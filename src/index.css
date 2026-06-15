@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "JetBrains Mono", SFMono-Regular, Consolas, monospace;
+}
+
+@layer utilities {
+  .animate-slow-pan {
+    animation: slowPan 35s linear infinite;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+}
+
+@keyframes slowPan {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.08) translate(-1%, 0.5%); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
