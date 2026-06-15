@@ -35,7 +35,7 @@ import { TravelpayoutsWidget } from "./components/TravelpayoutsWidget";
 import { TravelpayoutsEmbed } from "./components/TravelpayoutsEmbed";
 import { InteractiveTools } from "./components/InteractiveTools";
 import { useSeoMeta, buildFaqSchema } from "./hooks/useSeoMeta";
-const heroBgImage = new URL("./assets/images/clouds_boat_hero_1781438671378.jpg", import.meta.url).href;
+const heroBgImage = new URL("./assets/images/ural_hero_bg_1781543111624.jpg", import.meta.url).href;
 
 type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "costs" | "tools" | "blog";
 
@@ -232,29 +232,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-800 font-sans leading-relaxed selection:bg-[#F6B73C] selection:text-[#102A43]">
       
-      {/* 🖥️ SIMULATED BROWSER BAR (Fulfills programmatic URL verification requirements) */}
-      <div className="bg-[#0c2033]/90 text-slate-300 text-xs px-4 py-2 border-b border-slate-800 flex items-center justify-between gap-4 font-mono sticky top-0 z-50">
-        <div className="flex items-center gap-2">
-          <div className="flex gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block"></span>
-            <span className="w-2.5 h-2.5 rounded-full bg-yellow-500 inline-block"></span>
-            <span className="w-2.5 h-2.5 rounded-full bg-green-500 inline-block"></span>
-          </div>
-          <span className="text-slate-400 hidden md:inline ml-2">Secure Sandbox Mode:</span>
-        </div>
-        
-        {/* Dynamic Address Box */}
-        <div className="bg-slate-900 border border-slate-700/60 rounded px-3 py-1 flex items-center gap-2 flex-grow max-w-xl text-center md:text-left shadow-inner">
-          <Globe size={12} className="text-emerald-500" />
-          <span className="text-slate-350 select-none truncate">https://ural.travel{currentPath}</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Clock size={12} className="text-[#F6B73C]" />
-          <span className="text-slate-400 text-[10px] hidden sm:inline">{currentTime}</span>
-        </div>
-      </div>
-
       {/* 🟦 0. TOP BAR (Height: 40px) */}
       <div id="top-bar-hub" className="h-10 bg-[#F8FAFC] border-b border-slate-200 text-xs text-slate-600 flex items-center justify-between px-4 sm:px-6 lg:px-8 font-sans">
         <div className="text-slate-500 font-semibold tracking-wide text-[10px] sm:text-xs">
@@ -406,16 +383,15 @@ export default function App() {
           <div className="space-y-16">
             
             {/* 🟦 SECTION 1: TOP SECTION (ABOVE THE FOLD) — PRIMARY CONVERSION ZONE */}
-            <div className="relative rounded-3xl overflow-hidden bg-[#102A43] text-white p-8 md:p-14 shadow-2xl border border-slate-800/80 min-h-[580px] flex items-center">
+            <div className="relative rounded-3xl overflow-hidden bg-[#102A43] text-white p-8 md:p-14 shadow-2xl border border-slate-800/80 min-h-[500px] flex items-center">
               
-              {/* Drift Cloud background representation */}
+              {/* Cinematic cloud & airplane background with NO overlay */}
               <div className="absolute inset-0 z-0">
                 <img 
                   src={heroBgImage} 
-                  alt="URAL cloud wood boat background" 
-                  className="w-full h-full object-cover opacity-20 select-none pointer-events-none mix-blend-lighten animate-slow-pan"
+                  alt="URAL airplane flying above clouds background" 
+                  className="w-full h-full object-cover opacity-100 select-none pointer-events-none animate-slow-pan"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#0b1b2d] via-[#102A43]/90 to-[#0b1b2d]/70 z-10" />
               </div>
 
               {/* Master Full-Width Stack for primary conversion focus */}
@@ -426,36 +402,68 @@ export default function App() {
                     ✈️ Real flight prices, updated daily — from Dhaka
                   </span>
                   
-                  <h1 className="font-serif text-3xl sm:text-5xl lg:text-[54px] leading-tight font-black tracking-tight text-white">
+                  <h1 className="font-serif text-3xl sm:text-5xl lg:text-[54px] leading-tight font-black tracking-tight text-white drop-shadow-md">
                     Compare Cheap Flights <br />
                     from Dhaka, Instantly
                   </h1>
-                  <p className="text-slate-300 text-sm md:text-base leading-relaxed max-w-2xl font-light font-sans">
+                  <p className="text-slate-200 text-sm md:text-base leading-relaxed max-w-2xl font-normal font-sans drop-shadow-sm">
                     URAL is a free travel guide built for people flying out of Dhaka. Check real flight prices to Nepal, Thailand, Malaysia, and Dubai — learn exactly what visa documents you need, compare hotels by area and budget, and figure out your full trip cost in BDT before you book a single thing.
                   </p>
-                </div>
 
-                {/* VISUALLY DOMINANT: Flight Search Widget as requested in Section 1 */}
-                <div className="bg-[#0f1d2e]/95 border border-slate-700/60 rounded-2xl p-2 sm:p-4 shadow-2xl backdrop-blur-md w-full">
-                  <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase block mb-3 px-2 tracking-wider">✈️ LIVE FLIGHT PRICE SEARCH</span>
-                  <div className="text-slate-900">
-                    <TravelpayoutsEmbed />
+                  {/* Call-to-action buttons in Hero */}
+                  <div className="flex flex-wrap items-center gap-3.5 pt-4">
+                    <button 
+                      onClick={() => document.getElementById('live-flight-search')?.scrollIntoView({ behavior: 'smooth' })}
+                      className="bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer flex items-center gap-2 transform hover:-translate-y-0.5"
+                    >
+                      <span>Instant Flight Search</span>
+                      <span className="text-base">✈️</span>
+                    </button>
+                    <button
+                      onClick={() => document.getElementById('destinations-section')?.scrollIntoView({ behavior: 'smooth' })}
+                      className="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl backdrop-blur-sm transition-all cursor-pointer flex items-center gap-2"
+                    >
+                      <span>Explore Guides</span>
+                      <span>🇳🇵 🇹🇭 🇲🇾 🇦🇪</span>
+                    </button>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-4 text-xs font-bold pt-2">
-                  <span className="text-slate-400 font-normal">Popular flight routes from Dhaka:</span>
+                <div className="flex flex-wrap items-center gap-4 text-xs font-bold pt-2 drop-shadow">
+                  <span className="text-slate-200 font-medium font-sans">Popular flight routes from Dhaka:</span>
                   <button onClick={() => navigateTo("/flights?route=dhaka-kathmandu")} className="text-[#F6B73C] hover:underline">Dhaka → Kathmandu (KTM) 🇳🇵</button>
-                  <span className="text-slate-700">|</span>
+                  <span className="text-slate-650">|</span>
                   <button onClick={() => navigateTo("/flights?route=dhaka-bangkok")} className="text-[#F6B73C] hover:underline">Dhaka → Bangkok (BKK) 🇹🇭</button>
-                  <span className="text-slate-700">|</span>
+                  <span className="text-slate-650">|</span>
                   <button onClick={() => navigateTo("/flights?route=dhaka-kuala-lumpur")} className="text-[#F6B73C] hover:underline">Dhaka → Kuala Lumpur (KUL) 🇲🇾</button>
                 </div>
               </div>
             </div>
 
+            {/* 🟦 SECTION 1.5: FRESH NEW SEARCH SECTOR - relocated from hero */}
+            <div id="live-flight-search" className="scroll-mt-12 space-y-6">
+              <div className="text-center space-y-2">
+                <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">
+                  Real-time ticket search
+                </span>
+                <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                  Search Jet Fares from Dhaka
+                </h2>
+                <p className="text-xs text-slate-500 max-w-xl mx-auto">
+                  Powered by a global aviation scanner to secure the best rates. Direct, multi-stop, and promotional ticket options.
+                </p>
+              </div>
+
+              <div className="bg-[#0f1d2e] border border-slate-750 rounded-2xl p-2 sm:p-5 shadow-2xl w-full">
+                <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase block mb-3 px-2 tracking-wider">✈️ LIVE FLIGHT PRICE SEARCH</span>
+                <div className="text-slate-900">
+                  <TravelpayoutsEmbed />
+                </div>
+              </div>
+            </div>
+
             {/* 🟦 SECTION 2: QUICK DESTINATION ENTRY */}
-            <div className="space-y-6">
+            <div id="destinations-section" className="scroll-mt-12 space-y-6">
               <div className="text-center space-y-2">
                 <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">Popular destinations from Bangladesh</span>
                 <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Where Are You Flying Next?</h2>
