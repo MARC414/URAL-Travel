@@ -36,6 +36,10 @@ import { TravelpayoutsEmbed } from "./components/TravelpayoutsEmbed";
 import { InteractiveTools } from "./components/InteractiveTools";
 import { useSeoMeta, buildFaqSchema } from "./hooks/useSeoMeta";
 const heroBgImage = new URL("./assets/images/ural_hero_bg_1781543111624.jpg", import.meta.url).href;
+const nepalDestImg = new URL("./assets/images/nepal_destination_1781544132297.jpg", import.meta.url).href;
+const bangkokDestImg = new URL("./assets/images/bangkok_destination_1781544149435.jpg", import.meta.url).href;
+const klDestImg = new URL("./assets/images/kl_destination_1781544164707.jpg", import.meta.url).href;
+const dubaiDestImg = new URL("./assets/images/dubai_destination_1781544180311.jpg", import.meta.url).href;
 
 type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "costs" | "tools" | "blog";
 
@@ -472,28 +476,42 @@ export default function App() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                  { city: "Kathmandu", country: "Nepal", tag: "Free visa on arrival for Bangladeshis. Budget hotels in Thamel from BDT 1,500/night. A great first international trip.", code: "nepal-guide", img: "🇳🇵", path: "/destinations?country=nepal-guide" },
-                  { city: "Bangkok", country: "Thailand", tag: "Online e-Visa — approved in 5–10 days. Street food, shopping, islands, and beautiful temples.", code: "thailand-guide", img: "🇹🇭", path: "/destinations?country=thailand-guide" },
-                  { city: "Kuala Lumpur", country: "Malaysia", tag: "Simple online eVisa. Affordable hotels, excellent halal food, and easy transit across Kuala Lumpur.", code: "malaysia-guide", img: "🇲🇾", path: "/destinations?country=malaysia-guide" },
-                  { city: "Dubai", country: "UAE", tag: "eVisa in 3–5 days. Burj Khalifa, desert safari, duty-free shopping — 4h 45m direct from Dhaka.", code: "dubai-guide", img: "🇦🇪", path: "/destinations?country=dubai-guide" }
+                  { city: "Kathmandu", country: "Nepal", tag: "Free visa on arrival for Bangladeshis. Budget hotels in Thamel from BDT 1,500/night. A great first international trip.", code: "nepal-guide", img: "🇳🇵", path: "/destinations?country=nepal-guide", bgImg: nepalDestImg },
+                  { city: "Bangkok", country: "Thailand", tag: "Online e-Visa — approved in 5–10 days. Street food, shopping, islands, and beautiful temples.", code: "thailand-guide", img: "🇹🇭", path: "/destinations?country=thailand-guide", bgImg: bangkokDestImg },
+                  { city: "Kuala Lumpur", country: "Malaysia", tag: "Simple online eVisa. Affordable hotels, excellent halal food, and easy transit across Kuala Lumpur.", code: "malaysia-guide", img: "🇲🇾", path: "/destinations?country=malaysia-guide", bgImg: klDestImg },
+                  { city: "Dubai", country: "UAE", tag: "eVisa in 3–5 days. Burj Khalifa, desert safari, duty-free shopping — 4h 45m direct from Dhaka.", code: "dubai-guide", img: "🇦🇪", path: "/destinations?country=dubai-guide", bgImg: dubaiDestImg }
                 ].map((dest, idx) => (
                   <div 
                     key={idx}
                     onClick={() => navigateTo(dest.path)}
-                    className="border border-slate-200 hover:border-[#F6B73C] bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between transform hover:-translate-y-1"
-                    style={{ minHeight: "170px" }}
+                    className="group relative rounded-2xl overflow-hidden bg-slate-950 shadow-lg hover:shadow-2xl transition-all duration-350 cursor-pointer transform hover:-translate-y-1.5 flex flex-col justify-end aspect-[4/5] sm:aspect-square md:aspect-[4/5] border border-slate-800/10 hover:border-[#F6B73C]/20"
                   >
-                    <div className="flex items-start gap-4">
-                      <span className="text-4xl shrink-0 mt-0.5">{dest.img}</span>
-                      <div className="space-y-1">
-                        <h4 className="font-serif font-black text-base text-[#102A43]">{dest.city}, {dest.country}</h4>
-                        <p className="text-[11px] text-slate-500 font-normal leading-relaxed">{dest.tag}</p>
+                    {/* Background Travel Image */}
+                    <img 
+                      src={dest.bgImg} 
+                      alt={`${dest.city}, ${dest.country}`}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 select-none"
+                    />
+
+                    {/* Dark gradient shadow overlay for extreme readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent z-10" />
+
+                    {/* Glassmorphic description layout */}
+                    <div className="relative z-20 p-4 space-y-2.5 bg-slate-950/65 backdrop-blur-md border-t border-white/10 m-3 rounded-xl shadow-lg">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-sm px-1.5 py-0.5 bg-white/15 rounded backdrop-blur-sm font-sans shrink-0">{dest.img}</span>
+                        <h4 className="font-sans font-bold text-sm text-white tracking-tight">{dest.city}, {dest.country}</h4>
                       </div>
-                    </div>
-                    <div className="flex justify-end mt-4">
-                      <span className="text-[10px] font-mono font-bold text-[#102A43] hover:text-[#F6B73C] flex items-center gap-1 transition-colors">
-                        Plan This Trip →
-                      </span>
+                      
+                      <p className="text-[10px] text-slate-250 font-normal leading-relaxed line-clamp-3">
+                        {dest.tag}
+                      </p>
+
+                      <div className="flex items-center justify-between pt-2 border-t border-white/5">
+                        <span className="text-[10px] font-mono font-bold text-[#F6B73C] flex items-center gap-1 group-hover:text-amber-300 transition-colors">
+                          Plan This Trip <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                        </span>
+                      </div>
                     </div>
                   </div>
                 ))}
