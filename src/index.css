@@ -1,10 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
+
+:root {
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* === BORDER RADIUS === */
+  --radius-sm:   6px;    /* Small tags, badges */
+  --radius-md:   10px;   /* Input fields, small cards */
+  --radius-lg:   16px;   /* Standard cards */
+  --radius-xl:   20px;   /* Large cards, panels */
+  --radius-2xl:  24px;   /* Hero search widget */
+  --radius-full: 9999px; /* Pills, round buttons */
+
+  /* === SECTION PADDING === */
+  --section-py: 5rem;      /* 80px vertical padding for all sections */
+  --section-py-sm: 3rem;   /* 48px for smaller sections */
+  --container-px: 1.5rem;  /* Side padding on mobile */
+  --container-max: 1200px; /* Max content width */
+
+  /* === TYPE SCALE === */
+  --text-xs:    0.75rem;    /* 12px — metadata, badges */
+  --text-sm:    0.875rem;   /* 14px — nav links, labels */
+  --text-base:  1rem;       /* 16px — body copy */
+  --text-lg:    1.125rem;   /* 18px — card titles */
+  --text-xl:    1.25rem;    /* 20px — section subheadlines */
+  --text-2xl:   1.5rem;     /* 24px — section headings */
+  --text-3xl:   1.875rem;   /* 30px — major section titles */
+  --text-4xl:   2.25rem;    /* 36px — page headings */
+  --text-hero:  3.5rem;     /* 56px — hero H1 desktop */
+  --text-hero-mobile: 2rem; /* 32px — hero H1 mobile */
+
+  /* === FONT WEIGHTS === */
+  --fw-normal:    400;
+  --fw-medium:    500;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+  --fw-extrabold: 800;
+  --fw-black:     900;
+
+  /* === LINE HEIGHTS === */
+  --lh-tight:   1.2;   /* Hero headlines */
+  --lh-snug:    1.35;  /* Section titles */
+  --lh-normal:  1.5;   /* Body copy */
+  --lh-relaxed: 1.65;  /* Long descriptions */
+
+  /* === LETTER SPACING === */
+  --ls-tight:   -0.02em;  /* Large headings */
+  --ls-normal:  0em;       /* Body */
+  --ls-wide:    0.06em;    /* Section badge labels */
+  --ls-widest:  0.12em;    /* ALL-CAPS section eyebrows */
+}
+
+/* === SECTION BADGE EYEBROW === */
+/* The little yellow-text label above section headings */
+.section-eyebrow {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-brand-gold);
+}
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: "JetBrains Mono", SFMono-Regular, Consolas, monospace;
+
+  --color-brand-gold: #F6B73C;
+  --color-brand-gold-dark: #D4941A;
+  --color-brand-gold-light: #FDF0CC;
+
+  --color-navy-deepest: #0B1628;
+  --color-navy-dark: #0F172A;
+  --color-navy-mid: #1E293B;
+  --color-navy-soft: #334155;
+
+  --color-bg-white: #FFFFFF;
+  --color-bg-light: #F8FAFC;
+  --color-bg-subtle: #F1F5F9;
+
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94A3B8;
+  --color-text-white: #FFFFFF;
 }
 
 @layer utilities {
@@ -25,5 +103,171 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* === HERO BACKGROUND GRADIENT & NOISE === */
+.hero-bg {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    #0B1628 0%,
+    #0F1F3D 35%,
+    #152844 65%,
+    #1A3055 100%
+  );
+}
+
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* === HERO BOTTOM FADE === */
+.hero-bottom-fade {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(248, 250, 252, 0.15) 50%,
+    rgba(248, 250, 252, 0.95) 85%,
+    #F8FAFC 100%
+  );
+}
+
+/* === HERO ROUTE LINE ANIMATION === */
+@keyframes routeDash {
+  0% {
+    stroke-dashoffset: 600;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.3;
+  }
+}
+
+.route-line {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: routeDash 20s linear infinite;
+}
+
+/* === DESTINATION DOT PULSE === */
+@keyframes dotPulse {
+  0%, 100% { r: 4; opacity: 0.9; }
+  50% { r: 6; opacity: 1; }
+}
+
+.dest-dot {
+  animation: dotPulse 3s ease-in-out infinite;
+}
+
+/* === SHAMPAN BOAT GENTLE FLOAT === */
+@keyframes boatFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+.shampan-boat {
+  animation: boatFloat 5s ease-in-out infinite;
+}
+
+/* === HERO CONTENT FADE-IN ANIMATION === */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-badge {
+  animation: heroFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.hero-h1 {
+  animation: heroFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.25s;
+  opacity: 0;
+}
+
+.hero-subtitle {
+  animation: heroFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.hero-widget {
+  animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.55s;
+  opacity: 0;
+}
+
+.hero-links {
+  animation: heroFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.7s;
+  opacity: 0;
+}
+
+/* === STATS BAR === */
+.stats-bar {
+  background: rgba(11, 22, 40, 0.92);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(246, 183, 60, 0.2);
+}
+
+/* === OTHER URAL DESIGN UTILITIES === */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(11, 22, 40, 0.08);
+}
+
+.btn-gold {
+  background: #F6B73C;
+  color: #0F172A;
+  font-weight: 700;
+  border-radius: 9999px;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.btn-gold:hover {
+  background: #D4941A;
+  transform: scale(1.02);
+}
+
+.dark-panel {
+  background: #1E293B;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.eyebrow-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #FDF0CC;
+  color: #D4941A;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
 }
 

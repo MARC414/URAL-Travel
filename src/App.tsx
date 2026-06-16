@@ -35,7 +35,7 @@ import { TravelpayoutsWidget } from "./components/TravelpayoutsWidget";
 import { TravelpayoutsEmbed } from "./components/TravelpayoutsEmbed";
 import { InteractiveTools } from "./components/InteractiveTools";
 import { useSeoMeta, buildFaqSchema } from "./hooks/useSeoMeta";
-const heroBgImage = new URL("./assets/images/ural_hero_bg_1781543111624.jpg", import.meta.url).href;
+const heroBgImage = new URL("./assets/images/clouds_boat_hero_1781438671378.jpg", import.meta.url).href;
 const nepalDestImg = new URL("./assets/images/nepal_destination_1781544132297.jpg", import.meta.url).href;
 const bangkokDestImg = new URL("./assets/images/bangkok_destination_1781544149435.jpg", import.meta.url).href;
 const klDestImg = new URL("./assets/images/kl_destination_1781544164707.jpg", import.meta.url).href;
@@ -236,146 +236,267 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-800 font-sans leading-relaxed selection:bg-[#F6B73C] selection:text-[#102A43]">
       
-      {/* 🟦 0. TOP BAR (Height: 40px) */}
-      <div id="top-bar-hub" className="h-10 bg-[#F8FAFC] border-b border-slate-200 text-xs text-slate-600 flex items-center justify-between px-4 sm:px-6 lg:px-8 font-sans">
-        <div className="text-slate-500 font-semibold tracking-wide text-[10px] sm:text-xs">
-          Flights, Hotels & Visa Guides for Bangladeshi Travelers
-        </div>
 
-        <div className="flex items-center gap-4 text-[10px] sm:text-[11px] font-mono font-medium shrink-0">
-          <span className="text-slate-400 select-none">
-            Language: <b className="text-[#102A43]">EN</b> | <span className="text-slate-400 cursor-not-allowed" title="Bengali coming soon">বাংলা (Soon)</span>
-          </span>
-          <span className="text-slate-300 hidden sm:inline">|</span>
-          <button onClick={() => navigateTo("/tools")} className="text-[#102A43] hover:text-[#F6B73C] font-bold">
-            Free Travel Tools
-          </button>
-        </div>
-      </div>
 
-      {/* 🟦 1. MAIN NAVBAR (Height: 72px, Sticky for optimal conversions) */}
-      <header id="main-navbar-sticky" className="sticky top-0 z-40 bg-[#102A43] text-white border-b border-slate-800 h-[72px] flex items-center shadow-lg transition-all duration-300">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigateTo("/")}>
-            {/* Logo representing 'Cloud Messenger' */}
-            <div className="bg-gradient-to-br from-[#F8FAFC] to-[#E5E7EB] text-[#102A43] p-2 rounded-xl shrink-0">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
-              </svg>
+      {/* 🟦 STICKY HEADER WRAPPER (Top Strip + Main Navbar) */}
+      <div className="sticky top-0 z-50 w-full shadow-lg">
+        
+        {/* 🟦 TOP STRIP (Height: 36px, Background: #0B1628) */}
+        <div className="w-full bg-[#0B1628] h-9 flex items-center select-none">
+          <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between text-white/55 text-xs">
+            <span className="truncate font-sans font-medium">Flights, Hotels & Visa Guides for Bangladeshi Travelers</span>
+            <div className="flex items-center gap-3 shrink-0 font-sans text-[11px] font-medium">
+              <span className="flex items-center gap-1.5 cursor-default">🇧🇩 English (BDT)</span>
+              <span className="w-px h-3 bg-white/20"></span>
+              <span className="cursor-default">৳ BDT</span>
             </div>
-            <div>
-              <h1 className="font-serif font-black text-[#F6B73C] text-lg tracking-tight flex items-center gap-1.5 leading-none">
+          </div>
+        </div>
+
+        {/* 🟦 1. MAIN NAVBAR (Height: 64px, Background: #0F172A) */}
+        <header id="main-navbar-sticky" className="w-full bg-[#0F172A] text-white border-b border-white/8 h-16 flex items-center">
+          <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between">
+            
+            {/* Logo Left */}
+            <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigateTo("/")}>
+              <div className="bg-gradient-to-br from-[#F8FAFC] to-[#E5E7EB] text-[#0F172A] p-1.5 rounded-lg shrink-0">
+                <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
+                </svg>
+              </div>
+              <h1 className="font-sans font-extrabold text-[20px] text-white tracking-tight leading-none">
                 URAL
               </h1>
-              <p className="text-[8px] sm:text-[9px] text-[#F6B73C] tracking-wider font-mono mt-0.5 leading-none font-semibold">Air Travel Made Simple</p>
+            </div>
+
+            {/* Navigation Centered */}
+            <nav className="hidden md:flex items-center gap-8">
+              {[
+                { id: "home", label: "Home", path: "/" },
+                { id: "flights", label: "Flights", path: "/flights" },
+                { id: "hotels", label: "Hotels", path: "/hotels" },
+                { id: "visa", label: "Visa", path: "/visa" },
+                { id: "destinations", label: "Destinations", path: "/destinations" },
+                { id: "costs", label: "Costs", path: "/costs" },
+                { id: "tools", label: "Tools", path: "/tools" },
+                { id: "blog", label: "Blog", path: "/blog" }
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  id={`nav-${item.id}`}
+                  onClick={() => navigateTo(item.path)}
+                  className={`text-[14px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] ${
+                    section === item.id ? "text-[#F6B73C] font-semibold" : "text-white/75"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+
+            {/* Start Trip CTA Right */}
+            <div className="flex items-center gap-4">
+              <button
+                id="btn-start-trip-cta"
+                onClick={() => navigateTo("/destinations")}
+                className="hidden md:block bg-[#F6B73C] text-[#0F172A] hover:bg-[#D4941A] font-bold text-sm rounded-full px-5 py-2 shadow-md transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Start Trip
+              </button>
+
+              {/* Mobile Hamburger Menu Burger */}
+              <button
+                id="mobile-menu-burger"
+                onClick={() => setMobileMenuOpen(true)}
+                className="md:hidden p-1 focus:outline-none flex flex-col justify-between h-[15px] w-[20px] cursor-pointer"
+              >
+                <span className="w-full h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
+                <span className="w-full h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
+                <span className="w-full h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
+              </button>
             </div>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-xs font-semibold uppercase tracking-wider">
-            <button
-              id="nav-home"
-              onClick={() => navigateTo("/")}
-              className={`hover:text-[#F6B73C] transition-all cursor-pointer py-1 ${section === "home" ? "text-[#F6B73C] border-b-2 border-[#F6B73C]" : "text-slate-200"}`}
-            >
-              Home
-            </button>
-            <button
-              id="nav-flights"
-              onClick={() => navigateTo("/flights")}
-              className={`hover:text-[#F6B73C] transition-all cursor-pointer py-1 ${section === "flights" ? "text-[#F6B73C] border-b-2 border-[#F6B73C]" : "text-slate-200"}`}
-            >
-              Flights
-            </button>
-            <button
-              id="nav-hotels"
-              onClick={() => navigateTo("/hotels")}
-              className={`hover:text-[#F6B73C] transition-all cursor-pointer py-1 ${section === "hotels" ? "text-[#F6B73C] border-b-2 border-[#F6B73C]" : "text-slate-200"}`}
-            >
-              Hotels
-            </button>
-            <button
-              id="nav-visa"
-              onClick={() => navigateTo("/visa")}
-              className={`hover:text-[#F6B73C] transition-all cursor-pointer py-1 ${section === "visa" ? "text-[#F6B73C] border-b-2 border-[#F6B73C]" : "text-slate-200"}`}
-            >
-              Visa
-            </button>
-            <button
-              id="nav-destinations"
-              onClick={() => navigateTo("/destinations")}
-              className={`hover:text-[#F6B73C] transition-all cursor-pointer py-1 ${section === "destinations" ? "text-[#F6B73C] border-b-2 border-[#F6B73C]" : "text-slate-200"}`}
-            >
-              Destinations
-            </button>
-            <button
-              id="nav-costs"
-              onClick={() => navigateTo("/costs")}
-              className={`hover:text-[#F6B73C] transition-all cursor-pointer py-1 ${section === "costs" ? "text-[#F6B73C] border-b-2 border-[#F6B73C]" : "text-slate-200"}`}
-            >
-              Costs
-            </button>
-            <button
-              id="nav-tools"
-              onClick={() => navigateTo("/tools")}
-              className={`hover:text-[#F6B73C] transition-all cursor-pointer py-1 ${section === "tools" ? "text-[#F6B73C] border-b-2 border-[#F6B73C]" : "text-slate-200"}`}
-            >
-              Tools
-            </button>
-            <button
-              id="nav-blog"
-              onClick={() => navigateTo("/blog")}
-              className={`hover:text-[#F6B73C] transition-all cursor-pointer py-1 ${section === "blog" ? "text-[#F6B73C] border-b-2 border-[#F6B73C]" : "text-slate-200"}`}
-            >
-              Blog
-            </button>
-          </nav>
+          {/* Mobile Sliding Navigation Drawer */}
+          {mobileMenuOpen && (
+            <div className="fixed inset-0 z-50 md:hidden">
+              {/* Semi-transparent backdrop with click-to-close */}
+              <div 
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" 
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              
+              {/* Sliding drawer from right */}
+              <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[#0F172A] shadow-2xl flex flex-col z-10 border-l border-white/10">
+                {/* Drawer Header */}
+                <div className="h-16 px-6 flex items-center justify-between border-b border-white/8">
+                  <span className="font-sans font-extrabold text-[20px] text-white">URAL</span>
+                  <button 
+                    onClick={() => setMobileMenuOpen(false)} 
+                    className="text-[#F6B73C] hover:text-white p-1 transition-colors"
+                  >
+                    <X size={24} />
+                  </button>
+                </div>
 
-          {/* Right Action Widgets */}
-          <div className="flex items-center gap-3">
-            <button
-              id="btn-nav-search-trigger"
-              onClick={() => navigateTo("/tools")}
-              className="text-slate-350 hover:text-[#F6B73C] p-2 hover:bg-slate-800/40 rounded-lg transition-colors hidden sm:block"
-              title="Search Travel Resources"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-            
-            <button
-              id="btn-start-trip-cta"
-              onClick={() => navigateTo("/destinations")}
-              className="bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-[10px] sm:text-xs uppercase px-3.5 py-1.5 sm:py-2.5 rounded-lg shadow-md transition-all cursor-pointer tracking-wider whitespace-nowrap"
-            >
-              Start Trip
-            </button>
+                {/* Nav List */}
+                <nav className="flex-1 py-4 overflow-y-auto">
+                  {[
+                    { id: "home", label: "Home", path: "/" },
+                    { id: "flights", label: "Flights", path: "/flights" },
+                    { id: "hotels", label: "Hotels", path: "/hotels" },
+                    { id: "visa", label: "Visa", path: "/visa" },
+                    { id: "destinations", label: "Destinations", path: "/destinations" },
+                    { id: "costs", label: "Costs", path: "/costs" },
+                    { id: "tools", label: "Tools", path: "/tools" },
+                    { id: "blog", label: "Blog", path: "/blog" }
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        navigateTo(item.path);
+                        setMobileMenuOpen(false);
+                      }}
+                      className="w-full py-4 px-6 text-left border-b border-white/6 text-[14px] font-medium transition-colors block text-white/75 hover:text-[#F6B73C]"
+                      style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+                    >
+                      <span className={section === item.id ? "text-[#F6B73C] font-semibold" : ""}>
+                        {item.label}
+                      </span>
+                    </button>
+                  ))}
+                </nav>
 
-            <button
-              id="mobile-menu-burger"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-1.5 rounded-lg border border-slate-700 text-slate-350 hover:bg-slate-800 transition-colors"
-            >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+                {/* Drawer CTA Footer */}
+                <div className="p-6 border-t border-white/8 bg-[#0B1628]">
+                  <button
+                    onClick={() => {
+                      navigateTo("/destinations");
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full bg-[#F6B73C] text-[#0F172A] hover:bg-[#D4941A] font-bold text-xs uppercase py-3 rounded-full shadow-md text-center tracking-wider transition-colors"
+                  >
+                    Start Trip
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </header>
+
+      </div>
+
+      {/* ⚡ ACTIVE TEMPLATE RENDER */}
+      {section === "home" && (
+        <div className="w-full">
+          {/* 🟦 SECTION 1: TOP SECTION (ABOVE THE FOLD) — PRIMARY CONVERSION ZONE */}
+          <div 
+            className="hero-bg relative overflow-hidden min-h-[500px] lg:min-h-[560px] flex items-center p-6 md:p-12 lg:p-16 select-none border-b border-slate-800/80 bg-cover bg-center"
+            style={{
+              backgroundImage: `linear-gradient(135deg, rgba(8, 17, 32, 0.85) 0%, rgba(11, 23, 44, 0.8) 35%, rgba(15, 30, 56, 0.75) 65%, rgba(21, 38, 68, 0.85) 100%), url(${heroBgImage})`
+            }}
+          >
+            {/* Bottom Fade Gradient Overlay */}
+            <div className="hero-bottom-fade absolute bottom-0 left-0 right-0 h-64 z-10 pointer-events-none" />
+
+            {/* Animated SVG Route Map Overlay */}
+            <svg className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10 opacity-35" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
+              {/* Flight route paths starting from Dhaka (Dhaka is at 250, 450) */}
+              <path d="M 250,450 Q 400,300 550,180" fill="none" stroke="rgba(255, 255, 255, 0.45)" strokeWidth="2.5" className="route-line" style={{ animationDelay: '0s' }} />
+              <path d="M 250,450 Q 565,435 880,420" fill="none" stroke="rgba(255, 255, 255, 0.45)" strokeWidth="2.5" className="route-line" style={{ animationDelay: '-5s' }} />
+              <path d="M 250,450 Q 650,510 1050,580" fill="none" stroke="rgba(255, 255, 255, 0.45)" strokeWidth="2.5" className="route-line" style={{ animationDelay: '-10s' }} />
+              <path d="M 250,450 Q 175,385 100,320" fill="none" stroke="rgba(255, 255, 255, 0.45)" strokeWidth="2.5" className="route-line" style={{ animationDelay: '-15s' }} />
+
+              {/* Dotted static reference lines under routes for depth */}
+              <path d="M 250,450 Q 400,300 550,180" fill="none" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.5" strokeDasharray="4 4" />
+              <path d="M 250,450 Q 565,435 880,420" fill="none" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.5" strokeDasharray="4 4" />
+              <path d="M 250,450 Q 650,510 1050,580" fill="none" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.5" strokeDasharray="4 4" />
+              <path d="M 250,450 Q 175,385 100,320" fill="none" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.5" strokeDasharray="4 4" />
+
+              {/* Destination Dots with Pulse animation */}
+              {/* Dhaka (Hub) */}
+              <circle cx="250" cy="450" r="5" fill="#F6B73C" className="dest-dot" style={{ animationDelay: '0s' }} />
+              <text x="250" y="472" fill="#FFFFFF" fontSize="11" fontWeight="bold" fontFamily="monospace" textAnchor="middle" opacity="0.8">DHAKA (DAC)</text>
+
+              {/* Kathmandu */}
+              <circle cx="550" cy="180" r="4" fill="#FFFFFF" className="dest-dot" style={{ animationDelay: '0.8s' }} />
+              <text x="550" y="162" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.75">KATHMANDU (KTM)</text>
+
+              {/* Bangkok */}
+              <circle cx="880" cy="420" r="4" fill="#FFFFFF" className="dest-dot" style={{ animationDelay: '1.6s' }} />
+              <text x="880" y="438" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.75">BANGKOK (BKK)</text>
+
+              {/* Kuala Lumpur */}
+              <circle cx="1050" cy="580" r="4" fill="#FFFFFF" className="dest-dot" style={{ animationDelay: '2.4s' }} />
+              <text x="1050" y="598" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.75">KUALA LUMPUR (KUL)</text>
+
+              {/* Dubai */}
+              <circle cx="100" cy="320" r="4" fill="#FFFFFF" className="dest-dot" style={{ animationDelay: '1.2s' }} />
+              <text x="100" y="302" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.75">DUBAI (DXB)</text>
+            </svg>
+
+            {/* Master Left-Aligned Stack aligned perfectly with max-w-7xl content */}
+            <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col items-center sm:items-start justify-center space-y-6">
+              
+              <span className="hero-badge font-sans tracking-widest uppercase inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 border leading-none bg-[#F6B73C]/15 border-[#F6B73C]/25 text-[#F6B73C] rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C] animate-ping"></span>
+                ⭐️ Bangladesh's #1 Travel Intelligence Platform
+              </span>
+              
+              <h1 className="hero-h1 font-sans text-[clamp(2.3rem,6vw,4.5rem)] font-[900] leading-[1.1] tracking-tight text-white max-w-4xl drop-shadow text-center sm:text-left">
+                Travel Smarter <br />
+                <span className="text-[#F6B73C]">From Bangladesh</span>
+              </h1>
+              
+              <p className="hero-subtitle text-white/80 text-[1.1rem] sm:text-[1.2rem] leading-[1.60] max-w-2xl font-sans text-center sm:text-left">
+                Flights, hotels, visas, and destination guides — crafted specifically for Bangladeshi travelers. Your travel intelligence for the world.
+              </p>
+
+              {/* Pill List of Expert Features */}
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 pt-4">
+                <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/95 text-xs sm:text-sm font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" />
+                  Expert Visa Guides
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/95 text-xs sm:text-sm font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" />
+                  BDT Pricing
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/95 text-xs sm:text-sm font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" />
+                  Halal-Friendly Picks
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/95 text-xs sm:text-sm font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" />
+                  Dhaka Routes Focus
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats Bar Container (Full Width) */}
+          <div id="hero-stats-bar" className="stats-bar bg-[#0F172A] py-7 px-4 shadow-lg border-t border-b border-[#F6B73C]/20">
+            <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-around gap-6 md:gap-4 md:divide-x md:divide-white/10 text-center select-none">
+              <div className="flex-1 w-full space-y-1">
+                <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">50+</div>
+                <div className="text-white/75 text-[12px] uppercase tracking-widest font-semibold font-sans">Travel Guides</div>
+              </div>
+              <div className="flex-1 w-full space-y-1 md:pl-4">
+                <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">15+</div>
+                <div className="text-white/75 text-[12px] uppercase tracking-widest font-semibold font-sans">Destinations Covered</div>
+              </div>
+              <div className="flex-1 w-full space-y-1 md:pl-4">
+                <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">100%</div>
+                <div className="text-white/75 text-[12px] uppercase tracking-widest font-semibold font-sans">BD Traveler Focus</div>
+              </div>
+              <div className="flex-1 w-full space-y-1 md:pl-4">
+                <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">Free</div>
+                <div className="text-white/75 text-[12px] uppercase tracking-widest font-semibold font-sans">Travel Intelligence</div>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <div id="mobile-navigation-drawer" className="absolute top-[72px] left-0 w-full lg:hidden bg-[#0c2033] border-t border-slate-800 py-3 px-4 font-semibold text-xs flex flex-col gap-2 shadow-2xl animate-fade-in z-50">
-            <button id="mob-home" onClick={() => navigateTo("/")} className={`py-2 text-left hover:text-[#F6B73C] transition-colors ${section === "home" ? "text-[#F6B73C]" : "text-slate-200"}`}>Home</button>
-            <button id="mob-flights" onClick={() => navigateTo("/flights")} className={`py-2 text-left hover:text-[#F6B73C] transition-colors ${section === "flights" ? "text-[#F6B73C]" : "text-slate-200"}`}>Flights</button>
-            <button id="mob-visa" onClick={() => navigateTo("/visa")} className={`py-2 text-left hover:text-[#F6B73C] transition-colors ${section === "visa" ? "text-[#F6B73C]" : "text-slate-200"}`}>Visa Guides</button>
-            <button id="mob-hotels" onClick={() => navigateTo("/hotels")} className={`py-2 text-left hover:text-[#F6B73C] transition-colors ${section === "hotels" ? "text-[#F6B73C]" : "text-slate-200"}`}>Hotels</button>
-            <button id="mob-destinations" onClick={() => navigateTo("/destinations")} className={`py-2 text-left hover:text-[#F6B73C] transition-colors ${section === "destinations" ? "text-[#F6B73C]" : "text-slate-200"}`}>Destinations</button>
-            <button id="mob-costs" onClick={() => navigateTo("/costs")} className={`py-2 text-left hover:text-[#F6B73C] transition-colors ${section === "costs" ? "text-[#F6B73C]" : "text-slate-200"}`}>Trip Costs</button>
-            <button id="mob-tools" onClick={() => navigateTo("/tools")} className={`py-2 text-left hover:text-[#F6B73C] transition-colors ${section === "tools" ? "text-[#F6B73C]" : "text-slate-200"}`}>Travel Tools</button>
-            <button id="mob-blog" onClick={() => navigateTo("/blog")} className={`py-2 text-left hover:text-[#F6B73C] transition-colors ${section === "blog" ? "text-[#F6B73C]" : "text-slate-200"}`}>Travel Blog</button>
-          </div>
-        )}
-      </header>
+      )}
 
       {/* ⚡ ACTIVE TEMPLATE RENDER */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -385,69 +506,11 @@ export default function App() {
         ------------------------------------------------------------- */}
         {section === "home" && (
           <div className="space-y-16">
-            
-            {/* 🟦 SECTION 1: TOP SECTION (ABOVE THE FOLD) — PRIMARY CONVERSION ZONE */}
-            <div className="relative rounded-3xl overflow-hidden bg-[#102A43] text-white p-8 md:p-14 shadow-2xl border border-slate-800/80 min-h-[500px] flex items-center">
-              
-              {/* Cinematic cloud & airplane background with NO overlay */}
-              <div className="absolute inset-0 z-0">
-                <img 
-                  src={heroBgImage} 
-                  alt="URAL airplane flying above clouds background" 
-                  className="w-full h-full object-cover opacity-100 select-none pointer-events-none animate-slow-pan"
-                />
-              </div>
-
-              {/* Master Full-Width Stack for primary conversion focus */}
-              <div className="relative z-20 w-full space-y-8">
-                <div className="max-w-3xl space-y-4">
-                  <span className="text-[10px] font-mono font-bold text-[#F6B73C] bg-[#F6B73C]/10 border border-[#F6B73C]/30 px-3 py-1 rounded-full uppercase tracking-widest inline-flex items-center gap-1.5 animate-pulse">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C] animate-ping"></span>
-                    ✈️ Real flight prices, updated daily — from Dhaka
-                  </span>
-                  
-                  <h1 className="font-serif text-3xl sm:text-5xl lg:text-[54px] leading-tight font-black tracking-tight text-white drop-shadow-md">
-                    Compare Cheap Flights <br />
-                    from Dhaka, Instantly
-                  </h1>
-                  <p className="text-slate-200 text-sm md:text-base leading-relaxed max-w-2xl font-normal font-sans drop-shadow-sm">
-                    URAL is a free travel guide built for people flying out of Dhaka. Check real flight prices to Nepal, Thailand, Malaysia, and Dubai — learn exactly what visa documents you need, compare hotels by area and budget, and figure out your full trip cost in BDT before you book a single thing.
-                  </p>
-
-                  {/* Call-to-action buttons in Hero */}
-                  <div className="flex flex-wrap items-center gap-3.5 pt-4">
-                    <button 
-                      onClick={() => document.getElementById('live-flight-search')?.scrollIntoView({ behavior: 'smooth' })}
-                      className="bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer flex items-center gap-2 transform hover:-translate-y-0.5"
-                    >
-                      <span>Instant Flight Search</span>
-                      <span className="text-base">✈️</span>
-                    </button>
-                    <button
-                      onClick={() => document.getElementById('destinations-section')?.scrollIntoView({ behavior: 'smooth' })}
-                      className="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl backdrop-blur-sm transition-all cursor-pointer flex items-center gap-2"
-                    >
-                      <span>Explore Guides</span>
-                      <span>🇳🇵 🇹🇭 🇲🇾 🇦🇪</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-4 text-xs font-bold pt-2 drop-shadow">
-                  <span className="text-slate-200 font-medium font-sans">Popular flight routes from Dhaka:</span>
-                  <button onClick={() => navigateTo("/flights?route=dhaka-kathmandu")} className="text-[#F6B73C] hover:underline">Dhaka → Kathmandu (KTM) 🇳🇵</button>
-                  <span className="text-slate-650">|</span>
-                  <button onClick={() => navigateTo("/flights?route=dhaka-bangkok")} className="text-[#F6B73C] hover:underline">Dhaka → Bangkok (BKK) 🇹🇭</button>
-                  <span className="text-slate-650">|</span>
-                  <button onClick={() => navigateTo("/flights?route=dhaka-kuala-lumpur")} className="text-[#F6B73C] hover:underline">Dhaka → Kuala Lumpur (KUL) 🇲🇾</button>
-                </div>
-              </div>
-            </div>
 
             {/* 🟦 SECTION 1.5: FRESH NEW SEARCH SECTOR - relocated from hero */}
             <div id="live-flight-search" className="scroll-mt-12 space-y-6">
               <div className="text-center space-y-2">
-                <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">
+                <span className="text-[10px] font-mono font-bold text-[#0F172A] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">
                   Real-time ticket search
                 </span>
                 <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
@@ -458,7 +521,7 @@ export default function App() {
                 </p>
               </div>
 
-              <div className="bg-[#0f1d2e] border border-slate-750 rounded-2xl p-2 sm:p-5 shadow-2xl w-full">
+              <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-2 sm:p-5 shadow-2xl w-full">
                 <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase block mb-3 px-2 tracking-wider">✈️ LIVE FLIGHT PRICE SEARCH</span>
                 <div className="text-slate-900">
                   <TravelpayoutsEmbed />
@@ -469,7 +532,7 @@ export default function App() {
             {/* 🟦 SECTION 2: QUICK DESTINATION ENTRY */}
             <div id="destinations-section" className="scroll-mt-12 space-y-6">
               <div className="text-center space-y-2">
-                <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">Popular destinations from Bangladesh</span>
+                <span className="text-[10px] font-mono font-bold text-[#0F172A] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">Popular destinations from Bangladesh</span>
                 <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Where Are You Flying Next?</h2>
                 <p className="text-xs text-slate-500 max-w-xl mx-auto">Pick a destination to see flights, visa requirements, hotel guides, and a full trip budget — all in BDT.</p>
               </div>
@@ -2198,7 +2261,7 @@ export default function App() {
       </main>
 
       {/* 🔮 MASTER FOOTER BLOCK */}
-      <footer className="bg-[#102A43] text-slate-400 py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs mt-16">
+      <footer className="bg-[#0F172A] text-slate-400 py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs mt-16">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
           
           <div className="space-y-3">
@@ -2244,8 +2307,8 @@ export default function App() {
 
       {/* Dynamic Action Affiliate Conversion Toast Overlay */}
       {affiliateToast && (
-        <div id="converter-toast" className="fixed bottom-6 right-6 z-50 max-w-sm bg-[#102A43] text-white p-4 rounded-xl shadow-2xl border border-[#F6B73C] animate-fade-in flex items-start gap-4">
-          <div className="p-2 bg-[#F6B73C] text-[#102A43] rounded-lg shrink-0 text-xs">🚀</div>
+        <div id="converter-toast" className="fixed bottom-6 right-6 z-50 max-w-sm bg-[#0F172A] text-white p-4 rounded-xl shadow-2xl border border-[#F6B73C] animate-fade-in flex items-start gap-4">
+          <div className="p-2 bg-[#F6B73C] text-[#0F172A] rounded-lg shrink-0 text-xs">🚀</div>
           <div className="space-y-1 text-xs">
             <span className="font-mono font-bold text-[#F6B73C] block uppercase tracking-wide font-sans">Secure Partner Dispatch</span>
             <p className="leading-relaxed font-sans text-slate-300">{affiliateToast}</p>
