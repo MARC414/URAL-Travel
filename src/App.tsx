@@ -33,6 +33,7 @@ import { FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, DESTINATIONS_DATA, TRIP_COSTS_DAT
 import { AeoInspector } from "./components/AeoInspector";
 import { TravelpayoutsWidget } from "./components/TravelpayoutsWidget";
 import { TravelpayoutsEmbed } from "./components/TravelpayoutsEmbed";
+import { TrustpilotReviews } from "./components/TrustpilotReviews";
 import { InteractiveTools } from "./components/InteractiveTools";
 import { useSeoMeta, buildFaqSchema } from "./hooks/useSeoMeta";
 const heroBgImage = new URL("./assets/images/clouds_boat_hero_1781438671378.jpg", import.meta.url).href;
@@ -740,6 +741,9 @@ export default function App() {
 
               </div>
             </div>
+
+            {/* 🟦 SECTION 4.5: TRUSTPILOT TESTIMONIALS */}
+            <TrustpilotReviews />
 
             {/* 🟦 SECTION 5: CONTENT DISCOVERY (SEO SUPPORT) */}
             <div className="space-y-6">
