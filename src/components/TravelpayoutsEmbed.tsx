@@ -10,7 +10,7 @@ export function TravelpayoutsEmbed() {
     containerRef.current.innerHTML = "";
     
     const script = document.createElement("script");
-    script.src = "https://tpemd.com/content?currency=usd&campaign_id=100&promo_id=7879&plain=false&border_radius=0&color_focused=%2332a8dd&special=%23C4C4C4&secondary=%23FFFFFF&light=%23FFFFFF&dark=%23262626&color_icons=%2332a8dd&color_button=%2332a8dd&primary_override=%2332a8dd&searchUrl=www.aviasales.com%2Fsearch&locale=en&powered_by=true&show_hotels=true&shmarker=675992&trs=462865";
+    script.src = "https://tpemd.com/content?currency=usd&campaign_id=100&promo_id=7879&plain=false&border_radius=0&color_focused=%2332a8dd&special=%23C4C4C4&secondary=%23FFFFFF&light=%23FFFFFF&dark=%23262626&color_icons=%2332a8dd&color_button=%2332a8dd&primary_override=%2332a8dd&searchUrl=www.aviasales.com%2Fsearch&locale=en&powered_by=true&show_hotels=true&shmarker=675992&trs=540277";
     script.charset = "utf-8";
     script.async = true;
     
