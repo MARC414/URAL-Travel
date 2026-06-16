@@ -37,6 +37,7 @@ import { TrustpilotReviews } from "./components/TrustpilotReviews";
 import { InteractiveTools } from "./components/InteractiveTools";
 import { useSeoMeta, buildFaqSchema } from "./hooks/useSeoMeta";
 const heroBgImage = new URL("./assets/images/clouds_boat_hero_1781438671378.jpg", import.meta.url).href;
+const coxsBazarSunriseImg = new URL("./assets/images/coxs_bazar_sunrise_1781620718331.jpg", import.meta.url).href;
 const nepalDestImg = new URL("./assets/images/nepal_destination_1781544132297.jpg", import.meta.url).href;
 const bangkokDestImg = new URL("./assets/images/bangkok_destination_1781544149435.jpg", import.meta.url).href;
 const klDestImg = new URL("./assets/images/kl_destination_1781544164707.jpg", import.meta.url).href;
@@ -235,7 +236,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-800 font-sans leading-relaxed selection:bg-[#F6B73C] selection:text-[#102A43]">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-800 font-sans leading-relaxed selection:bg-[#F6B73C] selection:text-[#102A43] overflow-x-hidden">
       
 
 
@@ -811,42 +812,73 @@ export default function App() {
             </div>
 
             {/* 🟦 SECTION 7 / EMAIL ACTION SIGNUP */}
-            <div className="bg-gradient-to-r from-[#102A43] to-slate-900 text-white rounded-3xl p-8 border border-slate-800 text-center flex flex-col justify-center items-center space-y-4" style={{ minHeight: "180px" }}>
-              <div className="space-y-1">
-                <h3 className="font-serif text-xl sm:text-2xl font-black text-white">Get Flight Deal Alerts from Dhaka</h3>
-                <p className="text-xs text-slate-300">Sign up to get notified when flight prices from Dhaka drop below BDT 20,000 — to Nepal, Bangkok, KL, or Dubai.</p>
-              </div>
+            <div 
+              className="w-screen relative left-1/2 -translate-x-1/2 border-t border-b border-slate-900/10 bg-cover bg-center select-none overflow-hidden" 
+              style={{ 
+                backgroundImage: `linear-gradient(180deg, rgba(15, 30, 54, 0.5) 0%, rgba(11, 23, 44, 0.85) 65%, rgba(10, 15, 30, 0.98) 100%), url(${coxsBazarSunriseImg})`,
+                backgroundPosition: "center 40%"
+              }}
+            >
+              <div className="max-w-4xl mx-auto px-4 py-16 sm:py-20 flex flex-col justify-center items-center text-center space-y-8 relative z-10">
+                
+                {/* Visual Badge */}
+                <span className="font-sans tracking-widest uppercase inline-flex items-center gap-1.5 text-[11px] font-bold px-4 py-1.5 border leading-none bg-[#F6B73C]/20 border-[#F6B73C]/35 text-[#F6B73C] rounded-full backdrop-blur-md">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C] animate-pulse"></span>
+                  🌅 Live from Cox's Bazar to the World
+                </span>
 
-              {emailSubscribed ? (
-                <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs px-6 py-2.5 rounded-lg font-mono">
-                  ✔ You're subscribed! We'll email you at <b>{userEmail}</b> when Dhaka flight prices drop. Happy travels!
+                <div className="space-y-3 max-w-2xl">
+                  <h3 className="font-serif text-2xl sm:text-4xl font-black text-white leading-tight tracking-tight drop-shadow-md">
+                    Get Flight Deal Alerts <br className="sm:hidden" />
+                    <span className="text-[#F6B73C]">from Dhaka</span>
+                  </h3>
+                  <p className="text-sm sm:text-base text-slate-200 font-sans leading-relaxed max-w-xl mx-auto opacity-95">
+                    Sign up to get instant BDT notifications when flight prices from Dhaka drop below <span className="text-[#F6B73C] font-semibold">BDT 20,000</span> to Maldives, Nepal, Bangkok, KL, or Dubai.
+                  </p>
                 </div>
-              ) : (
-                <form 
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    if (userEmail.trim()) {
-                      setEmailSubscribed(true);
-                    }
-                  }}
-                  className="flex flex-wrap items-center justify-center gap-2 max-w-md w-full"
-                >
-                  <input 
-                    type="email" 
-                    value={userEmail}
-                    onChange={(e) => setUserEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    required
-                    className="flex-grow bg-[#16273b] border border-slate-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:ring-1 focus:ring-[#F6B73C]"
-                  />
-                  <button 
-                    type="submit"
-                    className="bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-black text-xs px-6 py-2.5 rounded-lg transition-colors cursor-pointer shrink-0"
-                  >
-                    Subscribe
-                  </button>
-                </form>
-              )}
+
+                <div className="w-full max-w-md bg-slate-950/40 p-1 rounded-2xl border border-white/10 backdrop-blur-md shadow-2xl">
+                  {emailSubscribed ? (
+                    <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs sm:text-sm px-6 py-4 rounded-xl font-mono text-center">
+                      ✔ You're subscribed! We'll email you at <b className="text-white">{userEmail}</b> when Dhaka flight prices drop. Happy travels!
+                    </div>
+                  ) : (
+                    <form 
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        if (userEmail.trim()) {
+                          setEmailSubscribed(true);
+                        }
+                      }}
+                      className="flex flex-col sm:flex-row items-center gap-2"
+                    >
+                      <input 
+                        type="email" 
+                        value={userEmail}
+                        onChange={(e) => setUserEmail(e.target.value)}
+                        placeholder="Enter your personal email"
+                        required
+                        className="w-full sm:flex-grow bg-slate-900/60 border border-white/10 rounded-xl py-3 px-4 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-[#F6B73C] focus:ring-1 focus:ring-[#F6B73C] transition-all font-sans text-center sm:text-left"
+                      />
+                      <button 
+                        type="submit"
+                        className="w-full sm:w-auto bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc240] active:bg-[#e2a222] font-black text-sm px-8 py-3 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer shrink-0 shadow-lg shadow-[#F6B73C]/20"
+                      >
+                        Subscribe Alerts
+                      </button>
+                    </form>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-4 text-[11px] font-mono text-slate-300 opacity-90">
+                  <span className="flex items-center gap-1">🔒 Spam-Free</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/20"></span>
+                  <span className="flex items-center gap-1">❌ 1-Click Unsubscribe</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/20"></span>
+                  <span className="flex items-center gap-1">🇧🇩 BDT Pricing Alerts</span>
+                </div>
+
+              </div>
             </div>
 
           </div>
