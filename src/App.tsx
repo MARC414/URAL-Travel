@@ -700,7 +700,7 @@ export default function App() {
                 <p className="text-xs text-slate-500 max-w-xl mx-auto">Book the rest of your trip in one place — airport transfers, things to do, mobile data, and rental cars.</p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 gap-6">
                 <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
                   <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block">🚕 Airport Transfers</span>
                   <KiwitaxiTransferWidget />

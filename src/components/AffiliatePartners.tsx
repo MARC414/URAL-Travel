@@ -12,6 +12,33 @@ export const AFFILIATE_LINKS = {
   qeeq: "https://qeeq.tpo.li/nooi5oSG"
 };
 
+export function LoadingSkeleton({ minHeight = 220, label }: { minHeight?: number; label: string }) {
+  return (
+    <div
+      className="w-full flex flex-col justify-between p-5 bg-slate-50/80 border border-slate-200/60 rounded-xl animate-pulse"
+      style={{ minHeight }}
+    >
+      <div className="space-y-4">
+        <div className="flex items-center space-x-3">
+          <div className="w-8 h-8 rounded-lg bg-slate-200" />
+          <div className="h-4 bg-slate-200 rounded w-1/3" />
+        </div>
+        <div className="space-y-2">
+          <div className="h-3 bg-slate-200 rounded w-5/6" />
+          <div className="h-3 bg-slate-200 rounded w-full" />
+          <div className="h-3 bg-slate-200 rounded w-2/3" />
+        </div>
+      </div>
+      <div className="flex items-center gap-2 pt-4 border-t border-slate-200/40">
+        <div className="w-3.5 h-3.5 border-2 border-slate-300 border-t-slate-500 rounded-full animate-spin" />
+        <span className="text-[11px] font-mono tracking-tight font-medium text-slate-500">
+          {label}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 /* Generic script-injecting widget shell — mirrors the existing
    TravelpayoutsEmbed.tsx pattern already used for Aviasales in this project. */
 function ScriptWidget({
@@ -73,12 +100,7 @@ function ScriptWidget({
       )}
 
       {status === "loading" && (
-        <div className="flex flex-col items-center justify-center py-8 text-slate-500">
-          <div className="w-6 h-6 border-4 border-slate-200 border-t-[#102A43] animate-spin rounded-full mb-2" />
-          <span className="text-[11px] font-mono tracking-tight font-medium">
-            {loadingLabel}
-          </span>
-        </div>
+        <LoadingSkeleton minHeight={minHeight - 20} label={loadingLabel} />
       )}
 
       <div 
