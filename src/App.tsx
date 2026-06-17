@@ -402,39 +402,52 @@ export default function App() {
             <div className="hero-bottom-fade absolute bottom-0 left-0 right-0 h-64 z-10 pointer-events-none" />
 
             {/* Animated SVG Route Map Overlay */}
-            <svg className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10 opacity-35" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
-              {/* Flight route paths starting from Dhaka (Dhaka is at 250, 450) */}
-              <path d="M 250,450 Q 400,300 550,180" fill="none" stroke="rgba(255, 255, 255, 0.45)" strokeWidth="2.5" className="route-line" style={{ animationDelay: '0s' }} />
-              <path d="M 250,450 Q 565,435 880,420" fill="none" stroke="rgba(255, 255, 255, 0.45)" strokeWidth="2.5" className="route-line" style={{ animationDelay: '-5s' }} />
-              <path d="M 250,450 Q 650,510 1050,580" fill="none" stroke="rgba(255, 255, 255, 0.45)" strokeWidth="2.5" className="route-line" style={{ animationDelay: '-10s' }} />
-              <path d="M 250,450 Q 175,385 100,320" fill="none" stroke="rgba(255, 255, 255, 0.45)" strokeWidth="2.5" className="route-line" style={{ animationDelay: '-15s' }} />
+            <svg className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10 opacity-40" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
+              {/* Flight route paths starting from Dhaka (Dhaka is at 600, 350 in the middle) */}
+              
+              {/* Dhaka to Kathmandu */}
+              <path d="M 600,350 Q 560,220 560,90" fill="none" stroke="#F6B73C" strokeWidth="2.5" className="route-line" style={{ animationDelay: '0s' }} />
+              {/* Dhaka to Bangkok */}
+              <path d="M 600,350 Q 840,305 1080,260" fill="none" stroke="#F6B73C" strokeWidth="2.5" className="route-line" style={{ animationDelay: '-4s' }} />
+              {/* Dhaka to Kuala Lumpur */}
+              <path d="M 600,350 Q 810,445 1020,540" fill="none" stroke="#F6B73C" strokeWidth="2.5" className="route-line" style={{ animationDelay: '-8s' }} />
+              {/* Dhaka to Maldives */}
+              <path d="M 600,350 Q 425,455 250,560" fill="none" stroke="#F6B73C" strokeWidth="2.5" className="route-line" style={{ animationDelay: '-12s' }} />
+              {/* Dhaka to Dubai */}
+              <path d="M 600,350 Q 360,295 120,240" fill="none" stroke="#F6B73C" strokeWidth="2.5" className="route-line" style={{ animationDelay: '-16s' }} />
 
               {/* Dotted static reference lines under routes for depth */}
-              <path d="M 250,450 Q 400,300 550,180" fill="none" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.5" strokeDasharray="4 4" />
-              <path d="M 250,450 Q 565,435 880,420" fill="none" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.5" strokeDasharray="4 4" />
-              <path d="M 250,450 Q 650,510 1050,580" fill="none" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.5" strokeDasharray="4 4" />
-              <path d="M 250,450 Q 175,385 100,320" fill="none" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.5" strokeDasharray="4 4" />
+              <path d="M 600,350 Q 560,220 560,90" fill="none" stroke="#F6B73C" strokeWidth="1.5" strokeOpacity="0.20" strokeDasharray="4 4" />
+              <path d="M 600,350 Q 840,305 1080,260" fill="none" stroke="#F6B73C" strokeWidth="1.5" strokeOpacity="0.20" strokeDasharray="4 4" />
+              <path d="M 600,350 Q 810,445 1020,540" fill="none" stroke="#F6B73C" strokeWidth="1.5" strokeOpacity="0.20" strokeDasharray="4 4" />
+              <path d="M 600,350 Q 425,455 250,560" fill="none" stroke="#F6B73C" strokeWidth="1.5" strokeOpacity="0.20" strokeDasharray="4 4" />
+              <path d="M 600,350 Q 360,295 120,240" fill="none" stroke="#F6B73C" strokeWidth="1.5" strokeOpacity="0.20" strokeDasharray="4 4" />
 
               {/* Destination Dots with Pulse animation */}
-              {/* Dhaka (Hub) */}
-              <circle cx="250" cy="450" r="5" fill="#F6B73C" className="dest-dot" style={{ animationDelay: '0s' }} />
-              <text x="250" y="472" fill="#FFFFFF" fontSize="11" fontWeight="bold" fontFamily="monospace" textAnchor="middle" opacity="0.8">DHAKA (DAC)</text>
+              {/* Dhaka (Hub -> Large Pulsating Gold Dot in the middle) */}
+              <circle cx="600" cy="350" r="7" fill="#F6B73C" className="dest-dot" style={{ animationDelay: '0s' }} />
+              <circle cx="600" cy="350" r="14" fill="none" stroke="#F6B73C" strokeWidth="1.5" strokeOpacity="0.5" className="animate-ping" style={{ transformOrigin: '600px 350px' }} />
+              <text x="600" y="380" fill="#F6B73C" fontSize="12" fontWeight="bold" fontFamily="monospace" textAnchor="middle" opacity="0.95" letterSpacing="1">DHAKA (DAC)</text>
 
               {/* Kathmandu */}
-              <circle cx="550" cy="180" r="4" fill="#FFFFFF" className="dest-dot" style={{ animationDelay: '0.8s' }} />
-              <text x="550" y="162" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.75">KATHMANDU (KTM)</text>
+              <circle cx="560" cy="90" r="4.5" fill="#FFFFFF" stroke="#F6B73C" strokeWidth="1.5" className="dest-dot" style={{ animationDelay: '0.8s' }} />
+              <text x="560" y="72" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.8">KATHMANDU (KTM)</text>
 
               {/* Bangkok */}
-              <circle cx="880" cy="420" r="4" fill="#FFFFFF" className="dest-dot" style={{ animationDelay: '1.6s' }} />
-              <text x="880" y="438" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.75">BANGKOK (BKK)</text>
+              <circle cx="1080" cy="260" r="4.5" fill="#FFFFFF" stroke="#F6B73C" strokeWidth="1.5" className="dest-dot" style={{ animationDelay: '1.6s' }} />
+              <text x="1080" y="242" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.8">BANGKOK (BKK)</text>
 
               {/* Kuala Lumpur */}
-              <circle cx="1050" cy="580" r="4" fill="#FFFFFF" className="dest-dot" style={{ animationDelay: '2.4s' }} />
-              <text x="1050" y="598" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.75">KUALA LUMPUR (KUL)</text>
+              <circle cx="1020" cy="540" r="4.5" fill="#FFFFFF" stroke="#F6B73C" strokeWidth="1.5" className="dest-dot" style={{ animationDelay: '2.4s' }} />
+              <text x="1020" y="522" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.8">KUALA LUMPUR (KUL)</text>
+
+              {/* Maldives */}
+              <circle cx="250" cy="560" r="4.5" fill="#FFFFFF" stroke="#F6B73C" strokeWidth="1.5" className="dest-dot" style={{ animationDelay: '3.2s' }} />
+              <text x="250" y="542" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.8">MALDIVES (MLE)</text>
 
               {/* Dubai */}
-              <circle cx="100" cy="320" r="4" fill="#FFFFFF" className="dest-dot" style={{ animationDelay: '1.2s' }} />
-              <text x="100" y="302" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.75">DUBAI (DXB)</text>
+              <circle cx="120" cy="240" r="4.5" fill="#FFFFFF" stroke="#F6B73C" strokeWidth="1.5" className="dest-dot" style={{ animationDelay: '1.2s' }} />
+              <text x="120" y="222" fill="#FFFFFF" fontSize="10" fontFamily="monospace" textAnchor="middle" opacity="0.8">DUBAI (DXB)</text>
             </svg>
 
             {/* Master Left-Aligned Stack aligned perfectly with max-w-7xl content */}
@@ -746,45 +759,7 @@ export default function App() {
             {/* 🟦 SECTION 4.5: TRUSTPILOT TESTIMONIALS */}
             <TrustpilotReviews />
 
-            {/* 🟦 SECTION 5: CONTENT DISCOVERY (SEO SUPPORT) */}
-            <div className="space-y-6">
-              <div className="text-center space-y-2">
-                <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">Travel Tips & Guides</span>
-                <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">From Our Travel Blog</h2>
-                <p className="text-xs text-slate-500 max-w-xl mx-auto">Practical guides for Bangladeshi travelers — cheaper flights, visa tips, and real trip budget breakdowns.</p>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[
-                  { title: "5 Ways to Book Cheaper Flights from Dhaka", slug: "cheap-flight-booking-hacks-dhaka", time: "10 min read", excerpt: "Most people book flights at the wrong time and overpay by thousands of taka. These five habits consistently get cheaper tickets — and the last one most people skip entirely." },
-                  { title: "Nepal vs Thailand: Which Is Better for Your First Trip?", slug: "nepal-vs-thailand-first-trip", time: "8 min read", excerpt: "Nepal gives free visa on arrival and a very low daily cost. Thailand takes a bit more visa paperwork but opens up beaches, markets, and city life. Here's how to choose." },
-                  { title: "How to Keep Hotel Costs Low in Bangkok, KL, and Dubai", slug: "hotel-savings-guide-bangkok-kl-dubai", time: "6 min read", excerpt: "The right neighborhood makes a big difference. One metro stop away from the tourist area can save BDT 8,000–15,000 per trip without giving up comfort." }
-                ].map((post, index) => (
-                  <div 
-                    key={index} 
-                    className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
-                    style={{ minHeight: "260px" }}
-                  >
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3">
-                        <span className="text-[10px] font-mono font-bold text-slate-400 uppercase">{post.time}</span>
-                      </div>
-                      <h4 className="font-serif font-black text-base text-slate-900 hover:text-[#102A43] cursor-pointer leading-snug" onClick={() => navigateTo(`/blog?slug=${post.slug}`)}>
-                        {post.title}
-                      </h4>
-                      <p className="text-xs text-slate-500 leading-relaxed font-light">{post.excerpt}</p>
-                    </div>
-
-                    <button 
-                      onClick={() => navigateTo(`/blog?slug=${post.slug}`)}
-                      className="text-xs font-bold text-[#102A43] hover:text-[#F6B73C] self-start mt-4 flex items-center gap-1 transition-colors"
-                    >
-                      Read full tips →
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
 
             {/* 🟦 SECTION 6: TRUST + ENGAGEMENT */}
             <div className="bg-[#102A43] text-white rounded-3xl p-8 border border-slate-800 text-center space-y-6 flex flex-col justify-center" style={{ minHeight: "220px" }}>
@@ -2293,6 +2268,85 @@ export default function App() {
 
           </div>
         )}
+
+      {/* 🟦 GLOBAL TRAVEL BLOG SECTION - Last section in any page before Footer */}
+      {section !== "blog" && (
+        <div className="mt-20 pt-16 border-t border-slate-200/80 space-y-8">
+          <div className="text-center space-y-2">
+            <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest bg-[#102A43]/10 border border-[#102A43]/20 px-3 py-1 rounded-full">
+              Explore Our Travel Blog
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              Practical Insights for Bangladeshi Travelers
+            </h2>
+            <p className="text-xs text-slate-500 max-w-xl mx-auto font-sans">
+              Cheaper flights, hassle-free visa processing guidelines, and real trip budget breakdowns in BDT.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { 
+                title: "5 Ways to Book Cheaper Flights from Dhaka", 
+                slug: "cheap-flight-booking-hacks-dhaka", 
+                time: "10 min read", 
+                icon: "✈️",
+                excerpt: "Most people book flights at the wrong time and overpay by thousands of taka. These five habits consistently get cheaper tickets — and the last one most people skip entirely." 
+              },
+              { 
+                title: "Nepal vs Thailand: Which Is Better for Your First Trip?", 
+                slug: "nepal-vs-thailand-first-trip", 
+                time: "8 min read", 
+                icon: "⛰️",
+                excerpt: "Nepal offers direct flight networks, free visa on arrival, and a very low daily cost. Thailand opens up beaches, high-end shopping, and vibrant streets. Here is how to choose." 
+              },
+              { 
+                title: "How to Keep Hotel Costs Low in Bangkok, KL, and Dubai", 
+                slug: "hotel-savings-guide-bangkok-kl-dubai", 
+                time: "6 min read", 
+                icon: "🏨",
+                excerpt: "The right neighborhood makes a huge difference. One metro station away from tourist sectors can save up to BDT 15,000 per trip without compromising of comfort." 
+              }
+            ].map((post, index) => (
+              <div 
+                key={index} 
+                className="group bg-white border border-slate-200 hover:border-[#F6B73C]/60 p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between transform hover:-translate-y-1"
+                style={{ minHeight: "270px" }}
+              >
+                <div className="space-y-3.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[20px]">{post.icon}</span>
+                    <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider bg-slate-50 border border-slate-100 px-2.5 py-1 rounded-md">{post.time}</span>
+                  </div>
+                  <h4 
+                    className="font-serif font-black text-base text-slate-900 group-hover:text-[#102A43] cursor-pointer leading-snug transition-colors" 
+                    onClick={() => navigateTo(`/blog?slug=${post.slug}`)}
+                  >
+                    {post.title}
+                  </h4>
+                  <p className="text-xs text-slate-500 leading-relaxed font-light">{post.excerpt}</p>
+                </div>
+
+                <button 
+                  onClick={() => navigateTo(`/blog?slug=${post.slug}`)}
+                  className="text-xs font-bold text-[#102A43] group-hover:text-[#F6B73C] self-start mt-4 flex items-center gap-1 transition-colors"
+                >
+                  Read full tips <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center pt-2">
+            <button
+              onClick={() => navigateTo("/blog")}
+              className="inline-flex items-center gap-2 bg-[#102A43] hover:bg-slate-800 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            >
+              📊 Visit Full Travel Blog Directory
+            </button>
+          </div>
+        </div>
+      )}
 
       </main>
 

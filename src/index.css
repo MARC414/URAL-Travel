@@ -140,26 +140,16 @@
 
 /* === HERO ROUTE LINE ANIMATION === */
 @keyframes routeDash {
-  0% {
-    stroke-dashoffset: 600;
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    stroke-dashoffset: 0;
-    opacity: 0.3;
+  to {
+    stroke-dashoffset: -40;
   }
 }
 
 .route-line {
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-  animation: routeDash 20s linear infinite;
+  stroke-dasharray: 3 6;
+  stroke-dashoffset: 0;
+  animation: routeDash 25s linear infinite;
+  opacity: 0.35;
 }
 
 /* === DESTINATION DOT PULSE === */
