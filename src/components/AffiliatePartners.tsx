@@ -1,0 +1,165 @@
+import React, { useEffect, useState, useRef } from "react";
+import { ExternalLink } from "lucide-react";
+
+/* Single source of truth for the plain outbound URLs (used by
+   PartnerLinkButton and any inline <a> tags). Do not edit these values. */
+export const AFFILIATE_LINKS = {
+  aviasales: "https://aviasales.tpo.li/8saJolX0",
+  klook: "https://klook.tpo.li/IYOU76Bn",
+  kkday: "https://kkday.tpo.li/3Ecyxris",
+  kiwitaxi: "https://kiwitaxi.tpo.li/GIhvhrtF",
+  airalo: "https://airalo.tpo.li/mV2QXsXK",
+  qeeq: "https://qeeq.tpo.li/nooi5oSG"
+};
+
+/* Generic script-injecting widget shell — mirrors the existing
+   TravelpayoutsEmbed.tsx pattern already used for Aviasales in this project. */
+function ScriptWidget({
+  src,
+  minHeight = 220,
+  loadingLabel,
+  fallbackUrl,
+  fallbackText
+}: {
+  src: string;
+  minHeight?: number;
+  loadingLabel: string;
+  fallbackUrl: string;
+  fallbackText: string;
+}) {
+  const [status, setStatus] = useState<"loading" | "loaded" | "failed">("loading");
+  const scriptContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!scriptContainerRef.current) return;
+    scriptContainerRef.current.innerHTML = "";
+    
+    const script = document.createElement("script");
+    script.src = src;
+    script.charset = "utf-8";
+    script.async = true;
+    
+    script.onload = () => setStatus("loaded");
+    script.onerror = () => setStatus("failed");
+    
+    const timer = setTimeout(() => {
+      setStatus(prev => prev === "loading" ? "failed" : prev);
+    }, 4500);
+
+    scriptContainerRef.current.appendChild(script);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [src]);
+
+  return (
+    <div
+      className="w-full bg-white rounded-lg p-2 overflow-hidden"
+      style={{ minHeight }}
+    >
+      {status === "failed" && (
+        <div className="flex flex-col items-center justify-center py-6 px-4 text-center space-y-3">
+          <span className="text-xs text-slate-500 font-mono">This interactive tool is taking longer than expected to load.</span>
+          <a
+            href={fallbackUrl}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="inline-flex items-center gap-1.5 bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs px-5 py-2.5 rounded-lg transition-colors cursor-pointer"
+          >
+            {fallbackText} <ExternalLink size={12} />
+          </a>
+        </div>
+      )}
+
+      {status === "loading" && (
+        <div className="flex flex-col items-center justify-center py-8 text-slate-500">
+          <div className="w-6 h-6 border-4 border-slate-200 border-t-[#102A43] animate-spin rounded-full mb-2" />
+          <span className="text-[11px] font-mono tracking-tight font-medium">
+            {loadingLabel}
+          </span>
+        </div>
+      )}
+
+      <div 
+        ref={scriptContainerRef} 
+        style={{ display: status === "loaded" ? "block" : "none" }}
+      />
+    </div>
+  );
+}
+
+/* 02. Klook — Activities & Things To Do widget */
+export function KlookActivitiesWidget() {
+  return (
+    <ScriptWidget
+      src="https://tpemd.com/content?currency=usd&promo_id=4497&campaign_id=137&powered_by=true&amount=3&category=3&city_id=9&locale=en&shmarker=675992&trs=540277"
+      loadingLabel="Loading tours & activities..."
+      fallbackUrl={AFFILIATE_LINKS.klook}
+      fallbackText="See Dubai Tours & Activities on Klook"
+    />
+  );
+}
+
+/* 04. Kiwitaxi — Airport Transfers / Shuttles widget */
+export function KiwitaxiTransferWidget() {
+  return (
+    <ScriptWidget
+      src="https://tpemd.com/content?currency=USD&promo_id=1486&campaign_id=1&powered_by=true&theme=6&language=en&shmarker=675992&trs=540277"
+      loadingLabel="Loading airport transfer search..."
+      fallbackUrl={AFFILIATE_LINKS.kiwitaxi}
+      fallbackText="Book Airport Transfers on Kiwitaxi"
+    />
+  );
+}
+
+/* 05. Airalo — eSIM / connectivity widget */
+export function AiraloEsimWidget() {
+  return (
+    <ScriptWidget
+      src="https://tpemd.com/content?campaign_id=541&promo_id=8588&no_labels=true&plain=false&border_radius=5&special=%23C4C4C4&light=%23FFFFFF&dark=%2311100f&secondary=%230b1628&color_focused=%23C32B2Bff&color_button=%23315590ff&powered_by=true&locale=en&shmarker=675992&trs=540277"
+      loadingLabel="Loading local eSIM plans..."
+      fallbackUrl={AFFILIATE_LINKS.airalo}
+      fallbackText="Get a Local eSIM from Airalo"
+    />
+  );
+}
+
+/* 06. QEEQ — Car Rental widget */
+export function QeeqCarRentalWidget() {
+  return (
+    <ScriptWidget
+      src="https://tpemd.com/content?promo_id=4850&campaign_id=172&powered_by=true&locale=en&shmarker=675992&trs=540277"
+      loadingLabel="Loading car rental search..."
+      fallbackUrl={AFFILIATE_LINKS.qeeq}
+      fallbackText="Rent a Car on QEEQ"
+    />
+  );
+}
+
+/* Styled outbound link button — used for KKday (link-only, no widget exists)
+   and as a fallback/secondary CTA next to any widget above. */
+export function PartnerLinkButton({
+  href,
+  label,
+  variant = "light"
+}: {
+  href: string;
+  label: string;
+  variant?: "light" | "dark";
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer sponsored"
+      className={
+        variant === "dark"
+          ? "inline-flex items-center gap-1.5 bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
+          : "inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] text-[#102A43] font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
+      }
+    >
+      {label} <ExternalLink size={12} />
+    </a>
+  );
+}

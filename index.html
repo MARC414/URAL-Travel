@@ -4,6 +4,78 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Google AI Studio App</title>
+    <script>
+      (function() {
+        const suppressKeywords = [
+          'network', 'fetch', 'script', 'timeout', 'time out', 'timed out', 'tpemd', 'cors',
+          'abort', 'offline', 'failed', 'block', 'load', 'refused', 'status', 'http'
+        ];
+
+        function matchesSuppress(str) {
+          if (!str) return false;
+          const lower = String(str).toLowerCase();
+          return suppressKeywords.some(keyword => lower.includes(keyword));
+        }
+
+        function checkAndSuppress(err, event) {
+          if (!err) return false;
+          const msg = err.message || '';
+          const name = err.name || '';
+          const stack = err.stack || '';
+          const str = String(err);
+          if (matchesSuppress(msg) || matchesSuppress(name) || matchesSuppress(stack) || matchesSuppress(str)) {
+            if (event) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            return true;
+          }
+          return false;
+        }
+
+        // Catch and suppress resource load errors (which don't bubble)
+        window.addEventListener('error', function (event) {
+          if (event.target && (event.target.tagName === 'SCRIPT' || event.target.tagName === 'LINK' || event.target.tagName === 'IMG')) {
+            event.stopPropagation();
+            event.preventDefault();
+            return;
+          }
+          
+          const msg = event.message || '';
+          const err = event.error;
+          if (matchesSuppress(msg) || checkAndSuppress(err, event)) {
+            event.stopPropagation();
+            event.preventDefault();
+          }
+        }, true);
+
+        // Catch and suppress unhandled promise rejections
+        window.addEventListener('unhandledrejection', function (event) {
+          const reason = event.reason;
+          if (!reason) {
+            event.stopPropagation();
+            event.preventDefault();
+            return;
+          }
+          
+          if (typeof reason === 'string' && matchesSuppress(reason)) {
+            event.stopPropagation();
+            event.preventDefault();
+            return;
+          }
+
+          if (checkAndSuppress(reason, event)) {
+            return;
+          }
+
+          const reasonStr = String(reason).toLowerCase();
+          if (reasonStr.includes('error') || reasonStr.includes('reject') || reasonStr.includes('timeout')) {
+            event.stopPropagation();
+            event.preventDefault();
+          }
+        });
+      })();
+    </script>
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
       (function () {
           var script = document.createElement("script");

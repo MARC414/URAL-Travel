@@ -35,6 +35,15 @@ import { TravelpayoutsWidget } from "./components/TravelpayoutsWidget";
 import { TravelpayoutsEmbed } from "./components/TravelpayoutsEmbed";
 import { TrustpilotReviews } from "./components/TrustpilotReviews";
 import { InteractiveTools } from "./components/InteractiveTools";
+import { TravelEssentials } from "./components/TravelEssentials";
+import {
+  KiwitaxiTransferWidget,
+  AiraloEsimWidget,
+  KlookActivitiesWidget,
+  QeeqCarRentalWidget,
+  PartnerLinkButton,
+  AFFILIATE_LINKS
+} from "./components/AffiliatePartners";
 import { useSeoMeta, buildFaqSchema } from "./hooks/useSeoMeta";
 const heroBgImage = new URL("./assets/images/clouds_boat_hero_1781438671378.jpg", import.meta.url).href;
 const coxsBazarSunriseImg = new URL("./assets/images/coxs_bazar_sunrise_1781620718331.jpg", import.meta.url).href;
@@ -664,6 +673,42 @@ export default function App() {
               </div>
             </div>
 
+            {/* 🟦 SECTION 4.25: TRAVEL SERVICES */}
+            <div className="space-y-6">
+              <div className="text-center space-y-2">
+                <span className="text-[10px] font-mono font-bold text-[#0F172A] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">Everything else for your trip</span>
+                <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Transfers, Activities, eSIM & Car Rental</h2>
+                <p className="text-xs text-slate-500 max-w-xl mx-auto">Book the rest of your trip in one place — airport transfers, things to do, mobile data, and rental cars.</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                  <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block">🚕 Airport Transfers</span>
+                  <KiwitaxiTransferWidget />
+                </div>
+
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                  <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block">📶 Stay Connected</span>
+                  <AiraloEsimWidget />
+                </div>
+
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block">🎟️ Things To Do</span>
+                    <KlookActivitiesWidget />
+                  </div>
+                  <div className="pt-2">
+                    <PartnerLinkButton href={AFFILIATE_LINKS.kkday} label="More tours on KKday" />
+                  </div>
+                </div>
+
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                  <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block">🚗 Car Rental</span>
+                  <QeeqCarRentalWidget />
+                </div>
+              </div>
+            </div>
+
             {/* 🟦 INTERACTIVE TOOLS DESK PANEL (Aesthetic calculation tools) */}
             <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 space-y-6">
               <div className="border-l-4 border-[#102A43] pl-4">
@@ -781,7 +826,7 @@ export default function App() {
                 <div className="space-y-1 p-4 bg-[#F6B73C]/10 rounded-xl border border-[#F6B73C]/30">
                   <span className="text-[#F6B73C] font-semibold text-xs block uppercase tracking-wider font-mono">🤝 Trusted Partners</span>
                   <p className="text-[11px] text-[#F6B73C] font-bold mt-1">“Powered by Travelpayouts”</p>
-                  <p className="text-[10px] text-slate-350 leading-relaxed font-sans">Our flight and hotel search is powered by Travelpayouts, a global travel affiliate network trusted by thousands of travel websites.</p>
+                  <p className="text-[10px] text-slate-350 leading-relaxed font-sans font-sans">Flights, transfers, activities, eSIMs, and car rentals on this site are powered by Travelpayouts and its partner network — including Aviasales, Klook, Kiwitaxi, Airalo, and QEEQ.</p>
                 </div>
               </div>
             </div>
@@ -894,6 +939,12 @@ export default function App() {
                   Compare prices for your {FLIGHTS_DATA.find(r => r.id === parameterId)?.country || "Nepal"} flight — lowest fares through our verified booking partners.
                 </p>
               </div>
+
+              <div className="bg-white border border-slate-200 p-5 rounded-xl space-y-2 shadow-sm">
+                <span className="text-[10px] text-[#102A43] font-mono uppercase tracking-widest block font-bold">🚕 After You Land</span>
+                <p className="text-[11px] text-slate-500 leading-normal">Pre-book a private airport transfer to your hotel in {FLIGHTS_DATA.find(r => r.id === parameterId)?.country || "Nepal"} — skip the taxi line.</p>
+                <PartnerLinkButton href={AFFILIATE_LINKS.kiwitaxi} label="Find a Transfer" variant="dark" />
+              </div>
             </div>
 
             {/* Master Page Content */}
@@ -971,7 +1022,7 @@ export default function App() {
                     {/* internal linking system ranking loops (Flights to Visa and Hotels!) */}
                     <div id="hotel-visa-loop-links" className="bg-[#102A43]/5 border border-[#102A43]/15 p-5 rounded-xl space-y-3">
                       <span className="text-[10px] font-bold text-[#102A43] font-mono tracking-widest uppercase block">Also Useful for This Trip</span>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-semibold font-mono">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
                         <button
                           id={`lnk-view-visa-from-flight-${activeRoute.id}`}
                           onClick={() => {
@@ -994,6 +1045,9 @@ export default function App() {
                         >
                           🏨 Where to Stay in {activeRoute.country} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
+                        <a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm">
+                          🚕 Book Airport Transfer in {activeRoute.country} <ExternalLink size={12} className="ml-auto text-[#F6B73C]" />
+                        </a>
                       </div>
                     </div>
 
@@ -1148,17 +1202,29 @@ export default function App() {
                       </div>
                     </div>
 
+                    {/* 🚕 Getting From the Airport widget block */}
+                    <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 animate-fade-in">
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest block">🚕 Getting From the Airport</span>
+                        <h3 className="font-serif text-lg font-bold text-slate-900">Book Your Transfer to {activeHotel.city}</h3>
+                        <p className="text-xs text-slate-500">Pre-book a private or shared transfer instead of negotiating a taxi on arrival.</p>
+                      </div>
+                      <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200">
+                        <KiwitaxiTransferWidget />
+                      </div>
+                    </div>
+
                     {/* Flight & Visa Loop linkups */}
                     <div id="hotel-internal-loop" className="bg-[#102A43]/5 border border-[#102A43]/15 p-5 rounded-xl space-y-3">
                       <span className="text-[10px] font-bold text-[#102A43] font-mono tracking-widest uppercase block">⚡ FLIGHT ROUTING & ENTRY DETAILS:</span>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-semibold font-mono">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
                         <button
                           id={`lnk-view-visa-from-hotel-${activeHotel.id}`}
                           onClick={() => {
                             const matchingVisa = activeHotel.country.toLowerCase() === "nepal" ? "nepal-visa" : activeHotel.country.toLowerCase() === "thailand" ? "thailand-visa" : "malaysia-visa";
                             navigateTo(`/visa?country=${matchingVisa}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
+                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
                         >
                           🛂 Check {activeHotel.country} Visa Checklist <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
@@ -1168,10 +1234,18 @@ export default function App() {
                             const matchingRoute = activeHotel.country.toLowerCase() === "nepal" ? "dhaka-kathmandu" : activeHotel.country.toLowerCase() === "thailand" ? "dhaka-bangkok" : "dhaka-kuala-lumpur";
                             navigateTo(`/flights?route=${matchingRoute}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
+                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
                         >
                           ✈️ Recommended Dhaka Flights <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
+                        <a
+                          href={AFFILIATE_LINKS.kiwitaxi}
+                          target="_blank"
+                          rel="noopener noreferrer sponsored"
+                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-250 rounded-lg text-left shadow-sm cursor-pointer"
+                        >
+                          🚕 Compare Transfer Prices <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                        </a>
                       </div>
                     </div>
 
@@ -1318,17 +1392,29 @@ export default function App() {
                       </div>
                     </div>
 
+                    {/* 📶 Stay Connected widget block */}
+                    <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 animate-fade-in">
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest block">📶 Before You Fly</span>
+                        <h3 className="font-serif text-lg font-bold text-slate-900">Get a Local eSIM for {activeVisa.country}</h3>
+                        <p className="text-xs text-slate-500">Land with data already active — no SIM card counter, no roaming bill shock.</p>
+                      </div>
+                      <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200">
+                        <AiraloEsimWidget />
+                      </div>
+                    </div>
+
                     {/* Flight & Hotel loop structure */}
                     <div id="visa-internal-loop" className="bg-[#102A43]/5 border border-[#102A43]/15 p-5 rounded-xl space-y-3">
                       <span className="text-[10px] font-bold text-[#102A43] font-mono tracking-widest uppercase block">Plan Your Full Trip</span>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-semibold font-mono">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
                         <button
                           id={`lnk-view-hotel-from-visa-${activeVisa.id}`}
                           onClick={() => {
                             const matchingHotel = activeVisa.country.toLowerCase() === "nepal" ? "kathmandu-hotels" : activeVisa.country.toLowerCase() === "thailand" ? "bangkok-hotels" : activeVisa.country.toLowerCase() === "uae" ? "dubai-hotels" : "kuala-lumpur-hotels";
                             navigateTo(`/hotels?city=${matchingHotel}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
+                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
                         >
                           🏨 Curated {activeVisa.country} Hotels <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
@@ -1338,10 +1424,18 @@ export default function App() {
                             const matchingRoute = activeVisa.country.toLowerCase() === "nepal" ? "dhaka-kathmandu" : activeVisa.country.toLowerCase() === "thailand" ? "dhaka-bangkok" : activeVisa.country.toLowerCase() === "uae" ? "dhaka-dubai" : "dhaka-kuala-lumpur";
                             navigateTo(`/flights?route=${matchingRoute}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
+                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
                         >
                           ✈️ Book Flights from Dhaka <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
+                        <a
+                          href={AFFILIATE_LINKS.airalo}
+                          target="_blank"
+                          rel="noopener noreferrer sponsored"
+                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                        >
+                          📶 Get a Local eSIM <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                        </a>
                       </div>
                     </div>
 
@@ -1452,7 +1546,7 @@ export default function App() {
                             <h4 className="font-serif font-black text-sm text-[#102A43] uppercase tracking-wider">Dubai Quick Snapshot</h4>
                             <p className="text-[11px] text-slate-500 font-mono font-light">Instant travel context before you search accommodation options below.</p>
                           </div>
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans">
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-sans">
                             <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
                               <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">🌞 Best time to visit</span>
                               <span className="font-serif font-bold text-slate-800 text-xs block">November – March</span>
@@ -1465,6 +1559,15 @@ export default function App() {
                               <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">🎒 Travel style</span>
                               <span className="font-serif font-bold text-slate-800 text-xs block">budget to luxury options available</span>
                             </div>
+                            <a
+                              href={AFFILIATE_LINKS.airalo}
+                              target="_blank"
+                              rel="noopener noreferrer sponsored"
+                              className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1 cursor-pointer hover:border-[#F6B73C] block"
+                            >
+                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">📶 Stay connected</span>
+                              <span className="font-serif font-bold text-slate-800 text-xs block">Local eSIM from Airalo</span>
+                            </a>
                           </div>
                         </div>
 
@@ -1527,6 +1630,27 @@ export default function App() {
                           </div>
                         </div>
 
+                        {/* 🚗 4. TRAVEL ESSENTIALS & SERVICES (Taxis, eSIMs, Rentals, Activities) */}
+                        <TravelEssentials country="Dubai, UAE" />
+
+                        {/* 🚕 New "Getting Around Dubai" section */}
+                        <div id="dubai-getting-around" className="space-y-4">
+                          <div className="border-b border-slate-200 pb-2">
+                            <h3 className="font-serif font-black text-lg text-slate-900">Getting Around Dubai</h3>
+                            <p className="text-xs text-slate-500">Pre-book transfers and rental cars instead of arranging them on arrival.</p>
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                              <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block">🚕 Airport & City Transfers</span>
+                              <KiwitaxiTransferWidget />
+                            </div>
+                            <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                              <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block">🚗 Self-Drive Car Rental</span>
+                              <QeeqCarRentalWidget />
+                            </div>
+                          </div>
+                        </div>
+
                         {/* 💡 5. TRAVEL INSIGHTS SECTION */}
                         <div id="dubai-insights" className="bg-[#102A43]/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
                           <div className="space-y-1">
@@ -1556,12 +1680,14 @@ export default function App() {
                             <h4 className="font-serif font-bold text-slate-855 text-sm">Dubai Premium Partner Portals</h4>
                             <p className="text-[11px] text-slate-500 leading-relaxed">Direct conversion fallback if search engines are not loaded.</p>
                           </div>
-                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
                             {[
                               { label: "Cheap flights to Dubai", path: "/flights" },
                               { label: "Best hotels in Dubai", path: "/hotels" },
-                              { label: "Dubai travel deals", click: () => triggerAffiliateToast("Opening partner page for Dubai travel deals...") },
-                              { label: "Dubai vacation packages", click: () => triggerAffiliateToast("Opening partner page for Dubai vacation packages...") }
+                              { label: "Dubai airport transfers (Kiwitaxi)", href: AFFILIATE_LINKS.kiwitaxi },
+                              { label: "Dubai car rental (QEEQ)", href: AFFILIATE_LINKS.qeeq },
+                              { label: "Dubai tours (Klook)", href: AFFILIATE_LINKS.klook },
+                              { label: "Dubai eSIM (Airalo)", href: AFFILIATE_LINKS.airalo }
                             ].map((lnk, idx) => (
                               lnk.path ? (
                                 <button
@@ -1573,14 +1699,16 @@ export default function App() {
                                   <ExternalLink size={10} className="text-[#F6B73C] shrink-0 ml-1" />
                                 </button>
                               ) : (
-                                <button
+                                <a
                                   key={idx}
-                                  onClick={lnk.click}
+                                  href={lnk.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer sponsored"
                                   className="bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] p-3 rounded-xl transition-all font-mono font-bold text-slate-705 text-left cursor-pointer flex items-center justify-between"
                                 >
                                   <span>{lnk.label}</span>
                                   <ExternalLink size={10} className="text-[#F6B73C] shrink-0 ml-1" />
-                                </button>
+                                </a>
                               )
                             ))}
                           </div>
@@ -1591,6 +1719,11 @@ export default function App() {
                           <div className="border-b border-slate-200 pb-2">
                             <h3 className="font-serif font-black text-lg text-slate-900">Things to Do in Dubai</h3>
                             <p className="text-xs text-slate-500">Unmissable attractions with deep-linked partner rates.</p>
+                          </div>
+                          <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                            <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block">🎟️ Book Dubai Tours & Activities</span>
+                            <KlookActivitiesWidget />
+                            <PartnerLinkButton href={AFFILIATE_LINKS.kkday} label="See more Dubai tours on KKday" />
                           </div>
                           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs font-sans">
                             {[
@@ -1724,7 +1857,7 @@ export default function App() {
                             <p className="text-[11px] text-slate-500 font-mono">Quick decision support parameters before searching accommodation.</p>
                           </div>
 
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
                             <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
                               <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">🌞 Best Time To Visit</span>
                               <span className="font-serif font-bold text-slate-800 text-xs block">{activeDes.bestTimeToVisit}</span>
@@ -1747,6 +1880,10 @@ export default function App() {
                                 activeDes.id === "dubai-guide" ? "Desert dune riding, observation deck sightseeing, and beach luxury resorts." : "Casual exploration"}
                               </span>
                             </div>
+                            <a href={AFFILIATE_LINKS.airalo} target="_blank" rel="noopener noreferrer sponsored" className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1 block hover:border-[#F6B73C] cursor-pointer">
+                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">📶 Stay Connected</span>
+                              <span className="font-serif font-bold text-slate-800 text-xs block">Local eSIM from Airalo</span>
+                            </a>
                           </div>
                         </div>
 
@@ -1826,6 +1963,9 @@ export default function App() {
                           </div>
                         </div>
 
+                        {/* 🚗 TRAVEL ESSENTIALS & SERVICES (Taxis, eSIMs, Rentals, Activities) */}
+                        <TravelEssentials country={activeDes.country} />
+
                         {/* 6. FLIGHT PRICE / DEAL INSIGHT SECTION */}
                         <div id="dest-flight-insights" className="bg-[#102A43]/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
                           <div className="space-y-1">
@@ -1900,6 +2040,28 @@ export default function App() {
                               ))}
                             </ul>
                           </div>
+
+                          {/* Activities block */}
+                          <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3 mt-4">
+                            <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block">🎟️ Book Activities & Day Tours</span>
+                            <KlookActivitiesWidget />
+                            <PartnerLinkButton href={AFFILIATE_LINKS.kkday} label="See more tours on KKday" />
+                          </div>
+
+                          {/* Getting Around block */}
+                          <div className="space-y-4 mt-4 text-left">
+                            <h4 className="font-serif font-bold text-sm text-slate-900">Getting Around {activeDes.country}</h4>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                                <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block">🚕 Airport & City Transfers</span>
+                                <KiwitaxiTransferWidget />
+                              </div>
+                              <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                                <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block">🚗 Self-Drive Car Rental</span>
+                                <QeeqCarRentalWidget />
+                              </div>
+                            </div>
+                          </div>
                         </div>
 
                         {/* 8. TRAVEL PLANNING CTA SECTION */}
@@ -1931,6 +2093,25 @@ export default function App() {
                             >
                               View Visa Guidelines →
                             </button>
+                          </div>
+                        </div>
+
+                        {/* Helpful Affiliate Links Fallback Panel */}
+                        <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 text-left">
+                          <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest block">Helpful Links</span>
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                            <a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] p-3 rounded-xl transition-all font-mono font-bold text-slate-705 text-left cursor-pointer flex items-center justify-between">
+                              <span>Airport transfers (Kiwitaxi)</span><ExternalLink size={10} className="text-[#F6B73C] shrink-0 ml-1" />
+                            </a>
+                            <a href={AFFILIATE_LINKS.qeeq} target="_blank" rel="noopener noreferrer sponsored" className="bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] p-3 rounded-xl transition-all font-mono font-bold text-slate-705 text-left cursor-pointer flex items-center justify-between">
+                              <span>Car rental (QEEQ)</span><ExternalLink size={10} className="text-[#F6B73C] shrink-0 ml-1" />
+                            </a>
+                            <a href={AFFILIATE_LINKS.klook} target="_blank" rel="noopener noreferrer sponsored" className="bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] p-3 rounded-xl transition-all font-mono font-bold text-slate-705 text-left cursor-pointer flex items-center justify-between">
+                              <span>Tours & activities (Klook)</span><ExternalLink size={10} className="text-[#F6B73C] shrink-0 ml-1" />
+                            </a>
+                            <a href={AFFILIATE_LINKS.kkday} target="_blank" rel="noopener noreferrer sponsored" className="bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] p-3 rounded-xl transition-all font-mono font-bold text-slate-705 text-left cursor-pointer flex items-center justify-between">
+                              <span>More tours (KKday)</span><ExternalLink size={10} className="text-[#F6B73C] shrink-0 ml-1" />
+                            </a>
                           </div>
                         </div>
 
@@ -2105,6 +2286,26 @@ export default function App() {
                       </div>
                     </div>
 
+                    {/* Cut These Costs Further links section */}
+                    <div className="bg-[#102A43]/5 border border-[#102A43]/15 p-5 rounded-xl space-y-3 text-left">
+                      <span className="text-[10px] font-bold text-[#102A43] font-mono tracking-widest uppercase block">Cut These Costs Further</span>
+                      <p className="text-xs text-slate-600">Pre-booking transport, activities, and data usually beats paying on arrival in {activeCost.country}.</p>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                        <a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] p-3 rounded-xl transition-all font-mono font-bold text-slate-705 text-left cursor-pointer flex items-center justify-between">
+                          <span>Airport transfer</span><ExternalLink size={10} className="text-[#F6B73C] shrink-0 ml-1" />
+                        </a>
+                        <a href={AFFILIATE_LINKS.qeeq} target="_blank" rel="noopener noreferrer sponsored" className="bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] p-3 rounded-xl transition-all font-mono font-bold text-slate-705 text-left cursor-pointer flex items-center justify-between">
+                          <span>Car rental</span><ExternalLink size={10} className="text-[#F6B73C] shrink-0 ml-1" />
+                        </a>
+                        <a href={AFFILIATE_LINKS.klook} target="_blank" rel="noopener noreferrer sponsored" className="bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] p-3 rounded-xl transition-all font-mono font-bold text-slate-705 text-left cursor-pointer flex items-center justify-between">
+                          <span>Activities (Klook)</span><ExternalLink size={10} className="text-[#F6B73C] shrink-0 ml-1" />
+                        </a>
+                        <a href={AFFILIATE_LINKS.airalo} target="_blank" rel="noopener noreferrer sponsored" className="bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] p-3 rounded-xl transition-all font-mono font-bold text-slate-705 text-left cursor-pointer flex items-center justify-between">
+                          <span>Local eSIM</span><ExternalLink size={10} className="text-[#F6B73C] shrink-0 ml-1" />
+                        </a>
+                      </div>
+                    </div>
+
                     {/* Internal link graphs */}
                     <div id="cost-internal-loop" className="bg-[#102A43]/5 border border-[#102A43]/15 p-5 rounded-xl space-y-3">
                       <span className="text-[10px] font-bold text-[#102A43] font-mono tracking-widest uppercase block">Also Plan For This Trip</span>
@@ -2243,6 +2444,18 @@ export default function App() {
                       {activePost.content}
                     </div>
 
+                    {activePost.affiliateCTA && (
+                      <div className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl space-y-2 text-left animate-fade-in">
+                        <span className="text-[10px] font-bold tracking-widest text-[#102A43] font-mono block uppercase">{activePost.affiliateCTA.headline}</span>
+                        <p className="text-xs text-slate-600">{activePost.affiliateCTA.body}</p>
+                        {activePost.affiliateCTA.provider === "klook" ? <KlookActivitiesWidget /> :
+                         activePost.affiliateCTA.provider === "kiwitaxi" ? <KiwitaxiTransferWidget /> :
+                         activePost.affiliateCTA.provider === "airalo" ? <AiraloEsimWidget /> :
+                         activePost.affiliateCTA.provider === "qeeq" ? <QeeqCarRentalWidget /> :
+                         <PartnerLinkButton href={AFFILIATE_LINKS[activePost.affiliateCTA.provider]} label="Check it out" variant="dark" />}
+                      </div>
+                    )}
+
                     {/* Ranking loop cross connections inside blog post footer */}
                     <div className="pt-6 border-t border-slate-100 space-y-3">
                       <span className="text-[10px] font-bold text-[#102A43] font-mono uppercase tracking-widest block font-sans">Related Articles</span>
@@ -2352,7 +2565,7 @@ export default function App() {
 
       {/* 🔮 MASTER FOOTER BLOCK */}
       <footer className="bg-[#0F172A] text-slate-400 py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs mt-16">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8">
           
           <div className="space-y-3">
             <div className="flex items-center gap-2.5 text-white">
@@ -2386,9 +2599,19 @@ export default function App() {
           </div>
 
           <div className="space-y-2">
+            <span className="text-white font-bold font-mono uppercase text-xs block mb-1">Travel Services</span>
+            <ul className="space-y-1 text-xs">
+              <li><a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Airport Transfers</a></li>
+              <li><a href={AFFILIATE_LINKS.klook} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Tours & Activities</a></li>
+              <li><a href={AFFILIATE_LINKS.qeeq} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Car Rental</a></li>
+              <li><a href={AFFILIATE_LINKS.airalo} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Local eSIM</a></li>
+            </ul>
+          </div>
+
+          <div className="space-y-2">
             <span className="text-white font-bold font-mono uppercase text-xs block mb-1">Monetisation Disclosures</span>
             <p className="leading-relaxed">
-              URAL earns a small commission when you book through links on this site. This doesn't add to your cost — it's paid by the airline or hotel. We never sell your personal data.
+              URAL earns a small commission when you book flights, transfers, activities, eSIMs, or rental cars through links on this site. This doesn't add to your cost — it's paid by our travel partners. We never sell your personal data.
             </p>
           </div>
 

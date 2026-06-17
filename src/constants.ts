@@ -1056,7 +1056,8 @@ Many local banks in Bangladesh (like EBL, SCB, City Bank, Mutual Trust Bank) run
     internalLinks: [
       { text: "Dhaka to Kathmandu flights Guide", path: "/flights?route=dhaka-kathmandu" },
       { text: "Dhaka to Bangkok Flight Costs", path: "/flights?route=dhaka-bangkok" }
-    ]
+    ],
+    affiliateCTA: { provider: "aviasales", headline: "Ready to check today's fares?", body: "Compare live Dhaka departure prices before they change." }
   },
   {
     id: "blog-2",
@@ -1088,7 +1089,8 @@ SUMMARY ADVICE
     internalLinks: [
       { text: "Nepal Visa step-by-step checklist", path: "/visa?country=nepal-visa" },
       { text: "Thailand trip cost from Dhaka", path: "/costs?country=thailand-costs" }
-    ]
+    ],
+    affiliateCTA: { provider: "klook", headline: "See what there is to do first", body: "Browse top-rated tours and activities in both Nepal and Thailand before you decide." }
   },
   {
     id: "blog-3",
@@ -1112,6 +1114,7 @@ Hotel rates on major portals tend to fluctuate mid-week. Always search for rooms
     internalLinks: [
       { text: "Dubai trip cost from Dhaka", path: "/costs?country=dubai-costs" },
       { text: "Kuala Lumpur Hotels Guide", path: "/hotels?city=kuala-lumpur" }
-    ]
+    ],
+    affiliateCTA: { provider: "kiwitaxi", headline: "Save on transport too", body: "A pre-booked airport transfer is usually cheaper than a metered taxi at arrival." }
   }
 ];

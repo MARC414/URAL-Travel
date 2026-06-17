@@ -11,7 +11,35 @@ interface SeoMetaProps {
  * JSON-LD <script type="application/ld+json"> tags into document.head.
  * Call this once per route/view with that page's data.
  */
+function safeStringify(val: any): string {
+  if (val === undefined || val === null) return "";
+  try {
+    const seen = new WeakSet();
+    return JSON.stringify(val, (key, value) => {
+      try {
+        if (typeof value === "object" && value !== null) {
+          if (seen.has(value)) {
+            return "[Circular]";
+          }
+          seen.add(value);
+        }
+        return value;
+      } catch (err) {
+        return undefined;
+      }
+    });
+  } catch (e) {
+    try {
+      return String(val);
+    } catch {
+      return "";
+    }
+  }
+}
+
 export function useSeoMeta({ title, description, schema }: SeoMetaProps) {
+  const schemaStr = safeStringify(schema);
+
   useEffect(() => {
     document.title = title;
     let metaDesc = document.querySelector('meta[name="description"]');
@@ -32,14 +60,14 @@ export function useSeoMeta({ title, description, schema }: SeoMetaProps) {
           const script = document.createElement("script");
           script.type = "application/ld+json";
           script.setAttribute("data-seo-schema", "true");
-          script.textContent = JSON.stringify(s);
+          script.textContent = safeStringify(s);
           document.head.appendChild(script);
         } catch (e) {
           console.error("Failed to inject schema:", e);
         }
       });
     }
-  }, [title, description, JSON.stringify(schema)]);
+  }, [title, description, schemaStr]);
 }
 
 /**

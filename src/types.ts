@@ -135,4 +135,5 @@ export interface BlogPost {
   readTime: string;
   content: string;
   internalLinks: { text: string; path: string }[];
+  affiliateCTA?: { provider: "aviasales" | "klook" | "kkday" | "kiwitaxi" | "airalo" | "qeeq"; headline: string; body: string };
 }
