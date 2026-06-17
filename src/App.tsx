@@ -56,7 +56,20 @@ type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "co
 
 export default function App() {
   // Simulated Browser Routing State
-  const [currentPath, setCurrentPath] = useState<string>("/");
+  const [currentPath, setCurrentPath] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      return window.location.pathname + window.location.search;
+    }
+    return "/";
+  });
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname + window.location.search);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [heroSearchTab, setHeroSearchTab] = useState<"flights" | "hotels" | "visa">("flights");
   const [heroFlightRoute, setHeroFlightRoute] = useState("dhaka-kathmandu");
@@ -87,7 +100,7 @@ export default function App() {
 
   // Parse path to resolve active section and optional query parameters
   const getRouteDetails = () => {
-    const url = new URL(currentPath, "https://ural.travel");
+    const url = new URL(currentPath, "https://ural-travel.pages.dev");
     const pathname = url.pathname;
     const searchParams = url.searchParams;
 
@@ -232,6 +245,9 @@ export default function App() {
 
   // Navigation Helper that emulates URL path routing
   const navigateTo = (path: string) => {
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", path);
+    }
     setCurrentPath(path);
     window.scrollTo({ top: 0, behavior: "smooth" });
     setMobileMenuOpen(false);
@@ -275,9 +291,9 @@ export default function App() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
                 </svg>
               </div>
-              <h1 className="font-sans font-extrabold text-[20px] text-white tracking-tight leading-none">
+              <span className="font-sans font-extrabold text-[20px] text-white tracking-tight leading-none">
                 URAL
-              </h1>
+              </span>
             </div>
 
             {/* Navigation Centered */}
@@ -407,6 +423,9 @@ export default function App() {
               backgroundImage: `linear-gradient(135deg, rgba(8, 17, 32, 0.85) 0%, rgba(11, 23, 44, 0.8) 35%, rgba(15, 30, 56, 0.75) 65%, rgba(21, 38, 68, 0.85) 100%), url(${heroBgImage})`
             }}
           >
+            {/* SEO-optimized Image Placement */}
+            <img src={heroBgImage} alt="Travel from Bangladesh — compare flights hotels and visa guides" className="sr-only" />
+
             {/* Bottom Fade Gradient Overlay */}
             <div className="hero-bottom-fade absolute bottom-0 left-0 right-0 h-64 z-10 pointer-events-none" />
 
@@ -563,10 +582,10 @@ export default function App() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                  { city: "Kathmandu", country: "Nepal", tag: "Free visa on arrival for Bangladeshis. Budget hotels in Thamel from BDT 1,500/night. A great first international trip.", code: "nepal-guide", img: "🇳🇵", path: "/destinations?country=nepal-guide", bgImg: nepalDestImg },
-                  { city: "Bangkok", country: "Thailand", tag: "Online e-Visa — approved in 5–10 days. Street food, shopping, islands, and beautiful temples.", code: "thailand-guide", img: "🇹🇭", path: "/destinations?country=thailand-guide", bgImg: bangkokDestImg },
-                  { city: "Kuala Lumpur", country: "Malaysia", tag: "Simple online eVisa. Affordable hotels, excellent halal food, and easy transit across Kuala Lumpur.", code: "malaysia-guide", img: "🇲🇾", path: "/destinations?country=malaysia-guide", bgImg: klDestImg },
-                  { city: "Dubai", country: "UAE", tag: "eVisa in 3–5 days. Burj Khalifa, desert safari, duty-free shopping — 4h 45m direct from Dhaka.", code: "dubai-guide", img: "🇦🇪", path: "/destinations?country=dubai-guide", bgImg: dubaiDestImg }
+                  { city: "Kathmandu", country: "Nepal", tag: "Free visa on arrival for Bangladeshis. Budget hotels in Thamel from BDT 1,500/night. A great first international trip.", code: "nepal-guide", img: "🇳🇵", path: "/destinations?country=nepal-guide", bgImg: nepalDestImg, alt: "Kathmandu skyline view — Nepal travel guide for Bangladeshi tourists" },
+                  { city: "Bangkok", country: "Thailand", tag: "Online e-Visa — approved in 5–10 days. Street food, shopping, islands, and beautiful temples.", code: "thailand-guide", img: "🇹🇭", path: "/destinations?country=thailand-guide", bgImg: bangkokDestImg, alt: "Bangkok temple and city view — Thailand travel guide for Bangladeshi tourists" },
+                  { city: "Kuala Lumpur", country: "Malaysia", tag: "Simple online eVisa. Affordable hotels, excellent halal food, and easy transit across Kuala Lumpur.", code: "malaysia-guide", img: "🇲🇾", path: "/destinations?country=malaysia-guide", bgImg: klDestImg, alt: "Kuala Lumpur Petronas Twin Towers — Malaysia travel guide for Bangladeshi tourists" },
+                  { city: "Dubai", country: "UAE", tag: "eVisa in 3–5 days. Burj Khalifa, desert safari, duty-free shopping — 4h 45m direct from Dhaka.", code: "dubai-guide", img: "🇦🇪", path: "/destinations?country=dubai-guide", bgImg: dubaiDestImg, alt: "Dubai Burj Khalifa skyline view — UAE travel guide for Bangladeshi tourists" }
                 ].map((dest, idx) => (
                   <div 
                     key={idx}
@@ -576,7 +595,7 @@ export default function App() {
                     {/* Background Travel Image */}
                     <img 
                       src={dest.bgImg} 
-                      alt={`${dest.city}, ${dest.country}`}
+                      alt={dest.alt}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 select-none"
                     />
 
@@ -839,6 +858,9 @@ export default function App() {
                 backgroundPosition: "center 40%"
               }}
             >
+              {/* SEO-optimized Image Placement */}
+              <img src={coxsBazarSunriseImg} alt="Cox's Bazar scenic sunrise beach view — travel from Dhaka and explore Bangladesh and outbound destinations" className="sr-only" />
+
               <div className="max-w-4xl mx-auto px-4 py-16 sm:py-20 flex flex-col justify-center items-center text-center space-y-8 relative z-10">
                 
                 {/* Visual Badge */}
@@ -965,9 +987,9 @@ export default function App() {
                       </nav>
 
                       <div className="flex flex-wrap items-center justify-between gap-4">
-                        <h2 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
+                        <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                           Flights from {activeRoute.from} to {activeRoute.to}
-                        </h2>
+                        </h1>
                         <span className="bg-[#F6B73C]/20 text-[#102A43] text-xs px-3 py-1 rounded-full font-bold font-mono">
                           {activeRoute.priceRangeBdt.split(" (")[0]}
                         </span>
@@ -984,7 +1006,7 @@ export default function App() {
 
                     {/* 📊 AEO: KEY FACTS TABLE */}
                     <div className="space-y-3">
-                      <h3 className="font-serif font-black text-lg text-slate-900">Flight Facts at a Glance</h3>
+                      <h2 className="font-serif font-black text-lg text-slate-900">Flight Facts at a Glance</h2>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {activeRoute.keyFacts.map((fact) => (
                           <div key={fact.label} className="bg-white border border-slate-250 p-4 rounded-xl text-center shadow-sm">
@@ -997,7 +1019,7 @@ export default function App() {
 
                     {/* Rich description contents */}
                     <div className="prose prose-slate prose-sm max-w-none text-xs text-slate-700 space-y-4">
-                      <h3 className="font-serif font-black text-lg text-slate-900">Airlines Flying This Route</h3>
+                      <h2 className="font-serif font-black text-lg text-slate-900">Airlines Flying This Route</h2>
                       <p>
                         Bangladeshi outbound travellers can leverage several daily flight profiles from Hazrat Shahjalal International Airport (DAC). Direct options are highly recommended to save travel fatigue:
                       </p>
@@ -1007,7 +1029,7 @@ export default function App() {
                         ))}
                       </ul>
                       
-                      <h4 className="font-serif font-black text-base text-slate-900 mt-4">When to Book for the Best Price</h4>
+                      <h3 className="font-serif font-black text-base text-slate-900 mt-4">When to Book for the Best Price</h3>
                       <p>
                         We advise booking flights approximately <strong>{activeRoute.bestTimeToBook}</strong>. In doing so, economy flyers can generally avoid peak dynamic pricing models. Ensure that you synchronize your flight bookings with visa durations, which are pre-configured at {activeRoute.visaRequirement}.
                       </p>
@@ -1053,7 +1075,7 @@ export default function App() {
 
                     {/* FAQ section */}
                     <div className="space-y-4">
-                      <h3 className="font-serif font-black text-lg text-slate-900 border-b border-slate-200 pb-2">Frequently Asked Questions</h3>
+                      <h2 className="font-serif font-black text-lg text-slate-900 border-b border-slate-200 pb-2">Frequently Asked Questions</h2>
                       <div className="space-y-4 text-xs">
                         {activeRoute.faqs.map((faq, index) => (
                           <div key={index} className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm space-y-1">
@@ -1127,9 +1149,9 @@ export default function App() {
                         <span className="text-[#102A43] font-bold">{activeHotel.id}</span>
                       </nav>
 
-                      <h2 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
+                      <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                         Where to Stay in {activeHotel.city}: Best Areas & Hotels
-                      </h2>
+                      </h1>
                     </div>
 
                     {/* AEO Answer */}
@@ -1142,7 +1164,7 @@ export default function App() {
 
                     {/* Neighborhoods breakdown */}
                     <div className="space-y-4">
-                      <h3 className="font-serif font-black text-lg text-slate-900 border-b border-slate-100 pb-2">Best Neighborhoods Area breakdown</h3>
+                      <h2 className="font-serif font-black text-lg text-slate-900 border-b border-slate-100 pb-2">Best Neighborhoods Area breakdown</h2>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {activeHotel.neighborhoods.map((zone) => (
                           <div key={zone.name} className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm hover:shadow">
@@ -1156,7 +1178,7 @@ export default function App() {
 
                     {/* Curated Housing Grid list */}
                     <div className="space-y-4">
-                      <h3 className="font-serif font-black text-lg text-slate-900">Curated Local Stays Selection</h3>
+                      <h2 className="font-serif font-black text-lg text-slate-900">Curated Local Stays Selection</h2>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {activeHotel.hotels.map((room) => (
                           <div key={room.name} className="border border-slate-205 p-5 bg-white rounded-xl shadow-sm flex flex-col justify-between">
@@ -1206,7 +1228,7 @@ export default function App() {
                     <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 animate-fade-in">
                       <div className="space-y-1">
                         <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest block">🚕 Getting From the Airport</span>
-                        <h3 className="font-serif text-lg font-bold text-slate-900">Book Your Transfer to {activeHotel.city}</h3>
+                        <h2 className="font-serif text-lg font-bold text-slate-900">Book Your Transfer to {activeHotel.city}</h2>
                         <p className="text-xs text-slate-500">Pre-book a private or shared transfer instead of negotiating a taxi on arrival.</p>
                       </div>
                       <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200">
@@ -1258,7 +1280,7 @@ export default function App() {
 
                     {/* FAQ */}
                     <div className="space-y-4">
-                      <h3 className="font-serif font-black text-lg text-slate-900 border-b border-slate-200 pb-2">Frequently Asked Questions</h3>
+                      <h2 className="font-serif font-black text-lg text-slate-900 border-b border-slate-200 pb-2">Frequently Asked Questions</h2>
                       <div className="space-y-4 text-xs">
                         {activeHotel.faqs.map((faq, index) => (
                           <div key={index} className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm space-y-1">
@@ -1332,9 +1354,9 @@ export default function App() {
                       </nav>
 
                       <div className="flex flex-wrap items-center justify-between gap-4">
-                        <h2 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
+                        <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                           {activeVisa.country} Visa Requirements for Bangladeshi Citizens
-                        </h2>
+                        </h1>
                         <span className="bg-[#102A43] text-white text-xs px-3 py-1 rounded-full font-bold font-mono">
                           {activeVisa.requirementType}
                         </span>
@@ -1361,7 +1383,7 @@ export default function App() {
 
                     {/* Step-by-step procedures */}
                     <div className="space-y-4">
-                      <h3 className="font-serif font-black text-lg text-slate-900 border-b border-slate-100 pb-2">Step-by-Step Application Process</h3>
+                      <h2 className="font-serif font-black text-lg text-slate-900 border-b border-slate-100 pb-2">Step-by-Step Application Process</h2>
                       <div className="space-y-3">
                         {activeVisa.stepByStep.map((step, idx) => (
                           <div key={idx} className="flex gap-4 text-xs leading-relaxed text-slate-650 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
@@ -1374,7 +1396,7 @@ export default function App() {
 
                     {/* Document structures */}
                     <div className="space-y-4">
-                      <h3 className="font-serif font-black text-lg text-slate-900">Document Checklist</h3>
+                      <h2 className="font-serif font-black text-lg text-slate-900">Document Checklist</h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {activeVisa.documentChecklist.map((cat) => (
                           <div key={cat.category} className="bg-slate-50 border border-slate-200 p-5 rounded-xl">
@@ -1396,7 +1418,7 @@ export default function App() {
                     <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 animate-fade-in">
                       <div className="space-y-1">
                         <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest block">📶 Before You Fly</span>
-                        <h3 className="font-serif text-lg font-bold text-slate-900">Get a Local eSIM for {activeVisa.country}</h3>
+                        <h2 className="font-serif text-lg font-bold text-slate-900">Get a Local eSIM for {activeVisa.country}</h2>
                         <p className="text-xs text-slate-500">Land with data already active — no SIM card counter, no roaming bill shock.</p>
                       </div>
                       <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200">
@@ -1441,7 +1463,7 @@ export default function App() {
 
                     {/* FAQ */}
                     <div className="space-y-4">
-                      <h3 className="font-serif font-black text-lg text-slate-900 border-b border-slate-200 pb-2">Frequently Asked Questions</h3>
+                      <h2 className="font-serif font-black text-lg text-slate-900 border-b border-slate-200 pb-2">Frequently Asked Questions</h2>
                       <div className="space-y-4 text-xs">
                         {activeVisa.faqs.map((faq, index) => (
                           <div key={index} className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm space-y-1">
@@ -1514,9 +1536,9 @@ export default function App() {
                       </nav>
 
                           {/* 🟦 1. HERO SECTION (TOP OF PAGE) */}
-                          <h2 className="font-serif text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
+                          <h1 className="font-serif text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
                             Dubai Travel Guide
-                          </h2>
+                          </h1>
                           <p className="text-sm sm:text-base text-slate-500 mt-2 font-light">
                             Find flights, hotels, and plan your Dubai trip instantly
                           </p>
@@ -1823,9 +1845,9 @@ export default function App() {
                           <span className="text-[10px] font-mono font-bold tracking-widest text-[#F6B73C] bg-[#102A43] px-2.5 py-0.5 rounded-full inline-block uppercase mb-2 animate-pulse">
                             🌍 Destination Guide
                           </span>
-                          <h2 className="font-serif text-2xl sm:text-4xl font-black tracking-tight text-slate-900 leading-tight">
+                          <h1 className="font-serif text-2xl sm:text-4xl font-black tracking-tight text-slate-900 leading-tight">
                             {activeDes.title}
-                          </h2>
+                          </h1>
                         </div>
 
                         {/* 2. TOP SECTION (PRIMARY CONVERSION ZONE) - FLIGHTS WIDGET FIRST */}
@@ -2219,9 +2241,9 @@ export default function App() {
                         <span className="text-[#102A43] font-bold">{activeCost.id}</span>
                       </nav>
 
-                      <h2 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
+                      <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                         {activeCost.country} Trip Cost from Bangladesh: Complete Price Matrix
-                      </h2>
+                      </h1>
                     </div>
 
                     {/* AEO Quote */}
@@ -2235,7 +2257,7 @@ export default function App() {
                     {/* Detailed matrix cost tables */}
                     <div className="space-y-4">
                       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-2">
-                        <h3 className="font-serif font-black text-lg text-slate-900">Full Trip Cost Breakdown (BDT)</h3>
+                        <h2 className="font-serif font-black text-lg text-slate-900">Full Trip Cost Breakdown (BDT)</h2>
                         <span className="text-xs text-[#102A43] bg-emerald-50 border border-emerald-200 font-mono px-3 py-1 rounded">
                           Exchange Rate: {activeCost.exchangeRateText}
                         </span>
@@ -2368,9 +2390,9 @@ export default function App() {
         {section === "tools" && (
           <div className="space-y-6">
             <div className="border-b border-slate-200 pb-4">
-              <h2 className="font-serif text-3xl font-bold tracking-tight text-slate-900">
+              <h1 className="font-serif text-3xl font-bold tracking-tight text-slate-900">
                 Outbound Travel Tools Workspace
-              </h2>
+              </h1>
               <p className="text-xs text-slate-500 font-mono">Dynamic calculators constructed specifically for South Asian travelers.</p>
             </div>
             
@@ -2430,9 +2452,9 @@ export default function App() {
                         <span className="text-slate-400 font-mono text-[10px]">{activePost.date}</span>
                       </div>
 
-                      <h2 className="font-serif text-2xl sm:text-3.5xl font-black text-slate-900 leading-tight">
+                      <h1 className="font-serif text-2xl sm:text-3.5xl font-black text-slate-900 leading-tight">
                         {activePost.title}
-                      </h2>
+                      </h1>
 
                       <div className="text-slate-400 text-[10px] font-mono pt-1">
                         Author: <strong>{activePost.author}</strong> | reading: <strong>{activePost.readTime}</strong>

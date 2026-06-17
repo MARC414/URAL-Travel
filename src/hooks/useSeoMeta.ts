@@ -9,7 +9,9 @@ interface SeoMetaProps {
 /**
  * Writes a page-specific <title>, <meta name="description">, and
  * JSON-LD <script type="application/ld+json"> tags into document.head.
- * Call this once per route/view with that page's data.
+ * Also manages canonical <link rel="canonical">, <meta property="og:url">,
+ * <meta property="og:title">, and <meta property="og:description"> tags to 
+ * prevent duplicate content issues.
  */
 function safeStringify(val: any): string {
   if (val === undefined || val === null) return "";
@@ -40,7 +42,39 @@ function safeStringify(val: any): string {
 export function useSeoMeta({ title, description, schema }: SeoMetaProps) {
   const schemaStr = safeStringify(schema);
 
+  // Derive canonical URL inside the hook
+  let canonicalUrl = "https://ural-travel.pages.dev/";
+  if (typeof window !== "undefined") {
+    const pathname = window.location.pathname;
+    const searchParams = new URLSearchParams(window.location.search);
+    
+    let parameterId = "";
+    if (pathname.startsWith("/flights")) {
+      parameterId = searchParams.get("route") || "";
+    } else if (pathname.startsWith("/hotels")) {
+      parameterId = searchParams.get("city") || "";
+    } else if (pathname.startsWith("/visa")) {
+      parameterId = searchParams.get("country") || "";
+    } else if (pathname.startsWith("/destinations")) {
+      parameterId = searchParams.get("country") || "";
+    } else if (pathname.startsWith("/costs")) {
+      parameterId = searchParams.get("country") || "";
+    } else if (pathname.startsWith("/blog")) {
+      parameterId = searchParams.get("slug") || "";
+    }
+
+    const baseUrl = "https://ural-travel.pages.dev";
+    const cleanPathname = pathname.endsWith("/") && pathname.length > 1 ? pathname.slice(0, -1) : pathname;
+    
+    if (parameterId) {
+      canonicalUrl = `${baseUrl}${cleanPathname}/${parameterId}`;
+    } else {
+      canonicalUrl = `${baseUrl}${cleanPathname}`;
+    }
+  }
+
   useEffect(() => {
+    // 1. Update Title & Meta Description
     document.title = title;
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
@@ -50,7 +84,43 @@ export function useSeoMeta({ title, description, schema }: SeoMetaProps) {
     }
     metaDesc.setAttribute("content", description);
 
-    // Clear any previously injected schema before adding new ones
+    // 2. Set/Update Canonical Link Tag
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalUrl);
+
+    // 3. Set/Update og:url Meta Tag
+    let ogUrl = document.querySelector('meta[property="og:url"]');
+    if (!ogUrl) {
+      ogUrl = document.createElement("meta");
+      ogUrl.setAttribute("property", "og:url");
+      document.head.appendChild(ogUrl);
+    }
+    ogUrl.setAttribute("content", canonicalUrl);
+
+    // 4. Set/Update og:title Meta Tag
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if (!ogTitle) {
+      ogTitle = document.createElement("meta");
+      ogTitle.setAttribute("property", "og:title");
+      document.head.appendChild(ogTitle);
+    }
+    ogTitle.setAttribute("content", title);
+
+    // 5. Set/Update og:description Meta Tag
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    if (!ogDesc) {
+      ogDesc = document.createElement("meta");
+      ogDesc.setAttribute("property", "og:description");
+      document.head.appendChild(ogDesc);
+    }
+    ogDesc.setAttribute("content", description);
+
+    // 6. JSON-LD Schema Script Updates
     document.querySelectorAll('script[data-seo-schema="true"]').forEach((el) => el.remove());
 
     if (schema) {
@@ -67,7 +137,7 @@ export function useSeoMeta({ title, description, schema }: SeoMetaProps) {
         }
       });
     }
-  }, [title, description, schemaStr]);
+  }, [title, description, schemaStr, canonicalUrl]);
 }
 
 /**

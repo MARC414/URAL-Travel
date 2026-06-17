@@ -41,26 +41,26 @@ export const FLIGHTS_DATA: FlightRoute[] = [
       }
     ],
     schemaMarkup: {
-      type: "FlightRoute + FAQPage",
+      type: "Flight",
       description: "DAC to KTM flight route details for Bangladeshi travelers",
       code: `{
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "FlightReservation",
-      "provider": "Biman Bangladesh Airlines",
-      "departureAirport": {
-        "@type": "Airport",
-        "name": "Hazrat Shahjalal International Airport",
-        "iataCode": "DAC"
-      },
-      "arrivalAirport": {
-        "@type": "Airport",
-        "name": "Tribhuvan International Airport",
-        "iataCode": "KTM"
-      }
-    }
-  ]
+  "@type": "Flight",
+  "provider": {
+    "@type": "Airline",
+    "name": "Biman Bangladesh Airlines"
+  },
+  "departureAirport": {
+    "@type": "Airport",
+    "name": "Hazrat Shahjalal International Airport",
+    "iataCode": "DAC"
+  },
+  "arrivalAirport": {
+    "@type": "Airport",
+    "name": "Tribhuvan International Airport",
+    "iataCode": "KTM"
+  },
+  "estimatedFlightDuration": "PT1H30M"
 }`
     }
   },
@@ -92,12 +92,15 @@ export const FLIGHTS_DATA: FlightRoute[] = [
       }
     ],
     schemaMarkup: {
-      type: "FlightRoute",
+      type: "Flight",
       description: "DAC to BKK Flight Route Info",
       code: `{
   "@context": "https://schema.org",
-  "@type": "FlightReservation",
-  "provider": "Thai Airways",
+  "@type": "Flight",
+  "provider": {
+    "@type": "Airline",
+    "name": "Thai Airways"
+  },
   "departureAirport": {
     "@type": "Airport",
     "name": "Hazrat Shahjalal International Airport",
@@ -107,7 +110,8 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     "@type": "Airport",
     "name": "Suvarnabhumi Airport",
     "iataCode": "BKK"
-  }
+  },
+  "estimatedFlightDuration": "PT2H30M"
 }`
     }
   },
@@ -139,12 +143,15 @@ export const FLIGHTS_DATA: FlightRoute[] = [
       }
     ],
     schemaMarkup: {
-      type: "FlightRoute",
+      type: "Flight",
       description: "DAC to KUL Direct flight guide",
       code: `{
   "@context": "https://schema.org",
-  "@type": "FlightReservation",
-  "provider": "Malaysia Airlines",
+  "@type": "Flight",
+  "provider": {
+    "@type": "Airline",
+    "name": "Malaysia Airlines"
+  },
   "departureAirport": {
     "@type": "Airport",
     "name": "Hazrat Shahjalal International Airport",
@@ -154,7 +161,8 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     "@type": "Airport",
     "name": "Kuala Lumpur International Airport",
     "iataCode": "KUL"
-  }
+  },
+  "estimatedFlightDuration": "PT3H50M"
 }`
     }
   },
@@ -182,12 +190,15 @@ export const FLIGHTS_DATA: FlightRoute[] = [
       }
     ],
     schemaMarkup: {
-      type: "FlightRoute",
+      type: "Flight",
       description: "DAC to DXB Direct path",
       code: `{
   "@context": "https://schema.org",
-  "@type": "FlightReservation",
-  "provider": "Emirates Airlines",
+  "@type": "Flight",
+  "provider": {
+    "@type": "Airline",
+    "name": "Emirates"
+  },
   "departureAirport": {
     "@type": "Airport",
     "name": "Hazrat Shahjalal International Airport",
@@ -197,7 +208,8 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     "@type": "Airport",
     "name": "Dubai International Airport",
     "iataCode": "DXB"
-  }
+  },
+  "estimatedFlightDuration": "PT4H45M"
 }`
     }
   }
