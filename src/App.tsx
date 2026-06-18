@@ -106,40 +106,59 @@ export default function App() {
 
     let section: SectionType = "home";
     let parameterId: string | null = null;
+    let isLanding = false;
 
     if (pathname.startsWith("/flights")) {
       section = "flights";
-      parameterId = searchParams.get("route") || "dhaka-kathmandu";
+      const routeParam = searchParams.get("route");
+      parameterId = routeParam || "dhaka-kathmandu";
+      isLanding = !routeParam;
     } else if (pathname.startsWith("/hotels")) {
       section = "hotels";
-      parameterId = searchParams.get("city") || "kathmandu-hotels";
+      const cityParam = searchParams.get("city");
+      parameterId = cityParam || "kathmandu-hotels";
+      isLanding = !cityParam;
     } else if (pathname.startsWith("/visa")) {
       section = "visa";
-      parameterId = searchParams.get("country") || "nepal-visa";
+      const countryParam = searchParams.get("country");
+      parameterId = countryParam || "nepal-visa";
+      isLanding = !countryParam;
     } else if (pathname.startsWith("/destinations")) {
       section = "destinations";
-      parameterId = searchParams.get("country") || "nepal-guide";
+      const countryParam = searchParams.get("country");
+      parameterId = countryParam || "nepal-guide";
+      isLanding = !countryParam;
     } else if (pathname.startsWith("/costs")) {
       section = "costs";
-      parameterId = searchParams.get("country") || "nepal-costs";
+      const countryParam = searchParams.get("country");
+      parameterId = countryParam || "nepal-costs";
+      isLanding = !countryParam;
     } else if (pathname.startsWith("/tools")) {
       section = "tools";
+      isLanding = true;
     } else if (pathname.startsWith("/blog")) {
       section = "blog";
-      parameterId = searchParams.get("slug") || "cheap-flight-booking-hacks-dhaka";
+      const slugParam = searchParams.get("slug");
+      parameterId = slugParam || "cheap-flight-booking-hacks-dhaka";
+      isLanding = !slugParam;
     }
 
-    return { section, parameterId };
+    return { section, parameterId, isLanding };
   };
 
-  const { section, parameterId } = getRouteDetails();
+  const { section, parameterId, isLanding } = getRouteDetails();
 
   // Dynamically compute metadata and schema
   let seoTitle = "URAL — Compare Flights, Hotels & Visa Guides for Bangladeshi Travelers";
   let seoDescription = "Compare flight prices from Dhaka to Nepal, Thailand, Malaysia and Dubai, check visa requirements step by step, and plan your trip budget in BDT.";
   let seoSchema: any = undefined;
+  let seoBreadcrumbs: { name: string; url: string }[] = [];
 
-  if (section === "flights") {
+  if (section === "home") {
+    seoBreadcrumbs = [
+      { name: "Home", url: "https://ural.travel/" }
+    ];
+  } else if (section === "flights") {
     const activeRoute = FLIGHTS_DATA.find(r => r.id === parameterId) || FLIGHTS_DATA[0];
     const year = new Date().getFullYear();
     seoTitle = activeRoute.id === "dhaka-kathmandu"
@@ -158,6 +177,19 @@ export default function App() {
       console.error("Schema parse error:", e);
     }
     seoSchema = schemaObj ? [schemaObj, buildFaqSchema(activeRoute.faqs)] : buildFaqSchema(activeRoute.faqs);
+
+    if (isLanding) {
+      seoBreadcrumbs = [
+        { name: "Home", url: "https://ural.travel/" },
+        { name: "Flight Guides", url: "https://ural.travel/flights" }
+      ];
+    } else {
+      seoBreadcrumbs = [
+        { name: "Home", url: "https://ural.travel/" },
+        { name: "Flight Guides", url: "https://ural.travel/flights" },
+        { name: `${activeRoute.from.split(" (")[0]} to ${activeRoute.to.split(" (")[0]} Flight`, url: `https://ural.travel/flights?route=${activeRoute.id}` }
+      ];
+    }
 
   } else if (section === "hotels") {
     const activeHotel = HOTELS_DATA.find(h => h.id === parameterId) || HOTELS_DATA[0];
@@ -178,6 +210,19 @@ export default function App() {
     }
     seoSchema = schemaObj ? [schemaObj, buildFaqSchema(activeHotel.faqs)] : buildFaqSchema(activeHotel.faqs);
 
+    if (isLanding) {
+      seoBreadcrumbs = [
+        { name: "Home", url: "https://ural.travel/" },
+        { name: "Hotel Neighborhoods", url: "https://ural.travel/hotels" }
+      ];
+    } else {
+      seoBreadcrumbs = [
+        { name: "Home", url: "https://ural.travel/" },
+        { name: "Hotel Neighborhoods", url: "https://ural.travel/hotels" },
+        { name: `${activeHotel.city} Hotels`, url: `https://ural.travel/hotels?city=${activeHotel.id}` }
+      ];
+    }
+
   } else if (section === "visa") {
     const activeVisa = VISA_DATA.find(v => v.id === parameterId) || VISA_DATA[0];
     seoTitle = activeVisa.id === "nepal-visa"
@@ -196,6 +241,19 @@ export default function App() {
       console.error("Schema parse error:", e);
     }
     seoSchema = schemaObj ? [schemaObj, buildFaqSchema(activeVisa.faqs)] : buildFaqSchema(activeVisa.faqs);
+
+    if (isLanding) {
+      seoBreadcrumbs = [
+        { name: "Home", url: "https://ural.travel/" },
+        { name: "Visa Guides", url: "https://ural.travel/visa" }
+      ];
+    } else {
+      seoBreadcrumbs = [
+        { name: "Home", url: "https://ural.travel/" },
+        { name: "Visa Guides", url: "https://ural.travel/visa" },
+        { name: `${activeVisa.country} Visa`, url: `https://ural.travel/visa?country=${activeVisa.id}` }
+      ];
+    }
 
   } else if (section === "destinations") {
     const activeDes = DESTINATIONS_DATA.find(d => d.id === parameterId) || DESTINATIONS_DATA[0];
@@ -216,6 +274,19 @@ export default function App() {
     }
     seoSchema = schemaObj ? [schemaObj, buildFaqSchema(activeDes.faqs)] : buildFaqSchema(activeDes.faqs);
 
+    if (isLanding) {
+      seoBreadcrumbs = [
+        { name: "Home", url: "https://ural.travel/" },
+        { name: "Destinations", url: "https://ural.travel/destinations" }
+      ];
+    } else {
+      seoBreadcrumbs = [
+        { name: "Home", url: "https://ural.travel/" },
+        { name: "Destinations", url: "https://ural.travel/destinations" },
+        { name: `${activeDes.country} Guide`, url: `https://ural.travel/destinations?country=${activeDes.id}` }
+      ];
+    }
+
   } else if (section === "costs") {
     const activeCost = TRIP_COSTS_DATA.find(c => c.id === parameterId) || TRIP_COSTS_DATA[0];
     seoTitle = activeCost.id === "nepal-costs"
@@ -234,13 +305,55 @@ export default function App() {
       console.error("Schema parse error:", e);
     }
     seoSchema = schemaObj ? [schemaObj, buildFaqSchema(activeCost.faqs)] : buildFaqSchema(activeCost.faqs);
+
+    if (isLanding) {
+      seoBreadcrumbs = [
+        { name: "Home", url: "https://ural.travel/" },
+        { name: "Trip Costs", url: "https://ural.travel/costs" }
+      ];
+    } else {
+      seoBreadcrumbs = [
+        { name: "Home", url: "https://ural.travel/" },
+        { name: "Trip Costs", url: "https://ural.travel/costs" },
+        { name: `${activeCost.country} Costs`, url: `https://ural.travel/costs?country=${activeCost.id}` }
+      ];
+    }
+
+  } else if (section === "tools") {
+    seoTitle = "Bangladeshi Traveler Utility Tools | URAL";
+    seoDescription = "Access handy travel utility tools for Bangladeshi outbound tourists, including live exchange rates, power plug specifications, and translation aids.";
+    seoSchema = undefined;
+    seoBreadcrumbs = [
+      { name: "Home", url: "https://ural.travel/" },
+      { name: "Travel Tools", url: "https://ural.travel/tools" }
+    ];
+
+  } else if (section === "blog") {
+    const activePost = BLOG_DATA.find(p => p.slug === parameterId) || BLOG_DATA[0];
+    seoTitle = `${activePost.title} | URAL Travel Blog`;
+    seoDescription = activePost.summary;
+    seoSchema = undefined;
+
+    if (isLanding) {
+      seoBreadcrumbs = [
+        { name: "Home", url: "https://ural.travel/" },
+        { name: "Travel Blog", url: "https://ural.travel/blog" }
+      ];
+    } else {
+      seoBreadcrumbs = [
+        { name: "Home", url: "https://ural.travel/" },
+        { name: "Travel Blog", url: "https://ural.travel/blog" },
+        { name: activePost.title, url: `https://ural.travel/blog?slug=${activePost.slug}` }
+      ];
+    }
   }
 
   // Call the hook at the top level
   useSeoMeta({
     title: seoTitle,
     description: seoDescription,
-    schema: seoSchema
+    schema: seoSchema,
+    breadcrumbs: seoBreadcrumbs
   });
 
   // Navigation Helper that emulates URL path routing
@@ -1414,6 +1527,31 @@ export default function App() {
                       </div>
                     </div>
 
+                    {/* Flight booking CTA after visa checklist */}
+                    <div className="space-y-4 pt-4 border-t border-slate-200">
+                      <div className="text-center text-sm font-semibold text-slate-600 py-2">
+                        Ready to book your trip?
+                      </div>
+                      
+                      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                        <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
+                          Find flights from Dhaka
+                        </span>
+                        <TravelpayoutsEmbed />
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <PartnerLinkButton 
+                          href={AFFILIATE_LINKS.airalo} 
+                          label={`Get a local eSIM for ${activeVisa.country}`} 
+                        />
+                        <PartnerLinkButton 
+                          href={AFFILIATE_LINKS.kiwitaxi} 
+                          label="Book airport transfer" 
+                        />
+                      </div>
+                    </div>
+
                     {/* 📶 Stay Connected widget block */}
                     <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 animate-fade-in">
                       <div className="space-y-1">
@@ -2285,6 +2423,30 @@ export default function App() {
                           </tbody>
                         </table>
                       </div>
+
+                      {/* Interactive Conversion Widgets Block */}
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6">
+                        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
+                            Check today's flight prices from Dhaka
+                          </span>
+                          <TravelpayoutsEmbed />
+                        </div>
+
+                        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
+                            Book tours & activities for your trip
+                          </span>
+                          <KlookActivitiesWidget />
+                        </div>
+
+                        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+                          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
+                            Pre-book your airport transfer
+                          </span>
+                          <KiwitaxiTransferWidget />
+                        </div>
+                      </div>
                     </div>
 
                     {/* Seasonal variations description */}
@@ -2397,6 +2559,68 @@ export default function App() {
             </div>
             
             <InteractiveTools />
+
+            {/* Book Your Trip - Visual Step-by-Step Booking Checklist Funnel */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-8 mt-8">
+              <div className="border-b border-slate-100 pb-4">
+                <h2 className="font-serif text-xl font-bold text-slate-900">Book Your Trip</h2>
+                <p className="text-sm text-slate-500">Your step-by-step planning and conversion dashboard built for outbound trips from Bangladesh.</p>
+              </div>
+
+              <div className="space-y-8 divide-y divide-slate-100">
+                {/* Step 1 */}
+                <div className="space-y-4 pt-0">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#102A43] text-white font-mono text-sm font-bold shadow-sm">
+                      1
+                    </div>
+                    <h3 className="font-serif text-base font-bold text-[#102A43]">Step 1: Find your flight</h3>
+                  </div>
+                  <div className="pl-0 sm:pl-11">
+                    <TravelpayoutsEmbed />
+                  </div>
+                </div>
+
+                {/* Step 2 */}
+                <div className="space-y-4 pt-8">
+                  <div className="flex items-center gap-3 font-medium">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#102A43] text-white font-mono text-sm font-bold shadow-sm">
+                      2
+                    </div>
+                    <h3 className="font-serif text-base font-bold text-[#102A43]">Step 2: Book your hotel</h3>
+                  </div>
+                  <div className="pl-0 sm:pl-11">
+                    <TravelpayoutsWidget initialTab="hotels" />
+                  </div>
+                </div>
+
+                {/* Step 3 */}
+                <div className="space-y-4 pt-8">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#102A43] text-white font-mono text-sm font-bold shadow-sm">
+                      3
+                    </div>
+                    <h3 className="font-serif text-base font-bold text-[#102A43]">Step 3: Plan activities with Klook</h3>
+                  </div>
+                  <div className="pl-0 sm:pl-11">
+                    <KlookActivitiesWidget />
+                  </div>
+                </div>
+
+                {/* Step 4 */}
+                <div className="space-y-4 pt-8">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#102A43] text-white font-mono text-sm font-bold shadow-sm">
+                      4
+                    </div>
+                    <h3 className="font-serif text-base font-bold text-[#102A43]">Step 4: Get your travel eSIM</h3>
+                  </div>
+                  <div className="pl-0 sm:pl-11">
+                    <AiraloEsimWidget />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
@@ -2425,6 +2649,33 @@ export default function App() {
                     <ArrowRight size={12} className={parameterId === post.slug ? "text-[#F6B73C]" : "text-slate-450"} />
                   </button>
                 ))}
+              </div>
+
+              {/* Sticky Affiliate Recommendations Card */}
+              <div className="sticky top-[80px] bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono block">
+                  Plan your trip
+                </span>
+                <div className="space-y-2.5">
+                  <PartnerLinkButton 
+                    href={AFFILIATE_LINKS.aviasales} 
+                    label="Compare flights from Dhaka" 
+                    variant="dark"
+                  />
+                  <PartnerLinkButton 
+                    href={AFFILIATE_LINKS.klook} 
+                    label="Book tours & activities" 
+                    variant="dark"
+                  />
+                  <PartnerLinkButton 
+                    href={AFFILIATE_LINKS.airalo} 
+                    label="Get a travel eSIM" 
+                    variant="dark"
+                  />
+                </div>
+                <div className="pt-2 border-t border-slate-100">
+                  <AiraloEsimWidget />
+                </div>
               </div>
             </div>
 

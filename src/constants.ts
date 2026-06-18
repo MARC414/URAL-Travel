@@ -38,6 +38,18 @@ export const FLIGHTS_DATA: FlightRoute[] = [
       {
         question: "Is Tribhuvan International Airport close to Thamel, Kathmandu?",
         answer: "Yes. Tribhuvan International Airport is roughly 15-20 minutes by taxi from Thamel, Kathmandu's main tourist hub, depending on traffic - making it convenient for short trips."
+      },
+      {
+        question: "What documents must I present at Hazrat Shahjalal International Airport in Dhaka before boarding a flight to Nepal?",
+        answer: "Before boarding your flight to Nepal in Dhaka, you must present a passport valid for at least six months from your travel date, along with a confirmed return flight ticket which is strictly required for Visa on Arrival. Immigration officials at Hazrat Shahjalal International Airport (DAC) may also ask to see your hotel booking confirmation and proof of sufficient foreign currency, such as a credit card endorsed by an international bank or a reasonable amount of cash in US Dollars. Having printed copies of all these documents ready will ensure a smooth check-in and departure experience."
+      },
+      {
+        question: "Should I choose Biman Bangladesh Airlines or Himalaya Airlines for a trip from Dhaka to Kathmandu?",
+        answer: "Both airlines offer regular direct flights on this route, so your choice should depend on price, baggage policies, and schedule preferences. Biman Bangladesh Airlines is a full-service schedule carrier offering complimentary standard meals and generous checked luggage, making it a reliable option for families or those traveling with heavy baggage. Himalaya Airlines is a private carrier based in Nepal that also operates direct flights with basic services, often providing competitive pricing or better timing for quick weekend getaways. It is highly recommended to compare current flight fares and luggage policies for your specific travel dates before making a decision."
+      },
+      {
+        question: "What is the baggage allowance for Biman Bangladesh and Himalaya Airlines on flights from Dhaka to Kathmandu?",
+        answer: "Biman Bangladesh Airlines generally provides a generous baggage allowance of 20 kg to 30 kg for checked luggage and 7 kg for carry-on baggage in Economy Class, though you should verify the exact limit printed on your ticket. Himalaya Airlines typically allows up to 20 kg of checked baggage and 7 kg of carry-on baggage for their standard economy fares, although they sometimes offer lower-priced promotional tickets with smaller allowances. If you plan to carry heavy trekking gear or winter clothing, always check current baggage specifications at the time of reserving your ticket, as excess baggage fees at Dhaka airport can be quite costly."
       }
     ],
     schemaMarkup: {
@@ -74,7 +86,7 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     bestTimeToBook: "30-50 days before departure",
     duration: "2h 30m (Direct)",
     visaRequirement: "Pre-arranged Visa (Sticker Visa via VFS Global Dhaka/Chattogram, or E-Visa)",
-    quickAnswer: "Flights from Dhaka to Bangkok's Suvarnabhumi (BKK) or Don Mueang (DMK) airports are frequent and direct, taking about 2.5 hours. Thai Airways and Biman Bangladesh run daily flights to BKK, while Thai Lion Air runs budget flights to DMK. Ticket prices range from BDT 31,500 to BDT 45,000. Standard sticker or online e-Visas must be applied for in advance, as Bangladeshis do not receive Visa on Arrival in Thailand.",
+    quickAnswer: "Direct flights from Dhaka to Bangkok take exactly 2 hours and 30 minutes, with economy roundtrip fares typically ranging from BDT 31,500 to BDT 45,000. Major carriers like Biman Bangladesh Airlines, Thai Airways, and US-Bangla Airlines fly daily to Suvarnabhumi Airport (BKK), while Thai Lion Air operates low-cost flights to Don Mueang Airport (DMK). Bangladeshi passport holders must secure a pre-arranged sticker visa or online e-visa prior to departure, as they are not eligible for visa-free entry or visa on arrival.",
     keyFacts: [
       { label: "Flight Time", value: "2 hours 30 mins" },
       { label: "Direct Airlines", value: "Thai Airways, Biman, US-Bangla, Thai Lion" },
@@ -298,7 +310,7 @@ export const HOTELS_DATA: HotelGuide[] = [
       { name: "S31 Sukhumvit Hotel", stars: 4, priceBdt: 6800, category: "Mid-Range", neighborhood: "Sukhumvit", features: ["Glass-edge pool", "Duplex suites", "Skytrain distance", "Panoramic gym"] },
       { name: "First House Hotel", stars: 3, priceBdt: 3800, category: "Mid-Range", neighborhood: "Pratunam", features: ["Halal breakfast options", "Quiet alley location", "Great value", "Baggage scale"] }
     ],
-    quickAnswer: "Bangkok's neighborhood choice defines your trip: Pratunam is perfect for Bangladeshi shoppers, keeping you within walking distance of retail markets with stays like First House Hotel (BDT 3,800/night). Premium business and leisure travelers will prefer the Amari Bangkok or S31 on Sukhumvit (BDT 6,800-12,500/night) for near-immediate BTS access.",
+    quickAnswer: "Bangkok hotel prices generally range from BDT 1,800 to BDT 12,500 per night depending on the neighborhood and hotel star rating. For Bangladeshi travelers focused on shopping, the Pratunam neighborhood is highly recommended with budget-friendly options like First House Hotel starting at BDT 3,800 per night. If you prefer high-end business convenience with quick BTS Skytrain connection, modern Sukhumvit hotels like Amari Bangkok cost between BDT 6,800 and BDT 12,500 per night.",
     keyFacts: [
       { label: "Best Shopping Neighborhood", value: "Pratunam" },
       { label: "Avg Mid-Range Price (BDT)", value: "3,500 - 7,000 / night" },
@@ -464,6 +476,14 @@ export const VISA_DATA: VisaGuide[] = [
       {
         question: "How long can I stay in Nepal on the free visa?",
         answer: "The free first-entry-of-the-year visa is valid for up to 30 days. If you want to stay longer, you can extend your visa at the Department of Immigration offices in Kathmandu or Pokhara before it expires, for an additional fee."
+      },
+      {
+        question: "Can a Bangladeshi citizen apply for a Nepal tourist visa extension while inside Nepal?",
+        answer: "Yes, Bangladeshi citizens can easily extend their tourist visa while inside the country by visiting the Department of Immigration office in Kathmandu or Pokhara. The visa can be extended for a minimum of 15 days, with a standard fee of USD 45 for that period, plus an additional USD 3 per day for any extra days beyond that. You must submit your passport, a digital photograph, and complete the extension form online before visiting the immigration office. It is highly recommended to start this process at least a week before your initial 30-day visa expires."
+      },
+      {
+        question: "What are the penalties if a Bangladeshi passport holder overstays their visa in Nepal?",
+        answer: "Overstaying your visa in Nepal is a serious offense that can lead to heavy fines, travel delays, or detention. Under current immigration regulations, you will be charged a standard overstay fee of USD 5 per day plus a visa extension fee of USD 3 per day at the Department of Immigration during exit clearance. For longer overstays or failures to reconcile fees, you might be barred from departing until your case is resolved or faced with a multi-year ban from entering the country. Always ensure your visa is legally extended or leave Nepal before your permitted duration expires to avoid these strict penalties."
       }
     ],
     schemaMarkup: {
@@ -485,6 +505,39 @@ export const VISA_DATA: VisaGuide[] = [
         "@type": "Audience",
         "audienceType": "Bangladeshi passport holders"
       }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to get a Nepal visa as a Bangladeshi citizen",
+      "description": "Bangladeshi citizens get a free 30-day Visa on Arrival at Tribhuvan International Airport for their first entry of each calendar year, under Nepal's SAARC gratis visa policy. A second visit in the same calendar year, or a longer stay, requires the standard fee: USD 30 for 15 days, USD 50 for 30 days, or USD 125 for 90 days, payable in cash on arrival. The 'visa year' resets every 1 January regardless of when your first trip happened.",
+      "totalTime": "PT1H",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "BDT",
+        "value": "0"
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "text": "Optionally fill out the online Nepal Tourist Visa arrival form a few days before your flight to save time - it's not mandatory, as kiosks at the airport let you complete it on arrival."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "On landing at Tribhuvan International Airport (KTM), use the self-service kiosks to scan your passport and print your arrival form receipt if you haven't already."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Go to the visa counter and join the line for SAARC nationals. Hand over your passport, photo, and printed form."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "If this is your first entry to Nepal in the current calendar year (1 January - 31 December), the 30-day tourist visa is issued free of charge. If it's a repeat visit this year, pay the standard fee in cash (USD preferred): USD 30 for 15 days, USD 50 for 30 days, or USD 125 for 90 days."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Proceed to immigration for passport stamping, then collect your luggage and exit to the arrivals hall."
+        }
+      ]
     }
   ]
 }`
@@ -525,7 +578,7 @@ export const VISA_DATA: VisaGuide[] = [
       "Pay the visa fee (approx THB 2,000) through the portal. Note: some applicants in Bangladesh may still be directed to pay via the Royal Thai Embassy or an authorised visa centre (VFS) due to local payment processing limits - the portal will indicate this if it applies to you.",
       "Track your application status by email or on the portal. Processing typically takes 5-10 working days. Once approved, download and print the e-Visa approval notice in colour and present it at Dhaka airport check-in and to Thai immigration on arrival."
     ],
-    quickAnswer: "Bangladeshi passport holders are not eligible for visa-free entry or visa on arrival in Thailand and must apply in advance. Since January 2025, this is done through Thailand's official e-Visa portal (thaievisa.go.th), which replaced the old embassy-only sticker process for most applicants. The Tourist Visa (TR) allows a 60-day stay, costs around THB 2,000 (about BDT 6,500-8,500), and typically takes 5-10 working days to process.",
+    quickAnswer: "Bangladeshi passport holders cannot get a visa on arrival in Thailand and must apply for an advance e-visa or sticker visa. The tourist visa allows a maximum stay of 60 days, costs approximately BDT 6,500 to BDT 8,500 (THB 2,000 government fee), and takes 5 to 10 working days to process. All applications from Bangladesh are processed online through the official Thai e-Visa portal (thaievisa.go.th). You must upload a six-month bank statement showing a minimum balance of BDT 65,000 (THB 20,000) per person to qualify.",
     keyFacts: [
       { label: "Visa Route", value: "Official e-Visa Portal (thaievisa.go.th)" },
       { label: "Visa on Arrival Eligible?", value: "No - advance visa required" },
@@ -577,6 +630,39 @@ export const VISA_DATA: VisaGuide[] = [
         "@type": "Audience",
         "audienceType": "Bangladeshi passport holders"
       }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to get a Thailand visa as a Bangladeshi citizen",
+      "description": "Bangladeshi passport holders are not eligible for visa-free entry or visa on arrival in Thailand and must apply in advance. Since January 2025, this is done through Thailand's official e-Visa portal (thaievisa.go.th), which replaced the old embassy-only sticker process for most applicants. The Tourist Visa (TR) allows a 60-day stay, costs around THB 2,000 (about BDT 6,500-8,500), and typically takes 5-10 working days to process.",
+      "totalTime": "P10D",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "BDT",
+        "value": "6500"
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "text": "Create an account on Thailand's official e-Visa portal (thaievisa.go.th) and select the Dhaka jurisdiction for your application."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Choose 'Tourist Visa (TR)', then enter your travel dates, passport details, and accommodation information exactly as they appear on your booking confirmations."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Upload clear digital scans: passport bio-page, recent 35x45mm photo, return flight ticket, hotel booking, 6-month bank statement, and the relevant occupational document for your category."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Pay the visa fee (approx THB 2,000) through the portal. Note: some applicants in Bangladesh may still be directed to pay via the Royal Thai Embassy or an authorised visa centre (VFS) due to local payment processing limits - the portal will indicate this if it applies to you."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Track your application status by email or on the portal. Processing typically takes 5-10 working days. Once approved, download and print the e-Visa approval notice in colour and present it at Dhaka airport check-in and to Thai immigration on arrival."
+        }
+      ]
     }
   ]
 }`
@@ -625,8 +711,45 @@ export const VISA_DATA: VisaGuide[] = [
       description: "Malaysia digital tourist visa system",
       code: `{
   "@context": "https://schema.org",
-  "@type": "GovernmentPermit",
-  "name": "Malaysia Tourist eVisa"
+  "@graph": [
+    {
+      "@type": "GovernmentPermit",
+      "name": "Malaysia Tourist eVisa"
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to get a Malaysia visa as a Bangladeshi citizen",
+      "description": "Malaysia offers a reliable, fully online eVisa system for Bangladeshi citizens. You do not need to drop off physical passports at an embassy. Submit professional passport photos, high-resolution bio-data scans, and a 6-month bank statement (showing BDT 80,000+ balance) directly to the Immigration Department of Malaysia's online portal. Total costs are around BDT 3,800 to 4,200, and approval typically arrives in 2-4 working days.",
+      "totalTime": "P4D",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "BDT",
+        "value": "3800"
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "text": "Access the official Malaysia eVisa portal (malaysiavisa.imi.gov.my) or use an accredited agency."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Upload clean scans of your photo, passport bio-page, return itinerary, and bank documents. Accuracy is highly critical."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Pay the processing fee using credit card, international debit card, or mobile banking if using partner portals."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Check your email inbox or portal status daily. If any 'Additional Documents Resubmission' is requested, resolve it immediately."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Upon approval, download and print the A4 physical paper eVisa. Keep this paper securely folded inside your passport when departing Dhaka."
+        }
+      ]
+    }
+  ]
 }`
     }
   },
@@ -673,8 +796,45 @@ export const VISA_DATA: VisaGuide[] = [
       description: "Dubai tourist eVisa procedures",
       code: `{
   "@context": "https://schema.org",
-  "@type": "GovernmentPermit",
-  "name": "UAE Outbound Tourist eVisa"
+  "@graph": [
+    {
+      "@type": "GovernmentPermit",
+      "name": "UAE Outbound Tourist eVisa"
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to get a UAE visa as a Bangladeshi citizen",
+      "description": "Bangladeshi citizens can easily secure tourist visas to the United Arab Emirates using the fully electronic sponsor-based eVisa system. Visas are processed in 3-5 days without needing passport submission. Applications are handled through airlines (Emirates, flydubai, Air Arabia) or approved local agents in Dhaka. A 6-month bank statement with BDT 150,000+ is recommended for flawless security approval. Note: UAE visa applications are not submitted directly to an embassy — you apply through Emirates, flydubai, Air Arabia, or an approved Dhaka-based travel agent.",
+      "totalTime": "P5D",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "BDT",
+        "value": "11500"
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "text": "Select a registered travel partner of DNRD/GDRFA, flydubai/Emirates or an accredited outbound agency inside Bangladesh."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Submit high-resolution scans of your passport bio-page, photograph, hotel reservations, and return bookings."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "The agency uploads your application to the official UAE GDRFA or ICP digital portal for security checks."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Wait for security clearances. UAE authorities verify applicant profiles. Processing duration is typically 72 to 120 working hours."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Receive your approved high-security eVisa PDF. Print a color copy to present during exit check-in at Dhaka (DAC) and entry borders in Dubai (DXB)."
+        }
+      ]
+    }
+  ]
 }`
     }
   }
@@ -696,7 +856,7 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
     ],
     localTransport: ["Tourist buses for cross-city travel (Kathmandu to Pokhara: BDT 1,200 - 1,800)", "Local ride-sharing apps (Pathao now operates actively in Kathmandu for super cheap rides!)", "Metered prepaid yellow taxis (negotiating a flat rate in advance is standard practice)"],
     budgetBdt: "BDT 20,000 - BDT 35,000 per person (Excluding airfare, based on budget backpacking / mid hotels)",
-    quickAnswer: "A 5-day Nepal trip from Bangladesh combining Kathmandu's temples and Pokhara's lakeside can be done for around BDT 20,000-35,000 per person in local spending (excluding flights), thanks to the free Visa on Arrival for Bangladeshi citizens and budget-friendly food, transport, and lodging. October-November and March-April offer the clearest mountain views and most comfortable weather.",
+    quickAnswer: "A complete 5-day Nepal tour itinerary from Bangladesh costs between BDT 20,000 and BDT 35,000 per person in local expenses, excluding international airfare. This budget covers standard sightseeing in Kathmandu, Bhaktapur, and Pokhara alongside local meals and tourist bus transport. Bangladeshi passport holders qualify for a free 30-day Visa on Arrival for their first trip of each calendar year, saving an extra USD 30 in entry fees. The optimal months to visit for clear Himalayan views are October through November and March through April.",
     keyFacts: [
       { label: "Recommended Trip Length", value: "5 to 8 Days" },
       { label: "Daily Local Budget (BDT)", value: "3,000 - 4,500 / day" },
@@ -891,6 +1051,22 @@ export const TRIP_COSTS_DATA: TripCostData[] = [
       {
         question: "Are there hidden costs for Bangladeshi tourists in Nepal?",
         answer: "Aside from the visa fee on repeat visits within the same year, most hotels add a 10% service charge plus 13% VAT to room rates - check whether quoted prices already include these before booking. Heritage site entry tickets are an additional cost worth budgeting for separately."
+      },
+      {
+        question: "How can I travel between Kathmandu and Pokhara on the absolute tightest budget when arriving from Dhaka?",
+        answer: "The absolute cheapest transport option is to take a local public bus or microbus from Kathmandu's Gongabu Bus Park, which costs around BDT 600 to 800 (about NPR 700 to 900) but can be crowded and less comfortable. For a balance of safety and cost, tourist buses departing from Shorakhutte (near Thamel) are recommended at BDT 1,200 to 1,500, offering comfortable seating, air conditioning, and designated rest stops. While domestic flights only take 25 minutes, they cost over BDT 10,000 one-way for foreign nationals, which will quickly exhaust a typical budget."
+      },
+      {
+        question: "Is Bangladeshi Taka (BDT) accepted for currency exchange or daily purchases in Nepal?",
+        answer: "Bangladeshi Taka is not accepted for standard day-to-day purchases in Nepal, and very few exchange booths near Thamel will convert them into Nepali Rupees, usually at very poor rates. It is highly recommended to carry US Dollars (USD) in cash from Dhaka, which can be exchanged quickly at standard rates anywhere in Kathmandu or Pokhara. Alternatively, you can use an internationally enabled dual-currency card endorsed with USD to withdraw Nepali Rupees directly from local ATMs. Restricting your itinerary to only carrying BDT cash will leave you unable to pay for transport or food in most tourist areas."
+      },
+      {
+        question: "What is the average daily cost of food and meals for a Bangladeshi traveler in Kathmandu?",
+        answer: "A Bangladeshi traveler can expect to spend between BDT 800 and 1,500 per day on food, depending strictly on where and what they eat. Tasting local Dal Bhat (lentil soup with rice and vegetable curries) or plates of steam/fried Momos at local eateries is incredibly cheap, costing around BDT 150 to 300 per meal. Dining in regular tourist-oriented cafes and restaurants in Thamel will increase your costs to BDT 500 to 900 per meal. Because Nepali cuisine shares many similarities with Bangladeshi food, such as rice and spicy curries, finding delicious and familiar meals is extremely simple and highly budget-friendly."
+      },
+      {
+        question: "How much money should a tourist from Dhaka budget for heritage site ticket costs in Nepal?",
+        answer: "As a SAARC national, you are eligible for heavily discounted ticket prices at major heritage attractions like Kathmandu Durbar Square, Patan, Bhaktapur, and the Boudhanath Stupa, usually paying BDT 100 to 500 per site compared to the BDT 1,000+ paid by non-SAARC tourists. However, popular trekking regions, national parks, and Mount Everest viewpoint fees do not have significant SAARC discounts and can cost between BDT 2,000 and 5,500 per permit. It is wise to set aside around BDT 3,500 to 5,000 in your total budget specifically for these admission tickets. Always carry your Bangladeshi passport to these ticket booths to prove SAARC citizenship and claim your discount."
       }
     ],
     schemaMarkup: {
@@ -1012,7 +1188,7 @@ export const TRIP_COSTS_DATA: TripCostData[] = [
       "Eat like a local in Deira or Bur Dubai! Excellent South Asian curries, Arabic mandi rice, or fresh wraps cost just AED 10 to AED 20 per meal.",
       "Book desert safari packages on local UAE multi-agent platforms or pre-purchase tourist passes to save up to 40% on Burj Khalifa entry fees."
     ],
-    quickAnswer: "A comfortable, fully loaded 5-day Dubai trip from Bangladesh matches BDT 1,20,000-1,40,000 including roundtrip flight tickets. An extreme budget-focused backpacker staying in Deira dorms/guest rooms and taking the metro can limit expenditure down to BDT 95,000, while staying in luxury Address/Burj Al Arab blocks reaches BDT 2,50,000+.",
+    quickAnswer: "A 5-day Dubai trip from Bangladesh costs approximately BDT 1,20,000 to BDT 1,40,000 per person for a comfortable mid-range itinerary including direct roundtrip flights. Extreme budget backpackers departing from Dhaka can reduce local expenses to around BDT 95,000 by staying in Deira hostels and using the Dubai Metro with a Nol card. High-end luxury stays covering 5-star hotels like Burj Al Arab and top-tier dining will elevate the budget to BDT 2,50,000 or more.",
     keyFacts: [
       { label: "Old Dubai Budget (5d)", value: "approx BDT 95,000" },
       { label: "Comfort Shopping (5d)", value: "approx BDT 1,30,000" },
@@ -1128,5 +1304,82 @@ Hotel rates on major portals tend to fluctuate mid-week. Always search for rooms
       { text: "Kuala Lumpur Hotels Guide", path: "/hotels?city=kuala-lumpur" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Save on transport too", body: "A pre-booked airport transfer is usually cheaper than a metered taxi at arrival." }
+  },
+  {
+    id: "blog-4",
+    slug: "halal-food-guide-bangkok-bangladesh",
+    title: "Where to Eat Halal Food in Bangkok: A Complete Guide for Bangladeshi Travelers",
+    summary: "Discover the best halal zones in Pratunam and Sukhumvit, learn how to identify official certified signage, check average meal costs in BDT, and find reliable restaurant recommendations for your next Bangkok stay.",
+    category: "Food & Culture",
+    date: "June 15, 2026",
+    author: "Fahmida Tasnim (Dhaka Food Blogger & Explorer)",
+    readTime: "5 min read",
+    content: `When traveling to Thailand, finding delicious, certified Halal food is often a major concern for Bangladeshi tourists. Fortunately, Bangkok is highly welcoming, with vibrant Muslim neighborhoods and countless certified or Muslim-owned eateries. Here is our essential guide to navigating Halal dining in Bangkok without any stress.
+
+1. HOW TO IDENTIFY HALAL SIGNAGE
+Always look for the official green Halal emblem from the Central Islamic Council of Thailand displayed on the storefront or menu. Many Muslim-owned venues also display Arabic calligraphy (such as "Bismillah") or simple "Halal" signs in English or Thai script. In major shopping malls, check lists of certified vendors or ask the counter for separate Halal menu options before ordering.
+
+2. THE TWO MAIN HALAL RESTAURANT ZONES
+- Pratunam (The Shopper's Paradise): Perfect for Bangladeshi tourists, this area is dense with Halal street food stalls, especially around the alleys of Petchaburi Road. You can find Halal kebabs, biryanis, and even local Thai curries adapted to Halal guidelines within minutes of major shopping blocks.
+- Sukhumvit (Soi 3 / Arab Street): Located near Nana BTS station, this bustling street is packed with Arab, Persian, Egyptian, Indian, and Bangladeshi restaurants. It is an amazing spot for high-quality BBQ, fresh flatbreads, and Middle Eastern delicacies, though prices can be slightly higher than in Pratunam.
+
+3. APPROXIMATE MEAL COSTS IN BDT
+Meal pricing is incredibly flexible in Bangkok:
+- Cheap street stalls or shopping mall food court stalls: BDT 150 - BDT 300 (THB 45 - THB 90) per serving.
+- Mid-range air-conditioned sit-down dining: BDT 600 - BDT 1,200 (THB 180 - THB 360) per person.
+- Fine-dining Lebanese or Indian restaurants in Sukhumvit: BDT 1,800+ (THB 550+) per item.
+
+4. 3 RECOMMENDED RESTAURANTS TO VISIT
+- Maidaun Halal Restaurant (Pratunam Market): Located directly across from Platinum Fashion Mall, this highly accessible eatery offers a mix of local Thai favorites (like red curry and pad thai) and familiar South Asian dishes (like chicken biryani and beef curry) on a strictly Halal menu.
+- Al Hussain Restaurant (Sukhumvit Soi 3): Famous among South Asians for its delicious naan, succulent tandoori kebabs, and aromatic curries, this vibrant spot is great for a heavy dinner after a long day of touring.
+- Yana Restaurant (Siam Discovery, 5th Floor): An air-conditioned, fully certified Halal restaurant located inside a major shopping mall. It is the perfect place to safely try spicy Tom Yum soup, green curry, or mango sticky rice in a clean, upscale setting.`,
+    internalLinks: [
+      { text: "Dhaka to Bangkok Flight Guide", path: "/flights?route=dhaka-bangkok" },
+      { text: "Bangkok Hotels Neighborhoods", path: "/hotels?city=bangkok-hotels" }
+    ],
+    affiliateCTA: { provider: "klook", headline: "Book a Bangkok Guided Food Tour", body: "Explore secret Halal street food alleys with an english-speaking local guide." }
+  },
+  {
+    id: "blog-5",
+    slug: "nepal-pokhara-itinerary-bangladesh",
+    title: "Kathmandu to Pokhara: A 5-Day Nepal Itinerary for Bangladeshis (With Costs in BDT)",
+    summary: "Plan the ultimate 5-day adventure combining the cultural sights of Kathmandu and beautiful lakeside scenery of Pokhara. Includes hotel tips, transit options, and total cost breakdown in BDT.",
+    category: "Itineraries",
+    date: "June 17, 2026",
+    author: "Abrar Sazzad (Backpacking Veteran)",
+    readTime: "6 min read",
+    content: `Are you a Bangladeshi traveler planning a scenic mountain escape that is incredibly pocket-friendly? A 5-day trip covering Kathmandu's historic valleys and Pokhara's peaceful lakes is the absolute sweet spot. Below is our complete, day-by-day itinerary optimized specifically for budget and timing from Dhaka.
+
+DAY 1: KATHMANDU ARRIVAL
+Fly from Hazrat Shahjalal International Airport (DAC) to Kathmandu's Tribhuvan Airport (KTM). Get your free SAARC Gratis Visa on Arrival in under 20 minutes (no visa fee for your first annual entry!). Rent a prepaid taxi to Thamel for roughly BDT 600 - 800, check into your hostel or guesthouse, and spend the evening wandering through the bustling streets of Thamel to buy cheap trekking supplies or sample local hot Momos.
+
+DAY 2: KATHMANDU VALLEY EXPLORATION
+Dedicate today to Kathmandu's historic landmarks. Start early with the massive, peaceful Boudhanath Stupa (SAARC ticket: BDT 100), followed by the monkey temple at Soyambhunath to catch the sunrise over the city. In the afternoon, take a taxi or a cheap Pathao ride to Patan Durbar Square to admire centuries-old Newari wooden and brick palaces.
+
+DAY 3: SCENIC DRIVE TO POKHARA
+Wake up early at 6:00 AM to board a comfortable tourist bus from Shorakhutte towards Pokhara. The 6 to 8-hour drive takes you through scenic valleys, mountain rivers, and small villages, costing about BDT 1,200 to BDT 1,500 per seat. Upon arriving in Pokhara, check into your lakeside hotel, and take peaceful evening strolls beside Phewa Lake under the reflection of Mount Fishtail.
+
+DAY 4: SARANGKOT SUNRISE AND LAKESIDE
+Start early at 4:30 AM with a private car (approx BDT 1,500 roundtrip) up to the Sarangkot peak viewpoint to witness the sunrise over the majestic Annapurna range. Head back down for a hearty breakfast, then rent a colorful wooden boat to row across Phewa Lake (approx BDT 400 - 600 per hour). Spend the rest of the day visiting Devi's Fall and Gupteshwor Cave before dining at a cozy lakeside restaurant.
+
+DAY 5: RETURN TO KATHMANDU AND DEPARTURE
+Catch a quick morning flight (approx 25 mins) or take an early morning tourist bus back to Kathmandu. Head directly to Tribhuvan International Airport for your afternoon/evening flight back to Dhaka, ending your wonderful Himalayan adventure!
+
+HOTEL RECOMMENDATIONS (PRICED IN BDT)
+- Kathmandu (Thamel Area) Budget Stays: BDT 1,500 - BDT 2,500 per night for simple, clean guest houses with hot water. Mid-range boutique hotels are BDT 4,000 - BDT 7,500 per night.
+- Pokhara (Lakeside Area) Clean Stays: BDT 1,800 - BDT 3,000 per night for a cozy room facing the gardens, with hot showers and free breakfast.
+
+TOTAL BUDGET SUMMARY PER PERSON (IN BDT)
+- Flights (DAC - KTM Roundtrip): BDT 28,000 - BDT 35,000
+- Hotels (4 Nights, sharing base): BDT 4,000 - BDT 6,000
+- Intercity & Local Transport: BDT 3,000 - BDT 5,000
+- Food & Snacks: BDT 4,000 - BDT 6,000
+- Heritage/Attraction Permits: BDT 1,000 - BDT 2,000
+- TOTAL ESTIMATED BUDGET: BDT 40,000 - BDT 54,000 per person for an unforgettable independent holiday!`,
+    internalLinks: [
+      { text: "Kathmandu Flights from Dhaka", path: "/flights?route=dhaka-kathmandu" },
+      { text: "Nepal Visa on Arrival Guide", path: "/visa?country=nepal-visa" }
+    ],
+    affiliateCTA: { provider: "aviasales", headline: "Check Dhaka to Kathmandu Flight Fares", body: "Check live availability and book cheap roundtrip flights to Nepal today." }
   }
 ];

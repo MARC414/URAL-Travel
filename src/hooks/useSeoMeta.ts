@@ -4,6 +4,7 @@ interface SeoMetaProps {
   title: string;
   description: string;
   schema?: object | object[];
+  breadcrumbs?: { name: string; url: string }[];
 }
 
 /**
@@ -39,8 +40,9 @@ function safeStringify(val: any): string {
   }
 }
 
-export function useSeoMeta({ title, description, schema }: SeoMetaProps) {
+export function useSeoMeta({ title, description, schema, breadcrumbs }: SeoMetaProps) {
   const schemaStr = safeStringify(schema);
+  const breadcrumbsStr = safeStringify(breadcrumbs);
 
   // Derive canonical URL inside the hook
   let canonicalUrl = "https://ural-travel.pages.dev/";
@@ -123,8 +125,30 @@ export function useSeoMeta({ title, description, schema }: SeoMetaProps) {
     // 6. JSON-LD Schema Script Updates
     document.querySelectorAll('script[data-seo-schema="true"]').forEach((el) => el.remove());
 
-    if (schema) {
-      const schemas = Array.isArray(schema) ? schema : [schema];
+    if (schema || (breadcrumbs && breadcrumbs.length > 0)) {
+      const schemas: any[] = [];
+      
+      if (schema) {
+        if (Array.isArray(schema)) {
+          schemas.push(...schema);
+        } else {
+          schemas.push(schema);
+        }
+      }
+
+      if (breadcrumbs && breadcrumbs.length > 0) {
+        schemas.push({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": breadcrumbs.map((crumb, idx) => ({
+            "@type": "ListItem",
+            "position": idx + 1,
+            "name": crumb.name,
+            "item": crumb.url
+          }))
+        });
+      }
+
       schemas.forEach((s) => {
         try {
           const script = document.createElement("script");
@@ -137,7 +161,7 @@ export function useSeoMeta({ title, description, schema }: SeoMetaProps) {
         }
       });
     }
-  }, [title, description, schemaStr, canonicalUrl]);
+  }, [title, description, schemaStr, breadcrumbsStr, canonicalUrl]);
 }
 
 /**

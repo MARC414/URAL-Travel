@@ -170,11 +170,29 @@ export function PartnerLinkButton({
   label: string;
   variant?: "light" | "dark";
 }) {
+  const handleClick = () => {
+    // 1. Log analytics tracking event to console
+    console.log(`[Affiliate Partner Click] Label: "${label}" | URL: ${href} | Timestamp: ${new Date().toISOString()}`);
+
+    // 2. Push event to standard web dataLayer if present
+    if (typeof window !== "undefined") {
+      const dataLayer = (window as any).dataLayer || [];
+      dataLayer.push({
+        event: "affiliate_partner_click",
+        partner_label: label,
+        partner_url: href,
+        timestamp: new Date().toISOString()
+      });
+      (window as any).dataLayer = dataLayer;
+    }
+  };
+
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer sponsored"
+      onClick={handleClick}
       className={
         variant === "dark"
           ? "inline-flex items-center gap-1.5 bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
