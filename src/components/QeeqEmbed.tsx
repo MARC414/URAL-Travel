@@ -1,61 +1,118 @@
-import React, { useEffect, useState, useRef } from "react";
-import { ExternalLink } from "lucide-react";
+import React, { useState } from "react";
+import { ExternalLink, Car, Calendar, MapPin, Loader2 } from "lucide-react";
 
 export function QeeqEmbed() {
-  const [status, setStatus] = useState<"loading" | "loaded" | "failed">("loading");
-  const scriptContainerRef = useRef<HTMLDivElement>(null);
+  const [pickupLocation, setPickupLocation] = useState("Kathmandu Airport (KTM)");
+  const [dropoffLocation, setDropoffLocation] = useState("Kathmandu Airport (KTM)");
+  const [pickupDate, setPickupDate] = useState("2026-07-15");
+  const [dropoffDate, setDropoffDate] = useState("2026-07-22");
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
-  useEffect(() => {
-    if (!scriptContainerRef.current) return;
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsRedirecting(true);
     
-    scriptContainerRef.current.innerHTML = "";
-    
-    const script = document.createElement("script");
-    script.src = "https://tpemd.com/content?promo_id=4850&campaign_id=172&powered_by=true&locale=en&shmarker=675992&trs=540277";
-    script.charset = "utf-8";
-    script.async = true;
-    
-    script.onload = () => setStatus("loaded");
-    script.onerror = () => setStatus("failed");
-    
-    const timer = setTimeout(() => {
-      setStatus(prev => prev === "loading" ? "failed" : prev);
-    }, 4500);
-
-    scriptContainerRef.current.appendChild(script);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
+    // Simulate premium affiliate routing delay for visual feedback
+    setTimeout(() => {
+      setIsRedirecting(false);
+      window.open("https://qeeq.tpo.li/nooi5oSG", "_blank", "noopener,noreferrer,sponsored");
+    }, 1000);
+  };
 
   return (
-    <div className="w-full bg-white rounded-xl p-2 min-h-[180px] overflow-hidden">
-      {status === "failed" && (
-        <div className="flex flex-col items-center justify-center py-6 px-4 text-center space-y-3">
-          <span className="text-xs text-slate-500 font-mono">Car rental widget is taking longer than expected to load.</span>
-          <a
-            href="https://qeeq.tpo.li/nooi5oSG"
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="inline-flex items-center gap-1.5 bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs px-5 py-2.5 rounded-lg transition-colors cursor-pointer"
-          >
-            Find Car Rentals on QEEQ <ExternalLink size={12} />
-          </a>
+    <div className="w-full bg-slate-50/80 rounded-xl p-4 sm:p-5 border border-slate-100 relative overflow-hidden font-sans">
+      <div className="flex items-center gap-2.5 mb-3.5">
+        <div className="p-1.5 bg-[#F6B73C]/10 text-[#F6B73C] rounded-lg">
+          <Car size={18} />
         </div>
-      )}
-
-      {status === "loading" && (
-        <div className="flex flex-col items-center justify-center py-10 text-slate-400">
-          <div className="w-6.5 h-6.5 border-4 border-slate-100 border-t-[#32a8dd] animate-spin rounded-full mb-2"></div>
-          <span className="text-[10px] font-mono tracking-wider">Loading car rentals form...</span>
+        <div>
+          <h4 className="font-serif font-black text-sm text-slate-900">Find Car Rentals on QEEQ</h4>
+          <p className="text-[10px] text-slate-500 uppercase font-mono tracking-wider">Best Price Guarantee • Free Cancellation</p>
         </div>
-      )}
+      </div>
 
-      <div 
-        ref={scriptContainerRef} 
-        style={{ display: status === "loaded" ? "block" : "none" }}
-      />
+      <form onSubmit={handleSearch} className="space-y-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* Pickup */}
+          <div>
+            <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+              <MapPin size={9} className="text-[#F6B73C]" /> Pick-up Location
+            </label>
+            <input
+              type="text"
+              value={pickupLocation}
+              onChange={(e) => setPickupLocation(e.target.value)}
+              className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#F6B73C] focus:border-[#F6B73C] transition-all"
+              placeholder="City, airport, or hotel"
+              required
+            />
+          </div>
+
+          {/* Dropoff */}
+          <div>
+            <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+              <MapPin size={9} className="text-[#F6B73C]" /> Drop-off Location
+            </label>
+            <input
+              type="text"
+              value={dropoffLocation}
+              onChange={(e) => setDropoffLocation(e.target.value)}
+              className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#F6B73C] focus:border-[#F6B73C] transition-all"
+              placeholder="Same as pick-up location"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          {/* Pickup Date */}
+          <div>
+            <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+              <Calendar size={9} className="text-[#F6B73C]" /> Pick-up Date
+            </label>
+            <input
+              type="date"
+              value={pickupDate}
+              onChange={(e) => setPickupDate(e.target.value)}
+              className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-[#F6B73C] focus:border-[#F6B73C] transition-all"
+              required
+            />
+          </div>
+
+          {/* Dropoff Date */}
+          <div>
+            <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+              <Calendar size={9} className="text-[#F6B73C]" /> Drop-off Date
+            </label>
+            <input
+              type="date"
+              value={dropoffDate}
+              onChange={(e) => setDropoffDate(e.target.value)}
+              className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-[#F6B73C] focus:border-[#F6B73C] transition-all"
+              required
+            />
+          </div>
+        </div>
+
+        {/* Search button with redirect loader */}
+        <button
+          type="submit"
+          disabled={isRedirecting}
+          className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-70"
+        >
+          {isRedirecting ? (
+            <>
+              <Loader2 size={12} className="animate-spin text-white" />
+              <span>Redirecting Securely...</span>
+            </>
+          ) : (
+            <>
+              <span>Search Cars on QEEQ</span>
+              <ExternalLink size={11} />
+            </>
+          )}
+        </button>
+      </form>
     </div>
   );
 }

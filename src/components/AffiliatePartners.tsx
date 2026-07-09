@@ -1,5 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { ExternalLink } from "lucide-react";
+import { KlookEmbed } from "./KlookEmbed";
+import { KiwitaxiEmbed } from "./KiwitaxiEmbed";
+import { AiraloEmbed } from "./AiraloEmbed";
+import { QeeqEmbed } from "./QeeqEmbed";
 
 /* Single source of truth for the plain outbound URLs (used by
    PartnerLinkButton and any inline <a> tags). Do not edit these values. */
@@ -113,51 +117,24 @@ function ScriptWidget({
 
 /* 02. Klook — Activities & Things To Do widget */
 export function KlookActivitiesWidget() {
-  return (
-    <ScriptWidget
-      src="https://tpemd.com/content?currency=usd&promo_id=4497&campaign_id=137&powered_by=true&amount=3&category=3&city_id=9&locale=en&shmarker=675992&trs=540277"
-      loadingLabel="Loading tours & activities..."
-      fallbackUrl={AFFILIATE_LINKS.klook}
-      fallbackText="See Dubai Tours & Activities on Klook"
-    />
-  );
+  return <KlookEmbed />;
 }
 
 /* 04. Kiwitaxi — Airport Transfers / Shuttles widget */
 export function KiwitaxiTransferWidget() {
-  return (
-    <ScriptWidget
-      src="https://tpemd.com/content?currency=USD&promo_id=1486&campaign_id=1&powered_by=true&theme=6&language=en&shmarker=675992&trs=540277"
-      loadingLabel="Loading airport transfer search..."
-      fallbackUrl={AFFILIATE_LINKS.kiwitaxi}
-      fallbackText="Book Airport Transfers on Kiwitaxi"
-    />
-  );
+  return <KiwitaxiEmbed />;
 }
 
 /* 05. Airalo — eSIM / connectivity widget */
 export function AiraloEsimWidget() {
-  return (
-    <ScriptWidget
-      src="https://tpemd.com/content?campaign_id=541&promo_id=8588&no_labels=true&plain=false&border_radius=5&special=%23C4C4C4&light=%23FFFFFF&dark=%2311100f&secondary=%230b1628&color_focused=%23C32B2Bff&color_button=%23315590ff&powered_by=true&locale=en&shmarker=675992&trs=540277"
-      loadingLabel="Loading local eSIM plans..."
-      fallbackUrl={AFFILIATE_LINKS.airalo}
-      fallbackText="Get a Local eSIM from Airalo"
-    />
-  );
+  return <AiraloEmbed />;
 }
 
 /* 06. QEEQ — Car Rental widget */
 export function QeeqCarRentalWidget() {
-  return (
-    <ScriptWidget
-      src="https://tpemd.com/content?promo_id=4850&campaign_id=172&powered_by=true&locale=en&shmarker=675992&trs=540277"
-      loadingLabel="Loading car rental search..."
-      fallbackUrl={AFFILIATE_LINKS.qeeq}
-      fallbackText="Rent a Car on QEEQ"
-    />
-  );
+  return <QeeqEmbed />;
 }
+
 
 /* Styled outbound link button — used for KKday (link-only, no widget exists)
    and as a fallback/secondary CTA next to any widget above. */

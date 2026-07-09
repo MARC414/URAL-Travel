@@ -1,61 +1,73 @@
-import React, { useEffect, useState, useRef } from "react";
-import { ExternalLink } from "lucide-react";
+import React, { useState } from "react";
+import { ExternalLink, Wifi, Globe, Loader2 } from "lucide-react";
 
 export function AiraloEmbed() {
-  const [status, setStatus] = useState<"loading" | "loaded" | "failed">("loading");
-  const scriptContainerRef = useRef<HTMLDivElement>(null);
+  const [selectedCountry, setSelectedCountry] = useState("Nepal");
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
-  useEffect(() => {
-    if (!scriptContainerRef.current) return;
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsRedirecting(true);
     
-    scriptContainerRef.current.innerHTML = "";
-    
-    const script = document.createElement("script");
-    script.src = "https://tpemd.com/content?campaign_id=541&promo_id=8588&no_labels=true&plain=false&border_radius=5&special=%23C4C4C4&light=%23FFFFFF&dark=%2311100f&secondary=%230b1628&color_focused=%23C32B2Bff&color_button=%23315590ff&powered_by=true&locale=en&shmarker=675992&trs=540277";
-    script.charset = "utf-8";
-    script.async = true;
-    
-    script.onload = () => setStatus("loaded");
-    script.onerror = () => setStatus("failed");
-    
-    const timer = setTimeout(() => {
-      setStatus(prev => prev === "loading" ? "failed" : prev);
-    }, 4500);
-
-    scriptContainerRef.current.appendChild(script);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
+    setTimeout(() => {
+      setIsRedirecting(false);
+      window.open("https://airalo.tpo.li/mV2QXsXK", "_blank", "noopener,noreferrer,sponsored");
+    }, 1000);
+  };
 
   return (
-    <div className="w-full bg-white rounded-xl p-2 min-h-[300px] overflow-hidden">
-      {status === "failed" && (
-        <div className="flex flex-col items-center justify-center py-6 px-4 text-center space-y-3">
-          <span className="text-xs text-slate-500 font-mono">Sim card / eSIM mobile data widget is taking longer than expected.</span>
-          <a
-            href="https://airalo.tpo.li/mV2QXsXK"
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="inline-flex items-center gap-1.5 bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs px-5 py-2.5 rounded-lg transition-colors cursor-pointer"
+    <div className="w-full bg-slate-50/80 rounded-xl p-4 sm:p-5 border border-slate-100 relative overflow-hidden font-sans">
+      <div className="flex items-center gap-2.5 mb-3.5">
+        <div className="p-1.5 bg-red-500/10 text-red-600 rounded-lg">
+          <Wifi size={18} />
+        </div>
+        <div>
+          <h4 className="font-serif font-black text-sm text-slate-900">Local eSIMs via Airalo</h4>
+          <p className="text-[10px] text-slate-500 uppercase font-mono tracking-wider">Instant Activation • No Physical Card</p>
+        </div>
+      </div>
+
+      <form onSubmit={handleSearch} className="space-y-3">
+        <div>
+          <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <Globe size={9} className="text-red-550" /> Destination Country
+          </label>
+          <select
+            value={selectedCountry}
+            onChange={(e) => setSelectedCountry(e.target.value)}
+            className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 transition-all"
           >
-            Buy Local eSIM Plans on Airalo <ExternalLink size={12} />
-          </a>
+            <option value="Nepal">Nepal 🇳🇵</option>
+            <option value="Thailand">Thailand 🇹🇭</option>
+            <option value="Malaysia">Malaysia 🇲🇾</option>
+            <option value="UAE">United Arab Emirates 🇦🇪</option>
+            <option value="Global">Global / Worldwide Plan</option>
+          </select>
         </div>
-      )}
 
-      {status === "loading" && (
-        <div className="flex flex-col items-center justify-center py-12 text-slate-400">
-          <div className="w-6.5 h-6.5 border-4 border-slate-100 border-t-[#C32B2B] animate-spin rounded-full mb-2"></div>
-          <span className="text-[10px] font-mono tracking-wider">Loading local eSIM plan search...</span>
-        </div>
-      )}
+        <p className="text-[10px] text-slate-500 font-sans leading-relaxed">
+          Airalo offers digital eSIM plans that activate on any compatible smartphone upon arrival, avoiding expensive roaming rates.
+        </p>
 
-      <div 
-        ref={scriptContainerRef} 
-        style={{ display: status === "loaded" ? "block" : "none" }}
-      />
+        {/* Search button with redirect loader */}
+        <button
+          type="submit"
+          disabled={isRedirecting}
+          className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-70"
+        >
+          {isRedirecting ? (
+            <>
+              <Loader2 size={12} className="animate-spin text-white" />
+              <span>Redirecting Securely...</span>
+            </>
+          ) : (
+            <>
+              <span>Get Local eSIM Plans</span>
+              <ExternalLink size={11} />
+            </>
+          )}
+        </button>
+      </form>
     </div>
   );
 }

@@ -1,65 +1,73 @@
-import React, { useEffect, useState, useRef } from "react";
-import { ExternalLink } from "lucide-react";
+import React, { useState } from "react";
+import { ExternalLink, Compass, Search, Loader2 } from "lucide-react";
 
 interface KlookEmbedProps {
-  cityId?: number; // Optional city ID customizability
+  cityId?: number;
 }
 
 export function KlookEmbed({ cityId = 9 }: KlookEmbedProps) {
-  const [status, setStatus] = useState<"loading" | "loaded" | "failed">("loading");
-  const scriptContainerRef = useRef<HTMLDivElement>(null);
+  const [query, setQuery] = useState("");
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
-  useEffect(() => {
-    if (!scriptContainerRef.current) return;
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsRedirecting(true);
     
-    scriptContainerRef.current.innerHTML = "";
-    
-    const script = document.createElement("script");
-    script.src = `https://tpemd.com/content?currency=usd&promo_id=4497&campaign_id=137&powered_by=true&amount=3&category=3&city_id=${cityId}&locale=en&shmarker=675992&trs=540277`;
-    script.charset = "utf-8";
-    script.async = true;
-    
-    script.onload = () => setStatus("loaded");
-    script.onerror = () => setStatus("failed");
-    
-    const timer = setTimeout(() => {
-      setStatus(prev => prev === "loading" ? "failed" : prev);
-    }, 4500);
-    
-    scriptContainerRef.current.appendChild(script);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [cityId]);
+    setTimeout(() => {
+      setIsRedirecting(false);
+      window.open("https://klook.tpo.li/IYOU76Bn", "_blank", "noopener,noreferrer,sponsored");
+    }, 1000);
+  };
 
   return (
-    <div className="w-full bg-white rounded-xl p-2 min-h-[250px] overflow-hidden">
-      {status === "failed" && (
-        <div className="flex flex-col items-center justify-center py-6 px-4 text-center space-y-3">
-          <span className="text-xs text-slate-500 font-mono">Tours and activities widget is taking longer than expected.</span>
-          <a
-            href="https://klook.tpo.li/IYOU76Bn"
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="inline-flex items-center gap-1.5 bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs px-5 py-2.5 rounded-lg transition-colors cursor-pointer"
-          >
-            Browse Tours & Activities on Klook <ExternalLink size={12} />
-          </a>
+    <div className="w-full bg-slate-50/80 rounded-xl p-4 sm:p-5 border border-slate-100 relative overflow-hidden font-sans">
+      <div className="flex items-center gap-2.5 mb-3.5">
+        <div className="p-1.5 bg-[#F6B73C]/10 text-[#F6B73C] rounded-lg">
+          <Compass size={18} />
         </div>
-      )}
-
-      {status === "loading" && (
-        <div className="flex flex-col items-center justify-center py-10 text-slate-400">
-          <div className="w-6.5 h-6.5 border-4 border-slate-100 border-t-[#F6B73C] animate-spin rounded-full mb-2"></div>
-          <span className="text-[10px] font-mono tracking-wider">Loading handpicked activities & attractions...</span>
+        <div>
+          <h4 className="font-serif font-black text-sm text-slate-900">Explore Activities on Klook</h4>
+          <p className="text-[10px] text-slate-500 uppercase font-mono tracking-wider">Lowest Price Guarantee • Direct Entry Passes</p>
         </div>
-      )}
+      </div>
 
-      <div 
-        ref={scriptContainerRef} 
-        style={{ display: status === "loaded" ? "block" : "none" }}
-      />
+      <form onSubmit={handleSearch} className="space-y-3">
+        <div>
+          <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <Search size={9} className="text-[#F6B73C]" /> Search Tours or Attractions
+          </label>
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#F6B73C] focus:border-[#F6B73C] transition-all"
+            placeholder="e.g. Burj Khalifa, Private City Tour"
+          />
+        </div>
+
+        <p className="text-[10px] text-slate-500 font-sans leading-relaxed">
+          Search over 100,000+ local attractions, day tours, transport passes, and unique experiences at exclusive discounted rates.
+        </p>
+
+        {/* Search button with redirect loader */}
+        <button
+          type="submit"
+          disabled={isRedirecting}
+          className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-70"
+        >
+          {isRedirecting ? (
+            <>
+              <Loader2 size={12} className="animate-spin text-white" />
+              <span>Redirecting Securely...</span>
+            </>
+          ) : (
+            <>
+              <span>Search Klook Activities</span>
+              <ExternalLink size={11} />
+            </>
+          )}
+        </button>
+      </form>
     </div>
   );
 }
