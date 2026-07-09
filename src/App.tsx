@@ -539,8 +539,7 @@ export default function App() {
             {/* SEO-optimized Image Placement */}
             <img src={heroBgImage} alt="Travel from Bangladesh — compare flights hotels and visa guides" className="sr-only" />
 
-            {/* Bottom Fade Gradient Overlay */}
-            <div className="hero-bottom-fade absolute bottom-0 left-0 right-0 h-64 z-10 pointer-events-none" />
+            {/* Bottom Fade Gradient Overlay - Removed to avoid white overlay */}
 
             {/* Animated SVG Route Map Overlay */}
             <svg className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10 opacity-40" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">

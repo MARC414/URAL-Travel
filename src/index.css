@@ -129,13 +129,7 @@
 
 /* === HERO BOTTOM FADE === */
 .hero-bottom-fade {
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(248, 250, 252, 0.15) 50%,
-    rgba(248, 250, 252, 0.95) 85%,
-    #F8FAFC 100%
-  );
+  background: transparent;
 }
 
 /* === HERO ROUTE LINE ANIMATION === */
