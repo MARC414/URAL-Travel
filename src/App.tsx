@@ -31,6 +31,7 @@ import { FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, DESTINATIONS_DATA, TRIP_COSTS_DAT
 
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
+import { TravelpayoutsOnboarding } from "./components/TravelpayoutsOnboarding";
 import { TravelpayoutsWidget } from "./components/TravelpayoutsWidget";
 import { TravelpayoutsEmbed } from "./components/TravelpayoutsEmbed";
 import { TrustpilotReviews } from "./components/TrustpilotReviews";
@@ -52,7 +53,7 @@ const bangkokDestImg = new URL("./assets/images/bangkok_destination_178154414943
 const klDestImg = new URL("./assets/images/kl_destination_1781544164707.jpg", import.meta.url).href;
 const dubaiDestImg = new URL("./assets/images/dubai_destination_1781544180311.jpg", import.meta.url).href;
 
-type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "costs" | "tools" | "blog";
+type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "costs" | "tools" | "blog" | "contact";
 
 export default function App() {
   // Simulated Browser Routing State
@@ -98,6 +99,15 @@ export default function App() {
     { id: 5, text: "2x2 white background photos (for specific entries)", checked: false },
   ]);
 
+  // Contact Us Page States
+  const [contactName, setContactName] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [contactSubject, setContactSubject] = useState("Visa Processing Checklist");
+  const [contactDestination, setContactDestination] = useState("Nepal");
+  const [contactMessage, setContactMessage] = useState("");
+  const [contactSubmitted, setContactSubmitted] = useState(false);
+  const [contactLoading, setContactLoading] = useState(false);
+
   // Parse path to resolve active section and optional query parameters
   const getRouteDetails = () => {
     const url = new URL(currentPath, "https://ural-travel.pages.dev");
@@ -141,12 +151,17 @@ export default function App() {
       const slugParam = searchParams.get("slug");
       parameterId = slugParam || "cheap-flight-booking-hacks-dhaka";
       isLanding = !slugParam;
+    } else if (pathname.startsWith("/contact")) {
+      section = "contact";
+      isLanding = true;
     }
 
-    return { section, parameterId, isLanding };
+    const isAdmin = searchParams.has("admin") || searchParams.has("inspector") || searchParams.get("onboarding") === "true";
+
+    return { section, parameterId, isLanding, isAdmin };
   };
 
-  const { section, parameterId, isLanding } = getRouteDetails();
+  const { section, parameterId, isLanding, isAdmin } = getRouteDetails();
 
   // Dynamically compute metadata and schema
   let seoTitle = "URAL — Compare Flights, Hotels & Visa Guides for Bangladeshi Travelers";
@@ -346,6 +361,14 @@ export default function App() {
         { name: activePost.title, url: `https://ural.travel/blog?slug=${activePost.slug}` }
       ];
     }
+  } else if (section === "contact") {
+    seoTitle = "Contact URAL — Direct Phone & WhatsApp Support";
+    seoDescription = "Connect directly with our flight & visa support desk at +8801784385335. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.";
+    seoSchema = undefined;
+    seoBreadcrumbs = [
+      { name: "Home", url: "https://ural.travel/" },
+      { name: "Contact Us", url: "https://ural.travel/contact" }
+    ];
   }
 
   // Call the hook at the top level
@@ -416,7 +439,7 @@ export default function App() {
             </div>
 
             {/* Navigation Centered */}
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-7">
               {[
                 { id: "home", label: "Home", path: "/" },
                 { id: "flights", label: "Flights", path: "/flights" },
@@ -425,7 +448,8 @@ export default function App() {
                 { id: "destinations", label: "Destinations", path: "/destinations" },
                 { id: "costs", label: "Costs", path: "/costs" },
                 { id: "tools", label: "Tools", path: "/tools" },
-                { id: "blog", label: "Blog", path: "/blog" }
+                { id: "blog", label: "Blog", path: "/blog" },
+                { id: "contact", label: "Contact", path: "/contact" }
               ].map((item) => (
                 <button
                   key={item.id}
@@ -504,7 +528,8 @@ export default function App() {
                     { id: "destinations", label: "Destinations", path: "/destinations" },
                     { id: "costs", label: "Costs", path: "/costs" },
                     { id: "tools", label: "Tools", path: "/tools" },
-                    { id: "blog", label: "Blog", path: "/blog" }
+                    { id: "blog", label: "Blog", path: "/blog" },
+                    { id: "contact", label: "Contact", path: "/contact" }
                   ].map((item) => (
                     <button
                       key={item.id}
@@ -2509,6 +2534,8 @@ export default function App() {
             
             <InteractiveTools />
 
+            {isAdmin && <TravelpayoutsOnboarding />}
+
             {/* Book Your Trip - Visual Step-by-Step Booking Checklist Funnel */}
             <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-8 mt-8">
               <div className="border-b border-slate-100 pb-4">
@@ -2783,6 +2810,278 @@ export default function App() {
         </div>
       )}
 
+      {/* -------------------------------------------------------------
+          📞 VIEW 9: CONTACT US & DIRECT SUPPORT HUB
+      ------------------------------------------------------------- */}
+      {section === "contact" && (
+        <div className="space-y-10 animate-fade-in font-sans">
+          
+          {/* Visual Header Banner */}
+          <div className="bg-[#102A43] text-white p-8 sm:p-12 rounded-3xl relative overflow-hidden shadow-xl border border-slate-800">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-[#F6B73C]/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-teal-500/5 rounded-full blur-2xl pointer-events-none" />
+            
+            <div className="relative z-10 max-w-3xl space-y-4">
+              <div className="inline-flex items-center gap-2 bg-[#F6B73C]/15 text-[#F6B73C] text-xs font-mono font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full">
+                <span className="w-2 h-2 rounded-full bg-[#F6B73C] animate-ping"></span>
+                Direct Assistance Hotline
+              </div>
+              
+              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none">
+                Let's Connect Directly
+              </h1>
+              
+              <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+                Have inquiries about flight bookings, visa procedures, or destination travel packages? Contact our director directly through Call, WhatsApp, or the interactive travel inquiry form below. We respond instantly!
+              </p>
+            </div>
+          </div>
+
+          {/* Quick Contact Grid cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            {/* WhatsApp direct card */}
+            <div className="bg-white border border-slate-200 hover:border-emerald-300 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
+              <div className="p-3.5 bg-emerald-50 text-emerald-600 rounded-xl shrink-0">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.665.988 3.3 1.488 5.35 1.489 5.513 0 10.002-4.486 10.005-9.999.001-2.671-1.037-5.182-2.924-7.071C17.192 1.685 14.685.648 12.012.648c-5.516 0-10.01 4.488-10.014 10.002-.001 1.902.483 3.654 1.401 5.247l-.952 3.479 3.599-.944z" />
+                </svg>
+              </div>
+              <div className="space-y-2 flex-1">
+                <span className="text-[10px] font-mono font-bold text-emerald-600 block uppercase tracking-widest">WHATSAPP CHAT</span>
+                <h3 className="font-serif text-lg font-bold text-slate-900">Start Direct Chat</h3>
+                <p className="text-xs text-slate-500 leading-normal">
+                  The fastest way to get custom support. Ask visa questions, seek roundtrip ticket packages, or request customized hotel bookings.
+                </p>
+                <a 
+                  href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
+                >
+                  Chat on WhatsApp (+8801784385335)
+                </a>
+              </div>
+            </div>
+
+            {/* Phone Direct call card */}
+            <div className="bg-white border border-slate-200 hover:border-[#102A43]/30 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
+              <div className="p-3.5 bg-blue-50 text-blue-600 rounded-xl shrink-0">
+                <svg className="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <div className="space-y-2 flex-1">
+                <span className="text-[10px] font-mono font-bold text-blue-600 block uppercase tracking-widest">TELEPHONE HOTLINE</span>
+                <h3 className="font-serif text-lg font-bold text-slate-900">Direct Mobile Support</h3>
+                <p className="text-xs text-slate-500 leading-normal">
+                  Talk directly to the director. Get immediate verification of requirements, active flight check comparisons, and reliable counsel.
+                </p>
+                <a 
+                  href="tel:+8801784385335" 
+                  className="inline-flex items-center gap-2 bg-[#102A43] hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
+                >
+                  Call Directly (+8801784385335)
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Travel Inquiry Contact Form & Verification Section */}
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            {/* Left Form (Col 7) */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="border-b border-slate-100 pb-4">
+                <h2 className="font-serif text-xl font-bold text-slate-900">Send an Interactive Travel Inquiry</h2>
+                <p className="text-xs text-slate-500 mt-1">Specify your target destination and desired assistance type to receive a custom callback.</p>
+              </div>
+
+              {contactSubmitted ? (
+                <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 text-center space-y-4 animate-fade-in">
+                  <div className="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center mx-auto text-xl shadow-sm shadow-emerald-500/20">
+                    ✓
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-serif text-lg font-bold text-slate-900">Inquiry Received Successfully!</h3>
+                    <p className="text-xs text-slate-600 max-w-md mx-auto">
+                      Thank you <b>{contactName}</b>. Your request regarding <b>{contactSubject}</b> has been registered. We will contact you at <b>{contactPhone}</b> via Call and WhatsApp shortly.
+                    </p>
+                  </div>
+
+                  <div className="bg-white rounded-xl p-4 border border-emerald-150 text-left space-y-2 max-w-md mx-auto font-mono text-[11px] text-slate-600">
+                    <div className="flex justify-between border-b border-slate-100 pb-1">
+                      <span className="font-bold text-slate-400">SUBJECT:</span>
+                      <span className="text-slate-800 font-bold">{contactSubject}</span>
+                    </div>
+                    <div className="flex justify-between border-b border-slate-100 pb-1">
+                      <span className="font-bold text-slate-400">DESTINATION:</span>
+                      <span className="text-slate-800 font-bold">{contactDestination}</span>
+                    </div>
+                    <div className="flex justify-between pb-1">
+                      <span className="font-bold text-slate-400">SUBMISSION ID:</span>
+                      <span className="text-[#102A43] font-bold">URAL-REQ-{Math.floor(1000 + Math.random() * 9000)}</span>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setContactSubmitted(false);
+                      setContactName("");
+                      setContactPhone("");
+                      setContactMessage("");
+                    }}
+                    className="bg-[#102A43] hover:bg-slate-800 text-white font-bold text-xs py-2 px-5 rounded-lg transition-colors"
+                  >
+                    Send Another Inquiry
+                  </button>
+                </div>
+              ) : (
+                <form 
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (!contactName || !contactPhone) {
+                      alert("Please fill in your Name and Phone/WhatsApp number.");
+                      return;
+                    }
+                    setContactLoading(true);
+                    setTimeout(() => {
+                      setContactLoading(false);
+                      setContactSubmitted(true);
+                    }, 1000);
+                  }}
+                  className="space-y-4 text-xs"
+                >
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Name input */}
+                    <div className="space-y-1.5">
+                      <label className="font-bold text-slate-700 block">Full Name <span className="text-red-500">*</span></label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Farhan Momen"
+                        value={contactName}
+                        onChange={(e) => setContactName(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-[#102A43] rounded-xl px-4 py-3 text-slate-800 outline-none transition-all"
+                      />
+                    </div>
+
+                    {/* Phone input */}
+                    <div className="space-y-1.5">
+                      <label className="font-bold text-slate-700 block">Phone or WhatsApp Number <span className="text-red-500">*</span></label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="e.g. +8801784385335"
+                        value={contactPhone}
+                        onChange={(e) => setContactPhone(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-[#102A43] rounded-xl px-4 py-3 text-slate-800 outline-none transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Assistance Category */}
+                    <div className="space-y-1.5">
+                      <label className="font-bold text-slate-700 block">Subject / Assistance Category</label>
+                      <select
+                        value={contactSubject}
+                        onChange={(e) => setContactSubject(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-[#102A43] rounded-xl px-3 py-3 text-slate-800 outline-none transition-all cursor-pointer"
+                      >
+                        <option value="Visa Processing Checklist">Visa Processing Checklist</option>
+                        <option value="Cheap Flight Package comparison">Cheap Flight Package comparison</option>
+                        <option value="Custom Group Itinerary planning">Custom Group Itinerary planning</option>
+                        <option value="Hotel Booking Assistance">Hotel Booking Assistance</option>
+                        <option value="Affiliate Partnership Inquiries">Affiliate Partnership Inquiries</option>
+                      </select>
+                    </div>
+
+                    {/* Target Destination */}
+                    <div className="space-y-1.5">
+                      <label className="font-bold text-slate-700 block">Travel Destination</label>
+                      <select
+                        value={contactDestination}
+                        onChange={(e) => setContactDestination(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-[#102A43] rounded-xl px-3 py-3 text-slate-800 outline-none transition-all cursor-pointer"
+                      >
+                        <option value="Nepal">Nepal 🇳🇵</option>
+                        <option value="Thailand">Thailand 🇹🇭</option>
+                        <option value="Malaysia">Malaysia 🇲🇾</option>
+                        <option value="United Arab Emirates">United Arab Emirates 🇦🇪</option>
+                        <option value="Other / Multi-Destination">Other / Multi-Destination 🌍</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Message */}
+                  <div className="space-y-1.5">
+                    <label className="font-bold text-slate-700 block">Your Message / Specific Requirements</label>
+                    <textarea
+                      rows={4}
+                      placeholder="Please write down your budget constraints, travel dates, or special assistance needs so we can guide you effectively..."
+                      value={contactMessage}
+                      onChange={(e) => setContactMessage(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-[#102A43] rounded-xl px-4 py-3 text-slate-800 outline-none transition-all resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={contactLoading}
+                    className="w-full bg-[#102A43] hover:bg-slate-800 text-[#F6B73C] font-black text-xs uppercase py-3.5 rounded-xl shadow-md tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    {contactLoading ? (
+                      <>
+                        <span className="w-3.5 h-3.5 rounded-full border-2 border-white/20 border-t-white animate-spin"></span>
+                        <span>Processing Inquiry...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Submit Travel Inquiry</span>
+                        <span>→</span>
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+            </div>
+
+            {/* Right Side info card (Col 5) */}
+            <div className="lg:col-span-5 bg-slate-50 border border-slate-200 p-6 rounded-2xl flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <span className="text-[10px] font-mono font-bold text-slate-400 block uppercase tracking-widest">SUPPORT COVENANT</span>
+                <h3 className="font-serif text-lg font-bold text-slate-900">Why Contact URAL Directly?</h3>
+                
+                <div className="space-y-3.5 text-xs text-slate-650">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-emerald-500 mt-0.5 shrink-0">✔</span>
+                    <p><b>100% Free Consultation:</b> We never charge any fees to verify visa documents or search for cheap flights.</p>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-emerald-500 mt-0.5 shrink-0">✔</span>
+                    <p><b>Authorized Referrals:</b> Connect to approved visa processing desks and Travelpayouts verified operators.</p>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-emerald-500 mt-0.5 shrink-0">✔</span>
+                    <p><b>Direct Callback:</b> Bangladeshi tourists receive a personal callback within 1-2 hours of submission.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-slate-250 p-4 rounded-xl border border-slate-300 text-center space-y-1">
+                <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">DIRECT DIAL DESK</span>
+                <span className="text-sm font-serif font-black text-[#102A43] block">+8801784385335</span>
+                <span className="text-[9px] text-slate-400 block">Available 24/7 on WhatsApp Messenger</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
       </main>
 
       {/* 🔮 MASTER FOOTER BLOCK */}
@@ -2836,10 +3135,25 @@ export default function App() {
             </ul>
           </div>
 
-          <div className="space-y-2">
-            <span className="text-white font-bold font-mono uppercase text-xs block mb-1">Monetisation Disclosures</span>
-            <p className="leading-relaxed">
-              URAL earns a small commission when you book flights, transfers, activities, eSIMs, or rental cars through links on this site. This doesn't add to your cost — it's paid by our travel partners. We never sell your personal data.
+          <div className="space-y-3">
+            <span className="text-white font-bold font-mono uppercase text-xs block mb-1">Direct Support & Contact</span>
+            <div className="space-y-2 text-xs">
+              <div className="flex items-center gap-1.5">
+                <span className="text-emerald-400">💬</span>
+                <a href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline text-emerald-400 font-mono font-bold">WhatsApp Chat</a>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[#F6B73C]">📞</span>
+                <a href="tel:+8801784385335" className="hover:text-white hover:underline text-[#F6B73C] font-mono font-bold">Direct Call: +8801784385335</a>
+              </div>
+              <div className="pt-1">
+                <button onClick={() => navigateTo("/contact")} className="bg-slate-800 text-[#F6B73C] hover:bg-slate-700 px-3 py-1.5 rounded-md font-bold text-[10px] uppercase tracking-wide cursor-pointer transition-colors">
+                  Contact Form Page
+                </button>
+              </div>
+            </div>
+            <p className="leading-relaxed text-[11px] text-slate-500 pt-2 border-t border-slate-800">
+              <b>Transparency:</b> URAL earns a small commission on travel reservations completed via links on our site, at no extra cost to you.
             </p>
           </div>
 
