@@ -30,7 +30,7 @@ import { FlightRoute, HotelGuide, VisaGuide, DestinationGuide, TripCostData, Blo
 import { FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, DESTINATIONS_DATA, TRIP_COSTS_DATA, BLOG_DATA } from "./constants";
 
 // Subcomponents
-import { AeoInspector } from "./components/AeoInspector";
+import { TravelIntelligence } from "./components/AeoInspector";
 import { TravelpayoutsWidget } from "./components/TravelpayoutsWidget";
 import { TravelpayoutsEmbed } from "./components/TravelpayoutsEmbed";
 import { TrustpilotReviews } from "./components/TrustpilotReviews";
@@ -398,13 +398,19 @@ export default function App() {
           <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between">
             
             {/* Logo Left */}
-            <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigateTo("/")}>
-              <div className="bg-gradient-to-br from-[#F8FAFC] to-[#E5E7EB] text-[#0F172A] p-1.5 rounded-lg shrink-0">
-                <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
+            <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigateTo("/")}>
+              <div className="bg-gradient-to-br from-[#F6B73C] to-[#E2A123] text-[#0F172A] p-2 rounded-xl shrink-0 shadow-lg shadow-[#F6B73C]/10 flex items-center justify-center">
+                <svg className="w-5 h-5 text-[#0F172A]" fill="none" stroke="currentColor" strokeWidth="2.25" viewBox="0 0 24 24">
+                  {/* Globe circle and grid */}
+                  <circle cx="12" cy="12" r="10" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20" />
+                  {/* Flight arc / international routing arrow */}
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeDasharray="3 3" d="M19 19C15.5 15.5 12 15 8 16" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 19l-4-1M19 19l-1-4" />
                 </svg>
               </div>
-              <span className="font-sans font-extrabold text-[20px] text-white tracking-tight leading-none">
+              <span className="font-sans font-extrabold text-[21px] text-white tracking-wider leading-none">
                 URAL
               </span>
             </div>
@@ -470,7 +476,16 @@ export default function App() {
               <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[#0F172A] shadow-2xl flex flex-col z-10 border-l border-white/10">
                 {/* Drawer Header */}
                 <div className="h-16 px-6 flex items-center justify-between border-b border-white/8">
-                  <span className="font-sans font-extrabold text-[20px] text-white">URAL</span>
+                  <div className="flex items-center gap-2.5">
+                    <div className="bg-gradient-to-br from-[#F6B73C] to-[#E2A123] text-[#0F172A] p-1.5 rounded-lg shrink-0">
+                      <svg className="w-4.5 h-4.5 text-[#0F172A]" fill="none" stroke="currentColor" strokeWidth="2.25" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20" />
+                      </svg>
+                    </div>
+                    <span className="font-sans font-extrabold text-[20px] text-white tracking-wider">URAL</span>
+                  </div>
                   <button 
                     onClick={() => setMobileMenuOpen(false)} 
                     className="text-[#F6B73C] hover:text-white p-1 transition-colors"
@@ -1111,7 +1126,7 @@ export default function App() {
                     {/* 🤖 AEO: QUICK ANSWER (50-80 Words, Google AI Overview Optimized) */}
                     <div id="aeo-quick-answer-card" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
                       <span className="text-[10px] font-bold tracking-widest text-[#102A43] font-mono block mb-1">Quick Answer</span>
-                      <p className="text-slate-700 text-sm italic font-serif leading-relaxed">
+                      <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
                         {activeRoute.quickAnswer}
                       </p>
                     </div>
@@ -1130,7 +1145,7 @@ export default function App() {
                     </div>
 
                     {/* Rich description contents */}
-                    <div className="prose prose-slate prose-sm max-w-none text-xs text-slate-700 space-y-4">
+                    <div className="prose prose-slate max-w-none text-sm sm:text-[14.5px] text-slate-700 space-y-4 leading-relaxed">
                       <h2 className="font-serif font-black text-lg text-slate-900">Airlines Flying This Route</h2>
                       <p>
                         Bangladeshi outbound travellers can leverage several daily flight profiles from Hazrat Shahjalal International Airport (DAC). Direct options are highly recommended to save travel fatigue:
@@ -1185,27 +1200,11 @@ export default function App() {
                       </div>
                     </div>
 
-                    {/* FAQ section */}
-                    <div className="space-y-4">
-                      <h2 className="font-serif font-black text-lg text-slate-900 border-b border-slate-200 pb-2">Frequently Asked Questions</h2>
-                      <div className="space-y-4 text-xs">
-                        {activeRoute.faqs.map((faq, index) => (
-                          <div key={index} className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm space-y-1">
-                            <span className="font-bold text-[#102A43] font-mono block">Question: {faq.question}</span>
-                            <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* SEO schema display */}
-                    <AeoInspector
+                    <TravelIntelligence
                       pageTitle={`Flights to ${activeRoute.country}`}
                       quickAnswer={activeRoute.quickAnswer}
                       keyFacts={activeRoute.keyFacts}
                       faqs={activeRoute.faqs}
-                      schemaMarkup={activeRoute.schemaMarkup}
-                      metaDescription={`Find cheap flight times, direct airlines, average costs, and custom luggage policies for Dhaka flights to ${activeRoute.to}.`}
                     />
 
                   </div>
@@ -1269,7 +1268,7 @@ export default function App() {
                     {/* AEO Answer */}
                     <div id="hotel-aeo-quick-answer" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
                       <span className="text-[10px] font-bold tracking-widest text-[#102A43] font-mono block mb-1">Quick Answer</span>
-                      <p className="text-slate-700 text-sm italic font-serif leading-relaxed">
+                      <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
                         {activeHotel.quickAnswer}
                       </p>
                     </div>
@@ -1282,7 +1281,7 @@ export default function App() {
                           <div key={zone.name} className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm hover:shadow">
                             <span className="font-serif text-base font-bold text-[#102A43] block">{zone.name}</span>
                             <span className="text-[10px] bg-slate-100 font-mono text-[#102A43] font-bold rounded-full px-2 py-0.5 inline-block my-1">{zone.vibe}</span>
-                            <p className="text-xs text-slate-600 leading-relaxed mt-2">{zone.description}</p>
+                            <p className="text-sm text-slate-700 leading-relaxed mt-2 font-sans">{zone.description}</p>
                           </div>
                         ))}
                       </div>
@@ -1390,26 +1389,11 @@ export default function App() {
                       initialTo={activeHotel.city === "Kathmandu" ? "Kathmandu (KTM)" : activeHotel.city === "Bangkok" ? "Bangkok (BKK)" : activeHotel.city === "Dubai" ? "Dubai (DXB)" : "Kuala Lumpur (KUL)"}
                     />
 
-                    {/* FAQ */}
-                    <div className="space-y-4">
-                      <h2 className="font-serif font-black text-lg text-slate-900 border-b border-slate-200 pb-2">Frequently Asked Questions</h2>
-                      <div className="space-y-4 text-xs">
-                        {activeHotel.faqs.map((faq, index) => (
-                          <div key={index} className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm space-y-1">
-                            <span className="font-bold text-[#102A43] font-mono block">Question: {faq.question}</span>
-                            <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <AeoInspector
+                    <TravelIntelligence
                       pageTitle={`Where to stay in ${activeHotel.city}`}
                       quickAnswer={activeHotel.quickAnswer}
                       keyFacts={activeHotel.keyFacts}
                       faqs={activeHotel.faqs}
-                      schemaMarkup={activeHotel.schemaMarkup}
-                      metaDescription={`Compare highly rated neighborhoods, luxury suites, and cheap guest rooms in ${activeHotel.city} compiled for outbound tourists.`}
                     />
 
                   </div>
@@ -1478,7 +1462,7 @@ export default function App() {
                     {/* AEO Quote */}
                     <div id="visa-aeo-box" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
                       <span className="text-[10px] font-bold tracking-widest text-[#102A43] font-mono block mb-1">Quick Answer</span>
-                      <p className="text-slate-700 text-sm italic font-serif leading-relaxed">
+                      <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
                         {activeVisa.quickAnswer}
                       </p>
                     </div>
@@ -1498,7 +1482,7 @@ export default function App() {
                       <h2 className="font-serif font-black text-lg text-slate-900 border-b border-slate-100 pb-2">Step-by-Step Application Process</h2>
                       <div className="space-y-3">
                         {activeVisa.stepByStep.map((step, idx) => (
-                          <div key={idx} className="flex gap-4 text-xs leading-relaxed text-slate-650 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                          <div key={idx} className="flex gap-4 text-sm sm:text-[14.5px] leading-relaxed text-slate-705 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
                             <span className="w-6 h-6 rounded-full bg-[#102A43] text-white font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">{idx + 1}</span>
                             <span>{step}</span>
                           </div>
@@ -1513,7 +1497,7 @@ export default function App() {
                         {activeVisa.documentChecklist.map((cat) => (
                           <div key={cat.category} className="bg-slate-50 border border-slate-200 p-5 rounded-xl">
                             <span className="text-xs font-bold font-mono uppercase tracking-wider text-[#102A43] block border-b border-slate-200 pb-2 mb-3">📋 {cat.category}</span>
-                            <ul className="space-y-2 text-xs text-slate-650">
+                            <ul className="space-y-2 text-sm sm:text-[14.5px] text-slate-700">
                               {cat.items.map((item, idx) => (
                                 <li key={idx} className="flex items-start gap-2">
                                   <span className="text-emerald-500 font-bold mt-0.5">✓</span>
@@ -1598,26 +1582,11 @@ export default function App() {
                       </div>
                     </div>
 
-                    {/* FAQ */}
-                    <div className="space-y-4">
-                      <h2 className="font-serif font-black text-lg text-slate-900 border-b border-slate-200 pb-2">Frequently Asked Questions</h2>
-                      <div className="space-y-4 text-xs">
-                        {activeVisa.faqs.map((faq, index) => (
-                          <div key={index} className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm space-y-1">
-                            <span className="font-bold text-[#102A43] font-mono block">Question: {faq.question}</span>
-                            <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <AeoInspector
+                    <TravelIntelligence
                       pageTitle={`${activeVisa.country} Outbound Visa Process`}
                       quickAnswer={activeVisa.quickAnswer}
                       keyFacts={activeVisa.keyFacts}
                       faqs={activeVisa.faqs}
-                      schemaMarkup={activeVisa.schemaMarkup}
-                      metaDescription={`Complete embassy checklists, processing schedules, and financial bank balances required to obtain tourist permits for ${activeVisa.country} from Dhaka.`}
                     />
 
                   </div>
@@ -1957,13 +1926,11 @@ export default function App() {
                           </div>
                         </div>
 
-                        <AeoInspector
+                        <TravelIntelligence
                           pageTitle={`${activeDes.country} Travel Guide Itinerary`}
                           quickAnswer={activeDes.quickAnswer}
                           keyFacts={activeDes.keyFacts}
                           faqs={activeDes.faqs}
-                          schemaMarkup={activeDes.schemaMarkup}
-                          metaDescription={`Plan your outbound trip with our day-by-day itinerary guides, transport maps, and food recommendations in ${activeDes.country}.`}
                         />
                       </div>
                     ) : (
@@ -2302,26 +2269,11 @@ export default function App() {
                           </div>
                         </div>
 
-                        {/* 10. FAQS */}
-                        <div className="space-y-4">
-                          <h3 className="font-serif font-black text-lg text-slate-900 border-b border-slate-200 pb-2">Frequently Asked Questions</h3>
-                          <div className="space-y-4 text-xs">
-                            {activeDes.faqs.map((faq, index) => (
-                              <div key={index} className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm space-y-1">
-                                <span className="font-bold text-[#102A43] font-mono block animate-pulse">Question: {faq.question}</span>
-                                <p className="text-slate-650 leading-relaxed">{faq.answer}</p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        <AeoInspector
+                        <TravelIntelligence
                           pageTitle={`${activeDes.country} Travel Guide Itinerary`}
                           quickAnswer={activeDes.quickAnswer}
                           keyFacts={activeDes.keyFacts}
                           faqs={activeDes.faqs}
-                          schemaMarkup={activeDes.schemaMarkup}
-                          metaDescription={`Plan your outbound trip with our day-by-day itinerary guides, transport maps, and food recommendations in ${activeDes.country}.`}
                         />
 
                       </div>
@@ -2386,7 +2338,7 @@ export default function App() {
                     {/* AEO Quote */}
                     <div id="cost-aeo-text-box" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
                       <span className="text-[10px] font-bold tracking-widest text-[#102A43] font-mono block mb-1">Quick Answer</span>
-                      <p className="text-slate-700 text-sm italic font-serif leading-relaxed">
+                      <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
                         {activeCost.quickAnswer}
                       </p>
                     </div>
@@ -2451,7 +2403,7 @@ export default function App() {
                     {/* Seasonal variations description */}
                     <div className="bg-slate-50 border border-slate-205 p-6 rounded-xl space-y-2">
                       <h4 className="font-serif font-black text-base text-slate-900">How Prices Change by Season</h4>
-                      <p className="text-xs leading-relaxed text-slate-650">
+                      <p className="text-sm leading-relaxed text-slate-700 font-sans">
                         {activeCost.seasonalVariation}
                       </p>
                     </div>
@@ -2463,7 +2415,7 @@ export default function App() {
                         {activeCost.moneyHacks.map((hack, idx) => (
                           <div key={idx} className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm space-y-2">
                             <span className="text-[10px] uppercase tracking-widest font-mono text-[#F6B73C] font-bold">Tip {idx + 1}</span>
-                            <p className="text-xs text-slate-750 leading-relaxed font-serif">{hack}</p>
+                            <p className="text-sm text-slate-700 leading-relaxed font-sans">{hack}</p>
                           </div>
                         ))}
                       </div>
@@ -2528,13 +2480,11 @@ export default function App() {
 
                     <InteractiveTools />
 
-                    <AeoInspector
+                    <TravelIntelligence
                       pageTitle={`${activeCost.country} Trip Cost calculations`}
                       quickAnswer={activeCost.quickAnswer}
                       keyFacts={activeCost.keyFacts}
                       faqs={activeCost.faqs}
-                      schemaMarkup={activeCost.schemaMarkup}
-                      metaDescription={`Complete cost charts, flights airfare estimates, hotel rent prices, and food spending budgets for ${activeCost.country} in BDT.`}
                     />
 
                   </div>
@@ -2679,7 +2629,7 @@ export default function App() {
             </div>
 
             {/* Blog Post Details */}
-            <div className="lg:col-span-3 space-y-6 bg-white p-6 md:p-8 rounded-xl border border-slate-200 shadow-sm animate-fade-in text-xs">
+            <div className="lg:col-span-3 space-y-6 bg-white p-6 md:p-8 rounded-xl border border-slate-200 shadow-sm animate-fade-in text-sm">
               {(() => {
                 const activePost = BLOG_DATA.find(p => p.slug === parameterId) || BLOG_DATA[0];
                 return (
@@ -2712,7 +2662,7 @@ export default function App() {
                     </div>
 
                     {/* Rich text body content */}
-                    <div className="prose prose-slate max-w-none text-slate-700 leading-relaxed whitespace-pre-wrap space-y-4 italic text-sm font-serif p-4 bg-slate-50 rounded-lg">
+                    <div className="prose prose-slate max-w-none text-slate-850 leading-relaxed sm:leading-relaxed whitespace-pre-wrap space-y-5 text-[15px] sm:text-[16px] font-sans p-5 sm:p-7 bg-slate-50/40 rounded-xl border border-slate-100">
                       {activePost.content}
                     </div>
 
@@ -2841,7 +2791,13 @@ export default function App() {
           
           <div className="space-y-3">
             <div className="flex items-center gap-2.5 text-white">
-              <span className="p-2 bg-white/10 rounded-lg text-white">⚡</span>
+              <div className="bg-white/10 text-white p-1.5 rounded-lg shrink-0">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.25" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20" />
+                </svg>
+              </div>
               <span className="font-serif font-bold text-base text-white">URAL Travel Intelligence</span>
             </div>
             <p className="leading-relaxed text-slate-400">

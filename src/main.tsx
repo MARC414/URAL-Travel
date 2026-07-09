@@ -8,7 +8,8 @@ if (typeof window !== "undefined") {
   const suppressKeywords = [
     'resizeobserver', 'loop completed', 'loop limit', 'cyclic object', 'circular reference',
     'network', 'fetch', 'script', 'timeout', 'time out', 'timed out', 'tpemd', 'cors',
-    'abort', 'offline', 'failed', 'block', 'load', 'refused', 'status', 'http', 'websocket'
+    'abort', 'offline', 'failed', 'block', 'load', 'refused', 'status', 'http', 'websocket',
+    'emrld', 'emerald'
   ];
 
   const shouldSuppressError = (msg?: string) => {
@@ -74,6 +75,16 @@ if (typeof window !== "undefined") {
   };
 
   window.addEventListener("error", (e) => {
+    const target = e.target as any;
+    if (target && (target.tagName === "SCRIPT" || target.tagName === "LINK" || target.tagName === "IMG" || target.tagName === "IFRAME")) {
+      const src = target.src || target.href || "";
+      if (shouldSuppressError(src) || src.includes("emrld") || src.includes("emerald")) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return;
+      }
+    }
+
     if (e.message && shouldSuppressError(e.message)) {
       e.stopImmediatePropagation();
       e.preventDefault();
