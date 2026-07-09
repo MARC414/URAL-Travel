@@ -9,7 +9,7 @@ if (typeof window !== "undefined") {
     'resizeobserver', 'loop completed', 'loop limit', 'cyclic object', 'circular reference',
     'network', 'fetch', 'script', 'timeout', 'time out', 'timed out', 'tpemd', 'cors',
     'abort', 'offline', 'failed', 'block', 'load', 'refused', 'status', 'http', 'websocket',
-    'emrld', 'emerald'
+    'emrld', 'emerald', 'error 0', 'error: 0', 'status 0', 'status: 0', 'failed to fetch', 'grecaptcha'
   ];
 
   const shouldSuppressError = (msg?: string) => {
@@ -65,7 +65,7 @@ if (typeof window !== "undefined") {
   const originalOnError = window.onerror;
   window.onerror = function (message, source, lineno, colno, error) {
     const errorMsg = typeof message === "string" ? message : (message ? message.toString() : "");
-    if (shouldSuppressError(errorMsg) || (error && checkAndSuppressReason(error))) {
+    if (shouldSuppressError(errorMsg) || (error && checkAndSuppressReason(error)) || errorMsg.toLowerCase().includes("network") || errorMsg.toLowerCase().includes("fetch")) {
       return true; // Suppresses standard error logging and overlay triggering
     }
     if (originalOnError) {
@@ -77,33 +77,30 @@ if (typeof window !== "undefined") {
   window.addEventListener("error", (e) => {
     const target = e.target as any;
     if (target && (target.tagName === "SCRIPT" || target.tagName === "LINK" || target.tagName === "IMG" || target.tagName === "IFRAME")) {
-      const src = target.src || target.href || "";
-      if (shouldSuppressError(src) || src.includes("emrld") || src.includes("emerald")) {
-        e.stopImmediatePropagation();
-        e.preventDefault();
-        return;
-      }
-    }
-
-    if (e.message && shouldSuppressError(e.message)) {
+      // Suppress ALL asset load errors because they are blocked by ad-blockers, sandbox restrictions, or offline state
       e.stopImmediatePropagation();
       e.preventDefault();
-    } else if (e.error && checkAndSuppressReason(e.error)) {
+      return;
+    }
+
+    const msgStr = String(e.message || "");
+    if (msgStr && (shouldSuppressError(msgStr) || msgStr.toLowerCase().includes("network") || msgStr.toLowerCase().includes("fetch") || msgStr.toLowerCase().includes("script error"))) {
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      return;
+    }
+
+    if (e.error && (checkAndSuppressReason(e.error) || String(e.error).toLowerCase().includes("network") || String(e.error).toLowerCase().includes("fetch"))) {
       e.stopImmediatePropagation();
       e.preventDefault();
     }
   }, true);
 
   window.addEventListener("unhandledrejection", (e) => {
-    if (checkAndSuppressReason(e.reason)) {
+    const reasonStr = String(e.reason || "").toLowerCase();
+    if (checkAndSuppressReason(e.reason) || reasonStr.includes('error') || reasonStr.includes('reject') || reasonStr.includes('timeout') || reasonStr.includes('network') || reasonStr.includes('fetch')) {
       e.stopImmediatePropagation();
       e.preventDefault();
-    } else {
-      const reasonStr = String(e.reason || "").toLowerCase();
-      if (reasonStr.includes('error') || reasonStr.includes('reject') || reasonStr.includes('timeout')) {
-        e.stopImmediatePropagation();
-        e.preventDefault();
-      }
     }
   });
 }

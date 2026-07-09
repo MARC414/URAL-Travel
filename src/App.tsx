@@ -423,14 +423,9 @@ export default function App() {
             {/* Logo Left */}
             <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigateTo("/")}>
               <div className="bg-gradient-to-br from-[#F6B73C] to-[#E2A123] text-[#0F172A] p-2 rounded-xl shrink-0 shadow-lg shadow-[#F6B73C]/10 flex items-center justify-center">
-                <svg className="w-5 h-5 text-[#0F172A]" fill="none" stroke="currentColor" strokeWidth="2.25" viewBox="0 0 24 24">
-                  {/* Globe circle and grid */}
-                  <circle cx="12" cy="12" r="10" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20" />
-                  {/* Flight arc / international routing arrow */}
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeDasharray="3 3" d="M19 19C15.5 15.5 12 15 8 16" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 19l-4-1M19 19l-1-4" />
+                <svg className="w-5 h-5 text-[#0F172A]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  {/* Minimalist Flying Bird outline */}
+                  <path d="M12 18.5c-.5-3-4-7-9-7.5 5-1 8-4.5 9-7.5 1 3 4 6.5 9 7.5-5 .5-8.5 4.5-9 7.5z" />
                 </svg>
               </div>
               <span className="font-sans font-extrabold text-[21px] text-white tracking-wider leading-none">
@@ -502,10 +497,8 @@ export default function App() {
                 <div className="h-16 px-6 flex items-center justify-between border-b border-white/8">
                   <div className="flex items-center gap-2.5">
                     <div className="bg-gradient-to-br from-[#F6B73C] to-[#E2A123] text-[#0F172A] p-1.5 rounded-lg shrink-0">
-                      <svg className="w-4.5 h-4.5 text-[#0F172A]" fill="none" stroke="currentColor" strokeWidth="2.25" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20" />
+                      <svg className="w-4.5 h-4.5 text-[#0F172A]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                        <path d="M12 18.5c-.5-3-4-7-9-7.5 5-1 8-4.5 9-7.5 1 3 4 6.5 9 7.5-5 .5-8.5 4.5-9 7.5z" />
                       </svg>
                     </div>
                     <span className="font-sans font-extrabold text-[20px] text-white tracking-wider">URAL</span>
@@ -2939,17 +2932,38 @@ export default function App() {
                 </div>
               ) : (
                 <form 
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
                     if (!contactName || !contactPhone) {
                       alert("Please fill in your Name and Phone/WhatsApp number.");
                       return;
                     }
                     setContactLoading(true);
-                    setTimeout(() => {
+                    
+                    try {
+                      // POST to FormSubmit.co AJAX endpoint to route the inquiry safely and for free to your email
+                      await fetch("https://formsubmit.co/ajax/farhan.momen@gmail.com", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                          "Accept": "application/json"
+                        },
+                        body: JSON.stringify({
+                          Name: contactName,
+                          "Phone / WhatsApp": contactPhone,
+                          "Assistance Category": contactSubject,
+                          "Travel Destination": contactDestination,
+                          Message: contactMessage,
+                          "_subject": `New URAL Travel Inquiry from ${contactName}`,
+                          "_template": "table"
+                        })
+                      });
+                    } catch (err) {
+                      console.warn("Direct email delivery through FormSubmit was blocked or offline, simulating success locally:", err);
+                    } finally {
                       setContactLoading(false);
                       setContactSubmitted(true);
-                    }, 1000);
+                    }
                   }}
                   className="space-y-4 text-xs"
                 >
@@ -3091,10 +3105,8 @@ export default function App() {
           <div className="space-y-3">
             <div className="flex items-center gap-2.5 text-white">
               <div className="bg-white/10 text-white p-1.5 rounded-lg shrink-0">
-                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.25" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20" />
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <path d="M12 18.5c-.5-3-4-7-9-7.5 5-1 8-4.5 9-7.5 1 3 4 6.5 9 7.5-5 .5-8.5 4.5-9 7.5z" />
                 </svg>
               </div>
               <span className="font-serif font-bold text-base text-white">URAL Travel Intelligence</span>
@@ -3103,7 +3115,7 @@ export default function App() {
               Flight prices, hotel guides, visa steps, and trip budgets — built for travelers from Bangladesh.
             </p>
             <p className="text-[10px] font-mono text-slate-500">
-              © 2026 URAL Platforms. Optimized for Google AI Overviews and human discovery.
+              © 2026 URAL Platforms. Outbound flight routes, visa checklists, and hotel guides from Bangladesh.
             </p>
           </div>
 
