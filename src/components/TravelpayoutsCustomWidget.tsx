@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Plane, Building, Search, ArrowRightLeft, Calendar, Users, Percent, Flame, ExternalLink, ShieldAlert } from "lucide-react";
 
-interface TravelpayoutsWidgetProps {
+interface TravelpayoutsCustomWidgetProps {
   initialTab?: "flights" | "hotels";
   initialFrom?: string;
   initialTo?: string;
   initialHotelCity?: string;
 }
 
-export function TravelpayoutsWidget({
+export function TravelpayoutsCustomWidget({
   initialTab = "flights",
   initialFrom = "Dhaka (DAC)",
   initialTo = "Kathmandu (KTM)",
   initialHotelCity = "Kathmandu"
-}: TravelpayoutsWidgetProps = {}) {
+}: TravelpayoutsCustomWidgetProps = {}) {
   const [searchTab, setSearchTab] = useState<"flights" | "hotels">(initialTab);
   const [fromCity, setFromCity] = useState(initialFrom);
   const [toCity, setToCity] = useState(initialTo);

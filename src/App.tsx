@@ -32,7 +32,8 @@ import { FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, DESTINATIONS_DATA, TRIP_COSTS_DAT
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
 import { TravelpayoutsOnboarding } from "./components/TravelpayoutsOnboarding";
-import { TravelpayoutsWidget } from "./components/TravelpayoutsWidget";
+import { TravelpayoutsCustomWidget } from "./components/TravelpayoutsCustomWidget";
+import TravelpayoutsWidget from "./components/TravelpayoutsWidget.jsx";
 import { TravelpayoutsEmbed } from "./components/TravelpayoutsEmbed";
 import { TrustpilotReviews } from "./components/TrustpilotReviews";
 import { InteractiveTools } from "./components/InteractiveTools";
@@ -712,7 +713,7 @@ export default function App() {
               <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-2 sm:p-5 shadow-2xl w-full">
                 <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase block mb-3 px-2 tracking-wider">✈️ LIVE FLIGHT PRICE SEARCH</span>
                 <div className="text-slate-900">
-                  <TravelpayoutsEmbed />
+                  <TravelpayoutsWidget />
                 </div>
               </div>
             </div>
@@ -821,7 +822,7 @@ export default function App() {
               {/* HOTEL WIDGET INTEGRATION: Visually distinct & secondary to flights widget */}
               <div className="w-full text-slate-900 bg-white rounded-2xl p-2 sm:p-4 shadow-xl">
                 <span className="text-[10px] font-mono font-bold text-slate-500 uppercase block mb-3 px-2">🏨 Search Hotels</span>
-                <TravelpayoutsWidget initialTab="hotels" />
+                <TravelpayoutsCustomWidget initialTab="hotels" />
               </div>
 
               {/* Quick links to pre-filled hotel lookups */}
@@ -1401,7 +1402,7 @@ export default function App() {
                     </div>
 
                     {/* Widget */}
-                    <TravelpayoutsWidget 
+                    <TravelpayoutsCustomWidget 
                       initialTab="hotels"
                       initialHotelCity={activeHotel.city}
                       initialTo={activeHotel.city === "Kathmandu" ? "Kathmandu (KTM)" : activeHotel.city === "Bangkok" ? "Bangkok (BKK)" : activeHotel.city === "Dubai" ? "Dubai (DXB)" : "Kuala Lumpur (KUL)"}
@@ -1730,7 +1731,7 @@ export default function App() {
                           </div>
                           <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200 text-slate-900">
                             <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">🏨 LIVE HOTEL COMPARISON ENGINE</span>
-                            <TravelpayoutsWidget 
+                            <TravelpayoutsCustomWidget 
                               initialTab="hotels"
                               initialTo="Dubai (DXB)"
                               initialHotelCity="Dubai"
@@ -2045,7 +2046,7 @@ export default function App() {
 
                           <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200 text-slate-900">
                             <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">🏨 LIVE ACCOMMODATION COMPARISON ENGINE</span>
-                            <TravelpayoutsWidget 
+                            <TravelpayoutsCustomWidget 
                               initialTab="hotels"
                               initialTo={activeDes.country === "Nepal" ? "Kathmandu (KTM)" : activeDes.country === "Thailand" ? "Bangkok (BKK)" : activeDes.country === "UAE" ? "Dubai (DXB)" : "Kuala Lumpur (KUL)"}
                               initialHotelCity={activeDes.country === "Nepal" ? "Kathmandu" : activeDes.country === "Thailand" ? "Bangkok" : activeDes.country === "UAE" ? "Dubai" : "Kuala Lumpur"}
@@ -2559,7 +2560,7 @@ export default function App() {
                     <h3 className="font-serif text-base font-bold text-[#102A43]">Step 2: Book your hotel</h3>
                   </div>
                   <div className="pl-0 sm:pl-11">
-                    <TravelpayoutsWidget initialTab="hotels" />
+                    <TravelpayoutsCustomWidget initialTab="hotels" />
                   </div>
                 </div>
 

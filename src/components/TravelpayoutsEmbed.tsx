@@ -52,6 +52,10 @@ export function TravelpayoutsEmbed() {
         </div>
       )}
 
+      {/* Travelpayouts White Label Web Engine mounting points */}
+      <div id="tpwl-search" className="w-full"></div>
+      <div id="tpwl-tickets" className="w-full"></div>
+
       <div 
         ref={scriptContainerRef} 
         style={{ display: status === "loaded" ? "block" : "none" }}

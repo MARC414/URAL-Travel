@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travelpayouts Search</title>
+  <base target="_blank" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      overflow-x: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .tpwl-wrapper {
+      width: 100%;
+      padding: 6px 8px;
+    }
+    #tpwl-search {
+      width: 100%;
+      min-height: 50px;
+    }
+    #tpwl-tickets {
+      width: 100%;
+      margin-top: 12px;
+    }
+  </style>
+  <script type="module" src="https://tpemd.com/wl_web/main.js?wl_id=22462" async></script>
+</head>
+<body>
+  <div class="tpwl-wrapper" id="tpwl-container">
+    <div id="tpwl-search"></div>
+    <div id="tpwl-tickets"></div>
+  </div>
+
+  <script>
+    (function() {
+      var lastSentHeight = 0;
+
+      function measureAndSend() {
+        var container = document.getElementById('tpwl-container');
+        if (!container) return;
+
+        // Measure exclusively the content wrapper to avoid infinite loop with window/html height
+        var rect = container.getBoundingClientRect();
+        var h = Math.ceil(Math.max(rect.height, container.scrollHeight, container.offsetHeight));
+
+        // Ignore empty/unmounted states
+        if (h < 40) return;
+
+        // Only dispatch when height genuinely changes by at least 6px
+        if (Math.abs(h - lastSentHeight) >= 6) {
+          lastSentHeight = h;
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: 'tpwl-resize', height: h }, '*');
+          }
+        }
+      }
+
+      window.addEventListener('load', function() {
+        measureAndSend();
+
+        // Observe only the container element, NOT document.body or html
+        if (window.ResizeObserver) {
+          var ro = new ResizeObserver(function() {
+            measureAndSend();
+          });
+          var target = document.getElementById('tpwl-container');
+          if (target) {
+            ro.observe(target);
+          }
+        }
+
+        // Staggered measurements after external script loads and renders
+        setTimeout(measureAndSend, 300);
+        setTimeout(measureAndSend, 800);
+        setTimeout(measureAndSend, 1800);
+        setTimeout(measureAndSend, 3500);
+      });
+    })();
+  </script>
+</body>
+</html>
