@@ -47,6 +47,9 @@ import {
   AFFILIATE_LINKS
 } from "./components/AffiliatePartners";
 import { useSeoMeta, buildFaqSchema } from "./hooks/useSeoMeta";
+import { Language, translations } from "./translations";
+import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
 const heroBgImage = new URL("./assets/images/clouds_boat_hero_1781438671378.jpg", import.meta.url).href;
 const coxsBazarSunriseImg = new URL("./assets/images/coxs_bazar_sunrise_1781620718331.jpg", import.meta.url).href;
 const nepalDestImg = new URL("./assets/images/nepal_destination_1781544132297.jpg", import.meta.url).href;
@@ -84,6 +87,22 @@ export default function App() {
       setAffiliateToast(null);
     }, 4500);
   };
+  const [lang, setLang] = useState<Language>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("ural_lang");
+      if (saved === "bn" || saved === "en") return saved;
+    }
+    return "en";
+  });
+
+  const handleLangToggle = (newLang: Language) => {
+    setLang(newLang);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("ural_lang", newLang);
+    }
+  };
+
+  const t = translations[lang];
   const [heroHotelCity, setHeroHotelCity] = useState("kathmandu-hotels");
   const [heroVisaCountry, setHeroVisaCountry] = useState("nepal-visa");
 
@@ -364,7 +383,7 @@ export default function App() {
     }
   } else if (section === "contact") {
     seoTitle = "Contact URAL — Direct Phone & WhatsApp Support";
-    seoDescription = "Connect directly with our flight & visa support desk at +8801784385335. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.";
+    seoDescription = "Connect directly with our flight & visa support desk at +8801784385336. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.";
     seoSchema = undefined;
     seoBreadcrumbs = [
       { name: "Home", url: "https://ural.travel/" },
@@ -408,11 +427,11 @@ export default function App() {
         {/* 🟦 TOP STRIP (Height: 36px, Background: #0B1628) */}
         <div className="w-full bg-[#0B1628] h-9 flex items-center select-none">
           <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between text-white/55 text-xs">
-            <span className="truncate font-sans font-medium">Flights, Hotels & Visa Guides for Bangladeshi Travelers</span>
-            <div className="flex items-center gap-3 shrink-0 font-sans text-[11px] font-medium">
-              <span className="flex items-center gap-1.5 cursor-default">🇧🇩 English (BDT)</span>
+            <span className="truncate font-sans font-medium">{t.topStripTagline}</span>
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0 font-sans text-[11px] font-medium">
+              <TopBarWhatsApp lang={lang} />
               <span className="w-px h-3 bg-white/20"></span>
-              <span className="cursor-default">৳ BDT</span>
+              <LanguageSwitcher lang={lang} onToggle={handleLangToggle} />
             </div>
           </div>
         </div>
@@ -437,15 +456,15 @@ export default function App() {
             {/* Navigation Centered */}
             <nav className="hidden md:flex items-center gap-7">
               {[
-                { id: "home", label: "Home", path: "/" },
-                { id: "flights", label: "Flights", path: "/flights" },
-                { id: "hotels", label: "Hotels", path: "/hotels" },
-                { id: "visa", label: "Visa", path: "/visa" },
-                { id: "destinations", label: "Destinations", path: "/destinations" },
-                { id: "costs", label: "Costs", path: "/costs" },
-                { id: "tools", label: "Tools", path: "/tools" },
-                { id: "blog", label: "Blog", path: "/blog" },
-                { id: "contact", label: "Contact", path: "/contact" }
+                { id: "home", label: t.navHome, path: "/" },
+                { id: "flights", label: t.navFlights, path: "/flights" },
+                { id: "hotels", label: t.navHotels, path: "/hotels" },
+                { id: "visa", label: t.navVisa, path: "/visa" },
+                { id: "destinations", label: t.navDestinations, path: "/destinations" },
+                { id: "costs", label: t.navCosts, path: "/costs" },
+                { id: "tools", label: t.navTools, path: "/tools" },
+                { id: "blog", label: t.navBlog, path: "/blog" },
+                { id: "contact", label: t.navContact, path: "/contact" }
               ].map((item) => (
                 <button
                   key={item.id}
@@ -467,7 +486,7 @@ export default function App() {
                 onClick={() => navigateTo("/destinations")}
                 className="hidden md:block bg-[#F6B73C] text-[#0F172A] hover:bg-[#D4941A] font-bold text-sm rounded-full px-5 py-2 shadow-md transition-colors whitespace-nowrap cursor-pointer"
               >
-                Start Trip
+                {t.startTripCta}
               </button>
 
               {/* Mobile Hamburger Menu Burger */}
@@ -515,15 +534,15 @@ export default function App() {
                 {/* Nav List */}
                 <nav className="flex-1 py-4 overflow-y-auto">
                   {[
-                    { id: "home", label: "Home", path: "/" },
-                    { id: "flights", label: "Flights", path: "/flights" },
-                    { id: "hotels", label: "Hotels", path: "/hotels" },
-                    { id: "visa", label: "Visa", path: "/visa" },
-                    { id: "destinations", label: "Destinations", path: "/destinations" },
-                    { id: "costs", label: "Costs", path: "/costs" },
-                    { id: "tools", label: "Tools", path: "/tools" },
-                    { id: "blog", label: "Blog", path: "/blog" },
-                    { id: "contact", label: "Contact", path: "/contact" }
+                    { id: "home", label: t.navHome, path: "/" },
+                    { id: "flights", label: t.navFlights, path: "/flights" },
+                    { id: "hotels", label: t.navHotels, path: "/hotels" },
+                    { id: "visa", label: t.navVisa, path: "/visa" },
+                    { id: "destinations", label: t.navDestinations, path: "/destinations" },
+                    { id: "costs", label: t.navCosts, path: "/costs" },
+                    { id: "tools", label: t.navTools, path: "/tools" },
+                    { id: "blog", label: t.navBlog, path: "/blog" },
+                    { id: "contact", label: t.navContact, path: "/contact" }
                   ].map((item) => (
                     <button
                       key={item.id}
@@ -542,7 +561,19 @@ export default function App() {
                 </nav>
 
                 {/* Drawer CTA Footer */}
-                <div className="p-6 border-t border-white/8 bg-[#0B1628]">
+                <div className="p-6 border-t border-white/8 bg-[#0B1628] space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-white/60 font-medium">Language / ভাষা:</span>
+                    <LanguageSwitcher lang={lang} onToggle={handleLangToggle} />
+                  </div>
+                  <a
+                    href="https://wa.me/8801784385336?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow transition-colors"
+                  >
+                    <span>💬 WhatsApp: 01784385336</span>
+                  </a>
                   <button
                     onClick={() => {
                       navigateTo("/destinations");
@@ -550,7 +581,7 @@ export default function App() {
                     }}
                     className="w-full bg-[#F6B73C] text-[#0F172A] hover:bg-[#D4941A] font-bold text-xs uppercase py-3 rounded-full shadow-md text-center tracking-wider transition-colors"
                   >
-                    Start Trip
+                    {t.startTripCta}
                   </button>
                 </div>
               </div>
@@ -700,18 +731,18 @@ export default function App() {
             <div id="live-flight-search" className="scroll-mt-12 space-y-6">
               <div className="text-center space-y-2">
                 <span className="text-[10px] font-mono font-bold text-[#0F172A] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">
-                  Real-time ticket search
+                  {t.searchSectionBadge}
                 </span>
                 <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-                  Search Jet Fares from Dhaka
+                  {t.searchSectionTitle}
                 </h2>
                 <p className="text-xs text-slate-500 max-w-xl mx-auto">
-                  Powered by a global aviation scanner to secure the best rates. Direct, multi-stop, and promotional ticket options.
+                  {t.searchSectionSubtitle}
                 </p>
               </div>
 
               <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-2 sm:p-5 shadow-2xl w-full">
-                <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase block mb-3 px-2 tracking-wider">✈️ LIVE FLIGHT PRICE SEARCH</span>
+                <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase block mb-3 px-2 tracking-wider">{t.liveSearchBoxHeader}</span>
                 <div className="text-slate-900">
                   <TravelpayoutsWidget />
                 </div>
@@ -721,9 +752,9 @@ export default function App() {
             {/* 🟦 SECTION 2: QUICK DESTINATION ENTRY */}
             <div id="destinations-section" className="scroll-mt-12 space-y-6">
               <div className="text-center space-y-2">
-                <span className="text-[10px] font-mono font-bold text-[#0F172A] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">Popular destinations from Bangladesh</span>
-                <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Where Are You Flying Next?</h2>
-                <p className="text-xs text-slate-500 max-w-xl mx-auto">Pick a destination to see flights, visa requirements, hotel guides, and a full trip budget — all in BDT.</p>
+                <span className="text-[10px] font-mono font-bold text-[#0F172A] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">{t.destinationsBadge}</span>
+                <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{t.destinationsTitle}</h2>
+                <p className="text-xs text-slate-500 max-w-xl mx-auto">{t.destinationsSubtitle}</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -2848,12 +2879,12 @@ export default function App() {
                   The fastest way to get custom support. Ask visa questions, seek roundtrip ticket packages, or request customized hotel bookings.
                 </p>
                 <a 
-                  href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" 
+                  href="https://wa.me/8801784385336?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
                 >
-                  Chat on WhatsApp (+8801784385335)
+                  Chat on WhatsApp (+8801784385336)
                 </a>
               </div>
             </div>
@@ -2872,10 +2903,10 @@ export default function App() {
                   Talk directly to the director. Get immediate verification of requirements, active flight check comparisons, and reliable counsel.
                 </p>
                 <a 
-                  href="tel:+8801784385335" 
+                  href="tel:+8801784385336" 
                   className="inline-flex items-center gap-2 bg-[#102A43] hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
                 >
-                  Call Directly (+8801784385335)
+                  Call Directly (+8801784385336)
                 </a>
               </div>
             </div>
@@ -3087,7 +3118,7 @@ export default function App() {
 
               <div className="bg-slate-250 p-4 rounded-xl border border-slate-300 text-center space-y-1">
                 <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">DIRECT DIAL DESK</span>
-                <span className="text-sm font-serif font-black text-[#102A43] block">+8801784385335</span>
+                <span className="text-sm font-serif font-black text-[#102A43] block">+8801784385336</span>
                 <span className="text-[9px] text-slate-400 block">Available 24/7 on WhatsApp Messenger</span>
               </div>
             </div>
@@ -3153,11 +3184,11 @@ export default function App() {
             <div className="space-y-2 text-xs">
               <div className="flex items-center gap-1.5">
                 <span className="text-emerald-400">💬</span>
-                <a href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline text-emerald-400 font-mono font-bold">WhatsApp Chat</a>
+                <a href="https://wa.me/8801784385336?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline text-emerald-400 font-mono font-bold">WhatsApp: 01784385336</a>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="text-[#F6B73C]">📞</span>
-                <a href="tel:+8801784385335" className="hover:text-white hover:underline text-[#F6B73C] font-mono font-bold">Direct Call: +8801784385335</a>
+                <a href="tel:+8801784385336" className="hover:text-white hover:underline text-[#F6B73C] font-mono font-bold">Direct Call: +8801784385336</a>
               </div>
               <div className="pt-1">
                 <button onClick={() => navigateTo("/contact")} className="bg-slate-800 text-[#F6B73C] hover:bg-slate-700 px-3 py-1.5 rounded-md font-bold text-[10px] uppercase tracking-wide cursor-pointer transition-colors">
@@ -3188,6 +3219,9 @@ export default function App() {
           <button onClick={() => setAffiliateToast(null)} className="text-slate-400 hover:text-white font-mono text-xs cursor-pointer ml-auto">×</button>
         </div>
       )}
+
+      {/* Direct Floating WhatsApp Contact Launcher */}
+      <WhatsAppSupport lang={lang} />
 
     </div>
   );
