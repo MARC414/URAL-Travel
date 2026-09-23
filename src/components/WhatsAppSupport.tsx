@@ -8,8 +8,8 @@ interface WhatsAppSupportProps {
 
 export function WhatsAppSupport({ lang }: WhatsAppSupportProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const phoneNumber = "8801784385336";
-  const displayPhone = "01784385336";
+  const phoneNumber = "8801784385335";
+  const displayPhone = "01784385335";
 
   const quickMessages = lang === "bn" ? [
     { label: "✈️ ঢাকা থেকে কম ভাড়ার টিকিট জানতে চাই", text: "হ্যালো Ural Travel! ঢাকা থেকে সাশ্রয়ী ফ্লাইটের দাম ও তারিখ জানতে চাই।" },
@@ -139,8 +139,8 @@ export function WhatsAppSupport({ lang }: WhatsAppSupportProps) {
 }
 
 export function TopBarWhatsApp({ lang }: WhatsAppSupportProps) {
-  const phoneNumber = "8801784385336";
-  const displayPhone = "01784385336";
+  const phoneNumber = "8801784385335";
+  const displayPhone = "01784385335";
   const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
     lang === "bn"
       ? "হ্যালো Ural Travel! ঢাকা থেকে ফ্লাইট ও ভিসা সংক্রান্ত তথ্য জানতে চাচ্ছি।"

@@ -46,10 +46,11 @@ import {
   PartnerLinkButton,
   AFFILIATE_LINKS
 } from "./components/AffiliatePartners";
-import { useSeoMeta, buildFaqSchema } from "./hooks/useSeoMeta";
+import { useSeoMeta, buildFaqSchema, getFaqSchemaForPage } from "./hooks/useSeoMeta";
 import { Language, translations } from "./translations";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
+import { PriceAlertModal } from "./components/PriceAlertModal";
 const heroBgImage = new URL("./assets/images/clouds_boat_hero_1781438671378.jpg", import.meta.url).href;
 const coxsBazarSunriseImg = new URL("./assets/images/coxs_bazar_sunrise_1781620718331.jpg", import.meta.url).href;
 const nepalDestImg = new URL("./assets/images/nepal_destination_1781544132297.jpg", import.meta.url).href;
@@ -103,6 +104,14 @@ export default function App() {
   };
 
   const t = translations[lang];
+  const [isPriceAlertOpen, setIsPriceAlertOpen] = useState(false);
+  const [alertDestination, setAlertDestination] = useState("Bangkok (BKK)");
+
+  const openPriceAlert = (dest?: string) => {
+    if (dest) setAlertDestination(dest);
+    setIsPriceAlertOpen(true);
+  };
+
   const [heroHotelCity, setHeroHotelCity] = useState("kathmandu-hotels");
   const [heroVisaCountry, setHeroVisaCountry] = useState("nepal-visa");
 
@@ -196,29 +205,34 @@ export default function App() {
   } else if (section === "flights") {
     const activeRoute = FLIGHTS_DATA.find(r => r.id === parameterId) || FLIGHTS_DATA[0];
     const year = new Date().getFullYear();
-    seoTitle = activeRoute.id === "dhaka-kathmandu"
-      ? `Dhaka to Kathmandu Flight Guide 2026: Price, Time & Visa | URAL`
-      : `Flights from Dhaka to ${activeRoute.to.split(" (")[0]} (${activeRoute.country}) ${year} | URAL`;
-    seoDescription = activeRoute.id === "dhaka-kathmandu"
-      ? `Direct Dhaka to Kathmandu flights take 1h30m on Biman Bangladesh or Himalaya Airlines, from BDT 28,000 roundtrip. Bangladeshis get a free visa on arrival.`
-      : `Compare flights from Dhaka to ${activeRoute.to.split(" (")[0]}. Check flight duration, direct airlines, and BDT fares.`;
     
-    let schemaObj: any = undefined;
-    try {
-      if (activeRoute.schemaMarkup?.code) {
-        schemaObj = JSON.parse(activeRoute.schemaMarkup.code);
-      }
-    } catch (e) {
-      console.error("Schema parse error:", e);
-    }
-    seoSchema = schemaObj ? [schemaObj, buildFaqSchema(activeRoute.faqs)] : buildFaqSchema(activeRoute.faqs);
-
     if (isLanding) {
+      seoTitle = `Flights from Dhaka: Compare Fares, Routes & Airlines (${year}) | URAL`;
+      seoDescription = "Compare cheap international flights from Hazrat Shahjalal International Airport (DAC) to Nepal, Thailand, Malaysia, and Dubai. View flight duration, direct airlines, and BDT fares.";
+      seoSchema = getFaqSchemaForPage("flights", undefined, true, "https://ural.travel/flights");
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural.travel/" },
         { name: "Flight Guides", url: "https://ural.travel/flights" }
       ];
     } else {
+      seoTitle = activeRoute.id === "dhaka-kathmandu"
+        ? `Dhaka to Kathmandu Flight Guide 2026: Price, Time & Visa | URAL`
+        : `Flights from Dhaka to ${activeRoute.to.split(" (")[0]} (${activeRoute.country}) ${year} | URAL`;
+      seoDescription = activeRoute.id === "dhaka-kathmandu"
+        ? `Direct Dhaka to Kathmandu flights take 1h30m on Biman Bangladesh or Himalaya Airlines, from BDT 28,000 roundtrip. Bangladeshis get a free visa on arrival.`
+        : `Compare flights from Dhaka to ${activeRoute.to.split(" (")[0]}. Check flight duration, direct airlines, and BDT fares.`;
+      
+      let schemaObj: any = undefined;
+      try {
+        if (activeRoute.schemaMarkup?.code) {
+          schemaObj = JSON.parse(activeRoute.schemaMarkup.code);
+        }
+      } catch (e) {
+        console.error("Schema parse error:", e);
+      }
+      const faqSchema = getFaqSchemaForPage("flights", activeRoute.id, false, `https://ural.travel/flights?route=${activeRoute.id}`);
+      seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
+
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural.travel/" },
         { name: "Flight Guides", url: "https://ural.travel/flights" },
@@ -228,29 +242,34 @@ export default function App() {
 
   } else if (section === "hotels") {
     const activeHotel = HOTELS_DATA.find(h => h.id === parameterId) || HOTELS_DATA[0];
-    seoTitle = activeHotel.id === "kathmandu-hotels"
-       ? `Best Hotels in Kathmandu for Bangladeshi Travelers (2026) | URAL`
-       : `Top Rated Hotels in ${activeHotel.city} | URAL`;
-    seoDescription = activeHotel.id === "kathmandu-hotels"
-       ? `Where to stay in Kathmandu: Thamel for budget travelers from BDT 1,500/night, Lazimpat for comfort, and Boudha for a quieter trip. Full neighborhood guide.`
-       : `Compare clean rooms, recommended zones, and hotels in ${activeHotel.city} starting from cheap BDT tourist rates.`;
     
-    let schemaObj: any = undefined;
-    try {
-      if (activeHotel.schemaMarkup?.code) {
-        schemaObj = JSON.parse(activeHotel.schemaMarkup.code);
-      }
-    } catch (e) {
-      console.error("Schema parse error:", e);
-    }
-    seoSchema = schemaObj ? [schemaObj, buildFaqSchema(activeHotel.faqs)] : buildFaqSchema(activeHotel.faqs);
-
     if (isLanding) {
+      seoTitle = `International Hotel Guides for Bangladeshi Travelers (2026) | URAL`;
+      seoDescription = "Find top-rated budget & family hotels in Kathmandu, Bangkok, Kuala Lumpur, and Dubai. Neighborhood safety, halal dining, and BDT payment guides.";
+      seoSchema = getFaqSchemaForPage("hotels", undefined, true, "https://ural.travel/hotels");
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural.travel/" },
         { name: "Hotel Neighborhoods", url: "https://ural.travel/hotels" }
       ];
     } else {
+      seoTitle = activeHotel.id === "kathmandu-hotels"
+        ? `Best Hotels in Kathmandu for Bangladeshi Travelers (2026) | URAL`
+        : `Top Rated Hotels in ${activeHotel.city} | URAL`;
+      seoDescription = activeHotel.id === "kathmandu-hotels"
+        ? `Where to stay in Kathmandu: Thamel for budget travelers from BDT 1,500/night, Lazimpat for comfort, and Boudha for a quieter trip. Full neighborhood guide.`
+        : `Compare clean rooms, recommended zones, and hotels in ${activeHotel.city} starting from cheap BDT tourist rates.`;
+      
+      let schemaObj: any = undefined;
+      try {
+        if (activeHotel.schemaMarkup?.code) {
+          schemaObj = JSON.parse(activeHotel.schemaMarkup.code);
+        }
+      } catch (e) {
+        console.error("Schema parse error:", e);
+      }
+      const faqSchema = getFaqSchemaForPage("hotels", activeHotel.id, false, `https://ural.travel/hotels?city=${activeHotel.id}`);
+      seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
+
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural.travel/" },
         { name: "Hotel Neighborhoods", url: "https://ural.travel/hotels" },
@@ -260,29 +279,34 @@ export default function App() {
 
   } else if (section === "visa") {
     const activeVisa = VISA_DATA.find(v => v.id === parameterId) || VISA_DATA[0];
-    seoTitle = activeVisa.id === "nepal-visa"
-      ? `Nepal Visa for Bangladeshi Citizens 2026: Free Visa on Arrival Guide | URAL`
-      : `${activeVisa.country} Visa for Bangladeshi Travelers 2026 | URAL`;
-    seoDescription = activeVisa.id === "nepal-visa"
-      ? `Bangladeshi citizens get a free 30-day Nepal visa on arrival for their first trip each year. Full document checklist, fees for repeat visits, and step-by-step process.`
-      : `Check complete visa requirements, costs in BDT, step-by-step instructions, and checklist for ${activeVisa.country} from Dhaka.`;
     
-    let schemaObj: any = undefined;
-    try {
-      if (activeVisa.schemaMarkup?.code) {
-        schemaObj = JSON.parse(activeVisa.schemaMarkup.code);
-      }
-    } catch (e) {
-      console.error("Schema parse error:", e);
-    }
-    seoSchema = schemaObj ? [schemaObj, buildFaqSchema(activeVisa.faqs)] : buildFaqSchema(activeVisa.faqs);
-
     if (isLanding) {
+      seoTitle = `Visa Requirements for Bangladeshi Citizens 2026: Guides & Checklists | URAL`;
+      seoDescription = "Check complete tourist visa guides for Bangladeshi citizens. Learn about free Visa on Arrival in Nepal, Thailand sticker visa rules, Malaysia eVisa, and Dubai visas.";
+      seoSchema = getFaqSchemaForPage("visa", undefined, true, "https://ural.travel/visa");
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural.travel/" },
         { name: "Visa Guides", url: "https://ural.travel/visa" }
       ];
     } else {
+      seoTitle = activeVisa.id === "nepal-visa"
+        ? `Nepal Visa for Bangladeshi Citizens 2026: Free Visa on Arrival Guide | URAL`
+        : `${activeVisa.country} Visa for Bangladeshi Travelers 2026 | URAL`;
+      seoDescription = activeVisa.id === "nepal-visa"
+        ? `Bangladeshi citizens get a free 30-day Nepal visa on arrival for their first trip each year. Full document checklist, fees for repeat visits, and step-by-step process.`
+        : `Check complete visa requirements, costs in BDT, step-by-step instructions, and checklist for ${activeVisa.country} from Dhaka.`;
+      
+      let schemaObj: any = undefined;
+      try {
+        if (activeVisa.schemaMarkup?.code) {
+          schemaObj = JSON.parse(activeVisa.schemaMarkup.code);
+        }
+      } catch (e) {
+        console.error("Schema parse error:", e);
+      }
+      const faqSchema = getFaqSchemaForPage("visa", activeVisa.id, false, `https://ural.travel/visa?country=${activeVisa.id}`);
+      seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
+
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural.travel/" },
         { name: "Visa Guides", url: "https://ural.travel/visa" },
@@ -292,29 +316,34 @@ export default function App() {
 
   } else if (section === "destinations") {
     const activeDes = DESTINATIONS_DATA.find(d => d.id === parameterId) || DESTINATIONS_DATA[0];
-    seoTitle = activeDes.id === "nepal-guide"
-      ? `Nepal Trip Plan from Bangladesh: 5-Day Itinerary & Costs (2026) | URAL`
-      : `${activeDes.country} Tour Itinerary & Travel Plan from Bangladesh | URAL`;
-    seoDescription = activeDes.id === "nepal-guide"
-      ? `A day-by-day Nepal itinerary for Bangladeshi travelers - Kathmandu and Pokhara highlights, local transport, food, and a realistic budget in BDT.`
-      : `Find tourist route plans, day-by-day itineraries, local transport guides, and estimated daily spends in BDT.`;
     
-    let schemaObj: any = undefined;
-    try {
-      if (activeDes.schemaMarkup?.code) {
-        schemaObj = JSON.parse(activeDes.schemaMarkup.code);
-      }
-    } catch (e) {
-      console.error("Schema parse error:", e);
-    }
-    seoSchema = schemaObj ? [schemaObj, buildFaqSchema(activeDes.faqs)] : buildFaqSchema(activeDes.faqs);
-
     if (isLanding) {
+      seoTitle = `Outbound Travel Plans & Itineraries from Bangladesh | URAL`;
+      seoDescription = "Explore hand-crafted 5-day itineraries and travel plans for Bangladeshi tourists visiting Nepal, Thailand, Malaysia, and the UAE with BDT budgets.";
+      seoSchema = getFaqSchemaForPage("destinations", undefined, true, "https://ural.travel/destinations");
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural.travel/" },
         { name: "Destinations", url: "https://ural.travel/destinations" }
       ];
     } else {
+      seoTitle = activeDes.id === "nepal-guide"
+        ? `Nepal Trip Plan from Bangladesh: 5-Day Itinerary & Costs (2026) | URAL`
+        : `${activeDes.country} Tour Itinerary & Travel Plan from Bangladesh | URAL`;
+      seoDescription = activeDes.id === "nepal-guide"
+        ? `A day-by-day Nepal itinerary for Bangladeshi travelers - Kathmandu and Pokhara highlights, local transport, food, and a realistic budget in BDT.`
+        : `Find tourist route plans, day-by-day itineraries, local transport guides, and estimated daily spends in BDT.`;
+      
+      let schemaObj: any = undefined;
+      try {
+        if (activeDes.schemaMarkup?.code) {
+          schemaObj = JSON.parse(activeDes.schemaMarkup.code);
+        }
+      } catch (e) {
+        console.error("Schema parse error:", e);
+      }
+      const faqSchema = getFaqSchemaForPage("destinations", activeDes.id, false, `https://ural.travel/destinations?country=${activeDes.id}`);
+      seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
+
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural.travel/" },
         { name: "Destinations", url: "https://ural.travel/destinations" },
@@ -324,29 +353,34 @@ export default function App() {
 
   } else if (section === "costs") {
     const activeCost = TRIP_COSTS_DATA.find(c => c.id === parameterId) || TRIP_COSTS_DATA[0];
-    seoTitle = activeCost.id === "nepal-costs"
-      ? `Nepal Trip Cost from Bangladesh 2026: Full Budget Breakdown (BDT) | URAL`
-      : `${activeCost.country} Trip Cost from Bangladesh: Full Budget Sheet | URAL`;
-    seoDescription = activeCost.id === "nepal-costs"
-      ? `What a 5-day Nepal trip really costs from Bangladesh - flights, hotels, food, and transport in BDT, from budget (BDT 45,000) to luxury.`
-      : `Detailed BDT breakdown of flights, hotels, dining, and sightseeing costs for planning your trip from Dhaka to ${activeCost.country}.`;
     
-    let schemaObj: any = undefined;
-    try {
-      if (activeCost.schemaMarkup?.code) {
-        schemaObj = JSON.parse(activeCost.schemaMarkup.code);
-      }
-    } catch (e) {
-      console.error("Schema parse error:", e);
-    }
-    seoSchema = schemaObj ? [schemaObj, buildFaqSchema(activeCost.faqs)] : buildFaqSchema(activeCost.faqs);
-
     if (isLanding) {
+      seoTitle = `International Trip Budgets from Bangladesh: Realistic BDT Cost Guides | URAL`;
+      seoDescription = "How much does an international trip really cost from Dhaka? Detailed BDT budgets for Nepal, Thailand, Malaysia, and Dubai covering flights, hotels, food & transport.";
+      seoSchema = getFaqSchemaForPage("costs", undefined, true, "https://ural.travel/costs");
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural.travel/" },
         { name: "Trip Costs", url: "https://ural.travel/costs" }
       ];
     } else {
+      seoTitle = activeCost.id === "nepal-costs"
+        ? `Nepal Trip Cost from Bangladesh 2026: Full Budget Breakdown (BDT) | URAL`
+        : `${activeCost.country} Trip Cost from Bangladesh: Full Budget Sheet | URAL`;
+      seoDescription = activeCost.id === "nepal-costs"
+        ? `What a 5-day Nepal trip really costs from Bangladesh - flights, hotels, food, and transport in BDT, from budget (BDT 45,000) to luxury.`
+        : `Detailed BDT breakdown of flights, hotels, dining, and sightseeing costs for planning your trip from Dhaka to ${activeCost.country}.`;
+      
+      let schemaObj: any = undefined;
+      try {
+        if (activeCost.schemaMarkup?.code) {
+          schemaObj = JSON.parse(activeCost.schemaMarkup.code);
+        }
+      } catch (e) {
+        console.error("Schema parse error:", e);
+      }
+      const faqSchema = getFaqSchemaForPage("costs", activeCost.id, false, `https://ural.travel/costs?country=${activeCost.id}`);
+      seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
+
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural.travel/" },
         { name: "Trip Costs", url: "https://ural.travel/costs" },
@@ -383,7 +417,7 @@ export default function App() {
     }
   } else if (section === "contact") {
     seoTitle = "Contact URAL — Direct Phone & WhatsApp Support";
-    seoDescription = "Connect directly with our flight & visa support desk at +8801784385336. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.";
+    seoDescription = "Connect directly with our flight & visa support desk at +8801784385335. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.";
     seoSchema = undefined;
     seoBreadcrumbs = [
       { name: "Home", url: "https://ural.travel/" },
@@ -567,12 +601,12 @@ export default function App() {
                     <LanguageSwitcher lang={lang} onToggle={handleLangToggle} />
                   </div>
                   <a
-                    href="https://wa.me/8801784385336?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
+                    href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow transition-colors"
                   >
-                    <span>💬 WhatsApp: 01784385336</span>
+                    <span>💬 WhatsApp: 01784385335</span>
                   </a>
                   <button
                     onClick={() => {
@@ -742,10 +776,43 @@ export default function App() {
               </div>
 
               <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-2 sm:p-5 shadow-2xl w-full">
-                <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase block mb-3 px-2 tracking-wider">{t.liveSearchBoxHeader}</span>
+                <div className="flex items-center justify-between mb-3 px-2">
+                  <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-wider">{t.liveSearchBoxHeader}</span>
+                  <button
+                    type="button"
+                    onClick={() => openPriceAlert("Bangkok (BKK)")}
+                    className="inline-flex items-center gap-1.5 text-xs text-emerald-300 hover:text-emerald-200 bg-[#25D366]/15 hover:bg-[#25D366]/25 px-2.5 py-1 rounded-md border border-[#25D366]/30 font-medium transition-colors cursor-pointer"
+                  >
+                    <span>🔔</span>
+                    <span className="hidden sm:inline">{t.setPriceAlertBtn}</span>
+                    <span className="sm:hidden">Price Alert</span>
+                  </button>
+                </div>
                 <div className="text-slate-900">
                   <TravelpayoutsWidget />
                 </div>
+              </div>
+
+              {/* Price Alert Promotion Banner */}
+              <div className="bg-white border border-slate-200 rounded-xl p-3.5 sm:px-5 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-amber-50 text-[#D4941A] flex items-center justify-center font-bold text-sm shrink-0 border border-amber-200">
+                    🔔
+                  </div>
+                  <div className="text-xs text-slate-650 leading-snug">
+                    <span className="font-bold text-slate-900 block sm:inline mr-1">
+                      {lang === "bn" ? "ভাড়া কমার নোটিফিকেশন:" : "Looking for lowest fare?"}
+                    </span>
+                    <span>{t.priceAlertBanner}</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openPriceAlert()}
+                  className="shrink-0 w-full sm:w-auto bg-[#0F172A] hover:bg-slate-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors cursor-pointer text-center"
+                >
+                  {t.setPriceAlertBtn}
+                </button>
               </div>
             </div>
 
@@ -1167,9 +1234,19 @@ export default function App() {
                         <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                           Flights from {activeRoute.from} to {activeRoute.to}
                         </h1>
-                        <span className="bg-[#F6B73C]/20 text-[#102A43] text-xs px-3 py-1 rounded-full font-bold font-mono">
-                          {activeRoute.priceRangeBdt.split(" (")[0]}
-                        </span>
+                        <div className="flex items-center gap-2.5">
+                          <span className="bg-[#F6B73C]/20 text-[#102A43] text-xs px-3 py-1.5 rounded-full font-bold font-mono">
+                            {activeRoute.priceRangeBdt.split(" (")[0]}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => openPriceAlert(activeRoute.to)}
+                            className="inline-flex items-center gap-1.5 text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3.5 py-1.5 rounded-full shadow-xs transition-colors cursor-pointer"
+                          >
+                            <span>🔔</span>
+                            <span>{lang === "bn" ? "ফেয়ার অ্যালার্ট" : "Price Alert"}</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
 
@@ -2879,12 +2956,12 @@ export default function App() {
                   The fastest way to get custom support. Ask visa questions, seek roundtrip ticket packages, or request customized hotel bookings.
                 </p>
                 <a 
-                  href="https://wa.me/8801784385336?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" 
+                  href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
                 >
-                  Chat on WhatsApp (+8801784385336)
+                  Chat on WhatsApp (+8801784385335)
                 </a>
               </div>
             </div>
@@ -2903,10 +2980,10 @@ export default function App() {
                   Talk directly to the director. Get immediate verification of requirements, active flight check comparisons, and reliable counsel.
                 </p>
                 <a 
-                  href="tel:+8801784385336" 
+                  href="tel:+8801784385335" 
                   className="inline-flex items-center gap-2 bg-[#102A43] hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
                 >
-                  Call Directly (+8801784385336)
+                  Call Directly (+8801784385335)
                 </a>
               </div>
             </div>
@@ -3118,7 +3195,7 @@ export default function App() {
 
               <div className="bg-slate-250 p-4 rounded-xl border border-slate-300 text-center space-y-1">
                 <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">DIRECT DIAL DESK</span>
-                <span className="text-sm font-serif font-black text-[#102A43] block">+8801784385336</span>
+                <span className="text-sm font-serif font-black text-[#102A43] block">+8801784385335</span>
                 <span className="text-[9px] text-slate-400 block">Available 24/7 on WhatsApp Messenger</span>
               </div>
             </div>
@@ -3184,11 +3261,11 @@ export default function App() {
             <div className="space-y-2 text-xs">
               <div className="flex items-center gap-1.5">
                 <span className="text-emerald-400">💬</span>
-                <a href="https://wa.me/8801784385336?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline text-emerald-400 font-mono font-bold">WhatsApp: 01784385336</a>
+                <a href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline text-emerald-400 font-mono font-bold">WhatsApp: 01784385335</a>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="text-[#F6B73C]">📞</span>
-                <a href="tel:+8801784385336" className="hover:text-white hover:underline text-[#F6B73C] font-mono font-bold">Direct Call: +8801784385336</a>
+                <a href="tel:+8801784385335" className="hover:text-white hover:underline text-[#F6B73C] font-mono font-bold">Direct Call: +8801784385335</a>
               </div>
               <div className="pt-1">
                 <button onClick={() => navigateTo("/contact")} className="bg-slate-800 text-[#F6B73C] hover:bg-slate-700 px-3 py-1.5 rounded-md font-bold text-[10px] uppercase tracking-wide cursor-pointer transition-colors">
@@ -3222,6 +3299,14 @@ export default function App() {
 
       {/* Direct Floating WhatsApp Contact Launcher */}
       <WhatsAppSupport lang={lang} />
+
+      {/* Flight Price Drop Alert Modal */}
+      <PriceAlertModal
+        isOpen={isPriceAlertOpen}
+        onClose={() => setIsPriceAlertOpen(false)}
+        lang={lang}
+        defaultDestination={alertDestination}
+      />
 
     </div>
   );

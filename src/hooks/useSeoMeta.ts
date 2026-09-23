@@ -164,21 +164,17 @@ export function useSeoMeta({ title, description, schema, breadcrumbs }: SeoMetaP
   }, [title, description, schemaStr, breadcrumbsStr, canonicalUrl]);
 }
 
+import { generateFaqSchema, getFaqSchemaForPage } from "../utils/faqSchema";
+export { generateFaqSchema, getFaqSchemaForPage };
+
 /**
  * Converts a FAQ array into a schema.org FAQPage object,
  * for AEO (Google AI Overviews, Perplexity, ChatGPT browsing).
  */
 export function buildFaqSchema(faqs: { question: string; answer: string }[]) {
-  return {
+  return generateFaqSchema(faqs) || {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
+    mainEntity: [],
   };
 }

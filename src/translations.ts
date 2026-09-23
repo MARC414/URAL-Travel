@@ -46,8 +46,13 @@ export const translations = {
 
     // WhatsApp Floating Button
     whatsappFloatingTooltip: "Chat with Travel Expert on WhatsApp",
-    whatsappHelpline: "Dhaka Helpline: 01784385336",
-    whatsappFastReply: "Instant reply for BD passport holders"
+    whatsappHelpline: "Dhaka Helpline: 01784385335",
+    whatsappFastReply: "Instant reply for BD passport holders",
+
+    // Price Alert
+    priceAlertBanner: "Tracking flight prices from Dhaka? Get instant WhatsApp alerts when airlines launch promo fares or price drops.",
+    setPriceAlertBtn: "Set WhatsApp Fare Alert",
+    activeAlertsLabel: "Active Route Alert"
   },
   bn: {
     // Top Bar & Navigation
@@ -94,7 +99,12 @@ export const translations = {
 
     // WhatsApp Floating Button
     whatsappFloatingTooltip: "ভ্রমণ সহায়তার জন্য সরাসরি হোয়াটসঅ্যাপে চ্যাট করুন",
-    whatsappHelpline: "ঢাকা হেল্পলাইন: ০১Actions: 01784385336",
-    whatsappFastReply: "বাংলাদেশি পাসপোর্টধারীদের জন্য দ্রুত সহায়তা"
+    whatsappHelpline: "ঢাকা হেল্পলাইন: ০১৭৮৪৩৮৫৩৩৫",
+    whatsappFastReply: "বাংলাদেশি পাসপোর্টধারীদের জন্য দ্রুত সহায়তা",
+
+    // Price Alert
+    priceAlertBanner: "ঢাকা থেকে কম ভাড়ার ফ্লাইটের সন্ধান করছেন? এয়ারলাইন্স স্পেশাল ডিসকাউন্ট ছাড়লে সরাসরি হোয়াটসঅ্যাপে নোটিফিকেশন পান।",
+    setPriceAlertBtn: "হোয়াটসঅ্যাপ ফেয়ার অ্যালার্ট সেট করুন",
+    activeAlertsLabel: "সক্রিয় রুট অ্যালার্ট"
   }
 };
