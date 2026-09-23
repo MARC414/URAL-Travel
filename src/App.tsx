@@ -46,7 +46,13 @@ import {
   PartnerLinkButton,
   AFFILIATE_LINKS
 } from "./components/AffiliatePartners";
-import { useSeoMeta, buildFaqSchema, getFaqSchemaForPage } from "./hooks/useSeoMeta";
+import {
+  useSeoMeta,
+  buildFaqSchema,
+  getFaqSchemaForPage,
+  SERVICE_TOOLS_FAQS,
+  SERVICE_CONTACT_FAQS,
+} from "./hooks/useSeoMeta";
 import { Language, translations } from "./translations";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
@@ -389,9 +395,9 @@ export default function App() {
     }
 
   } else if (section === "tools") {
-    seoTitle = "Bangladeshi Traveler Utility Tools | URAL";
-    seoDescription = "Access handy travel utility tools for Bangladeshi outbound tourists, including live exchange rates, power plug specifications, and translation aids.";
-    seoSchema = undefined;
+    seoTitle = "Bangladeshi Traveler Utility Tools & Services (2026) | URAL";
+    seoDescription = "Access handy travel utility tools for Bangladeshi outbound tourists: live BDT exchange rates, power plug specifications, packing checklist, and translation aids.";
+    seoSchema = getFaqSchemaForPage("tools", undefined, true, "https://ural.travel/tools");
     seoBreadcrumbs = [
       { name: "Home", url: "https://ural.travel/" },
       { name: "Travel Tools", url: "https://ural.travel/tools" }
@@ -418,7 +424,7 @@ export default function App() {
   } else if (section === "contact") {
     seoTitle = "Contact URAL — Direct Phone & WhatsApp Support";
     seoDescription = "Connect directly with our flight & visa support desk at +8801784385335. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.";
-    seoSchema = undefined;
+    seoSchema = getFaqSchemaForPage("contact", undefined, true, "https://ural.travel/contact");
     seoBreadcrumbs = [
       { name: "Home", url: "https://ural.travel/" },
       { name: "Contact Us", url: "https://ural.travel/contact" }
@@ -2699,6 +2705,19 @@ export default function App() {
                 </div>
               </div>
             </div>
+
+            {/* Traveler Utility Desk FAQs & Travel Intelligence */}
+            <TravelIntelligence
+              pageTitle="Bangladeshi Traveler Utility Tools"
+              quickAnswer="Our travel tool suite equips outbound tourists from Bangladesh with live mid-market exchange rate calculators, comprehensive plug type adapters (Type C, D, G) by destination, an interactive packing checklist for Dhaka airport immigration, and essential phrases in Thai, Malay, Nepali, and Arabic."
+              keyFacts={[
+                { label: "Currency Rates", value: "Mid-Market BDT Live Tracker" },
+                { label: "Annual FX Quota", value: "$12,000 USD / Adult Passport" },
+                { label: "Plug Compatibility", value: "Type C/D (Nepal), A/B (Thailand), G (MY/UAE)" },
+                { label: "Immigration Pack", value: "Passport + Ticket + Hotel + Solvency" }
+              ]}
+              faqs={SERVICE_TOOLS_FAQS}
+            />
           </div>
         )}
 
@@ -3201,6 +3220,19 @@ export default function App() {
             </div>
 
           </div>
+
+          {/* Contact & Booking Consultation FAQs */}
+          <TravelIntelligence
+            pageTitle="Travel Booking Assistance & Desk Support"
+            quickAnswer="URAL connects Bangladeshi travelers with dedicated itinerary planning, visa checklist reviews, and direct agency booking services via WhatsApp (+8801784385335) and hotline. All ticket and hotel payments can be completed safely in BDT via domestic banking, bKash, or in person."
+            keyFacts={[
+              { label: "Helpline", value: "+8801784385335 (Direct / WhatsApp)" },
+              { label: "Response Window", value: "15 to 30 Mins (Dhaka Time)" },
+              { label: "Payment Flexibility", value: "BDT (bKash / Nagad / Bank Transfer)" },
+              { label: "Desk Verification", value: "Verified IATA Agency Network" }
+            ]}
+            faqs={SERVICE_CONTACT_FAQS}
+          />
 
         </div>
       )}

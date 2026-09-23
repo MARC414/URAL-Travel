@@ -920,6 +920,18 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       {
         question: "How do I avoid heavy traffic jams in Bangkok?",
         answer: "Always stay near a BTS Skytrain or MRT Subway station. Avoid taking traditional taxis or Tuk-Tuks on main streets like Sukhumvit or Pratunam during peak rush hours (8am-10am, 5pm-8pm)."
+      },
+      {
+        question: "Where can Bangladeshi travelers find halal food in Bangkok?",
+        answer: "Halal food is abundant around Sukhumvit Soi 3 to 11 (Nana Arab Street), the Pratunam wholesale market area, and around the Phaya Thai / Ramkhamhaeng neighborhoods. Major shopping malls like MBK Center and Platinum Fashion Mall have certified halal food court counters."
+      },
+      {
+        question: "Can I pay for street shopping in Bangkok using international cards?",
+        answer: "Street markets like Chatuchak, Pratunam, and night markets operate predominantly on cash Thai Baht (THB). Carry cash exchanged at SuperRich counters in Bangkok for the best rates, and use your endorsed dual-currency debit/credit card for malls and hotel payments."
+      },
+      {
+        question: "Is Bangkok safe for Bangladeshi families and solo tourists?",
+        answer: "Yes, Bangkok is widely considered very safe for families and solo travelers with low violent crime rates. Use ride-hailing apps like Grab or Bolt for transparent fares, and take standard precautions with personal belongings in crowded night markets."
       }
     ],
     schemaMarkup: {
@@ -957,6 +969,18 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       {
         question: "Is English widely spoken in Kuala Lumpur?",
         answer: "Yes, English is extremely common in Malaysia. Signs, menus, and transit announcements are heavily bilingual, making independent navigation a absolute breeze."
+      },
+      {
+        question: "Are food outlets in Kuala Lumpur halal-friendly for Bangladeshi Muslims?",
+        answer: "Yes, Malaysia is a Muslim-majority country with strict JAKIM halal certification standards. Virtually all Malaysian, Mamak (Indian Muslim), and international fast-food restaurants across Kuala Lumpur are certified halal."
+      },
+      {
+        question: "What is the best way to travel from KLIA airport to central Kuala Lumpur?",
+        answer: "The fastest option is the high-speed KLIA Ekspres train, reaching KL Sentral station in 28 minutes for RM 55. For families or groups with heavy luggage, a pre-arranged airport transfer or Grab ride (RM 65-85) directly to your hotel is economical and convenient."
+      },
+      {
+        question: "How many days are ideal for a vacation in Kuala Lumpur from Dhaka?",
+        answer: "4 to 5 days is recommended for a balanced first trip. This gives you 2 days for city sights (KLCC Twin Towers, Bukit Bintang, Merdeka Square), 1 day for Batu Caves and Chinatown, and 1 full day for the mountain attractions and theme parks of Genting Highlands."
       }
     ],
     schemaMarkup: {
@@ -994,6 +1018,18 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       {
         question: "Is Dubai Metro easy for visitors to navigate?",
         answer: "Extremely easy. The metro has two active lines (Red and Green), is strictly bilingual (English and Arabic), and is directly linked to major shopping terminals including Dubai Mall, Mall of the Emirates, and Deira City Centre."
+      },
+      {
+        question: "What dress code should Bangladeshi tourists observe in Dubai?",
+        answer: "Dubai is cosmopolitan and modern. Casual tourist clothes (t-shirts, jeans, modest shorts, summer dresses) are standard in shopping malls, hotels, and beaches. Conservative clothing covering shoulders and knees is only required when visiting mosques or government buildings."
+      },
+      {
+        question: "How does the Dubai Nol card work for tourists?",
+        answer: "The Silver Nol Card can be bought at any metro station for AED 25 (includes AED 19 e-purse credit) and gives discounted contactless taps across the Dubai Metro, Tram, RTA public buses, and water buses. It is rechargeable at station ticket machines."
+      },
+      {
+        question: "Is Dubai too expensive for budget travelers from Bangladesh?",
+        answer: "Budget trips from Dhaka to Dubai are very manageable. By staying in central Deira or Bur Dubai, eating at local cafeterias (AED 15-25 per meal), and utilizing the Dubai Metro, travelers can keep daily local spending around BDT 8,000 to BDT 12,000."
       }
     ],
     schemaMarkup: {

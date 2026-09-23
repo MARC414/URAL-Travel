@@ -164,8 +164,23 @@ export function useSeoMeta({ title, description, schema, breadcrumbs }: SeoMetaP
   }, [title, description, schemaStr, breadcrumbsStr, canonicalUrl]);
 }
 
-import { generateFaqSchema, getFaqSchemaForPage } from "../utils/faqSchema";
-export { generateFaqSchema, getFaqSchemaForPage };
+import {
+  generateFaqSchema,
+  getFaqSchemaForPage,
+  SERVICE_TOOLS_FAQS,
+  SERVICE_CONTACT_FAQS,
+  SERVICE_TRAVEL_SERVICES_FAQS,
+  LANDING_DESTINATION_FAQS,
+} from "../utils/faqSchema";
+
+export {
+  generateFaqSchema,
+  getFaqSchemaForPage,
+  SERVICE_TOOLS_FAQS,
+  SERVICE_CONTACT_FAQS,
+  SERVICE_TRAVEL_SERVICES_FAQS,
+  LANDING_DESTINATION_FAQS,
+};
 
 /**
  * Converts a FAQ array into a schema.org FAQPage object,

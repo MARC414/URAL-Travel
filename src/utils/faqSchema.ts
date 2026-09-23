@@ -1,4 +1,4 @@
-import { FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, TRIP_COSTS_DATA } from "../constants";
+import { FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, TRIP_COSTS_DATA, DESTINATIONS_DATA } from "../constants";
 
 export interface FAQItem {
   question: string;
@@ -107,6 +107,82 @@ export const LANDING_COST_FAQS: FAQItem[] = [
   }
 ];
 
+export const LANDING_DESTINATION_FAQS: FAQItem[] = [
+  {
+    question: "What are the best international holiday destinations for first-time Bangladeshi travelers?",
+    answer: "Nepal and Thailand are the premier choices for first-time outbound tourists from Bangladesh. Nepal offers hassle-free free Visa on Arrival and short 1.5-hour flights, while Thailand provides world-class shopping, incredible street food, and straightforward sticker visa processing."
+  },
+  {
+    question: "How long should a standard international vacation be from Dhaka?",
+    answer: "A 4-to-6 day itinerary is ideal for short-haul destinations like Nepal (Kathmandu + Pokhara), Thailand (Bangkok + Pattaya), or Malaysia (Kuala Lumpur + Genting Highlands). For Dubai or multi-city travel, 6 to 8 days allows comfortable sightseeing without rushing."
+  },
+  {
+    question: "Do Bangladeshi tourists need a guided group tour or can they travel independently?",
+    answer: "Independent travel is completely safe and straightforward in Nepal, Thailand, Malaysia, and Dubai. Public transit (BTS, MRT, Dubai Metro), ride-hailing apps (Grab, Pathao, Careem), and online booking tools make independent itineraries easy to manage at half the cost of group package tours."
+  },
+  {
+    question: "Which months are optimal for budget-friendly international vacations from Bangladesh?",
+    answer: "Shoulder months such as September, October (post-monsoon), February, and May typically offer the lowest flight fares from Dhaka and discounted hotel rates abroad, while avoiding peak holiday surcharges."
+  }
+];
+
+export const SERVICE_TOOLS_FAQS: FAQItem[] = [
+  {
+    question: "How accurate are the travel currency exchange rates on URAL?",
+    answer: "Our currency utility monitors mid-market exchange rates for NPR, THB, MYR, AED, and USD against Bangladeshi Taka (BDT). Actual cash rates at airport kiosks and money changers in Dhaka may vary by 1% to 2% due to cash handling and conversion fees."
+  },
+  {
+    question: "What power plug adapter do I need when traveling from Bangladesh to Nepal, Thailand, Malaysia, or Dubai?",
+    answer: "Nepal uses Type C and D plugs (similar to Bangladesh). Thailand uses Type A, B, and C (two-pin flat or round). Malaysia and Dubai strictly require Type G three-pin British plugs (230V). Carrying a universal multi-pin travel adapter is strongly recommended for all outbound trips."
+  },
+  {
+    question: "What essential documents should Bangladeshi citizens pack in their hand luggage?",
+    answer: "Always carry your physical original passport with 6+ months validity, printed roundtrip e-tickets, hotel booking vouchers, visa copy (or passport photo for VOA), bank solvency certificate, and dual-currency bank cards in your carry-on bag for Dhaka immigration inspection."
+  },
+  {
+    question: "How can I translate menus and signs in non-English countries like Thailand or Nepal?",
+    answer: "Use Google Translate or photo-translation apps on your smartphone. URAL's built-in travel translator also provides essential phonetic phrases for greetings, directions, halal food requests, and bargaining numbers in Thai, Nepali, Malay, and Arabic."
+  }
+];
+
+export const SERVICE_CONTACT_FAQS: FAQItem[] = [
+  {
+    question: "How does URAL assist Bangladeshi travelers with flight bookings and visa queries?",
+    answer: "URAL provides direct phone and WhatsApp consultation at +8801784385335. Our desk answers itinerary questions, confirms airline baggage allowances, connects users with verified IATA agency ticket desks in Dhaka, and provides up-to-date embassy document checklists."
+  },
+  {
+    question: "Can I pay for flight tickets and travel services in Bangladeshi Taka (BDT)?",
+    answer: "Yes. Inquiries routed through our Dhaka partner desk can be settled via bKash, Nagad, domestic bank transfer, or in person at our affiliated travel desk in Dhaka, without requiring international credit cards."
+  },
+  {
+    question: "How does the WhatsApp Flight Price Alert service work?",
+    answer: "When you subscribe to a price alert for a route (e.g. Dhaka to Kathmandu, Bangkok, or Dubai), our team monitors airline flash sales and special promo seat inventories, sending an immediate alert to your WhatsApp number so you can lock in lowest fares."
+  },
+  {
+    question: "What is the response time for WhatsApp and telephone support?",
+    answer: "Our WhatsApp helpline (+8801784385335) typically responds within 15 to 30 minutes during standard Dhaka business hours (9:00 AM to 9:00 PM BST). Emergency queries for next-day flights receive prioritized callbacks."
+  }
+];
+
+export const SERVICE_TRAVEL_SERVICES_FAQS: FAQItem[] = [
+  {
+    question: "How do pre-booked airport transfers work at international airports like BKK, KTM, and DXB?",
+    answer: "Through KiwiTaxi and verified partners, your driver tracks your flight arrival time and waits in the airport arrival hall with a personalized name sign. This eliminates taxi negotiation stress, late-night transit scams, and local language barriers."
+  },
+  {
+    question: "Why should Bangladeshi tourists buy attraction tickets and tours on Klook before traveling?",
+    answer: "Pre-booking activities like Sarangkot sunrise tours, Chao Phraya dinner cruises, Genting Awana cable car passes, or Burj Khalifa tickets on Klook saves up to 30-50% compared to gate prices, skips long ticket lines, and allows payment with international or dual-currency cards."
+  },
+  {
+    question: "Is an International Driving Permit (IDP) required to rent a car abroad through Qeeq?",
+    answer: "Yes, to legally rent and drive a car in Malaysia, Thailand, or the UAE, Bangladeshi citizens must carry a valid International Driving Permit (IDP) issued by the Automobile Association of Bangladesh (AAB) alongside their original BRTA driving license."
+  },
+  {
+    question: "How does an Airalo travel eSIM work for outbound travelers from Dhaka?",
+    answer: "An eSIM is installed digitally via QR code on compatible iPhone and Android smartphones before departure. Upon landing in Kathmandu, Bangkok, Kuala Lumpur, or Dubai, your phone connects immediately to high-speed 4G/5G local networks without swapping physical SIM cards or paying high international roaming charges."
+  }
+];
+
 /**
  * Cleans plain text for Schema.org JSON-LD (removes HTML tags, trims whitespace).
  */
@@ -176,7 +252,7 @@ export function generateFaqSchema(
  * @param pageUrl Optional canonical URL of the page
  */
 export function getFaqSchemaForPage(
-  page: "flights" | "hotels" | "visa" | "costs" | "destinations",
+  page: "flights" | "hotels" | "visa" | "costs" | "destinations" | "tools" | "contact" | "services",
   parameterId?: string,
   isLanding?: boolean,
   pageUrl?: string
@@ -235,15 +311,31 @@ export function getFaqSchemaForPage(
 
     case "destinations": {
       if (isLanding || !parameterId) {
-        faqs = LANDING_FLIGHT_FAQS.slice(0, 3).concat(LANDING_COST_FAQS.slice(0, 3));
+        faqs = LANDING_DESTINATION_FAQS;
         pageName = "Popular Outbound Destinations from Bangladesh FAQs";
       } else {
-        const route = FLIGHTS_DATA.find((r) => r.id === parameterId);
-        if (route) {
-          faqs = route.faqs;
-          pageName = `${route.country} Travel Guide FAQs`;
-        }
+        const destination = DESTINATIONS_DATA.find((d) => d.id === parameterId) || DESTINATIONS_DATA[0];
+        faqs = destination.faqs;
+        pageName = `${destination.country} Trip Plan & Travel Itinerary FAQs`;
       }
+      break;
+    }
+
+    case "tools": {
+      faqs = SERVICE_TOOLS_FAQS;
+      pageName = "Bangladeshi Traveler Utility Tools FAQs";
+      break;
+    }
+
+    case "contact": {
+      faqs = SERVICE_CONTACT_FAQS;
+      pageName = "Travel Desk Inquiries & WhatsApp Booking Assistance FAQs";
+      break;
+    }
+
+    case "services": {
+      faqs = SERVICE_TRAVEL_SERVICES_FAQS;
+      pageName = "International Travel Services (eSIM, Transfers, Activities) FAQs";
       break;
     }
 
