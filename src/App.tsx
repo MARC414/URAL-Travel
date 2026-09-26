@@ -1298,7 +1298,17 @@ export default function App() {
                      {/* Embedded Conversion search form widget */}
                     <div className="bg-slate-100 p-4 rounded-xl border border-slate-250/60 my-6">
                       <span className="text-[10px] font-mono font-bold text-[#102A43] block mb-2">Search Flights on This Route</span>
-                      <TravelpayoutsEmbed />
+                      <TravelpayoutsEmbed
+                        defaultDestination={
+                          activeRoute.country.toLowerCase() === "nepal"
+                            ? "KTM"
+                            : activeRoute.country.toLowerCase() === "thailand"
+                            ? "BKK"
+                            : activeRoute.country.toLowerCase() === "malaysia"
+                            ? "KUL"
+                            : "DXB"
+                        }
+                      />
                     </div>
 
                     {/* internal linking system ranking loops (Flights to Visa and Hotels!) */}
@@ -1653,7 +1663,17 @@ export default function App() {
                         <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
                           Find flights from Dhaka
                         </span>
-                        <TravelpayoutsEmbed />
+                        <TravelpayoutsEmbed
+                          defaultDestination={
+                            activeVisa.country.toLowerCase() === "nepal"
+                              ? "KTM"
+                              : activeVisa.country.toLowerCase() === "thailand"
+                              ? "BKK"
+                              : activeVisa.country.toLowerCase() === "malaysia"
+                              ? "KUL"
+                              : "DXB"
+                          }
+                        />
                       </div>
 
                       <div className="flex flex-col sm:flex-row gap-3">
@@ -1797,7 +1817,7 @@ export default function App() {
                           </div>
                           <div className="bg-[#0f1d2e] p-2 sm:p-4 rounded-xl border border-slate-700/60 text-slate-900">
                             <span className="text-[10px] font-mono font-bold text-slate-500 uppercase block mb-3 px-1">✈️ LIVE FLIGHTS SEARCH</span>
-                            <TravelpayoutsEmbed />
+                            <TravelpayoutsEmbed defaultDestination="DXB" />
                           </div>
                         </div>
 
@@ -2105,7 +2125,17 @@ export default function App() {
                           {/* Travelpayouts Flights widget */}
                           <div className="bg-[#0f1d2e] p-2 sm:p-4 rounded-xl border border-slate-700/60 text-slate-900">
                             <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">✈️ LIVE FLIGHTS COMPARISON ENGINE</span>
-                            <TravelpayoutsEmbed />
+                            <TravelpayoutsEmbed
+                              defaultDestination={
+                                activeDes.country === "Nepal"
+                                  ? "KTM"
+                                  : activeDes.country === "Thailand"
+                                  ? "BKK"
+                                  : activeDes.country === "UAE"
+                                  ? "DXB"
+                                  : "KUL"
+                              }
+                            />
                           </div>
                         </div>
 

@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Travelpayouts Search</title>
-  <base target="_blank" />
+  <title>URAL Flight Search Engine</title>
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -18,7 +17,7 @@
     }
     .tpwl-wrapper {
       width: 100%;
-      padding: 6px 8px;
+      padding: 6px 8px 16px;
     }
     #tpwl-search {
       width: 100%;
@@ -26,9 +25,161 @@
     }
     #tpwl-tickets {
       width: 100%;
-      margin-top: 12px;
+      margin-top: 16px;
     }
   </style>
+
+  <script>
+    (function() {
+      // 1. Clean up any stale redirect flags in localStorage that could cause Vl()/Ya() to abort searches
+      try {
+        var staleKeys = [
+          "__wl_is_redirect",
+          "__wl_redirect_processed",
+          "__wl_original_params",
+          "__wl_original_search",
+          "__wl_expected_string"
+        ];
+        for (var i = 0; i < staleKeys.length; i++) {
+          localStorage.removeItem(staleKeys[i]);
+        }
+      } catch (e) {}
+
+      // 2. Extract initial origin/destination from query string and ensure a default flightSearch
+      // is present so the departure date is pre-filled and TicketsWidget hooks initialize cleanly.
+      var initOrigin = "DAC";
+      var initDest = "KTM";
+      try {
+        var currentUrl = new URL(window.location.href);
+        var oParam = currentUrl.searchParams.get("origin");
+        var dParam = currentUrl.searchParams.get("destination");
+        if (oParam && /^[A-Za-z]{3}$/.test(oParam)) {
+          initOrigin = oParam.toUpperCase();
+        }
+        if (dParam && /^[A-Za-z]{3}$/.test(dParam)) {
+          initDest = dParam.toUpperCase();
+        }
+        if (currentUrl.searchParams.has("origin") || currentUrl.searchParams.has("destination")) {
+          currentUrl.searchParams.delete("origin");
+          currentUrl.searchParams.delete("destination");
+        }
+        if (!currentUrl.searchParams.get("flightSearch")) {
+          var defDepart = new Date();
+          defDepart.setDate(defDepart.getDate() + 14);
+          var dd = String(defDepart.getDate()).padStart(2, "0");
+          var mm = String(defDepart.getMonth() + 1).padStart(2, "0");
+          currentUrl.searchParams.set("flightSearch", initOrigin + dd + mm + initDest + "1");
+        }
+        var remaining = currentUrl.searchParams.toString();
+        var cleanHref = currentUrl.pathname + (remaining ? "?" + remaining : "") + currentUrl.hash;
+        window.history.replaceState(null, "", cleanHref);
+      } catch (e) {}
+
+      // 3. Ensure hide_hotels=true is always present in document.cookie
+      try {
+        document.cookie = "hide_hotels=true; path=/; max-age=31536000; SameSite=None; Secure";
+        document.cookie = "hide_hotels=true; path=/; max-age=31536000; SameSite=Lax";
+      } catch (e) {}
+
+      try {
+        var cookieDesc = Object.getOwnPropertyDescriptor(Document.prototype, "cookie") ||
+                         Object.getOwnPropertyDescriptor(HTMLDocument.prototype, "cookie");
+        if (cookieDesc && cookieDesc.get) {
+          var virtualCookies = { hide_hotels: "true" };
+          Object.defineProperty(document, "cookie", {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+              var raw = cookieDesc.get.call(document) || "";
+              var parts = raw ? raw.split("; ") : [];
+              var map = {};
+              for (var i = 0; i < parts.length; i++) {
+                var eq = parts[i].indexOf("=");
+                if (eq > 0) {
+                  map[parts[i].slice(0, eq)] = parts[i].slice(eq + 1);
+                }
+              }
+              map.hide_hotels = "true";
+              var keys = Object.keys(virtualCookies);
+              for (var j = 0; j < keys.length; j++) {
+                if (virtualCookies[keys[j]]) {
+                  map[keys[j]] = virtualCookies[keys[j]];
+                }
+              }
+              var out = [];
+              var allKeys = Object.keys(map);
+              for (var k = 0; k < allKeys.length; k++) {
+                out.push(allKeys[k] + "=" + map[allKeys[k]]);
+              }
+              return out.join("; ");
+            },
+            set: function(val) {
+              try {
+                cookieDesc.set.call(document, val);
+              } catch (e) {}
+              if (typeof val === "string") {
+                var pair = val.split(";")[0];
+                var eq = pair.indexOf("=");
+                if (eq > 0) {
+                  var k = pair.slice(0, eq).trim();
+                  var v = pair.slice(eq + 1).trim();
+                  if (k !== "hide_hotels") {
+                    virtualCookies[k] = v;
+                  }
+                }
+              }
+            }
+          });
+        }
+      } catch (e) {}
+
+      // 4. Patch window.fetch to guard against Travelpayouts' null cheapest_ticket bug on 0ms cold route polls
+      try {
+        var origFetch = window.fetch.bind(window);
+        window.fetch = function(input, init) {
+          var urlStr = typeof input === "string" ? input : (input && input.url) || "";
+          return origFetch(input, init).then(function(response) {
+            if (urlStr.indexOf("/search/wl/results") !== -1 && response.ok) {
+              var origJson = response.json.bind(response);
+              response.json = function() {
+                return origJson().then(function(data) {
+                  if (Array.isArray(data)) {
+                    for (var i = 0; i < data.length; i++) {
+                      var chunk = data[i];
+                      if (chunk && chunk.chunk_id === "results" && !chunk.cheapest_ticket) {
+                        var firstTicket = Array.isArray(chunk.tickets) && chunk.tickets.length > 0 ? chunk.tickets[0] : null;
+                        chunk.cheapest_ticket = firstTicket || {
+                          proposals: [{ price: { currency_code: "BDT", value: 0 } }]
+                        };
+                      }
+                    }
+                  }
+                  return data;
+                });
+              };
+            }
+            return response;
+          });
+        };
+      } catch (e) {}
+
+      // 5. Configure Travelpayouts White Label to stay 100% in-page with BDT currency,
+      // route pre-fill via flightParams, and no hotel pop-under
+      var selfUrl = window.location.origin + window.location.pathname;
+      window.TPWL_CONFIGURATION = Object.assign({}, window.TPWL_CONFIGURATION || {}, {
+        showHotels: false,
+        showReferralLink: false,
+        resultsURL: selfUrl,
+        defaultCurrency: "BDT",
+        availableCurrencies: ["BDT", "USD", "THB", "MYR", "AED", "NPR", "EUR", "GBP"],
+        flightParams: {
+          origin: initOrigin,
+          destination: initDest
+        }
+      });
+    })();
+  </script>
+
   <script type="module" src="https://tpemd.com/wl_web/main.js?wl_id=22462" async></script>
 </head>
 <body>
@@ -40,46 +191,292 @@
   <script>
     (function() {
       var lastSentHeight = 0;
+      var observedShadowRoots = new WeakSet();
+      var styledShadowRoots = new WeakSet();
+
+      function clearRedirectLocks() {
+        try {
+          localStorage.removeItem("__wl_is_redirect");
+          localStorage.removeItem("__wl_redirect_processed");
+          localStorage.removeItem("__wl_original_params");
+          localStorage.removeItem("__wl_original_search");
+          localStorage.removeItem("__wl_expected_string");
+        } catch (e) {}
+      }
+
+      // If a PlacePicker autocomplete popover is open when the user presses Enter/Tab or clicks Search,
+      // automatically select the top matching city/airport option so their typed destination is kept.
+      function selectTopPlaceOptionIfOpen() {
+        try {
+          var modalsEl = document.getElementById("tpwl-modals");
+          if (!modalsEl || !modalsEl.shadowRoot) return false;
+          var placePopover = modalsEl.shadowRoot.querySelector('[class*="PlacePicker-module__popover"]');
+          if (!placePopover) return false;
+          var firstOption = placePopover.querySelector('button[class*="PlaceOption-module__root"]');
+          if (firstOption) {
+            firstOption.click();
+            return true;
+          }
+        } catch (e) {}
+        return false;
+      }
+
+      // If the user clicks "Search flights" before choosing a departure date, automatically open the calendar popover
+      function openDatePickerIfDepartureEmpty() {
+        try {
+          var searchEl = document.getElementById("tpwl-search");
+          if (!searchEl || !searchEl.shadowRoot) return;
+          var depInput = searchEl.shadowRoot.querySelector('[data-testid="date-range-departure-input"]');
+          if (depInput && !depInput.value) {
+            setTimeout(function() {
+              depInput.focus();
+              depInput.click();
+              measureAndSend();
+              setTimeout(measureAndSend, 80);
+            }, 30);
+          }
+        } catch (e) {}
+      }
+
+      function attachSearchFormHelpers(sr) {
+        if (!sr || sr.__uralHelpersAttached) return;
+        sr.__uralHelpersAttached = true;
+
+        sr.addEventListener("keydown", function(e) {
+          if (e.key === "Enter" || e.key === "Tab") {
+            var target = e.target;
+            if (target && (target.name === "origin" || target.name === "destination")) {
+              if (selectTopPlaceOptionIfOpen() && e.key === "Enter") {
+                e.preventDefault();
+                openDatePickerIfDepartureEmpty();
+              }
+            }
+          }
+        }, true);
+
+        sr.addEventListener("mousedown", function(e) {
+          var btn = e.target && e.target.closest ? e.target.closest('[data-testid="default-search-submit-button"], button[type="submit"]') : null;
+          if (btn) {
+            selectTopPlaceOptionIfOpen();
+          }
+        }, true);
+
+        sr.addEventListener("click", function(e) {
+          var btn = e.target && e.target.closest ? e.target.closest('[data-testid="default-search-submit-button"], button[type="submit"]') : null;
+          if (btn) {
+            openDatePickerIfDepartureEmpty();
+          }
+        }, true);
+      }
+
+      function measureShadowHost(hostEl) {
+        if (!hostEl || !hostEl.shadowRoot) return 0;
+        var sr = hostEl.shadowRoot;
+
+        if (hostEl.id === "tpwl-search") {
+          attachSearchFormHelpers(sr);
+        }
+
+        // Inject instant popover transition style once per shadowRoot so dropdowns/calendars measure at 0ms
+        if (!styledShadowRoots.has(sr)) {
+          styledShadowRoots.add(sr);
+          try {
+            var helperStyle = document.createElement("style");
+            helperStyle.textContent = '[class*="Popover-module__root"] { transition: none !important; }';
+            sr.appendChild(helperStyle);
+          } catch (e) {}
+        }
+
+        var maxBottom = 0;
+
+        // 1. Measure all direct children of the Shadow Root (excluding <style> and <link>)
+        var children = sr.children || [];
+        for (var i = 0; i < children.length; i++) {
+          var child = children[i];
+          if (child.tagName === "STYLE" || child.tagName === "LINK" || child.tagName === "SCRIPT") {
+            continue;
+          }
+          var cRect = child.getBoundingClientRect();
+          if (cRect.height > 0) {
+            var b = Math.ceil(cRect.bottom + window.scrollY + 24);
+            if (b > maxBottom) maxBottom = b;
+          }
+          if (child.scrollHeight > 0) {
+            var sb = Math.ceil(cRect.top + window.scrollY + child.scrollHeight + 24);
+            if (sb > maxBottom) maxBottom = sb;
+          }
+        }
+
+        // 2. Measure any open popovers, calendars, airport dropdowns, passenger pickers, or modals
+        var popovers = sr.querySelectorAll(
+          '[class*="Popover-module__visible"], [class*="DatePicker-module__popover"], [class*="PlacePicker-module__popover"], [class*="PassengersPicker-module__popover"], [class*="Modal-module__root"]'
+        );
+        for (var j = 0; j < popovers.length; j++) {
+          var el = popovers[j];
+          var cls = typeof el.className === "string" ? el.className : "";
+          var isVisiblePopover = cls.indexOf("Popover-module__visible") !== -1 || cls.indexOf("Modal-module__root") !== -1;
+          var style = window.getComputedStyle(el);
+          if (style.display === "none" || style.visibility === "hidden") {
+            continue;
+          }
+          if (!isVisiblePopover && style.opacity === "0") {
+            continue;
+          }
+          var r = el.getBoundingClientRect();
+          if (r.height > 0 && r.width > 0) {
+            var bottomEdge = Math.ceil(r.bottom + window.scrollY + 32);
+            if (bottomEdge > maxBottom) {
+              maxBottom = bottomEdge;
+            }
+          }
+        }
+
+        return maxBottom;
+      }
 
       function measureAndSend() {
-        var container = document.getElementById('tpwl-container');
+        var container = document.getElementById("tpwl-container");
         if (!container) return;
 
-        // Measure exclusively the content wrapper to avoid infinite loop with window/html height
         var rect = container.getBoundingClientRect();
         var h = Math.ceil(Math.max(rect.height, container.scrollHeight, container.offsetHeight));
 
-        // Ignore empty/unmounted states
+        var searchEl = document.getElementById("tpwl-search");
+        var ticketsEl = document.getElementById("tpwl-tickets");
+        var modalsEl = document.getElementById("tpwl-modals");
+
+        var searchBottom = measureShadowHost(searchEl);
+        var ticketsBottom = measureShadowHost(ticketsEl);
+        var modalsBottom = measureShadowHost(modalsEl);
+
+        h = Math.max(h, searchBottom, ticketsBottom, modalsBottom);
+
+        if (modalsEl && (modalsEl.style.position === "fixed" || modalsBottom > 0)) {
+          h = Math.max(h, 680);
+        }
+
         if (h < 40) return;
 
-        // Only dispatch when height genuinely changes by at least 6px
-        if (Math.abs(h - lastSentHeight) >= 6) {
+        if (Math.abs(h - lastSentHeight) >= 4) {
           lastSentHeight = h;
           if (window.parent && window.parent !== window) {
-            window.parent.postMessage({ type: 'tpwl-resize', height: h }, '*');
+            window.parent.postMessage({ type: "tpwl-resize", height: h }, "*");
           }
         }
       }
 
-      window.addEventListener('load', function() {
-        measureAndSend();
+      function attachShadowObservers() {
+        var ids = ["tpwl-search", "tpwl-tickets", "tpwl-modals"];
+        for (var i = 0; i < ids.length; i++) {
+          var el = document.getElementById(ids[i]);
+          if (el && el.shadowRoot && !observedShadowRoots.has(el.shadowRoot)) {
+            observedShadowRoots.add(el.shadowRoot);
+            if (el.id === "tpwl-search") {
+              attachSearchFormHelpers(el.shadowRoot);
+            }
+            if (window.MutationObserver) {
+              var mo = new MutationObserver(function() {
+                measureAndSend();
+                setTimeout(measureAndSend, 80);
+                setTimeout(measureAndSend, 250);
+              });
+              mo.observe(el.shadowRoot, { childList: true, subtree: true, attributes: true });
+            }
+          }
+        }
+      }
 
-        // Observe only the container element, NOT document.body or html
+      function notifySearchState() {
+        clearRedirectLocks();
+        var fs = new URLSearchParams(window.location.search).get("flightSearch") || "";
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: "tpwl-search-state", flightSearch: fs }, "*");
+        }
+        measureAndSend();
+        setTimeout(measureAndSend, 150);
+        setTimeout(measureAndSend, 500);
+        setTimeout(measureAndSend, 1200);
+        setTimeout(measureAndSend, 2500);
+      }
+
+      window.addEventListener("urlchange", notifySearchState);
+
+      // Listen for parent Popular Route selection
+      window.addEventListener("message", function(event) {
+        var data = event.data;
+        if (!data || typeof data !== "object") return;
+
+        if (data.type === "tpwl-run-search" && data.flightSearch) {
+          clearRedirectLocks();
+          var url = new URL(window.location.href);
+          var keysToDelete = [
+            "ticketId",
+            "destination_airports",
+            "origin_airports",
+            "open_datepicker",
+            "origin",
+            "origin_iata",
+            "destination",
+            "destination_iata",
+            "depart_date",
+            "return_date"
+          ];
+          for (var i = 0; i < keysToDelete.length; i++) {
+            url.searchParams.delete(keysToDelete[i]);
+          }
+          url.searchParams.set("flightSearch", data.flightSearch);
+          window.history.replaceState(null, "", url.href);
+          window.dispatchEvent(new CustomEvent("urlchange"));
+          measureAndSend();
+        }
+      });
+
+      window.addEventListener("click", function() {
+        attachShadowObservers();
+        setTimeout(measureAndSend, 30);
+        setTimeout(measureAndSend, 180);
+      }, true);
+
+      window.addEventListener("focusin", function() {
+        attachShadowObservers();
+        setTimeout(measureAndSend, 30);
+        setTimeout(measureAndSend, 180);
+      }, true);
+
+      window.addEventListener("input", function() {
+        attachShadowObservers();
+        setTimeout(measureAndSend, 100);
+        setTimeout(measureAndSend, 480);
+        setTimeout(measureAndSend, 750);
+      }, true);
+
+      window.addEventListener("keyup", function() {
+        setTimeout(measureAndSend, 60);
+        setTimeout(measureAndSend, 500);
+      }, true);
+
+      window.addEventListener("load", function() {
+        measureAndSend();
+        attachShadowObservers();
+
         if (window.ResizeObserver) {
           var ro = new ResizeObserver(function() {
+            attachShadowObservers();
             measureAndSend();
           });
-          var target = document.getElementById('tpwl-container');
+          var target = document.getElementById("tpwl-container");
           if (target) {
             ro.observe(target);
           }
         }
 
-        // Staggered measurements after external script loads and renders
-        setTimeout(measureAndSend, 300);
-        setTimeout(measureAndSend, 800);
-        setTimeout(measureAndSend, 1800);
-        setTimeout(measureAndSend, 3500);
+        // Keep a lightweight continuous observer for async ticket polling chunks
+        setInterval(function() {
+          attachShadowObservers();
+          measureAndSend();
+        }, 350);
+
+        notifySearchState();
       });
     })();
   </script>

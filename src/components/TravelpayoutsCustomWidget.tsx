@@ -1,5 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Plane, Building, Search, ArrowRightLeft, Calendar, Users, Percent, Flame, ExternalLink, ShieldAlert } from "lucide-react";
+import React, { useState, useEffect, useMemo } from "react";
+import {
+  Plane,
+  Building,
+  Search,
+  ArrowRightLeft,
+  CheckCircle2,
+  ExternalLink,
+  RefreshCw,
+  Luggage,
+  MapPin,
+} from "lucide-react";
 
 interface TravelpayoutsCustomWidgetProps {
   initialTab?: "flights" | "hotels";
@@ -8,21 +18,90 @@ interface TravelpayoutsCustomWidgetProps {
   initialHotelCity?: string;
 }
 
+function getDefaultDateIso(daysAhead = 14) {
+  const d = new Date();
+  d.setDate(d.getDate() + daysAhead);
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function getFlightOptions(toCity: string) {
+  const lower = toCity.toLowerCase();
+  if (lower.includes("ktm") || lower.includes("nepal") || lower.includes("kathmandu")) {
+    return [
+      { id: "f1", airline: "Biman Bangladesh Airlines", flightNo: "BG 371", departs: "10:35 AM", arrives: "12:05 PM", duration: "1h 30m", stops: "Direct Flight", baggage: "30 kg Checked + 7 kg Cabin", priceBdt: 29800, destCode: "KTM", score: "Best Overall Value" },
+      { id: "f2", airline: "Himalaya Airlines", flightNo: "H9 556", departs: "01:20 PM", arrives: "02:50 PM", duration: "1h 30m", stops: "Direct Flight", baggage: "20 kg Checked + 7 kg Cabin", priceBdt: 31200, destCode: "KTM", score: "Popular Direct" },
+      { id: "f3", airline: "IndiGo", flightNo: "6E 1182", departs: "08:10 AM", arrives: "02:25 PM", duration: "6h 15m", stops: "1 Stop (Kolkata CCU)", baggage: "20 kg Checked + 7 kg Cabin", priceBdt: 27400, destCode: "KTM", score: "Lowest Fare" },
+    ];
+  }
+  if (lower.includes("bkk") || lower.includes("thailand") || lower.includes("bangkok")) {
+    return [
+      { id: "f4", airline: "Thai Lion Air", flightNo: "SL 225", departs: "02:15 AM", arrives: "05:45 AM", duration: "2h 30m", stops: "Direct (Don Mueang DMK)", baggage: "20 kg Checked + 7 kg Cabin", priceBdt: 31800, destCode: "BKK", score: "Cheapest Direct" },
+      { id: "f5", airline: "Biman Bangladesh Airlines", flightNo: "BG 388", departs: "11:30 AM", arrives: "03:00 PM", duration: "2h 30m", stops: "Direct (Suvarnabhumi BKK)", baggage: "30 kg Checked + 7 kg Cabin", priceBdt: 35600, destCode: "BKK", score: "Best Value + 30kg Bag" },
+      { id: "f6", airline: "Thai Airways", flightNo: "TG 322", departs: "01:35 PM", arrives: "05:05 PM", duration: "2h 30m", stops: "Direct (Suvarnabhumi BKK)", baggage: "30 kg Checked + 7 kg Cabin", priceBdt: 42800, destCode: "BKK", score: "5-Star Full Service" },
+    ];
+  }
+  if (lower.includes("kul") || lower.includes("malaysia") || lower.includes("kuala")) {
+    return [
+      { id: "f7", airline: "AirAsia", flightNo: "AK 71", departs: "12:25 AM", arrives: "06:15 AM", duration: "3h 50m", stops: "Direct (KLIA2)", baggage: "20 kg Checked + 7 kg Cabin", priceBdt: 36200, destCode: "KUL", score: "Lowest Direct" },
+      { id: "f8", airline: "Batik Air Malaysia", flightNo: "OD 163", departs: "10:15 PM", arrives: "04:10 AM", duration: "3h 55m", stops: "Direct (KLIA1)", baggage: "20 kg Checked + 7 kg Cabin", priceBdt: 37900, destCode: "KUL", score: "Best Value Direct" },
+      { id: "f9", airline: "Malaysia Airlines", flightNo: "MH 197", departs: "12:15 PM", arrives: "06:05 PM", duration: "3h 50m", stops: "Direct (KLIA1)", baggage: "30 kg Checked + 7 kg Cabin", priceBdt: 45200, destCode: "KUL", score: "Full-Service Carrier" },
+    ];
+  }
+  return [
+    { id: "f10", airline: "flydubai", flightNo: "FZ 524", departs: "09:40 PM", arrives: "01:05 AM", duration: "4h 45m", stops: "Direct (DXB)", baggage: "20 kg Checked + 7 kg Cabin", priceBdt: 56900, destCode: "DXB", score: "Cheapest Direct" },
+    { id: "f11", airline: "Biman Bangladesh Airlines", flightNo: "BG 347", departs: "06:15 PM", arrives: "09:35 PM", duration: "4h 40m", stops: "Direct Dreamliner", baggage: "30 kg Checked + 7 kg Cabin", priceBdt: 59800, destCode: "DXB", score: "Best Value + 30kg Bag" },
+    { id: "f12", airline: "Emirates", flightNo: "EK 585", departs: "01:40 AM", arrives: "04:55 AM", duration: "4h 35m", stops: "Direct (Terminal 3)", baggage: "30 kg Checked + 7 kg Cabin", priceBdt: 73500, destCode: "DXB", score: "5-Star Flag Carrier" },
+  ];
+}
+
+function getHotelOptions(hotelCity: string) {
+  const lower = hotelCity.toLowerCase();
+  if (lower.includes("kathmandu") || lower.includes("nepal")) {
+    return [
+      { id: "h1", name: "Thamel Grand Heritage Hotel", category: "Budget Friendly", rating: "3★", review: "8.7/10 Very Good", priceBdt: 2400, neighborhood: "Thamel Core, Kathmandu", features: ["Free Breakfast", "5-min walk to Durbar Marg", "24h Airport Pickup"] },
+      { id: "h2", name: "Hotel Shanker Kathmandu", category: "Mid-Range", rating: "4★", review: "9.1/10 Wonderful", priceBdt: 7400, neighborhood: "Lazimpat, Kathmandu", features: ["Outdoor Swimming Pool", "Heritage Palace Architecture", "Halal-Friendly Dining Nearby"] },
+      { id: "h3", name: "Dwarika's Heritage Resort", category: "Luxury", rating: "5★", review: "9.7/10 Exceptional", priceBdt: 28500, neighborhood: "Battisputali, Kathmandu", features: ["Award-Winning Courtyard", "Full Spa & Courtyard Pool", "Hand-Carved Suites"] },
+    ];
+  }
+  if (lower.includes("bangkok") || lower.includes("thailand")) {
+    return [
+      { id: "h4", name: "First House Hotel Pratunam", category: "Value Pick", rating: "3★", review: "8.4/10 Very Good", priceBdt: 3900, neighborhood: "Pratunam Shopping Zone, Bangkok", features: ["Halal Street Food Outside", "2-min walk to Platinum Mall", "Family Triple Rooms"] },
+      { id: "h5", name: "S31 Sukhumvit Hotel", category: "Mid-Range", rating: "4★", review: "8.9/10 Excellent", priceBdt: 6800, neighborhood: "Sukhumvit (Near Phrom Phong BTS)", features: ["Saltwater Infinity Pool", "Spacious Family Suites", "Easy BTS Skytrain Access"] },
+      { id: "h6", name: "Amari Bangkok Pratunam", category: "Luxury", rating: "5★", review: "9.4/10 Outstanding", priceBdt: 12500, neighborhood: "Pratunam Opposite Platinum Mall", features: ["Resort Pool Deck", "Breeze Spa & Executive Lounge", "Direct Skybridge Walk"] },
+    ];
+  }
+  if (lower.includes("dubai") || lower.includes("uae")) {
+    return [
+      { id: "h10", name: "Rove City Centre Deira", category: "Best Value", rating: "3★", review: "9.1/10 Superb", priceBdt: 7200, neighborhood: "Deira (2 mins to Metro), Dubai", features: ["Outdoor Saltwater Pool", "10 mins from DXB Airport", "South Asian & Halal Dining"] },
+      { id: "h11", name: "Swissôtel Al Ghurair Dubai", category: "Mid-Range", rating: "5★", review: "9.0/10 Excellent", priceBdt: 12800, neighborhood: "Deira Creekside, Dubai", features: ["Connected to Al Ghurair Mall", "Free Beach Shuttle", "Large Family Rooms"] },
+      { id: "h12", name: "Address Downtown View Hotel", category: "Luxury", rating: "5★", review: "9.6/10 World Class", priceBdt: 29500, neighborhood: "Downtown Dubai (Burj Khalifa View)", features: ["Infinity Pool Facing Burj Khalifa", "Direct Dubai Mall Access", "VIP Concierge"] },
+    ];
+  }
+  return [
+    { id: "h7", name: "Travelodge Chinatown KL", category: "Budget Friendly", rating: "3★", review: "8.5/10 Very Good", priceBdt: 2900, neighborhood: "Chinatown & Pasar Seni MRT, KL", features: ["2-min walk to MRT/LRT", "Fast Wi-Fi", "Central Sightseeing Base"] },
+    { id: "h8", name: "WOLO Kuala Lumpur", category: "Mid-Range", rating: "4★", review: "9.1/10 Superb", priceBdt: 6400, neighborhood: "Bukit Bintang Crossing, KL", features: ["Next to Pavilion Mall", "Walk to Jalan Alor & Arab Street", "Modern Boutique Rooms"] },
+    { id: "h9", name: "THE FACE Suites Kuala Lumpur", category: "Luxury", rating: "5★", review: "9.5/10 Exceptional", priceBdt: 9800, neighborhood: "KLCC District, Kuala Lumpur", features: ["51st Floor Rooftop Infinity Pool", "Petronas Twin Towers View", "Full Apartment Suites"] },
+  ];
+}
+
 export function TravelpayoutsCustomWidget({
   initialTab = "flights",
   initialFrom = "Dhaka (DAC)",
   initialTo = "Kathmandu (KTM)",
-  initialHotelCity = "Kathmandu"
+  initialHotelCity = "Kathmandu",
 }: TravelpayoutsCustomWidgetProps = {}) {
   const [searchTab, setSearchTab] = useState<"flights" | "hotels">(initialTab);
   const [fromCity, setFromCity] = useState(initialFrom);
   const [toCity, setToCity] = useState(initialTo);
   const [hotelCity, setHotelCity] = useState(initialHotelCity);
-  const [date, setDate] = useState("2026-10-15");
+  const [date, setDate] = useState(() => getDefaultDateIso(14));
   const [travelers, setTravelers] = useState(1);
   const [isSearching, setIsSearching] = useState(false);
-  const [results, setResults] = useState<any[] | null>(null);
-  const [affiliateToast, setAffiliateToast] = useState<string | null>(null);
+  const [searchUpdatedCount, setSearchUpdatedCount] = useState(0);
+  const [selectedItem, setSelectedItem] = useState<any | null>(null);
 
   useEffect(() => {
     setSearchTab(initialTab);
@@ -40,6 +119,13 @@ export function TravelpayoutsCustomWidget({
     setHotelCity(initialHotelCity);
   }, [initialHotelCity]);
 
+  const results = useMemo(() => {
+    if (searchTab === "flights") {
+      return getFlightOptions(toCity);
+    }
+    return getHotelOptions(hotelCity);
+  }, [searchTab, toCity, hotelCity]);
+
   const swapCities = () => {
     const temp = fromCity;
     setFromCity(toCity);
@@ -49,137 +135,95 @@ export function TravelpayoutsCustomWidget({
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSearching(true);
-    setResults(null);
+    setSelectedItem(null);
 
     setTimeout(() => {
       setIsSearching(false);
-      if (searchTab === "flights") {
-        let options: any[] = [];
-        if (toCity.includes("KTM") || toCity.toLowerCase().includes("nepal") || toCity.toLowerCase().includes("kathmandu")) {
-          options = [
-            { id: "f1", airline: "Biman Bangladesh", flightNo: "BG 0371", departs: "10:35 AM", arrives: "12:05 PM", duration: "1h 30m", stops: "Direct", priceBdt: 29800, score: "9.2/10 Excellent" },
-            { id: "f2", airline: "Himalaya Airlines", flightNo: "H9 5632", departs: "01:20 PM", arrives: "02:50 PM", duration: "1h 30m", stops: "Direct", priceBdt: 31200, score: "8.8/10 Good" },
-            { id: "f3", airline: "Indigo Flights", flightNo: "6E 1876", departs: "08:10 AM", arrives: "03:45 PM", duration: "7h 05m", stops: "1 Stop (Kolkata CCU)", priceBdt: 27900, score: "7.9/10 Economy" }
-          ];
-        } else if (toCity.includes("BKK") || toCity.toLowerCase().includes("thailand") || toCity.toLowerCase().includes("bangkok")) {
-          options = [
-            { id: "f4", airline: "Thai Lion Air", flightNo: "SL 225", departs: "11:50 PM", arrives: "03:20 AM", duration: "2h 30m", stops: "Direct (DMK)", priceBdt: 31900, score: "8.1/10 Budget Choice" },
-            { id: "f5", airline: "Biman Bangladesh", flightNo: "BG 0088", departs: "11:30 AM", arrives: "03:00 PM", duration: "2h 30m", stops: "Direct (BKK)", priceBdt: 35600, score: "8.9/10 Reliable" },
-            { id: "f6", airline: "Thai Airways", flightNo: "TG 321", departs: "01:35 PM", arrives: "05:05 PM", duration: "2h 30m", stops: "Direct (BKK)", priceBdt: 42500, score: "9.6/10 Premium" }
-          ];
-        } else if (toCity.includes("KUL") || toCity.toLowerCase().includes("malaysia") || toCity.toLowerCase().includes("kuala")) {
-          options = [
-            { id: "f7", airline: "AirAsia", flightNo: "AK 71", departs: "12:25 AM", arrives: "06:15 AM", duration: "3h 50m", stops: "Direct", priceBdt: 36200, score: "8.2/10 Popular" },
-            { id: "f8", airline: "Batik Air", flightNo: "OD 163", departs: "10:15 PM", arrives: "04:10 AM", duration: "3h 55m", stops: "Direct", priceBdt: 38400, score: "8.0/10 Budget" },
-            { id: "f9", airline: "Malaysia Airlines", flightNo: "MH 197", departs: "12:15 PM", arrives: "06:05 PM", duration: "3h 50m", stops: "Direct", priceBdt: 45100, score: "9.5/10 Full Carrier" }
-          ];
-        } else {
-          // Dubai or general
-          options = [
-            { id: "f10", airline: "flydubai", flightNo: "FZ 583", departs: "09:40 PM", arrives: "01:25 AM", duration: "4h 45m", stops: "Direct", priceBdt: 58500, score: "8.5/10 Standard" },
-            { id: "f11", airline: "Biman Bangladesh", flightNo: "BG 0347", departs: "06:15 PM", arrives: "10:00 PM", duration: "4h 45m", stops: "Direct", priceBdt: 61000, score: "8.0/10 Comfort" },
-            { id: "f12", airline: "Emirates", flightNo: "EK 585", departs: "01:40 AM", arrives: "05:25 AM", duration: "4h 45m", stops: "Direct", priceBdt: 74500, score: "9.8/10 Unmatched Luxury" }
-          ];
-        }
-        setResults(options);
-      } else {
-        let options: any[] = [];
-        if (hotelCity.toLowerCase().includes("kathmandu") || hotelCity.toLowerCase().includes("nepal")) {
-          options = [
-            { id: "h1", name: "Thamel Grand Hotel", category: "Budget", rating: "3★", review: "8.6/10 Great", priceBdt: 2200, neighborhood: "Thamel Core", features: ["Free Breakfast", "Walk to main bazaars", "Hot Shower"] },
-            { id: "h2", name: "Hotel Shanker", category: "Mid-Range", rating: "4★", review: "9.0/10 Fabulous", priceBdt: 7500, neighborhood: "Lazimpat Precinct", features: ["Swimming Pool", "Heritage Palace conversion", "Garden view"] },
-            { id: "h3", name: "Dwarika's Heritage Resort", category: "Luxury", rating: "5★", review: "9.7/10 World Class", priceBdt: 29000, neighborhood: "Battisputali Area", features: ["Museum style", "Top Organic Dining", "Artisan carved wooden suites"] }
-          ];
-        } else if (hotelCity.toLowerCase().includes("bangkok") || hotelCity.toLowerCase().includes("thailand")) {
-          options = [
-            { id: "h4", name: "First House Hotel Bangkok", category: "Mid-Range", rating: "3★", review: "8.1/10 Popular", priceBdt: 3800, neighborhood: "Pratunam Shopping Zone", features: ["Halal menu options", "Opposite Wholesale Market", "Family Triple Rooms"] },
-            { id: "h5", name: "S31 Sukhumvit Heights", category: "Mid-Range", rating: "4★", review: "8.8/10 Scenic", priceBdt: 6800, neighborhood: "Sukhumvit (Near BTS)", features: ["Glass-edge pool", "Duplex skyline layouts", "Subway direct distance"] },
-            { id: "h6", name: "Amari Bangkok Hotel", category: "Luxury", rating: "5★", review: "9.4/10 Unbeatable", priceBdt: 12500, neighborhood: "Pratunam Axis", features: ["Rooftop terrace pool", "Full spa treatments", "Facing Platinum Fashion Mall"] }
-          ];
-        } else {
-          // KL & General
-          options = [
-            { id: "h7", name: "The Explorer Guesthouse", category: "Budget", rating: "2★", review: "8.5/10 Cozy", priceBdt: 1700, neighborhood: "Chinatown & Heritage", features: ["Free Shared Kitchen", "Walk to Train Station", "Lively cafe"] },
-            { id: "h8", name: "Wolo Bukit Bintang", category: "Mid-Range", rating: "4★", review: "9.1/10 Perfect Walk", priceBdt: 6200, neighborhood: "Bukit Bintang Crossing", features: ["High-speed optic fiber WiFi", "Modern art deco beds", "Beside Pavilion Mall"] },
-            { id: "h9", name: "The Face Suites Tower View", category: "Luxury", rating: "5★", review: "9.5/10 Peak Comfort", priceBdt: 9500, neighborhood: "KLCC District", features: ["Rooftop Twin Tower infinity pool", "Luxury kitchen", "Huge separate bedrooms"] }
-          ];
-        }
-        setResults(options);
-      }
-    }, 750);
-  };
-
-  const triggerAffiliateLink = (provider: string, itemName: string, price: number) => {
-    setAffiliateToast(`🎯 Redirecting via URAL tracking agent to Travelpayouts ${provider === "flight" ? "Jetradar" : "Hotellook"} engine...
-Tracking ID: DAC-URAL-2026-614
-Estimated payout for Bangladesh Outbound Route: BDT ${(price * 0.05).toFixed(0)}`);
-    setTimeout(() => {
-      setAffiliateToast(null);
-    }, 4500);
+      setSearchUpdatedCount((c) => c + 1);
+    }, 300);
   };
 
   return (
-    <div id="travelpayouts-affiliate-block" className="bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden my-6">
+    <div id="travelpayouts-affiliate-block" className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden my-4 text-slate-900">
       {/* Widget Tabs */}
-      <div className="bg-[#102A43] p-4 text-white flex items-center justify-between">
+      <div className="bg-[#102A43] p-3.5 sm:px-5 text-white flex flex-wrap items-center justify-between gap-2">
         <div className="flex gap-2">
           <button
             id="tab-search-flights"
-            onClick={() => { setSearchTab("flights"); setResults(null); }}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-              searchTab === "flights" ? "bg-[#F6B73C] text-[#102A43] shadow-md" : "hover:bg-slate-800 text-slate-300"
+            type="button"
+            onClick={() => {
+              setSearchTab("flights");
+              setSelectedItem(null);
+            }}
+            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+              searchTab === "flights"
+                ? "bg-[#F6B73C] text-[#102A43] shadow-xs"
+                : "hover:bg-slate-800 text-slate-300"
             }`}
           >
-            <Plane size={16} />
+            <Plane size={15} />
             Search Flights
           </button>
           <button
             id="tab-search-hotels"
-            onClick={() => { setSearchTab("hotels"); setResults(null); }}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-              searchTab === "hotels" ? "bg-[#F6B73C] text-[#102A43] shadow-md" : "hover:bg-slate-800 text-slate-300"
+            type="button"
+            onClick={() => {
+              setSearchTab("hotels");
+              setSelectedItem(null);
+            }}
+            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+              searchTab === "hotels"
+                ? "bg-[#F6B73C] text-[#102A43] shadow-xs"
+                : "hover:bg-slate-800 text-slate-300"
             }`}
           >
-            <Building size={16} />
+            <Building size={15} />
             Search Hotels
           </button>
         </div>
-        <div className="hidden sm:flex items-center gap-2 text-xs text-[#F6B73C] bg-[#F6B73C]/10 px-3 py-1.5 rounded-full border border-[#F6B73C]/20 font-mono">
-          <Percent size={12} />
-          <span>Exclusive Travelpayouts Partner Rates Active</span>
-        </div>
+        <span className="text-xs text-slate-300 font-medium">
+          Live Partner Fares · Prices in BDT (৳)
+        </span>
       </div>
 
       {/* Widget Input Form */}
-      <div className="p-6 bg-slate-50 border-b border-slate-200">
-        <form onSubmit={handleSearch} className="space-y-4">
+      <div className="p-4 sm:p-5 bg-slate-50 border-b border-slate-200">
+        <form onSubmit={handleSearch}>
           {searchTab === "flights" ? (
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
               <div>
-                <label className="block text-xs font-bold text-[#102A43] uppercase tracking-wider mb-1">Departure Airport</label>
-                <div className="relative">
-                  <select
-                    id="select-from-airport"
-                    value={fromCity}
-                    onChange={(e) => setFromCity(e.target.value)}
-                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
-                  >
-                    <option value="Dhaka (DAC)">Dhaka (DAC) - Bangladesh</option>
-                    <option value="Chittagong (CGP)">Chittagong (CGP) - Bangladesh</option>
-                  </select>
-                </div>
+                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                  Departure Airport
+                </label>
+                <select
+                  id="select-from-airport"
+                  value={fromCity}
+                  onChange={(e) => setFromCity(e.target.value)}
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                >
+                  <option value="Dhaka (DAC)">Dhaka (DAC) - Bangladesh</option>
+                  <option value="Chattogram (CGP)">Chattogram (CGP) - Bangladesh</option>
+                  <option value="Sylhet (ZYL)">Sylhet (ZYL) - Bangladesh</option>
+                </select>
               </div>
 
               <div className="flex flex-col relative justify-center">
-                <div className="absolute right-1/2 translate-x-1/2 -top-2 bg-white rounded-full border border-slate-200 p-1 cursor-pointer hover:bg-slate-100 hidden md:block z-10" onClick={swapCities}>
-                  <ArrowRightLeft size={12} className="text-[#102A43]" />
-                </div>
-                <label className="block text-xs font-bold text-[#102A43] uppercase tracking-wider mb-1">Destination Airport</label>
+                <button
+                  type="button"
+                  onClick={swapCities}
+                  title="Swap Airports"
+                  className="absolute right-2 top-0 text-[11px] font-semibold text-[#102A43] hover:underline flex items-center gap-1 cursor-pointer"
+                >
+                  <ArrowRightLeft size={11} /> Swap
+                </button>
+                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                  Destination Airport
+                </label>
                 <select
                   id="select-to-airport"
                   value={toCity}
                   onChange={(e) => setToCity(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
                 >
                   <option value="Kathmandu (KTM)">Kathmandu (KTM) - Nepal 🇳🇵</option>
                   <option value="Bangkok (BKK / DMK)">Bangkok (BKK / DMK) - Thailand 🇹🇭</option>
@@ -189,62 +233,78 @@ Estimated payout for Bangladesh Outbound Route: BDT ${(price * 0.05).toFixed(0)}
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#102A43] uppercase tracking-wider mb-1">Travel Date</label>
-                <div className="relative">
-                  <input
-                    id="input-flight-date"
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
-                  />
-                </div>
+                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                  Travel Date
+                </label>
+                <input
+                  id="input-flight-date"
+                  type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                />
               </div>
 
               <button
                 id="btn-search-flights-submit"
                 type="submit"
                 disabled={isSearching}
-                className="w-full bg-[#102A43] text-white hover:bg-[#1a4166] py-2.5 rounded-lg text-sm font-semibold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                className="w-full bg-[#07C369] hover:bg-[#06ad5d] text-white py-2.5 px-4 rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
               >
-                <Search size={16} />
-                {isSearching ? "Searching Flights..." : "Search Lowest Fares"}
+                {isSearching ? (
+                  <>
+                    <RefreshCw size={16} className="animate-spin" />
+                    <span>Searching...</span>
+                  </>
+                ) : (
+                  <>
+                    <Search size={16} />
+                    <span>Search Flights</span>
+                  </>
+                )}
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
               <div>
-                <label className="block text-xs font-bold text-[#102A43] uppercase tracking-wider mb-1">Destination City</label>
+                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                  Destination City
+                </label>
                 <select
                   id="select-hotel-city"
                   value={hotelCity}
                   onChange={(e) => setHotelCity(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
                 >
                   <option value="Kathmandu">Kathmandu - Nepal 🇳🇵</option>
                   <option value="Bangkok">Bangkok - Thailand 🇹🇭</option>
                   <option value="Kuala Lumpur">Kuala Lumpur - Malaysia 🇲🇾</option>
+                  <option value="Dubai">Dubai - UAE 🇦🇪</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#102A43] uppercase tracking-wider mb-1">Check-in Date</label>
+                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                  Check-in Date
+                </label>
                 <input
                   id="input-checkin-date"
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#102A43] uppercase tracking-wider mb-1">Guests / Rooms</label>
+                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                  Guests / Rooms
+                </label>
                 <select
                   id="select-hotel-rooms"
                   value={travelers}
                   onChange={(e) => setTravelers(Number(e.target.value))}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
                 >
                   <option value="1">1 Guest, 1 Room</option>
                   <option value="2">2 Guests, 1 Room</option>
@@ -257,97 +317,116 @@ Estimated payout for Bangladesh Outbound Route: BDT ${(price * 0.05).toFixed(0)}
                 id="btn-search-hotels-submit"
                 type="submit"
                 disabled={isSearching}
-                className="w-full bg-[#F6B73C] text-[#102A43] hover:bg-[#e0a42d] py-2.5 rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                className="w-full bg-[#F6B73C] text-[#102A43] hover:bg-[#e0a42d] py-2.5 px-4 rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
               >
-                <Search size={16} />
-                {isSearching ? "Querying Stays..." : "Find Verified Hotels"}
+                {isSearching ? (
+                  <>
+                    <RefreshCw size={16} className="animate-spin" />
+                    <span>Searching...</span>
+                  </>
+                ) : (
+                  <>
+                    <Search size={16} />
+                    <span>Search Hotels</span>
+                  </>
+                )}
               </button>
             </div>
           )}
         </form>
       </div>
 
-      {/* Dynamic Results Display */}
-      {isSearching && (
-        <div className="p-12 text-center">
-          <div className="w-8 h-8 rounded-full border-2 border-[#102A43] border-t-transparent animate-spin mx-auto mb-3"></div>
-          <p className="text-sm font-medium text-slate-500 font-mono">Aggregating real-time partner fares from Biman, AirAsia, Expedia & Agoda databases...</p>
-        </div>
-      )}
-
-      {/* Affiliate Action Feedback Toast */}
-      {affiliateToast && (
-        <div id="affiliate-tracker-toast" className="m-4 p-4 border-l-4 border-amber-500 bg-amber-50 rounded-r-lg flex gap-3 text-slate-800 text-xs shadow-lg animate-fade-in relative">
-          <Flame className="text-amber-600 shrink-0 mt-0.5 animate-bounce" size={18} />
-          <div className="space-y-1">
-            <span className="font-bold text-amber-950 uppercase tracking-widest block font-mono text-[10px]">Affiliate System Event Triggered</span>
-            <pre className="font-mono text-slate-700 whitespace-pre-wrap">{affiliateToast}</pre>
+      {/* Results List */}
+      <div className="p-4 sm:p-6 bg-white space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 size={15} className="text-[#07C369]" />
+            <span className="text-xs font-bold text-slate-800">
+              {searchTab === "flights"
+                ? `Showing Flights: ${fromCity} → ${toCity} (${date})`
+                : `Showing Top Stays in ${hotelCity} · Check-in ${date}`}
+            </span>
           </div>
-          <button className="absolute top-2 right-2 text-amber-800 hover:text-black font-bold font-mono" onClick={() => setAffiliateToast(null)}>×</button>
+          {searchUpdatedCount > 0 && (
+            <span className="text-xs font-medium text-emerald-700">
+              ✓ Results refreshed for your query
+            </span>
+          )}
         </div>
-      )}
 
-      {results && results.length > 0 && (
-        <div className="p-6 bg-white space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <span className="text-xs font-bold text-slate-500 font-mono">AVAILABLE LOW RATES FOR YOUR DEPARTURE:</span>
-            <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold font-mono uppercase">Cheapest fares found online</span>
-          </div>
-
-          <div className="space-y-3">
-            {searchTab === "flights" ? (
-              results.map((flight) => (
-                <div key={flight.id} className="border border-slate-200 hover:border-slate-350 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:bg-slate-50">
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 bg-blue-50 text-[#102A43] rounded-full">
-                      <Plane size={20} />
+        <div className="space-y-3">
+          {searchTab === "flights"
+            ? results.map((flight: any) => (
+                <div
+                  key={flight.id}
+                  className="border border-slate-200 hover:border-slate-300 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:bg-slate-50/60"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="p-2.5 bg-[#102A43] text-[#F6B73C] rounded-xl shrink-0 mt-0.5">
+                      <Plane size={18} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-800 text-sm flex items-center gap-2">
-                        {flight.airline} <span className="text-xs font-mono font-medium text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">{flight.flightNo}</span>
-                      </h4>
-                      <p className="text-xs text-slate-500 mt-1">
-                        <strong className="text-slate-800">{flight.departs}</strong> → <strong className="text-slate-800">{flight.arrives}</strong> ({flight.duration})
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h4 className="font-bold text-slate-900 text-sm">{flight.airline}</h4>
+                        <span className="text-xs font-mono text-slate-500">{flight.flightNo}</span>
+                        <span className="text-slate-300">·</span>
+                        <span className="text-xs font-semibold text-emerald-700">{flight.score}</span>
+                      </div>
+                      <p className="text-xs text-slate-700 mt-1">
+                        <strong>{flight.departs}</strong> → <strong>{flight.arrives}</strong> ({flight.duration} · {flight.stops})
                       </p>
-                      <span className="text-[10px] text-slate-400 font-medium font-mono">{flight.stops}</span>
+                      <p className="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1">
+                        <Luggage size={12} /> {flight.baggage}
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex items-center justify-between md:flex-col md:items-end gap-2 border-t md:border-t-0 border-slate-100 pt-3 md:pt-0">
                     <div className="text-left md:text-right">
-                      <div className="text-lg font-black text-[#102A43]">
-                        BDT {flight.priceBdt.toLocaleString()}
+                      <div className="text-lg font-black text-[#102A43] tabular-nums">
+                        ৳{flight.priceBdt.toLocaleString()} BDT
                       </div>
-                      <span className="text-[10px] text-slate-400 block font-mono">Roundtrip / Taxes Included</span>
+                      <span className="text-[11px] text-slate-500 block">
+                        Round-trip incl. taxes
+                      </span>
                     </div>
                     <button
                       id={`btn-book-flight-${flight.id}`}
-                      onClick={() => triggerAffiliateLink("flight", `${flight.airline} ${flight.flightNo}`, flight.priceBdt)}
-                      className="bg-[#F6B73C] hover:bg-[#e0a42d] text-[#102A43] px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1 cursor-pointer transition-all shadow-sm"
+                      type="button"
+                      onClick={() => setSelectedItem({ type: "flight", ...flight })}
+                      className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
                     >
-                      Book Ticket
+                      Select Flight
                       <ExternalLink size={12} />
                     </button>
                   </div>
                 </div>
               ))
-            ) : (
-              results.map((hotel) => (
-                <div key={hotel.id} className="border border-slate-200 hover:border-slate-350 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:bg-slate-50">
+            : results.map((hotel: any) => (
+                <div
+                  key={hotel.id}
+                  className="border border-slate-200 hover:border-slate-300 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:bg-slate-50/60"
+                >
                   <div className="flex items-start gap-3">
-                    <div className="p-3 bg-indigo-50 text-indigo-700 rounded-full mt-1">
-                      <Building size={20} />
+                    <div className="p-2.5 bg-slate-100 text-[#102A43] rounded-xl shrink-0 mt-0.5">
+                      <Building size={18} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-850 text-sm flex items-center gap-2">
-                        {hotel.name} <span className="text-xs text-amber-500 font-bold font-mono">{hotel.rating}</span>
-                      </h4>
-                      <p className="text-xs text-slate-500 mt-1 font-medium italic">
-                        📍 {hotel.neighborhood}
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h4 className="font-bold text-slate-900 text-sm">{hotel.name}</h4>
+                        <span className="text-xs text-amber-600 font-bold">{hotel.rating}</span>
+                        <span className="text-slate-300">·</span>
+                        <span className="text-xs text-emerald-700 font-medium">{hotel.review}</span>
+                      </div>
+                      <p className="text-xs text-slate-600 mt-1 flex items-center gap-1">
+                        <MapPin size={12} className="text-slate-400" /> {hotel.neighborhood}
                       </p>
-                      <div className="flex flex-wrap gap-1.5 mt-2">
+                      <div className="flex flex-wrap items-center gap-2 mt-1.5 text-[11px] text-slate-500">
                         {hotel.features.map((feature: string, idx: number) => (
-                          <span key={idx} className="bg-slate-100 text-[#102A43] text-[9px] px-2 py-0.5 rounded-full font-medium font-mono border border-slate-200">{feature}</span>
+                          <React.Fragment key={idx}>
+                            {idx > 0 && <span aria-hidden="true">·</span>}
+                            <span>{feature}</span>
+                          </React.Fragment>
                         ))}
                       </div>
                     </div>
@@ -355,26 +434,59 @@ Estimated payout for Bangladesh Outbound Route: BDT ${(price * 0.05).toFixed(0)}
 
                   <div className="flex items-center justify-between md:flex-col md:items-end gap-2 border-t md:border-t-0 border-slate-100 pt-3 md:pt-0">
                     <div className="text-left md:text-right">
-                      <div className="text-lg font-black text-slate-800">
-                        BDT {hotel.priceBdt.toLocaleString()}
+                      <div className="text-lg font-black text-slate-900 tabular-nums">
+                        ৳{hotel.priceBdt.toLocaleString()} BDT
                       </div>
-                      <span className="text-[10px] text-slate-400 block font-mono">Per Room / Night</span>
+                      <span className="text-[11px] text-slate-500 block">
+                        Per Room / Night
+                      </span>
                     </div>
                     <button
                       id={`btn-book-hotel-${hotel.id}`}
-                      onClick={() => triggerAffiliateLink("hotel", hotel.name, hotel.priceBdt)}
-                      className="bg-[#102A43] hover:bg-[#1f4c75] text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1 cursor-pointer transition-all shadow-sm"
+                      type="button"
+                      onClick={() => setSelectedItem({ type: "hotel", ...hotel })}
+                      className="bg-[#102A43] hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
                     >
-                      Book Stay
+                      Check Availability
                       <ExternalLink size={12} />
                     </button>
                   </div>
                 </div>
-              ))
-            )}
-          </div>
+              ))}
         </div>
-      )}
+
+        {/* Selected Booking Confirmation Banner */}
+        {selectedItem && (
+          <div className="mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="space-y-1">
+              <div className="text-xs font-bold text-emerald-950 flex items-center gap-1.5">
+                <CheckCircle2 size={15} className="text-[#07C369]" />
+                <span>
+                  {selectedItem.type === "flight"
+                    ? `${selectedItem.airline} (${selectedItem.flightNo}) — ৳${selectedItem.priceBdt.toLocaleString()} BDT`
+                    : `${selectedItem.name} (${selectedItem.neighborhood}) — ৳${selectedItem.priceBdt.toLocaleString()} BDT/night`}
+                </span>
+              </div>
+              <p className="text-xs text-slate-600">
+                Continue to official Travelpayouts partner booking portal to lock in this rate for {date}.
+              </p>
+            </div>
+            <a
+              href={
+                selectedItem.type === "flight"
+                  ? `https://www.aviasales.com/?marker=675992&currency=BDT`
+                  : `https://search.hotellook.com/?marker=675992&language=en&currency=BDT&destination=${encodeURIComponent(hotelCity)}`
+              }
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="shrink-0 bg-[#102A43] hover:bg-slate-800 text-[#F6B73C] px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+            >
+              <span>Proceed to Partner Checkout</span>
+              <ExternalLink size={13} />
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
