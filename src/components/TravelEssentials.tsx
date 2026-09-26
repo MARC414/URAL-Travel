@@ -1,214 +1,363 @@
-import React from "react";
-import { ExternalLink, Compass, Wifi, Car, ArrowRight } from "lucide-react";
+import React, { useState } from "react";
+import { ExternalLink, Compass, Wifi, Car, KeyRound, ArrowRight } from "lucide-react";
 import { KlookEmbed } from "./KlookEmbed";
 import { KiwitaxiEmbed } from "./KiwitaxiEmbed";
 import { AiraloEmbed } from "./AiraloEmbed";
 import { QeeqEmbed } from "./QeeqEmbed";
+import { WelcomePickupsEmbed, WELCOME_PICKUPS_PARTNER_URL } from "./WelcomePickupsEmbed";
+
+export type EssentialsTab = "transfers" | "activities" | "esim" | "rentals";
 
 interface TravelEssentialsProps {
   country: string;
+  defaultTab?: EssentialsTab;
+  compactHeader?: boolean;
+  lang?: "en" | "bn";
 }
 
-export function TravelEssentials({ country }: TravelEssentialsProps) {
+export function TravelEssentials({
+  country,
+  defaultTab = "transfers",
+  compactHeader = false,
+  lang = "en",
+}: TravelEssentialsProps) {
+  const [activeTab, setActiveTab] = useState<EssentialsTab>(defaultTab);
+  const [transferProvider, setTransferProvider] = useState<"welcome" | "kiwitaxi">("welcome");
+  const isBn = lang === "bn";
+
   // Helper to map country to appropriate Klook City ID
   const parseKlookCityId = (cName: string): number => {
     const formatted = cName.toLowerCase();
-    if (formatted.includes("nepal")) return 98; // Kathmandu
-    if (formatted.includes("thailand")) return 6; // Bangkok
-    if (formatted.includes("malaysia")) return 14; // Kuala Lumpur
-    if (formatted.includes("uae") || formatted.includes("dubai")) return 9; // Dubai
-    return 9; // Fallback
+    if (formatted.includes("nepal") || formatted.includes("kathmandu")) return 98;
+    if (formatted.includes("thailand") || formatted.includes("bangkok")) return 6;
+    if (formatted.includes("malaysia") || formatted.includes("kuala")) return 14;
+    if (formatted.includes("singapore")) return 15;
+    if (formatted.includes("maldives")) return 110;
+    if (formatted.includes("uae") || formatted.includes("dubai")) return 9;
+    return 9;
   };
 
   const cityId = parseKlookCityId(country);
 
+  const tabs: Array<{
+    id: EssentialsTab;
+    label: string;
+    partnerSummary: string;
+    icon: React.ReactNode;
+  }> = [
+    {
+      id: "transfers",
+      label: isBn ? "Airport Transfer ও Pickup" : "Airport Pickups",
+      partnerSummary: "Welcome Pickups · Kiwitaxi",
+      icon: <Car size={15} />,
+    },
+    {
+      id: "activities",
+      label: isBn ? "Tours ও Theme Park Pass" : "Tours & Passes",
+      partnerSummary: "Klook · KKday",
+      icon: <Compass size={15} />,
+    },
+    {
+      id: "esim",
+      label: isBn ? "Travel eSIM (ডাটা)" : "Travel eSIM",
+      partnerSummary: "Airalo Instant Data",
+      icon: <Wifi size={15} />,
+    },
+    {
+      id: "rentals",
+      label: isBn ? "Car Rental (গাড়ি ভাড়া)" : "Car Rental",
+      partnerSummary: "QEEQ Global Fleet",
+      icon: <KeyRound size={15} />,
+    },
+  ];
+
   return (
-    <div className="space-y-10 py-4">
-      {/* SECTION HEADER */}
-      <div className="border-b border-slate-200 pb-3">
-        <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">
-          In-Country Comfort Guides
-        </span>
-        <h3 className="font-serif text-xl sm:text-2xl font-black text-slate-900 mt-2">
-          Travel Essentials for {country}
-        </h3>
-        <p className="text-xs text-slate-500 font-sans">
-          Arrive with confidence. Search airport transfers, eSIM profiles, activities, and rentals synced directly to {country}'s local logistics.
-        </p>
-      </div>
-
-      {/* PARENT RESPONSIVE COOP GRID (Flights -> Visa -> Hotel are already handled on the page) */}
-      {/* 
-          Order of "moment in the journey" specified:
-          1. Getting Around (transfers [Kiwitaxi] + car rental [QEEQ])
-          2. Activities (Klook / KKday)
-          3. Stay Connected (Airalo eSIM)
-      */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-        {/* 🚗 1. GETTING AROUND: AIRPORT TRANSFERS (Kiwitaxi) */}
-        <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 flex flex-col justify-between">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="p-1.5 bg-[#102A43]/10 text-[#102A43] rounded-lg">
-                <Car size={16} />
-              </span>
-              <div>
-                <h4 className="font-serif font-black text-sm text-slate-900">Airport Taxi & Shuttles</h4>
-                <p className="text-[10px] uppercase font-mono text-slate-400 font-bold">Recommended for families & late arrivals</p>
-              </div>
-            </div>
-            
-            <p className="text-xs text-slate-600 font-light font-sans leading-relaxed">
-              Skip taxi scams and language barriers at the gate. Pre-book an English-speaking private driver with a clean vehicle.
-            </p>
-
-            {/* Widget Container */}
-            <div className="bg-white p-2 rounded-xl border border-slate-200">
-              <KiwitaxiEmbed />
-            </div>
+    <section className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-xs space-y-6">
+      {/* Clean Header + Segmented Tab Bar */}
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-slate-100 pb-5">
+        <div className="space-y-1.5">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
+            <span className="font-semibold text-[#102A43]">
+              {isBn ? "ভ্রমণের জরুরি সেবাসমূহ (Travel Essentials)" : "In-Country Travel Essentials"}
+            </span>
+            <span aria-hidden="true">·</span>
+            <span>{isBn ? `${country}-এর জন্য প্রযোজ্য` : `Synced for ${country}`}</span>
+            <span aria-hidden="true">·</span>
+            <span>{isBn ? "সব সেবা এক জায়গায়" : "Single-View Booking Hub"}</span>
           </div>
-
-          <div className="pt-4 border-t border-slate-200/60 mt-4 flex flex-col gap-2">
-            <a
-              href="https://kiwitaxi.tpo.li/GIhvhrtF"
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="w-full bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-black text-xs py-2.5 px-4 rounded-xl shadow-sm text-center transition-all inline-flex items-center justify-center gap-1.5"
-            >
-              Secure Driver Booking via Kiwitaxi <ExternalLink size={12} />
-            </a>
-          </div>
+          <h3
+            className={`font-serif font-bold text-slate-900 tracking-tight ${
+              compactHeader ? "text-lg sm:text-xl" : "text-xl sm:text-2xl"
+            }`}
+          >
+            {isBn
+              ? "Airport Transfer, Sightseeing Tour, Travel eSIM ও Car Rental"
+              : "Airport Transfers, Activities, eSIM & Car Rental"}
+          </h3>
         </div>
 
-        {/* 🎟️ 2. ACTIVITIES: TOURS & ATTRACTIONS (Klook & KKday) */}
-        <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 flex flex-col justify-between">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="p-1.5 bg-[#102A43]/10 text-[#102A43] rounded-lg">
-                <Compass size={16} />
-              </span>
-              <div>
-                <h4 className="font-serif font-black text-sm text-slate-900">Guided Tours & Local Passes</h4>
-                <p className="text-[10px] uppercase font-mono text-slate-400 font-bold">Unmissable curated sightseeing</p>
+        {/* Interactive Segmented Tab Bar */}
+        <div
+          role="tablist"
+          aria-label="Travel Essentials Categories"
+          className="flex items-center gap-1 p-1 bg-slate-100 rounded-xl overflow-x-auto shrink-0"
+        >
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-3.5 py-2 rounded-lg text-xs font-medium transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer ${
+                  isActive
+                    ? "bg-[#102A43] text-white font-semibold shadow-xs"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <span className={isActive ? "text-[#F6B73C]" : "text-slate-500"}>
+                  {tab.icon}
+                </span>
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* TAB 1: AIRPORT PICKUPS & TRANSFERS (Welcome Pickups + Kiwitaxi) */}
+      {activeTab === "transfers" && (
+        <div className="space-y-4 animate-fade-in">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50 px-4 py-3 rounded-xl border border-slate-200/80">
+            <div className="space-y-0.5">
+              <div className="text-xs font-semibold text-slate-900">
+                Choose Your Airport Transfer Partner for {country}
               </div>
+              <p className="text-[11px] text-slate-500">
+                Welcome Pickups includes arrival-gate meet & greet with flight tracking; Kiwitaxi offers budget point-to-point shuttles.
+              </p>
             </div>
 
-            <p className="text-xs text-slate-600 font-light font-sans leading-relaxed">
-              Secure skip-the-line entries, amusement park vouchers, and private tour experiences at lowest guaranteed price.
-            </p>
-
-            {/* Widget Container */}
-            <div className="bg-white p-2 rounded-xl border border-slate-200">
-              <KlookEmbed cityId={cityId} />
+            <div className="flex items-center gap-1 p-1 bg-slate-200/80 rounded-lg shrink-0 self-start sm:self-center">
+              <button
+                type="button"
+                onClick={() => setTransferProvider("welcome")}
+                className={`px-3 py-1.5 text-xs rounded-md transition-colors whitespace-nowrap cursor-pointer ${
+                  transferProvider === "welcome"
+                    ? "bg-white text-[#102A43] font-semibold shadow-2xs"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Welcome Pickups (Meet & Greet)
+              </button>
+              <button
+                type="button"
+                onClick={() => setTransferProvider("kiwitaxi")}
+                className={`px-3 py-1.5 text-xs rounded-md transition-colors whitespace-nowrap cursor-pointer ${
+                  transferProvider === "kiwitaxi"
+                    ? "bg-white text-[#102A43] font-semibold shadow-2xs"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Kiwitaxi (Standard Shuttle)
+              </button>
             </div>
           </div>
 
-          <div className="pt-4 border-t border-slate-200/60 mt-4 space-y-3">
-            <div className="space-y-2">
-              {/* Klook Button - Primary */}
+          {transferProvider === "welcome" ? (
+            <WelcomePickupsEmbed defaultCountry={country} />
+          ) : (
+            <div className="space-y-3">
+              <KiwitaxiEmbed />
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs text-slate-500">
+                <span>Fixed price per car · Free cancellation up to 24h before arrival</span>
+                <a
+                  href="https://kiwitaxi.tpo.li/GIhvhrtF"
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="font-semibold text-[#102A43] hover:underline inline-flex items-center gap-1"
+                >
+                  <span>Open Kiwitaxi Direct</span>
+                  <ExternalLink size={12} />
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* TAB 2: TOURS & ATTRACTION PASSES (Klook + KKday) */}
+      {activeTab === "activities" && (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center animate-fade-in">
+          <div className="lg:col-span-5 space-y-3">
+            <div className="flex items-center gap-2 text-xs text-slate-500">
+              <span className="font-semibold text-[#102A43]">Skip-the-Line Sightseeing</span>
+              <span aria-hidden="true">·</span>
+              <span>Instant Mobile QR Vouchers</span>
+            </div>
+            <h4 className="font-serif text-lg font-bold text-slate-900">
+              Guided Day Tours, Theme Parks & Attraction Passes in {country}
+            </h4>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Pre-book iconic experiences — from Bangkok Chao Phraya dinner cruises and Dubai desert safaris to Singapore Gardens by the Bay and KL Petronas Towers — at discounted partner rates.
+            </p>
+            <div className="flex flex-wrap items-center gap-2.5 pt-2">
               <a
                 href="https://klook.tpo.li/IYOU76Bn"
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="w-full bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-black text-xs py-2.5 px-4 rounded-xl shadow-sm text-center transition-all inline-flex items-center justify-center gap-1.5"
+                className="bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
               >
-                Search Attraction Passes on Klook <ExternalLink size={12} />
+                <span>Search Passes on Klook</span>
+                <ExternalLink size={12} />
               </a>
-
-              {/* KKday Button - Secondary (Always directly below Klook as requested in Rule 2) */}
-              <div className="text-center pt-1">
-                <span className="text-[10px] text-slate-450 uppercase font-mono tracking-wider block mb-1">Alternative activity booking:</span>
-                <a
-                  href="https://kkday.tpo.li/3Ecyxris"
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="w-full bg-white border border-slate-200 hover:border-[#F6B73C] text-[#102A43] font-bold text-xs py-2 px-4 rounded-xl text-center transition-all inline-flex items-center justify-center gap-1.5 hover:shadow-xs"
-                >
-                  Browse KKDay Activity Catalog <ArrowRight size={11} />
-                </a>
-              </div>
+              <a
+                href="https://kkday.tpo.li/3Ecyxris"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
+              >
+                <span>Browse KKday Catalog</span>
+                <ArrowRight size={12} />
+              </a>
             </div>
           </div>
+
+          <div className="lg:col-span-7">
+            <KlookEmbed cityId={cityId} />
+          </div>
         </div>
+      )}
 
-        {/* 📶 3. STAY CONNECTED: TRAVEL eSIM & MOBILE DATA (Airalo) */}
-        <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 flex flex-col justify-between">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="p-1.5 bg-[#102A43]/10 text-[#102A43] rounded-lg">
-                <Wifi size={16} />
-              </span>
-              <div>
-                <h4 className="font-serif font-black text-sm text-slate-900">Stay Connected: Travel eSIM</h4>
-                <p className="text-[10px] uppercase font-mono text-slate-400 font-bold">Instant eSIM activation on arrival</p>
-              </div>
+      {/* TAB 3: STAY CONNECTED (Airalo Travel eSIM) */}
+      {activeTab === "esim" && (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center animate-fade-in">
+          <div className="lg:col-span-5 space-y-3">
+            <div className="flex items-center gap-2 text-xs text-slate-500">
+              <span className="font-semibold text-[#102A43]">Digital Travel eSIM</span>
+              <span aria-hidden="true">·</span>
+              <span>Zero Roaming Bill Shock</span>
             </div>
-
-            <p className="text-xs text-slate-600 font-light font-sans leading-relaxed">
-              Don't queue for local SIM cards or overpay for roaming. Download a digital eSIM for {country} immediately before takeoff.
+            <h4 className="font-serif text-lg font-bold text-slate-900">
+              Land in {country} with High-Speed 4G/5G Data Already Active
+            </h4>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Skip long airport SIM queues and passport registration counters. Install an Airalo digital eSIM in Dhaka before takeoff so Grab, Uber, Google Maps, and WhatsApp work the moment your plane touches down.
             </p>
-
-            {/* Widget Container */}
-            <div className="bg-white p-2 rounded-xl border border-slate-200">
-              <AiraloEmbed />
+            <div className="pt-2">
+              <a
+                href="https://airalo.tpo.li/mV2QXsXK"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
+              >
+                <span>View All Airalo eSIM Plans</span>
+                <ExternalLink size={12} />
+              </a>
             </div>
           </div>
 
-          <div className="pt-4 border-t border-slate-200/60 mt-4 flex flex-col gap-2">
-            <a
-              href="https://airalo.tpo.li/mV2QXsXK"
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="w-full bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-black text-xs py-2.5 px-4 rounded-xl shadow-sm text-center transition-all inline-flex items-center justify-center gap-1.5"
-            >
-              Get Local Data Plans via Airalo eSIM <ExternalLink size={12} />
-            </a>
-          </div>
-        </div>
-
-        {/* 🚙 4. GETTING AROUND: CAR RENTALS (QEEQ) */}
-        <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl lg:col-span-3">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-            {/* Left side: Info & Call to Action */}
-            <div className="flex flex-col justify-between h-full space-y-4">
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <span className="p-1.5 bg-[#102A43]/10 text-[#102A43] rounded-lg">
-                    <Car size={16} />
-                  </span>
-                  <div>
-                    <h4 className="font-serif font-black text-sm text-slate-900">Affordable Luxury Car Rentals</h4>
-                    <p className="text-[10px] uppercase font-mono text-slate-400 font-bold">Unlimited mileage & free cancellation</p>
-                  </div>
-                </div>
-
-                <p className="text-xs text-slate-600 font-light font-sans leading-relaxed">
-                  Perfect for exploring locations at your own pace. Compare national rental agents and secure standard coverage policies instantly across top global operators.
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-slate-200/60 flex flex-col gap-2">
-                <a
-                  href="https://qeeq.tpo.li/nooi5oSG"
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="w-full bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-black text-xs py-2.5 px-4 rounded-xl shadow-sm text-center transition-all inline-flex items-center justify-center gap-1.5"
-                >
-                  Compare Rental Fleet Rates via QEEQ <ExternalLink size={12} />
-                </a>
-              </div>
-            </div>
-
-            {/* Right side: Embed Widget */}
-            <div className="bg-white p-2 rounded-xl border border-slate-200 flex flex-col justify-center min-h-[180px]">
-              <QeeqEmbed />
-            </div>
+          <div className="lg:col-span-7">
+            <AiraloEmbed />
           </div>
         </div>
+      )}
 
+      {/* TAB 4: SELF-DRIVE CAR RENTAL (QEEQ) */}
+      {activeTab === "rentals" && (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center animate-fade-in">
+          <div className="lg:col-span-5 space-y-3">
+            <div className="flex items-center gap-2 text-xs text-slate-500">
+              <span className="font-semibold text-[#102A43]">Self-Drive & Family Rentals</span>
+              <span aria-hidden="true">·</span>
+              <span>Free Cancellation</span>
+            </div>
+            <h4 className="font-serif text-lg font-bold text-slate-900">
+              Compare Airport & City Car Rental Fleets in {country}
+            </h4>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Exploring Malaysia's highways, Phuket's beaches, or Dubai's boulevards with an International Driving Permit? Compare verified global rental operators with transparent insurance coverage on QEEQ.
+            </p>
+            <div className="pt-2">
+              <a
+                href="https://qeeq.tpo.li/nooi5oSG"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
+              >
+                <span>Compare Car Rental Rates on QEEQ</span>
+                <ExternalLink size={12} />
+              </a>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <QeeqEmbed />
+          </div>
+        </div>
+      )}
+
+      {/* Quiet Quick-Access Partner Bar at Bottom */}
+      <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500">
+        <span>Direct Verified Partner Links:</span>
+        <div className="flex flex-wrap items-center gap-2">
+          <a
+            href={WELCOME_PICKUPS_PARTNER_URL}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="hover:text-[#102A43] hover:underline font-medium"
+          >
+            Welcome Pickups
+          </a>
+          <span aria-hidden="true">·</span>
+          <a
+            href="https://kiwitaxi.tpo.li/GIhvhrtF"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="hover:text-[#102A43] hover:underline font-medium"
+          >
+            Kiwitaxi
+          </a>
+          <span aria-hidden="true">·</span>
+          <a
+            href="https://klook.tpo.li/IYOU76Bn"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="hover:text-[#102A43] hover:underline font-medium"
+          >
+            Klook
+          </a>
+          <span aria-hidden="true">·</span>
+          <a
+            href="https://kkday.tpo.li/3Ecyxris"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="hover:text-[#102A43] hover:underline font-medium"
+          >
+            KKday
+          </a>
+          <span aria-hidden="true">·</span>
+          <a
+            href="https://airalo.tpo.li/mV2QXsXK"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="hover:text-[#102A43] hover:underline font-medium"
+          >
+            Airalo eSIM
+          </a>
+          <span aria-hidden="true">·</span>
+          <a
+            href="https://qeeq.tpo.li/nooi5oSG"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="hover:text-[#102A43] hover:underline font-medium"
+          >
+            QEEQ Cars
+          </a>
+        </div>
       </div>
-
-    </div>
+    </section>
   );
 }

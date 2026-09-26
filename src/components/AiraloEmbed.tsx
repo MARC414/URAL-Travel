@@ -40,8 +40,10 @@ export function AiraloEmbed() {
             <option value="Nepal">Nepal 🇳🇵</option>
             <option value="Thailand">Thailand 🇹🇭</option>
             <option value="Malaysia">Malaysia 🇲🇾</option>
+            <option value="Singapore">Singapore 🇸🇬</option>
+            <option value="Maldives">Maldives 🇲🇻</option>
             <option value="UAE">United Arab Emirates 🇦🇪</option>
-            <option value="Global">Global / Worldwide Plan</option>
+            <option value="Global">Global / Asia Regional Plan</option>
           </select>
         </div>
 

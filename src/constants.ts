@@ -224,6 +224,116 @@ export const FLIGHTS_DATA: FlightRoute[] = [
   "estimatedFlightDuration": "PT4H45M"
 }`
     }
+  },
+  {
+    id: "dhaka-singapore",
+    from: "Dhaka (DAC)",
+    to: "Singapore (SIN)",
+    country: "Singapore",
+    priceRangeBdt: "BDT 42,000 - BDT 62,000 (Roundtrip)",
+    airlines: ["Biman Bangladesh Airlines", "Singapore Airlines", "US-Bangla Airlines"],
+    bestTimeToBook: "45-60 days before departure",
+    duration: "4h 15m (Direct)",
+    visaRequirement: "Pre-arranged Singapore e-Visa (Applied via Authorized Visa Agents in Dhaka/Chattogram)",
+    quickAnswer: "Direct flights from Dhaka (DAC) to Singapore Changi Airport (SIN) take approximately 4 hours and 15 minutes. Biman Bangladesh Airlines, US-Bangla Airlines, and Singapore Airlines operate daily non-stop flights on this route. Roundtrip economy fares typically range from BDT 42,000 to BDT 62,000, while one-stop transit flights via Kuala Lumpur on AirAsia or Batik Air can drop to BDT 36,000. Bangladeshi passport holders must obtain a pre-arranged Singapore e-Visa through an embassy-authorized agent and submit the free SG Arrival Card online within 3 days before flying.",
+    keyFacts: [
+      { label: "Flight Time", value: "4 hours 15 mins (Direct)" },
+      { label: "Direct Airlines", value: "Singapore Airlines, Biman, US-Bangla" },
+      { label: "Average Roundtrip Price", value: "BDT 46,500" },
+      { label: "Visa Requirement", value: "Authorized Agent e-Visa + SGAC" }
+    ],
+    faqs: [
+      {
+        question: "Which airlines fly direct from Dhaka to Singapore?",
+        answer: "Singapore Airlines, Biman Bangladesh Airlines, and US-Bangla Airlines operate daily non-stop flights from Hazrat Shahjalal International Airport (DAC) to Singapore Changi Airport (SIN), taking roughly 4 hours and 15 minutes."
+      },
+      {
+        question: "What is the cheapest way to fly from Dhaka to Singapore?",
+        answer: "US-Bangla Airlines and Biman Bangladesh Airlines offer the lowest direct roundtrip fares starting around BDT 42,000-46,000. If you only carry 7kg cabin baggage, a one-stop flight via Kuala Lumpur on AirAsia or Batik Air can cost between BDT 35,000 and BDT 39,000 roundtrip."
+      },
+      {
+        question: "Do Bangladeshi travelers need to fill out the SG Arrival Card before boarding?",
+        answer: "Yes. Every traveler flying from Dhaka to Singapore must submit the free electronic SG Arrival Card (SGAC) via the official ICA website or MyICA mobile app within 3 days (72 hours) prior to arrival, in addition to holding a printed Singapore e-Visa."
+      }
+    ],
+    schemaMarkup: {
+      type: "Flight",
+      description: "DAC to SIN Direct Flight Route Guide for Bangladeshi Travelers",
+      code: `{
+  "@context": "https://schema.org",
+  "@type": "Flight",
+  "provider": {
+    "@type": "Airline",
+    "name": "Biman Bangladesh Airlines"
+  },
+  "departureAirport": {
+    "@type": "Airport",
+    "name": "Hazrat Shahjalal International Airport",
+    "iataCode": "DAC"
+  },
+  "arrivalAirport": {
+    "@type": "Airport",
+    "name": "Singapore Changi Airport",
+    "iataCode": "SIN"
+  },
+  "estimatedFlightDuration": "PT4H15M"
+}`
+    }
+  },
+  {
+    id: "dhaka-maldives",
+    from: "Dhaka (DAC)",
+    to: "Malé (MLE)",
+    country: "Maldives",
+    priceRangeBdt: "BDT 46,000 - BDT 68,000 (Roundtrip)",
+    airlines: ["US-Bangla Airlines", "SriLankan Airlines", "Maldivian", "Malaysia Airlines"],
+    bestTimeToBook: "45-75 days before departure (especially ahead of November-March dry season)",
+    duration: "4h 10m (Direct) / 6h 30m (via Colombo)",
+    visaRequirement: "Free 30-day Tourist Visa on Arrival + Mandatory IMUGA form within 96 hours",
+    quickAnswer: "Direct flights from Dhaka (DAC) to Velana International Airport in Malé (MLE) take 4 hours and 10 minutes on US-Bangla Airlines, while SriLankan Airlines offers convenient 1-stop connections via Colombo. Roundtrip economy fares generally range between BDT 46,000 and BDT 68,000. Bangladeshi passport holders receive a free 30-day Tourist Visa on Arrival in the Maldives, provided they carry a confirmed hotel voucher, return ticket, USD endorsement, and complete the free IMUGA Traveller Declaration online within 96 hours of flying.",
+    keyFacts: [
+      { label: "Flight Time", value: "4 hours 10 mins (Direct)" },
+      { label: "Popular Airlines", value: "US-Bangla (Direct), SriLankan (1-Stop)" },
+      { label: "Average Roundtrip Price", value: "BDT 52,000" },
+      { label: "Visa on Arrival", value: "Free 30 Days (+ IMUGA Form)" }
+    ],
+    faqs: [
+      {
+        question: "Is there a direct flight from Dhaka to the Maldives?",
+        answer: "Yes, US-Bangla Airlines operates direct scheduled flights from Dhaka (DAC) to Malé Velana International Airport (MLE) with a flight time of around 4 hours and 10 minutes. SriLankan Airlines also operates daily flights with a short transit in Colombo (CMB)."
+      },
+      {
+        question: "Do Bangladeshi citizens need an advance visa before flying to the Maldives?",
+        answer: "No advance visa is required for tourism. Bangladeshi tourists are granted a free 30-day Tourist Visa on Arrival at Malé Airport. However, you must complete the free online IMUGA Traveller Declaration within 96 hours before departure and present confirmed hotel and return flight bookings at Dhaka immigration."
+      },
+      {
+        question: "Can I combine Sri Lanka and Maldives on a single flight ticket from Dhaka?",
+        answer: "Yes. When flying SriLankan Airlines from Dhaka to Malé via Colombo, you can book a multi-city or stopover ticket to spend 2-3 days in Colombo/Galle before continuing to Malé for almost the same airfare."
+      }
+    ],
+    schemaMarkup: {
+      type: "Flight",
+      description: "DAC to MLE Flight Route Guide for Bangladeshi Travelers",
+      code: `{
+  "@context": "https://schema.org",
+  "@type": "Flight",
+  "provider": {
+    "@type": "Airline",
+    "name": "US-Bangla Airlines"
+  },
+  "departureAirport": {
+    "@type": "Airport",
+    "name": "Hazrat Shahjalal International Airport",
+    "iataCode": "DAC"
+  },
+  "arrivalAirport": {
+    "@type": "Airport",
+    "name": "Velana International Airport",
+    "iataCode": "MLE"
+  },
+  "estimatedFlightDuration": "PT4H10M"
+}`
+    }
   }
 ];
 
@@ -413,6 +523,106 @@ export const HOTELS_DATA: HotelGuide[] = [
       "position": 1,
       "name": "Address Downtown"
     }
+  ]
+}`
+    }
+  },
+  {
+    id: "singapore-hotels",
+    city: "Singapore",
+    country: "Singapore",
+    description: "Singapore hotel rates are higher than Bangkok or Kuala Lumpur, so choosing the right MRT-connected neighborhood is the secret to keeping your trip affordable. Little India/Farrer Park and Bugis offer unbeatable value and halal food access for Bangladeshi travelers.",
+    neighborhoods: [
+      { name: "Little India / Serangoon Road", description: "Centered around the 24-hour Mustafa Centre and Farrer Park MRT. Packed with Bangladeshi, Indian, and Muslim-owned halal restaurants and the best-value 3-star and 4-star hotels in Singapore.", vibe: "Bangladeshi-Favorite, 24/7 Shopping, Budget-Friendly" },
+      { name: "Bugis / Kampong Glam (Arab Street)", description: "Historic Malay-Arab heritage quarter anchored by the golden Sultan Mosque. Walkable to trendy cafes, Haji Lane, Bugis Street Market, and two major MRT lines.", vibe: "Halal Hub, Cultural, Central Transit" },
+      { name: "Marina Bay / Civic District", description: "Singapore's postcard waterfront skyline featuring Marina Bay Sands, Gardens by the Bay, and Merlion Park. Ideal for milestone family trips and luxury stays.", vibe: "Iconic Skyline, Ultra-Luxury, Waterfront" }
+    ],
+    hotels: [
+      { name: "One Farrer Hotel", stars: 5, priceBdt: 19500, category: "Luxury", neighborhood: "Little India (Farrer Park MRT)", features: ["Directly above Farrer Park MRT", "3-min walk to Mustafa Centre", "Olympic-size outdoor pool", "Popular with Bangladeshi families & medical visitors"] },
+      { name: "Village Hotel Bugis", stars: 4, priceBdt: 13500, category: "Mid-Range", neighborhood: "Bugis / Arab Street", features: ["Halal-certified Landmark restaurant", "Steps from Sultan Mosque", "Spacious family rooms", "5-min walk to Bugis MRT"] },
+      { name: "Hotel Boss", stars: 4, priceBdt: 10500, category: "Mid-Range", neighborhood: "Lavender / Kampong Glam", features: ["Sky terrace swimming pool", "Halal food court downstairs", "Near Lavender MRT", "Great value modern rooms"] },
+      { name: "ibis budget Singapore Imperial", stars: 3, priceBdt: 7200, category: "Budget", neighborhood: "Lavender / Little India border", features: ["Clean compact rooms", "Rooftop pool", "2-min walk to Lavender MRT", "Walkable to Mustafa Centre"] }
+    ],
+    quickAnswer: "For Bangladeshi travelers, Little India (near Mustafa Centre and Farrer Park MRT) and Bugis / Arab Street are the best neighborhoods to stay in Singapore. Clean budget hotels like ibis budget Imperial start around BDT 7,200 per night, popular family-friendly 4-star stays like Hotel Boss and Village Hotel Bugis cost BDT 10,500–13,500 per night, and 5-star properties like One Farrer Hotel start around BDT 19,500.",
+    keyFacts: [
+      { label: "Best Bangladeshi Area", value: "Little India (Near Mustafa Centre)" },
+      { label: "Budget Room Price (BDT)", value: "6,800 - 8,500 / night" },
+      { label: "Mid-Range Family (BDT)", value: "10,500 - 14,500 / night" },
+      { label: "Top Halal Dining Zone", value: "Arab Street (Bugis) & Serangoon Rd" }
+    ],
+    faqs: [
+      {
+        question: "Why do most Bangladeshi travelers stay near Mustafa Centre in Singapore?",
+        answer: "Mustafa Centre on Serangoon Road (Little India) is open 24 hours for electronics, chocolates, watches, and luggage shopping, and is surrounded by familiar Bangladeshi and Indian halal restaurants, money changers with competitive rates, and Farrer Park MRT station."
+      },
+      {
+        question: "Are hotel rooms in Singapore smaller than in Bangkok or Kuala Lumpur?",
+        answer: "Yes, land is scarce in Singapore so standard budget rooms are typically 14–18 sq meters. If traveling with children, look at Village Hotel Bugis or One Farrer Hotel which offer larger family room layouts."
+      }
+    ],
+    schemaMarkup: {
+      type: "HotelGuide",
+      description: "Singapore hotel guide for Bangladeshi travelers",
+      code: `{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Recommended Singapore Hotels for Bangladeshi Travelers",
+  "numberOfItems": 4,
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "One Farrer Hotel" },
+    { "@type": "ListItem", "position": 2, "name": "Village Hotel Bugis" },
+    { "@type": "ListItem", "position": 3, "name": "Hotel Boss" },
+    { "@type": "ListItem", "position": 4, "name": "ibis budget Singapore Imperial" }
+  ]
+}`
+    }
+  },
+  {
+    id: "maldives-hotels",
+    city: "Malé & Maafushi",
+    country: "Maldives",
+    description: "The Maldives offers two completely different accommodation styles: inhabited local islands (like Maafushi and Hulhumalé) where Bangladeshi travelers can stay in modern beachfront guesthouses for BDT 5,500–9,500/night, and private resort islands featuring iconic overwater villas.",
+    neighborhoods: [
+      { name: "Maafushi Island (South Malé Atoll)", description: "The #1 budget-friendly local island in the Maldives, just 35–40 minutes by speedboat ($25) or 90 minutes by public ferry ($2) from Malé Airport. Packed with bikini beaches, water sports centers, and affordable excursion operators.", vibe: "Budget Beach Paradise, Snorkeling Tours, Lively" },
+      { name: "Hulhumalé (Airport Connected Island)", description: "A modern reclaimed island connected to Velana International Airport by a 15-minute highway taxi ride. Ideal for first/last night transit stays or short budget beach breaks without paying speedboat fees.", vibe: "Zero Boat Transfer Cost, Convenient, Clean Beach" },
+      { name: "Private Resort Islands (North/South Malé Atoll)", description: "One-island-one-resort private sanctuaries reached by resort speedboat. Home to overwater bungalows, infinity pools, and all-inclusive dining.", vibe: "Honeymoon Luxury, Overwater Villas, Exclusive" }
+    ],
+    hotels: [
+      { name: "Kaani Palm Beach", stars: 4, priceBdt: 9800, category: "Mid-Range", neighborhood: "Maafushi Island", features: ["Rooftop infinity pool overlooking ocean", "Directly on Bikini Beach", "In-house shark & sandbank tour desk", "100% Halal buffet"] },
+      { name: "Arena Beach Hotel", stars: 4, priceBdt: 8200, category: "Mid-Range", neighborhood: "Maafushi Island", features: ["Sea-view balcony rooms", "Coco Grill beachfront dining", "Discounted snorkeling packages", "Speedboat pickup coordination"] },
+      { name: "h78 at Hulhumale Maldives", stars: 3, priceBdt: 6400, category: "Budget", neighborhood: "Hulhumalé Beachfront", features: ["15-min taxi from Malé Airport", "No expensive boat transfer needed", "Direct beach across the street", "Great for late-night Dhaka flights"] },
+      { name: "Cinnamon Dhonveli Maldives", stars: 5, priceBdt: 38000, category: "Luxury", neighborhood: "North Malé Atoll (Private Resort)", features: ["Iconic overwater suites", "25-min speedboat from airport", "Full-board & all-inclusive packages", "World-class house reef"] }
+    ],
+    quickAnswer: "You do not need to spend লাখ টাকা on a private resort to visit the Maldives from Bangladesh. By staying on Maafushi local island (such as Arena Beach Hotel or Kaani Palm Beach for BDT 8,200–9,800/night) or Hulhumalé beachfront (from BDT 6,400/night), you get crystal-clear lagoons and cheap $25–$40 snorkeling excursions. For honeymooners seeking overwater villas, private resorts near Malé start around BDT 35,000–45,000 per night.",
+    keyFacts: [
+      { label: "Best Budget Island", value: "Maafushi (35m speedboat from MLE)" },
+      { label: "Local Island Hotel (BDT)", value: "5,500 - 10,500 / night" },
+      { label: "Private Resort Villa (BDT)", value: "32,000 - 85,000+ / night" },
+      { label: "Green Tax & GST Rule", value: "Check if 16% T-GST + $6/night Green Tax is included" }
+    ],
+    faqs: [
+      {
+        question: "How do I get from Malé Airport to Maafushi or Hulhumalé?",
+        answer: "Hulhumalé is connected by bridge to the airport and takes 15 minutes by road taxi (approx $7–$10). Maafushi is reached in 35 minutes via scheduled shared speedboat ($25 USD per person each way, bookable through your hotel) directly from the airport jetty."
+      },
+      {
+        question: "Is all food in the Maldives halal for Bangladeshi travelers?",
+        answer: "Yes! The Maldives is a 100% Muslim nation, so all meat and food served on local islands (Malé, Hulhumalé, Maafushi) and resorts is strictly Halal."
+      }
+    ],
+    schemaMarkup: {
+      type: "HotelGuide",
+      description: "Maldives local island and resort hotel guide for Bangladeshis",
+      code: `{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Best Maldives Hotels & Guesthouses for Bangladeshi Travelers",
+  "numberOfItems": 4,
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Kaani Palm Beach Maafushi" },
+    { "@type": "ListItem", "position": 2, "name": "Arena Beach Hotel Maafushi" },
+    { "@type": "ListItem", "position": 3, "name": "h78 at Hulhumale" },
+    { "@type": "ListItem", "position": 4, "name": "Cinnamon Dhonveli Maldives" }
   ]
 }`
     }
@@ -837,6 +1047,170 @@ export const VISA_DATA: VisaGuide[] = [
   ]
 }`
     }
+  },
+  {
+    id: "singapore-visa",
+    country: "Singapore",
+    requirementType: "e-Visa",
+    costBdt: "BDT 4,200 - BDT 6,500 (SGD 30 Embassy Fee + Authorized Agent Service Charge; higher if agency arranges LOI)",
+    processingTime: "5 - 7 Business Days (excluding submission day and weekends)",
+    documentChecklist: [
+      {
+        category: "Mandatory Core Documents (Submitted via Authorized Visa Agent)",
+        items: [
+          "Original Passport valid for at least 6 months from arrival date in Singapore + old passports (if any)",
+          "Completed & signed Singapore Visa Application Form 14A",
+          "2 recent passport-size photographs (35mm x 45mm, matte finish, plain white background, 80% face coverage, taken within 3 months)",
+          "Letter of Introduction (LOI - Form V39A) issued by a Singapore Citizen or Permanent Resident aged 21+ (if you do not have a local contact, select an authorized Dhaka agent that provides LOI support)",
+          "6-month Personal Bank Statement with a minimum closing balance of BDT 1,50,000+ per person and Bank Solvency Certificate",
+          "Confirmed roundtrip flight itinerary (Dhaka - Singapore - Dhaka) and hotel booking confirmation"
+        ]
+      },
+      {
+        category: "Profession-Specific Supporting Papers",
+        items: [
+          "For Job Holders: Original No Objection Certificate (NOC) on company letterhead, Pay Slips (last 3 months), and Office ID card copy",
+          "For Business Owners: Renewed Trade License (notarized English translation), Company Pad cover letter, and Visiting Card",
+          "For Medical Travelers: Appointment confirmation letter from the Singapore hospital (e.g., Mount Elizabeth, Raffles, or NUH)",
+          "For Families: Marriage Certificate (Nikahnama) and Birth Certificates for accompanying children"
+        ]
+      }
+    ],
+    stepByStep: [
+      "Prepare your 6-month bank statement, occupational documents (NOC or Trade License), and two 35x45mm matte white-background photos.",
+      "Obtain a Letter of Introduction (Form V39A) from a Singapore Citizen/PR contact, OR choose an accredited Singapore High Commission Authorized Visa Agent in Dhaka (such as Simon Overseas, Silkways, or Lexing Global) that assists with tourist profiles.",
+      "Submit your physical passport, signed Form 14A, and supporting documents at the authorized visa agent's office in Dhaka or Chattogram (direct walk-in applications at the Consulate are not accepted).",
+      "Wait 5 to 7 working days for the Consulate of the Republic of Singapore in Dhaka to process the application.",
+      "Once approved, collect your passport and print the official Singapore e-Visa PDF. Within 72 hours before your flight, submit the free online SG Arrival Card (SGAC) at eservices.ica.gov.sg."
+    ],
+    quickAnswer: "Bangladeshi passport holders require a pre-arranged e-Visa to enter Singapore. You cannot apply directly at the Singapore Consulate in Dhaka; all applications must be submitted through an embassy-approved Authorized Visa Agent. The visa costs approximately BDT 4,200 to BDT 6,500 (SGD 30 government fee plus agency charge) and takes 5 to 7 working days. A Letter of Introduction (LOI Form V39A) from a Singapore local contact or sponsor is standardly required, along with a 6-month bank statement showing at least BDT 1,50,000 balance.",
+    keyFacts: [
+      { label: "Submission Channel", value: "Authorized Visa Agents in Dhaka" },
+      { label: "Total Visa Cost", value: "BDT 4,200 - 6,500" },
+      { label: "Processing Window", value: "5 to 7 Working Days" },
+      { label: "Pre-Flight Requirement", value: "Free SG Arrival Card (72h prior)" }
+    ],
+    faqs: [
+      {
+        question: "What if I do not know anyone in Singapore to give me a Letter of Introduction (LOI)?",
+        answer: "If you do not have a friend, relative, or business contact in Singapore to sign Form V39A (LOI), well-traveled applicants (with prior Schengen/US/UK or multiple Asian visas) or families booking through accredited Authorized Visa Agents in Dhaka can apply with a strong cover letter or agency-facilitated local tour sponsorship."
+      },
+      {
+        question: "Is the SG Arrival Card (SGAC) the same as a Singapore Visa?",
+        answer: "No. The SG Arrival Card is a mandatory free health and electronic arrival declaration that ALL travelers must submit online within 3 days before landing at Changi Airport. Bangladeshi citizens must carry BOTH their approved e-Visa printout and the SG Arrival Card confirmation."
+      }
+    ],
+    schemaMarkup: {
+      type: "GovernmentService + FAQPage",
+      description: "Singapore tourist e-Visa guide for Bangladeshi passport holders",
+      code: `{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "GovernmentService",
+      "name": "Singapore Tourist e-Visa for Bangladeshi Citizens",
+      "serviceType": "Tourist Visa",
+      "provider": {
+        "@type": "GovernmentOrganization",
+        "name": "Consulate of the Republic of Singapore, Dhaka"
+      },
+      "areaServed": "Bangladesh"
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to apply for a Singapore visa from Bangladesh",
+      "totalTime": "P7D",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "BDT",
+        "value": "4500"
+      },
+      "step": [
+        { "@type": "HowToStep", "text": "Gather 6-month bank statement (BDT 150,000+), NOC/Trade License, and 35x45mm matte photos." },
+        { "@type": "HowToStep", "text": "Submit Form 14A and LOI (Form V39A) through an Authorized Visa Agent in Dhaka." },
+        { "@type": "HowToStep", "text": "Print the approved e-Visa and complete the free SG Arrival Card within 72 hours of departure." }
+      ]
+    }
+  ]
+}`
+    }
+  },
+  {
+    id: "maldives-visa",
+    country: "Maldives",
+    requirementType: "Visa On Arrival",
+    costBdt: "Free (30-Day Tourist Visa on Arrival is 100% gratis for Bangladeshi citizens)",
+    processingTime: "Instant on arrival at Velana International Airport (MLE)",
+    documentChecklist: [
+      {
+        category: "Mandatory Documents for Dhaka Departure & Malé Arrival",
+        items: [
+          "Machine-Readable Passport (MRP or e-Passport) with at least 6 months validity",
+          "IMUGA Traveller Declaration QR Code (completed free online within 96 hours prior to flight)",
+          "Confirmed roundtrip air ticket (Dhaka – Malé – Dhaka)",
+          "Pre-booked, confirmed hotel or guesthouse voucher at a registered Maldivian tourist facility (e.g., Maafushi, Hulhumalé, or resort)",
+          "Proof of sufficient funds: USD cash ($100+ per day recommended) OR an international dual-currency card endorsed on your passport, plus a recent Bank Statement for Dhaka immigration clearance"
+        ]
+      }
+    ],
+    stepByStep: [
+      "Book your roundtrip flight from Dhaka to Malé (MLE) and reserve a registered hotel/guesthouse on Booking.com, Agoda, or directly with the property.",
+      "Endorse US Dollars on your passport (cash USD and/or dual-currency credit/debit card) at any authorized bank in Bangladesh.",
+      "Within 96 hours (4 days) before your departure flight from Dhaka, go to the official Maldives Immigration portal (imuga.immigration.gov.mv) and fill out the free Traveller Declaration form to receive your QR code.",
+      "Present your passport, return ticket, hotel voucher, USD endorsement, and IMUGA QR code screenshot at Hazrat Shahjalal International Airport (DAC) check-in and immigration.",
+      "Upon landing at Velana International Airport (MLE), walk directly to the immigration desk with your passport, hotel voucher, and return ticket to receive your free 30-day Tourist Visa stamp."
+    ],
+    quickAnswer: "Bangladeshi citizens get a completely free 30-day Tourist Visa on Arrival in the Maldives—no advance embassy application or visa fee is required. To clear Dhaka airport immigration and Malé arrival smoothly, you must carry a passport with 6+ months validity, a confirmed return flight ticket, a paid or confirmed hotel booking at a registered tourist property, USD endorsement on your passport, and the free IMUGA Traveller Declaration QR code completed online within 96 hours before flying.",
+    keyFacts: [
+      { label: "Visa Type", value: "Free 30-Day Visa on Arrival" },
+      { label: "Visa Fee", value: "BDT 0 (100% Free)" },
+      { label: "Mandatory Online Form", value: "IMUGA Declaration (within 96h)" },
+      { label: "Required Funds Proof", value: "Confirmed Hotel + USD Endorsement" }
+    ],
+    faqs: [
+      {
+        question: "Why do some Bangladeshi travelers get stopped at Dhaka airport when flying to the Maldives?",
+        answer: "Dhaka emigration officers verify that you are a genuine tourist and not traveling on a tourist entry to seek unauthorized work. Always carry a printed hotel voucher, return ticket, USD cash/card endorsement, your 6-month bank statement, and your job NOC or trade license to breeze through Dhaka immigration in 2 minutes."
+      },
+      {
+        question: "Does the IMUGA form cost any money?",
+        answer: "No! The official Maldives Immigration IMUGA Traveller Declaration (imuga.immigration.gov.mv) is 100% free. Never pay third-party scam websites for completing the IMUGA form."
+      }
+    ],
+    schemaMarkup: {
+      type: "GovernmentService + FAQPage",
+      description: "Maldives free Visa on Arrival and IMUGA guide for Bangladeshi citizens",
+      code: `{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "GovernmentService",
+      "name": "Maldives Free Tourist Visa on Arrival for Bangladeshi Citizens",
+      "serviceType": "Visa on Arrival",
+      "provider": {
+        "@type": "GovernmentOrganization",
+        "name": "Maldives Immigration"
+      },
+      "areaServed": "Bangladesh"
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to get a Maldives Visa on Arrival from Bangladesh",
+      "totalTime": "PT30M",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "BDT",
+        "value": "0"
+      },
+      "step": [
+        { "@type": "HowToStep", "text": "Book a confirmed return flight and registered Maldives hotel or Maafushi guesthouse." },
+        { "@type": "HowToStep", "text": "Complete the free IMUGA Traveller Declaration online within 96 hours before departure." },
+        { "@type": "HowToStep", "text": "Present your passport, hotel voucher, and return ticket at Malé Airport for a free 30-day stamp." }
+      ]
+    }
+  ]
+}`
+    }
   }
 ];
 
@@ -1039,6 +1413,89 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
   "@context": "https://schema.org",
   "@type": "TouristDestination",
   "name": "Dubai"
+}`
+    }
+  },
+  {
+    id: "singapore-guide",
+    country: "Singapore",
+    title: "Singapore Trip Plan from Bangladesh: 4-Day Itinerary, MRT Hacks & Halal Guide",
+    description: "Clean, safe, and effortlessly connected by MRT trains, Singapore packs futuristic indoor rainforests, world-class theme parks on Sentosa Island, and 24-hour shopping in Little India into one compact island nation.",
+    bestTimeToVisit: "February to April and July to October (warm, pleasant weather with lower rainfall and great shopping festivals)",
+    itinerary: [
+      { day: 1, title: "Changi Jewel, Little India & Marina Bay Light Show", activities: ["Land at Changi Airport and visit the HSBC Rain Vortex indoor waterfall inside Jewel Changi (free entry!)", "Take the MRT or Grab to your hotel in Little India / Bugis", "Catch the free 8:00 PM Spectra Light & Water Show outside Marina Bay Sands and walk across the Helix Bridge"] },
+      { day: 2, title: "Gardens by the Bay & Historic Arab Street", activities: ["Spend the morning inside the cooled Cloud Forest and Flower Dome conservatories at Gardens by the Bay", "Afternoon heritage walk around Sultan Mosque, Arab Street, and colorful Haji Lane for Turkish/Malay halal lunch", "Return to Supertree Grove at 7:45 PM for the free Garden Rhapsody musical light show"] },
+      { day: 3, title: "Sentosa Island & Universal Studios", activities: ["Take the MRT to HarbourFront (VivoCity) and ride the Sentosa Express monorail onto Sentosa Island", "Spend the day at Universal Studios Singapore, S.E.A. Aquarium, or relaxing at Siloso and Palawan Beaches", "Dinner at Malaysian Food Street (Halal options) or VivoCity waterfront"] },
+      { day: 4, title: "24-Hour Mustafa Shopping & Departure", activities: ["Morning souvenir, chocolate, watch, and electronics shopping at Mustafa Centre on Serangoon Road", "Claim your 9% Tourist GST Refund at Changi Airport eTRS kiosks before check-in", "Fly direct back to Dhaka (DAC)"] }
+    ],
+    localTransport: ["SimplyGo Contactless Card: Tap your Bangladeshi dual-currency Visa/Mastercard directly at MRT train and public bus gates (no need to buy paper tickets; fares are BDT 90–200 per ride)", "Grab / Gojek / Zig Apps: Reliable point-to-point car rides when traveling with elderly parents or heavy luggage", "Sentosa Express Monorail: SGD 4 entry from VivoCity Level 3 into Sentosa Island"],
+    budgetBdt: "BDT 48,000 - BDT 75,000 per person (Excluding airfare, covering 3 nights hotel, MRT, meals & attractions)",
+    quickAnswer: "A 4-day Singapore itinerary from Bangladesh costs approximately BDT 48,000 to BDT 75,000 per person in local expenses (excluding airfare). By staying near Farrer Park or Lavender MRT, tapping your dual-currency Visa/Mastercard directly on MRT trains via SimplyGo, and combining paid icons (Universal Studios, Cloud Forest) with world-class free shows (Jewel Vortex, Supertree Grove light show, Spectra at Marina Bay), Bangladeshi families can enjoy Singapore comfortably without overspending.",
+    keyFacts: [
+      { label: "Ideal Trip Duration", value: "4 Days / 3 Nights" },
+      { label: "Daily Local Budget", value: "BDT 10,000 - 15,000 / day" },
+      { label: "Transit Payment Hack", value: "Tap Dual-Currency Card on MRT (SimplyGo)" },
+      { label: "Airport Must-See", value: "Jewel Changi Rain Vortex (Free)" }
+    ],
+    faqs: [
+      {
+        question: "Can I use my Bangladeshi dual-currency credit or debit card directly on Singapore MRT trains and buses?",
+        answer: "Yes! Singapore's SimplyGo system allows foreign contactless Visa and Mastercard cards to be tapped directly at MRT gates and bus readers—saving you the non-refundable SGD 5 card fee of buying a physical EZ-Link card."
+      },
+      {
+        question: "How can I combine Singapore and Malaysia on a single trip from Dhaka?",
+        answer: "Many Bangladeshi travelers fly Dhaka → Singapore (spend 3 days), take a luxury 5-hour coach bus across the Johor causeway to Kuala Lumpur for BDT 2,500, spend 3 days in Malaysia, and fly Kuala Lumpur → Dhaka on an open-jaw ticket."
+      }
+    ],
+    schemaMarkup: {
+      type: "DestinationGuide",
+      description: "Singapore 4-day travel itinerary for Bangladeshi tourists",
+      code: `{
+  "@context": "https://schema.org",
+  "@type": "TouristDestination",
+  "name": "Singapore"
+}`
+    }
+  },
+  {
+    id: "maldives-guide",
+    country: "Maldives",
+    title: "Maldives Trip Plan from Bangladesh: 5-Day Maafushi & Resort Island Itinerary",
+    description: "Crystal-clear turquoise lagoons, coral reefs teeming with nurse sharks and sea turtles, and powdery white sandbanks—the Maldives is just a 4-hour flight from Dhaka with free Visa on Arrival for Bangladeshis.",
+    bestTimeToVisit: "November to April (sunny skies, calmest turquoise water, and highest underwater visibility for snorkeling)",
+    itinerary: [
+      { day: 1, title: "Arrival at Malé & Speedboat to Maafushi Island", activities: ["Land at Velana International Airport (MLE) and clear free Visa on Arrival immigration", "Board the 35-minute shared speedboat ($25) directly from the airport jetty across turquoise atolls to Maafushi Island", "Watch the Indian Ocean sunset from Bikini Beach and enjoy a beachfront grilled seafood dinner"] },
+      { day: 2, title: "Half-Day Snorkeling, Dolphin Cruise & Sandbank Picnic", activities: ["Join a $30–$35 full-day boat excursion to snorkel at Turtle Reef and Coral Garden", "Have a picnic lunch on a secluded white-sandbank in the middle of the ocean (free drone photos often included by local operators!)", "Spot spinner dolphins jumping alongside the boat on the sunset ride back"] },
+      { day: 3, title: "Luxury Private Resort Day-Pass OR Shipwreck & Shark Bay", activities: ["Option A: Book a $110–$140 All-Inclusive Resort Day Pass (includes return boat, pool, beach & buffet at a 4/5-star private resort)", "Option B: Take the Vaavu Atoll Shipwreck & friendly Nurse Shark snorkeling tour ($55)", "Evening stroll through Maafushi's sandy streets and souvenir shops"] },
+      { day: 4, title: "Transfer to Hulhumalé & Malé Capital Tour", activities: ["Take the morning speedboat back to Malé / Hulhumalé", "Explore Malé City: Friday Mosque, Sultan Park, and the bustling Local Fish Market", "Check into a beachfront hotel in Hulhumalé and relax at Central Park & Hulhumalé Beach"] },
+      { day: 5, title: "Morning Ocean Swim & Flight Back to Dhaka", activities: ["Enjoy a sunrise walk along Hulhumalé beachfront with coffee", "Take a 15-minute road taxi ($8) across the Sinamalé Bridge to Velana Airport for your flight back to Dhaka"] }
+    ],
+    localTransport: ["Airport-to-Maafushi Shared Speedboat: Runs every 1–2 hours directly from Malé Airport jetty ($25 USD / approx BDT 3,000 one-way, 35 mins)", "MTCC Public Ferry: Ultra-cheap government ferry from Malé to Maafushi ($2 USD / BDT 240, 90 mins, does not run on Fridays)", "Hulhumalé Highway Bus & Taxis: Direct road connection from Malé Airport to Hulhumalé for $1–$8 USD"],
+    budgetBdt: "BDT 35,000 - BDT 55,000 per person on Local Islands (Excluding airfare; Private Water Villa Resorts start at BDT 1,40,000+)",
+    quickAnswer: "A 5-day Maldives trip from Bangladesh does not require a millionaire budget. By basing yourself on Maafushi local island for 3 nights and Hulhumalé for 1 night, your local expenses (beachfront hotel, airport speedboats, meals, and coral/sandbank excursions) come to just BDT 35,000 to BDT 55,000 per person excluding flights. You can even visit a luxury private water-villa resort for a day using a $120 All-Inclusive Resort Day Pass.",
+    keyFacts: [
+      { label: "Recommended Length", value: "4 to 5 Days" },
+      { label: "Local Island Budget", value: "BDT 7,000 - 10,500 / day" },
+      { label: "Top Money-Saving Hack", value: "Stay in Maafushi + Take a 1-Day Resort Pass" },
+      { label: "Visa for Bangladeshis", value: "Free 30-Day Visa on Arrival" }
+    ],
+    faqs: [
+      {
+        question: "How can I get overwater villa photos in the Maldives without paying BDT 50,000/night?",
+        answer: "Stay at a comfortable hotel on Maafushi Island (around BDT 8,000/night) and book a 1-Day Private Resort Tour (around $110–$140 USD per person). This includes speedboat transfers, access to the resort's overwater walkways, infinity pool, beaches, and buffet lunch."
+      },
+      {
+        question: "Should I carry US Dollars or Maldivian Rufiyaa from Dhaka?",
+        answer: "Carry crisp US Dollar ($50 and $100 bills printed after 2013 with no tears or ink stamps). In the Maldives, almost all guesthouses, speedboats, and excursion operators quote and accept USD directly."
+      }
+    ],
+    schemaMarkup: {
+      type: "DestinationGuide",
+      description: "Maldives 5-day itinerary for Bangladeshi travelers",
+      code: `{
+  "@context": "https://schema.org",
+  "@type": "TouristDestination",
+  "name": "Maldives"
 }`
     }
   }
@@ -1248,6 +1705,94 @@ export const TRIP_COSTS_DATA: TripCostData[] = [
   "maxPrice": "250000"
 }`
     }
+  },
+  {
+    id: "singapore-costs",
+    country: "Singapore",
+    durationDays: 4,
+    currencyCode: "SGD (Singapore Dollar)",
+    exchangeRateText: "1 SGD ≈ 91.50 BDT | 1 BDT ≈ 0.011 SGD",
+    categories: [
+      { name: "Flights from Dhaka (Roundtrip)", lowBdt: 41500, midBdt: 47500, highBdt: 64000 },
+      { name: "Accommodations (3 Nights Total)", lowBdt: 21000, midBdt: 34000, highBdt: 68000 },
+      { name: "Halal Hawker Centres & Meals", lowBdt: 6500, midBdt: 12000, highBdt: 28000 },
+      { name: "MRT SimplyGo & Airport Transit", lowBdt: 2200, midBdt: 4500, highBdt: 12000 },
+      { name: "Sentosa, Gardens & Visa Fee", lowBdt: 9500, midBdt: 18500, highBdt: 35000 }
+    ],
+    seasonalVariation: "Prices spike during Formula 1 Singapore Grand Prix weekend (September), Chinese New Year, and December school holidays. Travelling in February–May or July–August offers the best hotel rates.",
+    moneyHacks: [
+      "Eat at Halal-certified stalls in famous Hawker Centres (Lau Pa Sat, Tekka Centre in Little India, or Albert Centre in Bugis) where delicious chicken biryani, murtabak, or nasi padang costs just SGD 5–8 (BDT 450–730).",
+      "Tap your Bangladeshi dual-currency Visa/Mastercard directly on MRT gates (SimplyGo) instead of using Grab taxis—Changi Airport to Little India by MRT costs under SGD 2.20 (BDT 200) vs SGD 30 by taxi!",
+      "Singapore tap water is 100% safe and WHO-certified to drink. Carry a refillable water bottle to save SGD 3 (BDT 275) per bottle at attractions."
+    ],
+    quickAnswer: "A 4-day Singapore trip from Bangladesh costs roughly BDT 80,000 to BDT 85,000 per person for a smart budget traveler (including direct flights and visa), around BDT 1,15,000 for a comfortable family stay in Bugis or Little India with Sentosa theme park tickets, and BDT 2,00,000+ for luxury Marina Bay hotels.",
+    keyFacts: [
+      { label: "Smart Budget Total (4d)", value: "approx BDT 82,000" },
+      { label: "Family Mid-Range (4d)", value: "approx BDT 1,16,500" },
+      { label: "Hawker Meal Cost", value: "SGD 6 - 9 (BDT 550 - 820)" },
+      { label: "Tourist GST Refund", value: "Up to 9% back at Changi" }
+    ],
+    faqs: [
+      {
+        question: "How much bank balance do I need to show for a Singapore trip from Bangladesh?",
+        answer: "Authorized visa agents in Dhaka recommend showing a minimum closing balance of BDT 1,50,000 to BDT 2,00,000 per applicant on a 6-month bank statement."
+      }
+    ],
+    schemaMarkup: {
+      type: "TripCostData",
+      description: "Singapore 4-day trip cost breakdown in BDT",
+      code: `{
+  "@context": "https://schema.org",
+  "@type": "PriceSpecification",
+  "priceCurrency": "BDT",
+  "minPrice": "80700",
+  "maxPrice": "207000"
+}`
+    }
+  },
+  {
+    id: "maldives-costs",
+    country: "Maldives",
+    durationDays: 5,
+    currencyCode: "MVR (Maldivian Rufiyaa) & USD",
+    exchangeRateText: "1 USD ≈ 122 BDT | 1 MVR ≈ 7.90 BDT",
+    categories: [
+      { name: "Flights from Dhaka (Roundtrip)", lowBdt: 46000, midBdt: 52500, highBdt: 68000 },
+      { name: "Hotels / Guesthouses (4 Nights)", lowBdt: 16000, midBdt: 34000, highBdt: 155000 },
+      { name: "Speedboat / Ferry Transfers", lowBdt: 1500, midBdt: 6200, highBdt: 24000 },
+      { name: "Meals & Beachfront Dining", lowBdt: 6500, midBdt: 13500, highBdt: 42000 },
+      { name: "Snorkeling, Sandbank & Resort Tours", lowBdt: 4500, midBdt: 14000, highBdt: 48000 }
+    ],
+    seasonalVariation: "December to March is peak dry season with the highest hotel rates. Travelling in the shoulder months of April, May, October, or November cuts Maafushi guesthouse and private resort rates by 30% to 45% while still offering plenty of sunshine.",
+    moneyHacks: [
+      "Stay on Maafushi or Hulhumalé instead of a private resort island—you save 70% on rooms and speedboats while enjoying the exact same turquoise Indian Ocean water.",
+      "Book a Half-Day Snorkeling + Dolphin + Sandbank Lunch package in Maafushi for just $30 USD (approx BDT 3,650), which includes underwater GoPro and drone photos!",
+      "Travel with a friend or spouse so you split the $60–$80/night ocean-view guesthouse room and save 50% on accommodation."
+    ],
+    quickAnswer: "A 5-day Maldives trip from Bangladesh costs only BDT 74,500 per person (flights included!) when you stay at a clean guesthouse on Hulhumalé or Maafushi local island. A comfortable mid-range beach holiday with sea-view rooms at Arena/Kaani Beach and multiple snorkeling/resort day trips costs around BDT 1,20,000 per person, while private overwater villa resorts start at BDT 2,50,000+.",
+    keyFacts: [
+      { label: "Local Island Budget (5d)", value: "approx BDT 74,500" },
+      { label: "Mid-Range Maafushi (5d)", value: "approx BDT 1,20,000" },
+      { label: "Visa Cost for Bangladeshis", value: "BDT 0 (Free VOA)" },
+      { label: "Snorkeling + Sandbank Tour", value: "$30 USD (approx BDT 3,650)" }
+    ],
+    faqs: [
+      {
+        question: "Why are private resort transfers so expensive in the Maldives?",
+        answer: "Private resorts require dedicated resort speedboats ($100–$250 return) or seaplanes ($400+ return). By contrast, Maafushi local island uses shared scheduled speedboats for $25 USD each way, and Hulhumalé is connected by a $8 road taxi from Malé Airport."
+      }
+    ],
+    schemaMarkup: {
+      type: "TripCostData",
+      description: "Maldives 5-day trip cost breakdown in BDT for Bangladeshi travelers",
+      code: `{
+  "@context": "https://schema.org",
+  "@type": "PriceSpecification",
+  "priceCurrency": "BDT",
+  "minPrice": "74500",
+  "maxPrice": "337000"
+}`
+    }
   }
 ];
 
@@ -1256,7 +1801,7 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-1",
     slug: "cheap-flight-booking-hacks-dhaka",
     title: "5 Insider Secrets to Booking Cheaper Flights from Dhaka in 2026",
-    summary: "How to avoid paying peak ticket scales. Learn matching dates, hidden transit routes, and airline ticketing hacks specifically for Hazrat Shahjalal Airport.",
+    summary: "Outbound airfare from Hazrat Shahjalal International Airport (DAC) can fluctuate by BDT 12,000 to BDT 25,000 overnight depending on corporate migration waves, weekend labor departures, and airline inventory resets. In this comprehensive guide for Bangladeshi travelers, we break down five proven booking strategies: checking fares during the Tuesday night global GDS refresh window, shifting departures from Thursday/Friday peak exit days to Monday or Tuesday mornings, pairing low-cost regional carriers like Thai Lion Air, AirAsia, and SalamAir with smart cabin-baggage discipline, and stacking 10% to 15% domestic bank card discounts from EBL, City Bank Amex, and BRAC Bank to lock in the lowest possible roundtrip BDT ticket prices.",
     category: "Cheap Flight Tips",
     date: "June 12, 2026",
     author: "Zayan Rahman (Senior Travel Researcher)",
@@ -1287,8 +1832,8 @@ Many local banks in Bangladesh (like EBL, SCB, City Bank, Mutual Trust Bank) run
     id: "blog-2",
     slug: "nepal-vs-thailand-first-trip",
     title: "Nepal vs Thailand: Which is the Best First Country to Visit for Bangladeshis?",
-    summary: "An in-depth showdown comparing visa requirements, overall budgets, halal dining variety, and the ease of independent navigation for first-time outbound travelers.",
-    category: "Travel Hacks",
+    summary: "Choosing your very first international destination on a Bangladeshi passport often comes down to two iconic neighbors: the Himalayan valleys of Nepal or the vibrant street markets and islands of Thailand. This head-to-head comparison evaluates both countries across four critical factors for first-time Bangladeshi flyers: visa simplicity (Nepal's free instant SAARC Visa on Arrival at Tribhuvan Airport versus Thailand's pre-departure e-Visa and 6-month bank statement requirements), realistic 5-day BDT budgets (BDT 45,000 for Kathmandu and Pokhara vs. BDT 80,000+ for Bangkok and Pattaya), Halal food availability, and urban transit convenience so you can pick the right first stamp in your passport.",
+    category: "Visa & Immigration",
     date: "May 28, 2026",
     author: "Nabila Tabassum (Programmatic Curator)",
     readTime: "5 min read",
@@ -1320,7 +1865,7 @@ SUMMARY ADVICE
     id: "blog-3",
     slug: "hotel-savings-guide-bangkok-kl-dubai",
     title: "How to Keep Hotel Costs Low in Bangkok, KL, and Dubai",
-    summary: "The right neighborhood makes a big difference. One metro stop away from the tourist area can save BDT 8,000–15,000 per trip without giving up comfort.",
+    summary: "Accommodation typically consumes 30% to 40% of an outbound trip budget from Bangladesh, yet most travelers overpay simply by booking inside the most crowded tourist blocks. In this neighborhood-by-neighborhood hotel savings guide, you will learn how shifting just two or three metro stops down the line—such as staying near On Nut or Phra Khanong BTS instead of Siam in Bangkok, choosing Al Rigga or Union Metro in Deira over Downtown Dubai, or booking serviced family apartments near Bukit Bintang and KLCC in Kuala Lumpur—can save BDT 8,000 to BDT 15,000 per trip while keeping you surrounded by affordable Halal restaurants and fast transit.",
     category: "Hotel Savings",
     date: "June 05, 2026",
     author: "Faisal Ahmed (Accommodations Analyst)",
@@ -1337,7 +1882,7 @@ For South Asian travelers, breakfast is key. When booking, filters often overpri
 Hotel rates on major portals tend to fluctuate mid-week. Always search for rooms in private incognito browsers and try booking non-refundable rates only after your visa sticker or eVisa approval is fully secured in-hand.`,
     internalLinks: [
       { text: "Dubai trip cost from Dhaka", path: "/costs?country=dubai-costs" },
-      { text: "Kuala Lumpur Hotels Guide", path: "/hotels?city=kuala-lumpur" }
+      { text: "Kuala Lumpur Hotels Guide", path: "/hotels?city=kuala-lumpur-hotels" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Save on transport too", body: "A pre-booked airport transfer is usually cheaper than a metered taxi at arrival." }
   },
@@ -1345,7 +1890,7 @@ Hotel rates on major portals tend to fluctuate mid-week. Always search for rooms
     id: "blog-4",
     slug: "halal-food-guide-bangkok-bangladesh",
     title: "Where to Eat Halal Food in Bangkok: A Complete Guide for Bangladeshi Travelers",
-    summary: "Discover the best halal zones in Pratunam and Sukhumvit, learn how to identify official certified signage, check average meal costs in BDT, and find reliable restaurant recommendations for your next Bangkok stay.",
+    summary: "Finding authentic, 100% certified Halal food is one of the top priorities for Bangladeshi families visiting Thailand for shopping, holidays, or medical check-ups at Bumrungrad and Bangkok Hospital. This practical dining guide walks you through identifying the official green emblem of the Central Islamic Council of Thailand, navigating Bangkok's two largest Muslim culinary hubs—Pratunam's Petchaburi Road alleys and Sukhumvit Soi 3 (Arab Street) near Nana BTS—and budgeting for every meal tier in BDT, from BDT 180 mall food court dishes to beloved restaurants like Maidaun Halal in Pratunam, Al Hussain in Sukhumvit, and Yana Restaurant inside Siam Discovery.",
     category: "Food & Culture",
     date: "June 15, 2026",
     author: "Fahmida Tasnim (Dhaka Food Blogger & Explorer)",
@@ -1379,8 +1924,8 @@ Meal pricing is incredibly flexible in Bangkok:
     id: "blog-5",
     slug: "nepal-pokhara-itinerary-bangladesh",
     title: "Kathmandu to Pokhara: A 5-Day Nepal Itinerary for Bangladeshis (With Costs in BDT)",
-    summary: "Plan the ultimate 5-day adventure combining the cultural sights of Kathmandu and beautiful lakeside scenery of Pokhara. Includes hotel tips, transit options, and total cost breakdown in BDT.",
-    category: "Itineraries",
+    summary: "At just 90 minutes flying time from Dhaka and zero visa fee on your first visit of the year, Nepal is the ultimate pocket-friendly Himalayan escape for Bangladeshi travelers. This day-by-day 5-day itinerary connects the ancient heritage squares of Kathmandu Valley (Boudhanath Stupa, Swayambhunath, and Patan Durbar Square) with the tranquil lakeside charm of Pokhara and the breathtaking Annapurna sunrise from Sarangkot peak. Inside, you will find verified BDT pricing for tourist buses versus domestic flights, Thamel and Phewa Lakeside hotel rates, SAARC heritage ticket discounts, and a complete BDT 40,000 to BDT 54,000 per-person budget sheet.",
+    category: "Family & Budget",
     date: "June 17, 2026",
     author: "Abrar Sazzad (Backpacking Veteran)",
     readTime: "6 min read",
@@ -1417,5 +1962,330 @@ TOTAL BUDGET SUMMARY PER PERSON (IN BDT)
       { text: "Nepal Visa on Arrival Guide", path: "/visa?country=nepal-visa" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Check Dhaka to Kathmandu Flight Fares", body: "Check live availability and book cheap roundtrip flights to Nepal today." }
+  },
+  {
+    id: "blog-6",
+    slug: "dual-currency-card-endorsement-bangladesh",
+    title: "How to Get Dual-Currency Card Endorsement in Bangladesh (2026 Passport Dollar Endorsement Guide)",
+    summary: "Before you can book international flights, Agoda or Booking.com hotels, Haramain bullet train tickets, or Klook attraction passes from Bangladesh, your bank card must be endorsed against your passport under Bangladesh Bank's USD $12,000 annual personal travel quota. This step-by-step banking guide explains which Bangladeshi banks issue fast dual-currency debit and prepaid cards without credit history (EBL Aqua, City Bank Amex/Visa, BRAC Multi-Currency, MTB, and Islami Bank), what documents to bring for the physical passport stamp, how to unlock the USD e-commerce and 3D-Secure part via your bank app, RFCD vs. Travel Quota accounts, and how to avoid 5% DCC currency conversion traps abroad.",
+    category: "Banking & Payments",
+    date: "September 26, 2026",
+    author: "Farhan Momen (Lead Travel Strategist)",
+    readTime: "7 min read",
+    content: `One of the biggest hurdles for Bangladeshi travelers planning an independent trip abroad isn't the visa—it is getting a Dual-Currency Debit, Prepaid, or Credit Card endorsed and unlocked for international flights, hotels, and attraction tickets. Here is the complete, up-to-date 2026 playbook for getting your passport dollar endorsement and paying abroad smoothly.
+
+1. WHAT IS PASSPORT DOLLAR ENDORSEMENT & THE $12,000 ANNUAL TRAVEL QUOTA?
+Under Bangladesh Bank foreign exchange regulations, every adult Bangladeshi citizen holding a valid Machine-Readable Passport (MRP) or e-Passport is entitled to endorse up to USD $12,000 per calendar year (January 1 to December 31) for personal international travel (and USD $5,000 per year for children under 12).
+- "Endorsement" means an authorized dealer (AD) bank branch in Bangladesh stamps the back pages of your physical passport, records the USD limit allocated to your card or cash, and unlocks the Foreign Currency (USD) wallet on your card.
+- Without this physical stamp and system activation, Bangladeshi bank cards are automatically blocked from paying on international websites like Booking.com, Agoda, Klook, Airalo, or foreign airlines.
+
+2. STEP-BY-STEP: HOW TO GET YOUR DUAL-CURRENCY CARD ENDORSED AT ANY BANK
+Step 1: Choose a Card (No Credit History Needed!)
+You do not need a high-salary credit card. Almost every major bank in Bangladesh now issues instant or 48-hour Dual-Currency Debit or Prepaid Cards if you have a valid passport and NID:
+- Eastern Bank (EBL): Aqua MasterCard Prepaid Card or Lifestyle Dual-Currency Debit Card
+- The City Bank: American Express or Visa Dual-Currency Debit Card
+- BRAC Bank: Multi-Currency Visa Debit Card & Tara Card
+- Standard Chartered, Mutual Trust Bank (MTB), Prime Bank & Islami Bank (Khidmah / Dual-Currency Debit)
+
+Step 2: Visit Your Bank's Foreign Exchange / Card Desk with 3 Documents
+Carry:
+- Your original valid Passport (minimum 6 months validity recommended)
+- Your National ID (NID) card and 1 passport-size photo (for new prepaid cards)
+- Your bank account or prepaid card number
+Ask the officer to endorse your annual travel quota (for example, $1,500 to $5,000 USD depending on your needs—you don't have to deposit the full $12,000 at once; you simply deposit BDT as you spend!).
+
+Step 3: Open the Foreign Currency & E-Commerce Part Before Booking Online
+Having the physical ink stamp in your passport is only half the process! Before you book a flight on Aviasales, a hotel in Bangkok or Kuala Lumpur, or an airport pickup on Welcome Pickups:
+- Log into your bank mobile app (EBL Skybanking, Citytouch, BRAC Astha) OR call your bank's 24/7 hotline (e.g., 16230 for EBL, 16234 for City Bank, 16221 for BRAC).
+- Tell the agent: "Please open my USD Foreign Currency part AND enable E-Commerce / 3D-Secure Online Transactions and Overseas POS/ATM for [Number] days."
+- Note on Single-Transaction Caps: Some banks cap single online transactions at $300–$500 USD by default. If you are buying family flight tickets costing $800+, inform the call center 15 minutes before clicking 'Pay'.
+
+3. RFCD ACCOUNT VS. REGULAR TRAVEL QUOTA: WHICH ONE IS BETTER?
+When you return to Dhaka with leftover cash USD from a trip (up to $10,000 without declaration, or more with an FMJ form), you can deposit that foreign cash into a Resident Foreign Currency Deposit (RFCD) account at your bank.
+- Regular Travel Quota Card: You deposit BDT, and the bank converts it to USD at the daily BC selling rate + passport endorsement limit.
+- RFCD International Card: Your money stays in USD, earns interest, never expires with the calendar year, and has no $300 single-transaction e-commerce hassle!
+
+4. HOW TO AVOID HIDDEN 5% DYNAMIC CURRENCY CONVERSION (DCC) FEES ABROAD
+When tapping your Bangladeshi card at hotels or malls in Bangkok (Sukhumvit/Pratunam), Kuala Lumpur (Bukit Bintang), Singapore (Mustafa Centre), or Dubai (Deira), the POS machine will often ask: "Pay in USD or Local Currency (THB/MYR/SGD/AED)?"
+- Always select the LOCAL currency of the country you are visiting (or USD if your bank bills directly in USD without markup). Never select BDT on an overseas card terminal, or you will lose 4%–6% on poor conversion rates.
+
+5. WHAT IF YOU DON'T HAVE A DUAL-CURRENCY CARD YET?
+Don't let card delays cause you to miss a cheap flight fare or hotel room! You can message the URAL Support Desk directly on WhatsApp (+8801784385335) and pay in BDT via local bank transfer, bKash, or Nagad while we complete your verified flight, hotel, or Welcome Pickups airport transfer reservation.`,
+    internalLinks: [
+      { text: "Top Budget Family Destinations from Dhaka", path: "/blog?slug=top-budget-family-destinations-from-dhaka" },
+      { text: "Compare Trip Budgets in BDT", path: "/costs?country=thailand-costs" },
+      { text: "Singapore MRT SimplyGo Card Guide", path: "/destinations?country=singapore-guide" }
+    ],
+    affiliateCTA: { provider: "aviasales", headline: "Card Endorsed & Ready?", body: "Compare live international flight fares from Dhaka and book directly with zero agency markup." }
+  },
+  {
+    id: "blog-7",
+    slug: "maldives-budget-trip-bangladesh-maafushi",
+    title: "Maldives Under BDT 75,000 from Dhaka: Maafushi Local Island vs. Private Resort Guide",
+    summary: "For years, Bangladeshi travelers assumed a Maldives vacation required BDT 2,50,000+ per person because private overwater resorts charge $500+ per night and $250 for private speedboats. Today, local inhabited islands like Maafushi and Hulhumalé let you swim in the exact same crystal-clear Indian Ocean lagoons for under BDT 75,000 total—flights included! Read how Bangladeshi tourists get a free 30-day Visa on Arrival in Malé, submit the free IMUGA declaration, catch the $25 scheduled speedboat to Maafushi beachfront hotels, join $30 half-day snorkeling and sandbank drone excursions, and book 1-day water villa resort passes without paying resort room rates.",
+    category: "Family & Budget",
+    date: "September 22, 2026",
+    author: "Zayan Rahman (Senior Travel Researcher)",
+    readTime: "5 min read",
+    content: `For years, Bangladeshi travelers assumed a trip to the Maldives required BDT 2,50,000+ per person because private overwater villas charge $500+ a night and $300 for resort speedboats. Today, thanks to local island tourism on Maafushi and Hulhumalé, you can experience the exact same turquoise Indian Ocean lagoons for a fraction of the price.
+
+1. LOCAL ISLAND (MAAFUSHI) VS. PRIVATE RESORT ISLAND
+The Maldives has two types of islands:
+- Private Resort Islands: One hotel owns the entire island. Rooms start at BDT 35,000–80,000/night, and you must pay the resort's private boat fee ($120–$250/person) and eat all meals at resort prices.
+- Local Inhabited Islands (Maafushi & Hulhumalé): Welcoming Maldivian towns with modern 3-star and 4-star beachfront hotels (like Kaani Palm Beach and Arena Beach Hotel) costing BDT 6,500–9,800 per night. Everything is 100% Halal, and shared speedboats from Malé Airport cost just $25 USD!
+
+2. THE $30 SNORKELING & SANDBANK SECRET
+On Maafushi Island, local tour operators run daily group speedboats for just $30–$35 USD (approx BDT 3,650) per person. A single half-day tour includes:
+- Snorkeling at 2 vibrant coral reefs with sea turtles and tropical fish
+- Dolphin watching on the open ocean
+- Visiting a pure-white sandbank in the middle of the sea with complimentary lunch and underwater GoPro/drone photos!
+
+3. HOW TO VISIT A WATER VILLA RESORT FOR ONE DAY
+Want those iconic overwater bungalow photos for Instagram without paying BDT 60,000 a night? Book a "1-Day Resort Excursion Pass" from Maafushi ($110–$140 USD). It includes roundtrip boat transfers to a 4-star or 5-star private resort, full access to the overwater walkways, infinity pool, beach loungers, and an all-inclusive buffet lunch.
+
+4. DHAKA IMMIGRATION CHECKLIST FOR MALDIVES FREE VOA
+Bangladeshi passport holders get a FREE 30-day Visa on Arrival in Malé. To ensure a smooth 2-minute check at Dhaka Airport:
+- Complete the free IMUGA Traveller Declaration (imuga.immigration.gov.mv) within 96 hours before flying.
+- Carry printed copies of your return flight ticket and confirmed hotel booking.
+- Have USD endorsed on your passport alongside your job NOC or trade license.`,
+    internalLinks: [
+      { text: "Dhaka to Malé Flight Guide", path: "/flights?route=dhaka-maldives" },
+      { text: "Maldives Free Visa & IMUGA Steps", path: "/visa?country=maldives-visa" },
+      { text: "Maldives Full Cost Breakdown in BDT", path: "/costs?country=maldives-costs" }
+    ],
+    affiliateCTA: { provider: "klook", headline: "Explore Maldives Tours & Transfers", body: "Check day tours, snorkeling excursions, and eSIM data packages before you fly to Malé." }
+  },
+  {
+    id: "blog-8",
+    slug: "singapore-visa-guide-bangladesh-agents",
+    title: "Singapore Tourist Visa from Bangladesh (2026): Authorized Agents, LOI V39A & Checklist",
+    summary: "Singapore is a premier destination for Bangladeshi families seeking world-class theme parks on Sentosa Island, medical check-ups at Mount Elizabeth Hospital, or shopping around Mustafa Centre in Little India. However, because the Consulate of the Republic of Singapore in Dhaka does not accept walk-in tourist applications, every Bangladeshi traveler must apply through an Embassy-Authorized Visa Agent (AVA). This guide demystifies the entire 2026 Singapore e-Visa process: how to handle the Letter of Introduction (Form V39A) if you do not have a local Singaporean contact, strict 35mm x 45mm matte photo rules, recommended BDT 1,50,000+ bank balance statements, and completing the mandatory free SG Arrival Card (SGAC) 72 hours before departure.",
+    category: "Visa & Immigration",
+    date: "September 24, 2026",
+    author: "Nabila Tabassum (Programmatic Curator)",
+    readTime: "5 min read",
+    content: `Singapore is one of the most popular family vacation, shopping, and medical check-up hubs for Bangladeshi citizens. However, unlike Malaysia's self-service eVisa portal, Singapore requires applications from Bangladesh to go through Embassy-Authorized Visa Agents. Here is how to get your Singapore e-Visa approved smoothly on the first try.
+
+1. WHY YOU MUST USE AN AUTHORIZED VISA AGENT
+The Consulate of the Republic of Singapore in Dhaka (Gulshan) does not accept walk-in tourist visa applications from individuals. Instead, the Consulate designates official Authorized Visa Agents (AVAs) in Dhaka and Chattogram to verify your physical passport, Form 14A, and supporting documents before submitting them electronically into the ICA SAVE system.
+
+2. DECODING THE LETTER OF INTRODUCTION (LOI - FORM V39A)
+The #1 question from first-time Bangladeshi applicants is: "What is Form V39A (LOI)?"
+- A Letter of Introduction (Form V39A) is a sponsorship form signed by a Singapore Citizen or Singapore Permanent Resident (PR) aged 21 or older who knows you or invites you.
+- What if you don't know anyone in Singapore? Do not panic. If you have a solid travel history (previous visits to Thailand, Malaysia, UAE, Europe, or US) and strong financials, or if you book through a top-tier Authorized Visa Agent in Dhaka, the agency can guide you on submitting a corporate/hotel-backed profile or arranged local tour sponsorship.
+
+3. FINANCIAL & PHOTO SPECIFICATIONS THAT CAUSE DELAYS
+- Photo Rule: Singapore is strict about photo quality. Your 35mm x 45mm photo must be taken within the last 3 months on a pure white background with a matte finish—do not reuse an old photo that already appears on an old visa in your passport!
+- Bank Statement: Provide a 6-month personal bank statement with regular transaction flow and a closing balance of at least BDT 1,50,000 per person (BDT 3,00,000+ for a family), paired with an original Bank Solvency Certificate.
+
+4. DON'T FORGET THE SG ARRIVAL CARD (72 HOURS BEFORE FLIGHT)
+Once your Singapore e-Visa PDF arrives (usually within 5–7 working days), print it on clean A4 paper. Then, within 3 days (72 hours) prior to your flight from Dhaka, go to the official ICA website (eservices.ica.gov.sg) to submit your free SG Arrival Card (SGAC). With both in hand, you can even use Changi Airport's automated immigration lanes!`,
+    internalLinks: [
+      { text: "Singapore Visa Requirements & Checklist", path: "/visa?country=singapore-visa" },
+      { text: "Dhaka to Singapore Direct Flights", path: "/flights?route=dhaka-singapore" },
+      { text: "Best Hotels Near Mustafa Centre Singapore", path: "/hotels?city=singapore-hotels" }
+    ],
+    affiliateCTA: { provider: "airalo", headline: "Stay Connected at Changi Airport", body: "Install a Singapore eSIM before leaving Dhaka so your Grab and Google Maps work the second you land." }
+  },
+  {
+    id: "blog-9",
+    slug: "top-budget-family-destinations-from-dhaka",
+    title: "Top 6 Budget-Friendly Family Destinations from Dhaka in 2026 (Ranked by BDT Cost & Visa Ease)",
+    summary: "Planning an international holiday from Dhaka with young children, a spouse, or elderly parents requires balancing flight duration, predictable visa approval, Halal food access, stroller-friendly streets, and total cost in Bangladeshi Taka. In this ranked 2026 family guide, we compare the top six outbound destinations from Bangladesh from lowest to highest 5-day per-person BDT budget: Nepal (from BDT 42,000 with free Visa on Arrival), Malaysia (from BDT 68,000 with 4-day online e-Visa and universal JAKIM Halal dining), Thailand (from BDT 72,000 with Safari World and medical check-up access), Maldives local islands (Maafushi & Hulhumalé from BDT 75,000), Singapore, and Dubai.",
+    category: "Family & Budget",
+    date: "September 26, 2026",
+    author: "Farhan Momen (Lead Travel Strategist)",
+    readTime: "7 min read",
+    content: `When traveling abroad from Dhaka with a spouse, children, or elderly parents, your priorities shift completely. You need short flight times, predictable visa approvals, easily accessible Halal meals, family-sized hotel rooms, and reliable airport-to-hotel transfers. Here are the Top 6 Budget-Friendly Family Destinations from Dhaka in 2026, ranked from lowest to highest total BDT cost.
+
+1. NEPAL (KATHMANDU, NAGARKOT & POKHARA) — BEST UNDER ৳50,000 PER PERSON
+- Flight Time from Dhaka: 1 hr 30 mins direct (Biman Bangladesh, Himalaya Airlines)
+- Visa for Bangladeshis: 100% Free Visa on Arrival (Gratis for 1st visit/year)
+- 5-Day Per-Person Budget (Family Sharing): BDT 42,000 – BDT 55,000 (Flights + 4-Star Hotel + Private Car)
+- Why Families Love It: Zero visa anxiety! If you decide on Monday to take your family abroad on Thursday, Nepal is ready. Instead of taking long tourist buses with children or seniors, families can hire a private Toyota Hiace or Scorpio SUV with an English-speaking driver for Kathmandu and Nagarkot sunrise views at very affordable rates.
+
+2. MALAYSIA (KUALA LUMPUR & GENTING HIGHLANDS) — BEST ALL-AROUND MUSLIM FAMILY HUB
+- Flight Time from Dhaka: 4 hrs direct (Biman, Malaysia Airlines, AirAsia, Batik Air)
+- Visa for Bangladeshis: 100% Online e-Visa (BDT 3,800 – 4,200; 2–4 working days)
+- 5-Day Per-Person Budget (Family Sharing): BDT 68,000 – BDT 85,000
+- Why Families Love It: Malaysia is arguably the most stress-free country in Asia for Bangladeshi families. Virtually 100% of restaurants in Bukit Bintang and KLCC are JAKIM Halal-certified, English is spoken everywhere, sidewalks are stroller- and wheelchair-friendly, and a 2-bedroom serviced apartment with a kitchen and swimming pool near KLCC costs less than a cramped hotel room elsewhere. Kids adore the Awana Skyway cable car up to Genting Highlands and Aquaria KLCC.
+
+3. THAILAND (BANGKOK, PATTAYA & PHUKET) — BEST FOR SHOPPING, SAFARI WORLD & MEDICAL CHECKUPS
+- Flight Time from Dhaka: 2 hrs 35 mins direct (Biman, Thai Airways, US-Bangla, Thai Lion Air)
+- Visa for Bangladeshis: Official Thailand e-Visa via thaievisa.go.th (BDT 6,500 – 8,500; 5–10 days)
+- 5-Day Per-Person Budget (Family Sharing): BDT 72,000 – BDT 92,000
+- Why Families Love It: Now that Thailand has launched the online e-Visa portal for Dhaka applicants, families no longer have to leave physical passports at VFS for weeks. Stay in Pratunam or Sukhumvit for effortless Halal dining, take the kids to Safari World Bangkok or Chao Phraya dinner cruises via Klook, and pre-book a Welcome Pickups family minivan so your driver greets you right at Suvarnabhumi Arrival Gate 3.
+
+4. MALDIVES (MAAFUSHI & HULHUMALÉ LOCAL ISLANDS) — BEST BEACH ESCAPE WITH ZERO VISA FEE
+- Flight Time from Dhaka: 4 hrs 15 mins direct (US-Bangla Airlines) or 1-stop via Colombo
+- Visa for Bangladeshis: 100% Free 30-Day Visa on Arrival (+ Free IMUGA online form)
+- 5-Day Per-Person Budget (Family Sharing): BDT 75,000 – BDT 98,000
+- Why Families Love It: A 100% Muslim nation with crystal-clear, shallow turquoise lagoons. Families with young kids often split their stay between Hulhumalé (connected by road bridge to Malé Airport—no boat needed!) and Maafushi Island (a 35-minute $25 speedboat ride) for dolphin cruises and sandbank picnics.
+
+5. SINGAPORE (LITTLE INDIA, MARINA BAY & SENTOSA) — SAFEST & MOST ACCESSIBLE FOR SENIORS & KIDS
+- Flight Time from Dhaka: 4 hrs 10 mins direct (Singapore Airlines, Biman, US-Bangla)
+- Visa for Bangladeshis: e-Visa via Authorized Dhaka Visa Agents (BDT 4,200 – 6,500)
+- 5-Day Per-Person Budget (Family Sharing): BDT 98,000 – BDT 1,35,000
+- Why Families Love It: While hotel rooms in Singapore are pricier, the city is unmatched for safety, cleanliness, and wheelchair/stroller accessibility. Staying near Little India (Mustafa Centre) or Bugis gives you 24-hour Bengali and Indian Halal food, and attractions like Gardens by the Bay, Singapore Zoo, and Universal Studios Sentosa are world-class.
+
+6. DUBAI, UAE (DEIRA, DOWNTOWN & DESERT SAFARI) — BEST WINTER FAMILY EXTRAVAGANZA (NOV–MAR)
+- Flight Time from Dhaka: 5 hrs 30 mins direct (Emirates, flydubai, Biman, US-Bangla)
+- Visa for Bangladeshis: Sponsor-based e-Visa (BDT 11,500 – 14,500; 3–5 days)
+- 5-Day Per-Person Budget (Family Sharing): BDT 1,10,000 – BDT 1,45,000
+- Why Families Love It: Between November and March, Dubai's weather is pleasant and cool. Families can watch the free Dubai Mall Fountain Show below Burj Khalifa, visit Miracle Garden and Global Village, and book a family 4x4 Desert Safari with BBQ dinner.
+
+PRO FAMILY SAVING HACK: PRE-BOOK A FAMILY MINIVAN AT THE AIRPORT
+When traveling as a family of 4 to 6 people with 4+ suitcases, ordinary airport taxis cannot fit your luggage and will force you to split into two cars. Always pre-book a 6-seater Family Minivan via Welcome Pickups or Kiwitaxi in our Travel Essentials Hub—it costs almost the same as two regular taxis and your driver waits at the gate with your family name sign!`,
+    internalLinks: [
+      { text: "Compare All 6 Country Budgets in BDT", path: "/costs?country=malaysia-costs" },
+      { text: "Check Family Hotel Guides by Neighborhood", path: "/hotels?city=kuala-lumpur-hotels" },
+      { text: "Dual-Currency Card Endorsement Guide", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" }
+    ],
+    affiliateCTA: { provider: "klook", headline: "Book Family Theme Parks & Safari World Passes", body: "Save 15–25% on Safari World Bangkok, Genting SkyWorlds, Gardens by the Bay, and Dubai Desert Safaris with mobile QR tickets." }
+  },
+  {
+    id: "blog-10",
+    slug: "dhaka-airport-outbound-immigration-checklist-noc-go",
+    title: "Dhaka Airport (DAC) Outbound Immigration Checklist 2026: NOC, GO, Return Ticket & First-Time Flyer Rules",
+    summary: "Even after receiving an approved e-Visa or booking a Visa-on-Arrival holiday to Nepal or the Maldives, many first-time Bangladeshi travelers feel anxious about facing the emigration counter at Hazrat Shahjalal International Airport (DAC). In reality, clearing Dhaka outbound immigration takes under two minutes when your document folder is properly organized. This verified checklist details the 5 mandatory documents every passenger must carry (6-month valid passport with old passports attached, printed visa/QR code, return PNR ticket, hotel voucher, and passport dollar endorsement), alongside profession-specific papers including Private Job NOCs, Government Orders (GO), Trade Licenses, and fresh-passport tips.",
+    category: "Visa & Immigration",
+    date: "September 26, 2026",
+    author: "Nabila Tabassum (Programmatic Curator)",
+    readTime: "6 min read",
+    content: `Even after getting an approved e-Visa or preparing for a Visa-on-Arrival destination like Nepal or the Maldives, many first-time Bangladeshi travelers feel nervous about the emigration desk at Hazrat Shahjalal International Airport (DAC). In reality, Dhaka immigration officers simply verify that you are a genuine tourist with confirmed return plans and legitimate financial backing.
+
+Carry a neat plastic document folder in your cabin backpack with these exact printed papers, and you will clear emigration in under 2 minutes:
+
+1. THE 5 MANDATORY PAPERS FOR EVERY TOURIST
+- Valid Passport (minimum 6 months validity from your return date) + Old Passports (if your travel history is in an expired passport, always carry it bound together!).
+- Printed Visa Copy (e-Visa printout in clear color/B&W for Thailand, Malaysia, Singapore, or UAE) OR Mandatory Arrival QR Code (IMUGA QR for Maldives; SGAC for Singapore; MDAC for Malaysia).
+- Confirmed Return Air Ticket (showing a valid PNR for both Dhaka departure and Dhaka return—never fly on a one-way ticket with a tourist visa).
+- Confirmed Hotel Booking Voucher (printed from Booking.com, Agoda, or direct hotel confirmation covering your stay).
+- Foreign Currency Endorsement Proof: Physical bank endorsement stamp on your passport showing Cash USD ($500+ recommended for VOA countries) and/or an active Dual-Currency Debit/Credit Card in your name + recent 6-month Bank Statement copy.
+
+2. PROFESSION-SPECIFIC DOCUMENTS (DO NOT FORGET THESE!)
+Dhaka immigration officers routinely ask: "What do you do in Bangladesh?" and ask to see your occupational proof:
+- Private Sector Job Holders: Original printed No Objection Certificate (NOC) / Leave Approval Letter on company letterhead + your physical Office ID Card + 1 or 2 Visiting Cards.
+- Government / Semi-Govt / Autonomous Body Employees: Official Government Order (GO) / Ex-Bangladesh Leave Order issued by your ministry or department (mandatory by law for government staff).
+- Business Owners / Entrepreneurs: Copy of your renewed Trade License (with English translation) + Company Letterhead Pad self-declaration + Business Visiting Card.
+- Doctors, Engineers & Lawyers: BMDC / IEB / Bar Council ID card + Chamber/Hospital NOC.
+- Students & Homemakers: Student ID + Institution No-Objection Letter (for students), or Spouse's NOC/Trade License + Marriage Certificate copy (when traveling as a family or sponsored by spouse/parents).
+
+3. SPECIAL TIPS FOR FIRST-TIME "FRESH PASSPORT" FLYERS TO NEPAL & MALDIVES
+Because Nepal and the Maldives offer free Visa on Arrival to Bangladeshi citizens, emigration officers check first-time flyers slightly more carefully:
+- Dress neatly and confidently.
+- Know your hotel name and your basic 4–5 day sightseeing plan (e.g., "We are staying 3 nights in Thamel, Kathmandu and 2 nights in Pokhara Lakeside").
+- Carry at least $300–$500 Cash USD in hand OR an endorsed Dual-Currency Card with your bank statement so you can immediately demonstrate sufficient funds.`,
+    internalLinks: [
+      { text: "Nepal Free Visa on Arrival Checklist", path: "/visa?country=nepal-visa" },
+      { text: "Maldives Free VOA & IMUGA Guide", path: "/visa?country=maldives-visa" },
+      { text: "Interactive Outbound Packing & Document Tool", path: "/tools" }
+    ],
+    affiliateCTA: { provider: "airalo", headline: "Have Internet Ready at the Arrival Immigration Desk", body: "Activate a travel eSIM before takeoff so you can pull up your return ticket, hotel voucher, or IMUGA QR code immediately upon landing." }
+  },
+  {
+    id: "blog-11",
+    slug: "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+    title: "Umrah & Hajj Preparation Guide from Bangladesh (2026): Official Visa Rules, Nusuk App, Flights & BDT Cost Breakdown",
+    summary: "Every year, hundreds of thousands of Bangladeshi Muslims travel to Makkah and Madinah for Umrah and Hajj, yet confusing social media rumors often cause pilgrims to overpay or misunderstand current Saudi e-Visa rules. This verified 2026 guide clarifies the strict legal separation between obligatory Hajj registration via the Bangladesh Ministry of Religious Affairs portal (hajj.gov.bd) and year-round DIY Umrah planning. Explore the 3 legitimate Umrah visa pathways for Bangladeshi passport holders, mandatory Saudi Visa Bio and Nusuk Rawdah permit apps, open-jaw Dhaka–Jeddah/Madinah flight routing, and a complete 10-day BDT 1,16,000 to BDT 1,32,000 budget breakdown.",
+    category: "Hajj & Umrah",
+    date: "September 26, 2026",
+    author: "Farhan Momen (Lead Travel Strategist)",
+    readTime: "8 min read",
+    content: `Every year, hundreds of thousands of Bangladeshi Muslims travel to Makkah and Madinah for Umrah and Hajj. Because rules from the Saudi Ministry of Hajj & Umrah and the Bangladesh Ministry of Religious Affairs have modernized rapidly, having accurate, verified information is essential so your family is never overcharged or misled.
+
+1. CRUCIAL DISTINCTION: OFFICIAL HAJJ VS. INDEPENDENT (DIY) UMRAH FOR BANGLADESHIS
+Before planning, every Bangladeshi pilgrim must understand the strict legal separation between Hajj and Umrah:
+- HAJJ (Strictly Regulated Quota System): You CANNOT perform obligatory Hajj independently on an Umrah visa, Transit visa, or Tourist visa. Saudi authorities strictly enforce a SAR 10,000+ fine, deportation, and a 10-year entry ban for anyone attempting Hajj without an official Hajj Permit/Nusuk Hajj Card. To perform Hajj from Bangladesh, you must complete official Pre-Registration (Prak-Nibondhon) and Final Registration (Nibondhon) through the Bangladesh Ministry of Religious Affairs portal (hajj.gov.bd) using your NID and e-Passport, under either the Government Hajj Package or a Ministry-Approved Licensed Hajj Agency.
+- UMRAH (Flexible Year-Round Outside the Hajj Season): Unlike Hajj, you DO NOT have to buy an overpriced all-inclusive group package to perform Umrah! Once you obtain a valid Saudi Umrah e-Visa (or Stopover Visa), you are legally free to book your own Dhaka–Jeddah/Madinah flights, choose your own Makkah and Madinah hotels near the Haram, and travel at your family's own pace.
+
+2. THE 3 VERIFIED UMRAH VISA PATHWAYS FOR BANGLADESHI PASSPORT HOLDERS
+Be careful of social media rumors claiming any Bangladeshi passport can apply for an instant Saudi Tourist e-Visa online—that rule only applies to specific visa holders. Here are the 3 authentic ways Bangladeshi citizens get an Umrah visa in 2026:
+
+Pathway A: 90-Day Umrah e-Visa via an Authorized Bangladesh Umrah Agency (Open to All Valid Passports)
+- Who qualifies: Any Bangladeshi citizen with an e-Passport or MRP valid for at least 6 months.
+- How it works: Submit your passport scan and passport photo to a Ministry/Nusuk-authorized Umrah agency in Dhaka for "Visa + Mandatory Saudi Health Insurance Only" (without buying their hotel or flight bundle).
+- Processing time & cost: Issued in 2 to 5 working days as a PDF e-Visa; typically costs BDT 15,500 – BDT 19,500 per person.
+
+Pathway B: 96-Hour Saudi Stopover / Transit Visa (When Flying Saudia or Flynas)
+- Who qualifies: Bangladeshi travelers booking an international transit flight on Saudia (Saudi Arabian Airlines) or Flynas (for example, flying Dhaka → Jeddah → Dubai/Istanbul/London or vice versa).
+- How it works: During flight checkout on the official Saudia or Flynas website, select the "Stopover Visa" option (up to 96 hours / 4 days stay in Saudi Arabia). The visa is issued electronically within minutes for ~SAR 39.50 + mandatory medical insurance (~BDT 3,500 – BDT 4,500 total), and eligible Saudia stopover tickets include 1 complimentary hotel night!
+
+Pathway C: Instant 1-Year Saudi Tourist e-Visa or Visa on Arrival (ONLY for US/UK/Schengen Visa Holders)
+- Who qualifies: Bangladeshi passport holders who hold a valid, physical US, UK, or Schengen tourist/business visa that has been stamped/used at least once to enter the issuing country (or permanent residents of the US, UK, or EU).
+- How it works: Eligible travelers can apply directly on visa.visitsaudi.com or obtain a Visa on Arrival at Jeddah (JED) or Madinah (MED) airport for ~SAR 480 (~BDT 15,500).
+
+3. MANDATORY APPS & HEALTH REQUIREMENTS BEFORE FLYING FROM DHAKA
+- Saudi Visa Bio App (Biometrics): Download the official "Saudi Visa Bio" app on your smartphone to scan your passport, face, and 10 fingerprints before flying (mandatory for Hajj pilgrims and required for visa biometrics).
+- Official Nusuk App (nusuk.sa): Once your Umrah or Stopover visa is issued, create an account on the official Nusuk app using your Visa Number and Passport Number. You will use Nusuk to book your Umrah appointment slot and your mandatory Rawdah Shareef (Riyazul Jannah) permit in Masjid an-Nabawi, Madinah. Tip: Rawdah permits for men and women open on separate schedules—check Nusuk early!
+- Vaccination Certificate: Carry your Meningococcal Meningitis (ACWY-135) vaccination card (taken at least 10 days prior to travel) along with your printed e-Visa, confirmed return air ticket, hotel vouchers, and endorsed Dual-Currency Card / Cash USD or SAR.
+
+4. FLIGHTS & HARAMAIN HIGH-SPEED TRAIN: SMART ROUTING FROM DHAKA
+- Best Flight Strategy ("Open-Jaw / Multi-City Ticket"): Instead of flying Dhaka → Jeddah → Dhaka and backtracking by road, book a Multi-City ticket: Fly Dhaka (DAC) → Jeddah (JED), wear your Ihram before crossing the Miqat (Yalamlam / Qarn al-Manazil—announced by the pilot 45 minutes before landing on Biman and Saudia flights), perform Umrah in Makkah, take the bullet train to Madinah, and fly home directly from Madinah (MED) → Dhaka (DAC).
+- Direct Airlines from Dhaka: Biman Bangladesh Airlines and Saudia operate direct flights (~6 to 6.5 hours; roundtrip BDT 74,000 – BDT 92,000). Budget 1-stop options include Gulf Air, SalamAir, Jazeera Airways, Air Arabia, and Kuwait Airways (BDT 56,000 – BDT 68,000).
+- Haramain High-Speed Railway (sar.hhr.sa): Connects Jeddah Airport (KAIA Station inside Terminal 1) directly to Makkah Station in 55 minutes (Economy fare: SAR 60–75 / ~BDT 2,100), and connects Makkah to Madinah in just 2 hours 20 minutes at 300 km/h (Economy fare: SAR 150–220 / ~BDT 5,200–7,200).
+
+5. WHERE TO STAY IN MAKKAH & MADINAH (HOTEL ZONES EXPLAINED)
+- Makkah Walking-Distance Zones: Jabal Omar, Abraj Al Bait (Clock Tower), and northern Ajyad / Ibrahim Al Khalil Street (0 to 500 meters from Masjid al-Haram courtyard; ideal for elderly parents and children, from BDT 14,000 – BDT 32,000/night).
+- Makkah Budget Shuttle Zones: Mahbas Al Jin, Kudai, and Aziziyah / Naseem (3-to-4 star clean hotels with dedicated 24/7 free shuttle buses dropping you at the Haram tunnel in 8–10 minutes; from BDT 4,200 – BDT 7,500/night).
+- Madinah Best Zone for Families: Markazia North & West (Central Area) stays 100–300 meters from Masjid an-Nabawi gates. If traveling with female family members, book a hotel on the Northern side near Ladies' Gates 25 to 29 for effortless prayer access.
+
+6. REALISTIC 10-DAY DIY UMRAH BUDGET FROM BANGLADESH (PER PERSON IN BDT, FAMILY OF 4 SHARING)
+- Roundtrip Flights (DAC–JED / MED–DAC): BDT 58,000 (1-Stop) to BDT 78,000 (Direct Biman/Saudia)
+- Umrah e-Visa + Mandatory Saudi Medical Insurance: BDT 16,500
+- 5 Nights Makkah + 4 Nights Madinah Hotels (Per Person Share): BDT 22,000 (Shuttle/Budget 3-Star) to BDT 55,000 (Walking-Distance 4/5-Star)
+- Haramain Bullet Train / Private Family GMC or Hyundai H1 Van: BDT 7,500 – BDT 11,000
+- Daily Halal Meals & Ziyarah Tours (Taif, Badr, Quba Mosque, Mount Uhud): BDT 12,000 – BDT 18,000
+- Total Estimated 10-Day Umrah Cost per Person: BDT 1,16,000 – BDT 1,32,000 (Budget Family Share) | BDT 1,65,000 – BDT 2,15,000 (Comfort Walking-Distance)`,
+    internalLinks: [
+      { text: "Dual-Currency Card Endorsement Guide for Hotel & Train Bookings", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
+      { text: "Dhaka Airport Outbound Immigration Document Checklist", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Dubai Stopover & UAE Visa Guide from Dhaka", path: "/destinations?country=dubai-guide" }
+    ],
+    affiliateCTA: { provider: "airalo", headline: "Stay Connected on Nusuk & WhatsApp in Makkah and Madinah", body: "Install a Saudi Arabia 4G/5G eSIM before flying from Dhaka so your Nusuk Rawdah permit QR code, Haramain train ticket, and Uber/Careem work the moment you land at Jeddah Airport." }
+  },
+  {
+    id: "blog-12",
+    slug: "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
+    title: "Makkah & Madinah Hotel Zones, Haramain Bullet Train & Ziyarah Guide for Bangladeshi Pilgrims (2026)",
+    summary: "Picking the wrong hotel street in Makkah or Madinah can mean pushing elderly parents up steep hills in 40°C heat or waiting 45 minutes for crowded elevators after every prayer. This practical ground-logistics guide for Bangladeshi Umrah and Hajj pilgrims compares Makkah's flattest walking-distance zones (Jabal Omar, Clock Tower, and Northern Ajyad) against high-value 24/7 shuttle districts (Mahbas Al Jin and Kudai), shows how to book hotels near Masjid an-Nabawi Ladies' Gates 25–29 in Madinah Markazia North, and walks through Haramain High-Speed Railway baggage rules, Zamzam water allowance at Jeddah/Madinah airports, and private Ziyarah taxi rates in SAR and BDT.",
+    category: "Hajj & Umrah",
+    date: "September 26, 2026",
+    author: "Farhan Momen (Lead Travel Strategist)",
+    readTime: "7 min read",
+    content: `When Bangladeshi families plan an Umrah trip—especially with elderly parents or young children—the difference between an exhausting journey and a peaceful spiritual experience comes down to three ground logistics: choosing the right hotel zone near the Haramain, mastering the Haramain High-Speed Bullet Train, and knowing the official Zamzam and Ziyarah rules.
+
+1. MAKKAH HOTEL ZONES: FLAT WALKING ACCESS VS. STEEP HILLS
+Many hotels advertise "600 meters from Masjid al-Haram" on online booking sites without mentioning that the last 200 meters is a steep uphill climb! Here is the real street-level breakdown for Bangladeshi pilgrims:
+- Jabal Omar & Ibrahim Al Khalil Street (North-West): Zero steep slopes, modern wide elevators, and direct flat access into the King Fahd Gate and Umrah courtyard in 3 to 6 minutes. Best for wheelchair users and senior parents (BDT 18,000 – BDT 35,000/night).
+- Lower Ajyad Street (First 400m): Very convenient for King Abdulaziz Gate access, surrounded by affordable Bengali/Pakistani restaurants. Avoid Upper Ajyad (Bir Balila) if traveling with elderly family members unless the hotel operates a 24/7 golf-cart or microbus shuttle to the flat courtyard.
+- Mahbas Al Jin & Kudai (Smart Budget Shuttle Hubs): Clean 3-star and 4-star towers costing just BDT 4,200 – BDT 7,500/night. Dedicated free shuttle buses run every 5 minutes through the tunnel directly to the Marwah / Bab Ali bus terminal.
+
+2. MADINAH HOTEL ZONES: WHY MARKAZIA NORTH IS BEST FOR FAMILIES
+Masjid an-Nabawi is surrounded by a flat paved courtyard on all four sides (Markazia North, South, East, and West).
+- Why Bangladeshi Families Prefer Markazia North (Al Haram Road): The main Ladies' Prayer Sections and Rawdah entry points for women are located near Gates 25 to 29 on the Northern side, while men can enter directly through King Fahd Gate (Gate 21). Staying in Markazia North means mothers, wives, and sisters walk only 150 meters to their gate instead of walking 1 kilometer around the perimeter in the midday sun!
+
+3. HARAMAIN HIGH-SPEED TRAIN (300 KM/H): JEDDAH → MAKKAH → MADINAH
+Operated on the official portal (sar.hhr.sa) and the HHR Train mobile app:
+- Jeddah Airport (KAIA Terminal 1) to Makkah: Takes just 54 minutes (SAR 60–75 Economy / ~BDT 2,100). If you land at Jeddah Terminal 1 in Ihram on Saudia or Biman, you walk straight into the indoor air-conditioned train station without stepping outside into the heat.
+- Makkah (Rusayfah Station) to Madinah Station: Takes 2 hours 20 minutes (SAR 150–220 Economy / ~BDT 5,200–7,200) vs. 5 to 6 hours by highway bus.
+- Strict Baggage Rule to Remember: Haramain Train allows 1 large suitcase (up to 25 kg, max dimensions 65 x 45 x 30 cm) + 1 cabin hand-bag per passenger. If your family has extra oversized cartons, either use the station's SPL luggage delivery service or hire a private 7-seater Hyundai H1 / GMC Savana van (SAR 450–600 / ~BDT 15,000–19,500 total for the whole family door-to-door).
+
+4. HISTORIC ZIYARAH IN MAKKAH, MADINAH & TAIF (REALISTIC FARES)
+Instead of paying per-person tour bus markups, a family of 3 to 6 can book a private air-conditioned sedan or 7-seater van for a 3-hour morning Ziyarah right after Fajr prayer:
+- Makkah Ziyarah (Jabal al-Noor / Cave Hira base, Jabal Thawr, Mina, Muzdalifah, Arafat / Jabal al-Rahmah, Masjid Jin): SAR 150 – 220 (~BDT 4,900 – 7,200 total per car).
+- Madinah Ziyarah (Masjid Quba—where praying 2 Rakah equals the reward of an Umrah—Mount Uhud & Martyrs' Cemetery, Masjid Qiblatain, Seven Mosques / Khandaq): SAR 120 – 180 (~BDT 3,900 – 5,900 total per car).
+- Full-Day Taif Excursion from Makkah (Miqat Qarn al-Manazil, Abdullah Ibn Abbas Mosque, Rose Factories): SAR 350 – 450 (~BDT 11,500 – 14,800 roundtrip per car).
+
+5. OFFICIAL ZAMZAM WATER RULE FOR RETURN FLIGHTS TO DHAKA
+- Every pilgrim holding an Umrah e-Visa (or Nusuk Umrah permit) is permitted to purchase one official 5-liter boxed bottle of Zamzam water from the automated kiosks outside Jeddah (JED) or Madinah (MED) Airport for SAR 9.50–12.50 (~BDT 350–400).
+- Full-service carriers flying to Dhaka (Biman Bangladesh Airlines, Saudia, Gulf Air, Kuwait Airways) carry this 5-liter sealed Zamzam box FREE of charge in addition to your regular 30kg–46kg baggage allowance.`,
+    internalLinks: [
+      { text: "Complete Umrah & Hajj Visa, Nusuk & BDT Budget Guide", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Dual-Currency Card Endorsement for Booking Haramain Train", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
+      { text: "Dhaka Airport Outbound Immigration Checklist", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" }
+    ],
+    affiliateCTA: { provider: "airalo", headline: "Need Data for Haramain Train & Nusuk Permits?", body: "Get an instant Saudi Arabia eSIM before flying from Dhaka so your Nusuk QR codes and Careem rides work seamlessly across Makkah and Madinah." }
   }
 ];
+

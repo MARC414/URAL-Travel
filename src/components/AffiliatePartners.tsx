@@ -4,16 +4,38 @@ import { KlookEmbed } from "./KlookEmbed";
 import { KiwitaxiEmbed } from "./KiwitaxiEmbed";
 import { AiraloEmbed } from "./AiraloEmbed";
 import { QeeqEmbed } from "./QeeqEmbed";
+import { WelcomePickupsEmbed, WELCOME_PICKUPS_PARTNER_URL } from "./WelcomePickupsEmbed";
 
 /* Single source of truth for the plain outbound URLs (used by
    PartnerLinkButton and any inline <a> tags). Do not edit these values. */
 export const AFFILIATE_LINKS = {
   aviasales: "https://aviasales.tpo.li/8saJolX0",
   klook: "https://klook.tpo.li/IYOU76Bn",
+  tiqets: "https://tiqets.tpo.li/KSc4uyIB",
+  airhelp: "https://airhelp.tpo.li/XS95LnEC",
   kkday: "https://kkday.tpo.li/3Ecyxris",
   kiwitaxi: "https://kiwitaxi.tpo.li/GIhvhrtF",
+  welcomePickups: WELCOME_PICKUPS_PARTNER_URL,
   airalo: "https://airalo.tpo.li/mV2QXsXK",
   qeeq: "https://qeeq.tpo.li/nooi5oSG"
+};
+
+export const AIRHELP_PROMO = {
+  code: "AHTPO11",
+  discount: "11% OFF",
+  validUntil: "November 30, 2026",
+  plans: "AirHelp+ Smart & AirHelp+ Pro",
+  scriptSrc: "https://tpemd.com/content?promo_id=8679&campaign_id=120&powered_by=true&lang=en&shmarker=675992&trs=540277"
+};
+
+export const KKDAY_PROMO = {
+  affiliateUrl: "https://kkday.tpo.li/3Ecyxris",
+  campaignName: "KKday Southeast Asia 9.9 Travel Sale",
+  discount: "30% OFF + Buy 1 Get 1",
+  giveaway: "US$100 KKday Coupon (Top 5 Spenders)",
+  bookingWindow: "Sept 9 – Sept 30, 2026",
+  travelWindow: "Sept 9 – Dec 31, 2026",
+  categories: "Southeast Asia Tours, Airport Transfers & Attraction Tickets"
 };
 
 export function LoadingSkeleton({ minHeight = 220, label }: { minHeight?: number; label: string }) {
@@ -123,6 +145,11 @@ export function KlookActivitiesWidget() {
 /* 04. Kiwitaxi — Airport Transfers / Shuttles widget */
 export function KiwitaxiTransferWidget() {
   return <KiwitaxiEmbed />;
+}
+
+/* 04b. Welcome Pickups — Arrival Gate Meet-and-Greet Airport Transfers widget */
+export function WelcomePickupsWidget({ defaultCountry }: { defaultCountry?: string }) {
+  return <WelcomePickupsEmbed defaultCountry={defaultCountry} />;
 }
 
 /* 05. Airalo — eSIM / connectivity widget */

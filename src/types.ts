@@ -27,6 +27,7 @@ export interface FlightRoute {
   airlines: string[];
   bestTimeToBook: string;
   duration: string;
+  flightDuration?: string;
   visaRequirement: string;
   quickAnswer: string;
   keyFacts: KeyFact[];
@@ -70,7 +71,7 @@ export interface DocumentChecklist {
 export interface VisaGuide {
   id: string;
   country: string;
-  requirementType: "Visa On Arrival" | "e-Visa" | "Sticker Visa / Sticker Required" | "Visa Free";
+  requirementType: "Visa On Arrival" | "e-Visa" | "Sticker Visa / Sticker Required" | "Visa Free" | string;
   costBdt: string;
   processingTime: string;
   documentChecklist: DocumentChecklist[];

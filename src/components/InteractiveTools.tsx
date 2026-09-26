@@ -1,8 +1,27 @@
 import React, { useState } from "react";
 import { Coins, Calculator, CheckSquare, ShieldCheck, Heart, User, Sparkles, Check, RefreshCw } from "lucide-react";
+import { AirHelpWidget } from "./AirHelpWidget";
 
 export function InteractiveTools() {
-  const [activeTool, setActiveTool] = useState<"converter" | "calculator" | "packing" | "visa-checker">("calculator");
+  const [activeTool, setActiveTool] = useState<"converter" | "calculator" | "packing" | "visa-checker" | "airhelp">(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get("tab");
+      if (tab === "airhelp" || tab === "converter" || tab === "calculator" || tab === "packing" || tab === "visa-checker") {
+        return tab;
+      }
+    }
+    return "calculator";
+  });
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get("tab");
+    if (tab === "airhelp" || tab === "converter" || tab === "calculator" || tab === "packing" || tab === "visa-checker") {
+      setActiveTool(tab);
+    }
+  }, [typeof window !== "undefined" ? window.location.search : ""]);
 
   // 1. Currency Converter State
   const [bdtAmount, setBdtAmount] = useState<number>(10000);
@@ -155,6 +174,15 @@ export function InteractiveTools() {
             }`}
           >
             Visa Checker
+          </button>
+          <button
+            id="tool-nav-airhelp"
+            onClick={() => setActiveTool("airhelp")}
+            className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
+              activeTool === "airhelp" ? "bg-[#F6B73C] text-[#102A43]" : "text-slate-350 hover:text-white"
+            }`}
+          >
+            Flight Delay Claim (€600)
           </button>
         </div>
       </div>
@@ -475,6 +503,13 @@ export function InteractiveTools() {
                 ⚠️ Bangladeshis require a tourist check-in clearance. Always verify that your passport biodata pages do not contain 'restricted clearance' remarks and that your passport has at least 6 months validity.
               </div>
             </div>
+          </div>
+        )}
+
+        {/* TOOL 5: AIRHELP FLIGHT DELAY & COMPENSATION */}
+        {activeTool === "airhelp" && (
+          <div className="animate-fade-in">
+            <AirHelpWidget />
           </div>
         )}
       </div>
