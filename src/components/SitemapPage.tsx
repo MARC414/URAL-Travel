@@ -1,221 +1,770 @@
-import React, { useState, useMemo } from "react";
-import { ArrowRight, Check, Copy, Download, ExternalLink, Search } from "lucide-react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
-  generateSitemap,
-  generateSitemapXml,
-  SitemapEntry,
-} from "../utils/sitemap";
+  ArrowRight,
+  CheckCircle2,
+  Circle,
+  Plane,
+  ShieldCheck,
+  Luggage,
+  PhoneCall,
+  FileCheck2,
+  CreditCard,
+  Search,
+  RotateCcw,
+  Sparkles,
+  MapPin,
+  AlertTriangle,
+} from "lucide-react";
+import { Language } from "../translations";
 
 interface SitemapPageProps {
   onNavigate: (path: string) => void;
+  lang?: Language;
 }
 
-const CATEGORIES: Array<"All" | SitemapEntry["category"]> = [
-  "All",
-  "Flight Routes",
-  "Visa Checklists",
-  "Hotel Guides",
-  "Destination Plans",
-  "Trip Budgets (BDT)",
-  "Travel Blog & Guides",
-  "Core Pages",
+interface ChecklistItem {
+  id: string;
+  stage: "banking" | "immigration" | "boarding";
+  titleEn: string;
+  titleBn: string;
+  detailEn: string;
+  detailBn: string;
+  actionLabelEn?: string;
+  actionLabelBn?: string;
+  actionPath?: string;
+}
+
+const PRE_DEPARTURE_CHECKLIST: ChecklistItem[] = [
+  {
+    id: "passport-6m",
+    stage: "banking",
+    titleEn: "Passport Validity (6+ Months from Return Date)",
+    titleBn: "পাসপোর্টের মেয়াদ (ফেরার তারিখ থেকে কমপক্ষে ৬ মাস)",
+    detailEn:
+      "Airlines at Dhaka Airport (DAC) will deny boarding if your passport expires within 180 days of your return flight.",
+    detailBn:
+      "পাসপোর্টের মেয়াদ ৬ মাসের কম থাকলে ঢাকা এয়ারপোর্টে এয়ারলাইন্স বোর্ডিং পাস ইস্যু করবে না। কমপক্ষে ২টি খালি পাতা থাকতে হবে।",
+  },
+  {
+    id: "dollar-endorsement",
+    stage: "banking",
+    titleEn: "Dual-Currency Card Endorsement & E-Commerce Activation",
+    titleBn: "ডুয়াল-কারেন্সি কার্ডে ডলার এন্ডোর্সমেন্ট ও E-Commerce চালু",
+    detailEn:
+      "Get your passport stamped under the $12,000 annual travel quota at your bank branch and turn ON Foreign POS & E-Commerce in your banking app.",
+    detailBn:
+      "ব্যাংক ব্রাঞ্চ থেকে পাসপোর্টে বার্ষিক $১২,০০০ কোটায় এন্ডোর্সমেন্ট সিল নিন এবং ব্যাংক অ্যাপ বা হেল্পলাইনে কল করে ফরেন ট্রানজেকশন চালু করুন।",
+    actionLabelEn: "Read Card Endorsement Guide",
+    actionLabelBn: "কার্ড এন্ডোর্সমেন্ট গাইড পড়ুন",
+    actionPath: "/blog?slug=dual-currency-card-endorsement-bangladesh",
+  },
+  {
+    id: "usd-cash-carry",
+    stage: "banking",
+    titleEn: "Carry USD $300–$500 Cash Alongside Your Card",
+    titleBn: "কার্ডের পাশাপাশি নগদ $৩০০–$৫০০ মার্কিন ডলার সাথে রাখুন",
+    detailEn:
+      "Carry crisp, undamaged 2013+ series $100 USD bills for Visa on Arrival fees, Thailand immigration proof of funds, or emergency money exchange.",
+    detailBn:
+      "দাগ বা ভাঁজ ছাড়া নতুন সিরিজের $১০০ ডলার নোট সাথে রাখুন—অন-অ্যারাইভাল ভিসা ফি, থাইল্যান্ড ইমিগ্রেশন বা জরুরি মানি এক্সচেঞ্জে প্রয়োজন হয়।",
+    actionLabelEn: "Open BDT Currency Tool",
+    actionLabelBn: "কারেন্সি কনভার্টার দেখুন",
+    actionPath: "/tools",
+  },
+  {
+    id: "return-ticket-hotel",
+    stage: "immigration",
+    titleEn: "Printed Return Air Ticket & Confirmed Hotel Voucher",
+    titleBn: "প্রিন্টেড রিটার্ন এয়ার টিকেট ও কনফার্মড হোটেল ভাউচার",
+    detailEn:
+      "Always print hard copies of your two-way return flight ticket and hotel booking confirmation—DAC immigration officers routinely inspect paper copies.",
+    detailBn:
+      "ট্যুরিস্ট ভিসায় ওয়ান-ওয়ে টিকেটে ভ্রমণ করা যায় না। যাওয়া-আসার কনফার্মড রিটার্ন টিকেট ও হোটেল বুকিংয়ের প্রিন্ট কপি হাতের কাছে রাখুন।",
+    actionLabelEn: "Compare Dhaka Flights",
+    actionLabelBn: "ঢাকা থেকে ফ্লাইট খুঁজুন",
+    actionPath: "/flights",
+  },
+  {
+    id: "noc-go-profession",
+    stage: "immigration",
+    titleEn: "Profession Proof: Office NOC / Govt GO / Trade License / Student ID",
+    titleBn: "পেশার প্রমাণপত্র: অফিস NOC / সরকারি GO / ট্রেড লাইসেন্স / স্টুডেন্ট আইডি",
+    detailEn:
+      "Private job holders need a printed NOC + Office ID; govt/bank staff need an official GO; business owners need Trade License copy; newlyweds should carry Nikahnama.",
+    detailBn:
+      "বেসরকারি চাকরিজীবীদের NOC ও অফিস আইডি, সরকারি কর্মীদের GO, ব্যবসায়ীদের ট্রেড লাইসেন্স কপি এবং নবদম্পতিদের নিকাহনামা সাথে রাখা জরুরি।",
+    actionLabelEn: "Dhaka Immigration Checklist",
+    actionLabelBn: "ঢাকা ইমিগ্রেশন চেকলিস্ট",
+    actionPath: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go",
+  },
+  {
+    id: "bank-solvency",
+    stage: "immigration",
+    titleEn: "Printed 6-Month Bank Statement (For First-Time Flyers)",
+    titleBn: "৬ মাসের ব্যাংক স্টেটমেন্ট (প্রথমবার বিদেশ ভ্রমণকারীদের জন্য)",
+    detailEn:
+      "If this is your first international trip on a fresh Bangladeshi passport, carry your bank statement copy matching the one submitted for your visa.",
+    detailBn:
+      "নতুন পাসপোর্টে প্রথমবার বিদেশ যাওয়ার ক্ষেত্রে ভিসা আবেদনে ব্যবহৃত ব্যাংক স্টেটমেন্টের কপি সাথে রাখলে ইমিগ্রেশন দ্রুত সম্পন্ন হয়।",
+  },
+  {
+    id: "digital-arrival-card",
+    stage: "boarding",
+    titleEn: "Digital Arrival Card Submitted (72 Hours Before Flight)",
+    titleBn: "ডিজিটাল অ্যারাইভাল কার্ড পূরণ (ফ্লাইটের ৭২ ঘণ্টা আগে)",
+    detailEn:
+      "Submit Malaysia MDAC, Singapore SGAC (MyICA), Maldives IMUGA, Thailand TDAC, or Saudi Nusuk permit online—completely free on official government portals.",
+    detailBn:
+      "মালয়েশিয়া (MDAC), সিঙ্গাপুর (SGAC), মালদ্বীপ (IMUGA) বা ওমরাহর ক্ষেত্রে (Nusuk) ফ্লাইটের ৩ দিন আগে অনলাইনে বিনামূল্যে পূরণ করুন।",
+    actionLabelEn: "Check Country Visa Rules",
+    actionLabelBn: "দেশভিত্তিক ভিসা নিয়ম দেখুন",
+    actionPath: "/visa",
+  },
+  {
+    id: "powerbank-handcarry",
+    stage: "boarding",
+    titleEn: "Power Bank (Max 20,000 mAh) Packed in Hand Carry Only",
+    titleBn: "পাওয়ার ব্যাংক (সর্বোচ্চ ২০,০০০ mAh) অবশ্যই হ্যান্ড ব্যাগে রাখুন",
+    detailEn:
+      "Never put power banks, spare lithium batteries, or laptops in checked-in luggage—DAC security scanners will hold or confiscate them.",
+    detailBn:
+      "পাওয়ার ব্যাংক বা লিথিয়াম ব্যাটারি কখনোই বড় লাগেজে (Checked Baggage) দেবেন না—হ্যান্ড ক্যারিতে রাখুন, নতুবা সিকিউরিটি স্ক্যানিংয়ে জব্দ হতে পারে।",
+  },
+  {
+    id: "esim-offline-docs",
+    stage: "boarding",
+    titleEn: "Pre-Install Travel eSIM & Save Offline Document Scans",
+    titleBn: "ট্রাভেল eSIM ইনস্টল ও ফোনে অফলাইন ডকুমেন্ট ব্যাকআপ",
+    detailEn:
+      "Install your local eSIM before takeoff so Grab/Uber and Google Maps work upon landing, and save PDF copies of your passport & visa offline.",
+    detailBn:
+      "দেশ ছাড়ার আগেই ফোনে eSIM ইনস্টল করে নিন যাতে ল্যান্ড করার সাথে সাথেই ইন্টারনেট পান এবং পাসপোর্ট ও ভিসার ছবি অফলাইনে সেভ রাখুন।",
+  },
 ];
 
-export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate }) => {
-  const [selectedCategory, setSelectedCategory] = useState<"All" | SitemapEntry["category"]>("All");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [viewMode, setViewMode] = useState<"directory" | "xml">("directory");
-  const [copiedXml, setCopiedXml] = useState(false);
+const EMBASSY_DIRECTORY = [
+  {
+    countryEn: "Nepal (Kathmandu)",
+    countryBn: "নেপাল (কাঠমান্ডু)",
+    flag: "🇳🇵",
+    missionEn: "Embassy of Bangladesh, Kathmandu",
+    missionBn: "বাংলাদেশ দূতাবাস, কাঠমান্ডু",
+    address: "Maharajgunj, Ring Road, Ward No. 3, Kathmandu, Nepal",
+    phone: "+977-1-4372843",
+    emergencyNoteEn: "Issues Emergency Travel Permits (Travel Pass) if passport is lost in Thamel/Pokhara.",
+    emergencyNoteBn: "নেপালে পাসপোর্ট হারালে জরুরি ট্রাভেল পাস ইস্যু ও কনস্যুলার সহায়তা প্রদান করে।",
+    visaPath: "/visa?country=nepal-visa",
+    guidePath: "/destinations?country=nepal-guide",
+  },
+  {
+    countryEn: "Thailand (Bangkok)",
+    countryBn: "থাইল্যান্ড (ব্যাংকক)",
+    flag: "🇹🇭",
+    missionEn: "Embassy of Bangladesh, Bangkok",
+    missionBn: "বাংলাদেশ দূতাবাস, ব্যাংকক",
+    address: "47/8 Ekamai Soi 30, Sukhumvit 63, Watthana, Bangkok 10110",
+    phone: "+66-2-3905107",
+    emergencyNoteEn: "Located near Sukhumvit/Ekamai; assists Bangladeshi tourists and medical patients at Bumrungrad/Bangkok Hospital.",
+    emergencyNoteBn: "সুখুমভিত একামাই এলাকায় অবস্থিত; পর্যটক ও চিকিৎসা নিতে যাওয়া বাংলাদেশিদের জরুরি সহায়তা দেয়।",
+    visaPath: "/visa?country=thailand-visa",
+    guidePath: "/destinations?country=thailand-guide",
+  },
+  {
+    countryEn: "Malaysia (Kuala Lumpur)",
+    countryBn: "মালয়েশিয়া (কুয়ালালামপুর)",
+    flag: "🇲🇾",
+    missionEn: "High Commission of Bangladesh, KL",
+    missionBn: "বাংলাদেশ হাইকমিশন, কুয়ালালামপুর",
+    address: "Lot 9 & 10, Jalan Sultan Yahya Petra, 54100 Kuala Lumpur",
+    phone: "+60-3-26040946",
+    emergencyNoteEn: "Consular wing assists with emergency travel documents and KLIA immigration liaison.",
+    emergencyNoteBn: "জরুরি পাসপোর্ট সহায়তা এবং কুয়ালালামপুরে অবস্থানরত বাংলাদেশি নাগরিকদের সেবা প্রদান করে।",
+    visaPath: "/visa?country=malaysia-visa",
+    guidePath: "/destinations?country=malaysia-guide",
+  },
+  {
+    countryEn: "Singapore",
+    countryBn: "সিঙ্গাপুর",
+    flag: "🇸🇬",
+    missionEn: "High Commission of Bangladesh, Singapore",
+    missionBn: "বাংলাদেশ হাইকমিশন, সিঙ্গাপুর",
+    address: "91 Bencoolen Street, #04-01 Sunshine Plaza, Singapore 189652",
+    phone: "+65-62550075",
+    emergencyNoteEn: "Walking distance from Bugis / Bencoolen MRT; fast consular support during weekday hours.",
+    emergencyNoteBn: "বুগিস ও বেনকুলেন MRT-এর কাছে সানশাইন প্লাজায় অবস্থিত; দ্রুত কনস্যুলার সহায়তা পাওয়া যায়।",
+    visaPath: "/visa?country=singapore-visa",
+    guidePath: "/destinations?country=singapore-guide",
+  },
+  {
+    countryEn: "Maldives (Malé)",
+    countryBn: "মালদ্বীপ (মালে)",
+    flag: "🇲🇻",
+    missionEn: "High Commission of Bangladesh, Malé",
+    missionBn: "বাংলাদেশ হাইকমিশন, মালে",
+    address: "M. Luxury, 7th Floor, Orchid Magu, Malé, Maldives",
+    phone: "+960-3320859",
+    emergencyNoteEn: "Central Malé location near ferry terminals; assists tourists traveling to Maafushi & Hulhumalé.",
+    emergencyNoteBn: "মালে শহরের কেন্দ্রস্থলে অবস্থিত; মাফুশি ও হুলহুমালে ভ্রমণকারীদের জরুরি সহায়তা দেয়।",
+    visaPath: "/visa?country=maldives-visa",
+    guidePath: "/destinations?country=maldives-guide",
+  },
+  {
+    countryEn: "UAE (Dubai & Abu Dhabi)",
+    countryBn: "সংযুক্ত আরব আমিরাত (দুবাই)",
+    flag: "🇦🇪",
+    missionEn: "Consulate General of Bangladesh, Dubai",
+    missionBn: "বাংলাদেশ কনস্যুলেট জেনারেল, দুবাই",
+    address: "Villa 36 & 145, Al Wuheida Rd, Deira, Dubai, UAE",
+    phone: "+971-4-2388199",
+    emergencyNoteEn: "Conveniently located in Deira for tourists staying near Al Rigga, Bur Dubai, and Downtown.",
+    emergencyNoteBn: "দেইরা এলাকায় অবস্থিত; দুবাই ও উত্তর আমিরাতে ভ্রমণরত বাংলাদেশিদের জরুরি সেবা দেয়।",
+    visaPath: "/visa?country=dubai-visa",
+    guidePath: "/destinations?country=dubai-guide",
+  },
+  {
+    countryEn: "Saudi Arabia (Jeddah & Makkah)",
+    countryBn: "সৌদি আরব (জেদ্দা ও মক্কা ওমরাহ মিশন)",
+    flag: "🇸🇦",
+    missionEn: "Consulate General of Bangladesh, Jeddah",
+    missionBn: "বাংলাদেশ কনস্যুলেট জেনারেল, জেদ্দা",
+    address: "Al-Nuzlah Al-Yamaniyah District, Kilo-3, Jeddah, Saudi Arabia",
+    phone: "+966-12-6878465",
+    emergencyNoteEn: "Dedicated Hajj & Umrah Welfare Wing for Bangladeshi pilgrims in Makkah, Madinah, and Jeddah.",
+    emergencyNoteBn: "মক্কা, মদিনা ও জেদ্দায় ওমরাহ ও হজযাত্রীদের জরুরি চিকিৎসা ও হারানো পাসপোর্ট সেবায় নিয়োজিত।",
+    visaPath: "/umrah",
+    guidePath: "/umrah",
+  },
+];
 
-  const baseUrl =
-    typeof window !== "undefined" && window.location.origin
-      ? window.location.origin
-      : "https://ural-travel.pages.dev";
+const COUNTRY_QUICK_MATRIX = [
+  {
+    countryEn: "Nepal",
+    countryBn: "নেপাল",
+    flag: "🇳🇵",
+    taglineEn: "Free SAARC Visa on Arrival · 1h 30m flight",
+    taglineBn: "ফ্রি অন-অ্যারাইভাল ভিসা · ১ ঘণ্টা ৩০ মিনিটের ফ্লাইট",
+    flightPath: "/flights?route=dhaka-kathmandu",
+    visaPath: "/visa?country=nepal-visa",
+    hotelPath: "/hotels?city=kathmandu-hotels",
+    planPath: "/destinations?country=nepal-guide",
+    costPath: "/costs?country=nepal-costs",
+  },
+  {
+    countryEn: "Thailand",
+    countryBn: "থাইল্যান্ড",
+    flag: "🇹🇭",
+    taglineEn: "Official e-Visa · Bangkok & Phuket islands",
+    taglineBn: "অফিসিয়াল ই-ভিসা · ব্যাংকক, ফুকেট ও হালাল ডাইনিং",
+    flightPath: "/flights?route=dhaka-bangkok",
+    visaPath: "/visa?country=thailand-visa",
+    hotelPath: "/hotels?city=bangkok-hotels",
+    planPath: "/destinations?country=thailand-guide",
+    costPath: "/costs?country=thailand-costs",
+  },
+  {
+    countryEn: "Malaysia",
+    countryBn: "মালয়েশিয়া",
+    flag: "🇲🇾",
+    taglineEn: "Fast Online e-Visa · 100% Halal-friendly hub",
+    taglineBn: "দ্রুত অনলাইন ই-ভিসা · ফ্যামিলি ও হালাল ফুড হাব",
+    flightPath: "/flights?route=dhaka-kuala-lumpur",
+    visaPath: "/visa?country=malaysia-visa",
+    hotelPath: "/hotels?city=kuala-lumpur-hotels",
+    planPath: "/destinations?country=malaysia-guide",
+    costPath: "/costs?country=malaysia-costs",
+  },
+  {
+    countryEn: "Singapore",
+    countryBn: "সিঙ্গাপুর",
+    flag: "🇸🇬",
+    taglineEn: "Authorized Agent e-Visa · Sentosa & Marina Bay",
+    taglineBn: "অনুমোদিত এজেন্ট ভিসা · মেরিনা বে ও সেন্টোসা",
+    flightPath: "/flights?route=dhaka-singapore",
+    visaPath: "/visa?country=singapore-visa",
+    hotelPath: "/hotels?city=singapore-hotels",
+    planPath: "/destinations?country=singapore-guide",
+    costPath: "/costs?country=singapore-costs",
+  },
+  {
+    countryEn: "Maldives",
+    countryBn: "মালদ্বীপ",
+    flag: "🇲🇻",
+    taglineEn: "Free 30-Day VOA · Maafushi & Water Villas",
+    taglineBn: "ফ্রি ৩০ দিনের ভিসা · মাফুশি ও ওয়াটার ভিলা",
+    flightPath: "/flights?route=dhaka-maldives",
+    visaPath: "/visa?country=maldives-visa",
+    hotelPath: "/hotels?city=maldives-hotels",
+    planPath: "/destinations?country=maldives-guide",
+    costPath: "/costs?country=maldives-costs",
+  },
+  {
+    countryEn: "Dubai & UAE",
+    countryBn: "দুবাই ও আমিরাত",
+    flag: "🇦🇪",
+    taglineEn: "Tourist e-Visa · Desert Safari & Burj Khalifa",
+    taglineBn: "ট্যুরিস্ট ই-ভিসা · ডেজার্ট সাফারি ও বুর্জ খলিফা",
+    flightPath: "/flights?route=dhaka-dubai",
+    visaPath: "/visa?country=dubai-visa",
+    hotelPath: "/hotels?city=dubai-hotels",
+    planPath: "/destinations?country=dubai-guide",
+    costPath: "/costs?country=dubai-costs",
+  },
+];
 
-  const allEntries = useMemo(() => generateSitemap("https://ural-travel.pages.dev"), []);
-  const xmlString = useMemo(
-    () => generateSitemapXml("https://ural-travel.pages.dev"),
-    []
+const STORAGE_KEY = "ural_dac_predeparture_checked_v1";
+
+export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en" }) => {
+  const isBn = lang === "bn";
+
+  const [checkedIds, setCheckedIds] = useState<string[]>(() => {
+    if (typeof window === "undefined") return ["passport-6m", "return-ticket-hotel"];
+    try {
+      const saved = window.localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : ["passport-6m", "return-ticket-hotel"];
+    } catch {
+      return ["passport-6m", "return-ticket-hotel"];
+    }
+  });
+
+  const [countrySearch, setCountrySearch] = useState("");
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedIds));
+    } catch {
+      // ignore storage quota errors
+    }
+  }, [checkedIds]);
+
+  const toggleItem = (id: string) => {
+    setCheckedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  const resetChecklist = () => {
+    setCheckedIds([]);
+  };
+
+  const progressPct = Math.round(
+    (checkedIds.length / PRE_DEPARTURE_CHECKLIST.length) * 100
   );
 
-  const filteredEntries = useMemo(() => {
-    return allEntries.filter((entry) => {
-      const matchesCategory =
-        selectedCategory === "All" || entry.category === selectedCategory;
-      const q = searchQuery.trim().toLowerCase();
-      const matchesQuery =
-        !q ||
-        entry.title.toLowerCase().includes(q) ||
-        entry.subtitle.toLowerCase().includes(q) ||
-        entry.path.toLowerCase().includes(q) ||
-        entry.category.toLowerCase().includes(q);
-      return matchesCategory && matchesQuery;
-    });
-  }, [allEntries, selectedCategory, searchQuery]);
+  const filteredCountries = useMemo(() => {
+    const q = countrySearch.trim().toLowerCase();
+    if (!q) return COUNTRY_QUICK_MATRIX;
+    return COUNTRY_QUICK_MATRIX.filter(
+      (c) =>
+        c.countryEn.toLowerCase().includes(q) ||
+        c.countryBn.includes(q) ||
+        c.taglineEn.toLowerCase().includes(q)
+    );
+  }, [countrySearch]);
 
-  const groupedEntries = useMemo<Record<string, SitemapEntry[]>>(() => {
-    const groups: Record<string, SitemapEntry[]> = {};
-    for (const item of filteredEntries) {
-      if (!groups[item.category]) {
-        groups[item.category] = [];
-      }
-      groups[item.category].push(item);
-    }
-    return groups;
-  }, [filteredEntries]);
-
-  const handleCopyXml = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(xmlString);
-      setCopiedXml(true);
-      setTimeout(() => setCopiedXml(false), 2500);
-    }
-  };
-
-  const handleDownloadXml = () => {
-    const blob = new Blob([xmlString], { type: "application/xml;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "sitemap.xml";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
+  const stages: Array<{
+    key: ChecklistItem["stage"];
+    badgeEn: string;
+    badgeBn: string;
+    titleEn: string;
+    titleBn: string;
+  }> = [
+    {
+      key: "banking",
+      badgeEn: "STAGE 01 · 7 DAYS BEFORE FLIGHT",
+      badgeBn: "ধাপ ০১ · ফ্লাইটের ৭ দিন আগে",
+      titleEn: "Passport, Dollar Endorsement & Foreign Currency",
+      titleBn: "পাসপোর্ট, ডলার এন্ডোর্সমেন্ট ও ফরেন কারেন্সি",
+    },
+    {
+      key: "immigration",
+      badgeEn: "STAGE 02 · DHAKA IMMIGRATION DESK",
+      badgeBn: "ধাপ ০২ · ঢাকা এয়ারপোর্ট ইমিগ্রেশন ডেস্ক",
+      titleEn: "Mandatory Printed Documents for DAC Officers",
+      titleBn: "ইমিগ্রেশন কাউন্টারে প্রদর্শনের আবশ্যক কাগজপত্র",
+    },
+    {
+      key: "boarding",
+      badgeEn: "STAGE 03 · 72 HOURS BEFORE TAKEOFF",
+      badgeBn: "ধাপ ০৩ · উড্ডয়নের ৭২ ঘণ্টা আগে",
+      titleEn: "Digital Arrival Cards, Cabin Safety & eSIM",
+      titleBn: "ডিজিটাল অ্যারাইভাল কার্ড, পাওয়ার ব্যাংক ও eSIM",
+    },
+  ];
 
   return (
-    <div className="space-y-10 animate-fade-in">
-      {/* Header Banner */}
-      <div className="bg-[#0F172A] text-white rounded-2xl p-6 sm:p-10 border border-slate-800 space-y-6">
+    <div className="space-y-12 animate-fade-in">
+      {/* 1. HERO HEADER BANNER */}
+      <div className="bg-[#0F172A] text-white rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-xl space-y-6">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <div className="space-y-3 max-w-2xl">
-            <div className="flex items-center gap-2 text-xs text-[#F6B73C] font-mono">
-              <span>Search Engine Indexing Architecture</span>
-              <span aria-hidden="true">·</span>
-              <span className="tabular-nums">{allEntries.length} Indexed URLs</span>
-              <span aria-hidden="true">·</span>
-              <span>Sitemaps.org v0.9 Protocol</span>
+          <div className="space-y-3 max-w-3xl">
+            <div className="inline-flex items-center gap-2 text-xs text-[#F6B73C] font-mono bg-[#F6B73C]/10 border border-[#F6B73C]/25 px-3.5 py-1 rounded-full">
+              <Plane size={13} />
+              <span>
+                {isBn
+                  ? "হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর (DAC) · প্রি-ডিপার্চার হাব"
+                  : "Hazrat Shahjalal International Airport (DAC) · Traveler Readiness Hub"}
+              </span>
             </div>
             <h1
               className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-white"
               style={{ textWrap: "balance" }}
             >
-              Dynamic XML Sitemap & Complete Route Index
+              {isBn
+                ? "ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার চেকলিস্ট, লাগেজ নিয়ম ও দূতাবাস হেল্পলাইন"
+                : "Dhaka Airport (DAC) Pre-Departure Checklist & Traveler Emergency Hub"}
             </h1>
             <p className="text-sm text-slate-300 leading-relaxed">
-              Every flight route, embassy visa checklist, neighborhood hotel guide, destination
-              itinerary, BDT trip cost matrix, and banking article on URAL is dynamically indexed
-              here for Google Search Console and fast internal crawling.
+              {isBn
+                ? "বিমানবন্দরে রওনা দেওয়ার আগে আপনার পাসপোর্ট এন্ডোর্সমেন্ট, NOC/GO, রিটার্ন টিকেট ও ডিজিটাল অ্যারাইভাল কার্ড যাচাই করে নিন। পাশাপাশি কেবিন লাগেজ, জমজম পানির নিয়ম এবং বিদেশে বাংলাদেশ দূতাবাসের জরুরি নাম্বারগুলো হাতের কাছে রাখুন।"
+                : "Everything a Bangladeshi traveler needs in the final 72 hours before flying out of Dhaka (DAC) — verify your immigration documents, check cabin & Zamzam baggage rules, save Bangladesh Embassy emergency numbers, or jump directly to any country guide."}
             </p>
           </div>
 
-          {/* Primary Actions */}
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <div className="flex items-center gap-1 p-1 bg-slate-800/90 rounded-lg border border-slate-700">
-              <button
-                type="button"
-                onClick={() => setViewMode("directory")}
-                className={`px-3.5 py-2 text-xs font-medium rounded-md transition-colors whitespace-nowrap cursor-pointer ${
-                  viewMode === "directory"
-                    ? "bg-[#F6B73C] text-[#0F172A] font-semibold"
-                    : "text-slate-300 hover:text-white"
-                }`}
-              >
-                HTML Route Directory
-              </button>
-              <button
-                type="button"
-                onClick={() => setViewMode("xml")}
-                className={`px-3.5 py-2 text-xs font-medium rounded-md transition-colors whitespace-nowrap cursor-pointer ${
-                  viewMode === "xml"
-                    ? "bg-[#F6B73C] text-[#0F172A] font-semibold"
-                    : "text-slate-300 hover:text-white"
-                }`}
-              >
-                Live XML Source
-              </button>
+          {/* Live Readiness Meter Card */}
+          <div className="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-5 min-w-[260px] space-y-2.5 shrink-0">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-mono uppercase tracking-wider text-slate-400">
+                {isBn ? "আপনার ফ্লাইট প্রস্তুতি" : "Flight Readiness Score"}
+              </span>
+              <span className="font-mono font-bold text-[#F6B73C] text-sm tabular-nums">
+                {checkedIds.length}/{PRE_DEPARTURE_CHECKLIST.length} ({progressPct}%)
+              </span>
             </div>
-
-            <a
-              href="/sitemap.xml"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2.5 text-xs font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-colors whitespace-nowrap inline-flex items-center gap-1.5"
-            >
-              <span>Open /sitemap.xml</span>
-              <ExternalLink size={13} />
-            </a>
+            <div className="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-[#F6B73C] to-emerald-400 transition-all duration-300 rounded-full"
+                style={{ width: `${progressPct}%` }}
+              />
+            </div>
+            <div className="flex items-center justify-between pt-1">
+              <span className="text-[11px] text-slate-400">
+                {progressPct === 100
+                  ? isBn
+                    ? "✅ আপনি ইমিগ্রেশনের জন্য সম্পূর্ণ প্রস্তুত!"
+                    : "✅ All set for DAC Immigration!"
+                  : isBn
+                  ? "চেকলিস্টে টিক দিয়ে অগ্রগতি সেভ করুন"
+                  : "Tap items below to check them off"}
+              </span>
+              {checkedIds.length > 0 && (
+                <button
+                  type="button"
+                  onClick={resetChecklist}
+                  className="text-[11px] text-slate-400 hover:text-white inline-flex items-center gap-1 cursor-pointer"
+                >
+                  <RotateCcw size={11} />
+                  <span>{isBn ? "রিসেট" : "Reset"}</span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Summary Metrics Row */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 pt-6 border-t border-slate-800/80 text-left">
+        {/* Essential DAC Airport Quick Rules Strip */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-800/80 text-left">
           {[
             {
-              label: "Flight Routes",
-              count: allEntries.filter((e) => e.category === "Flight Routes").length,
-              note: "Dhaka (DAC) hubs",
+              value: isBn ? "৩.৫ – ৪ ঘণ্টা আগে" : "3.5 – 4 Hours Early",
+              label: isBn ? "এয়ারপোর্টে পৌঁছানোর সময়" : "Arrive at DAC Terminal 1 / 2",
+              note: isBn ? "চেক-ইন ও ইমিগ্রেশন লাইনের জন্য" : "Buffer for check-in & immigration",
             },
             {
-              label: "Visa Checklists",
-              count: allEntries.filter((e) => e.category === "Visa Checklists").length,
-              note: "VOA & e-Visa guides",
+              value: "USD $12,000 / Yr",
+              label: isBn ? "বার্ষিক পাসপোর্ট ডলার কোটা" : "Annual Travel Quota",
+              note: isBn ? "ডুয়াল-কারেন্সি কার্ড এন্ডোর্সমেন্ট" : "Bangladesh Bank card endorsement",
             },
             {
-              label: "Hotel Guides",
-              count: allEntries.filter((e) => e.category === "Hotel Guides").length,
-              note: "Halal & transit zones",
+              value: isBn ? "৭ কেজি + ২০/৩০ কেজি" : "7 kg Cabin + 20–30 kg",
+              label: isBn ? "স্ট্যান্ডার্ড লাগেজ সীমা" : "Standard Baggage Allowance",
+              note: isBn ? "পাওয়ার ব্যাংক শুধুমাত্র হ্যান্ড ব্যাগে" : "Power banks in hand carry only",
             },
             {
-              label: "Destinations",
-              count: allEntries.filter((e) => e.category === "Destination Plans").length,
-              note: "Day-by-day plans",
-            },
-            {
-              label: "BDT Cost Sheets",
-              count: allEntries.filter((e) => e.category === "Trip Budgets (BDT)").length,
-              note: "3-tier price matrices",
-            },
-            {
-              label: "Travel Articles",
-              count: allEntries.filter((e) => e.category === "Travel Blog & Guides").length,
-              note: "Cards & budget hacks",
+              value: isBn ? "৫ লিটার (ফ্রি)" : "5 Liters Free",
+              label: isBn ? "জমজম পানির অনুমোদন" : "Zamzam Water Allowance",
+              note: isBn ? "ওমরাহ ও হজযাত্রীদের জন্য (সিলকৃত)" : "1 sealed airport pack per pilgrim",
             },
           ].map((stat) => (
-            <div key={stat.label} className="space-y-1">
-              <div className="text-xl font-bold text-[#F6B73C] font-mono tabular-nums">
-                {stat.count}
+            <div key={stat.label} className="space-y-1 bg-white/4 rounded-xl p-3.5 border border-white/8">
+              <div className="text-base sm:text-lg font-bold text-[#F6B73C] font-mono tabular-nums">
+                {stat.value}
               </div>
-              <div className="text-xs font-medium text-white">{stat.label}</div>
+              <div className="text-xs font-semibold text-white">{stat.label}</div>
               <div className="text-[11px] text-slate-400">{stat.note}</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Search & Filter Bar */}
-      <div className="space-y-4">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          {/* Interactive Category Filter Bar */}
-          <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-lg overflow-x-auto">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                  selectedCategory === cat
-                    ? "bg-white text-slate-900 shadow-xs font-semibold"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
+      {/* 2. INTERACTIVE 3-STAGE PRE-DEPARTURE CHECKLIST */}
+      <section className="space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+          <div className="space-y-1">
+            <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+              {isBn ? "📋 ইন্টারেক্টিভ প্রি-ফ্লাইট চেকলিস্ট" : "📋 INTERACTIVE PRE-FLIGHT VERIFICATION"}
+            </span>
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+              {isBn
+                ? "বিমানবন্দরে যাওয়ার আগে ৯টি আবশ্যক ধাপ মিলিয়ে নিন"
+                : "9 Essential Checks Before Leaving for Dhaka Airport (DAC)"}
+            </h2>
+          </div>
+          <p className="text-xs text-slate-500">
+            {isBn
+              ? "আপনার টিক দেওয়া তথ্য ব্রাউজারে স্বয়ংক্রিয়ভাবে সেভ থাকে"
+              : "Your progress is saved automatically on this device"}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {stages.map((stage) => {
+            const stageItems = PRE_DEPARTURE_CHECKLIST.filter((i) => i.stage === stage.key);
+            return (
+              <div
+                key={stage.key}
+                className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs flex flex-col justify-between space-y-4"
               >
-                {cat}
-              </button>
-            ))}
+                <div className="space-y-4">
+                  <div className="border-b border-slate-100 pb-3 space-y-1">
+                    <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+                      {isBn ? stage.badgeBn : stage.badgeEn}
+                    </span>
+                    <h3 className="font-serif text-base font-bold text-slate-900">
+                      {isBn ? stage.titleBn : stage.titleEn}
+                    </h3>
+                  </div>
+
+                  <div className="space-y-3">
+                    {stageItems.map((item) => {
+                      const isDone = checkedIds.includes(item.id);
+                      return (
+                        <div
+                          key={item.id}
+                          onClick={() => toggleItem(item.id)}
+                          className={`p-3.5 rounded-xl border transition-all cursor-pointer select-none ${
+                            isDone
+                              ? "bg-emerald-50/60 border-emerald-200"
+                              : "bg-slate-50/70 hover:bg-slate-50 border-slate-200"
+                          }`}
+                        >
+                          <div className="flex items-start gap-3">
+                            <span className="mt-0.5 shrink-0">
+                              {isDone ? (
+                                <CheckCircle2 size={18} className="text-emerald-600" />
+                              ) : (
+                                <Circle size={18} className="text-slate-400" />
+                              )}
+                            </span>
+                            <div className="space-y-1.5 min-w-0">
+                              <div
+                                className={`text-xs font-bold leading-snug ${
+                                  isDone ? "text-emerald-950 line-through" : "text-slate-900"
+                                }`}
+                              >
+                                {isBn ? item.titleBn : item.titleEn}
+                              </div>
+                              <p className="text-[11.5px] text-slate-600 leading-relaxed">
+                                {isBn ? item.detailBn : item.detailEn}
+                              </p>
+                              {item.actionPath && (
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    onNavigate(item.actionPath!);
+                                  }}
+                                  className="text-[11px] font-semibold text-[#102A43] hover:text-[#D4941A] inline-flex items-center gap-1 pt-0.5 cursor-pointer"
+                                >
+                                  <span>
+                                    {isBn ? item.actionLabelBn : item.actionLabelEn}
+                                  </span>
+                                  <ArrowRight size={11} />
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 3. DHAKA AIRPORT (DAC) BAGGAGE, ZAMZAM & CUSTOMS RULES */}
+      <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+        <div className="space-y-1">
+          <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+            {isBn ? "🧳 লাগেজ, কাস্টমস ও বিমানবন্দর নিয়মাবলী" : "🧳 DAC BAGGAGE, ZAMZAM & CUSTOMS RULES"}
+          </span>
+          <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+            {isBn
+              ? "হযরত শাহজালাল বিমানবন্দরে লাগেজ, পাওয়ার ব্যাংক ও কাস্টমস গাইড"
+              : "Baggage Limits, Power Banks, Zamzam Water & Customs Allowance"}
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
+            <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
+              <Luggage size={17} className="text-[#102A43]" />
+              <span>
+                {isBn
+                  ? "কেবিন লাগেজ (৭ কেজি) ও তরল পদার্থের নিয়ম"
+                  : "Cabin Baggage (7 kg) & 100ml Liquid Rule"}
+              </span>
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              {isBn
+                ? "হ্যান্ড ক্যারিতে সর্বোচ্চ ৭ কেজি ওজন এবং ১০০ মি.লি.-এর বেশি পারফিউম, লোশন বা তরল নেওয়া নিষেধ। বড় শ্যাম্পু, আচার বা কসমেটিকস অবশ্যই চেকড লাগেজে (২০–৩০ কেজি) প্যাক করুন।"
+                : "Carry-on bags are capped at 7 kg across Biman, US-Bangla, AirAsia, and Gulf carriers. Perfumes, lotions, and gels in hand carry must be in containers of 100ml or less; pack larger bottles in checked luggage."}
+            </p>
           </div>
 
-          {/* Search Filter Input */}
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
+            <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
+              <AlertTriangle size={17} className="text-amber-600" />
+              <span>
+                {isBn
+                  ? "পাওয়ার ব্যাংক ও ব্যাটারি সতর্কতা (খুবই গুরুত্বপূর্ণ)"
+                  : "Power Bank & Lithium Battery Rule (Strict at DAC)"}
+              </span>
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              {isBn
+                ? "পাওয়ার ব্যাংক (সর্বোচ্চ ২০,০০০ mAh বা ১০০ Wh) কখনোই বড় লাগেজে দেবেন না। এটি অবশ্যই হ্যান্ড ব্যাগে রাখতে হবে। গায়ে mAh লেখা মুছে গেলে এয়ারপোর্ট সিকিউরিটি সেটি জব্দ করতে পারে।"
+                : "Power banks up to 20,000 mAh (100Wh) are strictly allowed in Hand Carry only. Never place power banks in checked luggage, and ensure the mAh capacity label is clearly printed on the casing."}
+            </p>
+          </div>
+
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
+            <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
+              <Sparkles size={17} className="text-emerald-600" />
+              <span>
+                {isBn
+                  ? "ওমরাহ ও হজযাত্রীদের জন্য জমজম পানির নিয়ম"
+                  : "Zamzam Water Rules for Umrah & Hajj Pilgrims"}
+              </span>
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              {isBn
+                ? "জেদ্দা বা মদিনা এয়ারপোর্ট থেকে ফেরার সময় ওমরাহ বা হজ ভিসাধারী প্রত্যেক যাত্রী মূল লাগেজের বাইরে বিনামূল্যে ১টি সিলকৃত ৫ লিটারের জমজম পানির কার্টন আনতে পারবেন।"
+                : "Pilgrims flying back from Jeddah (JED) or Madinah (MED) on Biman, Saudia, or scheduled carriers are entitled to 1 official sealed 5-liter Zamzam bottle free of charge in addition to checked baggage."}
+            </p>
+          </div>
+
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
+            <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
+              <CreditCard size={17} className="text-[#102A43]" />
+              <span>
+                {isBn
+                  ? "বৈদেশিক মুদ্রা ও স্বর্ণালংকার কাস্টমস সীমা"
+                  : "Foreign Currency & Gold Ornaments Customs Limit"}
+              </span>
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              {isBn
+                ? "বাংলাদেশ ব্যাংকের নিয়ম অনুযায়ী বার্ষিক সর্বোচ্চ $১২,০০০ পর্যন্ত পাসপোর্টে এন্ডোর্স করা যায়। শুল্কমুক্তভাবে ব্যক্তিগত ব্যবহারের জন্য সর্বোচ্চ ১০০ গ্রাম স্বর্ণালংকার এবং ১টি নতুন ফোন আনা যায়।"
+                : "Travelers can endorse up to USD $12,000 annually per adult passport. Returning passengers may bring up to 100 grams of personal gold ornaments and 2 phones duty-free through the DAC Green Channel."}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. OVERSEAS BANGLADESH EMBASSY & HIGH COMMISSION EMERGENCY DIRECTORY */}
+      <section className="space-y-5">
+        <div className="space-y-1">
+          <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+            {isBn
+              ? "🇧🇩 প্রবাসে বাংলাদেশ দূতাবাস ও জরুরি হেল্পলাইন"
+              : "🇧🇩 BANGLADESH EMBASSY & CONSULAR HELPLINES ABROAD"}
+          </span>
+          <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+            {isBn
+              ? "বিদেশে পাসপোর্ট হারালে বা জরুরি প্রয়োজনে বাংলাদেশ মিশনের ঠিকানা ও ফোন নাম্বার"
+              : "Verified Bangladesh Missions Abroad (Lost Passport & Emergency Support)"}
+          </h2>
+          <p className="text-xs text-slate-500">
+            {isBn
+              ? "ভ্রমণকালে পাসপোর্ট হারিয়ে গেলে নিকটস্থ পুলিশ স্টেশনে জিডি (Police Report) করে নিচের বাংলাদেশ দূতাবাসে যোগাযোগ করলে দেশে ফেরার জন্য Emergency Travel Permit পাওয়া যায়।"
+              : "If your passport is lost or stolen abroad, file a local Police Report immediately and contact the nearest Bangladesh Embassy/High Commission below for an Emergency Travel Permit."}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {EMBASSY_DIRECTORY.map((emb) => (
+            <div
+              key={emb.countryEn}
+              className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col justify-between space-y-4"
+            >
+              <div className="space-y-2.5">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <span className="text-lg">{emb.flag}</span>
+                    <span>{isBn ? emb.countryBn : emb.countryEn}</span>
+                  </span>
+                  <a
+                    href={`tel:${emb.phone}`}
+                    className="text-xs font-mono font-bold text-[#102A43] bg-slate-100 hover:bg-[#102A43] hover:text-white px-2.5 py-1 rounded-lg transition-colors inline-flex items-center gap-1"
+                  >
+                    <PhoneCall size={11} />
+                    <span>{emb.phone}</span>
+                  </a>
+                </div>
+
+                <div className="text-xs font-semibold text-slate-800">
+                  {isBn ? emb.missionBn : emb.missionEn}
+                </div>
+
+                <div className="text-[11.5px] text-slate-500 flex items-start gap-1.5">
+                  <MapPin size={13} className="text-slate-400 shrink-0 mt-0.5" />
+                  <span>{emb.address}</span>
+                </div>
+
+                <p className="text-[11.5px] text-slate-600 bg-slate-50 border border-slate-100 rounded-xl p-2.5 leading-relaxed">
+                  {isBn ? emb.emergencyNoteBn : emb.emergencyNoteEn}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs font-semibold">
+                <button
+                  type="button"
+                  onClick={() => onNavigate(emb.visaPath)}
+                  className="text-[#102A43] hover:underline cursor-pointer"
+                >
+                  {isBn ? "ভিসা গাইড" : "Visa Guide"}
+                </button>
+                <span className="text-slate-300">·</span>
+                <button
+                  type="button"
+                  onClick={() => onNavigate(emb.guidePath)}
+                  className="text-[#102A43] hover:underline inline-flex items-center gap-1 cursor-pointer"
+                >
+                  <span>{isBn ? "পূর্ণাঙ্গ ভ্রমণ গাইড" : "Full Country Guide"}</span>
+                  <ArrowRight size={11} />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. ONE-CLICK COUNTRY & GUIDE QUICK FINDER */}
+      <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="space-y-1">
+            <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+              {isBn ? "🧭 এক ক্লিকে সব গন্তব্যের গাইড" : "🧭 ALL-IN-ONE DESTINATION QUICK FINDER"}
+            </span>
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+              {isBn
+                ? "দেশ অনুযায়ী ফ্লাইট, ভিসা, হোটেল ও BDT বাজেট শিট বেছে নিন"
+                : "Jump Directly to Any Country's Flight, Visa, Hotel, or BDT Budget Guide"}
+            </h2>
+          </div>
+
           <div className="relative w-full md:w-72 shrink-0">
             <Search
               size={14}
@@ -223,156 +772,122 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate }) => {
             />
             <input
               type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Filter by country, city, or URL..."
-              className="w-full bg-white border border-slate-200 focus:border-[#102A43] rounded-lg pl-9 pr-3 py-2 text-xs text-slate-800 outline-none transition-colors"
+              value={countrySearch}
+              onChange={(e) => setCountrySearch(e.target.value)}
+              placeholder={
+                isBn ? "দেশের নাম লিখুন (যেমন: Nepal, Dubai)..." : "Filter country (e.g. Nepal, Dubai)..."
+              }
+              className="w-full bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#102A43] rounded-xl pl-9 pr-3 py-2 text-xs text-slate-800 outline-none transition-colors"
             />
           </div>
         </div>
-      </div>
 
-      {viewMode === "directory" ? (
-        <div className="space-y-8">
-          {(Object.entries(groupedEntries) as [string, SitemapEntry[]][]).map(([category, items], groupIdx) => (
-            <section
-              key={category}
-              className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filteredCountries.map((item) => (
+            <div
+              key={item.countryEn}
+              className="border border-slate-200 rounded-2xl p-5 bg-slate-50/50 hover:bg-white transition-colors space-y-4"
             >
-              <div className="flex items-baseline justify-between border-b border-slate-100 pb-3">
-                <h2 className="font-serif text-lg font-bold text-slate-900">
-                  0{groupIdx + 1}. {category}
-                </h2>
-                <span className="text-xs text-slate-500 font-mono tabular-nums">
-                  {items.length} {items.length === 1 ? "route" : "routes"}
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="font-serif text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <span>{item.flag}</span>
+                    <span>{isBn ? item.countryBn : item.countryEn}</span>
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {isBn ? item.taglineBn : item.taglineEn}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
+                <button
+                  type="button"
+                  onClick={() => onNavigate(item.flightPath)}
+                  className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-[#102A43] text-slate-800 text-left flex items-center justify-between cursor-pointer"
+                >
+                  <span>✈️ {isBn ? "ফ্লাইট রুট" : "Flights"}</span>
+                  <ArrowRight size={11} className="text-slate-400" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onNavigate(item.visaPath)}
+                  className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-[#102A43] text-slate-800 text-left flex items-center justify-between cursor-pointer"
+                >
+                  <span>🛂 {isBn ? "ভিসা চেকলিস্ট" : "Visa Rules"}</span>
+                  <ArrowRight size={11} className="text-slate-400" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onNavigate(item.hotelPath)}
+                  className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-[#102A43] text-slate-800 text-left flex items-center justify-between cursor-pointer"
+                >
+                  <span>🏨 {isBn ? "হোটেল জোন" : "Best Hotels"}</span>
+                  <ArrowRight size={11} className="text-slate-400" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onNavigate(item.costPath)}
+                  className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-[#102A43] text-slate-800 text-left flex items-center justify-between cursor-pointer"
+                >
+                  <span>📊 {isBn ? "BDT বাজেট" : "BDT Budget"}</span>
+                  <ArrowRight size={11} className="text-slate-400" />
+                </button>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => onNavigate(item.planPath)}
+                className="w-full py-2.5 px-4 rounded-xl bg-[#102A43] hover:bg-slate-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+              >
+                <span>
+                  {isBn
+                    ? `${item.countryBn} ভ্রমণ গাইড ও ইটিনারারি দেখুন`
+                    : `Explore ${item.countryEn} Full Itinerary`}
                 </span>
-              </div>
-
-              <div className="divide-y divide-slate-100">
-                {items.map((entry) => (
-                  <div
-                    key={entry.path}
-                    className="py-3.5 first:pt-1 last:pb-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3 group"
-                  >
-                    <div className="space-y-1 min-w-0">
-                      <button
-                        type="button"
-                        onClick={() => onNavigate(entry.path)}
-                        className="text-sm font-semibold text-slate-900 group-hover:text-[#102A43] hover:underline text-left block truncate cursor-pointer"
-                      >
-                        {entry.title}
-                      </button>
-                      <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-                        <span className="font-mono text-slate-600">{entry.path}</span>
-                        <span aria-hidden="true">·</span>
-                        <span>{entry.subtitle}</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-4 shrink-0 text-xs text-slate-500 font-mono tabular-nums">
-                      <span>Priority {entry.priority}</span>
-                      <span aria-hidden="true">·</span>
-                      <span>{entry.changefreq}</span>
-                      <button
-                        type="button"
-                        onClick={() => onNavigate(entry.path)}
-                        className="px-3 py-1.5 bg-slate-100 group-hover:bg-[#102A43] text-slate-800 group-hover:text-white rounded-md font-sans font-medium transition-colors inline-flex items-center gap-1 whitespace-nowrap cursor-pointer"
-                      >
-                        <span>Visit Page</span>
-                        <ArrowRight size={12} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
+                <ArrowRight size={13} className="text-[#F6B73C]" />
+              </button>
+            </div>
           ))}
-
-          {filteredEntries.length === 0 && (
-            <div className="bg-white border border-slate-200 rounded-2xl p-10 text-center space-y-2">
-              <p className="text-sm font-semibold text-slate-800">
-                No routes match "{searchQuery}"
-              </p>
-              <p className="text-xs text-slate-500">
-                Try searching for Nepal, Singapore, Maldives, Thailand, Malaysia, Dubai, or Visa.
-              </p>
-            </div>
-          )}
         </div>
-      ) : (
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
-            <div className="space-y-1">
-              <h2 className="font-serif text-lg font-bold text-slate-900">
-                Dynamically Generated XML Sitemap Output
-              </h2>
-              <p className="text-xs text-slate-500">
-                Automatically compiled from live route definitions in URAL's travel database (
-                <code className="font-mono text-slate-700">{baseUrl}/sitemap.xml</code>).
-              </p>
-            </div>
 
-            <div className="flex items-center gap-2 shrink-0">
-              <button
-                type="button"
-                onClick={handleCopyXml}
-                className="px-4 py-2 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
-              >
-                {copiedXml ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
-                <span>{copiedXml ? "Copied XML" : "Copy XML"}</span>
-              </button>
-              <button
-                type="button"
-                onClick={handleDownloadXml}
-                className="px-4 py-2 text-xs font-semibold bg-[#102A43] hover:bg-slate-800 text-white rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
-              >
-                <Download size={13} />
-                <span>Download sitemap.xml</span>
-              </button>
-            </div>
-          </div>
-
-          <pre className="bg-[#0F172A] text-slate-200 p-5 rounded-xl text-xs font-mono overflow-x-auto max-h-[540px] leading-relaxed select-all">
-            {xmlString}
-          </pre>
-        </div>
-      )}
-
-      {/* Google Search Console Submission Guide for Site Owner */}
-      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-4">
-        <h3 className="font-serif text-base font-bold text-slate-900">
-          How This Sitemap Accelerates Google Indexing for URAL
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-600 leading-relaxed">
-          <div className="space-y-1">
-            <div className="font-semibold text-slate-900">01. Static + Dynamic Parity</div>
-            <p>
-              Search engine bots fetching <code className="font-mono">/sitemap.xml</code> receive
-              the raw XML feed immediately, while visitors and crawlers navigating{" "}
-              <code className="font-mono">/sitemap</code> discover direct internal links to every
-              country guide.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <div className="font-semibold text-slate-900">02. Google Search Console Ready</div>
-            <p>
-              Submit <code className="font-mono">https://ural-travel.pages.dev/sitemap.xml</code>{" "}
-              under the "Sitemaps" tab in Google Search Console so Google crawls your new Singapore,
-              Maldives, and Dual-Currency Card guides right away.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <div className="font-semibold text-slate-900">03. Zero Orphan Routes</div>
-            <p>
-              Every query-based route (<code className="font-mono">?route=</code>,{" "}
-              <code className="font-mono">?city=</code>,{" "}
-              <code className="font-mono">?country=</code>,{" "}
-              <code className="font-mono">?slug=</code>) is cross-linked with Schema.org JSON-LD and
-              canonical tags in <code className="font-mono">useSeoMeta</code>.
-            </p>
+        {/* Bottom Popular Hubs Bar */}
+        <div className="pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            <span className="font-mono font-bold text-slate-500 uppercase">
+              {isBn ? "বিশেষ হাব:" : "More Essential Hubs:"}
+            </span>
+            <button
+              type="button"
+              onClick={() => onNavigate("/umrah")}
+              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#102A43] hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
+            >
+              🕋 {isBn ? "ওমরাহ ও হজ প্ল্যানার ২০২৬" : "Umrah & Hajj Hub 2026"}
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate("/experiences")}
+              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#102A43] hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
+            >
+              🎟️ {isBn ? "ইউরোপ, UK, USA ও এশিয়া অ্যাক্টিভিটি পাস" : "Europe, UK, USA & Asia Passes"}
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate("/blog")}
+              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#102A43] hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
+            >
+              📖 {isBn ? "সবগুলো ট্রাভেল ব্লগ ও গাইড" : "All 12 Travel Blog Guides"}
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate("/tools?tab=airhelp")}
+              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#102A43] hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
+            >
+              🛡️ {isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "Flight Delay Claim (€600)"}
+            </button>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

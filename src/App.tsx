@@ -74,7 +74,9 @@ import { SitemapPage } from "./components/SitemapPage";
 import { ExperiencesPage } from "./components/ExperiencesPage";
 import { UmrahLandingPage } from "./components/UmrahLandingPage";
 import { AirHelpWidget } from "./components/AirHelpWidget";
+import { TopicalAuthorityBlueprint } from "./components/TopicalAuthorityBlueprint";
 const heroBgImage = new URL("./assets/images/clouds_boat_hero_1781438671378.jpg", import.meta.url).href;
+const uralHeroBgImg = new URL("./assets/images/ural_hero_bg_1781543111624.jpg", import.meta.url).href;
 const coxsBazarSunriseImg = new URL("./assets/images/coxs_bazar_sunrise_1781620718331.jpg", import.meta.url).href;
 const nepalDestImg = new URL("./assets/images/nepal_destination_1781544132297.jpg", import.meta.url).href;
 const bangkokDestImg = new URL("./assets/images/bangkok_destination_1781544149435.jpg", import.meta.url).href;
@@ -85,18 +87,110 @@ const maldivesDestImg = new URL("./assets/images/maldives_destination_1790387286
 const blogHeroBannerImg = new URL("./assets/images/blog_editorial_hero_banner_1790429994056.jpg", import.meta.url).href;
 const umrahMakkahImg = new URL("./assets/images/umrah_makkah_haram_guide_1790430007679.jpg", import.meta.url).href;
 const passportCardDeskImg = new URL("./assets/images/passport_card_travel_desk_1790430035290.jpg", import.meta.url).href;
+const haramainTrainImg = new URL("./assets/images/haramain_bullet_train_1790484312808.jpg", import.meta.url).href;
+const minaHajjTentsImg = new URL("./assets/images/mina_hajj_tents_1790484325661.jpg", import.meta.url).href;
+const madinahUmbrellasImg = new URL("./assets/images/madinah_courtyard_umbrellas_1790484340720.jpg", import.meta.url).href;
+const saudiStopoverFlightImg = new URL("./assets/images/saudi_stopover_aircraft_1790484351784.jpg", import.meta.url).href;
+const madinahGreenDomeImg = new URL("./assets/images/madinah_green_dome_1790484369923.jpg", import.meta.url).href;
+const masjidNabawiArchesImg = new URL("./assets/images/masjid_nabawi_arches_1790484388265.jpg", import.meta.url).href;
+const jeddahAirportTerminalImg = new URL("./assets/images/jeddah_airport_terminal_1790484400414.jpg", import.meta.url).href;
+const ramadanMakkahNightImg = new URL("./assets/images/ramadan_makkah_night_1790484415220.jpg", import.meta.url).href;
+const ihramPreparationImg = new URL("./assets/images/ihram_preparation_set_1790484426740.jpg", import.meta.url).href;
+const zamzamAjwaDatesImg = new URL("./assets/images/zamzam_ajwa_dates_1790484440926.jpg", import.meta.url).href;
+const makkahHalalCuisineImg = new URL("./assets/images/makkah_halal_cuisine_1790484456326.jpg", import.meta.url).href;
+const qubaMosqueZiyarahImg = new URL("./assets/images/quba_mosque_taif_ziyarah_1790485732985.jpg", import.meta.url).href;
+const dubaiSkylineTwilightImg = new URL("./assets/images/dubai_skyline_burj_twilight_1790485747967.jpg", import.meta.url).href;
+const sheikhZayedMosqueImg = new URL("./assets/images/sheikh_zayed_grand_mosque_1790485758750.jpg", import.meta.url).href;
+const putrajayaPinkMosqueImg = new URL("./assets/images/putrajaya_pink_mosque_malaysia_1790485770212.jpg", import.meta.url).href;
+const parisLouvreLandmarksImg = new URL("./assets/images/paris_louvre_london_landmarks_1790485782111.jpg", import.meta.url).href;
+const islamicBankingCardImg = new URL("./assets/images/islamic_banking_card_makkah_1790486749439.jpg", import.meta.url).href;
+const rfcdForeignBankingImg = new URL("./assets/images/rfcd_foreign_currency_banking_1790486762760.jpg", import.meta.url).href;
+const bdtTravelConciergeImg = new URL("./assets/images/bdt_travel_concierge_voucher_1790486777146.jpg", import.meta.url).href;
+const posCardTerminalImg = new URL("./assets/images/pos_card_terminal_currency_1790486792551.jpg", import.meta.url).href;
+const bangkokWatArunImg = new URL("./assets/images/bangkok_wat_arun_chao_phraya_1790486821534.jpg", import.meta.url).href;
+const kualaLumpurPetronasImg = new URL("./assets/images/kuala_lumpur_petronas_twilight_1790486835902.jpg", import.meta.url).href;
+const passportStampsWindowImg = new URL("./assets/images/passport_stamps_boarding_window_1790486849797.jpg", import.meta.url).href;
+const singaporeMrtGardensImg = new URL("./assets/images/singapore_mrt_gardens_bay_1790520762227.jpg", import.meta.url).href;
+const bangkokMedicalLobbyImg = new URL("./assets/images/bangkok_medical_hospital_lobby_1790520775439.jpg", import.meta.url).href;
+const travelEsimInsuranceImg = new URL("./assets/images/travel_esim_smartphone_insurance_1790520786938.jpg", import.meta.url).href;
+const sriLankaNineArchImg = new URL("./assets/images/sri_lanka_nine_arch_train_1790520800518.jpg", import.meta.url).href;
+const bdEpassportDeskImg = new URL("./assets/images/bangladesh_epassport_biometric_desk_1790520813052.jpg", import.meta.url).href;
+const airportDelayBoardImg = new URL("./assets/images/airport_departure_board_delay_claim_1790520824658.jpg", import.meta.url).href;
+const dhakaAirlinesTarmacImg = new URL("./assets/images/dhaka_airport_widebody_airlines_tarmac_1790520836931.jpg", import.meta.url).href;
 
+// Every single blog post (all 41 articles) is mapped to its own 100% unique visual asset (zero repeated images)
 function getBlogCoverImage(slug: string): string {
   switch (slug) {
     case "umrah-hajj-guide-bangladesh-nusuk-bdt-cost":
-    case "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh":
       return umrahMakkahImg;
+    case "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh":
+      return haramainTrainImg;
+    case "hajj-registration-bangladesh-government-vs-private-package-cost":
+      return minaHajjTentsImg;
+    case "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
+      return madinahUmbrellasImg;
+    case "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
+      return saudiStopoverFlightImg;
+    case "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
+      return madinahGreenDomeImg;
+    case "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
+      return masjidNabawiArchesImg;
+    case "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
+      return jeddahAirportTerminalImg;
+    case "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
+      return ramadanMakkahNightImg;
+    case "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
+      return ihramPreparationImg;
+    case "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
+      return zamzamAjwaDatesImg;
+    case "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
+      return makkahHalalCuisineImg;
+    case "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide":
+      return qubaMosqueZiyarahImg;
+    case "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide":
+      return dubaiSkylineTwilightImg;
+    case "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide":
+      return sheikhZayedMosqueImg;
+    case "malaysia-islamic-heritage-putrajaya-halal-family-tour-guide":
+      return putrajayaPinkMosqueImg;
+    case "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide":
+      return parisLouvreLandmarksImg;
+    case "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah":
+      return islamicBankingCardImg;
+    case "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix":
+      return rfcdForeignBankingImg;
+    case "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card":
+      return bdtTravelConciergeImg;
+    case "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide":
+      return posCardTerminalImg;
+    case "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide":
+      return bangkokWatArunImg;
+    case "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration":
+      return kualaLumpurPetronasImg;
+    case "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia":
+      return passportStampsWindowImg;
+    case "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide":
+      return singaporeMrtGardensImg;
+    case "bangkok-medical-tourism-checkup-guide-bangladesh-bumrungrad-bangkok-hospital":
+      return bangkokMedicalLobbyImg;
+    case "best-travel-esim-and-insurance-from-bangladesh-airalo-schengen-umrah":
+      return travelEsimInsuranceImg;
+    case "sri-lanka-budget-tour-from-bangladesh-eta-visa-colombo-kandy-ella":
+      return sriLankaNineArchImg;
+    case "bangladesh-epassport-application-renewal-guide-64-districts-urgent-fees":
+      return bdEpassportDeskImg;
+    case "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp":
+      return airportDelayBoardImg;
+    case "best-airlines-from-dhaka-biman-saudia-emirates-qatar-singapore-baggage-guide":
+      return dhakaAirlinesTarmacImg;
     case "dual-currency-card-endorsement-bangladesh":
-    case "dhaka-airport-outbound-immigration-checklist-noc-go":
       return passportCardDeskImg;
+    case "dhaka-airport-outbound-immigration-checklist-noc-go":
+      return uralHeroBgImg;
     case "nepal-pokhara-itinerary-bangladesh":
-    case "nepal-vs-thailand-first-trip":
       return nepalDestImg;
+    case "nepal-vs-thailand-first-trip":
+      return coxsBazarSunriseImg;
     case "halal-food-guide-bangkok-bangladesh":
       return bangkokDestImg;
     case "top-budget-family-destinations-from-dhaka":
@@ -111,6 +205,191 @@ function getBlogCoverImage(slug: string): string {
     default:
       return heroBgImage;
   }
+}
+
+// Precision ~50-Word AEO Direct Answer Snippets for Blog Cards (Complete sentences, high-fact density)
+function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: string): string {
+  const snippetsEn: Record<string, string> = {
+    "umrah-hajj-guide-bangladesh-nusuk-bdt-cost":
+      "A 10-day DIY Umrah from Bangladesh costs BDT 1,16,000–1,32,000 per person (family of 4 sharing), covering a 90-day Umrah e-Visa (BDT 15,500–19,500), roundtrip Dhaka–Jeddah/Madinah flights, hotels, and Haramain Bullet Train. Obligatory Fard Hajj requires separate registration via the official Ministry portal (hajj.gov.bd).",
+    "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh":
+      "For flat wheelchair-friendly access in Makkah, stay in Jabal Omar or Clock Tower (3–5 minutes to Haram), or save 60% in Mahbas Al Jin shuttle hotels (BDT 4,200–7,500/night). In Madinah, book Markazia North near Ladies' Gates 25–29 and ride the 300 km/h Haramain Train (sar.hhr.sa).",
+    "hajj-registration-bangladesh-government-vs-private-package-cost":
+      "Obligatory Hajj from Bangladesh requires two-stage registration on hajj.gov.bd: Pre-Registration with your NID and ~BDT 30,000 deposit to get a tracking N-Serial, followed by Final Registration (BDT 5,20,000–6,00,000 for Government packages or BDT 5,80,000–9,50,000+ for licensed Private Agency Maktab A/B/D packages).",
+    "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
+      "When taking elderly parents for Umrah from Dhaka, attach a free airline Wheelchair (WCHR) request 48 hours before departure and bring a foldable wheelchair from Bangladesh (carried free). Inside Masjid al-Haram, rent official roof-level electric scooters (SAR 115 full Umrah) and stay on flat Jabal Omar streets.",
+    "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
+      "Bangladeshi passport holders flying Saudia or Flynas to the UK, US, Europe, Istanbul, or Dubai can book a 96-Hour Saudi Stopover Visa during flight checkout for ~SAR 135 (BDT 4,200) with 1 free hotel night on Saudia. US/UK/Schengen visa holders also qualify for a 1-year Saudi e-Visa.",
+    "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
+      "Every Bangladeshi pilgrim must complete 10-fingerprint biometrics on the official Saudi Visa Bio app before flying and register on the Nusuk app (nusuk.sa) using their 10-digit Visa Number. Inside Nusuk, book your free Umrah slot and mandatory Rawdah Shareef (Riyazul Jannah) permit in Madinah.",
+    "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
+      "Under updated Saudi Ministry of Hajj & Umrah (haj.gov.sa) rules, Bangladeshi women can obtain an Umrah e-Visa without a mandatory male Mahram restriction in the visa portal. In Madinah, book hotels in Markazia North facing Ladies' Gates 25–29 for direct women's prayer hall and Rawdah access.",
+    "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
+      "Save 6 hours of highway travel by booking an Open-Jaw (Multi-City) ticket: fly Dhaka (DAC) to Jeddah (JED) outbound and return directly from Madinah (MED) to Dhaka. Direct Biman and Saudia flights cost BDT 72,000–92,000 with 46kg baggage, while 1-stop Gulf carriers start at BDT 54,000.",
+    "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
+      "Performing Umrah in Ramadan equals the reward of Hajj, but Last-10-Days Makkah hotel rates triple to BDT 2,20,000+ per person. Cut your budget by 50% (to BDT 1,35,000–1,55,000) by flying in late Sha'ban and performing Umrah during the first week of Ramadan, or register early on Nusuk for I'tikaf.",
+    "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
+      "When flying direct from Dhaka to Jeddah on Biman or Saudia, put on your unstitched Ihram garments at Dhaka Airport and make Niyyah when the pilot announces Miqat Qarn al-Manazil 45 minutes before landing. On 1-stop transit flights, change into Ihram during your Gulf airport layover.",
+    "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
+      "Never pack loose Zamzam bottles inside checked suitcases. Buy one official 5-liter sealed Zamzam box (SAR 9.50–12.50) at the Jeddah or Madinah airport kiosk, carried free by Biman and Saudia. Returning Bangladeshi passengers can also bring 5–10 kg of Madinah dates and up to 100g of gold jewelry duty-free.",
+    "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
+      "Skip expensive hotel buffets and oily fast food during Umrah: walk 5 minutes from Masjid al-Haram into Ibrahim Al Khalil Road (Misflah) or Lower Ajyad in Makkah, and Bengalee Lane (West Markazia) in Madinah, for fresh Bangladeshi rice, fish curry, daal, and bharta at SAR 12–18 (BDT 390–580).",
+    "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide":
+      "A private 4-seater sedan for a 3-hour morning Ziyarah costs SAR 150–200 in Makkah (Jabal al-Noor Hira Cultural District, Jabal Thawr, Mina, Arafat) and SAR 120–160 in Madinah (Masjid Quba—where 2 Rakah equals an Umrah reward—Mount Uhud, and Qiblatain), while a Taif highland day trip costs SAR 350–450.",
+    "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide":
+      "Combine a 7-day Makkah and Madinah Umrah with a 3-day Dubai and Abu Dhabi holiday on one Multi-City air ticket (DAC → JED/MED → DXB → DAC) to save BDT 35,000+ per person on airfare. Pair your Saudi Umrah e-Visa with a 96-hour UAE Transit Visa or 30-day Tourist e-Visa.",
+    "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide":
+      "Travel from Dubai to Abu Dhabi in 90 minutes for just AED 25 (~BDT 850) each way on the RTA E100 or E101 coach using your Silver Nol Card. Entry to Sheikh Zayed Grand Mosque is 100% free via online QR registration at visit.szgmc.gov.ae alongside Qasr Al Watan Palace.",
+    "malaysia-islamic-heritage-putrajaya-halal-family-tour-guide":
+      "Ranked #1 for Muslim family travel, Malaysia offers 100% JAKIM-certified Halal dining and Surau prayer rooms in every mall. Take the MRT Putrajaya Line from KLCC (MYR 5.40 / BDT 150) to Putrajaya's Pink Mosque (Masjid Putra) and Lake Cruise, and visit the Islamic Arts Museum Malaysia.",
+    "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide":
+      "Bangladeshi passport holders with a valid used US, UK, or Schengen visa qualify for an instant 1-year Saudi e-Visa or Visa on Arrival to perform Umrah on their return leg. In Paris, London, Rome, and New York, pre-book official Tiqets skip-the-line passes to avoid 2.5-hour museum queues.",
+    "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah":
+      "Top Shariah-compliant Riba-free cards in Bangladesh for Umrah and Halal travel include Islami Bank (IBBL) Dual-Currency Debit & Khidmah Card, City Islamic Amex/Visa, EBL Islamic Debit Card, Al-Arafah La-Riba, and Standard Chartered Saadiq—all supporting the $12,000 passport travel quota for Haramain Train and Makkah hotel bookings.",
+    "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix":
+      "When Bangladeshi banks block online flight or hotel payments above $300 USD on regular Travel Quota cards, call your bank's 24/7 hotline 15 minutes before checkout to lift the merchant cap—or open a Resident Foreign Currency Deposit (RFCD) account using leftover travel cash for zero single-transaction caps.",
+    "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card":
+      "Travelers without an endorsed Dual-Currency Card can message the URAL Dhaka Desk on WhatsApp (+8801784385335) to book confirmed airline PNR tickets, Makkah/Madinah or Asian hotel vouchers, and Haramain train tickets in Bangladeshi Taka (BDT) via local bank transfer, bKash, or Nagad.",
+    "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide":
+      "For Umrah, buy Saudi Riyals (SAR) directly in Dhaka for daily cash expenses to avoid losing 3% on double conversion (BDT→USD→SAR). When tapping your Dual-Currency Card at hotels or malls in Makkah, Bangkok, or Kuala Lumpur, always select 'Local Currency' on the POS terminal to avoid 5% DCC fees.",
+    "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide":
+      "Bangladeshi citizens apply online via thaievisa.go.th for a 60-day Thailand Tourist Visa (TR) without surrendering their physical passport. Upload clear PDF scans of your passport, return ticket, paid hotel booking, NOC/Trade License, and a 6-month bank statement showing at least BDT 65,000 (BDT 1,20,000+ recommended) per person.",
+    "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration":
+      "Apply online at malaysiavisa.imi.gov.my for a 30-day Malaysia Tourist e-Visa (BDT 3,800–4,200; approved in 2–4 working days) with a 6-month bank statement showing BDT 80,000+ balance. Within 3 days before landing at KLIA, submit the mandatory free Malaysia Digital Arrival Card (MDAC).",
+    "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia":
+      "Build a strong travel history on a blank Bangladeshi e-Passport in 3 steps: Step 1 — Get a zero-risk free Visa on Arrival in Nepal or the Maldives; Step 2 — Obtain online e-Visas for Malaysia and Thailand; Step 3 — Unlock Singapore, Dubai + Umrah, and Schengen/UK/US visas.",
+    "dual-currency-card-endorsement-bangladesh":
+      "Under Bangladesh Bank rules, adult passport holders can endorse up to USD $12,000 per calendar year on a Dual-Currency Debit, Prepaid, or Credit Card (EBL, City Bank Amex, BRAC, MTB). After getting the physical passport stamp, unlock E-Commerce and 3D-Secure in your bank app before booking online.",
+    "dhaka-airport-outbound-immigration-checklist-noc-go":
+      "Clear Dhaka Airport (DAC) outbound emigration in under 2 minutes by carrying 5 printed documents in your cabin folder: a 6-month valid passport (with old passports), printed visa or arrival QR code, confirmed return air ticket, paid hotel voucher, passport dollar endorsement, and your Job NOC, GO, or Trade License.",
+    "cheap-flight-booking-hacks-dhaka":
+      "Cut international airfare from Dhaka (DAC) by 15%–30% by searching during Tuesday night airline inventory resets, flying out on Monday or Tuesday mornings instead of Thursday/Friday peak migration waves, travelling with 7kg cabin luggage on budget carriers, and stacking 12%–15% Bangladeshi bank card discounts.",
+    "nepal-vs-thailand-first-trip":
+      "For first-time Bangladeshi travelers, Nepal is the easiest budget starter trip (free instant SAARC Visa on Arrival at Kathmandu Airport and a BDT 45,000–55,000 5-day budget), while Thailand is best for family shopping, beaches, and medical check-ups (requiring a pre-arranged e-Visa and BDT 75,000+ budget).",
+    "hotel-savings-guide-bangkok-kl-dubai":
+      "Save 30%–40% on family hotels in Bangkok, Kuala Lumpur, and Dubai without sacrificing safety by booking 2–3 metro stops outside the pricey tourist core—such as On Nut BTS in Bangkok, Al Rigga Metro in Deira Dubai, or serviced family apartments near Bukit Bintang and KLCC in Malaysia.",
+    "halal-food-guide-bangkok-bangladesh":
+      "Bangladeshi travelers in Bangkok can find 100% certified Halal meals displaying the green Central Islamic Council of Thailand emblem across Pratunam (Petchaburi Road alleys) and Sukhumvit Soi 3 (Nana Arab Street). Halal food court dishes start at BDT 180–300, with famous spots including Maidaun and Yana Restaurant.",
+    "nepal-pokhara-itinerary-bangladesh":
+      "A 5-day Kathmandu and Pokhara trip from Dhaka costs just BDT 40,000–54,000 per person including roundtrip flights (BDT 28,000–35,000). Claim your free SAARC Visa on Arrival at Tribhuvan Airport, explore Boudhanath and Durbar Square, and take a scenic bus or flight to Phewa Lake and Sarangkot.",
+    "maldives-budget-trip-bangladesh-maafushi":
+      "Experience the Maldives from Dhaka for under BDT 75,000 per person (flights included) by staying on local inhabited islands like Maafushi and Hulhumalé instead of $500/night private resorts. Bangladeshi citizens receive a free 30-day Visa on Arrival (with free IMUGA QR) and $25 airport speedboat transfers.",
+    "singapore-visa-guide-bangladesh-agents":
+      "Bangladeshi citizens must apply for a Singapore Tourist e-Visa (BDT 4,200–6,500; 5–7 working days) through an Embassy-Authorized Visa Agent in Dhaka using Form 14A, a 35x45mm matte photo, a 6-month bank statement (BDT 1,50,000+ balance), and a Letter of Introduction (LOI Form V39A).",
+    "top-budget-family-destinations-from-dhaka":
+      "The top 6 budget-friendly international family destinations from Dhaka for 2026 ranked by 5-day per-person BDT cost are: 1. Nepal (from BDT 42,000, free VOA), 2. Malaysia (from BDT 68,000, online e-Visa), 3. Thailand (from BDT 72,000), 4. Maldives local islands (from BDT 75,000), 5. Singapore, and 6. Dubai.",
+    "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide":
+      "Explore Singapore from Dhaka in 4 days for BDT 84,000–96,000 per person (flights included) by tapping your Bangladeshi Dual-Currency Visa/Mastercard directly on MRT gates via SimplyGo, staying near Farrer Park & Mustafa Centre (24/7) or Bugis Sultan Mosque, and dining at MUIS-certified Halal hawker stalls.",
+    "bangkok-medical-tourism-checkup-guide-bangladesh-bumrungrad-bangkok-hospital":
+      "Bangladeshi patients visiting Bumrungrad International (Sukhumvit Soi 3), Bangkok Hospital, or Samitivej can book executive health check-up packages online (THB 6,900–24,500 / BDT 24,500–87,000) with complimentary Bengali medical interpreters, free airport wheelchair assistance, and patient apartments within a 5-minute walk.",
+    "best-travel-esim-and-insurance-from-bangladesh-airalo-schengen-umrah":
+      "Avoid BDT 1,200/day international roaming charges by installing an Airalo Travel eSIM ($4.50–$9.00 via your Dual-Currency Card) in Dhaka before departure so 5G data activates upon landing in Jeddah, Bangkok, KL, or Singapore—and pair it with a $30,000+ Travel Medical Insurance policy.",
+    "sri-lanka-budget-tour-from-bangladesh-eta-visa-colombo-kandy-ella":
+      "A 6-day Sri Lanka tour (Colombo, Kandy, Nuwara Eliya, Ella Nine Arch Bridge, and Galle Fort) from Dhaka costs BDT 68,000–82,000 per person including roundtrip flights. Bangladeshi passport holders apply online at eta.gov.lk ($20 USD SAARC fee) and enjoy abundant HAC-certified Halal dining.",
+    "bangladesh-epassport-application-renewal-guide-64-districts-urgent-fees":
+      "Apply or renew your Bangladeshi e-Passport across all 64 Regional Passport Offices at epassport.gov.bd without brokers. A 10-year 48-page e-Passport costs BDT 5,750 (Regular), BDT 8,050 (Express), or BDT 10,350 (Super Express, 2 days); always select the 64-page booklet (BDT 8,050+) if you travel frequently.",
+    "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp":
+      "Bangladeshi passengers whose flights are delayed 3+ hours, cancelled, or overbooked on UK/EU routes (EC 261/2004) can claim €250–€600 (BDT 33,000–80,000), while Montreal Convention rules cover up to ~$1,700 (BDT 2,05,000) for lost or damaged baggage on Biman, Saudia, Emirates, or Qatar Airways.",
+    "best-airlines-from-dhaka-biman-saudia-emirates-qatar-singapore-baggage-guide":
+      "Compare every major airline flying out of Dhaka (DAC): Biman and Saudia lead for direct 6.5-hour Jeddah/Madinah flights with 2x23kg (46kg) baggage and free 5L Zamzam water; Emirates, Qatar, and Gulf Air offer top 1-stop transit value; and Malaysia/Singapore Airlines lead on Asian routes.",
+  };
+
+  const snippetsBn: Record<string, string> = {
+    "umrah-hajj-guide-bangladesh-nusuk-bdt-cost":
+      "ঢাকা থেকে ৪ জনের পরিবারের শেয়ারে ১০ দিনের DIY ওমরাহ করতে জনপ্রতি BDT ১,১৬,০০০–১,৩২,০০০ খরচ হয়—যার মধ্যে ৯০ দিনের ই-ভিসা (১৬,৫০০ টাকা), রিটার্ন ফ্লাইট, হোটেল ও হারামাইন বুলেট ট্রেন অন্তর্ভুক্ত। আর ফরজ হজের জন্য সরকারি পোর্টাল (hajj.gov.bd)-এ নিবন্ধন বাধ্যতামূলক।",
+    "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh":
+      "মক্কায় বয়স্ক মা-বাবার জন্য ঢালহীন সমতল রাস্তার Jabal Omar বা Clock Tower সেরা (৩–৫ মিনিটে হারাম), আর বাজেট বাঁচাতে Mahbas Al Jin শাটল হোটেল (রাত ৪,২০০–৭,৫০০ টাকা) বেছে নিন। মদিনায় মহিলাদের গেট ২৫–২৯ এর কাছে Markazia North-এ থাকুন ও হারামাইন ট্রেনে যাতায়াত করুন।",
+    "hajj-registration-bangladesh-government-vs-private-package-cost":
+      "বাংলাদেশ থেকে ফরজ হজের জন্য ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ ২ ধাপে নিবন্ধন করতে হয়: NID ও ৩০,০০০ টাকা জমা দিয়ে প্রাক-নিবন্ধন (N-Serial) এবং কোটা অনুযায়ী চূড়ান্ত নিবন্ধন (সরকারি প্যাকেজ ৫.২০–৬.০০ লক্ষ টাকা; বেসরকারি এজেন্সি ৫.৮০–৯.৫০+ লক্ষ টাকা)।",
+    "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
+      "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ যাত্রায় ফ্লাইটের ৪৮ ঘণ্টা আগে ফ্রি এয়ারপোর্ট হুইলচেয়ার (WCHR) বুক করুন এবং দেশ থেকে একটি ফোল্ডিং হুইলচেয়ার সাথে নিন (ফ্লাইটে ফ্রি)। মসজিদুল হারামের ছাদে অফিশিয়াল ইলেকট্রিক স্কুটার (তাওয়াফ+সাঈ ১১৫ রিয়াল) ও সমতল রাস্তার হোটেল ব্যবহার করুন।",
+    "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
+      "Saudia বা Flynas এয়ারলাইন্সে লন্ডন, ইউরোপ, আমেরিকা, ইস্তাম্বুল বা দুবাই যাওয়ার পথে বাংলাদেশি পাসপোর্টধারীরা মাত্র ১৩৫ সৌদি রিয়াল (~৪,২০০ টাকা) খরচে ৯৬ ঘণ্টার Saudi Stopover Visa ও ১ রাত ফ্রি হোটেল নিয়ে ওমরাহ করতে পারেন। এছাড়া US/UK/Schengen ভিসাধারীরা ১ বছরের ই-ভিসা পান।",
+    "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
+      "ওমরাহ ও হজযাত্রীদের ফ্লাইটের আগেই Saudi Visa Bio অ্যাপে ১০ আঙুলের ছাপ দিতে হয় এবং ভিসা ইস্যুর পর ১০ ডিজিটের ভিসা নম্বর দিয়ে অফিশিয়াল Nusuk অ্যাপে (nusuk.sa) একাউন্ট খুলতে হয়। Nusuk অ্যাপ থেকেই মদিনায় রিয়াজুল জান্নাত (Rawdah Shareef) জিয়ারতের ফ্রি পারমিট বুক করা যায়।",
+    "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
+      "সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের (haj.gov.sa) হালনাগাদ নিয়মে বাংলাদেশি নারীরা মাহরাম ছাড়াও ওমরাহ ই-ভিসার আবেদন করতে পারেন। মদিনায় মা ও বোনদের সহজে নামাজ ও রিয়াজুল জান্নাতে প্রবেশের জন্য উত্তর দিকের Ladies' Gates 25–29 সংলগ্ন Markazia North হোটেলে থাকা সবচেয়ে সুবিধাজনক।",
+    "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
+      "ওমরাহ শেষে মদিনা থেকে জেদ্দা বিমানবন্দরের ৬ ঘণ্টার ক্লান্তিকর সড়কপথ এড়াতে Multi-City (Open-Jaw) টিকিট কাটুন: ঢাকা থেকে জেদ্দা (DAC–JED) যান এবং মদিনা থেকে সরাসরি ঢাকা (MED–DAC) ফিরুন। বিমান ও সৌদিয়ার ডিরেক্ট ফ্লাইট ৭২–৯২ হাজার টাকা এবং ট্রানজিট ফ্লাইট ৫৪ হাজার টাকা থেকে শুরু।",
+    "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
+      "রমজান মাসে ওমরাহ পালনে হজের সমান সওয়াব পাওয়া যায়, তবে শেষ ১০ দিনে মক্কার হোটেল ভাড়া তিনগুণ বেড়ে জনপ্রতি ২.২০ লক্ষ+ টাকা ছাড়িয়ে যায়। শাবানের শেষ সপ্তাহে মদিনায় গিয়ে রমজানের প্রথম সপ্তাহে মক্কায় ওমরাহ করলে মাত্র ১.৩৫–১.৫৫ লক্ষ টাকায় (৫০% কমে) রমজান ওমরাহ সম্পন্ন করা সম্ভব।",
+    "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
+      "বিমান বা সৌদিয়ার ডিরেক্ট ফ্লাইটে জেদ্দা গেলে ঢাকা এয়ারপোর্টেই ইহরামের কাপড় পরুন এবং ল্যান্ডিংয়ের ৪৫ মিনিট আগে পাইলট মিকাত (কারনুল মানাজিল) ঘোষণা করলে নিয়ত ও তালবিয়াহ পড়ুন। আর ট্রানজিট ফ্লাইটে গেলে দুবাই/শারজাহ/মাস্কাট যাত্রাবিরতিতে ইহরাম পরে নিন।",
+    "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
+      "লাগেজের ভেতর খোলা বোতলে জমজমের পানি ভরলে এক্স-রে স্ক্যানারে তা জব্দ হয়। জেদ্দা বা মদিনা এয়ারপোর্টের অফিশিয়াল কিয়স্ক থেকে পাসপোর্ট দেখিয়ে ৫ লিটারের সিল করা জমজম বক্স (৯.৫০–১২.৫০ রিয়াল) কিনুন, যা বিমান ও সৌদিয়া ফ্রি বহন করে। সাথে ৫–১০ কেজি খেজুর ও ১০০ গ্রাম স্বর্ণালংকার শুল্কমুক্ত আনা যায়।",
+    "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
+      "ওমরাহ সফরে প্রতিদিন ফাস্টফুড না খেয়ে মক্কার ইব্রাহিম আল খলিল রোড (মিসফালাহ) ও আজইয়াদ এবং মদিনার বাঙালি লেনে (গেট ৫–৯ এর কাছে) মাত্র ১২–১৮ রিয়ালে (৩৯০–৫৮০ টাকা) গরম ভাত, মাছের ঝোল, ডাল ও ভর্তা খেতে পারেন। এছাড়া জাবাল ওমর ও তায়্যিবা সেন্টারে পাবেন অফিশিয়াল Al Baik।",
+    "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide":
+      "প্রাইভেট ৪-সিটার গাড়িতে ৩ ঘণ্টার মক্কা জিয়ারত (জাবালে নূর হেরা ডিস্ট্রিক্ট, গারে সাওর, মিনা, আরাফাত) ১৫০–২০০ রিয়াল এবং মদিনা জিয়ারত (মসজিদে কুবা—যেখানে ২ রাকাত নামাজে ১টি ওমরাহর সওয়াব—উহুদ ও কিবলাতাইন) ১২০–১৬০ রিয়ালে করা যায়। আর তায়েফ ডে-ট্রিপের ভাড়া ৩৫০–৪৫০ রিয়াল।",
+    "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide":
+      "দুটি আলাদা ট্রিপের বিমান ভাড়া বাঁচাতে একটি Multi-City টিকিটেই (ঢাকা → জেদ্দা/মদিনা → দুবাই → ঢাকা) ৭ দিনের ওমরাহ এবং ৩ দিনের দুবাই ও আবুধাবি ভ্রমণ করুন। এতে ওমরাহ ই-ভিসা ও দুবাই ট্রানজিট/ই-ভিসা ব্যবহার করে জনপ্রতি ৩৫,০০০+ টাকা বিমান ভাড়া সাশ্রয় হয়।",
+    "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide":
+      "দুবাইয়ের ইবনে বতুতা বা আল গুবাইবা স্টেশন থেকে RTA E100/E101 এসি বাসে মাত্র ২৫ দিরহামে (~৮৫০ টাকা, Nol Card দিয়ে) ৯০ মিনিটে আবুধাবি যাওয়া যায়। অফিশিয়াল সাইটে (visit.szgmc.gov.ae) ফ্রি QR পাস নিয়ে শেখ জায়েদ গ্র্যান্ড মসজিদ ও কাসর আল ওয়াতান প্রাসাদ ঘুরে দেখুন।",
+    "malaysia-islamic-heritage-putrajaya-halal-family-tour-guide":
+      "মুসলিম পরিবারের ভ্রমণের জন্য মালয়েশিয়া বিশ্বে ১ নম্বর—প্রতিটি শপিং মলে সরকারি JAKIM হালাল খাবার ও নামাজের স্থান (Surau) রয়েছে। কুয়ালালামপুর থেকে MRT ট্রেনে মাত্র ৫.৪০ রিঙ্গিতে (১৫০ টাকা) পুত্রজায়া পিঙ্ক মসজিদ ও লেক ক্রুজ এবং ইসলামিক আর্টস মিউজিয়াম ঘুরে দেখুন।",
+    "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide":
+      "বাংলাদেশি পাসপোর্টে বৈধ ও একবার ব্যবহৃত (Used) US, UK বা Schengen ভিসা থাকলে ফেরার পথে তাৎক্ষণিক ১ বছরের সৌদি ই-ভিসা নিয়ে ওমরাহ করা যায়। এছাড়া প্যারিসের লুভর, আইফেল টাওয়ার, লন্ডন আই ও রোমের কলোসিয়ামে ২–৩ ঘণ্টার লাইন এড়াতে Tiqets স্কিপ-দ্য-লাইন পাস বুক করুন।",
+    "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah":
+      "ওমরাহ ও হালাল ভ্রমণে সুদমুক্ত (Riba-Free) লেনদেনের জন্য ইসলামী ব্যাংক (IBBL) ডুয়াল-কারেন্সি ডেবিট ও খিদমাহ কার্ড, সিটি ইসলামিক অ্যামেক্স/ভিসা, ইবিএল ইসলামিক, আল-আরাফাহ লা-রিবা এবং স্ট্যান্ডার্ড চার্টার্ড সাদিক কার্ডে $12,000 পাসপোর্ট এনডোর্সমেন্ট করে হারামাইন ট্রেন ও মক্কার হোটেল বুক করা যায়।",
+    "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix":
+      "সাধারণ ডুয়াল-কারেন্সি কার্ডে $300 USD-এর বেশি ফ্লাইট বা হোটেল পেমেন্ট ডিক্লাইন হলে পেমেন্টের ১৫ মিনিট আগে ব্যাংকের হটলাইনে কল করে লিমিট আনলক করুন। আর স্থায়ী সমাধানের জন্য বিদেশ থেকে ফেরার পর বেঁচে যাওয়া নগদ ডলার জমা দিয়ে ব্যাংকে RFCD Account ও কার্ড খুলুন।",
+    "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card":
+      "হাতে এনডোর্স করা Dual-Currency Card না থাকলে সরাসরি URAL-এর ঢাকা WhatsApp ডেস্কে (+8801784385335) যোগাযোগ করে দেশীয় ব্যাংক ট্রান্সফার, bKash বা Nagad-এ (BDT) পেমেন্ট করেই কনফার্মড ফ্লাইট PNR, মক্কা/মদিনা বা এশিয়ার হোটেল ভাউচার ও হারামাইন ট্রেন টিকিট বুক করতে পারেন।",
+    "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide":
+      "ওমরাহর হাতখরচের জন্য ঢাকা থেকেই সরাসরি নগদ সৌদি রিয়াল (SAR) কিনলে ডাবল কনভার্সন (BDT→USD→SAR) লস বাঁচে। আর মক্কা, ব্যাংকক বা কুয়ালালামপুরে কার্ড পাঞ্চ করার সময় POS মেশিনে সবসময় 'Local Currency' সিলেক্ট করবেন—এতে ৫% অতিরিক্ত DCC চার্জ কাটবে না।",
+    "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide":
+      "পাসপোর্ট জমা না দিয়েই অফিশিয়াল thaievisa.go.th পোর্টালে আবেদন করে ৫–১০ কার্যদিবসে ৬০ দিনের থাইল্যান্ড ই-ভিসা (TR) পাওয়া যায়। এজন্য পাসপোর্ট স্ক্যান, রিটার্ন টিকিট, হোটেল ভাউচার, NOC/Trade License এবং জনপ্রতি অন্তত ৬৫,০০০+ টাকার (নিরাপদ অনুমোদনের জন্য ১.২০ লক্ষ+ টাকা) ব্যাংক স্টেটমেন্ট আপলোড করুন।",
+    "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration":
+      "অনলাইনে malaysiavisa.imi.gov.my পোর্টালে ৮০,০০০+ টাকা ব্যাংক ব্যালেন্স দেখিয়ে আবেদন করলে ২–৪ কার্যদিবসে ৩০ দিনের মালয়েশিয়া ই-ভিসা (BDT ৩,৮০০–৪,২০০) পাওয়া যায়। কুয়ালালামপুর (KLIA) ফ্লাইটের ৩ দিন আগে অবশ্যই ফ্রি Malaysia Digital Arrival Card (MDAC) পূরণ করে প্রিন্ট সাথে রাখুন।",
+    "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia":
+      "নতুন সাদা পাসপোর্টে ভিসা রিজেকশন এড়াতে ৩ ধাপে ট্রাভেল হিস্ট্রি গড়ুন: ১ম ধাপে নেপাল বা মালদ্বীপে নিশ্চিত ফ্রি Visa on Arrival সফর করুন; ২য় ধাপে মালয়েশিয়া ও থাইল্যান্ডের অনলাইন ই-ভিসা নিন; এবং ৩য় ধাপে সিঙ্গাপুর, দুবাই, সৌদি ওমরাহ ও ইউরোপের ভিসার আবেদন করুন।",
+    "dual-currency-card-endorsement-bangladesh":
+      "বাংলাদেশ ব্যাংকের নিয়মে প্রাপ্তবয়স্ক পাসপোর্টধারীরা বছরে সর্বোচ্চ ১২,০০০ মার্কিন ডলার ডুয়াল-কারেন্সি ডেবিট, প্রিপেইড বা ক্রেডিট কার্ডে এনডোর্সমেন্ট করতে পারেন। ব্যাংকে পাসপোর্ট স্ট্যাম্প নেওয়ার পর অনলাইনে ফ্লাইট বা হোটেল বুকিংয়ের আগে ব্যাংক অ্যাপ বা হটলাইনে E-Commerce ও 3D-Secure চালু করে নিন।",
+    "dhaka-airport-outbound-immigration-checklist-noc-go":
+      "ঢাকা বিমানবন্দরে (DAC) মাত্র ২ মিনিটে ইমিগ্রেশন সম্পন্ন করতে হাতের ফাইলে ৫টি প্রিন্টেড কাগজ রাখুন: ৬ মাসের মেয়াদসহ পাসপোর্ট (পুরাতন পাসপোর্টসহ), ভিসা বা Arrival QR প্রিন্ট, রিটার্ন এয়ার টিকিট, হোটেল ভাউচার, ডলার এনডোর্সমেন্ট এবং পেশাগত NOC, GO অথবা ট্রেড লাইসেন্স।",
+    "cheap-flight-booking-hacks-dhaka":
+      "ঢাকা (DAC) থেকে ১৫%–৩০% কম খরচে বিমান টিকিট কাটতে মঙ্গলবার রাতে ভাড়া যাচাই করুন, বৃহস্পতি/শুক্রবারের ভিড় এড়িয়ে সোম বা মঙ্গলবার সকালে ফ্লাইট নিন, বাজেট এয়ারলাইন্সে ৭ কেজি কেবিন ব্যাগে ভ্রমণ করুন এবং দেশীয় ব্যাংকের কার্ডে ১০%–১৫% ডিসকাউন্ট অফার ব্যবহার করুন।",
+    "nepal-vs-thailand-first-trip":
+      "প্রথমবার বিদেশ ভ্রমণের জন্য বাংলাদেশিদের কাছে নেপাল সবচেয়ে সহজ ও সাশ্রয়ী (কাঠমান্ডু এয়ারপোর্টে ফ্রি অন-অ্যারাইভাল ভিসা এবং ৫ দিনে মাত্র ৪৫,০০০–৫৫,০০০ টাকা বাজেট)। অন্যদিকে ফ্যামিলি শপিং, থিম পার্ক ও মেডিকেল চেকআপের জন্য থাইল্যান্ড সেরা (আগাম ই-ভিসা ও ৭৫,০০০+ টাকা বাজেট)।",
+    "hotel-savings-guide-bangkok-kl-dubai":
+      "ব্যাংকক, কুয়ালালামপুর ও দুবাইয়ে নিরাপদ ও পরিচ্ছন্ন হোটেলে ৩০%–৪০% খরচ বাঁচাতে মূল ট্যুরিস্ট স্পট থেকে মাত্র ২–৩টি মেট্রো স্টেশন দূরে হোটেল নিন—যেমন ব্যাংককের On Nut BTS, দুবাই দেইরার Al Rigga Metro অথবা কুয়ালালামপুরের Bukit Bintang সংলগ্ন ফ্যামিলি অ্যাপার্টমেন্ট।",
+    "halal-food-guide-bangkok-bangladesh":
+      "ব্যাংককে হালাল খাবারের জন্য Central Islamic Council of Thailand-এর সবুজ লোগো দেখে Pratunam (Petchaburi Soi 7) এবং Sukhumvit Soi 3 (Nana Arab Street) এলাকায় যান। মাত্র ১৮০–৩০০ টাকায় শপিং মলের ফুড কোর্টে এবং Maidaun ও Yana Restaurant-এ সুস্বাদু হালাল খাবার পাওয়া যায়।",
+    "nepal-pokhara-itinerary-bangladesh":
+      "ঢাকা থেকে রিটার্ন ফ্লাইটসহ (২৮,০০০–৩৫,০০০ টাকা) ৫ দিনের কাঠমান্ডু ও পোখরা ভ্রমণে জনপ্রতি মাত্র ৪০,০০০–৫৪,০০০ টাকা খরচ হয়। ত্রিভুবন এয়ারপোর্টে ফ্রি SAARC ভিসা নিয়ে বৌদ্ধনাথ স্তূপা, দরবার স্কয়ার এবং পোখরার ফেওয়া লেক ও সারাংকোট সূর্যোদয় উপভোগ করুন।",
+    "maldives-budget-trip-bangladesh-maafushi":
+      "প্রাইভেট রিসোর্টে লাখ টাকা খরচ না করে মাফুশি (Maafushi) ও হুলহুমালে লোকাল আইল্যান্ডে থেকে ঢাকা থেকে ফ্লাইটসহ মাত্র ৭৫,০০০ টাকার নিচে মালদ্বীপ ভ্রমণ করা যায়। বাংলাদেশিরা পান ফ্রি ৩০ দিনের অন-অ্যারাইভাল ভিসা এবং মাত্র ২৫ ডলারে এয়ারপোর্ট স্পিডবোট ট্রান্সফার।",
+    "singapore-visa-guide-bangladesh-agents":
+      "সিঙ্গাপুর ভ্রমণের জন্য বাংলাদেশিদের ঢাকায় অবস্থিত Embassy-Authorized Visa Agent-এর মাধ্যমে ই-ভিসা (খরচ ৪,২০০–৬,৫০০ টাকা; সময় ৫–৭ কর্মদিবস) করতে হয়। আবেদনের জন্য ফর্ম 14A, ৩৫x৪৫ মিমি ম্যাট ছবি, ১.৫ লক্ষ+ টাকার ব্যাংক স্টেটমেন্ট এবং LOI (Form V39A) প্রয়োজন।",
+    "top-budget-family-destinations-from-dhaka":
+      "ঢাকা থেকে ২০২৬ সালে পরিবার নিয়ে ভ্রমণের শীর্ষ ৬টি বাজেট-বান্ধব দেশ (৫ দিনের জনপ্রতি খরচ অনুযায়ী): ১. নেপাল (৪২,০০০ টাকা, ফ্রি ভিসা), ২. মালয়েশিয়া (৬৮,০০০ টাকা, অনলাইন ই-ভিসা), ৩. থাইল্যান্ড (৭২,০০০ টাকা), ৪. মালদ্বীপ মাফুশি (৭৫,০০০ টাকা), ৫. সিঙ্গাপুর এবং ৬. দুবাই।",
+    "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide":
+      "ঢাকা থেকে ফ্লাইটসহ জনপ্রতি মাত্র ৮৪,০০০–৯৬,০০০ টাকায় ৪ দিনের সিঙ্গাপুর ভ্রমণ করুন: বাংলাদেশি ডুয়াল-কারেন্সি কার্ড সরাসরি MRT গেটে ট্যাপ (SimplyGo) করে যাতায়াত করুন, Farrer Park (Mustafa Centre) বা Bugis (সুলতান মসজিদ) এলাকায় থাকুন এবং MUIS হালাল ফুড কোর্টে খান।",
+    "bangkok-medical-tourism-checkup-guide-bangladesh-bumrungrad-bangkok-hospital":
+      "ব্যাংককের Bumrungrad International (Sukhumvit Soi 3), Bangkok Hospital ও Samitivej-এ অনলাইনে অ্যাপয়েন্টমেন্ট নিয়ে ফ্রি দোভাষী সুবিধাসহ হেলথ চেকআপ (৬,৯০০–২৪,৫০০ বাথ / ২৪,৫০০–৮৭,০০০ টাকা) করা যায়। গুরুতর রোগীদের দ্রুত ভিসার জন্য হাসপাতাল থেকে ফ্রি Medical Invitation Letter পাওয়া যায়।",
+    "best-travel-esim-and-insurance-from-bangladesh-airalo-schengen-umrah":
+      "বিদেশে প্রতিদিন ১,২০০ টাকার রোমিং বিল বাঁচাতে ঢাকা থেকেই ডুয়াল-কারেন্সি কার্ড দিয়ে Airalo অ্যাপে Travel eSIM ($4.50–$9.00) ইনস্টল করুন—যাতে জেদ্দা, ব্যাংকক বা কুয়ালালামপুরে ল্যান্ড করার সাথে সাথেই 5G ইন্টারনেট চালু হয়। সাথে রাখুন ট্রাভেল মেডিকেল ইন্স্যুরেন্স।",
+    "sri-lanka-budget-tour-from-bangladesh-eta-visa-colombo-kandy-ella":
+      "ঢাকা থেকে ফ্লাইটসহ জনপ্রতি মাত্র ৬৮,০০০–৮২,০০০ টাকায় ৬ দিনের শ্রীলঙ্কা (কলম্বো, ক্যান্ডি, নুওয়ারা এলিয়া, এলা Nine Arch Bridge ও গল ফোর্ট) ভ্রমণ করা যায়। বাংলাদেশি পাসপোর্টধারীরা অফিশিয়াল পোর্টালে (eta.gov.lk) মাত্র ২০ ডলারে SAARC ETA ভিসা পান।",
+    "bangladesh-epassport-application-guide-64-districts-urgent-fees":
+      "দালাল ছাড়াই দেশের ৬৪ জেলার পাসপোর্ট অফিসে epassport.gov.bd পোর্টালে ১০ বছর মেয়াদী ৪৮ পৃষ্ঠার ই-পাসপোর্ট করতে ৫,৭৫০ টাকা (রেগুলার), ৮,০৫০ টাকা (এক্সপ্রেস) বা ১০,৩৫০ টাকা (সুপার এক্সপ্রেস, ২ দিনে) লাগে। নিয়মিত ভ্রমণকারীদের জন্য ৬৪ পৃষ্ঠার পাসপোর্ট সেরা।",
+    "bangladesh-epassport-application-renewal-guide-64-districts-urgent-fees":
+      "দালাল ছাড়াই দেশের ৬৪ জেলার পাসপোর্ট অফিসে epassport.gov.bd পোর্টালে ১০ বছর মেয়াদী ৪৮ পৃষ্ঠার ই-পাসপোর্ট করতে ৫,৭৫০ টাকা (রেগুলার), ৮,০৫০ টাকা (এক্সপ্রেস) বা ১০,৩৫০ টাকা (সুপার এক্সপ্রেস, ২ দিনে) লাগে। নিয়মিত ভ্রমণকারীদের জন্য ৬৪ পৃষ্ঠার পাসপোর্ট সেরা।",
+    "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp":
+      "ফ্লাইট ৩+ ঘণ্টা দেরি (Delay), বাতিল বা ওভারবুকিং হলে ইউরোপ/যুক্তরাজ্য রুটে EC 261/2004 আইন অনুযায়ী €250–€600 (৩৩,০০০–৮০,০০০ টাকা) এবং যেকোনো আন্তর্জাতিক এয়ারলাইন্সে লাগেজ হারালে মন্ট্রিয়ল কনভেনশনে সর্বোচ্চ ২,০৫,০০০ টাকা পর্যন্ত ক্ষতিপূরণ দাবি করা যায়।",
+    "best-airlines-from-dhaka-biman-saudia-emirates-qatar-singapore-baggage-guide":
+      "ঢাকা (DAC) থেকে সরাসরি জেদ্দা/মদিনা ওমরাহ ফ্লাইটে ৪৬ কেজি (২x২৩ কেজি) ব্যাগেজ ও ৫ লিটার ফ্রি জমজম পানির সুবিধায় Biman ও Saudia সেরা। সাশ্রয়ী ১-স্টপ ট্রানজিটে Emirates, Qatar ও Gulf Air এবং এশিয়া রুটে Malaysia ও Singapore Airlines শীর্ষে।",
+  };
+
+  const map = isBn ? snippetsBn : snippetsEn;
+  if (map[slug]) {
+    return map[slug];
+  }
+
+  // Fallback: clean ~50-word excerpt
+  const cleanWords = fallbackSummary.replace(/\*\*/g, "").replace(/\s+/g, " ").trim().split(" ");
+  if (cleanWords.length <= 52) return cleanWords.join(" ");
+  return `${cleanWords.slice(0, 50).join(" ").replace(/[.,;:!?-]+$/, "")}...`;
 }
 
 type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "experiences" | "umrah" | "costs" | "tools" | "blog" | "contact" | "sitemap";
@@ -333,7 +612,7 @@ export default function App() {
     } else if (pathname.startsWith("/contact")) {
       section = "contact";
       isLanding = true;
-    } else if (pathname.startsWith("/sitemap")) {
+    } else if (pathname.startsWith("/sitemap") || pathname.startsWith("/pre-departure")) {
       section = "sitemap";
       isLanding = true;
     }
@@ -580,8 +859,7 @@ export default function App() {
       seoTitle = `${activePost.title} | URAL Travel Blog`;
       seoDescription = activePost.summary;
       seoSchema =
-        activePost.slug === "umrah-hajj-guide-bangladesh-nusuk-bdt-cost" ||
-        activePost.slug === "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh"
+        activePost.category === "Hajj & Umrah"
           ? generateFAQSchema(HAJJ_UMRAH_FAQS, {
               url: `https://ural.travel/blog?slug=${activePost.slug}`,
               name: activePost.title,
@@ -626,11 +904,11 @@ export default function App() {
       { name: "Umrah & Hajj Hub", url: "https://ural.travel/umrah" }
     ];
   } else if (section === "sitemap") {
-    seoTitle = "Dynamic XML Sitemap & Complete Travel Route Index | URAL";
-    seoDescription = "Browse the complete index of URAL outbound travel guides from Bangladesh: Dhaka flight routes, visa checklists, hotel neighborhoods, and BDT trip budgets.";
+    seoTitle = "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Embassy Helpline | URAL";
+    seoDescription = "Interactive pre-flight readiness checklist for Bangladeshi travelers: passport dollar endorsement, NOC/GO rules, cabin baggage & Zamzam limits, and overseas Bangladesh Embassy emergency contacts.";
     seoBreadcrumbs = [
       { name: "Home", url: "https://ural.travel/" },
-      { name: "Sitemap & Route Index", url: "https://ural.travel/sitemap" }
+      { name: "Pre-Departure & Embassy Hub", url: "https://ural.travel/pre-departure" }
     ];
   }
 
@@ -696,8 +974,8 @@ export default function App() {
               </span>
             </div>
 
-            {/* Navigation Centered — Senior Mega Menu Architecture */}
-            <nav className="hidden md:flex items-center gap-6">
+            {/* Navigation Centered — Streamlined High-Intent Information Architecture */}
+            <nav className="hidden md:flex items-center gap-4 lg:gap-5">
               {/* 1. Home */}
               <button
                 type="button"
@@ -710,7 +988,20 @@ export default function App() {
                 {t.navHome}
               </button>
 
-              {/* 2. Flights */}
+              {/* 2. Priority #1 Pillar: Umrah & Hajj */}
+              <button
+                type="button"
+                id="nav-umrah"
+                onClick={() => navigateTo("/umrah")}
+                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-semibold hover:text-[#F6B73C] whitespace-nowrap flex items-center gap-1.5 py-2 ${
+                  section === "umrah" ? "text-[#F6B73C]" : "text-white"
+                }`}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" aria-hidden="true" />
+                <span>{t.navUmrah}</span>
+              </button>
+
+              {/* 3. Flights */}
               <button
                 type="button"
                 id="nav-flights"
@@ -722,7 +1013,7 @@ export default function App() {
                 {t.navFlights}
               </button>
 
-              {/* 3. Hotels */}
+              {/* 4. Hotels */}
               <button
                 type="button"
                 id="nav-hotels"
@@ -734,7 +1025,19 @@ export default function App() {
                 {t.navHotels}
               </button>
 
-              {/* 4. MEGA MENU 1: DESTINATIONS & GLOBAL ATTRACTIONS (Europe/UK/USA vs. Asia) */}
+              {/* 5. Visa Checklists */}
+              <button
+                type="button"
+                id="nav-visa"
+                onClick={() => navigateTo("/visa")}
+                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
+                  section === "visa" ? "text-[#F6B73C] font-semibold" : "text-white/75"
+                }`}
+              >
+                {t.navVisa}
+              </button>
+
+              {/* 6. Destinations & Global Attractions Mega Menu */}
               <div className="relative group">
                 <button
                   type="button"
@@ -746,7 +1049,7 @@ export default function App() {
                       : "text-white/75"
                   }`}
                 >
-                  <span>{isBn ? "গন্তব্য ও আকর্ষণ" : "Destinations & Passes"}</span>
+                  <span>{t.navDestinations}</span>
                   <span className="text-[10px] opacity-75">▾</span>
                 </button>
 
@@ -875,7 +1178,7 @@ export default function App() {
                       </button>
                     </div>
 
-                    {/* Column 3: Asia Attractions (Klook) + Dedicated Umrah Spotlight (4 Cols) */}
+                    {/* Column 3: Asia Attractions (Klook) + KKday Promo (4 Cols) */}
                     <div className="col-span-4 flex flex-col justify-between space-y-4">
                       <div className="space-y-3">
                         <div className="space-y-0.5">
@@ -956,152 +1259,82 @@ export default function App() {
                 </div>
               </div>
 
-              {/* 5. Visa Checklists */}
+              {/* 7. PRIMARY TOP-LEVEL BLOG LINK (Crawl Depth = 1 for Topical Authority) */}
               <button
                 type="button"
-                id="nav-visa"
-                onClick={() => navigateTo("/visa")}
+                id="nav-blog"
+                onClick={() => navigateTo("/blog")}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
-                  section === "visa" ? "text-[#F6B73C] font-semibold" : "text-white/75"
+                  section === "blog" ? "text-[#F6B73C] font-semibold" : "text-white/75"
                 }`}
               >
-                {t.navVisa}
+                {t.navBlog}
               </button>
 
-              {/* 6. Dedicated Umrah & Hajj Landing Page */}
-              <button
-                type="button"
-                id="nav-umrah"
-                onClick={() => navigateTo("/umrah")}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-semibold hover:text-[#F6B73C] whitespace-nowrap flex items-center gap-1.5 py-2 ${
-                  section === "umrah" ? "text-[#F6B73C]" : "text-white"
-                }`}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" aria-hidden="true" />
-                <span>{t.navUmrah}</span>
-              </button>
-
-              {/* 7. MEGA MENU 2: TRAVEL TOOLS, BUDGETS & EDITORIAL GUIDES */}
+              {/* 8. COMPACT UTILITY MENU: TOOLS, BUDGETS & PRE-DEPARTURE HUB */}
               <div className="relative group">
                 <button
                   type="button"
                   id="nav-tools-megamenu"
+                  onClick={() => navigateTo("/tools")}
                   className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] flex items-center gap-1 py-2 whitespace-nowrap ${
-                    ["costs", "tools", "blog", "contact", "sitemap"].includes(section)
+                    ["costs", "tools", "contact", "sitemap"].includes(section)
                       ? "text-[#F6B73C] font-semibold"
                       : "text-white/75"
                   }`}
                 >
-                  <span>{isBn ? "টুলস ও গাইড" : "Tools & Guides"}</span>
+                  <span>{t.navTools}</span>
                   <span className="text-[10px] opacity-75">▾</span>
                 </button>
 
-                <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-150 absolute right-0 top-full pt-2 w-[560px] z-50">
-                  <div className="bg-[#0F172A] border border-white/15 rounded-3xl shadow-2xl p-5 grid grid-cols-2 gap-5 text-left">
-                    {/* Left Column: Interactive Tools & Flight Compensation */}
-                    <div className="space-y-2.5 border-r border-white/10 pr-4">
-                      <span className="text-[10px] font-mono text-[#F6B73C] font-bold uppercase tracking-wider block">
-                        {isBn ? "ইন্টারেক্টিভ টুলস ও ক্যালকুলেটর" : "Interactive Calculators & Claims"}
-                      </span>
+                <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-150 absolute right-0 top-full pt-2 w-[340px] z-50">
+                  <div className="bg-[#0F172A] border border-white/15 rounded-3xl shadow-2xl p-4 space-y-1.5 text-left">
+                    <span className="text-[10px] font-mono text-[#F6B73C] font-bold uppercase tracking-wider block px-2 pb-1">
+                      {isBn ? "ইন্টারেক্টিভ টুলস ও হেল্পলাইন" : "Calculators, Checklists & Support"}
+                    </span>
 
-                      {[
-                        {
-                          id: "costs",
-                          label: isBn ? "📊 দেশভিত্তিক বাজেট শিট (BDT)" : "📊 Trip Cost & Budget Matrices",
-                          sub: isBn ? "৩-স্তরের পূর্ণাঙ্গ খরচের হিসাব" : "3-tier BDT budgets for 6 countries",
-                          path: "/costs",
-                        },
-                        {
-                          id: "tools",
-                          label: isBn ? "🧮 কারেন্সি কনভার্টার ও চেকলিস্ট" : "🧮 Currency, Packing & Visa Odds",
-                          sub: isBn ? "লাইভ BDT রেট ও প্যাকিং লিস্ট" : "Live BDT FX converter & trip tools",
-                          path: "/tools",
-                        },
-                        {
-                          id: "airhelp",
-                          label: isBn ? "🛡️ ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "🛡️ Flight Delay Claim (€600 / AirHelp)",
-                          sub: isBn ? "প্রোমো কোড AHTPO11 (১১% ছাড়)" : "Up to BDT 78k payout + Code AHTPO11",
-                          path: "/tools?tab=airhelp",
-                        },
-                        {
-                          id: "contact",
-                          label: isBn ? "💬 BDT বুকিং ও সাপোর্ট ডেস্ক" : "💬 Contact & BDT Booking Desk",
-                          sub: isBn ? "WhatsApp: +8801784385335" : "Pay in BDT via bank / bKash",
-                          path: "/contact",
-                        },
-                      ].map((toolItem) => (
-                        <button
-                          key={toolItem.id}
-                          type="button"
-                          onClick={() => navigateTo(toolItem.path)}
-                          className="w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer"
-                        >
-                          <div className="text-xs font-semibold text-white">{toolItem.label}</div>
-                          <div className="text-[11px] text-slate-400">{toolItem.sub}</div>
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Right Column: Editorial Guides, Blog & Sitemap */}
-                    <div className="space-y-2.5">
-                      <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider block">
-                        {isBn ? "জনপ্রিয় ট্রাভেল গাইড ও ব্লগ" : "High-Demand Bangladeshi Guides"}
-                      </span>
-
-                      {[
-                        {
-                          label: isBn
-                            ? "💳 Dual-Currency Card এন্ডোর্সমেন্ট"
-                            : "💳 Dual-Currency Card Endorsement",
-                          sub: isBn
-                            ? "$12,000 বার্ষিক কোটা ও ব্যাংক গাইড"
-                            : "2026 passport dollar stamp rules",
-                          path: "/blog?slug=dual-currency-card-endorsement-bangladesh",
-                        },
-                        {
-                          label: isBn
-                            ? "🕋 ওমরাহ Nusuk ও ই-ভিসা গাইড"
-                            : "🕋 Umrah Nusuk & e-Visa Playbook",
-                          sub: isBn
-                            ? "Saudi Visa Bio ও বুলেট ট্রেন নিয়ম"
-                            : "Step-by-step DIY Umrah tutorial",
-                          path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
-                        },
-                        {
-                          label: isBn
-                            ? "🛂 ঢাকা এয়ারপোর্ট ইমিগ্রেশন চেকলিস্ট"
-                            : "🛂 Dhaka Airport Immigration & NOC",
-                          sub: isBn
-                            ? "প্রথমবার বিদেশ যাত্রার কাগজপত্র"
-                            : "First-time flyer document checklist",
-                          path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go",
-                        },
-                        {
-                          label: isBn
-                            ? "📖 সবগুলো ট্রাভেল ব্লগ দেখুন (12)"
-                            : "📖 All 12 Travel Guides & Articles",
-                          sub: isBn ? "সম্পূর্ণ এডিটোরিয়াল ইনডেক্স" : "Browse full editorial library",
-                          path: "/blog",
-                        },
-                        {
-                          label: isBn
-                            ? "🗺️ সাইটম্যাপ (HTML ও XML Sitemap)"
-                            : "🗺️ Complete Route Index & Sitemap",
-                          sub: isBn ? "সবগুলো পেজের ডিরেক্টরি" : "All routes, tools & guides",
-                          path: "/sitemap",
-                        },
-                      ].map((guideItem, idx) => (
-                        <button
-                          key={idx}
-                          type="button"
-                          onClick={() => navigateTo(guideItem.path)}
-                          className="w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer"
-                        >
-                          <div className="text-xs font-semibold text-white">{guideItem.label}</div>
-                          <div className="text-[11px] text-slate-400">{guideItem.sub}</div>
-                        </button>
-                      ))}
-                    </div>
+                    {[
+                      {
+                        id: "costs",
+                        label: isBn ? "📊 দেশভিত্তিক বাজেট শিট (BDT)" : "📊 Trip Cost & Budget Matrices",
+                        sub: isBn ? "৬টি দেশের ৩-স্তরের খরচের হিসাব" : "3-tier BDT budgets for 6 countries",
+                        path: "/costs",
+                      },
+                      {
+                        id: "tools",
+                        label: isBn ? "🧮 কারেন্সি কনভার্টার ও প্যাকিং" : "🧮 Currency, Packing & Visa Odds",
+                        sub: isBn ? "লাইভ BDT রেট ও প্যাকিং লিস্ট" : "Live BDT FX converter & trip tools",
+                        path: "/tools",
+                      },
+                      {
+                        id: "pre-departure",
+                        label: isBn ? "✈️ প্রি-ডিপার্চার ও দূতাবাস হেল্পলাইন" : "✈️ Pre-Departure & Embassy Hub",
+                        sub: isBn ? "লাগেজ নিয়ম, জমজম ও জরুরি নাম্বার" : "DAC baggage, Zamzam & embassy contacts",
+                        path: "/pre-departure",
+                      },
+                      {
+                        id: "airhelp",
+                        label: isBn ? "🛡️ ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "🛡️ Flight Delay Claim (€600 / AirHelp)",
+                        sub: isBn ? "প্রোমো কোড AHTPO11 (১১% ছাড়)" : "Up to BDT 78k payout + Code AHTPO11",
+                        path: "/tools?tab=airhelp",
+                      },
+                      {
+                        id: "contact",
+                        label: isBn ? "💬 BDT বুকিং ও সাপোর্ট ডেস্ক" : "💬 Contact & BDT Booking Desk",
+                        sub: isBn ? "WhatsApp: +8801784385335" : "Pay in BDT via bank / bKash",
+                        path: "/contact",
+                      },
+                    ].map((toolItem) => (
+                      <button
+                        key={toolItem.id}
+                        type="button"
+                        onClick={() => navigateTo(toolItem.path)}
+                        className="w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer"
+                      >
+                        <div className="text-xs font-semibold text-white">{toolItem.label}</div>
+                        <div className="text-[11px] text-slate-400">{toolItem.sub}</div>
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -1163,15 +1396,20 @@ export default function App() {
                 <nav className="flex-1 py-4 overflow-y-auto">
                   {[
                     { id: "home", label: t.navHome, path: "/" },
+                    { id: "umrah", label: `${t.navUmrah} (Priority Hub)`, path: "/umrah" },
                     { id: "flights", label: t.navFlights, path: "/flights" },
                     { id: "hotels", label: t.navHotels, path: "/hotels" },
                     { id: "visa", label: t.navVisa, path: "/visa" },
                     { id: "destinations", label: t.navDestinations, path: "/destinations" },
+                    { id: "blog", label: `${t.navBlog} (${localizedBlogs.length} Guides)`, path: "/blog" },
                     { id: "experiences", label: `${t.navExperiences} (Tiqets & Klook)`, path: "/experiences" },
-                    { id: "umrah", label: `${t.navUmrah} (2026 Hub)`, path: "/umrah" },
                     { id: "costs", label: t.navCosts, path: "/costs" },
                     { id: "tools", label: `${t.navTools} & AirHelp`, path: "/tools" },
-                    { id: "blog", label: t.navBlog, path: "/blog" },
+                    {
+                      id: "sitemap",
+                      label: isBn ? "প্রি-ডিপার্চার ও দূতাবাস হেল্পলাইন" : "Pre-Departure & Embassy Hub",
+                      path: "/pre-departure",
+                    },
                     { id: "contact", label: t.navContact, path: "/contact" }
                   ].map((item) => (
                     <button
@@ -3547,15 +3785,23 @@ export default function App() {
                     },
                     {
                       id: "Hajj & Umrah",
-                      label: isBn ? "Hajj ও Umrah (2)" : "Hajj & Umrah (2)",
+                      label: isBn
+                        ? `হজ্জ ও ওমরাহ (${localizedBlogs.filter((b) => b.category === "Hajj & Umrah").length})`
+                        : `Hajj & Umrah (${localizedBlogs.filter((b) => b.category === "Hajj & Umrah").length})`,
+                    },
+                    {
+                      id: "Ziyarah & Stopovers",
+                      label: isBn
+                        ? `জিয়ারত ও স্টপওভার (${localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers").length})`
+                        : `Ziyarah & Stopovers (${localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers").length})`,
                     },
                     {
                       id: "Visa & Immigration",
-                      label: isBn ? "Visa ও Immigration (3)" : "Visa & Immigration (3)",
+                      label: isBn ? "ভিসা ও ইমিগ্রেশন (3)" : "Visa & Immigration (3)",
                     },
                     {
                       id: "Banking & Payments",
-                      label: isBn ? "Dual-Currency Card ও BDT (1)" : "Card Endorsement & BDT (1)",
+                      label: isBn ? "ডুয়াল-কারেন্সি কার্ড ও BDT (1)" : "Card Endorsement & BDT (1)",
                     },
                     {
                       id: "Family & Budget",
@@ -3564,7 +3810,7 @@ export default function App() {
                     {
                       id: "Flights, Hotels & Food",
                       label: isBn
-                        ? "Flight, Hotel ও Halal খাবার (3)"
+                        ? "ফ্লাইট, হোটেল ও হালাল খাবার (3)"
                         : "Flights, Hotels & Halal Food (3)",
                     },
                   ].map((tab) => {
@@ -3614,34 +3860,12 @@ export default function App() {
               </div>
             </div>
 
-            {/* 3. 3-CARDS-PER-ROW BLOG GRID (THUMBNAIL + ~150-WORD EXCERPT + 'READ FULL BLOG' BUTTON) */}
+            {/* 3. 3-CARDS-PER-ROW BLOG GRID (UNIQUE THUMBNAIL + DARK H2 TITLE + ~50-WORD AEO SNIPPET + 'READ FULL BLOG' BUTTON) */}
             {(() => {
-              const build150WordExcerpt = (summary: string, content: string, targetWords = 150): string => {
-                const cleanParagraphs = content
-                  .split("\n")
-                  .map((line) => line.trim())
-                  .filter(
-                    (line) =>
-                      line.length > 0 &&
-                      !/^([0-9]+|[০-৯]+)\.\s+/.test(line) &&
-                      !(line.endsWith(":") && line.length < 100)
-                  )
-                  .map((line) => line.replace(/^(-|•|\*)\s+/, ""));
-
-                const combinedText = `${summary.trim()} ${cleanParagraphs.join(" ")}`
-                  .replace(/\s+/g, " ")
-                  .trim();
-
-                const words = combinedText.split(" ");
-                if (words.length <= targetWords) {
-                  return combinedText;
-                }
-                return `${words.slice(0, targetWords).join(" ").replace(/[.,;:!?-]+$/, "")}...`;
-              };
-
               const orderedBlogs = [
                 ...localizedBlogs.filter((b) => b.category === "Hajj & Umrah"),
-                ...localizedBlogs.filter((b) => b.category !== "Hajj & Umrah"),
+                ...localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers"),
+                ...localizedBlogs.filter((b) => b.category !== "Hajj & Umrah" && b.category !== "Ziyarah & Stopovers"),
               ];
 
               const filteredBlogs = orderedBlogs.filter((post) => {
@@ -3665,7 +3889,7 @@ export default function App() {
               if (filteredBlogs.length === 0) {
                 return (
                   <div className="bg-white border border-slate-200 rounded-2xl p-10 text-center space-y-3">
-                    <h3 className="font-serif text-lg font-bold text-slate-900">
+                    <h3 className="font-serif text-[20px] font-bold text-[#0F172A]">
                       {isBn ? "কোনো ট্রাভেল গাইড খুঁজে পাওয়া যায়নি" : "No matching travel guides found"}
                     </h3>
                     <p className="text-xs text-slate-600 max-w-md mx-auto">
@@ -3693,7 +3917,7 @@ export default function App() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
                   {filteredBlogs.map((post) => {
                     const coverImg = getBlogCoverImage(post.slug);
-                    const excerpt150Words = build150WordExcerpt(post.summary, post.content, 150);
+                    const aeoSnippet50Words = getBlogAeoSnippet50Words(post.slug, isBn, post.summary);
 
                     return (
                       <article
@@ -3702,7 +3926,7 @@ export default function App() {
                         className="group bg-white border border-slate-200/90 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between cursor-pointer"
                       >
                         <div className="flex flex-col">
-                          {/* Card Thumbnail Image */}
+                          {/* Unique Card Thumbnail Image */}
                           <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
                             <img
                               src={coverImg}
@@ -3720,8 +3944,8 @@ export default function App() {
                             </div>
                           </div>
 
-                          {/* Card Body: Metadata + H2 Title + 150-Word Excerpt */}
-                          <div className="p-6 space-y-3.5">
+                          {/* Card Body: Metadata + Dark H2 Title (20px-22px) + ~50-Word AEO Main Snippet (14px) */}
+                          <div className="p-6 space-y-3">
                             <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500">
                               <span>{post.date}</span>
                               <span aria-hidden="true">·</span>
@@ -3732,12 +3956,12 @@ export default function App() {
                               </span>
                             </div>
 
-                            <h2 className="font-serif text-lg sm:text-xl font-bold text-slate-900 group-hover:text-[#102A43] leading-snug text-balance">
+                            <h2 className="font-serif text-[20px] sm:text-[22px] font-bold text-[#0F172A] group-hover:text-[#102A43] leading-[1.3] text-balance">
                               {post.title}
                             </h2>
 
-                            <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
-                              {excerpt150Words}
+                            <p className="text-[14px] text-slate-700 leading-[1.65]">
+                              {aeoSnippet50Words}
                             </p>
                           </div>
                         </div>
@@ -3763,6 +3987,9 @@ export default function App() {
               );
             })()}
 
+            {/* Admin-Only SEO Matrix (Hidden from regular site visitors) */}
+            {isAdmin && <TopicalAuthorityBlueprint lang={lang} onNavigate={navigateTo} />}
+
             {/* 4. SMART CONVERSION WIDGETS SECTION ON BLOG DIRECTORY PAGE */}
             <div className="pt-8 border-t border-slate-200 space-y-8">
               <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-4">
@@ -3773,7 +4000,7 @@ export default function App() {
                         ? "লাইভ Flight ও Umrah রুটের ভাড়া তুলনা"
                         : "Live Airfare & Umrah Route Comparison"}
                     </div>
-                    <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+                    <h2 className="font-serif text-[22px] sm:text-[26px] font-bold text-[#0F172A]">
                       {isBn
                         ? "ঢাকা (DAC) থেকে ফ্লাইটের সর্বনিম্ন ভাড়া যাচাই করুন"
                         : "Compare Flights from Dhaka (DAC) While You Plan"}
@@ -3841,11 +4068,277 @@ export default function App() {
             📖 DEDICATED SINGLE BLOG POST PAGE (/blog?slug=...)
         ------------------------------------------------------------- */}
         {section === "blog" && !isLanding && (
-          <div className="space-y-10 animate-fade-in">
+          <div className="space-y-8 animate-fade-in">
             {(() => {
               const activePost = localizedBlogs.find((p) => p.slug === parameterId) || localizedBlogs[0];
               const activeCoverImg = getBlogCoverImage(activePost.slug);
-              const relatedPosts = localizedBlogs.filter((p) => p.slug !== activePost.slug).slice(0, 3);
+              const sameCategoryPosts = localizedBlogs.filter(
+                (p) => p.slug !== activePost.slug && p.category === activePost.category
+              );
+              const otherCategoryPosts = localizedBlogs.filter(
+                (p) => p.slug !== activePost.slug && p.category !== activePost.category
+              );
+              const relatedPosts = [...sameCategoryPosts, ...otherCategoryPosts].slice(0, 3);
+
+              // First-Occurrence Semantic Contextual Internal Linker (Nathan Gotch / Koray Tugberk Silo Rule)
+              // Ensures each target URL is linked at most ONCE inside the article body (no spammy duplicate links, no self-links)
+              const usedInternalPaths = new Set<string>();
+              const currentBlogPath = `/blog?slug=${activePost.slug}`;
+
+              const CONTEXTUAL_INTERNAL_LINK_RULES: { pattern: RegExp; path: string; title: string }[] = [
+                {
+                  pattern: /\b(Nusuk App|Nusuk portal|Rawdah Shareef permit|Riyazul Jannah|রিয়াজুল জান্নাত|Nusuk অ্যাপ)\b/i,
+                  path: "/blog?slug=nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
+                  title: "Nusuk App & Rawdah Shareef Permit Step-by-Step Guide",
+                },
+                {
+                  pattern: /\b(96-Hour Saudi Stopover Visa|Saudi Stopover Visa|৯৬ ঘণ্টার Saudi Stopover Visa|স্টপওভার ভিসা)\b/i,
+                  path: "/blog?slug=saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
+                  title: "96-Hour Saudi Stopover Visa Guide for Bangladeshis",
+                },
+                {
+                  pattern: /\b(Haramain Bullet Train|Haramain High-Speed Train|Jabal Omar|Mahbas Al Jin|হারামাইন বুলেট ট্রেন)\b/i,
+                  path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
+                  title: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide",
+                },
+                {
+                  pattern: /\b(Open-Jaw|Multi-City ticket|মাল্টি-সিটি টিকিট|Open-Jaw Flight)\b/i,
+                  path: "/blog?slug=dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia",
+                  title: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy",
+                },
+                {
+                  pattern: /\b(Dual-Currency Card|passport dollar endorsement|\$12,000 annual travel quota|ডুয়াল-কারেন্সি কার্ড|ডলার এনডোর্সমেন্ট)\b/i,
+                  path: "/blog?slug=dual-currency-card-endorsement-bangladesh",
+                  title: "Dual-Currency Card & $12,000 Passport Endorsement Guide",
+                },
+                {
+                  pattern: /\b(elderly parents|electric scooter|wheelchair assistance|বয়স্ক মা-বাবা|ইলেকট্রিক স্কুটার)\b/i,
+                  path: "/blog?slug=umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
+                  title: "Performing Umrah with Elderly Parents from Bangladesh",
+                },
+                {
+                  pattern: /\b(Ladies' Gates 25–29|Northern Gates 25 to 29|without a male Mahram|মাহরাম ছাড়া)\b/i,
+                  path: "/blog?slug=umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
+                  title: "Umrah Rules for Bangladeshi Women & Ladies' Gates 25–29",
+                },
+                {
+                  pattern: /\b(Miqat Qarn al-Manazil|wear Ihram|ইহরাম বাঁধার নিয়ম|মিকাত)\b/i,
+                  path: "/blog?slug=wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
+                  title: "Wearing Ihram from Dhaka Airport vs. Transit Flight Miqat Guide",
+                },
+                {
+                  pattern: /\b(5-liter sealed Zamzam|Zamzam carton|Ajwa dates|জমজম বক্স|আজওয়া খেজুর)\b/i,
+                  path: "/blog?slug=official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
+                  title: "Official Zamzam Water, Dates & Gold Customs Rules",
+                },
+                {
+                  pattern: /\b(Masjid Quba|Mount Uhud|Taif day trip|Hira Cultural District|মসজিদে কুবা|তায়েফ ডে-ট্রিপ)\b/i,
+                  path: "/blog?slug=makkah-madinah-badr-taif-historical-ziyarah-taxi-guide",
+                  title: "Complete Makkah, Madinah, Badr & Taif Ziyarah Guide",
+                },
+                {
+                  pattern: /\b(Sheikh Zayed Grand Mosque|Qasr Al Watan|শেখ জায়েদ গ্র্যান্ড মসজিদ)\b/i,
+                  path: "/blog?slug=abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide",
+                  title: "Abu Dhabi Sheikh Zayed Mosque & Qasr Al Watan Day Trip Guide",
+                },
+                {
+                  pattern: /\b(Putrajaya Pink Mosque|Masjid Putra|Islamic Arts Museum Malaysia|পুত্রজায়া পিঙ্ক মসজিদ)\b/i,
+                  path: "/blog?slug=malaysia-islamic-heritage-putrajaya-halal-family-tour-guide",
+                  title: "Malaysia Islamic Heritage & Putrajaya Halal Family Guide",
+                },
+                {
+                  pattern: /\b(Skip-the-Line|Louvre Museum|Colosseum|স্কিপ-দ্য-লাইন)\b/i,
+                  path: "/blog?slug=europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
+                  title: "Europe, UK & USA Sightseeing Skip-the-Line & Stopover Umrah Guide",
+                },
+                {
+                  pattern: /\b(Islamic Dual-Currency|Shariah-Compliant|Khidmah Card|Riba-Free|ইসলামিক ডুয়াল-কারেন্সি|শরীয়াহ-সম্মত)\b/i,
+                  path: "/blog?slug=shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
+                  title: "Best Shariah-Compliant Islamic Dual-Currency Cards in Bangladesh",
+                },
+                {
+                  pattern: /\b(RFCD Account|Resident Foreign Currency Deposit|\$300 single-transaction|RFCD একাউন্ট|\$300 ক্যাপ)\b/i,
+                  path: "/blog?slug=rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
+                  title: "RFCD Account vs. Regular Travel Quota ($300 Cap Solution)",
+                },
+                {
+                  pattern: /\b(bKash|Nagad|BDT Support Desk|local bank transfer|বিকাশ|নগদে পেমেন্ট)\b/i,
+                  path: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
+                  title: "How to Book Flights & Makkah Hotels in BDT via bKash/Bank Transfer",
+                },
+                {
+                  pattern: /\b(Dynamic Currency Conversion|5% DCC|SuperRich|ডাবল কনভার্সন|DCC চার্জ)\b/i,
+                  path: "/blog?slug=cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
+                  title: "Cash SAR / USD vs. Dual-Currency Card & Avoiding 5% DCC Fees",
+                },
+                {
+                  pattern: /\b(thaievisa\.go\.th|Thailand e-Visa|Thailand Tourist Visa|থাইল্যান্ড ই-ভিসা)\b/i,
+                  path: "/blog?slug=thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
+                  title: "Thailand Official e-Visa Guide from Bangladesh (thaievisa.go.th)",
+                },
+                {
+                  pattern: /\b(Malaysia Digital Arrival Card|MDAC|malaysiavisa\.imi\.gov\.my|মালয়েশিয়া ই-ভিসা)\b/i,
+                  path: "/blog?slug=malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration",
+                  title: "Malaysia Online e-Visa & Free MDAC Arrival Card Guide",
+                },
+                {
+                  pattern: /\b(Form V39A|Letter of Introduction|Authorized Visa Agent|সিঙ্গাপুর ভিসা)\b/i,
+                  path: "/blog?slug=singapore-visa-guide-bangladesh-agents",
+                  title: "Singapore Tourist Visa Guide from Bangladesh (LOI Form V39A)",
+                },
+                {
+                  pattern: /\b(Travel History Ladder|Fresh Passport|blank passport|নতুন পাসপোর্টে|ট্রাভেল হিস্ট্রি)\b/i,
+                  path: "/blog?slug=fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia",
+                  title: "First International Trip on a Fresh Bangladeshi Passport (3-Step Ladder)",
+                },
+                {
+                  pattern: /\b(SimplyGo|Mustafa Centre|Gardens by the Bay|Sentosa|সিঙ্গাপুর MRT)\b/i,
+                  path: "/blog?slug=singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide",
+                  title: "Singapore 4-Day Budget Itinerary from Dhaka (MRT SimplyGo & Halal Food)",
+                },
+                {
+                  pattern: /\b(Bumrungrad|Bangkok Hospital|Samitivej|Medical Check-Up|বামরুনগ্রাদ|মেডিকেল ভিসা)\b/i,
+                  path: "/blog?slug=bangkok-medical-tourism-checkup-guide-bangladesh-bumrungrad-bangkok-hospital",
+                  title: "Bangkok Medical Check-Up & Hospital Guide from Bangladesh (Bumrungrad & Bangkok Hospital)",
+                },
+                {
+                  pattern: /\b(Airalo|Travel eSIM|Schengen Travel Insurance|ট্রাভেল ই-সিম|ট্রাভেল ইন্স্যুরেন্স)\b/i,
+                  path: "/blog?slug=best-travel-esim-and-insurance-from-bangladesh-airalo-schengen-umrah",
+                  title: "Best Travel eSIM (Airalo) & Overseas Medical Insurance from Bangladesh",
+                },
+                {
+                  pattern: /\b(Sri Lanka ETA|Nine Arch Bridge|Nuwara Eliya|শ্রীলঙ্কা ভ্রমণ|শ্রীলঙ্কা ভিসা)\b/i,
+                  path: "/blog?slug=sri-lanka-budget-tour-from-bangladesh-eta-visa-colombo-kandy-ella",
+                  title: "Sri Lanka 6-Day Budget Tour from Bangladesh (ETA Visa, Kandy & Ella Train)",
+                },
+                {
+                  pattern: /\b(epassport\.gov\.bd|e-Passport Renewal|Super Express Passport|ই-পাসপোর্ট রিনিউ|৬৪ পৃষ্ঠার পাসপোর্ট)\b/i,
+                  path: "/blog?slug=bangladesh-epassport-application-renewal-guide-64-districts-urgent-fees",
+                  title: "Bangladesh e-Passport Application & Urgent Renewal Guide (All 64 Districts)",
+                },
+                {
+                  pattern: /\b(AirHelp|EC 261\/2004|PIR Report|Flight Delay Compensation|ফ্লাইট ডিলে ক্ষতিপূরণ)\b/i,
+                  path: "/blog?slug=flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
+                  title: "Flight Delay, Cancellation & Lost Baggage Compensation Guide for Bangladeshis",
+                },
+                {
+                  pattern: /\b(Biman vs\.? Saudia|46kg Baggage|২x২৩ কেজি|বিমান বনাম সৌদিয়া)\b/i,
+                  path: "/blog?slug=best-airlines-from-dhaka-biman-saudia-emirates-qatar-singapore-baggage-guide",
+                  title: "Best Airlines Flying from Dhaka Compared (Biman, Saudia, Emirates, Qatar & Baggage Rules)",
+                },
+                {
+                  pattern: /\b(Dhaka Airport emigration|NOC|Government Order|ইমিগ্রেশন)\b/i,
+                  path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go",
+                  title: "Dhaka Airport Outbound Immigration Checklist (NOC & GO Rules)",
+                },
+                {
+                  pattern: /\b(DIY Umrah|10-day DIY Umrah|নিজে নিজে ওমরাহ)\b/i,
+                  path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+                  title: "DIY Umrah & Hajj Preparation from Bangladesh (10-Day BDT Budget)",
+                },
+              ];
+
+              const injectContextualInternalLink = (textSegment: string, keyPrefix: string): React.ReactNode => {
+                if (usedInternalPaths.size >= 6) return textSegment;
+                for (const rule of CONTEXTUAL_INTERNAL_LINK_RULES) {
+                  if (rule.path === currentBlogPath || usedInternalPaths.has(rule.path)) continue;
+                  const match = rule.pattern.exec(textSegment);
+                  if (match && match.index !== undefined) {
+                    const matchedWord = match[0];
+                    const before = textSegment.slice(0, match.index);
+                    const after = textSegment.slice(match.index + matchedWord.length);
+                    usedInternalPaths.add(rule.path);
+                    return (
+                      <React.Fragment key={keyPrefix}>
+                        {before}
+                        <a
+                          href={rule.path}
+                          title={rule.title}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            navigateTo(rule.path);
+                          }}
+                          className="text-[#102A43] font-semibold underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-[#D4941A] transition-colors cursor-pointer"
+                        >
+                          {matchedWord}
+                        </a>
+                        {after}
+                      </React.Fragment>
+                    );
+                  }
+                }
+                return textSegment;
+              };
+
+              const renderFormattedText = (rawText: string) => {
+                const parts = rawText.split(/(\*\*[^*]+\*\*)/g);
+                return parts.map((part, pIdx) => {
+                  if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
+                    const boldInner = part.slice(2, -2);
+                    return (
+                      <strong key={pIdx} className="font-semibold text-[#0F172A]">
+                        {injectContextualInternalLink(boldInner, `bold-${pIdx}`)}
+                      </strong>
+                    );
+                  }
+                  return <React.Fragment key={pIdx}>{injectContextualInternalLink(part, `txt-${pIdx}`)}</React.Fragment>;
+                });
+              };
+
+              const officialGovSources =
+                activePost.category === "Hajj & Umrah" || activePost.category === "Ziyarah & Stopovers"
+                  ? [
+                      {
+                        name: isBn ? "ধর্ম মন্ত্রণালয় বাংলাদেশ (hajj.gov.bd)" : "BD Ministry of Religious Affairs (hajj.gov.bd)",
+                        url: "https://www.hajj.gov.bd",
+                      },
+                      {
+                        name: isBn ? "অফিশিয়াল Nusuk পোর্টাল (nusuk.sa)" : "Official Saudi Nusuk Portal (nusuk.sa)",
+                        url: "https://www.nusuk.sa",
+                      },
+                      {
+                        name: isBn ? "সৌদি হজ ও ওমরাহ মন্ত্রণালয় (haj.gov.sa)" : "Saudi Ministry of Hajj & Umrah (haj.gov.sa)",
+                        url: "https://www.haj.gov.sa",
+                      },
+                      {
+                        name: isBn ? "সৌদি ই-ভিসা পোর্টাল (ksavisa.sa)" : "Saudi Unified Visa Platform (ksavisa.sa)",
+                        url: "https://ksavisa.sa",
+                      },
+                      {
+                        name: isBn ? "হারামাইন বুলেট ট্রেন (sar.hhr.sa)" : "Haramain High-Speed Railway (sar.hhr.sa)",
+                        url: "https://sar.hhr.sa",
+                      },
+                      {
+                        name: isBn ? "UAE পোর্টাল (u.ae) ও JAKIM (islam.gov.my)" : "UAE Official Portal (u.ae) & Malaysia JAKIM (islam.gov.my)",
+                        url: "https://u.ae",
+                      },
+                    ]
+                  : [
+                      {
+                        name: isBn ? "বাংলাদেশ ই-পাসপোর্ট পোর্টাল (epassport.gov.bd)" : "BD e-Passport Portal (epassport.gov.bd)",
+                        url: "https://www.epassport.gov.bd",
+                      },
+                      {
+                        name: isBn ? "বাংলাদেশ ব্যাংক ট্রাভেল কোটা (bb.org.bd)" : "Bangladesh Bank FX Rules (bb.org.bd)",
+                        url: "https://www.bb.org.bd",
+                      },
+                      {
+                        name: isBn ? "জাতীয় রাজস্ব বোর্ড কাস্টমস (nbr.gov.bd)" : "Bangladesh Customs NBR (nbr.gov.bd)",
+                        url: "https://nbr.gov.bd",
+                      },
+                      {
+                        name: isBn ? "থাইল্যান্ড ই-ভিসা (thaievisa.go.th)" : "Official Thai e-Visa (thaievisa.go.th)",
+                        url: "https://www.thaievisa.go.th",
+                      },
+                      {
+                        name: isBn ? "মালয়েশিয়া ই-ভিসা ও MDAC (imi.gov.my)" : "Malaysia Immigration & MDAC (imi.gov.my)",
+                        url: "https://malaysiavisa.imi.gov.my",
+                      },
+                      {
+                        name: isBn ? "সিঙ্গাপুর ICA (ica.gov.sg)" : "Singapore ICA Portal (ica.gov.sg)",
+                        url: "https://www.ica.gov.sg",
+                      },
+                    ];
 
               return (
                 <>
@@ -3879,148 +4372,265 @@ export default function App() {
                     </nav>
                   </div>
 
-                  {/* Single Article Hero Banner */}
-                  <div className="relative rounded-3xl overflow-hidden border border-slate-800 bg-[#0B1628] shadow-lg min-h-[280px] sm:min-h-[340px] flex items-end">
-                    <img
-                      src={activeCoverImg}
-                      alt={activePost.title}
-                      referrerPolicy="no-referrer"
-                      className="absolute inset-0 w-full h-full object-cover object-center opacity-50"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1628] via-[#0B1628]/75 to-[#0B1628]/25" />
-
-                    <div className="relative z-10 w-full p-6 sm:p-10 space-y-3 max-w-4xl">
-                      <div className="flex flex-wrap items-center gap-2 text-xs text-slate-300">
-                        <span className="font-semibold text-[#F6B73C]">{activePost.category}</span>
-                        <span aria-hidden="true">·</span>
-                        <span>{activePost.date}</span>
-                        <span aria-hidden="true">·</span>
-                        <span>{activePost.readTime}</span>
-                        <span aria-hidden="true">·</span>
-                        <span>{isBn ? `লেখক: ${activePost.author}` : `By ${activePost.author}`}</span>
-                      </div>
-
-                      <h1 className="font-serif text-2xl sm:text-4xl font-black text-white leading-tight text-balance">
-                        {activePost.title}
-                      </h1>
-                    </div>
-                  </div>
-
                   {/* Main Article 2-Column Layout (Content + Sticky Trip Planner Sidebar) */}
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    {/* Left Column: Full Article Content (8 Cols) */}
-                    <article className="lg:col-span-8 space-y-8 bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-xs">
-                      {/* Executive Overview / Primary Description Box */}
-                      <div className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl space-y-1.5">
-                        <div className="text-xs font-semibold text-[#102A43]">
-                          {isBn ? "মূল সারসংক্ষেপ (Article Summary)" : "Article Overview & Key Takeaway"}
+                    {/* Left Column: Full Article Content (8 Cols) with Dark H1 / H2 / H3 Hierarchy */}
+                    <article className="lg:col-span-8 space-y-7 bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-xs">
+                      {/* Primary Semantic H1 in Dark Color (#0F172A) & Large Pixel Scale (30px–38px) */}
+                      <header className="space-y-5 border-b border-slate-200 pb-6">
+                        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="font-bold text-[#102A43]">{activePost.category}</span>
+                            <span aria-hidden="true">·</span>
+                            <span>{activePost.date}</span>
+                            <span aria-hidden="true">·</span>
+                            <span>{activePost.readTime}</span>
+                            <span aria-hidden="true">·</span>
+                            <span>{isBn ? `লেখক: ${activePost.author}` : `By ${activePost.author}`}</span>
+                          </div>
+                          <span className="font-mono text-emerald-700 font-semibold">
+                            {isBn ? "✓ সরকারি সূত্র হতে যাচাইকৃত (2026)" : "✓ Verified Official Rules (2026)"}
+                          </span>
                         </div>
-                        <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                          {activePost.summary}
-                        </p>
-                      </div>
 
-                      {/* Full Long-Form Verified Guide Content with Semantic H2 / H3 Hierarchy for SEO */}
-                      <div className="prose prose-slate max-w-none text-slate-800 leading-relaxed space-y-5 text-[15px] sm:text-[16px] font-sans">
+                        <h1 className="font-serif text-[28px] sm:text-[34px] lg:text-[38px] font-black text-[#0F172A] leading-[1.18] tracking-tight text-balance">
+                          {activePost.title}
+                        </h1>
+
+                        {/* Dedicated Unique Article Feature Photograph */}
+                        <figure className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-900">
+                          <img
+                            src={activeCoverImg}
+                            alt={activePost.title}
+                            referrerPolicy="no-referrer"
+                            className="w-full aspect-[16/9] object-cover object-center"
+                          />
+                        </figure>
+
+                        {/* Quick Answer & Key Takeaway Box (AEO-Structured Direct Answer) */}
+                        <div className="bg-slate-50 border-l-4 border-[#102A43] p-5 rounded-r-xl space-y-1.5">
+                          <div className="text-xs font-bold text-[#0F172A]">
+                            {isBn
+                              ? "একনজরে মূল উত্তর ও সারসংক্ষেপ (Quick Answer & Key Takeaway)"
+                              : "Quick Answer & Key Takeaway"}
+                          </div>
+                          <p className="text-[15px] sm:text-[16px] text-slate-800 leading-[1.75]">
+                            {activePost.summary}
+                          </p>
+                        </div>
+
+                        {/* Official Government & Verified Sources Bar */}
+                        <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-xl p-4 space-y-2">
+                          <div className="text-xs font-bold text-[#0F172A] flex items-center justify-between">
+                            <span>
+                              {isBn
+                                ? "অফিশিয়াল সরকারি পোর্টাল ও যাচাইকৃত তথ্যসূত্র (Official Government Sources):"
+                                : "Verified Official Government Portals & Authentic Sources:"}
+                            </span>
+                            <span className="text-[11px] font-mono text-emerald-800">
+                              {isBn ? "হালনাগাদ: ২০২৬" : "Updated: 2026"}
+                            </span>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs">
+                            {officialGovSources.map((src, sIdx) => (
+                              <a
+                                key={sIdx}
+                                href={src.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-medium text-[#102A43] hover:text-[#0F172A] underline decoration-slate-300 hover:decoration-[#0F172A] inline-flex items-center gap-1"
+                              >
+                                <span>{src.name}</span>
+                                <ExternalLink size={11} className="opacity-70" />
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      </header>
+
+                      {/* Full Long-Form Verified Guide Content with Dark H2 (24px–26px), Dark H3 (19px–21px) & 16px Body */}
+                      <div className="max-w-none text-slate-800 leading-[1.8] space-y-6 text-[16px] sm:text-[17px] font-sans">
                         {activePost.content.split("\n\n").map((block, bIdx) => {
                           const trimmed = block.trim();
                           if (!trimmed) return null;
 
-                          // Major numbered section heading -> Semantic H2
-                          if (/^([0-9]+|[০-৯]+)\.\s+/.test(trimmed) && trimmed.length < 160 && !trimmed.includes("\n")) {
+                          // Major numbered section heading -> Semantic H2 (Dark #0F172A, 22px–26px)
+                          if (/^([0-9]+|[০-৯]+)\.\s+/.test(trimmed) && trimmed.length < 170 && !trimmed.includes("\n")) {
                             return (
                               <h2
                                 key={bIdx}
-                                className="font-serif text-xl sm:text-2xl font-bold text-[#102A43] pt-4 pb-1 border-b border-slate-100"
+                                className="font-serif text-[22px] sm:text-[26px] font-bold text-[#0F172A] leading-[1.3] pt-5 pb-2 border-b border-slate-200"
                               >
-                                {trimmed}
+                                {trimmed.replace(/\*\*/g, "")}
                               </h2>
                             );
                           }
 
-                          // Sub-heading (Step, Option, Route, Tier, Zone, or short title ending with colon) -> Semantic H3
+                          // Sub-heading -> Semantic H3 (Dark #102A43, 18px–21px)
                           if (
-                            (/^(Step|Option|Tier|Zone|Route|Phase|Tip|ধাপ|অপশন|রুট|টিপস)\s+/i.test(trimmed) ||
-                              (trimmed.endsWith(":") && trimmed.length < 110)) &&
+                            (/^(Step|Option|Tier|Zone|Route|Phase|Tip|Rule|Pathway|Scenario|ধাপ|অপশন|রুট|টিপস|নিয়ম|জোন|দৃশ্যপট)\s+/i.test(trimmed) ||
+                              (trimmed.endsWith(":") && trimmed.length < 120)) &&
                             !trimmed.includes("\n")
                           ) {
                             return (
                               <h3
                                 key={bIdx}
-                                className="font-serif text-lg sm:text-xl font-bold text-[#102A43] pt-2"
+                                className="font-serif text-[18px] sm:text-[21px] font-bold text-[#102A43] leading-[1.35] pt-3"
                               >
-                                {trimmed}
+                                {trimmed.replace(/\*\*/g, "")}
                               </h3>
                             );
                           }
 
-                          // Multi-line block where the first line is a numbered H2 heading followed by body/bullets
+                          // Multi-line block where the first line is a numbered H2 heading followed by body/bullets/H3s
                           const lines = trimmed.split("\n");
                           const firstLine = lines[0].trim();
                           const isFirstLineH2 =
-                            /^([0-9]+|[০-৯]+)\.\s+/.test(firstLine) && firstLine.length < 160;
+                            /^([0-9]+|[০-৯]+)\.\s+/.test(firstLine) && firstLine.length < 170;
                           const isFirstLineH3 =
                             !isFirstLineH2 &&
                             lines.length > 1 &&
-                            firstLine.length < 120 &&
+                            firstLine.length < 125 &&
                             (firstLine.endsWith(":") ||
-                              /^(Step|Option|Tier|Zone|Route|Phase|Tip|ধাপ|অপশন|রুট|টিপস)\s+/i.test(firstLine));
+                              /^(Step|Option|Tier|Zone|Route|Phase|Tip|Rule|Pathway|Scenario|ধাপ|অপশন|রুট|টিপস|নিয়ম|জোন|দৃশ্যপট)\s+/i.test(firstLine));
 
                           const remainingLines =
                             isFirstLineH2 || isFirstLineH3 ? lines.slice(1) : lines;
 
-                          const bulletLines = remainingLines.filter((l) =>
-                            /^(-|•|\*)\s+/.test(l.trim())
-                          );
-                          const isMostlyBullets =
-                            remainingLines.length > 0 &&
-                            bulletLines.length === remainingLines.length;
-
                           return (
-                            <div key={bIdx} className="space-y-3">
-                              {isFirstLineH2 && (
-                                <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#102A43] pt-4 pb-1 border-b border-slate-100">
-                                  {firstLine}
+                            <React.Fragment key={bIdx}>
+                              <div className="space-y-3.5">
+                                {isFirstLineH2 && (
+                                <h2 className="font-serif text-[22px] sm:text-[26px] font-bold text-[#0F172A] leading-[1.3] pt-5 pb-2 border-b border-slate-200">
+                                  {firstLine.replace(/\*\*/g, "")}
                                 </h2>
                               )}
                               {isFirstLineH3 && (
-                                <h3 className="font-serif text-lg sm:text-xl font-bold text-[#102A43] pt-2">
-                                  {firstLine}
+                                <h3 className="font-serif text-[18px] sm:text-[21px] font-bold text-[#102A43] leading-[1.35] pt-3">
+                                  {firstLine.replace(/\*\*/g, "")}
                                 </h3>
                               )}
-                              {isMostlyBullets ? (
-                                <ul className="space-y-2 pl-5 list-disc text-slate-700 marker:text-[#D4941A]">
-                                  {remainingLines.map((item, iIdx) => (
-                                    <li key={iIdx} className="leading-relaxed">
-                                      {item.trim().replace(/^(-|•|\*)\s+/, "")}
-                                    </li>
-                                  ))}
-                                </ul>
-                              ) : (
-                                remainingLines.map((line, lIdx) => {
-                                  const cleanLine = line.trim();
-                                  if (!cleanLine) return null;
-                                  if (/^(-|•|\*)\s+/.test(cleanLine)) {
-                                    return (
-                                      <div
-                                        key={lIdx}
-                                        className="flex items-start gap-2.5 pl-2 text-slate-700"
-                                      >
-                                        <span className="text-[#D4941A] font-bold mt-1">•</span>
-                                        <span className="leading-relaxed">
-                                          {cleanLine.replace(/^(-|•|\*)\s+/, "")}
-                                        </span>
-                                      </div>
-                                    );
-                                  }
+                              {remainingLines.map((line, lIdx) => {
+                                const cleanLine = line.trim();
+                                if (!cleanLine) return null;
+
+                                // Check if an inner line is an H3 sub-heading (e.g., Step 1:, Rule 1:, Zone 1:, ধাপ ১:, নিয়ম ১:)
+                                if (
+                                  !/^(-|•|\*)\s+/.test(cleanLine) &&
+                                  cleanLine.length < 125 &&
+                                  (cleanLine.endsWith(":") ||
+                                    /^(Step|Option|Tier|Zone|Route|Phase|Tip|Rule|Pathway|Scenario|ধাপ|অপশন|রুট|টিপস|নিয়ম|জোন|দৃশ্যপট)\s+/i.test(cleanLine))
+                                ) {
                                   return (
-                                    <p key={lIdx} className="leading-relaxed text-slate-800">
-                                      {cleanLine}
-                                    </p>
+                                    <h3
+                                      key={lIdx}
+                                      className="font-serif text-[18px] sm:text-[21px] font-bold text-[#102A43] leading-[1.35] pt-3"
+                                    >
+                                      {cleanLine.replace(/\*\*/g, "")}
+                                    </h3>
                                   );
-                                })
+                                }
+
+                                if (/^(-|•|\*)\s+/.test(cleanLine)) {
+                                  const bulletText = cleanLine.replace(/^(-|•|\*)\s+/, "");
+                                  return (
+                                    <div
+                                      key={lIdx}
+                                      className="flex items-start gap-3 pl-2 text-slate-800"
+                                    >
+                                      <span className="text-[#102A43] font-bold mt-1 shrink-0">•</span>
+                                      <span className="leading-[1.8]">
+                                        {renderFormattedText(bulletText)}
+                                      </span>
+                                    </div>
+                                  );
+                                }
+                                return (
+                                  <p key={lIdx} className="leading-[1.8] text-slate-800">
+                                    {renderFormattedText(cleanLine)}
+                                  </p>
+                                );
+                              })}
+                              </div>
+
+                              {/* Mid-Article Contextual Internal Link + Native Content-Analyzed Travelpayouts & BDT Hotel Conversion Card (Zero-CLS Native Replacement for Travelpayouts Drive) */}
+                              {bIdx === 2 && activePost.internalLinks[0] && (
+                                <div className="my-6 bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5">
+                                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                                    <div className="space-y-0.5">
+                                      <span className="text-[11px] font-bold text-[#102A43] uppercase tracking-wider block">
+                                        {isBn ? "সংশ্লিষ্ট পরবর্তী ধাপ (Recommended Next Guide)" : "Recommended Next Step in This Topic"}
+                                      </span>
+                                      <button
+                                        type="button"
+                                        onClick={() => navigateTo(activePost.internalLinks[0].path)}
+                                        className="text-left font-serif font-bold text-[16px] text-[#0F172A] hover:text-[#102A43] underline decoration-[#D4941A] decoration-2 underline-offset-3 cursor-pointer"
+                                      >
+                                        {activePost.internalLinks[0].text} →
+                                      </button>
+                                    </div>
+                                    <button
+                                      type="button"
+                                      onClick={() => navigateTo("/umrah")}
+                                      className="self-start sm:self-center text-xs font-semibold text-[#102A43] bg-white border border-slate-200 hover:border-[#102A43] px-3 py-1.5 rounded-lg shrink-0 cursor-pointer"
+                                    >
+                                      {isBn ? "Umrah BDT ক্যালকুলেটর" : "Open Umrah BDT Calculator"}
+                                    </button>
+                                  </div>
+
+                                  <div className="flex flex-wrap items-center justify-between gap-3 pt-0.5">
+                                    <div className="text-xs text-slate-700 max-w-xl">
+                                      {isBn
+                                        ? "নিজে ডুয়াল-কারেন্সি কার্ডে অনলাইনে ফ্লাইট, পিকআপ ও ট্যুর পাস বুক করুন—অথবা কার্ড না থাকলে সরাসরি আমাদের ঢাকা ডেস্ক থেকে BDT-তে হোটেল ভাউচার ও টিকিট নিন:"
+                                        : "Book flights, airport transfers, or attraction passes online with your card—or book Makkah, Madinah, Dubai & KL hotels directly in BDT via our Dhaka Desk:"}
+                                    </div>
+                                    <div className="flex flex-wrap items-center gap-2">
+                                      <PartnerLinkButton
+                                        href={
+                                          activePost.affiliateCTA
+                                            ? AFFILIATE_LINKS[activePost.affiliateCTA.provider]
+                                            : AFFILIATE_LINKS.aviasales
+                                        }
+                                        label={
+                                          activePost.affiliateCTA?.provider === "tiqets"
+                                            ? isBn
+                                              ? "Skip-the-Line টিকিট দেখুন"
+                                              : "Check Skip-the-Line Passes"
+                                            : activePost.affiliateCTA?.provider === "klook" ||
+                                              activePost.affiliateCTA?.provider === "kkday"
+                                            ? isBn
+                                              ? "ট্যুর ও ডে-পাস ভাড়া দেখুন"
+                                              : "Compare Tour & Attraction Passes"
+                                            : activePost.affiliateCTA?.provider === "kiwitaxi" ||
+                                              activePost.affiliateCTA?.provider === "welcomePickups"
+                                            ? isBn
+                                              ? "প্রাইভেট কার ও পিকআপ ভাড়া দেখুন"
+                                              : "Check Private Car & Pickup Rates"
+                                            : activePost.affiliateCTA?.provider === "airalo"
+                                            ? isBn
+                                              ? "Saudi / ট্রাভেল eSIM দেখুন"
+                                              : "Check Travel eSIM Plans"
+                                            : isBn
+                                            ? "লাইভ বিমান ভাড়া তুলনা করুন"
+                                            : "Compare Live Flight Fares"
+                                        }
+                                        variant="dark"
+                                      />
+                                      <a
+                                        href={`https://wa.me/8801784385335?text=${encodeURIComponent(
+                                          `Assalamu Alaikum URAL Desk, I was reading "${activePost.title}" and want to check BDT hotel & flight package rates.`
+                                        )}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1.5 bg-[#102A43] hover:bg-slate-800 text-white font-semibold text-xs px-3.5 py-2.5 rounded-lg transition-colors"
+                                      >
+                                        <span>{isBn ? "BDT-তে হোটেল ও টিকিট বুকিং (WhatsApp)" : "Book Hotel & Flight in BDT (WhatsApp)"}</span>
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
                               )}
-                            </div>
+                            </React.Fragment>
                           );
                         })}
                       </div>
@@ -4054,12 +4664,73 @@ export default function App() {
                         </div>
                       )}
 
-                      {/* Internal SEO Links to Related Calculators & Guides */}
-                      <div className="pt-6 border-t border-slate-200 space-y-3">
+                      {/* Hub-and-Spoke Topical Cluster Silo Navigator (Internal Linking Authority Matrix) */}
+                      <div className="pt-6 border-t border-slate-200 space-y-4">
+                        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5">
+                          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                            <div>
+                              <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4941A] block">
+                                {isBn ? "টপিক্যাল ক্লাস্টার সাইলো নেভিগেটর (Hub & Spoke Silo)" : "Topical Authority Cluster Navigator (Hub & Spoke Silo)"}
+                              </span>
+                              <h3 className="font-serif text-base font-bold text-[#0F172A]">
+                                {isBn
+                                  ? `${activePost.category} — এই ক্লাস্টারের সবগুলো গাইড (${sameCategoryPosts.length + 1}টি আর্টিকেল)`
+                                  : `Complete "${activePost.category}" Topical Series (${sameCategoryPosts.length + 1} Connected Guides)`}
+                              </h3>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => navigateTo("/sitemap")}
+                              className="text-xs font-semibold text-[#102A43] hover:underline cursor-pointer"
+                            >
+                              {isBn ? "সম্পূর্ণ SEO Blueprint দেখুন →" : "View Full Topical Map →"}
+                            </button>
+                          </div>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            {[activePost, ...sameCategoryPosts].map((clusterPost, cIdx) => {
+                              const isCurrent = clusterPost.slug === activePost.slug;
+                              return (
+                                <button
+                                  key={clusterPost.id}
+                                  type="button"
+                                  disabled={isCurrent}
+                                  onClick={() => !isCurrent && navigateTo(`/blog?slug=${clusterPost.slug}`)}
+                                  className={`text-left p-3 rounded-xl border transition-all flex items-start gap-2.5 ${
+                                    isCurrent
+                                      ? "bg-[#102A43] text-white border-[#102A43] cursor-default"
+                                      : "bg-white hover:bg-slate-100 text-slate-800 border-slate-200 hover:border-[#102A43] cursor-pointer"
+                                  }`}
+                                >
+                                  <span
+                                    className={`text-[11px] font-mono font-bold px-1.5 py-0.5 rounded shrink-0 mt-0.5 ${
+                                      isCurrent ? "bg-[#F6B73C] text-[#0F172A]" : "bg-slate-100 text-[#102A43]"
+                                    }`}
+                                  >
+                                    {String(cIdx + 1).padStart(2, "0")}
+                                  </span>
+                                  <div className="space-y-0.5 min-w-0">
+                                    <div className={`text-xs font-semibold line-clamp-2 leading-snug ${isCurrent ? "text-white" : "text-[#0F172A]"}`}>
+                                      {clusterPost.title}
+                                    </div>
+                                    <div className={`text-[10px] ${isCurrent ? "text-[#F6B73C] font-semibold" : "text-slate-500"}`}>
+                                      {isCurrent
+                                        ? isBn
+                                          ? "● বর্তমানে এই গাইডটি পড়ছেন"
+                                          : "● Currently Reading This Guide"
+                                        : `${clusterPost.readTime} · ${isBn ? "পড়তে ক্লিক করুন →" : "Read Spoke Guide →"}`}
+                                    </div>
+                                  </div>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+
                         <div className="text-xs font-bold text-[#102A43]">
                           {isBn
-                            ? "সংশ্লিষ্ট ক্যালকুলেটর ও প্রয়োজনীয় গাইড"
-                            : "Related Calculators & Next Steps on URAL"}
+                            ? "সংশ্লিষ্ট ক্যালকুলেটর ও পরবর্তী ধাপ (Cross-Cluster Internal Links)"
+                            : "Related Calculators & Cross-Cluster Next Steps on URAL"}
                         </div>
                         <div className="flex flex-wrap gap-2.5 text-xs">
                           {activePost.internalLinks.map((lnk, idx) => (
@@ -4074,11 +4745,65 @@ export default function App() {
                             </button>
                           ))}
                         </div>
+
+                        {/* Viral Bangladesh Social & WhatsApp Family Group Share Bar + Ready-to-Post FB Caption Copy */}
+                        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                          <div className="space-y-0.5">
+                            <span className="text-xs font-bold text-[#0F172A] block">
+                              {isBn
+                                ? "পরিবার বা বন্ধুদের সাথে গাইডটি শেয়ার করুন (WhatsApp / Facebook)"
+                                : "Share This Guide with Family or Travel Groups"}
+                            </span>
+                            <span className="text-[11px] text-slate-600 block">
+                              {isBn
+                                ? "এক ক্লিকে WhatsApp গ্রুপে পাঠান অথবা ফেসবুক পোস্ট ক্যাপশন কপি করুন:"
+                                : "Send to your family WhatsApp chat or copy a ready-to-post Facebook caption:"}
+                            </span>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-2 text-xs">
+                            <a
+                              href={`https://wa.me/?text=${encodeURIComponent(
+                                `${activePost.title}\n\n${getArticleQuickAnswer(activePost, isBn)}\n\nRead Full Guide on URAL: https://ural.com.bd/blog?slug=${activePost.slug}`
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="bg-[#102A43] hover:bg-slate-800 text-white font-semibold px-3.5 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5"
+                            >
+                              <span>{isBn ? "WhatsApp-এ শেয়ার" : "Share on WhatsApp"}</span>
+                            </a>
+                            <a
+                              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                                `https://ural.com.bd/blog?slug=${activePost.slug}`
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="bg-white hover:bg-slate-100 text-[#0F172A] border border-slate-300 font-semibold px-3.5 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5"
+                            >
+                              <span>{isBn ? "Facebook-এ শেয়ার" : "Share on Facebook"}</span>
+                            </a>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const fbCaption = isBn
+                                  ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getArticleQuickAnswer(activePost, true)}\n\n👉 সম্পূর্ণ গাইড ও BDT বাজেট দেখুন: https://ural.com.bd/blog?slug=${activePost.slug}\n💬 কার্ড ছাড়াই BDT/bKash-এ ফ্লাইট ও হোটেল বুকিং হেল্পলাইন (WhatsApp): +8801784385335`
+                                  : `✈️ ${activePost.title}\n\n📌 Quick Summary:\n${getArticleQuickAnswer(activePost, false)}\n\n👉 Read Full Guide & BDT Calculator: https://ural.com.bd/blog?slug=${activePost.slug}\n💬 Book Flights & Hotels in BDT via WhatsApp: +8801784385335`;
+                                navigator.clipboard?.writeText(fbCaption);
+                                setAffiliateToast(
+                                  isBn
+                                    ? "ফেসবুক পোস্ট ক্যাপশন ও লিংক কপি হয়েছে! এখন যেকোনো Facebook পেজ বা গ্রুপে পেস্ট করুন।"
+                                    : "Ready-to-post Facebook caption & link copied to clipboard!"
+                                );
+                              }}
+                              className="bg-[#F6B73C] hover:bg-[#e5a629] text-[#0F172A] font-bold px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
+                            >
+                              {isBn ? "📋 FB ক্যাপশন কপি করুন" : "📋 Copy Ready FB Post"}
+                            </button>
+                          </div>
+                        </div>
                       </div>
 
-                      {/* Visible Hajj & Umrah Preparation FAQs (Matches JSON-LD FAQPage Schema 100%) */}
-                      {(activePost.slug === "umrah-hajj-guide-bangladesh-nusuk-bdt-cost" ||
-                        activePost.slug === "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh") && (
+                      {/* Visible Hajj, Umrah & Ziyarah Preparation FAQs (Matches JSON-LD FAQPage Schema 100%) */}
+                      {(activePost.category === "Hajj & Umrah" || activePost.category === "Ziyarah & Stopovers") && (
                         <TravelIntelligence
                           pageTitle={
                             isBn
@@ -4186,37 +4911,34 @@ export default function App() {
                           </button>
                         </div>
                         <div className="divide-y divide-slate-100">
-                          {localizedBlogs
-                            .filter((p) => p.slug !== activePost.slug)
-                            .slice(0, 5)
-                            .map((post) => (
-                              <button
-                                key={post.id}
-                                type="button"
-                                onClick={() => navigateTo(`/blog?slug=${post.slug}`)}
-                                className="w-full text-left py-3 first:pt-1 last:pb-0 group cursor-pointer space-y-1"
-                              >
-                                <div className="text-[11px] text-slate-500">
-                                  {post.category} · {post.readTime}
-                                </div>
-                                <div className="text-xs font-semibold text-slate-800 group-hover:text-[#102A43] line-clamp-2 leading-snug">
-                                  {post.title}
-                                </div>
-                              </button>
-                            ))}
+                          {relatedPosts.map((post) => (
+                            <button
+                              key={post.id}
+                              type="button"
+                              onClick={() => navigateTo(`/blog?slug=${post.slug}`)}
+                              className="w-full text-left py-3 first:pt-1 last:pb-0 group cursor-pointer space-y-1"
+                            >
+                              <div className="text-[11px] text-slate-500">
+                                {post.category} · {post.readTime}
+                              </div>
+                              <div className="text-xs font-semibold text-slate-800 group-hover:text-[#102A43] line-clamp-2 leading-snug">
+                                {post.title}
+                              </div>
+                            </button>
+                          ))}
                         </div>
                       </div>
                     </aside>
                   </div>
 
-                  {/* Bottom Section: 3 More Blog Cards in One Row */}
+                  {/* Bottom Section: 3 More Blog Cards in One Row (Unique Thumbnail + Dark H3 + 50-Word AEO Snippet + 'Read Full Blog' Button) */}
                   <div className="pt-10 border-t border-slate-200 space-y-6">
                     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
                       <div className="space-y-1">
                         <div className="text-xs font-semibold text-[#102A43]">
                           {isBn ? "আরও পড়ুন" : "Continue Reading"}
                         </div>
-                        <h2 className="font-serif text-2xl font-bold text-slate-900">
+                        <h2 className="font-serif text-2xl font-bold text-[#0F172A]">
                           {isBn
                             ? "বাংলাদেশি ভ্রমণকারীদের জন্য আরও প্রয়োজনীয় গাইড"
                             : "More Travel Guides for Bangladeshi Flyers"}
@@ -4238,14 +4960,7 @@ export default function App() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       {relatedPosts.map((post) => {
-                        const relatedWords = `${post.summary} ${post.content.replace(/\n+/g, " ")}`
-                          .replace(/\s+/g, " ")
-                          .trim()
-                          .split(" ");
-                        const relatedExcerpt =
-                          relatedWords.length > 150
-                            ? `${relatedWords.slice(0, 150).join(" ").replace(/[.,;:!?-]+$/, "")}...`
-                            : relatedWords.join(" ");
+                        const relatedSnippet = getBlogAeoSnippet50Words(post.slug, isBn, post.summary);
 
                         return (
                           <article
@@ -4267,11 +4982,11 @@ export default function App() {
                                 <div className="text-xs text-slate-500">
                                   {post.category} · {post.readTime}
                                 </div>
-                                <h3 className="font-serif font-bold text-base text-slate-900 group-hover:text-[#102A43] leading-snug">
+                                <h3 className="font-serif font-bold text-[18px] text-[#0F172A] group-hover:text-[#102A43] leading-snug">
                                   {post.title}
                                 </h3>
-                                <p className="text-xs text-slate-600 leading-relaxed">
-                                  {relatedExcerpt}
+                                <p className="text-[13.5px] text-slate-700 leading-[1.65]">
+                                  {relatedSnippet}
                                 </p>
                               </div>
                             </div>
@@ -4309,22 +5024,22 @@ export default function App() {
             <div className="space-y-1.5 max-w-2xl">
               <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
                 <span className="font-semibold text-[#102A43]">
-                  {isBn ? "ট্রাভেল গাইড ও ব্লগ হাব" : "Content & Growth Hub"}
+                  {isBn ? "ট্রাভেল গাইড ও ব্লগ" : "Featured Travel Guides"}
                 </span>
                 <span aria-hidden="true">·</span>
                 <span>
-                  {isBn ? "বাংলাদেশি ভ্রমণকারীদের শীর্ষ সার্চ টপিক (2026)" : "Bangladeshi Search Trends (2026)"}
+                  {isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য যাচাইকৃত গাইড (2026)" : "Verified Playbooks for Bangladeshi Travelers (2026)"}
                 </span>
               </div>
-              <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              <h2 className="font-serif text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight">
                 {isBn
                   ? "বাংলাদেশি ভ্রমণকারীদের জন্য সবচেয়ে জরুরি ৪টি ট্রাভেল ও Umrah গাইড"
-                  : "High-Demand Travel Guides Built for Bangladeshi Searchers"}
+                  : "Essential Travel & Umrah Guides for Bangladeshi Flyers"}
               </h2>
               <p className="text-xs sm:text-sm text-slate-600">
                 {isBn
                   ? "Dual-Currency Card Endorsement, কম খরচে ফ্যামিলি ট্যুর, নিজে নিজে Umrah প্রস্তুতি এবং Dhaka Airport Immigration-এর যাচাইকৃত গাইড।"
-                  : "Verified step-by-step guides answering the top banking, family budget, Umrah, and Dhaka airport immigration questions."}
+                  : "Step-by-step guides answering top banking, family budget, DIY Umrah, and Dhaka airport immigration questions."}
               </p>
             </div>
 
@@ -4336,44 +5051,64 @@ export default function App() {
               <span>
                 {isBn
                   ? `সবগুলো ব্লগ দেখুন (${localizedBlogs.length})`
-                  : `View More Blogs (${localizedBlogs.length})`}
+                  : `View All ${localizedBlogs.length} Blogs`}
               </span>
               <ArrowRight size={13} className="text-[#F6B73C]" />
             </button>
           </div>
 
-          {/* Strictly 4 Featured Blog Topics in a Single Row on Desktop */}
+          {/* Strictly 4 Featured Blog Topics in a Single Row on Desktop (With Unique Image + 50-Word AEO Snippet + Read Full Blog Button) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {featuredGrowthTopics.map((topic) => (
-              <div
-                key={topic.id}
-                onClick={() => navigateTo(`/blog?slug=${topic.slug}`)}
-                className="group bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl p-5 shadow-xs flex flex-col justify-between space-y-4 transition-all cursor-pointer"
-              >
-                <div className="space-y-2.5">
-                  <div className="flex items-center justify-between gap-2 text-[11px] text-slate-500 font-mono">
-                    <span className="font-semibold text-[#102A43]">{topic.category}</span>
+            {featuredGrowthTopics.map((topic) => {
+              const cardSnippet = getBlogAeoSnippet50Words(topic.slug, isBn, topic.excerpt);
+              return (
+                <article
+                  key={topic.id}
+                  onClick={() => navigateTo(`/blog?slug=${topic.slug}`)}
+                  className="group bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between transition-all cursor-pointer"
+                >
+                  <div>
+                    <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
+                      <img
+                        src={getBlogCoverImage(topic.slug)}
+                        alt={topic.title}
+                        referrerPolicy="no-referrer"
+                        loading="lazy"
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+                      <span className="absolute bottom-2.5 left-3 bg-[#102A43]/85 text-white text-[10px] font-semibold px-2 py-0.5 rounded-md border border-white/15">
+                        {topic.category}
+                      </span>
+                    </div>
+
+                    <div className="p-4 space-y-2">
+                      <h3 className="font-serif font-bold text-base text-[#0F172A] group-hover:text-[#102A43] leading-snug">
+                        {topic.title}
+                      </h3>
+
+                      <p className="text-xs text-slate-700 leading-relaxed">
+                        {cardSnippet}
+                      </p>
+                    </div>
                   </div>
 
-                  <p className="text-[11px] font-mono text-emerald-700 bg-emerald-50/70 border border-emerald-200/60 rounded-md px-2.5 py-1 truncate">
-                    {topic.searchQuery}
-                  </p>
-
-                  <h3 className="font-serif font-bold text-sm sm:text-base text-slate-900 group-hover:text-[#102A43] leading-snug">
-                    {topic.title}
-                  </h3>
-
-                  <p className="text-xs text-slate-600 leading-relaxed line-clamp-4">
-                    {topic.excerpt}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#102A43] group-hover:text-[#D4941A] transition-colors">
-                  <span>{isBn ? "সম্পূর্ণ গাইড পড়ুন" : "Read Full Guide"}</span>
-                  <ArrowRight size={13} />
-                </div>
-              </div>
-            ))}
+                  <div className="px-4 pb-4 pt-1">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigateTo(`/blog?slug=${topic.slug}`);
+                      }}
+                      className="w-full bg-[#102A43] group-hover:bg-[#F6B73C] text-white group-hover:text-[#0F172A] font-bold text-xs py-2.5 px-3.5 rounded-xl transition-colors flex items-center justify-between cursor-pointer"
+                    >
+                      <span>{isBn ? "সম্পূর্ণ ব্লগ পড়ুন" : "Read Full Blog"}</span>
+                      <ArrowRight size={13} />
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
       )}
@@ -4782,10 +5517,10 @@ export default function App() {
       )}
 
       {/* -------------------------------------------------------------
-          🗺️ VIEW 10: DYNAMIC XML & HTML SITEMAP DIRECTORY
+          ✈️ VIEW 10: DHAKA AIRPORT (DAC) PRE-DEPARTURE & EMBASSY HUB
       ------------------------------------------------------------- */}
       {section === "sitemap" && (
-        <SitemapPage onNavigate={navigateTo} />
+        <SitemapPage onNavigate={navigateTo} lang={lang} />
       )}
 
       </main>
@@ -4808,23 +5543,18 @@ export default function App() {
                 ? "বাংলাদেশি ভ্রমণকারীদের জন্য ফ্লাইট ভাড়া, হোটেল গাইড, ভিসা চেকলিস্ট, Umrah প্রস্তুতি এবং BDT ট্রিপ বাজেট।"
                 : "Flight prices, hotel guides, visa steps, and trip budgets — built for travelers from Bangladesh."}
             </p>
-            <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-mono">
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-semibold">
               <button
                 type="button"
-                onClick={() => navigateTo("/sitemap")}
-                className="text-[#F6B73C] hover:underline cursor-pointer"
+                onClick={() => navigateTo("/pre-departure")}
+                className="text-[#F6B73C] hover:underline cursor-pointer inline-flex items-center gap-1"
               >
-                HTML & XML Sitemap
+                <span>
+                  {isBn
+                    ? "✈️ ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার ও দূতাবাস হেল্পলাইন →"
+                    : "✈️ Dhaka Airport Pre-Departure & Embassy Hub →"}
+                </span>
               </button>
-              <span aria-hidden="true">·</span>
-              <a
-                href="/sitemap.xml"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white hover:underline"
-              >
-                sitemap.xml
-              </a>
             </div>
             <p className="text-[10px] font-mono text-slate-500">
               {isBn
