@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://ural-travel.pages.dev/sitemap.xml
+Sitemap: https://ural-travel.pages.dev/rss.xml

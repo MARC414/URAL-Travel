@@ -565,6 +565,8 @@ export default function App() {
     const url = new URL(currentPath, "https://ural-travel.pages.dev");
     const pathname = url.pathname;
     const searchParams = url.searchParams;
+    const segments = pathname.split("/").filter(Boolean);
+    const subSegment = segments[1] || null;
 
     let section: SectionType = "home";
     let parameterId: string | null = null;
@@ -572,22 +574,22 @@ export default function App() {
 
     if (pathname.startsWith("/flights")) {
       section = "flights";
-      const routeParam = searchParams.get("route");
+      const routeParam = searchParams.get("route") || subSegment;
       parameterId = routeParam || "dhaka-kathmandu";
       isLanding = !routeParam;
     } else if (pathname.startsWith("/hotels")) {
       section = "hotels";
-      const cityParam = searchParams.get("city");
+      const cityParam = searchParams.get("city") || subSegment;
       parameterId = cityParam || "kathmandu-hotels";
       isLanding = !cityParam;
     } else if (pathname.startsWith("/visa")) {
       section = "visa";
-      const countryParam = searchParams.get("country");
+      const countryParam = searchParams.get("country") || subSegment;
       parameterId = countryParam || "nepal-visa";
       isLanding = !countryParam;
     } else if (pathname.startsWith("/destinations")) {
       section = "destinations";
-      const countryParam = searchParams.get("country");
+      const countryParam = searchParams.get("country") || subSegment;
       parameterId = countryParam || "nepal-guide";
       isLanding = !countryParam;
     } else if (pathname.startsWith("/experiences") || pathname.startsWith("/attractions")) {
@@ -598,7 +600,7 @@ export default function App() {
       isLanding = true;
     } else if (pathname.startsWith("/costs")) {
       section = "costs";
-      const countryParam = searchParams.get("country");
+      const countryParam = searchParams.get("country") || subSegment;
       parameterId = countryParam || "nepal-costs";
       isLanding = !countryParam;
     } else if (pathname.startsWith("/tools")) {
@@ -606,13 +608,17 @@ export default function App() {
       isLanding = true;
     } else if (pathname.startsWith("/blog")) {
       section = "blog";
-      const slugParam = searchParams.get("slug");
+      const slugParam = searchParams.get("slug") || subSegment;
       parameterId = slugParam || "cheap-flight-booking-hacks-dhaka";
       isLanding = !slugParam;
     } else if (pathname.startsWith("/contact")) {
       section = "contact";
       isLanding = true;
-    } else if (pathname.startsWith("/sitemap") || pathname.startsWith("/pre-departure")) {
+    } else if (
+      pathname.startsWith("/sitemap") ||
+      pathname.startsWith("/pre-departure") ||
+      pathname.startsWith("/indexing")
+    ) {
       section = "sitemap";
       isLanding = true;
     }
@@ -645,7 +651,7 @@ export default function App() {
       ...HAJJ_UMRAH_FAQS.slice(0, 2),
     ]);
     seoBreadcrumbs = [
-      { name: "Home", url: "https://ural.travel/" }
+      { name: "Home", url: "https://ural-travel.pages.dev/" }
     ];
   } else if (section === "flights") {
     const activeRoute = FLIGHTS_DATA.find(r => r.id === parameterId) || FLIGHTS_DATA[0];
@@ -654,10 +660,10 @@ export default function App() {
     if (isLanding) {
       seoTitle = `Flights from Dhaka: Compare Fares, Routes & Airlines (${year}) | URAL`;
       seoDescription = "Compare cheap international flights from Hazrat Shahjalal International Airport (DAC) to Nepal, Thailand, Malaysia, and Dubai. View flight duration, direct airlines, and BDT fares.";
-      seoSchema = getFaqSchemaForPage("flights", undefined, true, "https://ural.travel/flights");
+      seoSchema = getFaqSchemaForPage("flights", undefined, true, "https://ural-travel.pages.dev/flights");
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural.travel/" },
-        { name: "Flight Guides", url: "https://ural.travel/flights" }
+        { name: "Home", url: "https://ural-travel.pages.dev/" },
+        { name: "Flight Guides", url: "https://ural-travel.pages.dev/flights" }
       ];
     } else {
       seoTitle = activeRoute.id === "dhaka-kathmandu"
@@ -675,13 +681,13 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("flights", activeRoute.id, false, `https://ural.travel/flights?route=${activeRoute.id}`);
+      const faqSchema = getFaqSchemaForPage("flights", activeRoute.id, false, `https://ural-travel.pages.dev/flights?route=${activeRoute.id}`);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural.travel/" },
-        { name: "Flight Guides", url: "https://ural.travel/flights" },
-        { name: `${activeRoute.from.split(" (")[0]} to ${activeRoute.to.split(" (")[0]} Flight`, url: `https://ural.travel/flights?route=${activeRoute.id}` }
+        { name: "Home", url: "https://ural-travel.pages.dev/" },
+        { name: "Flight Guides", url: "https://ural-travel.pages.dev/flights" },
+        { name: `${activeRoute.from.split(" (")[0]} to ${activeRoute.to.split(" (")[0]} Flight`, url: `https://ural-travel.pages.dev/flights?route=${activeRoute.id}` }
       ];
     }
 
@@ -691,10 +697,10 @@ export default function App() {
     if (isLanding) {
       seoTitle = `International Hotel Guides for Bangladeshi Travelers (2026) | URAL`;
       seoDescription = "Find top-rated budget & family hotels in Kathmandu, Bangkok, Kuala Lumpur, and Dubai. Neighborhood safety, halal dining, and BDT payment guides.";
-      seoSchema = getFaqSchemaForPage("hotels", undefined, true, "https://ural.travel/hotels");
+      seoSchema = getFaqSchemaForPage("hotels", undefined, true, "https://ural-travel.pages.dev/hotels");
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural.travel/" },
-        { name: "Hotel Neighborhoods", url: "https://ural.travel/hotels" }
+        { name: "Home", url: "https://ural-travel.pages.dev/" },
+        { name: "Hotel Neighborhoods", url: "https://ural-travel.pages.dev/hotels" }
       ];
     } else {
       seoTitle = activeHotel.id === "kathmandu-hotels"
@@ -712,13 +718,13 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("hotels", activeHotel.id, false, `https://ural.travel/hotels?city=${activeHotel.id}`);
+      const faqSchema = getFaqSchemaForPage("hotels", activeHotel.id, false, `https://ural-travel.pages.dev/hotels?city=${activeHotel.id}`);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural.travel/" },
-        { name: "Hotel Neighborhoods", url: "https://ural.travel/hotels" },
-        { name: `${activeHotel.city} Hotels`, url: `https://ural.travel/hotels?city=${activeHotel.id}` }
+        { name: "Home", url: "https://ural-travel.pages.dev/" },
+        { name: "Hotel Neighborhoods", url: "https://ural-travel.pages.dev/hotels" },
+        { name: `${activeHotel.city} Hotels`, url: `https://ural-travel.pages.dev/hotels?city=${activeHotel.id}` }
       ];
     }
 
@@ -728,10 +734,10 @@ export default function App() {
     if (isLanding) {
       seoTitle = `Visa Requirements for Bangladeshi Citizens 2026: Guides & Checklists | URAL`;
       seoDescription = "Check complete tourist visa guides for Bangladeshi citizens. Learn about free Visa on Arrival in Nepal, Thailand sticker visa rules, Malaysia eVisa, and Dubai visas.";
-      seoSchema = getFaqSchemaForPage("visa", undefined, true, "https://ural.travel/visa");
+      seoSchema = getFaqSchemaForPage("visa", undefined, true, "https://ural-travel.pages.dev/visa");
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural.travel/" },
-        { name: "Visa Guides", url: "https://ural.travel/visa" }
+        { name: "Home", url: "https://ural-travel.pages.dev/" },
+        { name: "Visa Guides", url: "https://ural-travel.pages.dev/visa" }
       ];
     } else {
       seoTitle = activeVisa.id === "nepal-visa"
@@ -749,13 +755,13 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("visa", activeVisa.id, false, `https://ural.travel/visa?country=${activeVisa.id}`);
+      const faqSchema = getFaqSchemaForPage("visa", activeVisa.id, false, `https://ural-travel.pages.dev/visa?country=${activeVisa.id}`);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural.travel/" },
-        { name: "Visa Guides", url: "https://ural.travel/visa" },
-        { name: `${activeVisa.country} Visa`, url: `https://ural.travel/visa?country=${activeVisa.id}` }
+        { name: "Home", url: "https://ural-travel.pages.dev/" },
+        { name: "Visa Guides", url: "https://ural-travel.pages.dev/visa" },
+        { name: `${activeVisa.country} Visa`, url: `https://ural-travel.pages.dev/visa?country=${activeVisa.id}` }
       ];
     }
 
@@ -765,10 +771,10 @@ export default function App() {
     if (isLanding) {
       seoTitle = `Outbound Travel Plans & Itineraries from Bangladesh | URAL`;
       seoDescription = "Explore hand-crafted 5-day itineraries and travel plans for Bangladeshi tourists visiting Nepal, Thailand, Malaysia, and the UAE with BDT budgets.";
-      seoSchema = getFaqSchemaForPage("destinations", undefined, true, "https://ural.travel/destinations");
+      seoSchema = getFaqSchemaForPage("destinations", undefined, true, "https://ural-travel.pages.dev/destinations");
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural.travel/" },
-        { name: "Destinations", url: "https://ural.travel/destinations" }
+        { name: "Home", url: "https://ural-travel.pages.dev/" },
+        { name: "Destinations", url: "https://ural-travel.pages.dev/destinations" }
       ];
     } else {
       seoTitle = activeDes.id === "nepal-guide"
@@ -786,13 +792,13 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("destinations", activeDes.id, false, `https://ural.travel/destinations?country=${activeDes.id}`);
+      const faqSchema = getFaqSchemaForPage("destinations", activeDes.id, false, `https://ural-travel.pages.dev/destinations?country=${activeDes.id}`);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural.travel/" },
-        { name: "Destinations", url: "https://ural.travel/destinations" },
-        { name: `${activeDes.country} Guide`, url: `https://ural.travel/destinations?country=${activeDes.id}` }
+        { name: "Home", url: "https://ural-travel.pages.dev/" },
+        { name: "Destinations", url: "https://ural-travel.pages.dev/destinations" },
+        { name: `${activeDes.country} Guide`, url: `https://ural-travel.pages.dev/destinations?country=${activeDes.id}` }
       ];
     }
 
@@ -802,10 +808,10 @@ export default function App() {
     if (isLanding) {
       seoTitle = `International Trip Budgets from Bangladesh: Realistic BDT Cost Guides | URAL`;
       seoDescription = "How much does an international trip really cost from Dhaka? Detailed BDT budgets for Nepal, Thailand, Malaysia, and Dubai covering flights, hotels, food & transport.";
-      seoSchema = getFaqSchemaForPage("costs", undefined, true, "https://ural.travel/costs");
+      seoSchema = getFaqSchemaForPage("costs", undefined, true, "https://ural-travel.pages.dev/costs");
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural.travel/" },
-        { name: "Trip Costs", url: "https://ural.travel/costs" }
+        { name: "Home", url: "https://ural-travel.pages.dev/" },
+        { name: "Trip Costs", url: "https://ural-travel.pages.dev/costs" }
       ];
     } else {
       seoTitle = activeCost.id === "nepal-costs"
@@ -823,23 +829,23 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("costs", activeCost.id, false, `https://ural.travel/costs?country=${activeCost.id}`);
+      const faqSchema = getFaqSchemaForPage("costs", activeCost.id, false, `https://ural-travel.pages.dev/costs?country=${activeCost.id}`);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural.travel/" },
-        { name: "Trip Costs", url: "https://ural.travel/costs" },
-        { name: `${activeCost.country} Costs`, url: `https://ural.travel/costs?country=${activeCost.id}` }
+        { name: "Home", url: "https://ural-travel.pages.dev/" },
+        { name: "Trip Costs", url: "https://ural-travel.pages.dev/costs" },
+        { name: `${activeCost.country} Costs`, url: `https://ural-travel.pages.dev/costs?country=${activeCost.id}` }
       ];
     }
 
   } else if (section === "tools") {
     seoTitle = "Bangladeshi Traveler Utility Tools & Services (2026) | URAL";
     seoDescription = "Access handy travel utility tools for Bangladeshi outbound tourists: live BDT exchange rates, power plug specifications, packing checklist, and translation aids.";
-    seoSchema = getFaqSchemaForPage("tools", undefined, true, "https://ural.travel/tools");
+    seoSchema = getFaqSchemaForPage("tools", undefined, true, "https://ural-travel.pages.dev/tools");
     seoBreadcrumbs = [
-      { name: "Home", url: "https://ural.travel/" },
-      { name: "Travel Tools", url: "https://ural.travel/tools" }
+      { name: "Home", url: "https://ural-travel.pages.dev/" },
+      { name: "Travel Tools", url: "https://ural-travel.pages.dev/tools" }
     ];
 
   } else if (section === "blog") {
@@ -848,20 +854,43 @@ export default function App() {
       seoTitle = "Travel Guides, Umrah Preparation & Outbound Intelligence for Bangladesh (2026) | URAL Blog";
       seoDescription = "Explore verified travel guides built for Bangladeshi travelers: DIY Umrah & Hajj preparation, dual-currency card endorsement, visa checklists, and family trip budgets in BDT.";
       seoSchema = generateFAQSchema(HAJJ_UMRAH_FAQS, {
-        url: "https://ural.travel/blog",
+        url: "https://ural-travel.pages.dev/blog",
         name: "URAL Travel Blog & Bangladeshi Outbound Guides",
       });
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural.travel/" },
-        { name: "Travel Blog", url: "https://ural.travel/blog" }
+        { name: "Home", url: "https://ural-travel.pages.dev/" },
+        { name: "Travel Blog", url: "https://ural-travel.pages.dev/blog" }
       ];
     } else {
+      const postUrl = `https://ural-travel.pages.dev/blog?slug=${activePost.slug}`;
       seoTitle = `${activePost.title} | URAL Travel Blog`;
       seoDescription = activePost.summary;
-      seoSchema =
+      const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: activePost.title,
+        description: activePost.summary,
+        datePublished: "2026-09-26T08:00:00+06:00",
+        dateModified: "2026-09-27T10:00:00+06:00",
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": postUrl,
+        },
+        author: {
+          "@type": "Organization",
+          name: "URAL Travel Intelligence Desk (Dhaka)",
+          url: "https://ural-travel.pages.dev/",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "URAL",
+          url: "https://ural-travel.pages.dev/",
+        },
+      };
+      const faqSchema =
         activePost.category === "Hajj & Umrah"
           ? generateFAQSchema(HAJJ_UMRAH_FAQS, {
-              url: `https://ural.travel/blog?slug=${activePost.slug}`,
+              url: postUrl,
               name: activePost.title,
             })
           : generateFAQSchema([
@@ -871,44 +900,45 @@ export default function App() {
               },
               ...HAJJ_UMRAH_FAQS.slice(0, 2),
             ]);
+      seoSchema = [articleSchema, faqSchema];
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural.travel/" },
-        { name: "Travel Blog", url: "https://ural.travel/blog" },
-        { name: activePost.title, url: `https://ural.travel/blog?slug=${activePost.slug}` }
+        { name: "Home", url: "https://ural-travel.pages.dev/" },
+        { name: "Travel Blog", url: "https://ural-travel.pages.dev/blog" },
+        { name: activePost.title, url: postUrl }
       ];
     }
   } else if (section === "contact") {
     seoTitle = "Contact URAL — Direct Phone & WhatsApp Support";
     seoDescription = "Connect directly with our flight & visa support desk at +8801784385335. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.";
-    seoSchema = getFaqSchemaForPage("contact", undefined, true, "https://ural.travel/contact");
+    seoSchema = getFaqSchemaForPage("contact", undefined, true, "https://ural-travel.pages.dev/contact");
     seoBreadcrumbs = [
-      { name: "Home", url: "https://ural.travel/" },
-      { name: "Contact Us", url: "https://ural.travel/contact" }
+      { name: "Home", url: "https://ural-travel.pages.dev/" },
+      { name: "Contact Us", url: "https://ural-travel.pages.dev/contact" }
     ];
   } else if (section === "experiences") {
     seoTitle = "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub) | URAL";
     seoDescription = "Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and KL.";
     seoBreadcrumbs = [
-      { name: "Home", url: "https://ural.travel/" },
-      { name: "Attractions & Passes", url: "https://ural.travel/experiences" }
+      { name: "Home", url: "https://ural-travel.pages.dev/" },
+      { name: "Attractions & Passes", url: "https://ural-travel.pages.dev/experiences" }
     ];
   } else if (section === "umrah") {
     seoTitle = "Umrah & Hajj Guide from Bangladesh 2026: BDT Cost Calculator, Nusuk & Flights | URAL";
     seoDescription = "Plan your DIY Umrah from Dhaka and save BDT 35,000+ per pilgrim, or book flights, Makkah/Madinah hotels, and e-Visas in BDT via our Dhaka WhatsApp desk.";
     seoSchema = generateFAQSchema(HAJJ_UMRAH_FAQS, {
-      url: "https://ural.travel/umrah",
+      url: "https://ural-travel.pages.dev/umrah",
       name: "Umrah & Hajj Planning Hub from Bangladesh (2026)",
     });
     seoBreadcrumbs = [
-      { name: "Home", url: "https://ural.travel/" },
-      { name: "Umrah & Hajj Hub", url: "https://ural.travel/umrah" }
+      { name: "Home", url: "https://ural-travel.pages.dev/" },
+      { name: "Umrah & Hajj Hub", url: "https://ural-travel.pages.dev/umrah" }
     ];
   } else if (section === "sitemap") {
-    seoTitle = "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Embassy Helpline | URAL";
-    seoDescription = "Interactive pre-flight readiness checklist for Bangladeshi travelers: passport dollar endorsement, NOC/GO rules, cabin baggage & Zamzam limits, and overseas Bangladesh Embassy emergency contacts.";
+    seoTitle = "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Complete 83-Page Sitemap | URAL";
+    seoDescription = "Interactive pre-flight readiness checklist for Bangladeshi travelers, Google Indexing Console, and complete 83-page directory of flights, visas, hotels, and 41 travel blogs.";
     seoBreadcrumbs = [
-      { name: "Home", url: "https://ural.travel/" },
-      { name: "Pre-Departure & Embassy Hub", url: "https://ural.travel/pre-departure" }
+      { name: "Home", url: "https://ural-travel.pages.dev/" },
+      { name: "Pre-Departure & Complete Sitemap", url: "https://ural-travel.pages.dev/sitemap" }
     ];
   }
 
@@ -5543,18 +5573,21 @@ export default function App() {
                 ? "বাংলাদেশি ভ্রমণকারীদের জন্য ফ্লাইট ভাড়া, হোটেল গাইড, ভিসা চেকলিস্ট, Umrah প্রস্তুতি এবং BDT ট্রিপ বাজেট।"
                 : "Flight prices, hotel guides, visa steps, and trip budgets — built for travelers from Bangladesh."}
             </p>
-            <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-semibold">
-              <button
-                type="button"
-                onClick={() => navigateTo("/pre-departure")}
+            <div className="pt-1 text-[11px] font-semibold">
+              <a
+                href="/sitemap"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo("/sitemap");
+                }}
                 className="text-[#F6B73C] hover:underline cursor-pointer inline-flex items-center gap-1"
               >
                 <span>
                   {isBn
-                    ? "✈️ ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার ও দূতাবাস হেল্পলাইন →"
-                    : "✈️ Dhaka Airport Pre-Departure & Embassy Hub →"}
+                    ? "✈️ ঢাকা এয়ারপোর্ট (DAC) চেকলিস্ট ও সব গাইড ডিরেক্টরি →"
+                    : "✈️ Dhaka Airport (DAC) Checklist & All Guides Directory →"}
                 </span>
-              </button>
+              </a>
             </div>
             <p className="text-[10px] font-mono text-slate-500">
               {isBn
@@ -5568,12 +5601,13 @@ export default function App() {
               {isBn ? "জনপ্রিয় ফ্লাইট রুট" : "Flights Destination Directory"}
             </span>
             <ul className="space-y-1 text-xs">
-              <li><button onClick={() => navigateTo("/flights?route=dhaka-kathmandu")} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kathmandu (KTM)</button></li>
-              <li><button onClick={() => navigateTo("/flights?route=dhaka-bangkok")} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Bangkok (BKK)</button></li>
-              <li><button onClick={() => navigateTo("/flights?route=dhaka-kuala-lumpur")} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kuala Lumpur (KUL)</button></li>
-              <li><button onClick={() => navigateTo("/flights?route=dhaka-singapore")} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</button></li>
-              <li><button onClick={() => navigateTo("/flights?route=dhaka-maldives")} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</button></li>
-              <li><button onClick={() => navigateTo("/flights?route=dhaka-dubai")} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</button></li>
+              <li><a href="/flights?route=dhaka-kathmandu" onClick={(e) => { e.preventDefault(); navigateTo("/flights?route=dhaka-kathmandu"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kathmandu (KTM)</a></li>
+              <li><a href="/flights?route=dhaka-bangkok" onClick={(e) => { e.preventDefault(); navigateTo("/flights?route=dhaka-bangkok"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Bangkok (BKK)</a></li>
+              <li><a href="/flights?route=dhaka-kuala-lumpur" onClick={(e) => { e.preventDefault(); navigateTo("/flights?route=dhaka-kuala-lumpur"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kuala Lumpur (KUL)</a></li>
+              <li><a href="/flights?route=dhaka-singapore" onClick={(e) => { e.preventDefault(); navigateTo("/flights?route=dhaka-singapore"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</a></li>
+              <li><a href="/flights?route=dhaka-maldives" onClick={(e) => { e.preventDefault(); navigateTo("/flights?route=dhaka-maldives"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
+              <li><a href="/flights?route=dhaka-dubai" onClick={(e) => { e.preventDefault(); navigateTo("/flights?route=dhaka-dubai"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
+              <li><a href="/umrah" onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }} className="text-[#F6B73C] hover:underline text-left cursor-pointer">Dhaka → Jeddah & Madinah (Umrah Hub)</a></li>
             </ul>
           </div>
 
@@ -5582,12 +5616,13 @@ export default function App() {
               {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa Guides by Country"}
             </span>
             <ul className="space-y-1 text-xs">
-              <li><button onClick={() => navigateTo("/visa?country=nepal-visa")} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</button></li>
-              <li><button onClick={() => navigateTo("/visa?country=maldives-visa")} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</button></li>
-              <li><button onClick={() => navigateTo("/visa?country=thailand-visa")} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</button></li>
-              <li><button onClick={() => navigateTo("/visa?country=malaysia-visa")} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</button></li>
-              <li><button onClick={() => navigateTo("/visa?country=singapore-visa")} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Agent Visa"}</button></li>
-              <li><button onClick={() => navigateTo("/visa?country=dubai-visa")} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</button></li>
+              <li><a href="/visa?country=nepal-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa?country=nepal-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</a></li>
+              <li><a href="/visa?country=maldives-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa?country=maldives-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</a></li>
+              <li><a href="/visa?country=thailand-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa?country=thailand-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</a></li>
+              <li><a href="/visa?country=malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa?country=malaysia-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
+              <li><a href="/visa?country=singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa?country=singapore-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Agent Visa"}</a></li>
+              <li><a href="/visa?country=dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa?country=dubai-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
+              <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="text-[#F6B73C] hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪১টি ট্রাভেল ব্লগ গাইড →" : "All 41 Travel Blog Guides →"}</a></li>
             </ul>
           </div>
 

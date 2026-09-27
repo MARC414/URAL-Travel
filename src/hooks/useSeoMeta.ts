@@ -184,37 +184,56 @@ export function useSeoMeta({
   const breadcrumbsStr = safeStringify(breadcrumbs);
   const faqsStr = safeStringify(faqs);
 
-  // Derive canonical URL inside the hook
+  // Derive canonical URL inside the hook to strictly match public/sitemap.xml
   let canonicalUrl = "https://ural-travel.pages.dev/";
   if (typeof window !== "undefined") {
     const pathname = window.location.pathname;
     const searchParams = new URLSearchParams(window.location.search);
-
-    let parameterId = "";
-    if (pathname.startsWith("/flights")) {
-      parameterId = searchParams.get("route") || "";
-    } else if (pathname.startsWith("/hotels")) {
-      parameterId = searchParams.get("city") || "";
-    } else if (pathname.startsWith("/visa")) {
-      parameterId = searchParams.get("country") || "";
-    } else if (pathname.startsWith("/destinations")) {
-      parameterId = searchParams.get("country") || "";
-    } else if (pathname.startsWith("/costs")) {
-      parameterId = searchParams.get("country") || "";
-    } else if (pathname.startsWith("/blog")) {
-      parameterId = searchParams.get("slug") || "";
-    }
-
     const baseUrl = "https://ural-travel.pages.dev";
-    const cleanPathname =
-      pathname.endsWith("/") && pathname.length > 1
-        ? pathname.slice(0, -1)
-        : pathname;
+    const segments = pathname.split("/").filter(Boolean);
+    const rootSection = segments[0] || "";
+    const subSegment = segments[1] || "";
 
-    if (parameterId) {
-      canonicalUrl = `${baseUrl}${cleanPathname}/${parameterId}`;
+    if (rootSection === "flights") {
+      const routeId = searchParams.get("route") || subSegment;
+      canonicalUrl = routeId
+        ? `${baseUrl}/flights?route=${routeId}`
+        : `${baseUrl}/flights`;
+    } else if (rootSection === "hotels") {
+      const cityId = searchParams.get("city") || subSegment;
+      canonicalUrl = cityId
+        ? `${baseUrl}/hotels?city=${cityId}`
+        : `${baseUrl}/hotels`;
+    } else if (rootSection === "visa") {
+      const countryId = searchParams.get("country") || subSegment;
+      canonicalUrl = countryId
+        ? `${baseUrl}/visa?country=${countryId}`
+        : `${baseUrl}/visa`;
+    } else if (rootSection === "destinations") {
+      const countryId = searchParams.get("country") || subSegment;
+      canonicalUrl = countryId
+        ? `${baseUrl}/destinations?country=${countryId}`
+        : `${baseUrl}/destinations`;
+    } else if (rootSection === "costs") {
+      const countryId = searchParams.get("country") || subSegment;
+      canonicalUrl = countryId
+        ? `${baseUrl}/costs?country=${countryId}`
+        : `${baseUrl}/costs`;
+    } else if (rootSection === "blog") {
+      const slugId = searchParams.get("slug") || subSegment;
+      canonicalUrl = slugId
+        ? `${baseUrl}/blog?slug=${slugId}`
+        : `${baseUrl}/blog`;
+    } else if (rootSection === "pre-departure" || rootSection === "sitemap") {
+      canonicalUrl = `${baseUrl}/sitemap`;
+    } else if (rootSection === "attractions" || rootSection === "experiences") {
+      canonicalUrl = `${baseUrl}/experiences`;
+    } else if (rootSection === "hajj" || rootSection === "umrah") {
+      canonicalUrl = `${baseUrl}/umrah`;
+    } else if (rootSection) {
+      canonicalUrl = `${baseUrl}/${rootSection}`;
     } else {
-      canonicalUrl = `${baseUrl}${cleanPathname}`;
+      canonicalUrl = `${baseUrl}/`;
     }
   }
 
@@ -229,6 +248,18 @@ export function useSeoMeta({
     }
     metaDesc.setAttribute("content", description);
 
+    // 1b. Ensure Robots Meta Tag explicitly permits indexing & rich snippets
+    let metaRobots = document.querySelector('meta[name="robots"]');
+    if (!metaRobots) {
+      metaRobots = document.createElement("meta");
+      metaRobots.setAttribute("name", "robots");
+      document.head.appendChild(metaRobots);
+    }
+    metaRobots.setAttribute(
+      "content",
+      "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    );
+
     // 2. Set/Update Canonical Link Tag
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
@@ -238,7 +269,7 @@ export function useSeoMeta({
     }
     canonicalLink.setAttribute("href", canonicalUrl);
 
-    // 3. Set/Update og:url Meta Tag
+    // 3. Set/Update og:url & twitter:url Meta Tags
     let ogUrl = document.querySelector('meta[property="og:url"]');
     if (!ogUrl) {
       ogUrl = document.createElement("meta");
@@ -247,7 +278,15 @@ export function useSeoMeta({
     }
     ogUrl.setAttribute("content", canonicalUrl);
 
-    // 4. Set/Update og:title Meta Tag
+    let twitterUrl = document.querySelector('meta[name="twitter:url"]');
+    if (!twitterUrl) {
+      twitterUrl = document.createElement("meta");
+      twitterUrl.setAttribute("name", "twitter:url");
+      document.head.appendChild(twitterUrl);
+    }
+    twitterUrl.setAttribute("content", canonicalUrl);
+
+    // 4. Set/Update og:title & twitter:title Meta Tags
     let ogTitle = document.querySelector('meta[property="og:title"]');
     if (!ogTitle) {
       ogTitle = document.createElement("meta");
@@ -256,7 +295,15 @@ export function useSeoMeta({
     }
     ogTitle.setAttribute("content", title);
 
-    // 5. Set/Update og:description Meta Tag
+    let twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (!twitterTitle) {
+      twitterTitle = document.createElement("meta");
+      twitterTitle.setAttribute("name", "twitter:title");
+      document.head.appendChild(twitterTitle);
+    }
+    twitterTitle.setAttribute("content", title);
+
+    // 5. Set/Update og:description & twitter:description Meta Tags
     let ogDesc = document.querySelector('meta[property="og:description"]');
     if (!ogDesc) {
       ogDesc = document.createElement("meta");
@@ -264,6 +311,14 @@ export function useSeoMeta({
       document.head.appendChild(ogDesc);
     }
     ogDesc.setAttribute("content", description);
+
+    let twitterDesc = document.querySelector('meta[name="twitter:description"]');
+    if (!twitterDesc) {
+      twitterDesc = document.createElement("meta");
+      twitterDesc.setAttribute("name", "twitter:description");
+      document.head.appendChild(twitterDesc);
+    }
+    twitterDesc.setAttribute("content", description);
 
     // 6. JSON-LD Schema Script Updates
     document

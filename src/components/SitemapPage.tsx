@@ -14,8 +14,10 @@ import {
   Sparkles,
   MapPin,
   AlertTriangle,
+  BookOpen,
 } from "lucide-react";
 import { Language } from "../translations";
+import { getLocalizedBlogs } from "../data/bengaliContent";
 
 interface SitemapPageProps {
   onNavigate: (path: string) => void;
@@ -327,6 +329,8 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
   });
 
   const [countrySearch, setCountrySearch] = useState("");
+
+  const localizedBlogs = useMemo(() => getLocalizedBlogs(lang), [lang]);
 
   useEffect(() => {
     try {
@@ -801,43 +805,58 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
-                <button
-                  type="button"
-                  onClick={() => onNavigate(item.flightPath)}
+                <a
+                  href={item.flightPath}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(item.flightPath);
+                  }}
                   className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-[#102A43] text-slate-800 text-left flex items-center justify-between cursor-pointer"
                 >
                   <span>✈️ {isBn ? "ফ্লাইট রুট" : "Flights"}</span>
                   <ArrowRight size={11} className="text-slate-400" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigate(item.visaPath)}
+                </a>
+                <a
+                  href={item.visaPath}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(item.visaPath);
+                  }}
                   className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-[#102A43] text-slate-800 text-left flex items-center justify-between cursor-pointer"
                 >
                   <span>🛂 {isBn ? "ভিসা চেকলিস্ট" : "Visa Rules"}</span>
                   <ArrowRight size={11} className="text-slate-400" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigate(item.hotelPath)}
+                </a>
+                <a
+                  href={item.hotelPath}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(item.hotelPath);
+                  }}
                   className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-[#102A43] text-slate-800 text-left flex items-center justify-between cursor-pointer"
                 >
                   <span>🏨 {isBn ? "হোটেল জোন" : "Best Hotels"}</span>
                   <ArrowRight size={11} className="text-slate-400" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigate(item.costPath)}
+                </a>
+                <a
+                  href={item.costPath}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(item.costPath);
+                  }}
                   className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-[#102A43] text-slate-800 text-left flex items-center justify-between cursor-pointer"
                 >
                   <span>📊 {isBn ? "BDT বাজেট" : "BDT Budget"}</span>
                   <ArrowRight size={11} className="text-slate-400" />
-                </button>
+                </a>
               </div>
 
-              <button
-                type="button"
-                onClick={() => onNavigate(item.planPath)}
+              <a
+                href={item.planPath}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate(item.planPath);
+                }}
                 className="w-full py-2.5 px-4 rounded-xl bg-[#102A43] hover:bg-slate-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <span>
@@ -846,7 +865,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                     : `Explore ${item.countryEn} Full Itinerary`}
                 </span>
                 <ArrowRight size={13} className="text-[#F6B73C]" />
-              </button>
+              </a>
             </div>
           ))}
         </div>
@@ -857,36 +876,104 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
             <span className="font-mono font-bold text-slate-500 uppercase">
               {isBn ? "বিশেষ হাব:" : "More Essential Hubs:"}
             </span>
-            <button
-              type="button"
-              onClick={() => onNavigate("/umrah")}
+            <a
+              href="/umrah"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate("/umrah");
+              }}
               className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#102A43] hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
             >
               🕋 {isBn ? "ওমরাহ ও হজ প্ল্যানার ২০২৬" : "Umrah & Hajj Hub 2026"}
-            </button>
-            <button
-              type="button"
-              onClick={() => onNavigate("/experiences")}
+            </a>
+            <a
+              href="/experiences"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate("/experiences");
+              }}
               className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#102A43] hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
             >
               🎟️ {isBn ? "ইউরোপ, UK, USA ও এশিয়া অ্যাক্টিভিটি পাস" : "Europe, UK, USA & Asia Passes"}
-            </button>
-            <button
-              type="button"
-              onClick={() => onNavigate("/blog")}
+            </a>
+            <a
+              href="/blog"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate("/blog");
+              }}
               className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#102A43] hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
             >
-              📖 {isBn ? "সবগুলো ট্রাভেল ব্লগ ও গাইড" : "All 12 Travel Blog Guides"}
-            </button>
-            <button
-              type="button"
-              onClick={() => onNavigate("/tools?tab=airhelp")}
+              📖 {isBn ? "সবগুলো ৪১টি ট্রাভেল ব্লগ ও গাইড" : "All 41 Travel Blog Guides"}
+            </a>
+            <a
+              href="/tools?tab=airhelp"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate("/tools?tab=airhelp");
+              }}
               className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#102A43] hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
             >
               🛡️ {isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "Flight Delay Claim (€600)"}
-            </button>
+            </a>
           </div>
         </div>
+      </section>
+
+      {/* 6. COMPLETE CRAWLABLE HTML SITEMAP DIRECTORY (ALL 41 BLOG GUIDES & 42 HUBS) */}
+      <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+        <div className="space-y-1">
+          <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+            {isBn
+              ? "📚 সম্পূর্ণ সাইট ডিরেক্টরি (৪১টি গাইড ও ৪২টি হাব পেজ)"
+              : "📚 COMPLETE CRAWLABLE DIRECTORY · ALL 41 BLOG GUIDES & 42 HUB PAGES"}
+          </span>
+          <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+            {isBn
+              ? "বাংলাদেশি ভ্রমণকারীদের জন্য আমাদের সবগুলো ৪১টি গাইডের সরাসরি লিংক"
+              : "All 41 Verified Bangladesh Outbound Travel & Umrah Guides (Direct Anchor Index)"}
+          </h2>
+          <p className="text-xs text-slate-500">
+            {isBn
+              ? "সার্চ ইঞ্জিন ক্রলার এবং পাঠকদের দ্রুত নেভিগেশনের জন্য প্রতিটি গাইডের সরাসরি HTML লিংক নিচে দেওয়া হলো:"
+              : "Every guide below is linked via standard HTML <a href> tags so Googlebot and readers can reach any article in one click:"}
+          </p>
+        </div>
+
+        <nav
+          aria-label="All 41 Bangladesh Travel Blog Guides"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"
+        >
+          {localizedBlogs.map((post, idx) => {
+            const href = `/blog?slug=${post.slug}`;
+            return (
+              <a
+                key={post.slug}
+                href={href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate(href);
+                }}
+                className="group p-3.5 rounded-2xl border border-slate-200 hover:border-[#102A43] bg-slate-50/60 hover:bg-white transition-all flex items-start gap-3"
+              >
+                <span className="text-[11px] font-mono font-bold text-[#102A43] bg-slate-200/80 group-hover:bg-[#F6B73C] px-2 py-0.5 rounded-md shrink-0 mt-0.5">
+                  #{String(idx + 1).padStart(2, "0")}
+                </span>
+                <div className="space-y-1 min-w-0">
+                  <div className="text-xs font-bold text-slate-900 group-hover:text-[#102A43] leading-snug line-clamp-2">
+                    {post.title}
+                  </div>
+                  <div className="flex items-center gap-2 text-[10px] font-mono text-slate-500">
+                    <BookOpen size={10} />
+                    <span>{post.category}</span>
+                    <span>·</span>
+                    <span>{post.readTime}</span>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </nav>
       </section>
     </div>
   );
