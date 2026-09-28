@@ -118,7 +118,7 @@ function ScriptWidget({
             href={fallbackUrl}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="inline-flex items-center gap-1.5 bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs px-5 py-2.5 rounded-lg transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] font-bold text-xs px-5 py-2.5 rounded-lg transition-colors cursor-pointer"
           >
             {fallbackText} <ExternalLink size={12} />
           </a>
@@ -199,8 +199,8 @@ export function PartnerLinkButton({
       onClick={handleClick}
       className={
         variant === "dark"
-          ? "inline-flex items-center gap-1.5 bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
-          : "inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] text-[#102A43] font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
+          ? "inline-flex items-center gap-1.5 bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] font-bold text-xs px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
+          : "inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] text-brand-navy font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
       }
     >
       {label} <ExternalLink size={12} />

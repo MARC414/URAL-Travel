@@ -79,7 +79,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
   return (
     <div className="space-y-10 animate-fade-in">
       {/* 🏛️ HERO BANNER: GLOBAL ATTRACTIONS, SKIP-THE-LINE & PASSES ENGINE */}
-      <div className="relative bg-gradient-to-br from-[#0B1628] via-[#102A43] to-[#1A365D] rounded-3xl p-6 sm:p-10 text-white shadow-xl border border-white/10 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-brand-navy via-brand-navy to-[#1A365D] rounded-3xl p-6 sm:p-10 text-white shadow-xl border border-white/10 overflow-hidden">
         <div className="absolute -right-12 -top-12 w-72 h-72 bg-[#F6B73C]/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -117,7 +117,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
               onClick={() => setActiveRegion("west")}
               className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-start justify-between gap-3 ${
                 activeRegion === "west"
-                  ? "bg-[#F6B73C] text-[#0F172A] border-[#F6B73C] shadow-lg"
+                  ? "bg-[#F6B73C] text-brand-navy border-[#F6B73C] shadow-lg"
                   : "bg-white/5 text-white border-white/15 hover:bg-white/10"
               }`}
             >
@@ -133,7 +133,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                     ? "ইউরোপ, যুক্তরাজ্য ও আমেরিকা (Europe, UK & USA)"
                     : "Europe, UK & USA Skip-the-Line Hub"}
                 </h2>
-                <p className={`text-xs ${activeRegion === "west" ? "text-[#0F172A]/80 font-medium" : "text-slate-300"}`}>
+                <p className={`text-xs ${activeRegion === "west" ? "text-brand-navy/80 font-medium" : "text-slate-300"}`}>
                   {isBn
                     ? "লন্ডন, প্যারিস, রোম, নিউ ইয়র্ক, আমস্টারডাম, মিলান, ভেনিস, ফ্লোরেন্স ও লিসবন"
                     : "London, Paris, Rome, New York, Amsterdam, Milan, Venice, Florence & Lisbon"}
@@ -148,7 +148,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
               onClick={() => setActiveRegion("east")}
               className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-start justify-between gap-3 ${
                 activeRegion === "east"
-                  ? "bg-[#F6B73C] text-[#0F172A] border-[#F6B73C] shadow-lg"
+                  ? "bg-[#F6B73C] text-brand-navy border-[#F6B73C] shadow-lg"
                   : "bg-white/5 text-white border-white/15 hover:bg-white/10"
               }`}
             >
@@ -164,7 +164,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                     ? "এশিয়া ও মধ্যপ্রাচ্য ট্যুর ও থিম পার্ক (Asia & Gulf)"
                     : "Asia & Middle East Tours & Passes Hub"}
                 </h2>
-                <p className={`text-xs ${activeRegion === "east" ? "text-[#0F172A]/80 font-medium" : "text-slate-300"}`}>
+                <p className={`text-xs ${activeRegion === "east" ? "text-brand-navy/80 font-medium" : "text-slate-300"}`}>
                   {isBn
                     ? "দুবাই, ব্যাংকক, কুয়ালালামপুর, সিঙ্গাপুর, মালদ্বীপ ও কাঠমান্ডু ডে-ট্রিপ"
                     : "Dubai, Bangkok, Kuala Lumpur, Singapore, Maldives & Kathmandu Activities"}
@@ -195,7 +195,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                 href={TIQETS_PARTNER_LINK}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="text-xs font-mono font-bold text-[#102A43] hover:text-[#D4941A] inline-flex items-center gap-1"
+                className="text-xs font-mono font-bold text-brand-navy hover:text-brand-emerald inline-flex items-center gap-1"
               >
                 <span>{isBn ? "Tiqets-এ সব শহর দেখুন" : "Browse All Cities on Tiqets"}</span>
                 <ExternalLink size={12} />
@@ -209,7 +209,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                   onClick={() => setSelectedCityId(city.cityId)}
                   className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer flex flex-col items-center gap-1 ${
                     selectedCityId === city.cityId
-                      ? "bg-[#102A43] text-white border-[#102A43] shadow-md"
+                      ? "bg-brand-navy text-white border-brand-navy shadow-md"
                       : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                   }`}
                 >
@@ -227,7 +227,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                 onClick={() => setWidgetTab("triple-stack")}
                 className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
                   widgetTab === "triple-stack"
-                    ? "bg-[#102A43] text-white shadow"
+                    ? "bg-brand-navy text-white shadow"
                     : "text-slate-700 hover:bg-white"
                 }`}
               >
@@ -243,7 +243,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                 onClick={() => setWidgetTab("popular-tours")}
                 className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
                   widgetTab === "popular-tours"
-                    ? "bg-[#102A43] text-white shadow"
+                    ? "bg-brand-navy text-white shadow"
                     : "text-slate-700 hover:bg-white"
                 }`}
               >
@@ -259,7 +259,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                 onClick={() => setWidgetTab("availability-calendar")}
                 className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
                   widgetTab === "availability-calendar"
-                    ? "bg-[#102A43] text-white shadow"
+                    ? "bg-brand-navy text-white shadow"
                     : "text-slate-700 hover:bg-white"
                 }`}
               >
@@ -302,7 +302,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                   <span className="text-[10px] font-mono uppercase text-slate-400 block">
                     {isBn ? "৩টি আকর্ষণের মোট বাজেট (আনুমানিক)" : "Full 3-Experience Day Stack"}
                   </span>
-                  <div className="text-lg font-black text-[#102A43]">
+                  <div className="text-lg font-black text-brand-navy">
                     ${stackTotalUsd} USD{" "}
                     <span className="text-xs font-mono font-normal text-slate-500">
                       (~৳{stackTotalBdt.toLocaleString()} BDT)
@@ -324,7 +324,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                   >
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#102A43] bg-[#F6B73C]/25 px-2.5 py-1 rounded-md">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-navy bg-[#F6B73C]/25 px-2.5 py-1 rounded-md">
                           <Clock size={12} /> {slot.time}
                         </span>
                         <span className="text-[10px] font-mono text-slate-400">
@@ -363,7 +363,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                         href={TIQETS_PARTNER_LINK}
                         target="_blank"
                         rel="noopener noreferrer sponsored"
-                        className="bg-[#102A43] hover:bg-[#1e3a5f] text-white text-xs font-bold px-3.5 py-2 rounded-xl inline-flex items-center gap-1.5 transition-colors"
+                        className="bg-brand-navy hover:bg-[#1e3a5f] text-white text-xs font-bold px-3.5 py-2 rounded-xl inline-flex items-center gap-1.5 transition-colors"
                       >
                         <span>{isBn ? "স্লট বুক করুন" : "Book Slot"}</span>
                         <ExternalLink size={11} />
@@ -374,9 +374,9 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
               </div>
 
               {/* Airport Express Rail / City Pass Add-On Bar */}
-              <div className="bg-gradient-to-r from-[#102A43] to-[#1e3a5f] text-white p-5 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="bg-gradient-to-r from-brand-navy to-[#1e3a5f] text-white p-5 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div className="flex items-start gap-3.5">
-                  <div className="p-2.5 rounded-xl bg-[#F6B73C] text-[#102A43] shrink-0 mt-0.5">
+                  <div className="p-2.5 rounded-xl bg-[#F6B73C] text-brand-navy shrink-0 mt-0.5">
                     <Train size={20} />
                   </div>
                   <div className="space-y-1">
@@ -400,7 +400,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                   href={TIQETS_PARTNER_LINK}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  className="bg-[#F6B73C] hover:bg-[#ffc654] text-[#0F172A] font-bold text-xs px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5 shrink-0 shadow transition-colors"
+                  className="bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5 shrink-0 shadow transition-colors"
                 >
                   <span>{isBn ? "ট্রেন/পাস টিকেট নিন" : "Reserve Pass on Tiqets"}</span>
                   <ExternalLink size={12} />
@@ -442,7 +442,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                       onClick={() => setCategoryFilter(f.id as any)}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
                         categoryFilter === f.id
-                          ? "bg-[#102A43] text-white"
+                          ? "bg-brand-navy text-white"
                           : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
                       }`}
                     >
@@ -452,7 +452,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                   {selectedCityId !== "all" && (
                     <button
                       onClick={() => setSelectedCityId("all")}
-                      className="px-3 py-1.5 rounded-lg text-xs font-mono font-bold text-[#102A43] bg-[#F6B73C]/25 hover:bg-[#F6B73C]/40 cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg text-xs font-mono font-bold text-brand-navy bg-[#F6B73C]/25 hover:bg-[#F6B73C]/40 cursor-pointer"
                     >
                       {isBn ? "সব ৯টি শহর দেখুন" : "Show All 9 Cities"}
                     </button>
@@ -510,7 +510,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                           <span className="text-[10px] font-mono text-slate-400 block">
                             {isBn ? item.audienceMatchBn : item.audienceMatch}
                           </span>
-                          <div className="text-base font-black text-[#102A43]">
+                          <div className="text-base font-black text-brand-navy">
                             ${item.priceUsd} USD{" "}
                             <span className="text-xs font-mono font-normal text-slate-500">
                               (~৳{item.priceBdt.toLocaleString()} BDT)
@@ -523,7 +523,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                             setActiveCalendarProduct(item);
                             setWidgetTab("availability-calendar");
                           }}
-                          className="text-[11px] font-mono font-bold text-slate-600 hover:text-[#102A43] underline cursor-pointer"
+                          className="text-[11px] font-mono font-bold text-slate-600 hover:text-brand-navy underline cursor-pointer"
                         >
                           {isBn ? "তারিখ চেক" : "Check Date"}
                         </button>
@@ -533,7 +533,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                         href={TIQETS_PARTNER_LINK}
                         target="_blank"
                         rel="noopener noreferrer sponsored"
-                        className="w-full bg-[#102A43] hover:bg-[#1e3a5f] text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-xs"
+                        className="w-full bg-brand-navy hover:bg-[#1e3a5f] text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-xs"
                       >
                         <span>
                           {isBn
@@ -612,7 +612,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                             onClick={() => setPartySize(num)}
                             className={`flex-1 py-2.5 rounded-xl font-mono text-xs font-bold border cursor-pointer ${
                               partySize === num
-                                ? "bg-[#102A43] text-white border-[#102A43]"
+                                ? "bg-brand-navy text-white border-brand-navy"
                                 : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                             }`}
                           >
@@ -647,7 +647,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
               </div>
 
               {/* Right Summary & Conversion Box */}
-              <div className="lg:col-span-5 bg-[#102A43] text-white rounded-2xl p-6 flex flex-col justify-between space-y-5">
+              <div className="lg:col-span-5 bg-brand-navy text-white rounded-2xl p-6 flex flex-col justify-between space-y-5">
                 <div className="space-y-3">
                   <span className="text-[10px] font-mono uppercase tracking-widest text-[#F6B73C] font-bold block">
                     TIQETS INSTANT E-TICKET SUMMARY
@@ -682,7 +682,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                     href={TIQETS_PARTNER_LINK}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-[#0F172A] font-extrabold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-lg transition-colors"
+                    className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-extrabold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-lg transition-colors"
                   >
                     <span>
                       {isBn
@@ -735,7 +735,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                 href={AFFILIATE_LINKS.klook}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="bg-[#F6B73C] hover:bg-[#ffc654] text-[#0F172A] font-bold text-xs px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5"
+                className="bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5"
               >
                 <span>{isBn ? "Klook-এ সব অফার দেখুন" : "Explore All Deals on Klook"}</span>
                 <ExternalLink size={12} />
@@ -773,8 +773,8 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                     <p className="text-xs text-slate-600 mt-1 leading-relaxed">{hub.items}</p>
                   </div>
                   <button
-                    onClick={() => onNavigate(`/destinations?country=${hub.destId}`)}
-                    className="text-xs font-mono font-bold text-[#102A43] hover:text-[#D4941A] inline-flex items-center gap-1 cursor-pointer"
+                    onClick={() => onNavigate(`/destinations/${hub.destId}`)}
+                    className="text-xs font-mono font-bold text-brand-navy hover:text-brand-emerald inline-flex items-center gap-1 cursor-pointer"
                   >
                     <span>{isBn ? "৫-দিনের আইটিনারারি দেখুন" : "View 5-Day Itinerary"}</span>
                     <ArrowRight size={12} />
@@ -787,9 +787,9 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
       )}
 
       {/* 💳 BANGLADESHI DUAL-CURRENCY CARD & VISA HOLDER ADVISORY */}
-      <div className="bg-[#102A43]/5 border border-[#102A43]/15 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div className="bg-brand-navy/5 border border-brand-navy/15 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="space-y-1.5 max-w-2xl">
-          <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#102A43] block">
+          <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-brand-navy block">
             {isBn ? "🇧🇩 বাংলাদেশি পাসপোর্ট ও পেমেন্ট গাইড" : "🇧🇩 BANGLADESHI TRAVELER PAYMENT & VISA BRIDGE"}
           </span>
           <h3 className="font-serif text-lg font-bold text-slate-900">
@@ -806,8 +806,8 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
 
         <div className="flex flex-wrap items-center gap-3 shrink-0">
           <button
-            onClick={() => onNavigate("/blog?slug=dual-currency-card-endorsement-bangladesh")}
-            className="bg-white border border-slate-300 hover:bg-slate-50 text-[#102A43] font-bold text-xs px-4 py-2.5 rounded-xl cursor-pointer transition-colors"
+            onClick={() => onNavigate("/blog/dual-currency-card-endorsement-bangladesh")}
+            className="bg-white border border-slate-300 hover:bg-slate-50 text-brand-navy font-bold text-xs px-4 py-2.5 rounded-xl cursor-pointer transition-colors"
           >
             {isBn ? "ডুয়াল-কারেন্সি কার্ড গাইড" : "Read Card Endorsement Guide"}
           </button>
@@ -815,7 +815,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
             href={TIQETS_PARTNER_LINK}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="bg-[#102A43] hover:bg-[#1e3a5f] text-white font-bold text-xs px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5 transition-colors"
+            className="bg-brand-navy hover:bg-[#1e3a5f] text-white font-bold text-xs px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5 transition-colors"
           >
             <span>{isBn ? "Tiqets অফিসিয়াল পোর্টাল" : "Open Tiqets Portal"}</span>
             <ExternalLink size={12} />

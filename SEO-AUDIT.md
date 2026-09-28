@@ -4,6 +4,26 @@
 **Audit date:** 2026-09-28
 **Scope:** indexing failure diagnosis, sitemap fetch failure, Schema.org / JSON-LD implementation, on-page technical SEO.
 
+## Follow-up implementation note — 2026-09-28
+
+This report is the baseline audit, not a current deployment checklist. The code has since been updated; use [`SEO-KEYWORD-MAP.md`](./SEO-KEYWORD-MAP.md) for the first-pass page-intent map. The older sections below describe the audited snapshot and may contain recommendations that are now superseded.
+
+Implemented in the repository:
+
+- Shared page-specific title and description copy for prerendered HTML and client-side metadata.
+- Clean path URLs for internal links and the generated sitemap/RSS; Cloudflare Pages Function middleware for legacy query-string URLs.
+- A real static 404 page, strict client route matching, and removal of the wildcard SPA 200 fallback.
+- Removal of the unsupported Bengali `hreflang` alternate while Bengali remains a client-side language toggle.
+- Omission of sitemap `lastmod` until reliable per-URL modification dates are available.
+- Removal of the retired `SearchAction` sitelinks-search-box markup and the unstable data-URI favicon; checked PNG favicon dimensions (16, 32, 48, 180, 192 and 512px), raster palette samples, and 16/32/48px ICO frames.
+- Image SEO for all 42 source photographs: 640px/1200px WebP `srcset`s with intrinsic dimensions, descriptive alt text for content images, decorative backgrounds hidden from assistive technology, below-the-fold lazy loading, and eager/high-priority LCP images. The 1200px WebP set is 4.84 MiB versus 35.57 MiB of original JPEGs (86.4% smaller); the 640px set is 1.79 MiB. Social-preview JPEG sources are optimized to a 1200px maximum dimension and copied to stable blog/OG URLs during prerender.
+
+**Local validation (2026-09-28):** `npm run lint` and `npm run build` pass. The build prerendered 83 route HTML files, generated 84 responsive WebP variants and 41 optimized blog JPEGs. Static-output checks found a unique title, description and canonical on every route; an actual `404.html`; and 83 sitemap URLs, each matching a prerendered file, with no query URLs or `lastmod`. RSS contains no legacy query URLs. The output emits neither Bengali `hreflang` nor retired `SearchAction`; internal blog links resolve to known slugs; route-specific image preloads are present for the home, Umrah, blog hub, and article LCP images; and middleware smoke tests returned 301s to the expected clean paths for three representative legacy URLs. Vite still reports the large JavaScript chunk: 1.73 MB minified (461 kB gzip). Image payload improvements are verified locally; field Core Web Vitals and Search Console results require production measurement.
+
+**Deployment verification is still required:** confirm the Pages project deploys the `functions/` directory and `_routes.json`, that legacy URLs return a single 301 to their clean canonical path, and that an unknown path returns HTTP 404. Production HTTP status behavior remains unverified. Search Console data is still needed to validate keyword demand and indexing status.
+
+Structured data and metadata help describe content; they do not guarantee rich-result display or rankings. Google's FAQ rich-result feature and sitelinks search box are retired. See the current [FAQ documentation](https://developers.google.com/search/docs/appearance/structured-data/faqpage), [sitelinks search box retirement notice](https://developers.google.com/search/docs/appearance/structured-data/sitelinks-searchbox?hl=en), and [structured-data policies](https://developers.google.com/search/docs/appearance/structured-data/sd-policies).
+
 ---
 
 ## 0. Executive summary — the actual answer

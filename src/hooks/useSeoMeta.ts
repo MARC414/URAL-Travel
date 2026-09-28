@@ -36,11 +36,13 @@ export interface SeoMetaProps {
   faqs?: { question: string; answer: string }[];
   imageUrl?: string;
   inLanguage?: string;
+  noindex?: boolean;
 }
 
 /**
- * Verified FAQ schema questions related to Hajj and Umrah preparation from Bangladesh
- * to boost search engine visibility and rich-snippet eligibility for religious travel queries.
+ * FAQ content related to Hajj and Umrah preparation from Bangladesh. Emit it as
+ * FAQPage markup only where the matching Q&A is visibly rendered; structured data
+ * does not guarantee a Google rich result or ranking improvement.
  */
 export const HAJJ_UMRAH_FAQS: FAQItem[] = [
   {
@@ -183,7 +185,7 @@ function cleanFaqText(text: string): string {
 
 /**
  * Takes an array of { question, answer } objects and returns a Schema.org
- * JSON-LD FAQPage object to boost search engine visibility for travel queries.
+ * JSON-LD FAQPage object for matching, visibly rendered page content.
  */
 export function generateFAQSchema(
   faqs: Array<{ question: string; answer: string }> | undefined | null,
@@ -265,6 +267,7 @@ export function useSeoMeta({
   faqs,
   imageUrl,
   inLanguage = "en-BD",
+  noindex = false,
 }: SeoMetaProps) {
   const schemaStr = safeStringify(schema);
   const breadcrumbsStr = safeStringify(breadcrumbs);
@@ -376,7 +379,7 @@ export function useSeoMeta({
     }
     metaDesc.setAttribute("content", description);
 
-    // 1b. Ensure Robots Meta Tag explicitly permits indexing & rich snippets
+    // 1b. Set indexing and preview directives for this route.
     let metaRobots = document.querySelector('meta[name="robots"]');
     if (!metaRobots) {
       metaRobots = document.createElement("meta");
@@ -385,7 +388,9 @@ export function useSeoMeta({
     }
     metaRobots.setAttribute(
       "content",
-      "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      noindex
+        ? "noindex, follow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     );
 
     // 2. Set/Update Canonical Link Tag
@@ -556,6 +561,7 @@ export function useSeoMeta({
     cleanPathTarget,
     imageUrl,
     inLanguage,
+    noindex,
   ]);
 }
 

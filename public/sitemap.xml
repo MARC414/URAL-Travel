@@ -1,514 +1,252 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- 12 CORE HUB PAGES -->
   <url>
     <loc>https://ural-travel.pages.dev/</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/umrah</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.95</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/flights</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/flights/dhaka-kathmandu</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/flights/dhaka-bangkok</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/flights/dhaka-kuala-lumpur</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/flights/dhaka-dubai</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/flights/dhaka-singapore</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/flights/dhaka-maldives</loc>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/hotels</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/hotels/kathmandu-hotels</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/hotels/bangkok-hotels</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/hotels/kuala-lumpur-hotels</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/hotels/dubai-hotels</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/hotels/singapore-hotels</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/hotels/maldives-hotels</loc>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/visa</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/visa/nepal-visa</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/visa/thailand-visa</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/visa/malaysia-visa</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/visa/dubai-visa</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/visa/singapore-visa</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/visa/maldives-visa</loc>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/destinations</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/destinations/nepal-guide</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/destinations/thailand-guide</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/destinations/malaysia-guide</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/destinations/dubai-guide</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/destinations/singapore-guide</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/destinations/maldives-guide</loc>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/costs</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/costs/nepal-costs</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/costs/thailand-costs</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/costs/malaysia-costs</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/costs/dubai-costs</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/costs/singapore-costs</loc>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/costs/maldives-costs</loc>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/experiences</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.95</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/tools</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/sitemap</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/contact</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
   </url>
-
-  <!-- 6 FLIGHT ROUTE GUIDES -->
   <url>
-    <loc>https://ural-travel.pages.dev/flights?route=dhaka-kathmandu</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/flights?route=dhaka-bangkok</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/cheap-flight-booking-hacks-dhaka</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/flights?route=dhaka-kuala-lumpur</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/nepal-vs-thailand-first-trip</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/flights?route=dhaka-dubai</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/hotel-savings-guide-bangkok-kl-dubai</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/flights?route=dhaka-singapore</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/halal-food-guide-bangkok-bangladesh</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/flights?route=dhaka-maldives</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/nepal-pokhara-itinerary-bangladesh</loc>
   </url>
-
-  <!-- 6 HOTEL NEIGHBORHOOD GUIDES -->
   <url>
-    <loc>https://ural-travel.pages.dev/hotels?city=kathmandu-hotels</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/dual-currency-card-endorsement-bangladesh</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/hotels?city=bangkok-hotels</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/maldives-budget-trip-bangladesh-maafushi</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/hotels?city=kuala-lumpur-hotels</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/singapore-visa-guide-bangladesh-agents</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/hotels?city=dubai-hotels</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/top-budget-family-destinations-from-dhaka</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/hotels?city=singapore-hotels</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/dhaka-airport-outbound-immigration-checklist-noc-go</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/hotels?city=maldives-hotels</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost</loc>
   </url>
-
-  <!-- 6 COUNTRY VISA CHECKLISTS -->
   <url>
-    <loc>https://ural-travel.pages.dev/visa?country=nepal-visa</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/visa?country=thailand-visa</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/hajj-registration-bangladesh-government-vs-private-package-cost</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/visa?country=malaysia-visa</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/visa?country=dubai-visa</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/visa?country=singapore-visa</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/visa?country=maldives-visa</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates</loc>
   </url>
-
-  <!-- 6 DESTINATION ITINERARY GUIDES -->
   <url>
-    <loc>https://ural-travel.pages.dev/destinations?country=nepal-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/destinations?country=thailand-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/destinations?country=malaysia-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/destinations?country=dubai-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/destinations?country=singapore-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/destinations?country=maldives-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide</loc>
   </url>
-
-  <!-- 6 COUNTRY BDT BUDGET SHEETS -->
   <url>
-    <loc>https://ural-travel.pages.dev/costs?country=nepal-costs</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/costs?country=thailand-costs</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/costs?country=malaysia-costs</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/costs?country=dubai-costs</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/costs?country=singapore-costs</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/costs?country=maldives-costs</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix</loc>
   </url>
-
-  <!-- ALL 41 TOPICAL AUTHORITY BLOG GUIDES (CLUSTERS 1 TO 6) -->
   <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <loc>https://ural-travel.pages.dev/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <loc>https://ural-travel.pages.dev/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=hajj-registration-bangladesh-government-vs-private-package-cost</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <loc>https://ural-travel.pages.dev/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <loc>https://ural-travel.pages.dev/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <loc>https://ural-travel.pages.dev/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <loc>https://ural-travel.pages.dev/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <loc>https://ural-travel.pages.dev/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <loc>https://ural-travel.pages.dev/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=ramadan-umrah-itikaf-guide-bangladesh-booking-budget</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <loc>https://ural-travel.pages.dev/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <loc>https://ural-travel.pages.dev/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <loc>https://ural-travel.pages.dev/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp</loc>
   </url>
   <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=bangladeshi-halal-food-guide-makkah-madinah-budget-meals</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=makkah-madinah-badr-taif-historical-ziyarah-taxi-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=malaysia-islamic-heritage-putrajaya-halal-family-tour-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=bangkok-medical-tourism-checkup-guide-bangladesh-bumrungrad-bangkok-hospital</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=best-travel-esim-and-insurance-from-bangladesh-airalo-schengen-umrah</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=sri-lanka-budget-tour-from-bangladesh-eta-visa-colombo-kandy-ella</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=bangladesh-epassport-application-renewal-guide-64-districts-urgent-fees</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=best-airlines-from-dhaka-biman-saudia-emirates-qatar-singapore-baggage-guide</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=dual-currency-card-endorsement-bangladesh</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=cheap-flight-booking-hacks-dhaka</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=nepal-vs-thailand-first-trip</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=hotel-savings-guide-bangkok-kl-dubai</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=halal-food-guide-bangkok-bangladesh</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=nepal-pokhara-itinerary-bangladesh</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=maldives-budget-trip-bangladesh-maafushi</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=singapore-visa-guide-bangladesh-agents</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ural-travel.pages.dev/blog?slug=top-budget-family-destinations-from-dhaka</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://ural-travel.pages.dev/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla</loc>
   </url>
 </urlset>

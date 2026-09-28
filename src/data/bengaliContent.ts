@@ -64,9 +64,9 @@ export const BENGALI_BLOG_OVERRIDES: Record<
 - **খাবার (হালাল বাঙালি/পাকিস্তানি/আরবি রেস্টুরেন্ট) ও Saudi eSIM:** BDT 10,000
 - **মোট প্রাক্কলিত খরচ:** জনপ্রতি **BDT 1,16,000 থেকে BDT 1,32,000** (যেখানে সাধারণ প্যাকেজে ১,৫৫,০০০ – ১,৮০,০০০+ টাকা লেগে যায়)।`,
     internalLinks: [
-      { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Dual-Currency Card ও Passport Endorsement গাইড", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport (DAC) Immigration ডকুমেন্ট চেকলিস্ট", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Dual-Currency Card ও Passport Endorsement গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dhaka Airport (DAC) Immigration ডকুমেন্ট চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -111,9 +111,9 @@ export const BENGALI_BLOG_OVERRIDES: Record<
 - প্রতিটি Umrah e-Visa বা Nusuk Umrah পারমিটধারী যাত্রী Jeddah (JED) বা Madinah (MED) এয়ারপোর্টের নির্দিষ্ট কাউন্টার থেকে পাসপোর্ট স্ক্যান করে ১টি অফিশিয়াল ৫ লিটারের সিল করা Zamzam পানির বক্স কিনতে পারবেন (**SAR 9.50–12.50 / ~BDT 350–400**)।
 - Biman Bangladesh Airlines, Saudia, Gulf Air ও Kuwait Airways-এ এই ৫ লিটারের Zamzam বক্স আপনার নিয়মিত ৩০–৪৬ কেজি লাগেজ অ্যালাউন্সের বাইরে **সম্পূর্ণ বিনামূল্যে** বহন করা যায়।`,
     internalLinks: [
-      { text: "সম্পূর্ণ Umrah ও Hajj Visa, Nusuk এবং BDT বাজেট গাইড", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Haramain Train বুকিংয়ের জন্য Dual-Currency Card গাইড", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport Outbound Immigration চেকলিস্ট", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "সম্পূর্ণ Umrah ও Hajj Visa, Nusuk এবং BDT বাজেট গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Haramain Train বুকিংয়ের জন্য Dual-Currency Card গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dhaka Airport Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -161,10 +161,10 @@ export const BENGALI_BLOG_OVERRIDES: Record<
 ৬. যদি আপনার DUAL-CURRENCY CARD না থাকে তবে কীভাবে বুক করবেন?
 আপনার যদি পাসপোর্ট এনডোর্সমেন্ট বা কার্ড রেডি না থাকে, তবে একদমই চিন্তার কারণ নেই। আমাদের **URAL WhatsApp BDT Support Desk (+8801784385335)**-এ মেসেজ দিন—আপনি দেশীয় ব্যাংক ট্রান্সফার, bKash বা Nagad-এ বাংলাদেশি টাকায় (BDT) পেমেন্ট করেই আপনার কনফার্মড ফ্লাইট টিকিট, হোটেল ভাউচার ও এয়ারপোর্ট ট্রান্সফার বুক করতে পারবেন।`,
     internalLinks: [
-      { text: "ওমরাহর জন্য সেরা শরীয়াহ-সম্মত ইসলামিক ডুয়াল-কারেন্সি কার্ড", path: "/blog?slug=shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-      { text: "RFCD Account বনাম সাধারণ Travel Quota ($300 লিমিট সমাধান)", path: "/blog?slug=rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
-      { text: "নগদ রিয়াল/ডলার বনাম কার্ড: ৫% DCC চার্জ বাঁচানোর উপায়", path: "/blog?slug=cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
-      { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুকিং", path: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "ওমরাহর জন্য সেরা শরীয়াহ-সম্মত ইসলামিক ডুয়াল-কারেন্সি কার্ড", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
+      { text: "RFCD Account বনাম সাধারণ Travel Quota ($300 লিমিট সমাধান)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
+      { text: "নগদ রিয়াল/ডলার বনাম কার্ড: ৫% DCC চার্জ বাঁচানোর উপায়", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
+      { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুকিং", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -214,11 +214,11 @@ export const BENGALI_BLOG_OVERRIDES: Record<
 - **৫ দিনের জনপ্রতি খরচ:** **BDT 1,10,000 – BDT 1,35,000**
 - **কেন পরিবারের জন্য সেরা:** অক্টোবর থেকে মার্চ মাসের চমৎকার আবহাওয়া, শতভাগ হালাল খাবার, Burj Khalifa, Miracle Garden এবং ফ্যামিলি Desert Safari।`,
     internalLinks: [
-      { text: "Singapore ৪ দিনের বাজেট ট্যুর প্ল্যান (MRT SimplyGo ও হালাল খাবার)", path: "/blog?slug=singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide" },
-      { text: "Bumrungrad ও Bangkok Hospital মেডিকেল চেকআপ গাইড", path: "/blog?slug=bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" },
-      { text: "মাত্র ৭৫,০০০ টাকায় মালদ্বীপ ভ্রমণ (Maafushi গাইড)", path: "/blog?slug=maldives-budget-trip-bangladesh-maafushi" },
-      { text: "Sri Lanka + Maldives ৭ দিনের কম্বো ট্যুর ও BDT খরচ", path: "/blog?slug=sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" },
-      { text: "কাঠমান্ডু ও পোখারা ৫ দিনের নেপাল ট্যুর প্ল্যান", path: "/blog?slug=nepal-pokhara-itinerary-bangladesh" },
+      { text: "Singapore ৪ দিনের বাজেট ট্যুর প্ল্যান (MRT SimplyGo ও হালাল খাবার)", path: "/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide" },
+      { text: "Bumrungrad ও Bangkok Hospital মেডিকেল চেকআপ গাইড", path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" },
+      { text: "মাত্র ৭৫,০০০ টাকায় মালদ্বীপ ভ্রমণ (Maafushi গাইড)", path: "/blog/maldives-budget-trip-bangladesh-maafushi" },
+      { text: "Sri Lanka + Maldives ৭ দিনের কম্বো ট্যুর ও BDT খরচ", path: "/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" },
+      { text: "কাঠমান্ডু ও পোখারা ৫ দিনের নেপাল ট্যুর প্ল্যান", path: "/blog/nepal-pokhara-itinerary-bangladesh" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -261,10 +261,10 @@ Nepal এবং Maldives-এ বাংলাদেশিদের জন্য �
 - আপনি কোন হোটেলে থাকছেন এবং কোন কোন জায়গা ঘুরবেন তা জেনে রাখুন (যেমন: *"আমরা কাঠমান্ডুর Thamel-এ ৩ রাত এবং Pokhara Lakeside-এ ২ রাত থাকব"*).
 - সাথে অন্তত **$300–$500 USD** সমপরিমাণ নগদ ডলার অথবা এনডোর্স করা **Dual-Currency Card ও Bank Statement** রাখুন।`,
     internalLinks: [
-      { text: "নতুন পাসপোর্টে (Fresh Passport) ৩ ধাপে Travel History তৈরির গাইড", path: "/blog?slug=fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
-      { text: "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)", path: "/blog?slug=thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
-      { text: "Malaysia e-Visa ও ফ্রি MDAC কার্ড গাইড (KLIA ইমিগ্রেশন)", path: "/blog?slug=malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
-      { text: "Singapore Tourist Visa গাইড (অনুমোদিত এজেন্ট ও LOI V39A)", path: "/blog?slug=singapore-visa-guide-bangladesh-agents" },
+      { text: "নতুন পাসপোর্টে (Fresh Passport) ৩ ধাপে Travel History তৈরির গাইড", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
+      { text: "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
+      { text: "Malaysia e-Visa ও ফ্রি MDAC কার্ড গাইড (KLIA ইমিগ্রেশন)", path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
+      { text: "Singapore Tourist Visa গাইড (অনুমোদিত এজেন্ট ও LOI V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" },
     ],
     affiliateCTA: {
       provider: "kiwitaxi",
@@ -295,8 +295,8 @@ Nepal এবং Maldives-এ বাংলাদেশিদের জন্য �
 ৪. দেশীয় ব্যাংকের কার্ড ডিসকাউন্ট ও প্রোমো কোড
 ভ্রমণের আগে আপনার EBL, City Bank Amex, BRAC Bank বা Standard Chartered কার্ডে চলমান ট্রাভেল ডিসকাউন্ট চেক করুন এবং আমাদের ফ্লাইট সার্চ ইঞ্জিনে সব এয়ারলাইন্সের লাইভ রেট তুলনা করে নিন।`,
     internalLinks: [
-      { text: "ঢাকা থেকে কাঠমান্ডু ফ্লাইট গাইড", path: "/flights?route=dhaka-kathmandu" },
-      { text: "ঢাকা থেকে ব্যাংকক ফ্লাইট গাইড", path: "/flights?route=dhaka-bangkok" },
+      { text: "ঢাকা থেকে কাঠমান্ডু ফ্লাইট গাইড", path: "/flights/dhaka-kathmandu" },
+      { text: "ঢাকা থেকে ব্যাংকক ফ্লাইট গাইড", path: "/flights/dhaka-bangkok" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -326,8 +326,8 @@ Nepal এবং Maldives-এ বাংলাদেশিদের জন্য �
 ৩. চূড়ান্ত সিদ্ধান্ত
 আপনার পাসপোর্টে যদি কোনো দেশের ভিসা না থাকে এবং বাজেট ৫০ হাজার টাকার নিচে হয়, তবে চোখ বন্ধ করে **Nepal** দিয়ে শুরু করুন। আর যদি আপনার ব্যাংক স্টেটমেন্ট প্রস্তুত থাকে এবং আধুনিক মেট্রো শহর, শপিং মল ও কোরাল আইল্যান্ড দেখতে চান, তবে **Thailand** বেছে নিন।`,
     internalLinks: [
-      { text: "Nepal ভিসা চেকলিস্ট দেখুন", path: "/visa?country=nepal-visa" },
-      { text: "Thailand e-Visa গাইড দেখুন", path: "/visa?country=thailand-visa" },
+      { text: "Nepal ভিসা চেকলিস্ট দেখুন", path: "/visa/nepal-visa" },
+      { text: "Thailand e-Visa গাইড দেখুন", path: "/visa/thailand-visa" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -355,8 +355,8 @@ Siam বা মূল Sukhumvit রোডের ওপর ৪-তারকা �
 ৩. DUBAI: DEIRA (AL RIGGA ও UNION METRO)
 Downtown Dubai বা Marina-এর তুলনায় **Deira (Al Rigga বা Salah Al Din Metro স্টেশনের কাছে)** হোটেল ভাড়া প্রায় ৪০% কম। এখান থেকে মেট্রোতে চড়ে খুব সহজেই Burj Khalifa ও Dubai Mall-এ যাওয়া যায় এবং চারপাশে প্রচুর সাশ্রয়ী বাংলাদেশি ও পাকিস্তানি হালাল রেস্টুরেন্ট রয়েছে।`,
     internalLinks: [
-      { text: "Dubai ভ্রমণের সম্পূর্ণ BDT খরচ", path: "/costs?country=dubai-costs" },
-      { text: "Kuala Lumpur হোটেল গাইড", path: "/hotels?city=kuala-lumpur-hotels" },
+      { text: "Dubai ভ্রমণের সম্পূর্ণ BDT খরচ", path: "/costs/dubai-costs" },
+      { text: "Kuala Lumpur হোটেল গাইড", path: "/hotels/kuala-lumpur-hotels" },
     ],
     affiliateCTA: {
       provider: "kiwitaxi",
@@ -387,9 +387,9 @@ Downtown Dubai বা Marina-এর তুলনায় **Deira (Al Rigga বা 
 - **স্ট্রিট ফুড ও মলের ফুড কোর্ট:** প্রতি প্লেট ৬০–১০০ বাথ (**BDT 190 – BDT 320**)
 - **মিড-রেঞ্জ রেস্টুরেন্ট (যেমন Yana Restaurant বা Al Hussain):** জনপ্রতি ১৫০–৩০০ বাথ (**BDT 480 – BDT 950**)`,
     internalLinks: [
-      { text: "Thailand ভিসা গাইড ও চেকলিস্ট", path: "/visa?country=thailand-visa" },
-      { text: "Bangkok হোটেল ও সেরা এলাকা", path: "/hotels?city=bangkok-hotels" },
-      { text: "Bangkok ৫ দিনের সম্পূর্ণ BDT বাজেট", path: "/costs?country=thailand-costs" },
+      { text: "Thailand ভিসা গাইড ও চেকলিস্ট", path: "/visa/thailand-visa" },
+      { text: "Bangkok হোটেল ও সেরা এলাকা", path: "/hotels/bangkok-hotels" },
+      { text: "Bangkok ৫ দিনের সম্পূর্ণ BDT বাজেট", path: "/costs/thailand-costs" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -421,9 +421,9 @@ Downtown Dubai বা Marina-এর তুলনায় **Deira (Al Rigga বা 
 
 **মোট ৫ দিনের খরচ:** ট্যুরিস্ট বাসে যাতায়াত করলে জনপ্রতি **BDT 40,000 – BDT 45,000**, আর অভ্যন্তরীণ ফ্লাইট নিলে **BDT 50,000 – BDT 56,000**।`,
     internalLinks: [
-      { text: "ঢাকা থেকে কাঠমান্ডু ফ্লাইটের দাম", path: "/flights?route=dhaka-kathmandu" },
-      { text: "কাঠমান্ডু ও পোখারার হোটেল গাইড", path: "/hotels?city=kathmandu-hotels" },
-      { text: "Nepal ৫ দিনের বিস্তারিত খরচ", path: "/costs?country=nepal-costs" },
+      { text: "ঢাকা থেকে কাঠমান্ডু ফ্লাইটের দাম", path: "/flights/dhaka-kathmandu" },
+      { text: "কাঠমান্ডু ও পোখারার হোটেল গাইড", path: "/hotels/kathmandu-hotels" },
+      { text: "Nepal ৫ দিনের বিস্তারিত খরচ", path: "/costs/nepal-costs" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -456,9 +456,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 - **হাফ-ডে স্নরকেলিং ট্যুর ও খাবার:** BDT 11,000
 - **মোট খরচ:** **BDT 72,500 – BDT 82,500**!`,
     internalLinks: [
-      { text: "Maldives ৪ দিনের বিস্তারিত BDT বাজেট", path: "/costs?country=maldives-costs" },
-      { text: "Maldives ফ্রি VOA ও IMUGA চেকলিস্ট", path: "/visa?country=maldives-visa" },
-      { text: "Maafushi ও Hulhumalé হোটেল গাইড", path: "/hotels?city=maldives-hotels" },
+      { text: "Maldives ৪ দিনের বিস্তারিত BDT বাজেট", path: "/costs/maldives-costs" },
+      { text: "Maldives ফ্রি VOA ও IMUGA চেকলিস্ট", path: "/visa/maldives-visa" },
+      { text: "Maafushi ও Hulhumalé হোটেল গাইড", path: "/hotels/maldives-hotels" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -494,9 +494,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 ৪. ফ্লাইটের ৭২ ঘণ্টা আগে ফ্রি SG ARRIVAL CARD (SGAC)
 ভিসা অনুমোদনের পর ঢাকা থেকে ফ্লাইটের ঠিক ৩ দিন (৭২ ঘণ্টা) আগে অফিশিয়াল ICA ওয়েবসাইট বা **MyICA Mobile App**-এ সম্পূর্ণ বিনামূল্যে **SG Arrival Card** সাবমিট করবেন।`,
     internalLinks: [
-      { text: "Singapore ভিসা চেকলিস্ট পেজ দেখুন", path: "/visa?country=singapore-visa" },
-      { text: "ঢাকা থেকে সিঙ্গাপুর ডিরেক্ট ফ্লাইট ভাড়া", path: "/flights?route=dhaka-singapore" },
-      { text: "Little India ও Bugis হোটেল গাইড", path: "/hotels?city=singapore-hotels" },
+      { text: "Singapore ভিসা চেকলিস্ট পেজ দেখুন", path: "/visa/singapore-visa" },
+      { text: "ঢাকা থেকে সিঙ্গাপুর ডিরেক্ট ফ্লাইট ভাড়া", path: "/flights/dhaka-singapore" },
+      { text: "Little India ও Bugis হোটেল গাইড", path: "/hotels/singapore-hotels" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -533,9 +533,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 - **Maktab D (সাধারণ দক্ষিণ এশীয় জোন / মুয়াইসিম):** জামারাত থেকে ২.৫ – ৪ কিমি দূরে অবস্থিত, সোফা-কাম-বেড ও এয়ার কুলার/এসি সুবিধা থাকে।
 - **Maktab A ও B (ভিআইপি জোন / কিদানা টাওয়ার):** জামারাতের একদম সন্নিকটে (৩০০–৮০০ মিটার), উন্নত স্প্লিট এসি, ৩ বেলা বুফে খাবার এবং পর্যাপ্ত ওয়াশরুম সুবিধা থাকে।`,
     internalLinks: [
-      { text: "সম্পূর্ণ DIY Umrah ও Nusuk App গাইড (2026)", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "বয়স্ক বাবা-মাকে নিয়ে Umrah: হুইলচেয়ার ও মেডিকেল গাইড", path: "/blog?slug=umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
-      { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "সম্পূর্ণ DIY Umrah ও Nusuk App গাইড (2026)", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "বয়স্ক বাবা-মাকে নিয়ে Umrah: হুইলচেয়ার ও মেডিকেল গাইড", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -574,8 +574,8 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 - ব্লাড প্রেশার, ডায়াবেটিস (ইনসুলিন নিলে কুলিং পাউচ হ্যান্ডব্যাগে রাখুন), গ্যাস্ট্রিক ও হার্টের ১৫ দিনের পর্যাপ্ত ওষুধ এবং অবশ্যই **ইংরেজিতে লেখা ডাক্তারের প্রেসক্রিপশন** সাথে রাখুন।
 - হারাম শরীফের ভেতরে এসি ২০ ডিগ্রি সেলসিয়াসে থাকে, তাই বাবা-মায়ের জন্য পাতলা চাদর, ওরস্যালাইন (ORS), সুগন্ধিহীন ভ্যাসলিন এবং নরম ভেলক্রো স্যান্ডেল সাথে নিন।`,
     internalLinks: [
-      { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "সম্পূর্ণ DIY Umrah ও Nusuk App গাইড", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "সম্পূর্ণ DIY Umrah ও Nusuk App গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার ও লাগেজ নিয়ম", path: "/pre-departure" },
     ],
     affiliateCTA: {
@@ -618,9 +618,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 - **৩য় দিন:** সকালে ২ ঘণ্টা ২০ মিনিটের বুলেট ট্রেনে মদিনায় যান এবং Nusuk পারমিট নিয়ে রিয়াজুল জান্নাতে (Rawdah Shareef) নামাজ আদায় করুন।
 - **৪র্থ দিন:** ফজরের পর মসজিদে কুবা জিয়ারত শেষে ট্রেনে জেদ্দা এয়ারপোর্টে ফিরে আপনার পরবর্তী গন্তব্যের ফ্লাইটে উঠুন!`,
     internalLinks: [
-      { text: "সম্পূর্ণ DIY Umrah ও Nusuk App গাইড", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "টিকিট কাটার জন্য Dual-Currency Card Endorsement গাইড", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
+      { text: "সম্পূর্ণ DIY Umrah ও Nusuk App গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "টিকিট কাটার জন্য Dual-Currency Card Endorsement গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -665,9 +665,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 নিয়ম ২: শুক্রবারের সাপ্তাহিক স্লট ও প্রতি ৩০ মিনিটের ইনস্ট্যান্ট ট্র্যাক:
 - প্রতি **শুক্রবার সকালে** পরবর্তী সপ্তাহের নতুন স্লট ওপেন হয়। আর মদিনায় পৌঁছানোর পর কোনো স্লট খালি না দেখলে মসজিদে নববীর চত্বরে ফোনের Location (GPS) চালু রেখে **প্রতি ঘণ্টার ০১ মিনিট ও ৩১ মিনিটে** (যেমন ১০:০১, ১০:৩১) অ্যাপ চেক করুন—বাতিল হওয়া স্লটগুলো তাৎক্ষণিকভাবে ওপেন হয়ে যায়!`,
     internalLinks: [
-      { text: "সম্পূর্ণ DIY Umrah ও ১০ দিনের BDT বাজেট গাইড", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "নারীদের জন্য ওমরাহ গাইড ও মদিনার Ladies' Gate 25–29", path: "/blog?slug=umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
-      { text: "hajj.gov.bd পোর্টালে সরকারি ও বেসরকারি হজ নিবন্ধন", path: "/blog?slug=hajj-registration-bangladesh-government-vs-private-package-cost" },
+      { text: "সম্পূর্ণ DIY Umrah ও ১০ দিনের BDT বাজেট গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "নারীদের জন্য ওমরাহ গাইড ও মদিনার Ladies' Gate 25–29", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
+      { text: "hajj.gov.bd পোর্টালে সরকারি ও বেসরকারি হজ নিবন্ধন", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -705,9 +705,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 ৪. সাঈ শেষে নারীরা কীভাবে পর্দা বজায় রেখে চুল কাটবেন (তাকসীর)?
 - মারওয়া পাহাড়ের ভিড়ে প্রকাশ্যে কখনোই চুল কাটবেন না! সাঈ শেষ করে মহিলা নামাজ কক্ষের নীরব স্থানে হিজাবের নিচ দিয়ে অথবা পরিবারের সাথে নিজের হোটেল রুমে ফিরে এসে সব চুলের আগা থেকে **এক আঙুলের কর পরিমাণ (প্রায় ১ ইঞ্চি)** চুল কেটে হালাল হবেন।`,
     internalLinks: [
-      { text: "Nusuk App ও ফ্রি Rawdah Permit বুকিং গাইড", path: "/blog?slug=nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
-      { text: "মক্কা ও মদিনার সেরা ফ্যামিলি হোটেল জোন গাইড", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ ও হুইলচেয়ার গাইড", path: "/blog?slug=umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "Nusuk App ও ফ্রি Rawdah Permit বুকিং গাইড", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "মক্কা ও মদিনার সেরা ফ্যামিলি হোটেল জোন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ ও হুইলচেয়ার গাইড", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
     ],
     affiliateCTA: {
       provider: "kiwitaxi",
@@ -746,9 +746,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 - **ফুল-সার্ভিস ট্রানজিট এয়ারলাইন্স (Gulf Air, Kuwait Airways, Qatar Airways, Emirates):** ভাড়া **BDT 62,000 – BDT 74,000** (খাবার, ৩০–৪৬ কেজি লাগেজ ও ফ্রি জমজমসহ)।
 - **বাজেট ক্যারিয়ার (SalamAir, Air Arabia, Jazeera Airways, Flynas):** ভাড়া মাত্র **BDT 52,000 – BDT 63,000** থেকে শুরু (টিকিট কাটার সময় অবশ্যই ২০ বা ৩০ কেজি চেকড লাগেজ বান্ডেল যুক্ত করে নেবেন)।`,
     internalLinks: [
-      { text: "ঢাকা এয়ারপোর্ট বনাম ট্রানজিট ফ্লাইটে ইহরাম বাঁধার নিয়ম", path: "/blog?slug=wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
-      { text: "জেদ্দা ও ঢাকা এয়ারপোর্টে জমজম পানি ও খেজুর আনার নিয়ম", path: "/blog?slug=official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
-      { text: "সম্পূর্ণ DIY Umrah ১০ দিনের BDT বাজেট গাইড", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "ঢাকা এয়ারপোর্ট বনাম ট্রানজিট ফ্লাইটে ইহরাম বাঁধার নিয়ম", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "জেদ্দা ও ঢাকা এয়ারপোর্টে জমজম পানি ও খেজুর আনার নিয়ম", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
+      { text: "সম্পূর্ণ DIY Umrah ১০ দিনের BDT বাজেট গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -788,9 +788,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 - **হারাম শরীফের ফ্রি ইফতার দস্তরখান:** মাগরিবের আজানের অন্তত **৬০–৭৫ মিনিট আগে** মসজিদে প্রবেশ করলে খেজুর, জমজম, লাবান ও রুটির ইফতার দস্তরখানে সহজেই জায়গা পাবেন।
 - **রোজা রেখে তাওয়াফের সেরা সময়:** দুপুরের কড়া রোদে তাওয়াফ না করে **তারাবীহ নামাজের পর (রাত ১০:৩০ – ২:০০টা)** অথবা **ফজরের নামাজের পর** তাওয়াফ ও সাঈ করুন।`,
     internalLinks: [
-      { text: "সম্পূর্ণ DIY Umrah ও Nusuk App গাইড", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "মক্কা ও মদিনার হোটেল জোন এবং Haramain Train গাইড", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "মক্কা ও মদিনায় দেশি হালাল খাবার ও সাহরি/ইফতার গাইড", path: "/blog?slug=bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
+      { text: "সম্পূর্ণ DIY Umrah ও Nusuk App গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "মক্কা ও মদিনার হোটেল জোন এবং Haramain Train গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "মক্কা ও মদিনায় দেশি হালাল খাবার ও সাহরি/ইফতার গাইড", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -829,9 +829,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 ৪. দৃশ্যপট ৩: প্রথমে ঢাকা থেকে মদিনা (MED) ফ্লাইট হলে করণীয় কী?
 - আপনার ফ্লাইট যদি প্রথমে **মদিনা এয়ারপোর্টে (MED)** ল্যান্ড করে, তবে ঢাকা বা প্লেনে **ইহরাম বাঁধতে হবে না**! সাধারণ পোশাকে মদিনায় গিয়ে ৩–৫ দিন নামাজ ও জিয়ারত শেষে যেদিন মক্কায় রওনা হবেন, সেদিন মদিনার হোটেল থেকে ইহরাম পরে **মিকাত যুল হুলাইফা (মসজিদে আবইয়ারে আলী)** থেকে নিয়ত করবেন।`,
     internalLinks: [
-      { text: "ঢাকা থেকে জেদ্দা ও মদিনা Open-Jaw ফ্লাইট গাইড", path: "/blog?slug=dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "নারীদের জন্য ওমরাহ গাইড ও ইহরামের নিয়ম", path: "/blog?slug=umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
-      { text: "সম্পূর্ণ DIY Umrah ও ১০ দিনের BDT বাজেট গাইড", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "ঢাকা থেকে জেদ্দা ও মদিনা Open-Jaw ফ্লাইট গাইড", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "নারীদের জন্য ওমরাহ গাইড ও ইহরামের নিয়ম", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
+      { text: "সম্পূর্ণ DIY Umrah ও ১০ দিনের BDT বাজেট গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
     ],
     affiliateCTA: {
       provider: "kiwitaxi",
@@ -872,8 +872,8 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 - **স্বর্ণের বার (Gold Bar):** স্বর্ণের বার আনলে ঢাকা কাস্টমস কাউন্টারে ঘোষণা দিয়ে সরকারি নির্ধারিত শুল্ক পরিশোধ করতে হবে।`,
     internalLinks: [
       { text: "ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার ও লাগেজ নিয়ম হাব", path: "/pre-departure" },
-      { text: "ঢাকা থেকে জেদ্দা ও মদিনা ফ্লাইট এবং ৪৬ কেজি লাগেজ গাইড", path: "/blog?slug=dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "সম্পূর্ণ DIY Umrah ও ১০ দিনের BDT খরচ গাইড", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "ঢাকা থেকে জেদ্দা ও মদিনা ফ্লাইট এবং ৪৬ কেজি লাগেজ গাইড", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "সম্পূর্ণ DIY Umrah ও ১০ দিনের BDT খরচ গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
     ],
     affiliateCTA: {
       provider: "kiwitaxi",
@@ -914,9 +914,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 - **প্রতিদিনের গড় খাবার খরচ:** দেশি রেস্টুরেন্ট ও সুপারমার্কেট মিলিয়ে জনপ্রতি প্রতিদিন **SAR 30 – 40 (~BDT 980 – 1,300)**।
 - **BinDawood সুপারমার্কেট হ্যাক:** ক্লক টাওয়ার বা তাইবা সেন্টারের নিচে **BinDawood** সুপারমার্কেট থেকে কলা, খেজুর, লাবান (দইয়ের পানীয়), ওটস, রুটি ও মধু কিনে হোটেল রুমেই সকালের নাস্তা সেরে নিন!`,
     internalLinks: [
-      { text: "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ: হুইলচেয়ার ও মেডিকেল গাইড", path: "/blog?slug=umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
-      { text: "মক্কা ও মদিনার হোটেল জোন এবং Haramain Train গাইড", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "সম্পূর্ণ DIY Umrah ১০ দিনের BDT বাজেট গাইড", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ: হুইলচেয়ার ও মেডিকেল গাইড", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "মক্কা ও মদিনার হোটেল জোন এবং Haramain Train গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "সম্পূর্ণ DIY Umrah ১০ দিনের BDT বাজেট গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -964,9 +964,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 অপশন ২: মদিনা থেকে ঐতিহাসিক বদর প্রান্তর জিয়ারত (মদিনা থেকে ১৫০ কিমি দক্ষিণ-পশ্চিমে):
 - বদর যুদ্ধের শহীদ সাহাবীদের স্মৃতিস্তম্ভ ও **মসজিদে আরিশ** জিয়ারতের জন্য মদিনা থেকে ৪ ঘণ্টার প্রাইভেট কার ভাড়া **SAR 280 – 350**।`,
     internalLinks: [
-      { text: "মক্কা ও মদিনার হোটেল জোন এবং Haramain Train গাইড", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ: হুইলচেয়ার ও স্কুটার গাইড", path: "/blog?slug=umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
-      { text: "সম্পূর্ণ DIY Umrah ১০ দিনের BDT বাজেট গাইড", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "মক্কা ও মদিনার হোটেল জোন এবং Haramain Train গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ: হুইলচেয়ার ও স্কুটার গাইড", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "সম্পূর্ণ DIY Umrah ১০ দিনের BDT বাজেট গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
     ],
     affiliateCTA: {
       provider: "kiwitaxi",
@@ -1007,9 +1007,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 - **দিন ৮ থেকে ১০ (দুবাই ও আবুধাবি — ৩ রাত):** মদিনা বা জেদ্দা থেকে দুবাই ফ্লাইট। দুবাইয়ের **Deira (Al Rigga Metro)** হোটেলে অবস্থান, বিকেলে **Desert Safari with BBQ Dinner**, পরদিন **Burj Khalifa, Dubai Mall ও Museum of the Future** এবং শেষ দিন **আবুধাবি শেখ জায়েদ গ্র্যান্ড মসজিদ** ঘুরে ঢাকায় প্রত্যাবর্তন!
 - **১০ দিনের মোট জনপ্রতি বাজেট (৪ জনের পরিবার শেয়ারে):** সব ফ্লাইট, ২টি ভিসা, ১০ রাত হোটেল, ট্রেন ও ডেজার্ট সাফারিসহ জনপ্রতি **BDT 1,58,000 – BDT 1,85,000**।`,
     internalLinks: [
-      { text: "দুবাই থেকে আবুধাবি শেখ জায়েদ গ্র্যান্ড মসজিদ ডে-ট্রিপ গাইড", path: "/blog?slug=abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" },
-      { text: "৯৬ ঘণ্টার Saudi Stopover Visa ওমরাহ গাইড", path: "/blog?slug=saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
-      { text: "দুবাই ভ্রমণ প্ল্যান ও UAE ভিসা গাইড", path: "/destinations?country=dubai-guide" },
+      { text: "দুবাই থেকে আবুধাবি শেখ জায়েদ গ্র্যান্ড মসজিদ ডে-ট্রিপ গাইড", path: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" },
+      { text: "৯৬ ঘণ্টার Saudi Stopover Visa ওমরাহ গাইড", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
+      { text: "দুবাই ভ্রমণ প্ল্যান ও UAE ভিসা গাইড", path: "/destinations/dubai-guide" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -1049,9 +1049,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 - **দুপুর ১:৩০ – বিকেল ৩:৩০:** সাদিয়াত আইল্যান্ডের **Louvre Abu Dhabi** পরিদর্শন ও আল ওয়াহদা মলে হালাল লাঞ্চ।
 - **বিকেল ৪:৩০ – সন্ধ্যা ৭:০০ (গোল্ডেন আওয়ার):** বিকেল ৪:৩০-এ শেখ জায়েদ গ্র্যান্ড মসজিদে প্রবেশ করুন—যাতে দিনের আলো, সূর্যাস্তের সোনালী আভা এবং মাগরিবের পর নীল আলোর জাদুকরী সৌন্দর্য একসাথে দেখতে পান!`,
     internalLinks: [
-      { text: "একই ট্রিপে Umrah + Dubai ১০ দিনের মাল্টি-সিটি গাইড", path: "/blog?slug=umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
+      { text: "একই ট্রিপে Umrah + Dubai ১০ দিনের মাল্টি-সিটি গাইড", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
       { text: "দুবাই ও আবুধাবি Attraction Passes হাব (Klook)", path: "/experiences?region=asia&city=dubai-klook" },
-      { text: "দুবাই, কুয়ালালামপুর ও ব্যাংককে হোটেল খরচ বাঁচানোর গাইড", path: "/blog?slug=hotel-savings-guide-bangkok-kl-dubai" },
+      { text: "দুবাই, কুয়ালালামপুর ও ব্যাংককে হোটেল খরচ বাঁচানোর গাইড", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -1088,9 +1088,9 @@ KL Sentral থেকে মাত্র ৫ মিনিট দূরত্ব�
 - **সেরা হালাল খাবার:** Suria KLCC Level 2 Food Court (**MYR 15–25**), Bukit Bintang-এর **Damascus ও Halab Gate** এরাবিয়ান রেস্টুরেন্ট এবং **Masjid India** এলাকার দেশি ভাত-মাছ ও বিরিয়ানি।
 - **৫ দিনের মোট মালয়েশিয়া ফ্যামিলি বাজেট:** ঢাকা–KL রাউন্ডট্রিপ ফ্লাইট, অনলাইন e-Visa (ফ্রি MDAC সহ), ৪ রাত হোটেল, পুত্রজায়া ও Genting Highlands কেবল কারসহ জনপ্রতি **BDT 66,000 – BDT 82,000**।`,
     internalLinks: [
-      { text: "মালয়েশিয়া ৫ দিনের ট্যুর প্ল্যান ও e-Visa গাইড", path: "/destinations?country=malaysia-guide" },
-      { text: "ঢাকা থেকে সেরা ৬টি বাজেট-বান্ধব ফ্যামিলি গন্তব্য", path: "/blog?slug=top-budget-family-destinations-from-dhaka" },
-      { text: "কুয়ালালামপুর, ব্যাংকক ও দুবাইয়ে হোটেল সাশ্রয় গাইড", path: "/blog?slug=hotel-savings-guide-bangkok-kl-dubai" },
+      { text: "মালয়েশিয়া ৫ দিনের ট্যুর প্ল্যান ও e-Visa গাইড", path: "/destinations/malaysia-guide" },
+      { text: "ঢাকা থেকে সেরা ৬টি বাজেট-বান্ধব ফ্যামিলি গন্তব্য", path: "/blog/top-budget-family-destinations-from-dhaka" },
+      { text: "কুয়ালালামপুর, ব্যাংকক ও দুবাইয়ে হোটেল সাশ্রয় গাইড", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" },
     ],
     affiliateCTA: {
       provider: "kkday",
@@ -1131,8 +1131,8 @@ KL Sentral থেকে মাত্র ৫ মিনিট দূরত্ব�
 - **EU261 ও UK261 যাত্রী অধিকার আইন:** লন্ডন, প্যারিস, রোম, ফ্রাঙ্কফুর্ট বা আমস্টারডাম থেকে ছেড়ে আসা ফ্লাইট যদি ৩ ঘণ্টার বেশি দেরি (Delay) হয় বা বাতিল (Cancelled) হয়, তবে ইউরোপীয় আইন অনুযায়ী আপনি **AirHelp**-এর মাধ্যমে জনপ্রতি সর্বোচ্চ **€600 বা £520 (~BDT 78,000)** পর্যন্ত নগদ ক্ষতিপূরণ দাবি করতে পারেন!`,
     internalLinks: [
       { text: "ইউরোপ, UK ও USA-এর অফিশিয়াল Tiqets পাস হাব দেখুন", path: "/experiences?region=west" },
-      { text: "৯৬ ঘণ্টার Saudi Stopover Visa ও US/UK/Schengen ওমরাহ গাইড", path: "/blog?slug=saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
+      { text: "৯৬ ঘণ্টার Saudi Stopover Visa ও US/UK/Schengen ওমরাহ গাইড", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
+      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
     ],
     affiliateCTA: {
       provider: "tiqets",
@@ -1180,9 +1180,9 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 ধাপ ৩: মক্কা ও মদিনার দোকানে সবসময় "SAR" (Saudi Riyal) সিলেক্ট করুন:
 - **Al Baik, Bin Dawood সুপারমার্কেট বা ফার্মেসিতে** কার্ড পাঞ্চ করার সময় মেশিনে সবসময় **Local Currency (SAR)** সিলেক্ট করবেন—এতে ৫% অতিরিক্ত DCC চার্জ কাটবে না।`,
     internalLinks: [
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "মক্কা ও মদিনা হোটেল জোন এবং Haramain বুলেট ট্রেন গাইড", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "কার্ড নেই? bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুক করুন", path: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "মক্কা ও মদিনা হোটেল জোন এবং Haramain বুলেট ট্রেন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "কার্ড নেই? bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুক করুন", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "১০ দিনের DIY Umrah BDT বাজেট ক্যালকুলেটর", path: "/umrah" },
     ],
     affiliateCTA: {
@@ -1221,10 +1221,10 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **৩. ডলারেই মুনাফা লাভ:** অনেক ব্যাংক RFCD ব্যালেন্সের ওপর বছরে ৪.৫% থেকে ৬.৫% পর্যন্ত ডলারে রিটার্ন দেয়।
 - **৪. পরিবারের জন্য সাপ্লিমেন্টারি কার্ড:** স্বামী/স্ত্রী বা সন্তানদের জন্য সহজেই সাপ্লিমেন্টারি কার্ড নেওয়া যায়।`,
     internalLinks: [
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "ওমরাহর জন্য সেরা শরীয়াহ-সম্মত ইসলামিক ডুয়াল-কারেন্সি কার্ড", path: "/blog?slug=shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-      { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুকিং", path: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "নগদ রিয়াল/ডলার বনাম কার্ড: ৫% DCC চার্জ বাঁচানোর উপায়", path: "/blog?slug=cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
+      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "ওমরাহর জন্য সেরা শরীয়াহ-সম্মত ইসলামিক ডুয়াল-কারেন্সি কার্ড", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
+      { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুকিং", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "নগদ রিয়াল/ডলার বনাম কার্ড: ৫% DCC চার্জ বাঁচানোর উপায়", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -1263,9 +1263,9 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - যেকোনো দেশীয় ব্যাংক একাউন্ট (NPSB/BEFTN), **bKash** বা **Nagad**-এ পেমেন্ট সম্পন্ন করার সাথে সাথেই আপনার হোয়াটসঅ্যাপ ও ইমেইলে চলে আসবে **যাচাইযোগ্য ৬-ডিজিটের Airline PNR সহ ই-টিকিট, কনফার্মড হোটেল ভাউচার PDF এবং এয়ারপোর্ট পিকআপ কনফার্মেশন**!`,
     internalLinks: [
       { text: "১০ দিনের DIY Umrah BDT বাজেট ক্যালকুলেটর ও হোটেল জোন", path: "/umrah" },
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "মক্কা ও মদিনা হোটেল জোন এবং Haramain বুলেট ট্রেন গাইড", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "মক্কা ও মদিনা হোটেল জোন এবং Haramain বুলেট ট্রেন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -1303,10 +1303,10 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **🇹🇭 থাইল্যান্ড (ব্যাংকক ও পাতায়া):** ঢাকা থেকে **২০১৭ সালের পরের চকচকে, দাগ ও ভাঁজহীন $100 USD নোট** নিন। সুবর্ণভূমি এয়ারপোর্টে মাত্র ২০–৩০ ডলার ভাঙিয়ে বাকি ডলার ব্যাংককের **Pratunam / Ratchadamri এলাকার SuperRich Thailand (সবুজ বা কমলা বুথ)** থেকে ভাঙান—এখানে এশিয়ার সেরা রেট পাওয়া যায়।
 - **🇲🇾 মালয়েশিয়া (কুয়ালালামপুর) ও 🇲🇻 মালদ্বীপ (মাফুশি):** কুয়ালালামপুরে শপিং মল ও Grab-এ কার্ড ব্যবহার করুন এবং নগদ ডলার **Bukit Bintang (Pavilion), Mid Valley বা Masjid India**-তে ভাঙান। আর মালদ্বীপের মাফুশি দ্বীপে স্পিডবোট ($25) ও স্নরকেলিং ট্যুরে ($30) সরাসরি **নগদ USD** গ্রহণ করা হয়।`,
     internalLinks: [
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "ওমরাহর জন্য সেরা শরীয়াহ-সম্মত ইসলামিক ডুয়াল-কারেন্সি কার্ড", path: "/blog?slug=shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-      { text: "RFCD Account বনাম সাধারণ Travel Quota ($300 লিমিট সমাধান)", path: "/blog?slug=rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
-      { text: "মক্কা ও মদিনায় বাংলাদেশি হালাল খাবারের হোটেল ও দাম", path: "/blog?slug=bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
+      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "ওমরাহর জন্য সেরা শরীয়াহ-সম্মত ইসলামিক ডুয়াল-কারেন্সি কার্ড", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
+      { text: "RFCD Account বনাম সাধারণ Travel Quota ($300 লিমিট সমাধান)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
+      { text: "মক্কা ও মদিনায় বাংলাদেশি হালাল খাবারের হোটেল ও দাম", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -1351,10 +1351,10 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **ভুল ১: ব্যাংক একাউন্টে হঠাৎ বড় অঙ্কের ক্যাশ ডিপোজিট:** ৫ মাস একাউন্ট খালি রেখে ভিসা আবেদনের আগের দিন হঠাৎ ১.৫ লক্ষ টাকা জমা দেবেন না।
 - **ভুল ২: আবেদন জমা দিয়েই হোটেল বুকিং ক্যানসেল করা:** ভিসা অফিসাররা হোটেল বুকিং নম্বর অনলাইনে যাচাই করেন, তাই ভিসা হওয়ার আগে হোটেল বুকিং বাতিল করবেন না।`,
     internalLinks: [
-      { text: "Thailand ভিসা চেকলিস্ট ও ফি ক্যালকুলেটর", path: "/visa?country=thailand-visa" },
-      { text: "Bangkok-এ Halal খাবারের সেরা জায়গা (Pratunam ও Sukhumvit)", path: "/blog?slug=halal-food-guide-bangkok-bangladesh" },
-      { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Thailand ৫ দিনের বিস্তারিত BDT বাজেট", path: "/costs?country=thailand-costs" },
+      { text: "Thailand ভিসা চেকলিস্ট ও ফি ক্যালকুলেটর", path: "/visa/thailand-visa" },
+      { text: "Bangkok-এ Halal খাবারের সেরা জায়গা (Pratunam ও Sukhumvit)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
+      { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Thailand ৫ দিনের বিস্তারিত BDT বাজেট", path: "/costs/thailand-costs" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -1398,10 +1398,10 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **৩. প্রিন্ট করা পেইড হোটেল বুকিং ভাউচার।**
 - **৪. পকেট মানি বা ডলারের প্রমাণ ($500–$1,000 USD নগদ বা এনডোর্স করা কার্ড)** এবং আপনার ঢাকার **অফিস আইডি কার্ড / NOC**।`,
     internalLinks: [
-      { text: "মালয়েশিয়া ইসলামিক হেরিটেজ, পুত্রজায়া পিঙ্ক মসজিদ ও হালাল ট্যুর গাইড", path: "/blog?slug=malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" },
-      { text: "Malaysia ভিসা চেকলিস্ট ও আবেদনের নিয়ম", path: "/visa?country=malaysia-visa" },
-      { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Malaysia ৫ দিনের বিস্তারিত BDT খরচ", path: "/costs?country=malaysia-costs" },
+      { text: "মালয়েশিয়া ইসলামিক হেরিটেজ, পুত্রজায়া পিঙ্ক মসজিদ ও হালাল ট্যুর গাইড", path: "/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" },
+      { text: "Malaysia ভিসা চেকলিস্ট ও আবেদনের নিয়ম", path: "/visa/malaysia-visa" },
+      { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Malaysia ৫ দিনের বিস্তারিত BDT খরচ", path: "/costs/malaysia-costs" },
     ],
     affiliateCTA: {
       provider: "kkday",
@@ -1437,10 +1437,10 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **🇸🇬 সিঙ্গাপুর, 🇦🇪 দুবাই ও 🇸🇦 সৌদি ওমরাহ:** সিঙ্গাপুরের অনুমোদিত ভিসা এজেন্ট এবং দুবাই/সৌদি স্পনসরদের কাছে আপনার প্রোফাইল তখন একজন পরীক্ষিত পর্যটক হিসেবে গণ্য হবে। আপনি সহজেই **১০ দিনের ওমরাহ + দুবাই কম্বো ট্রিপ** করতে পারবেন।
 - **🇪🇺 ইউরোপ (Schengen), 🇬🇧 যুক্তরাজ্য ও 🇺🇸 আমেরিকা:** উন্নত দেশগুলোর দূতাবাসে আবেদন করলে অফিসাররা দেখবেন আপনি ৩–৪টি দেশ ভ্রমণ করে সময়মতো দেশে ফিরেছেন। আর একবার আপনার পাসপোর্টে বৈধ ও ব্যবহৃত **US, UK বা Schengen ভিসা** যুক্ত হলে আপনি ভবিষ্যতে যেকোনো সময় **১ বছরের মাল্টিপল-এন্ট্রি সৌদি ই-ভিসা বা অন-অ্যারাইভাল ভিসা** নিয়ে ওমরাহ করতে পারবেন!`,
     internalLinks: [
-      { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Malaysia e-Visa ও ফ্রি MDAC কার্ড গাইড", path: "/blog?slug=malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
-      { text: "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)", path: "/blog?slug=thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
-      { text: "Singapore Tourist Visa গাইড (অনুমোদিত এজেন্ট ও LOI V39A)", path: "/blog?slug=singapore-visa-guide-bangladesh-agents" },
+      { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Malaysia e-Visa ও ফ্রি MDAC কার্ড গাইড", path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
+      { text: "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
+      { text: "Singapore Tourist Visa গাইড (অনুমোদিত এজেন্ট ও LOI V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -1483,10 +1483,10 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **Gardens by the Bay ও Sentosa অ্যাটাকশন টিকিট:** BDT 8,000 – 12,500
 - **মোট ৪ দিনের জনপ্রতি খরচ:** **BDT 82,000 – BDT 1,05,000**`,
     internalLinks: [
-      { text: "Singapore Tourist Visa গাইড (অনুমোদিত এজেন্ট ও LOI V39A)", path: "/blog?slug=singapore-visa-guide-bangladesh-agents" },
-      { text: "Singapore ৪ দিনের বিস্তারিত BDT খরচ ক্যালকুলেটর", path: "/costs?country=singapore-costs" },
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "ঢাকা থেকে সেরা ৬টি বাজেট ফ্যামিলি ট্যুর গন্তব্য", path: "/blog?slug=top-budget-family-destinations-from-dhaka" },
+      { text: "Singapore Tourist Visa গাইড (অনুমোদিত এজেন্ট ও LOI V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" },
+      { text: "Singapore ৪ দিনের বিস্তারিত BDT খরচ ক্যালকুলেটর", path: "/costs/singapore-costs" },
+      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "ঢাকা থেকে সেরা ৬টি বাজেট ফ্যামিলি ট্যুর গন্তব্য", path: "/blog/top-budget-family-destinations-from-dhaka" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -1531,10 +1531,10 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 ৪. বাংলাদেশ ব্যাংকের $10,000+ মেডিকেল কোটা ব্যবহারের নিয়ম
 **বাংলাদেশ ব্যাংকের (bb.org.bd)** নিয়ম অনুযায়ী আপনার সাধারণ **$12,000 USD বার্ষিক ট্রাভেল কোটার** বাইরেও, হাসপাতালের অফিশিয়াল প্রাক্কলিত বিল (Cost Estimate Invoice) দেখিয়ে ব্যাংকের AD শাখা থেকে চিকিৎসার জন্য অতিরিক্ত **USD $10,000+ Medical Quota** কার্ডে বা হাসপাতালের একাউন্টে ছাড় করানো যায়!`,
     internalLinks: [
-      { text: "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)", path: "/blog?slug=thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
-      { text: "ব্যাংককে হালাল খাবারের সেরা জায়গা (Pratunam ও Sukhumvit Soi 3)", path: "/blog?slug=halal-food-guide-bangkok-bangladesh" },
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে ব্যাংকক ফ্লাইট ও হোটেল বুকিং", path: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
+      { text: "ব্যাংককে হালাল খাবারের সেরা জায়গা (Pratunam ও Sukhumvit Soi 3)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
+      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে ব্যাংকক ফ্লাইট ও হোটেল বুকিং", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
     ],
     affiliateCTA: {
       provider: "kiwitaxi",
@@ -1569,9 +1569,9 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **২. থাইল্যান্ড ই-ভিসা (thaievisa.go.th), মালয়েশিয়া ও ফ্যামিলি ট্যুর (EKTA Insurance):**
   • আন্তর্জাতিক প্রোভাইডার **EKTA** থেকে প্রতিদিন মাত্র **$0.99 থেকে $1.80 USD (~BDT 120–220)** খরচে ইনস্যুরেন্স নিলে ২ মিনিটেই ইমেইলে অফিশিয়াল ইংরেজি PDF পলিসি চলে আসে—যা চিকিৎসা খরচ, হারানো লাগেজ ও ফ্লাইট ডিলে কভার করে।`,
     internalLinks: [
-      { text: "মদিনায় রিয়াজুল জান্নাতে ঢুকতে লাইভ Nusuk QR কোডের নিয়ম", path: "/blog?slug=nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "ইউরোপ, যুক্তরাজ্য ও আমেরিকা ভ্রমণ গাইড", path: "/blog?slug=europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
+      { text: "মদিনায় রিয়াজুল জান্নাতে ঢুকতে লাইভ Nusuk QR কোডের নিয়ম", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "ইউরোপ, যুক্তরাজ্য ও আমেরিকা ভ্রমণ গাইড", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
       { text: "Travel Tools হাবে eSIM ও EKTA ইনস্যুরেন্স তুলনা করুন", path: "/tools" },
     ],
     affiliateCTA: {
@@ -1619,10 +1619,10 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **৭ দিনের হালাল খাবার ও এন্ট্রি টিকিট:** BDT 7,000 – 9,500
 - **মোট ৭ দিনের ২-দেশ কম্বো বাজেট:** **জনপ্রতি BDT 95,000 – BDT 1,20,500!**`,
     internalLinks: [
-      { text: "মাত্র ৭৫,০০০ টাকায় মালদ্বীপ ভ্রমণ (Maafushi গাইড)", path: "/blog?slug=maldives-budget-trip-bangladesh-maafushi" },
-      { text: "নতুন পাসপোর্টে (Fresh Passport) ৩ ধাপে Travel History তৈরির গাইড", path: "/blog?slug=fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
-      { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে মাল্টি-সিটি ফ্লাইট বুকিং", path: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "Maldives ৫ দিনের বিস্তারিত BDT খরচ ক্যালকুলেটর", path: "/costs?country=maldives-costs" },
+      { text: "মাত্র ৭৫,০০০ টাকায় মালদ্বীপ ভ্রমণ (Maafushi গাইড)", path: "/blog/maldives-budget-trip-bangladesh-maafushi" },
+      { text: "নতুন পাসপোর্টে (Fresh Passport) ৩ ধাপে Travel History তৈরির গাইড", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
+      { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে মাল্টি-সিটি ফ্লাইট বুকিং", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "Maldives ৫ দিনের বিস্তারিত BDT খরচ ক্যালকুলেটর", path: "/costs/maldives-costs" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -1668,10 +1668,10 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **তথ্য অপরিবর্তিত থাকলে পুলিশ ভেরিফিকেশন লাগে না!** আপনার যদি আগের কোনো **MRP বা e-Passport** থাকে এবং আপনি নাম, পিতা-মাতার নাম, জন্ম তারিখ ও স্থায়ী ঠিকানা অপরিবর্তিত রেখে রিনিউ (Re-issue) আবেদন করেন, তবে নতুন করে পুলিশ ভেরিফিকেশন ছাড়াই দ্রুত পাসপোর্ট প্রিন্ট হয়ে আসে।
 - **গুরুত্বপূর্ণ টিপস:** নতুন ই-পাসপোর্ট হাতে পাওয়ার সময় পুরনো পাসপোর্টটি *"Cancelled without Prejudice"* সিলসহ ফেরত নিন এবং বিদেশ ভ্রমণের সময় পুরনো ও নতুন পাসপোর্ট একসাথে পিন করে সাথে রাখুন!`,
     internalLinks: [
-      { text: "নতুন পাসপোর্টে (Fresh Passport) ৩ ধাপে Travel History তৈরির গাইড", path: "/blog?slug=fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
-      { text: "নতুন পাসপোর্টে $12,000 ডলার এনডোর্সমেন্ট করার নিয়ম", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "NID ও ই-পাসপোর্ট দিয়ে সরকারি Hajj রেজিস্ট্রেশন (hajj.gov.bd)", path: "/blog?slug=hajj-registration-bangladesh-government-vs-private-package-cost" },
+      { text: "নতুন পাসপোর্টে (Fresh Passport) ৩ ধাপে Travel History তৈরির গাইড", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
+      { text: "নতুন পাসপোর্টে $12,000 ডলার এনডোর্সমেন্ট করার নিয়ম", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "NID ও ই-পাসপোর্ট দিয়ে সরকারি Hajj রেজিস্ট্রেশন (hajj.gov.bd)", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -1709,9 +1709,9 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - একা ইমেইল করলে এয়ারলাইন্সগুলো প্রায়ই উত্তর দেয় না। তাই **AirHelp**-এ আপনার ফ্লাইট নম্বর ও তারিখ দিয়ে ফ্রিতে যাচাই করুন (এবং **AirHelp+ প্রোটেকশনে ৮% ছাড় পেতে প্রোমো কোড ` + "`" + `AHPROMO8` + "`" + `** ব্যবহার করুন)। ক্ষতিপূরণ আদায় হলেই কেবল তারা সার্ভিস ফি নেয় ("No-Win, No-Fee")!`,
     internalLinks: [
       { text: "Travel Tools হাবে ফ্লাইট ক্ষতিপূরণ ও AirHelp প্রোমো কোড দেখুন", path: "/tools?tab=airhelp" },
-      { text: "ঢাকা থেকে পরিচালিত সেরা ১০টি এয়ারলাইন্সের লাগেজ ও সার্ভিস তুলনা", path: "/blog?slug=top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
-      { text: "ঢাকা থেকে জেদ্দা ও মদিনা Open-Jaw Flight কৌশল", path: "/blog?slug=dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "বিদেশ ভ্রমণে সেরা Travel eSIM ও EKTA ফ্লাইট ইনস্যুরেন্স গাইড", path: "/blog?slug=best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
+      { text: "ঢাকা থেকে পরিচালিত সেরা ১০টি এয়ারলাইন্সের লাগেজ ও সার্ভিস তুলনা", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
+      { text: "ঢাকা থেকে জেদ্দা ও মদিনা Open-Jaw Flight কৌশল", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "বিদেশ ভ্রমণে সেরা Travel eSIM ও EKTA ফ্লাইট ইনস্যুরেন্স গাইড", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
     ],
     affiliateCTA: {
       provider: "airhelp",
@@ -1755,10 +1755,10 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **৬. বাজেট এয়ারলাইন্স (AirAsia, Thai Lion Air, SalamAir, Air Arabia, Jazeera, Flynas):**
   • **সবচেয়ে জরুরি নিয়ম:** এদের সর্বনিম্ন ভাড়ায় শুধুমাত্র **৭ কেজি কেবিন ব্যাগ** থাকে (কোনো চেক-ইন লাগেজ থাকে না!)। তাই টিকিট কাটার সময় অনলাইনেই **২০ বা ৩০ কেজি লাগেজ বান্ডেল** কিনে নিন—এয়ারপোর্টে কিনতে গেলে ৩ গুণ বেশি টাকা লাগবে!`,
     internalLinks: [
-      { text: "ঢাকা থেকে কম খরচে ফ্লাইট টিকিট কাটার ৫টি গোপন কৌশল", path: "/blog?slug=cheap-flight-booking-hacks-dhaka" },
-      { text: "ঢাকা থেকে জেদ্দা ও মদিনা Open-Jaw Flight কৌশল", path: "/blog?slug=dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "ফ্লাইট ডিলে বা লাগেজ হারালে সর্বোচ্চ €600 ক্ষতিপূরণ পাওয়ার নিয়ম", path: "/blog?slug=flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" },
-      { text: "জেদ্দা ও ঢাকা এয়ারপোর্টে জমজম পানি ও স্বর্ণ আনার কাস্টমস নিয়ম", path: "/blog?slug=official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
+      { text: "ঢাকা থেকে কম খরচে ফ্লাইট টিকিট কাটার ৫টি গোপন কৌশল", path: "/blog/cheap-flight-booking-hacks-dhaka" },
+      { text: "ঢাকা থেকে জেদ্দা ও মদিনা Open-Jaw Flight কৌশল", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "ফ্লাইট ডিলে বা লাগেজ হারালে সর্বোচ্চ €600 ক্ষতিপূরণ পাওয়ার নিয়ম", path: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" },
+      { text: "জেদ্দা ও ঢাকা এয়ারপোর্টে জমজম পানি ও স্বর্ণ আনার কাস্টমস নিয়ম", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
     ],
     affiliateCTA: {
       provider: "aviasales",

@@ -20,13 +20,12 @@ export interface SitemapEntry {
     | "Destination Plans"
     | "Trip Budgets (BDT)"
     | "Travel Blog & Guides";
-  lastmod: string;
+  lastmod?: string;
   changefreq: "daily" | "weekly" | "monthly";
   priority: string;
 }
 
 const DEFAULT_BASE_URL = "https://ural-travel.pages.dev";
-const DEFAULT_LASTMOD = "2026-09-26";
 
 /**
  * Dynamically generates a complete list of all route-based pages
@@ -43,7 +42,6 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
       title: "URAL Home — Outbound Travel Intelligence for Bangladesh",
       subtitle: "Live flight comparison, hotel search, visa guides, and BDT trip calculators",
       category: "Core Pages",
-      lastmod: DEFAULT_LASTMOD,
       changefreq: "daily",
       priority: "1.0",
     },
@@ -53,7 +51,6 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
       title: "International Flights from Dhaka (DAC) Hub",
       subtitle: "Compare direct & transit airlines, baggage allowances, and roundtrip BDT fares",
       category: "Core Pages",
-      lastmod: DEFAULT_LASTMOD,
       changefreq: "daily",
       priority: "0.9",
     },
@@ -63,7 +60,6 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
       title: "Hotel & Neighborhood Guides for Bangladeshi Travelers",
       subtitle: "Halal-friendly areas, MRT-connected stays, and BDT room price ranges",
       category: "Core Pages",
-      lastmod: DEFAULT_LASTMOD,
       changefreq: "weekly",
       priority: "0.9",
     },
@@ -73,7 +69,6 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
       title: "Tourist Visa Requirements & Checklists for Bangladeshi Citizens",
       subtitle: "Visa on Arrival, e-Visa portals, bank statement rules, and step-by-step guides",
       category: "Core Pages",
-      lastmod: DEFAULT_LASTMOD,
       changefreq: "weekly",
       priority: "0.9",
     },
@@ -83,7 +78,6 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
       title: "Outbound Destination Itineraries from Bangladesh",
       subtitle: "Day-by-day trip plans, local transport hacks, and sightseeing guides",
       category: "Core Pages",
-      lastmod: DEFAULT_LASTMOD,
       changefreq: "weekly",
       priority: "0.9",
     },
@@ -93,7 +87,6 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
       title: "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub)",
       subtitle: "Skip-the-line museum tickets, theme parks, river cruises, and BDT bundle calculator",
       category: "Core Pages",
-      lastmod: DEFAULT_LASTMOD,
       changefreq: "weekly",
       priority: "0.95",
     },
@@ -103,7 +96,6 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
       title: "Umrah & Hajj Planning Hub from Bangladesh (2026 BDT Calculator & Nusuk Guide)",
       subtitle: "Compare Dhaka–Jeddah/Madinah flights, walkable Haram hotels, e-Visa steps & BDT booking desk",
       category: "Core Pages",
-      lastmod: DEFAULT_LASTMOD,
       changefreq: "weekly",
       priority: "0.95",
     },
@@ -113,7 +105,6 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
       title: "International Trip Cost & Budget Breakdowns in BDT",
       subtitle: "Budget, Mid-Range, and Luxury cost matrices for Bangladeshi travelers",
       category: "Core Pages",
-      lastmod: DEFAULT_LASTMOD,
       changefreq: "weekly",
       priority: "0.9",
     },
@@ -123,7 +114,6 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
       title: "Bangladeshi Traveler Utility Tools (BDT Converter, Plugs & Packing)",
       subtitle: "Interactive currency calculator, immigration checklist, and travel phrasebook",
       category: "Core Pages",
-      lastmod: DEFAULT_LASTMOD,
       changefreq: "weekly",
       priority: "0.8",
     },
@@ -133,7 +123,6 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
       title: "URAL Travel Blog — Dual-Currency Cards, Visa Hacks & Budget Guides",
       subtitle: "In-depth articles solving real outbound travel challenges from Bangladesh",
       category: "Core Pages",
-      lastmod: DEFAULT_LASTMOD,
       changefreq: "weekly",
       priority: "0.8",
     },
@@ -143,7 +132,6 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
       title: "Contact URAL — Direct WhatsApp & Telephone Support Desk",
       subtitle: "Free consultation for flight bookings, visa document checks, and BDT payments",
       category: "Core Pages",
-      lastmod: DEFAULT_LASTMOD,
       changefreq: "monthly",
       priority: "0.7",
     },
@@ -153,74 +141,67 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
       title: "Dynamic XML & HTML Sitemap Directory",
       subtitle: "Complete index of all route-based pages for search engines and travelers",
       category: "Core Pages",
-      lastmod: DEFAULT_LASTMOD,
       changefreq: "weekly",
       priority: "0.6",
     },
   ];
 
   const flightEntries: SitemapEntry[] = FLIGHTS_DATA.map((route) => ({
-    path: `/flights?route=${route.id}`,
-    loc: `${cleanBase}/flights?route=${route.id}`,
+    path: `/flights/${route.id}`,
+    loc: `${cleanBase}/flights/${route.id}`,
     title: `${route.from} to ${route.to} Flight Guide (${route.country})`,
     subtitle: `${route.duration} · ${route.priceRangeBdt}`,
     category: "Flight Routes",
-    lastmod: DEFAULT_LASTMOD,
     changefreq: "weekly",
     priority: "0.85",
   }));
 
   const hotelEntries: SitemapEntry[] = HOTELS_DATA.map((hotel) => ({
-    path: `/hotels?city=${hotel.id}`,
-    loc: `${cleanBase}/hotels?city=${hotel.id}`,
+    path: `/hotels/${hotel.id}`,
+    loc: `${cleanBase}/hotels/${hotel.id}`,
     title: `Best Hotels & Neighborhoods in ${hotel.city} (${hotel.country})`,
     subtitle: `Areas: ${hotel.neighborhoods.map((n) => n.name).join(", ")}`,
     category: "Hotel Guides",
-    lastmod: DEFAULT_LASTMOD,
     changefreq: "weekly",
     priority: "0.85",
   }));
 
   const visaEntries: SitemapEntry[] = VISA_DATA.map((visa) => ({
-    path: `/visa?country=${visa.id}`,
-    loc: `${cleanBase}/visa?country=${visa.id}`,
+    path: `/visa/${visa.id}`,
+    loc: `${cleanBase}/visa/${visa.id}`,
     title: `${visa.country} Visa Requirements for Bangladeshi Citizens`,
     subtitle: `${visa.requirementType} · Processing: ${visa.processingTime}`,
     category: "Visa Checklists",
-    lastmod: DEFAULT_LASTMOD,
     changefreq: "weekly",
     priority: "0.85",
   }));
 
   const destinationEntries: SitemapEntry[] = DESTINATIONS_DATA.map((dest) => ({
-    path: `/destinations?country=${dest.id}`,
-    loc: `${cleanBase}/destinations?country=${dest.id}`,
+    path: `/destinations/${dest.id}`,
+    loc: `${cleanBase}/destinations/${dest.id}`,
     title: dest.title,
     subtitle: `${dest.itinerary.length}-Day Itinerary · ${dest.budgetBdt.split(" (")[0]}`,
     category: "Destination Plans",
-    lastmod: DEFAULT_LASTMOD,
     changefreq: "weekly",
     priority: "0.85",
   }));
 
   const costEntries: SitemapEntry[] = TRIP_COSTS_DATA.map((cost) => ({
-    path: `/costs?country=${cost.id}`,
-    loc: `${cleanBase}/costs?country=${cost.id}`,
+    path: `/costs/${cost.id}`,
+    loc: `${cleanBase}/costs/${cost.id}`,
     title: `${cost.country} Trip Cost from Bangladesh (${cost.durationDays}-Day BDT Budget)`,
     subtitle: `${cost.currencyCode} · ${cost.exchangeRateText}`,
     category: "Trip Budgets (BDT)",
-    lastmod: DEFAULT_LASTMOD,
     changefreq: "weekly",
     priority: "0.85",
   }));
 
   const blogEntries: SitemapEntry[] = BLOG_DATA.map((post) => ({
-    path: `/blog?slug=${post.slug}`,
-    loc: `${cleanBase}/blog?slug=${post.slug}`,
+    path: `/blog/${post.slug}`,
+    loc: `${cleanBase}/blog/${post.slug}`,
     title: post.title,
     subtitle: `${post.category} · ${post.readTime} · Updated ${post.date}`,
     category: "Travel Blog & Guides",
-    lastmod: DEFAULT_LASTMOD,
     changefreq: "weekly",
     priority: "0.80",
   }));
@@ -242,14 +223,12 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
 export function generateSitemapXml(baseUrl: string = DEFAULT_BASE_URL): string {
   const entries = generateSitemap(baseUrl);
   const urlBlocks = entries
-    .map(
-      (entry) => `  <url>
-    <loc>${entry.loc.replace(/&/g, "&amp;")}</loc>
-    <lastmod>${entry.lastmod}</lastmod>
-    <changefreq>${entry.changefreq}</changefreq>
-    <priority>${entry.priority}</priority>
-  </url>`
-    )
+    .map((entry) => {
+      const lastmod = entry.lastmod
+        ? `\n    <lastmod>${entry.lastmod}</lastmod>`
+        : "";
+      return `  <url>\n    <loc>${entry.loc.replace(/&/g, "&amp;")}</loc>${lastmod}\n    <changefreq>${entry.changefreq}</changefreq>\n    <priority>${entry.priority}</priority>\n  </url>`;
+    })
     .join("\n");
 
   return `<?xml version="1.0" encoding="UTF-8"?>

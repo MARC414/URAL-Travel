@@ -21,6 +21,7 @@ import { AirHelpWidget } from "./AirHelpWidget";
 import { TravelIntelligence } from "./AeoInspector";
 import { Language } from "../translations";
 import { FAQ } from "../types";
+import { getResponsiveImageProps } from "../utils/imageAssets";
 
 interface UmrahLandingPageProps {
   lang: Language;
@@ -88,10 +89,12 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
       >
         {/* Full-Bleed Background Photography + Multi-Layer Editorial Vignette */}
         <img
-          src={coverImage}
-          alt="Masjid al-Haram Makkah and Madinah Umrah Package Guide from Bangladesh 2026"
-          referrerPolicy="no-referrer"
-          className="absolute inset-0 w-full h-full object-cover object-center opacity-45 scale-[1.01]"
+          {...getResponsiveImageProps(coverImage, "100vw")}
+          alt="The Kaaba at Masjid al-Haram in Makkah, illuminated at night."
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-45 scale-[1.01] pointer-events-none"
         />
         <div
           className="absolute inset-0"
@@ -135,17 +138,13 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               >
                 {isBn ? (
                   <>
-                    বাংলাদেশ থেকে ওমরাহ ও হজ্জ গাইড ২০২৬:{" "}
-                    <span className="text-[#F6B73C]">
-                      নিজে প্ল্যান করে প্রতি জনে বাঁচান ৩৫,০০০+ টাকা
-                    </span>
+                    বাংলাদেশ থেকে ওমরাহর খরচ:{" "}
+                    <span className="text-[#F6B73C]">নিজে পরিকল্পনার গাইড</span>
                   </>
                 ) : (
                   <>
-                    Umrah & Hajj Package Guide from Bangladesh 2026:{" "}
-                    <span className="text-[#F6B73C]">
-                      Save BDT 35,000+ Per Pilgrim
-                    </span>
+                    Umrah Cost from Bangladesh:{" "}
+                    <span className="text-[#F6B73C]">A DIY Planning Guide</span>
                   </>
                 )}
               </h1>
@@ -153,15 +152,15 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               {/* Search-Intent Lead Paragraph */}
               <p className="text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl">
                 {isBn
-                  ? "এজেন্সির ফিক্সড প্যাকেজে অতিরিক্ত ৩০% চার্জ বা ২ কিমি দূরের শাটল হোটেলে না থেকে নিজেই ঢাকা থেকে জেদ্দা (JED) ও মদিনা (MED) ফ্লাইট, কাবা শরীফ থেকে ৪০০ মিটারের ওয়াকিং-ডিসট্যান্স হোটেল এবং Haramain Bullet Train বুক করুন—অথবা Dual-Currency Card না থাকলে আমাদের ঢাকা ডেস্কের মাধ্যমে সম্পূর্ণ BDT-তে বুক করুন।"
-                  : "Stop overpaying 30% on opaque group packages or walking 2km uphill to distant shuttle hotels. Compare live Dhaka to Jeddah (JED) & Madinah (MED) flights, walkable Makkah Clock Tower & Ajyad hotels, and 90-day Saudi Umrah e-Visa steps in BDT—or book everything in Bangladeshi Taka through our Dhaka support desk."}
+                  ? "ঢাকা থেকে ওমরাহ পরিকল্পনার জন্য BDT বাজেট, ফ্লাইট ও হোটেলের বিকল্প, সৌদি ভিসা-সংক্রান্ত ধাপ এবং Nusuk প্রস্তুতি একসাথে দেখুন। ভাড়া, ভিসার নিয়ম ও বুকিংয়ের শর্ত বদলাতে পারে—সিদ্ধান্তের আগে বর্তমান তথ্য সংশ্লিষ্ট অফিসিয়াল উৎসে যাচাই করুন।"
+                  : "Plan Umrah from Dhaka with a BDT budget framework, flight and accommodation comparisons, Saudi visa guidance, and Nusuk preparation. Fares, entry rules, and booking terms can change, so confirm current details with the relevant official sources before you book."}
               </p>
 
               {/* Primary Paid-Marketing Action Buttons */}
               <div className="flex flex-wrap items-center gap-3.5 pt-1">
                 <a
                   href="#umrah-calculator"
-                  className="bg-[#F6B73C] hover:bg-[#ffc654] text-[#0F172A] font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-[#F6B73C]/20 inline-flex items-center gap-2 cursor-pointer"
+                  className="bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-[#F6B73C]/20 inline-flex items-center gap-2 cursor-pointer"
                 >
                   <Calculator size={15} />
                   <span>
@@ -235,7 +234,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             </div>
 
             {/* Right Column: Dual-Mode Conversion Card (DIY vs. BDT Desk) (5 Cols) */}
-            <div className="lg:col-span-5 bg-[#102A43]/95 backdrop-blur-md border border-white/15 rounded-3xl p-6 sm:p-7 space-y-5 shadow-2xl">
+            <div className="lg:col-span-5 bg-brand-navy/95 backdrop-blur-md border border-white/15 rounded-3xl p-6 sm:p-7 space-y-5 shadow-2xl">
               <div className="space-y-1">
                 <span className="text-[11px] font-mono text-[#F6B73C] font-semibold uppercase tracking-wider block">
                   {isBn ? "আপনার বুকিং পদ্ধতি বেছে নিন" : "Select Your Umrah Booking Path"}
@@ -246,7 +245,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                     onClick={() => setBookingMode("diy")}
                     className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
                       bookingMode === "diy"
-                        ? "bg-[#F6B73C] text-[#0F172A]"
+                        ? "bg-[#F6B73C] text-brand-navy"
                         : "text-slate-300 hover:text-white"
                     }`}
                   >
@@ -257,7 +256,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                     onClick={() => setBookingMode("bdtDesk")}
                     className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
                       bookingMode === "bdtDesk"
-                        ? "bg-[#F6B73C] text-[#0F172A]"
+                        ? "bg-[#F6B73C] text-brand-navy"
                         : "text-slate-300 hover:text-white"
                     }`}
                   >
@@ -301,7 +300,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                   </ul>
                   <a
                     href="#umrah-step-flights"
-                    className="w-full bg-white hover:bg-slate-100 text-[#0F172A] font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5"
+                    className="w-full bg-white hover:bg-slate-100 text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5"
                   >
                     <span>
                       {isBn
@@ -381,7 +380,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               <a
                 key={idx}
                 href={nav.href}
-                className="text-xs font-medium text-slate-200 hover:text-[#0F172A] bg-white/8 hover:bg-[#F6B73C] border border-white/12 px-3.5 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+                className="text-xs font-medium text-slate-200 hover:text-brand-navy bg-white/8 hover:bg-[#F6B73C] border border-white/12 px-3.5 py-1.5 rounded-lg transition-colors whitespace-nowrap"
               >
                 {nav.label}
               </a>
@@ -400,8 +399,8 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-100 pb-5">
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-xs text-slate-500">
-              <Calculator size={14} className="text-[#102A43]" />
-              <span className="font-semibold text-[#102A43]">
+              <Calculator size={14} className="text-brand-navy" />
+              <span className="font-semibold text-brand-navy">
                 {isBn
                   ? "ইন্টারেক্টিভ ওমরাহ বাজেট ক্যালকুলেটর ২০২৬"
                   : "Interactive Umrah Package Cost Calculator (2026)"}
@@ -439,7 +438,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 max={8}
                 value={pilgrims}
                 onChange={(e) => setPilgrims(Number(e.target.value))}
-                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#102A43]"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-navy"
               />
               <div className="flex justify-between text-[11px] font-mono text-slate-500 mt-1">
                 <span>1 Solo</span>
@@ -467,7 +466,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                     onClick={() => setDays(item.d as any)}
                     className={`py-2.5 px-3 rounded-xl text-xs font-semibold border transition-colors cursor-pointer ${
                       days === item.d
-                        ? "bg-[#102A43] text-white border-[#102A43]"
+                        ? "bg-brand-navy text-white border-brand-navy"
                         : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                     }`}
                   >
@@ -519,7 +518,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                     onClick={() => setHotelTier(tier.id as any)}
                     className={`w-full text-left p-3 rounded-xl border transition-colors cursor-pointer ${
                       hotelTier === tier.id
-                        ? "border-[#102A43] bg-white shadow-xs"
+                        ? "border-brand-navy bg-white shadow-xs"
                         : "border-slate-200 bg-slate-100/60 hover:bg-white"
                     }`}
                   >
@@ -540,7 +539,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                   onClick={() => setSeason("regular")}
                   className={`py-2 px-3 rounded-xl text-xs font-semibold border cursor-pointer ${
                     season === "regular"
-                      ? "bg-[#102A43] text-white border-[#102A43]"
+                      ? "bg-brand-navy text-white border-brand-navy"
                       : "bg-white text-slate-700 border-slate-200"
                   }`}
                 >
@@ -551,7 +550,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                   onClick={() => setSeason("peak")}
                   className={`py-2 px-3 rounded-xl text-xs font-semibold border cursor-pointer ${
                     season === "peak"
-                      ? "bg-[#102A43] text-white border-[#102A43]"
+                      ? "bg-brand-navy text-white border-brand-navy"
                       : "bg-white text-slate-700 border-slate-200"
                   }`}
                 >
@@ -569,7 +568,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 : "Itemized 2026 Umrah Cost Breakdown in Bangladeshi Taka (BDT)"}
             </h3>
 
-            <div className="bg-[#0F172A] text-white rounded-2xl p-6 grid grid-cols-1 sm:grid-cols-3 gap-4 border border-slate-800">
+            <div className="bg-brand-navy text-white rounded-2xl p-6 grid grid-cols-1 sm:grid-cols-3 gap-4 border border-slate-800">
               <div>
                 <span className="text-[11px] text-slate-400 block">
                   {isBn ? "নিজে প্ল্যান করলে জনপ্রতি খরচ" : "DIY Cost Per Pilgrim"}
@@ -687,7 +686,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         className="scroll-mt-24 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 lg:p-10 space-y-6 shadow-xs"
       >
         <div className="space-y-1 border-b border-slate-100 pb-5">
-          <span className="text-xs font-mono font-semibold text-[#102A43]">
+          <span className="text-xs font-mono font-semibold text-brand-navy">
             {isBn
               ? "প্যাকেজ মূল্য তুলনা ২০২৬ (জনপ্রতি হিসাব)"
               : "2026 Transparent Price Audit (Per Pilgrim Based on Double Occupancy)"}
@@ -748,7 +747,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               key={i}
               className={`rounded-2xl p-6 border flex flex-col justify-between space-y-4 ${
                 card.featured
-                  ? "bg-[#0F172A] text-white border-[#F6B73C]"
+                  ? "bg-brand-navy text-white border-[#F6B73C]"
                   : "bg-slate-50 text-slate-900 border-slate-200"
               }`}
             >
@@ -762,7 +761,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                     {isBn ? card.savingBn : card.saving}
                   </span>
                   {card.featured && (
-                    <span className="text-[10px] font-mono bg-[#F6B73C] text-[#0F172A] font-bold px-2.5 py-0.5 rounded-md">
+                    <span className="text-[10px] font-mono bg-[#F6B73C] text-brand-navy font-bold px-2.5 py-0.5 rounded-md">
                       {isBn ? "সবচেয়ে জনপ্রিয়" : "Most Popular"}
                     </span>
                   )}
@@ -828,7 +827,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         className="scroll-mt-24 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 lg:p-10 space-y-6 shadow-xs"
       >
         <div className="space-y-1.5 border-b border-slate-100 pb-5">
-          <span className="text-xs font-mono font-semibold text-[#102A43]">
+          <span className="text-xs font-mono font-semibold text-brand-navy">
             {isBn
               ? "ধাপ ০১ · ঢাকা (DAC) থেকে জেদ্দা (JED) ও মদিনা (MED) এয়ার টিকিট"
               : "Step 01 · Dhaka (DAC) to Jeddah (JED) & Madinah (MED) Airfare Guide"}
@@ -848,7 +847,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         {/* 3 H3 Flight Strategy Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
-            <span className="text-xs font-mono font-semibold text-[#102A43]">
+            <span className="text-xs font-mono font-semibold text-brand-navy">
               6h 30m Non-Stop · 2×23kg + 5L Zamzam
             </span>
             <h3 className="font-serif text-base font-bold text-slate-900">
@@ -880,7 +879,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
           </div>
 
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
-            <span className="text-xs font-mono font-semibold text-[#102A43]">
+            <span className="text-xs font-mono font-semibold text-brand-navy">
               Smart Routing · Save 5 Hours on Highway
             </span>
             <h3 className="font-serif text-base font-bold text-slate-900">
@@ -907,7 +906,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         className="scroll-mt-24 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 lg:p-10 space-y-6 shadow-xs"
       >
         <div className="space-y-1.5 border-b border-slate-100 pb-5">
-          <span className="text-xs font-mono font-semibold text-[#102A43]">
+          <span className="text-xs font-mono font-semibold text-brand-navy">
             {isBn
               ? "ধাপ ০২ · মক্কা ও মদিনার সেরা হোটেল জোন গাইড"
               : "Step 02 · Makkah & Madinah Hotel Neighborhood Guide"}
@@ -962,7 +961,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2.5 flex flex-col justify-between"
             >
               <div className="space-y-2">
-                <div className="text-xs font-mono text-[#102A43] font-semibold">{z.dist}</div>
+                <div className="text-xs font-mono text-brand-navy font-semibold">{z.dist}</div>
                 <h3 className="font-serif text-base font-bold text-slate-900">{z.zone}</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">{z.desc}</p>
               </div>
@@ -974,7 +973,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         </div>
 
         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 space-y-3">
-          <h3 className="font-serif text-base font-bold text-[#102A43]">
+          <h3 className="font-serif text-base font-bold text-brand-navy">
             {isBn
               ? "মক্কা ও মদিনার হোটেল রেট লাইভ সার্চ করুন:"
               : "Compare Live Makkah & Madinah Hotel Rates:"}
@@ -995,7 +994,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         className="scroll-mt-24 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 lg:p-10 space-y-6 shadow-xs"
       >
         <div className="space-y-1.5 border-b border-slate-100 pb-5">
-          <span className="text-xs font-mono font-semibold text-[#102A43]">
+          <span className="text-xs font-mono font-semibold text-brand-navy">
             {isBn
               ? "ধাপ ০৩ · সৌদি ওমরাহ ই-ভিসা, Nusuk অ্যাপ ও বায়োমেট্রিক্স নিয়ম ২০২৬"
               : "Step 03 · 2026 Saudi Umrah e-Visa, Nusuk App & Biometrics Requirements"}
@@ -1051,7 +1050,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2.5 flex flex-col justify-between"
             >
               <div className="space-y-2">
-                <span className="text-xs font-mono font-bold text-[#102A43] block">
+                <span className="text-xs font-mono font-bold text-brand-navy block">
                   {item.step}
                 </span>
                 <h3 className="font-serif text-base font-bold text-slate-900 leading-snug">
@@ -1072,7 +1071,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         className="scroll-mt-24 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 lg:p-10 space-y-6 shadow-xs"
       >
         <div className="space-y-1.5 border-b border-slate-100 pb-5">
-          <span className="text-xs font-mono font-semibold text-[#102A43]">
+          <span className="text-xs font-mono font-semibold text-brand-navy">
             {isBn
               ? "ধাপ ০৪ · এয়ারপোর্ট পিকআপ, মক্কা-মদিনা জিয়ারাহ ও সৌদি eSIM"
               : "Step 04 · Jeddah Airport Pickup, Makkah/Madinah Ziyarah & Saudi eSIM"}
@@ -1088,7 +1087,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
           {/* 1. Jeddah Airport to Makkah Hotel Private Car */}
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col justify-between space-y-4">
             <div className="space-y-2">
-              <span className="text-xs font-mono font-semibold text-[#102A43]">
+              <span className="text-xs font-mono font-semibold text-brand-navy">
                 01. Jeddah (JED) → Makkah Hotel
               </span>
               <h3 className="font-serif text-base font-bold text-slate-900">
@@ -1118,7 +1117,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
           {/* 2. Klook Makkah/Madinah Ziyarah & Haramain High-Speed Rail */}
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col justify-between space-y-4">
             <div className="space-y-2">
-              <span className="text-xs font-mono font-semibold text-[#102A43]">
+              <span className="text-xs font-mono font-semibold text-brand-navy">
                 02. Ziyarah & Bullet Train (Klook)
               </span>
               <h3 className="font-serif text-base font-bold text-slate-900">
@@ -1148,7 +1147,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
           {/* 3. Airalo Saudi Arabia (Nusuk App Ready) eSIM */}
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col justify-between space-y-4">
             <div className="space-y-2">
-              <span className="text-xs font-mono font-semibold text-[#102A43]">
+              <span className="text-xs font-mono font-semibold text-brand-navy">
                 03. Instant Saudi Data (Airalo eSIM)
               </span>
               <h3 className="font-serif text-base font-bold text-slate-900">
@@ -1194,10 +1193,10 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div
-            onClick={() => onNavigate("/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost")}
+            onClick={() => onNavigate("/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost")}
             className="bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl p-6 space-y-2 cursor-pointer transition-colors"
           >
-            <span className="text-xs font-mono text-[#102A43] font-semibold">
+            <span className="text-xs font-mono text-brand-navy font-semibold">
               {isBn ? "বিস্তারিত গাইড ০১" : "In-Depth Playbook 01"}
             </span>
             <h3 className="font-serif text-lg font-bold text-slate-900">
@@ -1214,11 +1213,11 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
 
           <div
             onClick={() =>
-              onNavigate("/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh")
+              onNavigate("/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh")
             }
             className="bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl p-6 space-y-2 cursor-pointer transition-colors"
           >
-            <span className="text-xs font-mono text-[#102A43] font-semibold">
+            <span className="text-xs font-mono text-brand-navy font-semibold">
               {isBn ? "বিস্তারিত গাইড ০২" : "In-Depth Playbook 02"}
             </span>
             <h3 className="font-serif text-lg font-bold text-slate-900">

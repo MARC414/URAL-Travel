@@ -79,51 +79,53 @@ import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
 import { PriceAlertModal } from "./components/PriceAlertModal";
 import { SitemapPage } from "./components/SitemapPage";
 import { ExperiencesPage } from "./components/ExperiencesPage";
+import { getSeoCopy } from "./utils/seoCopy";
 import { UmrahLandingPage } from "./components/UmrahLandingPage";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { TopicalAuthorityBlueprint } from "./components/TopicalAuthorityBlueprint";
-const heroBgImage = new URL("./assets/images/clouds_boat_hero_1781438671378.jpg", import.meta.url).href;
-const uralHeroBgImg = new URL("./assets/images/ural_hero_bg_1781543111624.jpg", import.meta.url).href;
-const coxsBazarSunriseImg = new URL("./assets/images/coxs_bazar_sunrise_1781620718331.jpg", import.meta.url).href;
-const nepalDestImg = new URL("./assets/images/nepal_destination_1781544132297.jpg", import.meta.url).href;
-const bangkokDestImg = new URL("./assets/images/bangkok_destination_1781544149435.jpg", import.meta.url).href;
-const klDestImg = new URL("./assets/images/kl_destination_1781544164707.jpg", import.meta.url).href;
-const dubaiDestImg = new URL("./assets/images/dubai_destination_1781544180311.jpg", import.meta.url).href;
-const singaporeDestImg = new URL("./assets/images/singapore_destination_1790387270177.jpg", import.meta.url).href;
-const maldivesDestImg = new URL("./assets/images/maldives_destination_1790387286896.jpg", import.meta.url).href;
-const blogHeroBannerImg = new URL("./assets/images/blog_editorial_hero_banner_1790429994056.jpg", import.meta.url).href;
-const umrahMakkahImg = new URL("./assets/images/umrah_makkah_haram_guide_1790430007679.jpg", import.meta.url).href;
-const passportCardDeskImg = new URL("./assets/images/passport_card_travel_desk_1790430035290.jpg", import.meta.url).href;
-const haramainTrainImg = new URL("./assets/images/haramain_bullet_train_1790484312808.jpg", import.meta.url).href;
-const minaHajjTentsImg = new URL("./assets/images/mina_hajj_tents_1790484325661.jpg", import.meta.url).href;
-const madinahUmbrellasImg = new URL("./assets/images/madinah_courtyard_umbrellas_1790484340720.jpg", import.meta.url).href;
-const saudiStopoverFlightImg = new URL("./assets/images/saudi_stopover_aircraft_1790484351784.jpg", import.meta.url).href;
-const madinahGreenDomeImg = new URL("./assets/images/madinah_green_dome_1790484369923.jpg", import.meta.url).href;
-const masjidNabawiArchesImg = new URL("./assets/images/masjid_nabawi_arches_1790484388265.jpg", import.meta.url).href;
-const jeddahAirportTerminalImg = new URL("./assets/images/jeddah_airport_terminal_1790484400414.jpg", import.meta.url).href;
-const ramadanMakkahNightImg = new URL("./assets/images/ramadan_makkah_night_1790484415220.jpg", import.meta.url).href;
-const ihramPreparationImg = new URL("./assets/images/ihram_preparation_set_1790484426740.jpg", import.meta.url).href;
-const zamzamAjwaDatesImg = new URL("./assets/images/zamzam_ajwa_dates_1790484440926.jpg", import.meta.url).href;
-const makkahHalalCuisineImg = new URL("./assets/images/makkah_halal_cuisine_1790484456326.jpg", import.meta.url).href;
-const qubaMosqueZiyarahImg = new URL("./assets/images/quba_mosque_taif_ziyarah_1790485732985.jpg", import.meta.url).href;
-const dubaiSkylineTwilightImg = new URL("./assets/images/dubai_skyline_burj_twilight_1790485747967.jpg", import.meta.url).href;
-const sheikhZayedMosqueImg = new URL("./assets/images/sheikh_zayed_grand_mosque_1790485758750.jpg", import.meta.url).href;
-const putrajayaPinkMosqueImg = new URL("./assets/images/putrajaya_pink_mosque_malaysia_1790485770212.jpg", import.meta.url).href;
-const parisLouvreLandmarksImg = new URL("./assets/images/paris_louvre_london_landmarks_1790485782111.jpg", import.meta.url).href;
-const islamicBankingCardImg = new URL("./assets/images/islamic_banking_card_makkah_1790486749439.jpg", import.meta.url).href;
-const rfcdForeignBankingImg = new URL("./assets/images/rfcd_foreign_currency_banking_1790486762760.jpg", import.meta.url).href;
-const bdtTravelConciergeImg = new URL("./assets/images/bdt_travel_concierge_voucher_1790486777146.jpg", import.meta.url).href;
-const posCardTerminalImg = new URL("./assets/images/pos_card_terminal_currency_1790486792551.jpg", import.meta.url).href;
-const bangkokWatArunImg = new URL("./assets/images/bangkok_wat_arun_chao_phraya_1790486821534.jpg", import.meta.url).href;
-const kualaLumpurPetronasImg = new URL("./assets/images/kuala_lumpur_petronas_twilight_1790486835902.jpg", import.meta.url).href;
-const passportStampsWindowImg = new URL("./assets/images/passport_stamps_boarding_window_1790486849797.jpg", import.meta.url).href;
-const singaporeMrtGardensImg = new URL("./assets/images/singapore_mrt_gardens_bay_1790520762227.jpg", import.meta.url).href;
-const bangkokMedicalLobbyImg = new URL("./assets/images/bangkok_medical_hospital_lobby_1790520775439.jpg", import.meta.url).href;
-const travelEsimInsuranceImg = new URL("./assets/images/travel_esim_smartphone_insurance_1790520786938.jpg", import.meta.url).href;
-const sriLankaNineArchImg = new URL("./assets/images/sri_lanka_nine_arch_train_1790520800518.jpg", import.meta.url).href;
-const bdEpassportDeskImg = new URL("./assets/images/bangladesh_epassport_biometric_desk_1790520813052.jpg", import.meta.url).href;
-const airportDelayBoardImg = new URL("./assets/images/airport_departure_board_delay_claim_1790520824658.jpg", import.meta.url).href;
-const dhakaAirlinesTarmacImg = new URL("./assets/images/dhaka_airport_widebody_airlines_tarmac_1790520836931.jpg", import.meta.url).href;
+import { getBlogImageAltText, getResponsiveImageProps } from "./utils/imageAssets";
+const heroBgImage = "/assets/images/clouds_boat_hero_1781438671378-1200.webp";
+const uralHeroBgImg = "/assets/images/ural_hero_bg_1781543111624-1200.webp";
+const coxsBazarSunriseImg = "/assets/images/coxs_bazar_sunrise_1781620718331-1200.webp";
+const nepalDestImg = "/assets/images/nepal_destination_1781544132297-1200.webp";
+const bangkokDestImg = "/assets/images/bangkok_destination_1781544149435-1200.webp";
+const klDestImg = "/assets/images/kl_destination_1781544164707-1200.webp";
+const dubaiDestImg = "/assets/images/dubai_destination_1781544180311-1200.webp";
+const singaporeDestImg = "/assets/images/singapore_destination_1790387270177-1200.webp";
+const maldivesDestImg = "/assets/images/maldives_destination_1790387286896-1200.webp";
+const blogHeroBannerImg = "/assets/images/blog_editorial_hero_banner_1790429994056-1200.webp";
+const umrahMakkahImg = "/assets/images/umrah_makkah_haram_guide_1790430007679-1200.webp";
+const passportCardDeskImg = "/assets/images/passport_card_travel_desk_1790430035290-1200.webp";
+const haramainTrainImg = "/assets/images/haramain_bullet_train_1790484312808-1200.webp";
+const minaHajjTentsImg = "/assets/images/mina_hajj_tents_1790484325661-1200.webp";
+const madinahUmbrellasImg = "/assets/images/madinah_courtyard_umbrellas_1790484340720-1200.webp";
+const saudiStopoverFlightImg = "/assets/images/saudi_stopover_aircraft_1790484351784-1200.webp";
+const madinahGreenDomeImg = "/assets/images/madinah_green_dome_1790484369923-1200.webp";
+const masjidNabawiArchesImg = "/assets/images/masjid_nabawi_arches_1790484388265-1200.webp";
+const jeddahAirportTerminalImg = "/assets/images/jeddah_airport_terminal_1790484400414-1200.webp";
+const ramadanMakkahNightImg = "/assets/images/ramadan_makkah_night_1790484415220-1200.webp";
+const ihramPreparationImg = "/assets/images/ihram_preparation_set_1790484426740-1200.webp";
+const zamzamAjwaDatesImg = "/assets/images/zamzam_ajwa_dates_1790484440926-1200.webp";
+const makkahHalalCuisineImg = "/assets/images/makkah_halal_cuisine_1790484456326-1200.webp";
+const qubaMosqueZiyarahImg = "/assets/images/quba_mosque_taif_ziyarah_1790485732985-1200.webp";
+const dubaiSkylineTwilightImg = "/assets/images/dubai_skyline_burj_twilight_1790485747967-1200.webp";
+const sheikhZayedMosqueImg = "/assets/images/sheikh_zayed_grand_mosque_1790485758750-1200.webp";
+const putrajayaPinkMosqueImg = "/assets/images/putrajaya_pink_mosque_malaysia_1790485770212-1200.webp";
+const parisLouvreLandmarksImg = "/assets/images/paris_louvre_london_landmarks_1790485782111-1200.webp";
+const islamicBankingCardImg = "/assets/images/islamic_banking_card_makkah_1790486749439-1200.webp";
+const rfcdForeignBankingImg = "/assets/images/rfcd_foreign_currency_banking_1790486762760-1200.webp";
+const bdtTravelConciergeImg = "/assets/images/bdt_travel_concierge_voucher_1790486777146-1200.webp";
+const posCardTerminalImg = "/assets/images/pos_card_terminal_currency_1790486792551-1200.webp";
+const bangkokWatArunImg = "/assets/images/bangkok_wat_arun_chao_phraya_1790486821534-1200.webp";
+const kualaLumpurPetronasImg = "/assets/images/kuala_lumpur_petronas_twilight_1790486835902-1200.webp";
+const passportStampsWindowImg = "/assets/images/passport_stamps_boarding_window_1790486849797-1200.webp";
+const singaporeMrtGardensImg = "/assets/images/singapore_mrt_gardens_bay_1790520762227-1200.webp";
+const bangkokMedicalLobbyImg = "/assets/images/bangkok_medical_hospital_lobby_1790520775439-1200.webp";
+const travelEsimInsuranceImg = "/assets/images/travel_esim_smartphone_insurance_1790520786938-1200.webp";
+const sriLankaNineArchImg = "/assets/images/sri_lanka_nine_arch_train_1790520800518-1200.webp";
+const bdEpassportDeskImg = "/assets/images/bangladesh_epassport_biometric_desk_1790520813052-1200.webp";
+const airportDelayBoardImg = "/assets/images/airport_departure_board_delay_claim_1790520824658-1200.webp";
+const dhakaAirlinesTarmacImg = "/assets/images/dhaka_airport_widebody_airlines_tarmac_1790520836931-1200.webp";
 
 // Every single blog post (all 41 articles) is mapped to its own 100% unique visual asset (zero repeated images)
 function getBlogCoverImage(slug: string): string {
@@ -178,17 +180,17 @@ function getBlogCoverImage(slug: string): string {
       return passportStampsWindowImg;
     case "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide":
       return singaporeMrtGardensImg;
-    case "bangkok-medical-tourism-checkup-guide-bangladesh-bumrungrad-bangkok-hospital":
+    case "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh":
       return bangkokMedicalLobbyImg;
-    case "best-travel-esim-and-insurance-from-bangladesh-airalo-schengen-umrah":
+    case "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide":
       return travelEsimInsuranceImg;
-    case "sri-lanka-budget-tour-from-bangladesh-eta-visa-colombo-kandy-ella":
+    case "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost":
       return sriLankaNineArchImg;
-    case "bangladesh-epassport-application-renewal-guide-64-districts-urgent-fees":
+    case "bangladesh-epassport-application-renewal-64-districts-fee-guide":
       return bdEpassportDeskImg;
     case "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp":
       return airportDelayBoardImg;
-    case "best-airlines-from-dhaka-biman-saudia-emirates-qatar-singapore-baggage-guide":
+    case "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla":
       return dhakaAirlinesTarmacImg;
     case "dual-currency-card-endorsement-bangladesh":
       return passportCardDeskImg;
@@ -209,6 +211,7 @@ function getBlogCoverImage(slug: string): string {
     case "maldives-budget-trip-bangladesh-maafushi":
       return maldivesDestImg;
     case "cheap-flight-booking-hacks-dhaka":
+      return blogHeroBannerImg;
     default:
       return heroBgImage;
   }
@@ -287,17 +290,17 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
       "The top 6 budget-friendly international family destinations from Dhaka for 2026 ranked by 5-day per-person BDT cost are: 1. Nepal (from BDT 42,000, free VOA), 2. Malaysia (from BDT 68,000, online e-Visa), 3. Thailand (from BDT 72,000), 4. Maldives local islands (from BDT 75,000), 5. Singapore, and 6. Dubai.",
     "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide":
       "Explore Singapore from Dhaka in 4 days for BDT 84,000–96,000 per person (flights included) by tapping your Bangladeshi Dual-Currency Visa/Mastercard directly on MRT gates via SimplyGo, staying near Farrer Park & Mustafa Centre (24/7) or Bugis Sultan Mosque, and dining at MUIS-certified Halal hawker stalls.",
-    "bangkok-medical-tourism-checkup-guide-bangladesh-bumrungrad-bangkok-hospital":
+    "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh":
       "Bangladeshi patients visiting Bumrungrad International (Sukhumvit Soi 3), Bangkok Hospital, or Samitivej can book executive health check-up packages online (THB 6,900–24,500 / BDT 24,500–87,000) with complimentary Bengali medical interpreters, free airport wheelchair assistance, and patient apartments within a 5-minute walk.",
-    "best-travel-esim-and-insurance-from-bangladesh-airalo-schengen-umrah":
+    "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide":
       "Avoid BDT 1,200/day international roaming charges by installing an Airalo Travel eSIM ($4.50–$9.00 via your Dual-Currency Card) in Dhaka before departure so 5G data activates upon landing in Jeddah, Bangkok, KL, or Singapore—and pair it with a $30,000+ Travel Medical Insurance policy.",
-    "sri-lanka-budget-tour-from-bangladesh-eta-visa-colombo-kandy-ella":
+    "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost":
       "A 6-day Sri Lanka tour (Colombo, Kandy, Nuwara Eliya, Ella Nine Arch Bridge, and Galle Fort) from Dhaka costs BDT 68,000–82,000 per person including roundtrip flights. Bangladeshi passport holders apply online at eta.gov.lk ($20 USD SAARC fee) and enjoy abundant HAC-certified Halal dining.",
-    "bangladesh-epassport-application-renewal-guide-64-districts-urgent-fees":
+    "bangladesh-epassport-application-renewal-64-districts-fee-guide":
       "Apply or renew your Bangladeshi e-Passport across all 64 Regional Passport Offices at epassport.gov.bd without brokers. A 10-year 48-page e-Passport costs BDT 5,750 (Regular), BDT 8,050 (Express), or BDT 10,350 (Super Express, 2 days); always select the 64-page booklet (BDT 8,050+) if you travel frequently.",
     "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp":
       "Bangladeshi passengers whose flights are delayed 3+ hours, cancelled, or overbooked on UK/EU routes (EC 261/2004) can claim €250–€600 (BDT 33,000–80,000), while Montreal Convention rules cover up to ~$1,700 (BDT 2,05,000) for lost or damaged baggage on Biman, Saudia, Emirates, or Qatar Airways.",
-    "best-airlines-from-dhaka-biman-saudia-emirates-qatar-singapore-baggage-guide":
+    "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla":
       "Compare every major airline flying out of Dhaka (DAC): Biman and Saudia lead for direct 6.5-hour Jeddah/Madinah flights with 2x23kg (46kg) baggage and free 5L Zamzam water; Emirates, Qatar, and Gulf Air offer top 1-stop transit value; and Malaysia/Singapore Airlines lead on Asian routes.",
   };
 
@@ -372,19 +375,19 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
       "ঢাকা থেকে ২০২৬ সালে পরিবার নিয়ে ভ্রমণের শীর্ষ ৬টি বাজেট-বান্ধব দেশ (৫ দিনের জনপ্রতি খরচ অনুযায়ী): ১. নেপাল (৪২,০০০ টাকা, ফ্রি ভিসা), ২. মালয়েশিয়া (৬৮,০০০ টাকা, অনলাইন ই-ভিসা), ৩. থাইল্যান্ড (৭২,০০০ টাকা), ৪. মালদ্বীপ মাফুশি (৭৫,০০০ টাকা), ৫. সিঙ্গাপুর এবং ৬. দুবাই।",
     "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide":
       "ঢাকা থেকে ফ্লাইটসহ জনপ্রতি মাত্র ৮৪,০০০–৯৬,০০০ টাকায় ৪ দিনের সিঙ্গাপুর ভ্রমণ করুন: বাংলাদেশি ডুয়াল-কারেন্সি কার্ড সরাসরি MRT গেটে ট্যাপ (SimplyGo) করে যাতায়াত করুন, Farrer Park (Mustafa Centre) বা Bugis (সুলতান মসজিদ) এলাকায় থাকুন এবং MUIS হালাল ফুড কোর্টে খান।",
-    "bangkok-medical-tourism-checkup-guide-bangladesh-bumrungrad-bangkok-hospital":
+    "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh":
       "ব্যাংককের Bumrungrad International (Sukhumvit Soi 3), Bangkok Hospital ও Samitivej-এ অনলাইনে অ্যাপয়েন্টমেন্ট নিয়ে ফ্রি দোভাষী সুবিধাসহ হেলথ চেকআপ (৬,৯০০–২৪,৫০০ বাথ / ২৪,৫০০–৮৭,০০০ টাকা) করা যায়। গুরুতর রোগীদের দ্রুত ভিসার জন্য হাসপাতাল থেকে ফ্রি Medical Invitation Letter পাওয়া যায়।",
-    "best-travel-esim-and-insurance-from-bangladesh-airalo-schengen-umrah":
+    "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide":
       "বিদেশে প্রতিদিন ১,২০০ টাকার রোমিং বিল বাঁচাতে ঢাকা থেকেই ডুয়াল-কারেন্সি কার্ড দিয়ে Airalo অ্যাপে Travel eSIM ($4.50–$9.00) ইনস্টল করুন—যাতে জেদ্দা, ব্যাংকক বা কুয়ালালামপুরে ল্যান্ড করার সাথে সাথেই 5G ইন্টারনেট চালু হয়। সাথে রাখুন ট্রাভেল মেডিকেল ইন্স্যুরেন্স।",
-    "sri-lanka-budget-tour-from-bangladesh-eta-visa-colombo-kandy-ella":
+    "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost":
       "ঢাকা থেকে ফ্লাইটসহ জনপ্রতি মাত্র ৬৮,০০০–৮২,০০০ টাকায় ৬ দিনের শ্রীলঙ্কা (কলম্বো, ক্যান্ডি, নুওয়ারা এলিয়া, এলা Nine Arch Bridge ও গল ফোর্ট) ভ্রমণ করা যায়। বাংলাদেশি পাসপোর্টধারীরা অফিশিয়াল পোর্টালে (eta.gov.lk) মাত্র ২০ ডলারে SAARC ETA ভিসা পান।",
     "bangladesh-epassport-application-guide-64-districts-urgent-fees":
       "দালাল ছাড়াই দেশের ৬৪ জেলার পাসপোর্ট অফিসে epassport.gov.bd পোর্টালে ১০ বছর মেয়াদী ৪৮ পৃষ্ঠার ই-পাসপোর্ট করতে ৫,৭৫০ টাকা (রেগুলার), ৮,০৫০ টাকা (এক্সপ্রেস) বা ১০,৩৫০ টাকা (সুপার এক্সপ্রেস, ২ দিনে) লাগে। নিয়মিত ভ্রমণকারীদের জন্য ৬৪ পৃষ্ঠার পাসপোর্ট সেরা।",
-    "bangladesh-epassport-application-renewal-guide-64-districts-urgent-fees":
+    "bangladesh-epassport-application-renewal-64-districts-fee-guide":
       "দালাল ছাড়াই দেশের ৬৪ জেলার পাসপোর্ট অফিসে epassport.gov.bd পোর্টালে ১০ বছর মেয়াদী ৪৮ পৃষ্ঠার ই-পাসপোর্ট করতে ৫,৭৫০ টাকা (রেগুলার), ৮,০৫০ টাকা (এক্সপ্রেস) বা ১০,৩৫০ টাকা (সুপার এক্সপ্রেস, ২ দিনে) লাগে। নিয়মিত ভ্রমণকারীদের জন্য ৬৪ পৃষ্ঠার পাসপোর্ট সেরা।",
     "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp":
       "ফ্লাইট ৩+ ঘণ্টা দেরি (Delay), বাতিল বা ওভারবুকিং হলে ইউরোপ/যুক্তরাজ্য রুটে EC 261/2004 আইন অনুযায়ী €250–€600 (৩৩,০০০–৮০,০০০ টাকা) এবং যেকোনো আন্তর্জাতিক এয়ারলাইন্সে লাগেজ হারালে মন্ট্রিয়ল কনভেনশনে সর্বোচ্চ ২,০৫,০০০ টাকা পর্যন্ত ক্ষতিপূরণ দাবি করা যায়।",
-    "best-airlines-from-dhaka-biman-saudia-emirates-qatar-singapore-baggage-guide":
+    "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla":
       "ঢাকা (DAC) থেকে সরাসরি জেদ্দা/মদিনা ওমরাহ ফ্লাইটে ৪৬ কেজি (২x২৩ কেজি) ব্যাগেজ ও ৫ লিটার ফ্রি জমজম পানির সুবিধায় Biman ও Saudia সেরা। সাশ্রয়ী ১-স্টপ ট্রানজিটে Emirates, Qatar ও Gulf Air এবং এশিয়া রুটে Malaysia ও Singapore Airlines শীর্ষে।",
   };
 
@@ -399,7 +402,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
   return `${cleanWords.slice(0, 50).join(" ").replace(/[.,;:!?-]+$/, "")}...`;
 }
 
-type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "experiences" | "umrah" | "costs" | "tools" | "blog" | "contact" | "sitemap";
+type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "experiences" | "umrah" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
@@ -570,61 +573,75 @@ export default function App() {
   // Parse path to resolve active section and optional query parameters
   const getRouteDetails = () => {
     const url = new URL(currentPath, "https://ural-travel.pages.dev");
-    const pathname = url.pathname;
     const searchParams = url.searchParams;
-    const segments = pathname.split("/").filter(Boolean);
+    const segments = url.pathname.split("/").filter(Boolean);
+    const root = segments[0] || "";
     const subSegment = segments[1] || null;
 
-    let section: SectionType = "home";
+    let section: SectionType = "notFound";
     let parameterId: string | null = null;
     let isLanding = false;
 
-    if (pathname.startsWith("/flights")) {
-      section = "flights";
+    if (!root) {
+      section = "home";
+      isLanding = true;
+    } else if (root === "flights" && segments.length <= 2) {
       const routeParam = searchParams.get("route") || subSegment;
-      parameterId = routeParam || "dhaka-kathmandu";
-      isLanding = !routeParam;
-    } else if (pathname.startsWith("/hotels")) {
-      section = "hotels";
+      if (!routeParam || FLIGHTS_DATA.some((route) => route.id === routeParam)) {
+        section = "flights";
+        parameterId = routeParam || "dhaka-kathmandu";
+        isLanding = !routeParam;
+      }
+    } else if (root === "hotels" && segments.length <= 2) {
       const cityParam = searchParams.get("city") || subSegment;
-      parameterId = cityParam || "kathmandu-hotels";
-      isLanding = !cityParam;
-    } else if (pathname.startsWith("/visa")) {
-      section = "visa";
+      if (!cityParam || HOTELS_DATA.some((hotel) => hotel.id === cityParam)) {
+        section = "hotels";
+        parameterId = cityParam || "kathmandu-hotels";
+        isLanding = !cityParam;
+      }
+    } else if (root === "visa" && segments.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
-      parameterId = countryParam || "nepal-visa";
-      isLanding = !countryParam;
-    } else if (pathname.startsWith("/destinations")) {
-      section = "destinations";
+      if (!countryParam || VISA_DATA.some((visa) => visa.id === countryParam)) {
+        section = "visa";
+        parameterId = countryParam || "nepal-visa";
+        isLanding = !countryParam;
+      }
+    } else if (root === "destinations" && segments.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
-      parameterId = countryParam || "nepal-guide";
-      isLanding = !countryParam;
-    } else if (pathname.startsWith("/experiences") || pathname.startsWith("/attractions")) {
+      if (!countryParam || DESTINATIONS_DATA.some((destination) => destination.id === countryParam)) {
+        section = "destinations";
+        parameterId = countryParam || "nepal-guide";
+        isLanding = !countryParam;
+      }
+    } else if (root === "costs" && segments.length <= 2) {
+      const countryParam = searchParams.get("country") || subSegment;
+      if (!countryParam || TRIP_COSTS_DATA.some((cost) => cost.id === countryParam)) {
+        section = "costs";
+        parameterId = countryParam || "nepal-costs";
+        isLanding = !countryParam;
+      }
+    } else if ((root === "experiences" || root === "attractions") && segments.length === 1) {
       section = "experiences";
       isLanding = true;
-    } else if (pathname.startsWith("/umrah") || pathname.startsWith("/hajj")) {
+    } else if ((root === "umrah" || root === "hajj") && segments.length === 1) {
       section = "umrah";
       isLanding = true;
-    } else if (pathname.startsWith("/costs")) {
-      section = "costs";
-      const countryParam = searchParams.get("country") || subSegment;
-      parameterId = countryParam || "nepal-costs";
-      isLanding = !countryParam;
-    } else if (pathname.startsWith("/tools")) {
+    } else if (root === "tools" && segments.length === 1) {
       section = "tools";
       isLanding = true;
-    } else if (pathname.startsWith("/blog")) {
-      section = "blog";
+    } else if (root === "blog" && segments.length <= 2) {
       const slugParam = searchParams.get("slug") || subSegment;
-      parameterId = slugParam || "cheap-flight-booking-hacks-dhaka";
-      isLanding = !slugParam;
-    } else if (pathname.startsWith("/contact")) {
+      if (!slugParam || BLOG_DATA.some((post) => post.slug === slugParam)) {
+        section = "blog";
+        parameterId = slugParam || "cheap-flight-booking-hacks-dhaka";
+        isLanding = !slugParam;
+      }
+    } else if (root === "contact" && segments.length === 1) {
       section = "contact";
       isLanding = true;
     } else if (
-      pathname.startsWith("/sitemap") ||
-      pathname.startsWith("/pre-departure") ||
-      pathname.startsWith("/indexing")
+      ["sitemap", "pre-departure", "indexing"].includes(root) &&
+      segments.length === 1
     ) {
       section = "sitemap";
       isLanding = true;
@@ -1086,8 +1103,8 @@ export default function App() {
       { name: "Attractions & Passes", url: "https://ural-travel.pages.dev/experiences" }
     ];
   } else if (section === "umrah") {
-    seoTitle = "Umrah & Hajj Guide from Bangladesh 2026: BDT Cost Calculator, Nusuk & Flights | URAL";
-    seoDescription = "Plan your DIY Umrah from Dhaka and save BDT 35,000+ per pilgrim, or book flights, Makkah/Madinah hotels, and e-Visas in BDT via our Dhaka WhatsApp desk.";
+    seoTitle = "Umrah Cost from Bangladesh: DIY Guide & Nusuk | URAL";
+    seoDescription = "Plan Umrah from Dhaka with a BDT cost framework, Saudi visa and Nusuk guidance, Makkah–Madinah travel options, and a practical preparation checklist.";
     seoSchema = generateFAQSchema(HAJJ_UMRAH_FAQS, {
       url: "https://ural-travel.pages.dev/umrah",
       name: "Umrah & Hajj Planning Hub from Bangladesh (2026)",
@@ -1108,6 +1125,44 @@ export default function App() {
     ];
   }
 
+  if (section === "notFound") {
+    seoTitle = "Page not found | URAL";
+    seoDescription = "The requested URAL travel page could not be found. Browse the travel guides or return to the homepage.";
+  }
+
+  const seoRoutePath = (() => {
+    if (section === "home") return "/";
+    if (["flights", "hotels", "visa", "destinations", "costs"].includes(section)) {
+      return isLanding ? `/${section}` : `/${section}/${parameterId}`;
+    }
+    if (section === "blog") return isLanding ? "/blog" : `/blog/${parameterId}`;
+    if (section === "experiences") return "/experiences";
+    if (section === "umrah") return "/umrah";
+    if (section === "sitemap") return "/sitemap";
+    if (section === "tools" || section === "contact") return `/${section}`;
+    return new URL(currentPath, "https://ural-travel.pages.dev").pathname;
+  })();
+
+  const sharedSeoCopy = getSeoCopy(seoRoutePath, seoTitle, seoDescription);
+  seoTitle = sharedSeoCopy.title;
+  seoDescription = sharedSeoCopy.description;
+
+  const syncPageSchemaCopy = (schemaNode: any): any => {
+    if (Array.isArray(schemaNode)) return schemaNode.map(syncPageSchemaCopy);
+    if (!schemaNode || typeof schemaNode !== "object") return schemaNode;
+
+    const updatedNode = { ...schemaNode };
+    if (updatedNode["@type"] === "WebPage" || updatedNode["@type"] === "CollectionPage") {
+      updatedNode.name = seoTitle;
+      updatedNode.description = seoDescription;
+    }
+    if (Array.isArray(updatedNode["@graph"])) {
+      updatedNode["@graph"] = updatedNode["@graph"].map(syncPageSchemaCopy);
+    }
+    return updatedNode;
+  };
+  seoSchema = syncPageSchemaCopy(seoSchema);
+
   // Call the hook at the top level
   useSeoMeta({
     title: seoTitle,
@@ -1116,6 +1171,7 @@ export default function App() {
     breadcrumbs: seoBreadcrumbs,
     imageUrl: seoImageUrl,
     inLanguage: pageLanguage,
+    noindex: section === "notFound",
   });
 
   // Helper that normalizes legacy query-string paths to clean path-based routes
@@ -1173,15 +1229,15 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-800 font-sans leading-relaxed selection:bg-[#F6B73C] selection:text-[#102A43] overflow-x-hidden">
+    <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-[#F6B73C] selection:text-brand-navy overflow-x-hidden">
       
 
 
       {/* 🟦 STICKY HEADER WRAPPER (Top Strip + Main Navbar) */}
       <div className="sticky top-0 z-50 w-full shadow-lg">
         
-        {/* 🟦 TOP STRIP (Height: 36px, Background: #0B1628) */}
-        <div className="w-full bg-[#0B1628] h-9 flex items-center select-none">
+        {/* 🟦 TOP STRIP (Height: 36px, Background: #0B1426) */}
+        <div className="w-full bg-brand-navy h-9 flex items-center select-none">
           <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between text-white/55 text-xs">
             <span className="truncate font-sans font-medium">{t.topStripTagline}</span>
             <div className="flex items-center gap-2 sm:gap-3 shrink-0 font-sans text-[11px] font-medium">
@@ -1192,21 +1248,19 @@ export default function App() {
           </div>
         </div>
 
-        {/* 🟦 1. MAIN NAVBAR (Height: 64px, Background: #0F172A) */}
-        <header id="main-navbar-sticky" className="w-full bg-[#0F172A] text-white border-b border-white/8 h-16 flex items-center">
+        {/* 🟦 1. MAIN NAVBAR (Height: 64px, Background: #0B1426) */}
+        <header id="main-navbar-sticky" className="w-full bg-brand-navy text-white border-b border-white/8 h-16 flex items-center">
           <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between">
             
             {/* Logo Left */}
-            <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigateTo("/")}>
-              <div className="bg-gradient-to-br from-[#F6B73C] to-[#E2A123] text-[#0F172A] p-2 rounded-xl shrink-0 shadow-lg shadow-[#F6B73C]/10 flex items-center justify-center">
-                <svg className="w-5 h-5 text-[#0F172A]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  {/* Minimalist Flying Bird outline */}
-                  <path d="M12 18.5c-.5-3-4-7-9-7.5 5-1 8-4.5 9-7.5 1 3 4 6.5 9 7.5-5 .5-8.5 4.5-9 7.5z" />
-                </svg>
-              </div>
-              <span className="font-sans font-extrabold text-[21px] text-white tracking-wider leading-none">
-                URAL
-              </span>
+            <div className="flex items-center cursor-pointer" onClick={() => navigateTo("/")}>
+              <img
+                src="/assets/brand/svg/ural-wordmark.svg"
+                alt="URAL"
+                width="105"
+                height="36"
+                className="h-9 w-auto"
+              />
             </div>
 
             {/* Navigation Centered — Streamlined High-Intent Information Architecture */}
@@ -1290,7 +1344,7 @@ export default function App() {
 
                 {/* 3-Column Mega Menu Dropdown Panel */}
                 <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-150 absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[780px] lg:w-[860px] z-50">
-                  <div className="bg-[#0F172A] border border-white/15 rounded-3xl shadow-2xl p-6 grid grid-cols-12 gap-6 text-left">
+                  <div className="bg-brand-navy border border-white/15 rounded-3xl shadow-2xl p-6 grid grid-cols-12 gap-6 text-left">
                     {/* Column 1: Asia & Middle East Pillars (4 Cols) */}
                     <div className="col-span-4 space-y-3 border-r border-white/10 pr-5">
                       <div className="space-y-0.5">
@@ -1307,32 +1361,32 @@ export default function App() {
                           {
                             label: isBn ? "🇳🇵 নেপাল (কাঠমান্ডু ও পোখরা)" : "🇳🇵 Nepal (Kathmandu & Pokhara)",
                             sub: isBn ? "ফ্রি SAARC অন-অ্যারাইভাল ভিসা" : "Free SAARC VOA · From BDT 40k",
-                            path: "/destinations?country=nepal-guide",
+                            path: "/destinations/nepal-guide",
                           },
                           {
                             label: isBn ? "🇹🇭 থাইল্যান্ড (ব্যাংকক ও ফুকেট)" : "🇹🇭 Thailand (Bangkok & Phuket)",
                             sub: isBn ? "শপিং, হালাল ফুড ও আইল্যান্ড" : "Halal dining, shopping & islands",
-                            path: "/destinations?country=thailand-guide",
+                            path: "/destinations/thailand-guide",
                           },
                           {
                             label: isBn ? "🇲🇾 মালয়েশিয়া (কুয়ালালামপুর)" : "🇲🇾 Malaysia (KL & Genting)",
                             sub: isBn ? "ই-ভিসা ও ফ্যামিলি হাব" : "Fast e-Visa · Family favorite",
-                            path: "/destinations?country=malaysia-guide",
+                            path: "/destinations/malaysia-guide",
                           },
                           {
                             label: isBn ? "🇸🇬 সিঙ্গাপুর (মেরিনা বে ও সেন্টোসা)" : "🇸🇬 Singapore (Sentosa & Bugis)",
                             sub: isBn ? "MRT গাইড ও থিম পার্ক" : "SimplyGo MRT & Universal Studios",
-                            path: "/destinations?country=singapore-guide",
+                            path: "/destinations/singapore-guide",
                           },
                           {
                             label: isBn ? "🇲🇻 মালদ্বীপ (মাফুশি ও রিসোর্ট)" : "🇲🇻 Maldives (Maafushi & Resorts)",
                             sub: isBn ? "ফ্রি ভিসা · বাজেট ও ওয়াটার ভিলা" : "Free VOA · Local island & resorts",
-                            path: "/destinations?country=maldives-guide",
+                            path: "/destinations/maldives-guide",
                           },
                           {
                             label: isBn ? "🇦🇪 দুবাই ও আবুধাবি (UAE)" : "🇦🇪 Dubai & Abu Dhabi (UAE)",
                             sub: isBn ? "ডেজার্ট সাফারি ও বুর্জ খলিফা" : "Desert Safari, Deira & Downtown",
-                            path: "/destinations?country=uae-guide",
+                            path: "/destinations/dubai-guide",
                           },
                         ].map((item, idx) => (
                           <button
@@ -1475,7 +1529,7 @@ export default function App() {
                           <button
                             type="button"
                             onClick={() => navigateTo("/experiences")}
-                            className="bg-[#F6B73C] hover:bg-[#ffc654] text-[#0F172A] font-bold text-[11px] py-2 px-2.5 rounded-xl transition-colors cursor-pointer"
+                            className="bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-[11px] py-2 px-2.5 rounded-xl transition-colors cursor-pointer"
                           >
                             {isBn ? "অ্যাক্টিভিটি হাব →" : "All Passes →"}
                           </button>
@@ -1523,7 +1577,7 @@ export default function App() {
                 </button>
 
                 <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-150 absolute right-0 top-full pt-2 w-[340px] z-50">
-                  <div className="bg-[#0F172A] border border-white/15 rounded-3xl shadow-2xl p-4 space-y-1.5 text-left">
+                  <div className="bg-brand-navy border border-white/15 rounded-3xl shadow-2xl p-4 space-y-1.5 text-left">
                     <span className="text-[10px] font-mono text-[#F6B73C] font-bold uppercase tracking-wider block px-2 pb-1">
                       {isBn ? "ইন্টারেক্টিভ টুলস ও হেল্পলাইন" : "Calculators, Checklists & Support"}
                     </span>
@@ -1580,7 +1634,7 @@ export default function App() {
               <button
                 id="btn-start-trip-cta"
                 onClick={() => navigateTo("/destinations")}
-                className="hidden md:block bg-[#F6B73C] text-[#0F172A] hover:bg-[#D4941A] font-bold text-sm rounded-full px-5 py-2 shadow-md transition-colors whitespace-nowrap cursor-pointer"
+                className="hidden md:block bg-[#F6B73C] text-brand-navy hover:bg-[#D4941A] font-bold text-sm rounded-full px-5 py-2 shadow-md transition-colors whitespace-nowrap cursor-pointer"
               >
                 {t.startTripCta}
               </button>
@@ -1619,31 +1673,20 @@ export default function App() {
               />
 
               {/* Sliding drawer from right */}
-              <div className="fixed top-0 right-0 h-full w-[340px] max-w-[90vw] bg-[#0F172A] shadow-2xl flex flex-col z-10 border-l border-white/10">
+              <div className="fixed top-0 right-0 h-full w-[340px] max-w-[90vw] bg-brand-navy shadow-2xl flex flex-col z-10 border-l border-white/10">
                 {/* Drawer Header */}
                 <div className="h-15 px-4 flex items-center justify-between border-b border-white/10 shrink-0">
-                  <div className="flex items-center gap-2.5">
-                    <div className="bg-gradient-to-br from-[#F6B73C] to-[#E2A123] text-[#0F172A] p-1.5 rounded-lg shrink-0">
-                      <svg
-                        className="w-4 h-4 text-[#0F172A]"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M12 18.5c-.5-3-4-7-9-7.5 5-1 8-4.5 9-7.5 1 3 4 6.5 9 7.5-5 .5-8.5 4.5-9 7.5z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <span className="font-sans font-extrabold text-base text-white tracking-wider block leading-none">
-                        URAL
-                      </span>
-                      <span className="text-[11px] text-slate-400 block mt-0.5">
-                        {isBn ? "যাত্রার উদ্দেশ্য অনুযায়ী মেনু" : "Browse by Travel Intent"}
-                      </span>
-                    </div>
+                  <div className="flex flex-col items-start gap-0.5">
+                    <img
+                      src="/assets/brand/svg/ural-wordmark.svg"
+                      alt="URAL"
+                      width="70"
+                      height="24"
+                      className="h-6 w-auto"
+                    />
+                    <span className="text-[11px] text-slate-400 block">
+                      {isBn ? "যাত্রার উদ্দেশ্য অনুযায়ী মেনু" : "Browse by Travel Intent"}
+                    </span>
                   </div>
                   <button
                     type="button"
@@ -1681,7 +1724,7 @@ export default function App() {
                     }}
                     className={`min-h-[44px] px-3 py-2 rounded-xl text-left text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
                       section === "umrah"
-                        ? "bg-[#F6B73C] text-[#0F172A]"
+                        ? "bg-[#F6B73C] text-brand-navy"
                         : "bg-[#F6B73C]/15 text-[#F6B73C] hover:bg-[#F6B73C]/25 border border-[#F6B73C]/35"
                     }`}
                   >
@@ -1730,10 +1773,10 @@ export default function App() {
                         },
                       ],
                       quickChips: [
-                        { label: isBn ? "✈️ কাঠমান্ডু ফ্লাইট" : "✈️ Dhaka → KTM", path: "/flights?route=dhaka-kathmandu" },
-                        { label: isBn ? "✈️ ব্যাংকক ফ্লাইট" : "✈️ Dhaka → BKK", path: "/flights?route=dhaka-bangkok" },
-                        { label: isBn ? "🛂 থাইল্যান্ড ই-ভিসা" : "🛂 Thai e-Visa", path: "/visa?country=thailand-visa" },
-                        { label: isBn ? "🛂 মালয়েশিয়া ভিসা" : "🛂 Malaysia eVisa", path: "/visa?country=malaysia-visa" },
+                        { label: isBn ? "✈️ কাঠমান্ডু ফ্লাইট" : "✈️ Dhaka → KTM", path: "/flights/dhaka-kathmandu" },
+                        { label: isBn ? "✈️ ব্যাংকক ফ্লাইট" : "✈️ Dhaka → BKK", path: "/flights/dhaka-bangkok" },
+                        { label: isBn ? "🛂 থাইল্যান্ড ই-ভিসা" : "🛂 Thai e-Visa", path: "/visa/thailand-visa" },
+                        { label: isBn ? "🛂 মালয়েশিয়া ভিসা" : "🛂 Malaysia eVisa", path: "/visa/malaysia-visa" },
                       ],
                     },
                     {
@@ -1758,12 +1801,12 @@ export default function App() {
                         },
                       ],
                       quickChips: [
-                        { label: isBn ? "🇳🇵 নেপাল গাইড" : "🇳🇵 Nepal Guide", path: "/destinations?country=nepal-guide" },
-                        { label: isBn ? "🇹🇭 থাইল্যান্ড" : "🇹🇭 Thailand", path: "/destinations?country=thailand-guide" },
-                        { label: isBn ? "🇲🇾 মালয়েশিয়া" : "🇲🇾 Malaysia", path: "/destinations?country=malaysia-guide" },
-                        { label: isBn ? "🇸🇬 সিঙ্গাপুর" : "🇸🇬 Singapore", path: "/destinations?country=singapore-guide" },
-                        { label: isBn ? "🇲🇻 মালদ্বীপ" : "🇲🇻 Maldives", path: "/destinations?country=maldives-guide" },
-                        { label: isBn ? "🇦🇪 দুবাই ও UAE" : "🇦🇪 Dubai / UAE", path: "/destinations?country=uae-guide" },
+                        { label: isBn ? "🇳🇵 নেপাল গাইড" : "🇳🇵 Nepal Guide", path: "/destinations/nepal-guide" },
+                        { label: isBn ? "🇹🇭 থাইল্যান্ড" : "🇹🇭 Thailand", path: "/destinations/thailand-guide" },
+                        { label: isBn ? "🇲🇾 মালয়েশিয়া" : "🇲🇾 Malaysia", path: "/destinations/malaysia-guide" },
+                        { label: isBn ? "🇸🇬 সিঙ্গাপুর" : "🇸🇬 Singapore", path: "/destinations/singapore-guide" },
+                        { label: isBn ? "🇲🇻 মালদ্বীপ" : "🇲🇻 Maldives", path: "/destinations/maldives-guide" },
+                        { label: isBn ? "🇦🇪 দুবাই ও UAE" : "🇦🇪 Dubai / UAE", path: "/destinations/dubai-guide" },
                         { label: isBn ? "🇫🇷🇬🇧 ইউরোপ ও UK" : "🇫🇷🇬🇧 Europe & UK", path: "/experiences?region=west" },
                         { label: isBn ? "🎟️ এশিয়া Klook ডিল" : "🎟️ Asia Passes", path: "/experiences?region=asia" },
                       ],
@@ -1792,19 +1835,19 @@ export default function App() {
                       quickChips: [
                         {
                           label: isBn ? "💳 কার্ড এন্ডোর্সমেন্ট" : "💳 Card Endorsement",
-                          path: "/blog?slug=dual-currency-card-endorsement-bangladesh",
+                          path: "/blog/dual-currency-card-endorsement-bangladesh",
                         },
                         {
                           label: isBn ? "🛂 ঢাকা ইমিগ্রেশন" : "🛂 DAC Immigration",
-                          path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go",
+                          path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go",
                         },
                         {
                           label: isBn ? "🏥 ব্যাংকক মেডিকেল" : "🏥 Medical Visa",
-                          path: "/blog?slug=bangkok-medical-tourism-guide-bangladesh-bumrungrad-visa-cost",
+                          path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh",
                         },
                         {
                           label: isBn ? "📘 ই-পাসপোর্ট গাইড" : "📘 e-Passport Guide",
-                          path: "/blog?slug=bangladesh-epassport-application-renewal-guide-fees-police-verification",
+                          path: "/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide",
                         },
                       ],
                     },
@@ -1954,7 +1997,7 @@ export default function App() {
                 </nav>
 
                 {/* Drawer CTA Footer (Compact to preserve vertical viewport budget) */}
-                <div className="p-4 border-t border-white/10 bg-[#0B1628] space-y-2.5 shrink-0">
+                <div className="p-4 border-t border-white/10 bg-brand-navy space-y-2.5 shrink-0">
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-white/70 font-medium">Language / ভাষা:</span>
                     <LanguageSwitcher lang={lang} onToggle={handleLangToggle} />
@@ -1964,7 +2007,7 @@ export default function App() {
                       href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="min-h-[42px] bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs px-3 rounded-xl flex items-center justify-center gap-1.5 shadow transition-colors"
+                      className="min-h-[42px] bg-brand-emerald text-white font-bold text-xs px-3 rounded-xl flex items-center justify-center gap-1.5 shadow transition-colors"
                     >
                       <span>💬 WhatsApp</span>
                     </a>
@@ -1974,7 +2017,7 @@ export default function App() {
                         navigateTo("/destinations");
                         setMobileMenuOpen(false);
                       }}
-                      className="min-h-[42px] bg-[#F6B73C] text-[#0F172A] hover:bg-[#D4941A] font-bold text-xs px-3 rounded-xl shadow-md text-center transition-colors cursor-pointer"
+                      className="min-h-[42px] bg-[#F6B73C] text-brand-navy hover:bg-[#D4941A] font-bold text-xs px-3 rounded-xl shadow-md text-center transition-colors cursor-pointer"
                     >
                       {t.startTripCta}
                     </button>
@@ -1991,14 +2034,26 @@ export default function App() {
       {section === "home" && (
         <div className="w-full">
           {/* 🟦 SECTION 1: TOP SECTION (ABOVE THE FOLD) — PRIMARY CONVERSION ZONE */}
-          <div 
+          <div
             className="hero-bg relative overflow-hidden min-h-[500px] lg:min-h-[560px] flex items-center p-6 md:p-12 lg:p-16 select-none border-b border-slate-800/80 bg-cover bg-center"
-            style={{
-              backgroundImage: `linear-gradient(135deg, rgba(8, 17, 32, 0.85) 0%, rgba(11, 23, 44, 0.8) 35%, rgba(15, 30, 56, 0.75) 65%, rgba(21, 38, 68, 0.85) 100%), url(${heroBgImage})`
-            }}
           >
-            {/* SEO-optimized Image Placement */}
-            <img src={heroBgImage} alt="Travel from Bangladesh — compare flights hotels and visa guides" className="sr-only" />
+            <img
+              {...getResponsiveImageProps(heroBgImage, "100vw")}
+              alt=""
+              aria-hidden={true}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none"
+            />
+            <div
+              aria-hidden={true}
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(8, 17, 32, 0.85) 0%, rgba(11, 23, 44, 0.8) 35%, rgba(15, 30, 56, 0.75) 65%, rgba(21, 38, 68, 0.85) 100%)",
+              }}
+            />
 
             {/* Bottom Fade Gradient Overlay - Removed to avoid white overlay */}
 
@@ -2057,19 +2112,19 @@ export default function App() {
               <span className="hero-badge font-sans tracking-widest uppercase inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 border leading-none bg-[#F6B73C]/15 border-[#F6B73C]/25 text-[#F6B73C] rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C] animate-ping"></span>
                 {isBn
-                  ? "⭐️ বাংলাদেশের #১ ট্রাভেল ইন্টেলিজেন্স প্ল্যাটফর্ম"
-                  : "⭐️ Bangladesh's #1 Travel Intelligence Platform"}
+                  ? "বাংলাদেশি ভ্রমণকারীদের জন্য ট্রাভেল প্ল্যানিং"
+                  : "Travel planning for Bangladeshi travelers"}
               </span>
               
               <h1 className="hero-h1 font-sans text-[clamp(2.3rem,6vw,4.5rem)] font-[900] leading-[1.1] tracking-tight text-white max-w-4xl drop-shadow text-center sm:text-left">
                 {isBn ? (
                   <>
-                    বাংলাদেশ থেকে স্মার্টভাবে <br />
-                    <span className="text-[#F6B73C]">বিশ্ব ভ্রমণ ও Umrah প্ল্যান করুন</span>
+                    বাংলাদেশ থেকে ভ্রমণ <br />
+                    <span className="text-[#F6B73C]">পরিকল্পনা করুন স্মার্টভাবে</span>
                   </>
                 ) : (
                   <>
-                    Travel Smarter <br />
+                    Plan Your Trip <br />
                     <span className="text-[#F6B73C]">From Bangladesh</span>
                   </>
                 )}
@@ -2104,7 +2159,7 @@ export default function App() {
           </div>
 
           {/* Stats Bar Container (Full Width) */}
-          <div id="hero-stats-bar" className="stats-bar bg-[#0F172A] py-7 px-4 shadow-lg border-t border-b border-[#F6B73C]/20">
+          <div id="hero-stats-bar" className="stats-bar bg-brand-navy py-7 px-4 shadow-lg border-t border-b border-[#F6B73C]/20">
             <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-around gap-6 md:gap-4 md:divide-x md:divide-white/10 text-center select-none">
               <div className="flex-1 w-full space-y-1">
                 <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">50+</div>
@@ -2147,7 +2202,7 @@ export default function App() {
             {/* 🟦 SECTION 1.5: FRESH NEW SEARCH SECTOR - relocated from hero */}
             <div id="live-flight-search" className="scroll-mt-12 space-y-6">
               <div className="text-center space-y-2">
-                <span className="text-[10px] font-mono font-bold text-[#0F172A] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">
+                <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">
                   {t.searchSectionBadge}
                 </span>
                 <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
@@ -2164,7 +2219,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => openPriceAlert("Bangkok (BKK)")}
-                    className="inline-flex items-center gap-1.5 text-xs text-emerald-300 hover:text-emerald-200 bg-[#25D366]/15 hover:bg-[#25D366]/25 px-2.5 py-1 rounded-md border border-[#25D366]/30 font-medium transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-xs text-brand-ivory hover:text-white bg-brand-emerald/15 hover:bg-brand-emerald/25 px-2.5 py-1 rounded-md border border-brand-emerald/30 font-medium transition-colors cursor-pointer"
                   >
                     <span>🔔</span>
                     <span className="hidden sm:inline">{t.setPriceAlertBtn}</span>
@@ -2179,7 +2234,7 @@ export default function App() {
               {/* Price Alert Promotion Banner */}
               <div className="bg-white border border-slate-200 rounded-xl p-3.5 sm:px-5 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-amber-50 text-[#D4941A] flex items-center justify-center font-bold text-sm shrink-0 border border-amber-200">
+                  <div className="w-8 h-8 rounded-lg bg-amber-50 text-brand-emerald flex items-center justify-center font-bold text-sm shrink-0 border border-amber-200">
                     🔔
                   </div>
                   <div className="text-xs text-slate-650 leading-snug">
@@ -2192,7 +2247,7 @@ export default function App() {
                 <button
                   type="button"
                   onClick={() => openPriceAlert()}
-                  className="shrink-0 w-full sm:w-auto bg-[#0F172A] hover:bg-slate-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors cursor-pointer text-center"
+                  className="shrink-0 w-full sm:w-auto bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors cursor-pointer text-center"
                 >
                   {t.setPriceAlertBtn}
                 </button>
@@ -2202,7 +2257,7 @@ export default function App() {
             {/* 🟦 SECTION 2: QUICK DESTINATION ENTRY */}
             <div id="destinations-section" className="scroll-mt-12 space-y-6">
               <div className="text-center space-y-2">
-                <span className="text-[10px] font-mono font-bold text-[#0F172A] uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">{t.destinationsBadge}</span>
+                <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">{t.destinationsBadge}</span>
                 <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{t.destinationsTitle}</h2>
                 <p className="text-xs text-slate-500 max-w-xl mx-auto">{t.destinationsSubtitle}</p>
               </div>
@@ -2217,9 +2272,9 @@ export default function App() {
                       : "Free visa on arrival for Bangladeshis. Budget hotels in Thamel from BDT 1,500/night. A great first international trip.",
                     code: "nepal-guide",
                     img: "🇳🇵",
-                    path: "/destinations?country=nepal-guide",
+                    path: "/destinations/nepal-guide",
                     bgImg: nepalDestImg,
-                    alt: "Kathmandu skyline view — Nepal travel guide for Bangladeshi tourists",
+                    alt: "Boudhanath Stupa in Kathmandu at sunset.",
                   },
                   {
                     city: "Bangkok",
@@ -2229,9 +2284,9 @@ export default function App() {
                       : "Online e-Visa — approved in 5–10 days. Street food, Pratunam shopping, islands, and golden temples.",
                     code: "thailand-guide",
                     img: "🇹🇭",
-                    path: "/destinations?country=thailand-guide",
+                    path: "/destinations/thailand-guide",
                     bgImg: bangkokDestImg,
-                    alt: "Bangkok temple and city view — Thailand travel guide for Bangladeshi tourists",
+                    alt: "Wat Arun on Bangkok’s Chao Phraya River at sunset.",
                   },
                   {
                     city: "Kuala Lumpur",
@@ -2241,9 +2296,9 @@ export default function App() {
                       : "Simple online eVisa. Affordable KLCC suites, 100% halal dining, and easy transit across Kuala Lumpur.",
                     code: "malaysia-guide",
                     img: "🇲🇾",
-                    path: "/destinations?country=malaysia-guide",
+                    path: "/destinations/malaysia-guide",
                     bgImg: klDestImg,
-                    alt: "Kuala Lumpur Petronas Twin Towers — Malaysia travel guide for Bangladeshi tourists",
+                    alt: "Petronas Twin Towers in the Kuala Lumpur skyline at twilight.",
                   },
                   {
                     city: "Singapore",
@@ -2253,9 +2308,9 @@ export default function App() {
                       : "4h 15m direct from Dhaka. Marina Bay, Sentosa, Gardens by the Bay, and 24-hour Mustafa shopping in Little India.",
                     code: "singapore-guide",
                     img: "🇸🇬",
-                    path: "/destinations?country=singapore-guide",
+                    path: "/destinations/singapore-guide",
                     bgImg: singaporeDestImg,
-                    alt: "Singapore Marina Bay and Gardens by the Bay — Singapore travel guide for Bangladeshi tourists",
+                    alt: "Gardens by the Bay Supertrees against Singapore’s waterfront skyline.",
                   },
                   {
                     city: "Malé & Maafushi",
@@ -2265,9 +2320,9 @@ export default function App() {
                       : "Free 30-day Visa on Arrival! Stay on Maafushi local island from BDT 6,500/night with $30 coral & sandbank tours.",
                     code: "maldives-guide",
                     img: "🇲🇻",
-                    path: "/destinations?country=maldives-guide",
+                    path: "/destinations/maldives-guide",
                     bgImg: maldivesDestImg,
-                    alt: "Maldives turquoise lagoon and white sandbank — Maldives travel guide for Bangladeshi tourists",
+                    alt: "Overwater villas above a turquoise lagoon in the Maldives.",
                   },
                   {
                     city: "Dubai",
@@ -2277,9 +2332,9 @@ export default function App() {
                       : "eVisa in 3–5 days. Burj Khalifa, desert safari, duty-free shopping — 4h 45m direct from Dhaka.",
                     code: "dubai-guide",
                     img: "🇦🇪",
-                    path: "/destinations?country=dubai-guide",
+                    path: "/destinations/dubai-guide",
                     bgImg: dubaiDestImg,
-                    alt: "Dubai Burj Khalifa skyline view — UAE travel guide for Bangladeshi tourists",
+                    alt: "Burj Khalifa rising above Dubai’s skyline at sunset.",
                   },
                 ].map((dest, idx) => (
                   <div 
@@ -2288,9 +2343,15 @@ export default function App() {
                     className="group relative rounded-2xl overflow-hidden bg-slate-950 shadow-lg hover:shadow-2xl transition-all duration-350 cursor-pointer transform hover:-translate-y-1.5 flex flex-col justify-end aspect-[4/5] sm:aspect-square md:aspect-[4/5] border border-slate-800/10 hover:border-[#F6B73C]/20"
                   >
                     {/* Background Travel Image */}
-                    <img 
-                      src={dest.bgImg} 
+                    <img
+                      {...getResponsiveImageProps(
+                        dest.bgImg,
+                        "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw",
+                      )}
                       alt={dest.alt}
+                      loading="lazy"
+                      fetchPriority="low"
+                      decoding="async"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 select-none"
                     />
 
@@ -2326,7 +2387,7 @@ export default function App() {
                 <span className="text-[10px] font-mono font-bold text-amber-600 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full uppercase tracking-wider inline-block">
                   {isBn ? "🎯 ঢাকা থেকে আপনার পরবর্তী সফর সাজান" : "🎯 Plan your next trip from Dhaka"}
                 </span>
-                <h3 className="font-serif text-2xl sm:text-3.5xl font-black text-[#102A43] tracking-tight">
+                <h3 className="font-serif text-2xl sm:text-3.5xl font-black text-brand-navy tracking-tight">
                   {isBn ? "বুকিং করার আগে যা যা জানা প্রয়োজন" : "Everything You Need Before You Book"}
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed font-sans">
@@ -2339,19 +2400,19 @@ export default function App() {
               <div className="flex flex-col sm:flex-row gap-3 shrink-0 w-full lg:w-auto">
                 <button 
                   onClick={() => navigateTo("/flights")}
-                  className="bg-[#102A43] text-white hover:bg-slate-800 font-bold text-xs py-3.5 px-6 rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+                  className="bg-brand-navy text-white hover:bg-slate-800 font-bold text-xs py-3.5 px-6 rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
                 >
                   {isBn ? "সাশ্রয়ী Flight খুঁজুন →" : "Find Cheap Flights →"}
                 </button>
                 <button 
                   onClick={() => navigateTo("/hotels")}
-                  className="bg-[#102A43] text-white hover:bg-slate-800 font-bold text-xs py-3.5 px-6 rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+                  className="bg-brand-navy text-white hover:bg-slate-800 font-bold text-xs py-3.5 px-6 rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
                 >
                   {isBn ? "বাজেট Hotel খুঁজুন →" : "Search Budget Hotels →"}
                 </button>
                 <button 
                   onClick={() => navigateTo("/blog")}
-                  className="bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-black text-xs py-3.5 px-6 rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+                  className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] font-black text-xs py-3.5 px-6 rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
                 >
                   {isBn ? "সব ট্রাভেল ব্লগ পড়ুন →" : "Browse Travel Guides →"}
                 </button>
@@ -2359,7 +2420,7 @@ export default function App() {
             </div>
 
             {/* 🟦 SECTION 4: HOTEL SEARCH ENTRY */}
-            <div className="relative rounded-3xl overflow-hidden bg-[#102A43] text-white p-8 md:p-12 shadow-xl border border-slate-800">
+            <div className="relative rounded-3xl overflow-hidden bg-brand-navy text-white p-8 md:p-12 shadow-xl border border-slate-800">
               
               <div className="max-w-3xl mx-auto text-center space-y-3 mb-8">
                 <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/20 px-3 py-1 rounded-full">
@@ -2388,17 +2449,17 @@ export default function App() {
               {/* Quick links to pre-filled hotel lookups */}
               <div className="text-center text-xs font-mono text-slate-400 mt-6 flex flex-wrap justify-center items-center gap-2">
                 <span>{isBn ? "জনপ্রিয় ফ্যামিলি হোটেল জোন:" : "Top family-rated lodging selectors:"}</span>
-                <button onClick={() => navigateTo("/hotels?city=kathmandu-hotels")} className="text-[#F6B73C] hover:underline">Thamel, Kathmandu 🇳🇵</button>
+                <button onClick={() => navigateTo("/hotels/kathmandu-hotels")} className="text-[#F6B73C] hover:underline">Thamel, Kathmandu 🇳🇵</button>
                 <span>•</span>
-                <button onClick={() => navigateTo("/hotels?city=bangkok-hotels")} className="text-[#F6B73C] hover:underline">Pratunam, Bangkok 🇹🇭</button>
+                <button onClick={() => navigateTo("/hotels/bangkok-hotels")} className="text-[#F6B73C] hover:underline">Pratunam, Bangkok 🇹🇭</button>
                 <span>•</span>
-                <button onClick={() => navigateTo("/hotels?city=kuala-lumpur-hotels")} className="text-[#F6B73C] hover:underline">Bukit Bintang, KL 🇲🇾</button>
+                <button onClick={() => navigateTo("/hotels/kuala-lumpur-hotels")} className="text-[#F6B73C] hover:underline">Bukit Bintang, KL 🇲🇾</button>
                 <span>•</span>
-                <button onClick={() => navigateTo("/hotels?city=singapore-hotels")} className="text-[#F6B73C] hover:underline">Little India, Singapore 🇸🇬</button>
+                <button onClick={() => navigateTo("/hotels/singapore-hotels")} className="text-[#F6B73C] hover:underline">Little India, Singapore 🇸🇬</button>
                 <span>•</span>
-                <button onClick={() => navigateTo("/hotels?city=maldives-hotels")} className="text-[#F6B73C] hover:underline">Maafushi, Maldives 🇲🇻</button>
+                <button onClick={() => navigateTo("/hotels/maldives-hotels")} className="text-[#F6B73C] hover:underline">Maafushi, Maldives 🇲🇻</button>
                 <span>•</span>
-                <button onClick={() => navigateTo("/hotels?city=dubai-hotels")} className="text-[#F6B73C] hover:underline">Deira, Dubai 🇦🇪</button>
+                <button onClick={() => navigateTo("/hotels/dubai-hotels")} className="text-[#F6B73C] hover:underline">Deira, Dubai 🇦🇪</button>
               </div>
             </div>
 
@@ -2407,8 +2468,8 @@ export default function App() {
 
             {/* 🟦 INTERACTIVE TOOLS DESK PANEL (Aesthetic calculation tools) */}
             <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 space-y-6">
-              <div className="border-l-4 border-[#102A43] pl-4">
-                <h3 className="font-serif text-xl font-bold text-[#102A43]">
+              <div className="border-l-4 border-brand-navy pl-4">
+                <h3 className="font-serif text-xl font-bold text-brand-navy">
                   {isBn ? "প্রয়োজনীয় ট্রাভেল টুলস (Handy Travel Tools)" : "Handy Travel Tools"}
                 </h3>
                 <p className="text-xs text-slate-500 font-mono">
@@ -2423,7 +2484,7 @@ export default function App() {
                 {/* 1. Currency Converter (Interactive) */}
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 flex flex-col justify-between">
                   <div>
-                    <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block mb-2">
+                    <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest block mb-2">
                       {isBn ? "💸 কারেন্সি কনভার্টার (BDT রেট)" : "💸 Currency Converter"}
                     </span>
                     <div className="space-y-2">
@@ -2469,7 +2530,7 @@ export default function App() {
                 {/* 2. Packing Checklist (Interactive checkboxes) */}
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 flex flex-col justify-between">
                   <div>
-                    <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block mb-1">
+                    <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest block mb-1">
                       {isBn ? "🧳 ডকুমেন্ট ও প্যাকিং চেকলিস্ট" : "🧳 Packing Checklist"}
                     </span>
                     <p className="text-[10px] text-slate-400 mb-2">
@@ -2499,7 +2560,7 @@ export default function App() {
                 {/* 3. Budget Planner Tool */}
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 flex flex-col justify-between">
                   <div>
-                    <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block mb-2">
+                    <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest block mb-2">
                       {isBn ? "📊 ৫ দিনের BDT বাজেট প্ল্যানার" : "📊 Fast Budget Planner"}
                     </span>
                     <p className="text-[11px] text-slate-500 leading-normal">
@@ -2510,7 +2571,7 @@ export default function App() {
                   </div>
                   <button 
                     onClick={() => navigateTo("/costs")}
-                    className="bg-[#102A43] text-white hover:bg-slate-800 font-bold text-[10px] py-1.5 px-3 rounded-lg self-start mt-3"
+                    className="bg-brand-navy text-white hover:bg-slate-800 font-bold text-[10px] py-1.5 px-3 rounded-lg self-start mt-3"
                   >
                     {isBn ? "বাজেট ক্যালকুলেটর খুলুন" : "Open Budget Calculator"}
                   </button>
@@ -2525,7 +2586,7 @@ export default function App() {
 
 
             {/* 🟦 SECTION 6: TRUST + ENGAGEMENT */}
-            <div className="bg-[#102A43] text-white rounded-3xl p-8 border border-slate-800 text-center space-y-6 flex flex-col justify-center" style={{ minHeight: "220px" }}>
+            <div className="bg-brand-navy text-white rounded-3xl p-8 border border-slate-800 text-center space-y-6 flex flex-col justify-center" style={{ minHeight: "220px" }}>
               <div className="space-y-1">
                 <span className="text-[9px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest">
                   {isBn ? "কেন ভ্রমণকারীরা URAL ব্যবহার করেন" : "Why Travelers Use URAL"}
@@ -2578,15 +2639,27 @@ export default function App() {
             </div>
 
             {/* 🟦 SECTION 7 / EMAIL ACTION SIGNUP */}
-            <div 
-              className="w-screen relative left-1/2 -translate-x-1/2 border-t border-b border-slate-900/10 bg-cover bg-center select-none overflow-hidden" 
-              style={{ 
-                backgroundImage: `linear-gradient(180deg, rgba(15, 30, 54, 0.5) 0%, rgba(11, 23, 44, 0.85) 65%, rgba(10, 15, 30, 0.98) 100%), url(${coxsBazarSunriseImg})`,
-                backgroundPosition: "center 40%"
-              }}
+            <div
+              className="w-screen relative left-1/2 -translate-x-1/2 border-t border-b border-slate-900/10 bg-cover bg-center select-none overflow-hidden"
             >
-              {/* SEO-optimized Image Placement */}
-              <img src={coxsBazarSunriseImg} alt="Cox's Bazar scenic sunrise beach view — travel from Dhaka and explore Bangladesh and outbound destinations" className="sr-only" />
+              <img
+                {...getResponsiveImageProps(coxsBazarSunriseImg, "100vw")}
+                alt=""
+                aria-hidden={true}
+                loading="lazy"
+                fetchPriority="low"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover pointer-events-none"
+                style={{ objectPosition: "center 40%" }}
+              />
+              <div
+                aria-hidden={true}
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(15, 30, 54, 0.5) 0%, rgba(11, 23, 44, 0.85) 65%, rgba(10, 15, 30, 0.98) 100%)",
+                }}
+              />
 
               <div className="max-w-4xl mx-auto px-4 py-16 sm:py-20 flex flex-col justify-center items-center text-center space-y-8 relative z-10">
                 
@@ -2658,7 +2731,7 @@ export default function App() {
                       />
                       <button 
                         type="submit"
-                        className="w-full sm:w-auto bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc240] active:bg-[#e2a222] font-black text-sm px-8 py-3 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer shrink-0 shadow-lg shadow-[#F6B73C]/20"
+                        className="w-full sm:w-auto bg-[#F6B73C] text-brand-navy hover:bg-[#ffc240] active:bg-[#e2a222] font-black text-sm px-8 py-3 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer shrink-0 shadow-lg shadow-[#F6B73C]/20"
                       >
                         {isBn ? "এলার্ট চালু করুন" : "Subscribe Alerts"}
                       </button>
@@ -2696,10 +2769,10 @@ export default function App() {
                   <button
                     key={route.id}
                     id={`btn-route-select-${route.id}`}
-                    onClick={() => navigateTo(`/flights?route=${route.id}`)}
+                    onClick={() => navigateTo(`/flights/${route.id}`)}
                     className={`w-full text-left p-3.5 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
                       parameterId === route.id
-                        ? "bg-[#102A43] text-white border-[#102A43] shadow-md"
+                        ? "bg-brand-navy text-white border-brand-navy shadow-md"
                         : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50"
                     }`}
                   >
@@ -2710,7 +2783,7 @@ export default function App() {
               </div>
 
               {/* Conversion Ads banner */}
-              <div className="bg-[#102A43] text-white p-5 rounded-xl border border-slate-800 space-y-3 shadow">
+              <div className="bg-brand-navy text-white p-5 rounded-xl border border-slate-800 space-y-3 shadow">
                 <span className="text-[10px] text-[#F6B73C] font-mono uppercase tracking-widest block font-bold">
                   {isBn ? "💰 বিশেষ সাশ্রয়" : "💰 Special Offer"}
                 </span>
@@ -2725,7 +2798,7 @@ export default function App() {
               </div>
 
               <div className="bg-white border border-slate-200 p-5 rounded-xl space-y-2 shadow-sm">
-                <span className="text-[10px] text-[#102A43] font-mono uppercase tracking-widest block font-bold">
+                <span className="text-[10px] text-brand-navy font-mono uppercase tracking-widest block font-bold">
                   {isBn ? "🚕 ল্যান্ড করার পর" : "🚕 After You Land"}
                 </span>
                 <p className="text-[11px] text-slate-500 leading-normal">
@@ -2751,7 +2824,7 @@ export default function App() {
                         <span>/</span>
                         <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/flights")}>{isBn ? "ফ্লাইটস" : "Flights"}</span>
                         <span>/</span>
-                        <span className="text-[#102A43] font-bold">{activeRoute.id}</span>
+                        <span className="text-brand-navy font-bold">{activeRoute.id}</span>
                       </nav>
 
                       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -2759,7 +2832,7 @@ export default function App() {
                           {isBn ? `${activeRoute.from} থেকে ${activeRoute.to} ফ্লাইট গাইড` : `Flights from ${activeRoute.from} to ${activeRoute.to}`}
                         </h1>
                         <div className="flex items-center gap-2.5">
-                          <span className="bg-[#F6B73C]/20 text-[#102A43] text-xs px-3 py-1.5 rounded-full font-bold font-mono">
+                          <span className="bg-[#F6B73C]/20 text-brand-navy text-xs px-3 py-1.5 rounded-full font-bold font-mono">
                             {activeRoute.priceRangeBdt.split(" (")[0]}
                           </span>
                           <button
@@ -2776,7 +2849,7 @@ export default function App() {
 
                     {/* 🤖 AEO: QUICK ANSWER (50-80 Words, Google AI Overview Optimized) */}
                     <div id="aeo-quick-answer-card" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
-                      <span className="text-[10px] font-bold tracking-widest text-[#102A43] font-mono block mb-1">
+                      <span className="text-[10px] font-bold tracking-widest text-brand-navy font-mono block mb-1">
                         {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
                       </span>
                       <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
@@ -2793,7 +2866,7 @@ export default function App() {
                         {activeRoute.keyFacts.map((fact) => (
                           <div key={fact.label} className="bg-white border border-slate-250 p-4 rounded-xl text-center shadow-sm">
                             <span className="text-[10px] font-bold text-slate-400 font-mono uppercase tracking-wider block">{fact.label}</span>
-                            <span className="text-xs font-semibold text-[#102A43] font-mono block mt-1">{fact.value}</span>
+                            <span className="text-xs font-semibold text-brand-navy font-mono block mt-1">{fact.value}</span>
                           </div>
                         ))}
                       </div>
@@ -2833,7 +2906,7 @@ export default function App() {
 
                      {/* Embedded Conversion search form widget */}
                     <div className="bg-slate-100 p-4 rounded-xl border border-slate-250/60 my-6">
-                      <span className="text-[10px] font-mono font-bold text-[#102A43] block mb-2">
+                      <span className="text-[10px] font-mono font-bold text-brand-navy block mb-2">
                         {isBn ? "এই রুটের ফ্লাইট সার্চ করুন" : "Search Flights on This Route"}
                       </span>
                       <TravelpayoutsEmbed
@@ -2848,30 +2921,30 @@ export default function App() {
                     />
 
                     {/* internal linking system ranking loops (Flights to Visa and Hotels!) */}
-                    <div id="hotel-visa-loop-links" className="bg-[#102A43]/5 border border-[#102A43]/15 p-5 rounded-xl space-y-3">
-                      <span className="text-[10px] font-bold text-[#102A43] font-mono tracking-widest uppercase block">
+                    <div id="hotel-visa-loop-links" className="bg-brand-navy/5 border border-brand-navy/15 p-5 rounded-xl space-y-3">
+                      <span className="text-[10px] font-bold text-brand-navy font-mono tracking-widest uppercase block">
                         {isBn ? "এই ট্রিপের জন্য আরও প্রয়োজনীয় তথ্য" : "Also Useful for This Trip"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
                         <button
                           id={`lnk-view-visa-from-flight-${activeRoute.id}`}
                           onClick={() => {
-                            navigateTo(`/visa?country=${getCountryVisaId(activeRoute.country)}`);
+                            navigateTo(`/visa/${getCountryVisaId(activeRoute.country)}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🛂 {isBn ? `${activeRoute.country} ভিসা চেকলিস্ট দেখুন` : `Check ${activeRoute.country} Visa Checklist`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
                         <button
                           id={`lnk-view-hotel-from-flight-${activeRoute.id}`}
                           onClick={() => {
-                            navigateTo(`/hotels?city=${getCountryHotelId(activeRoute.country)}`);
+                            navigateTo(`/hotels/${getCountryHotelId(activeRoute.country)}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🏨 {isBn ? `${activeRoute.country}-এ কোথায় থাকবেন` : `Where to Stay in ${activeRoute.country}`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
-                        <a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm">
+                        <a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm">
                           🚕 {isBn ? `${activeRoute.country} Airport Transfer বুক করুন` : `Book Airport Transfer in ${activeRoute.country}`} <ExternalLink size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                       </div>
@@ -2908,10 +2981,10 @@ export default function App() {
                   <button
                     key={col.id}
                     id={`btn-hotel-select-${col.id}`}
-                    onClick={() => navigateTo(`/hotels?city=${col.id}`)}
+                    onClick={() => navigateTo(`/hotels/${col.id}`)}
                     className={`w-full text-left p-3.5 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
                       parameterId === col.id
-                        ? "bg-[#102A43] text-white border-[#102A43] shadow-md"
+                        ? "bg-brand-navy text-white border-brand-navy shadow-md"
                         : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50"
                     }`}
                   >
@@ -2936,7 +3009,7 @@ export default function App() {
                         <span>/</span>
                         <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/hotels")}>{isBn ? "হোটেল" : "Hotels"}</span>
                         <span>/</span>
-                        <span className="text-[#102A43] font-bold">{activeHotel.id}</span>
+                        <span className="text-brand-navy font-bold">{activeHotel.id}</span>
                       </nav>
 
                       <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
@@ -2946,7 +3019,7 @@ export default function App() {
 
                     {/* AEO Answer */}
                     <div id="hotel-aeo-quick-answer" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
-                      <span className="text-[10px] font-bold tracking-widest text-[#102A43] font-mono block mb-1">
+                      <span className="text-[10px] font-bold tracking-widest text-brand-navy font-mono block mb-1">
                         {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
                       </span>
                       <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
@@ -2962,8 +3035,8 @@ export default function App() {
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {activeHotel.neighborhoods.map((zone) => (
                           <div key={zone.name} className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm hover:shadow">
-                            <span className="font-serif text-base font-bold text-[#102A43] block">{zone.name}</span>
-                            <span className="text-[10px] bg-slate-100 font-mono text-[#102A43] font-bold rounded-full px-2 py-0.5 inline-block my-1">{zone.vibe}</span>
+                            <span className="font-serif text-base font-bold text-brand-navy block">{zone.name}</span>
+                            <span className="text-[10px] bg-slate-100 font-mono text-brand-navy font-bold rounded-full px-2 py-0.5 inline-block my-1">{zone.vibe}</span>
                             <p className="text-sm text-slate-700 leading-relaxed mt-2 font-sans">{zone.description}</p>
                           </div>
                         ))}
@@ -2994,7 +3067,7 @@ export default function App() {
                               
                               <div className="flex flex-wrap gap-1 mt-3">
                                 {room.features.slice(0, 3).map((f) => (
-                                  <span key={f} className="text-[9px] font-mono bg-slate-100 text-[#102A43] px-2 py-0.5 rounded border border-slate-200">{f}</span>
+                                  <span key={f} className="text-[9px] font-mono bg-slate-100 text-brand-navy px-2 py-0.5 rounded border border-slate-200">{f}</span>
                                 ))}
                               </div>
                             </div>
@@ -3014,7 +3087,7 @@ export default function App() {
                                       : `Finding the best available rate at ${room.name}, ${room.neighborhood}. Opening booking page...`
                                   );
                                 }}
-                                className="bg-[#102A43] text-white hover:bg-[#1a4166] text-[10px] font-bold px-3 py-1.5 rounded-md cursor-pointer flex items-center gap-1.5 transition-colors"
+                                className="bg-brand-navy text-white hover:bg-[#1a4166] text-[10px] font-bold px-3 py-1.5 rounded-md cursor-pointer flex items-center gap-1.5 transition-colors"
                               >
                                 {isBn ? "বুক করুন" : "Book Stay"} <ExternalLink size={10} />
                               </button>
@@ -3033,26 +3106,26 @@ export default function App() {
                     />
 
                     {/* Flight & Visa Loop linkups */}
-                    <div id="hotel-internal-loop" className="bg-[#102A43]/5 border border-[#102A43]/15 p-5 rounded-xl space-y-3">
-                      <span className="text-[10px] font-bold text-[#102A43] font-mono tracking-widest uppercase block">
+                    <div id="hotel-internal-loop" className="bg-brand-navy/5 border border-brand-navy/15 p-5 rounded-xl space-y-3">
+                      <span className="text-[10px] font-bold text-brand-navy font-mono tracking-widest uppercase block">
                         {isBn ? "⚡ ফ্লাইট রুট ও ভিসা গাইড:" : "⚡ FLIGHT ROUTING & ENTRY DETAILS:"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
                         <button
                           id={`lnk-view-visa-from-hotel-${activeHotel.id}`}
                           onClick={() => {
-                            navigateTo(`/visa?country=${getCountryVisaId(activeHotel.country)}`);
+                            navigateTo(`/visa/${getCountryVisaId(activeHotel.country)}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
                         >
                           🛂 {isBn ? `${activeHotel.country} ভিসা চেকলিস্ট` : `Check ${activeHotel.country} Visa Checklist`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
                         <button
                           id={`lnk-view-flight-from-hotel-${activeHotel.id}`}
                           onClick={() => {
-                            navigateTo(`/flights?route=${getCountryFlightId(activeHotel.country)}`);
+                            navigateTo(`/flights/${getCountryFlightId(activeHotel.country)}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
                         >
                           ✈️ {isBn ? "ঢাকা থেকে ফ্লাইট রুট" : "Recommended Dhaka Flights"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
@@ -3060,7 +3133,7 @@ export default function App() {
                           href={AFFILIATE_LINKS.kiwitaxi}
                           target="_blank"
                           rel="noopener noreferrer sponsored"
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-250 rounded-lg text-left shadow-sm cursor-pointer"
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-250 rounded-lg text-left shadow-sm cursor-pointer"
                         >
                           🚕 {isBn ? "Airport Transfer ভাড়া তুলনা" : "Compare Transfer Prices"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
@@ -3105,10 +3178,10 @@ export default function App() {
                   <button
                     key={v.id}
                     id={`btn-visa-select-${v.id}`}
-                    onClick={() => navigateTo(`/visa?country=${v.id}`)}
+                    onClick={() => navigateTo(`/visa/${v.id}`)}
                     className={`w-full text-left p-3.5 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
                       parameterId === v.id
-                        ? "bg-[#102A43] text-white border-[#102A43] shadow-md"
+                        ? "bg-brand-navy text-white border-brand-navy shadow-md"
                         : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50 relative"
                     }`}
                   >
@@ -3133,7 +3206,7 @@ export default function App() {
                         <span>/</span>
                         <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/visa")}>{isBn ? "ভিসা গাইড" : "Visa"}</span>
                         <span>/</span>
-                        <span className="text-[#102A43] font-bold">{activeVisa.id}</span>
+                        <span className="text-brand-navy font-bold">{activeVisa.id}</span>
                       </nav>
 
                       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -3142,7 +3215,7 @@ export default function App() {
                             ? `বাংলাদেশি পাসপোর্টধারীদের জন্য ${activeVisa.country} ভিসা গাইড ও চেকলিস্ট`
                             : `${activeVisa.country} Visa Requirements for Bangladeshi Citizens`}
                         </h1>
-                        <span className="bg-[#102A43] text-white text-xs px-3 py-1 rounded-full font-bold font-mono">
+                        <span className="bg-brand-navy text-white text-xs px-3 py-1 rounded-full font-bold font-mono">
                           {activeVisa.requirementType}
                         </span>
                       </div>
@@ -3150,7 +3223,7 @@ export default function App() {
 
                     {/* AEO Quote */}
                     <div id="visa-aeo-box" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
-                      <span className="text-[10px] font-bold tracking-widest text-[#102A43] font-mono block mb-1">
+                      <span className="text-[10px] font-bold tracking-widest text-brand-navy font-mono block mb-1">
                         {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
                       </span>
                       <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
@@ -3163,7 +3236,7 @@ export default function App() {
                       {activeVisa.keyFacts.map((fact) => (
                         <div key={fact.label} className="bg-white border border-slate-200 p-4 rounded-xl text-center shadow-sm">
                           <span className="text-[10px] font-bold text-slate-400 font-mono uppercase tracking-wider block">{fact.label}</span>
-                          <span className="text-xs font-semibold text-[#102A43] font-mono block mt-1">{fact.value}</span>
+                          <span className="text-xs font-semibold text-brand-navy font-mono block mt-1">{fact.value}</span>
                         </div>
                       ))}
                     </div>
@@ -3176,7 +3249,7 @@ export default function App() {
                       <div className="space-y-3">
                         {activeVisa.stepByStep.map((step, idx) => (
                           <div key={idx} className="flex gap-4 text-sm sm:text-[14.5px] leading-relaxed text-slate-705 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                            <span className="w-6 h-6 rounded-full bg-[#102A43] text-white font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">{idx + 1}</span>
+                            <span className="w-6 h-6 rounded-full bg-brand-navy text-white font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">{idx + 1}</span>
                             <span>{step}</span>
                           </div>
                         ))}
@@ -3191,7 +3264,7 @@ export default function App() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {activeVisa.documentChecklist.map((cat) => (
                           <div key={cat.category} className="bg-slate-50 border border-slate-200 p-5 rounded-xl">
-                            <span className="text-xs font-bold font-mono uppercase tracking-wider text-[#102A43] block border-b border-slate-200 pb-2 mb-3">📋 {cat.category}</span>
+                            <span className="text-xs font-bold font-mono uppercase tracking-wider text-brand-navy block border-b border-slate-200 pb-2 mb-3">📋 {cat.category}</span>
                             <ul className="space-y-2 text-sm sm:text-[14.5px] text-slate-700">
                               {cat.items.map((item, idx) => (
                                 <li key={idx} className="flex items-start gap-2">
@@ -3235,7 +3308,7 @@ export default function App() {
                     {/* 📶 Stay Connected widget block */}
                     <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 animate-fade-in">
                       <div className="space-y-1">
-                        <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest block">
+                        <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest block">
                           {isBn ? "📶 ফ্লাইটে ওঠার আগে" : "📶 Before You Fly"}
                         </span>
                         <h2 className="font-serif text-lg font-bold text-slate-900">
@@ -3251,26 +3324,26 @@ export default function App() {
                     </div>
 
                     {/* Flight & Hotel loop structure */}
-                    <div id="visa-internal-loop" className="bg-[#102A43]/5 border border-[#102A43]/15 p-5 rounded-xl space-y-3">
-                      <span className="text-[10px] font-bold text-[#102A43] font-mono tracking-widest uppercase block">
+                    <div id="visa-internal-loop" className="bg-brand-navy/5 border border-brand-navy/15 p-5 rounded-xl space-y-3">
+                      <span className="text-[10px] font-bold text-brand-navy font-mono tracking-widest uppercase block">
                         {isBn ? "আপনার পুরো ট্রিপ প্ল্যান করুন" : "Plan Your Full Trip"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
                         <button
                           id={`lnk-view-hotel-from-visa-${activeVisa.id}`}
                           onClick={() => {
-                            navigateTo(`/hotels?city=${getCountryHotelId(activeVisa.country)}`);
+                            navigateTo(`/hotels/${getCountryHotelId(activeVisa.country)}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
                         >
                           🏨 {isBn ? `${activeVisa.country}-এর বাছাইকৃত হোটেল` : `Curated ${activeVisa.country} Hotels`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
                         <button
                           id={`lnk-view-flight-from-visa-${activeVisa.id}`}
                           onClick={() => {
-                            navigateTo(`/flights?route=${getCountryFlightId(activeVisa.country)}`);
+                            navigateTo(`/flights/${getCountryFlightId(activeVisa.country)}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
                         >
                           ✈️ {isBn ? "ঢাকা থেকে ফ্লাইট বুক করুন" : "Book Flights from Dhaka"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
@@ -3278,7 +3351,7 @@ export default function App() {
                           href={AFFILIATE_LINKS.airalo}
                           target="_blank"
                           rel="noopener noreferrer sponsored"
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
                         >
                           📶 {isBn ? "লোকাল eSIM নিন" : "Get a Local eSIM"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
@@ -3314,10 +3387,10 @@ export default function App() {
                   <button
                     key={des.id}
                     id={`btn-dest-select-${des.id}`}
-                    onClick={() => navigateTo(`/destinations?country=${des.id}`)}
+                    onClick={() => navigateTo(`/destinations/${des.id}`)}
                     className={`w-full text-left p-3.5 rounded-xl border font-semibold flex items-center justify-between transition-colors cursor-pointer ${
                       parameterId === des.id
-                        ? "bg-[#102A43] text-white border-[#102A43] shadow-md font-sans"
+                        ? "bg-brand-navy text-white border-brand-navy shadow-md font-sans"
                         : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50 font-sans"
                     }`}
                   >
@@ -3341,7 +3414,7 @@ export default function App() {
                         <span>/</span>
                         <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/destinations")}>Destinations</span>
                         <span>/</span>
-                        <span className="text-[#102A43] font-bold">dubai-guide</span>
+                        <span className="text-brand-navy font-bold">dubai-guide</span>
                       </nav>
 
                           {/* 🟦 1. HERO SECTION (TOP OF PAGE) */}
@@ -3355,7 +3428,7 @@ export default function App() {
 
                         {/* 👉 INSERT FLIGHT SEARCH WIDGET (Travelpayouts) */}
                         {/* Widget placement rule: Must be first interactive element on page, Above all content */}
-                        <div id="dubai-flight-conversion-widget" className="bg-[#102A43] text-white p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl space-y-6 animate-pulse-subtle">
+                        <div id="dubai-flight-conversion-widget" className="bg-brand-navy text-white p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl space-y-6 animate-pulse-subtle">
                           <div className="space-y-2">
                             <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/30 px-3 py-1 rounded-full inline-block">
                               ✈️ FLIGHTS TO DUBAI (DXB) — PRIMARY CONVERSION ZONE
@@ -3373,8 +3446,8 @@ export default function App() {
 
                         {/* 🟨 2. DUBAI QUICK SNAPSHOT */}
                         <div id="dubai-quick-snapshot" className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-4">
-                          <div className="border-l-4 border-[#102A43] pl-3">
-                            <h4 className="font-serif font-black text-sm text-[#102A43] uppercase tracking-wider">Dubai Quick Snapshot</h4>
+                          <div className="border-l-4 border-brand-navy pl-3">
+                            <h4 className="font-serif font-black text-sm text-brand-navy uppercase tracking-wider">Dubai Quick Snapshot</h4>
                             <p className="text-[11px] text-slate-500 font-mono font-light">Instant travel context before you search accommodation options below.</p>
                           </div>
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-sans">
@@ -3405,7 +3478,7 @@ export default function App() {
                         {/* 🏨 3. ACCOMMODATION SECTION */}
                         <div id="dubai-accommodation" className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4">
                           <div className="space-y-1">
-                            <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest block">
+                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest block">
                               🏨 SECTION 2: ACCOMMODATION PORTAL
                             </span>
                             <h3 className="font-serif text-lg font-bold text-slate-900">Find Hotels in Dubai</h3>
@@ -3437,7 +3510,7 @@ export default function App() {
                             ].map((item, index) => (
                               <div key={index} className="bg-white border border-slate-200 hover:border-[#F6B73C] p-5 rounded-2xl shadow-sm flex flex-col justify-between transition-all transform hover:-translate-y-1">
                                 <div className="space-y-2">
-                                  <span className="text-[9px] font-mono font-bold uppercase bg-slate-100 text-[#102A43] px-2 py-0.5 rounded-full inline-block">
+                                  <span className="text-[9px] font-mono font-bold uppercase bg-slate-100 text-brand-navy px-2 py-0.5 rounded-full inline-block">
                                     📍 AREA RECOMMENDATION
                                   </span>
                                   <h4 className="font-serif font-bold text-sm text-slate-900">{item.area}</h4>
@@ -3451,7 +3524,7 @@ export default function App() {
                                   </div>
                                   <button 
                                     onClick={() => triggerAffiliateToast(`Finding the best available rates for hotels in ${item.area}. Opening booking page...`)}
-                                    className="bg-[#102A43] hover:bg-[#F6B73C] hover:text-[#102A43] text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
+                                    className="bg-brand-navy hover:bg-[#F6B73C] hover:text-brand-navy text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
                                   >
                                     Check Hotels <ExternalLink size={10} />
                                   </button>
@@ -3465,10 +3538,10 @@ export default function App() {
                         <TravelEssentials country="Dubai, UAE" />
 
                         {/* 💡 5. TRAVEL INSIGHTS SECTION */}
-                        <div id="dubai-insights" className="bg-[#102A43]/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
+                        <div id="dubai-insights" className="bg-brand-navy/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
                           <div className="space-y-1">
-                            <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-wider block font-sans">💡 Booking Tips</span>
-                            <h4 className="font-serif text-base font-bold text-[#102A43]">Essential Dubai Booking Tips & Cost Hacks</h4>
+                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-wider block font-sans">💡 Booking Tips</span>
+                            <h4 className="font-serif text-base font-bold text-brand-navy">Essential Dubai Booking Tips & Cost Hacks</h4>
                           </div>
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans">
                             <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
@@ -3507,7 +3580,7 @@ export default function App() {
                                 </div>
                                 <button
                                   onClick={() => triggerAffiliateToast(`Checking availability for: ${thing.title}. Opening booking page...`)}
-                                  className="mt-2 text-[10px] text-[#102A43] hover:text-[#F6B73C] hover:underline flex items-center gap-1 font-mono cursor-pointer font-bold"
+                                  className="mt-2 text-[10px] text-brand-navy hover:text-[#F6B73C] hover:underline flex items-center gap-1 font-mono cursor-pointer font-bold"
                                 >
                                   Secure Pass <ExternalLink size={8} />
                                 </button>
@@ -3517,7 +3590,7 @@ export default function App() {
                         </div>
 
                         {/* 🚀 8. FINAL CALL TO ACTION */}
-                        <div id="dubai-final-cta" className="bg-[#102A43] text-white p-8 rounded-2xl text-center space-y-4">
+                        <div id="dubai-final-cta" className="bg-brand-navy text-white p-8 rounded-2xl text-center space-y-4">
                           <div className="space-y-1 max-w-xl mx-auto">
                             <h4 className="font-serif font-black text-lg sm:text-2xl text-[#F6B73C]">Plan your Dubai trip now</h4>
                             <p className="text-xs sm:text-sm text-slate-300 font-light font-sans leading-relaxed">
@@ -3527,7 +3600,7 @@ export default function App() {
                           <div className="flex flex-col sm:flex-row justify-center items-center gap-3 text-xs font-semibold">
                             <button 
                               onClick={() => navigateTo("/flights")} 
-                              className="w-full sm:w-auto bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] px-6 py-2.5 rounded-lg transition-colors cursor-pointer"
+                              className="w-full sm:w-auto bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] px-6 py-2.5 rounded-lg transition-colors cursor-pointer"
                             >
                               Search Outbound Flights
                             </button>
@@ -3582,10 +3655,10 @@ export default function App() {
                             <span>/</span>
                             <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/destinations")}>Destinations</span>
                             <span>/</span>
-                            <span className="text-[#102A43] font-bold">{activeDes.id}</span>
+                            <span className="text-brand-navy font-bold">{activeDes.id}</span>
                           </nav>
 
-                          <span className="text-[10px] font-mono font-bold tracking-widest text-[#F6B73C] bg-[#102A43] px-2.5 py-0.5 rounded-full inline-block uppercase mb-2 animate-pulse">
+                          <span className="text-[10px] font-mono font-bold tracking-widest text-[#F6B73C] bg-brand-navy px-2.5 py-0.5 rounded-full inline-block uppercase mb-2 animate-pulse">
                             🌍 Destination Guide
                           </span>
                           <h1 className="font-serif text-2xl sm:text-4xl font-black tracking-tight text-slate-900 leading-tight">
@@ -3594,7 +3667,7 @@ export default function App() {
                         </div>
 
                         {/* 2. TOP SECTION (PRIMARY CONVERSION ZONE) - FLIGHTS WIDGET FIRST */}
-                        <div id="dest-primary-conversion" className="bg-[#102A43] text-white p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl space-y-6">
+                        <div id="dest-primary-conversion" className="bg-brand-navy text-white p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl space-y-6">
                           <div className="space-y-2">
                             <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/30 px-3 py-1 rounded-full inline-block font-sans">
                               ✈️ Book Your Flight
@@ -3621,8 +3694,8 @@ export default function App() {
 
                         {/* 3. DESTINATION SNAPSHOT SECTION (FAST CONTEXT) */}
                         <div id="dest-snapshot-bento" className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-4">
-                          <div className="border-l-4 border-[#102A43] pl-3">
-                            <h4 className="font-serif font-black text-sm text-[#102A43] uppercase tracking-wider">Quick Facts</h4>
+                          <div className="border-l-4 border-brand-navy pl-3">
+                            <h4 className="font-serif font-black text-sm text-brand-navy uppercase tracking-wider">Quick Facts</h4>
                             <p className="text-[11px] text-slate-500 font-mono">Quick decision support parameters before searching accommodation.</p>
                           </div>
 
@@ -3663,7 +3736,7 @@ export default function App() {
                         {/* 4. HOTEL SEARCH SECTION (SECONDARY CONVERSION ZONE) */}
                         <div id="dest-secondary-conversion" className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4">
                           <div className="space-y-1">
-                            <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-widest block font-sans">
+                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest block font-sans">
                               🏨 Find a Hotel
                             </span>
                             <h3 className="font-serif text-lg font-bold text-slate-900">Compare Accommodations in {getCountryCityName(activeDes.country)}</h3>
@@ -3718,7 +3791,7 @@ export default function App() {
                               <div key={index} className="bg-white border border-slate-200 hover:border-[#F6B73C] p-5 rounded-2xl shadow-sm flex flex-col justify-between transition-all transform hover:-translate-y-1">
                                 <div className="space-y-2">
                                   <div className="flex items-center justify-between">
-                                    <span className="text-[9px] font-mono font-bold uppercase bg-slate-100 text-[#102A43] px-2 py-0.5 rounded-full">
+                                    <span className="text-[9px] font-mono font-bold uppercase bg-slate-100 text-brand-navy px-2 py-0.5 rounded-full">
                                       {hotel.area}
                                     </span>
                                     <span className="text-amber-500 text-xs font-bold leading-none">{hotel.star}</span>
@@ -3734,7 +3807,7 @@ export default function App() {
                                   </div>
                                   <button 
                                     onClick={() => triggerAffiliateToast(`Finding the best available rate at ${hotel.name}, ${hotel.area}. Opening booking page...`)}
-                                    className="bg-[#102A43] hover:bg-[#F6B73C] hover:text-[#102A43] text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
+                                    className="bg-brand-navy hover:bg-[#F6B73C] hover:text-brand-navy text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
                                   >
                                     Check Rates <ExternalLink size={10} />
                                   </button>
@@ -3748,10 +3821,10 @@ export default function App() {
                         <TravelEssentials country={activeDes.country} />
 
                         {/* 6. FLIGHT PRICE / DEAL INSIGHT SECTION */}
-                        <div id="dest-flight-insights" className="bg-[#102A43]/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
+                        <div id="dest-flight-insights" className="bg-brand-navy/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
                           <div className="space-y-1">
-                            <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-wider block font-sans">Flight Prices & Timing</span>
-                            <h4 className="font-serif text-base font-bold text-[#102A43]">Typical Flight Prices (Dhaka to {getCountryCityWithIata(activeDes.country)})</h4>
+                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-wider block font-sans">Flight Prices & Timing</span>
+                            <h4 className="font-serif text-base font-bold text-brand-navy">Typical Flight Prices (Dhaka to {getCountryCityWithIata(activeDes.country)})</h4>
                           </div>
 
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
@@ -3799,10 +3872,10 @@ export default function App() {
                             {activeDes.itinerary.map((dayPlan) => (
                               <div key={dayPlan.day} className="relative pl-8 border-l-2 border-slate-200 ml-4 space-y-2 font-sans">
                                 {/* Visual Timeline Bulb */}
-                                <div className="absolute -left-3 top-1 w-5.5 h-5.5 rounded-full bg-[#102A43] text-white flex items-center justify-center font-mono font-bold text-[10px]">
+                                <div className="absolute -left-3 top-1 w-5.5 h-5.5 rounded-full bg-brand-navy text-white flex items-center justify-center font-mono font-bold text-[10px]">
                                   D{dayPlan.day}
                                 </div>
-                                <h4 className="font-serif text-base font-bold text-[#102A43]">{dayPlan.title}</h4>
+                                <h4 className="font-serif text-base font-bold text-brand-navy">{dayPlan.title}</h4>
                                 <ul className="space-y-1.5 text-xs text-slate-650">
                                   {dayPlan.activities.map((act, innerIndex) => (
                                     <li key={innerIndex} className="flex gap-2">
@@ -3821,7 +3894,7 @@ export default function App() {
                             <ul className="space-y-2 text-xs text-slate-700">
                               {activeDes.localTransport.map((trans, idx) => (
                                 <li key={idx} className="flex items-start gap-2.5">
-                                  <span className="w-5 h-5 rounded bg-slate-200 text-[#102A43] font-mono font-bold flex items-center justify-center shrink-0 mt-0.5 text-[10px]">✓</span>
+                                  <span className="w-5 h-5 rounded bg-slate-200 text-brand-navy font-mono font-bold flex items-center justify-center shrink-0 mt-0.5 text-[10px]">✓</span>
                                   <span>{trans}</span>
                                 </li>
                               ))}
@@ -3841,7 +3914,7 @@ export default function App() {
                         )}
 
                         {/* 8. TRAVEL PLANNING CTA SECTION */}
-                        <div id="dest-planning-links-hub" className="bg-[#102A43]/5 border border-slate-200/60 p-6 rounded-2xl space-y-4 text-center">
+                        <div id="dest-planning-links-hub" className="bg-brand-navy/5 border border-slate-200/60 p-6 rounded-2xl space-y-4 text-center">
                           <div className="space-y-1 max-w-xl mx-auto">
                             <h4 className="font-serif font-bold text-slate-955 text-base">Ready to Book?</h4>
                             <p className="text-xs text-slate-500">Move deeper into our integrated, certified airfare and hotel booking channels to guarantee secure pricing codes.</p>
@@ -3850,21 +3923,21 @@ export default function App() {
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-semibold">
                             <button 
                               onClick={() => navigateTo("/flights")} 
-                              className="bg-[#102A43] text-white hover:bg-slate-800 p-3 rounded-xl transition-colors cursor-pointer"
+                              className="bg-brand-navy text-white hover:bg-slate-800 p-3 rounded-xl transition-colors cursor-pointer"
                             >
                               Find Cheap Flights →
                             </button>
                             <button 
                               onClick={() => navigateTo("/hotels")} 
-                              className="bg-[#102A43] text-white hover:bg-slate-800 p-3 rounded-xl transition-colors cursor-pointer"
+                              className="bg-brand-navy text-white hover:bg-slate-800 p-3 rounded-xl transition-colors cursor-pointer"
                             >
                               Check Hotel Directories →
                             </button>
                             <button 
                               onClick={() => {
-                                navigateTo(`/visa?country=${getCountryVisaId(activeDes.country)}`);
+                                navigateTo(`/visa/${getCountryVisaId(activeDes.country)}`);
                               }} 
-                              className="bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] p-3 rounded-xl transition-colors cursor-pointer"
+                              className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] p-3 rounded-xl transition-colors cursor-pointer"
                             >
                               View Visa Guidelines →
                             </button>
@@ -3878,7 +3951,7 @@ export default function App() {
                             {DESTINATIONS_DATA.filter(d => d.id !== activeDes.id).map((other) => (
                               <button
                                 key={other.id}
-                                onClick={() => navigateTo(`/destinations?country=${other.id}`)}
+                                onClick={() => navigateTo(`/destinations/${other.id}`)}
                                 className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium"
                               >
                                 🌍 {other.country} Outbound Guide
@@ -3931,10 +4004,10 @@ export default function App() {
                   <button
                     key={c.id}
                     id={`btn-cost-select-${c.id}`}
-                    onClick={() => navigateTo(`/costs?country=${c.id}`)}
+                    onClick={() => navigateTo(`/costs/${c.id}`)}
                     className={`w-full text-left p-3.5 rounded-xl border font-semibold flex items-center justify-between transition-colors cursor-pointer ${
                       parameterId === c.id
-                        ? "bg-[#102A43] text-white border-[#102A43] shadow-md font-sans"
+                        ? "bg-brand-navy text-white border-brand-navy shadow-md font-sans"
                         : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50 font-sans"
                     }`}
                   >
@@ -3959,7 +4032,7 @@ export default function App() {
                         <span>/</span>
                         <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/costs")}>{isBn ? "ভ্রমণ খরচ" : "Trip Costs"}</span>
                         <span>/</span>
-                        <span className="text-[#102A43] font-bold">{activeCost.id}</span>
+                        <span className="text-brand-navy font-bold">{activeCost.id}</span>
                       </nav>
 
                       <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
@@ -3971,7 +4044,7 @@ export default function App() {
 
                     {/* AEO Quote */}
                     <div id="cost-aeo-text-box" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
-                      <span className="text-[10px] font-bold tracking-widest text-[#102A43] font-mono block mb-1">
+                      <span className="text-[10px] font-bold tracking-widest text-brand-navy font-mono block mb-1">
                         {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
                       </span>
                       <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
@@ -3985,7 +4058,7 @@ export default function App() {
                         <h2 className="font-serif font-black text-lg text-slate-900">
                           {isBn ? "খাতওয়ারী সম্পূর্ণ ভ্রমণ খরচের হিসাব (BDT)" : "Full Trip Cost Breakdown (BDT)"}
                         </h2>
-                        <span className="text-xs text-[#102A43] bg-emerald-50 border border-emerald-200 font-mono px-3 py-1 rounded">
+                        <span className="text-xs text-brand-navy bg-emerald-50 border border-emerald-200 font-mono px-3 py-1 rounded">
                           {isBn ? "এক্সচেঞ্জ রেট:" : "Exchange Rate:"} {activeCost.exchangeRateText}
                         </span>
                       </div>
@@ -3993,7 +4066,7 @@ export default function App() {
                       <div className="overflow-x-auto">
                         <table className="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
                           <thead>
-                            <tr className="bg-[#102A43] text-white">
+                            <tr className="bg-brand-navy text-white">
                               <th className="p-4 font-serif font-bold">{isBn ? "খরচের খাত" : "What You'll Spend On"}</th>
                               <th className="p-4 font-mono font-bold">{isBn ? "বাজেট (Budget)" : "Budget"}</th>
                               <th className="p-4 font-mono font-bold">{isBn ? "মিড-রেঞ্জ (Mid-Range)" : "Mid-Range"}</th>
@@ -4045,7 +4118,7 @@ export default function App() {
 
                     {/* Money-saving hacks */}
                     <div className="space-y-4">
-                      <h3 className="font-serif font-black text-lg text-[#102A43]">
+                      <h3 className="font-serif font-black text-lg text-brand-navy">
                         {isBn ? "খরচ কমানোর পরীক্ষিত কৌশল" : "Tips to Spend Less"}
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -4061,35 +4134,35 @@ export default function App() {
                     </div>
 
                     {/* Internal link graphs */}
-                    <div id="cost-internal-loop" className="bg-[#102A43]/5 border border-[#102A43]/15 p-5 rounded-xl space-y-3">
-                      <span className="text-[10px] font-bold text-[#102A43] font-mono tracking-widest uppercase block">
+                    <div id="cost-internal-loop" className="bg-brand-navy/5 border border-brand-navy/15 p-5 rounded-xl space-y-3">
+                      <span className="text-[10px] font-bold text-brand-navy font-mono tracking-widest uppercase block">
                         {isBn ? "এই ট্রিপের অন্যান্য গাইড" : "Also Plan For This Trip"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
                         <button
                           id={`lnk-view-visa-from-cost-${activeCost.id}`}
                           onClick={() => {
-                            navigateTo(`/visa?country=${getCountryVisaId(activeCost.country)}`);
+                            navigateTo(`/visa/${getCountryVisaId(activeCost.country)}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🛂 {isBn ? "ভিসা চেকলিস্ট দেখুন" : "Passport Visa Checklist"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
                         <button
                           id={`lnk-view-dest-from-cost-${activeCost.id}`}
                           onClick={() => {
-                            navigateTo(`/destinations?country=${getCountryDestId(activeCost.country)}`);
+                            navigateTo(`/destinations/${getCountryDestId(activeCost.country)}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🌍 {isBn ? "ট্যুর আইটিনারারি দেখুন" : "View Travel Itinerary"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
                         <button
                           id={`lnk-view-hotel-from-cost-${activeCost.id}`}
                           onClick={() => {
-                            navigateTo(`/hotels?city=${getCountryHotelId(activeCost.country)}`);
+                            navigateTo(`/hotels/${getCountryHotelId(activeCost.country)}`);
                           }}
-                          className="flex items-center gap-2 text-[#102A43] hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🏨 {isBn ? "সেরা হোটেল জোন" : "Curated Area Stays"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </button>
@@ -4148,10 +4221,10 @@ export default function App() {
                 {/* Step 1 */}
                 <div className="space-y-4 pt-0">
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#102A43] text-white font-mono text-sm font-bold shadow-sm">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-navy text-white font-mono text-sm font-bold shadow-sm">
                       1
                     </div>
-                    <h3 className="font-serif text-base font-bold text-[#102A43]">
+                    <h3 className="font-serif text-base font-bold text-brand-navy">
                       {isBn ? "ধাপ ১: আপনার ফ্লাইট খুঁজুন" : "Step 1: Find your flight"}
                     </h3>
                   </div>
@@ -4163,10 +4236,10 @@ export default function App() {
                 {/* Step 2 */}
                 <div className="space-y-4 pt-8">
                   <div className="flex items-center gap-3 font-medium">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#102A43] text-white font-mono text-sm font-bold shadow-sm">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-navy text-white font-mono text-sm font-bold shadow-sm">
                       2
                     </div>
-                    <h3 className="font-serif text-base font-bold text-[#102A43]">
+                    <h3 className="font-serif text-base font-bold text-brand-navy">
                       {isBn ? "ধাপ ২: আপনার হোটেল বুক করুন" : "Step 2: Book your hotel"}
                     </h3>
                   </div>
@@ -4178,10 +4251,10 @@ export default function App() {
                 {/* Step 3 */}
                 <div className="space-y-4 pt-8">
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#102A43] text-white font-mono text-sm font-bold shadow-sm">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-navy text-white font-mono text-sm font-bold shadow-sm">
                       3
                     </div>
-                    <h3 className="font-serif text-base font-bold text-[#102A43]">
+                    <h3 className="font-serif text-base font-bold text-brand-navy">
                       {isBn ? "ধাপ ৩: Klook-এ ট্যুর ও অ্যাক্টিভিটি বুক করুন" : "Step 3: Plan activities with Klook"}
                     </h3>
                   </div>
@@ -4193,10 +4266,10 @@ export default function App() {
                 {/* Step 4 */}
                 <div className="space-y-4 pt-8">
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#102A43] text-white font-mono text-sm font-bold shadow-sm">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-navy text-white font-mono text-sm font-bold shadow-sm">
                       4
                     </div>
-                    <h3 className="font-serif text-base font-bold text-[#102A43]">
+                    <h3 className="font-serif text-base font-bold text-brand-navy">
                       {isBn ? "ধাপ ৪: ট্রাভেল eSIM সংগ্রহ করুন" : "Step 4: Get your travel eSIM"}
                     </h3>
                   </div>
@@ -4234,14 +4307,17 @@ export default function App() {
             {/* 1. FULL-WIDTH EDGE-TO-EDGE HERO IMAGE WITH H1 HEADER & SHORT DESCRIPTION */}
             <section
               aria-labelledby="blog-hero-h1"
-              className="w-screen relative left-1/2 -translate-x-1/2 -mt-6 sm:-mt-8 bg-[#0B1628] text-white overflow-hidden border-b border-slate-800 shadow-xl"
+              className="w-screen relative left-1/2 -translate-x-1/2 -mt-6 sm:-mt-8 bg-brand-navy text-white overflow-hidden border-b border-slate-800 shadow-xl"
             >
               <div className="absolute inset-0">
                 <img
-                  src={blogHeroBannerImg}
-                  alt="URAL Travel Guides and Bangladeshi Outbound Intelligence"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-center opacity-45"
+                  {...getResponsiveImageProps(blogHeroBannerImg, "100vw")}
+                  alt=""
+                  aria-hidden={true}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="w-full h-full object-cover object-center opacity-45 pointer-events-none"
                 />
                 <div
                   className="absolute inset-0"
@@ -4250,7 +4326,7 @@ export default function App() {
                       "linear-gradient(105deg, rgba(11,22,40,0.96) 0%, rgba(16,42,67,0.86) 55%, rgba(11,22,40,0.72) 100%)",
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1628] via-transparent to-[#0B1628]/40" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-brand-navy/40" />
               </div>
 
               <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
@@ -4274,7 +4350,7 @@ export default function App() {
                     <span className="bg-white/10 text-white/90 px-2.5 py-0.5 rounded-md border border-white/15">
                       {isBn
                         ? `${localizedBlogs.length}টি বিস্তারিত গাইড`
-                        : `${localizedBlogs.length} Verified Guides`}
+                        : `${localizedBlogs.length} Travel Guides`}
                     </span>
                   </nav>
 
@@ -4352,7 +4428,7 @@ export default function App() {
                         onClick={() => setBlogCategoryFilter(tab.id)}
                         className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                           isActive
-                            ? "bg-[#102A43] text-white shadow-xs"
+                            ? "bg-brand-navy text-white shadow-xs"
                             : "text-slate-700 hover:text-slate-900 hover:bg-white/60"
                         }`}
                       >
@@ -4373,7 +4449,7 @@ export default function App() {
                         : "Search Umrah, card, Nepal, visa..."
                     }
                     aria-label="Search blog guides"
-                    className="w-full bg-white border border-slate-200 focus:border-[#102A43] rounded-xl px-4 py-2.5 text-xs text-slate-800 outline-none transition-colors"
+                    className="w-full bg-white border border-slate-200 focus:border-brand-navy rounded-xl px-4 py-2.5 text-xs text-slate-800 outline-none transition-colors"
                   />
                   {blogSearchQuery && (
                     <button
@@ -4417,7 +4493,7 @@ export default function App() {
               if (filteredBlogs.length === 0) {
                 return (
                   <div className="bg-white border border-slate-200 rounded-2xl p-10 text-center space-y-3">
-                    <h3 className="font-serif text-[20px] font-bold text-[#0F172A]">
+                    <h3 className="font-serif text-[20px] font-bold text-brand-navy">
                       {isBn ? "কোনো ট্রাভেল গাইড খুঁজে পাওয়া যায়নি" : "No matching travel guides found"}
                     </h3>
                     <p className="text-xs text-slate-600 max-w-md mx-auto">
@@ -4431,7 +4507,7 @@ export default function App() {
                         setBlogCategoryFilter("all");
                         setBlogSearchQuery("");
                       }}
-                      className="bg-[#102A43] text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer"
+                      className="bg-brand-navy text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer"
                     >
                       {isBn
                         ? `সবগুলো গাইড দেখুন (${localizedBlogs.length})`
@@ -4450,22 +4526,26 @@ export default function App() {
                     return (
                       <article
                         key={post.id}
-                        onClick={() => navigateTo(`/blog?slug=${post.slug}`)}
+                        onClick={() => navigateTo(`/blog/${post.slug}`)}
                         className="group bg-white border border-slate-200/90 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between cursor-pointer"
                       >
                         <div className="flex flex-col">
                           {/* Unique Card Thumbnail Image */}
                           <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
                             <img
-                              src={coverImg}
-                              alt={post.title}
-                              referrerPolicy="no-referrer"
+                              {...getResponsiveImageProps(
+                                coverImg,
+                                "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw",
+                              )}
+                              alt={getBlogImageAltText(post.slug)}
                               loading="lazy"
+                              fetchPriority="low"
+                              decoding="async"
                               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent" />
                             <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[11px] text-white/95 font-medium">
-                              <span className="bg-[#102A43]/85 backdrop-blur-xs px-2.5 py-0.5 rounded-md border border-white/15">
+                              <span className="bg-brand-navy/85 backdrop-blur-xs px-2.5 py-0.5 rounded-md border border-white/15">
                                 {post.category}
                               </span>
                               <span className="font-mono">{post.readTime}</span>
@@ -4484,7 +4564,7 @@ export default function App() {
                               </span>
                             </div>
 
-                            <h2 className="font-serif text-[20px] sm:text-[22px] font-bold text-[#0F172A] group-hover:text-[#102A43] leading-[1.3] text-balance">
+                            <h2 className="font-serif text-[20px] sm:text-[22px] font-bold text-brand-navy group-hover:text-brand-emerald leading-[1.3] text-balance">
                               {post.title}
                             </h2>
 
@@ -4500,12 +4580,12 @@ export default function App() {
                             type="button"
                             onClick={(e) => {
                               e.stopPropagation();
-                              navigateTo(`/blog?slug=${post.slug}`);
+                              navigateTo(`/blog/${post.slug}`);
                             }}
-                            className="w-full bg-[#102A43] group-hover:bg-[#F6B73C] text-white group-hover:text-[#0F172A] font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-between cursor-pointer"
+                            className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-between cursor-pointer"
                           >
                             <span>{isBn ? "সম্পূর্ণ ব্লগ পড়ুন · Read Full Blog" : "Read Full Blog"}</span>
-                            <ArrowRight size={14} className="text-[#F6B73C] group-hover:text-[#0F172A] transition-transform group-hover:translate-x-0.5" />
+                            <ArrowRight size={14} className="text-[#F6B73C] group-hover:text-brand-navy transition-transform group-hover:translate-x-0.5" />
                           </button>
                         </div>
                       </article>
@@ -4523,12 +4603,12 @@ export default function App() {
               <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
                   <div className="space-y-1">
-                    <div className="text-xs font-semibold text-[#102A43]">
+                    <div className="text-xs font-semibold text-brand-navy">
                       {isBn
                         ? "লাইভ Flight ও Umrah রুটের ভাড়া তুলনা"
                         : "Live Airfare & Umrah Route Comparison"}
                     </div>
-                    <h2 className="font-serif text-[22px] sm:text-[26px] font-bold text-[#0F172A]">
+                    <h2 className="font-serif text-[22px] sm:text-[26px] font-bold text-brand-navy">
                       {isBn
                         ? "ঢাকা (DAC) থেকে ফ্লাইটের সর্বনিম্ন ভাড়া যাচাই করুন"
                         : "Compare Flights from Dhaka (DAC) While You Plan"}
@@ -4542,7 +4622,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => navigateTo("/contact")}
-                    className="self-start sm:self-end text-xs font-semibold text-[#102A43] hover:underline inline-flex items-center gap-1 whitespace-nowrap cursor-pointer"
+                    className="self-start sm:self-end text-xs font-semibold text-brand-navy hover:underline inline-flex items-center gap-1 whitespace-nowrap cursor-pointer"
                   >
                     <span>
                       {isBn
@@ -4593,7 +4673,7 @@ export default function App() {
         )}
 
         {/* -------------------------------------------------------------
-            📖 DEDICATED SINGLE BLOG POST PAGE (/blog?slug=...)
+            📖 DEDICATED SINGLE BLOG POST PAGE (/blog/...)
         ------------------------------------------------------------- */}
         {section === "blog" && !isLanding && (
           <div className="space-y-8 animate-fade-in">
@@ -4611,157 +4691,157 @@ export default function App() {
               // First-Occurrence Semantic Contextual Internal Linker (Nathan Gotch / Koray Tugberk Silo Rule)
               // Ensures each target URL is linked at most ONCE inside the article body (no spammy duplicate links, no self-links)
               const usedInternalPaths = new Set<string>();
-              const currentBlogPath = `/blog?slug=${activePost.slug}`;
+              const currentBlogPath = `/blog/${activePost.slug}`;
 
               const CONTEXTUAL_INTERNAL_LINK_RULES: { pattern: RegExp; path: string; title: string }[] = [
                 {
                   pattern: /\b(Nusuk App|Nusuk portal|Rawdah Shareef permit|Riyazul Jannah|রিয়াজুল জান্নাত|Nusuk অ্যাপ)\b/i,
-                  path: "/blog?slug=nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
+                  path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
                   title: "Nusuk App & Rawdah Shareef Permit Step-by-Step Guide",
                 },
                 {
                   pattern: /\b(96-Hour Saudi Stopover Visa|Saudi Stopover Visa|৯৬ ঘণ্টার Saudi Stopover Visa|স্টপওভার ভিসা)\b/i,
-                  path: "/blog?slug=saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
+                  path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
                   title: "96-Hour Saudi Stopover Visa Guide for Bangladeshis",
                 },
                 {
                   pattern: /\b(Haramain Bullet Train|Haramain High-Speed Train|Jabal Omar|Mahbas Al Jin|হারামাইন বুলেট ট্রেন)\b/i,
-                  path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
+                  path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
                   title: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide",
                 },
                 {
                   pattern: /\b(Open-Jaw|Multi-City ticket|মাল্টি-সিটি টিকিট|Open-Jaw Flight)\b/i,
-                  path: "/blog?slug=dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia",
+                  path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia",
                   title: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy",
                 },
                 {
                   pattern: /\b(Dual-Currency Card|passport dollar endorsement|\$12,000 annual travel quota|ডুয়াল-কারেন্সি কার্ড|ডলার এনডোর্সমেন্ট)\b/i,
-                  path: "/blog?slug=dual-currency-card-endorsement-bangladesh",
+                  path: "/blog/dual-currency-card-endorsement-bangladesh",
                   title: "Dual-Currency Card & $12,000 Passport Endorsement Guide",
                 },
                 {
                   pattern: /\b(elderly parents|electric scooter|wheelchair assistance|বয়স্ক মা-বাবা|ইলেকট্রিক স্কুটার)\b/i,
-                  path: "/blog?slug=umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
+                  path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
                   title: "Performing Umrah with Elderly Parents from Bangladesh",
                 },
                 {
                   pattern: /\b(Ladies' Gates 25–29|Northern Gates 25 to 29|without a male Mahram|মাহরাম ছাড়া)\b/i,
-                  path: "/blog?slug=umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
+                  path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
                   title: "Umrah Rules for Bangladeshi Women & Ladies' Gates 25–29",
                 },
                 {
                   pattern: /\b(Miqat Qarn al-Manazil|wear Ihram|ইহরাম বাঁধার নিয়ম|মিকাত)\b/i,
-                  path: "/blog?slug=wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
+                  path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
                   title: "Wearing Ihram from Dhaka Airport vs. Transit Flight Miqat Guide",
                 },
                 {
                   pattern: /\b(5-liter sealed Zamzam|Zamzam carton|Ajwa dates|জমজম বক্স|আজওয়া খেজুর)\b/i,
-                  path: "/blog?slug=official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
+                  path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
                   title: "Official Zamzam Water, Dates & Gold Customs Rules",
                 },
                 {
                   pattern: /\b(Masjid Quba|Mount Uhud|Taif day trip|Hira Cultural District|মসজিদে কুবা|তায়েফ ডে-ট্রিপ)\b/i,
-                  path: "/blog?slug=makkah-madinah-badr-taif-historical-ziyarah-taxi-guide",
+                  path: "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide",
                   title: "Complete Makkah, Madinah, Badr & Taif Ziyarah Guide",
                 },
                 {
                   pattern: /\b(Sheikh Zayed Grand Mosque|Qasr Al Watan|শেখ জায়েদ গ্র্যান্ড মসজিদ)\b/i,
-                  path: "/blog?slug=abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide",
+                  path: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide",
                   title: "Abu Dhabi Sheikh Zayed Mosque & Qasr Al Watan Day Trip Guide",
                 },
                 {
                   pattern: /\b(Putrajaya Pink Mosque|Masjid Putra|Islamic Arts Museum Malaysia|পুত্রজায়া পিঙ্ক মসজিদ)\b/i,
-                  path: "/blog?slug=malaysia-islamic-heritage-putrajaya-halal-family-tour-guide",
+                  path: "/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide",
                   title: "Malaysia Islamic Heritage & Putrajaya Halal Family Guide",
                 },
                 {
                   pattern: /\b(Skip-the-Line|Louvre Museum|Colosseum|স্কিপ-দ্য-লাইন)\b/i,
-                  path: "/blog?slug=europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
+                  path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
                   title: "Europe, UK & USA Sightseeing Skip-the-Line & Stopover Umrah Guide",
                 },
                 {
                   pattern: /\b(Islamic Dual-Currency|Shariah-Compliant|Khidmah Card|Riba-Free|ইসলামিক ডুয়াল-কারেন্সি|শরীয়াহ-সম্মত)\b/i,
-                  path: "/blog?slug=shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
+                  path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
                   title: "Best Shariah-Compliant Islamic Dual-Currency Cards in Bangladesh",
                 },
                 {
                   pattern: /\b(RFCD Account|Resident Foreign Currency Deposit|\$300 single-transaction|RFCD একাউন্ট|\$300 ক্যাপ)\b/i,
-                  path: "/blog?slug=rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
+                  path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
                   title: "RFCD Account vs. Regular Travel Quota ($300 Cap Solution)",
                 },
                 {
                   pattern: /\b(bKash|Nagad|BDT Support Desk|local bank transfer|বিকাশ|নগদে পেমেন্ট)\b/i,
-                  path: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
+                  path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
                   title: "How to Book Flights & Makkah Hotels in BDT via bKash/Bank Transfer",
                 },
                 {
                   pattern: /\b(Dynamic Currency Conversion|5% DCC|SuperRich|ডাবল কনভার্সন|DCC চার্জ)\b/i,
-                  path: "/blog?slug=cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
+                  path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
                   title: "Cash SAR / USD vs. Dual-Currency Card & Avoiding 5% DCC Fees",
                 },
                 {
                   pattern: /\b(thaievisa\.go\.th|Thailand e-Visa|Thailand Tourist Visa|থাইল্যান্ড ই-ভিসা)\b/i,
-                  path: "/blog?slug=thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
+                  path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
                   title: "Thailand Official e-Visa Guide from Bangladesh (thaievisa.go.th)",
                 },
                 {
                   pattern: /\b(Malaysia Digital Arrival Card|MDAC|malaysiavisa\.imi\.gov\.my|মালয়েশিয়া ই-ভিসা)\b/i,
-                  path: "/blog?slug=malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration",
+                  path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration",
                   title: "Malaysia Online e-Visa & Free MDAC Arrival Card Guide",
                 },
                 {
                   pattern: /\b(Form V39A|Letter of Introduction|Authorized Visa Agent|সিঙ্গাপুর ভিসা)\b/i,
-                  path: "/blog?slug=singapore-visa-guide-bangladesh-agents",
+                  path: "/blog/singapore-visa-guide-bangladesh-agents",
                   title: "Singapore Tourist Visa Guide from Bangladesh (LOI Form V39A)",
                 },
                 {
                   pattern: /\b(Travel History Ladder|Fresh Passport|blank passport|নতুন পাসপোর্টে|ট্রাভেল হিস্ট্রি)\b/i,
-                  path: "/blog?slug=fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia",
+                  path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia",
                   title: "First International Trip on a Fresh Bangladeshi Passport (3-Step Ladder)",
                 },
                 {
                   pattern: /\b(SimplyGo|Mustafa Centre|Gardens by the Bay|Sentosa|সিঙ্গাপুর MRT)\b/i,
-                  path: "/blog?slug=singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide",
+                  path: "/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide",
                   title: "Singapore 4-Day Budget Itinerary from Dhaka (MRT SimplyGo & Halal Food)",
                 },
                 {
                   pattern: /\b(Bumrungrad|Bangkok Hospital|Samitivej|Medical Check-Up|বামরুনগ্রাদ|মেডিকেল ভিসা)\b/i,
-                  path: "/blog?slug=bangkok-medical-tourism-checkup-guide-bangladesh-bumrungrad-bangkok-hospital",
+                  path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh",
                   title: "Bangkok Medical Check-Up & Hospital Guide from Bangladesh (Bumrungrad & Bangkok Hospital)",
                 },
                 {
                   pattern: /\b(Airalo|Travel eSIM|Schengen Travel Insurance|ট্রাভেল ই-সিম|ট্রাভেল ইন্স্যুরেন্স)\b/i,
-                  path: "/blog?slug=best-travel-esim-and-insurance-from-bangladesh-airalo-schengen-umrah",
+                  path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide",
                   title: "Best Travel eSIM (Airalo) & Overseas Medical Insurance from Bangladesh",
                 },
                 {
                   pattern: /\b(Sri Lanka ETA|Nine Arch Bridge|Nuwara Eliya|শ্রীলঙ্কা ভ্রমণ|শ্রীলঙ্কা ভিসা)\b/i,
-                  path: "/blog?slug=sri-lanka-budget-tour-from-bangladesh-eta-visa-colombo-kandy-ella",
+                  path: "/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost",
                   title: "Sri Lanka 6-Day Budget Tour from Bangladesh (ETA Visa, Kandy & Ella Train)",
                 },
                 {
                   pattern: /\b(epassport\.gov\.bd|e-Passport Renewal|Super Express Passport|ই-পাসপোর্ট রিনিউ|৬৪ পৃষ্ঠার পাসপোর্ট)\b/i,
-                  path: "/blog?slug=bangladesh-epassport-application-renewal-guide-64-districts-urgent-fees",
+                  path: "/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide",
                   title: "Bangladesh e-Passport Application & Urgent Renewal Guide (All 64 Districts)",
                 },
                 {
                   pattern: /\b(AirHelp|EC 261\/2004|PIR Report|Flight Delay Compensation|ফ্লাইট ডিলে ক্ষতিপূরণ)\b/i,
-                  path: "/blog?slug=flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
+                  path: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
                   title: "Flight Delay, Cancellation & Lost Baggage Compensation Guide for Bangladeshis",
                 },
                 {
                   pattern: /\b(Biman vs\.? Saudia|46kg Baggage|২x২৩ কেজি|বিমান বনাম সৌদিয়া)\b/i,
-                  path: "/blog?slug=best-airlines-from-dhaka-biman-saudia-emirates-qatar-singapore-baggage-guide",
+                  path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla",
                   title: "Best Airlines Flying from Dhaka Compared (Biman, Saudia, Emirates, Qatar & Baggage Rules)",
                 },
                 {
                   pattern: /\b(Dhaka Airport emigration|NOC|Government Order|ইমিগ্রেশন)\b/i,
-                  path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go",
+                  path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go",
                   title: "Dhaka Airport Outbound Immigration Checklist (NOC & GO Rules)",
                 },
                 {
                   pattern: /\b(DIY Umrah|10-day DIY Umrah|নিজে নিজে ওমরাহ)\b/i,
-                  path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+                  path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
                   title: "DIY Umrah & Hajj Preparation from Bangladesh (10-Day BDT Budget)",
                 },
               ];
@@ -4786,7 +4866,7 @@ export default function App() {
                             e.preventDefault();
                             navigateTo(rule.path);
                           }}
-                          className="text-[#102A43] font-semibold underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-[#D4941A] transition-colors cursor-pointer"
+                          className="text-brand-navy font-semibold underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-brand-emerald transition-colors cursor-pointer"
                         >
                           {matchedWord}
                         </a>
@@ -4804,7 +4884,7 @@ export default function App() {
                   if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
                     const boldInner = part.slice(2, -2);
                     return (
-                      <strong key={pIdx} className="font-semibold text-[#0F172A]">
+                      <strong key={pIdx} className="font-semibold text-brand-navy">
                         {injectContextualInternalLink(boldInner, `bold-${pIdx}`)}
                       </strong>
                     );
@@ -4875,7 +4955,7 @@ export default function App() {
                     <button
                       type="button"
                       onClick={() => navigateTo("/blog")}
-                      className="inline-flex items-center gap-2 text-xs font-semibold text-[#102A43] hover:text-slate-900 bg-white border border-slate-200 hover:border-[#102A43] px-4 py-2 rounded-xl transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-2 text-xs font-semibold text-brand-navy hover:text-slate-900 bg-white border border-slate-200 hover:border-brand-navy px-4 py-2 rounded-xl transition-colors cursor-pointer"
                     >
                       <ChevronLeft size={14} />
                       <span>
@@ -4894,7 +4974,7 @@ export default function App() {
                         {isBn ? "ট্রাভেল ব্লগ" : "Travel Blog"}
                       </span>
                       <span aria-hidden="true">/</span>
-                      <span className="text-[#102A43] font-semibold truncate max-w-[240px] sm:max-w-md">
+                      <span className="text-brand-navy font-semibold truncate max-w-[240px] sm:max-w-md">
                         {activePost.title}
                       </span>
                     </nav>
@@ -4904,11 +4984,11 @@ export default function App() {
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                     {/* Left Column: Full Article Content (8 Cols) with Dark H1 / H2 / H3 Hierarchy */}
                     <article className="lg:col-span-8 space-y-7 bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-xs">
-                      {/* Primary Semantic H1 in Dark Color (#0F172A) & Large Pixel Scale (30px–38px) */}
+                      {/* Primary Semantic H1 in Dark Color (#0B1426) & Large Pixel Scale (30px–38px) */}
                       <header className="space-y-5 border-b border-slate-200 pb-6">
                         <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
                           <div className="flex flex-wrap items-center gap-2">
-                            <span className="font-bold text-[#102A43]">{activePost.category}</span>
+                            <span className="font-bold text-brand-navy">{activePost.category}</span>
                             <span aria-hidden="true">·</span>
                             <span>{activePost.date}</span>
                             <span aria-hidden="true">·</span>
@@ -4921,23 +5001,28 @@ export default function App() {
                           </span>
                         </div>
 
-                        <h1 className="font-serif text-[28px] sm:text-[34px] lg:text-[38px] font-black text-[#0F172A] leading-[1.18] tracking-tight text-balance">
+                        <h1 className="font-serif text-[28px] sm:text-[34px] lg:text-[38px] font-black text-brand-navy leading-[1.18] tracking-tight text-balance">
                           {activePost.title}
                         </h1>
 
                         {/* Dedicated Unique Article Feature Photograph */}
                         <figure className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-900">
                           <img
-                            src={activeCoverImg}
-                            alt={activePost.title}
-                            referrerPolicy="no-referrer"
+                            {...getResponsiveImageProps(
+                              activeCoverImg,
+                              "(max-width: 767px) 100vw, 840px",
+                            )}
+                            alt={getBlogImageAltText(activePost.slug)}
+                            loading="eager"
+                            fetchPriority="high"
+                            decoding="async"
                             className="w-full aspect-[16/9] object-cover object-center"
                           />
                         </figure>
 
                         {/* Quick Answer & Key Takeaway Box (AEO-Structured Direct Answer) */}
-                        <div className="bg-slate-50 border-l-4 border-[#102A43] p-5 rounded-r-xl space-y-1.5">
-                          <div className="text-xs font-bold text-[#0F172A]">
+                        <div className="bg-slate-50 border-l-4 border-brand-navy p-5 rounded-r-xl space-y-1.5">
+                          <div className="text-xs font-bold text-brand-navy">
                             {isBn
                               ? "একনজরে মূল উত্তর ও সারসংক্ষেপ (Quick Answer & Key Takeaway)"
                               : "Quick Answer & Key Takeaway"}
@@ -4949,7 +5034,7 @@ export default function App() {
 
                         {/* Official Government & Verified Sources Bar */}
                         <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-xl p-4 space-y-2">
-                          <div className="text-xs font-bold text-[#0F172A] flex items-center justify-between">
+                          <div className="text-xs font-bold text-brand-navy flex items-center justify-between">
                             <span>
                               {isBn
                                 ? "অফিশিয়াল সরকারি পোর্টাল ও যাচাইকৃত তথ্যসূত্র (Official Government Sources):"
@@ -4966,7 +5051,7 @@ export default function App() {
                                 href={src.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="font-medium text-[#102A43] hover:text-[#0F172A] underline decoration-slate-300 hover:decoration-[#0F172A] inline-flex items-center gap-1"
+                                className="font-medium text-brand-navy hover:text-brand-emerald underline decoration-slate-300 hover:decoration-brand-navy inline-flex items-center gap-1"
                               >
                                 <span>{src.name}</span>
                                 <ExternalLink size={11} className="opacity-70" />
@@ -4982,19 +5067,19 @@ export default function App() {
                           const trimmed = block.trim();
                           if (!trimmed) return null;
 
-                          // Major numbered section heading -> Semantic H2 (Dark #0F172A, 22px–26px)
+                          // Major numbered section heading -> Semantic H2 (Dark #0B1426, 22px–26px)
                           if (/^([0-9]+|[০-৯]+)\.\s+/.test(trimmed) && trimmed.length < 170 && !trimmed.includes("\n")) {
                             return (
                               <h2
                                 key={bIdx}
-                                className="font-serif text-[22px] sm:text-[26px] font-bold text-[#0F172A] leading-[1.3] pt-5 pb-2 border-b border-slate-200"
+                                className="font-serif text-[22px] sm:text-[26px] font-bold text-brand-navy leading-[1.3] pt-5 pb-2 border-b border-slate-200"
                               >
                                 {trimmed.replace(/\*\*/g, "")}
                               </h2>
                             );
                           }
 
-                          // Sub-heading -> Semantic H3 (Dark #102A43, 18px–21px)
+                          // Sub-heading -> Semantic H3 (Dark #0B1426, 18px–21px)
                           if (
                             (/^(Step|Option|Tier|Zone|Route|Phase|Tip|Rule|Pathway|Scenario|ধাপ|অপশন|রুট|টিপস|নিয়ম|জোন|দৃশ্যপট)\s+/i.test(trimmed) ||
                               (trimmed.endsWith(":") && trimmed.length < 120)) &&
@@ -5003,7 +5088,7 @@ export default function App() {
                             return (
                               <h3
                                 key={bIdx}
-                                className="font-serif text-[18px] sm:text-[21px] font-bold text-[#102A43] leading-[1.35] pt-3"
+                                className="font-serif text-[18px] sm:text-[21px] font-bold text-brand-navy leading-[1.35] pt-3"
                               >
                                 {trimmed.replace(/\*\*/g, "")}
                               </h3>
@@ -5029,12 +5114,12 @@ export default function App() {
                             <React.Fragment key={bIdx}>
                               <div className="space-y-3.5">
                                 {isFirstLineH2 && (
-                                <h2 className="font-serif text-[22px] sm:text-[26px] font-bold text-[#0F172A] leading-[1.3] pt-5 pb-2 border-b border-slate-200">
+                                <h2 className="font-serif text-[22px] sm:text-[26px] font-bold text-brand-navy leading-[1.3] pt-5 pb-2 border-b border-slate-200">
                                   {firstLine.replace(/\*\*/g, "")}
                                 </h2>
                               )}
                               {isFirstLineH3 && (
-                                <h3 className="font-serif text-[18px] sm:text-[21px] font-bold text-[#102A43] leading-[1.35] pt-3">
+                                <h3 className="font-serif text-[18px] sm:text-[21px] font-bold text-brand-navy leading-[1.35] pt-3">
                                   {firstLine.replace(/\*\*/g, "")}
                                 </h3>
                               )}
@@ -5052,7 +5137,7 @@ export default function App() {
                                   return (
                                     <h3
                                       key={lIdx}
-                                      className="font-serif text-[18px] sm:text-[21px] font-bold text-[#102A43] leading-[1.35] pt-3"
+                                      className="font-serif text-[18px] sm:text-[21px] font-bold text-brand-navy leading-[1.35] pt-3"
                                     >
                                       {cleanLine.replace(/\*\*/g, "")}
                                     </h3>
@@ -5066,7 +5151,7 @@ export default function App() {
                                       key={lIdx}
                                       className="flex items-start gap-3 pl-2 text-slate-800"
                                     >
-                                      <span className="text-[#102A43] font-bold mt-1 shrink-0">•</span>
+                                      <span className="text-brand-navy font-bold mt-1 shrink-0">•</span>
                                       <span className="leading-[1.8]">
                                         {renderFormattedText(bulletText)}
                                       </span>
@@ -5086,13 +5171,13 @@ export default function App() {
                                 <div className="my-6 bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5">
                                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
                                     <div className="space-y-0.5">
-                                      <span className="text-[11px] font-bold text-[#102A43] uppercase tracking-wider block">
+                                      <span className="text-[11px] font-bold text-brand-navy uppercase tracking-wider block">
                                         {isBn ? "সংশ্লিষ্ট পরবর্তী ধাপ (Recommended Next Guide)" : "Recommended Next Step in This Topic"}
                                       </span>
                                       <button
                                         type="button"
                                         onClick={() => navigateTo(activePost.internalLinks[0].path)}
-                                        className="text-left font-serif font-bold text-[16px] text-[#0F172A] hover:text-[#102A43] underline decoration-[#D4941A] decoration-2 underline-offset-3 cursor-pointer"
+                                        className="text-left font-serif font-bold text-[16px] text-brand-navy hover:text-brand-emerald underline decoration-[#D4941A] decoration-2 underline-offset-3 cursor-pointer"
                                       >
                                         {activePost.internalLinks[0].text} →
                                       </button>
@@ -5100,7 +5185,7 @@ export default function App() {
                                     <button
                                       type="button"
                                       onClick={() => navigateTo("/umrah")}
-                                      className="self-start sm:self-center text-xs font-semibold text-[#102A43] bg-white border border-slate-200 hover:border-[#102A43] px-3 py-1.5 rounded-lg shrink-0 cursor-pointer"
+                                      className="self-start sm:self-center text-xs font-semibold text-brand-navy bg-white border border-slate-200 hover:border-brand-navy px-3 py-1.5 rounded-lg shrink-0 cursor-pointer"
                                     >
                                       {isBn ? "Umrah BDT ক্যালকুলেটর" : "Open Umrah BDT Calculator"}
                                     </button>
@@ -5150,7 +5235,7 @@ export default function App() {
                                         )}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-1.5 bg-[#102A43] hover:bg-slate-800 text-white font-semibold text-xs px-3.5 py-2.5 rounded-lg transition-colors"
+                                        className="inline-flex items-center gap-1.5 bg-brand-navy hover:bg-slate-800 text-white font-semibold text-xs px-3.5 py-2.5 rounded-lg transition-colors"
                                       >
                                         <span>{isBn ? "BDT-তে হোটেল ও টিকিট বুকিং (WhatsApp)" : "Book Hotel & Flight in BDT (WhatsApp)"}</span>
                                       </a>
@@ -5166,7 +5251,7 @@ export default function App() {
                       {/* Contextual Affiliate Widget */}
                       {activePost.affiliateCTA && (
                         <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-3 text-left">
-                          <h3 className="text-xs font-bold text-[#102A43]">
+                          <h3 className="text-xs font-bold text-brand-navy">
                             {activePost.affiliateCTA.headline}
                           </h3>
                           <p className="text-xs text-slate-600">{activePost.affiliateCTA.body}</p>
@@ -5197,10 +5282,10 @@ export default function App() {
                         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5">
                           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
                             <div>
-                              <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4941A] block">
+                              <span className="text-[11px] font-bold uppercase tracking-wider text-brand-emerald block">
                                 {isBn ? "টপিক্যাল ক্লাস্টার সাইলো নেভিগেটর (Hub & Spoke Silo)" : "Topical Authority Cluster Navigator (Hub & Spoke Silo)"}
                               </span>
-                              <h3 className="font-serif text-base font-bold text-[#0F172A]">
+                              <h3 className="font-serif text-base font-bold text-brand-navy">
                                 {isBn
                                   ? `${activePost.category} — এই ক্লাস্টারের সবগুলো গাইড (${sameCategoryPosts.length + 1}টি আর্টিকেল)`
                                   : `Complete "${activePost.category}" Topical Series (${sameCategoryPosts.length + 1} Connected Guides)`}
@@ -5209,7 +5294,7 @@ export default function App() {
                             <button
                               type="button"
                               onClick={() => navigateTo("/sitemap")}
-                              className="text-xs font-semibold text-[#102A43] hover:underline cursor-pointer"
+                              className="text-xs font-semibold text-brand-navy hover:underline cursor-pointer"
                             >
                               {isBn ? "সম্পূর্ণ SEO Blueprint দেখুন →" : "View Full Topical Map →"}
                             </button>
@@ -5223,22 +5308,22 @@ export default function App() {
                                   key={clusterPost.id}
                                   type="button"
                                   disabled={isCurrent}
-                                  onClick={() => !isCurrent && navigateTo(`/blog?slug=${clusterPost.slug}`)}
+                                  onClick={() => !isCurrent && navigateTo(`/blog/${clusterPost.slug}`)}
                                   className={`text-left p-3 rounded-xl border transition-all flex items-start gap-2.5 ${
                                     isCurrent
-                                      ? "bg-[#102A43] text-white border-[#102A43] cursor-default"
-                                      : "bg-white hover:bg-slate-100 text-slate-800 border-slate-200 hover:border-[#102A43] cursor-pointer"
+                                      ? "bg-brand-navy text-white border-brand-navy cursor-default"
+                                      : "bg-white hover:bg-slate-100 text-slate-800 border-slate-200 hover:border-brand-navy cursor-pointer"
                                   }`}
                                 >
                                   <span
                                     className={`text-[11px] font-mono font-bold px-1.5 py-0.5 rounded shrink-0 mt-0.5 ${
-                                      isCurrent ? "bg-[#F6B73C] text-[#0F172A]" : "bg-slate-100 text-[#102A43]"
+                                      isCurrent ? "bg-[#F6B73C] text-brand-navy" : "bg-slate-100 text-brand-navy"
                                     }`}
                                   >
                                     {String(cIdx + 1).padStart(2, "0")}
                                   </span>
                                   <div className="space-y-0.5 min-w-0">
-                                    <div className={`text-xs font-semibold line-clamp-2 leading-snug ${isCurrent ? "text-white" : "text-[#0F172A]"}`}>
+                                    <div className={`text-xs font-semibold line-clamp-2 leading-snug ${isCurrent ? "text-white" : "text-brand-navy"}`}>
                                       {clusterPost.title}
                                     </div>
                                     <div className={`text-[10px] ${isCurrent ? "text-[#F6B73C] font-semibold" : "text-slate-500"}`}>
@@ -5255,7 +5340,7 @@ export default function App() {
                           </div>
                         </div>
 
-                        <div className="text-xs font-bold text-[#102A43]">
+                        <div className="text-xs font-bold text-brand-navy">
                           {isBn
                             ? "সংশ্লিষ্ট ক্যালকুলেটর ও পরবর্তী ধাপ (Cross-Cluster Internal Links)"
                             : "Related Calculators & Cross-Cluster Next Steps on URAL"}
@@ -5266,9 +5351,9 @@ export default function App() {
                               key={idx}
                               id={`blog-inner-link-${idx}`}
                               onClick={() => navigateTo(lnk.path)}
-                              className="bg-slate-100 hover:bg-[#102A43] text-[#102A43] hover:text-white border border-slate-200 px-3.5 py-2 rounded-xl cursor-pointer flex items-center gap-1.5 transition-colors font-medium"
+                              className="bg-slate-100 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 px-3.5 py-2 rounded-xl cursor-pointer flex items-center gap-1.5 transition-colors font-medium"
                             >
-                              <Link2 size={13} className="text-[#D4941A]" />
+                              <Link2 size={13} className="text-brand-emerald" />
                               <span>{lnk.text}</span>
                             </button>
                           ))}
@@ -5277,7 +5362,7 @@ export default function App() {
                         {/* Viral Bangladesh Social & WhatsApp Family Group Share Bar + Ready-to-Post FB Caption Copy */}
                         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                           <div className="space-y-0.5">
-                            <span className="text-xs font-bold text-[#0F172A] block">
+                            <span className="text-xs font-bold text-brand-navy block">
                               {isBn
                                 ? "পরিবার বা বন্ধুদের সাথে গাইডটি শেয়ার করুন (WhatsApp / Facebook)"
                                 : "Share This Guide with Family or Travel Groups"}
@@ -5295,7 +5380,7 @@ export default function App() {
                               )}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="bg-[#102A43] hover:bg-slate-800 text-white font-semibold px-3.5 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5"
+                              className="bg-brand-navy hover:bg-slate-800 text-white font-semibold px-3.5 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5"
                             >
                               <span>{isBn ? "WhatsApp-এ শেয়ার" : "Share on WhatsApp"}</span>
                             </a>
@@ -5305,7 +5390,7 @@ export default function App() {
                               )}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="bg-white hover:bg-slate-100 text-[#0F172A] border border-slate-300 font-semibold px-3.5 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5"
+                              className="bg-white hover:bg-slate-100 text-brand-navy border border-slate-300 font-semibold px-3.5 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5"
                             >
                               <span>{isBn ? "Facebook-এ শেয়ার" : "Share on Facebook"}</span>
                             </a>
@@ -5322,7 +5407,7 @@ export default function App() {
                                     : "Ready-to-post Facebook caption & link copied to clipboard!"
                                 );
                               }}
-                              className="bg-[#F6B73C] hover:bg-[#e5a629] text-[#0F172A] font-bold px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
+                              className="bg-[#F6B73C] hover:bg-[#e5a629] text-brand-navy font-bold px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
                             >
                               {isBn ? "📋 FB ক্যাপশন কপি করুন" : "📋 Copy Ready FB Post"}
                             </button>
@@ -5365,7 +5450,7 @@ export default function App() {
                     {/* Right Column: Sticky Trip Planning & BDT Support Sidebar (4 Cols) */}
                     <aside className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
                       {/* Direct WhatsApp BDT Booking Desk Card */}
-                      <div className="bg-[#102A43] text-white rounded-2xl p-6 space-y-4 shadow-sm">
+                      <div className="bg-brand-navy text-white rounded-2xl p-6 space-y-4 shadow-sm">
                         <div className="text-xs font-semibold text-[#F6B73C]">
                           {isBn
                             ? "Dual-Currency Card নেই? BDT-তে বুক করুন"
@@ -5385,7 +5470,7 @@ export default function App() {
                           href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20was%20reading%20your%20travel%20guide%20and%20need%20help%20planning%20my%20trip!"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
+                          className="w-full bg-brand-emerald text-white font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
                         >
                           <span>
                             {isBn
@@ -5433,7 +5518,7 @@ export default function App() {
                           <button
                             type="button"
                             onClick={() => navigateTo("/blog")}
-                            className="text-xs font-semibold text-[#102A43] hover:underline cursor-pointer"
+                            className="text-xs font-semibold text-brand-navy hover:underline cursor-pointer"
                           >
                             {isBn ? `সব দেখুন (${localizedBlogs.length})` : `View All (${localizedBlogs.length})`}
                           </button>
@@ -5443,13 +5528,13 @@ export default function App() {
                             <button
                               key={post.id}
                               type="button"
-                              onClick={() => navigateTo(`/blog?slug=${post.slug}`)}
+                              onClick={() => navigateTo(`/blog/${post.slug}`)}
                               className="w-full text-left py-3 first:pt-1 last:pb-0 group cursor-pointer space-y-1"
                             >
                               <div className="text-[11px] text-slate-500">
                                 {post.category} · {post.readTime}
                               </div>
-                              <div className="text-xs font-semibold text-slate-800 group-hover:text-[#102A43] line-clamp-2 leading-snug">
+                              <div className="text-xs font-semibold text-slate-800 group-hover:text-brand-navy line-clamp-2 leading-snug">
                                 {post.title}
                               </div>
                             </button>
@@ -5463,10 +5548,10 @@ export default function App() {
                   <div className="pt-10 border-t border-slate-200 space-y-6">
                     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
                       <div className="space-y-1">
-                        <div className="text-xs font-semibold text-[#102A43]">
+                        <div className="text-xs font-semibold text-brand-navy">
                           {isBn ? "আরও পড়ুন" : "Continue Reading"}
                         </div>
-                        <h2 className="font-serif text-2xl font-bold text-[#0F172A]">
+                        <h2 className="font-serif text-2xl font-bold text-brand-navy">
                           {isBn
                             ? "বাংলাদেশি ভ্রমণকারীদের জন্য আরও প্রয়োজনীয় গাইড"
                             : "More Travel Guides for Bangladeshi Flyers"}
@@ -5475,7 +5560,7 @@ export default function App() {
                       <button
                         type="button"
                         onClick={() => navigateTo("/blog")}
-                        className="self-start sm:self-end bg-[#102A43] text-white text-xs font-semibold px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5 cursor-pointer"
+                        className="self-start sm:self-end bg-brand-navy text-white text-xs font-semibold px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5 cursor-pointer"
                       >
                         <span>
                           {isBn
@@ -5493,16 +5578,20 @@ export default function App() {
                         return (
                           <article
                             key={post.id}
-                            onClick={() => navigateTo(`/blog?slug=${post.slug}`)}
+                            onClick={() => navigateTo(`/blog/${post.slug}`)}
                             className="group bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between cursor-pointer transition-all"
                           >
                             <div>
                               <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
                                 <img
-                                  src={getBlogCoverImage(post.slug)}
-                                  alt={post.title}
-                                  referrerPolicy="no-referrer"
+                                  {...getResponsiveImageProps(
+                                    getBlogCoverImage(post.slug),
+                                    "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw",
+                                  )}
+                                  alt={getBlogImageAltText(post.slug)}
                                   loading="lazy"
+                                  fetchPriority="low"
+                                  decoding="async"
                                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                 />
                               </div>
@@ -5510,7 +5599,7 @@ export default function App() {
                                 <div className="text-xs text-slate-500">
                                   {post.category} · {post.readTime}
                                 </div>
-                                <h3 className="font-serif font-bold text-[18px] text-[#0F172A] group-hover:text-[#102A43] leading-snug">
+                                <h3 className="font-serif font-bold text-[18px] text-brand-navy group-hover:text-brand-emerald leading-snug">
                                   {post.title}
                                 </h3>
                                 <p className="text-[13.5px] text-slate-700 leading-[1.65]">
@@ -5523,9 +5612,9 @@ export default function App() {
                                 type="button"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  navigateTo(`/blog?slug=${post.slug}`);
+                                  navigateTo(`/blog/${post.slug}`);
                                 }}
-                                className="w-full bg-[#102A43] group-hover:bg-[#F6B73C] text-white group-hover:text-[#0F172A] font-bold text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-between cursor-pointer"
+                                className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-between cursor-pointer"
                               >
                                 <span>{isBn ? "সম্পূর্ণ ব্লগ পড়ুন · Read Full Blog" : "Read Full Blog"}</span>
                                 <ArrowRight size={13} />
@@ -5543,7 +5632,7 @@ export default function App() {
         )}
 
       {/* 🟦 CONTENT & GROWTH: 4 FEATURED BANGLADESHI TRAVEL GUIDES IN ONE ROW */}
-      {section !== "blog" && (
+      {section !== "blog" && section !== "notFound" && (
         <section
           id="content-and-growth-hub"
           className="mt-20 pt-16 border-t border-slate-200/80 space-y-6"
@@ -5551,7 +5640,7 @@ export default function App() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="space-y-1.5 max-w-2xl">
               <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-                <span className="font-semibold text-[#102A43]">
+                <span className="font-semibold text-brand-navy">
                   {isBn ? "ট্রাভেল গাইড ও ব্লগ" : "Featured Travel Guides"}
                 </span>
                 <span aria-hidden="true">·</span>
@@ -5559,7 +5648,7 @@ export default function App() {
                   {isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য যাচাইকৃত গাইড (2026)" : "Verified Playbooks for Bangladeshi Travelers (2026)"}
                 </span>
               </div>
-              <h2 className="font-serif text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight">
+              <h2 className="font-serif text-2xl sm:text-3xl font-black text-brand-navy tracking-tight">
                 {isBn
                   ? "বাংলাদেশি ভ্রমণকারীদের জন্য সবচেয়ে জরুরি ৪টি ট্রাভেল ও Umrah গাইড"
                   : "Essential Travel & Umrah Guides for Bangladeshi Flyers"}
@@ -5574,7 +5663,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => navigateTo("/blog")}
-              className="self-start sm:self-end bg-[#102A43] hover:bg-slate-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
+              className="self-start sm:self-end bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
             >
               <span>
                 {isBn
@@ -5592,26 +5681,30 @@ export default function App() {
               return (
                 <article
                   key={topic.id}
-                  onClick={() => navigateTo(`/blog?slug=${topic.slug}`)}
+                  onClick={() => navigateTo(`/blog/${topic.slug}`)}
                   className="group bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between transition-all cursor-pointer"
                 >
                   <div>
                     <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
                       <img
-                        src={getBlogCoverImage(topic.slug)}
-                        alt={topic.title}
-                        referrerPolicy="no-referrer"
+                        {...getResponsiveImageProps(
+                          getBlogCoverImage(topic.slug),
+                          "(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw",
+                        )}
+                        alt={getBlogImageAltText(topic.slug)}
                         loading="lazy"
+                        fetchPriority="low"
+                        decoding="async"
                         className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
-                      <span className="absolute bottom-2.5 left-3 bg-[#102A43]/85 text-white text-[10px] font-semibold px-2 py-0.5 rounded-md border border-white/15">
+                      <span className="absolute bottom-2.5 left-3 bg-brand-navy/85 text-white text-[10px] font-semibold px-2 py-0.5 rounded-md border border-white/15">
                         {topic.category}
                       </span>
                     </div>
 
                     <div className="p-4 space-y-2">
-                      <h3 className="font-serif font-bold text-base text-[#0F172A] group-hover:text-[#102A43] leading-snug">
+                      <h3 className="font-serif font-bold text-base text-brand-navy group-hover:text-brand-emerald leading-snug">
                         {topic.title}
                       </h3>
 
@@ -5626,9 +5719,9 @@ export default function App() {
                       type="button"
                       onClick={(e) => {
                         e.stopPropagation();
-                        navigateTo(`/blog?slug=${topic.slug}`);
+                        navigateTo(`/blog/${topic.slug}`);
                       }}
-                      className="w-full bg-[#102A43] group-hover:bg-[#F6B73C] text-white group-hover:text-[#0F172A] font-bold text-xs py-2.5 px-3.5 rounded-xl transition-colors flex items-center justify-between cursor-pointer"
+                      className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-2.5 px-3.5 rounded-xl transition-colors flex items-center justify-between cursor-pointer"
                     >
                       <span>{isBn ? "সম্পূর্ণ ব্লগ পড়ুন" : "Read Full Blog"}</span>
                       <ArrowRight size={13} />
@@ -5648,7 +5741,7 @@ export default function App() {
         <div className="space-y-10 animate-fade-in font-sans">
           
           {/* Visual Header Banner */}
-          <div className="bg-[#102A43] text-white p-8 sm:p-12 rounded-3xl relative overflow-hidden shadow-xl border border-slate-800">
+          <div className="bg-brand-navy text-white p-8 sm:p-12 rounded-3xl relative overflow-hidden shadow-xl border border-slate-800">
             <div className="absolute top-0 right-0 w-80 h-80 bg-[#F6B73C]/10 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-teal-500/5 rounded-full blur-2xl pointer-events-none" />
             
@@ -5674,14 +5767,14 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* WhatsApp direct card */}
-            <div className="bg-white border border-slate-200 hover:border-emerald-300 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
-              <div className="p-3.5 bg-emerald-50 text-emerald-600 rounded-xl shrink-0">
+            <div className="bg-white border border-slate-200 hover:border-brand-emerald/40 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
+              <div className="p-3.5 bg-brand-emerald/10 text-brand-emerald rounded-xl shrink-0">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.665.988 3.3 1.488 5.35 1.489 5.513 0 10.002-4.486 10.005-9.999.001-2.671-1.037-5.182-2.924-7.071C17.192 1.685 14.685.648 12.012.648c-5.516 0-10.01 4.488-10.014 10.002-.001 1.902.483 3.654 1.401 5.247l-.952 3.479 3.599-.944z" />
                 </svg>
               </div>
               <div className="space-y-2 flex-1">
-                <span className="text-[10px] font-mono font-bold text-emerald-600 block uppercase tracking-widest">WHATSAPP CHAT</span>
+                <span className="text-[10px] font-mono font-bold text-brand-emerald block uppercase tracking-widest">WHATSAPP CHAT</span>
                 <h3 className="font-serif text-lg font-bold text-slate-900">
                   {isBn ? "সরাসরি WhatsApp চ্যাট করুন" : "Start Direct Chat"}
                 </h3>
@@ -5694,7 +5787,7 @@ export default function App() {
                   href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
+                  className="inline-flex items-center gap-2 bg-brand-emerald text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
                 >
                   {isBn ? "WhatsApp-এ মেসেজ দিন (+8801784385335)" : "Chat on WhatsApp (+8801784385335)"}
                 </a>
@@ -5702,7 +5795,7 @@ export default function App() {
             </div>
 
             {/* Phone Direct call card */}
-            <div className="bg-white border border-slate-200 hover:border-[#102A43]/30 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
+            <div className="bg-white border border-slate-200 hover:border-brand-navy/30 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
               <div className="p-3.5 bg-blue-50 text-blue-600 rounded-xl shrink-0">
                 <svg className="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -5720,7 +5813,7 @@ export default function App() {
                 </p>
                 <a 
                   href="tel:+8801784385335" 
-                  className="inline-flex items-center gap-2 bg-[#102A43] hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
+                  className="inline-flex items-center gap-2 bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
                 >
                   {isBn ? "সরাসরি কল করুন (+8801784385335)" : "Call Directly (+8801784385335)"}
                 </a>
@@ -5776,7 +5869,7 @@ export default function App() {
                     </div>
                     <div className="flex justify-between pb-1">
                       <span className="font-bold text-slate-400">SUBMISSION ID:</span>
-                      <span className="text-[#102A43] font-bold">URAL-REQ-{Math.floor(1000 + Math.random() * 9000)}</span>
+                      <span className="text-brand-navy font-bold">URAL-REQ-{Math.floor(1000 + Math.random() * 9000)}</span>
                     </div>
                   </div>
 
@@ -5787,7 +5880,7 @@ export default function App() {
                       setContactPhone("");
                       setContactMessage("");
                     }}
-                    className="bg-[#102A43] hover:bg-slate-800 text-white font-bold text-xs py-2 px-5 rounded-lg transition-colors"
+                    className="bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs py-2 px-5 rounded-lg transition-colors"
                   >
                     {isBn ? "আরেকটি জিজ্ঞাসা পাঠান" : "Send Another Inquiry"}
                   </button>
@@ -5840,7 +5933,7 @@ export default function App() {
                         placeholder={isBn ? "যেমন: Farhan Momen" : "e.g. Farhan Momen"}
                         value={contactName}
                         onChange={(e) => setContactName(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-[#102A43] rounded-xl px-4 py-3 text-slate-800 outline-none transition-all"
+                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-4 py-3 text-slate-800 outline-none transition-all"
                       />
                     </div>
 
@@ -5855,7 +5948,7 @@ export default function App() {
                         placeholder="e.g. +8801784385335"
                         value={contactPhone}
                         onChange={(e) => setContactPhone(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-[#102A43] rounded-xl px-4 py-3 text-slate-800 outline-none transition-all"
+                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-4 py-3 text-slate-800 outline-none transition-all"
                       />
                     </div>
                   </div>
@@ -5869,7 +5962,7 @@ export default function App() {
                       <select
                         value={contactSubject}
                         onChange={(e) => setContactSubject(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-[#102A43] rounded-xl px-3 py-3 text-slate-800 outline-none transition-all cursor-pointer"
+                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-3 py-3 text-slate-800 outline-none transition-all cursor-pointer"
                       >
                         <option value="Visa Processing Checklist">{isBn ? "ভিসা প্রসেসিং চেকলিস্ট" : "Visa Processing Checklist"}</option>
                         <option value="Cheap Flight Package comparison">{isBn ? "সাশ্রয়ী ফ্লাইট টিকেট তুলনা" : "Cheap Flight Package comparison"}</option>
@@ -5887,7 +5980,7 @@ export default function App() {
                       <select
                         value={contactDestination}
                         onChange={(e) => setContactDestination(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-[#102A43] rounded-xl px-3 py-3 text-slate-800 outline-none transition-all cursor-pointer"
+                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-3 py-3 text-slate-800 outline-none transition-all cursor-pointer"
                       >
                         <option value="Saudi Arabia (Umrah / Hajj)">Saudi Arabia (Umrah / Hajj) 🇸🇦</option>
                         <option value="Nepal">Nepal 🇳🇵</option>
@@ -5915,14 +6008,14 @@ export default function App() {
                       }
                       value={contactMessage}
                       onChange={(e) => setContactMessage(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-[#102A43] rounded-xl px-4 py-3 text-slate-800 outline-none transition-all resize-none"
+                      className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-4 py-3 text-slate-800 outline-none transition-all resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={contactLoading}
-                    className="w-full bg-[#102A43] hover:bg-slate-800 text-[#F6B73C] font-black text-xs uppercase py-3.5 rounded-xl shadow-md tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2"
+                    className="w-full bg-brand-navy hover:bg-slate-800 text-[#F6B73C] font-black text-xs uppercase py-3.5 rounded-xl shadow-md tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2"
                   >
                     {contactLoading ? (
                       <>
@@ -5996,7 +6089,7 @@ export default function App() {
 
               <div className="bg-slate-250 p-4 rounded-xl border border-slate-300 text-center space-y-1">
                 <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">DIRECT DIAL DESK</span>
-                <span className="text-sm font-serif font-black text-[#102A43] block">+8801784385335</span>
+                <span className="text-sm font-serif font-black text-brand-navy block">+8801784385335</span>
                 <span className="text-[9px] text-slate-400 block">
                   {isBn ? "২৪/৭ WhatsApp মেসেঞ্জারে সচল" : "Available 24/7 on WhatsApp Messenger"}
                 </span>
@@ -6051,20 +6144,34 @@ export default function App() {
         <SitemapPage onNavigate={navigateTo} lang={lang} />
       )}
 
+      {section === "notFound" && (
+        <section className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 text-center shadow-sm">
+          <div className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-brand-emerald">404 · Page not found</div>
+          <h1 className="mt-3 font-serif text-3xl font-black text-brand-navy">We can’t find that travel page.</h1>
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-slate-600">The address may have changed or the guide may no longer be available. Browse our travel guides or return to the home page.</p>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <button type="button" onClick={() => navigateTo("/")} className="rounded-xl bg-brand-navy px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-800">Go to home</button>
+            <button type="button" onClick={() => navigateTo("/blog")} className="rounded-xl bg-slate-100 px-4 py-3 text-sm font-bold text-brand-navy transition-colors hover:bg-slate-200">Browse travel guides</button>
+          </div>
+        </section>
+      )}
+
       </main>
 
       {/* 🔮 MASTER FOOTER BLOCK */}
-      <footer className="bg-[#0F172A] text-slate-400 py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs mt-16">
+      <footer className="bg-brand-navy text-slate-400 py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs mt-16">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8">
           
           <div className="space-y-3">
             <div className="flex items-center gap-2.5 text-white">
-              <div className="bg-white/10 text-white p-1.5 rounded-lg shrink-0">
-                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M12 18.5c-.5-3-4-7-9-7.5 5-1 8-4.5 9-7.5 1 3 4 6.5 9 7.5-5 .5-8.5 4.5-9 7.5z" />
-                </svg>
-              </div>
-              <span className="font-serif font-bold text-base text-white">URAL Travel Intelligence</span>
+              <img
+                src="/assets/brand/svg/ural-wordmark.svg"
+                alt="URAL"
+                width="82"
+                height="28"
+                className="h-7 w-auto"
+              />
+              <span className="text-[11px] font-semibold tracking-wide text-slate-300">Travel Intelligence</span>
             </div>
             <p className="leading-relaxed text-slate-400">
               {isBn
@@ -6099,12 +6206,12 @@ export default function App() {
               {isBn ? "জনপ্রিয় ফ্লাইট রুট" : "Flights Destination Directory"}
             </span>
             <ul className="space-y-1 text-xs">
-              <li><a href="/flights?route=dhaka-kathmandu" onClick={(e) => { e.preventDefault(); navigateTo("/flights?route=dhaka-kathmandu"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kathmandu (KTM)</a></li>
-              <li><a href="/flights?route=dhaka-bangkok" onClick={(e) => { e.preventDefault(); navigateTo("/flights?route=dhaka-bangkok"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Bangkok (BKK)</a></li>
-              <li><a href="/flights?route=dhaka-kuala-lumpur" onClick={(e) => { e.preventDefault(); navigateTo("/flights?route=dhaka-kuala-lumpur"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kuala Lumpur (KUL)</a></li>
-              <li><a href="/flights?route=dhaka-singapore" onClick={(e) => { e.preventDefault(); navigateTo("/flights?route=dhaka-singapore"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</a></li>
-              <li><a href="/flights?route=dhaka-maldives" onClick={(e) => { e.preventDefault(); navigateTo("/flights?route=dhaka-maldives"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
-              <li><a href="/flights?route=dhaka-dubai" onClick={(e) => { e.preventDefault(); navigateTo("/flights?route=dhaka-dubai"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
+              <li><a href="/flights/dhaka-kathmandu" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kathmandu"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kathmandu (KTM)</a></li>
+              <li><a href="/flights/dhaka-bangkok" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-bangkok"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Bangkok (BKK)</a></li>
+              <li><a href="/flights/dhaka-kuala-lumpur" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kuala-lumpur"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kuala Lumpur (KUL)</a></li>
+              <li><a href="/flights/dhaka-singapore" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-singapore"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</a></li>
+              <li><a href="/flights/dhaka-maldives" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-maldives"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
+              <li><a href="/flights/dhaka-dubai" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-dubai"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
               <li><a href="/umrah" onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }} className="text-[#F6B73C] hover:underline text-left cursor-pointer">Dhaka → Jeddah & Madinah (Umrah Hub)</a></li>
             </ul>
           </div>
@@ -6114,12 +6221,12 @@ export default function App() {
               {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa Guides by Country"}
             </span>
             <ul className="space-y-1 text-xs">
-              <li><a href="/visa?country=nepal-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa?country=nepal-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</a></li>
-              <li><a href="/visa?country=maldives-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa?country=maldives-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</a></li>
-              <li><a href="/visa?country=thailand-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa?country=thailand-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</a></li>
-              <li><a href="/visa?country=malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa?country=malaysia-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
-              <li><a href="/visa?country=singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa?country=singapore-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Agent Visa"}</a></li>
-              <li><a href="/visa?country=dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa?country=dubai-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
+              <li><a href="/visa/nepal-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/nepal-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</a></li>
+              <li><a href="/visa/maldives-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/maldives-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</a></li>
+              <li><a href="/visa/thailand-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/thailand-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</a></li>
+              <li><a href="/visa/malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/malaysia-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
+              <li><a href="/visa/singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/singapore-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Agent Visa"}</a></li>
+              <li><a href="/visa/dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/dubai-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
               <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="text-[#F6B73C] hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪১টি ট্রাভেল ব্লগ গাইড →" : "All 41 Travel Blog Guides →"}</a></li>
             </ul>
           </div>
@@ -6145,8 +6252,8 @@ export default function App() {
             </span>
             <div className="space-y-2 text-xs">
               <div className="flex items-center gap-1.5">
-                <span className="text-emerald-400">💬</span>
-                <a href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline text-emerald-400 font-mono font-bold">WhatsApp: 01784385335</a>
+                <span className="text-brand-ivory">💬</span>
+                <a href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline text-brand-ivory font-mono font-bold">WhatsApp: 01784385335</a>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="text-[#F6B73C]">📞</span>
@@ -6176,8 +6283,8 @@ export default function App() {
 
       {/* Dynamic Action Affiliate Conversion Toast Overlay */}
       {affiliateToast && (
-        <div id="converter-toast" className="fixed bottom-6 right-6 z-50 max-w-sm bg-[#0F172A] text-white p-4 rounded-xl shadow-2xl border border-[#F6B73C] animate-fade-in flex items-start gap-4">
-          <div className="p-2 bg-[#F6B73C] text-[#0F172A] rounded-lg shrink-0 text-xs">🚀</div>
+        <div id="converter-toast" className="fixed bottom-6 right-6 z-50 max-w-sm bg-brand-navy text-white p-4 rounded-xl shadow-2xl border border-[#F6B73C] animate-fade-in flex items-start gap-4">
+          <div className="p-2 bg-[#F6B73C] text-brand-navy rounded-lg shrink-0 text-xs">🚀</div>
           <div className="space-y-1 text-xs">
             <span className="font-mono font-bold text-[#F6B73C] block uppercase tracking-wide font-sans">Secure Partner Dispatch</span>
             <p className="leading-relaxed font-sans text-slate-300">{affiliateToast}</p>

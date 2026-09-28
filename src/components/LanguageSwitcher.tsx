@@ -16,7 +16,7 @@ export function LanguageSwitcher({ lang, onToggle, compact = false }: LanguageSw
         onClick={() => onToggle("en")}
         className={`px-2 py-0.5 rounded-md transition-all cursor-pointer flex items-center gap-1 ${
           lang === "en"
-            ? "bg-[#F6B73C] text-[#0F172A] font-bold shadow-xs"
+            ? "bg-[#F6B73C] text-brand-navy font-bold shadow-xs"
             : "text-white/70 hover:text-white"
         }`}
         title="Switch to English"
@@ -29,7 +29,7 @@ export function LanguageSwitcher({ lang, onToggle, compact = false }: LanguageSw
         onClick={() => onToggle("bn")}
         className={`px-2 py-0.5 rounded-md transition-all cursor-pointer flex items-center gap-1 ${
           lang === "bn"
-            ? "bg-[#F6B73C] text-[#0F172A] font-bold shadow-xs"
+            ? "bg-[#F6B73C] text-brand-navy font-bold shadow-xs"
             : "text-white/70 hover:text-white"
         }`}
         title="বাংলায় পরিবর্তন করুন"

@@ -35,13 +35,6 @@ export function toIsoDate(
 }
 
 /**
- * Converts a date string into YYYY-MM-DD for sitemap <lastmod>.
- */
-export function toDateOnly(dateStr?: string, fallback = "2026-09-27"): string {
-  return toIsoDate(dateStr, `${fallback}T09:00:00+06:00`).slice(0, 10);
-}
-
-/**
  * Parses author strings such as "Zayan Rahman (Senior Travel Researcher)"
  * into a Schema.org Person entity linked to the URAL Organization.
  */
@@ -76,11 +69,11 @@ export function getSiteGraphNodes() {
       logo: {
         "@type": "ImageObject",
         "@id": SITE_LOGO_ID,
-        url: `${BASE_URL}/brand/ural-logo-512.png`,
-        contentUrl: `${BASE_URL}/brand/ural-logo-512.png`,
+        url: `${BASE_URL}/assets/brand/favicon/favicon-512.png`,
+        contentUrl: `${BASE_URL}/assets/brand/favicon/favicon-512.png`,
         width: 512,
         height: 512,
-        caption: "URAL",
+        caption: "URAL Ascent mark",
       },
       image: { "@id": SITE_LOGO_ID },
       telephone: "+8801784385335",
@@ -119,15 +112,7 @@ export function getSiteGraphNodes() {
       name: "URAL",
       description: "Travel Intelligence for Bangladeshi Outbound Travelers",
       publisher: { "@id": SITE_ORG_ID },
-      inLanguage: ["en-BD", "bn-BD"],
-      potentialAction: {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: `${BASE_URL}/sitemap?q={search_term_string}`,
-        },
-        "query-input": "required name=search_term_string",
-      },
+      inLanguage: "en-BD",
     },
   ];
 }

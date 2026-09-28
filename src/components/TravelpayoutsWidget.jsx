@@ -1157,7 +1157,7 @@ export default function TravelpayoutsWidget({
                   onClick={() => handleQuickRouteSelect(route)}
                   className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-[#102A43] text-[#F6B73C] font-semibold shadow-xs'
+                      ? 'bg-brand-navy text-[#F6B73C] font-semibold shadow-xs'
                       : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200/90'
                   }`}
                 >
@@ -1175,7 +1175,7 @@ export default function TravelpayoutsWidget({
               onClick={() => setCurrency('BDT')}
               className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
                 currency === 'BDT'
-                  ? 'bg-white text-[#102A43] shadow-2xs'
+                  ? 'bg-white text-brand-navy shadow-2xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -1186,7 +1186,7 @@ export default function TravelpayoutsWidget({
               onClick={() => setCurrency('USD')}
               className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
                 currency === 'USD'
-                  ? 'bg-white text-[#102A43] shadow-2xs'
+                  ? 'bg-white text-brand-navy shadow-2xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -1208,7 +1208,7 @@ export default function TravelpayoutsWidget({
                 onClick={() => setTripType('roundtrip')}
                 className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
                   tripType === 'roundtrip'
-                    ? 'bg-[#102A43] text-white shadow-2xs'
+                    ? 'bg-brand-navy text-white shadow-2xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -1219,7 +1219,7 @@ export default function TravelpayoutsWidget({
                 onClick={() => setTripType('oneway')}
                 className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
                   tripType === 'oneway'
-                    ? 'bg-[#102A43] text-white shadow-2xs'
+                    ? 'bg-brand-navy text-white shadow-2xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -1291,7 +1291,7 @@ export default function TravelpayoutsWidget({
               onClick={() => setActiveDropdown('origin')}
               className={`w-full bg-slate-50 hover:bg-slate-100/80 border rounded-xl px-3.5 py-2.5 cursor-text transition-all ${
                 activeDropdown === 'origin'
-                  ? 'border-[#102A43] ring-2 ring-[#102A43]/15 bg-white'
+                  ? 'border-brand-navy ring-2 ring-brand-navy/15 bg-white'
                   : 'border-slate-200'
               }`}
             >
@@ -1316,7 +1316,7 @@ export default function TravelpayoutsWidget({
                     {originInfo.name}
                   </div>
                 </div>
-                <span className="shrink-0 text-xs font-mono font-bold bg-[#102A43]/10 text-[#102A43] px-2 py-0.5 rounded">
+                <span className="shrink-0 text-xs font-mono font-bold bg-brand-navy/10 text-brand-navy px-2 py-0.5 rounded">
                   {originInfo.code}
                 </span>
               </div>
@@ -1347,7 +1347,7 @@ export default function TravelpayoutsWidget({
                       </div>
                       <div className="text-[11px] text-slate-500 truncate">{airport.name}</div>
                     </div>
-                    <span className="text-xs font-mono font-bold text-[#102A43] bg-slate-100 px-2 py-0.5 rounded shrink-0">
+                    <span className="text-xs font-mono font-bold text-brand-navy bg-slate-100 px-2 py-0.5 rounded shrink-0">
                       {airport.code}
                     </span>
                   </button>
@@ -1362,7 +1362,7 @@ export default function TravelpayoutsWidget({
               type="button"
               onClick={handleSwapLocations}
               title="Swap Origin and Destination"
-              className="hidden md:flex absolute -left-4 top-8 z-20 w-7 h-7 rounded-full bg-white border border-slate-300 shadow-xs items-center justify-center text-[#102A43] hover:bg-[#102A43] hover:text-white transition-colors cursor-pointer"
+              className="hidden md:flex absolute -left-4 top-8 z-20 w-7 h-7 rounded-full bg-white border border-slate-300 shadow-xs items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-white transition-colors cursor-pointer"
             >
               <ArrowRightLeft size={13} />
             </button>
@@ -1374,7 +1374,7 @@ export default function TravelpayoutsWidget({
               <button
                 type="button"
                 onClick={handleSwapLocations}
-                className="md:hidden text-[11px] font-semibold text-[#102A43] flex items-center gap-1 cursor-pointer"
+                className="md:hidden text-[11px] font-semibold text-brand-navy flex items-center gap-1 cursor-pointer"
               >
                 <ArrowRightLeft size={11} /> Swap
               </button>
@@ -1384,7 +1384,7 @@ export default function TravelpayoutsWidget({
               onClick={() => setActiveDropdown('dest')}
               className={`w-full bg-slate-50 hover:bg-slate-100/80 border rounded-xl px-3.5 py-2.5 cursor-text transition-all ${
                 activeDropdown === 'dest'
-                  ? 'border-[#102A43] ring-2 ring-[#102A43]/15 bg-white'
+                  ? 'border-brand-navy ring-2 ring-brand-navy/15 bg-white'
                   : 'border-slate-200'
               }`}
             >
@@ -1409,7 +1409,7 @@ export default function TravelpayoutsWidget({
                     {destInfo.name}
                   </div>
                 </div>
-                <span className="shrink-0 text-xs font-mono font-bold bg-[#F6B73C]/25 text-[#102A43] px-2 py-0.5 rounded">
+                <span className="shrink-0 text-xs font-mono font-bold bg-[#F6B73C]/25 text-brand-navy px-2 py-0.5 rounded">
                   {destInfo.code}
                 </span>
               </div>
@@ -1440,7 +1440,7 @@ export default function TravelpayoutsWidget({
                       </div>
                       <div className="text-[11px] text-slate-500 truncate">{airport.name}</div>
                     </div>
-                    <span className="text-xs font-mono font-bold text-[#102A43] bg-slate-100 px-2 py-0.5 rounded shrink-0">
+                    <span className="text-xs font-mono font-bold text-brand-navy bg-slate-100 px-2 py-0.5 rounded shrink-0">
                       {airport.code}
                     </span>
                   </button>
@@ -1592,7 +1592,7 @@ export default function TravelpayoutsWidget({
                 href={aviasalesPartnerUrl}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#102A43] bg-[#F6B73C]/20 hover:bg-[#F6B73C]/35 px-3 py-2 rounded-lg transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-navy bg-[#F6B73C]/20 hover:bg-[#F6B73C]/35 px-3 py-2 rounded-lg transition-colors cursor-pointer"
               >
                 <span>Compare on Aviasales Global</span>
                 <ExternalLink size={13} />
@@ -1726,7 +1726,7 @@ export default function TravelpayoutsWidget({
                 {/* Top Metadata Row */}
                 <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-slate-100 text-xs">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-bold text-[#102A43]">{flight.badge}</span>
+                    <span className="font-bold text-brand-navy">{flight.badge}</span>
                     <span className="text-slate-300" aria-hidden="true">·</span>
                     <span className="text-slate-600 font-medium">{flight.aircraft}</span>
                     <span className="text-slate-300" aria-hidden="true">·</span>
@@ -1742,7 +1742,7 @@ export default function TravelpayoutsWidget({
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
                   {/* Airline Info */}
                   <div className="lg:col-span-3 flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-xl bg-[#102A43] text-[#F6B73C] font-mono font-black text-sm flex items-center justify-center shrink-0">
+                    <div className="w-11 h-11 rounded-xl bg-brand-navy text-[#F6B73C] font-mono font-black text-sm flex items-center justify-center shrink-0">
                       {flight.airlineCode}
                     </div>
                     <div>
@@ -1834,7 +1834,7 @@ export default function TravelpayoutsWidget({
                   {/* Price & Primary CTA */}
                   <div className="lg:col-span-3 flex flex-row lg:flex-col items-center lg:items-end justify-between gap-3 pt-3 lg:pt-0 border-t lg:border-t-0 lg:border-l border-slate-100 lg:pl-4">
                     <div className="text-left lg:text-right">
-                      <div className="text-xl font-black text-[#102A43] tabular-nums">
+                      <div className="text-xl font-black text-brand-navy tabular-nums">
                         {formatMoney(flight.totalBdt, flight.totalUsd)}
                       </div>
                       <div className="text-[11px] text-slate-500 tabular-nums">
@@ -1941,7 +1941,7 @@ export default function TravelpayoutsWidget({
                         href={aviasalesPartnerUrl}
                         target="_blank"
                         rel="noopener noreferrer sponsored"
-                        className="w-full sm:w-auto bg-[#102A43] hover:bg-slate-800 text-[#F6B73C] font-bold text-xs px-4 py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer"
+                        className="w-full sm:w-auto bg-brand-navy hover:bg-slate-800 text-[#F6B73C] font-bold text-xs px-4 py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer"
                       >
                         <span>Continue to Partner Booking</span>
                         <ExternalLink size={13} />
@@ -1962,7 +1962,7 @@ export default function TravelpayoutsWidget({
           <button
             type="button"
             onClick={() => setShowClassicWhiteLabel((v) => !v)}
-            className="text-[#102A43] hover:underline font-semibold cursor-pointer"
+            className="text-brand-navy hover:underline font-semibold cursor-pointer"
           >
             {showClassicWhiteLabel
               ? 'Hide Embedded Aviasales White-Label Frame'

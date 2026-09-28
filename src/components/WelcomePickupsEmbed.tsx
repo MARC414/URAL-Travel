@@ -203,7 +203,7 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
       {/* Header Row */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
         <div className="flex items-start gap-3">
-          <div className="p-2 bg-[#102A43] text-[#F6B73C] rounded-lg shrink-0 mt-0.5">
+          <div className="p-2 bg-brand-navy text-[#F6B73C] rounded-lg shrink-0 mt-0.5">
             <Car size={18} />
           </div>
           <div>
@@ -240,7 +240,7 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
               href={WELCOME_PICKUPS_PARTNER_URL}
               target="_blank"
               rel="noopener noreferrer sponsored"
-              className="text-[#102A43] font-semibold hover:underline inline-flex items-center gap-1"
+              className="text-brand-navy font-semibold hover:underline inline-flex items-center gap-1"
             >
               <span>Open Direct</span>
               <ExternalLink size={10} />
@@ -256,12 +256,12 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
           {/* Airport Pickup */}
           <div>
             <label className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1">
-              <MapPin size={11} className="text-[#102A43]" /> Arrival Airport
+              <MapPin size={11} className="text-brand-navy" /> Arrival Airport
             </label>
             <select
               value={selectedRouteId}
               onChange={(e) => handleRouteChange(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 font-medium focus:outline-none focus:border-[#102A43] transition-colors cursor-pointer"
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 font-medium focus:outline-none focus:border-brand-navy transition-colors cursor-pointer"
             >
               {TRANSFER_ROUTES.map((r) => (
                 <option key={r.id} value={r.id}>
@@ -274,13 +274,13 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
           {/* Drop-off Hotel / District */}
           <div>
             <label className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1">
-              <MapPin size={11} className="text-[#D4941A]" /> Destination Hotel / Area
+              <MapPin size={11} className="text-brand-emerald" /> Destination Hotel / Area
             </label>
             <input
               type="text"
               value={hotelAddress}
               onChange={(e) => setHotelAddress(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#102A43] transition-colors"
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-navy transition-colors"
               placeholder="e.g. Sukhumvit Hotel, Bangkok"
               required
             />
@@ -290,25 +290,25 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
           <div className="grid grid-cols-2 gap-2">
             <div>
               <label className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1">
-                <Plane size={11} className="text-[#102A43]" /> Flight #
+                <Plane size={11} className="text-brand-navy" /> Flight #
               </label>
               <input
                 type="text"
                 value={flightNumber}
                 onChange={(e) => setFlightNumber(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 font-mono focus:outline-none focus:border-[#102A43] transition-colors"
+                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 font-mono focus:outline-none focus:border-brand-navy transition-colors"
                 placeholder="BG 388"
               />
             </div>
             <div>
               <label className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1">
-                <Calendar size={11} className="text-[#102A43]" /> Date
+                <Calendar size={11} className="text-brand-navy" /> Date
               </label>
               <input
                 type="date"
                 value={pickupDate}
                 onChange={(e) => setPickupDate(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-2 text-xs text-slate-900 focus:outline-none focus:border-[#102A43] transition-colors"
+                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-2 text-xs text-slate-900 focus:outline-none focus:border-brand-navy transition-colors"
                 required
               />
             </div>
@@ -317,12 +317,12 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
           {/* Passengers & Vehicle Type */}
           <div>
             <label className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1">
-              <Users size={11} className="text-[#102A43]" /> Travelers & Vehicle
+              <Users size={11} className="text-brand-navy" /> Travelers & Vehicle
             </label>
             <select
               value={passengers}
               onChange={(e) => handlePassengerChange(Number(e.target.value))}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 font-medium focus:outline-none focus:border-[#102A43] transition-colors cursor-pointer"
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 font-medium focus:outline-none focus:border-brand-navy transition-colors cursor-pointer"
             >
               <option value={1}>1–2 Pax · Private Sedan</option>
               <option value={3}>3 Pax · Private Sedan</option>
@@ -339,7 +339,7 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
               <span className="font-semibold text-slate-900">
                 Est. Flat Rate ({vehicleType === "minivan" ? "Family Minivan" : "Private Sedan"}):
               </span>
-              <span className="font-mono font-bold text-[#102A43] tabular-nums">
+              <span className="font-mono font-bold text-brand-navy tabular-nums">
                 ৳{estimatedBdt.toLocaleString()} BDT
               </span>
               <span aria-hidden="true">·</span>
@@ -357,7 +357,7 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
             <button
               type="submit"
               disabled={isRedirecting}
-              className="bg-[#F6B73C] hover:bg-[#ffc654] text-[#102A43] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer disabled:opacity-70"
+              className="bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer disabled:opacity-70"
             >
               {isRedirecting ? (
                 <>
