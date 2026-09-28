@@ -5635,7 +5635,11 @@ export default function App() {
       {section !== "blog" && section !== "notFound" && (
         <section
           id="content-and-growth-hub"
-          className="mt-20 pt-16 border-t border-slate-200/80 space-y-6"
+          className={`${
+            ["umrah", "contact", "experiences", "sitemap"].includes(section)
+              ? "mt-4 pt-4 mb-14 sm:mb-20 pb-12 sm:pb-16 border-b border-slate-200/80"
+              : "mt-20 pt-16 border-t border-slate-200/80"
+          } space-y-6`}
         >
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="space-y-1.5 max-w-2xl">
