@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -26 380 130" width="380" height="130" role="img" aria-labelledby="title desc">
-<title id="title">URAL wordmark</title><desc id="desc">Custom monoline URAL wordmark with a guiding star inside the arch-shaped A.</desc><rect width="380" height="130" fill="#FBF9F4"/>
-<g fill="none" stroke="#0B1426" stroke-width="14" stroke-linejoin="miter" stroke-miterlimit="10">
-<path d="M7,0 V64 A31,31 0 0 0 69,64 V0"/><path d="M105,100 V7 H136 A24.5,24.5 0 0 1 136,56 H105"/><path d="M134,56 L166,100"/><path d="M195,100 V58 A64,64 0 0 1 234,2 A64,64 0 0 1 273,58 V100"/><path d="M309,0 V93 H362"/></g>
-<path d="M 234,32.0 Q 234,46 248.0,46 Q 234,46 234,60.0 Q 234,46 220.0,46 Q 234,46 234,32.0 Z" fill="#F6B73C"/>
-</svg>
