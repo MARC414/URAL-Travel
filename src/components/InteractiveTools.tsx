@@ -131,9 +131,9 @@ export function InteractiveTools() {
   const currentEligibility = visaEligibilityMap[testNational][testDest];
 
   return (
-    <div id="interactive-tools-panel" className="bg-[#F8FAFC] border border-slate-200 rounded-xl overflow-hidden shadow-lg my-8">
+    <div id="interactive-tools-panel" className="bg-brand-ivory border border-slate-200 rounded-xl overflow-hidden shadow-lg my-8">
       {/* Tools Top Header Navigation */}
-      <div className="bg-[#102A43] px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-slate-700">
+      <div className="bg-brand-navy px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-slate-700">
         <h3 className="font-serif text-lg font-bold text-white flex items-center gap-2">
           <Sparkles className="text-[#F6B73C]" size={20} />
           URAL Bangladesh Travel Utility Desk
@@ -143,7 +143,7 @@ export function InteractiveTools() {
             id="tool-nav-calculator"
             onClick={() => setActiveTool("calculator")}
             className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "calculator" ? "bg-[#F6B73C] text-[#102A43]" : "text-slate-350 hover:text-white"
+              activeTool === "calculator" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-350 hover:text-white"
             }`}
           >
             Trip Cost Estimator
@@ -152,7 +152,7 @@ export function InteractiveTools() {
             id="tool-nav-converter"
             onClick={() => setActiveTool("converter")}
             className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "converter" ? "bg-[#F6B73C] text-[#102A43]" : "text-slate-350 hover:text-white"
+              activeTool === "converter" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-350 hover:text-white"
             }`}
           >
             Currency Converter
@@ -161,7 +161,7 @@ export function InteractiveTools() {
             id="tool-nav-packing"
             onClick={() => setActiveTool("packing")}
             className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "packing" ? "bg-[#F6B73C] text-[#102A43]" : "text-slate-350 hover:text-white"
+              activeTool === "packing" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-350 hover:text-white"
             }`}
           >
             Smart Checklist
@@ -170,7 +170,7 @@ export function InteractiveTools() {
             id="tool-nav-visa-checker"
             onClick={() => setActiveTool("visa-checker")}
             className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "visa-checker" ? "bg-[#F6B73C] text-[#102A43]" : "text-slate-350 hover:text-white"
+              activeTool === "visa-checker" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-350 hover:text-white"
             }`}
           >
             Visa Checker
@@ -179,7 +179,7 @@ export function InteractiveTools() {
             id="tool-nav-airhelp"
             onClick={() => setActiveTool("airhelp")}
             className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "airhelp" ? "bg-[#F6B73C] text-[#102A43]" : "text-slate-350 hover:text-white"
+              activeTool === "airhelp" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-350 hover:text-white"
             }`}
           >
             Flight Delay Claim (€600)
@@ -193,7 +193,7 @@ export function InteractiveTools() {
         {activeTool === "calculator" && (
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-slate-800 font-serif border-b border-slate-200 pb-3">
-              <Calculator className="text-[#102A43]" size={20} />
+              <Calculator className="text-brand-navy" size={20} />
               <h4 className="font-bold text-lg">Interactive Outbound Budget Estimator (BDT)</h4>
             </div>
 
@@ -208,7 +208,7 @@ export function InteractiveTools() {
                     id="calc-dest-select"
                     value={calcCountry}
                     onChange={(e) => setCalcCountry(e.target.value as any)}
-                    className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                    className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                   >
                     <option value="nepal">Nepal 🇳🇵</option>
                     <option value="thailand">Thailand 🇹🇭</option>
@@ -226,7 +226,7 @@ export function InteractiveTools() {
                     max="14"
                     value={calcDays}
                     onChange={(e) => setCalcDays(Number(e.target.value))}
-                    className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#102A43]"
+                    className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-navy"
                   />
                   <div className="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
                     <span>1 Day</span>
@@ -244,7 +244,7 @@ export function InteractiveTools() {
                     max="5"
                     value={calcPeeps}
                     onChange={(e) => setCalcPeeps(Number(e.target.value))}
-                    className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#102A43]"
+                    className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-navy"
                   />
                   <div className="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
                     <span>1 Traveler (Solo)</span>
@@ -286,7 +286,7 @@ export function InteractiveTools() {
 
               {/* Dynamic Recalculated Output Column */}
               <div className="md:col-span-2 space-y-4">
-                <div className="bg-[#102A43] text-slate-100 p-6 rounded-xl relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="bg-brand-navy text-slate-100 p-6 rounded-xl relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4">
                   {/* Decorative mesh */}
                   <div className="absolute right-0 top-0 opacity-10 text-white font-serif text-9xl">৳</div>
                   <div>
@@ -338,7 +338,7 @@ export function InteractiveTools() {
         {activeTool === "converter" && (
           <div className="space-y-6 max-w-xl mx-auto">
             <div className="flex items-center gap-2 text-slate-800 font-serif border-b border-slate-200 pb-3">
-              <Coins className="text-[#102A43]" size={20} />
+              <Coins className="text-brand-navy" size={20} />
               <h4 className="font-bold text-lg">Bangladeshi Taka (BDT) Real-time Currency Proxy</h4>
             </div>
 
@@ -352,7 +352,7 @@ export function InteractiveTools() {
                     type="number"
                     value={bdtAmount}
                     onChange={(e) => setBdtAmount(Number(e.target.value))}
-                    className="w-full bg-white border border-slate-350 rounded-lg pl-8 pr-12 py-3 text-sm font-semibold font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                    className="w-full bg-white border border-slate-350 rounded-lg pl-8 pr-12 py-3 text-sm font-semibold font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                   />
                   <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-mono font-bold text-slate-400">BDT</span>
                 </div>
@@ -391,7 +391,7 @@ export function InteractiveTools() {
           <div className="space-y-6 max-w-2xl mx-auto">
             <div className="flex items-center justify-between border-b border-slate-200 pb-3">
               <div className="flex items-center gap-2 text-slate-850 font-serif">
-                <CheckSquare className="text-[#102A43]" size={20} />
+                <CheckSquare className="text-brand-navy" size={20} />
                 <h4 className="font-bold text-lg">Bangladeshi Outbound Packing Checklist</h4>
               </div>
               <div className="text-xs font-mono font-semibold text-slate-600 bg-slate-100 py-1 px-2.5 rounded-full border border-slate-200">
@@ -419,7 +419,7 @@ export function InteractiveTools() {
                 const categoricalItems = checklist.filter(item => item.category === category);
                 return (
                   <div key={category} className="space-y-2">
-                    <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-wider block border-l-2 border-[#102A43] pl-2 mb-2">{category} Items</span>
+                    <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-wider block border-l-2 border-brand-navy pl-2 mb-2">{category} Items</span>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
                       {categoricalItems.map((item) => (
                         <div
@@ -451,7 +451,7 @@ export function InteractiveTools() {
         {activeTool === "visa-checker" && (
           <div className="space-y-6 max-w-xl mx-auto">
             <div className="flex items-center gap-2 text-slate-800 font-serif border-b border-slate-200 pb-3">
-              <ShieldCheck className="text-[#102A43]" size={20} />
+              <ShieldCheck className="text-brand-navy" size={20} />
               <h4 className="font-bold text-lg">Passport Visa Eligibility Evaluator</h4>
             </div>
 
@@ -463,7 +463,7 @@ export function InteractiveTools() {
                     id="select-checker-national"
                     value={testNational}
                     onChange={(e) => setTestNational(e.target.value as any)}
-                    className="w-full bg-white border border-slate-350 rounded-lg px-2.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                    className="w-full bg-white border border-slate-350 rounded-lg px-2.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                   >
                     <option value="bd">Bangladesh 🇧🇩</option>
                     <option value="in">India 🇮🇳</option>
@@ -477,7 +477,7 @@ export function InteractiveTools() {
                     id="select-checker-dest"
                     value={testDest}
                     onChange={(e) => setTestDest(e.target.value as any)}
-                    className="w-full bg-white border border-slate-350 rounded-lg px-2.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                    className="w-full bg-white border border-slate-350 rounded-lg px-2.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                   >
                     <option value="np">Nepal 🇳🇵</option>
                     <option value="th">Thailand 🇹🇭</option>

@@ -146,7 +146,7 @@ export function TravelpayoutsCustomWidget({
   return (
     <div id="travelpayouts-affiliate-block" className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden my-4 text-slate-900">
       {/* Widget Tabs */}
-      <div className="bg-[#102A43] p-3.5 sm:px-5 text-white flex flex-wrap items-center justify-between gap-2">
+      <div className="bg-brand-navy p-3.5 sm:px-5 text-white flex flex-wrap items-center justify-between gap-2">
         <div className="flex gap-2">
           <button
             id="tab-search-flights"
@@ -157,7 +157,7 @@ export function TravelpayoutsCustomWidget({
             }}
             className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
               searchTab === "flights"
-                ? "bg-[#F6B73C] text-[#102A43] shadow-xs"
+                ? "bg-[#F6B73C] text-brand-navy shadow-xs"
                 : "hover:bg-slate-800 text-slate-300"
             }`}
           >
@@ -173,7 +173,7 @@ export function TravelpayoutsCustomWidget({
             }}
             className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
               searchTab === "hotels"
-                ? "bg-[#F6B73C] text-[#102A43] shadow-xs"
+                ? "bg-[#F6B73C] text-brand-navy shadow-xs"
                 : "hover:bg-slate-800 text-slate-300"
             }`}
           >
@@ -199,7 +199,7 @@ export function TravelpayoutsCustomWidget({
                   id="select-from-airport"
                   value={fromCity}
                   onChange={(e) => setFromCity(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                 >
                   <option value="Dhaka (DAC)">Dhaka (DAC) - Bangladesh</option>
                   <option value="Chattogram (CGP)">Chattogram (CGP) - Bangladesh</option>
@@ -212,7 +212,7 @@ export function TravelpayoutsCustomWidget({
                   type="button"
                   onClick={swapCities}
                   title="Swap Airports"
-                  className="absolute right-2 top-0 text-[11px] font-semibold text-[#102A43] hover:underline flex items-center gap-1 cursor-pointer"
+                  className="absolute right-2 top-0 text-[11px] font-semibold text-brand-navy hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <ArrowRightLeft size={11} /> Swap
                 </button>
@@ -223,7 +223,7 @@ export function TravelpayoutsCustomWidget({
                   id="select-to-airport"
                   value={toCity}
                   onChange={(e) => setToCity(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                 >
                   <option value="Kathmandu (KTM)">Kathmandu (KTM) - Nepal 🇳🇵</option>
                   <option value="Bangkok (BKK / DMK)">Bangkok (BKK / DMK) - Thailand 🇹🇭</option>
@@ -241,7 +241,7 @@ export function TravelpayoutsCustomWidget({
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                 />
               </div>
 
@@ -274,7 +274,7 @@ export function TravelpayoutsCustomWidget({
                   id="select-hotel-city"
                   value={hotelCity}
                   onChange={(e) => setHotelCity(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                 >
                   <option value="Kathmandu">Kathmandu - Nepal 🇳🇵</option>
                   <option value="Bangkok">Bangkok - Thailand 🇹🇭</option>
@@ -292,7 +292,7 @@ export function TravelpayoutsCustomWidget({
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                 />
               </div>
 
@@ -304,7 +304,7 @@ export function TravelpayoutsCustomWidget({
                   id="select-hotel-rooms"
                   value={travelers}
                   onChange={(e) => setTravelers(Number(e.target.value))}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#102A43]"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                 >
                   <option value="1">1 Guest, 1 Room</option>
                   <option value="2">2 Guests, 1 Room</option>
@@ -317,7 +317,7 @@ export function TravelpayoutsCustomWidget({
                 id="btn-search-hotels-submit"
                 type="submit"
                 disabled={isSearching}
-                className="w-full bg-[#F6B73C] text-[#102A43] hover:bg-[#e0a42d] py-2.5 px-4 rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                className="w-full bg-[#F6B73C] text-brand-navy hover:bg-[#e0a42d] py-2.5 px-4 rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
               >
                 {isSearching ? (
                   <>
@@ -362,7 +362,7 @@ export function TravelpayoutsCustomWidget({
                   className="border border-slate-200 hover:border-slate-300 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:bg-slate-50/60"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="p-2.5 bg-[#102A43] text-[#F6B73C] rounded-xl shrink-0 mt-0.5">
+                    <div className="p-2.5 bg-brand-navy text-[#F6B73C] rounded-xl shrink-0 mt-0.5">
                       <Plane size={18} />
                     </div>
                     <div>
@@ -383,7 +383,7 @@ export function TravelpayoutsCustomWidget({
 
                   <div className="flex items-center justify-between md:flex-col md:items-end gap-2 border-t md:border-t-0 border-slate-100 pt-3 md:pt-0">
                     <div className="text-left md:text-right">
-                      <div className="text-lg font-black text-[#102A43] tabular-nums">
+                      <div className="text-lg font-black text-brand-navy tabular-nums">
                         ৳{flight.priceBdt.toLocaleString()} BDT
                       </div>
                       <span className="text-[11px] text-slate-500 block">
@@ -408,7 +408,7 @@ export function TravelpayoutsCustomWidget({
                   className="border border-slate-200 hover:border-slate-300 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:bg-slate-50/60"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="p-2.5 bg-slate-100 text-[#102A43] rounded-xl shrink-0 mt-0.5">
+                    <div className="p-2.5 bg-slate-100 text-brand-navy rounded-xl shrink-0 mt-0.5">
                       <Building size={18} />
                     </div>
                     <div>
@@ -445,7 +445,7 @@ export function TravelpayoutsCustomWidget({
                       id={`btn-book-hotel-${hotel.id}`}
                       type="button"
                       onClick={() => setSelectedItem({ type: "hotel", ...hotel })}
-                      className="bg-[#102A43] hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
+                      className="bg-brand-navy hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
                     >
                       Check Availability
                       <ExternalLink size={12} />
@@ -479,7 +479,7 @@ export function TravelpayoutsCustomWidget({
               }
               target="_blank"
               rel="noopener noreferrer sponsored"
-              className="shrink-0 bg-[#102A43] hover:bg-slate-800 text-[#F6B73C] px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="shrink-0 bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <span>Proceed to Partner Checkout</span>
               <ExternalLink size={13} />

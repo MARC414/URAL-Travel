@@ -77,7 +77,7 @@ export function TravelEssentials({
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="space-y-1.5">
           <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-            <span className="font-semibold text-[#102A43]">
+            <span className="font-semibold text-brand-navy">
               {isBn ? "ভ্রমণের জরুরি সেবাসমূহ (Travel Essentials)" : "In-Country Travel Essentials"}
             </span>
             <span aria-hidden="true">·</span>
@@ -113,7 +113,7 @@ export function TravelEssentials({
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-3.5 py-2 rounded-lg text-xs font-medium transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer ${
                   isActive
-                    ? "bg-[#102A43] text-white font-semibold shadow-xs"
+                    ? "bg-brand-navy text-white font-semibold shadow-xs"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -146,7 +146,7 @@ export function TravelEssentials({
                 onClick={() => setTransferProvider("welcome")}
                 className={`px-3 py-1.5 text-xs rounded-md transition-colors whitespace-nowrap cursor-pointer ${
                   transferProvider === "welcome"
-                    ? "bg-white text-[#102A43] font-semibold shadow-2xs"
+                    ? "bg-white text-brand-navy font-semibold shadow-2xs"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -157,7 +157,7 @@ export function TravelEssentials({
                 onClick={() => setTransferProvider("kiwitaxi")}
                 className={`px-3 py-1.5 text-xs rounded-md transition-colors whitespace-nowrap cursor-pointer ${
                   transferProvider === "kiwitaxi"
-                    ? "bg-white text-[#102A43] font-semibold shadow-2xs"
+                    ? "bg-white text-brand-navy font-semibold shadow-2xs"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -177,7 +177,7 @@ export function TravelEssentials({
                   href="https://kiwitaxi.tpo.li/GIhvhrtF"
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  className="font-semibold text-[#102A43] hover:underline inline-flex items-center gap-1"
+                  className="font-semibold text-brand-navy hover:underline inline-flex items-center gap-1"
                 >
                   <span>Open Kiwitaxi Direct</span>
                   <ExternalLink size={12} />
@@ -193,7 +193,7 @@ export function TravelEssentials({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center animate-fade-in">
           <div className="lg:col-span-5 space-y-3">
             <div className="flex items-center gap-2 text-xs text-slate-500">
-              <span className="font-semibold text-[#102A43]">Skip-the-Line Sightseeing</span>
+              <span className="font-semibold text-brand-navy">Skip-the-Line Sightseeing</span>
               <span aria-hidden="true">·</span>
               <span>Instant Mobile QR Vouchers</span>
             </div>
@@ -208,7 +208,7 @@ export function TravelEssentials({
                 href="https://klook.tpo.li/IYOU76Bn"
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
+                className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
               >
                 <span>Search Passes on Klook</span>
                 <ExternalLink size={12} />
@@ -236,7 +236,7 @@ export function TravelEssentials({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center animate-fade-in">
           <div className="lg:col-span-5 space-y-3">
             <div className="flex items-center gap-2 text-xs text-slate-500">
-              <span className="font-semibold text-[#102A43]">Digital Travel eSIM</span>
+              <span className="font-semibold text-brand-navy">Digital Travel eSIM</span>
               <span aria-hidden="true">·</span>
               <span>Zero Roaming Bill Shock</span>
             </div>
@@ -251,7 +251,7 @@ export function TravelEssentials({
                 href="https://airalo.tpo.li/mV2QXsXK"
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
+                className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
               >
                 <span>View All Airalo eSIM Plans</span>
                 <ExternalLink size={12} />
@@ -270,7 +270,7 @@ export function TravelEssentials({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center animate-fade-in">
           <div className="lg:col-span-5 space-y-3">
             <div className="flex items-center gap-2 text-xs text-slate-500">
-              <span className="font-semibold text-[#102A43]">Self-Drive & Family Rentals</span>
+              <span className="font-semibold text-brand-navy">Self-Drive & Family Rentals</span>
               <span aria-hidden="true">·</span>
               <span>Free Cancellation</span>
             </div>
@@ -285,7 +285,7 @@ export function TravelEssentials({
                 href="https://qeeq.tpo.li/nooi5oSG"
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
+                className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
               >
                 <span>Compare Car Rental Rates on QEEQ</span>
                 <ExternalLink size={12} />
@@ -307,7 +307,7 @@ export function TravelEssentials({
             href={WELCOME_PICKUPS_PARTNER_URL}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="hover:text-[#102A43] hover:underline font-medium"
+            className="hover:text-brand-navy hover:underline font-medium"
           >
             Welcome Pickups
           </a>
@@ -316,7 +316,7 @@ export function TravelEssentials({
             href="https://kiwitaxi.tpo.li/GIhvhrtF"
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="hover:text-[#102A43] hover:underline font-medium"
+            className="hover:text-brand-navy hover:underline font-medium"
           >
             Kiwitaxi
           </a>
@@ -325,7 +325,7 @@ export function TravelEssentials({
             href="https://klook.tpo.li/IYOU76Bn"
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="hover:text-[#102A43] hover:underline font-medium"
+            className="hover:text-brand-navy hover:underline font-medium"
           >
             Klook
           </a>
@@ -334,7 +334,7 @@ export function TravelEssentials({
             href="https://kkday.tpo.li/3Ecyxris"
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="hover:text-[#102A43] hover:underline font-medium"
+            className="hover:text-brand-navy hover:underline font-medium"
           >
             KKday
           </a>
@@ -343,7 +343,7 @@ export function TravelEssentials({
             href="https://airalo.tpo.li/mV2QXsXK"
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="hover:text-[#102A43] hover:underline font-medium"
+            className="hover:text-brand-navy hover:underline font-medium"
           >
             Airalo eSIM
           </a>
@@ -352,7 +352,7 @@ export function TravelEssentials({
             href="https://qeeq.tpo.li/nooi5oSG"
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="hover:text-[#102A43] hover:underline font-medium"
+            className="hover:text-brand-navy hover:underline font-medium"
           >
             QEEQ Cars
           </a>

@@ -18,7 +18,7 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
 
   if (variant === "compact") {
     return (
-      <div className="bg-gradient-to-r from-[#0B192C] via-[#102A43] to-[#173A5E] text-white rounded-2xl p-5 sm:p-6 border border-cyan-500/30 shadow-sm">
+      <div className="bg-gradient-to-r from-[#0B192C] via-brand-navy to-[#173A5E] text-white rounded-2xl p-5 sm:p-6 border border-cyan-500/30 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
           <div className="space-y-2 max-w-2xl">
             <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono">
@@ -74,7 +74,7 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
   return (
     <section
       aria-labelledby="kkday-sale-heading"
-      className="bg-gradient-to-br from-[#0B192C] via-[#102A43] to-[#0F2942] text-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-cyan-500/30 shadow-md relative overflow-hidden"
+      className="bg-gradient-to-br from-[#0B192C] via-brand-navy to-[#0F2942] text-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-cyan-500/30 shadow-md relative overflow-hidden"
     >
       <div
         className="absolute -right-20 -top-20 w-80 h-80 rounded-full opacity-15 pointer-events-none"

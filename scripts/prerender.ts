@@ -20,6 +20,7 @@ import {
   buildSchemaGraph,
   toIsoDate,
 } from "../src/utils/schema";
+import { getSeoCopy } from "../src/utils/seoCopy";
 import {
   HAJJ_UMRAH_FAQS,
   generateFAQSchema,
@@ -31,6 +32,7 @@ const ROOT_DIR = process.cwd();
 const PUBLIC_DIR = path.join(ROOT_DIR, "public");
 const DIST_DIR = path.join(ROOT_DIR, "dist");
 const ASSETS_IMAGES_DIR = path.join(ROOT_DIR, "src", "assets", "images");
+const OPTIMIZED_SOCIAL_IMAGES_DIR = path.join(ROOT_DIR, "src", "assets", "optimized-social");
 
 const BLOG_IMAGE_MAP: Record<string, string> = {
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": "umrah_makkah_haram_guide_1790430007679.jpg",
@@ -58,12 +60,12 @@ const BLOG_IMAGE_MAP: Record<string, string> = {
   "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration": "kuala_lumpur_petronas_twilight_1790486835902.jpg",
   "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia": "passport_stamps_boarding_window_1790486849797.jpg",
   "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide": "singapore_mrt_gardens_bay_1790520762227.jpg",
-  "bangkok-medical-tourism-checkup-guide-bangladesh-bumrungrad-bangkok-hospital": "bangkok_medical_hospital_lobby_1790520775439.jpg",
-  "best-travel-esim-and-insurance-from-bangladesh-airalo-schengen-umrah": "travel_esim_smartphone_insurance_1790520786938.jpg",
-  "sri-lanka-budget-tour-from-bangladesh-eta-visa-colombo-kandy-ella": "sri_lanka_nine_arch_train_1790520800518.jpg",
-  "bangladesh-epassport-application-renewal-guide-64-districts-urgent-fees": "bangladesh_epassport_biometric_desk_1790520813052.jpg",
+  "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh": "bangkok_medical_hospital_lobby_1790520775439.jpg",
+  "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": "travel_esim_smartphone_insurance_1790520786938.jpg",
+  "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost": "sri_lanka_nine_arch_train_1790520800518.jpg",
+  "bangladesh-epassport-application-renewal-64-districts-fee-guide": "bangladesh_epassport_biometric_desk_1790520813052.jpg",
   "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp": "airport_departure_board_delay_claim_1790520824658.jpg",
-  "best-airlines-from-dhaka-biman-saudia-emirates-qatar-singapore-baggage-guide": "dhaka_airport_widebody_airlines_tarmac_1790520836931.jpg",
+  "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla": "dhaka_airport_widebody_airlines_tarmac_1790520836931.jpg",
   "dual-currency-card-endorsement-bangladesh": "passport_card_travel_desk_1790430035290.jpg",
   "dhaka-airport-outbound-immigration-checklist-noc-go": "ural_hero_bg_1781543111624.jpg",
   "nepal-pokhara-itinerary-bangladesh": "nepal_destination_1781544132297.jpg",
@@ -73,7 +75,7 @@ const BLOG_IMAGE_MAP: Record<string, string> = {
   "hotel-savings-guide-bangkok-kl-dubai": "dubai_destination_1781544180311.jpg",
   "singapore-visa-guide-bangladesh-agents": "singapore_destination_1790387270177.jpg",
   "maldives-budget-trip-bangladesh-maafushi": "maldives_destination_1790387286896.jpg",
-  "cheap-flight-booking-hacks-dhaka": "clouds_boat_hero_1781438671378.jpg",
+  "cheap-flight-booking-hacks-dhaka": "blog_editorial_hero_banner_1790429994056.jpg",
 };
 
 function escapeHtml(str: string): string {
@@ -92,17 +94,25 @@ function escapeXml(str: string): string {
 interface PrerenderRoute {
   routePath: string; // e.g. "/" or "/blog/slug"
   canonicalUrl: string;
-  lastmod: string;
   title: string;
   description: string;
   imageUrl: string;
+  lcpImageUrl?: string;
+  lcpImageSizes?: string;
   breadcrumbs: { name: string; url: string }[];
   extraGraphNodes: Record<string, unknown>[];
   bodyHtml: string;
 }
 
+function getSocialImageSource(fileName: string): string {
+  const optimizedPath = path.join(OPTIMIZED_SOCIAL_IMAGES_DIR, fileName);
+  return fs.existsSync(optimizedPath)
+    ? optimizedPath
+    : path.join(ASSETS_IMAGES_DIR, fileName);
+}
+
 function copyStaticSeoImages() {
-  const ogSrc = path.join(ASSETS_IMAGES_DIR, "ural_hero_bg_1781543111624.jpg");
+  const ogSrc = getSocialImageSource("ural_hero_bg_1781543111624.jpg");
   const targetDirs = [PUBLIC_DIR];
   if (fs.existsSync(DIST_DIR)) {
     targetDirs.push(DIST_DIR);
@@ -116,7 +126,7 @@ function copyStaticSeoImages() {
     for (const post of BLOG_DATA) {
       const fileName =
         BLOG_IMAGE_MAP[post.slug] || "ural_hero_bg_1781543111624.jpg";
-      const srcFile = path.join(ASSETS_IMAGES_DIR, fileName);
+      const srcFile = getSocialImageSource(fileName);
       if (fs.existsSync(srcFile)) {
         fs.copyFileSync(
           srcFile,
@@ -136,7 +146,6 @@ function stripContext(obj: unknown): Record<string, unknown> {
 function buildAllRoutes(): PrerenderRoute[] {
   const routes: PrerenderRoute[] = [];
   const defaultOgImage = `${BASE_URL}/og-image.jpg`;
-  const defaultDate = "2026-03-31";
 
   // 1. Home (/)
   const homeFaq = stripContext(
@@ -160,11 +169,12 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/",
     canonicalUrl: `${BASE_URL}/`,
-    lastmod: defaultDate,
     title: "URAL — Compare Flights, Hotels & Visa Guides for Bangladeshi Travelers",
     description:
       "Compare flight prices from Dhaka to Nepal, Thailand, Malaysia and Dubai, check visa requirements step by step, and plan your trip budget in BDT.",
     imageUrl: defaultOgImage,
+    lcpImageUrl: `${BASE_URL}/assets/images/clouds_boat_hero_1781438671378-1200.webp`,
+    lcpImageSizes: "100vw",
     breadcrumbs: [{ name: "Home", url: `${BASE_URL}/` }],
     extraGraphNodes: [homeFaq],
     bodyHtml: `
@@ -186,11 +196,12 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/umrah",
     canonicalUrl: `${BASE_URL}/umrah`,
-    lastmod: defaultDate,
-    title: "Umrah & Hajj Guide from Bangladesh 2026: BDT Cost Calculator, Nusuk & Flights | URAL",
+    title: "Umrah Cost from Bangladesh: DIY Guide & Nusuk | URAL",
     description:
-      "Plan your DIY Umrah from Dhaka and save BDT 35,000+ per pilgrim, or book flights, Makkah/Madinah hotels, and e-Visas in BDT via our Dhaka WhatsApp desk.",
+      "Plan Umrah from Dhaka with a BDT cost framework, Saudi visa and Nusuk guidance, Makkah–Madinah travel options, and a practical preparation checklist.",
     imageUrl: defaultOgImage,
+    lcpImageUrl: `${BASE_URL}/assets/images/umrah_makkah_haram_guide_1790430007679-1200.webp`,
+    lcpImageSizes: "100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Umrah & Hajj Hub", url: `${BASE_URL}/umrah` },
@@ -218,7 +229,6 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/flights",
     canonicalUrl: `${BASE_URL}/flights`,
-    lastmod: defaultDate,
     title: flightsHubTitle,
     description: flightsHubDesc,
     imageUrl: defaultOgImage,
@@ -279,7 +289,6 @@ function buildAllRoutes(): PrerenderRoute[] {
     routes.push({
       routePath: `/flights/${r.id}`,
       canonicalUrl: routeUrl,
-      lastmod: defaultDate,
       title,
       description,
       imageUrl: defaultOgImage,
@@ -314,7 +323,6 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/hotels",
     canonicalUrl: `${BASE_URL}/hotels`,
-    lastmod: defaultDate,
     title: hotelsHubTitle,
     description: hotelsHubDesc,
     imageUrl: defaultOgImage,
@@ -372,7 +380,6 @@ function buildAllRoutes(): PrerenderRoute[] {
     routes.push({
       routePath: `/hotels/${h.id}`,
       canonicalUrl: hotelUrl,
-      lastmod: defaultDate,
       title,
       description,
       imageUrl: defaultOgImage,
@@ -386,6 +393,12 @@ function buildAllRoutes(): PrerenderRoute[] {
         <article>
           <h1>${escapeHtml(title)}</h1>
           <p>${escapeHtml(h.quickAnswer || h.description || description)}</p>
+          <h2>Neighborhoods to compare</h2>
+          <ul>
+            ${h.neighborhoods.map((area) => `<li><strong>${escapeHtml(area.name)}:</strong> ${escapeHtml(area.description)} (${escapeHtml(area.vibe)})</li>`).join("")}
+          </ul>
+          <h2>Planning facts</h2>
+          <ul>${h.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
         </article>
       `,
     });
@@ -399,7 +412,6 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/visa",
     canonicalUrl: `${BASE_URL}/visa`,
-    lastmod: defaultDate,
     title: visaHubTitle,
     description: visaHubDesc,
     imageUrl: defaultOgImage,
@@ -458,7 +470,6 @@ function buildAllRoutes(): PrerenderRoute[] {
     routes.push({
       routePath: `/visa/${v.id}`,
       canonicalUrl: visaUrl,
-      lastmod: defaultDate,
       title,
       description,
       imageUrl: defaultOgImage,
@@ -472,7 +483,13 @@ function buildAllRoutes(): PrerenderRoute[] {
         <article>
           <h1>${escapeHtml(title)}</h1>
           <p>${escapeHtml(v.quickAnswer || description)}</p>
-          <p><strong>Visa Type:</strong> ${escapeHtml(v.requirementType)} | <strong>Fee:</strong> ${escapeHtml(v.costBdt)} | <strong>Processing Time:</strong> ${escapeHtml(v.processingTime)}</p>
+          <p><strong>Visa Type:</strong> ${escapeHtml(v.requirementType)} | <strong>Published fee guidance:</strong> ${escapeHtml(v.costBdt)} | <strong>Typical processing guidance:</strong> ${escapeHtml(v.processingTime)}</p>
+          <p>Entry rules, fees and processing times can change. Confirm current requirements with the destination's official immigration or visa authority before applying.</p>
+          <h2>Documents to check</h2>
+          ${v.documentChecklist.map((checklist) => `<section><h3>${escapeHtml(checklist.category)}</h3><ul>${checklist.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>`).join("")}
+          <h2>Application steps</h2>
+          <ol>${v.stepByStep.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
+          ${v.faqs.length ? `<section><h2>Common questions</h2>${v.faqs.map((faq) => `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`).join("")}</section>` : ""}
         </article>
       `,
     });
@@ -486,7 +503,6 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/destinations",
     canonicalUrl: `${BASE_URL}/destinations`,
-    lastmod: defaultDate,
     title: destHubTitle,
     description: destHubDesc,
     imageUrl: defaultOgImage,
@@ -557,7 +573,6 @@ function buildAllRoutes(): PrerenderRoute[] {
     routes.push({
       routePath: `/destinations/${d.id}`,
       canonicalUrl: destUrl,
-      lastmod: defaultDate,
       title,
       description,
       imageUrl: defaultOgImage,
@@ -571,6 +586,12 @@ function buildAllRoutes(): PrerenderRoute[] {
         <article>
           <h1>${escapeHtml(title)}</h1>
           <p>${escapeHtml(d.quickAnswer || d.description || description)}</p>
+          <p><strong>Best time to visit:</strong> ${escapeHtml(d.bestTimeToVisit)}</p>
+          <h2>${escapeHtml(String(d.itinerary.length))}-day route outline</h2>
+          <ol>${d.itinerary.map((day) => `<li><strong>Day ${escapeHtml(String(day.day))} — ${escapeHtml(day.title)}:</strong> ${day.activities.map(escapeHtml).join("; ")}</li>`).join("")}</ol>
+          <h2>Local transport options</h2>
+          <ul>${d.localTransport.map((option) => `<li>${escapeHtml(option)}</li>`).join("")}</ul>
+          <p><strong>Indicative local budget:</strong> ${escapeHtml(d.budgetBdt)}. Review international flights and current entry rules separately.</p>
         </article>
       `,
     });
@@ -584,7 +605,6 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/costs",
     canonicalUrl: `${BASE_URL}/costs`,
-    lastmod: defaultDate,
     title: costsHubTitle,
     description: costsHubDesc,
     imageUrl: defaultOgImage,
@@ -635,7 +655,6 @@ function buildAllRoutes(): PrerenderRoute[] {
     routes.push({
       routePath: `/costs/${c.id}`,
       canonicalUrl: costUrl,
-      lastmod: defaultDate,
       title,
       description,
       imageUrl: defaultOgImage,
@@ -649,6 +668,15 @@ function buildAllRoutes(): PrerenderRoute[] {
         <article>
           <h1>${escapeHtml(title)}</h1>
           <p>${escapeHtml(c.quickAnswer || description)}</p>
+          <h2>${escapeHtml(String(c.durationDays))}-day cost categories</h2>
+          <table>
+            <thead><tr><th>Category</th><th>Lower estimate</th><th>Mid-range estimate</th><th>Higher estimate</th></tr></thead>
+            <tbody>${c.categories.map((category) => `<tr><th scope="row">${escapeHtml(category.name)}</th><td>BDT ${category.lowBdt.toLocaleString("en-US")}</td><td>BDT ${category.midBdt.toLocaleString("en-US")}</td><td>BDT ${category.highBdt.toLocaleString("en-US")}</td></tr>`).join("")}</tbody>
+          </table>
+          <p><strong>Seasonal considerations:</strong> ${escapeHtml(c.seasonalVariation)}</p>
+          <h2>Budget planning tips</h2>
+          <ul>${c.moneyHacks.map((tip) => `<li>${escapeHtml(tip)}</li>`).join("")}</ul>
+          <p>These figures are planning estimates, not live quotes. Check current fares, hotel rates and exchange rates before booking.</p>
         </article>
       `,
     });
@@ -658,7 +686,6 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/experiences",
     canonicalUrl: `${BASE_URL}/experiences`,
-    lastmod: defaultDate,
     title: "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub) | URAL",
     description:
       "Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and KL.",
@@ -702,7 +729,6 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/tools",
     canonicalUrl: `${BASE_URL}/tools`,
-    lastmod: defaultDate,
     title: "Bangladeshi Traveler Utility Tools & Services (2026) | URAL",
     description:
       "Access handy travel utility tools for Bangladeshi outbound tourists: live BDT exchange rates, power plug specifications, packing checklist, and translation aids.",
@@ -740,7 +766,6 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/sitemap",
     canonicalUrl: `${BASE_URL}/sitemap`,
-    lastmod: defaultDate,
     title: "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Complete 83-Page Sitemap | URAL",
     description:
       "Interactive pre-flight readiness checklist for Bangladeshi travelers departing Dhaka Airport (DAC), cabin & Zamzam baggage rules, Embassy emergency helplines, and complete 83-page directory.",
@@ -763,7 +788,6 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/contact",
     canonicalUrl: `${BASE_URL}/contact`,
-    lastmod: defaultDate,
     title: "Contact URAL — Direct Phone & WhatsApp Support",
     description:
       "Connect directly with our flight & visa support desk at +8801784385335. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.",
@@ -799,10 +823,11 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/blog",
     canonicalUrl: `${BASE_URL}/blog`,
-    lastmod: defaultDate,
     title: blogHubTitle,
     description: blogHubDesc,
     imageUrl: defaultOgImage,
+    lcpImageUrl: `${BASE_URL}/assets/images/blog_editorial_hero_banner_1790429994056-1200.webp`,
+    lcpImageSizes: "100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Travel Blog", url: `${BASE_URL}/blog` },
@@ -835,8 +860,10 @@ function buildAllRoutes(): PrerenderRoute[] {
 
   for (const post of BLOG_DATA) {
     const postUrl = `${BASE_URL}/blog/${post.slug}`;
+    const postImageFileName =
+      BLOG_IMAGE_MAP[post.slug] || "ural_hero_bg_1781543111624.jpg";
+    const postLcpImageUrl = `${BASE_URL}/assets/images/${postImageFileName.replace(/\.jpg$/, "-1200.webp")}`;
     const postImgUrl = `${BASE_URL}/img/blog/${post.slug}.jpg`;
-    const isoDate = toIsoDate(post.date);
     const title = `${post.title} | URAL Travel Blog`;
     const description = post.summary;
 
@@ -869,10 +896,11 @@ function buildAllRoutes(): PrerenderRoute[] {
     routes.push({
       routePath: `/blog/${post.slug}`,
       canonicalUrl: postUrl,
-      lastmod: isoDate,
       title,
       description,
       imageUrl: postImgUrl,
+      lcpImageUrl: postLcpImageUrl,
+      lcpImageSizes: "(max-width: 767px) 100vw, 840px",
       breadcrumbs: [
         { name: "Home", url: `${BASE_URL}/` },
         { name: "Travel Blog", url: `${BASE_URL}/blog` },
@@ -896,6 +924,22 @@ function buildAllRoutes(): PrerenderRoute[] {
   return routes;
 }
 
+function applySharedSeoCopy(routes: PrerenderRoute[]) {
+  for (const route of routes) {
+    const seoCopy = getSeoCopy(route.routePath, route.title, route.description);
+    route.title = seoCopy.title;
+    route.description = seoCopy.description;
+
+    for (const node of route.extraGraphNodes) {
+      const type = node["@type"];
+      if (type === "WebPage" || type === "CollectionPage") {
+        node.name = route.title;
+        node.description = route.description;
+      }
+    }
+  }
+}
+
 function generateSitemapXml(routes: PrerenderRoute[]) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -903,7 +947,6 @@ ${routes
   .map(
     (r) => `  <url>
     <loc>${escapeXml(r.canonicalUrl)}</loc>
-    <lastmod>${escapeXml(r.lastmod)}</lastmod>
   </url>`
   )
   .join("\n")}
@@ -976,6 +1019,9 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     }
 
     const fullGraphJson = JSON.stringify(buildSchemaGraph(graphNodes, false));
+    const lcpImagePreload = r.lcpImageUrl
+      ? `  <link rel="preload" as="image" type="image/webp" href="${escapeHtml(r.lcpImageUrl)}" imagesrcset="${escapeHtml(`${r.lcpImageUrl.replace(/-1200\.webp$/, "-640.webp")} 640w, ${r.lcpImageUrl} 1200w`)}" imagesizes="${escapeHtml(r.lcpImageSizes || "100vw")}" fetchpriority="high" />\n`
+      : "";
 
     let pageHtml = templateHtml
       .replace(
@@ -989,18 +1035,6 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       .replace(
         /<link rel="canonical" href="[^"]*" \/>/,
         `<link rel="canonical" href="${escapeHtml(r.canonicalUrl)}" />`
-      )
-      .replace(
-        /<link rel="alternate" hreflang="en-BD" href="[^"]*" \/>/,
-        `<link rel="alternate" hreflang="en-BD" href="${escapeHtml(r.canonicalUrl)}" />`
-      )
-      .replace(
-        /<link rel="alternate" hreflang="bn-BD" href="[^"]*" \/>/,
-        `<link rel="alternate" hreflang="bn-BD" href="${escapeHtml(r.canonicalUrl)}?lang=bn" />`
-      )
-      .replace(
-        /<link rel="alternate" hreflang="x-default" href="[^"]*" \/>/,
-        `<link rel="alternate" hreflang="x-default" href="${escapeHtml(r.canonicalUrl)}" />`
       )
       .replace(
         /<meta property="og:url" content="[^"]*" \/>/,
@@ -1036,7 +1070,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       )
       .replace(
         "</head>",
-        `  <script type="application/ld+json" data-seo-schema="true">${fullGraphJson}</script>\n  </head>`
+        `${lcpImagePreload}  <script type="application/ld+json" data-seo-schema="true">${fullGraphJson}</script>\n  </head>`
       );
 
     if (r.routePath !== "/") {
@@ -1058,11 +1092,12 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
 function main() {
   copyStaticSeoImages();
   const routes = buildAllRoutes();
+  applySharedSeoCopy(routes);
   generateSitemapXml(routes);
   generateRssXml();
   prerenderDistHtmlFiles(routes);
   console.log(
-    `[SEO Prerender] Generated ${routes.length} canonical routes, clean sitemap.xml, rss.xml, og-image.jpg & 41 blog images.`
+    `[SEO Prerender] Generated ${routes.length} canonical routes, clean sitemap.xml, rss.xml, optimized og-image.jpg & 41 optimized blog JPEGs.`
   );
 }
 

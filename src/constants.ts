@@ -1823,8 +1823,8 @@ Budget airlines like AirAsia or Batik Air offer incredibly cheap base tickets, b
 5. ACCUMULATE LOCAL BANK DEBIT/CREDIT OFFERS
 Many local banks in Bangladesh (like EBL, SCB, City Bank, Mutual Trust Bank) run persistent 10% to 15% discount campaigns with domestic travel OTA agents (like GoZayaan or ShareTrip) that outperform global search engines. Always double check terms on your credit cards.`,
     internalLinks: [
-      { text: "Dhaka to Kathmandu flights Guide", path: "/flights?route=dhaka-kathmandu" },
-      { text: "Dhaka to Bangkok Flight Costs", path: "/flights?route=dhaka-bangkok" }
+      { text: "Dhaka to Kathmandu flights Guide", path: "/flights/dhaka-kathmandu" },
+      { text: "Dhaka to Bangkok Flight Costs", path: "/flights/dhaka-bangkok" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Ready to check today's fares?", body: "Compare live Dhaka departure prices before they change." }
   },
@@ -1856,8 +1856,8 @@ SUMMARY ADVICE
 - Pick Nepal if: You are traveling with friends, seek mountain vistas, desire effortless entry, or are on a strict budget.
 - Pick Thailand if: You are traveling with family, desire great retail shopping, crave street food culture, and can manage visa paperwork in advance.`,
     internalLinks: [
-      { text: "Nepal Visa step-by-step checklist", path: "/visa?country=nepal-visa" },
-      { text: "Thailand trip cost from Dhaka", path: "/costs?country=thailand-costs" }
+      { text: "Nepal Visa step-by-step checklist", path: "/visa/nepal-visa" },
+      { text: "Thailand trip cost from Dhaka", path: "/costs/thailand-costs" }
     ],
     affiliateCTA: { provider: "klook", headline: "See what there is to do first", body: "Browse top-rated tours and activities in both Nepal and Thailand before you decide." }
   },
@@ -1881,8 +1881,8 @@ For South Asian travelers, breakfast is key. When booking, filters often overpri
 3. OPTIMIZE BOOKING WINDOWS
 Hotel rates on major portals tend to fluctuate mid-week. Always search for rooms in private incognito browsers and try booking non-refundable rates only after your visa sticker or eVisa approval is fully secured in-hand.`,
     internalLinks: [
-      { text: "Dubai trip cost from Dhaka", path: "/costs?country=dubai-costs" },
-      { text: "Kuala Lumpur Hotels Guide", path: "/hotels?city=kuala-lumpur-hotels" }
+      { text: "Dubai trip cost from Dhaka", path: "/costs/dubai-costs" },
+      { text: "Kuala Lumpur Hotels Guide", path: "/hotels/kuala-lumpur-hotels" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Save on transport too", body: "A pre-booked airport transfer is usually cheaper than a metered taxi at arrival." }
   },
@@ -1915,8 +1915,8 @@ Meal pricing is incredibly flexible in Bangkok:
 - Al Hussain Restaurant (Sukhumvit Soi 3): Famous among South Asians for its delicious naan, succulent tandoori kebabs, and aromatic curries, this vibrant spot is great for a heavy dinner after a long day of touring.
 - Yana Restaurant (Siam Discovery, 5th Floor): An air-conditioned, fully certified Halal restaurant located inside a major shopping mall. It is the perfect place to safely try spicy Tom Yum soup, green curry, or mango sticky rice in a clean, upscale setting.`,
     internalLinks: [
-      { text: "Dhaka to Bangkok Flight Guide", path: "/flights?route=dhaka-bangkok" },
-      { text: "Bangkok Hotels Neighborhoods", path: "/hotels?city=bangkok-hotels" }
+      { text: "Dhaka to Bangkok Flight Guide", path: "/flights/dhaka-bangkok" },
+      { text: "Bangkok Hotels Neighborhoods", path: "/hotels/bangkok-hotels" }
     ],
     affiliateCTA: { provider: "klook", headline: "Book a Bangkok Guided Food Tour", body: "Explore secret Halal street food alleys with an english-speaking local guide." }
   },
@@ -1958,8 +1958,8 @@ TOTAL BUDGET SUMMARY PER PERSON (IN BDT)
 - Heritage/Attraction Permits: BDT 1,000 - BDT 2,000
 - TOTAL ESTIMATED BUDGET: BDT 40,000 - BDT 54,000 per person for an unforgettable independent holiday!`,
     internalLinks: [
-      { text: "Kathmandu Flights from Dhaka", path: "/flights?route=dhaka-kathmandu" },
-      { text: "Nepal Visa on Arrival Guide", path: "/visa?country=nepal-visa" }
+      { text: "Kathmandu Flights from Dhaka", path: "/flights/dhaka-kathmandu" },
+      { text: "Nepal Visa on Arrival Guide", path: "/visa/nepal-visa" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Check Dhaka to Kathmandu Flight Fares", body: "Check live availability and book cheap roundtrip flights to Nepal today." }
   },
@@ -2012,10 +2012,10 @@ When tapping your Bangladeshi card at hotels or malls in Bangkok (Sukhumvit/Prat
 5. WHAT IF YOU DON'T HAVE A DUAL-CURRENCY CARD YET?
 Don't let card delays cause you to miss a cheap flight fare or hotel room! You can message the URAL Support Desk directly on WhatsApp (+8801784385335) and pay in BDT via local bank transfer, bKash, or Nagad while we complete your verified flight, hotel, or Welcome Pickups airport transfer reservation.`,
     internalLinks: [
-      { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog?slug=shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-      { text: "RFCD Account vs. Regular Travel Quota ($300 Cap Fix)", path: "/blog?slug=rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
-      { text: "Cash SAR / USD vs. Card Abroad (Avoid 5% DCC Trap)", path: "/blog?slug=cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
-      { text: "Book Flights & Makkah Hotels in BDT via bKash/Bank Transfer", path: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" }
+      { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
+      { text: "RFCD Account vs. Regular Travel Quota ($300 Cap Fix)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
+      { text: "Cash SAR / USD vs. Card Abroad (Avoid 5% DCC Trap)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
+      { text: "Book Flights & Makkah Hotels in BDT via bKash/Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Card Endorsed & Ready?", body: "Compare live international flight fares from Dhaka and book directly with zero agency markup." }
   },
@@ -2050,9 +2050,9 @@ Bangladeshi passport holders get a FREE 30-day Visa on Arrival in Malé. To ensu
 - Carry printed copies of your return flight ticket and confirmed hotel booking.
 - Have USD endorsed on your passport alongside your job NOC or trade license.`,
     internalLinks: [
-      { text: "Dhaka to Malé Flight Guide", path: "/flights?route=dhaka-maldives" },
-      { text: "Maldives Free Visa & IMUGA Steps", path: "/visa?country=maldives-visa" },
-      { text: "Maldives Full Cost Breakdown in BDT", path: "/costs?country=maldives-costs" }
+      { text: "Dhaka to Malé Flight Guide", path: "/flights/dhaka-maldives" },
+      { text: "Maldives Free Visa & IMUGA Steps", path: "/visa/maldives-visa" },
+      { text: "Maldives Full Cost Breakdown in BDT", path: "/costs/maldives-costs" }
     ],
     affiliateCTA: { provider: "klook", headline: "Explore Maldives Tours & Transfers", body: "Check day tours, snorkeling excursions, and eSIM data packages before you fly to Malé." }
   },
@@ -2082,9 +2082,9 @@ The #1 question from first-time Bangladeshi applicants is: "What is Form V39A (L
 4. DON'T FORGET THE SG ARRIVAL CARD (72 HOURS BEFORE FLIGHT)
 Once your Singapore e-Visa PDF arrives (usually within 5–7 working days), print it on clean A4 paper. Then, within 3 days (72 hours) prior to your flight from Dhaka, go to the official ICA website (eservices.ica.gov.sg) to submit your free SG Arrival Card (SGAC). With both in hand, you can even use Changi Airport's automated immigration lanes!`,
     internalLinks: [
-      { text: "Singapore Visa Requirements & Checklist", path: "/visa?country=singapore-visa" },
-      { text: "Dhaka to Singapore Direct Flights", path: "/flights?route=dhaka-singapore" },
-      { text: "Best Hotels Near Mustafa Centre Singapore", path: "/hotels?city=singapore-hotels" }
+      { text: "Singapore Visa Requirements & Checklist", path: "/visa/singapore-visa" },
+      { text: "Dhaka to Singapore Direct Flights", path: "/flights/dhaka-singapore" },
+      { text: "Best Hotels Near Mustafa Centre Singapore", path: "/hotels/singapore-hotels" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Stay Connected at Changi Airport", body: "Install a Singapore eSIM before leaving Dhaka so your Grab and Google Maps work the second you land." }
   },
@@ -2138,11 +2138,11 @@ Once your Singapore e-Visa PDF arrives (usually within 5–7 working days), prin
 PRO FAMILY SAVING HACK: PRE-BOOK A FAMILY MINIVAN AT THE AIRPORT
 When traveling as a family of 4 to 6 people with 4+ suitcases, ordinary airport taxis cannot fit your luggage and will force you to split into two cars. Always pre-book a 6-seater Family Minivan via Welcome Pickups or Kiwitaxi in our Travel Essentials Hub—it costs almost the same as two regular taxis and your driver waits at the gate with your family name sign!`,
     internalLinks: [
-      { text: "Singapore 4-Day Budget Itinerary (MRT SimplyGo & Halal Hawkers)", path: "/blog?slug=singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide" },
-      { text: "Bumrungrad & Bangkok Hospital Medical Checkup Guide from Dhaka", path: "/blog?slug=bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" },
-      { text: "Maldives Under BDT 75,000: Maafushi Local Island vs. Resort Guide", path: "/blog?slug=maldives-budget-trip-bangladesh-maafushi" },
-      { text: "Sri Lanka + Maldives 7-Day Combo Tour & BDT Cost Breakdown", path: "/blog?slug=sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" },
-      { text: "Kathmandu to Pokhara 5-Day Nepal Itinerary in BDT", path: "/blog?slug=nepal-pokhara-itinerary-bangladesh" }
+      { text: "Singapore 4-Day Budget Itinerary (MRT SimplyGo & Halal Hawkers)", path: "/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide" },
+      { text: "Bumrungrad & Bangkok Hospital Medical Checkup Guide from Dhaka", path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" },
+      { text: "Maldives Under BDT 75,000: Maafushi Local Island vs. Resort Guide", path: "/blog/maldives-budget-trip-bangladesh-maafushi" },
+      { text: "Sri Lanka + Maldives 7-Day Combo Tour & BDT Cost Breakdown", path: "/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" },
+      { text: "Kathmandu to Pokhara 5-Day Nepal Itinerary in BDT", path: "/blog/nepal-pokhara-itinerary-bangladesh" }
     ],
     affiliateCTA: { provider: "klook", headline: "Book Family Theme Parks & Safari World Passes", body: "Save 15–25% on Safari World Bangkok, Genting SkyWorlds, Gardens by the Bay, and Dubai Desert Safaris with mobile QR tickets." }
   },
@@ -2180,10 +2180,10 @@ Because Nepal and the Maldives offer free Visa on Arrival to Bangladeshi citizen
 - Know your hotel name and your basic 4–5 day sightseeing plan (e.g., "We are staying 3 nights in Thamel, Kathmandu and 2 nights in Pokhara Lakeside").
 - Carry at least $300–$500 Cash USD in hand OR an endorsed Dual-Currency Card with your bank statement so you can immediately demonstrate sufficient funds.`,
     internalLinks: [
-      { text: "First International Trip on a Fresh Passport (3-Step History Ladder)", path: "/blog?slug=fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
-      { text: "Thailand Official e-Visa Guide (thaievisa.go.th Bank & Upload Rules)", path: "/blog?slug=thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
-      { text: "Malaysia Online e-Visa & Free MDAC Arrival Card Guide", path: "/blog?slug=malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
-      { text: "Singapore Tourist Visa Guide (Authorized Agents & Form V39A)", path: "/blog?slug=singapore-visa-guide-bangladesh-agents" }
+      { text: "First International Trip on a Fresh Passport (3-Step History Ladder)", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
+      { text: "Thailand Official e-Visa Guide (thaievisa.go.th Bank & Upload Rules)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
+      { text: "Malaysia Online e-Visa & Free MDAC Arrival Card Guide", path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
+      { text: "Singapore Tourist Visa Guide (Authorized Agents & Form V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Have Internet Ready at the Arrival Immigration Desk", body: "Activate a travel eSIM before takeoff so you can pull up your return ticket, hotel voucher, or IMUGA QR code immediately upon landing." }
   },
@@ -2242,9 +2242,9 @@ Pathway C: Instant 1-Year Saudi Tourist e-Visa or Visa on Arrival (ONLY for US/U
 - Daily Halal Meals & Ziyarah Tours (Taif, Badr, Quba Mosque, Mount Uhud): BDT 12,000 – BDT 18,000
 - Total Estimated 10-Day Umrah Cost per Person: BDT 1,16,000 – BDT 1,32,000 (Budget Family Share) | BDT 1,65,000 – BDT 2,15,000 (Comfort Walking-Distance)`,
     internalLinks: [
-      { text: "Dual-Currency Card Endorsement Guide for Hotel & Train Bookings", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport Outbound Immigration Document Checklist", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Dubai Stopover & UAE Visa Guide from Dhaka", path: "/destinations?country=dubai-guide" }
+      { text: "Dual-Currency Card Endorsement Guide for Hotel & Train Bookings", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dhaka Airport Outbound Immigration Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Dubai Stopover & UAE Visa Guide from Dhaka", path: "/destinations/dubai-guide" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Stay Connected on Nusuk & WhatsApp in Makkah and Madinah", body: "Install a Saudi Arabia 4G/5G eSIM before flying from Dhaka so your Nusuk Rawdah permit QR code, Haramain train ticket, and Uber/Careem work the moment you land at Jeddah Airport." }
   },
@@ -2285,9 +2285,9 @@ Instead of paying per-person tour bus markups, a family of 3 to 6 can book a pri
 - Every pilgrim holding an Umrah e-Visa (or Nusuk Umrah permit) is permitted to purchase one official 5-liter boxed bottle of Zamzam water from the automated kiosks outside Jeddah (JED) or Madinah (MED) Airport for SAR 9.50–12.50 (~BDT 350–400).
 - Full-service carriers flying to Dhaka (Biman Bangladesh Airlines, Saudia, Gulf Air, Kuwait Airways) carry this 5-liter sealed Zamzam box FREE of charge in addition to your regular 30kg–46kg baggage allowance.`,
     internalLinks: [
-      { text: "Complete Umrah & Hajj Visa, Nusuk & BDT Budget Guide", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Dual-Currency Card Endorsement for Booking Haramain Train", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport Outbound Immigration Checklist", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" }
+      { text: "Complete Umrah & Hajj Visa, Nusuk & BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Dual-Currency Card Endorsement for Booking Haramain Train", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dhaka Airport Outbound Immigration Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Need Data for Haramain Train & Nusuk Permits?", body: "Get an instant Saudi Arabia eSIM before flying from Dhaka so your Nusuk QR codes and Careem rides work seamlessly across Makkah and Madinah." }
   },
@@ -2325,9 +2325,9 @@ During the 5 core days of Hajj (8 to 13 Dhul Hijjah), your comfort depends on yo
 5. MANDATORY ASHOKNA HAJJ CAMP & SAUDI VISA BIO STEPS
 All Bangladeshi Hajj pilgrims must complete their 10-fingerprint biometrics on the official Saudi Visa Bio App, obtain their Meningitis (ACWY-135) and seasonal Influenza vaccinations at designated Civil Surgeon / Government Hospital centers, and collect their Nusuk Hajj Smart Card—which is mandatory to board the Mashair train and enter the Haram courtyard during Hajj.`,
     internalLinks: [
-      { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Umrah & Hajj with Elderly Parents: Wheelchair & Medical Guide", path: "/blog?slug=umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
-      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" }
+      { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Umrah & Hajj with Elderly Parents: Wheelchair & Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Keep Family Location Sharing Active in Mina & Arafat", body: "Install a Saudi Arabia 5G eSIM before flying from Dhaka so your WhatsApp live location and Nusuk Hajj Smart Card app never lose connection during the 5 days of Hajj." }
   },
@@ -2364,8 +2364,8 @@ Inside Masjid al-Haram in Makkah, you have three official options for performing
 - Carry a 15-day supply of all regular blood pressure, diabetes (including insulin cooling pouches in cabin baggage), gastric, and heart medications in their original strips, accompanied by a printed English doctor's prescription from Bangladesh.
 - Pack ORS (Oral Rehydration Salts), unscented Vaseline/ointment (for chafing during Ihram), soft orthopedic velcro sandals, and a light shawl—because while outside temperatures in Makkah reach 38°C–42°C, the air conditioning inside Masjid al-Haram and the Haramain Bullet Train is kept at a chilly 20°C!`,
     internalLinks: [
-      { text: "Makkah & Madinah Flat Hotel Zones & Haramain Train Guide", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Makkah & Madinah Flat Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Dhaka Airport Pre-Departure & Baggage Rules Hub", path: "/pre-departure" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Pre-Book a Door-to-Door Family GMC or Minivan at Jeddah Airport", body: "Traveling with elderly parents and wheelchairs? Pre-book a private 7-seater minivan from Jeddah Airport straight to your Makkah hotel lobby so your parents never wait in taxi queues." }
@@ -2405,9 +2405,9 @@ If you hold a Bangladeshi passport AND have a valid, currently active Tourist or
 - Day 3 (Bullet Train to Madinah & Rawdah): Catch the morning 2h 20m Haramain Bullet Train to Madinah, check into Markazia North, and visit Rawdah Shareef using your pre-booked Nusuk App permit.
 - Day 4 (Masjid Quba & Onward Flight): Visit Masjid Quba after Fajr, take the afternoon train back to Jeddah Airport (or fly directly out of Madinah), and board your onward flight!`,
     internalLinks: [
-      { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Dual-Currency Card Endorsement Guide for Online Flight Booking", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" }
+      { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Dual-Currency Card Endorsement Guide for Online Flight Booking", path: "/blog/dual-currency-card-endorsement-bangladesh" }
     ],
     affiliateCTA: { provider: "airalo", headline: "4-Day Saudi Stopover? Activate a 3GB Saudi eSIM for Just $8", body: "Don't waste precious hours of your 96-hour stopover queuing for a physical SIM card at Jeddah Airport. Activate a Saudi eSIM before leaving Dhaka." }
   },
@@ -2453,9 +2453,9 @@ Rule 2: The Friday Weekly Slot Release & 30-Minute Instant Track:
 - Standard weekly Rawdah appointment slots open **every Friday morning** (Saudi time) for the upcoming week.
 - If all calendar dates look grayed out when you arrive in Madinah, turn on the location GPS on your phone near Masjid an-Nabawi and check Nusuk **at :01 and :31 past every hour**—the system releases cancelled and instant-entry slots every 30 minutes for pilgrims physically within the Haram boundary!`,
     internalLinks: [
-      { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Umrah Rules for Bangladeshi Women & Ladies' Gates 25–29", path: "/blog?slug=umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
-      { text: "Hajj Registration on hajj.gov.bd & PID Verification", path: "/blog?slug=hajj-registration-bangladesh-government-vs-private-package-cost" }
+      { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Umrah Rules for Bangladeshi Women & Ladies' Gates 25–29", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
+      { text: "Hajj Registration on hajj.gov.bd & PID Verification", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Live Nusuk QR Code Requires Active Mobile Data at Rawdah Gates", body: "Screenshots of Nusuk Rawdah permits are not accepted by Masjid an-Nabawi guards. Install a Saudi Arabia 5G eSIM before flying from Dhaka so your live dynamic QR code loads instantly." }
   },
@@ -2493,9 +2493,9 @@ Unlike men (who wear two unstitched white towels), women wear normal stitched, l
 - Never cut your hair openly in the Marwah marble gallery in front of crowds!
 - After completing the 7th lap of Sa'i at Marwah, either gather the tips of your hair under your Hijab in a private corner of the women's prayer section, OR walk back to your hotel room with your family (remaining in Ihram rules until you reach the room) and trim **one fingertip's length (approx. 1 inch / 2 cm)** from the ends of your hair using small nail scissors packed in your checked suitcase.`,
     internalLinks: [
-      { text: "Nusuk App & Rawdah Shareef Permit Step-by-Step Guide", path: "/blog?slug=nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
-      { text: "Makkah & Madinah Hotel Zones (Near Ladies' Gates 25–29)", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Umrah with Elderly Parents: Wheelchair & Scooter Guide", path: "/blog?slug=umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" }
+      { text: "Nusuk App & Rawdah Shareef Permit Step-by-Step Guide", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "Makkah & Madinah Hotel Zones (Near Ladies' Gates 25–29)", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Umrah with Elderly Parents: Wheelchair & Scooter Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Safe Private Family Airport Transfers in Jeddah & Madinah", body: "Traveling with mothers, sisters, or children? Pre-book a vetted door-to-door family car from Jeddah or Madinah Airport straight to your Markazia North hotel." }
   },
@@ -2532,9 +2532,9 @@ If a family of 4 wants to save BDT 60,000 to BDT 85,000 total on airfare, 1-stop
 - **Low-Cost 1-Stop Carriers (SalamAir via Muscat, Air Arabia via Sharjah, Jazeera Airways via Kuwait, Flynas):** Fares start from **BDT 52,000 – BDT 63,000**.
 - **Crucial Warning on Low-Cost Airlines:** Always select the **"Value / Extra Baggage Bundle" (20kg or 30kg checked luggage)** when booking SalamAir, Jazeera, or Air Arabia, and verify whether the fare includes free Zamzam water carriage or charges USD $25–$40 at Jeddah check-in.`,
     internalLinks: [
-      { text: "Wearing Ihram at Dhaka Airport vs. Transit Layover Guide", path: "/blog?slug=wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
-      { text: "Official Zamzam Water & Baggage Rules at Jeddah Airport", path: "/blog?slug=official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
-      { text: "Complete DIY Umrah 10-Day BDT Cost Breakdown", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
+      { text: "Wearing Ihram at Dhaka Airport vs. Transit Layover Guide", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "Official Zamzam Water & Baggage Rules at Jeddah Airport", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
+      { text: "Complete DIY Umrah 10-Day BDT Cost Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare Direct Biman/Saudia vs. 1-Stop Umrah Fares from Dhaka", body: "Check live Dhaka (DAC) to Jeddah (JED) and Madinah (MED) ticket prices across all airlines—or message our WhatsApp desk to issue Open-Jaw tickets in BDT." }
   },
@@ -2574,9 +2574,9 @@ According to the **General Authority for the Care of the Affairs of the Grand Mo
 - **Free Haram Iftar Dastarkhwan:** Arrive at least **60 to 75 minutes before Maghrib** to sit along the official Iftar spreads inside the Haram (offering dates, Zamzam, laban/yogurt, Arabic coffee, and bread).
 - **Performing Tawaf Without Heat Exhaustion:** During Ramadan fasting hours, never perform ground-floor Mataf Tawaf between 11:00 AM and 3:30 PM. Perform your Umrah either **right after Isha/Taraweeh (10:30 PM – 2:00 AM)** or **after Fajr prayer (6:00 AM – 8:30 AM)**.`,
     internalLinks: [
-      { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Makkah & Madinah Shuttle vs. Walking Hotel Zones", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Bangladeshi Halal Food & Suhoor/Iftar Guide in Makkah", path: "/blog?slug=bangladeshi-halal-food-guide-makkah-madinah-budget-meals" }
+      { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Makkah & Madinah Shuttle vs. Walking Hotel Zones", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Bangladeshi Halal Food & Suhoor/Iftar Guide in Makkah", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Traveling in Ramadan Crowds? Keep Family Connected 24/7", body: "During Taraweeh and Qiyam-ul-Layl when 2 million worshippers exit Masjid al-Haram simultaneously, an active Saudi 5G eSIM ensures you can always call and locate your family." }
   },
@@ -2616,9 +2616,9 @@ Step 2: Change into Ihram During Your Layover at the Transit Airport:
 - If your outbound ticket lands at **Madinah Airport (MED)** first, you **DO NOT wear Ihram** at Dhaka Airport or on the airplane!
 - You fly to Madinah in normal everyday clothes, spend 3 to 5 peaceful days praying in Masjid an-Nabawi, and on the day you travel from Madinah to Makkah (by Haramain Bullet Train or car), you bathe and wear your Ihram at your Madinah hotel and make Niyyah at **Miqat Dhul Hulayfah (Masjid Abyar Ali)**.`,
     internalLinks: [
-      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Comparison", path: "/blog?slug=dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "Umrah Rules for Bangladeshi Women & Modest Ihram Guide", path: "/blog?slug=umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
-      { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
+      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "Umrah Rules for Bangladeshi Women & Modest Ihram Guide", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
+      { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Landing at Jeddah Terminal 1 in Ihram?", body: "Book a private air-conditioned sedan or family minivan waiting at Jeddah Arrivals to take you directly to your Makkah hotel near Masjid al-Haram." }
   },
@@ -2657,8 +2657,8 @@ Under the updated **Bangladesh National Board of Revenue (NBR - nbr.gov.bd) Pass
 - **Saudi VAT Refund (15% Tax-Free ZATCA):** Always ask licensed Makkah/Madinah gold shops for an official digital QR invoice.`,
     internalLinks: [
       { text: "Dhaka Airport Pre-Departure & Baggage Allowance Hub", path: "/pre-departure" },
-      { text: "Dhaka to Jeddah & Madinah Flight Baggage Comparison", path: "/blog?slug=dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "Complete DIY Umrah & 10-Day BDT Cost Guide", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
+      { text: "Dhaka to Jeddah & Madinah Flight Baggage Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "Complete DIY Umrah & 10-Day BDT Cost Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Returning with 46kg Suitcases & Zamzam Boxes?", body: "Book a large 7-seater family van from your Makkah or Madinah hotel to the airport so all your suitcases and Zamzam cartons fit comfortably in one vehicle." }
   },
@@ -2699,9 +2699,9 @@ Almost every Bangladeshi traveler wants to taste Saudi Arabia's famous **Al Baik
 - **Budget Desi Dining + Tamimi/BinDawood Supermarket Breakfast:** **SAR 30 – SAR 40 per person/day (~BDT 980 – BDT 1,300/day)**.
 - **Smart Family Grocery Hack:** Visit **BinDawood Supermarket** (located inside Clock Tower Makkah, Jabal Omar, and Taiba Center Madinah) to buy fresh bananas, Laban (yogurt drink), oats, whole-wheat bread, honey, and bottled water at standard Saudi supermarket prices!`,
     internalLinks: [
-      { text: "Umrah with Elderly Parents: Wheelchair & Medical Guide", path: "/blog?slug=umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
-      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
+      { text: "Umrah with Elderly Parents: Wheelchair & Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Use Google Maps & HungerStation Food Delivery in Makkah", body: "Too tired to walk out after Tawaf? With a Saudi Arabia eSIM, you can use HungerStation or Jahez apps to deliver hot Bangladeshi meals or Al Baik straight to your hotel lobby." }
   },
@@ -2749,9 +2749,9 @@ Option 1: Makkah to Taif Highland Day Trip (6 to 7 Hours Roundtrip):
 Option 2: Madinah to Badr Battlefield Stopover (150 km South-West of Madinah):
 - Visit **Masjid al-Arish** and the Martyrs' Enclosure of the **Battle of Badr (17 Ramadan, 2 AH)** either as a 4-hour roundtrip from Madinah (**SAR 280 – SAR 350**) or as a 1-hour stopover while traveling by private car from Madinah to Makkah.`,
     internalLinks: [
-      { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Umrah with Elderly Parents: Wheelchair & Electric Scooter Guide", path: "/blog?slug=umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
-      { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
+      { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Umrah with Elderly Parents: Wheelchair & Electric Scooter Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Pre-Book Private Family Chauffeur Cars & Airport Transfers in Saudi Arabia", body: "Avoid bargaining with street taxi touts outside the Haram. Lock in fixed-rate private sedans and 7-seater family vans for Jeddah/Madinah transfers or rent a car via QEEQ." }
   },
@@ -2790,9 +2790,9 @@ Step 2: UAE / Dubai Visa (Issued via u.ae / gdrfad.gov.ae Authorized Channels):
 - **Days 8 to 10 (Dubai & Abu Dhabi — 3 Nights):** Fly directly from Madinah (MED) or Jeddah (JED) to Dubai (DXB). Stay near **Al Rigga / Union Metro in Deira**, enjoy an **Evening Red Dunes Desert Safari with BBQ Dinner**, visit **Burj Khalifa At The Top & Dubai Mall Fountain**, and take a day trip to **Sheikh Zayed Grand Mosque in Abu Dhabi** before flying home to Dhaka!
 - **Estimated Total 10-Day Per-Person Budget (Family of 4 Sharing):** **BDT 1,58,000 – BDT 1,85,000 per person** (including Multi-City flights, both visas, 7 nights Makkah/Madinah hotels, 3 nights Dubai 3/4-star hotel, Haramain Train, and Desert Safari).`,
     internalLinks: [
-      { text: "Abu Dhabi Sheikh Zayed Mosque Day Trip Guide from Dubai", path: "/blog?slug=abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" },
-      { text: "96-Hour Saudi Stopover Visa Guide for Bangladeshis", path: "/blog?slug=saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
-      { text: "Dubai Destination Itinerary & UAE Visa Guide", path: "/destinations?country=dubai-guide" }
+      { text: "Abu Dhabi Sheikh Zayed Mosque Day Trip Guide from Dubai", path: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" },
+      { text: "96-Hour Saudi Stopover Visa Guide for Bangladeshis", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
+      { text: "Dubai Destination Itinerary & UAE Visa Guide", path: "/destinations/dubai-guide" }
     ],
     affiliateCTA: { provider: "klook", headline: "Book Discounted Dubai Desert Safari, Burj Khalifa & Museum of the Future Passes", body: "Save 15%–25% compared to Dubai ticket counters by pre-booking your verified Klook mobile vouchers before flying from Madinah or Jeddah to Dubai." }
   },
@@ -2831,9 +2831,9 @@ Rule 2: Strict Official Modesty Dress Code (Enforced by Automated Scanners):
 - **Afternoon (1:30 PM – 3:30 PM):** Visit **Louvre Abu Dhabi** on Saadiyat Island or have Halal Mandi/Seafood lunch at **Al Mina or Al Wahda Mall**.
 - **Golden Hour Sunset (4:30 PM – 7:00 PM):** Arrive at **Sheikh Zayed Grand Mosque** at 4:30 PM so you witness the white marble columns in bright afternoon sunlight, golden sunset reflection across the sapphire pools, and the breathtaking blue lunar lighting after Maghrib!`,
     internalLinks: [
-      { text: "Umrah + Dubai 10-Day Multi-City Combo Guide from Dhaka", path: "/blog?slug=umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
+      { text: "Umrah + Dubai 10-Day Multi-City Combo Guide from Dhaka", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
       { text: "Dubai Safari, Burj Khalifa & Abu Dhabi Passes Hub", path: "/experiences?region=asia&city=dubai-klook" },
-      { text: "Hotel Savings Guide in Bangkok, Kuala Lumpur & Dubai", path: "/blog?slug=hotel-savings-guide-bangkok-kl-dubai" }
+      { text: "Hotel Savings Guide in Bangkok, Kuala Lumpur & Dubai", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" }
     ],
     affiliateCTA: { provider: "klook", headline: "Book Abu Dhabi Grand Mosque, Qasr Al Watan & Ferrari World Combo Tours", body: "Skip intercity bus queues with a roundtrip air-conditioned Abu Dhabi day tour from your Dubai hotel or instant Qasr Al Watan & Louvre e-tickets via Klook." }
   },
@@ -2870,9 +2870,9 @@ Located beside the lush Perdana Botanical Gardens (5 minutes from KL Sentral):
   • **Masjid India & Lebuh Ampang:** Authentic Bangladeshi, South Indian Muslim (Mamak Nasi Kandar), and briyani restaurants.
 - **Complete 5-Day Malaysia Family Budget:** **BDT 66,000 – BDT 82,000 per person** (including roundtrip Dhaka–KL flights on AirAsia/Batik/Biman, online Malaysia e-Visa + free MDAC card, 4 nights hotel, Putrajaya day trip, and Genting Highlands Awana SkyWay Cable Car).`,
     internalLinks: [
-      { text: "Malaysia 5-Day Family Destination & e-Visa Guide", path: "/destinations?country=malaysia-guide" },
-      { text: "Top 6 Budget-Friendly Family Destinations from Dhaka", path: "/blog?slug=top-budget-family-destinations-from-dhaka" },
-      { text: "Hotel Savings Guide in Kuala Lumpur, Bangkok & Dubai", path: "/blog?slug=hotel-savings-guide-bangkok-kl-dubai" }
+      { text: "Malaysia 5-Day Family Destination & e-Visa Guide", path: "/destinations/malaysia-guide" },
+      { text: "Top 6 Budget-Friendly Family Destinations from Dhaka", path: "/blog/top-budget-family-destinations-from-dhaka" },
+      { text: "Hotel Savings Guide in Kuala Lumpur, Bangkok & Dubai", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" }
     ],
     affiliateCTA: { provider: "kkday", headline: "Claim 30% OFF + Buy 1 Get 1 on Malaysia & Genting Passes (KKday 9.9 Sale)", body: "Book Petronas Twin Towers Skybridge, Genting Awana SkyWay Cable Car, Aquaria KLCC, and KLIA Ekspres train tickets with up to 30% discount." }
   },
@@ -2911,8 +2911,8 @@ Unlike Asian attractions where walk-up tickets are often available, Europe and N
 - **Know Your EU261 / UK261 Passenger Rights (€600 Compensation):** Under **European Union Regulation EC 261/2004** and **UK261**, if your flight departing from Paris, Rome, Frankfurt, Amsterdam, or London (or arriving on an EU/UK carrier) is delayed by **3+ hours** or cancelled, you are legally entitled to up to **€600 / £520 (~BDT 78,000 per passenger)** via **AirHelp**!`,
     internalLinks: [
       { text: "Browse Official Europe, UK & USA Skip-the-Line Passes (Tiqets Hub)", path: "/experiences?region=west" },
-      { text: "96-Hour Saudi Stopover Visa & US/UK/Schengen Umrah Rules", path: "/blog?slug=saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
-      { text: "Dual-Currency Card Endorsement ($12,000 Quota Guide)", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" }
+      { text: "96-Hour Saudi Stopover Visa & US/UK/Schengen Umrah Rules", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
+      { text: "Dual-Currency Card Endorsement ($12,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" }
     ],
     affiliateCTA: { provider: "tiqets", headline: "Book Instant Mobile Skip-the-Line Tickets for Paris, London, Rome & NYC (Tiqets)", body: "Secure guaranteed timed-entry QR passes for the Louvre, Eiffel Tower, London Eye, Colosseum, and Statue of Liberty with instant confirmation." }
   },
@@ -2958,9 +2958,9 @@ Step 2: Enable USD E-Commerce & 3D-Secure OTP:
 Step 3: Always Select "SAR" (Saudi Riyal) at Makkah & Madinah POS Terminals:
 - When paying at **Al Baik, Bin Dawood Supermarket, or pharmacies near Masjid al-Haram**, always choose **Local Currency (SAR)** on the card terminal to avoid 5% Dynamic Currency Conversion (DCC) surcharges.`,
     internalLinks: [
-      { text: "Complete $12,000 Passport Dollar Endorsement Guide", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "No Card? Book Flights & Umrah Hotels in BDT via WhatsApp", path: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "Complete $12,000 Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "No Card? Book Flights & Umrah Hotels in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "10-Day DIY Umrah Cost Calculator in BDT", path: "/umrah" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare Dhaka–Jeddah & Madinah Flights with Your Islamic Card", body: "Check live Biman, Saudia, and Gulf carrier fares and pay directly with your endorsed Shariah-compliant dual-currency card." }
@@ -3000,10 +3000,10 @@ Rule 3: The 4 Massive Advantages of an RFCD International Debit Card:
 - **Annual Limit:** Regular Travel Quota = Capped at **USD $12,000 per calendar year** | RFCD Account = Up to **100% of your deposited foreign currency balance**.
 - **Best Strategy for Frequent Flyers:** Use your regular Travel Quota card or cash USD for your first trip, bring back **$500–$2,000 in leftover USD cash**, and deposit it into an **EBL, City Bank, BRAC, or SCB RFCD Account** so you never face a card limit decline again!`,
     internalLinks: [
-      { text: "Step-by-Step $12,000 Passport Dollar Endorsement Guide", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog?slug=shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-      { text: "No Card? Pay in BDT via bKash/Bank Transfer (URAL Desk)", path: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "Cash SAR / USD vs. Card Abroad (5% DCC Fee Guide)", path: "/blog?slug=cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" }
+      { text: "Step-by-Step $12,000 Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
+      { text: "No Card? Pay in BDT via bKash/Bank Transfer (URAL Desk)", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "Cash SAR / USD vs. Card Abroad (5% DCC Fee Guide)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Test Your Unlocked Card on Live Dhaka Flight Fares", body: "Search and compare roundtrip airfares from Dhaka to Jeddah, Madinah, Bangkok, Kuala Lumpur, and Dubai." }
   },
@@ -3043,9 +3043,9 @@ Step 3: Pay in BDT via Local Bank Transfer, bKash, or Nagad & Receive Instant PD
 - **🌏 Asian & Middle East Family Holidays:** Flights, e-Visas, 3-to-5 Star Halal-Friendly Hotels, and Airport Minivans for **Nepal, Thailand, Malaysia, Maldives, Singapore, and Dubai/Abu Dhabi**.`,
     internalLinks: [
       { text: "10-Day DIY Umrah Cost Calculator & Hotel Zones", path: "/umrah" },
-      { text: "Dual-Currency Card Endorsement ($12,000 Quota Guide)", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" }
+      { text: "Dual-Currency Card Endorsement ($12,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Check Live Flight Prices First, Then Book by Card or BDT WhatsApp", body: "Compare real-time airline fares from Dhaka so you know the exact market price before booking." }
   },
@@ -3080,10 +3080,10 @@ Whenever you tap your Bangladeshi Visa, Mastercard, or Amex card at a hotel, mal
 - **🇲🇾 Malaysia (Kuala Lumpur & Putrajaya):** Tap your **Dual-Currency Card** at malls/Grab, and exchange crisp **$100 USD bills** at licensed money changers inside **Mid Valley Megamall, Pavilion Bukit Bintang, or Masjid India** (avoid airport booths which charge 6% worse rates).
 - **🇲🇻 Maldives (Malé & Maafushi) & 🇳🇵 Nepal (Kathmandu):** In the Maldives, guesthouses, $25 speedboats, and $30 snorkeling tours accept **cash USD directly** (bring clean post-2013 $50/$100 bills). In Nepal, exchange USD in **Thamel** or tap your card at hotels.`,
     internalLinks: [
-      { text: "How to Get Dual-Currency Card Endorsement ($12,000 Quota)", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog?slug=shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-      { text: "RFCD Account vs. Regular Travel Quota ($300 Cap Fix)", path: "/blog?slug=rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
-      { text: "Bangladeshi Halal Food in Makkah & Madinah (SAR Meal Prices)", path: "/blog?slug=bangladeshi-halal-food-guide-makkah-madinah-budget-meals" }
+      { text: "How to Get Dual-Currency Card Endorsement ($12,000 Quota)", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
+      { text: "RFCD Account vs. Regular Travel Quota ($300 Cap Fix)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
+      { text: "Bangladeshi Halal Food in Makkah & Madinah (SAR Meal Prices)", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Get Instant Bank OTPs & Rate Checks Abroad with an eSIM", body: "Install an Airalo eSIM before departure so your mobile banking app and live currency calculator work the moment you land." }
   },
@@ -3126,10 +3126,10 @@ Step 5: Confirmed Roundtrip Air Ticket & Paid/Verifiable Hotel Booking:
 - **Mistake 2: Auto-Cancelled Hotel Bookings:** Do not cancel your Booking.com/Agoda reservation the day after submitting your e-Visa—consular officers verify live hotel booking numbers during review!
 - **Mistake 3: Mismatched Name or Passport Number:** Double-check every character of your Given Name, Surname, and Passport Number on **thaievisa.go.th** before submitting payment.`,
     internalLinks: [
-      { text: "Thailand Visa Checklist & Fee Calculator", path: "/visa?country=thailand-visa" },
-      { text: "Where to Eat Halal Food in Bangkok (Pratunam & Sukhumvit)", path: "/blog?slug=halal-food-guide-bangkok-bangladesh" },
-      { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Thailand 5-Day Trip Budget in BDT", path: "/costs?country=thailand-costs" }
+      { text: "Thailand Visa Checklist & Fee Calculator", path: "/visa/thailand-visa" },
+      { text: "Where to Eat Halal Food in Bangkok (Pratunam & Sukhumvit)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
+      { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Thailand 5-Day Trip Budget in BDT", path: "/costs/thailand-costs" }
     ],
     affiliateCTA: { provider: "klook", headline: "Book Safari World Bangkok, Chao Phraya Cruise & Bangkok Hospital Transfers", body: "Save up to 25% on Bangkok family attractions and Suvarnabhumi Airport transfers with instant Klook QR tickets." }
   },
@@ -3170,10 +3170,10 @@ Because Malaysian immigration officers carefully screen against unauthorized wor
 - **3. Printed Paid Hotel Booking Voucher** (e.g., 4 nights in Bukit Bintang or KLCC).
 - **4. Proof of Pocket Money ($500–$1,000 USD Cash/Endorsed Card):** Carry crisp USD cash and your passport-endorsed **Dual-Currency Card** plus your Dhaka **Job ID / NOC** so the officer immediately sees you are a bona fide holidaymaker.`,
     internalLinks: [
-      { text: "Malaysia Islamic Heritage, Putrajaya Pink Mosque & Halal Guide", path: "/blog?slug=malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" },
-      { text: "Malaysia Visa Requirements & Checklist", path: "/visa?country=malaysia-visa" },
-      { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Malaysia 5-Day Trip Cost Breakdown in BDT", path: "/costs?country=malaysia-costs" }
+      { text: "Malaysia Islamic Heritage, Putrajaya Pink Mosque & Halal Guide", path: "/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" },
+      { text: "Malaysia Visa Requirements & Checklist", path: "/visa/malaysia-visa" },
+      { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Malaysia 5-Day Trip Cost Breakdown in BDT", path: "/costs/malaysia-costs" }
     ],
     affiliateCTA: { provider: "kkday", headline: "Claim 30% OFF Malaysia Attraction Passes & KLIA Ekspres (KKday Sale)", body: "Pre-book KLIA Ekspres high-speed airport train, Petronas Twin Towers, and Genting Highlands cable car tickets before flying." }
   },
@@ -3206,10 +3206,10 @@ With **Nepal/Maldives + Malaysia + Thailand** stamped in your passport and a con
 - **🇸🇬 Singapore & 🇦🇪 Dubai (UAE) + 🇸🇦 Saudi Umrah:** Your profile is now considered a **proven, low-risk tourist profile** by Singapore Authorized Visa Agents (AVAs) and UAE/Saudi sponsors. You can easily book a **10-Day Umrah + Dubai Stopover Combo**.
 - **🇪🇺 Schengen Area, 🇬🇧 UK & 🇺🇸 USA:** When you apply for Europe, the UK, or the US, consular officers see 3 to 4 countries visited and exited on time—And once you receive and use your **US, UK, or Schengen visa**, your Bangladeshi passport automatically qualifies for an **instant 1-Year Multiple-Entry Saudi e-Visa or Visa on Arrival** for future Umrah trips!`,
     internalLinks: [
-      { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Malaysia Online e-Visa & Free MDAC Arrival Card Guide", path: "/blog?slug=malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
-      { text: "Thailand Official e-Visa Guide (thaievisa.go.th)", path: "/blog?slug=thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
-      { text: "Singapore Tourist Visa Guide (Authorized Agents & LOI V39A)", path: "/blog?slug=singapore-visa-guide-bangladesh-agents" }
+      { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Malaysia Online e-Visa & Free MDAC Arrival Card Guide", path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
+      { text: "Thailand Official e-Visa Guide (thaievisa.go.th)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
+      { text: "Singapore Tourist Visa Guide (Authorized Agents & LOI V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Start Step 1: Check Dhaka to Kathmandu, Malé & Kuala Lumpur Fares", body: "Compare live roundtrip airfares from Dhaka and begin building your international travel history." }
   },
@@ -3250,10 +3250,10 @@ Under **Singapore Land Transport Authority (LTA - lta.gov.sg)** rules, foreign v
 - **Gardens by the Bay + Sentosa Attraction Passes (Klook):** BDT 8,000 – BDT 12,500
 - **Total 4-Day Per-Person Budget:** **BDT 82,000 – BDT 1,05,000**`,
     internalLinks: [
-      { text: "Singapore Tourist Visa Guide (Authorized Agents & Form V39A)", path: "/blog?slug=singapore-visa-guide-bangladesh-agents" },
-      { text: "Singapore 4-Day Cost Calculator in BDT", path: "/costs?country=singapore-costs" },
-      { text: "Dual-Currency Card Endorsement for MRT SimplyGo", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Top 6 Budget Family Destinations from Dhaka", path: "/blog?slug=top-budget-family-destinations-from-dhaka" }
+      { text: "Singapore Tourist Visa Guide (Authorized Agents & Form V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" },
+      { text: "Singapore 4-Day Cost Calculator in BDT", path: "/costs/singapore-costs" },
+      { text: "Dual-Currency Card Endorsement for MRT SimplyGo", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Top 6 Budget Family Destinations from Dhaka", path: "/blog/top-budget-family-destinations-from-dhaka" }
     ],
     affiliateCTA: { provider: "klook", headline: "Save 20% on Gardens by the Bay, Universal Studios & Sentosa Passes", body: "Pre-book instant QR tickets for Singapore's top family attractions on Klook and skip the ticket booth queues." }
   },
@@ -3295,10 +3295,10 @@ When traveling with elderly parents who need fasting blood tests at 7:00 AM, sta
 4. HOW TO PAY LARGE HOSPITAL BILLS BEYOND YOUR $12,000 TRAVEL QUOTA
 Under **Bangladesh Bank Foreign Exchange Guidelines (bb.org.bd)**, in addition to your regular **$12,000 annual personal travel quota**, Bangladeshi citizens can release up to **USD $10,000+ under the Medical Treatment Quota** through an Authorized Dealer (AD) bank branch by submitting the hospital's official cost estimate invoice and doctor recommendation!`,
     internalLinks: [
-      { text: "Thailand Official e-Visa Guide (thaievisa.go.th Upload Rules)", path: "/blog?slug=thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
-      { text: "Where to Eat Halal Food in Bangkok (Pratunam & Sukhumvit Soi 3)", path: "/blog?slug=halal-food-guide-bangkok-bangladesh" },
-      { text: "Dual-Currency Card Endorsement & Medical Quota Rules", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "No Card? Book Bangkok Flights & Hotels in BDT via WhatsApp", path: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" }
+      { text: "Thailand Official e-Visa Guide (thaievisa.go.th Upload Rules)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
+      { text: "Where to Eat Halal Food in Bangkok (Pratunam & Sukhumvit Soi 3)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
+      { text: "Dual-Currency Card Endorsement & Medical Quota Rules", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "No Card? Book Bangkok Flights & Hotels in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Pre-Book a Private Wheelchair-Friendly Minivan from Suvarnabhumi Airport", body: "Arriving in Bangkok with elderly parents for a checkup? Pre-book a private door-to-door minivan from BKK Airport straight to your Sukhumvit Soi 3 hotel." }
   },
@@ -3332,9 +3332,9 @@ Even a minor 24-hour hospital admission for food poisoning, dehydration, or a sl
 - **3. Saudi Umrah & 96-Hour Stopover Visa:**
   • Basic emergency coverage is bundled into your official Saudi visa fee, but families traveling with **elderly parents (Age 60+)** should add a supplemental **EKTA Senior Medical & Baggage Policy** so flight delays and pre-existing stabilization are covered.`,
     internalLinks: [
-      { text: "How to Use Nusuk App in Makkah & Madinah (Requires Live Data)", path: "/blog?slug=nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
-      { text: "Dual-Currency Card Endorsement for Buying eSIM & Insurance", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Europe, UK & USA Sightseeing & Schengen Guide", path: "/blog?slug=europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
+      { text: "How to Use Nusuk App in Makkah & Madinah (Requires Live Data)", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "Dual-Currency Card Endorsement for Buying eSIM & Insurance", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Europe, UK & USA Sightseeing & Schengen Guide", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
       { text: "Compare eSIM & Travel Insurance in Travel Tools Hub", path: "/tools" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Download Your Airalo eSIM & EKTA Insurance in 3 Minutes", body: "Install your destination eSIM before leaving Dhaka so your WhatsApp, Uber/Grab, and Nusuk QR codes work the moment you land." }
@@ -3378,10 +3378,10 @@ Book a **Multi-City Ticket** on **SriLankan Airlines** (or combine **Biman/SriLa
 - **Halal Meals & Sightseeing Tickets (7 Days):** BDT 7,000 – BDT 9,500
 - **Total 7-Day 2-Country Combo Budget:** **BDT 95,000 – BDT 1,20,500 per person!**`,
     internalLinks: [
-      { text: "Maldives Under BDT 75,000: Maafushi Local Island Guide", path: "/blog?slug=maldives-budget-trip-bangladesh-maafushi" },
-      { text: "First International Trip on a Fresh Passport (3-Step Ladder)", path: "/blog?slug=fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
-      { text: "How to Book Multi-City Flights in BDT via WhatsApp", path: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "Maldives 5-Day Cost Calculator in BDT", path: "/costs?country=maldives-costs" }
+      { text: "Maldives Under BDT 75,000: Maafushi Local Island Guide", path: "/blog/maldives-budget-trip-bangladesh-maafushi" },
+      { text: "First International Trip on a Fresh Passport (3-Step Ladder)", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
+      { text: "How to Book Multi-City Flights in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "Maldives 5-Day Cost Calculator in BDT", path: "/costs/maldives-costs" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Search Dhaka → Colombo → Malé Multi-City Flight Fares", body: "Use the Multi-City search tab on Aviasales to lock in Sri Lanka + Maldives combo tickets on a single itinerary." }
   },
@@ -3426,10 +3426,10 @@ Rule 2: Official 2026 Bangladesh e-Passport Fee Chart (Including 15% VAT):
 - **No Police Verification for Unchanged Renewals!** If you already hold a valid or expired Bangladeshi **MRP or e-Passport**, and you are renewing with the **exact same Name, Father's Name, Mother's Name, Date of Birth, and Permanent Address**, police verification (SB check) is **waived**—meaning your Express e-Passport is printed much faster!
 - **Crucial Post-Renewal Step for Travelers:** Always ask the Passport Officer to stamp **"Cancelled without Prejudice — Old Passport Returned to Bearer"** and **staple/bind your old passport together with your new e-Passport** when flying from Dhaka Airport so immigration officers can see your old visas and travel history!`,
     internalLinks: [
-      { text: "First International Trip on a Fresh e-Passport (3-Step Ladder)", path: "/blog?slug=fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
-      { text: "How to Get $12,000 Dollar Endorsement on Your New e-Passport", path: "/blog?slug=dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Official Hajj Registration with NID & e-Passport (hajj.gov.bd)", path: "/blog?slug=hajj-registration-bangladesh-government-vs-private-package-cost" }
+      { text: "First International Trip on a Fresh e-Passport (3-Step Ladder)", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
+      { text: "How to Get $12,000 Dollar Endorsement on Your New e-Passport", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Official Hajj Registration with NID & e-Passport (hajj.gov.bd)", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Got Your New e-Passport? Check First-Trip Flight Fares from Dhaka", body: "Compare live roundtrip fares to Nepal, Maldives, Malaysia, Thailand, and Saudi Arabia." }
   },
@@ -3467,9 +3467,9 @@ Step 3: Check Your Eligibility in 2 Minutes on AirHelp (Zero Upfront Cost):
 - Airlines routinely ignore individual emails from passengers. By entering your flight number and date into **AirHelp** (and using promo code **` + "`" + `AHPROMO8` + "`" + `** for an **8% discount on AirHelp+ protection**), their aviation legal team handles the entire claim on a **"No-Win, No-Fee"** basis—and you can even claim for disrupted flights from the **last 3 years**!`,
     internalLinks: [
       { text: "Check Flight Compensation & AirHelp Promo Code in Travel Tools", path: "/tools?tab=airhelp" },
-      { text: "Top Airlines Operating from Dhaka: Baggage & Service Comparison", path: "/blog?slug=top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
-      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog?slug=dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "Best Travel eSIM & EKTA Flight Delay Insurance Guide", path: "/blog?slug=best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" }
+      { text: "Top Airlines Operating from Dhaka: Baggage & Service Comparison", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
+      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "Best Travel eSIM & EKTA Flight Delay Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" }
     ],
     affiliateCTA: { provider: "airhelp", headline: "Had a Delayed Flight or Lost Bag in the Last 3 Years? Claim Up to €600", body: "Check your flight eligibility for free in 2 minutes with AirHelp (Use Promo Code AHPROMO8 for 8% OFF AirHelp+)." }
   },
@@ -3510,10 +3510,10 @@ Before packing your suitcases in Dhaka, check your e-ticket for whether your rou
 - **6. Low-Cost Carriers (AirAsia AK, Thai Lion Air SL, SalamAir OV, Air Arabia G9, Jazeera J9, Flynas XY):**
   • **Money-Saving Rule:** Base "Lite" fares include **ONLY 7 kg cabin hand-luggage (0 kg checked bag!)**. Always purchase your **20kg or 30kg Checked Baggage Add-On online during booking**—buying baggage at the Dhaka Airport check-in desk costs **3x more per kilogram**!`,
     internalLinks: [
-      { text: "5 Insider Secrets to Booking Cheaper Flights from Dhaka", path: "/blog?slug=cheap-flight-booking-hacks-dhaka" },
-      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog?slug=dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "Flight Delay & Lost Baggage Compensation (Claim Up to €600)", path: "/blog?slug=flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" },
-      { text: "Official Zamzam Water & Gold Customs Rules at Dhaka Airport", path: "/blog?slug=official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" }
+      { text: "5 Insider Secrets to Booking Cheaper Flights from Dhaka", path: "/blog/cheap-flight-booking-hacks-dhaka" },
+      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "Flight Delay & Lost Baggage Compensation (Claim Up to €600)", path: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" },
+      { text: "Official Zamzam Water & Gold Customs Rules at Dhaka Airport", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare All 10 Airlines from Dhaka on One Screen", body: "Check live roundtrip and multi-city fares across Biman, Saudia, US-Bangla, Emirates, Qatar Airways, and low-cost carriers." }
   }

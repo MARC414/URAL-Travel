@@ -87,7 +87,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "ঢাকা থেকে ৪ জনের পরিবারের শেয়ারে ১০ দিনের DIY ওমরাহ করতে জনপ্রতি BDT ১,১৬,০০০–১,৩২,০০০ খরচ হয় (ই-ভিসা ১৬,৫০০ টাকা, ফ্লাইট ৫৮,০০০–৭৫,০০০ টাকা, হোটেল ও বুলেট ট্রেনসহ)।",
     eavTriples: "DIY Umrah (Entity) → 10-Day Cost (Attribute) → BDT 1,16,000–1,32,000 (Value)",
-    targetPath: "/blog?slug=umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+    targetPath: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
     isLiveBlog: true,
   },
   {
@@ -108,7 +108,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "ফরজ হজের জন্য hajj.gov.bd পোর্টালে NID ও ৩০,০০০ টাকা জমা দিয়ে প্রাক-নিবন্ধন (N-Serial) এবং কোটা অনুযায়ী চূড়ান্ত নিবন্ধন (সরকারি ৫.২০–৬ লক্ষ টাকা) সম্পন্ন করতে হয়।",
     eavTriples: "Bangladesh Hajj Registration (Entity) → Official Portal (Attribute) → hajj.gov.bd (Value)",
-    targetPath: "/blog?slug=hajj-registration-bangladesh-government-vs-private-package-cost",
+    targetPath: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost",
     isLiveBlog: true,
   },
   {
@@ -129,7 +129,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "ফ্লাইটের ৪৮ ঘণ্টা আগে ফ্রি WCHR হুইলচেয়ার বুক করুন, দেশ থেকে ফোল্ডিং হুইলচেয়ার নিন, Jabal Omar ও Markazia North-এ সমতল হোটেলে থাকুন এবং SAR 115-এ ইলেকট্রিক স্কুটার ব্যবহার করুন।",
     eavTriples: "Haram Electric Mobility Scooter (Entity) → Full Umrah Fare (Attribute) → SAR 115 / BDT 3,800 (Value)",
-    targetPath: "/blog?slug=umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
+    targetPath: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
     isLiveBlog: true,
   },
   {
@@ -150,7 +150,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "মক্কায় সমতল রাস্তার জন্য Jabal Omar বা Ibrahim Al Khalil এবং বাজেটের জন্য Mahbas Al Jin ফ্রি শাটল হোটেল সেরা; আর মদিনায় মহিলা গেট ২৫–২৯ এর কাছে Markazia North সেরা।",
     eavTriples: "Haramain Bullet Train (Entity) → Makkah to Madinah Duration (Attribute) → 2 Hours 20 Minutes at 300 km/h (Value)",
-    targetPath: "/blog?slug=makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
+    targetPath: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
     isLiveBlog: true,
   },
   {
@@ -171,7 +171,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "Saudia বা Flynas-এ ট্রানজিট টিকিট কাটার সময় যেকোনো বাংলাদেশি পাসপোর্টধারী ~SAR 135 (BDT ৩,৮০০–৪,৫০০) ফি দিয়ে ৯৬ ঘণ্টার স্টপওভার ওমরাহ ভিসা ও ১ রাত ফ্রি হোটেল পেতে পারেন।",
     eavTriples: "Saudi Stopover Visa (Entity) → Maximum Stay Duration (Attribute) → 96 Hours / 4 Days (Value)",
-    targetPath: "/blog?slug=saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
+    targetPath: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
     isLiveBlog: true,
   },
   {
@@ -192,7 +192,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "ভিসা ও পাসপোর্ট নম্বর দিয়ে Nusuk অ্যাপে একাউন্ট খুলে ফ্রি Rawdah Permit বুক করতে হয়; প্রতি শুক্রবার নতুন স্লট এবং প্রতি ৩০ মিনিট পরপর ইনস্ট্যান্ট স্লট ওপেন হয়।",
     eavTriples: "Masjid an-Nabawi Rawdah Entry (Entity) → Mandatory Requirement (Attribute) → Nusuk App QR Permit (Value)",
-    targetPath: "/blog?slug=nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
+    targetPath: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
     isLiveBlog: true,
   },
   {
@@ -213,7 +213,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "সৌদি ই-ভিসা নিয়মে নারীদের ভিসার জন্য মাহরাম বাধ্যতামূলক নয় এবং মদিনায় নারীদের নামাজ ও রওজা শরীফে প্রবেশের জন্য উত্তর দিকের গেট ২৫–২৯ নির্ধারিত।",
     eavTriples: "Masjid an-Nabawi Women's Rawdah Access (Entity) → Entry Gates (Attribute) → Northern Gates 25 to 29 (Value)",
-    targetPath: "/blog?slug=umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
+    targetPath: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
     isLiveBlog: true,
   },
   {
@@ -234,7 +234,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "মাল্টি-সিটি টিকিটে ঢাকা→জেদ্দা ও মদিনা→ঢাকা বুক করুন। বিমান ও সৌদিয়ার ডিরেক্ট ফ্লাইট BDT ৬৮,০০০–৮৫,০০০ (৪৬ কেজি লাগেজ + ফ্রি ৫ লিটার জমজম) এবং ট্রানজিট ফ্লাইট ৫৪,০০০ টাকা থেকে শুরু।",
     eavTriples: "Open-Jaw Umrah Flight (Entity) → Optimal Route (Attribute) → DAC to JED Outbound + MED to DAC Return (Value)",
-    targetPath: "/blog?slug=dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia",
+    targetPath: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia",
     isLiveBlog: true,
   },
   {
@@ -255,7 +255,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "কম খরচে রমজান ওমরাহ করতে শাবানের শেষ ৫ দিনে গিয়ে প্রথম ৬ রোজা পর্যন্ত থাকুন—এতে শেষ দশকের তুলনায় হোটেল ভাড়া ৫০% কম লাগে।",
     eavTriples: "Ramadan Umrah (Entity) → Smart Cost-Saving Window (Attribute) → 26 Sha'ban to 6 Ramadan (Value)",
-    targetPath: "/blog?slug=ramadan-umrah-itikaf-guide-bangladesh-booking-budget",
+    targetPath: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget",
     isLiveBlog: true,
   },
   {
@@ -276,7 +276,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "ডিরেক্ট ফ্লাইটে ঢাকা এয়ারপোর্টে ইহরামের কাপড় পরে জেদ্দায় নামার ৪৫ মিনিট আগে পাইলটের ঘোষণায় নিয়ত করুন; আর ট্রানজিট ফ্লাইটে যাত্রাবিরতির এয়ারপোর্টে ইহরাম পরিধান করুন।",
     eavTriples: "Dhaka to Jeddah Flight (Entity) → Designated Air Miqat (Attribute) → Qarn al-Manazil / Yalamlam (Value)",
-    targetPath: "/blog?slug=wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
+    targetPath: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
     isLiveBlog: true,
   },
   {
@@ -297,7 +297,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "প্রতিটি ওমরাহ ভিসাধারী জেদ্দা বা মদিনা এয়ারপোর্ট থেকে ১টি অফিশিয়াল ৫ লিটারের সিল করা জমজম বক্স (~SAR 12.50) কিনতে পারেন, যা মূল লাগেজের বাইরে বিনামূল্যে বহনযোগ্য।",
     eavTriples: "Official Airport Zamzam Box (Entity) → Allowance per Pilgrim (Attribute) → 1 Sealed 5-Liter Carton (Value)",
-    targetPath: "/blog?slug=official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
+    targetPath: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
     isLiveBlog: true,
   },
   {
@@ -318,7 +318,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "মক্কার ইব্রাহিম খলিল রোড (মিসফালাহ), আজইয়াদ এবং মদিনার মারকাজিয়া সাউথে মাত্র ১২–২০ রিয়ালে (৩৯০–৬৫০ টাকা) দেশি ভাত, ডাল, মাছ ও ভর্তা পাওয়া যায়।",
     eavTriples: "Makkah Bangladeshi Meal (Entity) → Average Per-Meal Price (Attribute) → SAR 12–20 / BDT 390–650 (Value)",
-    targetPath: "/blog?slug=bangladeshi-halal-food-guide-makkah-madinah-budget-meals",
+    targetPath: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals",
     isLiveBlog: true,
   },
 
@@ -343,7 +343,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "পুরো পরিবারের জন্য প্রাইভেট গাড়িতে মক্কা জিয়ারত ১৫০–২০০ রিয়াল, মদিনা জিয়ারত ১২০–১৬০ রিয়াল এবং তায়েফ ডে-ট্রিপ ৩৫০–৪৫০ রিয়াল খরচে সম্পন্ন করা যায়।",
     eavTriples: "Madinah Private Ziyarah Car (Entity) → 3-Hour Standard Fare (Attribute) → SAR 120–160 / BDT 3,900–5,200 (Value)",
-    targetPath: "/blog?slug=makkah-madinah-badr-taif-historical-ziyarah-taxi-guide",
+    targetPath: "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide",
     isLiveBlog: true,
   },
   {
@@ -364,7 +364,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "মাল্টি-সিটি টিকিটে ঢাকা → জেদ্দা/মদিনা → দুবাই → ঢাকা বুক করলে দুটি আলাদা ট্রিপের চেয়ে জনপ্রতি ৩৫,০০০+ টাকা বিমান ভাড়া সাশ্রয় হয়।",
     eavTriples: "Umrah + Dubai Multi-City Route (Entity) → Per-Person Airfare Savings (Attribute) → BDT 35,000+ vs Separate Trips (Value)",
-    targetPath: "/blog?slug=umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide",
+    targetPath: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide",
     isLiveBlog: true,
   },
   {
@@ -385,7 +385,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "দুবাইয়ের ইবনে বতুতা স্টেশন থেকে E101 বাসে মাত্র ২৫ দিরহামে (৮৫০ টাকা) আবুধাবি যাওয়া যায় এবং শেখ জায়েদ গ্র্যান্ড মসজিদে প্রবেশ সম্পূর্ণ ফ্রি।",
     eavTriples: "Sheikh Zayed Grand Mosque (Entity) → Entry Ticket Fee (Attribute) → AED 0 / 100% Free with Online QR (Value)",
-    targetPath: "/blog?slug=abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide",
+    targetPath: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide",
     isLiveBlog: true,
   },
   {
@@ -406,7 +406,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "কুয়ালালামপুর থেকে MRT ট্রেনে মাত্র ৬ রিঙ্গিতে পুত্রজায়া পিঙ্ক মসজিদ ও লেক ক্রুজ ঘোরা যায় এবং প্রতিটি শপিং মলে সরকারি JAKIM হালাল খাবার পাওয়া যায়।",
     eavTriples: "Malaysia Outbound Tourism (Entity) → Halal Certification Authority (Attribute) → JAKIM Official Standard (Value)",
-    targetPath: "/blog?slug=malaysia-islamic-heritage-putrajaya-halal-family-tour-guide",
+    targetPath: "/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide",
     isLiveBlog: true,
   },
   {
@@ -427,7 +427,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "বৈধ US, UK বা Schengen ভিসাধারীরা অনলাইনে ১ বছরের সৌদি ই-ভিসা নিতে পারেন এবং প্যারিস, লন্ডন ও রোমের জনপ্রিয় স্থানে Tiqets স্কিপ-দ্য-লাইন পাস বুক করে ঘণ্টার পর ঘণ্টা লাইন এড়াতে পারেন।",
     eavTriples: "Used US/UK/Schengen Visa on BD Passport (Entity) → Saudi Visa Benefit (Attribute) → Instant 1-Year Multiple-Entry e-Visa / VOA (Value)",
-    targetPath: "/blog?slug=europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
+    targetPath: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
     isLiveBlog: true,
   },
 
@@ -452,7 +452,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "প্রাপ্তবয়স্ক বাংলাদেশি নাগরিকরা পাসপোর্টে বছরে সর্বোচ্চ $12,000 USD এনডোর্স করতে পারেন এবং ব্যাংকের অ্যাপ থেকে USD ও 3D-Secure অন করে অনলাইনে আন্তর্জাতিক পেমেন্ট করতে পারেন।",
     eavTriples: "Bangladesh Bank Travel Quota (Entity) → Annual Adult Limit (Attribute) → USD $12,000 per Calendar Year (Value)",
-    targetPath: "/blog?slug=dual-currency-card-endorsement-bangladesh",
+    targetPath: "/blog/dual-currency-card-endorsement-bangladesh",
     isLiveBlog: true,
   },
   {
@@ -473,7 +473,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "ইসলামী ব্যাংক (IBBL) ডুয়াল-কারেন্সি ডেবিট ও খিদমাহ কার্ড, সিটি ইসলামিক অ্যামেক্স, ইবিএল ইসলামিক এবং আল-আরাফাহ লা-রিবা কার্ড দিয়ে সুদমুক্তভাবে ওমরাহর সব অনলাইন পেমেন্ট করা যায়।",
     eavTriples: "Islamic Dual-Currency Debit Card (Entity) → Shariah Mechanism (Attribute) → Mudaraba / Ujrah Zero-Riba Structure (Value)",
-    targetPath: "/blog?slug=shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
+    targetPath: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
     isLiveBlog: true,
   },
   {
@@ -494,7 +494,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "বিদেশ থেকে ফেরার সময় বেঁচে যাওয়া নগদ ডলার ব্যাংকে জমা দিয়ে RFCD একাউন্ট খুললে সরাসরি ডলারে ব্যালেন্স থাকে এবং বড় অঙ্কের ফ্লাইট বা হোটেল বুকিংয়ে কোনো $300 ক্যাপ থাকে না।",
     eavTriples: "RFCD Account Bangladesh (Entity) → Key Advantage (Attribute) → No $300 Single E-Commerce Cap (Value)",
-    targetPath: "/blog?slug=rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
+    targetPath: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
     isLiveBlog: true,
   },
   {
@@ -515,7 +515,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "হাতে ডুয়াল-কারেন্সি কার্ড না থাকলে URAL-এর ঢাকা WhatsApp ডেস্কে (+8801784385335) যোগাযোগ করে দেশীয় ব্যাংক ট্রান্সফার, বিকাশ বা নগদে পেমেন্ট করেই কনফার্মড ফ্লাইট ও হোটেল বুক করা যায়।",
     eavTriples: "URAL BDT Booking Desk (Entity) → Accepted Local Payment Methods (Attribute) → BDT Bank Transfer, bKash, Nagad (Value)",
-    targetPath: "/blog?slug=book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
+    targetPath: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
     isLiveBlog: true,
   },
   {
@@ -536,7 +536,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "ওমরাহর জন্য ঢাকা থেকেই নগদ সৌদি রিয়াল (SAR) কিনলে ডাবল কনভার্সন লস বাঁচে এবং বিদেশে কার্ড পাঞ্চ করার সময় সবসময় Local Currency সিলেক্ট করলে ৫% DCC চার্জ কাটে না।",
     eavTriples: "Overseas POS Card Payment (Entity) → Optimal Currency Selection (Attribute) → Local Currency (SAR/THB/MYR/AED) (Value)",
-    targetPath: "/blog?slug=cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
+    targetPath: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
     isLiveBlog: true,
   },
 
@@ -561,7 +561,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "ঢাকা এয়ারপোর্টে ৫টি প্রিন্ট করা কাগজ সাথে রাখুন: পাসপোর্ট, ভিসা/QR কোড, রিটার্ন টিকিট, হোটেল ভাউচার ও ডলার এনডোর্সমেন্ট এবং পেশা অনুযায়ী NOC, সরকারি GO বা ট্রেড লাইসেন্স।",
     eavTriples: "Dhaka Outbound Immigration (Entity) → Core Occupational Proofs (Attribute) → Private NOC / Govt GO / Trade License (Value)",
-    targetPath: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go",
+    targetPath: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go",
     isLiveBlog: true,
   },
   {
@@ -582,7 +582,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "সিঙ্গাপুর ভিসার জন্য অনুমোদিত এজেন্টের মাধ্যমে Form 14A, ম্যাট ছবি, ৬ মাসের ব্যাংক স্টেটমেন্ট (১.৫ লক্ষ+ টাকা) ও LOI জমা দিতে হয়; খরচ ৪,২০০–৬,৫০০ টাকা।",
     eavTriples: "Singapore Tourist e-Visa BD (Entity) → Submission Channel (Attribute) → Consulate-Authorized Visa Agents Only (Value)",
-    targetPath: "/blog?slug=singapore-visa-guide-bangladesh-agents",
+    targetPath: "/blog/singapore-visa-guide-bangladesh-agents",
     isLiveBlog: true,
   },
   {
@@ -603,7 +603,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "thaievisa.go.th পোর্টালে জনপ্রতি অন্তত ৬৫,০০০ টাকা ব্যাংক ব্যালেন্স ও রিটার্ন টিকিট আপলোড করে আবেদন করলে ৫–১০ কার্যদিবসে ৬০ দিনের থাইল্যান্ড ই-ভিসা পাওয়া যায়।",
     eavTriples: "Thailand Tourist e-Visa BD (Entity) → Minimum Bank Balance (Attribute) → BDT 65,000 / THB 20,000 per Person (Value)",
-    targetPath: "/blog?slug=thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
+    targetPath: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
     isLiveBlog: true,
   },
   {
@@ -624,7 +624,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "৮০,০০০+ টাকা ব্যাংক ব্যালেন্স দেখিয়ে অনলাইনে আবেদন করলে ২–৪ দিনে মালয়েশিয়া ই-ভিসা (BDT ৩,৮০০–৪,২০০) পাওয়া যায় এবং ফ্লাইটের ৩ দিন আগে ফ্রি MDAC পূরণ করতে হয়।",
     eavTriples: "Malaysia Entry for Bangladeshis (Entity) → Pre-Arrival Digital Form (Attribute) → Free MDAC within 72 Hours (Value)",
-    targetPath: "/blog?slug=malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration",
+    targetPath: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration",
     isLiveBlog: true,
   },
   {
@@ -645,7 +645,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "৩ ধাপে ট্রাভেল হিস্ট্রি গড়ুন: ১. নেপাল বা মালদ্বীপে ফ্রি অন-অ্যারাইভাল সফর; ২. মালয়েশিয়া ও থাইল্যান্ড ই-ভিসা; ৩. সিঙ্গাপুর, দুবাই ও উন্নত দেশের ভিসা আবেদন।",
     eavTriples: "Fresh BD Passport Strategy (Entity) → Step 1 Zero-Risk Entry (Attribute) → Nepal Free SAARC VOA or Maldives 30-Day VOA (Value)",
-    targetPath: "/blog?slug=fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia",
+    targetPath: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia",
     isLiveBlog: true,
   },
 
@@ -670,7 +670,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "ঢাকা থেকে ৫ দিনের জনপ্রতি ফ্যামিলি খরচ: ১. নেপাল (৪২–৫৫ হাজার টাকা), ২. মালয়েশিয়া (৬৮–৮৫ হাজার), ৩. থাইল্যান্ড (৭২–৯২ হাজার), ৪. মালদ্বীপ মাফুশি (৭৫–৯৮ হাজার), ৫. সিঙ্গাপুর ও ৬. দুবাই।",
     eavTriples: "Lowest-Cost Family Trip from Dhaka (Entity) → 5-Day All-In BDT Budget (Attribute) → Nepal at BDT 42,000–55,000/Person (Value)",
-    targetPath: "/blog?slug=top-budget-family-destinations-from-dhaka",
+    targetPath: "/blog/top-budget-family-destinations-from-dhaka",
     isLiveBlog: true,
   },
   {
@@ -691,7 +691,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "ব্যাংককের Pratunam (Maidaun Halal) এবং বামরুনগ্রাদ হাসপাতালের কাছে Sukhumvit Soi 3 (Al Hussain) ও Siam Discovery-র Yana রেস্টুরেন্টে ১৮০–১,২০০ টাকায় সার্টিফাইড হালাল খাবার মেলে।",
     eavTriples: "Bangkok Halal Dining (Entity) → Top 2 Neighborhood Hubs (Attribute) → Pratunam Petchaburi Alleys & Sukhumvit Soi 3 (Value)",
-    targetPath: "/blog?slug=halal-food-guide-bangkok-bangladesh",
+    targetPath: "/blog/halal-food-guide-bangkok-bangladesh",
     isLiveBlog: true,
   },
   {
@@ -712,7 +712,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "মালে এয়ারপোর্ট থেকে ২৫ ডলারের স্পিডবোটে মাফুশি লোকাল আইল্যান্ডে গিয়ে এবং ৩০ ডলারের স্নরকেলিং ট্যুর নিয়ে বিমান ভাড়াসহ মাত্র ৭৫,০০০ টাকায় মালদ্বীপ ঘুরে আসা যায়।",
     eavTriples: "Malé Airport to Maafushi (Entity) → Scheduled Speedboat Fare (Attribute) → USD $25 per Person (Value)",
-    targetPath: "/blog?slug=maldives-budget-trip-bangladesh-maafushi",
+    targetPath: "/blog/maldives-budget-trip-bangladesh-maafushi",
     isLiveBlog: true,
   },
   {
@@ -733,7 +733,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "ঢাকা থেকে ৫ দিনের কাঠমান্ডু ও পোখারা ভ্রমণে রাউন্ডট্রিপ বিমান টিকিট, ফ্রি ভিসা, হোটেল ও গাড়ি ভাড়াসহ জনপ্রতি মাত্র ৪০,০০০–৫৪,০০০ টাকা খরচ হয়।",
     eavTriples: "Nepal SAARC Tourist Visa (Entity) → First Annual Visit Fee for BD Citizens (Attribute) → USD $0 / Gratis (Value)",
-    targetPath: "/blog?slug=nepal-pokhara-itinerary-bangladesh",
+    targetPath: "/blog/nepal-pokhara-itinerary-bangladesh",
     isLiveBlog: true,
   },
   {
@@ -754,7 +754,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     aeoDirectAnswerBn:
       "আন্তর্জাতিক বিমান যাত্রী অধিকার আইন অনুযায়ী যোগ্য রুটে ৩+ ঘণ্টা ফ্লাইট বিলম্ব, বাতিল বা লাগেজ হারালে জনপ্রতি সর্বোচ্চ €600 (প্রায় ৭৮,০০০ টাকা) পর্যন্ত ক্ষতিপূরণ দাবি করা যায়।",
     eavTriples: "International Flight Disruption Claim (Entity) → Maximum Statutory Payout (Attribute) → €600 / ~BDT 78,000 per Passenger (Value)",
-    targetPath: "/blog?slug=flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
+    targetPath: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
     isLiveBlog: true,
   },
 ];
@@ -794,7 +794,7 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-slate-200 pb-6">
         <div className="space-y-2.5 max-w-3xl">
           <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-            <span className="font-semibold text-[#102A43]">
+            <span className="font-semibold text-brand-navy">
               {isBn
                 ? "টপিক্যাল অথরিটি ও AEO নলেজ হাব"
                 : "Topical Authority & AEO Knowledge Graph"}
@@ -827,13 +827,13 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
         {/* Quick Architecture Summary Numbers */}
         <div className="grid grid-cols-3 gap-3 shrink-0 bg-slate-50 border border-slate-200/80 rounded-2xl p-3.5 text-center tabular-nums">
           <div className="px-2">
-            <div className="font-serif text-xl font-black text-[#102A43]">12</div>
+            <div className="font-serif text-xl font-black text-brand-navy">12</div>
             <div className="text-[11px] text-slate-500">
               {isBn ? "Hajj/Umrah কোর" : "Hajj/Umrah Core"}
             </div>
           </div>
           <div className="px-2 border-x border-slate-200">
-            <div className="font-serif text-xl font-black text-[#102A43]">29</div>
+            <div className="font-serif text-xl font-black text-brand-navy">29</div>
             <div className="text-[11px] text-slate-500">
               {isBn ? "আউটবাউন্ড ক্লাস্টার" : "Outbound Silos"}
             </div>
@@ -858,7 +858,7 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
               onClick={() => setActiveCluster(isSelected ? "all" : cluster.id)}
               className={`text-left p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between gap-2 ${
                 isSelected
-                  ? "bg-[#102A43] text-white border-[#102A43] shadow-sm"
+                  ? "bg-brand-navy text-white border-brand-navy shadow-sm"
                   : "bg-slate-50/80 hover:bg-white text-slate-800 border-slate-200 hover:border-[#F6B73C]"
               }`}
             >
@@ -891,7 +891,7 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
                 onClick={() => setActiveCluster(tab.id)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
                   active
-                    ? "bg-[#102A43] text-white shadow-xs"
+                    ? "bg-brand-navy text-white shadow-xs"
                     : "text-slate-600 hover:text-slate-900 hover:bg-white"
                 }`}
               >
@@ -916,7 +916,7 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
                 : "Filter keywords, intent, psychology..."
             }
             aria-label="Filter topical authority matrix"
-            className="w-full bg-white border border-slate-200 focus:border-[#102A43] rounded-xl pl-9 pr-4 py-2 text-xs text-slate-800 outline-none"
+            className="w-full bg-white border border-slate-200 focus:border-brand-navy rounded-xl pl-9 pr-4 py-2 text-xs text-slate-800 outline-none"
           />
         </div>
       </div>
@@ -933,7 +933,7 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
               {/* Top Unboxed Metadata Row */}
               <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
                 <div className="flex flex-wrap items-center gap-1.5">
-                  <span className="font-mono font-semibold text-[#102A43] tabular-nums">
+                  <span className="font-mono font-semibold text-brand-navy tabular-nums">
                     {String(index + 1).padStart(2, "0")}.
                   </span>
                   <span className="font-medium text-slate-700">{node.funnelStage}</span>
@@ -948,7 +948,7 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
               </div>
 
               {/* Topic Headline */}
-              <h3 className="font-serif text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#102A43] leading-snug">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-slate-900 group-hover:text-brand-navy leading-snug">
                 {isBn ? node.titleBn : node.titleEn}
               </h3>
 
@@ -967,7 +967,7 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
 
               {/* Customer Psychology & Pain Point */}
               <div className="space-y-1">
-                <div className="text-xs font-bold text-[#102A43]">
+                <div className="text-xs font-bold text-brand-navy">
                   {isBn
                     ? "গ্রাহকের মনস্তত্ত্ব ও আবেগ (Customer Psychology):"
                     : "Customer Psychology & Emotional Hook:"}
@@ -994,7 +994,7 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
             </div>
 
             {/* Footer Action */}
-            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#102A43] group-hover:text-[#D4941A] transition-colors">
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-navy group-hover:text-brand-emerald transition-colors">
               <span>
                 {node.isLiveBlog
                   ? isBn

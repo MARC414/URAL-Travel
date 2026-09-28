@@ -97,9 +97,9 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Strip */}
-        <div className="bg-[#0B1628] text-white p-5 flex items-start justify-between border-b border-white/10">
+        <div className="bg-brand-navy text-white p-5 flex items-start justify-between border-b border-white/10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#F6B73C] text-[#0F172A] flex items-center justify-center font-bold shadow-md shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-[#F6B73C] text-brand-navy flex items-center justify-center font-bold shadow-md shrink-0">
               <Bell className="w-5 h-5" />
             </div>
             <div>
@@ -107,8 +107,8 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
                 <span className="text-[10px] font-mono uppercase tracking-wider text-[#F6B73C] font-bold">
                   {lang === "bn" ? "ফ্লাইট ফেয়ার ট্র্যাকার" : "Flight Fare Tracker"}
                 </span>
-                <span className="inline-flex items-center gap-1 text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span className="inline-flex items-center gap-1 text-[10px] bg-brand-emerald/20 text-brand-ivory px-2 py-0.5 rounded-full border border-brand-emerald/40">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-ivory animate-pulse"></span>
                   WhatsApp Alert
                 </span>
               </div>
@@ -129,7 +129,7 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
         {/* Modal Content */}
         {isSubmitted ? (
           <div className="p-6 text-center space-y-4">
-            <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
+            <div className="w-14 h-14 bg-brand-emerald/10 text-brand-emerald rounded-full flex items-center justify-center mx-auto shadow-inner">
               <CheckCircle className="w-8 h-8" />
             </div>
             <div className="space-y-1.5">
@@ -145,10 +145,10 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
 
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-700 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Plane className="w-4 h-4 text-[#D4941A]" />
+                <Plane className="w-4 h-4 text-brand-emerald" />
                 <span className="font-bold">DAC ➔ {targetDest}</span>
               </div>
-              <span className="text-[11px] font-mono text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+              <span className="text-[11px] font-mono text-brand-emerald font-bold bg-brand-emerald/10 px-2 py-0.5 rounded border border-brand-emerald/20">
                 ✓ Active
               </span>
             </div>
@@ -162,7 +162,7 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
               </button>
               <button
                 onClick={onClose}
-                className="w-full bg-[#0F172A] hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow transition-colors"
+                className="w-full bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow transition-colors"
               >
                 {lang === "bn" ? "ঠিক আছে, সম্পন্ন" : "Done"}
               </button>
@@ -211,7 +211,7 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
                 <button
                   type="button"
                   onClick={() => setIsCustomDest(!isCustomDest)}
-                  className="text-xs text-[#0B1628] hover:text-[#D4941A] font-semibold underline underline-offset-2 cursor-pointer inline-flex items-center gap-1"
+                  className="text-xs text-brand-navy hover:text-brand-emerald font-semibold underline underline-offset-2 cursor-pointer inline-flex items-center gap-1"
                 >
                   {isCustomDest 
                     ? (lang === "bn" ? "← জনপ্রিয় তালিকা থেকে বেছে নিন" : "← Pick from popular list") 
@@ -265,7 +265,7 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-750 flex items-center justify-between">
                 <span>{lang === "bn" ? "৪. আপনার মোবাইল / হোয়াটসঅ্যাপ নম্বর:" : "4. Your WhatsApp / Mobile Number:"}</span>
-                <span className="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
+                <span className="text-[10px] text-brand-emerald font-bold flex items-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5" /> Direct Support
                 </span>
               </label>
@@ -282,7 +282,7 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
             <div className="pt-2 space-y-2">
               <button
                 type="submit"
-                className="w-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs sm:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer"
+                className="w-full bg-brand-emerald text-white font-bold text-xs sm:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4 fill-white" />
                 <span>

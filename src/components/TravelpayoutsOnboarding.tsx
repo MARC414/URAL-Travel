@@ -70,7 +70,7 @@ export function TravelpayoutsOnboarding() {
     <div id="tp-onboarding-hub" className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xl my-10 font-sans">
       
       {/* Visual Header Banner */}
-      <div className="bg-[#102A43] text-white p-6 sm:p-8 relative overflow-hidden">
+      <div className="bg-brand-navy text-white p-6 sm:p-8 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#F6B73C]/10 rounded-full blur-3xl pointer-events-none" />
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
@@ -101,7 +101,7 @@ export function TravelpayoutsOnboarding() {
           <button
             onClick={() => setActiveTab("checklist")}
             className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${
-              activeTab === "checklist" ? "bg-[#F6B73C] text-[#102A43]" : "text-slate-300 hover:text-white hover:bg-white/5"
+              activeTab === "checklist" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-300 hover:text-white hover:bg-white/5"
             }`}
           >
             <CheckCircle2 size={15} />
@@ -110,7 +110,7 @@ export function TravelpayoutsOnboarding() {
           <button
             onClick={() => setActiveTab("drive-sandbox")}
             className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${
-              activeTab === "drive-sandbox" ? "bg-[#F6B73C] text-[#102A43]" : "text-slate-300 hover:text-white hover:bg-white/5"
+              activeTab === "drive-sandbox" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-300 hover:text-white hover:bg-white/5"
             }`}
           >
             <Layers size={15} />
@@ -119,7 +119,7 @@ export function TravelpayoutsOnboarding() {
           <button
             onClick={() => setActiveTab("referral-calculator")}
             className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${
-              activeTab === "referral-calculator" ? "bg-[#F6B73C] text-[#102A43]" : "text-slate-300 hover:text-white hover:bg-white/5"
+              activeTab === "referral-calculator" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-300 hover:text-white hover:bg-white/5"
             }`}
           >
             <Users size={15} />
@@ -128,7 +128,7 @@ export function TravelpayoutsOnboarding() {
           <button
             onClick={() => setActiveTab("audit")}
             className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${
-              activeTab === "audit" ? "bg-[#F6B73C] text-[#102A43]" : "text-slate-300 hover:text-white hover:bg-white/5"
+              activeTab === "audit" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-300 hover:text-white hover:bg-white/5"
             }`}
           >
             <ShieldCheck size={15} />
@@ -157,7 +157,7 @@ export function TravelpayoutsOnboarding() {
             <div className="space-y-2">
               <div className="flex justify-between text-xs font-bold text-slate-700">
                 <span>Setup & Monetization Readiness Index</span>
-                <span className="text-[#102A43]">{progressPercent}% Completed</span>
+                <span className="text-brand-navy">{progressPercent}% Completed</span>
               </div>
               <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
                 <div 
@@ -202,7 +202,7 @@ export function TravelpayoutsOnboarding() {
 
             {/* Video Tips Highlight block */}
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex gap-3 text-xs leading-relaxed text-slate-600">
-              <Info size={18} className="text-[#102A43] shrink-0 mt-0.5" />
+              <Info size={18} className="text-brand-navy shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold text-slate-850 block mb-1">💡 Professional Tip from the Onboarding Video</span>
                 "Join programs that you can recommend authentically to your audience. Add the tools, activate Drive, and just let it do its thing while you focus on writing incredible content!"
@@ -242,7 +242,7 @@ export function TravelpayoutsOnboarding() {
                     }}
                     className={`w-full text-left p-3.5 rounded-xl border transition-all space-y-1 block cursor-pointer ${
                       selectedDriveTool === tool.id 
-                        ? "bg-[#102A43] text-white border-[#102A43] shadow-md" 
+                        ? "bg-brand-navy text-white border-brand-navy shadow-md"
                         : "bg-slate-50 hover:bg-slate-100 text-slate-800 border-slate-200"
                     }`}
                   >
@@ -280,7 +280,7 @@ export function TravelpayoutsOnboarding() {
                   {selectedDriveTool === 2 && (
                     <div className="space-y-3">
                       <span className="text-[10px] font-mono font-bold text-slate-400 block uppercase">Keyword Auto-Linking:</span>
-                      <div className="p-4 bg-[#0B1628] rounded-xl border border-[#F6B73C]/20 text-slate-200 font-serif leading-relaxed text-sm">
+                      <div className="p-4 bg-brand-navy rounded-xl border border-[#F6B73C]/20 text-slate-200 font-serif leading-relaxed text-sm">
                         "For tourists seeking a safe, central, and buzzing zone, the absolute best choice is to{" "}
                         <span className="text-[#F6B73C] underline font-bold cursor-pointer hover:text-amber-300 relative inline-block group">
                           stay in Thamel
@@ -315,12 +315,12 @@ export function TravelpayoutsOnboarding() {
                           ].map((h, i) => (
                             <div key={i} className={`flex items-center justify-between text-xs pt-2 ${i === 0 ? "pt-0" : ""}`}>
                               <div>
-                                <span className="font-bold text-[#102A43]">{h.name}</span>
+                                <span className="font-bold text-brand-navy">{h.name}</span>
                                 <span className="text-[10px] text-amber-600 block">⭐ {h.rating}</span>
                               </div>
                               <div className="text-right">
                                 <span className="font-bold text-slate-700 block">{h.price}</span>
-                                <a href={h.link} target="_blank" rel="noopener noreferrer sponsored" className="text-[10px] text-[#102A43] font-bold hover:underline flex items-center justify-end gap-0.5">
+                                <a href={h.link} target="_blank" rel="noopener noreferrer sponsored" className="text-[10px] text-brand-navy font-bold hover:underline flex items-center justify-end gap-0.5">
                                   Book stay <ExternalLink size={8} />
                                 </a>
                               </div>
@@ -364,7 +364,7 @@ export function TravelpayoutsOnboarding() {
                             href="https://aviasales.tpo.li/8saJolX0" 
                             target="_blank" 
                             rel="noopener noreferrer sponsored" 
-                            className="bg-[#102A43] hover:bg-[#1a4166] text-white text-center py-1 rounded text-[10px] font-bold block"
+                            className="bg-brand-navy hover:bg-[#1a4166] text-white text-center py-1 rounded text-[10px] font-bold block"
                           >
                             Check Availability
                           </a>
@@ -441,13 +441,13 @@ export function TravelpayoutsOnboarding() {
               
               {/* Sliders left */}
               <div className="space-y-6 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                <span className="text-xs font-bold text-[#102A43] font-mono uppercase tracking-widest block">Adjust Parameters</span>
+                <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest block">Adjust Parameters</span>
                 
                 {/* Slider 1: Referral invitees */}
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-xs">
                     <span className="font-bold text-slate-700">Friends invited & active:</span>
-                    <span className="font-mono bg-indigo-50 text-[#102A43] px-2.5 py-0.5 rounded font-black">{referralCount} Bloggers</span>
+                    <span className="font-mono bg-indigo-50 text-brand-navy px-2.5 py-0.5 rounded font-black">{referralCount} Bloggers</span>
                   </div>
                   <input
                     type="range"
@@ -455,7 +455,7 @@ export function TravelpayoutsOnboarding() {
                     max="20"
                     value={referralCount}
                     onChange={(e) => setReferralCount(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#102A43]"
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-navy"
                   />
                   <div className="flex justify-between text-[10px] font-mono text-slate-400">
                     <span>1 Friend</span>
@@ -468,7 +468,7 @@ export function TravelpayoutsOnboarding() {
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-xs">
                     <span className="font-bold text-slate-700">Their average monthly affiliate earnings:</span>
-                    <span className="font-mono bg-indigo-50 text-[#102A43] px-2.5 py-0.5 rounded font-black">${averageMonthlyEarnings}/mo</span>
+                    <span className="font-mono bg-indigo-50 text-brand-navy px-2.5 py-0.5 rounded font-black">${averageMonthlyEarnings}/mo</span>
                   </div>
                   <input
                     type="range"
@@ -477,7 +477,7 @@ export function TravelpayoutsOnboarding() {
                     step="50"
                     value={averageMonthlyEarnings}
                     onChange={(e) => setAverageMonthlyEarnings(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#102A43]"
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-navy"
                   />
                   <div className="flex justify-between text-[10px] font-mono text-slate-400">
                     <span>$50</span>
@@ -488,7 +488,7 @@ export function TravelpayoutsOnboarding() {
 
                 {/* Tips matching video directly */}
                 <div className="border-t border-slate-200 pt-4 space-y-2 text-xs text-slate-600 font-sans leading-relaxed">
-                  <span className="font-bold text-[#102A43] uppercase tracking-wider block font-mono text-[10px]">Onboarding Video Invite Guidelines:</span>
+                  <span className="font-bold text-brand-navy uppercase tracking-wider block font-mono text-[10px]">Onboarding Video Invite Guidelines:</span>
                   <ul className="list-disc pl-4 space-y-1">
                     <li><b>Who to invite:</b> target active travel bloggers, photographers, or travel content creators.</li>
                     <li><b>How to invite:</b> send authentic personal recommendations explaining how simple the dashboard and tools are.</li>
@@ -498,7 +498,7 @@ export function TravelpayoutsOnboarding() {
               </div>
 
               {/* Outputs right */}
-              <div className="bg-[#102A43] text-white p-6 sm:p-8 rounded-2xl flex flex-col justify-between relative overflow-hidden">
+              <div className="bg-brand-navy text-white p-6 sm:p-8 rounded-2xl flex flex-col justify-between relative overflow-hidden">
                 <div className="absolute top-0 right-0 opacity-10 text-white text-9xl font-serif">$</div>
                 
                 <div className="space-y-4">
@@ -528,7 +528,7 @@ export function TravelpayoutsOnboarding() {
                   href="https://aviasales.tpo.li/8saJolX0"
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  className="w-full bg-[#F6B73C] text-[#102A43] hover:bg-[#ffc654] font-black text-xs py-3 rounded-xl shadow-md text-center tracking-wide mt-6 block cursor-pointer transition-colors"
+                  className="w-full bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] font-black text-xs py-3 rounded-xl shadow-md text-center tracking-wide mt-6 block cursor-pointer transition-colors"
                 >
                   Retrieve My Partner Invite URL <ExternalLink size={12} className="inline ml-1" />
                 </a>
@@ -570,7 +570,7 @@ export function TravelpayoutsOnboarding() {
             <div className="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="space-y-1">
                 <span className="text-xs font-mono font-bold text-emerald-800 block uppercase tracking-wider">PLATFORM CONFORMANCE SUMMARY:</span>
-                <p className="text-sm font-serif font-bold text-[#102A43]">Passed 5 / 5 Technical Alignment Benchmarks</p>
+                <p className="text-sm font-serif font-bold text-brand-navy">Passed 5 / 5 Technical Alignment Benchmarks</p>
                 <p className="text-xs text-slate-600 leading-relaxed font-sans">
                   The URAL application perfectly integrates Travelpayouts widgets, adheres to nofollow and sponsored outbound link standards, uses clean sub-IDs, and supports static fallback anchors.
                 </p>

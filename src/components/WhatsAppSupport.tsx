@@ -36,16 +36,16 @@ export function WhatsAppSupport({ lang }: WhatsAppSupportProps) {
         {isOpen && (
           <div className="mb-3 w-80 sm:w-88 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
             {/* Header */}
-            <div className="bg-[#128C7E] text-white p-4 flex items-center justify-between">
+            <div className="bg-brand-emerald text-white p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="relative w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white">
                   <MessageCircle className="w-6 h-6 fill-white" />
-                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-[#25D366] border-2 border-[#128C7E] rounded-full"></span>
+                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-brand-ivory border-2 border-brand-emerald rounded-full"></span>
                 </div>
                 <div>
                   <h4 className="font-bold text-sm leading-tight">Ural Travel Support</h4>
-                  <div className="flex items-center gap-1 text-[11px] text-emerald-100">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#25D366]"></span>
+                  <div className="flex items-center gap-1 text-[11px] text-brand-ivory">
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-ivory"></span>
                     <span>{lang === "bn" ? "অনলাইন • দ্রুত রিপ্লাই" : "Online • Fast Response"}</span>
                   </div>
                 </div>
@@ -72,7 +72,7 @@ export function WhatsAppSupport({ lang }: WhatsAppSupportProps) {
                 </p>
                 <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-mono">
                   <span>Direct: {displayPhone}</span>
-                  <span className="text-[#128C7E] font-medium flex items-center gap-1">
+                  <span className="text-brand-emerald font-medium flex items-center gap-1">
                     <ShieldCheck className="w-3.5 h-3.5" /> Verified
                   </span>
                 </div>
@@ -89,11 +89,11 @@ export function WhatsAppSupport({ lang }: WhatsAppSupportProps) {
                     href={getWaLink(item.text)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block text-xs bg-white hover:bg-emerald-50 text-slate-750 hover:text-emerald-850 p-2.5 rounded-xl border border-slate-200 hover:border-emerald-300 transition-all font-medium text-left group"
+                    className="block text-xs bg-white hover:bg-brand-emerald/10 text-slate-750 hover:text-brand-emerald p-2.5 rounded-xl border border-slate-200 hover:border-brand-emerald/40 transition-all font-medium text-left group"
                   >
                     <div className="flex items-center justify-between">
                       <span>{item.label}</span>
-                      <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-600 transition-colors shrink-0 ml-2" />
+                      <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-brand-emerald transition-colors shrink-0 ml-2" />
                     </div>
                   </a>
                 ))}
@@ -104,7 +104,7 @@ export function WhatsAppSupport({ lang }: WhatsAppSupportProps) {
                 href={getWaLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full mt-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-md transition-all hover:shadow-lg"
+                className="w-full mt-2 bg-brand-emerald text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-md transition-all hover:shadow-lg"
               >
                 <MessageCircle className="w-4 h-4 fill-white" />
                 <span>{lang === "bn" ? "হোয়াটসঅ্যাপে চ্যাট শুরু করুন" : "Open WhatsApp Chat"}</span>
@@ -116,7 +116,7 @@ export function WhatsAppSupport({ lang }: WhatsAppSupportProps) {
         {/* Main Floating Trigger Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="group flex items-center gap-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white px-4 py-3 rounded-full shadow-2xl hover:shadow-emerald-500/30 transition-all duration-300 transform hover:scale-105 cursor-pointer border-2 border-white/20"
+          className="group flex items-center gap-2.5 bg-brand-emerald text-white px-4 py-3 rounded-full shadow-2xl hover:shadow-brand-emerald/30 transition-all duration-300 transform hover:scale-105 cursor-pointer border-2 border-white/20"
           aria-label="Open WhatsApp Chat Support"
         >
           <div className="relative flex items-center justify-center">
@@ -128,7 +128,7 @@ export function WhatsAppSupport({ lang }: WhatsAppSupportProps) {
             <div className="text-[11px] font-bold leading-tight flex items-center gap-1">
               <span>{lang === "bn" ? "হোয়াটসঅ্যাপ সাপোর্ট" : "WhatsApp Support"}</span>
             </div>
-            <div className="text-[10px] text-emerald-100 font-mono leading-none">
+            <div className="text-[10px] text-brand-ivory font-mono leading-none">
               {displayPhone}
             </div>
           </div>
@@ -152,11 +152,11 @@ export function TopBarWhatsApp({ lang }: WhatsAppSupportProps) {
       href={waUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/30 text-emerald-300 hover:text-emerald-200 transition-colors font-medium text-[11px] group cursor-pointer"
+      className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-brand-emerald/15 hover:bg-brand-emerald/25 border border-brand-emerald/30 text-brand-ivory hover:text-white transition-colors font-medium text-[11px] group cursor-pointer"
       title={lang === "bn" ? "সরাসরি হোয়াটসঅ্যাপে মেসেজ পাঠান" : "Direct WhatsApp Support"}
     >
-      <MessageCircle className="w-3.5 h-3.5 fill-[#25D366] text-[#25D366]" />
-      <span className="font-bold text-[#25D366] group-hover:text-emerald-200">
+      <MessageCircle className="w-3.5 h-3.5 fill-brand-ivory text-brand-ivory" />
+      <span className="font-bold text-brand-ivory group-hover:text-white">
         WhatsApp:
       </span>
       <span className="font-mono text-white/90 group-hover:text-white">

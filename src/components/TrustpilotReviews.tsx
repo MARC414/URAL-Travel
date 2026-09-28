@@ -87,8 +87,8 @@ export function TrustpilotReviews() {
     <div id="trustpilot-reviews-section" className="space-y-6">
 
       {/* Dark header band with eyebrow, heading, rating chip, and spotlight quote */}
-      <div className="relative rounded-3xl overflow-hidden bg-[#102A43] text-white p-8 md:p-12 shadow-2xl border border-slate-800/80">
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#0b1b2d] via-[#102A43]/95 to-[#0b1b2d]/80 z-0" />
+      <div className="relative rounded-3xl overflow-hidden bg-brand-navy text-white p-8 md:p-12 shadow-2xl border border-slate-800/80">
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#0b1b2d] via-brand-navy/95 to-[#0b1b2d]/80 z-0" />
         <div className="relative z-10 space-y-8">
 
           <div className="flex flex-wrap items-start justify-between gap-6">
@@ -177,7 +177,7 @@ export function TrustpilotReviews() {
           href={TRUSTPILOT_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-[#102A43] hover:bg-slate-800 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all cursor-pointer flex items-center gap-2"
+          className="bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all cursor-pointer flex items-center gap-2"
         >
           Read All 238 Reviews on Trustpilot <ExternalLink size={13} />
         </a>

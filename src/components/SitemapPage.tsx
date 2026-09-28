@@ -527,7 +527,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
   return (
     <div className="space-y-12 animate-fade-in">
       {/* 1. HERO HEADER BANNER */}
-      <div className="bg-[#0F172A] text-white rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-xl space-y-6">
+      <div className="bg-brand-navy text-white rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-xl space-y-6">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div className="space-y-3 max-w-3xl">
             <div className="inline-flex items-center gap-2 text-xs text-[#F6B73C] font-mono bg-[#F6B73C]/10 border border-[#F6B73C]/25 px-3.5 py-1 rounded-full">
@@ -632,7 +632,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
       <section className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
           <div className="space-y-1">
-            <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+            <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
               {isBn ? "📋 ইন্টারেক্টিভ প্রি-ফ্লাইট চেকলিস্ট" : "📋 INTERACTIVE PRE-FLIGHT VERIFICATION"}
             </span>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
@@ -658,7 +658,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
               >
                 <div className="space-y-4">
                   <div className="border-b border-slate-100 pb-3 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+                    <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-wider block">
                       {isBn ? stage.badgeBn : stage.badgeEn}
                     </span>
                     <h3 className="font-serif text-base font-bold text-slate-900">
@@ -705,7 +705,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                                     e.stopPropagation();
                                     onNavigate(item.actionPath!);
                                   }}
-                                  className="text-[11px] font-semibold text-[#102A43] hover:text-[#D4941A] inline-flex items-center gap-1 pt-0.5 cursor-pointer"
+                                  className="text-[11px] font-semibold text-brand-navy hover:text-brand-emerald inline-flex items-center gap-1 pt-0.5 cursor-pointer"
                                 >
                                   <span>
                                     {isBn ? item.actionLabelBn : item.actionLabelEn}
@@ -729,7 +729,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
       {/* 3. DHAKA AIRPORT (DAC) BAGGAGE, ZAMZAM & CUSTOMS RULES */}
       <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
         <div className="space-y-1">
-          <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+          <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
             {isBn ? "🧳 লাগেজ, কাস্টমস ও বিমানবন্দর নিয়মাবলী" : "🧳 DAC BAGGAGE, ZAMZAM & CUSTOMS RULES"}
           </span>
           <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
@@ -742,7 +742,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
             <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
-              <Luggage size={17} className="text-[#102A43]" />
+              <Luggage size={17} className="text-brand-navy" />
               <span>
                 {isBn
                   ? "কেবিন লাগেজ (৭ কেজি) ও তরল পদার্থের নিয়ম"
@@ -790,7 +790,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
 
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
             <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
-              <CreditCard size={17} className="text-[#102A43]" />
+              <CreditCard size={17} className="text-brand-navy" />
               <span>
                 {isBn
                   ? "বৈদেশিক মুদ্রা ও স্বর্ণালংকার কাস্টমস সীমা"
@@ -809,7 +809,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
       {/* 4. OVERSEAS BANGLADESH EMBASSY & HIGH COMMISSION EMERGENCY DIRECTORY */}
       <section className="space-y-5">
         <div className="space-y-1">
-          <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+          <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
             {isBn
               ? "🇧🇩 প্রবাসে বাংলাদেশ দূতাবাস ও জরুরি হেল্পলাইন"
               : "🇧🇩 BANGLADESH EMBASSY & CONSULAR HELPLINES ABROAD"}
@@ -840,7 +840,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                   </span>
                   <a
                     href={`tel:${emb.phone}`}
-                    className="text-xs font-mono font-bold text-[#102A43] bg-slate-100 hover:bg-[#102A43] hover:text-white px-2.5 py-1 rounded-lg transition-colors inline-flex items-center gap-1"
+                    className="text-xs font-mono font-bold text-brand-navy bg-slate-100 hover:bg-brand-navy hover:text-white px-2.5 py-1 rounded-lg transition-colors inline-flex items-center gap-1"
                   >
                     <PhoneCall size={11} />
                     <span>{emb.phone}</span>
@@ -865,7 +865,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                 <button
                   type="button"
                   onClick={() => onNavigate(emb.visaPath)}
-                  className="text-[#102A43] hover:underline cursor-pointer"
+                  className="text-brand-navy hover:underline cursor-pointer"
                 >
                   {isBn ? "ভিসা গাইড" : "Visa Guide"}
                 </button>
@@ -873,7 +873,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                 <button
                   type="button"
                   onClick={() => onNavigate(emb.guidePath)}
-                  className="text-[#102A43] hover:underline inline-flex items-center gap-1 cursor-pointer"
+                  className="text-brand-navy hover:underline inline-flex items-center gap-1 cursor-pointer"
                 >
                   <span>{isBn ? "পূর্ণাঙ্গ ভ্রমণ গাইড" : "Full Country Guide"}</span>
                   <ArrowRight size={11} />
@@ -888,7 +888,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
       <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="space-y-1">
-            <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+            <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
               {isBn ? "🧭 এক ক্লিকে সব গন্তব্যের গাইড" : "🧭 ALL-IN-ONE DESTINATION QUICK FINDER"}
             </span>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
@@ -910,7 +910,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
               placeholder={
                 isBn ? "দেশের নাম লিখুন (যেমন: Nepal, Dubai)..." : "Filter country (e.g. Nepal, Dubai)..."
               }
-              className="w-full bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#102A43] rounded-xl pl-9 pr-3 py-2 text-xs text-slate-800 outline-none transition-colors"
+              className="w-full bg-slate-50 border border-slate-200 focus:bg-white focus:border-brand-navy rounded-xl pl-9 pr-3 py-2 text-xs text-slate-800 outline-none transition-colors"
             />
           </div>
         </div>
@@ -940,7 +940,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                     e.preventDefault();
                     onNavigate(item.flightPath);
                   }}
-                  className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-[#102A43] text-slate-800 text-left flex items-center justify-between cursor-pointer"
+                  className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-brand-navy text-slate-800 text-left flex items-center justify-between cursor-pointer"
                 >
                   <span>✈️ {isBn ? "ফ্লাইট রুট" : "Flights"}</span>
                   <ArrowRight size={11} className="text-slate-400" />
@@ -951,7 +951,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                     e.preventDefault();
                     onNavigate(item.visaPath);
                   }}
-                  className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-[#102A43] text-slate-800 text-left flex items-center justify-between cursor-pointer"
+                  className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-brand-navy text-slate-800 text-left flex items-center justify-between cursor-pointer"
                 >
                   <span>🛂 {isBn ? "ভিসা চেকলিস্ট" : "Visa Rules"}</span>
                   <ArrowRight size={11} className="text-slate-400" />
@@ -962,7 +962,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                     e.preventDefault();
                     onNavigate(item.hotelPath);
                   }}
-                  className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-[#102A43] text-slate-800 text-left flex items-center justify-between cursor-pointer"
+                  className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-brand-navy text-slate-800 text-left flex items-center justify-between cursor-pointer"
                 >
                   <span>🏨 {isBn ? "হোটেল জোন" : "Best Hotels"}</span>
                   <ArrowRight size={11} className="text-slate-400" />
@@ -973,7 +973,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                     e.preventDefault();
                     onNavigate(item.costPath);
                   }}
-                  className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-[#102A43] text-slate-800 text-left flex items-center justify-between cursor-pointer"
+                  className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-brand-navy text-slate-800 text-left flex items-center justify-between cursor-pointer"
                 >
                   <span>📊 {isBn ? "BDT বাজেট" : "BDT Budget"}</span>
                   <ArrowRight size={11} className="text-slate-400" />
@@ -986,7 +986,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                   e.preventDefault();
                   onNavigate(item.planPath);
                 }}
-                className="w-full py-2.5 px-4 rounded-xl bg-[#102A43] hover:bg-slate-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                className="w-full py-2.5 px-4 rounded-xl bg-brand-navy hover:bg-slate-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <span>
                   {isBn
@@ -1011,7 +1011,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                 e.preventDefault();
                 onNavigate("/umrah");
               }}
-              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#102A43] hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
             >
               🕋 {isBn ? "ওমরাহ ও হজ প্ল্যানার ২০২৬" : "Umrah & Hajj Hub 2026"}
             </a>
@@ -1021,7 +1021,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                 e.preventDefault();
                 onNavigate("/experiences");
               }}
-              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#102A43] hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
             >
               🎟️ {isBn ? "ইউরোপ, UK, USA ও এশিয়া অ্যাক্টিভিটি পাস" : "Europe, UK, USA & Asia Passes"}
             </a>
@@ -1031,7 +1031,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                 e.preventDefault();
                 onNavigate("/blog");
               }}
-              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#102A43] hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
             >
               📖 {isBn ? "সবগুলো ৪১টি ট্রাভেল ব্লগ ও গাইড" : "All 41 Travel Blog Guides"}
             </a>
@@ -1041,7 +1041,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                 e.preventDefault();
                 onNavigate("/tools?tab=airhelp");
               }}
-              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-[#102A43] hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
             >
               🛡️ {isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "Flight Delay Claim (€600)"}
             </a>
@@ -1056,7 +1056,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
       >
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
           <div className="space-y-1">
-            <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+            <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
               {isBn
                 ? "❓ প্রি-ডিপার্চার ও ঢাকা এয়ারপোর্ট (DAC) সাধারণ জিজ্ঞাসা"
                 : "❓ PRE-FLIGHT READINESS & DHAKA AIRPORT (DAC) FAQS"}
@@ -1088,7 +1088,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                   aria-controls={`predeparture-faq-answer-${idx}`}
                   id={`predeparture-faq-trigger-${idx}`}
                   onClick={() => setOpenFaqIdx((prev) => (prev === idx ? null : idx))}
-                  className="w-full min-h-[52px] px-5 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#102A43]"
+                  className="w-full min-h-[52px] px-5 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
                 >
                   <span className="text-sm font-bold text-slate-900 leading-snug">
                     {isBn ? faq.questionBn : faq.questionEn}
@@ -1096,7 +1096,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                   <ChevronDown
                     size={16}
                     className={`shrink-0 text-slate-400 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-[#102A43]" : ""
+                      isOpen ? "rotate-180 text-brand-navy" : ""
                     }`}
                   />
                 </button>
@@ -1119,7 +1119,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
       {/* 7. COMPLETE CRAWLABLE HTML SITEMAP DIRECTORY (ALL 41 BLOG GUIDES & 42 HUBS) */}
       <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
         <div className="space-y-1">
-          <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+          <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
             {isBn
               ? "📚 সম্পূর্ণ সাইট ডিরেক্টরি (৪১টি গাইড ও ৪২টি হাব পেজ)"
               : "📚 COMPLETE CRAWLABLE DIRECTORY · ALL 41 BLOG GUIDES & 42 HUB PAGES"}
@@ -1150,13 +1150,13 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                   e.preventDefault();
                   onNavigate(href);
                 }}
-                className="group p-3.5 rounded-2xl border border-slate-200 hover:border-[#102A43] bg-slate-50/60 hover:bg-white transition-all flex items-start gap-3"
+                className="group p-3.5 rounded-2xl border border-slate-200 hover:border-brand-navy bg-slate-50/60 hover:bg-white transition-all flex items-start gap-3"
               >
-                <span className="text-[11px] font-mono font-bold text-[#102A43] bg-slate-200/80 group-hover:bg-[#F6B73C] px-2 py-0.5 rounded-md shrink-0 mt-0.5">
+                <span className="text-[11px] font-mono font-bold text-brand-navy bg-slate-200/80 group-hover:bg-[#F6B73C] px-2 py-0.5 rounded-md shrink-0 mt-0.5">
                   #{String(idx + 1).padStart(2, "0")}
                 </span>
                 <div className="space-y-1 min-w-0">
-                  <div className="text-xs font-bold text-slate-900 group-hover:text-[#102A43] leading-snug line-clamp-2">
+                  <div className="text-xs font-bold text-slate-900 group-hover:text-brand-navy leading-snug line-clamp-2">
                     {post.title}
                   </div>
                   <div className="flex items-center gap-2 text-[10px] font-mono text-slate-500">

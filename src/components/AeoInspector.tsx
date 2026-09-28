@@ -37,7 +37,7 @@ export function TravelIntelligence({
     <div id="travel-intelligence-panel" className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-8 my-8">
       {/* Header section */}
       <div className="border-b border-slate-100 pb-5">
-        <div className="flex items-center gap-2.5 text-[#102A43] mb-1">
+        <div className="flex items-center gap-2.5 text-brand-navy mb-1">
           <div className="p-1.5 bg-[#F6B73C]/10 rounded-lg text-[#F6B73C]">
             <Info size={18} />
           </div>
@@ -57,7 +57,7 @@ export function TravelIntelligence({
               SUMMARY
             </span>
             <div className="space-y-1">
-              <h4 className="text-xs font-mono font-bold tracking-wider text-[#102A43] uppercase">
+              <h4 className="text-xs font-mono font-bold tracking-wider text-brand-navy uppercase">
                 Travel Summary & Key Takeaways
               </h4>
               <p className="text-slate-700 text-sm leading-relaxed font-sans">
@@ -71,7 +71,7 @@ export function TravelIntelligence({
       {/* Key Facts Grid */}
       {keyFacts && keyFacts.length > 0 && (
         <div className="space-y-4">
-          <h3 className="font-serif text-base font-bold text-[#102A43] flex items-center gap-2">
+          <h3 className="font-serif text-base font-bold text-brand-navy flex items-center gap-2">
             <CheckCircle2 size={16} className="text-[#F6B73C]" />
             Key Facts & Travel Metrics
           </h3>
@@ -96,7 +96,7 @@ export function TravelIntelligence({
       {/* FAQs Accordion */}
       {faqs && faqs.length > 0 && (
         <div className="space-y-4 pt-4 border-t border-slate-100">
-          <h3 className="font-serif text-base font-bold text-[#102A43] flex items-center gap-2">
+          <h3 className="font-serif text-base font-bold text-brand-navy flex items-center gap-2">
             <HelpCircle size={16} className="text-[#F6B73C]" />
             Frequently Asked Questions
           </h3>

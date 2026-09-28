@@ -104,7 +104,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-              <span className="font-semibold text-[#102A43]">
+              <span className="font-semibold text-brand-navy">
                 {isBn ? "ফ্লাইট বিলম্ব ও বাতিল সুরক্ষা" : "Flight Delay & Cancellation Protection"}
               </span>
               <span aria-hidden="true">·</span>
@@ -139,7 +139,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
               href={AFFILIATE_LINKS.airhelp}
               target="_blank"
               rel="noopener noreferrer sponsored"
-              className="bg-[#102A43] hover:bg-slate-800 text-[#F6B73C] font-bold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
+              className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] font-bold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
             >
               <span>{isBn ? "ক্ষতিপূরণ যাচাই করুন" : "Check Flight Compensation"}</span>
               <ExternalLink size={12} />
@@ -159,7 +159,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
       <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="space-y-1.5 max-w-2xl">
           <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-            <span className="font-semibold text-[#102A43]">
+            <span className="font-semibold text-brand-navy">
               {isBn ? "যাত্রী অধিকার ও ফ্লাইট ক্ষতিপূরণ ডেস্ক" : "Passenger Rights & Flight Delay Desk"}
             </span>
             <span aria-hidden="true">·</span>
@@ -188,7 +188,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
             onClick={() => setActiveMode("claim")}
             className={`px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
               activeMode === "claim"
-                ? "bg-[#102A43] text-white"
+                ? "bg-brand-navy text-white"
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
@@ -199,7 +199,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
             onClick={() => setActiveMode("plus")}
             className={`px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
               activeMode === "plus"
-                ? "bg-[#102A43] text-white"
+                ? "bg-brand-navy text-white"
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
@@ -210,7 +210,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
             onClick={() => setActiveMode("live-form")}
             className={`px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
               activeMode === "live-form"
-                ? "bg-[#102A43] text-white"
+                ? "bg-brand-navy text-white"
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
@@ -251,7 +251,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                     onClick={() => setFlightRegion(opt.id as any)}
                     className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                       flightRegion === opt.id
-                        ? "border-[#102A43] bg-slate-50"
+                        ? "border-brand-navy bg-slate-50"
                         : "border-slate-200 hover:border-slate-300 bg-white"
                     }`}
                   >
@@ -279,7 +279,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                     onClick={() => setDelayHours(d.id as any)}
                     className={`py-2.5 px-3 rounded-xl border text-xs font-medium transition-colors cursor-pointer ${
                       delayHours === d.id
-                        ? "bg-[#102A43] text-white border-[#102A43]"
+                        ? "bg-brand-navy text-white border-brand-navy"
                         : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
                     }`}
                   >
@@ -299,7 +299,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
           </div>
 
           {/* Payout Card */}
-          <div className="lg:col-span-5 bg-[#0F172A] text-white rounded-2xl p-6 space-y-4 border border-slate-800">
+          <div className="lg:col-span-5 bg-brand-navy text-white rounded-2xl p-6 space-y-4 border border-slate-800">
             <div className="flex items-center justify-between text-xs text-slate-400">
               <span>{isBn ? "সম্ভাব্য ক্ষতিপূরণ (প্রতি যাত্রী)" : "Estimated Compensation"}</span>
               <span className="font-mono text-[#F6B73C]">{result.amount}</span>
@@ -316,7 +316,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                 href={AFFILIATE_LINKS.airhelp}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="flex-1 bg-[#F6B73C] hover:bg-[#ffc654] text-[#0F172A] font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                className="flex-1 bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <span>{isBn ? "ফ্রি ক্ষতিপূরণ চেক করুন" : "Check My Flight for Free"}</span>
                 <ExternalLink size={13} />
@@ -390,7 +390,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
               </span>
               <div className="flex items-center justify-between bg-white border border-slate-300 rounded-xl px-4 py-3">
                 <div>
-                  <span className="font-mono text-lg font-bold text-[#102A43] tracking-wider">
+                  <span className="font-mono text-lg font-bold text-brand-navy tracking-wider">
                     {AIRHELP_PROMO.code}
                   </span>
                   <span className="block text-[11px] text-slate-500">
@@ -400,7 +400,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                 <button
                   type="button"
                   onClick={handleCopyPromo}
-                  className="bg-[#102A43] hover:bg-slate-800 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                  className="bg-brand-navy hover:bg-slate-800 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
                 >
                   {copiedCode ? <Check size={13} className="text-[#F6B73C]" /> : <Copy size={13} />}
                   <span>{copiedCode ? (isBn ? "কপি হয়েছে" : "Copied") : isBn ? "কোড কপি" : "Copy Code"}</span>
@@ -412,7 +412,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
               href={AFFILIATE_LINKS.airhelp}
               target="_blank"
               rel="noopener noreferrer sponsored"
-              className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-[#0F172A] font-bold text-xs py-3.5 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-3.5 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>
                 {isBn
@@ -443,7 +443,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
 
             {embedStatus === "loading" && (
               <div className="py-10 text-center space-y-2">
-                <div className="w-5 h-5 border-2 border-slate-300 border-t-[#102A43] rounded-full animate-spin mx-auto" />
+                <div className="w-5 h-5 border-2 border-slate-300 border-t-brand-navy rounded-full animate-spin mx-auto" />
                 <p className="text-xs text-slate-500 font-mono">
                   {isBn ? "অফিসিয়াল AirHelp ক্লেইম পোর্টাল লোড হচ্ছে..." : "Loading official AirHelp claim portal..."}
                 </p>
@@ -462,7 +462,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                     href={AFFILIATE_LINKS.airhelp}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="inline-flex items-center gap-1.5 bg-[#F6B73C] hover:bg-[#ffc654] text-[#0F172A] font-bold text-xs px-5 py-2.5 rounded-xl transition-colors"
+                    className="inline-flex items-center gap-1.5 bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs px-5 py-2.5 rounded-xl transition-colors"
                   >
                     <span>{isBn ? "AirHelp অফিসিয়াল পোর্টাল খুলুন" : "Open AirHelp Official Portal"}</span>
                     <ExternalLink size={13} />

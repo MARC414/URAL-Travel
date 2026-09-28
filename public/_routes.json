@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "include": [
+    "/flights",
+    "/hotels",
+    "/visa",
+    "/destinations",
+    "/costs",
+    "/blog"
+  ],
+  "exclude": []
+}

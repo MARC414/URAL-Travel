@@ -522,7 +522,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
   return (
     <div className="space-y-14 animate-fade-in">
       {/* 1. HERO SECTION — GLOBAL ATTRACTIONS & SKIP-THE-LINE HUB */}
-      <div className="bg-[#0B1628] text-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-800 shadow-xl space-y-8">
+      <div className="bg-brand-navy text-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-800 shadow-xl space-y-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
             <nav className="text-slate-400 text-xs flex items-center gap-2">
@@ -569,7 +569,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 href={AFFILIATE_LINKS.tiqets}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="bg-[#F6B73C] hover:bg-[#ffc654] text-[#0F172A] font-bold text-xs px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2 cursor-pointer"
+                className="bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2 cursor-pointer"
               >
                 <span>
                   {isBn
@@ -596,7 +596,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
           </div>
 
           {/* Right Column: Interactive Bundle & Availability Calculator (Widget 3 Equivalent) */}
-          <div className="lg:col-span-5 bg-[#102A43] border border-slate-700/80 rounded-2xl p-6 space-y-4 shadow-lg">
+          <div className="lg:col-span-5 bg-brand-navy border border-slate-700/80 rounded-2xl p-6 space-y-4 shadow-lg">
             <div className="flex items-center justify-between border-b border-slate-700/80 pb-3">
               <div>
                 <span className="text-[11px] font-mono text-[#F6B73C] font-semibold block">
@@ -619,7 +619,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 <select
                   value={calcCityId}
                   onChange={(e) => setCalcCityId(e.target.value)}
-                  className="w-full bg-[#0B1628] border border-slate-700 rounded-xl px-3.5 py-2.5 text-white font-medium focus:outline-none focus:border-[#F6B73C]"
+                  className="w-full bg-brand-navy border border-slate-700 rounded-xl px-3.5 py-2.5 text-white font-medium focus:outline-none focus:border-[#F6B73C]"
                 >
                   <optgroup label="Europe, UK & USA (Tiqets Official)">
                     <option value="paris">Paris, France (Louvre + Seine + Eiffel)</option>
@@ -644,7 +644,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                     type="date"
                     value={travelDate}
                     onChange={(e) => setTravelDate(e.target.value)}
-                    className="w-full bg-[#0B1628] border border-slate-700 rounded-xl px-3 py-2 text-white font-mono text-xs focus:outline-none focus:border-[#F6B73C]"
+                    className="w-full bg-brand-navy border border-slate-700 rounded-xl px-3 py-2 text-white font-mono text-xs focus:outline-none focus:border-[#F6B73C]"
                   />
                 </div>
 
@@ -652,7 +652,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                   <label className="block text-slate-300 font-medium mb-1">
                     {isBn ? `৩. যাত্রী সংখ্যা (${ticketCount} জন):` : `3. Travelers (${ticketCount}):`}
                   </label>
-                  <div className="flex items-center bg-[#0B1628] border border-slate-700 rounded-xl overflow-hidden">
+                  <div className="flex items-center bg-brand-navy border border-slate-700 rounded-xl overflow-hidden">
                     <button
                       type="button"
                       onClick={() => setTicketCount(Math.max(1, ticketCount - 1))}
@@ -675,7 +675,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
               </div>
 
               {/* Calculated Output */}
-              <div className="bg-[#0B1628] border border-slate-800 rounded-xl p-4 space-y-2">
+              <div className="bg-brand-navy border border-slate-800 rounded-xl p-4 space-y-2">
                 <div className="flex items-center justify-between text-xs text-slate-400">
                   <span>
                     {isBn
@@ -702,7 +702,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 }
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-[#0F172A] font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <span>
                   {activeCalcCity.provider === "tiqets"
@@ -752,7 +752,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 }}
                 className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap cursor-pointer ${
                   regionFilter === tab.id
-                    ? "bg-[#102A43] text-white shadow-xs"
+                    ? "bg-brand-navy text-white shadow-xs"
                     : "text-slate-700 hover:text-slate-900"
                 }`}
               >
@@ -814,7 +814,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
               <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-slate-100 pb-5">
                 <div className="space-y-1.5">
                   <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-                    <span className="font-mono font-semibold text-[#102A43]">
+                    <span className="font-mono font-semibold text-brand-navy">
                       0{idx + 1}. {isBn ? hub.countryBn : hub.country}
                     </span>
                     <span aria-hidden="true">·</span>
@@ -856,7 +856,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                     href={partnerUrl}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="bg-[#102A43] hover:bg-slate-800 text-white font-semibold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
+                    className="bg-brand-navy hover:bg-slate-800 text-white font-semibold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
                   >
                     <span>
                       {isBn
@@ -873,11 +873,11 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 {hub.items.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-slate-50/70 border border-slate-200/90 hover:border-[#102A43] rounded-2xl p-5 flex flex-col justify-between space-y-5 transition-colors"
+                    className="bg-slate-50/70 border border-slate-200/90 hover:border-brand-navy rounded-2xl p-5 flex flex-col justify-between space-y-5 transition-colors"
                   >
                     <div className="space-y-3">
                       <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
-                        <span className="font-semibold text-[#102A43]">
+                        <span className="font-semibold text-brand-navy">
                           {isBn ? item.slotBn : item.slot}
                         </span>
                         <span>{item.duration}</span>
@@ -911,7 +911,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                         href={partnerUrl}
                         target="_blank"
                         rel="noopener noreferrer sponsored"
-                        className="w-full bg-white hover:bg-[#102A43] text-[#102A43] hover:text-white border border-slate-300 hover:border-[#102A43] font-semibold text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                        className="w-full bg-white hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-300 hover:border-brand-navy font-semibold text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <span>
                           {isBn
@@ -928,7 +928,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
               {/* Airport Express & City Transit Bar */}
               <div className="bg-slate-100/90 border border-slate-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="space-y-1">
-                  <div className="text-xs font-mono font-semibold text-[#102A43]">
+                  <div className="text-xs font-mono font-semibold text-brand-navy">
                     {isBn
                       ? "এয়ারপোর্ট এক্সপ্রেস ট্রেন ও সিটি ট্রান্সফার"
                       : "Airport Express Rail & City Transit Pass"}
@@ -946,7 +946,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                     href={partnerUrl}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="bg-[#F6B73C] hover:bg-[#ffc654] text-[#0F172A] font-bold text-xs px-4 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5"
+                    className="bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs px-4 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5"
                   >
                     <span>
                       {isBn ? "ট্রান্সফার পাস দেখুন" : `Reserve on ${partnerName}`}
@@ -961,7 +961,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
       </div>
 
       {/* 4. DUAL-CURRENCY CARD VS. WHATSAPP BDT DESK ASSIST BANNER */}
-      <div className="bg-[#102A43] text-white rounded-3xl p-6 sm:p-10 border border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div className="bg-brand-navy text-white rounded-3xl p-6 sm:p-10 border border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div className="lg:col-span-8 space-y-2">
           <div className="text-xs font-mono text-[#F6B73C]">
             {isBn
@@ -995,7 +995,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
           </a>
           <button
             type="button"
-            onClick={() => onNavigate("/blog?slug=dual-currency-card-endorsement-bangladesh")}
+            onClick={() => onNavigate("/blog/dual-currency-card-endorsement-bangladesh")}
             className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs py-3 px-4 rounded-xl transition-colors cursor-pointer"
           >
             {isBn
