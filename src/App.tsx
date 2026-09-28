@@ -15,6 +15,7 @@ import {
   ExternalLink,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   Sparkles,
   Link2,
   Calendar,
@@ -53,8 +54,14 @@ import {
   HAJJ_UMRAH_FAQS,
   buildFaqSchema,
   getFaqSchemaForPage,
+  getPreDepartureFaqSchema,
   SERVICE_TOOLS_FAQS,
   SERVICE_CONTACT_FAQS,
+  articleSchema,
+  touristTripSchema,
+  serviceSchema,
+  productOfferSchema,
+  collectionPageSchema,
 } from "./hooks/useSeoMeta";
 import { Language, translations } from "./translations";
 import {
@@ -630,11 +637,45 @@ export default function App() {
 
   const { section, parameterId, isLanding, isAdmin } = getRouteDetails();
 
+  // Mobile Drawer User-Intent Accordion State (reduces vertical scroll depth)
+  const getDefaultDrawerGroup = (sec: SectionType): "booking" | "destinations" | "research" | "tools" => {
+    if (sec === "destinations" || sec === "experiences") return "destinations";
+    if (sec === "blog" || sec === "costs") return "research";
+    if (sec === "tools" || sec === "sitemap" || sec === "contact") return "tools";
+    return "booking";
+  };
+
+  const [expandedDrawerGroup, setExpandedDrawerGroup] = useState<
+    "booking" | "destinations" | "research" | "tools" | null
+  >(() => getDefaultDrawerGroup(section));
+
+  useEffect(() => {
+    setExpandedDrawerGroup(getDefaultDrawerGroup(section));
+  }, [section]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
   // Dynamically compute metadata and schema
   let seoTitle = "URAL — Compare Flights, Hotels & Visa Guides for Bangladeshi Travelers";
   let seoDescription = "Compare flight prices from Dhaka to Nepal, Thailand, Malaysia and Dubai, check visa requirements step by step, and plan your trip budget in BDT.";
   let seoSchema: any = undefined;
   let seoBreadcrumbs: { name: string; url: string }[] = [];
+  let seoImageUrl = "https://ural-travel.pages.dev/og-image.jpg";
+  const pageLanguage = lang === "bn" ? "bn-BD" : "en-BD";
 
   if (section === "home") {
     seoSchema = generateFAQSchema([
@@ -656,23 +697,36 @@ export default function App() {
   } else if (section === "flights") {
     const activeRoute = FLIGHTS_DATA.find(r => r.id === parameterId) || FLIGHTS_DATA[0];
     const year = new Date().getFullYear();
-    
+
     if (isLanding) {
       seoTitle = `Flights from Dhaka: Compare Fares, Routes & Airlines (${year}) | URAL`;
       seoDescription = "Compare cheap international flights from Hazrat Shahjalal International Airport (DAC) to Nepal, Thailand, Malaysia, and Dubai. View flight duration, direct airlines, and BDT fares.";
-      seoSchema = getFaqSchemaForPage("flights", undefined, true, "https://ural-travel.pages.dev/flights");
+      const collectionNode = collectionPageSchema({
+        url: "https://ural-travel.pages.dev/flights",
+        name: seoTitle,
+        description: seoDescription,
+        inLanguage: pageLanguage,
+        items: FLIGHTS_DATA.map((r) => ({
+          name: `${r.from} to ${r.to} Flight Guide`,
+          url: `https://ural-travel.pages.dev/flights/${r.id}`,
+          description: r.quickAnswer,
+        })),
+      });
+      const faqSchema = getFaqSchemaForPage("flights", undefined, true, "https://ural-travel.pages.dev/flights");
+      seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
         { name: "Flight Guides", url: "https://ural-travel.pages.dev/flights" }
       ];
     } else {
+      const routeUrl = `https://ural-travel.pages.dev/flights/${activeRoute.id}`;
       seoTitle = activeRoute.id === "dhaka-kathmandu"
         ? `Dhaka to Kathmandu Flight Guide 2026: Price, Time & Visa | URAL`
         : `Flights from Dhaka to ${activeRoute.to.split(" (")[0]} (${activeRoute.country}) ${year} | URAL`;
       seoDescription = activeRoute.id === "dhaka-kathmandu"
         ? `Direct Dhaka to Kathmandu flights take 1h30m on Biman Bangladesh or Himalaya Airlines, from BDT 28,000 roundtrip. Bangladeshis get a free visa on arrival.`
         : `Compare flights from Dhaka to ${activeRoute.to.split(" (")[0]}. Check flight duration, direct airlines, and BDT fares.`;
-      
+
       let schemaObj: any = undefined;
       try {
         if (activeRoute.schemaMarkup?.code) {
@@ -681,35 +735,48 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("flights", activeRoute.id, false, `https://ural-travel.pages.dev/flights?route=${activeRoute.id}`);
+      const faqSchema = getFaqSchemaForPage("flights", activeRoute.id, false, routeUrl);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
         { name: "Flight Guides", url: "https://ural-travel.pages.dev/flights" },
-        { name: `${activeRoute.from.split(" (")[0]} to ${activeRoute.to.split(" (")[0]} Flight`, url: `https://ural-travel.pages.dev/flights?route=${activeRoute.id}` }
+        { name: `${activeRoute.from.split(" (")[0]} to ${activeRoute.to.split(" (")[0]} Flight`, url: routeUrl }
       ];
     }
 
   } else if (section === "hotels") {
     const activeHotel = HOTELS_DATA.find(h => h.id === parameterId) || HOTELS_DATA[0];
-    
+
     if (isLanding) {
       seoTitle = `International Hotel Guides for Bangladeshi Travelers (2026) | URAL`;
       seoDescription = "Find top-rated budget & family hotels in Kathmandu, Bangkok, Kuala Lumpur, and Dubai. Neighborhood safety, halal dining, and BDT payment guides.";
-      seoSchema = getFaqSchemaForPage("hotels", undefined, true, "https://ural-travel.pages.dev/hotels");
+      const collectionNode = collectionPageSchema({
+        url: "https://ural-travel.pages.dev/hotels",
+        name: seoTitle,
+        description: seoDescription,
+        inLanguage: pageLanguage,
+        items: HOTELS_DATA.map((h) => ({
+          name: `Best Hotels in ${h.city} (${h.country})`,
+          url: `https://ural-travel.pages.dev/hotels/${h.id}`,
+          description: h.quickAnswer,
+        })),
+      });
+      const faqSchema = getFaqSchemaForPage("hotels", undefined, true, "https://ural-travel.pages.dev/hotels");
+      seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
         { name: "Hotel Neighborhoods", url: "https://ural-travel.pages.dev/hotels" }
       ];
     } else {
+      const hotelUrl = `https://ural-travel.pages.dev/hotels/${activeHotel.id}`;
       seoTitle = activeHotel.id === "kathmandu-hotels"
         ? `Best Hotels in Kathmandu for Bangladeshi Travelers (2026) | URAL`
         : `Top Rated Hotels in ${activeHotel.city} | URAL`;
       seoDescription = activeHotel.id === "kathmandu-hotels"
         ? `Where to stay in Kathmandu: Thamel for budget travelers from BDT 1,500/night, Lazimpat for comfort, and Boudha for a quieter trip. Full neighborhood guide.`
         : `Compare clean rooms, recommended zones, and hotels in ${activeHotel.city} starting from cheap BDT tourist rates.`;
-      
+
       let schemaObj: any = undefined;
       try {
         if (activeHotel.schemaMarkup?.code) {
@@ -718,35 +785,48 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("hotels", activeHotel.id, false, `https://ural-travel.pages.dev/hotels?city=${activeHotel.id}`);
+      const faqSchema = getFaqSchemaForPage("hotels", activeHotel.id, false, hotelUrl);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
         { name: "Hotel Neighborhoods", url: "https://ural-travel.pages.dev/hotels" },
-        { name: `${activeHotel.city} Hotels`, url: `https://ural-travel.pages.dev/hotels?city=${activeHotel.id}` }
+        { name: `${activeHotel.city} Hotels`, url: hotelUrl }
       ];
     }
 
   } else if (section === "visa") {
     const activeVisa = VISA_DATA.find(v => v.id === parameterId) || VISA_DATA[0];
-    
+
     if (isLanding) {
       seoTitle = `Visa Requirements for Bangladeshi Citizens 2026: Guides & Checklists | URAL`;
       seoDescription = "Check complete tourist visa guides for Bangladeshi citizens. Learn about free Visa on Arrival in Nepal, Thailand sticker visa rules, Malaysia eVisa, and Dubai visas.";
-      seoSchema = getFaqSchemaForPage("visa", undefined, true, "https://ural-travel.pages.dev/visa");
+      const collectionNode = collectionPageSchema({
+        url: "https://ural-travel.pages.dev/visa",
+        name: seoTitle,
+        description: seoDescription,
+        inLanguage: pageLanguage,
+        items: VISA_DATA.map((v) => ({
+          name: `${v.country} Visa Guide for Bangladeshis`,
+          url: `https://ural-travel.pages.dev/visa/${v.id}`,
+          description: v.quickAnswer,
+        })),
+      });
+      const faqSchema = getFaqSchemaForPage("visa", undefined, true, "https://ural-travel.pages.dev/visa");
+      seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
         { name: "Visa Guides", url: "https://ural-travel.pages.dev/visa" }
       ];
     } else {
+      const visaUrl = `https://ural-travel.pages.dev/visa/${activeVisa.id}`;
       seoTitle = activeVisa.id === "nepal-visa"
         ? `Nepal Visa for Bangladeshi Citizens 2026: Free Visa on Arrival Guide | URAL`
         : `${activeVisa.country} Visa for Bangladeshi Travelers 2026 | URAL`;
       seoDescription = activeVisa.id === "nepal-visa"
         ? `Bangladeshi citizens get a free 30-day Nepal visa on arrival for their first trip each year. Full document checklist, fees for repeat visits, and step-by-step process.`
         : `Check complete visa requirements, costs in BDT, step-by-step instructions, and checklist for ${activeVisa.country} from Dhaka.`;
-      
+
       let schemaObj: any = undefined;
       try {
         if (activeVisa.schemaMarkup?.code) {
@@ -755,35 +835,48 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("visa", activeVisa.id, false, `https://ural-travel.pages.dev/visa?country=${activeVisa.id}`);
+      const faqSchema = getFaqSchemaForPage("visa", activeVisa.id, false, visaUrl);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
         { name: "Visa Guides", url: "https://ural-travel.pages.dev/visa" },
-        { name: `${activeVisa.country} Visa`, url: `https://ural-travel.pages.dev/visa?country=${activeVisa.id}` }
+        { name: `${activeVisa.country} Visa`, url: visaUrl }
       ];
     }
 
   } else if (section === "destinations") {
     const activeDes = DESTINATIONS_DATA.find(d => d.id === parameterId) || DESTINATIONS_DATA[0];
-    
+
     if (isLanding) {
       seoTitle = `Outbound Travel Plans & Itineraries from Bangladesh | URAL`;
       seoDescription = "Explore hand-crafted 5-day itineraries and travel plans for Bangladeshi tourists visiting Nepal, Thailand, Malaysia, and the UAE with BDT budgets.";
-      seoSchema = getFaqSchemaForPage("destinations", undefined, true, "https://ural-travel.pages.dev/destinations");
+      const collectionNode = collectionPageSchema({
+        url: "https://ural-travel.pages.dev/destinations",
+        name: seoTitle,
+        description: seoDescription,
+        inLanguage: pageLanguage,
+        items: DESTINATIONS_DATA.map((d) => ({
+          name: `${d.country} 5-Day Itinerary from Bangladesh`,
+          url: `https://ural-travel.pages.dev/destinations/${d.id}`,
+          description: d.quickAnswer,
+        })),
+      });
+      const faqSchema = getFaqSchemaForPage("destinations", undefined, true, "https://ural-travel.pages.dev/destinations");
+      seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
         { name: "Destinations", url: "https://ural-travel.pages.dev/destinations" }
       ];
     } else {
+      const destUrl = `https://ural-travel.pages.dev/destinations/${activeDes.id}`;
       seoTitle = activeDes.id === "nepal-guide"
         ? `Nepal Trip Plan from Bangladesh: 5-Day Itinerary & Costs (2026) | URAL`
         : `${activeDes.country} Tour Itinerary & Travel Plan from Bangladesh | URAL`;
       seoDescription = activeDes.id === "nepal-guide"
         ? `A day-by-day Nepal itinerary for Bangladeshi travelers - Kathmandu and Pokhara highlights, local transport, food, and a realistic budget in BDT.`
         : `Find tourist route plans, day-by-day itineraries, local transport guides, and estimated daily spends in BDT.`;
-      
+
       let schemaObj: any = undefined;
       try {
         if (activeDes.schemaMarkup?.code) {
@@ -792,35 +885,68 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("destinations", activeDes.id, false, `https://ural-travel.pages.dev/destinations?country=${activeDes.id}`);
-      seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
+      const tripNode = touristTripSchema({
+        url: destUrl,
+        name: `${activeDes.country} 5-Day Itinerary from Dhaka`,
+        description: seoDescription,
+        country: activeDes.country,
+        places: activeDes.itinerary?.map((p) => p.title) || [activeDes.country],
+        estimatedPriceBdt:
+          activeDes.id === "nepal-guide"
+            ? 45000
+            : activeDes.id === "thailand-guide"
+            ? 68000
+            : activeDes.id === "malaysia-guide"
+            ? 68000
+            : activeDes.id === "singapore-guide"
+            ? 88000
+            : activeDes.id === "maldives-guide"
+            ? 76000
+            : 95000,
+        inLanguage: pageLanguage,
+      });
+      const faqSchema = getFaqSchemaForPage("destinations", activeDes.id, false, destUrl);
+      seoSchema = [schemaObj, tripNode, faqSchema].filter(Boolean);
 
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
         { name: "Destinations", url: "https://ural-travel.pages.dev/destinations" },
-        { name: `${activeDes.country} Guide`, url: `https://ural-travel.pages.dev/destinations?country=${activeDes.id}` }
+        { name: `${activeDes.country} Guide`, url: destUrl }
       ];
     }
 
   } else if (section === "costs") {
     const activeCost = TRIP_COSTS_DATA.find(c => c.id === parameterId) || TRIP_COSTS_DATA[0];
-    
+
     if (isLanding) {
       seoTitle = `International Trip Budgets from Bangladesh: Realistic BDT Cost Guides | URAL`;
       seoDescription = "How much does an international trip really cost from Dhaka? Detailed BDT budgets for Nepal, Thailand, Malaysia, and Dubai covering flights, hotels, food & transport.";
-      seoSchema = getFaqSchemaForPage("costs", undefined, true, "https://ural-travel.pages.dev/costs");
+      const collectionNode = collectionPageSchema({
+        url: "https://ural-travel.pages.dev/costs",
+        name: seoTitle,
+        description: seoDescription,
+        inLanguage: pageLanguage,
+        items: TRIP_COSTS_DATA.map((c) => ({
+          name: `${c.country} 5-Day Trip Cost Breakdown in BDT`,
+          url: `https://ural-travel.pages.dev/costs/${c.id}`,
+          description: c.quickAnswer,
+        })),
+      });
+      const faqSchema = getFaqSchemaForPage("costs", undefined, true, "https://ural-travel.pages.dev/costs");
+      seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
         { name: "Trip Costs", url: "https://ural-travel.pages.dev/costs" }
       ];
     } else {
+      const costUrl = `https://ural-travel.pages.dev/costs/${activeCost.id}`;
       seoTitle = activeCost.id === "nepal-costs"
         ? `Nepal Trip Cost from Bangladesh 2026: Full Budget Breakdown (BDT) | URAL`
         : `${activeCost.country} Trip Cost from Bangladesh: Full Budget Sheet | URAL`;
       seoDescription = activeCost.id === "nepal-costs"
         ? `What a 5-day Nepal trip really costs from Bangladesh - flights, hotels, food, and transport in BDT, from budget (BDT 45,000) to luxury.`
         : `Detailed BDT breakdown of flights, hotels, dining, and sightseeing costs for planning your trip from Dhaka to ${activeCost.country}.`;
-      
+
       let schemaObj: any = undefined;
       try {
         if (activeCost.schemaMarkup?.code) {
@@ -829,20 +955,28 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("costs", activeCost.id, false, `https://ural-travel.pages.dev/costs?country=${activeCost.id}`);
+      const faqSchema = getFaqSchemaForPage("costs", activeCost.id, false, costUrl);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
         { name: "Trip Costs", url: "https://ural-travel.pages.dev/costs" },
-        { name: `${activeCost.country} Costs`, url: `https://ural-travel.pages.dev/costs?country=${activeCost.id}` }
+        { name: `${activeCost.country} Costs`, url: costUrl }
       ];
     }
 
   } else if (section === "tools") {
     seoTitle = "Bangladeshi Traveler Utility Tools & Services (2026) | URAL";
     seoDescription = "Access handy travel utility tools for Bangladeshi outbound tourists: live BDT exchange rates, power plug specifications, packing checklist, and translation aids.";
-    seoSchema = getFaqSchemaForPage("tools", undefined, true, "https://ural-travel.pages.dev/tools");
+    const toolsServiceNode = serviceSchema({
+      url: "https://ural-travel.pages.dev/tools",
+      idSuffix: "service-travel-tools",
+      name: "Bangladesh Outbound Currency, Visa Odds & Flight Delay Claim Tools",
+      description: seoDescription,
+      serviceType: "Travel Planning & Flight Compensation Utility",
+    });
+    const faqSchema = getFaqSchemaForPage("tools", undefined, true, "https://ural-travel.pages.dev/tools");
+    seoSchema = faqSchema ? [toolsServiceNode, faqSchema] : [toolsServiceNode];
     seoBreadcrumbs = [
       { name: "Home", url: "https://ural-travel.pages.dev/" },
       { name: "Travel Tools", url: "https://ural-travel.pages.dev/tools" }
@@ -853,54 +987,52 @@ export default function App() {
     if (isLanding) {
       seoTitle = "Travel Guides, Umrah Preparation & Outbound Intelligence for Bangladesh (2026) | URAL Blog";
       seoDescription = "Explore verified travel guides built for Bangladeshi travelers: DIY Umrah & Hajj preparation, dual-currency card endorsement, visa checklists, and family trip budgets in BDT.";
-      seoSchema = generateFAQSchema(HAJJ_UMRAH_FAQS, {
+      seoSchema = collectionPageSchema({
         url: "https://ural-travel.pages.dev/blog",
-        name: "URAL Travel Blog & Bangladeshi Outbound Guides",
+        name: seoTitle,
+        description: seoDescription,
+        inLanguage: pageLanguage,
+        items: BLOG_DATA.map((p) => ({
+          name: p.title,
+          url: `https://ural-travel.pages.dev/blog/${p.slug}`,
+          description: p.summary,
+        })),
       });
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
         { name: "Travel Blog", url: "https://ural-travel.pages.dev/blog" }
       ];
     } else {
-      const postUrl = `https://ural-travel.pages.dev/blog?slug=${activePost.slug}`;
+      const postUrl = `https://ural-travel.pages.dev/blog/${activePost.slug}`;
+      const postImgUrl = `https://ural-travel.pages.dev/img/blog/${activePost.slug}.jpg`;
       seoTitle = `${activePost.title} | URAL Travel Blog`;
       seoDescription = activePost.summary;
-      const articleSchema = {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
+      seoImageUrl = postImgUrl;
+
+      const articleNode = articleSchema({
+        url: postUrl,
         headline: activePost.title,
         description: activePost.summary,
-        datePublished: "2026-09-26T08:00:00+06:00",
-        dateModified: "2026-09-27T10:00:00+06:00",
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": postUrl,
-        },
-        author: {
-          "@type": "Organization",
-          name: "URAL Travel Intelligence Desk (Dhaka)",
-          url: "https://ural-travel.pages.dev/",
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "URAL",
-          url: "https://ural-travel.pages.dev/",
-        },
-      };
-      const faqSchema =
-        activePost.category === "Hajj & Umrah"
-          ? generateFAQSchema(HAJJ_UMRAH_FAQS, {
-              url: postUrl,
-              name: activePost.title,
-            })
-          : generateFAQSchema([
-              {
-                question: activePost.title,
-                answer: activePost.summary,
-              },
-              ...HAJJ_UMRAH_FAQS.slice(0, 2),
-            ]);
-      seoSchema = [articleSchema, faqSchema];
+        slug: activePost.slug,
+        datePublished: activePost.date,
+        dateModified: activePost.date,
+        authorRaw: activePost.author,
+        articleSection: activePost.category,
+        imageUrl: postImgUrl,
+        inLanguage: pageLanguage,
+      });
+
+      // Only emit FAQPage when the article is in the Hajj & Umrah or Ziyarah & Stopovers cluster where those FAQs are visibly rendered
+      if (activePost.category === "Hajj & Umrah" || activePost.category === "Ziyarah & Stopovers") {
+        const faqSchema = generateFAQSchema(HAJJ_UMRAH_FAQS, {
+          url: postUrl,
+          name: activePost.title,
+        });
+        seoSchema = [articleNode, faqSchema];
+      } else {
+        seoSchema = [articleNode];
+      }
+
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
         { name: "Travel Blog", url: "https://ural-travel.pages.dev/blog" },
@@ -910,7 +1042,16 @@ export default function App() {
   } else if (section === "contact") {
     seoTitle = "Contact URAL — Direct Phone & WhatsApp Support";
     seoDescription = "Connect directly with our flight & visa support desk at +8801784385335. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.";
-    seoSchema = getFaqSchemaForPage("contact", undefined, true, "https://ural-travel.pages.dev/contact");
+    const contactServiceNode = serviceSchema({
+      url: "https://ural-travel.pages.dev/contact",
+      idSuffix: "service-visa-assistance",
+      name: "Bangladesh Outbound Visa Assistance & BDT Booking Desk",
+      description:
+        "Visa checklist review, document preparation, and flight/hotel booking in Bangladeshi Taka via bKash or bank transfer for Bangladeshi passport holders.",
+      serviceType: "Visa Assistance",
+    });
+    const faqSchema = getFaqSchemaForPage("contact", undefined, true, "https://ural-travel.pages.dev/contact");
+    seoSchema = faqSchema ? [contactServiceNode, faqSchema] : [contactServiceNode];
     seoBreadcrumbs = [
       { name: "Home", url: "https://ural-travel.pages.dev/" },
       { name: "Contact Us", url: "https://ural-travel.pages.dev/contact" }
@@ -918,6 +1059,28 @@ export default function App() {
   } else if (section === "experiences") {
     seoTitle = "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub) | URAL";
     seoDescription = "Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and KL.";
+    seoSchema = [
+      productOfferSchema({
+        url: "https://ural-travel.pages.dev/experiences",
+        idSuffix: "product-airalo-saudi-esim",
+        name: "Saudi Arabia Travel eSIM for Umrah (5 GB / 30 days)",
+        description:
+          "Prepaid data eSIM covering Makkah, Madinah and Jeddah, activated before departure from Dhaka.",
+        sku: "airalo-saudi-5gb-30d",
+        brandName: "Airalo",
+        priceBdt: 2100,
+      }),
+      productOfferSchema({
+        url: "https://ural-travel.pages.dev/experiences",
+        idSuffix: "product-tiqets-paris-pass",
+        name: "Paris Louvre, Eiffel Tower & Seine River Skip-the-Line Bundle",
+        description:
+          "Official mobile-entry attraction bundle for Bangladeshi Schengen visa travelers visiting Paris.",
+        sku: "tiqets-paris-bundle-2026",
+        brandName: "Tiqets",
+        priceBdt: 9800,
+      }),
+    ];
     seoBreadcrumbs = [
       { name: "Home", url: "https://ural-travel.pages.dev/" },
       { name: "Attractions & Passes", url: "https://ural-travel.pages.dev/experiences" }
@@ -935,7 +1098,10 @@ export default function App() {
     ];
   } else if (section === "sitemap") {
     seoTitle = "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Complete 83-Page Sitemap | URAL";
-    seoDescription = "Interactive pre-flight readiness checklist for Bangladeshi travelers, Google Indexing Console, and complete 83-page directory of flights, visas, hotels, and 41 travel blogs.";
+    seoDescription = "Interactive pre-flight readiness checklist for Bangladeshi travelers departing Dhaka Airport (DAC), cabin & Zamzam baggage rules, Embassy emergency helplines, and complete 83-page directory.";
+    seoSchema = getPreDepartureFaqSchema({
+      url: "https://ural-travel.pages.dev/sitemap",
+    });
     seoBreadcrumbs = [
       { name: "Home", url: "https://ural-travel.pages.dev/" },
       { name: "Pre-Departure & Complete Sitemap", url: "https://ural-travel.pages.dev/sitemap" }
@@ -947,24 +1113,63 @@ export default function App() {
     title: seoTitle,
     description: seoDescription,
     schema: seoSchema,
-    breadcrumbs: seoBreadcrumbs
+    breadcrumbs: seoBreadcrumbs,
+    imageUrl: seoImageUrl,
+    inLanguage: pageLanguage,
   });
 
-  // Navigation Helper that emulates URL path routing
-  const navigateTo = (path: string) => {
-    if (typeof window !== "undefined") {
-      window.history.pushState({}, "", path);
+  // Helper that normalizes legacy query-string paths to clean path-based routes
+  const normalizeRoutePath = (rawPath: string): string => {
+    try {
+      const u = new URL(rawPath, "https://ural-travel.pages.dev");
+      const p = u.pathname;
+      const sp = u.searchParams;
+      if (p === "/flights" && sp.get("route")) return `/flights/${sp.get("route")}`;
+      if (p === "/hotels" && sp.get("city")) return `/hotels/${sp.get("city")}`;
+      if (p === "/visa" && sp.get("country")) return `/visa/${sp.get("country")}`;
+      if (p === "/destinations" && sp.get("country")) return `/destinations/${sp.get("country")}`;
+      if (p === "/costs" && sp.get("country")) return `/costs/${sp.get("country")}`;
+      if (p === "/blog" && sp.get("slug")) return `/blog/${sp.get("slug")}`;
+      if (p === "/pre-departure" || p === "/indexing") return "/sitemap";
+      return u.pathname + u.search + u.hash;
+    } catch {
+      return rawPath;
     }
-    setCurrentPath(path);
+  };
+
+  // Navigation Helper that emulates URL path routing with clean path URLs
+  const navigateTo = (path: string) => {
+    const cleanPath = normalizeRoutePath(path);
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", cleanPath);
+    }
+    setCurrentPath(cleanPath);
     window.scrollTo({ top: 0, behavior: "smooth" });
     setMobileMenuOpen(false);
   };
 
-  // Synchronise system time
+  // Synchronise real live Dhaka (BST) clock instead of static mock timestamp
   const [currentTime, setCurrentTime] = useState("");
   useEffect(() => {
-    // Static simulation based on 2026-06-14 local mock time
-    setCurrentTime("June 14, 2026 - 04:32 AM (Dhaka)");
+    const updateDhakaClock = () => {
+      try {
+        const formatted = new Intl.DateTimeFormat("en-US", {
+          timeZone: "Asia/Dhaka",
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        }).format(new Date());
+        setCurrentTime(`${formatted} (Dhaka BST)`);
+      } catch {
+        setCurrentTime("Dhaka Standard Time (GMT+6)");
+      }
+    };
+    updateDhakaClock();
+    const timer = window.setInterval(updateDhakaClock, 60000);
+    return () => window.clearInterval(timer);
   }, []);
 
   return (
@@ -1382,105 +1587,398 @@ export default function App() {
 
               {/* Mobile Hamburger Menu Burger */}
               <button
+                type="button"
                 id="mobile-menu-burger"
+                aria-label={isBn ? "নেভিগেশন মেনু খুলুন" : "Open navigation menu"}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-intent-drawer"
                 onClick={() => setMobileMenuOpen(true)}
-                className="md:hidden p-1 focus:outline-none flex flex-col justify-between h-[15px] w-[20px] cursor-pointer"
+                className="md:hidden w-11 h-11 rounded-xl flex flex-col items-center justify-center gap-1.5 hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] cursor-pointer transition-colors"
               >
-                <span className="w-full h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
-                <span className="w-full h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
-                <span className="w-full h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
+                <span className="w-5 h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
+                <span className="w-5 h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
+                <span className="w-5 h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
               </button>
             </div>
           </div>
 
-          {/* Mobile Sliding Navigation Drawer */}
+          {/* Mobile Sliding Navigation Drawer — Grouped by User Intent with Collapsible Sub-Menus */}
           {mobileMenuOpen && (
-            <div className="fixed inset-0 z-50 md:hidden">
+            <div
+              id="mobile-intent-drawer"
+              role="dialog"
+              aria-modal="true"
+              aria-label={isBn ? "মোবাইল নেভিগেশন মেনু" : "Mobile navigation menu"}
+              className="fixed inset-0 z-50 md:hidden"
+            >
               {/* Semi-transparent backdrop with click-to-close */}
-              <div 
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" 
+              <div
+                className="fixed inset-0 bg-black/65 backdrop-blur-xs transition-opacity"
                 onClick={() => setMobileMenuOpen(false)}
+                aria-hidden="true"
               />
-              
+
               {/* Sliding drawer from right */}
-              <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[#0F172A] shadow-2xl flex flex-col z-10 border-l border-white/10">
+              <div className="fixed top-0 right-0 h-full w-[340px] max-w-[90vw] bg-[#0F172A] shadow-2xl flex flex-col z-10 border-l border-white/10">
                 {/* Drawer Header */}
-                <div className="h-16 px-6 flex items-center justify-between border-b border-white/8">
+                <div className="h-15 px-4 flex items-center justify-between border-b border-white/10 shrink-0">
                   <div className="flex items-center gap-2.5">
                     <div className="bg-gradient-to-br from-[#F6B73C] to-[#E2A123] text-[#0F172A] p-1.5 rounded-lg shrink-0">
-                      <svg className="w-4.5 h-4.5 text-[#0F172A]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <svg
+                        className="w-4 h-4 text-[#0F172A]"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                      >
                         <path d="M12 18.5c-.5-3-4-7-9-7.5 5-1 8-4.5 9-7.5 1 3 4 6.5 9 7.5-5 .5-8.5 4.5-9 7.5z" />
                       </svg>
                     </div>
-                    <span className="font-sans font-extrabold text-[20px] text-white tracking-wider">URAL</span>
+                    <div>
+                      <span className="font-sans font-extrabold text-base text-white tracking-wider block leading-none">
+                        URAL
+                      </span>
+                      <span className="text-[11px] text-slate-400 block mt-0.5">
+                        {isBn ? "যাত্রার উদ্দেশ্য অনুযায়ী মেনু" : "Browse by Travel Intent"}
+                      </span>
+                    </div>
                   </div>
-                  <button 
-                    onClick={() => setMobileMenuOpen(false)} 
-                    className="text-[#F6B73C] hover:text-white p-1 transition-colors"
+                  <button
+                    type="button"
+                    aria-label={isBn ? "মেনু বন্ধ করুন" : "Close navigation menu"}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-11 h-11 rounded-xl flex items-center justify-center text-[#F6B73C] hover:text-white hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] transition-colors cursor-pointer"
                   >
-                    <X size={24} />
+                    <X size={20} />
                   </button>
                 </div>
 
-                {/* Nav List */}
-                <nav className="flex-1 py-4 overflow-y-auto">
-                  {[
-                    { id: "home", label: t.navHome, path: "/" },
-                    { id: "umrah", label: `${t.navUmrah} (Priority Hub)`, path: "/umrah" },
-                    { id: "flights", label: t.navFlights, path: "/flights" },
-                    { id: "hotels", label: t.navHotels, path: "/hotels" },
-                    { id: "visa", label: t.navVisa, path: "/visa" },
-                    { id: "destinations", label: t.navDestinations, path: "/destinations" },
-                    { id: "blog", label: `${t.navBlog} (${localizedBlogs.length} Guides)`, path: "/blog" },
-                    { id: "experiences", label: `${t.navExperiences} (Tiqets & Klook)`, path: "/experiences" },
-                    { id: "costs", label: t.navCosts, path: "/costs" },
-                    { id: "tools", label: `${t.navTools} & AirHelp`, path: "/tools" },
-                    {
-                      id: "sitemap",
-                      label: isBn ? "প্রি-ডিপার্চার ও দূতাবাস হেল্পলাইন" : "Pre-Departure & Embassy Hub",
-                      path: "/pre-departure",
-                    },
-                    { id: "contact", label: t.navContact, path: "/contact" }
-                  ].map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => {
-                        navigateTo(item.path);
-                        setMobileMenuOpen(false);
-                      }}
-                      className="w-full py-4 px-6 text-left border-b border-white/6 text-[14px] font-medium transition-colors block text-white/75 hover:text-[#F6B73C]"
-                      style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
-                    >
-                      <span className={section === item.id ? "text-[#F6B73C] font-semibold" : ""}>
-                        {item.label}
-                      </span>
-                    </button>
-                  ))}
-                </nav>
-
-                {/* Drawer CTA Footer */}
-                <div className="p-6 border-t border-white/8 bg-[#0B1628] space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-white/60 font-medium">Language / ভাষা:</span>
-                    <LanguageSwitcher lang={lang} onToggle={handleLangToggle} />
-                  </div>
-                  <a
-                    href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow transition-colors"
-                  >
-                    <span>💬 WhatsApp: 01784385335</span>
-                  </a>
+                {/* Compact Pinned Top Shortcuts (Zero-Scroll High-Frequency Entry Points) */}
+                <div className="px-3.5 pt-3 pb-2.5 border-b border-white/8 grid grid-cols-2 gap-2 shrink-0">
                   <button
+                    type="button"
                     onClick={() => {
-                      navigateTo("/destinations");
+                      navigateTo("/");
                       setMobileMenuOpen(false);
                     }}
-                    className="w-full bg-[#F6B73C] text-[#0F172A] hover:bg-[#D4941A] font-bold text-xs uppercase py-3 rounded-full shadow-md text-center tracking-wider transition-colors"
+                    className={`min-h-[44px] px-3 py-2 rounded-xl text-left text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
+                      section === "home"
+                        ? "bg-[#F6B73C]/15 text-[#F6B73C] border border-[#F6B73C]/40"
+                        : "bg-white/5 text-white/90 hover:bg-white/10 border border-white/8"
+                    }`}
                   >
-                    {t.startTripCta}
+                    <span>{t.navHome}</span>
+                    <ArrowRight size={12} className="opacity-70 shrink-0" />
                   </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigateTo("/umrah");
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`min-h-[44px] px-3 py-2 rounded-xl text-left text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
+                      section === "umrah"
+                        ? "bg-[#F6B73C] text-[#0F172A]"
+                        : "bg-[#F6B73C]/15 text-[#F6B73C] hover:bg-[#F6B73C]/25 border border-[#F6B73C]/35"
+                    }`}
+                  >
+                    <span className="truncate">🕋 {t.navUmrah}</span>
+                    <ArrowRight size={12} className="shrink-0" />
+                  </button>
+                </div>
+
+                {/* Collapsible User-Intent Accordion Navigation */}
+                <nav
+                  aria-label={isBn ? "প্রধান মোবাইল নেভিগেশন" : "Primary mobile navigation by intent"}
+                  className="flex-1 px-3.5 py-2.5 overflow-y-auto space-y-2"
+                >
+                  {([
+                    {
+                      id: "booking" as const,
+                      title: isBn ? "ফ্লাইট, হোটেল ও ভিসা বুকিং" : "Flights, Hotels & Visas",
+                      subtitle: isBn
+                        ? "ঢাকা রুট · হালাল হোটেল · ই-ভিসা চেকলিস্ট"
+                        : "Dhaka fares · Hotel zones · Visa rules",
+                      isActiveGroup: ["flights", "hotels", "visa", "umrah"].includes(section),
+                      primaryLinks: [
+                        {
+                          id: "flights",
+                          label: t.navFlights,
+                          meta: isBn ? "ঢাকা থেকে ৬টি প্রধান রুট" : "Compare Dhaka (DAC) routes",
+                          path: "/flights",
+                        },
+                        {
+                          id: "hotels",
+                          label: t.navHotels,
+                          meta: isBn ? "হালাল ও ফ্যামিলি জোন গাইড" : "Family & Halal hotel areas",
+                          path: "/hotels",
+                        },
+                        {
+                          id: "visa",
+                          label: t.navVisa,
+                          meta: isBn ? "অন-অ্যারাইভাল ও ই-ভিসা ধাপ" : "Free VOA & e-Visa checklists",
+                          path: "/visa",
+                        },
+                        {
+                          id: "umrah",
+                          label: isBn ? "ওমরাহ ও হজ প্ল্যানার ২০২৬" : "Umrah & Hajj 2026 Hub",
+                          meta: isBn ? "Nusuk অ্যাপ ও DIY খরচ" : "Nusuk permit & DIY BDT cost",
+                          path: "/umrah",
+                        },
+                      ],
+                      quickChips: [
+                        { label: isBn ? "✈️ কাঠমান্ডু ফ্লাইট" : "✈️ Dhaka → KTM", path: "/flights?route=dhaka-kathmandu" },
+                        { label: isBn ? "✈️ ব্যাংকক ফ্লাইট" : "✈️ Dhaka → BKK", path: "/flights?route=dhaka-bangkok" },
+                        { label: isBn ? "🛂 থাইল্যান্ড ই-ভিসা" : "🛂 Thai e-Visa", path: "/visa?country=thailand-visa" },
+                        { label: isBn ? "🛂 মালয়েশিয়া ভিসা" : "🛂 Malaysia eVisa", path: "/visa?country=malaysia-visa" },
+                      ],
+                    },
+                    {
+                      id: "destinations" as const,
+                      title: isBn ? "গন্তব্য গাইড ও অ্যাক্টিভিটি পাস" : "Destinations & Attraction Passes",
+                      subtitle: isBn
+                        ? "এশিয়া গাইড · ইউরোপ, UK ও USA পাস"
+                        : "6 Asian hubs · Europe, UK & USA passes",
+                      isActiveGroup: ["destinations", "experiences"].includes(section),
+                      primaryLinks: [
+                        {
+                          id: "destinations",
+                          label: t.navDestinations,
+                          meta: isBn ? "নেপাল, থাইল্যান্ড, মালয়েশিয়া ও দুবাই" : "Full country itineraries & tips",
+                          path: "/destinations",
+                        },
+                        {
+                          id: "experiences",
+                          label: t.navExperiences,
+                          meta: isBn ? "Tiqets ও Klook স্কিপ-দ্য-লাইন পাস" : "Tiqets & Klook skip-the-line passes",
+                          path: "/experiences",
+                        },
+                      ],
+                      quickChips: [
+                        { label: isBn ? "🇳🇵 নেপাল গাইড" : "🇳🇵 Nepal Guide", path: "/destinations?country=nepal-guide" },
+                        { label: isBn ? "🇹🇭 থাইল্যান্ড" : "🇹🇭 Thailand", path: "/destinations?country=thailand-guide" },
+                        { label: isBn ? "🇲🇾 মালয়েশিয়া" : "🇲🇾 Malaysia", path: "/destinations?country=malaysia-guide" },
+                        { label: isBn ? "🇸🇬 সিঙ্গাপুর" : "🇸🇬 Singapore", path: "/destinations?country=singapore-guide" },
+                        { label: isBn ? "🇲🇻 মালদ্বীপ" : "🇲🇻 Maldives", path: "/destinations?country=maldives-guide" },
+                        { label: isBn ? "🇦🇪 দুবাই ও UAE" : "🇦🇪 Dubai / UAE", path: "/destinations?country=uae-guide" },
+                        { label: isBn ? "🇫🇷🇬🇧 ইউরোপ ও UK" : "🇫🇷🇬🇧 Europe & UK", path: "/experiences?region=west" },
+                        { label: isBn ? "🎟️ এশিয়া Klook ডিল" : "🎟️ Asia Passes", path: "/experiences?region=asia" },
+                      ],
+                    },
+                    {
+                      id: "research" as const,
+                      title: isBn ? "ট্রাভেল ব্লগ ও BDT বাজেট হিসাব" : "Blog Guides & BDT Trip Budgets",
+                      subtitle: isBn
+                        ? `${localizedBlogs.length}টি বিস্তারিত গাইড · ৫ দিনের খরচ`
+                        : `${localizedBlogs.length} in-depth guides · 5-day BDT sheets`,
+                      isActiveGroup: ["blog", "costs"].includes(section),
+                      primaryLinks: [
+                        {
+                          id: "blog",
+                          label: isBn ? `সবগুলো ট্রাভেল ব্লগ (${localizedBlogs.length})` : `All Travel Blog Guides (${localizedBlogs.length})`,
+                          meta: isBn ? "ওমরাহ, কার্ড এন্ডোর্সমেন্ট ও ইমিগ্রেশন" : "Umrah, Card Endorsement & Visas",
+                          path: "/blog",
+                        },
+                        {
+                          id: "costs",
+                          label: t.navCosts,
+                          meta: isBn ? "বাজেট, মিড-রেঞ্জ ও ফ্যামিলি খরচ" : "3-tier BDT cost matrices by country",
+                          path: "/costs",
+                        },
+                      ],
+                      quickChips: [
+                        {
+                          label: isBn ? "💳 কার্ড এন্ডোর্সমেন্ট" : "💳 Card Endorsement",
+                          path: "/blog?slug=dual-currency-card-endorsement-bangladesh",
+                        },
+                        {
+                          label: isBn ? "🛂 ঢাকা ইমিগ্রেশন" : "🛂 DAC Immigration",
+                          path: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go",
+                        },
+                        {
+                          label: isBn ? "🏥 ব্যাংকক মেডিকেল" : "🏥 Medical Visa",
+                          path: "/blog?slug=bangkok-medical-tourism-guide-bangladesh-bumrungrad-visa-cost",
+                        },
+                        {
+                          label: isBn ? "📘 ই-পাসপোর্ট গাইড" : "📘 e-Passport Guide",
+                          path: "/blog?slug=bangladesh-epassport-application-renewal-guide-fees-police-verification",
+                        },
+                      ],
+                    },
+                    {
+                      id: "tools" as const,
+                      title: isBn ? "এয়ারপোর্ট প্রস্তুতি, টুলস ও সাপোর্ট" : "Airport Readiness, Tools & Help",
+                      subtitle: isBn
+                        ? "কারেন্সি কনভার্টার · দূতাবাস · €600 ক্লেইম"
+                        : "FX tool · DAC checklist · €600 claim",
+                      isActiveGroup: ["tools", "sitemap", "contact"].includes(section),
+                      primaryLinks: [
+                        {
+                          id: "tools",
+                          label: isBn ? "কারেন্সি কনভার্টার ও প্যাকিং টুলস" : "BDT Currency & Packing Tools",
+                          meta: isBn ? "লাইভ BDT রেট ও ভিসা ক্যালকুলেটর" : "Live BDT FX & readiness tools",
+                          path: "/tools",
+                        },
+                        {
+                          id: "sitemap",
+                          label: isBn ? "ঢাকা এয়ারপোর্ট (DAC) ও দূতাবাস হাব" : "Pre-Departure & Embassy Hub",
+                          meta: isBn ? "লাগেজ নিয়ম, জমজম ও জরুরি নাম্বার" : "Baggage rules, Zamzam & embassies",
+                          path: "/pre-departure",
+                        },
+                        {
+                          id: "airhelp",
+                          label: isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "Flight Delay Claim (€600 / AirHelp)",
+                          meta: isBn ? "প্রোমো কোড AHTPO11 · ৭৮,০০০ টাকা পর্যন্ত" : "Code AHTPO11 · Up to BDT 78k payout",
+                          path: "/tools?tab=airhelp",
+                        },
+                        {
+                          id: "contact",
+                          label: t.navContact,
+                          meta: isBn ? "কার্ড ছাড়াই বিকাশ/ব্যাংকে BDT পেমেন্ট" : "Book via bKash, Nagad or Bank BDT",
+                          path: "/contact",
+                        },
+                      ],
+                      quickChips: [],
+                    },
+                  ]).map((group) => {
+                    const isExpanded = expandedDrawerGroup === group.id;
+                    return (
+                      <div
+                        key={group.id}
+                        className={`rounded-2xl border transition-colors ${
+                          isExpanded
+                            ? "bg-white/[0.05] border-white/15"
+                            : group.isActiveGroup
+                            ? "bg-white/[0.03] border-[#F6B73C]/35"
+                            : "bg-white/[0.02] border-white/8"
+                        }`}
+                      >
+                        {/* Accordion Trigger Button */}
+                        <button
+                          type="button"
+                          id={`drawer-trigger-${group.id}`}
+                          aria-expanded={isExpanded}
+                          aria-controls={`drawer-panel-${group.id}`}
+                          onClick={() =>
+                            setExpandedDrawerGroup((prev) => (prev === group.id ? null : group.id))
+                          }
+                          className="w-full min-h-[52px] px-3.5 py-2.5 text-left flex items-center justify-between gap-2 cursor-pointer rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+                        >
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span
+                                className={`text-[13.5px] font-semibold leading-snug truncate ${
+                                  group.isActiveGroup || isExpanded ? "text-[#F6B73C]" : "text-white"
+                                }`}
+                              >
+                                {group.title}
+                              </span>
+                            </div>
+                            <span className="text-[11px] text-slate-400 block truncate mt-0.5">
+                              {group.subtitle}
+                            </span>
+                          </div>
+                          <ChevronDown
+                            size={16}
+                            className={`shrink-0 text-slate-400 transition-transform duration-200 ${
+                              isExpanded ? "rotate-180 text-[#F6B73C]" : ""
+                            }`}
+                          />
+                        </button>
+
+                        {/* Collapsible Sub-Menu Panel */}
+                        {isExpanded && (
+                          <div
+                            id={`drawer-panel-${group.id}`}
+                            role="region"
+                            aria-labelledby={`drawer-trigger-${group.id}`}
+                            className="px-2.5 pb-2.5 pt-1 border-t border-white/8 space-y-1.5"
+                          >
+                            <div className="space-y-1">
+                              {group.primaryLinks.map((link) => {
+                                const isCurrent = section === link.id;
+                                return (
+                                  <button
+                                    key={link.path}
+                                    type="button"
+                                    onClick={() => {
+                                      navigateTo(link.path);
+                                      setMobileMenuOpen(false);
+                                    }}
+                                    className={`w-full min-h-[44px] px-3 py-2 rounded-xl text-left flex items-center justify-between gap-2 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
+                                      isCurrent
+                                        ? "bg-[#F6B73C]/15 text-[#F6B73C]"
+                                        : "hover:bg-white/8 text-white/90"
+                                    }`}
+                                  >
+                                    <div className="min-w-0">
+                                      <div className="text-xs font-semibold truncate">{link.label}</div>
+                                      <div className="text-[11px] text-slate-400 truncate">{link.meta}</div>
+                                    </div>
+                                    <ArrowRight
+                                      size={12}
+                                      className={isCurrent ? "text-[#F6B73C] shrink-0" : "text-slate-500 shrink-0"}
+                                    />
+                                  </button>
+                                );
+                              })}
+                            </div>
+
+                            {group.quickChips.length > 0 && (
+                              <div className="pt-1.5 border-t border-white/6">
+                                <div className="grid grid-cols-2 gap-1.5">
+                                  {group.quickChips.map((chip) => (
+                                    <button
+                                      key={chip.path}
+                                      type="button"
+                                      onClick={() => {
+                                        navigateTo(chip.path);
+                                        setMobileMenuOpen(false);
+                                      }}
+                                      className="min-h-[38px] px-2.5 py-1.5 rounded-lg bg-slate-900/80 hover:bg-white/10 border border-white/8 text-left text-[11px] font-medium text-slate-200 hover:text-[#F6B73C] truncate transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+                                    >
+                                      {chip.label}
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </nav>
+
+                {/* Drawer CTA Footer (Compact to preserve vertical viewport budget) */}
+                <div className="p-4 border-t border-white/10 bg-[#0B1628] space-y-2.5 shrink-0">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-white/70 font-medium">Language / ভাষা:</span>
+                    <LanguageSwitcher lang={lang} onToggle={handleLangToggle} />
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <a
+                      href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="min-h-[42px] bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs px-3 rounded-xl flex items-center justify-center gap-1.5 shadow transition-colors"
+                    >
+                      <span>💬 WhatsApp</span>
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigateTo("/destinations");
+                        setMobileMenuOpen(false);
+                      }}
+                      className="min-h-[42px] bg-[#F6B73C] text-[#0F172A] hover:bg-[#D4941A] font-bold text-xs px-3 rounded-xl shadow-md text-center transition-colors cursor-pointer"
+                    >
+                      {t.startTripCta}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -4793,7 +5291,7 @@ export default function App() {
                           <div className="flex flex-wrap items-center gap-2 text-xs">
                             <a
                               href={`https://wa.me/?text=${encodeURIComponent(
-                                `${activePost.title}\n\n${getArticleQuickAnswer(activePost, isBn)}\n\nRead Full Guide on URAL: https://ural.com.bd/blog?slug=${activePost.slug}`
+                                `${activePost.title}\n\n${getBlogAeoSnippet50Words(activePost.slug, isBn, activePost.summary)}\n\nRead Full Guide on URAL: https://ural-travel.pages.dev/blog/${activePost.slug}`
                               )}`}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -4803,7 +5301,7 @@ export default function App() {
                             </a>
                             <a
                               href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                                `https://ural.com.bd/blog?slug=${activePost.slug}`
+                                `https://ural-travel.pages.dev/blog/${activePost.slug}`
                               )}`}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -4815,8 +5313,8 @@ export default function App() {
                               type="button"
                               onClick={() => {
                                 const fbCaption = isBn
-                                  ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getArticleQuickAnswer(activePost, true)}\n\n👉 সম্পূর্ণ গাইড ও BDT বাজেট দেখুন: https://ural.com.bd/blog?slug=${activePost.slug}\n💬 কার্ড ছাড়াই BDT/bKash-এ ফ্লাইট ও হোটেল বুকিং হেল্পলাইন (WhatsApp): +8801784385335`
-                                  : `✈️ ${activePost.title}\n\n📌 Quick Summary:\n${getArticleQuickAnswer(activePost, false)}\n\n👉 Read Full Guide & BDT Calculator: https://ural.com.bd/blog?slug=${activePost.slug}\n💬 Book Flights & Hotels in BDT via WhatsApp: +8801784385335`;
+                                  ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getBlogAeoSnippet50Words(activePost.slug, true, activePost.summary)}\n\n👉 সম্পূর্ণ গাইড ও BDT বাজেট দেখুন: https://ural-travel.pages.dev/blog/${activePost.slug}\n💬 কার্ড ছাড়াই BDT/bKash-এ ফ্লাইট ও হোটেল বুকিং হেল্পলাইন (WhatsApp): +8801784385335`
+                                  : `✈️ ${activePost.title}\n\n📌 Quick Summary:\n${getBlogAeoSnippet50Words(activePost.slug, false, activePost.summary)}\n\n👉 Read Full Guide & BDT Calculator: https://ural-travel.pages.dev/blog/${activePost.slug}\n💬 Book Flights & Hotels in BDT via WhatsApp: +8801784385335`;
                                 navigator.clipboard?.writeText(fbCaption);
                                 setAffiliateToast(
                                   isBn

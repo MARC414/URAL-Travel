@@ -183,6 +183,37 @@ export const SERVICE_TRAVEL_SERVICES_FAQS: FAQItem[] = [
   }
 ];
 
+export const PRE_DEPARTURE_SITEMAP_FAQS: FAQItem[] = [
+  {
+    question: "What documents are required at Dhaka Airport (DAC) outbound immigration for Bangladeshi travelers?",
+    answer: "Outbound passengers departing Hazrat Shahjalal International Airport (DAC) must present an original Bangladeshi passport with at least 6 months validity beyond the return date, a printed two-way return flight ticket, confirmed hotel booking vouchers, a valid visa or e-Visa printout, profession proof (private office NOC + ID card, government GO, Trade License copy, or Student ID), and endorsed foreign currency (an active dual-currency bank card stamped under the $12,000 annual travel quota and/or USD cash)."
+  },
+  {
+    question: "How many hours before an international flight should I arrive at Dhaka Airport (DAC)?",
+    answer: "International passengers departing from Hazrat Shahjalal International Airport (DAC Terminal 1, Terminal 2, or Terminal 3) should arrive 3.5 to 4 hours before scheduled departure to allow sufficient time for terminal entry security, airline check-in and document verification, outbound immigration queues, and boarding gate security."
+  },
+  {
+    question: "What are the power bank, battery, and cabin baggage rules at Dhaka Airport?",
+    answer: "Standard cabin hand carry is strictly capped at 7 kg across airlines operating from Dhaka, with liquids, aerosols, and gels restricted to containers of 100ml or less. Lithium-ion power banks up to 20,000 mAh (100Wh) and spare batteries must be packed in hand luggage only—never in checked baggage—and must have a clearly legible mAh capacity rating printed on the body."
+  },
+  {
+    question: "How much foreign currency and gold can a Bangladeshi traveler carry through Dhaka Airport customs?",
+    answer: "Adult Bangladeshi passport holders can endorse up to USD $12,000 per calendar year under the Bangladesh Bank private travel quota across a dual-currency Visa/Mastercard and cash USD notes. Returning passengers may bring up to 100 grams of personal gold ornaments and up to 2 mobile phones duty-free through the DAC Green Channel."
+  },
+  {
+    question: "What is the Zamzam water allowance for Bangladeshi Umrah and Hajj pilgrims returning to Dhaka?",
+    answer: "Pilgrims returning from Jeddah (JED) or Madinah (MED) on Biman Bangladesh Airlines, Saudia, or scheduled carriers with a valid Umrah or Hajj visa are entitled to carry 1 official airport-sealed 5-liter carton of Zamzam water free of charge in addition to their standard checked baggage allowance."
+  },
+  {
+    question: "Which destinations require a free online Digital Arrival Card within 72 hours before flying from Dhaka?",
+    answer: "Before boarding at Dhaka Airport (DAC), travelers must submit official free digital arrival declarations within 72 hours of departure for Malaysia (MDAC), Singapore (SGAC via MyICA), the Maldives (IMUGA Traveller Declaration), and Thailand (TDAC), while Umrah pilgrims must register on the Saudi Visa Bio and Nusuk apps."
+  },
+  {
+    question: "What should a Bangladeshi citizen do if their passport is lost or stolen while traveling abroad?",
+    answer: "If your Bangladeshi passport is lost or stolen abroad, immediately file a local Police Report (GD) at the nearest police station and visit the Bangladesh Embassy or High Commission in Kathmandu, Bangkok, Kuala Lumpur, Singapore, Malé, Abu Dhabi/Dubai, or Riyadh/Jeddah with a copy of your lost passport and NID to receive an Emergency Travel Permit (Travel Pass) to fly back to Dhaka."
+  }
+];
+
 /**
  * Cleans plain text for Schema.org JSON-LD (removes HTML tags, trims whitespace).
  */
@@ -252,7 +283,7 @@ export function generateFaqSchema(
  * @param pageUrl Optional canonical URL of the page
  */
 export function getFaqSchemaForPage(
-  page: "flights" | "hotels" | "visa" | "costs" | "destinations" | "tools" | "contact" | "services",
+  page: "flights" | "hotels" | "visa" | "costs" | "destinations" | "tools" | "contact" | "services" | "sitemap" | "pre-departure",
   parameterId?: string,
   isLanding?: boolean,
   pageUrl?: string
@@ -336,6 +367,13 @@ export function getFaqSchemaForPage(
     case "services": {
       faqs = SERVICE_TRAVEL_SERVICES_FAQS;
       pageName = "International Travel Services (eSIM, Transfers, Activities) FAQs";
+      break;
+    }
+
+    case "sitemap":
+    case "pre-departure": {
+      faqs = PRE_DEPARTURE_SITEMAP_FAQS;
+      pageName = "Dhaka Airport (DAC) Pre-Departure Readiness, Baggage & Embassy Emergency Hub FAQs";
       break;
     }
 

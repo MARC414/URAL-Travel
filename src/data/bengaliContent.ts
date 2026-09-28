@@ -15,7 +15,7 @@ export const BENGALI_BLOG_OVERRIDES: Record<
     content: string;
     internalLinks: { text: string; path: string }[];
     affiliateCTA?: {
-      provider: "aviasales" | "klook" | "kiwitaxi" | "airalo" | "qeeq";
+      provider: "aviasales" | "klook" | "kkday" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp";
       headline: string;
       body: string;
     };

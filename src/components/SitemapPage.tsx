@@ -15,9 +15,14 @@ import {
   MapPin,
   AlertTriangle,
   BookOpen,
+  ChevronDown,
 } from "lucide-react";
 import { Language } from "../translations";
 import { getLocalizedBlogs } from "../data/bengaliContent";
+import {
+  getPreDepartureFaqSchema,
+  PRE_DEPARTURE_SITEMAP_FAQS,
+} from "../hooks/useSeoMeta";
 
 interface SitemapPageProps {
   onNavigate: (path: string) => void;
@@ -58,7 +63,7 @@ const PRE_DEPARTURE_CHECKLIST: ChecklistItem[] = [
       "ব্যাংক ব্রাঞ্চ থেকে পাসপোর্টে বার্ষিক $১২,০০০ কোটায় এন্ডোর্সমেন্ট সিল নিন এবং ব্যাংক অ্যাপ বা হেল্পলাইনে কল করে ফরেন ট্রানজেকশন চালু করুন।",
     actionLabelEn: "Read Card Endorsement Guide",
     actionLabelBn: "কার্ড এন্ডোর্সমেন্ট গাইড পড়ুন",
-    actionPath: "/blog?slug=dual-currency-card-endorsement-bangladesh",
+    actionPath: "/blog/dual-currency-card-endorsement-bangladesh",
   },
   {
     id: "usd-cash-carry",
@@ -97,7 +102,7 @@ const PRE_DEPARTURE_CHECKLIST: ChecklistItem[] = [
       "বেসরকারি চাকরিজীবীদের NOC ও অফিস আইডি, সরকারি কর্মীদের GO, ব্যবসায়ীদের ট্রেড লাইসেন্স কপি এবং নবদম্পতিদের নিকাহনামা সাথে রাখা জরুরি।",
     actionLabelEn: "Dhaka Immigration Checklist",
     actionLabelBn: "ঢাকা ইমিগ্রেশন চেকলিস্ট",
-    actionPath: "/blog?slug=dhaka-airport-outbound-immigration-checklist-noc-go",
+    actionPath: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go",
   },
   {
     id: "bank-solvency",
@@ -155,8 +160,8 @@ const EMBASSY_DIRECTORY = [
     phone: "+977-1-4372843",
     emergencyNoteEn: "Issues Emergency Travel Permits (Travel Pass) if passport is lost in Thamel/Pokhara.",
     emergencyNoteBn: "নেপালে পাসপোর্ট হারালে জরুরি ট্রাভেল পাস ইস্যু ও কনস্যুলার সহায়তা প্রদান করে।",
-    visaPath: "/visa?country=nepal-visa",
-    guidePath: "/destinations?country=nepal-guide",
+    visaPath: "/visa/nepal-visa",
+    guidePath: "/destinations/nepal-guide",
   },
   {
     countryEn: "Thailand (Bangkok)",
@@ -168,8 +173,8 @@ const EMBASSY_DIRECTORY = [
     phone: "+66-2-3905107",
     emergencyNoteEn: "Located near Sukhumvit/Ekamai; assists Bangladeshi tourists and medical patients at Bumrungrad/Bangkok Hospital.",
     emergencyNoteBn: "সুখুমভিত একামাই এলাকায় অবস্থিত; পর্যটক ও চিকিৎসা নিতে যাওয়া বাংলাদেশিদের জরুরি সহায়তা দেয়।",
-    visaPath: "/visa?country=thailand-visa",
-    guidePath: "/destinations?country=thailand-guide",
+    visaPath: "/visa/thailand-visa",
+    guidePath: "/destinations/thailand-guide",
   },
   {
     countryEn: "Malaysia (Kuala Lumpur)",
@@ -181,8 +186,8 @@ const EMBASSY_DIRECTORY = [
     phone: "+60-3-26040946",
     emergencyNoteEn: "Consular wing assists with emergency travel documents and KLIA immigration liaison.",
     emergencyNoteBn: "জরুরি পাসপোর্ট সহায়তা এবং কুয়ালালামপুরে অবস্থানরত বাংলাদেশি নাগরিকদের সেবা প্রদান করে।",
-    visaPath: "/visa?country=malaysia-visa",
-    guidePath: "/destinations?country=malaysia-guide",
+    visaPath: "/visa/malaysia-visa",
+    guidePath: "/destinations/malaysia-guide",
   },
   {
     countryEn: "Singapore",
@@ -194,8 +199,8 @@ const EMBASSY_DIRECTORY = [
     phone: "+65-62550075",
     emergencyNoteEn: "Walking distance from Bugis / Bencoolen MRT; fast consular support during weekday hours.",
     emergencyNoteBn: "বুগিস ও বেনকুলেন MRT-এর কাছে সানশাইন প্লাজায় অবস্থিত; দ্রুত কনস্যুলার সহায়তা পাওয়া যায়।",
-    visaPath: "/visa?country=singapore-visa",
-    guidePath: "/destinations?country=singapore-guide",
+    visaPath: "/visa/singapore-visa",
+    guidePath: "/destinations/singapore-guide",
   },
   {
     countryEn: "Maldives (Malé)",
@@ -207,8 +212,8 @@ const EMBASSY_DIRECTORY = [
     phone: "+960-3320859",
     emergencyNoteEn: "Central Malé location near ferry terminals; assists tourists traveling to Maafushi & Hulhumalé.",
     emergencyNoteBn: "মালে শহরের কেন্দ্রস্থলে অবস্থিত; মাফুশি ও হুলহুমালে ভ্রমণকারীদের জরুরি সহায়তা দেয়।",
-    visaPath: "/visa?country=maldives-visa",
-    guidePath: "/destinations?country=maldives-guide",
+    visaPath: "/visa/maldives-visa",
+    guidePath: "/destinations/maldives-guide",
   },
   {
     countryEn: "UAE (Dubai & Abu Dhabi)",
@@ -220,8 +225,8 @@ const EMBASSY_DIRECTORY = [
     phone: "+971-4-2388199",
     emergencyNoteEn: "Conveniently located in Deira for tourists staying near Al Rigga, Bur Dubai, and Downtown.",
     emergencyNoteBn: "দেইরা এলাকায় অবস্থিত; দুবাই ও উত্তর আমিরাতে ভ্রমণরত বাংলাদেশিদের জরুরি সেবা দেয়।",
-    visaPath: "/visa?country=dubai-visa",
-    guidePath: "/destinations?country=dubai-guide",
+    visaPath: "/visa/dubai-visa",
+    guidePath: "/destinations/dubai-guide",
   },
   {
     countryEn: "Saudi Arabia (Jeddah & Makkah)",
@@ -245,11 +250,11 @@ const COUNTRY_QUICK_MATRIX = [
     flag: "🇳🇵",
     taglineEn: "Free SAARC Visa on Arrival · 1h 30m flight",
     taglineBn: "ফ্রি অন-অ্যারাইভাল ভিসা · ১ ঘণ্টা ৩০ মিনিটের ফ্লাইট",
-    flightPath: "/flights?route=dhaka-kathmandu",
-    visaPath: "/visa?country=nepal-visa",
-    hotelPath: "/hotels?city=kathmandu-hotels",
-    planPath: "/destinations?country=nepal-guide",
-    costPath: "/costs?country=nepal-costs",
+    flightPath: "/flights/dhaka-kathmandu",
+    visaPath: "/visa/nepal-visa",
+    hotelPath: "/hotels/kathmandu-hotels",
+    planPath: "/destinations/nepal-guide",
+    costPath: "/costs/nepal-costs",
   },
   {
     countryEn: "Thailand",
@@ -257,11 +262,11 @@ const COUNTRY_QUICK_MATRIX = [
     flag: "🇹🇭",
     taglineEn: "Official e-Visa · Bangkok & Phuket islands",
     taglineBn: "অফিসিয়াল ই-ভিসা · ব্যাংকক, ফুকেট ও হালাল ডাইনিং",
-    flightPath: "/flights?route=dhaka-bangkok",
-    visaPath: "/visa?country=thailand-visa",
-    hotelPath: "/hotels?city=bangkok-hotels",
-    planPath: "/destinations?country=thailand-guide",
-    costPath: "/costs?country=thailand-costs",
+    flightPath: "/flights/dhaka-bangkok",
+    visaPath: "/visa/thailand-visa",
+    hotelPath: "/hotels/bangkok-hotels",
+    planPath: "/destinations/thailand-guide",
+    costPath: "/costs/thailand-costs",
   },
   {
     countryEn: "Malaysia",
@@ -269,11 +274,11 @@ const COUNTRY_QUICK_MATRIX = [
     flag: "🇲🇾",
     taglineEn: "Fast Online e-Visa · 100% Halal-friendly hub",
     taglineBn: "দ্রুত অনলাইন ই-ভিসা · ফ্যামিলি ও হালাল ফুড হাব",
-    flightPath: "/flights?route=dhaka-kuala-lumpur",
-    visaPath: "/visa?country=malaysia-visa",
-    hotelPath: "/hotels?city=kuala-lumpur-hotels",
-    planPath: "/destinations?country=malaysia-guide",
-    costPath: "/costs?country=malaysia-costs",
+    flightPath: "/flights/dhaka-kuala-lumpur",
+    visaPath: "/visa/malaysia-visa",
+    hotelPath: "/hotels/kuala-lumpur-hotels",
+    planPath: "/destinations/malaysia-guide",
+    costPath: "/costs/malaysia-costs",
   },
   {
     countryEn: "Singapore",
@@ -281,11 +286,11 @@ const COUNTRY_QUICK_MATRIX = [
     flag: "🇸🇬",
     taglineEn: "Authorized Agent e-Visa · Sentosa & Marina Bay",
     taglineBn: "অনুমোদিত এজেন্ট ভিসা · মেরিনা বে ও সেন্টোসা",
-    flightPath: "/flights?route=dhaka-singapore",
-    visaPath: "/visa?country=singapore-visa",
-    hotelPath: "/hotels?city=singapore-hotels",
-    planPath: "/destinations?country=singapore-guide",
-    costPath: "/costs?country=singapore-costs",
+    flightPath: "/flights/dhaka-singapore",
+    visaPath: "/visa/singapore-visa",
+    hotelPath: "/hotels/singapore-hotels",
+    planPath: "/destinations/singapore-guide",
+    costPath: "/costs/singapore-costs",
   },
   {
     countryEn: "Maldives",
@@ -293,11 +298,11 @@ const COUNTRY_QUICK_MATRIX = [
     flag: "🇲🇻",
     taglineEn: "Free 30-Day VOA · Maafushi & Water Villas",
     taglineBn: "ফ্রি ৩০ দিনের ভিসা · মাফুশি ও ওয়াটার ভিলা",
-    flightPath: "/flights?route=dhaka-maldives",
-    visaPath: "/visa?country=maldives-visa",
-    hotelPath: "/hotels?city=maldives-hotels",
-    planPath: "/destinations?country=maldives-guide",
-    costPath: "/costs?country=maldives-costs",
+    flightPath: "/flights/dhaka-maldives",
+    visaPath: "/visa/maldives-visa",
+    hotelPath: "/hotels/maldives-hotels",
+    planPath: "/destinations/maldives-guide",
+    costPath: "/costs/maldives-costs",
   },
   {
     countryEn: "Dubai & UAE",
@@ -305,17 +310,17 @@ const COUNTRY_QUICK_MATRIX = [
     flag: "🇦🇪",
     taglineEn: "Tourist e-Visa · Desert Safari & Burj Khalifa",
     taglineBn: "ট্যুরিস্ট ই-ভিসা · ডেজার্ট সাফারি ও বুর্জ খলিফা",
-    flightPath: "/flights?route=dhaka-dubai",
-    visaPath: "/visa?country=dubai-visa",
-    hotelPath: "/hotels?city=dubai-hotels",
-    planPath: "/destinations?country=dubai-guide",
-    costPath: "/costs?country=dubai-costs",
+    flightPath: "/flights/dhaka-dubai",
+    visaPath: "/visa/dubai-visa",
+    hotelPath: "/hotels/dubai-hotels",
+    planPath: "/destinations/dubai-guide",
+    costPath: "/costs/dubai-costs",
   },
 ];
 
 const STORAGE_KEY = "ural_dac_predeparture_checked_v1";
 
-export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en" }) => {
+export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en" as Language }) => {
   const isBn = lang === "bn";
 
   const [checkedIds, setCheckedIds] = useState<string[]>(() => {
@@ -329,8 +334,132 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
   });
 
   const [countrySearch, setCountrySearch] = useState("");
+  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
 
   const localizedBlogs = useMemo(() => getLocalizedBlogs(lang), [lang]);
+
+  const uncheckedChecklistItems = useMemo(
+    () =>
+      PRE_DEPARTURE_CHECKLIST.filter((item) => !checkedIds.includes(item.id)).map(
+        (item) => ({
+          title: isBn ? item.titleBn : item.titleEn,
+          detail: isBn ? item.detailBn : item.detailEn,
+          titleEn: item.titleEn,
+          detailEn: item.detailEn,
+        })
+      ),
+    [checkedIds, isBn]
+  );
+
+  const localizedPreDepartureFaqs = useMemo(() => {
+    const baseFaqs = [
+      {
+        questionEn: PRE_DEPARTURE_SITEMAP_FAQS[0].question,
+        answerEn: PRE_DEPARTURE_SITEMAP_FAQS[0].answer,
+        questionBn:
+          "ঢাকা এয়ারপোর্ট (DAC) ইমিগ্রেশনে বাংলাদেশি যাত্রীদের কী কী কাগজপত্র দেখাতে হয়?",
+        answerBn:
+          "হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর (DAC) দিয়ে বিদেশ ভ্রমণের সময় কমপক্ষে ৬ মাস মেয়াদী মূল পাসপোর্ট, প্রিন্টেড রিটার্ন এয়ার টিকেট, কনফার্মড হোটেল ভাউচার, বৈধ ভিসা বা ই-ভিসার কপি, পেশার প্রমাণপত্র (বেসরকারি চাকরিজীবীদের NOC ও অফিস আইডি, সরকারি কর্মীদের GO, ব্যবসায়ীদের ট্রেড লাইসেন্স বা স্টুডেন্ট আইডি) এবং পাসপোর্টে এন্ডোর্সকৃত ডুয়াল-কারেন্সি কার্ড বা নগদ মার্কিন ডলার সাথে রাখতে হয়।",
+      },
+      {
+        questionEn: PRE_DEPARTURE_SITEMAP_FAQS[1].question,
+        answerEn: PRE_DEPARTURE_SITEMAP_FAQS[1].answer,
+        questionBn:
+          "আন্তর্জাতিক ফ্লাইটের কত ঘণ্টা আগে ঢাকা এয়ারপোর্টে (DAC) পৌঁছানো উচিত?",
+        answerBn:
+          "চেক-ইন কাউন্টার, লাগেজ ড্রপ এবং ইমিগ্রেশন লাইনের ভিড় এড়াতে ফ্লাইট ছাড়ার নির্ধারিত সময়ের কমপক্ষে ৩.৫ থেকে ৪ ঘণ্টা আগে ঢাকা বিমানবন্দরের টার্মিনালে পৌঁছানো উচিত।",
+      },
+      {
+        questionEn: PRE_DEPARTURE_SITEMAP_FAQS[2].question,
+        answerEn: PRE_DEPARTURE_SITEMAP_FAQS[2].answer,
+        questionBn:
+          "ঢাকা এয়ারপোর্টে পাওয়ার ব্যাংক, ব্যাটারি ও কেবিন লাগেজের নিয়ম কী?",
+        answerBn:
+          "হ্যান্ড ক্যারিতে সর্বোচ্চ ৭ কেজি ওজন এবং ১০০ মি.লি.-এর কম বোতলে তরল পদার্থ বহন করা যায়। পাওয়ার ব্যাংক (সর্বোচ্চ ২০,০০০ mAh বা ১০০ Wh) এবং অতিরিক্ত লিথিয়াম ব্যাটারি কখনোই চেকড লাগেজে দেওয়া যাবে না—অবশ্যই হ্যান্ড ব্যাগে রাখতে হবে এবং গায়ে mAh ক্ষমতা স্পষ্টভাবে লেখা থাকতে হবে।",
+      },
+      {
+        questionEn: PRE_DEPARTURE_SITEMAP_FAQS[3].question,
+        answerEn: PRE_DEPARTURE_SITEMAP_FAQS[3].answer,
+        questionBn:
+          "বাংলাদেশি পাসপোর্টে বছরে কত ডলার এন্ডোর্স করা যায় এবং কাস্টমসে স্বর্ণ আনার সীমা কত?",
+        answerBn:
+          "বাংলাদেশ ব্যাংকের নিয়ম অনুযায়ী প্রাপ্তবয়স্ক যাত্রীরা বার্ষিক সর্বোচ্চ USD $১২,০০০ পর্যন্ত পাসপোর্টে এন্ডোর্স করে ডুয়াল-কারেন্সি কার্ড ও নগদ অর্থে বহন করতে পারেন। ফেরার সময় গ্রিন চ্যানেল দিয়ে শুল্কমুক্তভাবে সর্বোচ্চ ১০০ গ্রাম ব্যক্তিগত স্বর্ণালংকার এবং ২টি মোবাইল ফোন আনা যায়।",
+      },
+      {
+        questionEn: PRE_DEPARTURE_SITEMAP_FAQS[4].question,
+        answerEn: PRE_DEPARTURE_SITEMAP_FAQS[4].answer,
+        questionBn:
+          "ওমরাহ ও হজযাত্রীরা ঢাকা ফেরার সময় কতটুকু জমজম পানি বিনামূল্যে আনতে পারবেন?",
+        answerBn:
+          "জেদ্দা (JED) বা মদিনা (MED) এয়ারপোর্ট থেকে বিমান বাংলাদেশ, সৌদিয়া বা নির্ধারিত এয়ারলাইন্সে ফেরার সময় বৈধ ওমরাহ বা হজ ভিসাধারী প্রত্যেক যাত্রী মূল চেকড লাগেজের অতিরিক্ত হিসেবে বিনামূল্যে ১টি সিলকৃত ৫ লিটারের জমজম পানির কার্টন আনতে পারবেন।",
+      },
+      {
+        questionEn: PRE_DEPARTURE_SITEMAP_FAQS[5].question,
+        answerEn: PRE_DEPARTURE_SITEMAP_FAQS[5].answer,
+        questionBn:
+          "কোন কোন দেশে যাওয়ার আগে ৭২ ঘণ্টার মধ্যে অনলাইনে ফ্রি ডিজিটাল অ্যারাইভাল কার্ড পূরণ করতে হয়?",
+        answerBn:
+          "ঢাকা থেকে ফ্লাইটের ৭২ ঘণ্টা আগে মালয়েশিয়ার জন্য MDAC, সিঙ্গাপুরের জন্য SGAC (MyICA অ্যাপ), মালদ্বীপের জন্য IMUGA এবং থাইল্যান্ডের জন্য TDAC সরকারি ওয়েবসাইটে বিনামূল্যে পূরণ করতে হয়। এছাড়া ওমরাহ যাত্রীদের জন্য Saudi Visa Bio ও Nusuk অ্যাপ নিবন্ধন আবশ্যক।",
+      },
+      {
+        questionEn: PRE_DEPARTURE_SITEMAP_FAQS[6].question,
+        answerEn: PRE_DEPARTURE_SITEMAP_FAQS[6].answer,
+        questionBn:
+          "বিদেশে ভ্রমণকালে পাসপোর্ট হারিয়ে বা চুরি হয়ে গেলে করণীয় কী?",
+        answerBn:
+          "বিদেশে পাসপোর্ট হারালে সাথে সাথে নিকটস্থ পুলিশ স্টেশনে জিডি (Police Report) করুন এবং পাসপোর্ট ও এনআইডির ফটোকপি নিয়ে কাঠমান্ডু, ব্যাংকক, কুয়ালালামপুর, সিঙ্গাপুর, মালে, দুবাই বা জেদ্দায় অবস্থিত বাংলাদেশ দূতাবাসে যোগাযোগ করে দেশে ফেরার জন্য Emergency Travel Permit (Travel Pass) সংগ্রহ করুন।",
+      },
+    ];
+
+    const dynamicChecklistFaqs = uncheckedChecklistItems.slice(0, 2).map((item) => ({
+      questionEn: `Why is "${item.titleEn}" required before flying out of Dhaka Airport (DAC)?`,
+      answerEn: item.detailEn,
+      questionBn: `ঢাকা এয়ারপোর্টে ফ্লাইটের আগে "${item.title}" কেন জরুরি?`,
+      answerBn: item.detail,
+    }));
+
+    return [...baseFaqs, ...dynamicChecklistFaqs];
+  }, [uncheckedChecklistItems]);
+
+  // Dynamically synchronize the Schema.org FAQPage JSON-LD in document.head when checklist or country filter state updates
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const dynamicSchema = getPreDepartureFaqSchema({
+      url: "https://ural-travel.pages.dev/sitemap",
+      uncheckedChecklistItems: uncheckedChecklistItems.map((i) => ({
+        title: i.titleEn,
+        detail: i.detailEn,
+      })),
+      countryFilter: countrySearch.trim() || undefined,
+    });
+
+    const existingScripts = Array.from(
+      document.querySelectorAll('script[type="application/ld+json"][data-seo-schema="true"]')
+    );
+    existingScripts.forEach((el) => {
+      try {
+        const parsed = JSON.parse(el.textContent || "{}");
+        if (parsed && Array.isArray(parsed["@graph"])) {
+          const idx = parsed["@graph"].findIndex(
+            (n: Record<string, unknown>) => n && n["@type"] === "FAQPage"
+          );
+          const { "@context": _ctx, ...faqNode } = dynamicSchema as unknown as Record<string, unknown>;
+          faqNode["@id"] = "https://ural-travel.pages.dev/sitemap#faq";
+          faqNode["mainEntityOfPage"] = { "@id": "https://ural-travel.pages.dev/sitemap#webpage" };
+          if (idx >= 0) {
+            parsed["@graph"][idx] = faqNode;
+          } else {
+            parsed["@graph"].push(faqNode);
+          }
+          el.textContent = JSON.stringify(parsed);
+        } else if (parsed && parsed["@type"] === "FAQPage") {
+          el.textContent = JSON.stringify(dynamicSchema);
+        }
+      } catch {
+        // ignore parse errors
+      }
+    });
+  }, [uncheckedChecklistItems, countrySearch]);
 
   useEffect(() => {
     try {
@@ -920,7 +1049,74 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
         </div>
       </section>
 
-      {/* 6. COMPLETE CRAWLABLE HTML SITEMAP DIRECTORY (ALL 41 BLOG GUIDES & 42 HUBS) */}
+      {/* 6. DYNAMIC PRE-DEPARTURE READINESS & DHAKA AIRPORT (DAC) FAQS */}
+      <section
+        aria-labelledby="predeparture-faq-heading"
+        className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6"
+      >
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
+          <div className="space-y-1">
+            <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
+              {isBn
+                ? "❓ প্রি-ডিপার্চার ও ঢাকা এয়ারপোর্ট (DAC) সাধারণ জিজ্ঞাসা"
+                : "❓ PRE-FLIGHT READINESS & DHAKA AIRPORT (DAC) FAQS"}
+            </span>
+            <h2
+              id="predeparture-faq-heading"
+              className="font-serif text-xl sm:text-2xl font-bold text-slate-900"
+            >
+              {isBn
+                ? "ইমিগ্রেশন, লাগেজ, ডলার এন্ডোর্সমেন্ট ও জরুরি নিয়মাবলী (FAQ)"
+                : "Frequently Asked Questions Before Flying Out of Dhaka (DAC)"}
+            </h2>
+          </div>
+          <p className="text-xs text-slate-500">
+            {isBn
+              ? `আপনার চেকলিস্ট অগ্রগতি (${progressPct}%) অনুযায়ী ডায়নামিক প্রশ্নোত্তর সংযুক্ত`
+              : `Dynamically tailored to your pre-flight checklist (${progressPct}% complete)`}
+          </p>
+        </div>
+
+        <div className="divide-y divide-slate-200 border border-slate-200 rounded-2xl overflow-hidden">
+          {localizedPreDepartureFaqs.map((faq, idx) => {
+            const isOpen = openFaqIdx === idx;
+            return (
+              <div key={faq.questionEn} className="bg-white">
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  aria-controls={`predeparture-faq-answer-${idx}`}
+                  id={`predeparture-faq-trigger-${idx}`}
+                  onClick={() => setOpenFaqIdx((prev) => (prev === idx ? null : idx))}
+                  className="w-full min-h-[52px] px-5 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#102A43]"
+                >
+                  <span className="text-sm font-bold text-slate-900 leading-snug">
+                    {isBn ? faq.questionBn : faq.questionEn}
+                  </span>
+                  <ChevronDown
+                    size={16}
+                    className={`shrink-0 text-slate-400 transition-transform duration-200 ${
+                      isOpen ? "rotate-180 text-[#102A43]" : ""
+                    }`}
+                  />
+                </button>
+                {isOpen && (
+                  <div
+                    id={`predeparture-faq-answer-${idx}`}
+                    role="region"
+                    aria-labelledby={`predeparture-faq-trigger-${idx}`}
+                    className="px-5 pb-4 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50/50"
+                  >
+                    {isBn ? faq.answerBn : faq.answerEn}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 7. COMPLETE CRAWLABLE HTML SITEMAP DIRECTORY (ALL 41 BLOG GUIDES & 42 HUBS) */}
       <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
         <div className="space-y-1">
           <span className="text-xs font-mono font-bold text-[#102A43] uppercase tracking-wider block">
@@ -945,7 +1141,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"
         >
           {localizedBlogs.map((post, idx) => {
-            const href = `/blog?slug=${post.slug}`;
+            const href = `/blog/${post.slug}`;
             return (
               <a
                 key={post.slug}

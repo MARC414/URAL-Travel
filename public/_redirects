@@ -1,4 +1,22 @@
-/sitemap.xml  /sitemap.xml  200
-/rss.xml      /rss.xml      200
-/robots.txt   /robots.txt   200
-/*            /index.html   200
+# Static SEO & Social Assets
+/sitemap.xml   /sitemap.xml   200
+/rss.xml       /rss.xml       200
+/robots.txt    /robots.txt    200
+/og-image.jpg  /og-image.jpg  200
+
+# Canonical 301 Redirects for Duplicate Alias Routes
+/hajj           /umrah        301
+/attractions    /experiences  301
+/pre-departure  /sitemap      301
+/indexing       /sitemap      301
+
+# Legacy Query-String to Clean Path 301 Redirects
+/flights        route=:route        /flights/:route         301
+/hotels         city=:city          /hotels/:city           301
+/visa           country=:country    /visa/:country          301
+/destinations   country=:country    /destinations/:country  301
+/costs          country=:country    /costs/:country         301
+/blog           slug=:slug          /blog/:slug             301
+
+# SPA Catch-All Fallback
+/*              /index.html   200

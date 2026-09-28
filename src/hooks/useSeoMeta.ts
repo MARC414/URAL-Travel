@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
   generateFaqSchema,
   getFaqSchemaForPage,
@@ -10,10 +10,23 @@ import {
   LANDING_HOTEL_FAQS,
   LANDING_VISA_FAQS,
   LANDING_COST_FAQS,
+  PRE_DEPARTURE_SITEMAP_FAQS,
   type FAQItem,
   type SchemaQuestion,
   type FaqPageSchema,
 } from "../utils/faqSchema";
+import {
+  breadcrumbSchema,
+  webPageSchema,
+  articleSchema,
+  touristTripSchema,
+  serviceSchema,
+  productOfferSchema,
+  collectionPageSchema,
+  buildSchemaGraph,
+  toIsoDate,
+  parseAuthor,
+} from "../utils/schema";
 
 export interface SeoMetaProps {
   title: string;
@@ -21,6 +34,8 @@ export interface SeoMetaProps {
   schema?: object | object[];
   breadcrumbs?: { name: string; url: string }[];
   faqs?: { question: string; answer: string }[];
+  imageUrl?: string;
+  inLanguage?: string;
 }
 
 /**
@@ -83,6 +98,75 @@ export function getHajjUmrahFaqSchema(
     name,
     description:
       "Verified answers on Saudi Umrah e-Visa rules, Nusuk Rawdah permits, official Bangladesh Hajj registration (hajj.gov.bd), DIY BDT cost breakdowns, Haramain High-Speed Train booking, and Makkah/Madinah hotel zones.",
+  });
+}
+
+export interface PreDepartureFaqSchemaOptions {
+  url?: string;
+  name?: string;
+  description?: string;
+  uncheckedChecklistItems?: Array<{ title: string; detail: string }>;
+  countryFilter?: string;
+  additionalFaqs?: Array<{ question: string; answer: string }>;
+}
+
+/**
+ * Dynamically generates a Schema.org FAQPage JSON-LD object for the
+ * Sitemap & Dhaka Airport (DAC) Pre-Departure Readiness Hub (/sitemap, /pre-departure).
+ * Combines core pre-flight readiness FAQs with dynamic checklist/country context when provided.
+ */
+export function getPreDepartureFaqSchema(
+  options?: PreDepartureFaqSchemaOptions
+): FaqPageSchema {
+  const url = options?.url || "https://ural-travel.pages.dev/sitemap";
+  const name =
+    options?.name ||
+    "Dhaka Airport (DAC) Pre-Departure Readiness, Baggage & Embassy Emergency Hub FAQs";
+  const description =
+    options?.description ||
+    "Verified pre-flight readiness answers for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC): immigration documents, NOC/GO rules, $12,000 card endorsement, 7 kg cabin & 20,000 mAh power bank limits, 5L Zamzam allowance, 72-hour digital arrival cards, and overseas Bangladesh Embassy emergency helplines.";
+
+  const dynamicItems: FAQItem[] = [...PRE_DEPARTURE_SITEMAP_FAQS];
+
+  if (
+    options?.uncheckedChecklistItems &&
+    options.uncheckedChecklistItems.length > 0
+  ) {
+    options.uncheckedChecklistItems.slice(0, 3).forEach((item) => {
+      const q = `Why is "${item.title}" required before flying out of Dhaka Airport (DAC)?`;
+      const alreadyExists = dynamicItems.some(
+        (existing) => existing.question.toLowerCase() === q.toLowerCase()
+      );
+      if (!alreadyExists && item.detail) {
+        dynamicItems.push({
+          question: q,
+          answer: item.detail,
+        });
+      }
+    });
+  }
+
+  if (options?.additionalFaqs && options.additionalFaqs.length > 0) {
+    options.additionalFaqs.forEach((faq) => {
+      if (
+        faq.question &&
+        faq.answer &&
+        !dynamicItems.some(
+          (existing) =>
+            existing.question.toLowerCase() === faq.question.toLowerCase()
+        )
+      ) {
+        dynamicItems.push(faq);
+      }
+    });
+  }
+
+  return generateFAQSchema(dynamicItems, {
+    url,
+    name: options?.countryFilter
+      ? `${name} (${options.countryFilter})`
+      : name,
+    description,
   });
 }
 
@@ -179,13 +263,17 @@ export function useSeoMeta({
   schema,
   breadcrumbs,
   faqs,
+  imageUrl,
+  inLanguage = "en-BD",
 }: SeoMetaProps) {
   const schemaStr = safeStringify(schema);
   const breadcrumbsStr = safeStringify(breadcrumbs);
   const faqsStr = safeStringify(faqs);
+  const lastTrackedCanonicalRef = useRef<string | null>(null);
 
-  // Derive canonical URL inside the hook to strictly match public/sitemap.xml
+  // Derive clean path-based canonical URL to strictly match prerendered static files & sitemap.xml
   let canonicalUrl = "https://ural-travel.pages.dev/";
+  let cleanPathTarget: string | null = null;
   if (typeof window !== "undefined") {
     const pathname = window.location.pathname;
     const searchParams = new URLSearchParams(window.location.search);
@@ -197,33 +285,51 @@ export function useSeoMeta({
     if (rootSection === "flights") {
       const routeId = searchParams.get("route") || subSegment;
       canonicalUrl = routeId
-        ? `${baseUrl}/flights?route=${routeId}`
+        ? `${baseUrl}/flights/${routeId}`
         : `${baseUrl}/flights`;
+      if (searchParams.has("route") && routeId) {
+        cleanPathTarget = `/flights/${routeId}`;
+      }
     } else if (rootSection === "hotels") {
       const cityId = searchParams.get("city") || subSegment;
       canonicalUrl = cityId
-        ? `${baseUrl}/hotels?city=${cityId}`
+        ? `${baseUrl}/hotels/${cityId}`
         : `${baseUrl}/hotels`;
+      if (searchParams.has("city") && cityId) {
+        cleanPathTarget = `/hotels/${cityId}`;
+      }
     } else if (rootSection === "visa") {
       const countryId = searchParams.get("country") || subSegment;
       canonicalUrl = countryId
-        ? `${baseUrl}/visa?country=${countryId}`
+        ? `${baseUrl}/visa/${countryId}`
         : `${baseUrl}/visa`;
+      if (searchParams.has("country") && countryId) {
+        cleanPathTarget = `/visa/${countryId}`;
+      }
     } else if (rootSection === "destinations") {
       const countryId = searchParams.get("country") || subSegment;
       canonicalUrl = countryId
-        ? `${baseUrl}/destinations?country=${countryId}`
+        ? `${baseUrl}/destinations/${countryId}`
         : `${baseUrl}/destinations`;
+      if (searchParams.has("country") && countryId) {
+        cleanPathTarget = `/destinations/${countryId}`;
+      }
     } else if (rootSection === "costs") {
       const countryId = searchParams.get("country") || subSegment;
       canonicalUrl = countryId
-        ? `${baseUrl}/costs?country=${countryId}`
+        ? `${baseUrl}/costs/${countryId}`
         : `${baseUrl}/costs`;
+      if (searchParams.has("country") && countryId) {
+        cleanPathTarget = `/costs/${countryId}`;
+      }
     } else if (rootSection === "blog") {
       const slugId = searchParams.get("slug") || subSegment;
       canonicalUrl = slugId
-        ? `${baseUrl}/blog?slug=${slugId}`
+        ? `${baseUrl}/blog/${slugId}`
         : `${baseUrl}/blog`;
+      if (searchParams.has("slug") && slugId) {
+        cleanPathTarget = `/blog/${slugId}`;
+      }
     } else if (rootSection === "pre-departure" || rootSection === "sitemap") {
       canonicalUrl = `${baseUrl}/sitemap`;
     } else if (rootSection === "attractions" || rootSection === "experiences") {
@@ -238,8 +344,30 @@ export function useSeoMeta({
   }
 
   useEffect(() => {
+    // 0. Upgrade legacy query-string URLs (?slug=, ?route=, etc.) to clean path URLs in place
+    if (typeof window !== "undefined" && cleanPathTarget) {
+      window.history.replaceState({}, "", cleanPathTarget);
+    }
+
     // 1. Update Title & Meta Description
     document.title = title;
+
+    // 1a. Notify Google tag (G-2EWKHC1KE1) on client-side SPA route changes (skipping initial load already tracked by index.html)
+    if (typeof window !== "undefined") {
+      if (lastTrackedCanonicalRef.current === null) {
+        lastTrackedCanonicalRef.current = canonicalUrl;
+      } else if (lastTrackedCanonicalRef.current !== canonicalUrl) {
+        lastTrackedCanonicalRef.current = canonicalUrl;
+        const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+        if (typeof w.gtag === "function") {
+          w.gtag("config", "G-2EWKHC1KE1", {
+            page_title: title,
+            page_location: canonicalUrl,
+            page_path: window.location.pathname + window.location.search,
+          });
+        }
+      }
+    }
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
       metaDesc = document.createElement("meta");
@@ -303,7 +431,7 @@ export function useSeoMeta({
     }
     twitterTitle.setAttribute("content", title);
 
-    // 5. Set/Update og:description & twitter:description Meta Tags
+    // 5. Set/Update og:description, twitter:description & og:image Meta Tags
     let ogDesc = document.querySelector('meta[property="og:description"]');
     if (!ogDesc) {
       ogDesc = document.createElement("meta");
@@ -320,62 +448,115 @@ export function useSeoMeta({
     }
     twitterDesc.setAttribute("content", description);
 
-    // 6. JSON-LD Schema Script Updates
+    const resolvedImage = imageUrl || "https://ural-travel.pages.dev/og-image.jpg";
+    let ogImg = document.querySelector('meta[property="og:image"]');
+    if (!ogImg) {
+      ogImg = document.createElement("meta");
+      ogImg.setAttribute("property", "og:image");
+      document.head.appendChild(ogImg);
+    }
+    ogImg.setAttribute("content", resolvedImage);
+
+    let twitterImg = document.querySelector('meta[name="twitter:image"]');
+    if (!twitterImg) {
+      twitterImg = document.createElement("meta");
+      twitterImg.setAttribute("name", "twitter:image");
+      document.head.appendChild(twitterImg);
+    }
+    twitterImg.setAttribute("content", resolvedImage);
+
+    // 6. Consolidated @graph JSON-LD Schema Script Update
     document
       .querySelectorAll('script[data-seo-schema="true"]')
       .forEach((el) => el.remove());
 
-    const hasSchema = Boolean(schema);
-    const hasBreadcrumbs = Boolean(breadcrumbs && breadcrumbs.length > 0);
-    const hasFaqs = Boolean(faqs && faqs.length > 0);
+    const graphNodes: Record<string, unknown>[] = [];
 
-    if (hasSchema || hasBreadcrumbs || hasFaqs) {
-      const schemas: object[] = [];
-
-      if (schema) {
-        if (Array.isArray(schema)) {
-          schemas.push(...schema);
+    // Always include a WebPage node unless schema already provides a CollectionPage/WebPage
+    const rawSchemas: Record<string, unknown>[] = [];
+    if (schema) {
+      if (Array.isArray(schema)) {
+        schema.forEach((s) => {
+          if (s && typeof s === "object") {
+            const obj = s as Record<string, unknown>;
+            if (Array.isArray(obj["@graph"])) {
+              rawSchemas.push(...(obj["@graph"] as Record<string, unknown>[]));
+            } else {
+              const { "@context": _ctx, ...rest } = obj;
+              rawSchemas.push(rest);
+            }
+          }
+        });
+      } else if (typeof schema === "object") {
+        const obj = schema as Record<string, unknown>;
+        if (Array.isArray(obj["@graph"])) {
+          rawSchemas.push(...(obj["@graph"] as Record<string, unknown>[]));
         } else {
-          schemas.push(schema);
+          const { "@context": _ctx, ...rest } = obj;
+          rawSchemas.push(rest);
         }
       }
+    }
 
-      if (faqs && faqs.length > 0) {
-        const faqSchemaObj = generateFAQSchema(faqs, {
+    const hasWebPageNode = rawSchemas.some(
+      (n) => n["@type"] === "WebPage" || n["@type"] === "CollectionPage"
+    );
+
+    if (!hasWebPageNode) {
+      graphNodes.push(
+        webPageSchema({
           url: canonicalUrl,
           name: title,
-        });
-        if (faqSchemaObj.mainEntity.length > 0) {
-          schemas.push(faqSchemaObj);
-        }
-      }
-
-      if (breadcrumbs && breadcrumbs.length > 0) {
-        schemas.push({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: breadcrumbs.map((crumb, idx) => ({
-            "@type": "ListItem",
-            position: idx + 1,
-            name: crumb.name,
-            item: crumb.url,
-          })),
-        });
-      }
-
-      schemas.forEach((s) => {
-        try {
-          const script = document.createElement("script");
-          script.type = "application/ld+json";
-          script.setAttribute("data-seo-schema", "true");
-          script.textContent = safeStringify(s);
-          document.head.appendChild(script);
-        } catch (e) {
-          console.error("Failed to inject schema:", e);
-        }
-      });
+          description,
+          imageUrl: resolvedImage,
+          inLanguage,
+          hasBreadcrumb: Boolean(breadcrumbs && breadcrumbs.length > 0),
+        })
+      );
     }
-  }, [title, description, schemaStr, breadcrumbsStr, faqsStr, canonicalUrl]);
+
+    graphNodes.push(...rawSchemas);
+
+    if (faqs && faqs.length > 0) {
+      const faqSchemaObj = generateFAQSchema(faqs, {
+        url: canonicalUrl,
+        name: title,
+      });
+      if (faqSchemaObj.mainEntity.length > 0) {
+        const { "@context": _ctx, ...faqNode } = faqSchemaObj as unknown as Record<string, unknown>;
+        faqNode["@id"] = `${canonicalUrl}#faq`;
+        faqNode["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+        faqNode["inLanguage"] = inLanguage;
+        graphNodes.push(faqNode);
+      }
+    }
+
+    if (breadcrumbs && breadcrumbs.length > 0) {
+      graphNodes.push(breadcrumbSchema(canonicalUrl, breadcrumbs));
+    }
+
+    if (graphNodes.length > 0) {
+      try {
+        const script = document.createElement("script");
+        script.type = "application/ld+json";
+        script.setAttribute("data-seo-schema", "true");
+        script.textContent = safeStringify(buildSchemaGraph(graphNodes, false));
+        document.head.appendChild(script);
+      } catch (e) {
+        console.error("Failed to inject schema:", e);
+      }
+    }
+  }, [
+    title,
+    description,
+    schemaStr,
+    breadcrumbsStr,
+    faqsStr,
+    canonicalUrl,
+    cleanPathTarget,
+    imageUrl,
+    inLanguage,
+  ]);
 }
 
 export {
@@ -389,6 +570,17 @@ export {
   LANDING_HOTEL_FAQS,
   LANDING_VISA_FAQS,
   LANDING_COST_FAQS,
+  PRE_DEPARTURE_SITEMAP_FAQS,
+  breadcrumbSchema,
+  webPageSchema,
+  articleSchema,
+  touristTripSchema,
+  serviceSchema,
+  productOfferSchema,
+  collectionPageSchema,
+  buildSchemaGraph,
+  toIsoDate,
+  parseAuthor,
   type FAQItem,
   type SchemaQuestion,
   type FaqPageSchema,

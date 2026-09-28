@@ -1,5 +1,32 @@
 User-agent: *
 Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+# Explicitly allow Search & AI Answer Engine Crawlers (AEO / GEO)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
 
 Sitemap: https://ural-travel.pages.dev/sitemap.xml
-Sitemap: https://ural-travel.pages.dev/rss.xml
