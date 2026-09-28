@@ -446,10 +446,11 @@ export function TravelpayoutsOnboarding() {
                 {/* Slider 1: Referral invitees */}
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-slate-700">Friends invited & active:</span>
+                    <label htmlFor="tp-referral-count-range" className="font-bold text-slate-700">Friends invited & active:</label>
                     <span className="font-mono bg-indigo-50 text-brand-navy px-2.5 py-0.5 rounded font-black">{referralCount} Bloggers</span>
                   </div>
                   <input
+                    id="tp-referral-count-range"
                     type="range"
                     min="1"
                     max="20"
@@ -467,10 +468,11 @@ export function TravelpayoutsOnboarding() {
                 {/* Slider 2: Average monthly earnings of invitee */}
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-slate-700">Their average monthly affiliate earnings:</span>
+                    <label htmlFor="tp-monthly-earnings-range" className="font-bold text-slate-700">Their average monthly affiliate earnings:</label>
                     <span className="font-mono bg-indigo-50 text-brand-navy px-2.5 py-0.5 rounded font-black">${averageMonthlyEarnings}/mo</span>
                   </div>
                   <input
+                    id="tp-monthly-earnings-range"
                     type="range"
                     min="50"
                     max="1500"

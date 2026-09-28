@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState, useMemo, useId } from 'react';
 import {
   Plane,
   Search,
@@ -844,6 +844,12 @@ export default function TravelpayoutsWidget({
   defaultDestination = 'KTM',
   showQuickRoutes = true,
 }) {
+  const instanceId = useId();
+  const originInputId = `${instanceId}-origin-input`;
+  const destInputId = `${instanceId}-dest-input`;
+  const departDateId = `${instanceId}-depart-date`;
+  const returnDateId = `${instanceId}-return-date`;
+
   const [originInfo, setOriginInfo] = useState(() => findAirportInfo(defaultOrigin));
   const [destInfo, setDestInfo] = useState(() => findAirportInfo(defaultDestination));
 
@@ -1284,7 +1290,10 @@ export default function TravelpayoutsWidget({
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-stretch">
           {/* FROM AIRPORT */}
           <div className="md:col-span-3 relative">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+            <label
+              htmlFor={originInputId}
+              className="block text-[11px] font-semibold text-slate-500 mb-1"
+            >
               From (Origin City or Airport)
             </label>
             <div
@@ -1298,6 +1307,7 @@ export default function TravelpayoutsWidget({
               <div className="flex items-center justify-between gap-2">
                 <div className="min-w-0 flex-1">
                   <input
+                    id={originInputId}
                     type="text"
                     value={
                       activeDropdown === 'origin'
@@ -1368,7 +1378,10 @@ export default function TravelpayoutsWidget({
             </button>
 
             <div className="flex items-center justify-between mb-1">
-              <label className="block text-[11px] font-semibold text-slate-500">
+              <label
+                htmlFor={destInputId}
+                className="block text-[11px] font-semibold text-slate-500"
+              >
                 To (Destination City or Airport)
               </label>
               <button
@@ -1391,6 +1404,7 @@ export default function TravelpayoutsWidget({
               <div className="flex items-center justify-between gap-2">
                 <div className="min-w-0 flex-1">
                   <input
+                    id={destInputId}
                     type="text"
                     value={
                       activeDropdown === 'dest'
@@ -1452,11 +1466,15 @@ export default function TravelpayoutsWidget({
           {/* DEPARTURE & RETURN DATES */}
           <div className="md:col-span-4 grid grid-cols-2 gap-2">
             <div>
-              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+              <label
+                htmlFor={departDateId}
+                className="block text-[11px] font-semibold text-slate-500 mb-1"
+              >
                 Departure Date
               </label>
               <div className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 flex flex-col justify-center">
                 <input
+                  id={departDateId}
                   type="date"
                   value={departDate}
                   onChange={(e) => {
@@ -1475,12 +1493,16 @@ export default function TravelpayoutsWidget({
             </div>
 
             <div>
-              <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+              <label
+                htmlFor={tripType === 'roundtrip' ? returnDateId : undefined}
+                className="block text-[11px] font-semibold text-slate-500 mb-1"
+              >
                 {tripType === 'roundtrip' ? 'Return Date' : 'Trip Mode'}
               </label>
               {tripType === 'roundtrip' ? (
                 <div className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 flex flex-col justify-center">
                   <input
+                    id={returnDateId}
                     type="date"
                     value={returnDate}
                     min={departDate}

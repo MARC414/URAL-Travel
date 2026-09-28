@@ -173,7 +173,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     description:
       "Compare flight prices from Dhaka to Nepal, Thailand, Malaysia and Dubai, check visa requirements step by step, and plan your trip budget in BDT.",
     imageUrl: defaultOgImage,
-    lcpImageUrl: `${BASE_URL}/assets/images/clouds_boat_hero_1781438671378-1200.webp`,
+    lcpImageUrl: `/assets/images/clouds_boat_hero_1781438671378-1200.webp`,
     lcpImageSizes: "100vw",
     breadcrumbs: [{ name: "Home", url: `${BASE_URL}/` }],
     extraGraphNodes: [homeFaq],
@@ -200,7 +200,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     description:
       "Plan Umrah from Dhaka with a BDT cost framework, Saudi visa and Nusuk guidance, Makkah–Madinah travel options, and a practical preparation checklist.",
     imageUrl: defaultOgImage,
-    lcpImageUrl: `${BASE_URL}/assets/images/umrah_makkah_haram_guide_1790430007679-1200.webp`,
+    lcpImageUrl: `/assets/images/umrah_makkah_haram_guide_1790430007679-1200.webp`,
     lcpImageSizes: "100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
@@ -826,7 +826,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     title: blogHubTitle,
     description: blogHubDesc,
     imageUrl: defaultOgImage,
-    lcpImageUrl: `${BASE_URL}/assets/images/blog_editorial_hero_banner_1790429994056-1200.webp`,
+    lcpImageUrl: `/assets/images/blog_editorial_hero_banner_1790429994056-1200.webp`,
     lcpImageSizes: "100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
@@ -862,7 +862,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     const postUrl = `${BASE_URL}/blog/${post.slug}`;
     const postImageFileName =
       BLOG_IMAGE_MAP[post.slug] || "ural_hero_bg_1781543111624.jpg";
-    const postLcpImageUrl = `${BASE_URL}/assets/images/${postImageFileName.replace(/\.jpg$/, "-1200.webp")}`;
+    const postLcpImageUrl = `/assets/images/${postImageFileName.replace(/\.jpg$/, "-1200.webp")}`;
     const postImgUrl = `${BASE_URL}/img/blog/${post.slug}.jpg`;
     const title = `${post.title} | URAL Travel Blog`;
     const description = post.summary;
@@ -1020,10 +1020,14 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
 
     const fullGraphJson = JSON.stringify(buildSchemaGraph(graphNodes, false));
     const lcpImagePreload = r.lcpImageUrl
-      ? `  <link rel="preload" as="image" type="image/webp" href="${escapeHtml(r.lcpImageUrl)}" imagesrcset="${escapeHtml(`${r.lcpImageUrl.replace(/-1200\.webp$/, "-640.webp")} 640w, ${r.lcpImageUrl} 1200w`)}" imagesizes="${escapeHtml(r.lcpImageSizes || "100vw")}" fetchpriority="high" />\n`
+      ? `    <link rel="preload" as="image" type="image/webp" href="${escapeHtml(r.lcpImageUrl)}" imagesrcset="${escapeHtml(`${r.lcpImageUrl.replace(/-1200\.webp$/, "-640.webp")} 640w, ${r.lcpImageUrl} 1200w`)}" imagesizes="${escapeHtml(r.lcpImageSizes || "100vw")}" fetchpriority="high" />\n`
       : "";
 
     let pageHtml = templateHtml
+      .replace(
+        /\s*<link rel="preload" as="image"[^>]*\/>\n?/,
+        lcpImagePreload ? `\n${lcpImagePreload}` : "\n"
+      )
       .replace(
         /<title>[\s\S]*?<\/title>/,
         `<title>${escapeHtml(r.title)}</title>`
@@ -1070,7 +1074,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       )
       .replace(
         "</head>",
-        `${lcpImagePreload}  <script type="application/ld+json" data-seo-schema="true">${fullGraphJson}</script>\n  </head>`
+        `  <script type="application/ld+json" data-seo-schema="true">${fullGraphJson}</script>\n  </head>`
       );
 
     if (r.routePath !== "/") {
@@ -1080,12 +1084,15 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       );
     }
 
-    const outDir =
-      r.routePath === "/"
-        ? DIST_DIR
-        : path.join(DIST_DIR, ...r.routePath.split("/").filter(Boolean));
-    fs.mkdirSync(outDir, { recursive: true });
-    fs.writeFileSync(path.join(outDir, "index.html"), pageHtml, "utf8");
+    if (r.routePath === "/") {
+      fs.writeFileSync(path.join(DIST_DIR, "index.html"), pageHtml, "utf8");
+    } else {
+      const segments = r.routePath.split("/").filter(Boolean);
+      const fileName = `${segments.pop()}.html`;
+      const outDir = path.join(DIST_DIR, ...segments);
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(path.join(outDir, fileName), pageHtml, "utf8");
+    }
   }
 }
 

@@ -186,7 +186,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                   href="https://wa.me/8801784385335?text=Assalamu%20Alaikum%20URAL%2C%20I%20want%20help%20planning%20my%20Umrah%20trip%20in%20BDT!"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition-colors inline-flex items-center gap-2"
+                  className="bg-brand-emerald hover:bg-brand-emerald/90 text-white font-bold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition-colors inline-flex items-center gap-2"
                 >
                   <span>
                     {isBn
@@ -333,7 +333,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                     href="https://wa.me/8801784385335?text=Assalamu%20Alaikum%20URAL%2C%20I%20want%20a%20custom%20Umrah%20quote%20in%20BDT%20(Visa%20%2B%20Flight%20%2B%20Hotels)."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5"
+                    className="w-full bg-brand-emerald hover:bg-brand-emerald/90 text-white font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5"
                   >
                     <span>
                       {isBn
@@ -427,12 +427,13 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             </h3>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-2">
+              <label htmlFor="umrah-pilgrims-range" className="block text-xs font-bold text-slate-700 mb-2">
                 {isBn
                   ? `১. ওমরাহ যাত্রীর সংখ্যা: ${pilgrims} জন (${roomsNeeded}টি রুম)`
                   : `1. Number of Pilgrims: ${pilgrims} (${roomsNeeded} Double/Family Room${roomsNeeded > 1 ? "s" : ""})`}
               </label>
               <input
+                id="umrah-pilgrims-range"
                 type="range"
                 min={1}
                 max={8}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useId } from "react";
 import {
   Car,
   Calendar,
@@ -118,6 +118,13 @@ interface WelcomePickupsEmbedProps {
 }
 
 export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePickupsEmbedProps) {
+  const instanceId = useId();
+  const arrivalAirportId = `${instanceId}-arrival-airport`;
+  const destinationHotelId = `${instanceId}-destination-hotel`;
+  const flightNumberId = `${instanceId}-flight-number`;
+  const pickupDateId = `${instanceId}-pickup-date`;
+  const travelersVehicleId = `${instanceId}-travelers-vehicle`;
+
   const resolveInitialPreset = (cName: string): RoutePreset => {
     const lower = cName.toLowerCase();
     if (lower.includes("malaysia") || lower.includes("kuala")) return TRANSFER_ROUTES[1];
@@ -255,10 +262,14 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Airport Pickup */}
           <div>
-            <label className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1">
+            <label
+              htmlFor={arrivalAirportId}
+              className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1"
+            >
               <MapPin size={11} className="text-brand-navy" /> Arrival Airport
             </label>
             <select
+              id={arrivalAirportId}
               value={selectedRouteId}
               onChange={(e) => handleRouteChange(e.target.value)}
               className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 font-medium focus:outline-none focus:border-brand-navy transition-colors cursor-pointer"
@@ -273,10 +284,14 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
 
           {/* Drop-off Hotel / District */}
           <div>
-            <label className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1">
+            <label
+              htmlFor={destinationHotelId}
+              className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1"
+            >
               <MapPin size={11} className="text-brand-emerald" /> Destination Hotel / Area
             </label>
             <input
+              id={destinationHotelId}
               type="text"
               value={hotelAddress}
               onChange={(e) => setHotelAddress(e.target.value)}
@@ -289,10 +304,14 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
           {/* Flight Number + Arrival Date */}
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <label className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1">
+              <label
+                htmlFor={flightNumberId}
+                className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1"
+              >
                 <Plane size={11} className="text-brand-navy" /> Flight #
               </label>
               <input
+                id={flightNumberId}
                 type="text"
                 value={flightNumber}
                 onChange={(e) => setFlightNumber(e.target.value)}
@@ -301,10 +320,14 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
               />
             </div>
             <div>
-              <label className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1">
+              <label
+                htmlFor={pickupDateId}
+                className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1"
+              >
                 <Calendar size={11} className="text-brand-navy" /> Date
               </label>
               <input
+                id={pickupDateId}
                 type="date"
                 value={pickupDate}
                 onChange={(e) => setPickupDate(e.target.value)}
@@ -316,10 +339,14 @@ export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePick
 
           {/* Passengers & Vehicle Type */}
           <div>
-            <label className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1">
+            <label
+              htmlFor={travelersVehicleId}
+              className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1"
+            >
               <Users size={11} className="text-brand-navy" /> Travelers & Vehicle
             </label>
             <select
+              id={travelersVehicleId}
               value={passengers}
               onChange={(e) => handlePassengerChange(Number(e.target.value))}
               className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 font-medium focus:outline-none focus:border-brand-navy transition-colors cursor-pointer"

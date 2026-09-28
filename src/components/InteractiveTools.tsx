@@ -203,7 +203,7 @@ export function InteractiveTools() {
                 <h5 className="text-xs font-black text-slate-500 uppercase tracking-wider font-mono">1. Trip Parameters</h5>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Target Destination</label>
+                  <label htmlFor="calc-dest-select" className="block text-xs font-semibold text-slate-700 mb-1">Target Destination</label>
                   <select
                     id="calc-dest-select"
                     value={calcCountry}
@@ -218,7 +218,7 @@ export function InteractiveTools() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Duration of Trip ({calcDays} Days)</label>
+                  <label htmlFor="calc-days-range" className="block text-xs font-semibold text-slate-700 mb-1">Duration of Trip ({calcDays} Days)</label>
                   <input
                     id="calc-days-range"
                     type="range"
@@ -236,7 +236,7 @@ export function InteractiveTools() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Companions ({calcPeeps} {calcPeeps === 1 ? "Person" : "Persons"})</label>
+                  <label htmlFor="calc-peeps-range" className="block text-xs font-semibold text-slate-700 mb-1">Companions ({calcPeeps} {calcPeeps === 1 ? "Person" : "Persons"})</label>
                   <input
                     id="calc-peeps-range"
                     type="range"
@@ -344,7 +344,7 @@ export function InteractiveTools() {
 
             <div className="bg-slate-100/70 p-6 rounded-xl border border-slate-200 space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-600 uppercase tracking-widest mb-1.5">Base Investment (Bangladeshi Taka BDT)</label>
+                <label htmlFor="input-converter-bdt" className="block text-xs font-bold text-slate-600 uppercase tracking-widest mb-1.5">Base Investment (Bangladeshi Taka BDT)</label>
                 <div className="relative">
                   <span className="absolute left-3.5 top-1/2 -translate-y-1/2 font-serif font-semibold text-slate-500 text-sm">৳</span>
                   <input
@@ -458,7 +458,7 @@ export function InteractiveTools() {
             <div className="bg-slate-50 border border-slate-200 p-6 rounded-xl space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-650 uppercase tracking-widest mb-1.5 font-mono">My Nationality Passport:</label>
+                  <label htmlFor="select-checker-national" className="block text-xs font-bold text-slate-650 uppercase tracking-widest mb-1.5 font-mono">My Nationality Passport:</label>
                   <select
                     id="select-checker-national"
                     value={testNational}
@@ -472,7 +472,7 @@ export function InteractiveTools() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-650 uppercase tracking-widest mb-1.5 font-mono">Travel Destination:</label>
+                  <label htmlFor="select-checker-dest" className="block text-xs font-bold text-slate-650 uppercase tracking-widest mb-1.5 font-mono">Travel Destination:</label>
                   <select
                     id="select-checker-dest"
                     value={testDest}

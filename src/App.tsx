@@ -32,12 +32,10 @@ import { FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, DESTINATIONS_DATA, TRIP_COSTS_DAT
 
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
-import { TravelpayoutsOnboarding } from "./components/TravelpayoutsOnboarding";
 import { TravelpayoutsCustomWidget } from "./components/TravelpayoutsCustomWidget";
 import TravelpayoutsWidget from "./components/TravelpayoutsWidget.jsx";
 import { TravelpayoutsEmbed } from "./components/TravelpayoutsEmbed";
 import { TrustpilotReviews } from "./components/TrustpilotReviews";
-import { InteractiveTools } from "./components/InteractiveTools";
 import { TravelEssentials } from "./components/TravelEssentials";
 import {
   KiwitaxiTransferWidget,
@@ -76,14 +74,32 @@ import {
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
-import { PriceAlertModal } from "./components/PriceAlertModal";
-import { SitemapPage } from "./components/SitemapPage";
-import { ExperiencesPage } from "./components/ExperiencesPage";
 import { getSeoCopy } from "./utils/seoCopy";
-import { UmrahLandingPage } from "./components/UmrahLandingPage";
 import { AirHelpWidget } from "./components/AirHelpWidget";
-import { TopicalAuthorityBlueprint } from "./components/TopicalAuthorityBlueprint";
 import { getBlogImageAltText, getResponsiveImageProps } from "./utils/imageAssets";
+
+// Non-critical route & modal components loaded on demand to reduce initial JS parse/compile cost
+const UmrahLandingPage = React.lazy(() =>
+  import("./components/UmrahLandingPage").then((m) => ({ default: m.UmrahLandingPage }))
+);
+const ExperiencesPage = React.lazy(() =>
+  import("./components/ExperiencesPage").then((m) => ({ default: m.ExperiencesPage }))
+);
+const SitemapPage = React.lazy(() =>
+  import("./components/SitemapPage").then((m) => ({ default: m.SitemapPage }))
+);
+const InteractiveTools = React.lazy(() =>
+  import("./components/InteractiveTools").then((m) => ({ default: m.InteractiveTools }))
+);
+const TopicalAuthorityBlueprint = React.lazy(() =>
+  import("./components/TopicalAuthorityBlueprint").then((m) => ({ default: m.TopicalAuthorityBlueprint }))
+);
+const TravelpayoutsOnboarding = React.lazy(() =>
+  import("./components/TravelpayoutsOnboarding").then((m) => ({ default: m.TravelpayoutsOnboarding }))
+);
+const PriceAlertModal = React.lazy(() =>
+  import("./components/PriceAlertModal").then((m) => ({ default: m.PriceAlertModal }))
+);
 const heroBgImage = "/assets/images/clouds_boat_hero_1781438671378-1200.webp";
 const uralHeroBgImg = "/assets/images/ural_hero_bg_1781543111624-1200.webp";
 const coxsBazarSunriseImg = "/assets/images/coxs_bazar_sunrise_1781620718331-1200.webp";
@@ -2489,8 +2505,17 @@ export default function App() {
                     </span>
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-slate-400 font-mono text-[10px] uppercase w-12">BDT (৳)</span>
+                        <label
+                          htmlFor="home-currency-bdt-amount"
+                          className="text-slate-400 font-mono text-[10px] uppercase w-12"
+                        >
+                          BDT (৳)
+                          <span className="sr-only">
+                            {isBn ? " বাংলাদেশি টাকার পরিমাণ" : " Amount in Bangladeshi Taka"}
+                          </span>
+                        </label>
                         <input 
+                          id="home-currency-bdt-amount"
                           type="number" 
                           value={currencyAmount}
                           onChange={(e) => setCurrencyAmount(Number(e.target.value))}
@@ -2498,8 +2523,17 @@ export default function App() {
                         />
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-slate-400 font-mono text-[10px] uppercase w-12">To</span>
+                        <label
+                          htmlFor="home-currency-target-select"
+                          className="text-slate-400 font-mono text-[10px] uppercase w-12"
+                        >
+                          To
+                          <span className="sr-only">
+                            {isBn ? " গন্তব্য দেশের মুদ্রা" : " Target Currency"}
+                          </span>
+                        </label>
                         <select 
+                          id="home-currency-target-select"
                           value={currencyToOption}
                           onChange={(e) => setCurrencyToOption(e.target.value as any)}
                           className="flex-grow bg-slate-50 border border-slate-250 rounded p-1 text-xs font-mono focus:outline-none font-bold"
@@ -2721,7 +2755,11 @@ export default function App() {
                       }}
                       className="flex flex-col sm:flex-row items-center gap-2"
                     >
+                      <label htmlFor="home-deal-alert-email" className="sr-only">
+                        {isBn ? "আপনার ইমেইল এড্রেস লিখুন" : "Enter your personal email"}
+                      </label>
                       <input 
+                        id="home-deal-alert-email"
                         type="email" 
                         value={userEmail}
                         onChange={(e) => setUserEmail(e.target.value)}
@@ -4169,7 +4207,9 @@ export default function App() {
                       </div>
                     </div>
 
-                    <InteractiveTools />
+                    <React.Suspense fallback={null}>
+                      <InteractiveTools />
+                    </React.Suspense>
 
                     <TravelIntelligence
                       pageTitle={isBn ? `${activeCost.country} ভ্রমণের খরচের হিসাব` : `${activeCost.country} Trip Cost calculations`}
@@ -4200,9 +4240,15 @@ export default function App() {
               </p>
             </div>
             
-            <InteractiveTools />
+            <React.Suspense fallback={null}>
+              <InteractiveTools />
+            </React.Suspense>
 
-            {isAdmin && <TravelpayoutsOnboarding />}
+            {isAdmin && (
+              <React.Suspense fallback={null}>
+                <TravelpayoutsOnboarding />
+              </React.Suspense>
+            )}
 
             {/* Book Your Trip - Visual Step-by-Step Booking Checklist Funnel */}
             <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-8 mt-8">
@@ -4596,7 +4642,11 @@ export default function App() {
             })()}
 
             {/* Admin-Only SEO Matrix (Hidden from regular site visitors) */}
-            {isAdmin && <TopicalAuthorityBlueprint lang={lang} onNavigate={navigateTo} />}
+            {isAdmin && (
+              <React.Suspense fallback={null}>
+                <TopicalAuthorityBlueprint lang={lang} onNavigate={navigateTo} />
+              </React.Suspense>
+            )}
 
             {/* 4. SMART CONVERSION WIDGETS SECTION ON BLOG DIRECTORY PAGE */}
             <div className="pt-8 border-t border-slate-200 space-y-8">
@@ -5928,10 +5978,11 @@ export default function App() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Name input */}
                     <div className="space-y-1.5">
-                      <label className="font-bold text-slate-700 block">
+                      <label htmlFor="contact-full-name" className="font-bold text-slate-700 block">
                         {isBn ? "আপনার নাম" : "Full Name"} <span className="text-red-500">*</span>
                       </label>
                       <input
+                        id="contact-full-name"
                         type="text"
                         required
                         placeholder={isBn ? "যেমন: Farhan Momen" : "e.g. Farhan Momen"}
@@ -5943,10 +5994,11 @@ export default function App() {
 
                     {/* Phone input */}
                     <div className="space-y-1.5">
-                      <label className="font-bold text-slate-700 block">
+                      <label htmlFor="contact-phone-number" className="font-bold text-slate-700 block">
                         {isBn ? "ফোন বা WhatsApp নাম্বার" : "Phone or WhatsApp Number"} <span className="text-red-500">*</span>
                       </label>
                       <input
+                        id="contact-phone-number"
                         type="tel"
                         required
                         placeholder="e.g. +8801784385335"
@@ -5960,10 +6012,11 @@ export default function App() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Assistance Category */}
                     <div className="space-y-1.5">
-                      <label className="font-bold text-slate-700 block">
+                      <label htmlFor="contact-subject-category" className="font-bold text-slate-700 block">
                         {isBn ? "সহায়তার বিষয়" : "Subject / Assistance Category"}
                       </label>
                       <select
+                        id="contact-subject-category"
                         value={contactSubject}
                         onChange={(e) => setContactSubject(e.target.value)}
                         className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-3 py-3 text-slate-800 outline-none transition-all cursor-pointer"
@@ -5978,10 +6031,11 @@ export default function App() {
 
                     {/* Target Destination */}
                     <div className="space-y-1.5">
-                      <label className="font-bold text-slate-700 block">
+                      <label htmlFor="contact-travel-destination" className="font-bold text-slate-700 block">
                         {isBn ? "ভ্রমণ গন্তব্য" : "Travel Destination"}
                       </label>
                       <select
+                        id="contact-travel-destination"
                         value={contactDestination}
                         onChange={(e) => setContactDestination(e.target.value)}
                         className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-3 py-3 text-slate-800 outline-none transition-all cursor-pointer"
@@ -6000,10 +6054,11 @@ export default function App() {
 
                   {/* Message */}
                   <div className="space-y-1.5">
-                    <label className="font-bold text-slate-700 block">
+                    <label htmlFor="contact-message-body" className="font-bold text-slate-700 block">
                       {isBn ? "আপনার বার্তা / বিশেষ প্রয়োজন" : "Your Message / Specific Requirements"}
                     </label>
                     <textarea
+                      id="contact-message-body"
                       rows={4}
                       placeholder={
                         isBn
@@ -6126,26 +6181,32 @@ export default function App() {
           🎟️ VIEW 11: GLOBAL ATTRACTIONS & SKIP-THE-LINE HUB (TIQETS & KLOOK)
       ------------------------------------------------------------- */}
       {section === "experiences" && (
-        <ExperiencesPage lang={lang} onNavigate={navigateTo} />
+        <React.Suspense fallback={null}>
+          <ExperiencesPage lang={lang} onNavigate={navigateTo} />
+        </React.Suspense>
       )}
 
       {/* -------------------------------------------------------------
           🕋 VIEW 12: DEDICATED UMRAH & HAJJ PAID-ADS LANDING PAGE
       ------------------------------------------------------------- */}
       {section === "umrah" && (
-        <UmrahLandingPage
-          lang={lang}
-          localizedHajjFaqs={localizedHajjFaqs}
-          onNavigate={navigateTo}
-          coverImage={umrahMakkahImg}
-        />
+        <React.Suspense fallback={null}>
+          <UmrahLandingPage
+            lang={lang}
+            localizedHajjFaqs={localizedHajjFaqs}
+            onNavigate={navigateTo}
+            coverImage={umrahMakkahImg}
+          />
+        </React.Suspense>
       )}
 
       {/* -------------------------------------------------------------
           ✈️ VIEW 10: DHAKA AIRPORT (DAC) PRE-DEPARTURE & EMBASSY HUB
       ------------------------------------------------------------- */}
       {section === "sitemap" && (
-        <SitemapPage onNavigate={navigateTo} lang={lang} />
+        <React.Suspense fallback={null}>
+          <SitemapPage onNavigate={navigateTo} lang={lang} />
+        </React.Suspense>
       )}
 
       {section === "notFound" && (
@@ -6305,12 +6366,16 @@ export default function App() {
       <WhatsAppSupport lang={lang} />
 
       {/* Flight Price Drop Alert Modal */}
-      <PriceAlertModal
-        isOpen={isPriceAlertOpen}
-        onClose={() => setIsPriceAlertOpen(false)}
-        lang={lang}
-        defaultDestination={alertDestination}
-      />
+      {isPriceAlertOpen && (
+        <React.Suspense fallback={null}>
+          <PriceAlertModal
+            isOpen={isPriceAlertOpen}
+            onClose={() => setIsPriceAlertOpen(false)}
+            lang={lang}
+            defaultDestination={alertDestination}
+          />
+        </React.Suspense>
+      )}
 
     </div>
   );

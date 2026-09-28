@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useId } from "react";
 import {
   Plane,
   Building,
@@ -93,6 +93,14 @@ export function TravelpayoutsCustomWidget({
   initialTo = "Kathmandu (KTM)",
   initialHotelCity = "Kathmandu",
 }: TravelpayoutsCustomWidgetProps = {}) {
+  const instanceId = useId();
+  const fromAirportId = `${instanceId}-select-from-airport`;
+  const toAirportId = `${instanceId}-select-to-airport`;
+  const flightDateId = `${instanceId}-input-flight-date`;
+  const hotelCityId = `${instanceId}-select-hotel-city`;
+  const checkinDateId = `${instanceId}-input-checkin-date`;
+  const hotelRoomsId = `${instanceId}-select-hotel-rooms`;
+
   const [searchTab, setSearchTab] = useState<"flights" | "hotels">(initialTab);
   const [fromCity, setFromCity] = useState(initialFrom);
   const [toCity, setToCity] = useState(initialTo);
@@ -192,11 +200,14 @@ export function TravelpayoutsCustomWidget({
           {searchTab === "flights" ? (
             <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                <label
+                  htmlFor={fromAirportId}
+                  className="block text-xs font-semibold text-slate-600 mb-1"
+                >
                   Departure Airport
                 </label>
                 <select
-                  id="select-from-airport"
+                  id={fromAirportId}
                   value={fromCity}
                   onChange={(e) => setFromCity(e.target.value)}
                   className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
@@ -216,11 +227,14 @@ export function TravelpayoutsCustomWidget({
                 >
                   <ArrowRightLeft size={11} /> Swap
                 </button>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                <label
+                  htmlFor={toAirportId}
+                  className="block text-xs font-semibold text-slate-600 mb-1"
+                >
                   Destination Airport
                 </label>
                 <select
-                  id="select-to-airport"
+                  id={toAirportId}
                   value={toCity}
                   onChange={(e) => setToCity(e.target.value)}
                   className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
@@ -233,11 +247,14 @@ export function TravelpayoutsCustomWidget({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                <label
+                  htmlFor={flightDateId}
+                  className="block text-xs font-semibold text-slate-600 mb-1"
+                >
                   Travel Date
                 </label>
                 <input
-                  id="input-flight-date"
+                  id={flightDateId}
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
@@ -267,11 +284,14 @@ export function TravelpayoutsCustomWidget({
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                <label
+                  htmlFor={hotelCityId}
+                  className="block text-xs font-semibold text-slate-600 mb-1"
+                >
                   Destination City
                 </label>
                 <select
-                  id="select-hotel-city"
+                  id={hotelCityId}
                   value={hotelCity}
                   onChange={(e) => setHotelCity(e.target.value)}
                   className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
@@ -284,11 +304,14 @@ export function TravelpayoutsCustomWidget({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                <label
+                  htmlFor={checkinDateId}
+                  className="block text-xs font-semibold text-slate-600 mb-1"
+                >
                   Check-in Date
                 </label>
                 <input
-                  id="input-checkin-date"
+                  id={checkinDateId}
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
@@ -297,11 +320,14 @@ export function TravelpayoutsCustomWidget({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                <label
+                  htmlFor={hotelRoomsId}
+                  className="block text-xs font-semibold text-slate-600 mb-1"
+                >
                   Guests / Rooms
                 </label>
                 <select
-                  id="select-hotel-rooms"
+                  id={hotelRoomsId}
                   value={travelers}
                   onChange={(e) => setTravelers(Number(e.target.value))}
                   className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"

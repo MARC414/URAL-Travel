@@ -568,10 +568,11 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
 
                 <div className="space-y-4">
                   <div>
-                    <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                    <label htmlFor="tiqets-attraction-select" className="text-xs font-bold text-slate-700 block mb-1.5">
                       {isBn ? "১. আকর্ষণ নির্বাচন করুন:" : "1. Choose High-Demand Attraction:"}
                     </label>
                     <select
+                      id="tiqets-attraction-select"
                       value={activeCalendarProduct.productId}
                       onChange={(e) => {
                         const found = TIQETS_TOP_ATTRACTIONS.find((a) => a.productId === e.target.value);
@@ -589,10 +590,11 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                      <label htmlFor="tiqets-entry-date-input" className="text-xs font-bold text-slate-700 block mb-1.5">
                         {isBn ? "২. ভ্রমণের তারিখ:" : "2. Preferred Entry Date:"}
                       </label>
                       <input
+                        id="tiqets-entry-date-input"
                         type="date"
                         value={selectedDate}
                         onChange={(e) => setSelectedDate(e.target.value)}

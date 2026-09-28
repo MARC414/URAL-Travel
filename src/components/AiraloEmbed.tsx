@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useId } from "react";
 import { ExternalLink, Wifi, Globe, Loader2 } from "lucide-react";
 
 export function AiraloEmbed() {
+  const uid = useId();
   const [selectedCountry, setSelectedCountry] = useState("Nepal");
   const [isRedirecting, setIsRedirecting] = useState(false);
 
@@ -29,10 +30,11 @@ export function AiraloEmbed() {
 
       <form onSubmit={handleSearch} className="space-y-3">
         <div>
-          <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+          <label htmlFor={`${uid}-airalo-country`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
             <Globe size={9} className="text-red-550" /> Destination Country
           </label>
           <select
+            id={`${uid}-airalo-country`}
             value={selectedCountry}
             onChange={(e) => setSelectedCountry(e.target.value)}
             className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 transition-all"

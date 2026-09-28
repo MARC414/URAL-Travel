@@ -613,10 +613,11 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
 
             <div className="space-y-3 text-xs">
               <div>
-                <label className="block text-slate-300 font-medium mb-1">
+                <label htmlFor="exp-calc-city-select" className="block text-slate-300 font-medium mb-1">
                   {isBn ? "১. গন্তব্য শহর নির্বাচন করুন:" : "1. Select Destination City:"}
                 </label>
                 <select
+                  id="exp-calc-city-select"
                   value={calcCityId}
                   onChange={(e) => setCalcCityId(e.target.value)}
                   className="w-full bg-brand-navy border border-slate-700 rounded-xl px-3.5 py-2.5 text-white font-medium focus:outline-none focus:border-[#F6B73C]"
@@ -637,10 +638,11 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-300 font-medium mb-1">
+                  <label htmlFor="exp-travel-date-input" className="block text-slate-300 font-medium mb-1">
                     {isBn ? "২. ভ্রমণের তারিখ:" : "2. Preferred Date:"}
                   </label>
                   <input
+                    id="exp-travel-date-input"
                     type="date"
                     value={travelDate}
                     onChange={(e) => setTravelDate(e.target.value)}
@@ -985,7 +987,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
             href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20want%20to%20book%20Tiqets%20or%20Klook%20attraction%20passes%20in%20BDT!"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs py-3.5 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
+            className="w-full bg-brand-emerald hover:bg-brand-emerald/90 text-white font-bold text-xs py-3.5 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
           >
             <span>
               {isBn

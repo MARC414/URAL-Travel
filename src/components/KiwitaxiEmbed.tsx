@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useId } from "react";
 import { ExternalLink, Car, Calendar, MapPin, Users, Loader2 } from "lucide-react";
 
 export function KiwitaxiEmbed() {
+  const uid = useId();
   const [pickup, setPickup] = useState("Kathmandu Airport (KTM)");
   const [destination, setDestination] = useState("Thamel City Center Hotel");
   const [date, setDate] = useState("2026-07-15");
@@ -34,10 +35,11 @@ export function KiwitaxiEmbed() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {/* Pickup */}
           <div>
-            <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-pickup`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <MapPin size={9} className="text-emerald-500" /> From (Airport or City)
             </label>
             <input
+              id={`${uid}-pickup`}
               type="text"
               value={pickup}
               onChange={(e) => setPickup(e.target.value)}
@@ -49,10 +51,11 @@ export function KiwitaxiEmbed() {
 
           {/* Destination */}
           <div>
-            <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-destination`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <MapPin size={9} className="text-emerald-500" /> To (Hotel or Address)
             </label>
             <input
+              id={`${uid}-destination`}
               type="text"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
@@ -66,10 +69,11 @@ export function KiwitaxiEmbed() {
         <div className="grid grid-cols-2 gap-3">
           {/* Date */}
           <div>
-            <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-date`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <Calendar size={9} className="text-emerald-500" /> Transfer Date
             </label>
             <input
+              id={`${uid}-date`}
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
@@ -80,10 +84,11 @@ export function KiwitaxiEmbed() {
 
           {/* Passengers */}
           <div>
-            <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-passengers`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <Users size={9} className="text-emerald-500" /> Passengers
             </label>
             <select
+              id={`${uid}-passengers`}
               value={passengers}
               onChange={(e) => setPassengers(e.target.value)}
               className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-all"

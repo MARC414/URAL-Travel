@@ -899,11 +899,15 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
           </div>
 
           <div className="relative w-full md:w-72 shrink-0">
+            <label htmlFor="sitemap-country-search" className="sr-only">
+              {isBn ? "দেশের নাম লিখুন" : "Filter country"}
+            </label>
             <Search
               size={14}
               className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
             />
             <input
+              id="sitemap-country-search"
               type="text"
               value={countrySearch}
               onChange={(e) => setCountrySearch(e.target.value)}

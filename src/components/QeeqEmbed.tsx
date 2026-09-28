@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useId } from "react";
 import { ExternalLink, Car, Calendar, MapPin, Loader2 } from "lucide-react";
 
 export function QeeqEmbed() {
+  const uid = useId();
   const [pickupLocation, setPickupLocation] = useState("Kathmandu Airport (KTM)");
   const [dropoffLocation, setDropoffLocation] = useState("Kathmandu Airport (KTM)");
   const [pickupDate, setPickupDate] = useState("2026-07-15");
@@ -35,10 +36,11 @@ export function QeeqEmbed() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {/* Pickup */}
           <div>
-            <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-pickup-loc`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <MapPin size={9} className="text-[#F6B73C]" /> Pick-up Location
             </label>
             <input
+              id={`${uid}-pickup-loc`}
               type="text"
               value={pickupLocation}
               onChange={(e) => setPickupLocation(e.target.value)}
@@ -50,10 +52,11 @@ export function QeeqEmbed() {
 
           {/* Dropoff */}
           <div>
-            <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-dropoff-loc`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <MapPin size={9} className="text-[#F6B73C]" /> Drop-off Location
             </label>
             <input
+              id={`${uid}-dropoff-loc`}
               type="text"
               value={dropoffLocation}
               onChange={(e) => setDropoffLocation(e.target.value)}
@@ -67,10 +70,11 @@ export function QeeqEmbed() {
         <div className="grid grid-cols-2 gap-3">
           {/* Pickup Date */}
           <div>
-            <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-pickup-date`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <Calendar size={9} className="text-[#F6B73C]" /> Pick-up Date
             </label>
             <input
+              id={`${uid}-pickup-date`}
               type="date"
               value={pickupDate}
               onChange={(e) => setPickupDate(e.target.value)}
@@ -81,10 +85,11 @@ export function QeeqEmbed() {
 
           {/* Dropoff Date */}
           <div>
-            <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-dropoff-date`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <Calendar size={9} className="text-[#F6B73C]" /> Drop-off Date
             </label>
             <input
+              id={`${uid}-dropoff-date`}
               type="date"
               value={dropoffDate}
               onChange={(e) => setDropoffDate(e.target.value)}

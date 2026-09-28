@@ -218,24 +218,31 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
                     : (lang === "bn" ? "+ অন্য যেকোনো দেশের শহর লিখতে চান?" : "+ Specify a different city / country")}
                 </button>
                 {isCustomDest && (
-                  <input
-                    type="text"
-                    required
-                    placeholder={lang === "bn" ? "যেমন: London (LHR), Sydney, Toronto" : "e.g. London (LHR), Sydney, Toronto"}
-                    value={customDestText}
-                    onChange={(e) => setCustomDestText(e.target.value)}
-                    className="mt-2 w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-[#F6B73C] focus:border-[#F6B73C]"
-                  />
+                  <>
+                    <label htmlFor="price-alert-custom-dest" className="sr-only">
+                      {lang === "bn" ? "অন্য দেশের শহর বা গন্তব্য" : "Custom destination city or country"}
+                    </label>
+                    <input
+                      id="price-alert-custom-dest"
+                      type="text"
+                      required
+                      placeholder={lang === "bn" ? "যেমন: London (LHR), Sydney, Toronto" : "e.g. London (LHR), Sydney, Toronto"}
+                      value={customDestText}
+                      onChange={(e) => setCustomDestText(e.target.value)}
+                      className="mt-2 w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-[#F6B73C] focus:border-[#F6B73C]"
+                    />
+                  </>
                 )}
               </div>
             </div>
 
             {/* Travel Timing Window */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-750 block">
+              <label htmlFor="price-alert-travel-window" className="text-xs font-bold text-slate-750 block">
                 {lang === "bn" ? "২. আনুমানিক কবে ভ্রমণ করবেন?" : "2. Approximate Travel Window:"}
               </label>
               <select
+                id="price-alert-travel-window"
                 value={travelWindow}
                 onChange={(e) => setTravelWindow(e.target.value)}
                 className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white focus:outline-hidden focus:ring-2 focus:ring-[#F6B73C]"
@@ -248,11 +255,12 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
 
             {/* Target Budget (Optional) */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-750 flex items-center justify-between">
+              <label htmlFor="price-alert-target-budget" className="text-xs font-bold text-slate-750 flex items-center justify-between">
                 <span>{lang === "bn" ? "৩. লক্ষ্যমাত্রা বাজেট (ঐচ্ছিক):" : "3. Target Budget in BDT (Optional):"}</span>
                 <span className="text-[10px] text-slate-400 font-normal">{lang === "bn" ? "খালি রাখলে যেকোনো অফার" : "Optional"}</span>
               </label>
               <input
+                id="price-alert-target-budget"
                 type="text"
                 placeholder={lang === "bn" ? "যেমন: ৩৫,০০০ টাকার মধ্যে" : "e.g. Under 35,000 BDT"}
                 value={budgetTarget}
@@ -263,13 +271,14 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
 
             {/* WhatsApp / Phone */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-750 flex items-center justify-between">
+              <label htmlFor="price-alert-user-phone" className="text-xs font-bold text-slate-750 flex items-center justify-between">
                 <span>{lang === "bn" ? "৪. আপনার মোবাইল / হোয়াটসঅ্যাপ নম্বর:" : "4. Your WhatsApp / Mobile Number:"}</span>
                 <span className="text-[10px] text-brand-emerald font-bold flex items-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5" /> Direct Support
                 </span>
               </label>
               <input
+                id="price-alert-user-phone"
                 type="tel"
                 placeholder="e.g. 01784385335"
                 value={userPhone}

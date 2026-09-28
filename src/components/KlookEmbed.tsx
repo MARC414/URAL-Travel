@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useId } from "react";
 import { ExternalLink, Compass, Search, Loader2 } from "lucide-react";
 
 interface KlookEmbedProps {
@@ -6,6 +6,7 @@ interface KlookEmbedProps {
 }
 
 export function KlookEmbed({ cityId = 9 }: KlookEmbedProps) {
+  const uid = useId();
   const [query, setQuery] = useState("");
   const [isRedirecting, setIsRedirecting] = useState(false);
 
@@ -33,10 +34,11 @@ export function KlookEmbed({ cityId = 9 }: KlookEmbedProps) {
 
       <form onSubmit={handleSearch} className="space-y-3">
         <div>
-          <label className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+          <label htmlFor={`${uid}-klook-query`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
             <Search size={9} className="text-[#F6B73C]" /> Search Tours or Attractions
           </label>
           <input
+            id={`${uid}-klook-query`}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
