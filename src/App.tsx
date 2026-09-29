@@ -2869,9 +2869,9 @@ export default function App() {
                     {/* Header */}
                     <div className="border-b border-slate-200 pb-5">
                       <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <span className="hover:text-slate-750 cursor-pointer" onClick={() => navigateTo("/")}>{isBn ? "হোম" : "Home"}</span>
-                        <span>/</span>
-                        <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/flights")}>{isBn ? "ফ্লাইটস" : "Flights"}</span>
+                        <a href="/" onClick={(e) => { e.preventDefault(); navigateTo("/"); }} className="hover:text-slate-750">{isBn ? "হোম" : "Home"}</a>
+                        <span aria-hidden="true">/</span>
+                        <a href="/flights" onClick={(e) => { e.preventDefault(); navigateTo("/flights"); }} className="hover:text-slate-755">{isBn ? "ফ্লাইটস" : "Flights"}</a>
                         <span>/</span>
                         <span className="text-brand-navy font-bold">{activeRoute.id}</span>
                       </nav>
@@ -2975,24 +2975,22 @@ export default function App() {
                         {isBn ? "এই ট্রিপের জন্য আরও প্রয়োজনীয় তথ্য" : "Also Useful for This Trip"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
-                        <button
+                        <a
                           id={`lnk-view-visa-from-flight-${activeRoute.id}`}
-                          onClick={() => {
-                            navigateTo(`/visa/${getCountryVisaId(activeRoute.country)}`);
-                          }}
+                          href={`/visa/${getCountryVisaId(activeRoute.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeRoute.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🛂 {isBn ? `${activeRoute.country} ভিসা চেকলিস্ট দেখুন` : `Check ${activeRoute.country} Visa Checklist`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
-                        <button
+                        </a>
+                        <a
                           id={`lnk-view-hotel-from-flight-${activeRoute.id}`}
-                          onClick={() => {
-                            navigateTo(`/hotels/${getCountryHotelId(activeRoute.country)}`);
-                          }}
+                          href={`/hotels/${getCountryHotelId(activeRoute.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeRoute.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🏨 {isBn ? `${activeRoute.country}-এ কোথায় থাকবেন` : `Where to Stay in ${activeRoute.country}`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
+                        </a>
                         <a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm">
                           🚕 {isBn ? `${activeRoute.country} Airport Transfer বুক করুন` : `Book Airport Transfer in ${activeRoute.country}`} <ExternalLink size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
@@ -3054,9 +3052,9 @@ export default function App() {
                     {/* Header */}
                     <div className="border-b border-slate-200 pb-5">
                       <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <span className="hover:text-slate-750 cursor-pointer" onClick={() => navigateTo("/")}>{isBn ? "হোম" : "Home"}</span>
-                        <span>/</span>
-                        <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/hotels")}>{isBn ? "হোটেল" : "Hotels"}</span>
+                        <a href="/" onClick={(e) => { e.preventDefault(); navigateTo("/"); }} className="hover:text-slate-750">{isBn ? "হোম" : "Home"}</a>
+                        <span aria-hidden="true">/</span>
+                        <a href="/hotels" onClick={(e) => { e.preventDefault(); navigateTo("/hotels"); }} className="hover:text-slate-755">{isBn ? "হোটেল" : "Hotels"}</a>
                         <span>/</span>
                         <span className="text-brand-navy font-bold">{activeHotel.id}</span>
                       </nav>
@@ -3160,24 +3158,22 @@ export default function App() {
                         {isBn ? "⚡ ফ্লাইট রুট ও ভিসা গাইড:" : "⚡ FLIGHT ROUTING & ENTRY DETAILS:"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
-                        <button
+                        <a
                           id={`lnk-view-visa-from-hotel-${activeHotel.id}`}
-                          onClick={() => {
-                            navigateTo(`/visa/${getCountryVisaId(activeHotel.country)}`);
-                          }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          href={`/visa/${getCountryVisaId(activeHotel.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeHotel.country)}`); }}
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🛂 {isBn ? `${activeHotel.country} ভিসা চেকলিস্ট` : `Check ${activeHotel.country} Visa Checklist`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
-                        <button
+                        </a>
+                        <a
                           id={`lnk-view-flight-from-hotel-${activeHotel.id}`}
-                          onClick={() => {
-                            navigateTo(`/flights/${getCountryFlightId(activeHotel.country)}`);
-                          }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          href={`/flights/${getCountryFlightId(activeHotel.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/flights/${getCountryFlightId(activeHotel.country)}`); }}
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           ✈️ {isBn ? "ঢাকা থেকে ফ্লাইট রুট" : "Recommended Dhaka Flights"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
+                        </a>
                         <a
                           href={AFFILIATE_LINKS.kiwitaxi}
                           target="_blank"
@@ -3251,9 +3247,9 @@ export default function App() {
                     {/* Header */}
                     <div className="border-b border-slate-200 pb-5">
                       <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <span className="hover:text-slate-750 cursor-pointer" onClick={() => navigateTo("/")}>{isBn ? "হোম" : "Home"}</span>
-                        <span>/</span>
-                        <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/visa")}>{isBn ? "ভিসা গাইড" : "Visa"}</span>
+                        <a href="/" onClick={(e) => { e.preventDefault(); navigateTo("/"); }} className="hover:text-slate-750">{isBn ? "হোম" : "Home"}</a>
+                        <span aria-hidden="true">/</span>
+                        <a href="/visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa"); }} className="hover:text-slate-755">{isBn ? "ভিসা গাইড" : "Visa"}</a>
                         <span>/</span>
                         <span className="text-brand-navy font-bold">{activeVisa.id}</span>
                       </nav>
@@ -3378,24 +3374,22 @@ export default function App() {
                         {isBn ? "আপনার পুরো ট্রিপ প্ল্যান করুন" : "Plan Your Full Trip"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
-                        <button
+                        <a
                           id={`lnk-view-hotel-from-visa-${activeVisa.id}`}
-                          onClick={() => {
-                            navigateTo(`/hotels/${getCountryHotelId(activeVisa.country)}`);
-                          }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          href={`/hotels/${getCountryHotelId(activeVisa.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeVisa.country)}`); }}
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🏨 {isBn ? `${activeVisa.country}-এর বাছাইকৃত হোটেল` : `Curated ${activeVisa.country} Hotels`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
-                        <button
+                        </a>
+                        <a
                           id={`lnk-view-flight-from-visa-${activeVisa.id}`}
-                          onClick={() => {
-                            navigateTo(`/flights/${getCountryFlightId(activeVisa.country)}`);
-                          }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          href={`/flights/${getCountryFlightId(activeVisa.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/flights/${getCountryFlightId(activeVisa.country)}`); }}
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           ✈️ {isBn ? "ঢাকা থেকে ফ্লাইট বুক করুন" : "Book Flights from Dhaka"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
+                        </a>
                         <a
                           href={AFFILIATE_LINKS.airalo}
                           target="_blank"
@@ -3459,9 +3453,9 @@ export default function App() {
                     {/* BREADCRUMB HEADER */}
                     <div className="border-b border-slate-200 pb-5">
                       <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <span className="hover:text-slate-750 cursor-pointer" onClick={() => navigateTo("/")}>Home</span>
-                        <span>/</span>
-                        <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/destinations")}>Destinations</span>
+                        <a href="/" onClick={(e) => { e.preventDefault(); navigateTo("/"); }} className="hover:text-slate-750">Home</a>
+                        <span aria-hidden="true">/</span>
+                        <a href="/destinations" onClick={(e) => { e.preventDefault(); navigateTo("/destinations"); }} className="hover:text-slate-755">Destinations</a>
                         <span>/</span>
                         <span className="text-brand-navy font-bold">dubai-guide</span>
                       </nav>
@@ -3700,9 +3694,9 @@ export default function App() {
                         {/* BREADCRUMB HEADER */}
                         <div className="border-b border-slate-200 pb-5">
                           <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                            <span className="hover:text-slate-750 cursor-pointer" onClick={() => navigateTo("/")}>Home</span>
-                            <span>/</span>
-                            <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/destinations")}>Destinations</span>
+                            <a href="/" onClick={(e) => { e.preventDefault(); navigateTo("/"); }} className="hover:text-slate-750">Home</a>
+                            <span aria-hidden="true">/</span>
+                            <a href="/destinations" onClick={(e) => { e.preventDefault(); navigateTo("/destinations"); }} className="hover:text-slate-755">Destinations</a>
                             <span>/</span>
                             <span className="text-brand-navy font-bold">{activeDes.id}</span>
                           </nav>
@@ -3970,26 +3964,27 @@ export default function App() {
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-semibold">
-                            <button 
-                              onClick={() => navigateTo("/flights")} 
-                              className="bg-brand-navy text-white hover:bg-slate-800 p-3 rounded-xl transition-colors cursor-pointer"
+                            <a
+                              href="/flights"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/flights"); }}
+                              className="bg-brand-navy text-white hover:bg-slate-800 p-3 rounded-xl transition-colors"
                             >
                               Find Cheap Flights →
-                            </button>
-                            <button 
-                              onClick={() => navigateTo("/hotels")} 
-                              className="bg-brand-navy text-white hover:bg-slate-800 p-3 rounded-xl transition-colors cursor-pointer"
+                            </a>
+                            <a
+                              href="/hotels"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/hotels"); }}
+                              className="bg-brand-navy text-white hover:bg-slate-800 p-3 rounded-xl transition-colors"
                             >
                               Check Hotel Directories →
-                            </button>
-                            <button 
-                              onClick={() => {
-                                navigateTo(`/visa/${getCountryVisaId(activeDes.country)}`);
-                              }} 
-                              className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] p-3 rounded-xl transition-colors cursor-pointer"
+                            </a>
+                            <a
+                              href={`/visa/${getCountryVisaId(activeDes.country)}`}
+                              onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeDes.country)}`); }}
+                              className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] p-3 rounded-xl transition-colors"
                             >
                               View Visa Guidelines →
-                            </button>
+                            </a>
                           </div>
                         </div>
 
@@ -3998,26 +3993,29 @@ export default function App() {
                           <span className="font-mono text-[9px] font-bold text-slate-400 block uppercase tracking-widest text-center font-sans">Other Destinations</span>
                           <div className="flex flex-wrap justify-center items-center gap-2 text-xs">
                             {DESTINATIONS_DATA.filter(d => d.id !== activeDes.id).map((other) => (
-                              <button
+                              <a
                                 key={other.id}
-                                onClick={() => navigateTo(`/destinations/${other.id}`)}
+                                href={`/destinations/${other.id}`}
+                                onClick={(e) => { e.preventDefault(); navigateTo(`/destinations/${other.id}`); }}
                                 className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium"
                               >
                                 🌍 {other.country} Outbound Guide
-                              </button>
+                              </a>
                             ))}
-                            <button
-                              onClick={() => navigateTo("/visa")}
+                            <a
+                              href="/visa"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/visa"); }}
                               className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium"
                             >
                               🛂 Embassy Visa Center
-                            </button>
-                            <button
-                              onClick={() => navigateTo("/costs")}
+                            </a>
+                            <a
+                              href="/costs"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/costs"); }}
                               className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium"
                             >
                               💰 Dual-Currency Costs Analyzer
-                            </button>
+                            </a>
                           </div>
                         </div>
 
@@ -4077,9 +4075,9 @@ export default function App() {
                     {/* Header */}
                     <div className="border-b border-slate-200 pb-5">
                       <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <span className="hover:text-slate-750 cursor-pointer" onClick={() => navigateTo("/")}>{isBn ? "হোম" : "Home"}</span>
-                        <span>/</span>
-                        <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/costs")}>{isBn ? "ভ্রমণ খরচ" : "Trip Costs"}</span>
+                        <a href="/" onClick={(e) => { e.preventDefault(); navigateTo("/"); }} className="hover:text-slate-750">{isBn ? "হোম" : "Home"}</a>
+                        <span aria-hidden="true">/</span>
+                        <a href="/costs" onClick={(e) => { e.preventDefault(); navigateTo("/costs"); }} className="hover:text-slate-755">{isBn ? "ভ্রমণ খরচ" : "Trip Costs"}</a>
                         <span>/</span>
                         <span className="text-brand-navy font-bold">{activeCost.id}</span>
                       </nav>
@@ -4188,33 +4186,30 @@ export default function App() {
                         {isBn ? "এই ট্রিপের অন্যান্য গাইড" : "Also Plan For This Trip"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
-                        <button
+                        <a
                           id={`lnk-view-visa-from-cost-${activeCost.id}`}
-                          onClick={() => {
-                            navigateTo(`/visa/${getCountryVisaId(activeCost.country)}`);
-                          }}
+                          href={`/visa/${getCountryVisaId(activeCost.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeCost.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🛂 {isBn ? "ভিসা চেকলিস্ট দেখুন" : "Passport Visa Checklist"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
-                        <button
+                        </a>
+                        <a
                           id={`lnk-view-dest-from-cost-${activeCost.id}`}
-                          onClick={() => {
-                            navigateTo(`/destinations/${getCountryDestId(activeCost.country)}`);
-                          }}
+                          href={`/destinations/${getCountryDestId(activeCost.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/destinations/${getCountryDestId(activeCost.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🌍 {isBn ? "ট্যুর আইটিনারারি দেখুন" : "View Travel Itinerary"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
-                        <button
+                        </a>
+                        <a
                           id={`lnk-view-hotel-from-cost-${activeCost.id}`}
-                          onClick={() => {
-                            navigateTo(`/hotels/${getCountryHotelId(activeCost.country)}`);
-                          }}
+                          href={`/hotels/${getCountryHotelId(activeCost.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeCost.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🏨 {isBn ? "সেরা হোটেল জোন" : "Curated Area Stays"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
+                        </a>
                       </div>
                     </div>
 

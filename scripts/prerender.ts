@@ -102,6 +102,156 @@ function normalizeInternalHref(rawPath: string): string {
   return INTERNAL_ROUTE_ALIASES[pathname] || pathname;
 }
 
+interface InternalLinkItem {
+  href: string;
+  text: string;
+}
+
+type BlogEntry = (typeof BLOG_DATA)[number];
+
+const CATEGORY_HUB_LINKS: InternalLinkItem[] = [
+  { href: "/flights", text: "Compare international flights from Dhaka" },
+  { href: "/hotels", text: "Compare hotel areas and stays by destination" },
+  { href: "/visa", text: "Check visa requirements for Bangladeshi travelers" },
+  { href: "/destinations", text: "Explore destination itineraries from Bangladesh" },
+  { href: "/costs", text: "Plan an international trip budget in BDT" },
+];
+
+const COUNTRY_TOPIC_ALIASES: Record<string, string[]> = {
+  Nepal: ["nepal", "kathmandu", "pokhara"],
+  Thailand: ["thailand", "bangkok", "pattaya"],
+  Malaysia: ["malaysia", "kuala lumpur", "putrajaya", "klia"],
+  UAE: ["uae", "dubai", "abu dhabi"],
+  Singapore: ["singapore", "sentosa", "little india"],
+  Maldives: ["maldives", "male", "maafushi", "hulhumale"],
+};
+
+function findCountryForRoute(routePath: string): string | undefined {
+  const [section, id] = routePath.split("/").filter(Boolean);
+  if (!id) return undefined;
+  if (section === "flights") return FLIGHTS_DATA.find((item) => item.id === id)?.country;
+  if (section === "hotels") return HOTELS_DATA.find((item) => item.id === id)?.country;
+  if (section === "visa") return VISA_DATA.find((item) => item.id === id)?.country;
+  if (section === "destinations") return DESTINATIONS_DATA.find((item) => item.id === id)?.country;
+  if (section === "costs") return TRIP_COSTS_DATA.find((item) => item.id === id)?.country;
+  return undefined;
+}
+
+function getTripCrossLinks(country: string, currentPath: string): InternalLinkItem[] {
+  const links: InternalLinkItem[] = [];
+  const flight = FLIGHTS_DATA.find((item) => item.country === country);
+  const hotel = HOTELS_DATA.find((item) => item.country === country);
+  const visa = VISA_DATA.find((item) => item.country === country);
+  const destination = DESTINATIONS_DATA.find((item) => item.country === country);
+  const cost = TRIP_COSTS_DATA.find((item) => item.country === country);
+
+  if (flight) {
+    links.push({ href: `/flights/${flight.id}`, text: `Flights from Dhaka to ${flight.to.split(" (")[0]}` });
+  }
+  if (hotel) {
+    links.push({ href: `/hotels/${hotel.id}`, text: `Hotel neighborhoods in ${hotel.city}` });
+  }
+  if (visa) {
+    links.push({ href: `/visa/${visa.id}`, text: `${country} visa requirements for Bangladeshi citizens` });
+  }
+  if (destination) {
+    links.push({ href: `/destinations/${destination.id}`, text: `${country} itinerary from Bangladesh` });
+  }
+  if (cost) {
+    links.push({ href: `/costs/${cost.id}`, text: `${country} trip cost breakdown in BDT` });
+  }
+
+  return links.filter((link) => link.href !== currentPath);
+}
+
+function getRelatedBlogsForRoute(country: string, routePath: string, limit = 3): BlogEntry[] {
+  const aliases = COUNTRY_TOPIC_ALIASES[country] || [country.toLowerCase()];
+  return BLOG_DATA.map((post, index) => {
+    const explicitlyLinksHere = (post.internalLinks || []).some(
+      (link) => normalizeInternalHref(link.path) === routePath
+    );
+    const text = ` ${post.slug} ${post.title} `
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, " ");
+    const topicMatches = aliases.filter((alias) => {
+      const normalizedAlias = alias.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+      return text.includes(` ${normalizedAlias} `);
+    }).length;
+    return { post, index, score: (explicitlyLinksHere ? 20 : 0) + topicMatches * 3 };
+  })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.index - b.index)
+    .slice(0, limit)
+    .map((item) => item.post);
+}
+
+function renderLinkSection(id: string, heading: string, links: InternalLinkItem[]): string {
+  if (links.length === 0) return "";
+  return `<section aria-labelledby="${id}"><h2 id="${id}">${escapeHtml(heading)}</h2><ul>${links
+    .map((link) => `<li><a href="${escapeHtml(link.href)}">${escapeHtml(link.text)}</a></li>`)
+    .join("\n")}</ul></section>`;
+}
+
+function addInternalLinkSections(routes: PrerenderRoute[]): void {
+  const categoryHubPaths = new Set(CATEGORY_HUB_LINKS.map((link) => link.href));
+
+  for (const route of routes) {
+    let extraLinks = "";
+    if (categoryHubPaths.has(route.routePath)) {
+      const siblingHubs = CATEGORY_HUB_LINKS.filter((link) => link.href !== route.routePath);
+      extraLinks = renderLinkSection(
+        "related-planning-hubs",
+        "Continue planning your trip",
+        siblingHubs
+      );
+    } else {
+      const country = findCountryForRoute(route.routePath);
+      if (country) {
+        const tripLinks = getTripCrossLinks(country, route.routePath);
+        const blogLinks = getRelatedBlogsForRoute(country, route.routePath).map((post) => ({
+          href: `/blog/${post.slug}`,
+          text: post.title,
+        }));
+        extraLinks = `${renderLinkSection("complete-trip-links", `Complete your ${country} trip`, tripLinks)}${renderLinkSection("related-destination-guides", `Related ${country} travel guides`, blogLinks)}`;
+      }
+    }
+
+    if (extraLinks) {
+      route.bodyHtml = route.bodyHtml.replace("</article>", `${extraLinks}</article>`);
+    }
+
+    if (route.routePath !== "/" && !categoryHubPaths.has(route.routePath)) {
+      const parentHubPath = CATEGORY_HUB_LINKS.map((link) => link.href).find((hubPath) =>
+        route.routePath.startsWith(`${hubPath}/`)
+      );
+      const sitewideHubLinks = CATEGORY_HUB_LINKS.filter(
+        (link) => link.href !== parentHubPath && link.href !== route.routePath
+      );
+      const sitewideHubSection = renderLinkSection(
+        "planning-hub-links",
+        "More trip-planning hubs",
+        sitewideHubLinks
+      );
+      route.bodyHtml = route.bodyHtml.replace("</article>", `${sitewideHubSection}</article>`);
+    }
+
+    if (route.routePath !== "/" && !route.bodyHtml.includes('aria-label="Breadcrumb"')) {
+      const parentCrumbs = route.breadcrumbs.slice(0, -1);
+      const currentCrumb = route.breadcrumbs[route.breadcrumbs.length - 1];
+      const crumbLinks = parentCrumbs.map((crumb) => {
+        const href = new URL(crumb.url).pathname;
+        return `<a href="${escapeHtml(href)}">${escapeHtml(crumb.name)}</a>`;
+      });
+      const breadcrumbItems = [
+        ...crumbLinks,
+        `<span aria-current="page">${escapeHtml(currentCrumb?.name || route.title)}</span>`,
+      ];
+      const breadcrumbHtml = `<nav aria-label="Breadcrumb">${breadcrumbItems.join(" / ")}</nav>`;
+      route.bodyHtml = route.bodyHtml.replace("<article>", `<article>${breadcrumbHtml}`);
+    }
+  }
+}
+
 interface PrerenderRoute {
   routePath: string; // e.g. "/" or "/blog/slug"
   canonicalUrl: string;
@@ -1173,6 +1323,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
 function main() {
   copyStaticSeoImages();
   const routes = buildAllRoutes();
+  addInternalLinkSections(routes);
   applySharedSeoCopy(routes);
   generateSitemapXml(routes);
   generateRssXml();
