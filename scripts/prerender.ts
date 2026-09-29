@@ -375,6 +375,61 @@ function renderLandingFaqs(
     .join("\n")}</section>`;
 }
 
+const VISA_OFFICIAL_SOURCES: Record<string, { label: string; url: string }[]> = {
+  "nepal-visa": [
+    { label: "Nepal Department of Immigration: visa information", url: "https://immigration.gov.np/visa-information" },
+    { label: "Nepal official online immigration portal", url: "https://nepaliport.immigration.gov.np/" },
+  ],
+  "thailand-visa": [
+    { label: "Thailand official e-Visa portal", url: "https://www.thaievisa.go.th/" },
+    { label: "Royal Thai Embassy in Dhaka: visa information", url: "https://dhaka.thaiembassy.org/en/page/59898-visa-information?menu=5d83296215e39c2540006a10" },
+  ],
+  "malaysia-visa": [
+    { label: "Malaysia official MYVISA portal", url: "https://malaysiavisa.imi.gov.my/" },
+    { label: "Malaysia Immigration Department: eVISA information", url: "https://www.imi.gov.my/index.php/en/main-services/visa/evisa-en/" },
+  ],
+  "dubai-visa": [
+    { label: "UAE Government: tourist visa information and application channels", url: "https://u.ae/en/information-and-services/visa-and-emirates-id/Types-of-visas/tourist-visa" },
+  ],
+  "singapore-visa": [
+    { label: "Singapore ICA: visa requirements for Bangladesh passport holders", url: "https://www.ica.gov.sg/enter-transit-depart/entering-singapore/visa_requirements/visa-detail-page/bangladesh" },
+    { label: "Singapore ICA: SG Arrival Card e-service", url: "https://eservices.ica.gov.sg/sgarrivalcard/" },
+  ],
+  "maldives-visa": [
+    { label: "Maldives Immigration: tourist visa on arrival and entry requirements", url: "https://www.immigration.gov.mv/visa/tourist-visa" },
+    { label: "Maldives Immigration: Traveller Declaration instructions", url: "https://www.immigration.gov.mv/traveller-declaration" },
+    { label: "Official IMUGA Traveller Declaration portal", url: "https://imuga.immigration.gov.mv/traveller" },
+  ],
+};
+
+function renderVisaOfficialSources(routeId: string): string {
+  const sources = VISA_OFFICIAL_SOURCES[routeId] || [];
+  if (!sources.length) return "";
+  return `<section aria-labelledby="official-visa-sources"><h2 id="official-visa-sources">Official sources to verify current requirements</h2><p>Visa categories, document lists, fees and processing estimates can change. Check the destination authority's latest instructions before applying or booking.</p><ul>${sources
+    .map((source) => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.label)}</a></li>`)
+    .join("")}</ul></section>`;
+}
+
+function renderVisaRouteContext(routeId: string): string {
+  const contextByRoute: Record<string, string> = {
+    "nepal-visa": `<p>Nepal's Department of Immigration describes tourist visa on arrival and provides an online immigration portal. The department's current instructions explain the arrival-card and online-form or kiosk process, and set out the applicable tourist-visa categories and gratis eligibility. Check those official instructions close to travel: a saved fee table or old application receipt may no longer reflect the current visa year, charge or stay period. A tourist visa is for tourism; if your purpose is different, confirm the correct category before travel.</p>`,
+    "thailand-visa": `<p>Use the official Thailand e-Visa portal together with the Royal Thai Embassy in Dhaka's current Bangladesh-facing visa information. The portal and local mission guidance are the places to confirm the category, submission method, documents, fees and any appointment or payment instructions that apply to your application. The supporting papers can depend on purpose, occupation, sponsorship and family circumstances; a checklist is a preparation aid, not an assurance of approval.</p>`,
+    "malaysia-visa": `<p>Keep the Malaysia eVisa and arrival declaration as separate tasks. The official MYVISA portal is the source for the eVisa application and its current document, payment and approval instructions. Malaysia's official portal also publishes separate Malaysia Digital Arrival Card guidance, including its current submission window and passport conditions; it currently says to register the MDAC within three days before arrival. Recheck both details close to departure; an approved eVisa does not automatically complete a separate arrival-card requirement. Retain the approved visa notice and check that its details match your passport and itinerary.</p>`,
+    "dubai-visa": `<p>The UAE Government describes several tourist-visa application channels, including the federal ICP and Dubai's GDRFA as well as airlines, hotels and licensed travel agents. Confirm which authority or sponsor handles the application and which emirate's process applies to the visa being issued. Before paying a provider, check its authorization, itemized charges, document-handling process and method for tracking the application. The BDT range and processing period in this guide are planning estimates, not an official offer or approval guarantee.</p>`,
+    "singapore-visa": `<p>Singapore ICA publishes a country-specific entry-visa page for Bangladesh passport holders and the official supporting-document and application information. Check the latest ICA instructions and the applicable Dhaka submission channel rather than relying only on an agent checklist. The SG Arrival Card is a separate arrival declaration, not a visa; ICA publishes its own submission window and free e-service. Keep the visa decision and arrival declaration requirements distinct in your trip checklist.</p>`,
+    "maldives-visa": `<p>Maldives Immigration states that tourists do not need pre-approval for a tourist visa, but they must meet the entry requirements for clearance on arrival. Its current page specifies an MRZ passport or travel document with at least one month's validity, a confirmed return journey, prepaid booking at a registered facility, and sufficient funds or approved sponsorship. It also requires each traveler to submit the free IMUGA Traveller Declaration within 96 hours before arrival. Meeting the listed requirements does not guarantee entry; immigration officers determine admissibility at the port of entry.</p>`,
+  };
+  return contextByRoute[routeId] || "";
+}
+
+function renderVisaApplicationGuidance(): string {
+  return `<section aria-labelledby="visa-application-guidance"><h2 id="visa-application-guidance">A careful application workflow for Bangladeshi travelers</h2>
+    <p>Start by checking that the visa category matches the real reason for travel and the planned length of stay. Use the official authority's current instructions to confirm where an application must be submitted, whether an online form or appointment is required, which documents must be original, and which fees are payable to the government or a service provider. Do not treat a generic checklist as a substitute for country- or applicant-specific instructions.</p>
+    <p>Prepare a consistent document set: names, passport numbers, travel dates and accommodation details should agree across the form and supporting papers. Submit clear, readable scans or copies in the format requested. Provide genuine financial, employment, study or sponsorship evidence when requested; do not alter documents or make unexplained deposits to fit an informal target. If a document is not in an accepted language, confirm whether an official translation or certification is required.</p>
+    <p>After submission, save the receipt or reference number and use the official portal or authorized channel to check status. Processing estimates can change because of holidays, application volume or requests for more information, so leave a buffer and avoid relying on a promised decision date. Before departure, check the approved visa's name, validity dates, number of entries and permitted stay, and carry the supporting papers that may be requested at check-in or arrival. A visa does not remove the need to meet border-entry conditions.</p>
+  </section>`;
+}
+
 function renderFlightsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
   const routeDirectory = FLIGHTS_DATA.map(
     (route) =>
@@ -883,13 +938,18 @@ function buildAllRoutes(): PrerenderRoute[] {
         <article>
           <h1>${escapeHtml(title)}</h1>
           <p>${escapeHtml(v.quickAnswer || description)}</p>
-          <p><strong>Visa Type:</strong> ${escapeHtml(v.requirementType)} | <strong>Published fee guidance:</strong> ${escapeHtml(v.costBdt)} | <strong>Typical processing guidance:</strong> ${escapeHtml(v.processingTime)}</p>
-          <p>Entry rules, fees and processing times can change. Confirm current requirements with the destination's official immigration or visa authority before applying.</p>
+          <p><strong>Entry route:</strong> ${escapeHtml(v.requirementType)} | <strong>Published fee/entry guidance:</strong> ${escapeHtml(v.costBdt)} | <strong>Indicative processing guidance:</strong> ${escapeHtml(v.processingTime)}</p>
+          <p>These details are an editorial planning summary, not an official decision. Rules, fees, forms and processing windows can change; verify the current requirements with the linked authority before applying or making non-refundable plans.</p>
+          <h2>Key visa facts</h2>
+          <ul>${v.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
           <h2>Documents to check</h2>
           ${v.documentChecklist.map((checklist) => `<section><h3>${escapeHtml(checklist.category)}</h3><ul>${checklist.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>`).join("")}
           <h2>Application steps</h2>
           <ol>${v.stepByStep.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
-          ${v.faqs.length ? `<section><h2>Common questions</h2>${v.faqs.map((faq) => `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`).join("")}</section>` : ""}
+          ${renderVisaRouteContext(v.id)}
+          ${renderVisaApplicationGuidance()}
+          ${renderVisaOfficialSources(v.id)}
+          ${renderLandingFaqs("visa-guide-faqs", `${v.country} visa questions for Bangladeshi travelers`, vFaq)}
         </article>
       `,
     });
