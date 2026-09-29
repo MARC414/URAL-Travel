@@ -77,6 +77,7 @@ import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
 import { getSeoCopy } from "./utils/seoCopy";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { getBlogImageAltText, getResponsiveImageProps } from "./utils/imageAssets";
+import { getRelatedBlogPosts } from "./utils/blogLinks";
 
 // Non-critical route & modal components loaded on demand to reduce initial JS parse/compile cost
 const UmrahLandingPage = React.lazy(() =>
@@ -2867,15 +2868,7 @@ export default function App() {
                     
                     {/* Header */}
                     <div className="border-b border-slate-200 pb-5">
-                      <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <span className="hover:text-slate-750 cursor-pointer" onClick={() => navigateTo("/")}>{isBn ? "হোম" : "Home"}</span>
-                        <span>/</span>
-                        <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/flights")}>{isBn ? "ফ্লাইটস" : "Flights"}</span>
-                        <span>/</span>
-                        <span className="text-brand-navy font-bold">{activeRoute.id}</span>
-                      </nav>
-
-                      <div className="flex flex-wrap items-center justify-between gap-4">
+<div className="flex flex-wrap items-center justify-between gap-4">
                         <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                           {isBn ? `${activeRoute.from} থেকে ${activeRoute.to} ফ্লাইট গাইড` : `Flights from ${activeRoute.from} to ${activeRoute.to}`}
                         </h1>
@@ -2974,24 +2967,22 @@ export default function App() {
                         {isBn ? "এই ট্রিপের জন্য আরও প্রয়োজনীয় তথ্য" : "Also Useful for This Trip"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
-                        <button
+                        <a
                           id={`lnk-view-visa-from-flight-${activeRoute.id}`}
-                          onClick={() => {
-                            navigateTo(`/visa/${getCountryVisaId(activeRoute.country)}`);
-                          }}
+                          href={`/visa/${getCountryVisaId(activeRoute.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeRoute.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🛂 {isBn ? `${activeRoute.country} ভিসা চেকলিস্ট দেখুন` : `Check ${activeRoute.country} Visa Checklist`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
-                        <button
+                        </a>
+                        <a
                           id={`lnk-view-hotel-from-flight-${activeRoute.id}`}
-                          onClick={() => {
-                            navigateTo(`/hotels/${getCountryHotelId(activeRoute.country)}`);
-                          }}
+                          href={`/hotels/${getCountryHotelId(activeRoute.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeRoute.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🏨 {isBn ? `${activeRoute.country}-এ কোথায় থাকবেন` : `Where to Stay in ${activeRoute.country}`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
+                        </a>
                         <a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm">
                           🚕 {isBn ? `${activeRoute.country} Airport Transfer বুক করুন` : `Book Airport Transfer in ${activeRoute.country}`} <ExternalLink size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
@@ -3052,15 +3043,7 @@ export default function App() {
                     
                     {/* Header */}
                     <div className="border-b border-slate-200 pb-5">
-                      <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <span className="hover:text-slate-750 cursor-pointer" onClick={() => navigateTo("/")}>{isBn ? "হোম" : "Home"}</span>
-                        <span>/</span>
-                        <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/hotels")}>{isBn ? "হোটেল" : "Hotels"}</span>
-                        <span>/</span>
-                        <span className="text-brand-navy font-bold">{activeHotel.id}</span>
-                      </nav>
-
-                      <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
+<h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                         {isBn ? `${activeHotel.city}-এ কোথায় থাকবেন: সেরা এলাকা ও হোটেল গাইড` : `Where to Stay in ${activeHotel.city}: Best Areas & Hotels`}
                       </h1>
                     </div>
@@ -3159,24 +3142,22 @@ export default function App() {
                         {isBn ? "⚡ ফ্লাইট রুট ও ভিসা গাইড:" : "⚡ FLIGHT ROUTING & ENTRY DETAILS:"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
-                        <button
+                        <a
                           id={`lnk-view-visa-from-hotel-${activeHotel.id}`}
-                          onClick={() => {
-                            navigateTo(`/visa/${getCountryVisaId(activeHotel.country)}`);
-                          }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          href={`/visa/${getCountryVisaId(activeHotel.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeHotel.country)}`); }}
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🛂 {isBn ? `${activeHotel.country} ভিসা চেকলিস্ট` : `Check ${activeHotel.country} Visa Checklist`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
-                        <button
+                        </a>
+                        <a
                           id={`lnk-view-flight-from-hotel-${activeHotel.id}`}
-                          onClick={() => {
-                            navigateTo(`/flights/${getCountryFlightId(activeHotel.country)}`);
-                          }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          href={`/flights/${getCountryFlightId(activeHotel.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/flights/${getCountryFlightId(activeHotel.country)}`); }}
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           ✈️ {isBn ? "ঢাকা থেকে ফ্লাইট রুট" : "Recommended Dhaka Flights"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
+                        </a>
                         <a
                           href={AFFILIATE_LINKS.kiwitaxi}
                           target="_blank"
@@ -3249,15 +3230,7 @@ export default function App() {
                     
                     {/* Header */}
                     <div className="border-b border-slate-200 pb-5">
-                      <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <span className="hover:text-slate-750 cursor-pointer" onClick={() => navigateTo("/")}>{isBn ? "হোম" : "Home"}</span>
-                        <span>/</span>
-                        <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/visa")}>{isBn ? "ভিসা গাইড" : "Visa"}</span>
-                        <span>/</span>
-                        <span className="text-brand-navy font-bold">{activeVisa.id}</span>
-                      </nav>
-
-                      <div className="flex flex-wrap items-center justify-between gap-4">
+<div className="flex flex-wrap items-center justify-between gap-4">
                         <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                           {isBn
                             ? `বাংলাদেশি পাসপোর্টধারীদের জন্য ${activeVisa.country} ভিসা গাইড ও চেকলিস্ট`
@@ -3377,24 +3350,22 @@ export default function App() {
                         {isBn ? "আপনার পুরো ট্রিপ প্ল্যান করুন" : "Plan Your Full Trip"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
-                        <button
+                        <a
                           id={`lnk-view-hotel-from-visa-${activeVisa.id}`}
-                          onClick={() => {
-                            navigateTo(`/hotels/${getCountryHotelId(activeVisa.country)}`);
-                          }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          href={`/hotels/${getCountryHotelId(activeVisa.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeVisa.country)}`); }}
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🏨 {isBn ? `${activeVisa.country}-এর বাছাইকৃত হোটেল` : `Curated ${activeVisa.country} Hotels`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
-                        <button
+                        </a>
+                        <a
                           id={`lnk-view-flight-from-visa-${activeVisa.id}`}
-                          onClick={() => {
-                            navigateTo(`/flights/${getCountryFlightId(activeVisa.country)}`);
-                          }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+                          href={`/flights/${getCountryFlightId(activeVisa.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/flights/${getCountryFlightId(activeVisa.country)}`); }}
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           ✈️ {isBn ? "ঢাকা থেকে ফ্লাইট বুক করুন" : "Book Flights from Dhaka"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
+                        </a>
                         <a
                           href={AFFILIATE_LINKS.airalo}
                           target="_blank"
@@ -3455,17 +3426,9 @@ export default function App() {
                 const activeDes = DESTINATIONS_DATA.find(d => d.id === parameterId) || DESTINATIONS_DATA[0];
                 return activeDes.id === "dubai-guide" ? (
                   <div className="space-y-10 animate-fade-in text-slate-800">
-                    {/* BREADCRUMB HEADER */}
+                    {/* DESTINATION GUIDE HEADER */}
                     <div className="border-b border-slate-200 pb-5">
-                      <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <span className="hover:text-slate-750 cursor-pointer" onClick={() => navigateTo("/")}>Home</span>
-                        <span>/</span>
-                        <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/destinations")}>Destinations</span>
-                        <span>/</span>
-                        <span className="text-brand-navy font-bold">dubai-guide</span>
-                      </nav>
-
-                          {/* 🟦 1. HERO SECTION (TOP OF PAGE) */}
+{/* 🟦 1. HERO SECTION (TOP OF PAGE) */}
                           <h1 className="font-serif text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
                             Dubai Travel Guide
                           </h1>
@@ -3696,17 +3659,9 @@ export default function App() {
                     ) : (
                       <div className="space-y-10 animate-fade-in text-slate-800">
                         
-                        {/* BREADCRUMB HEADER */}
+                        {/* DESTINATION GUIDE HEADER */}
                         <div className="border-b border-slate-200 pb-5">
-                          <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                            <span className="hover:text-slate-750 cursor-pointer" onClick={() => navigateTo("/")}>Home</span>
-                            <span>/</span>
-                            <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/destinations")}>Destinations</span>
-                            <span>/</span>
-                            <span className="text-brand-navy font-bold">{activeDes.id}</span>
-                          </nav>
-
-                          <span className="text-[10px] font-mono font-bold tracking-widest text-[#F6B73C] bg-brand-navy px-2.5 py-0.5 rounded-full inline-block uppercase mb-2 animate-pulse">
+<span className="text-[10px] font-mono font-bold tracking-widest text-[#F6B73C] bg-brand-navy px-2.5 py-0.5 rounded-full inline-block uppercase mb-2 animate-pulse">
                             🌍 Destination Guide
                           </span>
                           <h1 className="font-serif text-2xl sm:text-4xl font-black tracking-tight text-slate-900 leading-tight">
@@ -3969,26 +3924,27 @@ export default function App() {
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-semibold">
-                            <button 
-                              onClick={() => navigateTo("/flights")} 
-                              className="bg-brand-navy text-white hover:bg-slate-800 p-3 rounded-xl transition-colors cursor-pointer"
+                            <a
+                              href="/flights"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/flights"); }}
+                              className="bg-brand-navy text-white hover:bg-slate-800 p-3 rounded-xl transition-colors"
                             >
                               Find Cheap Flights →
-                            </button>
-                            <button 
-                              onClick={() => navigateTo("/hotels")} 
-                              className="bg-brand-navy text-white hover:bg-slate-800 p-3 rounded-xl transition-colors cursor-pointer"
+                            </a>
+                            <a
+                              href="/hotels"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/hotels"); }}
+                              className="bg-brand-navy text-white hover:bg-slate-800 p-3 rounded-xl transition-colors"
                             >
                               Check Hotel Directories →
-                            </button>
-                            <button 
-                              onClick={() => {
-                                navigateTo(`/visa/${getCountryVisaId(activeDes.country)}`);
-                              }} 
-                              className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] p-3 rounded-xl transition-colors cursor-pointer"
+                            </a>
+                            <a
+                              href={`/visa/${getCountryVisaId(activeDes.country)}`}
+                              onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeDes.country)}`); }}
+                              className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] p-3 rounded-xl transition-colors"
                             >
                               View Visa Guidelines →
-                            </button>
+                            </a>
                           </div>
                         </div>
 
@@ -3997,26 +3953,29 @@ export default function App() {
                           <span className="font-mono text-[9px] font-bold text-slate-400 block uppercase tracking-widest text-center font-sans">Other Destinations</span>
                           <div className="flex flex-wrap justify-center items-center gap-2 text-xs">
                             {DESTINATIONS_DATA.filter(d => d.id !== activeDes.id).map((other) => (
-                              <button
+                              <a
                                 key={other.id}
-                                onClick={() => navigateTo(`/destinations/${other.id}`)}
+                                href={`/destinations/${other.id}`}
+                                onClick={(e) => { e.preventDefault(); navigateTo(`/destinations/${other.id}`); }}
                                 className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium"
                               >
                                 🌍 {other.country} Outbound Guide
-                              </button>
+                              </a>
                             ))}
-                            <button
-                              onClick={() => navigateTo("/visa")}
+                            <a
+                              href="/visa"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/visa"); }}
                               className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium"
                             >
                               🛂 Embassy Visa Center
-                            </button>
-                            <button
-                              onClick={() => navigateTo("/costs")}
+                            </a>
+                            <a
+                              href="/costs"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/costs"); }}
                               className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium"
                             >
                               💰 Dual-Currency Costs Analyzer
-                            </button>
+                            </a>
                           </div>
                         </div>
 
@@ -4075,15 +4034,7 @@ export default function App() {
                     
                     {/* Header */}
                     <div className="border-b border-slate-200 pb-5">
-                      <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <span className="hover:text-slate-750 cursor-pointer" onClick={() => navigateTo("/")}>{isBn ? "হোম" : "Home"}</span>
-                        <span>/</span>
-                        <span className="hover:text-slate-755 cursor-pointer" onClick={() => navigateTo("/costs")}>{isBn ? "ভ্রমণ খরচ" : "Trip Costs"}</span>
-                        <span>/</span>
-                        <span className="text-brand-navy font-bold">{activeCost.id}</span>
-                      </nav>
-
-                      <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
+<h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                         {isBn
                           ? `বাংলাদেশ থেকে ${activeCost.country} ভ্রমণের বিস্তারিত খরচ (BDT বাজেট চার্ট)`
                           : `${activeCost.country} Trip Cost from Bangladesh: Complete Price Matrix`}
@@ -4187,33 +4138,30 @@ export default function App() {
                         {isBn ? "এই ট্রিপের অন্যান্য গাইড" : "Also Plan For This Trip"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
-                        <button
+                        <a
                           id={`lnk-view-visa-from-cost-${activeCost.id}`}
-                          onClick={() => {
-                            navigateTo(`/visa/${getCountryVisaId(activeCost.country)}`);
-                          }}
+                          href={`/visa/${getCountryVisaId(activeCost.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeCost.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🛂 {isBn ? "ভিসা চেকলিস্ট দেখুন" : "Passport Visa Checklist"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
-                        <button
+                        </a>
+                        <a
                           id={`lnk-view-dest-from-cost-${activeCost.id}`}
-                          onClick={() => {
-                            navigateTo(`/destinations/${getCountryDestId(activeCost.country)}`);
-                          }}
+                          href={`/destinations/${getCountryDestId(activeCost.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/destinations/${getCountryDestId(activeCost.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🌍 {isBn ? "ট্যুর আইটিনারারি দেখুন" : "View Travel Itinerary"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
-                        <button
+                        </a>
+                        <a
                           id={`lnk-view-hotel-from-cost-${activeCost.id}`}
-                          onClick={() => {
-                            navigateTo(`/hotels/${getCountryHotelId(activeCost.country)}`);
-                          }}
+                          href={`/hotels/${getCountryHotelId(activeCost.country)}`}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeCost.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
                           🏨 {isBn ? "সেরা হোটেল জোন" : "Curated Area Stays"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </button>
+                        </a>
                       </div>
                     </div>
 
@@ -4387,30 +4335,7 @@ export default function App() {
 
               <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
                 <div className="max-w-4xl space-y-5">
-                  <nav
-                    aria-label="Breadcrumb"
-                    className="text-slate-300 text-xs flex flex-wrap items-center gap-2 font-mono"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => navigateTo("/")}
-                      className="hover:text-white transition-colors cursor-pointer"
-                    >
-                      {isBn ? "হোম (Home)" : "Home"}
-                    </button>
-                    <span aria-hidden="true">/</span>
-                    <span className="text-[#F6B73C] font-semibold">
-                      {isBn ? "ট্রাভেল ব্লগ ও গাইড (Travel Blog)" : "Travel Guides & Blog"}
-                    </span>
-                    <span aria-hidden="true">·</span>
-                    <span className="bg-white/10 text-white/90 px-2.5 py-0.5 rounded-md border border-white/15">
-                      {isBn
-                        ? `${localizedBlogs.length}টি বিস্তারিত গাইড`
-                        : `${localizedBlogs.length} Travel Guides`}
-                    </span>
-                  </nav>
-
-                  <h1
+<h1
                     id="blog-hero-h1"
                     className="font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.12] text-balance"
                   >
@@ -4743,10 +4668,7 @@ export default function App() {
               const sameCategoryPosts = localizedBlogs.filter(
                 (p) => p.slug !== activePost.slug && p.category === activePost.category
               );
-              const otherCategoryPosts = localizedBlogs.filter(
-                (p) => p.slug !== activePost.slug && p.category !== activePost.category
-              );
-              const relatedPosts = [...sameCategoryPosts, ...otherCategoryPosts].slice(0, 3);
+              const relatedPosts = getRelatedBlogPosts(activePost, localizedBlogs, 3);
 
               // First-Occurrence Semantic Contextual Internal Linker (Nathan Gotch / Koray Tugberk Silo Rule)
               // Ensures each target URL is linked at most ONCE inside the article body (no spammy duplicate links, no self-links)
@@ -5010,12 +4932,12 @@ export default function App() {
 
               return (
                 <>
-                  {/* Top Navigation Bar: Back to All Blogs + Breadcrumb */}
+                  {/* Top Navigation: Return to the blog index */}
                   <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
-                    <button
-                      type="button"
-                      onClick={() => navigateTo("/blog")}
-                      className="inline-flex items-center gap-2 text-xs font-semibold text-brand-navy hover:text-slate-900 bg-white border border-slate-200 hover:border-brand-navy px-4 py-2 rounded-xl transition-colors cursor-pointer"
+                    <a
+                      href="/blog"
+                      onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
+                      className="inline-flex items-center gap-2 text-xs font-semibold text-brand-navy hover:text-slate-900 bg-white border border-slate-200 hover:border-brand-navy px-4 py-2 rounded-xl transition-colors"
                     >
                       <ChevronLeft size={14} />
                       <span>
@@ -5023,21 +4945,8 @@ export default function App() {
                           ? `সবগুলো ট্রাভেল ব্লগে ফিরে যান (${localizedBlogs.length})`
                           : `Back to All Travel Guides (${localizedBlogs.length})`}
                       </span>
-                    </button>
+                    </a>
 
-                    <nav className="text-slate-500 text-xs flex items-center gap-1.5 truncate max-w-full">
-                      <span className="hover:text-slate-900 cursor-pointer" onClick={() => navigateTo("/")}>
-                        {isBn ? "হোম" : "Home"}
-                      </span>
-                      <span aria-hidden="true">/</span>
-                      <span className="hover:text-slate-900 cursor-pointer" onClick={() => navigateTo("/blog")}>
-                        {isBn ? "ট্রাভেল ব্লগ" : "Travel Blog"}
-                      </span>
-                      <span aria-hidden="true">/</span>
-                      <span className="text-brand-navy font-semibold truncate max-w-[240px] sm:max-w-md">
-                        {activePost.title}
-                      </span>
-                    </nav>
                   </div>
 
                   {/* Main Article 2-Column Layout (Content + Sticky Trip Planner Sidebar) */}
@@ -5234,21 +5143,21 @@ export default function App() {
                                       <span className="text-[11px] font-bold text-brand-navy uppercase tracking-wider block">
                                         {isBn ? "সংশ্লিষ্ট পরবর্তী ধাপ (Recommended Next Guide)" : "Recommended Next Step in This Topic"}
                                       </span>
-                                      <button
-                                        type="button"
-                                        onClick={() => navigateTo(activePost.internalLinks[0].path)}
-                                        className="text-left font-serif font-bold text-[16px] text-brand-navy hover:text-brand-emerald underline decoration-[#D4941A] decoration-2 underline-offset-3 cursor-pointer"
+                                      <a
+                                        href={activePost.internalLinks[0].path}
+                                        onClick={(e) => { e.preventDefault(); navigateTo(activePost.internalLinks[0].path); }}
+                                        className="text-left font-serif font-bold text-[16px] text-brand-navy hover:text-brand-emerald underline decoration-[#D4941A] decoration-2 underline-offset-3"
                                       >
                                         {activePost.internalLinks[0].text} →
-                                      </button>
+                                      </a>
                                     </div>
-                                    <button
-                                      type="button"
-                                      onClick={() => navigateTo("/umrah")}
-                                      className="self-start sm:self-center text-xs font-semibold text-brand-navy bg-white border border-slate-200 hover:border-brand-navy px-3 py-1.5 rounded-lg shrink-0 cursor-pointer"
+                                    <a
+                                      href="/umrah"
+                                      onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }}
+                                      className="self-start sm:self-center text-xs font-semibold text-brand-navy bg-white border border-slate-200 hover:border-brand-navy px-3 py-1.5 rounded-lg shrink-0"
                                     >
                                       {isBn ? "Umrah BDT ক্যালকুলেটর" : "Open Umrah BDT Calculator"}
-                                    </button>
+                                    </a>
                                   </div>
 
                                   <div className="flex flex-wrap items-center justify-between gap-3 pt-0.5">
@@ -5351,30 +5260,25 @@ export default function App() {
                                   : `Complete "${activePost.category}" Topical Series (${sameCategoryPosts.length + 1} Connected Guides)`}
                               </h3>
                             </div>
-                            <button
-                              type="button"
-                              onClick={() => navigateTo("/sitemap")}
-                              className="text-xs font-semibold text-brand-navy hover:underline cursor-pointer"
+                            <a
+                              href="/sitemap"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/sitemap"); }}
+                              className="text-xs font-semibold text-brand-navy hover:underline"
                             >
                               {isBn ? "সম্পূর্ণ SEO Blueprint দেখুন →" : "View Full Topical Map →"}
-                            </button>
+                            </a>
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                             {[activePost, ...sameCategoryPosts].map((clusterPost, cIdx) => {
                               const isCurrent = clusterPost.slug === activePost.slug;
-                              return (
-                                <button
-                                  key={clusterPost.id}
-                                  type="button"
-                                  disabled={isCurrent}
-                                  onClick={() => !isCurrent && navigateTo(`/blog/${clusterPost.slug}`)}
-                                  className={`text-left p-3 rounded-xl border transition-all flex items-start gap-2.5 ${
-                                    isCurrent
-                                      ? "bg-brand-navy text-white border-brand-navy cursor-default"
-                                      : "bg-white hover:bg-slate-100 text-slate-800 border-slate-200 hover:border-brand-navy cursor-pointer"
-                                  }`}
-                                >
+                              const className = `text-left p-3 rounded-xl border transition-all flex items-start gap-2.5 ${
+                                isCurrent
+                                  ? "bg-brand-navy text-white border-brand-navy cursor-default"
+                                  : "bg-white hover:bg-slate-100 text-slate-800 border-slate-200 hover:border-brand-navy"
+                              }`;
+                              const contents = (
+                                <>
                                   <span
                                     className={`text-[11px] font-mono font-bold px-1.5 py-0.5 rounded shrink-0 mt-0.5 ${
                                       isCurrent ? "bg-[#F6B73C] text-brand-navy" : "bg-slate-100 text-brand-navy"
@@ -5394,7 +5298,22 @@ export default function App() {
                                         : `${clusterPost.readTime} · ${isBn ? "পড়তে ক্লিক করুন →" : "Read Spoke Guide →"}`}
                                     </div>
                                   </div>
-                                </button>
+                                </>
+                              );
+
+                              return isCurrent ? (
+                                <div key={clusterPost.id} aria-current="page" className={className}>
+                                  {contents}
+                                </div>
+                              ) : (
+                                <a
+                                  key={clusterPost.id}
+                                  href={`/blog/${clusterPost.slug}`}
+                                  onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${clusterPost.slug}`); }}
+                                  className={className}
+                                >
+                                  {contents}
+                                </a>
                               );
                             })}
                           </div>
@@ -5407,15 +5326,16 @@ export default function App() {
                         </div>
                         <div className="flex flex-wrap gap-2.5 text-xs">
                           {activePost.internalLinks.map((lnk, idx) => (
-                            <button
+                            <a
                               key={idx}
                               id={`blog-inner-link-${idx}`}
-                              onClick={() => navigateTo(lnk.path)}
-                              className="bg-slate-100 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 px-3.5 py-2 rounded-xl cursor-pointer flex items-center gap-1.5 transition-colors font-medium"
+                              href={lnk.path}
+                              onClick={(e) => { e.preventDefault(); navigateTo(lnk.path); }}
+                              className="bg-slate-100 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-colors font-medium"
                             >
                               <Link2 size={13} className="text-brand-emerald" />
                               <span>{lnk.text}</span>
-                            </button>
+                            </a>
                           ))}
                         </div>
 
@@ -5575,21 +5495,21 @@ export default function App() {
                           <span className="text-xs font-bold text-slate-800">
                             {isBn ? "আরও ট্রাভেল গাইড" : "More Travel Guides"}
                           </span>
-                          <button
-                            type="button"
-                            onClick={() => navigateTo("/blog")}
-                            className="text-xs font-semibold text-brand-navy hover:underline cursor-pointer"
+                          <a
+                            href="/blog"
+                            onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
+                            className="text-xs font-semibold text-brand-navy hover:underline"
                           >
                             {isBn ? `সব দেখুন (${localizedBlogs.length})` : `View All (${localizedBlogs.length})`}
-                          </button>
+                          </a>
                         </div>
                         <div className="divide-y divide-slate-100">
                           {relatedPosts.map((post) => (
-                            <button
+                            <a
                               key={post.id}
-                              type="button"
-                              onClick={() => navigateTo(`/blog/${post.slug}`)}
-                              className="w-full text-left py-3 first:pt-1 last:pb-0 group cursor-pointer space-y-1"
+                              href={`/blog/${post.slug}`}
+                              onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${post.slug}`); }}
+                              className="w-full text-left py-3 first:pt-1 last:pb-0 group space-y-1 block"
                             >
                               <div className="text-[11px] text-slate-500">
                                 {post.category} · {post.readTime}
@@ -5597,7 +5517,7 @@ export default function App() {
                               <div className="text-xs font-semibold text-slate-800 group-hover:text-brand-navy line-clamp-2 leading-snug">
                                 {post.title}
                               </div>
-                            </button>
+                            </a>
                           ))}
                         </div>
                       </div>
@@ -5617,10 +5537,10 @@ export default function App() {
                             : "More Travel Guides for Bangladeshi Flyers"}
                         </h2>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => navigateTo("/blog")}
-                        className="self-start sm:self-end bg-brand-navy text-white text-xs font-semibold px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5 cursor-pointer"
+                      <a
+                        href="/blog"
+                        onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
+                        className="self-start sm:self-end bg-brand-navy text-white text-xs font-semibold px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5"
                       >
                         <span>
                           {isBn
@@ -5628,7 +5548,7 @@ export default function App() {
                             : `Back to All ${localizedBlogs.length} Blog Guides`}
                         </span>
                         <ArrowRight size={13} className="text-[#F6B73C]" />
-                      </button>
+                      </a>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -5638,9 +5558,13 @@ export default function App() {
                         return (
                           <article
                             key={post.id}
-                            onClick={() => navigateTo(`/blog/${post.slug}`)}
-                            className="group bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between cursor-pointer transition-all"
+                            className="bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs transition-all"
                           >
+                            <a
+                              href={`/blog/${post.slug}`}
+                              onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${post.slug}`); }}
+                              className="group flex h-full flex-col justify-between"
+                            >
                             <div>
                               <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
                                 <img
@@ -5668,18 +5592,12 @@ export default function App() {
                               </div>
                             </div>
                             <div className="px-5 pb-5 pt-2">
-                              <button
-                                type="button"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  navigateTo(`/blog/${post.slug}`);
-                                }}
-                                className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-between cursor-pointer"
-                              >
+                              <span className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-between">
                                 <span>{isBn ? "সম্পূর্ণ ব্লগ পড়ুন · Read Full Blog" : "Read Full Blog"}</span>
                                 <ArrowRight size={13} />
-                              </button>
+                              </span>
                             </div>
+                            </a>
                           </article>
                         );
                       })}
@@ -6335,9 +6253,16 @@ export default function App() {
                 <a href="tel:+8801784385335" className="hover:text-white hover:underline text-[#F6B73C] font-mono font-bold">Direct Call: +8801784385335</a>
               </div>
               <div className="pt-1">
-                <button onClick={() => navigateTo("/contact")} className="bg-slate-800 text-[#F6B73C] hover:bg-slate-700 px-3 py-1.5 rounded-md font-bold text-[10px] uppercase tracking-wide cursor-pointer transition-colors">
+                <a
+                  href="/contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo("/contact");
+                  }}
+                  className="bg-slate-800 text-[#F6B73C] hover:bg-slate-700 px-3 py-1.5 rounded-md font-bold text-[10px] uppercase tracking-wide cursor-pointer transition-colors inline-flex items-center"
+                >
                   {isBn ? "যোগাযোগ ফর্ম পেজ" : "Contact Form Page"}
-                </button>
+                </a>
               </div>
             </div>
             <p className="leading-relaxed text-[11px] text-slate-500 pt-2 border-t border-slate-800">

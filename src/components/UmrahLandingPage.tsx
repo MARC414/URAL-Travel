@@ -108,24 +108,9 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         {/* Constrained Content Container Inside Full-Width Hero */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 space-y-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            {/* Left Column: Breadcrumb, Search-Intent H1, Value Prop & Dual CTAs (7 Cols) */}
+            {/* Left Column: Search-Intent H1, Value Prop & Dual CTAs (7 Cols) */}
             <div className="lg:col-span-7 space-y-6">
-              {/* Breadcrumb & Verification Metadata */}
               <div className="flex flex-wrap items-center gap-2 text-xs text-slate-300">
-                <button
-                  type="button"
-                  onClick={() => onNavigate("/")}
-                  className="hover:text-[#F6B73C] transition-colors cursor-pointer"
-                >
-                  {isBn ? "হোম (Home)" : "Home"}
-                </button>
-                <span aria-hidden="true">/</span>
-                <span className="text-[#F6B73C] font-semibold">
-                  {isBn
-                    ? "ওমরাহ ও হজ্জ প্ল্যানিং হাব ২০২৬"
-                    : "Umrah & Hajj Planning Hub 2026"}
-                </span>
-                <span aria-hidden="true">·</span>
                 <span className="font-mono text-[11px] text-emerald-300">
                   {isBn ? "✓ Nusuk (nusuk.sa) ও ই-ভিসা ভেরিফায়েড" : "✓ Nusuk (nusuk.sa) & e-Visa Verified"}
                 </span>
@@ -1193,9 +1178,13 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             : "In-Depth Umrah & Hajj Editorial Playbooks"}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div
-            onClick={() => onNavigate("/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost")}
-            className="bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl p-6 space-y-2 cursor-pointer transition-colors"
+          <a
+            href="/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost"
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate("/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost");
+            }}
+            className="block bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl p-6 space-y-2 cursor-pointer transition-colors"
           >
             <span className="text-xs font-mono text-brand-navy font-semibold">
               {isBn ? "বিস্তারিত গাইড ০১" : "In-Depth Playbook 01"}
@@ -1210,13 +1199,15 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 ? "ধাপে ধাপে Saudi Visa Bio ফিঙ্গারপ্রিন্ট, Nusuk Rawdah পারমিট ও ১০ দিনের পূর্ণাঙ্গ বাজেট পড়ুন →"
                 : "Read the complete guide to Saudi Visa Bio biometrics, Nusuk Rawdah permits, and 10-day cost tables →"}
             </p>
-          </div>
+          </a>
 
-          <div
-            onClick={() =>
-              onNavigate("/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh")
-            }
-            className="bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl p-6 space-y-2 cursor-pointer transition-colors"
+          <a
+            href="/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh"
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate("/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh");
+            }}
+            className="block bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl p-6 space-y-2 cursor-pointer transition-colors"
           >
             <span className="text-xs font-mono text-brand-navy font-semibold">
               {isBn ? "বিস্তারিত গাইড ০২" : "In-Depth Playbook 02"}
@@ -1231,7 +1222,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 ? "হুইলচেয়ার অ্যাক্সেস, বাংলাদেশি খাবারের হোটেল জোন ও বুলেট ট্রেন টিকিট বুকিং নিয়ম পড়ুন →"
                 : "Learn which streets have zero uphill walking, Bangladeshi dining, and how to book the 300 km/h bullet train →"}
             </p>
-          </div>
+          </a>
         </div>
       </section>
 

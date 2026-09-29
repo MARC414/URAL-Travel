@@ -1081,14 +1081,14 @@ export const VISA_DATA: VisaGuide[] = [
       "Obtain a Letter of Introduction (Form V39A) from a Singapore Citizen/PR contact, OR choose an accredited Singapore High Commission Authorized Visa Agent in Dhaka (such as Simon Overseas, Silkways, or Lexing Global) that assists with tourist profiles.",
       "Submit your physical passport, signed Form 14A, and supporting documents at the authorized visa agent's office in Dhaka or Chattogram (direct walk-in applications at the Consulate are not accepted).",
       "Wait 5 to 7 working days for the Consulate of the Republic of Singapore in Dhaka to process the application.",
-      "Once approved, collect your passport and print the official Singapore e-Visa PDF. Within 72 hours before your flight, submit the free online SG Arrival Card (SGAC) at eservices.ica.gov.sg."
+      "Once approved, follow the current ICA and authorized-channel instructions for your visa document. Submit the free SG Arrival Card (SGAC) within three days, including the day of arrival, before entering Singapore."
     ],
     quickAnswer: "Bangladeshi passport holders require a pre-arranged e-Visa to enter Singapore. You cannot apply directly at the Singapore Consulate in Dhaka; all applications must be submitted through an embassy-approved Authorized Visa Agent. The visa costs approximately BDT 4,200 to BDT 6,500 (SGD 30 government fee plus agency charge) and takes 5 to 7 working days. A Letter of Introduction (LOI Form V39A) from a Singapore local contact or sponsor is standardly required, along with a 6-month bank statement showing at least BDT 1,50,000 balance.",
     keyFacts: [
       { label: "Submission Channel", value: "Authorized Visa Agents in Dhaka" },
       { label: "Total Visa Cost", value: "BDT 4,200 - 6,500" },
       { label: "Processing Window", value: "5 to 7 Working Days" },
-      { label: "Pre-Flight Requirement", value: "Free SG Arrival Card (72h prior)" }
+      { label: "Arrival Declaration", value: "Free SG Arrival Card within 3 days before arrival" }
     ],
     faqs: [
       {
@@ -1128,7 +1128,7 @@ export const VISA_DATA: VisaGuide[] = [
       "step": [
         { "@type": "HowToStep", "text": "Gather 6-month bank statement (BDT 150,000+), NOC/Trade License, and 35x45mm matte photos." },
         { "@type": "HowToStep", "text": "Submit Form 14A and LOI (Form V39A) through an Authorized Visa Agent in Dhaka." },
-        { "@type": "HowToStep", "text": "Print the approved e-Visa and complete the free SG Arrival Card within 72 hours of departure." }
+        { "@type": "HowToStep", "text": "Follow ICA's current visa instructions and submit the free SG Arrival Card within three days, including the day of arrival, before entering Singapore." }
       ]
     }
   ]
@@ -1139,53 +1139,54 @@ export const VISA_DATA: VisaGuide[] = [
     id: "maldives-visa",
     country: "Maldives",
     requirementType: "Visa On Arrival",
-    costBdt: "Free (30-Day Tourist Visa on Arrival is 100% gratis for Bangladeshi citizens)",
-    processingTime: "Instant on arrival at Velana International Airport (MLE)",
+    costBdt: "No advance tourist visa application; confirm current fee and permitted stay with Maldives Immigration",
+    processingTime: "Tourist visa is assessed on arrival after immigration admissibility checks",
     documentChecklist: [
       {
-        category: "Mandatory Documents for Dhaka Departure & Malé Arrival",
+        category: "Official tourist-entry checklist (verify before departure)",
         items: [
-          "Machine-Readable Passport (MRP or e-Passport) with at least 6 months validity",
-          "IMUGA Traveller Declaration QR Code (completed free online within 96 hours prior to flight)",
-          "Confirmed roundtrip air ticket (Dhaka – Malé – Dhaka)",
-          "Pre-booked, confirmed hotel or guesthouse voucher at a registered Maldivian tourist facility (e.g., Maafushi, Hulhumalé, or resort)",
-          "Proof of sufficient funds: USD cash ($100+ per day recommended) OR an international dual-currency card endorsed on your passport, plus a recent Bank Statement for Dhaka immigration clearance"
+          "Passport or travel document with a Machine-Readable Zone (MRZ) and at least one month of validity under current Maldives Immigration guidance; check whether an airline, transit country, or onward destination requires more",
+          "Confirmed return or onward journey ticket",
+          "Prepaid, confirmed booking at a registered facility in the Maldives",
+          "Sufficient funds to cover the stay, or sponsorship approved by Maldives Immigration",
+          "Free IMUGA Traveller Declaration submitted within 96 hours before arrival; each traveler, including children, submits a separate declaration",
+          "Meet the entry requirements of the next destination and carry a valid Yellow Fever certificate if the official rule applies to your itinerary"
         ]
       }
     ],
     stepByStep: [
-      "Book your roundtrip flight from Dhaka to Malé (MLE) and reserve a registered hotel/guesthouse on Booking.com, Agoda, or directly with the property.",
-      "Endorse US Dollars on your passport (cash USD and/or dual-currency credit/debit card) at any authorized bank in Bangladesh.",
-      "Within 96 hours (4 days) before your departure flight from Dhaka, go to the official Maldives Immigration portal (imuga.immigration.gov.mv) and fill out the free Traveller Declaration form to receive your QR code.",
-      "Present your passport, return ticket, hotel voucher, USD endorsement, and IMUGA QR code screenshot at Hazrat Shahjalal International Airport (DAC) check-in and immigration.",
-      "Upon landing at Velana International Airport (MLE), walk directly to the immigration desk with your passport, hotel voucher, and return ticket to receive your free 30-day Tourist Visa stamp."
+      "Book a confirmed return or onward ticket and a prepaid stay at a registered Maldivian facility. Prepare evidence of sufficient funds for the trip or an approved sponsorship.",
+      "Check that your passport or travel document has an MRZ and meets Maldives Immigration's current validity rule. Review any stricter requirements imposed by your airline, transit country, or onward destination.",
+      "Within 96 hours before arrival in the Maldives, submit the free Traveller Declaration through the official IMUGA portal. Each traveler, including a child, needs an individual submission; save the confirmation for the journey.",
+      "Keep your passport, return or onward ticket, registered accommodation booking, funds or sponsorship evidence, and IMUGA confirmation accessible for airline check-in and arrival checks. Confirm any separate departure-document requirements with your airline and relevant authorities.",
+      "On arrival, present the requested documents to Maldives Immigration. A tourist visa is granted on arrival without pre-approval, but entry remains subject to the officer's admissibility decision and the current official requirements."
     ],
-    quickAnswer: "Bangladeshi citizens get a completely free 30-day Tourist Visa on Arrival in the Maldives—no advance embassy application or visa fee is required. To clear Dhaka airport immigration and Malé arrival smoothly, you must carry a passport with 6+ months validity, a confirmed return flight ticket, a paid or confirmed hotel booking at a registered tourist property, USD endorsement on your passport, and the free IMUGA Traveller Declaration QR code completed online within 96 hours before flying.",
+    quickAnswer: "Tourists do not need pre-approval for a Maldives tourist visa; the visa is granted on arrival after immigration checks. Current Maldives Immigration guidance calls for an MRZ passport or travel document with at least one month's validity, a confirmed return or onward ticket, prepaid accommodation at a registered facility, and sufficient funds or approved sponsorship. Submit the free IMUGA Traveller Declaration within 96 hours before arrival. Check current fee and permitted-stay details, plus any stricter airline, transit, or onward-destination rules, before departure.",
     keyFacts: [
-      { label: "Visa Type", value: "Free 30-Day Visa on Arrival" },
-      { label: "Visa Fee", value: "BDT 0 (100% Free)" },
-      { label: "Mandatory Online Form", value: "IMUGA Declaration (within 96h)" },
-      { label: "Required Funds Proof", value: "Confirmed Hotel + USD Endorsement" }
+      { label: "Tourist Visa", value: "Granted on arrival; no pre-approval" },
+      { label: "Passport Rule", value: "MRZ document; at least 1 month validity" },
+      { label: "Entry Planning", value: "Return/onward ticket + registered prepaid stay" },
+      { label: "Traveller Declaration", value: "Free IMUGA submission within 96h before arrival" }
     ],
     faqs: [
       {
-        question: "Why do some Bangladeshi travelers get stopped at Dhaka airport when flying to the Maldives?",
-        answer: "Dhaka emigration officers verify that you are a genuine tourist and not traveling on a tourist entry to seek unauthorized work. Always carry a printed hotel voucher, return ticket, USD cash/card endorsement, your 6-month bank statement, and your job NOC or trade license to breeze through Dhaka immigration in 2 minutes."
+        question: "What documents does Maldives Immigration list for tourist entry?",
+        answer: "Maldives Immigration lists an MRZ passport or travel document with at least one month's validity, a confirmed return journey ticket, a prepaid booking at a registered facility, sufficient funds or approved sponsorship, and the Traveller Declaration submitted within 96 hours before arrival. Check the official page for current requirements and any additional airline or onward-destination rules."
       },
       {
-        question: "Does the IMUGA form cost any money?",
-        answer: "No! The official Maldives Immigration IMUGA Traveller Declaration (imuga.immigration.gov.mv) is 100% free. Never pay third-party scam websites for completing the IMUGA form."
+        question: "Is the Maldives IMUGA Traveller Declaration free?",
+        answer: "Yes. Maldives Immigration says the Traveller Declaration is free and should be submitted directly through the official IMUGA portal within 96 hours before arrival. Each traveler, including children, needs a separate declaration."
       }
     ],
     schemaMarkup: {
       type: "GovernmentService + FAQPage",
-      description: "Maldives free Visa on Arrival and IMUGA guide for Bangladeshi citizens",
+      description: "Maldives tourist visa on arrival and IMUGA guide for Bangladeshi citizens",
       code: `{
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "GovernmentService",
-      "name": "Maldives Free Tourist Visa on Arrival for Bangladeshi Citizens",
+      "name": "Maldives Tourist Visa on Arrival for Bangladeshi Citizens",
       "serviceType": "Visa on Arrival",
       "provider": {
         "@type": "GovernmentOrganization",
@@ -1195,17 +1196,11 @@ export const VISA_DATA: VisaGuide[] = [
     },
     {
       "@type": "HowTo",
-      "name": "How to get a Maldives Visa on Arrival from Bangladesh",
-      "totalTime": "PT30M",
-      "estimatedCost": {
-        "@type": "MonetaryAmount",
-        "currency": "BDT",
-        "value": "0"
-      },
+      "name": "How to prepare for Maldives tourist visa on arrival",
       "step": [
-        { "@type": "HowToStep", "text": "Book a confirmed return flight and registered Maldives hotel or Maafushi guesthouse." },
-        { "@type": "HowToStep", "text": "Complete the free IMUGA Traveller Declaration online within 96 hours before departure." },
-        { "@type": "HowToStep", "text": "Present your passport, hotel voucher, and return ticket at Malé Airport for a free 30-day stamp." }
+        { "@type": "HowToStep", "text": "Prepare a confirmed return or onward ticket, prepaid accommodation at a registered facility, and sufficient funds or sponsorship approved by Maldives Immigration." },
+        { "@type": "HowToStep", "text": "Check the current passport validity rule and submit an individual, free IMUGA Traveller Declaration within 96 hours before arrival." },
+        { "@type": "HowToStep", "text": "Carry the itinerary, booking, funds or sponsorship evidence, passport, and IMUGA confirmation for immigration assessment on arrival." }
       ]
     }
   ]

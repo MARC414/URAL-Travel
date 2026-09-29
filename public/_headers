@@ -1,8 +1,10 @@
 # ---------------------------------------------------------------------------
 # Cloudflare Pages response headers
 #
-# Rule order matters: Pages applies the FIRST matching rule per header name,
-# so the specific immutable-asset rules must precede any broader fallback.
+# Avoid overlapping Cache-Control rules: deployed Pages responses can combine
+# matching values instead of replacing them, yielding conflicting directives.
+# Keep the feed/asset Cache-Control rules specific; rely on Pages' default for
+# other HTML responses.
 # ---------------------------------------------------------------------------
 
 # Vite emits content-hashed filenames (index-BAZjQAaJ.js). The hash changes
@@ -34,9 +36,9 @@
   Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=3600
 
-# Prerendered HTML must stay fresh (content changes without a URL change), but
-# may be served stale briefly while revalidating to keep TTFB low.
+# Prerendered HTML must stay fresh (content changes without a URL change).
+# Cloudflare Pages defaults static HTML to revalidation; don't add a second,
+# broad Cache-Control value that would conflict with the specific rules above.
 /*
-  Cache-Control: public, max-age=0, must-revalidate, stale-while-revalidate=60
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
