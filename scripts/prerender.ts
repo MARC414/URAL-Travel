@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { execSync } from "node:child_process";
 import {
   FLIGHTS_DATA,
   HOTELS_DATA,
@@ -319,7 +320,32 @@ interface PrerenderRoute {
   breadcrumbs: { name: string; url: string }[];
   extraGraphNodes: Record<string, unknown>[];
   bodyHtml: string;
+  // ISO date (YYYY-MM-DD) for the sitemap <lastmod>. Blog posts use their own
+  // publish date; content-driven hub/route pages fall back to the last git
+  // commit date of src/constants.ts (the data source), so lastmod only moves
+  // when the content genuinely changed — never on a rebuild of unchanged pages.
+  lastmod?: string;
 }
+
+// Last git-commit date (YYYY-MM-DD) of the file that drives the page's content.
+// Falls back to today's build date when git history is unavailable (e.g. a
+// shallow CI checkout or an export without .git).
+function gitLastModifiedDate(relativePath: string): string {
+  const today = new Date().toISOString().slice(0, 10);
+  try {
+    const out = execSync(`git log -1 --format=%cs -- "${relativePath}"`, {
+      cwd: ROOT_DIR,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    }).trim();
+    // %cs yields a strict YYYY-MM-DD committer date.
+    return /^\d{4}-\d{2}-\d{2}$/.test(out) ? out : today;
+  } catch {
+    return today;
+  }
+}
+
+const CONTENT_DATA_LASTMOD = gitLastModifiedDate("src/constants.ts");
 
 function getSocialImageSource(fileName: string): string {
   const optimizedPath = path.join(OPTIMIZED_SOCIAL_IMAGES_DIR, fileName);
@@ -1383,6 +1409,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         { name: post.title, url: postUrl },
       ],
       extraGraphNodes: extraNodes,
+      lastmod: toIsoDate(post.date),
       bodyHtml: `
         <article>
           <h1>${escapeHtml(post.title)}</h1>
@@ -1418,14 +1445,31 @@ function applySharedSeoCopy(routes: PrerenderRoute[]) {
 }
 
 function generateSitemapXml(routes: PrerenderRoute[]) {
+  // Weak crawl-priority hints. The homepage and the five category hubs are the
+  // freshest, most important entry points; individual guides and blog posts
+  // change less often. These are hints only — Google largely ignores priority,
+  // but a truthful changefreq/priority costs nothing and never hurts.
+  const isHub = (p: string) =>
+    p === "/" ||
+    ["/flights", "/hotels", "/visa", "/destinations", "/costs", "/blog"].includes(
+      p
+    );
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${routes
-  .map(
-    (r) => `  <url>
+  .map((r) => {
+    const lastmod = r.lastmod || CONTENT_DATA_LASTMOD;
+    const hub = isHub(r.routePath);
+    const changefreq = hub ? "weekly" : "monthly";
+    const priority = r.routePath === "/" ? "1.0" : hub ? "0.9" : "0.7";
+    return `  <url>
     <loc>${escapeXml(r.canonicalUrl)}</loc>
-  </url>`
-  )
+    <lastmod>${escapeXml(lastmod)}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+  })
   .join("\n")}
 </urlset>
 `;
