@@ -786,12 +786,30 @@ function buildAllRoutes(): PrerenderRoute[] {
         <article>
           <h1>${escapeHtml(title)}</h1>
           <p>${escapeHtml(h.quickAnswer || h.description || description)}</p>
-          <h2>Neighborhoods to compare</h2>
+          <h2>Neighborhoods to compare in ${escapeHtml(h.city)}</h2>
           <ul>
             ${h.neighborhoods.map((area) => `<li><strong>${escapeHtml(area.name)}:</strong> ${escapeHtml(area.description)} (${escapeHtml(area.vibe)})</li>`).join("")}
           </ul>
           <h2>Planning facts</h2>
           <ul>${h.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
+          <h2>Example properties in the ${escapeHtml(h.city)} guide</h2>
+          <ul>${h.hotels.map((hotel) => `<li><strong>${escapeHtml(hotel.name)}</strong> — ${escapeHtml(hotel.category)} option in ${escapeHtml(hotel.neighborhood)}; indicative guide figure BDT ${hotel.priceBdt.toLocaleString("en-US")}. Listed features include ${escapeHtml(hotel.features.join(", "))}.</li>`).join("")}</ul>
+          <section>
+            <h2>Match the hotel area to your itinerary</h2>
+            <p>The area options in this guide have different profiles: ${h.neighborhoods.map((area) => `${escapeHtml(area.name)} (${escapeHtml(area.vibe)})`).join("; ")}. Choose by looking at where you expect to spend your time, how you will reach those places and the pace that suits your travel party. A central location may reduce some local journeys but can cost more or be busier; a quieter base may require more planning for meals and transport. Use the neighborhood descriptions above to compare trade-offs rather than treating one area as the universal best choice.</p>
+            <p>Before selecting a property, plot its exact address against your planned activities and the transport you expect to use. Check walking distances, station access and airport-transfer arrangements using current maps. If you have mobility needs, children or an early departure, contact the property to confirm the room setup, lift access, luggage storage and check-in arrangements instead of relying only on a neighborhood label.</p>
+          </section>
+          <section>
+            <h2>Check the full rate and reservation conditions</h2>
+            <p>Compare the final amount for the same dates, room occupancy and number of nights. Confirm whether the displayed rate includes local taxes, service charges, breakfast and any required deposit; these items can change the checkout total. Review the cancellation deadline, refund method, payment schedule and conditions for changing guest names. If a booking is marked non-refundable, make sure your travel dates and entry arrangements are sufficiently settled before paying.</p>
+            <p>The BDT figures and property examples in this guide are planning references, not live availability or a guaranteed offer. Prices can change with season, room type, occupancy and booking channel. Check the provider's current listing and recent property reviews, and verify that the selected room meets your needs before confirming. A star category or an attractive headline rate does not replace checking the room description and terms.</p>
+          </section>
+          <section>
+            <h2>Payment and arrival planning for travelers from Bangladesh</h2>
+            <p>Payment methods vary by booking platform and property. Before relying on a Bangladeshi debit or credit card, ask your bank about foreign-currency endorsement, online transactions and any international usage controls. A “pay at property” option may still require a card guarantee or a deposit, so read the policy rather than assuming payment can be made in BDT at arrival. Keep the reservation confirmation and the property's contact details available offline.</p>
+            <p>For arrival day, note the local address and check-in hours, then confirm what to do if your flight is delayed or lands after reception hours. Arrange a transfer using current airport and local transport information; do not assume the hotel is next to the airport or a station simply because it appears close on a city map. Share the address and check-in plan with the other travelers in your party.</p>
+          </section>
+          ${renderLandingFaqs("hotel-guide-faqs", `Hotel questions about ${h.city}`, hotelFaq)}
         </article>
       `,
     });
