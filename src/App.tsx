@@ -540,6 +540,16 @@ export default function App() {
     }
   };
 
+  // The document language is baked into index.html as lang="en", but the UI can
+  // switch to Bengali entirely client-side. Without this, <html lang> keeps
+  // claiming English while Bengali text is on screen, so screen readers apply
+  // the wrong pronunciation rules (WCAG 3.1.1 / 3.1.2).
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = lang === "bn" ? "bn-BD" : "en-BD";
+    }
+  }, [lang]);
+
   const t = translations[lang];
   const isBn = lang === "bn";
   const localizedBlogs = getLocalizedBlogs(lang);

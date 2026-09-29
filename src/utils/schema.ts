@@ -178,12 +178,18 @@ export function webPageSchema(options: {
     description,
     isPartOf: { "@id": SITE_WEBSITE_ID },
     about: { "@id": SITE_ORG_ID },
+    // The image is declared once with a stable @id, then referenced by both
+    // primaryImageOfPage and image. Inlining it twice would make parsers treat
+    // it as two unrelated ImageObjects for the same page.
     primaryImageOfPage: {
       "@type": "ImageObject",
+      "@id": `${url}#primaryimage`,
       url: imageUrl,
+      contentUrl: imageUrl,
       width: 1200,
       height: 630,
     },
+    image: { "@id": `${url}#primaryimage` },
     inLanguage,
   };
 

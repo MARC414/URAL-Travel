@@ -148,6 +148,10 @@ function buildAllRoutes(): PrerenderRoute[] {
   const defaultOgImage = `${BASE_URL}/og-image.jpg`;
 
   // 1. Home (/)
+  // Every question here must be unique to the homepage. HAJJ_UMRAH_FAQS is
+  // already emitted in full on /umrah and on each Hajj/Umrah blog post, so
+  // borrowing from it made the same two Q&A pairs appear at three different
+  // URLs — answer engines pick one URL per answer and drop the rest.
   const homeFaq = stripContext(
     generateFAQSchema([
       {
@@ -160,7 +164,16 @@ function buildAllRoutes(): PrerenderRoute[] {
         answer:
           "Nepal (from BDT 42,000 per person with free Visa on Arrival), Malaysia (from BDT 68,000 with 4-day online e-Visa and universal Halal dining), Thailand, and the Maldives local islands (Maafushi and Hulhumalé) are the top budget-friendly family destinations from Dhaka.",
       },
-      ...HAJJ_UMRAH_FAQS.slice(0, 2),
+      {
+        question: "Which countries can Bangladeshi passport holders visit without a prior visa?",
+        answer:
+          "Nepal, the Maldives, Sri Lanka (via online ETA), Bhutan and Indonesia issue Visa on Arrival or free entry to Bangladeshi passport holders, so no embassy appointment is needed before departure from Dhaka. Nepal and the Maldives are the cheapest of these to reach from Dhaka (DAC).",
+      },
+      {
+        question: "Is URAL a travel agency that sells tickets?",
+        answer:
+          "No. URAL is an independent outbound travel intelligence desk for Bangladeshi travellers: it publishes flight price guidance in BDT, official visa checklists, itineraries and realistic trip-cost breakdowns, then links out to the airline, hotel or visa portal so you book directly at the source price.",
+      },
     ])
   );
   homeFaq["@id"] = `${BASE_URL}/#faq`;
@@ -1039,6 +1052,18 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       .replace(
         /<link rel="canonical" href="[^"]*" \/>/,
         `<link rel="canonical" href="${escapeHtml(r.canonicalUrl)}" />`
+      )
+      // Both hreflang tags are self-referential: en-BD is the served variant and
+      // x-default catches every other locale. Without rewriting them per route,
+      // all 83 pages would declare the homepage as their alternate, which
+      // Search Console reports as "no return tag" and ignores wholesale.
+      .replace(
+        /<link rel="alternate" hreflang="en-bd" href="[^"]*" \/>/,
+        `<link rel="alternate" hreflang="en-bd" href="${escapeHtml(r.canonicalUrl)}" />`
+      )
+      .replace(
+        /<link rel="alternate" hreflang="x-default" href="[^"]*" \/>/,
+        `<link rel="alternate" hreflang="x-default" href="${escapeHtml(r.canonicalUrl)}" />`
       )
       .replace(
         /<meta property="og:url" content="[^"]*" \/>/,

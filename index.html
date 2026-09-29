@@ -1,22 +1,27 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-BD">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2EWKHC1KE1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-2EWKHC1KE1');
-    </script>
+    <!--
+      Head order is deliberate and load-bearing:
+        1. charset — must land inside the first 1024 bytes or the parser may
+           restart after sniffing a different encoding.
+        2. viewport — needed before layout so mobile CLS is measured correctly.
+        3. LCP preload — issued before any third-party request so the hero image
+           is not queued behind analytics on a cold connection.
+        4. Analytics/affiliate tags — last, so they never contend with the LCP
+           image for the first few connections.
+    -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0B1426" />
+    <link rel="preload" as="image" type="image/webp" href="/assets/images/clouds_boat_hero_1781438671378-1200.webp" imagesrcset="/assets/images/clouds_boat_hero_1781438671378-640.webp 640w, /assets/images/clouds_boat_hero_1781438671378-1200.webp 1200w" imagesizes="100vw" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://emrld.ltd" />
-    <link rel="preload" as="image" type="image/webp" href="/assets/images/clouds_boat_hero_1781438671378-1200.webp" imagesrcset="/assets/images/clouds_boat_hero_1781438671378-640.webp 640w, /assets/images/clouds_boat_hero_1781438671378-1200.webp 1200w" imagesizes="100vw" fetchpriority="high" />
+    <!--
+      emrld.ltd is a revenue script, not a render-critical one. dns-prefetch
+      warms DNS without holding open a TLS connection the critical path needs.
+    -->
+    <link rel="dns-prefetch" href="https://emrld.ltd" />
     <title>Bangladesh Travel Guides, Flights &amp; Visas from Dhaka | URAL</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="48x48" href="/assets/brand/favicon/favicon-48.png" />
@@ -27,6 +32,15 @@
     <link rel="manifest" href="/assets/brand/favicon/site.webmanifest" />
     <meta name="description" content="Plan travel from Dhaka with BDT flight guidance, visa checklists for Bangladeshi passport holders, destination itineraries and practical trip-budget guides." />
     <link rel="canonical" href="https://ural-travel.pages.dev/" />
+    <!--
+      Self-referential hreflang. The site serves English and Bengali from the
+      same URLs, so en-BD is declared as the served variant and x-default points
+      at the same URL for all other locales. Prerender rewrites these per route
+      alongside the canonical tag.
+    -->
+    <link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/" />
+    <link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/" />
+
 
     <!-- Local Dhaka (BD-13) Geo Meta Signals -->
     <meta name="geo.region" content="BD-13" />
@@ -135,6 +149,21 @@
           }
         ]
       }
+    </script>
+
+    <!--
+      Google tag (gtag.js). Deliberately the last thing in <head>: gtag.js is
+      ~90 KB of JavaScript that must be parsed and compiled on the main thread.
+      Loading it before charset/preload (as it was) pushed the LCP image request
+      behind an analytics connection and added to TBT before first paint.
+    -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2EWKHC1KE1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2EWKHC1KE1');
     </script>
 
     <!-- Travelpayouts Emerald Partner Script (loads asynchronously; guarded against ad-blocker script error events) -->
