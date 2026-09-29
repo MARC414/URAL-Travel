@@ -2868,15 +2868,7 @@ export default function App() {
                     
                     {/* Header */}
                     <div className="border-b border-slate-200 pb-5">
-                      <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <a href="/" onClick={(e) => { e.preventDefault(); navigateTo("/"); }} className="hover:text-slate-750">{isBn ? "হোম" : "Home"}</a>
-                        <span aria-hidden="true">/</span>
-                        <a href="/flights" onClick={(e) => { e.preventDefault(); navigateTo("/flights"); }} className="hover:text-slate-755">{isBn ? "ফ্লাইটস" : "Flights"}</a>
-                        <span>/</span>
-                        <span className="text-brand-navy font-bold">{activeRoute.id}</span>
-                      </nav>
-
-                      <div className="flex flex-wrap items-center justify-between gap-4">
+<div className="flex flex-wrap items-center justify-between gap-4">
                         <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                           {isBn ? `${activeRoute.from} থেকে ${activeRoute.to} ফ্লাইট গাইড` : `Flights from ${activeRoute.from} to ${activeRoute.to}`}
                         </h1>
@@ -3051,15 +3043,7 @@ export default function App() {
                     
                     {/* Header */}
                     <div className="border-b border-slate-200 pb-5">
-                      <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <a href="/" onClick={(e) => { e.preventDefault(); navigateTo("/"); }} className="hover:text-slate-750">{isBn ? "হোম" : "Home"}</a>
-                        <span aria-hidden="true">/</span>
-                        <a href="/hotels" onClick={(e) => { e.preventDefault(); navigateTo("/hotels"); }} className="hover:text-slate-755">{isBn ? "হোটেল" : "Hotels"}</a>
-                        <span>/</span>
-                        <span className="text-brand-navy font-bold">{activeHotel.id}</span>
-                      </nav>
-
-                      <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
+<h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                         {isBn ? `${activeHotel.city}-এ কোথায় থাকবেন: সেরা এলাকা ও হোটেল গাইড` : `Where to Stay in ${activeHotel.city}: Best Areas & Hotels`}
                       </h1>
                     </div>
@@ -3246,15 +3230,7 @@ export default function App() {
                     
                     {/* Header */}
                     <div className="border-b border-slate-200 pb-5">
-                      <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <a href="/" onClick={(e) => { e.preventDefault(); navigateTo("/"); }} className="hover:text-slate-750">{isBn ? "হোম" : "Home"}</a>
-                        <span aria-hidden="true">/</span>
-                        <a href="/visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa"); }} className="hover:text-slate-755">{isBn ? "ভিসা গাইড" : "Visa"}</a>
-                        <span>/</span>
-                        <span className="text-brand-navy font-bold">{activeVisa.id}</span>
-                      </nav>
-
-                      <div className="flex flex-wrap items-center justify-between gap-4">
+<div className="flex flex-wrap items-center justify-between gap-4">
                         <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                           {isBn
                             ? `বাংলাদেশি পাসপোর্টধারীদের জন্য ${activeVisa.country} ভিসা গাইড ও চেকলিস্ট`
@@ -3450,17 +3426,9 @@ export default function App() {
                 const activeDes = DESTINATIONS_DATA.find(d => d.id === parameterId) || DESTINATIONS_DATA[0];
                 return activeDes.id === "dubai-guide" ? (
                   <div className="space-y-10 animate-fade-in text-slate-800">
-                    {/* BREADCRUMB HEADER */}
+                    {/* DESTINATION GUIDE HEADER */}
                     <div className="border-b border-slate-200 pb-5">
-                      <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <a href="/" onClick={(e) => { e.preventDefault(); navigateTo("/"); }} className="hover:text-slate-750">Home</a>
-                        <span aria-hidden="true">/</span>
-                        <a href="/destinations" onClick={(e) => { e.preventDefault(); navigateTo("/destinations"); }} className="hover:text-slate-755">Destinations</a>
-                        <span>/</span>
-                        <span className="text-brand-navy font-bold">dubai-guide</span>
-                      </nav>
-
-                          {/* 🟦 1. HERO SECTION (TOP OF PAGE) */}
+{/* 🟦 1. HERO SECTION (TOP OF PAGE) */}
                           <h1 className="font-serif text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
                             Dubai Travel Guide
                           </h1>
@@ -3691,17 +3659,9 @@ export default function App() {
                     ) : (
                       <div className="space-y-10 animate-fade-in text-slate-800">
                         
-                        {/* BREADCRUMB HEADER */}
+                        {/* DESTINATION GUIDE HEADER */}
                         <div className="border-b border-slate-200 pb-5">
-                          <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                            <a href="/" onClick={(e) => { e.preventDefault(); navigateTo("/"); }} className="hover:text-slate-750">Home</a>
-                            <span aria-hidden="true">/</span>
-                            <a href="/destinations" onClick={(e) => { e.preventDefault(); navigateTo("/destinations"); }} className="hover:text-slate-755">Destinations</a>
-                            <span>/</span>
-                            <span className="text-brand-navy font-bold">{activeDes.id}</span>
-                          </nav>
-
-                          <span className="text-[10px] font-mono font-bold tracking-widest text-[#F6B73C] bg-brand-navy px-2.5 py-0.5 rounded-full inline-block uppercase mb-2 animate-pulse">
+<span className="text-[10px] font-mono font-bold tracking-widest text-[#F6B73C] bg-brand-navy px-2.5 py-0.5 rounded-full inline-block uppercase mb-2 animate-pulse">
                             🌍 Destination Guide
                           </span>
                           <h1 className="font-serif text-2xl sm:text-4xl font-black tracking-tight text-slate-900 leading-tight">
@@ -4074,15 +4034,7 @@ export default function App() {
                     
                     {/* Header */}
                     <div className="border-b border-slate-200 pb-5">
-                      <nav className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5 mb-2 uppercase">
-                        <a href="/" onClick={(e) => { e.preventDefault(); navigateTo("/"); }} className="hover:text-slate-750">{isBn ? "হোম" : "Home"}</a>
-                        <span aria-hidden="true">/</span>
-                        <a href="/costs" onClick={(e) => { e.preventDefault(); navigateTo("/costs"); }} className="hover:text-slate-755">{isBn ? "ভ্রমণ খরচ" : "Trip Costs"}</a>
-                        <span>/</span>
-                        <span className="text-brand-navy font-bold">{activeCost.id}</span>
-                      </nav>
-
-                      <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
+<h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
                         {isBn
                           ? `বাংলাদেশ থেকে ${activeCost.country} ভ্রমণের বিস্তারিত খরচ (BDT বাজেট চার্ট)`
                           : `${activeCost.country} Trip Cost from Bangladesh: Complete Price Matrix`}
@@ -4383,30 +4335,7 @@ export default function App() {
 
               <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
                 <div className="max-w-4xl space-y-5">
-                  <nav
-                    aria-label="Breadcrumb"
-                    className="text-slate-300 text-xs flex flex-wrap items-center gap-2 font-mono"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => navigateTo("/")}
-                      className="hover:text-white transition-colors cursor-pointer"
-                    >
-                      {isBn ? "হোম (Home)" : "Home"}
-                    </button>
-                    <span aria-hidden="true">/</span>
-                    <span className="text-[#F6B73C] font-semibold">
-                      {isBn ? "ট্রাভেল ব্লগ ও গাইড (Travel Blog)" : "Travel Guides & Blog"}
-                    </span>
-                    <span aria-hidden="true">·</span>
-                    <span className="bg-white/10 text-white/90 px-2.5 py-0.5 rounded-md border border-white/15">
-                      {isBn
-                        ? `${localizedBlogs.length}টি বিস্তারিত গাইড`
-                        : `${localizedBlogs.length} Travel Guides`}
-                    </span>
-                  </nav>
-
-                  <h1
+<h1
                     id="blog-hero-h1"
                     className="font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.12] text-balance"
                   >
@@ -5003,7 +4932,7 @@ export default function App() {
 
               return (
                 <>
-                  {/* Top Navigation Bar: Back to All Blogs + Breadcrumb */}
+                  {/* Top Navigation: Return to the blog index */}
                   <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
                     <a
                       href="/blog"
@@ -5018,27 +4947,6 @@ export default function App() {
                       </span>
                     </a>
 
-                    <nav className="text-slate-500 text-xs flex items-center gap-1.5 truncate max-w-full">
-                      <a
-                        href="/"
-                        onClick={(e) => { e.preventDefault(); navigateTo("/"); }}
-                        className="hover:text-slate-900"
-                      >
-                        {isBn ? "হোম" : "Home"}
-                      </a>
-                      <span aria-hidden="true">/</span>
-                      <a
-                        href="/blog"
-                        onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
-                        className="hover:text-slate-900"
-                      >
-                        {isBn ? "ট্রাভেল ব্লগ" : "Travel Blog"}
-                      </a>
-                      <span aria-hidden="true">/</span>
-                      <span className="text-brand-navy font-semibold truncate max-w-[240px] sm:max-w-md">
-                        {activePost.title}
-                      </span>
-                    </nav>
                   </div>
 
                   {/* Main Article 2-Column Layout (Content + Sticky Trip Planner Sidebar) */}

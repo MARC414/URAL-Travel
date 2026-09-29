@@ -235,20 +235,6 @@ function addInternalLinkSections(routes: PrerenderRoute[]): void {
       route.bodyHtml = route.bodyHtml.replace("</article>", `${sitewideHubSection}</article>`);
     }
 
-    if (route.routePath !== "/" && !route.bodyHtml.includes('aria-label="Breadcrumb"')) {
-      const parentCrumbs = route.breadcrumbs.slice(0, -1);
-      const currentCrumb = route.breadcrumbs[route.breadcrumbs.length - 1];
-      const crumbLinks = parentCrumbs.map((crumb) => {
-        const href = new URL(crumb.url).pathname;
-        return `<a href="${escapeHtml(href)}">${escapeHtml(crumb.name)}</a>`;
-      });
-      const breadcrumbItems = [
-        ...crumbLinks,
-        `<span aria-current="page">${escapeHtml(currentCrumb?.name || route.title)}</span>`,
-      ];
-      const breadcrumbHtml = `<nav aria-label="Breadcrumb">${breadcrumbItems.join(" / ")}</nav>`;
-      route.bodyHtml = route.bodyHtml.replace("<article>", `<article>${breadcrumbHtml}`);
-    }
   }
 }
 
@@ -1119,7 +1105,6 @@ function buildAllRoutes(): PrerenderRoute[] {
       extraGraphNodes: extraNodes,
       bodyHtml: `
         <article>
-          <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog">Travel Guides</a> / ${escapeHtml(post.title)}</nav>
           <h1>${escapeHtml(post.title)}</h1>
           <p><em>By ${escapeHtml(post.author)} · Published ${escapeHtml(post.date)} · ${escapeHtml(post.readTime)}</em></p>
           <p>${escapeHtml(post.summary)}</p>
