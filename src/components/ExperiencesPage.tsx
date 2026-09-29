@@ -525,19 +525,6 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
       <div className="bg-brand-navy text-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-800 shadow-xl space-y-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <nav className="text-slate-400 text-xs flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => onNavigate("/")}
-                className="hover:text-white transition-colors cursor-pointer"
-              >
-                {isBn ? "হোম (Home)" : "Home"}
-              </button>
-              <span aria-hidden="true">/</span>
-              <span className="text-[#F6B73C] font-semibold">
-                {isBn ? "গ্লোবাল অ্যাক্টিভিটি ও আকর্ষণ (Tiqets & Klook)" : "Attractions & Day Passes"}
-              </span>
-            </nav>
 
             <div className="flex flex-wrap items-center gap-2 text-xs text-slate-300">
               <span className="font-semibold text-[#F6B73C]">
@@ -995,15 +982,18 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 : "WhatsApp BDT Desk (+8801784385335)"}
             </span>
           </a>
-          <button
-            type="button"
-            onClick={() => onNavigate("/blog/dual-currency-card-endorsement-bangladesh")}
-            className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs py-3 px-4 rounded-xl transition-colors cursor-pointer"
+          <a
+            href="/blog/dual-currency-card-endorsement-bangladesh"
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate("/blog/dual-currency-card-endorsement-bangladesh");
+            }}
+            className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs py-3 px-4 rounded-xl transition-colors cursor-pointer text-center"
           >
             {isBn
               ? "কীভাবে পাসপোর্টে ডলার এন্ডোর্স করবেন পড়ুন →"
               : "Read Dual-Currency Card Endorsement Guide →"}
-          </button>
+          </a>
         </div>
       </div>
 

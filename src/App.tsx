@@ -6253,9 +6253,16 @@ export default function App() {
                 <a href="tel:+8801784385335" className="hover:text-white hover:underline text-[#F6B73C] font-mono font-bold">Direct Call: +8801784385335</a>
               </div>
               <div className="pt-1">
-                <button onClick={() => navigateTo("/contact")} className="bg-slate-800 text-[#F6B73C] hover:bg-slate-700 px-3 py-1.5 rounded-md font-bold text-[10px] uppercase tracking-wide cursor-pointer transition-colors">
+                <a
+                  href="/contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo("/contact");
+                  }}
+                  className="bg-slate-800 text-[#F6B73C] hover:bg-slate-700 px-3 py-1.5 rounded-md font-bold text-[10px] uppercase tracking-wide cursor-pointer transition-colors inline-flex items-center"
+                >
                   {isBn ? "যোগাযোগ ফর্ম পেজ" : "Contact Form Page"}
-                </button>
+                </a>
               </div>
             </div>
             <p className="leading-relaxed text-[11px] text-slate-500 pt-2 border-t border-slate-800">

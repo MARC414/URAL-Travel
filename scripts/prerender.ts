@@ -117,6 +117,51 @@ const CATEGORY_HUB_LINKS: InternalLinkItem[] = [
   { href: "/costs", text: "Plan an international trip budget in BDT" },
 ];
 
+const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
+  "/umrah": [
+    {
+      href: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+      text: "Umrah & Hajj preparation, Nusuk and BDT cost guide",
+    },
+    {
+      href: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
+      text: "Nusuk app, Saudi Visa Bio and Rawdah permit guide",
+    },
+    {
+      href: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
+      text: "Makkah and Madinah hotel zones and Haramain train guide",
+    },
+    {
+      href: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost",
+      text: "Official Bangladesh Hajj registration and package comparison",
+    },
+    {
+      href: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
+      text: "Saudi stopover visa and Umrah routing guide",
+    },
+  ],
+  "/experiences": [
+    { href: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide", text: "Europe, UK and USA attraction passes for Bangladeshi travelers" },
+    { href: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide", text: "Abu Dhabi day trip from Dubai: mosque and attraction guide" },
+    { href: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide", text: "Umrah and Dubai multi-city itinerary from Dhaka" },
+    { href: "/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide", text: "Singapore family itinerary with Sentosa and halal food" },
+    { href: "/destinations/dubai-guide", text: "Plan a Dubai itinerary from Bangladesh" },
+    { href: "/destinations/singapore-guide", text: "Explore the Singapore destination guide" },
+  ],
+  "/tools": [
+    { href: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp", text: "Flight delay, cancellation and baggage claim guide" },
+    { href: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide", text: "Travel eSIM and insurance guide for Bangladeshi travelers" },
+    { href: "/blog/dual-currency-card-endorsement-bangladesh", text: "Dual-currency card endorsement and travel quota guide" },
+    { href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go", text: "Dhaka Airport outbound immigration checklist" },
+  ],
+  "/contact": [
+    { href: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card", text: "How to book travel in BDT by bKash or bank transfer" },
+    { href: "/blog/dual-currency-card-endorsement-bangladesh", text: "Passport dollar endorsement and dual-currency card guide" },
+    { href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go", text: "Dhaka Airport documents and outbound checklist" },
+    { href: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost", text: "Umrah planning and BDT cost guide" },
+  ],
+};
+
 const COUNTRY_TOPIC_ALIASES: Record<string, string[]> = {
   Nepal: ["nepal", "kathmandu", "pokhara"],
   Thailand: ["thailand", "bangkok", "pattaya"],
@@ -213,6 +258,27 @@ function addInternalLinkSections(routes: PrerenderRoute[]): void {
           text: post.title,
         }));
         extraLinks = `${renderLinkSection("complete-trip-links", `Complete your ${country} trip`, tripLinks)}${renderLinkSection("related-destination-guides", `Related ${country} travel guides`, blogLinks)}`;
+      } else if (route.routePath === "/sitemap") {
+        const directoryLinks = routes
+          .filter((entry) => entry.routePath !== "/sitemap")
+          .map((entry) => ({ href: entry.routePath, text: entry.title }));
+        extraLinks = renderLinkSection(
+          "complete-page-directory",
+          "Complete travel page directory",
+          directoryLinks
+        );
+      } else if (STANDALONE_PAGE_LINKS[route.routePath]) {
+        extraLinks = renderLinkSection(
+          "related-standalone-guides",
+          route.routePath === "/umrah"
+            ? "Related Umrah and Hajj guides"
+            : route.routePath === "/experiences"
+              ? "Related attraction and destination guides"
+              : route.routePath === "/tools"
+                ? "Guides for using travel tools"
+                : "Helpful guides before you contact URAL",
+          STANDALONE_PAGE_LINKS[route.routePath]
+        );
       }
     }
 
@@ -220,7 +286,11 @@ function addInternalLinkSections(routes: PrerenderRoute[]): void {
       route.bodyHtml = route.bodyHtml.replace("</article>", `${extraLinks}</article>`);
     }
 
-    if (route.routePath !== "/" && !categoryHubPaths.has(route.routePath)) {
+    if (
+      route.routePath !== "/" &&
+      route.routePath !== "/sitemap" &&
+      !categoryHubPaths.has(route.routePath)
+    ) {
       const parentHubPath = CATEGORY_HUB_LINKS.map((link) => link.href).find((hubPath) =>
         route.routePath.startsWith(`${hubPath}/`)
       );

@@ -699,9 +699,10 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                                 {isBn ? item.detailBn : item.detailEn}
                               </p>
                               {item.actionPath && (
-                                <button
-                                  type="button"
+                                <a
+                                  href={item.actionPath}
                                   onClick={(e) => {
+                                    e.preventDefault();
                                     e.stopPropagation();
                                     onNavigate(item.actionPath!);
                                   }}
@@ -711,7 +712,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                                     {isBn ? item.actionLabelBn : item.actionLabelEn}
                                   </span>
                                   <ArrowRight size={11} />
-                                </button>
+                                </a>
                               )}
                             </div>
                           </div>
@@ -862,22 +863,28 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
               </div>
 
               <div className="flex items-center gap-2 pt-2 border-t border-slate-100 text-xs font-semibold">
-                <button
-                  type="button"
-                  onClick={() => onNavigate(emb.visaPath)}
+                <a
+                  href={emb.visaPath}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(emb.visaPath);
+                  }}
                   className="text-brand-navy hover:underline cursor-pointer"
                 >
                   {isBn ? "ভিসা গাইড" : "Visa Guide"}
-                </button>
+                </a>
                 <span className="text-slate-300">·</span>
-                <button
-                  type="button"
-                  onClick={() => onNavigate(emb.guidePath)}
+                <a
+                  href={emb.guidePath}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(emb.guidePath);
+                  }}
                   className="text-brand-navy hover:underline inline-flex items-center gap-1 cursor-pointer"
                 >
                   <span>{isBn ? "পূর্ণাঙ্গ ভ্রমণ গাইড" : "Full Country Guide"}</span>
                   <ArrowRight size={11} />
-                </button>
+                </a>
               </div>
             </div>
           ))}
