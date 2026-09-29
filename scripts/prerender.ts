@@ -678,14 +678,41 @@ function buildAllRoutes(): PrerenderRoute[] {
         <article>
           <h1>${escapeHtml(title)}</h1>
           <p>${escapeHtml(r.quickAnswer || description)}</p>
-          <p><strong>Price Range:</strong> ${escapeHtml(r.priceRangeBdt)} | <strong>Duration:</strong> ${escapeHtml(r.duration)} | <strong>Airlines:</strong> ${escapeHtml(r.airlines.join(", "))}</p>
-          ${
-            r.faqs && r.faqs.length > 0
-              ? `<section><h2>Frequently Asked Questions</h2>${r.faqs
-                  .map((f) => `<h3>${escapeHtml(f.question)}</h3><p>${escapeHtml(f.answer)}</p>`)
-                  .join("\n")}</section>`
-              : ""
-          }
+          <p><strong>Price range:</strong> ${escapeHtml(r.priceRangeBdt)} | <strong>Journey duration:</strong> ${escapeHtml(r.duration)} | <strong>Airlines listed:</strong> ${escapeHtml(r.airlines.join(", "))}</p>
+          <section>
+            <h2>Dhaka to ${escapeHtml(r.to.split(" (")[0])} route facts</h2>
+            <ul>${r.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
+          </section>
+          <section>
+            <h2>How to compare fares on this route</h2>
+            <p>Treat the published fare band as a starting point for comparison, not as a live quote or a promise that seats are available at that price. Check the same travel dates, passenger count, cabin and baggage allowance across providers. Compare the final payable amount after any booking, payment or seat-selection fees, and read the change and cancellation conditions before you pay. A connecting option may have a lower headline price but a longer total journey; make sure the transfer time is practical and that you understand who is responsible if a segment is delayed.</p>
+            <p>If your dates are flexible, compare nearby departure days as well as different times. Fare inventory changes, and holidays or school breaks may affect availability. The guide's BDT range is useful for planning a budget; use the airline or booking provider's current checkout total for the final decision.</p>
+          </section>
+          <section>
+            <h2>Booking window and airline choice</h2>
+            <p>The route guidance suggests starting fare checks around ${escapeHtml(r.bestTimeToBook)}. That is a planning cue rather than a guaranteed cheapest day to buy: compare current schedules and prices, then balance fare against departure time, total travel duration, baggage and support if plans change. Airlines listed for this route include ${escapeHtml(r.airlines.join(", "))}; operating carriers, aircraft and schedules can vary by date, so confirm the carrier shown on each segment.</p>
+            <p>Before choosing a direct or connecting itinerary, check the exact origin and destination airport codes on the ticket. If a connection is involved, verify whether all sectors are on one ticket, whether baggage is checked through, and whether you need permission to enter or transit the connection country. Do not assume a booking platform's itinerary summary replaces the airline's conditions.</p>
+          </section>
+          <section>
+            <h2>Entry requirements and departure preparation</h2>
+            <p>The current route data describes the entry requirement as: ${escapeHtml(r.visaRequirement)}. Visa rules depend on the traveler and can change; verify the latest instructions with the destination's official immigration authority or embassy before purchasing a non-refundable ticket. Check that passport details match the booking, understand the permitted stay and any pre-arrival form requirements, and carry the documents requested for your specific trip.</p>
+            <p>For departure from Dhaka, check your airline's current check-in time, baggage limits and airport instructions before travel. Keep the passport, ticket, visa or entry authorization, accommodation details and onward or return itinerary accessible. Requirements differ by destination and individual circumstances, so use the linked visa guide as a starting point and confirm with official sources.</p>
+          </section>
+          <section>
+            <h2>Plan the full journey around this flight</h2>
+            <p>Door-to-door timing includes more than the time in the air. Plan how you will reach Hazrat Shahjalal International Airport from your starting point, allow the airline's required check-in time, and consider the time needed to collect bags and reach accommodation after landing. For this route, confirm the destination airport shown on the ticket (${escapeHtml(r.to)}) before arranging a pickup or choosing a hotel; airport names and codes matter when comparing transfer options. If you arrive late or have a connection, confirm the transfer plan and the accommodation's check-in arrangements in advance. Keep enough flexibility for traffic and schedule changes rather than planning a tight onward connection on a separate booking.</p>
+          </section>
+          <section>
+            <h2>Arrival and connection checklist</h2>
+            <ol>
+              <li>Confirm the airport code, operating carrier, departure time and terminal shown on the latest itinerary.</li>
+              <li>Review cabin and checked-baggage allowances for every sector, especially when an itinerary combines more than one airline.</li>
+              <li>Check transit rules for each connection point and leave enough time for any required security or immigration steps.</li>
+              <li>Save the booking confirmation offline and keep the airline's contact and disruption instructions available.</li>
+              <li>Plan the transfer from the arrival airport to your accommodation using current local information, and share your hotel address with your travel party.</li>
+            </ol>
+          </section>
+          ${renderLandingFaqs("flight-route-faqs", "Questions about this Dhaka flight route", routeFaq)}
         </article>
       `,
     });
