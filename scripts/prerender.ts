@@ -360,6 +360,165 @@ function stripContext(obj: unknown): Record<string, unknown> {
   return rest;
 }
 
+function renderLandingFaqs(
+  id: string,
+  heading: string,
+  faqSchema: ReturnType<typeof getFaqSchemaForPage>
+): string {
+  const questions = faqSchema?.mainEntity || [];
+  if (!questions.length) return "";
+  return `<section aria-labelledby="${id}"><h2 id="${id}">${escapeHtml(heading)}</h2>${questions
+    .map(
+      (question) =>
+        `<section><h3>${escapeHtml(question.name)}</h3><p>${escapeHtml(question.acceptedAnswer.text)}</p></section>`
+    )
+    .join("\n")}</section>`;
+}
+
+function renderFlightsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
+  const routeDirectory = FLIGHTS_DATA.map(
+    (route) =>
+      `<li><a href="/flights/${escapeHtml(route.id)}">Flights from ${escapeHtml(route.from)} to ${escapeHtml(route.to)}</a> — ${escapeHtml(route.priceRangeBdt)}; ${escapeHtml(route.duration)}.</li>`
+  ).join("");
+  const routeDetails = FLIGHTS_DATA.map(
+    (route) => `
+      <section>
+        <h3>${escapeHtml(route.from)} to ${escapeHtml(route.to)} (${escapeHtml(route.country)})</h3>
+        <p>This route guide brings together an indicative fare band of ${escapeHtml(route.priceRangeBdt)}, a journey time of ${escapeHtml(route.duration)}, and the airlines listed for the route: ${escapeHtml(route.airlines.join(", "))}. Its booking lead-time note is ${escapeHtml(route.bestTimeToBook)}; check the live timetable, fare rules and current entry conditions before choosing a ticket.</p>
+      </section>`
+  ).join("");
+
+  return `<article>
+    <h1>${escapeHtml(title)}</h1>
+    <p>${escapeHtml(description)}</p>
+    <p>Use these Dhaka flight guides to compare the destinations covered, indicative BDT fare ranges, journey duration, airlines and booking guidance in one place. The route notes are planning references rather than live fare quotes: prices and schedules can change with travel dates, seat inventory, baggage choices and fare conditions. Before booking, compare the total itinerary—not only the headline fare—including baggage, stopovers, transit requirements, change or cancellation terms, and arrival time. Travelers starting in Chattogram, Sylhet or another city should plan any separate domestic leg and allow a realistic connection buffer. Confirm the operating carrier and current departure details with the airline or booking provider.</p>
+    <section><h2>Dhaka international flight routes and fare guide</h2><ul>${routeDirectory}</ul></section>
+    <section><h2>Route-by-route flight planning from Dhaka</h2>${routeDetails}</section>
+    <section><h2>How to compare international flights from Bangladesh</h2>
+      <p>Start with flexible dates where possible, then compare direct and connecting itineraries using the same passenger count and baggage allowance. A low displayed fare may exclude checked baggage, seat selection or payment fees, while a connection can add transit formalities and a longer journey. Check whether each segment is on one ticket, how missed connections are handled, and whether the fare permits changes. Keep passport validity and destination entry rules in view before committing to a non-refundable fare.</p>
+      <p>Flight duration and booking windows in the linked guides are indicative and should be checked against current schedules. For trips during Eid, school holidays or the winter travel season, compare early and revisit fares before purchase rather than assuming a fixed discount window. If your itinerary includes a separate domestic flight to Dhaka, protect that connection with sufficient time and consider the consequences of delays.</p>
+    </section>
+    ${renderLandingFaqs("flights-hub-faqs", "Flight booking questions for travelers from Bangladesh", faqSchema)}
+  </article>`;
+}
+
+function renderHotelsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
+  const directory = HOTELS_DATA.map(
+    (guide) =>
+      `<li><a href="/hotels/${escapeHtml(guide.id)}">Where to stay in ${escapeHtml(guide.city)}, ${escapeHtml(guide.country)}</a> — compare ${guide.neighborhoods.map((area) => escapeHtml(area.name)).join(", ")}.</li>`
+  ).join("");
+  const guideDetails = HOTELS_DATA.map(
+    (guide) => `
+      <section>
+        <h3>${escapeHtml(guide.city)}, ${escapeHtml(guide.country)}</h3>
+        <p>Choose between ${guide.neighborhoods
+          .map((area) => `<strong>${escapeHtml(area.name)}</strong> (${escapeHtml(area.vibe)})`)
+          .join(", ")}. The linked guide compares these areas with example properties such as ${guide.hotels.map((hotel) => escapeHtml(hotel.name)).join(", ")}.</p>
+        <p>Use the area notes to match a stay to your transit plans, preferred pace and trip budget. Check the exact address and current room terms before booking; a property's listed category or neighborhood alone does not confirm availability, accessibility or the final payable price.</p>
+      </section>`
+  ).join("");
+
+  return `<article>
+    <h1>${escapeHtml(title)}</h1>
+    <p>${escapeHtml(description)}</p>
+    <p>Choosing the right hotel area can matter as much as choosing the property. These guides compare neighborhoods in destinations reached by Bangladeshi travelers, with attention to transit access, family needs, local food options, quiet or busy surroundings, and the type of trip each area supports. Use the linked city guide to compare the neighborhoods and example stays before checking dates and availability. Displayed BDT amounts are planning references, not a guaranteed quote; the final total can differ because of room dates, occupancy, taxes, service charges, meal plans, currency conversion and the provider's cancellation terms.</p>
+    <section><h2>Hotel neighborhood guides by destination</h2><ul>${directory}</ul></section>
+    <section><h2>Compare where to stay in each destination</h2>${guideDetails}</section>
+    <section><h2>Hotel booking checklist for Bangladesh-based travelers</h2>
+      <p>Before paying, confirm the full property address, check-in and check-out time, room occupancy, whether breakfast is included, and whether the booking is refundable. Compare the final payable amount after local taxes and fees rather than relying on the first nightly rate shown. For family trips, confirm bed configuration and any child charges directly in the booking conditions.</p>
+      <p>Review the neighborhood against your actual itinerary: proximity to a metro or airport link can reduce transfer time, while a quieter area may suit a longer stay. Check recent property reviews and the route between the hotel and the places you expect to visit. If you plan to pay with a Bangladeshi card, verify foreign-currency endorsement and online transaction settings with your bank; payment options vary by hotel and booking platform.</p>
+    </section>
+    ${renderLandingFaqs("hotels-hub-faqs", "Hotel booking questions for Bangladeshi travelers", faqSchema)}
+  </article>`;
+}
+
+function renderVisaHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
+  const directory = VISA_DATA.map(
+    (guide) =>
+      `<li><a href="/visa/${escapeHtml(guide.id)}">${escapeHtml(guide.country)} visa guide for Bangladeshi passport holders</a> — ${escapeHtml(guide.requirementType)}; fee guidance ${escapeHtml(guide.costBdt)}; processing guidance ${escapeHtml(guide.processingTime)}.</li>`
+  ).join("");
+  const guideDetails = VISA_DATA.map(
+    (guide) => `
+      <section>
+        <h3>${escapeHtml(guide.country)} visa requirements from Bangladesh</h3>
+        <p>The current guide classifies the route as ${escapeHtml(guide.requirementType)} and provides fee guidance of ${escapeHtml(guide.costBdt)} with an indicative processing estimate of ${escapeHtml(guide.processingTime)}. It organizes the checklist into ${guide.documentChecklist.length} document groups (${guide.documentChecklist.map((group) => escapeHtml(group.category)).join(", ")}) and lays out ${guide.stepByStep.length} application steps. Open the destination guide for the complete checklist and sequence, then confirm the latest instructions with the official authority.</p>
+      </section>`
+  ).join("");
+
+  return `<article>
+    <h1>${escapeHtml(title)}</h1>
+    <p>${escapeHtml(description)}</p>
+    <p>This visa hub brings together entry-route, fee, processing-time and document guidance for popular destinations for Bangladeshi passport holders. Start with the country-specific guide below to understand whether the route described is visa-free, visa on arrival, electronic or an advance application. Requirements depend on the travel purpose, passport and current policy; the amounts and timeframes shown are guidance from the underlying destination pages, not an approval guarantee. Immigration rules can change without notice, so verify the latest requirements and application channel with the destination's official immigration department, embassy or authorized portal before booking or applying.</p>
+    <section><h2>Country visa guides and application routes</h2><ul>${directory}</ul></section>
+    <section><h2>Documents and steps by destination</h2>${guideDetails}</section>
+    <section><h2>Before submitting a tourist visa application</h2>
+      <p>Check that the visa category matches your real travel purpose and intended length of stay. Use the current application form and document list published by the official authority, and make sure names, passport numbers, dates and supporting bookings match across every document. If an application must be submitted through an embassy or authorized service provider, confirm the Dhaka jurisdiction, appointment process and payment instructions directly with that provider.</p>
+      <p>Processing estimates are not guarantees: public holidays, peak demand, additional-document requests and individual circumstances can change the outcome. Avoid non-refundable travel commitments until you understand the relevant entry rules. Keep copies of submitted documents and the approval notice accessible during check-in and arrival. This directory is a starting point for research, not legal advice or a substitute for an official decision.</p>
+    </section>
+    ${renderLandingFaqs("visa-hub-faqs", "Visa questions for Bangladeshi passport holders", faqSchema)}
+  </article>`;
+}
+
+function renderDestinationsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
+  const directory = DESTINATIONS_DATA.map(
+    (guide) =>
+      `<li><a href="/destinations/${escapeHtml(guide.id)}">${escapeHtml(guide.country)} itinerary from Bangladesh</a> — best-time note: ${escapeHtml(guide.bestTimeToVisit)}; local budget reference: ${escapeHtml(guide.budgetBdt)}.</li>`
+  ).join("");
+  const guideDetails = DESTINATIONS_DATA.map(
+    (guide) => `
+      <section>
+        <h3>${escapeHtml(guide.country)} itinerary from Dhaka</h3>
+        <p>The linked itinerary covers ${guide.itinerary.length} days, with stops including ${guide.itinerary.map((day) => escapeHtml(day.title)).join(", ")}. The page's local transport notes compare ${guide.localTransport.length} ways to move around or between its featured places. Use it to decide whether the pace fits your dates before checking current schedules and local access.</p>
+      </section>`
+  ).join("");
+
+  return `<article>
+    <h1>${escapeHtml(title)}</h1>
+    <p>${escapeHtml(description)}</p>
+    <p>Use these destination guides to turn a broad idea into a practical trip plan from Bangladesh. Each linked page combines a day-by-day outline with seasonal context, local transport notes and a budget reference, so you can compare the pace and style of different destinations before deciding where to go. The outlines are starting points rather than fixed tours: adjust them for flight arrival times, family mobility, prayer and meal needs, local opening days and weather. Confirm entry requirements separately, then recheck transport schedules, attraction access and prices close to travel.</p>
+    <section><h2>Destination itineraries for Bangladeshi travelers</h2><ul>${directory}</ul></section>
+    <section><h2>Compare sample itineraries and local planning notes</h2>${guideDetails}</section>
+    <section><h2>How to adapt an itinerary to your trip</h2>
+      <p>Begin by setting the number of nights and identifying any fixed arrival or departure times. Avoid placing a long intercity transfer and several time-sensitive attractions on the same day. Check the actual location of each hotel against the itinerary, and leave room for traffic, rest and unexpected weather. For a multi-city trip, compare the time and total cost of road, rail and air connections rather than assuming the fastest option is the most convenient.</p>
+      <p>Families and first-time travelers may prefer fewer hotel changes and a simpler route. Travelers with a specific interest—food, shopping, culture, nature or religious sites—can use the day outlines as a base and replace activities to suit their priorities. Budgets and seasonal notes are indicative; confirm current entry fees, transport fares and opening information with local operators or official destination sources.</p>
+    </section>
+    ${renderLandingFaqs("destinations-hub-faqs", "Planning an international trip from Bangladesh", faqSchema)}
+  </article>`;
+}
+
+function renderCostsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
+  const directory = TRIP_COSTS_DATA.map(
+    (guide) =>
+      `<li><a href="/costs/${escapeHtml(guide.id)}">${escapeHtml(guide.country)} trip cost in BDT</a> — ${guide.durationDays}-day guide in ${escapeHtml(guide.currencyCode)}.</li>`
+  ).join("");
+  const guideDetails = TRIP_COSTS_DATA.map(
+    (guide) => `
+      <section>
+        <h3>${escapeHtml(guide.country)} trip budget from Bangladesh</h3>
+        <p>This ${guide.durationDays}-day guide separates ${guide.categories.map((category) => escapeHtml(category.name)).join(", ")}. It also flags seasonal influences and includes ${guide.moneyHacks.length} practical budget suggestions. Open the destination breakdown to review its BDT ranges and assumptions together rather than treating any one category as the total trip price.</p>
+      </section>`
+  ).join("");
+
+  return `<article>
+    <h1>${escapeHtml(title)}</h1>
+    <p>${escapeHtml(description)}</p>
+    <p>Estimate an international trip from Dhaka in Bangladeshi Taka by looking at the whole journey rather than airfare alone. These destination guides break budgets into categories such as flights, accommodation, meals, transport and activities, with lower, mid-range and higher estimates where the underlying data provides them. Use the figures to set a starting budget and compare destinations; they are not live quotes or a promise that every listed cost is included in the same way. Travel dates, room occupancy, exchange rates, baggage, local taxes and activity choices can all change the final amount.</p>
+    <section><h2>Destination cost guides and BDT budget ranges</h2><ul>${directory}</ul></section>
+    <section><h2>Compare trip costs by destination</h2>${guideDetails}</section>
+    <section><h2>How to build a realistic travel budget</h2>
+      <p>Separate one-time costs from daily costs. Flights, visas and some activities are usually paid before departure; hotels, meals, ground transport and shopping are paid during the trip. Keep a contingency for exchange-rate movement, airport transfers, baggage fees and unexpected changes. If a category shows a range, choose the level that matches your likely travel style rather than simply adding every lowest estimate together.</p>
+      <p>Exchange-rate references are approximate and can move; check a current bank or authorized money-changer rate before converting funds. Review what each guide includes and excludes, especially airfare, accommodation nights, visa fees and optional activities, so you do not compare different trip lengths on an equal footing. Revisit the estimate when your dates and bookings are known.</p>
+      <ol>
+        <li>Choose the destination and duration that match your real travel window, then open that country's detailed BDT breakdown.</li>
+        <li>Mark which costs are already fixed, such as purchased flights, and which still depend on daily choices, such as meals and local transport.</li>
+        <li>Use the middle estimate as a comparison point only when it fits your accommodation and activity preferences; do not assume the lowest figure covers every traveler.</li>
+        <li>Recheck exchange rates, baggage conditions, hotel taxes and payment fees close to booking, and leave a separate contingency rather than hiding it inside the listed categories.</li>
+      </ol>
+    </section>
+    ${renderLandingFaqs("costs-hub-faqs", "Trip budget questions for travelers from Bangladesh", faqSchema)}
+  </article>`;
+}
+
 function buildAllRoutes(): PrerenderRoute[] {
   const routes: PrerenderRoute[] = [];
   const defaultOgImage = `${BASE_URL}/og-image.jpg`;
@@ -479,20 +638,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       }),
       ...(flightsFaq ? [stripContext(flightsFaq)] : []),
     ],
-    bodyHtml: `
-      <article>
-        <h1>${escapeHtml(flightsHubTitle)}</h1>
-        <p>${escapeHtml(flightsHubDesc)}</p>
-        <ul>
-          ${FLIGHTS_DATA.map(
-            (r) =>
-              `<li><a href="/flights/${r.id}">${escapeHtml(r.from)} to ${escapeHtml(
-                r.to
-              )} — ${escapeHtml(r.priceRangeBdt)} (${escapeHtml(r.duration)})</a></li>`
-          ).join("\n")}
-        </ul>
-      </article>
-    `,
+    bodyHtml: renderFlightsHubBody(flightsHubTitle, flightsHubDesc, flightsFaq),
   });
 
   for (const r of FLIGHTS_DATA) {
@@ -573,17 +719,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       }),
       ...(hotelsFaq ? [stripContext(hotelsFaq)] : []),
     ],
-    bodyHtml: `
-      <article>
-        <h1>${escapeHtml(hotelsHubTitle)}</h1>
-        <p>${escapeHtml(hotelsHubDesc)}</p>
-        <ul>
-          ${HOTELS_DATA.map(
-            (h) => `<li><a href="/hotels/${h.id}">Best Hotels in ${escapeHtml(h.city)} (${escapeHtml(h.country)})</a></li>`
-          ).join("\n")}
-        </ul>
-      </article>
-    `,
+    bodyHtml: renderHotelsHubBody(hotelsHubTitle, hotelsHubDesc, hotelsFaq),
   });
 
   for (const h of HOTELS_DATA) {
@@ -662,18 +798,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       }),
       ...(visaFaq ? [stripContext(visaFaq)] : []),
     ],
-    bodyHtml: `
-      <article>
-        <h1>${escapeHtml(visaHubTitle)}</h1>
-        <p>${escapeHtml(visaHubDesc)}</p>
-        <ul>
-          ${VISA_DATA.map(
-            (v) =>
-              `<li><a href="/visa/${v.id}">${escapeHtml(v.country)} Visa (${escapeHtml(v.requirementType)}) — ${escapeHtml(v.costBdt)}</a></li>`
-          ).join("\n")}
-        </ul>
-      </article>
-    `,
+    bodyHtml: renderVisaHubBody(visaHubTitle, visaHubDesc, visaFaq),
   });
 
   for (const v of VISA_DATA) {
@@ -753,17 +878,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       }),
       ...(destFaq ? [stripContext(destFaq)] : []),
     ],
-    bodyHtml: `
-      <article>
-        <h1>${escapeHtml(destHubTitle)}</h1>
-        <p>${escapeHtml(destHubDesc)}</p>
-        <ul>
-          ${DESTINATIONS_DATA.map(
-            (d) => `<li><a href="/destinations/${d.id}">${escapeHtml(d.country)} 5-Day Itinerary</a></li>`
-          ).join("\n")}
-        </ul>
-      </article>
-    `,
+    bodyHtml: renderDestinationsHubBody(destHubTitle, destHubDesc, destFaq),
   });
 
   for (const d of DESTINATIONS_DATA) {
@@ -855,17 +970,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       }),
       ...(costsFaq ? [stripContext(costsFaq)] : []),
     ],
-    bodyHtml: `
-      <article>
-        <h1>${escapeHtml(costsHubTitle)}</h1>
-        <p>${escapeHtml(costsHubDesc)}</p>
-        <ul>
-          ${TRIP_COSTS_DATA.map(
-            (c) => `<li><a href="/costs/${c.id}">${escapeHtml(c.country)} Trip Cost in BDT</a></li>`
-          ).join("\n")}
-        </ul>
-      </article>
-    `,
+    bodyHtml: renderCostsHubBody(costsHubTitle, costsHubDesc, costsFaq),
   });
 
   for (const c of TRIP_COSTS_DATA) {
