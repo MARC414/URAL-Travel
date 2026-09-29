@@ -21,6 +21,7 @@ import {
   toIsoDate,
 } from "../src/utils/schema";
 import { getSeoCopy } from "../src/utils/seoCopy";
+import { getRelatedBlogPosts } from "../src/utils/blogLinks";
 import {
   HAJJ_UMRAH_FAQS,
   generateFAQSchema,
@@ -89,6 +90,16 @@ function escapeHtml(str: string): string {
 
 function escapeXml(str: string): string {
   return escapeHtml(str);
+}
+
+const INTERNAL_ROUTE_ALIASES: Record<string, string> = {
+  "/indexing": "/sitemap",
+  "/pre-departure": "/sitemap",
+};
+
+function normalizeInternalHref(rawPath: string): string {
+  const pathname = String(rawPath || "/").split(/[?#]/, 1)[0] || "/";
+  return INTERNAL_ROUTE_ALIASES[pathname] || pathname;
 }
 
 interface PrerenderRoute {
@@ -906,6 +917,42 @@ function buildAllRoutes(): PrerenderRoute[] {
       extraNodes.push(faqNode);
     }
 
+    const planLinks: { text: string; href: string }[] = [];
+    const relatedGuideLinks: { text: string; href: string }[] = [];
+    const usedBlogLinkHrefs = new Set<string>();
+
+    for (const link of post.internalLinks || []) {
+      const href = normalizeInternalHref(link.path);
+      if (!href.startsWith("/")) continue;
+      if (href.startsWith("/blog/")) {
+        if (href !== `/blog/${post.slug}` && !usedBlogLinkHrefs.has(href)) {
+          relatedGuideLinks.push({ text: link.text, href });
+          usedBlogLinkHrefs.add(href);
+        }
+      } else if (!planLinks.some((existing) => existing.href === href)) {
+        planLinks.push({ text: link.text, href });
+      }
+    }
+
+    for (const relatedPost of getRelatedBlogPosts(post, BLOG_DATA, 4)) {
+      const href = `/blog/${relatedPost.slug}`;
+      if (!usedBlogLinkHrefs.has(href)) {
+        relatedGuideLinks.push({ text: relatedPost.title, href });
+        usedBlogLinkHrefs.add(href);
+      }
+    }
+
+    const planLinksHtml = planLinks.length
+      ? `<section aria-labelledby="plan-your-trip-links"><h2 id="plan-your-trip-links">Plan your trip</h2><ul>${planLinks
+          .map((link) => `<li><a href="${escapeHtml(link.href)}">${escapeHtml(link.text)}</a></li>`)
+          .join("\n")}</ul></section>`
+      : "";
+    const relatedGuidesHtml = relatedGuideLinks.length
+      ? `<section aria-labelledby="related-travel-guides"><h2 id="related-travel-guides">Related Bangladesh travel guides</h2><ul>${relatedGuideLinks
+          .map((link) => `<li><a href="${escapeHtml(link.href)}">${escapeHtml(link.text)}</a></li>`)
+          .join("\n")}</ul></section>`
+      : "";
+
     routes.push({
       routePath: `/blog/${post.slug}`,
       canonicalUrl: postUrl,
@@ -922,13 +969,15 @@ function buildAllRoutes(): PrerenderRoute[] {
       extraGraphNodes: extraNodes,
       bodyHtml: `
         <article>
+          <nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog">Travel Guides</a> / ${escapeHtml(post.title)}</nav>
           <h1>${escapeHtml(post.title)}</h1>
           <p><em>By ${escapeHtml(post.author)} · Published ${escapeHtml(post.date)} · ${escapeHtml(post.readTime)}</em></p>
           <p>${escapeHtml(post.summary)}</p>
           ${(Array.isArray(post.content) ? post.content : String(post.content || "").split("\n\n"))
             .map((para) => `<p>${escapeHtml(para)}</p>`)
             .join("\n")}
-          <p><a href="/blog">← Back to All 41 Bangladesh Travel Guides</a></p>
+          ${planLinksHtml}
+          ${relatedGuidesHtml}
         </article>
       `,
     });

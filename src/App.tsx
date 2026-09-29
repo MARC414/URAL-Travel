@@ -77,6 +77,7 @@ import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
 import { getSeoCopy } from "./utils/seoCopy";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { getBlogImageAltText, getResponsiveImageProps } from "./utils/imageAssets";
+import { getRelatedBlogPosts } from "./utils/blogLinks";
 
 // Non-critical route & modal components loaded on demand to reduce initial JS parse/compile cost
 const UmrahLandingPage = React.lazy(() =>
@@ -4743,10 +4744,7 @@ export default function App() {
               const sameCategoryPosts = localizedBlogs.filter(
                 (p) => p.slug !== activePost.slug && p.category === activePost.category
               );
-              const otherCategoryPosts = localizedBlogs.filter(
-                (p) => p.slug !== activePost.slug && p.category !== activePost.category
-              );
-              const relatedPosts = [...sameCategoryPosts, ...otherCategoryPosts].slice(0, 3);
+              const relatedPosts = getRelatedBlogPosts(activePost, localizedBlogs, 3);
 
               // First-Occurrence Semantic Contextual Internal Linker (Nathan Gotch / Koray Tugberk Silo Rule)
               // Ensures each target URL is linked at most ONCE inside the article body (no spammy duplicate links, no self-links)
@@ -5012,10 +5010,10 @@ export default function App() {
                 <>
                   {/* Top Navigation Bar: Back to All Blogs + Breadcrumb */}
                   <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
-                    <button
-                      type="button"
-                      onClick={() => navigateTo("/blog")}
-                      className="inline-flex items-center gap-2 text-xs font-semibold text-brand-navy hover:text-slate-900 bg-white border border-slate-200 hover:border-brand-navy px-4 py-2 rounded-xl transition-colors cursor-pointer"
+                    <a
+                      href="/blog"
+                      onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
+                      className="inline-flex items-center gap-2 text-xs font-semibold text-brand-navy hover:text-slate-900 bg-white border border-slate-200 hover:border-brand-navy px-4 py-2 rounded-xl transition-colors"
                     >
                       <ChevronLeft size={14} />
                       <span>
@@ -5023,16 +5021,24 @@ export default function App() {
                           ? `সবগুলো ট্রাভেল ব্লগে ফিরে যান (${localizedBlogs.length})`
                           : `Back to All Travel Guides (${localizedBlogs.length})`}
                       </span>
-                    </button>
+                    </a>
 
                     <nav className="text-slate-500 text-xs flex items-center gap-1.5 truncate max-w-full">
-                      <span className="hover:text-slate-900 cursor-pointer" onClick={() => navigateTo("/")}>
+                      <a
+                        href="/"
+                        onClick={(e) => { e.preventDefault(); navigateTo("/"); }}
+                        className="hover:text-slate-900"
+                      >
                         {isBn ? "হোম" : "Home"}
-                      </span>
+                      </a>
                       <span aria-hidden="true">/</span>
-                      <span className="hover:text-slate-900 cursor-pointer" onClick={() => navigateTo("/blog")}>
+                      <a
+                        href="/blog"
+                        onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
+                        className="hover:text-slate-900"
+                      >
                         {isBn ? "ট্রাভেল ব্লগ" : "Travel Blog"}
-                      </span>
+                      </a>
                       <span aria-hidden="true">/</span>
                       <span className="text-brand-navy font-semibold truncate max-w-[240px] sm:max-w-md">
                         {activePost.title}
@@ -5234,21 +5240,21 @@ export default function App() {
                                       <span className="text-[11px] font-bold text-brand-navy uppercase tracking-wider block">
                                         {isBn ? "সংশ্লিষ্ট পরবর্তী ধাপ (Recommended Next Guide)" : "Recommended Next Step in This Topic"}
                                       </span>
-                                      <button
-                                        type="button"
-                                        onClick={() => navigateTo(activePost.internalLinks[0].path)}
-                                        className="text-left font-serif font-bold text-[16px] text-brand-navy hover:text-brand-emerald underline decoration-[#D4941A] decoration-2 underline-offset-3 cursor-pointer"
+                                      <a
+                                        href={activePost.internalLinks[0].path}
+                                        onClick={(e) => { e.preventDefault(); navigateTo(activePost.internalLinks[0].path); }}
+                                        className="text-left font-serif font-bold text-[16px] text-brand-navy hover:text-brand-emerald underline decoration-[#D4941A] decoration-2 underline-offset-3"
                                       >
                                         {activePost.internalLinks[0].text} →
-                                      </button>
+                                      </a>
                                     </div>
-                                    <button
-                                      type="button"
-                                      onClick={() => navigateTo("/umrah")}
-                                      className="self-start sm:self-center text-xs font-semibold text-brand-navy bg-white border border-slate-200 hover:border-brand-navy px-3 py-1.5 rounded-lg shrink-0 cursor-pointer"
+                                    <a
+                                      href="/umrah"
+                                      onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }}
+                                      className="self-start sm:self-center text-xs font-semibold text-brand-navy bg-white border border-slate-200 hover:border-brand-navy px-3 py-1.5 rounded-lg shrink-0"
                                     >
                                       {isBn ? "Umrah BDT ক্যালকুলেটর" : "Open Umrah BDT Calculator"}
-                                    </button>
+                                    </a>
                                   </div>
 
                                   <div className="flex flex-wrap items-center justify-between gap-3 pt-0.5">
@@ -5351,30 +5357,25 @@ export default function App() {
                                   : `Complete "${activePost.category}" Topical Series (${sameCategoryPosts.length + 1} Connected Guides)`}
                               </h3>
                             </div>
-                            <button
-                              type="button"
-                              onClick={() => navigateTo("/sitemap")}
-                              className="text-xs font-semibold text-brand-navy hover:underline cursor-pointer"
+                            <a
+                              href="/sitemap"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/sitemap"); }}
+                              className="text-xs font-semibold text-brand-navy hover:underline"
                             >
                               {isBn ? "সম্পূর্ণ SEO Blueprint দেখুন →" : "View Full Topical Map →"}
-                            </button>
+                            </a>
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                             {[activePost, ...sameCategoryPosts].map((clusterPost, cIdx) => {
                               const isCurrent = clusterPost.slug === activePost.slug;
-                              return (
-                                <button
-                                  key={clusterPost.id}
-                                  type="button"
-                                  disabled={isCurrent}
-                                  onClick={() => !isCurrent && navigateTo(`/blog/${clusterPost.slug}`)}
-                                  className={`text-left p-3 rounded-xl border transition-all flex items-start gap-2.5 ${
-                                    isCurrent
-                                      ? "bg-brand-navy text-white border-brand-navy cursor-default"
-                                      : "bg-white hover:bg-slate-100 text-slate-800 border-slate-200 hover:border-brand-navy cursor-pointer"
-                                  }`}
-                                >
+                              const className = `text-left p-3 rounded-xl border transition-all flex items-start gap-2.5 ${
+                                isCurrent
+                                  ? "bg-brand-navy text-white border-brand-navy cursor-default"
+                                  : "bg-white hover:bg-slate-100 text-slate-800 border-slate-200 hover:border-brand-navy"
+                              }`;
+                              const contents = (
+                                <>
                                   <span
                                     className={`text-[11px] font-mono font-bold px-1.5 py-0.5 rounded shrink-0 mt-0.5 ${
                                       isCurrent ? "bg-[#F6B73C] text-brand-navy" : "bg-slate-100 text-brand-navy"
@@ -5394,7 +5395,22 @@ export default function App() {
                                         : `${clusterPost.readTime} · ${isBn ? "পড়তে ক্লিক করুন →" : "Read Spoke Guide →"}`}
                                     </div>
                                   </div>
-                                </button>
+                                </>
+                              );
+
+                              return isCurrent ? (
+                                <div key={clusterPost.id} aria-current="page" className={className}>
+                                  {contents}
+                                </div>
+                              ) : (
+                                <a
+                                  key={clusterPost.id}
+                                  href={`/blog/${clusterPost.slug}`}
+                                  onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${clusterPost.slug}`); }}
+                                  className={className}
+                                >
+                                  {contents}
+                                </a>
                               );
                             })}
                           </div>
@@ -5407,15 +5423,16 @@ export default function App() {
                         </div>
                         <div className="flex flex-wrap gap-2.5 text-xs">
                           {activePost.internalLinks.map((lnk, idx) => (
-                            <button
+                            <a
                               key={idx}
                               id={`blog-inner-link-${idx}`}
-                              onClick={() => navigateTo(lnk.path)}
-                              className="bg-slate-100 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 px-3.5 py-2 rounded-xl cursor-pointer flex items-center gap-1.5 transition-colors font-medium"
+                              href={lnk.path}
+                              onClick={(e) => { e.preventDefault(); navigateTo(lnk.path); }}
+                              className="bg-slate-100 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-colors font-medium"
                             >
                               <Link2 size={13} className="text-brand-emerald" />
                               <span>{lnk.text}</span>
-                            </button>
+                            </a>
                           ))}
                         </div>
 
@@ -5575,21 +5592,21 @@ export default function App() {
                           <span className="text-xs font-bold text-slate-800">
                             {isBn ? "আরও ট্রাভেল গাইড" : "More Travel Guides"}
                           </span>
-                          <button
-                            type="button"
-                            onClick={() => navigateTo("/blog")}
-                            className="text-xs font-semibold text-brand-navy hover:underline cursor-pointer"
+                          <a
+                            href="/blog"
+                            onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
+                            className="text-xs font-semibold text-brand-navy hover:underline"
                           >
                             {isBn ? `সব দেখুন (${localizedBlogs.length})` : `View All (${localizedBlogs.length})`}
-                          </button>
+                          </a>
                         </div>
                         <div className="divide-y divide-slate-100">
                           {relatedPosts.map((post) => (
-                            <button
+                            <a
                               key={post.id}
-                              type="button"
-                              onClick={() => navigateTo(`/blog/${post.slug}`)}
-                              className="w-full text-left py-3 first:pt-1 last:pb-0 group cursor-pointer space-y-1"
+                              href={`/blog/${post.slug}`}
+                              onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${post.slug}`); }}
+                              className="w-full text-left py-3 first:pt-1 last:pb-0 group space-y-1 block"
                             >
                               <div className="text-[11px] text-slate-500">
                                 {post.category} · {post.readTime}
@@ -5597,7 +5614,7 @@ export default function App() {
                               <div className="text-xs font-semibold text-slate-800 group-hover:text-brand-navy line-clamp-2 leading-snug">
                                 {post.title}
                               </div>
-                            </button>
+                            </a>
                           ))}
                         </div>
                       </div>
@@ -5617,10 +5634,10 @@ export default function App() {
                             : "More Travel Guides for Bangladeshi Flyers"}
                         </h2>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => navigateTo("/blog")}
-                        className="self-start sm:self-end bg-brand-navy text-white text-xs font-semibold px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5 cursor-pointer"
+                      <a
+                        href="/blog"
+                        onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
+                        className="self-start sm:self-end bg-brand-navy text-white text-xs font-semibold px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5"
                       >
                         <span>
                           {isBn
@@ -5628,7 +5645,7 @@ export default function App() {
                             : `Back to All ${localizedBlogs.length} Blog Guides`}
                         </span>
                         <ArrowRight size={13} className="text-[#F6B73C]" />
-                      </button>
+                      </a>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -5638,9 +5655,13 @@ export default function App() {
                         return (
                           <article
                             key={post.id}
-                            onClick={() => navigateTo(`/blog/${post.slug}`)}
-                            className="group bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between cursor-pointer transition-all"
+                            className="bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs transition-all"
                           >
+                            <a
+                              href={`/blog/${post.slug}`}
+                              onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${post.slug}`); }}
+                              className="group flex h-full flex-col justify-between"
+                            >
                             <div>
                               <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
                                 <img
@@ -5668,18 +5689,12 @@ export default function App() {
                               </div>
                             </div>
                             <div className="px-5 pb-5 pt-2">
-                              <button
-                                type="button"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  navigateTo(`/blog/${post.slug}`);
-                                }}
-                                className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-between cursor-pointer"
-                              >
+                              <span className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-between">
                                 <span>{isBn ? "সম্পূর্ণ ব্লগ পড়ুন · Read Full Blog" : "Read Full Blog"}</span>
                                 <ArrowRight size={13} />
-                              </button>
+                              </span>
                             </div>
+                            </a>
                           </article>
                         );
                       })}
