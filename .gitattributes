@@ -1,0 +1,37 @@
+# ---------------------------------------------------------------------------
+# Line-ending normalization
+#
+# The build (scripts/prerender.ts) writes LF-terminated files, but on Windows
+# Git was re-encoding public/sitemap.xml and public/rss.xml to CRLF, producing
+# phantom "modified" diffs on every rebuild (empty content diff, pure EOL).
+# Forcing LF for all text files keeps generated artifacts byte-stable across
+# platforms and keeps commits clean. See docs/growth/08-site-cleanup.md §2.
+# ---------------------------------------------------------------------------
+
+# Default: treat as text, auto-detect, and always check out with LF.
+* text=auto eol=lf
+
+# Generated/crawlable text — the files that were churning. Be explicit.
+*.xml   text eol=lf
+*.txt   text eol=lf
+*.json  text eol=lf
+*.html  text eol=lf
+
+# Source files.
+*.ts    text eol=lf
+*.tsx   text eol=lf
+*.js    text eol=lf
+*.jsx   text eol=lf
+*.css   text eol=lf
+*.md    text eol=lf
+*.svg   text eol=lf
+
+# Binary assets — never normalize (would corrupt them).
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.gif   binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
