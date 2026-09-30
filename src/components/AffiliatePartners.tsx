@@ -553,8 +553,10 @@ export function PartnerLinkButton({
   const resolvedHref = resolvePartnerUrl(href);
 
   const handleClick = () => {
-    // 1. Log analytics tracking event to console
-    console.log(`[Affiliate Partner Click] Label: "${label}" | URL: ${resolvedHref} | Timestamp: ${new Date().toISOString()}`);
+    // 1. Log analytics tracking event to console (development only — never ships to production)
+    if (import.meta.env.DEV) {
+      console.log(`[Affiliate Partner Click] Label: "${label}" | URL: ${resolvedHref} | Timestamp: ${new Date().toISOString()}`);
+    }
 
     // 2. Push event to standard web dataLayer if present
     if (typeof window !== "undefined") {
