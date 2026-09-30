@@ -32,9 +32,6 @@ import { FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, DESTINATIONS_DATA, TRIP_COSTS_DAT
 
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
-import { TravelpayoutsCustomWidget } from "./components/TravelpayoutsCustomWidget";
-import TravelpayoutsWidget from "./components/TravelpayoutsWidget.jsx";
-import { TravelpayoutsEmbed } from "./components/TravelpayoutsEmbed";
 import { TrustpilotReviews } from "./components/TrustpilotReviews";
 import { TravelEssentials } from "./components/TravelEssentials";
 import {
@@ -140,6 +137,262 @@ const TravelpayoutsOnboarding = React.lazy(() =>
 const PriceAlertModal = React.lazy(() =>
   import("./components/PriceAlertModal").then((m) => ({ default: m.PriceAlertModal }))
 );
+const TravelpayoutsWidget = React.lazy(() => import("./components/TravelpayoutsWidget.jsx"));
+const TravelpayoutsEmbed = React.lazy(() =>
+  import("./components/TravelpayoutsEmbed").then((m) => ({ default: m.TravelpayoutsEmbed }))
+);
+const TravelpayoutsCustomWidget = React.lazy(() =>
+  import("./components/TravelpayoutsCustomWidget").then((m) => ({ default: m.TravelpayoutsCustomWidget }))
+);
+
+interface TravelpayoutsSkeletonProps {
+  variant?: "flights" | "hotels";
+  isBn?: boolean;
+  onInteract?: () => void;
+}
+
+export function TravelpayoutsWidgetSkeleton({
+  variant = "flights",
+  isBn = false,
+  onInteract,
+}: TravelpayoutsSkeletonProps) {
+  if (variant === "hotels") {
+    return (
+      <div
+        role="status"
+        aria-live="polite"
+        aria-busy="true"
+        aria-label={
+          isBn
+            ? "হোটেল ভাড়া তুলনা উইজেট লোড হচ্ছে..."
+            : "Loading Travelpayouts hotel comparison widget..."
+        }
+        onMouseDown={onInteract}
+        onTouchStart={onInteract}
+        onFocus={onInteract}
+        className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden my-4 text-slate-900 select-none"
+      >
+        {/* Brand Navy Header Bar Skeleton */}
+        <div className="bg-brand-navy p-3.5 sm:px-5 text-white flex flex-wrap items-center justify-between gap-2">
+          <div className="flex gap-2">
+            <div className="h-9 w-32 rounded-lg bg-slate-800/90 animate-pulse" />
+            <div className="h-9 w-32 rounded-lg bg-[#F6B73C]/85 animate-pulse" />
+          </div>
+          <div className="flex items-center gap-2 text-xs text-slate-300 font-mono">
+            <span className="w-2 h-2 rounded-full bg-[#F6B73C] animate-ping" />
+            <span>
+              {isBn
+                ? "লাইভ হোটেল রেট ইঞ্জিন প্রস্তুত হচ্ছে..."
+                : "Initializing live hotel partner rates..."}
+            </span>
+          </div>
+        </div>
+
+        {/* 4-Column Hotel Search Controls Bar Skeleton */}
+        <div className="p-4 sm:p-5 bg-slate-50 border-b border-slate-200">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
+            {[1, 2, 3].map((col) => (
+              <div key={col} className="space-y-1.5">
+                <div className="h-3.5 w-28 rounded bg-slate-200 animate-pulse" />
+                <div className="h-[42px] w-full rounded-lg bg-white border border-slate-200 px-3 flex items-center">
+                  <div className="h-3.5 w-3/4 rounded bg-slate-200 animate-pulse" />
+                </div>
+              </div>
+            ))}
+            <div className="h-[42px] w-full rounded-lg bg-[#F6B73C]/75 animate-pulse" />
+          </div>
+        </div>
+
+        {/* Hotel Comparison Result Cards Skeleton */}
+        <div className="p-4 sm:p-6 bg-white space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div className="h-4 w-56 rounded bg-slate-200 animate-pulse" />
+            <div className="h-3.5 w-32 rounded bg-slate-100 animate-pulse" />
+          </div>
+          <div className="space-y-3">
+            {[1, 2, 3].map((row) => (
+              <div
+                key={row}
+                className="border border-slate-200 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4"
+              >
+                <div className="flex items-start gap-3 flex-1">
+                  <div className="w-10 h-10 rounded-xl bg-slate-200 animate-pulse shrink-0" />
+                  <div className="space-y-2 flex-1">
+                    <div className="h-4 w-48 max-w-full rounded bg-slate-200 animate-pulse" />
+                    <div className="h-3 w-36 max-w-full rounded bg-slate-100 animate-pulse" />
+                    <div className="flex gap-2 pt-0.5">
+                      <div className="h-3 w-20 rounded bg-slate-100 animate-pulse" />
+                      <div className="h-3 w-24 rounded bg-slate-100 animate-pulse" />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between md:flex-col md:items-end gap-2 border-t md:border-t-0 border-slate-100 pt-3 md:pt-0">
+                  <div className="space-y-1">
+                    <div className="h-5 w-28 rounded bg-slate-200 animate-pulse" />
+                    <div className="h-3 w-20 rounded bg-slate-100 animate-pulse" />
+                  </div>
+                  <div className="h-8 w-32 rounded-lg bg-brand-navy/80 animate-pulse" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+      aria-label={
+        isBn
+          ? "ফ্লাইট সার্চ উইজেট লোড হচ্ছে..."
+          : "Loading Travelpayouts flight search widget..."
+      }
+      onMouseDown={onInteract}
+      onTouchStart={onInteract}
+      onFocus={onInteract}
+      className="w-full overflow-hidden rounded-xl bg-white shadow-sm border border-slate-200/90 text-slate-900 select-none"
+    >
+      {/* 1. Popular Routes Bar Skeleton */}
+      <div className="bg-slate-50 border-b border-slate-200/80 px-3 sm:px-5 py-2.5 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-1.5">
+          <div className="h-3.5 w-20 rounded bg-slate-200 animate-pulse mr-1" />
+          {[1, 2, 3, 4, 5].map((pill) => (
+            <div
+              key={pill}
+              className="h-7 w-28 rounded-lg bg-slate-200/90 animate-pulse"
+            />
+          ))}
+        </div>
+        <div className="flex items-center gap-2 text-[11px] font-mono text-slate-500">
+          <span className="w-2 h-2 rounded-full bg-[#07C369] animate-ping" />
+          <span>
+            {isBn
+              ? "লাইভ এয়ারলাইন ভাড়া লোড হচ্ছে..."
+              : "Initializing Travelpayouts live fares..."}
+          </span>
+        </div>
+      </div>
+
+      {/* 2. Main Interactive Search Form Skeleton */}
+      <div className="p-4 sm:p-5 bg-white border-b border-slate-200 space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="h-8 w-40 rounded-lg bg-slate-100 animate-pulse" />
+            <div className="h-8 w-44 rounded-lg bg-slate-100 animate-pulse" />
+          </div>
+          <div className="h-8 w-44 rounded-lg bg-slate-100 animate-pulse" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-stretch">
+          <div className="md:col-span-3 space-y-1">
+            <div className="h-3.5 w-36 rounded bg-slate-200 animate-pulse" />
+            <div className="h-[58px] rounded-xl bg-slate-50 border border-slate-200 p-3 flex items-center justify-between">
+              <div className="space-y-1.5 flex-1">
+                <div className="h-4 w-28 rounded bg-slate-200 animate-pulse" />
+                <div className="h-3 w-40 rounded bg-slate-100 animate-pulse" />
+              </div>
+              <div className="h-5 w-10 rounded bg-slate-200 animate-pulse" />
+            </div>
+          </div>
+
+          <div className="md:col-span-3 space-y-1">
+            <div className="h-3.5 w-40 rounded bg-slate-200 animate-pulse" />
+            <div className="h-[58px] rounded-xl bg-slate-50 border border-slate-200 p-3 flex items-center justify-between">
+              <div className="space-y-1.5 flex-1">
+                <div className="h-4 w-32 rounded bg-slate-200 animate-pulse" />
+                <div className="h-3 w-36 rounded bg-slate-100 animate-pulse" />
+              </div>
+              <div className="h-5 w-10 rounded bg-[#F6B73C]/30 animate-pulse" />
+            </div>
+          </div>
+
+          <div className="md:col-span-4 grid grid-cols-2 gap-2">
+            {[1, 2].map((dateCol) => (
+              <div key={dateCol} className="space-y-1">
+                <div className="h-3.5 w-24 rounded bg-slate-200 animate-pulse" />
+                <div className="h-[58px] rounded-xl bg-slate-50 border border-slate-200 p-3 flex flex-col justify-center gap-1.5">
+                  <div className="h-4 w-24 rounded bg-slate-200 animate-pulse" />
+                  <div className="h-3 w-20 rounded bg-slate-100 animate-pulse" />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="md:col-span-2 flex flex-col justify-end">
+            <div className="h-[58px] w-full rounded-xl bg-[#07C369]/80 animate-pulse" />
+          </div>
+        </div>
+      </div>
+
+      {/* 3. Results & Route Summary Skeleton */}
+      <div className="p-4 sm:p-6 bg-slate-50/70 space-y-4">
+        <div className="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100">
+            <div className="space-y-1.5">
+              <div className="h-3.5 w-52 rounded bg-slate-200 animate-pulse" />
+              <div className="h-5 w-64 rounded bg-slate-200 animate-pulse" />
+            </div>
+            <div className="h-8 w-44 rounded-lg bg-[#F6B73C]/25 animate-pulse" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {[1, 2, 3].map((stat) => (
+              <div
+                key={stat}
+                className="bg-slate-50 rounded-lg p-3 border border-slate-200/60 space-y-1.5"
+              >
+                <div className="h-3 w-32 rounded bg-slate-200 animate-pulse" />
+                <div className="h-5 w-28 rounded bg-slate-200 animate-pulse" />
+                <div className="h-3 w-40 rounded bg-slate-100 animate-pulse" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          {[1, 2, 3].map((card) => (
+            <div
+              key={card}
+              className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3"
+            >
+              <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                <div className="h-3.5 w-48 rounded bg-slate-200 animate-pulse" />
+                <div className="h-3.5 w-24 rounded bg-slate-100 animate-pulse" />
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+                <div className="lg:col-span-3 flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-xl bg-brand-navy/85 animate-pulse shrink-0" />
+                  <div className="space-y-1.5">
+                    <div className="h-4 w-36 rounded bg-slate-200 animate-pulse" />
+                    <div className="h-3 w-24 rounded bg-slate-100 animate-pulse" />
+                  </div>
+                </div>
+                <div className="lg:col-span-6 flex items-center justify-between gap-3">
+                  <div className="space-y-1">
+                    <div className="h-5 w-14 rounded bg-slate-200 animate-pulse" />
+                    <div className="h-3 w-16 rounded bg-slate-100 animate-pulse" />
+                  </div>
+                  <div className="flex-1 h-2 rounded bg-slate-200 animate-pulse mx-2" />
+                  <div className="space-y-1 text-right">
+                    <div className="h-5 w-14 rounded bg-slate-200 animate-pulse ml-auto" />
+                    <div className="h-3 w-16 rounded bg-slate-100 animate-pulse ml-auto" />
+                  </div>
+                </div>
+                <div className="lg:col-span-3 flex items-center lg:flex-col lg:items-end justify-between gap-2">
+                  <div className="h-6 w-28 rounded bg-slate-200 animate-pulse" />
+                  <div className="h-9 w-32 rounded-lg bg-[#07C369]/80 animate-pulse" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 const heroBgImage = "/assets/images/clouds_boat_hero_1781438671378-1200.webp";
 const uralHeroBgImg = "/assets/images/ural_hero_bg_1781543111624-1200.webp";
 const coxsBazarSunriseImg = "/assets/images/coxs_bazar_sunrise_1781620718331-1200.webp";
@@ -641,6 +894,44 @@ export default function App() {
   // Blog Directory Filtering & Search States
   const [blogCategoryFilter, setBlogCategoryFilter] = useState<string>("all");
   const [blogSearchQuery, setBlogSearchQuery] = useState<string>("");
+
+  // Home Page Global Search Hub States (around Real-time ticket search / Search Jet Fares from Dhaka)
+  const [homeSearchEngineTab, setHomeSearchEngineTab] = useState<"flights" | "hotels">("flights");
+  const [homeOriginCity, setHomeOriginCity] = useState<string>("Dhaka (DAC)");
+  const [homeDestCity, setHomeDestCity] = useState<string>("Kathmandu (KTM)");
+  const [homeHotelCity, setHomeHotelCity] = useState<string>("Makkah");
+  const [homeCustomSearchInput, setHomeCustomSearchInput] = useState<string>("");
+
+  // Track third-party Travelpayouts script initialization for perceived performance skeletons
+  const [areTpScriptsReady, setAreTpScriptsReady] = useState<boolean>(() =>
+    typeof window === "undefined"
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined" || areTpScriptsReady) return;
+
+    let isMounted = true;
+    const markReady = () => {
+      if (isMounted) setAreTpScriptsReady(true);
+    };
+
+    const tpScript = document.querySelector<HTMLScriptElement>('script[src*="emrld.ltd"]');
+    const fallbackTimer = window.setTimeout(markReady, 260);
+
+    if (tpScript) {
+      tpScript.addEventListener("load", markReady, { once: true });
+      tpScript.addEventListener("error", markReady, { once: true });
+    }
+
+    return () => {
+      isMounted = false;
+      window.clearTimeout(fallbackTimer);
+      if (tpScript) {
+        tpScript.removeEventListener("load", markReady);
+        tpScript.removeEventListener("error", markReady);
+      }
+    };
+  }, [areTpScriptsReady]);
 
   // Parse path to resolve active section and optional query parameters
   const getRouteDetails = () => {
@@ -2315,12 +2606,214 @@ export default function App() {
                 </p>
               </div>
 
+              {/* Global Search Bar & Hub Selector directly under 'Search Jet Fares from Dhaka' */}
+              <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-md space-y-4">
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAreTpScriptsReady(true);
+                        setHomeSearchEngineTab("flights");
+                      }}
+                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                        homeSearchEngineTab === "flights"
+                          ? "bg-brand-navy text-[#F6B73C] shadow-sm"
+                          : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                      }`}
+                    >
+                      <span>✈️</span>
+                      <span>{isBn ? "গ্লোবাল ফ্লাইট স্ক্যানার (যেকোনো দেশ)" : "Global Flight Scanner (Any Country)"}</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAreTpScriptsReady(true);
+                        setHomeSearchEngineTab("hotels");
+                      }}
+                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                        homeSearchEngineTab === "hotels"
+                          ? "bg-brand-navy text-[#F6B73C] shadow-sm"
+                          : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                      }`}
+                    >
+                      <span>🏨</span>
+                      <span>{isBn ? "গ্লোবাল হোটেল ও স্টে সার্চ" : "Global Hotel & Stay Finder"}</span>
+                    </button>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2">
+                    <a
+                      href={`/travelpayouts-wl.html?origin=${encodeURIComponent(homeOriginCity)}&destination=${encodeURIComponent(homeDestCity)}&standalone=1`}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="inline-flex items-center gap-1.5 text-[11px] font-bold bg-[#0B192C] hover:bg-slate-800 text-[#F6B73C] px-3 py-1.5 rounded-lg border border-[#F6B73C]/40 transition-colors"
+                    >
+                      <span>🌐</span>
+                      <span>{isBn ? "উড়াল হোয়াইট-লেবেল সার্চ (নতুন ট্যাব)" : "Open URAL White-Label Search"}</span>
+                      <span>↗</span>
+                    </a>
+                    <a
+                      href={`https://search.hotellook.com/?marker=675992&trs=540277&language=en&destination=${encodeURIComponent(homeHotelCity)}`}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="inline-flex items-center gap-1.5 text-[11px] font-bold bg-emerald-50 hover:bg-emerald-100 text-emerald-900 px-3 py-1.5 rounded-lg border border-emerald-300 transition-colors"
+                    >
+                      <span>🏨</span>
+                      <span>{isBn ? "লাইভ হোটেল রেট (Hotellook)" : "Live Global Hotels"}</span>
+                      <span>↗</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Universal Quick Global Destination Input */}
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const q = homeCustomSearchInput.trim();
+                    if (!q) return;
+                    setAreTpScriptsReady(true);
+                    if (homeSearchEngineTab === "hotels") {
+                      setHomeHotelCity(q);
+                    } else {
+                      setHomeDestCity(q);
+                      setHomeHotelCity(q.split(" (")[0]);
+                    }
+                  }}
+                  className="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-center"
+                >
+                  <div className="md:col-span-3">
+                    <label htmlFor="home-global-origin" className="block text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold mb-1">
+                      {isBn ? "যাত্রা শুরুর শহর (From)" : "Departure City / Airport"}
+                    </label>
+                    <input
+                      id="home-global-origin"
+                      type="text"
+                      value={homeOriginCity}
+                      onChange={(e) => setHomeOriginCity(e.target.value)}
+                      placeholder="Dhaka (DAC), London (LHR)..."
+                      className="w-full px-3 py-2 text-xs sm:text-sm font-semibold bg-slate-50 border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-navy"
+                    />
+                  </div>
+                  <div className="md:col-span-6">
+                    <label htmlFor="home-global-destination" className="block text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold mb-1">
+                      {homeSearchEngineTab === "flights"
+                        ? isBn
+                          ? "গন্তব্য শহর, দেশ বা এয়ারপোর্ট কোড (যেমন: London, Paris, JFK, JED)"
+                          : "Search Any Global Destination City, Country, or IATA Code (Europe, USA, UK, Middle East, Asia)"
+                        : isBn
+                        ? "যেকোনো শহরের হোটেল খুঁজুন (যেমন: Makkah, Paris, Dubai, Bangkok)"
+                        : "Type Any Global City or Landmark for Hotels (Makkah, Paris, Dubai, London, New York...)"}
+                    </label>
+                    <input
+                      id="home-global-destination"
+                      type="text"
+                      value={homeCustomSearchInput}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setHomeCustomSearchInput(val);
+                        if (val.trim().length >= 2) {
+                          if (homeSearchEngineTab === "hotels") {
+                            setHomeHotelCity(val.trim());
+                          } else {
+                            setHomeDestCity(val.trim());
+                          }
+                        }
+                      }}
+                      placeholder={
+                        homeSearchEngineTab === "flights"
+                          ? "Type any destination: London (LHR), Paris (CDG), New York (JFK), Jeddah (JED), Rome (FCO)..."
+                          : "Type any hotel city: Makkah, Madinah, Paris, Dubai, Bangkok, Istanbul, New York..."
+                      }
+                      className="w-full px-3.5 py-2 text-xs sm:text-sm font-semibold bg-slate-50 border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-navy"
+                    />
+                  </div>
+                  <div className="md:col-span-3 pt-0 md:pt-4 flex gap-2">
+                    <button
+                      type="submit"
+                      className="w-full py-2.5 px-4 bg-[#F6B73C] hover:bg-amber-400 text-brand-navy font-black text-xs sm:text-sm rounded-xl shadow-xs transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+                    >
+                      <span>🔍</span>
+                      <span>
+                        {homeSearchEngineTab === "flights"
+                          ? isBn
+                            ? "ফ্লাইট খুঁজুন"
+                            : "Apply Global Route"
+                          : isBn
+                          ? "হোটেল খুঁজুন"
+                          : "Apply Hotel City"}
+                      </span>
+                    </button>
+                  </div>
+                </form>
+
+                {/* One-Click Global Hub Chips */}
+                <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 mr-1">
+                    {isBn ? "জনপ্রিয় গ্লোবাল হাব:" : "Popular Global Hubs:"}
+                  </span>
+                  {[
+                    { label: "🇸🇦 Jeddah / Makkah", flight: "Jeddah (JED)", hotel: "Makkah" },
+                    { label: "🇸🇦 Madinah", flight: "Madinah (MED)", hotel: "Madinah" },
+                    { label: "🇦🇪 Dubai", flight: "Dubai (DXB)", hotel: "Dubai" },
+                    { label: "🇬🇧 London", flight: "London (LHR)", hotel: "London" },
+                    { label: "🇫🇷 Paris", flight: "Paris (CDG)", hotel: "Paris" },
+                    { label: "🇺🇸 New York", flight: "New York (JFK)", hotel: "New York" },
+                    { label: "🇹🇷 Istanbul", flight: "Istanbul (IST)", hotel: "Istanbul" },
+                    { label: "🇮🇹 Rome", flight: "Rome (FCO)", hotel: "Rome" },
+                    { label: "🇨🇦 Toronto", flight: "Toronto (YYZ)", hotel: "Toronto" },
+                    { label: "🇹🇭 Bangkok", flight: "Bangkok (BKK)", hotel: "Bangkok" },
+                    { label: "🇲🇾 Kuala Lumpur", flight: "Kuala Lumpur (KUL)", hotel: "Kuala Lumpur" },
+                    { label: "🇳🇵 Kathmandu", flight: "Kathmandu (KTM)", hotel: "Kathmandu" },
+                  ].map((hub) => {
+                    const isActive =
+                      homeSearchEngineTab === "flights"
+                        ? homeDestCity.toLowerCase().includes(hub.flight.split(" (")[0].toLowerCase())
+                        : homeHotelCity.toLowerCase().includes(hub.hotel.toLowerCase());
+                    return (
+                      <button
+                        key={hub.label}
+                        type="button"
+                        onClick={() => {
+                          setAreTpScriptsReady(true);
+                          setHomeDestCity(hub.flight);
+                          setHomeHotelCity(hub.hotel);
+                          setHomeCustomSearchInput(
+                            homeSearchEngineTab === "flights" ? hub.flight : hub.hotel
+                          );
+                        }}
+                        className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border transition-all cursor-pointer ${
+                          isActive
+                            ? "bg-brand-navy text-[#F6B73C] border-brand-navy shadow-2xs"
+                            : "bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200"
+                        }`}
+                      >
+                        {hub.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-2 sm:p-5 shadow-2xl w-full">
-                <div className="flex items-center justify-between mb-3 px-2">
-                  <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-wider">{t.liveSearchBoxHeader}</span>
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-3 px-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-wider">
+                      {homeSearchEngineTab === "flights"
+                        ? t.liveSearchBoxHeader
+                        : isBn
+                        ? "উড়াল গ্লোবাল হোটেল ও ফ্লাইট সার্চ ইঞ্জিন"
+                        : "URAL GLOBAL HOTEL & FLIGHT SEARCH ENGINE"}
+                    </span>
+                    <span className="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700 font-mono">
+                      {homeSearchEngineTab === "flights"
+                        ? `${homeOriginCity} → ${homeDestCity}`
+                        : `🏨 ${homeHotelCity}`}
+                    </span>
+                  </div>
                   <button
                     type="button"
-                    onClick={() => openPriceAlert("Bangkok (BKK)")}
+                    onClick={() => openPriceAlert(homeDestCity || "Bangkok (BKK)")}
                     className="inline-flex items-center gap-1.5 text-xs text-brand-ivory hover:text-white bg-brand-emerald/15 hover:bg-brand-emerald/25 px-2.5 py-1 rounded-md border border-brand-emerald/30 font-medium transition-colors cursor-pointer"
                   >
                     <span>🔔</span>
@@ -2329,7 +2822,37 @@ export default function App() {
                   </button>
                 </div>
                 <div className="text-slate-900">
-                  <TravelpayoutsWidget />
+                  {areTpScriptsReady ? (
+                    <React.Suspense
+                      fallback={
+                        <TravelpayoutsWidgetSkeleton
+                          variant={homeSearchEngineTab}
+                          isBn={isBn}
+                          onInteract={() => setAreTpScriptsReady(true)}
+                        />
+                      }
+                    >
+                      {homeSearchEngineTab === "flights" ? (
+                        <TravelpayoutsWidget
+                          origin={homeOriginCity}
+                          destination={homeDestCity}
+                        />
+                      ) : (
+                        <TravelpayoutsCustomWidget
+                          initialTab="hotels"
+                          initialFrom={homeOriginCity}
+                          initialTo={homeDestCity}
+                          initialHotelCity={homeHotelCity}
+                        />
+                      )}
+                    </React.Suspense>
+                  ) : (
+                    <TravelpayoutsWidgetSkeleton
+                      variant={homeSearchEngineTab}
+                      isBn={isBn}
+                      onInteract={() => setAreTpScriptsReady(true)}
+                    />
+                  )}
                 </div>
               </div>
 
@@ -2545,7 +3068,25 @@ export default function App() {
                 <span className="text-[10px] font-mono font-bold text-slate-500 uppercase block mb-3 px-2">
                   {isBn ? "🏨 হোটেল সার্চ (Search Hotels)" : "🏨 Search Hotels"}
                 </span>
-                <TravelpayoutsCustomWidget initialTab="hotels" />
+                {areTpScriptsReady ? (
+                  <React.Suspense
+                    fallback={
+                      <TravelpayoutsWidgetSkeleton
+                        variant="hotels"
+                        isBn={isBn}
+                        onInteract={() => setAreTpScriptsReady(true)}
+                      />
+                    }
+                  >
+                    <TravelpayoutsCustomWidget initialTab="hotels" />
+                  </React.Suspense>
+                ) : (
+                  <TravelpayoutsWidgetSkeleton
+                    variant="hotels"
+                    isBn={isBn}
+                    onInteract={() => setAreTpScriptsReady(true)}
+                  />
+                )}
               </div>
 
               {/* Quick links to pre-filled hotel lookups */}
@@ -3025,9 +3566,27 @@ export default function App() {
                       <span className="text-[10px] font-mono font-bold text-brand-navy block">
                         {isBn ? "এই রুটের ফ্লাইট সার্চ করুন" : "Search Flights on This Route"}
                       </span>
-                      <TravelpayoutsEmbed
-                        defaultDestination={getCountryIata(activeRoute.country)}
-                      />
+                      {areTpScriptsReady ? (
+                        <React.Suspense
+                          fallback={
+                            <TravelpayoutsWidgetSkeleton
+                              variant="flights"
+                              isBn={isBn}
+                              onInteract={() => setAreTpScriptsReady(true)}
+                            />
+                          }
+                        >
+                          <TravelpayoutsEmbed
+                            defaultDestination={getCountryIata(activeRoute.country)}
+                          />
+                        </React.Suspense>
+                      ) : (
+                        <TravelpayoutsWidgetSkeleton
+                          variant="flights"
+                          isBn={isBn}
+                          onInteract={() => setAreTpScriptsReady(true)}
+                        />
+                      )}
                       <div className="pt-2 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
                         <span className="text-xs text-slate-600">
                           {isBn
@@ -3196,8 +3755,11 @@ export default function App() {
                                 <span className="text-sm font-bold text-slate-800">৳ {room.priceBdt.toLocaleString()} BDT</span>
                               </div>
                               
-                              <button
+                              <a
                                 id={`hotel-booking-btn-${room.name.toLowerCase().replace(/\s+/g, '-')}`}
+                                href={`https://search.hotellook.com/?marker=675992&trs=540277&language=en&currency=BDT&destination=${encodeURIComponent(`${room.name} ${activeHotel.city}`)}`}
+                                target="_blank"
+                                rel="noopener noreferrer sponsored"
                                 onClick={() => {
                                   triggerAffiliateToast(
                                     isBn
@@ -3208,7 +3770,7 @@ export default function App() {
                                 className="bg-brand-navy text-white hover:bg-[#1a4166] text-[10px] font-bold px-3 py-1.5 rounded-md cursor-pointer flex items-center gap-1.5 transition-colors"
                               >
                                 {isBn ? "বুক করুন" : "Book Stay"} <ExternalLink size={10} />
-                              </button>
+                              </a>
                             </div>
                           </div>
                         ))}
@@ -3257,11 +3819,29 @@ export default function App() {
                     </div>
 
                     {/* Widget */}
-                    <TravelpayoutsCustomWidget 
-                      initialTab="hotels"
-                      initialHotelCity={activeHotel.city}
-                      initialTo={getCountryCityWithIata(activeHotel.country)}
-                    />
+                    {areTpScriptsReady ? (
+                      <React.Suspense
+                        fallback={
+                          <TravelpayoutsWidgetSkeleton
+                            variant="hotels"
+                            isBn={isBn}
+                            onInteract={() => setAreTpScriptsReady(true)}
+                          />
+                        }
+                      >
+                        <TravelpayoutsCustomWidget 
+                          initialTab="hotels"
+                          initialHotelCity={activeHotel.city}
+                          initialTo={getCountryCityWithIata(activeHotel.country)}
+                        />
+                      </React.Suspense>
+                    ) : (
+                      <TravelpayoutsWidgetSkeleton
+                        variant="hotels"
+                        isBn={isBn}
+                        onInteract={() => setAreTpScriptsReady(true)}
+                      />
+                    )}
 
                     <TravelIntelligence
                       pageTitle={isBn ? `${activeHotel.city}-এ কোথায় থাকবেন` : `Where to stay in ${activeHotel.city}`}
@@ -3396,9 +3976,27 @@ export default function App() {
                         <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
                           {isBn ? "ঢাকা থেকে ফ্লাইট খুঁজুন" : "Find flights from Dhaka"}
                         </span>
-                        <TravelpayoutsEmbed
-                          defaultDestination={getCountryIata(activeVisa.country)}
-                        />
+                        {areTpScriptsReady ? (
+                          <React.Suspense
+                            fallback={
+                              <TravelpayoutsWidgetSkeleton
+                                variant="flights"
+                                isBn={isBn}
+                                onInteract={() => setAreTpScriptsReady(true)}
+                              />
+                            }
+                          >
+                            <TravelpayoutsEmbed
+                              defaultDestination={getCountryIata(activeVisa.country)}
+                            />
+                          </React.Suspense>
+                        ) : (
+                          <TravelpayoutsWidgetSkeleton
+                            variant="flights"
+                            isBn={isBn}
+                            onInteract={() => setAreTpScriptsReady(true)}
+                          />
+                        )}
                       </div>
 
                       <div className="flex flex-wrap gap-2.5">
@@ -3550,7 +4148,25 @@ export default function App() {
                           </div>
                           <div className="bg-[#0f1d2e] p-2 sm:p-4 rounded-xl border border-slate-700/60 text-slate-900">
                             <span className="text-[10px] font-mono font-bold text-slate-500 uppercase block mb-3 px-1">✈️ LIVE FLIGHTS SEARCH</span>
-                            <TravelpayoutsEmbed defaultDestination="DXB" />
+                            {areTpScriptsReady ? (
+                              <React.Suspense
+                                fallback={
+                                  <TravelpayoutsWidgetSkeleton
+                                    variant="flights"
+                                    isBn={isBn}
+                                    onInteract={() => setAreTpScriptsReady(true)}
+                                  />
+                                }
+                              >
+                                <TravelpayoutsEmbed defaultDestination="DXB" />
+                              </React.Suspense>
+                            ) : (
+                              <TravelpayoutsWidgetSkeleton
+                                variant="flights"
+                                isBn={isBn}
+                                onInteract={() => setAreTpScriptsReady(true)}
+                              />
+                            )}
                           </div>
                         </div>
 
@@ -3598,11 +4214,29 @@ export default function App() {
                           </div>
                           <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200 text-slate-900">
                             <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">🏨 LIVE HOTEL COMPARISON ENGINE</span>
-                            <TravelpayoutsCustomWidget 
-                              initialTab="hotels"
-                              initialTo="Dubai (DXB)"
-                              initialHotelCity="Dubai"
-                            />
+                            {areTpScriptsReady ? (
+                              <React.Suspense
+                                fallback={
+                                  <TravelpayoutsWidgetSkeleton
+                                    variant="hotels"
+                                    isBn={isBn}
+                                    onInteract={() => setAreTpScriptsReady(true)}
+                                  />
+                                }
+                              >
+                                <TravelpayoutsCustomWidget 
+                                  initialTab="hotels"
+                                  initialTo="Dubai (DXB)"
+                                  initialHotelCity="Dubai"
+                                />
+                              </React.Suspense>
+                            ) : (
+                              <TravelpayoutsWidgetSkeleton
+                                variant="hotels"
+                                isBn={isBn}
+                                onInteract={() => setAreTpScriptsReady(true)}
+                              />
+                            )}
                           </div>
                         </div>
 
@@ -3788,9 +4422,27 @@ export default function App() {
                           {/* Travelpayouts Flights widget */}
                           <div className="bg-[#0f1d2e] p-2 sm:p-4 rounded-xl border border-slate-700/60 text-slate-900">
                             <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">✈️ LIVE FLIGHTS COMPARISON ENGINE</span>
-                            <TravelpayoutsEmbed
-                              defaultDestination={getCountryIata(activeDes.country)}
-                            />
+                            {areTpScriptsReady ? (
+                              <React.Suspense
+                                fallback={
+                                  <TravelpayoutsWidgetSkeleton
+                                    variant="flights"
+                                    isBn={isBn}
+                                    onInteract={() => setAreTpScriptsReady(true)}
+                                  />
+                                }
+                              >
+                                <TravelpayoutsEmbed
+                                  defaultDestination={getCountryIata(activeDes.country)}
+                                />
+                              </React.Suspense>
+                            ) : (
+                              <TravelpayoutsWidgetSkeleton
+                                variant="flights"
+                                isBn={isBn}
+                                onInteract={() => setAreTpScriptsReady(true)}
+                              />
+                            )}
                           </div>
                         </div>
 
@@ -3849,11 +4501,29 @@ export default function App() {
 
                           <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200 text-slate-900">
                             <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">🏨 LIVE ACCOMMODATION COMPARISON ENGINE</span>
-                            <TravelpayoutsCustomWidget 
-                              initialTab="hotels"
-                              initialTo={getCountryCityWithIata(activeDes.country)}
-                              initialHotelCity={getCountryCityName(activeDes.country)}
-                            />
+                            {areTpScriptsReady ? (
+                              <React.Suspense
+                                fallback={
+                                  <TravelpayoutsWidgetSkeleton
+                                    variant="hotels"
+                                    isBn={isBn}
+                                    onInteract={() => setAreTpScriptsReady(true)}
+                                  />
+                                }
+                              >
+                                <TravelpayoutsCustomWidget 
+                                  initialTab="hotels"
+                                  initialTo={getCountryCityWithIata(activeDes.country)}
+                                  initialHotelCity={getCountryCityName(activeDes.country)}
+                                />
+                              </React.Suspense>
+                            ) : (
+                              <TravelpayoutsWidgetSkeleton
+                                variant="hotels"
+                                isBn={isBn}
+                                onInteract={() => setAreTpScriptsReady(true)}
+                              />
+                            )}
                           </div>
                         </div>
 
@@ -4190,9 +4860,27 @@ export default function App() {
                           <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
                             {isBn ? `ঢাকা থেকে ${activeCost.country} ফ্লাইটের আজকের ভাড়া দেখুন` : `Check today's flight prices from Dhaka to ${activeCost.country}`}
                           </span>
-                          <TravelpayoutsEmbed
-                            defaultDestination={getCountryIata(activeCost.country)}
-                          />
+                          {areTpScriptsReady ? (
+                            <React.Suspense
+                              fallback={
+                                <TravelpayoutsWidgetSkeleton
+                                  variant="flights"
+                                  isBn={isBn}
+                                  onInteract={() => setAreTpScriptsReady(true)}
+                                />
+                              }
+                            >
+                              <TravelpayoutsEmbed
+                                defaultDestination={getCountryIata(activeCost.country)}
+                              />
+                            </React.Suspense>
+                          ) : (
+                            <TravelpayoutsWidgetSkeleton
+                              variant="flights"
+                              isBn={isBn}
+                              onInteract={() => setAreTpScriptsReady(true)}
+                            />
+                          )}
                         </div>
 
                         <TravelEssentials
@@ -4332,7 +5020,25 @@ export default function App() {
                     </h3>
                   </div>
                   <div className="pl-0 sm:pl-11">
-                    <TravelpayoutsEmbed />
+                    {areTpScriptsReady ? (
+                      <React.Suspense
+                        fallback={
+                          <TravelpayoutsWidgetSkeleton
+                            variant="flights"
+                            isBn={isBn}
+                            onInteract={() => setAreTpScriptsReady(true)}
+                          />
+                        }
+                      >
+                        <TravelpayoutsEmbed />
+                      </React.Suspense>
+                    ) : (
+                      <TravelpayoutsWidgetSkeleton
+                        variant="flights"
+                        isBn={isBn}
+                        onInteract={() => setAreTpScriptsReady(true)}
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -4347,7 +5053,25 @@ export default function App() {
                     </h3>
                   </div>
                   <div className="pl-0 sm:pl-11">
-                    <TravelpayoutsCustomWidget initialTab="hotels" />
+                    {areTpScriptsReady ? (
+                      <React.Suspense
+                        fallback={
+                          <TravelpayoutsWidgetSkeleton
+                            variant="hotels"
+                            isBn={isBn}
+                            onInteract={() => setAreTpScriptsReady(true)}
+                          />
+                        }
+                      >
+                        <TravelpayoutsCustomWidget initialTab="hotels" />
+                      </React.Suspense>
+                    ) : (
+                      <TravelpayoutsWidgetSkeleton
+                        variant="hotels"
+                        isBn={isBn}
+                        onInteract={() => setAreTpScriptsReady(true)}
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -4716,7 +5440,25 @@ export default function App() {
                     <ArrowRight size={12} />
                   </button>
                 </div>
-                <TravelpayoutsEmbed defaultDestination="JED" />
+                {areTpScriptsReady ? (
+                  <React.Suspense
+                    fallback={
+                      <TravelpayoutsWidgetSkeleton
+                        variant="flights"
+                        isBn={isBn}
+                        onInteract={() => setAreTpScriptsReady(true)}
+                      />
+                    }
+                  >
+                    <TravelpayoutsEmbed defaultDestination="JED" />
+                  </React.Suspense>
+                ) : (
+                  <TravelpayoutsWidgetSkeleton
+                    variant="flights"
+                    isBn={isBn}
+                    onInteract={() => setAreTpScriptsReady(true)}
+                  />
+                )}
               </div>
 
               <TravelEssentials country="Saudi Arabia & Asia" defaultTab="transfers" compactHeader lang={lang} />

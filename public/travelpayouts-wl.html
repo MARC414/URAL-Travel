@@ -15,9 +15,88 @@
       overflow-x: hidden;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
+    body.ural-standalone {
+      background: #F8FAFC;
+      color: #0F172A;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .ural-wl-header {
+      display: none;
+      background: #0B192C;
+      color: #FFFFFF;
+      border-bottom: 2px solid rgba(246, 183, 60, 0.35);
+      padding: 14px 20px;
+    }
+    body.ural-standalone .ural-wl-header {
+      display: block;
+    }
+    .ural-wl-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .ural-wl-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+    .ural-wl-badge {
+      background: rgba(246, 183, 60, 0.18);
+      color: #F6B73C;
+      border: 1px solid rgba(246, 183, 60, 0.4);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .ural-wl-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+    .ural-wl-link {
+      color: #E2E8F0;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.07);
+      transition: background 0.15s;
+    }
+    .ural-wl-link:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #F6B73C;
+    }
+    .ural-wl-link-gold {
+      background: #F6B73C;
+      color: #0B192C;
+      font-weight: 700;
+    }
+    .ural-wl-link-gold:hover {
+      background: #e5a62b;
+      color: #0B192C;
+    }
     .tpwl-wrapper {
       width: 100%;
       padding: 6px 8px 16px;
+    }
+    body.ural-standalone .tpwl-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+      flex: 1;
     }
     #tpwl-search {
       width: 100%;
@@ -26,6 +105,18 @@
     #tpwl-tickets {
       width: 100%;
       margin-top: 16px;
+    }
+    .ural-wl-footer {
+      display: none;
+      background: #0B192C;
+      color: #94A3B8;
+      border-top: 1px solid #1E293B;
+      padding: 20px;
+      font-size: 12px;
+      text-align: center;
+    }
+    body.ural-standalone .ural-wl-footer {
+      display: block;
     }
   </style>
 
@@ -45,23 +136,35 @@
         }
       } catch (e) {}
 
-      // 2. Extract initial origin/destination from query string and ensure a default flightSearch
+      // 2. Extract initial origin/destination/currency from query string and ensure a default flightSearch
       // is present so the departure date is pre-filled and TicketsWidget hooks initialize cleanly.
       var initOrigin = "DAC";
       var initDest = "KTM";
+      var initCurrency = "BDT";
+      var isStandalone = false;
       try {
         var currentUrl = new URL(window.location.href);
         var oParam = currentUrl.searchParams.get("origin");
         var dParam = currentUrl.searchParams.get("destination");
+        var cParam = currentUrl.searchParams.get("currency");
+        var sParam = currentUrl.searchParams.get("standalone");
         if (oParam && /^[A-Za-z]{3}$/.test(oParam)) {
           initOrigin = oParam.toUpperCase();
         }
         if (dParam && /^[A-Za-z]{3}$/.test(dParam)) {
           initDest = dParam.toUpperCase();
         }
-        if (currentUrl.searchParams.has("origin") || currentUrl.searchParams.has("destination")) {
+        if (cParam && /^[A-Za-z]{3}$/.test(cParam)) {
+          initCurrency = cParam.toUpperCase();
+        }
+        if (sParam === "1" || window.self === window.top) {
+          isStandalone = true;
+        }
+        if (currentUrl.searchParams.has("origin") || currentUrl.searchParams.has("destination") || currentUrl.searchParams.has("currency") || currentUrl.searchParams.has("standalone")) {
           currentUrl.searchParams.delete("origin");
           currentUrl.searchParams.delete("destination");
+          currentUrl.searchParams.delete("currency");
+          currentUrl.searchParams.delete("standalone");
         }
         if (!currentUrl.searchParams.get("flightSearch")) {
           var defDepart = new Date();
@@ -74,6 +177,8 @@
         var cleanHref = currentUrl.pathname + (remaining ? "?" + remaining : "") + currentUrl.hash;
         window.history.replaceState(null, "", cleanHref);
       } catch (e) {}
+
+      window.__URAL_STANDALONE__ = isStandalone;
 
       // 3. Ensure hide_hotels=true is always present in document.cookie
       try {
@@ -149,7 +254,7 @@
                       if (chunk && chunk.chunk_id === "results" && !chunk.cheapest_ticket) {
                         var firstTicket = Array.isArray(chunk.tickets) && chunk.tickets.length > 0 ? chunk.tickets[0] : null;
                         chunk.cheapest_ticket = firstTicket || {
-                          proposals: [{ price: { currency_code: "BDT", value: 0 } }]
+                          proposals: [{ price: { currency_code: initCurrency, value: 0 } }]
                         };
                       }
                     }
@@ -163,15 +268,15 @@
         };
       } catch (e) {}
 
-      // 5. Configure Travelpayouts White Label to stay 100% in-page with BDT currency,
+      // 5. Configure Travelpayouts White Label to stay 100% in-page with selected currency,
       // route pre-fill via flightParams, and no hotel pop-under
       var selfUrl = window.location.origin + window.location.pathname;
       window.TPWL_CONFIGURATION = Object.assign({}, window.TPWL_CONFIGURATION || {}, {
         showHotels: false,
         showReferralLink: false,
         resultsURL: selfUrl,
-        defaultCurrency: "BDT",
-        availableCurrencies: ["BDT", "USD", "THB", "MYR", "AED", "NPR", "EUR", "GBP"],
+        defaultCurrency: initCurrency,
+        availableCurrencies: ["BDT", "USD", "EUR", "GBP", "SAR", "AED", "THB", "MYR", "NPR", "SGD", "CAD", "AUD"],
         flightParams: {
           origin: initOrigin,
           destination: initDest
@@ -183,13 +288,36 @@
   <script type="module" src="https://tpemd.com/wl_web/main.js?wl_id=22462" async></script>
 </head>
 <body>
+  <header class="ural-wl-header">
+    <div class="ural-wl-header-inner">
+      <a href="/" class="ural-wl-brand">
+        <img src="/assets/brand/svg/ural-wordmark.svg" alt="URAL" width="82" height="28" style="height:28px;width:auto" />
+        <span class="ural-wl-badge">Global Flight Search Desk</span>
+      </a>
+      <nav class="ural-wl-nav" aria-label="URAL Navigation">
+        <a href="/flights" class="ural-wl-link">✈️ Flight Guides</a>
+        <a href="/hotels" class="ural-wl-link">🏨 Hotels</a>
+        <a href="/visa" class="ural-wl-link">🛂 Visa Checklists</a>
+        <a href="/umrah" class="ural-wl-link">🕋 Umrah Hub</a>
+        <a href="/" class="ural-wl-link ural-wl-link-gold">← Back to URAL Home</a>
+      </nav>
+    </div>
+  </header>
+
   <div class="tpwl-wrapper" id="tpwl-container">
     <div id="tpwl-search"></div>
     <div id="tpwl-tickets"></div>
   </div>
 
+  <footer class="ural-wl-footer">
+    <div>© 2026 URAL Travel Intelligence · Official Partner Search Engine (ID #675992 · WL #22462) · Need BDT / bKash Booking Help? <a href="https://wa.me/8801784385335" target="_blank" rel="noopener noreferrer" style="color:#F6B73C;font-weight:700;text-decoration:none">WhatsApp +8801784385335</a></div>
+  </footer>
+
   <script>
     (function() {
+      if (window.__URAL_STANDALONE__) {
+        document.body.classList.add("ural-standalone");
+      }
       var lastSentHeight = 0;
       var observedShadowRoots = new WeakSet();
       var styledShadowRoots = new WeakSet();

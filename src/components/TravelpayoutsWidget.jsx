@@ -25,45 +25,113 @@ import {
 const MARKER_ID = '675992';
 const BDT_PER_USD = 120;
 
+const CURRENCY_CONFIG = {
+  BDT: { symbol: '৳', code: 'BDT', label: '৳ BDT', rateFromBdt: 1 },
+  USD: { symbol: '$', code: 'USD', label: '$ USD', rateFromBdt: 1 / 120 },
+  EUR: { symbol: '€', code: 'EUR', label: '€ EUR', rateFromBdt: 1 / 130 },
+  GBP: { symbol: '£', code: 'GBP', label: '£ GBP', rateFromBdt: 1 / 152 },
+  SAR: { symbol: 'SAR ', code: 'SAR', label: '﷼ SAR', rateFromBdt: 1 / 32 },
+  AED: { symbol: 'AED ', code: 'AED', label: 'د.إ AED', rateFromBdt: 1 / 32.7 },
+};
+
+const BANGLADESH_AIRPORT_CODES = new Set(['DAC', 'CGP', 'ZYL', 'CXB', 'RJH', 'SPD', 'JSR', 'BZL']);
+
 const POPULAR_ROUTES = [
   { label: 'Dhaka → Kathmandu', origin: 'DAC', destination: 'KTM', flag: '🇳🇵', badge: 'Visa on Arrival' },
   { label: 'Dhaka → Bangkok', origin: 'DAC', destination: 'BKK', flag: '🇹🇭', badge: '2h 30m Direct' },
   { label: 'Dhaka → Kuala Lumpur', origin: 'DAC', destination: 'KUL', flag: '🇲🇾', badge: 'Easy e-Visa' },
   { label: 'Dhaka → Dubai', origin: 'DAC', destination: 'DXB', flag: '🇦🇪', badge: '4 Daily Direct' },
+  { label: 'Dhaka → Jeddah (Umrah)', origin: 'DAC', destination: 'JED', flag: '🇸🇦', badge: 'Direct Umrah' },
   { label: 'Dhaka → Singapore', origin: 'DAC', destination: 'SIN', flag: '🇸🇬', badge: '4h 05m Direct' },
   { label: 'Dhaka → Maldives', origin: 'DAC', destination: 'MLE', flag: '🇲🇻', badge: 'Free Entry Visa' },
-  { label: 'Dhaka → Guangzhou', origin: 'DAC', destination: 'CAN', flag: '🇨🇳', badge: 'Business Hub' },
+  { label: 'Dhaka → London', origin: 'DAC', destination: 'LHR', flag: '🇬🇧', badge: 'Global Route' },
+  { label: 'London → New York', origin: 'LHR', destination: 'JFK', flag: '🇺🇸', badge: 'Global Route' },
 ];
 
 const AIRPORTS_DIRECTORY = [
+  // Bangladesh
   { code: 'DAC', city: 'Dhaka', name: 'Hazrat Shahjalal International Airport', country: 'Bangladesh', flag: '🇧🇩' },
   { code: 'CGP', city: 'Chattogram', name: 'Shah Amanat International Airport', country: 'Bangladesh', flag: '🇧🇩' },
   { code: 'ZYL', city: 'Sylhet', name: 'Osmani International Airport', country: 'Bangladesh', flag: '🇧🇩' },
   { code: 'CXB', city: "Cox's Bazar", name: "Cox's Bazar Airport", country: 'Bangladesh', flag: '🇧🇩' },
+  // South & Southeast Asia
   { code: 'KTM', city: 'Kathmandu', name: 'Tribhuvan International Airport', country: 'Nepal', flag: '🇳🇵' },
   { code: 'BKK', city: 'Bangkok', name: 'Suvarnabhumi International Airport', country: 'Thailand', flag: '🇹🇭' },
   { code: 'DMK', city: 'Bangkok (Don Mueang)', name: 'Don Mueang International Airport', country: 'Thailand', flag: '🇹🇭' },
   { code: 'HKT', city: 'Phuket', name: 'Phuket International Airport', country: 'Thailand', flag: '🇹🇭' },
+  { code: 'CNX', city: 'Chiang Mai', name: 'Chiang Mai International Airport', country: 'Thailand', flag: '🇹🇭' },
   { code: 'KUL', city: 'Kuala Lumpur', name: 'Kuala Lumpur International Airport', country: 'Malaysia', flag: '🇲🇾' },
-  { code: 'DXB', city: 'Dubai', name: 'Dubai International Airport', country: 'United Arab Emirates', flag: '🇦🇪' },
-  { code: 'AUH', city: 'Abu Dhabi', name: 'Zayed International Airport', country: 'United Arab Emirates', flag: '🇦🇪' },
-  { code: 'SHJ', city: 'Sharjah', name: 'Sharjah International Airport', country: 'United Arab Emirates', flag: '🇦🇪' },
+  { code: 'PEN', city: 'Penang', name: 'Penang International Airport', country: 'Malaysia', flag: '🇲🇾' },
+  { code: 'LGK', city: 'Langkawi', name: 'Langkawi International Airport', country: 'Malaysia', flag: '🇲🇾' },
   { code: 'SIN', city: 'Singapore', name: 'Changi International Airport', country: 'Singapore', flag: '🇸🇬' },
   { code: 'MLE', city: 'Malé', name: 'Velana International Airport', country: 'Maldives', flag: '🇲🇻' },
-  { code: 'CAN', city: 'Guangzhou', name: 'Baiyun International Airport', country: 'China', flag: '🇨🇳' },
-  { code: 'KMG', city: 'Kunming', name: 'Changshui International Airport', country: 'China', flag: '🇨🇳' },
   { code: 'CMB', city: 'Colombo', name: 'Bandaranaike International Airport', country: 'Sri Lanka', flag: '🇱🇰' },
   { code: 'CCU', city: 'Kolkata', name: 'Netaji Subhas Chandra Bose Intl', country: 'India', flag: '🇮🇳' },
   { code: 'DEL', city: 'New Delhi', name: 'Indira Gandhi International Airport', country: 'India', flag: '🇮🇳' },
+  { code: 'BOM', city: 'Mumbai', name: 'Chhatrapati Shivaji Maharaj Intl', country: 'India', flag: '🇮🇳' },
   { code: 'MAA', city: 'Chennai', name: 'Chennai International Airport', country: 'India', flag: '🇮🇳' },
-  { code: 'DOH', city: 'Doha', name: 'Hamad International Airport', country: 'Qatar', flag: '🇶🇦' },
-  { code: 'JED', city: 'Jeddah', name: 'King Abdulaziz International Airport', country: 'Saudi Arabia', flag: '🇸🇦' },
+  { code: 'BLR', city: 'Bengaluru', name: 'Kempegowda International Airport', country: 'India', flag: '🇮🇳' },
+  { code: 'CGK', city: 'Jakarta', name: 'Soekarno-Hatta International Airport', country: 'Indonesia', flag: '🇮🇩' },
+  { code: 'DPS', city: 'Bali (Denpasar)', name: 'I Gusti Ngurah Rai International Airport', country: 'Indonesia', flag: '🇮🇩' },
+  { code: 'HAN', city: 'Hanoi', name: 'Noi Bai International Airport', country: 'Vietnam', flag: '🇻🇳' },
+  { code: 'SGN', city: 'Ho Chi Minh City', name: 'Tan Son Nhat International Airport', country: 'Vietnam', flag: '🇻🇳' },
+  { code: 'MNL', city: 'Manila', name: 'Ninoy Aquino International Airport', country: 'Philippines', flag: '🇵🇭' },
+  // Middle East & Umrah Hubs
+  { code: 'JED', city: 'Jeddah (Makkah Gateway)', name: 'King Abdulaziz International Airport', country: 'Saudi Arabia', flag: '🇸🇦' },
+  { code: 'MED', city: 'Madinah', name: 'Prince Mohammad Bin Abdulaziz Airport', country: 'Saudi Arabia', flag: '🇸🇦' },
   { code: 'RUH', city: 'Riyadh', name: 'King Khalid International Airport', country: 'Saudi Arabia', flag: '🇸🇦' },
+  { code: 'DMM', city: 'Dammam', name: 'King Fahd International Airport', country: 'Saudi Arabia', flag: '🇸🇦' },
+  { code: 'DXB', city: 'Dubai', name: 'Dubai International Airport', country: 'United Arab Emirates', flag: '🇦🇪' },
+  { code: 'AUH', city: 'Abu Dhabi', name: 'Zayed International Airport', country: 'United Arab Emirates', flag: '🇦🇪' },
+  { code: 'SHJ', city: 'Sharjah', name: 'Sharjah International Airport', country: 'United Arab Emirates', flag: '🇦🇪' },
+  { code: 'DOH', city: 'Doha', name: 'Hamad International Airport', country: 'Qatar', flag: '🇶🇦' },
+  { code: 'MCT', city: 'Muscat', name: 'Muscat International Airport', country: 'Oman', flag: '🇴🇲' },
+  { code: 'KWI', city: 'Kuwait City', name: 'Kuwait International Airport', country: 'Kuwait', flag: '🇰🇼' },
+  { code: 'BAH', city: 'Bahrain (Manama)', name: 'Bahrain International Airport', country: 'Bahrain', flag: '🇧🇭' },
+  { code: 'CAI', city: 'Cairo', name: 'Cairo International Airport', country: 'Egypt', flag: '🇪🇬' },
+  // Europe & UK
+  { code: 'LHR', city: 'London (Heathrow)', name: 'Heathrow Airport', country: 'United Kingdom', flag: '🇬🇧' },
+  { code: 'LGW', city: 'London (Gatwick)', name: 'Gatwick Airport', country: 'United Kingdom', flag: '🇬🇧' },
+  { code: 'MAN', city: 'Manchester', name: 'Manchester Airport', country: 'United Kingdom', flag: '🇬🇧' },
   { code: 'IST', city: 'Istanbul', name: 'Istanbul Airport', country: 'Turkey', flag: '🇹🇷' },
-  { code: 'LHR', city: 'London', name: 'Heathrow Airport', country: 'United Kingdom', flag: '🇬🇧' },
-  { code: 'JFK', city: 'New York', name: 'John F. Kennedy International Airport', country: 'United States', flag: '🇺🇸' },
-  { code: 'YYZ', city: 'Toronto', name: 'Pearson International Airport', country: 'Canada', flag: '🇨🇦' },
+  { code: 'SAW', city: 'Istanbul (Sabiha Gökçen)', name: 'Sabiha Gökçen International Airport', country: 'Turkey', flag: '🇹🇷' },
+  { code: 'CDG', city: 'Paris', name: 'Charles de Gaulle Airport', country: 'France', flag: '🇫🇷' },
+  { code: 'FCO', city: 'Rome', name: 'Leonardo da Vinci–Fiumicino Airport', country: 'Italy', flag: '🇮🇹' },
+  { code: 'MXP', city: 'Milan', name: 'Milan Malpensa Airport', country: 'Italy', flag: '🇮🇹' },
+  { code: 'FRA', city: 'Frankfurt', name: 'Frankfurt Airport', country: 'Germany', flag: '🇩🇪' },
+  { code: 'MUC', city: 'Munich', name: 'Munich Airport', country: 'Germany', flag: '🇩🇪' },
+  { code: 'AMS', city: 'Amsterdam', name: 'Amsterdam Airport Schiphol', country: 'Netherlands', flag: '🇳🇱' },
+  { code: 'MAD', city: 'Madrid', name: 'Adolfo Suárez Madrid–Barajas Airport', country: 'Spain', flag: '🇪🇸' },
+  { code: 'BCN', city: 'Barcelona', name: 'Josep Tarradellas Barcelona–El Prat', country: 'Spain', flag: '🇪🇸' },
+  { code: 'ZRH', city: 'Zurich', name: 'Zurich Airport', country: 'Switzerland', flag: '🇨🇭' },
+  { code: 'VIE', city: 'Vienna', name: 'Vienna International Airport', country: 'Austria', flag: '🇦🇹' },
+  { code: 'ATH', city: 'Athens', name: 'Athens International Airport', country: 'Greece', flag: '🇬🇷' },
+  { code: 'LIS', city: 'Lisbon', name: 'Humberto Delgado Airport', country: 'Portugal', flag: '🇵🇹' },
+  { code: 'DUB', city: 'Dublin', name: 'Dublin Airport', country: 'Ireland', flag: '🇮🇪' },
+  // USA & Canada
+  { code: 'JFK', city: 'New York (JFK)', name: 'John F. Kennedy International Airport', country: 'United States', flag: '🇺🇸' },
+  { code: 'EWR', city: 'New York / Newark (EWR)', name: 'Newark Liberty International Airport', country: 'United States', flag: '🇺🇸' },
+  { code: 'LAX', city: 'Los Angeles', name: 'Los Angeles International Airport', country: 'United States', flag: '🇺🇸' },
+  { code: 'SFO', city: 'San Francisco', name: 'San Francisco International Airport', country: 'United States', flag: '🇺🇸' },
+  { code: 'ORD', city: 'Chicago', name: "O'Hare International Airport", country: 'United States', flag: '🇺🇸' },
+  { code: 'IAD', city: 'Washington, D.C.', name: 'Washington Dulles International Airport', country: 'United States', flag: '🇺🇸' },
+  { code: 'DFW', city: 'Dallas', name: 'Dallas/Fort Worth International Airport', country: 'United States', flag: '🇺🇸' },
+  { code: 'MIA', city: 'Miami', name: 'Miami International Airport', country: 'United States', flag: '🇺🇸' },
+  { code: 'BOS', city: 'Boston', name: 'Logan International Airport', country: 'United States', flag: '🇺🇸' },
+  { code: 'YYZ', city: 'Toronto', name: 'Toronto Pearson International Airport', country: 'Canada', flag: '🇨🇦' },
+  { code: 'YVR', city: 'Vancouver', name: 'Vancouver International Airport', country: 'Canada', flag: '🇨🇦' },
+  { code: 'YUL', city: 'Montreal', name: 'Montréal–Trudeau International Airport', country: 'Canada', flag: '🇨🇦' },
+  // East Asia & Oceania
+  { code: 'CAN', city: 'Guangzhou', name: 'Baiyun International Airport', country: 'China', flag: '🇨🇳' },
+  { code: 'KMG', city: 'Kunming', name: 'Changshui International Airport', country: 'China', flag: '🇨🇳' },
+  { code: 'PVG', city: 'Shanghai', name: 'Shanghai Pudong International Airport', country: 'China', flag: '🇨🇳' },
+  { code: 'PEK', city: 'Beijing', name: 'Beijing Capital International Airport', country: 'China', flag: '🇨🇳' },
+  { code: 'HKG', city: 'Hong Kong', name: 'Hong Kong International Airport', country: 'Hong Kong', flag: '🇭🇰' },
+  { code: 'NRT', city: 'Tokyo (Narita)', name: 'Narita International Airport', country: 'Japan', flag: '🇯🇵' },
+  { code: 'HND', city: 'Tokyo (Haneda)', name: 'Tokyo Haneda Airport', country: 'Japan', flag: '🇯🇵' },
+  { code: 'ICN', city: 'Seoul', name: 'Incheon International Airport', country: 'South Korea', flag: '🇰🇷' },
   { code: 'SYD', city: 'Sydney', name: 'Kingsford Smith Airport', country: 'Australia', flag: '🇦🇺' },
+  { code: 'MEL', city: 'Melbourne', name: 'Melbourne Airport', country: 'Australia', flag: '🇦🇺' },
 ];
 
 const ROUTE_DATABASE = {
@@ -675,6 +743,142 @@ const ROUTE_DATABASE = {
       },
     ],
   },
+  JED: {
+    visaNote: 'Saudi Umrah e-Visa or 96-Hour Stopover Visa required; includes 5L Zamzam water allowance on return',
+    visaBadge: 'Umrah / Saudi e-Visa',
+    bestWindow: 'Book 4–8 weeks ahead; Open-Jaw (Land JED, Return MED) saves Haramain transfer time',
+    terminalTip: 'Saudia & Biman land at Jeddah Terminal 1 / Hajj Terminal · 45 mins to Makkah Haram',
+    flights: [
+      {
+        id: 'jed-sv-803',
+        airline: 'Saudia (Saudi Arabian Airlines)',
+        airlineCode: 'SV',
+        flightNo: 'SV 803',
+        returnFlightNo: 'SV 802',
+        aircraft: 'Boeing 777-300ER',
+        departTime: '18:55',
+        arriveTime: '23:15',
+        returnDepartTime: '01:45',
+        returnArriveTime: '11:30',
+        durationMinutes: 440,
+        durationText: '7h 20m',
+        stops: 0,
+        stopText: 'Direct Flight (JED T1)',
+        cabinBag: '7 kg Cabin',
+        checkedBag: '46 kg (2x23kg) + 5L Zamzam',
+        mealIncluded: true,
+        refundable: 'Umrah flexible rules',
+        baseRoundtripBdt: 86500,
+        badge: 'Top Direct Umrah Carrier',
+        badgeType: 'emerald',
+        reliability: '96% On-Time',
+      },
+      {
+        id: 'jed-bg-335',
+        airline: 'Biman Bangladesh Airlines',
+        airlineCode: 'BG',
+        flightNo: 'BG 335',
+        returnFlightNo: 'BG 336',
+        aircraft: 'Boeing 787-9 Dreamliner',
+        departTime: '17:30',
+        arriveTime: '21:45',
+        returnDepartTime: '23:45',
+        returnArriveTime: '09:35',
+        durationMinutes: 435,
+        durationText: '7h 15m',
+        stops: 0,
+        stopText: 'Direct Dreamliner',
+        cabinBag: '7 kg Cabin',
+        checkedBag: '40 kg Checked + 5L Zamzam',
+        mealIncluded: true,
+        refundable: 'Date change permitted',
+        baseRoundtripBdt: 83900,
+        badge: 'Best Direct Value',
+        badgeType: 'blue',
+        reliability: '92% On-Time',
+      },
+      {
+        id: 'jed-ov-498',
+        airline: 'SalamAir / Gulf Transit',
+        airlineCode: 'OV',
+        flightNo: 'OV 498',
+        returnFlightNo: 'OV 497',
+        aircraft: 'Airbus A321neo',
+        departTime: '09:20',
+        arriveTime: '16:40',
+        returnDepartTime: '18:10',
+        returnArriveTime: '05:30',
+        durationMinutes: 560,
+        durationText: '9h 20m',
+        stops: 1,
+        stopText: '1 Short Stop via Muscat (MCT)',
+        cabinBag: '7 kg Cabin',
+        checkedBag: '30 kg Checked + 5L Zamzam',
+        mealIncluded: false,
+        refundable: 'Budget Umrah Saver',
+        baseRoundtripBdt: 68500,
+        badge: 'Lowest Umrah Fare',
+        badgeType: 'amber',
+        reliability: '91% On-Time',
+      },
+    ],
+  },
+  MED: {
+    visaNote: 'Saudi Umrah e-Visa required; landing directly in Madinah avoids long bus rides after arrival',
+    visaBadge: 'Direct Madinah Entry',
+    bestWindow: 'Book 4–8 weeks ahead; combine with Haramain High-Speed Train to Makkah',
+    terminalTip: 'Lands at Prince Mohammad Bin Abdulaziz Airport (MED) · 20 mins to Masjid an-Nabawi',
+    flights: [
+      {
+        id: 'med-sv-809',
+        airline: 'Saudia (Saudi Arabian Airlines)',
+        airlineCode: 'SV',
+        flightNo: 'SV 809',
+        returnFlightNo: 'SV 808',
+        aircraft: 'Boeing 777-300ER',
+        departTime: '12:15',
+        arriveTime: '16:25',
+        returnDepartTime: '22:15',
+        returnArriveTime: '08:05',
+        durationMinutes: 430,
+        durationText: '7h 10m',
+        stops: 0,
+        stopText: 'Direct Flight (MED)',
+        cabinBag: '7 kg Cabin',
+        checkedBag: '46 kg (2x23kg) + 5L Zamzam',
+        mealIncluded: true,
+        refundable: 'Full-Service Umrah',
+        baseRoundtripBdt: 89200,
+        badge: 'Direct to Madinah',
+        badgeType: 'emerald',
+        reliability: '96% On-Time',
+      },
+      {
+        id: 'med-bg-337',
+        airline: 'Biman Bangladesh Airlines',
+        airlineCode: 'BG',
+        flightNo: 'BG 337',
+        returnFlightNo: 'BG 338',
+        aircraft: 'Boeing 787-8 Dreamliner',
+        departTime: '14:10',
+        arriveTime: '18:25',
+        returnDepartTime: '20:15',
+        returnArriveTime: '06:00',
+        durationMinutes: 435,
+        durationText: '7h 15m',
+        stops: 0,
+        stopText: 'Direct Dreamliner',
+        cabinBag: '7 kg Cabin',
+        checkedBag: '40 kg Checked + 5L Zamzam',
+        mealIncluded: true,
+        refundable: 'Flexible economy',
+        baseRoundtripBdt: 86800,
+        badge: 'Popular Family Choice',
+        badgeType: 'blue',
+        reliability: '92% On-Time',
+      },
+    ],
+  },
 };
 
 function getFutureDateIso(daysAhead) {
@@ -726,93 +930,28 @@ function buildAviasalesSearchCode(origin, destination, departIso, returnIso, tri
 }
 
 function generateDynamicRouteData(originInfo, destInfo) {
+  const origCode = (originInfo?.code || 'DAC').toUpperCase();
   const destCode = (destInfo?.code || 'KTM').toUpperCase();
-  if (ROUTE_DATABASE[destCode]) {
-    return ROUTE_DATABASE[destCode];
+  const isBangladeshOrigin = BANGLADESH_AIRPORT_CODES.has(origCode);
+
+  if (isBangladeshOrigin && ROUTE_DATABASE[destCode]) {
+    return {
+      ...ROUTE_DATABASE[destCode],
+      isGlobalLiveOnly: false,
+    };
   }
 
+  const origCity = originInfo?.city || origCode;
   const destCity = destInfo?.city || destCode;
   const destCountry = destInfo?.country || 'International';
 
   return {
-    visaNote: `Verify ${destCountry} visa requirements and passport validity (6+ months) before departure`,
-    visaBadge: `${destCountry} Entry Rules`,
-    bestWindow: `Book 4–8 weeks ahead for best rates from ${originInfo?.city || 'Dhaka'} to ${destCity}`,
-    terminalTip: `Depart from ${originInfo?.code || 'DAC'} International Terminal · Compare direct and 1-stop partner fares below`,
-    flights: [
-      {
-        id: `${destCode.toLowerCase()}-bg-101`,
-        airline: 'Biman Bangladesh Airlines',
-        airlineCode: 'BG',
-        flightNo: `BG ${200 + (destCode.charCodeAt(0) % 79)}`,
-        returnFlightNo: `BG ${201 + (destCode.charCodeAt(0) % 79)}`,
-        aircraft: 'Boeing 787-8 Dreamliner',
-        departTime: '10:45',
-        arriveTime: '16:15',
-        returnDepartTime: '17:45',
-        returnArriveTime: '22:30',
-        durationMinutes: 270,
-        durationText: '4h 30m',
-        stops: 0,
-        stopText: 'Direct / Fastest Routing',
-        cabinBag: '7 kg Cabin',
-        checkedBag: '30 kg Checked',
-        mealIncluded: true,
-        refundable: 'Date change permitted',
-        baseRoundtripBdt: 48500,
-        badge: 'Best Overall Value',
-        badgeType: 'emerald',
-        reliability: '93% On-Time',
-      },
-      {
-        id: `${destCode.toLowerCase()}-qr-641`,
-        airline: 'Qatar Airways / Partner',
-        airlineCode: 'QR',
-        flightNo: 'QR 641',
-        returnFlightNo: 'QR 638',
-        aircraft: 'Airbus A350 / Boeing 777',
-        departTime: '03:15',
-        arriveTime: '12:40',
-        returnDepartTime: '19:20',
-        returnArriveTime: '05:10',
-        durationMinutes: 445,
-        durationText: '7h 25m',
-        stops: 1,
-        stopText: '1 Stop (Express Transfer)',
-        cabinBag: '7 kg Cabin',
-        checkedBag: '30 kg Checked',
-        mealIncluded: true,
-        refundable: '5-Star Global Carrier',
-        baseRoundtripBdt: 64200,
-        badge: '5-Star Global Carrier',
-        badgeType: 'blue',
-        reliability: '97% On-Time',
-      },
-      {
-        id: `${destCode.toLowerCase()}-6e-saver`,
-        airline: 'Regional Partner Saver',
-        airlineCode: 'BS',
-        flightNo: 'BS 415',
-        returnFlightNo: 'BS 416',
-        aircraft: 'Boeing 737-800',
-        departTime: '07:30',
-        arriveTime: '14:10',
-        returnDepartTime: '15:20',
-        returnArriveTime: '21:05',
-        durationMinutes: 340,
-        durationText: '5h 40m',
-        stops: 1,
-        stopText: '1 Short Transit Stop',
-        cabinBag: '7 kg Cabin',
-        checkedBag: '20 kg Checked',
-        mealIncluded: false,
-        refundable: 'Economy Saver',
-        baseRoundtripBdt: 42900,
-        badge: 'Lowest Fare Found',
-        badgeType: 'amber',
-        reliability: '90% On-Time',
-      },
-    ],
+    isGlobalLiveOnly: true,
+    visaNote: `Check ${destCountry} entry & visa rules for your nationality and ensure 6+ months passport validity before flying`,
+    visaBadge: `${destCountry} Global Route`,
+    bestWindow: `Compare live airlines, 1-stop connections, and multi-city fares for ${origCity} (${origCode}) → ${destCity} (${destCode})`,
+    terminalTip: `Live global route search · Real-time airline inventory powered by URAL White-Label (#22462) & Aviasales Global (#${MARKER_ID})`,
+    flights: [],
   };
 }
 
@@ -855,13 +994,17 @@ export default function TravelpayoutsWidget({
 
   const [originQuery, setOriginQuery] = useState('');
   const [destQuery, setDestQuery] = useState('');
-  const [activeDropdown, setActiveDropdown] = useState(null); // 'origin' | 'dest' | null
-  const [remoteSuggestions, setRemoteSuggestions] = useState([]);
+  const [globalQuickQuery, setGlobalQuickQuery] = useState('');
+  const [activeDropdown, setActiveDropdown] = useState(null); // 'origin' | 'dest' | 'global' | null
+  const [originRemoteSuggestions, setOriginRemoteSuggestions] = useState([]);
+  const [destRemoteSuggestions, setDestRemoteSuggestions] = useState([]);
+  const [globalRemoteSuggestions, setGlobalRemoteSuggestions] = useState([]);
 
   const [tripType, setTripType] = useState('roundtrip'); // 'roundtrip' | 'oneway'
   const [cabinClass, setCabinClass] = useState('economy'); // 'economy' | 'business'
   const [passengers, setPassengers] = useState(1);
-  const [currency, setCurrency] = useState('BDT'); // 'BDT' | 'USD'
+  const [currency, setCurrency] = useState('BDT'); // 'BDT' | 'USD' | 'EUR' | 'GBP' | 'SAR' | 'AED'
+  const [wlFrameHeight, setWlFrameHeight] = useState(540);
 
   const [departDate, setDepartDate] = useState(() => getFutureDateIso(14));
   const [returnDate, setReturnDate] = useState(() => getFutureDateIso(21));
@@ -888,8 +1031,21 @@ export default function TravelpayoutsWidget({
 
   const resultsContainerRef = useRef(null);
   const formWrapperRef = useRef(null);
+  const wlIframeRef = useRef(null);
 
-  // Sync if parent prop changes (e.g. navigating between Nepal, Thailand, Malaysia, Dubai flight pages)
+  // Listen for dynamic height resize messages from /travelpayouts-wl.html
+  useEffect(() => {
+    const handleMessage = (event) => {
+      const data = event?.data;
+      if (data && data.type === 'tpwl-resize' && typeof data.height === 'number') {
+        setWlFrameHeight(Math.max(480, Math.min(2400, data.height)));
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
+  // Sync if parent prop changes (e.g. navigating between Nepal, Thailand, Malaysia, Dubai flight pages or Home Global Search)
   useEffect(() => {
     const nextOrigin = findAirportInfo(defaultOrigin);
     const nextDest = findAirportInfo(defaultDestination);
@@ -900,6 +1056,12 @@ export default function TravelpayoutsWidget({
       origin: nextOrigin,
       destination: nextDest,
     }));
+    const isGlobalUnlisted =
+      !BANGLADESH_AIRPORT_CODES.has((nextOrigin?.code || 'DAC').toUpperCase()) ||
+      !ROUTE_DATABASE[(nextDest?.code || 'KTM').toUpperCase()];
+    if (isGlobalUnlisted) {
+      setShowClassicWhiteLabel(true);
+    }
     setExpandedFlightId(null);
     setSelectedBookingFlight(null);
   }, [defaultOrigin, defaultDestination]);
@@ -917,9 +1079,20 @@ export default function TravelpayoutsWidget({
 
   // Fetch live airport/city suggestions from Travelpayouts Places2 API when user types
   useEffect(() => {
-    const term = activeDropdown === 'origin' ? originQuery.trim() : activeDropdown === 'dest' ? destQuery.trim() : '';
+    const isOrig = activeDropdown === 'origin';
+    const isDest = activeDropdown === 'dest';
+    const isGlobal = activeDropdown === 'global';
+    const term = isOrig
+      ? originQuery.trim()
+      : isDest
+      ? destQuery.trim()
+      : isGlobal
+      ? globalQuickQuery.trim()
+      : '';
     if (!term || term.length < 2) {
-      setRemoteSuggestions([]);
+      if (isOrig) setOriginRemoteSuggestions([]);
+      if (isDest) setDestRemoteSuggestions([]);
+      if (isGlobal) setGlobalRemoteSuggestions([]);
       return;
     }
 
@@ -932,27 +1105,35 @@ export default function TravelpayoutsWidget({
         if (!res.ok || cancelled) return;
         const data = await res.json();
         if (cancelled || !Array.isArray(data)) return;
-        const mapped = data.slice(0, 6).map((item) => ({
+        const mapped = data.slice(0, 8).map((item) => ({
           code: (item.code || 'KTM').toUpperCase(),
           city: item.name || item.city_name || item.code,
           name: item.main_airport_name || `${item.name} (${item.code})`,
-          country: item.country_name || '',
+          country: item.country_name || 'International',
           flag: '✈️',
         }));
-        setRemoteSuggestions(mapped);
+        if (isOrig) setOriginRemoteSuggestions(mapped);
+        if (isDest) setDestRemoteSuggestions(mapped);
+        if (isGlobal) setGlobalRemoteSuggestions(mapped);
       } catch {
         // Fallback to built-in directory silently
       }
-    }, 140);
+    }, 120);
 
     return () => {
       cancelled = true;
       clearTimeout(timer);
     };
-  }, [originQuery, destQuery, activeDropdown]);
+  }, [originQuery, destQuery, globalQuickQuery, activeDropdown]);
 
-  const getFilteredAirports = (queryStr) => {
+  const getFilteredAirports = (queryStr, field = 'dest') => {
     const q = (queryStr || '').trim().toLowerCase();
+    const remoteList =
+      field === 'origin'
+        ? originRemoteSuggestions
+        : field === 'global'
+        ? globalRemoteSuggestions
+        : destRemoteSuggestions;
     const localMatches = q
       ? AIRPORTS_DIRECTORY.filter(
           (a) =>
@@ -961,22 +1142,22 @@ export default function TravelpayoutsWidget({
             a.country.toLowerCase().includes(q) ||
             a.name.toLowerCase().includes(q)
         )
-      : AIRPORTS_DIRECTORY.slice(0, 10);
+      : AIRPORTS_DIRECTORY.slice(0, 14);
 
     const seen = new Set(localMatches.map((a) => a.code));
     const merged = [...localMatches];
-    for (const rem of remoteSuggestions) {
+    for (const rem of remoteList) {
       if (!seen.has(rem.code)) {
         seen.add(rem.code);
         merged.push(rem);
       }
     }
-    return merged.slice(0, 8);
+    return merged.slice(0, 10);
   };
 
-  const resolveTypedPlaceIfAny = (currentInfo, typedText) => {
+  const resolveTypedPlaceIfAny = (currentInfo, typedText, field = 'dest') => {
     if (!typedText || !typedText.trim()) return currentInfo;
-    const matches = getFilteredAirports(typedText);
+    const matches = getFilteredAirports(typedText, field);
     if (matches.length > 0) return matches[0];
     return findAirportInfo(typedText);
   };
@@ -991,8 +1172,8 @@ export default function TravelpayoutsWidget({
     nextPax = passengers,
     scrollToResults = true,
   } = {}) => {
-    const finalOrigin = resolveTypedPlaceIfAny(nextOrigin, originQuery);
-    const finalDest = resolveTypedPlaceIfAny(nextDest, destQuery);
+    const finalOrigin = resolveTypedPlaceIfAny(nextOrigin, originQuery, 'origin');
+    const finalDest = resolveTypedPlaceIfAny(nextDest, destQuery, 'dest');
 
     setOriginInfo(finalOrigin);
     setDestInfo(finalDest);
@@ -1001,6 +1182,23 @@ export default function TravelpayoutsWidget({
     setActiveDropdown(null);
     setIsSearching(true);
     setSelectedBookingFlight(null);
+
+    const isGlobalUnlisted =
+      !BANGLADESH_AIRPORT_CODES.has((finalOrigin?.code || 'DAC').toUpperCase()) ||
+      !ROUTE_DATABASE[(finalDest?.code || 'KTM').toUpperCase()];
+
+    if (isGlobalUnlisted) {
+      setShowClassicWhiteLabel(true);
+    }
+
+    const nextCode = buildAviasalesSearchCode(
+      finalOrigin.code,
+      finalDest.code,
+      nextDepart,
+      nextReturn,
+      nextTripType,
+      nextPax
+    );
 
     setTimeout(() => {
       setCommittedQuery({
@@ -1017,6 +1215,17 @@ export default function TravelpayoutsWidget({
       setLastSearchedAt(
         new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
       );
+
+      if (wlIframeRef.current && wlIframeRef.current.contentWindow) {
+        try {
+          wlIframeRef.current.contentWindow.postMessage(
+            { type: 'tpwl-run-search', flightSearch: nextCode },
+            '*'
+          );
+        } catch {
+          // ignore cross-frame errors
+        }
+      }
 
       if (scrollToResults && resultsContainerRef.current) {
         resultsContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1127,18 +1336,21 @@ export default function TravelpayoutsWidget({
     return `https://www.aviasales.com/search/${searchCode}?marker=${MARKER_ID}&currency=${currency}`;
   }, [searchCode, currency]);
 
-  const formatMoney = (bdtAmount, usdAmount) => {
-    if (currency === 'USD') {
-      return `$${usdAmount.toLocaleString()} USD`;
-    }
-    return `৳${bdtAmount.toLocaleString()} BDT`;
+  const uralBrandedWlUrl = useMemo(() => {
+    return `/travelpayouts-wl.html?origin=${committedQuery.origin.code}&destination=${committedQuery.destination.code}&flightSearch=${searchCode}&currency=${currency}&standalone=1`;
+  }, [committedQuery.origin.code, committedQuery.destination.code, searchCode, currency]);
+
+  const formatMoney = (bdtAmount) => {
+    const cfg = CURRENCY_CONFIG[currency] || CURRENCY_CONFIG.BDT;
+    const converted = Math.round(bdtAmount * cfg.rateFromBdt);
+    return `${cfg.symbol}${converted.toLocaleString()} ${cfg.code}`;
   };
 
   const formatSecondaryMoney = (bdtAmount, usdAmount) => {
-    if (currency === 'USD') {
-      return `≈ ৳${bdtAmount.toLocaleString()} BDT`;
+    if (currency === 'BDT') {
+      return `≈ $${usdAmount.toLocaleString()} USD`;
     }
-    return `≈ $${usdAmount.toLocaleString()} USD`;
+    return `≈ ৳${bdtAmount.toLocaleString()} BDT`;
   };
 
   return (
@@ -1146,9 +1358,9 @@ export default function TravelpayoutsWidget({
       ref={formWrapperRef}
       className="w-full overflow-visible rounded-xl bg-white shadow-sm border border-slate-200/90 text-slate-900"
     >
-      {/* 1. POPULAR ROUTES BAR */}
-      {showQuickRoutes && (
-        <div className="bg-slate-50 border-b border-slate-200/80 px-3 sm:px-5 py-2.5 flex flex-wrap items-center justify-between gap-2 rounded-t-xl">
+      {/* 1. POPULAR ROUTES & GLOBAL CURRENCY BAR */}
+      <div className="bg-slate-50 border-b border-slate-200/80 px-3 sm:px-5 py-2.5 flex flex-wrap items-center justify-between gap-2 rounded-t-xl">
+        {showQuickRoutes ? (
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="text-[11px] font-semibold text-slate-500 mr-1">
               Popular Routes:
@@ -1173,34 +1385,31 @@ export default function TravelpayoutsWidget({
               );
             })}
           </div>
-
-          {/* Currency Switcher */}
-          <div className="inline-flex items-center bg-slate-200/70 p-0.5 rounded-lg text-xs font-semibold">
-            <button
-              type="button"
-              onClick={() => setCurrency('BDT')}
-              className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
-                currency === 'BDT'
-                  ? 'bg-white text-brand-navy shadow-2xs'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              ৳ BDT
-            </button>
-            <button
-              type="button"
-              onClick={() => setCurrency('USD')}
-              className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
-                currency === 'USD'
-                  ? 'bg-white text-brand-navy shadow-2xs'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              $ USD
-            </button>
+        ) : (
+          <div className="text-[11px] font-semibold text-slate-600 flex items-center gap-1.5">
+            <Plane size={13} className="text-[#07C369]" />
+            <span>Global Flight Search · Search any city or airport worldwide</span>
           </div>
+        )}
+
+        {/* Global Multi-Currency Switcher */}
+        <div className="inline-flex flex-wrap items-center bg-slate-200/70 p-0.5 rounded-lg text-xs font-semibold">
+          {Object.values(CURRENCY_CONFIG).map((curr) => (
+            <button
+              key={curr.code}
+              type="button"
+              onClick={() => setCurrency(curr.code)}
+              className={`px-2 py-1 rounded-md transition-colors cursor-pointer ${
+                currency === curr.code
+                  ? 'bg-white text-brand-navy shadow-2xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              {curr.label}
+            </button>
+          ))}
         </div>
-      )}
+      </div>
 
       {/* 2. MAIN INTERACTIVE SEARCH FORM */}
       <form onSubmit={handleFormSubmit} className="p-4 sm:p-5 bg-white border-b border-slate-200">
@@ -1286,6 +1495,99 @@ export default function TravelpayoutsWidget({
           </div>
         </div>
 
+        {/* GLOBAL INSTANT DESTINATION & AIRPORT SEARCH BAR */}
+        <div className="mb-3.5 relative">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 bg-slate-50 border border-slate-200/90 rounded-xl p-2 focus-within:border-brand-navy focus-within:bg-white focus-within:ring-2 focus-within:ring-brand-navy/10 transition-all">
+            <div className="flex items-center gap-2 flex-1 px-2">
+              <Search size={16} className="text-brand-navy shrink-0" />
+              <input
+                type="text"
+                value={globalQuickQuery}
+                aria-label="Global destination or airport quick search"
+                placeholder="Global Quick Search: Type any city, country, or airport code worldwide (e.g. Jeddah, Makkah, Paris, London, JFK, Tokyo)..."
+                onFocus={() => setActiveDropdown('global')}
+                onChange={(e) => {
+                  setGlobalQuickQuery(e.target.value);
+                  setActiveDropdown('global');
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && globalQuickQuery.trim()) {
+                    e.preventDefault();
+                    const picked = resolveTypedPlaceIfAny(destInfo, globalQuickQuery, 'global');
+                    setDestInfo(picked);
+                    setGlobalQuickQuery('');
+                    setActiveDropdown(null);
+                    executeSearch({ nextDest: picked, scrollToResults: true });
+                  }
+                }}
+                className="w-full bg-transparent text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none"
+              />
+            </div>
+            <div className="flex items-center gap-1.5 shrink-0">
+              <button
+                type="button"
+                onClick={() => {
+                  if (!globalQuickQuery.trim()) {
+                    setActiveDropdown('global');
+                    return;
+                  }
+                  const picked = resolveTypedPlaceIfAny(destInfo, globalQuickQuery, 'global');
+                  setDestInfo(picked);
+                  setGlobalQuickQuery('');
+                  setActiveDropdown(null);
+                  executeSearch({ nextDest: picked, scrollToResults: true });
+                }}
+                className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] text-xs font-bold px-3.5 py-2 rounded-lg transition-colors cursor-pointer whitespace-nowrap"
+              >
+                Apply Destination
+              </button>
+              <a
+                href={uralBrandedWlUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden lg:inline-flex items-center gap-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold px-3 py-2 rounded-lg transition-colors whitespace-nowrap"
+              >
+                <span>Full-Screen White-Label</span>
+                <ExternalLink size={12} />
+              </a>
+            </div>
+          </div>
+
+          {activeDropdown === 'global' && (
+            <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-72 overflow-y-auto py-1">
+              <div className="px-3.5 py-1.5 text-[10px] font-semibold text-slate-400 border-b border-slate-100 flex items-center justify-between">
+                <span>Instant Global Airport & City Directory (Click to set destination & search)</span>
+                <span className="font-mono text-brand-navy">65+ Hubs + Live Global API</span>
+              </div>
+              {getFilteredAirports(globalQuickQuery, 'global').map((airport) => (
+                <button
+                  key={`global-quick-${airport.code}-${airport.city}`}
+                  type="button"
+                  onClick={() => {
+                    setDestInfo(airport);
+                    setGlobalQuickQuery('');
+                    setActiveDropdown(null);
+                    executeSearch({ nextDest: airport, scrollToResults: false });
+                  }}
+                  className="w-full px-3.5 py-2.5 text-left hover:bg-slate-50 flex items-center justify-between gap-2 transition-colors cursor-pointer"
+                >
+                  <div className="min-w-0">
+                    <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                      <span>{airport.flag}</span>
+                      <span>{airport.city}</span>
+                      <span className="text-slate-400 font-normal">· {airport.country}</span>
+                    </div>
+                    <div className="text-[11px] text-slate-500 truncate">{airport.name}</div>
+                  </div>
+                  <span className="text-xs font-mono font-bold text-brand-navy bg-slate-100 px-2 py-0.5 rounded shrink-0">
+                    {airport.code}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
         {/* Main Inputs Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-stretch">
           {/* FROM AIRPORT */}
@@ -1336,9 +1638,9 @@ export default function TravelpayoutsWidget({
             {activeDropdown === 'origin' && (
               <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-68 overflow-y-auto py-1">
                 <div className="px-3 py-1.5 text-[10px] font-semibold text-slate-400 border-b border-slate-100">
-                  Select Departure Airport
+                  Select Departure Airport (Type any city worldwide)
                 </div>
-                {getFilteredAirports(originQuery).map((airport) => (
+                {getFilteredAirports(originQuery, 'origin').map((airport) => (
                   <button
                     key={`orig-${airport.code}-${airport.city}`}
                     type="button"
@@ -1433,9 +1735,9 @@ export default function TravelpayoutsWidget({
             {activeDropdown === 'dest' && (
               <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-68 overflow-y-auto py-1">
                 <div className="px-3 py-1.5 text-[10px] font-semibold text-slate-400 border-b border-slate-100">
-                  Select Destination City or Airport
+                  Select Destination City or Airport (Type any city worldwide)
                 </div>
-                {getFilteredAirports(destQuery).map((airport) => (
+                {getFilteredAirports(destQuery, 'dest').map((airport) => (
                   <button
                     key={`dest-${airport.code}-${airport.city}`}
                     type="button"
@@ -1611,10 +1913,19 @@ export default function TravelpayoutsWidget({
 
             <div className="flex flex-wrap items-center gap-2">
               <a
+                href={uralBrandedWlUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-brand-navy hover:bg-slate-800 px-3.5 py-2 rounded-lg transition-colors cursor-pointer shadow-2xs"
+              >
+                <span>Open URAL White-Label Search</span>
+                <ExternalLink size={13} className="text-[#F6B73C]" />
+              </a>
+              <a
                 href={aviasalesPartnerUrl}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-navy bg-[#F6B73C]/20 hover:bg-[#F6B73C]/35 px-3 py-2 rounded-lg transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-navy bg-[#F6B73C]/25 hover:bg-[#F6B73C]/40 px-3 py-2 rounded-lg transition-colors cursor-pointer"
               >
                 <span>Compare on Aviasales Global</span>
                 <ExternalLink size={13} />
@@ -1624,7 +1935,7 @@ export default function TravelpayoutsWidget({
 
           {/* 3 Quick Highlight Metrics */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3.5">
-            {cheapestFlight && (
+            {cheapestFlight ? (
               <div className="bg-slate-50 rounded-lg p-3 border border-slate-200/60">
                 <div className="text-[11px] font-medium text-slate-500">
                   Lowest Fare Found ({committedQuery.tripType === 'roundtrip' ? 'Round-Trip' : 'One-Way'})
@@ -1637,9 +1948,21 @@ export default function TravelpayoutsWidget({
                   {cheapestFlight.airline} · {cheapestFlight.stopText}
                 </div>
               </div>
+            ) : (
+              <div className="bg-slate-50 rounded-lg p-3 border border-slate-200/60">
+                <div className="text-[11px] font-medium text-slate-500">
+                  Live Global Airline Inventory
+                </div>
+                <div className="text-sm font-black text-brand-navy mt-0.5">
+                  {committedQuery.origin.code} → {committedQuery.destination.code} ({currency})
+                </div>
+                <div className="text-[11px] text-slate-600 mt-0.5">
+                  720+ airlines & OTA partners compared live
+                </div>
+              </div>
             )}
 
-            {fastestDirectFlight && (
+            {fastestDirectFlight ? (
               <div className="bg-slate-50 rounded-lg p-3 border border-slate-200/60">
                 <div className="text-[11px] font-medium text-slate-500">
                   Fastest Flight Option
@@ -1651,11 +1974,23 @@ export default function TravelpayoutsWidget({
                   {fastestDirectFlight.airline} · Includes {fastestDirectFlight.checkedBag}
                 </div>
               </div>
+            ) : (
+              <div className="bg-slate-50 rounded-lg p-3 border border-slate-200/60">
+                <div className="text-[11px] font-medium text-slate-500">
+                  Routing & Cabin Options
+                </div>
+                <div className="text-sm font-black text-slate-900 mt-0.5">
+                  Non-Stop, 1-Stop & Multi-Airline
+                </div>
+                <div className="text-[11px] text-slate-600 mt-0.5">
+                  {committedQuery.cabinClass === 'business' ? 'Business Class' : 'Economy'} · {committedQuery.passengers} {committedQuery.passengers === 1 ? 'Traveler' : 'Travelers'}
+                </div>
+              </div>
             )}
 
             <div className="bg-amber-50/70 rounded-lg p-3 border border-amber-200/70">
               <div className="text-[11px] font-semibold text-amber-900">
-                Visa & Entry Guide for Bangladeshis
+                Visa & Entry Intelligence
               </div>
               <div className="text-xs font-bold text-slate-900 mt-0.5">
                 {routeMeta.visaBadge}
@@ -1667,7 +2002,57 @@ export default function TravelpayoutsWidget({
           </div>
         </div>
 
-        {/* Filter & Sort Controls */}
+        {/* GLOBAL ROUTE LIVE DISPATCH CARD (When route is outside curated Dhaka benchmark table) */}
+        {routeMeta.isGlobalLiveOnly && (
+          <div className="bg-white border-2 border-brand-navy/15 rounded-xl p-5 shadow-xs space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider bg-brand-navy text-[#F6B73C] px-2.5 py-1 rounded-md">
+                  <Sparkles size={12} />
+                  <span>Global Live Flight Search Ready · {committedQuery.origin.code} → {committedQuery.destination.code}</span>
+                </div>
+                <h4 className="text-base font-bold text-slate-900">
+                  Compare Live {committedQuery.origin.city} ({committedQuery.origin.code}) to {committedQuery.destination.city} ({committedQuery.destination.code}) Fares in {currency}
+                </h4>
+                <p className="text-xs text-slate-600 max-w-2xl">
+                  Browse real-time tickets in the embedded URAL White-Label engine below, or launch full-screen results in a new tab with your exact dates ({formatReadableDate(committedQuery.departDate)}{committedQuery.tripType === 'roundtrip' ? ` – ${formatReadableDate(committedQuery.returnDate)}` : ''}) and passenger count.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                <a
+                  href={uralBrandedWlUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#07C369] hover:bg-[#06ad5d] text-white font-bold text-xs px-4 py-3 rounded-xl flex items-center gap-2 shadow-sm transition-colors cursor-pointer"
+                >
+                  <span>Full-Screen URAL White-Label</span>
+                  <ExternalLink size={14} />
+                </a>
+                <a
+                  href={aviasalesPartnerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] font-bold text-xs px-4 py-3 rounded-xl flex items-center gap-2 shadow-sm transition-colors cursor-pointer"
+                >
+                  <span>Aviasales Global ({currency})</span>
+                  <ExternalLink size={14} />
+                </a>
+                <a
+                  href="https://kiwi.tpo.li/9isVGzpF"
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs px-3.5 py-3 rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <span>Kiwi.com Multi-City</span>
+                  <ExternalLink size={13} />
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Filter & Sort Controls (Only shown when curated benchmark flights exist) */}
+        {computedFlights.length > 0 && (
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           {/* Interactive Filter Buttons */}
           <div className="flex flex-wrap items-center gap-1 p-1 bg-slate-200/70 rounded-lg w-fit">
@@ -1733,6 +2118,7 @@ export default function TravelpayoutsWidget({
             </div>
           </div>
         </div>
+        )}
 
         {/* Flight Cards List */}
         <div className="space-y-3">
@@ -1958,14 +2344,23 @@ export default function TravelpayoutsWidget({
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
+                    <div className="flex flex-wrap items-center gap-2 shrink-0 w-full sm:w-auto">
+                      <a
+                        href={uralBrandedWlUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full sm:w-auto bg-[#07C369] hover:bg-[#06ad5d] text-white font-bold text-xs px-4 py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer"
+                      >
+                        <span>Book on URAL White-Label</span>
+                        <ExternalLink size={13} />
+                      </a>
                       <a
                         href={aviasalesPartnerUrl}
                         target="_blank"
                         rel="noopener noreferrer sponsored"
                         className="w-full sm:w-auto bg-brand-navy hover:bg-slate-800 text-[#F6B73C] font-bold text-xs px-4 py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer"
                       >
-                        <span>Continue to Partner Booking</span>
+                        <span>Continue on Aviasales</span>
                         <ExternalLink size={13} />
                       </a>
                     </div>
@@ -1981,24 +2376,36 @@ export default function TravelpayoutsWidget({
           <div>
             <strong>Booking Tip:</strong> {routeMeta.bestWindow}
           </div>
-          <button
-            type="button"
-            onClick={() => setShowClassicWhiteLabel((v) => !v)}
-            className="text-brand-navy hover:underline font-semibold cursor-pointer"
-          >
-            {showClassicWhiteLabel
-              ? 'Hide Embedded Aviasales White-Label Frame'
-              : 'Open Embedded Aviasales White-Label Frame'}
-          </button>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setShowClassicWhiteLabel((v) => !v)}
+              className="text-brand-navy hover:underline font-semibold cursor-pointer"
+            >
+              {showClassicWhiteLabel || routeMeta.isGlobalLiveOnly
+                ? 'Hide Embedded URAL White-Label Engine'
+                : 'Open Embedded URAL White-Label Engine'}
+            </button>
+            <a
+              href={uralBrandedWlUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-700 hover:underline font-semibold inline-flex items-center gap-1"
+            >
+              <span>Open in New Tab</span>
+              <ExternalLink size={11} />
+            </a>
+          </div>
         </div>
 
-        {showClassicWhiteLabel && (
+        {(showClassicWhiteLabel || routeMeta.isGlobalLiveOnly) && (
           <div className="pt-2">
             <iframe
-              src={`/travelpayouts-wl.html?origin=${committedQuery.origin.code}&destination=${committedQuery.destination.code}&flightSearch=${searchCode}`}
+              ref={wlIframeRef}
+              src={`/travelpayouts-wl.html?origin=${committedQuery.origin.code}&destination=${committedQuery.destination.code}&flightSearch=${searchCode}&currency=${currency}`}
               title="URAL Embedded White-Label Engine"
               className="w-full rounded-xl border border-slate-200 bg-white"
-              style={{ height: '520px', width: '100%', display: 'block' }}
+              style={{ height: `${wlFrameHeight}px`, width: '100%', display: 'block' }}
             />
           </div>
         )}
