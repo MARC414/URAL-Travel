@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ShieldAlert, Check, Copy, ExternalLink, ArrowRight } from "lucide-react";
-import { AFFILIATE_LINKS, AIRHELP_PROMO } from "./AffiliatePartners";
+import {
+  AFFILIATE_LINKS,
+  AIRHELP_PROMO,
+  isPromoActive,
+  resolvePartnerUrl,
+} from "./AffiliatePartners";
 import { Language } from "../translations";
 
 interface AirHelpWidgetProps {
@@ -15,6 +20,8 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
   compact = false,
 }) => {
   const isBn = lang === "bn";
+  const promoActive = isPromoActive(AIRHELP_PROMO.expiresAt);
+  const partnerHref = resolvePartnerUrl(AFFILIATE_LINKS.airhelp);
   const [copiedCode, setCopiedCode] = useState(false);
   const [activeMode, setActiveMode] = useState<"claim" | "plus" | "live-form">("claim");
   const [delayHours, setDelayHours] = useState<"under3" | "3to4" | "over4" | "cancelled">("over4");
@@ -118,25 +125,31 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                 : "Flight Delayed 3+ Hours, Cancelled, or Flying Soon? Protect Your Ticket with AirHelp"}
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed max-w-2xl">
-              {isBn
-                ? `AirHelp-এর মাধ্যমে গত ৩ বছরের যেকোনো বিলম্বিত বা বাতিল ফ্লাইটের ক্ষতিপূরণ চেক করুন (No Win, No Fee)। আর ফ্লাইটের আগে AirHelp+ Smart বা Pro নিলে প্রোমো কোড ${AIRHELP_PROMO.code} ব্যবহার করে পান ১১% ছাড় (${AIRHELP_PROMO.validUntil} পর্যন্ত)।`
-                : `Check free compensation eligibility for delayed or cancelled flights from the past 3 years (No Win, No Fee), or get 11% OFF AirHelp+ Smart & Pro subscriptions through ${AIRHELP_PROMO.validUntil} using code ${AIRHELP_PROMO.code}.`}
+              {promoActive
+                ? isBn
+                  ? `AirHelp-এর মাধ্যমে গত ৩ বছরের যেকোনো বিলম্বিত বা বাতিল ফ্লাইটের ক্ষতিপূরণ চেক করুন (No Win, No Fee)। আর ফ্লাইটের আগে AirHelp+ Smart বা Pro নিলে প্রোমো কোড ${AIRHELP_PROMO.code} ব্যবহার করে পান ১১% ছাড় (${AIRHELP_PROMO.validUntil} পর্যন্ত)।`
+                  : `Check free compensation eligibility for delayed or cancelled flights from the past 3 years (No Win, No Fee), or get 11% OFF AirHelp+ Smart & Pro subscriptions through ${AIRHELP_PROMO.validUntil} using code ${AIRHELP_PROMO.code}.`
+                : isBn
+                ? "AirHelp-এর মাধ্যমে গত ৩ বছরের যেকোনো বিলম্বিত বা বাতিল ফ্লাইটের ক্ষতিপূরণ ফ্রিতে চেক করুন (No Win, No Fee)—অথবা ফ্লাইটের আগে AirHelp+ নিয়ে লাউঞ্জ অ্যাক্সেস ও লাগেজ সুরক্ষা নিশ্চিত করুন।"
+                : "Check free compensation eligibility for delayed or cancelled flights from the past 3 years (No Win, No Fee), or protect upcoming trips with AirHelp+ Smart & Pro for lounge access and baggage protection."}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-            <button
-              type="button"
-              onClick={handleCopyPromo}
-              className="bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-900 text-xs font-mono font-semibold px-3.5 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer"
-              title="Copy 11% OFF Promo Code"
-            >
-              {copiedCode ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
-              <span>{copiedCode ? (isBn ? "কপি হয়েছে!" : "Copied AHTPO11") : `Code: ${AIRHELP_PROMO.code} (11% OFF)`}</span>
-            </button>
+            {promoActive && (
+              <button
+                type="button"
+                onClick={handleCopyPromo}
+                className="bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-900 text-xs font-mono font-semibold px-3.5 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                title="Copy 11% OFF Promo Code"
+              >
+                {copiedCode ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
+                <span>{copiedCode ? (isBn ? "কপি হয়েছে!" : "Copied AHTPO11") : `Code: ${AIRHELP_PROMO.code} (11% OFF)`}</span>
+              </button>
+            )}
 
             <a
-              href={AFFILIATE_LINKS.airhelp}
+              href={partnerHref}
               target="_blank"
               rel="noopener noreferrer sponsored"
               className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] font-bold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"

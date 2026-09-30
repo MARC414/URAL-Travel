@@ -44,6 +44,7 @@ import {
   KlookActivitiesWidget,
   QeeqCarRentalWidget,
   PartnerLinkButton,
+  RadicalStorageContextualCallout,
   AFFILIATE_LINKS
 } from "./components/AffiliatePartners";
 import {
@@ -5253,6 +5254,9 @@ export default function App() {
                           );
                         })}
                       </div>
+
+                      {/* Contextual Luggage Storage Offer Callout (Radical Storage on matching travel guides) */}
+                      <RadicalStorageContextualCallout slug={activePost.slug} lang={lang} />
 
                       {/* Contextual Affiliate Widget */}
                       {activePost.affiliateCTA && (

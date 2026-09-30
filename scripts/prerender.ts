@@ -24,6 +24,11 @@ import {
 import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
 import {
+  RADICAL_STORAGE_BLOG_PLACEMENTS,
+  resolvePartnerUrl,
+  AFFILIATE_LINKS,
+} from "../src/components/AffiliatePartners";
+import {
   HAJJ_UMRAH_FAQS,
   generateFAQSchema,
   getFaqSchemaForPage,
@@ -1188,6 +1193,10 @@ function buildAllRoutes(): PrerenderRoute[] {
       <article>
         <h1>Europe, UK, USA &amp; Asian Attraction Passes (Tiqets &amp; Klook Hub)</h1>
         <p>Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and Kuala Lumpur.</p>
+        <section aria-labelledby="luggage-storage-tip">
+          <h2 id="luggage-storage-tip">Museum Bag-Ban Rule &amp; Verified Luggage Storage (Paris, London, Rome &amp; NYC)</h2>
+          <p>Major European, UK, and US attractions (Louvre, Eiffel Tower, Colosseum, Vatican, British Museum, and Statue of Liberty) strictly prohibit suitcases and large backpacks inside security. Store your bags for ~€5/day per bag (with €3,000 security guarantee) at verified hotels and shops near major stations via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">Radical Storage luggage storage network</a>.</p>
+        </section>
       </article>
     `,
   });
@@ -1386,6 +1395,10 @@ function buildAllRoutes(): PrerenderRoute[] {
           .map((link) => `<li><a href="${escapeHtml(link.href)}">${escapeHtml(link.text)}</a></li>`)
           .join("\n")}</ul></section>`
       : "";
+    const radicalPlacement = RADICAL_STORAGE_BLOG_PLACEMENTS[post.slug];
+    const radicalStorageHtml = radicalPlacement
+      ? `<section aria-labelledby="luggage-storage-tip"><h2 id="luggage-storage-tip">${escapeHtml(radicalPlacement.headlineEn)}</h2><p>${escapeHtml(radicalPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(radicalPlacement.anchorTextEn)}</a>${escapeHtml(radicalPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(radicalPlacement.buttonLabelEn)}</a>.</p></section>`
+      : "";
 
     routes.push({
       routePath: `/blog/${post.slug}`,
@@ -1410,6 +1423,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           ${(Array.isArray(post.content) ? post.content : String(post.content || "").split("\n\n"))
             .map((para) => `<p>${escapeHtml(para)}</p>`)
             .join("\n")}
+          ${radicalStorageHtml}
           ${planLinksHtml}
           ${relatedGuidesHtml}
         </article>

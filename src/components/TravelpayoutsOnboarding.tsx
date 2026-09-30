@@ -19,6 +19,12 @@ import {
   Eye, 
   Sparkles 
 } from "lucide-react";
+import {
+  AFFILIATE_OFFER_REGISTRY,
+  isPromoActive,
+  getPromoDaysRemaining,
+  resolvePartnerUrl,
+} from "./AffiliatePartners";
 
 export function TravelpayoutsOnboarding() {
   const [activeTab, setActiveTab] = useState<"checklist" | "drive-sandbox" | "referral-calculator" | "audit">("checklist");
@@ -134,6 +140,78 @@ export function TravelpayoutsOnboarding() {
             <ShieldCheck size={15} />
             Platform Integration Audit
           </button>
+        </div>
+      </div>
+
+      {/* Self-Healing Affiliate Offer & Promo Lifecycle Monitor */}
+      <div className="bg-slate-50 border-b border-slate-200 p-6 sm:p-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+          <div>
+            <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-brand-navy bg-[#F6B73C]/20 px-3 py-1 rounded-full mb-2">
+              <Sparkles size={13} className="text-amber-600" />
+              Automated Offer Lifecycle &amp; Fallback Engine
+            </div>
+            <h3 className="font-serif text-lg sm:text-xl font-black text-slate-900">
+              Time-Bound Promotions &amp; Commission Boosts (Zero Dead Links)
+            </h3>
+            <p className="text-xs text-slate-600 mt-1 max-w-3xl">
+              Every temporary Travelpayouts promo code or commission boost is registered in <code className="bg-slate-200 px-1.5 py-0.5 rounded font-mono text-[11px]">AFFILIATE_OFFER_REGISTRY</code>. When an offer passes its <code className="bg-slate-200 px-1.5 py-0.5 rounded font-mono text-[11px]">expiresAt</code> date, URAL automatically hides expired coupon badges for visitors while keeping the permanent partner link (or fallback partner URL) live.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {Object.values(AFFILIATE_OFFER_REGISTRY)
+            .filter((offer) => offer.offerType !== "evergreen")
+            .map((offer) => {
+              const active = isPromoActive(offer.expiresAt);
+              const daysLeft = getPromoDaysRemaining(offer.expiresAt);
+              const resolvedHref = resolvePartnerUrl(offer.id);
+              return (
+                <div
+                  key={offer.id}
+                  className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm flex flex-col justify-between gap-3"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <span className="font-bold text-sm text-slate-900">{offer.partnerName}</span>
+                      {offer.status !== "active" ? (
+                        <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">
+                          Auto-Fallback Active
+                        </span>
+                      ) : active ? (
+                        <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                          Boost Active ({daysLeft}d left)
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                          Evergreen Mode (Promo Ended)
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs font-semibold text-brand-navy mb-1">
+                      {offer.activeNote}
+                    </p>
+                    <p className="text-[11px] text-slate-600 leading-relaxed">
+                      {offer.expiredFallbackBehavior}
+                    </p>
+                  </div>
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                    <span className="text-slate-500 font-mono truncate max-w-[180px]" title={resolvedHref}>
+                      {resolvedHref}
+                    </span>
+                    <a
+                      href={resolvedHref}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="text-brand-navy font-bold hover:underline inline-flex items-center gap-1 shrink-0"
+                    >
+                      Test Link <ExternalLink size={11} />
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
 

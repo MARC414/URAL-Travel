@@ -9,7 +9,10 @@ import {
   Search,
   Globe,
 } from "lucide-react";
-import { AFFILIATE_LINKS } from "./AffiliatePartners";
+import {
+  AFFILIATE_LINKS,
+  RadicalStorageContextualCallout,
+} from "./AffiliatePartners";
 import { AirHelpWidget } from "./AirHelpWidget";
 import { KKdayPromoBanner } from "./KKdayPromoBanner";
 import { TravelIntelligence } from "./AeoInspector";
@@ -996,6 +999,12 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
           </a>
         </div>
       </div>
+
+      {/* 4B. CONTEXTUAL MUSEUM BAG-RESTRICTION & LUGGAGE STORAGE CALLOUT (RADICAL STORAGE) */}
+      <RadicalStorageContextualCallout
+        slug="europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide"
+        lang={lang}
+      />
 
       {/* 5. CONTEXTUAL AIRHELP PROTECTION FOR EUROPE / UK / USA & LONG-HAUL FLYERS */}
       <AirHelpWidget
