@@ -217,6 +217,29 @@ export function resolvePartnerUrl(hrefOrKey: string): string {
   return matchedEntry.url;
 }
 
+/**
+ * Automatically strips or replaces time-bound campaign references (KKday 9.9 Sale,
+ * AirHelp AHTPO11) inside blog body paragraphs and CTA headlines once their
+ * `expiresAt` date has passed in Bangladesh Standard Time (UTC+06:00).
+ */
+export function sanitizeExpiredPromoText(text: string): string {
+  let out = text;
+  if (!isPromoActive(KKDAY_PROMO.expiresAt)) {
+    out = out
+      .replace(/\s*\(KKday 9\.9 Sale\)/gi, " (KKday Official Partner)")
+      .replace(/Claim 30% OFF \+ Buy 1 Get 1 on/gi, "Book Discounted")
+      .replace(/৩০% ছাড় \+ Buy 1 Get 1/g, "অনলাইন ডিসকাউন্ট");
+  }
+  if (!isPromoActive(AIRHELP_PROMO.expiresAt)) {
+    out = out
+      .replace(/\s*\(and using promo code \*\*`AHTPO11`\*\* for an \*\*11% discount on AirHelp\+ Smart & Pro protection\*\*\)/gi, "")
+      .replace(/\s*\(Use Promo Code AHTPO11 for 11% OFF AirHelp\+ Smart & Pro\)/gi, "")
+      .replace(/\s*\(এবং \*\*AirHelp\+ Smart ও Pro প্রোটেকশনে ১১% ছাড় পেতে প্রোমো কোড `AHTPO11`\*\* ব্যবহার করুন\)/g, "")
+      .replace(/\s*\(AirHelp\+ এ ১১% ছাড়ের কোড: AHTPO11\)/g, "");
+  }
+  return out;
+}
+
 export interface RadicalStorageBlogPlacement {
   badgeEn: string;
   badgeBn: string;

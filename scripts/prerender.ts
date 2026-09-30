@@ -26,6 +26,7 @@ import { getRelatedBlogPosts } from "../src/utils/blogLinks";
 import {
   RADICAL_STORAGE_BLOG_PLACEMENTS,
   resolvePartnerUrl,
+  sanitizeExpiredPromoText,
   AFFILIATE_LINKS,
 } from "../src/components/AffiliatePartners";
 import {
@@ -1420,8 +1421,8 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h1>${escapeHtml(post.title)}</h1>
           <p><em>By ${escapeHtml(post.author)} · Published ${escapeHtml(post.date)} · ${escapeHtml(post.readTime)}</em></p>
           <p>${escapeHtml(post.summary)}</p>
-          ${(Array.isArray(post.content) ? post.content : String(post.content || "").split("\n\n"))
-            .map((para) => `<p>${escapeHtml(para)}</p>`)
+          ${(Array.isArray(post.content) ? post.content : sanitizeExpiredPromoText(String(post.content || "")).split("\n\n"))
+            .map((para) => `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`)
             .join("\n")}
           ${radicalStorageHtml}
           ${planLinksHtml}

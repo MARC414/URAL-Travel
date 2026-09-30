@@ -179,7 +179,13 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
             <span>{routeLabel ? routeLabel : isBn ? "সকল আন্তর্জাতিক রুট" : "International Routes from Dhaka"}</span>
             <span aria-hidden="true">·</span>
             <span className="font-mono text-emerald-700 font-semibold">
-              {isBn ? "প্রোমো কোড: AHTPO11 (১১% ছাড়)" : "Promo: AHTPO11 (11% OFF AirHelp+)"}
+              {promoActive
+                ? isBn
+                  ? `প্রোমো কোড: ${AIRHELP_PROMO.code} (১১% ছাড়)`
+                  : `Promo: ${AIRHELP_PROMO.code} (11% OFF AirHelp+)`
+                : isBn
+                ? "No Win, No Fee · সর্বোচ্চ €600"
+                : "No Win, No Fee · Up to €600 Claim"}
             </span>
           </div>
           <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
@@ -216,7 +222,13 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
-            {isBn ? "২. AirHelp+ (১১% ছাড়)" : "2. AirHelp+ (11% OFF)"}
+            {promoActive
+              ? isBn
+                ? "২. AirHelp+ (১১% ছাড়)"
+                : "2. AirHelp+ (11% OFF)"
+              : isBn
+              ? "২. AirHelp+ সুরক্ষা"
+              : "2. AirHelp+ Protection"}
           </button>
           <button
             type="button"
@@ -326,7 +338,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
 
             <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
               <a
-                href={AFFILIATE_LINKS.airhelp}
+                href={partnerHref}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
                 className="flex-1 bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
@@ -339,27 +351,45 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                 onClick={() => setActiveMode("plus")}
                 className="bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs py-3 px-4 rounded-xl transition-colors cursor-pointer"
               >
-                {isBn ? "১১% ডিসকাউন্ট কোড" : "Get 11% OFF AirHelp+"}
+                {promoActive
+                  ? isBn
+                    ? "১১% ডিসকাউন্ট কোড"
+                    : "Get 11% OFF AirHelp+"
+                  : isBn
+                  ? "AirHelp+ সুবিধা দেখুন"
+                  : "Explore AirHelp+"}
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* MODE 2: AIRHELP+ SMART & PRO WITH AHTPO11 11% OFF PROMO */}
+      {/* MODE 2: AIRHELP+ SMART & PRO (WITH AUTO-EXPIRING AHTPO11 PROMO) */}
       {activeMode === "plus" && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           <div className="lg:col-span-7 space-y-4">
             <div className="flex flex-wrap items-center gap-2 text-xs text-emerald-700 font-semibold">
-              <span>{isBn ? "এক্সক্লুসিভ ট্রাভেলপেআউটস অফার" : "Exclusive Partner Offer"}</span>
+              <span>{isBn ? "অফিশিয়াল পার্টনার প্রোটেকশন" : "Official Partner Flight Protection"}</span>
               <span aria-hidden="true">·</span>
-              <span>{isBn ? "৩০ নভেম্বর ২০২৬ পর্যন্ত" : `Valid through ${AIRHELP_PROMO.validUntil}`}</span>
+              <span>
+                {promoActive
+                  ? isBn
+                    ? "৩০ নভেম্বর ২০২৬ পর্যন্ত ১১% ছাড়"
+                    : `Valid through ${AIRHELP_PROMO.validUntil}`
+                  : isBn
+                  ? "বার্ষিক ফ্লাইট ও লাউঞ্জ মেম্বারশিপ"
+                  : "Annual Flight & Airport Lounge Membership"}
+              </span>
             </div>
 
             <h3 className="font-serif text-lg sm:text-xl font-bold text-slate-900">
-              {isBn
-                ? "AirHelp+ Smart ও Pro সাবস্ক্রিপশনে ১১% ডিসকাউন্ট (যুক্তরাষ্ট্র ছাড়া সকল মার্কেটে)"
-                : "Save 11% on AirHelp+ Smart & AirHelp+ Pro Annual Flight Protection"}
+              {promoActive
+                ? isBn
+                  ? "AirHelp+ Smart ও Pro সাবস্ক্রিপশনে ১১% ডিসকাউন্ট (যুক্তরাষ্ট্র ছাড়া সকল মার্কেটে)"
+                  : "Save 11% on AirHelp+ Smart & AirHelp+ Pro Annual Flight Protection"
+                : isBn
+                ? "AirHelp+ Smart ও Pro বার্ষিক ফ্লাইট, লাগেজ ও লাউঞ্জ সুরক্ষা"
+                : "AirHelp+ Smart & AirHelp+ Pro Annual Flight & Airport Lounge Protection"}
             </h3>
 
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -372,7 +402,9 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
               <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/70 space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-900">AirHelp+ Smart</span>
-                  <span className="text-xs font-mono text-emerald-700 font-semibold">11% OFF with {AIRHELP_PROMO.code}</span>
+                  <span className="text-xs font-mono text-emerald-700 font-semibold">
+                    {promoActive ? `11% OFF with ${AIRHELP_PROMO.code}` : "Up to 3 Trips / Year"}
+                  </span>
                 </div>
                 <p className="text-xs text-slate-600">
                   {isBn
@@ -384,7 +416,9 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
               <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/70 space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-900">AirHelp+ Pro</span>
-                  <span className="text-xs font-mono text-emerald-700 font-semibold">11% OFF with {AIRHELP_PROMO.code}</span>
+                  <span className="text-xs font-mono text-emerald-700 font-semibold">
+                    {promoActive ? `11% OFF with ${AIRHELP_PROMO.code}` : "Up to 9 Trips + Lounge"}
+                  </span>
                 </div>
                 <p className="text-xs text-slate-600">
                   {isBn
@@ -395,50 +429,71 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
             </div>
           </div>
 
-          {/* Promo Code Box */}
+          {/* Promo Code / Evergreen Action Box */}
           <div className="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-4">
-            <div className="space-y-1">
-              <span className="text-xs font-semibold text-slate-500">
-                {isBn ? "চেকআউটে নিচের কোডটি ব্যবহার করুন" : "Apply Promo Code at Checkout"}
-              </span>
-              <div className="flex items-center justify-between bg-white border border-slate-300 rounded-xl px-4 py-3">
-                <div>
-                  <span className="font-mono text-lg font-bold text-brand-navy tracking-wider">
-                    {AIRHELP_PROMO.code}
-                  </span>
-                  <span className="block text-[11px] text-slate-500">
-                    11% OFF Smart & Pro · Valid Sept 1 – Nov 30, 2026
-                  </span>
+            {promoActive ? (
+              <div className="space-y-1">
+                <span className="text-xs font-semibold text-slate-500">
+                  {isBn ? "চেকআউটে নিচের কোডটি ব্যবহার করুন" : "Apply Promo Code at Checkout"}
+                </span>
+                <div className="flex items-center justify-between bg-white border border-slate-300 rounded-xl px-4 py-3">
+                  <div>
+                    <span className="font-mono text-lg font-bold text-brand-navy tracking-wider">
+                      {AIRHELP_PROMO.code}
+                    </span>
+                    <span className="block text-[11px] text-slate-500">
+                      11% OFF Smart &amp; Pro · Valid through {AIRHELP_PROMO.validUntil}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleCopyPromo}
+                    className="bg-brand-navy hover:bg-slate-800 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                  >
+                    {copiedCode ? <Check size={13} className="text-[#F6B73C]" /> : <Copy size={13} />}
+                    <span>{copiedCode ? (isBn ? "কপি হয়েছে" : "Copied") : isBn ? "কোড কপি" : "Copy Code"}</span>
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={handleCopyPromo}
-                  className="bg-brand-navy hover:bg-slate-800 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5 cursor-pointer"
-                >
-                  {copiedCode ? <Check size={13} className="text-[#F6B73C]" /> : <Copy size={13} />}
-                  <span>{copiedCode ? (isBn ? "কপি হয়েছে" : "Copied") : isBn ? "কোড কপি" : "Copy Code"}</span>
-                </button>
               </div>
-            </div>
+            ) : (
+              <div className="space-y-1">
+                <span className="text-xs font-semibold text-slate-500">
+                  {isBn ? "কেন AirHelp+ মেম্বারশিপ নেবেন?" : "Why Frequent Flyers Choose AirHelp+"}
+                </span>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {isBn
+                    ? "ফ্লাইট বিলম্ব বা বাতিল হলে ১০০% ক্ষতিপূরণ অর্থ আপনার (০% সার্ভিস ফি) এবং আন্তর্জাতিক বিমানবন্দরে ফ্রি লাউঞ্জ অ্যাক্সেস।"
+                    : "Keep 100% of your €600 compensation payout with zero service fees deducted, plus instant airport lounge access during flight delays."}
+                </p>
+              </div>
+            )}
 
             <a
-              href={AFFILIATE_LINKS.airhelp}
+              href={partnerHref}
               target="_blank"
               rel="noopener noreferrer sponsored"
               className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-3.5 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>
-                {isBn
-                  ? "AirHelp+ এ ১১% ডিসকাউন্ট অ্যাক্টিভেট করুন"
-                  : "Activate 11% OFF on AirHelp+ Official Site"}
+                {promoActive
+                  ? isBn
+                    ? "AirHelp+ এ ১১% ডিসকাউন্ট অ্যাক্টিভেট করুন"
+                    : "Activate 11% OFF on AirHelp+ Official Site"
+                  : isBn
+                  ? "AirHelp+ মেম্বারশিপ প্ল্যান দেখুন"
+                  : "Explore AirHelp+ Plans on Official Site"}
               </span>
               <ArrowRight size={14} />
             </a>
 
             <p className="text-[11px] text-slate-500 leading-relaxed">
-              {isBn
-                ? "নোট: প্রোমো কোডটি যুক্তরাষ্ট্র (US) বাদে বাংলাদেশ, যুক্তরাজ্য, ইউরোপ, মধ্যপ্রাচ্য ও এশিয়ার সকল মার্কেটে কার্যকর।"
-                : "Note: Promo code AHTPO11 is valid across all markets (including Bangladesh, UK, Europe, UAE & Asia) except the US."}
+              {promoActive
+                ? isBn
+                  ? "নোট: প্রোমো কোডটি যুক্তরাষ্ট্র (US) বাদে বাংলাদেশ, যুক্তরাজ্য, ইউরোপ, মধ্যপ্রাচ্য ও এশিয়ার সকল মার্কেটে কার্যকর।"
+                  : `Note: Promo code ${AIRHELP_PROMO.code} is valid across all markets (including Bangladesh, UK, Europe, UAE & Asia) except the US.`
+                : isBn
+                ? "বাংলাদেশি ডুয়াল-কারেন্সি কার্ডে অনলাইনে তাৎক্ষণিক অ্যাক্টিভেশন সুবিধা।"
+                : "Instant online activation with Bangladeshi dual-currency cards."}
             </p>
           </div>
         </div>
@@ -468,11 +523,13 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                 <p className="text-xs text-slate-600 max-w-lg mx-auto">
                   {isBn
                     ? "আপনার ব্রাউজারের অ্যাড-ব্লকার বা প্রাইভেসি সেটিংসের কারণে এমবেড ফর্মটি ব্লক হয়েছে। নিচের বাটনে ক্লিক করে সরাসরি অফিসিয়াল AirHelp পোর্টালে আপনার ফ্লাইট নম্বর চেক করুন।"
-                    : "Open the official AirHelp portal directly to enter your flight number, check €600 compensation eligibility, or redeem promo code AHTPO11 for 11% OFF AirHelp+."}
+                    : promoActive
+                    ? `Open the official AirHelp portal directly to enter your flight number, check €600 compensation eligibility, or redeem promo code ${AIRHELP_PROMO.code} for 11% OFF AirHelp+.`
+                    : "Open the official AirHelp portal directly to enter your flight number and check up to €600 compensation eligibility for free."}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3">
                   <a
-                    href={AFFILIATE_LINKS.airhelp}
+                    href={partnerHref}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
                     className="inline-flex items-center gap-1.5 bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs px-5 py-2.5 rounded-xl transition-colors"
@@ -480,14 +537,16 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                     <span>{isBn ? "AirHelp অফিসিয়াল পোর্টাল খুলুন" : "Open AirHelp Official Portal"}</span>
                     <ExternalLink size={13} />
                   </a>
-                  <button
-                    type="button"
-                    onClick={handleCopyPromo}
-                    className="inline-flex items-center gap-1.5 bg-white border border-slate-300 text-slate-800 font-mono text-xs px-4 py-2.5 rounded-xl cursor-pointer"
-                  >
-                    {copiedCode ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
-                    <span>{copiedCode ? "Copied AHTPO11" : "Copy Code: AHTPO11"}</span>
-                  </button>
+                  {promoActive && (
+                    <button
+                      type="button"
+                      onClick={handleCopyPromo}
+                      className="inline-flex items-center gap-1.5 bg-white border border-slate-300 text-slate-800 font-mono text-xs px-4 py-2.5 rounded-xl cursor-pointer"
+                    >
+                      {copiedCode ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
+                      <span>{copiedCode ? `Copied ${AIRHELP_PROMO.code}` : `Copy Code: ${AIRHELP_PROMO.code}`}</span>
+                    </button>
+                  )}
                 </div>
               </div>
             )}
