@@ -9,7 +9,14 @@ import {
   Search,
   Globe,
 } from "lucide-react";
-import { AFFILIATE_LINKS } from "./AffiliatePartners";
+import {
+  AFFILIATE_LINKS,
+  KKDAY_PROMO,
+  isPromoActive,
+  resolvePartnerUrl,
+  RadicalStorageContextualCallout,
+  MultiPartnerBlogCallout,
+} from "./AffiliatePartners";
 import { AirHelpWidget } from "./AirHelpWidget";
 import { KKdayPromoBanner } from "./KKdayPromoBanner";
 import { TravelIntelligence } from "./AeoInspector";
@@ -828,21 +835,38 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 <div className="flex flex-wrap items-center gap-2.5 self-start lg:self-end">
                   {(hub.id === "bangkok" || hub.id === "singapore-kl") && (
                     <a
-                      href={AFFILIATE_LINKS.kkday}
+                      href={resolvePartnerUrl(AFFILIATE_LINKS.kkday)}
                       target="_blank"
                       rel="noopener noreferrer sponsored"
                       className="bg-cyan-50 hover:bg-cyan-100 text-[#0B192C] border border-cyan-300 font-bold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
                     >
                       <span>
-                        {isBn
-                          ? "KKday ৩০% সেল ও B1G1 ডিল দেখুন"
-                          : "KKday 9.9 Sale (30% OFF + B1G1)"}
+                        {isPromoActive(KKDAY_PROMO.expiresAt)
+                          ? isBn
+                            ? "KKday ৩০% সেল ও B1G1 ডিল দেখুন"
+                            : "KKday 9.9 Sale (30% OFF + B1G1)"
+                          : isBn
+                          ? "KKday সাউথইস্ট এশিয়া ডিল দেখুন"
+                          : "Compare Passes on KKday"}
                       </span>
                       <ExternalLink size={13} className="text-cyan-700" />
                     </a>
                   )}
                   <a
-                    href={partnerUrl}
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="bg-amber-50 hover:bg-amber-100 text-brand-navy border border-amber-300 font-bold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
+                  >
+                    <span>
+                      {isBn
+                        ? `Go City ${hub.city.split(",")[0]} অল-ইনক্লুসিভ পাস (৫০% ছাড়)`
+                        : `Go City ${hub.city.split(",")[0]} Pass (Save up to 50%)`}
+                    </span>
+                    <ExternalLink size={13} className="text-amber-700" />
+                  </a>
+                  <a
+                    href={resolvePartnerUrl(partnerUrl)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
                     className="bg-brand-navy hover:bg-slate-800 text-white font-semibold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
@@ -996,6 +1020,18 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
           </a>
         </div>
       </div>
+
+      {/* 4B. CONTEXTUAL MUSEUM BAG-RESTRICTION & LUGGAGE STORAGE CALLOUT (RADICAL STORAGE) */}
+      <RadicalStorageContextualCallout
+        slug="europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide"
+        lang={lang}
+      />
+
+      {/* 4C. CONTEXTUAL GO CITY ALL-INCLUSIVE PASSES & EKTA SCHENGEN VISA INSURANCE CALLOUT */}
+      <MultiPartnerBlogCallout
+        slug="europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide"
+        lang={lang}
+      />
 
       {/* 5. CONTEXTUAL AIRHELP PROTECTION FOR EUROPE / UK / USA & LONG-HAUL FLYERS */}
       <AirHelpWidget

@@ -18,7 +18,8 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { Language } from "../translations";
-import { getLocalizedBlogs } from "../data/bengaliContent";
+import { BLOG_DATA } from "../constants";
+import type * as BengaliContentModule from "../data/bengaliContent";
 import {
   getPreDepartureFaqSchema,
   PRE_DEPARTURE_SITEMAP_FAQS,
@@ -335,8 +336,18 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
 
   const [countrySearch, setCountrySearch] = useState("");
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
+  const [bnContent, setBnContent] = useState<typeof BengaliContentModule | null>(null);
 
-  const localizedBlogs = useMemo(() => getLocalizedBlogs(lang), [lang]);
+  useEffect(() => {
+    if (lang === "bn" && !bnContent) {
+      import("../data/bengaliContent").then((mod) => setBnContent(mod));
+    }
+  }, [lang, bnContent]);
+
+  const localizedBlogs = useMemo(
+    () => (lang === "bn" && bnContent ? bnContent.getLocalizedBlogs(lang) : BLOG_DATA),
+    [lang, bnContent]
+  );
 
   const uncheckedChecklistItems = useMemo(
     () =>

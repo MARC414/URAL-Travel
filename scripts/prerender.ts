@@ -21,8 +21,15 @@ import {
   buildSchemaGraph,
   toIsoDate,
 } from "../src/utils/schema";
-import { getSeoCopy } from "../src/utils/seoCopy";
+import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
+import {
+  RADICAL_STORAGE_BLOG_PLACEMENTS,
+  MULTI_PARTNER_BLOG_PLACEMENTS,
+  resolvePartnerUrl,
+  sanitizeExpiredPromoText,
+  AFFILIATE_LINKS,
+} from "../src/components/AffiliatePartners";
 import {
   HAJJ_UMRAH_FAQS,
   generateFAQSchema,
@@ -974,6 +981,10 @@ function buildAllRoutes(): PrerenderRoute[] {
           <ol>${v.stepByStep.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
           ${renderVisaRouteContext(v.id)}
           ${renderVisaApplicationGuidance()}
+          <section aria-labelledby="visa-travel-insurance-esim">
+            <h2 id="visa-travel-insurance-esim">${escapeHtml(v.country)} Visa Travel Medical Insurance &amp; eSIM</h2>
+            <p>Download an embassy-compliant <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.ekta))}" target="_blank" rel="noopener noreferrer sponsored">EKTA Travel Medical Insurance English PDF policy (from $0.99/day)</a> for your ${escapeHtml(v.country)} visa checklist, pre-install a <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.yesim))}" target="_blank" rel="noopener noreferrer sponsored">Yesim Travel eSIM (App &amp; Web)</a>, and book private airport pickup via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.getTransfer))}" target="_blank" rel="noopener noreferrer sponsored">GetTransfer.com</a>.</p>
+          </section>
           ${renderVisaOfficialSources(v.id)}
           ${renderLandingFaqs("visa-guide-faqs", `${v.country} visa questions for Bangladeshi travelers`, vFaq)}
         </article>
@@ -1068,6 +1079,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h2>Local transport options</h2>
           <ul>${d.localTransport.map((option) => `<li>${escapeHtml(option)}</li>`).join("")}</ul>
           <p><strong>Indicative local budget:</strong> ${escapeHtml(d.budgetBdt)}. Review international flights and current entry rules separately.</p>
+          ${renderLandingFaqs(`${d.id}-faqs`, `${d.country} itinerary questions for Bangladeshi travelers`, dFaq)}
         </article>
       `,
     });
@@ -1143,6 +1155,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h2>Budget planning tips</h2>
           <ul>${c.moneyHacks.map((tip) => `<li>${escapeHtml(tip)}</li>`).join("")}</ul>
           <p>These figures are planning estimates, not live quotes. Check current fares, hotel rates and exchange rates before booking.</p>
+          ${renderLandingFaqs(`${c.id}-faqs`, `${c.country} trip cost questions for Bangladeshi travelers`, cFaq)}
         </article>
       `,
     });
@@ -1186,6 +1199,10 @@ function buildAllRoutes(): PrerenderRoute[] {
       <article>
         <h1>Europe, UK, USA &amp; Asian Attraction Passes (Tiqets &amp; Klook Hub)</h1>
         <p>Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and Kuala Lumpur.</p>
+        <section aria-labelledby="luggage-storage-tip">
+          <h2 id="luggage-storage-tip">Museum Bag-Ban Rule &amp; Verified Luggage Storage (Paris, London, Rome &amp; NYC)</h2>
+          <p>Major European, UK, and US attractions (Louvre, Eiffel Tower, Colosseum, Vatican, British Museum, and Statue of Liberty) strictly prohibit suitcases and large backpacks inside security. Store your bags for ~€5/day per bag (with €3,000 security guarantee) at verified hotels and shops near major stations via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">Radical Storage luggage storage network</a>, or bundle 3 to 10+ city landmarks with <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.goCity))}" target="_blank" rel="noopener noreferrer sponsored">Go City All-Inclusive Passes</a> and <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.ekta))}" target="_blank" rel="noopener noreferrer sponsored">EKTA €30,000 Schengen Travel Insurance</a>.</p>
+        </section>
       </article>
     `,
   });
@@ -1218,14 +1235,14 @@ function buildAllRoutes(): PrerenderRoute[] {
       <article>
         <h1>Bangladeshi Traveler Utility Tools &amp; Flight Delay Compensation (€600)</h1>
         <p>Convert BDT to USD, SAR, NPR, THB, MYR, SGD, and AED, evaluate tourist visa approval readiness, and claim up to €600 ($650) for delayed or cancelled flights via AirHelp.</p>
+        ${renderLandingFaqs("tools-hub-faqs", "Travel planning tool questions for Bangladeshi travelers", toolsFaq)}
       </article>
     `,
   });
 
   // 10. Sitemap & Pre-Departure Hub (/sitemap)
-  const sitemapFaq = stripContext(
-    getPreDepartureFaqSchema({ url: `${BASE_URL}/sitemap` })
-  );
+  const sitemapFaqSchema = getPreDepartureFaqSchema({ url: `${BASE_URL}/sitemap` });
+  const sitemapFaq = stripContext(sitemapFaqSchema);
   sitemapFaq["@id"] = `${BASE_URL}/sitemap#faq`;
   sitemapFaq["mainEntityOfPage"] = { "@id": `${BASE_URL}/sitemap#webpage` };
 
@@ -1245,6 +1262,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       <article>
         <h1>Dhaka Airport (DAC) Pre-Departure Readiness Checklist &amp; Complete 83-Page Sitemap</h1>
         <p>Interactive pre-flight checklist for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC), cabin &amp; 5L Zamzam baggage rules, Bangladesh Embassy emergency helplines abroad, and direct links to all 41 travel guides.</p>
+        ${renderLandingFaqs("sitemap-predeparture-faqs", "Dhaka Airport pre-departure and baggage questions", sitemapFaqSchema)}
       </article>
     `,
   });
@@ -1277,6 +1295,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       <article>
         <h1>Contact URAL — Dhaka Outbound Flight, Umrah &amp; Visa Desk (+8801784385335)</h1>
         <p>Connect directly with our Dhaka support desk via WhatsApp at +8801784385335 for BDT flight &amp; hotel booking, Umrah e-Visa processing, and tourist visa document verification.</p>
+        ${renderLandingFaqs("contact-desk-faqs", "Questions about URAL travel support and BDT booking", contactFaq)}
       </article>
     `,
   });
@@ -1347,18 +1366,6 @@ function buildAllRoutes(): PrerenderRoute[] {
       }),
     ];
 
-    if (post.category === "Hajj & Umrah" || post.category === "Ziyarah & Stopovers") {
-      const faqNode = stripContext(
-        generateFAQSchema(HAJJ_UMRAH_FAQS, {
-          url: postUrl,
-          name: post.title,
-        })
-      );
-      faqNode["@id"] = `${postUrl}#faq`;
-      faqNode["mainEntityOfPage"] = { "@id": `${postUrl}#webpage` };
-      extraNodes.push(faqNode);
-    }
-
     const planLinks: { text: string; href: string }[] = [];
     const relatedGuideLinks: { text: string; href: string }[] = [];
     const usedBlogLinkHrefs = new Set<string>();
@@ -1394,6 +1401,18 @@ function buildAllRoutes(): PrerenderRoute[] {
           .map((link) => `<li><a href="${escapeHtml(link.href)}">${escapeHtml(link.text)}</a></li>`)
           .join("\n")}</ul></section>`
       : "";
+    const radicalPlacement = RADICAL_STORAGE_BLOG_PLACEMENTS[post.slug];
+    const radicalStorageHtml = radicalPlacement
+      ? `<section aria-labelledby="luggage-storage-tip"><h2 id="luggage-storage-tip">${escapeHtml(radicalPlacement.headlineEn)}</h2><p>${escapeHtml(radicalPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(radicalPlacement.anchorTextEn)}</a>${escapeHtml(radicalPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(radicalPlacement.buttonLabelEn)}</a>.</p></section>`
+      : "";
+    const multiPlacement = MULTI_PARTNER_BLOG_PLACEMENTS[post.slug];
+    const multiPartnerHtml = multiPlacement
+      ? `<section aria-labelledby="partner-travel-tools"><h2 id="partner-travel-tools">${escapeHtml(multiPlacement.headlineEn)}</h2><p>${escapeHtml(multiPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacement.primaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.anchorTextEn)}</a>${escapeHtml(multiPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacement.primaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.primaryButtonEn)}</a>${
+          multiPlacement.secondaryPartner && multiPlacement.secondaryButtonEn
+            ? ` · <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacement.secondaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.secondaryButtonEn)}</a>`
+            : ""
+        }.</p></section>`
+      : "";
 
     routes.push({
       routePath: `/blog/${post.slug}`,
@@ -1415,9 +1434,11 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h1>${escapeHtml(post.title)}</h1>
           <p><em>By ${escapeHtml(post.author)} · Published ${escapeHtml(post.date)} · ${escapeHtml(post.readTime)}</em></p>
           <p>${escapeHtml(post.summary)}</p>
-          ${(Array.isArray(post.content) ? post.content : String(post.content || "").split("\n\n"))
-            .map((para) => `<p>${escapeHtml(para)}</p>`)
+          ${(Array.isArray(post.content) ? post.content : sanitizeExpiredPromoText(String(post.content || "")).split("\n\n"))
+            .map((para) => `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`)
             .join("\n")}
+          ${radicalStorageHtml}
+          ${multiPartnerHtml}
           ${planLinksHtml}
           ${relatedGuidesHtml}
         </article>
@@ -1433,6 +1454,12 @@ function applySharedSeoCopy(routes: PrerenderRoute[]) {
     const seoCopy = getSeoCopy(route.routePath, route.title, route.description);
     route.title = seoCopy.title;
     route.description = seoCopy.description;
+    // Strip trailing "| URAL" / "| URAL Blog" brand suffixes from prerendered H1s
+    // so static HTML matches the clean React detail-page headings.
+    route.bodyHtml = route.bodyHtml.replace(
+      /<h1([^>]*)>([\s\S]*?)<\/h1>/i,
+      (_match, attrs, inner) => `<h1${attrs}>${stripBrandSuffix(inner)}</h1>`
+    );
 
     for (const node of route.extraGraphNodes) {
       const type = node["@type"];

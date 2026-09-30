@@ -102,24 +102,36 @@ export function KiwitaxiEmbed() {
           </div>
         </div>
 
-        {/* Search button with redirect loader */}
-        <button
-          type="submit"
-          disabled={isRedirecting}
-          className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-70"
-        >
-          {isRedirecting ? (
-            <>
-              <Loader2 size={12} className="animate-spin text-white" />
-              <span>Redirecting Securely...</span>
-            </>
-          ) : (
-            <>
-              <span>Search Private Transfers</span>
-              <ExternalLink size={11} />
-            </>
-          )}
-        </button>
+        {/* Dual Transfer Partner Buttons: Kiwitaxi + GetTransfer.com (Intercity Vans & Driver Bidding) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <button
+            type="submit"
+            disabled={isRedirecting}
+            className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-3 rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-70"
+          >
+            {isRedirecting ? (
+              <>
+                <Loader2 size={12} className="animate-spin text-white" />
+                <span>Opening Kiwitaxi...</span>
+              </>
+            ) : (
+              <>
+                <span>Fixed Rate on Kiwitaxi</span>
+                <ExternalLink size={11} />
+              </>
+            )}
+          </button>
+
+          <a
+            href="https://gettransfer.tpo.li/sekWRAM1"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-2.5 px-3 rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer text-center"
+          >
+            <span>Compare Driver Bids (GetTransfer)</span>
+            <ExternalLink size={11} />
+          </a>
+        </div>
       </form>
     </div>
   );

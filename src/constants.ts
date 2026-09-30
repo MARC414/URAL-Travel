@@ -1873,8 +1873,8 @@ In Bangkok, staying directly on Sukhumvit Road near Siam BTS is hyper-expensive.
 2. CHOOSE CONCIERGE HUBS WITH HALAL BUFFET OPTIONS
 For South Asian travelers, breakfast is key. When booking, filters often overprice halal buffets. Look for hotels in areas like Pratunam (Bangkok), Bukit Bintang (Kuala Lumpur), or Deira (Dubai) where affordable Bengali, Indian, or Middle Eastern dinings are flanking the street corners.
 
-3. OPTIMIZE BOOKING WINDOWS
-Hotel rates on major portals tend to fluctuate mid-week. Always search for rooms in private incognito browsers and try booking non-refundable rates only after your visa sticker or eVisa approval is fully secured in-hand.`,
+3. OPTIMIZE BOOKING WINDOWS & 12:00 PM CHECK-OUT LUGGAGE LOGISTICS
+Hotel rates on major portals tend to fluctuate mid-week. Always search for rooms in private incognito browsers and try booking non-refundable rates only after your visa sticker or eVisa approval is fully secured in-hand. Also note that serviced apartments in KLCC/Bukit Bintang and budget hotels in Bangkok or Deira enforce a strict 11:00 AM–12:00 PM check-out while most flights back to Dhaka depart late at night; instead of paying for an extra hotel night just to store bags, use a verified Radical Storage drop point near the nearest BTS/MRT/Metro station (~$6/day per suitcase) to enjoy your final day hands-free.`,
     internalLinks: [
       { text: "Dubai trip cost from Dhaka", path: "/costs/dubai-costs" },
       { text: "Kuala Lumpur Hotels Guide", path: "/hotels/kuala-lumpur-hotels" }
@@ -2824,7 +2824,8 @@ Rule 2: Strict Official Modesty Dress Code (Enforced by Automated Scanners):
 3. COMBINING QASR AL WATAN (PRESIDENTIAL PALACE) & LOUVRE ABU DHABI IN ONE DAY
 - **Morning (10:00 AM – 12:30 PM):** Explore **Qasr Al Watan (The Working Presidential Palace of the UAE)**—marvel at the Great Hall dome, presidential banquet halls, and rare Islamic manuscripts in the Qasr Al Watan Library (**Ticket: ~AED 65 / BDT 2,200**).
 - **Afternoon (1:30 PM – 3:30 PM):** Visit **Louvre Abu Dhabi** on Saadiyat Island or have Halal Mandi/Seafood lunch at **Al Mina or Al Wahda Mall**.
-- **Golden Hour Sunset (4:30 PM – 7:00 PM):** Arrive at **Sheikh Zayed Grand Mosque** at 4:30 PM so you witness the white marble columns in bright afternoon sunlight, golden sunset reflection across the sapphire pools, and the breathtaking blue lunar lighting after Maghrib!`,
+- **Golden Hour Sunset (4:30 PM – 7:00 PM):** Arrive at **Sheikh Zayed Grand Mosque** at 4:30 PM so you witness the white marble columns in bright afternoon sunlight, golden sunset reflection across the sapphire pools, and the breathtaking blue lunar lighting after Maghrib!
+- **Final-Day Check-Out Luggage Rule:** Neither Sheikh Zayed Grand Mosque nor Qasr Al Watan allows visitors to bring rolling suitcases past security. If you are visiting Abu Dhabi on your final day after checking out of your Dubai hotel, store your bags at a verified Radical Storage location near Ibn Battuta, Al Ghubaiba, or central Abu Dhabi before boarding the intercity bus.`,
     internalLinks: [
       { text: "Umrah + Dubai 10-Day Multi-City Combo Guide from Dhaka", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
       { text: "Dubai Safari, Burj Khalifa & Abu Dhabi Passes Hub", path: "/experiences?region=asia&city=dubai-klook" },
@@ -2900,6 +2901,7 @@ Unlike Asian attractions where walk-up tickets are often available, Europe and N
   • Book your **Colosseum + Roman Forum + Palatine Hill Timed-Entry Pass (~€24–€38)** and **Milan Cathedral (Duomo di Milano) Rooftop Terraces Lift Ticket** at least 14 days ahead.
 - **🇺🇸 New York City, USA (Statue of Liberty, Ellis Island & SUMMIT One Vanderbilt):**
   • Reserve official **Statue of Liberty Ferry + Pedestal Access** and **SUMMIT One Vanderbilt or Empire State Building Sunset Deck** slots using your endorsed Bangladeshi Dual-Currency Card.
+- **🧳 Strict Museum Bag-Ban Rule (Paris, London, Rome & NYC):** Security checkpoints at the Louvre, Eiffel Tower, Colosseum, Vatican, British Museum, and Statue of Liberty strictly prohibit cabin suitcases and large backpacks. If you are sightseeing after hotel check-out or between train transfers, drop your bags at a verified Radical Storage partner location (~€5/day per bag with €3,000 security guarantee) near Gare du Nord, King's Cross, Roma Termini, or Penn Station so you are not turned away at the gate.
 
 3. HOW TO PAY FOR EUROPEAN/US PASSES & CLAIM UP TO €600 (BDT 78,000) FOR DELAYED FLIGHTS
 - **Paying with a Bangladeshi Dual-Currency Card:** Ensure your passport's **$12,000 annual travel quota** is endorsed at your bank in Dhaka and **3D-Secure USD/EUR E-Commerce** is active so your online **Tiqets** bookings process seamlessly with zero foreign agent markups.
@@ -3235,7 +3237,7 @@ Under **Singapore Land Transport Authority (LTA - lta.gov.sg)** rules, foreign v
   • Pray Dhuhr at the historic golden-domed **Masjid Sultan in Kampong Glam (Arab Street)** and lunch at **Zam Zam Restaurant (famous since 1908 for Halal Murtabak, SGD 8–12 / BDT 730–1,100)**.
   • Afternoon inside the air-conditioned **Cloud Forest & Flower Dome** at Gardens by the Bay (pre-book on Klook to save 15%).
 - **Day 4 — 24-Hour Mustafa Centre Souvenir Shopping & Departure from Changi:**
-  • Spend your morning buying chocolates, perfumes, watches, and electronics at **Mustafa Centre (Serangoon Road)**—don't forget to present your Bangladeshi passport at the GST Refund counter for purchases over **SGD 100** to claim up to **9% cash/card tax refund at Changi Airport**!
+  • Spend your morning buying chocolates, perfumes, watches, and electronics at **Mustafa Centre (Serangoon Road)**—don't forget to present your Bangladeshi passport at the GST Refund counter for purchases over **SGD 100** to claim up to **9% cash/card tax refund at Changi Airport**! If your hotel or budget apartment in Little India or Bugis does not hold bags after 11:00 AM check-out, drop your heavy suitcases at a verified Radical Storage counter near Farrer Park or Bugis MRT so you can shop and ride the MRT hands-free before your evening flight.
 
 3. REALISTIC 4-DAY SINGAPORE BUDGET IN BDT (PER PERSON, FAMILY / TWIN SHARING)
 - **Roundtrip Direct Flights (DAC – SIN – DAC):** BDT 41,500 – BDT 48,000
@@ -3363,7 +3365,7 @@ Book a **Multi-City Ticket** on **SriLankan Airlines** (or combine **Biman/SriLa
 - **Days 5–6: Maafushi Turquoise Lagoon, $30 Snorkeling & Sandbank Drone Picnic:**
   • Join the **$30 full-day Turtle Reef snorkeling, dolphin cruise, and white-sandbank lunch tour** (with free underwater GoPro & drone photos), or take a **1-Day Private Water Villa Resort Pass ($120)**.
 - **Day 7: Morning Malé Souvenir Walk & Flight Home to Dhaka (DAC):**
-  • Return to Velana Airport by speedboat and fly back to Dhaka with **two countries and four immigration stamps** in your passport!
+  • Return to Velana Airport by speedboat and fly back to Dhaka with **two countries and four immigration stamps** in your passport! (Tip: If your return SriLankan Airlines flight includes an 8-to-10 hour daytime layover in Colombo—or before boarding the Kandy-to-Ella scenic train—you can drop heavy suitcases at a verified Radical Storage point in Colombo or Kandy so your family can explore hands-free.)
 
 3. COMPLETE 7-DAY SRI LANKA + MALDIVES COMBO BUDGET IN BDT (PER PERSON, COUPLE / FAMILY SHARING)
 - **Multi-City Flights (DAC → CMB → MLE → DAC):** BDT 56,000 – BDT 68,000
@@ -3459,14 +3461,14 @@ Step 1: Keep Your Physical Boarding Pass & 6-Digit PNR e-Ticket:
 Step 2: For Delayed or Missing Suitcases, File a "PIR" (Property Irregularity Report) Before Exiting Customs:
 - At **Jeddah Terminal 1, Madinah Airport, or Dhaka Airport (DAC) Lost & Found Baggages Desk**, demand an official **Property Irregularity Report (PIR)** with a 10-character reference code (e.g., ` + "`" + `JEDSV12345` + "`" + ` or ` + "`" + `DACBG54321` + "`" + `) BEFORE you leave the baggage hall! Without a PIR number, airlines will reject your baggage claim.
 Step 3: Check Your Eligibility in 2 Minutes on AirHelp (Zero Upfront Cost):
-- Airlines routinely ignore individual emails from passengers. By entering your flight number and date into **AirHelp** (and using promo code **` + "`" + `AHPROMO8` + "`" + `** for an **8% discount on AirHelp+ protection**), their aviation legal team handles the entire claim on a **"No-Win, No-Fee"** basis—and you can even claim for disrupted flights from the **last 3 years**!`,
+- Airlines routinely ignore individual emails from passengers. By entering your flight number and date into **AirHelp** (and using promo code **` + "`" + `AHTPO11` + "`" + `** for an **11% discount on AirHelp+ Smart & Pro protection**), their aviation legal team handles the entire claim on a **"No-Win, No-Fee"** basis—and you can even claim for disrupted flights from the **last 3 years**!`,
     internalLinks: [
       { text: "Check Flight Compensation & AirHelp Promo Code in Travel Tools", path: "/tools?tab=airhelp" },
       { text: "Top Airlines Operating from Dhaka: Baggage & Service Comparison", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
       { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
       { text: "Best Travel eSIM & EKTA Flight Delay Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" }
     ],
-    affiliateCTA: { provider: "airhelp", headline: "Had a Delayed Flight or Lost Bag in the Last 3 Years? Claim Up to €600", body: "Check your flight eligibility for free in 2 minutes with AirHelp (Use Promo Code AHPROMO8 for 8% OFF AirHelp+)." }
+    affiliateCTA: { provider: "airhelp", headline: "Had a Delayed Flight or Lost Bag in the Last 3 Years? Claim Up to €600", body: "Check your flight eligibility for free in 2 minutes with AirHelp (Use Promo Code AHTPO11 for 11% OFF AirHelp+ Smart & Pro)." }
   },
   {
     id: "blog-41",

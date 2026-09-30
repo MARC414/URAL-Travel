@@ -44,7 +44,15 @@ import {
   KlookActivitiesWidget,
   QeeqCarRentalWidget,
   PartnerLinkButton,
-  AFFILIATE_LINKS
+  RadicalStorageContextualCallout,
+  MultiPartnerBlogCallout,
+  EktaInsuranceCallout,
+  AFFILIATE_LINKS,
+  AIRHELP_PROMO,
+  KKDAY_PROMO,
+  isPromoActive,
+  resolvePartnerUrl,
+  sanitizeExpiredPromoText,
 } from "./components/AffiliatePartners";
 import {
   useSeoMeta,
@@ -62,15 +70,7 @@ import {
   collectionPageSchema,
 } from "./hooks/useSeoMeta";
 import { Language, translations } from "./translations";
-import {
-  getLocalizedBlogs,
-  getLocalizedFlights,
-  getLocalizedHotels,
-  getLocalizedVisas,
-  getLocalizedCosts,
-  getLocalizedHajjFaqs,
-  getFeaturedGrowthTopics,
-} from "./data/bengaliContent";
+import type * as BengaliContentModule from "./data/bengaliContent";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
@@ -78,6 +78,45 @@ import { getSeoCopy } from "./utils/seoCopy";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { getBlogImageAltText, getResponsiveImageProps } from "./utils/imageAssets";
 import { getRelatedBlogPosts } from "./utils/blogLinks";
+
+const ENGLISH_FEATURED_GROWTH_TOPICS = [
+  {
+    id: "trend-umrah-hajj",
+    category: "Religious Travel · 8 min",
+    searchQuery: "“DIY Umrah cost & Nusuk guide Bangladesh”",
+    title: "Umrah & Hajj Preparation Guide from Bangladesh (2026 Official Rules & BDT Cost)",
+    excerpt:
+      "Official Hajj registration (hajj.gov.bd) vs. DIY Umrah planning, 3 verified Umrah visa pathways, Nusuk Rawdah permits, Haramain bullet train fares, and 10-day BDT budgets.",
+    slug: "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+  },
+  {
+    id: "trend-endorsement",
+    category: "Banking & FX · 7 min",
+    searchQuery: "“How to get dual-currency card endorsement”",
+    title: "How to Get Dual-Currency Card Endorsement (2026 Passport Dollar Quota Guide)",
+    excerpt:
+      "Step-by-step guide to the $12,000 annual passport endorsement quota, RFCD vs. Travel Quota cards (EBL, City Bank, BRAC), 3D-Secure activation, and avoiding 5% DCC fees.",
+    slug: "dual-currency-card-endorsement-bangladesh",
+  },
+  {
+    id: "trend-family-budget",
+    category: "Family & Budget · 7 min",
+    searchQuery: "“Top budget-friendly family destinations from Dhaka”",
+    title: "Top 6 Budget-Friendly Family Destinations from Dhaka (Ranked by 5-Day BDT Cost)",
+    excerpt:
+      "Compare Nepal (from ৳42k), Malaysia (from ৳68k), Thailand, Maldives Local Islands, Singapore, and Dubai by total family BDT cost, visa speed, and Halal dining.",
+    slug: "top-budget-family-destinations-from-dhaka",
+  },
+  {
+    id: "trend-dac-immigration",
+    category: "Outbound Rules · 6 min",
+    searchQuery: "“Dhaka airport immigration documents checklist”",
+    title: "Dhaka Airport (DAC) Outbound Immigration Checklist: NOC, GO & First-Time Rules",
+    excerpt:
+      "Exact document folder checklist to clear Hazrat Shahjalal Airport emigration in under 2 minutes for job holders (NOC), govt staff (GO), business owners, and fresh passports.",
+    slug: "dhaka-airport-outbound-immigration-checklist-noc-go",
+  },
+];
 
 // Non-critical route & modal components loaded on demand to reduce initial JS parse/compile cost
 const UmrahLandingPage = React.lazy(() =>
@@ -541,6 +580,8 @@ export default function App() {
     }
   };
 
+  const [bnContent, setBnContent] = useState<typeof BengaliContentModule | null>(null);
+
   // The document language is baked into index.html as lang="en", but the UI can
   // switch to Bengali entirely client-side. Without this, <html lang> keeps
   // claiming English while Bengali text is on screen, so screen readers apply
@@ -549,17 +590,21 @@ export default function App() {
     if (typeof document !== "undefined") {
       document.documentElement.lang = lang === "bn" ? "bn-BD" : "en-BD";
     }
-  }, [lang]);
+    if (lang === "bn" && !bnContent) {
+      import("./data/bengaliContent").then((mod) => setBnContent(mod));
+    }
+  }, [lang, bnContent]);
 
   const t = translations[lang];
   const isBn = lang === "bn";
-  const localizedBlogs = getLocalizedBlogs(lang);
-  const localizedFlights = getLocalizedFlights(lang);
-  const localizedHotels = getLocalizedHotels(lang);
-  const localizedVisas = getLocalizedVisas(lang);
-  const localizedCosts = getLocalizedCosts(lang);
-  const localizedHajjFaqs = getLocalizedHajjFaqs(lang);
-  const featuredGrowthTopics = getFeaturedGrowthTopics(lang);
+  const localizedBlogs = isBn && bnContent ? bnContent.getLocalizedBlogs(lang) : BLOG_DATA;
+  const localizedFlights = isBn && bnContent ? bnContent.getLocalizedFlights(lang) : FLIGHTS_DATA;
+  const localizedHotels = isBn && bnContent ? bnContent.getLocalizedHotels(lang) : HOTELS_DATA;
+  const localizedVisas = isBn && bnContent ? bnContent.getLocalizedVisas(lang) : VISA_DATA;
+  const localizedCosts = isBn && bnContent ? bnContent.getLocalizedCosts(lang) : TRIP_COSTS_DATA;
+  const localizedHajjFaqs = isBn && bnContent ? bnContent.getLocalizedHajjFaqs(lang) : HAJJ_UMRAH_FAQS;
+  const featuredGrowthTopics =
+    isBn && bnContent ? bnContent.getFeaturedGrowthTopics(lang) : ENGLISH_FEATURED_GROWTH_TOPICS;
   const [isPriceAlertOpen, setIsPriceAlertOpen] = useState(false);
   const [alertDestination, setAlertDestination] = useState("Bangkok (BKK)");
 
@@ -733,7 +778,16 @@ export default function App() {
         answer:
           "Nepal (from BDT 42,000 per person with free Visa on Arrival), Malaysia (from BDT 68,000 with 4-day online e-Visa and universal Halal dining), Thailand, and the Maldives local islands (Maafushi and Hulhumalé) are the top budget-friendly family destinations from Dhaka.",
       },
-      ...HAJJ_UMRAH_FAQS.slice(0, 2),
+      {
+        question: "Which countries can Bangladeshi passport holders visit without a prior visa?",
+        answer:
+          "Nepal, the Maldives, Sri Lanka (via online ETA), Bhutan and Indonesia issue Visa on Arrival or free entry to Bangladeshi passport holders, so no embassy appointment is needed before departure from Dhaka. Nepal and the Maldives are the cheapest of these to reach from Dhaka (DAC).",
+      },
+      {
+        question: "Is URAL a travel agency that sells tickets?",
+        answer:
+          "No. URAL is an independent outbound travel intelligence desk for Bangladeshi travellers: it publishes flight price guidance in BDT, official visa checklists, itineraries and realistic trip-cost breakdowns, then links out to the airline, hotel or visa portal so you book directly at the source price.",
+      },
     ]);
     seoBreadcrumbs = [
       { name: "Home", url: "https://ural-travel.pages.dev/" }
@@ -1066,16 +1120,7 @@ export default function App() {
         inLanguage: pageLanguage,
       });
 
-      // Only emit FAQPage when the article is in the Hajj & Umrah or Ziyarah & Stopovers cluster where those FAQs are visibly rendered
-      if (activePost.category === "Hajj & Umrah" || activePost.category === "Ziyarah & Stopovers") {
-        const faqSchema = generateFAQSchema(HAJJ_UMRAH_FAQS, {
-          url: postUrl,
-          name: activePost.title,
-        });
-        seoSchema = [articleNode, faqSchema];
-      } else {
-        seoSchema = [articleNode];
-      }
+      seoSchema = [articleNode];
 
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },
@@ -1543,14 +1588,26 @@ export default function App() {
                       <div className="bg-white/6 border border-white/12 rounded-2xl p-3.5 space-y-2">
                         <div className="flex items-center justify-between text-[11px] font-mono">
                           <span className="text-cyan-300 font-bold">
-                            {isBn ? "🔥 KKday ৯.৯ সেল (৩০% ছাড়)" : "🔥 KKday 9.9 SEA Sale (30% OFF)"}
+                            {isPromoActive(KKDAY_PROMO.expiresAt)
+                              ? isBn
+                                ? "🔥 KKday ৯.৯ সেল (৩০% ছাড়)"
+                                : "🔥 KKday 9.9 SEA Sale (30% OFF)"
+                              : isBn
+                              ? "🌏 KKday সাউথইস্ট এশিয়া পাস"
+                              : "🌏 KKday Southeast Asia Passes"}
                           </span>
-                          <span className="text-amber-300 font-semibold">+$100 Giveaway</span>
+                          <span className="text-amber-300 font-semibold">
+                            {isPromoActive(KKDAY_PROMO.expiresAt) ? "+$100 Giveaway" : "Instant QR"}
+                          </span>
                         </div>
                         <p className="text-[11px] text-slate-300 leading-relaxed">
-                          {isBn
-                            ? "থাইল্যান্ড, মালয়েশিয়া ও সিঙ্গাপুরে ৩০% প্রোমো কোড + Buy 1 Get 1 ডিল (ভ্রমণ: ৩১ ডিসেম্বর ২০২৬ পর্যন্ত)।"
-                            : "30% OFF + Buy 1 Get 1 on Thailand, Malaysia & Singapore passes (travel until Dec 31, 2026)."}
+                          {isPromoActive(KKDAY_PROMO.expiresAt)
+                            ? isBn
+                              ? "থাইল্যান্ড, মালয়েশিয়া ও সিঙ্গাপুরে ৩০% প্রোমো কোড + Buy 1 Get 1 ডিল (ভ্রমণ: ৩১ ডিসেম্বর ২০২৬ পর্যন্ত)।"
+                              : "30% OFF + Buy 1 Get 1 on Thailand, Malaysia & Singapore passes (travel until Dec 31, 2026)."
+                            : isBn
+                            ? "থাইল্যান্ড, মালয়েশিয়া ও সিঙ্গাপুরের থিম পার্ক, ডে-ট্যুর ও এয়ারপোর্ট ট্রেন টিকিটে অনলাইন ছাড়।"
+                            : "Save 15–25% on Thailand, Malaysia & Singapore theme parks, airport rail & day tours."}
                         </p>
                         <div className="grid grid-cols-2 gap-2 pt-0.5">
                           <button
@@ -1561,12 +1618,18 @@ export default function App() {
                             {isBn ? "অ্যাক্টিভিটি হাব →" : "All Passes →"}
                           </button>
                           <a
-                            href={AFFILIATE_LINKS.kkday}
+                            href={resolvePartnerUrl(AFFILIATE_LINKS.kkday)}
                             target="_blank"
                             rel="noopener noreferrer sponsored"
                             className="bg-cyan-400 hover:bg-cyan-300 text-[#0B192C] font-bold text-[11px] py-2 px-2.5 rounded-xl transition-colors text-center"
                           >
-                            {isBn ? "KKday ৩০% ডিল ↗" : "KKday 30% Sale ↗"}
+                            {isPromoActive(KKDAY_PROMO.expiresAt)
+                              ? isBn
+                                ? "KKday ৩০% ডিল ↗"
+                                : "KKday 30% Sale ↗"
+                              : isBn
+                              ? "KKday ডিল দেখুন ↗"
+                              : "KKday Passes ↗"}
                           </a>
                         </div>
                       </div>
@@ -1631,7 +1694,13 @@ export default function App() {
                       {
                         id: "airhelp",
                         label: isBn ? "🛡️ ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "🛡️ Flight Delay Claim (€600 / AirHelp)",
-                        sub: isBn ? "প্রোমো কোড AHTPO11 (১১% ছাড়)" : "Up to BDT 78k payout + Code AHTPO11",
+                        sub: isPromoActive(AIRHELP_PROMO.expiresAt)
+                          ? isBn
+                            ? `প্রোমো কোড ${AIRHELP_PROMO.code} (১১% ছাড়)`
+                            : `Up to BDT 78k payout + Code ${AIRHELP_PROMO.code}`
+                          : isBn
+                          ? "No Win, No Fee · ৭৮,০০০ টাকা পর্যন্ত"
+                          : "No Win, No Fee · Up to BDT 78k payout",
                         path: "/tools?tab=airhelp",
                       },
                       {
@@ -1901,7 +1970,13 @@ export default function App() {
                         {
                           id: "airhelp",
                           label: isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "Flight Delay Claim (€600 / AirHelp)",
-                          meta: isBn ? "প্রোমো কোড AHTPO11 · ৭৮,০০০ টাকা পর্যন্ত" : "Code AHTPO11 · Up to BDT 78k payout",
+                          meta: isPromoActive(AIRHELP_PROMO.expiresAt)
+                            ? isBn
+                              ? `প্রোমো কোড ${AIRHELP_PROMO.code} · ৭৮,০০০ টাকা পর্যন্ত`
+                              : `Code ${AIRHELP_PROMO.code} · Up to BDT 78k payout`
+                            : isBn
+                            ? "No Win, No Fee · ৭৮,০০০ টাকা পর্যন্ত"
+                            : "No Win, No Fee · Up to BDT 78k payout",
                           path: "/tools?tab=airhelp",
                         },
                         {
@@ -2946,13 +3021,25 @@ export default function App() {
                     </div>
 
                      {/* Embedded Conversion search form widget */}
-                    <div className="bg-slate-100 p-4 rounded-xl border border-slate-250/60 my-6">
-                      <span className="text-[10px] font-mono font-bold text-brand-navy block mb-2">
+                    <div className="bg-slate-100 p-4 rounded-xl border border-slate-250/60 my-6 space-y-3">
+                      <span className="text-[10px] font-mono font-bold text-brand-navy block">
                         {isBn ? "এই রুটের ফ্লাইট সার্চ করুন" : "Search Flights on This Route"}
                       </span>
                       <TravelpayoutsEmbed
                         defaultDestination={getCountryIata(activeRoute.country)}
                       />
+                      <div className="pt-2 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                        <span className="text-xs text-slate-600">
+                          {isBn
+                            ? "মাল্টি-সিটি, ওপেন-জ বা ভিন্ন এয়ারলাইন্সের কম্বো টিকিট খুঁজছেন?"
+                            : "Looking for Multi-City, Open-Jaw, or Self-Transfer Airline Combos?"}
+                        </span>
+                        <PartnerLinkButton
+                          href={AFFILIATE_LINKS.kiwi}
+                          label={isBn ? "Kiwi.com-এ মাল্টি-সিটি ভাড়া দেখুন" : "Compare Multi-City Fares on Kiwi.com"}
+                          variant="dark"
+                        />
+                      </div>
                     </div>
 
                     {/* 🛡️ AirHelp Flight Delay Compensation & AirHelp+ (AHTPO11 11% OFF) */}
@@ -3314,17 +3401,29 @@ export default function App() {
                         />
                       </div>
 
-                      <div className="flex flex-col sm:flex-row gap-3">
+                      <div className="flex flex-wrap gap-2.5">
                         <PartnerLinkButton 
-                          href={AFFILIATE_LINKS.airalo} 
-                          label={isBn ? `${activeVisa.country}-এর জন্য লোকাল eSIM নিন` : `Get a local eSIM for ${activeVisa.country}`} 
+                          href={AFFILIATE_LINKS.ekta} 
+                          label={isBn ? `${activeVisa.country} ভিসা ইনস্যুরেন্স PDF ($0.99/দিন)` : `Get ${activeVisa.country} Visa Insurance PDF (EKTA)`}
+                          variant="dark"
                         />
                         <PartnerLinkButton 
-                          href={AFFILIATE_LINKS.kiwitaxi} 
-                          label={isBn ? "Airport Transfer বুক করুন" : "Book airport transfer"} 
+                          href={AFFILIATE_LINKS.yesim} 
+                          label={isBn ? `${activeVisa.country} Yesim eSIM অ্যাপ` : `Get Yesim eSIM (${activeVisa.country})`} 
+                        />
+                        <PartnerLinkButton 
+                          href={AFFILIATE_LINKS.airalo} 
+                          label={isBn ? `${activeVisa.country} Airalo eSIM` : `Compare Airalo eSIM`} 
+                        />
+                        <PartnerLinkButton 
+                          href={AFFILIATE_LINKS.getTransfer} 
+                          label={isBn ? "Airport Transfer (GetTransfer)" : "Book Airport Transfer (GetTransfer)"} 
                         />
                       </div>
                     </div>
+
+                    {/* 🛡️ Embassy Visa Travel Medical Insurance Callout (EKTA + Yesim) */}
+                    <EktaInsuranceCallout countryName={activeVisa.country} lang={lang} />
 
                     {/* 📶 Stay Connected widget block */}
                     <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 animate-fade-in">
@@ -5032,7 +5131,7 @@ export default function App() {
 
                       {/* Full Long-Form Verified Guide Content with Dark H2 (24px–26px), Dark H3 (19px–21px) & 16px Body */}
                       <div className="max-w-none text-slate-800 leading-[1.8] space-y-6 text-[16px] sm:text-[17px] font-sans">
-                        {activePost.content.split("\n\n").map((block, bIdx) => {
+                        {sanitizeExpiredPromoText(activePost.content).split("\n\n").map((block, bIdx) => {
                           const trimmed = block.trim();
                           if (!trimmed) return null;
 
@@ -5217,13 +5316,21 @@ export default function App() {
                         })}
                       </div>
 
+                      {/* Contextual Luggage Storage Offer Callout (Radical Storage on matching travel guides) */}
+                      <RadicalStorageContextualCallout slug={activePost.slug} lang={lang} />
+
+                      {/* Contextual Multi-Partner Callout (EKTA Insurance, Yesim eSIM, Kiwi.com Multi-City, GetTransfer Vans & Go City Passes) */}
+                      <MultiPartnerBlogCallout slug={activePost.slug} lang={lang} />
+
                       {/* Contextual Affiliate Widget */}
                       {activePost.affiliateCTA && (
                         <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-3 text-left">
                           <h3 className="text-xs font-bold text-brand-navy">
-                            {activePost.affiliateCTA.headline}
+                            {sanitizeExpiredPromoText(activePost.affiliateCTA.headline)}
                           </h3>
-                          <p className="text-xs text-slate-600">{activePost.affiliateCTA.body}</p>
+                          <p className="text-xs text-slate-600">
+                            {sanitizeExpiredPromoText(activePost.affiliateCTA.body)}
+                          </p>
                           {activePost.affiliateCTA.provider === "klook" ? (
                             <KlookActivitiesWidget />
                           ) : activePost.affiliateCTA.provider === "kiwitaxi" ? (
@@ -6229,13 +6336,29 @@ export default function App() {
               {isBn ? "ট্রাভেল সার্ভিস পার্টনার" : "Travel Services"}
             </span>
             <ul className="space-y-1 text-xs">
-              <li><a href={AFFILIATE_LINKS.tiqets} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Europe, UK & USA Passes (Tiqets)</a></li>
-              <li><a href={AFFILIATE_LINKS.klook} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Asia & Dubai Tours (Klook)</a></li>
-              <li><a href={AFFILIATE_LINKS.airhelp} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Flight Delay Compensation (AirHelp · Code AHTPO11)</a></li>
-              <li><a href={AFFILIATE_LINKS.welcomePickups} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Welcome Pickups (Meet & Greet)</a></li>
-              <li><a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Kiwitaxi Airport Transfers</a></li>
-              <li><a href={AFFILIATE_LINKS.qeeq} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Car Rental (QEEQ)</a></li>
-              <li><a href={AFFILIATE_LINKS.airalo} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Local Travel eSIM (Airalo)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.tiqets)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Europe, UK &amp; USA Passes (Tiqets)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">All-Inclusive City Passes (Go City)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.klook)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Asia &amp; Dubai Tours (Klook)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.ekta)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Schengen &amp; Visa Travel Insurance (EKTA)</a></li>
+              <li>
+                <a
+                  href={resolvePartnerUrl(AFFILIATE_LINKS.airhelp)}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="hover:text-white hover:underline"
+                >
+                  {isPromoActive(AIRHELP_PROMO.expiresAt)
+                    ? `Flight Delay Compensation (AirHelp · Code ${AIRHELP_PROMO.code})`
+                    : "Flight Delay Compensation (AirHelp · Up to €600)"}
+                </a>
+              </li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.getTransfer)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Intercity Vans &amp; Transfers (GetTransfer)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.welcomePickups)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Welcome Pickups (Meet &amp; Greet)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.kiwitaxi)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Kiwitaxi Airport Transfers</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.yesim)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Yesim Travel eSIM (App &amp; Web)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.airalo)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Local Travel eSIM (Airalo)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.kiwi)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Multi-City Flights (Kiwi.com)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.qeeq)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Car Rental (QEEQ)</a></li>
             </ul>
           </div>
 
