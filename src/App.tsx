@@ -62,15 +62,7 @@ import {
   collectionPageSchema,
 } from "./hooks/useSeoMeta";
 import { Language, translations } from "./translations";
-import {
-  getLocalizedBlogs,
-  getLocalizedFlights,
-  getLocalizedHotels,
-  getLocalizedVisas,
-  getLocalizedCosts,
-  getLocalizedHajjFaqs,
-  getFeaturedGrowthTopics,
-} from "./data/bengaliContent";
+import type * as BengaliContentModule from "./data/bengaliContent";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
@@ -78,6 +70,45 @@ import { getSeoCopy } from "./utils/seoCopy";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { getBlogImageAltText, getResponsiveImageProps } from "./utils/imageAssets";
 import { getRelatedBlogPosts } from "./utils/blogLinks";
+
+const ENGLISH_FEATURED_GROWTH_TOPICS = [
+  {
+    id: "trend-umrah-hajj",
+    category: "Religious Travel · 8 min",
+    searchQuery: "“DIY Umrah cost & Nusuk guide Bangladesh”",
+    title: "Umrah & Hajj Preparation Guide from Bangladesh (2026 Official Rules & BDT Cost)",
+    excerpt:
+      "Official Hajj registration (hajj.gov.bd) vs. DIY Umrah planning, 3 verified Umrah visa pathways, Nusuk Rawdah permits, Haramain bullet train fares, and 10-day BDT budgets.",
+    slug: "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+  },
+  {
+    id: "trend-endorsement",
+    category: "Banking & FX · 7 min",
+    searchQuery: "“How to get dual-currency card endorsement”",
+    title: "How to Get Dual-Currency Card Endorsement (2026 Passport Dollar Quota Guide)",
+    excerpt:
+      "Step-by-step guide to the $12,000 annual passport endorsement quota, RFCD vs. Travel Quota cards (EBL, City Bank, BRAC), 3D-Secure activation, and avoiding 5% DCC fees.",
+    slug: "dual-currency-card-endorsement-bangladesh",
+  },
+  {
+    id: "trend-family-budget",
+    category: "Family & Budget · 7 min",
+    searchQuery: "“Top budget-friendly family destinations from Dhaka”",
+    title: "Top 6 Budget-Friendly Family Destinations from Dhaka (Ranked by 5-Day BDT Cost)",
+    excerpt:
+      "Compare Nepal (from ৳42k), Malaysia (from ৳68k), Thailand, Maldives Local Islands, Singapore, and Dubai by total family BDT cost, visa speed, and Halal dining.",
+    slug: "top-budget-family-destinations-from-dhaka",
+  },
+  {
+    id: "trend-dac-immigration",
+    category: "Outbound Rules · 6 min",
+    searchQuery: "“Dhaka airport immigration documents checklist”",
+    title: "Dhaka Airport (DAC) Outbound Immigration Checklist: NOC, GO & First-Time Rules",
+    excerpt:
+      "Exact document folder checklist to clear Hazrat Shahjalal Airport emigration in under 2 minutes for job holders (NOC), govt staff (GO), business owners, and fresh passports.",
+    slug: "dhaka-airport-outbound-immigration-checklist-noc-go",
+  },
+];
 
 // Non-critical route & modal components loaded on demand to reduce initial JS parse/compile cost
 const UmrahLandingPage = React.lazy(() =>
@@ -541,6 +572,8 @@ export default function App() {
     }
   };
 
+  const [bnContent, setBnContent] = useState<typeof BengaliContentModule | null>(null);
+
   // The document language is baked into index.html as lang="en", but the UI can
   // switch to Bengali entirely client-side. Without this, <html lang> keeps
   // claiming English while Bengali text is on screen, so screen readers apply
@@ -549,17 +582,21 @@ export default function App() {
     if (typeof document !== "undefined") {
       document.documentElement.lang = lang === "bn" ? "bn-BD" : "en-BD";
     }
-  }, [lang]);
+    if (lang === "bn" && !bnContent) {
+      import("./data/bengaliContent").then((mod) => setBnContent(mod));
+    }
+  }, [lang, bnContent]);
 
   const t = translations[lang];
   const isBn = lang === "bn";
-  const localizedBlogs = getLocalizedBlogs(lang);
-  const localizedFlights = getLocalizedFlights(lang);
-  const localizedHotels = getLocalizedHotels(lang);
-  const localizedVisas = getLocalizedVisas(lang);
-  const localizedCosts = getLocalizedCosts(lang);
-  const localizedHajjFaqs = getLocalizedHajjFaqs(lang);
-  const featuredGrowthTopics = getFeaturedGrowthTopics(lang);
+  const localizedBlogs = isBn && bnContent ? bnContent.getLocalizedBlogs(lang) : BLOG_DATA;
+  const localizedFlights = isBn && bnContent ? bnContent.getLocalizedFlights(lang) : FLIGHTS_DATA;
+  const localizedHotels = isBn && bnContent ? bnContent.getLocalizedHotels(lang) : HOTELS_DATA;
+  const localizedVisas = isBn && bnContent ? bnContent.getLocalizedVisas(lang) : VISA_DATA;
+  const localizedCosts = isBn && bnContent ? bnContent.getLocalizedCosts(lang) : TRIP_COSTS_DATA;
+  const localizedHajjFaqs = isBn && bnContent ? bnContent.getLocalizedHajjFaqs(lang) : HAJJ_UMRAH_FAQS;
+  const featuredGrowthTopics =
+    isBn && bnContent ? bnContent.getFeaturedGrowthTopics(lang) : ENGLISH_FEATURED_GROWTH_TOPICS;
   const [isPriceAlertOpen, setIsPriceAlertOpen] = useState(false);
   const [alertDestination, setAlertDestination] = useState("Bangkok (BKK)");
 
@@ -733,7 +770,16 @@ export default function App() {
         answer:
           "Nepal (from BDT 42,000 per person with free Visa on Arrival), Malaysia (from BDT 68,000 with 4-day online e-Visa and universal Halal dining), Thailand, and the Maldives local islands (Maafushi and Hulhumalé) are the top budget-friendly family destinations from Dhaka.",
       },
-      ...HAJJ_UMRAH_FAQS.slice(0, 2),
+      {
+        question: "Which countries can Bangladeshi passport holders visit without a prior visa?",
+        answer:
+          "Nepal, the Maldives, Sri Lanka (via online ETA), Bhutan and Indonesia issue Visa on Arrival or free entry to Bangladeshi passport holders, so no embassy appointment is needed before departure from Dhaka. Nepal and the Maldives are the cheapest of these to reach from Dhaka (DAC).",
+      },
+      {
+        question: "Is URAL a travel agency that sells tickets?",
+        answer:
+          "No. URAL is an independent outbound travel intelligence desk for Bangladeshi travellers: it publishes flight price guidance in BDT, official visa checklists, itineraries and realistic trip-cost breakdowns, then links out to the airline, hotel or visa portal so you book directly at the source price.",
+      },
     ]);
     seoBreadcrumbs = [
       { name: "Home", url: "https://ural-travel.pages.dev/" }
@@ -1066,16 +1112,7 @@ export default function App() {
         inLanguage: pageLanguage,
       });
 
-      // Only emit FAQPage when the article is in the Hajj & Umrah or Ziyarah & Stopovers cluster where those FAQs are visibly rendered
-      if (activePost.category === "Hajj & Umrah" || activePost.category === "Ziyarah & Stopovers") {
-        const faqSchema = generateFAQSchema(HAJJ_UMRAH_FAQS, {
-          url: postUrl,
-          name: activePost.title,
-        });
-        seoSchema = [articleNode, faqSchema];
-      } else {
-        seoSchema = [articleNode];
-      }
+      seoSchema = [articleNode];
 
       seoBreadcrumbs = [
         { name: "Home", url: "https://ural-travel.pages.dev/" },

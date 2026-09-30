@@ -21,7 +21,7 @@ import {
   buildSchemaGraph,
   toIsoDate,
 } from "../src/utils/schema";
-import { getSeoCopy } from "../src/utils/seoCopy";
+import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
 import {
   HAJJ_UMRAH_FAQS,
@@ -1068,6 +1068,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h2>Local transport options</h2>
           <ul>${d.localTransport.map((option) => `<li>${escapeHtml(option)}</li>`).join("")}</ul>
           <p><strong>Indicative local budget:</strong> ${escapeHtml(d.budgetBdt)}. Review international flights and current entry rules separately.</p>
+          ${renderLandingFaqs(`${d.id}-faqs`, `${d.country} itinerary questions for Bangladeshi travelers`, dFaq)}
         </article>
       `,
     });
@@ -1143,6 +1144,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h2>Budget planning tips</h2>
           <ul>${c.moneyHacks.map((tip) => `<li>${escapeHtml(tip)}</li>`).join("")}</ul>
           <p>These figures are planning estimates, not live quotes. Check current fares, hotel rates and exchange rates before booking.</p>
+          ${renderLandingFaqs(`${c.id}-faqs`, `${c.country} trip cost questions for Bangladeshi travelers`, cFaq)}
         </article>
       `,
     });
@@ -1218,14 +1220,14 @@ function buildAllRoutes(): PrerenderRoute[] {
       <article>
         <h1>Bangladeshi Traveler Utility Tools &amp; Flight Delay Compensation (€600)</h1>
         <p>Convert BDT to USD, SAR, NPR, THB, MYR, SGD, and AED, evaluate tourist visa approval readiness, and claim up to €600 ($650) for delayed or cancelled flights via AirHelp.</p>
+        ${renderLandingFaqs("tools-hub-faqs", "Travel planning tool questions for Bangladeshi travelers", toolsFaq)}
       </article>
     `,
   });
 
   // 10. Sitemap & Pre-Departure Hub (/sitemap)
-  const sitemapFaq = stripContext(
-    getPreDepartureFaqSchema({ url: `${BASE_URL}/sitemap` })
-  );
+  const sitemapFaqSchema = getPreDepartureFaqSchema({ url: `${BASE_URL}/sitemap` });
+  const sitemapFaq = stripContext(sitemapFaqSchema);
   sitemapFaq["@id"] = `${BASE_URL}/sitemap#faq`;
   sitemapFaq["mainEntityOfPage"] = { "@id": `${BASE_URL}/sitemap#webpage` };
 
@@ -1245,6 +1247,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       <article>
         <h1>Dhaka Airport (DAC) Pre-Departure Readiness Checklist &amp; Complete 83-Page Sitemap</h1>
         <p>Interactive pre-flight checklist for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC), cabin &amp; 5L Zamzam baggage rules, Bangladesh Embassy emergency helplines abroad, and direct links to all 41 travel guides.</p>
+        ${renderLandingFaqs("sitemap-predeparture-faqs", "Dhaka Airport pre-departure and baggage questions", sitemapFaqSchema)}
       </article>
     `,
   });
@@ -1277,6 +1280,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       <article>
         <h1>Contact URAL — Dhaka Outbound Flight, Umrah &amp; Visa Desk (+8801784385335)</h1>
         <p>Connect directly with our Dhaka support desk via WhatsApp at +8801784385335 for BDT flight &amp; hotel booking, Umrah e-Visa processing, and tourist visa document verification.</p>
+        ${renderLandingFaqs("contact-desk-faqs", "Questions about URAL travel support and BDT booking", contactFaq)}
       </article>
     `,
   });
@@ -1346,18 +1350,6 @@ function buildAllRoutes(): PrerenderRoute[] {
         imageUrl: postImgUrl,
       }),
     ];
-
-    if (post.category === "Hajj & Umrah" || post.category === "Ziyarah & Stopovers") {
-      const faqNode = stripContext(
-        generateFAQSchema(HAJJ_UMRAH_FAQS, {
-          url: postUrl,
-          name: post.title,
-        })
-      );
-      faqNode["@id"] = `${postUrl}#faq`;
-      faqNode["mainEntityOfPage"] = { "@id": `${postUrl}#webpage` };
-      extraNodes.push(faqNode);
-    }
 
     const planLinks: { text: string; href: string }[] = [];
     const relatedGuideLinks: { text: string; href: string }[] = [];
@@ -1433,6 +1425,12 @@ function applySharedSeoCopy(routes: PrerenderRoute[]) {
     const seoCopy = getSeoCopy(route.routePath, route.title, route.description);
     route.title = seoCopy.title;
     route.description = seoCopy.description;
+    // Strip trailing "| URAL" / "| URAL Blog" brand suffixes from prerendered H1s
+    // so static HTML matches the clean React detail-page headings.
+    route.bodyHtml = route.bodyHtml.replace(
+      /<h1([^>]*)>([\s\S]*?)<\/h1>/i,
+      (_match, attrs, inner) => `<h1${attrs}>${stripBrandSuffix(inner)}</h1>`
+    );
 
     for (const node of route.extraGraphNodes) {
       const type = node["@type"];

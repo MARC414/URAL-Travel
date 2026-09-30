@@ -4,8 +4,8 @@ export interface SeoCopy {
 }
 
 /**
- * First-pass search copy for priority URLs. These are intent hypotheses based on
- * the site's existing content, not claims about measured search volume or rank.
+ * First-pass search copy for all 83 canonical URLs. These are intent hypotheses
+ * based on the site's existing content, not claims about measured search volume or rank.
  */
 export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/": {
@@ -28,10 +28,65 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "Compare Dhaka–Kathmandu flight options, journey times and BDT fare guidance. See practical booking tips for Bangladeshi travelers planning a Nepal trip.",
   },
+  "/flights/dhaka-bangkok": {
+    title: "Dhaka to Bangkok Flights: Fares, Airlines & Tips | URAL",
+    description:
+      "Compare Dhaka to Bangkok flights across BKK and DMK airports, direct airlines, 2h 30m flight time and BDT roundtrip fare guidance for Bangladesh travelers.",
+  },
+  "/flights/dhaka-kuala-lumpur": {
+    title: "Dhaka to Kuala Lumpur Flights: Price & Airlines | URAL",
+    description:
+      "Compare direct Dhaka to Kuala Lumpur (KUL) flights, 3h 50m duration, budget vs full-service airlines and BDT roundtrip fare ranges from Bangladesh.",
+  },
+  "/flights/dhaka-dubai": {
+    title: "Dhaka to Dubai Flights: BDT Fares & Airlines | URAL",
+    description:
+      "Compare direct and connecting Dhaka to Dubai (DXB) flights, 4h 45m flight time, operating airlines and BDT roundtrip fare guidance for Bangladeshi travelers.",
+  },
+  "/flights/dhaka-singapore": {
+    title: "Dhaka to Singapore Flights: Airlines & BDT Fares | URAL",
+    description:
+      "Compare direct Dhaka to Singapore (SIN) flights, 4h 15m journey time, Biman, US-Bangla and Singapore Airlines options, and BDT roundtrip fare guidance.",
+  },
+  "/flights/dhaka-maldives": {
+    title: "Dhaka to Maldives Flights: Direct & Transit Fares | URAL",
+    description:
+      "Compare Dhaka to Malé (MLE) direct and Colombo-transit flights, journey times, operating airlines and BDT fare guidance for Bangladeshi travelers.",
+  },
   "/hotels": {
     title: "Hotel Area Guides for Bangladesh Travelers | URAL",
     description:
       "Explore hotel neighborhoods and stay-planning guides for popular destinations, with practical notes on location, transport and BDT budgets.",
+  },
+  "/hotels/kathmandu-hotels": {
+    title: "Where to Stay in Kathmandu: Thamel & Area Guide | URAL",
+    description:
+      "Compare Kathmandu hotel areas for Bangladeshi travelers, including Thamel for budget stays, Lazimpat for quieter comfort and Boudha, with BDT rate guidance.",
+  },
+  "/hotels/bangkok-hotels": {
+    title: "Where to Stay in Bangkok: Best Areas & BDT Guide | URAL",
+    description:
+      "Compare Bangkok hotel neighborhoods for Bangladeshi travelers, including Pratunam for shopping, Sukhumvit near Bumrungrad and Riverside, with BDT rates.",
+  },
+  "/hotels/kuala-lumpur-hotels": {
+    title: "Where to Stay in Kuala Lumpur: KLCC & Bukit Bintang | URAL",
+    description:
+      "Compare Kuala Lumpur hotel areas for Bangladeshi families, including Bukit Bintang, KLCC serviced suites and KL Sentral transit hubs, with BDT rate ranges.",
+  },
+  "/hotels/dubai-hotels": {
+    title: "Where to Stay in Dubai: Deira, Downtown & Marina | URAL",
+    description:
+      "Compare Dubai hotel neighborhoods for Bangladeshi travelers: Deira and Bur Dubai for budget metro access and halal dining, or Downtown and Marina for luxury.",
+  },
+  "/hotels/singapore-hotels": {
+    title: "Where to Stay in Singapore: Little India & Bugis | URAL",
+    description:
+      "Compare Singapore hotel areas for Bangladeshi travelers, including Little India near Mustafa Centre, Bugis and Marina Bay, with MRT and BDT budget notes.",
+  },
+  "/hotels/maldives-hotels": {
+    title: "Where to Stay in Maldives: Maafushi & Hulhumalé | URAL",
+    description:
+      "Compare affordable Maldives stays on Maafushi and Hulhumalé local islands versus private resorts, with speedboat transfer and BDT nightly rate guidance.",
   },
   "/visa": {
     title: "Visa Guides for Bangladeshi Citizens | URAL",
@@ -52,6 +107,21 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     title: "Malaysia Visa from Bangladesh: eVisa & MDAC | URAL",
     description:
       "Explore Malaysia visa guidance for Bangladeshi travelers, including eVisa application planning, document checklist and Malaysia Digital Arrival Card basics.",
+  },
+  "/visa/dubai-visa": {
+    title: "Dubai & UAE Visa from Bangladesh: Tourist eVisa | URAL",
+    description:
+      "Review UAE and Dubai tourist visa planning for Bangladeshi passport holders, including authorized sponsors, required documents, BDT fees and processing times.",
+  },
+  "/visa/singapore-visa": {
+    title: "Singapore Visa from Bangladesh: Documents & Process | URAL",
+    description:
+      "Review Singapore tourist visa requirements for Bangladeshi citizens, including authorized visa agents in Dhaka, Form V39A LOI rules, SG Arrival Card and fees.",
+  },
+  "/visa/maldives-visa": {
+    title: "Maldives Visa for Bangladeshi Citizens: VOA & IMUGA | URAL",
+    description:
+      "Review Maldives tourist entry rules for Bangladeshi passport holders, including visa on arrival requirements, hotel voucher checks and the free IMUGA form.",
   },
   "/destinations": {
     title: "Trip Itineraries from Bangladesh | URAL",
@@ -97,6 +167,31 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     title: "Nepal Trip Cost from Bangladesh: BDT Budget | URAL",
     description:
       "Estimate a Nepal trip budget from Bangladesh in BDT. Review flight, lodging, transport and daily-spend categories before building your itinerary.",
+  },
+  "/costs/thailand-costs": {
+    title: "Thailand Trip Cost from Bangladesh: BDT Budget | URAL",
+    description:
+      "Estimate a 5-day Thailand trip cost from Bangladesh in BDT, covering Dhaka–Bangkok flights, e-Visa fees, hotels, halal meals, transport and sightseeing.",
+  },
+  "/costs/malaysia-costs": {
+    title: "Malaysia Trip Cost from Bangladesh: BDT Budget | URAL",
+    description:
+      "Estimate a 5-day Malaysia trip budget from Bangladesh in BDT, with low, mid-range and luxury estimates for flights, Kuala Lumpur hotels, food and transit.",
+  },
+  "/costs/dubai-costs": {
+    title: "Dubai Trip Cost from Bangladesh: 5-Day BDT Budget | URAL",
+    description:
+      "Estimate a 5-day Dubai trip cost from Bangladesh in BDT, including Dhaka–DXB flights, UAE tourist visa fees, Deira or Downtown hotels, metro and activities.",
+  },
+  "/costs/singapore-costs": {
+    title: "Singapore Trip Cost from Bangladesh: BDT Budget | URAL",
+    description:
+      "Estimate a 4-day Singapore trip budget from Bangladesh in BDT, covering flights from Dhaka, visa fees, Little India or Bugis hotels, MRT and Sentosa tickets.",
+  },
+  "/costs/maldives-costs": {
+    title: "Maldives Trip Cost from Bangladesh: BDT Budget | URAL",
+    description:
+      "Estimate a 5-day Maldives trip cost from Bangladesh in BDT, comparing budget Maafushi guesthouses and speedboat transfers with private island resort stays.",
   },
   "/experiences": {
     title: "Attraction & Activity Guides for Bangladesh Travelers | URAL",
@@ -188,6 +283,146 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "Compare airlines serving Dhaka by destination, route and baggage-policy considerations. Check the operating airline and your fare rules before booking.",
   },
+  "/blog/nepal-vs-thailand-first-trip": {
+    title: "Nepal vs Thailand: Best First Trip from Bangladesh | URAL",
+    description:
+      "Compare Nepal and Thailand for a first international trip from Bangladesh across visa rules, BDT flight and hotel costs, halal food and family comfort.",
+  },
+  "/blog/hotel-savings-guide-bangkok-kl-dubai": {
+    title: "How to Save on Hotels in Bangkok, KL & Dubai | URAL",
+    description:
+      "Cut hotel costs by 30–40% in Bangkok, Kuala Lumpur and Dubai with transit-friendly neighborhood picks, serviced apartments and BDT booking tips.",
+  },
+  "/blog/halal-food-guide-bangkok-bangladesh": {
+    title: "Halal Food Guide in Bangkok for Bangladeshis | URAL",
+    description:
+      "Find certified halal restaurants, Bangladeshi and Indian kitchens, mall food courts and prayer spaces across Pratunam, Sukhumvit and Siam in Bangkok.",
+  },
+  "/blog/maldives-budget-trip-bangladesh-maafushi": {
+    title: "Maldives Budget Trip from Bangladesh: Maafushi | URAL",
+    description:
+      "Plan a Maldives trip from Dhaka under BDT 75,000 by staying on Maafushi local island, using public speedboats and booking affordable excursion packages.",
+  },
+  "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": {
+    title: "Makkah & Madinah Hotel Zones & Haramain Train | URAL",
+    description:
+      "Compare flat, wheelchair-accessible Makkah and Madinah hotel streets near the Haram and learn how to book Haramain High-Speed Bullet Train tickets.",
+  },
+  "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
+    title: "Umrah with Elderly Parents: Wheelchair & Hotel Guide | URAL",
+    description:
+      "Plan a smooth Umrah from Bangladesh with elderly parents: airline wheelchair requests, flat-street Makkah and Madinah hotels, electric carts and medical tips.",
+  },
+  "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": {
+    title: "96-Hour Saudi Stopover Visa for Bangladeshis | URAL",
+    description:
+      "Learn how Bangladeshi travelers flying Saudia or Flynas can book a 96-hour Saudi Stopover Visa to perform Umrah and visit Madinah during transit.",
+  },
+  "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": {
+    title: "Nusuk App & Saudi Visa Bio Guide for Bangladesh | URAL",
+    description:
+      "Step-by-step guide for Bangladeshi pilgrims to complete Saudi Visa Bio fingerprint enrollment and book Umrah and Rawdah Shareef permits on the Nusuk app.",
+  },
+  "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": {
+    title: "Umrah Rules for Bangladeshi Women: Visa & Gates | URAL",
+    description:
+      "Review Saudi Umrah visa rules for Bangladeshi women, Madinah Ladies' Prayer Gates 25–29 for Rawdah access, abaya guidelines and travel safety tips.",
+  },
+  "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": {
+    title: "Dhaka to Jeddah & Madinah Open-Jaw Flight Guide | URAL",
+    description:
+      "Save 5–6 hours of highway travel on Umrah by booking a Multi-City (Open-Jaw) ticket into Jeddah and out of Madinah on Biman, Saudia or Gulf carriers.",
+  },
+  "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget": {
+    title: "Ramadan Umrah & I'tikaf Guide from Bangladesh | URAL",
+    description:
+      "Plan Ramadan Umrah and Last 10 Days I'tikaf from Bangladesh with early booking timelines, shuttle hotel savings, Suhoor/Iftar tips and BDT budgets.",
+  },
+  "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": {
+    title: "Wearing Ihram from Dhaka vs Transit: Miqat Rules | URAL",
+    description:
+      "Know exactly where to wear Ihram and make Niyyah when flying direct from Dhaka to Jeddah versus connecting via Dubai, Doha, Abu Dhabi, Muscat or Madinah.",
+  },
+  "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": {
+    title: "Zamzam, Dates & Gold Customs Rules: Jeddah & Dhaka | URAL",
+    description:
+      "Check official airline and customs rules for bringing 5L Zamzam water, Madinah Ajwa dates and gold jewelry from Jeddah or Madinah back to Dhaka Airport.",
+  },
+  "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals": {
+    title: "Bangladeshi Food Guide in Makkah & Madinah | URAL",
+    description:
+      "Find familiar Bangladeshi, Pakistani and Indian halal meals near Masjid al-Haram and Masjid an-Nabawi, with daily food budgets in SAR and BDT.",
+  },
+  "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": {
+    title: "Makkah, Madinah, Badr & Taif Ziyarah Taxi Guide | URAL",
+    description:
+      "Plan historical Ziyarah tours in Makkah, Madinah, Badr and Taif with landmark checklists, visiting hours and private family taxi fares in SAR and BDT.",
+  },
+  "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide": {
+    title: "Umrah + Dubai 10-Day Combo Trip from Dhaka | URAL",
+    description:
+      "Combine Makkah, Madinah and Dubai on one multi-city itinerary from Dhaka, with Saudi and UAE visa sequencing, flight routing and BDT cost breakdowns.",
+  },
+  "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide": {
+    title: "Abu Dhabi Sheikh Zayed Mosque Day Trip from Dubai | URAL",
+    description:
+      "Plan an Abu Dhabi day trip from Dubai for Bangladeshi families: Sheikh Zayed Grand Mosque dress code, free entry registration, bus vs taxi costs in BDT.",
+  },
+  "/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide": {
+    title: "Malaysia Islamic Heritage & Putrajaya Family Guide | URAL",
+    description:
+      "Explore Putrajaya Pink Mosque, the Islamic Arts Museum and halal family attractions in Kuala Lumpur with MRT transit directions and BDT costs.",
+  },
+  "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide": {
+    title: "Europe, UK & USA Attraction Passes from Bangladesh | URAL",
+    description:
+      "Book skip-the-line museum and landmark passes in Paris, London, Rome and New York, plus learn how US, UK and Schengen visa holders can do Stopover Umrah.",
+  },
+  "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah": {
+    title: "Islamic Dual-Currency Cards in Bangladesh for Umrah | URAL",
+    description:
+      "Compare Shariah-compliant Islamic dual-currency debit and pre-paid cards in Bangladesh for booking Nusuk, Haramain trains and Makkah hotels without riba.",
+  },
+  "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": {
+    title: "RFCD Account vs Travel Quota in Bangladesh | URAL",
+    description:
+      "Understand the difference between Bangladesh Bank's $12,000 annual travel quota and RFCD accounts, and how to clear per-transaction online payment limits.",
+  },
+  "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": {
+    title: "Book Flights & Makkah Hotels in BDT Without a Card | URAL",
+    description:
+      "Learn how Bangladeshi travelers without a dual-currency card can book international flights, Makkah hotels and transfers in BDT via bKash or bank transfer.",
+  },
+  "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": {
+    title: "Cash SAR/USD vs Dual-Currency Card Abroad | URAL",
+    description:
+      "Compare carrying USD or SAR cash versus swiping a Bangladeshi dual-currency card in Makkah, Bangkok and KL, and avoid 5% Dynamic Currency Conversion fees.",
+  },
+  "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia": {
+    title: "Fresh Bangladeshi Passport Travel History Guide | URAL",
+    description:
+      "Build credible international travel history on a blank Bangladeshi e-Passport starting with visa-on-arrival trips to Nepal and Maldives before e-Visa routes.",
+  },
+  "/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide": {
+    title: "Singapore 4-Day Budget Itinerary Under BDT 85,000 | URAL",
+    description:
+      "Follow a 4-day Singapore budget itinerary from Bangladesh using SimplyGo MRT contactless cards, Little India and Arab Street halal dining, and Sentosa tips.",
+  },
+  "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh": {
+    title: "Bumrungrad & Bangkok Hospital Guide from Bangladesh | URAL",
+    description:
+      "Plan a Bangkok medical checkup from Bangladesh: booking Bumrungrad or Bangkok Hospital appointments, free Bengali interpreters, visas and BDT package costs.",
+  },
+  "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": {
+    title: "Travel eSIM & Insurance Guide from Bangladesh | URAL",
+    description:
+      "Compare Airalo travel eSIMs with Bangladeshi roaming and review travel medical insurance options for Umrah, Southeast Asia and Schengen visa applications.",
+  },
+  "/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost": {
+    title: "Sri Lanka + Maldives 7-Day Combo Tour in BDT | URAL",
+    description:
+      "Combine Colombo, Kandy, Ella and Maafushi Island on one 7-day itinerary from Dhaka, with Sri Lanka ETA, Maldives VOA and a complete BDT budget breakdown.",
+  },
 };
 
 function normalizePath(path: string): string {
@@ -204,11 +439,19 @@ function trimAtWord(text: string, maxLength: number): string {
   return `${clipped.trimEnd()}…`;
 }
 
-function compactTitle(title: string): string {
-  const suffix = " | URAL";
-  const withoutBrand = title
+/**
+ * Removes trailing brand suffixes ("| URAL", "| URAL Travel", "| URAL Travel Blog")
+ * so H1 headings and compact title builders operate on the clean page topic.
+ */
+export function stripBrandSuffix(text: string): string {
+  return text
     .replace(/\s*\|\s*URAL(?:\s+Travel)?(?:\s+Blog)?\s*$/i, "")
     .trim();
+}
+
+function compactTitle(title: string): string {
+  const suffix = " | URAL";
+  const withoutBrand = stripBrandSuffix(title);
   return `${trimAtWord(withoutBrand, 60 - suffix.length)}${suffix}`;
 }
 
