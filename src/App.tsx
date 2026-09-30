@@ -45,6 +45,8 @@ import {
   QeeqCarRentalWidget,
   PartnerLinkButton,
   RadicalStorageContextualCallout,
+  MultiPartnerBlogCallout,
+  EktaInsuranceCallout,
   AFFILIATE_LINKS,
   AIRHELP_PROMO,
   KKDAY_PROMO,
@@ -3019,13 +3021,25 @@ export default function App() {
                     </div>
 
                      {/* Embedded Conversion search form widget */}
-                    <div className="bg-slate-100 p-4 rounded-xl border border-slate-250/60 my-6">
-                      <span className="text-[10px] font-mono font-bold text-brand-navy block mb-2">
+                    <div className="bg-slate-100 p-4 rounded-xl border border-slate-250/60 my-6 space-y-3">
+                      <span className="text-[10px] font-mono font-bold text-brand-navy block">
                         {isBn ? "এই রুটের ফ্লাইট সার্চ করুন" : "Search Flights on This Route"}
                       </span>
                       <TravelpayoutsEmbed
                         defaultDestination={getCountryIata(activeRoute.country)}
                       />
+                      <div className="pt-2 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                        <span className="text-xs text-slate-600">
+                          {isBn
+                            ? "মাল্টি-সিটি, ওপেন-জ বা ভিন্ন এয়ারলাইন্সের কম্বো টিকিট খুঁজছেন?"
+                            : "Looking for Multi-City, Open-Jaw, or Self-Transfer Airline Combos?"}
+                        </span>
+                        <PartnerLinkButton
+                          href={AFFILIATE_LINKS.kiwi}
+                          label={isBn ? "Kiwi.com-এ মাল্টি-সিটি ভাড়া দেখুন" : "Compare Multi-City Fares on Kiwi.com"}
+                          variant="dark"
+                        />
+                      </div>
                     </div>
 
                     {/* 🛡️ AirHelp Flight Delay Compensation & AirHelp+ (AHTPO11 11% OFF) */}
@@ -3387,17 +3401,29 @@ export default function App() {
                         />
                       </div>
 
-                      <div className="flex flex-col sm:flex-row gap-3">
+                      <div className="flex flex-wrap gap-2.5">
                         <PartnerLinkButton 
-                          href={AFFILIATE_LINKS.airalo} 
-                          label={isBn ? `${activeVisa.country}-এর জন্য লোকাল eSIM নিন` : `Get a local eSIM for ${activeVisa.country}`} 
+                          href={AFFILIATE_LINKS.ekta} 
+                          label={isBn ? `${activeVisa.country} ভিসা ইনস্যুরেন্স PDF ($0.99/দিন)` : `Get ${activeVisa.country} Visa Insurance PDF (EKTA)`}
+                          variant="dark"
                         />
                         <PartnerLinkButton 
-                          href={AFFILIATE_LINKS.kiwitaxi} 
-                          label={isBn ? "Airport Transfer বুক করুন" : "Book airport transfer"} 
+                          href={AFFILIATE_LINKS.yesim} 
+                          label={isBn ? `${activeVisa.country} Yesim eSIM অ্যাপ` : `Get Yesim eSIM (${activeVisa.country})`} 
+                        />
+                        <PartnerLinkButton 
+                          href={AFFILIATE_LINKS.airalo} 
+                          label={isBn ? `${activeVisa.country} Airalo eSIM` : `Compare Airalo eSIM`} 
+                        />
+                        <PartnerLinkButton 
+                          href={AFFILIATE_LINKS.getTransfer} 
+                          label={isBn ? "Airport Transfer (GetTransfer)" : "Book Airport Transfer (GetTransfer)"} 
                         />
                       </div>
                     </div>
+
+                    {/* 🛡️ Embassy Visa Travel Medical Insurance Callout (EKTA + Yesim) */}
+                    <EktaInsuranceCallout countryName={activeVisa.country} lang={lang} />
 
                     {/* 📶 Stay Connected widget block */}
                     <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 animate-fade-in">
@@ -5293,6 +5319,9 @@ export default function App() {
                       {/* Contextual Luggage Storage Offer Callout (Radical Storage on matching travel guides) */}
                       <RadicalStorageContextualCallout slug={activePost.slug} lang={lang} />
 
+                      {/* Contextual Multi-Partner Callout (EKTA Insurance, Yesim eSIM, Kiwi.com Multi-City, GetTransfer Vans & Go City Passes) */}
+                      <MultiPartnerBlogCallout slug={activePost.slug} lang={lang} />
+
                       {/* Contextual Affiliate Widget */}
                       {activePost.affiliateCTA && (
                         <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-3 text-left">
@@ -6307,8 +6336,10 @@ export default function App() {
               {isBn ? "ট্রাভেল সার্ভিস পার্টনার" : "Travel Services"}
             </span>
             <ul className="space-y-1 text-xs">
-              <li><a href={AFFILIATE_LINKS.tiqets} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Europe, UK & USA Passes (Tiqets)</a></li>
-              <li><a href={AFFILIATE_LINKS.klook} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Asia & Dubai Tours (Klook)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.tiqets)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Europe, UK &amp; USA Passes (Tiqets)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">All-Inclusive City Passes (Go City)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.klook)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Asia &amp; Dubai Tours (Klook)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.ekta)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Schengen &amp; Visa Travel Insurance (EKTA)</a></li>
               <li>
                 <a
                   href={resolvePartnerUrl(AFFILIATE_LINKS.airhelp)}
@@ -6321,10 +6352,13 @@ export default function App() {
                     : "Flight Delay Compensation (AirHelp · Up to €600)"}
                 </a>
               </li>
-              <li><a href={AFFILIATE_LINKS.welcomePickups} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Welcome Pickups (Meet & Greet)</a></li>
-              <li><a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Kiwitaxi Airport Transfers</a></li>
-              <li><a href={AFFILIATE_LINKS.qeeq} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Car Rental (QEEQ)</a></li>
-              <li><a href={AFFILIATE_LINKS.airalo} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Local Travel eSIM (Airalo)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.getTransfer)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Intercity Vans &amp; Transfers (GetTransfer)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.welcomePickups)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Welcome Pickups (Meet &amp; Greet)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.kiwitaxi)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Kiwitaxi Airport Transfers</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.yesim)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Yesim Travel eSIM (App &amp; Web)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.airalo)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Local Travel eSIM (Airalo)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.kiwi)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Multi-City Flights (Kiwi.com)</a></li>
+              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.qeeq)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Car Rental (QEEQ)</a></li>
             </ul>
           </div>
 

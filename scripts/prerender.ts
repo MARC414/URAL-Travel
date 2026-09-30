@@ -25,6 +25,7 @@ import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
 import {
   RADICAL_STORAGE_BLOG_PLACEMENTS,
+  MULTI_PARTNER_BLOG_PLACEMENTS,
   resolvePartnerUrl,
   sanitizeExpiredPromoText,
   AFFILIATE_LINKS,
@@ -980,6 +981,10 @@ function buildAllRoutes(): PrerenderRoute[] {
           <ol>${v.stepByStep.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
           ${renderVisaRouteContext(v.id)}
           ${renderVisaApplicationGuidance()}
+          <section aria-labelledby="visa-travel-insurance-esim">
+            <h2 id="visa-travel-insurance-esim">${escapeHtml(v.country)} Visa Travel Medical Insurance &amp; eSIM</h2>
+            <p>Download an embassy-compliant <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.ekta))}" target="_blank" rel="noopener noreferrer sponsored">EKTA Travel Medical Insurance English PDF policy (from $0.99/day)</a> for your ${escapeHtml(v.country)} visa checklist, pre-install a <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.yesim))}" target="_blank" rel="noopener noreferrer sponsored">Yesim Travel eSIM (App &amp; Web)</a>, and book private airport pickup via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.getTransfer))}" target="_blank" rel="noopener noreferrer sponsored">GetTransfer.com</a>.</p>
+          </section>
           ${renderVisaOfficialSources(v.id)}
           ${renderLandingFaqs("visa-guide-faqs", `${v.country} visa questions for Bangladeshi travelers`, vFaq)}
         </article>
@@ -1196,7 +1201,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         <p>Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and Kuala Lumpur.</p>
         <section aria-labelledby="luggage-storage-tip">
           <h2 id="luggage-storage-tip">Museum Bag-Ban Rule &amp; Verified Luggage Storage (Paris, London, Rome &amp; NYC)</h2>
-          <p>Major European, UK, and US attractions (Louvre, Eiffel Tower, Colosseum, Vatican, British Museum, and Statue of Liberty) strictly prohibit suitcases and large backpacks inside security. Store your bags for ~€5/day per bag (with €3,000 security guarantee) at verified hotels and shops near major stations via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">Radical Storage luggage storage network</a>.</p>
+          <p>Major European, UK, and US attractions (Louvre, Eiffel Tower, Colosseum, Vatican, British Museum, and Statue of Liberty) strictly prohibit suitcases and large backpacks inside security. Store your bags for ~€5/day per bag (with €3,000 security guarantee) at verified hotels and shops near major stations via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">Radical Storage luggage storage network</a>, or bundle 3 to 10+ city landmarks with <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.goCity))}" target="_blank" rel="noopener noreferrer sponsored">Go City All-Inclusive Passes</a> and <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.ekta))}" target="_blank" rel="noopener noreferrer sponsored">EKTA €30,000 Schengen Travel Insurance</a>.</p>
         </section>
       </article>
     `,
@@ -1400,6 +1405,14 @@ function buildAllRoutes(): PrerenderRoute[] {
     const radicalStorageHtml = radicalPlacement
       ? `<section aria-labelledby="luggage-storage-tip"><h2 id="luggage-storage-tip">${escapeHtml(radicalPlacement.headlineEn)}</h2><p>${escapeHtml(radicalPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(radicalPlacement.anchorTextEn)}</a>${escapeHtml(radicalPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(radicalPlacement.buttonLabelEn)}</a>.</p></section>`
       : "";
+    const multiPlacement = MULTI_PARTNER_BLOG_PLACEMENTS[post.slug];
+    const multiPartnerHtml = multiPlacement
+      ? `<section aria-labelledby="partner-travel-tools"><h2 id="partner-travel-tools">${escapeHtml(multiPlacement.headlineEn)}</h2><p>${escapeHtml(multiPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacement.primaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.anchorTextEn)}</a>${escapeHtml(multiPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacement.primaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.primaryButtonEn)}</a>${
+          multiPlacement.secondaryPartner && multiPlacement.secondaryButtonEn
+            ? ` · <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacement.secondaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.secondaryButtonEn)}</a>`
+            : ""
+        }.</p></section>`
+      : "";
 
     routes.push({
       routePath: `/blog/${post.slug}`,
@@ -1425,6 +1438,7 @@ function buildAllRoutes(): PrerenderRoute[] {
             .map((para) => `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`)
             .join("\n")}
           ${radicalStorageHtml}
+          ${multiPartnerHtml}
           ${planLinksHtml}
           ${relatedGuidesHtml}
         </article>

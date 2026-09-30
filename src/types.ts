@@ -136,5 +136,5 @@ export interface BlogPost {
   readTime: string;
   content: string;
   internalLinks: { text: string; path: string }[];
-  affiliateCTA?: { provider: "aviasales" | "klook" | "kkday" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage"; headline: string; body: string };
+  affiliateCTA?: { provider: "aviasales" | "klook" | "kkday" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage" | "ekta" | "yesim" | "kiwi" | "getTransfer" | "goCity"; headline: string; body: string };
 }

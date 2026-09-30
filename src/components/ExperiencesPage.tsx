@@ -15,6 +15,7 @@ import {
   isPromoActive,
   resolvePartnerUrl,
   RadicalStorageContextualCallout,
+  MultiPartnerBlogCallout,
 } from "./AffiliatePartners";
 import { AirHelpWidget } from "./AirHelpWidget";
 import { KKdayPromoBanner } from "./KKdayPromoBanner";
@@ -852,7 +853,20 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                     </a>
                   )}
                   <a
-                    href={partnerUrl}
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="bg-amber-50 hover:bg-amber-100 text-brand-navy border border-amber-300 font-bold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
+                  >
+                    <span>
+                      {isBn
+                        ? `Go City ${hub.city.split(",")[0]} অল-ইনক্লুসিভ পাস (৫০% ছাড়)`
+                        : `Go City ${hub.city.split(",")[0]} Pass (Save up to 50%)`}
+                    </span>
+                    <ExternalLink size={13} className="text-amber-700" />
+                  </a>
+                  <a
+                    href={resolvePartnerUrl(partnerUrl)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
                     className="bg-brand-navy hover:bg-slate-800 text-white font-semibold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
@@ -1009,6 +1023,12 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
 
       {/* 4B. CONTEXTUAL MUSEUM BAG-RESTRICTION & LUGGAGE STORAGE CALLOUT (RADICAL STORAGE) */}
       <RadicalStorageContextualCallout
+        slug="europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide"
+        lang={lang}
+      />
+
+      {/* 4C. CONTEXTUAL GO CITY ALL-INCLUSIVE PASSES & EKTA SCHENGEN VISA INSURANCE CALLOUT */}
+      <MultiPartnerBlogCallout
         slug="europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide"
         lang={lang}
       />

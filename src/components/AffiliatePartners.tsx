@@ -18,7 +18,12 @@ export const AFFILIATE_LINKS = {
   welcomePickups: WELCOME_PICKUPS_PARTNER_URL,
   airalo: "https://airalo.tpo.li/mV2QXsXK",
   qeeq: "https://qeeq.tpo.li/nooi5oSG",
-  radicalStorage: "https://radicalstorage.tpo.li/7I3EWiUg"
+  radicalStorage: "https://radicalstorage.tpo.li/7I3EWiUg",
+  ekta: "https://ektatraveling.tpo.li/vl11DEG6",
+  yesim: "https://yesim.tpo.li/O8Zvqr73",
+  kiwi: "https://kiwi.tpo.li/9isVGzpF",
+  getTransfer: "https://gettransfer.tpo.li/sekWRAM1",
+  goCity: "https://gocity.tpo.li/rpHETE4N"
 };
 
 export type AffiliatePartnerKey = keyof typeof AFFILIATE_LINKS;
@@ -80,9 +85,9 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     status: "active",
     offerType: "evergreen",
     url: AFFILIATE_LINKS.aviasales,
-    fallbackPartner: "aviasales",
-    activeNote: "Core flight metasearch engine",
-    expiredFallbackBehavior: "Permanent core partner"
+    fallbackPartner: "kiwi",
+    activeNote: "Core flight metasearch engine (40% rev share, Web & App)",
+    expiredFallbackBehavior: "Falls back to Kiwi.com if ever paused"
   },
   klook: {
     id: "klook",
@@ -90,9 +95,9 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     status: "active",
     offerType: "evergreen",
     url: AFFILIATE_LINKS.klook,
-    fallbackPartner: "tiqets",
-    activeNote: "Core Asia & Dubai tours/activities partner",
-    expiredFallbackBehavior: "Permanent core partner"
+    fallbackPartner: "kkday",
+    activeNote: "Core Asia & Dubai tours/activities partner (Web & App)",
+    expiredFallbackBehavior: "Falls back to KKday if ever paused"
   },
   tiqets: {
     id: "tiqets",
@@ -100,9 +105,9 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     status: "active",
     offerType: "evergreen",
     url: AFFILIATE_LINKS.tiqets,
-    fallbackPartner: "klook",
-    activeNote: "Core Europe, UK & USA museum pass partner",
-    expiredFallbackBehavior: "Falls back to Klook if ever paused"
+    fallbackPartner: "goCity",
+    activeNote: "Core Europe, UK & USA museum pass partner (Web & App)",
+    expiredFallbackBehavior: "Falls back to Go City if ever paused"
   },
   airhelp: {
     id: "airhelp",
@@ -110,7 +115,7 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     status: "active",
     offerType: "customer-promo",
     url: AFFILIATE_LINKS.airhelp,
-    fallbackPartner: "aviasales",
+    fallbackPartner: "ekta",
     expiresAt: AIRHELP_PROMO.expiresAt,
     promoCode: AIRHELP_PROMO.code,
     activeNote: `11% OFF AirHelp+ with code ${AIRHELP_PROMO.code} through ${AIRHELP_PROMO.validUntil}`,
@@ -133,9 +138,9 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     status: "active",
     offerType: "evergreen",
     url: AFFILIATE_LINKS.kiwitaxi,
-    fallbackPartner: "welcomePickups",
-    activeNote: "Core private airport transfer partner",
-    expiredFallbackBehavior: "Falls back to Welcome Pickups if ever paused"
+    fallbackPartner: "getTransfer",
+    activeNote: "Core private airport transfer partner (9–11% reward)",
+    expiredFallbackBehavior: "Falls back to GetTransfer.com if ever paused"
   },
   welcomePickups: {
     id: "welcomePickups",
@@ -143,9 +148,9 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     status: "active",
     offerType: "evergreen",
     url: AFFILIATE_LINKS.welcomePickups,
-    fallbackPartner: "kiwitaxi",
-    activeNote: "Meet-and-greet airport transfer partner",
-    expiredFallbackBehavior: "Falls back to Kiwitaxi if ever paused"
+    fallbackPartner: "getTransfer",
+    activeNote: "Meet-and-greet airport transfer partner (8–9% reward, 45d cookie)",
+    expiredFallbackBehavior: "Falls back to GetTransfer.com if ever paused"
   },
   airalo: {
     id: "airalo",
@@ -153,9 +158,9 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     status: "active",
     offerType: "evergreen",
     url: AFFILIATE_LINKS.airalo,
-    fallbackPartner: "klook",
-    activeNote: "Core 200+ country travel eSIM partner",
-    expiredFallbackBehavior: "Permanent core partner"
+    fallbackPartner: "yesim",
+    activeNote: "Core 200+ country travel eSIM partner (12% reward)",
+    expiredFallbackBehavior: "Falls back to Yesim eSIM if ever paused"
   },
   qeeq: {
     id: "qeeq",
@@ -163,9 +168,9 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     status: "active",
     offerType: "evergreen",
     url: AFFILIATE_LINKS.qeeq,
-    fallbackPartner: "kiwitaxi",
-    activeNote: "International car rental comparison",
-    expiredFallbackBehavior: "Falls back to Kiwitaxi if ever paused"
+    fallbackPartner: "getTransfer",
+    activeNote: "International car rental comparison (5–10% reward)",
+    expiredFallbackBehavior: "Falls back to GetTransfer.com if ever paused"
   },
   radicalStorage: {
     id: "radicalStorage",
@@ -177,6 +182,56 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     expiresAt: RADICAL_STORAGE_PROMO.expiresAt,
     activeNote: `Boosted 15% partner commission through ${RADICAL_STORAGE_PROMO.commissionBoostValidUntil} (then 8%–10% base rate)`,
     expiredFallbackBehavior: "Keeps permanent link live at base 8%–10% commission; if paused, auto-swaps to Klook"
+  },
+  ekta: {
+    id: "ekta",
+    partnerName: "EKTA Travel Medical Insurance",
+    status: "active",
+    offerType: "evergreen",
+    url: AFFILIATE_LINKS.ekta,
+    fallbackPartner: "airhelp",
+    activeNote: "25% commission · Schengen €30k, Thailand e-Visa & Senior Umrah policies",
+    expiredFallbackBehavior: "Falls back to AirHelp if ever paused"
+  },
+  yesim: {
+    id: "yesim",
+    partnerName: "Yesim Travel eSIM (App + Web)",
+    status: "active",
+    offerType: "evergreen",
+    url: AFFILIATE_LINKS.yesim,
+    fallbackPartner: "airalo",
+    activeNote: "18% commission · 90-day cookie · Tracks Mobile Web & App installs",
+    expiredFallbackBehavior: "Falls back to Airalo eSIM if ever paused"
+  },
+  kiwi: {
+    id: "kiwi",
+    partnerName: "Kiwi.com Multi-City & Virtual Interlining",
+    status: "active",
+    offerType: "evergreen",
+    url: AFFILIATE_LINKS.kiwi,
+    fallbackPartner: "aviasales",
+    activeNote: "3% commission · 30-day cookie · Multi-city & self-transfer flight hacks",
+    expiredFallbackBehavior: "Falls back to Aviasales if ever paused"
+  },
+  getTransfer: {
+    id: "getTransfer",
+    partnerName: "GetTransfer.com Intercity Vans & Transfers",
+    status: "active",
+    offerType: "evergreen",
+    url: AFFILIATE_LINKS.getTransfer,
+    fallbackPartner: "kiwitaxi",
+    activeNote: "4–25% commission · Tracks Mobile Web & App · Driver bidding for family vans",
+    expiredFallbackBehavior: "Falls back to Kiwitaxi if ever paused"
+  },
+  goCity: {
+    id: "goCity",
+    partnerName: "Go City All-Inclusive City Passes",
+    status: "active",
+    offerType: "evergreen",
+    url: AFFILIATE_LINKS.goCity,
+    fallbackPartner: "tiqets",
+    activeNote: "3.4–6% commission · 90-day cookie · London, Paris, Rome, NYC, Dubai & SG passes",
+    expiredFallbackBehavior: "Falls back to Tiqets if ever paused"
   }
 };
 
@@ -611,3 +666,509 @@ export function RadicalStorageContextualCallout({
     </aside>
   );
 }
+
+export interface MultiPartnerBlogPlacement {
+  primaryPartner: AffiliatePartnerKey;
+  secondaryPartner?: AffiliatePartnerKey;
+  badgeEn: string;
+  badgeBn: string;
+  headlineEn: string;
+  headlineBn: string;
+  bodyBeforeAnchorEn: string;
+  anchorTextEn: string;
+  bodyAfterAnchorEn: string;
+  bodyBeforeAnchorBn: string;
+  anchorTextBn: string;
+  bodyAfterAnchorBn: string;
+  primaryButtonEn: string;
+  primaryButtonBn: string;
+  secondaryButtonEn?: string;
+  secondaryButtonBn?: string;
+}
+
+export const MULTI_PARTNER_BLOG_PLACEMENTS: Record<string, MultiPartnerBlogPlacement> = {
+  "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": {
+    primaryPartner: "ekta",
+    secondaryPartner: "yesim",
+    badgeEn: "🛡️ EMBASSY VISA INSURANCE + MOBILE APP ESIM",
+    badgeBn: "🛡️ ভিসা ইনস্যুরেন্স (EKTA) + মোবাইল অ্যাপ eSIM (Yesim)",
+    headlineEn: "Need an Instant English Travel Insurance PDF for Your Visa or an App-Based eSIM?",
+    headlineBn: "ভিসার জন্য তাৎক্ষণিক ইংরেজি ইনস্যুরেন্স PDF বা আনলিমিটেড ট্রাভেল eSIM প্রয়োজন?",
+    bodyBeforeAnchorEn:
+      "For Schengen Europe (€30,000 coverage), Thailand e-Visa (thaievisa.go.th), Malaysia, and senior Umrah pilgrims, you can ",
+    anchorTextEn:
+      "download an official EKTA Travel Medical Insurance policy online in 2 minutes (from $0.99/day)",
+    bodyAfterAnchorEn:
+      " and pair it with a Yesim Travel eSIM (supports both iOS/Android App & web activation while keeping your Bangladeshi SIM active for free banking OTPs).",
+    bodyBeforeAnchorBn:
+      "শেনজেন ইউরোপ (€30,000 কভারেজ), থাইল্যান্ড ই-ভিসা, মালয়েশিয়া ও বয়স্ক ওমরাহ যাত্রীদের জন্য ",
+    anchorTextBn:
+      "মাত্র ২ মিনিটে EKTA থেকে অফিশিয়াল ইংরেজি Travel Medical Insurance PDF ($0.99/দিন থেকে) ডাউনলোড করুন",
+    bodyAfterAnchorBn:
+      " এবং ব্যাংকের OTP সচল রেখে দ্রুত ইন্টারনেটের জন্য Yesim Travel eSIM অ্যাপ ব্যবহার করুন।",
+    primaryButtonEn: "Get EKTA Travel Insurance ($0.99/day)",
+    primaryButtonBn: "EKTA ট্রাভেল ইনস্যুরেন্স নিন ($0.99/দিন)",
+    secondaryButtonEn: "Compare Yesim App eSIM Plans",
+    secondaryButtonBn: "Yesim eSIM প্ল্যান দেখুন"
+  },
+  "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": {
+    primaryPartner: "ekta",
+    secondaryPartner: "yesim",
+    badgeEn: "🛡️ THAIEVISA.GO.TH INSURANCE & CONNECTIVITY",
+    badgeBn: "🛡️ থাইল্যান্ড ই-ভিসা ইনস্যুরেন্স ও কানেক্টিভিটি",
+    headlineEn: "Uploading Supporting Documents on thaievisa.go.th? Add Verifiable Travel Insurance",
+    headlineBn: "thaievisa.go.th পোর্টালে ডকুমেন্ট আপলোড করছেন? ভেরিফায়েড ট্রাভেল ইনস্যুরেন্স যুক্ত করুন",
+    bodyBeforeAnchorEn:
+      "Strengthen your Thailand e-Visa application and protect your family against hospital bills or flight delays in Bangkok and Phuket: ",
+    anchorTextEn:
+      "get an instant English PDF policy from EKTA Travel Insurance (from $0.99/day)",
+    bodyAfterAnchorEn:
+      " and pre-install a Yesim Thailand eSIM before flying from Dhaka.",
+    bodyBeforeAnchorBn:
+      "থাইল্যান্ড ই-ভিসা আবেদন শক্তিশালী করতে এবং ব্যাংকক/ফুকেটে চিকিৎসা ও ফ্লাইট বিলম্বের ঝুঁকি এড়াতে ",
+    anchorTextBn:
+      "EKTA থেকে তাৎক্ষণিক ইংরেজি Travel Insurance PDF পলিসি নিন",
+    bodyAfterAnchorBn:
+      " এবং দেশ ছাড়ার আগেই Yesim Thailand eSIM ইনস্টল করে নিন।",
+    primaryButtonEn: "Download EKTA Thailand Visa Insurance",
+    primaryButtonBn: "EKTA থাইল্যান্ড ভিসা ইনস্যুরেন্স নিন",
+    secondaryButtonEn: "Get Yesim Thailand eSIM",
+    secondaryButtonBn: "Yesim থাইল্যান্ড eSIM নিন"
+  },
+  "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
+    primaryPartner: "ekta",
+    secondaryPartner: "getTransfer",
+    badgeEn: "🛡️ SENIOR UMRAH MEDICAL INSURANCE & PRIVATE FAMILY VANS",
+    badgeBn: "🛡️ বয়স্ক বাবা-মায়ের ওমরাহ ইনস্যুরেন্স ও প্রাইভেট ভ্যান",
+    headlineEn: "Traveling with Parents Aged 60+? Protect Their Health & Book Door-to-Door Haramain Vans",
+    headlineBn: "৬০+ বছর বয়সী বাবা-মাকে নিয়ে ওমরাহ যাচ্ছেন? সিনিয়র ইনস্যুরেন্স ও প্রাইভেট গাড়ি নিশ্চিত করুন",
+    bodyBeforeAnchorEn:
+      "Standard visa medical cover does not reimburse flight delays, lost wheelchairs/luggage, or extended clinic care. Before flying from Dhaka, ",
+    anchorTextEn:
+      "secure an EKTA Senior Travel & Medical Insurance policy (covers travelers up to age 85+)",
+    bodyAfterAnchorEn:
+      " and book a spacious GMC Yukon or Toyota HiAce directly to your Makkah hotel door via GetTransfer.",
+    bodyBeforeAnchorBn:
+      "বয়স্ক বাবা-মায়ের ফ্লাইট ডিলে, হারানো লাগেজ বা জরুরি চিকিৎসার ঝুঁকি এড়াতে ঢাকা ছাড়ার আগেই ",
+    anchorTextBn:
+      "EKTA Senior Travel & Medical Insurance পলিসি নিন",
+    bodyAfterAnchorBn:
+      " এবং জেদ্দা এয়ারপোর্ট থেকে সরাসরি মক্কার হোটেলের গেটে যেতে GetTransfer-এ প্রাইভেট GMC/HiAce বুক করুন।",
+    primaryButtonEn: "Get EKTA Senior Medical Insurance",
+    primaryButtonBn: "EKTA সিনিয়র মেডিকেল ইনস্যুরেন্স নিন",
+    secondaryButtonEn: "Book Family Van on GetTransfer",
+    secondaryButtonBn: "GetTransfer-এ প্রাইভেট গাড়ি বুক করুন"
+  },
+  "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh": {
+    primaryPartner: "ekta",
+    secondaryPartner: "getTransfer",
+    badgeEn: "🏥 BANGKOK MEDICAL TRIP INSURANCE & HOSPITAL PICKUP",
+    badgeBn: "🏥 ব্যাংকক মেডিকেল ট্রিপ ইনস্যুরেন্স ও হাসপাতাল পিকআপ",
+    headlineEn: "Flying from Dhaka to Bumrungrad or Bangkok Hospital? Book Private Airport-to-Clinic Pickup",
+    headlineBn: "বামরুনগ্রাদ বা ব্যাংকক হাসপাতালে যাচ্ছেন? প্রাইভেট পিকআপ ও ট্রাভেল ইনস্যুরেন্স নিন",
+    bodyBeforeAnchorEn:
+      "Avoid standing in Suvarnabhumi taxi queues with a patient after landing: ",
+    anchorTextEn:
+      "pre-book a private wheelchair-friendly sedan or van to Sukhumvit Soi 3 on GetTransfer",
+    bodyAfterAnchorEn:
+      " and protect accompanying family members with an EKTA Thailand Travel Insurance policy.",
+    bodyBeforeAnchorBn:
+      "রোগী নিয়ে সুবর্ণভূমি এয়ারপোর্টে ট্যাক্সির লাইনে না দাঁড়িয়ে ",
+    anchorTextBn:
+      "GetTransfer-এ সরাসরি বামরুনগ্রাদ বা সুখুমভিত হোটেলে যাওয়ার প্রাইভেট গাড়ি প্রি-বুক করুন",
+    bodyAfterAnchorBn:
+      " এবং সফরসঙ্গীদের জন্য EKTA ট্রাভেল ইনস্যুরেন্স সাথে রাখুন।",
+    primaryButtonEn: "Get EKTA Travel Insurance",
+    primaryButtonBn: "EKTA ট্রাভেল ইনস্যুরেন্স নিন",
+    secondaryButtonEn: "Book Airport-to-Hospital Pickup (GetTransfer)",
+    secondaryButtonBn: "GetTransfer প্রাইভেট পিকআপ বুক করুন"
+  },
+  "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": {
+    primaryPartner: "getTransfer",
+    secondaryPartner: "yesim",
+    badgeEn: "🚐 PRIVATE ZIYARAH VAN BIDDING & SAUDI ESIM",
+    badgeBn: "🚐 প্রাইভেট জিয়ারাহ ভ্যান (GetTransfer) ও সৌদি eSIM",
+    headlineEn: "Compare Local Driver Bids for Makkah, Madinah, Badr & Taif Ziyarah Tours",
+    headlineBn: "মক্কা, মদিনা, বদর ও তায়েফ জিয়ারাহর জন্য প্রাইভেট Camry, Staria ও HiAce ভাড়া তুলনা করুন",
+    bodyBeforeAnchorEn:
+      "Instead of haggling with street taxis outside the Clock Tower in 40°C heat, ",
+    anchorTextEn:
+      "request competitive driver bids for a private sedan, Hyundai Staria, or Toyota HiAce on GetTransfer.com",
+    bodyAfterAnchorEn:
+      " with vehicle photos and ratings upfront—and stay connected on WhatsApp with a Yesim Saudi Arabia eSIM.",
+    bodyBeforeAnchorBn:
+      "মক্কা ক্লক টাওয়ারের বাইরে রোদে দাঁড়িয়ে ট্যাক্সি চালকদের সাথে দরদাম না করে ",
+    anchorTextBn:
+      "GetTransfer.com-এ গাড়ির ছবি ও ড্রাইভার রেটিং দেখে প্রাইভেট জিয়ারাহ ভ্যান বা কার বুক করুন",
+    bodyAfterAnchorBn:
+      " এবং ড্রাইভারের সাথে WhatsApp-এ যোগাযোগ রাখতে Yesim Saudi eSIM ব্যবহার করুন।",
+    primaryButtonEn: "Compare Ziyarah Van Bids on GetTransfer",
+    primaryButtonBn: "GetTransfer-এ জিয়ারাহ গাড়ির ভাড়া দেখুন",
+    secondaryButtonEn: "Get Yesim Saudi Arabia eSIM",
+    secondaryButtonBn: "Yesim সৌদি eSIM নিন"
+  },
+  "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": {
+    primaryPartner: "getTransfer",
+    secondaryPartner: "ekta",
+    badgeEn: "🚐 JEDDAH AIRPORT TO MAKKAH HOTEL DOOR TRANSFER",
+    badgeBn: "🚐 জেদ্দা এয়ারপোর্ট থেকে মক্কা হোটেল প্রাইভেট ট্রান্সফার",
+    headlineEn: "Arriving at Jeddah Terminal 1 or North Terminal with Family Luggage?",
+    headlineBn: "পরিবার ও বড় লাগেজ নিয়ে জেদ্দা এয়ারপোর্টে নামছেন?",
+    bodyBeforeAnchorEn:
+      "Haramain High-Speed Train strictly limits suitcase dimensions. If your family is carrying 4–6 large suitcases and Zamzam cartons, ",
+    anchorTextEn:
+      "compare private GMC Yukon, Hyundai Staria, and HiAce transfers from Jeddah Airport to your Makkah hotel on GetTransfer",
+    bodyAfterAnchorEn:
+      " for seamless door-to-door pickup.",
+    bodyBeforeAnchorBn:
+      "হারামাইন ট্রেনে বড় স্যুটকেস নেওয়ার কড়াকড়ি রয়েছে। পরিবারের সবার লাগেজ নিয়ে নির্বিঘ্নে মক্কার হোটেলে পৌঁছাতে ",
+    anchorTextBn:
+      "GetTransfer-এ জেদ্দা এয়ারপোর্ট থেকে মক্কা ও মদিনার প্রাইভেট ভ্যান/কার ভাড়া তুলনা করুন",
+    bodyAfterAnchorBn:
+      " এবং সরাসরি হোটেলের গেটে নামুন।",
+    primaryButtonEn: "Book Private Haramain Transfer (GetTransfer)",
+    primaryButtonBn: "GetTransfer প্রাইভেট ট্রান্সফার বুক করুন",
+    secondaryButtonEn: "EKTA Umrah Travel Insurance",
+    secondaryButtonBn: "EKTA ওমরাহ ইনস্যুরেন্স"
+  },
+  "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide": {
+    primaryPartner: "kiwi",
+    secondaryPartner: "goCity",
+    badgeEn: "✈️ MULTI-CITY FLIGHT HACK + DUBAI ALL-INCLUSIVE PASS",
+    badgeBn: "✈️ মাল্টি-সিটি ফ্লাইট (Kiwi.com) + দুবাই পাস (Go City)",
+    headlineEn: "Stitch Dhaka → Jeddah → Dubai → Dhaka Multi-City Fares & Save up to 50% on Dubai Attractions",
+    headlineBn: "ঢাকা → জেদ্দা → দুবাই → ঢাকা মাল্টি-সিটি টিকিট ও Go City Dubai Pass-এ সাশ্রয় করুন",
+    bodyBeforeAnchorEn:
+      "Alongside Aviasales, use ",
+    anchorTextEn:
+      "Kiwi.com's Nomad & Multi-City virtual interlining engine to combine Saudi and UAE carriers on one itinerary",
+    bodyAfterAnchorEn:
+      "—and unlock Burj Khalifa, Desert Safari, and Louvre Abu Dhabi with a single Go City Dubai Pass.",
+    bodyBeforeAnchorBn:
+      "Aviasales-এর পাশাপাশি ",
+    anchorTextBn:
+      "Kiwi.com-এর Multi-City সার্চে ঢাকা → জেদ্দা → দুবাই → ঢাকা রুটের সবচেয়ে সাশ্রয়ী কম্বো টিকিট খুঁজুন",
+    bodyAfterAnchorBn:
+      " এবং দুবাইয়ের প্রধান আকর্ষণগুলোতে ৫০% পর্যন্ত বাঁচাতে Go City Dubai Pass নিন।",
+    primaryButtonEn: "Search Multi-City Combo on Kiwi.com",
+    primaryButtonBn: "Kiwi.com-এ মাল্টি-সিটি ফ্লাইট খুঁজুন",
+    secondaryButtonEn: "Get Go City Dubai All-Inclusive Pass",
+    secondaryButtonBn: "Go City Dubai Pass দেখুন"
+  },
+  "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost": {
+    primaryPartner: "kiwi",
+    secondaryPartner: "getTransfer",
+    badgeEn: "✈️ MULTI-CITY COMBO FLIGHTS + SRI LANKA PRIVATE CAR",
+    badgeBn: "✈️ মাল্টি-সিটি ফ্লাইট (Kiwi.com) + শ্রীলঙ্কা প্রাইভেট কার",
+    headlineEn: "Compare Dhaka → Colombo → Malé → Dhaka Combo Tickets & Private Kandy/Nuwara Eliya Drivers",
+    headlineBn: "ঢাকা → কলম্বো → মালে কম্বো ফ্লাইট এবং কলম্বো-ক্যান্ডি প্রাইভেট গাড়ি বুক করুন",
+    bodyBeforeAnchorEn:
+      "Check ",
+    anchorTextEn:
+      "Kiwi.com's Multi-City search to combine SriLankan Airlines, Biman, and US-Bangla segments on a single trip",
+    bodyAfterAnchorEn:
+      ", and book your air-conditioned Colombo → Kandy → Nuwara Eliya car or family van via GetTransfer.",
+    bodyBeforeAnchorBn:
+      "সাশ্রয়ী ভাড়ায় ২ দেশ ভ্রমণের জন্য ",
+    anchorTextBn:
+      "Kiwi.com-এ ঢাকা → কলম্বো → মালে → ঢাকা মাল্টি-সিটি ফ্লাইট তুলনা করুন",
+    bodyAfterAnchorBn:
+      " এবং কলম্বো থেকে ক্যান্ডি ও নুয়ারা এলিয়া ঘোরার প্রাইভেট গাড়ি GetTransfer-এ বুক করুন।",
+    primaryButtonEn: "Search Combo Flights on Kiwi.com",
+    primaryButtonBn: "Kiwi.com-এ কম্বো ফ্লাইট খুঁজুন",
+    secondaryButtonEn: "Book Sri Lanka Car on GetTransfer",
+    secondaryButtonBn: "GetTransfer-এ শ্রীলঙ্কা প্রাইভেট গাড়ি"
+  },
+  "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": {
+    primaryPartner: "kiwi",
+    secondaryPartner: "getTransfer",
+    badgeEn: "✈️ OPEN-JAW FLIGHT COMBINATIONS + HARAMAIN TRANSFERS",
+    badgeBn: "✈️ ওপেন-জ ফ্লাইট সার্চ (Kiwi.com) ও প্রাইভেট ট্রান্সফার",
+    headlineEn: "Compare Open-Jaw (Land Jeddah, Return Madinah) Combinations Across All Airlines",
+    headlineBn: "জেদ্দায় নেমে মদিনা থেকে ফেরার (Open-Jaw) সেরা ফ্লাইট কম্বিনেশন খুঁজুন",
+    bodyBeforeAnchorEn:
+      "When single-airline return tickets are sold out, ",
+    anchorTextEn:
+      "search Kiwi.com to mix and match outbound Dhaka → Jeddah and return Madinah → Dhaka fares",
+    bodyAfterAnchorEn:
+      " and pre-book your private airport-to-Haram transfer on GetTransfer.",
+    bodyBeforeAnchorBn:
+      "একই এয়ারলাইন্সে সিট না পেলে ",
+    anchorTextBn:
+      "Kiwi.com-এ ঢাকা → জেদ্দা এবং মদিনা → ঢাকা ওপেন-জ ফ্লাইট কম্বিনেশন চেক করুন",
+    bodyAfterAnchorBn:
+      " এবং এয়ারপোর্ট থেকে হোটেলের প্রাইভেট গাড়ি GetTransfer-এ বুক করুন।",
+    primaryButtonEn: "Search Open-Jaw Fares on Kiwi.com",
+    primaryButtonBn: "Kiwi.com-এ ওপেন-জ ফ্লাইট দেখুন",
+    secondaryButtonEn: "Compare Airport Transfers (GetTransfer)",
+    secondaryButtonBn: "GetTransfer এয়ারপোর্ট পিকআপ"
+  },
+  "cheap-flight-booking-hacks-dhaka": {
+    primaryPartner: "kiwi",
+    secondaryPartner: "ekta",
+    badgeEn: "✈️ VIRTUAL INTERLINING & SELF-TRANSFER FLIGHT HACKS",
+    badgeBn: "✈️ মাল্টি-এয়ারলাইন কম্বো ফ্লাইট হ্যাক (Kiwi.com)",
+    headlineEn: "Unlock Hidden Self-Transfer & Multi-Airline Combos from Dhaka on Kiwi.com",
+    headlineBn: "Kiwi.com-এর মাধ্যমে ঢাকা থেকে লুকানো মাল্টি-এয়ারলাইন ও ট্রানজিট ডিল খুঁজুন",
+    bodyBeforeAnchorEn:
+      "In addition to checking Aviasales, smart Bangladeshi travelers ",
+    anchorTextEn:
+      "compare virtual-interlined and multi-city routes on Kiwi.com",
+    bodyAfterAnchorEn:
+      " to pair low-cost regional carriers with full-service airlines on a single itinerary.",
+    bodyBeforeAnchorBn:
+      "Aviasales-এ ভাড়া দেখার পাশাপাশি ",
+    anchorTextBn:
+      "Kiwi.com-এ ভিন্ন দুটি এয়ারলাইন্সের কানেক্টিং ও মাল্টি-সিটি ভাড়া তুলনা করুন",
+    bodyAfterAnchorBn:
+      " এবং ভিসা আবেদনের জন্য EKTA ট্রাভেল ইনস্যুরেন্স সংগ্রহে রাখুন।",
+    primaryButtonEn: "Compare Flight Hacks on Kiwi.com",
+    primaryButtonBn: "Kiwi.com-এ সস্তা ফ্লাইট খুঁজুন",
+    secondaryButtonEn: "Get EKTA Visa Travel Insurance",
+    secondaryButtonBn: "EKTA ভিসা ইনস্যুরেন্স নিন"
+  },
+  "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide": {
+    primaryPartner: "goCity",
+    secondaryPartner: "ekta",
+    badgeEn: "🎟️ ALL-INCLUSIVE MULTI-ATTRACTION PASS (GO CITY) + SCHENGEN INSURANCE",
+    badgeBn: "🎟️ অল-ইনক্লুসিভ সিটি পাস (Go City) + শেনজেন ইনস্যুরেন্স",
+    headlineEn: "Visiting 3+ Landmarks in London, Paris, Rome, or New York? Save up to 50% with Go City",
+    headlineBn: "লন্ডন, প্যারিস, রোম বা নিউ ইয়র্কে ৩টির বেশি দর্শনীয় স্থান ঘুরবেন? Go City Pass নিন",
+    bodyBeforeAnchorEn:
+      "While Tiqets is best for single museum tickets, travelers visiting multiple attractions in London, Paris, Rome, or New York can ",
+    anchorTextEn:
+      "bundle 3 to 10+ top landmarks on one Go City All-Inclusive or Explorer Pass to save up to 50%",
+    bodyAfterAnchorEn:
+      "—and download €30,000 Schengen-compliant medical insurance via EKTA.",
+    bodyBeforeAnchorBn:
+      "একক টিকিটের জন্য Tiqets সেরা হলেও লন্ডন, প্যারিস, রোম বা নিউ ইয়র্কে একাধিক জায়গা ঘুরতে ",
+    anchorTextBn:
+      "Go City All-Inclusive বা Explorer Pass নিয়ে এক পাসে ৫০% পর্যন্ত সাশ্রয় করুন",
+    bodyAfterAnchorBn:
+      " এবং শেনজেন ভিসার জন্য €30,000 কভারেজের EKTA ইনস্যুরেন্স ডাউনলোড করুন।",
+    primaryButtonEn: "Explore Go City All-Inclusive Passes",
+    primaryButtonBn: "Go City অল-ইনক্লুসিভ পাস দেখুন",
+    secondaryButtonEn: "EKTA €30,000 Schengen Insurance",
+    secondaryButtonBn: "EKTA শেনজেন ইনস্যুরেন্স"
+  },
+  "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide": {
+    primaryPartner: "goCity",
+    secondaryPartner: "yesim",
+    badgeEn: "🎟️ GO CITY SINGAPORE PASS + YESIM ESIM",
+    badgeBn: "🎟️ Go City সিঙ্গাপুর পাস + Yesim eSIM",
+    headlineEn: "Bundling Gardens by the Bay, Sentosa Cable Car & Night Safari? Check Go City Singapore",
+    headlineBn: "Gardens by the Bay, Sentosa ও Night Safari একসাথে ঘুরবেন? Go City পাস দেখুন",
+    bodyBeforeAnchorEn:
+      "If your family plans to visit 3 to 7 attractions across Marina Bay, Sentosa, and Mandai, ",
+    anchorTextEn:
+      "compare the Go City Singapore Explorer & All-Inclusive Pass",
+    bodyAfterAnchorEn:
+      " to cut gate admission costs by up to 45%—and stay connected on the MRT with a Yesim Singapore eSIM.",
+    bodyBeforeAnchorBn:
+      "সিঙ্গাপুরে ৩ থেকে ৭টি আকর্ষণ একসাথে ঘুরতে চাইলে ",
+    anchorTextBn:
+      "Go City Singapore Pass-এর মাধ্যমে টিকিট খরচে ৪৫% পর্যন্ত সাশ্রয় করুন",
+    bodyAfterAnchorBn:
+      " এবং MRT ও ম্যাপ ব্যবহারের জন্য Yesim Singapore eSIM সাথে রাখুন।",
+    primaryButtonEn: "Check Go City Singapore Pass Deals",
+    primaryButtonBn: "Go City সিঙ্গাপুর পাস দেখুন",
+    secondaryButtonEn: "Get Yesim Singapore eSIM",
+    secondaryButtonBn: "Yesim সিঙ্গাপুর eSIM নিন"
+  },
+  "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide": {
+    primaryPartner: "goCity",
+    secondaryPartner: "getTransfer",
+    badgeEn: "🎟️ DUBAI & ABU DHABI EXPLORER PASS + PRIVATE INTERCITY CAR",
+    badgeBn: "🎟️ দুবাই ও আবুধাবি পাস (Go City) + প্রাইভেট গাড়ি",
+    headlineEn: "Combining Louvre Abu Dhabi, Qasr Al Watan & Burj Khalifa? Save with Go City Dubai",
+    headlineBn: "লুভর আবুধাবি, কাসর আল ওয়াতান ও বুর্জ খলিফা একসাথে দেখবেন? Go City Pass নিন",
+    bodyBeforeAnchorEn:
+      "Visitors combining Dubai and Abu Dhabi highlights can ",
+    anchorTextEn:
+      "bundle Louvre Abu Dhabi, Qasr Al Watan, Desert Safari, and Burj Khalifa on a single Go City Pass",
+    bodyAfterAnchorEn:
+      " or book a private door-to-door Dubai ↔ Abu Dhabi family car via GetTransfer.",
+    bodyBeforeAnchorBn:
+      "দুবাই ও আবুধাবির প্রধান আকর্ষণগুলো একসাথে ঘুরতে ",
+    anchorTextBn:
+      "Go City Pass নিয়ে এক পাসে সর্বোচ্চ ৫০% পর্যন্ত টিকিট খরচ বাঁচান",
+    bodyAfterAnchorBn:
+      " অথবা পরিবারের জন্য দুবাই থেকে আবুধাবি যাওয়ার প্রাইভেট গাড়ি GetTransfer-এ বুক করুন।",
+    primaryButtonEn: "Browse Go City Dubai & Abu Dhabi Pass",
+    primaryButtonBn: "Go City দুবাই ও আবুধাবি পাস দেখুন",
+    secondaryButtonEn: "Book Private Dubai–Abu Dhabi Car (GetTransfer)",
+    secondaryButtonBn: "GetTransfer প্রাইভেট গাড়ি বুক করুন"
+  }
+};
+
+export function MultiPartnerBlogCallout({
+  slug,
+  lang = "en"
+}: {
+  slug: string;
+  lang?: "en" | "bn";
+}) {
+  const placement = MULTI_PARTNER_BLOG_PLACEMENTS[slug];
+  if (!placement) return null;
+
+  const isBn = lang === "bn";
+  const primaryHref = resolvePartnerUrl(AFFILIATE_LINKS[placement.primaryPartner]);
+  const secondaryHref = placement.secondaryPartner
+    ? resolvePartnerUrl(AFFILIATE_LINKS[placement.secondaryPartner])
+    : undefined;
+
+  return (
+    <aside
+      aria-label={isBn ? "পার্টনার ট্রাভেল টুলস ও ডিসকাউন্ট" : "Recommended Partner Travel Tools"}
+      className="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-5 sm:p-6 space-y-3 text-left"
+    >
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <span className="text-[10px] font-mono font-bold uppercase tracking-wider bg-brand-navy text-[#F6B73C] px-2.5 py-1 rounded-md">
+          {isBn ? placement.badgeBn : placement.badgeEn}
+        </span>
+        <span className="text-[11px] font-mono text-slate-500">
+          {isBn ? "ভেরিফায়েড অফিশিয়াল পার্টনার · ডুয়াল-কারেন্সি কার্ড সাপোর্টেড" : "Verified Official Partner · Instant Online Confirmation"}
+        </span>
+      </div>
+
+      <h3 className="font-serif text-base sm:text-lg font-bold text-brand-navy leading-snug">
+        {isBn ? placement.headlineBn : placement.headlineEn}
+      </h3>
+
+      <p className="text-xs sm:text-[13.5px] text-slate-700 leading-relaxed">
+        {isBn ? placement.bodyBeforeAnchorBn : placement.bodyBeforeAnchorEn}
+        <a
+          href={primaryHref}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="font-semibold text-brand-navy underline decoration-[#F6B73C] decoration-2 underline-offset-2 hover:text-emerald-800"
+        >
+          {isBn ? placement.anchorTextBn : placement.anchorTextEn}
+        </a>
+        {isBn ? placement.bodyAfterAnchorBn : placement.bodyAfterAnchorEn}
+      </p>
+
+      <div className="pt-1 flex flex-wrap items-center gap-2.5">
+        <PartnerLinkButton
+          href={AFFILIATE_LINKS[placement.primaryPartner]}
+          label={isBn ? placement.primaryButtonBn : placement.primaryButtonEn}
+          variant="dark"
+        />
+        {placement.secondaryPartner && secondaryHref && (
+          <PartnerLinkButton
+            href={AFFILIATE_LINKS[placement.secondaryPartner]}
+            label={isBn ? placement.secondaryButtonBn || "" : placement.secondaryButtonEn || ""}
+            variant="light"
+          />
+        )}
+      </div>
+    </aside>
+  );
+}
+
+/**
+ * Contextual Travel Medical Insurance & eSIM Callout for `/visa` and `/visa/:id` pages.
+ */
+export function EktaInsuranceCallout({
+  countryName,
+  lang = "en"
+}: {
+  countryName?: string;
+  lang?: "en" | "bn";
+}) {
+  const isBn = lang === "bn";
+  const ektaHref = resolvePartnerUrl(AFFILIATE_LINKS.ekta);
+  const yesimHref = resolvePartnerUrl(AFFILIATE_LINKS.yesim);
+  const targetLabel = countryName || (isBn ? "আন্তর্জাতিক" : "International");
+
+  return (
+    <aside
+      aria-label={isBn ? "ভিসা ট্রাভেল মেডিকেল ইনস্যুরেন্স ও eSIM" : "Embassy Visa Travel Medical Insurance & eSIM"}
+      className="bg-slate-900 text-white border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-3.5 text-left"
+    >
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <span className="text-[10px] font-mono font-bold uppercase tracking-wider bg-[#F6B73C] text-brand-navy px-2.5 py-1 rounded-md">
+          {isBn
+            ? `🛡️ ${targetLabel} ভিসা চেকলিস্ট: মেডিকেল ইনস্যুরেন্স ও eSIM`
+            : `🛡️ ${targetLabel} Visa Document Requirement: Travel Insurance & eSIM`}
+        </span>
+        <span className="text-[11px] font-mono text-emerald-300">
+          {isBn ? "২ মিনিটে অফিশিয়াল ইংরেজি PDF পলিসি · $0.99/দিন থেকে" : "Instant English PDF Policy in 2 Mins · From $0.99/day"}
+        </span>
+      </div>
+
+      <h3 className="font-serif text-base sm:text-lg font-bold text-white leading-snug">
+        {isBn
+          ? `${targetLabel} ভিসা আবেদন ও ইমিগ্রেশনের জন্য ভেরিফায়েড Travel Medical Insurance PDF প্রয়োজন?`
+          : `Need Verifiable Travel Medical Insurance for Your ${targetLabel} Visa & Airport Immigration?`}
+      </h3>
+
+      <p className="text-xs sm:text-[13.5px] text-slate-300 leading-relaxed">
+        {isBn ? (
+          <>
+            দূতাবাস ও ই-ভিসা পোর্টালে (থাইল্যান্ড, মালয়েশিয়া, শেনজেন ইউরোপ, সিঙ্গাপুর ও দুবাই) গ্রহণযোগ্য{" "}
+            <a
+              href={ektaHref}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="text-[#F6B73C] font-semibold underline underline-offset-2"
+            >
+              EKTA Travel Medical Insurance পলিসি ($0.99/দিন থেকে, €30,000–$50,000 কভারেজ)
+            </a>{" "}
+            মাত্র ২ মিনিটে ইমেইলে ডাউনলোড করুন—এবং এয়ারপোর্টে নেমেই ইন্টারনেট পেতে{" "}
+            <a
+              href={yesimHref}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="text-cyan-300 font-semibold underline underline-offset-2"
+            >
+              Yesim Travel eSIM অ্যাপ
+            </a>{" "}
+            ইনস্টল করে নিন।
+          </>
+        ) : (
+          <>
+            Download an embassy-compliant{" "}
+            <a
+              href={ektaHref}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="text-[#F6B73C] font-semibold underline underline-offset-2"
+            >
+              EKTA Travel Medical Insurance English PDF policy (from $0.99/day with €30,000–$50,000 medical &amp; flight delay coverage)
+            </a>{" "}
+            in 2 minutes for your visa submission, and pre-install a{" "}
+            <a
+              href={yesimHref}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="text-cyan-300 font-semibold underline underline-offset-2"
+            >
+              Yesim Travel eSIM (App &amp; Web supported)
+            </a>{" "}
+            so your phone works the moment you land.
+          </>
+        )}
+      </p>
+
+      <div className="pt-1 flex flex-wrap items-center gap-2.5">
+        <PartnerLinkButton
+          href={AFFILIATE_LINKS.ekta}
+          label={isBn ? "EKTA ভিসা ইনস্যুরেন্স নিন ($0.99/দিন)" : "Get EKTA Visa Insurance PDF ($0.99/day)"}
+          variant="dark"
+        />
+        <PartnerLinkButton
+          href={AFFILIATE_LINKS.yesim}
+          label={isBn ? "Yesim eSIM প্ল্যান দেখুন" : "Get Yesim Travel eSIM"}
+          variant="light"
+        />
+        <PartnerLinkButton
+          href={AFFILIATE_LINKS.airalo}
+          label={isBn ? "Airalo eSIM তুলনা করুন" : "Compare Airalo eSIM"}
+          variant="light"
+        />
+      </div>
+    </aside>
+  );
+}
+
