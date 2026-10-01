@@ -254,6 +254,26 @@ longer and more descriptive than the SERP title.
 
 ## Known gaps / next steps
 
+- **The hydrated Bengali page still mixes in English data fields.** Because
+  `src/main.tsx` mounts with `createRoot().render()` rather than `hydrateRoot()`,
+  React replaces the prerendered Bengali body on load — so what users and
+  JS-rendering crawlers ultimately see is the app UI (Bengali, from
+  `translations.ts`) plus whatever the data overrides translate. Coverage today:
+
+  | Group | Bengali fields | Still English |
+  | --- | --- | --- |
+  | Blogs (41) | full content, title, summary, internal links | — |
+  | Flights (6) | from/to, duration, best-time-to-book, visa line, quick answer | key facts, FAQs, airline list, BDT fare band |
+  | Hotels (6) | quick answer | neighbourhoods, hotel rows, key facts, FAQs |
+  | Visas (6) | requirement type, quick answer | document checklist, step-by-step steps, key facts, FAQs, fee/time |
+  | Trip costs (6) | quick answer | category rows, money hacks, seasonality, key facts, FAQs |
+  | Hajj/Umrah FAQs | full FAQ set | — |
+
+  The prerendered crawl body for every `/bn` route is fully Bengali, so the
+  indexed snapshot is consistent; closing this table is the main remaining work
+  for a genuinely Bengali reading experience (and the prerequisite for Bengali
+  `FAQPage` schema).
+
 - **`/bn/destinations/*` is not generated.** There is no `getLocalizedDestinations`
   and no `BENGALI_DESTINATIONS_OVERRIDES`, so those pages would ship English prose
   on a `bn-BD` URL. `DEFERRED_BN_GROUPS` in `src/utils/localeRoutes.ts` withholds
