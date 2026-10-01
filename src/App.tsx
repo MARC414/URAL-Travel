@@ -807,8 +807,6 @@ export default function App() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [heroSearchTab, setHeroSearchTab] = useState<"flights" | "hotels" | "visa">("flights");
-  const [heroFlightRoute, setHeroFlightRoute] = useState("dhaka-kathmandu");
   
   // Custom Action Affiliate Conversion Toast overlay state
   const [affiliateToast, setAffiliateToast] = useState<string | null>(null);
@@ -2522,6 +2520,40 @@ export default function App() {
                   : "Flights, hotels, visas, and destination guides — crafted specifically for Bangladeshi travelers. Your travel intelligence for the world."}
               </p>
 
+              {/* High-Intent Above-the-Fold Quick Action Bar */}
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3.5 pt-1">
+                <a
+                  href="#live-flight-search"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setAreTpScriptsReady(true);
+                    document.getElementById("live-flight-search")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    setTimeout(() => {
+                      document.getElementById("ural-global-dest-input")?.focus();
+                    }, 420);
+                  }}
+                  className="inline-flex items-center gap-2.5 bg-[#F6B73C] hover:bg-[#f5ad24] text-brand-navy font-black text-sm px-6 py-3.5 rounded-xl shadow-[0_10px_24px_-4px_rgba(246,183,60,0.5)] hover:shadow-[0_14px_28px_-4px_rgba(246,183,60,0.7)] transition-all cursor-pointer group"
+                >
+                  <span>{isBn ? "গ্লোবাল ফ্লাইট খুঁজুন" : "Search Global Flights"}</span>
+                  <ArrowRight size={16} className="stroke-[2.5] group-hover:translate-x-0.5 transition-transform" />
+                </a>
+                <a
+                  href="#global-hotel-search"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setAreTpScriptsReady(true);
+                    document.getElementById("global-hotel-search")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    setTimeout(() => {
+                      document.getElementById("ural-global-hotel-input")?.focus();
+                    }, 450);
+                  }}
+                  className="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/15 border border-white/25 hover:border-[#F6B73C]/60 text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-all cursor-pointer group"
+                >
+                  <span>{isBn ? "হোটেল ও আবাসন খুঁজুন" : "Explore Global Hotels"}</span>
+                  <ArrowRight size={15} className="text-[#F6B73C] group-hover:translate-x-0.5 transition-transform" />
+                </a>
+              </div>
+
               {/* Pill List of Expert Features */}
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 pt-4">
                 <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/95 text-xs sm:text-sm font-medium">
@@ -2624,7 +2656,10 @@ export default function App() {
                         />
                       }
                     >
-                      <TravelpayoutsWidget />
+                      <TravelpayoutsWidget
+                        lang={lang}
+                        onOpenPriceAlert={openPriceAlert}
+                      />
                     </React.Suspense>
                   ) : (
                     <TravelpayoutsWidgetSkeleton
@@ -3355,6 +3390,8 @@ export default function App() {
                         >
                           <TravelpayoutsEmbed
                             defaultDestination={getCountryIata(activeRoute.country)}
+                            lang={lang}
+                            onOpenPriceAlert={openPriceAlert}
                           />
                         </React.Suspense>
                       ) : (
@@ -4211,6 +4248,8 @@ export default function App() {
                               >
                                 <TravelpayoutsEmbed
                                   defaultDestination={getCountryIata(activeDes.country)}
+                                  lang={lang}
+                                  onOpenPriceAlert={openPriceAlert}
                                 />
                               </React.Suspense>
                             ) : (

@@ -10,8 +10,10 @@ import {
   Luggage,
   MapPin,
   Sparkles,
+  Mic,
+  MicOff,
 } from "lucide-react";
-import { AFFILIATE_LINKS } from "./AffiliatePartners";
+import { AFFILIATE_LINKS, resolvePartnerUrl } from "./AffiliatePartners";
 
 interface TravelpayoutsCustomWidgetProps {
   initialTab?: "flights" | "hotels";
@@ -380,7 +382,7 @@ export function TravelpayoutsCustomWidget({
   const fromAirportId = `${instanceId}-select-from-airport`;
   const toAirportId = `${instanceId}-select-to-airport`;
   const flightDateId = `${instanceId}-input-flight-date`;
-  const hotelCityId = `${instanceId}-select-hotel-city`;
+  const hotelCityId = "ural-global-hotel-input";
   const checkinDateId = `${instanceId}-input-checkin-date`;
   const checkoutDateId = `${instanceId}-input-checkout-date`;
   const hotelRoomsId = `${instanceId}-select-hotel-rooms`;
@@ -401,6 +403,9 @@ export function TravelpayoutsCustomWidget({
 
   // Autocomplete dropdown states
   const [activeDropdown, setActiveDropdown] = useState<"from" | "to" | "hotel" | null>(null);
+  const [listeningField, setListeningField] = useState<"from" | "to" | "hotel" | null>(null);
+  const [voiceStatus, setVoiceStatus] = useState<string | null>(null);
+  const recognitionRef = useRef<any>(null);
   const [remotePlaces, setRemotePlaces] = useState<Array<{ label: string; code: string; city: string; country: string; flag: string }>>([]);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -427,8 +432,111 @@ export function TravelpayoutsCustomWidget({
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.abort();
+        } catch {
+          // ignore
+        }
+      }
+    };
   }, []);
+
+  const handleVoiceInput = (field: "from" | "to" | "hotel", e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (listeningField === field && recognitionRef.current) {
+      try {
+        recognitionRef.current.stop();
+      } catch {
+        // ignore
+      }
+      setListeningField(null);
+      setVoiceStatus(null);
+      return;
+    }
+
+    const SpeechRecognitionApi =
+      typeof window !== "undefined" &&
+      ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
+
+    if (!SpeechRecognitionApi) {
+      setVoiceStatus("Voice dictation is not supported on this browser. Please type your city.");
+      setTimeout(() => setVoiceStatus(null), 3500);
+      return;
+    }
+
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.abort();
+      } catch {
+        // ignore
+      }
+    }
+
+    const recognition = new SpeechRecognitionApi();
+    recognitionRef.current = recognition;
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    setListeningField(field);
+    setActiveDropdown(null);
+    setVoiceStatus(
+      field === "hotel"
+        ? "Listening... Say a city for your hotel stay (e.g. Makkah, Bangkok, Dubai)"
+        : "Listening... Say a city or route (e.g. Dhaka to Bangkok)"
+    );
+
+    recognition.onresult = (event: any) => {
+      const transcript = (event?.results?.[0]?.[0]?.transcript || "").replace(/[.,!?]/g, "").trim();
+      setListeningField(null);
+      if (!transcript) {
+        setVoiceStatus(null);
+        return;
+      }
+
+      if (field === "hotel") {
+        setHotelCity(transcript);
+        setVoiceStatus(`Hotel destination set to "${transcript}"`);
+      } else {
+        const parts = transcript
+          .replace(/^from\s+/i, "")
+          .split(/\s+(?:to|towards)\s+/i)
+          .map((s: string) => s.trim())
+          .filter(Boolean);
+        if (parts.length >= 2) {
+          setFromCity(parts[0]);
+          setToCity(parts[1]);
+          setVoiceStatus(`Route set: ${parts[0]} → ${parts[1]}`);
+        } else if (field === "from") {
+          setFromCity(transcript);
+          setVoiceStatus(`Departure set to "${transcript}"`);
+        } else {
+          setToCity(transcript);
+          setVoiceStatus(`Destination set to "${transcript}"`);
+        }
+      }
+      setTimeout(() => setVoiceStatus(null), 4000);
+    };
+
+    recognition.onerror = () => {
+      setListeningField(null);
+      setVoiceStatus("Could not capture voice. Check microphone permission or type.");
+      setTimeout(() => setVoiceStatus(null), 3500);
+    };
+
+    recognition.onend = () => {
+      setListeningField(null);
+    };
+
+    try {
+      recognition.start();
+    } catch {
+      setListeningField(null);
+    }
+  };
 
   // Fetch live global suggestions from Travelpayouts Places2 API
   useEffect(() => {
@@ -885,9 +993,29 @@ export function TravelpayoutsCustomWidget({
                     >
                       Destination City or Hotel
                     </label>
-                    <span className="text-[10px] font-mono font-bold bg-[#F6B73C]/30 text-brand-navy px-1.5 py-0.5 rounded">
-                      GLOBAL STAY
-                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={(e) => handleVoiceInput("hotel", e)}
+                        aria-label={
+                          listeningField === "hotel"
+                            ? "Stop voice input for hotel destination"
+                            : "Dictate hotel destination city by voice"
+                        }
+                        aria-pressed={listeningField === "hotel"}
+                        title="Dictate hotel destination city by voice"
+                        className={`w-6 h-6 rounded-full flex items-center justify-center transition-all cursor-pointer ${
+                          listeningField === "hotel"
+                            ? "bg-rose-500 text-white ring-4 ring-rose-500/25 animate-pulse"
+                            : "bg-slate-200/80 hover:bg-brand-navy text-slate-600 hover:text-[#F6B73C]"
+                        }`}
+                      >
+                        {listeningField === "hotel" ? <MicOff size={12} /> : <Mic size={12} />}
+                      </button>
+                      <span className="text-[10px] font-mono font-bold bg-[#F6B73C]/30 text-brand-navy px-1.5 py-0.5 rounded">
+                        GLOBAL STAY
+                      </span>
+                    </div>
                   </div>
                   <input
                     id={hotelCityId}
@@ -1022,7 +1150,7 @@ export function TravelpayoutsCustomWidget({
                   onClick={() => {
                     setActiveDropdown(null);
                   }}
-                  className="w-full h-[68px] bg-[#F6B73C] text-brand-navy hover:bg-[#f5ad24] active:scale-[0.99] rounded-xl shadow-md hover:shadow-lg transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer px-3 text-center group"
+                  className="w-full h-[68px] bg-[#F6B73C] text-brand-navy hover:bg-[#f5ad24] active:scale-[0.99] rounded-xl shadow-[0_10px_22px_-5px_rgba(246,183,60,0.55)] hover:shadow-[0_14px_28px_-5px_rgba(246,183,60,0.75)] transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer px-3 text-center group"
                 >
                   <div className="flex items-center gap-1.5 font-black text-sm sm:text-[15px] tracking-tight">
                     <Search size={16} className="shrink-0 stroke-[2.5]" />
@@ -1032,6 +1160,78 @@ export function TravelpayoutsCustomWidget({
                   <span className="text-[10px] font-mono font-bold text-brand-navy/75 truncate max-w-full">
                     {hotelCity || "Global"} · {currency}
                   </span>
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Voice Dictation Status Banner */}
+          {voiceStatus && (
+            <div
+              role="status"
+              aria-live="polite"
+              className="mt-3 px-3.5 py-2 rounded-xl text-xs font-semibold bg-amber-50 border border-[#F6B73C] text-brand-navy flex items-center justify-between gap-2"
+            >
+              <span className="flex items-center gap-2">
+                <Mic size={13} className="text-rose-500 animate-pulse shrink-0" />
+                <span>{voiceStatus}</span>
+              </span>
+              <button
+                type="button"
+                onClick={() => setVoiceStatus(null)}
+                className="text-[11px] font-mono underline opacity-75 hover:opacity-100 cursor-pointer"
+              >
+                Dismiss
+              </button>
+            </div>
+          )}
+
+          {/* Active Hotel & Stay Affiliate Partner Bar (Always visible below Hotel Search) */}
+          {searchTab === "hotels" && (
+            <div className="mt-4 pt-3.5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-[11px] text-slate-500">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="inline-flex items-center gap-1 font-medium text-slate-600">
+                  <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
+                  Verified Global Stays, Family Suites & Halal-Friendly Zones ({hotelCity || "Worldwide"})
+                </span>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
+                <a
+                  href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1.5 rounded-lg transition-colors"
+                >
+                  <span>Klook Hotels & Resorts</span>
+                  <ExternalLink size={11} />
+                </a>
+                <a
+                  href={resolvePartnerUrl(AFFILIATE_LINKS.kkday)}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1.5 rounded-lg transition-colors"
+                >
+                  <span>KKday Stay Packages</span>
+                  <ExternalLink size={11} />
+                </a>
+                <a
+                  href={resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage)}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1.5 rounded-lg transition-colors"
+                >
+                  <span>Luggage Storage (Radical)</span>
+                  <ExternalLink size={11} />
+                </a>
+                <a
+                  href={resolvePartnerUrl(AFFILIATE_LINKS.kiwitaxi)}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1.5 rounded-lg transition-colors"
+                >
+                  <span>Hotel Airport Transfer</span>
+                  <ExternalLink size={11} />
                 </a>
               </div>
             </div>

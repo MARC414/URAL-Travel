@@ -20,7 +20,23 @@ import {
   RefreshCw,
   Utensils,
   AlertCircle,
+  ArrowRight,
+  Bell,
+  Mic,
+  MicOff,
+  TrendingDown,
 } from 'lucide-react';
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  ReferenceLine,
+} from 'recharts';
+import { AFFILIATE_LINKS, resolvePartnerUrl } from './AffiliatePartners';
 
 const MARKER_ID = '675992';
 const BDT_PER_USD = 120;
@@ -954,9 +970,96 @@ function generateDynamicRouteData(originInfo, destInfo) {
   };
 }
 
+const TYPO_AND_ALIAS_MAP = {
+  JEDAH: 'JED',
+  JEDDA: 'JED',
+  JEDDAH: 'JED',
+  MAKKAH: 'JED',
+  MECCA: 'JED',
+  UMRAH: 'JED',
+  MEDINA: 'MED',
+  MADINA: 'MED',
+  MADINAH: 'MED',
+  KATMANDU: 'KTM',
+  KATHMANDU: 'KTM',
+  NEPAL: 'KTM',
+  DACCA: 'DAC',
+  DHAKA: 'DAC',
+  CALCUTTA: 'CCU',
+  KOLKATA: 'CCU',
+  MALDIVES: 'MLE',
+  MALE: 'MLE',
+  MAAFUSHI: 'MLE',
+  DUBAI: 'DXB',
+  UAE: 'DXB',
+  BANKOK: 'BKK',
+  BANGKOK: 'BKK',
+  THAILAND: 'BKK',
+  MALAYSIA: 'KUL',
+  KUALALUMPUR: 'KUL',
+  SINGAPOR: 'SIN',
+  SINGAPORE: 'SIN',
+  LONDON: 'LHR',
+  UK: 'LHR',
+  BRITAIN: 'LHR',
+  NEWYORK: 'JFK',
+  USA: 'JFK',
+  ISTANBUL: 'IST',
+  TURKEY: 'IST',
+  TURKIYE: 'IST',
+  TORONTO: 'YYZ',
+  CANADA: 'YYZ',
+  SYDNEY: 'SYD',
+  AUSTRALIA: 'SYD',
+  PARIS: 'CDG',
+  FRANCE: 'CDG',
+  ROME: 'FCO',
+  ITALY: 'FCO',
+  DOHA: 'DOH',
+  QATAR: 'DOH',
+  RIYADH: 'RUH',
+  SAUDI: 'JED',
+};
+
+function isWithinOneEdit(a, b) {
+  if (!a || !b) return false;
+  if (a === b) return true;
+  const lenA = a.length;
+  const lenB = b.length;
+  if (Math.abs(lenA - lenB) > 1 || lenA < 4 || lenB < 4) return false;
+  let i = 0;
+  let j = 0;
+  let edits = 0;
+  while (i < lenA && j < lenB) {
+    if (a[i] === b[j]) {
+      i++;
+      j++;
+    } else {
+      edits++;
+      if (edits > 1) return false;
+      if (lenA > lenB) i++;
+      else if (lenB > lenA) j++;
+      else {
+        i++;
+        j++;
+      }
+    }
+  }
+  if (i < lenA || j < lenB) edits++;
+  return edits <= 1;
+}
+
 function findAirportInfo(codeOrQuery) {
   if (!codeOrQuery) return AIRPORTS_DIRECTORY[0];
   const q = codeOrQuery.trim().toUpperCase();
+  const compactQ = q.replace(/[^A-Z]/g, '');
+
+  if (TYPO_AND_ALIAS_MAP[compactQ]) {
+    const mappedCode = TYPO_AND_ALIAS_MAP[compactQ];
+    const aliasMatch = AIRPORTS_DIRECTORY.find((a) => a.code === mappedCode);
+    if (aliasMatch) return aliasMatch;
+  }
+
   const exactCode = AIRPORTS_DIRECTORY.find((a) => a.code === q);
   if (exactCode) return exactCode;
 
@@ -967,6 +1070,16 @@ function findAirportInfo(codeOrQuery) {
       a.name.toUpperCase().includes(q)
   );
   if (partial) return partial;
+
+  const fuzzy = AIRPORTS_DIRECTORY.find((a) => {
+    const cityWords = a.city.toUpperCase().split(/[^A-Z]+/);
+    const countryWords = a.country.toUpperCase().split(/[^A-Z]+/);
+    return (
+      cityWords.some((w) => isWithinOneEdit(compactQ, w)) ||
+      countryWords.some((w) => isWithinOneEdit(compactQ, w))
+    );
+  });
+  if (fuzzy) return fuzzy;
 
   return {
     code: q.slice(0, 3) || 'KTM',
@@ -982,10 +1095,13 @@ export default function TravelpayoutsWidget({
   defaultDestination = 'KTM',
   showQuickRoutes = true,
   showInlineResults = false,
+  lang = 'en',
+  onOpenPriceAlert,
 }) {
+  const isBn = lang === 'bn';
   const instanceId = useId();
   const originInputId = `${instanceId}-origin-input`;
-  const destInputId = `${instanceId}-dest-input`;
+  const destInputId = `ural-global-dest-input`;
   const departDateId = `${instanceId}-depart-date`;
   const returnDateId = `${instanceId}-return-date`;
 
@@ -996,6 +1112,12 @@ export default function TravelpayoutsWidget({
   const [destQuery, setDestQuery] = useState('');
   const [globalQuickQuery, setGlobalQuickQuery] = useState('');
   const [activeDropdown, setActiveDropdown] = useState(null); // 'origin' | 'dest' | 'global' | null
+  const [highlightIndex, setHighlightIndex] = useState(0);
+  const [swapRotation, setSwapRotation] = useState(0);
+  const [listeningField, setListeningField] = useState(null); // 'origin' | 'dest' | null
+  const [voiceFeedback, setVoiceFeedback] = useState(null); // { type: 'listening' | 'success' | 'error', text: string } | null
+  const [showPriceTrendChart, setShowPriceTrendChart] = useState(true);
+  const recognitionRef = useRef(null);
   const [originRemoteSuggestions, setOriginRemoteSuggestions] = useState([]);
   const [destRemoteSuggestions, setDestRemoteSuggestions] = useState([]);
   const [globalRemoteSuggestions, setGlobalRemoteSuggestions] = useState([]);
@@ -1066,7 +1188,7 @@ export default function TravelpayoutsWidget({
     setSelectedBookingFlight(null);
   }, [defaultOrigin, defaultDestination]);
 
-  // Close autocomplete dropdown on outside click
+  // Close autocomplete dropdown on outside click & clean up speech recognition on unmount
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (formWrapperRef.current && !formWrapperRef.current.contains(e.target)) {
@@ -1074,8 +1196,195 @@ export default function TravelpayoutsWidget({
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.abort();
+        } catch {
+          // ignore
+        }
+      }
+    };
   }, []);
+
+  const resolveSpokenPlace = async (spokenText) => {
+    const cleaned = (spokenText || '').replace(/[.,!?]/g, '').trim();
+    if (!cleaned) return null;
+    const localMatch = findAirportInfo(cleaned);
+    const isKnownDirectoryMatch = AIRPORTS_DIRECTORY.some((a) => a.code === localMatch.code);
+    if (isKnownDirectoryMatch) return localMatch;
+
+    try {
+      const res = await fetch(
+        `https://autocomplete.travelpayouts.com/places2?term=${encodeURIComponent(cleaned)}&locale=en&types[]=city&types[]=airport`
+      );
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          const top = data[0];
+          return {
+            code: (top.code || localMatch.code).toUpperCase(),
+            city: top.name || top.city_name || cleaned,
+            name: top.main_airport_name || `${top.name || cleaned} (${top.code})`,
+            country: top.country_name || 'International',
+            flag: '✈️',
+          };
+        }
+      }
+    } catch {
+      // Fallback to localMatch
+    }
+    return localMatch;
+  };
+
+  const applySpokenTranscript = async (transcriptText, targetField = 'dest') => {
+    const transcript = (transcriptText || '').trim();
+    if (!transcript) {
+      setVoiceFeedback(null);
+      return;
+    }
+
+    const routeParts = transcript
+      .replace(/^from\s+/i, '')
+      .split(/\s+(?:to|towards|for|থেকে)\s+/i)
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    if (routeParts.length >= 2) {
+      const [spokenOrig, spokenDest] = routeParts;
+      const [resolvedOrig, resolvedDest] = await Promise.all([
+        resolveSpokenPlace(spokenOrig),
+        resolveSpokenPlace(spokenDest),
+      ]);
+      if (resolvedOrig && resolvedDest) {
+        setOriginInfo(resolvedOrig);
+        setDestInfo(resolvedDest);
+        setOriginQuery('');
+        setDestQuery('');
+        setVoiceFeedback({
+          type: 'success',
+          text: `Voice route matched: ${resolvedOrig.city} (${resolvedOrig.code}) → ${resolvedDest.city} (${resolvedDest.code})`,
+        });
+        setTimeout(() => setVoiceFeedback(null), 5000);
+        return;
+      }
+    }
+
+    const resolvedPlace = await resolveSpokenPlace(transcript);
+    if (resolvedPlace) {
+      if (targetField === 'origin') {
+        setOriginInfo(resolvedPlace);
+        setOriginQuery('');
+        setVoiceFeedback({
+          type: 'success',
+          text: `Departure set by voice: ${resolvedPlace.city} (${resolvedPlace.code})`,
+        });
+      } else {
+        setDestInfo(resolvedPlace);
+        setDestQuery('');
+        setVoiceFeedback({
+          type: 'success',
+          text: `Destination set by voice: ${resolvedPlace.city} (${resolvedPlace.code})`,
+        });
+      }
+      setTimeout(() => setVoiceFeedback(null), 4500);
+    }
+  };
+
+  const handleVoiceDictation = (targetField, e) => {
+    if (e) e.stopPropagation();
+
+    if (listeningField === targetField && recognitionRef.current) {
+      try {
+        recognitionRef.current.stop();
+      } catch {
+        // ignore
+      }
+      setListeningField(null);
+      setVoiceFeedback(null);
+      return;
+    }
+
+    const SpeechRecognitionApi =
+      typeof window !== 'undefined' &&
+      (window.SpeechRecognition || window.webkitSpeechRecognition);
+
+    if (!SpeechRecognitionApi) {
+      setVoiceFeedback({
+        type: 'error',
+        text: isBn
+          ? 'আপনার ব্রাউজারে সরাসরি মাইক্রোফোন এপিআই নেই—নিচের যেকোনো ভয়েস রুট সিলেক্ট করুন:'
+          : 'Browser microphone API unavailable — pick a quick voice phrase below or type:',
+      });
+      return;
+    }
+
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.abort();
+      } catch {
+        // ignore
+      }
+    }
+
+    const recognition = new SpeechRecognitionApi();
+    recognitionRef.current = recognition;
+    recognition.lang = 'en-US';
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+
+    setListeningField(targetField);
+    setActiveDropdown(null);
+    setVoiceFeedback({
+      type: 'listening',
+      text: isBn
+        ? '🎙️ শুনছি... শহরের নাম বলুন অথবা "Dhaka to Jeddah" বলুন'
+        : targetField === 'origin'
+        ? '🎙️ Listening... Speak departure city or say "Dhaka to Jeddah"'
+        : '🎙️ Listening... Speak destination city or say "Dhaka to Bangkok"',
+    });
+
+    recognition.onresult = async (event) => {
+      const resultsList = event?.results;
+      if (!resultsList || !resultsList.length) return;
+      const latestResult = resultsList[resultsList.length - 1];
+      const transcript = latestResult?.[0]?.transcript?.trim() || '';
+
+      if (!latestResult.isFinal) {
+        if (transcript) {
+          setVoiceFeedback({
+            type: 'listening',
+            text: `🎙️ Hearing: "${transcript}"...`,
+          });
+        }
+        return;
+      }
+
+      setListeningField(null);
+      await applySpokenTranscript(transcript, targetField);
+    };
+
+    recognition.onerror = () => {
+      setListeningField(null);
+      setVoiceFeedback({
+        type: 'error',
+        text: isBn
+          ? 'মাইক্রোফোন অনুমতি প্রয়োজন অথবা নিচের ভয়েস রুট বাটনটি ব্যবহার করুন:'
+          : 'Microphone permission blocked in preview — click a voice command below or allow mic access:',
+      });
+    };
+
+    recognition.onend = () => {
+      setListeningField(null);
+    };
+
+    try {
+      recognition.start();
+    } catch {
+      setListeningField(null);
+    }
+  };
 
   // Fetch live airport/city suggestions from Travelpayouts Places2 API when user types
   useEffect(() => {
@@ -1128,6 +1437,9 @@ export default function TravelpayoutsWidget({
 
   const getFilteredAirports = (queryStr, field = 'dest') => {
     const q = (queryStr || '').trim().toLowerCase();
+    const compactUpper = q.toUpperCase().replace(/[^A-Z]/g, '');
+    const aliasCode = TYPO_AND_ALIAS_MAP[compactUpper];
+
     const remoteList =
       field === 'origin'
         ? originRemoteSuggestions
@@ -1135,13 +1447,19 @@ export default function TravelpayoutsWidget({
         ? globalRemoteSuggestions
         : destRemoteSuggestions;
     const localMatches = q
-      ? AIRPORTS_DIRECTORY.filter(
-          (a) =>
+      ? AIRPORTS_DIRECTORY.filter((a) => {
+          if (aliasCode && a.code === aliasCode) return true;
+          if (
             a.code.toLowerCase().includes(q) ||
             a.city.toLowerCase().includes(q) ||
             a.country.toLowerCase().includes(q) ||
             a.name.toLowerCase().includes(q)
-        )
+          ) {
+            return true;
+          }
+          const cityWords = a.city.toUpperCase().split(/[^A-Z]+/);
+          return cityWords.some((w) => isWithinOneEdit(compactUpper, w));
+        })
       : AIRPORTS_DIRECTORY.slice(0, 14);
 
     const seen = new Set(localMatches.map((a) => a.code));
@@ -1279,6 +1597,37 @@ export default function TravelpayoutsWidget({
     setDestInfo(prevO);
     setOriginQuery('');
     setDestQuery('');
+    setSwapRotation((r) => r + 180);
+  };
+
+  const handleInputKeyDown = (e, field) => {
+    const queryStr = field === 'origin' ? originQuery : destQuery;
+    const suggestions = getFilteredAirports(queryStr, field);
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActiveDropdown(field);
+      setHighlightIndex((prev) => (suggestions.length ? (prev + 1) % suggestions.length : 0));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActiveDropdown(field);
+      setHighlightIndex((prev) =>
+        suggestions.length ? (prev - 1 + suggestions.length) % suggestions.length : 0
+      );
+    } else if (e.key === 'Escape') {
+      setActiveDropdown(null);
+    } else if (e.key === 'Enter' && activeDropdown === field && suggestions.length > 0) {
+      e.preventDefault();
+      const picked = suggestions[highlightIndex] || suggestions[0];
+      if (field === 'origin') {
+        setOriginInfo(picked);
+        setOriginQuery('');
+      } else {
+        setDestInfo(picked);
+        setDestQuery('');
+      }
+      setActiveDropdown(null);
+      setHighlightIndex(0);
+    }
   };
 
   // Compute dynamic flight results based on committedQuery
@@ -1393,6 +1742,120 @@ export default function TravelpayoutsWidget({
     return `/travelpayouts-wl.html?origin=${effectiveOrigin.code}&destination=${effectiveDest.code}&flightSearch=${liveFormSearchCode}&currency=${currency}&standalone=1`;
   }, [effectiveOrigin.code, effectiveDest.code, liveFormSearchCode, currency]);
 
+  // 30-Day Historical & Projected Flight Price Trend Data for Recharts LineChart
+  const priceTrend30Days = useMemo(() => {
+    const destCode = (effectiveDest.code || 'KTM').toUpperCase();
+    const origCode = (effectiveOrigin.code || 'DAC').toUpperCase();
+    const routeEntry = ROUTE_DATABASE[destCode];
+
+    // Base round-trip BDT benchmark by route or region
+    let baseBdt = 34000;
+    if (routeEntry && routeEntry.flights && routeEntry.flights.length > 0) {
+      baseBdt = Math.min(...routeEntry.flights.map((f) => f.baseRoundtripBdt));
+    } else {
+      const globalBaselines = {
+        JED: 68000,
+        MED: 71000,
+        RUH: 64000,
+        DXB: 54000,
+        AUH: 53000,
+        DOH: 56000,
+        SIN: 42000,
+        MLE: 48000,
+        CCU: 16500,
+        DEL: 24500,
+        LHR: 96000,
+        LGW: 92000,
+        MAN: 98000,
+        CDG: 94000,
+        FCO: 91000,
+        IST: 78000,
+        JFK: 128000,
+        YYZ: 134000,
+        SYD: 118000,
+      };
+      const codeSeed =
+        (origCode.charCodeAt(0) + destCode.charCodeAt(0) + destCode.charCodeAt(1)) % 18;
+      baseBdt = globalBaselines[destCode] || 52000 + codeSeed * 2400;
+    }
+
+    const tripMultiplier = tripType === 'oneway' ? 0.58 : 1.0;
+    const cabinMultiplier = cabinClass === 'business' ? 2.35 : 1.0;
+    const paxMultiplier = Math.max(1, passengers);
+    const cfg = CURRENCY_CONFIG[currency] || CURRENCY_CONFIG.BDT;
+
+    const points = [];
+    const today = new Date();
+
+    for (let offset = 1; offset <= 30; offset++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() + offset);
+      const iso = d.toISOString().split('T')[0];
+      const dayOfWeek = d.getDay(); // 0 Sun .. 6 Sat
+      const shortLabel = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      const weekdayName = d.toLocaleDateString('en-US', { weekday: 'short' });
+
+      // Historical aviation booking curve:
+      // - Last-minute (days 1-5) carries a 14%-22% premium
+      // - Sweet spot booking window (days 13-23) drops 6%-11%
+      // - Tue/Wed departures are historically 5%-7% cheaper; Thu/Fri/Sun carry weekend demand surge
+      let advanceFactor = 1.0;
+      if (offset <= 4) advanceFactor = 1.19 - offset * 0.02;
+      else if (offset <= 10) advanceFactor = 1.06 - (offset - 4) * 0.01;
+      else if (offset >= 13 && offset <= 23) advanceFactor = 0.92 + ((offset % 3) * 0.012);
+      else advanceFactor = 0.97 + ((offset % 4) * 0.015);
+
+      const dowFactor =
+        dayOfWeek === 2 || dayOfWeek === 3
+          ? 0.94 // Tue / Wed lowest
+          : dayOfWeek === 4 || dayOfWeek === 5
+          ? 1.07 // Thu / Fri weekend surge
+          : dayOfWeek === 0
+          ? 1.04
+          : 0.99;
+
+      const wave = Math.sin((offset + destCode.charCodeAt(0)) * 0.65) * 0.025;
+      const bdtFare = Math.round(
+        (baseBdt * tripMultiplier * cabinMultiplier * paxMultiplier * (advanceFactor * dowFactor + wave)) /
+          100
+      ) * 100;
+
+      const convertedFare = Math.round(bdtFare * cfg.rateFromBdt);
+
+      points.push({
+        dayOffset: offset,
+        isoDate: iso,
+        dateLabel: shortLabel,
+        weekday: weekdayName,
+        price: convertedFare,
+        bdtPrice: bdtFare,
+        formattedPrice: `${cfg.symbol}${convertedFare.toLocaleString()} ${cfg.code}`,
+      });
+    }
+
+    const lowestPoint = points.reduce((min, p) => (p.price < min.price ? p : min), points[0]);
+    const highestPoint = points.reduce((max, p) => (p.price > max.price ? p : max), points[0]);
+    const avgPrice = Math.round(points.reduce((sum, p) => sum + p.price, 0) / points.length);
+    const potentialSavings = Math.max(0, avgPrice - lowestPoint.price);
+
+    return {
+      points,
+      lowestPoint,
+      highestPoint,
+      avgPrice,
+      potentialSavings,
+      currencySymbol: cfg.symbol,
+      currencyCode: cfg.code,
+    };
+  }, [
+    effectiveOrigin.code,
+    effectiveDest.code,
+    tripType,
+    cabinClass,
+    passengers,
+    currency,
+  ]);
+
   const formatMoney = (bdtAmount) => {
     const cfg = CURRENCY_CONFIG[currency] || CURRENCY_CONFIG.BDT;
     const converted = Math.round(bdtAmount * cfg.rateFromBdt);
@@ -1409,105 +1872,168 @@ export default function TravelpayoutsWidget({
   return (
     <div
       ref={formWrapperRef}
-      className="w-full overflow-visible rounded-2xl bg-white shadow-xl border border-slate-200/90 text-slate-900"
+      className="w-full overflow-visible rounded-2xl bg-white shadow-[0_14px_34px_-10px_rgba(11,25,44,0.16)] border border-slate-200/90 text-slate-900"
     >
-      {/* MAIN UNIFIED WHITE-LABEL GLOBAL FLIGHT SEARCH BAR */}
+      {/* ONE CARD, ONE JOB: UNIFIED SKYSCANNER-GRADE WHITE-LABEL FLIGHT SEARCH BAR */}
       <form
         onSubmit={handleFormSubmit}
         className={`p-4 sm:p-6 bg-white ${showInlineResults ? 'border-b border-slate-200 rounded-t-2xl' : 'rounded-2xl'}`}
       >
-        {/* ROW 1 (Cockpit Control Strip): Trip Type, Cabin, Passengers + Currency Switcher */}
+        {/* ROW 1: Segmented Control Track (Trip Type, Cabin, Passengers) + Multi-Currency Switcher */}
         <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100">
-          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
-            {/* Round-trip vs One-way */}
-            <div className="inline-flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200/60">
+          <div className="flex flex-wrap items-center gap-2.5">
+            {/* Segmented Trip-Type Control with CSS-only sliding pill + gold dot */}
+            <div
+              role="group"
+              aria-label={isBn ? 'ট্রিপের ধরন' : 'Trip type'}
+              className="relative grid grid-cols-2 items-center bg-slate-100 p-1 rounded-xl border border-slate-200/70 min-w-[216px]"
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  transform: tripType === 'roundtrip' ? 'translateX(0%)' : 'translateX(100%)',
+                  transitionProperty: 'transform',
+                }}
+                className="pointer-events-none absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-lg bg-white shadow-xs duration-200 ease-out"
+              />
               <button
                 type="button"
+                aria-current={tripType === 'roundtrip' ? 'true' : undefined}
                 onClick={() => setTripType('roundtrip')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                className={`relative z-10 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
                   tripType === 'roundtrip'
-                    ? 'bg-brand-navy text-white shadow-xs'
+                    ? 'text-brand-navy'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                Round-Trip
+                <span
+                  className={`w-1.5 h-1.5 rounded-full transition-opacity ${
+                    tripType === 'roundtrip' ? 'bg-[#F6B73C] opacity-100' : 'opacity-0'
+                  }`}
+                />
+                <span>{isBn ? 'রাউন্ড-ট্রিপ' : 'Round-Trip'}</span>
               </button>
               <button
                 type="button"
+                aria-current={tripType === 'oneway' ? 'true' : undefined}
                 onClick={() => setTripType('oneway')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                className={`relative z-10 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
                   tripType === 'oneway'
-                    ? 'bg-brand-navy text-white shadow-xs'
+                    ? 'text-brand-navy'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                One-Way
+                <span
+                  className={`w-1.5 h-1.5 rounded-full transition-opacity ${
+                    tripType === 'oneway' ? 'bg-[#F6B73C] opacity-100' : 'opacity-0'
+                  }`}
+                />
+                <span>{isBn ? 'ওয়ান-ওয়ে' : 'One-Way'}</span>
               </button>
             </div>
 
-            {/* Cabin Class */}
-            <div className="inline-flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200/60">
+            {/* Segmented Cabin Class Control with CSS-only sliding pill */}
+            <div
+              role="group"
+              aria-label={isBn ? 'কেবিন ক্লাস' : 'Cabin class'}
+              className="relative grid grid-cols-2 items-center bg-slate-100 p-1 rounded-xl border border-slate-200/70 min-w-[184px]"
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  transform: cabinClass === 'economy' ? 'translateX(0%)' : 'translateX(100%)',
+                  transitionProperty: 'transform',
+                }}
+                className="pointer-events-none absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-lg bg-white shadow-xs duration-200 ease-out"
+              />
               <button
                 type="button"
+                aria-current={cabinClass === 'economy' ? 'true' : undefined}
                 onClick={() => setCabinClass('economy')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`relative z-10 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
                   cabinClass === 'economy'
-                    ? 'bg-white text-slate-900 shadow-2xs font-bold'
+                    ? 'text-brand-navy font-bold'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                Economy
+                {isBn ? 'ইকোনমি' : 'Economy'}
               </button>
               <button
                 type="button"
+                aria-current={cabinClass === 'business' ? 'true' : undefined}
                 onClick={() => setCabinClass('business')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`relative z-10 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
                   cabinClass === 'business'
-                    ? 'bg-white text-slate-900 shadow-2xs font-bold'
+                    ? 'text-brand-navy font-bold'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                Business
+                {isBn ? 'বিজনেস' : 'Business'}
               </button>
             </div>
 
             {/* Passengers Counter */}
-            <div className="inline-flex items-center gap-2 bg-slate-100/80 border border-slate-200/80 px-3 py-1.5 rounded-xl">
+            <div className="inline-flex items-center gap-2 bg-slate-100/90 border border-slate-200/80 px-3 py-1.5 rounded-xl">
               <Users size={14} className="text-brand-navy" />
               <button
                 type="button"
                 onClick={() => setPassengers((p) => Math.max(1, p - 1))}
-                className="w-5 h-5 rounded-md bg-white border border-slate-200 text-slate-700 hover:bg-brand-navy hover:text-white font-bold text-xs flex items-center justify-center transition-colors cursor-pointer"
+                className="w-6 h-6 rounded-md bg-white border border-slate-200 text-slate-700 hover:bg-brand-navy hover:text-white font-bold text-xs flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
                 aria-label="Decrease passengers"
               >
                 -
               </button>
-              <span className="text-xs font-bold font-mono text-slate-900 min-w-[54px] text-center tabular-nums">
-                {passengers} {passengers === 1 ? 'Adult' : 'Adults'}
+              <span className="text-xs font-bold font-mono text-slate-900 min-w-[62px] text-center tabular-nums">
+                {passengers}{' '}
+                {isBn
+                  ? 'জন যাত্রী'
+                  : passengers === 1
+                  ? 'Traveler'
+                  : 'Travelers'}
               </span>
               <button
                 type="button"
                 onClick={() => setPassengers((p) => Math.min(9, p + 1))}
-                className="w-5 h-5 rounded-md bg-white border border-slate-200 text-slate-700 hover:bg-brand-navy hover:text-white font-bold text-xs flex items-center justify-center transition-colors cursor-pointer"
+                className="w-6 h-6 rounded-md bg-white border border-slate-200 text-slate-700 hover:bg-brand-navy hover:text-white font-bold text-xs flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
                 aria-label="Increase passengers"
               >
                 +
               </button>
             </div>
+
+            {/* Dedicated Voice Search Pill Button in Control Bar */}
+            <button
+              type="button"
+              onClick={(e) => handleVoiceDictation('dest', e)}
+              aria-label={
+                listeningField
+                  ? 'Stop voice search dictation'
+                  : 'Dictate departure and destination route by voice'
+              }
+              aria-pressed={Boolean(listeningField)}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
+                listeningField
+                  ? 'bg-rose-500 text-white border-rose-500 ring-4 ring-rose-500/20 animate-pulse'
+                  : 'bg-amber-50/90 hover:bg-[#F6B73C]/25 text-brand-navy border-[#F6B73C]/50'
+              }`}
+            >
+              {listeningField ? <MicOff size={13} /> : <Mic size={13} className="text-brand-navy" />}
+              <span>{listeningField ? (isBn ? 'শুনছি...' : 'Listening...') : isBn ? 'ভয়েস সার্চ' : 'Voice Search'}</span>
+            </button>
           </div>
 
           {/* Global Multi-Currency Switcher */}
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-semibold text-slate-400 hidden lg:inline">
-              Currency:
+            <span className="text-[11px] font-semibold text-slate-500 hidden xl:inline">
+              {isBn ? 'মুদ্রা:' : 'Currency:'}
             </span>
-            <div className="inline-flex flex-wrap items-center bg-slate-100 p-1 rounded-xl border border-slate-200/60 text-xs font-semibold">
+            <div className="inline-flex flex-wrap items-center bg-slate-100 p-1 rounded-xl border border-slate-200/70 text-xs font-semibold">
               {Object.values(CURRENCY_CONFIG).map((curr) => (
                 <button
                   key={curr.code}
                   type="button"
                   onClick={() => setCurrency(curr.code)}
-                  className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                  className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
                     currency === curr.code
                       ? 'bg-brand-navy text-[#F6B73C] font-bold shadow-2xs'
                       : 'text-slate-600 hover:text-slate-900'
@@ -1520,252 +2046,369 @@ export default function TravelpayoutsWidget({
           </div>
         </div>
 
-        {/* ROW 2: THE ONE ELEVATED COCKPIT SEARCH BAR */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-2.5 items-stretch">
-          {/* FROM AIRPORT */}
-          <div className="lg:col-span-3 relative">
-            <div
-              onClick={() => setActiveDropdown('origin')}
-              className={`h-[68px] w-full bg-slate-50/90 hover:bg-slate-100/70 border rounded-xl px-3.5 py-2 cursor-text transition-all flex flex-col justify-between ${
-                activeDropdown === 'origin'
-                  ? 'border-brand-navy ring-2 ring-brand-navy/15 bg-white shadow-sm'
-                  : 'border-slate-200/90'
-              }`}
-            >
-              <div className="flex items-center justify-between gap-1">
-                <label
-                  htmlFor={originInputId}
-                  className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 cursor-pointer"
-                >
-                  From · Origin
-                </label>
-                <span className="text-[10px] font-mono font-bold bg-brand-navy/10 text-brand-navy px-1.5 py-0.5 rounded">
-                  {effectiveOrigin.code}
-                </span>
-              </div>
-
-              <input
-                id={originInputId}
-                type="text"
-                value={
-                  activeDropdown === 'origin'
-                    ? originQuery
-                    : `${originInfo.flag || '✈️'} ${originInfo.city} (${originInfo.code})`
-                }
-                placeholder="Type origin city or airport..."
-                onFocus={() => {
+        {/* ROW 2: UNIFIED INSET FIELD STRIP + PRIMARY GOLD SUBMIT CTA */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch">
+          {/* Unified Inset Field Strip (From ↔ To + Departure + Return) */}
+          <div className="lg:col-span-10 grid grid-cols-1 md:grid-cols-12 rounded-2xl border border-slate-200 bg-white shadow-[0_2px_12px_-3px_rgba(11,25,44,0.07)] divide-y md:divide-y-0 md:divide-x divide-slate-200/90 overflow-visible">
+            {/* FROM CELL */}
+            <div className="md:col-span-4 relative">
+              <div
+                onClick={() => {
                   setActiveDropdown('origin');
-                  setOriginQuery('');
+                  setHighlightIndex(0);
                 }}
-                onChange={(e) => setOriginQuery(e.target.value)}
-                className="w-full bg-transparent text-sm sm:text-[15px] font-extrabold text-slate-900 placeholder:text-slate-400 placeholder:font-medium focus:outline-none truncate"
-              />
-
-              <div className="text-[11px] text-slate-500 truncate">
-                {effectiveOrigin.name}
-              </div>
-            </div>
-
-            {/* Origin Autocomplete Dropdown */}
-            {activeDropdown === 'origin' && (
-              <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 max-h-72 overflow-y-auto py-1">
-                <div className="px-3.5 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 bg-slate-50/60">
-                  Select Departure Airport (Type any city worldwide)
-                </div>
-                {getFilteredAirports(originQuery, 'origin').map((airport) => (
-                  <button
-                    key={`orig-${airport.code}-${airport.city}`}
-                    type="button"
-                    onClick={() => {
-                      setOriginInfo(airport);
-                      setOriginQuery('');
-                      setActiveDropdown(null);
-                    }}
-                    className="w-full px-3.5 py-2.5 text-left hover:bg-slate-50 flex items-center justify-between gap-2 transition-colors cursor-pointer border-b border-slate-50 last:border-0"
+                className={`min-h-[68px] w-full px-4 py-2.5 cursor-text transition-all duration-200 ease-out flex flex-col justify-between rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none focus-within:scale-[1.015] focus-within:-translate-y-[1px] focus-within:bg-white focus-within:shadow-[0_0_0_2px_#F6B73C,0_12px_28px_-6px_rgba(246,183,60,0.32)] focus-within:z-20 ${
+                  activeDropdown === 'origin'
+                    ? 'scale-[1.015] -translate-y-[1px] bg-white shadow-[0_0_0_2px_#F6B73C,0_12px_28px_-6px_rgba(246,183,60,0.32)] z-20'
+                    : 'hover:bg-slate-50/80'
+                }`}
+              >
+                <div className="flex items-center justify-between gap-1">
+                  <label
+                    htmlFor={originInputId}
+                    className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 cursor-pointer"
                   >
-                    <div className="min-w-0">
-                      <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                        <span>{airport.flag}</span>
-                        <span>{airport.city}</span>
-                        <span className="text-slate-400 font-normal">· {airport.country}</span>
-                      </div>
-                      <div className="text-[11px] text-slate-500 truncate">{airport.name}</div>
-                    </div>
-                    <span className="text-xs font-mono font-bold text-brand-navy bg-slate-100 px-2 py-0.5 rounded shrink-0">
-                      {airport.code}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* SWAP + TO AIRPORT */}
-          <div className="lg:col-span-3 relative">
-            <button
-              type="button"
-              onClick={handleSwapLocations}
-              title="Swap Origin and Destination"
-              className="hidden lg:flex absolute -left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-slate-300 shadow-md items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-[#F6B73C] hover:border-brand-navy hover:rotate-180 transition-all duration-300 cursor-pointer"
-            >
-              <ArrowRightLeft size={13} />
-            </button>
-
-            <div
-              onClick={() => setActiveDropdown('dest')}
-              className={`h-[68px] w-full bg-slate-50/90 hover:bg-slate-100/70 border rounded-xl px-3.5 py-2 cursor-text transition-all flex flex-col justify-between ${
-                activeDropdown === 'dest'
-                  ? 'border-brand-navy ring-2 ring-brand-navy/15 bg-white shadow-sm'
-                  : 'border-slate-200/90'
-              }`}
-            >
-              <div className="flex items-center justify-between gap-1">
-                <label
-                  htmlFor={destInputId}
-                  className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 cursor-pointer"
-                >
-                  To · Any Global City
-                </label>
-                <div className="flex items-center gap-1.5">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleSwapLocations();
-                    }}
-                    className="lg:hidden text-[10px] font-bold text-brand-navy flex items-center gap-0.5 cursor-pointer"
-                  >
-                    <ArrowRightLeft size={10} /> Swap
-                  </button>
-                  <span className="text-[10px] font-mono font-bold bg-[#F6B73C]/30 text-brand-navy px-1.5 py-0.5 rounded">
-                    {effectiveDest.code}
+                    {isBn ? 'কোথা থেকে · From' : 'From · Origin'}
+                  </label>
+                  <span className="text-[11px] font-mono font-bold bg-brand-navy/10 text-brand-navy px-1.5 py-0.5 rounded">
+                    {effectiveOrigin.code}
                   </span>
                 </div>
-              </div>
 
-              <input
-                id={destInputId}
-                type="text"
-                value={
-                  activeDropdown === 'dest'
-                    ? destQuery
-                    : `${destInfo.flag || '🌍'} ${destInfo.city} (${destInfo.code})`
-                }
-                placeholder="City, country, or IATA (London, JED, JFK)..."
-                onFocus={() => {
-                  setActiveDropdown('dest');
-                  setDestQuery('');
-                }}
-                onChange={(e) => setDestQuery(e.target.value)}
-                className="w-full bg-transparent text-sm sm:text-[15px] font-extrabold text-slate-900 placeholder:text-slate-400 placeholder:font-medium focus:outline-none truncate"
-              />
-
-              <div className="text-[11px] text-slate-500 truncate">
-                {effectiveDest.name}
-              </div>
-            </div>
-
-            {/* Destination Autocomplete Dropdown */}
-            {activeDropdown === 'dest' && (
-              <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 max-h-72 overflow-y-auto py-1">
-                <div className="px-3.5 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 bg-slate-50/60">
-                  Select Destination City or Airport Worldwide
-                </div>
-                {getFilteredAirports(destQuery, 'dest').map((airport) => (
-                  <button
-                    key={`dest-${airport.code}-${airport.city}`}
-                    type="button"
-                    onClick={() => {
-                      setDestInfo(airport);
-                      setDestQuery('');
-                      setActiveDropdown(null);
+                <div className="flex items-center gap-1.5">
+                  <input
+                    id={originInputId}
+                    type="text"
+                    role="combobox"
+                    aria-expanded={activeDropdown === 'origin'}
+                    aria-autocomplete="list"
+                    value={
+                      activeDropdown === 'origin'
+                        ? originQuery
+                        : `${originInfo.flag || '✈️'} ${originInfo.city} (${originInfo.code})`
+                    }
+                    placeholder={
+                      isBn
+                        ? 'যাত্রার শহর বা বিমানবন্দর (যেমন: Dhaka, DAC)...'
+                        : 'Origin city or IATA (e.g. Dhaka, DAC, LHR)...'
+                    }
+                    onFocus={() => {
+                      setActiveDropdown('origin');
+                      setOriginQuery('');
+                      setHighlightIndex(0);
                     }}
-                    className="w-full px-3.5 py-2.5 text-left hover:bg-slate-50 flex items-center justify-between gap-2 transition-colors cursor-pointer border-b border-slate-50 last:border-0"
+                    onChange={(e) => {
+                      setOriginQuery(e.target.value);
+                      setHighlightIndex(0);
+                    }}
+                    onKeyDown={(e) => handleInputKeyDown(e, 'origin')}
+                    className="w-full bg-transparent text-sm sm:text-[15px] font-extrabold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:outline-none truncate"
+                  />
+                  <button
+                    type="button"
+                    onClick={(e) => handleVoiceDictation('origin', e)}
+                    aria-label={
+                      listeningField === 'origin'
+                        ? 'Stop voice input for departure city'
+                        : 'Dictate departure city by voice'
+                    }
+                    aria-pressed={listeningField === 'origin'}
+                    title={
+                      isBn
+                        ? 'ভয়েস দিয়ে যাত্রার শহর বলুন'
+                        : 'Speak departure city (or say "Dhaka to Jeddah")'
+                    }
+                    className={`w-7 h-7 shrink-0 rounded-lg flex items-center justify-center transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
+                      listeningField === 'origin'
+                        ? 'bg-rose-500 text-white ring-4 ring-rose-500/25 animate-pulse'
+                        : 'bg-slate-100 hover:bg-brand-navy text-brand-navy hover:text-[#F6B73C]'
+                    }`}
                   >
-                    <div className="min-w-0">
-                      <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                        <span>{airport.flag}</span>
-                        <span>{airport.city}</span>
-                        <span className="text-slate-400 font-normal">· {airport.country}</span>
-                      </div>
-                      <div className="text-[11px] text-slate-500 truncate">{airport.name}</div>
-                    </div>
-                    <span className="text-xs font-mono font-bold text-brand-navy bg-slate-100 px-2 py-0.5 rounded shrink-0">
-                      {airport.code}
-                    </span>
+                    {listeningField === 'origin' ? <MicOff size={13} /> : <Mic size={13} />}
                   </button>
-                ))}
-              </div>
-            )}
-          </div>
+                </div>
 
-          {/* DEPARTURE & RETURN DATES */}
-          <div className="lg:col-span-4 grid grid-cols-2 gap-2.5">
-            <div className="h-[68px] bg-slate-50/90 hover:bg-slate-100/70 border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-colors">
-              <label
-                htmlFor={departDateId}
-                className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 cursor-pointer"
-              >
-                Departure
-              </label>
-              <input
-                id={departDateId}
-                type="date"
-                value={departDate}
-                onChange={(e) => {
-                  const nextDep = e.target.value;
-                  setDepartDate(nextDep);
-                  if (returnDate && nextDep > returnDate) {
-                    setReturnDate(nextDep);
-                  }
-                }}
-                className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
-              />
-              <span className="text-[11px] text-slate-500 truncate">
-                {formatReadableDate(departDate)}
-              </span>
+                <div className="text-[11px] text-slate-500 truncate">
+                  {effectiveOrigin.name}
+                </div>
+              </div>
+
+              {/* Origin Autocomplete Popover */}
+              {activeDropdown === 'origin' && (
+                <div
+                  role="listbox"
+                  className="absolute left-0 right-0 top-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-2xl z-50 max-h-72 overflow-y-auto py-1.5"
+                >
+                  <div className="px-3.5 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 bg-slate-50/70">
+                    {isBn
+                      ? 'যাত্রার বিমানবন্দর নির্বাচন করুন (যেকোনো শহর টাইপ করুন)'
+                      : 'Select Departure Airport · Typo-Tolerant Global Search'}
+                  </div>
+                  {getFilteredAirports(originQuery, 'origin').map((airport, idx) => (
+                    <button
+                      key={`orig-${airport.code}-${airport.city}`}
+                      type="button"
+                      role="option"
+                      aria-selected={idx === highlightIndex}
+                      onClick={() => {
+                        setOriginInfo(airport);
+                        setOriginQuery('');
+                        setActiveDropdown(null);
+                      }}
+                      className={`w-full px-3.5 py-2.5 text-left flex items-center justify-between gap-2 transition-colors cursor-pointer border-b border-slate-50 last:border-0 ${
+                        idx === highlightIndex ? 'bg-amber-50/70' : 'hover:bg-slate-50'
+                      }`}
+                    >
+                      <div className="min-w-0">
+                        <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                          <span>{airport.flag}</span>
+                          <span>{airport.city}</span>
+                          <span className="text-slate-400 font-normal">· {airport.country}</span>
+                        </div>
+                        <div className="text-[11px] text-slate-500 truncate">{airport.name}</div>
+                      </div>
+                      <span className="text-xs font-mono font-bold text-brand-navy bg-slate-100 px-2 py-0.5 rounded shrink-0">
+                        {airport.code}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {tripType === 'roundtrip' ? (
-              <div className="h-[68px] bg-slate-50/90 hover:bg-slate-100/70 border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-colors">
-                <label
-                  htmlFor={returnDateId}
-                  className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 cursor-pointer"
+            {/* SWAP + TO CELL */}
+            <div className="md:col-span-4 relative">
+              {/* 44px Hit-Area Circular Swap Button with Fluid Spring Rotation */}
+              <button
+                type="button"
+                onClick={handleSwapLocations}
+                aria-label={
+                  isBn
+                    ? 'যাত্রার স্থান এবং গন্তব্য অদলবদল করুন'
+                    : 'Swap departure and destination airports'
+                }
+                title={isBn ? 'স্থান অদলবদল করুন' : 'Swap Origin and Destination'}
+                className="hidden md:flex absolute -left-[22px] top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-white border border-slate-300 shadow-md items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-[#F6B73C] hover:border-brand-navy active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] transition-all duration-200 cursor-pointer"
+              >
+                <ArrowRightLeft
+                  size={15}
+                  style={{
+                    transform: `rotate(${swapRotation}deg)`,
+                  }}
+                  className="transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+                />
+              </button>
+
+              <div
+                onClick={() => {
+                  setActiveDropdown('dest');
+                  setHighlightIndex(0);
+                }}
+                className={`min-h-[68px] w-full px-4 md:pl-7 py-2.5 cursor-text transition-all duration-200 ease-out flex flex-col justify-between focus-within:scale-[1.015] focus-within:-translate-y-[1px] focus-within:bg-white focus-within:shadow-[0_0_0_2px_#F6B73C,0_12px_28px_-6px_rgba(246,183,60,0.32)] focus-within:z-20 ${
+                  activeDropdown === 'dest'
+                    ? 'scale-[1.015] -translate-y-[1px] bg-white shadow-[0_0_0_2px_#F6B73C,0_12px_28px_-6px_rgba(246,183,60,0.32)] z-20'
+                    : 'hover:bg-slate-50/80'
+                }`}
+              >
+                <div className="flex items-center justify-between gap-1">
+                  <label
+                    htmlFor={destInputId}
+                    className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 cursor-pointer"
+                  >
+                    {isBn ? 'গন্তব্য · To' : 'To · Destination'}
+                  </label>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSwapLocations();
+                      }}
+                      aria-label="Swap departure and destination airports"
+                      className="md:hidden inline-flex items-center gap-1 text-[11px] font-bold text-brand-navy bg-slate-100 hover:bg-slate-200 px-2 py-0.5 rounded-md cursor-pointer"
+                    >
+                      <ArrowRightLeft
+                        size={11}
+                        style={{ transform: `rotate(${swapRotation}deg)` }}
+                        className="transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+                      />
+                      <span>{isBn ? 'অদলবদল' : 'Swap'}</span>
+                    </button>
+                    <span className="text-[11px] font-mono font-bold bg-[#F6B73C]/30 text-brand-navy px-1.5 py-0.5 rounded">
+                      {effectiveDest.code}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <input
+                    id={destInputId}
+                    type="text"
+                    role="combobox"
+                    aria-expanded={activeDropdown === 'dest'}
+                    aria-autocomplete="list"
+                    value={
+                      activeDropdown === 'dest'
+                        ? destQuery
+                        : `${destInfo.flag || '🌍'} ${destInfo.city} (${destInfo.code})`
+                    }
+                    placeholder={
+                      isBn
+                        ? 'যেকোনো শহর, দেশ বা কোড (Jeddah, LHR, JFK)...'
+                        : 'City, country, or IATA (Jeddah, LHR, JFK)...'
+                    }
+                    onFocus={() => {
+                      setActiveDropdown('dest');
+                      setDestQuery('');
+                      setHighlightIndex(0);
+                    }}
+                    onChange={(e) => {
+                      setDestQuery(e.target.value);
+                      setHighlightIndex(0);
+                    }}
+                    onKeyDown={(e) => handleInputKeyDown(e, 'dest')}
+                    className="w-full bg-transparent text-sm sm:text-[15px] font-extrabold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:outline-none truncate"
+                  />
+                  <button
+                    type="button"
+                    onClick={(e) => handleVoiceDictation('dest', e)}
+                    aria-label={
+                      listeningField === 'dest'
+                        ? 'Stop voice input for destination'
+                        : 'Dictate destination city by voice'
+                    }
+                    aria-pressed={listeningField === 'dest'}
+                    title={
+                      isBn
+                        ? 'ভয়েস দিয়ে গন্তব্য শহর বলুন'
+                        : 'Speak destination city (or say "Dhaka to Jeddah")'
+                    }
+                    className={`w-7 h-7 shrink-0 rounded-lg flex items-center justify-center transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
+                      listeningField === 'dest'
+                        ? 'bg-rose-500 text-white ring-4 ring-rose-500/25 animate-pulse'
+                        : 'bg-slate-100 hover:bg-brand-navy text-brand-navy hover:text-[#F6B73C]'
+                    }`}
+                  >
+                    {listeningField === 'dest' ? <MicOff size={13} /> : <Mic size={13} />}
+                  </button>
+                </div>
+
+                <div className="text-[11px] text-slate-500 truncate">
+                  {effectiveDest.name}
+                </div>
+              </div>
+
+              {/* Destination Autocomplete Popover */}
+              {activeDropdown === 'dest' && (
+                <div
+                  role="listbox"
+                  className="absolute left-0 right-0 top-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-2xl z-50 max-h-72 overflow-y-auto py-1.5"
                 >
-                  Return
+                  <div className="px-3.5 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 bg-slate-50/70">
+                    {isBn
+                      ? 'গন্তব্য শহর বা বিমানবন্দর নির্বাচন করুন'
+                      : 'Select Global Destination · City, Country, or IATA'}
+                  </div>
+                  {getFilteredAirports(destQuery, 'dest').map((airport, idx) => (
+                    <button
+                      key={`dest-${airport.code}-${airport.city}`}
+                      type="button"
+                      role="option"
+                      aria-selected={idx === highlightIndex}
+                      onClick={() => {
+                        setDestInfo(airport);
+                        setDestQuery('');
+                        setActiveDropdown(null);
+                      }}
+                      className={`w-full px-3.5 py-2.5 text-left flex items-center justify-between gap-2 transition-colors cursor-pointer border-b border-slate-50 last:border-0 ${
+                        idx === highlightIndex ? 'bg-amber-50/70' : 'hover:bg-slate-50'
+                      }`}
+                    >
+                      <div className="min-w-0">
+                        <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                          <span>{airport.flag}</span>
+                          <span>{airport.city}</span>
+                          <span className="text-slate-400 font-normal">· {airport.country}</span>
+                        </div>
+                        <div className="text-[11px] text-slate-500 truncate">{airport.name}</div>
+                      </div>
+                      <span className="text-xs font-mono font-bold text-brand-navy bg-slate-100 px-2 py-0.5 rounded shrink-0">
+                        {airport.code}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* DEPARTURE & RETURN DATES */}
+            <div className="md:col-span-4 grid grid-cols-2 divide-x divide-slate-200/90">
+              <div className="min-h-[68px] px-3.5 py-2.5 flex flex-col justify-between transition-all duration-200 ease-out hover:bg-slate-50/80 focus-within:scale-[1.015] focus-within:-translate-y-[1px] focus-within:bg-white focus-within:shadow-[0_0_0_2px_#F6B73C,0_12px_28px_-6px_rgba(246,183,60,0.32)] focus-within:z-20">
+                <label
+                  htmlFor={departDateId}
+                  className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 cursor-pointer"
+                >
+                  {isBn ? 'যাত্রা · Depart' : 'Departure'}
                 </label>
                 <input
-                  id={returnDateId}
+                  id={departDateId}
                   type="date"
-                  value={returnDate}
-                  min={departDate}
-                  onChange={(e) => setReturnDate(e.target.value)}
+                  value={departDate}
+                  onChange={(e) => {
+                    const nextDep = e.target.value;
+                    setDepartDate(nextDep);
+                    if (returnDate && nextDep > returnDate) {
+                      setReturnDate(nextDep);
+                    }
+                  }}
                   className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
                 />
                 <span className="text-[11px] text-slate-500 truncate">
-                  {formatReadableDate(returnDate)}
+                  {formatReadableDate(departDate)}
                 </span>
               </div>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setTripType('roundtrip')}
-                className="h-[68px] w-full bg-slate-50/60 hover:bg-slate-100 border border-dashed border-slate-300 rounded-xl px-3.5 py-2 text-left flex flex-col justify-between transition-colors cursor-pointer"
-              >
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                  Return Date
-                </span>
-                <span className="text-xs sm:text-sm font-bold text-brand-navy">
-                  + Add Return
-                </span>
-                <span className="text-[11px] text-slate-500 truncate">
-                  One-way selected
-                </span>
-              </button>
-            )}
+
+              {tripType === 'roundtrip' ? (
+                <div className="min-h-[68px] px-3.5 py-2.5 flex flex-col justify-between transition-all duration-200 ease-out rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none hover:bg-slate-50/80 focus-within:scale-[1.015] focus-within:-translate-y-[1px] focus-within:bg-white focus-within:shadow-[0_0_0_2px_#F6B73C,0_12px_28px_-6px_rgba(246,183,60,0.32)] focus-within:z-20">
+                  <label
+                    htmlFor={returnDateId}
+                    className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 cursor-pointer"
+                  >
+                    {isBn ? 'ফেরা · Return' : 'Return'}
+                  </label>
+                  <input
+                    id={returnDateId}
+                    type="date"
+                    value={returnDate}
+                    min={departDate}
+                    onChange={(e) => setReturnDate(e.target.value)}
+                    className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
+                  />
+                  <span className="text-[11px] text-slate-500 truncate">
+                    {formatReadableDate(returnDate)}
+                  </span>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setTripType('roundtrip')}
+                  className="min-h-[68px] w-full bg-slate-50/50 hover:bg-slate-100/80 px-3.5 py-2.5 text-left flex flex-col justify-between transition-all duration-200 cursor-pointer rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+                >
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    {isBn ? 'ফেরা · Return' : 'Return'}
+                  </span>
+                  <span className="text-xs sm:text-sm font-bold text-brand-navy">
+                    {isBn ? '+ রিটার্ন যোগ করুন' : '+ Add Return'}
+                  </span>
+                  <span className="text-[11px] text-slate-500 truncate">
+                    {isBn ? 'ওয়ান-ওয়ে নির্বাচিত' : 'One-way fare'}
+                  </span>
+                </button>
+              )}
+            </div>
           </div>
 
-          {/* PRIMARY GOLD CTA BUTTON: Opens URAL White-Label Search ONLY in New Tab */}
+          {/* PRIMARY GOLD SUBMIT BUTTON: Opens URAL White-Label Search strictly in New Tab */}
           <div className="lg:col-span-2 flex">
             <a
               href={liveFormUralWlUrl}
@@ -1783,57 +2426,348 @@ export default function TravelpayoutsWidget({
                 }
                 setActiveDropdown(null);
               }}
-              className="w-full h-[68px] bg-[#F6B73C] hover:bg-[#f5ad24] active:scale-[0.99] text-brand-navy rounded-xl shadow-md hover:shadow-lg transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer px-3 text-center group"
+              className="w-full min-h-[56px] lg:min-h-[68px] bg-[#F6B73C] hover:bg-[#f5ad24] active:scale-[0.99] text-brand-navy rounded-2xl shadow-[0_10px_22px_-5px_rgba(246,183,60,0.55)] hover:shadow-[0_14px_28px_-5px_rgba(246,183,60,0.75)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer px-4 text-center group"
             >
-              <div className="flex items-center gap-1.5 font-black text-sm sm:text-[15px] tracking-tight">
-                <Search size={16} className="shrink-0 stroke-[2.5]" />
-                <span>Search Flights</span>
-                <ExternalLink size={13} className="shrink-0 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <div className="flex items-center gap-1.5 font-black text-base tracking-tight">
+                <Search size={17} className="shrink-0 stroke-[2.5]" />
+                <span>{isBn ? 'ফ্লাইট খুঁজুন' : 'Search Flights'}</span>
+                <ArrowRight
+                  size={16}
+                  className="shrink-0 stroke-[2.5] group-hover:translate-x-0.5 transition-transform"
+                />
               </div>
-              <span className="text-[10px] font-mono font-bold text-brand-navy/75">
+              <span className="text-[11px] font-mono font-bold text-brand-navy/80">
                 {effectiveOrigin.code} → {effectiveDest.code} · {currency}
               </span>
             </a>
           </div>
         </div>
 
-        {/* ROW 3: 8 QUICK-SELECT POPULAR GLOBAL HUB CHIPS */}
-        {showQuickRoutes && (
-          <div className="mt-4 pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
+        {/* LIVE VOICE DICTATION STATUS FEEDBACK PILL + QUICK VOICE ROUTE PRESETS */}
+        {voiceFeedback && (
+          <div
+            role="status"
+            aria-live="polite"
+            className={`mt-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border transition-all ${
+              voiceFeedback.type === 'listening'
+                ? 'bg-amber-50 border-[#F6B73C] text-brand-navy'
+                : voiceFeedback.type === 'success'
+                ? 'bg-emerald-50 border-emerald-200 text-emerald-900'
+                : 'bg-amber-50/80 border-amber-300 text-slate-800'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Mic
+                size={14}
+                className={
+                  voiceFeedback.type === 'listening'
+                    ? 'text-rose-500 animate-pulse shrink-0'
+                    : 'text-brand-navy shrink-0'
+                }
+              />
+              <span>{voiceFeedback.text}</span>
+            </div>
             <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1">
-                Popular Hubs:
-              </span>
-              {POPULAR_ROUTES.map((route) => {
-                const isSelected =
-                  originInfo.code === route.origin && destInfo.code === route.destination;
-                return (
+              {['Dhaka to Jeddah', 'Dhaka to Bangkok', 'Dhaka to Kathmandu', 'Dhaka to London'].map(
+                (samplePhrase) => (
                   <button
-                    key={`${route.origin}-${route.destination}`}
+                    key={samplePhrase}
                     type="button"
-                    onClick={() => handleQuickRouteSelect(route)}
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer border ${
-                      isSelected
-                        ? 'bg-brand-navy text-[#F6B73C] border-brand-navy shadow-2xs'
-                        : 'bg-slate-50 text-slate-700 border-slate-200/80 hover:bg-slate-100 hover:border-slate-300'
-                    }`}
+                    onClick={() => applySpokenTranscript(samplePhrase, 'dest')}
+                    className="px-2.5 py-1 rounded-lg bg-white hover:bg-brand-navy text-brand-navy hover:text-[#F6B73C] border border-slate-200 text-[11px] font-mono font-bold transition-colors cursor-pointer"
                   >
-                    <span>{route.flag}</span>
-                    <span>{route.label}</span>
+                    “{samplePhrase}”
                   </button>
-                );
-              })}
+                )
+              )}
+              <button
+                type="button"
+                onClick={() => setVoiceFeedback(null)}
+                className="ml-1 text-[11px] font-mono underline opacity-75 hover:opacity-100 cursor-pointer"
+              >
+                {isBn ? 'বন্ধ করুন' : 'Dismiss'}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ROW 3: 8 QUICK-SELECT POPULAR GLOBAL HUB CHIPS (40px+ Touch Targets) */}
+        {showQuickRoutes && (
+          <div className="mt-4 pt-3.5 border-t border-slate-100 space-y-4">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 shrink-0 mr-0.5">
+                  {isBn ? 'জনপ্রিয় রুট:' : 'Popular Hubs:'}
+                </span>
+                {POPULAR_ROUTES.map((route) => {
+                  const isSelected =
+                    originInfo.code === route.origin && destInfo.code === route.destination;
+                  return (
+                    <button
+                      key={`${route.origin}-${route.destination}`}
+                      type="button"
+                      onClick={() => handleQuickRouteSelect(route)}
+                      className={`min-h-[40px] shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
+                        isSelected
+                          ? 'bg-brand-navy text-[#F6B73C] border-brand-navy shadow-xs'
+                          : 'bg-slate-50 text-slate-700 border-slate-200/90 hover:bg-slate-100 hover:border-slate-300'
+                      }`}
+                    >
+                      <span>{route.flag}</span>
+                      <span>{route.label}</span>
+                      <span
+                        className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                          isSelected
+                            ? 'bg-white/15 text-[#F6B73C]'
+                            : 'bg-slate-200/70 text-slate-600'
+                        }`}
+                      >
+                        {route.destination}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setShowPriceTrendChart((v) => !v)}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy bg-slate-100 hover:bg-slate-200/80 px-3 py-2 rounded-xl transition-colors cursor-pointer shrink-0"
+              >
+                <TrendingDown size={14} className="text-emerald-600" />
+                <span>
+                  {showPriceTrendChart
+                    ? isBn
+                      ? '৩০ দিনের ভাড়ার চার্ট লুকান'
+                      : 'Hide 30-Day Price Trend'
+                    : isBn
+                    ? '৩০ দিনের ভাড়ার চার্ট দেখুন'
+                    : 'View 30-Day Price Trend'}
+                </span>
+              </button>
             </div>
 
-            <a
-              href="https://kiwi.tpo.li/9isVGzpF"
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="text-[11px] font-semibold text-brand-navy hover:text-emerald-700 inline-flex items-center gap-1 transition-colors"
-            >
-              <span>Multi-City / Open-Jaw (Kiwi.com)</span>
-              <ExternalLink size={11} />
-            </a>
+            {/* 30-DAY FLIGHT PRICE TREND LINE CHART (RECHARTS) */}
+            {showPriceTrendChart && (
+              <div
+                id="flight-price-trend-30d"
+                className="bg-slate-50/90 border border-slate-200/90 rounded-2xl p-4 sm:p-5 space-y-3.5"
+              >
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                  <div className="space-y-0.5">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold uppercase tracking-wider bg-brand-navy text-[#F6B73C] px-2.5 py-0.5 rounded-full">
+                        <TrendingDown size={11} />
+                        {isBn ? '৩০-দিনের ফ্লাইট ভাড়ার প্রবণতা' : '30-Day Historical Fare Trend'}
+                      </span>
+                      <span className="text-xs font-extrabold text-slate-900">
+                        {effectiveOrigin.city} ({effectiveOrigin.code}) → {effectiveDest.city} (
+                        {effectiveDest.code})
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-500">
+                      {isBn
+                        ? 'যেকোনো তারিখের বিন্দুতে ক্লিক করে সরাসরি সেই দিনের ফ্লাইট সার্চ করুন (মঙ্গল ও বুধবার সাধারণত ভাড়া কম থাকে)।'
+                        : 'Click any point on the 30-day curve to set your departure date to that lowest-fare booking window.'}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const bestIso = priceTrend30Days.lowestPoint.isoDate;
+                        setDepartDate(bestIso);
+                        if (returnDate && bestIso > returnDate) {
+                          setReturnDate(bestIso);
+                        }
+                      }}
+                      className="inline-flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-900 px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+                      title="Click to apply lowest-fare date"
+                    >
+                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                      <span>
+                        {isBn ? 'সেরা বুকিং দিন:' : 'Best Booking Window:'}{' '}
+                        {priceTrend30Days.lowestPoint.dateLabel} (
+                        {priceTrend30Days.lowestPoint.weekday}) ·{' '}
+                        {priceTrend30Days.lowestPoint.formattedPrice}
+                      </span>
+                    </button>
+                    <div className="bg-white border border-slate-200 px-3 py-1.5 rounded-xl text-[11px] font-mono font-semibold text-slate-600">
+                      {isBn ? '৩০-দিনের গড়:' : '30d Avg:'}{' '}
+                      <span className="font-bold text-slate-900">
+                        {priceTrend30Days.currencySymbol}
+                        {priceTrend30Days.avgPrice.toLocaleString()}{' '}
+                        {priceTrend30Days.currencyCode}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="h-[190px] w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart
+                      data={priceTrend30Days.points}
+                      margin={{ top: 8, right: 14, left: 4, bottom: 4 }}
+                      onClick={(chartState) => {
+                        const clickedIso = chartState?.activePayload?.[0]?.payload?.isoDate;
+                        if (clickedIso) {
+                          setDepartDate(clickedIso);
+                          if (returnDate && clickedIso > returnDate) {
+                            setReturnDate(clickedIso);
+                          }
+                        }
+                      }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+                      <XAxis
+                        dataKey="dateLabel"
+                        tick={{ fontSize: 10, fill: '#64748b' }}
+                        tickLine={false}
+                        axisLine={{ stroke: '#cbd5e1' }}
+                        interval={3}
+                      />
+                      <YAxis
+                        tick={{ fontSize: 10, fill: '#64748b' }}
+                        tickLine={false}
+                        axisLine={false}
+                        width={60}
+                        domain={['dataMin - 500', 'dataMax + 500']}
+                        tickFormatter={(val) =>
+                          `${priceTrend30Days.currencySymbol}${
+                            val >= 1000 ? `${(val / 1000).toFixed(0)}k` : val
+                          }`
+                        }
+                      />
+                      <Tooltip
+                        cursor={{ stroke: '#F6B73C', strokeWidth: 2 }}
+                        content={({ active, payload }) => {
+                          if (!active || !payload || !payload.length) return null;
+                          const item = payload[0].payload;
+                          const isLowest =
+                            item.isoDate === priceTrend30Days.lowestPoint.isoDate;
+                          return (
+                            <div className="bg-brand-navy text-white px-3 py-2 rounded-xl shadow-xl border border-slate-700 text-xs space-y-0.5">
+                              <div className="font-mono text-[10px] text-[#F6B73C] uppercase font-bold">
+                                {item.weekday}, {item.dateLabel}{' '}
+                                {isLowest ? '· ★ Best Booking Window' : ''}
+                              </div>
+                              <div className="font-black text-sm tabular-nums">
+                                {item.formattedPrice}
+                              </div>
+                              <div className="text-[10px] text-slate-300">
+                                {isBn
+                                  ? 'তারিখটি সিলেক্ট করতে ক্লিক করুন'
+                                  : 'Click point to select this departure date'}
+                              </div>
+                            </div>
+                          );
+                        }}
+                      />
+                      <ReferenceLine
+                        y={priceTrend30Days.avgPrice}
+                        stroke="#94a3b8"
+                        strokeDasharray="4 4"
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="price"
+                        stroke="#0B192C"
+                        strokeWidth={2.5}
+                        dot={(dotProps) => {
+                          const { cx, cy, payload } = dotProps;
+                          if (payload.isoDate === priceTrend30Days.lowestPoint.isoDate) {
+                            return (
+                              <circle
+                                key={`dot-${payload.isoDate}`}
+                                cx={cx}
+                                cy={cy}
+                                r={5.5}
+                                fill="#10b981"
+                                stroke="#ffffff"
+                                strokeWidth={2}
+                              />
+                            );
+                          }
+                          if (payload.isoDate === departDate) {
+                            return (
+                              <circle
+                                key={`dot-${payload.isoDate}`}
+                                cx={cx}
+                                cy={cy}
+                                r={5}
+                                fill="#F6B73C"
+                                stroke="#0B192C"
+                                strokeWidth={2}
+                              />
+                            );
+                          }
+                          return (
+                            <circle
+                              key={`dot-${payload.isoDate}`}
+                              cx={cx}
+                              cy={cy}
+                              r={2.5}
+                              fill="#0B192C"
+                            />
+                          );
+                        }}
+                        activeDot={{
+                          r: 6,
+                          fill: '#F6B73C',
+                          stroke: '#0B192C',
+                          strokeWidth: 2,
+                        }}
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            )}
+
+            {/* ROW 4: TRUST MICROCOPY & QUIET SECONDARY FOOTER */}
+            <div className="pt-2.5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-slate-500">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="inline-flex items-center gap-1 font-medium text-slate-600">
+                  <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
+                  {isBn
+                    ? '৭২০+ এয়ারলাইন্স ও ট্রাভেল এজেন্সি সরাসরি তুলনা'
+                    : '720+ Global Airlines & OTAs Compared Live'}
+                </span>
+                <span className="text-slate-300 hidden sm:inline" aria-hidden="true">·</span>
+                <span>
+                  {isBn
+                    ? 'কোনো লুকানো চার্জ নেই · নতুন ট্যাবে ফলাফল খুলবে'
+                    : 'Zero Hidden Markup · Opens Results in New Tab'}
+                </span>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 shrink-0">
+                {onOpenPriceAlert && (
+                  <button
+                    type="button"
+                    onClick={() => onOpenPriceAlert(effectiveDest.city)}
+                    className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 transition-colors cursor-pointer"
+                  >
+                    <Bell size={12} className="text-[#F6B73C]" />
+                    <span>{isBn ? 'ভাড়া কমার অ্যালার্ট' : 'Track Fare Drops'}</span>
+                  </button>
+                )}
+                <a
+                  href={resolvePartnerUrl(AFFILIATE_LINKS.kiwi)}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="font-semibold text-brand-navy hover:text-emerald-700 inline-flex items-center gap-1 transition-colors"
+                >
+                  <span>
+                    {isBn
+                      ? 'মাল্টি-সিটি / ওপেন-জ (Kiwi.com)'
+                      : 'Multi-City / Open-Jaw (Kiwi.com)'}
+                  </span>
+                  <ExternalLink size={11} />
+                </a>
+              </div>
+            </div>
           </div>
         )}
       </form>
@@ -2025,7 +2959,7 @@ export default function TravelpayoutsWidget({
                   <ExternalLink size={14} />
                 </a>
                 <a
-                  href="https://kiwi.tpo.li/9isVGzpF"
+                  href={resolvePartnerUrl(AFFILIATE_LINKS.kiwi)}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
                   className="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs px-3.5 py-3 rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer"
