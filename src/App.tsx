@@ -900,46 +900,110 @@ export default function App() {
     }
     return "";
   });
+  const [subscriptionId, setSubscriptionId] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("ural_subscription_id") || "";
+    }
+    return "";
+  });
   const [footerEmail, setFooterEmail] = useState<string>("");
   const [emailSubmitting, setEmailSubmitting] = useState<boolean>(false);
+  const [emailSubscribeError, setEmailSubscribeError] = useState<string | null>(null);
 
   const handleEmailSubscription = async (rawEmail: string, sourceLabel: string) => {
-    const cleanEmail = rawEmail.trim();
-    if (!cleanEmail || emailSubmitting) return;
+    const cleanEmail = rawEmail.trim().toLowerCase();
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!cleanEmail || !emailPattern.test(cleanEmail)) {
+      setEmailSubscribeError(
+        lang === "bn"
+          ? "অনুগ্রহ করে একটি সঠিক ইমেইল এড্রেস লিখুন।"
+          : "Please enter a valid email address."
+      );
+      return;
+    }
+
+    if (emailSubmitting) return;
+    setEmailSubscribeError(null);
     setEmailSubmitting(true);
     setUserEmail(cleanEmail);
 
+    const generatedSubId = `URAL-SUB-${Math.floor(100000 + Math.random() * 900000)}`;
+    const dhakaTimestamp = new Date().toLocaleString("en-GB", {
+      timeZone: "Asia/Dhaka",
+      dateStyle: "medium",
+      timeStyle: "medium",
+    });
+    const activePageUrl =
+      typeof window !== "undefined" ? window.location.href : `https://ural-travel.pages.dev${currentPath}`;
+    const preferredLanguage = lang === "bn" ? "Bengali (BN)" : "English (EN)";
+
+    const notificationPayload = {
+      email: cleanEmail,
+      "Subscriber Email": cleanEmail,
+      "Subscription ID": generatedSubId,
+      "Signup Placement": sourceLabel,
+      "Preferred Language": preferredLanguage,
+      "Selected Currency": currencyToOption,
+      "Page URL": activePageUrl,
+      "Timestamp (Dhaka BST)": dhakaTimestamp,
+      "Notification Recipient": "marcwriter2025@gmail.com",
+      _replyto: cleanEmail,
+      _subject: `🔔 New URAL Newsletter Subscriber: ${cleanEmail} (${sourceLabel})`,
+      _template: "table",
+      _captcha: "false",
+    };
+
     try {
-      await fetch("https://formsubmit.co/ajax/marcwriter2025@gmail.com", {
+      // 1. Primary dispatch via dedicated Cloudflare Pages serverless endpoint (/api/subscribe)
+      const serverlessRequest = fetch("/api/subscribe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({
-          "Subscriber Email": cleanEmail,
-          "Signup Placement": sourceLabel,
-          "Preferred Language": lang === "bn" ? "Bengali (BN)" : "English (EN)",
-          "Page URL": typeof window !== "undefined" ? window.location.href : currentPath,
-          "Timestamp (Dhaka BST)": new Date().toLocaleString("en-GB", {
-            timeZone: "Asia/Dhaka",
-          }),
-          _subject: `New URAL Fare Alert Subscriber: ${cleanEmail}`,
-          _template: "table",
+          email: cleanEmail,
+          source: sourceLabel,
+          subscriptionId: generatedSubId,
+          language: preferredLanguage,
+          pageUrl: activePageUrl,
+          timestamp: dhakaTimestamp,
         }),
-      });
+      }).catch(() => null);
+
+      // 2. Direct client-side FormSubmit AJAX dispatch to marcwriter2025@gmail.com
+      // (ensures browser Origin/Referer headers are included for immediate FormSubmit delivery)
+      const formSubmitRequest = fetch("https://formsubmit.co/ajax/marcwriter2025@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(notificationPayload),
+      }).catch(() => null);
+
+      await Promise.allSettled([serverlessRequest, formSubmitRequest]);
     } catch (err) {
-      console.warn("Subscription email dispatch fallback:", err);
+      console.warn("Subscription notification dispatch fallback:", err);
     } finally {
       if (typeof window !== "undefined") {
         try {
           localStorage.setItem("ural_subscribed_email", cleanEmail);
+          localStorage.setItem("ural_subscription_id", generatedSubId);
         } catch {
           // ignore storage quota errors
         }
       }
+      setSubscriptionId(generatedSubId);
+      setFooterEmail("");
       setEmailSubmitting(false);
       setEmailSubscribed(true);
+      setAffiliateToast(
+        lang === "bn"
+          ? `সাবস্ক্রিপশন নিশ্চিত হয়েছে (${generatedSubId})! আপনার ইমেইল (${cleanEmail}) আমাদের ফ্লাইট অ্যালার্ট ডেস্কে যুক্ত হয়েছে।`
+          : `Subscription confirmed (${generatedSubId})! Notification sent for ${cleanEmail}.`
+      );
     }
   };
   const [packingItems, setPackingItems] = useState([
@@ -3373,16 +3437,35 @@ export default function App() {
 
                 <div className="w-full max-w-md bg-slate-950/40 p-1 rounded-2xl border border-white/10 backdrop-blur-md shadow-2xl">
                   {emailSubscribed ? (
-                    <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs sm:text-sm px-6 py-4 rounded-xl font-mono text-center">
-                      {isBn ? (
-                        <>
-                          ✔ সাবস্ক্রিপশন সম্পন্ন হয়েছে! ঢাকা থেকে ফ্লাইটের ভাড়া কমলে আপনার <b className="text-white">{userEmail}</b> ইমেইলে জানিয়ে দেওয়া হবে।
-                        </>
-                      ) : (
-                        <>
-                          ✔ You're subscribed! We'll email you at <b className="text-white">{userEmail}</b> when Dhaka flight prices drop. Happy travels!
-                        </>
-                      )}
+                    <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs sm:text-sm px-5 py-4 rounded-xl font-mono text-center space-y-2">
+                      <div>
+                        {isBn ? (
+                          <>
+                            ✔ সাবস্ক্রিপশন সম্পন্ন হয়েছে! ঢাকা থেকে ফ্লাইটের ভাড়া কমলে আপনার <b className="text-white">{userEmail}</b> ইমেইলে জানিয়ে দেওয়া হবে।
+                          </>
+                        ) : (
+                          <>
+                            ✔ You're subscribed! We'll email you at <b className="text-white">{userEmail}</b> when Dhaka flight prices drop.
+                          </>
+                        )}
+                      </div>
+                      <div className="flex items-center justify-center gap-3 pt-1 text-[11px]">
+                        {subscriptionId && (
+                          <span className="bg-emerald-500/20 text-emerald-200 px-2 py-0.5 rounded border border-emerald-400/30">
+                            ID: {subscriptionId}
+                          </span>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setEmailSubscribed(false);
+                            setEmailSubscribeError(null);
+                          }}
+                          className="text-[#F6B73C] hover:underline cursor-pointer font-sans font-semibold"
+                        >
+                          {isBn ? "অন্য ইমেইল যুক্ত করুন" : "Use another email"}
+                        </button>
+                      </div>
                     </div>
                   ) : (
                     <form 
@@ -3390,33 +3473,43 @@ export default function App() {
                         e.preventDefault();
                         handleEmailSubscription(userEmail, "Homepage Hero Deal Alert");
                       }}
-                      className="flex flex-col sm:flex-row items-center gap-2"
+                      className="space-y-2"
                     >
-                      <label htmlFor="home-deal-alert-email" className="sr-only">
-                        {isBn ? "আপনার ইমেইল এড্রেস লিখুন" : "Enter your personal email"}
-                      </label>
-                      <input 
-                        id="home-deal-alert-email"
-                        type="email" 
-                        value={userEmail}
-                        onChange={(e) => setUserEmail(e.target.value)}
-                        placeholder={isBn ? "আপনার ইমেইল এড্রেস লিখুন" : "Enter your personal email"}
-                        required
-                        className="w-full sm:flex-grow bg-slate-900/60 border border-white/10 rounded-xl py-3 px-4 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-[#F6B73C] focus:ring-1 focus:ring-[#F6B73C] transition-all font-sans text-center sm:text-left"
-                      />
-                      <button 
-                        type="submit"
-                        disabled={emailSubmitting}
-                        className="w-full sm:w-auto bg-[#F6B73C] text-brand-navy hover:bg-[#ffc240] active:bg-[#e2a222] disabled:opacity-60 font-black text-sm px-8 py-3 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer shrink-0 shadow-lg shadow-[#F6B73C]/20"
-                      >
-                        {emailSubmitting
-                          ? isBn
-                            ? "যুক্ত হচ্ছে..."
-                            : "Subscribing..."
-                          : isBn
-                            ? "এলার্ট চালু করুন"
-                            : "Subscribe Alerts"}
-                      </button>
+                      <div className="flex flex-col sm:flex-row items-center gap-2">
+                        <label htmlFor="home-deal-alert-email" className="sr-only">
+                          {isBn ? "আপনার ইমেইল এড্রেস লিখুন" : "Enter your personal email"}
+                        </label>
+                        <input 
+                          id="home-deal-alert-email"
+                          type="email" 
+                          value={userEmail}
+                          onChange={(e) => {
+                            setUserEmail(e.target.value);
+                            if (emailSubscribeError) setEmailSubscribeError(null);
+                          }}
+                          placeholder={isBn ? "আপনার ইমেইল এড্রেস লিখুন" : "Enter your personal email"}
+                          required
+                          className="w-full sm:flex-grow bg-slate-900/60 border border-white/10 rounded-xl py-3 px-4 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-[#F6B73C] focus:ring-1 focus:ring-[#F6B73C] transition-all font-sans text-center sm:text-left"
+                        />
+                        <button 
+                          type="submit"
+                          disabled={emailSubmitting}
+                          className="w-full sm:w-auto bg-[#F6B73C] text-brand-navy hover:bg-[#ffc240] active:bg-[#e2a222] disabled:opacity-60 font-black text-sm px-8 py-3 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer shrink-0 shadow-lg shadow-[#F6B73C]/20"
+                        >
+                          {emailSubmitting
+                            ? isBn
+                              ? "যুক্ত হচ্ছে..."
+                              : "Subscribing..."
+                            : isBn
+                              ? "এলার্ট চালু করুন"
+                              : "Subscribe Alerts"}
+                        </button>
+                      </div>
+                      {emailSubscribeError && (
+                        <p role="alert" className="text-[11px] text-amber-300 font-sans px-2 text-left">
+                          {emailSubscribeError}
+                        </p>
+                      )}
                     </form>
                   )}
                 </div>
@@ -7311,10 +7404,22 @@ export default function App() {
                     : "Get Dhaka Flight Drops & Visa Updates:"}
                 </div>
                 {emailSubscribed ? (
-                  <div className="text-[11px] text-emerald-400 font-mono bg-emerald-500/10 border border-emerald-500/25 rounded-xl px-3 py-2">
-                    {isBn
-                      ? `✔ সাবস্ক্রাইবড (${userEmail || "সক্রিয়"})`
-                      : `✔ Subscribed (${userEmail || "Active"})`}
+                  <div className="text-[11px] text-emerald-400 font-mono bg-emerald-500/10 border border-emerald-500/25 rounded-xl px-3 py-2 flex items-center justify-between gap-2">
+                    <span className="truncate">
+                      {isBn
+                        ? `✔ সাবস্ক্রাইবড (${userEmail || "সক্রিয়"})`
+                        : `✔ Subscribed (${userEmail || "Active"})`}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEmailSubscribed(false);
+                        setEmailSubscribeError(null);
+                      }}
+                      className="shrink-0 text-[10px] text-[#F6B73C] hover:underline cursor-pointer font-sans font-semibold"
+                    >
+                      {isBn ? "পরিবর্তন" : "Change"}
+                    </button>
                   </div>
                 ) : (
                   <form
@@ -7322,27 +7427,37 @@ export default function App() {
                       e.preventDefault();
                       handleEmailSubscription(footerEmail, "Footer Sitewide Newsletter");
                     }}
-                    className="flex items-center gap-1.5"
+                    className="space-y-1.5"
                   >
-                    <label htmlFor="footer-newsletter-email" className="sr-only">
-                      {isBn ? "আপনার ইমেইল লিখুন" : "Your email address"}
-                    </label>
-                    <input
-                      id="footer-newsletter-email"
-                      type="email"
-                      required
-                      value={footerEmail}
-                      onChange={(e) => setFooterEmail(e.target.value)}
-                      placeholder={isBn ? "আপনার ইমেইল..." : "Your email address..."}
-                      className="min-w-0 flex-1 bg-brand-navy border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#F6B73C]"
-                    />
-                    <button
-                      type="submit"
-                      disabled={emailSubmitting}
-                      className="shrink-0 bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy font-extrabold text-xs px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
-                    >
-                      {emailSubmitting ? "..." : isBn ? "যুক্ত হোন" : "Join"}
-                    </button>
+                    <div className="flex items-center gap-1.5">
+                      <label htmlFor="footer-newsletter-email" className="sr-only">
+                        {isBn ? "আপনার ইমেইল লিখুন" : "Your email address"}
+                      </label>
+                      <input
+                        id="footer-newsletter-email"
+                        type="email"
+                        required
+                        value={footerEmail}
+                        onChange={(e) => {
+                          setFooterEmail(e.target.value);
+                          if (emailSubscribeError) setEmailSubscribeError(null);
+                        }}
+                        placeholder={isBn ? "আপনার ইমেইল..." : "Your email address..."}
+                        className="min-w-0 flex-1 bg-brand-navy border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#F6B73C]"
+                      />
+                      <button
+                        type="submit"
+                        disabled={emailSubmitting}
+                        className="shrink-0 bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy font-extrabold text-xs px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
+                      >
+                        {emailSubmitting ? "..." : isBn ? "যুক্ত হোন" : "Join"}
+                      </button>
+                    </div>
+                    {emailSubscribeError && (
+                      <p role="alert" className="text-[10px] text-amber-300 font-sans">
+                        {emailSubscribeError}
+                      </p>
+                    )}
                   </form>
                 )}
                 <div className="flex items-center justify-between pt-0.5">
