@@ -2754,6 +2754,32 @@ export default function TravelpayoutsWidget({
                   </button>
                 )}
                 <a
+                  href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="font-semibold text-brand-navy hover:text-emerald-700 inline-flex items-center gap-1 transition-colors"
+                >
+                  <span>
+                    {isBn
+                      ? `${effectiveDest.city} হোটেল ও ট্যুর (Klook)`
+                      : `${effectiveDest.city} Hotels & Tours (Klook)`}
+                  </span>
+                  <ExternalLink size={11} />
+                </a>
+                <a
+                  href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="font-semibold text-brand-navy hover:text-emerald-700 inline-flex items-center gap-1 transition-colors"
+                >
+                  <span>
+                    {isBn
+                      ? 'অল-ইনক্লুসিভ সিটি পাস (Go City)'
+                      : 'All-Inclusive City Pass (Go City)'}
+                  </span>
+                  <ExternalLink size={11} />
+                </a>
+                <a
                   href={resolvePartnerUrl(AFFILIATE_LINKS.kiwi)}
                   target="_blank"
                   rel="noopener noreferrer sponsored"

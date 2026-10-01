@@ -58,6 +58,26 @@ export const RADICAL_STORAGE_PROMO = {
   pricePerBag: "From ~€5 / $6 per bag/day (insured up to €3,000)"
 };
 
+export const KLOOK_PROMO = {
+  affiliateUrl: "https://klook.tpo.li/IYOU76Bn",
+  partnerName: "Klook Hotels, Tours & Activities",
+  toursAndActivitiesRate: "10%",
+  hotelsRate: "8%",
+  validUntil: "December 31, 2026",
+  expiresAt: "2026-12-31",
+  categories: "Global Hotels & Resorts (8%), Tours & Sightseeing (10%), Activities & Experiences (10%)"
+};
+
+export const GO_CITY_PROMO = {
+  affiliateUrl: "https://gocity.tpo.li/rpHETE4N",
+  partnerName: "Go City All-Inclusive & Explorer Passes",
+  allInclusiveRate: "8.5%",
+  explorerRate: "8.5%",
+  validUntil: "December 31, 2026",
+  expiresAt: "2026-12-31",
+  eligiblePasses: "All-Inclusive Pass (AI) & Explorer Pass (EXP)"
+};
+
 export interface AffiliateOfferLifecycleItem {
   id: AffiliatePartnerKey;
   partnerName: string;
@@ -91,13 +111,14 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
   },
   klook: {
     id: "klook",
-    partnerName: "Klook Activities & Rail",
+    partnerName: "Klook Hotels, Tours & Activities",
     status: "active",
-    offerType: "evergreen",
+    offerType: "commission-boost",
     url: AFFILIATE_LINKS.klook,
     fallbackPartner: "kkday",
-    activeNote: "Core Asia & Dubai tours/activities partner (Web & App)",
-    expiredFallbackBehavior: "Falls back to KKday if ever paused"
+    expiresAt: KLOOK_PROMO.expiresAt,
+    activeNote: `Boosted Q4 Commission through ${KLOOK_PROMO.validUntil}: 10% Tours/Activities + 8% Hotels (Web & App)`,
+    expiredFallbackBehavior: "Keeps permanent Klook Hotels & Activities link live after Dec 31, 2026; falls back to KKday if ever paused"
   },
   tiqets: {
     id: "tiqets",
@@ -225,13 +246,14 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
   },
   goCity: {
     id: "goCity",
-    partnerName: "Go City All-Inclusive City Passes",
+    partnerName: "Go City All-Inclusive & Explorer Passes",
     status: "active",
-    offerType: "evergreen",
+    offerType: "commission-boost",
     url: AFFILIATE_LINKS.goCity,
     fallbackPartner: "tiqets",
-    activeNote: "3.4–6% commission · 90-day cookie · London, Paris, Rome, NYC, Dubai & SG passes",
-    expiredFallbackBehavior: "Falls back to Tiqets if ever paused"
+    expiresAt: GO_CITY_PROMO.expiresAt,
+    activeNote: `Boosted 8.5% Commission on All-Inclusive & Explorer Passes through ${GO_CITY_PROMO.validUntil} · 90-day cookie`,
+    expiredFallbackBehavior: "Keeps permanent Go City All-Inclusive & Explorer Pass link live after Dec 31, 2026; falls back to Tiqets if ever paused"
   }
 };
 
@@ -836,26 +858,26 @@ export const MULTI_PARTNER_BLOG_PLACEMENTS: Record<string, MultiPartnerBlogPlace
   "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide": {
     primaryPartner: "kiwi",
     secondaryPartner: "goCity",
-    badgeEn: "✈️ MULTI-CITY FLIGHT HACK + DUBAI ALL-INCLUSIVE PASS",
+    badgeEn: "✈️ MULTI-CITY FLIGHT HACK + DUBAI ALL-INCLUSIVE & EXPLORER PASS",
     badgeBn: "✈️ মাল্টি-সিটি ফ্লাইট (Kiwi.com) + দুবাই পাস (Go City)",
-    headlineEn: "Stitch Dhaka → Jeddah → Dubai → Dhaka Multi-City Fares & Save up to 50% on Dubai Attractions",
-    headlineBn: "ঢাকা → জেদ্দা → দুবাই → ঢাকা মাল্টি-সিটি টিকিট ও Go City Dubai Pass-এ সাশ্রয় করুন",
+    headlineEn: "Stitch Dhaka → Jeddah → Dubai → Dhaka Multi-City Fares & Save up to 50% with Go City All-Inclusive or Explorer Pass",
+    headlineBn: "ঢাকা → জেদ্দা → দুবাই → ঢাকা মাল্টি-সিটি টিকিট ও Go City Dubai All-Inclusive/Explorer Pass-এ সাশ্রয় করুন",
     bodyBeforeAnchorEn:
       "Alongside Aviasales, use ",
     anchorTextEn:
       "Kiwi.com's Nomad & Multi-City virtual interlining engine to combine Saudi and UAE carriers on one itinerary",
     bodyAfterAnchorEn:
-      "—and unlock Burj Khalifa, Desert Safari, and Louvre Abu Dhabi with a single Go City Dubai Pass.",
+      "—and unlock Burj Khalifa, Desert Safari, and Louvre Abu Dhabi with a single Go City Dubai All-Inclusive or Explorer Pass.",
     bodyBeforeAnchorBn:
       "Aviasales-এর পাশাপাশি ",
     anchorTextBn:
       "Kiwi.com-এর Multi-City সার্চে ঢাকা → জেদ্দা → দুবাই → ঢাকা রুটের সবচেয়ে সাশ্রয়ী কম্বো টিকিট খুঁজুন",
     bodyAfterAnchorBn:
-      " এবং দুবাইয়ের প্রধান আকর্ষণগুলোতে ৫০% পর্যন্ত বাঁচাতে Go City Dubai Pass নিন।",
+      " এবং দুবাইয়ের প্রধান আকর্ষণগুলোতে ৫০% পর্যন্ত বাঁচাতে Go City Dubai All-Inclusive বা Explorer Pass নিন।",
     primaryButtonEn: "Search Multi-City Combo on Kiwi.com",
     primaryButtonBn: "Kiwi.com-এ মাল্টি-সিটি ফ্লাইট খুঁজুন",
-    secondaryButtonEn: "Get Go City Dubai All-Inclusive Pass",
-    secondaryButtonBn: "Go City Dubai Pass দেখুন"
+    secondaryButtonEn: "Get Go City Dubai All-Inclusive / Explorer Pass",
+    secondaryButtonBn: "Go City Dubai All-Inclusive Pass দেখুন"
   },
   "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost": {
     primaryPartner: "kiwi",

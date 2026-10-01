@@ -870,8 +870,60 @@ export default function App() {
   // Custom Interactive Home states
   const [currencyAmount, setCurrencyAmount] = useState<number>(10000);
   const [currencyToOption, setCurrencyToOption] = useState<"USD" | "NPR" | "THB" | "MYR" | "AED" | "SGD">("NPR");
-  const [emailSubscribed, setEmailSubscribed] = useState<boolean>(false);
-  const [userEmail, setUserEmail] = useState<string>("");
+  const [emailSubscribed, setEmailSubscribed] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return Boolean(localStorage.getItem("ural_subscribed_email"));
+    }
+    return false;
+  });
+  const [userEmail, setUserEmail] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("ural_subscribed_email") || "";
+    }
+    return "";
+  });
+  const [footerEmail, setFooterEmail] = useState<string>("");
+  const [emailSubmitting, setEmailSubmitting] = useState<boolean>(false);
+
+  const handleEmailSubscription = async (rawEmail: string, sourceLabel: string) => {
+    const cleanEmail = rawEmail.trim();
+    if (!cleanEmail || emailSubmitting) return;
+    setEmailSubmitting(true);
+    setUserEmail(cleanEmail);
+
+    try {
+      await fetch("https://formsubmit.co/ajax/marcwriter2025@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          "Subscriber Email": cleanEmail,
+          "Signup Placement": sourceLabel,
+          "Preferred Language": lang === "bn" ? "Bengali (BN)" : "English (EN)",
+          "Page URL": typeof window !== "undefined" ? window.location.href : currentPath,
+          "Timestamp (Dhaka BST)": new Date().toLocaleString("en-GB", {
+            timeZone: "Asia/Dhaka",
+          }),
+          _subject: `New URAL Fare Alert Subscriber: ${cleanEmail}`,
+          _template: "table",
+        }),
+      });
+    } catch (err) {
+      console.warn("Subscription email dispatch fallback:", err);
+    } finally {
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.setItem("ural_subscribed_email", cleanEmail);
+        } catch {
+          // ignore storage quota errors
+        }
+      }
+      setEmailSubmitting(false);
+      setEmailSubscribed(true);
+    }
+  };
   const [packingItems, setPackingItems] = useState([
     { id: 1, text: "6 Months Valid Original Passport", checked: true },
     { id: 2, text: "Bank Statement (Minimum BDT 150K balance)", checked: true },
@@ -1606,15 +1658,23 @@ export default function App() {
         <header id="main-navbar-sticky" className="w-full bg-brand-navy text-white border-b border-white/8 h-16 flex items-center">
           <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between">
             
-            {/* Logo Left */}
-            <div className="flex items-center cursor-pointer" onClick={() => navigateTo("/")}>
+            {/* Logo Left + Precision Brand Slogan */}
+            <div
+              className="flex flex-col items-start justify-center cursor-pointer group shrink-0 py-1"
+              onClick={() => navigateTo("/")}
+            >
               <img
                 src="/assets/brand/svg/ural-wordmark.svg"
                 alt="URAL"
-                width="105"
-                height="36"
-                className="h-9 w-auto"
+                width="98"
+                height="32"
+                className="h-7 sm:h-8 w-auto transition-opacity duration-200 group-hover:opacity-95"
               />
+              <span className="text-[9.5px] sm:text-[10px] font-medium tracking-wide text-slate-300/90 group-hover:text-[#F6B73C] transition-colors leading-none mt-1 whitespace-nowrap">
+                {isBn
+                  ? "ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়"
+                  : "Travel Intelligence System · Beyond a Typical Agency"}
+              </span>
             </div>
 
             {/* Navigation Centered — Streamlined High-Intent Information Architecture */}
@@ -2062,8 +2122,10 @@ export default function App() {
                       height="24"
                       className="h-6 w-auto"
                     />
-                    <span className="text-[11px] text-slate-400 block">
-                      {isBn ? "যাত্রার উদ্দেশ্য অনুযায়ী মেনু" : "Browse by Travel Intent"}
+                    <span className="text-[10px] text-slate-300 block">
+                      {isBn
+                        ? "ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়"
+                        : "Travel Intelligence System · Beyond a Typical Agency"}
                     </span>
                   </div>
                   <button
@@ -2631,18 +2693,18 @@ export default function App() {
                 </p>
               </div>
 
-              <div className="bg-brand-navy border border-slate-800 rounded-3xl p-2 sm:p-4 shadow-2xl w-full">
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5 px-2">
+              <div className="bg-gradient-to-b from-brand-navy to-[#081322] border border-slate-800/90 rounded-3xl p-2.5 sm:p-5 shadow-2xl w-full">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-3 px-2">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#F6B73C]" />
+                    <span className="w-2 h-2 rounded-full bg-[#F6B73C] shadow-[0_0_8px_rgba(246,183,60,0.8)]" />
                     <span className="text-[11px] font-mono font-bold text-[#F6B73C] uppercase tracking-wider">
                       {t.liveSearchBoxHeader}
                     </span>
                   </div>
                   <span className="text-[11px] font-mono text-slate-300 hidden sm:inline">
                     {isBn
-                      ? "৭২০+ এয়ারলাইন্স · নতুন ট্যাবে লাইভ ফলাফল"
-                      : "720+ Global Airlines · Opens Live Results in New Tab"}
+                      ? "URAL হোয়াইট-লেবেল ফ্লাইট ও ভেরিফায়েড গ্লোবাল হোটেল সার্চ"
+                      : "URAL White-Label Flights & Verified Global Hotels"}
                   </span>
                 </div>
                 <div className="text-slate-900">
@@ -3188,9 +3250,7 @@ export default function App() {
                     <form 
                       onSubmit={(e) => {
                         e.preventDefault();
-                        if (userEmail.trim()) {
-                          setEmailSubscribed(true);
-                        }
+                        handleEmailSubscription(userEmail, "Homepage Hero Deal Alert");
                       }}
                       className="flex flex-col sm:flex-row items-center gap-2"
                     >
@@ -3208,9 +3268,16 @@ export default function App() {
                       />
                       <button 
                         type="submit"
-                        className="w-full sm:w-auto bg-[#F6B73C] text-brand-navy hover:bg-[#ffc240] active:bg-[#e2a222] font-black text-sm px-8 py-3 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer shrink-0 shadow-lg shadow-[#F6B73C]/20"
+                        disabled={emailSubmitting}
+                        className="w-full sm:w-auto bg-[#F6B73C] text-brand-navy hover:bg-[#ffc240] active:bg-[#e2a222] disabled:opacity-60 font-black text-sm px-8 py-3 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer shrink-0 shadow-lg shadow-[#F6B73C]/20"
                       >
-                        {isBn ? "এলার্ট চালু করুন" : "Subscribe Alerts"}
+                        {emailSubmitting
+                          ? isBn
+                            ? "যুক্ত হচ্ছে..."
+                            : "Subscribing..."
+                          : isBn
+                            ? "এলার্ট চালু করুন"
+                            : "Subscribe Alerts"}
                       </button>
                     </form>
                   )}
@@ -3571,14 +3638,14 @@ export default function App() {
                               
                               <a
                                 id={`hotel-booking-btn-${room.name.toLowerCase().replace(/\s+/g, '-')}`}
-                                href={`https://search.hotellook.com/?marker=675992&trs=540277&language=en&currency=BDT&destination=${encodeURIComponent(`${room.name} ${activeHotel.city}`)}`}
+                                href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
                                 target="_blank"
                                 rel="noopener noreferrer sponsored"
                                 onClick={() => {
                                   triggerAffiliateToast(
                                     isBn
-                                      ? `${room.name}, ${room.neighborhood}-এর সর্বনিম্ন রেট খোঁজা হচ্ছে...`
-                                      : `Finding the best available rate at ${room.name}, ${room.neighborhood}. Opening booking page...`
+                                      ? `${room.name}, ${room.neighborhood}-এর সেরা হোটেল ডিল খোলা হচ্ছে...`
+                                      : `Opening verified hotel rates for ${room.name}, ${room.neighborhood} on Klook...`
                                   );
                                 }}
                                 className="bg-brand-navy text-white hover:bg-[#1a4166] text-[10px] font-bold px-3 py-1.5 rounded-md cursor-pointer flex items-center gap-1.5 transition-colors"
@@ -4393,12 +4460,15 @@ export default function App() {
                                     <span className="text-[9px] font-mono text-slate-400 block uppercase">Estimate rates</span>
                                     <span className="text-xs font-mono font-bold text-[#F6B73C]">{hotel.rate}</span>
                                   </div>
-                                  <button 
-                                    onClick={() => triggerAffiliateToast(`Finding the best available rate at ${hotel.name}, ${hotel.area}. Opening booking page...`)}
+                                  <a
+                                    href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                                    target="_blank"
+                                    rel="noopener noreferrer sponsored"
+                                    onClick={() => triggerAffiliateToast(`Opening verified hotel rates for ${hotel.name}, ${hotel.area} on Klook...`)}
                                     className="bg-brand-navy hover:bg-[#F6B73C] hover:text-brand-navy text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
                                   >
                                     Check Rates <ExternalLink size={10} />
-                                  </button>
+                                  </a>
                                 </div>
                               </div>
                             ))}
@@ -6543,7 +6613,7 @@ export default function App() {
                     
                     try {
                       // POST to FormSubmit.co AJAX endpoint to route the inquiry safely and for free to your email
-                      await fetch("https://formsubmit.co/ajax/farhan.momen@gmail.com", {
+                      await fetch("https://formsubmit.co/ajax/marcwriter2025@gmail.com", {
                         method: "POST",
                         headers: {
                           "Content-Type": "application/json",
@@ -6817,148 +6887,367 @@ export default function App() {
       </main>
 
       {/* 🔮 MASTER FOOTER BLOCK */}
-      <footer className="bg-brand-navy text-slate-400 py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs mt-16">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8">
-          
-          <div className="space-y-3">
-            <div className="flex items-center gap-2.5 text-white">
-              <img
-                src="/assets/brand/svg/ural-wordmark.svg"
-                alt="URAL"
-                width="82"
-                height="28"
-                className="h-7 w-auto"
-              />
-              <span className="text-[11px] font-semibold tracking-wide text-slate-300">Travel Intelligence</span>
-            </div>
-            <p className="leading-relaxed text-slate-400">
-              {isBn
-                ? "বাংলাদেশি ভ্রমণকারীদের জন্য ফ্লাইট ভাড়া, হোটেল গাইড, ভিসা চেকলিস্ট, Umrah প্রস্তুতি এবং BDT ট্রিপ বাজেট।"
-                : "Flight prices, hotel guides, visa steps, and trip budgets — built for travelers from Bangladesh."}
-            </p>
-            <div className="pt-1 text-[11px] font-semibold">
-              <a
-                href="/sitemap"
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigateTo("/sitemap");
-                }}
-                className="text-[#F6B73C] hover:underline cursor-pointer inline-flex items-center gap-1"
-              >
-                <span>
-                  {isBn
-                    ? "✈️ ঢাকা এয়ারপোর্ট (DAC) চেকলিস্ট ও সব গাইড ডিরেক্টরি →"
-                    : "✈️ Dhaka Airport (DAC) Checklist & All Guides Directory →"}
-                </span>
-              </a>
-            </div>
-            <p className="text-[10px] font-mono text-slate-500">
-              {isBn
-                ? "© 2026 URAL Platforms. বাংলাদেশ থেকে আন্তর্জাতিক ফ্লাইট রুট, ভিসা চেকলিস্ট ও হোটেল গাইড।"
-                : "© 2026 URAL Platforms. Outbound flight routes, visa checklists, and hotel guides from Bangladesh."}
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <span className="text-white font-bold font-mono uppercase text-xs block mb-1">
-              {isBn ? "জনপ্রিয় ফ্লাইট রুট" : "Flights Destination Directory"}
-            </span>
-            <ul className="space-y-1 text-xs">
-              <li><a href="/flights/dhaka-kathmandu" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kathmandu"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kathmandu (KTM)</a></li>
-              <li><a href="/flights/dhaka-bangkok" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-bangkok"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Bangkok (BKK)</a></li>
-              <li><a href="/flights/dhaka-kuala-lumpur" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kuala-lumpur"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kuala Lumpur (KUL)</a></li>
-              <li><a href="/flights/dhaka-singapore" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-singapore"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</a></li>
-              <li><a href="/flights/dhaka-maldives" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-maldives"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
-              <li><a href="/flights/dhaka-dubai" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-dubai"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
-              <li><a href="/umrah" onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }} className="text-[#F6B73C] hover:underline text-left cursor-pointer">Dhaka → Jeddah & Madinah (Umrah Hub)</a></li>
-            </ul>
-          </div>
-
-          <div className="space-y-2">
-            <span className="text-white font-bold font-mono uppercase text-xs block mb-1">
-              {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa Guides by Country"}
-            </span>
-            <ul className="space-y-1 text-xs">
-              <li><a href="/visa/nepal-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/nepal-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</a></li>
-              <li><a href="/visa/maldives-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/maldives-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</a></li>
-              <li><a href="/visa/thailand-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/thailand-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</a></li>
-              <li><a href="/visa/malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/malaysia-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
-              <li><a href="/visa/singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/singapore-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Agent Visa"}</a></li>
-              <li><a href="/visa/dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/dubai-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
-              <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="text-[#F6B73C] hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪১টি ট্রাভেল ব্লগ গাইড →" : "All 41 Travel Blog Guides →"}</a></li>
-            </ul>
-          </div>
-
-          <div className="space-y-2">
-            <span className="text-white font-bold font-mono uppercase text-xs block mb-1">
-              {isBn ? "ট্রাভেল সার্ভিস পার্টনার" : "Travel Services"}
-            </span>
-            <ul className="space-y-1 text-xs">
-              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.tiqets)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Europe, UK &amp; USA Passes (Tiqets)</a></li>
-              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">All-Inclusive City Passes (Go City)</a></li>
-              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.klook)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Asia &amp; Dubai Tours (Klook)</a></li>
-              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.ekta)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Schengen &amp; Visa Travel Insurance (EKTA)</a></li>
-              <li>
-                <a
-                  href={resolvePartnerUrl(AFFILIATE_LINKS.airhelp)}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="hover:text-white hover:underline"
+      <footer className="bg-brand-navy text-slate-400 pt-14 pb-10 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs mt-16">
+        <div className="max-w-7xl mx-auto space-y-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
+            
+            {/* COLUMN 1 (3 Cols): Brand Lockup, Slogan & Social Media Community */}
+            <div className="lg:col-span-3 space-y-4">
+              <div className="space-y-1.5">
+                <div
+                  onClick={() => navigateTo("/")}
+                  className="inline-flex items-center gap-2.5 text-white cursor-pointer"
                 >
-                  {isPromoActive(AIRHELP_PROMO.expiresAt)
-                    ? `Flight Delay Compensation (AirHelp · Code ${AIRHELP_PROMO.code})`
-                    : "Flight Delay Compensation (AirHelp · Up to €600)"}
-                </a>
-              </li>
-              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.getTransfer)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Intercity Vans &amp; Transfers (GetTransfer)</a></li>
-              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.welcomePickups)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Welcome Pickups (Meet &amp; Greet)</a></li>
-              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.kiwitaxi)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Kiwitaxi Airport Transfers</a></li>
-              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.yesim)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Yesim Travel eSIM (App &amp; Web)</a></li>
-              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.airalo)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Local Travel eSIM (Airalo)</a></li>
-              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.kiwi)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Multi-City Flights (Kiwi.com)</a></li>
-              <li><a href={resolvePartnerUrl(AFFILIATE_LINKS.qeeq)} target="_blank" rel="noopener noreferrer sponsored" className="hover:text-white hover:underline">Car Rental (QEEQ)</a></li>
-            </ul>
-          </div>
+                  <img
+                    src="/assets/brand/svg/ural-wordmark.svg"
+                    alt="URAL"
+                    width="88"
+                    height="30"
+                    className="h-7 w-auto"
+                  />
+                </div>
+                <p className="text-[11px] font-semibold text-[#F6B73C] tracking-wide">
+                  {isBn
+                    ? "ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়"
+                    : "Travel Intelligence System · Beyond a Typical Agency"}
+                </p>
+              </div>
 
-          <div className="space-y-3">
-            <span className="text-white font-bold font-mono uppercase text-xs block mb-1">
-              {isBn ? "সরাসরি সাপোর্ট ও যোগাযোগ" : "Direct Support & Contact"}
-            </span>
-            <div className="space-y-2 text-xs">
-              <div className="flex items-center gap-1.5">
-                <span className="text-brand-ivory">💬</span>
-                <a href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline text-brand-ivory font-mono font-bold">WhatsApp: 01784385335</a>
+              <p className="leading-relaxed text-slate-400 text-xs">
+                {isBn
+                  ? "বাংলাদেশি ও গ্লোবাল ভ্রমণকারীদের জন্য নিরপেক্ষ ফ্লাইট ভাড়া তুলনা, ভেরিফায়েড হোটেল জোন, অফিসিয়াল ভিসা চেকলিস্ট, DIY ওমরাহ এবং BDT বাজেট প্ল্যানার।"
+                  : "Independent flight fare intelligence, verified hotel zones, step-by-step visa checklists, and BDT trip budgets built for Bangladeshi and global travelers."}
+              </p>
+
+              {/* Social Media Channels — Clean, balanced icon bar */}
+              <div className="space-y-2 pt-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
+                  {isBn ? "সোশ্যাল মিডিয়ায় যুক্ত থাকুন" : "Follow URAL Intelligence"}
+                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  {[
+                    {
+                      name: "Facebook",
+                      href: "https://www.facebook.com/",
+                      svg: (
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                        </svg>
+                      ),
+                    },
+                    {
+                      name: "YouTube",
+                      href: "https://www.youtube.com/",
+                      svg: (
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                        </svg>
+                      ),
+                    },
+                    {
+                      name: "Instagram",
+                      href: "https://www.instagram.com/",
+                      svg: (
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                      ),
+                    },
+                    {
+                      name: "X (Twitter)",
+                      href: "https://x.com/",
+                      svg: (
+                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                      ),
+                    },
+                    {
+                      name: "LinkedIn",
+                      href: "https://www.linkedin.com/",
+                      svg: (
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                        </svg>
+                      ),
+                    },
+                    {
+                      name: "WhatsApp",
+                      href: "https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21",
+                      svg: (
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.665.988 3.3 1.488 5.35 1.489 5.513 0 10.002-4.486 10.005-9.999.001-2.671-1.037-5.182-2.924-7.071C17.192 1.685 14.685.648 12.012.648c-5.516 0-10.01 4.488-10.014 10.002-.001 1.902.483 3.654 1.401 5.247l-.952 3.479 3.599-.944z" />
+                        </svg>
+                      ),
+                    },
+                  ].map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`URAL on ${social.name}`}
+                      title={social.name}
+                      className="w-9 h-9 rounded-xl bg-slate-800/80 hover:bg-[#F6B73C] text-slate-300 hover:text-brand-navy border border-slate-700/70 hover:border-[#F6B73C] flex items-center justify-center transition-colors"
+                    >
+                      {social.svg}
+                    </a>
+                  ))}
+                </div>
               </div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-[#F6B73C]">📞</span>
-                <a href="tel:+8801784385335" className="hover:text-white hover:underline text-[#F6B73C] font-mono font-bold">Direct Call: +8801784385335</a>
-              </div>
-              <div className="pt-1">
+
+              <div className="pt-1 text-[11px] font-semibold">
                 <a
-                  href="/contact"
+                  href="/sitemap"
                   onClick={(e) => {
                     e.preventDefault();
-                    navigateTo("/contact");
+                    navigateTo("/sitemap");
                   }}
-                  className="bg-slate-800 text-[#F6B73C] hover:bg-slate-700 px-3 py-1.5 rounded-md font-bold text-[10px] uppercase tracking-wide cursor-pointer transition-colors inline-flex items-center"
+                  className="text-[#F6B73C] hover:underline cursor-pointer inline-flex items-center gap-1"
                 >
-                  {isBn ? "যোগাযোগ ফর্ম পেজ" : "Contact Form Page"}
+                  <span>
+                    {isBn
+                      ? "ঢাকা এয়ারপোর্ট (DAC) চেকলিস্ট ও সব গাইড ডিরেক্টরি →"
+                      : "Dhaka Airport (DAC) Checklist & All Guides Directory →"}
+                  </span>
                 </a>
               </div>
             </div>
-            <p className="leading-relaxed text-[11px] text-slate-500 pt-2 border-t border-slate-800">
+
+            {/* COLUMN 2 (2 Cols): Flights & Umrah Directory */}
+            <div className="lg:col-span-2 space-y-2.5">
+              <span className="text-white font-bold font-mono uppercase text-xs block">
+                {isBn ? "জনপ্রিয় ফ্লাইট রুট" : "Flight Routes"}
+              </span>
+              <ul className="space-y-1.5 text-xs">
+                <li><a href="/flights/dhaka-kathmandu" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kathmandu"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kathmandu (KTM)</a></li>
+                <li><a href="/flights/dhaka-bangkok" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-bangkok"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Bangkok (BKK)</a></li>
+                <li><a href="/flights/dhaka-kuala-lumpur" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kuala-lumpur"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kuala Lumpur (KUL)</a></li>
+                <li><a href="/flights/dhaka-singapore" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-singapore"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</a></li>
+                <li><a href="/flights/dhaka-maldives" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-maldives"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
+                <li><a href="/flights/dhaka-dubai" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-dubai"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
+                <li><a href="/umrah" onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }} className="text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">Dhaka → Jeddah &amp; Madinah (Umrah)</a></li>
+              </ul>
+            </div>
+
+            {/* COLUMN 3 (2 Cols): Visa Guides by Country */}
+            <div className="lg:col-span-2 space-y-2.5">
+              <span className="text-white font-bold font-mono uppercase text-xs block">
+                {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa Checklists"}
+              </span>
+              <ul className="space-y-1.5 text-xs">
+                <li><a href="/visa/nepal-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/nepal-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</a></li>
+                <li><a href="/visa/maldives-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/maldives-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</a></li>
+                <li><a href="/visa/thailand-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/thailand-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</a></li>
+                <li><a href="/visa/malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/malaysia-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
+                <li><a href="/visa/singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/singapore-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Visa"}</a></li>
+                <li><a href="/visa/dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/dubai-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
+                <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪১টি ট্রাভেল ব্লগ গাইড →" : "All 41 Travel Blog Guides →"}</a></li>
+              </ul>
+            </div>
+
+            {/* COLUMN 4 (2 Cols): Streamlined High-Converting Travel Services (Task-First, Zero Clutter) */}
+            <div className="lg:col-span-2 space-y-2.5">
+              <span className="text-white font-bold font-mono uppercase text-xs block">
+                {isBn ? "গ্লোবাল ট্রাভেল সার্ভিস" : "Travel Services"}
+              </span>
+              <ul className="space-y-1.5 text-xs">
+                <li>
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="hover:text-white hover:underline"
+                  >
+                    {isBn ? "গ্লোবাল হোটেল ও রিসোর্ট বুকিং" : "Global Hotels & Resorts"}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="hover:text-white hover:underline"
+                  >
+                    {isBn ? "এশিয়া ও দুবাই ট্যুর ও অ্যাক্টিভিটি" : "Asia & Dubai Tours & Passes"}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="hover:text-white hover:underline"
+                  >
+                    {isBn ? "অল-ইনক্লুসিভ ও এক্সপ্লোরার সিটি পাস" : "All-Inclusive & Explorer Passes"}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.tiqets)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="hover:text-white hover:underline"
+                  >
+                    {isBn ? "ইউরোপ, UK ও USA মিউজিয়াম পাস" : "Europe, UK & USA Attractions"}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.ekta)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="hover:text-white hover:underline"
+                  >
+                    {isBn ? "ভিসা ও শেনজেন ট্রাভেল ইনস্যুরেন্স" : "Visa & Schengen Insurance"}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.airalo)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="hover:text-white hover:underline"
+                  >
+                    {isBn ? "ইনস্ট্যান্ট ট্রাভেল eSIM ডাটা" : "Global Travel eSIM Data"}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.welcomePickups)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="hover:text-white hover:underline"
+                  >
+                    {isBn ? "প্রাইভেট এয়ারপোর্ট পিকআপ ও ট্রান্সফার" : "Airport Pickup & Transfers"}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.airhelp)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="hover:text-white hover:underline"
+                  >
+                    {isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600 পর্যন্ত)" : "Flight Delay Claims (Up to €600)"}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* COLUMN 5 (3 Cols): Direct Support Desk + Sitewide Fare Alert Newsletter */}
+            <div className="lg:col-span-3 space-y-4">
+              <div className="space-y-2">
+                <span className="text-white font-bold font-mono uppercase text-xs block">
+                  {isBn ? "সরাসরি সাপোর্ট ও ভাড়া অ্যালার্ট" : "Direct Desk & Fare Alerts"}
+                </span>
+                <div className="space-y-1.5 text-xs">
+                  <div className="flex items-center justify-between bg-slate-900/70 border border-slate-800 rounded-xl px-3 py-2">
+                    <span className="text-slate-400">{isBn ? "WhatsApp ডেস্ক:" : "WhatsApp Desk:"}</span>
+                    <a
+                      href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white hover:underline text-emerald-400 font-mono font-bold"
+                    >
+                      +880 1784-385335
+                    </a>
+                  </div>
+                  <div className="flex items-center justify-between bg-slate-900/70 border border-slate-800 rounded-xl px-3 py-2">
+                    <span className="text-slate-400">{isBn ? "সরাসরি কল:" : "Direct Hotline:"}</span>
+                    <a
+                      href="tel:+8801784385335"
+                      className="hover:text-white hover:underline text-[#F6B73C] font-mono font-bold"
+                    >
+                      +880 1784-385335
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sitewide Newsletter / Fare Alert Subscription Box */}
+              <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 space-y-2.5">
+                <div className="text-[11px] text-slate-200 font-semibold leading-snug">
+                  {isBn
+                    ? "ঢাকা থেকে ফ্লাইট ও হোটেল ডিল ইমেইলে পান:"
+                    : "Get Dhaka Flight Drops & Visa Updates:"}
+                </div>
+                {emailSubscribed ? (
+                  <div className="text-[11px] text-emerald-400 font-mono bg-emerald-500/10 border border-emerald-500/25 rounded-xl px-3 py-2">
+                    {isBn
+                      ? `✔ সাবস্ক্রাইবড (${userEmail || "সক্রিয়"})`
+                      : `✔ Subscribed (${userEmail || "Active"})`}
+                  </div>
+                ) : (
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleEmailSubscription(footerEmail, "Footer Sitewide Newsletter");
+                    }}
+                    className="flex items-center gap-1.5"
+                  >
+                    <label htmlFor="footer-newsletter-email" className="sr-only">
+                      {isBn ? "আপনার ইমেইল লিখুন" : "Your email address"}
+                    </label>
+                    <input
+                      id="footer-newsletter-email"
+                      type="email"
+                      required
+                      value={footerEmail}
+                      onChange={(e) => setFooterEmail(e.target.value)}
+                      placeholder={isBn ? "আপনার ইমেইল..." : "Your email address..."}
+                      className="min-w-0 flex-1 bg-brand-navy border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#F6B73C]"
+                    />
+                    <button
+                      type="submit"
+                      disabled={emailSubmitting}
+                      className="shrink-0 bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy font-extrabold text-xs px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
+                    >
+                      {emailSubmitting ? "..." : isBn ? "যুক্ত হোন" : "Join"}
+                    </button>
+                  </form>
+                )}
+                <div className="flex items-center justify-between pt-0.5">
+                  <span className="text-[10px] text-slate-500">
+                    {isBn ? "স্প্যাম মুক্ত · ফ্রি অ্যালার্ট" : "Zero spam · Unsubscribe anytime"}
+                  </span>
+                  <a
+                    href="/contact"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateTo("/contact");
+                    }}
+                    className="text-[10px] font-bold text-[#F6B73C] hover:underline cursor-pointer"
+                  >
+                    {isBn ? "যোগাযোগ ফর্ম →" : "Contact Form →"}
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* BOTTOM COMPLIANCE BAR: FTC / Partner Affiliate Disclosure & Copyright */}
+          <div className="pt-6 border-t border-slate-800/90 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 text-[11px] text-slate-500 leading-relaxed">
+            <p className="max-w-4xl">
               {isBn ? (
                 <>
-                  <b>স্বচ্ছতা:</b> আমাদের সাইটের পার্টনার লিংকের মাধ্যমে বুকিং সম্পন্ন হলে আপনার অতিরিক্ত কোনো খরচ ছাড়াই URAL সামান্য কমিশন পেতে পারে।
+                  <strong className="text-slate-300 font-semibold">অ্যাফিলিয়েট ও সম্পাদকীয় স্বচ্ছতা (Affiliate Disclosure):</strong>{" "}
+                  URAL কোনো প্রথাগত ট্রাভেল এজেন্সি নয়—এটি একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স প্ল্যাটফর্ম। আমাদের সাইটের কিছু আউটবাউন্ড লিংক ভেরিফায়েড আন্তর্জাতিক বুকিং পার্টনারদের (যেমন Travelpayouts, Klook, Go City, Tiqets, EKTA ও AirHelp) সাথে যুক্ত। এসব লিংকের মাধ্যমে আপনি বুকিং সম্পন্ন করলে আপনার অতিরিক্ত কোনো খরচ ছাড়াই URAL সামান্য রেফারেল কমিশন পেতে পারে, যা আমাদের সব গাইড ও ক্যালকুলেটর ১০০% ফ্রি রাখতে সাহায্য করে।
                 </>
               ) : (
                 <>
-                  <b>Transparency:</b> URAL earns a small commission on travel reservations completed via links on our site, at no extra cost to you.
+                  <strong className="text-slate-300 font-semibold">Affiliate &amp; Editorial Disclosure:</strong>{" "}
+                  URAL is an independent travel intelligence system, not a traditional ticket-selling agency. Some outbound links on this site connect to verified global travel partners (including Travelpayouts, Klook, Go City, Tiqets, EKTA, and AirHelp). When you book through these links, URAL may earn a referral commission at zero additional cost to you—keeping our visa checklists, BDT calculators, and travel guides 100% free.
                 </>
               )}
             </p>
+            <div className="shrink-0 font-mono text-[10px] text-slate-400">
+              {isBn
+                ? "© 2026 URAL Travel Intelligence. সর্বস্বত্ব সংরক্ষিত।"
+                : "© 2026 URAL Travel Intelligence. All rights reserved."}
+            </div>
           </div>
-
         </div>
       </footer>
 

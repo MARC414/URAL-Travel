@@ -581,8 +581,21 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
               >
                 <span>
                   {isBn
-                    ? "Klook-এ Asia ও Dubai ট্যুর দেখুন"
-                    : "Explore Asia & Dubai on Klook"}
+                    ? "Klook-এ হোটেল ও ট্যুর ডিল দেখুন"
+                    : "Explore Klook Hotels, Tours & Activities"}
+                </span>
+                <ExternalLink size={13} />
+              </a>
+              <a
+                href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="bg-amber-400/15 hover:bg-amber-400/25 border border-[#F6B73C]/50 text-[#F6B73C] font-bold text-xs px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2 cursor-pointer"
+              >
+                <span>
+                  {isBn
+                    ? "Go City All-Inclusive ও Explorer Pass (৫০% ছাড়)"
+                    : "Go City All-Inclusive & Explorer Passes"}
                 </span>
                 <ExternalLink size={13} />
               </a>
@@ -860,8 +873,8 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                   >
                     <span>
                       {isBn
-                        ? `Go City ${hub.city.split(",")[0]} অল-ইনক্লুসিভ পাস (৫০% ছাড়)`
-                        : `Go City ${hub.city.split(",")[0]} Pass (Save up to 50%)`}
+                        ? `Go City ${hub.city.split(",")[0]} All-Inclusive / Explorer Pass`
+                        : `Go City ${hub.city.split(",")[0]} All-Inclusive & Explorer Pass`}
                     </span>
                     <ExternalLink size={13} className="text-amber-700" />
                   </a>

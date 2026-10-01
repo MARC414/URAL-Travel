@@ -189,20 +189,20 @@ export function TravelEssentials({
         </div>
       )}
 
-      {/* TAB 2: TOURS & ATTRACTION PASSES (Klook + KKday) */}
+      {/* TAB 2: TOURS & ATTRACTION PASSES (Klook + Go City + KKday) */}
       {activeTab === "activities" && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center animate-fade-in">
           <div className="lg:col-span-5 space-y-3">
             <div className="flex items-center gap-2 text-xs text-slate-500">
-              <span className="font-semibold text-brand-navy">Skip-the-Line Sightseeing</span>
+              <span className="font-semibold text-brand-navy">Hotels, Tours &amp; All-Inclusive City Passes</span>
               <span aria-hidden="true">·</span>
               <span>Instant Mobile QR Vouchers</span>
             </div>
             <h4 className="font-serif text-lg font-bold text-slate-900">
-              Guided Day Tours, Theme Parks & Attraction Passes in {country}
+              Hotels, Guided Day Tours &amp; All-Inclusive / Explorer Passes in {country}
             </h4>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Pre-book iconic experiences — from Bangkok Chao Phraya dinner cruises and Dubai desert safaris to Singapore Gardens by the Bay and KL Petronas Towers — at discounted partner rates.
+              Book verified hotels, theme parks, and sightseeing tours on Klook, or bundle 3 to 10+ top landmarks on a single <strong>Go City All-Inclusive Pass</strong> or <strong>Explorer Pass</strong> to save up to 50% at the gate.
             </p>
             <div className="flex flex-wrap items-center gap-2.5 pt-2">
               <a
@@ -211,7 +211,16 @@ export function TravelEssentials({
                 rel="noopener noreferrer sponsored"
                 className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
               >
-                <span>Search Passes on Klook</span>
+                <span>Klook Hotels &amp; Tours</span>
+                <ExternalLink size={12} />
+              </a>
+              <a
+                href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="bg-brand-navy text-[#F6B73C] hover:bg-slate-800 font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
+              >
+                <span>Go City All-Inclusive &amp; Explorer Pass</span>
                 <ExternalLink size={12} />
               </a>
               <a
