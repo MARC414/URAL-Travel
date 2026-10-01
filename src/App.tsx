@@ -816,19 +816,26 @@ export default function App() {
       setAffiliateToast(null);
     }, 4500);
   };
-  const [lang, setLang] = useState<Language>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("ural_lang");
-      if (saved === "bn" || saved === "en") return saved;
-    }
-    return "en";
-  });
+  // Language is derived from the URL (/bn/* ⇒ Bengali) so the first client paint
+  // matches the prerendered HTML a crawler receives. localStorage is kept only as
+  // a soft preference and must never override the path, or a /bn deep link would
+  // repaint into English — a flash-of-English and a cloaking signal.
+  const [lang, setLang] = useState<Language>(() =>
+    typeof window !== "undefined" && /^\/bn(\/|$)/.test(window.location.pathname)
+      ? "bn"
+      : "en"
+  );
 
+  // Switching language is a navigation: it rewrites the current path into the
+  // target locale's tree (e.g. /umrah ⇄ /bn/umrah) and lets the URL-driven sync
+  // effect update `lang`. It reads pushPath/toLocalePath declared further down,
+  // which is safe because this only ever runs from a user click (post-render).
   const handleLangToggle = (newLang: Language) => {
-    setLang(newLang);
     if (typeof window !== "undefined") {
       localStorage.setItem("ural_lang", newLang);
     }
+    const basePath = currentPath.split("?")[0].split("#")[0];
+    pushPath(toLocalePath(basePath, newLang));
   };
 
   const [bnContent, setBnContent] = useState<typeof BengaliContentModule | null>(null);
@@ -980,7 +987,15 @@ export default function App() {
   const getRouteDetails = () => {
     const url = new URL(currentPath, "https://ural-travel.pages.dev");
     const searchParams = url.searchParams;
-    const segments = url.pathname.split("/").filter(Boolean);
+    const rawSegments = url.pathname.split("/").filter(Boolean);
+    // A leading /bn segment selects the Bengali locale; the remainder is the same
+    // English-slug route tree, so strip it before section matching. /bn ⇒ home.
+    let locale: Language = "en";
+    let segments = rawSegments;
+    if (rawSegments[0] === "bn") {
+      locale = "bn";
+      segments = rawSegments.slice(1);
+    }
     const root = segments[0] || "";
     const subSegment = segments[1] || null;
 
@@ -1055,10 +1070,16 @@ export default function App() {
 
     const isAdmin = searchParams.has("admin") || searchParams.has("inspector") || searchParams.get("onboarding") === "true";
 
-    return { section, parameterId, isLanding, isAdmin };
+    return { section, parameterId, isLanding, isAdmin, locale };
   };
 
-  const { section, parameterId, isLanding, isAdmin } = getRouteDetails();
+  const { section, parameterId, isLanding, isAdmin, locale } = getRouteDetails();
+
+  // Keep `lang` in lock-step with the URL locale on every navigation (popstate,
+  // pushState, deep link). localStorage never gates this — the path always wins.
+  useEffect(() => {
+    setLang(locale);
+  }, [locale]);
 
   // Mobile Drawer User-Intent Accordion State (reduces vertical scroll depth)
   const getDefaultDrawerGroup = (sec: SectionType): "booking" | "destinations" | "research" | "tools" => {
@@ -1435,7 +1456,7 @@ export default function App() {
         { name: "Travel Blog", url: "https://ural-travel.pages.dev/blog" }
       ];
     } else {
-      const postUrl = `https://ural-travel.pages.dev/blog/${activePost.slug}`;
+      const postUrl = `https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`;
       const postImgUrl = `https://ural-travel.pages.dev/img/blog/${activePost.slug}.jpg`;
       seoTitle = `${activePost.title} | URAL Travel Blog`;
       seoDescription = activePost.summary;
@@ -1599,8 +1620,18 @@ export default function App() {
     }
   };
 
-  // Navigation Helper that emulates URL path routing with clean path URLs
-  const navigateTo = (path: string) => {
+  // Maps any path to its counterpart in the target locale's URL tree. Idempotent:
+  // it strips an existing /bn prefix before (optionally) re-applying it, so it is
+  // safe to call repeatedly and never produces /bn/bn.
+  const toLocalePath = (path: string, target: Language): string => {
+    const base = path.replace(/^\/bn(?=\/|$)/, "") || "/";
+    if (target === "en") return base;
+    return base === "/" ? "/bn" : `/bn${base}`;
+  };
+
+  // Low-level history pusher (the former navigateTo body). Call sites that already
+  // hold a fully-resolved path (e.g. the language switcher) use this directly.
+  const pushPath = (path: string) => {
     const cleanPath = normalizeRoutePath(path);
     if (typeof window !== "undefined") {
       window.history.pushState({}, "", cleanPath);
@@ -1608,6 +1639,14 @@ export default function App() {
     setCurrentPath(cleanPath);
     window.scrollTo({ top: 0, behavior: "smooth" });
     setMobileMenuOpen(false);
+  };
+
+  // Navigation Helper that emulates URL path routing with clean path URLs.
+  // Locale-preserving: in Bengali mode every existing navigateTo("/x") call site
+  // resolves to /bn/x automatically, so none of them needed to change.
+  const navigateTo = (path: string) => {
+    const normalized = normalizeRoutePath(path);
+    pushPath(lang === "bn" ? toLocalePath(normalized, "bn") : normalized);
   };
 
   // Synchronise real live Dhaka (BST) clock instead of static mock timestamp
@@ -1649,7 +1688,7 @@ export default function App() {
             <div className="flex items-center gap-2 sm:gap-3 shrink-0 font-sans text-[11px] font-medium">
               <TopBarWhatsApp lang={lang} />
               <span className="w-px h-3 bg-white/20"></span>
-              <LanguageSwitcher lang={lang} onToggle={handleLangToggle} />
+              <LanguageSwitcher lang={lang} onToggle={handleLangToggle} enHref={toLocalePath(currentPath.split("?")[0].split("#")[0], "en")} bnHref={toLocalePath(currentPath.split("?")[0].split("#")[0], "bn")} />
             </div>
           </div>
         </div>
@@ -2446,7 +2485,7 @@ export default function App() {
                 <div className="p-4 border-t border-white/10 bg-brand-navy space-y-2.5 shrink-0">
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-white/70 font-medium">Language / ভাষা:</span>
-                    <LanguageSwitcher lang={lang} onToggle={handleLangToggle} />
+                    <LanguageSwitcher lang={lang} onToggle={handleLangToggle} enHref={toLocalePath(currentPath.split("?")[0].split("#")[0], "en")} bnHref={toLocalePath(currentPath.split("?")[0].split("#")[0], "bn")} />
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <a
@@ -6091,7 +6130,7 @@ export default function App() {
                           <div className="flex flex-wrap items-center gap-2 text-xs">
                             <a
                               href={`https://wa.me/?text=${encodeURIComponent(
-                                `${activePost.title}\n\n${getBlogAeoSnippet50Words(activePost.slug, isBn, activePost.summary)}\n\nRead Full Guide on URAL: https://ural-travel.pages.dev/blog/${activePost.slug}`
+                                `${activePost.title}\n\n${getBlogAeoSnippet50Words(activePost.slug, isBn, activePost.summary)}\n\nRead Full Guide on URAL: https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`
                               )}`}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -6101,7 +6140,7 @@ export default function App() {
                             </a>
                             <a
                               href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                                `https://ural-travel.pages.dev/blog/${activePost.slug}`
+                                `https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`
                               )}`}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -6113,8 +6152,8 @@ export default function App() {
                               type="button"
                               onClick={() => {
                                 const fbCaption = isBn
-                                  ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getBlogAeoSnippet50Words(activePost.slug, true, activePost.summary)}\n\n👉 সম্পূর্ণ গাইড ও BDT বাজেট দেখুন: https://ural-travel.pages.dev/blog/${activePost.slug}\n💬 কার্ড ছাড়াই BDT/bKash-এ ফ্লাইট ও হোটেল বুকিং হেল্পলাইন (WhatsApp): +8801784385335`
-                                  : `✈️ ${activePost.title}\n\n📌 Quick Summary:\n${getBlogAeoSnippet50Words(activePost.slug, false, activePost.summary)}\n\n👉 Read Full Guide & BDT Calculator: https://ural-travel.pages.dev/blog/${activePost.slug}\n💬 Book Flights & Hotels in BDT via WhatsApp: +8801784385335`;
+                                  ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getBlogAeoSnippet50Words(activePost.slug, true, activePost.summary)}\n\n👉 সম্পূর্ণ গাইড ও BDT বাজেট দেখুন: https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}\n💬 কার্ড ছাড়াই BDT/bKash-এ ফ্লাইট ও হোটেল বুকিং হেল্পলাইন (WhatsApp): +8801784385335`
+                                  : `✈️ ${activePost.title}\n\n📌 Quick Summary:\n${getBlogAeoSnippet50Words(activePost.slug, false, activePost.summary)}\n\n👉 Read Full Guide & BDT Calculator: https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}\n💬 Book Flights & Hotels in BDT via WhatsApp: +8801784385335`;
                                 navigator.clipboard?.writeText(fbCaption);
                                 setAffiliateToast(
                                   isBn

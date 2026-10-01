@@ -278,9 +278,18 @@ export function useSeoMeta({
   let canonicalUrl = "https://ural-travel.pages.dev/";
   let cleanPathTarget: string | null = null;
   if (typeof window !== "undefined") {
-    const pathname = window.location.pathname;
+    const rawPathname = window.location.pathname;
     const searchParams = new URLSearchParams(window.location.search);
     const baseUrl = "https://ural-travel.pages.dev";
+    // A leading /bn segment is the Bengali locale prefix. Strip it for section
+    // detection but preserve it in every canonical/clean-path so /bn/* stays
+    // self-referential — a Bengali page must never canonicalise to its English
+    // counterpart (that would de-index the Bengali URL).
+    const localePrefix = /^\/bn(\/|$)/.test(rawPathname) ? "/bn" : "";
+    const pathname = localePrefix
+      ? rawPathname.replace(/^\/bn/, "") || "/"
+      : rawPathname;
+    const localeBase = `${baseUrl}${localePrefix}`;
     const segments = pathname.split("/").filter(Boolean);
     const rootSection = segments[0] || "";
     const subSegment = segments[1] || "";
@@ -288,61 +297,63 @@ export function useSeoMeta({
     if (rootSection === "flights") {
       const routeId = searchParams.get("route") || subSegment;
       canonicalUrl = routeId
-        ? `${baseUrl}/flights/${routeId}`
-        : `${baseUrl}/flights`;
+        ? `${localeBase}/flights/${routeId}`
+        : `${localeBase}/flights`;
       if (searchParams.has("route") && routeId) {
-        cleanPathTarget = `/flights/${routeId}`;
+        cleanPathTarget = `${localePrefix}/flights/${routeId}`;
       }
     } else if (rootSection === "hotels") {
       const cityId = searchParams.get("city") || subSegment;
       canonicalUrl = cityId
-        ? `${baseUrl}/hotels/${cityId}`
-        : `${baseUrl}/hotels`;
+        ? `${localeBase}/hotels/${cityId}`
+        : `${localeBase}/hotels`;
       if (searchParams.has("city") && cityId) {
-        cleanPathTarget = `/hotels/${cityId}`;
+        cleanPathTarget = `${localePrefix}/hotels/${cityId}`;
       }
     } else if (rootSection === "visa") {
       const countryId = searchParams.get("country") || subSegment;
       canonicalUrl = countryId
-        ? `${baseUrl}/visa/${countryId}`
-        : `${baseUrl}/visa`;
+        ? `${localeBase}/visa/${countryId}`
+        : `${localeBase}/visa`;
       if (searchParams.has("country") && countryId) {
-        cleanPathTarget = `/visa/${countryId}`;
+        cleanPathTarget = `${localePrefix}/visa/${countryId}`;
       }
     } else if (rootSection === "destinations") {
       const countryId = searchParams.get("country") || subSegment;
       canonicalUrl = countryId
-        ? `${baseUrl}/destinations/${countryId}`
-        : `${baseUrl}/destinations`;
+        ? `${localeBase}/destinations/${countryId}`
+        : `${localeBase}/destinations`;
       if (searchParams.has("country") && countryId) {
-        cleanPathTarget = `/destinations/${countryId}`;
+        cleanPathTarget = `${localePrefix}/destinations/${countryId}`;
       }
     } else if (rootSection === "costs") {
       const countryId = searchParams.get("country") || subSegment;
       canonicalUrl = countryId
-        ? `${baseUrl}/costs/${countryId}`
-        : `${baseUrl}/costs`;
+        ? `${localeBase}/costs/${countryId}`
+        : `${localeBase}/costs`;
       if (searchParams.has("country") && countryId) {
-        cleanPathTarget = `/costs/${countryId}`;
+        cleanPathTarget = `${localePrefix}/costs/${countryId}`;
       }
     } else if (rootSection === "blog") {
       const slugId = searchParams.get("slug") || subSegment;
       canonicalUrl = slugId
-        ? `${baseUrl}/blog/${slugId}`
-        : `${baseUrl}/blog`;
+        ? `${localeBase}/blog/${slugId}`
+        : `${localeBase}/blog`;
       if (searchParams.has("slug") && slugId) {
-        cleanPathTarget = `/blog/${slugId}`;
+        cleanPathTarget = `${localePrefix}/blog/${slugId}`;
       }
     } else if (rootSection === "pre-departure" || rootSection === "sitemap") {
-      canonicalUrl = `${baseUrl}/sitemap`;
+      canonicalUrl = `${localeBase}/sitemap`;
     } else if (rootSection === "attractions" || rootSection === "experiences") {
-      canonicalUrl = `${baseUrl}/experiences`;
+      canonicalUrl = `${localeBase}/experiences`;
     } else if (rootSection === "hajj" || rootSection === "umrah") {
-      canonicalUrl = `${baseUrl}/umrah`;
+      canonicalUrl = `${localeBase}/umrah`;
     } else if (rootSection) {
-      canonicalUrl = `${baseUrl}/${rootSection}`;
+      canonicalUrl = `${localeBase}/${rootSection}`;
     } else {
-      canonicalUrl = `${baseUrl}/`;
+      // Home: English keeps its trailing slash (…/), Bengali home is …/bn
+      // (no slash) to match the prerendered dist/bn.html and the sitemap.
+      canonicalUrl = localePrefix ? localeBase : `${baseUrl}/`;
     }
   }
 
