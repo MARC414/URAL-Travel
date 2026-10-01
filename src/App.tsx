@@ -71,7 +71,13 @@ import type * as BengaliContentModule from "./data/bengaliContent";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
-import { getSeoCopy } from "./utils/seoCopy";
+import { getBengaliSeoCopy, getSeoCopy } from "./utils/seoCopy";
+import {
+  BN_BREADCRUMB_LABELS,
+  hasBengaliCounterpart,
+  localizePublicSiteUrl,
+  siteUrl,
+} from "./utils/localeRoutes";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { getBlogImageAltText, getResponsiveImageProps } from "./utils/imageAssets";
 import { getRelatedBlogPosts } from "./utils/blogLinks";
@@ -816,19 +822,31 @@ export default function App() {
       setAffiliateToast(null);
     }, 4500);
   };
+  // Language is a pure function of the URL (see getRouteDetails().locale): /bn/*
+  // renders Bengali, everything else English. Seeding from the path means the
+  // first paint already matches the prerendered HTML. localStorage is demoted to
+  // a preference note that must never override the URL — repainting a Bengali
+  // /bn page into English would be both a jarring flash and a cloaking signal
+  // (crawler reads Bengali, rendered DOM becomes English).
   const [lang, setLang] = useState<Language>(() => {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("ural_lang");
-      if (saved === "bn" || saved === "en") return saved;
+      const path = window.location.pathname;
+      if (path === "/bn" || path.startsWith("/bn/")) return "bn";
     }
     return "en";
   });
 
   const handleLangToggle = (newLang: Language) => {
-    setLang(newLang);
     if (typeof window !== "undefined") {
       localStorage.setItem("ural_lang", newLang);
     }
+    // Switching language navigates to the other locale's URL — /bn/* is the
+    // crawlable Bengali surface, it is not just a client-side state flip.
+    const current =
+      typeof window !== "undefined"
+        ? window.location.pathname + window.location.search
+        : currentPath;
+    pushPath(toLocalePath(current, newLang));
   };
 
   const [bnContent, setBnContent] = useState<typeof BengaliContentModule | null>(null);
@@ -981,8 +999,14 @@ export default function App() {
     const url = new URL(currentPath, "https://ural-travel.pages.dev");
     const searchParams = url.searchParams;
     const segments = url.pathname.split("/").filter(Boolean);
-    const root = segments[0] || "";
-    const subSegment = segments[1] || null;
+    // Bengali is a locale sub-directory: /bn/umrah mirrors /umrah. The locale
+    // lives in the URL (not in localStorage) so the prerendered Bengali HTML and
+    // the client render the same language — otherwise React would repaint a
+    // /bn page into English a few ms after load (flash + cloaking signal).
+    const locale: Language = segments[0] === "bn" ? "bn" : "en";
+    const segs = locale === "bn" ? segments.slice(1) : segments;
+    const root = segs[0] || "";
+    const subSegment = segs[1] || null;
 
     let section: SectionType = "notFound";
     let parameterId: string | null = null;
@@ -991,63 +1015,63 @@ export default function App() {
     if (!root) {
       section = "home";
       isLanding = true;
-    } else if (root === "flights" && segments.length <= 2) {
+    } else if (root === "flights" && segs.length <= 2) {
       const routeParam = searchParams.get("route") || subSegment;
       if (!routeParam || FLIGHTS_DATA.some((route) => route.id === routeParam)) {
         section = "flights";
         parameterId = routeParam || "dhaka-kathmandu";
         isLanding = !routeParam;
       }
-    } else if (root === "hotels" && segments.length <= 2) {
+    } else if (root === "hotels" && segs.length <= 2) {
       const cityParam = searchParams.get("city") || subSegment;
       if (!cityParam || HOTELS_DATA.some((hotel) => hotel.id === cityParam)) {
         section = "hotels";
         parameterId = cityParam || "kathmandu-hotels";
         isLanding = !cityParam;
       }
-    } else if (root === "visa" && segments.length <= 2) {
+    } else if (root === "visa" && segs.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
       if (!countryParam || VISA_DATA.some((visa) => visa.id === countryParam)) {
         section = "visa";
         parameterId = countryParam || "nepal-visa";
         isLanding = !countryParam;
       }
-    } else if (root === "destinations" && segments.length <= 2) {
+    } else if (root === "destinations" && segs.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
       if (!countryParam || DESTINATIONS_DATA.some((destination) => destination.id === countryParam)) {
         section = "destinations";
         parameterId = countryParam || "nepal-guide";
         isLanding = !countryParam;
       }
-    } else if (root === "costs" && segments.length <= 2) {
+    } else if (root === "costs" && segs.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
       if (!countryParam || TRIP_COSTS_DATA.some((cost) => cost.id === countryParam)) {
         section = "costs";
         parameterId = countryParam || "nepal-costs";
         isLanding = !countryParam;
       }
-    } else if ((root === "experiences" || root === "attractions") && segments.length === 1) {
+    } else if ((root === "experiences" || root === "attractions") && segs.length === 1) {
       section = "experiences";
       isLanding = true;
-    } else if ((root === "umrah" || root === "hajj") && segments.length === 1) {
+    } else if ((root === "umrah" || root === "hajj") && segs.length === 1) {
       section = "umrah";
       isLanding = true;
-    } else if (root === "tools" && segments.length === 1) {
+    } else if (root === "tools" && segs.length === 1) {
       section = "tools";
       isLanding = true;
-    } else if (root === "blog" && segments.length <= 2) {
+    } else if (root === "blog" && segs.length <= 2) {
       const slugParam = searchParams.get("slug") || subSegment;
       if (!slugParam || BLOG_DATA.some((post) => post.slug === slugParam)) {
         section = "blog";
         parameterId = slugParam || "cheap-flight-booking-hacks-dhaka";
         isLanding = !slugParam;
       }
-    } else if (root === "contact" && segments.length === 1) {
+    } else if (root === "contact" && segs.length === 1) {
       section = "contact";
       isLanding = true;
     } else if (
       ["sitemap", "pre-departure", "indexing"].includes(root) &&
-      segments.length === 1
+      segs.length === 1
     ) {
       section = "sitemap";
       isLanding = true;
@@ -1055,10 +1079,16 @@ export default function App() {
 
     const isAdmin = searchParams.has("admin") || searchParams.has("inspector") || searchParams.get("onboarding") === "true";
 
-    return { section, parameterId, isLanding, isAdmin };
+    return { section, parameterId, isLanding, isAdmin, locale };
   };
 
-  const { section, parameterId, isLanding, isAdmin } = getRouteDetails();
+  const { section, parameterId, isLanding, isAdmin, locale } = getRouteDetails();
+
+  // Keep React state in lockstep with the URL locale — covers back/forward
+  // navigation between /umrah and /bn/umrah as well as direct deep links.
+  useEffect(() => {
+    setLang(locale);
+  }, [locale]);
 
   // Mobile Drawer User-Intent Accordion State (reduces vertical scroll depth)
   const getDefaultDrawerGroup = (sec: SectionType): "booking" | "destinations" | "research" | "tools" => {
@@ -1101,57 +1131,62 @@ export default function App() {
   const pageLanguage = lang === "bn" ? "bn-BD" : "en-BD";
 
   if (section === "home") {
-    seoSchema = generateFAQSchema([
-      {
-        question: "How do I get a dual-currency card endorsement on a Bangladeshi passport?",
-        answer:
-          "Visit an authorized bank branch in Bangladesh with your original valid passport and NID to endorse up to USD $12,000 per calendar year under the Bangladesh Bank travel quota, then enable E-Commerce and 3D-Secure online transactions in your bank app before booking flights or hotels.",
-      },
-      {
-        question: "What are the top budget-friendly family destinations from Dhaka?",
-        answer:
-          "Nepal (from BDT 42,000 per person with free Visa on Arrival), Malaysia (from BDT 68,000 with 4-day online e-Visa and universal Halal dining), Thailand, and the Maldives local islands (Maafushi and Hulhumalé) are the top budget-friendly family destinations from Dhaka.",
-      },
-      {
-        question: "Which countries can Bangladeshi passport holders visit without a prior visa?",
-        answer:
-          "Nepal, the Maldives, Sri Lanka (via online ETA), Bhutan and Indonesia issue Visa on Arrival or free entry to Bangladeshi passport holders, so no embassy appointment is needed before departure from Dhaka. Nepal and the Maldives are the cheapest of these to reach from Dhaka (DAC).",
-      },
-      {
-        question: "Is URAL a travel agency that sells tickets?",
-        answer:
-          "No. URAL is an independent outbound travel intelligence desk for Bangladeshi travellers: it publishes flight price guidance in BDT, official visa checklists, itineraries and realistic trip-cost breakdowns, then links out to the airline, hotel or visa portal so you book directly at the source price.",
-      },
-    ]);
+    if (!isBn) {
+      seoSchema = generateFAQSchema([
+        {
+          question: "How do I get a dual-currency card endorsement on a Bangladeshi passport?",
+          answer:
+            "Visit an authorized bank branch in Bangladesh with your original valid passport and NID to endorse up to USD $12,000 per calendar year under the Bangladesh Bank travel quota, then enable E-Commerce and 3D-Secure online transactions in your bank app before booking flights or hotels.",
+        },
+        {
+          question: "What are the top budget-friendly family destinations from Dhaka?",
+          answer:
+            "Nepal (from BDT 42,000 per person with free Visa on Arrival), Malaysia (from BDT 68,000 with 4-day online e-Visa and universal Halal dining), Thailand, and the Maldives local islands (Maafushi and Hulhumalé) are the top budget-friendly family destinations from Dhaka.",
+        },
+        {
+          question: "Which countries can Bangladeshi passport holders visit without a prior visa?",
+          answer:
+            "Nepal, the Maldives, Sri Lanka (via online ETA), Bhutan and Indonesia issue Visa on Arrival or free entry to Bangladeshi passport holders, so no embassy appointment is needed before departure from Dhaka. Nepal and the Maldives are the cheapest of these to reach from Dhaka (DAC).",
+        },
+        {
+          question: "Is URAL a travel agency that sells tickets?",
+          answer:
+            "No. URAL is an independent outbound travel intelligence desk for Bangladeshi travellers: it publishes flight price guidance in BDT, official visa checklists, itineraries and realistic trip-cost breakdowns, then links out to the airline, hotel or visa portal so you book directly at the source price.",
+        },
+      ]);
+    }
     seoBreadcrumbs = [
-      { name: "Home", url: "https://ural-travel.pages.dev/" }
+      { name: "Home", url: siteUrl("/", lang) }
     ];
   } else if (section === "flights") {
-    const activeRoute = FLIGHTS_DATA.find(r => r.id === parameterId) || FLIGHTS_DATA[0];
+    const activeRoute = localizedFlights.find(r => r.id === parameterId) || localizedFlights[0];
     const year = new Date().getFullYear();
+    const hubUrl = siteUrl("/flights", lang);
 
     if (isLanding) {
       seoTitle = `Flights from Dhaka: Compare Fares, Routes & Airlines (${year}) | URAL`;
       seoDescription = "Compare cheap international flights from Hazrat Shahjalal International Airport (DAC) to Nepal, Thailand, Malaysia, and Dubai. View flight duration, direct airlines, and BDT fares.";
       const collectionNode = collectionPageSchema({
-        url: "https://ural-travel.pages.dev/flights",
+        url: hubUrl,
         name: seoTitle,
         description: seoDescription,
         inLanguage: pageLanguage,
-        items: FLIGHTS_DATA.map((r) => ({
-          name: `${r.from} to ${r.to} Flight Guide`,
-          url: `https://ural-travel.pages.dev/flights/${r.id}`,
+        items: localizedFlights.map((r) => ({
+          name: isBn
+            ? getBengaliSeoCopy(`/flights/${r.id}`)?.title || `${r.from} থেকে ${r.to} ফ্লাইট গাইড`
+            : `${r.from} to ${r.to} Flight Guide`,
+          url: siteUrl(`/flights/${r.id}`, lang),
           description: r.quickAnswer,
         })),
       });
-      const faqSchema = getFaqSchemaForPage("flights", undefined, true, "https://ural-travel.pages.dev/flights");
+      const faqSchema = isBn ? null : getFaqSchemaForPage("flights", undefined, true, hubUrl);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural-travel.pages.dev/" },
-        { name: "Flight Guides", url: "https://ural-travel.pages.dev/flights" }
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Flight Guides", url: hubUrl }
       ];
     } else {
-      const routeUrl = `https://ural-travel.pages.dev/flights/${activeRoute.id}`;
+      const routeUrl = siteUrl(`/flights/${activeRoute.id}`, lang);
       seoTitle = activeRoute.id === "dhaka-kathmandu"
         ? `Dhaka to Kathmandu Flight Guide 2026: Price, Time & Visa | URAL`
         : `Flights from Dhaka to ${activeRoute.to.split(" (")[0]} (${activeRoute.country}) ${year} | URAL`;
@@ -1167,41 +1202,44 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("flights", activeRoute.id, false, routeUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("flights", activeRoute.id, false, routeUrl);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural-travel.pages.dev/" },
-        { name: "Flight Guides", url: "https://ural-travel.pages.dev/flights" },
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Flight Guides", url: hubUrl },
         { name: `${activeRoute.from.split(" (")[0]} to ${activeRoute.to.split(" (")[0]} Flight`, url: routeUrl }
       ];
     }
 
   } else if (section === "hotels") {
-    const activeHotel = HOTELS_DATA.find(h => h.id === parameterId) || HOTELS_DATA[0];
+    const activeHotel = localizedHotels.find(h => h.id === parameterId) || localizedHotels[0];
+    const hubUrl = siteUrl("/hotels", lang);
 
     if (isLanding) {
       seoTitle = `International Hotel Guides for Bangladeshi Travelers (2026) | URAL`;
       seoDescription = "Find top-rated budget & family hotels in Kathmandu, Bangkok, Kuala Lumpur, and Dubai. Neighborhood safety, halal dining, and BDT payment guides.";
       const collectionNode = collectionPageSchema({
-        url: "https://ural-travel.pages.dev/hotels",
+        url: hubUrl,
         name: seoTitle,
         description: seoDescription,
         inLanguage: pageLanguage,
-        items: HOTELS_DATA.map((h) => ({
-          name: `Best Hotels in ${h.city} (${h.country})`,
-          url: `https://ural-travel.pages.dev/hotels/${h.id}`,
+        items: localizedHotels.map((h) => ({
+          name: isBn
+            ? getBengaliSeoCopy(`/hotels/${h.id}`)?.title || `${h.city} হোটেল গাইড (${h.country})`
+            : `Best Hotels in ${h.city} (${h.country})`,
+          url: siteUrl(`/hotels/${h.id}`, lang),
           description: h.quickAnswer,
         })),
       });
-      const faqSchema = getFaqSchemaForPage("hotels", undefined, true, "https://ural-travel.pages.dev/hotels");
+      const faqSchema = isBn ? null : getFaqSchemaForPage("hotels", undefined, true, hubUrl);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural-travel.pages.dev/" },
-        { name: "Hotel Neighborhoods", url: "https://ural-travel.pages.dev/hotels" }
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Hotel Neighborhoods", url: hubUrl }
       ];
     } else {
-      const hotelUrl = `https://ural-travel.pages.dev/hotels/${activeHotel.id}`;
+      const hotelUrl = siteUrl(`/hotels/${activeHotel.id}`, lang);
       seoTitle = activeHotel.id === "kathmandu-hotels"
         ? `Best Hotels in Kathmandu for Bangladeshi Travelers (2026) | URAL`
         : `Top Rated Hotels in ${activeHotel.city} | URAL`;
@@ -1217,41 +1255,44 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("hotels", activeHotel.id, false, hotelUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("hotels", activeHotel.id, false, hotelUrl);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural-travel.pages.dev/" },
-        { name: "Hotel Neighborhoods", url: "https://ural-travel.pages.dev/hotels" },
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Hotel Neighborhoods", url: hubUrl },
         { name: `${activeHotel.city} Hotels`, url: hotelUrl }
       ];
     }
 
   } else if (section === "visa") {
-    const activeVisa = VISA_DATA.find(v => v.id === parameterId) || VISA_DATA[0];
+    const activeVisa = localizedVisas.find(v => v.id === parameterId) || localizedVisas[0];
+    const hubUrl = siteUrl("/visa", lang);
 
     if (isLanding) {
       seoTitle = `Visa Requirements for Bangladeshi Citizens 2026: Guides & Checklists | URAL`;
       seoDescription = "Check complete tourist visa guides for Bangladeshi citizens. Learn about free Visa on Arrival in Nepal, Thailand sticker visa rules, Malaysia eVisa, and Dubai visas.";
       const collectionNode = collectionPageSchema({
-        url: "https://ural-travel.pages.dev/visa",
+        url: hubUrl,
         name: seoTitle,
         description: seoDescription,
         inLanguage: pageLanguage,
-        items: VISA_DATA.map((v) => ({
-          name: `${v.country} Visa Guide for Bangladeshis`,
-          url: `https://ural-travel.pages.dev/visa/${v.id}`,
+        items: localizedVisas.map((v) => ({
+          name: isBn
+            ? getBengaliSeoCopy(`/visa/${v.id}`)?.title || `${v.country} ভিসা গাইড`
+            : `${v.country} Visa Guide for Bangladeshis`,
+          url: siteUrl(`/visa/${v.id}`, lang),
           description: v.quickAnswer,
         })),
       });
-      const faqSchema = getFaqSchemaForPage("visa", undefined, true, "https://ural-travel.pages.dev/visa");
+      const faqSchema = isBn ? null : getFaqSchemaForPage("visa", undefined, true, hubUrl);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural-travel.pages.dev/" },
-        { name: "Visa Guides", url: "https://ural-travel.pages.dev/visa" }
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Visa Guides", url: hubUrl }
       ];
     } else {
-      const visaUrl = `https://ural-travel.pages.dev/visa/${activeVisa.id}`;
+      const visaUrl = siteUrl(`/visa/${activeVisa.id}`, lang);
       seoTitle = activeVisa.id === "nepal-visa"
         ? `Nepal Visa for Bangladeshi Citizens 2026: Free Visa on Arrival Guide | URAL`
         : `${activeVisa.country} Visa for Bangladeshi Travelers 2026 | URAL`;
@@ -1267,41 +1308,42 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("visa", activeVisa.id, false, visaUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("visa", activeVisa.id, false, visaUrl);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural-travel.pages.dev/" },
-        { name: "Visa Guides", url: "https://ural-travel.pages.dev/visa" },
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Visa Guides", url: hubUrl },
         { name: `${activeVisa.country} Visa`, url: visaUrl }
       ];
     }
 
   } else if (section === "destinations") {
     const activeDes = DESTINATIONS_DATA.find(d => d.id === parameterId) || DESTINATIONS_DATA[0];
+    const hubUrl = siteUrl("/destinations", lang);
 
     if (isLanding) {
       seoTitle = `Outbound Travel Plans & Itineraries from Bangladesh | URAL`;
       seoDescription = "Explore hand-crafted 5-day itineraries and travel plans for Bangladeshi tourists visiting Nepal, Thailand, Malaysia, and the UAE with BDT budgets.";
       const collectionNode = collectionPageSchema({
-        url: "https://ural-travel.pages.dev/destinations",
+        url: hubUrl,
         name: seoTitle,
         description: seoDescription,
         inLanguage: pageLanguage,
         items: DESTINATIONS_DATA.map((d) => ({
           name: `${d.country} 5-Day Itinerary from Bangladesh`,
-          url: `https://ural-travel.pages.dev/destinations/${d.id}`,
+          url: siteUrl(`/destinations/${d.id}`, lang),
           description: d.quickAnswer,
         })),
       });
-      const faqSchema = getFaqSchemaForPage("destinations", undefined, true, "https://ural-travel.pages.dev/destinations");
+      const faqSchema = isBn ? null : getFaqSchemaForPage("destinations", undefined, true, hubUrl);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural-travel.pages.dev/" },
-        { name: "Destinations", url: "https://ural-travel.pages.dev/destinations" }
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Destinations", url: hubUrl }
       ];
     } else {
-      const destUrl = `https://ural-travel.pages.dev/destinations/${activeDes.id}`;
+      const destUrl = siteUrl(`/destinations/${activeDes.id}`, lang);
       seoTitle = activeDes.id === "nepal-guide"
         ? `Nepal Trip Plan from Bangladesh: 5-Day Itinerary & Costs (2026) | URAL`
         : `${activeDes.country} Tour Itinerary & Travel Plan from Bangladesh | URAL`;
@@ -1337,41 +1379,44 @@ export default function App() {
             : 95000,
         inLanguage: pageLanguage,
       });
-      const faqSchema = getFaqSchemaForPage("destinations", activeDes.id, false, destUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("destinations", activeDes.id, false, destUrl);
       seoSchema = [schemaObj, tripNode, faqSchema].filter(Boolean);
 
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural-travel.pages.dev/" },
-        { name: "Destinations", url: "https://ural-travel.pages.dev/destinations" },
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Destinations", url: hubUrl },
         { name: `${activeDes.country} Guide`, url: destUrl }
       ];
     }
 
   } else if (section === "costs") {
-    const activeCost = TRIP_COSTS_DATA.find(c => c.id === parameterId) || TRIP_COSTS_DATA[0];
+    const activeCost = localizedCosts.find(c => c.id === parameterId) || localizedCosts[0];
+    const hubUrl = siteUrl("/costs", lang);
 
     if (isLanding) {
       seoTitle = `International Trip Budgets from Bangladesh: Realistic BDT Cost Guides | URAL`;
       seoDescription = "How much does an international trip really cost from Dhaka? Detailed BDT budgets for Nepal, Thailand, Malaysia, and Dubai covering flights, hotels, food & transport.";
       const collectionNode = collectionPageSchema({
-        url: "https://ural-travel.pages.dev/costs",
+        url: hubUrl,
         name: seoTitle,
         description: seoDescription,
         inLanguage: pageLanguage,
-        items: TRIP_COSTS_DATA.map((c) => ({
-          name: `${c.country} 5-Day Trip Cost Breakdown in BDT`,
-          url: `https://ural-travel.pages.dev/costs/${c.id}`,
+        items: localizedCosts.map((c) => ({
+          name: isBn
+            ? getBengaliSeoCopy(`/costs/${c.id}`)?.title || `${c.country} ভ্রমণ খরচ (BDT)`
+            : `${c.country} 5-Day Trip Cost Breakdown in BDT`,
+          url: siteUrl(`/costs/${c.id}`, lang),
           description: c.quickAnswer,
         })),
       });
-      const faqSchema = getFaqSchemaForPage("costs", undefined, true, "https://ural-travel.pages.dev/costs");
+      const faqSchema = isBn ? null : getFaqSchemaForPage("costs", undefined, true, hubUrl);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural-travel.pages.dev/" },
-        { name: "Trip Costs", url: "https://ural-travel.pages.dev/costs" }
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Trip Costs", url: hubUrl }
       ];
     } else {
-      const costUrl = `https://ural-travel.pages.dev/costs/${activeCost.id}`;
+      const costUrl = siteUrl(`/costs/${activeCost.id}`, lang);
       seoTitle = activeCost.id === "nepal-costs"
         ? `Nepal Trip Cost from Bangladesh 2026: Full Budget Breakdown (BDT) | URAL`
         : `${activeCost.country} Trip Cost from Bangladesh: Full Budget Sheet | URAL`;
@@ -1387,68 +1432,72 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("costs", activeCost.id, false, costUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("costs", activeCost.id, false, costUrl);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural-travel.pages.dev/" },
-        { name: "Trip Costs", url: "https://ural-travel.pages.dev/costs" },
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Trip Costs", url: hubUrl },
         { name: `${activeCost.country} Costs`, url: costUrl }
       ];
     }
 
   } else if (section === "tools") {
+    const toolsUrl = siteUrl("/tools", lang);
     seoTitle = "Bangladeshi Traveler Utility Tools & Services (2026) | URAL";
     seoDescription = "Access handy travel utility tools for Bangladeshi outbound tourists: live BDT exchange rates, power plug specifications, packing checklist, and translation aids.";
     const toolsServiceNode = serviceSchema({
-      url: "https://ural-travel.pages.dev/tools",
+      url: toolsUrl,
       idSuffix: "service-travel-tools",
       name: "Bangladesh Outbound Currency, Visa Odds & Flight Delay Claim Tools",
       description: seoDescription,
       serviceType: "Travel Planning & Flight Compensation Utility",
     });
-    const faqSchema = getFaqSchemaForPage("tools", undefined, true, "https://ural-travel.pages.dev/tools");
+    const faqSchema = isBn ? null : getFaqSchemaForPage("tools", undefined, true, toolsUrl);
     seoSchema = faqSchema ? [toolsServiceNode, faqSchema] : [toolsServiceNode];
     seoBreadcrumbs = [
-      { name: "Home", url: "https://ural-travel.pages.dev/" },
-      { name: "Travel Tools", url: "https://ural-travel.pages.dev/tools" }
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: "Travel Tools", url: toolsUrl }
     ];
 
   } else if (section === "blog") {
-    const activePost = BLOG_DATA.find(p => p.slug === parameterId) || BLOG_DATA[0];
+    const activePost = localizedBlogs.find(p => p.slug === parameterId) || localizedBlogs[0];
+    const canonicalPost = BLOG_DATA.find(p => p.slug === activePost.slug) || activePost;
+    const hubUrl = siteUrl("/blog", lang);
     if (isLanding) {
       seoTitle = "Travel Guides, Umrah Preparation & Outbound Intelligence for Bangladesh (2026) | URAL Blog";
       seoDescription = "Explore verified travel guides built for Bangladeshi travelers: DIY Umrah & Hajj preparation, dual-currency card endorsement, visa checklists, and family trip budgets in BDT.";
       seoSchema = collectionPageSchema({
-        url: "https://ural-travel.pages.dev/blog",
+        url: hubUrl,
         name: seoTitle,
         description: seoDescription,
         inLanguage: pageLanguage,
-        items: BLOG_DATA.map((p) => ({
+        items: localizedBlogs.map((p) => ({
           name: p.title,
-          url: `https://ural-travel.pages.dev/blog/${p.slug}`,
+          url: siteUrl(`/blog/${p.slug}`, lang),
           description: p.summary,
         })),
       });
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural-travel.pages.dev/" },
-        { name: "Travel Blog", url: "https://ural-travel.pages.dev/blog" }
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Travel Blog", url: hubUrl }
       ];
     } else {
-      const postUrl = `https://ural-travel.pages.dev/blog/${activePost.slug}`;
+      const postUrl = siteUrl(`/blog/${activePost.slug}`, lang);
       const postImgUrl = `https://ural-travel.pages.dev/img/blog/${activePost.slug}.jpg`;
+      const bnPostSeo = isBn ? bnContent?.getBengaliRouteSeo(`/blog/${activePost.slug}`) : null;
       seoTitle = `${activePost.title} | URAL Travel Blog`;
-      seoDescription = activePost.summary;
+      seoDescription = bnPostSeo?.description || activePost.summary;
       seoImageUrl = postImgUrl;
 
       const articleNode = articleSchema({
         url: postUrl,
-        headline: activePost.title,
-        description: activePost.summary,
+        headline: bnPostSeo?.h1 || activePost.title,
+        description: bnPostSeo?.description || activePost.summary,
         slug: activePost.slug,
-        datePublished: activePost.date,
-        dateModified: activePost.date,
-        authorRaw: activePost.author,
+        datePublished: canonicalPost.date,
+        dateModified: canonicalPost.date,
+        authorRaw: canonicalPost.author,
         articleSection: activePost.category,
         imageUrl: postImgUrl,
         inLanguage: pageLanguage,
@@ -1457,34 +1506,36 @@ export default function App() {
       seoSchema = [articleNode];
 
       seoBreadcrumbs = [
-        { name: "Home", url: "https://ural-travel.pages.dev/" },
-        { name: "Travel Blog", url: "https://ural-travel.pages.dev/blog" },
-        { name: activePost.title, url: postUrl }
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Travel Blog", url: hubUrl },
+        { name: bnPostSeo?.h1 || activePost.title, url: postUrl }
       ];
     }
   } else if (section === "contact") {
+    const contactUrl = siteUrl("/contact", lang);
     seoTitle = "Contact URAL — Direct Phone & WhatsApp Support";
     seoDescription = "Connect directly with our flight & visa support desk at +8801784385335. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.";
     const contactServiceNode = serviceSchema({
-      url: "https://ural-travel.pages.dev/contact",
+      url: contactUrl,
       idSuffix: "service-visa-assistance",
       name: "Bangladesh Outbound Visa Assistance & BDT Booking Desk",
       description:
         "Visa checklist review, document preparation, and flight/hotel booking in Bangladeshi Taka via bKash or bank transfer for Bangladeshi passport holders.",
       serviceType: "Visa Assistance",
     });
-    const faqSchema = getFaqSchemaForPage("contact", undefined, true, "https://ural-travel.pages.dev/contact");
+    const faqSchema = isBn ? null : getFaqSchemaForPage("contact", undefined, true, contactUrl);
     seoSchema = faqSchema ? [contactServiceNode, faqSchema] : [contactServiceNode];
     seoBreadcrumbs = [
-      { name: "Home", url: "https://ural-travel.pages.dev/" },
-      { name: "Contact Us", url: "https://ural-travel.pages.dev/contact" }
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: "Contact Us", url: contactUrl }
     ];
   } else if (section === "experiences") {
+    const experiencesUrl = siteUrl("/experiences", lang);
     seoTitle = "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub) | URAL";
     seoDescription = "Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and KL.";
     seoSchema = [
       productOfferSchema({
-        url: "https://ural-travel.pages.dev/experiences",
+        url: experiencesUrl,
         idSuffix: "product-airalo-saudi-esim",
         name: "Saudi Arabia Travel eSIM for Umrah (5 GB / 30 days)",
         description:
@@ -1494,7 +1545,7 @@ export default function App() {
         priceBdt: 2100,
       }),
       productOfferSchema({
-        url: "https://ural-travel.pages.dev/experiences",
+        url: experiencesUrl,
         idSuffix: "product-tiqets-paris-pass",
         name: "Paris Louvre, Eiffel Tower & Seine River Skip-the-Line Bundle",
         description:
@@ -1505,29 +1556,39 @@ export default function App() {
       }),
     ];
     seoBreadcrumbs = [
-      { name: "Home", url: "https://ural-travel.pages.dev/" },
-      { name: "Attractions & Passes", url: "https://ural-travel.pages.dev/experiences" }
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: "Attractions & Passes", url: experiencesUrl }
     ];
   } else if (section === "umrah") {
+    const umrahUrl = siteUrl("/umrah", lang);
     seoTitle = "Umrah Cost from Bangladesh: DIY Guide & Nusuk | URAL";
     seoDescription = "Plan Umrah from Dhaka with a BDT cost framework, Saudi visa and Nusuk guidance, Makkah–Madinah travel options, and a practical preparation checklist.";
-    seoSchema = generateFAQSchema(HAJJ_UMRAH_FAQS, {
-      url: "https://ural-travel.pages.dev/umrah",
-      name: "Umrah & Hajj Planning Hub from Bangladesh (2026)",
-    });
+    const umrahFaqNode = generateFAQSchema(localizedHajjFaqs, {
+      url: umrahUrl,
+      name: isBn
+        ? getBengaliSeoCopy("/umrah")?.title || "উমরাহ ও হজ গাইড"
+        : "Umrah & Hajj Planning Hub from Bangladesh (2026)",
+    }) as unknown as Record<string, unknown>;
+    umrahFaqNode["@id"] = `${umrahUrl}#faq`;
+    umrahFaqNode["mainEntityOfPage"] = { "@id": `${umrahUrl}#webpage` };
+    umrahFaqNode["inLanguage"] = pageLanguage;
+    seoSchema = umrahFaqNode;
     seoBreadcrumbs = [
-      { name: "Home", url: "https://ural-travel.pages.dev/" },
-      { name: "Umrah & Hajj Hub", url: "https://ural-travel.pages.dev/umrah" }
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: "Umrah & Hajj Hub", url: umrahUrl }
     ];
   } else if (section === "sitemap") {
+    const sitemapUrl = siteUrl("/sitemap", lang);
     seoTitle = "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Complete 83-Page Sitemap | URAL";
     seoDescription = "Interactive pre-flight readiness checklist for Bangladeshi travelers departing Dhaka Airport (DAC), cabin & Zamzam baggage rules, Embassy emergency helplines, and complete 83-page directory.";
-    seoSchema = getPreDepartureFaqSchema({
-      url: "https://ural-travel.pages.dev/sitemap",
-    });
+    if (!isBn) {
+      seoSchema = getPreDepartureFaqSchema({
+        url: sitemapUrl,
+      });
+    }
     seoBreadcrumbs = [
-      { name: "Home", url: "https://ural-travel.pages.dev/" },
-      { name: "Pre-Departure & Complete Sitemap", url: "https://ural-travel.pages.dev/sitemap" }
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: "Pre-Departure & Complete Sitemap", url: sitemapUrl }
     ];
   }
 
@@ -1549,25 +1610,60 @@ export default function App() {
     return new URL(currentPath, "https://ural-travel.pages.dev").pathname;
   })();
 
-  const sharedSeoCopy = getSeoCopy(seoRoutePath, seoTitle, seoDescription);
+  // Bengali pages must never fall back to the English copy tables: prefer the
+  // hand-written BENGALI_SEO_COPY, then the generated /bn metadata from
+  // bengaliContent (loaded lazily on /bn routes), then a compact fallback.
+  const sharedSeoCopy = isBn
+    ? (() => {
+        // Same precedence as scripts/prerender.ts: hand-written Bengali SERP
+        // copy, then copy generated from the Bengali data, then a compact
+        // fallback. Keeping the order identical is what guarantees the client
+        // renders the same <title> the crawler already saw.
+        const bnHandWritten = getBengaliSeoCopy(seoRoutePath);
+        if (bnHandWritten) return bnHandWritten;
+        const bnGenerated = bnContent?.getBengaliRouteSeo(seoRoutePath);
+        if (bnGenerated) {
+          return { title: bnGenerated.title, description: bnGenerated.description };
+        }
+        return getSeoCopy(seoRoutePath, seoTitle, seoDescription, "bn");
+      })()
+    : getSeoCopy(seoRoutePath, seoTitle, seoDescription);
   seoTitle = sharedSeoCopy.title;
   seoDescription = sharedSeoCopy.description;
 
   const syncPageSchemaCopy = (schemaNode: any): any => {
+    if (typeof schemaNode === "string") {
+      return isBn ? localizePublicSiteUrl(schemaNode, "bn") : schemaNode;
+    }
     if (Array.isArray(schemaNode)) return schemaNode.map(syncPageSchemaCopy);
     if (!schemaNode || typeof schemaNode !== "object") return schemaNode;
 
-    const updatedNode = { ...schemaNode };
+    const updatedNode: Record<string, any> = {};
+    for (const [k, v] of Object.entries(schemaNode)) {
+      updatedNode[k] = syncPageSchemaCopy(v);
+    }
     if (updatedNode["@type"] === "WebPage" || updatedNode["@type"] === "CollectionPage") {
       updatedNode.name = seoTitle;
       updatedNode.description = seoDescription;
     }
-    if (Array.isArray(updatedNode["@graph"])) {
-      updatedNode["@graph"] = updatedNode["@graph"].map(syncPageSchemaCopy);
-    }
     return updatedNode;
   };
   seoSchema = syncPageSchemaCopy(seoSchema);
+
+  if (isBn && seoBreadcrumbs.length > 0) {
+    const bnLastLabel =
+      bnContent?.getBengaliRouteSeo(seoRoutePath)?.h1 ??
+      seoTitle.replace(/\s*\|\s*URAL.*$/i, "").trim();
+    seoBreadcrumbs = seoBreadcrumbs.map((crumb, idx) => {
+      const isLast = idx === seoBreadcrumbs.length - 1;
+      return {
+        name: isLast
+          ? bnLastLabel
+          : BN_BREADCRUMB_LABELS[crumb.name] || crumb.name,
+        url: localizePublicSiteUrl(crumb.url, "bn"),
+      };
+    });
+  }
 
   // Call the hook at the top level
   useSeoMeta({
@@ -1599,15 +1695,47 @@ export default function App() {
     }
   };
 
-  // Navigation Helper that emulates URL path routing with clean path URLs
-  const navigateTo = (path: string) => {
+  /**
+   * Maps an English base path to its localised URL.
+   * Idempotent: a path that already carries the /bn prefix is normalised back to
+   * the English base first, so toLocalePath(toLocalePath(p, "bn"), "bn") is
+   * stable and switching languages twice can never produce /bn/bn/…
+   * Query strings and hashes are preserved ("/experiences?region=west").
+   */
+  const toLocalePath = (path: string, target: Language): string => {
+    const match = String(path || "/").match(/^([^?#]*)([\s\S]*)$/);
+    const pathname = match?.[1] || "/";
+    const rest = match?.[2] || "";
+    const base = pathname.replace(/^\/bn(?=\/|$)/, "") || "/";
+    if (target === "en") return `${base}${rest}`;
+    return base === "/" ? `/bn${rest}` : `/bn${base}${rest}`;
+  };
+
+  /** Low-level history push — no locale awareness (see navigateTo). */
+  const pushPath = (path: string) => {
     const cleanPath = normalizeRoutePath(path);
     if (typeof window !== "undefined") {
       window.history.pushState({}, "", cleanPath);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
     setCurrentPath(cleanPath);
-    window.scrollTo({ top: 0, behavior: "smooth" });
     setMobileMenuOpen(false);
+  };
+
+  // Navigation helper that emulates URL path routing with clean path URLs.
+  // In Bengali mode every existing navigateTo("/x") call site resolves to
+  // /bn/x automatically, so no call site needed to change.
+  const navigateTo = (path: string) => {
+    pushPath(lang === "bn" ? toLocalePath(normalizeRoutePath(path), "bn") : path);
+  };
+
+  // Real hrefs for the language switcher so both locales are crawlable anchors
+  // from every page (reinforcing the hreflang cluster with on-page links).
+  const localeHrefs = {
+    en: toLocalePath(currentPath, "en"),
+    bn: hasBengaliCounterpart(currentPath)
+      ? toLocalePath(currentPath, "bn")
+      : "/bn",
   };
 
   // Synchronise real live Dhaka (BST) clock instead of static mock timestamp
@@ -1649,7 +1777,12 @@ export default function App() {
             <div className="flex items-center gap-2 sm:gap-3 shrink-0 font-sans text-[11px] font-medium">
               <TopBarWhatsApp lang={lang} />
               <span className="w-px h-3 bg-white/20"></span>
-              <LanguageSwitcher lang={lang} onToggle={handleLangToggle} />
+              <LanguageSwitcher
+                lang={lang}
+                onToggle={handleLangToggle}
+                enHref={localeHrefs.en}
+                bnHref={localeHrefs.bn}
+              />
             </div>
           </div>
         </div>
@@ -2446,7 +2579,12 @@ export default function App() {
                 <div className="p-4 border-t border-white/10 bg-brand-navy space-y-2.5 shrink-0">
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-white/70 font-medium">Language / ভাষা:</span>
-                    <LanguageSwitcher lang={lang} onToggle={handleLangToggle} />
+                    <LanguageSwitcher
+                lang={lang}
+                onToggle={handleLangToggle}
+                enHref={localeHrefs.en}
+                bnHref={localeHrefs.bn}
+              />
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <a
@@ -6091,7 +6229,7 @@ export default function App() {
                           <div className="flex flex-wrap items-center gap-2 text-xs">
                             <a
                               href={`https://wa.me/?text=${encodeURIComponent(
-                                `${activePost.title}\n\n${getBlogAeoSnippet50Words(activePost.slug, isBn, activePost.summary)}\n\nRead Full Guide on URAL: https://ural-travel.pages.dev/blog/${activePost.slug}`
+                                `${activePost.title}\n\n${getBlogAeoSnippet50Words(activePost.slug, isBn, activePost.summary)}\n\nRead Full Guide on URAL: https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`
                               )}`}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -6101,7 +6239,7 @@ export default function App() {
                             </a>
                             <a
                               href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                                `https://ural-travel.pages.dev/blog/${activePost.slug}`
+                                `https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`
                               )}`}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -6113,7 +6251,7 @@ export default function App() {
                               type="button"
                               onClick={() => {
                                 const fbCaption = isBn
-                                  ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getBlogAeoSnippet50Words(activePost.slug, true, activePost.summary)}\n\n👉 সম্পূর্ণ গাইড ও BDT বাজেট দেখুন: https://ural-travel.pages.dev/blog/${activePost.slug}\n💬 কার্ড ছাড়াই BDT/bKash-এ ফ্লাইট ও হোটেল বুকিং হেল্পলাইন (WhatsApp): +8801784385335`
+                                  ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getBlogAeoSnippet50Words(activePost.slug, true, activePost.summary)}\n\n👉 সম্পূর্ণ গাইড ও BDT বাজেট দেখুন: https://ural-travel.pages.dev/bn/blog/${activePost.slug}\n💬 কার্ড ছাড়াই BDT/bKash-এ ফ্লাইট ও হোটেল বুকিং হেল্পলাইন (WhatsApp): +8801784385335`
                                   : `✈️ ${activePost.title}\n\n📌 Quick Summary:\n${getBlogAeoSnippet50Words(activePost.slug, false, activePost.summary)}\n\n👉 Read Full Guide & BDT Calculator: https://ural-travel.pages.dev/blog/${activePost.slug}\n💬 Book Flights & Hotels in BDT via WhatsApp: +8801784385335`;
                                 navigator.clipboard?.writeText(fbCaption);
                                 setAffiliateToast(

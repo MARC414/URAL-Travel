@@ -33,12 +33,15 @@
     <meta name="description" content="Plan travel from Dhaka with BDT flight guidance, visa checklists for Bangladeshi passport holders, destination itineraries and practical trip-budget guides." />
     <link rel="canonical" href="https://ural-travel.pages.dev/" />
     <!--
-      Self-referential hreflang. The site serves English and Bengali from the
-      same URLs, so en-BD is declared as the served variant and x-default points
-      at the same URL for all other locales. Prerender rewrites these per route
-      alongside the canonical tag.
+      Reciprocal hreflang cluster. English lives at /… and Bengali at /bn/…,
+      so each page declares three alternates: en-bd and x-default point at the
+      English URL, bn-bd at the Bengali URL. Prerender rewrites all three per
+      route (scripts/prerender.ts) and emits byte-identical values on both
+      members of a locale pair. Pages without a Bengali counterpart yet (see
+      DEFERRED_BN_GROUPS) have the bn-bd line removed entirely.
     -->
     <link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/" />
+    <link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/" />
     <link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/" />
 
 
@@ -52,6 +55,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="URAL" />
     <meta property="og:locale" content="en_BD" />
+    <meta property="og:locale:alternate" content="bn_BD" />
     <meta property="og:url" content="https://ural-travel.pages.dev/" />
     <meta property="og:title" content="Bangladesh Travel Guides, Flights &amp; Visas from Dhaka | URAL" />
     <meta property="og:description" content="Plan travel from Dhaka with BDT flight guidance, visa checklists for Bangladeshi passport holders, destination itineraries and practical trip-budget guides." />
