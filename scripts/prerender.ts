@@ -1904,11 +1904,21 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
   for (const en of enRoutes) {
     const englishPath = toEnglishBasePath(en.routePath);
     if (!hasBengaliCounterpart(englishPath)) continue;
-    // Detail routes (flights/hotels/visa/costs/blog) generate their copy from
-    // the localized data; hubs and static pages use the hand-written table.
-    const copy =
-      getBengaliRouteSeo(englishPath) ?? bengaliStaticCopy(englishPath);
-    if (!copy) continue;
+    // Precedence, mirrored exactly in src/App.tsx so the prerendered <title>
+    // and the client-rendered one can never drift:
+    //   1. hand-written Bengali SERP copy (BENGALI_SEO_COPY — all 35 localised
+    //      hubs and detail guides, written for search intent)
+    //   2. copy generated from the Bengali data (flights/hotels/visa/costs/blogs)
+    //   3. nothing -> no Bengali page for this route
+    // The generated H1 is preferred for the on-page heading in both cases.
+    const generated = getBengaliRouteSeo(englishPath);
+    const handWritten = bengaliStaticCopy(englishPath);
+    if (!generated && !handWritten) continue;
+    const copy = {
+      title: handWritten?.title ?? generated!.title,
+      description: handWritten?.description ?? generated!.description,
+      h1: generated?.h1 ?? handWritten!.h1,
+    };
 
     const bnPath = toBengaliPath(englishPath);
     const canonicalUrl = `${BASE_URL}${bnPath === "/bn" ? "/bn/" : bnPath}`;

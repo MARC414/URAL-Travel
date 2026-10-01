@@ -71,7 +71,7 @@ import type * as BengaliContentModule from "./data/bengaliContent";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
-import { getSeoCopy } from "./utils/seoCopy";
+import { getBengaliSeoCopy, getSeoCopy } from "./utils/seoCopy";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { getBlogImageAltText, getResponsiveImageProps } from "./utils/imageAssets";
 import { getRelatedBlogPosts } from "./utils/blogLinks";
@@ -1578,10 +1578,17 @@ export default function App() {
   // then the hub-level Bengali copy in BENGALI_SEO_COPY.
   const sharedSeoCopy = isBn
     ? (() => {
+        // Same precedence as scripts/prerender.ts: hand-written Bengali SERP
+        // copy, then copy generated from the Bengali data, then a compact
+        // fallback. Keeping the order identical is what guarantees the client
+        // renders the same <title> the crawler already saw.
+        const bnHandWritten = getBengaliSeoCopy(seoRoutePath);
+        if (bnHandWritten) return bnHandWritten;
         const bnGenerated = bnContent?.getBengaliRouteSeo(seoRoutePath);
-        return bnGenerated
-          ? { title: bnGenerated.title, description: bnGenerated.description }
-          : getSeoCopy(seoRoutePath, seoTitle, seoDescription, "bn");
+        if (bnGenerated) {
+          return { title: bnGenerated.title, description: bnGenerated.description };
+        }
+        return getSeoCopy(seoRoutePath, seoTitle, seoDescription, "bn");
       })()
     : getSeoCopy(seoRoutePath, seoTitle, seoDescription);
   seoTitle = sharedSeoCopy.title;

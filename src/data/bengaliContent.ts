@@ -2141,7 +2141,27 @@ function bnPlace(raw: string): string {
 function bnClamp(text: string, max: number): string {
   const normalized = String(text || "").replace(/\s+/g, " ").trim();
   if (normalized.length <= max) return normalized;
-  const cut = normalized.slice(0, Math.max(1, max - 1));
+  const cut = normalized.slice(0, max);
+  // Prefer ending on a complete sentence. A meta description that stops
+  // mid-clause ("…কার্ড ছাড়াই") reads as broken in the SERP, so only fall back
+  // to a word-boundary ellipsis when no sentence ends late enough in the cut.
+  const sentenceEnd = Math.max(
+    cut.lastIndexOf("।"),
+    cut.lastIndexOf("."),
+    cut.lastIndexOf("?"),
+    cut.lastIndexOf("!")
+  );
+  if (sentenceEnd > max * 0.5) return cut.slice(0, sentenceEnd + 1).trim();
+  // No sentence ends inside the window (common: a Bengali blog summary can run
+  // 200-550 chars). Close the excerpt at the last clause boundary so it still
+  // ends as a well-formed sentence instead of a dangling "…".
+  const clauseEnd = Math.max(
+    cut.lastIndexOf(","),
+    cut.lastIndexOf("—"),
+    cut.lastIndexOf(";"),
+    cut.lastIndexOf(":")
+  );
+  if (clauseEnd > max * 0.5) return `${cut.slice(0, clauseEnd).trimEnd()}।`;
   const boundary = cut.lastIndexOf(" ");
   return `${(boundary > max * 0.6 ? cut.slice(0, boundary) : cut).trimEnd()}…`;
 }
