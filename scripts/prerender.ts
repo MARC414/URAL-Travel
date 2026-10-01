@@ -36,6 +36,22 @@ import {
   getFaqSchemaForPage,
   getPreDepartureFaqSchema,
 } from "../src/hooks/useSeoMeta";
+import {
+  BENGALI_BLOG_OVERRIDES,
+  getBengaliRouteSeo,
+  getLocalizedBlogs,
+  getLocalizedCosts,
+  getLocalizedFlights,
+  getLocalizedHajjFaqs,
+  getLocalizedHotels,
+  getLocalizedVisas,
+} from "../src/data/bengaliContent";
+import {
+  hasBengaliCounterpart,
+  toBengaliPath,
+  toEnglishBasePath,
+} from "../src/utils/localeRoutes";
+import { BENGALI_SEO_COPY } from "../src/utils/seoCopy";
 
 const ROOT_DIR = process.cwd();
 const PUBLIC_DIR = path.join(ROOT_DIR, "public");
@@ -317,8 +333,14 @@ function addInternalLinkSections(routes: PrerenderRoute[]): void {
 }
 
 interface PrerenderRoute {
-  routePath: string; // e.g. "/" or "/blog/slug"
+  routePath: string; // e.g. "/" or "/blog/slug" — "/bn/blog/slug" for Bengali
   canonicalUrl: string;
+  /** "en" (default) or "bn" — drives inLanguage, <html lang> and og:locale. */
+  locale?: "en" | "bn";
+  /** English counterpart URL (own canonicalUrl for English routes). */
+  enUrl?: string;
+  /** Bengali counterpart URL — present only when the twin page was generated. */
+  bnUrl?: string;
   title: string;
   description: string;
   imageUrl: string;
@@ -1449,9 +1471,507 @@ function buildAllRoutes(): PrerenderRoute[] {
   return routes;
 }
 
-function applySharedSeoCopy(routes: PrerenderRoute[]) {
+
+// ===========================================================================
+// Bengali (/bn) route generation
+//
+// Bengali is a real, crawlable locale sub-directory: /bn/umrah mirrors /umrah.
+// Each Bengali route is a twin of its English counterpart carrying:
+//   - a Bengali title/meta description/H1 (src/data/bengaliContent.ts)
+//   - a genuinely Bengali body built from the localized data — an English-bodied
+//     page on a bn-BD URL would be a cloaking/quality problem
+//   - a self-referential canonical (/bn/... never /umrah)
+//   - en-bd / bn-bd / x-default hreflang tags whose three values are identical
+//     on both members of the pair (valid reciprocal return tags)
+//
+// Coverage (src/data/bengaliContent.ts): 41/41 blogs, 6 flights, 6 hotels,
+// 6 visas, 6 trip-cost guides and the Hajj/Umrah FAQs. Hub and static pages use
+// the hand-written BENGALI_SEO_COPY. /destinations/* has no Bengali data yet, so
+// no /bn route is generated for it and its hreflang cluster is withheld — see
+// DEFERRED_BN_GROUPS in src/utils/localeRoutes.ts.
+// ===========================================================================
+
+/** Bengali labels for the trip-cost line items (names are English in the data). */
+const BN_COST_CATEGORY_LABELS: Record<string, string> = {
+  "Flights from Dhaka": "ঢাকা থেকে ফ্লাইট",
+  "Flights from Dhaka (Roundtrip)": "ঢাকা থেকে ফ্লাইট (রাউন্ডট্রিপ)",
+  "Accommodations (per night)": "থাকার খরচ (প্রতি রাত)",
+  "Accommodations (3 Nights Total)": "থাকার খরচ (৩ রাত)",
+  "Hotels / Guesthouses (4 Nights)": "হোটেল / গেস্টহাউস (৪ রাত)",
+  "Daily Meals & Street Food": "দৈনিক খাবার ও স্ট্রিট ফুড",
+  "Daily Meals & Satay Feasts": "দৈনিক খাবার ও সাটে",
+  "Daily Meals & Creek Shawarma": "দৈনিক খাবার ও শাওয়ারমা",
+  "Halal Hawker Centres & Meals": "হালাল হকার সেন্টার ও খাবার",
+  "Meals & Beachfront Dining": "খাবার ও বিচফ্রন্ট ডাইনিং",
+  "Intercity Transit / Taxis": "আন্তঃনগর যাতায়াত / ট্যাক্সি",
+  "BTS/MRT Trains & Grab Rides": "BTS/MRT ট্রেন ও গ্র্যাব",
+  "MRT SimplyGo & Airport Transit": "MRT SimplyGo ও এয়ারপোর্ট ট্রান্সফার",
+  "Metro Nol card & RTA Taxis": "মেট্রো নল কার্ড ও RTA ট্যাক্সি",
+  "LRT/MRT Trains & Grab Taxis": "LRT/MRT ট্রেন ও গ্র্যাব ট্যাক্সি",
+  "Attraction Tickets & Guides": "দর্শনীয় স্থানের টিকিট ও গাইড",
+  "Sentosa, Gardens & Visa Fee": "সেন্তোসা, গার্ডেনস ও ভিসা ফি",
+  "Genting / Attractions Tickets": "গেন্টিং / দর্শনীয় স্থানের টিকিট",
+  "Desert Safaris & Khalifa tickets": "ডেজার্ট সাফারি ও খলিফা টাওয়ার টিকিট",
+  "Shopping & Market Purchases": "শপিং ও মার্কেট কেনাকাটা",
+  "Snorkeling, Sandbank & Resort Tours": "স্নরকেলিং, স্যান্ডব্যাংক ও রিসোর্ট ট্যুর",
+  "Speedboat / Ferry Transfers": "স্পিডবোট / ফেরি ট্রান্সফার",
+};
+
+function bnSection(heading: string, inner: string): string {
+  return `<section><h2>${escapeHtml(heading)}</h2>${inner}</section>`;
+}
+
+function bnFactList(rows: { label: string; value?: string }[]): string {
+  const items = rows
+    .filter((row) => row.value && String(row.value).trim())
+    .map(
+      (row) =>
+        `<li><strong>${escapeHtml(row.label)}:</strong> ${escapeHtml(String(row.value))}</li>`
+    )
+    .join("");
+  return `<ul>${items}</ul>`;
+}
+
+/** Bengali link list. Paths without a Bengali counterpart are dropped (no 404s). */
+function bnLinkList(
+  heading: string,
+  links: { label: string; path: string }[]
+): string {
+  const items = links
+    .filter((link) => link.label && hasBengaliCounterpart(link.path))
+    .map(
+      (link) =>
+        `<li><a href="${escapeHtml(toBengaliPath(link.path))}">${escapeHtml(link.label)}</a></li>`
+    )
+    .join("");
+  return items ? bnSection(heading, `<ul>${items}</ul>`) : "";
+}
+
+function bnFaqList(
+  heading: string,
+  faqs: { question: string; answer: string }[]
+): string {
+  if (!faqs.length) return "";
+  return bnSection(
+    heading,
+    faqs
+      .map(
+        (faq) =>
+          `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`
+      )
+      .join("")
+  );
+}
+
+/** Turns the Bengali blog body (plain text with blank-line paragraphs) into HTML. */
+function bnParagraphs(text: string): string {
+  return String(text || "")
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.replace(/\n/g, " ").replace(/\*\*/g, "").trim())
+    .filter(Boolean)
+    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+    .join("");
+}
+
+/** Directory section: links to the Bengali twins of the given English paths. */
+function bnDirectory(heading: string, englishPaths: string[]): string {
+  const links = englishPaths
+    .map((path) => ({ path, copy: getBengaliRouteSeo(path) }))
+    .filter((entry) => entry.copy)
+    .map((entry) => ({ label: entry.copy!.h1, path: entry.path }));
+  return bnLinkList(heading, links);
+}
+
+/** Cross-links to the same country's flight/hotel/visa/cost Bengali pages. */
+function bnCountryCrossLinks(
+  country: string,
+  currentEnglishPath: string
+): { label: string; path: string }[] {
+  const links: { label: string; path: string }[] = [];
+  const flight = FLIGHTS_DATA.find((item) => item.country === country);
+  const hotel = HOTELS_DATA.find((item) => item.country === country);
+  const visa = VISA_DATA.find((item) => item.country === country);
+  const cost = TRIP_COSTS_DATA.find((item) => item.country === country);
+  const push = (path: string, label: string) => {
+    if (path !== currentEnglishPath) links.push({ label, path });
+  };
+  if (flight) push(`/flights/${flight.id}`, "ঢাকা থেকে ফ্লাইট: সময়, এয়ারলাইন্স ও BDT ভাড়া");
+  if (hotel) push(`/hotels/${hotel.id}`, "হোটেল এলাকা, হালাল খাবার ও রুম ভাড়া");
+  if (visa) push(`/visa/${visa.id}`, "ভিসার নিয়ম, ডকুমেন্ট চেকলিস্ট ও ফি");
+  if (cost) push(`/costs/${cost.id}`, "৫ দিনের সম্পূর্ণ BDT খরচের হিসাব");
+  return links;
+}
+
+/** Bengali crawl body for one route — always ends with internal links. */
+function buildBengaliBody(
+  englishPath: string,
+  h1: string,
+  description: string
+): string {
+  const segments = englishPath.split("/").filter(Boolean);
+  const [group, id] = segments;
+  const parts: string[] = [
+    `<h1>${escapeHtml(h1)}</h1>`,
+    `<p>${escapeHtml(description)}</p>`,
+  ];
+  const englishPathsIn = (prefix: string, ids: string[]) =>
+    ids.map((value) => `${prefix}/${value}`);
+
+  if (group === "blog" && id) {
+    const override = BENGALI_BLOG_OVERRIDES[id];
+    if (override) {
+      parts.push(bnParagraphs(override.content));
+      const internal = (override.internalLinks || [])
+        .filter((link) => hasBengaliCounterpart(link.path))
+        .map((link) => ({ label: link.text, path: link.path }));
+      const related = bnLinkList("সম্পর্কিত গাইড", internal);
+      if (related) parts.push(related);
+    }
+    return `<article>${parts.join("")}</article>`;
+  }
+
+  if (group === "flights") {
+    if (id) {
+      const route = getLocalizedFlights("bn").find((item) => item.id === id);
+      if (route) {
+        parts.push(
+          bnFactList([
+            { label: "ভাড়ার পরিসীমা (রাউন্ডট্রিপ)", value: route.priceRangeBdt },
+            { label: "যাত্রার সময়", value: route.flightDuration || route.duration },
+            { label: "এয়ারলাইন্স", value: route.airlines.join(", ") },
+            { label: "বুকিংয়ের উপযুক্ত সময়", value: route.bestTimeToBook },
+            { label: "ভিসা প্রয়োজন", value: route.visaRequirement },
+          ])
+        );
+        parts.push(
+          bnLinkList(
+            "এই ট্রিপের বাকি পরিকল্পনা",
+            bnCountryCrossLinks(route.country, englishPath)
+          )
+        );
+      }
+      const guidance = bnGuidanceFor(group);
+      if (guidance.length) {
+        parts.push(
+          bnSection(
+            "ব্যবহারিক পরামর্শ",
+            guidance.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")
+          )
+        );
+      }
+
+    } else {
+      parts.push(
+        bnDirectory(
+          "সব ফ্লাইট রুট গাইড",
+          englishPathsIn("/flights", FLIGHTS_DATA.map((route) => route.id))
+        )
+      );
+    }
+    return `<article>${parts.join("")}</article>`;
+  }
+
+  if (group === "hotels") {
+    if (id) {
+      const hotel = getLocalizedHotels("bn").find((item) => item.id === id);
+      if (hotel) {
+        parts.push(
+          bnFactList([{ label: "শহর", value: hotel.city }, { label: "দেশ", value: hotel.country }])
+        );
+        const stays = hotel.hotels
+          .slice(0, 6)
+          .map(
+            (item) =>
+              `<li><strong>${escapeHtml(item.name)}</strong> — BDT ${item.priceBdt}/রাত (${item.stars}★, ${escapeHtml(item.neighborhood)})</li>`
+          )
+          .join("");
+        if (stays) parts.push(bnSection("কোথায় থাকবেন", `<ul>${stays}</ul>`));
+        parts.push(
+          bnLinkList(
+            "এই ট্রিপের বাকি পরিকল্পনা",
+            bnCountryCrossLinks(hotel.country, englishPath)
+          )
+        );
+      }
+      const guidance = bnGuidanceFor(group);
+      if (guidance.length) {
+        parts.push(
+          bnSection(
+            "ব্যবহারিক পরামর্শ",
+            guidance.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")
+          )
+        );
+      }
+
+    } else {
+      parts.push(
+        bnDirectory(
+          "সব হোটেল গাইড",
+          englishPathsIn("/hotels", HOTELS_DATA.map((hotel) => hotel.id))
+        )
+      );
+    }
+    return `<article>${parts.join("")}</article>`;
+  }
+
+  if (group === "visa") {
+    if (id) {
+      const visa = getLocalizedVisas("bn").find((item) => item.id === id);
+      if (visa) {
+        parts.push(
+          bnFactList([
+            { label: "ভিসার ধরন", value: visa.requirementType },
+            { label: "আনুমানিক খরচ", value: visa.costBdt },
+            { label: "প্রসেসিং সময়", value: visa.processingTime },
+          ])
+        );
+        parts.push(
+          bnLinkList(
+            "এই ট্রিপের বাকি পরিকল্পনা",
+            bnCountryCrossLinks(visa.country, englishPath)
+          )
+        );
+      }
+      const guidance = bnGuidanceFor(group);
+      if (guidance.length) {
+        parts.push(
+          bnSection(
+            "ব্যবহারিক পরামর্শ",
+            guidance.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")
+          )
+        );
+      }
+
+    } else {
+      parts.push(
+        bnDirectory(
+          "সব ভিসা গাইড",
+          englishPathsIn("/visa", VISA_DATA.map((visa) => visa.id))
+        )
+      );
+    }
+    return `<article>${parts.join("")}</article>`;
+  }
+
+  if (group === "costs") {
+    if (id) {
+      const cost = getLocalizedCosts("bn").find((item) => item.id === id);
+      if (cost) {
+        const rows = cost.categories
+          .map((category) => {
+            const label =
+              BN_COST_CATEGORY_LABELS[category.name] || category.name;
+            return `<li><strong>${escapeHtml(label)}:</strong> BDT ${category.lowBdt.toLocaleString(
+              "en-US"
+            )} – ${category.midBdt.toLocaleString("en-US")} (মিড-রেঞ্জ) – ${category.highBdt.toLocaleString(
+              "en-US"
+            )}</li>`;
+          })
+          .join("");
+        if (rows) parts.push(bnSection("খরচের খাতভিত্তিক হিসাব", `<ul>${rows}</ul>`));
+        parts.push(
+          bnLinkList(
+            "এই ট্রিপের বাকি পরিকল্পনা",
+            bnCountryCrossLinks(cost.country, englishPath)
+          )
+        );
+      }
+      const guidance = bnGuidanceFor(group);
+      if (guidance.length) {
+        parts.push(
+          bnSection(
+            "ব্যবহারিক পরামর্শ",
+            guidance.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")
+          )
+        );
+      }
+
+    } else {
+      parts.push(
+        bnDirectory(
+          "সব খরচের গাইড",
+          englishPathsIn("/costs", TRIP_COSTS_DATA.map((cost) => cost.id))
+        )
+      );
+    }
+    return `<article>${parts.join("")}</article>`;
+  }
+
+  if (group === "umrah") {
+    parts.push(
+      bnFaqList("উমরাহ ও হজ: সাধারণ প্রশ্ন", getLocalizedHajjFaqs("bn"))
+    );
+    parts.push(
+      bnLinkList("সম্পর্কিত গাইড", [
+        { label: "ঢাকা থেকে জেদ্দা ও মদিনার ফ্লাইট", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+        { label: "নেপাল ভিসা (ফ্রি Visa on Arrival)", path: "/visa/nepal-visa" },
+      ])
+    );
+    return `<article>${parts.join("")}</article>`;
+  }
+
+  // Home + static/hub pages: Bengali intro plus a directory of the main hubs.
+  const hubLinks = [
+    { label: "ফ্লাইট গাইড", path: "/flights" },
+    { label: "হোটেল গাইড", path: "/hotels" },
+    { label: "ভিসা গাইড", path: "/visa" },
+    { label: "ভ্রমণ খরচ", path: "/costs" },
+    { label: "উমরাহ প্ল্যানার", path: "/umrah" },
+    { label: "৪১টি ট্রাভেল ব্লগ", path: "/blog" },
+  ];
+  parts.push(bnLinkList("কোথা থেকে শুরু করবেন", hubLinks));
+  return `<article>${parts.join("")}</article>`;
+}
+
+/** Bengali breadcrumb labels for the hub crumbs used by the English routes. */
+const BN_BREADCRUMB_LABELS: Record<string, string> = {
+  Home: "হোম",
+  "Flight Guides": "ফ্লাইট গাইড",
+  "Hotel Guides": "হোটেল গাইড",
+  "Hotel Neighborhoods": "হোটেল এলাকা",
+  "Visa Guides": "ভিসা গাইড",
+  Destinations: "ডেস্টিনেশন",
+  "Trip Costs": "ভ্রমণ খরচ",
+  "Travel Blog": "ট্রাভেল ব্লগ",
+  "Umrah & Hajj Hub": "উমরাহ ও হজ",
+  "Travel Tools": "ভ্রমণ টুলস",
+  "Pre-Departure & Complete Sitemap": "প্রস্থান-পূর্ব প্রস্তুতি ও সাইটম্যাপ",
+  "Contact Us": "যোগাযোগ",
+  "Attractions & Passes": "অভিজ্ঞতা ও টিকিট",
+};
+
+/**
+ * Hub/static pages have no data-driven Bengali metadata, so their copy comes
+ * from BENGALI_SEO_COPY (src/utils/seoCopy.ts). Returns null when the path has
+ * no Bengali copy at all — those routes are simply not localised yet.
+ */
+function bengaliStaticCopy(
+  englishPath: string
+): { title: string; description: string; h1: string } | null {
+  const copy = BENGALI_SEO_COPY[englishPath];
+  if (!copy) return null;
+  return {
+    title: copy.title,
+    description: copy.description,
+    h1: copy.title.replace(/\s*\|\s*URAL\s*$/i, "").trim(),
+  };
+}
+
+/**
+ * Bengali long-form sections per route group.
+ *
+ * The English detail pages carry hand-written boilerplate ("How to compare
+ * fares…", "Booking window…"). Machine-translating those walls of text would
+ * produce exactly the thin, duplicated content the SEO audit warns about, so the
+ * Bengali pages get their own concise guidance instead — written once per group,
+ * factual, and with no claims that the data does not support.
+ */
+function bnGuidanceFor(group: string): string[] {
+  if (group === "flights") {
+    return [
+      "টিকিট কেনার আগে একই যাত্রার তারিখ, যাত্রীসংখ্যা, কেবিন ও ব্যাগেজ ভাতা রেখে একাধিক এয়ারলাইন্স ও এজেন্সির দাম তুলনা করুন। শুধু হেডলাইন ভাড়া নয়—বুকিং ফি, পেমেন্ট চার্জ ও সিট সিলেকশন ফি যোগ করার পর চূড়ান্ত মোট কত পড়ছে সেটাই আসল দাম।",
+      "কানেক্টিং ফ্লাইটে সময় কম মনে হলেও ট্রান্সফার এয়ারপোর্ট, ব্যাগেজ এক টিকিটে চেক-থ্রু হবে কি না, আর দেরি হলে দায় কার—এগুলো আগে নিশ্চিত করুন। বুকিংয়ের পরে এয়ারলাইন্সের নিজস্ব নিয়মই চূড়ান্ত, তাই নন-রিফান্ডেবল টিকিট কাটার আগে পরিবর্তন ও বাতিলের শর্ত পড়ে নিন।",
+      "পাসপোর্টের তথ্য টিকিটের সাথে হুবহু মিলিয়ে নিন এবং গন্তব্যের সর্বশেষ ভিসা/এন্ট্রি নিয়ম সংশ্লিষ্ট অফিসিয়াল দূতাবাস বা ইমিগ্রেশন ওয়েবসাইট থেকে যাচাই করুন। ভিসার নিয়ম বদলায়—এই গাইড শুরুর পয়েন্ট, চূড়ান্ত প্রমাণ নয়।",
+    ];
+  }
+  if (group === "hotels") {
+    return [
+      "রুম বুক করার আগে এলাকার নিরাপত্তা, মেট্রো বা স্টেশনের দূরত্ব এবং আশপাশে হালাল খাবারের ব্যবস্থা আছে কি না দেখে নিন। ঢাকার বাইরে বাজেট হোটেলে অবস্থান (location) সাধারণত রুমের সাইজের চেয়ে বেশি গুরুত্বপূর্ণ।",
+      "চেক-ইন ও চেক-আউটের সময়, বাতিলকরণের শর্ত এবং অতিরিক্ত রিসোর্ট ফি বা ট্যাক্স আলাদা করে পড়ুন—বুকিং সাইটের যে দাম দেখছেন তার সাথে চূড়ান্ত বিল সবসময় এক নাও হতে পারে।",
+      "মার্কিন ডলারে প্রি-পেইড বুকিং করার আগে কার্ডে ইন্টারন্যাশনাল লেনদেন চালু ও ৩ডি-সিকিউর অ্যাকটিভ করা আছে কি না নিশ্চিত করুন; অনেক বুকিং নিশ্চিত হয়েও কার্ড ডিক্লাইনের কারণে বাতিল হয়ে যায়।",
+    ];
+  }
+  if (group === "visa") {
+    return [
+      "আবেদন করার আগে পাসপোর্টের মেয়াদ (সাধারণত যাত্রার পর অন্তত ৬ মাস), দুই কপি ছবি, ব্যাংক স্টেটমেন্ট, এনওসি/ট্রেড লাইসেন্স এবং ট্রাভেল ইনস্যুরেন্স—এই ডকুমেন্টগুলো প্রস্তুত রাখুন। ফরম্যাট বা মেয়াদ সংক্রান্ত নিয়ম দেশভেদে আলাদা, তাই অফিসিয়াল সাইটের সর্বশেষ নির্দেশনা মানুন।",
+      "ভিসা ফি ও সার্ভিস চার্জের পাশাপাশি প্রসেসিং সময় হিসাব করে টিকিটের তারিখ ঠিক করুন। অনেক ক্ষেত্রে ভিসা না পাওয়া পর্যন্ত নন-রিফান্ডেবল টিকিট কেনা ঝুঁকিপূর্ণ।",
+      "এই পাতার তথ্য ২০২৬ সালের যাচাইকৃত সারসংক্ষেপ। নিয়ম বা ফি পরিবর্তিত হলে সংশ্লিষ্ট দেশের ইমিগ্রেশন বা দূতাবাসের ওয়েবসাইটই চূড়ান্ত সূত্র হিসেবে বিবেচ্য।",
+    ];
+  }
+  if (group === "costs") {
+    return [
+      "খরচের হিসাবটি জনপ্রতি এবং ন্যূনতম থেকে মিড-রেঞ্জ ধরে করা; সিজন, এয়ারলাইন্সের ভাড়া ও রুমের ধরন অনুযায়ী চূড়ান্ত বাজেট ১৫–২৫% ওঠানামা করতে পারে।",
+      "বাজেটে জরুরি খরচের জন্য ১০% আলাদা রাখুন—এয়ারপোর্ট ট্যাক্সি, অতিরিক্ত ব্যাগেজ, রিসোর্ট ফি বা অসুস্থতার মতো খরচ প্রায়ই হিসাবের বাইরে থাকে।",
+      "পরিবারের সঙ্গে ভ্রমণ করলে ফ্লাইট ও থাকার খরচে গ্রুপ ডিসকাউন্ট, আর অফ-সিজনে হোটেলে উল্লেখযোগ্য ছাড় পাওয়া যায়—তারিখ নমনীয় থাকলে খরচ অনেক কমতে পারে।",
+    ];
+  }
+  return [];
+}
+
+/** Builds the Bengali twin of every English route that has Bengali content. */
+function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
+  const bnRoutes: PrerenderRoute[] = [];
+  for (const en of enRoutes) {
+    const englishPath = toEnglishBasePath(en.routePath);
+    if (!hasBengaliCounterpart(englishPath)) continue;
+    // Detail routes (flights/hotels/visa/costs/blog) generate their copy from
+    // the localized data; hubs and static pages use the hand-written table.
+    const copy =
+      getBengaliRouteSeo(englishPath) ?? bengaliStaticCopy(englishPath);
+    if (!copy) continue;
+
+    const bnPath = toBengaliPath(englishPath);
+    const canonicalUrl = `${BASE_URL}${bnPath === "/bn" ? "/bn/" : bnPath}`;
+    const bnHomeUrl = `${BASE_URL}/bn/`;
+
+    const breadcrumbs = en.breadcrumbs.map((crumb, index) => {
+      const isLast = index === en.breadcrumbs.length - 1;
+      if (isLast) return { name: copy.h1, url: canonicalUrl };
+      return {
+        name: BN_BREADCRUMB_LABELS[crumb.name] || crumb.name,
+        url: index === 0 ? bnHomeUrl : toBengaliPath(toEnglishBasePath(crumb.url)),
+      };
+    });
+
+    const extraGraphNodes: Record<string, unknown>[] = [];
+    const segments = englishPath.split("/").filter(Boolean);
+    if (segments[0] === "blog" && segments[1]) {
+      const localizedPost = getLocalizedBlogs("bn").find(
+        (item) => item.slug === segments[1]
+      );
+      const sourcePost = BLOG_DATA.find((item) => item.slug === segments[1]);
+      extraGraphNodes.push(
+        articleSchema({
+          url: canonicalUrl,
+          headline: copy.h1,
+          description: copy.description,
+          slug: segments[1],
+          datePublished: sourcePost?.date,
+          dateModified: sourcePost?.date,
+          authorRaw: sourcePost?.author,
+          articleSection: localizedPost?.category,
+          inLanguage: "bn-BD",
+        })
+      );
+    }
+
+    bnRoutes.push({
+      routePath: bnPath,
+      canonicalUrl,
+      locale: "bn",
+      title: copy.title,
+      description: copy.description,
+      imageUrl: en.imageUrl,
+      breadcrumbs,
+      extraGraphNodes,
+      bodyHtml: buildBengaliBody(englishPath, copy.h1, copy.description),
+      lastmod: en.lastmod,
+    });
+  }
+  return bnRoutes;
+}
+
+function applySharedSeoCopy(
+  routes: PrerenderRoute[],
+  locale: "en" | "bn" = "en"
+) {
   for (const route of routes) {
-    const seoCopy = getSeoCopy(route.routePath, route.title, route.description);
+    const seoCopy = getSeoCopy(
+      route.routePath,
+      route.title,
+      route.description,
+      locale
+    );
     route.title = seoCopy.title;
     route.description = seoCopy.description;
     // Strip trailing "| URAL" / "| URAL Blog" brand suffixes from prerendered H1s
@@ -1476,6 +1996,8 @@ function generateSitemapXml(routes: PrerenderRoute[]) {
   // freshest, most important entry points; individual guides and blog posts
   // change less often. These are hints only — Google largely ignores priority,
   // but a truthful changefreq/priority costs nothing and never hurts.
+  // Priority/changefreq are computed on the English base path so a Bengali twin
+  // inherits the same hint as its English counterpart.
   const isHub = (p: string) =>
     p === "/" ||
     ["/flights", "/hotels", "/visa", "/destinations", "/costs", "/blog"].includes(
@@ -1483,15 +2005,25 @@ function generateSitemapXml(routes: PrerenderRoute[]) {
     );
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${routes
   .map((r) => {
+    const englishPath = toEnglishBasePath(r.routePath);
     const lastmod = r.lastmod || CONTENT_DATA_LASTMOD;
-    const hub = isHub(r.routePath);
+    const hub = isHub(englishPath);
     const changefreq = hub ? "weekly" : "monthly";
-    const priority = r.routePath === "/" ? "1.0" : hub ? "0.9" : "0.7";
+    const priority = englishPath === "/" ? "1.0" : hub ? "0.9" : "0.7";
+    // Reciprocal hreflang annotations, emitted only when the twin page exists.
+    // The three values are derived from the pair, so both members of a pair
+    // publish byte-identical annotations (a one-sided cluster is invalid).
+    const alternates =
+      r.enUrl && r.bnUrl
+        ? `\n    <xhtml:link rel="alternate" hreflang="en-bd" href="${escapeXml(r.enUrl)}" />` +
+          `\n    <xhtml:link rel="alternate" hreflang="bn-bd" href="${escapeXml(r.bnUrl)}" />` +
+          `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(r.enUrl)}" />`
+        : "";
     return `  <url>
-    <loc>${escapeXml(r.canonicalUrl)}</loc>
+    <loc>${escapeXml(r.canonicalUrl)}</loc>${alternates}
     <lastmod>${escapeXml(lastmod)}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
@@ -1556,7 +2088,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
           name: r.title,
           description: r.description,
           imageUrl: r.imageUrl,
-          inLanguage: "en-BD",
+          inLanguage: r.locale === "bn" ? "bn-BD" : "en-BD",
           hasBreadcrumb: r.breadcrumbs.length > 0,
         })
       );
@@ -1571,7 +2103,17 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       ? `    <link rel="preload" as="image" type="image/webp" href="${escapeHtml(r.lcpImageUrl)}" imagesrcset="${escapeHtml(`${r.lcpImageUrl.replace(/-1200\.webp$/, "-640.webp")} 640w, ${r.lcpImageUrl} 1200w`)}" imagesizes="${escapeHtml(r.lcpImageSizes || "100vw")}" fetchpriority="high" />\n`
       : "";
 
+    // Reciprocal hreflang cluster: identical on both members of a locale pair
+    // (en-bd/x-default → the English URL, bn-bd → the Bengali URL). The bn-bd
+    // tag is dropped entirely when no Bengali twin was generated, because a
+    // return tag pointing at a 404 is worse than no tag at all.
+    const englishUrl = r.enUrl || r.canonicalUrl;
+    const bengaliUrl = r.bnUrl || null;
+    const localeTag = r.locale === "bn" ? "bn-BD" : "en-BD";
+    const localeOgp = r.locale === "bn" ? "bn_BD" : "en_BD";
+
     let pageHtml = templateHtml
+      .replace(/<html lang="[^"]*">/, `<html lang="${localeTag}">`)
       .replace(
         /\s*<link rel="preload" as="image"[^>]*\/>\n?/,
         lcpImagePreload ? `\n${lcpImagePreload}` : "\n"
@@ -1594,11 +2136,25 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       // Search Console reports as "no return tag" and ignores wholesale.
       .replace(
         /<link rel="alternate" hreflang="en-bd" href="[^"]*" \/>/,
-        `<link rel="alternate" hreflang="en-bd" href="${escapeHtml(r.canonicalUrl)}" />`
+        `<link rel="alternate" hreflang="en-bd" href="${escapeHtml(englishUrl)}" />`
       )
       .replace(
         /<link rel="alternate" hreflang="x-default" href="[^"]*" \/>/,
-        `<link rel="alternate" hreflang="x-default" href="${escapeHtml(r.canonicalUrl)}" />`
+        `<link rel="alternate" hreflang="x-default" href="${escapeHtml(englishUrl)}" />`
+      )
+      .replace(
+        /\n?\s*<link rel="alternate" hreflang="bn-bd" href="[^"]*" \/>/,
+        bengaliUrl
+          ? `\n    <link rel="alternate" hreflang="bn-bd" href="${escapeHtml(bengaliUrl)}" />`
+          : ""
+      )
+      .replace(
+        /<meta property="og:locale" content="[^"]*" \/>/,
+        `<meta property="og:locale" content="${localeOgp}" />`
+      )
+      .replace(
+        /<meta property="og:locale:alternate" content="[^"]*" \/>/,
+        `<meta property="og:locale:alternate" content="${r.locale === "bn" ? "en_BD" : "bn_BD"}" />`
       )
       .replace(
         /<meta property="og:url" content="[^"]*" \/>/,
@@ -1658,14 +2214,36 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
 
 function main() {
   copyStaticSeoImages();
-  const routes = buildAllRoutes();
-  addInternalLinkSections(routes);
-  applySharedSeoCopy(routes);
+  const enRoutes = buildAllRoutes();
+  for (const route of enRoutes) {
+    route.locale = "en";
+    route.enUrl = route.canonicalUrl;
+  }
+
+  // Bengali twins, then pair the two locales so both members of a pair publish
+  // the same en-bd / bn-bd / x-default values (valid reciprocal return tags).
+  const bnRoutes = buildBengaliRoutes(enRoutes);
+  const bnByPath = new Map(bnRoutes.map((route) => [route.routePath, route]));
+  for (const route of enRoutes) {
+    const twin = bnByPath.get(toBengaliPath(route.routePath));
+    if (twin) {
+      route.bnUrl = twin.canonicalUrl;
+      twin.enUrl = route.canonicalUrl;
+      twin.bnUrl = twin.canonicalUrl;
+    }
+  }
+
+  const routes = [...enRoutes, ...bnRoutes];
+  // English link sections only: Bengali bodies already carry Bengali links
+  // (the English renderer would inject English anchor text into /bn pages).
+  addInternalLinkSections(enRoutes);
+  applySharedSeoCopy(enRoutes, "en");
+  applySharedSeoCopy(bnRoutes, "bn");
   generateSitemapXml(routes);
   generateRssXml();
   prerenderDistHtmlFiles(routes);
   console.log(
-    `[SEO Prerender] Generated ${routes.length} canonical routes, clean sitemap.xml, rss.xml, optimized og-image.jpg & 41 optimized blog JPEGs.`
+    `[SEO Prerender] Generated ${enRoutes.length} English + ${bnRoutes.length} Bengali canonical routes, clean sitemap.xml (with xhtml:link hreflang clusters), rss.xml, optimized og-image.jpg & 41 optimized blog JPEGs.`
   );
 }
 

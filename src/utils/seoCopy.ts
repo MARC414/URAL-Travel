@@ -431,6 +431,11 @@ function normalizePath(path: string): string {
   return normalized === "/" ? "/" : normalized.replace(/\/+$/, "");
 }
 
+/** Strips a leading /bn locale segment so Bengali and English keys stay aligned. */
+function stripLocalePrefix(path: string): string {
+  return normalizePath(path).replace(/^\/bn(?=\/|$)/, "") || "/";
+}
+
 function trimAtWord(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text;
   const candidate = text.slice(0, Math.max(1, maxLength - 1));
@@ -438,6 +443,74 @@ function trimAtWord(text: string, maxLength: number): string {
   const clipped = boundary > maxLength * 0.6 ? candidate.slice(0, boundary) : candidate;
   return `${clipped.trimEnd()}…`;
 }
+
+/**
+ * Bengali search copy for the hub / static routes. Detail routes
+ * (/flights/:id, /hotels/:id, /visa/:id, /costs/:id, /blog/:slug) get theirs
+ * generated from the Bengali data in src/data/bengaliContent.ts instead, because
+ * their titles depend on localized route names — see getBengaliRouteSeo().
+ *
+ * /destinations/* deliberately has no entry yet: there is no Bengali
+ * destination content, so no /bn/destinations URL is generated and its
+ * hreflang cluster is withheld (see scripts/prerender.ts).
+ */
+export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
+  "/": {
+    title: "ঢাকা থেকে বিদেশ ভ্রমণ: ফ্লাইট, ভিসা ও BDT বাজেট | URAL",
+    description:
+      "ঢাকা (DAC) থেকে ফ্লাইটের ভাড়া, বাংলাদেশি পাসপোর্টের ভিসা চেকলিস্ট, উমরাহ প্ল্যানার ও দেশভিত্তিক ভ্রমণ বাজেট—সব বাংলায় এক জায়গায়।",
+  },
+  "/umrah": {
+    title: "উমরাহ ও হজ গাইড: খরচ, ভিসা ও Nusuk অ্যাপ (২০২৬) | URAL",
+    description:
+      "বাংলাদেশ থেকে DIY উমরাহ: Saudi e-Visa, Nusuk অ্যাপ, মক্কা-মদিনা হোটেল, হারামাইন ট্রেন ও ১০ দিনের সম্পূর্ণ BDT বাজেট।",
+  },
+  "/flights": {
+    title: "ঢাকা থেকে ফ্লাইট ভাড়া: রুট, এয়ারলাইন্স ও BDT দাম | URAL",
+    description:
+      "ঢাকা (DAC) থেকে নেপাল, থাইল্যান্ড, মালয়েশিয়া, সিঙ্গাপুর, মালদ্বীপ ও দুবাইয়ের ফ্লাইট—সময়, সরাসরি এয়ারলাইন্স ও রাউন্ডট্রিপ BDT ভাড়া।",
+  },
+  "/hotels": {
+    title: "বিদেশে হোটেল গাইড: এলাকা, হালাল খাবার ও দাম | URAL",
+    description:
+      "কাঠমান্ডু, ব্যাংকক, কুয়ালালামপুর, দুবাই, সিঙ্গাপুর ও মালদ্বীপে বাংলাদেশি পরিবারের জন্য সেরা এলাকা, হোটেল ভাড়া ও হালাল খাবারের গাইড।",
+  },
+  "/visa": {
+    title: "বাংলাদেশি পাসপোর্টের ভিসা গাইড ২০২৬: নিয়ম ও খরচ | URAL",
+    description:
+      "নেপালের ফ্রি Visa on Arrival থেকে থাইল্যান্ডের e-Visa, মালয়েশিয়া, সিঙ্গাপুর, দুবাই ও মালদ্বীপ—ধাপে ধাপে ডকুমেন্ট চেকলিস্ট ও ফি।",
+  },
+  "/costs": {
+    title: "বিদেশ ভ্রমণের খরচ: ঢাকা থেকে BDT বাজেট গাইড | URAL",
+    description:
+      "৫ দিনের নেপাল, থাইল্যান্ড, মালয়েশিয়া, সিঙ্গাপুর, মালদ্বীপ ও দুবাই ভ্রমণে ফ্লাইট, হোটেল ও খাবারসহ জনপ্রতি বাস্তব BDT খরচের হিসাব।",
+  },
+  "/blog": {
+    title: "ট্রাভেল ব্লগ: ৪১টি ব্যবহারিক গাইড (২০২৬) | URAL",
+    description:
+      "ভিসা, ফ্লাইট টিকিট, উমরাহ, ব্যাংকিং ও ভ্রমণ বাজেট নিয়ে ৪১টি যাচাইকৃত বাংলা গাইড—বাংলাদেশি ভ্রমণকারীদের জন্য ধাপে ধাপে নির্দেশনা।",
+  },
+  "/experiences": {
+    title: "ট্যুর, টিকিট ও অভিজ্ঞতা বুকিং গাইড | URAL",
+    description:
+      "সিটি ট্যুর, থিম পার্ক, এয়ারপোর্ট ট্রান্সফার ও স্কিপ-দ্য-লাইন টিকিট—কোথা থেকে বুক করবেন এবং কত খরচ হবে তার ব্যবহারিক গাইড।",
+  },
+  "/tools": {
+    title: "ভ্রমণ টুলস ও ক্যালকুলেটর | URAL",
+    description:
+      "ট্রিপ বাজেট ক্যালকুলেটর, প্যাকিং চেকলিস্ট ও প্রস্তুতির টুলস—বাংলাদেশি ভ্রমণকারীদের জন্য বিনামূল্যে ব্যবহারযোগ্য।",
+  },
+  "/sitemap": {
+    title: "সাইটম্যাপ: সব ভ্রমণ গাইডের তালিকা | URAL",
+    description:
+      "URAL-এর সব ফ্লাইট, হোটেল, ভিসা, খরচ ও ব্লগ গাইডের পূর্ণ তালিকা—এক পাতায় খুঁজে নিন আপনার প্রয়োজনীয় গাইড।",
+  },
+  "/contact": {
+    title: "যোগাযোগ ও সহায়তা | URAL",
+    description:
+      "ভ্রমণ পরিকল্পনা, ভিসা বা বুকিং সংক্রান্ত প্রশ্নে URAL টিমের সাথে যোগাযোগ করুন—WhatsApp ও ইমেইলে সহায়তা।",
+  },
+};
 
 /**
  * Removes trailing brand suffixes ("| URAL", "| URAL Travel", "| URAL Travel Blog")
@@ -464,9 +537,32 @@ function compactDescription(description: string): string {
   return trimAtWord(normalized, 160);
 }
 
-/** Keep generated fallback metadata concise while preserving its source wording. */
-export function getSeoCopy(path: string, title: string, description: string): SeoCopy {
-  const priorityCopy = PRIORITY_SEO_COPY[normalizePath(path)];
+/**
+ * Keep generated fallback metadata concise while preserving its source wording.
+ *
+ * `locale` selects the copy table: English uses PRIORITY_SEO_COPY (all 83
+ * canonical routes), Bengali uses BENGALI_SEO_COPY for hub/static routes and
+ * falls back to the caller-provided (already Bengali) title/description for
+ * detail routes. A Bengali call must never return the English priority copy —
+ * a bn-BD page advertising English metadata is exactly the mismatch the
+ * /bn rollout exists to remove.
+ */
+export function getSeoCopy(
+  path: string,
+  title: string,
+  description: string,
+  locale: "en" | "bn" = "en"
+): SeoCopy {
+  const key = stripLocalePrefix(path);
+  if (locale === "bn") {
+    return (
+      BENGALI_SEO_COPY[key] ?? {
+        title: compactTitle(title),
+        description: compactDescription(description),
+      }
+    );
+  }
+  const priorityCopy = PRIORITY_SEO_COPY[key];
   if (priorityCopy) return priorityCopy;
   return {
     title: compactTitle(title),

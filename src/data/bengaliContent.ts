@@ -2097,3 +2097,138 @@ export function getFeaturedGrowthTopics(lang: Language) {
   ];
 }
 
+
+// ---------------------------------------------------------------------------
+// Bengali route metadata (title / meta description / H1)
+//
+// Keyed by the ENGLISH base path ("/flights/dhaka-bangkok"), never by the
+// /bn-prefixed one, so a route has exactly one Bengali counterpart record.
+// Both consumers read the same map, so the prerendered HTML and the client-side
+// <title> can never drift:
+//   - scripts/prerender.ts (build time, Node)
+//   - src/App.tsx (after this module is lazily imported on /bn routes)
+//
+// This lives here rather than in src/utils/seoCopy.ts on purpose: seoCopy.ts is
+// part of the entry bundle and this module carries ~390 KB of Bengali content
+// that English visitors must never download.
+// ---------------------------------------------------------------------------
+export interface BengaliSeoCopy {
+  title: string;
+  description: string;
+  h1: string;
+}
+
+/** Place names get a Bengali form; airport codes stay Latin (that is how they are booked). */
+const BN_PLACES: Record<string, string> = {
+  Kathmandu: "কাঠমান্ডু",
+  Bangkok: "ব্যাংকক",
+  "Kuala Lumpur": "কুয়ালালামপুর",
+  Dubai: "দুবাই",
+  Singapore: "সিঙ্গাপুর",
+  "Malé & Maafushi": "মালে ও মাফুশি",
+  Nepal: "নেপাল",
+  Thailand: "থাইল্যান্ড",
+  Malaysia: "মালয়েশিয়া",
+  UAE: "সংযুক্ত আরব আমিরাত",
+  Maldives: "মালদ্বীপ",
+};
+
+function bnPlace(raw: string): string {
+  const base = raw.split(" (")[0].trim();
+  return BN_PLACES[base] || base;
+}
+
+function bnClamp(text: string, max: number): string {
+  const normalized = String(text || "").replace(/\s+/g, " ").trim();
+  if (normalized.length <= max) return normalized;
+  const cut = normalized.slice(0, Math.max(1, max - 1));
+  const boundary = cut.lastIndexOf(" ");
+  return `${(boundary > max * 0.6 ? cut.slice(0, boundary) : cut).trimEnd()}…`;
+}
+
+/** Mirrors src/utils/seoCopy.ts compactTitle(): clean topic + brand suffix, ≤60 chars. */
+function bnTitle(text: string): string {
+  const suffix = " | URAL";
+  const clean = String(text || "").replace(/\s*\|\s*URAL\s*$/i, "").trim();
+  return `${bnClamp(clean, 60 - suffix.length)}${suffix}`;
+}
+
+const BENGALI_ROUTE_SEO: Record<string, BengaliSeoCopy> = {};
+
+// Flights — Bengali title from the localized route name, Bengali description
+// from the hand-written quick answer.
+for (const flight of getLocalizedFlights("bn")) {
+  const bn = BENGALI_FLIGHTS_OVERRIDES[flight.id];
+  if (!bn) continue;
+  const h1 = `ঢাকা → ${bnPlace(bn.to || flight.to)} বিমান ভাড়া, সময় ও ভিসা গাইড (২০২৬)`;
+  BENGALI_ROUTE_SEO[`/flights/${flight.id}`] = {
+    title: bnTitle(`${bnPlace(bn.to || flight.to)} ফ্লাইট গাইড: ভাড়া, সময় ও ভিসা`),
+    description: bnClamp(bn.quickAnswer || flight.quickAnswer, 160),
+    h1,
+  };
+}
+
+// Hotels — Bengali city name in the title, Bengali quick answer as description.
+for (const hotel of getLocalizedHotels("bn")) {
+  if (!BENGALI_HOTELS_OVERRIDES[hotel.id]) continue;
+  const city = bnPlace(hotel.city);
+  BENGALI_ROUTE_SEO[`/hotels/${hotel.id}`] = {
+    title: bnTitle(`${city} হোটেল গাইড: এলাকা, হালাল খাবার ও BDT ভাড়া`),
+    description: bnClamp(hotel.quickAnswer, 160),
+    h1: `${city}-এ কোথায় থাকবেন: এলাকা, হোটেল দাম ও হালাল খাবারের গাইড (২০২৬)`,
+  };
+}
+
+// Visas — requirements/cost/processing stay in the body; the quick answer is
+// already a Bengali summary of the whole process.
+for (const visa of getLocalizedVisas("bn")) {
+  if (!BENGALI_VISA_OVERRIDES[visa.id]) continue;
+  const country = bnPlace(visa.country);
+  BENGALI_ROUTE_SEO[`/visa/${visa.id}`] = {
+    title: bnTitle(`${country} ভিসা গাইড: বাংলাদেশিদের জন্য নিয়ম ও খরচ`),
+    description: bnClamp(visa.quickAnswer, 160),
+    h1: `${country} ভিসা (বাংলাদেশি পাসপোর্ট): নিয়ম, ডকুমেন্ট ও খরচ (২০২৬)`,
+  };
+}
+
+// Trip costs — the most searched Bengali phrasing ("খরচ কত").
+for (const cost of getLocalizedCosts("bn")) {
+  if (!BENGALI_COSTS_OVERRIDES[cost.id]) continue;
+  const country = bnPlace(cost.country);
+  BENGALI_ROUTE_SEO[`/costs/${cost.id}`] = {
+    title: bnTitle(`${country} ভ্রমণ খরচ: ঢাকা থেকে BDT বাজেট`),
+    description: bnClamp(cost.quickAnswer, 160),
+    h1: `ঢাকা থেকে ${country} ভ্রমণে কত টাকা লাগে? সম্পূর্ণ BDT বাজেট (২০২৬)`,
+  };
+}
+
+// Blog guides — the overrides already carry a native Bengali title and summary.
+for (const post of getLocalizedBlogs("bn")) {
+  const bn = BENGALI_BLOG_OVERRIDES[post.slug];
+  if (!bn) continue;
+  BENGALI_ROUTE_SEO[`/blog/${post.slug}`] = {
+    title: bnTitle(bn.title),
+    description: bnClamp(bn.summary, 160),
+    h1: bn.title,
+  };
+}
+
+/**
+ * Returns the Bengali title/description/H1 for an English base path, or null
+ * when no Bengali counterpart exists yet (currently: /destinations/*, which
+ * have no Bengali data — see the coverage note in scripts/prerender.ts).
+ */
+export function getBengaliRouteSeo(englishPath: string): BengaliSeoCopy | null {
+  const pathOnly = (String(englishPath).split(/[?#]/, 1)[0] || "/").replace(
+    /^\/bn(?=\/|$)/,
+    ""
+  );
+  const normalized =
+    `/${pathOnly.split("/").filter(Boolean).join("/")}` || "/";
+  return BENGALI_ROUTE_SEO[normalized] ?? null;
+}
+
+/** True when a Bengali counterpart page can be generated for this English path. */
+export function hasBengaliRoute(englishPath: string): boolean {
+  return getBengaliRouteSeo(englishPath) !== null;
+}

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { hasBengaliCounterpart } from "../utils/localeRoutes";
 import {
   generateFaqSchema,
   getFaqSchemaForPage,
@@ -274,75 +275,80 @@ export function useSeoMeta({
   const faqsStr = safeStringify(faqs);
   const lastTrackedCanonicalRef = useRef<string | null>(null);
 
-  // Derive clean path-based canonical URL to strictly match prerendered static files & sitemap.xml
+  // Derive clean path-based canonical URL to strictly match prerendered static
+  // files & sitemap.xml. Bengali routes canonicalise to themselves (/bn/...),
+  // never to their English twin — a self-referential canonical is what makes the
+  // /bn cluster indexable instead of collapsing it into the English page.
   let canonicalUrl = "https://ural-travel.pages.dev/";
   let cleanPathTarget: string | null = null;
+  let englishAlternateUrl = "https://ural-travel.pages.dev/";
+  let bengaliAlternateUrl: string | null = null;
+  let isBengaliRoute = false;
   if (typeof window !== "undefined") {
     const pathname = window.location.pathname;
     const searchParams = new URLSearchParams(window.location.search);
     const baseUrl = "https://ural-travel.pages.dev";
-    const segments = pathname.split("/").filter(Boolean);
+    const allSegments = pathname.split("/").filter(Boolean);
+    const localePrefix = allSegments[0] === "bn" ? "/bn" : "";
+    isBengaliRoute = localePrefix === "/bn";
+    const segments = localePrefix ? allSegments.slice(1) : allSegments;
     const rootSection = segments[0] || "";
     const subSegment = segments[1] || "";
 
+    // English base path for this URL (locale stripped, legacy query upgraded).
+    let routePath = "/";
     if (rootSection === "flights") {
       const routeId = searchParams.get("route") || subSegment;
-      canonicalUrl = routeId
-        ? `${baseUrl}/flights/${routeId}`
-        : `${baseUrl}/flights`;
+      routePath = routeId ? `/flights/${routeId}` : "/flights";
       if (searchParams.has("route") && routeId) {
         cleanPathTarget = `/flights/${routeId}`;
       }
     } else if (rootSection === "hotels") {
       const cityId = searchParams.get("city") || subSegment;
-      canonicalUrl = cityId
-        ? `${baseUrl}/hotels/${cityId}`
-        : `${baseUrl}/hotels`;
+      routePath = cityId ? `/hotels/${cityId}` : "/hotels";
       if (searchParams.has("city") && cityId) {
         cleanPathTarget = `/hotels/${cityId}`;
       }
     } else if (rootSection === "visa") {
       const countryId = searchParams.get("country") || subSegment;
-      canonicalUrl = countryId
-        ? `${baseUrl}/visa/${countryId}`
-        : `${baseUrl}/visa`;
+      routePath = countryId ? `/visa/${countryId}` : "/visa";
       if (searchParams.has("country") && countryId) {
         cleanPathTarget = `/visa/${countryId}`;
       }
     } else if (rootSection === "destinations") {
       const countryId = searchParams.get("country") || subSegment;
-      canonicalUrl = countryId
-        ? `${baseUrl}/destinations/${countryId}`
-        : `${baseUrl}/destinations`;
+      routePath = countryId ? `/destinations/${countryId}` : "/destinations";
       if (searchParams.has("country") && countryId) {
         cleanPathTarget = `/destinations/${countryId}`;
       }
     } else if (rootSection === "costs") {
       const countryId = searchParams.get("country") || subSegment;
-      canonicalUrl = countryId
-        ? `${baseUrl}/costs/${countryId}`
-        : `${baseUrl}/costs`;
+      routePath = countryId ? `/costs/${countryId}` : "/costs";
       if (searchParams.has("country") && countryId) {
         cleanPathTarget = `/costs/${countryId}`;
       }
     } else if (rootSection === "blog") {
       const slugId = searchParams.get("slug") || subSegment;
-      canonicalUrl = slugId
-        ? `${baseUrl}/blog/${slugId}`
-        : `${baseUrl}/blog`;
+      routePath = slugId ? `/blog/${slugId}` : "/blog";
       if (searchParams.has("slug") && slugId) {
         cleanPathTarget = `/blog/${slugId}`;
       }
     } else if (rootSection === "pre-departure" || rootSection === "sitemap") {
-      canonicalUrl = `${baseUrl}/sitemap`;
+      routePath = "/sitemap";
     } else if (rootSection === "attractions" || rootSection === "experiences") {
-      canonicalUrl = `${baseUrl}/experiences`;
+      routePath = "/experiences";
     } else if (rootSection === "hajj" || rootSection === "umrah") {
-      canonicalUrl = `${baseUrl}/umrah`;
+      routePath = "/umrah";
     } else if (rootSection) {
-      canonicalUrl = `${baseUrl}/${rootSection}`;
-    } else {
-      canonicalUrl = `${baseUrl}/`;
+      routePath = `/${rootSection}`;
+    }
+
+    canonicalUrl = `${baseUrl}${localePrefix}${routePath}`;
+    // The legacy ?query → clean-path upgrade must stay inside the locale.
+    if (cleanPathTarget) cleanPathTarget = `${localePrefix}${cleanPathTarget}`;
+    englishAlternateUrl = `${baseUrl}${routePath}`;
+    if (hasBengaliCounterpart(routePath)) {
+      bengaliAlternateUrl = `${baseUrl}/bn${routePath === "/" ? "" : routePath}`;
     }
   }
 
@@ -401,6 +407,38 @@ export function useSeoMeta({
       document.head.appendChild(canonicalLink);
     }
     canonicalLink.setAttribute("href", canonicalUrl);
+
+    // 2b. Keep the reciprocal hreflang cluster and og:locale in sync on SPA
+    // navigation. The served HTML already carries the correct cluster (written
+    // per route by scripts/prerender.ts); this keeps the client-rendered head
+    // consistent after in-app route changes. bn-bd is only emitted when a
+    // Bengali counterpart exists — a return tag pointing at a 404 is invalid.
+    const setAlternateLink = (hreflang: string, href: string | null) => {
+      const selector = `link[rel="alternate"][hreflang="${hreflang}"]`;
+      let link = document.head.querySelector<HTMLLinkElement>(selector);
+      if (!href) {
+        if (link) link.remove();
+        return;
+      }
+      if (!link) {
+        link = document.createElement("link");
+        link.setAttribute("rel", "alternate");
+        link.setAttribute("hreflang", hreflang);
+        document.head.appendChild(link);
+      }
+      link.setAttribute("href", href);
+    };
+    setAlternateLink("en-bd", englishAlternateUrl);
+    setAlternateLink("x-default", englishAlternateUrl);
+    setAlternateLink("bn-bd", bengaliAlternateUrl);
+
+    let ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (!ogLocale) {
+      ogLocale = document.createElement("meta");
+      ogLocale.setAttribute("property", "og:locale");
+      document.head.appendChild(ogLocale);
+    }
+    ogLocale.setAttribute("content", isBengaliRoute ? "bn_BD" : "en_BD");
 
     // 3. Set/Update og:url & twitter:url Meta Tags
     let ogUrl = document.querySelector('meta[property="og:url"]');
@@ -559,6 +597,8 @@ export function useSeoMeta({
     faqsStr,
     canonicalUrl,
     cleanPathTarget,
+    englishAlternateUrl,
+    bengaliAlternateUrl,
     imageUrl,
     inLanguage,
     noindex,

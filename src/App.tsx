@@ -816,19 +816,31 @@ export default function App() {
       setAffiliateToast(null);
     }, 4500);
   };
+  // Language is a pure function of the URL (see getRouteDetails().locale): /bn/*
+  // renders Bengali, everything else English. Seeding from the path means the
+  // first paint already matches the prerendered HTML. localStorage is demoted to
+  // a preference note that must never override the URL — repainting a Bengali
+  // /bn page into English would be both a jarring flash and a cloaking signal
+  // (crawler reads Bengali, rendered DOM becomes English).
   const [lang, setLang] = useState<Language>(() => {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("ural_lang");
-      if (saved === "bn" || saved === "en") return saved;
+      const path = window.location.pathname;
+      if (path === "/bn" || path.startsWith("/bn/")) return "bn";
     }
     return "en";
   });
 
   const handleLangToggle = (newLang: Language) => {
-    setLang(newLang);
     if (typeof window !== "undefined") {
       localStorage.setItem("ural_lang", newLang);
     }
+    // Switching language navigates to the other locale's URL — /bn/* is the
+    // crawlable Bengali surface, it is not just a client-side state flip.
+    const current =
+      typeof window !== "undefined"
+        ? window.location.pathname + window.location.search
+        : currentPath;
+    pushPath(toLocalePath(current, newLang));
   };
 
   const [bnContent, setBnContent] = useState<typeof BengaliContentModule | null>(null);
@@ -981,8 +993,14 @@ export default function App() {
     const url = new URL(currentPath, "https://ural-travel.pages.dev");
     const searchParams = url.searchParams;
     const segments = url.pathname.split("/").filter(Boolean);
-    const root = segments[0] || "";
-    const subSegment = segments[1] || null;
+    // Bengali is a locale sub-directory: /bn/umrah mirrors /umrah. The locale
+    // lives in the URL (not in localStorage) so the prerendered Bengali HTML and
+    // the client render the same language — otherwise React would repaint a
+    // /bn page into English a few ms after load (flash + cloaking signal).
+    const locale: Language = segments[0] === "bn" ? "bn" : "en";
+    const segs = locale === "bn" ? segments.slice(1) : segments;
+    const root = segs[0] || "";
+    const subSegment = segs[1] || null;
 
     let section: SectionType = "notFound";
     let parameterId: string | null = null;
@@ -991,63 +1009,63 @@ export default function App() {
     if (!root) {
       section = "home";
       isLanding = true;
-    } else if (root === "flights" && segments.length <= 2) {
+    } else if (root === "flights" && segs.length <= 2) {
       const routeParam = searchParams.get("route") || subSegment;
       if (!routeParam || FLIGHTS_DATA.some((route) => route.id === routeParam)) {
         section = "flights";
         parameterId = routeParam || "dhaka-kathmandu";
         isLanding = !routeParam;
       }
-    } else if (root === "hotels" && segments.length <= 2) {
+    } else if (root === "hotels" && segs.length <= 2) {
       const cityParam = searchParams.get("city") || subSegment;
       if (!cityParam || HOTELS_DATA.some((hotel) => hotel.id === cityParam)) {
         section = "hotels";
         parameterId = cityParam || "kathmandu-hotels";
         isLanding = !cityParam;
       }
-    } else if (root === "visa" && segments.length <= 2) {
+    } else if (root === "visa" && segs.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
       if (!countryParam || VISA_DATA.some((visa) => visa.id === countryParam)) {
         section = "visa";
         parameterId = countryParam || "nepal-visa";
         isLanding = !countryParam;
       }
-    } else if (root === "destinations" && segments.length <= 2) {
+    } else if (root === "destinations" && segs.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
       if (!countryParam || DESTINATIONS_DATA.some((destination) => destination.id === countryParam)) {
         section = "destinations";
         parameterId = countryParam || "nepal-guide";
         isLanding = !countryParam;
       }
-    } else if (root === "costs" && segments.length <= 2) {
+    } else if (root === "costs" && segs.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
       if (!countryParam || TRIP_COSTS_DATA.some((cost) => cost.id === countryParam)) {
         section = "costs";
         parameterId = countryParam || "nepal-costs";
         isLanding = !countryParam;
       }
-    } else if ((root === "experiences" || root === "attractions") && segments.length === 1) {
+    } else if ((root === "experiences" || root === "attractions") && segs.length === 1) {
       section = "experiences";
       isLanding = true;
-    } else if ((root === "umrah" || root === "hajj") && segments.length === 1) {
+    } else if ((root === "umrah" || root === "hajj") && segs.length === 1) {
       section = "umrah";
       isLanding = true;
-    } else if (root === "tools" && segments.length === 1) {
+    } else if (root === "tools" && segs.length === 1) {
       section = "tools";
       isLanding = true;
-    } else if (root === "blog" && segments.length <= 2) {
+    } else if (root === "blog" && segs.length <= 2) {
       const slugParam = searchParams.get("slug") || subSegment;
       if (!slugParam || BLOG_DATA.some((post) => post.slug === slugParam)) {
         section = "blog";
         parameterId = slugParam || "cheap-flight-booking-hacks-dhaka";
         isLanding = !slugParam;
       }
-    } else if (root === "contact" && segments.length === 1) {
+    } else if (root === "contact" && segs.length === 1) {
       section = "contact";
       isLanding = true;
     } else if (
       ["sitemap", "pre-departure", "indexing"].includes(root) &&
-      segments.length === 1
+      segs.length === 1
     ) {
       section = "sitemap";
       isLanding = true;
@@ -1055,10 +1073,16 @@ export default function App() {
 
     const isAdmin = searchParams.has("admin") || searchParams.has("inspector") || searchParams.get("onboarding") === "true";
 
-    return { section, parameterId, isLanding, isAdmin };
+    return { section, parameterId, isLanding, isAdmin, locale };
   };
 
-  const { section, parameterId, isLanding, isAdmin } = getRouteDetails();
+  const { section, parameterId, isLanding, isAdmin, locale } = getRouteDetails();
+
+  // Keep React state in lockstep with the URL locale — covers back/forward
+  // navigation between /umrah and /bn/umrah as well as direct deep links.
+  useEffect(() => {
+    setLang(locale);
+  }, [locale]);
 
   // Mobile Drawer User-Intent Accordion State (reduces vertical scroll depth)
   const getDefaultDrawerGroup = (sec: SectionType): "booking" | "destinations" | "research" | "tools" => {
@@ -1549,7 +1573,17 @@ export default function App() {
     return new URL(currentPath, "https://ural-travel.pages.dev").pathname;
   })();
 
-  const sharedSeoCopy = getSeoCopy(seoRoutePath, seoTitle, seoDescription);
+  // Bengali pages must never fall back to the English copy tables: prefer the
+  // generated /bn metadata from bengaliContent (loaded lazily on /bn routes),
+  // then the hub-level Bengali copy in BENGALI_SEO_COPY.
+  const sharedSeoCopy = isBn
+    ? (() => {
+        const bnGenerated = bnContent?.getBengaliRouteSeo(seoRoutePath);
+        return bnGenerated
+          ? { title: bnGenerated.title, description: bnGenerated.description }
+          : getSeoCopy(seoRoutePath, seoTitle, seoDescription, "bn");
+      })()
+    : getSeoCopy(seoRoutePath, seoTitle, seoDescription);
   seoTitle = sharedSeoCopy.title;
   seoDescription = sharedSeoCopy.description;
 
@@ -1599,15 +1633,45 @@ export default function App() {
     }
   };
 
-  // Navigation Helper that emulates URL path routing with clean path URLs
-  const navigateTo = (path: string) => {
+  /**
+   * Maps an English base path to its localised URL.
+   * Idempotent: a path that already carries the /bn prefix is normalised back to
+   * the English base first, so toLocalePath(toLocalePath(p, "bn"), "bn") is
+   * stable and switching languages twice can never produce /bn/bn/…
+   * Query strings and hashes are preserved ("/experiences?region=west").
+   */
+  const toLocalePath = (path: string, target: Language): string => {
+    const match = String(path || "/").match(/^([^?#]*)([\s\S]*)$/);
+    const pathname = match?.[1] || "/";
+    const rest = match?.[2] || "";
+    const base = pathname.replace(/^\/bn(?=\/|$)/, "") || "/";
+    if (target === "en") return `${base}${rest}`;
+    return base === "/" ? `/bn${rest}` : `/bn${base}${rest}`;
+  };
+
+  /** Low-level history push — no locale awareness (see navigateTo). */
+  const pushPath = (path: string) => {
     const cleanPath = normalizeRoutePath(path);
     if (typeof window !== "undefined") {
       window.history.pushState({}, "", cleanPath);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
     setCurrentPath(cleanPath);
-    window.scrollTo({ top: 0, behavior: "smooth" });
     setMobileMenuOpen(false);
+  };
+
+  // Navigation helper that emulates URL path routing with clean path URLs.
+  // In Bengali mode every existing navigateTo("/x") call site resolves to
+  // /bn/x automatically, so no call site needed to change.
+  const navigateTo = (path: string) => {
+    pushPath(lang === "bn" ? toLocalePath(normalizeRoutePath(path), "bn") : path);
+  };
+
+  // Real hrefs for the language switcher so both locales are crawlable anchors
+  // from every page (reinforcing the hreflang cluster with on-page links).
+  const localeHrefs = {
+    en: toLocalePath(currentPath, "en"),
+    bn: toLocalePath(currentPath, "bn"),
   };
 
   // Synchronise real live Dhaka (BST) clock instead of static mock timestamp
@@ -1649,7 +1713,12 @@ export default function App() {
             <div className="flex items-center gap-2 sm:gap-3 shrink-0 font-sans text-[11px] font-medium">
               <TopBarWhatsApp lang={lang} />
               <span className="w-px h-3 bg-white/20"></span>
-              <LanguageSwitcher lang={lang} onToggle={handleLangToggle} />
+              <LanguageSwitcher
+                lang={lang}
+                onToggle={handleLangToggle}
+                enHref={localeHrefs.en}
+                bnHref={localeHrefs.bn}
+              />
             </div>
           </div>
         </div>
@@ -2446,7 +2515,12 @@ export default function App() {
                 <div className="p-4 border-t border-white/10 bg-brand-navy space-y-2.5 shrink-0">
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-white/70 font-medium">Language / ভাষা:</span>
-                    <LanguageSwitcher lang={lang} onToggle={handleLangToggle} />
+                    <LanguageSwitcher
+                lang={lang}
+                onToggle={handleLangToggle}
+                enHref={localeHrefs.en}
+                bnHref={localeHrefs.bn}
+              />
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <a
@@ -6091,7 +6165,7 @@ export default function App() {
                           <div className="flex flex-wrap items-center gap-2 text-xs">
                             <a
                               href={`https://wa.me/?text=${encodeURIComponent(
-                                `${activePost.title}\n\n${getBlogAeoSnippet50Words(activePost.slug, isBn, activePost.summary)}\n\nRead Full Guide on URAL: https://ural-travel.pages.dev/blog/${activePost.slug}`
+                                `${activePost.title}\n\n${getBlogAeoSnippet50Words(activePost.slug, isBn, activePost.summary)}\n\nRead Full Guide on URAL: https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`
                               )}`}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -6101,7 +6175,7 @@ export default function App() {
                             </a>
                             <a
                               href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                                `https://ural-travel.pages.dev/blog/${activePost.slug}`
+                                `https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`
                               )}`}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -6113,7 +6187,7 @@ export default function App() {
                               type="button"
                               onClick={() => {
                                 const fbCaption = isBn
-                                  ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getBlogAeoSnippet50Words(activePost.slug, true, activePost.summary)}\n\n👉 সম্পূর্ণ গাইড ও BDT বাজেট দেখুন: https://ural-travel.pages.dev/blog/${activePost.slug}\n💬 কার্ড ছাড়াই BDT/bKash-এ ফ্লাইট ও হোটেল বুকিং হেল্পলাইন (WhatsApp): +8801784385335`
+                                  ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getBlogAeoSnippet50Words(activePost.slug, true, activePost.summary)}\n\n👉 সম্পূর্ণ গাইড ও BDT বাজেট দেখুন: https://ural-travel.pages.dev/bn/blog/${activePost.slug}\n💬 কার্ড ছাড়াই BDT/bKash-এ ফ্লাইট ও হোটেল বুকিং হেল্পলাইন (WhatsApp): +8801784385335`
                                   : `✈️ ${activePost.title}\n\n📌 Quick Summary:\n${getBlogAeoSnippet50Words(activePost.slug, false, activePost.summary)}\n\n👉 Read Full Guide & BDT Calculator: https://ural-travel.pages.dev/blog/${activePost.slug}\n💬 Book Flights & Hotels in BDT via WhatsApp: +8801784385335`;
                                 navigator.clipboard?.writeText(fbCaption);
                                 setAffiliateToast(

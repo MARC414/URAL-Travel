@@ -1,139 +1,208 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ural-travel.pages.dev/</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/umrah</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/umrah" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/umrah" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/umrah" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/flights</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/flights/dhaka-kathmandu</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-kathmandu" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-kathmandu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-kathmandu" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/flights/dhaka-bangkok</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-bangkok" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-bangkok" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-bangkok" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/flights/dhaka-kuala-lumpur</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-kuala-lumpur" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-kuala-lumpur" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-kuala-lumpur" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/flights/dhaka-dubai</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-dubai" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-dubai" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-dubai" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/flights/dhaka-singapore</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-singapore" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-singapore" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-singapore" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/flights/dhaka-maldives</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-maldives" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-maldives" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-maldives" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/hotels/kathmandu-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/kathmandu-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/kathmandu-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/kathmandu-hotels" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/hotels/bangkok-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/bangkok-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/bangkok-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/bangkok-hotels" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/hotels/kuala-lumpur-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/kuala-lumpur-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/kuala-lumpur-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/kuala-lumpur-hotels" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/hotels/dubai-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/dubai-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/dubai-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/dubai-hotels" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/hotels/singapore-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/singapore-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/singapore-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/singapore-hotels" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/hotels/maldives-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/maldives-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/maldives-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/maldives-hotels" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/visa/nepal-visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/nepal-visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/nepal-visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/nepal-visa" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/visa/thailand-visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/thailand-visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/thailand-visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/thailand-visa" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/visa/malaysia-visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/malaysia-visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/malaysia-visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/malaysia-visa" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/visa/dubai-visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/dubai-visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/dubai-visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/dubai-visa" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/visa/singapore-visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/singapore-visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/singapore-visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/singapore-visa" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/visa/maldives-visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/maldives-visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/maldives-visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/maldives-visa" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -182,318 +251,1161 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/costs/nepal-costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs/nepal-costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs/nepal-costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs/nepal-costs" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/costs/thailand-costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs/thailand-costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs/thailand-costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs/thailand-costs" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/costs/malaysia-costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs/malaysia-costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs/malaysia-costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs/malaysia-costs" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/costs/dubai-costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs/dubai-costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs/dubai-costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs/dubai-costs" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/costs/singapore-costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs/singapore-costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs/singapore-costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs/singapore-costs" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/costs/maldives-costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs/maldives-costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs/maldives-costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs/maldives-costs" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/experiences</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/experiences" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/experiences" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/experiences" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/tools</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/sitemap</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/sitemap" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/sitemap" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/sitemap" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/contact" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/contact" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/cheap-flight-booking-hacks-dhaka</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/cheap-flight-booking-hacks-dhaka" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/cheap-flight-booking-hacks-dhaka" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/cheap-flight-booking-hacks-dhaka" />
     <lastmod>2026-06-12T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/nepal-vs-thailand-first-trip</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/nepal-vs-thailand-first-trip" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/nepal-vs-thailand-first-trip" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/nepal-vs-thailand-first-trip" />
     <lastmod>2026-05-28T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/hotel-savings-guide-bangkok-kl-dubai</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/hotel-savings-guide-bangkok-kl-dubai" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/hotel-savings-guide-bangkok-kl-dubai" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/hotel-savings-guide-bangkok-kl-dubai" />
     <lastmod>2026-06-05T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/halal-food-guide-bangkok-bangladesh</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/halal-food-guide-bangkok-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/halal-food-guide-bangkok-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/halal-food-guide-bangkok-bangladesh" />
     <lastmod>2026-06-15T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/nepal-pokhara-itinerary-bangladesh</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/nepal-pokhara-itinerary-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/nepal-pokhara-itinerary-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/nepal-pokhara-itinerary-bangladesh" />
     <lastmod>2026-06-17T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/dual-currency-card-endorsement-bangladesh</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/dual-currency-card-endorsement-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/dual-currency-card-endorsement-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/dual-currency-card-endorsement-bangladesh" />
     <lastmod>2026-09-26T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/maldives-budget-trip-bangladesh-maafushi</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/maldives-budget-trip-bangladesh-maafushi" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/maldives-budget-trip-bangladesh-maafushi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/maldives-budget-trip-bangladesh-maafushi" />
     <lastmod>2026-09-22T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/singapore-visa-guide-bangladesh-agents</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/singapore-visa-guide-bangladesh-agents" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/singapore-visa-guide-bangladesh-agents" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/singapore-visa-guide-bangladesh-agents" />
     <lastmod>2026-09-24T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/top-budget-family-destinations-from-dhaka</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/top-budget-family-destinations-from-dhaka" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/top-budget-family-destinations-from-dhaka" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/top-budget-family-destinations-from-dhaka" />
     <lastmod>2026-09-26T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/dhaka-airport-outbound-immigration-checklist-noc-go</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/dhaka-airport-outbound-immigration-checklist-noc-go" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/dhaka-airport-outbound-immigration-checklist-noc-go" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/dhaka-airport-outbound-immigration-checklist-noc-go" />
     <lastmod>2026-09-26T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" />
     <lastmod>2026-09-26T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" />
     <lastmod>2026-09-26T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/hajj-registration-bangladesh-government-vs-private-package-cost</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/hajj-registration-bangladesh-government-vs-private-package-cost" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/hajj-registration-bangladesh-government-vs-private-package-cost" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/hajj-registration-bangladesh-government-vs-private-package-cost" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/umrah</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/umrah" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/umrah" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/umrah" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/flights</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/flights/dhaka-kathmandu</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-kathmandu" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-kathmandu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-kathmandu" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/flights/dhaka-bangkok</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-bangkok" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-bangkok" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-bangkok" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/flights/dhaka-kuala-lumpur</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-kuala-lumpur" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-kuala-lumpur" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-kuala-lumpur" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/flights/dhaka-dubai</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-dubai" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-dubai" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-dubai" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/flights/dhaka-singapore</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-singapore" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-singapore" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-singapore" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/flights/dhaka-maldives</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-maldives" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-maldives" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-maldives" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/hotels/kathmandu-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/kathmandu-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/kathmandu-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/kathmandu-hotels" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/hotels/bangkok-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/bangkok-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/bangkok-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/bangkok-hotels" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/hotels/kuala-lumpur-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/kuala-lumpur-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/kuala-lumpur-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/kuala-lumpur-hotels" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/hotels/dubai-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/dubai-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/dubai-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/dubai-hotels" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/hotels/singapore-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/singapore-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/singapore-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/singapore-hotels" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/hotels/maldives-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/maldives-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/maldives-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/maldives-hotels" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/visa/nepal-visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/nepal-visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/nepal-visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/nepal-visa" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/visa/thailand-visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/thailand-visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/thailand-visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/thailand-visa" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/visa/malaysia-visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/malaysia-visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/malaysia-visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/malaysia-visa" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/visa/dubai-visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/dubai-visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/dubai-visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/dubai-visa" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/visa/singapore-visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/singapore-visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/singapore-visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/singapore-visa" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/visa/maldives-visa</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/maldives-visa" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/maldives-visa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/maldives-visa" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/costs/nepal-costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs/nepal-costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs/nepal-costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs/nepal-costs" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/costs/thailand-costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs/thailand-costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs/thailand-costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs/thailand-costs" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/costs/malaysia-costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs/malaysia-costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs/malaysia-costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs/malaysia-costs" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/costs/dubai-costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs/dubai-costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs/dubai-costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs/dubai-costs" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/costs/singapore-costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs/singapore-costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs/singapore-costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs/singapore-costs" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/costs/maldives-costs</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/costs/maldives-costs" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/costs/maldives-costs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/costs/maldives-costs" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/experiences</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/experiences" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/experiences" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/experiences" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/tools</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/sitemap</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/sitemap" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/sitemap" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/sitemap" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/contact" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/contact" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/cheap-flight-booking-hacks-dhaka</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/cheap-flight-booking-hacks-dhaka" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/cheap-flight-booking-hacks-dhaka" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/cheap-flight-booking-hacks-dhaka" />
+    <lastmod>2026-06-12T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/nepal-vs-thailand-first-trip</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/nepal-vs-thailand-first-trip" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/nepal-vs-thailand-first-trip" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/nepal-vs-thailand-first-trip" />
+    <lastmod>2026-05-28T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/hotel-savings-guide-bangkok-kl-dubai</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/hotel-savings-guide-bangkok-kl-dubai" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/hotel-savings-guide-bangkok-kl-dubai" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/hotel-savings-guide-bangkok-kl-dubai" />
+    <lastmod>2026-06-05T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/halal-food-guide-bangkok-bangladesh</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/halal-food-guide-bangkok-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/halal-food-guide-bangkok-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/halal-food-guide-bangkok-bangladesh" />
+    <lastmod>2026-06-15T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/nepal-pokhara-itinerary-bangladesh</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/nepal-pokhara-itinerary-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/nepal-pokhara-itinerary-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/nepal-pokhara-itinerary-bangladesh" />
+    <lastmod>2026-06-17T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/dual-currency-card-endorsement-bangladesh</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/dual-currency-card-endorsement-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/dual-currency-card-endorsement-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/dual-currency-card-endorsement-bangladesh" />
+    <lastmod>2026-09-26T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/maldives-budget-trip-bangladesh-maafushi</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/maldives-budget-trip-bangladesh-maafushi" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/maldives-budget-trip-bangladesh-maafushi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/maldives-budget-trip-bangladesh-maafushi" />
+    <lastmod>2026-09-22T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/singapore-visa-guide-bangladesh-agents</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/singapore-visa-guide-bangladesh-agents" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/singapore-visa-guide-bangladesh-agents" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/singapore-visa-guide-bangladesh-agents" />
+    <lastmod>2026-09-24T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/top-budget-family-destinations-from-dhaka</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/top-budget-family-destinations-from-dhaka" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/top-budget-family-destinations-from-dhaka" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/top-budget-family-destinations-from-dhaka" />
+    <lastmod>2026-09-26T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/dhaka-airport-outbound-immigration-checklist-noc-go</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/dhaka-airport-outbound-immigration-checklist-noc-go" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/dhaka-airport-outbound-immigration-checklist-noc-go" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/dhaka-airport-outbound-immigration-checklist-noc-go" />
+    <lastmod>2026-09-26T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" />
+    <lastmod>2026-09-26T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" />
+    <lastmod>2026-09-26T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/hajj-registration-bangladesh-government-vs-private-package-cost</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/hajj-registration-bangladesh-government-vs-private-package-cost" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/hajj-registration-bangladesh-government-vs-private-package-cost" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/hajj-registration-bangladesh-government-vs-private-package-cost" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" />
+    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" />
     <lastmod>2026-09-27T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
