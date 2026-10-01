@@ -5,25 +5,22 @@ import { Globe } from "lucide-react";
 interface LanguageSwitcherProps {
   lang: Language;
   onToggle: (newLang: Language) => void;
-  /** English URL of the current page, e.g. "/umrah" — real href for crawlers. */
-  enHref?: string;
-  /** Bengali URL of the current page, e.g. "/bn/umrah". */
-  bnHref?: string;
+  /**
+   * Real, crawlable destination URLs for each locale (e.g. "/umrah" and
+   * "/bn/umrah"). Rendering these as <a href> with hrefLang lets search engines
+   * discover the Bengali counterpart of every page and reinforces the hreflang
+   * cluster with on-page links, while onClick keeps switching instant (SPA).
+   */
+  enHref: string;
+  bnHref: string;
   compact?: boolean;
 }
 
-/**
- * Both locales are real URLs (/umrah and /bn/umrah), so the switcher renders
- * anchors — not buttons. A <button onClick> is invisible to Googlebot, which is
- * why the Bengali pages were previously uncrawlable despite existing content.
- * The click handler keeps SPA behaviour (no full reload) while the href keeps
- * the link crawlable and "open in new tab" functional.
- */
 export function LanguageSwitcher({
   lang,
   onToggle,
-  enHref = "/",
-  bnHref = "/bn",
+  enHref,
+  bnHref,
   compact = false,
 }: LanguageSwitcherProps) {
   const baseClass = `px-2 py-0.5 rounded-md transition-all cursor-pointer flex items-center gap-1 ${
@@ -34,6 +31,7 @@ export function LanguageSwitcher({
     <div className="inline-flex items-center rounded-lg bg-white/10 p-0.5 border border-white/15 text-[11px] font-medium select-none">
       <a
         href={enHref}
+        hrefLang="en-bd"
         onClick={(event) => {
           event.preventDefault();
           onToggle("en");
@@ -52,6 +50,7 @@ export function LanguageSwitcher({
 
       <a
         href={bnHref}
+        hrefLang="bn-bd"
         onClick={(event) => {
           event.preventDefault();
           onToggle("bn");

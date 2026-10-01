@@ -47,11 +47,14 @@ import {
   getLocalizedVisas,
 } from "../src/data/bengaliContent";
 import {
+  BN_BREADCRUMB_LABELS,
   hasBengaliCounterpart,
+  localizePublicSiteUrl,
+  siteUrl,
   toBengaliPath,
   toEnglishBasePath,
 } from "../src/utils/localeRoutes";
-import { BENGALI_SEO_COPY } from "../src/utils/seoCopy";
+import { BENGALI_SEO_COPY, getBengaliSeoCopy } from "../src/utils/seoCopy";
 
 const ROOT_DIR = process.cwd();
 const PUBLIC_DIR = path.join(ROOT_DIR, "public");
@@ -1823,23 +1826,6 @@ function buildBengaliBody(
   return `<article>${parts.join("")}</article>`;
 }
 
-/** Bengali breadcrumb labels for the hub crumbs used by the English routes. */
-const BN_BREADCRUMB_LABELS: Record<string, string> = {
-  Home: "হোম",
-  "Flight Guides": "ফ্লাইট গাইড",
-  "Hotel Guides": "হোটেল গাইড",
-  "Hotel Neighborhoods": "হোটেল এলাকা",
-  "Visa Guides": "ভিসা গাইড",
-  Destinations: "ডেস্টিনেশন",
-  "Trip Costs": "ভ্রমণ খরচ",
-  "Travel Blog": "ট্রাভেল ব্লগ",
-  "Umrah & Hajj Hub": "উমরাহ ও হজ",
-  "Travel Tools": "ভ্রমণ টুলস",
-  "Pre-Departure & Complete Sitemap": "প্রস্থান-পূর্ব প্রস্তুতি ও সাইটম্যাপ",
-  "Contact Us": "যোগাযোগ",
-  "Attractions & Passes": "অভিজ্ঞতা ও টিকিট",
-};
-
 /**
  * Hub/static pages have no data-driven Bengali metadata, so their copy comes
  * from BENGALI_SEO_COPY (src/utils/seoCopy.ts). Returns null when the path has
@@ -1929,7 +1915,7 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
       if (isLast) return { name: copy.h1, url: canonicalUrl };
       return {
         name: BN_BREADCRUMB_LABELS[crumb.name] || crumb.name,
-        url: index === 0 ? bnHomeUrl : toBengaliPath(toEnglishBasePath(crumb.url)),
+        url: index === 0 ? bnHomeUrl : localizePublicSiteUrl(crumb.url, "bn"),
       };
     });
 
@@ -1953,6 +1939,148 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           inLanguage: "bn-BD",
         })
       );
+    } else if (englishPath === "/umrah") {
+      const bnUmrahFaq = stripContext(
+        generateFAQSchema(getLocalizedHajjFaqs("bn"), {
+          url: canonicalUrl,
+          name: copy.title,
+        })
+      );
+      bnUmrahFaq["@id"] = `${canonicalUrl}#faq`;
+      bnUmrahFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+      bnUmrahFaq["inLanguage"] = "bn-BD";
+      extraGraphNodes.push(bnUmrahFaq);
+    } else if (englishPath === "/flights") {
+      extraGraphNodes.push(
+        collectionPageSchema({
+          url: canonicalUrl,
+          name: copy.title,
+          description: copy.description,
+          inLanguage: "bn-BD",
+          items: getLocalizedFlights("bn").map((r) => ({
+            name:
+              getBengaliSeoCopy(`/flights/${r.id}`)?.title ||
+              `${r.from} থেকে ${r.to} ফ্লাইট গাইড`,
+            url: siteUrl(`/flights/${r.id}`, "bn"),
+            description: r.quickAnswer,
+          })),
+        })
+      );
+    } else if (englishPath === "/hotels") {
+      extraGraphNodes.push(
+        collectionPageSchema({
+          url: canonicalUrl,
+          name: copy.title,
+          description: copy.description,
+          inLanguage: "bn-BD",
+          items: getLocalizedHotels("bn").map((h) => ({
+            name:
+              getBengaliSeoCopy(`/hotels/${h.id}`)?.title ||
+              `${h.city} হোটেল গাইড (${h.country})`,
+            url: siteUrl(`/hotels/${h.id}`, "bn"),
+            description: h.quickAnswer,
+          })),
+        })
+      );
+    } else if (englishPath === "/visa") {
+      extraGraphNodes.push(
+        collectionPageSchema({
+          url: canonicalUrl,
+          name: copy.title,
+          description: copy.description,
+          inLanguage: "bn-BD",
+          items: getLocalizedVisas("bn").map((v) => ({
+            name:
+              getBengaliSeoCopy(`/visa/${v.id}`)?.title ||
+              `${v.country} ভিসা গাইড`,
+            url: siteUrl(`/visa/${v.id}`, "bn"),
+            description: v.quickAnswer,
+          })),
+        })
+      );
+    } else if (englishPath === "/costs") {
+      extraGraphNodes.push(
+        collectionPageSchema({
+          url: canonicalUrl,
+          name: copy.title,
+          description: copy.description,
+          inLanguage: "bn-BD",
+          items: getLocalizedCosts("bn").map((c) => ({
+            name:
+              getBengaliSeoCopy(`/costs/${c.id}`)?.title ||
+              `${c.country} ভ্রমণ খরচ (BDT)`,
+            url: siteUrl(`/costs/${c.id}`, "bn"),
+            description: c.quickAnswer,
+          })),
+        })
+      );
+    } else if (englishPath === "/blog") {
+      extraGraphNodes.push(
+        collectionPageSchema({
+          url: canonicalUrl,
+          name: copy.title,
+          description: copy.description,
+          inLanguage: "bn-BD",
+          items: getLocalizedBlogs("bn").map((p) => ({
+            name: p.title,
+            url: siteUrl(`/blog/${p.slug}`, "bn"),
+            description: p.summary,
+          })),
+        })
+      );
+    } else if (englishPath === "/tools") {
+      extraGraphNodes.push(
+        serviceSchema({
+          url: canonicalUrl,
+          idSuffix: "service-travel-tools",
+          name: "Bangladesh Outbound Currency, Visa Odds & Flight Delay Claim Tools",
+          description: copy.description,
+          serviceType: "Travel Planning & Flight Compensation Utility",
+        })
+      );
+    } else if (englishPath === "/contact") {
+      extraGraphNodes.push(
+        serviceSchema({
+          url: canonicalUrl,
+          idSuffix: "service-visa-assistance",
+          name: "Bangladesh Outbound Visa Assistance & BDT Booking Desk",
+          description:
+            "Visa checklist review, document preparation, and flight/hotel booking in Bangladeshi Taka via bKash or bank transfer for Bangladeshi passport holders.",
+          serviceType: "Visa Assistance",
+        })
+      );
+    } else if (englishPath === "/experiences") {
+      extraGraphNodes.push(
+        productOfferSchema({
+          url: canonicalUrl,
+          idSuffix: "product-airalo-saudi-esim",
+          name: "Saudi Arabia Travel eSIM for Umrah (5 GB / 30 days)",
+          description:
+            "Prepaid data eSIM covering Makkah, Madinah and Jeddah, activated before departure from Dhaka.",
+          sku: "airalo-saudi-5gb-30d",
+          brandName: "Airalo",
+          priceBdt: 2100,
+        }),
+        productOfferSchema({
+          url: canonicalUrl,
+          idSuffix: "product-tiqets-paris-pass",
+          name: "Paris Louvre, Eiffel Tower & Seine River Skip-the-Line Bundle",
+          description:
+            "Official mobile-entry attraction bundle for Bangladeshi Schengen visa travelers visiting Paris.",
+          sku: "tiqets-paris-bundle-2026",
+          brandName: "Tiqets",
+          priceBdt: 9800,
+        })
+      );
+    } else if (
+      segments.length === 2 &&
+      ["flights", "hotels", "visa", "costs"].includes(segments[0])
+    ) {
+      for (const node of en.extraGraphNodes) {
+        if (node["@type"] !== "FAQPage") {
+          extraGraphNodes.push(node);
+        }
+      }
     }
 
     bnRoutes.push({
