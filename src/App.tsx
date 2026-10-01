@@ -895,13 +895,6 @@ export default function App() {
   const [blogCategoryFilter, setBlogCategoryFilter] = useState<string>("all");
   const [blogSearchQuery, setBlogSearchQuery] = useState<string>("");
 
-  // Home Page Global Search Hub States (around Real-time ticket search / Search Jet Fares from Dhaka)
-  const [homeSearchEngineTab, setHomeSearchEngineTab] = useState<"flights" | "hotels">("flights");
-  const [homeOriginCity, setHomeOriginCity] = useState<string>("Dhaka (DAC)");
-  const [homeDestCity, setHomeDestCity] = useState<string>("Kathmandu (KTM)");
-  const [homeHotelCity, setHomeHotelCity] = useState<string>("Makkah");
-  const [homeCustomSearchInput, setHomeCustomSearchInput] = useState<string>("");
-
   // Track third-party Travelpayouts script initialization for perceived performance skeletons
   const [areTpScriptsReady, setAreTpScriptsReady] = useState<boolean>(() =>
     typeof window === "undefined"
@@ -2606,249 +2599,36 @@ export default function App() {
                 </p>
               </div>
 
-              {/* Global Search Bar & Hub Selector directly under 'Search Jet Fares from Dhaka' */}
-              <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-md space-y-4">
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setAreTpScriptsReady(true);
-                        setHomeSearchEngineTab("flights");
-                      }}
-                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                        homeSearchEngineTab === "flights"
-                          ? "bg-brand-navy text-[#F6B73C] shadow-sm"
-                          : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                      }`}
-                    >
-                      <span>✈️</span>
-                      <span>{isBn ? "গ্লোবাল ফ্লাইট স্ক্যানার (যেকোনো দেশ)" : "Global Flight Scanner (Any Country)"}</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setAreTpScriptsReady(true);
-                        setHomeSearchEngineTab("hotels");
-                      }}
-                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                        homeSearchEngineTab === "hotels"
-                          ? "bg-brand-navy text-[#F6B73C] shadow-sm"
-                          : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                      }`}
-                    >
-                      <span>🏨</span>
-                      <span>{isBn ? "গ্লোবাল হোটেল ও স্টে সার্চ" : "Global Hotel & Stay Finder"}</span>
-                    </button>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-2">
-                    <a
-                      href={`/travelpayouts-wl.html?origin=${encodeURIComponent(homeOriginCity)}&destination=${encodeURIComponent(homeDestCity)}&standalone=1`}
-                      target="_blank"
-                      rel="noopener noreferrer sponsored"
-                      className="inline-flex items-center gap-1.5 text-[11px] font-bold bg-[#0B192C] hover:bg-slate-800 text-[#F6B73C] px-3 py-1.5 rounded-lg border border-[#F6B73C]/40 transition-colors"
-                    >
-                      <span>🌐</span>
-                      <span>{isBn ? "উড়াল হোয়াইট-লেবেল সার্চ (নতুন ট্যাব)" : "Open URAL White-Label Search"}</span>
-                      <span>↗</span>
-                    </a>
-                    <a
-                      href={`https://search.hotellook.com/?marker=675992&trs=540277&language=en&destination=${encodeURIComponent(homeHotelCity)}`}
-                      target="_blank"
-                      rel="noopener noreferrer sponsored"
-                      className="inline-flex items-center gap-1.5 text-[11px] font-bold bg-emerald-50 hover:bg-emerald-100 text-emerald-900 px-3 py-1.5 rounded-lg border border-emerald-300 transition-colors"
-                    >
-                      <span>🏨</span>
-                      <span>{isBn ? "লাইভ হোটেল রেট (Hotellook)" : "Live Global Hotels"}</span>
-                      <span>↗</span>
-                    </a>
-                  </div>
-                </div>
-
-                {/* Universal Quick Global Destination Input */}
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const q = homeCustomSearchInput.trim();
-                    if (!q) return;
-                    setAreTpScriptsReady(true);
-                    if (homeSearchEngineTab === "hotels") {
-                      setHomeHotelCity(q);
-                    } else {
-                      setHomeDestCity(q);
-                      setHomeHotelCity(q.split(" (")[0]);
-                    }
-                  }}
-                  className="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-center"
-                >
-                  <div className="md:col-span-3">
-                    <label htmlFor="home-global-origin" className="block text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold mb-1">
-                      {isBn ? "যাত্রা শুরুর শহর (From)" : "Departure City / Airport"}
-                    </label>
-                    <input
-                      id="home-global-origin"
-                      type="text"
-                      value={homeOriginCity}
-                      onChange={(e) => setHomeOriginCity(e.target.value)}
-                      placeholder="Dhaka (DAC), London (LHR)..."
-                      className="w-full px-3 py-2 text-xs sm:text-sm font-semibold bg-slate-50 border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                    />
-                  </div>
-                  <div className="md:col-span-6">
-                    <label htmlFor="home-global-destination" className="block text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold mb-1">
-                      {homeSearchEngineTab === "flights"
-                        ? isBn
-                          ? "গন্তব্য শহর, দেশ বা এয়ারপোর্ট কোড (যেমন: London, Paris, JFK, JED)"
-                          : "Search Any Global Destination City, Country, or IATA Code (Europe, USA, UK, Middle East, Asia)"
-                        : isBn
-                        ? "যেকোনো শহরের হোটেল খুঁজুন (যেমন: Makkah, Paris, Dubai, Bangkok)"
-                        : "Type Any Global City or Landmark for Hotels (Makkah, Paris, Dubai, London, New York...)"}
-                    </label>
-                    <input
-                      id="home-global-destination"
-                      type="text"
-                      value={homeCustomSearchInput}
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        setHomeCustomSearchInput(val);
-                        if (val.trim().length >= 2) {
-                          if (homeSearchEngineTab === "hotels") {
-                            setHomeHotelCity(val.trim());
-                          } else {
-                            setHomeDestCity(val.trim());
-                          }
-                        }
-                      }}
-                      placeholder={
-                        homeSearchEngineTab === "flights"
-                          ? "Type any destination: London (LHR), Paris (CDG), New York (JFK), Jeddah (JED), Rome (FCO)..."
-                          : "Type any hotel city: Makkah, Madinah, Paris, Dubai, Bangkok, Istanbul, New York..."
-                      }
-                      className="w-full px-3.5 py-2 text-xs sm:text-sm font-semibold bg-slate-50 border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                    />
-                  </div>
-                  <div className="md:col-span-3 pt-0 md:pt-4 flex gap-2">
-                    <button
-                      type="submit"
-                      className="w-full py-2.5 px-4 bg-[#F6B73C] hover:bg-amber-400 text-brand-navy font-black text-xs sm:text-sm rounded-xl shadow-xs transition-colors cursor-pointer flex items-center justify-center gap-1.5"
-                    >
-                      <span>🔍</span>
-                      <span>
-                        {homeSearchEngineTab === "flights"
-                          ? isBn
-                            ? "ফ্লাইট খুঁজুন"
-                            : "Apply Global Route"
-                          : isBn
-                          ? "হোটেল খুঁজুন"
-                          : "Apply Hotel City"}
-                      </span>
-                    </button>
-                  </div>
-                </form>
-
-                {/* One-Click Global Hub Chips */}
-                <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 mr-1">
-                    {isBn ? "জনপ্রিয় গ্লোবাল হাব:" : "Popular Global Hubs:"}
-                  </span>
-                  {[
-                    { label: "🇸🇦 Jeddah / Makkah", flight: "Jeddah (JED)", hotel: "Makkah" },
-                    { label: "🇸🇦 Madinah", flight: "Madinah (MED)", hotel: "Madinah" },
-                    { label: "🇦🇪 Dubai", flight: "Dubai (DXB)", hotel: "Dubai" },
-                    { label: "🇬🇧 London", flight: "London (LHR)", hotel: "London" },
-                    { label: "🇫🇷 Paris", flight: "Paris (CDG)", hotel: "Paris" },
-                    { label: "🇺🇸 New York", flight: "New York (JFK)", hotel: "New York" },
-                    { label: "🇹🇷 Istanbul", flight: "Istanbul (IST)", hotel: "Istanbul" },
-                    { label: "🇮🇹 Rome", flight: "Rome (FCO)", hotel: "Rome" },
-                    { label: "🇨🇦 Toronto", flight: "Toronto (YYZ)", hotel: "Toronto" },
-                    { label: "🇹🇭 Bangkok", flight: "Bangkok (BKK)", hotel: "Bangkok" },
-                    { label: "🇲🇾 Kuala Lumpur", flight: "Kuala Lumpur (KUL)", hotel: "Kuala Lumpur" },
-                    { label: "🇳🇵 Kathmandu", flight: "Kathmandu (KTM)", hotel: "Kathmandu" },
-                  ].map((hub) => {
-                    const isActive =
-                      homeSearchEngineTab === "flights"
-                        ? homeDestCity.toLowerCase().includes(hub.flight.split(" (")[0].toLowerCase())
-                        : homeHotelCity.toLowerCase().includes(hub.hotel.toLowerCase());
-                    return (
-                      <button
-                        key={hub.label}
-                        type="button"
-                        onClick={() => {
-                          setAreTpScriptsReady(true);
-                          setHomeDestCity(hub.flight);
-                          setHomeHotelCity(hub.hotel);
-                          setHomeCustomSearchInput(
-                            homeSearchEngineTab === "flights" ? hub.flight : hub.hotel
-                          );
-                        }}
-                        className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border transition-all cursor-pointer ${
-                          isActive
-                            ? "bg-brand-navy text-[#F6B73C] border-brand-navy shadow-2xs"
-                            : "bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200"
-                        }`}
-                      >
-                        {hub.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-2 sm:p-5 shadow-2xl w-full">
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-3 px-2">
+              <div className="bg-brand-navy border border-slate-800 rounded-3xl p-2 sm:p-4 shadow-2xl w-full">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5 px-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-wider">
-                      {homeSearchEngineTab === "flights"
-                        ? t.liveSearchBoxHeader
-                        : isBn
-                        ? "উড়াল গ্লোবাল হোটেল ও ফ্লাইট সার্চ ইঞ্জিন"
-                        : "URAL GLOBAL HOTEL & FLIGHT SEARCH ENGINE"}
-                    </span>
-                    <span className="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700 font-mono">
-                      {homeSearchEngineTab === "flights"
-                        ? `${homeOriginCity} → ${homeDestCity}`
-                        : `🏨 ${homeHotelCity}`}
+                    <span className="w-2 h-2 rounded-full bg-[#F6B73C]" />
+                    <span className="text-[11px] font-mono font-bold text-[#F6B73C] uppercase tracking-wider">
+                      {t.liveSearchBoxHeader}
                     </span>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => openPriceAlert(homeDestCity || "Bangkok (BKK)")}
-                    className="inline-flex items-center gap-1.5 text-xs text-brand-ivory hover:text-white bg-brand-emerald/15 hover:bg-brand-emerald/25 px-2.5 py-1 rounded-md border border-brand-emerald/30 font-medium transition-colors cursor-pointer"
-                  >
-                    <span>🔔</span>
-                    <span className="hidden sm:inline">{t.setPriceAlertBtn}</span>
-                    <span className="sm:hidden">Price Alert</span>
-                  </button>
+                  <span className="text-[11px] font-mono text-slate-300 hidden sm:inline">
+                    {isBn
+                      ? "৭২০+ এয়ারলাইন্স · নতুন ট্যাবে লাইভ ফলাফল"
+                      : "720+ Global Airlines · Opens Live Results in New Tab"}
+                  </span>
                 </div>
                 <div className="text-slate-900">
                   {areTpScriptsReady ? (
                     <React.Suspense
                       fallback={
                         <TravelpayoutsWidgetSkeleton
-                          variant={homeSearchEngineTab}
+                          variant="flights"
                           isBn={isBn}
                           onInteract={() => setAreTpScriptsReady(true)}
                         />
                       }
                     >
-                      {homeSearchEngineTab === "flights" ? (
-                        <TravelpayoutsWidget
-                          origin={homeOriginCity}
-                          destination={homeDestCity}
-                        />
-                      ) : (
-                        <TravelpayoutsCustomWidget
-                          initialTab="hotels"
-                          initialFrom={homeOriginCity}
-                          initialTo={homeDestCity}
-                          initialHotelCity={homeHotelCity}
-                        />
-                      )}
+                      <TravelpayoutsWidget />
                     </React.Suspense>
                   ) : (
                     <TravelpayoutsWidgetSkeleton
-                      variant={homeSearchEngineTab}
+                      variant="flights"
                       isBn={isBn}
                       onInteract={() => setAreTpScriptsReady(true)}
                     />
@@ -3045,29 +2825,26 @@ export default function App() {
             </div>
 
             {/* 🟦 SECTION 4: HOTEL SEARCH ENTRY */}
-            <div className="relative rounded-3xl overflow-hidden bg-brand-navy text-white p-8 md:p-12 shadow-xl border border-slate-800">
+            <div id="global-hotel-search" className="relative rounded-3xl overflow-hidden bg-brand-navy text-white p-6 sm:p-8 md:p-10 shadow-xl border border-slate-800">
               
-              <div className="max-w-3xl mx-auto text-center space-y-3 mb-8">
+              <div className="max-w-3xl mx-auto text-center space-y-2.5 mb-6">
                 <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/20 px-3 py-1 rounded-full">
-                  {isBn ? "🏨 আপনার সফরের জন্য সঠিক হোটেল খুঁজুন" : "🏨 Find the right hotel for your trip"}
+                  {isBn ? "🏨 গ্লোবাল হোটেল ও ফ্যামিলি স্টে সার্চ" : "🏨 Global Hotel & Stay Finder"}
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-black text-white">
                   {isBn
-                    ? "Kathmandu, Bangkok, Kuala Lumpur ও Dubai-এর হোটেল ভাড়া তুলনা করুন"
-                    : "Compare Hotels in Kathmandu, Bangkok, KL & Dubai"}
+                    ? "মক্কা, দুবাই, ব্যাংকক, কুয়ালালামপুর, প্যারিস ও বিশ্বের যেকোনো শহরের হোটেল তুলনা করুন"
+                    : "Compare Hotels & Family Stays Worldwide (Asia, Middle East, Europe & USA)"}
                 </h3>
-                <p className="text-xs text-slate-300 leading-relaxed max-w-xl mx-auto">
+                <p className="text-xs text-slate-300 leading-relaxed max-w-2xl mx-auto">
                   {isBn
-                    ? "শহর ও তারিখ দিয়ে আসল ভাড়া দেখুন। Thamel-এর বাজেট রুম কিংবা Pratunam-এর ফ্যামিলি স্যুট—সব অপশন তুলনা করে সরাসরি বুক করুন।"
-                    : "Search by city and date to see real prices. Budget room in Thamel or a family suite in Pratunam — compare options and book directly."}
+                    ? "যেকোনো শহর ও তারিখ দিয়ে আসল হোটেল ভাড়া দেখুন। মক্কা হারাম ভিউ, Thamel-এর বাজেট রুম কিংবা Pratunam ও প্যারিসের ফ্যামিলি স্যুট—সব অপশন তুলনা করে সরাসরি বুক করুন।"
+                    : "Type any city worldwide or pick a popular hub below to compare live hotel rates. From Makkah Haram-view suites and Bangkok Pratunam stays to Paris, London, and New York hotels."}
                 </p>
               </div>
 
-              {/* HOTEL WIDGET INTEGRATION: Visually distinct & secondary to flights widget */}
-              <div className="w-full text-slate-900 bg-white rounded-2xl p-2 sm:p-4 shadow-xl">
-                <span className="text-[10px] font-mono font-bold text-slate-500 uppercase block mb-3 px-2">
-                  {isBn ? "🏨 হোটেল সার্চ (Search Hotels)" : "🏨 Search Hotels"}
-                </span>
+              {/* DEDICATED GLOBAL HOTEL WIDGET (Single clean bar, no flight tab duplication) */}
+              <div className="w-full text-slate-900">
                 {areTpScriptsReady ? (
                   <React.Suspense
                     fallback={
@@ -3078,7 +2855,7 @@ export default function App() {
                       />
                     }
                   >
-                    <TravelpayoutsCustomWidget initialTab="hotels" />
+                    <TravelpayoutsCustomWidget initialTab="hotels" hotelsOnly={true} />
                   </React.Suspense>
                 ) : (
                   <TravelpayoutsWidgetSkeleton

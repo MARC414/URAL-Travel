@@ -37,15 +37,14 @@ const CURRENCY_CONFIG = {
 const BANGLADESH_AIRPORT_CODES = new Set(['DAC', 'CGP', 'ZYL', 'CXB', 'RJH', 'SPD', 'JSR', 'BZL']);
 
 const POPULAR_ROUTES = [
-  { label: 'Dhaka → Kathmandu', origin: 'DAC', destination: 'KTM', flag: '🇳🇵', badge: 'Visa on Arrival' },
-  { label: 'Dhaka → Bangkok', origin: 'DAC', destination: 'BKK', flag: '🇹🇭', badge: '2h 30m Direct' },
-  { label: 'Dhaka → Kuala Lumpur', origin: 'DAC', destination: 'KUL', flag: '🇲🇾', badge: 'Easy e-Visa' },
-  { label: 'Dhaka → Dubai', origin: 'DAC', destination: 'DXB', flag: '🇦🇪', badge: '4 Daily Direct' },
-  { label: 'Dhaka → Jeddah (Umrah)', origin: 'DAC', destination: 'JED', flag: '🇸🇦', badge: 'Direct Umrah' },
-  { label: 'Dhaka → Singapore', origin: 'DAC', destination: 'SIN', flag: '🇸🇬', badge: '4h 05m Direct' },
-  { label: 'Dhaka → Maldives', origin: 'DAC', destination: 'MLE', flag: '🇲🇻', badge: 'Free Entry Visa' },
-  { label: 'Dhaka → London', origin: 'DAC', destination: 'LHR', flag: '🇬🇧', badge: 'Global Route' },
-  { label: 'London → New York', origin: 'LHR', destination: 'JFK', flag: '🇺🇸', badge: 'Global Route' },
+  { label: 'Kathmandu', origin: 'DAC', destination: 'KTM', flag: '🇳🇵', badge: 'Visa on Arrival' },
+  { label: 'Bangkok', origin: 'DAC', destination: 'BKK', flag: '🇹🇭', badge: '2h 30m Direct' },
+  { label: 'Kuala Lumpur', origin: 'DAC', destination: 'KUL', flag: '🇲🇾', badge: 'Easy e-Visa' },
+  { label: 'Jeddah / Umrah', origin: 'DAC', destination: 'JED', flag: '🇸🇦', badge: 'Direct Umrah' },
+  { label: 'Dubai', origin: 'DAC', destination: 'DXB', flag: '🇦🇪', badge: '4 Daily Direct' },
+  { label: 'London', origin: 'DAC', destination: 'LHR', flag: '🇬🇧', badge: 'Global Route' },
+  { label: 'Paris', origin: 'DAC', destination: 'CDG', flag: '🇫🇷', badge: 'Global Route' },
+  { label: 'New York', origin: 'DAC', destination: 'JFK', flag: '🇺🇸', badge: 'Global Route' },
 ];
 
 const AIRPORTS_DIRECTORY = [
@@ -982,6 +981,7 @@ export default function TravelpayoutsWidget({
   defaultOrigin = 'DAC',
   defaultDestination = 'KTM',
   showQuickRoutes = true,
+  showInlineResults = false,
 }) {
   const instanceId = useId();
   const originInputId = `${instanceId}-origin-input`;
@@ -1235,7 +1235,24 @@ export default function TravelpayoutsWidget({
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    executeSearch({ scrollToResults: true });
+    if (activeDropdown === 'origin' && originQuery.trim()) {
+      const resolvedOrigin = resolveTypedPlaceIfAny(originInfo, originQuery, 'origin');
+      setOriginInfo(resolvedOrigin);
+      setOriginQuery('');
+      setActiveDropdown(null);
+      return;
+    }
+    if (activeDropdown === 'dest' && destQuery.trim()) {
+      const resolvedDest = resolveTypedPlaceIfAny(destInfo, destQuery, 'dest');
+      setDestInfo(resolvedDest);
+      setDestQuery('');
+      setActiveDropdown(null);
+      return;
+    }
+    setActiveDropdown(null);
+    if (showInlineResults) {
+      executeSearch({ scrollToResults: true });
+    }
   };
 
   const handleQuickRouteSelect = (route) => {
@@ -1243,11 +1260,16 @@ export default function TravelpayoutsWidget({
     const d = findAirportInfo(route.destination);
     setOriginInfo(o);
     setDestInfo(d);
-    executeSearch({
-      nextOrigin: o,
-      nextDest: d,
-      scrollToResults: false,
-    });
+    setOriginQuery('');
+    setDestQuery('');
+    setActiveDropdown(null);
+    if (showInlineResults) {
+      executeSearch({
+        nextOrigin: o,
+        nextDest: d,
+        scrollToResults: false,
+      });
+    }
   };
 
   const handleSwapLocations = () => {
@@ -1340,6 +1362,37 @@ export default function TravelpayoutsWidget({
     return `/travelpayouts-wl.html?origin=${committedQuery.origin.code}&destination=${committedQuery.destination.code}&flightSearch=${searchCode}&currency=${currency}&standalone=1`;
   }, [committedQuery.origin.code, committedQuery.destination.code, searchCode, currency]);
 
+  const effectiveOrigin = useMemo(() => {
+    if (activeDropdown === 'origin' && originQuery.trim()) {
+      const matches = getFilteredAirports(originQuery, 'origin');
+      return matches.length > 0 ? matches[0] : findAirportInfo(originQuery);
+    }
+    return originInfo;
+  }, [activeDropdown, originQuery, originInfo, originRemoteSuggestions]);
+
+  const effectiveDest = useMemo(() => {
+    if (activeDropdown === 'dest' && destQuery.trim()) {
+      const matches = getFilteredAirports(destQuery, 'dest');
+      return matches.length > 0 ? matches[0] : findAirportInfo(destQuery);
+    }
+    return destInfo;
+  }, [activeDropdown, destQuery, destInfo, destRemoteSuggestions]);
+
+  const liveFormSearchCode = useMemo(() => {
+    return buildAviasalesSearchCode(
+      effectiveOrigin.code,
+      effectiveDest.code,
+      departDate,
+      returnDate,
+      tripType,
+      passengers
+    );
+  }, [effectiveOrigin.code, effectiveDest.code, departDate, returnDate, tripType, passengers]);
+
+  const liveFormUralWlUrl = useMemo(() => {
+    return `/travelpayouts-wl.html?origin=${effectiveOrigin.code}&destination=${effectiveDest.code}&flightSearch=${liveFormSearchCode}&currency=${currency}&standalone=1`;
+  }, [effectiveOrigin.code, effectiveDest.code, liveFormSearchCode, currency]);
+
   const formatMoney = (bdtAmount) => {
     const cfg = CURRENCY_CONFIG[currency] || CURRENCY_CONFIG.BDT;
     const converted = Math.round(bdtAmount * cfg.rateFromBdt);
@@ -1356,74 +1409,24 @@ export default function TravelpayoutsWidget({
   return (
     <div
       ref={formWrapperRef}
-      className="w-full overflow-visible rounded-xl bg-white shadow-sm border border-slate-200/90 text-slate-900"
+      className="w-full overflow-visible rounded-2xl bg-white shadow-xl border border-slate-200/90 text-slate-900"
     >
-      {/* 1. POPULAR ROUTES & GLOBAL CURRENCY BAR */}
-      <div className="bg-slate-50 border-b border-slate-200/80 px-3 sm:px-5 py-2.5 flex flex-wrap items-center justify-between gap-2 rounded-t-xl">
-        {showQuickRoutes ? (
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-[11px] font-semibold text-slate-500 mr-1">
-              Popular Routes:
-            </span>
-            {POPULAR_ROUTES.map((route) => {
-              const isSelected =
-                originInfo.code === route.origin && destInfo.code === route.destination;
-              return (
-                <button
-                  key={`${route.origin}-${route.destination}`}
-                  type="button"
-                  onClick={() => handleQuickRouteSelect(route)}
-                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
-                    isSelected
-                      ? 'bg-brand-navy text-[#F6B73C] font-semibold shadow-xs'
-                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200/90'
-                  }`}
-                >
-                  <span>{route.flag}</span>
-                  <span>{route.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="text-[11px] font-semibold text-slate-600 flex items-center gap-1.5">
-            <Plane size={13} className="text-[#07C369]" />
-            <span>Global Flight Search · Search any city or airport worldwide</span>
-          </div>
-        )}
-
-        {/* Global Multi-Currency Switcher */}
-        <div className="inline-flex flex-wrap items-center bg-slate-200/70 p-0.5 rounded-lg text-xs font-semibold">
-          {Object.values(CURRENCY_CONFIG).map((curr) => (
-            <button
-              key={curr.code}
-              type="button"
-              onClick={() => setCurrency(curr.code)}
-              className={`px-2 py-1 rounded-md transition-colors cursor-pointer ${
-                currency === curr.code
-                  ? 'bg-white text-brand-navy shadow-2xs'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              {curr.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* 2. MAIN INTERACTIVE SEARCH FORM */}
-      <form onSubmit={handleFormSubmit} className="p-4 sm:p-5 bg-white border-b border-slate-200">
-        {/* Top Row: Trip Type, Cabin Class, Passengers */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-          <div className="flex flex-wrap items-center gap-2">
+      {/* MAIN UNIFIED WHITE-LABEL GLOBAL FLIGHT SEARCH BAR */}
+      <form
+        onSubmit={handleFormSubmit}
+        className={`p-4 sm:p-6 bg-white ${showInlineResults ? 'border-b border-slate-200 rounded-t-2xl' : 'rounded-2xl'}`}
+      >
+        {/* ROW 1 (Cockpit Control Strip): Trip Type, Cabin, Passengers + Currency Switcher */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
             {/* Round-trip vs One-way */}
-            <div className="inline-flex items-center bg-slate-100 p-1 rounded-lg">
+            <div className="inline-flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200/60">
               <button
                 type="button"
                 onClick={() => setTripType('roundtrip')}
-                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   tripType === 'roundtrip'
-                    ? 'bg-brand-navy text-white shadow-2xs'
+                    ? 'bg-brand-navy text-white shadow-xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -1432,9 +1435,9 @@ export default function TravelpayoutsWidget({
               <button
                 type="button"
                 onClick={() => setTripType('oneway')}
-                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   tripType === 'oneway'
-                    ? 'bg-brand-navy text-white shadow-2xs'
+                    ? 'bg-brand-navy text-white shadow-xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -1443,13 +1446,13 @@ export default function TravelpayoutsWidget({
             </div>
 
             {/* Cabin Class */}
-            <div className="inline-flex items-center bg-slate-100 p-1 rounded-lg">
+            <div className="inline-flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200/60">
               <button
                 type="button"
                 onClick={() => setCabinClass('economy')}
-                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   cabinClass === 'economy'
-                    ? 'bg-white text-slate-900 shadow-2xs'
+                    ? 'bg-white text-slate-900 shadow-2xs font-bold'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -1458,186 +1461,115 @@ export default function TravelpayoutsWidget({
               <button
                 type="button"
                 onClick={() => setCabinClass('business')}
-                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   cabinClass === 'business'
-                    ? 'bg-white text-slate-900 shadow-2xs'
+                    ? 'bg-white text-slate-900 shadow-2xs font-bold'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                Business Class
+                Business
               </button>
             </div>
-          </div>
 
-          {/* Passengers Counter */}
-          <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg">
-            <Users size={14} className="text-slate-500" />
-            <span className="text-xs font-medium text-slate-700">Passengers:</span>
-            <button
-              type="button"
-              onClick={() => setPassengers((p) => Math.max(1, p - 1))}
-              className="w-6 h-6 rounded bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 font-bold text-xs flex items-center justify-center cursor-pointer"
-              aria-label="Decrease passengers"
-            >
-              -
-            </button>
-            <span className="text-xs font-bold font-mono text-slate-900 min-w-[54px] text-center tabular-nums">
-              {passengers} {passengers === 1 ? 'Adult' : 'Adults'}
-            </span>
-            <button
-              type="button"
-              onClick={() => setPassengers((p) => Math.min(9, p + 1))}
-              className="w-6 h-6 rounded bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 font-bold text-xs flex items-center justify-center cursor-pointer"
-              aria-label="Increase passengers"
-            >
-              +
-            </button>
-          </div>
-        </div>
-
-        {/* GLOBAL INSTANT DESTINATION & AIRPORT SEARCH BAR */}
-        <div className="mb-3.5 relative">
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 bg-slate-50 border border-slate-200/90 rounded-xl p-2 focus-within:border-brand-navy focus-within:bg-white focus-within:ring-2 focus-within:ring-brand-navy/10 transition-all">
-            <div className="flex items-center gap-2 flex-1 px-2">
-              <Search size={16} className="text-brand-navy shrink-0" />
-              <input
-                type="text"
-                value={globalQuickQuery}
-                aria-label="Global destination or airport quick search"
-                placeholder="Global Quick Search: Type any city, country, or airport code worldwide (e.g. Jeddah, Makkah, Paris, London, JFK, Tokyo)..."
-                onFocus={() => setActiveDropdown('global')}
-                onChange={(e) => {
-                  setGlobalQuickQuery(e.target.value);
-                  setActiveDropdown('global');
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && globalQuickQuery.trim()) {
-                    e.preventDefault();
-                    const picked = resolveTypedPlaceIfAny(destInfo, globalQuickQuery, 'global');
-                    setDestInfo(picked);
-                    setGlobalQuickQuery('');
-                    setActiveDropdown(null);
-                    executeSearch({ nextDest: picked, scrollToResults: true });
-                  }
-                }}
-                className="w-full bg-transparent text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none"
-              />
-            </div>
-            <div className="flex items-center gap-1.5 shrink-0">
+            {/* Passengers Counter */}
+            <div className="inline-flex items-center gap-2 bg-slate-100/80 border border-slate-200/80 px-3 py-1.5 rounded-xl">
+              <Users size={14} className="text-brand-navy" />
               <button
                 type="button"
-                onClick={() => {
-                  if (!globalQuickQuery.trim()) {
-                    setActiveDropdown('global');
-                    return;
-                  }
-                  const picked = resolveTypedPlaceIfAny(destInfo, globalQuickQuery, 'global');
-                  setDestInfo(picked);
-                  setGlobalQuickQuery('');
-                  setActiveDropdown(null);
-                  executeSearch({ nextDest: picked, scrollToResults: true });
-                }}
-                className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] text-xs font-bold px-3.5 py-2 rounded-lg transition-colors cursor-pointer whitespace-nowrap"
+                onClick={() => setPassengers((p) => Math.max(1, p - 1))}
+                className="w-5 h-5 rounded-md bg-white border border-slate-200 text-slate-700 hover:bg-brand-navy hover:text-white font-bold text-xs flex items-center justify-center transition-colors cursor-pointer"
+                aria-label="Decrease passengers"
               >
-                Apply Destination
+                -
               </button>
-              <a
-                href={uralBrandedWlUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden lg:inline-flex items-center gap-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold px-3 py-2 rounded-lg transition-colors whitespace-nowrap"
+              <span className="text-xs font-bold font-mono text-slate-900 min-w-[54px] text-center tabular-nums">
+                {passengers} {passengers === 1 ? 'Adult' : 'Adults'}
+              </span>
+              <button
+                type="button"
+                onClick={() => setPassengers((p) => Math.min(9, p + 1))}
+                className="w-5 h-5 rounded-md bg-white border border-slate-200 text-slate-700 hover:bg-brand-navy hover:text-white font-bold text-xs flex items-center justify-center transition-colors cursor-pointer"
+                aria-label="Increase passengers"
               >
-                <span>Full-Screen White-Label</span>
-                <ExternalLink size={12} />
-              </a>
+                +
+              </button>
             </div>
           </div>
 
-          {activeDropdown === 'global' && (
-            <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-72 overflow-y-auto py-1">
-              <div className="px-3.5 py-1.5 text-[10px] font-semibold text-slate-400 border-b border-slate-100 flex items-center justify-between">
-                <span>Instant Global Airport & City Directory (Click to set destination & search)</span>
-                <span className="font-mono text-brand-navy">65+ Hubs + Live Global API</span>
-              </div>
-              {getFilteredAirports(globalQuickQuery, 'global').map((airport) => (
+          {/* Global Multi-Currency Switcher */}
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-semibold text-slate-400 hidden lg:inline">
+              Currency:
+            </span>
+            <div className="inline-flex flex-wrap items-center bg-slate-100 p-1 rounded-xl border border-slate-200/60 text-xs font-semibold">
+              {Object.values(CURRENCY_CONFIG).map((curr) => (
                 <button
-                  key={`global-quick-${airport.code}-${airport.city}`}
+                  key={curr.code}
                   type="button"
-                  onClick={() => {
-                    setDestInfo(airport);
-                    setGlobalQuickQuery('');
-                    setActiveDropdown(null);
-                    executeSearch({ nextDest: airport, scrollToResults: false });
-                  }}
-                  className="w-full px-3.5 py-2.5 text-left hover:bg-slate-50 flex items-center justify-between gap-2 transition-colors cursor-pointer"
+                  onClick={() => setCurrency(curr.code)}
+                  className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                    currency === curr.code
+                      ? 'bg-brand-navy text-[#F6B73C] font-bold shadow-2xs'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
                 >
-                  <div className="min-w-0">
-                    <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                      <span>{airport.flag}</span>
-                      <span>{airport.city}</span>
-                      <span className="text-slate-400 font-normal">· {airport.country}</span>
-                    </div>
-                    <div className="text-[11px] text-slate-500 truncate">{airport.name}</div>
-                  </div>
-                  <span className="text-xs font-mono font-bold text-brand-navy bg-slate-100 px-2 py-0.5 rounded shrink-0">
-                    {airport.code}
-                  </span>
+                  {curr.label}
                 </button>
               ))}
             </div>
-          )}
+          </div>
         </div>
 
-        {/* Main Inputs Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-stretch">
+        {/* ROW 2: THE ONE ELEVATED COCKPIT SEARCH BAR */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-2.5 items-stretch">
           {/* FROM AIRPORT */}
-          <div className="md:col-span-3 relative">
-            <label
-              htmlFor={originInputId}
-              className="block text-[11px] font-semibold text-slate-500 mb-1"
-            >
-              From (Origin City or Airport)
-            </label>
+          <div className="lg:col-span-3 relative">
             <div
               onClick={() => setActiveDropdown('origin')}
-              className={`w-full bg-slate-50 hover:bg-slate-100/80 border rounded-xl px-3.5 py-2.5 cursor-text transition-all ${
+              className={`h-[68px] w-full bg-slate-50/90 hover:bg-slate-100/70 border rounded-xl px-3.5 py-2 cursor-text transition-all flex flex-col justify-between ${
                 activeDropdown === 'origin'
-                  ? 'border-brand-navy ring-2 ring-brand-navy/15 bg-white'
-                  : 'border-slate-200'
+                  ? 'border-brand-navy ring-2 ring-brand-navy/15 bg-white shadow-sm'
+                  : 'border-slate-200/90'
               }`}
             >
-              <div className="flex items-center justify-between gap-2">
-                <div className="min-w-0 flex-1">
-                  <input
-                    id={originInputId}
-                    type="text"
-                    value={
-                      activeDropdown === 'origin'
-                        ? originQuery
-                        : `${originInfo.city} (${originInfo.code})`
-                    }
-                    placeholder="Type city or airport (e.g. Dhaka)"
-                    onFocus={() => {
-                      setActiveDropdown('origin');
-                      setOriginQuery('');
-                    }}
-                    onChange={(e) => setOriginQuery(e.target.value)}
-                    className="w-full bg-transparent text-sm font-bold text-slate-900 focus:outline-none truncate"
-                  />
-                  <div className="text-[11px] text-slate-500 truncate mt-0.5">
-                    {originInfo.name}
-                  </div>
-                </div>
-                <span className="shrink-0 text-xs font-mono font-bold bg-brand-navy/10 text-brand-navy px-2 py-0.5 rounded">
-                  {originInfo.code}
+              <div className="flex items-center justify-between gap-1">
+                <label
+                  htmlFor={originInputId}
+                  className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 cursor-pointer"
+                >
+                  From · Origin
+                </label>
+                <span className="text-[10px] font-mono font-bold bg-brand-navy/10 text-brand-navy px-1.5 py-0.5 rounded">
+                  {effectiveOrigin.code}
                 </span>
+              </div>
+
+              <input
+                id={originInputId}
+                type="text"
+                value={
+                  activeDropdown === 'origin'
+                    ? originQuery
+                    : `${originInfo.flag || '✈️'} ${originInfo.city} (${originInfo.code})`
+                }
+                placeholder="Type origin city or airport..."
+                onFocus={() => {
+                  setActiveDropdown('origin');
+                  setOriginQuery('');
+                }}
+                onChange={(e) => setOriginQuery(e.target.value)}
+                className="w-full bg-transparent text-sm sm:text-[15px] font-extrabold text-slate-900 placeholder:text-slate-400 placeholder:font-medium focus:outline-none truncate"
+              />
+
+              <div className="text-[11px] text-slate-500 truncate">
+                {effectiveOrigin.name}
               </div>
             </div>
 
             {/* Origin Autocomplete Dropdown */}
             {activeDropdown === 'origin' && (
-              <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-68 overflow-y-auto py-1">
-                <div className="px-3 py-1.5 text-[10px] font-semibold text-slate-400 border-b border-slate-100">
+              <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 max-h-72 overflow-y-auto py-1">
+                <div className="px-3.5 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 bg-slate-50/60">
                   Select Departure Airport (Type any city worldwide)
                 </div>
                 {getFilteredAirports(originQuery, 'origin').map((airport) => (
@@ -1649,7 +1581,7 @@ export default function TravelpayoutsWidget({
                       setOriginQuery('');
                       setActiveDropdown(null);
                     }}
-                    className="w-full px-3.5 py-2.5 text-left hover:bg-slate-50 flex items-center justify-between gap-2 transition-colors cursor-pointer"
+                    className="w-full px-3.5 py-2.5 text-left hover:bg-slate-50 flex items-center justify-between gap-2 transition-colors cursor-pointer border-b border-slate-50 last:border-0"
                   >
                     <div className="min-w-0">
                       <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
@@ -1669,73 +1601,75 @@ export default function TravelpayoutsWidget({
           </div>
 
           {/* SWAP + TO AIRPORT */}
-          <div className="md:col-span-3 relative">
+          <div className="lg:col-span-3 relative">
             <button
               type="button"
               onClick={handleSwapLocations}
               title="Swap Origin and Destination"
-              className="hidden md:flex absolute -left-4 top-8 z-20 w-7 h-7 rounded-full bg-white border border-slate-300 shadow-xs items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-white transition-colors cursor-pointer"
+              className="hidden lg:flex absolute -left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-slate-300 shadow-md items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-[#F6B73C] hover:border-brand-navy hover:rotate-180 transition-all duration-300 cursor-pointer"
             >
               <ArrowRightLeft size={13} />
             </button>
 
-            <div className="flex items-center justify-between mb-1">
-              <label
-                htmlFor={destInputId}
-                className="block text-[11px] font-semibold text-slate-500"
-              >
-                To (Destination City or Airport)
-              </label>
-              <button
-                type="button"
-                onClick={handleSwapLocations}
-                className="md:hidden text-[11px] font-semibold text-brand-navy flex items-center gap-1 cursor-pointer"
-              >
-                <ArrowRightLeft size={11} /> Swap
-              </button>
-            </div>
-
             <div
               onClick={() => setActiveDropdown('dest')}
-              className={`w-full bg-slate-50 hover:bg-slate-100/80 border rounded-xl px-3.5 py-2.5 cursor-text transition-all ${
+              className={`h-[68px] w-full bg-slate-50/90 hover:bg-slate-100/70 border rounded-xl px-3.5 py-2 cursor-text transition-all flex flex-col justify-between ${
                 activeDropdown === 'dest'
-                  ? 'border-brand-navy ring-2 ring-brand-navy/15 bg-white'
-                  : 'border-slate-200'
+                  ? 'border-brand-navy ring-2 ring-brand-navy/15 bg-white shadow-sm'
+                  : 'border-slate-200/90'
               }`}
             >
-              <div className="flex items-center justify-between gap-2">
-                <div className="min-w-0 flex-1">
-                  <input
-                    id={destInputId}
-                    type="text"
-                    value={
-                      activeDropdown === 'dest'
-                        ? destQuery
-                        : `${destInfo.city} (${destInfo.code})`
-                    }
-                    placeholder="Type city or airport (e.g. Bangkok, KTM)"
-                    onFocus={() => {
-                      setActiveDropdown('dest');
-                      setDestQuery('');
+              <div className="flex items-center justify-between gap-1">
+                <label
+                  htmlFor={destInputId}
+                  className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 cursor-pointer"
+                >
+                  To · Any Global City
+                </label>
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSwapLocations();
                     }}
-                    onChange={(e) => setDestQuery(e.target.value)}
-                    className="w-full bg-transparent text-sm font-bold text-slate-900 focus:outline-none truncate"
-                  />
-                  <div className="text-[11px] text-slate-500 truncate mt-0.5">
-                    {destInfo.name}
-                  </div>
+                    className="lg:hidden text-[10px] font-bold text-brand-navy flex items-center gap-0.5 cursor-pointer"
+                  >
+                    <ArrowRightLeft size={10} /> Swap
+                  </button>
+                  <span className="text-[10px] font-mono font-bold bg-[#F6B73C]/30 text-brand-navy px-1.5 py-0.5 rounded">
+                    {effectiveDest.code}
+                  </span>
                 </div>
-                <span className="shrink-0 text-xs font-mono font-bold bg-[#F6B73C]/25 text-brand-navy px-2 py-0.5 rounded">
-                  {destInfo.code}
-                </span>
+              </div>
+
+              <input
+                id={destInputId}
+                type="text"
+                value={
+                  activeDropdown === 'dest'
+                    ? destQuery
+                    : `${destInfo.flag || '🌍'} ${destInfo.city} (${destInfo.code})`
+                }
+                placeholder="City, country, or IATA (London, JED, JFK)..."
+                onFocus={() => {
+                  setActiveDropdown('dest');
+                  setDestQuery('');
+                }}
+                onChange={(e) => setDestQuery(e.target.value)}
+                className="w-full bg-transparent text-sm sm:text-[15px] font-extrabold text-slate-900 placeholder:text-slate-400 placeholder:font-medium focus:outline-none truncate"
+              />
+
+              <div className="text-[11px] text-slate-500 truncate">
+                {effectiveDest.name}
               </div>
             </div>
 
             {/* Destination Autocomplete Dropdown */}
             {activeDropdown === 'dest' && (
-              <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-68 overflow-y-auto py-1">
-                <div className="px-3 py-1.5 text-[10px] font-semibold text-slate-400 border-b border-slate-100">
-                  Select Destination City or Airport (Type any city worldwide)
+              <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 max-h-72 overflow-y-auto py-1">
+                <div className="px-3.5 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 bg-slate-50/60">
+                  Select Destination City or Airport Worldwide
                 </div>
                 {getFilteredAirports(destQuery, 'dest').map((airport) => (
                   <button
@@ -1746,7 +1680,7 @@ export default function TravelpayoutsWidget({
                       setDestQuery('');
                       setActiveDropdown(null);
                     }}
-                    className="w-full px-3.5 py-2.5 text-left hover:bg-slate-50 flex items-center justify-between gap-2 transition-colors cursor-pointer"
+                    className="w-full px-3.5 py-2.5 text-left hover:bg-slate-50 flex items-center justify-between gap-2 transition-colors cursor-pointer border-b border-slate-50 last:border-0"
                   >
                     <div className="min-w-0">
                       <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
@@ -1766,93 +1700,146 @@ export default function TravelpayoutsWidget({
           </div>
 
           {/* DEPARTURE & RETURN DATES */}
-          <div className="md:col-span-4 grid grid-cols-2 gap-2">
-            <div>
+          <div className="lg:col-span-4 grid grid-cols-2 gap-2.5">
+            <div className="h-[68px] bg-slate-50/90 hover:bg-slate-100/70 border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-colors">
               <label
                 htmlFor={departDateId}
-                className="block text-[11px] font-semibold text-slate-500 mb-1"
+                className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 cursor-pointer"
               >
-                Departure Date
+                Departure
               </label>
-              <div className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 flex flex-col justify-center">
+              <input
+                id={departDateId}
+                type="date"
+                value={departDate}
+                onChange={(e) => {
+                  const nextDep = e.target.value;
+                  setDepartDate(nextDep);
+                  if (returnDate && nextDep > returnDate) {
+                    setReturnDate(nextDep);
+                  }
+                }}
+                className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
+              />
+              <span className="text-[11px] text-slate-500 truncate">
+                {formatReadableDate(departDate)}
+              </span>
+            </div>
+
+            {tripType === 'roundtrip' ? (
+              <div className="h-[68px] bg-slate-50/90 hover:bg-slate-100/70 border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-colors">
+                <label
+                  htmlFor={returnDateId}
+                  className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 cursor-pointer"
+                >
+                  Return
+                </label>
                 <input
-                  id={departDateId}
+                  id={returnDateId}
                   type="date"
-                  value={departDate}
-                  onChange={(e) => {
-                    const nextDep = e.target.value;
-                    setDepartDate(nextDep);
-                    if (returnDate && nextDep > returnDate) {
-                      setReturnDate(nextDep);
-                    }
-                  }}
-                  className="w-full bg-transparent text-xs sm:text-sm font-bold text-slate-900 focus:outline-none cursor-pointer"
+                  value={returnDate}
+                  min={departDate}
+                  onChange={(e) => setReturnDate(e.target.value)}
+                  className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
                 />
-                <span className="text-[10px] text-slate-500 truncate mt-0.5">
-                  {formatReadableDate(departDate)}
+                <span className="text-[11px] text-slate-500 truncate">
+                  {formatReadableDate(returnDate)}
                 </span>
               </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor={tripType === 'roundtrip' ? returnDateId : undefined}
-                className="block text-[11px] font-semibold text-slate-500 mb-1"
+            ) : (
+              <button
+                type="button"
+                onClick={() => setTripType('roundtrip')}
+                className="h-[68px] w-full bg-slate-50/60 hover:bg-slate-100 border border-dashed border-slate-300 rounded-xl px-3.5 py-2 text-left flex flex-col justify-between transition-colors cursor-pointer"
               >
-                {tripType === 'roundtrip' ? 'Return Date' : 'Trip Mode'}
-              </label>
-              {tripType === 'roundtrip' ? (
-                <div className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 flex flex-col justify-center">
-                  <input
-                    id={returnDateId}
-                    type="date"
-                    value={returnDate}
-                    min={departDate}
-                    onChange={(e) => setReturnDate(e.target.value)}
-                    className="w-full bg-transparent text-xs sm:text-sm font-bold text-slate-900 focus:outline-none cursor-pointer"
-                  />
-                  <span className="text-[10px] text-slate-500 truncate mt-0.5">
-                    {formatReadableDate(returnDate)}
-                  </span>
-                </div>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setTripType('roundtrip')}
-                  className="w-full h-[58px] bg-slate-50 hover:bg-slate-100 border border-dashed border-slate-300 rounded-xl px-3 py-2 text-left flex flex-col justify-center transition-colors cursor-pointer"
-                >
-                  <span className="text-xs font-semibold text-slate-700">+ Add Return</span>
-                  <span className="text-[10px] text-slate-500">Save with round-trip</span>
-                </button>
-              )}
-            </div>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
+                  Return Date
+                </span>
+                <span className="text-xs sm:text-sm font-bold text-brand-navy">
+                  + Add Return
+                </span>
+                <span className="text-[11px] text-slate-500 truncate">
+                  One-way selected
+                </span>
+              </button>
+            )}
           </div>
 
-          {/* SUBMIT SEARCH BUTTON */}
-          <div className="md:col-span-2 flex flex-col justify-end">
-            <button
-              type="submit"
-              disabled={isSearching}
+          {/* PRIMARY GOLD CTA BUTTON: Opens URAL White-Label Search ONLY in New Tab */}
+          <div className="lg:col-span-2 flex">
+            <a
+              href={liveFormUralWlUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               data-testid="search-flights-submit-btn"
-              className="w-full h-[58px] bg-[#07C369] hover:bg-[#06ad5d] active:scale-[0.99] text-white font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer px-4"
+              onClick={() => {
+                if (originQuery.trim()) {
+                  setOriginInfo(effectiveOrigin);
+                  setOriginQuery('');
+                }
+                if (destQuery.trim()) {
+                  setDestInfo(effectiveDest);
+                  setDestQuery('');
+                }
+                setActiveDropdown(null);
+              }}
+              className="w-full h-[68px] bg-[#F6B73C] hover:bg-[#f5ad24] active:scale-[0.99] text-brand-navy rounded-xl shadow-md hover:shadow-lg transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer px-3 text-center group"
             >
-              {isSearching ? (
-                <>
-                  <RefreshCw size={17} className="animate-spin shrink-0" />
-                  <span>Searching...</span>
-                </>
-              ) : (
-                <>
-                  <Search size={17} className="shrink-0" />
-                  <span>Search Flights</span>
-                </>
-              )}
-            </button>
+              <div className="flex items-center gap-1.5 font-black text-sm sm:text-[15px] tracking-tight">
+                <Search size={16} className="shrink-0 stroke-[2.5]" />
+                <span>Search Flights</span>
+                <ExternalLink size={13} className="shrink-0 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </div>
+              <span className="text-[10px] font-mono font-bold text-brand-navy/75">
+                {effectiveOrigin.code} → {effectiveDest.code} · {currency}
+              </span>
+            </a>
           </div>
         </div>
+
+        {/* ROW 3: 8 QUICK-SELECT POPULAR GLOBAL HUB CHIPS */}
+        {showQuickRoutes && (
+          <div className="mt-4 pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1">
+                Popular Hubs:
+              </span>
+              {POPULAR_ROUTES.map((route) => {
+                const isSelected =
+                  originInfo.code === route.origin && destInfo.code === route.destination;
+                return (
+                  <button
+                    key={`${route.origin}-${route.destination}`}
+                    type="button"
+                    onClick={() => handleQuickRouteSelect(route)}
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer border ${
+                      isSelected
+                        ? 'bg-brand-navy text-[#F6B73C] border-brand-navy shadow-2xs'
+                        : 'bg-slate-50 text-slate-700 border-slate-200/80 hover:bg-slate-100 hover:border-slate-300'
+                    }`}
+                  >
+                    <span>{route.flag}</span>
+                    <span>{route.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <a
+              href="https://kiwi.tpo.li/9isVGzpF"
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="text-[11px] font-semibold text-brand-navy hover:text-emerald-700 inline-flex items-center gap-1 transition-colors"
+            >
+              <span>Multi-City / Open-Jaw (Kiwi.com)</span>
+              <ExternalLink size={11} />
+            </a>
+          </div>
+        )}
       </form>
 
-      {/* 3. RESULTS & QUERY SUMMARY SECTION */}
+      {/* 3. OPTIONAL INLINE RESULTS SECTION (Disabled by default so search opens strictly in a new tab) */}
+      {showInlineResults && (
       <div ref={resultsContainerRef} className="p-4 sm:p-6 bg-slate-50/70 space-y-5">
         {/* Loading state feedback when user clicks Search Flights */}
         {isSearching && (
@@ -2410,6 +2397,7 @@ export default function TravelpayoutsWidget({
           </div>
         )}
       </div>
+      )}
     </div>
   );
 }

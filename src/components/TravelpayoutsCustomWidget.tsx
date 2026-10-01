@@ -18,6 +18,8 @@ interface TravelpayoutsCustomWidgetProps {
   initialFrom?: string;
   initialTo?: string;
   initialHotelCity?: string;
+  hotelsOnly?: boolean;
+  showInlineResults?: boolean;
 }
 
 const MARKER_ID = "675992";
@@ -371,6 +373,8 @@ export function TravelpayoutsCustomWidget({
   initialFrom = "Dhaka (DAC)",
   initialTo = "Kathmandu (KTM)",
   initialHotelCity = "Kathmandu",
+  hotelsOnly = false,
+  showInlineResults = false,
 }: TravelpayoutsCustomWidgetProps = {}) {
   const instanceId = useId();
   const fromAirportId = `${instanceId}-select-from-airport`;
@@ -381,7 +385,9 @@ export function TravelpayoutsCustomWidget({
   const checkoutDateId = `${instanceId}-input-checkout-date`;
   const hotelRoomsId = `${instanceId}-select-hotel-rooms`;
 
-  const [searchTab, setSearchTab] = useState<"flights" | "hotels">(initialTab);
+  const [searchTab, setSearchTab] = useState<"flights" | "hotels">(
+    hotelsOnly ? "hotels" : initialTab
+  );
   const [fromCity, setFromCity] = useState(initialFrom);
   const [toCity, setToCity] = useState(initialTo);
   const [hotelCity, setHotelCity] = useState(initialHotelCity);
@@ -399,8 +405,8 @@ export function TravelpayoutsCustomWidget({
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setSearchTab(initialTab);
-  }, [initialTab]);
+    setSearchTab(hotelsOnly ? "hotels" : initialTab);
+  }, [initialTab, hotelsOnly]);
 
   useEffect(() => {
     setFromCity(initialFrom);
@@ -578,56 +584,67 @@ export function TravelpayoutsCustomWidget({
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setActiveDropdown(null);
-    setIsSearching(true);
-    setSelectedItem(null);
+    if (showInlineResults) {
+      setIsSearching(true);
+      setSelectedItem(null);
 
-    setTimeout(() => {
-      setIsSearching(false);
-      setSearchUpdatedCount((c) => c + 1);
-    }, 280);
+      setTimeout(() => {
+        setIsSearching(false);
+        setSearchUpdatedCount((c) => c + 1);
+      }, 280);
+    }
   };
 
   return (
     <div
       ref={wrapperRef}
       id="travelpayouts-affiliate-block"
-      className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-visible my-4 text-slate-900"
+      className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-visible my-4 text-slate-900"
     >
-      {/* Widget Tabs & Global Currency Switcher */}
-      <div className="bg-brand-navy p-3.5 sm:px-5 text-white flex flex-wrap items-center justify-between gap-2 rounded-t-xl">
+      {/* Widget Header / Tabs & Global Currency Switcher */}
+      <div className="bg-brand-navy p-3.5 sm:px-5 text-white flex flex-wrap items-center justify-between gap-2 rounded-t-2xl">
         <div className="flex flex-wrap items-center gap-2">
-          <button
-            id="tab-search-flights"
-            type="button"
-            onClick={() => {
-              setSearchTab("flights");
-              setSelectedItem(null);
-            }}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
-              searchTab === "flights"
-                ? "bg-[#F6B73C] text-brand-navy shadow-xs"
-                : "hover:bg-slate-800 text-slate-300"
-            }`}
-          >
-            <Plane size={15} />
-            Search Flights
-          </button>
-          <button
-            id="tab-search-hotels"
-            type="button"
-            onClick={() => {
-              setSearchTab("hotels");
-              setSelectedItem(null);
-            }}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
-              searchTab === "hotels"
-                ? "bg-[#F6B73C] text-brand-navy shadow-xs"
-                : "hover:bg-slate-800 text-slate-300"
-            }`}
-          >
-            <Building size={15} />
-            Search Hotels
-          </button>
+          {hotelsOnly ? (
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#F6B73C]/15 border border-[#F6B73C]/30 text-[#F6B73C] text-xs sm:text-sm font-bold">
+              <Building size={15} />
+              <span>Global Hotel & Stay Search</span>
+            </div>
+          ) : (
+            <>
+              <button
+                id="tab-search-flights"
+                type="button"
+                onClick={() => {
+                  setSearchTab("flights");
+                  setSelectedItem(null);
+                }}
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                  searchTab === "flights"
+                    ? "bg-[#F6B73C] text-brand-navy shadow-xs"
+                    : "hover:bg-slate-800 text-slate-300"
+                }`}
+              >
+                <Plane size={15} />
+                Search Flights
+              </button>
+              <button
+                id="tab-search-hotels"
+                type="button"
+                onClick={() => {
+                  setSearchTab("hotels");
+                  setSelectedItem(null);
+                }}
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                  searchTab === "hotels"
+                    ? "bg-[#F6B73C] text-brand-navy shadow-xs"
+                    : "hover:bg-slate-800 text-slate-300"
+                }`}
+              >
+                <Building size={15} />
+                Search Hotels
+              </button>
+            </>
+          )}
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5">
@@ -653,101 +670,84 @@ export function TravelpayoutsCustomWidget({
         </div>
       </div>
 
-      {/* Explore Popular Cities — One-Click Hotel Search Hub */}
-      <div className="bg-slate-100/90 px-4 sm:px-5 py-3 border-b border-slate-200 space-y-2">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5">
-            <MapPin size={13} className="text-brand-navy" />
-            <span className="text-xs font-bold uppercase tracking-wider text-brand-navy">
-              Explore Popular Cities
-            </span>
-            <span className="text-[11px] text-slate-500 hidden sm:inline">
-              · One-click to populate hotel stays & rates
-            </span>
-          </div>
-          <span className="text-[11px] font-medium text-slate-500">
-            Showing prices in <strong className="text-brand-navy">{currency}</strong>
-          </span>
-        </div>
+      {/* Explore Popular Cities — Compact One-Click Hotel Search Hub */}
+      <div className="bg-slate-100/90 px-4 sm:px-5 py-2.5 border-b border-slate-200 flex flex-wrap items-center gap-1.5">
+        <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-brand-navy mr-1">
+          <MapPin size={12} className="text-brand-navy" />
+          Explore Popular Cities:
+        </span>
+        {EXPLORE_POPULAR_CITIES.map((hub) => {
+          const firstWord = hub.city.toLowerCase().split(" ")[0];
+          const isActive =
+            searchTab === "hotels" &&
+            hotelCity.toLowerCase().includes(firstWord);
+          const displayLabel = hub.shortLabel || hub.city;
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
-          {EXPLORE_POPULAR_CITIES.map((hub) => {
-            const firstWord = hub.city.toLowerCase().split(" ")[0];
-            const isActive =
-              searchTab === "hotels" &&
-              hotelCity.toLowerCase().includes(firstWord);
-            const displayLabel = hub.shortLabel || hub.city;
-
-            return (
-              <button
-                key={hub.city}
-                type="button"
-                onClick={() => {
-                  setSearchTab("hotels");
-                  setHotelCity(hub.city);
-                  setToCity(hub.flightDest);
-                  setActiveDropdown(null);
-                  setSelectedItem(null);
-                  setSearchUpdatedCount((c) => c + 1);
-                }}
-                className={`group text-left px-2.5 py-2 rounded-lg border transition-all cursor-pointer flex flex-col justify-between ${
-                  isActive
-                    ? "bg-brand-navy text-white border-brand-navy shadow-xs"
-                    : "bg-white hover:bg-slate-50 text-slate-800 border-slate-200/90 hover:border-slate-300"
+          return (
+            <button
+              key={hub.city}
+              type="button"
+              title={`${hub.city} (${hub.tag}) — from ${formatPrice(hub.fromBdt)}`}
+              onClick={() => {
+                setSearchTab("hotels");
+                setHotelCity(hub.city);
+                setToCity(hub.flightDest);
+                setActiveDropdown(null);
+                setSelectedItem(null);
+              }}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-medium transition-all cursor-pointer ${
+                isActive
+                  ? "bg-brand-navy text-white border-brand-navy shadow-2xs"
+                  : "bg-white hover:bg-slate-50 text-slate-800 border-slate-200/90 hover:border-slate-300"
+              }`}
+            >
+              <span className="font-bold">
+                {hub.flag} {displayLabel}
+              </span>
+              <span
+                className={`text-[10px] font-mono font-semibold ${
+                  isActive ? "text-[#F6B73C]" : "text-emerald-700"
                 }`}
               >
-                <div className="flex items-center justify-between gap-1">
-                  <span className="text-xs font-bold truncate">
-                    {hub.flag} {displayLabel}
-                  </span>
-                  <span
-                    className={`text-[10px] font-mono font-semibold shrink-0 ${
-                      isActive ? "text-[#F6B73C]" : "text-emerald-700"
-                    }`}
-                  >
-                    {formatPrice(hub.fromBdt)}+
-                  </span>
-                </div>
-                <div
-                  className={`text-[10px] truncate mt-0.5 ${
-                    isActive ? "text-slate-300" : "text-slate-500"
-                  }`}
-                >
-                  {hub.tag}
-                </div>
-              </button>
-            );
-          })}
-        </div>
+                {formatPrice(hub.fromBdt)}+
+              </span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Widget Input Form */}
-      <div className="p-4 sm:p-5 bg-slate-50 border-b border-slate-200">
+      <div className={`p-4 sm:p-5 bg-white ${showInlineResults ? "border-b border-slate-200" : "rounded-b-2xl"}`}>
         <form onSubmit={handleSearch}>
           {searchTab === "flights" ? (
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-stretch">
               {/* Departure Airport Global Autocomplete */}
               <div className="relative">
-                <label
-                  htmlFor={fromAirportId}
-                  className="block text-xs font-semibold text-slate-600 mb-1"
-                >
-                  Departure Airport or City
-                </label>
-                <input
-                  id={fromAirportId}
-                  type="text"
-                  value={fromCity}
-                  placeholder="Type any city or airport (e.g. Dhaka, London)"
-                  onFocus={() => setActiveDropdown("from")}
-                  onChange={(e) => {
-                    setFromCity(e.target.value);
-                    setActiveDropdown("from");
-                  }}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                />
+                <div className="h-[68px] bg-slate-50/90 hover:bg-slate-100/70 border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between">
+                  <label
+                    htmlFor={fromAirportId}
+                    className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400"
+                  >
+                    From · Departure
+                  </label>
+                  <input
+                    id={fromAirportId}
+                    type="text"
+                    value={fromCity}
+                    placeholder="City or airport (e.g. Dhaka, London)"
+                    onFocus={() => setActiveDropdown("from")}
+                    onChange={(e) => {
+                      setFromCity(e.target.value);
+                      setActiveDropdown("from");
+                    }}
+                    className="w-full bg-transparent text-sm font-extrabold text-slate-900 focus:outline-none truncate"
+                  />
+                  <span className="text-[11px] text-slate-500 truncate">
+                    Origin Airport ({origCode})
+                  </span>
+                </div>
                 {activeDropdown === "from" && (
-                  <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto py-1">
+                  <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 max-h-60 overflow-y-auto py-1">
                     {filteredFromAirports.map((a) => (
                       <button
                         key={`from-${a.code}-${a.city}`}
@@ -771,35 +771,42 @@ export function TravelpayoutsCustomWidget({
               </div>
 
               {/* Destination Airport Global Autocomplete */}
-              <div className="flex flex-col relative justify-center">
-                <button
-                  type="button"
-                  onClick={swapCities}
-                  title="Swap Airports"
-                  className="absolute right-2 top-0 text-[11px] font-semibold text-brand-navy hover:underline flex items-center gap-1 cursor-pointer"
-                >
-                  <ArrowRightLeft size={11} /> Swap
-                </button>
-                <label
-                  htmlFor={toAirportId}
-                  className="block text-xs font-semibold text-slate-600 mb-1"
-                >
-                  Destination Airport or City
-                </label>
-                <input
-                  id={toAirportId}
-                  type="text"
-                  value={toCity}
-                  placeholder="Type any destination (e.g. Bangkok, Rome, JFK)"
-                  onFocus={() => setActiveDropdown("to")}
-                  onChange={(e) => {
-                    setToCity(e.target.value);
-                    setActiveDropdown("to");
-                  }}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                />
+              <div className="relative">
+                <div className="h-[68px] bg-slate-50/90 hover:bg-slate-100/70 border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor={toAirportId}
+                      className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400"
+                    >
+                      To · Destination
+                    </label>
+                    <button
+                      type="button"
+                      onClick={swapCities}
+                      title="Swap Airports"
+                      className="text-[10px] font-bold text-brand-navy hover:underline flex items-center gap-0.5 cursor-pointer"
+                    >
+                      <ArrowRightLeft size={10} /> Swap
+                    </button>
+                  </div>
+                  <input
+                    id={toAirportId}
+                    type="text"
+                    value={toCity}
+                    placeholder="Destination (e.g. Bangkok, Rome, JFK)"
+                    onFocus={() => setActiveDropdown("to")}
+                    onChange={(e) => {
+                      setToCity(e.target.value);
+                      setActiveDropdown("to");
+                    }}
+                    className="w-full bg-transparent text-sm font-extrabold text-slate-900 focus:outline-none truncate"
+                  />
+                  <span className="text-[11px] text-slate-500 truncate">
+                    Destination Airport ({destCode})
+                  </span>
+                </div>
                 {activeDropdown === "to" && (
-                  <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto py-1">
+                  <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 max-h-60 overflow-y-auto py-1">
                     {filteredToAirports.map((a) => (
                       <button
                         key={`to-${a.code}-${a.city}`}
@@ -822,10 +829,10 @@ export function TravelpayoutsCustomWidget({
                 )}
               </div>
 
-              <div>
+              <div className="h-[68px] bg-slate-50/90 hover:bg-slate-100/70 border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between">
                 <label
                   htmlFor={flightDateId}
-                  className="block text-xs font-semibold text-slate-600 mb-1"
+                  className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400"
                 >
                   Travel Date
                 </label>
@@ -834,54 +841,73 @@ export function TravelpayoutsCustomWidget({
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
+                  className="w-full bg-transparent text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
                 />
+                <span className="text-[11px] text-slate-500 truncate">
+                  Direct & 1-Stop Fares
+                </span>
               </div>
 
-              <button
+              <a
                 id="btn-search-flights-submit"
-                type="submit"
-                disabled={isSearching}
-                className="w-full bg-[#07C369] hover:bg-[#06ad5d] text-white py-2.5 px-4 rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                href={uralWlDeepUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setActiveDropdown(null)}
+                className="w-full h-[68px] bg-[#07C369] hover:bg-[#06ad5d] text-white rounded-xl text-sm font-black transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer shadow-md"
               >
-                {isSearching ? (
-                  <>
-                    <RefreshCw size={16} className="animate-spin" />
-                    <span>Searching...</span>
-                  </>
-                ) : (
-                  <>
-                    <Search size={16} />
-                    <span>Search Flights</span>
-                  </>
-                )}
-              </button>
+                <div className="flex items-center gap-1.5">
+                  <Search size={16} />
+                  <span>Search Flights</span>
+                  <ExternalLink size={13} />
+                </div>
+                <span className="text-[10px] font-mono font-semibold text-white/85">
+                  {origCode} → {destCode} · {currency}
+                </span>
+              </a>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-2.5 items-stretch">
               {/* Global Hotel City / Property Autocomplete */}
-              <div className="md:col-span-4 relative">
-                <label
-                  htmlFor={hotelCityId}
-                  className="block text-xs font-semibold text-slate-600 mb-1"
+              <div className="lg:col-span-4 relative">
+                <div
+                  onClick={() => setActiveDropdown("hotel")}
+                  className={`h-[68px] bg-slate-50/90 hover:bg-slate-100/70 border rounded-xl px-3.5 py-2 flex flex-col justify-between cursor-text transition-all ${
+                    activeDropdown === "hotel"
+                      ? "border-brand-navy ring-2 ring-brand-navy/15 bg-white shadow-sm"
+                      : "border-slate-200/90"
+                  }`}
                 >
-                  Destination City or Hotel Worldwide
-                </label>
-                <input
-                  id={hotelCityId}
-                  type="text"
-                  value={hotelCity}
-                  placeholder="Type any city (e.g. Bangkok, Makkah, London, Paris)"
-                  onFocus={() => setActiveDropdown("hotel")}
-                  onChange={(e) => {
-                    setHotelCity(e.target.value);
-                    setActiveDropdown("hotel");
-                  }}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                />
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor={hotelCityId}
+                      className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 cursor-pointer"
+                    >
+                      Destination City or Hotel
+                    </label>
+                    <span className="text-[10px] font-mono font-bold bg-[#F6B73C]/30 text-brand-navy px-1.5 py-0.5 rounded">
+                      GLOBAL STAY
+                    </span>
+                  </div>
+                  <input
+                    id={hotelCityId}
+                    type="text"
+                    value={hotelCity}
+                    placeholder="Type any city (Makkah, Bangkok, Paris, London)..."
+                    onFocus={() => setActiveDropdown("hotel")}
+                    onChange={(e) => {
+                      setHotelCity(e.target.value);
+                      setActiveDropdown("hotel");
+                    }}
+                    className="w-full bg-transparent text-sm sm:text-[15px] font-extrabold text-slate-900 placeholder:text-slate-400 placeholder:font-medium focus:outline-none truncate"
+                  />
+                  <span className="text-[11px] text-slate-500 truncate">
+                    {filteredHotelCities[0]?.zone || "Verified Hotels, Apartments & Family Suites"}
+                  </span>
+                </div>
                 {activeDropdown === "hotel" && (
-                  <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-64 overflow-y-auto py-1">
-                    <div className="px-3 py-1 text-[10px] font-semibold text-slate-400 border-b border-slate-100">
+                  <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 max-h-64 overflow-y-auto py-1">
+                    <div className="px-3.5 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 bg-slate-50/60">
                       Select City or Type Any Destination Worldwide
                     </div>
                     {filteredHotelCities.map((h) => (
@@ -892,7 +918,7 @@ export function TravelpayoutsCustomWidget({
                           setHotelCity(h.city);
                           setActiveDropdown(null);
                         }}
-                        className="w-full px-3 py-2 text-left hover:bg-slate-50 flex items-center justify-between gap-2 text-xs cursor-pointer"
+                        className="w-full px-3.5 py-2.5 text-left hover:bg-slate-50 flex items-center justify-between gap-2 text-xs cursor-pointer border-b border-slate-50 last:border-0"
                       >
                         <div className="min-w-0">
                           <div className="font-bold text-slate-900">
@@ -910,95 +936,112 @@ export function TravelpayoutsCustomWidget({
               </div>
 
               {/* Check-in Date */}
-              <div className="md:col-span-2">
-                <label
-                  htmlFor={checkinDateId}
-                  className="block text-xs font-semibold text-slate-600 mb-1"
-                >
-                  Check-in Date
-                </label>
-                <input
-                  id={checkinDateId}
-                  type="date"
-                  value={date}
-                  onChange={(e) => {
-                    const nextIn = e.target.value;
-                    setDate(nextIn);
-                    if (checkOutDate && nextIn >= checkOutDate) {
-                      setCheckOutDate(nextIn);
-                    }
-                  }}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-2.5 text-xs sm:text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                />
+              <div className="lg:col-span-2">
+                <div className="h-[68px] bg-slate-50/90 hover:bg-slate-100/70 border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-colors">
+                  <label
+                    htmlFor={checkinDateId}
+                    className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 cursor-pointer"
+                  >
+                    Check-In
+                  </label>
+                  <input
+                    id={checkinDateId}
+                    type="date"
+                    value={date}
+                    onChange={(e) => {
+                      const nextIn = e.target.value;
+                      setDate(nextIn);
+                      if (checkOutDate && nextIn >= checkOutDate) {
+                        setCheckOutDate(nextIn);
+                      }
+                    }}
+                    className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
+                  />
+                  <span className="text-[11px] text-slate-500 truncate">
+                    Flexible check-in
+                  </span>
+                </div>
               </div>
 
               {/* Check-out Date */}
-              <div className="md:col-span-2">
-                <label
-                  htmlFor={checkoutDateId}
-                  className="block text-xs font-semibold text-slate-600 mb-1"
-                >
-                  Check-out Date
-                </label>
-                <input
-                  id={checkoutDateId}
-                  type="date"
-                  value={checkOutDate}
-                  min={date}
-                  onChange={(e) => setCheckOutDate(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-2.5 text-xs sm:text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                />
+              <div className="lg:col-span-2">
+                <div className="h-[68px] bg-slate-50/90 hover:bg-slate-100/70 border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-colors">
+                  <label
+                    htmlFor={checkoutDateId}
+                    className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 cursor-pointer"
+                  >
+                    Check-Out
+                  </label>
+                  <input
+                    id={checkoutDateId}
+                    type="date"
+                    value={checkOutDate}
+                    min={date}
+                    onChange={(e) => setCheckOutDate(e.target.value)}
+                    className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
+                  />
+                  <span className="text-[11px] text-slate-500 truncate">
+                    Best rate guarantee
+                  </span>
+                </div>
               </div>
 
               {/* Guests / Rooms */}
-              <div className="md:col-span-2">
-                <label
-                  htmlFor={hotelRoomsId}
-                  className="block text-xs font-semibold text-slate-600 mb-1"
-                >
-                  Guests / Rooms
-                </label>
-                <select
-                  id={hotelRoomsId}
-                  value={travelers}
-                  onChange={(e) => setTravelers(Number(e.target.value))}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-2.5 text-xs sm:text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                >
-                  <option value="1">1 Guest, 1 Room</option>
-                  <option value="2">2 Guests, 1 Room</option>
-                  <option value="3">3 Guests, 1 Room</option>
-                  <option value="4">4 Guests, 2 Rooms</option>
-                </select>
+              <div className="lg:col-span-2">
+                <div className="h-[68px] bg-slate-50/90 hover:bg-slate-100/70 border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-colors">
+                  <label
+                    htmlFor={hotelRoomsId}
+                    className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 cursor-pointer"
+                  >
+                    Guests & Rooms
+                  </label>
+                  <select
+                    id={hotelRoomsId}
+                    value={travelers}
+                    onChange={(e) => setTravelers(Number(e.target.value))}
+                    className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
+                  >
+                    <option value="1">1 Guest · 1 Room</option>
+                    <option value="2">2 Guests · 1 Room</option>
+                    <option value="3">3 Guests · 1 Room</option>
+                    <option value="4">4 Guests · 2 Rooms</option>
+                  </select>
+                  <span className="text-[11px] text-slate-500 truncate">
+                    Taxes & fees shown
+                  </span>
+                </div>
               </div>
 
-              {/* Submit Search Button */}
-              <div className="md:col-span-2">
-                <button
+              {/* Submit Search Button — Opens Global Hotel Results ONLY in New Tab */}
+              <div className="lg:col-span-2 flex">
+                <a
                   id="btn-search-hotels-submit"
-                  type="submit"
-                  disabled={isSearching}
-                  className="w-full bg-[#F6B73C] text-brand-navy hover:bg-[#e0a42d] py-2.5 px-4 rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                  href={hotellookDeepUrl}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  onClick={() => {
+                    setActiveDropdown(null);
+                  }}
+                  className="w-full h-[68px] bg-[#F6B73C] text-brand-navy hover:bg-[#f5ad24] active:scale-[0.99] rounded-xl shadow-md hover:shadow-lg transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer px-3 text-center group"
                 >
-                  {isSearching ? (
-                    <>
-                      <RefreshCw size={16} className="animate-spin" />
-                      <span>Searching...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Search size={16} />
-                      <span>Search Hotels</span>
-                    </>
-                  )}
-                </button>
+                  <div className="flex items-center gap-1.5 font-black text-sm sm:text-[15px] tracking-tight">
+                    <Search size={16} className="shrink-0 stroke-[2.5]" />
+                    <span>Search Hotels</span>
+                    <ExternalLink size={13} className="shrink-0 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-brand-navy/75 truncate max-w-full">
+                    {hotelCity || "Global"} · {currency}
+                  </span>
+                </a>
               </div>
             </div>
           )}
         </form>
       </div>
 
-      {/* Results List & Live Partner Dispatch */}
-      <div className="p-4 sm:p-6 bg-white space-y-4 rounded-b-xl">
+      {/* Results List & Live Partner Dispatch (Only rendered if showInlineResults is explicitly enabled) */}
+      {showInlineResults && (
+      <div className="p-4 sm:p-6 bg-white space-y-4 rounded-b-2xl">
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
           <div className="flex items-center gap-2">
             <CheckCircle2 size={15} className="text-[#07C369]" />
@@ -1296,6 +1339,7 @@ export function TravelpayoutsCustomWidget({
           </div>
         )}
       </div>
+      )}
     </div>
   );
 }
