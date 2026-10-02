@@ -1320,6 +1320,15 @@ function buildAllRoutes(): PrerenderRoute[] {
       <article>
         <h1>Contact URAL — Dhaka Outbound Flight, Umrah &amp; Visa Desk (+8801784385335)</h1>
         <p>Connect directly with our Dhaka support desk via WhatsApp at +8801784385335 for BDT flight &amp; hotel booking, Umrah e-Visa processing, and tourist visa document verification.</p>
+        <section>
+          <h2>Official URAL Social Media &amp; Community Channels</h2>
+          <ul>
+            <li><a href="https://web.facebook.com/uraltravelbd/" target="_blank" rel="me noopener noreferrer">Facebook — @uraltravelbd (URAL Travel Bangladesh)</a></li>
+            <li><a href="https://www.instagram.com/uraltravelbd/" target="_blank" rel="me noopener noreferrer">Instagram — @uraltravelbd</a></li>
+            <li><a href="https://www.linkedin.com/company/ural-travel-bangladesh" target="_blank" rel="me noopener noreferrer">LinkedIn — URAL Travel Bangladesh</a></li>
+            <li><a href="https://wa.me/8801784385335" target="_blank" rel="noopener noreferrer">WhatsApp Support Desk — +8801784385335</a></li>
+          </ul>
+        </section>
         ${renderLandingFaqs("contact-desk-faqs", "Questions about URAL travel support and BDT booking", contactFaq)}
       </article>
     `,

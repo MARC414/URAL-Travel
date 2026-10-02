@@ -3,6 +3,13 @@ export const SITE_ORG_ID = `${BASE_URL}/#organization`;
 export const SITE_LOGO_ID = `${BASE_URL}/#logo`;
 export const SITE_WEBSITE_ID = `${BASE_URL}/#website`;
 
+export const URAL_SOCIAL_LINKS = {
+  facebook: "https://web.facebook.com/uraltravelbd/",
+  instagram: "https://www.instagram.com/uraltravelbd/",
+  linkedin: "https://www.linkedin.com/company/ural-travel-bangladesh",
+  whatsapp: "https://wa.me/8801784385335",
+} as const;
+
 export interface BreadcrumbItemInput {
   name: string;
   url: string;
@@ -103,7 +110,12 @@ export function getSiteGraphNodes() {
         { "@type": "Country", name: "United Arab Emirates" },
       ],
       knowsLanguage: ["en", "bn"],
-      sameAs: ["https://wa.me/8801784385335"],
+      sameAs: [
+        URAL_SOCIAL_LINKS.facebook,
+        URAL_SOCIAL_LINKS.instagram,
+        URAL_SOCIAL_LINKS.linkedin,
+        URAL_SOCIAL_LINKS.whatsapp,
+      ],
     },
     {
       "@type": "WebSite",
