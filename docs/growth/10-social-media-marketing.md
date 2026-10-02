@@ -435,6 +435,65 @@ Open and check the following for changes. If something changed → publish ভ�
 
 ---
 
+## 11. Platform decision log
+
+Append-only record of **where URAL does and does not maintain a presence**, with the evidence and the trigger that would change the decision. The point is to stop the next person (or agent) from re-litigating a settled question — or, worse, from spending a one-time incentive by accident.
+
+### 11.1 TikTok — account: yes (handle reservation + cross-post) · ads: **not yet**
+
+**Decided:** 2 October 2026 · **Decision:** claim `@uraltravelbd`, keep the profile complete and linked, cross-post the Reels we already produce for Instagram. **Do not run paid TikTok ads and do not build TikTok-native content yet.**
+
+**Evidence for the account:**
+- Bangladesh is the **8th-largest TikTok market globally** — 46.5M users aged 18+ (DataReportal, Jan 2025), more than Egypt, behind Russia.
+- Handle consistency: `@uraltravelbd` is the standard across Facebook and Instagram (`URAL_SOCIAL_LINKS`). An unclaimed handle on a travel/visa brand is an impersonation risk, and visa-agent impersonation is a live problem in this market.
+- Cost of the account is zero taka and it carries no content obligation.
+
+**Evidence against investing now:**
+- **Audience mismatch with our moat.** ~66% of TikTok's BD audience is under 35 (25–34 = 40.3%, 18–24 = 25.6%). Our deepest content — the 12 Hajj & Umrah guides, the elderly-parents wheelchair guide, the government-vs-private Hajj cost comparison — is read by the 35–60 cohort who make those decisions. Meta remains larger overall in BD (72.5M).
+- **Format mismatch is the real cost.** Our asset is *density*: portal screenshots, dated verification, BDT tables. That maps to Facebook carousels and to search/AEO where it compounds as indexable content. TikTok rewards volume, trend-speed and native style — a different production capability, and an account posting twice a month signals neglect.
+- **The site's own phase-2 gate has not been passed.** [README](README.md) §3 definition-of-done is still open (indexing %, internal links, backlinks, CWV).
+- **Ad economics are poor for a first test** — see 11.2.
+
+**The trap this log exists to prevent:** the new-advertiser ad-credit offer is **one-time and non-renewable**. It expires the moment it is used. Registering an Ads Manager account now, before creatives exist and before the endorsed card and tax treatment are settled, burns the only first-30-days window this business will ever get. **A promo is a reason to consider ads; it is never a reason to open an account.** The account is free and has no deadline.
+
+**Revisit when ALL FOUR are true:**
+1. Indexing and backlink targets in [01](01-indexing-crawling.md)/[07](07-backlinks-free.md) are met.
+2. Facebook/Instagram have shown which 2–3 formats actually convert (so we know what to re-cut).
+3. 15+ proven creatives exist that can be re-shot for vertical natively.
+4. Endorsed dual-currency card + the VAT/AIT treatment are confirmed in writing by our bank.
+
+**Kill criterion:** if 8–10 cross-posted videos produce no saves or shares, stop posting and record that here rather than "fixing" it with budget.
+
+**Platform-risk note (do not over-read this):** TikTok was restricted in Bangladesh in 2018, a court ordered it pulled in 2021, and it was blocked again on 2 Aug 2024 — but WhatsApp, Instagram, YouTube and Facebook were blocked in that same window. This is national political volatility affecting *all* platforms, not TikTok-specific fragility. The actual lesson is the standing rule: **never let one platform be the only distribution.** The newsletter (`functions/api/subscribe.js`) and the crawlable pages are the assets that survive any single feed.
+
+### 11.2 TikTok paid ads — the offer mechanics, recorded for when we revisit
+
+Bangladesh offer (observed Oct 2026): three tiers, headline "up to BDT 750,000 free ad credits". Per TikTok's help centre, only two coupon mechanics exist, and the tiers split across them:
+
+| Tier | Type | Reality |
+|---|---|---|
+| BDT 30,000 off | **Discount coupon** (50% off, capped) | No minimum spend; 50% of each ad charge deducted until BDT 30,000 is used. The only tier that is a genuine discount. |
+| BDT 70,000 off | **Ladder coupon** (spend X, get Y) | Spend BDT 30,000+ of your own money first; matching **credit** arrives after. |
+| BDT 750,000 off | **Ladder coupon**, top rung | First rung BDT 140,000; full value needs BDT 750,000 spend in 30 days. ~BDT 1M out of pocket with taxes. |
+
+Hard conditions to remember: the **30-day clock starts at registration, not at the first campaign**; if no tier is chosen the **middle tier is auto-assigned** (so a small advertiser can earn nothing); **one tier only**, credits cannot unlock the next tier; credits are **non-refundable, non-transferable, ad-spend-only, and expire**; taxes on credits are our liability; TikTok may **withhold or revoke** at its discretion.
+
+Bangladesh cost layer that the offer does not cover: bKash/Nagad are not accepted — an **endorsed dual-currency card** is required (`/bn/blog/dual-currency-card-endorsement-bangladesh`), and cross-border ad payments attract **15% VAT withheld at source** plus, in practice, ~**15% AIT**, so ~**30% above net ad spend**. TikTok's own APAC payment-methods page does not list Bangladesh; onboarding runs through Aleph, TikTok's regional sales partner. Verify against our bank before committing any figure.
+
+**If we ever do spend:** take the **discount tier** (no minimum spend, works at test budget), never the ladder. Sequence: endorsement → business verification → creatives → *then* register and select the tier → screenshot the Promotions page (type, minimum spend, targeted products, expiry) before spending anything.
+
+### 11.3 Decision log template
+
+```
+### <Platform> — <decision> · decided <date>
+Evidence for:
+Evidence against:
+Revisit when (all must be true):
+Kill criterion:
+```
+
+---
+
 ## Appendix A — Brand & template conventions
 
 - **Colors:** navy `#0B192C` background, gold `#F6B73C` accents/CTA, white text. Bengali headline in gold, English subline in white/70%.
