@@ -59,7 +59,6 @@ import { BENGALI_SEO_COPY, getBengaliSeoCopy } from "../src/utils/seoCopy";
 const ROOT_DIR = process.cwd();
 const PUBLIC_DIR = path.join(ROOT_DIR, "public");
 const DIST_DIR = path.join(ROOT_DIR, "dist");
-const ASSETS_IMAGES_DIR = path.join(ROOT_DIR, "src", "assets", "images");
 const OPTIMIZED_SOCIAL_IMAGES_DIR = path.join(ROOT_DIR, "src", "assets", "optimized-social");
 
 const BLOG_IMAGE_MAP: Record<string, string> = {
@@ -380,10 +379,7 @@ function gitLastModifiedDate(relativePath: string): string {
 const CONTENT_DATA_LASTMOD = gitLastModifiedDate("src/constants.ts");
 
 function getSocialImageSource(fileName: string): string {
-  const optimizedPath = path.join(OPTIMIZED_SOCIAL_IMAGES_DIR, fileName);
-  return fs.existsSync(optimizedPath)
-    ? optimizedPath
-    : path.join(ASSETS_IMAGES_DIR, fileName);
+  return path.join(OPTIMIZED_SOCIAL_IMAGES_DIR, fileName);
 }
 
 function copyStaticSeoImages() {

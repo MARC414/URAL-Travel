@@ -1,6 +1,0 @@
-{
-  "name": "URAL",
-  "description": "Production-grade travel intelligence, visa guide, and affiliate conversion platform designed for Bangladeshi outbound travelers.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
