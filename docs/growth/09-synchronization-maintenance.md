@@ -32,14 +32,22 @@ Never claim a change is done without this:
 ```bash
 npm run lint
 npm run build
+npm run verify:build   # asserts the prerender contract (see below)
 ```
 
 Then verify in the built output (not just the browser — Google reads the static HTML):
 - Grep `dist/` for the specific change you made (new link, new content, corrected canonical).
 - Spot-check `dist/sitemap.xml` has all 83 `<url>` with `<lastmod>`.
+- Confirm `git diff public/sitemap.xml public/rss.xml` is **empty** after a no-content-change build — a non-empty diff means build-time values are leaking into the feeds again.
 - For SEO-signal changes, confirm all §1 factors still agree on 2–3 sample routes.
 
 If lint/build fails, **fix it before reporting** — a broken build ships nothing.
+
+**Automated (2 October 2026):** [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) runs this loop on every PR and on `main`. It is not a substitute for the inspection above, but it does fail the build when:
+- `scripts/verify-build.ts` finds a broken prerender contract — route counts collapsed, a missing `og-image.jpg`, a blog image or RSS item out of sync with `BLOG_DATA`, a missing `<lastmod>`, an incomplete hreflang cluster, or **a `lastmod` that is neither a blog ISO timestamp nor `CONTENT_UPDATED`** (the 2026-10-02 regression, which `tsc` and a green build both missed).
+- the committed `public/sitemap.xml` / `rss.xml` differ from what the build produces (non-reproducible output).
+
+It also raises a **non-blocking warning** when `src/constants.ts` or `src/data/bengaliContent.ts` changes without `src/data/contentMeta.ts` — a reminder to bump `CONTENT_UPDATED`, not a failure, because CI cannot judge whether an edit was material.
 
 ---
 
