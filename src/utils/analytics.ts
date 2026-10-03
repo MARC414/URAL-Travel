@@ -1,6 +1,6 @@
 /**
  * URAL Travel Intelligence — Analytics & Event Tracking Engine
- * Dispatches structured events to window.dataLayer for Google Tag Manager (GTM-TP29ZSVR)
+ * Dispatches structured events to window.dataLayer for Google Tag Manager (GTM-TMPVL82B)
  * and Google Analytics 4 (GA4).
  */
 
