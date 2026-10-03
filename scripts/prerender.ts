@@ -128,15 +128,6 @@ const INTERNAL_ROUTE_ALIASES: Record<string, string> = {
   "/pre-departure": "/sitemap",
 };
 
-/**
- * Bengali homepage path. The trailing slash is deliberate: it is the canonical
- * URL the prerenderer emits for the Bengali home (`BASE_URL` + "/bn/", see
- * buildBengaliRoutes) and the same string `siteUrl("/", "bn")` hands the client,
- * so internal links, canonicals and the sitemap all agree on one URL. Linking
- * the bare "/bn" would add a second, non-canonical spelling of the same page.
- */
-const BN_HOME_PATH = "/bn/";
-
 function normalizeInternalHref(rawPath: string): string {
   const pathname = String(rawPath || "/").split(/[?#]/, 1)[0] || "/";
   return INTERNAL_ROUTE_ALIASES[pathname] || pathname;
@@ -270,19 +261,6 @@ function getRelatedBlogsForRoute(country: string, routePath: string, limit = 3):
     .map((item) => item.post);
 }
 
-/**
- * Appends a block just before the closing </main> of the pre-hydration crawl
- * directory in index.html. Idempotent: a second call with the same marker id is
- * a no-op, so a template that already carries the block is never doubled.
- */
-function appendInsideCrawlDirectory(html: string, block: string): string {
-  if (!block || html.includes(`id="read-in-bengali"`)) return html;
-  const match = html.match(/<\/main>\s*<\/div>/);
-  if (!match || match.index === undefined) return html;
-  const at = match.index;
-  return `${html.slice(0, at)}${block}${html.slice(at)}`;
-}
-
 function renderLinkSection(id: string, heading: string, links: InternalLinkItem[]): string {
   if (links.length === 0) return "";
   return `<section aria-labelledby="${id}"><h2 id="${id}">${escapeHtml(heading)}</h2><ul>${links
@@ -364,26 +342,19 @@ function addInternalLinkSections(
     if (route.bnUrl && bnRouteByCanonicalUrl) {
       const bnTwin = bnRouteByCanonicalUrl.get(route.bnUrl);
       const bnTitle = bnTwin?.title ? stripBrandSuffix(bnTwin.title) : "বাংলা সংস্করণ";
-      const bnHref =
-        route.routePath === "/" ? BN_HOME_PATH : toBengaliPath(route.routePath);
+      const bnHref = toBengaliPath(route.routePath);
       const langLinks: InternalLinkItem[] =
         route.routePath === "/"
-          ? // The twin of "/" *is* the Bengali homepage, so a second
-            // "homepage" link underneath it would just repeat the first one.
-            [{ href: bnHref, text: bnTitle }]
+          ? [{ href: "/bn", text: "বাংলা ট্রাভেল ইন্টেলিজেন্স (বাংলা সংস্করণ)" }]
           : [
               { href: bnHref, text: bnTitle },
-              { href: BN_HOME_PATH, text: "বাংলা ট্রাভেল ইন্টেলিজেন্স হোমপেইজ" },
+              { href: "/bn", text: "বাংলা ট্রাভেল ইন্টেলিজেন্স হোমপেইজ" },
             ];
       const langSection = renderLinkSection(
         "read-in-bengali",
         "বাংলায় পড়ুন — Read this page in Bengali",
         langLinks
       );
-      // Also parked on the route: the homepage ships the hand-written crawl
-      // directory from index.html rather than route.bodyHtml (see
-      // prerenderDistHtmlFiles), so appending to bodyHtml alone never reaches /.
-      route.languageSwitchHtml = langSection;
       if (route.bodyHtml.includes("</article>")) {
         route.bodyHtml = route.bodyHtml.replace("</article>", `${langSection}</article>`);
       } else {
@@ -402,13 +373,6 @@ interface PrerenderRoute {
   enUrl?: string;
   /** Bengali counterpart URL — present only when the twin page was generated. */
   bnUrl?: string;
-  /**
-   * The generated "Read in Bengali" block for English pages that have a /bn
-   * twin. Kept beside bodyHtml rather than only inside it because the homepage
-   * serves the hand-written crawl directory from index.html (see
-   * prerenderDistHtmlFiles) and would otherwise drop the block silently.
-   */
-  languageSwitchHtml?: string;
   title: string;
   description: string;
   imageUrl: string;
@@ -1624,10 +1588,6 @@ function bnLinkList(
   links: { label: string; path: string }[]
 ): string {
   const items = links
-    // Aliases first (/pre-departure -> /sitemap). Localising an alias instead of
-    // its target emits /bn/pre-departure, which no route serves — hasBengali-
-    // Counterpart() cannot catch that, because the alias itself is not deferred.
-    .map((link) => ({ label: link.label, path: normalizeInternalHref(link.path) }))
     .filter((link) => link.label && hasBengaliCounterpart(link.path))
     .map(
       (link) =>
@@ -2424,14 +2384,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
         `  <script type="application/ld+json" data-seo-schema="true">${fullGraphJson}</script>\n  </head>`
       );
 
-    if (r.routePath === "/") {
-      // The homepage is the one route that keeps the hand-written crawl
-      // directory from index.html instead of swapping in r.bodyHtml (it is a
-      // far richer body than the route's two-paragraph stub). So the generated
-      // language block is appended to that directory — without this, "/" would
-      // be the only page on the site with a /bn twin but no on-page link to it.
-      pageHtml = appendInsideCrawlDirectory(pageHtml, r.languageSwitchHtml || "");
-    } else {
+    if (r.routePath !== "/") {
       pageHtml = pageHtml.replace(
         /<div id="root">[\s\S]*?<\/main>\s*<\/div>/,
         `<div id="root"><main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif">${r.bodyHtml}</main></div>`
