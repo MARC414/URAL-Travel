@@ -2266,7 +2266,13 @@ ${routes
 function generateRssXml() {
   const rssItems = BLOG_DATA.map((post) => {
     const postUrl = `${BASE_URL}/blog/${post.slug}`;
-    const pubDate = new Date(`${toIsoDate(post.date)}T06:00:00+06:00`).toUTCString();
+    // toIsoDate already returns a full ISO-8601 timestamp (e.g.
+    // "2026-10-03T09:00:00+06:00"). Appending a time again produced
+    // "...T09:00:00+06:00T06:00:00+06:00", so `new Date(...)` was NaN and every
+    // <pubDate> shipped as the literal string "Invalid Date" — invisible to tsc,
+    // to a successful build, and to verify:build. toUTCString() yields the
+    // RFC 1123 form ("Fri, 03 Oct 2026 03:00:00 GMT") that feed readers expect.
+    const pubDate = new Date(toIsoDate(post.date)).toUTCString();
     return `    <item>
       <title>${escapeXml(post.title)}</title>
       <link>${escapeXml(postUrl)}</link>
@@ -2477,7 +2483,7 @@ function main() {
   generateRssXml();
   prerenderDistHtmlFiles(routes);
   console.log(
-    `[SEO Prerender] Generated ${enRoutes.length} English + ${bnRoutes.length} Bengali canonical routes, clean sitemap.xml (with xhtml:link hreflang clusters), rss.xml, optimized og-image.jpg & 41 optimized blog JPEGs.`
+    `[SEO Prerender] Generated ${enRoutes.length} English + ${bnRoutes.length} Bengali canonical routes, clean sitemap.xml (with xhtml:link hreflang clusters), rss.xml, optimized og-image.jpg & ${BLOG_DATA.length} blog JPEGs.`
   );
 }
 

@@ -235,6 +235,27 @@ if (rss) {
     itemCount === BLOG_DATA.length,
     `rss.xml has one <item> per blog post (${itemCount}/${BLOG_DATA.length})`
   );
+
+  // A malformed <pubDate> is the RSS equivalent of the sitemap lastmod bug:
+  // `new Date("...").toUTCString()` returns the literal string "Invalid Date"
+  // when the input does not parse, and nothing else in the pipeline notices.
+  // Assert parseability, not a specific date, so the guard survives a
+  // legitimate change of publish timestamps.
+  const itemBlocks = rss
+    .split("<item>")
+    .slice(1)
+    .map((block) => block.split("</item>")[0]);
+  const badPubDates = itemBlocks.filter((block) => {
+    const match = block.match(/<pubDate>([^<]*)<\/pubDate>/);
+    return !match || Number.isNaN(new Date(match[1]).getTime());
+  });
+  check(
+    badPubDates.length === 0,
+    badPubDates.length === 0
+      ? "every rss.xml <item> has a parseable pubDate"
+      : `${badPubDates.length} rss <item>(s) have a missing or unparseable pubDate ` +
+          `(e.g. "Invalid Date"); see toIsoDate() usage in scripts/prerender.ts`
+  );
 }
 
 // --- Report ----------------------------------------------------------------
