@@ -89,8 +89,10 @@ If it still says "Couldn't fetch" after 48h with a valid live `200` XML file, us
 - **Acceptable pragmatic approach:** use the build date (ISO 8601, `YYYY-MM-DD`) for all URLs, OR better, the git last-commit date of the source file that drives each route. Build date is fine to start.
 - Also set realistic `<changefreq>` and `<priority>` (homepage/hubs `weekly`/`0.9`; blog posts `monthly`/`0.6`). These are weak hints but harmless.
 - **Do not** fake future dates or bump `lastmod` on every build for unchanged pages — Google learns to distrust it. Only change `lastmod` when the page's content actually changed. (A build-date-for-all approach is acceptable initially but graduate to per-file git dates.)
+- **Shipped (2 Oct 2026) — the graduated implementation, and why it is not a git lookup.** Data-driven pages now read `CONTENT_UPDATED` from [`src/data/contentMeta.ts`](../../src/data/contentMeta.ts), a committed date; blog posts keep their own exact `post.date`. The git-derived version this section recommended **failed in production**: Cloudflare Pages builds from a shallow checkout, so `git log` for `src/constants.ts` returned nothing and the code fell back to *today's* date — stamping the deploy date onto 77 of 159 URLs on rebuilds where nothing changed, while a locally-built sitemap (full history) disagreed with CI. A committed constant is identical in every environment and moves only on a real content change.
+  - **Maintenance:** bump `CONTENT_UPDATED` whenever `src/constants.ts` or `src/data/bengaliContent.ts` changes materially. `prerender.ts` warns in the build log once the value is older than `CONTENT_UPDATED_MAX_AGE_DAYS` (180), so it cannot rot silently. Never make the value fresher than reality — the safe failure mode is staleness, not freshness.
 
-**Verify:** after build, `dist/sitemap.xml` must show `<lastmod>` on every `<url>`.
+**Verify:** after build, `dist/sitemap.xml` must show `<lastmod>` on every `<url>`, and two consecutive builds of an unchanged tree must produce a **byte-identical** `public/sitemap.xml` (`git diff --exit-code public/sitemap.xml`).
 
 ---
 

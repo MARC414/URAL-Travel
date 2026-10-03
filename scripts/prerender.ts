@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import { execSync } from "node:child_process";
 import {
   FLIGHTS_DATA,
   HOTELS_DATA,
@@ -23,6 +22,10 @@ import {
 } from "../src/utils/schema";
 import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
+import {
+  CONTENT_UPDATED,
+  CONTENT_UPDATED_MAX_AGE_DAYS,
+} from "../src/data/contentMeta";
 import {
   RADICAL_STORAGE_BLOG_PLACEMENTS,
   MULTI_PARTNER_BLOG_PLACEMENTS,
@@ -351,32 +354,44 @@ interface PrerenderRoute {
   breadcrumbs: { name: string; url: string }[];
   extraGraphNodes: Record<string, unknown>[];
   bodyHtml: string;
-  // ISO date (YYYY-MM-DD) for the sitemap <lastmod>. Blog posts use their own
-  // publish date; content-driven hub/route pages fall back to the last git
-  // commit date of src/constants.ts (the data source), so lastmod only moves
-  // when the content genuinely changed — never on a rebuild of unchanged pages.
+  // ISO date (YYYY-MM-DD) for the sitemap <lastmod>. Blog posts carry their own
+  // exact publish date; content-driven hub/route pages use CONTENT_DATA_LASTMOD
+  // below, which is a committed date — so lastmod only moves when a human says
+  // the content changed, never on a rebuild of unchanged pages, and it is
+  // identical in local and CI builds.
   lastmod?: string;
 }
 
-// Last git-commit date (YYYY-MM-DD) of the file that drives the page's content.
-// Falls back to today's build date when git history is unavailable (e.g. a
-// shallow CI checkout or an export without .git).
-function gitLastModifiedDate(relativePath: string): string {
-  const today = new Date().toISOString().slice(0, 10);
-  try {
-    const out = execSync(`git log -1 --format=%cs -- "${relativePath}"`, {
-      cwd: ROOT_DIR,
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
-    }).trim();
-    // %cs yields a strict YYYY-MM-DD committer date.
-    return /^\d{4}-\d{2}-\d{2}$/.test(out) ? out : today;
-  } catch {
-    return today;
+// Fallback <lastmod> for data-driven pages. Deliberately a committed constant
+// rather than a git lookup or the build date — see the long explanation in
+// src/data/contentMeta.ts. Summary: Cloudflare Pages builds from a shallow
+// checkout, so a git-derived value is unavailable there and the old "fall back
+// to today" behaviour stamped the deploy date onto 77 unchanged URLs, while also
+// making the local and CI sitemaps disagree.
+const CONTENT_DATA_LASTMOD = CONTENT_UPDATED;
+
+/**
+ * Nudge, never fail: a stale lastmod under-signals to crawlers, so surface it in
+ * the build log where a maintainer will actually see it. Kept non-fatal so a
+ * forgotten bump can never block a deploy.
+ */
+function warnIfContentDateStale() {
+  const updated = new Date(`${CONTENT_UPDATED}T00:00:00Z`).getTime();
+  if (Number.isNaN(updated)) {
+    console.warn(
+      `[SEO Prerender] WARNING: CONTENT_UPDATED is not a parseable YYYY-MM-DD date ("${CONTENT_UPDATED}").`
+    );
+    return;
+  }
+  const ageDays = Math.floor((Date.now() - updated) / 86_400_000);
+  if (ageDays > CONTENT_UPDATED_MAX_AGE_DAYS) {
+    console.warn(
+      `[SEO Prerender] WARNING: sitemap <lastmod> is ${ageDays} days old ` +
+        `(CONTENT_UPDATED=${CONTENT_UPDATED}). If site content changed since then, ` +
+        `bump CONTENT_UPDATED in src/data/contentMeta.ts.`
+    );
   }
 }
-
-const CONTENT_DATA_LASTMOD = gitLastModifiedDate("src/constants.ts");
 
 function getSocialImageSource(fileName: string): string {
   return path.join(OPTIMIZED_SOCIAL_IMAGES_DIR, fileName);
@@ -2382,6 +2397,7 @@ function main() {
   addInternalLinkSections(enRoutes);
   applySharedSeoCopy(enRoutes, "en");
   applySharedSeoCopy(bnRoutes, "bn");
+  warnIfContentDateStale();
   generateSitemapXml(routes);
   generateRssXml();
   prerenderDistHtmlFiles(routes);

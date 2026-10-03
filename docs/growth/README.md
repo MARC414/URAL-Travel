@@ -21,6 +21,7 @@ These come from the security and correctness constraints established while build
 4. **Keep the four synchronization factors aligned** on every page: canonical URL, `og:url`/`twitter:url`, `hreflang` self-reference, and the schema `@id` graph must all point at the same URL. See [09-synchronization-maintenance.md](09-synchronization-maintenance.md).
 5. **Verify before you claim.** After any change, run `npm run lint && npm run build`, then grep the built `dist/` output to confirm the change actually shipped. Never report a fix as done without checking the built HTML.
 6. **Bengali content is not crawlable yet.** It is a client-side toggle with no distinct URL. Do not emit `bn-BD` hreflang until real Bengali URLs exist. See [01-indexing-crawling.md](01-indexing-crawling.md) and [03-content-topical-authority.md](03-content-topical-authority.md).
+   - **Status update (2 October 2026):** resolved in commit `9146458`. The prerender now emits **76 crawlable `/bn/` routes** with reciprocal `hreflang` clusters and `inLanguage` schema (verified in `dist/sitemap.xml` and `dist/bn/**`). Bengali content **is** crawlable — link Bengali posts to `/bn/...` URLs and see [10-social-media-marketing.md](10-social-media-marketing.md).
 
 ### The three permission tiers (from the site owner's standing instructions)
 
@@ -49,6 +50,7 @@ The site is technically sound: prerendered, 83 unique pages, correct canonicals,
 | 07 | [07-backlinks-free.md](07-backlinks-free.md) | **Off-site authority** — free backlink methods that work for a Bangladesh travel site | Only worthwhile once pages are indexed and worth linking to. |
 | 08 | [08-site-cleanup.md](08-site-cleanup.md) | **Hygiene** — duplicate images, unused deps, unnecessary files, code weight | Ongoing; reduces risk and weight. |
 | 09 | [09-synchronization-maintenance.md](09-synchronization-maintenance.md) | **Synchronization & cadence** — keeping every SEO signal aligned, weekly/monthly routines | The routine that keeps 01–08 from rotting. |
+| 10 | [10-social-media-marketing.md](10-social-media-marketing.md) | **Social media & content marketing** — positioning, 10 launch scripts, hook library, weekly formats, platform playbooks, conversion + authenticity rules | Only works once 01–04 exist to be linked to. Bengali posts now land on crawlable `/bn/` pages. |
 
 ---
 

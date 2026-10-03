@@ -42,3 +42,32 @@
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+
+# ---------------------------------------------------------------------------
+# ⚠️  DO NOT add `X-Robots-Tag: noindex` for *.pages.dev HERE
+# ---------------------------------------------------------------------------
+# The widely-copied snippet for killing duplicate-content on preview hosts is:
+#
+#     https://:project.pages.dev/*
+#       X-Robots-Tag: noindex
+#
+# It is WRONG for this project. `ural-travel.pages.dev` is production — the live
+# site, and the origin every canonical, hreflang and sitemap URL points at. That
+# rule would deindex the entire production site on the next deploy.
+#
+# It becomes correct ONLY once a custom domain (e.g. uraltravel.com) is attached
+# and serving the site, at which point this pages.dev host is the duplicate. If
+# that happens, add BOTH of these (versioned hosts are the per-commit previews):
+#
+#     https://:project.pages.dev/*
+#       X-Robots-Tag: noindex
+#     https://:version.:project.pages.dev/*
+#       X-Robots-Tag: noindex
+#
+# Commit previews and branch aliases already send `X-Robots-Tag: noindex` by
+# default from Cloudflare Pages — verified live on a PR deployment — so nothing
+# is needed for them. Keep those hosts crawlable rather than disallowing them in
+# robots.txt: a blocked URL is never recrawled, so Google never reads the
+# noindex, and already-indexed copies stay in the index. Crawlable + noindex is
+# what actually removes a URL.
+# ---------------------------------------------------------------------------

@@ -47,7 +47,8 @@ If lint/build fails, **fix it before reporting** — a broken build ships nothin
 
 ### On every deploy (automate where possible)
 - [ ] Build + verify (§2).
-- [ ] Sitemap `<lastmod>` updated only for genuinely changed pages ([01](01-indexing-crawling.md) §4).
+- [ ] Sitemap `<lastmod>` updated only for genuinely changed pages ([01](01-indexing-crawling.md) §4). If this deploy changed `src/constants.ts` or `src/data/bengaliContent.ts`, **bump `CONTENT_UPDATED` in [`src/data/contentMeta.ts`](../../src/data/contentMeta.ts)** in the same commit — otherwise the changed pages keep an old date.
+- [ ] `git status` shows no diff in `public/sitemap.xml` / `public/rss.xml` after a build that changed no content (proof `<lastmod>` is stable, not build-stamped).
 - [ ] IndexNow ping for changed URLs ([01](01-indexing-crawling.md) §3).
 - [ ] No secret files staged ([08](08-site-cleanup.md) §5).
 
