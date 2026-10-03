@@ -160,20 +160,13 @@
       }
     </script>
 
-    <!--
-      Google tag (gtag.js). Deliberately the last thing in <head>: gtag.js is
-      ~90 KB of JavaScript that must be parsed and compiled on the main thread.
-      Loading it before charset/preload (as it was) pushed the LCP image request
-      behind an analytics connection and added to TBT before first paint.
-    -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2EWKHC1KE1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-2EWKHC1KE1');
-    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TP29ZSVR');</script>
+    <!-- End Google Tag Manager -->
 
     <!-- Travelpayouts Emerald Partner Script (loads asynchronously; guarded against ad-blocker script error events) -->
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
@@ -187,6 +180,10 @@
     </script>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TP29ZSVR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div id="root">
       <!-- Pre-hydration SEO Crawl Directory (Automatically replaced when React mounts) -->
       <main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif">

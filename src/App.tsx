@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { initGlobalClickTracking } from "./utils/analytics";
 import {
   Globe,
   Plane,
@@ -807,11 +808,15 @@ export default function App() {
   });
 
   useEffect(() => {
+    const cleanupClickTracking = initGlobalClickTracking();
     const handlePopState = () => {
       setCurrentPath(window.location.pathname + window.location.search);
     };
     window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+      cleanupClickTracking();
+    };
   }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   

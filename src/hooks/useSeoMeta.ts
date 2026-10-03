@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { trackPageView } from "../utils/analytics";
 import { hasBengaliCounterpart } from "../utils/localeRoutes";
 import {
   generateFaqSchema,
@@ -361,20 +362,14 @@ export function useSeoMeta({
     // 1. Update Title & Meta Description
     document.title = title;
 
-    // 1a. Notify Google tag (G-2EWKHC1KE1) on client-side SPA route changes (skipping initial load already tracked by index.html)
+    // 1a. Notify GTM (dataLayer virtual_page_view) & GA4 on client-side SPA route changes (skipping initial load already tracked by index.html)
     if (typeof window !== "undefined") {
       if (lastTrackedCanonicalRef.current === null) {
         lastTrackedCanonicalRef.current = canonicalUrl;
       } else if (lastTrackedCanonicalRef.current !== canonicalUrl) {
         lastTrackedCanonicalRef.current = canonicalUrl;
-        const w = window as unknown as { gtag?: (...args: unknown[]) => void };
-        if (typeof w.gtag === "function") {
-          w.gtag("config", "G-2EWKHC1KE1", {
-            page_title: title,
-            page_location: canonicalUrl,
-            page_path: window.location.pathname + window.location.search,
-          });
-        }
+        const pagePath = window.location.pathname + window.location.search;
+        trackPageView(pagePath, title, canonicalUrl);
       }
     }
     let metaDesc = document.querySelector('meta[name="description"]');
