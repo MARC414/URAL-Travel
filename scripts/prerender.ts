@@ -266,7 +266,10 @@ function renderLinkSection(id: string, heading: string, links: InternalLinkItem[
     .join("\n")}</ul></section>`;
 }
 
-function addInternalLinkSections(routes: PrerenderRoute[]): void {
+function addInternalLinkSections(
+  routes: PrerenderRoute[],
+  bnRouteByCanonicalUrl?: Map<string, PrerenderRoute>
+): void {
   const categoryHubPaths = new Set(CATEGORY_HUB_LINKS.map((link) => link.href));
 
   for (const route of routes) {
@@ -334,6 +337,28 @@ function addInternalLinkSections(routes: PrerenderRoute[]): void {
       route.bodyHtml = route.bodyHtml.replace("</article>", `${sitewideHubSection}</article>`);
     }
 
+    if (route.bnUrl && bnRouteByCanonicalUrl) {
+      const bnTwin = bnRouteByCanonicalUrl.get(route.bnUrl);
+      const bnTitle = bnTwin?.title ? stripBrandSuffix(bnTwin.title) : "বাংলা সংস্করণ";
+      const bnHref = toBengaliPath(route.routePath);
+      const langLinks: InternalLinkItem[] =
+        route.routePath === "/"
+          ? [{ href: "/bn", text: "বাংলা ট্রাভেল ইন্টেলিজেন্স (বাংলা সংস্করণ)" }]
+          : [
+              { href: bnHref, text: bnTitle },
+              { href: "/bn", text: "বাংলা ট্রাভেল ইন্টেলিজেন্স হোমপেইজ" },
+            ];
+      const langSection = renderLinkSection(
+        "read-in-bengali",
+        "বাংলায় পড়ুন — Read this page in Bengali",
+        langLinks
+      );
+      if (route.bodyHtml.includes("</article>")) {
+        route.bodyHtml = route.bodyHtml.replace("</article>", `${langSection}</article>`);
+      } else {
+        route.bodyHtml += langSection;
+      }
+    }
   }
 }
 
@@ -2394,7 +2419,8 @@ function main() {
   const routes = [...enRoutes, ...bnRoutes];
   // English link sections only: Bengali bodies already carry Bengali links
   // (the English renderer would inject English anchor text into /bn pages).
-  addInternalLinkSections(enRoutes);
+  const bnByCanonicalUrl = new Map(bnRoutes.map((r) => [r.canonicalUrl, r]));
+  addInternalLinkSections(enRoutes, bnByCanonicalUrl);
   applySharedSeoCopy(enRoutes, "en");
   applySharedSeoCopy(bnRoutes, "bn");
   warnIfContentDateStale();

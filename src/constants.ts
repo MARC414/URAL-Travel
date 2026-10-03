@@ -1819,7 +1819,9 @@ Budget airlines like AirAsia or Batik Air offer incredibly cheap base tickets, b
 Many local banks in Bangladesh (like EBL, SCB, City Bank, Mutual Trust Bank) run persistent 10% to 15% discount campaigns with domestic travel OTA agents (like GoZayaan or ShareTrip) that outperform global search engines. Always double check terms on your credit cards.`,
     internalLinks: [
       { text: "Dhaka to Kathmandu flights Guide", path: "/flights/dhaka-kathmandu" },
-      { text: "Dhaka to Bangkok Flight Costs", path: "/flights/dhaka-bangkok" }
+      { text: "Dhaka to Bangkok Flight Costs", path: "/flights/dhaka-bangkok" },
+      { text: "Flight Delay & Cancellation Compensation Checker", path: "/tools?tab=airhelp" },
+      { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Ready to check today's fares?", body: "Compare live Dhaka departure prices before they change." }
   },
@@ -1852,7 +1854,13 @@ SUMMARY ADVICE
 - Pick Thailand if: You are traveling with family, desire great retail shopping, crave street food culture, and can manage visa paperwork in advance.`,
     internalLinks: [
       { text: "Nepal Visa step-by-step checklist", path: "/visa/nepal-visa" },
-      { text: "Thailand trip cost from Dhaka", path: "/costs/thailand-costs" }
+      { text: "Thailand trip cost from Dhaka", path: "/costs/thailand-costs" },
+      { text: "Thailand e-Visa & Dhaka Embassy Requirements", path: "/visa/thailand-visa" },
+      { text: "Dhaka to Bangkok Flight Schedule & Fares", path: "/flights/dhaka-bangkok" },
+      { text: "Where to Stay in Bangkok: Hotel Neighborhoods", path: "/hotels/bangkok-hotels" },
+      { text: "Dhaka to Kathmandu Flight Schedule & Fares", path: "/flights/dhaka-kathmandu" },
+      { text: "Where to Stay in Kathmandu & Pokhara", path: "/hotels/kathmandu-hotels" },
+      { text: "Nepal 5-Day Trip Cost Calculator in BDT", path: "/costs/nepal-costs" }
     ],
     affiliateCTA: { provider: "klook", headline: "See what there is to do first", body: "Browse top-rated tours and activities in both Nepal and Thailand before you decide." }
   },
@@ -1877,7 +1885,15 @@ For South Asian travelers, breakfast is key. When booking, filters often overpri
 Hotel rates on major portals tend to fluctuate mid-week. Always search for rooms in private incognito browsers and try booking non-refundable rates only after your visa sticker or eVisa approval is fully secured in-hand. Also note that serviced apartments in KLCC/Bukit Bintang and budget hotels in Bangkok or Deira enforce a strict 11:00 AM–12:00 PM check-out while most flights back to Dhaka depart late at night; instead of paying for an extra hotel night just to store bags, use a verified Radical Storage drop point near the nearest BTS/MRT/Metro station (~$6/day per suitcase) to enjoy your final day hands-free.`,
     internalLinks: [
       { text: "Dubai trip cost from Dhaka", path: "/costs/dubai-costs" },
-      { text: "Kuala Lumpur Hotels Guide", path: "/hotels/kuala-lumpur-hotels" }
+      { text: "Kuala Lumpur Hotels Guide", path: "/hotels/kuala-lumpur-hotels" },
+      { text: "Thailand e-Visa & Dhaka Embassy Requirements", path: "/visa/thailand-visa" },
+      { text: "Dhaka to Bangkok Flight Schedule & Fares", path: "/flights/dhaka-bangkok" },
+      { text: "Where to Stay in Bangkok: Hotel Neighborhoods", path: "/hotels/bangkok-hotels" },
+      { text: "Thailand 5-Day Trip Cost Calculator in BDT", path: "/costs/thailand-costs" },
+      { text: "Dubai & UAE Tourist Visa Checklist", path: "/visa/dubai-visa" },
+      { text: "Dhaka to Dubai Flight Schedule & Fares", path: "/flights/dhaka-dubai" },
+      { text: "Where to Stay in Dubai: Metro & Marina Hotels", path: "/hotels/dubai-hotels" },
+      { text: "Dubai Desert Safari & Burj Khalifa Passes", path: "/experiences?region=asia&city=dubai-klook" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Save on transport too", body: "A pre-booked airport transfer is usually cheaper than a metered taxi at arrival." }
   },
@@ -1911,7 +1927,9 @@ Meal pricing is incredibly flexible in Bangkok:
 - Yana Restaurant (Siam Discovery, 5th Floor): An air-conditioned, fully certified Halal restaurant located inside a major shopping mall. It is the perfect place to safely try spicy Tom Yum soup, green curry, or mango sticky rice in a clean, upscale setting.`,
     internalLinks: [
       { text: "Dhaka to Bangkok Flight Guide", path: "/flights/dhaka-bangkok" },
-      { text: "Bangkok Hotels Neighborhoods", path: "/hotels/bangkok-hotels" }
+      { text: "Bangkok Hotels Neighborhoods", path: "/hotels/bangkok-hotels" },
+      { text: "Thailand e-Visa & Dhaka Embassy Requirements", path: "/visa/thailand-visa" },
+      { text: "Thailand 5-Day Trip Cost Calculator in BDT", path: "/costs/thailand-costs" }
     ],
     affiliateCTA: { provider: "klook", headline: "Book a Bangkok Guided Food Tour", body: "Explore secret Halal street food alleys with an english-speaking local guide." }
   },
@@ -1954,7 +1972,9 @@ TOTAL BUDGET SUMMARY PER PERSON (IN BDT)
 - TOTAL ESTIMATED BUDGET: BDT 40,000 - BDT 54,000 per person for an unforgettable independent holiday!`,
     internalLinks: [
       { text: "Kathmandu Flights from Dhaka", path: "/flights/dhaka-kathmandu" },
-      { text: "Nepal Visa on Arrival Guide", path: "/visa/nepal-visa" }
+      { text: "Nepal Visa on Arrival Guide", path: "/visa/nepal-visa" },
+      { text: "Where to Stay in Kathmandu & Pokhara", path: "/hotels/kathmandu-hotels" },
+      { text: "Nepal 5-Day Trip Cost Calculator in BDT", path: "/costs/nepal-costs" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Check Dhaka to Kathmandu Flight Fares", body: "Check live availability and book cheap roundtrip flights to Nepal today." }
   },
@@ -2010,7 +2030,8 @@ Don't let card delays cause you to miss a cheap flight fare or hotel room! You c
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account vs. Regular Travel Quota ($300 Cap Fix)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "Cash SAR / USD vs. Card Abroad (Avoid 5% DCC Trap)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
-      { text: "Book Flights & Makkah Hotels in BDT via bKash/Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" }
+      { text: "Book Flights & Makkah Hotels in BDT via bKash/Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Card Endorsed & Ready?", body: "Compare live international flight fares from Dhaka and book directly with zero agency markup." }
   },
@@ -2047,7 +2068,8 @@ Bangladeshi passport holders get a FREE 30-day Visa on Arrival in Malé. To ensu
     internalLinks: [
       { text: "Dhaka to Malé Flight Guide", path: "/flights/dhaka-maldives" },
       { text: "Maldives Free Visa & IMUGA Steps", path: "/visa/maldives-visa" },
-      { text: "Maldives Full Cost Breakdown in BDT", path: "/costs/maldives-costs" }
+      { text: "Maldives Full Cost Breakdown in BDT", path: "/costs/maldives-costs" },
+      { text: "Where to Stay in Maldives: Local Island Stays", path: "/hotels/maldives-hotels" }
     ],
     affiliateCTA: { provider: "klook", headline: "Explore Maldives Tours & Transfers", body: "Check day tours, snorkeling excursions, and eSIM data packages before you fly to Malé." }
   },
@@ -2079,7 +2101,8 @@ Once your Singapore e-Visa PDF arrives (usually within 5–7 working days), prin
     internalLinks: [
       { text: "Singapore Visa Requirements & Checklist", path: "/visa/singapore-visa" },
       { text: "Dhaka to Singapore Direct Flights", path: "/flights/dhaka-singapore" },
-      { text: "Best Hotels Near Mustafa Centre Singapore", path: "/hotels/singapore-hotels" }
+      { text: "Best Hotels Near Mustafa Centre Singapore", path: "/hotels/singapore-hotels" },
+      { text: "Singapore 4-Day Trip Cost Calculator in BDT", path: "/costs/singapore-costs" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Stay Connected at Changi Airport", body: "Install a Singapore eSIM before leaving Dhaka so your Grab and Google Maps work the second you land." }
   },
@@ -2137,7 +2160,11 @@ When traveling as a family of 4 to 6 people with 4+ suitcases, ordinary airport 
       { text: "Bumrungrad & Bangkok Hospital Medical Checkup Guide from Dhaka", path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" },
       { text: "Maldives Under BDT 75,000: Maafushi Local Island vs. Resort Guide", path: "/blog/maldives-budget-trip-bangladesh-maafushi" },
       { text: "Sri Lanka + Maldives 7-Day Combo Tour & BDT Cost Breakdown", path: "/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" },
-      { text: "Kathmandu to Pokhara 5-Day Nepal Itinerary in BDT", path: "/blog/nepal-pokhara-itinerary-bangladesh" }
+      { text: "Kathmandu to Pokhara 5-Day Nepal Itinerary in BDT", path: "/blog/nepal-pokhara-itinerary-bangladesh" },
+      { text: "Nepal On-Arrival Visa & Online Checklist", path: "/visa/nepal-visa" },
+      { text: "Thailand e-Visa & Embassy Requirements", path: "/visa/thailand-visa" },
+      { text: "Malaysia eVisa & MDAC Arrival Card Checklist", path: "/visa/malaysia-visa" },
+      { text: "Maldives On-Arrival Visa & IMUGA Checklist", path: "/visa/maldives-visa" }
     ],
     affiliateCTA: { provider: "klook", headline: "Book Family Theme Parks & Safari World Passes", body: "Save 15–25% on Safari World Bangkok, Genting SkyWorlds, Gardens by the Bay, and Dubai Desert Safaris with mobile QR tickets." }
   },
@@ -2178,7 +2205,8 @@ Because Nepal and the Maldives offer free Visa on Arrival to Bangladeshi citizen
       { text: "First International Trip on a Fresh Passport (3-Step History Ladder)", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
       { text: "Thailand Official e-Visa Guide (thaievisa.go.th Bank & Upload Rules)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
       { text: "Malaysia Online e-Visa & Free MDAC Arrival Card Guide", path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
-      { text: "Singapore Tourist Visa Guide (Authorized Agents & Form V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" }
+      { text: "Singapore Tourist Visa Guide (Authorized Agents & Form V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" },
+      { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Have Internet Ready at the Arrival Immigration Desk", body: "Activate a travel eSIM before takeoff so you can pull up your return ticket, hotel voucher, or IMUGA QR code immediately upon landing." }
   },
@@ -2239,7 +2267,8 @@ Pathway C: Instant 1-Year Saudi Tourist e-Visa or Visa on Arrival (ONLY for US/U
     internalLinks: [
       { text: "Dual-Currency Card Endorsement Guide for Hotel & Train Bookings", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport Outbound Immigration Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Dubai Stopover & UAE Visa Guide from Dhaka", path: "/destinations/dubai-guide" }
+      { text: "Dubai Stopover & UAE Visa Guide from Dhaka", path: "/destinations/dubai-guide" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Stay Connected on Nusuk & WhatsApp in Makkah and Madinah", body: "Install a Saudi Arabia 4G/5G eSIM before flying from Dhaka so your Nusuk Rawdah permit QR code, Haramain train ticket, and Uber/Careem work the moment you land at Jeddah Airport." }
   },
@@ -2282,7 +2311,8 @@ Instead of paying per-person tour bus markups, a family of 3 to 6 can book a pri
     internalLinks: [
       { text: "Complete Umrah & Hajj Visa, Nusuk & BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Dual-Currency Card Endorsement for Booking Haramain Train", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport Outbound Immigration Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" }
+      { text: "Dhaka Airport Outbound Immigration Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Need Data for Haramain Train & Nusuk Permits?", body: "Get an instant Saudi Arabia eSIM before flying from Dhaka so your Nusuk QR codes and Careem rides work seamlessly across Makkah and Madinah." }
   },
@@ -2322,7 +2352,8 @@ All Bangladeshi Hajj pilgrims must complete their 10-fingerprint biometrics on t
     internalLinks: [
       { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Umrah & Hajj with Elderly Parents: Wheelchair & Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
-      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" }
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Keep Family Location Sharing Active in Mina & Arafat", body: "Install a Saudi Arabia 5G eSIM before flying from Dhaka so your WhatsApp live location and Nusuk Hajj Smart Card app never lose connection during the 5 days of Hajj." }
   },
@@ -2361,7 +2392,8 @@ Inside Masjid al-Haram in Makkah, you have three official options for performing
     internalLinks: [
       { text: "Makkah & Madinah Flat Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Dhaka Airport Pre-Departure & Baggage Rules Hub", path: "/pre-departure" }
+      { text: "Dhaka Airport Pre-Departure & Baggage Rules Hub", path: "/pre-departure" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Pre-Book a Door-to-Door Family GMC or Minivan at Jeddah Airport", body: "Traveling with elderly parents and wheelchairs? Pre-book a private 7-seater minivan from Jeddah Airport straight to your Makkah hotel lobby so your parents never wait in taxi queues." }
   },
@@ -2402,7 +2434,8 @@ If you hold a Bangladeshi passport AND have a valid, currently active Tourist or
     internalLinks: [
       { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Dual-Currency Card Endorsement Guide for Online Flight Booking", path: "/blog/dual-currency-card-endorsement-bangladesh" }
+      { text: "Dual-Currency Card Endorsement Guide for Online Flight Booking", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
     affiliateCTA: { provider: "airalo", headline: "4-Day Saudi Stopover? Activate a 3GB Saudi eSIM for Just $8", body: "Don't waste precious hours of your 96-hour stopover queuing for a physical SIM card at Jeddah Airport. Activate a Saudi eSIM before leaving Dhaka." }
   },
@@ -2450,7 +2483,8 @@ Rule 2: The Friday Weekly Slot Release & 30-Minute Instant Track:
     internalLinks: [
       { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Umrah Rules for Bangladeshi Women & Ladies' Gates 25–29", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
-      { text: "Hajj Registration on hajj.gov.bd & PID Verification", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" }
+      { text: "Hajj Registration on hajj.gov.bd & PID Verification", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Live Nusuk QR Code Requires Active Mobile Data at Rawdah Gates", body: "Screenshots of Nusuk Rawdah permits are not accepted by Masjid an-Nabawi guards. Install a Saudi Arabia 5G eSIM before flying from Dhaka so your live dynamic QR code loads instantly." }
   },
@@ -2490,7 +2524,8 @@ Unlike men (who wear two unstitched white towels), women wear normal stitched, l
     internalLinks: [
       { text: "Nusuk App & Rawdah Shareef Permit Step-by-Step Guide", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Makkah & Madinah Hotel Zones (Near Ladies' Gates 25–29)", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Umrah with Elderly Parents: Wheelchair & Scooter Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" }
+      { text: "Umrah with Elderly Parents: Wheelchair & Scooter Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Safe Private Family Airport Transfers in Jeddah & Madinah", body: "Traveling with mothers, sisters, or children? Pre-book a vetted door-to-door family car from Jeddah or Madinah Airport straight to your Markazia North hotel." }
   },
@@ -2529,7 +2564,8 @@ If a family of 4 wants to save BDT 60,000 to BDT 85,000 total on airfare, 1-stop
     internalLinks: [
       { text: "Wearing Ihram at Dhaka Airport vs. Transit Layover Guide", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
       { text: "Official Zamzam Water & Baggage Rules at Jeddah Airport", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
-      { text: "Complete DIY Umrah 10-Day BDT Cost Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
+      { text: "Complete DIY Umrah 10-Day BDT Cost Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare Direct Biman/Saudia vs. 1-Stop Umrah Fares from Dhaka", body: "Check live Dhaka (DAC) to Jeddah (JED) and Madinah (MED) ticket prices across all airlines—or message our WhatsApp desk to issue Open-Jaw tickets in BDT." }
   },
@@ -2571,7 +2607,8 @@ According to the **General Authority for the Care of the Affairs of the Grand Mo
     internalLinks: [
       { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Makkah & Madinah Shuttle vs. Walking Hotel Zones", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Bangladeshi Halal Food & Suhoor/Iftar Guide in Makkah", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" }
+      { text: "Bangladeshi Halal Food & Suhoor/Iftar Guide in Makkah", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Traveling in Ramadan Crowds? Keep Family Connected 24/7", body: "During Taraweeh and Qiyam-ul-Layl when 2 million worshippers exit Masjid al-Haram simultaneously, an active Saudi 5G eSIM ensures you can always call and locate your family." }
   },
@@ -2613,7 +2650,10 @@ Step 2: Change into Ihram During Your Layover at the Transit Airport:
     internalLinks: [
       { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
       { text: "Umrah Rules for Bangladeshi Women & Modest Ihram Guide", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
-      { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
+      { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" },
+      { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Landing at Jeddah Terminal 1 in Ihram?", body: "Book a private air-conditioned sedan or family minivan waiting at Jeddah Arrivals to take you directly to your Makkah hotel near Masjid al-Haram." }
   },
@@ -2653,7 +2693,8 @@ Under the updated **Bangladesh National Board of Revenue (NBR - nbr.gov.bd) Pass
     internalLinks: [
       { text: "Dhaka Airport Pre-Departure & Baggage Allowance Hub", path: "/pre-departure" },
       { text: "Dhaka to Jeddah & Madinah Flight Baggage Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "Complete DIY Umrah & 10-Day BDT Cost Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
+      { text: "Complete DIY Umrah & 10-Day BDT Cost Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Returning with 46kg Suitcases & Zamzam Boxes?", body: "Book a large 7-seater family van from your Makkah or Madinah hotel to the airport so all your suitcases and Zamzam cartons fit comfortably in one vehicle." }
   },
@@ -2696,7 +2737,8 @@ Almost every Bangladeshi traveler wants to taste Saudi Arabia's famous **Al Baik
     internalLinks: [
       { text: "Umrah with Elderly Parents: Wheelchair & Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
+      { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Use Google Maps & HungerStation Food Delivery in Makkah", body: "Too tired to walk out after Tawaf? With a Saudi Arabia eSIM, you can use HungerStation or Jahez apps to deliver hot Bangladeshi meals or Al Baik straight to your hotel lobby." }
   },
@@ -2746,7 +2788,8 @@ Option 2: Madinah to Badr Battlefield Stopover (150 km South-West of Madinah):
     internalLinks: [
       { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Umrah with Elderly Parents: Wheelchair & Electric Scooter Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
-      { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" }
+      { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Pre-Book Private Family Chauffeur Cars & Airport Transfers in Saudi Arabia", body: "Avoid bargaining with street taxi touts outside the Haram. Lock in fixed-rate private sedans and 7-seater family vans for Jeddah/Madinah transfers or rent a car via QEEQ." }
   },
@@ -2787,7 +2830,13 @@ Step 2: UAE / Dubai Visa (Issued via u.ae / gdrfad.gov.ae Authorized Channels):
     internalLinks: [
       { text: "Abu Dhabi Sheikh Zayed Mosque Day Trip Guide from Dubai", path: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" },
       { text: "96-Hour Saudi Stopover Visa Guide for Bangladeshis", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
-      { text: "Dubai Destination Itinerary & UAE Visa Guide", path: "/destinations/dubai-guide" }
+      { text: "Dubai Destination Itinerary & UAE Visa Guide", path: "/destinations/dubai-guide" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Dubai & UAE Tourist Visa Checklist", path: "/visa/dubai-visa" },
+      { text: "Dhaka to Dubai Flight Schedule & Fares", path: "/flights/dhaka-dubai" },
+      { text: "Where to Stay in Dubai: Metro & Marina Hotels", path: "/hotels/dubai-hotels" },
+      { text: "Dubai 5-Day Trip Cost Calculator in BDT", path: "/costs/dubai-costs" },
+      { text: "Dubai Desert Safari & Burj Khalifa Passes", path: "/experiences?region=asia&city=dubai-klook" }
     ],
     affiliateCTA: { provider: "klook", headline: "Book Discounted Dubai Desert Safari, Burj Khalifa & Museum of the Future Passes", body: "Save 15%–25% compared to Dubai ticket counters by pre-booking your verified Klook mobile vouchers before flying from Madinah or Jeddah to Dubai." }
   },
@@ -2829,7 +2878,11 @@ Rule 2: Strict Official Modesty Dress Code (Enforced by Automated Scanners):
     internalLinks: [
       { text: "Umrah + Dubai 10-Day Multi-City Combo Guide from Dhaka", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
       { text: "Dubai Safari, Burj Khalifa & Abu Dhabi Passes Hub", path: "/experiences?region=asia&city=dubai-klook" },
-      { text: "Hotel Savings Guide in Bangkok, Kuala Lumpur & Dubai", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" }
+      { text: "Hotel Savings Guide in Bangkok, Kuala Lumpur & Dubai", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" },
+      { text: "Dubai & UAE Tourist Visa Checklist", path: "/visa/dubai-visa" },
+      { text: "Dhaka to Dubai Flight Schedule & Fares", path: "/flights/dhaka-dubai" },
+      { text: "Where to Stay in Dubai: Metro & Marina Hotels", path: "/hotels/dubai-hotels" },
+      { text: "Dubai 5-Day Trip Cost Calculator in BDT", path: "/costs/dubai-costs" }
     ],
     affiliateCTA: { provider: "klook", headline: "Book Abu Dhabi Grand Mosque, Qasr Al Watan & Ferrari World Combo Tours", body: "Skip intercity bus queues with a roundtrip air-conditioned Abu Dhabi day tour from your Dubai hotel or instant Qasr Al Watan & Louvre e-tickets via Klook." }
   },
@@ -2868,7 +2921,11 @@ Located beside the lush Perdana Botanical Gardens (5 minutes from KL Sentral):
     internalLinks: [
       { text: "Malaysia 5-Day Family Destination & e-Visa Guide", path: "/destinations/malaysia-guide" },
       { text: "Top 6 Budget-Friendly Family Destinations from Dhaka", path: "/blog/top-budget-family-destinations-from-dhaka" },
-      { text: "Hotel Savings Guide in Kuala Lumpur, Bangkok & Dubai", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" }
+      { text: "Hotel Savings Guide in Kuala Lumpur, Bangkok & Dubai", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" },
+      { text: "Malaysia eVisa & MDAC Arrival Card Checklist", path: "/visa/malaysia-visa" },
+      { text: "Dhaka to Kuala Lumpur Flight Schedule & Fares", path: "/flights/dhaka-kuala-lumpur" },
+      { text: "Where to Stay in KL: Hotel Neighborhoods", path: "/hotels/kuala-lumpur-hotels" },
+      { text: "Malaysia 5-Day Trip Cost Calculator in BDT", path: "/costs/malaysia-costs" }
     ],
     affiliateCTA: { provider: "kkday", headline: "Claim 30% OFF + Buy 1 Get 1 on Malaysia & Genting Passes (KKday 9.9 Sale)", body: "Book Petronas Twin Towers Skybridge, Genting Awana SkyWay Cable Car, Aquaria KLCC, and KLIA Ekspres train tickets with up to 30% discount." }
   },
@@ -2958,7 +3015,8 @@ Step 3: Always Select "SAR" (Saudi Riyal) at Makkah & Madinah POS Terminals:
       { text: "Complete $12,000 Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "No Card? Book Flights & Umrah Hotels in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "10-Day DIY Umrah Cost Calculator in BDT", path: "/umrah" }
+      { text: "10-Day DIY Umrah Cost Calculator in BDT", path: "/umrah" },
+      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare Dhaka–Jeddah & Madinah Flights with Your Islamic Card", body: "Check live Biman, Saudia, and Gulf carrier fares and pay directly with your endorsed Shariah-compliant dual-currency card." }
   },
@@ -3000,7 +3058,8 @@ Rule 3: The 4 Massive Advantages of an RFCD International Debit Card:
       { text: "Step-by-Step $12,000 Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "No Card? Pay in BDT via bKash/Bank Transfer (URAL Desk)", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "Cash SAR / USD vs. Card Abroad (5% DCC Fee Guide)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" }
+      { text: "Cash SAR / USD vs. Card Abroad (5% DCC Fee Guide)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
+      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Test Your Unlocked Card on Live Dhaka Flight Fares", body: "Search and compare roundtrip airfares from Dhaka to Jeddah, Madinah, Bangkok, Kuala Lumpur, and Dubai." }
   },
@@ -3042,7 +3101,9 @@ Step 3: Pay in BDT via Local Bank Transfer, bKash, or Nagad & Receive Instant PD
       { text: "10-Day DIY Umrah Cost Calculator & Hotel Zones", path: "/umrah" },
       { text: "Dual-Currency Card Endorsement ($12,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" }
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" },
+      { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Check Live Flight Prices First, Then Book by Card or BDT WhatsApp", body: "Compare real-time airline fares from Dhaka so you know the exact market price before booking." }
   },
@@ -3080,7 +3141,8 @@ Whenever you tap your Bangladeshi Visa, Mastercard, or Amex card at a hotel, mal
       { text: "How to Get Dual-Currency Card Endorsement ($12,000 Quota)", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account vs. Regular Travel Quota ($300 Cap Fix)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
-      { text: "Bangladeshi Halal Food in Makkah & Madinah (SAR Meal Prices)", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" }
+      { text: "Bangladeshi Halal Food in Makkah & Madinah (SAR Meal Prices)", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
+      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Get Instant Bank OTPs & Rate Checks Abroad with an eSIM", body: "Install an Airalo eSIM before departure so your mobile banking app and live currency calculator work the moment you land." }
   },
@@ -3126,7 +3188,9 @@ Step 5: Confirmed Roundtrip Air Ticket & Paid/Verifiable Hotel Booking:
       { text: "Thailand Visa Checklist & Fee Calculator", path: "/visa/thailand-visa" },
       { text: "Where to Eat Halal Food in Bangkok (Pratunam & Sukhumvit)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Thailand 5-Day Trip Budget in BDT", path: "/costs/thailand-costs" }
+      { text: "Thailand 5-Day Trip Budget in BDT", path: "/costs/thailand-costs" },
+      { text: "Dhaka to Bangkok Flight Schedule & Fares", path: "/flights/dhaka-bangkok" },
+      { text: "Where to Stay in Bangkok: Hotel Neighborhoods", path: "/hotels/bangkok-hotels" }
     ],
     affiliateCTA: { provider: "klook", headline: "Book Safari World Bangkok, Chao Phraya Cruise & Bangkok Hospital Transfers", body: "Save up to 25% on Bangkok family attractions and Suvarnabhumi Airport transfers with instant Klook QR tickets." }
   },
@@ -3170,7 +3234,11 @@ Because Malaysian immigration officers carefully screen against unauthorized wor
       { text: "Malaysia Islamic Heritage, Putrajaya Pink Mosque & Halal Guide", path: "/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" },
       { text: "Malaysia Visa Requirements & Checklist", path: "/visa/malaysia-visa" },
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Malaysia 5-Day Trip Cost Breakdown in BDT", path: "/costs/malaysia-costs" }
+      { text: "Malaysia 5-Day Trip Cost Breakdown in BDT", path: "/costs/malaysia-costs" },
+      { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" },
+      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" },
+      { text: "Dhaka to Kuala Lumpur Flight Schedule & Fares", path: "/flights/dhaka-kuala-lumpur" },
+      { text: "Where to Stay in KL: Hotel Neighborhoods", path: "/hotels/kuala-lumpur-hotels" }
     ],
     affiliateCTA: { provider: "kkday", headline: "Claim 30% OFF Malaysia Attraction Passes & KLIA Ekspres (KKday Sale)", body: "Pre-book KLIA Ekspres high-speed airport train, Petronas Twin Towers, and Genting Highlands cable car tickets before flying." }
   },
@@ -3206,7 +3274,20 @@ With **Nepal/Maldives + Malaysia + Thailand** stamped in your passport and a con
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Malaysia Online e-Visa & Free MDAC Arrival Card Guide", path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
       { text: "Thailand Official e-Visa Guide (thaievisa.go.th)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
-      { text: "Singapore Tourist Visa Guide (Authorized Agents & LOI V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" }
+      { text: "Singapore Tourist Visa Guide (Authorized Agents & LOI V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" },
+      { text: "Malaysia eVisa & MDAC Arrival Card Checklist", path: "/visa/malaysia-visa" },
+      { text: "Dhaka to Kuala Lumpur Flight Schedule & Fares", path: "/flights/dhaka-kuala-lumpur" },
+      { text: "Where to Stay in KL: Hotel Neighborhoods", path: "/hotels/kuala-lumpur-hotels" },
+      { text: "Malaysia 5-Day Trip Cost Calculator in BDT", path: "/costs/malaysia-costs" },
+      { text: "Nepal On-Arrival Visa & Online Checklist", path: "/visa/nepal-visa" },
+      { text: "Dhaka to Kathmandu Flight Schedule & Fares", path: "/flights/dhaka-kathmandu" },
+      { text: "Where to Stay in Kathmandu & Pokhara", path: "/hotels/kathmandu-hotels" },
+      { text: "Nepal 5-Day Trip Cost Calculator in BDT", path: "/costs/nepal-costs" },
+      { text: "Maldives On-Arrival Visa & IMUGA Checklist", path: "/visa/maldives-visa" },
+      { text: "Dhaka to Maldives Flight Schedule & Fares", path: "/flights/dhaka-maldives" },
+      { text: "Where to Stay in Maldives: Local Island Stays", path: "/hotels/maldives-hotels" },
+      { text: "Maldives 5-Day Trip Cost Calculator in BDT", path: "/costs/maldives-costs" },
+      { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Start Step 1: Check Dhaka to Kathmandu, Malé & Kuala Lumpur Fares", body: "Compare live roundtrip airfares from Dhaka and begin building your international travel history." }
   },
@@ -3250,7 +3331,10 @@ Under **Singapore Land Transport Authority (LTA - lta.gov.sg)** rules, foreign v
       { text: "Singapore Tourist Visa Guide (Authorized Agents & Form V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" },
       { text: "Singapore 4-Day Cost Calculator in BDT", path: "/costs/singapore-costs" },
       { text: "Dual-Currency Card Endorsement for MRT SimplyGo", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "Top 6 Budget Family Destinations from Dhaka", path: "/blog/top-budget-family-destinations-from-dhaka" }
+      { text: "Top 6 Budget Family Destinations from Dhaka", path: "/blog/top-budget-family-destinations-from-dhaka" },
+      { text: "Singapore Entry Visa & SG Arrival Card", path: "/visa/singapore-visa" },
+      { text: "Dhaka to Singapore Flight Schedule & Fares", path: "/flights/dhaka-singapore" },
+      { text: "Where to Stay in Singapore: MRT Hotel Guide", path: "/hotels/singapore-hotels" }
     ],
     affiliateCTA: { provider: "klook", headline: "Save 20% on Gardens by the Bay, Universal Studios & Sentosa Passes", body: "Pre-book instant QR tickets for Singapore's top family attractions on Klook and skip the ticket booth queues." }
   },
@@ -3295,7 +3379,11 @@ Under **Bangladesh Bank Foreign Exchange Guidelines (bb.org.bd)**, in addition t
       { text: "Thailand Official e-Visa Guide (thaievisa.go.th Upload Rules)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
       { text: "Where to Eat Halal Food in Bangkok (Pratunam & Sukhumvit Soi 3)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
       { text: "Dual-Currency Card Endorsement & Medical Quota Rules", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "No Card? Book Bangkok Flights & Hotels in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" }
+      { text: "No Card? Book Bangkok Flights & Hotels in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "Thailand e-Visa & Dhaka Embassy Requirements", path: "/visa/thailand-visa" },
+      { text: "Dhaka to Bangkok Flight Schedule & Fares", path: "/flights/dhaka-bangkok" },
+      { text: "Where to Stay in Bangkok: Hotel Neighborhoods", path: "/hotels/bangkok-hotels" },
+      { text: "Thailand 5-Day Trip Cost Calculator in BDT", path: "/costs/thailand-costs" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Pre-Book a Private Wheelchair-Friendly Minivan from Suvarnabhumi Airport", body: "Arriving in Bangkok with elderly parents for a checkup? Pre-book a private door-to-door minivan from BKK Airport straight to your Sukhumvit Soi 3 hotel." }
   },
@@ -3332,7 +3420,8 @@ Even a minor 24-hour hospital admission for food poisoning, dehydration, or a sl
       { text: "How to Use Nusuk App in Makkah & Madinah (Requires Live Data)", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Dual-Currency Card Endorsement for Buying eSIM & Insurance", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Europe, UK & USA Sightseeing & Schengen Guide", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
-      { text: "Compare eSIM & Travel Insurance in Travel Tools Hub", path: "/tools" }
+      { text: "Compare eSIM & Travel Insurance in Travel Tools Hub", path: "/tools" },
+      { text: "Travel eSIM Comparison (Yesim vs. Airalo)", path: "/tools?tab=esim" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Download Your Airalo eSIM & EKTA Insurance in 3 Minutes", body: "Install your destination eSIM before leaving Dhaka so your WhatsApp, Uber/Grab, and Nusuk QR codes work the moment you land." }
   },
@@ -3378,7 +3467,10 @@ Book a **Multi-City Ticket** on **SriLankan Airlines** (or combine **Biman/SriLa
       { text: "Maldives Under BDT 75,000: Maafushi Local Island Guide", path: "/blog/maldives-budget-trip-bangladesh-maafushi" },
       { text: "First International Trip on a Fresh Passport (3-Step Ladder)", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
       { text: "How to Book Multi-City Flights in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "Maldives 5-Day Cost Calculator in BDT", path: "/costs/maldives-costs" }
+      { text: "Maldives 5-Day Cost Calculator in BDT", path: "/costs/maldives-costs" },
+      { text: "Maldives On-Arrival Visa & IMUGA Checklist", path: "/visa/maldives-visa" },
+      { text: "Dhaka to Maldives Flight Schedule & Fares", path: "/flights/dhaka-maldives" },
+      { text: "Where to Stay in Maldives: Local Island Stays", path: "/hotels/maldives-hotels" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Search Dhaka → Colombo → Malé Multi-City Flight Fares", body: "Use the Multi-City search tab on Aviasales to lock in Sri Lanka + Maldives combo tickets on a single itinerary." }
   },
@@ -3426,7 +3518,8 @@ Rule 2: Official 2026 Bangladesh e-Passport Fee Chart (Including 15% VAT):
       { text: "First International Trip on a Fresh e-Passport (3-Step Ladder)", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
       { text: "How to Get $12,000 Dollar Endorsement on Your New e-Passport", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Official Hajj Registration with NID & e-Passport (hajj.gov.bd)", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" }
+      { text: "Official Hajj Registration with NID & e-Passport (hajj.gov.bd)", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
+      { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Got Your New e-Passport? Check First-Trip Flight Fares from Dhaka", body: "Compare live roundtrip fares to Nepal, Maldives, Malaysia, Thailand, and Saudi Arabia." }
   },
@@ -3466,7 +3559,8 @@ Step 3: Check Your Eligibility in 2 Minutes on AirHelp (Zero Upfront Cost):
       { text: "Check Flight Compensation & AirHelp Promo Code in Travel Tools", path: "/tools?tab=airhelp" },
       { text: "Top Airlines Operating from Dhaka: Baggage & Service Comparison", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
       { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "Best Travel eSIM & EKTA Flight Delay Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" }
+      { text: "Best Travel eSIM & EKTA Flight Delay Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
+      { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
     affiliateCTA: { provider: "airhelp", headline: "Had a Delayed Flight or Lost Bag in the Last 3 Years? Claim Up to €600", body: "Check your flight eligibility for free in 2 minutes with AirHelp (Use Promo Code AHTPO11 for 11% OFF AirHelp+ Smart & Pro)." }
   },
@@ -3510,7 +3604,9 @@ Before packing your suitcases in Dhaka, check your e-ticket for whether your rou
       { text: "5 Insider Secrets to Booking Cheaper Flights from Dhaka", path: "/blog/cheap-flight-booking-hacks-dhaka" },
       { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
       { text: "Flight Delay & Lost Baggage Compensation (Claim Up to €600)", path: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" },
-      { text: "Official Zamzam Water & Gold Customs Rules at Dhaka Airport", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" }
+      { text: "Official Zamzam Water & Gold Customs Rules at Dhaka Airport", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
+      { text: "Flight Delay & Cancellation Compensation Checker", path: "/tools?tab=airhelp" },
+      { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare All 10 Airlines from Dhaka on One Screen", body: "Check live roundtrip and multi-city fares across Biman, Saudia, US-Bangla, Emirates, Qatar Airways, and low-cost carriers." }
   }
