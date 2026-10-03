@@ -3609,6 +3609,120 @@ Before packing your suitcases in Dhaka, check your e-ticket for whether your rou
       { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare All 10 Airlines from Dhaka on One Screen", body: "Check live roundtrip and multi-city fares across Biman, Saudia, US-Bangla, Emirates, Qatar Airways, and low-cost carriers." }
+  },
+  {
+    id: "blog-42",
+    slug: "bangladesh-travelers-iata-airport-codes-directory-guide",
+    title: "The Ultimate Airport Codes Directory for Bangladeshi Travelers (2026 Guide)",
+    summary: "Mastering 3-letter IATA airport codes is the single most important skill for booking international and domestic flights from Bangladesh. From avoiding costly twin-airport mixups like Dubai DXB vs. DWC or Bangkok BKK vs. DMK, to understanding airline ticketing systems for Biman, US-Bangla, and Emirates, this complete directory covers all 8 Bangladesh domestic and international airports, plus 50 major hubs across the Middle East, Southeast Asia, Europe, and North America with baggage rules and live booking advice.",
+    category: "Cheap Flight Tips",
+    date: "October 03, 2026",
+    author: "Zayan Rahman (Senior Travel Researcher)",
+    readTime: "5 min read",
+    content: `When booking an air ticket, either through a travel consultant on WhatsApp or using an online search engine, entering the wrong city name can result in expensive rebooking penalties or arriving at the wrong airport. Every airline, Global Distribution System (Sabre, Amadeus), and travel intelligence platform operates strictly on 3-letter IATA (International Air Transport Association) airport codes.
+
+1. WHY AIRPORT CODES MATTER MORE THAN CITY NAMES
+Many global metropolises have two or more commercial airports separated by 40 to 80 kilometers:
+• Dubai, UAE: DXB (Dubai International — where Emirates, Biman, and flydubai land close to Deira and Downtown) vs. DWC (Al Maktoum International — located 50km south in Jebel Ali, often used by charters and cargo).
+• Bangkok, Thailand: BKK (Suvarnabhumi — where Thai Airways, Biman, and US-Bangla land with direct Airport Rail Link into Pratunam) vs. DMK (Don Mueang — the low-cost hub used by Thai AirAsia and Thai Lion Air). Landing at DMK when your connecting flight departs from BKK requires an immigration exit and a 90-minute cross-town shuttle bus.
+• London, UK: LHR (Heathrow — main legacy terminal) vs. LGW (Gatwick) vs. STN (Stansted).
+• Kuala Lumpur, Malaysia: KUL covers both KLIA Terminal 1 (full-service carriers like Malaysia Airlines and Biman) and KLIA Terminal 2 (formerly LCCT/AirAsia hub). Knowing your terminal code prevents missed boarding gates.
+
+2. BANGLADESH DOMESTIC & INTERNATIONAL AIRPORTS DIRECTORY
+Always use these exact 3-letter codes when searching domestic connection legs or international departures:
+• DAC — Dhaka (Hazrat Shahjalal International Airport, Kurmitola): The primary international gateway of Bangladesh, handling over 70% of all international flights and domestic connections across all 64 districts.
+• CGP — Chattogram (Shah Amanat International Airport, Patenga): The second largest international gateway, offering direct non-stop flights to Dubai (DXB), Sharjah (SHJ), Abu Dhabi (AUH), Muscat (MCT), and Jeddah (JED), plus frequent domestic shuttles to Dhaka (DAC).
+• ZYL — Sylhet (Osmani International Airport): Essential international hub for the UK diaspora and Middle East expatriates, with direct flights to London Heathrow (LHR) and Manchester on Biman widebodies.
+• CXB — Cox's Bazar Airport: Bangladesh's premier tourist gateway, operating heavy daily frequencies from Dhaka (DAC) and Chattogram (CGP) via Biman, US-Bangla, and Air Astra.
+• JSR — Jashore Airport: Key domestic feeder for Khulna division, Benapole land port, and the Sundarbans southwest belt.
+• SPD — Saidpur Airport: The aviation hub for northern Bangladesh, serving Rangpur, Dinajpur, Nilphamari, and Kurigram travelers.
+• RJH — Rajshahi (Shah Makhdum Airport): Serving the northwestern silk city and education corridor.
+• BZL — Barishal Airport: Connecting southern coastal districts and Kuakata travelers with Dhaka.
+
+3. TOP MIDDLE EAST DESTINATION CODES FOR BANGLADESHIS
+When requesting ticket quotes for overseas work or Umrah pilgrimages, use these precise codes:
+• DXB — Dubai International (UAE): Emirates, flydubai, Biman, US-Bangla.
+• SHJ — Sharjah (UAE): Main base for Air Arabia, providing affordable alternatives for Dubai passengers.
+• AUH — Zayed International Airport (Abu Dhabi, UAE): Home base for Etihad Airways and Air Arabia Abu Dhabi.
+• JED — King Abdulaziz International Airport (Jeddah, Saudi Arabia): The mandatory arrival gateway for Makkah Umrah and Hajj pilgrims (Terminal 1 for Saudia/foreign carriers; North Terminal for charter flights).
+• MED — Prince Mohammad bin Abdulaziz Airport (Madinah, Saudi Arabia): Direct flights allowing pilgrims to visit the Prophet's Mosque first and return via Jeddah.
+• DOH — Hamad International Airport (Doha, Qatar): Qatar Airways global hub.
+• RUH — King Khalid International Airport (Riyadh, Saudi Arabia): Capital corporate gateway.
+• DMM — King Fahd International Airport (Dammam, Saudi Arabia): Eastern Province industrial belt.
+• MCT — Muscat International Airport (Oman): Direct flights via Oman Air and SalamAir from Dhaka and Chattogram.
+• KWI — Kuwait International Airport (Kuwait City): Kuwait Airways and Jazeera Airways flights.
+
+4. SOUTH & SOUTHEAST ASIA CODES
+• BKK — Bangkok Suvarnabhumi Airport (Thailand)
+• DMK — Bangkok Don Mueang (Thailand low-cost)
+• KUL — Kuala Lumpur International Airport (Malaysia)
+• SIN — Singapore Changi Airport (Singapore)
+• MLE — Velana International Airport (Maldives / Male)
+• KTM — Tribhuvan International Airport (Kathmandu, Nepal)
+• CCU — Netaji Subhash Chandra Bose International Airport (Kolkata, India)
+• DEL — Indira Gandhi International Airport (Delhi, India)
+• MAA — Chennai International Airport (South India medical hub)
+• CMB — Bandaranaike International Airport (Colombo, Sri Lanka)
+
+5. HOW TO COMMUNICATE CODES FOR INSTANT FLIGHT QUOTES
+When you contact URAL or any airline ticketing desk, framing your inquiry as 'DAC-DXB on 15 Oct, 1 Pax, Economy' allows the ticketing agent to query global reservation systems in 5 seconds and give you the lowest fare without 10 back-and-forth messages. You can use our interactive Airport Code Finder and 1-Click WhatsApp Inquiry generator in our Travel Tools workspace.`,
+    internalLinks: [
+      { text: "Open Interactive Airport Codes & WhatsApp Inquiry Tool", path: "/tools?tab=airports" },
+      { text: "Dhaka to Dubai Flight Schedule & Fares", path: "/flights/dhaka-dubai" },
+      { text: "Flight Delay & Cancellation Compensation Checker", path: "/tools?tab=airhelp" },
+      { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" },
+      { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
+    ],
+    affiliateCTA: { provider: "aviasales", headline: "Search Flights Using Your 3-Letter Airport Code", body: "Compare live fares from DAC, CGP, and ZYL across 100+ airlines with instant BDT conversion." }
+  },
+  {
+    id: "blog-43",
+    slug: "chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai",
+    title: "Chattogram to Dubai & Middle East Direct Flights (2026): CGP to DXB Schedules, Fares & Shah Amanat Rules",
+    summary: "For millions of travelers and expatriates across Chattogram division, flying directly out of Shah Amanat International Airport (CGP) to Dubai (DXB), Sharjah (SHJ), Abu Dhabi (AUH), Muscat (MCT), and Jeddah (JED) saves 6 to 10 hours of grueling highway transit to Dhaka. This commercial guide breaks down direct and one-stop flight schedules on Biman Bangladesh, Flydubai, US-Bangla, and Air Arabia, average roundtrip BDT fare bands from BDT 52,000, Shah Amanat terminal baggage allowances, and customs guidelines.",
+    category: "Cheap Flight Tips",
+    date: "October 03, 2026",
+    author: "Farhan Momen (Outbound Intelligence Specialist)",
+    readTime: "6 min read",
+    content: `For residents of Chattogram, Cox's Bazar, Feni, Cumilla, and Noakhali, traveling to Dhaka to catch an international flight to the Middle East adds BDT 3,000 to BDT 6,000 in domestic transit costs, plus 6 to 8 hours of highway traffic or stressful airport layovers at Hazrat Shahjalal International Airport (DAC). 
+
+Shah Amanat International Airport (CGP) in Patenga, Chattogram offers direct widebody and narrowbody international connections to major Gulf destinations. Here is the complete operational and booking intelligence guide for departing directly from Chattogram.
+
+1. DIRECT AIRLINES OPERATING FROM CHATTOGRAM (CGP)
+Several prominent international and domestic airlines operate regular non-stop flights out of Shah Amanat International Airport:
+• Flydubai (FZ): Operates daily direct flights between Chattogram (CGP) and Dubai International (DXB Terminal 2). Excellent connections to Emirates global network via DXB codeshare.
+• Air Arabia (G9): Direct service from CGP to Sharjah International Airport (SHJ). A favorite for budget travelers and cargo-conscious passengers heading to Ajman, Sharjah, or northern Dubai.
+• Biman Bangladesh Airlines (BG): Operates Boeing 787 Dreamliner and 737-800 direct flights on high-demand routes:
+  - CGP to Dubai (DXB)
+  - CGP to Abu Dhabi (AUH)
+  - CGP to Muscat (MCT)
+  - CGP to Jeddah (JED) during scheduled Umrah and Hajj operations.
+• US-Bangla Airlines (BS): Operates Boeing 737-800 direct routes connecting CGP to Muscat (MCT), Dubai (DXB), and Doha (DOH), alongside frequent 45-minute domestic shuttles connecting CGP with Dhaka (DAC).
+• SalamAir (OV): Direct low-cost flights from CGP to Muscat (MCT) with onward Gulf and regional connections.
+
+2. BDT FARE COMPARISON: CGP DEPARTURES VS. DAC DEPARTURES
+• Direct CGP to Dubai (DXB) / Sharjah (SHJ): Typical one-way fares range from BDT 38,000 to BDT 52,000; roundtrip tickets range between BDT 58,000 and BDT 74,000 depending on advance purchase windows.
+• During peak return waves (post-Eid, winter holiday seasons, and labor visa clearance rushes), booking 60 to 90 days in advance saves up to BDT 15,000 compared to last-minute ticketing.
+• Connecting via Dhaka (CGP-DAC-DXB) is sometimes BDT 2,000 cheaper on base fares, but once domestic transit fees, baggage transfer risks, and hotel/layover meals in Dhaka are factored in, the direct CGP flight is significantly more cost-effective.
+
+3. SHAH AMANAT (CGP) TERMINAL PROTOCOL & CHECK-IN RULES
+• Check-in Reporting Window: International counters at Shah Amanat Airport open 3.5 hours prior to scheduled departure and strictly close 60 minutes before takeoff. Due to single-runway sequencing, airlines strictly enforce boarding gate closure 20 minutes before departure.
+• Baggage Allowances:
+  - Biman & US-Bangla: Typically 30kg to 40kg checked baggage (2 pieces maximum, 23kg per piece limit) for Gulf migrant worker tickets, plus 7kg cabin baggage.
+  - Flydubai & Air Arabia: Base tickets often include 20kg or 30kg checked baggage. Always verify that your travel agency ticket explicitly includes checked baggage.
+• Duty-Free & Customs Regulations: Passengers returning to CGP from Dubai or the Middle East enjoy the same standard Bangladesh National Board of Revenue (NBR) baggage baggage allowances: up to 100 grams of gold jewelry duty-free, 1 carton (200 sticks) of cigarettes, and 5 liters of Zamzam water (for Umrah returnees arriving with approved sealed cans).
+
+4. HOW TO BOOK CGP FLIGHTS CONFIDENTLY
+When requesting ticket options, always specify 'CGP to DXB' rather than 'Chittagong to Dubai'. This allows agents or automated search engines to pull non-stop inventory without routing you through Dhaka. You can explore live CGP flight benchmarks and generate instant WhatsApp fare requests using the URAL Travel Tools desk.`,
+    internalLinks: [
+      { text: "Dubai & UAE Tourist Visa Checklist", path: "/visa/dubai-visa" },
+      { text: "Dhaka to Dubai Flight Schedule & Fares", path: "/flights/dhaka-dubai" },
+      { text: "Where to Stay in Dubai: Metro & Marina Hotels", path: "/hotels/dubai-hotels" },
+      { text: "Dubai 5-Day Trip Cost Calculator in BDT", path: "/costs/dubai-costs" },
+      { text: "Airport Codes & WhatsApp Inquiry Tool", path: "/tools?tab=airports" },
+      { text: "Flight Delay Compensation Checker (€600)", path: "/tools?tab=airhelp" }
+    ],
+    affiliateCTA: { provider: "aviasales", headline: "Compare Direct Flights from Chattogram (CGP)", body: "Search direct flights from Shah Amanat International Airport to Dubai, Sharjah, Abu Dhabi, and Muscat." }
   }
 ];
 

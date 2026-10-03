@@ -106,6 +106,8 @@ const BLOG_IMAGE_MAP: Record<string, string> = {
   "singapore-visa-guide-bangladesh-agents": "singapore_destination_1790387270177.jpg",
   "maldives-budget-trip-bangladesh-maafushi": "maldives_destination_1790387286896.jpg",
   "cheap-flight-booking-hacks-dhaka": "blog_editorial_hero_banner_1790429994056.jpg",
+  "bangladesh-travelers-iata-airport-codes-directory-guide": "dhaka_airport_widebody_airlines_tarmac_1790520836931.jpg",
+  "chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai": "dubai_skyline_burj_twilight_1790485747967.jpg",
 };
 
 function escapeHtml(str: string): string {

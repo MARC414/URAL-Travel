@@ -2994,6 +2994,37 @@ export default function App() {
                   {t.setPriceAlertBtn}
                 </button>
               </div>
+
+              {/* ✈️ MINIMAL AIRPORT IATA CODES QUICK-STRIP */}
+              <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 text-xs font-bold text-brand-navy uppercase tracking-wider">
+                    <Plane className="text-brand-emerald" size={14} />
+                    <span>{isBn ? "কুইক এয়ারপোর্ট কোড রেফারেন্স (IATA)" : "Quick Airport Code Reference (IATA)"}</span>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-slate-600">
+                    <span><strong className="text-slate-900 font-mono">DAC</strong> Dhaka</span>
+                    <span className="text-slate-300">·</span>
+                    <span><strong className="text-slate-900 font-mono">CGP</strong> Chattogram</span>
+                    <span className="text-slate-300">·</span>
+                    <span><strong className="text-slate-900 font-mono">ZYL</strong> Sylhet</span>
+                    <span className="text-slate-300">·</span>
+                    <span><strong className="text-slate-900 font-mono">CXB</strong> Cox's Bazar</span>
+                    <span className="text-slate-300">·</span>
+                    <span><strong className="text-slate-900 font-mono">DXB</strong> Dubai</span>
+                    <span className="text-slate-300">·</span>
+                    <span><strong className="text-slate-900 font-mono">JED</strong> Jeddah</span>
+                  </div>
+                </div>
+                <a
+                  href="/tools?tab=airports"
+                  onClick={(e) => { e.preventDefault(); navigateTo("/tools?tab=airports"); }}
+                  className="inline-flex items-center justify-center gap-1.5 self-start md:self-center text-xs font-semibold text-brand-navy hover:text-white bg-slate-100 hover:bg-brand-navy border border-slate-200 px-4 py-2 rounded-xl transition-all shrink-0 cursor-pointer"
+                >
+                  <span>{isBn ? "সম্পূর্ণ এয়ারপোর্ট ডিরেক্টরি ও অনুসন্ধান টুল খুলুন" : "Open Full Airport Directory & Tool"}</span>
+                  <ArrowRight size={13} />
+                </a>
+              </div>
             </div>
 
             {/* 🟦 SECTION 2: QUICK DESTINATION ENTRY */}

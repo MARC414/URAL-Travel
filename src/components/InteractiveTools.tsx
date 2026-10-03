@@ -1,13 +1,64 @@
 import React, { useState } from "react";
-import { Coins, Calculator, CheckSquare, ShieldCheck, Heart, User, Sparkles, Check, RefreshCw } from "lucide-react";
+import { Coins, Calculator, CheckSquare, ShieldCheck, Heart, User, Sparkles, Check, RefreshCw, Plane, Search, Copy, Send, ArrowRight } from "lucide-react";
 import { AirHelpWidget } from "./AirHelpWidget";
 
+interface AirportItem {
+  code: string;
+  city: string;
+  name: string;
+  country: string;
+  category: "bangladesh" | "middle-east" | "asia" | "global";
+  airlines: string;
+}
+
+const AIRPORTS_DIRECTORY: AirportItem[] = [
+  // Bangladesh Domestic & International
+  { code: "DAC", city: "Dhaka", name: "Hazrat Shahjalal International Airport", country: "Bangladesh", category: "bangladesh", airlines: "Biman, US-Bangla, Emirates, Saudia, Qatar, Singapore Airlines" },
+  { code: "CGP", city: "Chattogram", name: "Shah Amanat International Airport", country: "Bangladesh", category: "bangladesh", airlines: "Biman, US-Bangla, Flydubai, Air Arabia, SalamAir" },
+  { code: "ZYL", city: "Sylhet", name: "Osmani International Airport", country: "Bangladesh", category: "bangladesh", airlines: "Biman, US-Bangla" },
+  { code: "CXB", city: "Cox's Bazar", name: "Cox's Bazar Airport", country: "Bangladesh", category: "bangladesh", airlines: "Biman, US-Bangla, Air Astra, Novoair" },
+  { code: "JSR", city: "Jashore", name: "Jashore Airport (Khulna Division)", country: "Bangladesh", category: "bangladesh", airlines: "Biman, US-Bangla, Air Astra" },
+  { code: "SPD", city: "Saidpur", name: "Saidpur Airport (Rangpur/Dinajpur)", country: "Bangladesh", category: "bangladesh", airlines: "Biman, US-Bangla, Air Astra" },
+  { code: "RJH", city: "Rajshahi", name: "Shah Makhdum Airport", country: "Bangladesh", category: "bangladesh", airlines: "Biman, US-Bangla" },
+  { code: "BZL", city: "Barishal", name: "Barishal Airport", country: "Bangladesh", category: "bangladesh", airlines: "Biman, US-Bangla" },
+
+  // Middle East Hubs
+  { code: "DXB", city: "Dubai", name: "Dubai International Airport", country: "UAE", category: "middle-east", airlines: "Emirates, flydubai, Biman, US-Bangla" },
+  { code: "SHJ", city: "Sharjah", name: "Sharjah International Airport", country: "UAE", category: "middle-east", airlines: "Air Arabia (Direct low-cost hub)" },
+  { code: "AUH", city: "Abu Dhabi", name: "Zayed International Airport", country: "UAE", category: "middle-east", airlines: "Etihad, Air Arabia Abu Dhabi, Biman, US-Bangla" },
+  { code: "JED", city: "Jeddah", name: "King Abdulaziz International Airport (Haramain/Umrah)", country: "Saudi Arabia", category: "middle-east", airlines: "Saudia, Biman, flynas" },
+  { code: "MED", city: "Madinah", name: "Prince Mohammad bin Abdulaziz Airport", country: "Saudi Arabia", category: "middle-east", airlines: "Saudia, Biman, flynas" },
+  { code: "RUH", city: "Riyadh", name: "King Khalid International Airport", country: "Saudi Arabia", category: "middle-east", airlines: "Saudia, Biman" },
+  { code: "DMM", city: "Dammam", name: "King Fahd International Airport", country: "Saudi Arabia", category: "middle-east", airlines: "Saudia, Biman, US-Bangla" },
+  { code: "DOH", city: "Doha", name: "Hamad International Airport", country: "Qatar", category: "middle-east", airlines: "Qatar Airways, Biman, US-Bangla" },
+  { code: "MCT", city: "Muscat", name: "Muscat International Airport", country: "Oman", category: "middle-east", airlines: "Oman Air, SalamAir, Biman, US-Bangla" },
+  { code: "KWI", city: "Kuwait City", name: "Kuwait International Airport", country: "Kuwait", category: "middle-east", airlines: "Kuwait Airways, Jazeera Airways, Biman" },
+
+  // South & Southeast Asia
+  { code: "BKK", city: "Bangkok", name: "Suvarnabhumi Airport (Main Hub)", country: "Thailand", category: "asia", airlines: "Thai Airways, Biman, US-Bangla, Drukair" },
+  { code: "DMK", city: "Bangkok", name: "Don Mueang International (Low Cost)", country: "Thailand", category: "asia", airlines: "Thai AirAsia, Thai Lion Air" },
+  { code: "KUL", city: "Kuala Lumpur", name: "Kuala Lumpur International (KLIA 1 & 2)", country: "Malaysia", category: "asia", airlines: "Malaysia Airlines, Batik Air, AirAsia, Biman, US-Bangla" },
+  { code: "SIN", city: "Singapore", name: "Singapore Changi Airport", country: "Singapore", category: "asia", airlines: "Singapore Airlines, Biman, US-Bangla" },
+  { code: "MLE", city: "Maldives", name: "Velana International Airport (Male)", country: "Maldives", category: "asia", airlines: "US-Bangla, Maldivian, SriLankan" },
+  { code: "KTM", city: "Kathmandu", name: "Tribhuvan International Airport", country: "Nepal", category: "asia", airlines: "Biman, Himalaya Airlines" },
+  { code: "CCU", city: "Kolkata", name: "Netaji Subhash Chandra Bose International", country: "India", category: "asia", airlines: "Biman, US-Bangla, IndiGo" },
+  { code: "DEL", city: "Delhi", name: "Indira Gandhi International Airport", country: "India", category: "asia", airlines: "Biman, Air India, IndiGo" },
+  { code: "MAA", city: "Chennai", name: "Chennai International Airport", country: "India", category: "asia", airlines: "Biman, US-Bangla, IndiGo" },
+  { code: "CMB", city: "Colombo", name: "Bandaranaike International Airport", country: "Sri Lanka", category: "asia", airlines: "SriLankan Airlines, FitsAir" },
+
+  // Global Transit Gateways
+  { code: "LHR", city: "London", name: "London Heathrow Airport", country: "United Kingdom", category: "global", airlines: "Biman, British Airways, Emirates, Qatar" },
+  { code: "JFK", city: "New York", name: "John F. Kennedy International Airport", country: "USA", category: "global", airlines: "Emirates, Qatar, Turkish, Saudia" },
+  { code: "YYZ", city: "Toronto", name: "Toronto Pearson International Airport", country: "Canada", category: "global", airlines: "Biman, Emirates, Qatar, Turkish" },
+  { code: "IST", city: "Istanbul", name: "Istanbul Airport", country: "Turkey", category: "global", airlines: "Turkish Airlines, Biman" },
+];
+
 export function InteractiveTools() {
-  const [activeTool, setActiveTool] = useState<"converter" | "calculator" | "packing" | "visa-checker" | "airhelp">(() => {
+  const [activeTool, setActiveTool] = useState<"converter" | "calculator" | "packing" | "visa-checker" | "airhelp" | "airports">(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const tab = params.get("tab");
-      if (tab === "airhelp" || tab === "converter" || tab === "calculator" || tab === "packing" || tab === "visa-checker") {
+      if (tab === "airhelp" || tab === "converter" || tab === "calculator" || tab === "packing" || tab === "visa-checker" || tab === "airports") {
         return tab;
       }
     }
@@ -18,7 +69,7 @@ export function InteractiveTools() {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
     const tab = params.get("tab");
-    if (tab === "airhelp" || tab === "converter" || tab === "calculator" || tab === "packing" || tab === "visa-checker") {
+    if (tab === "airhelp" || tab === "converter" || tab === "calculator" || tab === "packing" || tab === "visa-checker" || tab === "airports") {
       setActiveTool(tab);
     }
   }, [typeof window !== "undefined" ? window.location.search : ""]);
@@ -130,6 +181,63 @@ export function InteractiveTools() {
 
   const currentEligibility = visaEligibilityMap[testNational][testDest];
 
+  // 5. Airport Code Directory & WhatsApp Ticket Inquiry State
+  const [airportQuery, setAirportQuery] = useState("");
+  const [airportCategory, setAirportCategory] = useState<"all" | "bangladesh" | "middle-east" | "asia" | "global">("all");
+  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+
+  // WhatsApp Inquiry Generator State
+  const [inquiryOrigin, setInquiryOrigin] = useState("DAC");
+  const [inquiryDestination, setInquiryDestination] = useState("DXB");
+  const [inquiryDate, setInquiryDate] = useState("");
+  const [inquiryReturnDate, setInquiryReturnDate] = useState("");
+  const [inquiryPassengers, setInquiryPassengers] = useState("1 Adult");
+  const [inquiryClass, setInquiryClass] = useState("Economy");
+  const [inquiryNotes, setInquiryNotes] = useState("");
+
+  const handleCopyCode = (code: string) => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(code);
+      setCopiedCode(code);
+      setTimeout(() => setCopiedCode(null), 2000);
+    }
+  };
+
+  const filteredAirports = AIRPORTS_DIRECTORY.filter((item) => {
+    const matchesCategory = airportCategory === "all" || item.category === airportCategory;
+    const q = airportQuery.toLowerCase().trim();
+    if (!q) return matchesCategory;
+    const matchesQuery =
+      item.code.toLowerCase().includes(q) ||
+      item.city.toLowerCase().includes(q) ||
+      item.name.toLowerCase().includes(q) ||
+      item.country.toLowerCase().includes(q) ||
+      item.airlines.toLowerCase().includes(q);
+    return matchesCategory && matchesQuery;
+  });
+
+  const generateWhatsAppInquiryUrl = () => {
+    const originItem = AIRPORTS_DIRECTORY.find((a) => a.code === inquiryOrigin);
+    const destItem = AIRPORTS_DIRECTORY.find((a) => a.code === inquiryDestination);
+    const originLabel = originItem ? `${originItem.city} (${originItem.code})` : inquiryOrigin;
+    const destLabel = destItem ? `${destItem.city} (${destItem.code})` : inquiryDestination;
+
+    const message = [
+      `Assalamu Alaikum URAL Travel Desk, I would like to request a flight fare quote:`,
+      ``,
+      `✈️ Route: ${originLabel} ➔ ${destLabel}`,
+      `📅 Departure Date: ${inquiryDate || "Flexible (Please advise earliest/cheapest)"}`,
+      inquiryReturnDate ? `🔄 Return Date: ${inquiryReturnDate}` : `Trip Type: One-Way`,
+      `👥 Passengers: ${inquiryPassengers}`,
+      `💺 Cabin Class: ${inquiryClass}`,
+      inquiryNotes ? `📝 Note: ${inquiryNotes}` : ``,
+      ``,
+      `Please share available airline options, baggage allowances, and best BDT fare via bKash/Bank Transfer.`
+    ].filter(Boolean).join("\n");
+
+    return `https://wa.me/8801784385335?text=${encodeURIComponent(message)}`;
+  };
+
   return (
     <div id="interactive-tools-panel" className="bg-brand-ivory border border-slate-200 rounded-xl overflow-hidden shadow-lg my-8">
       {/* Tools Top Header Navigation */}
@@ -138,12 +246,22 @@ export function InteractiveTools() {
           <Sparkles className="text-[#F6B73C]" size={20} />
           URAL Bangladesh Travel Utility Desk
         </h3>
-        <div className="flex bg-[#0c2033]/80 p-1 rounded-lg border border-slate-800 text-xs text-white">
+        <div className="flex flex-wrap bg-[#0c2033]/80 p-1 rounded-lg border border-slate-800 text-xs text-white gap-1">
+          <button
+            id="tool-nav-airports"
+            onClick={() => setActiveTool("airports")}
+            className={`px-3 py-1.5 rounded-md font-semibold transition-all flex items-center gap-1.5 ${
+              activeTool === "airports" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
+            }`}
+          >
+            <Plane size={13} />
+            Airport Codes (IATA)
+          </button>
           <button
             id="tool-nav-calculator"
             onClick={() => setActiveTool("calculator")}
             className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "calculator" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-350 hover:text-white"
+              activeTool === "calculator" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-350 hover:text-white"
             }`}
           >
             Trip Cost Estimator
@@ -152,7 +270,7 @@ export function InteractiveTools() {
             id="tool-nav-converter"
             onClick={() => setActiveTool("converter")}
             className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "converter" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-350 hover:text-white"
+              activeTool === "converter" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-350 hover:text-white"
             }`}
           >
             Currency Converter
@@ -161,7 +279,7 @@ export function InteractiveTools() {
             id="tool-nav-packing"
             onClick={() => setActiveTool("packing")}
             className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "packing" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-350 hover:text-white"
+              activeTool === "packing" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-350 hover:text-white"
             }`}
           >
             Smart Checklist
@@ -170,7 +288,7 @@ export function InteractiveTools() {
             id="tool-nav-visa-checker"
             onClick={() => setActiveTool("visa-checker")}
             className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "visa-checker" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-350 hover:text-white"
+              activeTool === "visa-checker" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-350 hover:text-white"
             }`}
           >
             Visa Checker
@@ -179,7 +297,7 @@ export function InteractiveTools() {
             id="tool-nav-airhelp"
             onClick={() => setActiveTool("airhelp")}
             className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "airhelp" ? "bg-[#F6B73C] text-brand-navy" : "text-slate-350 hover:text-white"
+              activeTool === "airhelp" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-350 hover:text-white"
             }`}
           >
             Flight Delay Claim (€600)
@@ -510,6 +628,313 @@ export function InteractiveTools() {
         {activeTool === "airhelp" && (
           <div className="animate-fade-in">
             <AirHelpWidget />
+          </div>
+        )}
+
+        {/* TOOL 6: IATA AIRPORT CODES & WHATSAPP FLIGHT INQUIRY GENERATOR */}
+        {activeTool === "airports" && (
+          <div className="space-y-8 animate-fade-in">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
+              <div>
+                <div className="flex items-center gap-2 text-slate-900 font-serif">
+                  <Plane className="text-brand-navy" size={22} />
+                  <h4 className="font-bold text-xl">IATA Airport Codes & Flight Desk Directory</h4>
+                </div>
+                <p className="text-xs text-slate-500 mt-1">
+                  Official 3-letter airport codes required for global GDS ticket booking, domestic connections, and airline inquiries.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-mono text-slate-600 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200 shrink-0">
+                <span className="w-2 h-2 rounded-full bg-brand-emerald animate-pulse" />
+                <span>32 Verified Air Hubs</span>
+              </div>
+            </div>
+
+            {/* Part A: 1-Click WhatsApp Flight Quote Generator */}
+            <div className="bg-gradient-to-br from-slate-900 via-brand-navy to-[#081322] text-white p-6 rounded-2xl border border-slate-800 shadow-xl space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                <div className="space-y-0.5">
+                  <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-wider block">
+                    Instant Ticketing Assistance
+                  </span>
+                  <h5 className="font-serif font-bold text-base text-white">
+                    1-Click WhatsApp Flight Fare Request
+                  </h5>
+                </div>
+                <span className="text-[11px] text-slate-300">
+                  Direct connection with Dhaka Outbound Desk (+8801784385335)
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs text-slate-900">
+                <div>
+                  <label className="block text-[11px] font-semibold text-slate-300 mb-1">Flying From (Origin)</label>
+                  <select
+                    value={inquiryOrigin}
+                    onChange={(e) => setInquiryOrigin(e.target.value)}
+                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
+                  >
+                    <optgroup label="Bangladesh Hubs">
+                      <option value="DAC">DAC — Dhaka (Hazrat Shahjalal)</option>
+                      <option value="CGP">CGP — Chattogram (Shah Amanat)</option>
+                      <option value="ZYL">ZYL — Sylhet (Osmani)</option>
+                      <option value="CXB">CXB — Cox's Bazar</option>
+                      <option value="JSR">JSR — Jashore / Khulna</option>
+                      <option value="SPD">SPD — Saidpur / Rangpur</option>
+                    </optgroup>
+                    <optgroup label="International">
+                      <option value="DXB">DXB — Dubai, UAE</option>
+                      <option value="KUL">KUL — Kuala Lumpur, Malaysia</option>
+                      <option value="BKK">BKK — Bangkok, Thailand</option>
+                      <option value="SIN">SIN — Singapore</option>
+                      <option value="JED">JED — Jeddah, Saudi Arabia</option>
+                    </optgroup>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-semibold text-slate-300 mb-1">Flying To (Destination)</label>
+                  <select
+                    value={inquiryDestination}
+                    onChange={(e) => setInquiryDestination(e.target.value)}
+                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
+                  >
+                    <optgroup label="Middle East">
+                      <option value="DXB">DXB — Dubai International, UAE</option>
+                      <option value="SHJ">SHJ — Sharjah (Air Arabia Hub)</option>
+                      <option value="AUH">AUH — Abu Dhabi, UAE</option>
+                      <option value="JED">JED — Jeddah (Makkah/Umrah)</option>
+                      <option value="MED">MED — Madinah, Saudi Arabia</option>
+                      <option value="RUH">RUH — Riyadh, Saudi Arabia</option>
+                      <option value="DMM">DMM — Dammam, Saudi Arabia</option>
+                      <option value="DOH">DOH — Doha, Qatar</option>
+                      <option value="MCT">MCT — Muscat, Oman</option>
+                      <option value="KWI">KWI — Kuwait City</option>
+                    </optgroup>
+                    <optgroup label="Southeast & South Asia">
+                      <option value="BKK">BKK — Bangkok (Suvarnabhumi)</option>
+                      <option value="DMK">DMK — Bangkok (Don Mueang)</option>
+                      <option value="KUL">KUL — Kuala Lumpur (KLIA)</option>
+                      <option value="SIN">SIN — Singapore Changi</option>
+                      <option value="MLE">MLE — Maldives (Male)</option>
+                      <option value="KTM">KTM — Kathmandu, Nepal</option>
+                      <option value="CCU">CCU — Kolkata, India</option>
+                      <option value="DEL">DEL — Delhi, India</option>
+                      <option value="MAA">MAA — Chennai, India</option>
+                      <option value="CMB">CMB — Colombo, Sri Lanka</option>
+                    </optgroup>
+                    <optgroup label="Domestic (Bangladesh)">
+                      <option value="CGP">CGP — Chattogram</option>
+                      <option value="CXB">CXB — Cox's Bazar</option>
+                      <option value="ZYL">ZYL — Sylhet</option>
+                      <option value="DAC">DAC — Dhaka</option>
+                    </optgroup>
+                    <optgroup label="Long Haul">
+                      <option value="LHR">LHR — London Heathrow, UK</option>
+                      <option value="JFK">JFK — New York JFK, USA</option>
+                      <option value="YYZ">YYZ — Toronto, Canada</option>
+                      <option value="IST">IST — Istanbul, Turkey</option>
+                    </optgroup>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-semibold text-slate-300 mb-1">Departure Date</label>
+                  <input
+                    type="date"
+                    value={inquiryDate}
+                    onChange={(e) => setInquiryDate(e.target.value)}
+                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-semibold text-slate-300 mb-1">Passengers & Cabin</label>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    <select
+                      value={inquiryPassengers}
+                      onChange={(e) => setInquiryPassengers(e.target.value)}
+                      className="bg-white border border-slate-300 rounded-lg px-2 py-2 text-xs text-slate-900 focus:outline-none"
+                    >
+                      <option value="1 Adult">1 Adult</option>
+                      <option value="2 Adults">2 Adults</option>
+                      <option value="3 Adults">3 Adults</option>
+                      <option value="Family (2A + 1C)">2A + 1 Child</option>
+                      <option value="Family (2A + 2C)">2A + 2 Children</option>
+                      <option value="Group (4+ Pax)">Group (4+)</option>
+                    </select>
+                    <select
+                      value={inquiryClass}
+                      onChange={(e) => setInquiryClass(e.target.value)}
+                      className="bg-white border border-slate-300 rounded-lg px-2 py-2 text-xs text-slate-900 focus:outline-none"
+                    >
+                      <option value="Economy">Economy</option>
+                      <option value="Premium Economy">Prem Economy</option>
+                      <option value="Business">Business</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                <span className="text-[11px] text-slate-400">
+                  Ready to send via WhatsApp: <strong className="text-white font-mono">{inquiryOrigin} ➔ {inquiryDestination}</strong> ({inquiryDate || "Flexible date"})
+                </span>
+                <a
+                  href={generateWhatsAppInquiryUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl transition-all shadow-md shrink-0 cursor-pointer"
+                >
+                  <Send size={14} />
+                  <span>Send Fare Quote Request on WhatsApp →</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Part B: Search & Directory Filter */}
+            <div className="space-y-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <div className="relative flex-1">
+                  <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <input
+                    type="text"
+                    value={airportQuery}
+                    onChange={(e) => setAirportQuery(e.target.value)}
+                    placeholder="Search by 3-letter IATA code, city, country, or airport name (e.g. DAC, Chittagong, Dubai, BKK, Jeddah)..."
+                    className="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-navy shadow-xs"
+                  />
+                  {airportQuery && (
+                    <button
+                      onClick={() => setAirportQuery("")}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs font-semibold cursor-pointer"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap items-center gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs">
+                  <button
+                    onClick={() => setAirportCategory("all")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
+                      airportCategory === "all" ? "bg-white text-slate-900 shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    All ({AIRPORTS_DIRECTORY.length})
+                  </button>
+                  <button
+                    onClick={() => setAirportCategory("bangladesh")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
+                      airportCategory === "bangladesh" ? "bg-white text-slate-900 shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    Bangladesh Domestic (8)
+                  </button>
+                  <button
+                    onClick={() => setAirportCategory("middle-east")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
+                      airportCategory === "middle-east" ? "bg-white text-slate-900 shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    Middle East (10)
+                  </button>
+                  <button
+                    onClick={() => setAirportCategory("asia")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
+                      airportCategory === "asia" ? "bg-white text-slate-900 shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    South & SE Asia (10)
+                  </button>
+                  <button
+                    onClick={() => setAirportCategory("global")}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
+                      airportCategory === "global" ? "bg-white text-slate-900 shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    Global Gateways (4)
+                  </button>
+                </div>
+              </div>
+
+              {copiedCode && (
+                <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs px-4 py-2 rounded-xl flex items-center gap-2">
+                  <Check size={14} className="text-emerald-600 shrink-0" />
+                  <span>IATA code <strong>{copiedCode}</strong> copied to clipboard! Paste it into your flight search or ticket chat.</span>
+                </div>
+              )}
+
+              {/* Directory Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                {filteredAirports.map((airport) => (
+                  <div
+                    key={airport.code}
+                    className="bg-white border border-slate-200 rounded-xl p-4 hover:border-brand-navy hover:shadow-xs transition-all space-y-2.5 flex flex-col justify-between"
+                  >
+                    <div className="space-y-1">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-mono font-black text-lg text-brand-navy tracking-tight">
+                          {airport.code}
+                        </span>
+                        <div className="flex items-center gap-1.5 text-xs text-slate-500">
+                          <span>{airport.city}</span>
+                          <span className="text-slate-300">·</span>
+                          <span className="font-medium text-slate-700">{airport.country}</span>
+                        </div>
+                      </div>
+                      <h6 className="text-xs font-semibold text-slate-900 leading-snug line-clamp-1">
+                        {airport.name}
+                      </h6>
+                      <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed">
+                        Airlines: {airport.airlines}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-2 text-xs">
+                      <button
+                        type="button"
+                        onClick={() => handleCopyCode(airport.code)}
+                        className="inline-flex items-center gap-1 text-[11px] text-slate-600 hover:text-brand-navy bg-slate-50 hover:bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-md transition-colors cursor-pointer"
+                      >
+                        <Copy size={11} />
+                        <span>Copy Code</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setInquiryDestination(airport.code);
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-navy hover:text-brand-emerald cursor-pointer"
+                      >
+                        <span>Set as Destination →</span>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {filteredAirports.length === 0 && (
+                <div className="text-center py-12 bg-white rounded-2xl border border-slate-200 space-y-2">
+                  <p className="text-sm font-semibold text-slate-800">No airport found matching "{airportQuery}"</p>
+                  <p className="text-xs text-slate-500">
+                    Try searching for another city, country, or 3-letter IATA code, or request a custom flight route on WhatsApp.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Travel Agent Tip */}
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
+              <div className="flex items-center gap-2 text-xs font-bold text-brand-navy uppercase tracking-wider">
+                <Sparkles size={14} className="text-[#D4941A]" />
+                <span>Senior Ticketing Consultant Advice for Inbound Callers</span>
+              </div>
+              <p className="text-xs text-slate-700 leading-relaxed">
+                When calling or messaging a travel desk, always mention the <strong>departure city code (e.g. DAC for Dhaka, CGP for Chattogram)</strong>, the <strong>destination code (e.g. DXB for Dubai, JED for Jeddah)</strong>, and whether your <strong>dates are fixed or flexible by 1–2 days</strong>. Fare differences between consecutive departure days can save up to BDT 12,000 on long-haul and Middle East routes.
+              </p>
+            </div>
           </div>
         )}
       </div>

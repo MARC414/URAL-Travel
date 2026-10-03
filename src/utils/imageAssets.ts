@@ -122,6 +122,8 @@ export const BLOG_IMAGE_ALT_TEXT: Readonly<Record<string, string>> = {
   "singapore-visa-guide-bangladesh-agents": "The Gardens by the Bay Supertrees and Singapore skyline at twilight.",
   "maldives-budget-trip-bangladesh-maafushi": "Overwater villas above a turquoise lagoon in the Maldives.",
   "cheap-flight-booking-hacks-dhaka": "An airplane wing above the clouds, viewed from a passenger cabin.",
+  "bangladesh-travelers-iata-airport-codes-directory-guide": "Passenger aircraft and tarmac gates at an international airport terminal.",
+  "chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai": "Dubai skyline and waterfront architecture illuminated at twilight.",
 };
 
 export function getBlogImageAltText(slug: string): string {
