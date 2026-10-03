@@ -1,7 +1,5 @@
 {
   "name": "URAL Travel Intelligence",
   "description": "Editorial Travel Intelligence Platform for Bangladesh and global outbound travelers with flight scanner, hotel search, and visa checklists.",
-  "capabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
+  "capabilities": []
 }
