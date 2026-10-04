@@ -44,15 +44,18 @@
       #root{min-height:100vh}
     </style>
     <!--
-      emrld.ltd preconnect: saves 310ms by establishing TLS connection early.
-      No `crossorigin` here on purpose: the affiliate script is injected as a
-      plain async <script> (no crossorigin attribute), i.e. a no-cors request,
-      and a CORS-mode preconnect cannot be reused by it. Lighthouse reports
-      "Unused preconnect / check that the crossorigin attribute is used
-      properly" for exactly this mismatch. Add crossorigin back only if the
-      script tag itself starts requesting with crossorigin.
+      No preconnect to emrld.ltd, deliberately. The affiliate script is loaded
+      lazily (footer intersection) AND gated on marketing consent for every
+      visitor, so a page-load-time connection to that origin would be
+      speculative for most sessions — and it would contact a marketing processor
+      before the visitor has been given the choice, which is the exact thing the
+      consent gate exists to prevent. The cost of dropping it is one DNS+TLS
+      handshake on a fetch that is neither render-blocking nor on the critical
+      path.
+      (An earlier revision preconnected here because the script loaded for
+      every visitor; it also needed a no-cors preconnect to match the plain
+      async <script>, which Lighthouse flagged as an unused preconnect.)
     -->
-    <link rel="preconnect" href="https://emrld.ltd" />
     <title>Bangladesh Travel Guides, Flights &amp; Visas from Dhaka | URAL</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="48x48" href="/assets/brand/favicon/favicon-48.png" />

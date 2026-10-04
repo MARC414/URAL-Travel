@@ -53,6 +53,25 @@ function read(filePath: string): string | null {
   return fs.existsSync(filePath) ? fs.readFileSync(filePath, "utf8") : null;
 }
 
+/**
+ * Extract the inline affiliate loader from an HTML document.
+ *
+ * Anchored on `function loadEmerald` and then walked *backwards* to the nearest
+ * `<script` tag: a forward-only regex starting at the first `<script>` in the
+ * file would swallow every tag and comment in between (it has produced false
+ * positives twice — once from a `crossorigin` mention in markup, once from the
+ * word "preconnect" in a comment).
+ */
+function extractAffiliateLoader(html: string): string {
+  const marker = html.indexOf("function loadEmerald");
+  if (marker === -1) return "";
+  const open = html.lastIndexOf("<script", marker);
+  const bodyStart = html.indexOf(">", open);
+  const close = html.indexOf("</script>", marker);
+  if (open === -1 || bodyStart === -1 || close === -1) return "";
+  return html.slice(bodyStart + 1, close);
+}
+
 // --- 1. Build output exists -------------------------------------------------
 
 check(fs.existsSync(path.join(DIST_DIR, "index.html")), "dist/index.html exists");
@@ -427,14 +446,19 @@ check(
     : `shipped HTML references missing files: ${[...missingRefs].join(", ")}`
 );
 
-// The emrld.ltd preconnect must stay in no-cors mode: the affiliate script is
-// injected as a plain async <script>, so a `crossorigin` preconnect opens a
-// connection that request cannot reuse — Lighthouse reports it as an "unused
-// preconnect" and its LCP-savings column stays empty.
+// The affiliate origin must NOT be preconnected from the shell. The script is
+// lazy and consent-gated for every visitor, so opening a connection at page load
+// would be speculative for most sessions and would touch a marketing processor
+// before the visitor's choice. (A previous revision preconnected here, back when
+// the script loaded for every visitor without consent.)
+const loaderAddsPreconnect = /preconnect/.test(
+  extractAffiliateLoader(read(path.join(ROOT_DIR, "index.html")) ?? "")
+);
 check(
   distIndexHtml !== null &&
-    /<link rel="preconnect" href="https:\/\/emrld\.ltd" \/>/.test(distIndexHtml),
-  "dist/index.html preconnects emrld.ltd without a misapplied crossorigin attribute"
+    !/rel="preconnect"[^>]*emrld\.ltd/.test(distIndexHtml) &&
+    !loaderAddsPreconnect,
+  "no preconnect to the consent-gated affiliate origin (shell or loader)"
 );
 
 // --- 2d. Accessibility guards (WCAG 2.1 AA contrast + the audited fixes) ----
@@ -776,15 +800,7 @@ check(
 );
 
 // --- the affiliate loader's actual consent decision -------------------------
-const loaderSource = (() => {
-  const marker = shellHtml.indexOf("function loadEmerald");
-  if (marker === -1) return "";
-  const open = shellHtml.lastIndexOf("<script", marker);
-  const bodyStart = shellHtml.indexOf(">", open);
-  const close = shellHtml.indexOf("</script>", marker);
-  if (open === -1 || bodyStart === -1 || close === -1) return "";
-  return shellHtml.slice(bodyStart + 1, close);
-})();
+const loaderSource = extractAffiliateLoader(shellHtml);
 
 interface LoaderRun {
   injected: string[];
