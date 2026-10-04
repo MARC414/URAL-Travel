@@ -171,8 +171,8 @@ for (const file of distHtmlFiles) {
   fontChecked++;
   const rel = path.relative(DIST_DIR, file);
   const isBn = rel.startsWith(`bn${path.sep}`) || rel === "bn.html";
-  const hasNoto = html.includes('href="/fonts/noto-sans-bengali-400.woff2"');
-  const hasInter = html.includes('href="/fonts/inter-400.woff2"');
+  const hasNoto = html.includes('href="/fonts/noto-sans-bengali-400-v1.woff2"');
+  const hasInter = html.includes('href="/fonts/inter-400-v1.woff2"');
   if (isBn && !hasNoto) fontProblems.push(`${rel}: Bengali page without Noto preload`);
   if (isBn && hasInter) fontProblems.push(`${rel}: Bengali page still preloading Inter`);
   if (!isBn && !hasInter) fontProblems.push(`${rel}: English page without Inter preload`);
@@ -209,6 +209,117 @@ if (distIndexHtml !== null) {
     "analytics_storage can default to denied in shipped HTML"
   );
 }
+
+// --- 2c. Cache-lifetime guards (Lighthouse "efficient cache lifetimes") -----
+//
+// Lighthouse flags every static asset whose Cache-Control max-age is under
+// 30 days and estimates the transfer it considers wasted on repeat visits.
+// This site shipped 7-day TTLs on /fonts/* and the brand SVGs and was reported
+// for 28 KiB (fonts 212 KiB of the 266 KiB listed — the audit lists
+// everything, not only the flagged rows).
+//
+// Raising a TTL is only safe for unhashed files if the filename changes with
+// the content, so the rule below pairs the two: the header must be a
+// year + immutable, AND every font the app references must carry a `-vN`
+// version suffix and exist on disk. Rename the file without bumping the
+// suffix, or add an unversioned font, and this fails instead of silently
+// serving year-old bytes.
+
+const headersFile = read(path.join(ROOT_DIR, "public", "_headers")) ?? "";
+const ONE_YEAR_SECONDS = 31_536_000;
+
+function hasImmutableOneYearTtl(pathPattern: string): boolean {
+  const lines = headersFile.split("\n");
+  const idx = lines.findIndex((l) => l.trim() === pathPattern);
+  if (idx === -1) return false;
+  const ttlLine = lines[idx + 1] ?? "";
+  const maxAge = Number(ttlLine.match(/max-age=(\d+)/)?.[1] ?? 0);
+  return maxAge >= ONE_YEAR_SECONDS && /immutable/.test(ttlLine);
+}
+
+check(
+  hasImmutableOneYearTtl("/fonts/*") &&
+    hasImmutableOneYearTtl("/assets/brand/svg/*"),
+  "public/_headers serves /fonts/* and /assets/brand/svg/* with max-age>=1y, immutable"
+);
+
+// Every font referenced from the app shell or the prerenderer must be a
+// versioned file that exists in public/fonts/. Collect references from the
+// source (index.html, scripts/) rather than dist, so a typo'd rename fails
+// even before the build copies anything.
+const fontRefs = new Set<string>();
+for (const rel of ["index.html", "scripts/prerender.ts"]) {
+  const src = read(path.join(ROOT_DIR, rel)) ?? "";
+  for (const m of src.matchAll(/\/fonts\/([A-Za-z0-9._-]+\.woff2)/g)) {
+    fontRefs.add(m[1]);
+  }
+}
+const unversionedFonts = [...fontRefs].filter((f) => !/-v\d+\.woff2$/.test(f));
+const missingFonts = [...fontRefs].filter(
+  (f) => !fs.existsSync(path.join(ROOT_DIR, "public", "fonts", f))
+);
+check(
+  fontRefs.size > 0 && unversionedFonts.length === 0 && missingFonts.length === 0,
+  unversionedFonts.length === 0 && missingFonts.length === 0
+    ? `all ${fontRefs.size} referenced fonts are versioned and present in public/fonts/`
+    : `font cache-safety broken — unversioned: [${unversionedFonts.join(", ")}] ` +
+        `missing on disk: [${missingFonts.join(", ")}]`
+);
+
+// Brand SVG marks must carry the same version suffix, for the same reason.
+const brandSvgDir = path.join(ROOT_DIR, "public", "assets", "brand", "svg");
+const unversionedSvg = fs.existsSync(brandSvgDir)
+  ? fs.readdirSync(brandSvgDir).filter((f) => f.endsWith(".svg") && !/-v\d+\.svg$/.test(f))
+  : [];
+check(
+  fs.existsSync(brandSvgDir) && unversionedSvg.length === 0,
+  unversionedSvg.length === 0
+    ? "every brand SVG is versioned for its 1-year cache TTL"
+    : `brand SVGs without a -vN suffix: ${unversionedSvg.join(", ")}`
+);
+
+// No stray unversioned font may sit in public/fonts: scripts/download-fonts.sh
+// writes there, and an unversioned file is exactly what an immutable
+// Cache-Control must never serve (it would be cached for a year under a name
+// that never changes).
+const fontsDir = path.join(ROOT_DIR, "public", "fonts");
+const strayFonts = fs.existsSync(fontsDir)
+  ? fs.readdirSync(fontsDir).filter((f) => f.endsWith(".woff2") && !/-v\d+\.woff2$/.test(f))
+  : [];
+check(
+  strayFonts.length === 0,
+  strayFonts.length === 0
+    ? "public/fonts contains no unversioned woff2 files"
+    : `unversioned woff2 in public/fonts (rename to -vN or delete): ${strayFonts.join(", ")}`
+);
+
+// Every font / brand mark referenced from shipped HTML must exist in dist.
+// This is the general broken-reference guard: the versioned rename touches
+// hand-written pages outside the React tree (e.g. public/travelpayouts-wl.html)
+// that nothing else in this script would notice going 404.
+const missingRefs = new Set<string>();
+for (const file of distHtmlFiles) {
+  const html = fs.readFileSync(file, "utf8");
+  for (const m of html.matchAll(/(?:\/fonts\/[A-Za-z0-9._-]+\.woff2|\/assets\/brand\/svg\/[A-Za-z0-9._-]+\.svg)/g)) {
+    if (!fs.existsSync(path.join(DIST_DIR, m[0]))) missingRefs.add(m[0]);
+  }
+}
+check(
+  missingRefs.size === 0,
+  missingRefs.size === 0
+    ? "every /fonts and /assets/brand/svg reference in shipped HTML resolves in dist"
+    : `shipped HTML references missing files: ${[...missingRefs].join(", ")}`
+);
+
+// The emrld.ltd preconnect must stay in no-cors mode: the affiliate script is
+// injected as a plain async <script>, so a `crossorigin` preconnect opens a
+// connection that request cannot reuse — Lighthouse reports it as an "unused
+// preconnect" and its LCP-savings column stays empty.
+check(
+  distIndexHtml !== null &&
+    /<link rel="preconnect" href="https:\/\/emrld\.ltd" \/>/.test(distIndexHtml),
+  "dist/index.html preconnects emrld.ltd without a misapplied crossorigin attribute"
+);
 
 // --- 3. Sitemap: structure + the lastmod invariant --------------------------
 

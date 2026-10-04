@@ -1888,7 +1888,7 @@ export default function App() {
               onClick={() => navigateTo("/")}
             >
               <img
-                src="/assets/brand/svg/ural-wordmark.svg"
+                src="/assets/brand/svg/ural-wordmark-v1.svg"
                 alt="URAL"
                 width="98"
                 height="32"
@@ -2340,7 +2340,7 @@ export default function App() {
                 <div className="h-15 px-4 flex items-center justify-between border-b border-white/10 shrink-0">
                   <div className="flex flex-col items-start gap-0.5">
                     <img
-                      src="/assets/brand/svg/ural-wordmark.svg"
+                      src="/assets/brand/svg/ural-wordmark-v1.svg"
                       alt="URAL"
                       width="70"
                       height="24"
@@ -3145,7 +3145,8 @@ export default function App() {
                     <img
                       {...getResponsiveImageProps(
                         dest.bgImg,
-                        "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw",
+                        // column count flips at sm (640) / lg (1024) — keep in step with the grid above
+                        "(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw",
                       )}
                       alt={dest.alt}
                       loading="lazy"
@@ -6668,7 +6669,8 @@ export default function App() {
                                 <img
                                   {...getResponsiveImageProps(
                                     getBlogCoverImage(post.slug),
-                                    "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw",
+                                    // 1 column below md (768), 3 columns above it — no 50vw band exists here
+                                    "(max-width: 767px) 100vw, 33vw",
                                   )}
                                   alt={getBlogImageAltText(post.slug)}
                                   loading="lazy"
@@ -7306,7 +7308,7 @@ export default function App() {
                   className="inline-flex items-center gap-2.5 text-white cursor-pointer"
                 >
                   <img
-                    src="/assets/brand/svg/ural-wordmark.svg"
+                    src="/assets/brand/svg/ural-wordmark-v1.svg"
                     alt="URAL"
                     width="88"
                     height="30"

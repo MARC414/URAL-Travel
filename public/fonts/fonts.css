@@ -7,7 +7,7 @@
 /* Inter Regular (400) - Primary body text */
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/inter-400.woff2') format('woff2');
+  src: url('/fonts/inter-400-v1.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -17,7 +17,7 @@
 /* Inter Semi-Bold (600) - Headings and emphasis */
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/inter-600.woff2') format('woff2');
+  src: url('/fonts/inter-600-v1.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -27,7 +27,7 @@
 /* Inter Bold (700) - Strong emphasis */
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/inter-700.woff2') format('woff2');
+  src: url('/fonts/inter-700-v1.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -37,7 +37,7 @@
 /* Noto Sans Bengali Regular (400) - Bengali body text */
 @font-face {
   font-family: 'Noto Sans Bengali';
-  src: url('/fonts/noto-sans-bengali-400.woff2') format('woff2');
+  src: url('/fonts/noto-sans-bengali-400-v1.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -47,7 +47,7 @@
 /* Noto Sans Bengali Semi-Bold (600) - Bengali headings */
 @font-face {
   font-family: 'Noto Sans Bengali';
-  src: url('/fonts/noto-sans-bengali-600.woff2') format('woff2');
+  src: url('/fonts/noto-sans-bengali-600-v1.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;

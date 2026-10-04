@@ -2352,8 +2352,8 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     // and swaps (perceived LCP + CLS risk). English routes keep Inter.
     const fontPreloads =
       r.locale === "bn"
-        ? `    <link rel="preload" as="font" type="font/woff2" href="/fonts/noto-sans-bengali-400.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/noto-sans-bengali-600.woff2" crossorigin />\n`
-        : `    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600.woff2" crossorigin />\n`;
+        ? `    <link rel="preload" as="font" type="font/woff2" href="/fonts/noto-sans-bengali-400-v1.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/noto-sans-bengali-600-v1.woff2" crossorigin />\n`
+        : `    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-v1.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600-v1.woff2" crossorigin />\n`;
 
     // Reciprocal hreflang cluster: identical on both members of a locale pair
     // (en-bd/x-default → the English URL, bn-bd → the Bengali URL). The bn-bd

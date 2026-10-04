@@ -11,7 +11,8 @@
 - **Asset caching (was the P0 bug):** `public/_headers` now serves `/assets/*` with `Cache-Control: public, max-age=31536000, immutable`. Content-hashed bundles were previously served `max-age=0, must-revalidate` — every visit re-downloaded everything. **Never weaken this.**
 - **Code splitting:** `vite.config.ts` uses **function-form** `manualChunks` matching resolved module paths. The object-form version silently failed (`react-dom/client` is a different module than `react-dom`), leaving ~190 KB of React DOM in the app chunk. Result: index chunk 1,414,637 → 901,531 bytes (−36%), `vendor-react` 193,814 B, `content-data` 330,321 B. **If you touch `manualChunks`, keep it function-form and rebuild-verify the chunk sizes.**
 - **`<head>` order:** charset → viewport → LCP preload → font preconnects → metadata → gtag.js → `emrld.ltd` last.
-- **`emrld.ltd`** downgraded from `preconnect` to `dns-prefetch`.
+- **Cache policy (v2, 2026-10-04 night):** `/assets/*`, `/fonts/*` and `/assets/brand/svg/*` are `max-age=31536000, immutable`. Anything served immutable must be *immutable by name*: our fonts and brand SVGs are versioned (`inter-400-v1.woff2`, `ural-wordmark-v1.svg`) because they are not content-hashed — bump the `-vN` suffix before editing them, and note that `npm run verify:build` fails otherwise. Favicons stay at 7 days on purpose (favicon caches do not reliably revalidate). Lighthouse's *efficient cache lifetimes* audit flags **anything under 30 days**, which is why the earlier 7-day font rule still appeared in reports.
+- **`emrld.ltd`** carries a `preconnect` **without** `crossorigin` (it was briefly downgraded to `dns-prefetch`, then restored as a preconnect). The missing `crossorigin` is deliberate: the affiliate script is injected as a plain async `<script>`, so it performs a no-cors request and could never reuse a CORS-mode connection — which is exactly what Lighthouse reports as an "unused preconnect".
 
 ---
 
