@@ -25,6 +25,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { BLOG_DATA } from "../src/constants";
+import {
+  buildResponsiveSrcSet,
+  RESPONSIVE_IMAGE_BREAKPOINTS,
+} from "../src/utils/imageAssets";
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIST_DIR = path.join(ROOT_DIR, "dist");
@@ -64,6 +68,147 @@ check(
   blogImages.length === BLOG_DATA.length,
   `dist/img/blog has one JPEG per blog post (${blogImages.length}/${BLOG_DATA.length})`
 );
+
+// --- 2b. Responsive breakpoints & Consent Mode regression guards -----------
+//
+// Two invariants that are silent when broken:
+//
+//  (1) The 960w breakpoint only pays off if every emitter of a srcset agrees:
+//      src/utils/imageAssets.ts (React), scripts/prerender.ts (the LCP
+//      <link rel="preload"> rewritten into ~155 prerendered routes) and the
+//      hand-written copy in index.html. A half-added breakpoint would ship
+//      tablets and DPR-2 phones the 1200w LCP image forever, with no error
+//      anywhere — the same failure shape as the 2026-10 Google Fonts @import
+//      that silently undid all of Phase 1.
+//  (2) Consent Mode v2 is a legal control, not a performance one: if the
+//      `consent default` block ever lands AFTER the GTM loader (a reorder, a
+//      "cleanup" commit), analytics starts firing before consent with no
+//      build failure at all. Assert the order in the shipped HTML.
+
+function collectHtmlFiles(dir: string, acc: string[] = []): string[] {
+  if (!fs.existsSync(dir)) return acc;
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) collectHtmlFiles(full, acc);
+    else if (entry.name.endsWith(".html")) acc.push(full);
+  }
+  return acc;
+}
+
+const distHtmlFiles = collectHtmlFiles(DIST_DIR);
+const distIndexHtml = read(path.join(DIST_DIR, "index.html"));
+
+// (1a) every responsive image stem ships every breakpoint
+const responsiveImgDir = path.join(DIST_DIR, "assets", "images");
+const stems = new Map<string, Set<number>>();
+if (fs.existsSync(responsiveImgDir)) {
+  for (const file of fs.readdirSync(responsiveImgDir)) {
+    const match = file.match(/^(.+)-(\d+)\.webp$/);
+    if (!match) continue;
+    if (!stems.has(match[1])) stems.set(match[1], new Set());
+    stems.get(match[1])!.add(Number(match[2]));
+  }
+}
+const incompleteStems = [...stems.entries()]
+  .filter(([, widths]) => !RESPONSIVE_IMAGE_BREAKPOINTS.every((w) => widths.has(w)))
+  .map(
+    ([stem, widths]) =>
+      `${stem} [${[...widths].sort((a, b) => a - b).join(",")}]`
+  );
+check(
+  stems.size > 0 && incompleteStems.length === 0,
+  incompleteStems.length === 0
+    ? `every responsive image ships all breakpoints (${stems.size} stems × ${RESPONSIVE_IMAGE_BREAKPOINTS.join("/")}w)`
+    : `${incompleteStems.length} image stem(s) missing breakpoint(s): ` +
+        incompleteStems.slice(0, 5).join(", ")
+);
+
+// (1b) every imagesrcset in shipped HTML offers every breakpoint, and the
+//      SPA shell's hand-written hero srcset still matches the TS builder
+const srcsetProblems: string[] = [];
+let srcsetCount = 0;
+for (const file of distHtmlFiles) {
+  const html = fs.readFileSync(file, "utf8");
+  for (const match of html.matchAll(/imagesrcset="([^"]+)"/g)) {
+    srcsetCount++;
+    const missing = RESPONSIVE_IMAGE_BREAKPOINTS.filter(
+      (w) => !match[1].includes(` ${w}w`)
+    );
+    if (missing.length > 0) {
+      srcsetProblems.push(
+        `${path.relative(DIST_DIR, file)} missing ${missing.join(",")}w`
+      );
+    }
+  }
+}
+check(
+  srcsetCount > 0 && srcsetProblems.length === 0,
+  srcsetProblems.length === 0
+    ? `all ${srcsetCount} shipped imagesrcset(s) offer ${RESPONSIVE_IMAGE_BREAKPOINTS.join("/")}w`
+    : `${srcsetProblems.length} imagesrcset(s) missing breakpoints: ` +
+        srcsetProblems.slice(0, 5).join(", ")
+);
+
+const heroSrc = "/assets/images/clouds_boat_hero_1781438671378-1200.webp";
+check(
+  distIndexHtml !== null &&
+    distIndexHtml.includes(`imagesrcset="${buildResponsiveSrcSet(heroSrc)}"`),
+  "index.html hero imagesrcset matches buildResponsiveSrcSet() exactly"
+);
+
+// (1c) locale-correct critical font preloads: bn routes must preload Noto
+//      Sans Bengali (their LCP is Bengali text), en routes Inter — and
+//      neither should preload the other locale's font, because an unused
+//      preload competes with the LCP resource for early connections.
+const fontProblems: string[] = [];
+let fontChecked = 0;
+for (const file of distHtmlFiles) {
+  const html = fs.readFileSync(file, "utf8");
+  // Utility pages (404, search-console verification, partner whitelabel)
+  // are static copies from public/ with no app shell and no font preloads —
+  // out of scope. Real routes all carry the #root mount point.
+  if (!html.includes('id="root"')) continue;
+  fontChecked++;
+  const rel = path.relative(DIST_DIR, file);
+  const isBn = rel.startsWith(`bn${path.sep}`) || rel === "bn.html";
+  const hasNoto = html.includes('href="/fonts/noto-sans-bengali-400.woff2"');
+  const hasInter = html.includes('href="/fonts/inter-400.woff2"');
+  if (isBn && !hasNoto) fontProblems.push(`${rel}: Bengali page without Noto preload`);
+  if (isBn && hasInter) fontProblems.push(`${rel}: Bengali page still preloading Inter`);
+  if (!isBn && !hasInter) fontProblems.push(`${rel}: English page without Inter preload`);
+  if (!isBn && hasNoto) fontProblems.push(`${rel}: English page preloading unused Noto`);
+}
+check(
+  fontChecked > 0 && fontProblems.length === 0,
+  fontProblems.length === 0
+    ? `all ${fontChecked} route pages preload their own locale's critical font (bn→Noto, en→Inter)`
+    : `${fontProblems.length} page(s) with wrong font preload: ` +
+        fontProblems.slice(0, 5).join(", ")
+);
+
+// (2) consent default precedes the GTM loader, and defaults to denied.
+//     Whitespace-tolerant: the head script has been rewritten once already
+//     (binary -> granular CMP), and the guard must survive formatting changes
+//     while still catching a reorder or a default that stops denying.
+if (distIndexHtml !== null) {
+  const consentMatch = distIndexHtml.match(/gtag\(\s*'consent'\s*,\s*'default'/);
+  const consentIdx = consentMatch?.index ?? -1;
+  const gtmIdx = distIndexHtml.indexOf("googletagmanager.com/gtm.js");
+  check(
+    consentIdx !== -1 && gtmIdx !== -1 && consentIdx < gtmIdx,
+    consentIdx === -1
+      ? "dist/index.html has no Consent Mode v2 default block"
+      : gtmIdx === -1
+        ? "dist/index.html has no GTM loader"
+        : consentIdx < gtmIdx
+          ? "Consent Mode v2 default state ships before the GTM loader"
+          : "Consent Mode default block moved AFTER the GTM loader (GDPR risk)"
+  );
+  check(
+    /analytics_storage':[^,\n]*'denied'/.test(distIndexHtml),
+    "analytics_storage can default to denied in shipped HTML"
+  );
+}
 
 // --- 3. Sitemap: structure + the lastmod invariant --------------------------
 

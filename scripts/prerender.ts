@@ -21,6 +21,7 @@ import {
   toIsoDate,
 } from "../src/utils/schema";
 import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
+import { buildResponsiveSrcSet } from "../src/utils/imageAssets";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
 import {
   CONTENT_UPDATED,
@@ -2340,8 +2341,19 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
 
     const fullGraphJson = JSON.stringify(buildSchemaGraph(graphNodes, false));
     const lcpImagePreload = r.lcpImageUrl
-      ? `    <link rel="preload" as="image" type="image/webp" href="${escapeHtml(r.lcpImageUrl)}" imagesrcset="${escapeHtml(`${r.lcpImageUrl.replace(/-1200\.webp$/, "-640.webp")} 640w, ${r.lcpImageUrl} 1200w`)}" imagesizes="${escapeHtml(r.lcpImageSizes || "100vw")}" fetchpriority="high" />\n`
+      ? `    <link rel="preload" as="image" type="image/webp" href="${escapeHtml(r.lcpImageUrl)}" imagesrcset="${escapeHtml(buildResponsiveSrcSet(r.lcpImageUrl))}" imagesizes="${escapeHtml(r.lcpImageSizes || "100vw")}" fetchpriority="high" />\n`
       : "";
+
+    // Locale-correct critical font preloads. The LCP element of every /bn/
+    // route is Bengali TEXT, so the critical fonts there are Noto Sans
+    // Bengali 400/600 — the SPA shell preloads Inter 400/600 instead, which
+    // on bn pages spends two early-connection slots on a font with zero
+    // Bengali glyphs while the font that paints the headline arrives late
+    // and swaps (perceived LCP + CLS risk). English routes keep Inter.
+    const fontPreloads =
+      r.locale === "bn"
+        ? `    <link rel="preload" as="font" type="font/woff2" href="/fonts/noto-sans-bengali-400.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/noto-sans-bengali-600.woff2" crossorigin />\n`
+        : `    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600.woff2" crossorigin />\n`;
 
     // Reciprocal hreflang cluster: identical on both members of a locale pair
     // (en-bd/x-default → the English URL, bn-bd → the Bengali URL). The bn-bd
@@ -2357,6 +2369,10 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       .replace(
         /\s*<link rel="preload" as="image"[^>]*\/>\n?/,
         lcpImagePreload ? `\n${lcpImagePreload}` : "\n"
+      )
+      .replace(
+        /[ \t]*<link rel="preload" as="font"[^>]*\/>\n[ \t]*<link rel="preload" as="font"[^>]*\/>\n/,
+        fontPreloads
       )
       .replace(
         /<title>[\s\S]*?<\/title>/,

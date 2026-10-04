@@ -14,7 +14,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0B1426" />
-    <link rel="preload" as="image" type="image/webp" href="/assets/images/clouds_boat_hero_1781438671378-1200.webp" imagesrcset="/assets/images/clouds_boat_hero_1781438671378-640.webp 640w, /assets/images/clouds_boat_hero_1781438671378-1200.webp 1200w" imagesizes="100vw" fetchpriority="high" />
+    <!--
+      LCP hero preload. The imagesrcset below is a hand-written copy of
+      buildResponsiveSrcSet() in src/utils/imageAssets.ts (static HTML cannot
+      import TS); scripts/verify-build.ts asserts the two stay in sync.
+      960w matters most here: DPR-2 phones and tablets used to resolve this
+      preload to the 1200w file (~69KB); they now take the 960w one (~46KB).
+    -->
+    <link rel="preload" as="image" type="image/webp" href="/assets/images/clouds_boat_hero_1781438671378-1200.webp" imagesrcset="/assets/images/clouds_boat_hero_1781438671378-640.webp 640w, /assets/images/clouds_boat_hero_1781438671378-960.webp 960w, /assets/images/clouds_boat_hero_1781438671378-1200.webp 1200w" imagesizes="100vw" fetchpriority="high" />
     <!-- Self-hosted fonts: preload critical Inter 400 & 600 for LCP -->
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600.woff2" crossorigin />

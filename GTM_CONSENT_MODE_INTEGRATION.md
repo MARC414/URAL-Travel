@@ -1,7 +1,23 @@
 # Google Tag Manager Consent Mode Integration
 **Required For:** GDPR/ePR Compliance  
 **Affects:** EU visitors + Bangladesh users visiting from EU  
-**Priority:** CRITICAL (Legal Requirement)
+**Priority:** CRITICAL (Legal Requirement)  
+**Status:** ✅ COMPLETE (2026-10-04) — granular consent UI (`ConsentBanner.tsx`
+with per-category panel), head default-state script, withdrawal paths (footer
+"Cookie settings" + Privacy Policy "Change Preferences"), privacy/cookie
+policy page (`/privacy`, `/bn/privacy`) and CI guard all shipped. Remaining:
+post-deploy DevTools/GA4 verification only.
+
+> **Deviation from the snippets below (deliberate):** the GTM loader stays
+> *deferred* (first interaction or 3s) instead of being replaced by the
+> synchronous snippet shown in Step 1 — reverting to synchronous GTM would
+> give back the ~180ms TBT win from the Core Web Vitals work. Consent Mode
+> works identically because the default-state script still runs first and
+> `dataLayer` replays when GTM boots. Consent writes go through
+> `updateGoogleConsentMode()` in `ConsentBanner.tsx`, which shims
+> `window.gtag` onto `dataLayer` when GTM has not booted yet — never a bare
+> `window.gtag` import. Storage keys are `cookie-consent` and
+> `cookie-consent-settings` (not the `cookie-consent`-less examples below).
 
 ---
 
@@ -238,13 +254,15 @@ useEffect(() => {
 ## 📋 Compliance Checklist
 
 ### Technical Implementation
-- [ ] Consent Mode v2 default state in `<head>`
-- [ ] Cookie banner UI implemented
-- [ ] Accept/Decline handlers update consent
-- [ ] Consent choice persisted in localStorage
-- [ ] Consent state applied on page reload
-- [ ] Tested in Chrome DevTools
-- [ ] Verified in GA4 admin panel
+- [x] Consent Mode v2 default state in `<head>` (index.html, before deferred GTM)
+- [x] Cookie banner UI implemented (src/components/ConsentBanner.tsx, EN+BN)
+- [x] Accept/Decline handlers update consent (via window.uralConsent → dataLayer)
+- [x] Consent choice persisted in localStorage (key `ural-cookie-consent`, try/catch)
+- [x] Consent state applied on page reload (synchronously in the head script)
+- [x] Withdrawal path (footer "Cookie settings" → openBanner, GDPR Art. 7(3))
+- [x] CI guard: consent default must ship before GTM loader (verify-build.ts)
+- [ ] Tested in Chrome DevTools on the deployed site (post-deploy step)
+- [ ] Verified in GA4 admin panel (post-deploy step)
 
 ### Legal Requirements
 - [ ] Privacy policy updated

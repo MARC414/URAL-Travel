@@ -1857,8 +1857,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-[#F6B73C] selection:text-brand-navy overflow-x-hidden">
-      
-
 
       {/* 🟦 STICKY HEADER WRAPPER (Top Strip + Main Navbar) */}
       <div className="sticky top-0 z-50 w-full shadow-lg">
@@ -7659,7 +7657,7 @@ export default function App() {
                 </>
               )}
             </p>
-            <div className="shrink-0 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 font-mono text-[10px] text-slate-400">
+<div className="shrink-0 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 font-mono text-[10px] text-slate-400">
               <a
                 href={isBn ? "/bn/privacy" : "/privacy"}
                 onClick={(e) => {
@@ -7670,6 +7668,19 @@ export default function App() {
               >
                 {isBn ? "গোপনীয়তা ও কুকি নীতিমালা" : "Privacy & Cookie Policy"}
               </a>
+              <span className="hidden sm:inline">•</span>
+              {/* GDPR Art. 7(3): withdrawing consent must be as easy as giving it.
+                  The banner listens for this event and reopens with the
+                  per-category panel (see ConsentBanner.tsx). */}
+              <button
+                type="button"
+                onClick={() =>
+                  window.dispatchEvent(new CustomEvent("ural:open-cookie-banner"))
+                }
+                className="hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
+              >
+                {isBn ? "কুকি সেটিংস" : "Cookie settings"}
+              </button>
               <span className="hidden sm:inline">•</span>
               <span>
                 {isBn

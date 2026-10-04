@@ -6,7 +6,11 @@
 set -e
 
 IMAGE_DIR="public/assets/images"
-SOURCE_DIR="${SOURCE_DIR:-$IMAGE_DIR}"  # Override with original JPG/PNG source
+# The committed JPG masters live in src/assets/optimized-social (42 files, all
+# 1200px wide). Pointing SOURCE_DIR there by default means the pipeline works
+# out of the box and never re-encodes WebP -> WebP. Override only if your
+# masters live elsewhere: SOURCE_DIR=../image-masters bash scripts/...
+SOURCE_DIR="${SOURCE_DIR:-src/assets/optimized-social}"
 
 echo "🖼️  URAL Travel Image Optimization Pipeline"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
