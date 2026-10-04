@@ -1,8 +1,8 @@
 # URAL Travel - Core Web Vitals Optimization Guide
 **Created:** 2026-10-04  
-**Last updated:** 2026-10-04 (night) — 1-year cache TTLs + versioned font/SVG filenames landed (from the live Lighthouse report); **Appendix B** decodes that report, **Appendix A** is the Phase 6A AVIF plan  
-**Status:** Phase 1 ✅ complete · Phase 2 (images) ✅ complete · Phase 3 (JS) ✅ complete · Consent Mode v2 ✅ implemented · Phases 4–6 partially open  
-**Target:** 95+ Performance Score (Mobile & Desktop)
+**Last updated:** 2026-10-05 — AVIF `<picture>` shipped (Appendix **A.8**), blog bodies split into a lazy chunk (Appendix **E**), the marketing-consent gate re-scoped to every visitor (Appendix **D.1.5**) and the Travelpayouts widget chunk moved off its 260 ms timer (Appendix **F**). The metrics table below now separates **targets from measurements** — nothing is green without a number.  
+**Status:** Phases 1–3 ✅ · Consent Mode v2 ✅ · Phase 6A (AVIF) ✅ applied · P3.1 (blog split) ✅ · third-party load (F) ✅ applied · **P6 field verification ⏳ pending deploy**  
+**Target:** 95+ Performance Score (Mobile & Desktop) — **target, not a result** (last lab measurement: ~65 mobile, Appendix B)
 
 ---
 
@@ -20,8 +20,8 @@ the Production Verification commands at the bottom of this guide.
 | 3 | Critical CSS inlined in `<head>` (hero/nav/reset) | ✅ done | `index.html` inline `<style>` |
 | 4 | Self-hosted woff2 preloaded (Inter 400/600) | ✅ done | `index.html`, `public/fonts/` |
 | 5 | GTM deferred to first interaction or 3s | ✅ done | `index.html` deferred loader |
-| 6 | Emerald/Travelpayouts lazy-loaded at footer intersection | ✅ done | `index.html` IntersectionObserver wrapper |
-| 7 | `preconnect` to emrld.ltd | ✅ done | `index.html` |
+| 6 | Emerald/Travelpayouts lazy-loaded at footer intersection **and gated on marketing consent for every visitor** | ✅ done (re-scoped 2026-10-05) | `index.html` IntersectionObserver + `marketingAllowed()`; the edge no longer rewrites HTML (D.1.5) |
+| 7 | `preconnect` to emrld.ltd | ➖ **removed on purpose** 2026-10-05 | the script is lazy *and* consent-gated, so a page-load connection would be speculative and pre-consent; guarded (row 21, D.1.5, F.1) |
 | 8 | **960w WebP variants generated from JPG masters** | ✅ done | 42 files in `public/assets/images/` |
 | 9 | **960w wired into every srcset emitter** | ✅ done | `src/utils/imageAssets.ts` (`buildResponsiveSrcSet`), `scripts/prerender.ts` (LCP preload of prerendered routes), `index.html` (hand-written copy, asserted in sync) |
 | 10 | **GTM Consent Mode v2 default (all denied) before GTM** | ✅ done | `index.html` inline script (granular-CMP version, key `cookie-consent`); order asserted by `verify-build.ts` |
@@ -746,18 +746,29 @@ npm run verify:build  # 50 checks incl. srcset/consent/cache/contrast/security/g
 
 ---
 
-## 📈 Expected Final Metrics
+## 📈 Targets vs what has actually been measured
 
-| Metric | Before | After | Target Met |
-|--------|--------|-------|------------|
-| **Mobile Performance** | 65 | 95+ | ✅ |
-| **Desktop Performance** | 78 | 98+ | ✅ |
-| **LCP (Mobile)** | 3.2s | <2.5s | ✅ |
-| **TBT (Mobile)** | 1.8s | <200ms | ✅ |
-| **FCP (Mobile)** | 2.1s | <1.8s | ✅ |
-| **CLS** | Good | Good | ✅ |
+The previous revision of this table printed a ✅ next to every target. **None of
+those were ever measured** — they were the goals written when the plan was
+drafted. The rule now: a cell is green only when a number backs it, and the
+number says where it came from.
 
----
+| Metric | Target | Measured | State |
+|---|---|---|---|
+| Mobile Performance (lab) | ≥ 95 | **~65** — live PSI report, 2026-10-04 (Appendix B) | ⏳ not re-measured since the work on this branch |
+| Desktop Performance (lab) | ≥ 98 | **~78** — same report | ⏳ same |
+| LCP mobile (lab) | ≤ 2.5 s | **3.2 s** — same report | ⏳ the *bytes* are now smaller (hero 960w 46.3 → 26.0 KB, −44%; eager JS −64 KB gz; the 129 KB gz widget chunk no longer loads before a scroll) but **no post-change measurement exists** |
+| TBT mobile (lab) | ≤ 200 ms | **1.8 s** — same report | ⏳ dominated by third-party JS (GTM 140 KB unused, emrld, the widget). The consent gate, the interaction-deferred GTM and the viewport-triggered widget reduce our share; the third-party share is theirs |
+| FCP mobile (lab) | ≤ 1.8 s | **2.1 s** — same report | ⏳ essentially unchanged by this work — the single stylesheet (17.7 KB transfer) is the last render blocker and was deliberately left alone (B.1) |
+| CLS | ≤ 0.1 | good, and structurally protected | ✅ no layout-affecting change: AVIF uses `<picture className="contents">` and keeps `width`/`height` (A.8) |
+| Accessibility (lab) | 100 | 96 → contrast/target/heading fixes shipped | ⏳ needs the post-deploy re-run (Appendix C) |
+| Best Practices (lab) | 100 | 96 | ⏳ the last deduction is the third-party CORS error; the consent gate should remove it from lab runs (D.1.5) — **verify, don't assume** |
+| **CrUX field p75** (the only number Google ranks on) | LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 | **never measured** | ⏳ requires the deploy plus ~28 days of field data (P6) |
+
+**How to close each ⏳:** deploy PR #13 → re-run PSI mobile on `/`, `/blog/<slug>`
+and one `/bn/` route (Appendix B.4 lists the diffs to expect) → watch
+`errors-in-console` and the image/cache findings disappear → after ~28 days read
+the GSC Core Web Vitals report for the field verdict.
 
 ## ⚠️ Critical Notes
 
@@ -1231,12 +1242,12 @@ was audited before trusting the font rows — the report lists
 |---|---|---|---|
 | **Use efficient cache lifetimes** | 28 KiB | 5 self-hosted fonts + `ural-wordmark.svg` served **7 days**; `/fonts/*` and `/assets/brand/*` were written when the bug was `max-age=0` revalidation, not the audit's **30-day** threshold. The "28 KiB" is Lighthouse's probability-weighted estimate, not the 266 KiB the panel lists — the panel lists *all* resources it inspected, and the audit flags a TTL when fewer than ~92.5% of repeat visits would still have it cached. | ✅ **fixed** — 1y immutable + `-vN` filenames + 4 guards (B.3) |
 | (same audit) emrld.ltd `NTQwMjc3.js` | 1 h, 2 KiB | third-party affiliate script; TTL is theirs | ⛔ not ours. Petitions/mitigations belong to Travelpayouts, not to this repo |
-| **Improve image delivery** | 127 KiB | the homepage hero (served 960w, 46.3 KiB → est. 22.9) and the Bangkok/Nepal destination cards at 960w (90.5 / 85.1 KiB → est. 54.7 / 49.4). For assets that are *already* WebP, this estimate is Lighthouse modelling **recompression/AVIF**, not pointing at a bug: the cards are 96k/87k masters at q78. | ⏳ **Appendix A** — measured AVIF gains are −29%…−54% at the sizes these devices fetch. Cheaper partial lever if AVIF is deferred: re-encode from masters at q68–70 with `cwebp -q 69 -m 6 -resize 960 0 master.jpg -o …-960.webp` (expect −15…−25% on these three) and re-check visually |
+| **Improve image delivery** | 127 KiB | the homepage hero (served 960w, 46.3 KiB → est. 22.9) and the Bangkok/Nepal destination cards at 960w (90.5 / 85.1 KiB → est. 54.7 / 49.4). For assets that are *already* WebP, this estimate is Lighthouse modelling **recompression/AVIF**, not pointing at a bug: the cards are 96k/87k masters at q78. | ✅ **shipped** — AVIF `<picture>` with measured −31.8% across all tiers and −44% on the 960w hero (A.8); the 127 KiB estimate is now answered by real files, and 4 guards keep it that way. (The WebP re-encode fallback recorded here is no longer needed.) Cheaper partial lever if AVIF is deferred: re-encode from masters at q68–70 with `cwebp -q 69 -m 6 -resize 960 0 master.jpg -o …-960.webp` (expect −15…−25% on these three) and re-check visually |
 | **Render-blocking requests** | 150 ms | `/assets/index-*.css` (121 KB raw / 17.7 KB transfer) — the single stylesheet is the last render blocker left. The 2026-09 baseline this guide targets was 400 KB of render-blocking Google Fonts, so this is ~5% of the old cost, not a new regression. | 🔬 measure, then decide: with `cssCodeSplit: true` the route CSS is already separate, so the remaining question is whether 600 ms in the trace is *download* or *parse/compile*. If download: the file is 17.7 KB Brotli and the LCP element is an image/text, so the practical ceiling here is small. Do not inline more CSS by hand — that is how the inline block and `src/index.css` drift apart |
 | **Legacy JavaScript** | 8 KiB | `emrld.ltd/chunk*.js` (`Object.hasOwn`), i.e. their bundle, not ours. Our own build targets Vite 6's `baseline-widely-available` — nothing of ours is flagged. | ⛔ not ours |
 | **Forced reflow** | 36 ms | attributed to `vendor-react` + the Travelpayouts widget; both "unscored", and the growth playbook already documents that the emrld script hijacks native DOM methods | 🔬 only worth a DevTools Performance trace if INP (not lab TBT) is bad in the field. 36 ms does not move a score |
 | **Network dependency tree** | — | max critical path 1,740 ms = **Noto Sans Bengali 600** (56.7 KiB). The preload is present and carries `crossorigin`, so this is the Bengali LCP font arriving on a cold cache; it also explains the "3rd parties" row. On repeat visits the new 1-year TTL removes this chain entirely | ✅ mostly fixed by B.3 (repeat visits); cold visits are inherent to a 57 KiB Bengali font. If the *chain start* is late rather than slow, check that the shell's line order still matches the head-order comment (image preload → font preloads → tags) |
-| **Reduce unused JavaScript** | 289 KiB | GTM 140.0 + TravelpayoutsWidget 52.2 + app 42.5 + vendor-react 20.0 + emrld 34.1 | ⛔ structural (B.2). GTM is already deferred to first-interaction/3s; what remains is analysis/affiliate product surface |
+| **Reduce unused JavaScript** | 289 KiB | GTM 140.0 + TravelpayoutsWidget 52.2 + app 42.5 + vendor-react 20.0 + emrld 34.1 | 🔬 reduced, still third-party-heavy — GTM (interaction/3s) and emrld (consent) are deferred, and the 129 KB gz widget chunk no longer loads before its skeleton approaches the viewport (F.3). What the lab still sees at >3s is mostly GTM's 140 KB, which is an analytics/consent-mode decision, not an optimisation this repo can make alone |
 | **Minimize main-thread work** | 2.5 s | script evaluation 1,038 ms dominates; the same third-party set as above | ⛔ same as above |
 | **Minify JavaScript** | 3 KiB | `vendor-icons` (lucide, 28 KB). Measured in-sandbox: Terser takes it 28,020 → 16,620 bytes because esbuild cannot mangle *exported* names; net ~2.5–3 kB gzip | ⚠️ **won't fix** — a second minifier (`build.minify: 'terser'` + devDependency + lockfile churn) for 3 KiB is a bad trade in a repo whose worst outage was lockfile drift. Recipe recorded; revisit only if a chunk this size becomes load-bearing |
 | **Unused preconnect** (emrld.ltd) | — | the preconnect declared `crossorigin` while the injected `<script>` is a plain async no-cors fetch; a CORS-mode connection cannot be reused by it | ✅ **fixed** — `crossorigin` removed + guard (B.3) |
