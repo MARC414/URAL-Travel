@@ -510,6 +510,154 @@ check(
     : `${missingMaps.length} chunk(s) without a .map: ${missingMaps.slice(0, 5).join(", ")}`
 );
 
+// Consent-region gate for the affiliate script (Appendix D.1.3). The privacy
+// policy lists emrld.ltd as a MARKETING processor, so EEA/UK/CH visitors must
+// not load it before granting marketing consent. The region is stamped on
+// <html> by functions/_middleware.js; the shell's loader reads it. Three things
+// must stay true, and each has been broken at least once in similar projects:
+// the middleware still detects regions, the loader still gates on them, and the
+// gate did not quietly remove the lazy-loading that Phase 3B bought.
+const middlewareSrc = read(path.join(ROOT_DIR, "functions", "_middleware.js")) ?? "";
+check(
+  /GDPR_REGIONS/.test(middlewareSrc) &&
+    /data-consent-region="eea"/.test(middlewareSrc) &&
+    /request\.cf/.test(middlewareSrc),
+  "functions/_middleware.js still stamps data-consent-region on <html> for GDPR jurisdictions"
+);
+// The rewrite must stay fail-open: an unknown country (local dev, or any
+// non-GDPR visitor) short-circuits before the body is touched, and an
+// unreadable body is caught and served as-is. A gate that can 500 a page for
+// visitors it was meant to protect is worse than no gate.
+const failOpenChecks: Array<[string, RegExp]> = [
+  ["unknown country returns the untouched response", /!GDPR_REGIONS\.has\(country\)\) return response;/],
+  ["non-HTML / non-200 responses are skipped", /response\.status !== 200 \|\| !contentType\.includes\("text\/html"\)\) return response;/],
+  ["body read errors are caught and served as-is", /catch \{[\s\S]{0,120}return response;/],
+  ["no validators are stripped (304 caching preserved)", /headers\.delete\("content-length"\)/],
+  ["no validators are stripped (304 caching preserved)", /headers\.delete\("content-encoding"\)/],
+];
+const failOpenProblems = failOpenChecks
+  .filter(([, pattern]) => !pattern.test(middlewareSrc))
+  .map(([label]) => label);
+check(
+  failOpenProblems.length === 0,
+  failOpenProblems.length === 0
+    ? `consent-region rewrite is fail-open (${failOpenChecks.length} properties checked)`
+    : `middleware gate is not fail-open: ${[...new Set(failOpenProblems)].join("; ")}`
+);
+
+const shellHtml = read(path.join(ROOT_DIR, "index.html")) ?? "";
+const gatingChecks: Array<[string, RegExp]> = [
+  ["reads data-consent-region", /data-consent-region/],
+  ["checks the marketing category, not just the banner choice", /cookie-consent-settings[\s\S]{0,120}marketing/],
+  ["lets non-EEA visitors through unchanged", /region\(\)!=='eea'\)return true/],
+  ["still defers to viewport intersection (Phase 3B)", /IntersectionObserver[\s\S]{0,200}rootMargin/],
+  ["reacts to consent granted later", /ural:consent-updated/],
+];
+const gateProblems = gatingChecks
+  .filter(([, pattern]) => !pattern.test(shellHtml))
+  .map(([label]) => label);
+check(
+  gateProblems.length === 0,
+  gateProblems.length === 0
+    ? `affiliate-script consent gate intact (${gatingChecks.length} properties: region, marketing category, non-EEA passthrough, lazy-load, consent event)`
+    : `consent gate broken/missing: ${gateProblems.join("; ")}`
+);
+
+// --- 2f. Behavioural test of the consent-region gate ------------------------
+//
+// The checks above assert the gate's *shape*; this one exercises the actual
+// middleware with a fake request, because a gate that mis-tags or, worse,
+// rewrites a non-HTML response would be invisible to a regex. It runs here
+// rather than in a separate test runner for the same reason the rest of this
+// file exists: this project has one gate, and everything goes through it.
+const { onRequest } = await import("../functions/_middleware.js");
+
+const SAMPLE_HTML =
+  '<!doctype html><html lang="en-BD"><head><title>t</title></head><body>ok</body></html>';
+
+function fakeContext(
+  country: string | undefined,
+  options: { url?: string; contentType?: string; status?: number; callback?: (response: Response) => Response } = {}
+) {
+  const url = options.url ?? "https://ural-travel.pages.dev/";
+  const status = options.status ?? 200;
+  return {
+    request: { url, cf: country ? { country } : undefined },
+    next: async () => {
+      // 304 must be constructed without a body (the runtime rejects one).
+      const response = new Response(status === 304 ? null : SAMPLE_HTML, {
+        status,
+        headers: {
+          "content-type": options.contentType ?? "text/html; charset=utf-8",
+          etag: 'W/"abc123"',
+          "last-modified": "Thu, 02 Oct 2026 00:00:00 GMT",
+          "content-length": String(SAMPLE_HTML.length),
+          "content-encoding": "gzip",
+        },
+      });
+      return options.callback ? options.callback(response) : response;
+    },
+  };
+}
+
+const gateFailures: string[] = [];
+async function gateCase(label: string, run: () => Promise<void>) {
+  try {
+    await run();
+  } catch (error) {
+    gateFailures.push(`${label}: ${(error as Error).message}`);
+  }
+}
+
+await gateCase("EEA visitor (DE) is tagged", async () => {
+  const response = await (onRequest as any)(fakeContext("DE"));
+  const body = await response.text();
+  if (!body.includes('data-consent-region="eea"')) throw new Error("no data-consent-region attribute");
+  if (response.status !== 200) throw new Error(`status ${response.status}`);
+  if (response.headers.get("etag") !== 'W/"abc123"') throw new Error("etag dropped (hurts 304 revalidation)");
+  if (response.headers.get("content-length")) throw new Error("content-length carried over to a re-encoded body");
+  if (response.headers.get("content-encoding")) throw new Error("content-encoding carried over to a plain-text body");
+});
+
+await gateCase("non-EEA visitor (BD) is untouched", async () => {
+  const response = await (onRequest as any)(fakeContext("BD"));
+  const body = await response.text();
+  if (body.includes("data-consent-region")) throw new Error("non-GDPR visitor was tagged anyway");
+  if (body !== SAMPLE_HTML) throw new Error("body was modified");
+});
+
+await gateCase("missing cf.country (local dev) is untouched", async () => {
+  const response = await (onRequest as any)(fakeContext(undefined));
+  if ((await response.text()).includes("data-consent-region")) throw new Error("tagged without a country");
+});
+
+await gateCase("non-HTML responses are skipped", async () => {
+  const response = await (onRequest as any)(fakeContext("DE", { contentType: "application/javascript" }));
+  if ((await response.text()).includes("data-consent-region")) throw new Error("rewrote a non-HTML response");
+});
+
+await gateCase("304 responses stay bodyless", async () => {
+  const response = await (onRequest as any)(fakeContext("DE", { status: 304 }));
+  if (response.status !== 304) throw new Error(`status changed to ${response.status}`);
+  if ((await response.text()).length > 0) throw new Error("a body was attached to a 304");
+});
+
+await gateCase("legacy route redirects still work", async () => {
+  const response = await (onRequest as any)(
+    fakeContext(undefined, { url: "https://ural-travel.pages.dev/flights?route=dhaka-bangkok" })
+  );
+  if (response.status !== 301) throw new Error(`expected 301, got ${response.status}`);
+  const location = response.headers.get("location") ?? "";
+  if (!location.endsWith("/flights/dhaka-bangkok")) throw new Error(`bad redirect target: ${location}`);
+});
+
+check(
+  gateFailures.length === 0,
+  gateFailures.length === 0
+    ? "consent-region gate behaves correctly (6 cases: EEA tagged, non-EEA/local untouched, non-HTML skipped, 304 intact, legacy redirect intact)"
+    : `consent-region gate misbehaves: ${gateFailures.join("; ")}`
+);
+
 // --- 3. Sitemap: structure + the lastmod invariant --------------------------
 
 const sitemap = read(path.join(DIST_DIR, "sitemap.xml"));

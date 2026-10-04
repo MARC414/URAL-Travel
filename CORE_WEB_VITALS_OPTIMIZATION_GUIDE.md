@@ -9,7 +9,7 @@
 ## ✅ Status Board (single source of truth — 2026-10-04)
 
 Everything below is **committed code**, verified by `npm run build` + `npm run
-verify:build` (32 checks, incl. the cache/srcset/consent/contrast/security regression guards). "Deployed" means it
+verify:build` (36 checks, incl. the cache/srcset/consent/contrast/security/gate regression guards). "Deployed" means it
 will be live on the next Cloudflare Pages deploy of this branch — confirm with
 the Production Verification commands at the bottom of this guide.
 
@@ -41,7 +41,8 @@ the Production Verification commands at the bottom of this guide.
 | 24 | ~12 invalid Tailwind colour steps (`text-slate-650`, `border-slate-250`, …) | ⏳ open, visible as a CI warning | they render as `inherit` today; fixing them changes colours → needs its own visual pass (C.4) |
 | 25 | **Security headers** (HSTS + XFO + COOP + partial CSP) | ✅ done 2026-10-04 night | `public/_headers`; all five Lighthouse Trust & Safety audits are *informative* (unscored) — added because they are real and cheap, guarded by 3 checks (D.3) |
 | 26 | **Source maps shipped** (Lighthouse "missing source maps") | ✅ done 2026-10-04 night | `vite.config.ts` `sourcemap: true` → 16 maps (5.7 MB, DevTools-only); guarded (D.2) |
-| 27 | Console errors (CORS to `emrld.ltd/entrypoint_config`) | ⛔ **third-party defect** — reported, not fixable here | their endpoint sends no `Access-Control-Allow-Origin`; the only in-repo lever is a consent gate, which is an owner revenue decision (D.1) |
+| 27 | Console errors (CORS to `emrld.ltd/entrypoint_config`) | ⛔ **third-party defect** — report to Travelpayouts (D.1.2) | their endpoint sends no `Access-Control-Allow-Origin`; nothing in this repo can add one |
+| 28 | **Marketing-consent gate for the affiliate script (EEA/UK/CH only)** | ✅ done 2026-10-04 night (owner decision: option B) | `functions/_middleware.js` stamps `data-consent-region="eea"` on `<html>` from `cf.country`; the shell's loader waits for `ural:consent-updated` there. Non-GDPR traffic (incl. Bangladesh) is byte-for-byte unchanged; 2 shape guards + a 6-case behavioural test (D.1.3) |
 
 ### ⚠️ The recurring CI failure (lockfile hygiene)
 Three CI runs died in ~12s at "Install dependencies" (`fafdb27`, `4d45194`,
@@ -738,7 +739,7 @@ curl -sI https://ural-travel.pages.dev/ | grep -i x-robots-tag  # must be ABSENT
 ```bash
 npm run lint          # tsc --noEmit
 npm run build         # vite build + prerender of ~163 routes
-npm run verify:build  # 32 checks incl. srcset/consent/cache/contrast/security guards
+npm run verify:build  # 36 checks incl. srcset/consent/cache/contrast/security + gate behaviour
 ```
 
 ---
@@ -826,7 +827,8 @@ npm run preview
 - [ ] Separate visual pass for the 12 non-existent Tailwind colour steps (C.4)
 - [x] Security headers + source maps ✅ (2026-10-04 night — Appendix D)
 - [ ] Report the emrld.ltd CORS failure to Travelpayouts support (D.1) — copy the ready-made report
-- [ ] Owner decision: gate the emrld affiliate script behind marketing consent (D.1.3)
+- [x] Owner decision + implementation: EEA/UK/CH-only marketing-consent gate for the affiliate script ✅ (D.1.3)
+- [ ] Verify the gate on the deployed build from an EEA IP, or with `?consent_region=eea` (D.1.4)
 - [ ] Post-deploy Lighthouse/CrUX re-measure + record numbers in Status Board
 
 ---
@@ -1401,18 +1403,46 @@ So declining marketing currently does not stop a marketing script: a real
 consent gap (and the reason the lab audit sees the errors at all — a fresh
 profile has no marketing consent).
 
-Three options, in order of effort:
+**D.1.4 Chosen and implemented: option B — gate for EEA/UK/CH only.**
+Owner decision, 2026-10-04. `docs/growth/06` §5 makes the emrld script a revenue
+component that is only removed or deferred with explicit owner approval, so the
+gate was scoped to the jurisdictions where consent is legally required and
+nothing else changed.
 
-| Option | Effect on the errors | Effect on affiliate revenue |
-|---|---|---|
-| **A. Gate the loader on marketing consent** (load only after Accept / per-category marketing) | Errors disappear for decliners **and in every lab audit**; real accepted users still hit Travelpayouts' CORS bug until they fix it | Modest: declined users and pre-decision pageviews no longer load the script; typical accept rates are high |
-| **B. Gate only for EEA/UK visitors** (country from `functions/_middleware.js`, which already exists) | Same as A, but only for the jurisdictions where consent is legally required | Almost none — Bangladesh and other non-EEA traffic is untouched |
-| **C. Leave as-is; report upstream only** | Errors remain (visitor-facing harm is low; they are console noise, not broken UI) | None |
+How it works:
 
-This is not a decision a tool may take silently: `docs/growth/06` §5 says the
-emrld script is a revenue component that is only removed/deferred with explicit
-owner approval, and gating one is the same class of change. Option B is the
-compliance-correct, revenue-preserving middle path if you want it.
+1. `functions/_middleware.js` reads `context.request.cf.country` (Cloudflare
+   populates it per request). For the EU-27 + EEA + `GB` + `CH` it rewrites the
+   single `<html …>` tag of the HTML response to
+   `<html … data-consent-region="eea">`. Everything else — including local dev,
+   where `request.cf` is absent — is returned untouched.
+2. The shell's inline loader (`index.html`) reads that attribute. In `eea` it
+   injects `emrld.ltd/NTQwMjc3.js` only once `localStorage["cookie-consent"]` is
+   `accepted`, or `custom` with `marketing: true`; otherwise it stays unloaded
+   and waits for the `ural:consent-updated` event, so granting consent later
+   still starts it. Outside `eea` the previous behaviour is unchanged: load on
+   footer intersection, after first interaction/3 s.
+3. The rewrite is deliberately **fail-open**: unknown country, non-HTML
+   response, non-200 status or an unreadable body all return the original
+   response. `ETag`/`Last-Modified` are kept, so a conditional request is still
+   answered with a 304 and the visitor reuses their already-tagged copy;
+   `Content-Length`/`Content-Encoding` are dropped because the body is
+   re-emitted as plain text.
+
+Cost: one `String.replace` on HTML responses for GDPR visitors only. The lazy
+loading that Phase 3B bought (no third-party JS before the footer is near) is
+untouched for every visitor.
+
+Testing: append `?consent_region=eea` to any URL to exercise the gated path from
+anywhere (and `?consent_region=row` to force it off) — the override exists
+precisely because the region is normally derived from the visitor's IP, which
+cannot be spoofed locally. Beyond that, six behavioural cases run inside
+`npm run verify:build`: EEA tagged, non-EEA untouched, missing `cf` untouched,
+non-HTML skipped, 304 stays bodyless, legacy redirects still work.
+
+What this does **not** fix: a visitor who *does* grant marketing consent still
+loads a script whose own config fetch fails — that is Travelpayouts' bug
+(D.1.2).
 
 ## D.2 Source maps — now shipped
 
@@ -1465,7 +1495,7 @@ must be rewritten as explicit path blocks instead of `/*`.
 
 | Item | Why it is still open |
 |---|---|
-| `errors-in-console` (the scored failure) | Travelpayouts' CORS bug (D.1.2); only their fix or a consent gate removes it |
+| `errors-in-console` (the scored failure) | Travelpayouts' CORS bug (D.1.2). The consent gate (D.1.4) removes it for EEA/UK/CH visitors who have not accepted, and for every fresh lab audit; consenting visitors still see it until Travelpayouts fixes their endpoint |
 | `csp-xss` / `trusted-types-xss` | Need a nonce pipeline (Cloudflare Pages Function rewriting the shell + every widget's injected script) and would have to be re-tested against GTM, the affiliate bundles and the review embeds |
 | `origin-isolation` full isolation | Needs COEP, which needs every third party to send CORP/CORS |
 | Trust & Safety scoring impact | None — informative audits do not move the category score |

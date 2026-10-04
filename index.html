@@ -231,7 +231,14 @@
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Travelpayouts Emerald Partner Script - Lazy-loaded on viewport intersection -->
+    <!-- Travelpayouts Emerald Partner Script - Lazy-loaded on viewport intersection,
+         and (in GDPR jurisdictions only) gated on marketing consent.
+         The affiliate script sets marketing cookies and is listed as a marketing
+         processor in our own privacy policy, so for EEA/UK/CH visitors it must not
+         load until the visitor grants marketing consent. The region is stamped on
+         <html> by functions/_middleware.js from Cloudflare's request country; the
+         script stays lazy for everyone else, so the TBT/LCP win is unchanged.
+         QA override: append ?consent_region=eea or ?consent_region=row -->
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
       (function(){
         var loaded=false;
@@ -244,15 +251,36 @@
           script.onerror=function(){};
           document.head.appendChild(script);
         }
+        function region(){
+          var forced=new URLSearchParams(location.search).get('consent_region');
+          if(forced==='eea'||forced==='row')return forced;
+          return document.documentElement.getAttribute('data-consent-region')==='eea'?'eea':'row';
+        }
+        function marketingAllowed(){
+          if(region()!=='eea')return true;
+          try{
+            var choice=localStorage.getItem('cookie-consent');
+            if(choice==='accepted')return true;
+            if(choice==='custom'){
+              var settings=JSON.parse(localStorage.getItem('cookie-consent-settings')||'{}');
+              return !!(settings&&settings.marketing===true);
+            }
+          }catch(e){}
+          return false;
+        }
+        function attempt(){if(!loaded&&marketingAllowed())loadEmerald();}
         if('IntersectionObserver'in window){
           var observer=new IntersectionObserver(function(entries){
-            if(entries[0].isIntersecting){loadEmerald();observer.disconnect();}
+            if(entries[0].isIntersecting){observer.disconnect();attempt();}
           },{rootMargin:'200px'});
           document.addEventListener('DOMContentLoaded',function(){
             var footer=document.querySelector('footer');
-            if(footer)observer.observe(footer);else loadEmerald();
+            if(footer)observer.observe(footer);else attempt();
           });
-        }else{loadEmerald();}
+        }else{attempt();}
+        // Consent granted after this loader ran (Accept all, or marketing toggled
+        // on in the customize panel) must still start the script.
+        window.addEventListener('ural:consent-updated',attempt);
       })();
     </script>
   </head>
