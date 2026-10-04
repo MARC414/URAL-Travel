@@ -172,6 +172,9 @@ export function TravelpayoutsWidgetSkeleton({
   if (variant === "hotels") {
     return (
       <div
+        // Observed by the readiness effect: the widget chunk is fetched when this
+        // skeleton comes near the viewport, on interaction, or at the 2.5s ceiling.
+        data-tp-skeleton="hotels"
         role="status"
         aria-live="polite"
         aria-busy="true"
@@ -256,6 +259,10 @@ export function TravelpayoutsWidgetSkeleton({
 
   return (
     <div
+      // Observed by the readiness effect (see the state comment in the app
+      // component): the widget chunk loads when this skeleton approaches the
+      // viewport, on interaction, or at the 2.5s ceiling — not on a 260 ms timer.
+      data-tp-skeleton="flights"
       role="status"
       aria-live="polite"
       aria-busy="true"
@@ -1038,7 +1045,20 @@ export default function App() {
   const [blogCategoryFilter, setBlogCategoryFilter] = useState<string>("all");
   const [blogSearchQuery, setBlogSearchQuery] = useState<string>("");
 
-  // Track third-party Travelpayouts script initialization for perceived performance skeletons
+  // Track third-party Travelpayouts rendering for the perceived-performance
+  // skeletons.
+  //
+  // The real widget is a separate chunk (~129 KB gzip, two thirds of it the
+  // recharts tree) and used to be fetched by a 260 ms timer on every page that
+  // renders one — which put it in competition with the LCP image even for
+  // visitors who never scrolled to it. It is now fetched by whichever of these
+  // happens first:
+  //   1. a widget skeleton coming within 300px of the viewport (below),
+  //   2. the visitor touching/focusing the skeleton — the onInteract escapes,
+  //   3. the consented emrld script finishing its load,
+  //   4. a 2.5s ceiling, so a widget can never stay a skeleton indefinitely.
+  // Owner-approved change (docs/growth/06 §5): the widget is revenue-bearing,
+  // so its load timing is not changed without sign-off.
   const [areTpScriptsReady, setAreTpScriptsReady] = useState<boolean>(() =>
     typeof window === "undefined"
   );
@@ -1051,9 +1071,23 @@ export default function App() {
       if (isMounted) setAreTpScriptsReady(true);
     };
 
-    const tpScript = document.querySelector<HTMLScriptElement>('script[src*="emrld.ltd"]');
-    const fallbackTimer = window.setTimeout(markReady, 260);
+    const skeletons = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-tp-skeleton]")
+    );
+    let observer: IntersectionObserver | null = null;
+    if (skeletons.length > 0 && "IntersectionObserver" in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) markReady();
+        },
+        { rootMargin: "300px" }
+      );
+      skeletons.forEach((element) => observer!.observe(element));
+    }
 
+    const fallbackTimer = window.setTimeout(markReady, 2500);
+
+    const tpScript = document.querySelector<HTMLScriptElement>('script[src*="emrld.ltd"]');
     if (tpScript) {
       tpScript.addEventListener("load", markReady, { once: true });
       tpScript.addEventListener("error", markReady, { once: true });
@@ -1062,6 +1096,7 @@ export default function App() {
     return () => {
       isMounted = false;
       window.clearTimeout(fallbackTimer);
+      observer?.disconnect();
       if (tpScript) {
         tpScript.removeEventListener("load", markReady);
         tpScript.removeEventListener("error", markReady);

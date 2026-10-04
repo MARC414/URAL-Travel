@@ -9,7 +9,7 @@
 ## ✅ Status Board (single source of truth — 2026-10-04)
 
 Everything below is **committed code**, verified by `npm run build` + `npm run
-verify:build` (48 checks, incl. the cache/srcset/consent/contrast/security/gate/blog-split/AVIF regression guards). "Deployed" means it
+verify:build` (50 checks, incl. the cache/srcset/consent/contrast/security/gate/blog-split/AVIF/third-party regression guards). "Deployed" means it
 will be live on the next Cloudflare Pages deploy of this branch — confirm with
 the Production Verification commands at the bottom of this guide.
 
@@ -44,6 +44,7 @@ the Production Verification commands at the bottom of this guide.
 | 27 | Console errors (CORS to `emrld.ltd/entrypoint_config`) | ⛔ **third-party defect** — report to Travelpayouts (D.1.2) | their endpoint sends no `Access-Control-Allow-Origin`; nothing in this repo can add one |
 | 28 | **Marketing-consent gate for the affiliate script (every visitor)** | ✅ re-scoped and applied 2026-10-05 (owner decision: everywhere; supersedes the EEA/UK/CH-only option B of 2026-10-04) | `functions/_middleware.js` is redirect-only again — no HTML rewrite, so no body is buffered or re-encoded at the edge; `index.html` gates for everyone on `localStorage` marketing consent + `ural:consent-updated`, keeping viewport laziness. 5 guards incl. a 6-case loader decision test and a 4-case passthrough test, both mutation-tested (D.1.5) |
 | 29 | **Blog bodies split out of `constants.ts` into a lazy chunk (P3.1)** | ✅ done 2026-10-04 night | 43 article bodies → `src/data/blogContent.ts`, `import()`ed on blog routes only; measured **330.1 → 266.1 KB gzip** of eager JS (−64.0 KB, Appendix E). Prerender still inlines every paragraph (211/211 verified); 7 new guards + 2 mutation tests |
+| 30 | **Travelpayouts widget chunk loads on need, not on a timer** | ✅ applied 2026-10-05 (owner-approved: §5 revenue component) | the ~129 KB gz widget chunk was fetched 260 ms after mount on the homepage, competing with the LCP image for visitors who never scrolled to it; now triggered by viewport proximity (300px), interaction, the consented script, or a 2.5 s ceiling. 2 guards + mutation tests (Appendix F) |
 
 ### ⚠️ The recurring CI failure (lockfile hygiene)
 Three CI runs died in ~12s at "Install dependencies" (`fafdb27`, `4d45194`,
@@ -740,7 +741,7 @@ curl -sI https://ural-travel.pages.dev/ | grep -i x-robots-tag  # must be ABSENT
 ```bash
 npm run lint          # tsc --noEmit
 npm run build         # vite build + prerender of ~163 routes
-npm run verify:build  # 48 checks incl. srcset/consent/cache/contrast/security/gate/blog-split/AVIF guards
+npm run verify:build  # 50 checks incl. srcset/consent/cache/contrast/security/gate/blog-split/AVIF/third-party guards
 ```
 
 ---
@@ -828,6 +829,7 @@ npm run preview
 - [ ] Separate visual pass for the 12 non-existent Tailwind colour steps (C.4)
 - [x] Security headers + source maps ✅ (2026-10-04 night — Appendix D)
 - [ ] Report the emrld.ltd CORS failure to Travelpayouts support (D.1) — copy the ready-made report
+- [x] Travelpayouts widget chunk: viewport-triggered load instead of the 260 ms timer ✅ (2026-10-05, owner-approved — Appendix F)
 - [x] Marketing-consent gate for the affiliate script ✅ — first shipped EEA/UK/CH-only (D.1.3/D.1.4), then re-scoped to **every visitor** at the owner's direction (D.1.5, 2026-10-05)
 - [ ] Verify the deployed gate: fresh profile → no emrld request; "Accept all" → script appears; re-run PSI and check whether `errors-in-console` clears (D.1.5)
 - [x] **P3.1 — blog bodies split out of `constants.ts` into a lazy chunk** ✅ (2026-10-04 night — Appendix E)
@@ -1746,3 +1748,93 @@ Single commit. Reverting restores the bodies to `constants.ts` and the eager
 import; the prerender path falls back to `post.content`, so SEO output is
 unaffected either way. No data migration, no cache-versioning change (the chunk
 name is content-hashed like every other asset).
+
+
+# 📎 Appendix F — Third-party JavaScript: what loads, when, and why
+
+Written 2026-10-05, after the every-visitor consent gate (D.1.5) changed which of
+these requests happen at all. Everything below is measured on this repo's own
+build, not estimated.
+
+## F.1 The inventory
+
+| Origin | What it is | When it loads | Size |
+|---|---|---|---|
+| `googletagmanager.com` (GTM/gtag) | analytics + Consent Mode v2 | immediately, inline loader in `<head>`, storage defaulted to `denied` | ~2 KB inline + remote |
+| `emrld.ltd` | Travelpayouts affiliate script (marketing processor) | **only after marketing consent**, then on footer intersection | remote |
+| `TravelpayoutsWidget` (own chunk) | the homepage flight-search widget, incl. `recharts` | was 260 ms after mount; now on need (F.3) | **444 KB raw / ~129 KB gzip** |
+| `TravelpayoutsCustomWidget` | lighter partner search UI | with the section that renders it | 55 KB raw / 13.6 KB gzip |
+| `TravelpayoutsEmbed` / `Onboarding` | iframe-call wrapper / onboarding | with their sections | 0.6 KB / 29 KB raw |
+
+The heavy widget is mounted in **exactly one place** (`section === "home"`); the
+other pages use the 13.6 KB custom widget and the embed. So the third-party
+budget question is really a homepage question.
+
+## F.2 The measurement that did *not* justify a change
+
+`recharts` (plus its redux/immer/decimal/d3 tree) is **65% of the widget chunk** —
+885 KB of 1363 KB pre-minification source, from the chunk's own sourcemap.
+
+The tempting change is "lazy-load the chart library". It was rejected because it
+would not pay off: `showPriceTrendChart` defaults to **`true`**, so the chart
+renders on mount and recharts would be requested immediately anyway. Deferring it
+would have added a chunk boundary and a placeholder flash for ~0 bytes saved.
+Recording this is the point — the plausible-sounding optimisation is the trap.
+
+## F.3 The change that shipped
+
+The chunk used to be fetched by `window.setTimeout(markReady, 260)` on every page
+that renders a widget — including sessions that never scrolled to it, and while
+the LCP image was still downloading. It is now fetched by whichever happens
+first:
+
+1. a widget skeleton coming within **300px** of the viewport
+   (`IntersectionObserver`, `[data-tp-skeleton]` markers on both skeleton
+   variants),
+2. the visitor touching or focusing the skeleton (the existing `onInteract`
+   escapes — unchanged),
+3. the consented `emrld` script finishing its load,
+4. a **2.5 s ceiling**, so a widget can never be pinned as a skeleton.
+
+What does not change: the skeleton markup and copy, the widget itself, and the
+affiliate links. The visitor sees the same thing at the same position; the bytes
+simply stop being spent before they are needed. If the widget is inside the first
+viewport, the observer fires immediately and behaviour matches the old timer.
+
+**Owner sign-off was required and obtained** — `docs/growth/06` §5 marks the
+Travelpayouts components as revenue-bearing, so their load timing is not a
+unilateral decision.
+
+## F.4 Guards (48 → 50 checks)
+
+- the observer must exist (`IntersectionObserver` + `rootMargin: "300px"`), the
+  skeletons must carry `data-tp-skeleton` (otherwise there is nothing to observe),
+  and a sub-1.5 s `markReady` timer is treated as a regression — that is exactly
+  the 260 ms timer coming back;
+- a ceiling timer must exist, so "defer" cannot silently become "never";
+- the `onInteract` escape must remain, or touching a skeleton would no longer
+  load the widget.
+
+Mutation-tested: restoring the 260 ms timer fails the first check, and removing
+`rootMargin` fails it as well.
+
+## F.5 What is left, in order of size
+
+1. **The widget chunk itself (129 KB gz, 65% recharts).** Shrinking it means
+   either a chart that is not rendered by default (a design decision) or moving
+   the chart behind an explicit "view trend" interaction — both change what the
+   visitor sees, so both are owner decisions, not cleanups.
+2. **`emrld`'s INP cost** — still unmeasured here. It hijacks native DOM methods
+   by design; measure it in a real trace before proposing anything (D.1).
+3. **GTM** — 2 KB inline plus remote; already Consent-Mode-defaulted. Nothing
+   proposed.
+
+## F.6 Post-deploy verification
+
+- DevTools → Network, cold load of `/`: the `TravelpayoutsWidget` chunk must
+  **not** appear before the visitor scrolls (or ~2.5 s), and must appear once a
+  widget skeleton is approached.
+- Watch homepage LCP in PSI before/after; the expected effect is bandwidth
+  headroom during the LCP window, not a change in the LCP element.
+- Confirm the widget still renders and its affiliate CTAs still work — the
+  skeleton becomes the widget on exactly the same trigger for a scrolling user.

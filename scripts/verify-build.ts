@@ -461,6 +461,45 @@ check(
   "no preconnect to the consent-gated affiliate origin (shell or loader)"
 );
 
+// Travelpayouts widget chunk: loaded on need, not on a timer (Appendix F).
+//
+// The widget is a ~129 KB gzip chunk (two thirds recharts). It used to be
+// fetched 260 ms after mount on every page that renders one, competing with the
+// LCP image even for visitors who never scrolled to it. The owner approved
+// switching to a viewport trigger; these assertions keep the new trigger honest,
+// because all four paths are invisible in a green build.
+{
+  const appSrc = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
+  const ceilingMatches = [...appSrc.matchAll(/setTimeout\(markReady, (\d+)\)/g)].map((m) =>
+    Number(m[1])
+  );
+  const hasObserver =
+    /IntersectionObserver/.test(appSrc) && /rootMargin: "300px"/.test(appSrc);
+  const hasSkeletonTargets = (appSrc.match(/data-tp-skeleton/g) ?? []).length >= 3;
+  const hasInteractionEscape = /onInteract/.test(appSrc);
+  const shortTimer = ceilingMatches.some((ms) => ms < 1500);
+
+  check(
+    hasObserver && hasSkeletonTargets && !shortTimer && ceilingMatches.length > 0,
+    hasObserver && hasSkeletonTargets && !shortTimer && ceilingMatches.length > 0
+      ? `Travelpayouts widget loads on viewport proximity (observer + ${ceilingMatches.join("/")}ms ceiling), not a short timer`
+      : [
+          !hasObserver && "no IntersectionObserver/rootMargin trigger",
+          !hasSkeletonTargets && "skeletons are not marked data-tp-skeleton (nothing to observe)",
+          shortTimer && `a timer below 1.5s fetches the widget chunk anyway (${ceilingMatches.join(", ")}ms)`,
+          ceilingMatches.length === 0 && "no ceiling timer at all (a widget could stay a skeleton forever)",
+        ]
+          .filter(Boolean)
+          .join("; ")
+  );
+  check(
+    hasInteractionEscape,
+    hasInteractionEscape
+      ? "the skeleton interaction escape still fetches the widget immediately"
+      : "onInteract escape removed: touching a skeleton no longer loads the widget"
+  );
+}
+
 // --- 2d. Accessibility guards (WCAG 2.1 AA contrast + the audited fixes) ----
 //
 // Lighthouse's Accessibility category scored 96 with two scored failures: a
