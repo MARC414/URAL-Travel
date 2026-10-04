@@ -21,6 +21,7 @@ import {
   toIsoDate,
 } from "../src/utils/schema";
 import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
+import { buildResponsiveSrcSet } from "../src/utils/imageAssets";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
 import {
   CONTENT_UPDATED,
@@ -2291,7 +2292,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
 
     const fullGraphJson = JSON.stringify(buildSchemaGraph(graphNodes, false));
     const lcpImagePreload = r.lcpImageUrl
-      ? `    <link rel="preload" as="image" type="image/webp" href="${escapeHtml(r.lcpImageUrl)}" imagesrcset="${escapeHtml(`${r.lcpImageUrl.replace(/-1200\.webp$/, "-640.webp")} 640w, ${r.lcpImageUrl} 1200w`)}" imagesizes="${escapeHtml(r.lcpImageSizes || "100vw")}" fetchpriority="high" />\n`
+      ? `    <link rel="preload" as="image" type="image/webp" href="${escapeHtml(r.lcpImageUrl)}" imagesrcset="${escapeHtml(buildResponsiveSrcSet(r.lcpImageUrl))}" imagesizes="${escapeHtml(r.lcpImageSizes || "100vw")}" fetchpriority="high" />\n`
       : "";
 
     // Reciprocal hreflang cluster: identical on both members of a locale pair

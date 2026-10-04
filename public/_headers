@@ -23,6 +23,14 @@
 /assets/brand/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
 
+# Self-hosted fonts (Phase 1) are stable, version-controlled files, but they
+# are NOT content-hashed — and without an explicit rule Pages falls back to
+# `max-age=0, must-revalidate`, so every repeat visit pays a revalidation
+# round-trip for the two preloaded woff2 files, throwing away most of the
+# font-optimization win on the only visits where it should be free.
+/fonts/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
 # Crawlable feeds: short TTL so sitemap/RSS updates reach crawlers quickly.
 /sitemap.xml
   Content-Type: application/xml; charset=utf-8

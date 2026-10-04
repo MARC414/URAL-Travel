@@ -32,6 +32,7 @@ import { FlightRoute, HotelGuide, VisaGuide, DestinationGuide, TripCostData, Blo
 import { FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, DESTINATIONS_DATA, TRIP_COSTS_DATA, BLOG_DATA } from "./constants";
 
 // Subcomponents
+import { ConsentBanner } from "./components/ConsentBanner";
 import { TravelIntelligence } from "./components/AeoInspector";
 import { TrustpilotReviews } from "./components/TrustpilotReviews";
 import { TravelEssentials } from "./components/TravelEssentials";
@@ -1834,7 +1835,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-[#F6B73C] selection:text-brand-navy overflow-x-hidden">
-      
+      {/* GDPR cookie-consent bar (Consent Mode v2). Renders nothing unless the
+          visitor has no stored choice, so it costs zero CLS/LCP otherwise. */}
+      <ConsentBanner lang={lang} />
 
 
       {/* 🟦 STICKY HEADER WRAPPER (Top Strip + Main Navbar) */}
@@ -7627,10 +7630,22 @@ export default function App() {
                 </>
               )}
             </p>
-            <div className="shrink-0 font-mono text-[10px] text-slate-400">
-              {isBn
-                ? "© 2026 URAL Travel Intelligence. সর্বস্বত্ব সংরক্ষিত।"
-                : "© 2026 URAL Travel Intelligence. All rights reserved."}
+            <div className="shrink-0 font-mono text-[10px] text-slate-400 flex flex-wrap items-center gap-x-3 gap-y-1">
+              {/* GDPR Art. 7(3): consent must be as easy to withdraw as to give.
+                  Re-opens the ConsentBanner via the API the head script owns. */}
+              <button
+                type="button"
+                onClick={() => window.uralConsent?.openBanner?.()}
+                className="hover:text-brand-gold hover:underline cursor-pointer"
+              >
+                {isBn ? "কুকি সেটিংস" : "Cookie settings"}
+              </button>
+              <span aria-hidden="true">·</span>
+              <span>
+                {isBn
+                  ? "© 2026 URAL Travel Intelligence. সর্বস্বত্ব সংরক্ষিত।"
+                  : "© 2026 URAL Travel Intelligence. All rights reserved."}
+              </span>
             </div>
           </div>
         </div>

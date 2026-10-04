@@ -14,7 +14,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0B1426" />
-    <link rel="preload" as="image" type="image/webp" href="/assets/images/clouds_boat_hero_1781438671378-1200.webp" imagesrcset="/assets/images/clouds_boat_hero_1781438671378-640.webp 640w, /assets/images/clouds_boat_hero_1781438671378-1200.webp 1200w" imagesizes="100vw" fetchpriority="high" />
+    <!--
+      LCP hero preload. The imagesrcset below is a hand-written copy of
+      buildResponsiveSrcSet() in src/utils/imageAssets.ts (static HTML cannot
+      import TS); scripts/verify-build.ts asserts the two stay in sync.
+      960w matters most here: DPR-2 phones and tablets used to resolve this
+      preload to the 1200w file (~69KB); they now take the 960w one (~46KB).
+    -->
+    <link rel="preload" as="image" type="image/webp" href="/assets/images/clouds_boat_hero_1781438671378-1200.webp" imagesrcset="/assets/images/clouds_boat_hero_1781438671378-640.webp 640w, /assets/images/clouds_boat_hero_1781438671378-960.webp 960w, /assets/images/clouds_boat_hero_1781438671378-1200.webp 1200w" imagesizes="100vw" fetchpriority="high" />
     <!-- Self-hosted fonts: preload critical Inter 400 & 600 for LCP -->
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600.woff2" crossorigin />
@@ -177,6 +184,63 @@
           }
         ]
       }
+    </script>
+
+    <!--
+      Google Consent Mode v2 — default state.
+      MUST run before any Google tag fires, including the deferred GTM loader
+      below, so no cookie is set and no hit leaves the browser before the user
+      has chosen. All storage types start `denied` (security_storage is
+      exempt: Google marks it non-negotiable). `wait_for_update` holds tags
+      for 500ms so a consent state that is already known can land first.
+
+      If the visitor chose before, the stored choice is re-applied
+      synchronously HERE — not in React — so repeat visits never spend the
+      500ms window in the wrong state and GTM boots with the right consent.
+
+      The banner (src/components/ConsentBanner.tsx) drives the same public
+      API via window.uralConsent.{choose,apply,read,openBanner}.
+      Guide: GTM_CONSENT_MODE_INTEGRATION.md
+    -->
+    <script>
+      (function(){
+        var KEY='ural-cookie-consent';
+        var CONSENT_TYPES=['ad_storage','ad_user_data','ad_personalization','analytics_storage','functionality_storage','personalization_storage'];
+        var defaults={
+          'ad_storage':'denied',
+          'ad_user_data':'denied',
+          'ad_personalization':'denied',
+          'analytics_storage':'denied',
+          'functionality_storage':'denied',
+          'personalization_storage':'denied',
+          'security_storage':'granted',
+          'wait_for_update':500
+        };
+        window.dataLayer=window.dataLayer||[];
+        window.gtag=function(){dataLayer.push(arguments);};
+        function read(){try{return window.localStorage.getItem(KEY);}catch(e){return null;}}
+        var saved=read();
+        if(saved==='accepted'||saved==='declined'){
+          var v=saved==='accepted'?'granted':'denied';
+          for(var i=0;i<CONSENT_TYPES.length;i++){defaults[CONSENT_TYPES[i]]=v;}
+          delete defaults.wait_for_update;
+        }
+        window.gtag('consent','default',defaults);
+        window.uralConsent={
+          storageKey:KEY,
+          read:read,
+          apply:function(granted){
+            var v=granted?'granted':'denied',u={},i;
+            for(i=0;i<CONSENT_TYPES.length;i++){u[CONSENT_TYPES[i]]=v;}
+            window.gtag('consent','update',u);
+          },
+          choose:function(granted){
+            try{window.localStorage.setItem(KEY,granted?'accepted':'declined');}catch(e){}
+            this.apply(granted);
+          },
+          reset:function(){try{window.localStorage.removeItem(KEY);}catch(e){}}
+        };
+      })();
     </script>
 
     <!-- Google Tag Manager - Deferred to user interaction or 3s timeout -->
