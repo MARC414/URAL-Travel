@@ -156,6 +156,36 @@ check(
   "index.html hero imagesrcset matches buildResponsiveSrcSet() exactly"
 );
 
+// (1c) locale-correct critical font preloads: bn routes must preload Noto
+//      Sans Bengali (their LCP is Bengali text), en routes Inter — and
+//      neither should preload the other locale's font, because an unused
+//      preload competes with the LCP resource for early connections.
+const fontProblems: string[] = [];
+let fontChecked = 0;
+for (const file of distHtmlFiles) {
+  const html = fs.readFileSync(file, "utf8");
+  // Utility pages (404, search-console verification, partner whitelabel)
+  // are static copies from public/ with no app shell and no font preloads —
+  // out of scope. Real routes all carry the #root mount point.
+  if (!html.includes('id="root"')) continue;
+  fontChecked++;
+  const rel = path.relative(DIST_DIR, file);
+  const isBn = rel.startsWith(`bn${path.sep}`) || rel === "bn.html";
+  const hasNoto = html.includes('href="/fonts/noto-sans-bengali-400.woff2"');
+  const hasInter = html.includes('href="/fonts/inter-400.woff2"');
+  if (isBn && !hasNoto) fontProblems.push(`${rel}: Bengali page without Noto preload`);
+  if (isBn && hasInter) fontProblems.push(`${rel}: Bengali page still preloading Inter`);
+  if (!isBn && !hasInter) fontProblems.push(`${rel}: English page without Inter preload`);
+  if (!isBn && hasNoto) fontProblems.push(`${rel}: English page preloading unused Noto`);
+}
+check(
+  fontChecked > 0 && fontProblems.length === 0,
+  fontProblems.length === 0
+    ? `all ${fontChecked} route pages preload their own locale's critical font (bn→Noto, en→Inter)`
+    : `${fontProblems.length} page(s) with wrong font preload: ` +
+        fontProblems.slice(0, 5).join(", ")
+);
+
 // (2) consent default precedes the GTM loader, and defaults to denied.
 //     Whitespace-tolerant: the head script has been rewritten once already
 //     (binary -> granular CMP), and the guard must survive formatting changes
