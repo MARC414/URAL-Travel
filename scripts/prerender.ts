@@ -8,6 +8,11 @@ import {
   TRIP_COSTS_DATA,
   BLOG_DATA,
 } from "../src/constants";
+// English blog bodies were split out of constants.ts for Core Web Vitals (so
+// they do not ship in the eager client `content-data` chunk). Prerender runs in
+// Node at build time, so importing them eagerly here carries no client cost and
+// keeps every /blog/:slug route's crawlable HTML body intact.
+import { BLOG_CONTENT } from "../src/data/blogContent";
 import {
   BASE_URL,
   breadcrumbSchema,
@@ -1547,9 +1552,15 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h1>${escapeHtml(post.title)}</h1>
           <p><em>By ${escapeHtml(post.author)} · Published ${escapeHtml(post.date)} · ${escapeHtml(post.readTime)}</em></p>
           <p>${escapeHtml(post.summary)}</p>
-          ${(Array.isArray(post.content) ? post.content : sanitizeExpiredPromoText(String(post.content || "")).split("\n\n"))
-            .map((para) => `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`)
-            .join("\n")}
+          ${(() => {
+            // English body now lives in the lazily-loaded BLOG_CONTENT map
+            // (keyed by slug); fall back to any inline content for safety.
+            const body = post.content ?? BLOG_CONTENT[post.slug] ?? "";
+            return sanitizeExpiredPromoText(String(body))
+              .split("\n\n")
+              .map((para) => `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`)
+              .join("\n");
+          })()}
           ${radicalStorageHtml}
           ${multiPartnerHtml}
           ${planLinksHtml}

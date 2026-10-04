@@ -134,7 +134,14 @@ export interface BlogPost {
   date: string;
   author: string;
   readTime: string;
-  content: string;
+  /**
+   * English article body. Lazily loaded from src/data/blogContent.ts (keyed by
+   * slug) so ~115 KB gz stays out of the eager `content-data` chunk — it is
+   * therefore absent on BLOG_DATA entries and present only on Bengali localized
+   * posts (set from bengaliContent.ts). Resolve it via BLOG_CONTENT[slug] when
+   * undefined. See src/data/blogContent.ts.
+   */
+  content?: string;
   internalLinks: { text: string; path: string }[];
   affiliateCTA?: { provider: "aviasales" | "klook" | "kkday" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage" | "ekta" | "yesim" | "kiwi" | "getTransfer" | "goCity"; headline: string; body: string };
 }
