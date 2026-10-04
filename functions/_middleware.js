@@ -25,61 +25,29 @@ const LEGACY_BLOG_SLUGS = {
     "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost",
 };
 
-// --- GDPR-jurisdiction consent gate -----------------------------------------
+// --- Marketing-consent gate for the affiliate script ------------------------
 //
-// Cloudflare exposes the visitor's country on the request (`request.cf.country`).
 // The Emerald/Travelpayouts affiliate script is listed as a MARKETING processor
-// in this site's own privacy policy, so visitors in the EEA, the UK and
-// Switzerland must not load it before they grant marketing consent.
+// in this site's own privacy policy. It must not load before the visitor grants
+// marketing consent, and that rule is now the same for every visitor regardless
+// of country: the consent banner is shown to everyone (no region check in
+// ConsentBanner.tsx), so a region-limited gate only ever created two behaviours
+// to reason about — and it left non-EEA visitors loading a marketing script
+// before they had been given the choice.
 //
-// The HTML is static (and prerendered to ~165 routes), so the region is passed
-// to the client as an attribute on <html>; the inline loader in the shell reads
-// it and waits for the consent event before injecting the script. The rewrite
-// happens per request inside this Function — nothing is cached with the
-// attribute baked in.
+// The gate itself lives in the shell: the loader in index.html calls
+// marketingAllowed() and refuses to inject the script until localStorage says
+// marketing consent was granted, then listens for `ural:consent-updated`.
 //
-// Fail-open by design: if `request.cf` is unavailable (local dev) or anything
-// below throws, the original response is served unchanged, i.e. today's
-// behaviour. Only the shipping of this Function can gate traffic; it can never
-// break a page.
-const GDPR_REGIONS = new Set([
-  // EU 27
-  "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU",
-  "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE",
-  // EEA
-  "IS", "LI", "NO",
-  // UK + Switzerland (GDPR-equivalent regimes)
-  "GB", "CH",
-]);
-
-async function tagConsentRegion(context) {
-  const response = await context.next();
-  const country = context.request.cf && context.request.cf.country;
-  if (!country || !GDPR_REGIONS.has(country)) return response;
-
-  const contentType = response.headers.get("content-type") || "";
-  // A conditional request is answered by the asset layer with 304 + no body, so
-  // this early return is also what preserves HTML revalidation for these
-  // visitors: the browser reuses the tagged copy it already has.
-  if (response.status !== 200 || !contentType.includes("text/html")) return response;
-
-  const headers = new Headers(response.headers);
-  // The body is re-emitted as plain text, so byte-level headers must not be
-  // carried over. ETag/Last-Modified are deliberately KEPT.
-  headers.delete("content-length");
-  headers.delete("content-encoding");
-
-  let html;
-  try {
-    html = await response.text();
-  } catch {
-    return response; // unreadable body: serve it untouched
-  }
-
-  const tagged = html.replace(/<html([^>]*)>/, '<html$1 data-consent-region="eea">');
-  return new Response(tagged, { status: response.status, headers });
-}
-
+// This Function therefore no longer touches response bodies. The earlier
+// revision stamped `data-consent-region` on <html> from `request.cf.country`,
+// which meant reading, re-encoding and re-emitting every HTML response at the
+// edge — dropped here because the decision is client-side, and because leaving
+// rendered bodies alone keeps ETag/Last-Modified revalidation, compression and
+// content-length exactly as the asset layer produced them.
+//
+// This Function is redirect-only: if it ever throws, the asset layer still
+// serves the page.
 export async function onRequest(context) {
   const url = new URL(context.request.url);
   const legacyRoute = LEGACY_QUERY_ROUTES[url.pathname];
@@ -100,5 +68,5 @@ export async function onRequest(context) {
     }
   }
 
-  return tagConsentRegion(context);
+  return context.next();
 }

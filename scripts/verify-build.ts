@@ -626,46 +626,47 @@ check(
     : `${missingMaps.length} chunk(s) without a .map: ${missingMaps.slice(0, 5).join(", ")}`
 );
 
-// Consent-region gate for the affiliate script (Appendix D.1.3). The privacy
-// policy lists emrld.ltd as a MARKETING processor, so EEA/UK/CH visitors must
-// not load it before granting marketing consent. The region is stamped on
-// <html> by functions/_middleware.js; the shell's loader reads it. Three things
-// must stay true, and each has been broken at least once in similar projects:
-// the middleware still detects regions, the loader still gates on them, and the
-// gate did not quietly remove the lazy-loading that Phase 3B bought.
-const middlewareSrc = read(path.join(ROOT_DIR, "functions", "_middleware.js")) ?? "";
-check(
-  /GDPR_REGIONS/.test(middlewareSrc) &&
-    /data-consent-region="eea"/.test(middlewareSrc) &&
-    /request\.cf/.test(middlewareSrc),
-  "functions/_middleware.js still stamps data-consent-region on <html> for GDPR jurisdictions"
-);
-// The rewrite must stay fail-open: an unknown country (local dev, or any
-// non-GDPR visitor) short-circuits before the body is touched, and an
-// unreadable body is caught and served as-is. A gate that can 500 a page for
-// visitors it was meant to protect is worse than no gate.
-const failOpenChecks: Array<[string, RegExp]> = [
-  ["unknown country returns the untouched response", /!GDPR_REGIONS\.has\(country\)\) return response;/],
-  ["non-HTML / non-200 responses are skipped", /response\.status !== 200 \|\| !contentType\.includes\("text\/html"\)\) return response;/],
-  ["body read errors are caught and served as-is", /catch \{[\s\S]{0,120}return response;/],
-  ["no validators are stripped (304 caching preserved)", /headers\.delete\("content-length"\)/],
-  ["no validators are stripped (304 caching preserved)", /headers\.delete\("content-encoding"\)/],
+// Affiliate-script consent gate, scope: every visitor (Appendix D.1.5).
+//
+// The privacy policy lists emrld.ltd as a MARKETING processor and the consent
+// banner is shown to everyone, so the gate no longer depends on the visitor's
+// country. Two halves must stay true:
+//   (a) functions/_middleware.js is redirect-only again - it must not read,
+//       re-encode or re-emit response bodies (the `data-consent-region` stamp it
+//       used to add is gone). A middleware that buffers HTML is also the thing
+//       that can strip a Content-Encoding or break 304 revalidation.
+//   (b) the shell loader injects the script only when marketing consent is
+//       granted - for every visitor, with no region escape hatch - while keeping
+//       the viewport laziness from Phase 3B.
+// (b) is exercised for real below, with the loader's own source and a stub DOM.
+const middlewareRaw = read(path.join(ROOT_DIR, "functions", "_middleware.js")) ?? "";
+// Strip comments before scanning: the file explains *why* it no longer tags
+// regions, and prose about the old behaviour must not read as the behaviour.
+const middlewareSrc = middlewareRaw
+  .replace(/\/\*[\s\S]*?\*\//g, "")
+  .replace(/(^|[^:])\/\/[^\n]*/g, "$1");
+const middlewareForbidden: Array<[string, RegExp]> = [
+  ["no region tagging", /data-consent-region/],
+  ["no country lookup", /request\.cf/],
+  ["does not read response bodies", /response\.text\(\)/],
+  ["does not rebuild responses", /new Response\(/],
+  ["does not strip headers", /headers\.delete\(/],
 ];
-const failOpenProblems = failOpenChecks
-  .filter(([, pattern]) => !pattern.test(middlewareSrc))
+const middlewareViolations = middlewareForbidden
+  .filter(([, pattern]) => pattern.test(middlewareSrc))
   .map(([label]) => label);
 check(
-  failOpenProblems.length === 0,
-  failOpenProblems.length === 0
-    ? `consent-region rewrite is fail-open (${failOpenChecks.length} properties checked)`
-    : `middleware gate is not fail-open: ${[...new Set(failOpenProblems)].join("; ")}`
+  middlewareViolations.length === 0 && /return context\.next\(\)/.test(middlewareSrc),
+  middlewareViolations.length === 0
+    ? `functions/_middleware.js is redirect-only (${middlewareForbidden.length} body-rewrite patterns absent)`
+    : `middleware touches response bodies again: ${middlewareViolations.join("; ")}`
 );
 
 const shellHtml = read(path.join(ROOT_DIR, "index.html")) ?? "";
 const gatingChecks: Array<[string, RegExp]> = [
-  ["reads data-consent-region", /data-consent-region/],
+  ["no region escape hatch", /^(?!.*data-consent-region)(?!.*consent_region)[\s\S]*$/],
   ["checks the marketing category, not just the banner choice", /cookie-consent-settings[\s\S]{0,120}marketing/],
-  ["lets non-EEA visitors through unchanged", /region\(\)!=='eea'\)return true/],
+  ["reads the consent choice before loading", /localStorage\.getItem\('cookie-consent'\)/],
   ["still defers to viewport intersection (Phase 3B)", /IntersectionObserver[\s\S]{0,200}rootMargin/],
   ["reacts to consent granted later", /ural:consent-updated/],
 ];
@@ -675,33 +676,43 @@ const gateProblems = gatingChecks
 check(
   gateProblems.length === 0,
   gateProblems.length === 0
-    ? `affiliate-script consent gate intact (${gatingChecks.length} properties: region, marketing category, non-EEA passthrough, lazy-load, consent event)`
+    ? `affiliate-script gate intact for every visitor (${gatingChecks.length} properties: unconditional, marketing category, lazy-load, consent event)`
     : `consent gate broken/missing: ${gateProblems.join("; ")}`
 );
 
-// --- 2f. Behavioural test of the consent-region gate ------------------------
+// ...and the same invariant in the SHELL THAT SHIPS. The checks above read the
+// source; this one reads dist/index.html, so a build step that reintroduces the
+// region stamp (or drops the loader) cannot pass unnoticed.
+check(
+  distIndexHtml !== null &&
+    !distIndexHtml.includes("data-consent-region") &&
+    distIndexHtml.includes("function marketingAllowed()"),
+  "the shipped dist/index.html carries the unconditional gate and no region stamp"
+);
+
+// --- 2f. Behavioural tests ---------------------------------------------------
 //
-// The checks above assert the gate's *shape*; this one exercises the actual
-// middleware with a fake request, because a gate that mis-tags or, worse,
-// rewrites a non-HTML response would be invisible to a regex. It runs here
-// rather than in a separate test runner for the same reason the rest of this
-// file exists: this project has one gate, and everything goes through it.
+// The checks above assert *shape*; these run the real code. Part 1 drives
+// functions/_middleware.js with fake requests - the invariant that matters now
+// is that it passes everything through untouched. Part 2 extracts the inline
+// affiliate loader from index.html and executes it against a stub DOM, because
+// the gate's actual decision (storage -> inject or not) is the one thing a regex
+// can only pretend to verify.
 const { onRequest } = await import("../functions/_middleware.js");
 
 const SAMPLE_HTML =
   '<!doctype html><html lang="en-BD"><head><title>t</title></head><body>ok</body></html>';
 
 function fakeContext(
-  country: string | undefined,
-  options: { url?: string; contentType?: string; status?: number; callback?: (response: Response) => Response } = {}
+  options: { url?: string; contentType?: string; status?: number; country?: string } = {}
 ) {
   const url = options.url ?? "https://ural-travel.pages.dev/";
   const status = options.status ?? 200;
   return {
-    request: { url, cf: country ? { country } : undefined },
+    request: { url, cf: options.country ? { country: options.country } : undefined },
     next: async () => {
       // 304 must be constructed without a body (the runtime rejects one).
-      const response = new Response(status === 304 ? null : SAMPLE_HTML, {
+      return new Response(status === 304 ? null : SAMPLE_HTML, {
         status,
         headers: {
           "content-type": options.contentType ?? "text/html; charset=utf-8",
@@ -711,56 +722,46 @@ function fakeContext(
           "content-encoding": "gzip",
         },
       });
-      return options.callback ? options.callback(response) : response;
     },
   };
 }
 
-const gateFailures: string[] = [];
-async function gateCase(label: string, run: () => Promise<void>) {
+const middlewareFailures: string[] = [];
+async function middlewareCase(label: string, run: () => Promise<void>) {
   try {
     await run();
   } catch (error) {
-    gateFailures.push(`${label}: ${(error as Error).message}`);
+    middlewareFailures.push(`${label}: ${(error as Error).message}`);
   }
 }
 
-await gateCase("EEA visitor (DE) is tagged", async () => {
-  const response = await (onRequest as any)(fakeContext("DE"));
+await middlewareCase("HTML passes through byte-identical, validators intact", async () => {
+  const response = await (onRequest as any)(fakeContext({ country: "DE" }));
   const body = await response.text();
-  if (!body.includes('data-consent-region="eea"')) throw new Error("no data-consent-region attribute");
-  if (response.status !== 200) throw new Error(`status ${response.status}`);
-  if (response.headers.get("etag") !== 'W/"abc123"') throw new Error("etag dropped (hurts 304 revalidation)");
-  if (response.headers.get("content-length")) throw new Error("content-length carried over to a re-encoded body");
-  if (response.headers.get("content-encoding")) throw new Error("content-encoding carried over to a plain-text body");
-});
-
-await gateCase("non-EEA visitor (BD) is untouched", async () => {
-  const response = await (onRequest as any)(fakeContext("BD"));
-  const body = await response.text();
-  if (body.includes("data-consent-region")) throw new Error("non-GDPR visitor was tagged anyway");
   if (body !== SAMPLE_HTML) throw new Error("body was modified");
+  if (response.status !== 200) throw new Error(`status ${response.status}`);
+  if (response.headers.get("etag") !== 'W/"abc123"') throw new Error("etag dropped");
+  if (response.headers.get("content-encoding") !== "gzip") throw new Error("content-encoding dropped");
+  if (response.headers.get("content-length") !== String(SAMPLE_HTML.length)) {
+    throw new Error("content-length changed");
+  }
 });
 
-await gateCase("missing cf.country (local dev) is untouched", async () => {
-  const response = await (onRequest as any)(fakeContext(undefined));
-  if ((await response.text()).includes("data-consent-region")) throw new Error("tagged without a country");
+await middlewareCase("a GDPR country is treated exactly like any other", async () => {
+  const de = await (onRequest as any)(fakeContext({ country: "DE" }));
+  const bd = await (onRequest as any)(fakeContext({ country: "BD" }));
+  if ((await de.text()) !== (await bd.text())) throw new Error("response differs by country");
 });
 
-await gateCase("non-HTML responses are skipped", async () => {
-  const response = await (onRequest as any)(fakeContext("DE", { contentType: "application/javascript" }));
-  if ((await response.text()).includes("data-consent-region")) throw new Error("rewrote a non-HTML response");
-});
-
-await gateCase("304 responses stay bodyless", async () => {
-  const response = await (onRequest as any)(fakeContext("DE", { status: 304 }));
+await middlewareCase("304 responses stay bodyless", async () => {
+  const response = await (onRequest as any)(fakeContext({ status: 304 }));
   if (response.status !== 304) throw new Error(`status changed to ${response.status}`);
   if ((await response.text()).length > 0) throw new Error("a body was attached to a 304");
 });
 
-await gateCase("legacy route redirects still work", async () => {
+await middlewareCase("legacy route redirects still work", async () => {
   const response = await (onRequest as any)(
-    fakeContext(undefined, { url: "https://ural-travel.pages.dev/flights?route=dhaka-bangkok" })
+    fakeContext({ url: "https://ural-travel.pages.dev/flights?route=dhaka-bangkok" })
   );
   if (response.status !== 301) throw new Error(`expected 301, got ${response.status}`);
   const location = response.headers.get("location") ?? "";
@@ -768,13 +769,103 @@ await gateCase("legacy route redirects still work", async () => {
 });
 
 check(
-  gateFailures.length === 0,
-  gateFailures.length === 0
-    ? "consent-region gate behaves correctly (6 cases: EEA tagged, non-EEA/local untouched, non-HTML skipped, 304 intact, legacy redirect intact)"
-    : `consent-region gate misbehaves: ${gateFailures.join("; ")}`
+  middlewareFailures.length === 0,
+  middlewareFailures.length === 0
+    ? "middleware passes responses through untouched (4 cases: byte-identical, country-independent, 304 intact, legacy redirect intact)"
+    : `middleware misbehaves: ${middlewareFailures.join("; ")}`
 );
 
-// --- 3. Sitemap: structure + the lastmod invariant --------------------------
+// --- the affiliate loader's actual consent decision -------------------------
+const loaderSource = (() => {
+  const marker = shellHtml.indexOf("function loadEmerald");
+  if (marker === -1) return "";
+  const open = shellHtml.lastIndexOf("<script", marker);
+  const bodyStart = shellHtml.indexOf(">", open);
+  const close = shellHtml.indexOf("</script>", marker);
+  if (open === -1 || bodyStart === -1 || close === -1) return "";
+  return shellHtml.slice(bodyStart + 1, close);
+})();
+
+interface LoaderRun {
+  injected: string[];
+  fireConsentUpdate: () => void;
+}
+
+function runAffiliateLoader(storage: Record<string, string>): LoaderRun {
+  const injected: string[] = [];
+  const listeners: Array<() => void> = [];
+  const fakeWindow: any = {
+    addEventListener: (name: string, callback: () => void) => {
+      if (name === "ural:consent-updated") listeners.push(callback);
+    },
+  };
+  const fakeDocument: any = {
+    addEventListener: () => {},
+    querySelector: () => null,
+    createElement: () => ({ async: false, onerror: null, src: "" }),
+    head: {
+      appendChild: (element: { src: string }) => {
+        injected.push(element.src);
+      },
+    },
+  };
+  const fakeLocalStorage = {
+    getItem: (key: string) => (key in storage ? storage[key] : null),
+  };
+  // No IntersectionObserver on the stub window, so the loader takes its
+  // non-observer branch and calls attempt() immediately - which is exactly the
+  // decision under test.
+  // eslint-disable-next-line no-new-func
+  new Function("window", "document", "localStorage", "location", loaderSource)(
+    fakeWindow,
+    fakeDocument,
+    fakeLocalStorage,
+    { search: "" }
+  );
+  return { injected, fireConsentUpdate: () => listeners.forEach((callback) => callback()) };
+}
+
+const loaderFailures: string[] = [];
+const EMRldUrl = "https://emrld.ltd/";
+
+function loaderCase(label: string, storage: Record<string, string>, expectInjected: boolean, afterConsent?: Record<string, string>) {
+  try {
+    // Same object reference on purpose: the "granted later" case mutates this
+    // storage after the loader has started, and localStorage is read live.
+    const run = runAffiliateLoader(storage);
+    if (expectInjected && !run.injected.some((url) => url.startsWith(EMRldUrl))) {
+      throw new Error("script was NOT injected but should have been");
+    }
+    if (!expectInjected && run.injected.length > 0) {
+      throw new Error(`script was injected without marketing consent (${run.injected[0]})`);
+    }
+    if (afterConsent) {
+      Object.assign(storage, afterConsent);
+      run.fireConsentUpdate();
+      const injectedLater = run.injected.some((url) => url.startsWith(EMRldUrl));
+      if (!injectedLater) throw new Error("script did not start after ural:consent-updated");
+      if (run.injected.length !== 1) throw new Error(`script injected ${run.injected.length} times`);
+    }
+  } catch (error) {
+    loaderFailures.push(`${label}: ${(error as Error).message}`);
+  }
+}
+
+loaderCase("no consent recorded yet", {}, false, { "cookie-consent": "accepted" });
+loaderCase("Accept all", { "cookie-consent": "accepted" }, true);
+loaderCase("custom with marketing on", { "cookie-consent": "custom", "cookie-consent-settings": '{"marketing":true}' }, true);
+loaderCase("custom with marketing off", { "cookie-consent": "custom", "cookie-consent-settings": '{"marketing":false}' }, false);
+loaderCase("declined", { "cookie-consent": "declined" }, false);
+loaderCase("unreadable settings", { "cookie-consent": "custom", "cookie-consent-settings": "not json" }, false);
+
+check(
+  loaderSource.length > 0 && loaderFailures.length === 0,
+  loaderFailures.length === 0
+    ? "affiliate loader gates on marketing consent in all cases (6: none yet -> injected on grant, accept-all, custom+marketing, custom-without, declined, unreadable)"
+    : `affiliate loader misbehaves: ${loaderFailures.join("; ")}`
+);
+
+// --- 3. Sitemap: structure + the lastmod invariant --------------------------: structure + the lastmod invariant --------------------------
 
 const sitemap = read(path.join(DIST_DIR, "sitemap.xml"));
 check(sitemap !== null, "dist/sitemap.xml generated");

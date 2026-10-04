@@ -9,7 +9,7 @@
 ## ✅ Status Board (single source of truth — 2026-10-04)
 
 Everything below is **committed code**, verified by `npm run build` + `npm run
-verify:build` (47 checks, incl. the cache/srcset/consent/contrast/security/gate/blog-split/AVIF regression guards). "Deployed" means it
+verify:build` (48 checks, incl. the cache/srcset/consent/contrast/security/gate/blog-split/AVIF regression guards). "Deployed" means it
 will be live on the next Cloudflare Pages deploy of this branch — confirm with
 the Production Verification commands at the bottom of this guide.
 
@@ -42,7 +42,7 @@ the Production Verification commands at the bottom of this guide.
 | 25 | **Security headers** (HSTS + XFO + COOP + partial CSP) | ✅ done 2026-10-04 night | `public/_headers`; all five Lighthouse Trust & Safety audits are *informative* (unscored) — added because they are real and cheap, guarded by 3 checks (D.3) |
 | 26 | **Source maps shipped** (Lighthouse "missing source maps") | ✅ done 2026-10-04 night | `vite.config.ts` `sourcemap: true` → 16 maps (5.7 MB, DevTools-only); guarded (D.2) |
 | 27 | Console errors (CORS to `emrld.ltd/entrypoint_config`) | ⛔ **third-party defect** — report to Travelpayouts (D.1.2) | their endpoint sends no `Access-Control-Allow-Origin`; nothing in this repo can add one |
-| 28 | **Marketing-consent gate for the affiliate script (EEA/UK/CH only)** | ✅ done 2026-10-04 night (owner decision: option B) | `functions/_middleware.js` stamps `data-consent-region="eea"` on `<html>` from `cf.country`; the shell's loader waits for `ural:consent-updated` there. Non-GDPR traffic (incl. Bangladesh) is byte-for-byte unchanged; 2 shape guards + a 6-case behavioural test (D.1.3) |
+| 28 | **Marketing-consent gate for the affiliate script (every visitor)** | ✅ re-scoped and applied 2026-10-05 (owner decision: everywhere; supersedes the EEA/UK/CH-only option B of 2026-10-04) | `functions/_middleware.js` is redirect-only again — no HTML rewrite, so no body is buffered or re-encoded at the edge; `index.html` gates for everyone on `localStorage` marketing consent + `ural:consent-updated`, keeping viewport laziness. 5 guards incl. a 6-case loader decision test and a 4-case passthrough test, both mutation-tested (D.1.5) |
 | 29 | **Blog bodies split out of `constants.ts` into a lazy chunk (P3.1)** | ✅ done 2026-10-04 night | 43 article bodies → `src/data/blogContent.ts`, `import()`ed on blog routes only; measured **330.1 → 266.1 KB gzip** of eager JS (−64.0 KB, Appendix E). Prerender still inlines every paragraph (211/211 verified); 7 new guards + 2 mutation tests |
 
 ### ⚠️ The recurring CI failure (lockfile hygiene)
@@ -740,7 +740,7 @@ curl -sI https://ural-travel.pages.dev/ | grep -i x-robots-tag  # must be ABSENT
 ```bash
 npm run lint          # tsc --noEmit
 npm run build         # vite build + prerender of ~163 routes
-npm run verify:build  # 47 checks incl. srcset/consent/cache/contrast/security/gate/blog-split/AVIF guards
+npm run verify:build  # 48 checks incl. srcset/consent/cache/contrast/security/gate/blog-split/AVIF guards
 ```
 
 ---
@@ -828,8 +828,8 @@ npm run preview
 - [ ] Separate visual pass for the 12 non-existent Tailwind colour steps (C.4)
 - [x] Security headers + source maps ✅ (2026-10-04 night — Appendix D)
 - [ ] Report the emrld.ltd CORS failure to Travelpayouts support (D.1) — copy the ready-made report
-- [x] Owner decision + implementation: EEA/UK/CH-only marketing-consent gate for the affiliate script ✅ (D.1.3)
-- [ ] Verify the gate on the deployed build from an EEA IP, or with `?consent_region=eea` (D.1.4)
+- [x] Marketing-consent gate for the affiliate script ✅ — first shipped EEA/UK/CH-only (D.1.3/D.1.4), then re-scoped to **every visitor** at the owner's direction (D.1.5, 2026-10-05)
+- [ ] Verify the deployed gate: fresh profile → no emrld request; "Accept all" → script appears; re-run PSI and check whether `errors-in-console` clears (D.1.5)
 - [x] **P3.1 — blog bodies split out of `constants.ts` into a lazy chunk** ✅ (2026-10-04 night — Appendix E)
   - [x] 43 bodies → `src/data/blogContent.ts`; `content?` optional; lazy import on blog routes; skeleton placeholder
   - [x] prerender keeps emitting the full text + `modulepreload` on the 44 blog pages; manifest removed from `dist`
@@ -1483,7 +1483,8 @@ So declining marketing currently does not stop a marketing script: a real
 consent gap (and the reason the lab audit sees the errors at all — a fresh
 profile has no marketing consent).
 
-**D.1.4 Chosen and implemented: option B — gate for EEA/UK/CH only.**
+**D.1.4 (superseded by D.1.5) The first scope: gate for EEA/UK/CH only.**
+Kept for the reasoning; the shipping behaviour is D.1.5.
 Owner decision, 2026-10-04. `docs/growth/06` §5 makes the emrld script a revenue
 component that is only removed or deferred with explicit owner approval, so the
 gate was scoped to the jurisdictions where consent is legally required and
@@ -1523,6 +1524,65 @@ non-HTML skipped, 304 stays bodyless, legacy redirects still work.
 What this does **not** fix: a visitor who *does* grant marketing consent still
 loads a script whose own config fetch fails — that is Travelpayouts' bug
 (D.1.2).
+
+**D.1.5 Scope change, applied 2026-10-05: the gate covers every visitor.**
+
+Owner decision. Replaces the EEA/UK/CH-only scope of D.1.4, for two reasons:
+
+- The consent banner is shown to **every** visitor (`ConsentBanner.tsx` has no
+  region check), so the region-limited gate produced two behaviours: EEA/UK/CH
+  visitors got a choice before the script, everyone else — including Bangladesh,
+  the main market — had a marketing script loaded before being asked.
+- The narrower scope could not clean lab audits: PSI runs from non-EEA
+  infrastructure, so `cf.country` was never a GDPR region there and the script
+  loaded as before.
+
+How it works now:
+
+1. **`functions/_middleware.js` is redirect-only again.** The
+   `data-consent-region` stamp is gone, and with it the only reason this
+   Function ever read a response body. Nothing is re-encoded or re-emitted, so
+   `ETag`/`Last-Modified` revalidation, `Content-Encoding` and `Content-Length`
+   are exactly what the asset layer produced — and there is no body-rewriting
+   path left to fail on.
+2. **The shell's loader gates everyone.** `marketingAllowed()` reads
+   `localStorage["cookie-consent"]` (`accepted`, or `custom` with
+   `marketing: true`) and the script is injected only then; it stays lazy on
+   footer intersection (Phase 3B) and starts on `ural:consent-updated`, so
+   granting consent later still loads it. The `?consent_region=` QA override went
+   away with the region logic — the check is now simply "fresh profile → no
+   emrld request; Accept all → request".
+3. **Nothing else changed.** GTM still ships Consent Mode v2 defaults and the
+   analytics/personalization categories behave as before; only the marketing
+   script waits.
+
+**Cost, recorded deliberately:** a session that never grants marketing consent
+never loads the affiliate script, in every market — including the ones where
+there is no legal requirement to withhold it. That was the accepted trade for
+removing the "loaded before they were asked" state and collapsing this to one
+code path. Affiliate attribution is a revenue metric only the owner can see;
+the right way to judge it is the partner dashboard before/after, not this file.
+
+**Guards (5 checks, 47 → 48 overall):** the middleware is redirect-only (5
+body-rewrite patterns asserted absent, with comments stripped before scanning,
+because the file explains the old behaviour in prose); the shell's gate shape
+(unconditional, marketing category, lazy-load, consent event); **4 behavioural
+cases** proving byte-identical passthrough (validators intact, country-independent,
+304 bodyless, legacy redirect); **the loader's actual decision is executed** —
+its inline source is extracted from `index.html` and run against a stub DOM in
+**6 cases** (no answer yet → injected only after the consent event, accept-all,
+custom+marketing, custom-without, declined, unreadable settings); and the
+shipped `dist/index.html` must carry the gate with no region stamp.
+
+Both halves were mutation-tested rather than assumed: bypassing
+`marketingAllowed()` fails the four no-consent cases, and restoring the body
+rewrite fails the shape guard plus the passthrough cases (including a 304 the
+rewrite would corrupt).
+
+**Not yet verified — do this on the deployed build, not from here:** the
+`errors-in-console` prediction in D.4 (a fresh lab audit should no longer log
+the emrld CORS error, because the script never loads without consent), and the
+network-panel check above.
 
 ## D.2 Source maps — now shipped
 
@@ -1575,7 +1635,7 @@ must be rewritten as explicit path blocks instead of `/*`.
 
 | Item | Why it is still open |
 |---|---|
-| `errors-in-console` (the scored failure) | Travelpayouts' CORS bug (D.1.2). The consent gate (D.1.4) suppresses it for EEA/UK/CH visitors who have not accepted. **Correction (2026-10-04):** it does *not* clean lab audits — PageSpeed Insights runs from Google infrastructure outside the EEA, so `cf.country` is never a GDPR region there and the script loads as before. Only a field CrUX trace from an EEA/UK/CH device, or an everywhere-scope gate, changes what an audit sees |
+| `errors-in-console` (the scored failure) | Travelpayouts' CORS bug (D.1.2). Since the every-visitor gate (D.1.5) the affiliate script loads only after marketing consent, so a fresh lab audit — which has no consent — should no longer trigger it. **To confirm on the deployed build** (PSI), not yet measured; the earlier EEA-only scope could not fix this, because PSI runs from non-EEA infrastructure. Consenting visitors still see the error until Travelpayouts fixes their endpoint |
 | `csp-xss` / `trusted-types-xss` | Need a nonce pipeline (Cloudflare Pages Function rewriting the shell + every widget's injected script) and would have to be re-tested against GTM, the affiliate bundles and the review embeds |
 | `origin-isolation` full isolation | Needs COEP, which needs every third party to send CORP/CORS |
 | Trust & Safety scoring impact | None — informative audits do not move the category score |

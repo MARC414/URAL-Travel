@@ -231,14 +231,18 @@
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Travelpayouts Emerald Partner Script - Lazy-loaded on viewport intersection,
-         and (in GDPR jurisdictions only) gated on marketing consent.
+    <!-- Travelpayouts Emerald Partner Script - lazy-loaded on viewport
+         intersection AND gated on marketing consent for every visitor.
          The affiliate script sets marketing cookies and is listed as a marketing
-         processor in our own privacy policy, so for EEA/UK/CH visitors it must not
-         load until the visitor grants marketing consent. The region is stamped on
-         <html> by functions/_middleware.js from Cloudflare's request country; the
-         script stays lazy for everyone else, so the TBT/LCP win is unchanged.
-         QA override: append ?consent_region=eea or ?consent_region=row -->
+         processor in our own privacy policy, and the consent banner is shown to
+         everyone, so the gate no longer depends on the visitor's country: the
+         script is injected only after marketing consent is granted (Accept all,
+         or marketing toggled on in the customize panel), and a later
+         `ural:consent-updated` starts it immediately.
+         Nothing in functions/_middleware.js gates this any more - the decision is
+         entirely client-side in marketingAllowed() below.
+         QA: load the site with a fresh profile -> the script must NOT be in the
+         network log; click "Accept all" -> it must appear. -->
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
       (function(){
         var loaded=false;
@@ -251,13 +255,10 @@
           script.onerror=function(){};
           document.head.appendChild(script);
         }
-        function region(){
-          var forced=new URLSearchParams(location.search).get('consent_region');
-          if(forced==='eea'||forced==='row')return forced;
-          return document.documentElement.getAttribute('data-consent-region')==='eea'?'eea':'row';
-        }
         function marketingAllowed(){
-          if(region()!=='eea')return true;
+          // Same storage keys the consent banner and the privacy page write:
+          // "accepted" means Accept all; "custom" carries per-category flags.
+          // "declined", a missing value, or unreadable storage => no marketing.
           try{
             var choice=localStorage.getItem('cookie-consent');
             if(choice==='accepted')return true;
