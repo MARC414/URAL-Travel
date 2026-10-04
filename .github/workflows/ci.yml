@@ -1,0 +1,84 @@
+# CI — build and verify every change.
+#
+# This project has no unit tests, so the guard is the thing that actually
+# catches regressions: a clean `tsc`, a successful prerender, and an assertion
+# pass over the built output.
+#
+# It exists because of a real bug. The sitemap `<lastmod>` silently became the
+# build date on 77 of 159 URLs in Cloudflare's shallow checkout — while `tsc`
+# passed and the build reported success. Nothing would have caught it except
+# inspecting the built artifact. scripts/verify-build.ts now does that.
+#
+# This workflow does NOT deploy. Cloudflare Pages builds and deploys from its own
+# GitHub integration; duplicating that here would be two sources of truth.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# A newer push to the same PR makes an in-flight run obsolete.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Type-check, build and verify prerender output
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type-check
+        run: npm run lint
+
+      - name: Build (vite + prerender)
+        run: npm run build
+
+      - name: Verify prerendered output
+        run: npm run verify:build
+
+      # Determinism guard for the 2026-10-02 fix: a build must not rewrite the
+      # committed sitemap/RSS unless content genuinely changed (which requires a
+      # CONTENT_UPDATED bump, making the change expected and committed together).
+      # A non-empty diff here means the build is stamping build-time values again.
+      - name: Sitemap and RSS must be reproducible
+        run: |
+          if ! git diff --quiet -- public/sitemap.xml public/rss.xml; then
+            echo "::error::Build output differs from the committed feed files."
+            echo "Either a non-deterministic value crept back into the prerender"
+            echo "(see src/data/contentMeta.ts), or content changed without a"
+            echo "rebuild. Commit the regenerated public/sitemap.xml and rss.xml."
+            git --no-pager diff --stat -- public/sitemap.xml public/rss.xml
+            exit 1
+          fi
+          echo "Feed files are reproducible."
+
+      # Non-blocking reminder. CI cannot know whether a content edit was
+      # "material", so this surfaces the maintenance step without failing the
+      # build — the alternative is a rule people route around.
+      - name: Remind to bump CONTENT_UPDATED when content changes
+        if: github.event_name == 'pull_request'
+        run: |
+          BASE="origin/${{ github.base_ref }}"
+          git fetch --no-tags --depth=1 origin "${{ github.base_ref }}" || true
+          CHANGED="$(git diff --name-only "$BASE"...HEAD 2>/dev/null || true)"
+          if echo "$CHANGED" | grep -qE '^src/(constants\.ts|data/bengaliContent\.ts)$'; then
+            if ! echo "$CHANGED" | grep -q '^src/data/contentMeta\.ts$'; then
+              echo "::warning::Content changed in src/constants.ts or src/data/bengaliContent.ts but CONTENT_UPDATED in src/data/contentMeta.ts was not bumped. Sitemap <lastmod> will stay on the old date. See docs/growth/01-indexing-crawling.md §4."
+            fi
+          fi

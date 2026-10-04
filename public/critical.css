@@ -1,0 +1,21 @@
+/* URAL Travel Critical CSS - Inline for instant LCP rendering */
+/* Only above-the-fold styles - full CSS loads deferred */
+
+/* Reset & Base */
+*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:currentColor}
+html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+body{margin:0;line-height:inherit}
+
+/* Hero Section Critical Styles */
+.hero-bg{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg>img{position:absolute;inset:0;height:100%;width:100%;object-fit:cover;object-position:center;pointer-events:none}
+.hero-bg::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,20,38,0.75),rgba(11,20,38,0.85));z-index:1}
+
+/* Nav Critical */
+.nav-container{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(8px);background-color:rgba(11,20,38,0.9)}
+
+/* Typography Critical */
+h1{font-size:2.5rem;line-height:1.2;font-weight:700;margin:0}
+
+/* Hide non-critical content during load */
+#root{min-height:100vh}

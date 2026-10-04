@@ -1,0 +1,134 @@
+# ---------------------------------------------------------------------------
+# robots.txt — URAL
+#
+# IMPORTANT: robots.txt groups do NOT merge. A crawler obeys only the single
+# most specific User-agent group that matches it and ignores every other group,
+# including `*`. The previous version listed each bot in its own group with a
+# bare `Allow: /`, which silently exempted all of them from the /?admin,
+# /?inspector and /?onboarding disallows below. Every group therefore repeats
+# the full rule set — do not "tidy" that duplication away.
+# ---------------------------------------------------------------------------
+
+User-agent: *
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+# --- Search engine crawlers -------------------------------------------------
+
+User-agent: Googlebot
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: Bingbot
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+# Powers Siri and Spotlight suggestions.
+User-agent: Applebot
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+# --- AI answer engines (AEO / GEO) ------------------------------------------
+# These are allowed deliberately: being cited in AI answers is a traffic and
+# brand-authority channel for this site. Google-Extended and Applebot-Extended
+# are opt-ins for AI training/grounding and carry no ranking effect either way.
+
+User-agent: GPTBot
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: meta-externalagent
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: MistralAI-User
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /?admin
+Disallow: /?inspector
+Disallow: /?onboarding
+
+Sitemap: https://ural-travel.pages.dev/sitemap.xml

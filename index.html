@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en-BD">
+  <head>
+    <!--
+      Head order is deliberate and load-bearing:
+        1. charset — must land inside the first 1024 bytes or the parser may
+           restart after sniffing a different encoding.
+        2. viewport — needed before layout so mobile CLS is measured correctly.
+        3. LCP preload — issued before any third-party request so the hero image
+           is not queued behind analytics on a cold connection.
+        4. Analytics/affiliate tags — last, so they never contend with the LCP
+           image for the first few connections.
+    -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B1426" />
+    <!--
+      LCP hero preload. The imagesrcset below is a hand-written copy of
+      buildResponsiveSrcSet() in src/utils/imageAssets.ts (static HTML cannot
+      import TS); scripts/verify-build.ts asserts the two stay in sync.
+      960w matters most here: DPR-2 phones and tablets used to resolve this
+      preload to the 1200w file (~69KB); they now take the 960w one (~46KB).
+    -->
+    <link rel="preload" as="image" type="image/webp" href="/assets/images/clouds_boat_hero_1781438671378-1200.webp" imagesrcset="/assets/images/clouds_boat_hero_1781438671378-640.webp 640w, /assets/images/clouds_boat_hero_1781438671378-960.webp 960w, /assets/images/clouds_boat_hero_1781438671378-1200.webp 1200w" imagesizes="100vw" fetchpriority="high" />
+    <!-- Self-hosted fonts: preload critical Inter 400 & 600 for LCP -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600.woff2" crossorigin />
+    <style>
+      /* Critical font-face with size-adjust to prevent FOUT layout shift */
+      @font-face{font-family:'Inter';src:url('/fonts/inter-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;size-adjust:100.5%;ascent-override:90%;descent-override:22%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+0259,U+02C6,U+02DA,U+02DC,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+      @font-face{font-family:'Inter';src:url('/fonts/inter-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap;size-adjust:100.5%;ascent-override:90%;descent-override:22%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+0259,U+02C6,U+02DA,U+02DC,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+      @font-face{font-family:'Inter';src:url('/fonts/inter-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+0259,U+02C6,U+02DA,U+02DC,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+      @font-face{font-family:'Noto Sans Bengali';src:url('/fonts/noto-sans-bengali-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0951-0952,U+0964-0965,U+0980-09FF,U+1CD0,U+1CD2,U+1CD5-1CD6,U+1CD8,U+1CE1,U+1CEA,U+1CED,U+1CF2,U+1CF5-1CF7,U+200C-200D,U+20B9,U+25CC,U+A8F1}
+      @font-face{font-family:'Noto Sans Bengali';src:url('/fonts/noto-sans-bengali-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap;unicode-range:U+0951-0952,U+0964-0965,U+0980-09FF,U+1CD0,U+1CD2,U+1CD5-1CD6,U+1CD8,U+1CE1,U+1CEA,U+1CED,U+1CF2,U+1CF5-1CF7,U+200C-200D,U+20B9,U+25CC,U+A8F1}
+      /* Critical CSS - Above-the-fold instant render */
+      *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:currentColor}
+      html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+      body{margin:0;line-height:inherit}
+      .hero-bg{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+      .hero-bg>img{position:absolute;inset:0;height:100%;width:100%;object-fit:cover;object-position:center;pointer-events:none}
+      .hero-bg::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,20,38,0.75),rgba(11,20,38,0.85));z-index:1}
+      .nav-container{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(8px);background-color:rgba(11,20,38,0.9)}
+      h1{font-size:2.5rem;line-height:1.2;font-weight:700;margin:0}
+      #root{min-height:100vh}
+    </style>
+    <!--
+      emrld.ltd preconnect: saves 310ms by establishing TLS connection early.
+      Upgraded from dns-prefetch for faster affiliate script loading.
+    -->
+    <link rel="preconnect" href="https://emrld.ltd" crossorigin />
+    <title>Bangladesh Travel Guides, Flights &amp; Visas from Dhaka | URAL</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/brand/favicon/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon/favicon-16.png" />
+    <link rel="shortcut icon" href="/assets/brand/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/favicon/favicon-180.png" />
+    <link rel="manifest" href="/assets/brand/favicon/site.webmanifest" />
+    <meta name="description" content="Plan travel from Dhaka with BDT flight guidance, visa checklists for Bangladeshi passport holders, destination itineraries and practical trip-budget guides." />
+    <link rel="canonical" href="https://ural-travel.pages.dev/" />
+    <!--
+      Reciprocal hreflang cluster. English lives at /… and Bengali at /bn/…,
+      so each page declares three alternates: en-bd and x-default point at the
+      English URL, bn-bd at the Bengali URL. Prerender rewrites all three per
+      route (scripts/prerender.ts) and emits byte-identical values on both
+      members of a locale pair. Pages without a Bengali counterpart yet (see
+      DEFERRED_BN_GROUPS) have the bn-bd line removed entirely.
+    -->
+    <link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/" />
+    <link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/" />
+    <link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/" />
+
+
+    <!-- Local Dhaka (BD-13) Geo Meta Signals -->
+    <meta name="geo.region" content="BD-13" />
+    <meta name="geo.placename" content="Dhaka" />
+    <meta name="geo.position" content="23.8103;90.4125" />
+    <meta name="ICBM" content="23.8103, 90.4125" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="URAL" />
+    <meta property="og:locale" content="en_BD" />
+    <meta property="og:locale:alternate" content="bn_BD" />
+    <meta property="og:url" content="https://ural-travel.pages.dev/" />
+    <meta property="og:title" content="Bangladesh Travel Guides, Flights &amp; Visas from Dhaka | URAL" />
+    <meta property="og:description" content="Plan travel from Dhaka with BDT flight guidance, visa checklists for Bangladeshi passport holders, destination itineraries and practical trip-budget guides." />
+    <meta property="og:image" content="https://ural-travel.pages.dev/og-image.jpg" />
+    <meta property="og:image:alt" content="URAL — Flights, Hotels, Umrah &amp; Visa Guides for Bangladeshi Travelers" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://ural-travel.pages.dev/" />
+    <meta name="twitter:title" content="Bangladesh Travel Guides, Flights &amp; Visas from Dhaka | URAL" />
+    <meta name="twitter:description" content="Plan travel from Dhaka with BDT flight guidance, visa checklists for Bangladeshi passport holders, destination itineraries and practical trip-budget guides." />
+    <meta name="twitter:image" content="https://ural-travel.pages.dev/og-image.jpg" />
+
+    <meta name="google-site-verification" content="CtmKA_dGDtIeZVuxXQ57FCMUKOHcgw6ZBaberZanhMs" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+    <link rel="alternate" type="application/rss+xml" title="URAL — Flights, Hotels, Umrah &amp; Visa Guides RSS Feed" href="/rss.xml" />
+
+    <!-- Site-Wide Organization, Logo & WebSite Entity Graph -->
+    <script type="application/ld+json" id="site-entity-schema">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": ["TravelAgency", "Organization"],
+            "@id": "https://ural-travel.pages.dev/#organization",
+            "name": "URAL",
+            "alternateName": ["URAL Travel", "উড়াল", "URAL Outbound Travel Intelligence"],
+            "url": "https://ural-travel.pages.dev/",
+            "description": "Independent outbound travel intelligence, visa checklists, DIY Umrah planner, and flight/hotel comparison desk for Bangladeshi passport holders departing Dhaka (DAC).",
+            "logo": {
+              "@type": "ImageObject",
+              "@id": "https://ural-travel.pages.dev/#logo",
+              "url": "https://ural-travel.pages.dev/assets/brand/favicon/favicon-512.png",
+              "contentUrl": "https://ural-travel.pages.dev/assets/brand/favicon/favicon-512.png",
+              "width": 512,
+              "height": 512,
+              "caption": "URAL Ascent mark"
+            },
+            "image": { "@id": "https://ural-travel.pages.dev/#logo" },
+            "telephone": "+8801784385335",
+            "email": "farhan.momen@gmail.com",
+            "priceRange": "BDT 28,000 - BDT 250,000",
+            "currenciesAccepted": "BDT, USD, SAR",
+            "paymentAccepted": "bKash, Nagad, Bank Transfer, Visa, Mastercard, AMEX",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Dhaka",
+              "addressRegion": "Dhaka Division",
+              "addressCountry": "BD"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 23.8103,
+              "longitude": 90.4125
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "Bangladesh",
+              "sameAs": "https://www.wikidata.org/wiki/Q902"
+            },
+            "knowsLanguage": ["en", "bn"],
+            "knowsAbout": [
+              "Bangladesh outbound travel",
+              "Umrah visa and Nusuk guide from Bangladesh",
+              "Hajj registration Bangladesh",
+              "Nepal Visa on Arrival for Bangladeshi citizens",
+              "Thailand e-Visa from Bangladesh",
+              "Malaysia e-Visa and MDAC from Bangladesh",
+              "Singapore authorized visa agents in Dhaka",
+              "UAE Dubai tourist visa from Bangladesh",
+              "Bangladesh Bank dual-currency card endorsement"
+            ],
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "telephone": "+8801784385335",
+                "contactType": "customer support",
+                "areaServed": "BD",
+                "availableLanguage": ["en", "bn"],
+                "url": "https://wa.me/8801784385335"
+              }
+            ],
+            "sameAs": [
+              "https://web.facebook.com/uraltravelbd/",
+              "https://www.instagram.com/uraltravelbd/",
+              "https://www.linkedin.com/company/ural-travel-bangladesh",
+              "https://wa.me/8801784385335"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://ural-travel.pages.dev/#website",
+            "url": "https://ural-travel.pages.dev/",
+            "name": "URAL — Flights, Hotels, Umrah & Visa Guides for Bangladeshi Travelers",
+            "alternateName": "URAL Travel Bangladesh",
+            "description": "Compare flights from Dhaka (DAC), check step-by-step visa requirements, calculate DIY Umrah costs in BDT, and browse 41 practical travel guides for Bangladeshi citizens.",
+            "inLanguage": "en-BD",
+            "publisher": { "@id": "https://ural-travel.pages.dev/#organization" }
+          }
+        ]
+      }
+    </script>
+
+    <!-- Google Consent Mode v2 - Default State before GTM loads -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      (function(){
+        var stored = null;
+        try { stored = localStorage.getItem('cookie-consent'); } catch(e){}
+        var isGranted = stored === 'accepted';
+        gtag('consent', 'default', {
+          'ad_storage': isGranted ? 'granted' : 'denied',
+          'ad_user_data': isGranted ? 'granted' : 'denied',
+          'ad_personalization': isGranted ? 'granted' : 'denied',
+          'analytics_storage': isGranted ? 'granted' : 'denied',
+          'functionality_storage': isGranted ? 'granted' : 'denied',
+          'personalization_storage': isGranted ? 'granted' : 'denied',
+          'security_storage': 'granted',
+          'wait_for_update': 500
+        });
+      })();
+    </script>
+
+    <!-- Google Tag Manager - Deferred to user interaction or 3s timeout -->
+    <script>
+      (function(){
+        var loaded=false;
+        function loadGTM(){
+          if(loaded)return;
+          loaded=true;
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+          var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+          j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+          f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TMPVL82B');
+        }
+        var events=['mousedown','touchstart','keydown','wheel'];
+        events.forEach(function(e){window.addEventListener(e,loadGTM,{once:true,passive:true});});
+        setTimeout(loadGTM,3000);
+      })();
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Travelpayouts Emerald Partner Script - Lazy-loaded on viewport intersection -->
+    <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
+      (function(){
+        var loaded=false;
+        function loadEmerald(){
+          if(loaded)return;
+          loaded=true;
+          var script=document.createElement("script");
+          script.async=true;
+          script.src="https://emrld.ltd/NTQwMjc3.js?t=540277";
+          script.onerror=function(){};
+          document.head.appendChild(script);
+        }
+        if('IntersectionObserver'in window){
+          var observer=new IntersectionObserver(function(entries){
+            if(entries[0].isIntersecting){loadEmerald();observer.disconnect();}
+          },{rootMargin:'200px'});
+          document.addEventListener('DOMContentLoaded',function(){
+            var footer=document.querySelector('footer');
+            if(footer)observer.observe(footer);else loadEmerald();
+          });
+        }else{loadEmerald();}
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMPVL82B"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="root">
+      <!-- Pre-hydration SEO Crawl Directory (Automatically replaced when React mounts) -->
+      <main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif">
+        <h1>URAL — Flights, Hotels, Umrah &amp; Visa Guides for Bangladeshi Travelers</h1>
+        <p>Compare cheap international flights from Dhaka (DAC), check official e-Visa checklists, plan DIY Umrah &amp; Hajj in BDT, and browse 41 practical travel guides for Bangladeshi passport holders.</p>
+        <nav aria-label="Primary Travel Hubs">
+          <h2>Core Travel Planning Hubs</h2>
+          <ul>
+            <li><a href="/">Home — URAL Bangladesh Outbound Travel Hub</a></li>
+            <li><a href="/umrah">Umrah &amp; Hajj Guide from Bangladesh (2026 BDT Calculator &amp; Nusuk)</a></li>
+            <li><a href="/flights">Cheap International Flights from Dhaka (DAC)</a></li>
+            <li><a href="/hotels">Best Family &amp; Halal-Friendly Hotels Guide</a></li>
+            <li><a href="/visa">Visa Checklists for Bangladeshi Citizens (2026)</a></li>
+            <li><a href="/destinations">5-Day Country Itineraries from Bangladesh</a></li>
+            <li><a href="/costs">Realistic Trip Cost Breakdowns in BDT</a></li>
+            <li><a href="/experiences">Europe, UK, USA &amp; Asian Attraction Passes</a></li>
+            <li><a href="/blog">All 41 Bangladesh Outbound Travel &amp; Umrah Blog Guides</a></li>
+            <li><a href="/tools">Bangladeshi Traveler Tools, Currency &amp; AirHelp Compensation</a></li>
+            <li><a href="/sitemap">Dhaka Airport (DAC) Pre-Departure Checklist &amp; Complete Site Directory</a></li>
+            <li><a href="/contact">Contact URAL Dhaka Desk (+8801784385335 WhatsApp)</a> · <a href="https://web.facebook.com/uraltravelbd/" rel="me noopener noreferrer">URAL Facebook (@uraltravelbd)</a> · <a href="https://www.instagram.com/uraltravelbd/" rel="me noopener noreferrer">URAL Instagram (@uraltravelbd)</a> · <a href="https://www.linkedin.com/company/ural-travel-bangladesh" rel="me noopener noreferrer">URAL LinkedIn</a></li>
+          </ul>
+          <h2>Country Flights, Hotels, Visas, Itineraries &amp; BDT Costs</h2>
+          <ul>
+            <li><a href="/flights/dhaka-kathmandu">Dhaka to Kathmandu Flights</a> · <a href="/hotels/kathmandu-hotels">Kathmandu Hotels</a> · <a href="/visa/nepal-visa">Nepal Free Visa on Arrival</a> · <a href="/destinations/nepal-guide">Nepal 5-Day Itinerary</a> · <a href="/costs/nepal-costs">Nepal Trip Cost in BDT</a></li>
+            <li><a href="/flights/dhaka-bangkok">Dhaka to Bangkok Flights</a> · <a href="/hotels/bangkok-hotels">Bangkok Hotels</a> · <a href="/visa/thailand-visa">Thailand e-Visa Guide</a> · <a href="/destinations/thailand-guide">Thailand 5-Day Itinerary</a> · <a href="/costs/thailand-costs">Thailand Trip Cost in BDT</a></li>
+            <li><a href="/flights/dhaka-kuala-lumpur">Dhaka to Kuala Lumpur Flights</a> · <a href="/hotels/kuala-lumpur-hotels">Kuala Lumpur Hotels</a> · <a href="/visa/malaysia-visa">Malaysia e-Visa Guide</a> · <a href="/destinations/malaysia-guide">Malaysia 5-Day Itinerary</a> · <a href="/costs/malaysia-costs">Malaysia Trip Cost in BDT</a></li>
+            <li><a href="/flights/dhaka-singapore">Dhaka to Singapore Flights</a> · <a href="/hotels/singapore-hotels">Singapore Hotels</a> · <a href="/visa/singapore-visa">Singapore Authorized Agent Visa</a> · <a href="/destinations/singapore-guide">Singapore Itinerary</a> · <a href="/costs/singapore-costs">Singapore Trip Cost in BDT</a></li>
+            <li><a href="/flights/dhaka-maldives">Dhaka to Maldives Flights</a> · <a href="/hotels/maldives-hotels">Maldives Maafushi Hotels</a> · <a href="/visa/maldives-visa">Maldives Free VOA &amp; IMUGA</a> · <a href="/destinations/maldives-guide">Maldives Itinerary</a> · <a href="/costs/maldives-costs">Maldives Trip Cost in BDT</a></li>
+            <li><a href="/flights/dhaka-dubai">Dhaka to Dubai Flights</a> · <a href="/hotels/dubai-hotels">Dubai Deira &amp; Downtown Hotels</a> · <a href="/visa/dubai-visa">UAE Dubai Tourist Visa</a> · <a href="/destinations/dubai-guide">Dubai Itinerary</a> · <a href="/costs/dubai-costs">Dubai Trip Cost in BDT</a></li>
+          </ul>
+          <h2>41 Bangladesh Outbound Travel &amp; Umrah Guides</h2>
+          <ul>
+            <li><a href="/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost">Umrah &amp; Hajj Guide from Bangladesh: Nusuk App, Visa &amp; BDT Cost</a></li>
+            <li><a href="/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh">Makkah &amp; Madinah Hotel Zones + Haramain High-Speed Train Guide</a></li>
+            <li><a href="/blog/hajj-registration-bangladesh-government-vs-private-package-cost">Hajj Registration from Bangladesh: Government vs. Private Package Cost</a></li>
+            <li><a href="/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide">Umrah with Elderly Parents from Bangladesh: Wheelchair &amp; Medical Guide</a></li>
+            <li><a href="/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah">96-Hour Saudi Stopover Visa for Bangladesh: Saudia &amp; Flynas Umrah</a></li>
+            <li><a href="/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit">Nusuk App &amp; Saudi Visa Bio Guide for Bangladesh: Rawdah Permit</a></li>
+            <li><a href="/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates">Umrah Rules for Bangladeshi Women: Mahram Updates &amp; Ladies Gates</a></li>
+            <li><a href="/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">Dhaka to Jeddah/Madinah Open-Jaw Flight Strategy: Biman vs. Saudia</a></li>
+            <li><a href="/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget">Ramadan Umrah &amp; I&apos;tikaf Guide from Bangladesh: Booking &amp; Budget</a></li>
+            <li><a href="/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules">Wearing Ihram from Dhaka Airport vs. Transit Flights: Miqat Rules</a></li>
+            <li><a href="/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport">Official Zamzam Water, Dates &amp; Gold Customs Rules at Jeddah &amp; Dhaka</a></li>
+            <li><a href="/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals">Bangladeshi Halal Food Guide in Makkah &amp; Madinah: Budget Meals</a></li>
+            <li><a href="/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide">Makkah, Madinah, Badr &amp; Taif Historical Ziyarah Taxi Guide</a></li>
+            <li><a href="/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide">Umrah + Dubai 10-Day Combo Trip from Dhaka: Multi-City Guide</a></li>
+            <li><a href="/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide">Abu Dhabi &amp; Sheikh Zayed Grand Mosque Day Trip from Dubai</a></li>
+            <li><a href="/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide">Malaysia Islamic Heritage &amp; Putrajaya Halal Family Tour Guide</a></li>
+            <li><a href="/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide">Europe, UK &amp; USA Sightseeing Skip-the-Line Passes + Return Umrah</a></li>
+            <li><a href="/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah">Shariah-Compliant Islamic Dual-Currency Cards in Bangladesh</a></li>
+            <li><a href="/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix">RFCD Account vs. Travel Quota in Bangladesh: Fixing $300 Limit</a></li>
+            <li><a href="/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card">Book Flights &amp; Makkah Hotels in BDT (bKash / Bank Transfer)</a></li>
+            <li><a href="/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide">Cash SAR/USD vs. Dual-Currency Card: Avoiding 5% DCC Fees</a></li>
+            <li><a href="/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide">Thailand e-Visa Guide from Bangladesh (thaievisa.go.th)</a></li>
+            <li><a href="/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration">Malaysia e-Visa &amp; MDAC Arrival Card Guide for Bangladesh</a></li>
+            <li><a href="/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia">Fresh Bangladeshi Passport Travel History Ladder</a></li>
+            <li><a href="/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide">Singapore 4-Day Budget Itinerary: SimplyGo MRT, Mustafa &amp; Halal Food</a></li>
+            <li><a href="/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh">Bangkok Medical Tourism &amp; Health Checkup Guide: Bumrungrad &amp; Bangkok Hospital</a></li>
+            <li><a href="/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide">Best Travel eSIM &amp; Insurance from Bangladesh: Airalo, Schengen &amp; Umrah</a></li>
+            <li><a href="/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost">Sri Lanka 5-Day Budget Tour from Bangladesh: ETA Visa, Kandy &amp; Ella</a></li>
+            <li><a href="/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide">Bangladesh e-Passport Application &amp; Renewal Guide (64 Districts)</a></li>
+            <li><a href="/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp">Flight Delay, Cancellation &amp; Lost Baggage Compensation (€600 via AirHelp)</a></li>
+            <li><a href="/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla">Best Airlines from Dhaka: Biman vs. Saudia vs. Emirates, Qatar &amp; Singapore</a></li>
+            <li><a href="/blog/dual-currency-card-endorsement-bangladesh">Dual-Currency Card Endorsement in Bangladesh: $12,000 Travel Quota</a></li>
+            <li><a href="/blog/dhaka-airport-outbound-immigration-checklist-noc-go">Dhaka Airport (DAC) Outbound Immigration Checklist: NOC &amp; GO</a></li>
+            <li><a href="/blog/cheap-flight-booking-hacks-dhaka">Cheap Flight Booking Hacks from Dhaka (DAC)</a></li>
+            <li><a href="/blog/nepal-vs-thailand-first-trip">Nepal vs. Thailand for First-Time Bangladeshi Travelers</a></li>
+            <li><a href="/blog/hotel-savings-guide-bangkok-kl-dubai">Hotel Savings Guide in Bangkok, Kuala Lumpur &amp; Dubai</a></li>
+            <li><a href="/blog/halal-food-guide-bangkok-bangladesh">Halal Food Guide in Bangkok for Bangladeshi Travelers</a></li>
+            <li><a href="/blog/nepal-pokhara-itinerary-bangladesh">Nepal Kathmandu &amp; Pokhara 5-Day Itinerary from Bangladesh</a></li>
+            <li><a href="/blog/maldives-budget-trip-bangladesh-maafushi">Maldives Budget Trip from Bangladesh: Maafushi Local Island Guide</a></li>
+            <li><a href="/blog/singapore-visa-guide-bangladesh-agents">Singapore Visa Guide from Bangladesh: Authorized Agents &amp; LOI</a></li>
+            <li><a href="/blog/top-budget-family-destinations-from-dhaka">Top 6 Budget Family Destinations from Dhaka (2026 BDT Comparison)</a></li>
+          </ul>
+        </nav>
+        <section aria-labelledby="home-faqs">
+          <h2 id="home-faqs">Frequently Asked Questions for Bangladeshi Travelers</h2>
+          <section>
+            <h3>How do I get a dual-currency card endorsement on a Bangladeshi passport?</h3>
+            <p>Visit an authorized bank branch in Bangladesh with your original valid passport and NID to endorse up to USD $12,000 per calendar year under the Bangladesh Bank travel quota, then enable E-Commerce and 3D-Secure online transactions in your bank app before booking flights or hotels.</p>
+          </section>
+          <section>
+            <h3>What are the top budget-friendly family destinations from Dhaka?</h3>
+            <p>Nepal (from BDT 42,000 per person with free Visa on Arrival), Malaysia (from BDT 68,000 with 4-day online e-Visa and universal Halal dining), Thailand, and the Maldives local islands (Maafushi and Hulhumalé) are the top budget-friendly family destinations from Dhaka.</p>
+          </section>
+          <section>
+            <h3>Which countries can Bangladeshi passport holders visit without a prior visa?</h3>
+            <p>Nepal, the Maldives, Sri Lanka (via online ETA), Bhutan and Indonesia issue Visa on Arrival or free entry to Bangladeshi passport holders, so no embassy appointment is needed before departure from Dhaka. Nepal and the Maldives are the cheapest of these to reach from Dhaka (DAC).</p>
+          </section>
+          <section>
+            <h3>Is URAL a travel agency that sells tickets?</h3>
+            <p>No. URAL is an independent outbound travel intelligence desk for Bangladeshi travellers: it publishes flight price guidance in BDT, official visa checklists, itineraries and realistic trip-cost breakdowns, then links out to the airline, hotel or visa portal so you book directly at the source price.</p>
+          </section>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+# Static SEO & Social Assets
+/sitemap.xml   /sitemap.xml   200
+/rss.xml       /rss.xml       200
+/robots.txt    /robots.txt    200
+/og-image.jpg  /og-image.jpg  200
+
+# Canonical 301 redirects for duplicate alias routes
+/hajj           /umrah        301
+/attractions    /experiences  301
+/pre-departure  /sitemap      301
+/indexing       /sitemap      301
+/destinations/uae-guide  /destinations/dubai-guide  301
+
+# Retired blog slugs: keep older links and indexed URLs useful
+/blog/bangkok-medical-tourism-checkup-guide-bangladesh-bumrungrad-bangkok-hospital  /blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh  301
+/blog/bangkok-medical-tourism-guide-bangladesh-bumrungrad-visa-cost  /blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh  301
+/blog/bangladesh-epassport-application-renewal-guide-64-districts-urgent-fees  /blog/bangladesh-epassport-application-renewal-64-districts-fee-guide  301
+/blog/bangladesh-epassport-application-renewal-guide-fees-police-verification  /blog/bangladesh-epassport-application-renewal-64-districts-fee-guide  301
+/blog/best-airlines-from-dhaka-biman-saudia-emirates-qatar-singapore-baggage-guide  /blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla  301
+/blog/best-travel-esim-and-insurance-from-bangladesh-airalo-schengen-umrah  /blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide  301
+/blog/sri-lanka-budget-tour-from-bangladesh-eta-visa-colombo-kandy-ella  /blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost  301
