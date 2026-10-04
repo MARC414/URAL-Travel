@@ -97,6 +97,16 @@ function collectHtmlFiles(dir: string, acc: string[] = []): string[] {
   return acc;
 }
 
+function collectSourceFiles(dir: string, acc: string[] = []): string[] {
+  if (!fs.existsSync(dir)) return acc;
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) collectSourceFiles(full, acc);
+    else if (/\.(ts|tsx)$/.test(entry.name)) acc.push(full);
+  }
+  return acc;
+}
+
 const distHtmlFiles = collectHtmlFiles(DIST_DIR);
 const distIndexHtml = read(path.join(DIST_DIR, "index.html"));
 
@@ -151,12 +161,116 @@ check(
         srcsetProblems.slice(0, 5).join(", ")
 );
 
+// The shell's preload points at a specific stem; name the files so a rename
+// cannot leave the hero preload pointing at a 404.
+const RESONSIVE_AVIF_HERO_FILES = [
+  "clouds_boat_hero_1781438671378-640.avif",
+  "clouds_boat_hero_1781438671378-960.avif",
+  "clouds_boat_hero_1781438671378-1200.avif",
+];
+
 const heroSrc = "/assets/images/clouds_boat_hero_1781438671378-1200.webp";
+const heroAvifSrcSet = buildResponsiveSrcSet(heroSrc, "avif");
 check(
   distIndexHtml !== null &&
-    distIndexHtml.includes(`imagesrcset="${buildResponsiveSrcSet(heroSrc)}"`),
-  "index.html hero imagesrcset matches buildResponsiveSrcSet() exactly"
+    distIndexHtml.includes(`imagesrcset="${heroAvifSrcSet}"`),
+  "index.html hero imagesrcset matches buildResponsiveSrcSet(_, \"avif\") exactly"
 );
+// The srcset string matching is not enough: a typo in the extension would ship a
+// preload pointing at a 404 and nothing else would notice.
+check(
+  RESONSIVE_AVIF_HERO_FILES.every((f) => fs.existsSync(path.join(responsiveImgDir, f))),
+  "the 3 hero AVIF files referenced by the shell preload exist in dist"
+);
+
+// (1d) AVIF rollout guards (Appendix A.6).
+//
+// The <picture> upgrade is a three-way agreement: the AVIF files on disk, the
+// <source> order in ResponsiveImage.tsx, and the <link rel="preload"> that both
+// index.html and scripts/prerender.ts emit. A disagreement anywhere means
+// supporting browsers fetch the LCP image twice — and nothing else would fail.
+{
+  // every WebP stem has an AVIF sibling at every breakpoint (and vice versa)
+  const avifStems = new Map<string, Set<number>>();
+  let avifFileCount = 0;
+  if (fs.existsSync(responsiveImgDir)) {
+    for (const file of fs.readdirSync(responsiveImgDir)) {
+      const match = file.match(/^(.+)-(\d+)\.avif$/);
+      if (!match) continue;
+      avifFileCount++;
+      if (!avifStems.has(match[1])) avifStems.set(match[1], new Set());
+      avifStems.get(match[1])!.add(Number(match[2]));
+    }
+  }
+  const expectedAvifFiles = stems.size * RESPONSIVE_IMAGE_BREAKPOINTS.length;
+  const missingAvif = [...stems.entries()]
+    .filter(([stem, widths]) => {
+      const avifWidths = avifStems.get(stem);
+      return !avifWidths || ![...widths].every((w) => avifWidths.has(w));
+    })
+    .map(([stem]) => stem);
+  check(
+    missingAvif.length === 0 && avifFileCount === expectedAvifFiles,
+    missingAvif.length === 0 && avifFileCount === expectedAvifFiles
+      ? `every responsive image also ships AVIF at all breakpoints (${avifFileCount} files)`
+      : missingAvif.length > 0
+        ? `${missingAvif.length} stem(s) missing AVIF breakpoints: ` + missingAvif.slice(0, 5).join(", ")
+        : `expected ${expectedAvifFiles} AVIF files for ${stems.size} stems, found ${avifFileCount}`
+  );
+
+  // every emitted image preload is AVIF, offers all breakpoints, and every URL
+  // in it resolves to a file that is actually in dist
+  const preloadProblems: string[] = [];
+  let preloadCount = 0;
+  for (const file of distHtmlFiles) {
+    const html = fs.readFileSync(file, "utf8");
+    const rel = path.relative(DIST_DIR, file);
+    const tags = [...html.matchAll(/<link rel="preload" as="image"[^>]*>/g)];
+    if (tags.length > 1) {
+      preloadProblems.push(`${rel}: ${tags.length} image preloads (the strip regex is non-global — A.5)`);
+      continue;
+    }
+    for (const tag of tags) {
+      preloadCount++;
+      if (!tag[0].includes('type="image/avif"')) {
+        preloadProblems.push(`${rel}: image preload is not type="image/avif"`);
+      }
+      const urls = [
+        ...(tag[0].match(/imagesrcset="([^"]+)"/)?.[1] ?? "").split(",").map((part) => part.trim().split(" ")[0]),
+        tag[0].match(/href="([^"]+)"/)?.[1] ?? "",
+      ].filter(Boolean);
+      for (const url of urls) {
+        if (!url.endsWith(".avif")) {
+          preloadProblems.push(`${rel}: preload references a non-AVIF URL (${url})`);
+        } else if (!fs.existsSync(path.join(DIST_DIR, url.replace(/^\//, "")))) {
+          preloadProblems.push(`${rel}: preload points at a missing file (${url})`);
+        }
+      }
+    }
+  }
+  check(
+    preloadCount > 0 && preloadProblems.length === 0,
+    preloadProblems.length === 0
+      ? `all ${preloadCount} image preload(s) are AVIF, complete and resolvable`
+      : `${preloadProblems.length} image-preload problem(s): ` + preloadProblems.slice(0, 3).join("; ")
+  );
+
+  // no raw getResponsiveImageProps spread left in src/ — every photo must go
+  // through <ResponsiveImage>, or the next feature silently ships WebP-only
+  const srcFiles = collectSourceFiles(path.join(ROOT_DIR, "src"));
+  const rawSpreads = srcFiles.filter((file) => {
+    if (file.endsWith(path.join("utils", "imageAssets.ts"))) return false;
+    const text = fs.readFileSync(file, "utf8");
+    return /getResponsiveImageProps\s*\(/.test(text);
+  });
+  check(
+    rawSpreads.length === 0,
+    rawSpreads.length === 0
+      ? "all photo call sites use <ResponsiveImage> (no raw getResponsiveImageProps spread)"
+      : `${rawSpreads.length} file(s) still spread getResponsiveImageProps, bypassing AVIF: ` +
+          rawSpreads.map((f) => path.relative(ROOT_DIR, f)).slice(0, 3).join(", ")
+  );
+}
 
 // (1c) locale-correct critical font preloads: bn routes must preload Noto
 //      Sans Bengali (their LCP is Bengali text), en routes Inter — and

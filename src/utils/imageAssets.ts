@@ -67,9 +67,12 @@ export const RESPONSIVE_IMAGE_BREAKPOINTS = [640, 960, 1200] as const;
  * shell (static HTML cannot import TS). Keep it in sync; verify-build.ts
  * asserts that all three agree.
  */
-export function buildResponsiveSrcSet(src1200: string): string {
+export function buildResponsiveSrcSet(
+  src1200: string,
+  ext: "webp" | "avif" = "webp",
+): string {
   return RESPONSIVE_IMAGE_BREAKPOINTS.map(
-    (w) => `${src1200.replace(/-1200\.webp$/, `-${w}.webp`)} ${w}w`,
+    (w) => `${src1200.replace(/-1200\.webp$/, `-${w}.${ext}`)} ${w}w`,
   ).join(", ");
 }
 
@@ -82,15 +85,16 @@ export interface ResponsiveImageProps {
 }
 
 /**
- * Return matching 640px/960px/1200px WebP sources and the 1200px file's
- * intrinsic dimensions. Keeping width and height in markup reserves the
- * correct space before the image loads; callers choose loading/fetch-priority
- * per context.
+ * Normalise a photo URL to its 1200px canonical form and look up the intrinsic
+ * dimensions used for `width`/`height` (which is what reserves space before the
+ * image loads). Shared by `getResponsiveImageProps` and the `<ResponsiveImage>`
+ * component so the dimension table has exactly one reader.
  */
-export function getResponsiveImageProps(
-  source: string,
-  sizes = "100vw",
-): ResponsiveImageProps {
+export function getResponsiveImageDimensions(source: string): {
+  src: string;
+  width: number;
+  height: number;
+} {
   const src = source.replace(/-640\.webp$/, "-1200.webp");
   const baseName = src.split("/").pop()?.replace(/-1200\.webp$/, "") ?? "";
   const height = RESPONSIVE_IMAGE_HEIGHTS[baseName];
@@ -98,11 +102,31 @@ export function getResponsiveImageProps(
     throw new Error(`Missing intrinsic dimensions for optimized image: ${baseName}`);
   }
 
+  return { src, width: RESPONSIVE_IMAGE_WIDTH, height };
+}
+
+/**
+ * Return matching 640px/960px/1200px WebP sources and the 1200px file's
+ * intrinsic dimensions. Keeping width and height in markup reserves the
+ * correct space before the image loads; callers choose loading/fetch-priority
+ * per context.
+ *
+ * Since the AVIF rollout this is the WebP-only path used by non-React callers
+ * (scripts/prerender.ts builds the LCP preload from it) and by tests. React
+ * call sites use `<ResponsiveImage>` in src/components/ResponsiveImage.tsx,
+ * which wraps both formats in a <picture>. Do not add new call sites here.
+ */
+export function getResponsiveImageProps(
+  source: string,
+  sizes = "100vw",
+): ResponsiveImageProps {
+  const { src, width, height } = getResponsiveImageDimensions(source);
+
   return {
     src,
     srcSet: buildResponsiveSrcSet(src),
     sizes,
-    width: RESPONSIVE_IMAGE_WIDTH,
+    width,
     height,
   };
 }

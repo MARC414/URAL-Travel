@@ -81,7 +81,8 @@ import {
 } from "./utils/localeRoutes";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { ConsentBanner } from "./components/ConsentBanner";
-import { getBlogImageAltText, getResponsiveImageProps } from "./utils/imageAssets";
+import { getBlogImageAltText } from "./utils/imageAssets";
+import { ResponsiveImage } from "./components/ResponsiveImage";
 import { getRelatedBlogPosts } from "./utils/blogLinks";
 import { URAL_SOCIAL_LINKS } from "./utils/schema";
 
@@ -2778,8 +2779,9 @@ export default function App() {
           <div
             className="hero-bg relative overflow-hidden min-h-[500px] lg:min-h-[560px] flex items-center p-6 md:p-12 lg:p-16 select-none border-b border-slate-800/80 bg-cover bg-center"
           >
-            <img
-              {...getResponsiveImageProps(heroBgImage, "100vw")}
+            <ResponsiveImage
+              src={heroBgImage}
+              sizes="100vw"
               alt=""
               aria-hidden={true}
               loading="eager"
@@ -3171,12 +3173,10 @@ export default function App() {
                     className="group relative rounded-2xl overflow-hidden bg-slate-950 shadow-lg hover:shadow-2xl transition-all duration-350 cursor-pointer transform hover:-translate-y-1.5 flex flex-col justify-end aspect-[4/5] sm:aspect-square md:aspect-[4/5] border border-slate-800/10 hover:border-[#F6B73C]/20"
                   >
                     {/* Background Travel Image */}
-                    <img
-                      {...getResponsiveImageProps(
-                        dest.bgImg,
-                        // column count flips at sm (640) / lg (1024) — keep in step with the grid above
-                        "(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw",
-                      )}
+                    {/* column count flips at sm (640) / lg (1024) — keep in step with the grid above */}
+                    <ResponsiveImage
+                      src={dest.bgImg}
+                      sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                       alt={dest.alt}
                       loading="lazy"
                       fetchPriority="low"
@@ -3504,8 +3504,9 @@ export default function App() {
             <div
               className="w-screen relative left-1/2 -translate-x-1/2 border-t border-b border-slate-900/10 bg-cover bg-center select-none overflow-hidden"
             >
-              <img
-                {...getResponsiveImageProps(coxsBazarSunriseImg, "100vw")}
+              <ResponsiveImage
+                src={coxsBazarSunriseImg}
+                sizes="100vw"
                 alt=""
                 aria-hidden={true}
                 loading="lazy"
@@ -5379,8 +5380,9 @@ export default function App() {
               className="w-screen relative left-1/2 -translate-x-1/2 -mt-6 sm:-mt-8 bg-brand-navy text-white overflow-hidden border-b border-slate-800 shadow-xl"
             >
               <div className="absolute inset-0">
-                <img
-                  {...getResponsiveImageProps(blogHeroBannerImg, "100vw")}
+                <ResponsiveImage
+                  src={blogHeroBannerImg}
+                  sizes="100vw"
                   alt=""
                   aria-hidden={true}
                   loading="eager"
@@ -5578,11 +5580,9 @@ export default function App() {
                         <div className="flex flex-col">
                           {/* Unique Card Thumbnail Image */}
                           <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
-                            <img
-                              {...getResponsiveImageProps(
-                                coverImg,
-                                "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw",
-                              )}
+                            <ResponsiveImage
+                              src={coverImg}
+                              sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                               alt={getBlogImageAltText(post.slug)}
                               loading="lazy"
                               fetchPriority="low"
@@ -6064,11 +6064,9 @@ export default function App() {
 
                         {/* Dedicated Unique Article Feature Photograph */}
                         <figure className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-900">
-                          <img
-                            {...getResponsiveImageProps(
-                              activeCoverImg,
-                              "(max-width: 767px) 100vw, 840px",
-                            )}
+                          <ResponsiveImage
+                            src={activeCoverImg}
+                            sizes="(max-width: 767px) 100vw, 840px"
                             alt={getBlogImageAltText(activePost.slug)}
                             loading="eager"
                             fetchPriority="high"
@@ -6717,12 +6715,10 @@ export default function App() {
                             >
                             <div>
                               <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
-                                <img
-                                  {...getResponsiveImageProps(
-                                    getBlogCoverImage(post.slug),
-                                    // 1 column below md (768), 3 columns above it — no 50vw band exists here
-                                    "(max-width: 767px) 100vw, 33vw",
-                                  )}
+                                {/* 1 column below md (768), 3 columns above it — no 50vw band exists here */}
+                                <ResponsiveImage
+                                  src={getBlogCoverImage(post.slug)}
+                                  sizes="(max-width: 767px) 100vw, 33vw"
                                   alt={getBlogImageAltText(post.slug)}
                                   loading="lazy"
                                   fetchPriority="low"
@@ -6819,11 +6815,9 @@ export default function App() {
                 >
                   <div>
                     <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
-                      <img
-                        {...getResponsiveImageProps(
-                          getBlogCoverImage(topic.slug),
-                          "(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw",
-                        )}
+                      <ResponsiveImage
+                        src={getBlogCoverImage(topic.slug)}
+                        sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw"
                         alt={getBlogImageAltText(topic.slug)}
                         loading="lazy"
                         fetchPriority="low"

@@ -2375,8 +2375,13 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     }
 
     const fullGraphJson = JSON.stringify(buildSchemaGraph(graphNodes, false));
+    // AVIF, not WebP: the prerendered HTML has no photo <img>, so this preload is
+    // what decides the LCP fetch. <ResponsiveImage> puts the AVIF <source> first,
+    // so preloading WebP here would make browsers that support both formats
+    // download the LCP image twice. Exactly one image preload per route — the
+    // strip regex below is non-global on purpose (see Appendix A.5, Rule 3).
     const lcpImagePreload = r.lcpImageUrl
-      ? `    <link rel="preload" as="image" type="image/webp" href="${escapeHtml(r.lcpImageUrl)}" imagesrcset="${escapeHtml(buildResponsiveSrcSet(r.lcpImageUrl))}" imagesizes="${escapeHtml(r.lcpImageSizes || "100vw")}" fetchpriority="high" />\n`
+      ? `    <link rel="preload" as="image" type="image/avif" href="${escapeHtml(r.lcpImageUrl.replace(/-1200\.webp$/, "-1200.avif"))}" imagesrcset="${escapeHtml(buildResponsiveSrcSet(r.lcpImageUrl, "avif"))}" imagesizes="${escapeHtml(r.lcpImageSizes || "100vw")}" fetchpriority="high" />\n`
       : "";
 
     // Locale-correct critical font preloads. The LCP element of every /bn/

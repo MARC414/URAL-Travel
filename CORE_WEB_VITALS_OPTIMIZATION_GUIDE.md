@@ -9,7 +9,7 @@
 ## ✅ Status Board (single source of truth — 2026-10-04)
 
 Everything below is **committed code**, verified by `npm run build` + `npm run
-verify:build` (43 checks, incl. the cache/srcset/consent/contrast/security/gate/blog-split regression guards). "Deployed" means it
+verify:build` (47 checks, incl. the cache/srcset/consent/contrast/security/gate/blog-split/AVIF regression guards). "Deployed" means it
 will be live on the next Cloudflare Pages deploy of this branch — confirm with
 the Production Verification commands at the bottom of this guide.
 
@@ -36,7 +36,7 @@ the Production Verification commands at the bottom of this guide.
 | 19 | Locale-correct font preloads (bn pages preloaded Inter, not Noto) | ✅ done | `scripts/prerender.ts` swaps the shell's Inter preloads for Noto Sans Bengali 400/600 on `/bn/` routes; guarded by `verify-build.ts` (165 pages checked) |
 | 20 | **1-year immutable cache on fonts + brand SVGs** (Lighthouse flagged the 7-day TTLs for 28 KiB) | ✅ done 2026-10-04 night | `public/_headers` + filenames versioned (`-v1`): 5 fonts, 4 SVGs; refs updated in `index.html`, `scripts/prerender.ts`, `public/travelpayouts-wl.html`, `scripts/download-fonts.sh`. Guarded (4 new checks) |
 | 21 | **emrld.ltd preconnect no longer declares `crossorigin`** (Lighthouse: "unused preconnect") | ✅ done 2026-10-04 night | `index.html:50` — the affiliate script is injected as a plain async `<script>` (no-cors), which cannot reuse a CORS-mode preconnect; guarded |
-| 22 | Image compression (Lighthouse "Improve image delivery", 127 KiB) | ⏳ open — this is Appendix A | the estimate covers the homepage hero + the two 960w destination cards; AVIF is the measured lever (A.2) |
+| 22 | **Image compression — AVIF via `<picture>` (Lighthouse "Improve image delivery", 127 KiB)** | ✅ implemented 2026-10-04 night — deploy + field check pending | 126 AVIF files (−31.8% bytes across all tiers; the mobile-LCP hero at 960w: 46.3 → 26.0 KB, **−44%**); `<ResponsiveImage>` at all 9 call sites; AVIF preloads in the shell and on 46 route pages; 4 new guards (43 → 47 checks). Detail + verification in **A.8** |
 | 23 | **Accessibility 96 → contrast, target-size, heading-order** | ✅ fixed 2026-10-04 night | 7 class patterns + `brand-gold-ink` token + 24px checkbox + h3 levels; guarded (3 new checks). Appendix C |
 | 24 | ~12 invalid Tailwind colour steps (`text-slate-650`, `border-slate-250`, …) | ⏳ open, visible as a CI warning | they render as `inherit` today; fixing them changes colours → needs its own visual pass (C.4) |
 | 25 | **Security headers** (HSTS + XFO + COOP + partial CSP) | ✅ done 2026-10-04 night | `public/_headers`; all five Lighthouse Trust & Safety audits are *informative* (unscored) — added because they are real and cheap, guarded by 3 checks (D.3) |
@@ -740,7 +740,7 @@ curl -sI https://ural-travel.pages.dev/ | grep -i x-robots-tag  # must be ABSENT
 ```bash
 npm run lint          # tsc --noEmit
 npm run build         # vite build + prerender of ~163 routes
-npm run verify:build  # 43 checks incl. srcset/consent/cache/contrast/security/gate + blog-split guards
+npm run verify:build  # 47 checks incl. srcset/consent/cache/contrast/security/gate/blog-split/AVIF guards
 ```
 
 ---
@@ -815,10 +815,10 @@ npm run preview
 - [x] Phase 5A: Add cache headers ✅
 - [x] Consent Mode v2 + banner + withdrawal + CI guard ✅ (2026-10-04 evening)
 - [ ] Privacy/cookie policy page (legal prerequisite for EU traffic)
-- [ ] Phase 6A: AVIF via `<picture>` — plan in **Appendix A** (not started)
-  - [ ] 6A-1 Generate the 126 AVIF variants from the JPG masters + pipeline step
-  - [ ] 6A-2 `ResponsiveImage` component + 9 migrated call sites + AVIF preload + guard updates — **one commit** (A.4/A.5 are coupled; splitting them double-downloads the LCP image)
-  - [ ] 6A-3 Post-deploy field check (CrUX mobile LCP) + record numbers in the Status Board
+- [x] Phase 6A: AVIF via `<picture>` ✅ implemented 2026-10-04 night — **Appendix A.8**
+  - [x] 6A-1 126 AVIF variants generated from the JPG masters (q50/q50/q55) + pipeline block (also fixed a pre-existing bash syntax error that made the script unrunnable)
+  - [x] 6A-2 `ResponsiveImage` component + 9 migrated call sites + AVIF preload (shell + routes) + 4 guards — landed as **one commit**, as A.5 requires
+  - [ ] 6A-3 Post-deploy verification: DevTools network (exactly one hero request per browser), PSI mobile LCP, then CrUX p75 after ~28 days — record here
 - [x] Cache TTLs raised to 1y immutable with versioned filenames ✅ (2026-10-04 night — from the live Lighthouse report)
 - [x] emrld.ltd preconnect `crossorigin` mismatch fixed ✅ (2026-10-04 night)
 - [ ] 6A image delivery (127 KiB) — Appendix A
@@ -868,7 +868,8 @@ npm run preview
 
 # 📎 Appendix A — Phase 6A AVIF rollout plan (`<picture>`)
 
-**Status:** ⏳ **plan only — nothing in this appendix is implemented.**  
+**Status:** ✅ **implemented 2026-10-04 night** — see **A.8** for what actually
+shipped, the measured numbers and the two deviations from this plan.  
 **Written:** 2026-10-04, against `ef6db57` (`main` tip at the time). Re-verify the
 line numbers before executing; they are exact as of that commit.
 
@@ -1136,6 +1137,78 @@ unreferenced and can stay until a cleanup commit.
 | 1 | `chore(images): generate AVIF variants from JPG masters` | 126 `.avif` files + pipeline step | none (inert) |
 | 2 | `feat(images): AVIF <picture> + type-negotiated LCP preload` | `ResponsiveImage` + 9 call sites + shell/prerender preload + guards | one deploy: mobile LCP hero bytes drop ~29–55% on AVIF browsers |
 | 3 | `docs(cwv): record post-deploy AVIF numbers` | Status Board + this appendix | none |
+---
+
+## A.8 What actually shipped (2026-10-04 night)
+
+Two commits, deliberately split exactly where A.3/A.5 said to split:
+
+| Commit | Contents |
+|---|---|
+| `6A-1` | 126 `.avif` files from the JPG masters + the AVIF block in `scripts/optimize-images-production.sh`. Nothing referenced them, so it was inert and independently revertable. |
+| `6A-2` | `ResponsiveImage.tsx`, all 9 call sites, the shell preload, the per-route preload, and 4 new guards — **one commit**, because A.5's failure mode (preload format vs render format disagreeing for one deploy window) only exists if they land apart. |
+
+### Measured numbers
+
+Bytes, all 126 files per format, encoded from the same masters:
+
+| Tier | WebP | AVIF | Δ |
+|---|---|---|---|
+| 640w | 1833.0 KB | 1090.7 KB | −40.5% |
+| 960w | 3237.6 KB | 2055.9 KB | −36.5% |
+| 1200w | 4952.6 KB | 3690.1 KB | −25.5% |
+| **all** | **10023.2 KB** | **6836.7 KB** | **−31.8%** |
+
+The single file that matters most for mobile LCP — the homepage hero at 960w,
+which is the tier a DPR-2 phone resolves to — went **46.3 KB → 26.0 KB (−44%)**.
+
+### Deviations from the plan (both recorded on purpose)
+
+1. **Encoder.** `avifenc` and `sharp` are unavailable in the environment used
+   here, so the files were produced with **ImageMagick 6.9.11 + libheif 1.15.1**
+   at tier qualities 640: q50, 960: q50, 1200: q55 (the A.7 starting point).
+   The pipeline script prefers `avifenc -s 6` when present and falls back to
+   ImageMagick, warning instead of failing when neither exists.
+2. **Quality was verified with a second decoder, not with ImageMagick.** This
+   matters: `identify`/`compare` read these AVIFs as raw YCbCr and report a
+   nonsensical ~11 dB PSNR (means of 91/120/134 vs the master's 99/89/78). An
+   independent libavif decoder (`pillow-avif-plugin`) gives a mean channel error
+   ≤ 0.24/255 and PSNR 31.8–38.6 dB, against WebP's 33.6–37.9 dB on the same
+   images — AVIF is *better* at 1200w. **Do not tune quality with
+   `compare -metric PSNR` on these files.**
+
+   The same libheif build also marks colour primaries/transfer as *unspecified*
+   (matrix 6, full range). The encode and decode matrices agree, which is why the
+   round-trip is correct; `avifenc` writes cleaner signalling and is preferred by
+   the script.
+
+### Also fixed in passing
+
+`scripts/optimize-images-production.sh` had a **bash syntax error at HEAD**
+(`for source in … 2>/dev/null; do`) — the documented pipeline could never have
+run. Both loops now use `shopt -s nullglob`. Worth knowing before trusting any
+older instruction to "just run the image script".
+
+### Guards (43 → 47 checks)
+
+`verify:build` now asserts: every WebP stem has an AVIF sibling at all three
+breakpoints (126 files, self-maintaining); every shipped image preload is
+`type="image/avif"`, offers all breakpoints, and every URL in it resolves to a
+file that exists in `dist`; **no page carries more than one** image preload
+(the non-global strip-regex regression A.5 warns about); and no raw
+`getResponsiveImageProps(` spread remains in `src/`. The shell's hero
+exact-equality check was upgraded from WebP to AVIF **and** now checks the three
+files exist — matching the string alone would have passed a preload pointing at
+a 404.
+
+### Still to verify (6A-3, needs the deploy)
+
+- DevTools → Network on the live site: exactly **one** hero request on a browser
+  that supports AVIF, and the WebP `<source>` picked on one that does not
+  (Safari < 16.4 / Firefox < 93 — check the share in Cloudflare analytics).
+- PSI mobile: "Serve images in modern formats" gone; LCP before/after.
+- After ~28 days: CrUX p75 mobile LCP — the only number Google ranks on.
+
 ---
 
 # 📎 Appendix B — Decoding the live Lighthouse report (2026-10-04 night)
