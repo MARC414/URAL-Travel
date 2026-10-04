@@ -81,7 +81,8 @@ import {
 } from "./utils/localeRoutes";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { ConsentBanner } from "./components/ConsentBanner";
-import { getBlogImageAltText, getResponsiveImageProps } from "./utils/imageAssets";
+import { getBlogImageAltText } from "./utils/imageAssets";
+import { ResponsiveImage } from "./components/ResponsiveImage";
 import { getRelatedBlogPosts } from "./utils/blogLinks";
 import { URAL_SOCIAL_LINKS } from "./utils/schema";
 
@@ -171,6 +172,9 @@ export function TravelpayoutsWidgetSkeleton({
   if (variant === "hotels") {
     return (
       <div
+        // Observed by the readiness effect: the widget chunk is fetched when this
+        // skeleton comes near the viewport, on interaction, or at the 2.5s ceiling.
+        data-tp-skeleton="hotels"
         role="status"
         aria-live="polite"
         aria-busy="true"
@@ -255,6 +259,10 @@ export function TravelpayoutsWidgetSkeleton({
 
   return (
     <div
+      // Observed by the readiness effect (see the state comment in the app
+      // component): the widget chunk loads when this skeleton approaches the
+      // viewport, on interaction, or at the 2.5s ceiling — not on a 260 ms timer.
+      data-tp-skeleton="flights"
       role="status"
       aria-live="polite"
       aria-busy="true"
@@ -1037,7 +1045,20 @@ export default function App() {
   const [blogCategoryFilter, setBlogCategoryFilter] = useState<string>("all");
   const [blogSearchQuery, setBlogSearchQuery] = useState<string>("");
 
-  // Track third-party Travelpayouts script initialization for perceived performance skeletons
+  // Track third-party Travelpayouts rendering for the perceived-performance
+  // skeletons.
+  //
+  // The real widget is a separate chunk (~129 KB gzip, two thirds of it the
+  // recharts tree) and used to be fetched by a 260 ms timer on every page that
+  // renders one — which put it in competition with the LCP image even for
+  // visitors who never scrolled to it. It is now fetched by whichever of these
+  // happens first:
+  //   1. a widget skeleton coming within 300px of the viewport (below),
+  //   2. the visitor touching/focusing the skeleton — the onInteract escapes,
+  //   3. the consented emrld script finishing its load,
+  //   4. a 2.5s ceiling, so a widget can never stay a skeleton indefinitely.
+  // Owner-approved change (docs/growth/06 §5): the widget is revenue-bearing,
+  // so its load timing is not changed without sign-off.
   const [areTpScriptsReady, setAreTpScriptsReady] = useState<boolean>(() =>
     typeof window === "undefined"
   );
@@ -1050,9 +1071,23 @@ export default function App() {
       if (isMounted) setAreTpScriptsReady(true);
     };
 
-    const tpScript = document.querySelector<HTMLScriptElement>('script[src*="emrld.ltd"]');
-    const fallbackTimer = window.setTimeout(markReady, 260);
+    const skeletons = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-tp-skeleton]")
+    );
+    let observer: IntersectionObserver | null = null;
+    if (skeletons.length > 0 && "IntersectionObserver" in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) markReady();
+        },
+        { rootMargin: "300px" }
+      );
+      skeletons.forEach((element) => observer!.observe(element));
+    }
 
+    const fallbackTimer = window.setTimeout(markReady, 2500);
+
+    const tpScript = document.querySelector<HTMLScriptElement>('script[src*="emrld.ltd"]');
     if (tpScript) {
       tpScript.addEventListener("load", markReady, { once: true });
       tpScript.addEventListener("error", markReady, { once: true });
@@ -1061,6 +1096,7 @@ export default function App() {
     return () => {
       isMounted = false;
       window.clearTimeout(fallbackTimer);
+      observer?.disconnect();
       if (tpScript) {
         tpScript.removeEventListener("load", markReady);
         tpScript.removeEventListener("error", markReady);
@@ -1163,6 +1199,35 @@ export default function App() {
   };
 
   const { section, parameterId, isLanding, isAdmin, locale } = getRouteDetails();
+
+  // English blog bodies live in their own module (src/data/blogContent.ts) so the
+  // ~161 KB of article text is not part of every page's initial download. It is
+  // fetched when a blog section is on screen — that covers both the article route
+  // and the list route (so clicking a card is instant) — and never on the other
+  // 122 routes. Idle scheduling keeps the fetch out of the critical path; the
+  // fallback timer guarantees it still happens on browsers without
+  // requestIdleCallback. Mirrors how ./data/bengaliContent is loaded for /bn/*.
+  const [blogBodies, setBlogBodies] = useState<Readonly<Record<string, string>> | null>(null);
+  useEffect(() => {
+    if (section !== "blog" || locale === "bn" || blogBodies) return;
+    let cancelled = false;
+    const load = () => {
+      import("./data/blogContent").then((mod) => {
+        if (!cancelled) setBlogBodies(mod.BLOG_BODY);
+      });
+    };
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number };
+    if (typeof w.requestIdleCallback === "function") {
+      w.requestIdleCallback(load, { timeout: 2000 });
+    } else {
+      const timer = window.setTimeout(load, 0);
+      return () => window.clearTimeout(timer);
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, [section, locale, blogBodies]);
+
 
   // Keep React state in lockstep with the URL locale — covers back/forward
   // navigation between /umrah and /bn/umrah as well as direct deep links.
@@ -1888,7 +1953,7 @@ export default function App() {
               onClick={() => navigateTo("/")}
             >
               <img
-                src="/assets/brand/svg/ural-wordmark.svg"
+                src="/assets/brand/svg/ural-wordmark-v1.svg"
                 alt="URAL"
                 width="98"
                 height="32"
@@ -2340,7 +2405,7 @@ export default function App() {
                 <div className="h-15 px-4 flex items-center justify-between border-b border-white/10 shrink-0">
                   <div className="flex flex-col items-start gap-0.5">
                     <img
-                      src="/assets/brand/svg/ural-wordmark.svg"
+                      src="/assets/brand/svg/ural-wordmark-v1.svg"
                       alt="URAL"
                       width="70"
                       height="24"
@@ -2749,8 +2814,9 @@ export default function App() {
           <div
             className="hero-bg relative overflow-hidden min-h-[500px] lg:min-h-[560px] flex items-center p-6 md:p-12 lg:p-16 select-none border-b border-slate-800/80 bg-cover bg-center"
           >
-            <img
-              {...getResponsiveImageProps(heroBgImage, "100vw")}
+            <ResponsiveImage
+              src={heroBgImage}
+              sizes="100vw"
               alt=""
               aria-hidden={true}
               loading="eager"
@@ -2954,7 +3020,7 @@ export default function App() {
                 <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
                   {t.searchSectionTitle}
                 </h2>
-                <p className="text-xs text-slate-500 max-w-xl mx-auto">
+                <p className="text-xs text-slate-600 max-w-xl mx-auto">
                   {t.searchSectionSubtitle}
                 </p>
               </div>
@@ -3058,7 +3124,7 @@ export default function App() {
               <div className="text-center space-y-2">
                 <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">{t.destinationsBadge}</span>
                 <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{t.destinationsTitle}</h2>
-                <p className="text-xs text-slate-500 max-w-xl mx-auto">{t.destinationsSubtitle}</p>
+                <p className="text-xs text-slate-600 max-w-xl mx-auto">{t.destinationsSubtitle}</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -3142,11 +3208,10 @@ export default function App() {
                     className="group relative rounded-2xl overflow-hidden bg-slate-950 shadow-lg hover:shadow-2xl transition-all duration-350 cursor-pointer transform hover:-translate-y-1.5 flex flex-col justify-end aspect-[4/5] sm:aspect-square md:aspect-[4/5] border border-slate-800/10 hover:border-[#F6B73C]/20"
                   >
                     {/* Background Travel Image */}
-                    <img
-                      {...getResponsiveImageProps(
-                        dest.bgImg,
-                        "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw",
-                      )}
+                    {/* column count flips at sm (640) / lg (1024) — keep in step with the grid above */}
+                    <ResponsiveImage
+                      src={dest.bgImg}
+                      sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                       alt={dest.alt}
                       loading="lazy"
                       fetchPriority="low"
@@ -3161,7 +3226,7 @@ export default function App() {
                     <div className="relative z-20 p-4 space-y-2.5 bg-slate-950/65 backdrop-blur-md border-t border-white/10 m-3 rounded-xl shadow-lg">
                       <div className="flex items-center gap-1.5">
                         <span className="text-sm px-1.5 py-0.5 bg-white/15 rounded backdrop-blur-sm font-sans shrink-0">{dest.img}</span>
-                        <h4 className="font-sans font-bold text-sm text-white tracking-tight">{dest.city}, {dest.country}</h4>
+                        <h3 className="font-sans font-bold text-sm text-white tracking-tight">{dest.city}, {dest.country}</h3>
                       </div>
                       
                       <p className="text-[10px] text-slate-250 font-normal leading-relaxed line-clamp-3">
@@ -3183,7 +3248,7 @@ export default function App() {
             {/* 🟦 SECTION 3: “PLAN YOUR TRIP” PATHWAY */}
             <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-8">
               <div className="max-w-2xl space-y-3">
-                <span className="text-[10px] font-mono font-bold text-amber-600 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full uppercase tracking-wider inline-block">
+                <span className="text-[10px] font-mono font-bold text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full uppercase tracking-wider inline-block">
                   {isBn ? "🎯 ঢাকা থেকে আপনার পরবর্তী সফর সাজান" : "🎯 Plan your next trip from Dhaka"}
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3.5xl font-black text-brand-navy tracking-tight">
@@ -3305,7 +3370,7 @@ export default function App() {
                       <div className="flex items-center gap-2">
                         <label
                           htmlFor="home-currency-bdt-amount"
-                          className="text-slate-400 font-mono text-[10px] uppercase w-12"
+                          className="text-slate-600 font-mono text-[10px] uppercase w-12"
                         >
                           BDT (৳)
                           <span className="sr-only">
@@ -3323,7 +3388,7 @@ export default function App() {
                       <div className="flex items-center gap-2">
                         <label
                           htmlFor="home-currency-target-select"
-                          className="text-slate-400 font-mono text-[10px] uppercase w-12"
+                          className="text-slate-600 font-mono text-[10px] uppercase w-12"
                         >
                           To
                           <span className="sr-only">
@@ -3348,7 +3413,7 @@ export default function App() {
                   </div>
                   <div className="mt-4 pt-3 border-t border-slate-100 text-xs font-mono font-bold text-center bg-slate-50 py-1.5 rounded text-indigo-900">
                     ৳ {currencyAmount.toLocaleString()} BDT = &nbsp;
-                    <span className="text-[#F6B73C]">
+                    <span className="text-brand-gold-ink">
                       {currencyToOption === "NPR" ? (currencyAmount * 1.13).toFixed(2) :
                        currencyToOption === "THB" ? (currencyAmount * 0.30).toFixed(2) : 
                        currencyToOption === "MYR" ? (currencyAmount * 0.037).toFixed(2) :
@@ -3365,7 +3430,7 @@ export default function App() {
                     <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest block mb-1">
                       {isBn ? "🧳 ডকুমেন্ট ও প্যাকিং চেকলিস্ট" : "🧳 Packing Checklist"}
                     </span>
-                    <p className="text-[10px] text-slate-400 mb-2">
+                    <p className="text-[10px] text-slate-600 mb-2">
                       {isBn ? "ফ্লাইটের আগে জরুরি ডকুমেন্টগুলো মিলিয়ে নিন:" : "Check requirements to keep track before your flight:"}
                     </p>
                     <div className="space-y-1.5 text-[11px] font-medium text-slate-700">
@@ -3377,14 +3442,14 @@ export default function App() {
                             onChange={() => {
                               setPackingItems(prev => prev.map(p => p.id === item.id ? { ...p, checked: !p.checked } : p));
                             }}
-                            className="rounded text-[#F6B73C] focus:ring-[#F6B73C]"
+                            className="h-6 w-6 rounded text-[#F6B73C] focus:ring-[#F6B73C]"
                           />
-                          <span className={item.checked ? "line-through text-slate-400" : ""}>{item.text}</span>
+                          <span className={item.checked ? "line-through text-slate-600" : ""}>{item.text}</span>
                         </label>
                       ))}
                     </div>
                   </div>
-                  <span className="text-[9px] font-mono text-[#F6B73C] block mt-2 text-right">
+                  <span className="text-[9px] font-mono text-brand-gold-ink block mt-2 text-right">
                     {isBn ? "ইমিগ্রেশন চেকলিস্ট" : "Interactive Outbound checklist"}
                   </span>
                 </div>
@@ -3437,7 +3502,7 @@ export default function App() {
                       ? "“ঢাকা থেকে সব প্রধান এয়ারলাইন্সের ভাড়া এক সাথে তুলনা করুন”"
                       : "“Compare prices from all major airlines flying from Dhaka”"}
                   </p>
-                  <p className="text-[10px] text-slate-350 leading-relaxed">
+                  <p className="text-[10px] text-slate-300 leading-relaxed">
                     {isBn
                       ? "Biman Bangladesh, Saudia, Emirates, AirAsia, US-Bangla ও Thai Airways সহ ঢাকা থেকে চলাচলকারী সব এয়ারলাইন্সের প্রতিদিনের আপডেট ভাড়া।"
                       : "Flight search covers Biman Bangladesh, Emirates, AirAsia, Thai Airways, and other airlines that fly out of Dhaka — updated daily."}
@@ -3450,7 +3515,7 @@ export default function App() {
                   <p className="text-[11px] text-[#F6B73C] font-bold mt-1">
                     {isBn ? "“কোনো রেজিস্ট্রেশন বা বাড়তি ফি নেই”" : "“No signup, no fees”"}
                   </p>
-                  <p className="text-[10px] text-slate-350 leading-relaxed">
+                  <p className="text-[10px] text-slate-300 leading-relaxed">
                     {isBn
                       ? "কোনো একাউন্ট খোলা ছাড়াই ফ্লাইট ও হোটেল সার্চ করুন। কোনো লুকানো চার্জ নেই—অথবা কার্ড না থাকলে WhatsApp-এ BDT দিয়ে বুক করুন।"
                       : "Search flights and hotels without creating an account. No hidden charges. Click through to book directly with the airline or hotel."}
@@ -3461,7 +3526,7 @@ export default function App() {
                     {isBn ? "🤝 বিশ্বস্ত আন্তর্জাতিক পার্টনার" : "🤝 Trusted Partners"}
                   </span>
                   <p className="text-[11px] text-[#F6B73C] font-bold mt-1">“Powered by Travelpayouts”</p>
-                  <p className="text-[10px] text-slate-350 leading-relaxed font-sans">
+                  <p className="text-[10px] text-slate-300 leading-relaxed font-sans">
                     {isBn
                       ? "আমাদের ফ্লাইট, এয়ারপোর্ট পিকআপ, ট্যুর, Travel eSIM ও গাড়ি ভাড়ার সেবাগুলো Travelpayouts, Aviasales, Welcome Pickups, Klook, Kiwitaxi, Airalo ও QEEQ-এর মাধ্যমে পরিচালিত।"
                       : "Flights, transfers, activities, eSIMs, and car rentals on this site are powered by Travelpayouts and its partner network — including Aviasales, Klook, Kiwitaxi, Airalo, and QEEQ."}
@@ -3474,8 +3539,9 @@ export default function App() {
             <div
               className="w-screen relative left-1/2 -translate-x-1/2 border-t border-b border-slate-900/10 bg-cover bg-center select-none overflow-hidden"
             >
-              <img
-                {...getResponsiveImageProps(coxsBazarSunriseImg, "100vw")}
+              <ResponsiveImage
+                src={coxsBazarSunriseImg}
+                sizes="100vw"
                 alt=""
                 aria-hidden={true}
                 loading="lazy"
@@ -5349,8 +5415,9 @@ export default function App() {
               className="w-screen relative left-1/2 -translate-x-1/2 -mt-6 sm:-mt-8 bg-brand-navy text-white overflow-hidden border-b border-slate-800 shadow-xl"
             >
               <div className="absolute inset-0">
-                <img
-                  {...getResponsiveImageProps(blogHeroBannerImg, "100vw")}
+                <ResponsiveImage
+                  src={blogHeroBannerImg}
+                  sizes="100vw"
                   alt=""
                   aria-hidden={true}
                   loading="eager"
@@ -5548,11 +5615,9 @@ export default function App() {
                         <div className="flex flex-col">
                           {/* Unique Card Thumbnail Image */}
                           <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
-                            <img
-                              {...getResponsiveImageProps(
-                                coverImg,
-                                "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw",
-                              )}
+                            <ResponsiveImage
+                              src={coverImg}
+                              sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                               alt={getBlogImageAltText(post.slug)}
                               loading="lazy"
                               fetchPriority="low"
@@ -5717,6 +5782,11 @@ export default function App() {
           <div className="space-y-8 animate-fade-in">
             {(() => {
               const activePost = localizedBlogs.find((p) => p.slug === parameterId) || localizedBlogs[0];
+              // Body text: Bengali posts carry it inline in BLOG_DATA, English posts
+              // get it from the lazily loaded ./data/blogContent module (see the
+              // effect near the top of the component). Empty until that module
+              // resolves — the placeholder above covers that window.
+              const articleBody = activePost.content ?? blogBodies?.[activePost.slug] ?? "";
               const activeCoverImg = getBlogCoverImage(activePost.slug);
               const sameCategoryPosts = localizedBlogs.filter(
                 (p) => p.slug !== activePost.slug && p.category === activePost.category
@@ -6029,11 +6099,9 @@ export default function App() {
 
                         {/* Dedicated Unique Article Feature Photograph */}
                         <figure className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-900">
-                          <img
-                            {...getResponsiveImageProps(
-                              activeCoverImg,
-                              "(max-width: 767px) 100vw, 840px",
-                            )}
+                          <ResponsiveImage
+                            src={activeCoverImg}
+                            sizes="(max-width: 767px) 100vw, 840px"
                             alt={getBlogImageAltText(activePost.slug)}
                             loading="eager"
                             fetchPriority="high"
@@ -6085,7 +6153,24 @@ export default function App() {
 
                       {/* Full Long-Form Verified Guide Content with Dark H2 (24px–26px), Dark H3 (19px–21px) & 16px Body */}
                       <div className="max-w-none text-slate-800 leading-[1.8] space-y-6 text-[16px] sm:text-[17px] font-sans">
-                        {sanitizeExpiredPromoText(activePost.content).split("\n\n").map((block, bIdx) => {
+                        {!articleBody && (
+                          // The body module is a separate chunk. On a cold article load it is
+                          // already being fetched (prerender injects a modulepreload for blog
+                          // routes), so this placeholder is normally invisible; it exists so a
+                          // slow connection never renders an empty article.
+                          <div className="space-y-4 animate-pulse" aria-hidden="true" data-blog-body-placeholder>
+                            {[0, 1, 2, 3, 4].map((i) => (
+                              <div
+                                key={i}
+                                className={`h-4 rounded bg-slate-200 ${i % 3 === 2 ? "w-2/3" : "w-full"}`}
+                              />
+                            ))}
+                            <span className="sr-only">
+                              {isBn ? "গাইড লোড হচ্ছে…" : "Loading the guide…"}
+                            </span>
+                          </div>
+                        )}
+                        {articleBody && sanitizeExpiredPromoText(articleBody).split("\n\n").map((block, bIdx) => {
                           const trimmed = block.trim();
                           if (!trimmed) return null;
 
@@ -6665,11 +6750,10 @@ export default function App() {
                             >
                             <div>
                               <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
-                                <img
-                                  {...getResponsiveImageProps(
-                                    getBlogCoverImage(post.slug),
-                                    "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw",
-                                  )}
+                                {/* 1 column below md (768), 3 columns above it — no 50vw band exists here */}
+                                <ResponsiveImage
+                                  src={getBlogCoverImage(post.slug)}
+                                  sizes="(max-width: 767px) 100vw, 33vw"
                                   alt={getBlogImageAltText(post.slug)}
                                   loading="lazy"
                                   fetchPriority="low"
@@ -6766,11 +6850,9 @@ export default function App() {
                 >
                   <div>
                     <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
-                      <img
-                        {...getResponsiveImageProps(
-                          getBlogCoverImage(topic.slug),
-                          "(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw",
-                        )}
+                      <ResponsiveImage
+                        src={getBlogCoverImage(topic.slug)}
+                        sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw"
                         alt={getBlogImageAltText(topic.slug)}
                         loading="lazy"
                         fetchPriority="low"
@@ -7306,7 +7388,7 @@ export default function App() {
                   className="inline-flex items-center gap-2.5 text-white cursor-pointer"
                 >
                   <img
-                    src="/assets/brand/svg/ural-wordmark.svg"
+                    src="/assets/brand/svg/ural-wordmark-v1.svg"
                     alt="URAL"
                     width="88"
                     height="30"
@@ -7413,13 +7495,13 @@ export default function App() {
                 {isBn ? "জনপ্রিয় ফ্লাইট রুট" : "Flight Routes"}
               </span>
               <ul className="space-y-1.5 text-xs">
-                <li><a href="/flights/dhaka-kathmandu" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kathmandu"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kathmandu (KTM)</a></li>
-                <li><a href="/flights/dhaka-bangkok" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-bangkok"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Bangkok (BKK)</a></li>
-                <li><a href="/flights/dhaka-kuala-lumpur" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kuala-lumpur"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kuala Lumpur (KUL)</a></li>
-                <li><a href="/flights/dhaka-singapore" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-singapore"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</a></li>
-                <li><a href="/flights/dhaka-maldives" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-maldives"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
-                <li><a href="/flights/dhaka-dubai" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-dubai"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
-                <li><a href="/umrah" onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }} className="text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">Dhaka → Jeddah &amp; Madinah (Umrah)</a></li>
+                <li><a href="/flights/dhaka-kathmandu" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kathmandu"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kathmandu (KTM)</a></li>
+                <li><a href="/flights/dhaka-bangkok" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-bangkok"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Bangkok (BKK)</a></li>
+                <li><a href="/flights/dhaka-kuala-lumpur" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kuala-lumpur"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kuala Lumpur (KUL)</a></li>
+                <li><a href="/flights/dhaka-singapore" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-singapore"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</a></li>
+                <li><a href="/flights/dhaka-maldives" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-maldives"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
+                <li><a href="/flights/dhaka-dubai" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-dubai"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
+                <li><a href="/umrah" onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">Dhaka → Jeddah &amp; Madinah (Umrah)</a></li>
               </ul>
             </div>
 
@@ -7429,13 +7511,13 @@ export default function App() {
                 {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa Checklists"}
               </span>
               <ul className="space-y-1.5 text-xs">
-                <li><a href="/visa/nepal-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/nepal-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</a></li>
-                <li><a href="/visa/maldives-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/maldives-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</a></li>
-                <li><a href="/visa/thailand-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/thailand-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</a></li>
-                <li><a href="/visa/malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/malaysia-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
-                <li><a href="/visa/singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/singapore-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Visa"}</a></li>
-                <li><a href="/visa/dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/dubai-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
-                <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪১টি ট্রাভেল ব্লগ গাইড →" : "All 41 Travel Blog Guides →"}</a></li>
+                <li><a href="/visa/nepal-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/nepal-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</a></li>
+                <li><a href="/visa/maldives-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/maldives-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</a></li>
+                <li><a href="/visa/thailand-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/thailand-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</a></li>
+                <li><a href="/visa/malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/malaysia-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
+                <li><a href="/visa/singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/singapore-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Visa"}</a></li>
+                <li><a href="/visa/dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/dubai-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
+                <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪১টি ট্রাভেল ব্লগ গাইড →" : "All 41 Travel Blog Guides →"}</a></li>
               </ul>
             </div>
 
@@ -7623,7 +7705,7 @@ export default function App() {
                   </form>
                 )}
                 <div className="flex items-center justify-between pt-0.5">
-                  <span className="text-[10px] text-slate-500">
+                  <span className="text-[10px] text-slate-400">
                     {isBn ? "স্প্যাম মুক্ত · ফ্রি অ্যালার্ট" : "Zero spam · Unsubscribe anytime"}
                   </span>
                   <a

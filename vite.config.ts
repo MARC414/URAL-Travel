@@ -12,6 +12,13 @@ export default defineConfig(() => {
       },
     },
     build: {
+      // Ship source maps. Lighthouse's "Missing source maps for large
+      // first-party JavaScript" is unscored, but it is the difference between
+      // a production stack trace you can read and a column offset into a
+      // minified chunk. This repo is public on GitHub, so a map exposes
+      // nothing that is not already published — and maps are only downloaded
+      // when DevTools is open, so there is no user-facing cost.
+      sourcemap: true,
       // Route components are already React.lazy'd in App.tsx. What remained in
       // the entry chunk was React itself plus the content corpus, so this only
       // handles those two.
@@ -42,6 +49,11 @@ export default defineConfig(() => {
             if (id.includes('src/constants')) {
               return 'content-data';
             }
+            // Dynamically imported from App.tsx on blog routes only. Naming it here
+            // keeps the chunk findable in the build manifest across refactors.
+            if (id.includes('src/data/blogContent')) {
+              return 'blog-content';
+            }
             return undefined;
           },
         },
@@ -49,6 +61,11 @@ export default defineConfig(() => {
       // Surface regressions instead of silently shipping another large bundle.
       chunkSizeWarningLimit: 250,
       cssCodeSplit: true,
+      // The prerender pass reads this to emit a <link rel="modulepreload"> for the
+      // lazily imported blog-body chunk, so a cold article load starts fetching it
+      // during HTML parse instead of waiting for React to mount. It is deleted from
+      // dist right after prerendering (see scripts/prerender.ts).
+      manifest: true,
     },
     server: {
       allowedHosts: ['.e2b.app'],

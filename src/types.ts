@@ -134,7 +134,13 @@ export interface BlogPost {
   date: string;
   author: string;
   readTime: string;
-  content: string;
+  /**
+   * Long-form body. Optional on purpose: the 43 English bodies live in
+   * `src/data/blogContent.ts` and are imported lazily on blog routes, so
+   * BLOG_DATA no longer carries them (see the comment in that file).
+   * Consumers must fall back to `getBlogBody(slug)`.
+   */
+  content?: string;
   internalLinks: { text: string; path: string }[];
   affiliateCTA?: { provider: "aviasales" | "klook" | "kkday" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage" | "ekta" | "yesim" | "kiwi" | "getTransfer" | "goCity"; headline: string; body: string };
 }

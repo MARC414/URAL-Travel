@@ -21,7 +21,7 @@ import { AirHelpWidget } from "./AirHelpWidget";
 import { TravelIntelligence } from "./AeoInspector";
 import { Language } from "../translations";
 import { FAQ } from "../types";
-import { getResponsiveImageProps } from "../utils/imageAssets";
+import { ResponsiveImage } from "./ResponsiveImage";
 
 interface UmrahLandingPageProps {
   lang: Language;
@@ -88,8 +88,9 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         className="w-screen relative left-1/2 -translate-x-1/2 bg-[#071120] text-white border-y border-slate-800 overflow-hidden shadow-2xl"
       >
         {/* Full-Bleed Background Photography + Multi-Layer Editorial Vignette */}
-        <img
-          {...getResponsiveImageProps(coverImage, "100vw")}
+        <ResponsiveImage
+          src={coverImage}
+          sizes="100vw"
           alt="The Kaaba at Masjid al-Haram in Makkah, illuminated at night."
           loading="eager"
           fetchPriority="high"

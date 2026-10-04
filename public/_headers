@@ -15,21 +15,38 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Brand/favicon files are stable but not content-hashed: cache for a day and
-# allow a stale copy to be served while revalidating in the background.
+# Brand SVG marks are versioned by filename (`-v1`), so they are as immutable
+# as a hashed bundle. They used to inherit the 7-day brand rule below, which
+# Lighthouse's "efficient cache lifetimes" audit flags for anything under 30
+# days. Bump the `-vN` suffix when a mark changes.
+/assets/brand/svg/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Favicons are the deliberate counter-example: they are read from a browser
+# favicon cache that does not reliably revalidate, so a year-long TTL is how a
+# rebrand becomes invisible to returning visitors. Keep them short and allow a
+# stale copy to be served while revalidating in the background.
+/assets/brand/favicon/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
 /favicon.svg
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
-/assets/brand/*
-  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
-
-# Self-hosted fonts (Phase 1) are stable, version-controlled files, but they
-# are NOT content-hashed — and without an explicit rule Pages falls back to
-# `max-age=0, must-revalidate`, so every repeat visit pays a revalidation
-# round-trip for the two preloaded woff2 files, throwing away most of the
-# font-optimization win on the only visits where it should be free.
+# Self-hosted fonts (Phase 1). The original 7-day rule fixed the real bug it
+# was written for — Pages' default `max-age=0, must-revalidate`, i.e. a
+# revalidation round-trip on every repeat visit for the two preloaded files.
+# But 7 days still fails Lighthouse's "efficient cache lifetimes" audit, which
+# flags anything under 30 days — it looks for a ~92.5% cache-hit probability on
+# repeat visits and estimated 28 KiB of wasted transfer on this site (the panel
+# lists all 266 KiB of font transfer it inspected; the estimate is
+# probability-weighted, not the listed total).
+#
+# The files are NOT content-hashed, so they are versioned by filename instead
+# (`inter-400-v1.woff2`). Before editing a font file: bump the `-vN` suffix and
+# update every reference. `npm run verify:build` fails if a referenced font is
+# unversioned or missing, so a silent stale-font deploy is not possible.
 /fonts/*
-  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+  Cache-Control: public, max-age=31536000, immutable
 
 # Crawlable feeds: short TTL so sitemap/RSS updates reach crawlers quickly.
 /sitemap.xml
@@ -50,6 +67,49 @@
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Frame-Options: SAMEORIGIN
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+  Content-Security-Policy: object-src 'none'; base-uri 'self'; frame-ancestors 'self'
+
+# ---------------------------------------------------------------------------
+# Security headers — what is here, and what is deliberately NOT
+# ---------------------------------------------------------------------------
+# Lighthouse files csp-xss, has-hsts, origin-isolation, clickjacking-mitigation
+# and trusted-types-xss under "Trust and Safety". All five are INFORMATIVE
+# audits: they cannot move the Best Practices score. They were added because
+# they are cheap and real, in this order of risk:
+#
+# - HSTS: this host is HTTPS-only on Cloudflare Pages, so pinning it costs
+#   nothing. `preload` is required by the Lighthouse audit (it fails on a
+#   missing preload directive); submitting the domain to hstspreload.org is a
+#   separate, deliberate decision — the directive alone does nothing.
+# - X-Frame-Options SAMEORIGIN + CSP `frame-ancestors 'self'`: clickjacking
+#   protection. Sent together for old browsers. ⚠️ If /travelpayouts-wl.html
+#   ever has to be embedded cross-origin, this rule must be scoped to explicit
+#   paths instead of `/*` — Cloudflare merges matching rules and cannot
+#   unset a header per path.
+# - Cross-Origin-Opener-Policy: `same-origin-allow-popups`, not `same-origin`,
+#   because the Travelpayouts/Emerald widgets open cross-origin popups and
+#   severing window.opener would break their handoff. Any of the four allowed
+#   COOP values satisfies the audit; this is the one that keeps popups working.
+# - CSP is deliberately PARTIAL: object-src/base-uri/frame-ancestors only. A
+#   real XSS-mitigating `script-src` needs nonces or hashes for the four inline
+#   scripts in this shell (consent default, GTM loader, emrld loader, JSON-LD)
+#   plus allowlists for googletagmanager.com, emrld.ltd and the Travelpayouts
+#   widget bundles. That is a project with its own testing matrix, not a header
+#   line — see Appendix D.3.
+#
+# NOT added, on purpose:
+# - Cross-Origin-Embedder-Policy (COEP): `require-corp` would block every
+#   third-party asset that does not send CORP/CORS headers — the fonts are
+#   same-origin, but the affiliate widgets, GTM and the review embeds are not.
+#   COEP without cooperation from all of them breaks the page.
+# - `require-trusted-types-for 'script'`: React 19 does not create a Trusted
+#   Types policy, and the affiliate widgets inject script/markup directly.
+#   Enabling it blanks the app.
+# ---------------------------------------------------------------------------
+
 
 # ---------------------------------------------------------------------------
 # ⚠️  DO NOT add `X-Robots-Tag: noindex` for *.pages.dev HERE

@@ -160,10 +160,10 @@ export function TrustpilotReviews() {
                 <StarRow size={13} />
                 <ExternalLink size={12} className="text-slate-300 group-hover:text-[#00b67a] transition-colors" />
               </div>
-              <h4 className="font-serif font-bold text-sm text-slate-900 leading-snug">{review.title}</h4>
+              <h3 className="font-serif font-bold text-sm text-slate-900 leading-snug">{review.title}</h3>
               <p className="text-xs text-slate-600 leading-relaxed">{review.text}</p>
             </div>
-            <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100 text-[10px] text-slate-400 font-mono">
+            <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100 text-[10px] text-slate-600 font-mono">
               <span>{review.flag} {review.name}</span>
               <span>{review.date}</span>
             </div>
@@ -181,7 +181,7 @@ export function TrustpilotReviews() {
         >
           Read All 238 Reviews on Trustpilot <ExternalLink size={13} />
         </a>
-        <p className="text-[10px] text-slate-400 max-w-md">
+        <p className="text-[10px] text-slate-600 max-w-md">
           Like any platform, not every review is five stars — the link above shows the complete, unfiltered review history on Trustpilot.
         </p>
       </div>
