@@ -67,6 +67,49 @@
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Frame-Options: SAMEORIGIN
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+  Content-Security-Policy: object-src 'none'; base-uri 'self'; frame-ancestors 'self'
+
+# ---------------------------------------------------------------------------
+# Security headers — what is here, and what is deliberately NOT
+# ---------------------------------------------------------------------------
+# Lighthouse files csp-xss, has-hsts, origin-isolation, clickjacking-mitigation
+# and trusted-types-xss under "Trust and Safety". All five are INFORMATIVE
+# audits: they cannot move the Best Practices score. They were added because
+# they are cheap and real, in this order of risk:
+#
+# - HSTS: this host is HTTPS-only on Cloudflare Pages, so pinning it costs
+#   nothing. `preload` is required by the Lighthouse audit (it fails on a
+#   missing preload directive); submitting the domain to hstspreload.org is a
+#   separate, deliberate decision — the directive alone does nothing.
+# - X-Frame-Options SAMEORIGIN + CSP `frame-ancestors 'self'`: clickjacking
+#   protection. Sent together for old browsers. ⚠️ If /travelpayouts-wl.html
+#   ever has to be embedded cross-origin, this rule must be scoped to explicit
+#   paths instead of `/*` — Cloudflare merges matching rules and cannot
+#   unset a header per path.
+# - Cross-Origin-Opener-Policy: `same-origin-allow-popups`, not `same-origin`,
+#   because the Travelpayouts/Emerald widgets open cross-origin popups and
+#   severing window.opener would break their handoff. Any of the four allowed
+#   COOP values satisfies the audit; this is the one that keeps popups working.
+# - CSP is deliberately PARTIAL: object-src/base-uri/frame-ancestors only. A
+#   real XSS-mitigating `script-src` needs nonces or hashes for the four inline
+#   scripts in this shell (consent default, GTM loader, emrld loader, JSON-LD)
+#   plus allowlists for googletagmanager.com, emrld.ltd and the Travelpayouts
+#   widget bundles. That is a project with its own testing matrix, not a header
+#   line — see Appendix D.3.
+#
+# NOT added, on purpose:
+# - Cross-Origin-Embedder-Policy (COEP): `require-corp` would block every
+#   third-party asset that does not send CORP/CORS headers — the fonts are
+#   same-origin, but the affiliate widgets, GTM and the review embeds are not.
+#   COEP without cooperation from all of them breaks the page.
+# - `require-trusted-types-for 'script'`: React 19 does not create a Trusted
+#   Types policy, and the affiliate widgets inject script/markup directly.
+#   Enabling it blanks the app.
+# ---------------------------------------------------------------------------
+
 
 # ---------------------------------------------------------------------------
 # ⚠️  DO NOT add `X-Robots-Tag: noindex` for *.pages.dev HERE

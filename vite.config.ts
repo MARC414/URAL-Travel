@@ -12,6 +12,13 @@ export default defineConfig(() => {
       },
     },
     build: {
+      // Ship source maps. Lighthouse's "Missing source maps for large
+      // first-party JavaScript" is unscored, but it is the difference between
+      // a production stack trace you can read and a column offset into a
+      // minified chunk. This repo is public on GitHub, so a map exposes
+      // nothing that is not already published — and maps are only downloaded
+      // when DevTools is open, so there is no user-facing cost.
+      sourcemap: true,
       // Route components are already React.lazy'd in App.tsx. What remained in
       // the entry chunk was React itself plus the content corpus, so this only
       // handles those two.

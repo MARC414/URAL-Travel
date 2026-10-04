@@ -9,7 +9,7 @@
 ## ✅ Status Board (single source of truth — 2026-10-04)
 
 Everything below is **committed code**, verified by `npm run build` + `npm run
-verify:build` (29 checks, incl. the cache/srcset/consent/contrast regression guards). "Deployed" means it
+verify:build` (32 checks, incl. the cache/srcset/consent/contrast/security regression guards). "Deployed" means it
 will be live on the next Cloudflare Pages deploy of this branch — confirm with
 the Production Verification commands at the bottom of this guide.
 
@@ -39,6 +39,9 @@ the Production Verification commands at the bottom of this guide.
 | 22 | Image compression (Lighthouse "Improve image delivery", 127 KiB) | ⏳ open — this is Appendix A | the estimate covers the homepage hero + the two 960w destination cards; AVIF is the measured lever (A.2) |
 | 23 | **Accessibility 96 → contrast, target-size, heading-order** | ✅ fixed 2026-10-04 night | 7 class patterns + `brand-gold-ink` token + 24px checkbox + h3 levels; guarded (3 new checks). Appendix C |
 | 24 | ~12 invalid Tailwind colour steps (`text-slate-650`, `border-slate-250`, …) | ⏳ open, visible as a CI warning | they render as `inherit` today; fixing them changes colours → needs its own visual pass (C.4) |
+| 25 | **Security headers** (HSTS + XFO + COOP + partial CSP) | ✅ done 2026-10-04 night | `public/_headers`; all five Lighthouse Trust & Safety audits are *informative* (unscored) — added because they are real and cheap, guarded by 3 checks (D.3) |
+| 26 | **Source maps shipped** (Lighthouse "missing source maps") | ✅ done 2026-10-04 night | `vite.config.ts` `sourcemap: true` → 16 maps (5.7 MB, DevTools-only); guarded (D.2) |
+| 27 | Console errors (CORS to `emrld.ltd/entrypoint_config`) | ⛔ **third-party defect** — reported, not fixable here | their endpoint sends no `Access-Control-Allow-Origin`; the only in-repo lever is a consent gate, which is an owner revenue decision (D.1) |
 
 ### ⚠️ The recurring CI failure (lockfile hygiene)
 Three CI runs died in ~12s at "Install dependencies" (`fafdb27`, `4d45194`,
@@ -735,7 +738,7 @@ curl -sI https://ural-travel.pages.dev/ | grep -i x-robots-tag  # must be ABSENT
 ```bash
 npm run lint          # tsc --noEmit
 npm run build         # vite build + prerender of ~163 routes
-npm run verify:build  # 29 checks incl. srcset/consent/cache/contrast regression guards
+npm run verify:build  # 32 checks incl. srcset/consent/cache/contrast/security guards
 ```
 
 ---
@@ -821,6 +824,9 @@ npm run preview
 - [ ] Re-run Lighthouse after the cache + a11y changes and diff against Appendix B.1 / C.1
 - [ ] Owner decision: `POPULAR HUBS:` one-class fix in `TravelpayoutsWidget.jsx` (C.3)
 - [ ] Separate visual pass for the 12 non-existent Tailwind colour steps (C.4)
+- [x] Security headers + source maps ✅ (2026-10-04 night — Appendix D)
+- [ ] Report the emrld.ltd CORS failure to Travelpayouts support (D.1) — copy the ready-made report
+- [ ] Owner decision: gate the emrld affiliate script behind marketing consent (D.1.3)
 - [ ] Post-deploy Lighthouse/CrUX re-measure + record numbers in Status Board
 
 ---
@@ -1334,3 +1340,132 @@ silently ignored: text inherits its parent colour and `border-*` falls back to
 exactly the kind of thing a performance/a11y pass should not smuggle in. They are
 now listed as a warning in `npm run verify:build` output so the debt is visible
 instead of invisible. Fixing them is its own small visual PR.
+
+---
+
+# 📎 Appendix D — Console errors, source maps, security headers
+
+Companion to Appendix B (performance) and C (accessibility), from the same
+report's **Best Practices 96** section.
+
+## D.1 "Browser errors were logged to the console" — a third-party defect
+
+The three logged errors are one failure chain inside **Travelpayouts' Emerald
+script**, not our code:
+
+```
+Access to fetch at 'https://emrld.ltd/entrypoint_config?page_url=…&t=540277'
+from origin 'https://ural-travel.pages.dev' has been blocked by CORS policy:
+No 'Access-Control-Allow-Origin' header is present …
+emrld.ltd/chunk.BczHwNcq.js → "config is not valid"
+emrld.ltd/entrypoint_config → Failed to load resource: net::ERR_FAILED
+```
+
+Chain: our loader injects `https://emrld.ltd/NTQwMjc3.js` → that chunk fetches
+**its own** config endpoint → `emrld.ltd` returns no `Access-Control-Allow-Origin`
+→ the browser blocks it → the chunk logs `config is not valid` → the affiliate
+widget has no config.
+
+Why this is not ours to fix:
+
+- The `fetch` is issued by *their* bundle to *their* origin. Nothing in our HTML,
+  `_headers` or JS can add an ACAO header to another domain's response.
+- The `.map` errors in the same report (`SyntaxError: Unexpected token '<',
+  "<?xml vers"...`) are the same shape: DevTools asks `emrld.ltd/chunk.*.js.map`
+  and their CDN answers with an XML error page. Their maps are simply not
+  deployed. (Ours are now — see D.2.)
+- `src/main.tsx` already swallows `window` errors whose message contains
+  `emrld`; browser-generated network errors and a third party's own
+  `console.error` cannot be intercepted that way.
+
+**D.1.1 Impact on the audits.** `errors-in-console` is the one **scored** Best
+Practices failure left, and it is caused entirely by the above. No amount of
+in-page work clears it while the script loads and their endpoint stays broken.
+
+**D.1.2 Action, today:** report it. Ready to paste into Travelpayouts support:
+
+> Our integration on https://ural-travel.pages.dev loads
+> https://emrld.ltd/NTQwMjc3.js?t=540277 (marker 675992). The script's
+> `fetch('https://emrld.ltd/entrypoint_config?page_url=…&t=540277')` is blocked
+> by CORS: the response carries no `Access-Control-Allow-Origin` header for
+> origin https://ural-travel.pages.dev, so the widget logs "config is not valid"
+> and has no configuration. Please confirm the correct endpoint/CORS config for
+> this marker. Expected: `Access-Control-Allow-Origin: https://ural-travel.pages.dev`
+> (or `*`) on `/entrypoint_config`.
+
+**D.1.3 The one in-repo lever — and why it is an owner decision.** The privacy
+policy on this site lists `emrld.ltd` as a **marketing** processor (cookie table,
+`PrivacyPolicyPage.tsx`), and Consent Mode v2 defaults every storage type to
+`denied` — but the affiliate script is loaded regardless of the visitor's choice.
+So declining marketing currently does not stop a marketing script: a real
+consent gap (and the reason the lab audit sees the errors at all — a fresh
+profile has no marketing consent).
+
+Three options, in order of effort:
+
+| Option | Effect on the errors | Effect on affiliate revenue |
+|---|---|---|
+| **A. Gate the loader on marketing consent** (load only after Accept / per-category marketing) | Errors disappear for decliners **and in every lab audit**; real accepted users still hit Travelpayouts' CORS bug until they fix it | Modest: declined users and pre-decision pageviews no longer load the script; typical accept rates are high |
+| **B. Gate only for EEA/UK visitors** (country from `functions/_middleware.js`, which already exists) | Same as A, but only for the jurisdictions where consent is legally required | Almost none — Bangladesh and other non-EEA traffic is untouched |
+| **C. Leave as-is; report upstream only** | Errors remain (visitor-facing harm is low; they are console noise, not broken UI) | None |
+
+This is not a decision a tool may take silently: `docs/growth/06` §5 says the
+emrld script is a revenue component that is only removed/deferred with explicit
+owner approval, and gating one is the same class of change. Option B is the
+compliance-correct, revenue-preserving middle path if you want it.
+
+## D.2 Source maps — now shipped
+
+`vite.config.ts` gained `build.sourcemap: true`: 16 chunks → 16 `.map` files
+(5.7 MB total, largest 1.1 MB; Cloudflare Pages allows 25 MiB per file and
+20,000 files, so headroom is not a concern). Cost to visitors: zero — maps are
+fetched only when DevTools is open. Benefit: readable production stack traces,
+and the audit item clears. This repo is public on GitHub, so publishing maps
+exposes nothing that is not already published. A guard fails the build if a
+chunk ever ships without its map.
+
+## D.3 Security headers — added, with the score effect stated honestly
+
+`public/_headers` now sends, for `/*`:
+
+```
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+X-Frame-Options: SAMEORIGIN
+Cross-Origin-Opener-Policy: same-origin-allow-popups
+Content-Security-Policy: object-src 'none'; base-uri 'self'; frame-ancestors 'self'
+X-Content-Type-Options: nosniff            (already shipped)
+Referrer-Policy: strict-origin-when-cross-origin   (already shipped)
+```
+
+Status of the five "Trust and Safety" audits, read from Lighthouse's own source
+(`core/audits/*.js`, `scoreDisplayMode`):
+
+| Audit | Scored? | What it wants | What we shipped |
+|---|---|---|---|
+| `csp-xss` | **informative** | A CSP mitigating XSS (`script-src`, ideally nonces) | Partial CSP only — a real `script-src` needs nonces/hashes for the 4 inline scripts in the shell plus allowlists for googletagmanager, emrld.ltd and the widget bundles (D.3.1) |
+| `has-hsts` | **informative** | `max-age` ≥ 1 year **+ `includeSubDomains` + `preload`** (it fails if `preload` is missing) | All three, 2 years. Submitting to hstspreload.org is a separate deliberate step |
+| `origin-isolation` | **informative** | COOP with any of `same-origin`, `same-origin-allow-popups`, `noopener-allow-popups` | `same-origin-allow-popups` — `same-origin` would sever `window.opener` for the affiliate widgets' cross-origin popups |
+| `clickjacking-mitigation` | **informative** | XFO `DENY`/`SAMEORIGIN` **or** CSP `frame-ancestors` | Both |
+| `trusted-types-xss` | **informative** | `require-trusted-types-for 'script'` | **Deliberately not set** — React 19 creates no Trusted Types policy and the affiliate widgets inject markup; enabling it blanks the app |
+
+**All five are informative, so none of them can raise the 96.** They are here
+because they are real hardening at near-zero risk, not for the score.
+
+Two explicit non-goals: **COEP** (`require-corp` would block every third-party
+asset that does not send CORP/CORS — the widgets and GTM) and **Trusted Types**
+(above). Both are correct only after every third party cooperates.
+
+**D.3.1 The trap to remember on CSP:** Cloudflare Pages *merges* matching
+`_headers` rules rather than overriding them (the note at the top of the file).
+So the whole-site `frame-ancestors 'self'` cannot be relaxed for one path later
+— if `/travelpayouts-wl.html` ever needs to be embedded cross-origin, this rule
+must be rewritten as explicit path blocks instead of `/*`.
+
+## D.4 What is actually left
+
+| Item | Why it is still open |
+|---|---|
+| `errors-in-console` (the scored failure) | Travelpayouts' CORS bug (D.1.2); only their fix or a consent gate removes it |
+| `csp-xss` / `trusted-types-xss` | Need a nonce pipeline (Cloudflare Pages Function rewriting the shell + every widget's injected script) and would have to be re-tested against GTM, the affiliate bundles and the review embeds |
+| `origin-isolation` full isolation | Needs COEP, which needs every third party to send CORP/CORS |
+| Trust & Safety scoring impact | None — informative audits do not move the category score |

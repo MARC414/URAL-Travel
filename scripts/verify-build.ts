@@ -457,6 +457,59 @@ if (invalidSteps.size > 0) {
   );
 }
 
+// --- 2e. Security-header & source-map guards (Best Practices) ---------------
+//
+// Lighthouse's Best Practices category reported one scored failure (console
+// errors) and five INFORMATIVE "Trust and Safety" items. Informative audits
+// cannot move the score, but the headers behind them are cheap and real, so
+// they are asserted here: a future edit that drops HSTS, weakens COOP to
+// `unsafe-none`, or removes the clickjacking defence fails the build instead of
+// quietly showing up in the next report.
+
+const securityChecks: Array<[string, RegExp]> = [
+  ["Strict-Transport-Security with max-age>=1y + includeSubDomains + preload",
+   /Strict-Transport-Security:\s*max-age=(\d{8,})[^\n]*includeSubDomains[^\n]*preload/i],
+  ["X-Frame-Options SAMEORIGIN", /X-Frame-Options:\s*SAMEORIGIN/i],
+  ["Cross-Origin-Opener-Policy (popup-safe value)",
+   /Cross-Origin-Opener-Policy:\s*(same-origin-allow-popups|same-origin|noopener-allow-popups)/i],
+  ["CSP with frame-ancestors (clickjacking)", /Content-Security-Policy:[^\n]*frame-ancestors/i],
+  ["X-Content-Type-Options: nosniff", /X-Content-Type-Options:\s*nosniff/i],
+  ["Referrer-Policy", /Referrer-Policy:\s*strict-origin-when-cross-origin/i],
+];
+const missingSecurity = securityChecks
+  .filter(([, pattern]) => !pattern.test(headersFile))
+  .map(([label]) => label);
+check(
+  missingSecurity.length === 0,
+  missingSecurity.length === 0
+    ? `public/_headers keeps all ${securityChecks.length} security headers (HSTS, XFO, COOP, CSP frame-ancestors, nosniff, referrer-policy)`
+    : `missing/weakened security header(s): ${missingSecurity.join("; ")}`
+);
+
+// A COOP value of `unsafe-none` would pass the regex above only if the header
+// were absent, but assert the negative explicitly: it is the one value that
+// silently disables origin isolation while looking like a policy.
+check(
+  !/Cross-Origin-Opener-Policy:\s*unsafe-none/i.test(headersFile),
+  "COOP is not set to unsafe-none"
+);
+
+// Source maps must actually ship for every emitted JS chunk — the config flag
+// is easy to lose in a refactor, and Lighthouse only reports the symptom.
+const distAssetsDir = path.join(DIST_DIR, "assets");
+const jsChunks = fs.existsSync(distAssetsDir)
+  ? fs.readdirSync(distAssetsDir).filter((f) => f.endsWith(".js"))
+  : [];
+const missingMaps = jsChunks.filter(
+  (f) => !fs.existsSync(path.join(distAssetsDir, `${f}.map`))
+);
+check(
+  jsChunks.length > 0 && missingMaps.length === 0,
+  missingMaps.length === 0
+    ? `every emitted JS chunk ships a source map (${jsChunks.length} chunks)`
+    : `${missingMaps.length} chunk(s) without a .map: ${missingMaps.slice(0, 5).join(", ")}`
+);
+
 // --- 3. Sitemap: structure + the lastmod invariant --------------------------
 
 const sitemap = read(path.join(DIST_DIR, "sitemap.xml"));
