@@ -21,10 +21,12 @@
  *     self-maintaining rather than a magic number.
  */
 import fs from "node:fs";
+import zlib from "node:zlib";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { BLOG_DATA } from "../src/constants";
+import { BLOG_BODY } from "../src/data/blogContent";
 import {
   buildResponsiveSrcSet,
   RESPONSIVE_IMAGE_BREAKPOINTS,
@@ -750,6 +752,130 @@ if (rss) {
       ? "every rss.xml <item> has a parseable pubDate"
       : `${badPubDates.length} rss <item>(s) have a missing or unparseable pubDate ` +
           `(e.g. "Invalid Date"); see toIsoDate() usage in scripts/prerender.ts`
+  );
+}
+
+// --- 13. Blog body split (constants.ts -> lazily loaded blogContent.ts) ------
+//
+// The 43 English article bodies used to sit in constants.ts, which every page
+// downloads eagerly. They now live in src/data/blogContent.ts and are imported
+// only on blog routes, ~60 KB (gzip) lighter on every other page. The risk this
+// trades for is an SEO one: the body must still be *in* the prerendered HTML,
+// and the split must not silently undo itself. Both halves are asserted here.
+
+{
+  const missingBodies = BLOG_DATA.filter(
+    (post) => !BLOG_BODY[post.slug] || BLOG_BODY[post.slug].trim().length === 0
+  ).map((post) => post.slug);
+  check(
+    missingBodies.length === 0,
+    missingBodies.length === 0
+      ? `every blog post has a body in src/data/blogContent.ts (${BLOG_DATA.length}/${BLOG_DATA.length})`
+      : `${missingBodies.length} blog post(s) have no body in blogContent.ts: ` +
+          `${missingBodies.slice(0, 3).join(", ")} — the article would prerender empty`
+  );
+
+  const inlineBodies = BLOG_DATA.filter((post) => (post as { content?: string }).content).length;
+  check(
+    inlineBodies === 0,
+    inlineBodies === 0
+      ? "no English blog body is left inline in constants.ts (split still effective)"
+      : `${inlineBodies} blog post(s) still carry an inline body in constants.ts, ` +
+          `which puts ~${Math.round(inlineBodies * 3.7)} KB back into every page's initial download`
+  );
+
+  // Every paragraph of every body must survive into its prerendered page. The
+  // HTML escapes entities, so both sides are normalised the same way first.
+  const normalise = (value: string) =>
+    value
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#0?39;|&apos;/g, "'")
+      .replace(/\s+/g, " ")
+      .trim();
+  const emptyPrerenders: string[] = [];
+  const truncatedPrerenders: string[] = [];
+  for (const [slug, body] of Object.entries(BLOG_BODY)) {
+    const html = read(path.join(DIST_DIR, "blog", `${slug}.html`));
+    if (!html) {
+      emptyPrerenders.push(slug);
+      continue;
+    }
+    const page = normalise(html);
+    const paragraphs = body.split("\n\n").map((para) => para.trim()).filter(Boolean);
+    const missing = paragraphs.filter((para) => !page.includes(normalise(para)));
+    if (missing.length > 0) truncatedPrerenders.push(`${slug} (${missing.length}/${paragraphs.length})`);
+  }
+  check(
+    emptyPrerenders.length === 0,
+    emptyPrerenders.length === 0
+      ? `all ${Object.keys(BLOG_BODY).length} blog routes prerender to dist/blog/<slug>.html`
+      : `${emptyPrerenders.length} blog route(s) have no prerendered HTML: ${emptyPrerenders.slice(0, 3).join(", ")}`
+  );
+  check(
+    truncatedPrerenders.length === 0,
+    truncatedPrerenders.length === 0
+      ? `every blog paragraph survives into its prerendered HTML (${BLOG_DATA.length} articles, full text)`
+      : `${truncatedPrerenders.length} prerendered blog page(s) are missing body text: ` +
+          `${truncatedPrerenders.slice(0, 3).join(", ")} — Google would index a truncated article`
+  );
+
+  // The other half: the body must NOT be in what a non-blog page downloads.
+  const indexHtml = read(path.join(DIST_DIR, "index.html")) ?? "";
+  const eagerScripts = [
+    ...indexHtml.matchAll(/<script[^>]*type="module"[^>]*src="([^"]+)"/g),
+  ].map((m) => m[1]);
+  const eagerPreloads = [
+    ...indexHtml.matchAll(/<link rel="modulepreload"[^>]*href="([^"]+)"/g),
+  ].map((m) => m[1]);
+  const eagerCode = [...new Set([...eagerScripts, ...eagerPreloads])]
+    .map((url) => read(path.join(DIST_DIR, url.replace(/^\//, ""))) ?? "")
+    .join("");
+
+  const probeSlug = BLOG_DATA[0]?.slug ?? "";
+  const probeParagraph = (BLOG_BODY[probeSlug] ?? "")
+    .split("\n\n")
+    .map((para) => para.trim())
+    .find((para) => para.length > 120) ?? "";
+  const bodyLeakedIntoEager = probeParagraph.length > 0 && eagerCode.includes(probeParagraph.slice(0, 120));
+  check(
+    !bodyLeakedIntoEager,
+    bodyLeakedIntoEager
+      ? "blog body text is back in the eager chunks loaded by dist/index.html " +
+          "(blogContent.ts must stay a dynamic import — see the warning in that file)"
+      : `blog body text stays out of the ${new Set([...eagerScripts, ...eagerPreloads]).size} eager chunk(s) on non-blog pages`
+  );
+
+  // Budget guard: the whole point of this split is that non-blog pages download
+  // less. The ceiling sits just above today's measured value so a legitimate new
+  // feature has room, but re-inlining the article bodies (~+62 KB gzip) fails.
+  const EAGER_JS_BUDGET_KB = 300;
+  const eagerGzipKb =
+    [...new Set([...eagerScripts, ...eagerPreloads])].reduce((total, url) => {
+      const file = path.join(DIST_DIR, url.replace(/^\//, ""));
+      if (!fs.existsSync(file)) return total;
+      return total + zlib.gzipSync(fs.readFileSync(file), { level: 9 }).length / 1024;
+    }, 0);
+  check(
+    eagerGzipKb <= EAGER_JS_BUDGET_KB,
+    eagerGzipKb <= EAGER_JS_BUDGET_KB
+      ? `eager JS stays within the ${EAGER_JS_BUDGET_KB} KB gzip budget (measured ${eagerGzipKb.toFixed(1)} KB)`
+      : `eager JS is ${eagerGzipKb.toFixed(1)} KB gzip, over the ${EAGER_JS_BUDGET_KB} KB budget — ` +
+          "something that belongs in a route-level chunk went back into the entry graph"
+  );
+
+  // And it must be reachable without waiting for React to mount: blog pages
+  // carry a modulepreload for the body chunk, so the fetch starts at HTML parse.
+  const blogHtmlSample = read(path.join(DIST_DIR, "blog", `${probeSlug}.html`)) ?? "";
+  const blogHasPreload = /<link rel="modulepreload"[^>]*blog-content[^>]*>/.test(blogHtmlSample);
+  check(
+    blogHasPreload,
+    blogHasPreload
+      ? "blog pages modulepreload the body chunk (no wait for React to mount)"
+      : "blog pages do not modulepreload the body chunk — a cold article load waits for hydration; " +
+          "check getBlogBodyChunkPath() in scripts/prerender.ts"
   );
 }
 

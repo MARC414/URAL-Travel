@@ -8,6 +8,11 @@ import {
   TRIP_COSTS_DATA,
   BLOG_DATA,
 } from "../src/constants";
+// The English blog bodies were split out of constants.ts so the client can load
+// them lazily on blog routes. This script runs in Node and deliberately imports
+// them EAGERLY: the prerendered article HTML is the SEO surface, so the text has
+// to be here. verify-build.ts fails if it ever stops being emitted.
+import { BLOG_BODY } from "../src/data/blogContent";
 import {
   BASE_URL,
   breadcrumbSchema,
@@ -1547,7 +1552,8 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h1>${escapeHtml(post.title)}</h1>
           <p><em>By ${escapeHtml(post.author)} · Published ${escapeHtml(post.date)} · ${escapeHtml(post.readTime)}</em></p>
           <p>${escapeHtml(post.summary)}</p>
-          ${(Array.isArray(post.content) ? post.content : sanitizeExpiredPromoText(String(post.content || "")).split("\n\n"))
+          ${(BLOG_BODY[post.slug] || post.content || "")
+            .split("\n\n")
             .map((para) => `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`)
             .join("\n")}
           ${radicalStorageHtml}
@@ -2311,11 +2317,40 @@ ${rssItems}
   }
 }
 
+/**
+ * The English blog bodies are a lazily imported chunk (src/data/blogContent.ts).
+ * Blog routes are the only ones that need it, and on a cold load the chunk would
+ * otherwise be discovered only after React mounts. Reading Vite's build manifest
+ * lets us start the fetch during HTML parse with a modulepreload hint, which is
+ * exactly what Vite's own generated HTML would do for a static import.
+ */
+function getBlogBodyChunkPath(): string | null {
+  try {
+    const manifestPath = path.join(DIST_DIR, ".vite", "manifest.json");
+    if (!fs.existsSync(manifestPath)) return null;
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8")) as Record<
+      string,
+      { file?: string; isDynamicEntry?: boolean }
+    >;
+    for (const [key, entry] of Object.entries(manifest)) {
+      if (key.includes("data/blogContent") && entry.file) return `/${entry.file}`;
+    }
+  } catch (err) {
+    console.warn("  ! could not read the build manifest for the blog-body preload:", err);
+  }
+  return null;
+}
+
 function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
   const distIndex = path.join(DIST_DIR, "index.html");
   if (!fs.existsSync(distIndex)) return;
 
   const templateHtml = fs.readFileSync(distIndex, "utf8");
+  const blogBodyChunk = getBlogBodyChunkPath();
+  if (blogBodyChunk) {
+    console.log(`  preloading blog body chunk on blog routes: ${blogBodyChunk}`);
+  }
+  let blogPreloadCount = 0;
 
   for (const r of routes) {
     const hasCollectionNode = r.extraGraphNodes.some(
@@ -2449,6 +2484,22 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
         `  <script type="application/ld+json" data-seo-schema="true">${fullGraphJson}</script>\n  </head>`
       );
 
+    // Start the blog-body chunk download with the HTML parse on blog routes. The
+    // body itself is already in this HTML (crawl directory above), so this only
+    // affects how fast the hydrated page replaces the static copy.
+    if (
+      blogBodyChunk &&
+      /(^|\/)blog(\/|$)/.test(r.routePath) &&
+      !r.routePath.startsWith("/bn/") &&
+      pageHtml.includes("</head>")
+    ) {
+      pageHtml = pageHtml.replace(
+        "</head>",
+        `  <link rel="modulepreload" crossorigin href="${blogBodyChunk}" />\n  </head>`
+      );
+      blogPreloadCount++;
+    }
+
     if (r.routePath !== "/") {
       pageHtml = pageHtml.replace(
         /<div id="root">[\s\S]*?<\/main>\s*<\/div>/,
@@ -2464,6 +2515,17 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       const outDir = path.join(DIST_DIR, ...segments);
       fs.mkdirSync(outDir, { recursive: true });
       fs.writeFileSync(path.join(outDir, fileName), pageHtml, "utf8");
+    }
+  }
+
+  if (blogBodyChunk) {
+    console.log(`  modulepreload added to ${blogPreloadCount} blog pages`);
+    // Read once, then drop it: the manifest is a build-time artifact and nothing
+    // in the deployed site or the verify pass needs it.
+    try {
+      fs.rmSync(path.join(DIST_DIR, ".vite"), { recursive: true, force: true });
+    } catch {
+      /* non-fatal */
     }
   }
 }

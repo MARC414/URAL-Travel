@@ -9,7 +9,7 @@
 ## ✅ Status Board (single source of truth — 2026-10-04)
 
 Everything below is **committed code**, verified by `npm run build` + `npm run
-verify:build` (36 checks, incl. the cache/srcset/consent/contrast/security/gate regression guards). "Deployed" means it
+verify:build` (43 checks, incl. the cache/srcset/consent/contrast/security/gate/blog-split regression guards). "Deployed" means it
 will be live on the next Cloudflare Pages deploy of this branch — confirm with
 the Production Verification commands at the bottom of this guide.
 
@@ -43,6 +43,7 @@ the Production Verification commands at the bottom of this guide.
 | 26 | **Source maps shipped** (Lighthouse "missing source maps") | ✅ done 2026-10-04 night | `vite.config.ts` `sourcemap: true` → 16 maps (5.7 MB, DevTools-only); guarded (D.2) |
 | 27 | Console errors (CORS to `emrld.ltd/entrypoint_config`) | ⛔ **third-party defect** — report to Travelpayouts (D.1.2) | their endpoint sends no `Access-Control-Allow-Origin`; nothing in this repo can add one |
 | 28 | **Marketing-consent gate for the affiliate script (EEA/UK/CH only)** | ✅ done 2026-10-04 night (owner decision: option B) | `functions/_middleware.js` stamps `data-consent-region="eea"` on `<html>` from `cf.country`; the shell's loader waits for `ural:consent-updated` there. Non-GDPR traffic (incl. Bangladesh) is byte-for-byte unchanged; 2 shape guards + a 6-case behavioural test (D.1.3) |
+| 29 | **Blog bodies split out of `constants.ts` into a lazy chunk (P3.1)** | ✅ done 2026-10-04 night | 43 article bodies → `src/data/blogContent.ts`, `import()`ed on blog routes only; measured **330.1 → 266.1 KB gzip** of eager JS (−64.0 KB, Appendix E). Prerender still inlines every paragraph (211/211 verified); 7 new guards + 2 mutation tests |
 
 ### ⚠️ The recurring CI failure (lockfile hygiene)
 Three CI runs died in ~12s at "Install dependencies" (`fafdb27`, `4d45194`,
@@ -739,7 +740,7 @@ curl -sI https://ural-travel.pages.dev/ | grep -i x-robots-tag  # must be ABSENT
 ```bash
 npm run lint          # tsc --noEmit
 npm run build         # vite build + prerender of ~163 routes
-npm run verify:build  # 36 checks incl. srcset/consent/cache/contrast/security + gate behaviour
+npm run verify:build  # 43 checks incl. srcset/consent/cache/contrast/security/gate + blog-split guards
 ```
 
 ---
@@ -829,6 +830,12 @@ npm run preview
 - [ ] Report the emrld.ltd CORS failure to Travelpayouts support (D.1) — copy the ready-made report
 - [x] Owner decision + implementation: EEA/UK/CH-only marketing-consent gate for the affiliate script ✅ (D.1.3)
 - [ ] Verify the gate on the deployed build from an EEA IP, or with `?consent_region=eea` (D.1.4)
+- [x] **P3.1 — blog bodies split out of `constants.ts` into a lazy chunk** ✅ (2026-10-04 night — Appendix E)
+  - [x] 43 bodies → `src/data/blogContent.ts`; `content?` optional; lazy import on blog routes; skeleton placeholder
+  - [x] prerender keeps emitting the full text + `modulepreload` on the 44 blog pages; manifest removed from `dist`
+  - [x] measured −64.0 KB gzip eager JS (330.1 → 266.1); 211/211 paragraphs verified in prerendered HTML
+  - [x] 7 new guards + 2 mutation tests (36 → 43 checks)
+- [ ] P3.2 — the remaining ~55 KB gz eager `constants.ts` (route metadata/FAQs/schema): needs its own plan, not covered by E
 - [ ] Post-deploy Lighthouse/CrUX re-measure + record numbers in Status Board
 
 ---
@@ -1495,7 +1502,108 @@ must be rewritten as explicit path blocks instead of `/*`.
 
 | Item | Why it is still open |
 |---|---|
-| `errors-in-console` (the scored failure) | Travelpayouts' CORS bug (D.1.2). The consent gate (D.1.4) removes it for EEA/UK/CH visitors who have not accepted, and for every fresh lab audit; consenting visitors still see it until Travelpayouts fixes their endpoint |
+| `errors-in-console` (the scored failure) | Travelpayouts' CORS bug (D.1.2). The consent gate (D.1.4) suppresses it for EEA/UK/CH visitors who have not accepted. **Correction (2026-10-04):** it does *not* clean lab audits — PageSpeed Insights runs from Google infrastructure outside the EEA, so `cf.country` is never a GDPR region there and the script loads as before. Only a field CrUX trace from an EEA/UK/CH device, or an everywhere-scope gate, changes what an audit sees |
 | `csp-xss` / `trusted-types-xss` | Need a nonce pipeline (Cloudflare Pages Function rewriting the shell + every widget's injected script) and would have to be re-tested against GTM, the affiliate bundles and the review embeds |
 | `origin-isolation` full isolation | Needs COEP, which needs every third party to send CORP/CORS |
 | Trust & Safety scoring impact | None — informative audits do not move the category score |
+
+
+# 📎 Appendix E — The blog-body split (P3.1)
+
+**Commit:** blog bodies moved out of `src/constants.ts` into `src/data/blogContent.ts`.
+**Goal of P3:** stop shipping article text on pages that do not display it, without
+touching the SEO contract (the full text must stay in the prerendered HTML) or the
+rendered layout.
+
+## E.1 What the problem actually was
+
+`constants.ts` held `BLOG_DATA` — post metadata **and** all 43 long-form bodies —
+and it is imported eagerly by the app shell. Every route, from `/flights` to
+`/visa`, downloaded ~161 KB of article text to render none of it. Two facts made
+this the cheapest remaining win:
+
+1. **Only one runtime consumer.** `App.tsx` renders `activePost.content` on the
+   article route; nothing else reads a body. (The prerender script reads them too,
+   but that runs in Node, where code-splitting does not apply.)
+2. **The pattern already existed.** Bengali bodies live in
+   `src/data/bengaliContent.ts` (422 KB, `import()`ed when `lang === "bn"`). This
+   change makes English follow the same shape the Bengali routes have had since
+   they shipped.
+
+## E.2 The change
+
+| File | What changed |
+|---|---|
+| `src/data/blogContent.ts` | **new** — `BLOG_BODY: Record<slug, string>` with the 43 bodies, plus `getBlogBody()` |
+| `src/constants.ts` | `content:` field removed from all 43 entries (369,037 → 210,824 bytes) |
+| `src/types.ts` | `BlogPost.content?: string` — optional, with a comment pointing at the fallback |
+| `src/App.tsx` | `import("./data/blogContent")` in an effect that runs on blog sections only (idle-scheduled, 2 s timeout fallback); render site uses `activePost.content ?? blogBodies?.[slug] ?? ""`; skeleton placeholder covers the load window |
+| `src/App.tsx` | the effect is skipped when `locale === "bn"` — Bengali bodies already arrive through `bengaliContent.ts` |
+| `scripts/prerender.ts` | imports `BLOG_BODY` **eagerly** (Node) and emits the body into each `/blog/<slug>.html`; reads Vite's manifest and adds `<link rel="modulepreload">` for the body chunk on `/blog` + 43 article pages (not on `/bn/`); deletes the manifest from `dist` afterwards |
+| `vite.config.ts` | `manifest: true`; the body chunk is named `blog-content` |
+
+**The body must stay in the prerendered HTML.** Pre-hydration, a blog page shows
+the article through the "Pre-hydration SEO Crawl Directory" inside `#root`, which
+React replaces on mount. That is why the chunk is only a *hydration* concern: the
+modulepreload exists so the swap happens before a reader can notice, not to make
+content appear. If those two things are ever confused, the split gets "fixed" by
+putting the bodies back into `constants.ts`.
+
+## E.3 Measured effect
+
+Chunk sizes from `npm run build` (Vite's own gzip numbers):
+
+| Chunk | Before | After | Δ |
+|---|---|---|---|
+| `content-data` (eager) | ~121 KB gz | 193.69 KB → **55.61 KB gz** | −65 KB gz |
+| `blog-content` (lazy) | — | 161.35 KB → **65.61 KB gz** | new, blog routes only |
+| **Eager JS** (entry + `modulepreload`s in `dist/index.html`, gzip −9) | **330.1 KB gz** | **266.1 KB gz** | **−64.0 KB gz** |
+
+The "before" figure is not an estimate: it is the same codebase with one static
+`import` of `blogContent.ts` added back to `App.tsx` (mutation test E.5), measured
+by the budget guard. Source file view: `constants.ts` 116.6 → 55.3 KB gz, while
+`blogContent.ts` is 64.7 KB gz and now only fetched where it is rendered.
+
+**SEO side:** all 211 non-empty paragraphs across all 43 prerendered
+`dist/blog/<slug>.html` files are present verbatim (HTML-entity-normalised
+compare). Each article page is 27–60 KB of HTML; that did not change.
+
+## E.4 Guards added (36 → 43 checks)
+
+1. every `BLOG_DATA` slug has a non-empty body in `BLOG_BODY` (43/43);
+2. no inline body is left in `constants.ts` (the split silently undoing itself);
+3. every body slug prerenders to `dist/blog/<slug>.html`;
+4. **every paragraph** of every body appears in its prerendered page (full text,
+   not a sample — a truncated article is the realistic failure);
+5. no body text appears in the eager chunks listed in `dist/index.html`;
+6. blog pages carry a `modulepreload` for the body chunk;
+7. **eager-JS budget: ≤ 300 KB gz** (today 266.1). A new feature has room;
+   re-inlining the bodies (+64 KB) fails CI.
+
+## E.5 Mutation tests (the guards were verified, not assumed)
+
+| Mutation | Expected | Observed |
+|---|---|---|
+| prerender truncates each body to 300 chars | check 4 fails | ✗ "43 prerendered blog pages are missing body text" |
+| `App.tsx` statically imports `blogContent.ts` | checks 5 **and** 7 fail | ✗ "body text is back in the eager chunks" + ✗ "330.1 KB gzip, over the 300 KB budget" |
+
+Both mutations were reverted and the suite is green again at 43/43.
+
+## E.6 What this does *not* do (remaining P3)
+
+- `constants.ts` is still ~211 KB raw / 55.3 KB gz and still eager (it now holds
+  route metadata, flight/hotel/visa tables, FAQs, schema markup). Splitting that
+  further means per-section metadata modules and is a bigger, riskier change — it
+  is not covered by this commit.
+- `TravelpayoutsWidget.jsx` (129 KB gz) is untouched; per §5 of
+  `docs/growth/06-core-web-vitals.md` it needs explicit owner approval.
+- No CSS, layout, class or copy change. The only markup added is the loading
+  skeleton, which is `aria-hidden` with an `sr-only` label and is not rendered
+  once the body resolves.
+
+## E.7 Rollback
+
+Single commit. Reverting restores the bodies to `constants.ts` and the eager
+import; the prerender path falls back to `post.content`, so SEO output is
+unaffected either way. No data migration, no cache-versioning change (the chunk
+name is content-hashed like every other asset).

@@ -1164,6 +1164,35 @@ export default function App() {
 
   const { section, parameterId, isLanding, isAdmin, locale } = getRouteDetails();
 
+  // English blog bodies live in their own module (src/data/blogContent.ts) so the
+  // ~161 KB of article text is not part of every page's initial download. It is
+  // fetched when a blog section is on screen — that covers both the article route
+  // and the list route (so clicking a card is instant) — and never on the other
+  // 122 routes. Idle scheduling keeps the fetch out of the critical path; the
+  // fallback timer guarantees it still happens on browsers without
+  // requestIdleCallback. Mirrors how ./data/bengaliContent is loaded for /bn/*.
+  const [blogBodies, setBlogBodies] = useState<Readonly<Record<string, string>> | null>(null);
+  useEffect(() => {
+    if (section !== "blog" || locale === "bn" || blogBodies) return;
+    let cancelled = false;
+    const load = () => {
+      import("./data/blogContent").then((mod) => {
+        if (!cancelled) setBlogBodies(mod.BLOG_BODY);
+      });
+    };
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number };
+    if (typeof w.requestIdleCallback === "function") {
+      w.requestIdleCallback(load, { timeout: 2000 });
+    } else {
+      const timer = window.setTimeout(load, 0);
+      return () => window.clearTimeout(timer);
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, [section, locale, blogBodies]);
+
+
   // Keep React state in lockstep with the URL locale — covers back/forward
   // navigation between /umrah and /bn/umrah as well as direct deep links.
   useEffect(() => {
@@ -5718,6 +5747,11 @@ export default function App() {
           <div className="space-y-8 animate-fade-in">
             {(() => {
               const activePost = localizedBlogs.find((p) => p.slug === parameterId) || localizedBlogs[0];
+              // Body text: Bengali posts carry it inline in BLOG_DATA, English posts
+              // get it from the lazily loaded ./data/blogContent module (see the
+              // effect near the top of the component). Empty until that module
+              // resolves — the placeholder above covers that window.
+              const articleBody = activePost.content ?? blogBodies?.[activePost.slug] ?? "";
               const activeCoverImg = getBlogCoverImage(activePost.slug);
               const sameCategoryPosts = localizedBlogs.filter(
                 (p) => p.slug !== activePost.slug && p.category === activePost.category
@@ -6086,7 +6120,24 @@ export default function App() {
 
                       {/* Full Long-Form Verified Guide Content with Dark H2 (24px–26px), Dark H3 (19px–21px) & 16px Body */}
                       <div className="max-w-none text-slate-800 leading-[1.8] space-y-6 text-[16px] sm:text-[17px] font-sans">
-                        {sanitizeExpiredPromoText(activePost.content).split("\n\n").map((block, bIdx) => {
+                        {!articleBody && (
+                          // The body module is a separate chunk. On a cold article load it is
+                          // already being fetched (prerender injects a modulepreload for blog
+                          // routes), so this placeholder is normally invisible; it exists so a
+                          // slow connection never renders an empty article.
+                          <div className="space-y-4 animate-pulse" aria-hidden="true" data-blog-body-placeholder>
+                            {[0, 1, 2, 3, 4].map((i) => (
+                              <div
+                                key={i}
+                                className={`h-4 rounded bg-slate-200 ${i % 3 === 2 ? "w-2/3" : "w-full"}`}
+                              />
+                            ))}
+                            <span className="sr-only">
+                              {isBn ? "গাইড লোড হচ্ছে…" : "Loading the guide…"}
+                            </span>
+                          </div>
+                        )}
+                        {articleBody && sanitizeExpiredPromoText(articleBody).split("\n\n").map((block, bIdx) => {
                           const trimmed = block.trim();
                           if (!trimmed) return null;
 

@@ -49,6 +49,11 @@ export default defineConfig(() => {
             if (id.includes('src/constants')) {
               return 'content-data';
             }
+            // Dynamically imported from App.tsx on blog routes only. Naming it here
+            // keeps the chunk findable in the build manifest across refactors.
+            if (id.includes('src/data/blogContent')) {
+              return 'blog-content';
+            }
             return undefined;
           },
         },
@@ -56,6 +61,11 @@ export default defineConfig(() => {
       // Surface regressions instead of silently shipping another large bundle.
       chunkSizeWarningLimit: 250,
       cssCodeSplit: true,
+      // The prerender pass reads this to emit a <link rel="modulepreload"> for the
+      // lazily imported blog-body chunk, so a cold article load starts fetching it
+      // during HTML parse instead of waiting for React to mount. It is deleted from
+      // dist right after prerendering (see scripts/prerender.ts).
+      manifest: true,
     },
     server: {
       allowedHosts: ['.e2b.app'],
