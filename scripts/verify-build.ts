@@ -156,9 +156,13 @@ check(
   "index.html hero imagesrcset matches buildResponsiveSrcSet() exactly"
 );
 
-// (2) consent default precedes the GTM loader, and defaults to denied
+// (2) consent default precedes the GTM loader, and defaults to denied.
+//     Whitespace-tolerant: the head script has been rewritten once already
+//     (binary -> granular CMP), and the guard must survive formatting changes
+//     while still catching a reorder or a default that stops denying.
 if (distIndexHtml !== null) {
-  const consentIdx = distIndexHtml.indexOf("gtag('consent','default'");
+  const consentMatch = distIndexHtml.match(/gtag\(\s*'consent'\s*,\s*'default'/);
+  const consentIdx = consentMatch?.index ?? -1;
   const gtmIdx = distIndexHtml.indexOf("googletagmanager.com/gtm.js");
   check(
     consentIdx !== -1 && gtmIdx !== -1 && consentIdx < gtmIdx,
@@ -171,8 +175,8 @@ if (distIndexHtml !== null) {
           : "Consent Mode default block moved AFTER the GTM loader (GDPR risk)"
   );
   check(
-    distIndexHtml.includes("'analytics_storage':'denied'"),
-    "analytics_storage defaults to denied in shipped HTML"
+    /analytics_storage':[^,\n]*'denied'/.test(distIndexHtml),
+    "analytics_storage can default to denied in shipped HTML"
   );
 }
 

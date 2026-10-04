@@ -1,26 +1,14 @@
 /// <reference types="vite/client" />
 
 /**
- * Consent Mode v2 bridge injected by the inline script in index.html and
- * consumed by src/components/ConsentBanner.tsx.
+ * Ambient window globals for analytics / consent tooling.
  *
- * `window.dataLayer` and `window.gtag` are deliberately NOT declared here:
- * src/utils/analytics.ts already owns those ambient declarations, and two
- * `interface Window` blocks with differing optionality/types are a TS2687
- * compile error. Keep them there, keep this one here.
+ * `window.dataLayer` and `window.gtag` are declared in src/utils/analytics.ts
+ * and MUST stay there: two `interface Window` blocks with differing
+ * optionality/types are a TS2687 compile error (this file carried a duplicate
+ * copy once and broke `tsc`).
+ *
+ * The Consent Mode v2 head script in index.html and the granular consent UI
+ * in src/components/ConsentBanner.tsx use only those two globals plus
+ * localStorage and CustomEvent, so nothing else needs declaring here.
  */
-interface Window {
-  uralConsent?: {
-    storageKey: string;
-    /** Stored raw choice: "accepted" | "declined" | null when untouched. */
-    read: () => string | null;
-    /** Push a `consent update` command without persisting the choice. */
-    apply: (granted: boolean) => void;
-    /** Persist the choice and push the matching `consent update`. */
-    choose: (granted: boolean) => void;
-    /** Forget the stored choice (used by tests / manual resets). */
-    reset: () => void;
-    /** Re-open the banner so consent can be withdrawn; set by ConsentBanner. */
-    openBanner?: () => void;
-  };
-}

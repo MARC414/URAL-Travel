@@ -1,120 +1,366 @@
-import { useCallback, useEffect, useState } from "react";
-
-/**
- * GDPR / ePrivacy cookie-consent banner, the UI half of Google Consent Mode v2.
- *
- * The other half lives in index.html: an inline script that sets every storage
- * type to `denied` BEFORE GTM loads and re-applies any stored choice
- * synchronously. This component therefore only ever renders for visitors with
- * no stored choice — it is invisible (zero DOM nodes) for everyone else, which
- * keeps it out of the CLS and LCP budget entirely.
- *
- * Design constraints that shaped this file:
- *  - Never import or wait for `window.gtag` directly. GTM is deferred until
- *    first interaction or 3s, so `gtag` may not exist when the user clicks.
- *    All consent writes go through `window.uralConsent`, which the inline head
- *    script guarantees exists and which pushes straight into `dataLayer`
- *    (GTM replays the queue when it boots).
- *  - localStorage is wrapped in try/catch (Safari private mode throws), and a
- *    throw must never block the consent update itself.
- *  - The bar is `position: fixed`, so appearing/disappearing cannot shift
- *    layout — fixed overlays do not move other elements.
- *  - No dark patterns: Decline is equally prominent, nothing is pre-selected,
- *    and the choice can be withdrawn later via the footer "Cookie settings"
- *    button, which calls window.uralConsent.openBanner().
- *
- * See GTM_CONSENT_MODE_INTEGRATION.md for the compliance checklist.
- */
-
-type ConsentLang = "en" | "bn";
+import React, { useState, useEffect } from "react";
+import { ShieldCheck, Cookie, Settings2, Check, X, ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
+import { Language } from "../translations";
 
 interface ConsentBannerProps {
-  /** UI language of the surrounding page, mirroring App's locale state. */
-  lang?: ConsentLang;
+  onNavigate?: (path: string) => void;
+  lang?: Language;
 }
 
-const COPY = {
-  en: {
-    title: "We value your privacy",
-    body:
-      "We use cookies to remember your preferences and, only if you allow it, to measure how our travel guides are used. Declining changes nothing about your experience on URAL.",
-    accept: "Accept all",
-    decline: "Decline",
-    ariaLabel: "Cookie consent",
-  },
-  bn: {
-    title: "আপনার গোপনীয়তা আমাদের কাছে গুরুত্বপূর্ণ",
-    body:
-      "আপনার পছন্দ মনে রাখতে আমরা কুকি ব্যবহার করি এবং আপনি অনুমতি দিলেই কেবল আমাদের ট্রাভেল গাইডগুলো কীভাবে ব্যবহৃত হয় তা পরিমাপ করি। প্রত্যাখ্যান করলে URAL-এ আপনার অভিজ্ঞতায় কোনো পরিবর্তন হবে না।",
-    accept: "সব গ্রহণ করুন",
-    decline: "প্রত্যাখ্যান",
-    ariaLabel: "কুকি সম্মতি",
-  },
-} as const;
+export type ConsentStatus = "accepted" | "declined" | "custom";
 
-export function ConsentBanner({ lang = "en" }: ConsentBannerProps) {
+export interface GranularConsentSettings {
+  necessary: boolean; // Always true
+  analytics: boolean;
+  marketing: boolean;
+  functionality: boolean;
+}
+
+const DEFAULT_GRANULAR: GranularConsentSettings = {
+  necessary: true,
+  analytics: true,
+  marketing: false,
+  functionality: true,
+};
+
+export function updateGoogleConsentMode(granted: boolean | GranularConsentSettings) {
+  if (typeof window === "undefined") return;
+
+  window.dataLayer = window.dataLayer || [];
+  if (typeof window.gtag !== "function") {
+    window.gtag = function (...args: unknown[]) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(args as unknown as Record<string, unknown>);
+    };
+  }
+
+  let analyticsGranted = false;
+  let marketingGranted = false;
+  let funcGranted = true;
+
+  if (typeof granted === "boolean") {
+    analyticsGranted = granted;
+    marketingGranted = granted;
+    funcGranted = granted;
+  } else {
+    analyticsGranted = Boolean(granted.analytics);
+    marketingGranted = Boolean(granted.marketing);
+    funcGranted = Boolean(granted.functionality);
+  }
+
+  const consentPayload = {
+    ad_storage: marketingGranted ? "granted" : "denied",
+    ad_user_data: marketingGranted ? "granted" : "denied",
+    ad_personalization: marketingGranted ? "granted" : "denied",
+    analytics_storage: analyticsGranted ? "granted" : "denied",
+    functionality_storage: funcGranted ? "granted" : "denied",
+    personalization_storage: funcGranted ? "granted" : "denied",
+    security_storage: "granted", // Always granted for site security & spam prevention
+  };
+
+  window.gtag("consent", "update", consentPayload);
+
+  window.dataLayer.push({
+    event: "consent_update",
+    consent_status: typeof granted === "boolean" ? (granted ? "accepted" : "declined") : "custom",
+    consent_details: consentPayload,
+  });
+
+  window.dispatchEvent(
+    new CustomEvent("ural:consent-updated", {
+      detail: {
+        status: typeof granted === "boolean" ? (granted ? "accepted" : "declined") : "custom",
+        payload: consentPayload,
+      },
+    })
+  );
+}
+
+export function ConsentBanner({ onNavigate, lang = "en" }: ConsentBannerProps) {
   const [visible, setVisible] = useState(false);
+  const [showCustomize, setShowCustomize] = useState(false);
+  const [settings, setSettings] = useState<GranularConsentSettings>(DEFAULT_GRANULAR);
 
-  // Show the bar only when no choice exists yet. The head script has already
-  // applied a stored choice, so there is nothing to do on repeat visits.
+  const isBn = lang === "bn";
+  const privacyPath = isBn ? "/bn/privacy" : "/privacy";
+
   useEffect(() => {
-    const api = window.uralConsent;
-    if (!api) return;
-    if (api.read() === null) setVisible(true);
+    // Check if user has already stored consent
+    try {
+      const stored = localStorage.getItem("cookie-consent");
+      if (!stored) {
+        // Small delay so page renders first without layout jank
+        const timer = setTimeout(() => setVisible(true), 800);
+        return () => clearTimeout(timer);
+      } else {
+        // Apply existing choice to GTM on mount
+        if (stored === "accepted") {
+          updateGoogleConsentMode(true);
+        } else if (stored === "declined") {
+          updateGoogleConsentMode(false);
+        } else {
+          try {
+            const parsed = JSON.parse(localStorage.getItem("cookie-consent-settings") || "{}");
+            updateGoogleConsentMode(parsed);
+          } catch {
+            updateGoogleConsentMode(false);
+          }
+        }
+      }
+    } catch {
+      setVisible(true);
+    }
   }, []);
 
-  // Let the footer's "Cookie settings" control re-open the banner so consent
-  // can be withdrawn (GDPR Art. 7(3)). Registered here, next to the state it
-  // manipulates, instead of scattered across App.tsx.
+  // Listen for global reopen requests (e.g. from Privacy Policy page "Change Preferences" button)
   useEffect(() => {
-    const api = window.uralConsent;
-    if (!api) return;
-    api.openBanner = () => setVisible(true);
+    const handleReopen = () => {
+      setVisible(true);
+      setShowCustomize(true);
+    };
+    window.addEventListener("ural:open-cookie-banner", handleReopen);
     return () => {
-      if (window.uralConsent) window.uralConsent.openBanner = undefined;
+      window.removeEventListener("ural:open-cookie-banner", handleReopen);
     };
   }, []);
 
-  const decide = useCallback((granted: boolean) => {
-    window.uralConsent?.choose(granted);
+  const handleAcceptAll = () => {
+    try {
+      localStorage.setItem("cookie-consent", "accepted");
+      localStorage.setItem(
+        "cookie-consent-settings",
+        JSON.stringify({
+          necessary: true,
+          analytics: true,
+          marketing: true,
+          functionality: true,
+        })
+      );
+    } catch {
+      // storage unavailable in strict private mode
+    }
+    updateGoogleConsentMode(true);
     setVisible(false);
-  }, []);
+  };
+
+  const handleDeclineNonEssential = () => {
+    try {
+      localStorage.setItem("cookie-consent", "declined");
+      localStorage.setItem(
+        "cookie-consent-settings",
+        JSON.stringify({
+          necessary: true,
+          analytics: false,
+          marketing: false,
+          functionality: false,
+        })
+      );
+    } catch {
+      // storage unavailable
+    }
+    updateGoogleConsentMode(false);
+    setVisible(false);
+  };
+
+  const handleSaveCustom = () => {
+    try {
+      localStorage.setItem("cookie-consent", "custom");
+      localStorage.setItem("cookie-consent-settings", JSON.stringify(settings));
+    } catch {
+      // storage unavailable
+    }
+    updateGoogleConsentMode(settings);
+    setVisible(false);
+  };
+
+  const handlePrivacyClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate(privacyPath);
+    } else {
+      window.location.href = privacyPath;
+    }
+  };
 
   if (!visible) return null;
 
-  const t = COPY[lang];
-
   return (
-    <div
-      role="dialog"
-      aria-label={t.ariaLabel}
-      aria-live="polite"
-      className="fixed inset-x-0 bottom-0 z-[60] px-3 pb-3 sm:px-4 sm:pb-4"
+    <aside
+      role="region"
+      aria-label={isBn ? "কুকি ও গোপনীয়তা সম্মতি ব্যানার" : "Cookie and Privacy Consent Banner"}
+      className="fixed bottom-0 inset-x-0 z-50 p-3 sm:p-4 md:p-6 bg-slate-950/95 backdrop-blur-xl border-t border-[#F6B73C]/30 shadow-[0_-10px_35px_rgba(0,0,0,0.6)] text-slate-200 animate-fade-in font-sans"
     >
-      <div className="mx-auto max-w-[1200px] rounded-2xl border border-white/10 bg-brand-navy/95 text-white shadow-2xl backdrop-blur-md">
-        <div className="flex flex-col gap-4 p-4 sm:p-5 md:flex-row md:items-center md:justify-between">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold text-brand-gold">{t.title}</p>
-            <p className="mt-1 text-xs leading-relaxed text-slate-300">{t.body}</p>
+      <div className="max-w-7xl mx-auto space-y-4">
+        {/* Main Banner Bar */}
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+          {/* Icon & Message */}
+          <div className="flex items-start gap-3.5 max-w-4xl">
+            <div className="p-2.5 bg-[#F6B73C]/10 border border-[#F6B73C]/30 text-[#F6B73C] rounded-xl shrink-0 mt-0.5">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div className="space-y-1 text-xs leading-relaxed">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="font-bold text-white text-sm">
+                  {isBn ? "আপনার গোপনীয়তা ও নিরাপদ ভ্রমণ" : "Your Privacy & Travel Safety"}
+                </span>
+                <span className="text-[10px] font-mono uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-semibold">
+                  Google Consent Mode v2
+                </span>
+              </div>
+              <p className="text-slate-300">
+                {isBn ? (
+                  <>
+                    URAL Travel Intelligence প্ল্যাটফর্মের নিরাপত্তা বজায় রাখতে এবং আপনার পছন্দের মুদ্রা ও ভাষা মনে রাখতে প্রয়োজনীয় কুকি ব্যবহার করে। আপনার সম্মতি অনুযায়ী আমরা অ্যানালিটিক্স (GA4 ও GTM) ব্যবহার করি যাতে বিমান ভাড়া ও ভিসা গাইডের নির্ভুলতা উন্নত করা যায়। আমরা কখনই কোনো ব্যক্তিগত ডেটা বা ক্রেডিট কার্ড তথ্য বিক্রি বা শেয়ার করি না। বিস্তারিত জানতে আমাদের{" "}
+                    <a
+                      href={privacyPath}
+                      onClick={handlePrivacyClick}
+                      className="text-[#F6B73C] font-semibold underline underline-offset-2 hover:text-[#ffd26a] inline-flex items-center gap-0.5 transition-colors cursor-pointer"
+                    >
+                      গোপনীয়তা ও কুকি নীতিমালা
+                      <ExternalLink className="w-3 h-3 inline ml-0.5" />
+                    </a>{" "}
+                    পড়ুন।
+                  </>
+                ) : (
+                  <>
+                    URAL Travel Intelligence uses essential cookies to ensure secure platform operation and remember your currency &amp; language preferences. With your consent, we use privacy-conscious analytics (Google Analytics 4 &amp; GTM Consent Mode v2) to refine our flight benchmark schedules and visa guides. We never sell your personal data or store payment credentials. For full details, review our{" "}
+                    <a
+                      href={privacyPath}
+                      onClick={handlePrivacyClick}
+                      className="text-[#F6B73C] font-semibold underline underline-offset-2 hover:text-[#ffd26a] inline-flex items-center gap-0.5 transition-colors cursor-pointer"
+                    >
+                      Privacy &amp; Cookie Policy
+                      <ExternalLink className="w-3 h-3 inline ml-0.5" />
+                    </a>
+                    .
+                  </>
+                )}
+              </p>
+            </div>
           </div>
-          <div className="flex shrink-0 items-center gap-2 md:flex-col md:items-stretch lg:flex-row lg:items-center">
+
+          {/* Action Button Strip */}
+          <div className="flex items-center gap-2 w-full lg:w-auto shrink-0 flex-wrap sm:flex-nowrap justify-end">
             <button
               type="button"
-              onClick={() => decide(false)}
-              className="min-h-[42px] flex-1 rounded-xl border border-white/20 px-4 text-xs font-bold text-slate-200 transition-colors hover:bg-white/10 cursor-pointer md:flex-none"
+              onClick={() => setShowCustomize(!showCustomize)}
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white transition-all cursor-pointer"
             >
-              {t.decline}
+              <Settings2 className="w-3.5 h-3.5" />
+              <span>{isBn ? "পছন্দ কাস্টমাইজ" : "Customize"}</span>
+              {showCustomize ? (
+                <ChevronUp className="w-3.5 h-3.5 ml-0.5" />
+              ) : (
+                <ChevronDown className="w-3.5 h-3.5 ml-0.5" />
+              )}
             </button>
+
             <button
               type="button"
-              onClick={() => decide(true)}
-              className="min-h-[42px] flex-1 rounded-xl bg-brand-gold px-4 text-xs font-bold text-brand-navy transition-colors hover:bg-brand-gold-dark cursor-pointer md:flex-none"
+              onClick={handleDeclineNonEssential}
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center px-3.5 py-2 text-xs font-semibold rounded-xl bg-slate-900 border border-slate-700 hover:bg-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer"
             >
-              {t.accept}
+              {isBn ? "প্রয়োজনীয় ছাড়া প্রত্যাখ্যান" : "Essential Only"}
+            </button>
+
+            <button
+              type="button"
+              onClick={handleAcceptAll}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy shadow-md hover:shadow-lg transition-all cursor-pointer"
+            >
+              <Check className="w-3.5 h-3.5 stroke-[3]" />
+              <span>{isBn ? "সব গ্রহণ করুন" : "Accept All"}</span>
             </button>
           </div>
         </div>
+
+        {/* Expandable Granular Consent Customization Panel */}
+        {showCustomize && (
+          <div className="pt-4 mt-2 border-t border-slate-800 grid grid-cols-1 md:grid-cols-3 gap-3 animate-fade-in text-xs">
+            {/* 1. Necessary (Always Active) */}
+            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-white flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  {isBn ? "প্রয়োজনীয় কুকি (আবশ্যক)" : "Strictly Necessary"}
+                </span>
+                <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">
+                  {isBn ? "সর্বদা সক্রিয়" : "Always Active"}
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-snug">
+                {isBn
+                  ? "প্ল্যাটফর্ম নিরাপত্তা, ক্লাউডফ্লেয়ার ডিফেন্স, ভাষা ও মুদ্রা সিলেকশন বজায় রাখার জন্য আবশ্যক।"
+                  : "Required for core security, Cloudflare edge shielding, CSRF token handling, and language/currency settings."}
+              </p>
+            </div>
+
+            {/* 2. Analytics & Performance */}
+            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-white flex items-center gap-1.5">
+                  <Cookie className="w-3.5 h-3.5 text-[#F6B73C]" />
+                  {isBn ? "অ্যানালিটিক্স ও পারফরম্যান্স" : "Analytics & Performance"}
+                </span>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={settings.analytics}
+                    onChange={(e) =>
+                      setSettings({ ...settings, analytics: e.target.checked })
+                    }
+                    className="sr-only peer"
+                  />
+                  <div className="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#F6B73C]"></div>
+                </label>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-snug">
+                {isBn
+                  ? "গুগল অ্যানালিটিক্স ৪ ও ট্যাগ ম্যানেজার দ্বারা ভিজিট সংখ্যা ও জনপ্রিয় ট্রাভেল গাইডের পারফরম্যান্স পরিমাপ করা হয়।"
+                  : "Google Analytics 4 & GTM anonymous telemetry to measure route popularity and optimize flight schedules."}
+              </p>
+            </div>
+
+            {/* 3. Marketing & Partner Personalization */}
+            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-white flex items-center gap-1.5">
+                  <Settings2 className="w-3.5 h-3.5 text-blue-400" />
+                  {isBn ? "পার্টনার রেফারেল ও অফার" : "Partner Referral & Offers"}
+                </span>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={settings.marketing}
+                    onChange={(e) =>
+                      setSettings({ ...settings, marketing: e.target.checked })
+                    }
+                    className="sr-only peer"
+                  />
+                  <div className="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#F6B73C]"></div>
+                </label>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-snug">
+                {isBn
+                  ? "Travelpayouts, Aviasales, Klook ও Airalo-তে ডিসকাউন্ট ও ট্র্যাকিং সক্ষম করে। কোনো ব্যক্তিগত তথ্য থাকে না।"
+                  : "Enables secure partner attribution with Travelpayouts, Aviasales & Klook for booking referrals."}
+              </p>
+            </div>
+
+            {/* Save Preferences Button */}
+            <div className="md:col-span-3 flex justify-end gap-2 pt-2">
+              <button
+                type="button"
+                onClick={handleSaveCustom}
+                className="px-4 py-1.5 rounded-xl bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy font-bold text-xs shadow transition-all cursor-pointer"
+              >
+                {isBn ? "পছন্দ সংরক্ষণ করুন" : "Save Preferences"}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+    </aside>
   );
 }
+export default ConsentBanner;

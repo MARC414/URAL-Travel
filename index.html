@@ -186,60 +186,24 @@
       }
     </script>
 
-    <!--
-      Google Consent Mode v2 — default state.
-      MUST run before any Google tag fires, including the deferred GTM loader
-      below, so no cookie is set and no hit leaves the browser before the user
-      has chosen. All storage types start `denied` (security_storage is
-      exempt: Google marks it non-negotiable). `wait_for_update` holds tags
-      for 500ms so a consent state that is already known can land first.
-
-      If the visitor chose before, the stored choice is re-applied
-      synchronously HERE — not in React — so repeat visits never spend the
-      500ms window in the wrong state and GTM boots with the right consent.
-
-      The banner (src/components/ConsentBanner.tsx) drives the same public
-      API via window.uralConsent.{choose,apply,read,openBanner}.
-      Guide: GTM_CONSENT_MODE_INTEGRATION.md
-    -->
+    <!-- Google Consent Mode v2 - Default State before GTM loads -->
     <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
       (function(){
-        var KEY='ural-cookie-consent';
-        var CONSENT_TYPES=['ad_storage','ad_user_data','ad_personalization','analytics_storage','functionality_storage','personalization_storage'];
-        var defaults={
-          'ad_storage':'denied',
-          'ad_user_data':'denied',
-          'ad_personalization':'denied',
-          'analytics_storage':'denied',
-          'functionality_storage':'denied',
-          'personalization_storage':'denied',
-          'security_storage':'granted',
-          'wait_for_update':500
-        };
-        window.dataLayer=window.dataLayer||[];
-        window.gtag=function(){dataLayer.push(arguments);};
-        function read(){try{return window.localStorage.getItem(KEY);}catch(e){return null;}}
-        var saved=read();
-        if(saved==='accepted'||saved==='declined'){
-          var v=saved==='accepted'?'granted':'denied';
-          for(var i=0;i<CONSENT_TYPES.length;i++){defaults[CONSENT_TYPES[i]]=v;}
-          delete defaults.wait_for_update;
-        }
-        window.gtag('consent','default',defaults);
-        window.uralConsent={
-          storageKey:KEY,
-          read:read,
-          apply:function(granted){
-            var v=granted?'granted':'denied',u={},i;
-            for(i=0;i<CONSENT_TYPES.length;i++){u[CONSENT_TYPES[i]]=v;}
-            window.gtag('consent','update',u);
-          },
-          choose:function(granted){
-            try{window.localStorage.setItem(KEY,granted?'accepted':'declined');}catch(e){}
-            this.apply(granted);
-          },
-          reset:function(){try{window.localStorage.removeItem(KEY);}catch(e){}}
-        };
+        var stored = null;
+        try { stored = localStorage.getItem('cookie-consent'); } catch(e){}
+        var isGranted = stored === 'accepted';
+        gtag('consent', 'default', {
+          'ad_storage': isGranted ? 'granted' : 'denied',
+          'ad_user_data': isGranted ? 'granted' : 'denied',
+          'ad_personalization': isGranted ? 'granted' : 'denied',
+          'analytics_storage': isGranted ? 'granted' : 'denied',
+          'functionality_storage': isGranted ? 'granted' : 'denied',
+          'personalization_storage': isGranted ? 'granted' : 'denied',
+          'security_storage': 'granted',
+          'wait_for_update': 500
+        });
       })();
     </script>
 

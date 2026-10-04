@@ -1192,6 +1192,44 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
             );
           })}
         </nav>
+
+        {/* Core Platform Hubs & Legal Transparency */}
+        <div className="pt-6 border-t border-slate-200">
+          <h3 className="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-3">
+            {isBn ? "🏛️ মূল প্ল্যাটফর্ম হাব ও আইনগত তথ্য" : "🏛️ Core Platform Hubs & Legal Information"}
+          </h3>
+          <div className="flex flex-wrap gap-2 text-xs">
+            {[
+              { path: "/", en: "Home (ঢাকা ফ্লাইট হাব)", bn: "হোম (ঢাকা ফ্লাইট হাব)" },
+              { path: "/flights", en: "Flight Guides", bn: "ফ্লাইট গাইড" },
+              { path: "/hotels", en: "Hotel Neighborhoods", bn: "হোটেল এলাকা" },
+              { path: "/visa", en: "Visa Requirements", bn: "ভিসা চেকলিস্ট" },
+              { path: "/destinations", en: "Destination Itineraries", bn: "গন্তব্য ভ্রমণ গাইড" },
+              { path: "/costs", en: "Trip Cost Calculators (BDT)", bn: "ভ্রমণ খরচ ক্যালকুলেটর" },
+              { path: "/experiences", en: "Attractions & Passes", bn: "আকর্ষণ ও টিকিট" },
+              { path: "/umrah", en: "DIY Umrah & Hajj Hub", bn: "উমরাহ ও হজ হাব" },
+              { path: "/tools", en: "Interactive Travel Tools", bn: "ইন্টারেক্টিভ ট্রাভেল টুলস" },
+              { path: "/contact", en: "Contact & WhatsApp Desk", bn: "যোগাযোগ ও হোয়াটসঅ্যাপ" },
+              { path: "/privacy", en: "Privacy & Cookie Policy (গোপনীয়তা ও কুকি নীতিমালা)", bn: "গোপনীয়তা ও কুকি নীতিমালা (Privacy & Cookie Policy)" },
+            ].map((hub) => (
+              <a
+                key={hub.path}
+                href={hub.path}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate(hub.path);
+                }}
+                className={`px-3 py-1.5 rounded-xl border text-xs font-medium transition-colors ${
+                  hub.path === "/privacy"
+                    ? "bg-[#F6B73C]/15 border-[#F6B73C] text-brand-navy font-bold hover:bg-[#F6B73C]/25"
+                    : "bg-slate-100/80 hover:bg-slate-200/80 border-slate-200 text-slate-700 hover:text-slate-900"
+                }`}
+              >
+                {isBn ? hub.bn : hub.en}
+              </a>
+            ))}
+          </div>
+        </div>
       </section>
     </div>
   );

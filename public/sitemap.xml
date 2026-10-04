@@ -349,6 +349,15 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://ural-travel.pages.dev/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/privacy" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/privacy" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://ural-travel.pages.dev/blog</loc>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog" />
@@ -1046,6 +1055,15 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/contact" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/contact" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/contact" />
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/privacy" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/privacy" />
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

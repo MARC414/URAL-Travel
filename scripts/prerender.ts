@@ -1373,7 +1373,47 @@ function buildAllRoutes(): PrerenderRoute[] {
     `,
   });
 
-  // 12. Blog Hub (/blog) + 41 Blog Guides (/blog/:slug)
+  // 12. Privacy & Cookie Policy (/privacy)
+  routes.push({
+    routePath: "/privacy",
+    canonicalUrl: `${BASE_URL}/privacy`,
+    title: "Privacy & Cookie Policy | URAL Travel Intelligence",
+    description:
+      "Official Privacy and Cookie Policy of URAL Travel Intelligence. Learn how we handle visitor telemetry, Google Tag Manager, GA4 Consent Mode v2, and affiliate disclosures.",
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "Privacy & Cookie Policy", url: `${BASE_URL}/privacy` },
+    ],
+    extraGraphNodes: [
+      webPageSchema({
+        url: `${BASE_URL}/privacy`,
+        name: "Privacy & Cookie Policy | URAL Travel Intelligence",
+        description:
+          "Official Privacy and Cookie Policy of URAL Travel Intelligence. Learn how we handle visitor telemetry, Google Tag Manager, GA4 Consent Mode v2, and affiliate disclosures.",
+      }),
+    ],
+    bodyHtml: `
+      <article>
+        <h1>Privacy &amp; Cookie Policy — URAL Travel Intelligence</h1>
+        <p>This Privacy and Cookie Policy outlines how URAL Travel Intelligence collects, processes, and protects visitor data, our Google Consent Mode v2 compliance architecture, and our commercial affiliate partner relationships.</p>
+        <section>
+          <h2>1. Data Controller &amp; Editorial Identity</h2>
+          <p>URAL Travel Intelligence (https://ural-travel.pages.dev) is an independent travel intelligence publisher. We do not sell flight tickets directly or process passenger credit card transactions on our infrastructure.</p>
+        </section>
+        <section>
+          <h2>2. Google Tag Manager &amp; Consent Mode v2</h2>
+          <p>We deploy Google Tag Manager (GTM-TMPVL82B) with Consent Mode v2 default denial. Analytical and marketing storage are only activated after explicit user consent.</p>
+        </section>
+        <section>
+          <h2>3. Affiliate Partnerships &amp; FTC Transparency</h2>
+          <p>URAL participates in Travelpayouts, Aviasales, Hotellook, Klook, KKday, Airalo, and other affiliate programs. Outbound links may earn referral commissions at zero added cost to visitors.</p>
+        </section>
+      </article>
+    `,
+  });
+
+  // 13. Blog Hub (/blog) + 41 Blog Guides (/blog/:slug)
   const blogHubTitle =
     "Travel Guides, Umrah Preparation & Outbound Intelligence for Bangladesh (2026) | URAL Blog";
   const blogHubDesc =
@@ -2118,6 +2158,15 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           sku: "tiqets-paris-bundle-2026",
           brandName: "Tiqets",
           priceBdt: 9800,
+        })
+      );
+    } else if (englishPath === "/privacy") {
+      extraGraphNodes.push(
+        webPageSchema({
+          url: canonicalUrl,
+          name: copy.title,
+          description: copy.description,
+          inLanguage: "bn-BD",
         })
       );
     } else if (

@@ -2,11 +2,11 @@
 **Required For:** GDPR/ePR Compliance  
 **Affects:** EU visitors + Bangladesh users visiting from EU  
 **Priority:** CRITICAL (Legal Requirement)  
-**Status:** ✅ TECHNICAL IMPLEMENTATION COMPLETE (2026-10-04) — banner, head
-default state, withdrawal path and CI guard all shipped and smoke-tested.
-⛔ LEGAL STEP STILL OPEN: the privacy/cookie policy page does not exist yet;
-the banner deliberately ships without a policy link rather than linking to a
-404. Create the page, then add the link in `ConsentBanner.tsx`.
+**Status:** ✅ COMPLETE (2026-10-04) — granular consent UI (`ConsentBanner.tsx`
+with per-category panel), head default-state script, withdrawal paths (footer
+"Cookie settings" + Privacy Policy "Change Preferences"), privacy/cookie
+policy page (`/privacy`, `/bn/privacy`) and CI guard all shipped. Remaining:
+post-deploy DevTools/GA4 verification only.
 
 > **Deviation from the snippets below (deliberate):** the GTM loader stays
 > *deferred* (first interaction or 3s) instead of being replaced by the
@@ -14,7 +14,10 @@ the banner deliberately ships without a policy link rather than linking to a
 > give back the ~180ms TBT win from the Core Web Vitals work. Consent Mode
 > works identically because the default-state script still runs first and
 > `dataLayer` replays when GTM boots. Consent writes go through
-> `window.uralConsent`, not a bare `window.gtag` call, for the same reason.
+> `updateGoogleConsentMode()` in `ConsentBanner.tsx`, which shims
+> `window.gtag` onto `dataLayer` when GTM has not booted yet — never a bare
+> `window.gtag` import. Storage keys are `cookie-consent` and
+> `cookie-consent-settings` (not the `cookie-consent`-less examples below).
 
 ---
 
