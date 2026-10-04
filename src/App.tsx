@@ -2954,7 +2954,7 @@ export default function App() {
                 <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
                   {t.searchSectionTitle}
                 </h2>
-                <p className="text-xs text-slate-500 max-w-xl mx-auto">
+                <p className="text-xs text-slate-600 max-w-xl mx-auto">
                   {t.searchSectionSubtitle}
                 </p>
               </div>
@@ -3058,7 +3058,7 @@ export default function App() {
               <div className="text-center space-y-2">
                 <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">{t.destinationsBadge}</span>
                 <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{t.destinationsTitle}</h2>
-                <p className="text-xs text-slate-500 max-w-xl mx-auto">{t.destinationsSubtitle}</p>
+                <p className="text-xs text-slate-600 max-w-xl mx-auto">{t.destinationsSubtitle}</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -3162,7 +3162,7 @@ export default function App() {
                     <div className="relative z-20 p-4 space-y-2.5 bg-slate-950/65 backdrop-blur-md border-t border-white/10 m-3 rounded-xl shadow-lg">
                       <div className="flex items-center gap-1.5">
                         <span className="text-sm px-1.5 py-0.5 bg-white/15 rounded backdrop-blur-sm font-sans shrink-0">{dest.img}</span>
-                        <h4 className="font-sans font-bold text-sm text-white tracking-tight">{dest.city}, {dest.country}</h4>
+                        <h3 className="font-sans font-bold text-sm text-white tracking-tight">{dest.city}, {dest.country}</h3>
                       </div>
                       
                       <p className="text-[10px] text-slate-250 font-normal leading-relaxed line-clamp-3">
@@ -3184,7 +3184,7 @@ export default function App() {
             {/* 🟦 SECTION 3: “PLAN YOUR TRIP” PATHWAY */}
             <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-8">
               <div className="max-w-2xl space-y-3">
-                <span className="text-[10px] font-mono font-bold text-amber-600 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full uppercase tracking-wider inline-block">
+                <span className="text-[10px] font-mono font-bold text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full uppercase tracking-wider inline-block">
                   {isBn ? "🎯 ঢাকা থেকে আপনার পরবর্তী সফর সাজান" : "🎯 Plan your next trip from Dhaka"}
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3.5xl font-black text-brand-navy tracking-tight">
@@ -3306,7 +3306,7 @@ export default function App() {
                       <div className="flex items-center gap-2">
                         <label
                           htmlFor="home-currency-bdt-amount"
-                          className="text-slate-400 font-mono text-[10px] uppercase w-12"
+                          className="text-slate-600 font-mono text-[10px] uppercase w-12"
                         >
                           BDT (৳)
                           <span className="sr-only">
@@ -3324,7 +3324,7 @@ export default function App() {
                       <div className="flex items-center gap-2">
                         <label
                           htmlFor="home-currency-target-select"
-                          className="text-slate-400 font-mono text-[10px] uppercase w-12"
+                          className="text-slate-600 font-mono text-[10px] uppercase w-12"
                         >
                           To
                           <span className="sr-only">
@@ -3349,7 +3349,7 @@ export default function App() {
                   </div>
                   <div className="mt-4 pt-3 border-t border-slate-100 text-xs font-mono font-bold text-center bg-slate-50 py-1.5 rounded text-indigo-900">
                     ৳ {currencyAmount.toLocaleString()} BDT = &nbsp;
-                    <span className="text-[#F6B73C]">
+                    <span className="text-brand-gold-ink">
                       {currencyToOption === "NPR" ? (currencyAmount * 1.13).toFixed(2) :
                        currencyToOption === "THB" ? (currencyAmount * 0.30).toFixed(2) : 
                        currencyToOption === "MYR" ? (currencyAmount * 0.037).toFixed(2) :
@@ -3366,7 +3366,7 @@ export default function App() {
                     <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest block mb-1">
                       {isBn ? "🧳 ডকুমেন্ট ও প্যাকিং চেকলিস্ট" : "🧳 Packing Checklist"}
                     </span>
-                    <p className="text-[10px] text-slate-400 mb-2">
+                    <p className="text-[10px] text-slate-600 mb-2">
                       {isBn ? "ফ্লাইটের আগে জরুরি ডকুমেন্টগুলো মিলিয়ে নিন:" : "Check requirements to keep track before your flight:"}
                     </p>
                     <div className="space-y-1.5 text-[11px] font-medium text-slate-700">
@@ -3378,14 +3378,14 @@ export default function App() {
                             onChange={() => {
                               setPackingItems(prev => prev.map(p => p.id === item.id ? { ...p, checked: !p.checked } : p));
                             }}
-                            className="rounded text-[#F6B73C] focus:ring-[#F6B73C]"
+                            className="h-6 w-6 rounded text-[#F6B73C] focus:ring-[#F6B73C]"
                           />
-                          <span className={item.checked ? "line-through text-slate-400" : ""}>{item.text}</span>
+                          <span className={item.checked ? "line-through text-slate-600" : ""}>{item.text}</span>
                         </label>
                       ))}
                     </div>
                   </div>
-                  <span className="text-[9px] font-mono text-[#F6B73C] block mt-2 text-right">
+                  <span className="text-[9px] font-mono text-brand-gold-ink block mt-2 text-right">
                     {isBn ? "ইমিগ্রেশন চেকলিস্ট" : "Interactive Outbound checklist"}
                   </span>
                 </div>
@@ -3438,7 +3438,7 @@ export default function App() {
                       ? "“ঢাকা থেকে সব প্রধান এয়ারলাইন্সের ভাড়া এক সাথে তুলনা করুন”"
                       : "“Compare prices from all major airlines flying from Dhaka”"}
                   </p>
-                  <p className="text-[10px] text-slate-350 leading-relaxed">
+                  <p className="text-[10px] text-slate-300 leading-relaxed">
                     {isBn
                       ? "Biman Bangladesh, Saudia, Emirates, AirAsia, US-Bangla ও Thai Airways সহ ঢাকা থেকে চলাচলকারী সব এয়ারলাইন্সের প্রতিদিনের আপডেট ভাড়া।"
                       : "Flight search covers Biman Bangladesh, Emirates, AirAsia, Thai Airways, and other airlines that fly out of Dhaka — updated daily."}
@@ -3451,7 +3451,7 @@ export default function App() {
                   <p className="text-[11px] text-[#F6B73C] font-bold mt-1">
                     {isBn ? "“কোনো রেজিস্ট্রেশন বা বাড়তি ফি নেই”" : "“No signup, no fees”"}
                   </p>
-                  <p className="text-[10px] text-slate-350 leading-relaxed">
+                  <p className="text-[10px] text-slate-300 leading-relaxed">
                     {isBn
                       ? "কোনো একাউন্ট খোলা ছাড়াই ফ্লাইট ও হোটেল সার্চ করুন। কোনো লুকানো চার্জ নেই—অথবা কার্ড না থাকলে WhatsApp-এ BDT দিয়ে বুক করুন।"
                       : "Search flights and hotels without creating an account. No hidden charges. Click through to book directly with the airline or hotel."}
@@ -3462,7 +3462,7 @@ export default function App() {
                     {isBn ? "🤝 বিশ্বস্ত আন্তর্জাতিক পার্টনার" : "🤝 Trusted Partners"}
                   </span>
                   <p className="text-[11px] text-[#F6B73C] font-bold mt-1">“Powered by Travelpayouts”</p>
-                  <p className="text-[10px] text-slate-350 leading-relaxed font-sans">
+                  <p className="text-[10px] text-slate-300 leading-relaxed font-sans">
                     {isBn
                       ? "আমাদের ফ্লাইট, এয়ারপোর্ট পিকআপ, ট্যুর, Travel eSIM ও গাড়ি ভাড়ার সেবাগুলো Travelpayouts, Aviasales, Welcome Pickups, Klook, Kiwitaxi, Airalo ও QEEQ-এর মাধ্যমে পরিচালিত।"
                       : "Flights, transfers, activities, eSIMs, and car rentals on this site are powered by Travelpayouts and its partner network — including Aviasales, Klook, Kiwitaxi, Airalo, and QEEQ."}
@@ -7415,13 +7415,13 @@ export default function App() {
                 {isBn ? "জনপ্রিয় ফ্লাইট রুট" : "Flight Routes"}
               </span>
               <ul className="space-y-1.5 text-xs">
-                <li><a href="/flights/dhaka-kathmandu" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kathmandu"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kathmandu (KTM)</a></li>
-                <li><a href="/flights/dhaka-bangkok" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-bangkok"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Bangkok (BKK)</a></li>
-                <li><a href="/flights/dhaka-kuala-lumpur" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kuala-lumpur"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kuala Lumpur (KUL)</a></li>
-                <li><a href="/flights/dhaka-singapore" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-singapore"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</a></li>
-                <li><a href="/flights/dhaka-maldives" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-maldives"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
-                <li><a href="/flights/dhaka-dubai" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-dubai"); }} className="hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
-                <li><a href="/umrah" onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }} className="text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">Dhaka → Jeddah &amp; Madinah (Umrah)</a></li>
+                <li><a href="/flights/dhaka-kathmandu" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kathmandu"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kathmandu (KTM)</a></li>
+                <li><a href="/flights/dhaka-bangkok" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-bangkok"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Bangkok (BKK)</a></li>
+                <li><a href="/flights/dhaka-kuala-lumpur" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kuala-lumpur"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kuala Lumpur (KUL)</a></li>
+                <li><a href="/flights/dhaka-singapore" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-singapore"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</a></li>
+                <li><a href="/flights/dhaka-maldives" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-maldives"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
+                <li><a href="/flights/dhaka-dubai" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-dubai"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
+                <li><a href="/umrah" onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">Dhaka → Jeddah &amp; Madinah (Umrah)</a></li>
               </ul>
             </div>
 
@@ -7431,13 +7431,13 @@ export default function App() {
                 {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa Checklists"}
               </span>
               <ul className="space-y-1.5 text-xs">
-                <li><a href="/visa/nepal-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/nepal-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</a></li>
-                <li><a href="/visa/maldives-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/maldives-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</a></li>
-                <li><a href="/visa/thailand-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/thailand-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</a></li>
-                <li><a href="/visa/malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/malaysia-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
-                <li><a href="/visa/singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/singapore-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Visa"}</a></li>
-                <li><a href="/visa/dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/dubai-visa"); }} className="hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
-                <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪১টি ট্রাভেল ব্লগ গাইড →" : "All 41 Travel Blog Guides →"}</a></li>
+                <li><a href="/visa/nepal-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/nepal-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</a></li>
+                <li><a href="/visa/maldives-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/maldives-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</a></li>
+                <li><a href="/visa/thailand-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/thailand-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</a></li>
+                <li><a href="/visa/malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/malaysia-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
+                <li><a href="/visa/singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/singapore-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Visa"}</a></li>
+                <li><a href="/visa/dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/dubai-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
+                <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪১টি ট্রাভেল ব্লগ গাইড →" : "All 41 Travel Blog Guides →"}</a></li>
               </ul>
             </div>
 
@@ -7625,7 +7625,7 @@ export default function App() {
                   </form>
                 )}
                 <div className="flex items-center justify-between pt-0.5">
-                  <span className="text-[10px] text-slate-500">
+                  <span className="text-[10px] text-slate-400">
                     {isBn ? "স্প্যাম মুক্ত · ফ্রি অ্যালার্ট" : "Zero spam · Unsubscribe anytime"}
                   </span>
                   <a

@@ -70,6 +70,10 @@
   --color-brand-ivory: #F5F1E8;
   --color-brand-gold: #F6B73C;
   --color-brand-gold-dark: #D4941A;
+  /* Text-safe gold for LIGHT surfaces. #F6B73C is 1.79:1 on white and
+     #D4941A only 2.61:1 — fine for borders, icons, fills and anything on the
+     navy, unusable for text. This shade is 5.93:1 on white / 5.26:1 on ivory. */
+  --color-brand-gold-ink: #8A5A00;
   --color-brand-gold-light: #FDF0CC;
 
   --color-navy-deepest: #0B1426;

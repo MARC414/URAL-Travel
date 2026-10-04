@@ -9,7 +9,7 @@
 ## ✅ Status Board (single source of truth — 2026-10-04)
 
 Everything below is **committed code**, verified by `npm run build` + `npm run
-verify:build` (26 checks, incl. the cache/srcset/consent regression guards). "Deployed" means it
+verify:build` (29 checks, incl. the cache/srcset/consent/contrast regression guards). "Deployed" means it
 will be live on the next Cloudflare Pages deploy of this branch — confirm with
 the Production Verification commands at the bottom of this guide.
 
@@ -37,6 +37,8 @@ the Production Verification commands at the bottom of this guide.
 | 20 | **1-year immutable cache on fonts + brand SVGs** (Lighthouse flagged the 7-day TTLs for 28 KiB) | ✅ done 2026-10-04 night | `public/_headers` + filenames versioned (`-v1`): 5 fonts, 4 SVGs; refs updated in `index.html`, `scripts/prerender.ts`, `public/travelpayouts-wl.html`, `scripts/download-fonts.sh`. Guarded (4 new checks) |
 | 21 | **emrld.ltd preconnect no longer declares `crossorigin`** (Lighthouse: "unused preconnect") | ✅ done 2026-10-04 night | `index.html:50` — the affiliate script is injected as a plain async `<script>` (no-cors), which cannot reuse a CORS-mode preconnect; guarded |
 | 22 | Image compression (Lighthouse "Improve image delivery", 127 KiB) | ⏳ open — this is Appendix A | the estimate covers the homepage hero + the two 960w destination cards; AVIF is the measured lever (A.2) |
+| 23 | **Accessibility 96 → contrast, target-size, heading-order** | ✅ fixed 2026-10-04 night | 7 class patterns + `brand-gold-ink` token + 24px checkbox + h3 levels; guarded (3 new checks). Appendix C |
+| 24 | ~12 invalid Tailwind colour steps (`text-slate-650`, `border-slate-250`, …) | ⏳ open, visible as a CI warning | they render as `inherit` today; fixing them changes colours → needs its own visual pass (C.4) |
 
 ### ⚠️ The recurring CI failure (lockfile hygiene)
 Three CI runs died in ~12s at "Install dependencies" (`fafdb27`, `4d45194`,
@@ -733,7 +735,7 @@ curl -sI https://ural-travel.pages.dev/ | grep -i x-robots-tag  # must be ABSENT
 ```bash
 npm run lint          # tsc --noEmit
 npm run build         # vite build + prerender of ~163 routes
-npm run verify:build  # 26 checks incl. srcset/consent/cache regression guards
+npm run verify:build  # 29 checks incl. srcset/consent/cache/contrast regression guards
 ```
 
 ---
@@ -815,7 +817,10 @@ npm run preview
 - [x] Cache TTLs raised to 1y immutable with versioned filenames ✅ (2026-10-04 night — from the live Lighthouse report)
 - [x] emrld.ltd preconnect `crossorigin` mismatch fixed ✅ (2026-10-04 night)
 - [ ] 6A image delivery (127 KiB) — Appendix A
-- [ ] Re-run Lighthouse after the cache change and diff against Appendix B.1
+- [x] Accessibility pass: contrast tokens, 24px checkbox targets, h3 heading levels ✅ (2026-10-04 night — Appendix C)
+- [ ] Re-run Lighthouse after the cache + a11y changes and diff against Appendix B.1 / C.1
+- [ ] Owner decision: `POPULAR HUBS:` one-class fix in `TravelpayoutsWidget.jsx` (C.3)
+- [ ] Separate visual pass for the 12 non-existent Tailwind colour steps (C.4)
 - [ ] Post-deploy Lighthouse/CrUX re-measure + record numbers in Status Board
 
 ---
@@ -1233,3 +1238,99 @@ npx lighthouse https://ural-travel.pages.dev/ --only-categories=performance \
 Then diff the JSON against the numbers in B.1 (`uses-long-cache-ttl`,
 `image-delivery-insight`, `render-blocking-resources`, `unused-javascript`,
 `network-dependency-tree-insight`) and record the outcome in the Status Board.
+
+---
+
+# 📎 Appendix C — Accessibility report triage (2026-10-04 night)
+
+**Question this answers:** are the Lighthouse Accessibility findings "design"
+work that disturbs layouts, or can they be solved in place? Short version:
+**three of the four categories are class-level or tag-level fixes with no layout
+change at all; only the touch-target one nudges spacing.** Details, and what was
+done in the same commit:
+
+| Finding | Category | Effort | Layout impact |
+|---|---|---|---|
+| Color contrast (many elements) | Scored (WCAG 1.4.3 AA) | **Class swaps only** — the *tokens* were wrong for the surface, not the design | **None.** Same components, same sizes, same hierarchy, same spacing |
+| Target size (checkboxes, footer links) | Scored (WCAG 2.2 SC 2.5.8) | Padding/size only | **Small:** checkbox 16→24px, footer links get `py-1` (each link row ~8px taller) |
+| Heading order (h4 after h2) | Scored (best-practice audit) | `h4` → `h3`, classes untouched | **None** — purely semantic |
+| Identical links have the same purpose | **Unscored** best practice | Label/`aria-label` work | **None** |
+| Best-practices items (console errors, source maps, CSP/HSTS/COOP/XFO/Trusted Types) | Unscored | Headers/config or third-party — **not design** | None |
+
+## C.1 Why contrast was a token problem, not a design problem
+
+Measured with the WCAG relative-luminance formula (the guard in
+`scripts/verify-build.ts` computes the same numbers on every build):
+
+| Pair | Ratio | Verdict |
+|---|---|---|
+| `text-slate-400` on white | **2.56:1** | fail (needs 4.5) — this was the single most common offender: card meta rows, labels, subtitles |
+| `text-slate-400` on brand-ivory `#F5F1E8` | **2.27:1** | fail |
+| `text-slate-500` on brand-ivory | **4.22:1** | fail (just under) |
+| `text-slate-500` on `slate-900/80` (dark card) | **3.75:1** | fail (muted-for-light colour used on a dark surface) |
+| `text-[#F6B73C]` (brand gold) on white | **1.79:1** | fail — gold is a *dark-surface* colour |
+| `text-amber-600` on `bg-amber-50` | **3.07:1** | fail |
+| `text-slate-500` on white | 4.76:1 | pass (why some slate-500 text was fine and some was not) |
+| `text-slate-600` on white / ivory | 7.58 / 6.72 | pass |
+
+The fix therefore was: on light surfaces use `slate-600` (not 400/500), on dark
+surfaces use `slate-400` (not 500), and add one new text-only token
+`--color-brand-gold-ink: #8A5A00` (5.93:1 on white, 5.26:1 on ivory) for the two
+places where gold text sat on a light card. **Gold stays gold everywhere else** —
+the navy header, badges, borders, icons and fills are unchanged.
+
+## C.2 What changed in this commit
+
+- `src/App.tsx`: currency-converter labels + result, packing-checklist subtitle /
+  struck-through items / bottom note, the two brand-ivory section subtitles
+  (slate-500 → slate-600), the amber "PLAN YOUR NEXT TRIP" chip (amber-600 →
+  amber-800), the dark-card "Zero spam" note (slate-500 → slate-400), and the
+  checklist checkbox (16px → 24px).
+- `src/components/TrustpilotReviews.tsx`: review-card meta row + closing note
+  (slate-400 → slate-600), review titles `h4` → `h3`.
+- `src/App.tsx`: destination-card `h4` → `h3` (the section heading directly
+  above it is an `h2`, so `h4` skipped a level).
+- `src/index.css`: new `--color-brand-gold-ink` token, documented as
+  "text-safe gold for light surfaces".
+- `scripts/verify-build.ts`: 3 new checks — (a) the 12 documented text/surface
+  token pairs must stay ≥4.5:1, (b) the 7 exact class patterns that failed the
+  audit must not reappear anywhere in `src/`, (c) the checklist checkbox keeps
+  its 24px target. 29 checks total.
+- Footer link columns: `inline-block py-1` so each link box clears 24px.
+
+Three `text-slate-350` typos in the dark "Why Travelers Use URAL" card were
+changed to `text-slate-300` (see C.4): they were silently doing nothing, so
+those paragraphs rendered pure white; they now render as the muted grey the
+author clearly intended. That is the only *visible* colour change outside the
+flagged failures.
+
+## C.3 Not fixed here (deliberate)
+
+- **`POPULAR HUBS:` in `src/components/TravelpayoutsWidget.jsx`** — same
+  slate-400-on-white root cause, but this file is on the project's
+  do-not-modify list (any `Travelpayouts*` file). One class change fixes it;
+  it needs explicit owner approval. A partner-widget render is also the likely
+  source of the "browser errors in console" item.
+- **Identical links (`+880 1784-385335` twice, partner labels repeated with
+  different tracking URLs)** — unscored, and the honest fix is a per-link
+  `aria-label` that distinguishes "WhatsApp" from "call", and partner labels
+  that name the destination. No visual change, but it needs a decision about
+  link labels, so it is not guessed at here.
+- **Hover-state gold on white** (~230 `hover:text-[#F6B73C]` uses) — axe does not
+  evaluate hover, and changing all of them would repaint the interaction design.
+  If hover legibility matters, the token already exists (`hover:text-brand-gold-ink`).
+- **CSP / HSTS / COOP / XFO / Trusted Types** — Cloudflare Pages response
+  headers, not markup. Each needs a testing pass (a wrong CSP silently kills
+  GTM, the affiliate script or the fonts), so they belong in their own change.
+
+## C.4 The one thing that *would* be a design change
+
+`12` distinct class names in `src/` use colour steps that **do not exist** in
+Tailwind (`text-slate-650`, `text-slate-750`, `text-slate-850`, `text-slate-450`,
+`text-slate-250`, `bg-slate-250`, `border-slate-250`, `border-slate-350`,
+`border-emerald-150`, `divide-slate-150`, `text-emerald-650`, …). Today they are
+silently ignored: text inherits its parent colour and `border-*` falls back to
+`currentColor`. Making them effective **changes colours visibly**, which is
+exactly the kind of thing a performance/a11y pass should not smuggle in. They are
+now listed as a warning in `npm run verify:build` output so the debt is visible
+instead of invisible. Fixing them is its own small visual PR.

@@ -321,6 +321,142 @@ check(
   "dist/index.html preconnects emrld.ltd without a misapplied crossorigin attribute"
 );
 
+// --- 2d. Accessibility guards (WCAG 2.1 AA contrast + the audited fixes) ----
+//
+// Lighthouse's Accessibility category scored 96 with two scored failures: a
+// long list of color-contrast violations and undersized checkbox targets. Every
+// one of them came from the same handful of class strings, so the cheapest
+// durable guard is:
+//   (a) assert the palette pairs the design relies on actually meet AA, and
+//   (b) assert the exact patterns that failed the audit have not come back.
+// The alternative — running axe in CI — needs a browser and a rendered page;
+// this catches the regression at `npm run verify:build` time instead.
+
+function srgbToLinear(channel: number): number {
+  const c = channel / 255;
+  return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+}
+
+function relativeLuminance(hex: string): number {
+  const h = hex.replace("#", "");
+  const [r, g, b] = [0, 2, 4].map((i) => srgbToLinear(parseInt(h.slice(i, i + 2), 16)));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrastRatio(foreground: string, background: string): number {
+  const a = relativeLuminance(foreground);
+  const b = relativeLuminance(background);
+  return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+}
+
+// Palette values read from src/index.css so the guard tracks the real theme.
+const indexCss = read(path.join(ROOT_DIR, "src", "index.css")) ?? "";
+function token(name: string, fallback: string): string {
+  return indexCss.match(new RegExp(`--color-${name}:\\s*(#[0-9A-Fa-f]{6})`))?.[1] ?? fallback;
+}
+const TOKEN = {
+  navy: token("brand-navy", "#0B1426"),
+  ivory: token("brand-ivory", "#F5F1E8"),
+  gold: token("brand-gold", "#F6B73C"),
+  goldInk: token("brand-gold-ink", "#8A5A00"),
+  goldLight: token("brand-gold-light", "#FDF0CC"),
+  emerald: token("brand-emerald", "#0F4A3F"),
+};
+// Tailwind's slate scale (v4 values), the only greys the site uses for text.
+const SLATE = {
+  300: "#CBD5E1",
+  400: "#94A3B8",
+  500: "#64748B",
+  600: "#475569",
+  900: "#0F172A",
+};
+const AMBER_50 = "#FFFBEB";
+const AMBER_800 = "#92400E";
+const WHITE = "#FFFFFF";
+
+// Every pair below is a text-on-surface combination that ships today and must
+// keep meeting WCAG AA for normal text (4.5:1).
+const AA_PAIRS: Array<[string, string, string]> = [
+  ["slate-400 text on brand-navy (footer/nav body)", SLATE[400], TOKEN.navy],
+  ["slate-300 text on brand-navy", SLATE[300], TOKEN.navy],
+  ["slate-600 text on white (cards)", SLATE[600], WHITE],
+  ["slate-600 text on brand-ivory (page subtitles)", SLATE[600], TOKEN.ivory],
+  ["slate-500 text on white", SLATE[500], WHITE],
+  ["slate-400 text on slate-900 (dark cards)", SLATE[400], SLATE[900]],
+  ["brand-gold-ink text on white (converter result, checklist note)", TOKEN.goldInk, WHITE],
+  ["brand-gold-ink text on brand-ivory", TOKEN.goldInk, TOKEN.ivory],
+  ["brand-gold-ink text on brand-gold-light", TOKEN.goldInk, TOKEN.goldLight],
+  ["brand-gold text on brand-navy (badges, headings)", TOKEN.gold, TOKEN.navy],
+  ["white text on brand-emerald", WHITE, TOKEN.emerald],
+  ["amber-800 text on amber-50 (gold chip)", AMBER_800, AMBER_50],
+];
+const failedPairs = AA_PAIRS.filter(([, fg, bg]) => contrastRatio(fg, bg) < 4.5);
+check(
+  failedPairs.length === 0,
+  failedPairs.length === 0
+    ? `all ${AA_PAIRS.length} documented text/background token pairs meet WCAG AA (>=4.5:1)`
+    : `${failedPairs.length} token pair(s) below 4.5:1: ` +
+        failedPairs.map(([label, fg, bg]) => `${label} = ${contrastRatio(fg, bg).toFixed(2)}:1`).join("; ")
+);
+
+// The exact class strings behind the 2026-10-04 Lighthouse contrast failures.
+// Each one is a muted/gold colour placed on a light surface, or the reverse.
+const TSX_FILES: string[] = [];
+(function walk(dir: string) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) walk(full);
+    else if (/\.(tsx|jsx)$/.test(entry.name)) TSX_FILES.push(full);
+  }
+})(path.join(ROOT_DIR, "src"));
+
+const BANNED_CLASS_PATTERNS: Array<[string, string]> = [
+  ["text-slate-400 font-mono text-[10px]", "slate-400 on a white card is 2.56:1 — use slate-600"],
+  ["text-[10px] text-slate-400 mb-2", "slate-400 on a white card is 2.56:1 — use slate-600"],
+  ["line-through text-slate-400", "checked items still need 4.5:1 — use slate-600"],
+  ["text-xs text-slate-500 max-w-xl mx-auto", "slate-500 on brand-ivory is 4.22:1 — use slate-600"],
+  ["text-[9px] font-mono text-[#F6B73C]", "gold on white is 1.79:1 — use text-brand-gold-ink"],
+  ["text-amber-600 bg-amber-50", "amber-600 on amber-50 is 3.07:1 — use amber-800"],
+  ['className="text-[10px] text-slate-500"', "slate-500 on slate-900 is 3.75:1 — use slate-400 on dark"],
+];
+const bannedHits: string[] = [];
+for (const file of TSX_FILES) {
+  const text = fs.readFileSync(file, "utf8");
+  for (const [pattern, why] of BANNED_CLASS_PATTERNS) {
+    if (text.includes(pattern)) bannedHits.push(`${path.relative(ROOT_DIR, file)} :: ${pattern} (${why})`);
+  }
+}
+check(
+  bannedHits.length === 0,
+  bannedHits.length === 0
+    ? `no re-introduction of the ${BANNED_CLASS_PATTERNS.length} audited low-contrast class patterns`
+    : `${bannedHits.length} banned pattern(s) found:\n      ` + bannedHits.slice(0, 6).join("\n      ")
+);
+
+// The checklist checkbox is the one audited target-size failure: 16px -> 24px
+// (WCAG 2.2 SC 2.5.8). Keep the size class attached to the input.
+check(
+  /className="h-6 w-6 rounded text-\[#F6B73C\]/.test(
+    fs.readFileSync(path.join(ROOT_DIR, "src", "App.tsx"), "utf8")
+  ),
+  "checklist checkbox keeps a 24px (h-6 w-6) touch target"
+);
+
+// Non-failing inventory of Tailwind colour steps that do not exist, so the
+// debt is visible in CI output instead of silently rendering inherited colours.
+const INVALID_STEP = /\b(?:bg|text|border|divide|ring|fill)-(?:slate|emerald|amber)-(?:150|250|350|450|550|650|750|850)\b/g;
+const invalidSteps = new Set<string>();
+for (const file of TSX_FILES) {
+  for (const m of fs.readFileSync(file, "utf8").matchAll(INVALID_STEP)) invalidSteps.add(m[0]);
+}
+if (invalidSteps.size > 0) {
+  console.log(
+    `  [warn] ${invalidSteps.size} non-existent Tailwind colour step(s) still in use ` +
+      `(silently ignored today; fixing them CHANGES colours — do it as its own visual pass): ` +
+      [...invalidSteps].sort().join(", ")
+  );
+}
+
 // --- 3. Sitemap: structure + the lastmod invariant --------------------------
 
 const sitemap = read(path.join(DIST_DIR, "sitemap.xml"));
