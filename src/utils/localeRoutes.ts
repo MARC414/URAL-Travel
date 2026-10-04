@@ -127,4 +127,5 @@ export const BN_BREADCRUMB_LABELS: Record<string, string> = {
   "Pre-Departure & Complete Sitemap": "প্রস্থান-পূর্ব প্রস্তুতি ও সাইটম্যাপ",
   "Contact Us": "যোগাযোগ",
   "Attractions & Passes": "অভিজ্ঞতা ও টিকিট",
+  "Privacy & Cookie Policy": "গোপনীয়তা ও কুকি নীতিমালা",
 };

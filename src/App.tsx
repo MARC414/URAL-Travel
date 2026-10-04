@@ -80,6 +80,7 @@ import {
   siteUrl,
 } from "./utils/localeRoutes";
 import { AirHelpWidget } from "./components/AirHelpWidget";
+import { ConsentBanner } from "./components/ConsentBanner";
 import { getBlogImageAltText, getResponsiveImageProps } from "./utils/imageAssets";
 import { getRelatedBlogPosts } from "./utils/blogLinks";
 import { URAL_SOCIAL_LINKS } from "./utils/schema";
@@ -132,6 +133,9 @@ const ExperiencesPage = React.lazy(() =>
 );
 const SitemapPage = React.lazy(() =>
   import("./components/SitemapPage").then((m) => ({ default: m.SitemapPage }))
+);
+const PrivacyPolicyPage = React.lazy(() =>
+  import("./components/PrivacyPolicyPage").then((m) => ({ default: m.PrivacyPolicyPage }))
 );
 const InteractiveTools = React.lazy(() =>
   import("./components/InteractiveTools").then((m) => ({ default: m.InteractiveTools }))
@@ -719,7 +723,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
   return `${cleanWords.slice(0, 50).join(" ").replace(/[.,;:!?-]+$/, "")}...`;
 }
 
-type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "experiences" | "umrah" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "notFound";
+type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "experiences" | "umrah" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "privacy" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
@@ -1144,6 +1148,12 @@ export default function App() {
       segs.length === 1
     ) {
       section = "sitemap";
+      isLanding = true;
+    } else if (
+      ["privacy", "privacy-policy", "cookie-policy"].includes(root) &&
+      segs.length === 1
+    ) {
+      section = "privacy";
       isLanding = true;
     }
 
@@ -1660,6 +1670,18 @@ export default function App() {
       { name: "Home", url: siteUrl("/", lang) },
       { name: "Pre-Departure & Complete Sitemap", url: sitemapUrl }
     ];
+  } else if (section === "privacy") {
+    const privacyUrl = siteUrl("/privacy", lang);
+    seoTitle = isBn
+      ? "গোপনীয়তা ও কুকি নীতিমালা — URAL Travel Intelligence"
+      : "Privacy & Cookie Policy — URAL Travel Intelligence";
+    seoDescription = isBn
+      ? "URAL Travel Intelligence-এর গোপনীয়তা ও কুকি নীতিমালা। আমরা কীভাবে ভিজিটর ডেটা, গুগল কনসেন্ট মোড v2 ও ট্রাভেলপেআউটস পার্টনার কুকিজ নিরাপদে হ্যান্ডেল করি জানুন।"
+      : "Privacy and Cookie Policy for URAL Travel Intelligence. Learn how we handle visitor data, Google Tag Manager, GA4, Consent Mode v2, and affiliate partner cookies with transparency and security.";
+    seoBreadcrumbs = [
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: isBn ? "গোপনীয়তা ও কুকি নীতিমালা" : "Privacy & Cookie Policy", url: privacyUrl }
+    ];
   }
 
   if (section === "notFound") {
@@ -1676,6 +1698,7 @@ export default function App() {
     if (section === "experiences") return "/experiences";
     if (section === "umrah") return "/umrah";
     if (section === "sitemap") return "/sitemap";
+    if (section === "privacy") return "/privacy";
     if (section === "tools" || section === "contact") return `/${section}`;
     return new URL(currentPath, "https://ural-travel.pages.dev").pathname;
   })();
@@ -7249,6 +7272,15 @@ export default function App() {
         </React.Suspense>
       )}
 
+      {/* -------------------------------------------------------------
+          🔒 VIEW 11: PRIVACY & COOKIE POLICY HUB
+      ------------------------------------------------------------- */}
+      {section === "privacy" && (
+        <React.Suspense fallback={null}>
+          <PrivacyPolicyPage onNavigate={navigateTo} lang={lang} />
+        </React.Suspense>
+      )}
+
       {section === "notFound" && (
         <section className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 text-center shadow-sm">
           <div className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-brand-emerald">404 · Page not found</div>
@@ -7627,10 +7659,23 @@ export default function App() {
                 </>
               )}
             </p>
-            <div className="shrink-0 font-mono text-[10px] text-slate-400">
-              {isBn
-                ? "© 2026 URAL Travel Intelligence. সর্বস্বত্ব সংরক্ষিত।"
-                : "© 2026 URAL Travel Intelligence. All rights reserved."}
+            <div className="shrink-0 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 font-mono text-[10px] text-slate-400">
+              <a
+                href={isBn ? "/bn/privacy" : "/privacy"}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo(isBn ? "/bn/privacy" : "/privacy");
+                }}
+                className="hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
+              >
+                {isBn ? "গোপনীয়তা ও কুকি নীতিমালা" : "Privacy & Cookie Policy"}
+              </a>
+              <span className="hidden sm:inline">•</span>
+              <span>
+                {isBn
+                  ? "© 2026 URAL Travel Intelligence. সর্বস্বত্ব সংরক্ষিত।"
+                  : "© 2026 URAL Travel Intelligence. All rights reserved."}
+              </span>
             </div>
           </div>
         </div>
@@ -7666,6 +7711,9 @@ export default function App() {
           />
         </React.Suspense>
       )}
+
+      {/* Google Consent Mode v2 Floating Cookie Consent Banner */}
+      <ConsentBanner onNavigate={navigateTo} lang={lang} />
 
     </div>
   );

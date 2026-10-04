@@ -213,6 +213,11 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "Contact URAL's Dhaka support desk about flight planning, visa checklists, Umrah preparation or travel questions for Bangladeshi travelers.",
   },
+  "/privacy": {
+    title: "Privacy & Cookie Policy | URAL Travel Intelligence",
+    description:
+      "Understand how URAL Travel Intelligence collects, processes, and protects your data, our Google Consent Mode v2 implementation, and affiliate partner disclosures.",
+  },
   "/blog": {
     title: "Bangladesh Travel Blog: Visa, Umrah & BDT Guides | URAL",
     description:
@@ -476,6 +481,11 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
     title: "ঢাকায় URAL ট্রাভেল সাপোর্টে যোগাযোগ করুন | URAL",
     description:
       "ফ্লাইট পরিকল্পনা, ভিসা চেকলিস্ট, ওমরাহ প্রস্তুতি বা ভ্রমণ প্রশ্নে বাংলাদেশি ভ্রমণকারীদের জন্য URAL-এর ঢাকা সাপোর্ট ডেস্কে যোগাযোগ করুন।",
+  },
+  "/privacy": {
+    title: "গোপনীয়তা ও কুকি নীতিমালা | URAL Travel Intelligence",
+    description:
+      "URAL Travel Intelligence-এর গোপনীয়তা ও কুকি নীতিমালা। আমরা কীভাবে ভিজিটর ডেটা, গুগল কনসেন্ট মোড v2 ও ট্রাভেলপেআউটস পার্টনার কুকিজ নিরাপদে হ্যান্ডেল করি জানুন।",
   },
   "/costs": {
     title: "বাংলাদেশ থেকে ভ্রমণ খরচ: টাকায় বাজেট | URAL",
