@@ -2,7 +2,7 @@
 **Created:** 2026-10-04  
 **Last updated:** 2026-10-05 — AVIF `<picture>` shipped (Appendix **A.8**), blog bodies split into a lazy chunk (Appendix **E**), the marketing-consent gate re-scoped to every visitor (Appendix **D.1.5**), the Travelpayouts widget moved off its 260 ms timer (Appendix **F**), and below-fold Trustpilot/TravelEssentials modules split into lazy chunks (Appendix **G**). A deferred-GTM origin preconnect is now carried through all 165 prerendered routes and guarded in the build. The metrics table separates **targets from measurements** — nothing is green without a number.
 
-**Status:** Phases 1–3 ✅ · Consent Mode v2 ✅ · Phase 6A (AVIF) ✅ applied · P3.1 (blog split) ✅ · third-party load (F) ✅ applied · P3.3 + GTM preconnect ✅ in this PR · **post-deploy PSI/CrUX verification ⏳ pending**
+**Status:** Phases 1–3 ✅ · Consent Mode v2 ✅ · Phase 6A (AVIF) ✅ applied · P3.1 (blog split) ✅ · third-party load (F) ✅ applied · P3.3 + GTM preconnect ✅ in PR preview · **production PSI/CrUX verification ⏳ pending**
 
 **Target:** 95+ Performance Score (Mobile & Desktop) — **target, not a result** (historical lab baseline: ~65 mobile, Appendix B; operator-reported live comparator: 85 twice, details below)
 
@@ -47,8 +47,8 @@ the Production Verification commands at the bottom of this guide.
 | 28 | **Marketing-consent gate for the affiliate script (every visitor)** | ✅ re-scoped and applied 2026-10-05 (owner decision: everywhere; supersedes the EEA/UK/CH-only option B of 2026-10-04) | `functions/_middleware.js` is redirect-only again — no HTML rewrite, so no body is buffered or re-encoded at the edge; `index.html` gates for everyone on `localStorage` marketing consent + `ural:consent-updated`, keeping viewport laziness. 5 guards incl. a 6-case loader decision test and a 4-case passthrough test, both mutation-tested (D.1.5) |
 | 29 | **Blog bodies split out of `constants.ts` into a lazy chunk (P3.1)** | ✅ done 2026-10-04 night | 43 article bodies → `src/data/blogContent.ts`, `import()`ed on blog routes only; measured **330.1 → 266.1 KB gzip** of eager JS (−64.0 KB, Appendix E). Prerender still inlines every paragraph (211/211 verified); 7 new guards + 2 mutation tests |
 | 30 | **Travelpayouts widget chunk loads on need, not on a timer** | ✅ applied 2026-10-05 (owner-approved: §5 revenue component) | the ~129 KB gz widget chunk was fetched 260 ms after mount on the homepage, competing with the LCP image for visitors who never scrolled to it; now triggered by viewport proximity (300px), interaction, the consented script, or a 2.5 s ceiling. 2 guards + mutation tests (Appendix F) |
-| 31 | **GTM origin preconnect** (without eager `gtm.js`) | ✅ implemented 2026-10-05; deployed verification pending | `index.html` warms `www.googletagmanager.com` after first-party preloads; Consent Mode defaults and the 3 s/interaction GTM loader are unchanged. Guarded on all 165 prerendered app routes. The preconnect itself contacts Google at page load (DNS/TLS, exposing the visitor IP) but sends no tag request or cookie; it is not consent to load analytics. |
-| 32 | **Below-fold Trustpilot + TravelEssentials code split** | ✅ implemented 2026-10-05; deployed verification pending | `React.lazy` chunks + Suspense at all 7 render sites. Local eager JS gzip drops 266.3 → 261.9 KB (−4.4 KB); both component chunks are emitted separately. `WhatsAppSupport` stays eager because it shares its module with above-fold `TopBarWhatsApp`; splitting only the export would not move the module. Appendix G |
+| 31 | **GTM origin preconnect** (without eager `gtm.js`) | ✅ implemented and PR preview deployed (041e7a7); production verification pending | `index.html` warms `www.googletagmanager.com` after first-party preloads; Consent Mode defaults and the 3 s/interaction GTM loader are unchanged. Guarded on all 165 prerendered app routes. The preconnect itself contacts Google at page load (DNS/TLS, exposing the visitor IP) but sends no tag request or cookie; it is not consent to load analytics. |
+| 32 | **Below-fold Trustpilot + TravelEssentials code split** | ✅ implemented and PR preview deployed (041e7a7); production verification pending | `React.lazy` chunks + Suspense at all 7 render sites. Local eager JS gzip drops 266.3 → 261.9 KB (−4.4 KB); both component chunks are emitted separately. `WhatsAppSupport` stays eager because it shares its module with above-fold `TopBarWhatsApp`; splitting only the export would not move the module. Appendix G |
 
 ### ⚠️ The recurring CI failure (lockfile hygiene)
 Three CI runs died in ~12s at "Install dependencies" (`fafdb27`, `4d45194`,
@@ -873,7 +873,7 @@ npm run preview
   - [x] `TrustpilotReviews` + `TravelEssentials` use `React.lazy` and Suspense at all 7 render sites; `WhatsAppSupport` intentionally remains eager because `TopBarWhatsApp` shares its module
   - [x] Build emits both named chunks; eager JavaScript gzip measured 266.3 → 261.9 KB (−4.4 KB)
   - [ ] Post-deploy PSI comparison against the provisional 85 baseline (capture matching route/device/report data)
-- [x] **GTM origin preconnect** ✅ in this PR; checked on all 165 prerendered routes; deploy check pending
+- [x] **GTM origin preconnect** ✅ PR preview deployed; checked on all 165 prerendered routes; production check pending
 - [ ] Post-deploy Lighthouse/CrUX re-measure + record numbers in Status Board
 
 ---
@@ -1914,16 +1914,23 @@ This PR's build emits `index-Dey55kpp.js` at 578.27 KB raw / 146.19 KB gzip,
 plus `TrustpilotReviews-DPHXzqx_.js` (2.70 KB gzip) and
 `TravelEssentials-EhNM86Ts.js` (2.95 KB gzip). The verifier's eager-JS total
 falls from 266.3 to 261.9 KB gzip (−4.4 KB); this is an entry/eager-budget
-measurement, not a claim of 4.4 KB lower total bytes on every route. After the
-Cloudflare Pages deploy, compare the deployed HTML's JS hash with the build
-artifact before attributing a PSI score to this change.
+measurement, not a claim of 4.4 KB lower total bytes on every route. Cloudflare
+Pages successfully deployed PR commit `041e7a7` to the preview at
+[https://e15051c0.ural-travel.pages.dev](https://e15051c0.ural-travel.pages.dev);
+the new entry asset is served there and references both lazy chunks. This is a
+branch preview, not the production deploy.
+
+A mobile PSI API request against that preview returned HTTP 429 (daily quota
+limit 0); the PSI web UI exposed only its loading placeholder. Therefore there
+is no score from the PR preview to decode. After production deploy, compare the
+deployed HTML's JS hash with the build artifact before attributing a PSI score
+to this change.
 
 `verify-build.ts` now asserts exactly one no-CORS GTM preconnect on every
 prerendered app route, all 165 routes, and asserts that both component chunks
 are isolated dynamic imports and all seven render sites have Suspense
-boundaries. The gate is now 53 checks. Post-deploy PSI/CrUX verification remains
+boundaries. The gate is now 53 checks. Production PSI/CrUX verification remains
 open; two live PSI scores of 85/100 were reported by the operator and are listed
 above as a provisional pre-change comparator only (no permalink/JSON, route, or
-device strategy was supplied). A new PSI request from this environment was
-blocked by the shared Google API quota (HTTP 429), so no post-deploy result is
-being inferred or invented.
+device strategy was supplied). The preview API attempt was quota-blocked as
+noted above; no post-deploy score is being inferred or invented.
