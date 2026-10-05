@@ -71,7 +71,6 @@ import { Language, translations } from "./translations";
 import type * as BengaliContentModule from "./data/bengaliContent";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
-import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
 import { getBengaliSeoCopy, getSeoCopy } from "./utils/seoCopy";
 import {
   BN_BREADCRUMB_LABELS,
@@ -79,7 +78,6 @@ import {
   localizePublicSiteUrl,
   siteUrl,
 } from "./utils/localeRoutes";
-import { AirHelpWidget } from "./components/AirHelpWidget";
 import { ConsentBanner } from "./components/ConsentBanner";
 import { getBlogImageAltText, getResponsiveImageProps } from "./utils/imageAssets";
 import { getRelatedBlogPosts } from "./utils/blogLinks";
@@ -155,6 +153,16 @@ const TravelpayoutsEmbed = React.lazy(() =>
 );
 const TravelpayoutsCustomWidget = React.lazy(() =>
   import("./components/TravelpayoutsCustomWidget").then((m) => ({ default: m.TravelpayoutsCustomWidget }))
+);
+// Heavy affiliate widgets used only deep inside a single section each (AirHelp
+// in flight-route detail, KKday promo on 3 destination pages). Lazy so their
+// ~54 KB of source leaves the eager index chunk; the already-lazy ExperiencesPage
+// / InteractiveTools / UmrahLandingPage import them statically and share the chunk.
+const AirHelpWidget = React.lazy(() =>
+  import("./components/AirHelpWidget").then((m) => ({ default: m.AirHelpWidget }))
+);
+const KKdayPromoBanner = React.lazy(() =>
+  import("./components/KKdayPromoBanner").then((m) => ({ default: m.KKdayPromoBanner }))
 );
 
 interface TravelpayoutsSkeletonProps {
@@ -3827,10 +3835,12 @@ export default function App() {
                     </div>
 
                     {/* 🛡️ AirHelp Flight Delay Compensation & AirHelp+ (AHTPO11 11% OFF) */}
-                    <AirHelpWidget
-                      lang={lang}
-                      routeLabel={`${activeRoute.from} → ${activeRoute.to}`}
-                    />
+                    <React.Suspense fallback={null}>
+                      <AirHelpWidget
+                        lang={lang}
+                        routeLabel={`${activeRoute.from} → ${activeRoute.to}`}
+                      />
+                    </React.Suspense>
 
                     {/* internal linking system ranking loops (Flights to Visa and Hotels!) */}
                     <div id="hotel-visa-loop-links" className="bg-brand-navy/5 border border-brand-navy/15 p-5 rounded-xl space-y-3">
@@ -4908,11 +4918,13 @@ export default function App() {
                         {(activeDes.id === "thailand" ||
                           activeDes.id === "malaysia" ||
                           activeDes.id === "singapore") && (
-                          <KKdayPromoBanner
-                            lang={lang}
-                            variant="compact"
-                            cityContext={activeDes.country}
-                          />
+                          <React.Suspense fallback={null}>
+                            <KKdayPromoBanner
+                              lang={lang}
+                              variant="compact"
+                              cityContext={activeDes.country}
+                            />
+                          </React.Suspense>
                         )}
 
                         {/* 8. TRAVEL PLANNING CTA SECTION */}
