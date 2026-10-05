@@ -1186,6 +1186,24 @@ export default function App() {
     setExpandedDrawerGroup(getDefaultDrawerGroup(section));
   }, [section]);
 
+  // English blog article bodies are code-split into their own lazily-loaded
+  // chunk (src/data/blogContent.ts) so ~115 KB gz stays out of the eager
+  // content-data chunk that every page downloads. Fetch the map as soon as any
+  // blog route is active (list or detail), so clicking into an article is
+  // instant. Bengali localized posts already carry their own body and render
+  // immediately; they only consult this map for untranslated posts.
+  const [blogContentMap, setBlogContentMap] = useState<Record<string, string> | null>(null);
+  useEffect(() => {
+    if (section !== "blog" || blogContentMap) return;
+    let cancelled = false;
+    import("./data/blogContent").then((mod) => {
+      if (!cancelled) setBlogContentMap(mod.BLOG_CONTENT);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [section, blogContentMap]);
+
   useEffect(() => {
     if (!mobileMenuOpen) return;
     const prevOverflow = document.body.style.overflow;
@@ -5718,6 +5736,12 @@ export default function App() {
             {(() => {
               const activePost = localizedBlogs.find((p) => p.slug === parameterId) || localizedBlogs[0];
               const activeCoverImg = getBlogCoverImage(activePost.slug);
+              // Bengali localized posts carry their body inline; English (and
+              // untranslated Bengali) posts resolve it from the lazily-loaded
+              // BLOG_CONTENT map. While that chunk is still in flight the body
+              // area shows a skeleton instead of rendering empty.
+              const articleBody = activePost.content ?? blogContentMap?.[activePost.slug] ?? "";
+              const blogBodyLoading = !articleBody && !blogContentMap;
               const sameCategoryPosts = localizedBlogs.filter(
                 (p) => p.slug !== activePost.slug && p.category === activePost.category
               );
@@ -6085,7 +6109,17 @@ export default function App() {
 
                       {/* Full Long-Form Verified Guide Content with Dark H2 (24px–26px), Dark H3 (19px–21px) & 16px Body */}
                       <div className="max-w-none text-slate-800 leading-[1.8] space-y-6 text-[16px] sm:text-[17px] font-sans">
-                        {sanitizeExpiredPromoText(activePost.content).split("\n\n").map((block, bIdx) => {
+                        {blogBodyLoading && (
+                          <div className="space-y-4 animate-pulse" aria-hidden="true">
+                            {Array.from({ length: 9 }).map((_, i) => (
+                              <div
+                                key={i}
+                                className={`h-4 rounded bg-slate-200 ${i % 4 === 0 ? "w-1/3 mt-8" : "w-full"}`}
+                              />
+                            ))}
+                          </div>
+                        )}
+                        {sanitizeExpiredPromoText(articleBody).split("\n\n").map((block, bIdx) => {
                           const trimmed = block.trim();
                           if (!trimmed) return null;
 
