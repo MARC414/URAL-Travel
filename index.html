@@ -48,6 +48,14 @@
       Upgraded from dns-prefetch for faster affiliate script loading.
     -->
     <link rel="preconnect" href="https://emrld.ltd" crossorigin />
+    <!--
+      GTM preconnect (no crossorigin: gtm.js is a plain <script src>, a non-CORS
+      request, so the hint must match that mode to be reused). Placed after the
+      LCP image/font preloads above so it never wins a connection slot ahead of
+      them on a cold link; it only warms the TLS handshake GTM needs moments
+      later. Clears Lighthouse "preconnect to required origins".
+    -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
     <title>Bangladesh Travel Guides, Flights &amp; Visas from Dhaka | URAL</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="48x48" href="/assets/brand/favicon/favicon-48.png" />
