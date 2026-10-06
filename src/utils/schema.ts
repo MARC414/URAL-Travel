@@ -9,6 +9,7 @@ export const URAL_SOCIAL_LINKS = {
   facebook: "https://web.facebook.com/uraltravelbd/",
   instagram: "https://www.instagram.com/uraltravelbd/",
   linkedin: "https://www.linkedin.com/company/ural-travel-bangladesh",
+  tiktok: "https://www.tiktok.com/@uraltravelbd",
   whatsapp: "https://wa.me/8801784385335",
 } as const;
 
@@ -116,6 +117,7 @@ export function getSiteGraphNodes() {
         URAL_SOCIAL_LINKS.facebook,
         URAL_SOCIAL_LINKS.instagram,
         URAL_SOCIAL_LINKS.linkedin,
+        URAL_SOCIAL_LINKS.tiktok,
         URAL_SOCIAL_LINKS.whatsapp,
       ],
     },

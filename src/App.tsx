@@ -2775,6 +2775,18 @@ export default function App() {
                           <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
                         </svg>
                       </a>
+                      <a
+                        href={URAL_SOCIAL_LINKS.tiktok}
+                        target="_blank"
+                        rel="me noopener noreferrer"
+                        aria-label="URAL on TikTok (@uraltravelbd)"
+                        title="TikTok (@uraltravelbd)"
+                        className="w-8 h-8 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
+                      >
+                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.5 6.3 6.3 0 0 0 1.86-4.49V8.75a8.28 8.28 0 0 0 4.91 1.6V6.9a4.83 4.83 0 0 1-1-.21z" />
+                        </svg>
+                      </a>
                     </div>
                     <LanguageSwitcher
                       lang={lang}
@@ -6601,6 +6613,14 @@ export default function App() {
                               >
                                 <span>LinkedIn</span>
                               </a>
+                              <a
+                                href={URAL_SOCIAL_LINKS.tiktok}
+                                target="_blank"
+                                rel="me noopener noreferrer"
+                                className="bg-white hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 px-3 py-1.5 rounded-lg font-semibold text-[11px] transition-colors inline-flex items-center gap-1.5"
+                              >
+                                <span>TikTok (@uraltravelbd)</span>
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -7306,7 +7326,7 @@ export default function App() {
                   <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">
                     {isBn ? "অফিসিয়াল সোশ্যাল পেজ (@uraltravelbd)" : "OFFICIAL SOCIAL CHANNELS (@uraltravelbd)"}
                   </span>
-                  <div className="grid grid-cols-3 gap-2 text-xs">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
                     <a
                       href={URAL_SOCIAL_LINKS.facebook}
                       target="_blank"
@@ -7330,6 +7350,14 @@ export default function App() {
                       className="bg-slate-50 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 rounded-lg py-2 px-2.5 font-semibold text-[11px] flex items-center justify-center gap-1.5 transition-colors"
                     >
                       <span>LinkedIn</span>
+                    </a>
+                    <a
+                      href={URAL_SOCIAL_LINKS.tiktok}
+                      target="_blank"
+                      rel="me noopener noreferrer"
+                      className="bg-slate-50 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 rounded-lg py-2 px-2.5 font-semibold text-[11px] flex items-center justify-center gap-1.5 transition-colors"
+                    >
+                      <span>TikTok</span>
                     </a>
                   </div>
                 </div>
@@ -7480,6 +7508,16 @@ export default function App() {
                       svg: (
                         <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                           <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                        </svg>
+                      ),
+                    },
+                    {
+                      name: "TikTok (@uraltravelbd)",
+                      href: URAL_SOCIAL_LINKS.tiktok,
+                      rel: "me noopener noreferrer",
+                      svg: (
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.5 6.3 6.3 0 0 0 1.86-4.49V8.75a8.28 8.28 0 0 0 4.91 1.6V6.9a4.83 4.83 0 0 1-1-.21z" />
                         </svg>
                       ),
                     },

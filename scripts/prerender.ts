@@ -1370,6 +1370,7 @@ function buildAllRoutes(): PrerenderRoute[] {
             <li><a href="https://web.facebook.com/uraltravelbd/" target="_blank" rel="me noopener noreferrer">Facebook — @uraltravelbd (URAL Travel Bangladesh)</a></li>
             <li><a href="https://www.instagram.com/uraltravelbd/" target="_blank" rel="me noopener noreferrer">Instagram — @uraltravelbd</a></li>
             <li><a href="https://www.linkedin.com/company/ural-travel-bangladesh" target="_blank" rel="me noopener noreferrer">LinkedIn — URAL Travel Bangladesh</a></li>
+            <li><a href="https://www.tiktok.com/@uraltravelbd" target="_blank" rel="me noopener noreferrer">TikTok — @uraltravelbd</a></li>
             <li><a href="https://wa.me/8801784385335" target="_blank" rel="noopener noreferrer">WhatsApp Support Desk — +8801784385335</a></li>
           </ul>
         </section>
