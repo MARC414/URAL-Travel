@@ -1,17 +1,10 @@
 /**
- * Dynamic Alt Text Generation Utility for Editorial Blog Cover Photography
+ * Localized alt text for URAL's editorial blog-cover photos.
  *
- * Implements WCAG 2.1/2.2 Level AA/AAA accessibility requirements (WCAG 1.1.1 Non-text Content)
- * and Google Image SEO best practices:
- *   - Contextual & Informative: Explains the visual scene in connection to article topic & category.
- *   - Anti-Redundancy: Never uses screen-reader redundant phrases like "Photo of", "Image of",
- *     "Graphic of", or "ছবি:" (screen readers already announce the element as an image).
- *   - Semantic Sanitization: Strips clickbait artifacts, year tags (e.g. "[2026]"), marketing
- *     prefixes, and distracting emojis before generating descriptive copy.
- *   - Screen Reader Length Boundary: Defaults to 80-125 characters, strictly capped under 140 chars.
- *   - Bilingual Fidelity: Native English and Bengali generation for URAL's bilingual audience.
- *   - Dynamic Fallback: Never outputs generic strings ("Travel scene"); derives destination &
- *     category entity anchors dynamically when an unmapped or custom article is passed.
+ * Alt text should describe the important visual content, not repeat the nearby
+ * article heading or add search keywords. Scene descriptions are curated in
+ * English and Bengali by slug; a concise destination/category fallback is used
+ * for new or unmapped posts.
  */
 
 export interface BlogCoverAltTextInput {
@@ -23,10 +16,6 @@ export interface BlogCoverAltTextInput {
   slug?: string;
   /** Language locale ('en' | 'bn'). If omitted, auto-detected from text. */
   lang?: "en" | "bn" | string;
-  /** Whether the image is rendered as the primary article detail hero vs a listing card thumbnail. */
-  isDetail?: boolean;
-  /** Maximum length constraint (default: 125, optimal for screen-reader scannability). */
-  maxLength?: number;
 }
 
 /**
@@ -37,176 +26,176 @@ export const CURATED_BLOG_SCENES: Readonly<
   Record<string, { en: string; bn: string }>
 > = {
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": {
-    en: "The Kaaba at Masjid al-Haram in Makkah, illuminated at night",
-    bn: "মক্কার মসজিদুল হারামে রাতের আলোকোজ্জ্বল পবিত্র কাবা শরিফ",
+    en: "Pilgrims circle the Kaaba beneath Makkah Clock Tower at dusk",
+    bn: "গোধূলিতে মক্কা ক্লক টাওয়ারের নিচে কাবা ঘিরে তাওয়াফ করছেন মুসল্লিরা",
   },
   "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": {
-    en: "A Haramain high-speed bullet train at a modern station platform in Saudi Arabia",
-    bn: "সৌদি আরবের আধুনিক স্টেশনে অপেক্ষমাণ দ্রুতগতির হরমাইন বুলেট ট্রেন",
+    en: "A Haramain high-speed train waits at a glass-roofed station in Saudi Arabia",
+    bn: "সৌদি আরবের কাচঘেরা স্টেশনে অপেক্ষমাণ হরমাইন হাই-স্পিড ট্রেন",
   },
   "hajj-registration-bangladesh-government-vs-private-package-cost": {
-    en: "White pilgrim accommodation tents spread across Mina valley near Makkah",
-    bn: "মক্কার নিকটবর্তী মিনা উপত্যকায় শুভ্র হাজি তাঁবুর দৃশ্য",
+    en: "Rows of white tents fill a broad valley among rocky hills",
+    bn: "পাথুরে পাহাড়ের মাঝে বিস্তৃত উপত্যকায় সারি সারি সাদা তাঁবু",
   },
   "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
-    en: "Pilgrims walking beneath the shaded courtyard umbrellas at the Prophet's Mosque in Madinah",
-    bn: "মদিনায় মসজিদে নববীর বিশালাকার ছাতার নিচে ওমরাহ যাত্রীদের চলাচলের দৃশ্য",
+    en: "Pilgrims walk beneath the giant courtyard umbrellas at the Prophet's Mosque",
+    bn: "মসজিদে নববীর বিশাল ছাতার নিচ দিয়ে হেঁটে যাচ্ছেন মুসল্লিরা",
   },
   "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": {
-    en: "A commercial passenger aircraft cruising above the clouds at sunrise",
-    bn: "সূর্যোদয়ের সময় মেঘমালার ওপর দিয়ে উড়ে চলা আন্তর্জাতিক যাত্রীবাহী বিমান",
+    en: "A Saudia airliner flies above clouds and coastline at sunset",
+    bn: "সূর্যাস্তে মেঘ ও উপকূলের ওপর দিয়ে উড়ে যাচ্ছে সৌদিয়া এয়ারলাইন্সের বিমান",
   },
   "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": {
-    en: "The iconic Green Dome of the Prophet's Mosque in Madinah illuminated at dusk",
-    bn: "গোধূলিলগ্নে মদিনার মসজিদে নববীর পবিত্র সবুজ গম্বুজের দৃশ্য",
+    en: "The Green Dome and minarets of the Prophet's Mosque glow at twilight",
+    bn: "গোধূলিতে মদিনার মসজিদে নববীর সবুজ গম্বুজ ও মিনারগুলো আলোকিত",
   },
   "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": {
-    en: "Marble arches and designated pilgrim entrances at the Prophet's Mosque in Madinah",
-    bn: "মদিনার মসজিদে নববীর মার্বেল পাথরের খিলান ও প্রবেশদ্বার",
+    en: "Marble arches and courtyard at the Prophet's Mosque in Madinah",
+    bn: "মদিনার মসজিদে নববীর মার্বেলের খিলান ও প্রশস্ত প্রাঙ্গণ",
   },
   "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": {
-    en: "International travelers walking through the modern Jeddah King Abdulaziz airport terminal",
-    bn: "জেদ্দার কিং আবদুল আজিজ আন্তর্জাতিক বিমানবন্দর টার্মিনালে যাত্রীদের গমনাগমন",
+    en: "Travelers cross a glass-roofed airport terminal beneath a Terminal 1 departures sign",
+    bn: "টার্মিনাল ১-এর প্রস্থান নির্দেশিকার নিচে কাচঘেরা বিমানবন্দরে হাঁটছেন যাত্রীরা",
   },
   "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": {
-    en: "Pilgrims gathered in prayer around the Kaaba at Masjid al-Haram during Ramadan night",
-    bn: "রমজানের রাতে মক্কার মসজিদুল হারামে কাবা প্রাঙ্গণে সমবেত মুসল্লিদের প্রার্থনা",
+    en: "The Kaaba and Makkah Clock Tower glow beneath a crescent moon",
+    bn: "চাঁদের নিচে আলোকিত কাবা ও মক্কা ক্লক টাওয়ারের রাতের দৃশ্য",
   },
   "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": {
-    en: "Folded white ihram garments, prayer beads, and travel documents on a preparation desk",
-    bn: "টেবিলের ওপর রাখা শুভ্র ইহরামের কাপড়, তসবিহ ও ভ্রমণ নথিপত্র",
+    en: "Folded white ihram cloth, prayer beads, and passports on a wooden table",
+    bn: "কাঠের টেবিলে রাখা সাদা ইহরামের কাপড়, তসবিহ ও পাসপোর্ট",
   },
   "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": {
-    en: "Saudi Ajwa dates and traditional Arabic coffee set for airport departure customs clearance",
-    bn: "বিমানবন্দর কাস্টমস ব্যাগেজ চেকের জন্য প্রস্তুত সৌদি আজওয়া খেজুর ও আরবি কফি",
+    en: "Dates, cups, and an ornate Arabic coffee pot arranged on a woven tray",
+    bn: "বেতের ট্রেতে সাজানো খেজুর, পেয়ালা ও নকশা করা আরবি কফির পাত্র",
   },
   "bangladeshi-halal-food-guide-makkah-madinah-budget-meals": {
-    en: "A spread of authentic Middle Eastern halal grilled dishes served at a dining table",
-    bn: "রেস্তোরাঁয় পরিবেশিত ঐতিহ্যবাহী হালাল মধ্যপ্রাচ্যের খাবারের পদ",
+    en: "A table crowded with rice, curries, flatbread, dips, and tea",
+    bn: "ভাত, নানা তরকারি, রুটি, ডিপ ও চাসহ খাবারে ভরা একটি টেবিল",
   },
   "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": {
-    en: "Historic Quba Mosque in Madinah beside a serene reflecting pool",
-    bn: "মদিনার ঐতিহাসিক মসজিদে কুবা ও সম্মুখের শান্ত জলাশয়",
+    en: "A white domed mosque with tall minarets stands among palm trees",
+    bn: "খেজুরগাছের মাঝে দাঁড়িয়ে থাকা সাদা গম্বুজ ও উঁচু মিনারসমৃদ্ধ মসজিদ",
   },
   "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide": {
-    en: "Dubai downtown skyline at twilight featuring the illuminated Burj Khalifa",
-    bn: "গোধূলির আলোয় দুবাই ডাউনটাউনের স্কাইলাইন ও আলোকিত বুর্জ খলিফা",
+    en: "A family walks beside Dubai's waterfront beneath the downtown skyline at dusk",
+    bn: "গোধূলিতে দুবাইয়ের ডাউনটাউন স্কাইলাইনের নিচে জলধারের পথ ধরে হাঁটছে একটি পরিবার",
   },
   "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide": {
-    en: "Sheikh Zayed Grand Mosque in Abu Dhabi with white marble domes reflected in water",
-    bn: "আবুধাবির শেখ জায়েদ গ্র্যান্ড মসজিদের শুভ্র মার্বেল গম্বুজ ও জলাশয়ের প্রতিফলন",
+    en: "White domes of Sheikh Zayed Grand Mosque reflect in the courtyard pool",
+    bn: "শেখ জায়েদ গ্র্যান্ড মসজিদের শুভ্র গম্বুজের প্রতিফলন উঠোনের জলাশয়ে",
   },
   "malaysia-islamic-heritage-putrajaya-halal-family-tour-guide": {
-    en: "Putra Mosque in Putrajaya reflected across the scenic lake waterfront",
-    bn: "মালয়েশিয়ার পুত্রজায়ার নান্দনিক পুত্রা মসজিদ ও লেকের মনোরম দৃশ্য",
+    en: "Putra Mosque's pink dome and minaret reflect in Putrajaya Lake at dusk",
+    bn: "গোধূলিতে পুত্রজায়া লেকে প্রতিফলিত গোলাপি গম্বুজ ও মিনারসহ পুত্রা মসজিদ",
   },
   "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide": {
-    en: "The Louvre museum glass pyramid illuminated at dusk in Paris",
-    bn: "প্যারিসে গোধূলির আলোয় আলোকিত লুভর জাদুঘরের কাচের পিরামিড",
+    en: "The Louvre's glass pyramid glows in the Paris courtyard at dusk",
+    bn: "গোধূলিতে প্যারিসের লুভর প্রাঙ্গণে আলোকিত কাচের পিরামিড",
   },
   "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah": {
-    en: "An Islamic banking dual-currency credit card arranged with prayer beads on a travel desk",
-    bn: "ভ্রমণ ডেস্কে রাখা শরিয়াহ-সম্মত ডুয়েল কারেন্সি কার্ড ও তসবিহ",
+    en: "A green payment card and passport sit beside prayer beads and Arabic coffee",
+    bn: "আরবি কফি ও তসবিহের পাশে রাখা সবুজ পাসপোর্ট ও পেমেন্ট কার্ড",
   },
   "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": {
-    en: "Foreign currency bank paperwork and banking cards arranged on a business desk",
-    bn: "ব্যবসায়িক ডেস্কে রাখা বৈদেশিক মুদ্রা এন্ডোর্সমেন্ট ও ব্যাংকিং নথিপত্র",
+    en: "Foreign banknotes and a wallet beside a laptop showing a spreadsheet",
+    bn: "স্প্রেডশিট খোলা ল্যাপটপের পাশে বৈদেশিক মুদ্রার নোট ও মানিব্যাগ",
   },
   "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": {
-    en: "A digital travel booking voucher and laptop on an itinerary planning desk",
-    bn: "ভ্রমণ পরিকল্পনা ডেস্কে ডিজিটাল হোটেল ভাউচার ও ল্যাপটপ",
+    en: "Passport and boarding passes on a desk beside tea, a camera, and a city view",
+    bn: "জানালার বাইরের শহরের দৃশ্যের পাশে টেবিলে পাসপোর্ট, বোর্ডিং পাস, চা ও ক্যামেরা",
   },
   "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": {
-    en: "A point-of-sale card terminal, foreign currency banknotes, and an endorsed payment card",
-    bn: "পয়েন্ট অব সেল (পিওএস) টার্মিনাল, বৈদেশিক কারেন্সি নোট ও পেমেন্ট কার্ড",
+    en: "A contactless payment terminal beside a wallet, banknotes, and payment cards",
+    bn: "মানিব্যাগ, বৈদেশিক মুদ্রার নোট ও কার্ডের পাশে কন্ট্যাক্টলেস পেমেন্ট টার্মিনাল",
   },
   "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": {
-    en: "Wat Arun temple along the Chao Phraya River at golden hour sunset in Bangkok",
-    bn: "সূর্যাস্তের সোনালি আলোয় ব্যাংককের চাও ফ্রায়া নদীর তীরে ঐতিহাসিক ওয়াট অরুণ",
+    en: "Wat Arun across the Chao Phraya River as boats pass at sunset",
+    bn: "সূর্যাস্তে চাও ফ্রায়া নদীতে নৌকার ওপারে ওয়াট অরুণ",
   },
   "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration": {
-    en: "The iconic Petronas Twin Towers illuminated against the night sky in Kuala Lumpur",
-    bn: "কুয়ালালামপুরের রাতের আকাশে আলোকিত পেট্রোনাস টুইন টাওয়ার",
+    en: "The Petronas Twin Towers rise above a park and reflecting pool at night",
+    bn: "রাতে পার্ক ও জলাশয়ের ওপরে মাথা তুলে দাঁড়িয়ে পেট্রোনাস টুইন টাওয়ার",
   },
   "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia": {
-    en: "A green Bangladeshi passport with boarding passes arranged near an aircraft window",
-    bn: "উড়োজাহাজের জানালার পাশে রাখা সবুজ বাংলাদেশি পাসপোর্ট ও বোর্ডিং পাস",
+    en: "A green passport and boarding pass on an airplane tray beside snowy Himalayan peaks",
+    bn: "বরফঢাকা হিমালয়ের দৃশ্যের পাশে বিমানের ট্রে-টেবিলে রাখা সবুজ পাসপোর্ট ও বোর্ডিং পাস",
   },
   "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide": {
-    en: "A Singapore MRT train crossing Marina Bay bridge against the twilight city skyline",
-    bn: "গোধূলির আলোয় মেরিনা বে পারাপাররত সিঙ্গাপুর এমআরটি ট্রেন",
+    en: "A green MRT train passes Marina Bay Sands and Supertrees at sunset",
+    bn: "সূর্যাস্তে মেরিনা বে স্যান্ডস ও সুপারট্রির পাশ দিয়ে যাচ্ছে সবুজ এমআরটি ট্রেন",
   },
   "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh": {
-    en: "Modern international patient reception and healthcare lounge inside a Bangkok hospital",
-    bn: "ব্যাংককের আন্তর্জাতিক হাসপাতালের আধুনিক অভ্যর্থনা ও স্বাস্থ্যসেবা লাউঞ্জ",
+    en: "Visitors sit in a bright hospital lobby with a city skyline beyond the windows",
+    bn: "জানালার বাইরে নগরদৃশ্যসহ উজ্জ্বল হাসপাতালের লবিতে বসে আছেন রোগী ও দর্শনার্থীরা",
   },
   "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": {
-    en: "A smartphone with active eSIM data connectivity arranged beside travel insurance papers",
-    bn: "আন্তর্জাতিক ট্রাভেল ইন্স্যুরেন্স ও সচল ই-সিমসহ স্মার্টফোন",
+    en: "A smartphone, passport, boarding pass, and insurance document beside airport windows",
+    bn: "বিমানবন্দরের জানালার পাশে টেবিলে স্মার্টফোন, পাসপোর্ট, বোর্ডিং পাস ও ভ্রমণবিমার কাগজপত্র",
   },
   "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost": {
-    en: "A scenic passenger train crossing the historic Nine Arch Bridge in Ella, Sri Lanka",
-    bn: "শ্রীলঙ্কার সবুজে ঘেরা পাহাড়ের ওপর নাইন আর্চ ব্রিজ দিয়ে ট্রেন পারাপারের দৃশ্য",
+    en: "A blue train crosses Nine Arch Bridge amid the green hills of Ella, Sri Lanka",
+    bn: "শ্রীলঙ্কার এলার সবুজ পাহাড়ের মাঝে নাইন আর্চ ব্রিজ পেরিয়ে যাচ্ছে নীল ট্রেন",
   },
   "bangladesh-epassport-application-renewal-64-districts-fee-guide": {
-    en: "Biometric e-passport verification desk with official application forms and passport book",
-    bn: "বায়োমেট্রিক ই-পাসপোর্ট ভেরিফিকেশন ডেস্ক ও আবেদন নথিপত্র",
+    en: "Passports and application papers beside a fingerprint scanner and eyeglasses",
+    bn: "আঙুলের ছাপ নেওয়ার স্ক্যানার ও চশমার পাশে রাখা পাসপোর্ট ও আবেদনপত্র",
   },
   "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp": {
-    en: "Airport flight departure status board showing delayed and on-time international flights",
-    bn: "আন্তর্জাতিক বিমানবন্দরের ফ্লাইট স্ট্যাটাস বোর্ড ও বিলম্বিত ফ্লাইটের তালিকা",
+    en: "A traveler with a suitcase walks beneath an airport departure board, with planes outside",
+    bn: "বিমানবন্দরের প্রস্থান বোর্ডের নিচে স্যুটকেস হাতে হাঁটছেন এক যাত্রী, বাইরে দেখা যায় বিমান",
   },
   "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla": {
-    en: "Widebody passenger aircraft lined up at the tarmac gates of Dhaka Hazrat Shahjalal Airport",
-    bn: "ঢাকা হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দরের রানওয়েতে সারিবদ্ধ বোয়িং বিমান",
+    en: "Passenger jets stand at airport gates on the apron at sunset",
+    bn: "সূর্যাস্তে বিমানবন্দরের এপ্রনে গেটের পাশে দাঁড়িয়ে থাকা যাত্রীবাহী বিমান",
   },
   "dual-currency-card-endorsement-bangladesh": {
-    en: "Bangladeshi passport open to currency endorsement page beside international payment cards",
-    bn: "ডলার এন্ডোর্সমেন্ট পেজে উন্মুক্ত বাংলাদেশি পাসপোর্ট ও ডুয়েল কারেন্সি কার্ড",
+    en: "A passport, boarding passes, and payment card beside a compass on a stone table",
+    bn: "পাথরের টেবিলে কম্পাসের পাশে রাখা পাসপোর্ট, বোর্ডিং পাস ও পেমেন্ট কার্ড",
   },
   "dhaka-airport-outbound-immigration-checklist-noc-go": {
-    en: "Passenger aircraft climbing above sea of clouds at departure sunset from Dhaka",
-    bn: "ঢাকা বিমানবন্দর থেকে উড্ডয়নের পর সূর্যাস্তের মেঘমালার ওপর দিয়ে বিমান",
+    en: "A passenger jet flies above a sea of clouds in warm golden light",
+    bn: "উষ্ণ সোনালি আলোয় মেঘের সমুদ্রের ওপরে উড়ছে একটি যাত্রীবাহী বিমান",
   },
   "nepal-pokhara-itinerary-bangladesh": {
-    en: "The historic Boudhanath Stupa in Kathmandu fluttering with colorful prayer flags",
-    bn: "কাঠমান্ডুর ঐতিহাসিক বৌদ্ধনাথ স্তূপ ও বাতাসে দোলা রঙিন পতাকা",
+    en: "Boudhanath Stupa with prayer flags stands before snow-covered Himalayan peaks",
+    bn: "বরফঢাকা হিমালয়ের সামনে রঙিন প্রার্থনার পতাকায় ঘেরা কাঠমান্ডুর বৌদ্ধনাথ স্তূপ",
   },
   "nepal-vs-thailand-first-trip": {
-    en: "Sunrise reflections over Cox's Bazar beach and gentle ocean waves in Bangladesh",
-    bn: "কক্সবাজার সমুদ্র সৈকতে ভোরের শান্ত ঢেউ ও সূর্যোদয়ের লাল আভা",
+    en: "Sunrise lights a broad sandy beach as waves roll in and small boats sit offshore",
+    bn: "সূর্যোদয়ের আলোয় ঢেউয়ে ভেজা বিস্তৃত বালুকাবেলা, দূরে ছোট ছোট নৌকা",
   },
   "halal-food-guide-bangkok-bangladesh": {
-    en: "Wat Arun temple spire seen across the bustling Chao Phraya riverfront in Bangkok",
-    bn: "ব্যাংককের প্রাণবন্ত চাও ফ্রায়া নদী ও ওয়াট অরুণ মন্দিরের চূড়া",
+    en: "Wat Arun rises beyond the Chao Phraya River, with boats on the water at sunset",
+    bn: "সূর্যাস্তে চাও ফ্রায়া নদীর ওপারে ওয়াট অরুণ, জলে কয়েকটি নৌকা",
   },
   "top-budget-family-destinations-from-dhaka": {
-    en: "Petronas Twin Towers and surrounding park illuminated at dusk in Kuala Lumpur",
-    bn: "কুয়ালালামপুরের মনোরম পার্ক ও আলোকিত পেট্রোনাস টুইন টাওয়ার",
+    en: "The Petronas Twin Towers rise over Kuala Lumpur at sunset",
+    bn: "সূর্যাস্তে কুয়ালালামপুরের আকাশে মাথা তুলে দাঁড়িয়ে পেট্রোনাস টুইন টাওয়ার",
   },
   "hotel-savings-guide-bangkok-kl-dubai": {
-    en: "Modern city waterfront hotels and luxury skyscrapers illuminated at twilight",
-    bn: "গোধূলির আলোয় আধুনিক শহরের দৃষ্টিনন্দন ওয়াটারফ্রন্ট হোটেল ও স্কাইস্ক্র্যাপার",
+    en: "Dubai's illuminated skyline, including Burj Khalifa, rises beside the waterfront at dusk",
+    bn: "গোধূলিতে জলধারের পাশে আলোকিত দুবাইয়ের স্কাইলাইন ও বুর্জ খলিফা",
   },
   "singapore-visa-guide-bangladesh-agents": {
-    en: "Futuristic Supertree Grove at Gardens by the Bay glowing against Singapore skyline",
-    bn: "সিঙ্গাপুরের গার্ডেনস বাই দ্য বে-র আলোকিত সুপারট্রি গ্রোভ ও স্কাইলাইন",
+    en: "Marina Bay Sands and Supertrees line Singapore's waterfront at sunset",
+    bn: "সূর্যাস্তে সিঙ্গাপুরের জলধারে মেরিনা বে স্যান্ডস ও সুপারট্রি",
   },
   "maldives-budget-trip-bangladesh-maafushi": {
-    en: "Overwater wooden villas and palm trees beside a crystal-clear turquoise lagoon in Maldives",
-    bn: "মালদ্বীপের স্বচ্ছ নীল সমুদ্র ও সৈকতসংলগ্ন রিসোর্টের ওভারওয়াটার ভিলা",
+    en: "Overwater villas line a turquoise lagoon beside a palm-covered island",
+    bn: "খেজুরগাছে ঘেরা দ্বীপের পাশে ফিরোজা লেগুনে সারি সারি ওভারওয়াটার ভিলা",
   },
   "cheap-flight-booking-hacks-dhaka": {
-    en: "Aircraft wing and jet engine viewed from passenger window cruising through clear blue sky",
-    bn: "যাত্রীবাহী বিমানের জানালা দিয়ে নীল আকাশ ও মেঘের ওপর বিমানের ডানার দৃশ্য",
+    en: "Split view of an airport terminal and airplane wing above clouds at sunset",
+    bn: "সূর্যাস্তে বিমানবন্দর টার্মিনাল ও মেঘের ওপর দিয়ে যাওয়া বিমানের ডানার পাশাপাশি দৃশ্য",
   },
   "bangladesh-travelers-iata-airport-codes-directory-guide": {
-    en: "Commercial jetliners parked at international airport passenger gates during boarding",
-    bn: "আন্তর্জাতিক বিমানবন্দরের বোর্ডিং গেটে পার্ক করা বাণিজ্যিক যাত্রীবাহী বিমান",
+    en: "Passenger jets parked at multiple gates on an international airport apron",
+    bn: "আন্তর্জাতিক বিমানবন্দরের টার্মিনালের পাশে বিভিন্ন গেটে দাঁড়িয়ে থাকা যাত্রীবাহী বিমান",
   },
   "chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai": {
-    en: "Dubai Creek waterfront skyline and coastal illuminated architectural towers at night",
-    bn: "রাতের আলোয় দুবাই ক্রিক ওয়াটারফ্রন্ট ও আধুনিক টাওয়ারের মনোরম দৃশ্য",
+    en: "A family walks beside Dubai's waterfront beneath the downtown skyline at dusk",
+    bn: "গোধূলিতে দুবাইয়ের ডাউনটাউন স্কাইলাইনের নিচে জলধারের পথ ধরে হাঁটছে একটি পরিবার",
   },
 };
 
@@ -319,11 +308,11 @@ const CATEGORY_THEMES: Record<string, CategoryTheme> = {
   },
   "visa & immigration": {
     en: "Official travel documentation, passports, and immigration counters",
-    bn: "পাসপোর্ট, ভিসা নথিপত্র ও ইমিগ্রেশন ডেস্কেল প্রস্তুতি",
+    bn: "পাসপোর্ট, ভিসা নথিপত্র ও ইমিগ্রেশন কাউন্টার",
   },
   "ভিসা ও ইমিগ্রেশন": {
     en: "Official travel documentation, passports, and immigration counters",
-    bn: "পাসপোর্ট, ভিসা নথিপত্র ও ইমিগ্রেশন ডেস্কেল প্রস্তুতি",
+    bn: "পাসপোর্ট, ভিসা নথিপত্র ও ইমিগ্রেশন কাউন্টার",
   },
   "cheap flight tips": {
     en: "Commercial passenger aircraft and international flight departure terminals",
@@ -393,11 +382,15 @@ export function cleanBlogTitleForAlt(title: string): string {
     .replace(/^(?:ধাপে ধাপে\s*[:—–-]?\s*)/, "")
     // Strip redundant parenthesis like "(Step-by-Step)"
     .replace(/\((?:Step-by-Step|Complete Guide|DIY)\)/gi, "")
-    // Strip common travel emojis
+    // Remove complete keycaps first, then emoji bases, flag indicators, skin
+    // tones, and tag characters. Strip selectors/joiners too, so no invisible
+    // fragments remain after a family emoji or presentation sequence is gone.
+    .replace(/[#*0-9]\uFE0F?\u20E3/gu, "")
     .replace(
-      /[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,
+      /[\p{Extended_Pictographic}\p{Regional_Indicator}\p{Emoji_Modifier}\u{E0020}-\u{E007F}]/gu,
       "",
     )
+    .replace(/[\u200D\uFE0E\uFE0F\u20E3]/gu, "")
     // Normalize quotes and dashes
     .replace(/["""'']/g, "")
     // Clean trailing punctuation
@@ -406,31 +399,11 @@ export function cleanBlogTitleForAlt(title: string): string {
     .replace(/\s+/g, " ")
     .trim();
 
-  return cleaned || title.trim();
+  return cleaned;
 }
 
-/**
- * Truncates an alt text string cleanly without breaking mid-word,
- * ensuring proper punctuation at the end.
- */
-function truncateAltText(text: string, maxLength: number, isBn: boolean): string {
-  if (text.length <= maxLength) return text;
-
-  // Trim to maximum allowable length minus space for punctuation
-  const sub = text.slice(0, maxLength - 1);
-  const lastSpace = sub.lastIndexOf(" ");
-  const base = lastSpace > 40 ? sub.slice(0, lastSpace) : sub;
-  const cleaned = base.replace(/[.,:;—–-]+$/, "").trim();
-
-  return isBn ? `${cleaned}।` : `${cleaned}.`;
-}
-
-/**
- * Ensures alt text satisfies WCAG 2.1 Non-text Content (1.1.1) accessibility guidelines:
- *  - Strips forbidden redundant prefixes like "Photo of", "Image of", "Graphic of", "ছবি:"
- *  - Enforces proper sentence casing and final punctuation.
- */
-function enforceAccessibilityStandards(rawAlt: string, isBn: boolean): string {
+/** Normalize a scene description without adding redundant "photo of" wording. */
+function normalizeAltText(rawAlt: string, isBn: boolean): string {
   let alt = rawAlt.trim();
 
   // Strip redundant screen reader prefixes (English)
@@ -458,13 +431,9 @@ function enforceAccessibilityStandards(rawAlt: string, isBn: boolean): string {
 }
 
 /**
- * Dynamically generates descriptive, accessible, and SEO-optimized alt text
- * for blog cover photography based on article title, category, and optional metadata.
- *
- * @param input BlogCoverAltTextInput or title string
- * @param category Optional category string if title was provided as first argument
- * @param slug Optional article slug
- * @param lang Optional language code ('en' | 'bn')
+ * Return a concise scene description without repeating the adjacent article title.
+ * Known covers use curated English/Bengali text; metadata is only used to choose
+ * a sensible fallback for a new or unmapped post.
  */
 export function generateBlogCoverAltText(
   input: string | BlogCoverAltTextInput,
@@ -476,8 +445,6 @@ export function generateBlogCoverAltText(
   let cat = category ?? "";
   let postSlug = slug ?? "";
   let locale = lang;
-  let isDetail = false;
-  let maxLength = 125;
 
   if (typeof input === "string") {
     title = input;
@@ -486,90 +453,34 @@ export function generateBlogCoverAltText(
     cat = input.category ?? cat;
     postSlug = input.slug ?? postSlug;
     locale = input.lang ?? locale;
-    isDetail = input.isDetail ?? isDetail;
-    maxLength = input.maxLength ?? maxLength;
   }
 
-  // Detect Bengali language from explicit param or Bengali unicode block
-  const isBn =
-    locale === "bn" ||
-    (typeof title === "string" && /[\u0980-\u09FF]/.test(title)) ||
-    (typeof cat === "string" && /[\u0980-\u09FF]/.test(cat));
+  const normalizedLocale = typeof locale === "string" ? locale.trim().toLowerCase() : "";
+  const usesBengaliScript = /[\u0980-\u09FF]/.test(`${title} ${cat}`);
+  const isBn = normalizedLocale.startsWith("bn") ||
+    (!normalizedLocale.startsWith("en") && usesBengaliScript);
 
-  const cleanedTitle = cleanBlogTitleForAlt(title);
-  const normalizedCategory = (cat || "").toLowerCase().trim();
+  const cleanedTitle = cleanBlogTitleForAlt(title).toLowerCase();
+  const normalizedCategory = cat.trim().toLowerCase();
+  const normalizedSlug = postSlug.trim().toLowerCase();
+  const curated = normalizedSlug ? CURATED_BLOG_SCENES[normalizedSlug] : undefined;
 
-  // 1. Check if a curated high-fidelity photograph description is mapped to this slug
-  const curated = postSlug ? CURATED_BLOG_SCENES[postSlug] : undefined;
   if (curated) {
-    const photoSubject = isBn ? curated.bn : curated.en;
-
-    // Harmonize curated visual scene with article title and category context
-    let combined = "";
-    if (isBn) {
-      if (cleanedTitle) {
-        combined = isDetail
-          ? `${photoSubject} – ${cleanedTitle} ট্রাভেল গাইড`
-          : `${photoSubject} – ${cleanedTitle}`;
-      } else {
-        combined = `${photoSubject} – উড়াল ট্রাভেল গাইড`;
-      }
-    } else {
-      if (cleanedTitle) {
-        combined = isDetail
-          ? `${photoSubject}, illustrating the ${cleanedTitle} travel guide`
-          : `${photoSubject} for ${cleanedTitle}`;
-      } else {
-        combined = `${photoSubject} for URAL travel guide`;
-      }
-    }
-
-    const standardAlt = enforceAccessibilityStandards(combined, isBn);
-    return truncateAltText(standardAlt, maxLength, isBn);
+    return normalizeAltText(isBn ? curated.bn : curated.en, isBn);
   }
 
-  // 2. Dynamic generation: resolve visual destination and category anchors
-  const lowerTitle = (title || "").toLowerCase();
-  let destinationScene = "";
+  // Infer only a visual subject. Do not append the article title: it is already
+  // announced in the nearby heading and was causing long, abruptly truncated alts.
+  const searchText = `${cleanedTitle} ${normalizedSlug} ${normalizedCategory}`;
+  const destination = DESTINATION_ANCHORS.find(({ keywords }) =>
+    keywords.some((keyword) => searchText.includes(keyword.toLowerCase())),
+  );
+  const categoryTheme = CATEGORY_THEMES[normalizedCategory];
+  const fallback = isBn
+    ? destination?.bn ?? categoryTheme?.bn ?? "আন্তর্জাতিক ভ্রমণ গন্তব্য ও দর্শনীয় স্থান"
+    : destination?.en ?? categoryTheme?.en ?? "International travel destinations and landmarks";
 
-  for (const anchor of DESTINATION_ANCHORS) {
-    if (anchor.keywords.some((kw) => lowerTitle.includes(kw.toLowerCase()))) {
-      destinationScene = isBn ? anchor.bn : anchor.en;
-      break;
-    }
-  }
-
-  // Resolve category visual theme
-  const catTheme = CATEGORY_THEMES[normalizedCategory];
-  const categoryScene = catTheme
-    ? isBn
-      ? catTheme.bn
-      : catTheme.en
-    : "";
-
-  // 3. Compose dynamic descriptive alt text
-  let dynamicAlt = "";
-  if (isBn) {
-    const visualCore = destinationScene || categoryScene || "আন্তর্জাতিক ভ্রমণ গন্তব্য ও দর্শনীয় স্থান";
-    if (cleanedTitle) {
-      dynamicAlt = `${visualCore} – ${cleanedTitle} নির্দেশিকা`;
-    } else {
-      dynamicAlt = `${visualCore} – উড়াল ভ্রমণ গাইড`;
-    }
-  } else {
-    const visualCore = destinationScene || categoryScene || "International travel destination and landmarks";
-    const categorySuffix = cat ? ` in ${cat}` : "";
-    if (cleanedTitle) {
-      dynamicAlt = isDetail
-        ? `${visualCore} featured in the ${cleanedTitle}${categorySuffix} guide`
-        : `${visualCore} for ${cleanedTitle}${categorySuffix} guide`;
-    } else {
-      dynamicAlt = `${visualCore} for travel guide`;
-    }
-  }
-
-  const accessibleResult = enforceAccessibilityStandards(dynamicAlt, isBn);
-  return truncateAltText(accessibleResult, maxLength, isBn);
+  return normalizeAltText(fallback, isBn);
 }
 
 /**

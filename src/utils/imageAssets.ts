@@ -1,14 +1,9 @@
-import {
-  generateBlogCoverAltText,
+export {
   cleanBlogTitleForAlt,
+  generateBlogCoverAltText,
+  getBlogImageAltText,
   type BlogCoverAltTextInput,
 } from "./blogAltText";
-
-export {
-  generateBlogCoverAltText,
-  cleanBlogTitleForAlt,
-  type BlogCoverAltTextInput,
-};
 
 /** Shared image metadata for optimized responsive site photography. */
 const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
@@ -141,73 +136,4 @@ export function getResponsiveImageProps(
     width,
     height,
   };
-}
-
-/** Descriptive, visual alt text for the 43 editorial blog-cover photographs. */
-export const BLOG_IMAGE_ALT_TEXT: Readonly<Record<string, string>> = {
-  "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": "The Kaaba at Masjid al-Haram in Makkah, illuminated at night.",
-  "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": "A Haramain high-speed train at a station in Saudi Arabia.",
-  "hajj-registration-bangladesh-government-vs-private-package-cost": "White Hajj tents spread across Mina near Makkah.",
-  "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": "Pilgrims walking beneath the courtyard umbrellas at the Prophet’s Mosque in Madinah.",
-  "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": "A passenger aircraft flying above the clouds at sunrise.",
-  "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": "The Green Dome at the Prophet’s Mosque in Madinah, illuminated at night.",
-  "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": "Arched entrances and corridors at the Prophet’s Mosque in Madinah.",
-  "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": "Passengers walking through the Jeddah airport terminal.",
-  "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": "Pilgrims gathered at Masjid al-Haram in Makkah at night.",
-  "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": "Folded ihram garments, prayer beads, and a passport arranged on a desk.",
-  "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": "Dates and Arabic coffee arranged on a table.",
-  "bangladeshi-halal-food-guide-makkah-madinah-budget-meals": "A spread of Middle Eastern dishes served at a restaurant.",
-  "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": "Quba Mosque in Madinah beside a reflecting pool.",
-  "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide": "Dubai’s skyline at twilight, including the Burj Khalifa.",
-  "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide": "Sheikh Zayed Grand Mosque reflected in its courtyard pool in Abu Dhabi.",
-  "malaysia-islamic-heritage-putrajaya-halal-family-tour-guide": "Putra Mosque in Putrajaya reflected across the waterfront.",
-  "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide": "The Louvre pyramid in Paris at dusk.",
-  "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah": "A green payment card and prayer beads arranged on a desk.",
-  "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": "An open laptop beside banking paperwork and foreign currency.",
-  "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": "A laptop, travel notebook, and coffee arranged on a desk.",
-  "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": "A passport, payment card, and foreign banknotes arranged on a table.",
-  "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": "Wat Arun on Bangkok’s Chao Phraya River at sunset.",
-  "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration": "The Petronas Twin Towers illuminated at night in Kuala Lumpur.",
-  "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia": "A Bangladeshi passport and boarding pass beside an airplane window.",
-  "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide": "An MRT train crossing Marina Bay in Singapore at dusk.",
-  "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh": "The reception and seating area inside a modern Bangkok hospital.",
-  "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": "A smartphone and travel documents arranged beside a passport.",
-  "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost": "A train crossing the Nine Arch Bridge in Sri Lanka’s green hill country.",
-  "bangladesh-epassport-application-renewal-64-districts-fee-guide": "Passports and application paperwork arranged on a desk.",
-  "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp": "Departure information boards above passengers in an airport terminal.",
-  "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla": "Passenger aircraft parked at an airport during sunset.",
-  "dual-currency-card-endorsement-bangladesh": "Bangladeshi passports, foreign currency, and coffee on a travel desk.",
-  "dhaka-airport-outbound-immigration-checklist-noc-go": "A passenger aircraft cruising above a blanket of clouds at sunset.",
-  "nepal-pokhara-itinerary-bangladesh": "Boudhanath Stupa in Kathmandu at sunset.",
-  "nepal-vs-thailand-first-trip": "Sunrise over Cox’s Bazar beach in Bangladesh.",
-  "halal-food-guide-bangkok-bangladesh": "Wat Arun and Bangkok’s riverfront at sunset.",
-  "top-budget-family-destinations-from-dhaka": "The Kuala Lumpur skyline with the Petronas Twin Towers at twilight.",
-  "hotel-savings-guide-bangkok-kl-dubai": "Dubai’s skyline and Burj Khalifa beside the waterfront at sunset.",
-  "singapore-visa-guide-bangladesh-agents": "The Gardens by the Bay Supertrees and Singapore skyline at twilight.",
-  "maldives-budget-trip-bangladesh-maafushi": "Overwater villas above a turquoise lagoon in the Maldives.",
-  "cheap-flight-booking-hacks-dhaka": "An airplane wing above the clouds, viewed from a passenger cabin.",
-  "bangladesh-travelers-iata-airport-codes-directory-guide": "Passenger aircraft and tarmac gates at an international airport terminal.",
-  "chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai": "Dubai skyline and waterfront architecture illuminated at twilight.",
-};
-
-/**
- * Returns descriptive, accessible, and SEO-optimized alt text.
- * Enhanced to accept either a slug string, a BlogPost object, or an options object,
- * dynamically generating alt text that meets WCAG 2.1 AA standards.
- */
-export function getBlogImageAltText(
-  slugOrInput: string | BlogCoverAltTextInput,
-  title?: string,
-  category?: string,
-  lang?: "en" | "bn" | string,
-): string {
-  if (typeof slugOrInput === "string") {
-    return generateBlogCoverAltText({
-      slug: slugOrInput,
-      title,
-      category,
-      lang,
-    });
-  }
-  return generateBlogCoverAltText(slugOrInput);
 }

@@ -79,10 +79,7 @@ import {
 } from "./utils/localeRoutes";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { ConsentBanner } from "./components/ConsentBanner";
-import {
-  generateBlogCoverAltText,
-  getBlogImageAltText,
-} from "./utils/imageAssets";
+import { generateBlogCoverAltText } from "./utils/imageAssets";
 import { ResponsiveImage } from "./components/ResponsiveImage";
 import { getRelatedBlogPosts } from "./utils/blogLinks";
 import { URAL_SOCIAL_LINKS } from "./utils/schema";
@@ -5642,7 +5639,6 @@ export default function App() {
                                 category: post.category,
                                 slug: post.slug,
                                 lang: isBn ? "bn" : "en",
-                                isDetail: false,
                               })}
                               loading="lazy"
                               fetchPriority="low"
@@ -6134,7 +6130,6 @@ export default function App() {
                               category: activePost.category,
                               slug: activePost.slug,
                               lang: isBn ? "bn" : "en",
-                              isDetail: true,
                             })}
                             loading="eager"
                             fetchPriority="high"
@@ -6792,7 +6787,6 @@ export default function App() {
                                     category: post.category,
                                     slug: post.slug,
                                     lang: isBn ? "bn" : "en",
-                                    isDetail: false,
                                   })}
                                   loading="lazy"
                                   fetchPriority="low"
@@ -6897,7 +6891,6 @@ export default function App() {
                           category: topic.category,
                           slug: topic.slug,
                           lang: isBn ? "bn" : "en",
-                          isDetail: false,
                         })}
                         loading="lazy"
                         fetchPriority="low"
