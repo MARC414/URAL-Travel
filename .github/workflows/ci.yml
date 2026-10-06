@@ -29,7 +29,8 @@ permissions:
 jobs:
   build:
     name: Type-check, build and verify prerender output
-    runs-on: ubuntu-latest
+    # Pin the OS image so ubuntu-latest migrations do not silently change the build environment.
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7

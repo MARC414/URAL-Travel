@@ -263,7 +263,6 @@ export function articleSchema(options: {
         category: articleSection,
         slug,
         lang: inLanguage?.startsWith("bn") ? "bn" : "en",
-        isDetail: true,
       }),
     },
     datePublished: isoPub,

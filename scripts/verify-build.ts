@@ -31,6 +31,11 @@ import {
   buildResponsiveSrcSet,
   RESPONSIVE_IMAGE_BREAKPOINTS,
 } from "../src/utils/imageAssets";
+import {
+  cleanBlogTitleForAlt,
+  CURATED_BLOG_SCENES,
+  generateBlogCoverAltText,
+} from "../src/utils/blogAltText";
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIST_DIR = path.join(ROOT_DIR, "dist");
@@ -88,6 +93,110 @@ const blogImages = fs.existsSync(blogImgDir)
 check(
   blogImages.length === BLOG_DATA.length,
   `dist/img/blog has one JPEG per blog post (${blogImages.length}/${BLOG_DATA.length})`
+);
+
+const generatedBlogImgDir = path.join(ROOT_DIR, "public", "img", "blog");
+const postSlugs = new Set(BLOG_DATA.map((post) => post.slug));
+const postsMissingGeneratedImage = BLOG_DATA.filter(
+  (post) => !fs.existsSync(path.join(generatedBlogImgDir, `${post.slug}.jpg`)),
+).map((post) => post.slug);
+const postsMissingCuratedAlt = BLOG_DATA.filter(
+  (post) => !CURATED_BLOG_SCENES[post.slug],
+).map((post) => post.slug);
+const orphanedCuratedAlt = Object.keys(CURATED_BLOG_SCENES).filter(
+  (slug) => !postSlugs.has(slug),
+);
+const blogAssetMappingIsComplete =
+  postsMissingGeneratedImage.length === 0 &&
+  postsMissingCuratedAlt.length === 0 &&
+  orphanedCuratedAlt.length === 0;
+check(
+  blogAssetMappingIsComplete,
+  blogAssetMappingIsComplete
+    ? `every blog slug has a generated cover JPEG and curated bilingual alt text (${BLOG_DATA.length}/${BLOG_DATA.length})`
+    : [
+        postsMissingGeneratedImage.length > 0 &&
+          `missing generated cover JPEG: ${postsMissingGeneratedImage.join(", ")}`,
+        postsMissingCuratedAlt.length > 0 && `missing curated alt: ${postsMissingCuratedAlt.join(", ")}`,
+        orphanedCuratedAlt.length > 0 && `orphaned curated alt: ${orphanedCuratedAlt.join(", ")}`,
+      ]
+        .filter(Boolean)
+        .join("; "),
+);
+
+const altTextIssues: string[] = [];
+for (const post of BLOG_DATA) {
+  for (const [locale, lang] of [["en", "en"], ["bn", "bn-BD"]] as const) {
+    const alt = generateBlogCoverAltText({
+      title: post.title,
+      category: post.category,
+      slug: post.slug,
+      lang,
+    });
+    const hasRedundantPrefix =
+      /^(?:(?:a|an)\s+)?(?:photo(?:graph)?|image|picture|graphic)\s+of\b/i.test(alt);
+    const hasWrongScript =
+      locale === "en"
+        ? /[\u0980-\u09FF]/.test(alt)
+        : !/[\u0980-\u09FF]/.test(alt);
+    if (
+      !alt.trim() ||
+      alt.length > 125 ||
+      hasRedundantPrefix ||
+      !/[.!?।]$/.test(alt) ||
+      hasWrongScript ||
+      alt.toLowerCase().includes(post.title.toLowerCase())
+    ) {
+      altTextIssues.push(`${post.slug} (${locale})`);
+    }
+  }
+}
+check(
+  altTextIssues.length === 0,
+  `blog cover alt text is concise, localized, and scene-focused (${BLOG_DATA.length * 2 - altTextIssues.length}/${BLOG_DATA.length * 2})${
+    altTextIssues.length ? `; issues: ${altTextIssues.slice(0, 5).join(", ")}` : ""
+  }`,
+);
+
+const cleanedEmojiTitle = cleanBlogTitleForAlt("Bangladesh 🇧🇩 ✈️ 👨‍👩‍👧‍👦 5️⃣ travel");
+const emojiOnlyTitle = cleanBlogTitleForAlt("🇧🇩 ✈️ 👨‍👩‍👧‍👦 5️⃣");
+check(
+  cleanedEmojiTitle === "Bangladesh travel" && emojiOnlyTitle === "",
+  "title cleanup removes flag, joined, variation-selector, and keycap emoji without leftovers",
+);
+
+const localeSpecificBengaliAlt = generateBlogCoverAltText({
+  slug: "nepal-vs-thailand-first-trip",
+  lang: "bn-BD",
+});
+const localeSpecificEnglishAlt = generateBlogCoverAltText({
+  slug: "nepal-vs-thailand-first-trip",
+  title: "থাইল্যান্ড বনাম নেপাল",
+  lang: "en-US",
+});
+const unsupportedLocaleBengaliAlt = generateBlogCoverAltText({
+  title: "থাইল্যান্ড ভিসা নির্দেশিকা",
+  lang: "fr",
+});
+check(
+  localeSpecificBengaliAlt.includes("সূর্যোদয়ের") &&
+    localeSpecificEnglishAlt.startsWith("Sunrise lights") &&
+    unsupportedLocaleBengaliAlt.includes("ব্যাংককের"),
+  "blog cover alt honors en/bn locale tags and detects Bengali script for unsupported locales",
+);
+
+const fallbackEnglishAlt = generateBlogCoverAltText({
+  title: "Thailand visa guide [2026]",
+  category: "Visa & Immigration",
+});
+const fallbackBengaliAlt = generateBlogCoverAltText({
+  title: "থাইল্যান্ড ভিসা নির্দেশিকা",
+  category: "ভিসা ও ইমিগ্রেশন",
+});
+check(
+  fallbackEnglishAlt === "Wat Arun and the Chao Phraya riverfront in Bangkok." &&
+    fallbackBengaliAlt === "ব্যাংককের চাও ফ্রায়া নদী ও ওয়াট অরুণ মন্দির।",
+  "unmapped blog covers infer concise destination scenes in English and Bengali",
 );
 
 // --- 2b. Responsive breakpoints & Consent Mode regression guards -----------
@@ -1204,7 +1313,7 @@ if (rss) {
   // Budget guard: the whole point of this split is that non-blog pages download
   // less. The ceiling sits just above today's measured value so a legitimate new
   // feature has room, but re-inlining the article bodies (~+62 KB gzip) fails.
-  const EAGER_JS_BUDGET_KB = 350;
+  const EAGER_JS_BUDGET_KB = 300;
   const eagerGzipKb =
     [...new Set([...eagerScripts, ...eagerPreloads])].reduce((total, url) => {
       const file = path.join(DIST_DIR, url.replace(/^\//, ""));
