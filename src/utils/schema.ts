@@ -1,3 +1,5 @@
+import { generateBlogCoverAltText } from "./blogAltText";
+
 export const BASE_URL = "https://ural-travel.pages.dev";
 export const SITE_ORG_ID = `${BASE_URL}/#organization`;
 export const SITE_LOGO_ID = `${BASE_URL}/#logo`;
@@ -256,6 +258,13 @@ export function articleSchema(options: {
       url: imageUrl,
       width: 1200,
       height: 630,
+      caption: generateBlogCoverAltText({
+        title: headline,
+        category: articleSection,
+        slug,
+        lang: inLanguage?.startsWith("bn") ? "bn" : "en",
+        isDetail: true,
+      }),
     },
     datePublished: isoPub,
     dateModified: isoMod,

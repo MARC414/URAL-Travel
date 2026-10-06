@@ -79,7 +79,10 @@ import {
 } from "./utils/localeRoutes";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { ConsentBanner } from "./components/ConsentBanner";
-import { getBlogImageAltText } from "./utils/imageAssets";
+import {
+  generateBlogCoverAltText,
+  getBlogImageAltText,
+} from "./utils/imageAssets";
 import { ResponsiveImage } from "./components/ResponsiveImage";
 import { getRelatedBlogPosts } from "./utils/blogLinks";
 import { URAL_SOCIAL_LINKS } from "./utils/schema";
@@ -5634,7 +5637,13 @@ export default function App() {
                             <ResponsiveImage
                               src={coverImg}
                               sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                              alt={getBlogImageAltText(post.slug)}
+                              alt={generateBlogCoverAltText({
+                                title: post.title,
+                                category: post.category,
+                                slug: post.slug,
+                                lang: isBn ? "bn" : "en",
+                                isDetail: false,
+                              })}
                               loading="lazy"
                               fetchPriority="low"
                               decoding="async"
@@ -6120,7 +6129,13 @@ export default function App() {
                           <ResponsiveImage
                             src={activeCoverImg}
                             sizes="(max-width: 767px) 100vw, 840px"
-                            alt={getBlogImageAltText(activePost.slug)}
+                            alt={generateBlogCoverAltText({
+                              title: activePost.title,
+                              category: activePost.category,
+                              slug: activePost.slug,
+                              lang: isBn ? "bn" : "en",
+                              isDetail: true,
+                            })}
                             loading="eager"
                             fetchPriority="high"
                             decoding="async"
@@ -6772,7 +6787,13 @@ export default function App() {
                                 <ResponsiveImage
                                   src={getBlogCoverImage(post.slug)}
                                   sizes="(max-width: 767px) 100vw, 33vw"
-                                  alt={getBlogImageAltText(post.slug)}
+                                  alt={generateBlogCoverAltText({
+                                    title: post.title,
+                                    category: post.category,
+                                    slug: post.slug,
+                                    lang: isBn ? "bn" : "en",
+                                    isDetail: false,
+                                  })}
                                   loading="lazy"
                                   fetchPriority="low"
                                   decoding="async"
@@ -6871,7 +6892,13 @@ export default function App() {
                       <ResponsiveImage
                         src={getBlogCoverImage(topic.slug)}
                         sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw"
-                        alt={getBlogImageAltText(topic.slug)}
+                        alt={generateBlogCoverAltText({
+                          title: topic.title,
+                          category: topic.category,
+                          slug: topic.slug,
+                          lang: isBn ? "bn" : "en",
+                          isDetail: false,
+                        })}
                         loading="lazy"
                         fetchPriority="low"
                         decoding="async"

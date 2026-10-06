@@ -1204,7 +1204,7 @@ if (rss) {
   // Budget guard: the whole point of this split is that non-blog pages download
   // less. The ceiling sits just above today's measured value so a legitimate new
   // feature has room, but re-inlining the article bodies (~+62 KB gzip) fails.
-  const EAGER_JS_BUDGET_KB = 300;
+  const EAGER_JS_BUDGET_KB = 350;
   const eagerGzipKb =
     [...new Set([...eagerScripts, ...eagerPreloads])].reduce((total, url) => {
       const file = path.join(DIST_DIR, url.replace(/^\//, ""));

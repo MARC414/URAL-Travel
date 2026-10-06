@@ -1,3 +1,15 @@
+import {
+  generateBlogCoverAltText,
+  cleanBlogTitleForAlt,
+  type BlogCoverAltTextInput,
+} from "./blogAltText";
+
+export {
+  generateBlogCoverAltText,
+  cleanBlogTitleForAlt,
+  type BlogCoverAltTextInput,
+};
+
 /** Shared image metadata for optimized responsive site photography. */
 const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "airport_departure_board_delay_claim_1790520824658": 670,
@@ -131,7 +143,7 @@ export function getResponsiveImageProps(
   };
 }
 
-/** Descriptive, visual alt text for the 41 editorial blog-cover photographs. */
+/** Descriptive, visual alt text for the 43 editorial blog-cover photographs. */
 export const BLOG_IMAGE_ALT_TEXT: Readonly<Record<string, string>> = {
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": "The Kaaba at Masjid al-Haram in Makkah, illuminated at night.",
   "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": "A Haramain high-speed train at a station in Saudi Arabia.",
@@ -178,6 +190,24 @@ export const BLOG_IMAGE_ALT_TEXT: Readonly<Record<string, string>> = {
   "chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai": "Dubai skyline and waterfront architecture illuminated at twilight.",
 };
 
-export function getBlogImageAltText(slug: string): string {
-  return BLOG_IMAGE_ALT_TEXT[slug] ?? "Travel scene related to this guide.";
+/**
+ * Returns descriptive, accessible, and SEO-optimized alt text.
+ * Enhanced to accept either a slug string, a BlogPost object, or an options object,
+ * dynamically generating alt text that meets WCAG 2.1 AA standards.
+ */
+export function getBlogImageAltText(
+  slugOrInput: string | BlogCoverAltTextInput,
+  title?: string,
+  category?: string,
+  lang?: "en" | "bn" | string,
+): string {
+  if (typeof slugOrInput === "string") {
+    return generateBlogCoverAltText({
+      slug: slugOrInput,
+      title,
+      category,
+      lang,
+    });
+  }
+  return generateBlogCoverAltText(slugOrInput);
 }
