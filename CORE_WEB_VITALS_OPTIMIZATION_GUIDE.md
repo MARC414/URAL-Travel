@@ -1,15 +1,17 @@
 # URAL Travel - Core Web Vitals Optimization Guide
 **Created:** 2026-10-04  
-**Last updated:** 2026-10-05 — AVIF `<picture>` shipped (Appendix **A.8**), blog bodies split into a lazy chunk (Appendix **E**), the marketing-consent gate re-scoped to every visitor (Appendix **D.1.5**) and the Travelpayouts widget chunk moved off its 260 ms timer (Appendix **F**). The metrics table below now separates **targets from measurements** — nothing is green without a number.  
-**Status:** Phases 1–3 ✅ · Consent Mode v2 ✅ · Phase 6A (AVIF) ✅ applied · P3.1 (blog split) ✅ · third-party load (F) ✅ applied · **P6 field verification ⏳ pending deploy**  
-**Target:** 95+ Performance Score (Mobile & Desktop) — **target, not a result** (last lab measurement: ~65 mobile, Appendix B)
+**Last updated:** 2026-10-05 — AVIF `<picture>` shipped (Appendix **A.8**), blog bodies split into a lazy chunk (Appendix **E**), the marketing-consent gate re-scoped to every visitor (Appendix **D.1.5**), the Travelpayouts widget moved off its 260 ms timer (Appendix **F**), and below-fold Trustpilot/TravelEssentials modules split into lazy chunks (Appendix **G**). A deferred-GTM origin preconnect is now carried through all 165 prerendered routes and guarded in the build. The metrics table separates **targets from measurements** — nothing is green without a number.
+
+**Status:** Phases 1–3 ✅ · Consent Mode v2 ✅ · Phase 6A (AVIF) ✅ applied · P3.1 (blog split) ✅ · third-party load (F) ✅ applied · P3.3 + GTM preconnect ✅ in PR preview · **production PSI/CrUX verification ⏳ pending**
+
+**Target:** 95+ Performance Score (Mobile & Desktop) — **target, not a result** (historical lab baseline: ~65 mobile, Appendix B; operator-reported live comparator: 85 twice, details below)
 
 ---
 
-## ✅ Status Board (single source of truth — 2026-10-04)
+## ✅ Status Board (single source of truth — 2026-10-05)
 
 Everything below is **committed code**, verified by `npm run build` + `npm run
-verify:build` (50 checks, incl. the cache/srcset/consent/contrast/security/gate/blog-split/AVIF/third-party regression guards). "Deployed" means it
+verify:build` (53 checks, incl. the cache/srcset/consent/contrast/security/gate/blog-split/AVIF/third-party/route-preconnect/lazy-chunk regression guards). "Deployed" means it
 will be live on the next Cloudflare Pages deploy of this branch — confirm with
 the Production Verification commands at the bottom of this guide.
 
@@ -19,7 +21,7 @@ the Production Verification commands at the bottom of this guide.
 | 2 | Font stack leads with self-hosted Inter + Noto Sans Bengali | ✅ done | `src/index.css` `--font-primary`, `@theme --font-sans` |
 | 3 | Critical CSS inlined in `<head>` (hero/nav/reset) | ✅ done | `index.html` inline `<style>` |
 | 4 | Self-hosted woff2 preloaded (Inter 400/600) | ✅ done | `index.html`, `public/fonts/` |
-| 5 | GTM deferred to first interaction or 3s | ✅ done | `index.html` deferred loader |
+| 5 | GTM deferred to first interaction or 3s; origin handshake warmed after first-party preloads | ✅ done | `index.html`; Consent Mode defaults remain before `gtm.js`; route propagation asserted on all 165 pages |
 | 6 | Emerald/Travelpayouts lazy-loaded at footer intersection **and gated on marketing consent for every visitor** | ✅ done (re-scoped 2026-10-05) | `index.html` IntersectionObserver + `marketingAllowed()`; the edge no longer rewrites HTML (D.1.5) |
 | 7 | `preconnect` to emrld.ltd | ➖ **removed on purpose** 2026-10-05 | the script is lazy *and* consent-gated, so a page-load connection would be speculative and pre-consent; guarded (row 21, D.1.5, F.1) |
 | 8 | **960w WebP variants generated from JPG masters** | ✅ done | 42 files in `public/assets/images/` |
@@ -29,7 +31,7 @@ the Production Verification commands at the bottom of this guide.
 | 12 | `/fonts/*` cache header (was revalidating every visit) | ✅ done — upgraded to 1y immutable | `public/_headers` (v2: 1y + versioned filenames, see row 20) |
 | 13 | CI regression guards for 9 + 10 | ✅ done | `scripts/verify-build.ts` §2b |
 | 14 | Privacy / cookie policy **page** linked from the banner | ✅ done | `/privacy` + `/bn/privacy` (`PrivacyPolicyPage.tsx`), prerendered + in sitemap; linked from banner, footer and cookie table |
-| 15 | AVIF variants + `<picture>` | ⏳ open — plan written, not implemented | **Appendix A** (file-level rollout plan: 126 assets, 9 call sites, preload negotiation) |
+| 15 | AVIF variants + `<picture>` | ✅ implemented 2026-10-04 night; post-deploy validation still open | See row 22 and **Appendix A.8** (126 assets, 9 call sites, preload negotiation) |
 | 16 | Re-compress the existing 640/1200 WebPs | ⏸ deliberately skipped | re-encoding WebP→WebP loses a generation; masters already yield good sizes |
 | 17 | Post-deploy Lighthouse + CrUX re-measure | ⏳ open | run after deploy, record numbers here |
 | 18 | `package-lock.json` in sync with `package.json` | ✅ restored 2026-10-04 | **rule: never commit a lockfile regenerated by Google AI Studio / external sandboxes** — see note below |
@@ -40,11 +42,13 @@ the Production Verification commands at the bottom of this guide.
 | 23 | **Accessibility 96 → contrast, target-size, heading-order** | ✅ fixed 2026-10-04 night | 7 class patterns + `brand-gold-ink` token + 24px checkbox + h3 levels; guarded (3 new checks). Appendix C |
 | 24 | ~12 invalid Tailwind colour steps (`text-slate-650`, `border-slate-250`, …) | ⏳ open, visible as a CI warning | they render as `inherit` today; fixing them changes colours → needs its own visual pass (C.4) |
 | 25 | **Security headers** (HSTS + XFO + COOP + partial CSP) | ✅ done 2026-10-04 night | `public/_headers`; all five Lighthouse Trust & Safety audits are *informative* (unscored) — added because they are real and cheap, guarded by 3 checks (D.3) |
-| 26 | **Source maps shipped** (Lighthouse "missing source maps") | ✅ done 2026-10-04 night | `vite.config.ts` `sourcemap: true` → 16 maps (5.7 MB, DevTools-only); guarded (D.2) |
+| 26 | **Source maps shipped** (Lighthouse "missing source maps") | ✅ done 2026-10-04 night | `vite.config.ts` `sourcemap: true` → 19 maps in this build (including the two new lazy chunks; DevTools-only); guarded (D.2) |
 | 27 | Console errors (CORS to `emrld.ltd/entrypoint_config`) | ⛔ **third-party defect** — report to Travelpayouts (D.1.2) | their endpoint sends no `Access-Control-Allow-Origin`; nothing in this repo can add one |
 | 28 | **Marketing-consent gate for the affiliate script (every visitor)** | ✅ re-scoped and applied 2026-10-05 (owner decision: everywhere; supersedes the EEA/UK/CH-only option B of 2026-10-04) | `functions/_middleware.js` is redirect-only again — no HTML rewrite, so no body is buffered or re-encoded at the edge; `index.html` gates for everyone on `localStorage` marketing consent + `ural:consent-updated`, keeping viewport laziness. 5 guards incl. a 6-case loader decision test and a 4-case passthrough test, both mutation-tested (D.1.5) |
 | 29 | **Blog bodies split out of `constants.ts` into a lazy chunk (P3.1)** | ✅ done 2026-10-04 night | 43 article bodies → `src/data/blogContent.ts`, `import()`ed on blog routes only; measured **330.1 → 266.1 KB gzip** of eager JS (−64.0 KB, Appendix E). Prerender still inlines every paragraph (211/211 verified); 7 new guards + 2 mutation tests |
 | 30 | **Travelpayouts widget chunk loads on need, not on a timer** | ✅ applied 2026-10-05 (owner-approved: §5 revenue component) | the ~129 KB gz widget chunk was fetched 260 ms after mount on the homepage, competing with the LCP image for visitors who never scrolled to it; now triggered by viewport proximity (300px), interaction, the consented script, or a 2.5 s ceiling. 2 guards + mutation tests (Appendix F) |
+| 31 | **GTM origin preconnect** (without eager `gtm.js`) | ✅ implemented and PR preview deployed (041e7a7); production verification pending | `index.html` warms `www.googletagmanager.com` after first-party preloads; Consent Mode defaults and the 3 s/interaction GTM loader are unchanged. Guarded on all 165 prerendered app routes. The preconnect itself contacts Google at page load (DNS/TLS, exposing the visitor IP) but sends no tag request or cookie; it is not consent to load analytics. |
+| 32 | **Below-fold Trustpilot + TravelEssentials code split** | ✅ implemented and PR preview deployed (041e7a7); production verification pending | `React.lazy` chunks + Suspense at all 7 render sites. Local eager JS gzip drops 266.3 → 261.9 KB (−4.4 KB); both component chunks are emitted separately. `WhatsAppSupport` stays eager because it shares its module with above-fold `TopBarWhatsApp`; splitting only the export would not move the module. Appendix G |
 
 ### ⚠️ The recurring CI failure (lockfile hygiene)
 Three CI runs died in ~12s at "Install dependencies" (`fafdb27`, `4d45194`,
@@ -58,15 +62,16 @@ valid because `package.json` never changed). Workflow rule going forward:
 AI Studio output enters this repo **as source files only**, through a branch/
 PR — never with its `package-lock.json`, and never straight to `main`.
 
-### Why #15 is not free
+### Why the original #15 work was not free (implemented as row 22 / Appendix A.8)
 `getResponsiveImageProps()` returns props spread onto plain `<img>` tags in
 **9 places** (verified at `ef6db57`: `App.tsx` ×8 — lines 2753, 3146, 3478,
 5353, 5552, 6033, 6669, 6770 — and `UmrahLandingPage.tsx` ×1). AVIF needs
 `<picture><source type="image/avif">…</picture>`, i.e. a shared component or 9
 call-site edits, **plus** the preload path in `index.html` and
-`scripts/prerender.ts`. Worth ~29–55% more image bytes on the LCP hero (measured,
-see Appendix A.2); do it as its own change with its own verify-build guards.
-**Full file-level plan: Appendix A.**
+`scripts/prerender.ts`. Worth ~29–55% fewer image bytes on the LCP hero (measured,
+see Appendix A.2); it shipped as the separate implementation in row 22 / A.8
+with its own verify-build guards. **Appendix A** remains the file-level rollout
+record.
 
 ### Measurement note
 Baseline numbers below are the 2026-10-04 **lab** values. The 960w breakpoint
@@ -730,18 +735,19 @@ npx lighthouse https://ural-travel.pages.dev \
   --only-categories=performance \
   --view
 
-# Confirm the deployed HTML is the consent + 960w build (run after deploy):
+# Confirm the deployed HTML is the consent + 960w + GTM-preconnect build:
 curl -s https://ural-travel.pages.dev/ | grep -c "gtag('consent','default'"   # expect 1
 curl -s https://ural-travel.pages.dev/ | grep -o 'imagesrcset="[^"]*"' | head -1  # expect 640w, 960w, 1200w
-curl -sI https://ural-travel.pages.dev/fonts/inter-400.woff2 | grep -i cache-control  # expect max-age=604800
+curl -s https://ural-travel.pages.dev/ | grep -c 'rel="preconnect" href="https://www.googletagmanager.com"'  # expect 1
+curl -sI https://ural-travel.pages.dev/fonts/inter-400-v1.woff2 | grep -i cache-control  # expect max-age=31536000, immutable
 curl -sI https://ural-travel.pages.dev/ | grep -i x-robots-tag  # must be ABSENT on production host
 ```
 
 ### Local gate before pushing:
 ```bash
 npm run lint          # tsc --noEmit
-npm run build         # vite build + prerender of ~163 routes
-npm run verify:build  # 50 checks incl. srcset/consent/cache/contrast/security/gate/blog-split/AVIF/third-party guards
+npm run build         # vite build + prerender of 165 canonical routes
+npm run verify:build  # 53 checks incl. srcset/consent/cache/contrast/security/gate/blog-split/AVIF/third-party/route-preconnect/lazy-chunk guards
 ```
 
 ---
@@ -753,10 +759,22 @@ those were ever measured** — they were the goals written when the plan was
 drafted. The rule now: a cell is green only when a number backs it, and the
 number says where it came from.
 
+### Interim live PSI comparator (operator-reported; provisional)
+
+Two PSI runs of the same live deployment reportedly returned a **Performance
+score of 85/100** before this PR. The report links/JSON, audited route, device
+strategy, and Lighthouse version were not supplied, so this is recorded as a
+provisional pre-change comparator, **not** as a verified mobile/desktop result
+and not as evidence of this PR's impact. Keep the 2026-10-04 measured mobile
+(~65) and desktop (~78) values below as the historical lab baseline. A fresh
+PSI API request from this environment was blocked by Google's daily quota
+(HTTP 429, quota limit 0); no new live result was generated here.
+
 | Metric | Target | Measured | State |
 |---|---|---|---|
-| Mobile Performance (lab) | ≥ 95 | **~65** — live PSI report, 2026-10-04 (Appendix B) | ⏳ not re-measured since the work on this branch |
-| Desktop Performance (lab) | ≥ 98 | **~78** — same report | ⏳ same |
+| Mobile Performance (lab) | ≥ 95 | **~65** — live PSI report, 2026-10-04 (Appendix B) | ⏳ historical mobile result; compare new runs only with matching route/strategy |
+| Live PSI Performance score (provisional) | — | **85/100 twice** — operator-reported pre-change live runs; route/device unverified (above) | ⏳ not independently verified; capture the report URL/JSON and strategy on re-run |
+| Desktop Performance (lab) | ≥ 98 | **~78** — same report | ⏳ historical desktop result |
 | LCP mobile (lab) | ≤ 2.5 s | **3.2 s** — same report | ⏳ the *bytes* are now smaller (hero 960w 46.3 → 26.0 KB, −44%; eager JS −64 KB gz; the 129 KB gz widget chunk no longer loads before a scroll) but **no post-change measurement exists** |
 | TBT mobile (lab) | ≤ 200 ms | **1.8 s** — same report | ⏳ dominated by third-party JS (GTM 140 KB unused, emrld, the widget). The consent gate, the interaction-deferred GTM and the viewport-triggered widget reduce our share; the third-party share is theirs |
 | FCP mobile (lab) | ≤ 1.8 s | **2.1 s** — same report | ⏳ essentially unchanged by this work — the single stylesheet (17.7 KB transfer) is the last render blocker and was deliberately left alone (B.1) |
@@ -765,10 +783,12 @@ number says where it came from.
 | Best Practices (lab) | 100 | 96 | ⏳ the last deduction is the third-party CORS error; the consent gate should remove it from lab runs (D.1.5) — **verify, don't assume** |
 | **CrUX field p75** (the only number Google ranks on) | LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 | **never measured** | ⏳ requires the deploy plus ~28 days of field data (P6) |
 
-**How to close each ⏳:** deploy PR #13 → re-run PSI mobile on `/`, `/blog/<slug>`
-and one `/bn/` route (Appendix B.4 lists the diffs to expect) → watch
-`errors-in-console` and the image/cache findings disappear → after ~28 days read
-the GSC Core Web Vitals report for the field verdict.
+**How to close each ⏳:** deploy this PR, confirm the deployed JS asset hash, then
+re-run PSI on `/`, `/blog/<slug>` and one `/bn/` route (Appendix B.4 lists the
+diffs to expect). Compare the 85 only when route, device strategy, and report
+settings match; record each PSI permalink/JSON, timestamp, strategy, and asset
+hash. Watch `errors-in-console` and the image/cache findings, then after ~28
+days read the GSC Core Web Vitals report for the field verdict.
 
 ## ⚠️ Critical Notes
 
@@ -826,14 +846,14 @@ npm run preview
 - [x] Phase 4A: Optimize chunks ✅ (`manualChunks` in `vite.config.ts`: vendor-react / vendor-icons / content-data)
 - [x] Phase 5A: Add cache headers ✅
 - [x] Consent Mode v2 + banner + withdrawal + CI guard ✅ (2026-10-04 evening)
-- [ ] Privacy/cookie policy page (legal prerequisite for EU traffic)
+- [x] Privacy/cookie policy page (legal prerequisite for EU traffic) — `/privacy` + `/bn/privacy`, row 14
 - [x] Phase 6A: AVIF via `<picture>` ✅ implemented 2026-10-04 night — **Appendix A.8**
   - [x] 6A-1 126 AVIF variants generated from the JPG masters (q50/q50/q55) + pipeline block (also fixed a pre-existing bash syntax error that made the script unrunnable)
   - [x] 6A-2 `ResponsiveImage` component + 9 migrated call sites + AVIF preload (shell + routes) + 4 guards — landed as **one commit**, as A.5 requires
   - [ ] 6A-3 Post-deploy verification: DevTools network (exactly one hero request per browser), PSI mobile LCP, then CrUX p75 after ~28 days — record here
 - [x] Cache TTLs raised to 1y immutable with versioned filenames ✅ (2026-10-04 night — from the live Lighthouse report)
 - [x] emrld.ltd preconnect fixed ✅ (2026-10-04: `crossorigin` mismatch) and then removed entirely ✅ (2026-10-05: unnecessary once the script is consent-gated — D.1.5)
-- [ ] 6A image delivery (127 KiB) — Appendix A
+- [x] 6A image delivery (127 KiB) — AVIF `<picture>` shipped; deploy/PSI validation still pending (Appendix A.8)
 - [x] Accessibility pass: contrast tokens, 24px checkbox targets, h3 heading levels ✅ (2026-10-04 night — Appendix C)
 - [ ] Re-run Lighthouse after the cache + a11y changes and diff against Appendix B.1 / C.1
 - [ ] Owner decision: `POPULAR HUBS:` one-class fix in `TravelpayoutsWidget.jsx` (C.3)
@@ -849,6 +869,11 @@ npm run preview
   - [x] measured −64.0 KB gzip eager JS (330.1 → 266.1); 211/211 paragraphs verified in prerendered HTML
   - [x] 7 new guards + 2 mutation tests (36 → 43 checks)
 - [ ] P3.2 — the remaining ~55 KB gz eager `constants.ts` (route metadata/FAQs/schema): needs its own plan, not covered by E
+- [x] **P3.3 — split below-fold Trustpilot and TravelEssentials UI chunks** ✅ (2026-10-05 — Appendix G)
+  - [x] `TrustpilotReviews` + `TravelEssentials` use `React.lazy` and Suspense at all 7 render sites; `WhatsAppSupport` intentionally remains eager because `TopBarWhatsApp` shares its module
+  - [x] Build emits both named chunks; eager JavaScript gzip measured 266.3 → 261.9 KB (−4.4 KB)
+  - [ ] Post-deploy PSI comparison against the provisional 85 baseline (capture matching route/device/report data)
+- [x] **GTM origin preconnect** ✅ PR preview deployed; checked on all 165 prerendered routes; production check pending
 - [ ] Post-deploy Lighthouse/CrUX re-measure + record numbers in Status Board
 
 ---
@@ -1849,3 +1874,63 @@ Mutation-tested: restoring the 260 ms timer fails the first check, and removing
   headroom during the LCP window, not a change in the LCP element.
 - Confirm the widget still renders and its affiliate CTAs still work — the
   skeleton becomes the widget on exactly the same trigger for a scrolling user.
+
+# 📎 Appendix G — GTM preconnect + remaining eager UI chunks (2026-10-05)
+
+## G.1 What this PR changes
+
+- `index.html` now preconnects to `https://www.googletagmanager.com` after the
+  first-party LCP/font preloads. It does **not** load `gtm.js`: the existing
+  interaction/3-second loader is unchanged, and the Consent Mode default-denied
+  block still executes before that loader. The preconnect uses the default
+  no-CORS mode to match the classic script. A preconnect is still an early
+  network contact with Google (DNS/TLS, exposing the visitor IP); this is a
+  deliberate warm-up, not a consent signal. It is distinct from `emrld.ltd`,
+  whose preconnect stays removed because that processor is both marketing-gated
+  and viewport-lazy.
+- `TrustpilotReviews` and `TravelEssentials` now use `React.lazy` and
+  `<React.Suspense fallback={null}>` at all seven existing render sites (one
+  Trustpilot + six TravelEssentials). `WhatsAppSupport` remains eager because
+  it shares `WhatsAppSupport.tsx` with the above-fold `TopBarWhatsApp`; a dynamic
+  import of the same module would not split it. `TravelIntelligence` remains
+  eager: its source is only ~5.3 KB and it has ten render sites.
+- This is **code splitting**, not viewport-triggered mounting. React starts a
+  lazy component's import when that component is rendered; the change reduces
+  the eager App chunk and separates parse/evaluation units, but it does not
+  guarantee that all seven chunks wait for a scroll or that the homepage
+  downloads fewer total bytes if both sections render. The existing
+  `TravelpayoutsWidget` has the separate IntersectionObserver gate in Appendix F.
+
+## G.2 Build evidence (local; not a PSI score)
+
+With the lockfile's Vite 6.4.3 build, the unchanged pre-patch source emitted
+`index-BmaRMt4d.js` at 595.36 KB raw / 150.71 KB gzip. The operator-provided
+transcript called that filename the live asset; it matches this checkout's
+pre-patch output. Its different local filename (`index-BUkRaALh.js`) did not
+reproduce here, so that comparison alone does **not** prove the live site was
+stale relative to the checked-out `main`.
+
+This PR's build emits `index-Dey55kpp.js` at 578.27 KB raw / 146.19 KB gzip,
+plus `TrustpilotReviews-DPHXzqx_.js` (2.70 KB gzip) and
+`TravelEssentials-EhNM86Ts.js` (2.95 KB gzip). The verifier's eager-JS total
+falls from 266.3 to 261.9 KB gzip (−4.4 KB); this is an entry/eager-budget
+measurement, not a claim of 4.4 KB lower total bytes on every route. Cloudflare
+Pages successfully deployed PR commit `041e7a7` to the preview at
+[https://e15051c0.ural-travel.pages.dev](https://e15051c0.ural-travel.pages.dev);
+the new entry asset is served there and references both lazy chunks. This is a
+branch preview, not the production deploy.
+
+A mobile PSI API request against that preview returned HTTP 429 (daily quota
+limit 0); the PSI web UI exposed only its loading placeholder. Therefore there
+is no score from the PR preview to decode. After production deploy, compare the
+deployed HTML's JS hash with the build artifact before attributing a PSI score
+to this change.
+
+`verify-build.ts` now asserts exactly one no-CORS GTM preconnect on every
+prerendered app route, all 165 routes, and asserts that both component chunks
+are isolated dynamic imports and all seven render sites have Suspense
+boundaries. The gate is now 53 checks. Production PSI/CrUX verification remains
+open; two live PSI scores of 85/100 were reported by the operator and are listed
+above as a provisional pre-change comparator only (no permalink/JSON, route, or
+device strategy was supplied). The preview API attempt was quota-blocked as
+noted above; no post-deploy score is being inferred or invented.

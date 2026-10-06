@@ -321,6 +321,51 @@ check(
         fontProblems.slice(0, 5).join(", ")
 );
 
+// The deferred GTM loader is still delayed until interaction / 3 seconds, but
+// its origin handshake is warmed after the LCP and font preloads. This is a
+// shell-level hint that prerenderDistHtmlFiles() must carry through to every
+// canonical route. Keep exactly one no-cors preconnect: gtm.js is a classic
+// script without `crossorigin`, and consent defaults remain enforced below.
+const gtmPreconnectProblems: string[] = [];
+let gtmPreconnectRoutes = 0;
+for (const file of distHtmlFiles) {
+  const html = fs.readFileSync(file, "utf8");
+  if (!html.includes('id="root"')) continue;
+  gtmPreconnectRoutes++;
+  const gtmPreconnects = [...html.matchAll(/<link\b[^>]*>/g)]
+    .map((match) => match[0])
+    .filter(
+      (tag) =>
+        /\brel="preconnect"/.test(tag) &&
+        /\bhref="https:\/\/www\.googletagmanager\.com"/.test(tag)
+    );
+  if (gtmPreconnects.length !== 1 || /\bcrossorigin(?:\s|=|>)/i.test(gtmPreconnects[0] ?? "")) {
+    gtmPreconnectProblems.push(path.relative(DIST_DIR, file));
+  }
+}
+const shellForPreconnectOrder = distIndexHtml ?? "";
+const shellLcpPreloadIndex = shellForPreconnectOrder.indexOf('<link rel="preload" as="image"');
+const shellFontPreloadIndex = shellForPreconnectOrder.indexOf('href="/fonts/inter-400-v1.woff2"');
+const shellGtmPreconnectIndex = shellForPreconnectOrder.indexOf(
+  'href="https://www.googletagmanager.com"'
+);
+const gtmPreconnectAfterCriticalPreloads =
+  shellLcpPreloadIndex !== -1 &&
+  shellFontPreloadIndex > shellLcpPreloadIndex &&
+  shellGtmPreconnectIndex > shellFontPreloadIndex;
+check(
+  gtmPreconnectRoutes === fontChecked &&
+    gtmPreconnectRoutes > 0 &&
+    gtmPreconnectProblems.length === 0 &&
+    gtmPreconnectAfterCriticalPreloads,
+  gtmPreconnectProblems.length === 0 &&
+    gtmPreconnectRoutes === fontChecked &&
+    gtmPreconnectAfterCriticalPreloads
+    ? `all ${gtmPreconnectRoutes} prerendered app routes carry one no-cors GTM preconnect after LCP/font preloads`
+    : `GTM preconnect missing/duplicated/mismatched on ${gtmPreconnectProblems.length} route(s), ` +
+        `wrong shell ordering, or route count differs (${gtmPreconnectRoutes} vs ${fontChecked} font-checked)`
+);
+
 // (2) consent default precedes the GTM loader, and defaults to denied.
 //     Whitespace-tolerant: the head script has been rewritten once already
 //     (binary -> granular CMP), and the guard must survive formatting changes
@@ -687,6 +732,54 @@ check(
   missingMaps.length === 0
     ? `every emitted JS chunk ships a source map (${jsChunks.length} chunks)`
     : `${missingMaps.length} chunk(s) without a .map: ${missingMaps.slice(0, 5).join(", ")}`
+);
+
+// Below-the-fold trust and booking-hub components stay out of the eager App
+// module. Their named Vite chunks prove that the dynamic imports are real (a
+// React.lazy declaration alongside a static import would not save entry bytes).
+const appSrc = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
+const lazyUiCandidates = ["TrustpilotReviews", "TravelEssentials"];
+const lazyUiProblems = lazyUiCandidates.flatMap((name) => {
+  const dynamicImport =
+    appSrc.includes(`const ${name} = React.lazy(() =>`) &&
+    appSrc.includes(`import("./components/${name}")`);
+  const staticImport = appSrc.split("\n").some((line) =>
+    line.includes(`import { ${name} } from "./components/${name}"`)
+  );
+  const chunkExists = jsChunks.some((file) => file.startsWith(`${name}-`) && file.endsWith(".js"));
+  return dynamicImport && !staticImport && chunkExists
+    ? []
+    : [`${name}: dynamic-only import / isolated chunk missing`];
+});
+check(
+  lazyUiProblems.length === 0,
+  lazyUiProblems.length === 0
+    ? "TrustpilotReviews and TravelEssentials are emitted as lazy-only chunks"
+    : `below-fold component split regressed: ${lazyUiProblems.join("; ")}`
+);
+
+const trustpilotRenderCount = (appSrc.match(/<TrustpilotReviews\b/g) ?? []).length;
+const wrappedTrustpilotCount = (
+  appSrc.match(
+    /<React\.Suspense\s+fallback=\{null\}>\s*<TrustpilotReviews\s*\/>\s*<\/React\.Suspense>/g
+  ) ?? []
+).length;
+const essentialsRenderCount = (appSrc.match(/<TravelEssentials\b/g) ?? []).length;
+const wrappedEssentialsCount = (
+  appSrc.match(
+    /<React\.Suspense\s+fallback=\{null\}>\s*<TravelEssentials\b[\s\S]*?\/>\s*<\/React\.Suspense>/g
+  ) ?? []
+).length;
+check(
+  trustpilotRenderCount > 0 &&
+    wrappedTrustpilotCount === trustpilotRenderCount &&
+    essentialsRenderCount > 0 &&
+    wrappedEssentialsCount === essentialsRenderCount,
+  wrappedTrustpilotCount === trustpilotRenderCount &&
+    wrappedEssentialsCount === essentialsRenderCount
+    ? `all ${trustpilotRenderCount + essentialsRenderCount} Trustpilot/TravelEssentials render sites have Suspense boundaries`
+    : `lazy UI Suspense coverage is incomplete (Trustpilot ${wrappedTrustpilotCount}/${trustpilotRenderCount}, ` +
+        `TravelEssentials ${wrappedEssentialsCount}/${essentialsRenderCount})`
 );
 
 // Affiliate-script consent gate, scope: every visitor (Appendix D.1.5).
