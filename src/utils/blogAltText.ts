@@ -25,6 +25,10 @@ export interface BlogCoverAltTextInput {
 export const CURATED_BLOG_SCENES: Readonly<
   Record<string, { en: string; bn: string }>
 > = {
+  "travel-creator-resources": {
+    en: "An open laptop, notebook, camera and world map arranged on a wooden desk",
+    bn: "কাঠের টেবিলে খোলা ল্যাপটপ, নোটবুক, ক্যামেরা ও বিশ্ব মানচিত্র",
+  },
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": {
     en: "Pilgrims circle the Kaaba beneath Makkah Clock Tower at dusk",
     bn: "গোধূলিতে মক্কা ক্লক টাওয়ারের নিচে কাবা ঘিরে তাওয়াফ করছেন মুসল্লিরা",
