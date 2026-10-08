@@ -1681,12 +1681,16 @@ function bnFaqList(
 }
 
 /** Turns the Bengali blog body (plain text with blank-line paragraphs) into HTML. */
-function bnParagraphs(text: string): string {
+function bnParagraphs(text: string, figureHtml?: string): string {
   return String(text || "")
     .split(/\n{2,}/)
     .map((paragraph) => paragraph.replace(/\n/g, " ").replace(/\*\*/g, "").trim())
     .filter(Boolean)
-    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+    .map((paragraph) =>
+      paragraph === "[[figure]]"
+        ? figureHtml ?? ""
+        : `<p>${escapeHtml(paragraph)}</p>`
+    )
     .join("");
 }
 
@@ -1737,7 +1741,17 @@ function buildBengaliBody(
   if (group === "blog" && id) {
     const override = BENGALI_BLOG_OVERRIDES[id];
     if (override) {
-      parts.push(bnParagraphs(override.content));
+      const bnPost = BLOG_DATA.find((post) => post.slug === id);
+      const bnFig = bnPost?.inlineFigure;
+      const bnFigureHtml = bnFig
+        ? (() => {
+            const dims = getResponsiveImageDimensions(bnFig.imageSrc);
+            return `<figure><img src="${escapeHtml(dims.src)}" srcset="${escapeHtml(
+              buildResponsiveSrcSet(dims.src, "webp")
+            )}" sizes="(max-width: 767px) 100vw, 840px" width="${dims.width}" height="${dims.height}" loading="lazy" alt="${escapeHtml(bnFig.altBn)}"><figcaption>${escapeHtml(bnFig.captionBn)}</figcaption></figure>`;
+          })()
+        : undefined;
+      parts.push(bnParagraphs(override.content, bnFigureHtml));
       const refPlacementBn = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[id];
       if (refPlacementBn) {
         parts.push(

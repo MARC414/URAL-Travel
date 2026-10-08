@@ -1857,11 +1857,11 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-4",
     slug: "halal-food-guide-bangkok-bangladesh",
     title: "Where to Eat Halal Food in Bangkok: A Complete Guide for Bangladeshi Travelers",
-    summary: "Finding authentic, 100% certified Halal food is one of the top priorities for Bangladeshi families visiting Thailand for shopping, holidays, or medical check-ups at Bumrungrad and Bangkok Hospital. This practical dining guide walks you through identifying the official green emblem of the Central Islamic Council of Thailand, navigating Bangkok's two largest Muslim culinary hubs—Pratunam's Petchaburi Road alleys and Sukhumvit Soi 3 (Arab Street) near Nana BTS—and budgeting for every meal tier in BDT, from BDT 180 mall food court dishes to beloved restaurants like Maidaun Halal in Pratunam, Al Hussain in Sukhumvit, and Yana Restaurant inside Siam Discovery.",
+    summary: "Finding authentic, 100% certified Halal food is one of the top priorities for Bangladeshi families visiting Thailand for shopping, holidays, or medical check-ups at Bumrungrad and Bangkok Hospital. This practical dining guide walks you through identifying the official green emblem of the Central Islamic Council of Thailand, navigating Bangkok's two largest Muslim culinary hubs—Pratunam's Petchaburi Road alleys and Sukhumvit Soi 3 (Arab Street) near Nana BTS—and budgeting for every meal tier in BDT, from BDT 180 mall food court dishes to beloved restaurants like Maidaun Halal in Pratunam, Al Hussain in Sukhumvit, and Yana Restaurant inside Siam Discovery, plus a bonus halal-friendly Ayutthaya day-trip plan (UNESCO) with transport, temple tickets and BDT cost notes.",
     category: "Food & Culture",
     date: "June 15, 2026",
     author: "Fahmida Tasnim (Dhaka Food Blogger & Explorer)",
-    readTime: "5 min read",
+    readTime: "8 min read",
     internalLinks: [
       { text: "Dhaka to Bangkok Flight Guide", path: "/flights/dhaka-bangkok" },
       { text: "Bangkok Hotels Neighborhoods", path: "/hotels/bangkok-hotels" },

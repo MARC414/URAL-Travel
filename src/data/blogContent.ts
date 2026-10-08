@@ -82,7 +82,20 @@ Meal pricing is incredibly flexible in Bangkok:
 4. 3 RECOMMENDED RESTAURANTS TO VISIT
 - Maidaun Halal Restaurant (Pratunam Market): Located directly across from Platinum Fashion Mall, this highly accessible eatery offers a mix of local Thai favorites (like red curry and pad thai) and familiar South Asian dishes (like chicken biryani and beef curry) on a strictly Halal menu.
 - Al Hussain Restaurant (Sukhumvit Soi 3): Famous among South Asians for its delicious naan, succulent tandoori kebabs, and aromatic curries, this vibrant spot is great for a heavy dinner after a long day of touring.
-- Yana Restaurant (Siam Discovery, 5th Floor): An air-conditioned, fully certified Halal restaurant located inside a major shopping mall. It is the perfect place to safely try spicy Tom Yum soup, green curry, or mango sticky rice in a clean, upscale setting.`,
+- Yana Restaurant (Siam Discovery, 5th Floor): An air-conditioned, fully certified Halal restaurant located inside a major shopping mall. It is the perfect place to safely try spicy Tom Yum soup, green curry, or mango sticky rice in a clean, upscale setting.
+
+5. BONUS: A HALAL-FRIENDLY AYUTTHAYA DAY TRIP FROM BANGKOK
+Bangkok rewards a slow itinerary, but the ruins of Ayutthaya - the old Siamese capital, a UNESCO World Heritage site since 1991 - make the perfect single-day escape, and the town is easier to reach than most travelers expect. In one long day you can walk a royal palace complex, cruise the island's ring of rivers, and still be back in Pratunam for a late halal dinner.
+
+[[figure]]
+
+- Getting there: direct trains from Bangkok's Krung Thep Aphiwat Central Terminal take roughly 1.5 to 2 hours (third class is famously cheap, around THB 15-35 per person), while minivans cover the distance in about 1.5 hours for roughly THB 60-100. For families traveling with elders, a hired van for the day is the comfortable option and easy to split between four to six people.
+- What not to miss: Wat Phra Si Sanphet's three bell-shaped chedis - the postcard of the historical park - plus Wat Mahathat, where a Buddha head rests inside a tree root, and Wat Ratchaburana's painted crypt. Foreign-visitor tickets run about THB 20-50 per temple, and combined tickets are sold at the main sites.
+- Getting around: the old city is an island bounded by rivers. Rent a bicycle for roughly THB 50 per day, hop between temples in a tuk-tuk loop, or take the one-hour long-tail boat circuit around the island (approximately THB 200-300 per person) - the coolest way to see the river temples in the afternoon.
+- Halal food in Ayutthaya: the town has a long-standing Muslim community in the river quarter, and the Bang Lan Road night market carries Muslim-run stalls with halal signage - use the same green emblem checks as in Bangkok. Grilled river prawns, boat noodles and fresh fruit shakes cover the rest; confirm meat sourcing at each stall as usual. One honest tip: eat a proper breakfast at your Bangkok hotel first, because halal options thin out beyond the main market area.
+- Timing: leave Bangkok by 7:00-8:00 AM, tour the temples before the midday heat, keep 3:00-5:00 PM for the boat circuit or the night market, and return by 7:00-8:00 PM. Ayutthaya is flat, sunny and exposed - hats, water and sunscreen matter more here than in Bangkok.
+
+Five honest hours in Ayutthaya turn a Bangkok food trip into a proper Thailand holiday - and the photograph at Wat Phra Si Sanphet is the one your friends will assume you flew across the world for.`,
   "nepal-pokhara-itinerary-bangladesh": `Are you a Bangladeshi traveler planning a scenic mountain escape that is incredibly pocket-friendly? A 5-day trip covering Kathmandu's historic valleys and Pokhara's peaceful lakes is the absolute sweet spot. Below is our complete, day-by-day itinerary optimized specifically for budget and timing from Dhaka.
 
 DAY 1: KATHMANDU ARRIVAL
