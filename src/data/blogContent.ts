@@ -82,7 +82,20 @@ Meal pricing is incredibly flexible in Bangkok:
 4. 3 RECOMMENDED RESTAURANTS TO VISIT
 - Maidaun Halal Restaurant (Pratunam Market): Located directly across from Platinum Fashion Mall, this highly accessible eatery offers a mix of local Thai favorites (like red curry and pad thai) and familiar South Asian dishes (like chicken biryani and beef curry) on a strictly Halal menu.
 - Al Hussain Restaurant (Sukhumvit Soi 3): Famous among South Asians for its delicious naan, succulent tandoori kebabs, and aromatic curries, this vibrant spot is great for a heavy dinner after a long day of touring.
-- Yana Restaurant (Siam Discovery, 5th Floor): An air-conditioned, fully certified Halal restaurant located inside a major shopping mall. It is the perfect place to safely try spicy Tom Yum soup, green curry, or mango sticky rice in a clean, upscale setting.`,
+- Yana Restaurant (Siam Discovery, 5th Floor): An air-conditioned, fully certified Halal restaurant located inside a major shopping mall. It is the perfect place to safely try spicy Tom Yum soup, green curry, or mango sticky rice in a clean, upscale setting.
+
+5. BONUS: A HALAL-FRIENDLY AYUTTHAYA DAY TRIP FROM BANGKOK
+Bangkok rewards a slow itinerary, but the ruins of Ayutthaya - the old Siamese capital, a UNESCO World Heritage site since 1991 - make the perfect single-day escape, and the town is easier to reach than most travelers expect. In one long day you can walk a royal palace complex, cruise the island's ring of rivers, and still be back in Pratunam for a late halal dinner.
+
+[[figure]]
+
+- Getting there: direct trains from Bangkok's Krung Thep Aphiwat Central Terminal take roughly 1.5 to 2 hours (third class is famously cheap, around THB 15-35 per person), while minivans cover the distance in about 1.5 hours for roughly THB 60-100. For families traveling with elders, a hired van for the day is the comfortable option and easy to split between four to six people.
+- What not to miss: Wat Phra Si Sanphet's three bell-shaped chedis - the postcard of the historical park - plus Wat Mahathat, where a Buddha head rests inside a tree root, and Wat Ratchaburana's painted crypt. Foreign-visitor tickets run about THB 20-50 per temple, and combined tickets are sold at the main sites.
+- Getting around: the old city is an island bounded by rivers. Rent a bicycle for roughly THB 50 per day, hop between temples in a tuk-tuk loop, or take the one-hour long-tail boat circuit around the island (approximately THB 200-300 per person) - the coolest way to see the river temples in the afternoon.
+- Halal food in Ayutthaya: the town has a long-standing Muslim community in the river quarter, and the Bang Lan Road night market carries Muslim-run stalls with halal signage - use the same green emblem checks as in Bangkok. Grilled river prawns, boat noodles and fresh fruit shakes cover the rest; confirm meat sourcing at each stall as usual. One honest tip: eat a proper breakfast at your Bangkok hotel first, because halal options thin out beyond the main market area.
+- Timing: leave Bangkok by 7:00-8:00 AM, tour the temples before the midday heat, keep 3:00-5:00 PM for the boat circuit or the night market, and return by 7:00-8:00 PM. Ayutthaya is flat, sunny and exposed - hats, water and sunscreen matter more here than in Bangkok.
+
+Five honest hours in Ayutthaya turn a Bangkok food trip into a proper Thailand holiday - and the photograph at Wat Phra Si Sanphet is the one your friends will assume you flew across the world for.`,
   "nepal-pokhara-itinerary-bangladesh": `Are you a Bangladeshi traveler planning a scenic mountain escape that is incredibly pocket-friendly? A 5-day trip covering Kathmandu's historic valleys and Pokhara's peaceful lakes is the absolute sweet spot. Below is our complete, day-by-day itinerary optimized specifically for budget and timing from Dhaka.
 
 DAY 1: KATHMANDU ARRIVAL
@@ -1150,6 +1163,179 @@ Several prominent international and domestic airlines operate regular non-stop f
 
 4. HOW TO BOOK CGP FLIGHTS CONFIDENTLY
 When requesting ticket options, always specify 'CGP to DXB' rather than 'Chittagong to Dubai'. This allows agents or automated search engines to pull non-stop inventory without routing you through Dhaka. You can explore live CGP flight benchmarks and generate instant WhatsApp fare requests using the URAL Travel Tools desk.`,
+  "havana-cuba-travel-guide-bangladesh": `Havana is the only city in the Caribbean where a 1950s Chevrolet convertible idles in front of a marble opera house built before the First World War, and nobody photographs it twice because it happens every day. For Bangladeshi and other South Asian travelers, Cuba sits far off the usual Dubai-Bangkok-Kuala Lumpur circuit, yet it rewards the long journey with something those cities cannot: a destination that still feels genuinely undiscovered. This guide covers the five days that matter most - the Gran Teatro de La Habana Alicia Alonso, the four plazas of Old Havana, the classic American cars and the Malecon at sunset - plus the practical realities of visas, cash, food and safety in 2026.
+
+1. WHEN TO GO: DRY SEASON, BALLET NIGHTS & HURRICANE MONTHS
+Havana has two honest travel seasons. The dry season from November to April brings warm days, low humidity and clear skies - ideal for walking Old Havana and riding in open convertibles. December to March is peak season, so book your casa and any ballet tickets earlier than you think. The wet season runs May to October, with heavy afternoon showers and the year's best accommodation rates; September and October carry the Atlantic hurricane risk, so build flexibility into your plans if you travel then.
+- November to April: dry season. The best walking weather (22-28 degrees C) and the main theatre and ballet season at the Gran Teatro.
+- May to June: hot and humid with short rains. Fewer tourists and softer casa rates.
+- July to August: Havana's traditional carnival season along the Malecon - loud, colorful and crowded.
+- September to October: peak hurricane season. Cheapest fares, least predictable days.
+
+2. GETTING TO HAVANA FROM DHAKA: FLIGHTS, TOURIST VISA & ARRIVAL
+There are no direct flights between Dhaka and Havana. The cleanest routings run via Istanbul, which pairs naturally with a Dhaka departure, or through European gateways such as Madrid and Moscow. One-stop itineraries typically need 24 to 30 hours of total travel, so plan a long layover you can survive rather than the cheapest connection on paper. Expect return economy fares in the BDT 180,000 to BDT 300,000 band depending on season and lead time; compare multi-city routings rather than simple returns before you commit.
+- Visa: Bangladeshi passport holders need a Cuban tourist visa. Historically this was a tourist card arranged through the airline or a Cuban mission abroad; Cuba has been rolling out an electronic e-Visa system, and the process continues to evolve. There is no visa on arrival for Bangladeshi passports - confirm the current requirement with the Cuban embassy or the official Cuban e-Visa portal before booking flights, never from a social media screenshot.
+- Health insurance: Cuba requires incoming travelers to hold valid health insurance, and immigration officers can ask for printed proof. Buy a policy that explicitly covers Cuba before departure.
+- Yellow fever certificate: required if you arrive from or transit a country with yellow fever risk - relevant if your routing touches Africa or South America.
+- Arrival: Jose Marti International Airport (HAV) sits about 25 km southeast of the city. Arrange your first night's casa in advance and ask the host about an airport pickup; official taxis are reliable but priced in cash for arriving tourists.
+
+3. THE GRAN TEATRO DE LA HABANA: BALLET, MARBLE & THE CITY'S SOUL
+The Gran Teatro de La Habana Alicia Alonso - the great building facing Parque Central, where the classic cars park along the Paseo del Prado - opened in 1914 as the social heart of the Centro Gallego, and it remains one of the grandest theatre buildings in the Americas. Its neo-baroque facade carries monumental marble sculpture groups by Giuseppe Moretti, allegories of the arts and civic life that have watched the city change for more than a century. Inside are marble halls, a sweeping staircase and a main auditorium that still stages opera, ballet and symphonic music most weeks of the season.
+The building is inseparable from Cuban ballet. It is the home of the Ballet Nacional de Cuba, the company Alicia Alonso built into one of the world's great ballet institutions, and it hosts the International Ballet Festival of Havana, one of the oldest ballet festivals anywhere. For visitors this is unusually accessible: performance tickets are often remarkably affordable, commonly in the USD 10 to USD 30 range, and guided visits of the building are typically offered on non-performance days. Check the season calendar before you travel - a Havana evening with live ballet inside this building is the finest night out in the Caribbean.
+
+4. OLD HAVANA & ITS FOUR GREAT SQUARES
+Habana Vieja has been a UNESCO World Heritage site since 1982, and four decades of patient restoration have returned its plazas to the city. A compact walking loop covers them all in half a day, and then invites you to walk it again more slowly.
+- Plaza de Armas: the oldest square, shaded by royal palms, ringed by colonial palaces and a secondhand book market.
+- Plaza de la Catedral: baroque Havana at its most photogenic - the coral-stone Catedral de San Cristobal, whose two towers stand deliberately asymmetric, and the merchant palaces of a city that once traded sugar and enslaved people through this port.
+- Plaza Vieja: restored townhouses, the Camera Obscura for a live 360-degree panorama of the rooftops, and cafe tables that fill every evening.
+- Plaza de San Francisco de Asis: the quiet one, facing the harbor, with its basilica and the old customs house.
+Between the squares: the Castillo de la Real Fuerza (1577), one of the oldest stone fortresses in the Americas; the Havana Club rum museum; El Floridita, the daiquiri bar Hemingway made famous, and La Bodeguita del Medio, home of the mojito. Both are tourist institutions - go for the ritual, not the food.
+
+5. THE CLASSIC AMERICAN CARS: A MOVING MUSEUM YOU CAN RIDE IN
+Havana's vintage Chevrolets, Fords and Buicks are not decoration. When the revolution and the US embargo froze car imports in 1959, Cuban mechanics kept a generation of American cars running for six decades with improvised parts and swapped diesel engines. Since 2011 private car sales have been legal again, so the streets now mix the old Americans with Soviet-era Ladas and modern Korean and Chinese vehicles - but the 1950s convertibles remain the icons.
+- Private convertible tour: the classic experience. A driver takes you along the Malecon, past the Capitolio and Plaza de la Revolucion, up to Fusterlandia or leafy Miramar. Expect roughly USD 30 to USD 50 per hour for a private car - agree the full price, route and duration before departure, payable in cash.
+- Shared almendron: the local way. These shared vintage taxis run fixed city routes for a few dollars, and are the cheapest way to see Havana as residents see it.
+- Photography: the cars gather around Parque Central and the Gran Teatro every morning - the photograph that appears in every Havana guidebook, waiting for you.
+- Etiquette: settle the price first, tip for photo stops, and confirm whether the car has working air conditioning before you pay.
+
+6. BEYOND OLD HAVANA: THE MALECONE, VEDADO & FUSTERLANDIA
+- The Malecon: Havana's living room - an eight-kilometer seawall where the whole city gathers at sunset. Walk it from Habana Vieja to Vedado at least once, ideally twice.
+- Vedado: the leafy modern district - the 1930 Hotel Nacional de Cuba, the steps of the University of Havana, the Colon Cemetery with its marble avenues, and the Casa de la Musica for salsa that starts late.
+- Plaza de la Revolucion: vast, austere and unforgettable - the Jose Marti memorial tower and the steel outline of Che Guevara on the Interior Ministry wall.
+- Fusterlandia: the fishing village of Jaimanitas, transformed by artist Jose Fuster into a decades-long mosaic wonderland. Free to enter, joyful, and unlike anything else in Cuba.
+- Nightlife: the Tropicana open-air cabaret is the classic splurge; salsa clubs and live son cubano run everywhere across Vedado and Centro Habana.
+
+7. WHERE TO STAY & EAT: CASAS, PALADARES & THE HALAL REALITY
+- Casas particulares: private homestays marked by a small blue anchor symbol, running USD 25 to USD 45 per night for a clean room, private bathroom, strong coffee and better local advice than any hotel desk. For most Bangladeshi travelers a casa in Habana Vieja or Vedado is the right base.
+- Paladares: private restaurants, and the best food in Cuba. Book popular ones a day ahead. Order ropa vieja, congri (rice with black beans), tostones, fresh grilled fish, and lobster where your budget allows; finish with Cuban coffee.
+- Halal food: Cuba's Muslim community is small but established, and certified halal restaurants are rare. The practical approach: confirm meat sourcing directly with paladar owners before ordering, lean heavily on seafood, eggs, rice, beans and vegetables, and pack essential halal snacks and seasoning from Dhaka. Your casa host is usually the fastest route to a trustworthy kitchen - ask them to cook for you when in doubt.
+- Fruit and juices: mango, guava, papaya and sugarcane juice are excellent and safe when prepared fresh in front of you.
+
+8. MONEY, SAFETY & CONNECTIVITY: 2026 REALITIES
+- Cash first: Cuba runs largely on cash. Bring clean, unmarked EUR or USD notes in small denominations. US-issued cards, and any card processed through US networks, often do not work at all - do not depend on ATMs. Some non-US cards work inside major hotels, with heavy fees. Exchange at official CADECA outlets and keep your receipts.
+- Daily budget: a comfortable mid-range day (casa, paladares, one activity, transport) runs about USD 70 to USD 100 per person - roughly BDT 8,500 to BDT 12,000 at recent exchange rates. A realistic five-day total per person including flights lands around BDT 220,000 to BDT 360,000.
+- Safety: Havana is one of Latin America's safest capitals for tourists; violent crime against visitors is rare. The everyday irritant is the friendly hustle - strangers offering to guide you to a "factory" cigar shop or a bar with a surprise bill. A polite no, gracias and a little patience solves almost everything. Use licensed casas and taxis, agree fares first, and carry a passport copy rather than the original.
+- Connectivity: ETECSA sells prepaid data plans and Nauta wifi cards used in parks and hotel lobbies; speeds are modest by regional standards. Download offline maps before you need them. Many global travel eSIMs do not cover Cuba - verify coverage rather than assuming a data plan bought for Thailand or Dubai will work here.
+- Health basics: drink bottled or purified water, use sunscreen from day one, and keep your insurance papers in your day bag.
+
+Final note:
+Havana rewards travelers who plan lightly and walk slowly. Book the flight and visa early, reserve your first two nights, and leave the rest of the week loose - the best hours in this city are the unscheduled ones, when a ballet ticket appears at the Gran Teatro box office, a shared taxi turns into a city tour, or the Malecon decides your evening for you. Five honest days here will outrank five polished ones almost anywhere else in the Caribbean.`,
+  "chefchaouen-morocco-travel-guide-bangladesh": `Two hours south of Tangier, the Rif Mountains open around a town that looks like the sky fell into it. Chefchaouen - Morocco's famous Blue City - paints entire alleys, stairways, door frames and fountains in layers of powder blue, violet and white, and the effect is lovelier in person than in the photographs that made it famous. For Bangladeshi travelers pairing Morocco's imperial cities with a mountain escape, Chefchaouen is the country's most photogenic and most relaxing stop: small enough to see on foot, rich enough to fill two or three days, and surrounded by some of the best walking country in northern Morocco. This guide covers the blue medina and its old fountain quarter, the Kasbah, the sunset hike most visitors miss, Rif Mountain day trips, honest budgets in BDT, and the practicalities - visas, buses, cash and halal food - that keep the trip easy.
+
+1. WHY THE CITY IS BLUE & WHEN TO VISIT
+Nobody knows one single reason the medina is blue. The most-told story credits the Jewish community that settled here in the 15th century and again in the 1930s, when blue was associated with the sky and heaven and the wash was said to discourage mosquitoes; other explanations are simply tradition, kept alive by residents who repaint walls, steps and fountains every spring. What matters for a visitor is that the effect changes all day - deep cobalt in the morning shade, pale silver-blue at noon, violet and warm at sunset - which is why photographers come for one night and stay for three.
+The best windows are April to June and September to October: warm days, cool evenings, clear mountain air. July and August bring heat and European holiday crowds. Winter (November to March) is genuinely cold - the town sits at about 600 meters in the Rif - and rain or occasional snow makes the medina magical but the hiking poor. Plan two full days in the medina, three if you want the Akchour waterfalls.
+
+2. GETTING TO CHEFCHAOUEN: FLIGHTS, VISA & THE LAST MILE
+There are no direct flights from Dhaka to Morocco. The practical routings run via Istanbul, Dubai or Doha to Casablanca (CMN) or Tangier, with return economy fares from Dhaka typically in the BDT 90,000 to BDT 160,000 band depending on season and how early you book. From Casablanca, many travelers ride the fast Al Boraq train to Tangier in about two hours and continue by road.
+- Visa: Bangladeshi passport holders need a Moroccan visa before travel - there is no visa on arrival. In practice applications go through the Moroccan mission covering Bangladesh (often the Embassy of Morocco in New Delhi) or a licensed visa agent, and Morocco has been expanding its e-Visa portal for eligible travelers. Requirements, bank-statement rules and processing times change: confirm everything through official channels before paying an agent.
+- The last mile: Chefchaouen has no train station. CTM buses and Supratours coaches connect Tangier (about 4 hours), Fes (about 4 hours) and Tetouan (about 2 hours) with the small bus station just below the medina; shared grand taxis are faster and pricier. In summer, buy CTM tickets a day ahead - the evening buses sell out.
+- Arrival: the medina is pedestrian-only and steep. Agree a meeting point with your riad at Bab Bouzaloud or the taxi drop; most riads send someone to carry bags.
+
+3. THE BLUE MEDINA, THE OLD FOUNTAIN & THE KASBAH
+Enter at Bab Bouzaloud, the blue-and-white gate of the medina, and the town does the rest: cobbled alleys climbing past doorways painted five shades of blue, wool blankets and scarves hanging in thick colour bars, cats on warm steps. In the upper medina, ornate communal fountains - carved stone, painted and tiled in blue and white - still serve the neighbourhood, and the textile storefronts stacked around them make the most photographed corners of the town. This is a working medina, not a film set: residents wash steps in the morning, children walk home from school, and the blue is maintained by the people who live inside it.
+- Place Outa el-Hammam: the main square, ringed with cafes under trees, facing the Kasbah and the Grand Mosque with its rare octagonal minaret (non-Muslims cannot enter the mosque - the square is the point anyway).
+- The Kasbah: the 15th-century fortress of Moulay Ali ibn Rachid, restored in the 1920s, now housing a small ethnographic museum of Rif costumes, weapons and weaving, plus a garden and a tower climb for the best rooftops-and-mountains view in town.
+- Ras El Maa: where the medina meets the river. Families picnic on the rocks, women wash wool in the fast water, and the footpath upstream toward the Spanish Mosque is the loveliest short walk in Chefchaouen.
+- The Spanish Mosque (Jebel al-Kalaa): a 30 to 45 minute uphill walk to the ruined mosque on the ridge above town. This is the sunset viewpoint everyone is told about - and at golden hour it is still half empty. Go up, stay for the blue hour, walk down with a torch.
+
+4. AKCHOUR & THE RIF MOUNTAINS
+- Akchour waterfalls: about 45 minutes by grand taxi toward Talassemtane National Park, then a 45 to 90 minute hike to the main waterfall. The natural rock arch called God's Bridge (Pont de Dieu) is a shorter walk. Take water shoes, a picnic and swimming gear - the rock pools are the reward in summer.
+- Talassemtane National Park: one of the last Moroccan fir forests, with marked trails, birdsong and mountain air an hour from the medina. Local licensed guides can be arranged through your riad or the town's guides' association.
+- Easy day trips: Tetouan and its Andalusian medina (UNESCO), the coastal road toward Oued Laou, or the market town of Ouazzane on the road to Fes.
+
+5. WHERE TO STAY & EAT (AND WHY HALAL IS EASY HERE)
+- Stay inside the medina: a traditional riad or dar - blue courtyard, rooftop terrace, Rif views - runs about USD 25 to USD 60 for a double with breakfast almost everywhere. The lanes are steep: a riad near Bab Bouzaloud with luggage help is worth a few dollars more after a long bus day.
+- Eat: tagine (the local favourite is chicken with preserved lemon and olives), Friday couscous, harira soup, msemen flatbread at breakfast, and the town's famous goat cheese (jben) with honey. Moroccan food is mild by Bangladeshi standards - harissa and hot sauce live on every table for heat.
+- Halal: Morocco is a Muslim country and virtually every kitchen is halal by default; alcohol appears only in licensed hotels and some tourist restaurants. Eat street food as you would in Dhaka - use your judgement on stalls - and the whole town is otherwise effortless for Muslim travelers.
+- Mint tea is hospitality itself: sugared, poured from a height into small glasses. Accepting one is how you make friends in the medina.
+
+6. MONEY, SAFETY & PRACTICAL REALITIES
+- Currency: the Moroccan dirham (MAD). ATMs sit near Bab Bouzaloud and the main square; smaller riads, taxis and the souk prefer cash. Cards work in bigger restaurants and galleries - keep small notes for petit taxis and tips.
+- Daily budget: Chefchaouen is the gentlest stop in Morocco on the wallet - USD 40 to USD 70 per person per day covers a riad, three meals, coffee, tea and entrance tickets. A realistic five-day Morocco loop (Casablanca or Tangier, Fes and Chefchaouen) including flights from Dhaka lands around BDT 150,000 to BDT 220,000 per person.
+- Safety: Chefchaouen is very safe by any standard; violent crime against visitors is rare. The everyday annoyance is the unofficial "guide" offering a free tour that ends in a shop - decline firmly and politely, or hire a licensed guide through your riad. Normal big-city care on bags applies in the crowded medina lanes at peak season.
+- Language: Moroccan Darija (Arabic), French widely spoken, Spanish common in the north, English fine in tourism. A few words go far - shukran (thank you), b'saha (enjoy/bless you), la shukran (no thank you).
+- Connectivity: local SIMs from Maroc Telecom or Orange are cheap at airports, and global travel eSIMs like Airalo and Yesim cover Morocco properly. Riad wifi is standard.
+- Getting around: the medina is on foot only - it is small, steep and delightful. Petit taxis serve the lower town; agree the meter or the fare first (most rides 10 to 20 MAD).
+
+7. A GOOD 5-DAY MOROCCO LOOP FOR BANGLADESHI TRAVELERS
+- Fly into Casablanca (CMN); take the train into the city or straight to Fes (about 3.5 hours).
+- Two days in the Fes medina: the tanneries from a terrace, the Bou Inania madrasa (open to all), the brass and spice souks - and the world's oldest university, Al Quaraouiyine, viewed from its doors (non-Muslims cannot enter the mosque).
+- CTM bus to Chefchaouen (about 4 hours); two days in the blue medina including the Spanish Mosque sunset and, if legs allow, Akchour.
+- Return via Tangier or Tetouan; the Al Boraq train puts you back in Casablanca for the flight home. Build one buffer day before an international departure - mountain buses run on mountain time.
+
+Final note:
+Chefchaouen is the place travelers write to us about months later - not for any one sight, but for the slow hours: tea on a rooftop while the walls turn violet, a fountain square that still works like a village well, a mountain sunset you only found because the walk looked easy. Give it two unhurried days inside a wider Morocco loop, carry cash, confirm your visa before you dream about it, and let the blue do the rest.`,
+  "travel-creator-resources": `Search for travel blogging tools and you will find fifty-item listicles where every second entry is a paid placement. This page is the opposite: a short, honest list of travel creator resources we actually use at URAL Travel in 2026, filtered for creators building from Bangladesh. No rankings anyone paid for, no tools we have never opened, and a clear explanation of how each item earned its place.
+
+This page is for you if you are starting a travel blog, a YouTube channel, or a destination website and you want honest monetization advice from a desk in Dhaka, not recycled hype. If you are planning a trip instead, our destination guides are where you want to be.
+
+1. How We Choose What Makes This List
+Three rules, and nothing gets listed that fails one of them.
+- It solves a problem we had ourselves. If a tool never earned a place in our own workflow, it does not earn a line here.
+- The pricing is transparent. Free tiers are fine; hidden costs and fake countdown pressure are not.
+- It works from Bangladesh. Payout methods, currency, visa friction, and plain internet reality matter when your desk is in Dhaka.
+Some famous names are deliberately missing. A short list you can trust beats a long one you cannot, and every commercial mention below is disclosed. The only referral link on this page sits inside the clearly marked creator callout further down this page.
+
+2. Start With One Monetization Hub, Not Ten Affiliate Logins
+How do travel bloggers actually make money, and how do you monetize a travel blog without turning it into a billboard? Almost always the same first step: affiliate commissions on the tools your readers were going to book anyway. The mistake most new creators make is signing up for ten separate programs, chasing ten dashboards, and earning nothing from any of them. Start with one hub.
+Travelpayouts is the hub we recommend and the one this site runs on. Joining is free, and a single dashboard connects you to 80+ travel brands: flights, hotels, tours, transfers, attraction tickets, eSIMs. Several programs featured in our own guides run through it: Aviasales for flight search, WayAway for trip-planning cashback, Klook for activities and rail passes, GetTransfer for private transfers, and Tiqets for museum and attraction tickets.
+What actually earns: the platform's widgets, deep links, and ready-made buttons do the boring technical work, so your energy goes into content instead of link management. See where those tools sit inside real articles in our flight-booking hacks guide and our flight compensation guide: a search box where readers would search, a booking button where readers would book, and nothing in between pretending to be editorial.
+The Travelpayouts referral program deserves one honest paragraph here, because this page is exactly where it belongs. If you later recommend the platform to other creators using your own referral link, new partners can earn up to $100 in welcome bonuses, and you earn milestone rewards as those creators actually earn: on real, withdrawn earnings, not empty sign-ups. It is a slow, compounding channel, not quick cash, and self-referrals are banned. The marked callout below carries our own referral link, clearly disclosed.
+
+3. Free Content and SEO Tools That Earn Their Place
+You do not need a 99-dollar-a-month toolchain to start travel blogging. Everything below has a genuinely useful free tier, and none of these companies pay us anything.
+- Google Search Console. The only analytics that shows what people typed to find you. Install it on day one; the queries report is your keyword research.
+- Google Trends. Check seasonality before you commit to an article: best-time-to-visit searches have a calendar, and your publish date should too.
+- Canva free tier. Thumbnails, pins, and social crops. Keep one template so your brand looks consistent.
+- Grammarly free tier. Catches the typos that quietly destroy trust in a first-person guide.
+- Notion free tier. One database for ideas, target keywords, status, and publish dates. Our own editorial calendar runs on it.
+Install Search Console before anything else. It is the one free tool that shows what real people typed to find you, and that query report is your keyword research, your content calendar, and your honest-SEO compass in one screen.
+
+4. Your Best Camera Is the One You Already Own
+Readers forgive plain photos. They do not forgive fake ones. Ours are shot on phones and edited on phones.
+- Snapseed (free, no watermark) or Lightroom Mobile free tier. Fix exposure and horizons; do not crank filters until the food looks radioactive.
+- Shoot wide, then shoot detail. Editors and readers both want the scene and the texture.
+- Write alt text like a caption for a friend who cannot see the photo: under 125 characters, ending with real punctuation. Good for accessibility, right for image SEO.
+- Never publish a photo of a place you have not stood in. Readers forgive a plain honest image; they never forgive a stock lie.
+Our Chefchaouen guide runs on phone shots of a blue alley, and honest beats bought every time. Your own images are also the only ones you can use without a rights problem.
+
+5. Research Tools We Trust With Real Money
+The same belt our destination guides are built on.
+- The Man in Seat 61. The internet's best railway advice, kept current for decades. If a guide talks trains and does not cite it, be careful.
+- Rome2rio. Fast route feasibility: what connects to what, roughly how long. Always confirm on the operator's own site before you publish.
+- Numbeo. Crowd-sourced cost-of-living data: a sanity check for budget tables, never the final word.
+- Embassy and official visa pages. Every visa claim in our guides links to an official source, because timelines and rules change and your reputation does not survive stale visa advice.
+Prove your work in public. Our Cuba guide states plainly what sanctions do to card payments; our Bangkok halal guide names streets and emblems instead of vague many-options claims. Specific constraints are a niche, and they are what readers reward.
+
+6. The Workflow: How a Travel Article Actually Earns
+An article earns money only after it earns trust, and the order matters.
+- Pick one search intent per article: halal food in Bangkok, not Asia travel.
+- Answer the query in the first 100 words, then earn the long read.
+- Write from experience, and say plainly what you do not know.
+- Place affiliate tools where they help the reader act: a search box where they would search, a booking button where they would book.
+- Disclose every affiliate and referral link in plain language.
+- Link your articles to each other. A guide without internal links is an island.
+- Wait. Search traffic compounds over months, not days, and most abandoned travel blogs quit in month three.
+None of this is glamorous. All of it works.
+
+7. Frequently Asked Questions
+Is Travelpayouts free to join?
+Yes. Joining is free, you apply to individual brand programs inside the platform, and you earn when your content generates confirmed bookings or qualified referrals. Check each program's rates and cookie windows before you write about it.
+How do travel bloggers actually make money?
+Four honest channels: affiliate commissions on flights, stays, tours and insurance; display ads; sponsored content; and their own products or guides. Affiliate income usually arrives first, because it needs traffic, not fame.
+How long does it take for a new travel blog to earn?
+Plan in months. The sites that earn at month six published consistently at month one. Search engines reward sites that exist, answer real questions, and keep updating.
+Do I need a huge audience to earn?
+No. A thousand readers with buying intent beat a hundred thousand scrollers. Specific, honest, search-focused articles are exactly why small sites earn.
+What should a travel creator based in Bangladesh check first?
+That the platforms you join pay out to your country and currency, that your passport and visa facts come from official sources, and that your internet reality, from load times to image sizes, matches your readers'. Build for readers like you.
+Where is the referral link on this page?
+Inside the marked creator callout further down this page: exactly one place, clearly disclosed, with no earnings promises attached. That is the standard we hold every guide on this site to.
+
+8. Build Your First Article, Not Your Perfect Setup
+The difference between creators who earn and creators who keep tweaking their logo is finished articles. Pick one destination or one problem you genuinely know, maybe the visa paperwork you already survived or the halal food map of the city you walk, and publish one useful, honest page this week. Then another.
+When you are ready to monetize, start with one hub, place tools where they help, and disclose everything. The creator callout is the only place on this page where we earn if you click. We would rather you trust this page for years than click it once.`,
 };
 
 /** Look up one body by slug; undefined for an unknown slug. */

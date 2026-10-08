@@ -1266,7 +1266,11 @@ if (rss) {
       continue;
     }
     const page = normalise(html);
-    const paragraphs = body.split("\n\n").map((para) => para.trim()).filter(Boolean);
+    const paragraphs = body
+      .split("\n\n")
+      .map((para) => para.trim())
+      .filter(Boolean)
+      .filter((para) => para !== "[[figure]]");
     const missing = paragraphs.filter((para) => !page.includes(normalise(para)));
     if (missing.length > 0) truncatedPrerenders.push(`${slug} (${missing.length}/${paragraphs.length})`);
   }

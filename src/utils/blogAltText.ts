@@ -25,6 +25,10 @@ export interface BlogCoverAltTextInput {
 export const CURATED_BLOG_SCENES: Readonly<
   Record<string, { en: string; bn: string }>
 > = {
+  "travel-creator-resources": {
+    en: "An open laptop, notebook, camera and world map arranged on a wooden desk",
+    bn: "কাঠের টেবিলে খোলা ল্যাপটপ, নোটবুক, ক্যামেরা ও বিশ্ব মানচিত্র",
+  },
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": {
     en: "Pilgrims circle the Kaaba beneath Makkah Clock Tower at dusk",
     bn: "গোধূলিতে মক্কা ক্লক টাওয়ারের নিচে কাবা ঘিরে তাওয়াফ করছেন মুসল্লিরা",
@@ -192,6 +196,14 @@ export const CURATED_BLOG_SCENES: Readonly<
   "bangladesh-travelers-iata-airport-codes-directory-guide": {
     en: "Passenger jets parked at multiple gates on an international airport apron",
     bn: "আন্তর্জাতিক বিমানবন্দরের টার্মিনালের পাশে বিভিন্ন গেটে দাঁড়িয়ে থাকা যাত্রীবাহী বিমান",
+  },
+  "havana-cuba-travel-guide-bangladesh": {
+    en: "Classic American cars parked in a row outside the Gran Teatro de La Habana under a blue sky",
+    bn: "নীল আকাশের নিচে গ্রান তেয়াত্রো দে লা আবানার সামনে সারি সারি দাঁড়িয়ে থাকা ক্লাসিক আমেরিকান গাড়ি",
+  },
+  "chefchaouen-morocco-travel-guide-bangladesh": {
+    en: "Blue-washed alley in Chefchaouen with a carved fountain and hanging textiles",
+    bn: "শেফশাওয়েনের নীল রঙের গলিতে খোদাই করা ফোয়ারা ও ঝুলে থাকা পোশাক",
   },
   "chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai": {
     en: "A family walks beside Dubai's waterfront beneath the downtown skyline at dusk",

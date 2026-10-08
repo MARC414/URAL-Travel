@@ -26,7 +26,7 @@ import {
   toIsoDate,
 } from "../src/utils/schema";
 import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
-import { buildResponsiveSrcSet } from "../src/utils/imageAssets";
+import { buildResponsiveSrcSet, getResponsiveImageDimensions } from "../src/utils/imageAssets";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
 import {
   CONTENT_UPDATED,
@@ -35,6 +35,8 @@ import {
 import {
   RADICAL_STORAGE_BLOG_PLACEMENTS,
   MULTI_PARTNER_BLOG_PLACEMENTS,
+  TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
+  TRAVELPAYOUTS_REFERRAL_URL,
   resolvePartnerUrl,
   sanitizeExpiredPromoText,
   AFFILIATE_LINKS,
@@ -71,6 +73,8 @@ const DIST_DIR = path.join(ROOT_DIR, "dist");
 const OPTIMIZED_SOCIAL_IMAGES_DIR = path.join(ROOT_DIR, "src", "assets", "optimized-social");
 
 const BLOG_IMAGE_MAP: Record<string, string> = {
+  "havana-cuba-travel-guide-bangladesh": "havana_gran_teatro_classic_cars_1791427200000.jpg",
+  "chefchaouen-morocco-travel-guide-bangladesh": "chefchaouen_blue_fountain_alley_1791427400000.jpg",
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": "umrah_makkah_haram_guide_1790430007679.jpg",
   "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": "haramain_bullet_train_1790484312808.jpg",
   "hajj-registration-bangladesh-government-vs-private-package-cost": "mina_hajj_tents_1790484325661.jpg",
@@ -1510,6 +1514,11 @@ function buildAllRoutes(): PrerenderRoute[] {
       }
     }
 
+    const refPlacement = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[post.slug];
+    const travelpayoutsReferralHtml = refPlacement
+      ? `<section aria-labelledby="travel-creators-referral"><h2 id="travel-creators-referral">${escapeHtml(refPlacement.headlineEn)}</h2><p>${escapeHtml(refPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(TRAVELPAYOUTS_REFERRAL_URL)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacement.anchorTextEn)}</a>${escapeHtml(refPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(TRAVELPAYOUTS_REFERRAL_URL)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacement.buttonLabelEn)}</a>.</p><p><em>${escapeHtml(refPlacement.disclosureEn)}</em></p></section>`
+      : "";
+
     const planLinksHtml = planLinks.length
       ? `<section aria-labelledby="plan-your-trip-links"><h2 id="plan-your-trip-links">Plan your trip</h2><ul>${planLinks
           .map((link) => `<li><a href="${escapeHtml(link.href)}">${escapeHtml(link.text)}</a></li>`)
@@ -1555,10 +1564,22 @@ function buildAllRoutes(): PrerenderRoute[] {
           <p>${escapeHtml(post.summary)}</p>
           ${(BLOG_BODY[post.slug] || post.content || "")
             .split("\n\n")
-            .map((para) => `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`)
+            .map((para) => {
+              const trimmedPara = String(para).trim();
+              if (trimmedPara === "[[figure]]") {
+                const fig = post.inlineFigure;
+                if (!fig) return "";
+                const dims = getResponsiveImageDimensions(fig.imageSrc);
+                return `<figure><img src="${escapeHtml(dims.src)}" srcset="${escapeHtml(
+                  buildResponsiveSrcSet(dims.src, "webp")
+                )}" sizes="(max-width: 767px) 100vw, 840px" width="${dims.width}" height="${dims.height}" loading="lazy" alt="${escapeHtml(fig.altEn)}"><figcaption>${escapeHtml(fig.captionEn)}</figcaption></figure>`;
+              }
+              return `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`;
+            })
             .join("\n")}
           ${radicalStorageHtml}
           ${multiPartnerHtml}
+          ${travelpayoutsReferralHtml}
           ${planLinksHtml}
           ${relatedGuidesHtml}
         </article>
@@ -1662,12 +1683,16 @@ function bnFaqList(
 }
 
 /** Turns the Bengali blog body (plain text with blank-line paragraphs) into HTML. */
-function bnParagraphs(text: string): string {
+function bnParagraphs(text: string, figureHtml?: string): string {
   return String(text || "")
     .split(/\n{2,}/)
     .map((paragraph) => paragraph.replace(/\n/g, " ").replace(/\*\*/g, "").trim())
     .filter(Boolean)
-    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+    .map((paragraph) =>
+      paragraph === "[[figure]]"
+        ? figureHtml ?? ""
+        : `<p>${escapeHtml(paragraph)}</p>`
+    )
     .join("");
 }
 
@@ -1718,7 +1743,26 @@ function buildBengaliBody(
   if (group === "blog" && id) {
     const override = BENGALI_BLOG_OVERRIDES[id];
     if (override) {
-      parts.push(bnParagraphs(override.content));
+      const bnPost = BLOG_DATA.find((post) => post.slug === id);
+      const bnFig = bnPost?.inlineFigure;
+      const bnFigureHtml = bnFig
+        ? (() => {
+            const dims = getResponsiveImageDimensions(bnFig.imageSrc);
+            return `<figure><img src="${escapeHtml(dims.src)}" srcset="${escapeHtml(
+              buildResponsiveSrcSet(dims.src, "webp")
+            )}" sizes="(max-width: 767px) 100vw, 840px" width="${dims.width}" height="${dims.height}" loading="lazy" alt="${escapeHtml(bnFig.altBn)}"><figcaption>${escapeHtml(bnFig.captionBn)}</figcaption></figure>`;
+          })()
+        : undefined;
+      parts.push(bnParagraphs(override.content, bnFigureHtml));
+      const refPlacementBn = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[id];
+      if (refPlacementBn) {
+        parts.push(
+          bnSection(
+            refPlacementBn.headlineBn,
+            `<p>${escapeHtml(refPlacementBn.bodyBeforeAnchorBn)}<a href="${escapeHtml(TRAVELPAYOUTS_REFERRAL_URL)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacementBn.anchorTextBn)}</a>${escapeHtml(refPlacementBn.bodyAfterAnchorBn)} <a href="${escapeHtml(TRAVELPAYOUTS_REFERRAL_URL)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacementBn.buttonLabelBn)}</a>.</p><p><em>${escapeHtml(refPlacementBn.disclosureBn)}</em></p>`
+          )
+        );
+      }
       const internal = (override.internalLinks || [])
         .filter((link) => hasBengaliCounterpart(link.path))
         .map((link) => ({ label: link.text, path: link.path }));
@@ -1915,7 +1959,7 @@ function buildBengaliBody(
     { label: "ভিসা গাইড", path: "/visa" },
     { label: "ভ্রমণ খরচ", path: "/costs" },
     { label: "উমরাহ প্ল্যানার", path: "/umrah" },
-    { label: "৪১টি ট্রাভেল ব্লগ", path: "/blog" },
+    { label: "৪৬টি ট্রাভেল ব্লগ", path: "/blog" },
   ];
   parts.push(bnLinkList("কোথা থেকে শুরু করবেন", hubLinks));
   return `<article>${parts.join("")}</article>`;

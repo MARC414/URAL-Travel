@@ -1857,12 +1857,20 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-4",
     slug: "halal-food-guide-bangkok-bangladesh",
     title: "Where to Eat Halal Food in Bangkok: A Complete Guide for Bangladeshi Travelers",
-    summary: "Finding authentic, 100% certified Halal food is one of the top priorities for Bangladeshi families visiting Thailand for shopping, holidays, or medical check-ups at Bumrungrad and Bangkok Hospital. This practical dining guide walks you through identifying the official green emblem of the Central Islamic Council of Thailand, navigating Bangkok's two largest Muslim culinary hubs—Pratunam's Petchaburi Road alleys and Sukhumvit Soi 3 (Arab Street) near Nana BTS—and budgeting for every meal tier in BDT, from BDT 180 mall food court dishes to beloved restaurants like Maidaun Halal in Pratunam, Al Hussain in Sukhumvit, and Yana Restaurant inside Siam Discovery.",
+    summary: "Finding authentic, 100% certified Halal food is one of the top priorities for Bangladeshi families visiting Thailand for shopping, holidays, or medical check-ups at Bumrungrad and Bangkok Hospital. This practical dining guide walks you through identifying the official green emblem of the Central Islamic Council of Thailand, navigating Bangkok's two largest Muslim culinary hubs—Pratunam's Petchaburi Road alleys and Sukhumvit Soi 3 (Arab Street) near Nana BTS—and budgeting for every meal tier in BDT, from BDT 180 mall food court dishes to beloved restaurants like Maidaun Halal in Pratunam, Al Hussain in Sukhumvit, and Yana Restaurant inside Siam Discovery, plus a bonus halal-friendly Ayutthaya day-trip plan (UNESCO) with transport, temple tickets and BDT cost notes.",
     category: "Food & Culture",
     date: "June 15, 2026",
     author: "Fahmida Tasnim (Dhaka Food Blogger & Explorer)",
-    readTime: "5 min read",
+    readTime: "8 min read",
+    inlineFigure: {
+      imageSrc: "/assets/images/ayutthaya_wat_phra_si_sanphet_chedis_1791427300000-1200.webp",
+      altEn: "Three bell-shaped chedis of Wat Phra Si Sanphet at Ayutthaya under a blue cloudy sky",
+      altBn: "নীল মেঘলা আকাশের নিচে আয়ুতায়ার ওয়াট ফ্রা সি সানফেটের তিনটি চেদি",
+      captionEn: "The three chedis of Wat Phra Si Sanphet in the Ayutthaya Historical Park, the anchor of any day trip from Bangkok.",
+      captionBn: "আয়ুতায়া হিস্টোরিক্যাল পার্কে ওয়াট ফ্রা সি সানফেটের তিনটি চেদি — ব্যাংকক থেকে দিনের ট্রিপের প্রধান আকর্ষণ।",
+    },
     internalLinks: [
+      { text: "Travel Creator Resources: The Tools We Actually Use (2026)", path: "/blog/travel-creator-resources" },
       { text: "Dhaka to Bangkok Flight Guide", path: "/flights/dhaka-bangkok" },
       { text: "Bangkok Hotels Neighborhoods", path: "/hotels/bangkok-hotels" },
       { text: "Thailand e-Visa & Dhaka Embassy Requirements", path: "/visa/thailand-visa" },
@@ -2593,7 +2601,68 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Flight Delay Compensation Checker (€600)", path: "/tools?tab=airhelp" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare Direct Flights from Chattogram (CGP)", body: "Search direct flights from Shah Amanat International Airport to Dubai, Sharjah, Abu Dhabi, and Muscat." }
-  }
+  },
+  {
+    id: "blog-44",
+    slug: "havana-cuba-travel-guide-bangladesh",
+    title: "Havana, Cuba Travel Guide from Dhaka: Classic Cars, Old Havana & the Gran Teatro (2026)",
+    summary: "This five-day Havana guide for Bangladeshi and international travelers covers the Gran Teatro de La Habana Alicia Alonso (home of the Ballet Nacional de Cuba, with performance tickets often at just USD 10-30), the four UNESCO plazas of Old Havana, classic American car tours at honest 2026 prices, the Malecon and Vedado, and the practical realities that make or break a Cuba trip: tourist visa and e-Visa rules for Bangladeshi passports, mandatory health insurance proof, a cash-first economy where US-issued cards fail, casa particular versus hotel stays, halal dining strategies, and a realistic BDT 220,000 to BDT 360,000 per-person budget.",
+    category: "Family & Budget",
+    date: "October 8, 2026",
+    author: "Zayan Rahman (Senior Travel Researcher)",
+    readTime: "9 min read",
+    internalLinks: [
+      { text: "Travel Creator Resources: The Tools We Actually Use (2026)", path: "/blog/travel-creator-resources" },
+      { text: "5 Insider Secrets to Booking Cheaper Flights from Dhaka", path: "/blog/cheap-flight-booking-hacks-dhaka" },
+      { text: "Top Airlines from Dhaka: Baggage Rules Compared", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
+      { text: "Best Travel eSIM & Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
+      { text: "Dual-Currency Card Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "RFCD Account vs. BDT 300 Travel Quota Guide", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
+      { text: "Global Flight Search & Fare Benchmark", path: "/flights" },
+      { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools?tab=airhelp" }
+    ],
+    affiliateCTA: { provider: "aviasales", headline: "Comparing fares to Havana?", body: "Search multi-city routings from Dhaka via Istanbul or European gateways and watch how fares move before you lock your travel dates." }
+  },
+  {
+    id: "blog-45",
+    slug: "chefchaouen-morocco-travel-guide-bangladesh",
+    title: "Chefchaouen, Morocco Travel Guide from Dhaka: Exploring Morocco's Blue City (2026)",
+    summary: "Morocco's Blue City sits two hours south of Tangier in the Rif Mountains, where entire alleys, fountains and doorways are washed in layers of blue every spring. This complete Chefchaouen guide for Bangladeshi travelers covers the blue medina and its old fountain quarter, Place Outa el-Hammam and the 15th-century Kasbah, the Spanish Mosque sunset hike, Akchour waterfalls in Talassemtane National Park, riad stays from USD 25 a night, and the practical realities: Moroccan visa rules for Bangladeshi passports (no visa on arrival), CTM bus routes from Tangier and Fes, cash-first budgets in BDT 150,000-220,000 for a five-day Morocco loop, and why halal dining is effortless across the country.",
+    category: "Family & Budget",
+    date: "October 8, 2026",
+    author: "Zayan Rahman (Senior Travel Researcher)",
+    readTime: "9 min read",
+    internalLinks: [
+      { text: "Travel Creator Resources: The Tools We Actually Use (2026)", path: "/blog/travel-creator-resources" },
+      { text: "Havana, Cuba Travel Guide: Classic Cars & the Gran Teatro", path: "/blog/havana-cuba-travel-guide-bangladesh" },
+      { text: "5 Insider Secrets to Booking Cheaper Flights from Dhaka", path: "/blog/cheap-flight-booking-hacks-dhaka" },
+      { text: "Top Airlines from Dhaka: Baggage Rules Compared", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
+      { text: "Best Travel eSIM & Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
+      { text: "Dual-Currency Card Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Global Flight Search & Fare Benchmark", path: "/flights" },
+      { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools?tab=airhelp" }
+    ],
+    affiliateCTA: { provider: "aviasales", headline: "Comparing fares to Morocco?", body: "Search multi-city routings from Dhaka via Istanbul, Dubai or Doha to Casablanca or Tangier and watch how fares move before you lock your dates." }
+  },
+  {
+    id: "blog-46",
+    slug: "travel-creator-resources",
+    title: "Travel Creator Resources: The Tools We Actually Use (2026)",
+    summary:
+      "A no-hype 2026 resource list for travel creators: the free SEO tools, phone-photography workflow, trusted research sources, and one monetization hub we actually use at URAL Travel, chosen for creators building from Bangladesh. Includes honest answers on how travel blogs really earn, where affiliate tools belong in an article, and what a creator in Dhaka should verify before joining any platform.",
+    category: "Travel Tips",
+    date: "October 8, 2026",
+    author: "Rifat Ahmed (Editorial & Operations)",
+    readTime: "10 min read",
+    internalLinks: [
+      { text: "Halal Food Guide to Bangkok for Bangladeshi Travelers", path: "/blog/halal-food-guide-bangkok-bangladesh" },
+      { text: "Havana, Cuba Travel Guide from Dhaka", path: "/blog/havana-cuba-travel-guide-bangladesh" },
+      { text: "Chefchaouen, Morocco Travel Guide from Dhaka", path: "/blog/chefchaouen-morocco-travel-guide-bangladesh" },
+      { text: "5 Insider Secrets to Booking Cheaper Flights from Dhaka", path: "/blog/cheap-flight-booking-hacks-dhaka" },
+      { text: "Flight Delay, Cancellation & Lost Baggage Compensation Guide", path: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" },
+      { text: "Best Travel eSIM and Schengen Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
+    ],
+  },
 ];
 
 
