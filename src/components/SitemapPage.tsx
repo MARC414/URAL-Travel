@@ -59,9 +59,9 @@ const PRE_DEPARTURE_CHECKLIST: ChecklistItem[] = [
     titleEn: "Dual-Currency Card Endorsement & E-Commerce Activation",
     titleBn: "ডুয়াল-কারেন্সি কার্ডে ডলার এন্ডোর্সমেন্ট ও E-Commerce চালু",
     detailEn:
-      "Get your passport stamped under the $12,000 annual travel quota at your bank branch and turn ON Foreign POS & E-Commerce in your banking app.",
+      "Get your passport stamped under the $18,000 annual travel quota at your bank branch and turn ON Foreign POS & E-Commerce in your banking app.",
     detailBn:
-      "ব্যাংক ব্রাঞ্চ থেকে পাসপোর্টে বার্ষিক $১২,০০০ কোটায় এন্ডোর্সমেন্ট সিল নিন এবং ব্যাংক অ্যাপ বা হেল্পলাইনে কল করে ফরেন ট্রানজেকশন চালু করুন।",
+      "ব্যাংক ব্রাঞ্চ থেকে পাসপোর্টে বার্ষিক $১৮,০০০ কোটায় এন্ডোর্সমেন্ট সিল নিন এবং ব্যাংক অ্যাপ বা হেল্পলাইনে কল করে ফরেন ট্রানজেকশন চালু করুন।",
     actionLabelEn: "Read Card Endorsement Guide",
     actionLabelBn: "কার্ড এন্ডোর্সমেন্ট গাইড পড়ুন",
     actionPath: "/blog/dual-currency-card-endorsement-bangladesh",
@@ -394,7 +394,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
         questionBn:
           "বাংলাদেশি পাসপোর্টে বছরে কত ডলার এন্ডোর্স করা যায় এবং কাস্টমসে স্বর্ণ আনার সীমা কত?",
         answerBn:
-          "বাংলাদেশ ব্যাংকের নিয়ম অনুযায়ী প্রাপ্তবয়স্ক যাত্রীরা বার্ষিক সর্বোচ্চ USD $১২,০০০ পর্যন্ত পাসপোর্টে এন্ডোর্স করে ডুয়াল-কারেন্সি কার্ড ও নগদ অর্থে বহন করতে পারেন। ফেরার সময় গ্রিন চ্যানেল দিয়ে শুল্কমুক্তভাবে সর্বোচ্চ ১০০ গ্রাম ব্যক্তিগত স্বর্ণালংকার এবং ২টি মোবাইল ফোন আনা যায়।",
+          "বাংলাদেশ ব্যাংকের নিয়ম অনুযায়ী প্রাপ্তবয়স্ক যাত্রীরা বার্ষিক সর্বোচ্চ USD $১৮,০০০ পর্যন্ত পাসপোর্টে এন্ডোর্স করে ডুয়াল-কারেন্সি কার্ড ও নগদ অর্থে বহন করতে পারেন। ফেরার সময় গ্রিন চ্যানেল দিয়ে শুল্কমুক্তভাবে সর্বোচ্চ ১০০ গ্রাম ব্যক্তিগত স্বর্ণালংকার এবং ২টি মোবাইল ফোন আনা যায়।",
       },
       {
         questionEn: PRE_DEPARTURE_SITEMAP_FAQS[4].question,
@@ -613,7 +613,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
               note: isBn ? "চেক-ইন ও ইমিগ্রেশন লাইনের জন্য" : "Buffer for check-in & immigration",
             },
             {
-              value: "USD $12,000 / Yr",
+              value: "USD $18,000 / Yr",
               label: isBn ? "বার্ষিক পাসপোর্ট ডলার কোটা" : "Annual Travel Quota",
               note: isBn ? "ডুয়াল-কারেন্সি কার্ড এন্ডোর্সমেন্ট" : "Bangladesh Bank card endorsement",
             },
@@ -811,8 +811,8 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
             </div>
             <p className="text-xs text-slate-600 leading-relaxed">
               {isBn
-                ? "বাংলাদেশ ব্যাংকের নিয়ম অনুযায়ী বার্ষিক সর্বোচ্চ $১২,০০০ পর্যন্ত পাসপোর্টে এন্ডোর্স করা যায়। শুল্কমুক্তভাবে ব্যক্তিগত ব্যবহারের জন্য সর্বোচ্চ ১০০ গ্রাম স্বর্ণালংকার এবং ১টি নতুন ফোন আনা যায়।"
-                : "Travelers can endorse up to USD $12,000 annually per adult passport. Returning passengers may bring up to 100 grams of personal gold ornaments and 2 phones duty-free through the DAC Green Channel."}
+                ? "বাংলাদেশ ব্যাংকের নিয়ম অনুযায়ী বার্ষিক সর্বোচ্চ $১৮,০০০ পর্যন্ত পাসপোর্টে এন্ডোর্স করা যায়। শুল্কমুক্তভাবে ব্যক্তিগত ব্যবহারের জন্য সর্বোচ্চ ১০০ গ্রাম স্বর্ণালংকার এবং ১টি নতুন ফোন আনা যায়।"
+                : "Travelers can endorse up to USD $18,000 annually per adult passport. Returning passengers may bring up to 100 grams of personal gold ornaments and 2 phones duty-free through the DAC Green Channel."}
             </p>
           </div>
         </div>

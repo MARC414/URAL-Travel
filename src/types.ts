@@ -157,5 +157,5 @@ export interface BlogPost {
     captionBn: string;
   };
   internalLinks: { text: string; path: string }[];
-  affiliateCTA?: { provider: "aviasales" | "klook" | "kkday" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage" | "ekta" | "yesim" | "kiwi" | "getTransfer" | "goCity"; headline: string; body: string };
+  affiliateCTA?: { provider: "aviasales" | "klook" | "kkday" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage" | "yesim" | "kiwi" | "getTransfer" | "goCity"; headline: string; body: string };
 }

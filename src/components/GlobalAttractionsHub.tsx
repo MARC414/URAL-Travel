@@ -801,7 +801,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
           </h3>
           <p className="text-xs text-slate-600 leading-relaxed">
             {isBn
-              ? "১) আপনার পাসপোর্টে বার্ষিক $12,000 ট্রাভেল কোটা এন্ডোর্স করা থাকলে ব্যাংকের অ্যাপে E-Commerce ও 3D-Secure চালু করে সরাসরি Tiqets থেকে ই-টিকেট কাটুন। ২) কার্ড না থাকলে আমাদের WhatsApp ডেস্কে (+8801784385335) মেসেজ দিয়ে বিকাশ/ব্যাংক ট্রান্সফারের মাধ্যমে BDT-তে ভেরিফায়েড টিকেট সংগ্রহ করুন।"
+              ? "১) আপনার পাসপোর্টে বার্ষিক $18,000 ট্রাভেল কোটা এন্ডোর্স করা থাকলে ব্যাংকের অ্যাপে E-Commerce ও 3D-Secure চালু করে সরাসরি Tiqets থেকে ই-টিকেট কাটুন। ২) কার্ড না থাকলে আমাদের WhatsApp ডেস্কে (+8801784385335) মেসেজ দিয়ে বিকাশ/ব্যাংক ট্রান্সফারের মাধ্যমে BDT-তে ভেরিফায়েড টিকেট সংগ্রহ করুন।"
               : "1) Use your passport-endorsed Dual-Currency Visa/Mastercard on Tiqets (supports 3D-Secure OTP) so you don't face foreign ticket machine declines abroad. 2) Don't have an endorsed card yet? Message our Dhaka desk on WhatsApp (+8801784385335) to issue your skip-the-line QR vouchers in BDT."}
           </p>
         </div>

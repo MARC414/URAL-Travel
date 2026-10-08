@@ -1040,7 +1040,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
         lang={lang}
       />
 
-      {/* 4C. CONTEXTUAL GO CITY ALL-INCLUSIVE PASSES & EKTA SCHENGEN VISA INSURANCE CALLOUT */}
+      {/* 4C. CONTEXTUAL GO CITY ALL-INCLUSIVE PASSES CALLOUT */}
       <MultiPartnerBlogCallout
         slug="europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide"
         lang={lang}

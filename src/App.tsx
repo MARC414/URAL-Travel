@@ -34,7 +34,10 @@ import {
   Copy,
   Check,
   Car,
-  Wifi
+  Wifi,
+  Zap,
+  Lightbulb,
+  AlertTriangle
 } from "lucide-react";
 
 // Types
@@ -55,7 +58,6 @@ import {
   RadicalStorageContextualCallout,
   MultiPartnerBlogCallout,
   TravelpayoutsReferralCallout,
-  EktaInsuranceCallout,
   AFFILIATE_LINKS,
   AIRHELP_PROMO,
   KKDAY_PROMO,
@@ -713,7 +715,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia":
       "নতুন সাদা পাসপোর্টে ভিসা রিজেকশন এড়াতে ৩ ধাপে ট্রাভেল হিস্ট্রি গড়ুন: ১ম ধাপে নেপাল বা মালদ্বীপে নিশ্চিত ফ্রি Visa on Arrival সফর করুন; ২য় ধাপে মালয়েশিয়া ও থাইল্যান্ডের অনলাইন ই-ভিসা নিন; এবং ৩য় ধাপে সিঙ্গাপুর, দুবাই, সৌদি ওমরাহ ও ইউরোপের ভিসার আবেদন করুন।",
     "dual-currency-card-endorsement-bangladesh":
-      "বাংলাদেশ ব্যাংকের নিয়মে প্রাপ্তবয়স্ক পাসপোর্টধারীরা বছরে সর্বোচ্চ ১২,০০০ মার্কিন ডলার ডুয়াল-কারেন্সি ডেবিট, প্রিপেইড বা ক্রেডিট কার্ডে এনডোর্সমেন্ট করতে পারেন। ব্যাংকে পাসপোর্ট স্ট্যাম্প নেওয়ার পর অনলাইনে ফ্লাইট বা হোটেল বুকিংয়ের আগে ব্যাংক অ্যাপ বা হটলাইনে E-Commerce ও 3D-Secure চালু করে নিন।",
+      "বাংলাদেশ ব্যাংকের নিয়মে প্রাপ্তবয়স্ক পাসপোর্টধারীরা বছরে সর্বোচ্চ ১৮,০০০ মার্কিন ডলার ডুয়াল-কারেন্সি ডেবিট, প্রিপেইড বা ক্রেডিট কার্ডে এনডোর্সমেন্ট করতে পারেন। ব্যাংকে পাসপোর্ট স্ট্যাম্প নেওয়ার পর অনলাইনে ফ্লাইট বা হোটেল বুকিংয়ের আগে ব্যাংক অ্যাপ বা হটলাইনে E-Commerce ও 3D-Secure চালু করে নিন।",
     "dhaka-airport-outbound-immigration-checklist-noc-go":
       "ঢাকা বিমানবন্দরে (DAC) মাত্র ২ মিনিটে ইমিগ্রেশন সম্পন্ন করতে হাতের ফাইলে ৫টি প্রিন্টেড কাগজ রাখুন: ৬ মাসের মেয়াদসহ পাসপোর্ট (পুরাতন পাসপোর্টসহ), ভিসা বা Arrival QR প্রিন্ট, রিটার্ন এয়ার টিকিট, হোটেল ভাউচার, ডলার এনডোর্সমেন্ট এবং পেশাগত NOC, GO অথবা ট্রেড লাইসেন্স।",
     "cheap-flight-booking-hacks-dhaka":
@@ -1327,7 +1329,7 @@ export default function App() {
         {
           question: "Which countries can Bangladeshi passport holders visit without a prior visa?",
           answer:
-            "Nepal and the Maldives grant free Visa on Arrival (with free online IMUGA declaration for the Maldives), while Sri Lanka issues an online Electronic Travel Authorization (ETA via eta.gov.lk) before departure. Bhutan requires an entry permit and a Sustainable Development Fee (SDF of Nu. 1,200/night). Note that Indonesia, Thailand, Malaysia, Singapore, and Dubai do NOT grant Visa on Arrival to ordinary Bangladeshi passports and strictly require an advance e-Visa before flying from Dhaka.",
+            "Nepal and the Maldives grant free Visa on Arrival (with free online IMUGA declaration for the Maldives), while Sri Lanka issues an online Electronic Travel Authorization (ETA via eta.gov.lk) before departure. Bhutan requires an entry permit and a Sustainable Development Fee (SDF of Nu. 1,200/night). Note that Indonesia, Thailand, Malaysia, and Singapore do NOT grant Visa on Arrival to ordinary Bangladeshi passports, so an advance visa is required before flying from Dhaka. Indonesia's e-Visa is generally open to Bangladeshi applicants only through a local sponsor or guarantor, so most travellers apply for an embassy visa. Dubai's visa-on-arrival rules for Bangladeshi passports are conditional and change often, so confirm them with the UAE authorities before you book.",
         },
         {
           question: "Is URAL a travel agency that sells tickets?",
@@ -4126,7 +4128,7 @@ export default function App() {
                     {/* Flight & Visa Loop linkups */}
                     <div id="hotel-internal-loop" className="bg-brand-navy/5 border border-brand-navy/15 p-5 rounded-xl space-y-3">
                       <span className="text-[10px] font-bold text-brand-navy font-mono tracking-widest uppercase block">
-                        {isBn ? "⚡ ফ্লাইট রুট ও ভিসা গাইড:" : "⚡ FLIGHT ROUTING & ENTRY DETAILS:"}
+                        <Zap size={12} className="inline-block mr-1.5 -mt-0.5" />{isBn ? "ফ্লাইট রুট ও ভিসা গাইড:" : "FLIGHT ROUTING & ENTRY DETAILS:"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
                         <a
@@ -4299,7 +4301,7 @@ export default function App() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {activeVisa.documentChecklist.map((cat) => (
                           <div key={cat.category} className="bg-slate-50 border border-slate-200 p-5 rounded-xl">
-                            <span className="text-xs font-bold font-mono uppercase tracking-wider text-brand-navy block border-b border-slate-200 pb-2 mb-3">📋 {cat.category}</span>
+                            <span className="text-xs font-bold font-mono uppercase tracking-wider text-brand-navy block border-b border-slate-200 pb-2 mb-3"><FileText size={12} className="inline-block mr-1.5 -mt-0.5" />{cat.category}</span>
                             <ul className="space-y-2 text-sm sm:text-[14.5px] text-slate-700">
                               {cat.items.map((item, idx) => (
                                 <li key={idx} className="flex items-start gap-2">
@@ -4348,11 +4350,6 @@ export default function App() {
 
                       <div className="flex flex-wrap gap-2.5">
                         <PartnerLinkButton 
-                          href={AFFILIATE_LINKS.ekta} 
-                          label={isBn ? `${activeVisa.country} ভিসা ইনস্যুরেন্স PDF ($0.99/দিন)` : `Get ${activeVisa.country} Visa Insurance PDF (EKTA)`}
-                          variant="dark"
-                        />
-                        <PartnerLinkButton 
                           href={AFFILIATE_LINKS.yesim} 
                           label={isBn ? `${activeVisa.country} Yesim eSIM অ্যাপ` : `Get Yesim eSIM (${activeVisa.country})`} 
                         />
@@ -4366,9 +4363,6 @@ export default function App() {
                         />
                       </div>
                     </div>
-
-                    {/* 🛡️ Embassy Visa Travel Medical Insurance Callout (EKTA + Yesim) */}
-                    <EktaInsuranceCallout countryName={activeVisa.country} lang={lang} />
 
                     {/* 📶 Stay Connected widget block */}
                     <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 animate-fade-in">
@@ -4612,7 +4606,7 @@ export default function App() {
                               <div key={index} className="bg-white border border-slate-200 hover:border-[#F6B73C] p-5 rounded-2xl shadow-sm flex flex-col justify-between transition-all transform hover:-translate-y-1">
                                 <div className="space-y-2">
                                   <span className="text-[9px] font-mono font-bold uppercase bg-slate-100 text-brand-navy px-2 py-0.5 rounded-full inline-block">
-                                    📍 AREA RECOMMENDATION
+                                    <MapPin size={10} className="inline-block mr-1 -mt-0.5" />AREA RECOMMENDATION
                                   </span>
                                   <h4 className="font-serif font-bold text-sm text-slate-900">{item.area}</h4>
                                   <p className="text-xs text-slate-705"><strong>Pros:</strong> {item.details}</p>
@@ -4643,7 +4637,7 @@ export default function App() {
                         {/* 💡 5. TRAVEL INSIGHTS SECTION */}
                         <div id="dubai-insights" className="bg-brand-navy/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
                           <div className="space-y-1">
-                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-wider block font-sans">💡 Booking Tips</span>
+                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-wider block font-sans"><Lightbulb size={11} className="inline-block mr-1 -mt-0.5" />Booking Tips</span>
                             <h4 className="font-serif text-base font-bold text-brand-navy">Essential Dubai Booking Tips & Cost Hacks</h4>
                           </div>
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans">
@@ -4973,7 +4967,7 @@ export default function App() {
 
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                             <div className="space-y-1">
-                              <span className="font-semibold block text-slate-700">📅 Best Months to Book Lower Fares:</span>
+                              <span className="font-semibold block text-slate-700"><Calendar size={12} className="inline-block mr-1.5 -mt-0.5" />Best Months to Book Lower Fares:</span>
                               <p className="text-slate-650 leading-relaxed font-sans">
                                 {activeDes.id === "nepal-guide" ? "September & May represent low tourism price cycles." :
                                 activeDes.id === "thailand-guide" ? "June & September mark monsoon sales with high airline availability." :
@@ -4984,7 +4978,7 @@ export default function App() {
                               </p>
                             </div>
                             <div className="space-y-1">
-                              <span className="font-semibold block text-slate-700">💰 Return Airfare typical baseline:</span>
+                              <span className="font-semibold block text-slate-700"><DollarSign size={12} className="inline-block mr-1.5 -mt-0.5" />Return Airfare typical baseline:</span>
                               <span className="text-[#F6B73C] font-mono font-extrabold text-xs block">
                                 {activeDes.id === "nepal-guide" ? "৳28,000 – ৳36,000 Return" :
                                 activeDes.id === "thailand-guide" ? "৳31,500 – ৳42,000 Return" :
@@ -4997,7 +4991,7 @@ export default function App() {
                           </div>
 
                           <div className="bg-white/80 border border-slate-200 p-3.5 rounded-xl text-[11px] text-slate-650 flex items-start gap-2.5">
-                            <span className="text-amber-500 mt-0.5 shrink-0">⚠️</span>
+                            <span className="text-amber-500 mt-0.5 shrink-0"><AlertTriangle size={14} /></span>
                             <span className="font-sans"><b>Alert:</b> {
                               activeDes.id === "nepal-guide" ? "Flights during festivals peak heavily. Book at least 3 weeks in advance!" :
                               activeDes.id === "thailand-guide" ? "Weekend departure prices surge by 20%. Select Tuesday or Wednesday flights." :
@@ -5162,7 +5156,7 @@ export default function App() {
                         : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50 font-sans"
                     }`}
                   >
-                    <span>💰 {isBn ? `${c.country} ভ্রমণ খরচ` : `${c.country} Trip Cost`}</span>
+                    <span><DollarSign size={12} className="inline-block mr-1 -mt-0.5" />{isBn ? `${c.country} ভ্রমণ খরচ` : `${c.country} Trip Cost`}</span>
                     <ArrowRight size={12} className={parameterId === c.id ? "text-[#F6B73C]" : "text-slate-450"} />
                   </button>
                 ))}
@@ -6503,7 +6497,7 @@ export default function App() {
                       {/* Contextual Luggage Storage Offer Callout (Radical Storage on matching travel guides) */}
                       <RadicalStorageContextualCallout slug={activePost.slug} lang={lang} />
 
-                      {/* Contextual Multi-Partner Callout (EKTA Insurance, Yesim eSIM, Kiwi.com Multi-City, GetTransfer Vans & Go City Passes) */}
+                      {/* Contextual Multi-Partner Callout (Yesim eSIM, Kiwi.com Multi-City, GetTransfer Vans & Go City Passes) */}
                       <MultiPartnerBlogCallout slug={activePost.slug} lang={lang} />
 
                       {/* Travelpayouts creator-referral callout (transparent "For Travel Creators & Bloggers" placement) */}
@@ -6684,7 +6678,7 @@ export default function App() {
                                 }}
                                 className="bg-[#F6B73C] hover:bg-[#e5a629] text-brand-navy font-bold px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
                               >
-                                {isBn ? "📋 FB ক্যাপশন কপি করুন" : "📋 Copy Ready FB Post"}
+                                <FileText size={12} className="inline-block mr-1.5 -mt-0.5" />{isBn ? "FB ক্যাপশন কপি করুন" : "Copy Ready FB Post"}
                               </button>
                             </div>
                           </div>
@@ -7321,7 +7315,7 @@ export default function App() {
                         <option value="Singapore">Singapore 🇸🇬</option>
                         <option value="Maldives">Maldives 🇲🇻</option>
                         <option value="United Arab Emirates">United Arab Emirates 🇦🇪</option>
-                        <option value="Other / Multi-Destination">Other / Multi-Destination 🌍</option>
+                        <option value="Other / Multi-Destination">Other / Multi-Destination</option>
                       </select>
                     </div>
                   </div>
@@ -7753,16 +7747,6 @@ export default function App() {
                 </li>
                 <li>
                   <a
-                    href={resolvePartnerUrl(AFFILIATE_LINKS.ekta)}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
-                  >
-                    {isBn ? "ভিসা ও শেনজেন ট্রাভেল ইনস্যুরেন্স" : "Visa & Schengen Insurance"}
-                  </a>
-                </li>
-                <li>
-                  <a
                     href={resolvePartnerUrl(AFFILIATE_LINKS.airalo)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
@@ -7914,12 +7898,12 @@ export default function App() {
               {isBn ? (
                 <>
                   <strong className="text-slate-300 font-semibold">অ্যাফিলিয়েট ও সম্পাদকীয় স্বচ্ছতা (Affiliate Disclosure):</strong>{" "}
-                  URAL কোনো প্রথাগত ট্রাভেল এজেন্সি নয়—এটি একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স প্ল্যাটফর্ম। আমাদের সাইটের কিছু আউটবাউন্ড লিংক ভেরিফায়েড আন্তর্জাতিক বুকিং পার্টনারদের (যেমন Travelpayouts, Klook, Go City, Tiqets, EKTA ও AirHelp) সাথে যুক্ত। এসব লিংকের মাধ্যমে আপনি বুকিং সম্পন্ন করলে আপনার অতিরিক্ত কোনো খরচ ছাড়াই URAL সামান্য রেফারেল কমিশন পেতে পারে, যা আমাদের সব গাইড ও ক্যালকুলেটর ১০০% ফ্রি রাখতে সাহায্য করে।
+                  URAL কোনো প্রথাগত ট্রাভেল এজেন্সি নয়—এটি একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স প্ল্যাটফর্ম। আমাদের সাইটের কিছু আউটবাউন্ড লিংক ভেরিফায়েড আন্তর্জাতিক বুকিং পার্টনারদের (যেমন Travelpayouts, Klook, Go City, Tiqets ও AirHelp) সাথে যুক্ত। এসব লিংকের মাধ্যমে আপনি বুকিং সম্পন্ন করলে আপনার অতিরিক্ত কোনো খরচ ছাড়াই URAL সামান্য রেফারেল কমিশন পেতে পারে, যা আমাদের সব গাইড ও ক্যালকুলেটর ১০০% ফ্রি রাখতে সাহায্য করে।
                 </>
               ) : (
                 <>
                   <strong className="text-slate-300 font-semibold">Affiliate &amp; Editorial Disclosure:</strong>{" "}
-                  URAL is an independent travel intelligence system, not a traditional ticket-selling agency. Some outbound links on this site connect to verified global travel partners (including Travelpayouts, Klook, Go City, Tiqets, EKTA, and AirHelp). When you book through these links, URAL may earn a referral commission at zero additional cost to you—keeping our visa checklists, BDT calculators, and travel guides 100% free.
+                  URAL is an independent travel intelligence system, not a traditional ticket-selling agency. Some outbound links on this site connect to verified global travel partners (including Travelpayouts, Klook, Go City, Tiqets, and AirHelp). When you book through these links, URAL may earn a referral commission at zero additional cost to you—keeping our visa checklists, BDT calculators, and travel guides 100% free.
                 </>
               )}
             </p>
@@ -7961,7 +7945,7 @@ export default function App() {
       {/* Dynamic Action Affiliate Conversion Toast Overlay */}
       {affiliateToast && (
         <div id="converter-toast" className="fixed bottom-6 right-6 z-50 max-w-sm bg-brand-navy text-white p-4 rounded-xl shadow-2xl border border-[#F6B73C] animate-fade-in flex items-start gap-4">
-          <div className="p-2 bg-[#F6B73C] text-brand-navy rounded-lg shrink-0 text-xs">🚀</div>
+          <div className="p-2 bg-[#F6B73C] text-brand-navy rounded-lg shrink-0 text-xs"><Sparkles size={14} /></div>
           <div className="space-y-1 text-xs">
             <span className="font-mono font-bold text-[#F6B73C] block uppercase tracking-wide font-sans">Secure Partner Dispatch</span>
             <p className="leading-relaxed font-sans text-slate-300">{affiliateToast}</p>

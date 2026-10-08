@@ -2488,7 +2488,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Compare eSIM & Travel Insurance in Travel Tools Hub", path: "/tools" },
       { text: "Travel eSIM Comparison (Yesim vs. Airalo)", path: "/tools?tab=esim" }
     ],
-    affiliateCTA: { provider: "airalo", headline: "Download Your Airalo eSIM & EKTA Insurance in 3 Minutes", body: "Install your destination eSIM before leaving Dhaka so your WhatsApp, Uber/Grab, and Nusuk QR codes work the moment you land." }
+    affiliateCTA: { provider: "airalo", headline: "Download Your Airalo eSIM in 3 Minutes", body: "Install your destination eSIM before leaving Dhaka so your WhatsApp, Uber/Grab, and Nusuk QR codes work the moment you land." }
   },
   {
     id: "blog-38",
@@ -2541,7 +2541,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Check Flight Compensation & AirHelp Promo Code in Travel Tools", path: "/tools?tab=airhelp" },
       { text: "Top Airlines Operating from Dhaka: Baggage & Service Comparison", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
       { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "Best Travel eSIM & EKTA Flight Delay Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
+      { text: "Best Travel eSIM & Schengen Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
       { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
     affiliateCTA: { provider: "airhelp", headline: "Had a Delayed Flight or Lost Bag in the Last 3 Years? Claim Up to €600", body: "Check your flight eligibility for free in 2 minutes with AirHelp (Use Promo Code AHTPO11 for 11% OFF AirHelp+ Smart & Pro)." }

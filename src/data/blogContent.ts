@@ -972,10 +972,10 @@ Why have seasoned Bangladeshi flyers switched from physical airport SIM cards to
 Even a minor 24-hour hospital admission for food poisoning, dehydration, or a slip-and-fall in **Dubai, Singapore, Makkah, or Europe** can cost **USD $3,000 to $10,000+ (BDT 3.6 Lakhs to 12 Lakhs)**. Furthermore, travel insurance is legally required or strongly checked for:
 - **1. Schengen Visa Applications (Mandatory €30,000 Minimum Coverage):**
   • Under **EU Visa Code (Article 15)**, every Bangladeshi applying for a Schengen visa (France, Italy, Germany, Sweden, Spain, Switzerland) at VFS Dhaka must submit a travel medical insurance certificate with at least **€30,000 (~USD $35,000) coverage**, including emergency hospitalization and repatriation, valid across all 29 Schengen states.
-- **2. Thailand e-Visa (thaievisa.go.th), Malaysia & Family Trips (EKTA Travel Insurance):**
-  • Purchasing an international policy from **EKTA** (starting at just **$0.99 to $1.80 USD / ~BDT 120–220 per day**) gives you an instant English PDF policy accepted by embassies and airlines, covering medical emergencies, lost checked baggage, and flight delays.
+- **2. Thailand e-Visa (thaievisa.go.th), Malaysia & Family Trips (Travel Insurance):**
+  • Purchasing an international travel medical policy gives you an instant English PDF policy accepted by embassies and airlines, covering medical emergencies, lost checked baggage, and flight delays.
 - **3. Saudi Umrah & 96-Hour Stopover Visa:**
-  • Basic emergency coverage is bundled into your official Saudi visa fee, but families traveling with **elderly parents (Age 60+)** should add a supplemental **EKTA Senior Medical & Baggage Policy** so flight delays and pre-existing stabilization are covered.`,
+  • Basic emergency coverage is bundled into your official Saudi visa fee, but families traveling with **elderly parents (Age 60+)** should add a supplemental senior medical & baggage policy so flight delays and pre-existing stabilization are covered.`,
   "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost": `For Bangladeshi honeymooners, families, and travelers building their **Passport Travel History**, the **Sri Lanka + Maldives 7-Day Combo Tour** is South Asia's ultimate "2-in-1" itinerary. Because **Colombo Bandaranaike Airport (CMB)** is only a 1 hour 20 minute flight from **Malé Velana Airport (MLE)**, combining Sri Lanka's emerald tea mountains with the Maldives' crystal-clear coral lagoons costs barely **BDT 18,000 more** than visiting the Maldives alone!
 
 1. VISA RULES FOR BANGLADESHI PASSPORTS: SRI LANKA ETA + MALDIVES FREE VOA

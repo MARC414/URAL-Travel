@@ -1560,7 +1560,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
   "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": {
     title: "বিদেশ ভ্রমণে বাংলাদেশিদের জন্য সেরা Travel eSIM (Airalo) ও বাধ্যতামূলক Travel Insurance গাইড (2026 — ওমরাহ, এশিয়া ও ইউরোপ)",
     summary:
-      "জেদ্দা, ব্যাংকক, কুয়ালালামপুর বা প্যারিস এয়ারপোর্টে নামার পর ইন্টারনেট না থাকলে যেমন Nusuk অ্যাপের লাইভ QR কোড, Grab/Careem ট্যাক্সি বা ব্যাংকের 3D-Secure OTP খোলা যায় না, তেমনি এয়ারপোর্টের সিমের দোকানে ৪৫ মিনিট লাইনে দাঁড়িয়ে ৩ গুণ বেশি দাম দিতে হয়। অন্যদিকে শেনজেন (ইউরোপ), থাইল্যান্ড ও ওমরাহ ভিসার জন্য বৈধ Travel Medical Insurance অপরিহার্য। জানুন কীভাবে ঢাকা ছাড়ার আগেই মাত্র ৫৫০–১,১০০ টাকায় Airalo/Yesim eSIM এবং প্রতিদিন ১২০ টাকায় EKTA Travel Insurance কিনবেন।",
+      "জেদ্দা, ব্যাংকক, কুয়ালালামপুর বা প্যারিস এয়ারপোর্টে নামার পর ইন্টারনেট না থাকলে যেমন Nusuk অ্যাপের লাইভ QR কোড, Grab/Careem ট্যাক্সি বা ব্যাংকের 3D-Secure OTP খোলা যায় না, তেমনি এয়ারপোর্টের সিমের দোকানে ৪৫ মিনিট লাইনে দাঁড়িয়ে ৩ গুণ বেশি দাম দিতে হয়। অন্যদিকে শেনজেন (ইউরোপ), থাইল্যান্ড ও ওমরাহ ভিসার জন্য বৈধ Travel Medical Insurance অপরিহার্য। জানুন কীভাবে ঢাকা ছাড়ার আগেই মাত্র ৫৫০–১,১০০ টাকায় Airalo/Yesim eSIM এবং একটি ট্রাভেল ইনস্যুরেন্স কিনবেন।",
     category: "Family & Budget",
     date: "২৭ সেপ্টেম্বর, ২০২৬",
     author: "জায়ান রহমান (সিনিয়র ট্রাভেল রিসার্চার)",
@@ -1580,17 +1580,17 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 বিদেশে হঠাৎ ফুড পয়জনিং, ডিহাইড্রেশন বা সামান্য দুর্ঘটনায় ১ দিন হাসপাতালে ভর্তি হতে হলেও **USD $3,000–$10,000 (৩.৫ লক্ষ থেকে ১২ লক্ষ টাকা)** বিল আসে। এছাড়া ভিসার নিয়মেও এটি জরুরি:
 - **১. ইউরোপ বা শেনজেন ভিসা (বাধ্যতামূলক €30,000 কভারেজ):**
   • **EU Visa Code (Article 15)** অনুযায়ী ঢাকায় VFS-এ যেকোনো শেনজেন দেশের ভিসার আবেদনের সাথে কমপক্ষে **€30,000 (~USD $35,000)** কভারেজের ট্রাভেল মেডিকেল ইনস্যুরেন্স পলিসি জমা দেওয়া আইনত বাধ্যতামূলক।
-- **২. থাইল্যান্ড ই-ভিসা (thaievisa.go.th), মালয়েশিয়া ও ফ্যামিলি ট্যুর (EKTA Insurance):**
-  • আন্তর্জাতিক প্রোভাইডার **EKTA** থেকে প্রতিদিন মাত্র **$0.99 থেকে $1.80 USD (~BDT 120–220)** খরচে ইনস্যুরেন্স নিলে ২ মিনিটেই ইমেইলে অফিশিয়াল ইংরেজি PDF পলিসি চলে আসে—যা চিকিৎসা খরচ, হারানো লাগেজ ও ফ্লাইট ডিলে কভার করে।`,
+- **২. থাইল্যান্ড ই-ভিসা (thaievisa.go.th), মালয়েশিয়া ও ফ্যামিলি ট্যুর (ট্রাভেল ইনস্যুরেন্স):**
+  • একটি আন্তর্জাতিক ট্রাভেল মেডিকেল ইনস্যুরেন্স নিলে ২ মিনিটেই ইমেইলে অফিশিয়াল ইংরেজি PDF পলিসি চলে আসে—যা চিকিৎসা খরচ, হারানো লাগেজ ও ফ্লাইট ডিলে কভার করে।`,
     internalLinks: [
       { text: "মদিনায় রিয়াজুল জান্নাতে ঢুকতে লাইভ Nusuk QR কোডের নিয়ম", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "ইউরোপ, যুক্তরাজ্য ও আমেরিকা ভ্রমণ গাইড", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
-      { text: "Travel Tools হাবে eSIM ও EKTA ইনস্যুরেন্স তুলনা করুন", path: "/tools" },
+      { text: "Travel Tools হাবে eSIM ও ট্রাভেল ইনস্যুরেন্স তুলনা করুন", path: "/tools" },
     ],
     affiliateCTA: {
       provider: "airalo",
-      headline: "মাত্র ৩ মিনিটে আপনার Airalo Travel eSIM ও EKTA ইনস্যুরেন্স ডাউনলোড করুন",
+      headline: "মাত্র ৩ মিনিটে আপনার Airalo Travel eSIM ডাউনলোড করুন",
       body: "ঢাকা ছাড়ার আগেই ই-সিম ইনস্টল করে নিন যাতে বিদেশের মাটিতে নামার প্রথম সেকেন্ড থেকেই ইন্টারনেট সচল থাকে।",
     },
   },
@@ -1725,7 +1725,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
       { text: "Travel Tools হাবে ফ্লাইট ক্ষতিপূরণ ও AirHelp প্রোমো কোড দেখুন", path: "/tools?tab=airhelp" },
       { text: "ঢাকা থেকে পরিচালিত সেরা ১০টি এয়ারলাইন্সের লাগেজ ও সার্ভিস তুলনা", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
       { text: "ঢাকা থেকে জেদ্দা ও মদিনা Open-Jaw Flight কৌশল", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "বিদেশ ভ্রমণে সেরা Travel eSIM ও EKTA ফ্লাইট ইনস্যুরেন্স গাইড", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
+      { text: "বিদেশ ভ্রমণে সেরা Travel eSIM ও ট্রাভেল ইনস্যুরেন্স গাইড", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
     ],
     affiliateCTA: {
       provider: "airhelp",
