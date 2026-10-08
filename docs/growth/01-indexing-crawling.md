@@ -26,7 +26,7 @@ So link equity flows *into* the homepage and dies there. Deep pages are near-orp
 - **Fix in [03-content-topical-authority.md](03-content-topical-authority.md).**
 
 ### Root cause C — no freshness signal in the sitemap
-- `sitemap.xml` has **zero `<lastmod>` entries**. Google uses `<lastmod>` to prioritize crawl. Without it, every URL looks equally stale.
+- `sitemap.xml` now carries a `<lastmod>` on every URL (done, §4). Google uses `<lastmod>` to prioritize crawl. The sitemap lists 171 URLs: 89 English and 82 Bengali (`https://ural-travel.pages.dev/bn/` is the Bengali home).
 - **Fix below in §4.**
 
 ### Root cause D — the site is new with zero backlinks
@@ -52,7 +52,7 @@ Common, usually harmless causes — check in this order:
 - **It was just submitted.** Fetch status can lag hours to a day. Re-check later before doing anything.
 - **The URL you typed.** Submit `sitemap.xml`, not the full URL, not `/public/sitemap.xml`.
 - **Cloudflare challenge / bot check** intercepting Googlebot. Verify `https://ural-travel.pages.dev/sitemap.xml` returns `200` with `Content-Type: application/xml` (or `text/xml`) using `curl -I`. It does today — confirmed live.
-- **A stale/empty sitemap from a bad build.** Confirm the built `dist/sitemap.xml` has all 83 `<url>` entries after `npm run build`.
+- **A stale/empty sitemap from a bad build.** Confirm the built `dist/sitemap.xml` has all 171 `<url>` entries after `npm run build`. Also confirm `https://ural-travel.pages.dev/bn/` returns `200` (not a redirect). The Bengali home is built to `dist/bn/index.html` so it matches the sitemap and canonical.
 - **Line-ending noise** turning the file invalid — it is valid today; keep it that way (see [08-site-cleanup.md](08-site-cleanup.md) on CRLF/LF).
 
 If it still says "Couldn't fetch" after 48h with a valid live `200` XML file, use **Validate/Retry** in GSC — it almost always clears. Do not rebuild the sitemap format chasing this; the format is correct.
@@ -121,7 +121,7 @@ Automate this as a post-build script when time allows (see [09-synchronization-m
 
 ## 7. Order of operations (this file's mini-checklist)
 
-1. [ ] Add `<lastmod>` to sitemap (§4) — deploy.
+1. [x] Add `<lastmod>` to sitemap (§4) — deploy.
 2. [ ] Verify GSC + submit sitemap + request-index top pages (§2).
 3. [ ] Add Bing, import from GSC (§3).
 4. [ ] Wire IndexNow submission into deploy (§3).

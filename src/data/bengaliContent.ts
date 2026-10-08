@@ -1419,7 +1419,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
     ],
     affiliateCTA: {
       provider: "kkday",
-      headline: "Malaysia ট্যুর পাস ও KLIA Ekspres ট্রেনে ৩০% ছাড় পান (KKday Sale)",
+      headline: "Malaysia ট্যুর পাস ও KLIA Ekspres ট্রেনের টিকিট KKday-তে বুক করুন",
       body: "কুয়ালালামপুর এয়ারপোর্ট থেকে শহরে যাওয়ার হাই-স্পিড ট্রেন, পেট্রোনাস টুইন টাওয়ার ও গেন্টিং কেবল কার টিকিট প্রি-বুক করুন।",
     },
   },

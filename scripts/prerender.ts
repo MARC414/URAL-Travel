@@ -2559,6 +2559,13 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
 
     if (r.routePath === "/") {
       fs.writeFileSync(path.join(DIST_DIR, "index.html"), pageHtml, "utf8");
+    } else if (r.routePath === "/bn") {
+      // The Bengali home is served as a directory index so that /bn/ (the
+      // canonical and sitemap URL) returns 200 directly. A flat bn.html made
+      // Cloudflare Pages redirect /bn/ -> /bn, contradicting the canonical.
+      const bnDir = path.join(DIST_DIR, "bn");
+      fs.mkdirSync(bnDir, { recursive: true });
+      fs.writeFileSync(path.join(bnDir, "index.html"), pageHtml, "utf8");
     } else {
       const segments = r.routePath.split("/").filter(Boolean);
       const fileName = `${segments.pop()}.html`;

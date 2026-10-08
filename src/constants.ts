@@ -2399,7 +2399,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka to Kuala Lumpur Flight Schedule & Fares", path: "/flights/dhaka-kuala-lumpur" },
       { text: "Where to Stay in KL: Hotel Neighborhoods", path: "/hotels/kuala-lumpur-hotels" }
     ],
-    affiliateCTA: { provider: "kkday", headline: "Claim 30% OFF Malaysia Attraction Passes & KLIA Ekspres (KKday Sale)", body: "Pre-book KLIA Ekspres high-speed airport train, Petronas Twin Towers, and Genting Highlands cable car tickets before flying." }
+    affiliateCTA: { provider: "kkday", headline: "Book Malaysia Attraction Passes & KLIA Ekspres on KKday", body: "Pre-book KLIA Ekspres high-speed airport train, Petronas Twin Towers, and Genting Highlands cable car tickets before flying." }
   },
   {
     id: "blog-34",
