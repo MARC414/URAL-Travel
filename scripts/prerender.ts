@@ -35,6 +35,8 @@ import {
 import {
   RADICAL_STORAGE_BLOG_PLACEMENTS,
   MULTI_PARTNER_BLOG_PLACEMENTS,
+  TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
+  TRAVELPAYOUTS_REFERRAL_URL,
   resolvePartnerUrl,
   sanitizeExpiredPromoText,
   AFFILIATE_LINKS,
@@ -1510,6 +1512,11 @@ function buildAllRoutes(): PrerenderRoute[] {
       }
     }
 
+    const refPlacement = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[post.slug];
+    const travelpayoutsReferralHtml = refPlacement
+      ? `<section aria-labelledby="travel-creators-referral"><h2 id="travel-creators-referral">${escapeHtml(refPlacement.headlineEn)}</h2><p>${escapeHtml(refPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(TRAVELPAYOUTS_REFERRAL_URL)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacement.anchorTextEn)}</a>${escapeHtml(refPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(TRAVELPAYOUTS_REFERRAL_URL)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacement.buttonLabelEn)}</a>.</p><p><em>${escapeHtml(refPlacement.disclosureEn)}</em></p></section>`
+      : "";
+
     const planLinksHtml = planLinks.length
       ? `<section aria-labelledby="plan-your-trip-links"><h2 id="plan-your-trip-links">Plan your trip</h2><ul>${planLinks
           .map((link) => `<li><a href="${escapeHtml(link.href)}">${escapeHtml(link.text)}</a></li>`)
@@ -1559,6 +1566,7 @@ function buildAllRoutes(): PrerenderRoute[] {
             .join("\n")}
           ${radicalStorageHtml}
           ${multiPartnerHtml}
+          ${travelpayoutsReferralHtml}
           ${planLinksHtml}
           ${relatedGuidesHtml}
         </article>
@@ -1719,6 +1727,15 @@ function buildBengaliBody(
     const override = BENGALI_BLOG_OVERRIDES[id];
     if (override) {
       parts.push(bnParagraphs(override.content));
+      const refPlacementBn = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[id];
+      if (refPlacementBn) {
+        parts.push(
+          bnSection(
+            refPlacementBn.headlineBn,
+            `<p>${escapeHtml(refPlacementBn.bodyBeforeAnchorBn)}<a href="${escapeHtml(TRAVELPAYOUTS_REFERRAL_URL)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacementBn.anchorTextBn)}</a>${escapeHtml(refPlacementBn.bodyAfterAnchorBn)} <a href="${escapeHtml(TRAVELPAYOUTS_REFERRAL_URL)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacementBn.buttonLabelBn)}</a>.</p><p><em>${escapeHtml(refPlacementBn.disclosureBn)}</em></p>`
+          )
+        );
+      }
       const internal = (override.internalLinks || [])
         .filter((link) => hasBengaliCounterpart(link.path))
         .map((link) => ({ label: link.text, path: link.path }));
@@ -1915,7 +1932,7 @@ function buildBengaliBody(
     { label: "ভিসা গাইড", path: "/visa" },
     { label: "ভ্রমণ খরচ", path: "/costs" },
     { label: "উমরাহ প্ল্যানার", path: "/umrah" },
-    { label: "৪১টি ট্রাভেল ব্লগ", path: "/blog" },
+    { label: "৪৪টি ট্রাভেল ব্লগ", path: "/blog" },
   ];
   parts.push(bnLinkList("কোথা থেকে শুরু করবেন", hubLinks));
   return `<article>${parts.join("")}</article>`;

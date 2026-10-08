@@ -1150,6 +1150,63 @@ Several prominent international and domestic airlines operate regular non-stop f
 
 4. HOW TO BOOK CGP FLIGHTS CONFIDENTLY
 When requesting ticket options, always specify 'CGP to DXB' rather than 'Chittagong to Dubai'. This allows agents or automated search engines to pull non-stop inventory without routing you through Dhaka. You can explore live CGP flight benchmarks and generate instant WhatsApp fare requests using the URAL Travel Tools desk.`,
+  "havana-cuba-travel-guide-bangladesh": `Havana is the only city in the Caribbean where a 1950s Chevrolet convertible idles in front of a marble opera house built before the First World War, and nobody photographs it twice because it happens every day. For Bangladeshi and other South Asian travelers, Cuba sits far off the usual Dubai-Bangkok-Kuala Lumpur circuit, yet it rewards the long journey with something those cities cannot: a destination that still feels genuinely undiscovered. This guide covers the five days that matter most - the Gran Teatro de La Habana Alicia Alonso, the four plazas of Old Havana, the classic American cars and the Malecon at sunset - plus the practical realities of visas, cash, food and safety in 2026.
+
+1. WHEN TO GO: DRY SEASON, BALLET NIGHTS & HURRICANE MONTHS
+Havana has two honest travel seasons. The dry season from November to April brings warm days, low humidity and clear skies - ideal for walking Old Havana and riding in open convertibles. December to March is peak season, so book your casa and any ballet tickets earlier than you think. The wet season runs May to October, with heavy afternoon showers and the year's best accommodation rates; September and October carry the Atlantic hurricane risk, so build flexibility into your plans if you travel then.
+- November to April: dry season. The best walking weather (22-28 degrees C) and the main theatre and ballet season at the Gran Teatro.
+- May to June: hot and humid with short rains. Fewer tourists and softer casa rates.
+- July to August: Havana's traditional carnival season along the Malecon - loud, colorful and crowded.
+- September to October: peak hurricane season. Cheapest fares, least predictable days.
+
+2. GETTING TO HAVANA FROM DHAKA: FLIGHTS, TOURIST VISA & ARRIVAL
+There are no direct flights between Dhaka and Havana. The cleanest routings run via Istanbul, which pairs naturally with a Dhaka departure, or through European gateways such as Madrid and Moscow. One-stop itineraries typically need 24 to 30 hours of total travel, so plan a long layover you can survive rather than the cheapest connection on paper. Expect return economy fares in the BDT 180,000 to BDT 300,000 band depending on season and lead time; compare multi-city routings rather than simple returns before you commit.
+- Visa: Bangladeshi passport holders need a Cuban tourist visa. Historically this was a tourist card arranged through the airline or a Cuban mission abroad; Cuba has been rolling out an electronic e-Visa system, and the process continues to evolve. There is no visa on arrival for Bangladeshi passports - confirm the current requirement with the Cuban embassy or the official Cuban e-Visa portal before booking flights, never from a social media screenshot.
+- Health insurance: Cuba requires incoming travelers to hold valid health insurance, and immigration officers can ask for printed proof. Buy a policy that explicitly covers Cuba before departure.
+- Yellow fever certificate: required if you arrive from or transit a country with yellow fever risk - relevant if your routing touches Africa or South America.
+- Arrival: Jose Marti International Airport (HAV) sits about 25 km southeast of the city. Arrange your first night's casa in advance and ask the host about an airport pickup; official taxis are reliable but priced in cash for arriving tourists.
+
+3. THE GRAN TEATRO DE LA HABANA: BALLET, MARBLE & THE CITY'S SOUL
+The Gran Teatro de La Habana Alicia Alonso - the great building facing Parque Central, where the classic cars park along the Paseo del Prado - opened in 1914 as the social heart of the Centro Gallego, and it remains one of the grandest theatre buildings in the Americas. Its neo-baroque facade carries monumental marble sculpture groups by Giuseppe Moretti, allegories of the arts and civic life that have watched the city change for more than a century. Inside are marble halls, a sweeping staircase and a main auditorium that still stages opera, ballet and symphonic music most weeks of the season.
+The building is inseparable from Cuban ballet. It is the home of the Ballet Nacional de Cuba, the company Alicia Alonso built into one of the world's great ballet institutions, and it hosts the International Ballet Festival of Havana, one of the oldest ballet festivals anywhere. For visitors this is unusually accessible: performance tickets are often remarkably affordable, commonly in the USD 10 to USD 30 range, and guided visits of the building are typically offered on non-performance days. Check the season calendar before you travel - a Havana evening with live ballet inside this building is the finest night out in the Caribbean.
+
+4. OLD HAVANA & ITS FOUR GREAT SQUARES
+Habana Vieja has been a UNESCO World Heritage site since 1982, and four decades of patient restoration have returned its plazas to the city. A compact walking loop covers them all in half a day, and then invites you to walk it again more slowly.
+- Plaza de Armas: the oldest square, shaded by royal palms, ringed by colonial palaces and a secondhand book market.
+- Plaza de la Catedral: baroque Havana at its most photogenic - the coral-stone Catedral de San Cristobal, whose two towers stand deliberately asymmetric, and the merchant palaces of a city that once traded sugar and enslaved people through this port.
+- Plaza Vieja: restored townhouses, the Camera Obscura for a live 360-degree panorama of the rooftops, and cafe tables that fill every evening.
+- Plaza de San Francisco de Asis: the quiet one, facing the harbor, with its basilica and the old customs house.
+Between the squares: the Castillo de la Real Fuerza (1577), one of the oldest stone fortresses in the Americas; the Havana Club rum museum; El Floridita, the daiquiri bar Hemingway made famous, and La Bodeguita del Medio, home of the mojito. Both are tourist institutions - go for the ritual, not the food.
+
+5. THE CLASSIC AMERICAN CARS: A MOVING MUSEUM YOU CAN RIDE IN
+Havana's vintage Chevrolets, Fords and Buicks are not decoration. When the revolution and the US embargo froze car imports in 1959, Cuban mechanics kept a generation of American cars running for six decades with improvised parts and swapped diesel engines. Since 2011 private car sales have been legal again, so the streets now mix the old Americans with Soviet-era Ladas and modern Korean and Chinese vehicles - but the 1950s convertibles remain the icons.
+- Private convertible tour: the classic experience. A driver takes you along the Malecon, past the Capitolio and Plaza de la Revolucion, up to Fusterlandia or leafy Miramar. Expect roughly USD 30 to USD 50 per hour for a private car - agree the full price, route and duration before departure, payable in cash.
+- Shared almendron: the local way. These shared vintage taxis run fixed city routes for a few dollars, and are the cheapest way to see Havana as residents see it.
+- Photography: the cars gather around Parque Central and the Gran Teatro every morning - the photograph that appears in every Havana guidebook, waiting for you.
+- Etiquette: settle the price first, tip for photo stops, and confirm whether the car has working air conditioning before you pay.
+
+6. BEYOND OLD HAVANA: THE MALECONE, VEDADO & FUSTERLANDIA
+- The Malecon: Havana's living room - an eight-kilometer seawall where the whole city gathers at sunset. Walk it from Habana Vieja to Vedado at least once, ideally twice.
+- Vedado: the leafy modern district - the 1930 Hotel Nacional de Cuba, the steps of the University of Havana, the Colon Cemetery with its marble avenues, and the Casa de la Musica for salsa that starts late.
+- Plaza de la Revolucion: vast, austere and unforgettable - the Jose Marti memorial tower and the steel outline of Che Guevara on the Interior Ministry wall.
+- Fusterlandia: the fishing village of Jaimanitas, transformed by artist Jose Fuster into a decades-long mosaic wonderland. Free to enter, joyful, and unlike anything else in Cuba.
+- Nightlife: the Tropicana open-air cabaret is the classic splurge; salsa clubs and live son cubano run everywhere across Vedado and Centro Habana.
+
+7. WHERE TO STAY & EAT: CASAS, PALADARES & THE HALAL REALITY
+- Casas particulares: private homestays marked by a small blue anchor symbol, running USD 25 to USD 45 per night for a clean room, private bathroom, strong coffee and better local advice than any hotel desk. For most Bangladeshi travelers a casa in Habana Vieja or Vedado is the right base.
+- Paladares: private restaurants, and the best food in Cuba. Book popular ones a day ahead. Order ropa vieja, congri (rice with black beans), tostones, fresh grilled fish, and lobster where your budget allows; finish with Cuban coffee.
+- Halal food: Cuba's Muslim community is small but established, and certified halal restaurants are rare. The practical approach: confirm meat sourcing directly with paladar owners before ordering, lean heavily on seafood, eggs, rice, beans and vegetables, and pack essential halal snacks and seasoning from Dhaka. Your casa host is usually the fastest route to a trustworthy kitchen - ask them to cook for you when in doubt.
+- Fruit and juices: mango, guava, papaya and sugarcane juice are excellent and safe when prepared fresh in front of you.
+
+8. MONEY, SAFETY & CONNECTIVITY: 2026 REALITIES
+- Cash first: Cuba runs largely on cash. Bring clean, unmarked EUR or USD notes in small denominations. US-issued cards, and any card processed through US networks, often do not work at all - do not depend on ATMs. Some non-US cards work inside major hotels, with heavy fees. Exchange at official CADECA outlets and keep your receipts.
+- Daily budget: a comfortable mid-range day (casa, paladares, one activity, transport) runs about USD 70 to USD 100 per person - roughly BDT 8,500 to BDT 12,000 at recent exchange rates. A realistic five-day total per person including flights lands around BDT 220,000 to BDT 360,000.
+- Safety: Havana is one of Latin America's safest capitals for tourists; violent crime against visitors is rare. The everyday irritant is the friendly hustle - strangers offering to guide you to a "factory" cigar shop or a bar with a surprise bill. A polite no, gracias and a little patience solves almost everything. Use licensed casas and taxis, agree fares first, and carry a passport copy rather than the original.
+- Connectivity: ETECSA sells prepaid data plans and Nauta wifi cards used in parks and hotel lobbies; speeds are modest by regional standards. Download offline maps before you need them. Many global travel eSIMs do not cover Cuba - verify coverage rather than assuming a data plan bought for Thailand or Dubai will work here.
+- Health basics: drink bottled or purified water, use sunscreen from day one, and keep your insurance papers in your day bag.
+
+Final note:
+Havana rewards travelers who plan lightly and walk slowly. Book the flight and visa early, reserve your first two nights, and leave the rest of the week loose - the best hours in this city are the unscheduled ones, when a ballet ticket appears at the Gran Teatro box office, a shared taxi turns into a city tour, or the Malecon decides your evening for you. Five honest days here will outrank five polished ones almost anywhere else in the Caribbean.`,
 };
 
 /** Look up one body by slug; undefined for an unknown slug. */

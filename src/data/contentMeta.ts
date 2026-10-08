@@ -43,7 +43,7 @@
  * Last derivation: `git log -1 -- src/constants.ts` → 2026-09-30 (c0de02e),
  * `src/data/bengaliContent.ts` → 2026-10-01 (fa82a7b). Highest wins.
  */
-export const CONTENT_UPDATED = "2026-10-01";
+export const CONTENT_UPDATED = "2026-10-08";
 
 /**
  * Warn (do not fail) once CONTENT_UPDATED is older than this. Chosen so a content

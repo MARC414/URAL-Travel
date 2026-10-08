@@ -28,6 +28,17 @@ export const AFFILIATE_LINKS = {
 
 export type AffiliatePartnerKey = keyof typeof AFFILIATE_LINKS;
 
+/**
+ * Travelpayouts CREATOR REFERRAL link (marker=675992).
+ * ⚠️ This is NOT a travel-booking affiliate link. It refers other travel
+ * creators/publishers to the Travelpayouts platform (referral program:
+ * https://www.travelpayouts.com/?marker=675992). It must only appear inside the
+ * transparent "For Travel Creators & Bloggers" block (see
+ * TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS) — never disguised as a flight or
+ * hotel booking link. Booking CTAs always use the partner URLs above.
+ */
+export const TRAVELPAYOUTS_REFERRAL_URL = "https://www.travelpayouts.com/?marker=675992";
+
 export const AIRHELP_PROMO = {
   code: "AHTPO11",
   discount: "11% OFF",
@@ -1192,6 +1203,112 @@ export function EktaInsuranceCallout({
           variant="light"
         />
       </div>
+    </aside>
+  );
+}
+
+/* -------------------------------------------------------------------------
+   Travelpayouts creator-referral placement ("For Travel Creators & Bloggers")
+   -------------------------------------------------------------------------
+   One transparent referral placement per opted-in blog post. The link is a
+   CREATOR REFERRAL link (TRAVELPAYOUTS_REFERRAL_URL): it invites other travel
+   bloggers/creators to the Travelpayouts platform — it is deliberately NOT
+   framed as a booking tool. Copy is value-first, bonus-second, with a full
+   disclosure line, per Travelpayouts' official referral-promo guidance.
+   Placement counts toward Pin & Win "referral placement" submissions; do not
+   repeat it more than once per page.
+   --------------------------------------------------------------------------- */
+
+export interface TravelpayoutsReferralBlogPlacement {
+  badgeEn: string;
+  badgeBn: string;
+  headlineEn: string;
+  headlineBn: string;
+  bodyBeforeAnchorEn: string;
+  anchorTextEn: string;
+  bodyAfterAnchorEn: string;
+  bodyBeforeAnchorBn: string;
+  anchorTextBn: string;
+  bodyAfterAnchorBn: string;
+  buttonLabelEn: string;
+  buttonLabelBn: string;
+  disclosureEn: string;
+  disclosureBn: string;
+}
+
+export const TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS: Record<string, TravelpayoutsReferralBlogPlacement> = {
+  "havana-cuba-travel-guide-bangladesh": {
+    badgeEn: "✈️ FOR TRAVEL CREATORS & BLOGGERS",
+    badgeBn: "✈️ ট্রাভেল ক্রিয়েটর ও ব্লগারদের জন্য",
+    headlineEn: "Building a Travel Blog, Channel, or Destination Site of Your Own?",
+    headlineBn: "নিজের ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেস্টিনেশন সাইট গড়ছেন?",
+    bodyBeforeAnchorEn:
+      "A note for readers who publish travel content too: managing a dozen separate affiliate dashboards used to eat hours of my week. This site now runs its flight, hotel and activity partnerships through Travelpayouts - one dashboard, one payout. If you are building a travel blog, YouTube channel or destination website, you can ",
+    anchorTextEn: "explore Travelpayouts and its creator tools here",
+    bodyAfterAnchorEn:
+      " - it is the platform I recommend for creators who want to monetize travel content transparently. New partners can earn up to $100 in welcome bonuses, and rewards unlock as your content actually earns: a long-term income stream, not quick cash.",
+    bodyBeforeAnchorBn:
+      "যারা নিজেরাও ট্রাভেল কন্টেন্ট প্রকাশ করেন তাদের জন্য একটি নোট: আলাদা আলাদা অ্যাফিলিয়েট ড্যাশবোর্ড সামলানো আগে সপ্তাহে ঘণ্টার পর ঘণ্টা নিয়ে যেত। এখন এই সাইটের ফ্লাইট, হোটেল ও অ্যাক্টিভিটি পার্টনারশিপ চলে Travelpayouts-এর একটিমাত্র ড্যাশবোর্ড থেকে। আপনি যদি ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেস্টিনেশন ওয়েবসাইট গড়েন, তাহলে ",
+    anchorTextBn: "এখান থেকে Travelpayouts ও এর ক্রিয়েটর টুলগুলো দেখে নিন",
+    bodyAfterAnchorBn:
+      " - ট্রাভেল কন্টেন্ট দিয়ে স্বচ্ছভাবে আয় করতে চাওয়া ক্রিয়েটরদের জন্য আমি যে প্ল্যাটফর্মটি সুপারিশ করি, সেটিই এটি। নতুন পার্টনাররা স্বাগতম বোনাসে $100 পর্যন্ত পেতে পারেন; তবে পুরস্কার আনলক হয় আপনার কন্টেন্ট সত্যিই আয় করার পর - এটি দ্রুত টাকার নয়, দীর্ঘমেয়াদি আয়ের একটি পথ।",
+    buttonLabelEn: "Explore Travelpayouts for Creators",
+    buttonLabelBn: "ক্রিয়েটরদের জন্য Travelpayouts দেখুন",
+    disclosureEn:
+      "Transparency: this is my referral link. If you join through it and start earning, Travelpayouts pays me a milestone bonus at no extra cost to you.",
+    disclosureBn:
+      "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে আপনি যদি আয় করা শুরু করেন, তাহলে Travelpayouts আমাকে একটি মাইলফলক বোনাস দেয় - আপনার কোনো অতিরিক্ত খরচ ছাড়াই।",
+  },
+};
+
+export function TravelpayoutsReferralCallout({
+  slug,
+  lang = "en"
+}: {
+  slug: string;
+  lang?: "en" | "bn";
+}) {
+  const placement = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[slug];
+  if (!placement) return null;
+
+  const isBn = lang === "bn";
+  const href = TRAVELPAYOUTS_REFERRAL_URL;
+
+  return (
+    <aside
+      aria-label={isBn ? "ট্রাভেল ক্রিয়েটরদের জন্য Travelpayouts রেফারেল" : "Travelpayouts referral for travel creators"}
+      className="bg-sky-50/70 border border-sky-200/80 rounded-2xl p-5 sm:p-6 space-y-3 text-left"
+    >
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <span className="text-[10px] font-mono font-bold uppercase tracking-wider bg-brand-navy text-[#F6B73C] px-2.5 py-1 rounded-md">
+          {isBn ? placement.badgeBn : placement.badgeEn}
+        </span>
+      </div>
+      <h3 className="font-serif text-lg sm:text-xl font-bold text-brand-navy leading-snug">
+        {isBn ? placement.headlineBn : placement.headlineEn}
+      </h3>
+      <p className="text-sm text-slate-700 leading-relaxed">
+        {isBn ? placement.bodyBeforeAnchorBn : placement.bodyBeforeAnchorEn}
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="text-brand-navy font-semibold underline decoration-[#F6B73C] decoration-2 underline-offset-2 hover:text-[#F6B73C]"
+        >
+          {isBn ? placement.anchorTextBn : placement.anchorTextEn}
+        </a>
+        {isBn ? placement.bodyAfterAnchorBn : placement.bodyAfterAnchorEn}
+      </p>
+      <div className="pt-1">
+        <PartnerLinkButton
+          href={href}
+          label={isBn ? placement.buttonLabelBn : placement.buttonLabelEn}
+          variant="dark"
+        />
+      </div>
+      <p className="text-[11px] text-slate-500 leading-relaxed">
+        {isBn ? placement.disclosureBn : placement.disclosureEn}
+      </p>
     </aside>
   );
 }

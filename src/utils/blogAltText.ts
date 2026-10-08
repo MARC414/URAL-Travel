@@ -193,6 +193,10 @@ export const CURATED_BLOG_SCENES: Readonly<
     en: "Passenger jets parked at multiple gates on an international airport apron",
     bn: "আন্তর্জাতিক বিমানবন্দরের টার্মিনালের পাশে বিভিন্ন গেটে দাঁড়িয়ে থাকা যাত্রীবাহী বিমান",
   },
+  "havana-cuba-travel-guide-bangladesh": {
+    en: "Classic American cars parked in a row outside the Gran Teatro de La Habana under a blue sky",
+    bn: "নীল আকাশের নিচে গ্রান তেয়াত্রো দে লা আবানার সামনে সারি সারি দাঁড়িয়ে থাকা ক্লাসিক আমেরিকান গাড়ি",
+  },
   "chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai": {
     en: "A family walks beside Dubai's waterfront beneath the downtown skyline at dusk",
     bn: "গোধূলিতে দুবাইয়ের ডাউনটাউন স্কাইলাইনের নিচে জলধারের পথ ধরে হাঁটছে একটি পরিবার",

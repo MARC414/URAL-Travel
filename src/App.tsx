@@ -54,6 +54,7 @@ import {
   PartnerLinkButton,
   RadicalStorageContextualCallout,
   MultiPartnerBlogCallout,
+  TravelpayoutsReferralCallout,
   EktaInsuranceCallout,
   AFFILIATE_LINKS,
   AIRHELP_PROMO,
@@ -647,6 +648,8 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
       "Bangladeshi passengers whose flights are delayed 3+ hours, cancelled, or overbooked on UK/EU routes (EC 261/2004) can claim €250–€600 (BDT 33,000–80,000), while Montreal Convention rules cover up to ~$1,700 (BDT 2,05,000) for lost or damaged baggage on Biman, Saudia, Emirates, or Qatar Airways.",
     "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla":
       "Compare every major airline flying out of Dhaka (DAC): Biman and Saudia lead for direct 6.5-hour Jeddah/Madinah flights with 2x23kg (46kg) baggage and free 5L Zamzam water; Emirates, Qatar, and Gulf Air offer top 1-stop transit value; and Malaysia/Singapore Airlines lead on Asian routes.",
+    "havana-cuba-travel-guide-bangladesh":
+      "The Gran Teatro de La Habana Alicia Alonso (opened 1914) is home of the Ballet Nacional de Cuba, with tickets often just USD 10-30. Bangladeshi travelers need a Cuban tourist visa or e-Visa plus proof of health insurance, must plan on cash (US-issued cards rarely work), and should budget about BDT 220,000-360,000 for five days including flights.",
   };
 
   const snippetsBn: Record<string, string> = {
@@ -734,6 +737,8 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
       "ফ্লাইট ৩+ ঘণ্টা দেরি (Delay), বাতিল বা ওভারবুকিং হলে ইউরোপ/যুক্তরাজ্য রুটে EC 261/2004 আইন অনুযায়ী €250–€600 (৩৩,০০০–৮০,০০০ টাকা) এবং যেকোনো আন্তর্জাতিক এয়ারলাইন্সে লাগেজ হারালে মন্ট্রিয়ল কনভেনশনে সর্বোচ্চ ২,০৫,০০০ টাকা পর্যন্ত ক্ষতিপূরণ দাবি করা যায়।",
     "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla":
       "ঢাকা (DAC) থেকে সরাসরি জেদ্দা/মদিনা ওমরাহ ফ্লাইটে ৪৬ কেজি (২x২৩ কেজি) ব্যাগেজ ও ৫ লিটার ফ্রি জমজম পানির সুবিধায় Biman ও Saudia সেরা। সাশ্রয়ী ১-স্টপ ট্রানজিটে Emirates, Qatar ও Gulf Air এবং এশিয়া রুটে Malaysia ও Singapore Airlines শীর্ষে।",
+    "havana-cuba-travel-guide-bangladesh":
+      "হাভানার গ্রান তেয়াত্রো দে লা আবানা আলিসিয়া আলোনসো (১৯১৪ সালে উদ্বোধন) কিউবার জাতীয় ব্যালের আবাসস্থল, শো-এর টিকিট প্রায়ই মাত্র USD ১০-৩০। বাংলাদেশি ভ্রমণকারীদের কিউবান ট্যুরিস্ট ভিসা/ই-ভিসা ও স্বাস্থ্য বীমার প্রমাণ লাগে; ৫ দিনের বাজেট প্রায় ২,২০,০০০-৩,৬০,০০০ টাকা - কিউবা নগদ-নির্ভর, US-ইস্যু কার্ড সাধারণত কাজ করে না।",
   };
 
   const map = isBn ? snippetsBn : snippetsEn;
@@ -6459,6 +6464,9 @@ export default function App() {
                       {/* Contextual Multi-Partner Callout (EKTA Insurance, Yesim eSIM, Kiwi.com Multi-City, GetTransfer Vans & Go City Passes) */}
                       <MultiPartnerBlogCallout slug={activePost.slug} lang={lang} />
 
+                      {/* Travelpayouts creator-referral callout (transparent "For Travel Creators & Bloggers" placement) */}
+                      <TravelpayoutsReferralCallout slug={activePost.slug} lang={lang} />
+
                       {/* Contextual Affiliate Widget */}
                       {activePost.affiliateCTA && (
                         <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-3 text-left">
@@ -7651,7 +7659,7 @@ export default function App() {
                 <li><a href="/visa/malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/malaysia-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
                 <li><a href="/visa/singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/singapore-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Visa"}</a></li>
                 <li><a href="/visa/dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/dubai-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
-                <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪১টি ট্রাভেল ব্লগ গাইড →" : "All 41 Travel Blog Guides →"}</a></li>
+                <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪৪টি ট্রাভেল ব্লগ গাইড →" : "All 44 Travel Blog Guides →"}</a></li>
               </ul>
             </div>
 

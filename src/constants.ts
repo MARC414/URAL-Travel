@@ -2593,6 +2593,26 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Flight Delay Compensation Checker (€600)", path: "/tools?tab=airhelp" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare Direct Flights from Chattogram (CGP)", body: "Search direct flights from Shah Amanat International Airport to Dubai, Sharjah, Abu Dhabi, and Muscat." }
+  },
+  {
+    id: "blog-44",
+    slug: "havana-cuba-travel-guide-bangladesh",
+    title: "Havana, Cuba Travel Guide from Dhaka: Classic Cars, Old Havana & the Gran Teatro (2026)",
+    summary: "This five-day Havana guide for Bangladeshi and international travelers covers the Gran Teatro de La Habana Alicia Alonso (home of the Ballet Nacional de Cuba, with performance tickets often at just USD 10-30), the four UNESCO plazas of Old Havana, classic American car tours at honest 2026 prices, the Malecon and Vedado, and the practical realities that make or break a Cuba trip: tourist visa and e-Visa rules for Bangladeshi passports, mandatory health insurance proof, a cash-first economy where US-issued cards fail, casa particular versus hotel stays, halal dining strategies, and a realistic BDT 220,000 to BDT 360,000 per-person budget.",
+    category: "Family & Budget",
+    date: "October 8, 2026",
+    author: "Zayan Rahman (Senior Travel Researcher)",
+    readTime: "9 min read",
+    internalLinks: [
+      { text: "5 Insider Secrets to Booking Cheaper Flights from Dhaka", path: "/blog/cheap-flight-booking-hacks-dhaka" },
+      { text: "Top Airlines from Dhaka: Baggage Rules Compared", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
+      { text: "Best Travel eSIM & Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
+      { text: "Dual-Currency Card Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "RFCD Account vs. BDT 300 Travel Quota Guide", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
+      { text: "Global Flight Search & Fare Benchmark", path: "/flights" },
+      { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools?tab=airhelp" }
+    ],
+    affiliateCTA: { provider: "aviasales", headline: "Comparing fares to Havana?", body: "Search multi-city routings from Dhaka via Istanbul or European gateways and watch how fares move before you lock your travel dates." }
   }
 ];
 
