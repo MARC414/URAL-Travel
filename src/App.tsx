@@ -650,6 +650,8 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
       "Compare every major airline flying out of Dhaka (DAC): Biman and Saudia lead for direct 6.5-hour Jeddah/Madinah flights with 2x23kg (46kg) baggage and free 5L Zamzam water; Emirates, Qatar, and Gulf Air offer top 1-stop transit value; and Malaysia/Singapore Airlines lead on Asian routes.",
     "havana-cuba-travel-guide-bangladesh":
       "The Gran Teatro de La Habana Alicia Alonso (opened 1914) is home of the Ballet Nacional de Cuba, with tickets often just USD 10-30. Bangladeshi travelers need a Cuban tourist visa or e-Visa plus proof of health insurance, must plan on cash (US-issued cards rarely work), and should budget about BDT 220,000-360,000 for five days including flights.",
+    "chefchaouen-morocco-travel-guide-bangladesh":
+      "Chefchaouen, Morocco's Blue City in the Rif Mountains, is best visited April-June and September-October. CTM buses reach it in about 4 hours from Tangier or Fes. Bangladeshi travelers need a Moroccan visa in advance (no visa on arrival), halal food is the default everywhere, and a 5-day Morocco loop costs about BDT 150,000-220,000 including flights.",
   };
 
   const snippetsBn: Record<string, string> = {
@@ -739,6 +741,8 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
       "ঢাকা (DAC) থেকে সরাসরি জেদ্দা/মদিনা ওমরাহ ফ্লাইটে ৪৬ কেজি (২x২৩ কেজি) ব্যাগেজ ও ৫ লিটার ফ্রি জমজম পানির সুবিধায় Biman ও Saudia সেরা। সাশ্রয়ী ১-স্টপ ট্রানজিটে Emirates, Qatar ও Gulf Air এবং এশিয়া রুটে Malaysia ও Singapore Airlines শীর্ষে।",
     "havana-cuba-travel-guide-bangladesh":
       "হাভানার গ্রান তেয়াত্রো দে লা আবানা আলিসিয়া আলোনসো (১৯১৪ সালে উদ্বোধন) কিউবার জাতীয় ব্যালের আবাসস্থল, শো-এর টিকিট প্রায়ই মাত্র USD ১০-৩০। বাংলাদেশি ভ্রমণকারীদের কিউবান ট্যুরিস্ট ভিসা/ই-ভিসা ও স্বাস্থ্য বীমার প্রমাণ লাগে; ৫ দিনের বাজেট প্রায় ২,২০,০০০-৩,৬০,০০০ টাকা - কিউবা নগদ-নির্ভর, US-ইস্যু কার্ড সাধারণত কাজ করে না।",
+    "chefchaouen-morocco-travel-guide-bangladesh":
+      "রিফ পাহাড়ের মরক্কোর নীল শহর শেফশাওয়েন এপ্রিল-জুন ও সেপ্টেম্বর-অক্টোবরে যাওয়া ভালো। টাঞ্জিয়ার বা ফেজ থেকে CTM বাসে প্রায় ৪ ঘণ্টা। বাংলাদেশিদের আগেই মরক্কো ভিসা লাগে (ভিসা অন অ্যারাইভাল নেই), হালাল সর্বত্র স্বাভাবিক, আর ৫ দিনের মরক্কো লুপের ব্যয় প্রায় ১,৫০,০০০-২,২০,০০০ টাকা (ফ্লাইটসহ)।",
   };
 
   const map = isBn ? snippetsBn : snippetsEn;
@@ -7659,7 +7663,7 @@ export default function App() {
                 <li><a href="/visa/malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/malaysia-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
                 <li><a href="/visa/singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/singapore-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Visa"}</a></li>
                 <li><a href="/visa/dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/dubai-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
-                <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪৪টি ট্রাভেল ব্লগ গাইড →" : "All 44 Travel Blog Guides →"}</a></li>
+                <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪৫টি ট্রাভেল ব্লগ গাইড →" : "All 45 Travel Blog Guides →"}</a></li>
               </ul>
             </div>
 

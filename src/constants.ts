@@ -2613,6 +2613,26 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools?tab=airhelp" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Comparing fares to Havana?", body: "Search multi-city routings from Dhaka via Istanbul or European gateways and watch how fares move before you lock your travel dates." }
+  },
+  {
+    id: "blog-45",
+    slug: "chefchaouen-morocco-travel-guide-bangladesh",
+    title: "Chefchaouen, Morocco Travel Guide from Dhaka: Exploring Morocco's Blue City (2026)",
+    summary: "Morocco's Blue City sits two hours south of Tangier in the Rif Mountains, where entire alleys, fountains and doorways are washed in layers of blue every spring. This complete Chefchaouen guide for Bangladeshi travelers covers the blue medina and its old fountain quarter, Place Outa el-Hammam and the 15th-century Kasbah, the Spanish Mosque sunset hike, Akchour waterfalls in Talassemtane National Park, riad stays from USD 25 a night, and the practical realities: Moroccan visa rules for Bangladeshi passports (no visa on arrival), CTM bus routes from Tangier and Fes, cash-first budgets in BDT 150,000-220,000 for a five-day Morocco loop, and why halal dining is effortless across the country.",
+    category: "Family & Budget",
+    date: "October 8, 2026",
+    author: "Zayan Rahman (Senior Travel Researcher)",
+    readTime: "9 min read",
+    internalLinks: [
+      { text: "Havana, Cuba Travel Guide: Classic Cars & the Gran Teatro", path: "/blog/havana-cuba-travel-guide-bangladesh" },
+      { text: "5 Insider Secrets to Booking Cheaper Flights from Dhaka", path: "/blog/cheap-flight-booking-hacks-dhaka" },
+      { text: "Top Airlines from Dhaka: Baggage Rules Compared", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
+      { text: "Best Travel eSIM & Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
+      { text: "Dual-Currency Card Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Global Flight Search & Fare Benchmark", path: "/flights" },
+      { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools?tab=airhelp" }
+    ],
+    affiliateCTA: { provider: "aviasales", headline: "Comparing fares to Morocco?", body: "Search multi-city routings from Dhaka via Istanbul, Dubai or Doha to Casablanca or Tangier and watch how fares move before you lock your dates." }
   }
 ];
 

@@ -197,6 +197,10 @@ export const CURATED_BLOG_SCENES: Readonly<
     en: "Classic American cars parked in a row outside the Gran Teatro de La Habana under a blue sky",
     bn: "নীল আকাশের নিচে গ্রান তেয়াত্রো দে লা আবানার সামনে সারি সারি দাঁড়িয়ে থাকা ক্লাসিক আমেরিকান গাড়ি",
   },
+  "chefchaouen-morocco-travel-guide-bangladesh": {
+    en: "Blue-washed alley in Chefchaouen with a carved fountain and hanging textiles",
+    bn: "শেফশাওয়েনের নীল রঙের গলিতে খোদাই করা ফোয়ারা ও ঝুলে থাকা পোশাক",
+  },
   "chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai": {
     en: "A family walks beside Dubai's waterfront beneath the downtown skyline at dusk",
     bn: "গোধূলিতে দুবাইয়ের ডাউনটাউন স্কাইলাইনের নিচে জলধারের পথ ধরে হাঁটছে একটি পরিবার",

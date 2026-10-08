@@ -1932,7 +1932,7 @@ function buildBengaliBody(
     { label: "ভিসা গাইড", path: "/visa" },
     { label: "ভ্রমণ খরচ", path: "/costs" },
     { label: "উমরাহ প্ল্যানার", path: "/umrah" },
-    { label: "৪৪টি ট্রাভেল ব্লগ", path: "/blog" },
+    { label: "৪৫টি ট্রাভেল ব্লগ", path: "/blog" },
   ];
   parts.push(bnLinkList("কোথা থেকে শুরু করবেন", hubLinks));
   return `<article>${parts.join("")}</article>`;

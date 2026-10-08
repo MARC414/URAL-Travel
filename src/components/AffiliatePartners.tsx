@@ -1237,6 +1237,28 @@ export interface TravelpayoutsReferralBlogPlacement {
 }
 
 export const TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS: Record<string, TravelpayoutsReferralBlogPlacement> = {
+  "chefchaouen-morocco-travel-guide-bangladesh": {
+    badgeEn: "✈️ FOR TRAVEL CREATORS & BLOGGERS",
+    badgeBn: "✈️ ট্রাভেল ক্রিয়েটর ও ব্লগারদের জন্য",
+    headlineEn: "Building a Travel Blog, Channel, or Destination Site of Your Own?",
+    headlineBn: "নিজের ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেসটিনেশন সাইট গড়়ছেন?",
+    bodyBeforeAnchorEn:
+      "A note for readers who publish travel content too: managing a dozen separate affiliate dashboards used to eat hours of my week. This site now runs its flight, hotel and activity partnerships through Travelpayouts - one dashboard, one payout. If you are building a travel blog, YouTube channel or destination website, you can ",
+    anchorTextEn: "explore Travelpayouts and its creator tools here",
+    bodyAfterAnchorEn:
+      " - it is the platform I recommend for creators who want to monetize travel content transparently. New partners can earn up to $100 in welcome bonuses, and rewards unlock as your content actually earns: a long-term income stream, not quick cash.",
+    bodyBeforeAnchorBn:
+      "যারা নিজেরারাও ট্রাভেল কন্টেন্ট প্রকাশ করেন তাদের জন্য একটি নোট: আলাদা আলাদা অ্যাফিলিয়েট ড্যাশবোর্ড সামলানো আগে সপ্তাহে ঘণ্টার পর ঘণ্টা নিয়ে যেত। এখন এই সাইটের ফ্লাইট, হোটেল ও অ্যাক্টিভিটি পার্টনরশিপ চলে Travelpayouts-এর একটিমাত্র ড্যাশবোর্ড থেকে। আপনি যদি ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেসটিনেশন ওয়েবসাইট গড়়েন, তাহলে ",
+    anchorTextBn: "এখান থেকে Travelpayouts ও এর ক্রিয়েটর টুলগুলো দেখে নিন",
+    bodyAfterAnchorBn:
+      " - ট্রাভেল কন্টেন্ট দিয়ে স্বচ্ছভাবে আয় করতে চাওয়া ক্রিয়েটরদের জন্য আমি যে প্ল্যাটফর্মটি সুপারিশ করি, সেটিই এটি। নতুন পার্টনাররা স্বাগতম বোনাসে $100 পর্যন্ত পেতে পারেন; তবে পুরস্কার আনলক হয়় আপনার কন্টেন্ট সত্যিই আয় করার পর - এটি দ্রুত টাকার নয়়, দীর্ঘমেয়়াদি আয়ের একটি পথ।",
+    buttonLabelEn: "Explore Travelpayouts for Creators",
+    buttonLabelBn: "ক্রিয়েটরদের জন্য Travelpayouts দেখুন",
+    disclosureEn:
+      "Transparency: this is my referral link. If you join through it and start earning, Travelpayouts pays me a milestone bonus at no extra cost to you.",
+    disclosureBn:
+      "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে আপনি যদি আয় করা শুরু করেন, তাহলে Travelpayouts আমাকে একটি মাইলফলক বোনাস দেয়় - আপনার কোনো অতিরিক্ত খরচ ছাড়াই।",
+  },
   "havana-cuba-travel-guide-bangladesh": {
     badgeEn: "✈️ FOR TRAVEL CREATORS & BLOGGERS",
     badgeBn: "✈️ ট্রাভেল ক্রিয়েটর ও ব্লগারদের জন্য",

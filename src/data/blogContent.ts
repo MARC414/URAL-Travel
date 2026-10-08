@@ -1207,6 +1207,52 @@ Havana's vintage Chevrolets, Fords and Buicks are not decoration. When the revol
 
 Final note:
 Havana rewards travelers who plan lightly and walk slowly. Book the flight and visa early, reserve your first two nights, and leave the rest of the week loose - the best hours in this city are the unscheduled ones, when a ballet ticket appears at the Gran Teatro box office, a shared taxi turns into a city tour, or the Malecon decides your evening for you. Five honest days here will outrank five polished ones almost anywhere else in the Caribbean.`,
+  "chefchaouen-morocco-travel-guide-bangladesh": `Two hours south of Tangier, the Rif Mountains open around a town that looks like the sky fell into it. Chefchaouen - Morocco's famous Blue City - paints entire alleys, stairways, door frames and fountains in layers of powder blue, violet and white, and the effect is lovelier in person than in the photographs that made it famous. For Bangladeshi travelers pairing Morocco's imperial cities with a mountain escape, Chefchaouen is the country's most photogenic and most relaxing stop: small enough to see on foot, rich enough to fill two or three days, and surrounded by some of the best walking country in northern Morocco. This guide covers the blue medina and its old fountain quarter, the Kasbah, the sunset hike most visitors miss, Rif Mountain day trips, honest budgets in BDT, and the practicalities - visas, buses, cash and halal food - that keep the trip easy.
+
+1. WHY THE CITY IS BLUE & WHEN TO VISIT
+Nobody knows one single reason the medina is blue. The most-told story credits the Jewish community that settled here in the 15th century and again in the 1930s, when blue was associated with the sky and heaven and the wash was said to discourage mosquitoes; other explanations are simply tradition, kept alive by residents who repaint walls, steps and fountains every spring. What matters for a visitor is that the effect changes all day - deep cobalt in the morning shade, pale silver-blue at noon, violet and warm at sunset - which is why photographers come for one night and stay for three.
+The best windows are April to June and September to October: warm days, cool evenings, clear mountain air. July and August bring heat and European holiday crowds. Winter (November to March) is genuinely cold - the town sits at about 600 meters in the Rif - and rain or occasional snow makes the medina magical but the hiking poor. Plan two full days in the medina, three if you want the Akchour waterfalls.
+
+2. GETTING TO CHEFCHAOUEN: FLIGHTS, VISA & THE LAST MILE
+There are no direct flights from Dhaka to Morocco. The practical routings run via Istanbul, Dubai or Doha to Casablanca (CMN) or Tangier, with return economy fares from Dhaka typically in the BDT 90,000 to BDT 160,000 band depending on season and how early you book. From Casablanca, many travelers ride the fast Al Boraq train to Tangier in about two hours and continue by road.
+- Visa: Bangladeshi passport holders need a Moroccan visa before travel - there is no visa on arrival. In practice applications go through the Moroccan mission covering Bangladesh (often the Embassy of Morocco in New Delhi) or a licensed visa agent, and Morocco has been expanding its e-Visa portal for eligible travelers. Requirements, bank-statement rules and processing times change: confirm everything through official channels before paying an agent.
+- The last mile: Chefchaouen has no train station. CTM buses and Supratours coaches connect Tangier (about 4 hours), Fes (about 4 hours) and Tetouan (about 2 hours) with the small bus station just below the medina; shared grand taxis are faster and pricier. In summer, buy CTM tickets a day ahead - the evening buses sell out.
+- Arrival: the medina is pedestrian-only and steep. Agree a meeting point with your riad at Bab Bouzaloud or the taxi drop; most riads send someone to carry bags.
+
+3. THE BLUE MEDINA, THE OLD FOUNTAIN & THE KASBAH
+Enter at Bab Bouzaloud, the blue-and-white gate of the medina, and the town does the rest: cobbled alleys climbing past doorways painted five shades of blue, wool blankets and scarves hanging in thick colour bars, cats on warm steps. In the upper medina, ornate communal fountains - carved stone, painted and tiled in blue and white - still serve the neighbourhood, and the textile storefronts stacked around them make the most photographed corners of the town. This is a working medina, not a film set: residents wash steps in the morning, children walk home from school, and the blue is maintained by the people who live inside it.
+- Place Outa el-Hammam: the main square, ringed with cafes under trees, facing the Kasbah and the Grand Mosque with its rare octagonal minaret (non-Muslims cannot enter the mosque - the square is the point anyway).
+- The Kasbah: the 15th-century fortress of Moulay Ali ibn Rachid, restored in the 1920s, now housing a small ethnographic museum of Rif costumes, weapons and weaving, plus a garden and a tower climb for the best rooftops-and-mountains view in town.
+- Ras El Maa: where the medina meets the river. Families picnic on the rocks, women wash wool in the fast water, and the footpath upstream toward the Spanish Mosque is the loveliest short walk in Chefchaouen.
+- The Spanish Mosque (Jebel al-Kalaa): a 30 to 45 minute uphill walk to the ruined mosque on the ridge above town. This is the sunset viewpoint everyone is told about - and at golden hour it is still half empty. Go up, stay for the blue hour, walk down with a torch.
+
+4. AKCHOUR & THE RIF MOUNTAINS
+- Akchour waterfalls: about 45 minutes by grand taxi toward Talassemtane National Park, then a 45 to 90 minute hike to the main waterfall. The natural rock arch called God's Bridge (Pont de Dieu) is a shorter walk. Take water shoes, a picnic and swimming gear - the rock pools are the reward in summer.
+- Talassemtane National Park: one of the last Moroccan fir forests, with marked trails, birdsong and mountain air an hour from the medina. Local licensed guides can be arranged through your riad or the town's guides' association.
+- Easy day trips: Tetouan and its Andalusian medina (UNESCO), the coastal road toward Oued Laou, or the market town of Ouazzane on the road to Fes.
+
+5. WHERE TO STAY & EAT (AND WHY HALAL IS EASY HERE)
+- Stay inside the medina: a traditional riad or dar - blue courtyard, rooftop terrace, Rif views - runs about USD 25 to USD 60 for a double with breakfast almost everywhere. The lanes are steep: a riad near Bab Bouzaloud with luggage help is worth a few dollars more after a long bus day.
+- Eat: tagine (the local favourite is chicken with preserved lemon and olives), Friday couscous, harira soup, msemen flatbread at breakfast, and the town's famous goat cheese (jben) with honey. Moroccan food is mild by Bangladeshi standards - harissa and hot sauce live on every table for heat.
+- Halal: Morocco is a Muslim country and virtually every kitchen is halal by default; alcohol appears only in licensed hotels and some tourist restaurants. Eat street food as you would in Dhaka - use your judgement on stalls - and the whole town is otherwise effortless for Muslim travelers.
+- Mint tea is hospitality itself: sugared, poured from a height into small glasses. Accepting one is how you make friends in the medina.
+
+6. MONEY, SAFETY & PRACTICAL REALITIES
+- Currency: the Moroccan dirham (MAD). ATMs sit near Bab Bouzaloud and the main square; smaller riads, taxis and the souk prefer cash. Cards work in bigger restaurants and galleries - keep small notes for petit taxis and tips.
+- Daily budget: Chefchaouen is the gentlest stop in Morocco on the wallet - USD 40 to USD 70 per person per day covers a riad, three meals, coffee, tea and entrance tickets. A realistic five-day Morocco loop (Casablanca or Tangier, Fes and Chefchaouen) including flights from Dhaka lands around BDT 150,000 to BDT 220,000 per person.
+- Safety: Chefchaouen is very safe by any standard; violent crime against visitors is rare. The everyday annoyance is the unofficial "guide" offering a free tour that ends in a shop - decline firmly and politely, or hire a licensed guide through your riad. Normal big-city care on bags applies in the crowded medina lanes at peak season.
+- Language: Moroccan Darija (Arabic), French widely spoken, Spanish common in the north, English fine in tourism. A few words go far - shukran (thank you), b'saha (enjoy/bless you), la shukran (no thank you).
+- Connectivity: local SIMs from Maroc Telecom or Orange are cheap at airports, and global travel eSIMs like Airalo and Yesim cover Morocco properly. Riad wifi is standard.
+- Getting around: the medina is on foot only - it is small, steep and delightful. Petit taxis serve the lower town; agree the meter or the fare first (most rides 10 to 20 MAD).
+
+7. A GOOD 5-DAY MOROCCO LOOP FOR BANGLADESHI TRAVELERS
+- Fly into Casablanca (CMN); take the train into the city or straight to Fes (about 3.5 hours).
+- Two days in the Fes medina: the tanneries from a terrace, the Bou Inania madrasa (open to all), the brass and spice souks - and the world's oldest university, Al Quaraouiyine, viewed from its doors (non-Muslims cannot enter the mosque).
+- CTM bus to Chefchaouen (about 4 hours); two days in the blue medina including the Spanish Mosque sunset and, if legs allow, Akchour.
+- Return via Tangier or Tetouan; the Al Boraq train puts you back in Casablanca for the flight home. Build one buffer day before an international departure - mountain buses run on mountain time.
+
+Final note:
+Chefchaouen is the place travelers write to us about months later - not for any one sight, but for the slow hours: tea on a rooftop while the walls turn violet, a fountain square that still works like a village well, a mountain sunset you only found because the walk looked easy. Give it two unhurried days inside a wider Morocco loop, carry cash, confirm your visa before you dream about it, and let the blue do the rest.`,
 };
 
 /** Look up one body by slug; undefined for an unknown slug. */
