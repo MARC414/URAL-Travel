@@ -141,6 +141,21 @@ export interface BlogPost {
    * Consumers must fall back to `getBlogBody(slug)`.
    */
   content?: string;
+  /**
+   * Optional in-article figure, rendered where the body contains a standalone
+   * `[[figure]]` paragraph. Use for editorial photography that must appear
+   * INSIDE the article flow (post covers are wired via BLOG_IMAGE_MAP /
+   * getBlogCoverImage instead). Localized alt + caption are required so the
+   * figure stays accessible on both /blog and /bn/blog routes.
+   */
+  inlineFigure?: {
+    /** Generated asset URL in canonical -1200.webp form (see utils/imageAssets). */
+    imageSrc: string;
+    altEn: string;
+    altBn: string;
+    captionEn: string;
+    captionBn: string;
+  };
   internalLinks: { text: string; path: string }[];
   affiliateCTA?: { provider: "aviasales" | "klook" | "kkday" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage" | "ekta" | "yesim" | "kiwi" | "getTransfer" | "goCity"; headline: string; body: string };
 }

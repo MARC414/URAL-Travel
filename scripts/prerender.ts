@@ -26,7 +26,7 @@ import {
   toIsoDate,
 } from "../src/utils/schema";
 import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
-import { buildResponsiveSrcSet } from "../src/utils/imageAssets";
+import { buildResponsiveSrcSet, getResponsiveImageDimensions } from "../src/utils/imageAssets";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
 import {
   CONTENT_UPDATED,
@@ -1562,7 +1562,18 @@ function buildAllRoutes(): PrerenderRoute[] {
           <p>${escapeHtml(post.summary)}</p>
           ${(BLOG_BODY[post.slug] || post.content || "")
             .split("\n\n")
-            .map((para) => `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`)
+            .map((para) => {
+              const trimmedPara = String(para).trim();
+              if (trimmedPara === "[[figure]]") {
+                const fig = post.inlineFigure;
+                if (!fig) return "";
+                const dims = getResponsiveImageDimensions(fig.imageSrc);
+                return `<figure><img src="${escapeHtml(dims.src)}" srcset="${escapeHtml(
+                  buildResponsiveSrcSet(dims.src, "webp")
+                )}" sizes="(max-width: 767px) 100vw, 840px" width="${dims.width}" height="${dims.height}" loading="lazy" alt="${escapeHtml(fig.altEn)}"><figcaption>${escapeHtml(fig.captionEn)}</figcaption></figure>`;
+              }
+              return `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`;
+            })
             .join("\n")}
           ${radicalStorageHtml}
           ${multiPartnerHtml}

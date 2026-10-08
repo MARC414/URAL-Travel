@@ -6281,6 +6281,26 @@ export default function App() {
                           const trimmed = block.trim();
                           if (!trimmed) return null;
 
+                          // In-article editorial figure (opt-in via post.inlineFigure)
+                          if (trimmed === "[[figure]]") {
+                            const fig = activePost.inlineFigure;
+                            if (!fig) return null;
+                            return (
+                              <figure key={bIdx} className="my-6">
+                                <ResponsiveImage
+                                  src={fig.imageSrc}
+                                  alt={isBn ? fig.altBn : fig.altEn}
+                                  sizes="(max-width: 767px) 100vw, 840px"
+                                  className="w-full h-auto rounded-2xl"
+                                  loading="lazy"
+                                />
+                                <figcaption className="mt-2 text-xs text-slate-500 leading-relaxed">
+                                  {isBn ? fig.captionBn : fig.captionEn}
+                                </figcaption>
+                              </figure>
+                            );
+                          }
+
                           // Major numbered section heading -> Semantic H2 (Dark #0B1426, 22px–26px)
                           if (/^([0-9]+|[০-৯]+)\.\s+/.test(trimmed) && trimmed.length < 170 && !trimmed.includes("\n")) {
                             return (
