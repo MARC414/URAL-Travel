@@ -22,7 +22,19 @@ import {
   Calendar,
   Layers,
   HelpCircle,
-  Clock
+  Clock,
+  BarChart3,
+  Calculator,
+  ShieldCheck,
+  MessageSquare,
+  Ticket,
+  CreditCard,
+  FileText,
+  Bell,
+  Copy,
+  Check,
+  Car,
+  Wifi
 } from "lucide-react";
 
 // Types
@@ -100,7 +112,7 @@ const ENGLISH_FEATURED_GROWTH_TOPICS = [
     searchQuery: "“How to get dual-currency card endorsement”",
     title: "How to Get Dual-Currency Card Endorsement (2026 Passport Dollar Quota Guide)",
     excerpt:
-      "Step-by-step guide to the $12,000 annual passport endorsement quota, RFCD vs. Travel Quota cards (EBL, City Bank, BRAC), 3D-Secure activation, and avoiding 5% DCC fees.",
+      "Step-by-step guide to the $18,000 annual passport endorsement quota (Bangladesh Bank FE Circular No. 33), RFCD vs. Travel Quota cards (EBL, City Bank, BRAC), 3D-Secure activation, and avoiding 5% DCC fees.",
     slug: "dual-currency-card-endorsement-bangladesh",
   },
   {
@@ -588,7 +600,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide":
       "Bangladeshi passport holders with a valid used US, UK, or Schengen visa qualify for an instant 1-year Saudi e-Visa or Visa on Arrival to perform Umrah on their return leg. In Paris, London, Rome, and New York, pre-book official Tiqets skip-the-line passes to avoid 2.5-hour museum queues.",
     "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah":
-      "Top Shariah-compliant Riba-free cards in Bangladesh for Umrah and Halal travel include Islami Bank (IBBL) Dual-Currency Debit & Khidmah Card, City Islamic Amex/Visa, EBL Islamic Debit Card, Al-Arafah La-Riba, and Standard Chartered Saadiq—all supporting the $12,000 passport travel quota for Haramain Train and Makkah hotel bookings.",
+      "Top Shariah-compliant Riba-free cards in Bangladesh for Umrah and Halal travel include Islami Bank (IBBL) Dual-Currency Debit & Khidmah Card, City Islamic Amex/Visa, EBL Islamic Debit Card, Al-Arafah La-Riba, and Standard Chartered Saadiq—all supporting the $18,000 passport travel quota (FE Circular 33) for Haramain Train and Makkah hotel bookings.",
     "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix":
       "When Bangladeshi banks block online flight or hotel payments above $300 USD on regular Travel Quota cards, call your bank's 24/7 hotline 15 minutes before checkout to lift the merchant cap—or open a Resident Foreign Currency Deposit (RFCD) account using leftover travel cash for zero single-transaction caps.",
     "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card":
@@ -602,7 +614,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia":
       "Build a strong travel history on a blank Bangladeshi e-Passport in 3 steps: Step 1 — Get a zero-risk free Visa on Arrival in Nepal or the Maldives; Step 2 — Obtain online e-Visas for Malaysia and Thailand; Step 3 — Unlock Singapore, Dubai + Umrah, and Schengen/UK/US visas.",
     "dual-currency-card-endorsement-bangladesh":
-      "Under Bangladesh Bank rules, adult passport holders can endorse up to USD $12,000 per calendar year on a Dual-Currency Debit, Prepaid, or Credit Card (EBL, City Bank Amex, BRAC, MTB). After getting the physical passport stamp, unlock E-Commerce and 3D-Secure in your bank app before booking online.",
+      "Under Bangladesh Bank rules (FE/PD-1 Circular No. 33), adult passport holders can endorse up to USD $18,000 per calendar year on a Dual-Currency Debit, Prepaid, or Credit Card (EBL, City Bank Amex, BRAC, MTB). After getting the physical passport stamp, unlock E-Commerce and 3D-Secure in your bank app before booking online.",
     "dhaka-airport-outbound-immigration-checklist-noc-go":
       "Clear Dhaka Airport (DAC) outbound emigration in under 2 minutes by carrying 5 printed documents in your cabin folder: a 6-month valid passport (with old passports), printed visa or arrival QR code, confirmed return air ticket, paid hotel voucher, passport dollar endorsement, and your Job NOC, GO, or Trade License.",
     "cheap-flight-booking-hacks-dhaka":
@@ -673,7 +685,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide":
       "বাংলাদেশি পাসপোর্টে বৈধ ও একবার ব্যবহৃত (Used) US, UK বা Schengen ভিসা থাকলে ফেরার পথে তাৎক্ষণিক ১ বছরের সৌদি ই-ভিসা নিয়ে ওমরাহ করা যায়। এছাড়া প্যারিসের লুভর, আইফেল টাওয়ার, লন্ডন আই ও রোমের কলোসিয়ামে ২–৩ ঘণ্টার লাইন এড়াতে Tiqets স্কিপ-দ্য-লাইন পাস বুক করুন।",
     "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah":
-      "ওমরাহ ও হালাল ভ্রমণে সুদমুক্ত (Riba-Free) লেনদেনের জন্য ইসলামী ব্যাংক (IBBL) ডুয়াল-কারেন্সি ডেবিট ও খিদমাহ কার্ড, সিটি ইসলামিক অ্যামেক্স/ভিসা, ইবিএল ইসলামিক, আল-আরাফাহ লা-রিবা এবং স্ট্যান্ডার্ড চার্টার্ড সাদিক কার্ডে $12,000 পাসপোর্ট এনডোর্সমেন্ট করে হারামাইন ট্রেন ও মক্কার হোটেল বুক করা যায়।",
+      "ওমরাহ ও হালাল ভ্রমণে সুদমুক্ত (Riba-Free) লেনদেনের জন্য ইসলামী ব্যাংক (IBBL) ডুয়াল-কারেন্সি ডেবিট ও খিদমাহ কার্ড, সিটি ইসলামিক অ্যামেক্স/ভিসা, ইবিএল ইসলামিক, আল-আরাফাহ লা-রিবা এবং স্ট্যান্ডার্ড চার্টার্ড সাদিক কার্ডে $18,000 পাসপোর্ট এনডোর্সমেন্ট (FE Circular 33) করে হারামাইন ট্রেন ও মক্কার হোটেল বুক করা যায়।",
     "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix":
       "সাধারণ ডুয়াল-কারেন্সি কার্ডে $300 USD-এর বেশি ফ্লাইট বা হোটেল পেমেন্ট ডিক্লাইন হলে পেমেন্টের ১৫ মিনিট আগে ব্যাংকের হটলাইনে কল করে লিমিট আনলক করুন। আর স্থায়ী সমাধানের জন্য বিদেশ থেকে ফেরার পর বেঁচে যাওয়া নগদ ডলার জমা দিয়ে ব্যাংকে RFCD Account ও কার্ড খুলুন।",
     "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card":
@@ -1285,7 +1297,7 @@ export default function App() {
         {
           question: "How do I get a dual-currency card endorsement on a Bangladeshi passport?",
           answer:
-            "Visit an authorized bank branch in Bangladesh with your original valid passport and NID to endorse up to USD $12,000 per calendar year under the Bangladesh Bank travel quota, then enable E-Commerce and 3D-Secure online transactions in your bank app before booking flights or hotels.",
+            "Visit an authorized bank branch in Bangladesh with your original valid passport and NID to endorse up to USD $18,000 per calendar year under the Bangladesh Bank travel quota (FE/PD-1 Circular No. 33), then enable E-Commerce and 3D-Secure online transactions in your bank app before booking flights or hotels.",
         },
         {
           question: "What are the top budget-friendly family destinations from Dhaka?",
@@ -1295,7 +1307,7 @@ export default function App() {
         {
           question: "Which countries can Bangladeshi passport holders visit without a prior visa?",
           answer:
-            "Nepal, the Maldives, Sri Lanka (via online ETA), Bhutan and Indonesia issue Visa on Arrival or free entry to Bangladeshi passport holders, so no embassy appointment is needed before departure from Dhaka. Nepal and the Maldives are the cheapest of these to reach from Dhaka (DAC).",
+            "Nepal and the Maldives grant free Visa on Arrival (with free online IMUGA declaration for the Maldives), while Sri Lanka issues an online Electronic Travel Authorization (ETA via eta.gov.lk) before departure. Bhutan requires an entry permit and a Sustainable Development Fee (SDF of Nu. 1,200/night). Note that Indonesia, Thailand, Malaysia, Singapore, and Dubai do NOT grant Visa on Arrival to ordinary Bangladeshi passports and strictly require an advance e-Visa before flying from Dhaka.",
         },
         {
           question: "Is URAL a travel agency that sells tickets?",
@@ -2222,14 +2234,18 @@ export default function App() {
                       {/* Featured Callout Card inside Mega Menu */}
                       <div className="bg-white/6 border border-white/12 rounded-2xl p-3.5 space-y-2">
                         <div className="flex items-center justify-between text-[11px] font-mono">
-                          <span className="text-cyan-300 font-bold">
-                            {isPromoActive(KKDAY_PROMO.expiresAt)
-                              ? isBn
-                                ? "🔥 KKday ৯.৯ সেল (৩০% ছাড়)"
-                                : "🔥 KKday 9.9 SEA Sale (30% OFF)"
-                              : isBn
-                              ? "🌏 KKday সাউথইস্ট এশিয়া পাস"
-                              : "🌏 KKday Southeast Asia Passes"}
+                          <span className="text-cyan-300 font-bold inline-flex items-center gap-1.5">
+                            {isPromoActive(KKDAY_PROMO.expiresAt) ? (
+                              <>
+                                <Sparkles size={12} className="text-cyan-300 shrink-0" />
+                                <span>{isBn ? "KKday ৯.৯ সেল (৩০% ছাড়)" : "KKday 9.9 SEA Sale (30% OFF)"}</span>
+                              </>
+                            ) : (
+                              <>
+                                <Globe size={12} className="text-cyan-300 shrink-0" />
+                                <span>{isBn ? "KKday সাউথইস্ট এশিয়া পাস" : "KKday Southeast Asia Passes"}</span>
+                              </>
+                            )}
                           </span>
                           <span className="text-amber-300 font-semibold">
                             {isPromoActive(KKDAY_PROMO.expiresAt) ? "+$100 Giveaway" : "Instant QR"}
@@ -2310,25 +2326,29 @@ export default function App() {
                     {[
                       {
                         id: "costs",
-                        label: isBn ? "📊 দেশভিত্তিক বাজেট শিট (BDT)" : "📊 Trip Cost & Budget Matrices",
+                        icon: BarChart3,
+                        label: isBn ? "দেশভিত্তিক বাজেট শিট (BDT)" : "Trip Cost & Budget Matrices",
                         sub: isBn ? "৬টি দেশের ৩-স্তরের খরচের হিসাব" : "3-tier BDT budgets for 6 countries",
                         path: "/costs",
                       },
                       {
                         id: "tools",
-                        label: isBn ? "🧮 কারেন্সি কনভার্টার ও প্যাকিং" : "🧮 Currency, Packing & Visa Odds",
+                        icon: Calculator,
+                        label: isBn ? "কারেন্সি কনভার্টার ও প্যাকিং" : "Currency, Packing & Visa Odds",
                         sub: isBn ? "লাইভ BDT রেট ও প্যাকিং লিস্ট" : "Live BDT FX converter & trip tools",
                         path: "/tools",
                       },
                       {
                         id: "pre-departure",
-                        label: isBn ? "✈️ প্রি-ডিপার্চার ও দূতাবাস হেল্পলাইন" : "✈️ Pre-Departure & Embassy Hub",
+                        icon: Plane,
+                        label: isBn ? "প্রি-ডিপার্চার ও দূতাবাস হেল্পলাইন" : "Pre-Departure & Embassy Hub",
                         sub: isBn ? "লাগেজ নিয়ম, জমজম ও জরুরি নাম্বার" : "DAC baggage, Zamzam & embassy contacts",
                         path: "/pre-departure",
                       },
                       {
                         id: "airhelp",
-                        label: isBn ? "🛡️ ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "🛡️ Flight Delay Claim (€600 / AirHelp)",
+                        icon: ShieldCheck,
+                        label: isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "Flight Delay Claim (€600 / AirHelp)",
                         sub: isPromoActive(AIRHELP_PROMO.expiresAt)
                           ? isBn
                             ? `প্রোমো কোড ${AIRHELP_PROMO.code} (১১% ছাড়)`
@@ -2340,21 +2360,28 @@ export default function App() {
                       },
                       {
                         id: "contact",
-                        label: isBn ? "💬 BDT বুকিং ও সাপোর্ট ডেস্ক" : "💬 Contact & BDT Booking Desk",
+                        icon: MessageSquare,
+                        label: isBn ? "BDT বুকিং ও সাপোর্ট ডেস্ক" : "Contact & BDT Booking Desk",
                         sub: isBn ? "WhatsApp: +8801784385335" : "Pay in BDT via bank / bKash",
                         path: "/contact",
                       },
-                    ].map((toolItem) => (
-                      <button
-                        key={toolItem.id}
-                        type="button"
-                        onClick={() => navigateTo(toolItem.path)}
-                        className="w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer"
-                      >
-                        <div className="text-xs font-semibold text-white">{toolItem.label}</div>
-                        <div className="text-[11px] text-slate-400">{toolItem.sub}</div>
-                      </button>
-                    ))}
+                    ].map((toolItem) => {
+                      const IconComp = toolItem.icon;
+                      return (
+                        <button
+                          key={toolItem.id}
+                          type="button"
+                          onClick={() => navigateTo(toolItem.path)}
+                          className="w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors flex items-start gap-2.5 cursor-pointer"
+                        >
+                          <IconComp className="w-4 h-4 text-[#F6B73C] shrink-0 mt-0.5" />
+                          <div>
+                            <div className="text-xs font-semibold text-white">{toolItem.label}</div>
+                            <div className="text-[11px] text-slate-400">{toolItem.sub}</div>
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -2461,7 +2488,7 @@ export default function App() {
                         : "bg-[#F6B73C]/15 text-[#F6B73C] hover:bg-[#F6B73C]/25 border border-[#F6B73C]/35"
                     }`}
                   >
-                    <span className="truncate">🕋 {t.navUmrah}</span>
+                    <span className="truncate">{t.navUmrah}</span>
                     <ArrowRight size={12} className="shrink-0" />
                   </button>
                 </div>
@@ -2506,10 +2533,10 @@ export default function App() {
                         },
                       ],
                       quickChips: [
-                        { label: isBn ? "✈️ কাঠমান্ডু ফ্লাইট" : "✈️ Dhaka → KTM", path: "/flights/dhaka-kathmandu" },
-                        { label: isBn ? "✈️ ব্যাংকক ফ্লাইট" : "✈️ Dhaka → BKK", path: "/flights/dhaka-bangkok" },
-                        { label: isBn ? "🛂 থাইল্যান্ড ই-ভিসা" : "🛂 Thai e-Visa", path: "/visa/thailand-visa" },
-                        { label: isBn ? "🛂 মালয়েশিয়া ভিসা" : "🛂 Malaysia eVisa", path: "/visa/malaysia-visa" },
+                        { label: isBn ? "কাঠমান্ডু ফ্লাইট" : "Dhaka → KTM", path: "/flights/dhaka-kathmandu" },
+                        { label: isBn ? "ব্যাংকক ফ্লাইট" : "Dhaka → BKK", path: "/flights/dhaka-bangkok" },
+                        { label: isBn ? "থাইল্যান্ড ই-ভিসা" : "Thai e-Visa", path: "/visa/thailand-visa" },
+                        { label: isBn ? "মালয়েশিয়া ভিসা" : "Malaysia eVisa", path: "/visa/malaysia-visa" },
                       ],
                     },
                     {
@@ -2534,14 +2561,14 @@ export default function App() {
                         },
                       ],
                       quickChips: [
-                        { label: isBn ? "🇳🇵 নেপাল গাইড" : "🇳🇵 Nepal Guide", path: "/destinations/nepal-guide" },
-                        { label: isBn ? "🇹🇭 থাইল্যান্ড" : "🇹🇭 Thailand", path: "/destinations/thailand-guide" },
-                        { label: isBn ? "🇲🇾 মালয়েশিয়া" : "🇲🇾 Malaysia", path: "/destinations/malaysia-guide" },
-                        { label: isBn ? "🇸🇬 সিঙ্গাপুর" : "🇸🇬 Singapore", path: "/destinations/singapore-guide" },
-                        { label: isBn ? "🇲🇻 মালদ্বীপ" : "🇲🇻 Maldives", path: "/destinations/maldives-guide" },
-                        { label: isBn ? "🇦🇪 দুবাই ও UAE" : "🇦🇪 Dubai / UAE", path: "/destinations/dubai-guide" },
-                        { label: isBn ? "🇫🇷🇬🇧 ইউরোপ ও UK" : "🇫🇷🇬🇧 Europe & UK", path: "/experiences?region=west" },
-                        { label: isBn ? "🎟️ এশিয়া Klook ডিল" : "🎟️ Asia Passes", path: "/experiences?region=asia" },
+                        { label: isBn ? "নেপাল গাইড" : "Nepal Guide", path: "/destinations/nepal-guide" },
+                        { label: isBn ? "থাইল্যান্ড" : "Thailand", path: "/destinations/thailand-guide" },
+                        { label: isBn ? "মালয়েশিয়া" : "Malaysia", path: "/destinations/malaysia-guide" },
+                        { label: isBn ? "সিঙ্গাপুর" : "Singapore", path: "/destinations/singapore-guide" },
+                        { label: isBn ? "মালদ্বীপ" : "Maldives", path: "/destinations/maldives-guide" },
+                        { label: isBn ? "দুবাই ও UAE" : "Dubai / UAE", path: "/destinations/dubai-guide" },
+                        { label: isBn ? "ইউরোপ ও UK" : "Europe & UK", path: "/experiences?region=west" },
+                        { label: isBn ? "এশিয়া অ্যাক্টিভিটি" : "Asia Passes", path: "/experiences?region=asia" },
                       ],
                     },
                     {
@@ -2567,19 +2594,19 @@ export default function App() {
                       ],
                       quickChips: [
                         {
-                          label: isBn ? "💳 কার্ড এন্ডোর্সমেন্ট" : "💳 Card Endorsement",
+                          label: isBn ? "কার্ড এন্ডোর্সমেন্ট" : "Card Endorsement",
                           path: "/blog/dual-currency-card-endorsement-bangladesh",
                         },
                         {
-                          label: isBn ? "🛂 ঢাকা ইমিগ্রেশন" : "🛂 DAC Immigration",
+                          label: isBn ? "ঢাকা ইমিগ্রেশন" : "DAC Immigration",
                           path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go",
                         },
                         {
-                          label: isBn ? "🏥 ব্যাংকক মেডিকেল" : "🏥 Medical Visa",
+                          label: isBn ? "ব্যাংকক মেডিকেল" : "Medical Visa",
                           path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh",
                         },
                         {
-                          label: isBn ? "📘 ই-পাসপোর্ট গাইড" : "📘 e-Passport Guide",
+                          label: isBn ? "ই-পাসপোর্ট গাইড" : "e-Passport Guide",
                           path: "/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide",
                         },
                       ],
@@ -2802,7 +2829,7 @@ export default function App() {
                       rel="noopener noreferrer"
                       className="min-h-[42px] bg-brand-emerald text-white font-bold text-xs px-3 rounded-xl flex items-center justify-center gap-1.5 shadow transition-colors"
                     >
-                      <span>💬 WhatsApp</span>
+                      <span>WhatsApp</span>
                     </a>
                     <button
                       type="button"
@@ -3027,34 +3054,9 @@ export default function App() {
         {section === "home" && (
           <div className="space-y-16">
 
-            {/* 🟦 SECTION 1.5: FRESH NEW SEARCH SECTOR - relocated from hero */}
-            <div id="live-flight-search" className="scroll-mt-12 space-y-6">
-              <div className="text-center space-y-2">
-                <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">
-                  {t.searchSectionBadge}
-                </span>
-                <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-                  {t.searchSectionTitle}
-                </h2>
-                <p className="text-xs text-slate-600 max-w-xl mx-auto">
-                  {t.searchSectionSubtitle}
-                </p>
-              </div>
-
+            {/* SEARCH SECTOR */}
+            <div id="live-flight-search" className="scroll-mt-12">
               <div className="bg-gradient-to-b from-brand-navy to-[#081322] border border-slate-800/90 rounded-3xl p-2.5 sm:p-5 shadow-2xl w-full">
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-3 px-2">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#F6B73C] shadow-[0_0_8px_rgba(246,183,60,0.8)]" />
-                    <span className="text-[11px] font-mono font-bold text-[#F6B73C] uppercase tracking-wider">
-                      {t.liveSearchBoxHeader}
-                    </span>
-                  </div>
-                  <span className="text-[11px] font-mono text-slate-300 hidden sm:inline">
-                    {isBn
-                      ? "URAL হোয়াইট-লেবেল ফ্লাইট ও ভেরিফায়েড গ্লোবাল হোটেল সার্চ"
-                      : "URAL White-Label Flights & Verified Global Hotels"}
-                  </span>
-                </div>
                 <div className="text-slate-900">
                   {areTpScriptsReady ? (
                     <React.Suspense
@@ -3084,8 +3086,8 @@ export default function App() {
               {/* Price Alert Promotion Banner */}
               <div className="bg-white border border-slate-200 rounded-xl p-3.5 sm:px-5 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-amber-50 text-brand-emerald flex items-center justify-center font-bold text-sm shrink-0 border border-amber-200">
-                    🔔
+                  <div className="w-8 h-8 rounded-lg bg-amber-50 text-brand-navy flex items-center justify-center shrink-0 border border-amber-200">
+                    <Bell className="w-4 h-4 text-[#F6B73C]" />
                   </div>
                   <div className="text-xs text-slate-650 leading-snug">
                     <span className="font-bold text-slate-900 block sm:inline mr-1">
@@ -3265,7 +3267,7 @@ export default function App() {
             <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-8">
               <div className="max-w-2xl space-y-3">
                 <span className="text-[10px] font-mono font-bold text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full uppercase tracking-wider inline-block">
-                  {isBn ? "🎯 ঢাকা থেকে আপনার পরবর্তী সফর সাজান" : "🎯 Plan your next trip from Dhaka"}
+                  {isBn ? "ঢাকা থেকে আপনার পরবর্তী সফর সাজান" : "Plan your next trip from Dhaka"}
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3.5xl font-black text-brand-navy tracking-tight">
                   {isBn ? "বুকিং করার আগে যা যা জানা প্রয়োজন" : "Everything You Need Before You Book"}
@@ -3303,8 +3305,9 @@ export default function App() {
             <div id="global-hotel-search" className="relative rounded-3xl overflow-hidden bg-brand-navy text-white p-6 sm:p-8 md:p-10 shadow-xl border border-slate-800">
               
               <div className="max-w-3xl mx-auto text-center space-y-2.5 mb-6">
-                <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/20 px-3 py-1 rounded-full">
-                  {isBn ? "🏨 গ্লোবাল হোটেল ও ফ্যামিলি স্টে সার্চ" : "🏨 Global Hotel & Stay Finder"}
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/20 px-3 py-1 rounded-full">
+                  <Building size={12} className="text-[#F6B73C]" />
+                  <span>{isBn ? "গ্লোবাল হোটেল ও ফ্যামিলি স্টে সার্চ" : "Global Hotel & Stay Finder"}</span>
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-black text-white">
                   {isBn
@@ -3381,8 +3384,9 @@ export default function App() {
                 {/* 1. Currency Converter (Interactive) */}
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 flex flex-col justify-between">
                   <div>
-                    <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest block mb-2">
-                      {isBn ? "💸 কারেন্সি কনভার্টার (BDT রেট)" : "💸 Currency Converter"}
+                    <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest inline-flex items-center gap-1.5 mb-2">
+                      <DollarSign size={13} className="text-[#F6B73C]" />
+                      <span>{isBn ? "কারেন্সি কনভার্টার (BDT রেট)" : "Currency Converter"}</span>
                     </span>
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
@@ -3445,8 +3449,9 @@ export default function App() {
                 {/* 2. Packing Checklist (Interactive checkboxes) */}
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 flex flex-col justify-between">
                   <div>
-                    <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest block mb-1">
-                      {isBn ? "🧳 ডকুমেন্ট ও প্যাকিং চেকলিস্ট" : "🧳 Packing Checklist"}
+                    <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest inline-flex items-center gap-1.5 mb-1">
+                      <FileText size={13} className="text-[#F6B73C]" />
+                      <span>{isBn ? "ডকুমেন্ট ও প্যাকিং চেকলিস্ট" : "Packing Checklist"}</span>
                     </span>
                     <p className="text-[10px] text-slate-600 mb-2">
                       {isBn ? "ফ্লাইটের আগে জরুরি ডকুমেন্টগুলো মিলিয়ে নিন:" : "Check requirements to keep track before your flight:"}
@@ -3475,8 +3480,9 @@ export default function App() {
                 {/* 3. Budget Planner Tool */}
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 flex flex-col justify-between">
                   <div>
-                    <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest block mb-2">
-                      {isBn ? "📊 ৫ দিনের BDT বাজেট প্ল্যানার" : "📊 Fast Budget Planner"}
+                    <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest inline-flex items-center gap-1.5 mb-2">
+                      <Calculator size={13} className="text-[#F6B73C]" />
+                      <span>{isBn ? "৫ দিনের BDT বাজেট প্ল্যানার" : "Fast Budget Planner"}</span>
                     </span>
                     <p className="text-[11px] text-slate-500 leading-normal">
                       {isBn
@@ -3514,8 +3520,9 @@ export default function App() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto w-full text-left">
                 <div className="space-y-1 p-4 bg-slate-900/40 rounded-xl border border-slate-800">
-                  <span className="text-[#F6B73C] font-semibold text-xs block uppercase tracking-wider font-mono">
-                    {isBn ? "✈️ লাইভ Flight ভাড়া" : "✈️ Real Flight Prices"}
+                  <span className="text-[#F6B73C] font-semibold text-xs inline-flex items-center gap-1.5 uppercase tracking-wider font-mono">
+                    <Plane size={13} className="text-[#F6B73C]" />
+                    <span>{isBn ? "লাইভ Flight ভাড়া" : "Real Flight Prices"}</span>
                   </span>
                   <p className="text-[11px] text-[#F6B73C] font-bold mt-1">
                     {isBn
@@ -3529,8 +3536,9 @@ export default function App() {
                   </p>
                 </div>
                 <div className="space-y-1 p-4 bg-slate-900/40 rounded-xl border border-slate-800">
-                  <span className="text-[#F6B73C] font-semibold text-xs block uppercase tracking-wider font-mono">
-                    {isBn ? "⚡ দ্রুত ও সম্পূর্ণ ফ্রি" : "⚡ Fast and Free"}
+                  <span className="text-[#F6B73C] font-semibold text-xs inline-flex items-center gap-1.5 uppercase tracking-wider font-mono">
+                    <Sparkles size={13} className="text-[#F6B73C]" />
+                    <span>{isBn ? "দ্রুত ও সম্পূর্ণ ফ্রি" : "Fast and Free"}</span>
                   </span>
                   <p className="text-[11px] text-[#F6B73C] font-bold mt-1">
                     {isBn ? "“কোনো রেজিস্ট্রেশন বা বাড়তি ফি নেই”" : "“No signup, no fees”"}
@@ -3542,8 +3550,9 @@ export default function App() {
                   </p>
                 </div>
                 <div className="space-y-1 p-4 bg-[#F6B73C]/10 rounded-xl border border-[#F6B73C]/30">
-                  <span className="text-[#F6B73C] font-semibold text-xs block uppercase tracking-wider font-mono">
-                    {isBn ? "🤝 বিশ্বস্ত আন্তর্জাতিক পার্টনার" : "🤝 Trusted Partners"}
+                  <span className="text-[#F6B73C] font-semibold text-xs inline-flex items-center gap-1.5 uppercase tracking-wider font-mono">
+                    <ShieldCheck size={13} className="text-[#F6B73C]" />
+                    <span>{isBn ? "বিশ্বস্ত আন্তর্জাতিক পার্টনার" : "Trusted Partners"}</span>
                   </span>
                   <p className="text-[11px] text-[#F6B73C] font-bold mt-1">“Powered by Travelpayouts”</p>
                   <p className="text-[10px] text-slate-300 leading-relaxed font-sans">
@@ -3584,7 +3593,7 @@ export default function App() {
                 {/* Visual Badge */}
                 <span className="font-sans tracking-widest uppercase inline-flex items-center gap-1.5 text-[11px] font-bold px-4 py-1.5 border leading-none bg-[#F6B73C]/20 border-[#F6B73C]/35 text-[#F6B73C] rounded-full backdrop-blur-md">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C] animate-pulse"></span>
-                  {isBn ? "🌅 বাংলাদেশ থেকে বিশ্বজুড়ে যাত্রা" : "🌅 Live from Cox's Bazar to the World"}
+                  <span>{isBn ? "বাংলাদেশ থেকে বিশ্বজুড়ে যাত্রা" : "Live from Cox's Bazar to the World"}</span>
                 </span>
 
                 <div className="space-y-3 max-w-2xl">
@@ -3696,11 +3705,11 @@ export default function App() {
                 </div>
 
                 <div className="flex items-center gap-4 text-[11px] font-mono text-slate-300 opacity-90">
-                  <span className="flex items-center gap-1">🔒 Spam-Free</span>
+                  <span className="flex items-center gap-1.5"><ShieldCheck size={12} className="text-emerald-400" /> Spam-Free</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-white/20"></span>
-                  <span className="flex items-center gap-1">❌ 1-Click Unsubscribe</span>
+                  <span className="flex items-center gap-1.5"><Check size={12} className="text-slate-300" /> 1-Click Unsubscribe</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-white/20"></span>
-                  <span className="flex items-center gap-1">🇧🇩 BDT Pricing Alerts</span>
+                  <span className="flex items-center gap-1.5"><DollarSign size={12} className="text-[#F6B73C]" /> BDT Pricing Alerts</span>
                 </div>
 
               </div>
@@ -3732,7 +3741,7 @@ export default function App() {
                         : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50"
                     }`}
                   >
-                    <span>{route.from} ✈️ {route.to}</span>
+                    <span className="inline-flex items-center gap-1.5">{route.from} <span className="text-[#F6B73C] font-bold">→</span> {route.to}</span>
                     <ArrowRight size={12} className={parameterId === route.id ? "text-[#F6B73C]" : "text-slate-450"} />
                   </button>
                 ))}
@@ -3740,8 +3749,9 @@ export default function App() {
 
               {/* Conversion Ads banner */}
               <div className="bg-brand-navy text-white p-5 rounded-xl border border-slate-800 space-y-3 shadow">
-                <span className="text-[10px] text-[#F6B73C] font-mono uppercase tracking-widest block font-bold">
-                  {isBn ? "💰 বিশেষ সাশ্রয়" : "💰 Special Offer"}
+                <span className="text-[10px] text-[#F6B73C] font-mono uppercase tracking-widest inline-flex items-center gap-1.5 font-bold">
+                  <Ticket size={12} className="text-[#F6B73C]" />
+                  <span>{isBn ? "বিশেষ সাশ্রয়" : "Special Offer"}</span>
                 </span>
                 <h4 className="font-serif text-sm font-bold">
                   {isBn ? "আপনার পরবর্তী ফ্লাইট বুকিংয়ে সর্বোচ্চ BDT 3,500 সাশ্রয় করুন" : "Save up to BDT 3,500 on Your Next Booking"}
@@ -3754,8 +3764,9 @@ export default function App() {
               </div>
 
               <div className="bg-white border border-slate-200 p-5 rounded-xl space-y-2 shadow-sm">
-                <span className="text-[10px] text-brand-navy font-mono uppercase tracking-widest block font-bold">
-                  {isBn ? "🚕 ল্যান্ড করার পর" : "🚕 After You Land"}
+                <span className="text-[10px] text-brand-navy font-mono uppercase tracking-widest inline-flex items-center gap-1.5 font-bold">
+                  <Car size={12} className="text-brand-navy" />
+                  <span>{isBn ? "ল্যান্ড করার পর" : "After You Land"}</span>
                 </span>
                 <p className="text-[11px] text-slate-500 leading-normal">
                   {isBn
@@ -3788,7 +3799,7 @@ export default function App() {
                             onClick={() => openPriceAlert(activeRoute.to)}
                             className="inline-flex items-center gap-1.5 text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3.5 py-1.5 rounded-full shadow-xs transition-colors cursor-pointer"
                           >
-                            <span>🔔</span>
+                            <Bell size={12} className="text-white" />
                             <span>{isBn ? "ফেয়ার অ্যালার্ট" : "Price Alert"}</span>
                           </button>
                         </div>
@@ -3912,7 +3923,9 @@ export default function App() {
                           onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeRoute.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
-                          🛂 {isBn ? `${activeRoute.country} ভিসা চেকলিস্ট দেখুন` : `Check ${activeRoute.country} Visa Checklist`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                          <ShieldCheck size={14} className="text-brand-navy shrink-0" />
+                          <span>{isBn ? `${activeRoute.country} ভিসা চেকলিস্ট দেখুন` : `Check ${activeRoute.country} Visa Checklist`}</span>
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                         <a
                           id={`lnk-view-hotel-from-flight-${activeRoute.id}`}
@@ -3920,10 +3933,14 @@ export default function App() {
                           onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeRoute.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
-                          🏨 {isBn ? `${activeRoute.country}-এ কোথায় থাকবেন` : `Where to Stay in ${activeRoute.country}`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                          <Building size={14} className="text-brand-navy shrink-0" />
+                          <span>{isBn ? `${activeRoute.country}-এ কোথায় থাকবেন` : `Where to Stay in ${activeRoute.country}`}</span>
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                         <a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm">
-                          🚕 {isBn ? `${activeRoute.country} Airport Transfer বুক করুন` : `Book Airport Transfer in ${activeRoute.country}`} <ExternalLink size={12} className="ml-auto text-[#F6B73C]" />
+                          <Car size={14} className="text-brand-navy shrink-0" />
+                          <span>{isBn ? `${activeRoute.country} Airport Transfer বুক করুন` : `Book Airport Transfer in ${activeRoute.country}`}</span>
+                          <ExternalLink size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                       </div>
                     </div>
@@ -3966,7 +3983,10 @@ export default function App() {
                         : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50"
                     }`}
                   >
-                    <span>🏨 {isBn ? `${col.city} হোটেল গাইড` : `${col.city} Hotels Guide`}</span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Building size={13} className={parameterId === col.id ? "text-[#F6B73C]" : "text-brand-navy"} />
+                      <span>{isBn ? `${col.city} হোটেল গাইড` : `${col.city} Hotels Guide`}</span>
+                    </span>
                     <ArrowRight size={12} className={parameterId === col.id ? "text-[#F6B73C]" : "text-slate-450"} />
                   </button>
                 ))}
@@ -4033,7 +4053,10 @@ export default function App() {
                                 <span className="text-xs font-mono font-bold text-amber-500">{room.stars} ★</span>
                               </div>
                               <h4 className="font-bold text-slate-800 text-sm">{room.name}</h4>
-                              <p className="text-[11px] text-slate-450 mt-1 font-semibold italic">📍 {room.neighborhood}</p>
+                              <p className="text-[11px] text-slate-450 mt-1 font-semibold italic flex items-center gap-1">
+                                <MapPin size={11} className="text-[#F6B73C] shrink-0" />
+                                <span>{room.neighborhood}</span>
+                              </p>
                               
                               <div className="flex flex-wrap gap-1 mt-3">
                                 {room.features.slice(0, 3).map((f) => (
@@ -4092,7 +4115,9 @@ export default function App() {
                           onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeHotel.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
-                          🛂 {isBn ? `${activeHotel.country} ভিসা চেকলিস্ট` : `Check ${activeHotel.country} Visa Checklist`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                          <ShieldCheck size={14} className="text-brand-navy shrink-0" />
+                          <span>{isBn ? `${activeHotel.country} ভিসা চেকলিস্ট` : `Check ${activeHotel.country} Visa Checklist`}</span>
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                         <a
                           id={`lnk-view-flight-from-hotel-${activeHotel.id}`}
@@ -4100,7 +4125,9 @@ export default function App() {
                           onClick={(e) => { e.preventDefault(); navigateTo(`/flights/${getCountryFlightId(activeHotel.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
-                          ✈️ {isBn ? "ঢাকা থেকে ফ্লাইট রুট" : "Recommended Dhaka Flights"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                          <Plane size={14} className="text-brand-navy shrink-0" />
+                          <span>{isBn ? "ঢাকা থেকে ফ্লাইট রুট" : "Recommended Dhaka Flights"}</span>
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                         <a
                           href={AFFILIATE_LINKS.kiwitaxi}
@@ -4108,7 +4135,9 @@ export default function App() {
                           rel="noopener noreferrer sponsored"
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-250 rounded-lg text-left shadow-sm cursor-pointer"
                         >
-                          🚕 {isBn ? "Airport Transfer ভাড়া তুলনা" : "Compare Transfer Prices"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                          <Car size={14} className="text-brand-navy shrink-0" />
+                          <span>{isBn ? "Airport Transfer ভাড়া তুলনা" : "Compare Transfer Prices"}</span>
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                       </div>
                     </div>
@@ -4176,7 +4205,10 @@ export default function App() {
                         : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50 relative"
                     }`}
                   >
-                    <span>🛂 {isBn ? `${v.country} ভিসা রিকোয়ারমেন্টস` : `${v.country} Visa Requirements`}</span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <ShieldCheck size={13} className={parameterId === v.id ? "text-[#F6B73C]" : "text-brand-navy"} />
+                      <span>{isBn ? `${v.country} ভিসা রিকোয়ারমেন্টস` : `${v.country} Visa Requirements`}</span>
+                    </span>
                     <ArrowRight size={12} className={parameterId === v.id ? "text-[#F6B73C]" : "text-slate-450"} />
                   </button>
                 ))}
@@ -4321,8 +4353,9 @@ export default function App() {
                     {/* 📶 Stay Connected widget block */}
                     <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 animate-fade-in">
                       <div className="space-y-1">
-                        <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest block">
-                          {isBn ? "📶 ফ্লাইটে ওঠার আগে" : "📶 Before You Fly"}
+                        <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest block">
+                          <Wifi size={12} className="text-brand-navy" />
+                          <span>{isBn ? "ফ্লাইটে ওঠার আগে" : "Before You Fly"}</span>
                         </span>
                         <h2 className="font-serif text-lg font-bold text-slate-900">
                           {isBn ? `${activeVisa.country}-এর জন্য লোকাল eSIM সংগ্রহ করুন` : `Get a Local eSIM for ${activeVisa.country}`}
@@ -4348,7 +4381,9 @@ export default function App() {
                           onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeVisa.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
-                          🏨 {isBn ? `${activeVisa.country}-এর বাছাইকৃত হোটেল` : `Curated ${activeVisa.country} Hotels`} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                          <Building size={14} className="text-brand-navy shrink-0" />
+                          <span>{isBn ? `${activeVisa.country}-এর বাছাইকৃত হোটেল` : `Curated ${activeVisa.country} Hotels`}</span>
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                         <a
                           id={`lnk-view-flight-from-visa-${activeVisa.id}`}
@@ -4356,7 +4391,9 @@ export default function App() {
                           onClick={(e) => { e.preventDefault(); navigateTo(`/flights/${getCountryFlightId(activeVisa.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
-                          ✈️ {isBn ? "ঢাকা থেকে ফ্লাইট বুক করুন" : "Book Flights from Dhaka"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                          <Plane size={14} className="text-brand-navy shrink-0" />
+                          <span>{isBn ? "ঢাকা থেকে ফ্লাইট বুক করুন" : "Book Flights from Dhaka"}</span>
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                         <a
                           href={AFFILIATE_LINKS.airalo}
@@ -4364,7 +4401,9 @@ export default function App() {
                           rel="noopener noreferrer sponsored"
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
                         >
-                          📶 {isBn ? "লোকাল eSIM নিন" : "Get a Local eSIM"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                          <Wifi size={14} className="text-brand-navy shrink-0" />
+                          <span>{isBn ? "লোকাল eSIM নিন" : "Get a Local eSIM"}</span>
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                       </div>
                     </div>
@@ -4405,7 +4444,10 @@ export default function App() {
                         : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50 font-sans"
                     }`}
                   >
-                    <span>🌍 {des.country} Travel Guide</span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Compass size={13} className={parameterId === des.id ? "text-[#F6B73C]" : "text-brand-navy"} />
+                      <span>{des.country} Travel Guide</span>
+                    </span>
                     <ArrowRight size={12} className={parameterId === des.id ? "text-[#F6B73C]" : "text-slate-450"} />
                   </button>
                 ))}
@@ -4434,7 +4476,7 @@ export default function App() {
                         <div id="dubai-flight-conversion-widget" className="bg-brand-navy text-white p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl space-y-6 animate-pulse-subtle">
                           <div className="space-y-2">
                             <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/30 px-3 py-1 rounded-full inline-block">
-                              ✈️ FLIGHTS TO DUBAI (DXB) — PRIMARY CONVERSION ZONE
+                              FLIGHTS TO DUBAI (DXB) — DIRECT & TRANSIT FARES
                             </span>
                             <h3 className="font-serif text-xl sm:text-2xl font-bold text-white">Search Cheapest Flights leaving Dhaka (DAC) to Dubai (DXB)</h3>
                             <p className="text-xs text-slate-300 leading-relaxed font-light">
@@ -4442,7 +4484,7 @@ export default function App() {
                             </p>
                           </div>
                           <div className="bg-[#0f1d2e] p-2 sm:p-4 rounded-xl border border-slate-700/60 text-slate-900">
-                            <span className="text-[10px] font-mono font-bold text-slate-500 uppercase block mb-3 px-1">✈️ LIVE FLIGHTS SEARCH</span>
+                            <span className="text-[10px] font-mono font-bold text-slate-500 uppercase block mb-3 px-1">LIVE FLIGHTS SEARCH</span>
                             {areTpScriptsReady ? (
                               <React.Suspense
                                 fallback={
@@ -4465,7 +4507,7 @@ export default function App() {
                           </div>
                         </div>
 
-                        {/* 🟨 2. DUBAI QUICK SNAPSHOT */}
+                        {/* 2. DUBAI QUICK SNAPSHOT */}
                         <div id="dubai-quick-snapshot" className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-4">
                           <div className="border-l-4 border-brand-navy pl-3">
                             <h4 className="font-serif font-black text-sm text-brand-navy uppercase tracking-wider">Dubai Quick Snapshot</h4>
@@ -4473,15 +4515,15 @@ export default function App() {
                           </div>
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-sans">
                             <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">🌞 Best time to visit</span>
+                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Best time to visit</span>
                               <span className="font-serif font-bold text-slate-800 text-xs block">November – March</span>
                             </div>
                             <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">🏙️ Known for</span>
+                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Known for</span>
                               <span className="font-serif font-bold text-slate-800 text-xs block">luxury lifestyle, skyscrapers, beaches, shopping</span>
                             </div>
                             <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">🎒 Travel style</span>
+                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Travel style</span>
                               <span className="font-serif font-bold text-slate-800 text-xs block">budget to luxury options available</span>
                             </div>
                             <a
@@ -4490,17 +4532,17 @@ export default function App() {
                               rel="noopener noreferrer sponsored"
                               className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1 cursor-pointer hover:border-[#F6B73C] block"
                             >
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">📶 Stay connected</span>
+                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Stay connected</span>
                               <span className="font-serif font-bold text-slate-800 text-xs block">Local eSIM from Airalo</span>
                             </a>
                           </div>
                         </div>
 
-                        {/* 🏨 3. ACCOMMODATION SECTION */}
+                        {/* 3. ACCOMMODATION SECTION */}
                         <div id="dubai-accommodation" className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4">
                           <div className="space-y-1">
                             <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest block">
-                              🏨 SECTION 2: ACCOMMODATION PORTAL
+                              SECTION 2: ACCOMMODATION DIRECTORY
                             </span>
                             <h3 className="font-serif text-lg font-bold text-slate-900">Find Hotels in Dubai</h3>
                             <p className="text-xs text-slate-500">
@@ -4508,7 +4550,7 @@ export default function App() {
                             </p>
                           </div>
                           <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200 text-slate-900">
-                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">🏨 LIVE HOTEL COMPARISON ENGINE</span>
+                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">LIVE HOTEL COMPARISON ENGINE</span>
                             {areTpScriptsReady ? (
                               <React.Suspense
                                 fallback={
@@ -4586,15 +4628,15 @@ export default function App() {
                           </div>
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans">
                             <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="text-amber-500 font-bold block">✈️ airfare timing</span>
+                              <span className="text-amber-500 font-bold flex items-center gap-1.5"><Plane size={13} /> Airfare Timing</span>
                               <p className="text-slate-650 leading-relaxed font-light">Mid-week flights are often cheaper</p>
                             </div>
                             <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="text-amber-500 font-bold block">🏨 hotel demand peak</span>
+                              <span className="text-amber-500 font-bold flex items-center gap-1.5"><Building size={13} /> Hotel Demand Peak</span>
                               <p className="text-slate-650 leading-relaxed font-light">Hotel prices increase during peak season (Dec–Jan)</p>
                             </div>
                             <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="text-amber-500 font-bold block">🔒 secure availability</span>
+                              <span className="text-amber-500 font-bold flex items-center gap-1.5"><ShieldCheck size={13} /> Advance Booking</span>
                               <p className="text-slate-650 leading-relaxed font-light">Early booking improves price and availability</p>
                             </div>
                           </div>
@@ -4660,21 +4702,24 @@ export default function App() {
                           <div className="flex flex-wrap justify-center items-center gap-2.5 text-xs">
                             <button
                               onClick={() => navigateTo("/flights")}
-                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 font-sans transition-all"
+                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 font-sans transition-all inline-flex items-center gap-1.5 cursor-pointer"
                             >
-                              ✈️ Cheap flights page (Dubai route)
+                              <Plane size={12} className="text-[#F6B73C]" />
+                              <span>Cheap flights page (Dubai route)</span>
                             </button>
                             <button
                               onClick={() => navigateTo("/hotels")}
-                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 font-sans transition-all"
+                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 font-sans transition-all inline-flex items-center gap-1.5 cursor-pointer"
                             >
-                              🏨 Hotel comparison page (Dubai)
+                              <Building size={12} className="text-[#F6B73C]" />
+                              <span>Hotel comparison page (Dubai)</span>
                             </button>
                             <button
-                              onClick={() => navigateTo("/")}
-                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 font-sans transition-all"
+                              onClick={() => navigateTo("/blog")}
+                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 font-sans transition-all inline-flex items-center gap-1.5 cursor-pointer"
                             >
-                              📰 Future travel blog articles
+                              <FileText size={12} className="text-[#F6B73C]" />
+                              <span>Travel guide articles</span>
                             </button>
                           </div>
                         </div>
@@ -4691,8 +4736,9 @@ export default function App() {
                         
                         {/* DESTINATION GUIDE HEADER */}
                         <div className="border-b border-slate-200 pb-5">
-<span className="text-[10px] font-mono font-bold tracking-widest text-[#F6B73C] bg-brand-navy px-2.5 py-0.5 rounded-full inline-block uppercase mb-2 animate-pulse">
-                            🌍 Destination Guide
+                          <span className="text-[10px] font-mono font-bold tracking-widest text-[#F6B73C] bg-brand-navy px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 uppercase mb-2">
+                            <Compass size={11} className="text-[#F6B73C]" />
+                            <span>Destination Guide</span>
                           </span>
                           <h1 className="font-serif text-2xl sm:text-4xl font-black tracking-tight text-slate-900 leading-tight">
                             {activeDes.title}
@@ -4702,8 +4748,9 @@ export default function App() {
                         {/* 2. TOP SECTION (PRIMARY CONVERSION ZONE) - FLIGHTS WIDGET FIRST */}
                         <div id="dest-primary-conversion" className="bg-brand-navy text-white p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl space-y-6">
                           <div className="space-y-2">
-                            <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/30 px-3 py-1 rounded-full inline-block font-sans">
-                              ✈️ Book Your Flight
+                            <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/30 px-3 py-1 rounded-full inline-flex items-center gap-1.5 font-sans">
+                              <Plane size={11} className="text-[#F6B73C]" />
+                              <span>Book Your Flight</span>
                             </span>
                             <h3 className="font-serif text-xl sm:text-2xl font-bold">Flights Leaving Dhaka (DAC) to {getCountryCityWithIata(activeDes.country)}</h3>
                             <p className="text-xs text-slate-300 leading-relaxed max-w-2xl font-light font-sans">
@@ -4718,7 +4765,7 @@ export default function App() {
 
                           {/* Travelpayouts Flights widget */}
                           <div className="bg-[#0f1d2e] p-2 sm:p-4 rounded-xl border border-slate-700/60 text-slate-900">
-                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">✈️ LIVE FLIGHTS COMPARISON ENGINE</span>
+                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">LIVE FLIGHTS COMPARISON ENGINE</span>
                             {areTpScriptsReady ? (
                               <React.Suspense
                                 fallback={
@@ -4754,11 +4801,11 @@ export default function App() {
 
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
                             <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">🌞 Best Time To Visit</span>
+                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Best Time To Visit</span>
                               <span className="font-serif font-bold text-slate-800 text-xs block">{activeDes.bestTimeToVisit}</span>
                             </div>
                             <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">💰 Average Cost Index</span>
+                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Average Cost Index</span>
                               <span className="font-mono font-bold text-[#F6B73C] text-xs block">
                                 {activeDes.id === "nepal-guide" ? "Highly Budget-Friendly (approx BDT 3,500/day local expense)" :
                                 activeDes.id === "thailand-guide" ? "Affordable Mid-Range (approx BDT 6,000/day local expense)" :
@@ -4769,7 +4816,7 @@ export default function App() {
                               </span>
                             </div>
                             <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">🎒 Optimal Travel Style</span>
+                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Optimal Travel Style</span>
                               <span className="text-slate-650 leading-snug block font-sans">
                                 {activeDes.id === "nepal-guide" ? "High-altitude trekking, organic dining, and historical pagoda walks." :
                                 activeDes.id === "thailand-guide" ? "Multi-mall shopping, marine activities, and street food market tasting." :
@@ -4780,7 +4827,7 @@ export default function App() {
                               </span>
                             </div>
                             <a href={AFFILIATE_LINKS.airalo} target="_blank" rel="noopener noreferrer sponsored" className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1 block hover:border-[#F6B73C] cursor-pointer">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">📶 Stay Connected</span>
+                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Stay Connected</span>
                               <span className="font-serif font-bold text-slate-800 text-xs block">Local eSIM from Airalo</span>
                             </a>
                           </div>
@@ -4789,8 +4836,9 @@ export default function App() {
                         {/* 4. HOTEL SEARCH SECTION (SECONDARY CONVERSION ZONE) */}
                         <div id="dest-secondary-conversion" className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4">
                           <div className="space-y-1">
-                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest block font-sans">
-                              🏨 Find a Hotel
+                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest inline-flex items-center gap-1.5 font-sans">
+                              <Building size={11} className="text-brand-navy" />
+                              <span>Find a Hotel</span>
                             </span>
                             <h3 className="font-serif text-lg font-bold text-slate-900">Compare Accommodations in {getCountryCityName(activeDes.country)}</h3>
                             <p className="text-xs text-slate-500">
@@ -4799,7 +4847,7 @@ export default function App() {
                           </div>
 
                           <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200 text-slate-900">
-                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">🏨 LIVE ACCOMMODATION COMPARISON ENGINE</span>
+                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">LIVE ACCOMMODATION COMPARISON ENGINE</span>
                             {areTpScriptsReady ? (
                               <React.Suspense
                                 fallback={
@@ -5030,24 +5078,27 @@ export default function App() {
                                 key={other.id}
                                 href={`/destinations/${other.id}`}
                                 onClick={(e) => { e.preventDefault(); navigateTo(`/destinations/${other.id}`); }}
-                                className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium"
+                                className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium inline-flex items-center gap-1.5"
                               >
-                                🌍 {other.country} Outbound Guide
+                                <Compass size={12} className="text-[#F6B73C] shrink-0" />
+                                <span>{other.country} Outbound Guide</span>
                               </a>
                             ))}
                             <a
                               href="/visa"
                               onClick={(e) => { e.preventDefault(); navigateTo("/visa"); }}
-                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium"
+                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium inline-flex items-center gap-1.5"
                             >
-                              🛂 Embassy Visa Center
+                              <ShieldCheck size={12} className="text-[#F6B73C] shrink-0" />
+                              <span>Embassy Visa Center</span>
                             </a>
                             <a
                               href="/costs"
                               onClick={(e) => { e.preventDefault(); navigateTo("/costs"); }}
-                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium"
+                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium inline-flex items-center gap-1.5"
                             >
-                              💰 Dual-Currency Costs Analyzer
+                              <CreditCard size={12} className="text-[#F6B73C] shrink-0" />
+                              <span>Dual-Currency Costs Analyzer</span>
                             </a>
                           </div>
                         </div>
@@ -5237,7 +5288,9 @@ export default function App() {
                           onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeCost.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
-                          🛂 {isBn ? "ভিসা চেকলিস্ট দেখুন" : "Passport Visa Checklist"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                          <ShieldCheck size={14} className="text-brand-navy shrink-0" />
+                          <span>{isBn ? "ভিসা চেকলিস্ট দেখুন" : "Passport Visa Checklist"}</span>
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                         <a
                           id={`lnk-view-dest-from-cost-${activeCost.id}`}
@@ -5245,7 +5298,9 @@ export default function App() {
                           onClick={(e) => { e.preventDefault(); navigateTo(`/destinations/${getCountryDestId(activeCost.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
-                          🌍 {isBn ? "ট্যুর আইটিনারারি দেখুন" : "View Travel Itinerary"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                          <Compass size={14} className="text-brand-navy shrink-0" />
+                          <span>{isBn ? "ট্যুর আইটিনারারি দেখুন" : "View Travel Itinerary"}</span>
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                         <a
                           id={`lnk-view-hotel-from-cost-${activeCost.id}`}
@@ -5253,7 +5308,9 @@ export default function App() {
                           onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeCost.country)}`); }}
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
                         >
-                          🏨 {isBn ? "সেরা হোটেল জোন" : "Curated Area Stays"} <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                          <Building size={14} className="text-brand-navy shrink-0" />
+                          <span>{isBn ? "সেরা হোটেল জোন" : "Curated Area Stays"}</span>
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
                         </a>
                       </div>
                     </div>
@@ -5423,7 +5480,7 @@ export default function App() {
               }
               keyFacts={[
                 { label: isBn ? "কারেন্সি রেট" : "Currency Rates", value: "Mid-Market BDT Live Tracker" },
-                { label: isBn ? "বার্ষিক এন্ডোর্সমেন্ট কোটা" : "Annual FX Quota", value: "$12,000 USD / Adult Passport" },
+                { label: isBn ? "বার্ষিক এন্ডোর্সমেন্ট কোটা" : "Annual FX Quota", value: "$18,000 USD / Adult Passport (FE Circular 33)" },
                 { label: isBn ? "প্লাগ সাপোর্ট" : "Plug Compatibility", value: "Type C/D (Nepal), A/B (Thailand), G (MY/UAE)" },
                 { label: isBn ? "ইমিগ্রেশন প্যাক" : "Immigration Pack", value: "Passport + Ticket + Hotel + Solvency" }
               ]}
@@ -5797,7 +5854,7 @@ export default function App() {
                   },
                   {
                     label: isBn ? "বার্ষিক Card FX কোটা" : "Annual Card FX Quota",
-                    value: "$12,000 USD / Adult Passport",
+                    value: "$18,000 USD / Adult Passport (FE Circular 33)",
                   },
                   {
                     label: isBn ? "বাধ্যতামূলক Umrah অ্যাপ" : "Mandatory Umrah Apps",
@@ -5855,9 +5912,9 @@ export default function App() {
                   title: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy",
                 },
                 {
-                  pattern: /\b(Dual-Currency Card|passport dollar endorsement|\$12,000 annual travel quota|ডুয়াল-কারেন্সি কার্ড|ডলার এনডোর্সমেন্ট)\b/i,
+                  pattern: /\b(Dual-Currency Card|passport dollar endorsement|\$18,000 annual travel quota|\$12,000 annual travel quota|ডুয়াল-কারেন্সি কার্ড|ডলার এনডোর্সমেন্ট)\b/i,
                   path: "/blog/dual-currency-card-endorsement-bangladesh",
-                  title: "Dual-Currency Card & $12,000 Passport Endorsement Guide",
+                  title: "Dual-Currency Card & $18,000 Passport Endorsement Guide",
                 },
                 {
                   pattern: /\b(elderly parents|electric scooter|wheelchair assistance|বয়স্ক মা-বাবা|ইলেকট্রিক স্কুটার)\b/i,
@@ -6123,8 +6180,9 @@ export default function App() {
                             <span aria-hidden="true">·</span>
                             <span>{isBn ? `লেখক: ${activePost.author}` : `By ${activePost.author}`}</span>
                           </div>
-                          <span className="font-mono text-emerald-700 font-semibold">
-                            {isBn ? "✓ সরকারি সূত্র হতে যাচাইকৃত (2026)" : "✓ Verified Official Rules (2026)"}
+                          <span className="font-mono text-emerald-800 font-semibold inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md text-[11px]">
+                            <ShieldCheck size={12} className="text-emerald-600 shrink-0" />
+                            <span>{`SOURCE · CHECKED [${activePost.date}]`}</span>
                           </span>
                         </div>
 

@@ -22,6 +22,7 @@ interface TravelpayoutsCustomWidgetProps {
   initialHotelCity?: string;
   hotelsOnly?: boolean;
   showInlineResults?: boolean;
+  lang?: "en" | "bn";
 }
 
 const MARKER_ID = "675992";
@@ -377,7 +378,9 @@ export function TravelpayoutsCustomWidget({
   initialHotelCity = "Kathmandu",
   hotelsOnly = false,
   showInlineResults = false,
+  lang = "en",
 }: TravelpayoutsCustomWidgetProps = {}) {
+  const isBn = lang === "bn" || (typeof window !== "undefined" && window.location.pathname.startsWith("/bn"));
   const instanceId = useId();
   const fromAirportId = `${instanceId}-select-from-airport`;
   const toAirportId = `${instanceId}-select-to-airport`;
@@ -1378,7 +1381,7 @@ export function TravelpayoutsCustomWidget({
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 bg-[#07C369] hover:bg-[#06ad5d] text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer"
                   >
-                    <span>URAL White-Label Search</span>
+                    <span>{isBn ? 'লাইভ টিকিট সার্চ' : 'Search Live Fares'}</span>
                     <ExternalLink size={12} />
                   </a>
                   <a
@@ -1570,7 +1573,7 @@ export function TravelpayoutsCustomWidget({
                       rel="noopener noreferrer"
                       className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
-                      <span>Open URAL White-Label Search</span>
+                      <span>{isBn ? 'লাইভ ফ্লাইট সার্চ' : 'Search Live Flights'}</span>
                       <ExternalLink size={13} />
                     </a>
                     <a
@@ -1618,7 +1621,7 @@ export function TravelpayoutsCustomWidget({
                       rel="noopener noreferrer"
                       className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
-                      <span>URAL White-Label Checkout</span>
+                      <span>{isBn ? 'বুকিং সম্পন্ন করুন' : 'Book Flight Online'}</span>
                       <ExternalLink size={13} />
                     </a>
                     <a

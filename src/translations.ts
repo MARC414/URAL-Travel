@@ -31,10 +31,10 @@ export const translations = {
     heroVisaRequirements: "Check Visa Rules",
 
     // Search Flights Section
-    searchSectionBadge: "Real-time ticket search",
-    searchSectionTitle: "Search Jet Fares from Dhaka",
-    searchSectionSubtitle: "Powered by a global aviation scanner to secure the best rates. Direct, multi-stop, and promotional ticket options.",
-    liveSearchBoxHeader: "✈️ LIVE FLIGHT PRICE SEARCH (DAC DEPARTURES)",
+    searchSectionBadge: "Flight Search",
+    searchSectionTitle: "Search Flights from Dhaka",
+    searchSectionSubtitle: "Compare direct and multi-stop flight schedules and ticket prices from Dhaka to global destinations.",
+    liveSearchBoxHeader: "Flight Search (DAC Departures)",
 
     // Destinations Section
     destinationsBadge: "Popular destinations from Bangladesh",
@@ -45,7 +45,7 @@ export const translations = {
     hotelsBadge: "Verified Hotel Deals",
     hotelsTitle: "Compare Hotels in Kathmandu, Bangkok, KL & Dubai",
     hotelsSubtitle: "Search by city and date to see real prices. Budget room in Thamel or a family suite in Pratunam — compare options and book directly.",
-    searchHotelsLabel: "🏨 Search Hotels",
+    searchHotelsLabel: "Search Hotels",
 
     // WhatsApp Floating Button
     whatsappFloatingTooltip: "Chat with Travel Expert on WhatsApp",
@@ -90,7 +90,7 @@ export const translations = {
     searchSectionBadge: "লাইভ টিকিট সার্চ",
     searchSectionTitle: "ঢাকা থেকে সবচেয়ে কম ভাড়ার ফ্লাইট খুঁজুন",
     searchSectionSubtitle: "সেরা রেট নিশ্চিত করতে গ্লোবাল এভিয়েশন স্ক্যানার দ্বারা চালিত। সরাসরি, ট্রানজিট ও স্পেশাল প্রোমোশনাল টিকিট রেট।",
-    liveSearchBoxHeader: "✈️ লাইভ ফ্লাইট মূল্য অনুসন্ধান (ঢাকা থেকে)",
+    liveSearchBoxHeader: "লাইভ ফ্লাইট অনুসন্ধান (ঢাকা থেকে)",
 
     // Destinations Section
     destinationsBadge: "বাংলাদেশ থেকে জনপ্রিয় ভ্রমণ গন্তব্য",
@@ -101,7 +101,7 @@ export const translations = {
     hotelsBadge: "যাচাইকৃত সেরা হোটেল ডিল",
     hotelsTitle: "কাঠমান্ডু, ব্যাংকক, কুয়ালালামপুর ও দুবাইয়ের হোটেল তুলনা করুন",
     hotelsSubtitle: "আসল রেট দেখতে শহর ও তারিখ দিয়ে খুঁজুন। থামেলের সাশ্রয়ী রুম বা ব্যাংককের ফ্যামিলি স্যুট — সরাসরি বুকিংয়ের সুযোগ।",
-    searchHotelsLabel: "🏨 হোটেল সার্চ করুন",
+    searchHotelsLabel: "হোটেল সার্চ করুন",
 
     // WhatsApp Floating Button
     whatsappFloatingTooltip: "ভ্রমণ সহায়তার জন্য সরাসরি হোয়াটসঅ্যাপে চ্যাট করুন",

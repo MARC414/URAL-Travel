@@ -391,7 +391,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": {
     title: "RFCD Account vs Travel Quota in Bangladesh | URAL",
     description:
-      "Understand the difference between Bangladesh Bank's $12,000 annual travel quota and RFCD accounts, and how to clear per-transaction online payment limits.",
+      "Understand the difference between Bangladesh Bank's $18,000 annual travel quota and RFCD accounts, and how to clear per-transaction online payment limits.",
   },
   "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": {
     title: "Book Flights & Makkah Hotels in BDT Without a Card | URAL",

@@ -449,7 +449,7 @@ const EXPERIENCES_FAQS = [
   {
     question: "Can I book Tiqets (Europe/UK/USA) and Klook (Asia/Dubai) tickets using a Bangladeshi Dual-Currency Card?",
     answer:
-      "Yes. Both Tiqets and Klook accept Bangladeshi Visa and Mastercard dual-currency debit/credit cards (such as EBL, City Bank Amex, BRAC Bank, and DBBL) once your passport's annual $12,000 USD travel quota is endorsed and E-Commerce / 3D-Secure is active. If you do not have an endorsed card, you can message URAL's Dhaka WhatsApp Desk (+8801784385335) to issue your attraction vouchers in BDT.",
+      "Yes. Both Tiqets and Klook accept Bangladeshi Visa and Mastercard dual-currency debit/credit cards (such as EBL, City Bank Amex, BRAC Bank, and DBBL) once your passport's annual $18,000 USD travel quota (FE Circular 33) is endorsed and E-Commerce / 3D-Secure is active. If you do not have an endorsed card, you can message URAL's Dhaka WhatsApp Desk (+8801784385335) to issue your attraction vouchers in BDT.",
   },
   {
     question: "Why should I book Europe & UK attractions on Tiqets before flying from Dhaka?",

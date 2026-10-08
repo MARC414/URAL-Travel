@@ -113,8 +113,8 @@ TOTAL BUDGET SUMMARY PER PERSON (IN BDT)
 - TOTAL ESTIMATED BUDGET: BDT 40,000 - BDT 54,000 per person for an unforgettable independent holiday!`,
   "dual-currency-card-endorsement-bangladesh": `One of the biggest hurdles for Bangladeshi travelers planning an independent trip abroad isn't the visa—it is getting a Dual-Currency Debit, Prepaid, or Credit Card endorsed and unlocked for international flights, hotels, and attraction tickets. Here is the complete, up-to-date 2026 playbook for getting your passport dollar endorsement and paying abroad smoothly.
 
-1. WHAT IS PASSPORT DOLLAR ENDORSEMENT & THE $12,000 ANNUAL TRAVEL QUOTA?
-Under Bangladesh Bank foreign exchange regulations, every adult Bangladeshi citizen holding a valid Machine-Readable Passport (MRP) or e-Passport is entitled to endorse up to USD $12,000 per calendar year (January 1 to December 31) for personal international travel (and USD $5,000 per year for children under 12).
+1. WHAT IS PASSPORT DOLLAR ENDORSEMENT & THE $18,000 ANNUAL TRAVEL QUOTA?
+Under Bangladesh Bank foreign exchange regulations (FE/PD-1 Circular No. 33), every adult Bangladeshi citizen holding a valid Machine-Readable Passport (MRP) or e-Passport is entitled to endorse up to USD $18,000 per calendar year (January 1 to December 31) for personal international travel (with a cash note ceiling of $5,000, and USD $9,000 per year for children under 12).
 - "Endorsement" means an authorized dealer (AD) bank branch in Bangladesh stamps the back pages of your physical passport, records the USD limit allocated to your card or cash, and unlocks the Foreign Currency (USD) wallet on your card.
 - Without this physical stamp and system activation, Bangladeshi bank cards are automatically blocked from paying on international websites like Booking.com, Agoda, Klook, Airalo, or foreign airlines.
 
@@ -131,7 +131,7 @@ Carry:
 - Your original valid Passport (minimum 6 months validity recommended)
 - Your National ID (NID) card and 1 passport-size photo (for new prepaid cards)
 - Your bank account or prepaid card number
-Ask the officer to endorse your annual travel quota (for example, $1,500 to $5,000 USD depending on your needs—you don't have to deposit the full $12,000 at once; you simply deposit BDT as you spend!).
+Ask the officer to endorse your annual travel quota (for example, $1,500 to $5,000 USD depending on your needs—you don't have to deposit the full $18,000 at once; you simply deposit BDT as you spend!).
 
 Step 3: Open the Foreign Currency & E-Commerce Part Before Booking Online
 Having the physical ink stamp in your passport is only half the process! Before you book a flight on Aviasales, a hotel in Bangkok or Kuala Lumpur, or an airport pickup on Welcome Pickups:
@@ -708,9 +708,9 @@ Unlike Asian attractions where walk-up tickets are often available, Europe and N
 - **🧳 Strict Museum Bag-Ban Rule (Paris, London, Rome & NYC):** Security checkpoints at the Louvre, Eiffel Tower, Colosseum, Vatican, British Museum, and Statue of Liberty strictly prohibit cabin suitcases and large backpacks. If you are sightseeing after hotel check-out or between train transfers, drop your bags at a verified Radical Storage partner location (~€5/day per bag with €3,000 security guarantee) near Gare du Nord, King's Cross, Roma Termini, or Penn Station so you are not turned away at the gate.
 
 3. HOW TO PAY FOR EUROPEAN/US PASSES & CLAIM UP TO €600 (BDT 78,000) FOR DELAYED FLIGHTS
-- **Paying with a Bangladeshi Dual-Currency Card:** Ensure your passport's **$12,000 annual travel quota** is endorsed at your bank in Dhaka and **3D-Secure USD/EUR E-Commerce** is active so your online **Tiqets** bookings process seamlessly with zero foreign agent markups.
+- **Paying with a Bangladeshi Dual-Currency Card:** Ensure your passport's **$18,000 annual travel quota** is endorsed at your bank in Dhaka and **3D-Secure USD/EUR E-Commerce** is active so your online **Tiqets** bookings process seamlessly with zero foreign agent markups.
 - **Know Your EU261 / UK261 Passenger Rights (€600 Compensation):** Under **European Union Regulation EC 261/2004** and **UK261**, if your flight departing from Paris, Rome, Frankfurt, Amsterdam, or London (or arriving on an EU/UK carrier) is delayed by **3+ hours** or cancelled, you are legally entitled to up to **€600 / £520 (~BDT 78,000 per passenger)** via **AirHelp**!`,
-  "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah": `When preparing for a sacred journey to **Makkah and Madinah**, ensuring that every Taka spent is 100% pure and free from **Riba (interest)** is a top priority for Bangladeshi pilgrims. Fortunately, you do not need a conventional interest-charging credit card to book your **DIY Umrah flights, Jabal Omar hotels, or Haramain High-Speed Train tickets**. Under **Bangladesh Bank (bb.org.bd)** regulations, you can endorse your **$12,000 annual travel quota** onto a **Shariah-Compliant Islamic Dual-Currency Debit or Prepaid Card**.
+  "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah": `When preparing for a sacred journey to **Makkah and Madinah**, ensuring that every Taka spent is 100% pure and free from **Riba (interest)** is a top priority for Bangladeshi pilgrims. Fortunately, you do not need a conventional interest-charging credit card to book your **DIY Umrah flights, Jabal Omar hotels, or Haramain High-Speed Train tickets**. Under **Bangladesh Bank (bb.org.bd)** regulations, you can endorse your **$18,000 annual travel quota (FE/PD-1 Circular No. 33)** onto a **Shariah-Compliant Islamic Dual-Currency Debit or Prepaid Card**.
 
 1. HOW SHARIAH-COMPLIANT DUAL-CURRENCY CARDS AVOID RIBA (INTEREST)
 Conventional credit cards charge compound interest (20%–27% APR) if a balance is carried past the due date. By contrast, Islamic banks and Islamic banking windows in Bangladesh structure their dual-currency cards under two Shariah Supervisory Board-approved principles:
@@ -723,7 +723,7 @@ Rule 2: Bai-Murabaha / Ujrah Charge Cards (e.g., Khidmah Cards):
 Compare the leading Islamic dual-currency cards accepted on **sar.hhr.sa (Haramain Train), Nusuk, Aviasales, and Saudi POS terminals**:
 - **1. Islami Bank Bangladesh PLC (IBBL) — Dual-Currency Debit Card & Khidmah Card:**
   • **Best For:** Pilgrims who already hold an IBBL Mudaraba Savings Account or CellFin app.
-  • **Key Features:** Supports full **$12,000 annual passport endorsement** at any IBBL Authorized Dealer (AD) branch; works seamlessly on Saudi POS machines (Al-Rajhi, SNB) in Makkah and Madinah.
+  • **Key Features:** Supports full **$18,000 annual passport endorsement** at any IBBL Authorized Dealer (AD) branch; works seamlessly on Saudi POS machines (Al-Rajhi, SNB) in Makkah and Madinah.
 - **2. The City Bank (City Islamic) — Islamic American Express & Visa Dual-Currency Debit Card:**
   • **Best For:** Fast 3D-Secure online flight and hotel bookings via the **Citytouch app**.
   • **Key Features:** Dedicated Shariah supervisory board governance, instant USD Foreign Currency toggle inside Citytouch, and complimentary Balaka Executive Lounge access on select tiers at Dhaka Airport.
@@ -745,7 +745,7 @@ Step 3: Always Select "SAR" (Saudi Riyal) at Makkah & Madinah POS Terminals:
   "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": `Nothing is more stressful than finding a cheap roundtrip family flight from **Dhaka (DAC) to Jeddah, Bangkok, or Kuala Lumpur**, entering your card OTP at checkout, and watching the payment fail because the total exceeds **$300 USD (~BDT 36,600)**. Understanding the legal difference between a **Regular Travel Quota (TQ) Card** and a **Resident Foreign Currency Deposit (RFCD) Account** under **Bangladesh Bank (bb.org.bd)** rules solves this problem permanently.
 
 1. WHY DO SOME BANGLADESHI CARDS DECLINE ONLINE PAYMENTS ABOVE $300 USD?
-Under **Bangladesh Bank Foreign Exchange Guidelines**, every adult citizen has a **$12,000 USD annual personal travel quota**. However, to prevent unauthorized cross-border digital spending, several domestic banks configure their card switches with a **default $300 to $500 USD per-transaction e-commerce ceiling** on standard BDT-funded Travel Quota cards:
+Under **Bangladesh Bank Foreign Exchange Guidelines**, every adult citizen has an **$18,000 USD annual personal travel quota (raised from $12,000 under FE Circular No. 33)**. However, to prevent unauthorized cross-border digital spending, several domestic banks configure their card switches with a **default $300 to $500 USD per-transaction e-commerce ceiling** on standard BDT-funded Travel Quota cards:
 - **How to Unlock a $300+ Flight or Hotel Payment on a Regular Travel Quota Card (5-Minute Fix):**
   • If you are using a regular endorsed Dual-Currency Debit/Prepaid/Credit card (EBL, City Bank, BRAC, MTB, SCB) to buy a **$600–$2,500 airline ticket or hotel stay**, call your bank's 24/7 hotline **15 minutes before checkout**.
   • Tell the officer: *"I am booking verified travel (Airline/Hotel MCC Category) under my endorsed Passport Travel Quota. Please temporarily raise my single e-commerce transaction cap to $[Amount] USD for the next 24 hours."*
@@ -765,14 +765,14 @@ Rule 3: The 4 Massive Advantages of an RFCD International Debit Card:
 
 3. HEAD-TO-HEAD COMPARISON: REGULAR TRAVEL QUOTA CARD VS. RFCD CARD
 - **Funding Source:** Regular Travel Quota = Deposit BDT at bank branch/app (converted to USD at daily BC rate) | RFCD Account = Deposit physical USD/EUR/GBP cash brought back from abroad.
-- **Annual Limit:** Regular Travel Quota = Capped at **USD $12,000 per calendar year** | RFCD Account = Up to **100% of your deposited foreign currency balance**.
+- **Annual Limit:** Regular Travel Quota = Capped at **USD $18,000 per calendar year** | RFCD Account = Up to **100% of your deposited foreign currency balance**.
 - **Best Strategy for Frequent Flyers:** Use your regular Travel Quota card or cash USD for your first trip, bring back **$500–$2,000 in leftover USD cash**, and deposit it into an **EBL, City Bank, BRAC, or SCB RFCD Account** so you never face a card limit decline again!`,
   "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": `What happens when you spot a **BDT 56,000 roundtrip Dhaka–Jeddah Umrah flight** or a **BDT 6,500/night hotel near Masjid al-Haram**, but you don't have a **Dual-Currency Card**, your passport dollar endorsement isn't stamped yet, or your bank's $300 e-commerce cap blocks your checkout? For Bangladeshi families in Dhaka, Chattogram, Sylhet, and across the country, paying directly in **Bangladeshi Taka (BDT)** via local banking or mobile financial services (**bKash / Nagad**) is the fastest, zero-stress alternative.
 
 1. WHY SO MANY BANGLADESHI TRAVELERS PREFER BDT ASSISTED BOOKING OVER INTERNATIONAL CARDS
 Even experienced travelers frequently use local BDT settlement for three practical reasons:
-- **1. Preserving Your $12,000 Passport Travel Quota for Overseas Spending:**
-  • When you pay for your **airline tickets (BDT 75,000+) and Makkah/Madinah or Bangkok/KL hotels** in local **BDT** before leaving Bangladesh, your entire **USD $12,000 passport travel quota** stays untouched for shopping, dining, and emergencies abroad!
+- **1. Preserving Your $18,000 Passport Travel Quota for Overseas Spending:**
+  • When you pay for your **airline tickets (BDT 75,000+) and Makkah/Madinah or Bangkok/KL hotels** in local **BDT** before leaving Bangladesh, your entire **USD $18,000 passport travel quota** stays untouched for shopping, dining, and emergencies abroad!
 - **2. Zero Bank Endorsement Delays or 3D-Secure OTP Failures:**
   • Airline promotional seats on **Biman, Saudia, AirAsia, Thai Lion Air, and US-Bangla** often sell out in hours. If your passport is currently at an embassy or Umrah agency for visa processing, you physically *cannot* take it to a bank branch for endorsement.
 - **3. Official Hotel Vouchers for Visa & Dhaka Airport Immigration:**
@@ -941,8 +941,8 @@ When traveling with elderly parents who need fasting blood tests at 7:00 AM, sta
 - **Budget & Mid-Range (BDT 4,800 – BDT 8,500/night):** *FuramaXclusive Sukhumvit* (right opposite Bumrungrad!), *Zenith Sukhumvit Hotel*, or *Nana Hiso Hotel*.
 - **Family Serviced Apartments with Kitchen (BDT 9,500 – BDT 16,000/night):** *Fraser Suites Sukhumvit (Soi 11)*, *Aspira Tropical Residence*, or *Amari Boulevard / Mövenpick BDMS Wellness Resort*.
 
-4. HOW TO PAY LARGE HOSPITAL BILLS BEYOND YOUR $12,000 TRAVEL QUOTA
-Under **Bangladesh Bank Foreign Exchange Guidelines (bb.org.bd)**, in addition to your regular **$12,000 annual personal travel quota**, Bangladeshi citizens can release up to **USD $10,000+ under the Medical Treatment Quota** through an Authorized Dealer (AD) bank branch by submitting the hospital's official cost estimate invoice and doctor recommendation!`,
+4. HOW TO PAY LARGE HOSPITAL BILLS BEYOND YOUR $18,000 TRAVEL QUOTA
+Under **Bangladesh Bank Foreign Exchange Guidelines (bb.org.bd)**, in addition to your regular **$18,000 annual personal travel quota**, Bangladeshi citizens can release up to **USD $10,000+ under the Medical Treatment Quota** through an Authorized Dealer (AD) bank branch by submitting the hospital's official cost estimate invoice and doctor recommendation!`,
   "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": `Two small digital purchases made **24 hours before flying from Dhaka (DAC)** prevent 90% of arrival headaches abroad: a **Pre-Installed Travel eSIM** (so your phone has 5G data the second the plane touches the runway) and **International Travel Medical Insurance** (to protect your family against BDT 5,00,000+ overseas hospital emergencies and satisfy embassy visa checklists).
 
 1. TRAVEL ESIM (AIRALO / YESIM) VS. BANGLADESHI TELCO ROAMING VS. AIRPORT SIM CARDS

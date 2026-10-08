@@ -125,15 +125,15 @@ export const BENGALI_BLOG_OVERRIDES: Record<
   "dual-currency-card-endorsement-bangladesh": {
     title: "বাংলাদেশে Dual-Currency Card ও Passport Dollar Endorsement করার নিয়ম (2026 গাইড)",
     summary:
-      "বাংলাদেশ থেকে আন্তর্জাতিক Flight, Agoda বা Booking.com-এ Hotel, Haramain Bullet Train টিকিট কিংবা Klook-এ অ্যাক্টিভিটি বুক করার আগে আপনার ব্যাংক কার্ডে অবশ্যই পাসপোর্টের বিপরীতে বাংলাদেশ ব্যাংকের বার্ষিক USD $12,000 Travel Quota এনডোর্স (Endorse) করে নিতে হবে। এই ধাপে ধাপে গাইডে জানুন কোন কোন ব্যাংকে ক্রেডিট কার্ড ছাড়াই দ্রুত Dual-Currency Debit বা Prepaid Card পাওয়া যায় (EBL Aqua, City Bank Amex/Visa, BRAC Multi-Currency, MTB ও Islami Bank), পাসপোর্টে সিল দেওয়ার জন্য কী কী ডকুমেন্ট লাগে, ব্যাংকের অ্যাপ থেকে USD E-Commerce ও 3D-Secure চালু করার নিয়ম এবং বিদেশে ৫% DCC চার্জ বাঁচানোর কৌশল।",
+      "বাংলাদেশ থেকে আন্তর্জাতিক Flight, Agoda বা Booking.com-এ Hotel, Haramain Bullet Train টিকিট কিংবা Klook-এ অ্যাক্টিভিটি বুক করার আগে আপনার ব্যাংক কার্ডে অবশ্যই পাসপোর্টের বিপরীতে বাংলাদেশ ব্যাংকের বার্ষিক USD $18,000 Travel Quota (FE Circular 33) এনডোর্স (Endorse) করে নিতে হবে। এই ধাপে ধাপে গাইডে জানুন কোন কোন ব্যাংকে ক্রেডিট কার্ড ছাড়াই দ্রুত Dual-Currency Debit বা Prepaid Card পাওয়া যায় (EBL Aqua, City Bank Amex/Visa, BRAC Multi-Currency, MTB ও Islami Bank), পাসপোর্টে সিল দেওয়ার জন্য কী কী ডকুমেন্ট লাগে, ব্যাংকের অ্যাপ থেকে USD E-Commerce ও 3D-Secure চালু করার নিয়ম এবং বিদেশে ৫% DCC চার্জ বাঁচানোর কৌশল।",
     category: "Banking & Payments",
     date: "২৬ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Lead Travel Strategist)",
     readTime: "৭ মিনিট পড়া",
     content: `বাংলাদেশ থেকে প্রথমবার বিদেশ ভ্রমণের প্রস্তুতি নেওয়ার সময় বেশিরভাগ ভ্রমণকারী যে সমস্যায় পড়েন তা হলো: সাধারণ লোকাল ডেবিট বা bKash/Nagad দিয়ে আন্তর্জাতিক এয়ারলাইন্স বা বিদেশি হোটেল সাইটে পেমেন্ট করা যায় না। বাংলাদেশ ব্যাংকের নিয়ম অনুযায়ী, আপনার একটি **Dual-Currency Card** থাকতে হবে এবং সেখানে পাসপোর্টে **Dollar Endorsement** করা থাকতে হবে।
 
-১. PASSPORT DOLLAR ENDORSEMENT কী? (বার্ষিক $12,000 USD কোটা)
-বাংলাদেশ ব্যাংকের ফরেন এক্সচেঞ্জ নীতিমালা অনুযায়ী, প্রতিটি প্রাপ্তবয়স্ক বাংলাদেশি নাগরিক তার বৈধ পাসপোর্টে প্রতি ক্যালেন্ডার বছরে (১ জানুয়ারি – ৩১ ডিসেম্বর) ব্যক্তিগত বিদেশ ভ্রমণের জন্য সর্বোচ্চ **USD $12,000** (অপ্রাপ্তবয়স্কদের জন্য $6,000) পর্যন্ত খরচ করার অনুমতি পান।
+১. PASSPORT DOLLAR ENDORSEMENT কী? (বার্ষিক $18,000 USD কোটা)
+বাংলাদেশ ব্যাংকের ফরেন এক্সচেঞ্জ নীতিমালা (FE/PD-1 Circular No. 33) অনুযায়ী, প্রতিটি প্রাপ্তবয়স্ক বাংলাদেশি নাগরিক তার বৈধ পাসপোর্টে প্রতি ক্যালেন্ডার বছরে (১ জানুয়ারি – ৩১ ডিসেম্বর) ব্যক্তিগত বিদেশ ভ্রমণের জন্য সর্বোচ্চ **USD $18,000** পর্যন্ত খরচ করার অনুমতি পান।
 - ব্যাংকের ফরেন এক্সচেঞ্জ ডেস্কে গিয়ে আপনার পাসপোর্টের নির্দিষ্ট পাতায় সিল ও স্বাক্ষর নেওয়াকেই **Passport Endorsement** বলা হয়।
 - একবার পাসপোর্টে ডলার এনডোর্স হয়ে গেলে আপনি ব্যাংক একাউন্টে বাংলাদেশি টাকা (BDT) জমা রাখবেন, আর অনলাইনে বা বিদেশের POS মেশিনে কার্ড পাঞ্চ করলে ব্যাংক স্বয়ংক্রিয়ভাবে তা ডলারে কনভার্ট করে পেমেন্ট সম্পন্ন করবে।
 
@@ -151,7 +151,7 @@ export const BENGALI_BLOG_OVERRIDES: Record<
 ৪. **USD ও 3D-Secure E-Commerce পার্ট চালু করুন (সবচেয়ে জরুরি ধাপ!):** শুধু পাসপোর্টে সিল নিলেই অনলাইনে পেমেন্ট হবে না! ব্যাংকের অ্যাপে (Skybanking / Astha / Citytouch) ঢুকে অথবা কাস্টমাইজড কল সেন্টারে ফোন করে বলুন: *"আমার কার্ডের USD International Part এবং 3D-Secure E-Commerce Transaction আগামী ৭ দিনের জন্য ওপেন করে দিন।"*
 
 ৪. RFCD ACCOUNT বনাম সাধারণ TRAVEL QUOTA
-- **Travel Quota ($12,000/বছর):** আপনি একাউন্টে BDT জমা রাখবেন এবং আন্তর্জাতিক পেমেন্টের সময় ব্যাংক দিনের USD রেট + সামান্য মার্কআপ অনুযায়ী টাকা কাটবে। তবে বাংলাদেশ ব্যাংকের নিয়ম অনুযায়ী একক অনলাইন ট্রানজেকশনে কখনো কখনো **$300 USD ক্যাপ** থাকতে পারে।
+- **Travel Quota ($18,000/বছর):** আপনি একাউন্টে BDT জমা রাখবেন এবং আন্তর্জাতিক পেমেন্টের সময় ব্যাংক দিনের USD রেট + সামান্য মার্কআপ অনুযায়ী টাকা কাটবে। তবে বাংলাদেশ ব্যাংকের নিয়ম অনুযায়ী একক অনলাইন ট্রানজেকশনে কখনো কখনো **$300 USD ক্যাপ** থাকতে পারে।
 - **RFCD (Resident Foreign Currency Deposit) Account:** আপনি যদি বিদেশ সফর শেষে ফেরার সময় নগদ ডলার সাথে আনেন, তবে তা ব্যাংকে জমা দিয়ে RFCD একাউন্ট ও ডেবিট কার্ড খুলতে পারবেন। RFCD কার্ডে কোনো $300 ট্রানজেকশন ক্যাপ থাকে না—বড় অঙ্কের হোটেল বা ফ্লাইট পেমেন্ট অনায়াসে করা যায়।
 
 ৫. বিদেশে কার্ড ব্যবহারের সময় ৫% DCC চার্জ বাঁচানোর গোপন টিপস
@@ -1133,7 +1133,7 @@ KL Sentral থেকে মাত্র ৫ মিনিট দূরত্ব�
     internalLinks: [
       { text: "ইউরোপ, UK ও USA-এর অফিশিয়াল Tiqets পাস হাব দেখুন", path: "/experiences?region=west" },
       { text: "৯৬ ঘণ্টার Saudi Stopover Visa ও US/UK/Schengen ওমরাহ গাইড", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
     ],
     affiliateCTA: {
       provider: "tiqets",
@@ -1145,12 +1145,12 @@ KL Sentral থেকে মাত্র ৫ মিনিট দূরত্ব�
   "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah": {
     title: "ওমরাহ ও হালাল ভ্রমণের জন্য বাংলাদেশের সেরা শরীয়াহ-সম্মত ইসলামিক Dual-Currency Card তুলনা (2026)",
     summary:
-      "ওমরাহ, হজ বা হালাল ফ্যামিলি ট্যুরের প্রস্তুতির সময় ধর্মপ্রাণ বাংলাদেশি মুসলমানরা সুদযুক্ত (Riba) সাধারণ ক্রেডিট কার্ড ব্যবহার না করে ১০০% শরীয়াহ-সম্মত উপায়ে Haramain High-Speed Bullet Train (sar.hhr.sa), মক্কা-মদিনার হোটেল ও আন্তর্জাতিক বিমান টিকিট কাটতে চান। বাংলাদেশ ব্যাংকের ইসলামিক ব্যাংকিং নীতিমালা এবং বার্ষিক $12,000 USD পাসপোর্ট ট্রাভেল কোটার অধীনে দেশের শীর্ষ ইসলামী ব্যাংক ও ইসলামিক ব্যাংকিং উইন্ডোগুলো এখন সুদমুক্ত মুদারাবা ও উজরাহ-ভিত্তিক Dual-Currency Debit, Prepaid ও Khidmah কার্ড ইস্যু করছে। জানুন ২০২৬ সালের সেরা ৫টি ইসলামিক ডুয়াল-কারেন্সি কার্ডের তুলনা ও ব্যবহারের নিয়ম।",
+      "ওমরাহ, হজ বা হালাল ফ্যামিলি ট্যুরের প্রস্তুতির সময় ধর্মপ্রাণ বাংলাদেশি মুসলমানরা সুদযুক্ত (Riba) সাধারণ ক্রেডিট কার্ড ব্যবহার না করে ১০০% শরীয়াহ-সম্মত উপায়ে Haramain High-Speed Bullet Train (sar.hhr.sa), মক্কা-মদিনার হোটেল ও আন্তর্জাতিক বিমান টিকিট কাটতে চান। বাংলাদেশ ব্যাংকের ইসলামিক ব্যাংকিং নীতিমালা এবং বার্ষিক $18,000 USD পাসপোর্ট ট্রাভেল কোটার (FE Circular No. 33) অধীনে দেশের শীর্ষ ইসলামী ব্যাংক ও ইসলামিক ব্যাংকিং উইন্ডোগুলো এখন সুদমুক্ত মুদারাবা ও উজরাহ-ভিত্তিক Dual-Currency Debit, Prepaid ও Khidmah কার্ড ইস্যু করছে। জানুন ২০২৬ সালের সেরা ৫টি ইসলামিক ডুয়াল-কারেন্সি কার্ডের তুলনা ও ব্যবহারের নিয়ম।",
     category: "Banking & Payments",
     date: "২৭ সেপ্টেম্বর, ২০২৬",
     author: "ফারহান মোমেন (লিড ট্রাভেল স্ট্র্যাটেজিস্ট)",
     readTime: "৭ মিনিট পড়া",
-    content: `পবিত্র **মক্কা ও মদিনায়** ওমরাহ বা হজ সফরে যাওয়ার সময় প্রতিটি টাকার লেনদেন যেন ১০০% সুদমুক্ত (**Riba-Free**) ও হালাল থাকে, তা নিশ্চিত করা প্রত্যেক হাজীর একান্ত কাম্য। আশার কথা হলো—অনলাইনে **Haramain বুলেট ট্রেনের টিকিট, জাবাল ওমরের হোটেল বা ওমরাহর বিমান টিকিট** কাটার জন্য সুদভিত্তিক ক্রেডিট কার্ডের কোনো প্রয়োজন নেই। **বাংলাদেশ ব্যাংকের (bb.org.bd)** নিয়ম অনুযায়ী আপনি আপনার পাসপোর্টের **$12,000 USD বার্ষিক ট্রাভেল কোটা** যেকোনো **শরীয়াহ-সম্মত ইসলামিক ডুয়াল-কারেন্সি ডেবিট বা প্রিপেইড কার্ডে** এনডোর্স করে নিতে পারেন।
+    content: `পবিত্র **মক্কা ও মদিনায়** ওমরাহ বা হজ সফরে যাওয়ার সময় প্রতিটি টাকার লেনদেন যেন ১০০% সুদমুক্ত (**Riba-Free**) ও হালাল থাকে, তা নিশ্চিত করা প্রত্যেক হাজীর একান্ত কাম্য। আশার কথা হলো—অনলাইনে **Haramain বুলেট ট্রেনের টিকিট, জাবাল ওমরের হোটেল বা ওমরাহর বিমান টিকিট** কাটার জন্য সুদভিত্তিক ক্রেডিট কার্ডের কোনো প্রয়োজন নেই। **বাংলাদেশ ব্যাংকের (bb.org.bd)** নিয়ম অনুযায়ী আপনি আপনার পাসপোর্টের **$18,000 USD বার্ষিক ট্রাভেল কোটা (FE/PD-1 Circular No. 33)** যেকোনো **শরীয়াহ-সম্মত ইসলামিক ডুয়াল-কারেন্সি ডেবিট বা প্রিপেইড কার্ডে** এনডোর্স করে নিতে পারেন।
 
 ১. শরীয়াহ-সম্মত ইসলামিক কার্ড কীভাবে সুদ (RIBA) থেকে মুক্ত থাকে?
 সাধারণ ক্রেডিট কার্ডে নির্দিষ্ট তারিখের মধ্যে বিল পরিশোধ না করলে ২০%–২৭% চক্রবৃদ্ধি সুদ (Riba) আরোপিত হয়। বিপরীতে বাংলাদেশের ইসলামিক ব্যাংক ও ইসলামিক ব্যাংকিং উইন্ডোগুলো শরীয়াহ সুপারভাইজরি বোর্ডের তত্ত্বাবধানে দুটি হালাল পদ্ধতিতে আন্তর্জাতিক কার্ড পরিচালনা করে:
@@ -1163,7 +1163,7 @@ KL Sentral থেকে মাত্র ৫ মিনিট দূরত্ব�
 Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আরবের POS মেশিনে নির্বিঘ্নে কাজ করে এমন শীর্ষ ৫টি ইসলামিক কার্ড:
 - **১. ইসলামী ব্যাংক বাংলাদেশ পিএলসি (IBBL) — Dual-Currency Debit Card ও Khidmah Card:**
   • **কাদের জন্য সেরা:** যাদের ইতিমধ্যে ইসলামী ব্যাংকে মুদারাবা সেভিংস একাউন্ট বা **CellFin অ্যাপ** রয়েছে।
-  • **মূল সুবিধা:** ইসলামী ব্যাংকের যেকোনো AD শাখা থেকে পাসপোর্টে **$12,000 USD এনডোর্সমেন্ট** করা যায় এবং মক্কা-মদিনার Al-Rajhi ও SNB POS মেশিনে সরাসরি সৌদি রিয়ালে পেমেন্ট করা যায়।
+  • **মূল সুবিধা:** ইসলামী ব্যাংকের যেকোনো AD শাখা থেকে পাসপোর্টে **$18,000 USD এনডোর্সমেন্ট** করা যায় এবং মক্কা-মদিনার Al-Rajhi ও SNB POS মেশিনে সরাসরি সৌদি রিয়ালে পেমেন্ট করা যায়।
 - **২. দ্য সিটি ব্যাংক (City Islamic) — Islamic American Express ও Visa Dual-Currency Debit Card:**
   • **কাদের জন্য সেরা:** **Citytouch অ্যাপের** মাধ্যমে দ্রুত 3D-Secure অনলাইন পেমেন্ট ও ঢাকা এয়ারপোর্টে বলাকা লাউঞ্জ সুবিধার জন্য।
 - **৩. ইস্টার্ন ব্যাংক পিএলসি (EBL Islamic) — Islamic Dual-Currency Visa/Mastercard Debit Card:**
@@ -1181,7 +1181,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 ধাপ ৩: মক্কা ও মদিনার দোকানে সবসময় "SAR" (Saudi Riyal) সিলেক্ট করুন:
 - **Al Baik, Bin Dawood সুপারমার্কেট বা ফার্মেসিতে** কার্ড পাঞ্চ করার সময় মেশিনে সবসময় **Local Currency (SAR)** সিলেক্ট করবেন—এতে ৫% অতিরিক্ত DCC চার্জ কাটবে না।`,
     internalLinks: [
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "মক্কা ও মদিনা হোটেল জোন এবং Haramain বুলেট ট্রেন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "কার্ড নেই? bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুক করুন", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "১০ দিনের DIY Umrah BDT বাজেট ক্যালকুলেটর", path: "/umrah" },
@@ -1204,7 +1204,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
     content: `ঢাকা (DAC) থেকে সপরিবারে জেদ্দা, ব্যাংকক বা কুয়ালালামপুরের কম ভাড়ার ফ্লাইট খুঁজে পাওয়ার পর পেমেন্ট পেজে OTP দেওয়ার সাথে সাথে যদি দেখেন **$300 USD (~BDT 36,600)**-এর বেশি হওয়ার কারণে পেমেন্ট ডিক্লাইন হয়েছে—তবে তা অত্যন্ত হতাশাজনক। **বাংলাদেশ ব্যাংকের (bb.org.bd)** নিয়ম অনুযায়ী সাধারণ **Travel Quota (TQ) Card** এবং **Resident Foreign Currency Deposit (RFCD) Account**-এর পার্থক্য জানলে এই সমস্যা চিরতরে সমাধান করা যায়।
 
 ১. সাধারণ কার্ডে $300-এর বেশি অনলাইন পেমেন্ট কেন আটকে যায় এবং ৫ মিনিটে সমাধানের উপায় কী?
-বাংলাদেশ ব্যাংকের নিয়মে প্রাপ্তবয়স্ক নাগরিকদের বার্ষিক ট্রাভেল কোটা **$12,000 USD** হলেও, ডিজিটাল জালিয়াতি রোধে অনেক দেশীয় ব্যাংক সাধারণ BDT-ভিত্তিক কার্ডে **একবারে সর্বোচ্চ $300 থেকে $500 USD ই-কমার্স পেমেন্ট ক্যাপ** সেট করে রাখে:
+বাংলাদেশ ব্যাংকের নিয়মে প্রাপ্তবয়স্ক নাগরিকদের বার্ষিক ট্রাভেল কোটা **$18,000 USD (FE Circular No. 33 অনুযায়ী)** হলেও, ডিজিটাল জালিয়াতি রোধে অনেক দেশীয় ব্যাংক সাধারণ BDT-ভিত্তিক কার্ডে **একবারে সর্বোচ্চ $300 থেকে $500 USD ই-কমার্স পেমেন্ট ক্যাপ** সেট করে রাখে:
 - **সাধারণ Travel Quota কার্ডে $300+ ফ্লাইট বা হোটেল পেমেন্ট আনলক করার উপায়:**
   • আপনি যখন **EBL, City Bank, BRAC, MTB বা SCB**-এর সাধারণ ডুয়াল-কারেন্সি কার্ড দিয়ে **$600–$2,500 USD** মূল্যের ফ্লাইট টিকিট বা হোটেল বুক করবেন, তখন পেমেন্ট করার **১৫ মিনিট আগে ব্যাংকের ২৪/৭ হটলাইনে কল করুন**।
   • অফিসারকে বলুন: *"আমি আমার এনডোর্স করা পাসপোর্ট ট্রাভেল কোটার অধীনে ভেরিফাইড ট্রাভেল (Airline / Hotel MCC Category) পেমেন্ট করছি। অনুগ্রহ করে আগামী ২৪ ঘণ্টার জন্য আমার Single E-Commerce Transaction Limit বাড়িয়ে $[Amount] USD করে দিন।"*
@@ -1222,7 +1222,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **৩. ডলারেই মুনাফা লাভ:** অনেক ব্যাংক RFCD ব্যালেন্সের ওপর বছরে ৪.৫% থেকে ৬.৫% পর্যন্ত ডলারে রিটার্ন দেয়।
 - **৪. পরিবারের জন্য সাপ্লিমেন্টারি কার্ড:** স্বামী/স্ত্রী বা সন্তানদের জন্য সহজেই সাপ্লিমেন্টারি কার্ড নেওয়া যায়।`,
     internalLinks: [
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "ওমরাহর জন্য সেরা শরীয়াহ-সম্মত ইসলামিক ডুয়াল-কারেন্সি কার্ড", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুকিং", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "নগদ রিয়াল/ডলার বনাম কার্ড: ৫% DCC চার্জ বাঁচানোর উপায়", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
@@ -1237,7 +1237,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
   "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": {
     title: "Dual-Currency Card ছাড়াই bKash বা দেশীয় ব্যাংক ট্রান্সফারে (BDT) ফ্লাইট, ওমরাহ হোটেল ও ট্রান্সফার বুক করার নিয়ম",
     summary:
-      "বাংলাদেশের ৭০ শতাংশেরও বেশি প্রথমবার বিদেশগামী যাত্রী, ঢাকার বাইরের পরিবার এবং বয়স্ক ওমরাহ যাত্রীদের হাতে তাৎক্ষণিকভাবে এনডোর্স করা Dual-Currency Card থাকে না। ফলে অনলাইনে কম ভাড়ায় বিমান টিকিট বা মক্কা-মদিনার হোটেল ডিসকাউন্ট দেখলেও তাঁরা বুক করতে পারেন না। ব্যাংক কার্ডের জন্য সপ্তাহখানেক অপেক্ষা করে ২০,০০০+ টাকা বেশি ভাড়া গোনার বদলে আপনি সরাসরি URAL-এর ঢাকা সাপোর্ট ডেস্কের (+8801784385335) মাধ্যমে দেশীয় ব্যাংক ট্রান্সফার, bKash বা Nagad-এ (BDT) পেমেন্ট করে কনফার্মড ফ্লাইট PNR, মক্কা/মদিনা ও এশিয়ার হোটেল ভাউচার এবং এয়ারপোর্ট ট্রান্সফার বুক করতে পারেন।",
+      "বাংলাদেশের ৭০ শতাংশেও বেশি প্রথমবার বিদেশগামী যাত্রী, ঢাকার বাইরের পরিবার এবং বয়স্ক ওমরাহ যাত্রীদের হাতে তাৎক্ষণিকভাবে এনডোর্স করা Dual-Currency Card থাকে না। ফলে অনলাইনে কম ভাড়ায় বিমান টিকিট বা মক্কা-মদিনার হোটেল ডিসকাউন্ট দেখলেও তাঁরা বুক করতে পারেন না। ব্যাংক কার্ডের জন্য সপ্তাহখানেক অপেক্ষা করে ২০,০০০+ টাকা বেশি ভাড়া গোনার বদলে আপনি সরাসরি URAL-এর ঢাকা সাপোর্ট ডেস্কের (+8801784385335) মাধ্যমে দেশীয় ব্যাংক ট্রান্সফার, bKash বা Nagad-এ (BDT) পেমেন্ট করে কনফার্মড ফ্লাইট PNR, মক্কা/মদিনা ও এশিয়ার হোটেল ভাউচার এবং এয়ারপোর্ট ট্রান্সফার বুক করতে পারেন।",
     category: "Banking & Payments",
     date: "২৭ সেপ্টেম্বর, ২০২৬",
     author: "ফারহান মোমেন (লিড ট্রাভেল স্ট্র্যাটেজিস্ট)",
@@ -1246,8 +1246,8 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 
 ১. কেন অভিজ্ঞ বাংলাদেশি ভ্রমণকারীরাও BDT বুকিং ডেস্ক পছন্দ করেন?
 কার্ড না থাকা যাত্রীদের পাশাপাশি অনেক কার্ডধারীও ৩টি বাস্তব সুবিধার কারণে দেশীয় টাকায় (BDT) ফ্লাইট ও হোটেল বুক করেন:
-- **১. পাসপোর্টের $12,000 USD ট্রাভেল কোটা অক্ষত রাখা:**
-  • আপনি যদি দেশ থেকেই বিমানের টিকিট (৭৫,০০০+ টাকা) এবং মক্কা-মদিনা বা ব্যাংকক/কুয়ালালামপুরের হোটেল ভাড়া **বাংলাদেশি টাকায় (BDT)** পরিশোধ করেন, তবে আপনার পাসপোর্টের পুরো **$12,000 USD ট্রাভেল কোটা** বিদেশে শপিং, খাবার ও জরুরি খরচের জন্য সম্পূর্ণ অক্ষত থাকে!
+- **১. পাসপোর্টের $18,000 USD ট্রাভেল কোটা অক্ষত রাখা:**
+  • আপনি যদি দেশ থেকেই বিমানের টিকিট (৭৫,০০০+ টাকা) এবং মক্কা-মদিনা বা ব্যাংকক/কুয়ালালামপুরের হোটেল ভাড়া **বাংলাদেশি টাকায় (BDT)** পরিশোধ করেন, তবে আপনার পাসপোর্টের পুরো **$18,000 USD ট্রাভেল কোটা** বিদেশে শপিং, খাবার ও জরুরি খরচের জন্য সম্পূর্ণ অক্ষত থাকে!
 - **২. পাসপোর্ট ভিসা অফিসে জমা থাকলেও বুকিং করা যায়:**
   • আপনার আসল পাসপোর্ট যখন ওমরাহ এজেন্সি বা থাইল্যান্ড/সিঙ্গাপুর ভিসা প্রসেসিংয়ে থাকে, তখন পাসপোর্ট ছাড়া ব্যাংকে গিয়ে ডলার এনডোর্সমেন্ট করা অসম্ভব। অথচ প্রোমোশনাল ফ্লাইটের সিট কয়েক ঘণ্টায় শেষ হয়ে যায়।
 - **৩. ভিসা আবেদন ও ঢাকা এয়ারপোর্ট ইমিগ্রেশনের জন্য ১০০% কনফার্মড ভাউচার:**
@@ -1264,7 +1264,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - যেকোনো দেশীয় ব্যাংক একাউন্ট (NPSB/BEFTN), **bKash** বা **Nagad**-এ পেমেন্ট সম্পন্ন করার সাথে সাথেই আপনার হোয়াটসঅ্যাপ ও ইমেইলে চলে আসবে **যাচাইযোগ্য ৬-ডিজিটের Airline PNR সহ ই-টিকিট, কনফার্মড হোটেল ভাউচার PDF এবং এয়ারপোর্ট পিকআপ কনফার্মেশন**!`,
     internalLinks: [
       { text: "১০ দিনের DIY Umrah BDT বাজেট ক্যালকুলেটর ও হোটেল জোন", path: "/umrah" },
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "মক্কা ও মদিনা হোটেল জোন এবং Haramain বুলেট ট্রেন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
     ],
@@ -1304,7 +1304,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **🇹🇭 থাইল্যান্ড (ব্যাংকক ও পাতায়া):** ঢাকা থেকে **২০১৭ সালের পরের চকচকে, দাগ ও ভাঁজহীন $100 USD নোট** নিন। সুবর্ণভূমি এয়ারপোর্টে মাত্র ২০–৩০ ডলার ভাঙিয়ে বাকি ডলার ব্যাংককের **Pratunam / Ratchadamri এলাকার SuperRich Thailand (সবুজ বা কমলা বুথ)** থেকে ভাঙান—এখানে এশিয়ার সেরা রেট পাওয়া যায়।
 - **🇲🇾 মালয়েশিয়া (কুয়ালালামপুর) ও 🇲🇻 মালদ্বীপ (মাফুশি):** কুয়ালালামপুরে শপিং মল ও Grab-এ কার্ড ব্যবহার করুন এবং নগদ ডলার **Bukit Bintang (Pavilion), Mid Valley বা Masjid India**-তে ভাঙান। আর মালদ্বীপের মাফুশি দ্বীপে স্পিডবোট ($25) ও স্নরকেলিং ট্যুরে ($30) সরাসরি **নগদ USD** গ্রহণ করা হয়।`,
     internalLinks: [
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "ওমরাহর জন্য সেরা শরীয়াহ-সম্মত ইসলামিক ডুয়াল-কারেন্সি কার্ড", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account বনাম সাধারণ Travel Quota ($300 লিমিট সমাধান)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "মক্কা ও মদিনায় বাংলাদেশি হালাল খাবারের হোটেল ও দাম", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
@@ -1486,7 +1486,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
     internalLinks: [
       { text: "Singapore Tourist Visa গাইড (অনুমোদিত এজেন্ট ও LOI V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" },
       { text: "Singapore ৪ দিনের বিস্তারিত BDT খরচ ক্যালকুলেটর", path: "/costs/singapore-costs" },
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "ঢাকা থেকে সেরা ৬টি বাজেট ফ্যামিলি ট্যুর গন্তব্য", path: "/blog/top-budget-family-destinations-from-dhaka" },
     ],
     affiliateCTA: {
@@ -1530,11 +1530,11 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **রান্নাঘরসহ ফ্যামিলি সার্ভিসড অ্যাপার্টমেন্ট (BDT 9,500 – 16,000/রাত):** *Fraser Suites Sukhumvit (Soi 11)* অথবা *Aspira Tropical Residence*।
 
 ৪. বাংলাদেশ ব্যাংকের $10,000+ মেডিকেল কোটা ব্যবহারের নিয়ম
-**বাংলাদেশ ব্যাংকের (bb.org.bd)** নিয়ম অনুযায়ী আপনার সাধারণ **$12,000 USD বার্ষিক ট্রাভেল কোটার** বাইরেও, হাসপাতালের অফিশিয়াল প্রাক্কলিত বিল (Cost Estimate Invoice) দেখিয়ে ব্যাংকের AD শাখা থেকে চিকিৎসার জন্য অতিরিক্ত **USD $10,000+ Medical Quota** কার্ডে বা হাসপাতালের একাউন্টে ছাড় করানো যায়!`,
+**বাংলাদেশ ব্যাংকের (bb.org.bd)** নিয়ম অনুযায়ী আপনার সাধারণ **$18,000 USD বার্ষিক ট্রাভেল কোটার** বাইরেও, হাসপাতালের অফিশিয়াল প্রাক্কলিত বিল (Cost Estimate Invoice) দেখিয়ে ব্যাংকের AD শাখা থেকে চিকিৎসার জন্য অতিরিক্ত **USD $10,000+ Medical Quota** কার্ডে বা হাসপাতালের একাউন্টে ছাড় করানো যায়!`,
     internalLinks: [
       { text: "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
       { text: "ব্যাংককে হালাল খাবারের সেরা জায়গা (Pratunam ও Sukhumvit Soi 3)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে ব্যাংকক ফ্লাইট ও হোটেল বুকিং", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
     ],
     affiliateCTA: {
@@ -1571,7 +1571,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
   • আন্তর্জাতিক প্রোভাইডার **EKTA** থেকে প্রতিদিন মাত্র **$0.99 থেকে $1.80 USD (~BDT 120–220)** খরচে ইনস্যুরেন্স নিলে ২ মিনিটেই ইমেইলে অফিশিয়াল ইংরেজি PDF পলিসি চলে আসে—যা চিকিৎসা খরচ, হারানো লাগেজ ও ফ্লাইট ডিলে কভার করে।`,
     internalLinks: [
       { text: "মদিনায় রিয়াজুল জান্নাতে ঢুকতে লাইভ Nusuk QR কোডের নিয়ম", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
-      { text: "Dual-Currency Card ও $12,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "ইউরোপ, যুক্তরাজ্য ও আমেরিকা ভ্রমণ গাইড", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
       { text: "Travel Tools হাবে eSIM ও EKTA ইনস্যুরেন্স তুলনা করুন", path: "/tools" },
     ],
@@ -1670,7 +1670,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 - **গুরুত্বপূর্ণ টিপস:** নতুন ই-পাসপোর্ট হাতে পাওয়ার সময় পুরনো পাসপোর্টটি *"Cancelled without Prejudice"* সিলসহ ফেরত নিন এবং বিদেশ ভ্রমণের সময় পুরনো ও নতুন পাসপোর্ট একসাথে পিন করে সাথে রাখুন!`,
     internalLinks: [
       { text: "নতুন পাসপোর্টে (Fresh Passport) ৩ ধাপে Travel History তৈরির গাইড", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
-      { text: "নতুন পাসপোর্টে $12,000 ডলার এনডোর্সমেন্ট করার নিয়ম", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "নতুন পাসপোর্টে $18,000 ডলার এনডোর্সমেন্ট করার নিয়ম", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "NID ও ই-পাসপোর্ট দিয়ে সরকারি Hajj রেজিস্ট্রেশন (hajj.gov.bd)", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
     ],
@@ -2119,7 +2119,7 @@ export function getFeaturedGrowthTopics(lang: Language) {
         searchQuery: "“How to get dual-currency card endorsement”",
         title: "Dual-Currency Card ও Passport Dollar Endorsement করার নিয়ম (2026 গাইড)",
         excerpt:
-          "পাসপোর্টে বার্ষিক $12,000 USD Travel Quota এনডোর্সমেন্ট করার নিয়ম, EBL, City Bank ও BRAC কার্ডের সুবিধা, 3D-Secure E-Commerce চালু এবং ৫% DCC চার্জ বাঁচানোর উপায়।",
+          "পাসপোর্টে বার্ষিক $18,000 USD Travel Quota (FE Circular 33) এনডোর্সমেন্ট করার নিয়ম, EBL, City Bank ও BRAC কার্ডের সুবিধা, 3D-Secure E-Commerce চালু এবং ৫% DCC চার্জ বাঁচানোর উপায়।",
         slug: "dual-currency-card-endorsement-bangladesh",
       },
       {
@@ -2159,7 +2159,7 @@ export function getFeaturedGrowthTopics(lang: Language) {
       searchQuery: "“How to get dual-currency card endorsement”",
       title: "How to Get Dual-Currency Card Endorsement (2026 Passport Dollar Quota Guide)",
       excerpt:
-        "Step-by-step guide to the $12,000 annual passport endorsement quota, RFCD vs. Travel Quota cards (EBL, City Bank, BRAC), 3D-Secure activation, and avoiding 5% DCC fees.",
+        "Step-by-step guide to the $18,000 annual passport endorsement quota (Bangladesh Bank FE Circular No. 33), RFCD vs. Travel Quota cards (EBL, City Bank, BRAC), 3D-Secure activation, and avoiding 5% DCC fees.",
       slug: "dual-currency-card-endorsement-bangladesh",
     },
     {

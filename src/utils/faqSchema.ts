@@ -65,7 +65,7 @@ export const LANDING_HOTEL_FAQS: FAQItem[] = [
   },
   {
     question: "Do hotels abroad accept dual-currency cards endorsed against a Bangladeshi passport?",
-    answer: "Yes, major international hotels worldwide accept Visa, Mastercard, and American Express cards endorsed under the Bangladesh Bank annual travel quota ($12,000 per calendar year). Always notify your bank before flying abroad to activate international POS transactions."
+    answer: "Yes, major international hotels worldwide accept Visa, Mastercard, and American Express cards endorsed under the Bangladesh Bank annual travel quota ($18,000 per calendar year under FE/PD-1 Circular No. 33). Always notify your bank before flying abroad to activate international POS transactions."
   }
 ];
 
@@ -95,7 +95,7 @@ export const LANDING_COST_FAQS: FAQItem[] = [
   },
   {
     question: "How much foreign currency can a Bangladeshi citizen endorse per calendar year?",
-    answer: "Under Bangladesh Bank regulations, an adult citizen with a valid passport can endorse up to $12,000 USD per calendar year for private travel ($5,000 for SAARC countries and Myanmar, and $7,000 for other destinations, or up to the full $12,000 combined limit)."
+    answer: "Under Bangladesh Bank regulations (FE/PD-1 Circular No. 33), an adult citizen with a valid passport can endorse up to $18,000 USD per calendar year for private travel across personal dual-currency cards and cash notes."
   },
   {
     question: "What is the most effective way to carry money when traveling abroad from Dhaka?",
@@ -186,7 +186,7 @@ export const SERVICE_TRAVEL_SERVICES_FAQS: FAQItem[] = [
 export const PRE_DEPARTURE_SITEMAP_FAQS: FAQItem[] = [
   {
     question: "What documents are required at Dhaka Airport (DAC) outbound immigration for Bangladeshi travelers?",
-    answer: "Outbound passengers departing Hazrat Shahjalal International Airport (DAC) must present an original Bangladeshi passport with at least 6 months validity beyond the return date, a printed two-way return flight ticket, confirmed hotel booking vouchers, a valid visa or e-Visa printout, profession proof (private office NOC + ID card, government GO, Trade License copy, or Student ID), and endorsed foreign currency (an active dual-currency bank card stamped under the $12,000 annual travel quota and/or USD cash)."
+    answer: "Outbound passengers departing Hazrat Shahjalal International Airport (DAC) must present an original Bangladeshi passport with at least 6 months validity beyond the return date, a printed two-way return flight ticket, confirmed hotel booking vouchers, a valid visa or e-Visa printout, profession proof (private office NOC + ID card, government GO, Trade License copy, or Student ID), and endorsed foreign currency (an active dual-currency bank card stamped under the $18,000 annual travel quota per FE Circular 33 and/or USD cash)."
   },
   {
     question: "How many hours before an international flight should I arrive at Dhaka Airport (DAC)?",
@@ -198,7 +198,7 @@ export const PRE_DEPARTURE_SITEMAP_FAQS: FAQItem[] = [
   },
   {
     question: "How much foreign currency and gold can a Bangladeshi traveler carry through Dhaka Airport customs?",
-    answer: "Adult Bangladeshi passport holders can endorse up to USD $12,000 per calendar year under the Bangladesh Bank private travel quota across a dual-currency Visa/Mastercard and cash USD notes. Returning passengers may bring up to 100 grams of personal gold ornaments and up to 2 mobile phones duty-free through the DAC Green Channel."
+    answer: "Adult Bangladeshi passport holders can endorse up to USD $18,000 per calendar year under the Bangladesh Bank private travel quota (FE/PD-1 Circular No. 33) across a dual-currency Visa/Mastercard and cash USD notes. Returning passengers may bring up to 100 grams of personal gold ornaments and up to 2 mobile phones duty-free through the DAC Green Channel."
   },
   {
     question: "What is the Zamzam water allowance for Bangladeshi Umrah and Hajj pilgrims returning to Dhaka?",

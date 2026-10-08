@@ -965,7 +965,7 @@ function generateDynamicRouteData(originInfo, destInfo) {
     visaNote: `Check ${destCountry} entry & visa rules for your nationality and ensure 6+ months passport validity before flying`,
     visaBadge: `${destCountry} Global Route`,
     bestWindow: `Compare live airlines, 1-stop connections, and multi-city fares for ${origCity} (${origCode}) → ${destCity} (${destCode})`,
-    terminalTip: `Live global route search · Real-time airline inventory powered by URAL White-Label (#22462) & Aviasales Global (#${MARKER_ID})`,
+    terminalTip: 'Live global route search · Real-time airline inventory and verified flight schedules',
     flights: [],
   };
 }
@@ -2734,12 +2734,6 @@ export default function TravelpayoutsWidget({
                     ? '৭২০+ এয়ারলাইন্স ও ট্রাভেল এজেন্সি সরাসরি তুলনা'
                     : '720+ Global Airlines & OTAs Compared Live'}
                 </span>
-                <span className="text-slate-300 hidden sm:inline" aria-hidden="true">·</span>
-                <span>
-                  {isBn
-                    ? 'কোনো লুকানো চার্জ নেই · নতুন ট্যাবে ফলাফল খুলবে'
-                    : 'Zero Hidden Markup · Opens Results in New Tab'}
-                </span>
               </div>
 
               <div className="flex flex-wrap items-center gap-3 shrink-0">
@@ -2865,7 +2859,7 @@ export default function TravelpayoutsWidget({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-brand-navy hover:bg-slate-800 px-3.5 py-2 rounded-lg transition-colors cursor-pointer shadow-2xs"
               >
-                <span>Open URAL White-Label Search</span>
+                <span>{isBn ? 'লাইভ ফ্লাইট সার্চ খুলুন' : 'Open Live Flight Search'}</span>
                 <ExternalLink size={13} className="text-[#F6B73C]" />
               </a>
               <a
@@ -2962,7 +2956,7 @@ export default function TravelpayoutsWidget({
                   Compare Live {committedQuery.origin.city} ({committedQuery.origin.code}) to {committedQuery.destination.city} ({committedQuery.destination.code}) Fares in {currency}
                 </h4>
                 <p className="text-xs text-slate-600 max-w-2xl">
-                  Browse real-time tickets in the embedded URAL White-Label engine below, or launch full-screen results in a new tab with your exact dates ({formatReadableDate(committedQuery.departDate)}{committedQuery.tripType === 'roundtrip' ? ` – ${formatReadableDate(committedQuery.returnDate)}` : ''}) and passenger count.
+                  Browse real-time flight schedules below, or open full-screen search results in a new tab with your exact dates ({formatReadableDate(committedQuery.departDate)}{committedQuery.tripType === 'roundtrip' ? ` – ${formatReadableDate(committedQuery.returnDate)}` : ''}) and passenger count.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-2.5 shrink-0">
@@ -2972,7 +2966,7 @@ export default function TravelpayoutsWidget({
                   rel="noopener noreferrer"
                   className="bg-[#07C369] hover:bg-[#06ad5d] text-white font-bold text-xs px-4 py-3 rounded-xl flex items-center gap-2 shadow-sm transition-colors cursor-pointer"
                 >
-                  <span>Full-Screen URAL White-Label</span>
+                  <span>{isBn ? 'ফুল-স্ক্রিন ফ্লাইট সার্চ' : 'Full-Screen Flight Search'}</span>
                   <ExternalLink size={14} />
                 </a>
                 <a
@@ -3298,7 +3292,7 @@ export default function TravelpayoutsWidget({
                         rel="noopener noreferrer"
                         className="w-full sm:w-auto bg-[#07C369] hover:bg-[#06ad5d] text-white font-bold text-xs px-4 py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer"
                       >
-                        <span>Book on URAL White-Label</span>
+                        <span>{isBn ? 'টিকিট সার্চ ও বুকিং' : 'Search & Book Live Fares'}</span>
                         <ExternalLink size={13} />
                       </a>
                       <a
@@ -3330,8 +3324,8 @@ export default function TravelpayoutsWidget({
               className="text-brand-navy hover:underline font-semibold cursor-pointer"
             >
               {showClassicWhiteLabel || routeMeta.isGlobalLiveOnly
-                ? 'Hide Embedded URAL White-Label Engine'
-                : 'Open Embedded URAL White-Label Engine'}
+                ? isBn ? 'লাইভ ফ্লাইট শিডিউল লুকান' : 'Hide Live Flight Schedule'
+                : isBn ? 'লাইভ ফ্লাইট শিডিউল দেখুন' : 'View Live Flight Schedule'}
             </button>
             <a
               href={uralBrandedWlUrl}
@@ -3350,7 +3344,7 @@ export default function TravelpayoutsWidget({
             <iframe
               ref={wlIframeRef}
               src={`/travelpayouts-wl.html?origin=${committedQuery.origin.code}&destination=${committedQuery.destination.code}&flightSearch=${searchCode}&currency=${currency}`}
-              title="URAL Embedded White-Label Engine"
+              title="Live Flight Search & Booking Engine"
               className="w-full rounded-xl border border-slate-200 bg-white"
               style={{ height: `${wlFrameHeight}px`, width: '100%', display: 'block' }}
             />

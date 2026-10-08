@@ -690,7 +690,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       {
         question: "How do I get a dual-currency card endorsement on a Bangladeshi passport?",
         answer:
-          "Visit an authorized bank branch in Bangladesh with your original valid passport and NID to endorse up to USD $12,000 per calendar year under the Bangladesh Bank travel quota, then enable E-Commerce and 3D-Secure online transactions in your bank app before booking flights or hotels.",
+          "Visit an authorized bank branch in Bangladesh with your original valid passport and NID to endorse up to USD $18,000 per calendar year under the Bangladesh Bank travel quota (FE/PD-1 Circular No. 33), then enable E-Commerce and 3D-Secure online transactions in your bank app before booking flights or hotels.",
       },
       {
         question: "What are the top budget-friendly family destinations from Dhaka?",
@@ -700,7 +700,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       {
         question: "Which countries can Bangladeshi passport holders visit without a prior visa?",
         answer:
-          "Nepal, the Maldives, Sri Lanka (via online ETA), Bhutan and Indonesia issue Visa on Arrival or free entry to Bangladeshi passport holders, so no embassy appointment is needed before departure from Dhaka. Nepal and the Maldives are the cheapest of these to reach from Dhaka (DAC).",
+          "Nepal and the Maldives grant free Visa on Arrival (with free online IMUGA declaration for the Maldives), while Sri Lanka issues an online Electronic Travel Authorization (ETA via eta.gov.lk) before departure. Bhutan requires an entry permit and a Sustainable Development Fee (SDF of Nu. 1,200/night). Note that Indonesia, Thailand, Malaysia, Singapore, and Dubai do NOT grant Visa on Arrival to ordinary Bangladeshi passports and strictly require an advance e-Visa before flying from Dhaka.",
       },
       {
         question: "Is URAL a travel agency that sells tickets?",

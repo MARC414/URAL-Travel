@@ -1891,7 +1891,7 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-6",
     slug: "dual-currency-card-endorsement-bangladesh",
     title: "How to Get Dual-Currency Card Endorsement in Bangladesh (2026 Passport Dollar Endorsement Guide)",
-    summary: "Before you can book international flights, Agoda or Booking.com hotels, Haramain bullet train tickets, or Klook attraction passes from Bangladesh, your bank card must be endorsed against your passport under Bangladesh Bank's USD $12,000 annual personal travel quota. This step-by-step banking guide explains which Bangladeshi banks issue fast dual-currency debit and prepaid cards without credit history (EBL Aqua, City Bank Amex/Visa, BRAC Multi-Currency, MTB, and Islami Bank), what documents to bring for the physical passport stamp, how to unlock the USD e-commerce and 3D-Secure part via your bank app, RFCD vs. Travel Quota accounts, and how to avoid 5% DCC currency conversion traps abroad.",
+    summary: "Before you can book international flights, Agoda or Booking.com hotels, Haramain bullet train tickets, or Klook attraction passes from Bangladesh, your bank card must be endorsed against your passport under Bangladesh Bank's USD $18,000 annual personal travel quota (FE/PD-1 Circular No. 33). This step-by-step banking guide explains which Bangladeshi banks issue fast dual-currency debit and prepaid cards without credit history (EBL Aqua, City Bank Amex/Visa, BRAC Multi-Currency, MTB, and Islami Bank), what documents to bring for the physical passport stamp, how to unlock the USD e-commerce and 3D-Secure part via your bank app, RFCD vs. Travel Quota accounts, and how to avoid 5% DCC currency conversion traps abroad.",
     category: "Banking & Payments",
     date: "September 26, 2026",
     author: "Farhan Momen (Lead Travel Strategist)",
@@ -2276,7 +2276,7 @@ export const BLOG_DATA: BlogPost[] = [
     internalLinks: [
       { text: "Browse Official Europe, UK & USA Skip-the-Line Passes (Tiqets Hub)", path: "/experiences?region=west" },
       { text: "96-Hour Saudi Stopover Visa & US/UK/Schengen Umrah Rules", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
-      { text: "Dual-Currency Card Endorsement ($12,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" }
+      { text: "Dual-Currency Card Endorsement ($18,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" }
     ],
     affiliateCTA: { provider: "tiqets", headline: "Book Instant Mobile Skip-the-Line Tickets for Paris, London, Rome & NYC (Tiqets)", body: "Secure guaranteed timed-entry QR passes for the Louvre, Eiffel Tower, London Eye, Colosseum, and Statue of Liberty with instant confirmation." }
   },
@@ -2284,13 +2284,13 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-28",
     slug: "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
     title: "Best Shariah-Compliant Islamic Dual-Currency Cards in Bangladesh for Umrah & Halal Travel (2026)",
-    summary: "Many devout Bangladeshi Muslims preparing for Umrah, Hajj, or a Halal family holiday want the convenience of booking Haramain High-Speed Bullet Train tickets (sar.hhr.sa), Makkah and Madinah hotels, and international airlines online—without touching a conventional interest-bearing (Riba) credit card. Under Bangladesh Bank's Islamic Banking guidelines and the USD $12,000 annual personal travel quota, several leading Islamic banks and Shariah windows in Dhaka now issue 100% Riba-free Mudaraba and Ujrah-based Dual-Currency Debit, Prepaid, and Khidmah cards. Here is our verified 2026 comparison of the top Shariah-compliant travel cards in Bangladesh, passport endorsement rules, and how to use them in Makkah and Madinah.",
+    summary: "Many devout Bangladeshi Muslims preparing for Umrah, Hajj, or a Halal family holiday want the convenience of booking Haramain High-Speed Bullet Train tickets (sar.hhr.sa), Makkah and Madinah hotels, and international airlines online—without touching a conventional interest-bearing (Riba) credit card. Under Bangladesh Bank's Islamic Banking guidelines and the USD $18,000 annual personal travel quota (FE/PD-1 Circular No. 33), several leading Islamic banks and Shariah windows in Dhaka now issue 100% Riba-free Mudaraba and Ujrah-based Dual-Currency Debit, Prepaid, and Khidmah cards. Here is our verified 2026 comparison of the top Shariah-compliant travel cards in Bangladesh, passport endorsement rules, and how to use them in Makkah and Madinah.",
     category: "Banking & Payments",
     date: "September 27, 2026",
     author: "Farhan Momen (Lead Travel Strategist)",
     readTime: "7 min read",
     internalLinks: [
-      { text: "Complete $12,000 Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Complete $18,000 Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "No Card? Book Flights & Umrah Hotels in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "10-Day DIY Umrah Cost Calculator in BDT", path: "/umrah" },
@@ -2308,7 +2308,7 @@ export const BLOG_DATA: BlogPost[] = [
     author: "Farhan Momen (Lead Travel Strategist)",
     readTime: "7 min read",
     internalLinks: [
-      { text: "Step-by-Step $12,000 Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Step-by-Step $18,000 Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "No Card? Pay in BDT via bKash/Bank Transfer (URAL Desk)", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Cash SAR / USD vs. Card Abroad (5% DCC Fee Guide)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
@@ -2327,7 +2327,7 @@ export const BLOG_DATA: BlogPost[] = [
     readTime: "6 min read",
     internalLinks: [
       { text: "10-Day DIY Umrah Cost Calculator & Hotel Zones", path: "/umrah" },
-      { text: "Dual-Currency Card Endorsement ($12,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Dual-Currency Card Endorsement ($18,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" },
@@ -2345,7 +2345,7 @@ export const BLOG_DATA: BlogPost[] = [
     author: "Farhan Momen (Lead Travel Strategist)",
     readTime: "7 min read",
     internalLinks: [
-      { text: "How to Get Dual-Currency Card Endorsement ($12,000 Quota)", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "How to Get Dual-Currency Card Endorsement ($18,000 Quota)", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account vs. Regular Travel Quota ($300 Cap Fix)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "Bangladeshi Halal Food in Makkah & Madinah (SAR Meal Prices)", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
@@ -2513,7 +2513,7 @@ export const BLOG_DATA: BlogPost[] = [
     readTime: "8 min read",
     internalLinks: [
       { text: "First International Trip on a Fresh e-Passport (3-Step Ladder)", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
-      { text: "How to Get $12,000 Dollar Endorsement on Your New e-Passport", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "How to Get $18,000 Dollar Endorsement on Your New e-Passport", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Official Hajj Registration with NID & e-Passport (hajj.gov.bd)", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
       { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" }

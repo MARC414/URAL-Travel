@@ -128,7 +128,7 @@ export function getPreDepartureFaqSchema(
     "Dhaka Airport (DAC) Pre-Departure Readiness, Baggage & Embassy Emergency Hub FAQs";
   const description =
     options?.description ||
-    "Verified pre-flight readiness answers for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC): immigration documents, NOC/GO rules, $12,000 card endorsement, 7 kg cabin & 20,000 mAh power bank limits, 5L Zamzam allowance, 72-hour digital arrival cards, and overseas Bangladesh Embassy emergency helplines.";
+    "Verified pre-flight readiness answers for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC): immigration documents, NOC/GO rules, $18,000 card endorsement (FE Circular 33), 7 kg cabin & 20,000 mAh power bank limits, 5L Zamzam allowance, 72-hour digital arrival cards, and overseas Bangladesh Embassy emergency helplines.";
 
   const dynamicItems: FAQItem[] = [...PRE_DEPARTURE_SITEMAP_FAQS];
 
