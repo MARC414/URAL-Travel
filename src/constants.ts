@@ -1862,6 +1862,13 @@ export const BLOG_DATA: BlogPost[] = [
     date: "June 15, 2026",
     author: "Fahmida Tasnim (Dhaka Food Blogger & Explorer)",
     readTime: "8 min read",
+    inlineFigure: {
+      imageSrc: "/assets/images/ayutthaya_wat_phra_si_sanphet_chedis_1791427300000-1200.webp",
+      altEn: "Three bell-shaped chedis of Wat Phra Si Sanphet at Ayutthaya under a blue cloudy sky",
+      altBn: "নীল মেঘলা আকাশের নিচে আয়ুতায়ার ওয়াট ফ্রা সি সানফেটের তিনটি চেদি",
+      captionEn: "The three chedis of Wat Phra Si Sanphet in the Ayutthaya Historical Park, the anchor of any day trip from Bangkok.",
+      captionBn: "আয়ুতায়া হিস্টোরিক্যাল পার্কে ওয়াট ফ্রা সি সানফেটের তিনটি চেদি — ব্যাংকক থেকে দিনের ট্রিপের প্রধান আকর্ষণ।",
+    },
     internalLinks: [
       { text: "Travel Creator Resources: The Tools We Actually Use (2026)", path: "/blog/travel-creator-resources" },
       { text: "Dhaka to Bangkok Flight Guide", path: "/flights/dhaka-bangkok" },

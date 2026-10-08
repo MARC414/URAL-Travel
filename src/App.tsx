@@ -474,6 +474,9 @@ const airportDelayBoardImg = "/assets/images/airport_departure_board_delay_claim
 const dhakaAirlinesTarmacImg = "/assets/images/dhaka_airport_widebody_airlines_tarmac_1790520836931-1200.webp";
 
 // Every single blog post (all 41 articles) is mapped to its own 100% unique visual asset (zero repeated images)
+const havanaGranTeatroImg = "/assets/images/havana_gran_teatro_classic_cars_1791427200000-1200.webp";
+const chefchaouenFountainImg = "/assets/images/chefchaouen_blue_fountain_alley_1791427400000-1200.webp";
+
 function getBlogCoverImage(slug: string): string {
   switch (slug) {
     case "umrah-hajj-guide-bangladesh-nusuk-bdt-cost":
@@ -558,6 +561,10 @@ function getBlogCoverImage(slug: string): string {
       return maldivesDestImg;
     case "cheap-flight-booking-hacks-dhaka":
       return blogHeroBannerImg;
+    case "havana-cuba-travel-guide-bangladesh":
+      return havanaGranTeatroImg;
+    case "chefchaouen-morocco-travel-guide-bangladesh":
+      return chefchaouenFountainImg;
     default:
       return heroBgImage;
   }
