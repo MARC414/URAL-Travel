@@ -21,7 +21,7 @@ This document serves as the canonical technical handoff and architectural refere
 All Travelpayouts partner links and promotional campaigns are managed centrally in `src/components/AffiliatePartners.tsx`.
 
 ### Single Source of Truth
-- **`AFFILIATE_LINKS`**: Canonical dictionary of partner `.tpo.li` and short URLs (`aviasales`, `klook`, `tiqets`, `airhelp`, `kkday`, `kiwitaxi`, `welcomePickups`, `airalo`, `qeeq`, `radicalStorage`, `ekta`, `yesim`, `kiwi`, `getTransfer`, `goCity`). **Never hardcode raw `.tpo.li` URLs in UI components**—always import `AFFILIATE_LINKS` and resolve through `resolvePartnerUrl(...)` or `<PartnerLinkButton />`.
+- **`AFFILIATE_LINKS`**: Canonical dictionary of partner `.tpo.li` and short URLs (`aviasales`, `klook`, `tiqets`, `airhelp`, `kkday`, `kiwitaxi`, `welcomePickups`, `airalo`, `qeeq`, `radicalStorage`, `yesim`, `kiwi`, `getTransfer`, `goCity`). **Never hardcode raw `.tpo.li` URLs in UI components**—always import `AFFILIATE_LINKS` and resolve through `resolvePartnerUrl(...)` or `<PartnerLinkButton />`.
 - **`AFFILIATE_OFFER_REGISTRY`**: Maps every partner key to its `status` (`"active" | "paused"`), `offerType` (`"evergreen" | "commission-boost" | "customer-promo"`), `fallbackPartner`, and optional `expiresAt` (`YYYY-MM-DD` evaluated in Bangladesh Standard Time `UTC+06:00`).
 - **Automatic Fallback Behavior (`resolvePartnerUrl`)**: If a partner program is ever paused (`status: "paused"`), `resolvePartnerUrl()` automatically returns the active `fallbackPartner` URL across every CTA button, contextual callout, and prerendered link.
 - **Automatic Promo Expiry (`isPromoActive` & `sanitizeExpiredPromoText`)**:

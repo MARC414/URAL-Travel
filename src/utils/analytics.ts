@@ -59,7 +59,6 @@ export function identifyPartnerFromUrl(url: string): string {
   if (lower.includes("radicalstorage") || lower.includes("radical")) return "Radical Storage";
   if (lower.includes("qeeq")) return "QEEQ Car Rental";
   if (lower.includes("yesim")) return "Yesim eSIM";
-  if (lower.includes("ekta")) return "Ekta Insurance";
   if (lower.includes("kiwi.com")) return "Kiwi.com";
   if (lower.includes("gettransfer")) return "GetTransfer";
   if (lower.includes("gocity")) return "Go City";
@@ -149,7 +148,6 @@ export function initGlobalClickTracking(): () => void {
       href.includes("radicalstorage") ||
       href.includes("qeeq") ||
       href.includes("yesim") ||
-      href.includes("ekta") ||
       href.includes("kiwi.com") ||
       href.includes("gettransfer") ||
       href.includes("gocity") ||

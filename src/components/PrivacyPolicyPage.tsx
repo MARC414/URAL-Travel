@@ -713,11 +713,11 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <p>
               {isBn ? (
                 <>
-                  <strong>FTC গাইডলাইন ও আন্তর্জাতিক নিয়মানুযায়ী স্পষ্ট ঘোষণা:</strong> URAL একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স প্ল্যাটফর্ম। আমাদের সাইটের বেশ কিছু আউটবাউন্ড লিংক ভেরিফায়েড আন্তর্জাতিক পার্টনারদের সাথে যুক্ত (যেমন Travelpayouts, Aviasales, Hotellook, Klook, KKday, Tiqets, Airalo, AirHelp, KiwiTaxi, Welcome Pickups, QEEQ, EKTA, Yesim ও Kiwi.com)।
+                  <strong>FTC গাইডলাইন ও আন্তর্জাতিক নিয়মানুযায়ী স্পষ্ট ঘোষণা:</strong> URAL একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স প্ল্যাটফর্ম। আমাদের সাইটের বেশ কিছু আউটবাউন্ড লিংক ভেরিফায়েড আন্তর্জাতিক পার্টনারদের সাথে যুক্ত (যেমন Travelpayouts, Aviasales, Hotellook, Klook, KKday, Tiqets, Airalo, AirHelp, KiwiTaxi, Welcome Pickups, QEEQ, Yesim ও Kiwi.com)।
                 </>
               ) : (
                 <>
-                  <strong>FTC Compliance &amp; Global Advertising Disclosure:</strong> In full compliance with Federal Trade Commission (FTC) guidelines and international advertising transparency laws, URAL operates an affiliate monetization model. When you click an outbound link to one of our verified partners (including Travelpayouts, Aviasales, Hotellook, Klook, KKday, Tiqets, Airalo, AirHelp, KiwiTaxi, Welcome Pickups, QEEQ, EKTA, Yesim, and Kiwi.com), we may earn a referral commission.
+                  <strong>FTC Compliance &amp; Global Advertising Disclosure:</strong> In full compliance with Federal Trade Commission (FTC) guidelines and international advertising transparency laws, URAL operates an affiliate monetization model. When you click an outbound link to one of our verified partners (including Travelpayouts, Aviasales, Hotellook, Klook, KKday, Tiqets, Airalo, AirHelp, KiwiTaxi, Welcome Pickups, QEEQ, Yesim, and Kiwi.com), we may earn a referral commission.
                 </>
               )}
             </p>

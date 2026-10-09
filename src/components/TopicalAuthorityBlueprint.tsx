@@ -438,8 +438,8 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     id: "bf-01",
     clusterId: "banking-fx",
     funnelStage: "BoFu (High Commercial)",
-    titleEn: "How to Get Dual-Currency Card Endorsement in Bangladesh (2026): $12,000 Passport Quota & 3D-Secure Guide",
-    titleBn: "বাংলাদেশে Dual-Currency Card ও Passport Dollar Endorsement করার নিয়ম (2026): $12,000 কোটা ও ব্যাংক গাইড",
+    titleEn: "How to Get Dual-Currency Card Endorsement in Bangladesh (2026): $18,000 Passport Quota & 3D-Secure Guide",
+    titleBn: "বাংলাদেশে Dual-Currency Card ও Passport Dollar Endorsement করার নিয়ম (2026): $18,000 কোটা ও ব্যাংক গাইড",
     primaryKeyword: "dual currency card endorsement bangladesh",
     secondaryKeywords: ["passport dollar endorsement limit 2026", "ebl aqua prepaid card endorsement", "how to enable ecommerce in brac astha"],
     monthlyIntentSignal: "Massive Search Volume · #1 Pre-Booking Blocker in BD",
@@ -448,10 +448,10 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     customerPsychologyBn:
       "অনলাইন বুকিংয়ের প্রধান বাধা দূর করা: পাসপোর্টে ডলার এনডোর্সমেন্ট ও ব্যাংকের অ্যাপে USD E-Commerce চালু না করলে কোনো বিদেশি সাইটে পেমেন্ট হয় না—তাই এটি সবচেয়ে জরুরি গাইড।",
     aeoDirectAnswerEn:
-      "Every adult Bangladeshi passport holder can endorse up to USD $12,000 per calendar year at any Authorized Dealer (AD) bank branch using their valid passport and NID, then unlock the USD E-Commerce and 3D-Secure toggle in their bank app before paying online.",
+      "Every adult Bangladeshi passport holder can endorse up to USD $18,000 per calendar year at any Authorized Dealer (AD) bank branch using their valid passport and NID, then unlock the USD E-Commerce and 3D-Secure toggle in their bank app before paying online.",
     aeoDirectAnswerBn:
-      "প্রাপ্তবয়স্ক বাংলাদেশি নাগরিকরা পাসপোর্টে বছরে সর্বোচ্চ $12,000 USD এনডোর্স করতে পারেন এবং ব্যাংকের অ্যাপ থেকে USD ও 3D-Secure অন করে অনলাইনে আন্তর্জাতিক পেমেন্ট করতে পারেন।",
-    eavTriples: "Bangladesh Bank Travel Quota (Entity) → Annual Adult Limit (Attribute) → USD $12,000 per Calendar Year (Value)",
+      "প্রাপ্তবয়স্ক বাংলাদেশি নাগরিকরা পাসপোর্টে বছরে সর্বোচ্চ $18,000 USD এনডোর্স করতে পারেন এবং ব্যাংকের অ্যাপ থেকে USD ও 3D-Secure অন করে অনলাইনে আন্তর্জাতিক পেমেন্ট করতে পারেন।",
+    eavTriples: "Bangladesh Bank Travel Quota (Entity) → Annual Adult Limit (Attribute) → USD $18,000 per Calendar Year (Value)",
     targetPath: "/blog/dual-currency-card-endorsement-bangladesh",
     isLiveBlog: true,
   },
@@ -469,7 +469,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     customerPsychologyBn:
       "পবিত্র সফরে সুদ (রিবা) সম্পূর্ণ বর্জন: ধর্মপ্রাণ হাজীরা সাধারণ ক্রেডিট কার্ড ব্যবহার করতে চান না; তারা শরীয়াহ-সম্মত ইসলামিক ডেবিট বা প্রিপেইড কার্ড দিয়ে মক্কার হোটেল ও ট্রেন বুক করতে চান।",
     aeoDirectAnswerEn:
-      "Top Shariah-compliant dual-currency cards in Bangladesh include Islami Bank (IBBL) Dual-Currency Debit & Khidmah Card, City Islamic American Express, EBL Islamic Debit Card, Al-Arafah La-Riba Card, and Standard Chartered Saadiq—all supporting the $12,000 passport travel quota without interest.",
+      "Top Shariah-compliant dual-currency cards in Bangladesh include Islami Bank (IBBL) Dual-Currency Debit & Khidmah Card, City Islamic American Express, EBL Islamic Debit Card, Al-Arafah La-Riba Card, and Standard Chartered Saadiq—all supporting the $18,000 passport travel quota without interest.",
     aeoDirectAnswerBn:
       "ইসলামী ব্যাংক (IBBL) ডুয়াল-কারেন্সি ডেবিট ও খিদমাহ কার্ড, সিটি ইসলামিক অ্যামেক্স, ইবিএল ইসলামিক এবং আল-আরাফাহ লা-রিবা কার্ড দিয়ে সুদমুক্তভাবে ওমরাহর সব অনলাইন পেমেন্ট করা যায়।",
     eavTriples: "Islamic Dual-Currency Debit Card (Entity) → Shariah Mechanism (Attribute) → Mudaraba / Ujrah Zero-Riba Structure (Value)",

@@ -19,7 +19,6 @@ export const AFFILIATE_LINKS = {
   airalo: "https://airalo.tpo.li/mV2QXsXK",
   qeeq: "https://qeeq.tpo.li/nooi5oSG",
   radicalStorage: "https://radicalstorage.tpo.li/7I3EWiUg",
-  ekta: "https://ektatraveling.tpo.li/vl11DEG6",
   yesim: "https://yesim.tpo.li/O8Zvqr73",
   kiwi: "https://kiwi.tpo.li/9isVGzpF",
   getTransfer: "https://gettransfer.tpo.li/sekWRAM1",
@@ -147,7 +146,7 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     status: "active",
     offerType: "customer-promo",
     url: AFFILIATE_LINKS.airhelp,
-    fallbackPartner: "ekta",
+    fallbackPartner: "aviasales",
     expiresAt: AIRHELP_PROMO.expiresAt,
     promoCode: AIRHELP_PROMO.code,
     activeNote: `11% OFF AirHelp+ with code ${AIRHELP_PROMO.code} through ${AIRHELP_PROMO.validUntil}`,
@@ -214,16 +213,6 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     expiresAt: RADICAL_STORAGE_PROMO.expiresAt,
     activeNote: `Boosted 15% partner commission through ${RADICAL_STORAGE_PROMO.commissionBoostValidUntil} (then 8%–10% base rate)`,
     expiredFallbackBehavior: "Keeps permanent link live at base 8%–10% commission; if paused, auto-swaps to Klook"
-  },
-  ekta: {
-    id: "ekta",
-    partnerName: "EKTA Travel Medical Insurance",
-    status: "active",
-    offerType: "evergreen",
-    url: AFFILIATE_LINKS.ekta,
-    fallbackPartner: "airhelp",
-    activeNote: "25% commission · Schengen €30k, Thailand e-Visa & Senior Umrah policies",
-    expiredFallbackBehavior: "Falls back to AirHelp if ever paused"
   },
   yesim: {
     id: "yesim",
@@ -722,102 +711,6 @@ export interface MultiPartnerBlogPlacement {
 }
 
 export const MULTI_PARTNER_BLOG_PLACEMENTS: Record<string, MultiPartnerBlogPlacement> = {
-  "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": {
-    primaryPartner: "ekta",
-    secondaryPartner: "yesim",
-    badgeEn: "🛡️ EMBASSY VISA INSURANCE + MOBILE APP ESIM",
-    badgeBn: "🛡️ ভিসা ইনস্যুরেন্স (EKTA) + মোবাইল অ্যাপ eSIM (Yesim)",
-    headlineEn: "Need an Instant English Travel Insurance PDF for Your Visa or an App-Based eSIM?",
-    headlineBn: "ভিসার জন্য তাৎক্ষণিক ইংরেজি ইনস্যুরেন্স PDF বা আনলিমিটেড ট্রাভেল eSIM প্রয়োজন?",
-    bodyBeforeAnchorEn:
-      "For Schengen Europe (€30,000 coverage), Thailand e-Visa (thaievisa.go.th), Malaysia, and senior Umrah pilgrims, you can ",
-    anchorTextEn:
-      "download an official EKTA Travel Medical Insurance policy online in 2 minutes (from $0.99/day)",
-    bodyAfterAnchorEn:
-      " and pair it with a Yesim Travel eSIM (supports both iOS/Android App & web activation while keeping your Bangladeshi SIM active for free banking OTPs).",
-    bodyBeforeAnchorBn:
-      "শেনজেন ইউরোপ (€30,000 কভারেজ), থাইল্যান্ড ই-ভিসা, মালয়েশিয়া ও বয়স্ক ওমরাহ যাত্রীদের জন্য ",
-    anchorTextBn:
-      "মাত্র ২ মিনিটে EKTA থেকে অফিশিয়াল ইংরেজি Travel Medical Insurance PDF ($0.99/দিন থেকে) ডাউনলোড করুন",
-    bodyAfterAnchorBn:
-      " এবং ব্যাংকের OTP সচল রেখে দ্রুত ইন্টারনেটের জন্য Yesim Travel eSIM অ্যাপ ব্যবহার করুন।",
-    primaryButtonEn: "Get EKTA Travel Insurance ($0.99/day)",
-    primaryButtonBn: "EKTA ট্রাভেল ইনস্যুরেন্স নিন ($0.99/দিন)",
-    secondaryButtonEn: "Compare Yesim App eSIM Plans",
-    secondaryButtonBn: "Yesim eSIM প্ল্যান দেখুন"
-  },
-  "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": {
-    primaryPartner: "ekta",
-    secondaryPartner: "yesim",
-    badgeEn: "🛡️ THAIEVISA.GO.TH INSURANCE & CONNECTIVITY",
-    badgeBn: "🛡️ থাইল্যান্ড ই-ভিসা ইনস্যুরেন্স ও কানেক্টিভিটি",
-    headlineEn: "Uploading Supporting Documents on thaievisa.go.th? Add Verifiable Travel Insurance",
-    headlineBn: "thaievisa.go.th পোর্টালে ডকুমেন্ট আপলোড করছেন? ভেরিফায়েড ট্রাভেল ইনস্যুরেন্স যুক্ত করুন",
-    bodyBeforeAnchorEn:
-      "Strengthen your Thailand e-Visa application and protect your family against hospital bills or flight delays in Bangkok and Phuket: ",
-    anchorTextEn:
-      "get an instant English PDF policy from EKTA Travel Insurance (from $0.99/day)",
-    bodyAfterAnchorEn:
-      " and pre-install a Yesim Thailand eSIM before flying from Dhaka.",
-    bodyBeforeAnchorBn:
-      "থাইল্যান্ড ই-ভিসা আবেদন শক্তিশালী করতে এবং ব্যাংকক/ফুকেটে চিকিৎসা ও ফ্লাইট বিলম্বের ঝুঁকি এড়াতে ",
-    anchorTextBn:
-      "EKTA থেকে তাৎক্ষণিক ইংরেজি Travel Insurance PDF পলিসি নিন",
-    bodyAfterAnchorBn:
-      " এবং দেশ ছাড়ার আগেই Yesim Thailand eSIM ইনস্টল করে নিন।",
-    primaryButtonEn: "Download EKTA Thailand Visa Insurance",
-    primaryButtonBn: "EKTA থাইল্যান্ড ভিসা ইনস্যুরেন্স নিন",
-    secondaryButtonEn: "Get Yesim Thailand eSIM",
-    secondaryButtonBn: "Yesim থাইল্যান্ড eSIM নিন"
-  },
-  "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
-    primaryPartner: "ekta",
-    secondaryPartner: "getTransfer",
-    badgeEn: "🛡️ SENIOR UMRAH MEDICAL INSURANCE & PRIVATE FAMILY VANS",
-    badgeBn: "🛡️ বয়স্ক বাবা-মায়ের ওমরাহ ইনস্যুরেন্স ও প্রাইভেট ভ্যান",
-    headlineEn: "Traveling with Parents Aged 60+? Protect Their Health & Book Door-to-Door Haramain Vans",
-    headlineBn: "৬০+ বছর বয়সী বাবা-মাকে নিয়ে ওমরাহ যাচ্ছেন? সিনিয়র ইনস্যুরেন্স ও প্রাইভেট গাড়ি নিশ্চিত করুন",
-    bodyBeforeAnchorEn:
-      "Standard visa medical cover does not reimburse flight delays, lost wheelchairs/luggage, or extended clinic care. Before flying from Dhaka, ",
-    anchorTextEn:
-      "secure an EKTA Senior Travel & Medical Insurance policy (covers travelers up to age 85+)",
-    bodyAfterAnchorEn:
-      " and book a spacious GMC Yukon or Toyota HiAce directly to your Makkah hotel door via GetTransfer.",
-    bodyBeforeAnchorBn:
-      "বয়স্ক বাবা-মায়ের ফ্লাইট ডিলে, হারানো লাগেজ বা জরুরি চিকিৎসার ঝুঁকি এড়াতে ঢাকা ছাড়ার আগেই ",
-    anchorTextBn:
-      "EKTA Senior Travel & Medical Insurance পলিসি নিন",
-    bodyAfterAnchorBn:
-      " এবং জেদ্দা এয়ারপোর্ট থেকে সরাসরি মক্কার হোটেলের গেটে যেতে GetTransfer-এ প্রাইভেট GMC/HiAce বুক করুন।",
-    primaryButtonEn: "Get EKTA Senior Medical Insurance",
-    primaryButtonBn: "EKTA সিনিয়র মেডিকেল ইনস্যুরেন্স নিন",
-    secondaryButtonEn: "Book Family Van on GetTransfer",
-    secondaryButtonBn: "GetTransfer-এ প্রাইভেট গাড়ি বুক করুন"
-  },
-  "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh": {
-    primaryPartner: "ekta",
-    secondaryPartner: "getTransfer",
-    badgeEn: "🏥 BANGKOK MEDICAL TRIP INSURANCE & HOSPITAL PICKUP",
-    badgeBn: "🏥 ব্যাংকক মেডিকেল ট্রিপ ইনস্যুরেন্স ও হাসপাতাল পিকআপ",
-    headlineEn: "Flying from Dhaka to Bumrungrad or Bangkok Hospital? Book Private Airport-to-Clinic Pickup",
-    headlineBn: "বামরুনগ্রাদ বা ব্যাংকক হাসপাতালে যাচ্ছেন? প্রাইভেট পিকআপ ও ট্রাভেল ইনস্যুরেন্স নিন",
-    bodyBeforeAnchorEn:
-      "Avoid standing in Suvarnabhumi taxi queues with a patient after landing: ",
-    anchorTextEn:
-      "pre-book a private wheelchair-friendly sedan or van to Sukhumvit Soi 3 on GetTransfer",
-    bodyAfterAnchorEn:
-      " and protect accompanying family members with an EKTA Thailand Travel Insurance policy.",
-    bodyBeforeAnchorBn:
-      "রোগী নিয়ে সুবর্ণভূমি এয়ারপোর্টে ট্যাক্সির লাইনে না দাঁড়িয়ে ",
-    anchorTextBn:
-      "GetTransfer-এ সরাসরি বামরুনগ্রাদ বা সুখুমভিত হোটেলে যাওয়ার প্রাইভেট গাড়ি প্রি-বুক করুন",
-    bodyAfterAnchorBn:
-      " এবং সফরসঙ্গীদের জন্য EKTA ট্রাভেল ইনস্যুরেন্স সাথে রাখুন।",
-    primaryButtonEn: "Get EKTA Travel Insurance",
-    primaryButtonBn: "EKTA ট্রাভেল ইনস্যুরেন্স নিন",
-    secondaryButtonEn: "Book Airport-to-Hospital Pickup (GetTransfer)",
-    secondaryButtonBn: "GetTransfer প্রাইভেট পিকআপ বুক করুন"
-  },
   "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": {
     primaryPartner: "getTransfer",
     secondaryPartner: "yesim",
@@ -844,7 +737,6 @@ export const MULTI_PARTNER_BLOG_PLACEMENTS: Record<string, MultiPartnerBlogPlace
   },
   "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": {
     primaryPartner: "getTransfer",
-    secondaryPartner: "ekta",
     badgeEn: "🚐 JEDDAH AIRPORT TO MAKKAH HOTEL DOOR TRANSFER",
     badgeBn: "🚐 জেদ্দা এয়ারপোর্ট থেকে মক্কা হোটেল প্রাইভেট ট্রান্সফার",
     headlineEn: "Arriving at Jeddah Terminal 1 or North Terminal with Family Luggage?",
@@ -863,8 +755,6 @@ export const MULTI_PARTNER_BLOG_PLACEMENTS: Record<string, MultiPartnerBlogPlace
       " এবং সরাসরি হোটেলের গেটে নামুন।",
     primaryButtonEn: "Book Private Haramain Transfer (GetTransfer)",
     primaryButtonBn: "GetTransfer প্রাইভেট ট্রান্সফার বুক করুন",
-    secondaryButtonEn: "EKTA Umrah Travel Insurance",
-    secondaryButtonBn: "EKTA ওমরাহ ইনস্যুরেন্স"
   },
   "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide": {
     primaryPartner: "kiwi",
@@ -940,7 +830,6 @@ export const MULTI_PARTNER_BLOG_PLACEMENTS: Record<string, MultiPartnerBlogPlace
   },
   "cheap-flight-booking-hacks-dhaka": {
     primaryPartner: "kiwi",
-    secondaryPartner: "ekta",
     badgeEn: "✈️ VIRTUAL INTERLINING & SELF-TRANSFER FLIGHT HACKS",
     badgeBn: "✈️ মাল্টি-এয়ারলাইন কম্বো ফ্লাইট হ্যাক (Kiwi.com)",
     headlineEn: "Unlock Hidden Self-Transfer & Multi-Airline Combos from Dhaka on Kiwi.com",
@@ -956,17 +845,14 @@ export const MULTI_PARTNER_BLOG_PLACEMENTS: Record<string, MultiPartnerBlogPlace
     anchorTextBn:
       "Kiwi.com-এ ভিন্ন দুটি এয়ারলাইন্সের কানেক্টিং ও মাল্টি-সিটি ভাড়া তুলনা করুন",
     bodyAfterAnchorBn:
-      " এবং ভিসা আবেদনের জন্য EKTA ট্রাভেল ইনস্যুরেন্স সংগ্রহে রাখুন।",
+      " এবং সাশ্রয়ী কম্বো রুটের বিকল্প দেখে নিন।",
     primaryButtonEn: "Compare Flight Hacks on Kiwi.com",
     primaryButtonBn: "Kiwi.com-এ সস্তা ফ্লাইট খুঁজুন",
-    secondaryButtonEn: "Get EKTA Visa Travel Insurance",
-    secondaryButtonBn: "EKTA ভিসা ইনস্যুরেন্স নিন"
   },
   "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide": {
     primaryPartner: "goCity",
-    secondaryPartner: "ekta",
-    badgeEn: "🎟️ ALL-INCLUSIVE MULTI-ATTRACTION PASS (GO CITY) + SCHENGEN INSURANCE",
-    badgeBn: "🎟️ অল-ইনক্লুসিভ সিটি পাস (Go City) + শেনজেন ইনস্যুরেন্স",
+    badgeEn: "🎟️ ALL-INCLUSIVE MULTI-ATTRACTION PASS (GO CITY)",
+    badgeBn: "🎟️ অল-ইনক্লুসিভ সিটি পাস (Go City)",
     headlineEn: "Visiting 3+ Landmarks in London, Paris, Rome, or New York? Save up to 50% with Go City",
     headlineBn: "লন্ডন, প্যারিস, রোম বা নিউ ইয়র্কে ৩টির বেশি দর্শনীয় স্থান ঘুরবেন? Go City Pass নিন",
     bodyBeforeAnchorEn:
@@ -974,17 +860,15 @@ export const MULTI_PARTNER_BLOG_PLACEMENTS: Record<string, MultiPartnerBlogPlace
     anchorTextEn:
       "bundle 3 to 10+ top landmarks on one Go City All-Inclusive or Explorer Pass to save up to 50%",
     bodyAfterAnchorEn:
-      "—and download €30,000 Schengen-compliant medical insurance via EKTA.",
+      ".",
     bodyBeforeAnchorBn:
       "একক টিকিটের জন্য Tiqets সেরা হলেও লন্ডন, প্যারিস, রোম বা নিউ ইয়র্কে একাধিক জায়গা ঘুরতে ",
     anchorTextBn:
       "Go City All-Inclusive বা Explorer Pass নিয়ে এক পাসে ৫০% পর্যন্ত সাশ্রয় করুন",
     bodyAfterAnchorBn:
-      " এবং শেনজেন ভিসার জন্য €30,000 কভারেজের EKTA ইনস্যুরেন্স ডাউনলোড করুন।",
+      "।",
     primaryButtonEn: "Explore Go City All-Inclusive Passes",
     primaryButtonBn: "Go City অল-ইনক্লুসিভ পাস দেখুন",
-    secondaryButtonEn: "EKTA €30,000 Schengen Insurance",
-    secondaryButtonBn: "EKTA শেনজেন ইনস্যুরেন্স"
   },
   "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide": {
     primaryPartner: "goCity",
@@ -1096,112 +980,6 @@ export function MultiPartnerBlogCallout({
             variant="light"
           />
         )}
-      </div>
-    </aside>
-  );
-}
-
-/**
- * Contextual Travel Medical Insurance & eSIM Callout for `/visa` and `/visa/:id` pages.
- */
-export function EktaInsuranceCallout({
-  countryName,
-  lang = "en"
-}: {
-  countryName?: string;
-  lang?: "en" | "bn";
-}) {
-  const isBn = lang === "bn";
-  const ektaHref = resolvePartnerUrl(AFFILIATE_LINKS.ekta);
-  const yesimHref = resolvePartnerUrl(AFFILIATE_LINKS.yesim);
-  const targetLabel = countryName || (isBn ? "আন্তর্জাতিক" : "International");
-
-  return (
-    <aside
-      aria-label={isBn ? "ভিসা ট্রাভেল মেডিকেল ইনস্যুরেন্স ও eSIM" : "Embassy Visa Travel Medical Insurance & eSIM"}
-      className="bg-slate-900 text-white border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-3.5 text-left"
-    >
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className="text-[10px] font-mono font-bold uppercase tracking-wider bg-[#F6B73C] text-brand-navy px-2.5 py-1 rounded-md">
-          {isBn
-            ? `🛡️ ${targetLabel} ভিসা চেকলিস্ট: মেডিকেল ইনস্যুরেন্স ও eSIM`
-            : `🛡️ ${targetLabel} Visa Document Requirement: Travel Insurance & eSIM`}
-        </span>
-        <span className="text-[11px] font-mono text-emerald-300">
-          {isBn ? "২ মিনিটে অফিশিয়াল ইংরেজি PDF পলিসি · $0.99/দিন থেকে" : "Instant English PDF Policy in 2 Mins · From $0.99/day"}
-        </span>
-      </div>
-
-      <h3 className="font-serif text-base sm:text-lg font-bold text-white leading-snug">
-        {isBn
-          ? `${targetLabel} ভিসা আবেদন ও ইমিগ্রেশনের জন্য ভেরিফায়েড Travel Medical Insurance PDF প্রয়োজন?`
-          : `Need Verifiable Travel Medical Insurance for Your ${targetLabel} Visa & Airport Immigration?`}
-      </h3>
-
-      <p className="text-xs sm:text-[13.5px] text-slate-300 leading-relaxed">
-        {isBn ? (
-          <>
-            দূতাবাস ও ই-ভিসা পোর্টালে (থাইল্যান্ড, মালয়েশিয়া, শেনজেন ইউরোপ, সিঙ্গাপুর ও দুবাই) গ্রহণযোগ্য{" "}
-            <a
-              href={ektaHref}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="text-[#F6B73C] font-semibold underline underline-offset-2"
-            >
-              EKTA Travel Medical Insurance পলিসি ($0.99/দিন থেকে, €30,000–$50,000 কভারেজ)
-            </a>{" "}
-            মাত্র ২ মিনিটে ইমেইলে ডাউনলোড করুন—এবং এয়ারপোর্টে নেমেই ইন্টারনেট পেতে{" "}
-            <a
-              href={yesimHref}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="text-cyan-300 font-semibold underline underline-offset-2"
-            >
-              Yesim Travel eSIM অ্যাপ
-            </a>{" "}
-            ইনস্টল করে নিন।
-          </>
-        ) : (
-          <>
-            Download an embassy-compliant{" "}
-            <a
-              href={ektaHref}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="text-[#F6B73C] font-semibold underline underline-offset-2"
-            >
-              EKTA Travel Medical Insurance English PDF policy (from $0.99/day with €30,000–$50,000 medical &amp; flight delay coverage)
-            </a>{" "}
-            in 2 minutes for your visa submission, and pre-install a{" "}
-            <a
-              href={yesimHref}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="text-cyan-300 font-semibold underline underline-offset-2"
-            >
-              Yesim Travel eSIM (App &amp; Web supported)
-            </a>{" "}
-            so your phone works the moment you land.
-          </>
-        )}
-      </p>
-
-      <div className="pt-1 flex flex-wrap items-center gap-2.5">
-        <PartnerLinkButton
-          href={AFFILIATE_LINKS.ekta}
-          label={isBn ? "EKTA ভিসা ইনস্যুরেন্স নিন ($0.99/দিন)" : "Get EKTA Visa Insurance PDF ($0.99/day)"}
-          variant="dark"
-        />
-        <PartnerLinkButton
-          href={AFFILIATE_LINKS.yesim}
-          label={isBn ? "Yesim eSIM প্ল্যান দেখুন" : "Get Yesim Travel eSIM"}
-          variant="light"
-        />
-        <PartnerLinkButton
-          href={AFFILIATE_LINKS.airalo}
-          label={isBn ? "Airalo eSIM তুলনা করুন" : "Compare Airalo eSIM"}
-          variant="light"
-        />
       </div>
     </aside>
   );

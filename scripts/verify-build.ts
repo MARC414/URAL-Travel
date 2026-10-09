@@ -414,7 +414,7 @@ for (const file of distHtmlFiles) {
   if (!html.includes('id="root"')) continue;
   fontChecked++;
   const rel = path.relative(DIST_DIR, file);
-  const isBn = rel.startsWith(`bn${path.sep}`) || rel === "bn.html";
+  const isBn = rel.startsWith(`bn${path.sep}`) || rel === `bn${path.sep}index.html`;
   const hasNoto = html.includes('href="/fonts/noto-sans-bengali-400-v1.woff2"');
   const hasInter = html.includes('href="/fonts/inter-400-v1.woff2"');
   if (isBn && !hasNoto) fontProblems.push(`${rel}: Bengali page without Noto preload`);

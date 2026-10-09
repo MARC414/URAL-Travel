@@ -704,7 +704,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       {
         question: "Which countries can Bangladeshi passport holders visit without a prior visa?",
         answer:
-          "Nepal and the Maldives grant free Visa on Arrival (with free online IMUGA declaration for the Maldives), while Sri Lanka issues an online Electronic Travel Authorization (ETA via eta.gov.lk) before departure. Bhutan requires an entry permit and a Sustainable Development Fee (SDF of Nu. 1,200/night). Note that Indonesia, Thailand, Malaysia, Singapore, and Dubai do NOT grant Visa on Arrival to ordinary Bangladeshi passports and strictly require an advance e-Visa before flying from Dhaka.",
+          "Nepal and the Maldives grant free Visa on Arrival (with free online IMUGA declaration for the Maldives), while Sri Lanka issues an online Electronic Travel Authorization (ETA via eta.gov.lk) before departure. Bhutan requires an entry permit and a Sustainable Development Fee (SDF of Nu. 1,200/night). Note that Indonesia, Thailand, Malaysia, and Singapore do NOT grant Visa on Arrival to ordinary Bangladeshi passports, so an advance visa is required before flying from Dhaka. Indonesia's e-Visa is generally open to Bangladeshi applicants only through a local sponsor or guarantor, so most travellers apply for an embassy visa. Dubai's visa-on-arrival rules for Bangladeshi passports are conditional and change often, so confirm them with the UAE authorities before you book.",
       },
       {
         question: "Is URAL a travel agency that sells tickets?",
@@ -1054,9 +1054,9 @@ function buildAllRoutes(): PrerenderRoute[] {
           <ol>${v.stepByStep.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
           ${renderVisaRouteContext(v.id)}
           ${renderVisaApplicationGuidance()}
-          <section aria-labelledby="visa-travel-insurance-esim">
-            <h2 id="visa-travel-insurance-esim">${escapeHtml(v.country)} Visa Travel Medical Insurance &amp; eSIM</h2>
-            <p>Download an embassy-compliant <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.ekta))}" target="_blank" rel="noopener noreferrer sponsored">EKTA Travel Medical Insurance English PDF policy (from $0.99/day)</a> for your ${escapeHtml(v.country)} visa checklist, pre-install a <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.yesim))}" target="_blank" rel="noopener noreferrer sponsored">Yesim Travel eSIM (App &amp; Web)</a>, and book private airport pickup via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.getTransfer))}" target="_blank" rel="noopener noreferrer sponsored">GetTransfer.com</a>.</p>
+          <section aria-labelledby="visa-esim-transfer">
+            <h2 id="visa-esim-transfer">${escapeHtml(v.country)} eSIM &amp; Airport Transfer</h2>
+            <p>Pre-install a <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.yesim))}" target="_blank" rel="noopener noreferrer sponsored">Yesim Travel eSIM (App &amp; Web)</a> before you fly for your ${escapeHtml(v.country)} trip, and book private airport pickup via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.getTransfer))}" target="_blank" rel="noopener noreferrer sponsored">GetTransfer.com</a>.</p>
           </section>
           ${renderVisaOfficialSources(v.id)}
           ${renderLandingFaqs("visa-guide-faqs", `${v.country} visa questions for Bangladeshi travelers`, vFaq)}
@@ -1274,7 +1274,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         <p>Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and Kuala Lumpur.</p>
         <section aria-labelledby="luggage-storage-tip">
           <h2 id="luggage-storage-tip">Museum Bag-Ban Rule, Go City All-Inclusive &amp; Explorer Passes &amp; Luggage Storage</h2>
-          <p>Major European, UK, and US attractions (Louvre, Eiffel Tower, Colosseum, Vatican, British Museum, and Statue of Liberty) strictly prohibit suitcases and large backpacks inside security. Store your bags for ~€5/day per bag (with €3,000 security guarantee) at verified hotels and shops near major stations via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">Radical Storage luggage storage network</a>, bundle 3 to 10+ city landmarks with <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.goCity))}" target="_blank" rel="noopener noreferrer sponsored">Go City All-Inclusive &amp; Explorer Passes</a>, book verified global hotels and sightseeing tours on <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klook))}" target="_blank" rel="noopener noreferrer sponsored">Klook Global Hotels &amp; Activities</a>, and download <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.ekta))}" target="_blank" rel="noopener noreferrer sponsored">EKTA €30,000 Schengen Travel Insurance</a>.</p>
+          <p>Major European, UK, and US attractions (Louvre, Eiffel Tower, Colosseum, Vatican, British Museum, and Statue of Liberty) strictly prohibit suitcases and large backpacks inside security. Store your bags for ~€5/day per bag (with €3,000 security guarantee) at verified hotels and shops near major stations via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">Radical Storage luggage storage network</a>, bundle 3 to 10+ city landmarks with <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.goCity))}" target="_blank" rel="noopener noreferrer sponsored">Go City All-Inclusive &amp; Explorer Passes</a>, book verified global hotels and sightseeing tours on <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klook))}" target="_blank" rel="noopener noreferrer sponsored">Klook Global Hotels &amp; Activities</a>.</p>
         </section>
       </article>
     `,
@@ -2559,6 +2559,13 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
 
     if (r.routePath === "/") {
       fs.writeFileSync(path.join(DIST_DIR, "index.html"), pageHtml, "utf8");
+    } else if (r.routePath === "/bn") {
+      // The Bengali home is served as a directory index so that /bn/ (the
+      // canonical and sitemap URL) returns 200 directly. A flat bn.html made
+      // Cloudflare Pages redirect /bn/ -> /bn, contradicting the canonical.
+      const bnDir = path.join(DIST_DIR, "bn");
+      fs.mkdirSync(bnDir, { recursive: true });
+      fs.writeFileSync(path.join(bnDir, "index.html"), pageHtml, "utf8");
     } else {
       const segments = r.routePath.split("/").filter(Boolean);
       const fileName = `${segments.pop()}.html`;

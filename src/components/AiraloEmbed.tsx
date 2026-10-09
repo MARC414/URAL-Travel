@@ -1,5 +1,5 @@
 import React, { useState, useId } from "react";
-import { ExternalLink, Wifi, Globe, Loader2, ShieldCheck } from "lucide-react";
+import { ExternalLink, Wifi, Globe, Loader2 } from "lucide-react";
 
 export function AiraloEmbed() {
   const uid = useId();
@@ -23,7 +23,7 @@ export function AiraloEmbed() {
           <Wifi size={18} />
         </div>
         <div>
-          <h4 className="font-serif font-black text-sm text-slate-900">Travel eSIM (Airalo &amp; Yesim) + EKTA Insurance</h4>
+          <h4 className="font-serif font-black text-sm text-slate-900">Travel eSIM (Airalo &amp; Yesim)</h4>
           <p className="text-[10px] text-slate-500 uppercase font-mono tracking-wider">Instant QR Activation • Keep BD SIM for Bank OTPs</p>
         </div>
       </div>
@@ -86,25 +86,6 @@ export function AiraloEmbed() {
           </a>
         </div>
       </form>
-
-      {/* Contextual EKTA Travel Medical Insurance Bar ($0.99/day for Schengen, Thailand e-Visa & Elderly Umrah) */}
-      <div className="pt-2.5 border-t border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-        <div className="flex items-start gap-1.5 text-[11px] text-slate-700">
-          <ShieldCheck size={14} className="text-emerald-600 shrink-0 mt-0.5" />
-          <span>
-            Need <strong>Embassy-Compliant Travel Medical Insurance</strong> (Schengen, Thailand e-Visa, or Umrah Senior Coverage)?
-          </span>
-        </div>
-        <a
-          href="https://ektatraveling.tpo.li/vl11DEG6"
-          target="_blank"
-          rel="noopener noreferrer sponsored"
-          className="inline-flex items-center justify-center gap-1 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[11px] px-3 py-1.5 rounded-lg transition-colors shrink-0 whitespace-nowrap"
-        >
-          <span>EKTA Insurance ($0.99/day)</span>
-          <ExternalLink size={10} />
-        </a>
-      </div>
     </div>
   );
 }
