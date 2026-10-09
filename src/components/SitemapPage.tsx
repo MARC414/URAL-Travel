@@ -348,7 +348,6 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
     () => (lang === "bn" && bnContent ? bnContent.getLocalizedBlogs(lang) : BLOG_DATA),
     [lang, bnContent]
   );
-  const localizedBlogCount = localizedBlogs.length.toLocaleString(isBn ? "bn-BD" : "en-US");
 
   const uncheckedChecklistItems = useMemo(
     () =>
@@ -1056,7 +1055,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
               }}
               className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
             >
-              📖 {isBn ? `সবগুলো ${localizedBlogCount}টি ট্রাভেল ব্লগ ও গাইড` : `All ${localizedBlogCount} Travel Blog Guides`}
+              📖 {isBn ? "সব ট্রাভেল ব্লগ ও গাইড" : "All Travel Blog Guides"}
             </a>
             <a
               href="/tools?tab=airhelp"
@@ -1144,13 +1143,13 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
         <div className="space-y-1">
           <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
             {isBn
-              ? `📚 সম্পূর্ণ সাইট ডিরেক্টরি (${localizedBlogCount}টি গাইড ও ৪২টি হাব পেজ)`
-              : `📚 COMPLETE CRAWLABLE DIRECTORY · ALL ${localizedBlogCount} BLOG GUIDES & 42 HUB PAGES`}
+              ? "📚 সম্পূর্ণ সাইট ডিরেক্টরি (ব্লগ গাইড ও হাব পেজ)"
+              : "📚 COMPLETE CRAWLABLE DIRECTORY · BLOG GUIDES & HUB PAGES"}
           </span>
           <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
             {isBn
-              ? `বাংলাদেশি ভ্রমণকারীদের জন্য আমাদের সবগুলো ${localizedBlogCount}টি গাইডের সরাসরি লিংক`
-              : `All ${localizedBlogCount} Bangladesh Outbound Travel & Umrah Guides (Direct Anchor Index)`}
+              ? "বাংলাদেশি ভ্রমণকারীদের জন্য সব গাইডের সরাসরি লিংক"
+              : "Bangladesh Outbound Travel & Umrah Guides (Direct Anchor Index)"}
           </h2>
           <p className="text-xs text-slate-500">
             {isBn
@@ -1160,7 +1159,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
         </div>
 
         <nav
-          aria-label={`All ${localizedBlogCount} Bangladesh Travel Blog Guides`}
+          aria-label="All Bangladesh Travel Blog Guides"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"
         >
           {localizedBlogs.map((post, idx) => {

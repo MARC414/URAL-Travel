@@ -1665,6 +1665,7 @@ export default function App() {
         name: seoTitle,
         description: seoDescription,
         inLanguage: pageLanguage,
+        includeNumberOfItems: false,
         items: localizedBlogs.map((p) => ({
           name: p.title,
           url: siteUrl(`/blog/${p.slug}`, lang),

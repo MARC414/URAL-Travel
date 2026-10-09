@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { ArrowRight, BookOpen, Compass, HelpCircle, Layers, Search } from "lucide-react";
-import { BLOG_DATA } from "../constants";
 import { Language } from "../translations";
 
 export interface TopicalBlogNode {
@@ -783,7 +782,6 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
   const isBn = lang === "bn";
   const formatCount = (count: number) =>
     count.toLocaleString(isBn ? "bn-BD" : "en-US");
-  const publishedGuideCount = formatCount(BLOG_DATA.length);
   const coreTopicCount = formatCount(CORE_TOPIC_COUNT);
   const outboundTopicCount = formatCount(OUTBOUND_TOPIC_COUNT);
   const liveMappedTopicCount = formatCount(LIVE_MAPPED_TOPIC_COUNT);
@@ -821,8 +819,8 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
             <span aria-hidden="true">·</span>
             <span>
               {isBn
-                ? `${formatCount(SEMANTIC_CLUSTER_COUNT)}টি সেমান্টিক ক্লাস্টার · ${publishedGuideCount}টি প্রকাশিত ব্লগ গাইড`
-                : `${SEMANTIC_CLUSTER_COUNT} Semantic Clusters · ${publishedGuideCount} Published Blog Guides`}
+                ? `${formatCount(SEMANTIC_CLUSTER_COUNT)}টি সেমান্টিক ক্লাস্টার · ব্লগ গাইড`
+                : `${SEMANTIC_CLUSTER_COUNT} Semantic Clusters · Blog Guides`}
             </span>
             <span aria-hidden="true">·</span>
             <span>

@@ -1462,15 +1462,15 @@ const blogHubItemList = getSeoSchemaGraph(blogHubHtml).find((node) =>
   hasSchemaType(node, "ItemList")
 );
 const blogHubItems = blogHubItemList?.itemListElement;
-const blogHubCountIsCorrect =
-  blogHubItemList?.numberOfItems === BLOG_DATA.length &&
+const blogHubListIsCompleteWithoutTotal =
+  blogHubItemList?.numberOfItems === undefined &&
   Array.isArray(blogHubItems) &&
   blogHubItems.length === BLOG_DATA.length;
 check(
-  blogHubCountIsCorrect,
-  blogHubCountIsCorrect
-    ? `blog CollectionPage ItemList matches all ${BLOG_DATA.length} published posts`
-    : `blog CollectionPage ItemList does not match BLOG_DATA (${BLOG_DATA.length} posts)`
+  blogHubListIsCompleteWithoutTotal,
+  blogHubListIsCompleteWithoutTotal
+    ? "blog CollectionPage lists every guide without an explicit total"
+    : "blog CollectionPage should list every guide and omit numberOfItems"
 );
 
 const homepageHtml = distIndexHtml ?? "";
@@ -1496,18 +1496,20 @@ const homepageBlogSlugs = new Set(
 const missingHomepageBlogLinks = BLOG_DATA.filter((post) => !homepageBlogSlugs.has(post.slug)).map(
   (post) => post.slug
 );
+const homepageMentionsBlogCount =
+  /\b\d+\s+(?:practical\s+)?travel guides\b/i.test(websiteDescription) ||
+  /\bbrowse\s+\d+\s+(?:practical\s+)?travel guides\b/i.test(homepageHtml) ||
+  /\bAll\s+\d+\s+Bangladesh Outbound Travel &amp; Umrah Blog Guides\b/i.test(homepageHtml) ||
+  /<h2>\s*\d+\s+Bangladesh Outbound Travel &amp; Umrah Guides\s*<\/h2>/i.test(homepageHtml);
 const homepageBlogIndexIsCorrect =
-  websiteDescription.includes(`${BLOG_DATA.length} practical travel guides`) &&
-  homepageHtml.includes(`browse ${BLOG_DATA.length} practical travel guides`) &&
-  homepageHtml.includes(`All ${BLOG_DATA.length} Bangladesh Outbound Travel &amp; Umrah Blog Guides`) &&
-  homepageHtml.includes(`<h2>${BLOG_DATA.length} Bangladesh Outbound Travel &amp; Umrah Guides</h2>`) &&
+  !homepageMentionsBlogCount &&
   missingHomepageBlogLinks.length === 0 &&
   homepageBlogSlugs.size === BLOG_DATA.length;
 check(
   homepageBlogIndexIsCorrect,
   homepageBlogIndexIsCorrect
-    ? `homepage WebSite schema, copy, and crawlable directory match all ${BLOG_DATA.length} guides`
-    : `homepage guide count or crawlable directory does not match BLOG_DATA (${BLOG_DATA.length}); ` +
+    ? "homepage schema/copy omit the blog total while the crawlable directory retains every guide"
+    : `homepage still mentions the blog total or the crawlable directory is incomplete; ` +
         `missing links: ${missingHomepageBlogLinks.slice(0, 3).join(", ") || "none"}`
 );
 

@@ -285,8 +285,16 @@ export function collectionPageSchema(options: {
   description: string;
   items: Array<{ name: string; url: string; description?: string }>;
   inLanguage?: string;
+  includeNumberOfItems?: boolean;
 }) {
-  const { url, name, description, items, inLanguage = "en-BD" } = options;
+  const {
+    url,
+    name,
+    description,
+    items,
+    inLanguage = "en-BD",
+    includeNumberOfItems = true,
+  } = options;
   return {
     "@type": "CollectionPage",
     "@id": `${url}#webpage`,
@@ -300,7 +308,7 @@ export function collectionPageSchema(options: {
     mainEntity: {
       "@type": "ItemList",
       itemListOrder: "https://schema.org/ItemListOrderAscending",
-      numberOfItems: items.length,
+      ...(includeNumberOfItems ? { numberOfItems: items.length } : {}),
       itemListElement: items.map((item, idx) => ({
         "@type": "ListItem",
         position: idx + 1,

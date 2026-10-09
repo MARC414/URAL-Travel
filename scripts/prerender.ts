@@ -730,7 +730,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     extraGraphNodes: [homeFaq],
     bodyHtml: `
       <h1>URAL — Flights, Hotels, Umrah &amp; Visa Guides for Bangladeshi Travelers</h1>
-      <p>Compare cheap international flights from Dhaka (DAC), check official e-Visa checklists, plan DIY Umrah &amp; Hajj in BDT, and explore ${BLOG_DATA.length} verified travel guides for Bangladeshi passport holders.</p>
+      <p>Compare cheap international flights from Dhaka (DAC), check official e-Visa checklists, plan DIY Umrah &amp; Hajj in BDT, and explore verified travel guides for Bangladeshi passport holders.</p>
     `,
   });
 
@@ -1335,7 +1335,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     bodyHtml: `
       <article>
         <h1>Dhaka Airport (DAC) Pre-Departure Readiness Checklist &amp; Complete 83-Page Sitemap</h1>
-        <p>Interactive pre-flight checklist for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC), cabin &amp; 5L Zamzam baggage rules, Bangladesh Embassy emergency helplines abroad, and direct links to all ${BLOG_DATA.length} travel guides.</p>
+        <p>Interactive pre-flight checklist for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC), cabin &amp; 5L Zamzam baggage rules, Bangladesh Embassy emergency helplines abroad, and direct links to the travel guides.</p>
         ${renderLandingFaqs("sitemap-predeparture-faqs", "Dhaka Airport pre-departure and baggage questions", sitemapFaqSchema)}
       </article>
     `,
@@ -1446,6 +1446,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         url: `${BASE_URL}/blog`,
         name: blogHubTitle,
         description: blogHubDesc,
+        includeNumberOfItems: false,
         items: BLOG_DATA.map((p) => ({
           name: p.title,
           url: `${BASE_URL}/blog/${p.slug}`,
@@ -2161,6 +2162,7 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           name: copy.title,
           description: copy.description,
           inLanguage: "bn-BD",
+          includeNumberOfItems: false,
           items: getLocalizedBlogs("bn").map((p) => ({
             name: p.title,
             url: siteUrl(`/blog/${p.slug}`, "bn"),
