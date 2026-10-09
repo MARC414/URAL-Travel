@@ -33,8 +33,6 @@ import { FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, DESTINATIONS_DATA, TRIP_COSTS_DAT
 
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
-import { TrustpilotReviews } from "./components/TrustpilotReviews";
-import { TravelEssentials } from "./components/TravelEssentials";
 import {
   KiwitaxiTransferWidget,
   WelcomePickupsWidget,
@@ -163,6 +161,18 @@ const AirHelpWidget = React.lazy(() =>
 );
 const KKdayPromoBanner = React.lazy(() =>
   import("./components/KKdayPromoBanner").then((m) => ({ default: m.KKdayPromoBanner }))
+);
+// Below-the-fold section widgets. TrustpilotReviews is a mid-page band and
+// TravelEssentials renders inside hotel/destination/cost sections — neither is
+// above the fold on load, so they leave the eager index chunk. (TopBarWhatsApp /
+// LanguageSwitcher / ConsentBanner stay eager — they ARE above the fold or
+// legal-critical; WhatsAppSupport shares TopBarWhatsApp's module, so it stays
+// eager too rather than splitting a ~1 KB submodule.)
+const TrustpilotReviews = React.lazy(() =>
+  import("./components/TrustpilotReviews").then((m) => ({ default: m.TrustpilotReviews }))
+);
+const TravelEssentials = React.lazy(() =>
+  import("./components/TravelEssentials").then((m) => ({ default: m.TravelEssentials }))
 );
 
 interface TravelpayoutsSkeletonProps {
@@ -3304,7 +3314,9 @@ export default function App() {
             </div>
 
             {/* 🟦 SECTION 4.25: UNIFIED TABBED TRAVEL ESSENTIALS HUB */}
-            <TravelEssentials country="Thailand, Malaysia, Singapore, Maldives, Nepal & UAE" lang={lang} />
+            <React.Suspense fallback={null}>
+              <TravelEssentials country="Thailand, Malaysia, Singapore, Maldives, Nepal & UAE" lang={lang} />
+            </React.Suspense>
 
             {/* 🟦 INTERACTIVE TOOLS DESK PANEL (Aesthetic calculation tools) */}
             <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 space-y-6">
@@ -3439,7 +3451,9 @@ export default function App() {
             </div>
 
             {/* 🟦 SECTION 4.5: TRUSTPILOT TESTIMONIALS */}
-            <TrustpilotReviews />
+            <React.Suspense fallback={null}>
+              <TrustpilotReviews />
+            </React.Suspense>
 
 
 
@@ -4013,12 +4027,14 @@ export default function App() {
                     </div>
 
                     {/* 🚕 Unified Airport Transfer & Travel Essentials Hub */}
-                    <TravelEssentials
-                      country={activeHotel.city}
-                      defaultTab="transfers"
-                      compactHeader
-                      lang={lang}
-                    />
+                    <React.Suspense fallback={null}>
+                      <TravelEssentials
+                        country={activeHotel.city}
+                        defaultTab="transfers"
+                        compactHeader
+                        lang={lang}
+                      />
+                    </React.Suspense>
 
                     {/* Flight & Visa Loop linkups */}
                     <div id="hotel-internal-loop" className="bg-brand-navy/5 border border-brand-navy/15 p-5 rounded-xl space-y-3">
@@ -4514,7 +4530,9 @@ export default function App() {
                         </div>
 
                         {/* 🚗 4. UNIFIED TABBED TRAVEL ESSENTIALS (Welcome Pickups, Kiwitaxi, Klook, Airalo, QEEQ) */}
-                        <TravelEssentials country="Dubai, UAE" />
+                        <React.Suspense fallback={null}>
+                          <TravelEssentials country="Dubai, UAE" />
+                        </React.Suspense>
 
                         {/* 💡 5. TRAVEL INSIGHTS SECTION */}
                         <div id="dubai-insights" className="bg-brand-navy/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
@@ -4830,7 +4848,9 @@ export default function App() {
                         </div>
 
                         {/* 🚗 TRAVEL ESSENTIALS & SERVICES (Taxis, eSIMs, Rentals, Activities) */}
-                        <TravelEssentials country={activeDes.country} />
+                        <React.Suspense fallback={null}>
+                          <TravelEssentials country={activeDes.country} />
+                        </React.Suspense>
 
                         {/* 6. FLIGHT PRICE / DEAL INSIGHT SECTION */}
                         <div id="dest-flight-insights" className="bg-brand-navy/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
@@ -5125,12 +5145,14 @@ export default function App() {
                           )}
                         </div>
 
-                        <TravelEssentials
-                          country={activeCost.country}
-                          defaultTab="transfers"
-                          compactHeader
-                          lang={lang}
-                        />
+                        <React.Suspense fallback={null}>
+                          <TravelEssentials
+                            country={activeCost.country}
+                            defaultTab="transfers"
+                            compactHeader
+                            lang={lang}
+                          />
+                        </React.Suspense>
                       </div>
                     </div>
 
@@ -5703,7 +5725,9 @@ export default function App() {
                 )}
               </div>
 
-              <TravelEssentials country="Saudi Arabia & Asia" defaultTab="transfers" compactHeader lang={lang} />
+              <React.Suspense fallback={null}>
+                <TravelEssentials country="Saudi Arabia & Asia" defaultTab="transfers" compactHeader lang={lang} />
+              </React.Suspense>
 
               <TravelIntelligence
                 pageTitle={
