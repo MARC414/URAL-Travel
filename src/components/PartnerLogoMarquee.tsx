@@ -1,452 +1,549 @@
-import React from "react";
-import { ExternalLink, Sparkles, ShieldCheck } from "lucide-react";
-import {
-  AFFILIATE_LINKS,
-  KKDAY_PROMO,
-  isPromoActive,
-  resolvePartnerUrl,
-} from "./AffiliatePartners";
+import React, { useState } from "react";
+import { ExternalLink, Pause, Plane, Play } from "lucide-react";
+import { AFFILIATE_LINKS, resolvePartnerUrl } from "./AffiliatePartners";
 import { Language } from "../translations";
 
 interface PartnerLogoMarqueeProps {
   lang?: Language;
+  /** Kept for the existing App call-site API; partner links stay outbound. */
   onNavigate?: (path: string) => void;
 }
 
 interface PartnerItem {
   id: string;
   name: string;
+  wordmark: string;
+  logoSrc: string;
   roleEn: string;
   roleBn: string;
   href: string;
   brandColor: string;
-  badge?: {
-    textEn: string;
-    textBn: string;
-    route?: string;
-  };
-  renderOfficialLogo: () => React.ReactNode;
 }
 
 /**
- * PartnerLogoMarquee
+ * Travelpayouts partner wordmark carousel.
  *
- * Professional circular-badge partner carousel with authentic, accurate vector SVG logos.
- * Auto-scrolls at a slow, fluid, readable pace (75s cycle) with pause-on-hover.
- * Positioned in a soft, pale section directly beneath the Hero statistics bar.
+ * Uses the partner artwork supplied under public/assets/partners rather than
+ * hand-drawn lookalikes. HotelLook currently has a supplied PNG; use an SVG
+ * only when an authorized vector is available.
  */
-export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({
-  lang = "en",
-  onNavigate,
-}) => {
+export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "en" }) => {
   const isBn = lang === "bn";
-  const kkdaySaleActive = isPromoActive(KKDAY_PROMO.expiresAt);
+  const [isPaused, setIsPaused] = useState(false);
 
-  // 14 verified, official travel inventory providers — authentic vector marks
   const partners: PartnerItem[] = [
     {
       id: "klook",
       name: "Klook",
-      roleEn: "Tours & Attractions",
+      wordmark: "klook",
+      logoSrc: "/assets/partners/klook.svg",
+      roleEn: "Tours & attractions",
       roleBn: "ট্যুর ও অ্যাক্টিভিটি",
       href: resolvePartnerUrl(AFFILIATE_LINKS.klook),
       brandColor: "#FF5B00",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official Klook logo">
-          {/* Official Klook iconic orange splash / dual-ring symbol */}
-          <circle cx="50" cy="50" r="46" fill="#FF5B00" />
-          <path
-            d="M34 26v48h9.5V54.5l14 19.5H70L53.5 50.8 68.5 26H56.5L43.5 45.5V26H34z"
-            fill="#FFFFFF"
-          />
-          {/* Characteristic Klook playful dot / curve element */}
-          <circle cx="72" cy="30" r="6" fill="#00B894" />
-        </svg>
-      ),
     },
     {
       id: "kkday",
       name: "KKday",
-      roleEn: "Rail & Passes",
-      roleBn: "রেল ও ট্রাভেল পাস",
+      wordmark: "KKday",
+      logoSrc: "/assets/partners/kkday.svg",
+      roleEn: "Tours & rail passes",
+      roleBn: "ট্যুর ও রেল পাস",
       href: resolvePartnerUrl(AFFILIATE_LINKS.kkday),
-      brandColor: "#00C1B6",
-      badge: kkdaySaleActive
-        ? {
-            textEn: "30% OFF",
-            textBn: "৩০% ছাড়",
-            route: "/blog/kkday-10-10-winter-sale-japan-tours-passes-guide",
-          }
-        : undefined,
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official KKday logo">
-          {/* Official KKday signature bright cyan teal circle badge */}
-          <circle cx="50" cy="50" r="46" fill="#00C1B6" />
-          {/* Official Double K vector typography mark */}
-          <g fill="#FFFFFF">
-            <path d="M26 30v40h7V52.8l11.2 17.2h8.8L39.8 49.5 51.5 30h-8.8L33 46V30h-7z" />
-            <path d="M54 30v40h6.5V52.8l10.5 17.2H80L68.8 49.5 80 30h-8.5L60.5 46V30H54z" />
-          </g>
-        </svg>
-      ),
+      brandColor: "#008D86",
     },
     {
       id: "aviasales",
       name: "Aviasales",
-      roleEn: "Global Flights",
-      roleBn: "গ্লোবাল ফ্লাইট মেটা",
+      wordmark: "aviasales",
+      logoSrc: "/assets/partners/aviasales.svg",
+      roleEn: "Flight search",
+      roleBn: "ফ্লাইট সার্চ",
       href: resolvePartnerUrl(AFFILIATE_LINKS.aviasales),
       brandColor: "#1E60F2",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official Aviasales logo">
-          {/* Official Aviasales royal blue roundel */}
-          <circle cx="50" cy="50" r="46" fill="#1E60F2" />
-          {/* Official Aviasales supersonic aircraft silhouette */}
-          <path
-            d="M20 52l58-20-33 40-5-14-15-4-5-2z"
-            fill="#FFFFFF"
-          />
-          <path
-            d="M45 72l-4-14 37-26-33 40z"
-            fill="#DCE6FD"
-            opacity="0.8"
-          />
-        </svg>
-      ),
     },
     {
       id: "kiwi",
       name: "Kiwi.com",
-      roleEn: "Virtual Interlining",
+      wordmark: "kiwi.com",
+      logoSrc: "/assets/partners/kiwi.com.svg",
+      roleEn: "Flight combinations",
       roleBn: "মাল্টি-সিটি ফ্লাইট",
       href: resolvePartnerUrl(AFFILIATE_LINKS.kiwi),
-      brandColor: "#00A99D",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official Kiwi.com logo">
-          {/* Official Kiwi.com iconic split concentric lime-and-deep-teal fruit emblem */}
-          <circle cx="50" cy="50" r="46" fill="#D2F643" />
-          <circle cx="50" cy="50" r="28" fill="#00A99D" />
-          <circle cx="50" cy="50" r="14" fill="#FFFFFF" />
-          <circle cx="50" cy="50" r="6" fill="#00A99D" />
-        </svg>
-      ),
+      brandColor: "#008B80",
     },
     {
       id: "tiqets",
       name: "Tiqets",
-      roleEn: "Museum Passes",
-      roleBn: "মিউজিয়াম ও টাওয়ার পাস",
+      wordmark: "tiqets",
+      logoSrc: "/assets/partners/tiqets.svg",
+      roleEn: "Attraction tickets",
+      roleBn: "আকর্ষণ ও মিউজিয়াম টিকিট",
       href: resolvePartnerUrl(AFFILIATE_LINKS.tiqets),
       brandColor: "#2800A0",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official Tiqets logo">
-          {/* Official Tiqets deep royal indigo badge */}
-          <circle cx="50" cy="50" r="46" fill="#2800A0" />
-          {/* Official Tiqets neon orange ticket-notched geometry */}
-          <rect x="25" y="32" width="50" height="36" rx="6" fill="#FF5733" />
-          {/* Notch ticket cuts */}
-          <circle cx="25" cy="50" r="6" fill="#2800A0" />
-          <circle cx="75" cy="50" r="6" fill="#2800A0" />
-          {/* Internal barcode line accents */}
-          <rect x="36" y="42" width="4" height="16" fill="#FFFFFF" />
-          <rect x="44" y="42" width="6" height="16" fill="#FFFFFF" />
-          <rect x="54" y="42" width="3" height="16" fill="#FFFFFF" />
-          <rect x="61" y="42" width="5" height="16" fill="#FFFFFF" />
-        </svg>
-      ),
     },
     {
       id: "airhelp",
       name: "AirHelp",
-      roleEn: "Delay Compensation",
-      roleBn: "ফ্লাইট ক্ষতিপূরণ (€600)",
+      wordmark: "AirHelp",
+      logoSrc: "/assets/partners/airhelp.svg",
+      roleEn: "Flight disruption help",
+      roleBn: "ফ্লাইট ক্ষতিপূরণ সহায়তা",
       href: resolvePartnerUrl(AFFILIATE_LINKS.airhelp),
-      brandColor: "#EE3124",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official AirHelp logo">
-          {/* Official AirHelp deep corporate navy emblem */}
-          <circle cx="50" cy="50" r="46" fill="#0E233D" />
-          {/* Official AirHelp iconic bright red dynamic flight checkmark */}
-          <path
-            d="M32 50l12 14 26-28"
-            stroke="#EE3124"
-            strokeWidth="9"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-          />
-        </svg>
-      ),
+      brandColor: "#D92D24",
     },
     {
       id: "airalo",
       name: "Airalo",
-      roleEn: "Global Travel eSIM",
-      roleBn: "আন্তর্জাতিক ট্রাভেল ই-সিম",
+      wordmark: "airalo",
+      logoSrc: "/assets/partners/Airalo.svg",
+      roleEn: "Travel eSIM",
+      roleBn: "ট্রাভেল eSIM",
       href: resolvePartnerUrl(AFFILIATE_LINKS.airalo),
-      brandColor: "#FF4545",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official Airalo logo">
-          {/* Official Airalo coral red roundel */}
-          <circle cx="50" cy="50" r="46" fill="#FF4545" />
-          {/* Official Airalo SIM card chip & interconnected geometric letter 'A' */}
-          <path
-            d="M30 70L50 28l20 42H58L50 52l-8 18H30z"
-            fill="#FFFFFF"
-          />
-          <circle cx="50" cy="40" r="4" fill="#FF4545" />
-        </svg>
-      ),
+      brandColor: "#E74848",
     },
     {
       id: "yesim",
       name: "Yesim",
-      roleEn: "Unlimited eSIM",
-      roleBn: "আনলিমিটেড ডাটা ই-সিম",
+      wordmark: "yesim",
+      logoSrc: "/assets/partners/yesim.svg",
+      roleEn: "Travel eSIM",
+      roleBn: "ট্রাভেল eSIM",
       href: resolvePartnerUrl(AFFILIATE_LINKS.yesim),
-      brandColor: "#22C55E",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official Yesim logo">
-          {/* Official Yesim dark slate roundel with vibrant electric green check/Y */}
-          <circle cx="50" cy="50" r="46" fill="#121826" />
-          {/* Yesim stylized green antenna beacon */}
-          <path
-            d="M30 32l20 24v18h8V56l20-24H66L54 46 42 32H30z"
-            fill="#22C55E"
-          />
-        </svg>
-      ),
+      brandColor: "#168442",
     },
     {
       id: "hotellook",
       name: "Hotellook",
-      roleEn: "Worldwide Hotels",
-      roleBn: "বিশ্বব্যাপী হোটেল বুকিং",
+      wordmark: "hotellook",
+      logoSrc: "/assets/partners/hotellook-logo.png",
+      roleEn: "Hotel search",
+      roleBn: "হোটেল সার্চ",
       href: "https://search.hotellook.com/?marker=675992&trs=540277",
-      brandColor: "#2693FF",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official Hotellook logo">
-          {/* Official Hotellook sky-blue circular badge */}
-          <circle cx="50" cy="50" r="46" fill="#2693FF" />
-          {/* Clean architectural hotel structure & bed silhouette */}
-          <path
-            d="M28 64V36h10v12h24V36h10v28h-10V54H38v10H28z"
-            fill="#FFFFFF"
-          />
-          <circle cx="36" cy="44" r="3.5" fill="#2693FF" />
-        </svg>
-      ),
+      brandColor: "#287C3A",
     },
     {
       id: "kiwitaxi",
       name: "Kiwitaxi",
-      roleEn: "Airport Chauffeur",
-      roleBn: "এয়ারপোর্ট প্রাইভেট ট্যাক্সি",
+      wordmark: "kiwitaxi",
+      logoSrc: "/assets/partners/kiwitaxi.svg",
+      roleEn: "Airport transfers",
+      roleBn: "এয়ারপোর্ট ট্রান্সফার",
       href: resolvePartnerUrl(AFFILIATE_LINKS.kiwitaxi),
-      brandColor: "#FF6200",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official Kiwitaxi logo">
-          {/* Official Kiwitaxi vibrant orange roundel */}
-          <circle cx="50" cy="50" r="46" fill="#FF6200" />
-          {/* Official Kiwitaxi taxicab checkerboard silhouette */}
-          <path
-            d="M26 60l5-20h38l5 20H26z"
-            fill="#FFFFFF"
-          />
-          <rect x="42" y="32" width="16" height="6" rx="2" fill="#FFFFFF" />
-          <circle cx="37" cy="62" r="5" fill="#FF6200" />
-          <circle cx="63" cy="62" r="5" fill="#FF6200" />
-        </svg>
-      ),
+      brandColor: "#E85B00",
     },
     {
       id: "welcomePickups",
       name: "Welcome Pickups",
-      roleEn: "VIP Meet & Greet",
-      roleBn: "এয়ারপোর্ট ভিআইপি পিকআপ",
+      wordmark: "Welcome Pickups",
+      logoSrc: "/assets/partners/welcome-pickups.svg",
+      roleEn: "Airport meet & greet",
+      roleBn: "এয়ারপোর্ট মিট অ্যান্ড গ্রিট",
       href: resolvePartnerUrl(AFFILIATE_LINKS.welcomePickups),
-      brandColor: "#00B4A0",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official Welcome Pickups logo">
-          {/* Official Welcome Pickups emerald teal badge */}
-          <circle cx="50" cy="50" r="46" fill="#00B4A0" />
-          {/* Warm concierge 'W' welcome chevron */}
-          <path
-            d="M26 36l12 30 12-22 12 22 12-30h-9l-7 20-8-16-8 16-7-20h-9z"
-            fill="#FFFFFF"
-          />
-        </svg>
-      ),
+      brandColor: "#007F73",
     },
     {
       id: "qeeq",
       name: "QEEQ",
-      roleEn: "Worldwide Car Rental",
-      roleBn: "গ্লোবাল রেন্ট-এ-কার",
+      wordmark: "QEEQ",
+      logoSrc: "/assets/partners/qeeq.svg",
+      roleEn: "Car rental search",
+      roleBn: "গাড়ি ভাড়া সার্চ",
       href: resolvePartnerUrl(AFFILIATE_LINKS.qeeq),
-      brandColor: "#FF9900",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official QEEQ logo">
-          {/* Official QEEQ sunset amber roundel */}
-          <circle cx="50" cy="50" r="46" fill="#FF9900" />
-          {/* Stylized geometric Q mark with speed-line slash */}
-          <circle cx="50" cy="48" r="18" fill="none" stroke="#FFFFFF" strokeWidth="8" />
-          <path d="M58 56l14 16" stroke="#FFFFFF" strokeWidth="8" strokeLinecap="round" />
-        </svg>
-      ),
+      brandColor: "#B66A00",
     },
     {
       id: "radicalStorage",
       name: "Radical Storage",
-      roleEn: "Luggage Storage",
+      wordmark: "Radical Storage",
+      logoSrc: "/assets/partners/radical-storage.svg",
+      roleEn: "Luggage storage",
       roleBn: "লাগেজ স্টোরেজ",
       href: resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage),
-      brandColor: "#FF5E36",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official Radical Storage logo">
-          {/* Official Radical Storage coral roundel with locker padlock symbol */}
-          <circle cx="50" cy="50" r="46" fill="#FF5E36" />
-          <rect x="32" y="44" width="36" height="28" rx="6" fill="#FFFFFF" />
-          <path
-            d="M40 44V34a10 10 0 0 1 20 0v10"
-            stroke="#FFFFFF"
-            strokeWidth="7"
-            strokeLinecap="round"
-            fill="none"
-          />
-          <circle cx="50" cy="56" r="3.5" fill="#FF5E36" />
-        </svg>
-      ),
+      brandColor: "#D94F2D",
     },
     {
       id: "goCity",
       name: "Go City",
-      roleEn: "Multi-Attraction Pass",
-      roleBn: "মাল্টি-সিটি পাস (৫০% ছাড়)",
+      wordmark: "Go City",
+      logoSrc: "/assets/partners/go-city.svg",
+      roleEn: "City attraction passes",
+      roleBn: "সিটি অ্যাট্রাকশন পাস",
       href: resolvePartnerUrl(AFFILIATE_LINKS.goCity),
-      brandColor: "#00E5A3",
-      renderOfficialLogo: () => (
-        <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-9 sm:h-9" aria-label="Official Go City logo">
-          {/* Official Go City deep space navy with neon teal-green circular ring */}
-          <circle cx="50" cy="50" r="46" fill="#0D1322" />
-          <circle cx="50" cy="50" r="36" fill="none" stroke="#00E5A3" strokeWidth="7" />
-          {/* Dynamic 'GO' wordmark */}
-          <text
-            x="50"
-            y="58"
-            fontFamily="system-ui, -apple-system, sans-serif"
-            fontSize="26"
-            fontWeight="900"
-            fill="#FFFFFF"
-            textAnchor="middle"
-            letterSpacing="-1"
-          >
-            GO
-          </text>
-        </svg>
-      ),
+      brandColor: "#0B1426",
     },
   ];
 
-  // Duplicate for seamless 360-degree looping without visual gaps
-  const marqueeItems = [...partners, ...partners];
+  const renderPartner = (partner: PartnerItem, duplicate = false) => (
+    <a
+      key={`${partner.id}-${duplicate ? "duplicate" : "primary"}`}
+      href={partner.href}
+      target="_blank"
+      rel="noopener noreferrer sponsored"
+      tabIndex={duplicate ? -1 : undefined}
+      aria-label={
+        duplicate
+          ? undefined
+          : `${partner.name} — ${isBn ? partner.roleBn : partner.roleEn}; affiliate link opens in a new tab`
+      }
+      title={`${partner.name} · ${isBn ? partner.roleBn : partner.roleEn}`}
+      className="partner-marquee__item"
+      style={{ "--partner-color": partner.brandColor } as React.CSSProperties}
+    >
+      <span className="partner-marquee__logo-lockup" aria-hidden="true">
+        <img
+          src={partner.logoSrc}
+          alt=""
+          width={44}
+          height={44}
+          loading="lazy"
+          decoding="async"
+          className="partner-marquee__logo"
+        />
+        <span className={`partner-marquee__wordmark partner-marquee__wordmark--${partner.id}`}>
+          {partner.wordmark}
+        </span>
+      </span>
+      <span className="partner-marquee__role">
+        {isBn ? partner.roleBn : partner.roleEn}
+      </span>
+      <ExternalLink size={12} className="partner-marquee__external" aria-hidden="true" />
+    </a>
+  );
 
   return (
     <section
-      id="verified-booking-partners-section"
-      aria-label="Verified Global Travel Partners"
-      className="w-full bg-slate-50/75 border-y border-slate-200/70 py-4 sm:py-5 px-4 sm:px-6 lg:px-8 overflow-hidden transition-all"
+      id="travel-booking-partners-section"
+      aria-label={isBn ? "ট্রাভেল বুকিং পার্টনার" : "Travel booking partners"}
+      aria-roledescription="carousel"
+      className={`partner-marquee ${isPaused ? "partner-marquee--paused" : ""}`}
     >
-      <div className="max-w-7xl mx-auto space-y-3">
-        {/* Subtle, pale header strip with high-trust social proof */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/50 pb-2.5">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-slate-700 uppercase tracking-wider bg-slate-200/60 border border-slate-300/60 px-2 py-0.5 rounded-md">
-              <ShieldCheck size={12} className="text-emerald-600" />
-              <span>{isBn ? "অফিসিয়াল বুকিং নেটওয়ার্ক" : "Official Booking Partners"}</span>
+      <div className="partner-marquee__inner">
+        <div className="partner-marquee__header">
+          <div className="partner-marquee__heading">
+            <span className="partner-marquee__eyebrow">
+              <Plane size={13} aria-hidden="true" />
+              {isBn ? "Travelpayouts পার্টনার নেটওয়ার্ক" : "Travelpayouts partner network"}
             </span>
-            <span className="text-slate-300 text-xs hidden sm:inline">·</span>
-            <span className="text-xs text-slate-600 font-sans font-medium">
+            <p className="partner-marquee__description">
               {isBn
-                ? "Travelpayouts সার্টিফাইড আন্তর্জাতিক ইনভেন্টরি (ID: 675992)"
-                : "Verified direct affiliate connections powered by Travelpayouts (ID: 675992)"}
-            </span>
+                ? "ফ্লাইট, হোটেল, ট্রান্সফার ও ট্রাভেল এসেনশিয়ালস"
+                : "Flights, stays, transfers and travel essentials"}
+            </p>
           </div>
 
-          <div className="flex items-center gap-2 self-start sm:self-auto">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[11px] font-mono text-slate-500 font-medium">
-              {isBn ? "১৪টি যাচাইকৃত ব্র্যান্ড" : "14 Verified Global Brands"}
+          <div className="partner-marquee__controls">
+            <span className="partner-marquee__count">
+              {isBn ? "১৪টি পার্টনার · একসাথে ৫টি" : "14 partners · 5 shown at once"}
             </span>
+            <button
+              type="button"
+              className="partner-marquee__toggle"
+              onClick={() => setIsPaused((paused) => !paused)}
+              aria-pressed={isPaused}
+              aria-label={
+                isPaused
+                  ? isBn
+                    ? "পার্টনার লোগো স্ক্রল চালু করুন"
+                    : "Resume partner logo scrolling"
+                  : isBn
+                    ? "পার্টনার লোগো স্ক্রল থামান"
+                    : "Pause partner logo scrolling"
+              }
+            >
+              {isPaused ? <Play size={13} aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}
+              <span>
+                {isPaused
+                  ? isBn
+                    ? "চালু করুন"
+                    : "Resume"
+                  : isBn
+                    ? "থামান"
+                    : "Pause"}
+              </span>
+            </button>
           </div>
         </div>
 
-        {/* 🎡 Infinite Circular Logo Marquee — Slower, calm, readable 75s pace */}
-        <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)] group py-1">
-          <div className="flex items-center gap-6 sm:gap-8 py-2 animate-ural-marquee-slow group-hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] w-max">
-            {marqueeItems.map((partner, index) => {
-              return (
-                <a
-                  key={`${partner.id}-${index}`}
-                  href={partner.href}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  title={`${partner.name} · ${isBn ? partner.roleBn : partner.roleEn}`}
-                  onClick={() => {
-                    if (partner.badge?.route && onNavigate) {
-                      // Allow direct in-app navigation for special deals
-                    }
-                  }}
-                  className="group/circle flex flex-col items-center gap-2 shrink-0 transition-transform duration-300 hover:-translate-y-1 focus:outline-hidden"
-                >
-                  {/* 🔘 Pure Circle Container with High-Fidelity Vector Logo */}
-                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white border border-slate-200/90 shadow-2xs group-hover/circle:shadow-md group-hover/circle:border-slate-300 flex items-center justify-center p-2.5 transition-all duration-300">
-                    <div className="w-full h-full flex items-center justify-center transition-transform duration-300 group-hover/circle:scale-105">
-                      {partner.renderOfficialLogo()}
-                    </div>
-
-                    {/* Optional promo pill anchored to top-right of circle */}
-                    {partner.badge && (
-                      <span className="absolute -top-1.5 -right-2 text-[9px] font-mono font-bold bg-[#F6B73C] text-brand-navy px-1.5 py-0.5 rounded-full shadow-2xs border border-white leading-none whitespace-nowrap animate-pulse">
-                        {isBn ? partner.badge.textBn : partner.badge.textEn}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Clean Company Name & Role Underneath */}
-                  <div className="flex flex-col items-center text-center max-w-[84px] sm:max-w-[96px]">
-                    <span className="text-[11px] sm:text-xs font-bold text-slate-800 group-hover/circle:text-brand-navy truncate w-full transition-colors leading-tight">
-                      {partner.name}
-                    </span>
-                    <span className="text-[9px] sm:text-[10px] text-slate-500 font-mono truncate w-full leading-tight pt-0.5">
-                      {isBn ? partner.roleBn : partner.roleEn}
-                    </span>
-                  </div>
-                </a>
-              );
-            })}
+        <div className="partner-marquee__viewport" aria-live="off">
+          <div className="partner-marquee__track">
+            <div className="partner-marquee__group" role="list">
+              {partners.map((partner) => (
+                <div className="partner-marquee__list-item" role="listitem" key={partner.id}>
+                  {renderPartner(partner)}
+                </div>
+              ))}
+            </div>
+            <div className="partner-marquee__group partner-marquee__group--clone" aria-hidden="true">
+              {partners.map((partner) => (
+                <div className="partner-marquee__list-item" key={`clone-${partner.id}`}>
+                  {renderPartner(partner, true)}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Slower, silky-smooth marquee animation definition (75s duration) */}
       <style>{`
-        @keyframes ural-marquee-slow {
-          0% {
-            transform: translate3d(0, 0, 0);
-          }
-          100% {
-            transform: translate3d(-50%, 0, 0);
-          }
+        .partner-marquee {
+          --partner-gap: 16px;
+          width: 100%;
+          background: linear-gradient(105deg, #fff 0%, #fbfaf6 52%, #fff 100%);
+          border: 1px solid rgba(11, 20, 38, 0.08);
+          border-radius: 20px;
+          box-shadow: 0 8px 28px rgba(11, 20, 38, 0.055);
+          padding: 18px 20px 16px;
+          color: #0B1426;
         }
-        .animate-ural-marquee-slow {
-          animation: ural-marquee-slow 75s linear infinite;
+        .partner-marquee__inner {
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+        .partner-marquee__header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 14px;
+          margin-bottom: 15px;
+        }
+        .partner-marquee__heading {
+          min-width: 0;
+        }
+        .partner-marquee__eyebrow {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          color: #475569;
+          font: 700 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+          letter-spacing: 0.09em;
+          text-transform: uppercase;
+        }
+        .partner-marquee__eyebrow svg {
+          color: #0F4A3F;
+        }
+        .partner-marquee__description {
+          margin: 5px 0 0;
+          color: #64748B;
+          font: 500 12px/1.35 Inter, Arial, sans-serif;
+        }
+        .partner-marquee__controls {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 10px;
+          flex: 0 0 auto;
+        }
+        .partner-marquee__count {
+          color: #64748B;
+          font: 500 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+          white-space: nowrap;
+        }
+        .partner-marquee__toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          min-height: 34px;
+          padding: 0 10px;
+          border: 1px solid #DCE3E8;
+          border-radius: 999px;
+          background: #fff;
+          color: #0B1426;
+          font: 700 11px/1 Inter, Arial, sans-serif;
+          cursor: pointer;
+          transition: background-color 160ms ease, border-color 160ms ease;
+        }
+        .partner-marquee__toggle:hover {
+          background: #F5F1E8;
+          border-color: #B7C1CA;
+        }
+        .partner-marquee__toggle:focus-visible,
+        .partner-marquee__item:focus-visible {
+          outline: 3px solid #0B1426;
+          outline-offset: 3px;
+        }
+        .partner-marquee__viewport {
+          width: 100%;
+          overflow: hidden;
+          container-type: inline-size;
+          mask-image: linear-gradient(90deg, transparent 0, #000 2.5%, #000 97.5%, transparent 100%);
+          -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 2.5%, #000 97.5%, transparent 100%);
+        }
+        .partner-marquee__track {
+          display: flex;
+          width: max-content;
+          align-items: stretch;
+          animation: ural-partner-marquee 76s linear infinite;
           will-change: transform;
         }
+        .partner-marquee--paused .partner-marquee__track,
+        .partner-marquee__viewport:hover .partner-marquee__track,
+        .partner-marquee__viewport:focus-within .partner-marquee__track {
+          animation-play-state: paused;
+        }
+        .partner-marquee__group {
+          display: flex;
+          align-items: stretch;
+          gap: var(--partner-gap);
+          width: max-content;
+          padding-right: var(--partner-gap);
+        }
+        .partner-marquee__list-item {
+          flex: 0 0 calc(20cqw - 12.8px);
+          width: calc(20cqw - 12.8px);
+          min-width: 0;
+        }
+        .partner-marquee__item {
+          position: relative;
+          display: flex;
+          width: 100%;
+          min-height: 110px;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 7px;
+          padding: 12px 10px;
+          overflow: hidden;
+          border: 1px solid #E7E9EA;
+          border-radius: 15px;
+          background: rgba(255, 255, 255, 0.96);
+          text-decoration: none;
+          box-shadow: 0 2px 7px rgba(11, 20, 38, 0.035);
+          transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+        }
+        .partner-marquee__item::after {
+          position: absolute;
+          right: 14px;
+          bottom: 0;
+          left: 14px;
+          height: 2px;
+          border-radius: 2px 2px 0 0;
+          background: var(--partner-color);
+          content: "";
+          opacity: 0.7;
+          transform: scaleX(0.28);
+          transform-origin: center;
+          transition: transform 180ms ease, opacity 180ms ease;
+        }
+        .partner-marquee__item:hover {
+          border-color: color-mix(in srgb, var(--partner-color) 40%, #DCE3E8);
+          box-shadow: 0 9px 22px rgba(11, 20, 38, 0.10);
+          transform: translateY(-2px);
+        }
+        .partner-marquee__item:hover::after {
+          opacity: 1;
+          transform: scaleX(1);
+        }
+        .partner-marquee__logo-lockup {
+          display: flex;
+          min-height: 66px;
+          width: 100%;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+        }
+        .partner-marquee__logo {
+          display: block;
+          width: 44px;
+          height: 44px;
+          max-width: 76px;
+          flex: 0 0 auto;
+          object-fit: contain;
+        }
+        .partner-marquee__wordmark {
+          display: block;
+          max-width: 100%;
+          overflow: hidden;
+          color: #0B1426;
+          font-family: Inter, Arial, sans-serif;
+          font-size: clamp(14px, 1.35vw, 17px);
+          font-weight: 800;
+          letter-spacing: -0.035em;
+          line-height: 1;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .partner-marquee__wordmark--welcomePickups,
+        .partner-marquee__wordmark--radicalStorage {
+          font-size: clamp(12px, 1.05vw, 14px);
+          letter-spacing: -0.035em;
+        }
+        .partner-marquee__wordmark--qeeq {
+          font-size: clamp(17px, 1.6vw, 20px);
+          font-weight: 900;
+          letter-spacing: 0.03em;
+        }
+        .partner-marquee__wordmark--kkday {
+          letter-spacing: -0.06em;
+        }
+        .partner-marquee__role {
+          max-width: 100%;
+          overflow: hidden;
+          color: #64748B;
+          font: 500 10px/1.2 Inter, Arial, sans-serif;
+          text-align: center;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .partner-marquee__external {
+          position: absolute;
+          top: 9px;
+          right: 9px;
+          color: #94A3B8;
+          opacity: 0;
+          transition: opacity 160ms ease;
+        }
+        .partner-marquee__item:hover .partner-marquee__external,
+        .partner-marquee__item:focus-visible .partner-marquee__external {
+          opacity: 1;
+        }
+        @keyframes ural-partner-marquee {
+          from { transform: translate3d(0, 0, 0); }
+          to { transform: translate3d(-50%, 0, 0); }
+        }
+        @media (max-width: 900px) {
+          .partner-marquee { --partner-gap: 12px; padding: 16px 15px 14px; }
+          .partner-marquee__list-item { flex-basis: calc(25cqw - 9px); width: calc(25cqw - 9px); }
+          .partner-marquee__count { display: none; }
+        }
+        @media (max-width: 640px) {
+          .partner-marquee { padding: 14px 12px 12px; border-radius: 16px; }
+          .partner-marquee__header { align-items: flex-start; margin-bottom: 12px; }
+          .partner-marquee__description { font-size: 11px; }
+          .partner-marquee__count { display: none; }
+          .partner-marquee__toggle { min-height: 32px; padding: 0 8px; }
+          .partner-marquee__list-item { flex-basis: calc(50cqw - 6px); width: calc(50cqw - 6px); }
+          .partner-marquee__item { min-height: 104px; padding: 10px 7px; }
+          .partner-marquee__logo-lockup { min-height: 62px; gap: 4px; }
+          .partner-marquee__logo { width: 38px; height: 38px; }
+          .partner-marquee__wordmark { font-size: clamp(13px, 3.4vw, 15px); }
+          .partner-marquee__wordmark--welcomePickups,
+          .partner-marquee__wordmark--radicalStorage { font-size: clamp(11px, 3vw, 13px); }
+        }
         @media (prefers-reduced-motion: reduce) {
-          .animate-ural-marquee-slow {
-            animation: none;
+          .partner-marquee__viewport {
             overflow-x: auto;
+            mask-image: none;
+            -webkit-mask-image: none;
+            scrollbar-width: thin;
+            scroll-snap-type: x mandatory;
+          }
+          .partner-marquee__track { animation: none; will-change: auto; }
+          .partner-marquee__group--clone,
+          .partner-marquee__toggle { display: none; }
+          .partner-marquee__list-item { scroll-snap-align: start; }
+          .partner-marquee__item { transition: none; }
+        }
+        @supports not (width: 1cqw) {
+          .partner-marquee__list-item { flex-basis: calc(20vw - 20px); width: calc(20vw - 20px); }
+          @media (max-width: 900px) {
+            .partner-marquee__list-item { flex-basis: calc(25vw - 12px); width: calc(25vw - 12px); }
+          }
+          @media (max-width: 640px) {
+            .partner-marquee__list-item { flex-basis: calc(50vw - 12px); width: calc(50vw - 12px); }
           }
         }
       `}</style>
