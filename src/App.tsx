@@ -98,7 +98,16 @@ import { ConsentBanner } from "./components/ConsentBanner";
 import { generateBlogCoverAltText } from "./utils/imageAssets";
 import { ResponsiveImage } from "./components/ResponsiveImage";
 import { getRelatedBlogPosts } from "./utils/blogLinks";
-import { URAL_SOCIAL_LINKS } from "./utils/schema";
+import {
+  faqPageNodeSchema,
+  howToSchema,
+  URAL_SOCIAL_LINKS,
+} from "./utils/schema";
+import { getAuthorProfile } from "./data/authorProfiles";
+import {
+  getVisibleBlogFaqSection,
+  getVisibleBlogHowTos,
+} from "./utils/blogStructuredData";
 
 const ENGLISH_FEATURED_GROWTH_TOPICS = [
   {
@@ -856,6 +865,47 @@ function getCountryDestId(country: string): string {
   if (c === "singapore") return "singapore-guide";
   if (c === "maldives") return "maldives-guide";
   return "nepal-guide";
+}
+
+function AuthorBioCard({
+  authorRaw,
+  isBengali,
+}: {
+  authorRaw?: string;
+  isBengali: boolean;
+}) {
+  const profile = getAuthorProfile(authorRaw);
+  if (!profile) return null;
+
+  return (
+    <aside
+      aria-labelledby="blog-author-bio-heading"
+      className="mt-7 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6"
+    >
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="space-y-2">
+          <h2
+            id="blog-author-bio-heading"
+            className="font-serif text-lg font-bold text-brand-navy"
+          >
+            {isBengali ? "লেখক সম্পর্কে" : "About the author"}
+          </h2>
+          <p className="text-sm leading-7 text-slate-700">
+            {isBengali ? profile.bioBn : profile.bioEn}
+          </p>
+        </div>
+        <a
+          href={profile.portfolioUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex shrink-0 items-center gap-1.5 self-start text-sm font-semibold text-brand-navy underline decoration-brand-gold underline-offset-4 hover:text-brand-emerald"
+        >
+          {isBengali ? "পেশাগত পোর্টফোলিও দেখুন" : "View professional portfolio"}
+          <ExternalLink size={13} aria-hidden="true" />
+        </a>
+      </div>
+    </aside>
+  );
 }
 
 export default function App() {
@@ -1697,7 +1747,44 @@ export default function App() {
         inLanguage: pageLanguage,
       });
 
-      seoSchema = [articleNode];
+      const articleBodyForSchema = isBn
+        ? activePost.content || ""
+        : blogBodies?.[activePost.slug] || activePost.content || "";
+      const structuredDataLocale = isBn ? "bn" : "en";
+      const visibleFaqSection = getVisibleBlogFaqSection(
+        activePost.slug,
+        articleBodyForSchema,
+        structuredDataLocale
+      );
+      const pageSchemaNodes: Record<string, unknown>[] = [articleNode];
+
+      if (visibleFaqSection) {
+        pageSchemaNodes.push(
+          faqPageNodeSchema({
+            url: postUrl,
+            faqs: visibleFaqSection.questions,
+            inLanguage: pageLanguage,
+          })
+        );
+      }
+
+      for (const howTo of getVisibleBlogHowTos(
+        activePost.slug,
+        articleBodyForSchema,
+        structuredDataLocale
+      )) {
+        pageSchemaNodes.push(
+          howToSchema({
+            url: postUrl,
+            idSuffix: howTo.idSuffix,
+            name: howTo.name,
+            steps: howTo.steps,
+            inLanguage: pageLanguage,
+          })
+        );
+      }
+
+      seoSchema = pageSchemaNodes;
 
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -5921,6 +6008,9 @@ export default function App() {
               // effect near the top of the component). Empty until that module
               // resolves — the placeholder above covers that window.
               const articleBody = activePost.content ?? blogBodies?.[activePost.slug] ?? "";
+              const canonicalAuthorRaw =
+                BLOG_DATA.find((post) => post.slug === activePost.slug)?.author ||
+                activePost.author;
               const activeCoverImg = getBlogCoverImage(activePost.slug);
               const sameCategoryPosts = localizedBlogs.filter(
                 (p) => p.slug !== activePost.slug && p.category === activePost.category
@@ -6334,6 +6424,40 @@ export default function App() {
                             );
                           }
 
+                          const faqSection = getVisibleBlogFaqSection(
+                            activePost.slug,
+                            trimmed,
+                            isBn ? "bn" : "en"
+                          );
+                          if (faqSection) {
+                            return (
+                              <section
+                                key={bIdx}
+                                aria-labelledby="blog-article-faq-heading"
+                                className="space-y-4 pt-5"
+                              >
+                                <h2
+                                  id="blog-article-faq-heading"
+                                  className="font-serif text-[22px] sm:text-[26px] font-bold text-brand-navy leading-[1.3] pb-2 border-b border-slate-200"
+                                >
+                                  {faqSection.heading}
+                                </h2>
+                                <div className="space-y-4">
+                                  {faqSection.questions.map((faq, faqIdx) => (
+                                    <div key={faqIdx} className="space-y-1.5">
+                                      <h3 className="font-semibold text-brand-navy leading-[1.5]">
+                                        {faq.question}
+                                      </h3>
+                                      <p className="leading-[1.8] text-slate-800">
+                                        {faq.answer}
+                                      </p>
+                                    </div>
+                                  ))}
+                                </div>
+                              </section>
+                            );
+                          }
+
                           // Major numbered section heading -> Semantic H2 (Dark #0B1426, 22px–26px)
                           if (/^([0-9]+|[০-৯]+)\.\s+/.test(trimmed) && trimmed.length < 170 && !trimmed.includes("\n")) {
                             return (
@@ -6514,6 +6638,8 @@ export default function App() {
                           );
                         })}
                       </div>
+
+                      <AuthorBioCard authorRaw={canonicalAuthorRaw} isBengali={isBn} />
 
                       {/* Contextual Luggage Storage Offer Callout (Radical Storage on matching travel guides) */}
                       <RadicalStorageContextualCallout slug={activePost.slug} lang={lang} />

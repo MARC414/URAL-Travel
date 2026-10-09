@@ -27,6 +27,12 @@ import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { BLOG_DATA } from "../src/constants";
 import { BLOG_BODY } from "../src/data/blogContent";
+import { BENGALI_BLOG_OVERRIDES } from "../src/data/bengaliContent";
+import { FARHAN_MOMEN_PROFILE } from "../src/data/authorProfiles";
+import {
+  getVisibleBlogFaqSection,
+  getVisibleBlogHowTos,
+} from "../src/utils/blogStructuredData";
 import {
   buildResponsiveSrcSet,
   RESPONSIVE_IMAGE_BREAKPOINTS,
@@ -1270,7 +1276,8 @@ if (rss) {
       .split("\n\n")
       .map((para) => para.trim())
       .filter(Boolean)
-      .filter((para) => para !== "[[figure]]");
+      .filter((para) => para !== "[[figure]]")
+      .filter((para) => !getVisibleBlogFaqSection(slug, para, "en"));
     const missing = paragraphs.filter((para) => !page.includes(normalise(para)));
     if (missing.length > 0) truncatedPrerenders.push(`${slug} (${missing.length}/${paragraphs.length})`);
   }
@@ -1455,6 +1462,149 @@ check(
     : `Bengali blog Article JSON-LD coverage is incomplete ` +
         `(${bengaliBlogHtmlFiles.length}/${BLOG_DATA.length} pages, ` +
         `${missingBengaliArticleSchema.length} missing/incomplete)`
+);
+
+const normalizeStructuredText = (value: string) =>
+  value
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;|&apos;/g, "'")
+    .replace(/\*/g, "")
+    .replace(/(^|\s)[-•]\s+/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const faqSlug = "travel-creator-resources";
+const faqCoverageIssues: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  const content =
+    locale === "en"
+      ? BLOG_BODY[faqSlug] || ""
+      : BENGALI_BLOG_OVERRIDES[faqSlug]?.content || "";
+  const expectedFaq = getVisibleBlogFaqSection(faqSlug, content, locale);
+  const routeFile =
+    locale === "en"
+      ? path.join(DIST_DIR, "blog", `${faqSlug}.html`)
+      : path.join(DIST_DIR, "bn", "blog", `${faqSlug}.html`);
+  const html = read(routeFile) ?? "";
+  const faqNode = getSeoSchemaGraph(html).find((node) => hasSchemaType(node, "FAQPage"));
+  const mainEntity = Array.isArray(faqNode?.mainEntity)
+    ? (faqNode.mainEntity as Record<string, unknown>[])
+    : [];
+  const exactSchemaPairs =
+    expectedFaq &&
+    mainEntity.length === expectedFaq.questions.length &&
+    expectedFaq.questions.every((faq, index) => {
+      const answer = mainEntity[index]?.acceptedAnswer as Record<string, unknown> | undefined;
+      return mainEntity[index]?.name === faq.question && answer?.text === faq.answer;
+    });
+  const visibleText = normalizeStructuredText(html);
+  const faqIsVisible =
+    expectedFaq &&
+    expectedFaq.questions.every(
+      (faq) =>
+        visibleText.includes(normalizeStructuredText(faq.question)) &&
+        visibleText.includes(normalizeStructuredText(faq.answer))
+    );
+  if (!expectedFaq || !exactSchemaPairs || !faqIsVisible) {
+    faqCoverageIssues.push(locale);
+  }
+}
+check(
+  faqCoverageIssues.length === 0,
+  faqCoverageIssues.length === 0
+    ? "the visible Travel Creator Resources Q&As match FAQPage JSON-LD in English and Bengali"
+    : `FAQ content/schema mismatch for locale(s): ${faqCoverageIssues.join(", ")}`
+);
+
+const howToCases = [
+  "dual-currency-card-endorsement-bangladesh",
+  "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
+  "hajj-registration-bangladesh-government-vs-private-package-cost",
+];
+const howToCoverageIssues: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  for (const slug of howToCases) {
+    const content =
+      locale === "en"
+        ? BLOG_BODY[slug] || ""
+        : BENGALI_BLOG_OVERRIDES[slug]?.content || "";
+    const expectedHowTos = getVisibleBlogHowTos(slug, content, locale);
+    const routeFile =
+      locale === "en"
+        ? path.join(DIST_DIR, "blog", `${slug}.html`)
+        : path.join(DIST_DIR, "bn", "blog", `${slug}.html`);
+    const html = read(routeFile) ?? "";
+    const howToNodes = getSeoSchemaGraph(html).filter((node) => hasSchemaType(node, "HowTo"));
+    const pageText = normalizeStructuredText(html);
+    const matchesAll =
+      expectedHowTos.length > 0 &&
+      expectedHowTos.every((expected) => {
+        const node = howToNodes.find((candidate) =>
+          String(candidate["@id"] || "").endsWith(`#${expected.idSuffix}`)
+        );
+        const steps = Array.isArray(node?.step)
+          ? (node.step as Record<string, unknown>[])
+          : [];
+        return (
+          node?.name === expected.name &&
+          steps.length === expected.steps.length &&
+          expected.steps.every((step, index) => {
+            const schemaStep = steps[index];
+            return (
+              schemaStep?.name === step.name &&
+              schemaStep?.text === step.text &&
+              pageText.includes(normalizeStructuredText(step.name)) &&
+              pageText.includes(normalizeStructuredText(step.text))
+            );
+          })
+        );
+      });
+    if (!matchesAll) howToCoverageIssues.push(`${locale}:${slug}`);
+  }
+}
+check(
+  howToCoverageIssues.length === 0,
+  howToCoverageIssues.length === 0
+    ? "HowTo JSON-LD steps match the visible bilingual instructions on the selected procedural guides"
+    : `HowTo content/schema mismatch for route(s): ${howToCoverageIssues.join(", ")}`
+);
+
+const authorBioSlug = "dual-currency-card-endorsement-bangladesh";
+const authorBioIssues: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  const routeFile =
+    locale === "en"
+      ? path.join(DIST_DIR, "blog", `${authorBioSlug}.html`)
+      : path.join(DIST_DIR, "bn", "blog", `${authorBioSlug}.html`);
+  const html = read(routeFile) ?? "";
+  const article = getSeoSchemaGraph(html).find((node) => hasSchemaType(node, "Article"));
+  const author = article?.author as Record<string, unknown> | undefined;
+  const expectedBio = locale === "en" ? FARHAN_MOMEN_PROFILE.bioEn : FARHAN_MOMEN_PROFILE.bioBn;
+  const visibleText = normalizeStructuredText(html);
+  if (
+    !author ||
+    author.name !== FARHAN_MOMEN_PROFILE.name ||
+    author.description !== expectedBio ||
+    author.url !== FARHAN_MOMEN_PROFILE.portfolioUrl ||
+    !Array.isArray(author.sameAs) ||
+    !author.sameAs.includes(FARHAN_MOMEN_PROFILE.sameAs[0]) ||
+    !visibleText.includes(normalizeStructuredText(expectedBio)) ||
+    !html.includes(FARHAN_MOMEN_PROFILE.portfolioUrl)
+  ) {
+    authorBioIssues.push(locale);
+  }
+}
+check(
+  authorBioIssues.length === 0,
+  authorBioIssues.length === 0
+    ? "Farhan Momen's visible bilingual author bio and Article author entity link to the supplied portfolio"
+    : `author bio/Article author metadata mismatch for locale(s): ${authorBioIssues.join(", ")}`
 );
 
 const blogHubHtml = read(path.join(DIST_DIR, "blog.html")) ?? "";

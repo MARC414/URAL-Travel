@@ -1,4 +1,5 @@
 import { generateBlogCoverAltText } from "./blogAltText";
+import { getAuthorProfile } from "../data/authorProfiles";
 
 export const BASE_URL = "https://ural-travel.pages.dev";
 export const SITE_ORG_ID = `${BASE_URL}/#organization`;
@@ -48,17 +49,27 @@ export function toIsoDate(
  * Parses author strings such as "Zayan Rahman (Senior Travel Researcher)"
  * into a Schema.org Person entity linked to the URAL Organization.
  */
-export function parseAuthor(authorRaw?: string) {
+export function parseAuthor(authorRaw?: string, inLanguage = "en-BD") {
   const raw = (authorRaw || "Zayan Rahman (Senior Travel Researcher)").trim();
   const match = raw.match(/^([^(]+?)(?:\s*\(([^)]+)\))?$/);
   const name = (match?.[1] || raw).trim();
   const jobTitle = (match?.[2] || "Senior Travel Researcher").trim();
+  const profile = getAuthorProfile(name);
 
   return {
     "@type": "Person" as const,
     "@id": `${BASE_URL}/#/author/${encodeURIComponent(name)}`,
     name,
     jobTitle,
+    ...(profile
+      ? {
+          description: inLanguage.toLowerCase().startsWith("bn")
+            ? profile.bioBn
+            : profile.bioEn,
+          url: profile.portfolioUrl,
+          sameAs: profile.sameAs,
+        }
+      : {}),
     worksFor: { "@id": SITE_ORG_ID },
   };
 }
@@ -269,7 +280,7 @@ export function articleSchema(options: {
     },
     datePublished: isoPub,
     dateModified: isoMod,
-    author: parseAuthor(authorRaw),
+    author: parseAuthor(authorRaw, inLanguage),
     publisher: { "@id": SITE_ORG_ID },
     articleSection,
     inLanguage,
@@ -484,6 +495,37 @@ export function faqPageNodeSchema(options: {
     mainEntityOfPage: { "@id": `${url}#webpage` },
     inLanguage,
     mainEntity: valid,
+  };
+}
+
+/**
+ * Builds a Schema.org HowTo node from step-by-step instructions visibly
+ * rendered on the same page. Do not infer costs, durations, or outcomes here.
+ */
+export function howToSchema(options: {
+  url: string;
+  idSuffix: string;
+  name: string;
+  steps: Array<{ name: string; text: string }>;
+  inLanguage?: string;
+}) {
+  const { url, idSuffix, name, steps, inLanguage = "en-BD" } = options;
+  const validSteps = (steps || [])
+    .filter((step) => step && step.name && step.text)
+    .map((step, index) => ({
+      "@type": "HowToStep" as const,
+      position: index + 1,
+      name: step.name.replace(/<[^>]*>?/gm, "").replace(/\s+/g, " ").trim(),
+      text: step.text.replace(/<[^>]*>?/gm, "").replace(/\s+/g, " ").trim(),
+    }));
+
+  return {
+    "@type": "HowTo" as const,
+    "@id": `${url}#${idSuffix}`,
+    name: name.replace(/<[^>]*>?/gm, "").replace(/\s+/g, " ").trim(),
+    mainEntityOfPage: { "@id": `${url}#webpage` },
+    inLanguage,
+    step: validSteps,
   };
 }
 

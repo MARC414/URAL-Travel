@@ -22,9 +22,16 @@ import {
   serviceSchema,
   productOfferSchema,
   collectionPageSchema,
+  faqPageNodeSchema,
+  howToSchema,
   buildSchemaGraph,
   toIsoDate,
 } from "../src/utils/schema";
+import { getAuthorProfile } from "../src/data/authorProfiles";
+import {
+  getVisibleBlogFaqSection,
+  getVisibleBlogHowTos,
+} from "../src/utils/blogStructuredData";
 import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
 import { buildResponsiveSrcSet, getResponsiveImageDimensions } from "../src/utils/imageAssets";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
@@ -128,6 +135,33 @@ function escapeHtml(str: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+function renderVisibleFaqHtml(
+  section: ReturnType<typeof getVisibleBlogFaqSection>
+): string {
+  if (!section) return "";
+  return `<section aria-labelledby="blog-article-faq-heading"><h2 id="blog-article-faq-heading">${escapeHtml(section.heading)}</h2>${section.questions
+    .map(
+      (faq) =>
+        `<div><h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p></div>`
+    )
+    .join("")}</section>`;
+}
+
+function renderAuthorBioHtml(
+  profile: ReturnType<typeof getAuthorProfile>,
+  locale: "en" | "bn"
+): string {
+  if (!profile) return "";
+  const isBengali = locale === "bn";
+  return `<aside aria-labelledby="blog-author-bio-heading"><h2 id="blog-author-bio-heading">${
+    isBengali ? "লেখক সম্পর্কে" : "About the author"
+  }</h2><p>${escapeHtml(isBengali ? profile.bioBn : profile.bioEn)}</p><p><a href="${escapeHtml(
+    profile.portfolioUrl
+  )}" target="_blank" rel="noopener noreferrer">${
+    isBengali ? "পেশাগত পোর্টফোলিও দেখুন" : "View professional portfolio"
+  }</a></p></aside>`;
 }
 
 function escapeXml(str: string): string {
@@ -1476,6 +1510,9 @@ function buildAllRoutes(): PrerenderRoute[] {
     const postImgUrl = `${BASE_URL}/img/blog/${post.slug}.jpg`;
     const title = `${post.title} | URAL Travel Blog`;
     const description = post.summary;
+    const blogBody = BLOG_BODY[post.slug] || post.content || "";
+    const visibleFaqSection = getVisibleBlogFaqSection(post.slug, blogBody, "en");
+    const visibleHowTos = getVisibleBlogHowTos(post.slug, blogBody, "en");
 
     const extraNodes: Record<string, unknown>[] = [
       articleSchema({
@@ -1490,6 +1527,27 @@ function buildAllRoutes(): PrerenderRoute[] {
         imageUrl: postImgUrl,
       }),
     ];
+
+    if (visibleFaqSection) {
+      extraNodes.push(
+        faqPageNodeSchema({
+          url: postUrl,
+          faqs: visibleFaqSection.questions,
+          inLanguage: "en-BD",
+        })
+      );
+    }
+    for (const howTo of visibleHowTos) {
+      extraNodes.push(
+        howToSchema({
+          url: postUrl,
+          idSuffix: howTo.idSuffix,
+          name: howTo.name,
+          steps: howTo.steps,
+          inLanguage: "en-BD",
+        })
+      );
+    }
 
     const planLinks: { text: string; href: string }[] = [];
     const relatedGuideLinks: { text: string; href: string }[] = [];
@@ -1564,10 +1622,12 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h1>${escapeHtml(post.title)}</h1>
           <p><em>By ${escapeHtml(post.author)} · Published ${escapeHtml(post.date)} · ${escapeHtml(post.readTime)}</em></p>
           <p>${escapeHtml(post.summary)}</p>
-          ${(BLOG_BODY[post.slug] || post.content || "")
+          ${blogBody
             .split("\n\n")
             .map((para) => {
               const trimmedPara = String(para).trim();
+              const faqSection = getVisibleBlogFaqSection(post.slug, trimmedPara, "en");
+              if (faqSection) return renderVisibleFaqHtml(faqSection);
               if (trimmedPara === "[[figure]]") {
                 const fig = post.inlineFigure;
                 if (!fig) return "";
@@ -1579,6 +1639,7 @@ function buildAllRoutes(): PrerenderRoute[] {
               return `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`;
             })
             .join("\n")}
+          ${renderAuthorBioHtml(getAuthorProfile(post.author), "en")}
           ${radicalStorageHtml}
           ${multiPartnerHtml}
           ${travelpayoutsReferralHtml}
@@ -1685,16 +1746,23 @@ function bnFaqList(
 }
 
 /** Turns the Bengali blog body (plain text with blank-line paragraphs) into HTML. */
-function bnParagraphs(text: string, figureHtml?: string): string {
+function bnParagraphs(
+  text: string,
+  figureHtml?: string,
+  slug?: string
+): string {
   return String(text || "")
     .split(/\n{2,}/)
-    .map((paragraph) => paragraph.replace(/\n/g, " ").replace(/\*\*/g, "").trim())
-    .filter(Boolean)
-    .map((paragraph) =>
-      paragraph === "[[figure]]"
+    .map((rawParagraph) => {
+      const faqSection = getVisibleBlogFaqSection(slug || "", rawParagraph, "bn");
+      if (faqSection) return renderVisibleFaqHtml(faqSection);
+      const paragraph = rawParagraph.replace(/\n/g, " ").replace(/\*\*/g, "").trim();
+      if (!paragraph) return "";
+      return paragraph === "[[figure]]"
         ? figureHtml ?? ""
-        : `<p>${escapeHtml(paragraph)}</p>`
-    )
+        : `<p>${escapeHtml(paragraph)}</p>`;
+    })
+    .filter(Boolean)
     .join("");
 }
 
@@ -1755,7 +1823,8 @@ function buildBengaliBody(
             )}" sizes="(max-width: 767px) 100vw, 840px" width="${dims.width}" height="${dims.height}" loading="lazy" alt="${escapeHtml(bnFig.altBn)}"><figcaption>${escapeHtml(bnFig.captionBn)}</figcaption></figure>`;
           })()
         : undefined;
-      parts.push(bnParagraphs(override.content, bnFigureHtml));
+      parts.push(bnParagraphs(override.content, bnFigureHtml, id));
+      parts.push(renderAuthorBioHtml(getAuthorProfile(bnPost?.author), "bn"));
       const refPlacementBn = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[id];
       if (refPlacementBn) {
         parts.push(
@@ -2080,6 +2149,33 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           inLanguage: "bn-BD",
         })
       );
+      const localizedBody =
+        localizedPost?.content || BENGALI_BLOG_OVERRIDES[segments[1]]?.content || "";
+      const visibleFaqSection = getVisibleBlogFaqSection(
+        segments[1],
+        localizedBody,
+        "bn"
+      );
+      if (visibleFaqSection) {
+        extraGraphNodes.push(
+          faqPageNodeSchema({
+            url: canonicalUrl,
+            faqs: visibleFaqSection.questions,
+            inLanguage: "bn-BD",
+          })
+        );
+      }
+      for (const howTo of getVisibleBlogHowTos(segments[1], localizedBody, "bn")) {
+        extraGraphNodes.push(
+          howToSchema({
+            url: canonicalUrl,
+            idSuffix: howTo.idSuffix,
+            name: howTo.name,
+            steps: howTo.steps,
+            inLanguage: "bn-BD",
+          })
+        );
+      }
     } else if (englishPath === "/umrah") {
       const bnUmrahFaq = stripContext(
         generateFAQSchema(getLocalizedHajjFaqs("bn"), {
