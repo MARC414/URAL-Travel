@@ -1055,7 +1055,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
               }}
               className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
             >
-              📖 {isBn ? "সবগুলো ৪১টি ট্রাভেল ব্লগ ও গাইড" : "All 41 Travel Blog Guides"}
+              📖 {isBn ? "সব ট্রাভেল ব্লগ ও গাইড" : "All Travel Blog Guides"}
             </a>
             <a
               href="/tools?tab=airhelp"
@@ -1138,18 +1138,18 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
         </div>
       </section>
 
-      {/* 7. COMPLETE CRAWLABLE HTML SITEMAP DIRECTORY (ALL 41 BLOG GUIDES & 42 HUBS) */}
+      {/* 7. COMPLETE CRAWLABLE HTML SITEMAP DIRECTORY (BLOG GUIDES & 42 HUBS) */}
       <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
         <div className="space-y-1">
           <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
             {isBn
-              ? "📚 সম্পূর্ণ সাইট ডিরেক্টরি (৪১টি গাইড ও ৪২টি হাব পেজ)"
-              : "📚 COMPLETE CRAWLABLE DIRECTORY · ALL 41 BLOG GUIDES & 42 HUB PAGES"}
+              ? "📚 সম্পূর্ণ সাইট ডিরেক্টরি (ব্লগ গাইড ও হাব পেজ)"
+              : "📚 COMPLETE CRAWLABLE DIRECTORY · BLOG GUIDES & HUB PAGES"}
           </span>
           <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
             {isBn
-              ? "বাংলাদেশি ভ্রমণকারীদের জন্য আমাদের সবগুলো ৪১টি গাইডের সরাসরি লিংক"
-              : "All 41 Verified Bangladesh Outbound Travel & Umrah Guides (Direct Anchor Index)"}
+              ? "বাংলাদেশি ভ্রমণকারীদের জন্য সব গাইডের সরাসরি লিংক"
+              : "Bangladesh Outbound Travel & Umrah Guides (Direct Anchor Index)"}
           </h2>
           <p className="text-xs text-slate-500">
             {isBn
@@ -1159,7 +1159,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
         </div>
 
         <nav
-          aria-label="All 41 Bangladesh Travel Blog Guides"
+          aria-label="All Bangladesh Travel Blog Guides"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"
         >
           {localizedBlogs.map((post, idx) => {

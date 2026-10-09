@@ -22,9 +22,16 @@ import {
   serviceSchema,
   productOfferSchema,
   collectionPageSchema,
+  faqPageNodeSchema,
+  howToSchema,
   buildSchemaGraph,
   toIsoDate,
 } from "../src/utils/schema";
+import { getAuthorProfile } from "../src/data/authorProfiles";
+import {
+  getVisibleBlogFaqSection,
+  getVisibleBlogHowTos,
+} from "../src/utils/blogStructuredData";
 import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
 import { buildResponsiveSrcSet, getResponsiveImageDimensions } from "../src/utils/imageAssets";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
@@ -128,6 +135,43 @@ function escapeHtml(str: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+function renderVisibleFaqHtml(
+  section: ReturnType<typeof getVisibleBlogFaqSection>
+): string {
+  if (!section) return "";
+  return `<section aria-labelledby="blog-article-faq-heading"><h2 id="blog-article-faq-heading">${escapeHtml(section.heading)}</h2>${section.questions
+    .map(
+      (faq) =>
+        `<div><h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p></div>`
+    )
+    .join("")}</section>`;
+}
+
+function renderAuthorBioHtml(
+  profile: ReturnType<typeof getAuthorProfile>,
+  locale: "en" | "bn"
+): string {
+  if (!profile) return "";
+  const isBengali = locale === "bn";
+  const mediaLinks = profile.creativeWorks
+    .map(
+      (work) =>
+        `<li><a href="${escapeHtml(work.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(
+          isBengali ? work.titleBn : work.titleEn
+        )}</a></li>`
+    )
+    .join("");
+  return `<aside aria-labelledby="blog-author-bio-heading"><h2 id="blog-author-bio-heading">${
+    isBengali ? "লেখক সম্পর্কে" : "About the author"
+  }</h2><p>${escapeHtml(isBengali ? profile.bioBn : profile.bioEn)}</p><section><h3>${
+    isBengali ? "নির্বাচিত সৃজনশীল ও মিডিয়া কাজ" : "Selected creative &amp; media work"
+  }</h3><ul>${mediaLinks}</ul></section><p><a href="${escapeHtml(
+    profile.portfolioUrl
+  )}" target="_blank" rel="noopener noreferrer">${
+    isBengali ? "পেশাগত পোর্টফোলিও দেখুন" : "View professional portfolio"
+  }</a></p></aside>`;
 }
 
 function escapeXml(str: string): string {
@@ -730,7 +774,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     extraGraphNodes: [homeFaq],
     bodyHtml: `
       <h1>URAL — Flights, Hotels, Umrah &amp; Visa Guides for Bangladeshi Travelers</h1>
-      <p>Compare cheap international flights from Dhaka (DAC), check official e-Visa checklists, plan DIY Umrah &amp; Hajj in BDT, and explore 41 verified travel guides for Bangladeshi passport holders.</p>
+      <p>Compare cheap international flights from Dhaka (DAC), check official e-Visa checklists, plan DIY Umrah &amp; Hajj in BDT, and explore verified travel guides for Bangladeshi passport holders.</p>
     `,
   });
 
@@ -1335,7 +1379,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     bodyHtml: `
       <article>
         <h1>Dhaka Airport (DAC) Pre-Departure Readiness Checklist &amp; Complete 83-Page Sitemap</h1>
-        <p>Interactive pre-flight checklist for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC), cabin &amp; 5L Zamzam baggage rules, Bangladesh Embassy emergency helplines abroad, and direct links to all 41 travel guides.</p>
+        <p>Interactive pre-flight checklist for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC), cabin &amp; 5L Zamzam baggage rules, Bangladesh Embassy emergency helplines abroad, and direct links to the travel guides.</p>
         ${renderLandingFaqs("sitemap-predeparture-faqs", "Dhaka Airport pre-departure and baggage questions", sitemapFaqSchema)}
       </article>
     `,
@@ -1424,7 +1468,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     `,
   });
 
-  // 13. Blog Hub (/blog) + 41 Blog Guides (/blog/:slug)
+  // 13. Blog Hub (/blog) + individual Blog Guides (/blog/:slug)
   const blogHubTitle =
     "Travel Guides, Umrah Preparation & Outbound Intelligence for Bangladesh (2026) | URAL Blog";
   const blogHubDesc =
@@ -1446,6 +1490,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         url: `${BASE_URL}/blog`,
         name: blogHubTitle,
         description: blogHubDesc,
+        includeNumberOfItems: false,
         items: BLOG_DATA.map((p) => ({
           name: p.title,
           url: `${BASE_URL}/blog/${p.slug}`,
@@ -1475,6 +1520,9 @@ function buildAllRoutes(): PrerenderRoute[] {
     const postImgUrl = `${BASE_URL}/img/blog/${post.slug}.jpg`;
     const title = `${post.title} | URAL Travel Blog`;
     const description = post.summary;
+    const blogBody = BLOG_BODY[post.slug] || post.content || "";
+    const visibleFaqSection = getVisibleBlogFaqSection(post.slug, blogBody, "en");
+    const visibleHowTos = getVisibleBlogHowTos(post.slug, blogBody, "en");
 
     const extraNodes: Record<string, unknown>[] = [
       articleSchema({
@@ -1489,6 +1537,27 @@ function buildAllRoutes(): PrerenderRoute[] {
         imageUrl: postImgUrl,
       }),
     ];
+
+    if (visibleFaqSection) {
+      extraNodes.push(
+        faqPageNodeSchema({
+          url: postUrl,
+          faqs: visibleFaqSection.questions,
+          inLanguage: "en-BD",
+        })
+      );
+    }
+    for (const howTo of visibleHowTos) {
+      extraNodes.push(
+        howToSchema({
+          url: postUrl,
+          idSuffix: howTo.idSuffix,
+          name: howTo.name,
+          steps: howTo.steps,
+          inLanguage: "en-BD",
+        })
+      );
+    }
 
     const planLinks: { text: string; href: string }[] = [];
     const relatedGuideLinks: { text: string; href: string }[] = [];
@@ -1563,10 +1632,12 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h1>${escapeHtml(post.title)}</h1>
           <p><em>By ${escapeHtml(post.author)} · Published ${escapeHtml(post.date)} · ${escapeHtml(post.readTime)}</em></p>
           <p>${escapeHtml(post.summary)}</p>
-          ${(BLOG_BODY[post.slug] || post.content || "")
+          ${blogBody
             .split("\n\n")
             .map((para) => {
               const trimmedPara = String(para).trim();
+              const faqSection = getVisibleBlogFaqSection(post.slug, trimmedPara, "en");
+              if (faqSection) return renderVisibleFaqHtml(faqSection);
               if (trimmedPara === "[[figure]]") {
                 const fig = post.inlineFigure;
                 if (!fig) return "";
@@ -1578,6 +1649,7 @@ function buildAllRoutes(): PrerenderRoute[] {
               return `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`;
             })
             .join("\n")}
+          ${renderAuthorBioHtml(getAuthorProfile(post.author), "en")}
           ${radicalStorageHtml}
           ${multiPartnerHtml}
           ${travelpayoutsReferralHtml}
@@ -1604,7 +1676,7 @@ function buildAllRoutes(): PrerenderRoute[] {
 //   - en-bd / bn-bd / x-default hreflang tags whose three values are identical
 //     on both members of the pair (valid reciprocal return tags)
 //
-// Coverage (src/data/bengaliContent.ts): 41/41 blogs, 6 flights, 6 hotels,
+// Coverage (src/data/bengaliContent.ts): all BLOG_DATA blogs, 6 flights, 6 hotels,
 // 6 visas, 6 trip-cost guides and the Hajj/Umrah FAQs. Hub and static pages use
 // the hand-written BENGALI_SEO_COPY. /destinations/* has no Bengali data yet, so
 // no /bn route is generated for it and its hreflang cluster is withheld — see
@@ -1684,16 +1756,23 @@ function bnFaqList(
 }
 
 /** Turns the Bengali blog body (plain text with blank-line paragraphs) into HTML. */
-function bnParagraphs(text: string, figureHtml?: string): string {
+function bnParagraphs(
+  text: string,
+  figureHtml?: string,
+  slug?: string
+): string {
   return String(text || "")
     .split(/\n{2,}/)
-    .map((paragraph) => paragraph.replace(/\n/g, " ").replace(/\*\*/g, "").trim())
-    .filter(Boolean)
-    .map((paragraph) =>
-      paragraph === "[[figure]]"
+    .map((rawParagraph) => {
+      const faqSection = getVisibleBlogFaqSection(slug || "", rawParagraph, "bn");
+      if (faqSection) return renderVisibleFaqHtml(faqSection);
+      const paragraph = rawParagraph.replace(/\n/g, " ").replace(/\*\*/g, "").trim();
+      if (!paragraph) return "";
+      return paragraph === "[[figure]]"
         ? figureHtml ?? ""
-        : `<p>${escapeHtml(paragraph)}</p>`
-    )
+        : `<p>${escapeHtml(paragraph)}</p>`;
+    })
+    .filter(Boolean)
     .join("");
 }
 
@@ -1754,7 +1833,8 @@ function buildBengaliBody(
             )}" sizes="(max-width: 767px) 100vw, 840px" width="${dims.width}" height="${dims.height}" loading="lazy" alt="${escapeHtml(bnFig.altBn)}"><figcaption>${escapeHtml(bnFig.captionBn)}</figcaption></figure>`;
           })()
         : undefined;
-      parts.push(bnParagraphs(override.content, bnFigureHtml));
+      parts.push(bnParagraphs(override.content, bnFigureHtml, id));
+      parts.push(renderAuthorBioHtml(getAuthorProfile(bnPost?.author), "bn"));
       const refPlacementBn = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[id];
       if (refPlacementBn) {
         parts.push(
@@ -2079,6 +2159,33 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           inLanguage: "bn-BD",
         })
       );
+      const localizedBody =
+        localizedPost?.content || BENGALI_BLOG_OVERRIDES[segments[1]]?.content || "";
+      const visibleFaqSection = getVisibleBlogFaqSection(
+        segments[1],
+        localizedBody,
+        "bn"
+      );
+      if (visibleFaqSection) {
+        extraGraphNodes.push(
+          faqPageNodeSchema({
+            url: canonicalUrl,
+            faqs: visibleFaqSection.questions,
+            inLanguage: "bn-BD",
+          })
+        );
+      }
+      for (const howTo of getVisibleBlogHowTos(segments[1], localizedBody, "bn")) {
+        extraGraphNodes.push(
+          howToSchema({
+            url: canonicalUrl,
+            idSuffix: howTo.idSuffix,
+            name: howTo.name,
+            steps: howTo.steps,
+            inLanguage: "bn-BD",
+          })
+        );
+      }
     } else if (englishPath === "/umrah") {
       const bnUmrahFaq = stripContext(
         generateFAQSchema(getLocalizedHajjFaqs("bn"), {
@@ -2161,6 +2268,7 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           name: copy.title,
           description: copy.description,
           inLanguage: "bn-BD",
+          includeNumberOfItems: false,
           items: getLocalizedBlogs("bn").map((p) => ({
             name: p.title,
             url: siteUrl(`/blog/${p.slug}`, "bn"),

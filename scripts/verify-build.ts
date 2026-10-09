@@ -27,6 +27,13 @@ import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { BLOG_DATA } from "../src/constants";
 import { BLOG_BODY } from "../src/data/blogContent";
+import { BENGALI_BLOG_OVERRIDES } from "../src/data/bengaliContent";
+import { FARHAN_MOMEN_PROFILE } from "../src/data/authorProfiles";
+import {
+  getVisibleBlogFaqSection,
+  getVisibleBlogHowTos,
+} from "../src/utils/blogStructuredData";
+import { collectionPageSchema } from "../src/utils/schema";
 import {
   buildResponsiveSrcSet,
   RESPONSIVE_IMAGE_BREAKPOINTS,
@@ -1270,7 +1277,8 @@ if (rss) {
       .split("\n\n")
       .map((para) => para.trim())
       .filter(Boolean)
-      .filter((para) => para !== "[[figure]]");
+      .filter((para) => para !== "[[figure]]")
+      .filter((para) => !getVisibleBlogFaqSection(slug, para, "en"));
     const missing = paragraphs.filter((para) => !page.includes(normalise(para)));
     if (missing.length > 0) truncatedPrerenders.push(`${slug} (${missing.length}/${paragraphs.length})`);
   }
@@ -1344,6 +1352,370 @@ if (rss) {
           "check getBlogBodyChunkPath() in scripts/prerender.ts"
   );
 }
+
+// --- 14. Route metadata and structured data ---------------------------------
+
+function getSeoSchemaGraph(html: string): Record<string, unknown>[] {
+  const match = html.match(
+    /<script\b[^>]*data-seo-schema="true"[^>]*>([\s\S]*?)<\/script>/i
+  );
+  if (!match) return [];
+  try {
+    const parsed = JSON.parse(match[1]) as unknown;
+    const nodes: Record<string, unknown>[] = [];
+    const collect = (value: unknown) => {
+      if (Array.isArray(value)) {
+        value.forEach(collect);
+      } else if (typeof value === "object" && value !== null) {
+        nodes.push(value as Record<string, unknown>);
+        Object.values(value).forEach(collect);
+      }
+    };
+    collect(parsed);
+    return nodes;
+  } catch {
+    return [];
+  }
+}
+
+function hasSchemaType(node: Record<string, unknown>, expected: string): boolean {
+  const value = node["@type"];
+  return (Array.isArray(value) ? value : [value]).includes(expected);
+}
+
+const prerenderedRouteFiles = distHtmlFiles.filter((file) =>
+  (read(file) ?? "").includes('data-seo-schema="true"')
+);
+const emptyRouteDescriptions: string[] = [];
+const descriptionsToRoutes = new Map<string, string[]>();
+for (const file of prerenderedRouteFiles) {
+  const html = read(file) ?? "";
+  const description = html
+    .match(/<meta name="description" content="([^"]*)"\s*\/>/)
+    ?.[1]
+    ?.trim();
+  if (!description) {
+    emptyRouteDescriptions.push(path.relative(DIST_DIR, file));
+    continue;
+  }
+  const routes = descriptionsToRoutes.get(description) ?? [];
+  routes.push(path.relative(DIST_DIR, file));
+  descriptionsToRoutes.set(description, routes);
+}
+const duplicateRouteDescriptions = [...descriptionsToRoutes.entries()]
+  .filter(([, routes]) => routes.length > 1)
+  .map(([description, routes]) => `${routes.length} pages: ${description.slice(0, 70)}`);
+check(
+  emptyRouteDescriptions.length === 0,
+  emptyRouteDescriptions.length === 0
+    ? `all ${prerenderedRouteFiles.length} prerendered routes have a non-empty meta description`
+    : `${emptyRouteDescriptions.length} prerendered route(s) have no meta description: ` +
+        emptyRouteDescriptions.slice(0, 3).join(", ")
+);
+check(
+  duplicateRouteDescriptions.length === 0,
+  duplicateRouteDescriptions.length === 0
+    ? `all ${prerenderedRouteFiles.length} route meta descriptions are distinct`
+    : `${duplicateRouteDescriptions.length} duplicate meta description(s): ` +
+        duplicateRouteDescriptions.slice(0, 3).join("; ")
+);
+
+const missingArticleSchema: string[] = [];
+const requiredArticleFields = [
+  "headline",
+  "image",
+  "datePublished",
+  "dateModified",
+  "author",
+  "publisher",
+  "mainEntityOfPage",
+];
+for (const post of BLOG_DATA) {
+  const html = read(path.join(DIST_DIR, "blog", `${post.slug}.html`)) ?? "";
+  const article = getSeoSchemaGraph(html).find(
+    (node) => hasSchemaType(node, "Article") || hasSchemaType(node, "BlogPosting")
+  );
+  if (!article || requiredArticleFields.some((field) => !article[field])) {
+    missingArticleSchema.push(post.slug);
+  }
+}
+check(
+  missingArticleSchema.length === 0,
+  missingArticleSchema.length === 0
+    ? `all ${BLOG_DATA.length} English blog pages emit Article/BlogPosting JSON-LD with the required fields`
+    : `${missingArticleSchema.length} English blog page(s) have missing/incomplete Article JSON-LD: ` +
+        missingArticleSchema.slice(0, 3).join(", ")
+);
+
+const bengaliBlogHtmlFiles = collectHtmlFiles(path.join(DIST_DIR, "bn", "blog"));
+const missingBengaliArticleSchema = bengaliBlogHtmlFiles.filter((file) => {
+  const article = getSeoSchemaGraph(read(file) ?? "").find(
+    (node) => hasSchemaType(node, "Article") || hasSchemaType(node, "BlogPosting")
+  );
+  return !article || requiredArticleFields.some((field) => !article[field]);
+});
+const bengaliArticleSchemasAreComplete =
+  bengaliBlogHtmlFiles.length === BLOG_DATA.length && missingBengaliArticleSchema.length === 0;
+check(
+  bengaliArticleSchemasAreComplete,
+  bengaliArticleSchemasAreComplete
+    ? `all ${BLOG_DATA.length} Bengali blog pages emit Article/BlogPosting JSON-LD with the required fields`
+    : `Bengali blog Article JSON-LD coverage is incomplete ` +
+        `(${bengaliBlogHtmlFiles.length}/${BLOG_DATA.length} pages, ` +
+        `${missingBengaliArticleSchema.length} missing/incomplete)`
+);
+
+const normalizeStructuredText = (value: string) =>
+  value
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;|&apos;/g, "'")
+    .replace(/\*/g, "")
+    .replace(/(^|\s)[-•]\s+/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const faqSlug = "travel-creator-resources";
+const faqCoverageIssues: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  const content =
+    locale === "en"
+      ? BLOG_BODY[faqSlug] || ""
+      : BENGALI_BLOG_OVERRIDES[faqSlug]?.content || "";
+  const expectedFaq = getVisibleBlogFaqSection(faqSlug, content, locale);
+  const routeFile =
+    locale === "en"
+      ? path.join(DIST_DIR, "blog", `${faqSlug}.html`)
+      : path.join(DIST_DIR, "bn", "blog", `${faqSlug}.html`);
+  const html = read(routeFile) ?? "";
+  const faqNode = getSeoSchemaGraph(html).find((node) => hasSchemaType(node, "FAQPage"));
+  const mainEntity = Array.isArray(faqNode?.mainEntity)
+    ? (faqNode.mainEntity as Record<string, unknown>[])
+    : [];
+  const exactSchemaPairs =
+    expectedFaq &&
+    mainEntity.length === expectedFaq.questions.length &&
+    expectedFaq.questions.every((faq, index) => {
+      const answer = mainEntity[index]?.acceptedAnswer as Record<string, unknown> | undefined;
+      return mainEntity[index]?.name === faq.question && answer?.text === faq.answer;
+    });
+  const visibleText = normalizeStructuredText(html);
+  const faqIsVisible =
+    expectedFaq &&
+    expectedFaq.questions.every(
+      (faq) =>
+        visibleText.includes(normalizeStructuredText(faq.question)) &&
+        visibleText.includes(normalizeStructuredText(faq.answer))
+    );
+  if (!expectedFaq || !exactSchemaPairs || !faqIsVisible) {
+    faqCoverageIssues.push(locale);
+  }
+}
+check(
+  faqCoverageIssues.length === 0,
+  faqCoverageIssues.length === 0
+    ? "the visible Travel Creator Resources Q&As match FAQPage JSON-LD in English and Bengali"
+    : `FAQ content/schema mismatch for locale(s): ${faqCoverageIssues.join(", ")}`
+);
+
+const howToCases = [
+  "dual-currency-card-endorsement-bangladesh",
+  "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
+  "hajj-registration-bangladesh-government-vs-private-package-cost",
+];
+const howToCoverageIssues: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  for (const slug of howToCases) {
+    const content =
+      locale === "en"
+        ? BLOG_BODY[slug] || ""
+        : BENGALI_BLOG_OVERRIDES[slug]?.content || "";
+    const expectedHowTos = getVisibleBlogHowTos(slug, content, locale);
+    const routeFile =
+      locale === "en"
+        ? path.join(DIST_DIR, "blog", `${slug}.html`)
+        : path.join(DIST_DIR, "bn", "blog", `${slug}.html`);
+    const html = read(routeFile) ?? "";
+    const howToNodes = getSeoSchemaGraph(html).filter((node) => hasSchemaType(node, "HowTo"));
+    const pageText = normalizeStructuredText(html);
+    const matchesAll =
+      expectedHowTos.length > 0 &&
+      expectedHowTos.every((expected) => {
+        const node = howToNodes.find((candidate) =>
+          String(candidate["@id"] || "").endsWith(`#${expected.idSuffix}`)
+        );
+        const steps = Array.isArray(node?.step)
+          ? (node.step as Record<string, unknown>[])
+          : [];
+        return (
+          node?.name === expected.name &&
+          steps.length === expected.steps.length &&
+          expected.steps.every((step, index) => {
+            const schemaStep = steps[index];
+            return (
+              schemaStep?.name === step.name &&
+              schemaStep?.text === step.text &&
+              pageText.includes(normalizeStructuredText(step.name)) &&
+              pageText.includes(normalizeStructuredText(step.text))
+            );
+          })
+        );
+      });
+    if (!matchesAll) howToCoverageIssues.push(`${locale}:${slug}`);
+  }
+}
+check(
+  howToCoverageIssues.length === 0,
+  howToCoverageIssues.length === 0
+    ? "HowTo JSON-LD steps match the visible bilingual instructions on the selected procedural guides"
+    : `HowTo content/schema mismatch for route(s): ${howToCoverageIssues.join(", ")}`
+);
+
+const authorBioSlug = "dual-currency-card-endorsement-bangladesh";
+const authorBioIssues: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  const routeFile =
+    locale === "en"
+      ? path.join(DIST_DIR, "blog", `${authorBioSlug}.html`)
+      : path.join(DIST_DIR, "bn", "blog", `${authorBioSlug}.html`);
+  const html = read(routeFile) ?? "";
+  const article = getSeoSchemaGraph(html).find((node) => hasSchemaType(node, "Article"));
+  const author = article?.author as Record<string, unknown> | undefined;
+  const expectedBio = locale === "en" ? FARHAN_MOMEN_PROFILE.bioEn : FARHAN_MOMEN_PROFILE.bioBn;
+  const visibleText = normalizeStructuredText(html);
+  const alternateNames = Array.isArray(author?.alternateName)
+    ? (author.alternateName as string[])
+    : [];
+  const linkedWorks = Array.isArray(author?.subjectOf)
+    ? (author.subjectOf as Record<string, unknown>[])
+    : [];
+  const worksMatch = FARHAN_MOMEN_PROFILE.creativeWorks.every((work) => {
+    const expectedTitle = locale === "en" ? work.titleEn : work.titleBn;
+    const schemaWork = linkedWorks.find((item) => item.url === work.url);
+    return (
+      schemaWork?.name === expectedTitle &&
+      html.includes(work.url) &&
+      visibleText.includes(normalizeStructuredText(expectedTitle))
+    );
+  });
+  if (
+    !author ||
+    author.name !== FARHAN_MOMEN_PROFILE.name ||
+    author.description !== expectedBio ||
+    author.url !== FARHAN_MOMEN_PROFILE.portfolioUrl ||
+    !Array.isArray(author.sameAs) ||
+    !author.sameAs.includes(FARHAN_MOMEN_PROFILE.sameAs[0]) ||
+    !FARHAN_MOMEN_PROFILE.alternateNames.every((name) => alternateNames.includes(name)) ||
+    !worksMatch ||
+    !visibleText.includes(normalizeStructuredText(expectedBio)) ||
+    !html.includes(FARHAN_MOMEN_PROFILE.portfolioUrl)
+  ) {
+    authorBioIssues.push(locale);
+  }
+}
+check(
+  authorBioIssues.length === 0,
+  authorBioIssues.length === 0
+    ? "Farhan Momen/MARC's bilingual bio, documentary links, and Article author entity match the portfolio"
+    : `author bio/Article author metadata mismatch for locale(s): ${authorBioIssues.join(", ")}`
+);
+
+const sampleCollectionItems = [
+  { name: "Sample guide A", url: "https://ural-travel.pages.dev/blog/sample-a" },
+  { name: "Sample guide B", url: "https://ural-travel.pages.dev/blog/sample-b" },
+];
+const generatedEnBlogCollection = collectionPageSchema({
+  url: "https://ural-travel.pages.dev/blog",
+  name: "Travel Blog",
+  description: "Travel guides",
+  items: sampleCollectionItems,
+  includeNumberOfItems: true,
+});
+const generatedBnBlogCollection = collectionPageSchema({
+  url: "https://ural-travel.pages.dev/bn/blog",
+  name: "বাংলা ব্লগ",
+  description: "ভ্রমণ নির্দেশিকা",
+  items: sampleCollectionItems,
+  includeNumberOfItems: true,
+});
+const generatedFlightCollection = collectionPageSchema({
+  url: "https://ural-travel.pages.dev/flights",
+  name: "Flight Guides",
+  description: "Flight route guides",
+  items: sampleCollectionItems,
+  includeNumberOfItems: true,
+});
+const collectionSchemaCountGuardWorks =
+  generatedEnBlogCollection.mainEntity.numberOfItems === undefined &&
+  generatedBnBlogCollection.mainEntity.numberOfItems === undefined &&
+  generatedFlightCollection.mainEntity.numberOfItems === sampleCollectionItems.length;
+check(
+  collectionSchemaCountGuardWorks,
+  collectionSchemaCountGuardWorks
+    ? "CollectionPage always omits totals for /blog hubs while other collections keep computed counts"
+    : "CollectionPage count guard should omit totals on English/Bengali blog hubs only"
+);
+
+const blogHubHtml = read(path.join(DIST_DIR, "blog.html")) ?? "";
+const blogHubItemList = getSeoSchemaGraph(blogHubHtml).find((node) =>
+  hasSchemaType(node, "ItemList")
+);
+const blogHubItems = blogHubItemList?.itemListElement;
+const blogHubListIsCompleteWithoutTotal =
+  blogHubItemList?.numberOfItems === undefined &&
+  Array.isArray(blogHubItems) &&
+  blogHubItems.length === BLOG_DATA.length;
+check(
+  blogHubListIsCompleteWithoutTotal,
+  blogHubListIsCompleteWithoutTotal
+    ? "blog CollectionPage lists every guide without an explicit total"
+    : "blog CollectionPage should list every guide and omit numberOfItems"
+);
+
+const homepageHtml = distIndexHtml ?? "";
+const entitySchemaMatch = homepageHtml.match(
+  /<script type="application\/ld\+json" id="site-entity-schema">([\s\S]*?)<\/script>/
+);
+let websiteDescription = "";
+if (entitySchemaMatch) {
+  try {
+    const entityGraph = JSON.parse(entitySchemaMatch[1]) as {
+      "@graph"?: Record<string, unknown>[];
+    };
+    const websiteNode = entityGraph["@graph"]?.find((node) => hasSchemaType(node, "WebSite"));
+    websiteDescription =
+      typeof websiteNode?.description === "string" ? websiteNode.description : "";
+  } catch {
+    websiteDescription = "";
+  }
+}
+const homepageBlogSlugs = new Set(
+  [...homepageHtml.matchAll(/href="\/blog\/([^"]+)"/g)].map((match) => match[1])
+);
+const missingHomepageBlogLinks = BLOG_DATA.filter((post) => !homepageBlogSlugs.has(post.slug)).map(
+  (post) => post.slug
+);
+const homepageMentionsBlogCount =
+  /\b\d+\s+(?:practical\s+)?travel guides\b/i.test(websiteDescription) ||
+  /\bbrowse\s+\d+\s+(?:practical\s+)?travel guides\b/i.test(homepageHtml) ||
+  /\bAll\s+\d+\s+Bangladesh Outbound Travel &amp; Umrah Blog Guides\b/i.test(homepageHtml) ||
+  /<h2>\s*\d+\s+Bangladesh Outbound Travel &amp; Umrah Guides\s*<\/h2>/i.test(homepageHtml);
+const homepageBlogIndexIsCorrect =
+  !homepageMentionsBlogCount &&
+  missingHomepageBlogLinks.length === 0 &&
+  homepageBlogSlugs.size === BLOG_DATA.length;
+check(
+  homepageBlogIndexIsCorrect,
+  homepageBlogIndexIsCorrect
+    ? "homepage schema/copy omit the blog total while the crawlable directory retains every guide"
+    : `homepage still mentions the blog total or the crawlable directory is incomplete; ` +
+        `missing links: ${missingHomepageBlogLinks.slice(0, 3).join(", ") || "none"}`
+);
 
 // --- Report ----------------------------------------------------------------
 

@@ -1,91 +1,64 @@
-import React, { useState, useId } from "react";
-import { ExternalLink, Wifi, Globe, Loader2 } from "lucide-react";
+import { ExternalLink, Wifi } from "lucide-react";
 
+const AIRALO_AFFILIATE_URL = "https://airalo.tpo.li/mV2QXsXK";
+const YESIM_AFFILIATE_URL = "https://yesim.tpo.li/O8Zvqr73";
+
+/**
+ * The affiliate URLs are provider-level redirects, not country-specific
+ * deeplinks. Keep destination selection on the provider site until an approved
+ * destination-aware link is available; do not imply the selection is passed
+ * through to the partner.
+ */
 export function AiraloEmbed() {
-  const uid = useId();
-  const [selectedCountry, setSelectedCountry] = useState("Saudi Arabia");
-  const [isRedirecting, setIsRedirecting] = useState(false);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsRedirecting(true);
-    
-    setTimeout(() => {
-      setIsRedirecting(false);
-      window.open("https://airalo.tpo.li/mV2QXsXK", "_blank", "noopener,noreferrer,sponsored");
-    }, 600);
-  };
-
   return (
-    <div className="w-full bg-slate-50/80 rounded-xl p-4 sm:p-5 border border-slate-100 relative overflow-hidden font-sans space-y-3.5">
+    <section className="w-full space-y-3.5 overflow-hidden rounded-xl border border-slate-100 bg-slate-50/80 p-4 font-sans sm:p-5">
       <div className="flex items-center gap-2.5">
-        <div className="p-1.5 bg-red-500/10 text-red-600 rounded-lg">
+        <div className="rounded-lg bg-red-500/10 p-1.5 text-red-600" aria-hidden="true">
           <Wifi size={18} />
         </div>
         <div>
-          <h4 className="font-serif font-black text-sm text-slate-900">Travel eSIM (Airalo &amp; Yesim)</h4>
-          <p className="text-[10px] text-slate-500 uppercase font-mono tracking-wider">Instant QR Activation • Keep BD SIM for Bank OTPs</p>
+          <h4 className="font-serif text-sm font-black text-slate-900">
+            Travel eSIM plans
+          </h4>
+          <p className="text-[10px] font-mono uppercase tracking-wider text-slate-500">
+            Airalo · Yesim
+          </p>
         </div>
       </div>
 
-      <form onSubmit={handleSearch} className="space-y-3">
-        <div>
-          <label htmlFor={`${uid}-airalo-country`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
-            <Globe size={9} className="text-red-550" /> Destination Country
-          </label>
-          <select
-            id={`${uid}-airalo-country`}
-            value={selectedCountry}
-            onChange={(e) => setSelectedCountry(e.target.value)}
-            className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 transition-all"
-          >
-            <option value="Saudi Arabia">Saudi Arabia (Umrah / Nusuk) 🇸🇦</option>
-            <option value="Thailand">Thailand 🇹🇭</option>
-            <option value="Malaysia">Malaysia 🇲🇾</option>
-            <option value="Singapore">Singapore 🇸🇬</option>
-            <option value="UAE">United Arab Emirates (Dubai) 🇦🇪</option>
-            <option value="Nepal">Nepal 🇳🇵</option>
-            <option value="Maldives">Maldives 🇲🇻</option>
-            <option value="Europe">Europe / Schengen / UK / USA 🌍</option>
-            <option value="Global">Global / Multi-Country Asia Plan</option>
-          </select>
-        </div>
+      <p className="text-[11px] leading-relaxed text-slate-600">
+        Choose your destination and plan on the provider’s site. Check coverage,
+        data allowance, validity, device compatibility, activation rules, and the
+        current price before you buy.
+      </p>
 
-        <p className="text-[10px] text-slate-500 font-sans leading-relaxed">
-          Install your digital eSIM in Dhaka so WhatsApp, Nusuk QR codes, and Grab/Careem work the moment your flight lands—while your Bangladeshi SIM stays active for free bank OTPs.
-        </p>
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <a
+          href={AIRALO_AFFILIATE_URL}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-slate-900 px-3 py-2.5 text-center text-xs font-bold text-white transition-colors hover:bg-slate-800"
+        >
+          <span>Browse Airalo plans</span>
+          <ExternalLink size={11} aria-hidden="true" />
+        </a>
 
-        {/* Dual eSIM Partner Buttons: Airalo + Yesim (Mobile App & Web supported) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <button
-            type="submit"
-            disabled={isRedirecting}
-            className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-3 rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-70"
-          >
-            {isRedirecting ? (
-              <>
-                <Loader2 size={12} className="animate-spin text-white" />
-                <span>Opening Airalo...</span>
-              </>
-            ) : (
-              <>
-                <span>Airalo eSIM ($4.50+)</span>
-                <ExternalLink size={11} />
-              </>
-            )}
-          </button>
+        <a
+          href={YESIM_AFFILIATE_URL}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#F6B73C] px-3 py-2.5 text-center text-xs font-bold text-brand-navy transition-colors hover:bg-[#ffc654]"
+        >
+          <span>Browse Yesim plans</span>
+          <ExternalLink size={11} aria-hidden="true" />
+        </a>
+      </div>
 
-          <a
-            href="https://yesim.tpo.li/O8Zvqr73"
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-2.5 px-3 rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer text-center"
-          >
-            <span>Yesim Unlimited / App eSIM</span>
-            <ExternalLink size={11} />
-          </a>
-        </div>
-      </form>
-    </div>
+      <p className="text-[10px] leading-relaxed text-slate-500">
+        Prices, country coverage, and plan terms can change. Confirm them with the
+        provider. Keeping a Bangladesh SIM available for OTPs depends on your
+        phone, mobile operator, and roaming settings; check possible charges.
+      </p>
+    </section>
   );
 }
