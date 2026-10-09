@@ -1345,6 +1345,172 @@ if (rss) {
   );
 }
 
+// --- 14. Route metadata and structured data ---------------------------------
+
+function getSeoSchemaGraph(html: string): Record<string, unknown>[] {
+  const match = html.match(
+    /<script\b[^>]*data-seo-schema="true"[^>]*>([\s\S]*?)<\/script>/i
+  );
+  if (!match) return [];
+  try {
+    const parsed = JSON.parse(match[1]) as unknown;
+    const nodes: Record<string, unknown>[] = [];
+    const collect = (value: unknown) => {
+      if (Array.isArray(value)) {
+        value.forEach(collect);
+      } else if (typeof value === "object" && value !== null) {
+        nodes.push(value as Record<string, unknown>);
+        Object.values(value).forEach(collect);
+      }
+    };
+    collect(parsed);
+    return nodes;
+  } catch {
+    return [];
+  }
+}
+
+function hasSchemaType(node: Record<string, unknown>, expected: string): boolean {
+  const value = node["@type"];
+  return (Array.isArray(value) ? value : [value]).includes(expected);
+}
+
+const prerenderedRouteFiles = distHtmlFiles.filter((file) =>
+  (read(file) ?? "").includes('data-seo-schema="true"')
+);
+const emptyRouteDescriptions: string[] = [];
+const descriptionsToRoutes = new Map<string, string[]>();
+for (const file of prerenderedRouteFiles) {
+  const html = read(file) ?? "";
+  const description = html
+    .match(/<meta name="description" content="([^"]*)"\s*\/>/)
+    ?.[1]
+    ?.trim();
+  if (!description) {
+    emptyRouteDescriptions.push(path.relative(DIST_DIR, file));
+    continue;
+  }
+  const routes = descriptionsToRoutes.get(description) ?? [];
+  routes.push(path.relative(DIST_DIR, file));
+  descriptionsToRoutes.set(description, routes);
+}
+const duplicateRouteDescriptions = [...descriptionsToRoutes.entries()]
+  .filter(([, routes]) => routes.length > 1)
+  .map(([description, routes]) => `${routes.length} pages: ${description.slice(0, 70)}`);
+check(
+  emptyRouteDescriptions.length === 0,
+  emptyRouteDescriptions.length === 0
+    ? `all ${prerenderedRouteFiles.length} prerendered routes have a non-empty meta description`
+    : `${emptyRouteDescriptions.length} prerendered route(s) have no meta description: ` +
+        emptyRouteDescriptions.slice(0, 3).join(", ")
+);
+check(
+  duplicateRouteDescriptions.length === 0,
+  duplicateRouteDescriptions.length === 0
+    ? `all ${prerenderedRouteFiles.length} route meta descriptions are distinct`
+    : `${duplicateRouteDescriptions.length} duplicate meta description(s): ` +
+        duplicateRouteDescriptions.slice(0, 3).join("; ")
+);
+
+const missingArticleSchema: string[] = [];
+const requiredArticleFields = [
+  "headline",
+  "image",
+  "datePublished",
+  "dateModified",
+  "author",
+  "publisher",
+  "mainEntityOfPage",
+];
+for (const post of BLOG_DATA) {
+  const html = read(path.join(DIST_DIR, "blog", `${post.slug}.html`)) ?? "";
+  const article = getSeoSchemaGraph(html).find(
+    (node) => hasSchemaType(node, "Article") || hasSchemaType(node, "BlogPosting")
+  );
+  if (!article || requiredArticleFields.some((field) => !article[field])) {
+    missingArticleSchema.push(post.slug);
+  }
+}
+check(
+  missingArticleSchema.length === 0,
+  missingArticleSchema.length === 0
+    ? `all ${BLOG_DATA.length} English blog pages emit Article/BlogPosting JSON-LD with the required fields`
+    : `${missingArticleSchema.length} English blog page(s) have missing/incomplete Article JSON-LD: ` +
+        missingArticleSchema.slice(0, 3).join(", ")
+);
+
+const bengaliBlogHtmlFiles = collectHtmlFiles(path.join(DIST_DIR, "bn", "blog"));
+const missingBengaliArticleSchema = bengaliBlogHtmlFiles.filter((file) => {
+  const article = getSeoSchemaGraph(read(file) ?? "").find(
+    (node) => hasSchemaType(node, "Article") || hasSchemaType(node, "BlogPosting")
+  );
+  return !article || requiredArticleFields.some((field) => !article[field]);
+});
+const bengaliArticleSchemasAreComplete =
+  bengaliBlogHtmlFiles.length === BLOG_DATA.length && missingBengaliArticleSchema.length === 0;
+check(
+  bengaliArticleSchemasAreComplete,
+  bengaliArticleSchemasAreComplete
+    ? `all ${BLOG_DATA.length} Bengali blog pages emit Article/BlogPosting JSON-LD with the required fields`
+    : `Bengali blog Article JSON-LD coverage is incomplete ` +
+        `(${bengaliBlogHtmlFiles.length}/${BLOG_DATA.length} pages, ` +
+        `${missingBengaliArticleSchema.length} missing/incomplete)`
+);
+
+const blogHubHtml = read(path.join(DIST_DIR, "blog.html")) ?? "";
+const blogHubItemList = getSeoSchemaGraph(blogHubHtml).find((node) =>
+  hasSchemaType(node, "ItemList")
+);
+const blogHubItems = blogHubItemList?.itemListElement;
+const blogHubCountIsCorrect =
+  blogHubItemList?.numberOfItems === BLOG_DATA.length &&
+  Array.isArray(blogHubItems) &&
+  blogHubItems.length === BLOG_DATA.length;
+check(
+  blogHubCountIsCorrect,
+  blogHubCountIsCorrect
+    ? `blog CollectionPage ItemList matches all ${BLOG_DATA.length} published posts`
+    : `blog CollectionPage ItemList does not match BLOG_DATA (${BLOG_DATA.length} posts)`
+);
+
+const homepageHtml = distIndexHtml ?? "";
+const entitySchemaMatch = homepageHtml.match(
+  /<script type="application\/ld\+json" id="site-entity-schema">([\s\S]*?)<\/script>/
+);
+let websiteDescription = "";
+if (entitySchemaMatch) {
+  try {
+    const entityGraph = JSON.parse(entitySchemaMatch[1]) as {
+      "@graph"?: Record<string, unknown>[];
+    };
+    const websiteNode = entityGraph["@graph"]?.find((node) => hasSchemaType(node, "WebSite"));
+    websiteDescription =
+      typeof websiteNode?.description === "string" ? websiteNode.description : "";
+  } catch {
+    websiteDescription = "";
+  }
+}
+const homepageBlogSlugs = new Set(
+  [...homepageHtml.matchAll(/href="\/blog\/([^"]+)"/g)].map((match) => match[1])
+);
+const missingHomepageBlogLinks = BLOG_DATA.filter((post) => !homepageBlogSlugs.has(post.slug)).map(
+  (post) => post.slug
+);
+const homepageBlogIndexIsCorrect =
+  websiteDescription.includes(`${BLOG_DATA.length} practical travel guides`) &&
+  homepageHtml.includes(`browse ${BLOG_DATA.length} practical travel guides`) &&
+  homepageHtml.includes(`All ${BLOG_DATA.length} Bangladesh Outbound Travel &amp; Umrah Blog Guides`) &&
+  homepageHtml.includes(`<h2>${BLOG_DATA.length} Bangladesh Outbound Travel &amp; Umrah Guides</h2>`) &&
+  missingHomepageBlogLinks.length === 0 &&
+  homepageBlogSlugs.size === BLOG_DATA.length;
+check(
+  homepageBlogIndexIsCorrect,
+  homepageBlogIndexIsCorrect
+    ? `homepage WebSite schema, copy, and crawlable directory match all ${BLOG_DATA.length} guides`
+    : `homepage guide count or crawlable directory does not match BLOG_DATA (${BLOG_DATA.length}); ` +
+        `missing links: ${missingHomepageBlogLinks.slice(0, 3).join(", ") || "none"}`
+);
+
 // --- Report ----------------------------------------------------------------
 
 for (const label of checks) console.log(`  \u2713 ${label}`);

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ArrowRight, BookOpen, Compass, HelpCircle, Layers, Search } from "lucide-react";
+import { BLOG_DATA } from "../constants";
 import { Language } from "../translations";
 
 export interface TopicalBlogNode {
@@ -759,6 +760,17 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
   },
 ];
 
+const SEMANTIC_CLUSTER_COUNT = TOPICAL_AUTHORITY_CLUSTERS.filter(
+  (cluster) => cluster.id !== "all"
+).length;
+const CORE_TOPIC_COUNT = TOPICAL_BLOG_NODES.filter(
+  (node) => node.clusterId === "hajj-umrah"
+).length;
+const OUTBOUND_TOPIC_COUNT = TOPICAL_BLOG_NODES.length - CORE_TOPIC_COUNT;
+const LIVE_MAPPED_TOPIC_COUNT = TOPICAL_BLOG_NODES.filter(
+  (node) => node.isLiveBlog
+).length;
+
 interface TopicalAuthorityBlueprintProps {
   lang: Language;
   onNavigate: (path: string) => void;
@@ -769,6 +781,13 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
   onNavigate,
 }) => {
   const isBn = lang === "bn";
+  const formatCount = (count: number) =>
+    count.toLocaleString(isBn ? "bn-BD" : "en-US");
+  const publishedGuideCount = formatCount(BLOG_DATA.length);
+  const coreTopicCount = formatCount(CORE_TOPIC_COUNT);
+  const outboundTopicCount = formatCount(OUTBOUND_TOPIC_COUNT);
+  const liveMappedTopicCount = formatCount(LIVE_MAPPED_TOPIC_COUNT);
+  const totalTopicCount = formatCount(TOPICAL_BLOG_NODES.length);
   const [activeCluster, setActiveCluster] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
@@ -802,8 +821,8 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
             <span aria-hidden="true">·</span>
             <span>
               {isBn
-                ? "৬টি কোর ক্লাস্টার · ৪১টি লাইভ সরকারি যাচাইকৃত গাইড (100% Complete)"
-                : "6 Semantic Silos · 41 Live Verified Guides (100% Complete)"}
+                ? `${formatCount(SEMANTIC_CLUSTER_COUNT)}টি সেমান্টিক ক্লাস্টার · ${publishedGuideCount}টি প্রকাশিত ব্লগ গাইড`
+                : `${SEMANTIC_CLUSTER_COUNT} Semantic Clusters · ${publishedGuideCount} Published Blog Guides`}
             </span>
             <span aria-hidden="true">·</span>
             <span>
@@ -827,21 +846,23 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
         {/* Quick Architecture Summary Numbers */}
         <div className="grid grid-cols-3 gap-3 shrink-0 bg-slate-50 border border-slate-200/80 rounded-2xl p-3.5 text-center tabular-nums">
           <div className="px-2">
-            <div className="font-serif text-xl font-black text-brand-navy">12</div>
+            <div className="font-serif text-xl font-black text-brand-navy">{coreTopicCount}</div>
             <div className="text-[11px] text-slate-500">
               {isBn ? "Hajj/Umrah কোর" : "Hajj/Umrah Core"}
             </div>
           </div>
           <div className="px-2 border-x border-slate-200">
-            <div className="font-serif text-xl font-black text-brand-navy">29</div>
+            <div className="font-serif text-xl font-black text-brand-navy">{outboundTopicCount}</div>
             <div className="text-[11px] text-slate-500">
-              {isBn ? "আউটবাউন্ড ক্লাস্টার" : "Outbound Silos"}
+              {isBn ? "আউটবাউন্ড টপিক" : "Outbound Topics"}
             </div>
           </div>
           <div className="px-2">
-            <div className="font-serif text-xl font-black text-emerald-700">41/41</div>
+            <div className="font-serif text-xl font-black text-emerald-700">
+              {liveMappedTopicCount}/{totalTopicCount}
+            </div>
             <div className="text-[11px] text-slate-500">
-              {isBn ? "১০০% লাইভ ব্লগ" : "100% Live Guides"}
+              {isBn ? "লাইভ ম্যাপড টপিক" : "Live-Mapped Topics"}
             </div>
           </div>
         </div>

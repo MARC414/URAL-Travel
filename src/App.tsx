@@ -479,7 +479,7 @@ const bdEpassportDeskImg = "/assets/images/bangladesh_epassport_biometric_desk_1
 const airportDelayBoardImg = "/assets/images/airport_departure_board_delay_claim_1790520824658-1200.webp";
 const dhakaAirlinesTarmacImg = "/assets/images/dhaka_airport_widebody_airlines_tarmac_1790520836931-1200.webp";
 
-// Every single blog post (all 41 articles) is mapped to its own 100% unique visual asset (zero repeated images)
+// Every blog post is mapped to its own unique visual asset (zero repeated images).
 const havanaGranTeatroImg = "/assets/images/havana_gran_teatro_classic_cars_1791427200000-1200.webp";
 const chefchaouenFountainImg = "/assets/images/chefchaouen_blue_fountain_alley_1791427400000-1200.webp";
 

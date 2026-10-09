@@ -730,7 +730,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     extraGraphNodes: [homeFaq],
     bodyHtml: `
       <h1>URAL — Flights, Hotels, Umrah &amp; Visa Guides for Bangladeshi Travelers</h1>
-      <p>Compare cheap international flights from Dhaka (DAC), check official e-Visa checklists, plan DIY Umrah &amp; Hajj in BDT, and explore 41 verified travel guides for Bangladeshi passport holders.</p>
+      <p>Compare cheap international flights from Dhaka (DAC), check official e-Visa checklists, plan DIY Umrah &amp; Hajj in BDT, and explore ${BLOG_DATA.length} verified travel guides for Bangladeshi passport holders.</p>
     `,
   });
 
@@ -1335,7 +1335,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     bodyHtml: `
       <article>
         <h1>Dhaka Airport (DAC) Pre-Departure Readiness Checklist &amp; Complete 83-Page Sitemap</h1>
-        <p>Interactive pre-flight checklist for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC), cabin &amp; 5L Zamzam baggage rules, Bangladesh Embassy emergency helplines abroad, and direct links to all 41 travel guides.</p>
+        <p>Interactive pre-flight checklist for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC), cabin &amp; 5L Zamzam baggage rules, Bangladesh Embassy emergency helplines abroad, and direct links to all ${BLOG_DATA.length} travel guides.</p>
         ${renderLandingFaqs("sitemap-predeparture-faqs", "Dhaka Airport pre-departure and baggage questions", sitemapFaqSchema)}
       </article>
     `,
@@ -1424,7 +1424,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     `,
   });
 
-  // 13. Blog Hub (/blog) + 41 Blog Guides (/blog/:slug)
+  // 13. Blog Hub (/blog) + individual Blog Guides (/blog/:slug)
   const blogHubTitle =
     "Travel Guides, Umrah Preparation & Outbound Intelligence for Bangladesh (2026) | URAL Blog";
   const blogHubDesc =
@@ -1604,7 +1604,7 @@ function buildAllRoutes(): PrerenderRoute[] {
 //   - en-bd / bn-bd / x-default hreflang tags whose three values are identical
 //     on both members of the pair (valid reciprocal return tags)
 //
-// Coverage (src/data/bengaliContent.ts): 41/41 blogs, 6 flights, 6 hotels,
+// Coverage (src/data/bengaliContent.ts): all BLOG_DATA blogs, 6 flights, 6 hotels,
 // 6 visas, 6 trip-cost guides and the Hajj/Umrah FAQs. Hub and static pages use
 // the hand-written BENGALI_SEO_COPY. /destinations/* has no Bengali data yet, so
 // no /bn route is generated for it and its hreflang cluster is withheld — see
