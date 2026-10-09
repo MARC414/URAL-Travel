@@ -33,6 +33,7 @@ import {
   getVisibleBlogFaqSection,
   getVisibleBlogHowTos,
 } from "../src/utils/blogStructuredData";
+import { collectionPageSchema } from "../src/utils/schema";
 import {
   buildResponsiveSrcSet,
   RESPONSIVE_IMAGE_BREAKPOINTS,
@@ -1622,6 +1623,42 @@ check(
   authorBioIssues.length === 0
     ? "Farhan Momen/MARC's bilingual bio, documentary links, and Article author entity match the portfolio"
     : `author bio/Article author metadata mismatch for locale(s): ${authorBioIssues.join(", ")}`
+);
+
+const sampleCollectionItems = [
+  { name: "Sample guide A", url: "https://ural-travel.pages.dev/blog/sample-a" },
+  { name: "Sample guide B", url: "https://ural-travel.pages.dev/blog/sample-b" },
+];
+const generatedEnBlogCollection = collectionPageSchema({
+  url: "https://ural-travel.pages.dev/blog",
+  name: "Travel Blog",
+  description: "Travel guides",
+  items: sampleCollectionItems,
+  includeNumberOfItems: true,
+});
+const generatedBnBlogCollection = collectionPageSchema({
+  url: "https://ural-travel.pages.dev/bn/blog",
+  name: "বাংলা ব্লগ",
+  description: "ভ্রমণ নির্দেশিকা",
+  items: sampleCollectionItems,
+  includeNumberOfItems: true,
+});
+const generatedFlightCollection = collectionPageSchema({
+  url: "https://ural-travel.pages.dev/flights",
+  name: "Flight Guides",
+  description: "Flight route guides",
+  items: sampleCollectionItems,
+  includeNumberOfItems: true,
+});
+const collectionSchemaCountGuardWorks =
+  generatedEnBlogCollection.mainEntity.numberOfItems === undefined &&
+  generatedBnBlogCollection.mainEntity.numberOfItems === undefined &&
+  generatedFlightCollection.mainEntity.numberOfItems === sampleCollectionItems.length;
+check(
+  collectionSchemaCountGuardWorks,
+  collectionSchemaCountGuardWorks
+    ? "CollectionPage always omits totals for /blog hubs while other collections keep computed counts"
+    : "CollectionPage count guard should omit totals on English/Bengali blog hubs only"
 );
 
 const blogHubHtml = read(path.join(DIST_DIR, "blog.html")) ?? "";

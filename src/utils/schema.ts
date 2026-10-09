@@ -314,6 +314,11 @@ export function collectionPageSchema(options: {
     inLanguage = "en-BD",
     includeNumberOfItems = true,
   } = options;
+  const collectionPath = new URL(url, BASE_URL).pathname.replace(/\/+$/, "");
+  // Blog totals are intentionally undisclosed. Keep this invariant here as
+  // well as at call sites so new posts update the ItemList without exposing a
+  // count or requiring anyone to maintain a separate number.
+  const isBlogHub = collectionPath.endsWith("/blog");
   return {
     "@type": "CollectionPage",
     "@id": `${url}#webpage`,
@@ -327,7 +332,7 @@ export function collectionPageSchema(options: {
     mainEntity: {
       "@type": "ItemList",
       itemListOrder: "https://schema.org/ItemListOrderAscending",
-      ...(includeNumberOfItems ? { numberOfItems: items.length } : {}),
+      ...(includeNumberOfItems && !isBlogHub ? { numberOfItems: items.length } : {}),
       itemListElement: items.map((item, idx) => ({
         "@type": "ListItem",
         position: idx + 1,
