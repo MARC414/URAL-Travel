@@ -1336,6 +1336,122 @@ Inside the marked creator callout further down this page: exactly one place, cle
 8. Build Your First Article, Not Your Perfect Setup
 The difference between creators who earn and creators who keep tweaking their logo is finished articles. Pick one destination or one problem you genuinely know, maybe the visa paperwork you already survived or the halal food map of the city you walk, and publish one useful, honest page this week. Then another.
 When you are ready to monetize, start with one hub, place tools where they help, and disclose everything. The creator callout is the only place on this page where we earn if you click. We would rather you trust this page for years than click it once.`,
+  "kkday-10-10-winter-sale-japan-tours-passes-guide": `Winter is peak holiday season across Japan and East Asia, drawing international travelers for Hokkaido powder snow, Mt. Fuji day trips, Tokyo illuminations, and theme park spectacles. Today, Travelpayouts and KKday announced the official launch of the **KKday 10.10 Winter Travel Sale**, releasing three high-value 30% discount promo codes starting **October 10 at 08:00 AM UTC+8** (06:00 AM Bangladesh Standard Time / BST).
+
+Because these codes are strictly first-come, first-served (FCFS) with one redemption per customer account, planning your cart before the launch trigger is critical. In this editorial guide, we break down the three voucher codes, map them against the verified winter catalog, and share essential booking tips for travelers paying with international or Bangladeshi dual-currency cards.
+
+---
+
+### 1. The 10.10 Winter Promo Code Stack (30% Discount Tier)
+
+The sale features three distinct category-specific voucher codes launching simultaneously:
+
+* **Code: \`1010TOURS\` — 30% OFF Tours & Experiences**
+  Applies to ski lessons, snow resort day trips, guided UNESCO heritage excursions (like Shirakawa-go), and cultural workshops.
+* **Code: \`1010MOVE\` — 30% OFF Transportation & Rail**
+  Applies to airport express trains (Keisei Skyliner, Nankai Rapi:t), multi-day city subway passes, JR regional rail passes, and private airport transfers.
+* **Code: \`1010TIX\` — 30% OFF Attraction Tickets**
+  Applies to major theme parks, observation decks, digital art exhibits, and multi-attraction sightseeing passes.
+
+**Campaign Rules & Guardrails:**
+1. **Launch Window:** October 10 at 08:00 AM UTC+8 through October 31, 2026 (or until code quotas are exhausted).
+2. **Travel Validity:** Bookings made with these codes are valid for travel dates throughout the entire 2026–2027 winter season (up to March 31, 2027).
+3. **Usage Limit:** Exactly one redemption per code per registered KKday user account.
+4. **Checkout Tip:** Codes must be applied at checkout in the promo code field before finalizing payment with your Visa, Mastercard, or Amex.
+
+---
+
+### 2. Best Tours & Ski Experiences to Pair with \`1010TOURS\` (30% OFF)
+
+Winter day trips in Japan can cost between $80 and $250 USD per person due to private coach transit, equipment hire, and lift tickets. Applying \`1010TOURS\` provides significant cash savings on these verified winter items:
+
+1. **Hokkaido Ski Day Tour — Teine Ski Resort (Sapporo Departure):**
+   Sapporo Teine hosted the 1972 Winter Olympic alpine events and sits just 45 minutes from central Sapporo. This tour includes roundtrip bus transfer, ski equipment rental, and bilingual instruction—perfect for first-time skiers.
+2. **Mt. Fuji Snow Park Yeti Skiing & Lesson Tour (Tokyo Departure):**
+   Located on the southern slope of Mt. Fuji 2nd Station, Snow Park Yeti is famous for being Japan's earliest-opening outdoor snow resort. Full packages include Tokyo pickup, ski gear, sledding basin access, and optional hot spring (Onsen) add-ons.
+3. **Shirakawa-go Gassho Village & Hida Takayama Tour (Nagoya / Takayama Departure):**
+   The UNESCO World Heritage village of Shirakawa-go transforms into a fairy-tale snow kingdom in winter. KKday provides guaranteed-departure day buses including the Shiroyama Tenshukaku observation deck.
+4. **GALA Yuzawa Snow Resort Ski Gear & Gondola Pass (Niigata):**
+   GALA Yuzawa is the only ski resort in the world directly connected to a Shinkansen bullet train station (75 minutes from Tokyo Station). Pre-booking your gear rental and lift pass online eliminates 45-minute lines at the rental desk.
+5. **Niseko & Rusutsu Private Ski Instruction (Hokkaido):**
+   For families or small groups visiting Hokkaido's powder capital, private multi-lingual lessons provide dedicated instructors for adults and kids.
+6. **Kyoto Arashiyama Hozugawa River Boat Ride:**
+   Experience Arashiyama's dramatic winter river gorges on a traditional pole-steered 16-kilometer boat cruise from Kameoka into scenic Arashiyama.
+
+---
+
+### 3. Essential Airport Trains & Rail Passes to Pair with \`1010MOVE\` (30% OFF)
+
+Getting from international gateway airports into Tokyo and Osaka is one of the highest unavoidable trip expenses. Code \`1010MOVE\` delivers instant 30% savings on top transit arteries:
+
+1. **Keisei Skyliner Express (Narita Airport ↔ Tokyo Ueno/Nippori):**
+   The fastest transit connection from Narita Airport (NRT) to central Tokyo, operating at 160 km/h and reaching Nippori in just 36 minutes. KKday issues instant digital QR vouchers that exchange at automated ticket machines in 30 seconds.
+2. **Osaka Kansai Airport (KIX) Nankai Rapi:t Airport Express:**
+   The retro-futuristic blue bullet train connecting Kansai Airport directly to Namba Station in central Osaka in 34 minutes with reserved seating.
+3. **Tokyo Metro 24/48/72-Hour Unlimited Ticket:**
+   Provides unlimited rides across all 13 Tokyo Metro and Toei Subway lines for as little as ~800 JPY/day. A massive cost saver compared to tapping individual IC cards (Suica/Pasmo) for every tourist stop.
+4. **JR Hokkaido Rail Pass & JR Kansai WIDE Area Pass:**
+   Unlimited Shinkansen and express train transit across Sapporo, Otaru, Hakodate, and Asahikawa (Hokkaido) or Osaka, Kyoto, Nara, and Okayama (Kansai).
+5. **SNOW LINER Direct Ski Buses (Narita/Haneda ↔ Hakuba & Shiga Kogen):**
+   Direct long-distance airport express coaches running straight from Tokyo airports into Nagano ski resorts, bypassing awkward multi-leg train transfers with heavy luggage.
+6. **Haneda (HND) / Narita (NRT) Private Chauffeur Transfers:**
+   Door-to-door private van transfers directly to Tokyo 23 Wards, Tokyo Disneyland, or suburban hotels—ideal for multi-generational families with strollers and suitcases.
+
+---
+
+### 4. Top Attraction Passes & Theme Parks to Pair with \`1010TIX\` (30% OFF)
+
+Major attractions in Japan enforce timed entry and frequently sell out gate capacity weeks in advance. Code \`1010TIX\` works on premier entertainment tickets:
+
+1. **Universal Studios Japan (USJ) 1-Day Studio Pass (Osaka):**
+   Super Nintendo World, The Wizarding World of Harry Potter, and Minion Park. Official electronic tickets bypass the main park ticket booth queues.
+2. **Warner Bros. Studio Tour Tokyo — The Making of Harry Potter:**
+   The world's largest indoor Harry Potter attraction built on the former Toshimaen site. Walk through the Great Hall, Diagon Alley, and the Ministry of Magic.
+3. **Tokyo Disney Resort (Disneyland & DisneySea):**
+   Secure confirmed 1-day park passes for Tokyo Disneyland or the world-exclusive Fantasy Springs expansion at Tokyo DisneySea.
+4. **SHIBUYA SKY 360° Observation Deck (Tokyo):**
+   Perched 229 meters above Shibuya Crossing, SHIBUYA SKY is Tokyo's most viral sunset photo spot. Sunset slots sell out 4 weeks in advance.
+5. **TeamLab Planets TOKYO (Toyosu):**
+   The immersive digital art museum featuring walk-through water exhibitions and infinite crystal universes.
+6. **Osaka Amazing Pass (1-Day / 2-Day):**
+   Includes free rides on the Osaka Metro network plus complimentary admission to 40+ premier attractions including Osaka Castle Museum, Umeda Sky Building Floating Garden, and the Tombori River Cruise.
+
+---
+
+### 5. Winter Gourmet Dining & 5G eSIM Connectivity
+
+Beyond tours and passes, KKday's winter catalog features exclusive culinary reservations and instant mobile connectivity:
+
+* **Hokkaido All-You-Can-Eat Three Major Crabs & Shabu-Shabu:**
+  Reserve guaranteed tables at top Sapporo seafood dining halls (such as Japanese Buffet Dining Den) for unlimited snow crab, king crab, and horsehair crab.
+* **Century-Old Sukiyaki & A5 Wagyu Hotpots:**
+  Book reservations at Sukiyaki-Chinya in Asakusa (Tokyo) or Black Wagyu Shabu-Shabu houses in Namba and Umeda (Osaka).
+* **Japan 5G Unlimited Data eSIMs (SoftBank / KDDI / Docomo):**
+  Avoid expensive $10/day international roaming fees. KKday offers daily high-speed 5G eSIM QR codes at 50% discount that activate instantly upon landing at Haneda, Narita, or Kansai Airport.
+
+---
+
+### 6. Payment & Dual-Currency Card Guide for Bangladeshi & South Asian Travelers
+
+If you are booking from Bangladesh using an endorsed Dual-Currency card:
+
+1. **Passport Travel Quota (FE Circular No. 33):**
+   Ensure your passport is endorsed under Bangladesh Bank's $18,000 USD annual quota. EBL, City Bank Amex, BRAC Bank, and Standard Chartered cards easily process online international payments on KKday.
+2. **Enable E-Commerce & 3D Secure:**
+   Before the 08:00 AM UTC+8 launch trigger, open your banking app and ensure International E-Commerce transactions are toggled ON with sufficient credit/balance.
+3. **Select USD or JPY at Checkout:**
+   Always pay in the native merchant currency (USD or JPY) on KKday rather than enabling dynamic currency conversion (DCC), which adds unnecessary 3%–5% banking spread.
+4. **Combine with Klook Price Checks:**
+   As part of URAL's Travel Intelligence ethos, we recommend cross-checking rates on Klook before confirming your order to guarantee the lowest net price.
+
+---
+
+### Summary: Your 10.10 Action Plan
+
+1. Browse the eligible products on KKday and add your winter dates to your cart today.
+2. At **08:00 AM UTC+8 on October 10**, apply code \`1010TOURS\` for tours, \`1010MOVE\` for transport, or \`1010TIX\` for attractions.
+3. Complete checkout immediately with your endorsed card before the promo quotas expire.
+4. Save your digital QR vouchers to Apple Wallet or Google Wallet for seamless offline presentation at Japan train gates and attraction turnstiles.`,
 };
 
 /** Look up one body by slug; undefined for an unknown slug. */

@@ -2270,7 +2270,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Where to Stay in KL: Hotel Neighborhoods", path: "/hotels/kuala-lumpur-hotels" },
       { text: "Malaysia 5-Day Trip Cost Calculator in BDT", path: "/costs/malaysia-costs" }
     ],
-    affiliateCTA: { provider: "kkday", headline: "Claim 30% OFF + Buy 1 Get 1 on Malaysia & Genting Passes (KKday 9.9 Sale)", body: "Book Petronas Twin Towers Skybridge, Genting Awana SkyWay Cable Car, Aquaria KLCC, and KLIA Ekspres train tickets with up to 30% discount." }
+    affiliateCTA: { provider: "kkday", headline: "Save 30% on Malaysia & Genting Passes (KKday 10.10 Sale)", body: "Book Petronas Twin Towers Skybridge, Genting Awana SkyWay Cable Car, Aquaria KLCC, and KLIA Ekspres tickets with promo code 1010MOVE." }
   },
   {
     id: "blog-27",
@@ -2662,6 +2662,30 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Flight Delay, Cancellation & Lost Baggage Compensation Guide", path: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" },
       { text: "Best Travel eSIM and Schengen Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
     ],
+  },
+  {
+    id: "blog-47",
+    slug: "kkday-10-10-winter-sale-japan-tours-passes-guide",
+    title: "KKday 10.10 Winter Travel Sale: 30% Promo Codes for Japan Ski Tours, Theme Parks, JR Passes & Skyliner (2026)",
+    summary:
+      "Unlock 30% discount promo codes (1010TOURS, 1010MOVE, 1010TIX) for KKday's 10.10 Winter Sale launching October 10 at 08:00 AM UTC+8. Here is our curated guide to Hokkaido & Mt. Fuji ski tours, Universal Studios Japan, Tokyo Disney, Keisei Skyliner express tickets, and Kansai Rapi:t airport passes for international and Bangladeshi travelers using dual-currency cards.",
+    category: "Travel Deals & Intelligence",
+    date: "October 9, 2026",
+    author: "Zayan Rahman (Senior Travel Researcher)",
+    readTime: "8 min read",
+    internalLinks: [
+      { text: "Travel Creator Resources: The Tools We Actually Use (2026)", path: "/blog/travel-creator-resources" },
+      { text: "5 Insider Secrets to Booking Cheaper Flights from Dhaka", path: "/blog/cheap-flight-booking-hacks-dhaka" },
+      { text: "Dual-Currency Card Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Best Travel eSIM & Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
+      { text: "Global Flight Search & Fare Benchmark", path: "/flights" },
+      { text: "Global Hotel & Family Stay Finder", path: "/hotels" },
+    ],
+    affiliateCTA: {
+      provider: "kkday",
+      headline: "Lock in 30% Off Winter Japan Passes & Ski Tours",
+      body: "Use promo codes 1010TOURS, 1010MOVE, and 1010TIX on KKday before quotas run out.",
+    },
   },
 ];
 

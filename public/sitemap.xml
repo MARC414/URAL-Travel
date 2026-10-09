@@ -781,6 +781,15 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://ural-travel.pages.dev/blog/kkday-10-10-winter-sale-japan-tours-passes-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/kkday-10-10-winter-sale-japan-tours-passes-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/kkday-10-10-winter-sale-japan-tours-passes-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/kkday-10-10-winter-sale-japan-tours-passes-guide" />
+    <lastmod>2026-10-09T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://ural-travel.pages.dev/bn/</loc>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/" />
@@ -1515,6 +1524,15 @@
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/travel-creator-resources" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/travel-creator-resources" />
     <lastmod>2026-10-08T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/blog/kkday-10-10-winter-sale-japan-tours-passes-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/kkday-10-10-winter-sale-japan-tours-passes-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/blog/kkday-10-10-winter-sale-japan-tours-passes-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/blog/kkday-10-10-winter-sale-japan-tours-passes-guide" />
+    <lastmod>2026-10-09T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

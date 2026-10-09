@@ -19,6 +19,7 @@ import {
 } from "./AffiliatePartners";
 import { AirHelpWidget } from "./AirHelpWidget";
 import { KKdayPromoBanner } from "./KKdayPromoBanner";
+import { TiqetsEmbedWidget } from "./TiqetsEmbedWidget";
 import { TravelIntelligence } from "./AeoInspector";
 import { Language } from "../translations";
 
@@ -803,8 +804,34 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
         </div>
       </div>
 
-      {/* 2B. KKDAY SOUTHEAST ASIA 9.9 TRAVEL SALE SPOTLIGHT (30% OFF + B1G1 + US$100 GIVEAWAY) */}
-      {regionFilter !== "west" && <KKdayPromoBanner lang={lang} variant="full" />}
+      {/* 2B. KKDAY 10.10 WINTER TRAVEL SALE SPOTLIGHT (30% OFF CODES: 1010TOURS, 1010MOVE, 1010TIX) */}
+      {regionFilter !== "west" && (
+        <KKdayPromoBanner
+          lang={lang}
+          variant="full"
+          onNavigate={onNavigate}
+        />
+      )}
+
+      {/* 2C. OFFICIAL TIQETS LIVE ATTRACTIONS SCANNER (Promo 3948) */}
+      {(regionFilter === "all" || regionFilter === "west") && (
+        <TiqetsEmbedWidget
+          lang={lang}
+          currency="USD"
+          layout="horizontal"
+          cityName="Paris, London, Rome & New York"
+          headline={
+            isBn
+              ? "ইউরোপ ও আমেরিকার শীর্ষ মিউজিয়াম ও স্কাইলাইন ফাস্ট-ট্র্যাক ফাইন্ডার (Tiqets)"
+              : "Europe & USA Top Museum & Skyline Fast-Track Finder (Tiqets)"
+          }
+          subheadline={
+            isBn
+              ? "লুভর, আইফেল টাওয়ার, কলোসিয়াম ও দ্য শার্ড-এর অফিসিয়াল টাইমড এন্ট্রি স্লট ও কিউআর মোবাইল ভাউচার।"
+              : "Official timed entry allotments for the Louvre, Eiffel Tower, Colosseum & The Shard with instant QR codes."
+          }
+        />
+      )}
 
       {/* 3. CITY-BY-CITY "MORNING LANDMARK + AFTERNOON CRUISE + SUNSET VIEWPOINT" BUNDLES */}
       <div className="space-y-12">
@@ -856,10 +883,10 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                       <span>
                         {isPromoActive(KKDAY_PROMO.expiresAt)
                           ? isBn
-                            ? "KKday ৩০% সেল ও B1G1 ডিল দেখুন"
-                            : "KKday 9.9 Sale (30% OFF + B1G1)"
+                            ? "KKday ১০.১০ সেল (৩০% কোড)"
+                            : "KKday 10.10 Sale (30% OFF)"
                           : isBn
-                          ? "KKday সাউথইস্ট এশিয়া ডিল দেখুন"
+                          ? "KKday এশিয়া ডিল দেখুন"
                           : "Compare Passes on KKday"}
                       </span>
                       <ExternalLink size={13} className="text-cyan-700" />

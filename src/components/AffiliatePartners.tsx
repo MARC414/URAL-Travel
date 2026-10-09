@@ -49,13 +49,19 @@ export const AIRHELP_PROMO = {
 
 export const KKDAY_PROMO = {
   affiliateUrl: "https://kkday.tpo.li/3Ecyxris",
-  campaignName: "KKday Southeast Asia 9.9 Travel Sale",
-  discount: "30% OFF + Buy 1 Get 1",
-  giveaway: "US$100 KKday Coupon (Top 5 Spenders)",
-  bookingWindow: "Sept 9 – Sept 30, 2026",
-  expiresAt: "2026-09-30",
-  travelWindow: "Sept 9 – Dec 31, 2026",
-  categories: "Southeast Asia Tours, Airport Transfers & Attraction Tickets"
+  campaignName: "KKday 10.10 Winter Travel Sale",
+  discount: "30% OFF Flash Vouchers",
+  codes: {
+    tours: "1010TOURS",
+    transportation: "1010MOVE",
+    attractions: "1010TIX",
+  },
+  launchTime: "October 10, 2026 at 08:00 AM (UTC+8)",
+  launchTimeBST: "October 10, 2026 at 06:00 AM BST",
+  bookingWindow: "Oct 10 – Oct 31, 2026",
+  expiresAt: "2026-10-31",
+  travelWindow: "Oct 10, 2026 – March 31, 2027",
+  categories: "Japan Ski & Snow Tours, Airport Trains & Express Passes, Theme Park Tickets",
 };
 
 export const RADICAL_STORAGE_PROMO = {
@@ -154,14 +160,15 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
   },
   kkday: {
     id: "kkday",
-    partnerName: "KKday Southeast Asia",
+    partnerName: "KKday Tours, Rail & Activities",
     status: "active",
     offerType: "customer-promo",
     url: AFFILIATE_LINKS.kkday,
     fallbackPartner: "klook",
     expiresAt: KKDAY_PROMO.expiresAt,
-    activeNote: `${KKDAY_PROMO.campaignName} (${KKDAY_PROMO.discount}) through Sept 30, 2026`,
-    expiredFallbackBehavior: "Auto-switches banner to evergreen KKday SEA Passes after Sept 30, 2026"
+    promoCode: "1010TOURS, 1010MOVE, 1010TIX",
+    activeNote: `${KKDAY_PROMO.campaignName} (${KKDAY_PROMO.discount}: 1010TOURS, 1010MOVE, 1010TIX) through Oct 31, 2026`,
+    expiredFallbackBehavior: "Auto-switches banner to evergreen KKday Asian Tours & Rail Passes after Oct 31, 2026"
   },
   kiwitaxi: {
     id: "kiwitaxi",
@@ -303,8 +310,11 @@ export function sanitizeExpiredPromoText(text: string): string {
   let out = text;
   if (!isPromoActive(KKDAY_PROMO.expiresAt)) {
     out = out
+      .replace(/\s*\(KKday 10\.10 Sale\)/gi, " (KKday Official Partner)")
       .replace(/\s*\(KKday 9\.9 Sale\)/gi, " (KKday Official Partner)")
+      .replace(/Claim 30% OFF Flash Vouchers on/gi, "Book Discounted")
       .replace(/Claim 30% OFF \+ Buy 1 Get 1 on/gi, "Book Discounted")
+      .replace(/৩০% ফ্ল্যাশ ভাউচার/g, "অনলাইন ডিসকাউন্ট")
       .replace(/৩০% ছাড় \+ Buy 1 Get 1/g, "অনলাইন ডিসকাউন্ট");
   }
   if (!isPromoActive(AIRHELP_PROMO.expiresAt)) {

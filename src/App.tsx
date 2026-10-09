@@ -93,6 +93,7 @@ import {
   siteUrl,
 } from "./utils/localeRoutes";
 import { AirHelpWidget } from "./components/AirHelpWidget";
+import { TiqetsEmbedWidget } from "./components/TiqetsEmbedWidget";
 import { ConsentBanner } from "./components/ConsentBanner";
 import { generateBlogCoverAltText } from "./utils/imageAssets";
 import { ResponsiveImage } from "./components/ResponsiveImage";
@@ -175,6 +176,9 @@ const TrustpilotReviews = React.lazy(() =>
 );
 const TravelEssentials = React.lazy(() =>
   import("./components/TravelEssentials").then((m) => ({ default: m.TravelEssentials }))
+);
+const PartnerLogoMarquee = React.lazy(() =>
+  import("./components/PartnerLogoMarquee").then((m) => ({ default: m.PartnerLogoMarquee }))
 );
 
 interface TravelpayoutsSkeletonProps {
@@ -567,6 +571,8 @@ function getBlogCoverImage(slug: string): string {
       return havanaGranTeatroImg;
     case "chefchaouen-morocco-travel-guide-bangladesh":
       return chefchaouenFountainImg;
+    case "kkday-10-10-winter-sale-japan-tours-passes-guide":
+      return parisLouvreLandmarksImg;
     default:
       return heroBgImage;
   }
@@ -663,6 +669,8 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
       "Chefchaouen, Morocco's Blue City in the Rif Mountains, is best visited April-June and September-October. CTM buses reach it in about 4 hours from Tangier or Fes. Bangladeshi travelers need a Moroccan visa in advance (no visa on arrival), halal food is the default everywhere, and a 5-day Morocco loop costs about BDT 150,000-220,000 including flights.",
     "travel-creator-resources":
       "Travel creator resources that work in 2026: start with one free monetization hub (Travelpayouts), free SEO tools like Google Search Console and Trends, honest phone photography with real alt text, trusted research sources like Seat61 and embassy pages, and a realistic workflow - publish honest articles one at a time and disclose every affiliate link.",
+    "kkday-10-10-winter-sale-japan-tours-passes-guide":
+      "Claim 30% off with promo codes 1010TOURS (Hokkaido ski & day tours), 1010MOVE (Keisei Skyliner, Nankai Rapi:t, Tokyo Metro), and 1010TIX (Universal Studios Japan, Tokyo Disney, SHIBUYA SKY) during KKday's 10.10 Winter Sale launching October 10 at 08:00 AM UTC+8 with dual-currency card checkout.",
   };
 
   const snippetsBn: Record<string, string> = {
@@ -756,6 +764,8 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
       "রিফ পাহাড়ের মরক্কোর নীল শহর শেফশাওয়েন এপ্রিল-জুন ও সেপ্টেম্বর-অক্টোবরে যাওয়া ভালো। টাঞ্জিয়ার বা ফেজ থেকে CTM বাসে প্রায় ৪ ঘণ্টা। বাংলাদেশিদের আগেই মরক্কো ভিসা লাগে (ভিসা অন অ্যারাইভাল নেই), হালাল সর্বত্র স্বাভাবিক, আর ৫ দিনের মরক্কো লুপের ব্যয় প্রায় ১,৫০,০০০-২,২০,০০০ টাকা (ফ্লাইটসহ)।",
     "travel-creator-resources":
       "২০২৬ সালের কার্যকর ট্রাভেল ক্রিয়েটর রিসোর্সেস: একটিমাত্র ফ্রি মনিটাইজেশন হাব (Travelpayouts), Google Search Console ও Trends-এর মতো ফ্রি SEO টুল, আসল অল্ট টেক্সটসহ সৎ ফোন ফটোগ্রাফি, Seat61 ও দূতাবাসের পেজের মতো বিশ্বস্ত রিসার্স সোর্স এবং বাস্তব ওয়ার্কফ্লো - একটি করে সৎ আর্টিকেল প্রকাশ করুন এবং প্রতিটি অ্যাফিলিয়েট লিংক প্রকাশ করুন।",
+    "kkday-10-10-winter-sale-japan-tours-passes-guide":
+      "KKday-র ১০.১০ উইন্টার সেল শুরু হচ্ছে ১০ অক্টোবর সকাল ৮:০০ (UTC+8)-এ। প্রোমো কোড 1010TOURS (হোক্কাইডো স্কি ও ডে-ট্যুর), 1010MOVE (Keisei Skyliner, Nankai Rapi:t, মেট্রো) ও 1010TIX (USJ, টোকিও ডিজনি, শিবুয়া স্কাই) ব্যবহার করে ৩০% ফ্ল্যাশ ছাড় নিন।",
   };
 
   const map = isBn ? snippetsBn : snippetsEn;
@@ -2260,27 +2270,27 @@ export default function App() {
                             {isPromoActive(KKDAY_PROMO.expiresAt) ? (
                               <>
                                 <Sparkles size={12} className="text-cyan-300 shrink-0" />
-                                <span>{isBn ? "KKday ৯.৯ সেল (৩০% ছাড়)" : "KKday 9.9 SEA Sale (30% OFF)"}</span>
+                                <span>{isBn ? "KKday ১০.১০ উইন্টার সেল (৩০% ছাড়)" : "KKday 10.10 Winter Sale (30% OFF)"}</span>
                               </>
                             ) : (
                               <>
                                 <Globe size={12} className="text-cyan-300 shrink-0" />
-                                <span>{isBn ? "KKday সাউথইস্ট এশিয়া পাস" : "KKday Southeast Asia Passes"}</span>
+                                <span>{isBn ? "KKday এশিয়া ট্রাভেল পাস" : "KKday Asia Travel Passes"}</span>
                               </>
                             )}
                           </span>
                           <span className="text-amber-300 font-semibold">
-                            {isPromoActive(KKDAY_PROMO.expiresAt) ? "+$100 Giveaway" : "Instant QR"}
+                            {isPromoActive(KKDAY_PROMO.expiresAt) ? "30% Codes" : "Instant QR"}
                           </span>
                         </div>
                         <p className="text-[11px] text-slate-300 leading-relaxed">
                           {isPromoActive(KKDAY_PROMO.expiresAt)
                             ? isBn
-                              ? "থাইল্যান্ড, মালয়েশিয়া ও সিঙ্গাপুরে ৩০% প্রোমো কোড + Buy 1 Get 1 ডিল (ভ্রমণ: ৩১ ডিসেম্বর ২০২৬ পর্যন্ত)।"
-                              : "30% OFF + Buy 1 Get 1 on Thailand, Malaysia & Singapore passes (travel until Dec 31, 2026)."
+                              ? "জাপান স্কি ট্যুর, থিম পার্ক ও এয়ারপোর্ট রেল পাসে ৩০% প্রোমো কোড (1010TOURS, 1010MOVE, 1010TIX)।"
+                              : "30% OFF promo codes for Japan ski tours, theme parks & airport express rail (1010TOURS, 1010MOVE, 1010TIX)."
                             : isBn
-                            ? "থাইল্যান্ড, মালয়েশিয়া ও সিঙ্গাপুরের থিম পার্ক, ডে-ট্যুর ও এয়ারপোর্ট ট্রেন টিকিটে অনলাইন ছাড়।"
-                            : "Save 15–25% on Thailand, Malaysia & Singapore theme parks, airport rail & day tours."}
+                            ? "জাপান, থাইল্যান্ড ও সিঙ্গাপুরের থিম পার্ক, ডে-ট্যুর ও এয়ারপোর্ট ট্রেন টিকিটে অনলাইন ছাড়।"
+                            : "Save 15–30% on Japan, Thailand & Singapore theme parks, airport rail & ski tours."}
                         </p>
                         <div className="grid grid-cols-2 gap-2 pt-0.5">
                           <button
@@ -3062,6 +3072,15 @@ export default function App() {
                   {isBn ? "ফ্রি ট্রাভেল ইন্টেলিজেন্স" : "Travel Intelligence"}
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* 🟦 SECTION 1.2: OFFICIAL BOOKING & TRAVEL INVENTORY PARTNERS MARQUEE (PALED STRIP DIRECTLY UNDER HERO) */}
+          <div className="w-full bg-slate-50/85 border-b border-slate-200/80">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+              <React.Suspense fallback={null}>
+                <PartnerLogoMarquee lang={lang} onNavigate={navigateTo} />
+              </React.Suspense>
             </div>
           </div>
         </div>
@@ -5040,7 +5059,7 @@ export default function App() {
                           </div>
                         </div>
 
-                        {/* 7B. KKDAY SOUTHEAST ASIA 9.9 SALE FOR THAILAND, MALAYSIA & SINGAPORE */}
+                        {/* 7B. KKDAY 10.10 WINTER SALE & ASIA TOURS */}
                         {(activeDes.id === "thailand" ||
                           activeDes.id === "malaysia" ||
                           activeDes.id === "singapore") && (
@@ -5048,6 +5067,7 @@ export default function App() {
                             lang={lang}
                             variant="compact"
                             cityContext={activeDes.country}
+                            onNavigate={navigateTo}
                           />
                         )}
 
@@ -6514,6 +6534,23 @@ export default function App() {
                           </p>
                           {activePost.affiliateCTA.provider === "klook" ? (
                             <KlookActivitiesWidget />
+                          ) : activePost.affiliateCTA.provider === "tiqets" ? (
+                            <TiqetsEmbedWidget
+                              lang={lang}
+                              currency="USD"
+                              layout="horizontal"
+                              cityName={activePost.title.includes("Paris") ? "Paris" : activePost.title.includes("London") ? "London" : "Rome, Paris & London"}
+                              headline={
+                                isBn
+                                  ? "Tiqets লাইভ মিউজিয়াম ও স্কাইলাইন টিকিট সার্চ"
+                                  : "Tiqets Live Skip-the-Line Museum & Attraction Search"
+                              }
+                              subheadline={
+                                isBn
+                                  ? "ভ্রমণের তারিখ ও পাস নির্বাচন করে নিশ্চিত কিউআর মোবাইল টিকিট সংগ্রহ করুন।"
+                                  : "Select date & attraction to reserve instant mobile QR entry."
+                              }
+                            />
                           ) : activePost.affiliateCTA.provider === "kiwitaxi" ? (
                             <KiwitaxiTransferWidget />
                           ) : activePost.affiliateCTA.provider === "airalo" ? (

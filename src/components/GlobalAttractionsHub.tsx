@@ -20,6 +20,7 @@ import {
   TiqetsAttractionItem
 } from "../data/tiqetsAttractionsData";
 import { KlookActivitiesWidget, AFFILIATE_LINKS } from "./AffiliatePartners";
+import { TiqetsEmbedWidget } from "./TiqetsEmbedWidget";
 import { Language } from "../translations";
 
 interface GlobalAttractionsHubProps {
@@ -41,7 +42,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
   const [activeRegion, setActiveRegion] = useState<"west" | "east">(initialRegion);
   const [selectedCityId, setSelectedCityId] = useState<string>(initialCity || "london");
   const [categoryFilter, setCategoryFilter] = useState<"all" | "sold-out-rescue" | "transit" | "viewpoint" | "cruise">(initialFilter);
-  const [widgetTab, setWidgetTab] = useState<"triple-stack" | "popular-tours" | "availability-calendar">("triple-stack");
+  const [widgetTab, setWidgetTab] = useState<"triple-stack" | "popular-tours" | "availability-calendar" | "tiqets-embed">("triple-stack");
   const [selectedDate, setSelectedDate] = useState<string>(() => {
     const d = new Date();
     d.setDate(d.getDate() + 14);
@@ -268,6 +269,22 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                   {isBn
                     ? "লাইভ অ্যাভেইলেবিলিটি ক্যালেন্ডার ও BDT ক্যালকুলেটর"
                     : "Live Availability Calendar & BDT Calculator"}
+                </span>
+              </button>
+
+              <button
+                onClick={() => setWidgetTab("tiqets-embed")}
+                className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                  widgetTab === "tiqets-embed"
+                    ? "bg-emerald-700 text-white shadow"
+                    : "text-slate-700 hover:bg-white"
+                }`}
+              >
+                <Sparkles size={14} className="text-[#F6B73C]" />
+                <span>
+                  {isBn
+                    ? "⚡ Tiqets অফিশিয়াল লাইভ স্ক্যানার (Promo 3948)"
+                    : "⚡ Official Tiqets Live Scanner (Promo 3948)"}
                 </span>
               </button>
             </div>
@@ -710,6 +727,31 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                   </a>
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* ===============================================================
+              WIDGET MODE 4: OFFICIAL TIQETS EMBEDDED SCANNER (Promo 3948)
+             =============================================================== */}
+          {widgetTab === "tiqets-embed" && (
+            <div className="space-y-4">
+              <TiqetsEmbedWidget
+                lang={lang}
+                currency="USD"
+                layout="horizontal"
+                product={activeCalendarProduct.productId || ""}
+                cityName={activeCityStack.cityName}
+                headline={
+                  isBn
+                    ? `অফিশিয়াল Tiqets লাইভ টিকেট সার্চ: ${activeCityStack.cityName}`
+                    : `Official Tiqets Live Ticket Search: ${activeCityStack.cityName}`
+                }
+                subheadline={
+                  isBn
+                    ? `${activeCityStack.cityName} এর শীর্ষ মিউজিয়াম, টাওয়ার ও সাইটসিয়িং ক্রুজের তাৎক্ষণিক মোবাইল ভাউচার ও সরাসরি কিউআর প্রবেশাধিকার।`
+                    : `Live timed entry slots & official mobile barcode passes for ${activeCityStack.cityName}. Verified Travelpayouts Promo 3948 feed.`
+                }
+              />
             </div>
           )}
         </div>

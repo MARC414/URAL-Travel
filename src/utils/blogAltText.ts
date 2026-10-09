@@ -209,6 +209,10 @@ export const CURATED_BLOG_SCENES: Readonly<
     en: "A family walks beside Dubai's waterfront beneath the downtown skyline at dusk",
     bn: "গোধূলিতে দুবাইয়ের ডাউনটাউন স্কাইলাইনের নিচে জলধারের পথ ধরে হাঁটছে একটি পরিবার",
   },
+  "kkday-10-10-winter-sale-japan-tours-passes-guide": {
+    en: "Snow-covered Japanese mountains and ski resort slopes in Hokkaido with winter travelers",
+    bn: "হোক্কাইডোর তুষারাবৃত পাহাড় ও স্কি রিসোর্টে শীতকালীন ভ্রমণকারীদের দৃশ্য",
+  },
 };
 
 /**

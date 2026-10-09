@@ -73,6 +73,7 @@ const DIST_DIR = path.join(ROOT_DIR, "dist");
 const OPTIMIZED_SOCIAL_IMAGES_DIR = path.join(ROOT_DIR, "src", "assets", "optimized-social");
 
 const BLOG_IMAGE_MAP: Record<string, string> = {
+  "kkday-10-10-winter-sale-japan-tours-passes-guide": "paris_louvre_london_landmarks_1790485782111.jpg",
   "havana-cuba-travel-guide-bangladesh": "havana_gran_teatro_classic_cars_1791427200000.jpg",
   "chefchaouen-morocco-travel-guide-bangladesh": "chefchaouen_blue_fountain_alley_1791427400000.jpg",
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": "umrah_makkah_haram_guide_1790430007679.jpg",

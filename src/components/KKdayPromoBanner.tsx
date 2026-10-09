@@ -1,5 +1,5 @@
-import React from "react";
-import { ExternalLink, Sparkles, Tag, Trophy, Calendar, Check } from "lucide-react";
+import React, { useState } from "react";
+import { ExternalLink, Sparkles, Tag, Check, Copy, ArrowRight, ShieldCheck, Clock, Compass, Train, Ticket } from "lucide-react";
 import {
   AFFILIATE_LINKS,
   KKDAY_PROMO,
@@ -12,37 +12,83 @@ interface KKdayPromoBannerProps {
   lang?: Language;
   variant?: "full" | "compact";
   cityContext?: string;
+  onNavigate?: (path: string) => void;
 }
 
 export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
   lang = "en",
   variant = "full",
   cityContext,
+  onNavigate,
 }) => {
   const isBn = lang === "bn";
   const saleActive = isPromoActive(KKDAY_PROMO.expiresAt);
   const partnerHref = resolvePartnerUrl(AFFILIATE_LINKS.kkday);
+  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+
+  const copyCode = (code: string) => {
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(code).catch(() => {});
+    }
+    setCopiedCode(code);
+    setTimeout(() => {
+      setCopiedCode((current) => (current === code ? null : current));
+    }, 2500);
+  };
+
+  const vouchers = [
+    {
+      code: KKDAY_PROMO.codes.tours,
+      titleEn: "Tours & Experiences",
+      titleBn: "ট্যুর ও অভিজ্ঞতা",
+      descEn: "Hokkaido ski tours, Mt. Fuji, Shirakawa-go & day trips",
+      descBn: "হোক্কাইডো স্কি, মাউন্ট ফুজি ও ডে-ট্যুর",
+      discount: "30% OFF",
+      icon: Compass,
+      tagColor: "bg-amber-400/20 text-amber-300 border-amber-400/30",
+    },
+    {
+      code: KKDAY_PROMO.codes.transportation,
+      titleEn: "Transportation & Rail",
+      titleBn: "ট্রান্সপোর্ট ও রেল পাস",
+      descEn: "Keisei Skyliner, Nankai Rapi:t, Tokyo Metro & private cars",
+      descBn: "স্কাইলাইনার, নানকাই রাপিড, মেট্রো ও প্রাইভেট কার",
+      discount: "30% OFF",
+      icon: Train,
+      tagColor: "bg-cyan-400/20 text-cyan-300 border-cyan-400/30",
+    },
+    {
+      code: KKDAY_PROMO.codes.attractions,
+      titleEn: "Attraction Tickets",
+      titleBn: "অ্যাটাকশন ও থিম পার্ক",
+      descEn: "Universal Studios Japan (USJ), Tokyo Disney & SHIBUYA SKY",
+      descBn: "ইউএসজে (USJ), টোকিও ডিজনি ও শিবুয়া স্কাই",
+      discount: "30% OFF",
+      icon: Ticket,
+      tagColor: "bg-emerald-400/20 text-emerald-300 border-emerald-400/30",
+    },
+  ];
 
   if (variant === "compact") {
     return (
-      <div className="bg-gradient-to-r from-[#0B192C] via-brand-navy to-[#173A5E] text-white rounded-2xl p-5 sm:p-6 border border-cyan-500/30 shadow-sm">
+      <div className="bg-gradient-to-r from-[#0B192C] via-brand-navy to-[#133352] text-white rounded-2xl p-5 sm:p-6 border border-cyan-500/30 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
           <div className="space-y-2 max-w-2xl">
             <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono">
               <span className="bg-cyan-400 text-[#0B192C] px-2.5 py-0.5 rounded-md font-bold">
                 {saleActive
                   ? isBn
-                    ? "KKday 9.9 সাউথইস্ট এশিয়া সেল"
-                    : "KKday 9.9 SEA Travel Sale"
+                    ? "KKday ১০.১০ উইন্টার সেল (লাইভ)"
+                    : "KKday 10.10 Winter Travel Sale"
                   : isBn
-                  ? "KKday সাউথইস্ট এশিয়া অফিশিয়াল পাস"
-                  : "KKday Southeast Asia Partner"}
+                  ? "KKday অফিশিয়াল ট্রাভেল পার্টনার"
+                  : "KKday Official Travel Partner"}
               </span>
               <span className="bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-0.5 rounded-md font-semibold">
                 {saleActive
                   ? isBn
-                    ? "৩০% ছাড় + Buy 1 Get 1"
-                    : "30% OFF + Buy 1 Get 1"
+                    ? "৩০% ফ্ল্যাশ ভাউচার (1010TOURS, 1010MOVE, 1010TIX)"
+                    : "30% OFF (1010TOURS · 1010MOVE · 1010TIX)"
                   : isBn
                   ? "ইনস্ট্যান্ট মোবাইল QR টিকিট"
                   : "Instant Mobile QR E-Tickets"}
@@ -50,32 +96,32 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
               <span className="text-slate-300">
                 {saleActive
                   ? isBn
-                    ? "ভ্রমণের মেয়াদ: ৩১ ডিসেম্বর ২০২৬ পর্যন্ত"
-                    : "Valid for travel through Dec 31, 2026"
+                    ? "মেয়াদ: ৩১ অক্টোবর ২০২৬ পর্যন্ত"
+                    : "Valid for bookings through Oct 31, 2026"
                   : isBn
-                  ? "ব্যাংকক, কুয়ালালামপুর ও সিঙ্গাপুর"
-                  : "Bangkok, Kuala Lumpur & Singapore"}
+                  ? "জাপান, এশিয়া ও বিশ্বব্যাপী ট্যুর"
+                  : "Japan, Asia & Worldwide Tours"}
               </span>
             </div>
 
             <h3 className="font-serif text-lg sm:text-xl font-bold text-white leading-snug">
               {saleActive
                 ? isBn
-                  ? `${cityContext ? `${cityContext}-এ ` : "থাইল্যান্ড, মালয়েশিয়া ও সিঙ্গাপুরে "}ট্যুর, এয়ারপোর্ট ট্রান্সফার ও থিম পার্ক টিকিটে ৩০% ছাড় + US$100 গিভঅ্যাওয়ে`
-                  : `Save 30% + Buy 1 Get 1 on ${cityContext || "Southeast Asia"} Tours, Airport Transfers & Theme Parks`
+                  ? `${cityContext ? `${cityContext}-এ ` : "জাপান ও এশিয়ায় "}স্কি ট্যুর, এয়ারপোর্ট ট্রেন ও থিম পার্ক টিকিটে ৩০% ফ্ল্যাশ ছাড়`
+                  : `Save 30% on ${cityContext || "Japan & Asia"} Ski Tours, Airport Rail & Theme Park Tickets`
                 : isBn
-                ? `${cityContext ? `${cityContext}-এ ` : "থাইল্যান্ড, মালয়েশিয়া ও সিঙ্গাপুরে "}ট্যুর, এয়ারপোর্ট ট্রেন ও থিম পার্কের ডিসকাউন্টেড মোবাইল পাস`
-                : `Pre-Book Discounted ${cityContext || "Southeast Asia"} Tours, Airport Rail & Theme Park E-Tickets`}
+                ? `${cityContext ? `${cityContext}-এ ` : "জাপান, থাইল্যান্ড ও সিঙ্গাপুরে "}ট্যুর, এয়ারপোর্ট ট্রেন ও থিম পার্কের মোবাইল পাস`
+                : `Pre-Book Discounted ${cityContext || "Asia & Global"} Tours, Rail & Attraction Passes`}
             </h3>
 
             <p className="text-xs text-slate-300 leading-relaxed">
               {saleActive
                 ? isBn
-                  ? "৩০ সেপ্টেম্বর ২০২৬-এর মধ্যে বুকিং করলে পাচ্ছেন ৩০% প্রোমো কোড (ভ্রমণ করা যাবে ৩১ ডিসেম্বর ২০২৬ পর্যন্ত) এবং সর্বোচ্চ ৫ জন বুকিংকারী পাবেন US$100 (~BDT ১২,২০০) KKday কুপন উপহার!"
-                  : "Book by Sept 30, 2026 for travel anytime through Dec 31, 2026 (covers the entire Bangladesh winter holiday season). Plus, the top 5 spenders win a US$100 (~BDT 12,200) KKday travel coupon."
+                  ? "১০ অক্টোবর সকাল ৮:০০ (UTC+8 / বাংলাদেশ সময় সকাল ৬:০০) থেকে সীমিত কোটায় শুরু হচ্ছে কেকেডে ১০.১০ সেল। ট্যুর (1010TOURS), ট্রান্সপোর্ট (1010MOVE) ও টিকিটে (1010TIX) ৩০% সাশ্রয় করুন।"
+                  : "Launching October 10 at 08:00 AM UTC+8 (06:00 AM BST). First-come, first-served 30% discount codes for tours, airport rail (Skyliner, Rapi:t) and attraction passes."
                 : isBn
-                ? "আপনার এনডোর্স করা বাংলাদেশি ডুয়াল-কারেন্সি কার্ড ব্যবহার করে KLIA Ekspres, Genting Cable Car, Safari World ও Sentosa-এর তাৎক্ষণিক QR ভাউচার বুক করুন এবং কাউন্টারের দীর্ঘ লাইন এড়ান।"
-                : "Use your endorsed Bangladeshi dual-currency card to lock in instant QR vouchers for KLIA Ekspres, Genting SkyWay, Safari World Bangkok, and Sentosa—saving up to 20% over walk-up gate prices."}
+                ? "আপনার এনডোর্স করা বাংলাদেশি ডুয়াল-কারেন্সি কার্ড ব্যবহার করে প্রি-বুক করুন এবং টিকিট কাউন্টারের দীর্ঘ লাইন এড়িয়ে সরাসরি প্রবেশ করুন।"
+                : "Use your endorsed Bangladeshi dual-currency card to secure instant mobile vouchers while saving 15–30% over walk-up ticket counters."}
             </p>
           </div>
 
@@ -89,23 +135,23 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
               <span>
                 {saleActive
                   ? isBn
-                    ? "KKday ৩০% সেল ও B1G1 ডিল দেখুন"
-                    : "Claim KKday 30% Sale & B1G1 Deals"
+                    ? "KKday ১০.১০ সেল পেজ খুলুন"
+                    : "Open KKday 10.10 Sale Page"
                   : isBn
                   ? "KKday অ্যাটাকশন ও ট্রেন পাস দেখুন"
-                  : "Compare KKday SEA Passes & Deals"}
+                  : "Compare KKday Passes & Deals"}
               </span>
               <ExternalLink size={14} />
             </a>
-            <div className="text-[10px] text-slate-400 font-mono text-center">
-              {saleActive
-                ? isBn
-                  ? "আগে আসলে আগে পাবেন ভিত্তিতে সীমিত কোটা"
-                  : "First-come, first-served · Ends Sept 30"
-                : isBn
-                ? "তাৎক্ষণিক ই-টিকিট কনফার্মেশন"
-                : "Instant QR delivery · BD Cards accepted"}
-            </div>
+            {onNavigate && (
+              <button
+                type="button"
+                onClick={() => onNavigate("/blog/kkday-10-10-winter-sale-japan-tours-passes-guide")}
+                className="text-[11px] text-cyan-300 hover:text-white underline underline-offset-2 font-mono text-center cursor-pointer"
+              >
+                {isBn ? "১০.১০ সেল গাইড ও প্রডাক্ট লিস্ট পড়ুন →" : "Read Full 10.10 Sale Guide & Products →"}
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -132,29 +178,31 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
               <Sparkles size={13} />
               {saleActive
                 ? isBn
-                  ? "KKday সাউথইস্ট এশিয়া ৯.৯ ট্রাভেল সেল"
+                  ? "KKday ১০.১০ উইন্টার ট্রাভেল সেল"
                   : KKDAY_PROMO.campaignName
                 : isBn
-                ? "KKday সাউথইস্ট এশিয়া ট্রাভেল হাব"
-                : "KKday Southeast Asia Official Passes"}
+                ? "KKday এশিয়া ট্রাভেল হাব"
+                : "KKday Asia Official Passes"}
             </span>
-            <span className="bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-1 rounded-md font-semibold">
+            <span className="bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-1 rounded-md font-semibold inline-flex items-center gap-1">
+              <Tag size={12} />
               {saleActive
                 ? isBn
-                  ? "৩০% প্রোমো কোড + Buy 1 Get 1"
-                  : "30% Promo Codes + Buy 1 Get 1"
+                  ? "৩০% ফ্ল্যাশ ভাউচার কোড"
+                  : "30% OFF Flash Codes"
                 : isBn
-                ? "অনলাইন ডিসকাউন্ট ও মোবাইল QR"
+                ? "অনলাইন ডিসকাউন্ট ও ইনস্ট্যান্ট QR"
                 : "Online Discounts + Instant QR"}
             </span>
-            <span className="text-slate-300">
+            <span className="text-slate-300 flex items-center gap-1">
+              <Clock size={12} className="text-cyan-400" />
               {saleActive
                 ? isBn
-                  ? "বুকিং ডেডলাইন: ৩০ সেপ্টেম্বর ২০২৬"
-                  : "Book by Sept 30 · Travel until Dec 31, 2026"
+                  ? "লঞ্চ: ১০ অক্টোবর সকাল ৮:০০ (UTC+8) · FCFS কোটা"
+                  : "Launches Oct 10, 08:00 UTC+8 · First-Come FCFS"
                 : isBn
-                ? "সারা বছর ফ্যামিলি ও গ্রুপ বুকিং সচল"
-                : "Year-round instant e-tickets for BD travelers"}
+                ? "সারা বছর ইনস্ট্যান্ট মোবাইল QR টিকিট"
+                : "Year-round instant e-tickets for travelers"}
             </span>
           </div>
 
@@ -164,95 +212,69 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
           >
             {saleActive
               ? isBn
-                ? "থাইল্যান্ড, মালয়েশিয়া ও সিঙ্গাপুর ভ্রমণে ৩০% ছাড়, Buy 1 Get 1 অফার এবং US$100 গিভঅ্যাওয়ে"
-                : "Southeast Asia 9.9 Sale: 30% OFF Tours, Transfers & Attractions + US$100 Spender Giveaway"
+                ? "KKday ১০.১০ উইন্টার সেল: জাপান স্কি ট্যুর, এয়ারপোর্ট ট্রেন ও থিম পার্কের টিকিটে ৩০% ফ্ল্যাশ ছাড়"
+                : "KKday 10.10 Winter Sale: 30% OFF Japan Ski Tours, Airport Rail & Theme Park Tickets"
               : isBn
-              ? "থাইল্যান্ড, মালয়েশিয়া ও সিঙ্গাপুর ভ্রমণে ডিসকাউন্টেড থিম পার্ক, ডে-ট্যুর ও এয়ারপোর্ট ট্রেন পাস"
-              : "Southeast Asia Attraction Passes, Airport Rail & Day Tours for Bangladeshi Travelers"}
+              ? "জাপান, থাইল্যান্ড ও সিঙ্গাপুর ভ্রমণে ডিসকাউন্টেড থিম পার্ক, ডে-ট্যুর ও এয়ারপোর্ট ট্রেন পাস"
+              : "Asia Attraction Passes, Airport Rail & Ski Tours for International Travelers"}
           </h3>
 
           <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl">
             {saleActive
               ? isBn
-                ? "আপনি কি অক্টোবর–ডিসেম্বর ২০২৬-এর শীতকালীন ছুটিতে ব্যাংকক, ফুকেট, কুয়ালালামপুর বা সিঙ্গাপুর যাওয়ার পরিকল্পনা করছেন? ৩০ সেপ্টেম্বরের মধ্যে KKday-র ৯.৯ ট্রাভেল সেল থেকে থিম পার্ক টিকিট, ডে-ট্যুর ও এয়ারপোর্ট ট্রান্সফার বুক করলে পাচ্ছেন ৩০% ইনস্ট্যান্ট প্রোমো ডিসকাউন্ট ও Buy 1 Get 1 ডিল—যা আপনার পাসপোর্টের USD কোটা সাশ্রয় করবে।"
-                : "Planning a trip from Dhaka to Bangkok, Phuket, Kuala Lumpur, or Singapore between now and December 31, 2026? Lock in KKday's 9.9 Southeast Asia Travel Sale before September 30 to get 30% promo codes and Buy 1 Get 1 (B1G1) attraction tickets—stretching your passport's USD endorsement further."
+                ? "আপনি কি ২০২৬-২০২৭ শীতকালীন ছুটিতে জাপান (টোকিও, ওসাকা, হোক্কাইডো) কিংবা সাউথইস্ট এশিয়া যাওয়ার পরিকল্পনা করছেন? KKday-র ১০.১০ উইন্টার সেল থেকে ট্যুর, এয়ারপোর্ট এক্সপ্রেস (Keisei Skyliner, Nankai Rapi:t) ও থিম পার্ক (USJ, Tokyo Disney) বুক করে ৩০% পর্যন্ত সাশ্রয় করুন।"
+                : "Planning a winter getaway to Japan (Tokyo, Osaka, Hokkaido ski resorts) or Southeast Asia? Lock in KKday's 10.10 Winter Travel Sale launching October 10 at 08:00 AM UTC+8. Grab 30% off tours, transportation passes, and attraction tickets before codes run out."
               : isBn
-              ? "ব্যাংকক, ফুকেট, কুয়ালালামপুর বা সিঙ্গাপুর ভ্রমণের আগে KKday থেকে থিম পার্ক টিকিট, ডে-ট্যুর ও এয়ারপোর্ট ট্রান্সফার অনলাইনে প্রি-বুক করলে কাউন্টারের তুলনায় ১৫–২৫% পর্যন্ত সাশ্রয় হয় এবং আপনার পাসপোর্টের USD এনডোর্সমেন্ট কোটাও বাঁচে।"
-              : "Planning a trip from Dhaka to Bangkok, Phuket, Kuala Lumpur, or Singapore? Pre-booking your theme park passes, airport rail tickets, and day tours on KKday saves 15–25% compared to walk-up ticket counters while stretching your passport's USD endorsement further."}
+              ? "টোকিও, ওসাকা, হোক্কাইডো বা ব্যাংকক ভ্রমণের আগে KKday থেকে থিম পার্ক টিকিট, ডে-ট্যুর ও এয়ারপোর্ট এক্সপ্রেস অনলাইনে প্রি-বুক করলে কাউন্টারের তুলনায় ১৫–২৫% পর্যন্ত সাশ্রয় হয়।"
+              : "Pre-booking your theme park passes, airport rail tickets, and winter ski tours on KKday saves 15–25% compared to walk-up ticket counters while eliminating airport lines."}
           </p>
 
-          {/* 3 Value Pillars */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-            <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 space-y-1">
-              <div className="flex items-center gap-1.5 text-cyan-300 text-xs font-bold">
-                <Tag size={14} />
-                <span>
-                  {saleActive
-                    ? isBn
-                      ? "৩০% ছাড় + B1G1 ডিল"
-                      : "30% OFF + Buy 1 Get 1"
-                    : isBn
-                    ? "কাউন্টারের চেয়ে কম ভাড়া"
-                    : "Save vs. Walk-Up Counters"}
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                {saleActive
-                  ? isBn
-                    ? "ট্যুর, এয়ারপোর্ট ট্রান্সফার ও অ্যাটাকশন টিকিটে প্রতি গ্রাহক ১ বার ৩০% কোড ব্যবহার করতে পারবেন।"
-                    : "Applies to eligible SEA tours, airport rail/transfers & theme park tickets (1 use per customer)."
-                  : isBn
-                  ? "Safari World, Genting SkyWorlds, KLIA Ekspres ও Sentosa টিকিটে অনলাইন রেট উপভোগ করুন।"
-                  : "Lock in online rates on Safari World, Genting SkyWorlds, KLIA Ekspres & Sentosa passes."}
-              </p>
+          {/* Interactive 3-Voucher Code Stack */}
+          <div className="space-y-2 pt-2">
+            <div className="text-[11px] font-mono text-cyan-300 uppercase tracking-wider flex items-center gap-1.5">
+              <span>{isBn ? "ক্লিক করে প্রোমো কোড কপি করুন:" : "Click to Copy 30% Promo Vouchers (1 Use Per Customer):"}</span>
             </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 space-y-1">
-              <div className="flex items-center gap-1.5 text-[#F6B73C] text-xs font-bold">
-                <Trophy size={14} />
-                <span>
-                  {saleActive
-                    ? isBn
-                      ? "US$100 কুপন গিভঅ্যাওয়ে"
-                      : "US$100 Coupon Giveaway"
-                    : isBn
-                    ? "তাৎক্ষণিক মোবাইল QR এন্ট্রি"
-                    : "Instant Mobile QR Entry"}
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                {saleActive
-                  ? isBn
-                    ? "১–৩০ সেপ্টেম্বরের মধ্যে সর্বোচ্চ বুকিংকারী শীর্ষ ৫ জন প্রত্যেকে পাবেন US$100 (~BDT ১২,২০০) KKday ভাউচার।"
-                    : "The top 5 highest spenders between Sept 1–30 each win a US$100 (~BDT 12,200) KKday travel coupon."
-                  : isBn
-                  ? "কাগজের টিকিট প্রিন্ট করার ঝামেলা নেই—গেটে ফোনের QR কোড স্ক্যান করেই প্রবেশ করুন।"
-                  : "Skip paper vouchers and ticket booth queues—scan your phone's QR pass directly at the gate."}
-              </p>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 space-y-1">
-              <div className="flex items-center gap-1.5 text-emerald-300 text-xs font-bold">
-                <Calendar size={14} />
-                <span>
-                  {saleActive
-                    ? isBn
-                      ? "ভ্রমণ: ৩১ ডিসেম্বর ২০২৬ পর্যন্ত"
-                      : "Travel Until Dec 31, 2026"
-                    : isBn
-                    ? "ফ্রি ক্যান্সেলেশন সুবিধা"
-                    : "Flexible Cancellation"}
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                {saleActive
-                  ? isBn
-                    ? "এখন ৩০% ছাড়ে বুক করে সেপ্টেম্বর থেকে ৩১ ডিসেম্বর ২০২৬-এর মধ্যে যেকোনো দিন ভ্রমণ করুন।"
-                    : "Book by Sept 30 and travel anytime between Sept 9 and Dec 31, 2026 (ideal for winter holidays)."
-                  : isBn
-                  ? "অধিকাংশ ডে-ট্যুর ও এয়ারপোর্ট ট্রান্সফারে ফ্লাইটের সময় বদলালে সহজ রিফান্ড সুবিধা রয়েছে।"
-                  : "Most day tours and airport transfers include free cancellation if your flight schedule shifts."}
-              </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {vouchers.map((v) => {
+                const IconComponent = v.icon;
+                const isCopied = copiedCode === v.code;
+                return (
+                  <button
+                    key={v.code}
+                    type="button"
+                    onClick={() => copyCode(v.code)}
+                    className="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 rounded-xl p-3 text-left transition-all cursor-pointer relative group"
+                    title={`Click to copy ${v.code}`}
+                  >
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${v.tagColor}`}>
+                        {v.discount}
+                      </span>
+                      <span className="text-[11px] text-cyan-300 font-mono font-bold flex items-center gap-1 group-hover:text-white">
+                        {isCopied ? (
+                          <span className="text-emerald-400 flex items-center gap-0.5">
+                            <Check size={12} /> Copied!
+                          </span>
+                        ) : (
+                          <span className="flex items-center gap-0.5">
+                            <Copy size={11} /> Copy
+                          </span>
+                        )}
+                      </span>
+                    </div>
+                    <div className="font-mono text-sm font-bold text-white tracking-wider flex items-center gap-1.5">
+                      <IconComponent size={14} className="text-cyan-400" />
+                      <span>{v.code}</span>
+                    </div>
+                    <div className="text-[11px] font-semibold text-slate-200 mt-1">
+                      {isBn ? v.titleBn : v.titleEn}
+                    </div>
+                    <div className="text-[10px] text-slate-400 leading-tight mt-0.5 line-clamp-2">
+                      {isBn ? v.descBn : v.descEn}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -262,14 +284,14 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
           <div className="flex items-center justify-between border-b border-white/10 pb-3">
             <div>
               <div className="text-[11px] font-mono text-cyan-300 uppercase">
-                {isBn ? "অফিশিয়াল ক্যাম্পেইন পার্টনার" : "Official Partner Access"}
+                {isBn ? "অফিশিয়াল ক্যাম্পেইন নেটওয়ার্ক" : "Official Travel Network"}
               </div>
               <div className="font-serif text-lg font-bold text-white">
-                KKday Southeast Asia
+                KKday Global Winter Sale
               </div>
             </div>
-            <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[11px] font-mono font-bold px-2.5 py-1 rounded-md">
-              {saleActive ? (isBn ? "সক্রিয় ডিল" : "LIVE SALE") : isBn ? "ভেরিফায়েড পার্টনার" : "OFFICIAL PARTNER"}
+            <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[11px] font-mono font-bold px-2.5 py-1 rounded-md animate-pulse">
+              {saleActive ? (isBn ? "১০.১০ লাইভ" : "10.10 FLASH") : isBn ? "ভেরিফায়েড পার্টনার" : "OFFICIAL PARTNER"}
             </span>
           </div>
 
@@ -278,54 +300,71 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
               <Check size={14} className="text-cyan-400 shrink-0 mt-0.5" />
               <span>
                 {isBn
-                  ? "ব্যাংকক, ফুকেট, কুয়ালালামপুর, সিঙ্গাপুর ও বালি কভার করে"
-                  : "Covers Bangkok, Phuket, Kuala Lumpur, Singapore & Bali"}
+                  ? "হোক্কাইডো স্কি, মাউন্ট ফুজি, ইউএসজে (USJ) ও শিবুয়া স্কাই কভার করে"
+                  : "Covers Hokkaido ski, Mt Fuji, USJ, Shibuya Sky & Keisei Skyliner"}
               </span>
             </li>
             <li className="flex items-start gap-2">
               <Check size={14} className="text-cyan-400 shrink-0 mt-0.5" />
               <span>
                 {isBn
-                  ? "বাংলাদেশি ডুয়াল-কারেন্সি Visa / Mastercard ও Amex সাপোর্টেড"
-                  : "Accepts Bangladeshi Dual-Currency Visa, Mastercard & Amex"}
+                  ? "বাংলাদেশি ও আন্তর্জাতিক ডুয়াল-কারেন্সি Visa/Mastercard সাপোর্টেড"
+                  : "Accepts Bangladeshi & international Dual-Currency cards"}
               </span>
             </li>
             <li className="flex items-start gap-2">
               <Check size={14} className="text-cyan-400 shrink-0 mt-0.5" />
               <span>
-                {saleActive
-                  ? isBn
-                    ? "আগে আসলে আগে পাবেন ভিত্তিতে সীমিত প্রোমো কোড"
-                    : "First-come, first-served limited promo code inventory"
-                  : isBn
-                  ? "তাৎক্ষণিক মোবাইল ভাউচার ও ২৪/৭ কাস্টমার সাপোর্ট"
-                  : "Instant mobile voucher delivery & 24/7 booking support"}
+                {isBn
+                  ? "আগে আসলে আগে পাবেন ভিত্তিতে সীমিত কোটা (১ বার ব্যবহার্য)"
+                  : "First-come, first-served quota · 1 redemption per account"}
+              </span>
+            </li>
+            <li className="flex items-start gap-2">
+              <ShieldCheck size={14} className="text-[#F6B73C] shrink-0 mt-0.5" />
+              <span>
+                {isBn
+                  ? "ভ্রমণের মেয়াদ: ৩১ মার্চ ২০২৭ পর্যন্ত সচল"
+                  : "Valid for winter travel through March 31, 2027"}
               </span>
             </li>
           </ul>
 
-          <a
-            href={partnerHref}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="w-full bg-cyan-400 hover:bg-cyan-300 text-[#0B192C] font-bold text-xs sm:text-sm py-3.5 px-5 rounded-xl inline-flex items-center justify-center gap-2 transition-colors shadow-sm"
-          >
-            <span>
-              {saleActive
-                ? isBn
-                  ? "KKday ৯.৯ সেল ও ৩০% কোড ক্লেইম করুন"
-                  : "Explore KKday 9.9 Sale & 30% Codes"
-                : isBn
-                ? "KKday সাউথইস্ট এশিয়া ডিলগুলো দেখুন"
-                : "Browse KKday Southeast Asia Passes"}
-            </span>
-            <ExternalLink size={15} />
-          </a>
+          <div className="space-y-2">
+            <a
+              href={partnerHref}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="w-full bg-cyan-400 hover:bg-cyan-300 text-[#0B192C] font-bold text-xs sm:text-sm py-3.5 px-5 rounded-xl inline-flex items-center justify-center gap-2 transition-colors shadow-sm cursor-pointer"
+            >
+              <span>
+                {saleActive
+                  ? isBn
+                    ? "KKday ১০.১০ সেল পেজে যান"
+                    : "Go to KKday 10.10 Sale Page"
+                  : isBn
+                  ? "KKday এশিয়া ডিলগুলো দেখুন"
+                  : "Browse KKday Travel Passes"}
+              </span>
+              <ExternalLink size={15} />
+            </a>
+
+            {onNavigate && (
+              <button
+                type="button"
+                onClick={() => onNavigate("/blog/kkday-10-10-winter-sale-japan-tours-passes-guide")}
+                className="w-full bg-white/10 hover:bg-white/20 text-white font-semibold text-xs py-2.5 px-4 rounded-xl inline-flex items-center justify-center gap-1.5 transition-colors border border-white/15 cursor-pointer"
+              >
+                <span>{isBn ? "১০.১০ প্রডাক্ট গাইড ও টিপস পড়ুন" : "Read 10.10 Curated Products Guide"}</span>
+                <ArrowRight size={13} />
+              </button>
+            )}
+          </div>
 
           <div className="text-[11px] text-slate-300 text-center">
             {isBn
-              ? "টিপস: বুকিংয়ের আগে Klook ও KKday দুই জায়গায় ভাড়া তুলনা করে নিন!"
-              : "Pro Tip: Compare Klook vs. KKday rates to lock in the lowest BDT price."}
+              ? "টিপস: কোড সক্রিয় হওয়ার সাথে সাথে দ্রুত রিডিম করতে আপনার কার্ড এনডোর্স রাখুন!"
+              : "Tip: Codes apply at checkout on eligible items. Ensure card endorsement is active."}
           </div>
         </div>
       </div>
