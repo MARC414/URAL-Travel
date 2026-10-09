@@ -893,6 +893,28 @@ function AuthorBioCard({
           <p className="text-sm leading-7 text-slate-700">
             {isBengali ? profile.bioBn : profile.bioEn}
           </p>
+          {profile.creativeWorks.length > 0 && (
+            <div className="pt-1">
+              <p className="text-xs font-bold uppercase tracking-wide text-slate-600">
+                {isBengali ? "নির্বাচিত সৃজনশীল ও মিডিয়া কাজ" : "Selected creative & media work"}
+              </p>
+              <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
+                {profile.creativeWorks.map((work) => (
+                  <li key={work.url}>
+                    <a
+                      href={work.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-sm font-semibold text-brand-navy underline decoration-slate-300 underline-offset-4 hover:text-brand-emerald"
+                    >
+                      {isBengali ? work.titleBn : work.titleEn}
+                      <ExternalLink size={12} aria-hidden="true" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <a
           href={profile.portfolioUrl}

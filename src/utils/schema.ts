@@ -63,11 +63,19 @@ export function parseAuthor(authorRaw?: string, inLanguage = "en-BD") {
     jobTitle,
     ...(profile
       ? {
+          alternateName: profile.alternateNames,
           description: inLanguage.toLowerCase().startsWith("bn")
             ? profile.bioBn
             : profile.bioEn,
           url: profile.portfolioUrl,
           sameAs: profile.sameAs,
+          subjectOf: profile.creativeWorks.map((work) => ({
+            "@type": "CreativeWork" as const,
+            name: inLanguage.toLowerCase().startsWith("bn")
+              ? work.titleBn
+              : work.titleEn,
+            url: work.url,
+          })),
         }
       : {}),
     worksFor: { "@id": SITE_ORG_ID },

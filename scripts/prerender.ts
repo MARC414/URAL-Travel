@@ -155,9 +155,19 @@ function renderAuthorBioHtml(
 ): string {
   if (!profile) return "";
   const isBengali = locale === "bn";
+  const mediaLinks = profile.creativeWorks
+    .map(
+      (work) =>
+        `<li><a href="${escapeHtml(work.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(
+          isBengali ? work.titleBn : work.titleEn
+        )}</a></li>`
+    )
+    .join("");
   return `<aside aria-labelledby="blog-author-bio-heading"><h2 id="blog-author-bio-heading">${
     isBengali ? "লেখক সম্পর্কে" : "About the author"
-  }</h2><p>${escapeHtml(isBengali ? profile.bioBn : profile.bioEn)}</p><p><a href="${escapeHtml(
+  }</h2><p>${escapeHtml(isBengali ? profile.bioBn : profile.bioEn)}</p><section><h3>${
+    isBengali ? "নির্বাচিত সৃজনশীল ও মিডিয়া কাজ" : "Selected creative &amp; media work"
+  }</h3><ul>${mediaLinks}</ul></section><p><a href="${escapeHtml(
     profile.portfolioUrl
   )}" target="_blank" rel="noopener noreferrer">${
     isBengali ? "পেশাগত পোর্টফোলিও দেখুন" : "View professional portfolio"
