@@ -28,7 +28,7 @@ import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { BLOG_DATA } from "../src/constants";
 import { BLOG_BODY } from "../src/data/blogContent";
 import { BENGALI_BLOG_OVERRIDES } from "../src/data/bengaliContent";
-import { FARHAN_MOMEN_PROFILE } from "../src/data/authorProfiles";
+import { EDITOR_PROFILE } from "../src/data/authorProfiles";
 import {
   getVisibleBlogFaqSection,
   getVisibleBlogHowTos,
@@ -1586,7 +1586,7 @@ for (const locale of ["en", "bn"] as const) {
   const html = read(routeFile) ?? "";
   const article = getSeoSchemaGraph(html).find((node) => hasSchemaType(node, "Article"));
   const author = article?.author as Record<string, unknown> | undefined;
-  const expectedBio = locale === "en" ? FARHAN_MOMEN_PROFILE.bioEn : FARHAN_MOMEN_PROFILE.bioBn;
+  const expectedBio = locale === "en" ? EDITOR_PROFILE.bioEn : EDITOR_PROFILE.bioBn;
   const visibleText = normalizeStructuredText(html);
   const alternateNames = Array.isArray(author?.alternateName)
     ? (author.alternateName as string[])
@@ -1594,7 +1594,7 @@ for (const locale of ["en", "bn"] as const) {
   const linkedWorks = Array.isArray(author?.subjectOf)
     ? (author.subjectOf as Record<string, unknown>[])
     : [];
-  const worksMatch = FARHAN_MOMEN_PROFILE.creativeWorks.every((work) => {
+  const worksMatch = EDITOR_PROFILE.creativeWorks.every((work) => {
     const expectedTitle = locale === "en" ? work.titleEn : work.titleBn;
     const schemaWork = linkedWorks.find((item) => item.url === work.url);
     return (
@@ -1605,15 +1605,15 @@ for (const locale of ["en", "bn"] as const) {
   });
   if (
     !author ||
-    author.name !== FARHAN_MOMEN_PROFILE.name ||
+    author.name !== EDITOR_PROFILE.name ||
     author.description !== expectedBio ||
-    author.url !== FARHAN_MOMEN_PROFILE.portfolioUrl ||
+    author.url !== EDITOR_PROFILE.portfolioUrl ||
     !Array.isArray(author.sameAs) ||
-    !author.sameAs.includes(FARHAN_MOMEN_PROFILE.sameAs[0]) ||
-    !FARHAN_MOMEN_PROFILE.alternateNames.every((name) => alternateNames.includes(name)) ||
+    !author.sameAs.includes(EDITOR_PROFILE.sameAs[0]) ||
+    !EDITOR_PROFILE.alternateNames.every((name) => alternateNames.includes(name)) ||
     !worksMatch ||
     !visibleText.includes(normalizeStructuredText(expectedBio)) ||
-    !html.includes(FARHAN_MOMEN_PROFILE.portfolioUrl)
+    !html.includes(EDITOR_PROFILE.portfolioUrl)
   ) {
     authorBioIssues.push(locale);
   }
@@ -1621,7 +1621,7 @@ for (const locale of ["en", "bn"] as const) {
 check(
   authorBioIssues.length === 0,
   authorBioIssues.length === 0
-    ? "Farhan Momen/MARC's bilingual bio, documentary links, and Article author entity match the portfolio"
+    ? "the single editor's bilingual bio, documentary links, and Article author entity match the portfolio"
     : `author bio/Article author metadata mismatch for locale(s): ${authorBioIssues.join(", ")}`
 );
 
