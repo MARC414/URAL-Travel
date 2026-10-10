@@ -5,7 +5,7 @@ export interface AuthorCreativeWork {
 }
 
 export interface AuthorProfile {
-  /** Public name used in URAL article bylines. */
+  /** Prominent public name used in URAL article bylines. */
   name: string;
   /** Names and initials that also identify the author. */
   alternateNames: string[];
@@ -20,14 +20,14 @@ export interface AuthorProfile {
 }
 
 /**
- * Single-editor profile: every URAL guide is written and edited by the site
- * owner. Claims are limited to the public portfolio supplied by the owner —
- * digital/content work and selected media projects — plus the site's own
- * editorial verification practice.
+ * Author claims below are limited to the public portfolio supplied by the site
+ * owner. It documents digital/content work and selected media projects, not
+ * personal trip counts, visa outcomes, bank verification, or original travel-
+ * photo provenance.
  */
-export const EDITOR_PROFILE: AuthorProfile = {
+export const FARHAN_MOMEN_PROFILE: AuthorProfile = {
   name: "Farhan Momen",
-  alternateNames: [],
+  alternateNames: ["MARC", "Momen Ahmderu Rahman Chodhury"],
   portfolioUrl: "https://github.com/MARC414/MARC",
   sameAs: ["https://github.com/MARC414"],
   creativeWorks: [
@@ -48,12 +48,15 @@ export const EDITOR_PROFILE: AuthorProfile = {
     },
   ],
   bioEn:
-    "Farhan Momen is the Founder and Travel Editor of URAL Travel, an independent travel-planning desk based in Dhaka. He has spent 15+ years in Bangladesh's digital content and marketing industry across SEO strategy, web development, technical translation, and English-language teaching, and founded WebWorm Digital Agency. At URAL Travel he writes and personally edits practical guides for Bangladeshi outbound travelers—visa rules, passport dollar endorsement, airline baggage and Zamzam policies, and Umrah planning—and verifies every fare, fee, and rule against official sources such as Bangladesh Bank circulars, Bangladesh Police Special Branch, and Saudi authorities before publishing.",
+    "Farhan Momen is the prominent byline and nickname; MARC is the initials of his full name, Momen Ahmderu Rahman Chodhury. He is a Bangladesh-based digital marketing and web-development professional. His public portfolio describes 15+ years across content, education, and digital work, and lists experience in SEO strategy, WordPress development, technical translation, and English-language teaching, including founding WebWorm Digital Agency. At URAL Travel, he applies that research and editorial background to practical travel-planning guides for Bangladeshi outbound travelers. His portfolio also features a Tanchangya Tribe documentary, a television-drama production broadcast on Masranga TV, and an article on Fakir Lalon Shah.",
   bioBn:
-    "ফারহান মোমেন ঢাকার স্বাধীন ট্রাভেল-প্ল্যানিং ডেস্ক URAL Travel-এর প্রতিষ্ঠাতা ও ট্রাভেল এডিটর। বাংলাদেশের ডিজিটাল কনটেন্ট ও মার্কেটিং খাতে তাঁর ১৫ বছরের বেশি অভিজ্ঞতা রয়েছে—এর মধ্যে আছে SEO কৌশল, ওয়েব ডেভেলপমেন্ট, কারিগরি অনুবাদ ও ইংরেজি শিক্ষাদান, এবং তিনি WebWorm Digital Agency প্রতিষ্ঠা করেছেন। URAL Travel-এ তিনি বাংলাদেশি বহির্গামী ভ্রমণকারীদের জন্য ভিসা নিয়ম, পাসপোর্ট ডলার এনডোর্সমেন্ট, এয়ারলাইন ব্যাগেজ ও জমজম নীতি এবং ওমরাহ পরিকল্পনাবিষয়ক ব্যবহারিক গাইড লেখেন ও নিজে সম্পাদনা করেন; প্রতিটি ভাড়া, ফি ও নিয়ম প্রকাশের আগে বাংলাদেশ ব্যাংকের সার্কুলার, বাংলাদেশ পুলিশের স্পেশাল ব্রাঞ্চ এবং সৌদি কর্তৃপক্ষের মতো অফিসিয়াল উৎস থেকে যাচাই করা হয়।",
+    "ফারহান মোমেন তাঁর প্রচলিত বাইলাইন ও ডাকনাম; MARC হলো তাঁর পূর্ণ নাম Momen Ahmderu Rahman Chodhury-এর আদ্যক্ষর। তিনি বাংলাদেশভিত্তিক ডিজিটাল মার্কেটিং ও ওয়েব ডেভেলপমেন্ট পেশাজীবী। তাঁর পাবলিক পোর্টফোলিওতে কনটেন্ট, শিক্ষা ও ডিজিটাল কাজে ১৫ বছরের বেশি অভিজ্ঞতার কথা বলা হয়েছে; এতে SEO কৌশল, WordPress ডেভেলপমেন্ট, কারিগরি অনুবাদ ও ইংরেজি শিক্ষাদানের কাজও উল্লেখ আছে, পাশাপাশি WebWorm Digital Agency প্রতিষ্ঠার অভিজ্ঞতা রয়েছে। URAL Travel-এ তিনি সেই গবেষণা ও সম্পাদকীয় অভিজ্ঞতা ব্যবহার করে বাংলাদেশি বহির্গামী ভ্রমণকারীদের জন্য ব্যবহারিক ভ্রমণ-পরিকল্পনা গাইড তৈরি করেন। পোর্টফোলিওতে তঞ্চঙ্গ্যা সম্প্রদায়ের একটি প্রামাণ্যচিত্র, মাছরাঙা টিভিতে প্রচারিত একটি নাটক এবং ফকির লালন শাহের জীবন ও দর্শন নিয়ে একটি নিবন্ধও রয়েছে।",
 };
 
-/** Every URAL guide has one editor; resolve any byline to the single profile. */
-export function getAuthorProfile(_authorRaw?: string): AuthorProfile | undefined {
-  return EDITOR_PROFILE;
+/** Resolve a localized or role-qualified blog byline to a supported profile. */
+export function getAuthorProfile(authorRaw?: string): AuthorProfile | undefined {
+  const name = (authorRaw || "").split("(")[0].trim().toLocaleLowerCase();
+  return name === FARHAN_MOMEN_PROFILE.name.toLocaleLowerCase()
+    ? FARHAN_MOMEN_PROFILE
+    : undefined;
 }

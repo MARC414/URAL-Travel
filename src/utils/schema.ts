@@ -46,14 +46,14 @@ export function toIsoDate(
 }
 
 /**
- * Parses the single-editor byline string "Farhan Momen (Founder & Travel
- * Editor)" into a Schema.org Person entity linked to the URAL Organization.
+ * Parses author strings such as "Zayan Rahman (Senior Travel Researcher)"
+ * into a Schema.org Person entity linked to the URAL Organization.
  */
 export function parseAuthor(authorRaw?: string, inLanguage = "en-BD") {
-  const raw = (authorRaw || "Farhan Momen (Founder & Travel Editor)").trim();
+  const raw = (authorRaw || "Zayan Rahman (Senior Travel Researcher)").trim();
   const match = raw.match(/^([^(]+?)(?:\s*\(([^)]+)\))?$/);
   const name = (match?.[1] || raw).trim();
-  const jobTitle = (match?.[2] || "Founder & Travel Editor").trim();
+  const jobTitle = (match?.[2] || "Senior Travel Researcher").trim();
   const profile = getAuthorProfile(name);
 
   return {
@@ -63,9 +63,7 @@ export function parseAuthor(authorRaw?: string, inLanguage = "en-BD") {
     jobTitle,
     ...(profile
       ? {
-          ...(profile.alternateNames.length > 0
-            ? { alternateName: profile.alternateNames }
-            : {}),
+          alternateName: profile.alternateNames,
           description: inLanguage.toLowerCase().startsWith("bn")
             ? profile.bioBn
             : profile.bioEn,
