@@ -8123,6 +8123,29 @@ export default function App() {
                   ? "© 2026 URAL Travel Intelligence. সর্বস্বত্ব সংরক্ষিত।"
                   : "© 2026 URAL Travel Intelligence. All rights reserved."}
               </span>
+              <span className="hidden sm:inline">•</span>
+              {/* Wikidata entity verification badge */}
+              <a
+                href="https://www.wikidata.org/wiki/Q141682382"
+                target="_blank"
+                rel="noopener noreferrer"
+                title={isBn
+                  ? "URAL Travel — Wikidata-তে যাচাইকৃত Travel Intelligence সত্তা"
+                  : "URAL Travel on Wikidata — Verified travel intelligence entity"}
+                className="inline-flex items-center gap-1 hover:text-white transition-colors"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Wikidata-logo_inquares.svg/20px-Wikidata-logo_inquares.svg.png"
+                  alt="Wikidata"
+                  width={16}
+                  height={16}
+                  className="object-contain"
+                  loading="lazy"
+                />
+                <span>
+                  {isBn ? "Wikidata-তে তালিকাভুক্ত" : "Listed on Wikidata"}
+                </span>
+              </a>
             </div>
           </div>
         </div>
