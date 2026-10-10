@@ -162,15 +162,15 @@ Note: Bangladesh has no single published "emigration checklist" law; the NOC/GO 
 
 ---
 
-## ITEM 5 — Format decisions
+## ITEM 5 — Format decisions (CONFIRMED 10-10-2026)
 
-Handles (from the live site footer/schema — confirmed):
-- **TikTok:** @uraltravelbd → https://www.tiktok.com/@uraltravelbd
-- **Facebook:** @uraltravelbd → https://web.facebook.com/uraltravelbd/
-- Also live on site: Instagram @uraltravelbd, LinkedIn "ural-travel-bangladesh", WhatsApp desk +8801784385335.
+- **Format:** FACELESS (works with the current scripts — voiceover + stamps/b-roll/screen recordings)
+- **Voice:** TEXT-TO-SPEECH (AI voice; keep consistent voice across all 5 days)
+- **Handles (from the live site footer/schema — confirmed):**
+  - **TikTok:** @uraltravelbd → https://www.tiktok.com/@uraltravelbd
+  - **Facebook:** @uraltravelbd → https://web.facebook.com/uraltravelbd/
+  - Also live on site: Instagram @uraltravelbd, LinkedIn "ural-travel-bangladesh", WhatsApp desk +8801784385335.
 
-Still to be decided by the site owner: on-camera vs. faceless, own voice vs. TTS.
+## ITEM 6 — Editor (CONFIRMED 10-10-2026)
 
-## ITEM 6 — Editor
-
-Still to be confirmed by the site owner (CapCut vs. other) before timings are formatted.
+**CapCut** — format all timings as CapCut clip/caption markers.
