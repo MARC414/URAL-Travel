@@ -6486,6 +6486,42 @@ export default function App() {
                         </div>
                       </header>
 
+                      {/* Breadcrumb navigation — visible on screen + semantic for screen readers */}
+                      <nav aria-label={isBn ? "ব্রেডক্রাম্ব" : "Breadcrumb"}>
+                        <ol className="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-500 mb-4">
+                          <li>
+                            <a
+                              href="/"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/"); }}
+                              className="hover:text-brand-navy transition-colors"
+                            >
+                              {isBn ? "হোম" : "Home"}
+                            </a>
+                          </li>
+                          <li aria-hidden="true" className="text-slate-300 select-none">/</li>
+                          <li>
+                            <a
+                              href="/blog"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
+                              className="hover:text-brand-navy transition-colors"
+                            >
+                              {isBn ? "ট্রাভেল গাইড" : "Travel Guides"}
+                            </a>
+                          </li>
+                          <li aria-hidden="true" className="text-slate-300 select-none">/</li>
+                          <li>
+                            <a
+                              href={`/blog/${activePost.slug}`}
+                              onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${activePost.slug}`); }}
+                              className="hover:text-brand-navy transition-colors line-clamp-1 max-w-[200px] sm:max-w-xs"
+                              aria-current="page"
+                            >
+                              {activePost.title}
+                            </a>
+                          </li>
+                        </ol>
+                      </nav>
+
                       {/* Full Long-Form Verified Guide Content with Dark H2 (24px–26px), Dark H3 (19px–21px) & 16px Body */}
                       <div className="max-w-none text-slate-800 leading-[1.8] space-y-6 text-[16px] sm:text-[17px] font-sans">
                         {!articleBody && (
@@ -6493,7 +6529,7 @@ export default function App() {
                           // already being fetched (prerender injects a modulepreload for blog
                           // routes), so this placeholder is normally invisible; it exists so a
                           // slow connection never renders an empty article.
-                          <div className="space-y-4 animate-pulse" aria-hidden="true" data-blog-body-placeholder>
+                          <div className="space-y-4" aria-hidden="true" data-blog-body-placeholder>
                             {[0, 1, 2, 3, 4].map((i) => (
                               <div
                                 key={i}

@@ -274,6 +274,97 @@ body > :not(#root):not(script):not(style) {
 }
 
 /* ==========================================================================
+   PRINT STYLESHEET — Clean article-only output for browser print / PDF save
+   ========================================================================== */
+@media print {
+  /* Hide everything non-essential */
+  header,
+  nav,
+  aside,
+  footer,
+  [role="complementary"],
+  .lg\:sticky,
+  #mobile-intent-drawer,
+  .stats-bar,
+  .consent-banner,
+  .affiliate-toast,
+  .back-to-top,
+  video,
+  audio,
+  iframe,
+  canvas,
+  svg.route-line,
+  .shampan-boat,
+  .dest-dot {
+    display: none !important;
+  }
+
+  /* Reset background, preserve text */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Show only the root content */
+  #root {
+    display: block !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Article: readable column, no max-width cap */
+  article,
+  main {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Typography adjustments for print */
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  p, li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Images: fit page width, no scaling up */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Links: show URL after text */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555;
+  }
+
+  /* Suppress URL after internal nav links */
+  a[href^="/"]::after,
+  a[href^="#"]::after {
+    content: none;
+  }
+
+  /* Author bio card */
+  [aria-labelledby="blog-author-bio-heading"] {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    page-break-inside: avoid;
+  }
+}
+
+/* ==========================================================================
    WCAG 2.3.3 — REDUCE ALL MOTION WHEN USER PREFERS
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
