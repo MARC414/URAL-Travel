@@ -2131,6 +2131,7 @@ export default function App() {
                 type="button"
                 id="nav-home"
                 onClick={() => navigateTo("/")}
+                aria-current={section === "home" ? "page" : undefined}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
                   section === "home" ? "text-[#F6B73C] font-semibold" : "text-white/75"
                 }`}
@@ -2143,6 +2144,7 @@ export default function App() {
                 type="button"
                 id="nav-umrah"
                 onClick={() => navigateTo("/umrah")}
+                aria-current={section === "umrah" ? "page" : undefined}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-semibold hover:text-[#F6B73C] whitespace-nowrap flex items-center gap-1.5 py-2 ${
                   section === "umrah" ? "text-[#F6B73C]" : "text-white"
                 }`}
@@ -2156,6 +2158,7 @@ export default function App() {
                 type="button"
                 id="nav-flights"
                 onClick={() => navigateTo("/flights")}
+                aria-current={section === "flights" ? "page" : undefined}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
                   section === "flights" ? "text-[#F6B73C] font-semibold" : "text-white/75"
                 }`}
@@ -2168,6 +2171,7 @@ export default function App() {
                 type="button"
                 id="nav-hotels"
                 onClick={() => navigateTo("/hotels")}
+                aria-current={section === "hotels" ? "page" : undefined}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
                   section === "hotels" ? "text-[#F6B73C] font-semibold" : "text-white/75"
                 }`}
@@ -2180,6 +2184,7 @@ export default function App() {
                 type="button"
                 id="nav-visa"
                 onClick={() => navigateTo("/visa")}
+                aria-current={section === "visa" ? "page" : undefined}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
                   section === "visa" ? "text-[#F6B73C] font-semibold" : "text-white/75"
                 }`}
@@ -2193,6 +2198,7 @@ export default function App() {
                   type="button"
                   id="nav-destinations-megamenu"
                   onClick={() => navigateTo("/destinations")}
+                  aria-current={section === "destinations" || section === "experiences" ? "page" : undefined}
                   className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap flex items-center gap-1 py-2 ${
                     section === "destinations" || section === "experiences"
                       ? "text-[#F6B73C] font-semibold"
@@ -2436,6 +2442,7 @@ export default function App() {
                 type="button"
                 id="nav-blog"
                 onClick={() => navigateTo("/blog")}
+                aria-current={section === "blog" ? "page" : undefined}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
                   section === "blog" ? "text-[#F6B73C] font-semibold" : "text-white/75"
                 }`}
@@ -2449,6 +2456,7 @@ export default function App() {
                   type="button"
                   id="nav-tools-megamenu"
                   onClick={() => navigateTo("/tools")}
+                  aria-current={["costs", "tools", "contact", "sitemap"].includes(section) ? "page" : undefined}
                   className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] flex items-center gap-1 py-2 whitespace-nowrap ${
                     ["costs", "tools", "contact", "sitemap"].includes(section)
                       ? "text-[#F6B73C] font-semibold"
@@ -2855,6 +2863,7 @@ export default function App() {
                                   <button
                                     key={link.path}
                                     type="button"
+                                    aria-current={isCurrent ? "page" : undefined}
                                     onClick={() => {
                                       navigateTo(link.path);
                                       setMobileMenuOpen(false);
