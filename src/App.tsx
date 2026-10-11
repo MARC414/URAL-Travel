@@ -788,7 +788,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
   return `${cleanWords.slice(0, 50).join(" ").replace(/[.,;:!?-]+$/, "")}...`;
 }
 
-type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "experiences" | "umrah" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "privacy" | "notFound";
+type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "experiences" | "umrah" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "privacy" | "about" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
@@ -1298,6 +1298,9 @@ export default function App() {
       }
     } else if (root === "contact" && segs.length === 1) {
       section = "contact";
+      isLanding = true;
+    } else if (root === "about" && segs.length === 1) {
+      section = "about";
       isLanding = true;
     } else if (
       ["sitemap", "pre-departure", "indexing"].includes(root) &&
@@ -1831,6 +1834,43 @@ export default function App() {
     seoBreadcrumbs = [
       { name: "Home", url: siteUrl("/", lang) },
       { name: "Contact Us", url: contactUrl }
+    ];
+  } else if (section === "about") {
+    const aboutUrl = siteUrl("/about", lang);
+    seoTitle = isBn
+      ? "URAL Travel Intelligence — আমাদের সম্পর্কে | স্বাধীন ভ্রমণ গাইড"
+      : "About URAL Travel Intelligence | Farhan Momen, Founder & Travel Editor";
+    seoDescription = isBn
+      ? "URAL হলো একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স প্ল্যাটফর্ম — প্রচলিত ট্রাভেল এজেন্সি নয়। ফারহান মোমেন দ্বারা প্রতিষ্ঠিত, বাংলাদেশি ভ্রমণকারীদের জন্য নিরপেক্ষ ফ্লাইট, হোটেল, ভিসা ও BDT বাজেট গাইড।"
+      : "URAL is an independent travel intelligence platform — not a licensed travel agency. Founded by Farhan Momen to give Bangladeshi travelers verified, unbiased flight comparisons, hotel zones, visa checklists, and BDT budgets.";
+    const personSchema = {
+      "@type": "Person",
+      name: "Farhan Momen",
+      jobTitle: "Founder & Travel Editor",
+      url: aboutUrl,
+      sameAs: [
+        URAL_SOCIAL_LINKS.facebook,
+        URAL_SOCIAL_LINKS.instagram,
+        URAL_SOCIAL_LINKS.linkedin,
+      ],
+    };
+    const orgSchema = {
+      "@type": "Organization",
+      name: "URAL Travel Intelligence",
+      url: "https://ural-travel.pages.dev",
+      logo: "https://ural-travel.pages.dev/assets/brand/svg/ural-wordmark-v1.svg",
+      description: seoDescription,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+8801784385335",
+        contactType: "customer support",
+        availableLanguage: ["Bengali", "English"],
+      },
+    };
+    seoSchema = [personSchema, orgSchema];
+    seoBreadcrumbs = [
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: isBn ? "আমাদের সম্পর্কে" : "About", url: aboutUrl }
     ];
   } else if (section === "experiences") {
     const experiencesUrl = siteUrl("/experiences", lang);
@@ -7684,6 +7724,159 @@ export default function App() {
       )}
 
       {/* -------------------------------------------------------------
+          👤 VIEW 10: ABOUT US
+      ------------------------------------------------------------- */}
+      {section === "about" && (
+        <div className="space-y-10 animate-fade-in font-sans max-w-4xl mx-auto">
+
+          {/* Page Header */}
+          <div className="bg-brand-navy rounded-3xl p-8 sm:p-12 text-center space-y-4">
+            <span className="inline-flex items-center gap-2 text-[#F6B73C] text-xs font-mono font-bold uppercase tracking-widest">
+              {isBn ? "আমাদের সম্পর্কে" : "About URAL"}
+            </span>
+            <h1 className="text-3xl sm:text-4xl font-bold text-white font-serif leading-tight">
+              {isBn
+                ? "ভ্রমণ ইন্টেলিজেন্স — প্রচলিত এজেন্সি নয়"
+                : "Travel Intelligence. Not a Travel Agency."}
+            </h1>
+            <p className="text-slate-300 text-sm max-w-2xl mx-auto leading-relaxed">
+              {isBn
+                ? "URAL হলো বাংলাদেশি ভ্রমণকারীদের জন্য একটি স্বাধীন, নিরপেক্ষ ট্রাভেল গাইড প্ল্যাটফর্ম — যেখানে কোনো বিক্রিত রিভিউ, গোপন পার্টনার চুক্তি বা লুকানো কমিশন নেই।"
+                : "URAL is an independent, unbiased travel intelligence platform built for Bangladeshi and global travelers — with no sponsored reviews, hidden partner deals, or undisclosed commissions."}
+            </p>
+          </div>
+
+          {/* Mission & Model */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-[#F6B73C]/15 flex items-center justify-center text-[#F6B73C] font-bold text-lg">✦</div>
+              <h2 className="font-serif text-lg font-bold text-brand-navy">
+                {isBn ? "আমাদের লক্ষ্য" : "Our Mission"}
+              </h2>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                {isBn
+                  ? "বাংলাদেশি ভ্রমণকারীদের প্রথম সারির ভিসা তথ্য, BDT-ভিত্তিক বাজেট এবং সত্যিকারের হালাল-বান্ধব গন্তব্য রিভিউ দিয়ে সক্ষম করা — যাতে প্রতিটি আউটবাউন্ড ট্রিপ হয় উপভোগ্য, সাশ্রয়ী এবং সঠিকভাবে পরিকল্পিত।"
+                  : "To empower Bangladeshi travelers with first-hand visa intelligence, BDT-native budgets, and genuinely halal-friendly destination reviews — so every outbound trip is enjoyable, affordable, and correctly planned."}
+              </p>
+            </div>
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 font-bold text-lg">✓</div>
+              <h2 className="font-serif text-lg font-bold text-brand-navy">
+                {isBn ? "আমরা কী নই" : "What We Are Not"}
+              </h2>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                {isBn
+                  ? "URAL কোনো লাইসেন্সপ্রাপ্ত ট্রাভেল এজেন্সি নয়, টিকিট বিক্রেতা নয় এবং কোনো এয়ারলাইন বা হোটেলের অফিসিয়াল প্রতিনিধি নয়। আমরা একটি সম্পাদকীয় ইন্টেলিজেন্স সিস্টেম যা আপনাকে সিদ্ধান্ত নিতে সাহায্য করে।"
+                  : "URAL is not a licensed travel agency, ticket seller, or official representative of any airline or hotel brand. We are an editorial intelligence system that helps you make informed decisions."}
+              </p>
+            </div>
+          </div>
+
+          {/* Founder Profile */}
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-4">
+            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest block">
+              {isBn ? "প্রতিষ্ঠাতা ও প্রধান সম্পাদক" : "Founder & Editor-in-Chief"}
+            </span>
+            <div className="flex items-start gap-5">
+              <div className="w-16 h-16 rounded-full bg-brand-navy flex items-center justify-center text-[#F6B73C] font-bold text-2xl shrink-0 select-none" aria-hidden="true">
+                FM
+              </div>
+              <div className="space-y-2">
+                <h2 className="font-serif text-xl font-bold text-brand-navy">Farhan Momen</h2>
+                <p className="text-slate-500 text-xs font-medium">
+                  {isBn ? "প্রতিষ্ঠাতা ও ট্রাভেল এডিটর" : "Founder & Travel Editor"}
+                </p>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  {isBn
+                    ? "ফারহান মোমেন বাংলাদেশ থেকে আউটবাউন্ড ভ্রমণের জটিলতা সরল করার জন্য URAL প্রতিষ্ঠা করেছেন। তাঁর লক্ষ্য হলো প্রতিটি বাংলাদেশি ভ্রমণকারীকে এমন তথ্য দেওয়া যা আগে শুধুমাত্র এজেন্সি ভেতরে থাকত।"
+                    : "Farhan Momen founded URAL to demystify outbound travel from Bangladesh. His goal is to give every Bangladeshi traveler access to the same information that was previously locked inside agency back offices."}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Trust Pillars */}
+          <div className="space-y-3">
+            <h2 className="font-serif text-xl font-bold text-brand-navy">
+              {isBn ? "আমাদের প্রতিশ্রুতি" : "Our Editorial Commitments"}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                {
+                  icon: "⚖️",
+                  titleBn: "নিরপেক্ষ তুলনা",
+                  titleEn: "Unbiased Comparisons",
+                  descBn: "কোনো এয়ারলাইন বা হোটেল ব্র্যান্ড থেকে পেইড এনডোর্সমেন্ট নেই।",
+                  descEn: "No paid endorsements from any airline or hotel brand.",
+                },
+                {
+                  icon: "📋",
+                  titleBn: "যাচাইকৃত তথ্য",
+                  titleEn: "Verified Information",
+                  descBn: "প্রতিটি গাইড সরকারি উৎস ও প্রথম হাতের অভিজ্ঞতা থেকে তৈরি।",
+                  descEn: "Every guide built from official sources and first-hand experience.",
+                },
+                {
+                  icon: "💰",
+                  titleBn: "কোনো লুকানো ফি নেই",
+                  titleEn: "No Hidden Fees",
+                  descBn: "অ্যাফিলিয়েট লিংক সম্পূর্ণ প্রকাশিত এবং আপনার জন্য বিনামূল্যে।",
+                  descEn: "Affiliate links are fully disclosed and cost you nothing extra.",
+                },
+                {
+                  icon: "🌐",
+                  titleBn: "বাংলা ও ইংরেজি",
+                  titleEn: "Bengali & English",
+                  descBn: "৭৯টি বাংলা ও ৮৬টি ইংরেজি পৃষ্ঠায় সম্পূর্ণ দ্বিভাষিক।",
+                  descEn: "Fully bilingual across 79 Bengali and 86 English pages.",
+                },
+              ].map((item, i) => (
+                <div key={i} className="bg-white border border-slate-200 rounded-xl p-4 flex gap-3">
+                  <span className="text-2xl shrink-0 leading-none mt-0.5" aria-hidden="true">{item.icon}</span>
+                  <div>
+                    <h3 className="text-sm font-bold text-brand-navy">{isBn ? item.titleBn : item.titleEn}</h3>
+                    <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{isBn ? item.descBn : item.descEn}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact CTA */}
+          <div className="bg-brand-navy rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h2 className="text-white font-serif text-lg font-bold">
+                {isBn ? "যোগাযোগ করতে চান?" : "Want to Get in Touch?"}
+              </h2>
+              <p className="text-slate-400 text-xs mt-1">
+                {isBn
+                  ? "আমাদের WhatsApp বা হটলাইনে সরাসরি কথা বলুন — +8801784385335"
+                  : "Reach us directly on WhatsApp or hotline — +8801784385335"}
+              </p>
+            </div>
+            <div className="flex gap-2 shrink-0">
+              <a
+                href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20found%20you%20via%20the%20About%20page"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy font-bold text-xs px-4 py-2.5 rounded-xl transition-colors"
+              >
+                {isBn ? "WhatsApp-এ মেসেজ করুন" : "Message on WhatsApp"}
+              </a>
+              <button
+                type="button"
+                onClick={() => navigateTo("/contact")}
+                className="bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-4 py-2.5 rounded-xl border border-white/20 transition-colors"
+              >
+                {isBn ? "ইনকোয়েরি ফর্ম" : "Inquiry Form"}
+              </button>
+            </div>
+          </div>
+
+        </div>
+      )}
+
+      {/* -------------------------------------------------------------
           🎟️ VIEW 11: GLOBAL ATTRACTIONS & SKIP-THE-LINE HUB (TIQETS & KLOOK)
       ------------------------------------------------------------- */}
       {section === "experiences" && (
@@ -7725,15 +7918,95 @@ export default function App() {
       )}
 
       {section === "notFound" && (
-        <section className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 text-center shadow-sm">
-          <div className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-brand-emerald">404 · Page not found</div>
-          <h1 className="mt-3 font-serif text-3xl font-black text-brand-navy">We can’t find that travel page.</h1>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-slate-600">The address may have changed or the guide may no longer be available. Browse our travel guides or return to the home page.</p>
-          <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <button type="button" onClick={() => navigateTo("/")} className="rounded-xl bg-brand-navy px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-800">Go to home</button>
-            <button type="button" onClick={() => navigateTo("/blog")} className="rounded-xl bg-slate-100 px-4 py-3 text-sm font-bold text-brand-navy transition-colors hover:bg-slate-200">Browse travel guides</button>
+        <div className="space-y-8 animate-fade-in">
+
+          {/* Hero Banner */}
+          <div className="bg-brand-navy rounded-3xl p-8 sm:p-12 text-center space-y-4">
+            <div className="font-mono text-6xl sm:text-7xl font-black text-[#F6B73C] opacity-20 select-none leading-none" aria-hidden="true">404</div>
+            <div className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#F6B73C]">
+              {isBn ? "পৃষ্ঠা পাওয়া যায়নি" : "Page Not Found"}
+            </div>
+            <h1 className="font-serif text-2xl sm:text-3xl font-black text-white leading-tight">
+              {isBn
+                ? "এই ভ্রমণ পৃষ্ঠাটি খুঁজে পাওয়া যায়নি"
+                : "This Travel Page Doesn't Exist"}
+            </h1>
+            <p className="text-slate-300 text-sm max-w-xl mx-auto leading-relaxed">
+              {isBn
+                ? "এই ঠিকানাটি পরিবর্তিত হয়েছে, সরানো হয়েছে বা গাইডটি আর পাওয়া যাচ্ছে না। নিচের লিংকগুলো ব্যবহার করে আপনার গন্তব্য খুঁজুন।"
+                : "The address may have changed, been moved, or the guide is no longer available. Use the links below to find your destination."}
+            </p>
           </div>
-        </section>
+
+          {/* Quick Navigation Cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[
+              { labelBn: "হোমপেজ", labelEn: "Homepage", path: "/", icon: "⌂" },
+              { labelBn: "ব্লগ গাইড", labelEn: "Blog Guides", path: "/blog", icon: "✎" },
+              { labelBn: "ফ্লাইট গাইড", labelEn: "Flight Guides", path: "/flights", icon: "✈" },
+              { labelBn: "ভিসা চেকলিস্ট", labelEn: "Visa Checklists", path: "/visa", icon: "☑" },
+            ].map((item) => (
+              <button
+                key={item.path}
+                type="button"
+                onClick={() => navigateTo(item.path)}
+                className="bg-white border border-slate-200 rounded-2xl p-4 text-center hover:border-[#F6B73C] hover:shadow-md transition-all group"
+              >
+                <div className="text-2xl mb-2 select-none" aria-hidden="true">{item.icon}</div>
+                <div className="text-xs font-bold text-brand-navy group-hover:text-[#F6B73C] transition-colors">
+                  {isBn ? item.labelBn : item.labelEn}
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Popular Destination Quick Links */}
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+            <h2 className="text-sm font-bold text-brand-navy mb-3">
+              {isBn ? "জনপ্রিয় গন্তব্যে যান" : "Jump to a Popular Destination"}
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { label: isBn ? "নেপাল গাইড" : "Nepal Guide", path: "/destinations/nepal-guide" },
+                { label: isBn ? "থাইল্যান্ড গাইড" : "Thailand Guide", path: "/destinations/thailand-guide" },
+                { label: isBn ? "মালয়েশিয়া গাইড" : "Malaysia Guide", path: "/destinations/malaysia-guide" },
+                { label: isBn ? "দুবাই গাইড" : "Dubai Guide", path: "/destinations/dubai-guide" },
+                { label: isBn ? "ওমরাহ হাব" : "Umrah Hub", path: "/umrah" },
+                { label: isBn ? "সব গাইড দেখুন" : "All Guides", path: "/blog" },
+              ].map((link) => (
+                <button
+                  key={link.path}
+                  type="button"
+                  onClick={() => navigateTo(link.path)}
+                  className="text-xs font-semibold text-brand-navy bg-white border border-slate-300 rounded-full px-3 py-1.5 hover:border-[#F6B73C] hover:text-[#F6B73C] transition-colors"
+                >
+                  {link.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact CTA */}
+          <div className="bg-brand-navy rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <p className="text-white text-sm font-bold">
+                {isBn ? "আপনি যা খুঁজছিলেন খুঁজে পাননি?" : "Can't find what you were looking for?"}
+              </p>
+              <p className="text-slate-400 text-xs mt-0.5">
+                {isBn ? "আমাদের WhatsApp-এ মেসেজ করুন — আমরা সাহায্য করব।" : "Message us on WhatsApp — we'll point you in the right direction."}
+              </p>
+            </div>
+            <a
+              href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20was%20looking%20for%20something%20on%20your%20site%20but%20got%20a%20404%20error"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy font-bold text-xs px-4 py-2.5 rounded-xl transition-colors"
+            >
+              {isBn ? "WhatsApp-এ মেসেজ" : "Message on WhatsApp"}
+            </a>
+          </div>
+
+        </div>
       )}
 
       </main>
@@ -8103,6 +8376,28 @@ export default function App() {
               )}
             </p>
 <div className="shrink-0 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 font-mono text-[10px] text-slate-400">
+              <a
+                href={isBn ? "/bn/about" : "/about"}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo(isBn ? "/bn/about" : "/about");
+                }}
+                className="hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
+              >
+                {isBn ? "আমাদের সম্পর্কে" : "About"}
+              </a>
+              <span className="hidden sm:inline">•</span>
+              <a
+                href="/contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo("/contact");
+                }}
+                className="hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
+              >
+                {isBn ? "যোগাযোগ" : "Contact"}
+              </a>
+              <span className="hidden sm:inline">•</span>
               <a
                 href={isBn ? "/bn/privacy" : "/privacy"}
                 onClick={(e) => {
