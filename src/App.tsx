@@ -1205,7 +1205,16 @@ export default function App() {
 
     let isMounted = true;
     const markReady = () => {
-      if (isMounted) setAreTpScriptsReady(true);
+      if (!isMounted) return;
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(() => {
+          if (isMounted) setAreTpScriptsReady(true);
+        }, { timeout: 1200 });
+      } else {
+        setTimeout(() => {
+          if (isMounted) setAreTpScriptsReady(true);
+        }, 50);
+      }
     };
 
     const skeletons = Array.from(
