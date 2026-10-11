@@ -8163,7 +8163,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "গ্লোবাল হোটেল ও রিসোর্ট বুকিং" : "Global Hotels & Resorts"}
                   </a>
@@ -8173,7 +8173,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "এশিয়া ও দুবাই ট্যুর ও অ্যাক্টিভিটি" : "Asia & Dubai Tours & Passes"}
                   </a>
@@ -8183,7 +8183,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "অল-ইনক্লুসিভ ও এক্সপ্লোরার সিটি পাস" : "All-Inclusive & Explorer Passes"}
                   </a>
@@ -8193,7 +8193,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.tiqets)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "ইউরোপ, UK ও USA মিউজিয়াম পাস" : "Europe, UK & USA Attractions"}
                   </a>
@@ -8203,7 +8203,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.airalo)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "ইনস্ট্যান্ট ট্রাভেল eSIM ডাটা" : "Global Travel eSIM Data"}
                   </a>
@@ -8213,7 +8213,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.welcomePickups)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "প্রাইভেট এয়ারপোর্ট পিকআপ ও ট্রান্সফার" : "Airport Pickup & Transfers"}
                   </a>
@@ -8223,7 +8223,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.airhelp)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600 পর্যন্ত)" : "Flight Delay Claims (Up to €600)"}
                   </a>
@@ -8244,6 +8244,7 @@ export default function App() {
                       href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={isBn ? "WhatsApp ডেস্ক: +880 1784-385335" : "Chat on WhatsApp: +880 1784-385335"}
                       className="hover:text-white hover:underline text-emerald-400 font-mono font-bold"
                     >
                       +880 1784-385335
@@ -8253,6 +8254,7 @@ export default function App() {
                     <span className="text-slate-400">{isBn ? "সরাসরি কল:" : "Direct Hotline:"}</span>
                     <a
                       href="tel:+8801784385335"
+                      aria-label={isBn ? "সরাসরি কল: +880 1784-385335" : "Call directly: +880 1784-385335"}
                       className="hover:text-white hover:underline text-[#F6B73C] font-mono font-bold"
                     >
                       +880 1784-385335
