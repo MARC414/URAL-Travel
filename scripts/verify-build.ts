@@ -437,6 +437,42 @@ check(
         fontProblems.slice(0, 5).join(", ")
 );
 
+// (1c-2) The Bengali Taka sign U+09F3 (৳) renders on English pages (prices like
+//        "৳28,000"). It must NOT sit inside the Noto Sans Bengali @font-face
+//        unicode-range: if it does, that single glyph pulls the 57 KiB Bengali
+//        font onto every English route's critical path (Lighthouse measured a
+//        4.3 s max critical-path chain from exactly this). The range is split
+//        into U+0980-09F1 + U+09F4-09FF to exclude the currency marks
+//        U+09F2-09F3, so ৳ falls back to the system font. Guard both the inline
+//        critical CSS shipped in the shell and the standalone fonts.css copy.
+const notoRangeSources: { label: string; css: string }[] = [];
+if (distIndexHtml) {
+  notoRangeSources.push({ label: "index.html inline @font-face", css: distIndexHtml });
+}
+const distFontsCssPath = path.join(DIST_DIR, "fonts", "fonts.css");
+if (fs.existsSync(distFontsCssPath)) {
+  notoRangeSources.push({
+    label: "dist/fonts/fonts.css",
+    css: fs.readFileSync(distFontsCssPath, "utf8"),
+  });
+}
+const notoRangeProblems: string[] = [];
+for (const { label, css } of notoRangeSources) {
+  if (!/Noto Sans Bengali/.test(css)) continue; // only inspect sources that declare the face
+  if (/U\+0980-09FF/i.test(css)) {
+    notoRangeProblems.push(`${label}: contiguous U+0980-09FF still present (must exclude ৳ U+09F3)`);
+  }
+  if (!/U\+0980-09F1/i.test(css) || !/U\+09F4-09FF/i.test(css)) {
+    notoRangeProblems.push(`${label}: split range U+0980-09F1 + U+09F4-09FF not found`);
+  }
+}
+check(
+  notoRangeSources.length > 0 && notoRangeProblems.length === 0,
+  notoRangeProblems.length === 0
+    ? `Noto Bengali unicode-range excludes the Taka sign U+09F3 in ${notoRangeSources.length} source(s) (keeps the 57 KiB Bengali font off the English critical path)`
+    : notoRangeProblems.join("; ")
+);
+
 // The deferred GTM loader is still delayed until interaction / 3 seconds, but
 // its origin handshake is warmed after the LCP and font preloads. This is a
 // shell-level hint that prerenderDistHtmlFiles() must carry through to every
