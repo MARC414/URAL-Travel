@@ -6741,8 +6741,6 @@ export default function App() {
                         })}
                       </div>
 
-                      <AuthorBioCard authorRaw={canonicalAuthorRaw} isBengali={isBn} />
-
                       {/* Contextual Luggage Storage Offer Callout (Radical Storage on matching travel guides) */}
                       <RadicalStorageContextualCallout slug={activePost.slug} lang={lang} />
 
@@ -6800,199 +6798,8 @@ export default function App() {
                         </div>
                       )}
 
-                      {/* Hub-and-Spoke Topical Cluster Silo Navigator (Internal Linking Authority Matrix) */}
-                      <div className="pt-6 border-t border-slate-200 space-y-4">
-                        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5">
-                          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
-                            <div>
-                              <span className="text-[11px] font-bold uppercase tracking-wider text-brand-emerald block">
-                                {isBn ? "টপিক্যাল ক্লাস্টার সাইলো নেভিগেটর (Hub & Spoke Silo)" : "Topical Authority Cluster Navigator (Hub & Spoke Silo)"}
-                              </span>
-                              <h3 className="font-serif text-base font-bold text-brand-navy">
-                                {isBn
-                                  ? `${activePost.category} — এই ক্লাস্টারের সবগুলো গাইড (${sameCategoryPosts.length + 1}টি আর্টিকেল)`
-                                  : `Complete "${activePost.category}" Topical Series (${sameCategoryPosts.length + 1} Connected Guides)`}
-                              </h3>
-                            </div>
-                            <a
-                              href="/sitemap"
-                              onClick={(e) => { e.preventDefault(); navigateTo("/sitemap"); }}
-                              className="text-xs font-semibold text-brand-navy hover:underline"
-                            >
-                              {isBn ? "সম্পূর্ণ SEO Blueprint দেখুন →" : "View Full Topical Map →"}
-                            </a>
-                          </div>
-
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                            {[activePost, ...sameCategoryPosts].map((clusterPost, cIdx) => {
-                              const isCurrent = clusterPost.slug === activePost.slug;
-                              const className = `text-left p-3 rounded-xl border transition-all flex items-start gap-2.5 ${
-                                isCurrent
-                                  ? "bg-brand-navy text-white border-brand-navy cursor-default"
-                                  : "bg-white hover:bg-slate-100 text-slate-800 border-slate-200 hover:border-brand-navy"
-                              }`;
-                              const contents = (
-                                <>
-                                  <span
-                                    className={`text-[11px] font-mono font-bold px-1.5 py-0.5 rounded shrink-0 mt-0.5 ${
-                                      isCurrent ? "bg-[#F6B73C] text-brand-navy" : "bg-slate-100 text-brand-navy"
-                                    }`}
-                                  >
-                                    {String(cIdx + 1).padStart(2, "0")}
-                                  </span>
-                                  <div className="space-y-0.5 min-w-0">
-                                    <div className={`text-xs font-semibold line-clamp-2 leading-snug ${isCurrent ? "text-white" : "text-brand-navy"}`}>
-                                      {clusterPost.title}
-                                    </div>
-                                    <div className={`text-[10px] ${isCurrent ? "text-[#F6B73C] font-semibold" : "text-slate-500"}`}>
-                                      {isCurrent
-                                        ? isBn
-                                          ? "● বর্তমানে এই গাইডটি পড়ছেন"
-                                          : "● Currently Reading This Guide"
-                                        : `${clusterPost.readTime} · ${isBn ? "পড়তে ক্লিক করুন →" : "Read Spoke Guide →"}`}
-                                    </div>
-                                  </div>
-                                </>
-                              );
-
-                              return isCurrent ? (
-                                <div key={clusterPost.id} aria-current="page" className={className}>
-                                  {contents}
-                                </div>
-                              ) : (
-                                <a
-                                  key={clusterPost.id}
-                                  href={`/blog/${clusterPost.slug}`}
-                                  onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${clusterPost.slug}`); }}
-                                  className={className}
-                                >
-                                  {contents}
-                                </a>
-                              );
-                            })}
-                          </div>
-                        </div>
-
-                        <div className="text-xs font-bold text-brand-navy">
-                          {isBn
-                            ? "সংশ্লিষ্ট ক্যালকুলেটর ও পরবর্তী ধাপ (Cross-Cluster Internal Links)"
-                            : "Related Calculators & Cross-Cluster Next Steps on URAL"}
-                        </div>
-                        <div className="flex flex-wrap gap-2.5 text-xs">
-                          {activePost.internalLinks.map((lnk, idx) => (
-                            <a
-                              key={idx}
-                              id={`blog-inner-link-${idx}`}
-                              href={lnk.path}
-                              onClick={(e) => { e.preventDefault(); navigateTo(lnk.path); }}
-                              className="bg-slate-100 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-colors font-medium"
-                            >
-                              <Link2 size={13} className="text-brand-emerald" />
-                              <span>{lnk.text}</span>
-                            </a>
-                          ))}
-                        </div>
-
-                        {/* Viral Bangladesh Social & WhatsApp Family Group Share Bar + Ready-to-Post FB Caption Copy + Official @uraltravelbd Community Follow */}
-                        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-3.5">
-                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                            <div className="space-y-0.5">
-                              <span className="text-xs font-bold text-brand-navy block">
-                                {isBn
-                                  ? "পরিবার বা বন্ধুদের সাথে গাইডটি শেয়ার করুন (WhatsApp / Facebook)"
-                                  : "Share This Guide with Family or Travel Groups"}
-                              </span>
-                              <span className="text-[11px] text-slate-600 block">
-                                {isBn
-                                  ? "এক ক্লিকে WhatsApp গ্রুপে পাঠান অথবা ফেসবুক পোস্ট ক্যাপশন কপি করুন:"
-                                  : "Send to your family WhatsApp chat or copy a ready-to-post Facebook caption:"}
-                              </span>
-                            </div>
-                            <div className="flex flex-wrap items-center gap-2 text-xs">
-                              <a
-                                href={`https://wa.me/?text=${encodeURIComponent(
-                                  `${activePost.title}\n\n${getBlogAeoSnippet50Words(activePost.slug, isBn, activePost.summary)}\n\nRead Full Guide on URAL: https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`
-                                )}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="bg-brand-navy hover:bg-slate-800 text-white font-semibold px-3.5 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5"
-                              >
-                                <span>{isBn ? "WhatsApp-এ শেয়ার" : "Share on WhatsApp"}</span>
-                              </a>
-                              <a
-                                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                                  `https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`
-                                )}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="bg-white hover:bg-slate-100 text-brand-navy border border-slate-300 font-semibold px-3.5 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5"
-                              >
-                                <span>{isBn ? "Facebook-এ শেয়ার" : "Share on Facebook"}</span>
-                              </a>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  const fbCaption = isBn
-                                    ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getBlogAeoSnippet50Words(activePost.slug, true, activePost.summary)}\n\n👉 সম্পূর্ণ গাইড ও BDT বাজেট দেখুন: https://ural-travel.pages.dev/bn/blog/${activePost.slug}\n🌐 ফলো করুন: ${URAL_SOCIAL_LINKS.facebook}\n💬 কার্ড ছাড়াই BDT/bKash-এ ফ্লাইট ও হোটেল বুকিং হেল্পলাইন (WhatsApp): +8801784385335`
-                                    : `✈️ ${activePost.title}\n\n📌 Quick Summary:\n${getBlogAeoSnippet50Words(activePost.slug, false, activePost.summary)}\n\n👉 Read Full Guide & BDT Calculator: https://ural-travel.pages.dev/blog/${activePost.slug}\n🌐 Follow URAL on Facebook: ${URAL_SOCIAL_LINKS.facebook}\n💬 Book Flights & Hotels in BDT via WhatsApp: +8801784385335`;
-                                  navigator.clipboard?.writeText(fbCaption);
-                                  setAffiliateToast(
-                                    isBn
-                                      ? "ফেসবুক পোস্ট ক্যাপশন ও লিংক কপি হয়েছে! এখন যেকোনো Facebook পেজ বা গ্রুপে পেস্ট করুন।"
-                                      : "Ready-to-post Facebook caption & link copied to clipboard!"
-                                  );
-                                }}
-                                className="bg-[#F6B73C] hover:bg-[#e5a629] text-brand-navy font-bold px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
-                              >
-                                <FileText size={12} className="inline-block mr-1.5 -mt-0.5" />{isBn ? "FB ক্যাপশন কপি করুন" : "Copy Ready FB Post"}
-                              </button>
-                            </div>
-                          </div>
-
-                          {/* Official Social Community Follow Bar */}
-                          <div className="pt-3 border-t border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs">
-                            <span className="text-[11px] font-semibold text-slate-700">
-                              {isBn
-                                ? "বাংলায় ডেইলি ভিসা আপডেট ও ফ্লাইট ডিল পেতে আমাদের অফিসিয়াল পেজে যুক্ত হোন:"
-                                : "Follow URAL's official Bangladesh travel community for daily visa & fare updates:"}
-                            </span>
-                            <div className="flex flex-wrap items-center gap-2">
-                              <a
-                                href={URAL_SOCIAL_LINKS.facebook}
-                                target="_blank"
-                                rel="me noopener noreferrer"
-                                className="bg-white hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 px-3 py-1.5 rounded-lg font-semibold text-[11px] transition-colors inline-flex items-center gap-1.5"
-                              >
-                                <span>Facebook (@uraltravelbd)</span>
-                              </a>
-                              <a
-                                href={URAL_SOCIAL_LINKS.instagram}
-                                target="_blank"
-                                rel="me noopener noreferrer"
-                                className="bg-white hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 px-3 py-1.5 rounded-lg font-semibold text-[11px] transition-colors inline-flex items-center gap-1.5"
-                              >
-                                <span>Instagram (@uraltravelbd)</span>
-                              </a>
-                              <a
-                                href={URAL_SOCIAL_LINKS.linkedin}
-                                target="_blank"
-                                rel="me noopener noreferrer"
-                                className="bg-white hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 px-3 py-1.5 rounded-lg font-semibold text-[11px] transition-colors inline-flex items-center gap-1.5"
-                              >
-                                <span>LinkedIn</span>
-                              </a>
-                              <a
-                                href={URAL_SOCIAL_LINKS.tiktok}
-                                target="_blank"
-                                rel="me noopener noreferrer"
-                                className="bg-white hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 px-3 py-1.5 rounded-lg font-semibold text-[11px] transition-colors inline-flex items-center gap-1.5"
-                              >
-                                <span>TikTok (@uraltravelbd)</span>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      {/* Author Bio — E-E-A-T signal at end of article content */}
+                      <AuthorBioCard authorRaw={canonicalAuthorRaw} isBengali={isBn} />
 
                       {/* Visible Hajj, Umrah & Ziyarah Preparation FAQs (Matches JSON-LD FAQPage Schema 100%) */}
                       {(activePost.category === "Hajj & Umrah" || activePost.category === "Ziyarah & Stopovers") && (
@@ -7025,104 +6832,178 @@ export default function App() {
                         />
                       )}
 
-                      {/* Author Bio — E-E-A-T signal: establishes human authorship identity */}
-                      <AuthorBioCard authorRaw={canonicalAuthorRaw} isBengali={isBn} />
                     </article>
 
                     {/* Right Column: Sticky Trip Planning & BDT Support Sidebar (4 Cols) */}
-                    <aside className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
-                      {/* Direct WhatsApp BDT Booking Desk Card */}
-                      <div className="bg-brand-navy text-white rounded-2xl p-6 space-y-4 shadow-sm">
-                        <div className="text-xs font-semibold text-[#F6B73C]">
-                          {isBn
-                            ? "Dual-Currency Card নেই? BDT-তে বুক করুন"
-                            : "No Dual-Currency Card? Pay in BDT"}
+                    <aside className="lg:col-span-4 space-y-5 lg:sticky lg:top-24">
+
+                      {/* 1. Stay Connected: eSIM + Nusuk + Saudi connectivity */}
+                      <div className="bg-brand-navy text-white rounded-2xl p-5 space-y-3.5 shadow-sm">
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-[#F6B73C]">
+                          {isBn ? "সৌদি আরবে সংযুক্ত থাকুন" : "Stay Connected in Saudi Arabia"}
                         </div>
-                        <h3 className="font-serif text-lg font-bold text-white leading-snug">
+                        <p className="text-[13px] text-slate-200 leading-relaxed">
                           {isBn
-                            ? "WhatsApp-এর মাধ্যমে বাংলাদেশি টাকায় Flight, Umrah Hotel ও Transfer বুক করুন"
-                            : "Book Flights, Umrah Hotels & Transfers in BDT via WhatsApp"}
-                        </h3>
-                        <p className="text-xs text-slate-300 leading-relaxed">
+                            ? "ঢাকা থেকে উড়ে নামার সাথে সাথেই আপনার Nusuk Rawdah পারমিট QR, Haramain ট্রেন টিকিট এবং Uber/Careem কাজ করবে — সৌদি আরব 4G/5G eSIM আগেই ইনস্টল করে রাখুন।"
+                            : "Install a Saudi Arabia 4G/5G eSIM before flying from Dhaka so your Nusuk Rawdah permit QR code, Haramain train ticket, and Uber/Careem work the moment you land at Jeddah Airport."}
+                        </p>
+                        <div className="space-y-2">
+                          <div className="text-[11px] font-bold text-slate-300 uppercase tracking-wide">
+                            {isBn ? "Travel eSIM প্ল্যান" : "Travel eSIM Plans"}
+                          </div>
+                          <div className="flex gap-2">
+                            <a
+                              href={AFFILIATE_LINKS.airalo}
+                              target="_blank"
+                              rel="noopener noreferrer sponsored"
+                              className="flex-1 bg-white text-brand-navy font-bold text-[12px] py-2.5 px-3 rounded-xl text-center hover:bg-[#F6B73C] hover:text-brand-navy transition-colors"
+                            >
+                              Airalo
+                            </a>
+                            <a
+                              href={AFFILIATE_LINKS.yesim}
+                              target="_blank"
+                              rel="noopener noreferrer sponsored"
+                              className="flex-1 bg-white text-brand-navy font-bold text-[12px] py-2.5 px-3 rounded-xl text-center hover:bg-[#F6B73C] hover:text-brand-navy transition-colors"
+                            >
+                              Yesim
+                            </a>
+                          </div>
+                        </div>
+                        <p className="text-[11px] text-slate-400 leading-relaxed">
                           {isBn
-                            ? "আমাদের ঢাকা সাপোর্ট ডেস্কের মাধ্যমে দেশীয় ব্যাংক ট্রান্সফার, bKash বা Nagad ব্যবহার করে আপনার রাউন্ডট্রিপ বিমান টিকিট, মক্কা/মদিনা বা এশিয়ার হোটেল ভাউচার এবং এয়ারপোর্ট পিকআপ বুক করতে পারেন।"
-                            : "Our Dhaka support desk can issue your roundtrip air tickets, Makkah/Madinah or Asian hotel vouchers, and airport transfers using local bank transfer, bKash, or Nagad."}
+                            ? "গন্তব্য, ডেটা, মেয়াদ ও ডিভাইস সাপোর্ট প্রভাইডারের সাইটে চেক করুন। OTPs-এর জন্য বাংলাদেশি SIM রাখা কার্ডওয়াইজ, অপারেটর ও রোমিং সেটিংসের উপর নির্ভর করে।"
+                            : "Choose destination & plan on the provider's site. Check coverage, data allowance, validity, device compatibility, activation rules, and current price before you buy. Keeping a Bangladesh SIM for OTPs depends on your phone, operator, and roaming settings."}
+                        </p>
+                      </div>
+
+                      {/* 2. Share This Guide */}
+                      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3">
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-brand-navy">
+                          {isBn ? "গাইডটি শেয়ার করুন" : "Share This Guide"}
+                        </div>
+                        <div className="flex gap-2">
+                          <a
+                            href={`https://wa.me/?text=${encodeURIComponent(`${activePost.title}\n\n${getBlogAeoSnippet50Words(activePost.slug, isBn, activePost.summary)}\n\nRead Full Guide on URAL: https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 bg-brand-navy hover:bg-slate-800 text-white font-semibold text-[12px] py-2.5 px-3 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5"
+                          >
+                            <span>{isBn ? "WhatsApp" : "WhatsApp"}</span>
+                          </a>
+                          <a
+                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 bg-white hover:bg-slate-100 text-brand-navy border border-slate-300 font-semibold text-[12px] py-2.5 px-3 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5"
+                          >
+                            <span>{isBn ? "Facebook" : "Facebook"}</span>
+                          </a>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const caption = isBn
+                                ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getBlogAeoSnippet50Words(activePost.slug, true, activePost.summary)}\n\n👉 সম্পূর্ণ গাইড: https://ural-travel.pages.dev/bn/blog/${activePost.slug}\n🌐 Facebook: ${URAL_SOCIAL_LINKS.facebook}\n💬 BDT বুকিং WhatsApp: +8801784385335`
+                                : `✈️ ${activePost.title}\n\n📌 Quick Summary:\n${getBlogAeoSnippet50Words(activePost.slug, false, activePost.summary)}\n\n👉 Read Full Guide: https://ural-travel.pages.dev/blog/${activePost.slug}\n🌐 Follow URAL: ${URAL_SOCIAL_LINKS.facebook}\n💬 BDT Booking via WhatsApp: +8801784385335`;
+                              navigator.clipboard?.writeText(caption);
+                              setAffiliateToast(isBn ? "কপি হয়েছে! এখন পেস্ট করুন।" : "Copied! Paste it anywhere.");
+                            }}
+                            className="flex-1 bg-[#F6B73C] hover:bg-[#e5a629] text-brand-navy font-bold text-[12px] py-2.5 px-3 rounded-xl text-center transition-colors cursor-pointer"
+                          >
+                            {isBn ? "কপি করুন" : "Copy Post"}
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* 3. About the Author (compact sidebar version) */}
+                      {(() => {
+                        const profile = getAuthorProfile(canonicalAuthorRaw);
+                        if (!profile) return null;
+                        return (
+                          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2.5">
+                            <div className="text-[11px] font-bold uppercase tracking-wider text-brand-navy">
+                              {isBn ? "লেখক সম্পর্কে" : "About the Author"}
+                            </div>
+                            <div className="flex items-start gap-3">
+                              <div className="w-9 h-9 rounded-full bg-brand-navy flex items-center justify-center shrink-0">
+                                <span className="text-white text-sm font-bold">{profile.name.split(" ").map((n) => n[0]).join("")}</span>
+                              </div>
+                              <div className="space-y-1 min-w-0">
+                                <div className="text-[13px] font-bold text-brand-navy">{profile.name}</div>
+                                <div className="text-[11px] text-slate-600 font-medium">Founder & Travel Editor, URAL</div>
+                              </div>
+                            </div>
+                            <p className="text-[12px] text-slate-700 leading-relaxed line-clamp-4">
+                              {isBn ? profile.bioBn : profile.bioEn}
+                            </p>
+                            <a
+                              href={profile.portfolioUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-emerald"
+                            >
+                              {isBn ? "পেশাগত পোর্টফোলিও দেখুন" : "View Portfolio"}
+                              <ExternalLink size={10} aria-hidden="true" />
+                            </a>
+                          </div>
+                        );
+                      })()}
+
+                      {/* 4. Quick Booking Links (3 essentials) */}
+                      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs space-y-2.5">
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                          {isBn ? "দ্রুত অনলাইন বুকিং" : "Quick Booking Links"}
+                        </div>
+                        <PartnerLinkButton href={AFFILIATE_LINKS.aviasales} label={isBn ? "Flight ভাড়া তুলনা করুন" : "Compare Flights from Dhaka"} variant="dark" />
+                        <PartnerLinkButton href={AFFILIATE_LINKS.klook} label={isBn ? "Tours ও টিকিট বুক করুন" : "Book Tours & Attractions"} variant="dark" />
+                        <PartnerLinkButton href={AFFILIATE_LINKS.airalo} label={isBn ? "Saudi / Travel eSIM নিন" : "Get Travel eSIM"} variant="dark" />
+                      </div>
+
+                      {/* 5. Related Calculators & Next Steps */}
+                      {activePost.internalLinks.length > 0 && (
+                        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs space-y-2.5">
+                          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                            {isBn ? "সংশ্লিষ্ট ক্যালকুলেটর ও পরবর্তী ধাপ" : "Related Calculators & Next Steps"}
+                          </div>
+                          <div className="space-y-2">
+                            {activePost.internalLinks.map((lnk, idx) => (
+                              <a
+                                key={idx}
+                                href={lnk.path}
+                                onClick={(e) => { e.preventDefault(); navigateTo(lnk.path); }}
+                                className="flex items-center justify-between bg-slate-50 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 hover:border-brand-navy px-3.5 py-2.5 rounded-xl transition-all text-[12px] font-medium group"
+                              >
+                                <span className="flex items-center gap-2">
+                                  <Link2 size={13} className="text-brand-emerald group-hover:text-[#F6B73C] shrink-0" />
+                                  <span className="line-clamp-1">{lnk.text}</span>
+                                </span>
+                                <ArrowRight size={12} className="shrink-0 opacity-60 group-hover:opacity-100" />
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* 6. WhatsApp BDT Desk */}
+                      <div className="bg-brand-navy text-white rounded-2xl p-5 space-y-3 shadow-sm">
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-[#F6B73C]">
+                          {isBn ? "কার্ড ছাড়া BDT-তে বুক করুন" : "No Card? Pay in BDT via WhatsApp"}
+                        </div>
+                        <p className="text-[12px] text-slate-300 leading-relaxed">
+                          {isBn
+                            ? "ঢাকা সাপোর্ট ডেস্কে bKash, Nagad অথবা ব্যাংক ট্রান্সফার করে Flight, মক্কা/মদিনা হোটেল এবং এয়ারপোর্ট পিকআপ বুক করুন।"
+                            : "Our Dhaka desk issues flights, Makkah/Madinah hotel vouchers, and airport transfers using bKash, Nagad, or bank transfer."}
                         </p>
                         <a
                           href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20was%20reading%20your%20travel%20guide%20and%20need%20help%20planning%20my%20trip!"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full bg-brand-emerald text-white font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
+                          className="w-full bg-brand-emerald hover:bg-emerald-600 text-white font-bold text-[12px] py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
                         >
-                          <span>
-                            {isBn
-                              ? "WhatsApp-এ মেসেজ দিন (+8801784385335)"
-                              : "Chat on WhatsApp (+8801784385335)"}
-                          </span>
+                          <span>{isBn ? "WhatsApp-এ মেসেজ দিন" : "Chat on WhatsApp (+8801784385335)"}</span>
                         </a>
                       </div>
 
-                      {/* Quick Partner Booking Tools */}
-                      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
-                        <div className="text-xs font-bold text-slate-800">
-                          {isBn ? "নিজে নিজে অনলাইন বুকিং লিংক" : "Self-Service Booking Links"}
-                        </div>
-                        <div className="space-y-2.5">
-                          <PartnerLinkButton
-                            href={AFFILIATE_LINKS.aviasales}
-                            label={isBn ? "ঢাকা থেকে Flight ভাড়া তুলনা করুন" : "Compare flights from Dhaka"}
-                            variant="dark"
-                          />
-                          <PartnerLinkButton
-                            href={AFFILIATE_LINKS.welcomePickups}
-                            label={isBn ? "Airport Meet & Greet পিকআপ বুক করুন" : "Pre-book airport Meet & Greet"}
-                            variant="dark"
-                          />
-                          <PartnerLinkButton
-                            href={AFFILIATE_LINKS.klook}
-                            label={isBn ? "Tours ও Theme Park টিকিট বুক করুন" : "Book tours & attraction passes"}
-                            variant="dark"
-                          />
-                          <PartnerLinkButton
-                            href={AFFILIATE_LINKS.airalo}
-                            label={isBn ? "ফ্লাইটের আগে Travel eSIM নিন" : "Get a travel eSIM before flying"}
-                            variant="dark"
-                          />
-                        </div>
-                      </div>
-
-                      {/* More Guides List in Sidebar */}
-                      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-3">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-bold text-slate-800">
-                            {isBn ? "আরও ট্রাভেল গাইড" : "More Travel Guides"}
-                          </span>
-                          <a
-                            href="/blog"
-                            onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
-                            className="text-xs font-semibold text-brand-navy hover:underline"
-                          >
-                            {isBn ? `সব দেখুন (${localizedBlogs.length})` : `View All (${localizedBlogs.length})`}
-                          </a>
-                        </div>
-                        <div className="divide-y divide-slate-100">
-                          {relatedPosts.map((post) => (
-                            <a
-                              key={post.id}
-                              href={`/blog/${post.slug}`}
-                              onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${post.slug}`); }}
-                              className="w-full text-left py-3 first:pt-1 last:pb-0 group space-y-1 block"
-                            >
-                              <div className="text-[11px] text-slate-500">
-                                {post.category} · {post.readTime}
-                              </div>
-                              <div className="text-xs font-semibold text-slate-800 group-hover:text-brand-navy line-clamp-2 leading-snug">
-                                {post.title}
-                              </div>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
                     </aside>
                   </div>
 
