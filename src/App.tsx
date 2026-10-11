@@ -7178,7 +7178,7 @@ export default function App() {
         >
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="space-y-1.5 max-w-2xl">
-              <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
+              <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600">
                 <span className="font-semibold text-brand-navy">
                   {isBn ? "ট্রাভেল গাইড ও ব্লগ" : "Featured Travel Guides"}
                 </span>
@@ -7997,7 +7997,7 @@ export default function App() {
       </main>
 
       {/* 🔮 MASTER FOOTER BLOCK */}
-      <footer className="bg-brand-navy text-slate-400 pt-14 pb-10 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs mt-16">
+      <footer className="bg-brand-navy text-slate-300 pt-14 pb-10 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs mt-16">
         <div className="max-w-7xl mx-auto space-y-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
             
@@ -8023,7 +8023,7 @@ export default function App() {
                 </p>
               </div>
 
-              <p className="leading-relaxed text-slate-400 text-xs">
+              <p className="leading-relaxed text-slate-300 text-xs">
                 {isBn
                   ? "বাংলাদেশি ও গ্লোবাল ভ্রমণকারীদের জন্য নিরপেক্ষ ফ্লাইট ভাড়া তুলনা, ভেরিফায়েড হোটেল জোন, অফিসিয়াল ভিসা চেকলিস্ট, DIY ওমরাহ এবং BDT বাজেট প্ল্যানার।"
                   : "Independent flight fare intelligence, verified hotel zones, step-by-step visa checklists, and BDT trip budgets built for Bangladeshi and global travelers."}
@@ -8031,7 +8031,7 @@ export default function App() {
 
               {/* Social Media Channels — Official Verified URAL Profiles */}
               <div className="space-y-2 pt-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-300 block">
                   {isBn ? "সোশ্যাল মিডিয়ায় যুক্ত থাকুন (@uraltravelbd)" : "Follow URAL (@uraltravelbd)"}
                 </span>
                 <div className="flex flex-wrap items-center gap-2">
@@ -8239,7 +8239,7 @@ export default function App() {
                 </span>
                 <div className="space-y-1.5 text-xs">
                   <div className="flex items-center justify-between bg-slate-900/70 border border-slate-800 rounded-xl px-3 py-2">
-                    <span className="text-slate-400">{isBn ? "WhatsApp ডেস্ক:" : "WhatsApp Desk:"}</span>
+                    <span className="text-slate-300">{isBn ? "WhatsApp ডেস্ক:" : "WhatsApp Desk:"}</span>
                     <a
                       href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
                       target="_blank"
@@ -8251,7 +8251,7 @@ export default function App() {
                     </a>
                   </div>
                   <div className="flex items-center justify-between bg-slate-900/70 border border-slate-800 rounded-xl px-3 py-2">
-                    <span className="text-slate-400">{isBn ? "সরাসরি কল:" : "Direct Hotline:"}</span>
+                    <span className="text-slate-300">{isBn ? "সরাসরি কল:" : "Direct Hotline:"}</span>
                     <a
                       href="tel:+8801784385335"
                       aria-label={isBn ? "সরাসরি কল: +880 1784-385335" : "Call directly: +880 1784-385335"}
@@ -8328,7 +8328,7 @@ export default function App() {
                   </form>
                 )}
                 <div className="flex items-center justify-between pt-0.5">
-                  <span className="text-[10px] text-slate-400">
+                  <span className="text-[10px] text-slate-300">
                     {isBn ? "স্প্যাম মুক্ত · ফ্রি অ্যালার্ট" : "Zero spam · Unsubscribe anytime"}
                   </span>
                   <a
@@ -8348,7 +8348,7 @@ export default function App() {
           </div>
 
           {/* BOTTOM COMPLIANCE BAR: FTC / Partner Affiliate Disclosure & Copyright */}
-          <div className="pt-6 border-t border-slate-800/90 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 text-[11px] text-slate-500 leading-relaxed">
+          <div className="pt-6 border-t border-slate-800/90 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 text-[11px] text-slate-300 leading-relaxed">
             <p className="max-w-4xl">
               {isBn ? (
                 <>
@@ -8362,7 +8362,7 @@ export default function App() {
                 </>
               )}
             </p>
-<div className="shrink-0 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 font-mono text-[10px] text-slate-400">
+            <div className="shrink-0 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 font-mono text-[10px] text-slate-300">
               <a
                 href={isBn ? "/bn/about" : "/about"}
                 onClick={(e) => {
