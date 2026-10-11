@@ -459,11 +459,15 @@ if (fs.existsSync(distFontsCssPath)) {
 const notoRangeProblems: string[] = [];
 for (const { label, css } of notoRangeSources) {
   if (!/Noto Sans Bengali/.test(css)) continue; // only inspect sources that declare the face
-  if (/U\+0980-09FF/i.test(css)) {
-    notoRangeProblems.push(`${label}: contiguous U+0980-09FF still present (must exclude ৳ U+09F3)`);
+  // Inspect the VALUES of `unicode-range:` declarations only — not the whole
+  // file — so an explanatory comment that mentions the old contiguous range
+  // (as fonts.css does, on purpose) cannot trip this guard.
+  const rangeValues = [...css.matchAll(/unicode-range\s*:\s*([^;}]*)/gi)].map((m) => m[1]);
+  if (rangeValues.some((v) => /U\+0980-09FF/i.test(v))) {
+    notoRangeProblems.push(`${label}: contiguous U+0980-09FF present in a unicode-range (must exclude ৳ U+09F3)`);
   }
-  if (!/U\+0980-09F1/i.test(css) || !/U\+09F4-09FF/i.test(css)) {
-    notoRangeProblems.push(`${label}: split range U+0980-09F1 + U+09F4-09FF not found`);
+  if (!rangeValues.some((v) => /U\+0980-09F1/i.test(v) && /U\+09F4-09FF/i.test(v))) {
+    notoRangeProblems.push(`${label}: split range U+0980-09F1 + U+09F4-09FF not found in any unicode-range`);
   }
 }
 check(
