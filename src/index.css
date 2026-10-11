@@ -273,5 +273,31 @@ body > :not(#root):not(script):not(style) {
   visibility: hidden;
 }
 
+/* ==========================================================================
+   WCAG 2.3.3 — REDUCE ALL MOTION WHEN USER PREFERS
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 
+  .route-line,
+  .shampan-boat,
+  .dest-dot {
+    animation: none !important;
+  }
+
+  .hero-badge,
+  .hero-h1,
+  .hero-subtitle,
+  .hero-widget,
+  .hero-links {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 

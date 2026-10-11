@@ -2452,7 +2452,7 @@ export default function App() {
                           <button
                             type="button"
                             onClick={() => navigateTo("/experiences")}
-                            className="bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-[11px] py-2 px-2.5 rounded-xl transition-colors cursor-pointer"
+                            className="bg-brand-gold hover:bg-brand-gold-dark text-brand-navy font-bold text-[11px] py-2 px-2.5 rounded-xl transition-colors cursor-pointer"
                           >
                             {isBn ? "অ্যাক্টিভিটি হাব →" : "All Passes →"}
                           </button>
@@ -6908,7 +6908,7 @@ export default function App() {
                               navigator.clipboard?.writeText(caption);
                               setAffiliateToast(isBn ? "কপি হয়েছে! এখন পেস্ট করুন।" : "Copied! Paste it anywhere.");
                             }}
-                            className="flex-1 bg-[#F6B73C] hover:bg-[#e5a629] text-brand-navy font-bold text-[12px] py-2.5 px-3 rounded-xl text-center transition-colors cursor-pointer"
+                            className="flex-1 bg-brand-gold hover:bg-brand-gold-dark text-brand-navy font-bold text-[12px] py-2.5 px-3 rounded-xl text-center transition-colors cursor-pointer"
                           >
                             {isBn ? "কপি করুন" : "Copy Post"}
                           </button>
