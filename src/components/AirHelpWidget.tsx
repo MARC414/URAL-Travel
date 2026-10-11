@@ -201,11 +201,16 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
         </div>
 
         {/* Mode Switcher Tabs */}
-        <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-xl shrink-0 self-start">
+        <div
+          role="group"
+          aria-label={isBn ? "AirHelp ফ্লাইট সুরক্ষা বিকল্প" : "AirHelp protection options"}
+          className="flex max-w-full flex-wrap items-center gap-1 p-1 bg-slate-100 rounded-xl shrink-0 self-start"
+        >
           <button
             type="button"
+            aria-pressed={activeMode === "claim"}
             onClick={() => setActiveMode("claim")}
-            className={`px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+            className={`min-h-11 px-3.5 py-2 text-xs font-semibold leading-tight text-center rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy ${
               activeMode === "claim"
                 ? "bg-brand-navy text-white"
                 : "text-slate-600 hover:text-slate-900"
@@ -215,8 +220,9 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
           </button>
           <button
             type="button"
+            aria-pressed={activeMode === "plus"}
             onClick={() => setActiveMode("plus")}
-            className={`px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+            className={`min-h-11 px-3.5 py-2 text-xs font-semibold leading-tight text-center rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy ${
               activeMode === "plus"
                 ? "bg-brand-navy text-white"
                 : "text-slate-600 hover:text-slate-900"
@@ -232,8 +238,9 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
           </button>
           <button
             type="button"
+            aria-pressed={activeMode === "live-form"}
             onClick={() => setActiveMode("live-form")}
-            className={`px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+            className={`min-h-11 px-3.5 py-2 text-xs font-semibold leading-tight text-center rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy ${
               activeMode === "live-form"
                 ? "bg-brand-navy text-white"
                 : "text-slate-600 hover:text-slate-900"
@@ -273,8 +280,9 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                   <button
                     key={opt.id}
                     type="button"
+                    aria-pressed={flightRegion === opt.id}
                     onClick={() => setFlightRegion(opt.id as any)}
-                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                    className={`min-h-11 p-3.5 rounded-xl border text-left transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy ${
                       flightRegion === opt.id
                         ? "border-brand-navy bg-slate-50"
                         : "border-slate-200 hover:border-slate-300 bg-white"
@@ -301,8 +309,9 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                   <button
                     key={d.id}
                     type="button"
+                    aria-pressed={delayHours === d.id}
                     onClick={() => setDelayHours(d.id as any)}
-                    className={`py-2.5 px-3 rounded-xl border text-xs font-medium transition-colors cursor-pointer ${
+                    className={`min-h-11 py-2.5 px-3 rounded-xl border text-xs font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy ${
                       delayHours === d.id
                         ? "bg-brand-navy text-white border-brand-navy"
                         : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"

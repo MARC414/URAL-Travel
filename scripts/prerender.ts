@@ -1531,7 +1531,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         description: post.summary,
         slug: post.slug,
         datePublished: post.date,
-        dateModified: post.date,
+        dateModified: post.updatedAt || post.date,
         authorRaw: post.author,
         articleSection: post.category,
         imageUrl: postImgUrl,
@@ -1626,11 +1626,11 @@ function buildAllRoutes(): PrerenderRoute[] {
         { name: post.title, url: postUrl },
       ],
       extraGraphNodes: extraNodes,
-      lastmod: toIsoDate(post.date),
+      lastmod: toIsoDate(post.updatedAt || post.date),
       bodyHtml: `
         <article>
           <h1>${escapeHtml(post.title)}</h1>
-          <p><em>By ${escapeHtml(post.author)} · Published ${escapeHtml(post.date)} · ${escapeHtml(post.readTime)}</em></p>
+          <p><em>By ${escapeHtml(post.author)} · Published ${escapeHtml(post.date)}${post.updatedAt ? ` · Updated ${escapeHtml(post.updatedAt)}` : ""} · ${escapeHtml(post.readTime)}</em></p>
           <p>${escapeHtml(post.summary)}</p>
           ${blogBody
             .split("\n\n")
@@ -2153,7 +2153,7 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           description: copy.description,
           slug: segments[1],
           datePublished: sourcePost?.date,
-          dateModified: sourcePost?.date,
+          dateModified: sourcePost?.updatedAt || sourcePost?.date,
           authorRaw: sourcePost?.author,
           articleSection: localizedPost?.category,
           inLanguage: "bn-BD",
@@ -2472,6 +2472,33 @@ ${rssItems}
 }
 
 /**
+ * Content records are a route-only dependency (src/constants.ts -> content-data).
+ * Preload them in HTML for data-backed routes so the dynamic import is already
+ * in flight before React mounts; the homepage deliberately carries no such hint.
+ */
+function getContentDataChunkPath(): string | null {
+  try {
+    const manifestPath = path.join(DIST_DIR, ".vite", "manifest.json");
+    if (!fs.existsSync(manifestPath)) return null;
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8")) as Record<
+      string,
+      { file?: string }
+    >;
+    for (const [key, entry] of Object.entries(manifest)) {
+      if (key.includes("src/constants") && entry.file) return `/${entry.file}`;
+    }
+  } catch (err) {
+    console.warn("  ! could not read the build manifest for the route-data preload:", err);
+  }
+  return null;
+}
+
+function routeNeedsContentData(routePath: string): boolean {
+  const localeFreePath = routePath.replace(/^\/bn(?=\/|$)/, "") || "/";
+  return /^\/(?:flights|hotels|visa|destinations|costs|blog)(?:\/|$)/.test(localeFreePath);
+}
+
+/**
  * The English blog bodies are a lazily imported chunk (src/data/blogContent.ts).
  * Blog routes are the only ones that need it, and on a cold load the chunk would
  * otherwise be discovered only after React mounts. Reading Vite's build manifest
@@ -2500,6 +2527,11 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
   if (!fs.existsSync(distIndex)) return;
 
   const templateHtml = fs.readFileSync(distIndex, "utf8");
+  const contentDataChunk = getContentDataChunkPath();
+  if (contentDataChunk) {
+    console.log(`  preloading route data on content-backed routes: ${contentDataChunk}`);
+  }
+  let contentDataPreloadCount = 0;
   const blogBodyChunk = getBlogBodyChunkPath();
   if (blogBodyChunk) {
     console.log(`  preloading blog body chunk on blog routes: ${blogBodyChunk}`);
@@ -2538,16 +2570,16 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       ? `    <link rel="preload" as="image" type="image/avif" href="${escapeHtml(r.lcpImageUrl.replace(/-1200\.webp$/, "-1200.avif"))}" imagesrcset="${escapeHtml(buildResponsiveSrcSet(r.lcpImageUrl, "avif"))}" imagesizes="${escapeHtml(r.lcpImageSizes || "100vw")}" fetchpriority="high" />\n`
       : "";
 
-    // Locale-correct critical font preloads. The LCP element of every /bn/
-    // route is Bengali TEXT, so the critical fonts there are Noto Sans
-    // Bengali 400/600 — the SPA shell preloads Inter 400/600 instead, which
-    // on bn pages spends two early-connection slots on a font with zero
-    // Bengali glyphs while the font that paints the headline arrives late
-    // and swaps (perceived LCP + CLS risk). English routes keep Inter.
+    // Locale-correct critical font preloads. Bengali pages need Noto 400/600;
+    // English pages need Inter 400/600. The English homepage additionally uses
+    // the 700 face for its hero heading (font-weight 900 maps to the nearest
+    // available face), so only that route pays to preload the extra font.
     const fontPreloads =
       r.locale === "bn"
         ? `    <link rel="preload" as="font" type="font/woff2" href="/fonts/noto-sans-bengali-400-v1.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/noto-sans-bengali-600-v1.woff2" crossorigin />\n`
-        : `    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-v1.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600-v1.woff2" crossorigin />\n`;
+        : r.routePath === "/"
+          ? `    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-v1.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600-v1.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-700-v1.woff2" crossorigin />\n`
+          : `    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-v1.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600-v1.woff2" crossorigin />\n`;
 
     // Reciprocal hreflang cluster: identical on both members of a locale pair
     // (en-bd/x-default → the English URL, bn-bd → the Bengali URL). The bn-bd
@@ -2565,7 +2597,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
         lcpImagePreload ? `\n${lcpImagePreload}` : "\n"
       )
       .replace(
-        /[ \t]*<link rel="preload" as="font"[^>]*\/>\n[ \t]*<link rel="preload" as="font"[^>]*\/>\n/,
+        /(?:[ \t]*<link rel="preload" as="font"[^>]*\/>\n)+/g,
         fontPreloads
       )
       .replace(
@@ -2643,6 +2675,21 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
         `  <script type="application/ld+json" data-seo-schema="true">${fullGraphJson}</script>\n  </head>`
       );
 
+    // Content-backed routes replace the prerendered body on React mount, so
+    // start the data chunk while HTML is parsing. This is intentionally absent
+    // from `/` and other pages that can render without route records.
+    if (
+      contentDataChunk &&
+      routeNeedsContentData(r.routePath) &&
+      pageHtml.includes("</head>")
+    ) {
+      pageHtml = pageHtml.replace(
+        "</head>",
+        `  <link rel="modulepreload" crossorigin href="${contentDataChunk}" />\n  </head>`
+      );
+      contentDataPreloadCount++;
+    }
+
     // Start the blog-body chunk download with the HTML parse on blog routes. The
     // body itself is already in this HTML (crawl directory above), so this only
     // affects how fast the hydrated page replaces the static copy.
@@ -2684,8 +2731,13 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     }
   }
 
+  if (contentDataChunk) {
+    console.log(`  route-data modulepreload added to ${contentDataPreloadCount} pages`);
+  }
   if (blogBodyChunk) {
     console.log(`  modulepreload added to ${blogPreloadCount} blog pages`);
+  }
+  if (contentDataChunk || blogBodyChunk) {
     // Read once, then drop it: the manifest is a build-time artifact and nothing
     // in the deployed site or the verify pass needs it.
     try {

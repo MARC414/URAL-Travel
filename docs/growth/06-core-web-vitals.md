@@ -16,20 +16,25 @@
 
 ---
 
-## 2. The remaining big win: the 901 KB index chunk
+## 2. Homepage first-load and route chunks (implemented 2026-10-11)
 
-The app chunk is still ~901 KB (uncompressed; ~372 KB Brotli on the wire). Two heavy sources:
+The homepage now serves its hero image, visible heading/copy, and primary links in
+static HTML before React mounts. Inter 700 is preloaded on `/` only. The Travelpayouts
+30-day chart is a separate ~110 KB gzip chunk requested only after a visitor opens it.
+All 11 non-home route views use route-specific lazy chunks. Content records use a
+small eager slug/count index; the 201.7 KB minified `content-data` chunk is fetched
+only after a content-backed route is requested.
 
-- **`App.tsx` ≈ 449 KB** — large monolith. Route components are *already* lazy-loaded (7 of them via `React.lazy`), which is good. Remaining work: split out any large inline data/JSX and ensure nothing forces all routes into the initial chunk.
-- **`src/constants.ts` ≈ 350 KB** — all site content in one module, now isolated as the `content-data` chunk. It's still large and loads eagerly if imported at the top level.
+`npm run verify:build` measures **181.6 KB gzip** of eager homepage JavaScript and
+fails above 200 KB; it also asserts the static hero copy/CTAs, route chunks, chart
+deferral, and that `content-data` is not preloaded by the homepage. `npm run lint`,
+`npm run build`, and all 76 build checks passed after implementation. Vite still
+warns on deliberately large on-demand chunks. This is a build measurement, not a
+post-deploy Lighthouse/CrUX score; remeasure the live site after deployment.
 
-### Advanced fixes (medium risk — say so, don't ask)
-1. **Dynamic-import heavy blog bodies.** The full text of 41 posts shouldn't ship in the initial payload. Move long-form bodies to per-post modules (or JSON) loaded on demand when a post route renders. Biggest single reduction available.
-2. **Split `constants.ts` by domain** (flights, hotels, visa, destinations, costs, blog) so each route only pulls its slice. Combine with route-level `React.lazy` (already present) so each route's data rides its own chunk.
-3. **Confirm `content-data` isn't eagerly imported** by the initial route. If the homepage imports the whole `constants.ts`, the split doesn't help on first paint — import only what the homepage needs.
-4. Keep `chunkSizeWarningLimit: 250` so regressions are visible in build output.
-
-**Verify:** after each change, `npm run build` and compare chunk byte sizes in the Vite output. The initial (homepage) transfer should shrink.
+### Next measurement
+- Use PageSpeed Insights / Lighthouse on the deployed homepage and record LCP/TBT/INP.
+- Keep `chunkSizeWarningLimit: 250` so regressions in route-only chunks remain visible.
 
 ---
 

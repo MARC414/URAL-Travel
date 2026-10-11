@@ -1,0 +1,509 @@
+import React from "react";
+
+import { GuideJumpNav } from "../components/GuideJumpNav";
+
+import { PartnerLinkButton, AFFILIATE_LINKS, AiraloEsimWidget } from "../components/AffiliatePartners";
+
+import { ShieldCheck, ArrowRight, FileText, Wifi, Building, Plane } from "lucide-react";
+
+import { TravelIntelligence } from "../components/AeoInspector";
+
+
+
+type RouteViewProps = { context: Record<string, any> };
+
+
+
+export default function VisaRouteView({ context }: RouteViewProps) {
+
+  const { TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryFlightId, getCountryHotelId, getCountryIata, isBn, localizedVisas, navigateTo, parameterId, section, setAreTpScriptsReady } = context;
+
+  const activeVisa = localizedVisas.find((visa) => visa.id === parameterId) || localizedVisas[0];
+
+
+
+  return (
+
+    <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-4 lg:gap-10">
+
+      {/* Show the visa context before the country selector on mobile. */}
+
+      <header className="space-y-4 lg:col-start-2 lg:col-span-3 lg:row-start-1">
+
+        <div className="border-b border-slate-200 pb-5">
+
+          <div className="flex flex-wrap items-center justify-between gap-4">
+
+            <h1 className="ural-page-title font-serif text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+
+              {isBn
+
+                ? `বাংলাদেশি পাসপোর্টধারীদের জন্য ${activeVisa.country} ভিসা গাইড ও চেকলিস্ট`
+
+                : `${activeVisa.country} Visa Requirements for Bangladeshi Citizens`}
+
+            </h1>
+
+            <span className="rounded-full bg-brand-navy px-3 py-1 text-xs font-mono font-bold text-white">
+
+              {activeVisa.requirementType}
+
+            </span>
+
+          </div>
+
+        </div>
+
+        <div id="visa-aeo-box" className="rounded-r-xl border-l-4 border-[#F6B73C] bg-slate-50 p-5">
+
+          <span className="mb-1 block font-mono text-[10px] font-bold tracking-widest text-brand-navy">
+
+            {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
+
+          </span>
+
+          <p className="font-sans text-sm leading-relaxed text-slate-800 sm:text-[14.5px]">
+
+            {activeVisa.quickAnswer}
+
+          </p>
+
+        </div>
+
+        <GuideJumpNav
+
+          isBn={isBn}
+
+          links={[
+
+            { id: "visa-key-facts", en: "Visa facts at a glance", bn: "এক নজরে ভিসার তথ্য" },
+
+            { id: "visa-steps", en: "Application steps", bn: "আবেদনের ধাপ" },
+
+            { id: "visa-documents", en: "Document checklist", bn: "ডকুমেন্ট চেকলিস্ট" },
+
+            { id: "visa-flight-booking", en: "Find flights from Dhaka", bn: "ঢাকা থেকে ফ্লাইট খুঁজুন" },
+
+            { id: "visa-internal-loop", en: "Hotels, flights and eSIM", bn: "হোটেল, ফ্লাইট ও eSIM" },
+
+            { id: "travel-intelligence-panel", en: "FAQs and key answers", bn: "প্রশ্নোত্তর ও প্রয়োজনীয় তথ্য" },
+
+          ]}
+
+        />
+
+      </header>
+
+
+
+      <aside className="lg:col-start-1 lg:row-start-1 lg:row-span-2" aria-label={isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa guides by country"}>
+
+        <nav className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none">
+
+          <label htmlFor="mobile-visa-country-select" className="mb-3 block font-mono text-xs font-bold uppercase tracking-wider text-slate-500">
+
+            {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "VISA GUIDES BY COUNTRY"}
+
+          </label>
+
+          <select
+
+            id="mobile-visa-country-select"
+
+            value={parameterId}
+
+            onChange={(event) => navigateTo(`/visa/${event.currentTarget.value}`)}
+
+            className="min-h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-semibold text-brand-navy shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] lg:hidden"
+
+          >
+
+            {localizedVisas.map((visa) => (
+
+              <option key={visa.id} value={visa.id}>
+
+                {isBn ? `${visa.country} ভিসা রিকোয়ারমেন্টস` : `${visa.country} Visa Requirements`}
+
+              </option>
+
+            ))}
+
+          </select>
+
+          <div className="hidden space-y-2 lg:block">
+
+            {localizedVisas.map((v) => (
+
+              <button
+
+                key={v.id}
+
+                id={`btn-visa-select-${v.id}`}
+
+                onClick={() => navigateTo(`/visa/${v.id}`)}
+
+                className={`relative flex w-full cursor-pointer items-center justify-between rounded-xl border p-3.5 text-left text-xs font-semibold transition-colors ${
+
+                  parameterId === v.id
+
+                    ? "border-brand-navy bg-brand-navy text-white shadow-md"
+
+                    : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+
+                }`}
+
+              >
+
+                <span className="inline-flex items-center gap-1.5">
+
+                  <ShieldCheck size={13} className={parameterId === v.id ? "text-[#F6B73C]" : "text-brand-navy"} aria-hidden="true" />
+
+                  <span>{isBn ? `${v.country} ভিসা রিকোয়ারমেন্টস` : `${v.country} Visa Requirements`}</span>
+
+                </span>
+
+                <ArrowRight size={12} className={parameterId === v.id ? "text-[#F6B73C]" : "text-text-muted"} aria-hidden="true" />
+
+              </button>
+
+            ))}
+
+          </div>
+
+        </nav>
+
+      </aside>
+
+
+
+      <div className="min-w-0 ural-route-stack animate-fade-in lg:col-start-2 lg:col-span-3 lg:row-start-2">
+
+                    {/* Core facts */}
+
+                    <div id="visa-key-facts" className="ural-guide-jump-target grid grid-cols-2 md:grid-cols-4 gap-4">
+
+                      {activeVisa.keyFacts.map((fact) => (
+
+                        <div key={fact.label} className="ural-card bg-white border border-border-subtle p-4 text-center shadow-sm">
+
+                          <span className="text-[10px] font-bold text-slate-400 font-mono uppercase tracking-wider block">{fact.label}</span>
+
+                          <span className="text-xs font-semibold text-brand-navy font-mono block mt-1">{fact.value}</span>
+
+                        </div>
+
+                      ))}
+
+                    </div>
+
+
+
+                    {/* Step-by-step procedures */}
+
+                    <div id="visa-steps" className="ural-guide-jump-target space-y-4">
+
+                      <h2 className="ural-section-title font-serif font-black text-lg text-slate-900 border-b border-slate-100 pb-2">
+
+                        {isBn ? "ধাপে ধাপে ভিসা আবেদনের নিয়মাবলী" : "Step-by-Step Application Process"}
+
+                      </h2>
+
+                      <div className="space-y-3">
+
+                        {activeVisa.stepByStep.map((step, idx) => (
+
+                          <div key={idx} className="ural-card flex gap-4 text-sm sm:text-[14.5px] leading-relaxed text-slate-700 bg-white p-5 border border-border-subtle shadow-sm">
+
+                            <span className="w-6 h-6 rounded-full bg-brand-navy text-white font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">{idx + 1}</span>
+
+                            <span>{step}</span>
+
+                          </div>
+
+                        ))}
+
+                      </div>
+
+                    </div>
+
+
+
+                    {/* Document structures */}
+
+                    <div id="visa-documents" className="ural-guide-jump-target space-y-4">
+
+                      <h2 className="ural-section-title font-serif font-black text-lg text-slate-900">
+
+                        {isBn ? "প্রয়োজনীয় ডকুমেন্ট চেকলিস্ট" : "Document Checklist"}
+
+                      </h2>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        {activeVisa.documentChecklist.map((cat) => (
+
+                          <div key={cat.category} className="ural-card bg-slate-50 border border-border-subtle p-5">
+
+                            <span className="text-xs font-bold font-mono uppercase tracking-wider text-brand-navy block border-b border-slate-200 pb-2 mb-3"><FileText size={12} className="inline-block mr-1.5 -mt-0.5" />{cat.category}</span>
+
+                            <ul className="space-y-2 text-sm sm:text-[14.5px] text-slate-700">
+
+                              {cat.items.map((item, idx) => (
+
+                                <li key={idx} className="flex items-start gap-2">
+
+                                  <span className="text-emerald-500 font-bold mt-0.5">✓</span>
+
+                                  <span>{item}</span>
+
+                                </li>
+
+                              ))}
+
+                            </ul>
+
+                          </div>
+
+                        ))}
+
+                      </div>
+
+                    </div>
+
+
+
+                    {/* Flight booking CTA after visa checklist */}
+
+                    <div id="visa-flight-booking" className="ural-guide-jump-target space-y-4 pt-4 border-t border-slate-200">
+
+                      <div className="text-center text-sm font-semibold text-slate-600 py-2">
+
+                        {isBn ? "আপনার ট্রিপ বুক করতে প্রস্তুত?" : "Ready to book your trip?"}
+
+                      </div>
+
+
+
+                      <div className="ural-panel bg-white border border-border-subtle p-5 shadow-sm space-y-3">
+
+                        <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
+
+                          {isBn ? "ঢাকা থেকে ফ্লাইট খুঁজুন" : "Find flights from Dhaka"}
+
+                        </span>
+
+                        {areTpScriptsReady ? (
+
+                          <React.Suspense
+
+                            fallback={
+
+                              <TravelpayoutsWidgetSkeleton
+
+                                variant="flights"
+
+                                isBn={isBn}
+
+                                onInteract={() => setAreTpScriptsReady(true)}
+
+                              />
+
+                            }
+
+                          >
+
+                            <TravelpayoutsEmbed
+
+                              defaultDestination={getCountryIata(activeVisa.country)}
+
+                            />
+
+                          </React.Suspense>
+
+                        ) : (
+
+                          <TravelpayoutsWidgetSkeleton
+
+                            variant="flights"
+
+                            isBn={isBn}
+
+                            onInteract={() => setAreTpScriptsReady(true)}
+
+                          />
+
+                        )}
+
+                      </div>
+
+
+
+                      <div className="flex flex-wrap gap-2.5">
+
+                        <PartnerLinkButton
+
+                          href={AFFILIATE_LINKS.yesim}
+
+                          label={isBn ? `${activeVisa.country} Yesim eSIM অ্যাপ` : `Get Yesim eSIM (${activeVisa.country})`}
+
+                        />
+
+                        <PartnerLinkButton
+
+                          href={AFFILIATE_LINKS.airalo}
+
+                          label={isBn ? `${activeVisa.country} Airalo eSIM` : `Compare Airalo eSIM`}
+
+                        />
+
+                        <PartnerLinkButton
+
+                          href={AFFILIATE_LINKS.getTransfer}
+
+                          label={isBn ? "Airport Transfer (GetTransfer)" : "Book Airport Transfer (GetTransfer)"}
+
+                        />
+
+                      </div>
+
+                    </div>
+
+
+
+                    {/* 📶 Stay Connected widget block */}
+
+                    <div id="visa-esim" className="ural-guide-jump-target ural-panel bg-slate-50 border border-border-subtle p-6 space-y-4 animate-fade-in">
+
+                      <div className="space-y-1">
+
+                        <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest block">
+
+                          <Wifi size={12} className="text-brand-navy" />
+
+                          <span>{isBn ? "ফ্লাইটে ওঠার আগে" : "Before You Fly"}</span>
+
+                        </span>
+
+                        <h2 className="ural-section-title font-serif text-lg font-bold text-slate-900">
+
+                          {isBn ? `${activeVisa.country}-এর জন্য লোকাল eSIM সংগ্রহ করুন` : `Get a Local eSIM for ${activeVisa.country}`}
+
+                        </h2>
+
+                        <p className="text-xs text-slate-500">
+
+                          {isBn ? "এয়ারপোর্টে নেমেই সাথে সাথে ইন্টারনেট চালু করুন — সিমের লাইনে দাঁড়ানোর ঝামেলা নেই।" : "Land with data already active — no SIM card counter, no roaming bill shock."}
+
+                        </p>
+
+                      </div>
+
+                      <div className="ural-card bg-white p-2 sm:p-4 border border-border-subtle">
+
+                        <AiraloEsimWidget />
+
+                      </div>
+
+                    </div>
+
+
+
+                    {/* Flight & Hotel loop structure */}
+
+                    <div id="visa-internal-loop" className="ural-guide-jump-target bg-brand-navy/5 border border-brand-navy/15 p-5 rounded-xl space-y-3">
+
+                      <span className="text-[10px] font-bold text-brand-navy font-mono tracking-widest uppercase block">
+
+                        {isBn ? "আপনার পুরো ট্রিপ প্ল্যান করুন" : "Plan Your Full Trip"}
+
+                      </span>
+
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
+
+                        <a
+
+                          id={`lnk-view-hotel-from-visa-${activeVisa.id}`}
+
+                          href={`/hotels/${getCountryHotelId(activeVisa.country)}`}
+
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeVisa.country)}`); }}
+
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
+
+                        >
+
+                          <Building size={14} className="text-brand-navy shrink-0" />
+
+                          <span>{isBn ? `${activeVisa.country}-এর বাছাইকৃত হোটেল` : `Curated ${activeVisa.country} Hotels`}</span>
+
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+
+                        </a>
+
+                        <a
+
+                          id={`lnk-view-flight-from-visa-${activeVisa.id}`}
+
+                          href={`/flights/${getCountryFlightId(activeVisa.country)}`}
+
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/flights/${getCountryFlightId(activeVisa.country)}`); }}
+
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
+
+                        >
+
+                          <Plane size={14} className="text-brand-navy shrink-0" />
+
+                          <span>{isBn ? "ঢাকা থেকে ফ্লাইট বুক করুন" : "Book Flights from Dhaka"}</span>
+
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+
+                        </a>
+
+                        <a
+
+                          href={AFFILIATE_LINKS.airalo}
+
+                          target="_blank"
+
+                          rel="noopener noreferrer sponsored"
+
+                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
+
+                        >
+
+                          <Wifi size={14} className="text-brand-navy shrink-0" />
+
+                          <span>{isBn ? "লোকাল eSIM নিন" : "Get a Local eSIM"}</span>
+
+                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+
+                        </a>
+
+                      </div>
+
+                    </div>
+
+
+
+                    <TravelIntelligence
+
+                      pageTitle={isBn ? `${activeVisa.country} ভিসা প্রসেসিং গাইড` : `${activeVisa.country} Outbound Visa Process`}
+
+                      quickAnswer={activeVisa.quickAnswer}
+
+                      keyFacts={activeVisa.keyFacts}
+
+                      faqs={activeVisa.faqs}
+
+                    />
+
+
+
+      </div>
+
+    </div>
+
+        );
+
+}

@@ -174,9 +174,9 @@ export function InteractiveTools() {
     },
     pk: {
       np: { status: "Visa on Arrival", color: "text-emerald-700 bg-emerald-50 border-emerald-200", text: "Eligible for standard Visa on Arrival. First trip registration is gratis as a SAARC citizen." },
-      th: { status: " Embassy Sticker Required", color: "text-red-700 bg-red-50 border-red-250", text: "Must apply for a physical sticker visa at Thai consulate before flying. High documentation checks apply." },
-      my: { status: "Pre-arranged Visa Required", color: "text-red-700 bg-red-50 border-red-250", text: "Must obtain an approved Single Entry Visa online or through registered consultancies before departing." },
-      ae: { status: "Pre-arranged Visa", color: "text-red-700 bg-red-50 border-red-250", text: "Tourist visas are restricted and require pre-clearances and secure agent approvals." }
+      th: { status: " Embassy Sticker Required", color: "text-red-700 bg-red-50 border-red-200", text: "Must apply for a physical sticker visa at Thai consulate before flying. High documentation checks apply." },
+      my: { status: "Pre-arranged Visa Required", color: "text-red-700 bg-red-50 border-red-200", text: "Must obtain an approved Single Entry Visa online or through registered consultancies before departing." },
+      ae: { status: "Pre-arranged Visa", color: "text-red-700 bg-red-50 border-red-200", text: "Tourist visas are restricted and require pre-clearances and secure agent approvals." }
     }
   };
 
@@ -240,65 +240,81 @@ export function InteractiveTools() {
   };
 
   return (
-    <div id="interactive-tools-panel" className="bg-brand-ivory border border-slate-200 rounded-xl overflow-hidden shadow-lg my-8">
+    <div id="interactive-tools-panel" className="ural-panel bg-brand-ivory border border-border-subtle overflow-hidden shadow-lg my-8">
       {/* Tools Top Header Navigation */}
-      <div className="bg-brand-navy px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-slate-700">
-        <h3 className="font-serif text-lg font-bold text-white flex items-center gap-2">
-          <Sparkles className="text-[#F6B73C]" size={20} />
+      <div className="bg-brand-navy px-4 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-slate-700 sm:px-6">
+        <h2 className="ural-section-title font-serif text-lg font-bold text-white flex min-w-0 items-center gap-2">
+          <Sparkles className="shrink-0 text-[#F6B73C]" size={20} />
           URAL Bangladesh Travel Utility Desk
-        </h3>
-        <div className="flex flex-wrap bg-[#0c2033]/80 p-1 rounded-lg border border-slate-800 text-xs text-white gap-1">
+        </h2>
+        <div
+          role="group"
+          aria-label="Choose a travel tool"
+          className="grid w-full min-w-0 grid-cols-2 gap-1 rounded-lg border border-slate-800 bg-[#0c2033]/80 p-1 text-xs text-white sm:flex sm:w-auto sm:max-w-full sm:flex-wrap sm:justify-end"
+        >
           <button
             id="tool-nav-airports"
+            type="button"
+            aria-pressed={activeTool === "airports"}
             onClick={() => setActiveTool("airports")}
-            className={`px-3 py-1.5 rounded-md font-semibold transition-all flex items-center gap-1.5 ${
+            className={`min-h-11 px-2 py-2 rounded-md font-semibold leading-tight text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] sm:px-3 flex items-center justify-center gap-1.5 ${
               activeTool === "airports" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
             }`}
           >
-            <Plane size={13} />
+            <Plane className="shrink-0" size={13} />
             Airport Codes (IATA)
           </button>
           <button
             id="tool-nav-calculator"
+            type="button"
+            aria-pressed={activeTool === "calculator"}
             onClick={() => setActiveTool("calculator")}
-            className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "calculator" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-350 hover:text-white"
+            className={`min-h-11 px-2 py-2 rounded-md font-semibold leading-tight text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] sm:px-3 ${
+              activeTool === "calculator" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
             }`}
           >
             Trip Cost Estimator
           </button>
           <button
             id="tool-nav-converter"
+            type="button"
+            aria-pressed={activeTool === "converter"}
             onClick={() => setActiveTool("converter")}
-            className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "converter" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-350 hover:text-white"
+            className={`min-h-11 px-2 py-2 rounded-md font-semibold leading-tight text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] sm:px-3 ${
+              activeTool === "converter" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
             }`}
           >
             Currency Converter
           </button>
           <button
             id="tool-nav-packing"
+            type="button"
+            aria-pressed={activeTool === "packing"}
             onClick={() => setActiveTool("packing")}
-            className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "packing" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-350 hover:text-white"
+            className={`min-h-11 px-2 py-2 rounded-md font-semibold leading-tight text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] sm:px-3 ${
+              activeTool === "packing" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
             }`}
           >
             Smart Checklist
           </button>
           <button
             id="tool-nav-visa-checker"
+            type="button"
+            aria-pressed={activeTool === "visa-checker"}
             onClick={() => setActiveTool("visa-checker")}
-            className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "visa-checker" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-350 hover:text-white"
+            className={`min-h-11 px-2 py-2 rounded-md font-semibold leading-tight text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] sm:px-3 ${
+              activeTool === "visa-checker" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
             }`}
           >
             Visa Checker
           </button>
           <button
             id="tool-nav-airhelp"
+            type="button"
+            aria-pressed={activeTool === "airhelp"}
             onClick={() => setActiveTool("airhelp")}
-            className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-              activeTool === "airhelp" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-350 hover:text-white"
+            className={`min-h-11 px-2 py-2 rounded-md font-semibold leading-tight text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] sm:px-3 ${
+              activeTool === "airhelp" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
             }`}
           >
             Flight Delay Claim (€600)
@@ -307,19 +323,19 @@ export function InteractiveTools() {
       </div>
 
       {/* Internal Content Container */}
-      <div className="p-6 md:p-8">
+      <div className="p-4 sm:p-6 md:p-8">
         {/* TOOL 1: CALCULATOR */}
         {activeTool === "calculator" && (
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-slate-800 font-serif border-b border-slate-200 pb-3">
               <Calculator className="text-brand-navy" size={20} />
-              <h4 className="font-bold text-lg">Interactive Outbound Budget Estimator (BDT)</h4>
+              <h3 className="ural-card-title font-bold text-lg">Interactive Outbound Budget Estimator (BDT)</h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Controls Column */}
-              <div className="space-y-4 bg-slate-100/70 p-5 rounded-xl border border-slate-200/80">
-                <h5 className="text-xs font-black text-slate-500 uppercase tracking-wider font-mono">1. Trip Parameters</h5>
+              <div className="ural-card space-y-4 bg-slate-100/70 p-5 border border-border-subtle">
+                <h4 className="text-xs font-black text-slate-500 uppercase tracking-wider font-mono">1. Trip Parameters</h4>
 
                 <div>
                   <label htmlFor="calc-dest-select" className="block text-xs font-semibold text-slate-700 mb-1">Target Destination</label>
@@ -327,7 +343,7 @@ export function InteractiveTools() {
                     id="calc-dest-select"
                     value={calcCountry}
                     onChange={(e) => setCalcCountry(e.target.value as any)}
-                    className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
+                    className="w-full min-h-11 bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                   >
                     <option value="nepal">Nepal 🇳🇵</option>
                     <option value="thailand">Thailand 🇹🇭</option>
@@ -374,28 +390,31 @@ export function InteractiveTools() {
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1.5">Style of Travel</label>
-                  <div className="grid grid-cols-3 gap-1.5 p-1 bg-white rounded-lg border border-slate-250 text-[10px] font-bold">
+                  <div className="grid grid-cols-3 gap-1.5 p-1 bg-white rounded-lg border border-border-subtle text-[10px] font-bold">
                     <button
                       id="tier-low"
                       type="button"
+                      aria-pressed={budgetTier === "low"}
                       onClick={() => setBudgetTier("low")}
-                      className={`py-1.5 rounded ${budgetTier === "low" ? "bg-slate-800 text-white" : "text-slate-600 hover:bg-slate-100"}`}
+                      className={`min-h-11 px-1 py-2 rounded leading-tight ${budgetTier === "low" ? "bg-slate-800 text-white" : "text-slate-600 hover:bg-slate-100"}`}
                     >
                       Backpacker
                     </button>
                     <button
                       id="tier-mid"
                       type="button"
+                      aria-pressed={budgetTier === "mid"}
                       onClick={() => setBudgetTier("mid")}
-                      className={`py-1.5 rounded ${budgetTier === "mid" ? "bg-slate-800 text-white" : "text-slate-600 hover:bg-slate-100"}`}
+                      className={`min-h-11 px-1 py-2 rounded leading-tight ${budgetTier === "mid" ? "bg-slate-800 text-white" : "text-slate-600 hover:bg-slate-100"}`}
                     >
                       Mid-Comfort
                     </button>
                     <button
                       id="tier-high"
                       type="button"
+                      aria-pressed={budgetTier === "high"}
                       onClick={() => setBudgetTier("high")}
-                      className={`py-1.5 rounded ${budgetTier === "high" ? "bg-slate-800 text-white" : "text-slate-600 hover:bg-slate-100"}`}
+                      className={`min-h-11 px-1 py-2 rounded leading-tight ${budgetTier === "high" ? "bg-slate-800 text-white" : "text-slate-600 hover:bg-slate-100"}`}
                     >
                       Luxury Heritage
                     </button>
@@ -409,43 +428,43 @@ export function InteractiveTools() {
                   {/* Decorative mesh */}
                   <div className="absolute right-0 top-0 opacity-10 text-white font-serif text-9xl">৳</div>
                   <div>
-                    <h5 className="text-[10px] font-bold font-mono text-[#F6B73C] uppercase tracking-widest block mb-1">Estimated Outbound Investment</h5>
+                    <h4 className="text-[10px] font-bold font-mono text-[#F6B73C] uppercase tracking-widest block mb-1">Estimated Trip Budget</h4>
                     <div className="text-4xl font-serif font-black tracking-tight text-white">
-                      ৳ {grandBdtTotal.toLocaleString()} <span className="text-xs font-sans font-normal text-slate-350">BDT</span>
+                      ৳ {grandBdtTotal.toLocaleString()} <span className="text-xs font-sans font-normal text-slate-300">BDT</span>
                     </div>
-                    <p className="text-xs text-slate-350 mt-1">
-                      Estimations customized to current June 2026 inflation and fuel surcharges.
+                    <p className="text-xs text-slate-300 mt-1">
+                      Planning estimate only. Confirm current airfare, accommodation, and local costs before booking.
                     </p>
                   </div>
                   <div className="bg-slate-800/60 p-3 rounded-lg border border-slate-700 shrink-0 text-center md:min-w-[120px]">
                     <span className="text-[9px] text-slate-400 uppercase font-mono block">Budget Per Person</span>
                     <span className="text-sm font-bold text-white">৳ {Math.round(grandBdtTotal / calcPeeps).toLocaleString()}</span>
-                    <span className="text-[9px] text-slate-350 block mt-0.5">({calcPeeps} Peep)</span>
+                    <span className="text-[9px] text-slate-300 block mt-0.5">({calcPeeps} {calcPeeps === 1 ? "traveler" : "travelers"})</span>
                   </div>
                 </div>
 
-                <div className="bg-white border border-slate-200/80 rounded-xl p-4 space-y-2.5">
-                  <h6 className="text-xs font-bold text-slate-500 font-mono uppercase tracking-wider mb-2">Cost Breakdown Overview:</h6>
+                <div className="ural-card bg-white border border-border-subtle p-4 space-y-2.5">
+                  <h5 className="text-xs font-bold text-slate-500 font-mono uppercase tracking-wider mb-2">Cost Breakdown Overview:</h5>
 
-                  <div className="flex justify-between items-center text-xs py-1.5 border-b border-slate-100">
-                    <span className="text-slate-600">🛫 Roundtrip Outbound Airfare (Dhaka - {calcCountry.toUpperCase()})</span>
-                    <span className="font-mono font-semibold text-slate-800">৳ {flightCostTotal.toLocaleString()}</span>
+                  <div className="flex items-start justify-between gap-3 text-xs py-1.5 border-b border-slate-100">
+                    <span className="min-w-0 flex-1 leading-relaxed text-slate-600">🛫 Roundtrip Outbound Airfare (Dhaka - {calcCountry.toUpperCase()})</span>
+                    <span className="shrink-0 whitespace-nowrap text-right font-mono font-semibold text-slate-800">৳ {flightCostTotal.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between items-center text-xs py-1.5 border-b border-slate-100">
-                    <span className="text-slate-600">🏨 Local Accommodation ({calcDays} Nights, {Math.ceil(calcPeeps/2)} Rooms)</span>
-                    <span className="font-mono font-semibold text-slate-800">৳ {lodgingCostTotal.toLocaleString()}</span>
+                  <div className="flex items-start justify-between gap-3 text-xs py-1.5 border-b border-slate-100">
+                    <span className="min-w-0 flex-1 leading-relaxed text-slate-600">🏨 Local Accommodation ({calcDays} Nights, {Math.ceil(calcPeeps/2)} Rooms)</span>
+                    <span className="shrink-0 whitespace-nowrap text-right font-mono font-semibold text-slate-800">৳ {lodgingCostTotal.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between items-center text-xs py-1.5 border-b border-slate-100">
-                    <span className="text-slate-600">🍲 Daily Halal Meals & Refreshments</span>
-                    <span className="font-mono font-semibold text-slate-800">৳ {mealsCostTotal.toLocaleString()}</span>
+                  <div className="flex items-start justify-between gap-3 text-xs py-1.5 border-b border-slate-100">
+                    <span className="min-w-0 flex-1 leading-relaxed text-slate-600">🍲 Daily Halal Meals & Refreshments</span>
+                    <span className="shrink-0 whitespace-nowrap text-right font-mono font-semibold text-slate-800">৳ {mealsCostTotal.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between items-center text-xs py-1.5 border-b border-slate-100">
-                    <span className="text-slate-600">🚗 Innercity Transit & Taxis ({calcDays} Days)</span>
-                    <span className="font-mono font-semibold text-slate-800">৳ {transitCostTotal.toLocaleString()}</span>
+                  <div className="flex items-start justify-between gap-3 text-xs py-1.5 border-b border-slate-100">
+                    <span className="min-w-0 flex-1 leading-relaxed text-slate-600">🚗 Innercity Transit & Taxis ({calcDays} Days)</span>
+                    <span className="shrink-0 whitespace-nowrap text-right font-mono font-semibold text-slate-800">৳ {transitCostTotal.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between items-center text-xs py-1.5">
-                    <span className="text-slate-600">🎟️ Attraction Sightseeing & Historical Monuments Gates Entry</span>
-                    <span className="font-mono font-semibold text-slate-800">৳ {entriesCostTotal.toLocaleString()}</span>
+                  <div className="flex items-start justify-between gap-3 text-xs py-1.5">
+                    <span className="min-w-0 flex-1 leading-relaxed text-slate-600">🎟️ Attraction Sightseeing & Historical Monuments Gates Entry</span>
+                    <span className="shrink-0 whitespace-nowrap text-right font-mono font-semibold text-slate-800">৳ {entriesCostTotal.toLocaleString()}</span>
                   </div>
                 </div>
               </div>
@@ -458,10 +477,10 @@ export function InteractiveTools() {
           <div className="space-y-6 max-w-xl mx-auto">
             <div className="flex items-center gap-2 text-slate-800 font-serif border-b border-slate-200 pb-3">
               <Coins className="text-brand-navy" size={20} />
-              <h4 className="font-bold text-lg">Bangladeshi Taka (BDT) Real-time Currency Proxy</h4>
+              <h3 className="ural-card-title font-bold text-lg">Indicative BDT Currency Converter</h3>
             </div>
 
-            <div className="bg-slate-100/70 p-6 rounded-xl border border-slate-200 space-y-4">
+            <div className="ural-card bg-slate-100/70 p-6 border border-border-subtle space-y-4">
               <div>
                 <label htmlFor="input-converter-bdt" className="block text-xs font-bold text-slate-600 uppercase tracking-widest mb-1.5">Base Investment (Bangladeshi Taka BDT)</label>
                 <div className="relative">
@@ -471,14 +490,17 @@ export function InteractiveTools() {
                     type="number"
                     value={bdtAmount}
                     onChange={(e) => setBdtAmount(Number(e.target.value))}
-                    className="w-full bg-white border border-slate-350 rounded-lg pl-8 pr-12 py-3 text-sm font-semibold font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
+                    className="w-full bg-white border border-border-default rounded-lg pl-8 pr-12 py-3 text-sm font-semibold font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                   />
                   <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-mono font-bold text-slate-400">BDT</span>
                 </div>
               </div>
 
               <div className="pt-2">
-                <span className="text-xs font-bold text-slate-650 block mb-2 font-mono uppercase">ESTIMATED VALUATION ACROSS POPULAR SOUTH ASIAN TARGETS:</span>
+                <p role="note" className="text-xs text-slate-600 leading-relaxed mb-3">
+                  Reference rates are illustrative, not live exchange quotes. Confirm your provider’s rate before exchanging.
+                </p>
+                <span className="text-xs font-bold text-text-secondary block mb-2 font-mono uppercase">INDICATIVE CONVERSIONS:</span>
                 <div className="space-y-2">
                   {Object.keys(conversionRates).map((currency) => {
                     const coin = conversionRates[currency];
@@ -493,7 +515,7 @@ export function InteractiveTools() {
                           </div>
                         </div>
                         <div className="text-right font-mono">
-                          <div className="font-bold text-slate-850 text-sm">{convertedVal} {currency}</div>
+                          <div className="font-bold text-text-primary text-sm">{convertedVal} {currency}</div>
                           <div className="text-[10px] text-slate-400">1 BDT ≈ {coin.rate} {currency}</div>
                         </div>
                       </div>
@@ -508,12 +530,12 @@ export function InteractiveTools() {
         {/* TOOL 3: PACKING */}
         {activeTool === "packing" && (
           <div className="space-y-6 max-w-2xl mx-auto">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-              <div className="flex items-center gap-2 text-slate-850 font-serif">
-                <CheckSquare className="text-brand-navy" size={20} />
-                <h4 className="font-bold text-lg">Bangladeshi Outbound Packing Checklist</h4>
+            <div className="flex flex-col gap-3 border-b border-slate-200 pb-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex min-w-0 items-start gap-2 text-text-primary font-serif">
+                <CheckSquare className="mt-0.5 shrink-0 text-brand-navy" size={20} />
+                <h3 className="ural-card-title min-w-0 font-bold text-lg leading-snug">Bangladeshi Outbound Packing Checklist</h3>
               </div>
-              <div className="text-xs font-mono font-semibold text-slate-600 bg-slate-100 py-1 px-2.5 rounded-full border border-slate-200">
+              <div className="self-start shrink-0 text-xs font-mono font-semibold text-slate-600 bg-slate-100 py-1 px-2.5 rounded-full border border-slate-200">
                 {checkedCount} / {checklist.length} Packaged
               </div>
             </div>
@@ -533,7 +555,7 @@ export function InteractiveTools() {
             </div>
 
             {/* Checklist items list */}
-            <div className="space-y-3 bg-white p-6 rounded-xl border border-slate-200">
+            <div className="ural-card space-y-3 bg-white p-6 border border-border-subtle">
               {["Documents", "Electronics", "Health", "Clothes"].map((category) => {
                 const categoricalItems = checklist.filter(item => item.category === category);
                 return (
@@ -541,22 +563,24 @@ export function InteractiveTools() {
                     <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-wider block border-l-2 border-brand-navy pl-2 mb-2">{category} Items</span>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
                       {categoricalItems.map((item) => (
-                        <div
+                        <button
                           key={item.id}
+                          type="button"
+                          aria-pressed={item.checked}
                           onClick={() => toggleCheckItem(item.id)}
-                          className={`flex items-center gap-2.5 p-2.5 rounded-lg border cursor-pointer select-none transition-all ${
+                          className={`w-full min-h-11 text-left flex items-center gap-2.5 p-2.5 rounded-lg border select-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy ${
                             item.checked
                               ? "bg-emerald-50 border-emerald-200 text-slate-700 font-medium"
                               : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100"
                           }`}
                         >
-                          <div className={`w-4.5 h-4.5 border rounded flex items-center justify-center shrink-0 ${
+                          <span aria-hidden="true" className={`w-4.5 h-4.5 border rounded flex items-center justify-center shrink-0 ${
                             item.checked ? "bg-emerald-500 border-emerald-600 text-white" : "border-slate-300 bg-white"
                           }`}>
                             {item.checked && <Check size={12} strokeWidth={3} />}
-                          </div>
+                          </span>
                           <span>{item.text}</span>
-                        </div>
+                        </button>
                       ))}
                     </div>
                   </div>
@@ -571,18 +595,18 @@ export function InteractiveTools() {
           <div className="space-y-6 max-w-xl mx-auto">
             <div className="flex items-center gap-2 text-slate-800 font-serif border-b border-slate-200 pb-3">
               <ShieldCheck className="text-brand-navy" size={20} />
-              <h4 className="font-bold text-lg">Passport Visa Eligibility Evaluator</h4>
+              <h3 className="ural-card-title font-bold text-lg">Passport Visa Eligibility Evaluator</h3>
             </div>
 
-            <div className="bg-slate-50 border border-slate-200 p-6 rounded-xl space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+            <div className="ural-card bg-slate-50 border border-border-subtle p-6 space-y-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="select-checker-national" className="block text-xs font-bold text-slate-650 uppercase tracking-widest mb-1.5 font-mono">My Nationality Passport:</label>
+                  <label htmlFor="select-checker-national" className="block text-xs font-bold text-text-secondary uppercase tracking-widest mb-1.5 font-mono">My Nationality Passport:</label>
                   <select
                     id="select-checker-national"
                     value={testNational}
                     onChange={(e) => setTestNational(e.target.value as any)}
-                    className="w-full bg-white border border-slate-350 rounded-lg px-2.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
+                    className="w-full min-h-11 bg-white border border-border-default rounded-lg px-2.5 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                   >
                     <option value="bd">Bangladesh 🇧🇩</option>
                     <option value="in">India 🇮🇳</option>
@@ -591,12 +615,12 @@ export function InteractiveTools() {
                 </div>
 
                 <div>
-                  <label htmlFor="select-checker-dest" className="block text-xs font-bold text-slate-650 uppercase tracking-widest mb-1.5 font-mono">Travel Destination:</label>
+                  <label htmlFor="select-checker-dest" className="block text-xs font-bold text-text-secondary uppercase tracking-widest mb-1.5 font-mono">Travel Destination:</label>
                   <select
                     id="select-checker-dest"
                     value={testDest}
                     onChange={(e) => setTestDest(e.target.value as any)}
-                    className="w-full bg-white border border-slate-350 rounded-lg px-2.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
+                    className="w-full min-h-11 bg-white border border-border-default rounded-lg px-2.5 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
                   >
                     <option value="np">Nepal 🇳🇵</option>
                     <option value="th">Thailand 🇹🇭</option>
@@ -637,9 +661,9 @@ export function InteractiveTools() {
           <div className="space-y-8 animate-fade-in">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
               <div>
-                <div className="flex items-center gap-2 text-slate-900 font-serif">
-                  <Plane className="text-brand-navy" size={22} />
-                  <h4 className="font-bold text-xl">IATA Airport Codes & Flight Desk Directory</h4>
+                <div className="flex min-w-0 items-start gap-2 text-slate-900 font-serif">
+                  <Plane className="mt-0.5 shrink-0 text-brand-navy" size={22} />
+                  <h3 className="ural-card-title min-w-0 font-bold text-xl leading-snug">IATA Airport Codes & Flight Desk Directory</h3>
                 </div>
                 <p className="text-xs text-slate-500 mt-1">
                   Official 3-letter airport codes required for global GDS ticket booking, domestic connections, and airline inquiries.
@@ -652,15 +676,15 @@ export function InteractiveTools() {
             </div>
 
             {/* Part A: 1-Click WhatsApp Flight Quote Generator */}
-            <div className="bg-gradient-to-br from-slate-900 via-brand-navy to-[#081322] text-white p-6 rounded-2xl border border-slate-800 shadow-xl space-y-5">
+            <div className="bg-gradient-to-br from-slate-900 via-brand-navy to-[#081322] text-white p-4 sm:p-6 rounded-2xl border border-slate-800 shadow-xl space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
                 <div className="space-y-0.5">
                   <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-wider block">
                     Instant Ticketing Assistance
                   </span>
-                  <h5 className="font-serif font-bold text-base text-white">
+                  <h4 className="font-serif font-bold text-base text-white">
                     1-Click WhatsApp Flight Fare Request
-                  </h5>
+                  </h4>
                 </div>
                 <span className="text-[11px] text-slate-300">
                   Direct connection with Dhaka Outbound Desk (+8801784385335)
@@ -669,11 +693,12 @@ export function InteractiveTools() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs text-slate-900">
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-300 mb-1">Flying From (Origin)</label>
+                  <label htmlFor="airport-inquiry-origin" className="block text-[11px] font-semibold text-slate-300 mb-1">Flying From (Origin)</label>
                   <select
+                    id="airport-inquiry-origin"
                     value={inquiryOrigin}
                     onChange={(e) => setInquiryOrigin(e.target.value)}
-                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
+                    className="w-full min-h-11 bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
                   >
                     <optgroup label="Bangladesh Hubs">
                       <option value="DAC">DAC — Dhaka (Hazrat Shahjalal)</option>
@@ -694,11 +719,12 @@ export function InteractiveTools() {
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-300 mb-1">Flying To (Destination)</label>
+                  <label htmlFor="airport-inquiry-destination" className="block text-[11px] font-semibold text-slate-300 mb-1">Flying To (Destination)</label>
                   <select
+                    id="airport-inquiry-destination"
                     value={inquiryDestination}
                     onChange={(e) => setInquiryDestination(e.target.value)}
-                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
+                    className="w-full min-h-11 bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
                   >
                     <optgroup label="Middle East">
                       <option value="DXB">DXB — Dubai International, UAE</option>
@@ -740,22 +766,25 @@ export function InteractiveTools() {
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-300 mb-1">Departure Date</label>
+                  <label htmlFor="airport-inquiry-date" className="block text-[11px] font-semibold text-slate-300 mb-1">Departure Date</label>
                   <input
+                    id="airport-inquiry-date"
                     type="date"
                     value={inquiryDate}
                     onChange={(e) => setInquiryDate(e.target.value)}
-                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
+                    className="w-full min-h-11 bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-300 mb-1">Passengers & Cabin</label>
+                  <span id="airport-inquiry-passengers-label" className="block text-[11px] font-semibold text-slate-300 mb-1">Passengers & Cabin</span>
                   <div className="grid grid-cols-2 gap-1.5">
                     <select
+                      id="airport-inquiry-passengers"
+                      aria-label="Passengers"
                       value={inquiryPassengers}
                       onChange={(e) => setInquiryPassengers(e.target.value)}
-                      className="bg-white border border-slate-300 rounded-lg px-2 py-2 text-xs text-slate-900 focus:outline-none"
+                      className="min-w-0 min-h-11 bg-white border border-slate-300 rounded-lg px-1.5 py-2 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
                     >
                       <option value="1 Adult">1 Adult</option>
                       <option value="2 Adults">2 Adults</option>
@@ -765,9 +794,11 @@ export function InteractiveTools() {
                       <option value="Group (4+ Pax)">Group (4+)</option>
                     </select>
                     <select
+                      id="airport-inquiry-cabin"
+                      aria-label="Cabin class"
                       value={inquiryClass}
                       onChange={(e) => setInquiryClass(e.target.value)}
-                      className="bg-white border border-slate-300 rounded-lg px-2 py-2 text-xs text-slate-900 focus:outline-none"
+                      className="min-w-0 min-h-11 bg-white border border-slate-300 rounded-lg px-1.5 py-2 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
                     >
                       <option value="Economy">Economy</option>
                       <option value="Premium Economy">Prem Economy</option>
@@ -795,7 +826,7 @@ export function InteractiveTools() {
                       inquiryType: "flight_fare_quote",
                     });
                   }}
-                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl transition-all shadow-md shrink-0 cursor-pointer"
+                  className="min-h-11 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl transition-all shadow-md shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
                 >
                   <Send size={14} />
                   <span>Send Fare Quote Request on WhatsApp →</span>
@@ -807,60 +838,74 @@ export function InteractiveTools() {
             <div className="space-y-4">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
                 <div className="relative flex-1">
-                  <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <label htmlFor="airport-directory-search" className="sr-only">Search the airport directory</label>
+                  <Search aria-hidden="true" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                   <input
+                    id="airport-directory-search"
                     type="text"
                     value={airportQuery}
                     onChange={(e) => setAirportQuery(e.target.value)}
-                    placeholder="Search by 3-letter IATA code, city, country, or airport name (e.g. DAC, Chittagong, Dubai, BKK, Jeddah)..."
-                    className="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-navy shadow-xs"
+                    placeholder="Search by IATA code, city, country, or airport name (e.g. DAC, Chattogram, Dubai, BKK, Jeddah)"
+                    className="w-full min-h-11 bg-white border border-slate-300 rounded-xl pl-10 pr-16 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-navy shadow-xs"
                   />
                   {airportQuery && (
                     <button
+                      type="button"
+                      aria-label="Clear airport search"
                       onClick={() => setAirportQuery("")}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs font-semibold cursor-pointer"
+                      className="absolute right-1.5 top-1/2 -translate-y-1/2 inline-flex min-h-10 min-w-10 items-center justify-center rounded-lg text-slate-500 hover:text-slate-900 text-xs font-semibold cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
                     >
                       Clear
                     </button>
                   )}
                 </div>
 
-                <div className="flex flex-wrap items-center gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs">
+                <div role="group" aria-label="Filter airports by region" className="flex flex-wrap items-center gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs">
                   <button
+                    type="button"
+                    aria-pressed={airportCategory === "all"}
                     onClick={() => setAirportCategory("all")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
+                    className={`min-h-10 px-2.5 py-1.5 rounded-lg font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy ${
                       airportCategory === "all" ? "bg-white text-slate-900 shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
                     All ({AIRPORTS_DIRECTORY.length})
                   </button>
                   <button
+                    type="button"
+                    aria-pressed={airportCategory === "bangladesh"}
                     onClick={() => setAirportCategory("bangladesh")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
+                    className={`min-h-10 px-2.5 py-1.5 rounded-lg font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy ${
                       airportCategory === "bangladesh" ? "bg-white text-slate-900 shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
                     Bangladesh Domestic (8)
                   </button>
                   <button
+                    type="button"
+                    aria-pressed={airportCategory === "middle-east"}
                     onClick={() => setAirportCategory("middle-east")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
+                    className={`min-h-10 px-2.5 py-1.5 rounded-lg font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy ${
                       airportCategory === "middle-east" ? "bg-white text-slate-900 shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
                     Middle East (10)
                   </button>
                   <button
+                    type="button"
+                    aria-pressed={airportCategory === "asia"}
                     onClick={() => setAirportCategory("asia")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
+                    className={`min-h-10 px-2.5 py-1.5 rounded-lg font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy ${
                       airportCategory === "asia" ? "bg-white text-slate-900 shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
                     South & SE Asia (10)
                   </button>
                   <button
+                    type="button"
+                    aria-pressed={airportCategory === "global"}
                     onClick={() => setAirportCategory("global")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
+                    className={`min-h-10 px-2.5 py-1.5 rounded-lg font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy ${
                       airportCategory === "global" ? "bg-white text-slate-900 shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
@@ -870,7 +915,7 @@ export function InteractiveTools() {
               </div>
 
               {copiedCode && (
-                <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs px-4 py-2 rounded-xl flex items-center gap-2">
+                <div role="status" aria-live="polite" className="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs px-4 py-2 rounded-xl flex items-center gap-2">
                   <Check size={14} className="text-emerald-600 shrink-0" />
                   <span>IATA code <strong>{copiedCode}</strong> copied to clipboard! Paste it into your flight search or ticket chat.</span>
                 </div>
@@ -881,7 +926,7 @@ export function InteractiveTools() {
                 {filteredAirports.map((airport) => (
                   <div
                     key={airport.code}
-                    className="bg-white border border-slate-200 rounded-xl p-4 hover:border-brand-navy hover:shadow-xs transition-all space-y-2.5 flex flex-col justify-between"
+                    className="ural-card bg-white border border-slate-200 hover:border-brand-navy hover:shadow-xs p-4 transition-all space-y-2.5 flex flex-col justify-between"
                   >
                     <div className="space-y-1">
                       <div className="flex items-center justify-between gap-2">
@@ -894,19 +939,19 @@ export function InteractiveTools() {
                           <span className="font-medium text-slate-700">{airport.country}</span>
                         </div>
                       </div>
-                      <h6 className="text-xs font-semibold text-slate-900 leading-snug line-clamp-1">
+                      <h4 className="text-xs font-semibold text-slate-900 leading-snug line-clamp-2 break-words">
                         {airport.name}
-                      </h6>
+                      </h4>
                       <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed">
                         Airlines: {airport.airlines}
                       </p>
                     </div>
 
-                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-2 text-xs">
+                    <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
                       <button
                         type="button"
                         onClick={() => handleCopyCode(airport.code)}
-                        className="inline-flex items-center gap-1 text-[11px] text-slate-600 hover:text-brand-navy bg-slate-50 hover:bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-md transition-colors cursor-pointer"
+                        className="inline-flex min-h-10 items-center gap-1 text-[11px] text-slate-600 hover:text-brand-navy bg-slate-50 hover:bg-slate-100 border border-slate-200 px-2.5 py-1.5 rounded-md transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
                       >
                         <Copy size={11} />
                         <span>Copy Code</span>
@@ -917,7 +962,7 @@ export function InteractiveTools() {
                           setInquiryDestination(airport.code);
                           window.scrollTo({ top: 0, behavior: "smooth" });
                         }}
-                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-navy hover:text-brand-emerald cursor-pointer"
+                        className="inline-flex min-h-10 items-center gap-1 text-[11px] font-semibold text-brand-navy hover:text-brand-emerald cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy rounded-md px-1"
                       >
                         <span>Set as Destination →</span>
                       </button>
@@ -927,7 +972,7 @@ export function InteractiveTools() {
               </div>
 
               {filteredAirports.length === 0 && (
-                <div className="text-center py-12 bg-white rounded-2xl border border-slate-200 space-y-2">
+                <div role="status" className="ural-panel text-center py-12 bg-white border border-border-subtle space-y-2">
                   <p className="text-sm font-semibold text-slate-800">No airport found matching "{airportQuery}"</p>
                   <p className="text-xs text-slate-500">
                     Try searching for another city, country, or 3-letter IATA code, or request a custom flight route on WhatsApp.
@@ -937,7 +982,7 @@ export function InteractiveTools() {
             </div>
 
             {/* Travel Agent Tip */}
-            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
+            <div className="ural-panel bg-slate-50 border border-border-subtle p-5 space-y-2">
               <div className="flex items-center gap-2 text-xs font-bold text-brand-navy uppercase tracking-wider">
                 <Sparkles size={14} className="text-[#D4941A]" />
                 <span>Senior Ticketing Consultant Advice for Inbound Callers</span>

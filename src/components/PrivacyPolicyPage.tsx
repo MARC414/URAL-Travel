@@ -115,7 +115,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <ShieldCheck className="w-4 h-4" />
             <span>{isBn ? "আইনগত স্বচ্ছতা ও ডেটা সুরক্ষা" : "Legal Transparency & Data Protection"}</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          <h1 className="ural-page-title text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
             {isBn
               ? "গোপনীয়তা ও কুকি নীতিমালা"
               : "Privacy & Cookie Policy"}
@@ -142,7 +142,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
       <section className="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-5">
         <div className="flex items-center gap-2.5 text-[#F6B73C]">
           <Sparkles className="w-5 h-5" />
-          <h2 className="text-lg font-bold text-white">
+          <h2 className="ural-section-title text-lg font-bold text-white">
             {isBn ? "৬০ সেকেন্ডের সংক্ষেপ: আপনার জন্য জরুরি বিষয়গুলো" : "The 60-Second Summary: What You Need to Know"}
           </h2>
         </div>
@@ -205,7 +205,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
               <Sliders className="w-4 h-4" />
               <span>{isBn ? "ইন্টারেক্টিভ কন্ট্রোল হাব" : "Interactive Control Hub"}</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-white">
+            <h2 className="ural-section-title text-xl sm:text-2xl font-bold text-white">
               {isBn ? "আপনার বর্তমান কুকি সেটিংস পরিচালনা করুন" : "Manage Your Cookie Preferences"}
             </h2>
             <p className="text-slate-300 text-xs sm:text-sm">
@@ -395,7 +395,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-[#F6B73C]/10 text-[#F6B73C]">
               <Database className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "১. ডেটা নিয়ন্ত্রক ও প্রাতিষ্ঠানিক পরিচয় (Data Controller)" : "1. Data Controller & Editorial Identity"}
             </h2>
           </div>
@@ -423,7 +423,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
               <Globe className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "২. আইনি পরিধি ও আন্তর্জাতিক সম্মতি (Regulatory Framework)" : "2. Regulatory Scope & Territorial Applicability"}
             </h2>
           </div>
@@ -472,7 +472,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">
               <FileText className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "৩. ডেটা প্রসেসিংয়ের আইনি ভিত্তি (Legal Bases - GDPR Art. 6)" : "3. Legal Bases for Processing Data"}
             </h2>
           </div>
@@ -515,7 +515,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-[#F6B73C]/10 text-[#F6B73C]">
               <Eye className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "৪. আমরা কী তথ্য সংগ্রহ ও প্রসেস করি" : "4. Categories of Data We Collect"}
             </h2>
           </div>
@@ -552,7 +552,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-amber-500/10 text-amber-400">
               <AlertCircle className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "৫. যা আমরা স্পষ্টভাবে কখনোই সংগ্রহ করি না (What We DO NOT Collect)" : "5. Sensitive Data We Explicitly DO NOT Collect"}
             </h2>
           </div>
@@ -580,7 +580,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-[#F6B73C]/10 text-[#F6B73C]">
               <Cookie className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "৬. কুকি পলিসি ও পূর্ণাঙ্গ কুকি ইনভেন্টরি (Cookie Policy & Registry)" : "6. Cookie Policy & Comprehensive Registry"}
             </h2>
           </div>
@@ -655,7 +655,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">
               <ShieldCheck className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "৭. গুগল কনসেন্ট মোড v2 আর্কিটেকচার (Consent Mode v2 Architecture)" : "7. Google Consent Mode v2 Technical Architecture"}
             </h2>
           </div>
@@ -705,7 +705,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
               <ExternalLink className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "৮. অ্যাফিলিয়েট পার্টনারশিপ ও বাণিজ্যিক স্বচ্ছতা (Affiliate Disclosure)" : "8. Affiliate Partnerships & Commercial Transparency"}
             </h2>
           </div>
@@ -741,7 +741,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-[#F6B73C]/10 text-[#F6B73C]">
               <Database className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "৯. ডেটা সংরক্ষণের সময়সীমা (Data Retention)" : "9. Data Retention & Erasure Schedule"}
             </h2>
           </div>
@@ -774,7 +774,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">
               <Lock className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "১০. সাইট সিকিউরিটি ও ক্লাউড এনক্রিপশন (Security Measures)" : "10. Security Architecture & Encryption"}
             </h2>
           </div>
@@ -797,7 +797,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
               <Server className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "১১. আন্তর্জাতিক ডেটা স্থানান্তর (International Data Transfers)" : "11. International Data Transfers"}
             </h2>
           </div>
@@ -820,7 +820,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-[#F6B73C]/10 text-[#F6B73C]">
               <UserCheck className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "১২. ব্যবহারকারী হিসেবে আপনার অধিকার (Your Rights Under GDPR & CCPA)" : "12. Your Legal Rights as a Data Subject"}
             </h2>
           </div>
@@ -868,7 +868,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
               <ShieldCheck className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "১৩. অপ্রাপ্তবয়স্কদের সুরক্ষা (Children's Privacy - COPPA & GDPR-K)" : "13. Children's Online Privacy Protection"}
             </h2>
           </div>
@@ -891,7 +891,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <span className="p-1.5 rounded-lg bg-[#F6B73C]/10 text-[#F6B73C]">
               <RefreshCw className="w-4 h-4" />
             </span>
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="ural-section-title text-xl font-bold text-white">
               {isBn ? "১৪. নীতিমালার হালনাগাদ ও পরিবর্তন (Policy Revisions)" : "14. Policy Updates & Versioning"}
             </h2>
           </div>
@@ -912,7 +912,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
         <section id="sec-15" className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4">
           <div className="flex items-center gap-2 text-[#F6B73C]">
             <Mail className="w-5 h-5" />
-            <h2 className="text-lg font-bold text-white">
+            <h2 className="ural-section-title text-lg font-bold text-white">
               {isBn ? "১৫. প্রাইভেসি ও ডেটা সুরক্ষা হেল্পডেস্ক (Contact Us)" : "15. Contact Our Privacy & Data Protection Desk"}
             </h2>
           </div>

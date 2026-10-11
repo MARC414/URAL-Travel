@@ -132,8 +132,12 @@ export interface BlogPost {
   summary: string;
   category: string;
   date: string;
+  /** ISO calendar date when the editorial content was materially reviewed/updated. */
+  updatedAt?: string;
   author: string;
   readTime: string;
+  /** Article-specific references; category-level portal links are used when absent. */
+  references?: { name: string; nameBn: string; url: string }[];
   /**
    * Long-form body. Optional on purpose: the 43 English bodies live in
    * `src/data/blogContent.ts` and are imported lazily on blog routes, so

@@ -1813,11 +1813,24 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-2",
     slug: "nepal-vs-thailand-first-trip",
     title: "Nepal vs Thailand: Which is the Best First Country to Visit for Bangladeshis?",
-    summary: "Choosing your very first international destination on a Bangladeshi passport often comes down to two iconic neighbors: the Himalayan valleys of Nepal or the vibrant street markets and islands of Thailand. This head-to-head comparison evaluates both countries across four critical factors for first-time Bangladeshi flyers: visa simplicity (Nepal's free instant SAARC Visa on Arrival at Tribhuvan Airport versus Thailand's pre-departure e-Visa and 6-month bank statement requirements), realistic 5-day BDT budgets (BDT 45,000 for Kathmandu and Pokhara vs. BDT 80,000+ for Bangkok and Pattaya), Halal food availability, and urban transit convenience so you can pick the right first stamp in your passport.",
+    summary: "Choosing your very first international destination on a Bangladeshi passport often comes down to Nepal or Thailand. Compare Nepal's visa-on-arrival route and the Department of Immigration's gratis-visa rule for eligible SAARC visitors with Thailand's advance e-Visa process, plus indicative five-day budgets (about BDT 45,000–65,000 for Nepal and BDT 80,000+ for Thailand), halal-food options, and urban transit. Nepal's published rule grants eligible SAARC visitors up to 30 days gratis on a first visit in a visa year; check current entry rules and live prices before booking.",
     category: "Visa & Immigration",
     date: "May 28, 2026",
+    updatedAt: "2026-10-12",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "5 min read",
+    readTime: "2 min read",
+    references: [
+      {
+        name: "Nepal Department of Immigration — Tourist Visa & SAARC Gratis Visa",
+        nameBn: "নেপাল ইমিগ্রেশন বিভাগ — ট্যুরিস্ট ভিসা ও SAARC Gratis Visa",
+        url: "https://pokhara.immigration.gov.np/en/page/tourist-visa-2",
+      },
+      {
+        name: "Thailand e-Visa Portal — Ministry of Foreign Affairs",
+        nameBn: "Thailand e-Visa পোর্টাল — পররাষ্ট্র মন্ত্রণালয়",
+        url: "https://www.thaievisa.go.th/",
+      },
+    ],
     internalLinks: [
       { text: "Nepal Visa step-by-step checklist", path: "/visa/nepal-visa" },
       { text: "Thailand trip cost from Dhaka", path: "/costs/thailand-costs" },
@@ -2364,12 +2377,30 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-32",
     slug: "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
-    title: "Thailand Official e-Visa from Bangladesh (thaievisa.go.th): Document Upload, Bank Balance & Rejection Fixes (2026)",
-    summary: "Since the Royal Thai Embassy in Dhaka transitioned to the official Thai e-Visa portal (thaievisa.go.th), Bangladeshi citizens no longer have to surrender their physical passports at VFS for weeks to get a 60-day Thailand Tourist Visa (TR). However, because the online system relies on strict digital PDF verification, blurry scans, unverified dummy tickets, or bank statements falling below the mandatory BDT 65,000 (THB 20,000) per-person threshold can trigger a non-refundable rejection. Here is the verified 2026 step-by-step Thailand e-Visa guide for Bangladeshi job holders, business owners, families, and medical travelers.",
+    title: "Thailand Official e-Visa from Bangladesh: Dhaka Documents, Bank Evidence & Application Checks (2026)",
+    summary: "Bangladeshi applicants use Thailand's official e-Visa portal, but approval and processing time are not guaranteed. The Royal Thai Embassy Dhaka's public Tourist Visa TR checklist, last updated November 30, 2022, lists six-month bank statements and financial evidence of BDT 60,000 per person or BDT 120,000 per family. That dated checklist may not match every current online case, so confirm requirements on the live portal before applying.",
     category: "Visa & Immigration",
     date: "September 27, 2026",
+    updatedAt: "2026-10-12",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "7 min read",
+    readTime: "3 min read",
+    references: [
+      {
+        name: "Thailand e-Visa Portal — Ministry of Foreign Affairs",
+        nameBn: "Thailand e-Visa পোর্টাল — পররাষ্ট্র মন্ত্রণালয়",
+        url: "https://www.thaievisa.go.th/",
+      },
+      {
+        name: "Thailand e-Visa — Tourist Visa requirements",
+        nameBn: "Thailand e-Visa — Tourist Visa-এর প্রয়োজনীয়তা",
+        url: "https://www.thaievisa.go.th/visa/tourist-visa",
+      },
+      {
+        name: "Royal Thai Embassy Dhaka — Tourist Visa TR checklist (updated Nov 30, 2022)",
+        nameBn: "রয়্যাল থাই এমব্যাসি ঢাকা — Tourist Visa TR চেকলিস্ট (হালনাগাদ: ৩০ নভেম্বর ২০২২)",
+        url: "https://dhaka.thaiembassy.org/en/publicservice/tourist-visa-tr?page=5d83296315e39c2540006a6c&menu=5d83296315e39c2540006a6d",
+      },
+    ],
     internalLinks: [
       { text: "Thailand Visa Checklist & Fee Calculator", path: "/visa/thailand-visa" },
       { text: "Where to Eat Halal Food in Bangkok (Pratunam & Sukhumvit)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
