@@ -6486,6 +6486,42 @@ export default function App() {
                         </div>
                       </header>
 
+                      {/* Breadcrumb navigation — visible on screen + semantic for screen readers */}
+                      <nav aria-label={isBn ? "ব্রেডক্রাম্ব" : "Breadcrumb"}>
+                        <ol className="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-500 mb-4">
+                          <li>
+                            <a
+                              href="/"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/"); }}
+                              className="hover:text-brand-navy transition-colors"
+                            >
+                              {isBn ? "হোম" : "Home"}
+                            </a>
+                          </li>
+                          <li aria-hidden="true" className="text-slate-300 select-none">/</li>
+                          <li>
+                            <a
+                              href="/blog"
+                              onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
+                              className="hover:text-brand-navy transition-colors"
+                            >
+                              {isBn ? "ট্রাভেল গাইড" : "Travel Guides"}
+                            </a>
+                          </li>
+                          <li aria-hidden="true" className="text-slate-300 select-none">/</li>
+                          <li>
+                            <a
+                              href={`/blog/${activePost.slug}`}
+                              onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${activePost.slug}`); }}
+                              className="hover:text-brand-navy transition-colors line-clamp-1 max-w-[200px] sm:max-w-xs"
+                              aria-current="page"
+                            >
+                              {activePost.title}
+                            </a>
+                          </li>
+                        </ol>
+                      </nav>
+
                       {/* Full Long-Form Verified Guide Content with Dark H2 (24px–26px), Dark H3 (19px–21px) & 16px Body */}
                       <div className="max-w-none text-slate-800 leading-[1.8] space-y-6 text-[16px] sm:text-[17px] font-sans">
                         {!articleBody && (
@@ -6493,7 +6529,7 @@ export default function App() {
                           // already being fetched (prerender injects a modulepreload for blog
                           // routes), so this placeholder is normally invisible; it exists so a
                           // slow connection never renders an empty article.
-                          <div className="space-y-4 animate-pulse" aria-hidden="true" data-blog-body-placeholder>
+                          <div className="space-y-4" aria-hidden="true" data-blog-body-placeholder>
                             {[0, 1, 2, 3, 4].map((i) => (
                               <div
                                 key={i}
@@ -8127,7 +8163,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "গ্লোবাল হোটেল ও রিসোর্ট বুকিং" : "Global Hotels & Resorts"}
                   </a>
@@ -8137,7 +8173,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "এশিয়া ও দুবাই ট্যুর ও অ্যাক্টিভিটি" : "Asia & Dubai Tours & Passes"}
                   </a>
@@ -8147,7 +8183,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "অল-ইনক্লুসিভ ও এক্সপ্লোরার সিটি পাস" : "All-Inclusive & Explorer Passes"}
                   </a>
@@ -8157,7 +8193,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.tiqets)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "ইউরোপ, UK ও USA মিউজিয়াম পাস" : "Europe, UK & USA Attractions"}
                   </a>
@@ -8167,7 +8203,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.airalo)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "ইনস্ট্যান্ট ট্রাভেল eSIM ডাটা" : "Global Travel eSIM Data"}
                   </a>
@@ -8177,7 +8213,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.welcomePickups)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "প্রাইভেট এয়ারপোর্ট পিকআপ ও ট্রান্সফার" : "Airport Pickup & Transfers"}
                   </a>
@@ -8187,7 +8223,7 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.airhelp)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="hover:text-white hover:underline"
+                    className="inline-block py-1 hover:text-white hover:underline"
                   >
                     {isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600 পর্যন্ত)" : "Flight Delay Claims (Up to €600)"}
                   </a>
@@ -8208,6 +8244,7 @@ export default function App() {
                       href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={isBn ? "WhatsApp ডেস্ক: +880 1784-385335" : "Chat on WhatsApp: +880 1784-385335"}
                       className="hover:text-white hover:underline text-emerald-400 font-mono font-bold"
                     >
                       +880 1784-385335
@@ -8217,6 +8254,7 @@ export default function App() {
                     <span className="text-slate-400">{isBn ? "সরাসরি কল:" : "Direct Hotline:"}</span>
                     <a
                       href="tel:+8801784385335"
+                      aria-label={isBn ? "সরাসরি কল: +880 1784-385335" : "Call directly: +880 1784-385335"}
                       className="hover:text-white hover:underline text-[#F6B73C] font-mono font-bold"
                     >
                       +880 1784-385335
