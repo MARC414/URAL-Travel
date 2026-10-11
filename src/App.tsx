@@ -950,7 +950,24 @@ export default function App() {
       cleanupClickTracking();
     };
   }, []);
+
+  // Scroll progress bar + back-to-top button
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+      setScrollProgress(progress);
+      setShowBackToTop(scrollTop > 600);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Reading progress + back-to-top state
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   
   // Custom Action Affiliate Conversion Toast overlay state
   const [affiliateToast, setAffiliateToast] = useState<string | null>(null);
@@ -2119,7 +2136,24 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-[#F6B73C] selection:text-brand-navy overflow-x-hidden">
+    <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-brand-gold selection:text-brand-navy overflow-x-hidden">
+
+      {/* Reading progress bar — shown only on blog post pages */}
+      {section === "blog" && !isLanding && (
+        <div
+          className="fixed top-0 left-0 right-0 z-[60] h-0.5 bg-slate-200"
+          role="progressbar"
+          aria-valuenow={scrollProgress}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={isBn ? `পড়ার অগ্রগতি: ${scrollProgress}%` : `Reading progress: ${scrollProgress}%`}
+        >
+          <div
+            className="h-full bg-brand-gold transition-[width] duration-150 ease-linear"
+            style={{ width: `${scrollProgress}%` }}
+          />
+        </div>
+      )}
 
       {/* 🟦 STICKY HEADER WRAPPER (Top Strip + Main Navbar) */}
       <div className="sticky top-0 z-50 w-full shadow-lg">
@@ -8403,6 +8437,20 @@ export default function App() {
 
       {/* Google Consent Mode v2 Floating Cookie Consent Banner */}
       <ConsentBanner onNavigate={navigateTo} lang={lang} />
+
+      {/* Back-to-top floating button — appears after 600px scroll */}
+      <button
+        type="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        aria-label={isBn ? "পৃষ্ঠার শীর্ষে যান" : "Scroll back to top"}
+        className={`fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-brand-navy text-white shadow-lg flex items-center justify-center transition-all duration-300 cursor-pointer hover:bg-brand-gold hover:text-brand-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold ${
+          showBackToTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+        }`}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
+          <polyline points="18 15 12 9 6 15" />
+        </svg>
+      </button>
 
     </div>
   );
