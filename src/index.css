@@ -138,27 +138,32 @@
   background: transparent;
 }
 
-/* === HERO ROUTE LINE ANIMATION === */
-@keyframes routeDash {
-  to {
-    stroke-dashoffset: -40;
-  }
-}
-
+/* === HERO ROUTE LINES ===
+   Static dashed polylines. The previous `routeDash` animation flowed the dashes
+   via stroke-dashoffset, which the compositor cannot animate — it forced a
+   continuous main-thread repaint (Lighthouse: "non-composited animation",
+   unsupported property stroke-dashoffset). The dashed look is kept; only the
+   flow is dropped. */
 .route-line {
   stroke-dasharray: 3 6;
   stroke-dashoffset: 0;
-  animation: routeDash 25s linear infinite;
   opacity: 0.35;
 }
 
-/* === DESTINATION DOT PULSE === */
+/* === DESTINATION DOT PULSE ===
+   Pulse via opacity + transform:scale (both GPU-composited) instead of the SVG
+   `r` attribute, which cannot be composited and triggered main-thread repaints
+   (Lighthouse: "non-composited animation", unsupported property r).
+   transform-box/-origin make scale pivot on each circle's own centre, so dots
+   grow/shrink in place and keep the original look. */
 @keyframes dotPulse {
-  0%, 100% { r: 4; opacity: 0.9; }
-  50% { r: 6; opacity: 1; }
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.35); }
 }
 
 .dest-dot {
+  transform-box: fill-box;
+  transform-origin: center;
   animation: dotPulse 3s ease-in-out infinite;
 }
 
