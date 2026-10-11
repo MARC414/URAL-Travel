@@ -121,7 +121,6 @@ export function WhatsAppSupport({ lang }: WhatsAppSupportProps) {
         >
           <div className="relative flex items-center justify-center">
             <MessageCircle className="w-6 h-6 fill-white" />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-white rounded-full animate-ping"></span>
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-300 rounded-full"></span>
           </div>
           <div className="text-left hidden sm:block">

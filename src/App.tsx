@@ -227,7 +227,7 @@ export function TravelpayoutsWidgetSkeleton({
             <div className="h-9 w-32 rounded-lg bg-[#F6B73C]/85 animate-pulse" />
           </div>
           <div className="flex items-center gap-2 text-xs text-slate-300 font-mono">
-            <span className="w-2 h-2 rounded-full bg-[#F6B73C] animate-ping" />
+            <span className="w-2 h-2 rounded-full bg-[#F6B73C]" />
             <span>
               {isBn
                 ? "লাইভ হোটেল রেট ইঞ্জিন প্রস্তুত হচ্ছে..."
@@ -320,7 +320,7 @@ export function TravelpayoutsWidgetSkeleton({
           ))}
         </div>
         <div className="flex items-center gap-2 text-[11px] font-mono text-slate-500">
-          <span className="w-2 h-2 rounded-full bg-[#07C369] animate-ping" />
+          <span className="w-2 h-2 rounded-full bg-[#07C369]" />
           <span>
             {isBn
               ? "লাইভ এয়ারলাইন ভাড়া লোড হচ্ছে..."
@@ -3045,7 +3045,7 @@ export default function App() {
               {/* Destination Dots with Pulse animation */}
               {/* Dhaka (Hub -> Large Pulsating Gold Dot in the middle) */}
               <circle cx="600" cy="350" r="7" fill="#F6B73C" className="dest-dot" style={{ animationDelay: '0s' }} />
-              <circle cx="600" cy="350" r="14" fill="none" stroke="#F6B73C" strokeWidth="1.5" strokeOpacity="0.5" className="animate-ping" style={{ transformOrigin: '600px 350px' }} />
+              <circle cx="600" cy="350" r="14" fill="none" stroke="#F6B73C" strokeWidth="1.5" strokeOpacity="0.5" style={{ transformOrigin: '600px 350px' }} />
               <text x="600" y="380" fill="#F6B73C" fontSize="12" fontWeight="bold" fontFamily="monospace" textAnchor="middle" opacity="0.95" letterSpacing="1">DHAKA (DAC)</text>
 
               {/* Kathmandu */}
@@ -3073,7 +3073,7 @@ export default function App() {
             <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col items-center sm:items-start justify-center space-y-6">
               
               <span className="hero-badge font-sans tracking-widest uppercase inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 border leading-none bg-[#F6B73C]/15 border-[#F6B73C]/25 text-[#F6B73C] rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C] animate-ping"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]"></span>
                 {isBn
                   ? "বাংলাদেশি ভ্রমণকারীদের জন্য ট্রাভেল প্ল্যানিং"
                   : "Travel planning for Bangladeshi travelers"}
@@ -7255,7 +7255,7 @@ export default function App() {
             
             <div className="relative z-10 max-w-3xl space-y-4">
               <div className="inline-flex items-center gap-2 bg-[#F6B73C]/15 text-[#F6B73C] text-xs font-mono font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full">
-                <span className="w-2 h-2 rounded-full bg-[#F6B73C] animate-ping"></span>
+                <span className="w-2 h-2 rounded-full bg-[#F6B73C]"></span>
                 {isBn ? "সরাসরি সাপোর্ট হটলাইন" : "Direct Assistance Hotline"}
               </div>
               
@@ -8137,8 +8137,8 @@ export default function App() {
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Wikidata-logo_inquares.svg/20px-Wikidata-logo_inquares.svg.png"
                   alt="Wikidata"
-                  width={16}
-                  height={16}
+                  width={20}
+                  height={20}
                   className="object-contain"
                   loading="lazy"
                 />

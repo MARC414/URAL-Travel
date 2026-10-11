@@ -96,7 +96,7 @@ export function TravelpayoutsOnboarding() {
           <div className="flex bg-[#0c2033]/80 p-1.5 rounded-xl border border-white/10 text-xs shrink-0 items-center gap-3">
             <span className="text-[10px] text-slate-400 font-mono">STATUS:</span>
             <span className="bg-emerald-500/20 text-emerald-300 font-bold px-2.5 py-1 rounded-lg flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
               INTEGRATION HEALTHY
             </span>
           </div>
