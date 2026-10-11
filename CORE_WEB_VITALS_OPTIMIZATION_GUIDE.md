@@ -1,17 +1,17 @@
 # URAL Travel - Core Web Vitals Optimization Guide
 **Created:** 2026-10-04  
-**Last updated:** 2026-10-11 — Push to 90+/100 Mobile: Noto Bengali font removed from English critical path (currency ৳ U+09F3 excluded from unicode-range, Appendix **H.1**), hero SVG animations GPU-composited (Appendix **H.2**), footer link names + touch targets (Appendix **H.3**), contrast tokens upgraded across light/dark surfaces (Appendix **H.3**), SEO sitemap & crawlability verified with Search Console owner actions (Appendix **H.4**). Pre-existing AVIF, blog-body split, consent gate, and lazy chunks all intact. The metrics table separates **targets from measurements** — nothing is green without a number.
+**Last updated:** 2026-10-11 — In addition to the earlier H.1–H.4 work (Noto Bengali removed from English's critical path, hero animations composited, accessibility and crawlability fixes), the homepage now has a static pre-hydration hero with copy/CTAs, an Inter 700 home-only preload, an explicitly user-triggered fare chart, and 11 lazy route views. Route content data is no longer in the homepage's static import graph; the build guard measures 181.6 KB gzip eager JS (Appendix **H.7**). The metrics table separates **targets from measurements** — no deployed score is claimed without a post-deploy report.
 
-**Status:** Phases 1–3 ✅ · Consent Mode v2 ✅ · Phase 6A (AVIF) ✅ · P3.1 (blog split) ✅ · third-party load (F) ✅ · P3.3 + GTM preconnect ✅ · Noto Bengali split (H.1) ✅ · Hero compositing (H.2) ✅ · A11y & Contrast (H.3) ✅ · **production PSI/CrUX verification ⏳ pending**
+**Status:** Phases 1–3 ✅ · Consent Mode v2 ✅ · Phase 6A (AVIF) ✅ · P3.1 (blog split) ✅ · third-party load (F) ✅ · P3.3 + GTM preconnect ✅ · Noto Bengali split (H.1) ✅ · Hero compositing (H.2) ✅ · A11y & Contrast (H.3) ✅ · Homepage/route JS split (H.7) ✅ · **production PSI/CrUX verification ⏳ pending**
 
 **Target:** 95+ Performance Score (Mobile & Desktop) — **target, not a result** (historical lab baseline: ~65 mobile, Appendix B; operator-reported live comparator: 85 twice, details below)
 
 ---
 
-## ✅ Status Board (single source of truth — 2026-10-05)
+## ✅ Status Board (single source of truth — 2026-10-11)
 
-Everything below is **committed code**, verified by `npm run build` + `npm run
-verify:build` (53 checks, incl. the cache/srcset/consent/contrast/security/gate/blog-split/AVIF/third-party/route-preconnect/lazy-chunk regression guards). "Deployed" means it
+Everything below is **working-branch code**, verified by `npm run build` + `npm run
+verify:build` (76 checks, incl. cache/srcset/consent/contrast/security/gate/blog-split/AVIF/third-party/route-preconnect/lazy-chunk/hero/font/route-data guards). "Deployed" means it
 will be live on the next Cloudflare Pages deploy of this branch — confirm with
 the Production Verification commands at the bottom of this guide.
 
@@ -53,6 +53,7 @@ the Production Verification commands at the bottom of this guide.
 | 34 | **Hero SVG animations GPU-composited** (11 non-composited animations flagged) | ✅ applied 2026-10-11 | `src/index.css`: static dashed route line (no `stroke-dashoffset` repaint loop); destination dots pulse via GPU-composited `transform: scale()` + `opacity`. Keeps visual design; eliminates main-thread style/layout thrashing. Appendix H.2 |
 | 35 | **Accessibility 94 → ~100: contrast, distinct link names, touch targets** | ✅ applied 2026-10-11 | `src/App.tsx`, `src/components/TravelpayoutsWidget.jsx`: Popular Hubs label (slate-400 → slate-500), footer text (slate-400/500 → slate-300 on navy), playbooks subtitle (slate-500 → slate-600), affiliate disclosure (slate-500 → slate-300), WhatsApp vs phone distinct `aria-label`s, Travel Services `py-1` tap targets (≥24px). Guarded by CI. Appendix H.3 |
 | 36 | **SEO Indexing & Crawling verification and Search Console operational runbook** | ✅ verified 2026-10-11 | `public/robots.txt` line 134, `index.html` line 116, 173 prerendered pages + lastmod + 3-link hreflang clusters verified; non-code owner actions (GSC submission, URL inspection, custom domain recommendation) documented in Appendix H.4 |
+| 37 | **Homepage first paint + route-level JS/data split** | ✅ implemented 2026-10-11 | Static hero image/copy/CTAs; Inter 700 preload on `/` only; Travelpayouts fare chart loaded on click; 11 route views in lazy chunks; content-data excluded from homepage preload. `verify:build` measures **181.6 KB gzip eager JS** (≤200 KB guard); see Appendix H.7. Live PSI/CrUX measurement still pending |
 
 ### ⚠️ The recurring CI failure (lockfile hygiene)
 Three CI runs died in ~12s at "Install dependencies" (`fafdb27`, `4d45194`,
@@ -2131,9 +2132,10 @@ during the first 3.5 seconds of page life:
 1. **Google Tag Manager (`gtm.js`):** Fired at an arbitrary `setTimeout(loadGTM, 3000)`
    timer, directly colliding with page hydration during Lighthouse automated tests.
 2. **Travelpayouts Widget Readiness:** The `IntersectionObserver` / 2500ms ceiling
-   triggered `setAreTpScriptsReady(true)` synchronously on the main thread, causing
-   the 455 KB widget bundle (Recharts, SVG flight trends, route database) to parse
-   and mount as a single monolithic block.
+   triggered `setAreTpScriptsReady(true)` synchronously on the main thread. The
+   former widget/chart dependency has since been split: the widget shell is about
+   20 KB gzip, and the roughly 110 KB gzip Recharts trend chart is not requested
+   until the visitor explicitly opens it (Appendix H.7).
 3. **React 19 Initial Mount:** Competing for CPU cycles while third-party scripts
    attempted simultaneous execution.
 
@@ -2151,7 +2153,45 @@ during the first 3.5 seconds of page life:
     **immediate synchronous mounting** if a visitor touches or clicks any search box.
   - Passive readiness triggers (`IntersectionObserver` proximity or the 2500 ms ceiling)
     now yield via `requestIdleCallback` (`{timeout: 1200}`) before state dispatch.
-    This segments the 455 KB bundle evaluation into microtasks below the 50 ms
-    blocking threshold.
-- **Outcome:** TBT drops substantially without deleting a single affiliate feature,
-  tracking script, or breaking any CI verification assertion.
+    The small widget shell mounts on demand; the chart's larger evaluation is
+    deferred until a direct user request.
+- **Outcome:** The risky automatic chart parse is removed from the initial visit.
+  A post-deploy TBT measurement is still required; no synthetic score is inferred
+  from the build-only verification.
+
+
+---
+
+## H.7 Homepage First Paint, User-Triggered Chart & Route Chunks (2026-10-11)
+
+This change targets initial transfer and pre-hydration LCP while preserving the
+route views, content, and partner flows.
+
+### Implemented
+- **Static homepage hero (`index.html`):** a responsive `<picture>` / sized `<img>`
+  sits inside `#root` before the SEO directory. It includes the visible H1,
+  description, and flight/hotel CTAs, so both the image and useful copy exist in
+  initial HTML before `createRoot` mounts. Image dimensions and high fetch priority
+  are explicit; the source-set/preload agreement is build-checked.
+- **Homepage font:** Inter 700 is preloaded only for the English root homepage.
+  `scripts/prerender.ts` does not copy that preload to the other 172 routes.
+- **Travelpayouts 30-day fare trend:** Recharts UI/calculation live in
+  `FlightPriceTrendChart` (~371.9 KB minified / ~109.9 KB gzip) and load only after
+  the visitor activates “View 30-Day Price Trend.” The widget shell remains
+  viewport/interaction-triggered (~83.5 KB / ~20.3 KB gzip).
+- **Non-home views:** all 11 route views use `React.lazy` route-specific chunks.
+  A 47-entry slug/count index remains small and synchronous for URL validation and
+  homepage labels; the ~201.7 KB `content-data` chunk is dynamically imported only
+  for content-backed routes. Blog body text remains its own dynamic dependency.
+
+### Local build evidence (not a Lighthouse score)
+- `npm run lint`, `npm run build`, and `npm run verify:build` pass; all **76**
+  build checks pass.
+- `verify:build` measures **181.6 KB gzip** across the homepage's eager JavaScript
+  files and enforces a **200 KB** ceiling. It also fails if `content-data` appears
+  in the initial script/modulepreload graph, or if hero copy/CTAs, route chunks,
+  font preload scope, or chart deferral regress.
+- Vite still warns about intentionally large on-demand bundles (notably the
+  Recharts chart and Bengali content). That warning is not a build failure.
+- This is not a deployed Core Web Vitals result. Run PSI/Lighthouse on the deployed
+  branch and compare against the baseline; CrUX needs sufficient real-user traffic.

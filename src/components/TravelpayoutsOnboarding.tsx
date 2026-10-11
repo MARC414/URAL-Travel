@@ -282,7 +282,7 @@ export function TravelpayoutsOnboarding() {
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex gap-3 text-xs leading-relaxed text-slate-600">
               <Info size={18} className="text-brand-navy shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold text-slate-850 block mb-1">💡 Professional Tip from the Onboarding Video</span>
+                <span className="font-bold text-text-primary block mb-1">💡 Professional Tip from the Onboarding Video</span>
                 "Join programs that you can recommend authentically to your audience. Add the tools, activate Drive, and just let it do its thing while you focus on writing incredible content!"
               </div>
             </div>
@@ -385,7 +385,7 @@ export function TravelpayoutsOnboarding() {
                           <span className="text-[10px] text-slate-400 font-medium">Score: 9.2/10</span>
                         </div>
                         
-                        <div className="space-y-2 divide-y divide-slate-150">
+                        <div className="space-y-2 divide-y divide-border-faint">
                           {[
                             { name: "1. Thamel Grand Hotel", rating: "9.1/10 (Superb)", price: "BDT 2,200/night", link: "https://aviasales.tpo.li/8saJolX0" },
                             { name: "2. Hotel Shanker Palace", rating: "9.0/10 (Excellent)", price: "BDT 7,500/night", link: "https://aviasales.tpo.li/8saJolX0" },
@@ -584,7 +584,7 @@ export function TravelpayoutsOnboarding() {
                 <div className="space-y-4">
                   <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest block">Expected Annual Referral Income</span>
                   <div className="text-4xl sm:text-5xl font-serif font-black tracking-tight text-white">
-                    ${estimatedAnnualEarnings.toLocaleString()} <span className="text-sm font-sans font-normal text-slate-350">USD</span>
+                    ${estimatedAnnualEarnings.toLocaleString()} <span className="text-sm font-sans font-normal text-slate-300">USD</span>
                   </div>
                   <p className="text-xs text-slate-300 leading-normal">
                     This estimation comprises a one-off <b>${referralCount * baseRewardPerReferral} USD</b> activation bonus (up to $600 per tier), 

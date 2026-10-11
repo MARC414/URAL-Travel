@@ -6,6 +6,7 @@ import {
   TRIP_COSTS_DATA,
   BLOG_DATA,
 } from "../constants";
+import { toIsoDate } from "./schema";
 
 export interface SitemapEntry {
   path: string;
@@ -200,8 +201,9 @@ export function generateSitemap(baseUrl: string = DEFAULT_BASE_URL): SitemapEntr
     path: `/blog/${post.slug}`,
     loc: `${cleanBase}/blog/${post.slug}`,
     title: post.title,
-    subtitle: `${post.category} · ${post.readTime} · Updated ${post.date}`,
+    subtitle: `${post.category} · ${post.readTime} · Published ${post.date}${post.updatedAt ? ` · Updated ${post.updatedAt}` : ""}`,
     category: "Travel Blog & Guides",
+    lastmod: toIsoDate(post.updatedAt || post.date),
     changefreq: "weekly",
     priority: "0.80",
   }));

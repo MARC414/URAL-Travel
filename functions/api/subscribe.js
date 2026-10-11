@@ -6,6 +6,10 @@
 
 const RECIPIENT_EMAIL = "marcwriter2025@gmail.com";
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const ALLOWED_SUBSCRIPTION_INTERESTS = new Set([
+  "Dhaka flight fare-drop alerts",
+  "General URAL travel newsletter",
+]);
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -50,6 +54,20 @@ export async function onRequestPost(context) {
     }
 
     const sourceLabel = String(body.source || body["Signup Placement"] || "Website Newsletter");
+    const requestedInterests = Array.isArray(body.subscriptionInterests)
+      ? body.subscriptionInterests.map((interest) => String(interest).trim())
+      : [];
+    const validInterests = [...new Set(requestedInterests)].filter((interest) =>
+      ALLOWED_SUBSCRIPTION_INTERESTS.has(interest),
+    );
+    const subscriptionInterests = validInterests.length > 0
+      ? validInterests
+      : [
+          sourceLabel.toLowerCase().includes("homepage")
+            ? "Dhaka flight fare-drop alerts"
+            : "General URAL travel newsletter",
+        ];
+    const interestSummary = subscriptionInterests.join(", ");
     const subscriptionId =
       String(body.subscriptionId || body["Subscription ID"] || "") ||
       `URAL-SUB-${Math.floor(100000 + Math.random() * 900000)}`;
@@ -68,12 +86,13 @@ export async function onRequestPost(context) {
       "Subscriber Email": cleanEmail,
       "Subscription ID": subscriptionId,
       "Signup Placement": sourceLabel,
+      "Subscription Interests": interestSummary,
       "Preferred Language": language,
       "Page URL": pageUrl,
       "Timestamp (Dhaka BST)": dhakaTimestamp,
       "Notification Recipient": RECIPIENT_EMAIL,
       _replyto: cleanEmail,
-      _subject: `🔔 New URAL Subscriber: ${cleanEmail} (${sourceLabel})`,
+      _subject: `🔔 New URAL Subscription: ${cleanEmail} (${interestSummary})`,
       _template: "table",
       _captcha: "false",
     };
@@ -118,18 +137,19 @@ export async function onRequestPost(context) {
             from: "URAL Travel Intelligence <alerts@ural-travel.pages.dev>",
             to: [RECIPIENT_EMAIL],
             reply_to: cleanEmail,
-            subject: `🔔 New URAL Subscriber: ${cleanEmail} (${sourceLabel})`,
+            subject: `🔔 New URAL Subscription: ${cleanEmail} (${interestSummary})`,
             html: `
               <div style="font-family: sans-serif; max-width: 560px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
                 <div style="background: #0B192C; color: #ffffff; padding: 18px 24px;">
                   <h2 style="margin: 0; font-size: 18px; color: #F6B73C;">URAL Travel Intelligence — New Subscriber Alert</h2>
                 </div>
                 <div style="padding: 20px 24px; color: #1e293b; font-size: 14px; line-height: 1.6;">
-                  <p>A new visitor has subscribed to URAL Flight Fare Alerts &amp; Travel Intelligence:</p>
+                  <p>A new visitor has subscribed to URAL travel updates:</p>
                   <table style="width: 100%; border-collapse: collapse; margin-top: 12px;">
                     <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Subscriber Email</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${cleanEmail}</td></tr>
                     <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Subscription ID</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${subscriptionId}</td></tr>
                     <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Signup Placement</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${sourceLabel}</td></tr>
+                    <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Subscription Interests</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${interestSummary}</td></tr>
                     <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Preferred Language</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${language}</td></tr>
                     <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Page URL</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${pageUrl}</td></tr>
                     <tr><td style="padding: 8px; font-weight: bold;">Timestamp (Dhaka BST)</td><td style="padding: 8px;">${dhakaTimestamp}</td></tr>
@@ -149,6 +169,7 @@ export async function onRequestPost(context) {
         ok: true,
         subscriptionId,
         subscriberEmail: cleanEmail,
+        subscriptionInterests,
         deliveredTo: RECIPIENT_EMAIL,
         formSubmitDelivered,
         timestamp: dhakaTimestamp,

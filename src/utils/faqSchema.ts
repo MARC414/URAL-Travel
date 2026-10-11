@@ -1,5 +1,3 @@
-import { FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, TRIP_COSTS_DATA, DESTINATIONS_DATA } from "../constants";
-
 export interface FAQItem {
   question: string;
   answer: string;
@@ -21,6 +19,14 @@ export interface FaqPageSchema {
   url?: string;
   name?: string;
   description?: string;
+}
+
+interface RouteFaqEntry {
+  id: string;
+  faqs: FAQItem[];
+  to?: string;
+  city?: string;
+  country?: string;
 }
 
 /**
@@ -286,7 +292,8 @@ export function getFaqSchemaForPage(
   page: "flights" | "hotels" | "visa" | "costs" | "destinations" | "tools" | "contact" | "services" | "sitemap" | "pre-departure",
   parameterId?: string,
   isLanding?: boolean,
-  pageUrl?: string
+  pageUrl?: string,
+  routeItems?: readonly RouteFaqEntry[]
 ): FaqPageSchema | null {
   let faqs: FAQItem[] = [];
   let pageName = "";
@@ -297,9 +304,10 @@ export function getFaqSchemaForPage(
         faqs = LANDING_FLIGHT_FAQS;
         pageName = "Flights from Dhaka - Frequently Asked Questions";
       } else {
-        const route = FLIGHTS_DATA.find((r) => r.id === parameterId) || FLIGHTS_DATA[0];
+        const route = routeItems?.find((r) => r.id === parameterId) || routeItems?.[0];
+        if (!route) return null;
         faqs = route.faqs;
-        pageName = `Dhaka to ${route.to} Flight Guide FAQs`;
+        pageName = `Dhaka to ${route.to ?? "Destination"} Flight Guide FAQs`;
       }
       break;
     }
@@ -309,9 +317,10 @@ export function getFaqSchemaForPage(
         faqs = LANDING_HOTEL_FAQS;
         pageName = "International Hotel Guides for Bangladeshi Travelers FAQs";
       } else {
-        const hotel = HOTELS_DATA.find((h) => h.id === parameterId) || HOTELS_DATA[0];
+        const hotel = routeItems?.find((h) => h.id === parameterId) || routeItems?.[0];
+        if (!hotel) return null;
         faqs = hotel.faqs;
-        pageName = `${hotel.city} Hotels & Neighborhood Guide FAQs`;
+        pageName = `${hotel.city ?? "City"} Hotels & Neighborhood Guide FAQs`;
       }
       break;
     }
@@ -321,9 +330,10 @@ export function getFaqSchemaForPage(
         faqs = LANDING_VISA_FAQS;
         pageName = "Visa Requirements for Bangladeshi Passport Holders FAQs";
       } else {
-        const visa = VISA_DATA.find((v) => v.id === parameterId) || VISA_DATA[0];
+        const visa = routeItems?.find((v) => v.id === parameterId) || routeItems?.[0];
+        if (!visa) return null;
         faqs = visa.faqs;
-        pageName = `${visa.country} Visa Guide for Bangladeshis FAQs`;
+        pageName = `${visa.country ?? "Country"} Visa Guide for Bangladeshis FAQs`;
       }
       break;
     }
@@ -333,9 +343,10 @@ export function getFaqSchemaForPage(
         faqs = LANDING_COST_FAQS;
         pageName = "Trip Budgeting & Costs in BDT FAQs";
       } else {
-        const cost = TRIP_COSTS_DATA.find((c) => c.id === parameterId) || TRIP_COSTS_DATA[0];
+        const cost = routeItems?.find((c) => c.id === parameterId) || routeItems?.[0];
+        if (!cost) return null;
         faqs = cost.faqs;
-        pageName = `${cost.country} Travel Budget & Expenses in BDT FAQs`;
+        pageName = `${cost.country ?? "Country"} Travel Budget & Expenses in BDT FAQs`;
       }
       break;
     }
@@ -345,9 +356,10 @@ export function getFaqSchemaForPage(
         faqs = LANDING_DESTINATION_FAQS;
         pageName = "Popular Outbound Destinations from Bangladesh FAQs";
       } else {
-        const destination = DESTINATIONS_DATA.find((d) => d.id === parameterId) || DESTINATIONS_DATA[0];
+        const destination = routeItems?.find((d) => d.id === parameterId) || routeItems?.[0];
+        if (!destination) return null;
         faqs = destination.faqs;
-        pageName = `${destination.country} Trip Plan & Travel Itinerary FAQs`;
+        pageName = `${destination.country ?? "Country"} Trip Plan & Travel Itinerary FAQs`;
       }
       break;
     }

@@ -19,9 +19,10 @@ export default defineConfig(() => {
       // nothing that is not already published — and maps are only downloaded
       // when DevTools is open, so there is no user-facing cost.
       sourcemap: true,
-      // Route components are already React.lazy'd in App.tsx. What remained in
-      // the entry chunk was React itself plus the content corpus, so this only
-      // handles those two.
+      // Route components are React.lazy'd in App.tsx, and the full content
+      // corpus is imported only when a data-backed route is requested. Keep its
+      // stable chunk name for route-only HTML preloads; the homepage should not
+      // have it in the static module graph.
       //
       // The object form of manualChunks matches a package's *entry* module.
       // main.tsx imports "react-dom/client", which is a different module from
@@ -43,9 +44,9 @@ export default defineConfig(() => {
               }
               return undefined;
             }
-            // constants.ts is ~350 KB of blog/route content. Keeping it out of
-            // the app chunk means editing a component does not invalidate the
-            // content for returning visitors, and vice versa.
+            // constants.ts contains route records; App reaches it only via a
+            // dynamic import on content-backed routes. Keeping a stable chunk
+            // name lets prerender.ts preload it on those routes, never on `/`.
             if (id.includes('src/constants')) {
               return 'content-data';
             }

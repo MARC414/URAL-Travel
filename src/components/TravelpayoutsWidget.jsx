@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useMemo, useId } from 'react';
 import {
   Plane,
+  Globe,
   Search,
   ArrowRightLeft,
   Calendar,
@@ -26,19 +27,11 @@ import {
   MicOff,
   TrendingDown,
 } from 'lucide-react';
-import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-  ReferenceLine,
-} from 'recharts';
 import { AFFILIATE_LINKS, resolvePartnerUrl } from './AffiliatePartners';
 
 const MARKER_ID = '675992';
+
+const FlightPriceTrendChart = React.lazy(() => import('./FlightPriceTrendChart.jsx'));
 const BDT_PER_USD = 120;
 
 const CURRENCY_CONFIG = {
@@ -1116,7 +1109,7 @@ export default function TravelpayoutsWidget({
   const [swapRotation, setSwapRotation] = useState(0);
   const [listeningField, setListeningField] = useState(null); // 'origin' | 'dest' | null
   const [voiceFeedback, setVoiceFeedback] = useState(null); // { type: 'listening' | 'success' | 'error', text: string } | null
-  const [showPriceTrendChart, setShowPriceTrendChart] = useState(true);
+  const [showPriceTrendChart, setShowPriceTrendChart] = useState(false);
   const recognitionRef = useRef(null);
   const [originRemoteSuggestions, setOriginRemoteSuggestions] = useState([]);
   const [destRemoteSuggestions, setDestRemoteSuggestions] = useState([]);
@@ -1742,119 +1735,13 @@ export default function TravelpayoutsWidget({
     return `/travelpayouts-wl.html?origin=${effectiveOrigin.code}&destination=${effectiveDest.code}&flightSearch=${liveFormSearchCode}&currency=${currency}&standalone=1`;
   }, [effectiveOrigin.code, effectiveDest.code, liveFormSearchCode, currency]);
 
-  // 30-Day Historical & Projected Flight Price Trend Data for Recharts LineChart
-  const priceTrend30Days = useMemo(() => {
-    const destCode = (effectiveDest.code || 'KTM').toUpperCase();
-    const origCode = (effectiveOrigin.code || 'DAC').toUpperCase();
-    const routeEntry = ROUTE_DATABASE[destCode];
+  const routeBaseFareBdt = useMemo(() => {
+    const routeEntry = ROUTE_DATABASE[(effectiveDest.code || 'KTM').toUpperCase()];
+    if (!routeEntry?.flights?.length) return undefined;
+    return Math.min(...routeEntry.flights.map((flight) => flight.baseRoundtripBdt));
+  }, [effectiveDest.code]);
 
-    // Base round-trip BDT benchmark by route or region
-    let baseBdt = 34000;
-    if (routeEntry && routeEntry.flights && routeEntry.flights.length > 0) {
-      baseBdt = Math.min(...routeEntry.flights.map((f) => f.baseRoundtripBdt));
-    } else {
-      const globalBaselines = {
-        JED: 68000,
-        MED: 71000,
-        RUH: 64000,
-        DXB: 54000,
-        AUH: 53000,
-        DOH: 56000,
-        SIN: 42000,
-        MLE: 48000,
-        CCU: 16500,
-        DEL: 24500,
-        LHR: 96000,
-        LGW: 92000,
-        MAN: 98000,
-        CDG: 94000,
-        FCO: 91000,
-        IST: 78000,
-        JFK: 128000,
-        YYZ: 134000,
-        SYD: 118000,
-      };
-      const codeSeed =
-        (origCode.charCodeAt(0) + destCode.charCodeAt(0) + destCode.charCodeAt(1)) % 18;
-      baseBdt = globalBaselines[destCode] || 52000 + codeSeed * 2400;
-    }
 
-    const tripMultiplier = tripType === 'oneway' ? 0.58 : 1.0;
-    const cabinMultiplier = cabinClass === 'business' ? 2.35 : 1.0;
-    const paxMultiplier = Math.max(1, passengers);
-    const cfg = CURRENCY_CONFIG[currency] || CURRENCY_CONFIG.BDT;
-
-    const points = [];
-    const today = new Date();
-
-    for (let offset = 1; offset <= 30; offset++) {
-      const d = new Date(today);
-      d.setDate(today.getDate() + offset);
-      const iso = d.toISOString().split('T')[0];
-      const dayOfWeek = d.getDay(); // 0 Sun .. 6 Sat
-      const shortLabel = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-      const weekdayName = d.toLocaleDateString('en-US', { weekday: 'short' });
-
-      // Historical aviation booking curve:
-      // - Last-minute (days 1-5) carries a 14%-22% premium
-      // - Sweet spot booking window (days 13-23) drops 6%-11%
-      // - Tue/Wed departures are historically 5%-7% cheaper; Thu/Fri/Sun carry weekend demand surge
-      let advanceFactor = 1.0;
-      if (offset <= 4) advanceFactor = 1.19 - offset * 0.02;
-      else if (offset <= 10) advanceFactor = 1.06 - (offset - 4) * 0.01;
-      else if (offset >= 13 && offset <= 23) advanceFactor = 0.92 + ((offset % 3) * 0.012);
-      else advanceFactor = 0.97 + ((offset % 4) * 0.015);
-
-      const dowFactor =
-        dayOfWeek === 2 || dayOfWeek === 3
-          ? 0.94 // Tue / Wed lowest
-          : dayOfWeek === 4 || dayOfWeek === 5
-          ? 1.07 // Thu / Fri weekend surge
-          : dayOfWeek === 0
-          ? 1.04
-          : 0.99;
-
-      const wave = Math.sin((offset + destCode.charCodeAt(0)) * 0.65) * 0.025;
-      const bdtFare = Math.round(
-        (baseBdt * tripMultiplier * cabinMultiplier * paxMultiplier * (advanceFactor * dowFactor + wave)) /
-          100
-      ) * 100;
-
-      const convertedFare = Math.round(bdtFare * cfg.rateFromBdt);
-
-      points.push({
-        dayOffset: offset,
-        isoDate: iso,
-        dateLabel: shortLabel,
-        weekday: weekdayName,
-        price: convertedFare,
-        bdtPrice: bdtFare,
-        formattedPrice: `${cfg.symbol}${convertedFare.toLocaleString()} ${cfg.code}`,
-      });
-    }
-
-    const lowestPoint = points.reduce((min, p) => (p.price < min.price ? p : min), points[0]);
-    const highestPoint = points.reduce((max, p) => (p.price > max.price ? p : max), points[0]);
-    const avgPrice = Math.round(points.reduce((sum, p) => sum + p.price, 0) / points.length);
-    const potentialSavings = Math.max(0, avgPrice - lowestPoint.price);
-
-    return {
-      points,
-      lowestPoint,
-      highestPoint,
-      avgPrice,
-      potentialSavings,
-      currencySymbol: cfg.symbol,
-      currencyCode: cfg.code,
-    };
-  }, [
-    effectiveOrigin.code,
-    effectiveDest.code,
-    tripType,
-    cabinClass,
-    passengers,
-    currency,
-  ]);
 
   const formatMoney = (bdtAmount) => {
     const cfg = CURRENCY_CONFIG[currency] || CURRENCY_CONFIG.BDT;
@@ -1870,10 +1757,10 @@ export default function TravelpayoutsWidget({
   };
 
   return (
-    <div
-      ref={formWrapperRef}
-      className="w-full overflow-visible rounded-2xl bg-white shadow-[0_14px_34px_-10px_rgba(11,25,44,0.16)] border border-slate-200/90 text-slate-900"
-    >
+    <div ref={formWrapperRef} className="w-full space-y-5 sm:space-y-6">
+      {/* Keep the branded frame around the search controls only; insights below are peer cards. */}
+      <div className="overflow-visible rounded-3xl border border-slate-800/90 bg-gradient-to-b from-brand-navy to-[#081322] p-1.5 shadow-xl sm:p-3">
+        <div className="w-full overflow-visible rounded-2xl border border-slate-200/90 bg-white text-slate-900 shadow-[0_14px_34px_-10px_rgba(11,25,44,0.16)]">
       {/* ONE CARD, ONE JOB: UNIFIED SKYSCANNER-GRADE WHITE-LABEL FLIGHT SEARCH BAR */}
       <form
         onSubmit={handleFormSubmit}
@@ -2046,10 +1933,10 @@ export default function TravelpayoutsWidget({
           </div>
         </div>
 
-        {/* ROW 2: UNIFIED INSET FIELD STRIP + PRIMARY GOLD SUBMIT CTA */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch">
+        {/* ROW 2: FULL-WIDTH ROUTE/DATE STRIP WITH PRIMARY CTA BELOW IT */}
+        <div className="space-y-4 sm:space-y-5">
           {/* Unified Inset Field Strip (From ↔ To + Departure + Return) */}
-          <div className="lg:col-span-10 grid grid-cols-1 md:grid-cols-12 rounded-2xl border border-slate-200 bg-white shadow-[0_2px_12px_-3px_rgba(11,25,44,0.07)] divide-y md:divide-y-0 md:divide-x divide-slate-200/90 overflow-visible">
+          <div className="grid grid-cols-1 md:grid-cols-12 rounded-2xl border border-slate-200 bg-white shadow-[0_2px_12px_-3px_rgba(11,25,44,0.07)] divide-y md:divide-y-0 md:divide-x divide-slate-200/90 overflow-visible">
             {/* FROM CELL */}
             <div className="md:col-span-4 relative">
               <div
@@ -2408,8 +2295,7 @@ export default function TravelpayoutsWidget({
             </div>
           </div>
 
-          {/* PRIMARY GOLD SUBMIT BUTTON: Opens URAL White-Label Search strictly in New Tab */}
-          <div className="lg:col-span-2 flex">
+          {/* Primary action spans the complete width of the search card. */}
             <a
               href={liveFormUralWlUrl}
               target="_blank"
@@ -2426,7 +2312,7 @@ export default function TravelpayoutsWidget({
                 }
                 setActiveDropdown(null);
               }}
-              className="w-full min-h-[56px] lg:min-h-[68px] bg-[#F6B73C] hover:bg-[#f5ad24] active:scale-[0.99] text-brand-navy rounded-2xl shadow-[0_10px_22px_-5px_rgba(246,183,60,0.55)] hover:shadow-[0_14px_28px_-5px_rgba(246,183,60,0.75)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer px-4 text-center group"
+              className="group flex min-h-[58px] w-full cursor-pointer flex-col items-center justify-center gap-0.5 rounded-2xl bg-[#F6B73C] px-5 py-3 text-center text-brand-navy shadow-[0_8px_20px_-7px_rgba(246,183,60,0.75)] transition-colors hover:bg-[#f5ad24] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy focus-visible:ring-offset-2 sm:min-h-[62px] sm:flex-row sm:gap-3"
             >
               <div className="flex items-center gap-1.5 font-black text-base tracking-tight">
                 <Search size={17} className="shrink-0 stroke-[2.5]" />
@@ -2440,7 +2326,6 @@ export default function TravelpayoutsWidget({
                 {effectiveOrigin.code} → {effectiveDest.code} · {currency}
               </span>
             </a>
-          </div>
         </div>
 
         {/* LIVE VOICE DICTATION STATUS FEEDBACK PILL + QUICK VOICE ROUTE PRESETS */}
@@ -2491,302 +2376,41 @@ export default function TravelpayoutsWidget({
           </div>
         )}
 
-        {/* ROW 3: 8 QUICK-SELECT POPULAR GLOBAL HUB CHIPS (40px+ Touch Targets) */}
+        {/* Popular route shortcuts stay close to the search controls. */}
         {showQuickRoutes && (
-          <div className="mt-4 pt-3.5 border-t border-slate-100 space-y-4">
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 shrink-0 mr-0.5">
-                  {isBn ? 'জনপ্রিয় রুট:' : 'Popular Hubs:'}
-                </span>
-                {POPULAR_ROUTES.map((route) => {
-                  const isSelected =
-                    originInfo.code === route.origin && destInfo.code === route.destination;
-                  return (
-                    <button
-                      key={`${route.origin}-${route.destination}`}
-                      type="button"
-                      onClick={() => handleQuickRouteSelect(route)}
-                      className={`min-h-[40px] shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
+          <div className="mt-5 border-t border-slate-100 pt-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="mr-1 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                {isBn ? 'জনপ্রিয় রুট:' : 'Popular Hubs:'}
+              </span>
+              {POPULAR_ROUTES.map((route) => {
+                const isSelected =
+                  originInfo.code === route.origin && destInfo.code === route.destination;
+                return (
+                  <button
+                    key={`${route.origin}-${route.destination}`}
+                    type="button"
+                    onClick={() => handleQuickRouteSelect(route)}
+                    className={`inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-xl border px-3.5 py-2 text-xs font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
+                      isSelected
+                        ? 'border-brand-navy bg-brand-navy text-[#F6B73C] shadow-xs'
+                        : 'border-slate-200/90 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100'
+                    }`}
+                  >
+                    <span aria-hidden="true">{route.flag}</span>
+                    <span>{route.label}</span>
+                    <span
+                      className={`rounded px-1.5 py-0.5 font-mono text-[10px] ${
                         isSelected
-                          ? 'bg-brand-navy text-[#F6B73C] border-brand-navy shadow-xs'
-                          : 'bg-slate-50 text-slate-700 border-slate-200/90 hover:bg-slate-100 hover:border-slate-300'
+                          ? 'bg-white/15 text-[#F6B73C]'
+                          : 'bg-slate-200/70 text-slate-600'
                       }`}
                     >
-                      <span>{route.flag}</span>
-                      <span>{route.label}</span>
-                      <span
-                        className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                          isSelected
-                            ? 'bg-white/15 text-[#F6B73C]'
-                            : 'bg-slate-200/70 text-slate-600'
-                        }`}
-                      >
-                        {route.destination}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setShowPriceTrendChart((v) => !v)}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy bg-slate-100 hover:bg-slate-200/80 px-3 py-2 rounded-xl transition-colors cursor-pointer shrink-0"
-              >
-                <TrendingDown size={14} className="text-emerald-600" />
-                <span>
-                  {showPriceTrendChart
-                    ? isBn
-                      ? '৩০ দিনের ভাড়ার চার্ট লুকান'
-                      : 'Hide 30-Day Price Trend'
-                    : isBn
-                    ? '৩০ দিনের ভাড়ার চার্ট দেখুন'
-                    : 'View 30-Day Price Trend'}
-                </span>
-              </button>
-            </div>
-
-            {/* 30-DAY FLIGHT PRICE TREND LINE CHART (RECHARTS) */}
-            {showPriceTrendChart && (
-              <div
-                id="flight-price-trend-30d"
-                className="bg-slate-50/90 border border-slate-200/90 rounded-2xl p-4 sm:p-5 space-y-3.5"
-              >
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-                  <div className="space-y-0.5">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold uppercase tracking-wider bg-brand-navy text-[#F6B73C] px-2.5 py-0.5 rounded-full">
-                        <TrendingDown size={11} />
-                        {isBn ? '৩০-দিনের ফ্লাইট ভাড়ার প্রবণতা' : '30-Day Historical Fare Trend'}
-                      </span>
-                      <span className="text-xs font-extrabold text-slate-900">
-                        {effectiveOrigin.city} ({effectiveOrigin.code}) → {effectiveDest.city} (
-                        {effectiveDest.code})
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-slate-500">
-                      {isBn
-                        ? 'যেকোনো তারিখের বিন্দুতে ক্লিক করে সরাসরি সেই দিনের ফ্লাইট সার্চ করুন (মঙ্গল ও বুধবার সাধারণত ভাড়া কম থাকে)।'
-                        : 'Click any point on the 30-day curve to set your departure date to that lowest-fare booking window.'}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-2 shrink-0">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const bestIso = priceTrend30Days.lowestPoint.isoDate;
-                        setDepartDate(bestIso);
-                        if (returnDate && bestIso > returnDate) {
-                          setReturnDate(bestIso);
-                        }
-                      }}
-                      className="inline-flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-900 px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer"
-                      title="Click to apply lowest-fare date"
-                    >
-                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                      <span>
-                        {isBn ? 'সেরা বুকিং দিন:' : 'Best Booking Window:'}{' '}
-                        {priceTrend30Days.lowestPoint.dateLabel} (
-                        {priceTrend30Days.lowestPoint.weekday}) ·{' '}
-                        {priceTrend30Days.lowestPoint.formattedPrice}
-                      </span>
-                    </button>
-                    <div className="bg-white border border-slate-200 px-3 py-1.5 rounded-xl text-[11px] font-mono font-semibold text-slate-600">
-                      {isBn ? '৩০-দিনের গড়:' : '30d Avg:'}{' '}
-                      <span className="font-bold text-slate-900">
-                        {priceTrend30Days.currencySymbol}
-                        {priceTrend30Days.avgPrice.toLocaleString()}{' '}
-                        {priceTrend30Days.currencyCode}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="h-[190px] w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart
-                      data={priceTrend30Days.points}
-                      margin={{ top: 8, right: 14, left: 4, bottom: 4 }}
-                      onClick={(chartState) => {
-                        const clickedIso = chartState?.activePayload?.[0]?.payload?.isoDate;
-                        if (clickedIso) {
-                          setDepartDate(clickedIso);
-                          if (returnDate && clickedIso > returnDate) {
-                            setReturnDate(clickedIso);
-                          }
-                        }
-                      }}
-                    >
-                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
-                      <XAxis
-                        dataKey="dateLabel"
-                        tick={{ fontSize: 10, fill: '#64748b' }}
-                        tickLine={false}
-                        axisLine={{ stroke: '#cbd5e1' }}
-                        interval={3}
-                      />
-                      <YAxis
-                        tick={{ fontSize: 10, fill: '#64748b' }}
-                        tickLine={false}
-                        axisLine={false}
-                        width={60}
-                        domain={['dataMin - 500', 'dataMax + 500']}
-                        tickFormatter={(val) =>
-                          `${priceTrend30Days.currencySymbol}${
-                            val >= 1000 ? `${(val / 1000).toFixed(0)}k` : val
-                          }`
-                        }
-                      />
-                      <Tooltip
-                        cursor={{ stroke: '#F6B73C', strokeWidth: 2 }}
-                        content={({ active, payload }) => {
-                          if (!active || !payload || !payload.length) return null;
-                          const item = payload[0].payload;
-                          const isLowest =
-                            item.isoDate === priceTrend30Days.lowestPoint.isoDate;
-                          return (
-                            <div className="bg-brand-navy text-white px-3 py-2 rounded-xl shadow-xl border border-slate-700 text-xs space-y-0.5">
-                              <div className="font-mono text-[10px] text-[#F6B73C] uppercase font-bold">
-                                {item.weekday}, {item.dateLabel}{' '}
-                                {isLowest ? '· ★ Best Booking Window' : ''}
-                              </div>
-                              <div className="font-black text-sm tabular-nums">
-                                {item.formattedPrice}
-                              </div>
-                              <div className="text-[10px] text-slate-300">
-                                {isBn
-                                  ? 'তারিখটি সিলেক্ট করতে ক্লিক করুন'
-                                  : 'Click point to select this departure date'}
-                              </div>
-                            </div>
-                          );
-                        }}
-                      />
-                      <ReferenceLine
-                        y={priceTrend30Days.avgPrice}
-                        stroke="#94a3b8"
-                        strokeDasharray="4 4"
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="price"
-                        stroke="#0B192C"
-                        strokeWidth={2.5}
-                        dot={(dotProps) => {
-                          const { cx, cy, payload } = dotProps;
-                          if (payload.isoDate === priceTrend30Days.lowestPoint.isoDate) {
-                            return (
-                              <circle
-                                key={`dot-${payload.isoDate}`}
-                                cx={cx}
-                                cy={cy}
-                                r={5.5}
-                                fill="#10b981"
-                                stroke="#ffffff"
-                                strokeWidth={2}
-                              />
-                            );
-                          }
-                          if (payload.isoDate === departDate) {
-                            return (
-                              <circle
-                                key={`dot-${payload.isoDate}`}
-                                cx={cx}
-                                cy={cy}
-                                r={5}
-                                fill="#F6B73C"
-                                stroke="#0B192C"
-                                strokeWidth={2}
-                              />
-                            );
-                          }
-                          return (
-                            <circle
-                              key={`dot-${payload.isoDate}`}
-                              cx={cx}
-                              cy={cy}
-                              r={2.5}
-                              fill="#0B192C"
-                            />
-                          );
-                        }}
-                        activeDot={{
-                          r: 6,
-                          fill: '#F6B73C',
-                          stroke: '#0B192C',
-                          strokeWidth: 2,
-                        }}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-            )}
-
-            {/* ROW 4: TRUST MICROCOPY & QUIET SECONDARY FOOTER */}
-            <div className="pt-2.5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-slate-500">
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                <span className="inline-flex items-center gap-1 font-medium text-slate-600">
-                  <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
-                  {isBn
-                    ? '৭২০+ এয়ারলাইন্স ও ট্রাভেল এজেন্সি সরাসরি তুলনা'
-                    : '720+ Global Airlines & OTAs Compared Live'}
-                </span>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 shrink-0">
-                {onOpenPriceAlert && (
-                  <button
-                    type="button"
-                    onClick={() => onOpenPriceAlert(effectiveDest.city)}
-                    className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 transition-colors cursor-pointer"
-                  >
-                    <Bell size={12} className="text-[#F6B73C]" />
-                    <span>{isBn ? 'ভাড়া কমার অ্যালার্ট' : 'Track Fare Drops'}</span>
+                      {route.destination}
+                    </span>
                   </button>
-                )}
-                <a
-                  href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="font-semibold text-brand-navy hover:text-emerald-700 inline-flex items-center gap-1 transition-colors"
-                >
-                  <span>
-                    {isBn
-                      ? `${effectiveDest.city} হোটেল ও ট্যুর (Klook)`
-                      : `${effectiveDest.city} Hotels & Tours (Klook)`}
-                  </span>
-                  <ExternalLink size={11} />
-                </a>
-                <a
-                  href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="font-semibold text-brand-navy hover:text-emerald-700 inline-flex items-center gap-1 transition-colors"
-                >
-                  <span>
-                    {isBn
-                      ? 'অল-ইনক্লুসিভ সিটি পাস (Go City)'
-                      : 'All-Inclusive City Pass (Go City)'}
-                  </span>
-                  <ExternalLink size={11} />
-                </a>
-                <a
-                  href={resolvePartnerUrl(AFFILIATE_LINKS.kiwi)}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="font-semibold text-brand-navy hover:text-emerald-700 inline-flex items-center gap-1 transition-colors"
-                >
-                  <span>
-                    {isBn
-                      ? 'মাল্টি-সিটি / ওপেন-জ (Kiwi.com)'
-                      : 'Multi-City / Open-Jaw (Kiwi.com)'}
-                  </span>
-                  <ExternalLink size={11} />
-                </a>
-              </div>
+                );
+              })}
             </div>
           </div>
         )}
@@ -3351,6 +2975,190 @@ export default function TravelpayoutsWidget({
           </div>
         )}
       </div>
+      )}
+        </div>
+      </div>
+
+      {showQuickRoutes && (
+        <div className="grid grid-cols-1 gap-5 sm:gap-6 lg:grid-cols-5">
+          <section
+            aria-labelledby={`${instanceId}-price-trend-title`}
+            className="relative overflow-hidden rounded-2xl border border-amber-200/80 bg-gradient-to-br from-white via-white to-amber-50/70 p-5 shadow-sm sm:p-6 lg:col-span-3"
+          >
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full bg-[#F6B73C]/10 blur-2xl"
+            />
+            <div className="relative flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
+                    <TrendingDown size={17} aria-hidden="true" />
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
+                    {isBn ? 'আনুমানিক ভাড়া পূর্বাভাস' : 'Indicative fare outlook'}
+                  </span>
+                </div>
+                <h3
+                  id={`${instanceId}-price-trend-title`}
+                  className="mt-3 font-serif text-xl font-black tracking-tight text-slate-900 sm:text-2xl"
+                >
+                  {isBn ? '৩০ দিনের ফ্লাইট ভাড়ার ট্রেন্ড' : '30-Day Flight Price Trend'}
+                </h3>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">
+                  {isBn
+                    ? 'আপনার নির্বাচিত রুটের আনুমানিক ভাড়ার ধারা দেখুন। চার্টে একটি তারিখ বেছে নিলে যাত্রার তারিখ আপডেট হবে।'
+                    : 'Explore an indicative fare pattern for your selected route. Choose a date in the chart to update your departure.'}
+                </p>
+              </div>
+              <span className="inline-flex min-h-8 shrink-0 items-center gap-1.5 self-start rounded-full border border-slate-200 bg-white/85 px-3 py-1 font-mono text-[11px] font-bold text-brand-navy">
+                {effectiveOrigin.code}
+                <ArrowRight size={12} aria-hidden="true" />
+                {effectiveDest.code}
+                <span className="ml-1 border-l border-slate-200 pl-2 text-slate-500">{currency}</span>
+              </span>
+            </div>
+
+            <button
+              type="button"
+              aria-expanded={showPriceTrendChart}
+              aria-controls={`${instanceId}-price-trend-chart`}
+              onClick={() => setShowPriceTrendChart((visible) => !visible)}
+              className="relative mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-brand-navy/15 bg-white px-4 py-3 text-sm font-bold text-brand-navy shadow-sm transition-colors hover:border-brand-navy/30 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 sm:w-auto sm:min-w-[240px]"
+            >
+              <TrendingDown size={16} className="text-emerald-700" aria-hidden="true" />
+              <span>
+                {showPriceTrendChart
+                  ? isBn ? '৩০ দিনের চার্ট লুকান' : 'Hide 30-Day Price Trend'
+                  : isBn ? '৩০ দিনের ভাড়ার ট্রেন্ড দেখুন' : 'View 30-Day Price Trend'}
+              </span>
+              <ArrowRight
+                size={15}
+                className={`transition-transform ${showPriceTrendChart ? 'rotate-90' : ''}`}
+                aria-hidden="true"
+              />
+            </button>
+
+            {showPriceTrendChart && (
+              <div id={`${instanceId}-price-trend-chart`} className="relative mt-5 min-h-[250px]">
+                <React.Suspense
+                  fallback={
+                    <div
+                      className="h-[250px] rounded-2xl border border-slate-200 bg-white/80"
+                      role="status"
+                      aria-label={isBn ? 'চার্ট লোড হচ্ছে' : 'Loading fare trend chart'}
+                    />
+                  }
+                >
+                  <FlightPriceTrendChart
+                    origin={effectiveOrigin}
+                    destination={effectiveDest}
+                    routeBaseFareBdt={routeBaseFareBdt}
+                    currencyConfig={CURRENCY_CONFIG}
+                    currency={currency}
+                    tripType={tripType}
+                    cabinClass={cabinClass}
+                    passengers={passengers}
+                    departDate={departDate}
+                    isBn={isBn}
+                    onSelectDate={(isoDate) => {
+                      setDepartDate(isoDate);
+                      if (returnDate && isoDate > returnDate) setReturnDate(isoDate);
+                    }}
+                  />
+                </React.Suspense>
+              </div>
+            )}
+          </section>
+
+          <section
+            aria-labelledby={`${instanceId}-airline-coverage-title`}
+            className="relative overflow-hidden rounded-2xl bg-brand-navy p-5 text-white shadow-sm sm:p-6 lg:col-span-2"
+          >
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-12 -top-16 h-44 w-44 rounded-full border-[24px] border-white/[0.04]"
+            />
+            <div className="relative">
+              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300">
+                <Globe size={15} className="text-[#F6B73C]" aria-hidden="true" />
+                <span>{isBn ? 'বিস্তৃত ফ্লাইট তুলনা' : 'Global flight comparison'}</span>
+              </div>
+              <h3
+                id={`${instanceId}-airline-coverage-title`}
+                className="mt-4 text-lg font-bold leading-snug text-white"
+              >
+                <span className="mb-1 block font-mono text-4xl font-black leading-none tracking-tight text-[#F6B73C] sm:text-5xl">
+                  {isBn ? '৭২০+' : '720+'}
+                </span>
+                <span>
+                  {isBn
+                    ? 'এয়ারলাইন্স ও ট্রাভেল এজেন্সি সরাসরি তুলনা'
+                    : 'Global Airlines & OTAs Compared Live'}
+                </span>
+              </h3>
+              <p className="mt-3 text-xs leading-relaxed text-slate-300">
+                {isBn
+                  ? 'আপনার নির্বাচিত রুটের জন্য ফ্লাইট অপশন তুলনা করুন।'
+                  : 'Compare flight options for the route you selected above.'}
+              </p>
+
+              <div className="mt-5 space-y-3 border-t border-white/15 pt-4">
+                {onOpenPriceAlert && (
+                  <button
+                    type="button"
+                    onClick={() => onOpenPriceAlert(effectiveDest.city)}
+                    className="inline-flex min-h-10 items-center gap-2 rounded-lg text-xs font-semibold text-white transition-colors hover:text-[#F6B73C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+                  >
+                    <Bell size={14} className="text-[#F6B73C]" aria-hidden="true" />
+                    <span>{isBn ? 'ভাড়া কমার অ্যালার্ট' : 'Track Fare Drops'}</span>
+                  </button>
+                )}
+                <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px]">
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex min-h-8 items-center gap-1 text-slate-200 transition-colors hover:text-white"
+                  >
+                    <span>
+                      {isBn
+                        ? `${effectiveDest.city} হোটেল ও ট্যুর (Klook)`
+                        : `${effectiveDest.city} Hotels & Tours (Klook)`}
+                    </span>
+                    <ExternalLink size={11} aria-hidden="true" />
+                  </a>
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex min-h-8 items-center gap-1 text-slate-200 transition-colors hover:text-white"
+                  >
+                    <span>
+                      {isBn
+                        ? 'অল-ইনক্লুসিভ সিটি পাস (Go City)'
+                        : 'All-Inclusive City Pass (Go City)'}
+                    </span>
+                    <ExternalLink size={11} aria-hidden="true" />
+                  </a>
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.kiwi)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex min-h-8 items-center gap-1 text-slate-200 transition-colors hover:text-white"
+                  >
+                    <span>
+                      {isBn
+                        ? 'মাল্টি-সিটি / ওপেন-জ (Kiwi.com)'
+                        : 'Multi-City / Open-Jaw (Kiwi.com)'}
+                    </span>
+                    <ExternalLink size={11} aria-hidden="true" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       )}
     </div>
   );

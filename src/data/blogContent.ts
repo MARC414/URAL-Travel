@@ -1,11 +1,11 @@
 /**
  * Long-form English blog bodies, split out of `src/constants.ts`.
  *
- * WHY THIS FILE EXISTS: `constants.ts` is imported eagerly by the app shell, so
- * every page used to download all ~161 KB of article text even though only the
- * 43 blog routes render it. Moving the bodies here lets App.tsx `import()` them
- * on blog sections only, which takes ~60 KB (gzip) off the initial load of every
- * other page without changing a single byte of the rendered text.
+ * WHY THIS FILE EXISTS: Long-form post bodies are much larger than the compact
+ * metadata needed for blog listings and route lookup. App.tsx `import()`s this
+ * module only on blog sections; post metadata is itself loaded in the
+ * `content-data` route chunk, never as a homepage static dependency. This keeps
+ * all article prose off the initial homepage path without changing rendered text.
  *
  * HOW THE SEO CONTRACT IS KEPT: `scripts/prerender.ts` imports this module
  * STATICALLY (it runs in Node, so code-splitting does not apply) and keeps
@@ -39,11 +39,11 @@ Many local banks in Bangladesh (like EBL, SCB, City Bank, Mutual Trust Bank) run
   "nepal-vs-thailand-first-trip": `Choosing your very first international travel destination can feel daunting to Bangladeshi passport holders. Should you pick the high-altitude peaks of Nepal or the modern beaches and shopping plazas of Thailand? Here is our comparison to help you choose:
 
 1. THE VISA CHALLENGE: ADVANTAGE NEPAL
-For first-time travelers lacking extensive travel histories, the physical visa application process at Thailand consulates causes immense anxiety. Thailand requires pre-arranged sticker applications, 6-month bank statements, and professional NOCs. Rejections can occur for incomplete paperwork.
-Nepal, conversely, offer an instant Visa on Arrival for Bangladeshi citizens. Better still, your first tourist entry in a calendar year is fully free (gratis). If you want a quick, spontaneous getaway, Nepal is the absolute winner.
+For Bangladeshi applicants, Thailand's tourist visa must be arranged before travel. Applications use Thailand's official e-Visa portal, and approved applicants receive an e-Visa confirmation by email. Check the current Royal Thai Embassy, Dhaka instructions for the exact documents, fees, and processing time; approval is not guaranteed. Older sticker-only and visa-application-centre instructions may no longer describe the online process.
+Nepal's Department of Immigration lists visa on arrival and a gratis tourist visa of up to 30 days for eligible SAARC nationals (except Afghanistan) on a first visit in a visa year. Bangladesh is a SAARC member, but check the latest eligibility, entry, and fee rules before departure.
 
 2. TOTAL FINANCIAL COST: ADVANTAGE NEPAL
-Nepal is extremely friendly to budget backpackers. Local meals, heritage tickets, and inner-city ride-hailing (via Pathao) represent about half the price of Thailand services. A comfortable 5-day stay in Kathmandu/Pokhara runs around BDT 45k-65k (flights included). A Thailand trip with moderate shopping easily hits BDT 80k+.
+Nepal is extremely friendly to budget backpackers. Local meals, heritage tickets, and inner-city ride-hailing (via Pathao) are generally less expensive than comparable Thailand services. As an indicative planning range, a comfortable 5-day stay in Kathmandu/Pokhara runs around BDT 45k-65k (flights included); a Thailand trip with moderate shopping can reach BDT 80k+. Live airfare, accommodation, exchange rates, and travel dates can change these totals, so check current prices before booking.
 
 3. SHOPPING & ULTRA-MODERN COMFORT: ADVANTAGE THAILAND
 If your primary travel motivation involves purchasing high-quality apparel, kids' toys, electronics, and cosmetics, Bangkok is unparalleled. From Platinum Fashion Mall to high-street Siam centers, Thailand is a retail paradise. Nepal has amazing trekking gear and handmade crafts, but cannot match Thailand's retail hubs.
@@ -52,8 +52,8 @@ If your primary travel motivation involves purchasing high-quality apparel, kids
 Bangkok boasts superior, air-conditioned BTS Skytrains and underground MRT subways that leap over traffic congestion. Kathmandu's roads are often dusty and under-construction, making road travel slower. However, Kathmandu's smaller size means tourist points are closely clustered, and Pokhara lakeside is walkable.
 
 SUMMARY ADVICE
-- Pick Nepal if: You are traveling with friends, seek mountain vistas, desire effortless entry, or are on a strict budget.
-- Pick Thailand if: You are traveling with family, desire great retail shopping, crave street food culture, and can manage visa paperwork in advance.`,
+- Pick Nepal if: You are traveling with friends, seek mountain vistas, prefer a simpler entry process (after checking current rules), or are on a strict budget.
+- Pick Thailand if: You are traveling with family, desire great retail shopping, crave street food culture, and can arrange an advance visa.`,
   "hotel-savings-guide-bangkok-kl-dubai": `Finding affordable accommodation in major tourist destinations does not mean sacrificing safety or hygiene. Here are the smartest tactics utilized by seasoned Bangladeshi outbound travelers to lock down high-value hotel stays.
 
 1. SEGREGATE BY METRO PROXIMITY
@@ -826,35 +826,33 @@ Whenever you tap your Bangladeshi Visa, Mastercard, or Amex card at a hotel, mal
 - **🇹🇭 Thailand (Bangkok, Pattaya, Phuket):** Carry **crisp, post-2017 $100 USD bills** (no ink stamps, folds, or pinholes!). Exchange only $20–$30 at Suvarnabhumi Airport basement (near Airport Rail Link **SuperRich** booth) and exchange the rest at **SuperRich Thailand (Green or Orange) in Pratunam / Ratchadamri** for the best THB rates in Asia.
 - **🇲🇾 Malaysia (Kuala Lumpur & Putrajaya):** Tap your **Dual-Currency Card** at malls/Grab, and exchange crisp **$100 USD bills** at licensed money changers inside **Mid Valley Megamall, Pavilion Bukit Bintang, or Masjid India** (avoid airport booths which charge 6% worse rates).
 - **🇲🇻 Maldives (Malé & Maafushi) & 🇳🇵 Nepal (Kathmandu):** In the Maldives, guesthouses, $25 speedboats, and $30 snorkeling tours accept **cash USD directly** (bring clean post-2013 $50/$100 bills). In Nepal, exchange USD in **Thamel** or tap your card at hotels.`,
-  "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": `Thailand is one of Bangladesh's top destinations for family vacations, Pratunam wholesale shopping, Phuket beach getaways, and world-class medical checkups at **Bumrungrad International Hospital and Bangkok Hospital**. With the **Royal Thai Embassy Dhaka** operating via the official **Thai e-Visa portal (thaievisa.go.th)**, you keep your physical passport in hand throughout the entire process and receive a printable PDF e-Visa by email. Follow these verified rules to ensure 100% first-time approval.
+  "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": `Thailand is a popular choice for family holidays, Pratunam shopping, Phuket beaches, and medical travel. Bangladeshi applicants use Thailand's official **e-Visa portal (thaievisa.go.th)**; the Ministry of Foreign Affairs says applications are submitted online and an approved e-Visa confirmation is sent by email. Applicants do not submit passports and supporting papers in person through the current portal flow. Every application remains subject to approval, so no checklist can guarantee a visa.
 
-1. THAILAND OFFICIAL E-VISA (THAIEVISA.GO.TH) CORE FACTS FOR BANGLADESHIS
-Verified against the **Ministry of Foreign Affairs of the Kingdom of Thailand (thaievisa.go.th)** and **Royal Thai Embassy Dhaka (dhaka.thaiembassy.org)**:
-- **Visa Type:** Single-Entry Tourist Visa (**TR**) — valid for 90 days from issue, permitting up to **60 days of stay** in Thailand.
-- **Official Processing Time:** Typically **5 to 10 working days** (apply at least 3 weeks before your planned Dhaka–Bangkok flight).
-- **Minimum Required Bank Balance:** Equivalent to **THB 20,000 per individual applicant (~BDT 65,000 – BDT 70,000 minimum)** or **THB 40,000 per family (~BDT 1,35,000+)**. *Pro Tip: For smooth approval in Dhaka, maintain a healthy closing balance of **BDT 1,20,000+ per person (or BDT 2,50,000+ for a family)** with steady 6-month transactions.*
+1. THAILAND OFFICIAL E-VISA: ROUTE, TIMING & FINANCIAL EVIDENCE
+Start with the live **Thai e-Visa portal** and select the correct mission for your application. The portal directs applicants to the relevant embassy or consulate for mission-specific requirements.
+- **Visa category:** The portal lists the single-entry Tourist Visa (**TR**) with a 3-month validity period. Check the approved e-Visa for its entry window and permitted stay before booking or travel.
+- **Processing time:** There is no guaranteed decision time for every application. Submit well in advance, monitor email and the application dashboard, and follow any additional-document request from the Royal Thai Embassy, Dhaka.
+- **Financial evidence:** The Ministry's general Tourist Visa page lists financial evidence of at least **THB 20,000**, with examples including bank statements for the last three months or a sponsorship letter. The Embassy Dhaka's public TR checklist—last updated **November 30, 2022**—lists a six-month bank statement, a solvency certificate, and **BDT 60,000 per person or BDT 120,000 per family**. These pages differ in age and detail; confirm the current Dhaka-specific checklist in the portal before relying on a threshold. A balance alone does not guarantee approval.
 
-2. EXACT DOCUMENT UPLOAD CHECKLIST (PDF & JPEG SPECIFICATIONS)
-Every document uploaded on **thaievisa.go.th** must be crystal-clear and in English:
-Step 1: Passport Bio-Page & Travel History PDF:
-- High-resolution color scan of your **Passport Bio-Data Page** (valid for at least 6 months).
-- Separate combined PDF showing all **previous visa stickers and arrival/departure stamps** (from your current and old passports).
-Step 2: Recent Biometric Photograph (JPEG):
-- Taken within the last 6 months (40mm x 60mm / standard passport ratio), plain white background, no glasses, and **never reuse the exact photo printed on your passport bio-page**.
-Step 3: 6-Month Bank Statement + Bank Solvency Certificate:
-- Official 6-month statement stamped and signed by your bank within the last 7–10 days, accompanied by a **Bank Solvency Certificate** (and Trade License + Company Bank Statement if you are a business owner).
-Step 4: Occupational Proof (NOC / GO / Trade License / Student ID):
-- **Private Job Holders:** Original **No Objection Certificate (NOC)** on company letterhead with HR contact details + Office ID card + 3 months' salary slips.
-- **Business Owners:** Notarized English translation of your renewed **Trade License** + Company Letterhead cover letter.
-- **Government Staff:** Official **Government Order (GO)**.
-- **Medical Visitors:** Appointment confirmation letter from **Bumrungrad, Bangkok Hospital, or Samitivej** alongside your tourist/medical application.
-Step 5: Confirmed Roundtrip Air Ticket & Paid/Verifiable Hotel Booking:
-- Upload your **Dhaka (DAC) – Bangkok (BKK/DMK) roundtrip ticket** and hotel voucher covering your full stay in Bangkok/Pattaya/Phuket showing your name.
+2. DOCUMENT PREPARATION CHECKLIST (FOLLOW THE LIVE PORTAL)
+The items below are a preparation guide, not a substitute for the checklist shown for your mission and application. The Thai e-Visa portal's Tourist Visa page lists these common document groups; exact formats and additional documents may vary:
+Step 1: Passport and photograph:
+- Upload the passport biodata page and a photograph taken within the last six months. Follow the live portal's image dimensions and file-size instructions.
+- Add previous visa or travel-history pages only when requested or useful for the application.
+Step 2: Current location and travel plan:
+- The portal asks for a document showing your current location and a travel-booking confirmation. Use the genuine details that match your application.
+Step 3: Accommodation and financial evidence:
+- Provide accommodation evidence, such as a booking or invitation, when requested.
+- Use the current portal and Dhaka mission checklist for the required statement period, solvency letter, sponsor evidence, and any locally requested supporting documents. Do not assume that a dated checklist covers every case.
+Step 4: Occupation, family, or medical supporting documents:
+- Depending on your circumstances, the Embassy may ask for employer or occupation evidence, business documents, proof of relationship, parental consent for a minor, or a hospital appointment letter for medical travel. Follow the exact request shown for your application.
+Step 5: Review before submission:
+- Check that names, passport numbers, dates, travel bookings, and uploaded scans agree. Use genuine records; do not submit fabricated tickets, accommodation, or financial documents.
 
-3. TOP 3 REASONS THAILAND E-VISAS GET REJECTED (AND HOW TO AVOID THEM)
-- **Mistake 1: Instant "Sudden Deposit" in Bank Account:** Never deposit BDT 1,50,000 in cash the day before printing your statement if the account was empty for 5 months. Embassies check transaction consistency.
-- **Mistake 2: Auto-Cancelled Hotel Bookings:** Do not cancel your Booking.com/Agoda reservation the day after submitting your e-Visa—consular officers verify live hotel booking numbers during review!
-- **Mistake 3: Mismatched Name or Passport Number:** Double-check every character of your Given Name, Surname, and Passport Number on **thaievisa.go.th** before submitting payment.`,
+3. THREE PRACTICAL CHECKS BEFORE YOU SUBMIT
+- **Keep financial records clear:** Provide truthful statements and supporting evidence for the funds shown. Avoid artificial deposits or unexplained changes that you cannot document.
+- **Keep bookings consistent:** Make sure travel and accommodation details match the dates and purpose in your application; do not rely on dummy or misleading bookings.
+- **Check every identity field:** Review spelling, passport number, and dates before paying. Fees are non-refundable and the final decision rests with the relevant Thai authority.`,
   "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration": `Whether you are planning a 5-day family holiday to **Kuala Lumpur, Putrajaya, and Genting Highlands**, or building your passport's travel history after visiting Nepal or the Maldives, **Malaysia's Official Online e-Visa** is one of the smoothest digital visa systems available to Bangladeshi citizens. Verified against the **Immigration Department of Malaysia (imi.gov.my / malaysiavisa.imi.gov.my)**, here is everything you need from application in Dhaka to clearing **KLIA immigration**.
 
 1. STEP-BY-STEP: HOW TO APPLY FOR A MALAYSIA TOURIST E-VISA FROM BANGLADESH

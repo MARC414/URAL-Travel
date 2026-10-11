@@ -61,8 +61,8 @@ export function WhatsAppSupport({ lang }: WhatsAppSupportProps) {
 
             {/* Body */}
             <div className="p-4 bg-slate-50 space-y-3">
-              <div className="bg-white p-3 rounded-xl border border-slate-200 text-xs text-slate-650 leading-relaxed shadow-xs">
-                <p className="font-medium text-slate-850 mb-1">
+              <div className="bg-white p-3 rounded-xl border border-slate-200 text-xs text-text-secondary leading-relaxed shadow-xs">
+                <p className="font-medium text-text-primary mb-1">
                   {lang === "bn" ? "আসসালামু আলাইকুম! 👋" : "Hello traveler! 👋"}
                 </p>
                 <p>
@@ -89,7 +89,7 @@ export function WhatsAppSupport({ lang }: WhatsAppSupportProps) {
                     href={getWaLink(item.text)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block text-xs bg-white hover:bg-brand-emerald/10 text-slate-750 hover:text-brand-emerald p-2.5 rounded-xl border border-slate-200 hover:border-brand-emerald/40 transition-all font-medium text-left group"
+                    className="block text-xs bg-white hover:bg-brand-emerald/10 text-text-primary hover:text-brand-emerald p-2.5 rounded-xl border border-slate-200 hover:border-brand-emerald/40 transition-all font-medium text-left group"
                   >
                     <div className="flex items-center justify-between">
                       <span>{item.label}</span>

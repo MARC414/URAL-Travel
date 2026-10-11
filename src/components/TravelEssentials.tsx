@@ -73,7 +73,7 @@ export function TravelEssentials({
   ];
 
   return (
-    <section className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-xs space-y-6">
+    <section className="ural-panel bg-white border border-border-subtle p-5 sm:p-7 shadow-xs space-y-6">
       {/* Clean Header + Segmented Tab Bar */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="space-y-1.5">

@@ -14,9 +14,10 @@
  *   - Route counts are asserted as MINIMUMS, so adding content never breaks CI,
  *     while a prerender that silently emits nothing (the realistic failure) does.
  *   - The lastmod rule is asserted EXACTLY, because it is a hard invariant:
- *     every sitemap entry is either a blog post with its own ISO publish
- *     timestamp, or a data-driven page carrying the committed CONTENT_UPDATED
- *     date. This is what stops the build-date regression from returning.
+ *     every sitemap entry is either a blog post with its own ISO publication
+ *     timestamp (or explicit editorial update date when available), or a
+ *     data-driven page carrying the committed CONTENT_UPDATED date. This is
+ *     what stops the build-date regression from returning.
  *   - Blog image count is asserted against BLOG_DATA.length, so it is
  *     self-maintaining rather than a magic number.
  */
@@ -26,6 +27,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { BLOG_DATA } from "../src/constants";
+import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
 import { BLOG_BODY } from "../src/data/blogContent";
 import { BENGALI_BLOG_OVERRIDES } from "../src/data/bengaliContent";
 import { EDITOR_PROFILE } from "../src/data/authorProfiles";
@@ -92,6 +94,16 @@ check(fs.existsSync(DIST_DIR), "dist/ was produced by the build");
 // --- 2. Generated social/OG images (built by copyStaticSeoImages) -----------
 
 check(fs.existsSync(path.join(DIST_DIR, "og-image.jpg")), "dist/og-image.jpg generated");
+const blogIndexInSync =
+  BLOG_POST_COUNT === BLOG_DATA.length &&
+  BLOG_SLUGS.length === BLOG_DATA.length &&
+  BLOG_DATA.every((post, index) => BLOG_SLUGS[index] === post.slug);
+check(
+  blogIndexInSync,
+  blogIndexInSync
+    ? `the eager blog URL index stays in sync with full metadata (${BLOG_POST_COUNT} slugs)`
+    : "src/data/blogIndex.ts must match BLOG_DATA slugs and count in order"
+);
 
 const blogImgDir = path.join(DIST_DIR, "img", "blog");
 const blogImages = fs.existsSync(blogImgDir)
@@ -245,6 +257,56 @@ function collectSourceFiles(dir: string, acc: string[] = []): string[] {
 const distHtmlFiles = collectHtmlFiles(DIST_DIR);
 const distIndexHtml = read(path.join(DIST_DIR, "index.html"));
 
+// The prerendered shells intentionally defer the React app to hydration, so
+// guard the shared signup's source placement: one card after <main>, before the
+// common footer, with no subscriber form nested in the footer.
+const subscriptionAppSource = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
+const subscriptionSectionPosition = subscriptionAppSource.indexOf('id="sitewide-subscription"');
+const subscriptionFormPosition = subscriptionAppSource.indexOf('id="sitewide-subscription-form"');
+const subscriptionEmailPosition = subscriptionAppSource.indexOf('id="sitewide-subscription-email"');
+const mainClosePosition = subscriptionAppSource.lastIndexOf("</main>");
+const footerPosition = subscriptionAppSource.indexOf('      <footer className=');
+const footerClosePosition = subscriptionAppSource.indexOf("</footer>", footerPosition);
+const subscriptionFooterSource = footerPosition === -1 || footerClosePosition === -1
+  ? ""
+  : subscriptionAppSource.slice(footerPosition, footerClosePosition);
+const sharedSignupSourceIsValid =
+  subscriptionSectionPosition > mainClosePosition &&
+  subscriptionSectionPosition < footerPosition &&
+  subscriptionFormPosition > subscriptionSectionPosition &&
+  subscriptionFormPosition < footerPosition &&
+  subscriptionEmailPosition > subscriptionFormPosition &&
+  subscriptionEmailPosition < footerPosition &&
+  !subscriptionFooterSource.includes("<form") &&
+  !subscriptionAppSource.includes("home-deal-alert-email") &&
+  !subscriptionAppSource.includes("footer-newsletter-email");
+check(
+  sharedSignupSourceIsValid,
+  sharedSignupSourceIsValid
+    ? "one shared pre-footer signup follows <main>; the footer has no signup form"
+    : "shared signup should render once after <main> and before the footer, with no footer form or legacy duplicate IDs"
+);
+
+// The six tool tabs are public deep-link targets; a label or refactor must not
+// silently stop `?tab=` links from selecting their corresponding tool.
+const interactiveToolsSource = read(path.join(ROOT_DIR, "src", "components", "InteractiveTools.tsx")) ?? "";
+const toolsAppSource = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
+const supportedToolTabs = ["airports", "calculator", "converter", "packing", "visa-checker", "airhelp"];
+const toolDeepLinksArePreserved =
+  interactiveToolsSource.includes('new URLSearchParams(window.location.search)') &&
+  supportedToolTabs.every((tab) => {
+    const queryChecks = interactiveToolsSource.match(new RegExp(`tab === "${tab}"`, "g")) ?? [];
+    return queryChecks.length >= 2 && interactiveToolsSource.includes(`id="tool-nav-${tab}"`);
+  }) &&
+  toolsAppSource.includes("/tools?tab=airhelp") &&
+  toolsAppSource.includes("/tools?tab=airports");
+check(
+  toolDeepLinksArePreserved,
+  toolDeepLinksArePreserved
+    ? "all six tool tabs and existing AirHelp/airport ?tab= deep links remain wired"
+    : "all six tool tab values, navigation controls, and existing deep links must remain wired"
+);
+
 // (1a) every responsive image stem ships every breakpoint
 const responsiveImgDir = path.join(DIST_DIR, "assets", "images");
 const stems = new Map<string, Set<number>>();
@@ -311,6 +373,39 @@ check(
     distIndexHtml.includes(`imagesrcset="${heroAvifSrcSet}"`),
   "index.html hero imagesrcset matches buildResponsiveSrcSet(_, \"avif\") exactly"
 );
+const staticHeroStart = distIndexHtml?.indexOf('data-pre-hydration-hero') ?? -1;
+const staticHeroMainStart = distIndexHtml?.indexOf('<main', staticHeroStart) ?? -1;
+const staticHeroHasPicture =
+  distIndexHtml !== null &&
+  staticHeroStart > distIndexHtml.indexOf('<div id="root">') &&
+  staticHeroMainStart > staticHeroStart &&
+  distIndexHtml.indexOf('<picture>', staticHeroStart) > staticHeroStart &&
+  distIndexHtml.indexOf('<picture>', staticHeroStart) < staticHeroMainStart &&
+  distIndexHtml.indexOf('class="pre-hydration-hero__image"', staticHeroStart) > staticHeroStart &&
+  distIndexHtml.indexOf('class="pre-hydration-hero__image"', staticHeroStart) < staticHeroMainStart &&
+  distIndexHtml.includes('width="1200" height="670" alt="" aria-hidden="true" loading="eager" fetchpriority="high"');
+check(
+  staticHeroHasPicture,
+  staticHeroHasPicture
+    ? "the homepage's pre-hydration hero picture/image is in #root before its SEO directory"
+    : "the homepage must put a sized, high-priority hero <picture>/<img> in #root before the SEO directory"
+);
+const staticHeroMarkup =
+  staticHeroStart >= 0 && staticHeroMainStart > staticHeroStart
+    ? distIndexHtml!.slice(staticHeroStart, staticHeroMainStart)
+    : "";
+const staticHeroHasCopyAndCtas =
+  /<h1[^>]*class="pre-hydration-hero__title"[^>]*>[\s\S]*?Plan Your Trip/.test(staticHeroMarkup) &&
+  staticHeroMarkup.includes("Flights, hotels, visas, and destination guides") &&
+  staticHeroMarkup.includes('href="/flights"') &&
+  staticHeroMarkup.includes('href="/hotels"');
+check(
+  staticHeroHasCopyAndCtas,
+  staticHeroHasCopyAndCtas
+    ? "the pre-hydration hero includes its visible h1, description, and primary flight/hotel CTAs"
+    : "the initial homepage HTML must include the hero h1, description, and primary flight/hotel CTAs"
+);
+
 // The srcset string matching is not enough: a typo in the extension would ship a
 // preload pointing at a 404 and nothing else would notice.
 check(
@@ -424,15 +519,19 @@ for (const file of distHtmlFiles) {
   const isBn = rel.startsWith(`bn${path.sep}`) || rel === `bn${path.sep}index.html`;
   const hasNoto = html.includes('href="/fonts/noto-sans-bengali-400-v1.woff2"');
   const hasInter = html.includes('href="/fonts/inter-400-v1.woff2"');
+  const hasInter700 = html.includes('href="/fonts/inter-700-v1.woff2"');
+  const isEnglishHomepage = rel === "index.html";
   if (isBn && !hasNoto) fontProblems.push(`${rel}: Bengali page without Noto preload`);
   if (isBn && hasInter) fontProblems.push(`${rel}: Bengali page still preloading Inter`);
   if (!isBn && !hasInter) fontProblems.push(`${rel}: English page without Inter preload`);
   if (!isBn && hasNoto) fontProblems.push(`${rel}: English page preloading unused Noto`);
+  if (isEnglishHomepage && !hasInter700) fontProblems.push(`${rel}: English homepage without Inter 700 preload`);
+  if (!isEnglishHomepage && hasInter700) fontProblems.push(`${rel}: non-homepage route preloading unused Inter 700`);
 }
 check(
   fontChecked > 0 && fontProblems.length === 0,
   fontProblems.length === 0
-    ? `all ${fontChecked} route pages preload their own locale's critical font (bn→Noto, en→Inter)`
+    ? `all ${fontChecked} route pages preload their locale's critical fonts (bn→Noto, en→Inter; hero Inter 700 only on /)`
     : `${fontProblems.length} page(s) with wrong font preload: ` +
         fontProblems.slice(0, 5).join(", ")
 );
@@ -664,9 +763,10 @@ check(
 
 // Travelpayouts widget chunk: loaded on need, not on a timer (Appendix F).
 //
-// The widget is a ~129 KB gzip chunk (two thirds recharts). It used to be
-// fetched 260 ms after mount on every page that renders one, competing with the
-// LCP image even for visitors who never scrolled to it. The owner approved
+// The widget shell is ~20 KB gzip; the ~110 KB gzip Recharts trend chart is
+// now a separate user-triggered chunk. The shell used to be fetched 260 ms
+// after mount on every page that renders one, competing with the LCP image even
+// for visitors who never scrolled to it. The owner approved
 // switching to a viewport trigger; these assertions keep the new trigger honest,
 // because all four paths are invisible in a green build.
 {
@@ -741,6 +841,9 @@ const TOKEN = {
   goldInk: token("brand-gold-ink", "#8A5A00"),
   goldLight: token("brand-gold-light", "#FDF0CC"),
   emerald: token("brand-emerald", "#0F4A3F"),
+  textPrimary: token("text-primary", "#0B1426"),
+  textSecondary: token("text-secondary", "#475569"),
+  textMuted: token("text-muted", "#64748B"),
 };
 // Tailwind's slate scale (v4 values), the only greys the site uses for text.
 const SLATE = {
@@ -763,6 +866,9 @@ const AA_PAIRS: Array<[string, string, string]> = [
   ["slate-600 text on brand-ivory (page subtitles)", SLATE[600], TOKEN.ivory],
   ["slate-500 text on white", SLATE[500], WHITE],
   ["slate-400 text on slate-900 (dark cards)", SLATE[400], SLATE[900]],
+  ["semantic text-primary on white", TOKEN.textPrimary, WHITE],
+  ["semantic text-secondary on brand-ivory", TOKEN.textSecondary, TOKEN.ivory],
+  ["semantic text-muted on white", TOKEN.textMuted, WHITE],
   ["brand-gold-ink text on white (converter result, checklist note)", TOKEN.goldInk, WHITE],
   ["brand-gold-ink text on brand-ivory", TOKEN.goldInk, TOKEN.ivory],
   ["brand-gold-ink text on brand-gold-light", TOKEN.goldInk, TOKEN.goldLight],
@@ -823,20 +929,37 @@ check(
   "checklist checkbox keeps a 24px (h-6 w-6) touch target"
 );
 
-// Non-failing inventory of Tailwind colour steps that do not exist, so the
-// debt is visible in CI output instead of silently rendering inherited colours.
-const INVALID_STEP = /\b(?:bg|text|border|divide|ring|fill)-(?:slate|emerald|amber)-(?:150|250|350|450|550|650|750|850)\b/g;
+// Fail on unsupported Tailwind palette steps: these classes are silently
+// ignored by Tailwind, so they can make text/borders inherit unintended colors.
+// Standard palette steps are 50–900 by hundreds plus 950. Match every color
+// utility family (including gradients and focus rings), not just the shades
+// found in the original visual audit.
+const VALID_TAILWIND_COLOR_STEPS = new Set([
+  "50",
+  "100",
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+  "800",
+  "900",
+  "950",
+]);
+const TAILWIND_COLOR_UTILITY = /\b(?:bg|text|border|divide|ring|ring-offset|fill|stroke|placeholder|outline|decoration|shadow|accent|caret|from|via|to)-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(\d{1,4})(?=\b|\/)/g;
 const invalidSteps = new Set<string>();
 for (const file of TSX_FILES) {
-  for (const m of fs.readFileSync(file, "utf8").matchAll(INVALID_STEP)) invalidSteps.add(m[0]);
+  for (const match of fs.readFileSync(file, "utf8").matchAll(TAILWIND_COLOR_UTILITY)) {
+    if (!VALID_TAILWIND_COLOR_STEPS.has(match[1])) invalidSteps.add(match[0]);
+  }
 }
-if (invalidSteps.size > 0) {
-  console.log(
-    `  [warn] ${invalidSteps.size} non-existent Tailwind colour step(s) still in use ` +
-      `(silently ignored today; fixing them CHANGES colours — do it as its own visual pass): ` +
-      [...invalidSteps].sort().join(", ")
-  );
-}
+check(
+  invalidSteps.size === 0,
+  invalidSteps.size === 0
+    ? "no unsupported Tailwind color palette steps remain in source"
+    : `${invalidSteps.size} unsupported Tailwind color step(s): ${[...invalidSteps].sort().join(", ")}`
+);
 
 // --- 2e. Security-header & source-map guards (Best Practices) ---------------
 //
@@ -889,6 +1012,58 @@ check(
   missingMaps.length === 0
     ? `every emitted JS chunk ships a source map (${jsChunks.length} chunks)`
     : `${missingMaps.length} chunk(s) without a .map: ${missingMaps.slice(0, 5).join(", ")}`
+);
+
+// Core page views are real lazy chunks, not just React.lazy wrappers around
+// modules that are still statically imported by the entry.
+const routeSplitAppSrc = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
+const splitRouteViews = [
+  "FlightsRouteView",
+  "HotelsRouteView",
+  "VisaRouteView",
+  "DestinationsRouteView",
+  "CostsRouteView",
+  "ToolsRouteView",
+  "BlogIndexRouteView",
+  "BlogPostRouteView",
+  "ContactRouteView",
+  "AboutRouteView",
+  "NotFoundRouteView",
+];
+const splitRouteProblems = splitRouteViews.filter((name) => {
+  const dynamicImport =
+    routeSplitAppSrc.includes(`const ${name} = React.lazy(() => import("./routes/${name}"))`);
+  const rendered = routeSplitAppSrc.includes(`<${name} context={routeViewContext} />`);
+  const chunkExists = jsChunks.some((file) => file.startsWith(`${name}-`) && file.endsWith(".js"));
+  return !dynamicImport || !rendered || !chunkExists;
+});
+check(
+  splitRouteProblems.length === 0,
+  splitRouteProblems.length === 0
+    ? `${splitRouteViews.length} non-home route views ship as route-specific lazy chunks`
+    : `route-level code splitting regressed for: ${splitRouteProblems.join(", ")}`
+);
+
+const widgetSrc = read(path.join(ROOT_DIR, "src", "components", "TravelpayoutsWidget.jsx")) ?? "";
+const chartChunkExists = jsChunks.some(
+  (file) => file.startsWith("FlightPriceTrendChart-") && file.endsWith(".js")
+);
+const chartOnlyLoadsOnDemand =
+  /const FlightPriceTrendChart = React\.lazy\(\(\) => import\('\.\/FlightPriceTrendChart\.jsx'\)\)/.test(widgetSrc) &&
+  /showPriceTrendChart, setShowPriceTrendChart\] = useState\(false\)/.test(widgetSrc) &&
+  !/from ['"]recharts['"]/.test(widgetSrc) &&
+  (() => {
+    const trigger = widgetSrc.indexOf("{showPriceTrendChart && (");
+    const chartCard = widgetSrc.indexOf("<div id={`${instanceId}-price-trend-chart`}", trigger);
+    const suspense = widgetSrc.indexOf("<React.Suspense", chartCard);
+    return trigger >= 0 && chartCard > trigger && suspense > chartCard && suspense - trigger < 500;
+  })() &&
+  chartChunkExists;
+check(
+  chartOnlyLoadsOnDemand,
+  chartOnlyLoadsOnDemand
+    ? "Travelpayouts' Recharts fare trend is a user-triggered lazy chunk (not mounted or downloaded at widget load)"
+    : "fare chart must be hidden by default, dynamically imported, and emitted as its own chunk"
 );
 
 // Below-the-fold trust and booking-hub components stay out of the eager App
@@ -1210,7 +1385,7 @@ if (sitemap) {
     const match = block.match(/<lastmod>([^<]+)<\/lastmod>/);
     if (!match) continue;
     const value = match[1];
-    const isBlogTimestamp = value.includes("T"); // exact ISO publish datetime
+    const isBlogTimestamp = value.includes("T"); // ISO publish or explicit editorial update datetime
     const isContentDate = value === CONTENT_UPDATED; // committed content date
     if (!isBlogTimestamp && !isContentDate) badLastmod.push(value);
   }
@@ -1363,10 +1538,47 @@ if (rss) {
       : `blog body text stays out of the ${new Set([...eagerScripts, ...eagerPreloads]).size} eager chunk(s) on non-blog pages`
   );
 
-  // Budget guard: the whole point of this split is that non-blog pages download
-  // less. The ceiling sits just above today's measured value so a legitimate new
-  // feature has room, but re-inlining the article bodies (~+62 KB gzip) fails.
-  const EAGER_JS_BUDGET_KB = 300;
+  // Homepage budget: keep the complete entry graph below 200 KB gzip. The
+  // large content-data module must stay route-triggered, not appear in the
+  // module's static script or preload list.
+  const contentDataIsEager = [...new Set([...eagerScripts, ...eagerPreloads])].some((url) =>
+    /content-data/i.test(url)
+  );
+  check(
+    !contentDataIsEager,
+    contentDataIsEager
+      ? "content-data is in the homepage's eager script/preload graph"
+      : "content-data is absent from the homepage's eager script/preload graph"
+  );
+  const contentDataFile = jsChunks.find((file) => /^content-data-.*\.js$/.test(file));
+  const contentDataHref = contentDataFile ? `/assets/${contentDataFile}` : null;
+  const routePathFromHtmlFile = (file: string): string => {
+    const segments = path.relative(DIST_DIR, file).split(path.sep);
+    if (segments[0] === "bn") segments.shift();
+    const leaf = segments.pop() ?? "";
+    if (leaf !== "index.html" && leaf.endsWith(".html")) {
+      segments.push(leaf.slice(0, -".html".length));
+    }
+    return `/${segments.filter(Boolean).join("/")}`;
+  };
+  const dataRouteHtmlFiles = distHtmlFiles.filter((file) =>
+    /^\/(?:flights|hotels|visa|destinations|costs|blog)(?:\/|$)/.test(routePathFromHtmlFile(file))
+  );
+  const missingContentDataPreloads = contentDataHref
+    ? dataRouteHtmlFiles.filter((file) => {
+        const html = read(file) ?? "";
+        return !html.includes(`rel="modulepreload" crossorigin href="${contentDataHref}"`);
+      })
+    : dataRouteHtmlFiles;
+  check(
+    contentDataHref !== null &&
+      dataRouteHtmlFiles.length > 0 &&
+      missingContentDataPreloads.length === 0,
+    contentDataHref !== null && missingContentDataPreloads.length === 0
+      ? `all ${dataRouteHtmlFiles.length} content-backed routes modulepreload the route-data chunk`
+      : `${missingContentDataPreloads.length || dataRouteHtmlFiles.length} content-backed route(s) lack the route-data modulepreload`
+  );
+  const EAGER_JS_BUDGET_KB = 200;
   const eagerGzipKb =
     [...new Set([...eagerScripts, ...eagerPreloads])].reduce((total, url) => {
       const file = path.join(DIST_DIR, url.replace(/^\//, ""));
@@ -1756,6 +1968,47 @@ check(
     ? "homepage schema/copy omit the blog total while the crawlable directory retains every guide"
     : `homepage still mentions the blog total or the crawlable directory is incomplete; ` +
         `missing links: ${missingHomepageBlogLinks.slice(0, 3).join(", ") || "none"}`
+);
+
+// Guide-map anchors must resolve within the route view or a shared section.
+const guideRouteFiles = [
+  "src/routes/FlightsRouteView.tsx",
+  "src/routes/VisaRouteView.tsx",
+  "src/routes/HotelsRouteView.tsx",
+  "src/routes/CostsRouteView.tsx",
+  "src/routes/DestinationsRouteView.tsx",
+];
+const guideSharedSources = [
+  read(path.join(ROOT_DIR, "src/components/AeoInspector.tsx")) ?? "",
+  read(path.join(ROOT_DIR, "src/components/InteractiveTools.tsx")) ?? "",
+];
+const guideSharedIds = new Set(
+  guideSharedSources.flatMap((source) =>
+    [...source.matchAll(/\bid=["']([^"']+)["']/g)].map((match) => match[1])
+  )
+);
+const missingGuideTargets: string[] = [];
+let guideTargetCount = 0;
+for (const relativePath of guideRouteFiles) {
+  const source = read(path.join(ROOT_DIR, relativePath)) ?? "";
+  const localIds = new Set(
+    [...source.matchAll(/\bid=["']([^"']+)["']/g)].map((match) => match[1])
+  );
+  for (const block of source.matchAll(/<GuideJumpNav\b([\s\S]*?)\/>/g)) {
+    for (const target of block[1].matchAll(/\bid:\s*["']([^"']+)["']/g)) {
+      guideTargetCount += 1;
+      if (!localIds.has(target[1]) && !guideSharedIds.has(target[1])) {
+        missingGuideTargets.push(`${relativePath} → #${target[1]}`);
+      }
+    }
+  }
+}
+const guideTargetsResolve = guideTargetCount > 0 && missingGuideTargets.length === 0;
+check(
+  guideTargetsResolve,
+  guideTargetsResolve
+    ? `all ${guideTargetCount} guide-map links resolve to route or shared section targets`
+    : `guide-map links are missing targets: ${missingGuideTargets.slice(0, 5).join(", ") || "no guide links found"}`
 );
 
 // --- Report ----------------------------------------------------------------

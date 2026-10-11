@@ -100,7 +100,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
           </div>
 
           <div className="max-w-3xl space-y-3">
-            <h1 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
+            <h1 className="ural-page-title font-serif text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
               {isBn
                 ? "ইউরোপ, যুক্তরাজ্য, আমেরিকা ও এশিয়ার শীর্ষ আকর্ষণ এবং স্কিপ-দ্য-লাইন টিকেট"
                 : "Global Iconic Attractions, Skip-the-Line Tickets & 1-Day City Stacks"}
@@ -129,7 +129,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                   </span>
                   <span className="text-xs font-bold">🇬🇧 🇫🇷 🇮🇹 🇺🇸 🇳🇱 🇵🇹</span>
                 </div>
-                <h2 className="font-serif text-base sm:text-lg font-extrabold">
+                <h2 className="ural-section-title font-serif text-base sm:text-lg font-extrabold">
                   {isBn
                     ? "ইউরোপ, যুক্তরাজ্য ও আমেরিকা (Europe, UK & USA)"
                     : "Europe, UK & USA Skip-the-Line Hub"}
@@ -160,7 +160,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                   </span>
                   <span className="text-xs font-bold">🇦🇪 🇹🇭 🇲🇾 🇸🇬 🇲🇻 🇳🇵</span>
                 </div>
-                <h2 className="font-serif text-base sm:text-lg font-extrabold">
+                <h2 className="ural-section-title font-serif text-base sm:text-lg font-extrabold">
                   {isBn
                     ? "এশিয়া ও মধ্যপ্রাচ্য ট্যুর ও থিম পার্ক (Asia & Gulf)"
                     : "Asia & Middle East Tours & Passes Hub"}
@@ -307,7 +307,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                       {isBn ? activeCityStack.VisaCategoryForBdBn : activeCityStack.VisaCategoryForBd}
                     </span>
                   </div>
-                  <h2 className="font-serif text-xl sm:text-2xl font-black text-slate-900">
+                  <h2 className="ural-section-title font-serif text-xl sm:text-2xl font-black text-slate-900">
                     {activeCityStack.cityName}: {isBn ? activeCityStack.bundleTitleBn : activeCityStack.bundleTitle}
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-600 max-w-2xl">
@@ -353,7 +353,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                         <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-700 font-bold block">
                           Step {step} • {slot.label}
                         </span>
-                        <h3 className="font-serif text-base font-bold text-slate-900 mt-0.5">
+                        <h3 className="ural-card-title font-serif text-base font-bold text-slate-900 mt-0.5">
                           {slot.title}
                         </h3>
                       </div>
@@ -405,10 +405,10 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                         ID #{activeCityStack.airportTransit.productId}
                       </span>
                     </div>
-                    <h4 className="font-serif text-base font-bold">
+                    <h3 className="ural-card-title font-serif text-base font-bold">
                       {activeCityStack.airportTransit.title} — ${activeCityStack.airportTransit.priceUsd} (~৳
                       {(activeCityStack.airportTransit.priceUsd * 122).toLocaleString()} BDT)
-                    </h4>
+                    </h3>
                     <p className="text-xs text-slate-300">{activeCityStack.airportTransit.note}</p>
                   </div>
                 </div>
@@ -433,11 +433,11 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
             <div className="space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="font-serif text-xl font-black text-slate-900">
+                  <h2 className="ural-section-title font-serif text-xl font-black text-slate-900">
                     {isBn
                       ? "সোল্ড-আউট রেসকিউ এবং স্কিপ-দ্য-লাইন বেস্টসেলার টিকেট"
                       : "Verified Skip-the-Line & Sold-Out Rescue Tickets"}
-                  </h3>
+                  </h2>
                   <p className="text-xs text-slate-500">
                     {isBn
                       ? "অফিসিয়াল মিউজিয়াম কাউন্টারে টিকেট শেষ হয়ে গেলে এই সংরক্ষিত স্লটগুলো ব্যবহার করুন"
@@ -493,9 +493,9 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                         </span>
                       </div>
 
-                      <h4 className="font-serif text-base font-bold text-slate-900 leading-snug">
+                      <h3 className="ural-card-title font-serif text-base font-bold text-slate-900 leading-snug">
                         {isBn ? item.titleBn : item.title}
-                      </h4>
+                      </h3>
 
                       <p className="text-xs text-slate-600 leading-relaxed">
                         {isBn ? item.whyItConvertsBn : item.whyItConverts}
@@ -576,11 +576,11 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                   <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-700">
                     {isBn ? "📅 Tiqets অ্যাভেইলেবিলিটি ও স্লট ক্যালেন্ডার" : "📅 TIQETS LIVE AVAILABILITY & BDT SLOT PLANNER"}
                   </span>
-                  <h3 className="font-serif text-xl sm:text-2xl font-black text-slate-900">
+                  <h2 className="ural-section-title font-serif text-xl sm:text-2xl font-black text-slate-900">
                     {isBn
                       ? "আপনার ভ্রমণের তারিখ ও যাত্রীর সংখ্যা অনুযায়ী টিকেট বাজেট দেখুন"
                       : "Select Attraction, Date & Travelers to Lock Your Timed Entry"}
-                  </h3>
+                  </h2>
                 </div>
 
                 <div className="space-y-4">
@@ -671,9 +671,9 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                   <span className="text-[10px] font-mono uppercase tracking-widest text-[#F6B73C] font-bold block">
                     TIQETS INSTANT E-TICKET SUMMARY
                   </span>
-                  <h4 className="font-serif text-lg font-bold leading-snug">
+                  <h3 className="ural-card-title font-serif text-lg font-bold leading-snug">
                     {isBn ? activeCalendarProduct.titleBn : activeCalendarProduct.title}
-                  </h4>
+                  </h3>
                   <div className="text-xs text-slate-300 space-y-1 font-mono">
                     <div>City Hub: {activeCalendarProduct.cityName} ({activeCalendarProduct.country})</div>
                     <div>Tiqets Product ID: #{activeCalendarProduct.productId}</div>
@@ -768,7 +768,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                 <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-amber-600 block">
                   {isBn ? "🎢 এশিয়া ও মধ্যপ্রাচ্য অ্যাক্টিভিটি ইঞ্জিন" : "🎢 ASIA & MIDDLE EAST EXPERIENCES ENGINE"}
                 </span>
-                <h2 className="font-serif text-xl sm:text-2xl font-black text-slate-900">
+                <h2 className="ural-section-title font-serif text-xl sm:text-2xl font-black text-slate-900">
                   {isBn
                     ? "দুবাই, ব্যাংকক, কুয়ালালামপুর, সিঙ্গাপুর ও মালদ্বীপ অ্যাক্টিভিটি পাস"
                     : "Top Sightseeing Passes, Desert Safaris & Theme Parks Across Asia"}
@@ -813,7 +813,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
               ].map((hub) => (
                 <div key={hub.city} className="bg-slate-50 border border-slate-200 p-4 rounded-xl flex flex-col justify-between space-y-3">
                   <div>
-                    <h4 className="font-serif font-bold text-sm text-slate-900">{hub.city}</h4>
+                    <h3 className="ural-card-title font-serif font-bold text-sm text-slate-900">{hub.city}</h3>
                     <p className="text-xs text-slate-600 mt-1 leading-relaxed">{hub.items}</p>
                   </div>
                   <button
@@ -836,11 +836,11 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
           <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-brand-navy block">
             {isBn ? "🇧🇩 বাংলাদেশি পাসপোর্ট ও পেমেন্ট গাইড" : "🇧🇩 BANGLADESHI TRAVELER PAYMENT & VISA BRIDGE"}
           </span>
-          <h3 className="font-serif text-lg font-bold text-slate-900">
+          <h2 className="ural-section-title font-serif text-lg font-bold text-slate-900">
             {isBn
               ? "ইউরোপ বা আমেরিকার মিউজিয়ামে বাংলাদেশি কার্ড দিয়ে কীভাবে টিকেট কাটবেন?"
               : "How to Book European, UK & US Attractions from Bangladesh Without Card Declines"}
-          </h3>
+          </h2>
           <p className="text-xs text-slate-600 leading-relaxed">
             {isBn
               ? "১) আপনার পাসপোর্টে বার্ষিক $18,000 ট্রাভেল কোটা এন্ডোর্স করা থাকলে ব্যাংকের অ্যাপে E-Commerce ও 3D-Secure চালু করে সরাসরি Tiqets থেকে ই-টিকেট কাটুন। ২) কার্ড না থাকলে আমাদের WhatsApp ডেস্কে (+8801784385335) মেসেজ দিয়ে বিকাশ/ব্যাংক ট্রান্সফারের মাধ্যমে BDT-তে ভেরিফায়েড টিকেট সংগ্রহ করুন।"

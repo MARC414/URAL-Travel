@@ -1,0 +1,783 @@
+import React from "react";
+
+import { ArrowRight } from "lucide-react";
+
+import { ResponsiveImage } from "../components/ResponsiveImage";
+
+import { TravelIntelligence } from "../components/AeoInspector";
+
+import { generateBlogCoverAltText } from "../utils/imageAssets";
+
+
+
+type RouteViewProps = { context: Record<string, any> };
+
+
+
+export default function BlogIndexRouteView({ context }: RouteViewProps) {
+
+  const { TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, getBlogAeoSnippet50Words, getBlogCoverImage, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, section, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery } = context;
+
+  return (
+
+          <div className="space-y-12 animate-fade-in">
+
+            {/* 1. FULL-WIDTH EDGE-TO-EDGE HERO IMAGE WITH H1 HEADER & SHORT DESCRIPTION */}
+
+            <section
+
+              aria-labelledby="blog-hero-h1"
+
+              className="w-screen relative left-1/2 -translate-x-1/2 -mt-6 sm:-mt-8 bg-brand-navy text-white overflow-hidden border-b border-slate-800 shadow-xl"
+
+            >
+
+              <div className="absolute inset-0">
+
+                <ResponsiveImage
+
+                  src={blogHeroBannerImg}
+
+                  sizes="100vw"
+
+                  alt=""
+
+                  aria-hidden={true}
+
+                  loading="eager"
+
+                  fetchPriority="high"
+
+                  decoding="async"
+
+                  className="w-full h-full object-cover object-center opacity-45 pointer-events-none"
+
+                />
+
+                <div
+
+                  className="absolute inset-0"
+
+                  style={{
+
+                    background:
+
+                      "linear-gradient(105deg, rgba(11,22,40,0.96) 0%, rgba(16,42,67,0.86) 55%, rgba(11,22,40,0.72) 100%)",
+
+                  }}
+
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-brand-navy/40" />
+
+              </div>
+
+
+
+              <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
+
+                <div className="max-w-4xl space-y-5">
+
+<h1
+
+                    id="blog-hero-h1"
+
+                    className="ural-page-title font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.12] text-balance"
+
+                  >
+
+                    {isBn
+
+                      ? "বাংলাদেশি ভ্রমণকারীদের জন্য Travel Guide, Hajj ও Umrah প্রস্তুতি এবং BDT বাজেট প্ল্যান"
+
+                      : "Bangladesh Outbound Travel Blog: Visa Checklists, DIY Umrah & BDT Trip Guides"}
+
+                  </h1>
+
+
+
+                  <p className="text-sm sm:text-base lg:text-lg text-slate-200 leading-relaxed max-w-3xl">
+
+                    {isBn
+
+                      ? "বাংলাদেশি পাসপোর্টধারীদের জন্য সহজ বাংলায় তৈরি ধাপে ধাপে গাইড—সরকারি নিয়মে Hajj রেজিস্ট্রেশন, Nusuk App দিয়ে DIY Umrah, Dual-Currency Card Endorsement, Dhaka Airport Immigration চেকলিস্ট এবং কম খরচে ফ্যামিলি ট্যুর পরিকল্পনা।"
+
+                      : "Step-by-step editorial playbooks researched for Bangladeshi passport holders—covering DIY Umrah with the Nusuk app, dual-currency card endorsement, Dhaka Airport immigration checklists, and BDT destination budgets."}
+
+                  </p>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+
+            {/* 2. INTERACTIVE CATEGORY FILTER TABS & SEARCH BAR */}
+
+            <div className="space-y-4">
+
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+
+                <div
+
+                  role="tablist"
+
+                  aria-label="Filter travel guides by topic"
+
+                  className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 p-1.5 bg-slate-200/75 rounded-xl"
+
+                >
+
+                  {[
+
+                    {
+
+                      id: "all",
+
+                      label: isBn
+
+                        ? `সব গাইড (${localizedBlogs.length})`
+
+                        : `All Guides (${localizedBlogs.length})`,
+
+                    },
+
+                    {
+
+                      id: "Hajj & Umrah",
+
+                      label: isBn
+
+                        ? `হজ্জ ও ওমরাহ (${localizedBlogs.filter((b) => b.category === "Hajj & Umrah").length})`
+
+                        : `Hajj & Umrah (${localizedBlogs.filter((b) => b.category === "Hajj & Umrah").length})`,
+
+                    },
+
+                    {
+
+                      id: "Ziyarah & Stopovers",
+
+                      label: isBn
+
+                        ? `জিয়ারত ও স্টপওভার (${localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers").length})`
+
+                        : `Ziyarah & Stopovers (${localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers").length})`,
+
+                    },
+
+                    {
+
+                      id: "Visa & Immigration",
+
+                      label: isBn ? "ভিসা ও ইমিগ্রেশন (3)" : "Visa & Immigration (3)",
+
+                    },
+
+                    {
+
+                      id: "Banking & Payments",
+
+                      label: isBn ? "ডুয়াল-কারেন্সি কার্ড ও BDT (1)" : "Card Endorsement & BDT (1)",
+
+                    },
+
+                    {
+
+                      id: "Family & Budget",
+
+                      label: isBn ? "ফ্যামিলি ও বাজেট ট্রিপ (3)" : "Family & Budget Trips (3)",
+
+                    },
+
+                    {
+
+                      id: "Flights, Hotels & Food",
+
+                      label: isBn
+
+                        ? "ফ্লাইট, হোটেল ও হালাল খাবার (3)"
+
+                        : "Flights, Hotels & Halal Food (3)",
+
+                    },
+
+
+
+                    {
+
+                      id: "Travel Tips",
+
+                      label: isBn
+
+                        ? `ট্রাভেল টিপস (${localizedBlogs.filter((b) => b.category === "Travel Tips").length})`
+
+                        : `Travel Tips (${localizedBlogs.filter((b) => b.category === "Travel Tips").length})`,
+
+                    },
+
+                  ].map((tab) => {
+
+                    const isActive = blogCategoryFilter === tab.id;
+
+                    return (
+
+                      <button
+
+                        key={tab.id}
+
+                        type="button"
+
+                        role="tab"
+
+                        aria-selected={isActive}
+
+                        onClick={() => setBlogCategoryFilter(tab.id)}
+
+                        className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+
+                          isActive
+
+                            ? "bg-brand-navy text-white shadow-xs"
+
+                            : "text-slate-700 hover:text-slate-900 hover:bg-white/60"
+
+                        }`}
+
+                      >
+
+                        {tab.label}
+
+                      </button>
+
+                    );
+
+                  })}
+
+                </div>
+
+
+
+                <div className="relative w-full lg:w-72 shrink-0">
+
+                  <input
+
+                    type="search"
+
+                    value={blogSearchQuery}
+
+                    onChange={(e) => setBlogSearchQuery(e.target.value)}
+
+                    placeholder={
+
+                      isBn
+
+                        ? "Umrah, Card, Nepal, Visa লিখে খুঁজুন..."
+
+                        : "Search Umrah, card, Nepal, visa..."
+
+                    }
+
+                    aria-label="Search blog guides"
+
+                    className="w-full bg-white border border-slate-200 focus:border-brand-navy rounded-xl px-4 py-2.5 text-xs text-slate-800 outline-none transition-colors"
+
+                  />
+
+                  {blogSearchQuery && (
+
+                    <button
+
+                      type="button"
+
+                      onClick={() => setBlogSearchQuery("")}
+
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-700 cursor-pointer"
+
+                    >
+
+                      {isBn ? "মুছুন" : "Clear"}
+
+                    </button>
+
+                  )}
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            {/* 3. 3-CARDS-PER-ROW BLOG GRID (UNIQUE THUMBNAIL + DARK H2 TITLE + ~50-WORD AEO SNIPPET + 'READ FULL BLOG' BUTTON) */}
+
+            {(() => {
+
+              const orderedBlogs = [
+
+                ...localizedBlogs.filter((b) => b.category === "Hajj & Umrah"),
+
+                ...localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers"),
+
+                ...localizedBlogs.filter((b) => b.category !== "Hajj & Umrah" && b.category !== "Ziyarah & Stopovers"),
+
+              ];
+
+
+
+              const filteredBlogs = orderedBlogs.filter((post) => {
+
+                const matchesCategory =
+
+                  blogCategoryFilter === "all"
+
+                    ? true
+
+                    : blogCategoryFilter === "Flights, Hotels & Food"
+
+                    ? ["Cheap Flight Tips", "Hotel Savings", "Food & Culture"].includes(post.category)
+
+                    : post.category === blogCategoryFilter;
+
+
+
+                const q = blogSearchQuery.trim().toLowerCase();
+
+                const matchesQuery =
+
+                  !q ||
+
+                  post.title.toLowerCase().includes(q) ||
+
+                  post.summary.toLowerCase().includes(q) ||
+
+                  post.category.toLowerCase().includes(q);
+
+
+
+                return matchesCategory && matchesQuery;
+
+              });
+
+
+
+              if (filteredBlogs.length === 0) {
+
+                return (
+
+                  <div className="bg-white border border-slate-200 rounded-2xl p-10 text-center space-y-3">
+
+                    <h2 className="ural-section-title font-serif text-[20px] font-bold text-brand-navy">
+
+                      {isBn ? "কোনো ট্রাভেল গাইড খুঁজে পাওয়া যায়নি" : "No matching travel guides found"}
+
+                    </h2>
+
+                    <p className="text-xs text-slate-600 max-w-md mx-auto">
+
+                      {isBn
+
+                        ? "অনুগ্রহ করে অন্য শব্দ দিয়ে খুঁজুন অথবা সব গাইড দেখতে নিচের বাটনে ক্লিক করুন।"
+
+                        : "Try clearing your search filter or switching back to All Guides to browse our complete library of Bangladeshi travel guides."}
+
+                    </p>
+
+                    <button
+
+                      type="button"
+
+                      onClick={() => {
+
+                        setBlogCategoryFilter("all");
+
+                        setBlogSearchQuery("");
+
+                      }}
+
+                      className="bg-brand-navy text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer"
+
+                    >
+
+                      {isBn
+
+                        ? `সবগুলো গাইড দেখুন (${localizedBlogs.length})`
+
+                        : `Show All ${localizedBlogs.length} Guides`}
+
+                    </button>
+
+                  </div>
+
+                );
+
+              }
+
+
+
+              return (
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+
+                  {filteredBlogs.map((post) => {
+
+                    const coverImg = getBlogCoverImage(post.slug);
+
+                    const aeoSnippet50Words = getBlogAeoSnippet50Words(post.slug, isBn, post.summary);
+
+
+
+                    return (
+
+                      <article
+
+                        key={post.id}
+
+                        onClick={() => navigateTo(`/blog/${post.slug}`)}
+
+                        className="group bg-white border border-slate-200/90 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between cursor-pointer"
+
+                      >
+
+                        <div className="flex flex-col">
+
+                          {/* Unique Card Thumbnail Image */}
+
+                          <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
+
+                            <ResponsiveImage
+
+                              src={coverImg}
+
+                              sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
+
+                              alt={generateBlogCoverAltText({
+
+                                title: post.title,
+
+                                category: post.category,
+
+                                slug: post.slug,
+
+                                lang: isBn ? "bn" : "en",
+
+                              })}
+
+                              loading="lazy"
+
+                              fetchPriority="low"
+
+                              decoding="async"
+
+                              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+
+                            />
+
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent" />
+
+                            <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[11px] text-white/95 font-medium">
+
+                              <span className="bg-brand-navy/85 backdrop-blur-xs px-2.5 py-0.5 rounded-md border border-white/15">
+
+                                {post.category}
+
+                              </span>
+
+                              <span className="font-mono">{post.readTime}</span>
+
+                            </div>
+
+                          </div>
+
+
+
+                          {/* Card Body: Metadata + Dark H2 Title (20px-22px) + ~50-Word AEO Main Snippet (14px) */}
+
+                          <div className="p-6 space-y-3">
+
+                            <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500">
+
+                              <span>{post.date}</span>
+
+                              <span aria-hidden="true">·</span>
+
+                              <span>
+
+                                {isBn
+
+                                  ? `লেখক: ${post.author.split(" (")[0]}`
+
+                                  : `By ${post.author.split(" (")[0]}`}
+
+                              </span>
+
+                            </div>
+
+
+
+                            <h2 className="ural-card-title font-serif text-[20px] sm:text-[22px] font-bold text-brand-navy group-hover:text-brand-emerald leading-[1.3] text-balance">
+
+                              {post.title}
+
+                            </h2>
+
+
+
+                            <p className="text-[14px] text-slate-700 leading-[1.65]">
+
+                              {aeoSnippet50Words}
+
+                            </p>
+
+                          </div>
+
+                        </div>
+
+
+
+                        {/* Card Footer: 'Read Full Blog' Button */}
+
+                        <div className="px-6 pb-6 pt-2">
+
+                          <button
+
+                            type="button"
+
+                            onClick={(e) => {
+
+                              e.stopPropagation();
+
+                              navigateTo(`/blog/${post.slug}`);
+
+                            }}
+
+                            className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-between cursor-pointer"
+
+                          >
+
+                            <span>{isBn ? "সম্পূর্ণ ব্লগ পড়ুন · Read Full Blog" : "Read Full Blog"}</span>
+
+                            <ArrowRight size={14} className="text-[#F6B73C] group-hover:text-brand-navy transition-transform group-hover:translate-x-0.5" />
+
+                          </button>
+
+                        </div>
+
+                      </article>
+
+                    );
+
+                  })}
+
+                </div>
+
+              );
+
+            })()}
+
+
+
+            {/* Admin-Only SEO Matrix (Hidden from regular site visitors) */}
+
+            {isAdmin && (
+
+              <React.Suspense fallback={null}>
+
+                <TopicalAuthorityBlueprint lang={lang} onNavigate={navigateTo} />
+
+              </React.Suspense>
+
+            )}
+
+
+
+            {/* 4. SMART CONVERSION WIDGETS SECTION ON BLOG DIRECTORY PAGE */}
+
+            <div className="pt-8 border-t border-slate-200 space-y-8">
+
+              <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-4">
+
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+
+                  <div className="space-y-1">
+
+                    <div className="text-xs font-semibold text-brand-navy">
+
+                      {isBn
+
+                        ? "লাইভ Flight ও Umrah রুটের ভাড়া তুলনা"
+
+                        : "Live Airfare & Umrah Route Comparison"}
+
+                    </div>
+
+                    <h2 className="ural-section-title font-serif text-[22px] sm:text-[26px] font-bold text-brand-navy">
+
+                      {isBn
+
+                        ? "ঢাকা (DAC) থেকে ফ্লাইটের সর্বনিম্ন ভাড়া যাচাই করুন"
+
+                        : "Compare Flights from Dhaka (DAC) While You Plan"}
+
+                    </h2>
+
+                    <p className="text-xs text-slate-600">
+
+                      {isBn
+
+                        ? "Jeddah, Madinah, Kathmandu, Bangkok, Kuala Lumpur, Singapore, Malé ও Dubai-এর লাইভ ভাড়া দেখুন—অথবা Dual-Currency Card না থাকলে আমাদের WhatsApp BDT ডেস্কে মেসেজ দিন।"
+
+                        : "Search live fares to Jeddah, Madinah, Kathmandu, Bangkok, Kuala Lumpur, Singapore, Malé, and Dubai—or message our WhatsApp BDT Desk if you don't have a dual-currency card yet."}
+
+                    </p>
+
+                  </div>
+
+                  <button
+
+                    type="button"
+
+                    onClick={() => navigateTo("/contact")}
+
+                    className="self-start sm:self-end text-xs font-semibold text-brand-navy hover:underline inline-flex items-center gap-1 whitespace-nowrap cursor-pointer"
+
+                  >
+
+                    <span>
+
+                      {isBn
+
+                        ? "BDT-তে টিকিট ও হোটেল বুকিং সহায়তা"
+
+                        : "Need BDT Booking Help? Contact Desk"}
+
+                    </span>
+
+                    <ArrowRight size={12} />
+
+                  </button>
+
+                </div>
+
+                {areTpScriptsReady ? (
+
+                  <React.Suspense
+
+                    fallback={
+
+                      <TravelpayoutsWidgetSkeleton
+
+                        variant="flights"
+
+                        isBn={isBn}
+
+                        onInteract={() => setAreTpScriptsReady(true)}
+
+                      />
+
+                    }
+
+                  >
+
+                    <TravelpayoutsEmbed defaultDestination="JED" />
+
+                  </React.Suspense>
+
+                ) : (
+
+                  <TravelpayoutsWidgetSkeleton
+
+                    variant="flights"
+
+                    isBn={isBn}
+
+                    onInteract={() => setAreTpScriptsReady(true)}
+
+                  />
+
+                )}
+
+              </div>
+
+
+
+              <React.Suspense fallback={null}>
+
+                <TravelEssentials country="Saudi Arabia & Asia" defaultTab="transfers" compactHeader lang={lang} />
+
+              </React.Suspense>
+
+
+
+              <TravelIntelligence
+
+                pageTitle={
+
+                  isBn
+
+                    ? "বাংলাদেশ থেকে Hajj, Umrah ও বিদেশ ভ্রমণের প্রস্তুতি — সাধারণ প্রশ্নোত্তর (FAQ)"
+
+                    : "Hajj, Umrah & Outbound Preparation from Bangladesh — Verified FAQs"
+
+                }
+
+                quickAnswer={
+
+                  isBn
+
+                    ? "বাংলাদেশি নাগরিকদের ফরজ Hajj-এর জন্য অবশ্যই ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ নিবন্ধন করতে হবে। তবে বছরের যেকোনো সময় ৯০ দিনের Umrah e-Visa, ৯৬ ঘণ্টার Saudia/Flynas Stopover Visa অথবা US/UK/Schengen ভিসাধারীদের অনলাইন e-Visa এবং Nusuk App ব্যবহার করে নিজে নিজে কম খরচে DIY Umrah পালন করা যায়।"
+
+                    : "Bangladeshi citizens must register via hajj.gov.bd for obligatory Hajj, while year-round Umrah can be planned independently using a 90-day Umrah e-Visa, a 96-hour Saudia/Flynas Stopover Visa, or a qualified US/UK/Schengen holder e-Visa, paired with the official Nusuk and Saudi Visa Bio apps."
+
+                }
+
+                keyFacts={[
+
+                  {
+
+                    label: isBn ? "Umrah e-Visa খরচ" : "Umrah e-Visa Cost",
+
+                    value: isBn ? "BDT 15,500 – 19,500 (২–৫ দিন)" : "BDT 15,500 – 19,500 (2–5 Days)",
+
+                  },
+
+                  {
+
+                    label: isBn ? "১০ দিনের DIY Umrah বাজেট" : "10-Day DIY Umrah Budget",
+
+                    value: isBn ? "BDT 1,16,000 – 1,32,000 / জন" : "BDT 1,16,000 – 1,32,000 / Person",
+
+                  },
+
+                  {
+
+                    label: isBn ? "বার্ষিক Card FX কোটা" : "Annual Card FX Quota",
+
+                    value: "$18,000 USD / Adult Passport (FE Circular 33)",
+
+                  },
+
+                  {
+
+                    label: isBn ? "বাধ্যতামূলক Umrah অ্যাপ" : "Mandatory Umrah Apps",
+
+                    value: "Saudi Visa Bio + Nusuk (nusuk.sa)",
+
+                  },
+
+                ]}
+
+                faqs={localizedHajjFaqs}
+
+              />
+
+            </div>
+
+          </div>
+
+        );
+
+}

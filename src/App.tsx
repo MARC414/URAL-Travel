@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { initGlobalClickTracking } from "./utils/analytics";
 import {
   Globe,
@@ -44,7 +44,7 @@ import {
 import { FlightRoute, HotelGuide, VisaGuide, DestinationGuide, TripCostData, BlogPost } from "./types";
 
 // Database Constants
-import { FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, DESTINATIONS_DATA, TRIP_COSTS_DATA, BLOG_DATA } from "./constants";
+import { BLOG_POST_COUNT, BLOG_SLUGS } from "./data/blogIndex";
 
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
@@ -149,6 +149,18 @@ const ENGLISH_FEATURED_GROWTH_TOPICS = [
 ];
 
 // Non-critical route & modal components loaded on demand to reduce initial JS parse/compile cost
+const FlightsRouteView = React.lazy(() => import("./routes/FlightsRouteView"));
+const HotelsRouteView = React.lazy(() => import("./routes/HotelsRouteView"));
+const VisaRouteView = React.lazy(() => import("./routes/VisaRouteView"));
+const DestinationsRouteView = React.lazy(() => import("./routes/DestinationsRouteView"));
+const CostsRouteView = React.lazy(() => import("./routes/CostsRouteView"));
+const ToolsRouteView = React.lazy(() => import("./routes/ToolsRouteView"));
+const BlogIndexRouteView = React.lazy(() => import("./routes/BlogIndexRouteView"));
+const BlogPostRouteView = React.lazy(() => import("./routes/BlogPostRouteView"));
+const ContactRouteView = React.lazy(() => import("./routes/ContactRouteView"));
+const AboutRouteView = React.lazy(() => import("./routes/AboutRouteView"));
+const NotFoundRouteView = React.lazy(() => import("./routes/NotFoundRouteView"));
+
 const UmrahLandingPage = React.lazy(() =>
   import("./components/UmrahLandingPage").then((m) => ({ default: m.UmrahLandingPage }))
 );
@@ -633,7 +645,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide":
       "For Umrah, buy Saudi Riyals (SAR) directly in Dhaka for daily cash expenses to avoid losing 3% on double conversion (BDT→USD→SAR). When tapping your Dual-Currency Card at hotels or malls in Makkah, Bangkok, or Kuala Lumpur, always select 'Local Currency' on the POS terminal to avoid 5% DCC fees.",
     "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide":
-      "Bangladeshi citizens apply online via thaievisa.go.th for a 60-day Thailand Tourist Visa (TR) without surrendering their physical passport. Upload clear PDF scans of your passport, return ticket, paid hotel booking, NOC/Trade License, and a 6-month bank statement showing at least BDT 65,000 (BDT 1,20,000+ recommended) per person.",
+      "Thailand's official e-Visa portal handles online applications and emails approved confirmations, but decisions and timing are not guaranteed. Its general Tourist Visa page lists THB 20,000 financial evidence and recent bank statements or sponsorship; Dhaka Embassy's public TR checklist (updated Nov 30, 2022) lists BDT 60,000 per person or BDT 120,000 per family with six months of statements. Check current Dhaka requirements before applying.",
     "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration":
       "Apply online at malaysiavisa.imi.gov.my for a 30-day Malaysia Tourist e-Visa (BDT 3,800–4,200; approved in 2–4 working days) with a 6-month bank statement showing BDT 80,000+ balance. Within 3 days before landing at KLIA, submit the mandatory free Malaysia Digital Arrival Card (MDAC).",
     "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia":
@@ -645,7 +657,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "cheap-flight-booking-hacks-dhaka":
       "Cut international airfare from Dhaka (DAC) by 15%–30% by searching during Tuesday night airline inventory resets, flying out on Monday or Tuesday mornings instead of Thursday/Friday peak migration waves, travelling with 7kg cabin luggage on budget carriers, and stacking 12%–15% Bangladeshi bank card discounts.",
     "nepal-vs-thailand-first-trip":
-      "For first-time Bangladeshi travelers, Nepal is the easiest budget starter trip (free instant SAARC Visa on Arrival at Kathmandu Airport and a BDT 45,000–55,000 5-day budget), while Thailand is best for family shopping, beaches, and medical check-ups (requiring a pre-arranged e-Visa and BDT 75,000+ budget).",
+      "Nepal Immigration lists a free tourist visa of up to 30 days for eligible SAARC visitors, except Afghanistan, on a first visit in a visa year; check current rules before departure. Thailand uses an advance e-Visa process. As planning estimates, a five-day trip is about BDT 45,000–65,000 in Nepal and BDT 80,000+ in Thailand; live fares and lodging rates change.",
     "hotel-savings-guide-bangkok-kl-dubai":
       "Save 30%–40% on family hotels in Bangkok, Kuala Lumpur, and Dubai without sacrificing safety by booking 2–3 metro stops outside the pricey tourist core—such as On Nut BTS in Bangkok, Al Rigga Metro in Deira Dubai, or serviced family apartments near Bukit Bintang and KLCC in Malaysia.",
     "halal-food-guide-bangkok-bangladesh":
@@ -726,7 +738,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide":
       "ওমরাহর হাতখরচের জন্য ঢাকা থেকেই সরাসরি নগদ সৌদি রিয়াল (SAR) কিনলে ডাবল কনভার্সন (BDT→USD→SAR) লস বাঁচে। আর মক্কা, ব্যাংকক বা কুয়ালালামপুরে কার্ড পাঞ্চ করার সময় POS মেশিনে সবসময় 'Local Currency' সিলেক্ট করবেন—এতে ৫% অতিরিক্ত DCC চার্জ কাটবে না।",
     "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide":
-      "পাসপোর্ট জমা না দিয়েই অফিশিয়াল thaievisa.go.th পোর্টালে আবেদন করে ৫–১০ কার্যদিবসে ৬০ দিনের থাইল্যান্ড ই-ভিসা (TR) পাওয়া যায়। এজন্য পাসপোর্ট স্ক্যান, রিটার্ন টিকিট, হোটেল ভাউচার, NOC/Trade License এবং জনপ্রতি অন্তত ৬৫,০০০+ টাকার (নিরাপদ অনুমোদনের জন্য ১.২০ লক্ষ+ টাকা) ব্যাংক স্টেটমেন্ট আপলোড করুন।",
+      "Thailand-এর official e-Visa portal-এ online আবেদন হয় এবং অনুমোদিত হলে confirmation email-এ আসে; সিদ্ধান্ত বা সময় নিশ্চিত নয়। সাধারণ Tourist Visa পেজে THB 20,000 আর্থিক প্রমাণের কথা আছে, আর Dhaka Embassy-র প্রকাশিত TR checklist (হালনাগাদ ৩০ নভেম্বর ২০২২) জনপ্রতি BDT 60,000 বা পরিবারপ্রতি BDT 120,000 ও ৬ মাসের statement উল্লেখ করে। আবেদনের আগে বর্তমান Dhaka checklist মিলিয়ে নিন।",
     "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration":
       "অনলাইনে malaysiavisa.imi.gov.my পোর্টালে ৮০,০০০+ টাকা ব্যাংক ব্যালেন্স দেখিয়ে আবেদন করলে ২–৪ কার্যদিবসে ৩০ দিনের মালয়েশিয়া ই-ভিসা (BDT ৩,৮০০–৪,২০০) পাওয়া যায়। কুয়ালালামপুর (KLIA) ফ্লাইটের ৩ দিন আগে অবশ্যই ফ্রি Malaysia Digital Arrival Card (MDAC) পূরণ করে প্রিন্ট সাথে রাখুন।",
     "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia":
@@ -738,7 +750,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "cheap-flight-booking-hacks-dhaka":
       "ঢাকা (DAC) থেকে ১৫%–৩০% কম খরচে বিমান টিকিট কাটতে মঙ্গলবার রাতে ভাড়া যাচাই করুন, বৃহস্পতি/শুক্রবারের ভিড় এড়িয়ে সোম বা মঙ্গলবার সকালে ফ্লাইট নিন, বাজেট এয়ারলাইন্সে ৭ কেজি কেবিন ব্যাগে ভ্রমণ করুন এবং দেশীয় ব্যাংকের কার্ডে ১০%–১৫% ডিসকাউন্ট অফার ব্যবহার করুন।",
     "nepal-vs-thailand-first-trip":
-      "প্রথমবার বিদেশ ভ্রমণের জন্য বাংলাদেশিদের কাছে নেপাল সবচেয়ে সহজ ও সাশ্রয়ী (কাঠমান্ডু এয়ারপোর্টে ফ্রি অন-অ্যারাইভাল ভিসা এবং ৫ দিনে মাত্র ৪৫,০০০–৫৫,০০০ টাকা বাজেট)। অন্যদিকে ফ্যামিলি শপিং, থিম পার্ক ও মেডিকেল চেকআপের জন্য থাইল্যান্ড সেরা (আগাম ই-ভিসা ও ৭৫,০০০+ টাকা বাজেট)।",
+      "Nepal Immigration-এর প্রকাশিত নিয়মে Afghanistan ছাড়া যোগ্য SAARC নাগরিকদের visa year-এ প্রথম সফরে সর্বোচ্চ ৩০ দিনের gratis visa আছে; যাত্রার আগে বর্তমান নিয়ম যাচাই করুন। Thailand-এর জন্য আগাম e-Visa দরকার। আনুমানিক ৫ দিনের বাজেট Nepal-এ BDT 45,000–65,000 এবং Thailand-এ BDT 80,000+—লাইভ ফ্লাইট ও হোটেলদর বদলায়।",
     "hotel-savings-guide-bangkok-kl-dubai":
       "ব্যাংকক, কুয়ালালামপুর ও দুবাইয়ে নিরাপদ ও পরিচ্ছন্ন হোটেলে ৩০%–৪০% খরচ বাঁচাতে মূল ট্যুরিস্ট স্পট থেকে মাত্র ২–৩টি মেট্রো স্টেশন দূরে হোটেল নিন—যেমন ব্যাংককের On Nut BTS, দুবাই দেইরার Al Rigga Metro অথবা কুয়ালালামপুরের Bukit Bintang সংলগ্ন ফ্যামিলি অ্যাপার্টমেন্ট।",
     "halal-food-guide-bangkok-bangladesh":
@@ -930,6 +942,39 @@ function AuthorBioCard({
   );
 }
 
+type SubscriptionInterest = "dhaka-fare-alerts" | "travel-newsletter";
+
+const SUBSCRIPTION_INTERESTS: readonly SubscriptionInterest[] = [
+  "dhaka-fare-alerts",
+  "travel-newsletter",
+];
+
+const SUBSCRIPTION_INTEREST_LABELS: Record<SubscriptionInterest, { en: string; bn: string }> = {
+  "dhaka-fare-alerts": {
+    en: "Dhaka flight fare-drop alerts",
+    bn: "ঢাকা থেকে ফ্লাইট ভাড়া কমার অ্যালার্ট",
+  },
+  "travel-newsletter": {
+    en: "General URAL travel newsletter",
+    bn: "URAL সাধারণ ট্রাভেল নিউজলেটার",
+  },
+};
+
+const readSavedSubscriptionInterests = (): SubscriptionInterest[] => {
+  if (typeof window === "undefined") return [];
+
+  try {
+    const storedInterests: unknown = JSON.parse(
+      window.localStorage.getItem("ural_subscription_interests") || "[]",
+    );
+    return Array.isArray(storedInterests)
+      ? SUBSCRIPTION_INTERESTS.filter((interest) => storedInterests.includes(interest))
+      : [];
+  } catch {
+    return [];
+  }
+};
+
 export default function App() {
   // Simulated Browser Routing State
   const [currentPath, setCurrentPath] = useState<string>(() => {
@@ -964,6 +1009,14 @@ export default function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuCloseRef = useRef<HTMLButtonElement>(null);
+  const mobileDrawerPanelRef = useRef<HTMLDivElement>(null);
+  const [desktopMenuOpen, setDesktopMenuOpen] = useState<"destinations" | "tools" | null>(null);
+  const destinationsMenuRef = useRef<HTMLDivElement>(null);
+  const toolsMenuRef = useRef<HTMLDivElement>(null);
+  const destinationsDisclosureRef = useRef<HTMLButtonElement>(null);
+  const toolsDisclosureRef = useRef<HTMLButtonElement>(null);
 
   // Reading progress + back-to-top state
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -1005,6 +1058,9 @@ export default function App() {
   };
 
   const [bnContent, setBnContent] = useState<typeof BengaliContentModule | null>(null);
+  // Route content is a dynamic dependency: a homepage visit needs only the
+  // tiny blog URL index, not every flight/hotel/visa/destination/blog record.
+  const [contentData, setContentData] = useState<typeof import("./constants") | null>(null);
 
   // The document language is baked into index.html as lang="en", but the UI can
   // switch to Bengali entirely client-side. Without this, <html lang> keeps
@@ -1021,11 +1077,9 @@ export default function App() {
 
   const t = translations[lang];
   const isBn = lang === "bn";
-  const localizedBlogs = isBn && bnContent ? bnContent.getLocalizedBlogs(lang) : BLOG_DATA;
-  const localizedFlights = isBn && bnContent ? bnContent.getLocalizedFlights(lang) : FLIGHTS_DATA;
-  const localizedHotels = isBn && bnContent ? bnContent.getLocalizedHotels(lang) : HOTELS_DATA;
-  const localizedVisas = isBn && bnContent ? bnContent.getLocalizedVisas(lang) : VISA_DATA;
-  const localizedCosts = isBn && bnContent ? bnContent.getLocalizedCosts(lang) : TRIP_COSTS_DATA;
+  const blogPostCount = isBn && bnContent
+    ? bnContent.getLocalizedBlogs(lang).length
+    : BLOG_POST_COUNT;
   const localizedHajjFaqs = isBn && bnContent ? bnContent.getLocalizedHajjFaqs(lang) : HAJJ_UMRAH_FAQS;
   const featuredGrowthTopics =
     isBn && bnContent ? bnContent.getFeaturedGrowthTopics(lang) : ENGLISH_FEATURED_GROWTH_TOPICS;
@@ -1061,13 +1115,42 @@ export default function App() {
     }
     return "";
   });
-  const [footerEmail, setFooterEmail] = useState<string>("");
+  const [selectedSubscriptionInterests, setSelectedSubscriptionInterests] = useState<SubscriptionInterest[]>(
+    readSavedSubscriptionInterests,
+  );
   const [emailSubmitting, setEmailSubmitting] = useState<boolean>(false);
   const [emailSubscribeError, setEmailSubscribeError] = useState<string | null>(null);
+  const hasFareAlertPreference = selectedSubscriptionInterests.includes("dhaka-fare-alerts");
+  const hasNewsletterPreference = selectedSubscriptionInterests.includes("travel-newsletter");
 
-  const handleEmailSubscription = async (rawEmail: string, sourceLabel: string) => {
+  const toggleSubscriptionInterest = (interest: SubscriptionInterest) => {
+    setSelectedSubscriptionInterests((current) =>
+      current.includes(interest)
+        ? current.filter((selected) => selected !== interest)
+        : SUBSCRIPTION_INTERESTS.filter((candidate) => current.includes(candidate) || candidate === interest),
+    );
+    if (emailSubscribeError) setEmailSubscribeError(null);
+  };
+
+  const handleEmailSubscription = async (
+    rawEmail: string,
+    sourceLabel: string,
+    requestedInterests: SubscriptionInterest[],
+  ) => {
     const cleanEmail = rawEmail.trim().toLowerCase();
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const selectedInterests = SUBSCRIPTION_INTERESTS.filter((interest) =>
+      requestedInterests.includes(interest),
+    );
+
+    if (selectedInterests.length === 0) {
+      setEmailSubscribeError(
+        lang === "bn"
+          ? "চালিয়ে যেতে অন্তত একটি আপডেট বেছে নিন।"
+          : "Choose at least one type of update to continue."
+      );
+      return;
+    }
 
     if (!cleanEmail || !emailPattern.test(cleanEmail)) {
       setEmailSubscribeError(
@@ -1083,6 +1166,11 @@ export default function App() {
     setEmailSubmitting(true);
     setUserEmail(cleanEmail);
 
+    const interestLabels = selectedInterests.map((interest) => SUBSCRIPTION_INTEREST_LABELS[interest].en);
+    const interestSummary = interestLabels.join(", ");
+    const localizedInterestSummary = selectedInterests
+      .map((interest) => SUBSCRIPTION_INTEREST_LABELS[interest][lang])
+      .join(lang === "bn" ? " ও " : " and ");
     const generatedSubId = `URAL-SUB-${Math.floor(100000 + Math.random() * 900000)}`;
     const dhakaTimestamp = new Date().toLocaleString("en-GB", {
       timeZone: "Asia/Dhaka",
@@ -1098,13 +1186,14 @@ export default function App() {
       "Subscriber Email": cleanEmail,
       "Subscription ID": generatedSubId,
       "Signup Placement": sourceLabel,
+      "Subscription Interests": interestSummary,
       "Preferred Language": preferredLanguage,
       "Selected Currency": currencyToOption,
       "Page URL": activePageUrl,
       "Timestamp (Dhaka BST)": dhakaTimestamp,
       "Notification Recipient": "marcwriter2025@gmail.com",
       _replyto: cleanEmail,
-      _subject: `🔔 New URAL Newsletter Subscriber: ${cleanEmail} (${sourceLabel})`,
+      _subject: `🔔 New URAL Subscription: ${cleanEmail} (${interestSummary})`,
       _template: "table",
       _captcha: "false",
     };
@@ -1120,6 +1209,7 @@ export default function App() {
         body: JSON.stringify({
           email: cleanEmail,
           source: sourceLabel,
+          subscriptionInterests: interestLabels,
           subscriptionId: generatedSubId,
           language: preferredLanguage,
           pageUrl: activePageUrl,
@@ -1146,18 +1236,19 @@ export default function App() {
         try {
           localStorage.setItem("ural_subscribed_email", cleanEmail);
           localStorage.setItem("ural_subscription_id", generatedSubId);
+          localStorage.setItem("ural_subscription_interests", JSON.stringify(selectedInterests));
         } catch {
           // ignore storage quota errors
         }
       }
       setSubscriptionId(generatedSubId);
-      setFooterEmail("");
+      setSelectedSubscriptionInterests(selectedInterests);
       setEmailSubmitting(false);
       setEmailSubscribed(true);
       setAffiliateToast(
         lang === "bn"
-          ? `সাবস্ক্রিপশন নিশ্চিত হয়েছে (${generatedSubId})! আপনার ইমেইল (${cleanEmail}) আমাদের ফ্লাইট অ্যালার্ট ডেস্কে যুক্ত হয়েছে।`
-          : `Subscription confirmed (${generatedSubId})! Notification sent for ${cleanEmail}.`
+          ? `সাবস্ক্রিপশন নিশ্চিত হয়েছে (${generatedSubId})! ${localizedInterestSummary} আপডেটের জন্য ${cleanEmail} যুক্ত হয়েছে।`
+          : `Subscription confirmed (${generatedSubId})! ${localizedInterestSummary} updates are selected for ${cleanEmail}.`
       );
     }
   };
@@ -1185,9 +1276,10 @@ export default function App() {
   // Track third-party Travelpayouts rendering for the perceived-performance
   // skeletons.
   //
-  // The real widget is a separate chunk (~129 KB gzip, two thirds of it the
-  // recharts tree) and used to be fetched by a 260 ms timer on every page that
-  // renders one — which put it in competition with the LCP image even for
+  // The widget shell is a separate ~20 KB gzip chunk; its ~110 KB gzip
+  // Recharts fare chart is split again and is fetched only after the visitor
+  // explicitly opens the trend. The shell used to be fetched by a 260 ms timer
+  // on every page that renders one — competing with the LCP image even for
   // visitors who never scrolled to it. It is now fetched by whichever of these
   // happens first:
   //   1. a widget skeleton coming within 300px of the viewport (below),
@@ -1273,39 +1365,29 @@ export default function App() {
       isLanding = true;
     } else if (root === "flights" && segs.length <= 2) {
       const routeParam = searchParams.get("route") || subSegment;
-      if (!routeParam || FLIGHTS_DATA.some((route) => route.id === routeParam)) {
-        section = "flights";
-        parameterId = routeParam || "dhaka-kathmandu";
-        isLanding = !routeParam;
-      }
+      section = "flights";
+      parameterId = routeParam || "dhaka-kathmandu";
+      isLanding = !routeParam;
     } else if (root === "hotels" && segs.length <= 2) {
       const cityParam = searchParams.get("city") || subSegment;
-      if (!cityParam || HOTELS_DATA.some((hotel) => hotel.id === cityParam)) {
-        section = "hotels";
-        parameterId = cityParam || "kathmandu-hotels";
-        isLanding = !cityParam;
-      }
+      section = "hotels";
+      parameterId = cityParam || "kathmandu-hotels";
+      isLanding = !cityParam;
     } else if (root === "visa" && segs.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
-      if (!countryParam || VISA_DATA.some((visa) => visa.id === countryParam)) {
-        section = "visa";
-        parameterId = countryParam || "nepal-visa";
-        isLanding = !countryParam;
-      }
+      section = "visa";
+      parameterId = countryParam || "nepal-visa";
+      isLanding = !countryParam;
     } else if (root === "destinations" && segs.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
-      if (!countryParam || DESTINATIONS_DATA.some((destination) => destination.id === countryParam)) {
-        section = "destinations";
-        parameterId = countryParam || "nepal-guide";
-        isLanding = !countryParam;
-      }
+      section = "destinations";
+      parameterId = countryParam || "nepal-guide";
+      isLanding = !countryParam;
     } else if (root === "costs" && segs.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
-      if (!countryParam || TRIP_COSTS_DATA.some((cost) => cost.id === countryParam)) {
-        section = "costs";
-        parameterId = countryParam || "nepal-costs";
-        isLanding = !countryParam;
-      }
+      section = "costs";
+      parameterId = countryParam || "nepal-costs";
+      isLanding = !countryParam;
     } else if ((root === "experiences" || root === "attractions") && segs.length === 1) {
       section = "experiences";
       isLanding = true;
@@ -1317,7 +1399,7 @@ export default function App() {
       isLanding = true;
     } else if (root === "blog" && segs.length <= 2) {
       const slugParam = searchParams.get("slug") || subSegment;
-      if (!slugParam || BLOG_DATA.some((post) => post.slug === slugParam)) {
+      if (!slugParam || BLOG_SLUGS.includes(slugParam as (typeof BLOG_SLUGS)[number])) {
         section = "blog";
         parameterId = slugParam || "cheap-flight-booking-hacks-dhaka";
         isLanding = !slugParam;
@@ -1347,7 +1429,63 @@ export default function App() {
     return { section, parameterId, isLanding, isAdmin, locale };
   };
 
-  const { section, parameterId, isLanding, isAdmin, locale } = getRouteDetails();
+  const routeDetails = getRouteDetails();
+  const requestedSection = routeDetails.section;
+  const { parameterId, isLanding, isAdmin, locale } = routeDetails;
+  const contentBackedSections: SectionType[] = [
+    "flights",
+    "hotels",
+    "visa",
+    "destinations",
+    "costs",
+    "blog",
+  ];
+  const needsContentData = contentBackedSections.includes(requestedSection);
+
+  useEffect(() => {
+    if (!needsContentData || contentData) return;
+    let cancelled = false;
+    import("./constants").then((data) => {
+      if (!cancelled) setContentData(data);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [requestedSection, needsContentData, contentData]);
+
+  const localizedBlogs = isBn && bnContent
+    ? bnContent.getLocalizedBlogs(lang)
+    : contentData?.BLOG_DATA ?? [];
+  const localizedFlights = isBn && bnContent
+    ? bnContent.getLocalizedFlights(lang)
+    : contentData?.FLIGHTS_DATA ?? [];
+  const localizedHotels = isBn && bnContent
+    ? bnContent.getLocalizedHotels(lang)
+    : contentData?.HOTELS_DATA ?? [];
+  const localizedVisas = isBn && bnContent
+    ? bnContent.getLocalizedVisas(lang)
+    : contentData?.VISA_DATA ?? [];
+  const localizedCosts = isBn && bnContent
+    ? bnContent.getLocalizedCosts(lang)
+    : contentData?.TRIP_COSTS_DATA ?? [];
+  const DESTINATIONS_DATA = contentData?.DESTINATIONS_DATA ?? [];
+  const BLOG_DATA = contentData?.BLOG_DATA ?? [];
+
+  const validationRows =
+    requestedSection === "flights" ? localizedFlights
+      : requestedSection === "hotels" ? localizedHotels
+      : requestedSection === "visa" ? localizedVisas
+      : requestedSection === "destinations" ? DESTINATIONS_DATA
+      : requestedSection === "costs" ? localizedCosts
+      : [];
+  const isInvalidContentRoute =
+    needsContentData &&
+    requestedSection !== "blog" &&
+    Boolean(contentData) &&
+    !isLanding &&
+    Boolean(parameterId) &&
+    !validationRows.some((entry) => entry.id === parameterId);
+  const section: SectionType = isInvalidContentRoute ? "notFound" : requestedSection;
 
   // English blog bodies live in their own module (src/data/blogContent.ts) so the
   // ~161 KB of article text is not part of every page's initial download. It is
@@ -1402,17 +1540,59 @@ export default function App() {
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
-    const prevOverflow = document.body.style.overflow;
+
+    const previousOverflow = document.body.style.overflow;
+    const focusableSelector =
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
     document.body.style.overflow = "hidden";
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      mobileMenuCloseRef.current?.focus();
+    });
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
         setMobileMenuOpen(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const drawer = mobileDrawerPanelRef.current;
+      const focusableElements: HTMLElement[] = drawer
+        ? Array.from(drawer.querySelectorAll(focusableSelector)).filter(
+            (element): element is HTMLElement =>
+              element instanceof HTMLElement && element.getClientRects().length > 0,
+          )
+        : [];
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      const focusIsOutsideDrawer = !drawer?.contains(document.activeElement);
+
+      if (!firstElement || !lastElement) {
+        event.preventDefault();
+        drawer?.focus();
+        return;
+      }
+      if (event.shiftKey && (document.activeElement === firstElement || focusIsOutsideDrawer)) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && (document.activeElement === lastElement || focusIsOutsideDrawer)) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
-    window.addEventListener("keydown", handleKeyDown);
+
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.body.style.overflow = prevOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+      window.cancelAnimationFrame(focusFrame);
+      window.requestAnimationFrame(() => {
+        if (mobileMenuTriggerRef.current?.isConnected) {
+          mobileMenuTriggerRef.current.focus();
+        }
+      });
     };
   }, [mobileMenuOpen]);
 
@@ -1452,7 +1632,7 @@ export default function App() {
     seoBreadcrumbs = [
       { name: "Home", url: siteUrl("/", lang) }
     ];
-  } else if (section === "flights") {
+  } else if (section === "flights" && localizedFlights.length > 0) {
     const activeRoute = localizedFlights.find(r => r.id === parameterId) || localizedFlights[0];
     const year = new Date().getFullYear();
     const hubUrl = siteUrl("/flights", lang);
@@ -1473,7 +1653,7 @@ export default function App() {
           description: r.quickAnswer,
         })),
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("flights", undefined, true, hubUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("flights", undefined, true, hubUrl, localizedFlights);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -1496,7 +1676,7 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = isBn ? null : getFaqSchemaForPage("flights", activeRoute.id, false, routeUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("flights", activeRoute.id, false, routeUrl, localizedFlights);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
@@ -1506,7 +1686,7 @@ export default function App() {
       ];
     }
 
-  } else if (section === "hotels") {
+  } else if (section === "hotels" && localizedHotels.length > 0) {
     const activeHotel = localizedHotels.find(h => h.id === parameterId) || localizedHotels[0];
     const hubUrl = siteUrl("/hotels", lang);
 
@@ -1526,7 +1706,7 @@ export default function App() {
           description: h.quickAnswer,
         })),
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("hotels", undefined, true, hubUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("hotels", undefined, true, hubUrl, localizedHotels);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -1549,7 +1729,7 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = isBn ? null : getFaqSchemaForPage("hotels", activeHotel.id, false, hotelUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("hotels", activeHotel.id, false, hotelUrl, localizedHotels);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
@@ -1559,7 +1739,7 @@ export default function App() {
       ];
     }
 
-  } else if (section === "visa") {
+  } else if (section === "visa" && localizedVisas.length > 0) {
     const activeVisa = localizedVisas.find(v => v.id === parameterId) || localizedVisas[0];
     const hubUrl = siteUrl("/visa", lang);
 
@@ -1579,7 +1759,7 @@ export default function App() {
           description: v.quickAnswer,
         })),
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("visa", undefined, true, hubUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("visa", undefined, true, hubUrl, localizedVisas);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -1602,7 +1782,7 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = isBn ? null : getFaqSchemaForPage("visa", activeVisa.id, false, visaUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("visa", activeVisa.id, false, visaUrl, localizedVisas);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
@@ -1612,7 +1792,7 @@ export default function App() {
       ];
     }
 
-  } else if (section === "destinations") {
+  } else if (section === "destinations" && DESTINATIONS_DATA.length > 0) {
     const activeDes = DESTINATIONS_DATA.find(d => d.id === parameterId) || DESTINATIONS_DATA[0];
     const hubUrl = siteUrl("/destinations", lang);
 
@@ -1630,7 +1810,7 @@ export default function App() {
           description: d.quickAnswer,
         })),
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("destinations", undefined, true, hubUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("destinations", undefined, true, hubUrl, DESTINATIONS_DATA);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -1673,7 +1853,7 @@ export default function App() {
             : 95000,
         inLanguage: pageLanguage,
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("destinations", activeDes.id, false, destUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("destinations", activeDes.id, false, destUrl, DESTINATIONS_DATA);
       seoSchema = [schemaObj, tripNode, faqSchema].filter(Boolean);
 
       seoBreadcrumbs = [
@@ -1683,7 +1863,7 @@ export default function App() {
       ];
     }
 
-  } else if (section === "costs") {
+  } else if (section === "costs" && localizedCosts.length > 0) {
     const activeCost = localizedCosts.find(c => c.id === parameterId) || localizedCosts[0];
     const hubUrl = siteUrl("/costs", lang);
 
@@ -1703,7 +1883,7 @@ export default function App() {
           description: c.quickAnswer,
         })),
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("costs", undefined, true, hubUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("costs", undefined, true, hubUrl, localizedCosts);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -1726,7 +1906,7 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = isBn ? null : getFaqSchemaForPage("costs", activeCost.id, false, costUrl);
+      const faqSchema = isBn ? null : getFaqSchemaForPage("costs", activeCost.id, false, costUrl, localizedCosts);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
@@ -1754,7 +1934,7 @@ export default function App() {
       { name: "Travel Tools", url: toolsUrl }
     ];
 
-  } else if (section === "blog") {
+  } else if (section === "blog" && localizedBlogs.length > 0) {
     const activePost = localizedBlogs.find(p => p.slug === parameterId) || localizedBlogs[0];
     const canonicalPost = BLOG_DATA.find(p => p.slug === activePost.slug) || activePost;
     const hubUrl = siteUrl("/blog", lang);
@@ -1791,7 +1971,7 @@ export default function App() {
         description: bnPostSeo?.description || activePost.summary,
         slug: activePost.slug,
         datePublished: canonicalPost.date,
-        dateModified: canonicalPost.date,
+        dateModified: canonicalPost.updatedAt || canonicalPost.date,
         authorRaw: canonicalPost.author,
         articleSection: activePost.category,
         imageUrl: postImgUrl,
@@ -2102,6 +2282,7 @@ export default function App() {
     }
     setCurrentPath(cleanPath);
     setMobileMenuOpen(false);
+    setDesktopMenuOpen(null);
   };
 
   // Navigation helper that emulates URL path routing with clean path URLs.
@@ -2109,6 +2290,29 @@ export default function App() {
   // /bn/x automatically, so no call site needed to change.
   const navigateTo = (path: string) => {
     pushPath(lang === "bn" ? toLocalePath(normalizeRoutePath(path), "bn") : path);
+  };
+
+  const getLocalizedRouteHref = (path: string) =>
+    toLocalePath(normalizeRoutePath(path), lang);
+
+  const isCurrentNavigationPath = (path: string) =>
+    getLocalizedRouteHref(path) === getLocalizedRouteHref(currentPath);
+
+  const handleNavigationAnchorClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    path: string,
+  ) => {
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+    event.preventDefault();
+    navigateTo(path);
   };
 
   // Real hrefs for the language switcher so both locales are crawlable anchors
@@ -2144,6 +2348,8 @@ export default function App() {
     return () => window.clearInterval(timer);
   }, []);
 
+  const routeViewContext: Record<string, any> = { AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getBlogAeoSnippet50Words, getBlogCoverImage, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
+
   return (
     <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-brand-gold selection:text-brand-navy overflow-x-hidden">
 
@@ -2165,7 +2371,7 @@ export default function App() {
       )}
 
       {/* 🟦 STICKY HEADER WRAPPER (Top Strip + Main Navbar) */}
-      <div className="sticky top-0 z-50 w-full shadow-lg">
+      <div id="sticky-site-header" className="sticky top-0 z-50 w-full shadow-lg">
         
         {/* 🟦 TOP STRIP (Height: 36px, Background: #0B1426) */}
         <div className="w-full bg-brand-navy h-9 flex items-center select-none">
@@ -2189,9 +2395,11 @@ export default function App() {
           <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between">
             
             {/* Logo Left + Precision Brand Slogan */}
-            <div
-              className="flex flex-col items-start justify-center cursor-pointer group shrink-0 py-1"
-              onClick={() => navigateTo("/")}
+            <a
+              href={getLocalizedRouteHref("/")}
+              onClick={(event) => handleNavigationAnchorClick(event, "/")}
+              aria-label={isBn ? "URAL হোম পেজ" : "URAL home"}
+              className="flex flex-col items-start justify-center group shrink-0 py-1 focus-visible:outline-none"
             >
               <img
                 src="/assets/brand/svg/ural-wordmark-v1.svg"
@@ -2205,95 +2413,148 @@ export default function App() {
                   ? "ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়"
                   : "Travel Intelligence System · Beyond a Typical Agency"}
               </span>
-            </div>
+            </a>
 
             {/* Navigation Centered — Streamlined High-Intent Information Architecture */}
-            <nav className="hidden md:flex items-center gap-4 lg:gap-5">
+            <nav aria-label={isBn ? "প্রধান নেভিগেশন" : "Primary navigation"} className="hidden xl:flex items-center gap-3 xl:gap-4">
               {/* 1. Home */}
-              <button
-                type="button"
+              <a
                 id="nav-home"
-                onClick={() => navigateTo("/")}
+                href={getLocalizedRouteHref("/")}
+                onClick={(event) => handleNavigationAnchorClick(event, "/")}
                 aria-current={section === "home" ? "page" : undefined}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
+                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
                   section === "home" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
                 }`}
               >
                 {t.navHome}
-              </button>
+              </a>
 
               {/* 2. Priority #1 Pillar: Umrah & Hajj */}
-              <button
-                type="button"
+              <a
                 id="nav-umrah"
-                onClick={() => navigateTo("/umrah")}
+                href={getLocalizedRouteHref("/umrah")}
+                onClick={(event) => handleNavigationAnchorClick(event, "/umrah")}
                 aria-current={section === "umrah" ? "page" : undefined}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-semibold hover:text-[#F6B73C] whitespace-nowrap flex items-center gap-1.5 py-2 ${
+                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-semibold hover:text-[#F6B73C] whitespace-nowrap flex items-center gap-1.5 py-3 ${
                   section === "umrah" ? "text-[#F6B73C]" : "text-slate-200"
                 }`}
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" aria-hidden="true" />
                 <span>{t.navUmrah}</span>
-              </button>
+              </a>
 
               {/* 3. Flights */}
-              <button
-                type="button"
+              <a
                 id="nav-flights"
-                onClick={() => navigateTo("/flights")}
+                href={getLocalizedRouteHref("/flights")}
+                onClick={(event) => handleNavigationAnchorClick(event, "/flights")}
                 aria-current={section === "flights" ? "page" : undefined}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
+                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
                   section === "flights" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
                 }`}
               >
                 {t.navFlights}
-              </button>
+              </a>
 
               {/* 4. Hotels */}
-              <button
-                type="button"
+              <a
                 id="nav-hotels"
-                onClick={() => navigateTo("/hotels")}
+                href={getLocalizedRouteHref("/hotels")}
+                onClick={(event) => handleNavigationAnchorClick(event, "/hotels")}
                 aria-current={section === "hotels" ? "page" : undefined}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
+                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
                   section === "hotels" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
                 }`}
               >
                 {t.navHotels}
-              </button>
+              </a>
 
               {/* 5. Visa Checklists */}
-              <button
-                type="button"
+              <a
                 id="nav-visa"
-                onClick={() => navigateTo("/visa")}
+                href={getLocalizedRouteHref("/visa")}
+                onClick={(event) => handleNavigationAnchorClick(event, "/visa")}
                 aria-current={section === "visa" ? "page" : undefined}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
+                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
                   section === "visa" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
                 }`}
               >
                 {t.navVisa}
-              </button>
+              </a>
 
               {/* 6. Destinations & Global Attractions Mega Menu */}
-              <div className="relative group">
-                <button
-                  type="button"
-                  id="nav-destinations-megamenu"
-                  onClick={() => navigateTo("/destinations")}
-                  aria-current={section === "destinations" || section === "experiences" ? "page" : undefined}
-                  className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap flex items-center gap-1 py-2 ${
-                    section === "destinations" || section === "experiences"
-                      ? "text-[#F6B73C] font-semibold"
-                      : "text-slate-300"
-                  }`}
-                >
-                  <span>{t.navDestinations}</span>
-                  <span className="text-[10px] opacity-75">▾</span>
-                </button>
+              <div
+                ref={destinationsMenuRef}
+                className="relative"
+                onMouseEnter={() => {
+                  if (!toolsMenuRef.current?.contains(document.activeElement)) {
+                    setDesktopMenuOpen("destinations");
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (!destinationsMenuRef.current?.contains(document.activeElement)) {
+                    setDesktopMenuOpen((current) => current === "destinations" ? null : current);
+                  }
+                }}
+                onFocusCapture={(event) => {
+                  const previousTarget = event.relatedTarget as Node | null;
+                  if (!previousTarget || !destinationsMenuRef.current?.contains(previousTarget)) {
+                    setDesktopMenuOpen("destinations");
+                  }
+                }}
+                onBlurCapture={(event) => {
+                  const nextTarget = event.relatedTarget as Node | null;
+                  if (!nextTarget || !destinationsMenuRef.current?.contains(nextTarget)) {
+                    setDesktopMenuOpen((current) => current === "destinations" ? null : current);
+                  }
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") {
+                    event.preventDefault();
+                    setDesktopMenuOpen(null);
+                    destinationsDisclosureRef.current?.focus();
+                  }
+                }}
+              >
+                <div className="flex items-center gap-0.5">
+                  <a
+                    id="nav-destinations-megamenu"
+                    href={getLocalizedRouteHref("/destinations")}
+                    onClick={(event) => handleNavigationAnchorClick(event, "/destinations")}
+                    aria-current={section === "destinations" || section === "experiences" ? "page" : undefined}
+                    className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
+                      section === "destinations" || section === "experiences"
+                        ? "text-[#F6B73C] font-semibold"
+                        : "text-slate-300"
+                    }`}
+                  >
+                    {t.navDestinations}
+                  </a>
+                  <button
+                    ref={destinationsDisclosureRef}
+                    type="button"
+                    aria-label={isBn ? "গন্তব্য মেনু খুলুন বা বন্ধ করুন" : "Toggle destinations menu"}
+                    aria-expanded={desktopMenuOpen === "destinations"}
+                    aria-controls="destinations-mega-panel"
+                    onClick={() => setDesktopMenuOpen((current) => current === "destinations" ? null : "destinations")}
+                    className="w-8 h-8 rounded-md flex items-center justify-center text-slate-300 hover:text-[#F6B73C] hover:bg-white/5 transition-colors cursor-pointer focus-visible:outline-none"
+                  >
+                    <ChevronDown
+                      size={13}
+                      aria-hidden="true"
+                      className={`transition-transform duration-150 ${desktopMenuOpen === "destinations" ? "rotate-180 text-[#F6B73C]" : ""}`}
+                    />
+                  </button>
+                </div>
 
-                {/* 3-Column Mega Menu Dropdown Panel */}
-                <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-150 absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[780px] lg:w-[860px] z-50">
+                <div
+                  id="destinations-mega-panel"
+                  role="region"
+                  aria-label={isBn ? "গন্তব্য ও অ্যাক্টিভিটি পাস" : "Destination and attraction guides"}
+                  aria-hidden={desktopMenuOpen !== "destinations"}
+                  className={`${desktopMenuOpen === "destinations" ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"} transition-all duration-150 absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[780px] lg:w-[860px] z-50`}
+                >
                   <div className="bg-brand-navy border border-white/15 rounded-3xl shadow-2xl p-6 grid grid-cols-12 gap-6 text-left">
                     {/* Column 1: Asia & Middle East Pillars (4 Cols) */}
                     <div className="col-span-4 space-y-3 border-r border-white/10 pr-5">
@@ -2339,25 +2600,27 @@ export default function App() {
                             path: "/destinations/dubai-guide",
                           },
                         ].map((item, idx) => (
-                          <button
+                          <a
                             key={idx}
-                            type="button"
-                            onClick={() => navigateTo(item.path)}
-                            className="w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer"
+                            href={getLocalizedRouteHref(item.path)}
+                            onClick={(event) => handleNavigationAnchorClick(event, item.path)}
+                            aria-current={isCurrentNavigationPath(item.path) ? "page" : undefined}
+                            className={`w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer ${isCurrentNavigationPath(item.path) ? "bg-white/8 ring-1 ring-inset ring-[#F6B73C]/35" : ""}`}
                           >
                             <div className="text-xs font-semibold text-white">{item.label}</div>
                             <div className="text-[11px] text-slate-400">{item.sub}</div>
-                          </button>
+                          </a>
                         ))}
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => navigateTo("/destinations")}
-                        className="w-full text-left px-3 pt-1 text-xs font-semibold text-[#F6B73C] hover:underline cursor-pointer"
+                      <a
+                        href={getLocalizedRouteHref("/destinations")}
+                        onClick={(event) => handleNavigationAnchorClick(event, "/destinations")}
+                        aria-current={isCurrentNavigationPath("/destinations") ? "page" : undefined}
+                        className={`w-full text-left px-3 pt-1 text-xs font-semibold text-[#F6B73C] hover:underline cursor-pointer ${isCurrentNavigationPath("/destinations") ? "underline underline-offset-2" : ""}`}
                       >
                         {isBn ? "সবগুলো এশিয়ান গন্তব্য দেখুন →" : "View All Asian Destination Guides →"}
-                      </button>
+                      </a>
                     </div>
 
                     {/* Column 2: Europe, UK & USA Hubs — Tiqets Official (4 Cols) */}
@@ -2394,27 +2657,29 @@ export default function App() {
                             path: "/experiences?region=west&city=new-york",
                           },
                         ].map((item, idx) => (
-                          <button
+                          <a
                             key={idx}
-                            type="button"
-                            onClick={() => navigateTo(item.path)}
-                            className="w-full text-left px-3 py-2.5 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer"
+                            href={getLocalizedRouteHref(item.path)}
+                            onClick={(event) => handleNavigationAnchorClick(event, item.path)}
+                            aria-current={isCurrentNavigationPath(item.path) ? "page" : undefined}
+                            className={`w-full text-left px-3 py-2.5 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer ${isCurrentNavigationPath(item.path) ? "bg-white/8 ring-1 ring-inset ring-[#F6B73C]/35" : ""}`}
                           >
                             <div className="text-xs font-semibold text-white">{item.label}</div>
                             <div className="text-[11px] text-slate-400">{item.sub}</div>
-                          </button>
+                          </a>
                         ))}
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => navigateTo("/experiences?region=west")}
-                        className="w-full text-left px-3 pt-1 text-xs font-semibold text-[#F6B73C] hover:underline cursor-pointer"
+                      <a
+                        href={getLocalizedRouteHref("/experiences?region=west")}
+                        onClick={(event) => handleNavigationAnchorClick(event, "/experiences?region=west")}
+                        aria-current={isCurrentNavigationPath("/experiences?region=west") ? "page" : undefined}
+                        className={`w-full text-left px-3 pt-1 text-xs font-semibold text-[#F6B73C] hover:underline cursor-pointer ${isCurrentNavigationPath("/experiences?region=west") ? "underline underline-offset-2" : ""}`}
                       >
                         {isBn
                           ? "ইউরোপ, UK ও USA-এর সব পাস দেখুন →"
                           : "Browse Europe, UK & USA Hub →"}
-                      </button>
+                      </a>
                     </div>
 
                     {/* Column 3: Asia Attractions (Klook) + KKday Promo (4 Cols) */}
@@ -2449,15 +2714,16 @@ export default function App() {
                               path: "/experiences?region=asia&city=singapore-kl",
                             },
                           ].map((item, idx) => (
-                            <button
+                            <a
                               key={idx}
-                              type="button"
-                              onClick={() => navigateTo(item.path)}
-                              className="w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer"
+                              href={getLocalizedRouteHref(item.path)}
+                              onClick={(event) => handleNavigationAnchorClick(event, item.path)}
+                              aria-current={isCurrentNavigationPath(item.path) ? "page" : undefined}
+                              className={`w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer ${isCurrentNavigationPath(item.path) ? "bg-white/8 ring-1 ring-inset ring-[#F6B73C]/35" : ""}`}
                             >
                               <div className="text-xs font-semibold text-white">{item.label}</div>
                               <div className="text-[11px] text-slate-400">{item.sub}</div>
-                            </button>
+                            </a>
                           ))}
                         </div>
                       </div>
@@ -2492,13 +2758,14 @@ export default function App() {
                             : "Save 15–30% on Japan, Thailand & Singapore theme parks, airport rail & ski tours."}
                         </p>
                         <div className="grid grid-cols-2 gap-2 pt-0.5">
-                          <button
-                            type="button"
-                            onClick={() => navigateTo("/experiences")}
-                            className="bg-brand-gold hover:bg-brand-gold-dark text-brand-navy font-bold text-[11px] py-2 px-2.5 rounded-xl transition-colors cursor-pointer"
+                          <a
+                            href={getLocalizedRouteHref("/experiences")}
+                            onClick={(event) => handleNavigationAnchorClick(event, "/experiences")}
+                            aria-current={isCurrentNavigationPath("/experiences") ? "page" : undefined}
+                            className={`bg-brand-gold hover:bg-brand-gold-dark text-brand-navy font-bold text-[11px] py-2 px-2.5 rounded-xl transition-colors cursor-pointer ${isCurrentNavigationPath("/experiences") ? "underline underline-offset-2" : ""}`}
                           >
                             {isBn ? "অ্যাক্টিভিটি হাব →" : "All Passes →"}
-                          </button>
+                          </a>
                           <a
                             href={resolvePartnerUrl(AFFILIATE_LINKS.kkday)}
                             target="_blank"
@@ -2521,36 +2788,90 @@ export default function App() {
               </div>
 
               {/* 7. PRIMARY TOP-LEVEL BLOG LINK (Crawl Depth = 1 for Topical Authority) */}
-              <button
-                type="button"
+              <a
                 id="nav-blog"
-                onClick={() => navigateTo("/blog")}
+                href={getLocalizedRouteHref("/blog")}
+                onClick={(event) => handleNavigationAnchorClick(event, "/blog")}
                 aria-current={section === "blog" ? "page" : undefined}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
+                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
                   section === "blog" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
                 }`}
               >
                 {t.navBlog}
-              </button>
+              </a>
 
               {/* 8. COMPACT UTILITY MENU: TOOLS, BUDGETS & PRE-DEPARTURE HUB */}
-              <div className="relative group">
-                <button
-                  type="button"
-                  id="nav-tools-megamenu"
-                  onClick={() => navigateTo("/tools")}
-                  aria-current={["costs", "tools", "contact", "sitemap"].includes(section) ? "page" : undefined}
-                  className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] flex items-center gap-1 py-2 whitespace-nowrap ${
-                    ["costs", "tools", "contact", "sitemap"].includes(section)
-                      ? "text-[#F6B73C] font-semibold"
-                      : "text-slate-300"
-                  }`}
-                >
-                  <span>{t.navTools}</span>
-                  <span className="text-[10px] opacity-75">▾</span>
-                </button>
+              <div
+                ref={toolsMenuRef}
+                className="relative"
+                onMouseEnter={() => {
+                  if (!destinationsMenuRef.current?.contains(document.activeElement)) {
+                    setDesktopMenuOpen("tools");
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (!toolsMenuRef.current?.contains(document.activeElement)) {
+                    setDesktopMenuOpen((current) => current === "tools" ? null : current);
+                  }
+                }}
+                onFocusCapture={(event) => {
+                  const previousTarget = event.relatedTarget as Node | null;
+                  if (!previousTarget || !toolsMenuRef.current?.contains(previousTarget)) {
+                    setDesktopMenuOpen("tools");
+                  }
+                }}
+                onBlurCapture={(event) => {
+                  const nextTarget = event.relatedTarget as Node | null;
+                  if (!nextTarget || !toolsMenuRef.current?.contains(nextTarget)) {
+                    setDesktopMenuOpen((current) => current === "tools" ? null : current);
+                  }
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") {
+                    event.preventDefault();
+                    setDesktopMenuOpen(null);
+                    toolsDisclosureRef.current?.focus();
+                  }
+                }}
+              >
+                <div className="flex items-center gap-0.5">
+                  <a
+                    id="nav-tools-megamenu"
+                    href={getLocalizedRouteHref("/tools")}
+                    onClick={(event) => handleNavigationAnchorClick(event, "/tools")}
+                    aria-current={["costs", "tools", "contact", "sitemap"].includes(section) ? "page" : undefined}
+                    className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
+                      ["costs", "tools", "contact", "sitemap"].includes(section)
+                        ? "text-[#F6B73C] font-semibold"
+                        : "text-slate-300"
+                    }`}
+                  >
+                    {t.navTools}
+                  </a>
+                  <button
+                    ref={toolsDisclosureRef}
+                    type="button"
+                    aria-label={isBn ? "টুলস মেনু খুলুন বা বন্ধ করুন" : "Toggle tools menu"}
+                    aria-expanded={desktopMenuOpen === "tools"}
+                    aria-controls="tools-mega-panel"
+                    onClick={() => setDesktopMenuOpen((current) => current === "tools" ? null : "tools")}
+                    className="w-8 h-8 rounded-md flex items-center justify-center text-slate-300 hover:text-[#F6B73C] hover:bg-white/5 transition-colors cursor-pointer focus-visible:outline-none"
+                  >
+                    <ChevronDown
+                      size={13}
+                      aria-hidden="true"
+                      className={`transition-transform duration-150 ${desktopMenuOpen === "tools" ? "rotate-180 text-[#F6B73C]" : ""}`}
+                    />
+                  </button>
+                </div>
 
-                <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-150 absolute right-0 top-full pt-2 w-[340px] z-50">
+                <div
+                  id="tools-mega-panel"
+                  role="region"
+                  aria-label={isBn ? "টুলস, বাজেট ও সাপোর্ট" : "Travel tools, budgets and support"}
+                  aria-hidden={desktopMenuOpen !== "tools"}
+                  className={`${desktopMenuOpen === "tools" ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"} transition-all duration-150 absolute right-0 top-full pt-2 w-[340px] z-50`}
+                >
                   <div className="bg-brand-navy border border-white/15 rounded-3xl shadow-2xl p-4 space-y-1.5 text-left">
                     <span className="text-[10px] font-mono text-[#F6B73C] font-bold uppercase tracking-wider block px-2 pb-1">
                       {isBn ? "ইন্টারেক্টিভ টুলস ও হেল্পলাইন" : "Calculators, Checklists & Support"}
@@ -2601,18 +2922,19 @@ export default function App() {
                     ].map((toolItem) => {
                       const IconComp = toolItem.icon;
                       return (
-                        <button
+                        <a
                           key={toolItem.id}
-                          type="button"
-                          onClick={() => navigateTo(toolItem.path)}
-                          className="w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors flex items-start gap-2.5 cursor-pointer"
+                          href={getLocalizedRouteHref(toolItem.path)}
+                          onClick={(event) => handleNavigationAnchorClick(event, toolItem.path)}
+                          aria-current={isCurrentNavigationPath(toolItem.path) ? "page" : undefined}
+                          className={`w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors flex items-start gap-2.5 cursor-pointer ${isCurrentNavigationPath(toolItem.path) ? "bg-white/10 ring-1 ring-inset ring-[#F6B73C]/35" : ""}`}
                         >
                           <IconComp className="w-4 h-4 text-[#F6B73C] shrink-0 mt-0.5" />
                           <div>
                             <div className="text-xs font-semibold text-white">{toolItem.label}</div>
                             <div className="text-[11px] text-slate-400">{toolItem.sub}</div>
                           </div>
-                        </button>
+                        </a>
                       );
                     })}
                   </div>
@@ -2625,7 +2947,7 @@ export default function App() {
               <button
                 id="btn-start-trip-cta"
                 onClick={() => navigateTo("/destinations")}
-                className="hidden md:block bg-[#F6B73C] text-brand-navy hover:bg-[#D4941A] font-bold text-sm rounded-full px-5 py-2 shadow-md transition-colors whitespace-nowrap cursor-pointer"
+                className="hidden xl:block bg-[#F6B73C] text-brand-navy hover:bg-[#D4941A] font-bold text-sm rounded-full px-5 py-2 shadow-md transition-colors whitespace-nowrap cursor-pointer"
               >
                 {t.startTripCta}
               </button>
@@ -2634,11 +2956,12 @@ export default function App() {
               <button
                 type="button"
                 id="mobile-menu-burger"
+                ref={mobileMenuTriggerRef}
                 aria-label={isBn ? "নেভিগেশন মেনু খুলুন" : "Open navigation menu"}
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-intent-drawer"
                 onClick={() => setMobileMenuOpen(true)}
-                className="md:hidden w-11 h-11 rounded-xl flex flex-col items-center justify-center gap-1.5 hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] cursor-pointer transition-colors"
+                className="xl:hidden w-11 h-11 rounded-xl flex flex-col items-center justify-center gap-1.5 hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] cursor-pointer transition-colors"
               >
                 <span className="w-5 h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
                 <span className="w-5 h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
@@ -2654,7 +2977,7 @@ export default function App() {
               role="dialog"
               aria-modal="true"
               aria-label={isBn ? "মোবাইল নেভিগেশন মেনু" : "Mobile navigation menu"}
-              className="fixed inset-0 z-50 md:hidden"
+              className="fixed inset-0 z-50 xl:hidden"
             >
               {/* Semi-transparent backdrop with click-to-close */}
               <div
@@ -2664,7 +2987,11 @@ export default function App() {
               />
 
               {/* Sliding drawer from right */}
-              <div className="fixed top-0 right-0 h-full w-[340px] max-w-[90vw] bg-brand-navy shadow-2xl flex flex-col z-10 border-l border-white/10">
+              <div
+                ref={mobileDrawerPanelRef}
+                tabIndex={-1}
+                className="fixed top-0 right-0 h-full w-[340px] max-w-[90vw] bg-brand-navy shadow-2xl flex flex-col z-10 border-l border-white/10"
+              >
                 {/* Drawer Header */}
                 <div className="h-15 px-4 flex items-center justify-between border-b border-white/10 shrink-0">
                   <div className="flex flex-col items-start gap-0.5">
@@ -2682,6 +3009,7 @@ export default function App() {
                     </span>
                   </div>
                   <button
+                    ref={mobileMenuCloseRef}
                     type="button"
                     aria-label={isBn ? "মেনু বন্ধ করুন" : "Close navigation menu"}
                     onClick={() => setMobileMenuOpen(false)}
@@ -2695,6 +3023,7 @@ export default function App() {
                 <div className="px-3.5 pt-3 pb-2.5 border-b border-white/8 grid grid-cols-2 gap-2 shrink-0">
                   <button
                     type="button"
+                    aria-current={section === "home" ? "page" : undefined}
                     onClick={() => {
                       navigateTo("/");
                       setMobileMenuOpen(false);
@@ -2711,6 +3040,7 @@ export default function App() {
 
                   <button
                     type="button"
+                    aria-current={section === "umrah" ? "page" : undefined}
                     onClick={() => {
                       navigateTo("/umrah");
                       setMobileMenuOpen(false);
@@ -2808,13 +3138,13 @@ export default function App() {
                       id: "research" as const,
                       title: isBn ? "ট্রাভেল ব্লগ ও BDT বাজেট হিসাব" : "Blog Guides & BDT Trip Budgets",
                       subtitle: isBn
-                        ? `${localizedBlogs.length}টি বিস্তারিত গাইড · ৫ দিনের খরচ`
-                        : `${localizedBlogs.length} in-depth guides · 5-day BDT sheets`,
+                        ? `${blogPostCount}টি বিস্তারিত গাইড · ৫ দিনের খরচ`
+                        : `${blogPostCount} in-depth guides · 5-day BDT sheets`,
                       isActiveGroup: ["blog", "costs"].includes(section),
                       primaryLinks: [
                         {
                           id: "blog",
-                          label: isBn ? `সবগুলো ট্রাভেল ব্লগ (${localizedBlogs.length})` : `All Travel Blog Guides (${localizedBlogs.length})`,
+                          label: isBn ? `সবগুলো ট্রাভেল ব্লগ (${blogPostCount})` : `All Travel Blog Guides (${blogPostCount})`,
                           meta: isBn ? "ওমরাহ, কার্ড এন্ডোর্সমেন্ট ও ইমিগ্রেশন" : "Umrah, Card Endorsement & Visas",
                           path: "/blog",
                         },
@@ -2941,7 +3271,8 @@ export default function App() {
                           >
                             <div className="space-y-1">
                               {group.primaryLinks.map((link) => {
-                                const isCurrent = section === link.id;
+                                const isCurrent =
+                                  section === link.id || isCurrentNavigationPath(link.path);
                                 return (
                                   <button
                                     key={link.path}
@@ -2973,19 +3304,27 @@ export default function App() {
                             {group.quickChips.length > 0 && (
                               <div className="pt-1.5 border-t border-white/6">
                                 <div className="grid grid-cols-2 gap-1.5">
-                                  {group.quickChips.map((chip) => (
-                                    <button
-                                      key={chip.path}
-                                      type="button"
-                                      onClick={() => {
-                                        navigateTo(chip.path);
-                                        setMobileMenuOpen(false);
-                                      }}
-                                      className="min-h-[38px] px-2.5 py-1.5 rounded-lg bg-slate-900/80 hover:bg-white/10 border border-white/8 text-left text-[11px] font-medium text-slate-200 hover:text-[#F6B73C] truncate transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
-                                    >
-                                      {chip.label}
-                                    </button>
-                                  ))}
+                                  {group.quickChips.map((chip) => {
+                                    const isCurrent = isCurrentNavigationPath(chip.path);
+                                    return (
+                                      <button
+                                        key={chip.path}
+                                        type="button"
+                                        aria-current={isCurrent ? "page" : undefined}
+                                        onClick={() => {
+                                          navigateTo(chip.path);
+                                          setMobileMenuOpen(false);
+                                        }}
+                                        className={`min-h-[44px] px-2.5 py-1.5 rounded-lg border text-left text-[11px] font-medium truncate transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
+                                          isCurrent
+                                            ? "bg-[#F6B73C]/15 border-[#F6B73C]/45 text-[#F6B73C]"
+                                            : "bg-slate-900/80 hover:bg-white/10 border-white/8 text-slate-200 hover:text-[#F6B73C]"
+                                        }`}
+                                      >
+                                        {chip.label}
+                                      </button>
+                                    );
+                                  })}
                                 </div>
                               </div>
                             )}
@@ -3006,7 +3345,7 @@ export default function App() {
                         rel="me noopener noreferrer"
                         aria-label="URAL on Facebook (@uraltravelbd)"
                         title="Facebook (@uraltravelbd)"
-                        className="w-8 h-8 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
+                        className="w-11 h-11 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
                       >
                         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                           <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
@@ -3018,7 +3357,7 @@ export default function App() {
                         rel="me noopener noreferrer"
                         aria-label="URAL on Instagram (@uraltravelbd)"
                         title="Instagram (@uraltravelbd)"
-                        className="w-8 h-8 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
+                        className="w-11 h-11 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
                       >
                         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
@@ -3030,7 +3369,7 @@ export default function App() {
                         rel="me noopener noreferrer"
                         aria-label="URAL on LinkedIn"
                         title="LinkedIn (URAL Travel Bangladesh)"
-                        className="w-8 h-8 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
+                        className="w-11 h-11 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
                       >
                         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                           <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
@@ -3042,7 +3381,7 @@ export default function App() {
                         rel="me noopener noreferrer"
                         aria-label="URAL on TikTok (@uraltravelbd)"
                         title="TikTok (@uraltravelbd)"
-                        className="w-8 h-8 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
+                        className="w-11 h-11 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
                       >
                         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                           <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.5 6.3 6.3 0 0 0 1.86-4.49V8.75a8.28 8.28 0 0 0 4.91 1.6V6.9a4.83 4.83 0 0 1-1-.21z" />
@@ -3061,7 +3400,7 @@ export default function App() {
                       href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="min-h-[42px] bg-brand-emerald text-white font-bold text-xs px-3 rounded-xl flex items-center justify-center gap-1.5 shadow transition-colors"
+                      className="min-h-[44px] bg-brand-emerald text-white font-bold text-xs px-3 rounded-xl flex items-center justify-center gap-1.5 shadow transition-colors"
                     >
                       <span>WhatsApp</span>
                     </a>
@@ -3071,7 +3410,7 @@ export default function App() {
                         navigateTo("/destinations");
                         setMobileMenuOpen(false);
                       }}
-                      className="min-h-[42px] bg-[#F6B73C] text-brand-navy hover:bg-[#D4941A] font-bold text-xs px-3 rounded-xl shadow-md text-center transition-colors cursor-pointer"
+                      className="min-h-[44px] bg-[#F6B73C] text-brand-navy hover:bg-[#D4941A] font-bold text-xs px-3 rounded-xl shadow-md text-center transition-colors cursor-pointer"
                     >
                       {t.startTripCta}
                     </button>
@@ -3289,26 +3628,50 @@ export default function App() {
       )}
 
       {/* ⚡ ACTIVE TEMPLATE RENDER */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
 
         {/* -------------------------------------------------------------
             🏠 VIEW 1: HOME PAGE (CONVERSION HUB)
         ------------------------------------------------------------- */}
         {section === "home" && (
-          <div className="space-y-16">
+          <div className="space-y-12 sm:space-y-14 lg:space-y-16">
 
-            {/* SEARCH SECTOR */}
-            <div id="live-flight-search" className="scroll-mt-12">
-              <div className="bg-gradient-to-b from-brand-navy to-[#081322] border border-slate-800/90 rounded-3xl p-2.5 sm:p-5 shadow-2xl w-full">
-                <div className="text-slate-900">
+            {/* SEARCH & FLIGHT PLANNING */}
+            <div className="space-y-6 sm:space-y-7">
+              <section
+                id="live-flight-search"
+                aria-labelledby="flight-search-title"
+                className="scroll-mt-12 space-y-5 sm:space-y-6"
+              >
+                <header className="max-w-3xl space-y-2">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-[#F6B73C]/35 bg-[#F6B73C]/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-brand-navy">
+                    <Plane size={13} className="text-brand-emerald" aria-hidden="true" />
+                    <span>{isBn ? "ফ্লাইট সার্চ" : "Flight search"}</span>
+                  </div>
+                  <h2
+                    id="flight-search-title"
+                    className="ural-section-title font-serif text-2xl sm:text-3xl font-black tracking-tight text-slate-900"
+                  >
+                    {isBn ? "ফ্লাইট খুঁজুন" : "Search Flights"}
+                  </h2>
+                  <p className="max-w-2xl text-sm leading-relaxed text-slate-600">
+                    {isBn
+                      ? "আপনার রুট, তারিখ ও পছন্দের মুদ্রা বেছে ফ্লাইট অপশন তুলনা করুন।"
+                      : "Choose your route, dates and preferred currency to compare flight options."}
+                  </p>
+                </header>
+
+                <div className="w-full text-slate-900">
                   {areTpScriptsReady ? (
                     <React.Suspense
                       fallback={
-                        <TravelpayoutsWidgetSkeleton
-                          variant="flights"
-                          isBn={isBn}
-                          onInteract={() => setAreTpScriptsReady(true)}
-                        />
+                        <div className="rounded-3xl border border-slate-800/90 bg-gradient-to-b from-brand-navy to-[#081322] p-1.5 shadow-xl sm:p-3">
+                          <TravelpayoutsWidgetSkeleton
+                            variant="flights"
+                            isBn={isBn}
+                            onInteract={() => setAreTpScriptsReady(true)}
+                          />
+                        </div>
                       }
                     >
                       <TravelpayoutsWidget
@@ -3317,78 +3680,114 @@ export default function App() {
                       />
                     </React.Suspense>
                   ) : (
-                    <TravelpayoutsWidgetSkeleton
-                      variant="flights"
-                      isBn={isBn}
-                      onInteract={() => setAreTpScriptsReady(true)}
-                    />
+                    <div className="rounded-3xl border border-slate-800/90 bg-gradient-to-b from-brand-navy to-[#081322] p-1.5 shadow-xl sm:p-3">
+                      <TravelpayoutsWidgetSkeleton
+                        variant="flights"
+                        isBn={isBn}
+                        onInteract={() => setAreTpScriptsReady(true)}
+                      />
+                    </div>
                   )}
                 </div>
-              </div>
 
-              {/* Price Alert Promotion Banner */}
-              <div className="bg-white border border-slate-200 rounded-xl p-3.5 sm:px-5 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-amber-50 text-brand-navy flex items-center justify-center shrink-0 border border-amber-200">
-                    <Bell className="w-4 h-4 text-[#F6B73C]" />
+                {/* Price Alert Promotion Banner */}
+                <div className="flex flex-col items-start justify-between gap-3 rounded-2xl border border-amber-200/80 bg-amber-50/60 p-4 sm:flex-row sm:items-center sm:px-5">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-amber-200 bg-white text-brand-navy shadow-sm">
+                      <Bell className="h-4 w-4 text-[#F6B73C]" aria-hidden="true" />
+                    </div>
+                    <div className="text-xs leading-relaxed text-slate-700">
+                      <span className="mr-1 block font-bold text-slate-900 sm:inline">
+                        {lang === "bn" ? "ভাড়া কমার নোটিফিকেশন:" : "Looking for the lowest fare?"}
+                      </span>
+                      <span>{t.priceAlertBanner}</span>
+                    </div>
                   </div>
-                  <div className="text-xs text-slate-650 leading-snug">
-                    <span className="font-bold text-slate-900 block sm:inline mr-1">
-                      {lang === "bn" ? "ভাড়া কমার নোটিফিকেশন:" : "Looking for lowest fare?"}
+                  <button
+                    type="button"
+                    onClick={() => openPriceAlert()}
+                    className="min-h-11 w-full shrink-0 rounded-xl bg-brand-navy px-4 py-2.5 text-center text-xs font-bold text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 sm:w-auto"
+                  >
+                    {t.setPriceAlertBtn}
+                  </button>
+                </div>
+
+              <section
+                id="airport-code-reference"
+                aria-labelledby="quick-airport-codes-title"
+                className="rounded-3xl border border-slate-200/90 bg-white p-4 shadow-sm sm:p-6"
+              >
+                <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                  <div className="space-y-2">
+                    <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-brand-emerald">
+                        <Plane size={14} aria-hidden="true" />
+                      </span>
+                      <span>{isBn ? "দ্রুত IATA রেফারেন্স" : "Quick IATA reference"}</span>
+                    </div>
+                    <h3
+                      id="quick-airport-codes-title"
+                      className="ural-card-title font-serif text-lg font-black tracking-tight text-slate-900 sm:text-xl"
+                    >
+                      {isBn ? "এয়ারপোর্ট কোড এক নজরে" : "Quick Airport Code Reference"}
+                    </h3>
+                    <p className="max-w-2xl text-xs leading-relaxed text-slate-600">
+                      {isBn
+                        ? "ফ্লাইট খোঁজার সময় এই তিন-অক্ষরের IATA কোডগুলো ব্যবহার করুন।"
+                        : "Use these three-letter IATA codes when searching for your route."}
+                    </p>
+                  </div>
+                  <a
+                    href="/tools?tab=airports"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateTo("/tools?tab=airports");
+                    }}
+                    className="inline-flex min-h-11 w-full shrink-0 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-xs font-semibold text-brand-navy transition-colors hover:border-brand-navy hover:bg-brand-navy hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] md:w-auto"
+                  >
+                    <span>
+                      {isBn
+                        ? "সম্পূর্ণ এয়ারপোর্ট ডিরেক্টরি ও অনুসন্ধান টুল খুলুন"
+                        : "Open Full Airport Directory & Tool"}
                     </span>
-                    <span>{t.priceAlertBanner}</span>
-                  </div>
+                    <ArrowRight size={14} aria-hidden="true" />
+                  </a>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => openPriceAlert()}
-                  className="shrink-0 w-full sm:w-auto bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors cursor-pointer text-center"
-                >
-                  {t.setPriceAlertBtn}
-                </button>
-              </div>
-
-              {/* ✈️ MINIMAL AIRPORT IATA CODES QUICK-STRIP */}
-              <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2 text-xs font-bold text-brand-navy uppercase tracking-wider">
-                    <Plane className="text-brand-emerald" size={14} />
-                    <span>{isBn ? "কুইক এয়ারপোর্ট কোড রেফারেন্স (IATA)" : "Quick Airport Code Reference (IATA)"}</span>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-slate-600">
-                    <span><strong className="text-slate-900 font-mono">DAC</strong> Dhaka</span>
-                    <span className="text-slate-300">·</span>
-                    <span><strong className="text-slate-900 font-mono">CGP</strong> Chattogram</span>
-                    <span className="text-slate-300">·</span>
-                    <span><strong className="text-slate-900 font-mono">ZYL</strong> Sylhet</span>
-                    <span className="text-slate-300">·</span>
-                    <span><strong className="text-slate-900 font-mono">CXB</strong> Cox's Bazar</span>
-                    <span className="text-slate-300">·</span>
-                    <span><strong className="text-slate-900 font-mono">DXB</strong> Dubai</span>
-                    <span className="text-slate-300">·</span>
-                    <span><strong className="text-slate-900 font-mono">JED</strong> Jeddah</span>
-                  </div>
+                <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  {[
+                    { code: "DAC", en: "Dhaka", bn: "ঢাকা" },
+                    { code: "CGP", en: "Chattogram", bn: "চট্টগ্রাম" },
+                    { code: "ZYL", en: "Sylhet", bn: "সিলেট" },
+                    { code: "CXB", en: "Cox's Bazar", bn: "কক্সবাজার" },
+                    { code: "DXB", en: "Dubai", bn: "দুবাই" },
+                    { code: "JED", en: "Jeddah", bn: "জেদ্দা" },
+                  ].map((airport) => (
+                    <div
+                      key={airport.code}
+                      className="flex min-h-[68px] flex-col justify-center rounded-xl border border-slate-200/90 bg-slate-50/80 px-3 py-2.5"
+                    >
+                      <span className="font-mono text-base font-black tracking-wide text-brand-navy">
+                        {airport.code}
+                      </span>
+                      <span className="text-xs font-medium text-slate-600">
+                        {isBn ? airport.bn : airport.en}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-                <a
-                  href="/tools?tab=airports"
-                  onClick={(e) => { e.preventDefault(); navigateTo("/tools?tab=airports"); }}
-                  className="inline-flex items-center justify-center gap-1.5 self-start md:self-center text-xs font-semibold text-brand-navy hover:text-white bg-slate-100 hover:bg-brand-navy border border-slate-200 px-4 py-2 rounded-xl transition-all shrink-0 cursor-pointer"
-                >
-                  <span>{isBn ? "সম্পূর্ণ এয়ারপোর্ট ডিরেক্টরি ও অনুসন্ধান টুল খুলুন" : "Open Full Airport Directory & Tool"}</span>
-                  <ArrowRight size={13} />
-                </a>
-              </div>
+              </section>
+              </section>
             </div>
 
             {/* 🟦 SECTION 2: QUICK DESTINATION ENTRY */}
             <div id="destinations-section" className="scroll-mt-12 space-y-6">
               <div className="text-center space-y-2">
                 <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">{t.destinationsBadge}</span>
-                <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{t.destinationsTitle}</h2>
+                <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{t.destinationsTitle}</h2>
                 <p className="text-xs text-slate-600 max-w-xl mx-auto">{t.destinationsSubtitle}</p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
                 {[
                   {
                     city: "Kathmandu",
@@ -3487,10 +3886,10 @@ export default function App() {
                     <div className="relative z-20 p-4 space-y-2.5 bg-slate-950/65 backdrop-blur-md border-t border-white/10 m-3 rounded-xl shadow-lg">
                       <div className="flex items-center gap-1.5">
                         <span className="text-sm px-1.5 py-0.5 bg-white/15 rounded backdrop-blur-sm font-sans shrink-0">{dest.img}</span>
-                        <h3 className="font-sans font-bold text-sm text-white tracking-tight">{dest.city}, {dest.country}</h3>
+                        <h3 className="ural-card-title font-sans font-bold text-sm text-white tracking-tight">{dest.city}, {dest.country}</h3>
                       </div>
                       
-                      <p className="text-[10px] text-slate-250 font-normal leading-relaxed line-clamp-3">
+                      <p className="text-[11px] text-slate-200 font-normal leading-relaxed line-clamp-3 sm:text-xs">
                         {dest.tag}
                       </p>
 
@@ -3507,14 +3906,14 @@ export default function App() {
             </div>
 
             {/* 🟦 SECTION 3: “PLAN YOUR TRIP” PATHWAY */}
-            <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="ural-panel bg-slate-50 p-6 sm:p-8 border border-border-subtle shadow-sm flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8">
               <div className="max-w-2xl space-y-3">
                 <span className="text-[10px] font-mono font-bold text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full uppercase tracking-wider inline-block">
                   {isBn ? "ঢাকা থেকে আপনার পরবর্তী সফর সাজান" : "Plan your next trip from Dhaka"}
                 </span>
-                <h3 className="font-serif text-2xl sm:text-3.5xl font-black text-brand-navy tracking-tight">
+                <h2 className="ural-section-title font-serif text-2xl sm:text-3.5xl font-black text-brand-navy tracking-tight">
                   {isBn ? "বুকিং করার আগে যা যা জানা প্রয়োজন" : "Everything You Need Before You Book"}
-                </h3>
+                </h2>
                 <p className="text-xs text-slate-600 leading-relaxed font-sans">
                   {isBn
                     ? "কোথা থেকে শুরু করবেন ভাবছেন? প্রথমে ফ্লাইটের ভাড়া যাচাই করুন, এরপর পছন্দের এলাকায় হোটেল তুলনা করুন এবং আমাদের ভিসা গাইড দেখে প্রয়োজনীয় ডকুমেন্টগুলো গুছিয়ে নিন।"
@@ -3545,19 +3944,19 @@ export default function App() {
             </div>
 
             {/* 🟦 SECTION 4: HOTEL SEARCH ENTRY */}
-            <div id="global-hotel-search" className="relative rounded-3xl overflow-hidden bg-brand-navy text-white p-6 sm:p-8 md:p-10 shadow-xl border border-slate-800">
+            <div id="global-hotel-search" className="ural-panel relative overflow-hidden bg-white text-brand-navy p-6 sm:p-8 shadow-sm border border-border-subtle">
               
               <div className="max-w-3xl mx-auto text-center space-y-2.5 mb-6">
-                <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/20 px-3 py-1 rounded-full">
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-brand-gold-ink uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/25 px-3 py-1 rounded-full">
                   <Building size={12} className="text-[#F6B73C]" />
                   <span>{isBn ? "গ্লোবাল হোটেল ও ফ্যামিলি স্টে সার্চ" : "Global Hotel & Stay Finder"}</span>
                 </span>
-                <h3 className="font-serif text-2xl sm:text-3xl font-black text-white">
+                <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-black text-slate-900">
                   {isBn
                     ? "মক্কা, দুবাই, ব্যাংকক, কুয়ালালামপুর, প্যারিস ও বিশ্বের যেকোনো শহরের হোটেল তুলনা করুন"
                     : "Compare Hotels & Family Stays Worldwide (Asia, Middle East, Europe & USA)"}
-                </h3>
-                <p className="text-xs text-slate-300 leading-relaxed max-w-2xl mx-auto">
+                </h2>
+                <p className="text-xs text-slate-600 leading-relaxed max-w-2xl mx-auto">
                   {isBn
                     ? "যেকোনো শহর ও তারিখ দিয়ে আসল হোটেল ভাড়া দেখুন। মক্কা হারাম ভিউ, Thamel-এর বাজেট রুম কিংবা Pratunam ও প্যারিসের ফ্যামিলি স্যুট—সব অপশন তুলনা করে সরাসরি বুক করুন।"
                     : "Type any city worldwide or pick a popular hub below to compare live hotel rates. From Makkah Haram-view suites and Bangkok Pratunam stays to Paris, London, and New York hotels."}
@@ -3588,19 +3987,19 @@ export default function App() {
               </div>
 
               {/* Quick links to pre-filled hotel lookups */}
-              <div className="text-center text-xs font-mono text-slate-400 mt-6 flex flex-wrap justify-center items-center gap-2">
+              <div className="text-center text-xs font-mono text-slate-600 mt-6 flex flex-wrap justify-center items-center gap-2">
                 <span>{isBn ? "জনপ্রিয় ফ্যামিলি হোটেল জোন:" : "Top family-rated lodging selectors:"}</span>
-                <button onClick={() => navigateTo("/hotels/kathmandu-hotels")} className="text-[#F6B73C] hover:underline">Thamel, Kathmandu 🇳🇵</button>
+                <button onClick={() => navigateTo("/hotels/kathmandu-hotels")} className="text-brand-gold-ink hover:text-brand-navy hover:underline">Thamel, Kathmandu 🇳🇵</button>
                 <span>•</span>
-                <button onClick={() => navigateTo("/hotels/bangkok-hotels")} className="text-[#F6B73C] hover:underline">Pratunam, Bangkok 🇹🇭</button>
+                <button onClick={() => navigateTo("/hotels/bangkok-hotels")} className="text-brand-gold-ink hover:text-brand-navy hover:underline">Pratunam, Bangkok 🇹🇭</button>
                 <span>•</span>
-                <button onClick={() => navigateTo("/hotels/kuala-lumpur-hotels")} className="text-[#F6B73C] hover:underline">Bukit Bintang, KL 🇲🇾</button>
+                <button onClick={() => navigateTo("/hotels/kuala-lumpur-hotels")} className="text-brand-gold-ink hover:text-brand-navy hover:underline">Bukit Bintang, KL 🇲🇾</button>
                 <span>•</span>
-                <button onClick={() => navigateTo("/hotels/singapore-hotels")} className="text-[#F6B73C] hover:underline">Little India, Singapore 🇸🇬</button>
+                <button onClick={() => navigateTo("/hotels/singapore-hotels")} className="text-brand-gold-ink hover:text-brand-navy hover:underline">Little India, Singapore 🇸🇬</button>
                 <span>•</span>
-                <button onClick={() => navigateTo("/hotels/maldives-hotels")} className="text-[#F6B73C] hover:underline">Maafushi, Maldives 🇲🇻</button>
+                <button onClick={() => navigateTo("/hotels/maldives-hotels")} className="text-brand-gold-ink hover:text-brand-navy hover:underline">Maafushi, Maldives 🇲🇻</button>
                 <span>•</span>
-                <button onClick={() => navigateTo("/hotels/dubai-hotels")} className="text-[#F6B73C] hover:underline">Deira, Dubai 🇦🇪</button>
+                <button onClick={() => navigateTo("/hotels/dubai-hotels")} className="text-brand-gold-ink hover:text-brand-navy hover:underline">Deira, Dubai 🇦🇪</button>
               </div>
             </div>
 
@@ -3610,11 +4009,11 @@ export default function App() {
             </React.Suspense>
 
             {/* 🟦 INTERACTIVE TOOLS DESK PANEL (Aesthetic calculation tools) */}
-            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 space-y-6">
+            <div className="ural-panel bg-slate-50 border border-border-subtle p-6 sm:p-8 space-y-6">
               <div className="border-l-4 border-brand-navy pl-4">
-                <h3 className="font-serif text-xl font-bold text-brand-navy">
+                <h2 className="ural-section-title font-serif text-xl font-bold text-brand-navy">
                   {isBn ? "প্রয়োজনীয় ট্রাভেল টুলস (Handy Travel Tools)" : "Handy Travel Tools"}
-                </h3>
+                </h2>
                 <p className="text-xs text-slate-500 font-mono">
                   {isBn
                     ? "বাংলাদেশি টাকা (BDT) কনভার্ট করুন, প্যাকিং চেকলিস্ট মিলিয়ে নিন এবং ট্রিপের মোট বাজেট হিসাব করুন।"
@@ -3625,7 +4024,7 @@ export default function App() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 
                 {/* 1. Currency Converter (Interactive) */}
-                <div className="bg-white p-5 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                <div className="ural-card bg-white p-5 border border-border-subtle flex flex-col justify-between">
                   <div>
                     <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest inline-flex items-center gap-1.5 mb-2">
                       <DollarSign size={13} className="text-[#F6B73C]" />
@@ -3664,7 +4063,7 @@ export default function App() {
                           id="home-currency-target-select"
                           value={currencyToOption}
                           onChange={(e) => setCurrencyToOption(e.target.value as any)}
-                          className="flex-grow bg-slate-50 border border-slate-250 rounded p-1 text-xs font-mono focus:outline-none font-bold"
+                          className="flex-grow bg-slate-50 border border-border-subtle rounded p-1 text-xs font-mono focus:outline-none font-bold"
                         >
                           <option value="NPR">NPR (Nepal Rupee)</option>
                           <option value="THB">THB (Thai Baht)</option>
@@ -3690,7 +4089,7 @@ export default function App() {
                 </div>
 
                 {/* 2. Packing Checklist (Interactive checkboxes) */}
-                <div className="bg-white p-5 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                <div className="ural-card bg-white p-5 border border-border-subtle flex flex-col justify-between">
                   <div>
                     <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest inline-flex items-center gap-1.5 mb-1">
                       <FileText size={13} className="text-[#F6B73C]" />
@@ -3721,7 +4120,7 @@ export default function App() {
                 </div>
 
                 {/* 3. Budget Planner Tool */}
-                <div className="bg-white p-5 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                <div className="ural-card bg-white p-5 border border-border-subtle flex flex-col justify-between">
                   <div>
                     <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest inline-flex items-center gap-1.5 mb-2">
                       <Calculator size={13} className="text-[#F6B73C]" />
@@ -3752,16 +4151,16 @@ export default function App() {
 
 
             {/* 🟦 SECTION 6: TRUST + ENGAGEMENT */}
-            <div className="bg-brand-navy text-white rounded-3xl p-8 border border-slate-800 text-center space-y-6 flex flex-col justify-center" style={{ minHeight: "220px" }}>
+            <div className="ural-panel bg-brand-navy text-white p-6 sm:p-8 border border-slate-800 text-center space-y-5 sm:space-y-6 flex flex-col justify-center">
               <div className="space-y-1">
                 <span className="text-[9px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest">
                   {isBn ? "কেন ভ্রমণকারীরা URAL ব্যবহার করেন" : "Why Travelers Use URAL"}
                 </span>
-                <h3 className="font-serif text-2xl font-black">
+                <h2 className="ural-section-title font-serif text-2xl font-black">
                   {isBn ? "সহজ, ফ্রি এবং বাংলাদেশিদের জন্য তৈরি" : "Simple, Free, and Built for Bangladesh"}
-                </h3>
+                </h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto w-full text-left">
+              <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3 max-w-5xl mx-auto w-full text-left">
                 <div className="space-y-1 p-4 bg-slate-900/40 rounded-xl border border-slate-800">
                   <span className="text-[#F6B73C] font-semibold text-xs inline-flex items-center gap-1.5 uppercase tracking-wider font-mono">
                     <Plane size={13} className="text-[#F6B73C]" />
@@ -3807,156 +4206,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* 🟦 SECTION 7 / EMAIL ACTION SIGNUP */}
-            <div
-              className="w-screen relative left-1/2 -translate-x-1/2 border-t border-b border-slate-900/10 bg-cover bg-center select-none overflow-hidden"
-            >
-              <ResponsiveImage
-                src={coxsBazarSunriseImg}
-                sizes="100vw"
-                alt=""
-                aria-hidden={true}
-                loading="lazy"
-                fetchPriority="low"
-                decoding="async"
-                className="absolute inset-0 h-full w-full object-cover pointer-events-none"
-                style={{ objectPosition: "center 40%" }}
-              />
-              <div
-                aria-hidden={true}
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(15, 30, 54, 0.5) 0%, rgba(11, 23, 44, 0.85) 65%, rgba(10, 15, 30, 0.98) 100%)",
-                }}
-              />
-
-              <div className="max-w-4xl mx-auto px-4 py-16 sm:py-20 flex flex-col justify-center items-center text-center space-y-8 relative z-10">
-                
-                {/* Visual Badge */}
-                <span className="font-sans tracking-widest uppercase inline-flex items-center gap-1.5 text-[11px] font-bold px-4 py-1.5 border leading-none bg-[#F6B73C]/20 border-[#F6B73C]/35 text-[#F6B73C] rounded-full backdrop-blur-md">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C] animate-pulse"></span>
-                  <span>{isBn ? "বাংলাদেশ থেকে বিশ্বজুড়ে যাত্রা" : "Live from Cox's Bazar to the World"}</span>
-                </span>
-
-                <div className="space-y-3 max-w-2xl">
-                  <h3 className="font-serif text-2xl sm:text-4xl font-black text-white leading-tight tracking-tight drop-shadow-md">
-                    {isBn ? (
-                      <>
-                        ঢাকা থেকে ফ্লাইটের ভাড়া কমলে <br className="sm:hidden" />
-                        <span className="text-[#F6B73C]">সাথে সাথে এলার্ট পান</span>
-                      </>
-                    ) : (
-                      <>
-                        Get Flight Deal Alerts <br className="sm:hidden" />
-                        <span className="text-[#F6B73C]">from Dhaka</span>
-                      </>
-                    )}
-                  </h3>
-                  <p className="text-sm sm:text-base text-slate-200 font-sans leading-relaxed max-w-xl mx-auto opacity-95">
-                    {isBn ? (
-                      <>
-                        ঢাকা থেকে Maldives, Nepal, Bangkok, Kuala Lumpur, Jeddah বা Dubai-এর ফ্লাইটের ভাড়া কমলেই ইমেইলে{" "}
-                        <span className="text-[#F6B73C] font-semibold">BDT Fare Alert</span> পেতে সাবস্ক্রাইব করুন।
-                      </>
-                    ) : (
-                      <>
-                        Sign up to get instant BDT notifications when flight prices from Dhaka drop below{" "}
-                        <span className="text-[#F6B73C] font-semibold">BDT 20,000</span> to Maldives, Nepal, Bangkok, KL, or Dubai.
-                      </>
-                    )}
-                  </p>
-                </div>
-
-                <div className="w-full max-w-md bg-slate-950/40 p-1 rounded-2xl border border-white/10 backdrop-blur-md shadow-2xl">
-                  {emailSubscribed ? (
-                    <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs sm:text-sm px-5 py-4 rounded-xl font-mono text-center space-y-2">
-                      <div>
-                        {isBn ? (
-                          <>
-                            ✔ সাবস্ক্রিপশন সম্পন্ন হয়েছে! ঢাকা থেকে ফ্লাইটের ভাড়া কমলে আপনার <b className="text-white">{userEmail}</b> ইমেইলে জানিয়ে দেওয়া হবে।
-                          </>
-                        ) : (
-                          <>
-                            ✔ You're subscribed! We'll email you at <b className="text-white">{userEmail}</b> when Dhaka flight prices drop.
-                          </>
-                        )}
-                      </div>
-                      <div className="flex items-center justify-center gap-3 pt-1 text-[11px]">
-                        {subscriptionId && (
-                          <span className="bg-emerald-500/20 text-emerald-200 px-2 py-0.5 rounded border border-emerald-400/30">
-                            ID: {subscriptionId}
-                          </span>
-                        )}
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setEmailSubscribed(false);
-                            setEmailSubscribeError(null);
-                          }}
-                          className="text-[#F6B73C] hover:underline cursor-pointer font-sans font-semibold"
-                        >
-                          {isBn ? "অন্য ইমেইল যুক্ত করুন" : "Use another email"}
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <form 
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        handleEmailSubscription(userEmail, "Homepage Hero Deal Alert");
-                      }}
-                      className="space-y-2"
-                    >
-                      <div className="flex flex-col sm:flex-row items-center gap-2">
-                        <label htmlFor="home-deal-alert-email" className="sr-only">
-                          {isBn ? "আপনার ইমেইল এড্রেস লিখুন" : "Enter your personal email"}
-                        </label>
-                        <input 
-                          id="home-deal-alert-email"
-                          type="email" 
-                          value={userEmail}
-                          onChange={(e) => {
-                            setUserEmail(e.target.value);
-                            if (emailSubscribeError) setEmailSubscribeError(null);
-                          }}
-                          placeholder={isBn ? "আপনার ইমেইল এড্রেস লিখুন" : "Enter your personal email"}
-                          required
-                          className="w-full sm:flex-grow bg-slate-900/60 border border-white/10 rounded-xl py-3 px-4 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-[#F6B73C] focus:ring-1 focus:ring-[#F6B73C] transition-all font-sans text-center sm:text-left"
-                        />
-                        <button 
-                          type="submit"
-                          disabled={emailSubmitting}
-                          className="w-full sm:w-auto bg-[#F6B73C] text-brand-navy hover:bg-[#ffc240] active:bg-[#e2a222] disabled:opacity-60 font-black text-sm px-8 py-3 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer shrink-0 shadow-lg shadow-[#F6B73C]/20"
-                        >
-                          {emailSubmitting
-                            ? isBn
-                              ? "যুক্ত হচ্ছে..."
-                              : "Subscribing..."
-                            : isBn
-                              ? "এলার্ট চালু করুন"
-                              : "Subscribe Alerts"}
-                        </button>
-                      </div>
-                      {emailSubscribeError && (
-                        <p role="alert" className="text-[11px] text-amber-300 font-sans px-2 text-left">
-                          {emailSubscribeError}
-                        </p>
-                      )}
-                    </form>
-                  )}
-                </div>
-
-                <div className="flex items-center gap-4 text-[11px] font-mono text-slate-300 opacity-90">
-                  <span className="flex items-center gap-1.5"><ShieldCheck size={12} className="text-emerald-400" /> Spam-Free</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/20"></span>
-                  <span className="flex items-center gap-1.5"><Check size={12} className="text-slate-300" /> 1-Click Unsubscribe</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/20"></span>
-                  <span className="flex items-center gap-1.5"><DollarSign size={12} className="text-[#F6B73C]" /> BDT Pricing Alerts</span>
-                </div>
-
-              </div>
-            </div>
 
           </div>
         )}
@@ -3964,3215 +4213,73 @@ export default function App() {
         {/* -------------------------------------------------------------
             ✈️ VIEW 2: FLIGHTS INDEX & LANDING PAGES
         ------------------------------------------------------------- */}
-        {section === "flights" && (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            
-            {/* Sidebar Router for cities */}
-            <div className="space-y-4">
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
-                {isBn ? "ফ্লাইট রুট নির্বাচন করুন:" : "SELECT FLIGHT ROUTE:"}
-              </span>
-              <div className="space-y-2">
-                {localizedFlights.map((route) => (
-                  <button
-                    key={route.id}
-                    id={`btn-route-select-${route.id}`}
-                    onClick={() => navigateTo(`/flights/${route.id}`)}
-                    className={`w-full text-left p-3.5 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
-                      parameterId === route.id
-                        ? "bg-brand-navy text-white border-brand-navy shadow-md"
-                        : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50"
-                    }`}
-                  >
-                    <span className="inline-flex items-center gap-1.5">{route.from} <span className="text-[#F6B73C] font-bold">→</span> {route.to}</span>
-                    <ArrowRight size={12} className={parameterId === route.id ? "text-[#F6B73C]" : "text-slate-450"} />
-                  </button>
-                ))}
-              </div>
-
-              {/* Conversion Ads banner */}
-              <div className="bg-brand-navy text-white p-5 rounded-xl border border-slate-800 space-y-3 shadow">
-                <span className="text-[10px] text-[#F6B73C] font-mono uppercase tracking-widest inline-flex items-center gap-1.5 font-bold">
-                  <Ticket size={12} className="text-[#F6B73C]" />
-                  <span>{isBn ? "বিশেষ সাশ্রয়" : "Special Offer"}</span>
-                </span>
-                <h4 className="font-serif text-sm font-bold">
-                  {isBn ? "আপনার পরবর্তী ফ্লাইট বুকিংয়ে সর্বোচ্চ BDT 3,500 সাশ্রয় করুন" : "Save up to BDT 3,500 on Your Next Booking"}
-                </h4>
-                <p className="text-[11px] text-slate-300 leading-normal">
-                  {isBn
-                    ? `আপনার ${localizedFlights.find(r => r.id === parameterId)?.country || "Nepal"} ফ্লাইটের ভাড়া তুলনা করুন — ভেরিফায়েড পার্টনারের মাধ্যমে সর্বনিম্ন ভাড়া খুঁজুন।`
-                    : `Compare prices for your ${localizedFlights.find(r => r.id === parameterId)?.country || "Nepal"} flight — lowest fares through our verified booking partners.`}
-                </p>
-              </div>
-
-              <div className="bg-white border border-slate-200 p-5 rounded-xl space-y-2 shadow-sm">
-                <span className="text-[10px] text-brand-navy font-mono uppercase tracking-widest inline-flex items-center gap-1.5 font-bold">
-                  <Car size={12} className="text-brand-navy" />
-                  <span>{isBn ? "ল্যান্ড করার পর" : "After You Land"}</span>
-                </span>
-                <p className="text-[11px] text-slate-500 leading-normal">
-                  {isBn
-                    ? `${localizedFlights.find(r => r.id === parameterId)?.country || "Nepal"}-এ নেমে সরাসরি হোটেলে যেতে আগে থেকেই প্রাইভেট Airport Transfer বুক করুন।`
-                    : `Pre-book a private airport transfer to your hotel in ${localizedFlights.find(r => r.id === parameterId)?.country || "Nepal"} — skip the taxi line.`}
-                </p>
-                <PartnerLinkButton href={AFFILIATE_LINKS.kiwitaxi} label={isBn ? "Airport Transfer খুঁজুন" : "Find a Transfer"} variant="dark" />
-              </div>
-            </div>
-
-            {/* Master Page Content */}
-            <div className="lg:col-span-3 space-y-6">
-              {(() => {
-                const activeRoute = localizedFlights.find(r => r.id === parameterId) || localizedFlights[0];
-                return (
-                  <div className="space-y-8 animate-fade-in">
-                    
-                    {/* Header */}
-                    <div className="border-b border-slate-200 pb-5">
-<div className="flex flex-wrap items-center justify-between gap-4">
-                        <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
-                          {isBn ? `${activeRoute.from} থেকে ${activeRoute.to} ফ্লাইট গাইড` : `Flights from ${activeRoute.from} to ${activeRoute.to}`}
-                        </h1>
-                        <div className="flex items-center gap-2.5">
-                          <span className="bg-[#F6B73C]/20 text-brand-navy text-xs px-3 py-1.5 rounded-full font-bold font-mono">
-                            {activeRoute.priceRangeBdt.split(" (")[0]}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => openPriceAlert(activeRoute.to)}
-                            className="inline-flex items-center gap-1.5 text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3.5 py-1.5 rounded-full shadow-xs transition-colors cursor-pointer"
-                          >
-                            <Bell size={12} className="text-white" />
-                            <span>{isBn ? "ফেয়ার অ্যালার্ট" : "Price Alert"}</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* 🤖 AEO: QUICK ANSWER (50-80 Words, Google AI Overview Optimized) */}
-                    <div id="aeo-quick-answer-card" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
-                      <span className="text-[10px] font-bold tracking-widest text-brand-navy font-mono block mb-1">
-                        {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
-                      </span>
-                      <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
-                        {activeRoute.quickAnswer}
-                      </p>
-                    </div>
-
-                    {/* 📊 AEO: KEY FACTS TABLE */}
-                    <div className="space-y-3">
-                      <h2 className="font-serif font-black text-lg text-slate-900">
-                        {isBn ? "এক নজরে ফ্লাইটের তথ্য" : "Flight Facts at a Glance"}
-                      </h2>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {activeRoute.keyFacts.map((fact) => (
-                          <div key={fact.label} className="bg-white border border-slate-250 p-4 rounded-xl text-center shadow-sm">
-                            <span className="text-[10px] font-bold text-slate-400 font-mono uppercase tracking-wider block">{fact.label}</span>
-                            <span className="text-xs font-semibold text-brand-navy font-mono block mt-1">{fact.value}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Rich description contents */}
-                    <div className="prose prose-slate max-w-none text-sm sm:text-[14.5px] text-slate-700 space-y-4 leading-relaxed">
-                      <h2 className="font-serif font-black text-lg text-slate-900">
-                        {isBn ? "এই রুটে চলাচলকারী এয়ারলাইন্সসমূহ" : "Airlines Flying This Route"}
-                      </h2>
-                      <p>
-                        {isBn
-                          ? "হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর (DAC) থেকে প্রতিদিন একাধিক ফ্লাইট এই রুটে চলাচল করে। সময় ও ভ্রমণ ক্লান্তি কমাতে Direct Flight বেছে নেওয়া সবচেয়ে সুবিধাজনক:"
-                          : "Bangladeshi outbound travellers can leverage several daily flight profiles from Hazrat Shahjalal International Airport (DAC). Direct options are highly recommended to save travel fatigue:"}
-                      </p>
-                      <ul className="list-disc pl-5 space-y-1">
-                        {activeRoute.airlines.map((airline) => (
-                          <li key={airline} className="font-medium text-slate-805">{airline}</li>
-                        ))}
-                      </ul>
-                      
-                      <h3 className="font-serif font-black text-base text-slate-900 mt-4">
-                        {isBn ? "সবচেয়ে কম ভাড়ায় টিকেট কাটার উপযুক্ত সময়" : "When to Book for the Best Price"}
-                      </h3>
-                      <p>
-                        {isBn ? (
-                          <>
-                            আমরা ভ্রমণের অন্তত <strong>{activeRoute.bestTimeToBook}</strong> ফ্লাইট টিকেট বুক করার পরামর্শ দিই। এতে শেষ মুহূর্তের অতিরিক্ত ভাড়া এড়ানো যায়। পাশাপাশি আপনার ভিসার মেয়াদ ও শর্তাবলী (<strong>{activeRoute.visaRequirement}</strong>) মিলিয়ে টিকেট ইস্যু করুন।
-                          </>
-                        ) : (
-                          <>
-                            We advise booking flights approximately <strong>{activeRoute.bestTimeToBook}</strong>. In doing so, economy flyers can generally avoid peak dynamic pricing models. Ensure that you synchronize your flight bookings with visa durations, which are pre-configured at {activeRoute.visaRequirement}.
-                          </>
-                        )}
-                      </p>
-                    </div>
-
-                     {/* Embedded Conversion search form widget */}
-                    <div className="bg-slate-100 p-4 rounded-xl border border-slate-250/60 my-6 space-y-3">
-                      <span className="text-[10px] font-mono font-bold text-brand-navy block">
-                        {isBn ? "এই রুটের ফ্লাইট সার্চ করুন" : "Search Flights on This Route"}
-                      </span>
-                      {areTpScriptsReady ? (
-                        <React.Suspense
-                          fallback={
-                            <TravelpayoutsWidgetSkeleton
-                              variant="flights"
-                              isBn={isBn}
-                              onInteract={() => setAreTpScriptsReady(true)}
-                            />
-                          }
-                        >
-                          <TravelpayoutsEmbed
-                            defaultDestination={getCountryIata(activeRoute.country)}
-                            lang={lang}
-                            onOpenPriceAlert={openPriceAlert}
-                          />
-                        </React.Suspense>
-                      ) : (
-                        <TravelpayoutsWidgetSkeleton
-                          variant="flights"
-                          isBn={isBn}
-                          onInteract={() => setAreTpScriptsReady(true)}
-                        />
-                      )}
-                      <div className="pt-2 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
-                        <span className="text-xs text-slate-600">
-                          {isBn
-                            ? "মাল্টি-সিটি, ওপেন-জ বা ভিন্ন এয়ারলাইন্সের কম্বো টিকিট খুঁজছেন?"
-                            : "Looking for Multi-City, Open-Jaw, or Self-Transfer Airline Combos?"}
-                        </span>
-                        <PartnerLinkButton
-                          href={AFFILIATE_LINKS.kiwi}
-                          label={isBn ? "Kiwi.com-এ মাল্টি-সিটি ভাড়া দেখুন" : "Compare Multi-City Fares on Kiwi.com"}
-                          variant="dark"
-                        />
-                      </div>
-                    </div>
-
-                    {/* 🛡️ AirHelp Flight Delay Compensation & AirHelp+ (AHTPO11 11% OFF) */}
-                    <AirHelpWidget
-                      lang={lang}
-                      routeLabel={`${activeRoute.from} → ${activeRoute.to}`}
-                    />
-
-                    {/* internal linking system ranking loops (Flights to Visa and Hotels!) */}
-                    <div id="hotel-visa-loop-links" className="bg-brand-navy/5 border border-brand-navy/15 p-5 rounded-xl space-y-3">
-                      <span className="text-[10px] font-bold text-brand-navy font-mono tracking-widest uppercase block">
-                        {isBn ? "এই ট্রিপের জন্য আরও প্রয়োজনীয় তথ্য" : "Also Useful for This Trip"}
-                      </span>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
-                        <a
-                          id={`lnk-view-visa-from-flight-${activeRoute.id}`}
-                          href={`/visa/${getCountryVisaId(activeRoute.country)}`}
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeRoute.country)}`); }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
-                        >
-                          <ShieldCheck size={14} className="text-brand-navy shrink-0" />
-                          <span>{isBn ? `${activeRoute.country} ভিসা চেকলিস্ট দেখুন` : `Check ${activeRoute.country} Visa Checklist`}</span>
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </a>
-                        <a
-                          id={`lnk-view-hotel-from-flight-${activeRoute.id}`}
-                          href={`/hotels/${getCountryHotelId(activeRoute.country)}`}
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeRoute.country)}`); }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
-                        >
-                          <Building size={14} className="text-brand-navy shrink-0" />
-                          <span>{isBn ? `${activeRoute.country}-এ কোথায় থাকবেন` : `Where to Stay in ${activeRoute.country}`}</span>
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </a>
-                        <a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm">
-                          <Car size={14} className="text-brand-navy shrink-0" />
-                          <span>{isBn ? `${activeRoute.country} Airport Transfer বুক করুন` : `Book Airport Transfer in ${activeRoute.country}`}</span>
-                          <ExternalLink size={12} className="ml-auto text-[#F6B73C]" />
-                        </a>
-                      </div>
-                    </div>
-
-                    <TravelIntelligence
-                      pageTitle={isBn ? `${activeRoute.country} ফ্লাইট গাইড` : `Flights to ${activeRoute.country}`}
-                      quickAnswer={activeRoute.quickAnswer}
-                      keyFacts={activeRoute.keyFacts}
-                      faqs={activeRoute.faqs}
-                    />
-
-                  </div>
-                );
-              })()}
-            </div>
-
-          </div>
+        {section === "flights" && localizedFlights.length > 0 && (
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <FlightsRouteView context={routeViewContext} />
+          </React.Suspense>
         )}
 
         {/* -------------------------------------------------------------
             🏨 VIEW 3: HOTELS SECTION
         ------------------------------------------------------------- */}
-        {section === "hotels" && (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            
-            {/* Sidebar list */}
-            <div className="space-y-4">
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
-                {isBn ? "শহর অনুযায়ী হোটেল গাইড:" : "CITY HOUSING DIRECTORY:"}
-              </span>
-              <div className="space-y-2">
-                {localizedHotels.map((col) => (
-                  <button
-                    key={col.id}
-                    id={`btn-hotel-select-${col.id}`}
-                    onClick={() => navigateTo(`/hotels/${col.id}`)}
-                    className={`w-full text-left p-3.5 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
-                      parameterId === col.id
-                        ? "bg-brand-navy text-white border-brand-navy shadow-md"
-                        : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50"
-                    }`}
-                  >
-                    <span className="inline-flex items-center gap-1.5">
-                      <Building size={13} className={parameterId === col.id ? "text-[#F6B73C]" : "text-brand-navy"} />
-                      <span>{isBn ? `${col.city} হোটেল গাইড` : `${col.city} Hotels Guide`}</span>
-                    </span>
-                    <ArrowRight size={12} className={parameterId === col.id ? "text-[#F6B73C]" : "text-slate-450"} />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Hotel content template */}
-            <div className="lg:col-span-3 space-y-6">
-              {(() => {
-                const activeHotel = localizedHotels.find(h => h.id === parameterId) || localizedHotels[0];
-                return (
-                  <div className="space-y-8 animate-fade-in">
-                    
-                    {/* Header */}
-                    <div className="border-b border-slate-200 pb-5">
-<h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
-                        {isBn ? `${activeHotel.city}-এ কোথায় থাকবেন: সেরা এলাকা ও হোটেল গাইড` : `Where to Stay in ${activeHotel.city}: Best Areas & Hotels`}
-                      </h1>
-                    </div>
-
-                    {/* AEO Answer */}
-                    <div id="hotel-aeo-quick-answer" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
-                      <span className="text-[10px] font-bold tracking-widest text-brand-navy font-mono block mb-1">
-                        {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
-                      </span>
-                      <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
-                        {activeHotel.quickAnswer}
-                      </p>
-                    </div>
-
-                    {/* Neighborhoods breakdown */}
-                    <div className="space-y-4">
-                      <h2 className="font-serif font-black text-lg text-slate-900 border-b border-slate-100 pb-2">
-                        {isBn ? "থাকার জন্য সেরা এলাকা ও লোকেশন বিশ্লেষণ" : "Best Neighborhoods Area breakdown"}
-                      </h2>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {activeHotel.neighborhoods.map((zone) => (
-                          <div key={zone.name} className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm hover:shadow">
-                            <span className="font-serif text-base font-bold text-brand-navy block">{zone.name}</span>
-                            <span className="text-[10px] bg-slate-100 font-mono text-brand-navy font-bold rounded-full px-2 py-0.5 inline-block my-1">{zone.vibe}</span>
-                            <p className="text-sm text-slate-700 leading-relaxed mt-2 font-sans">{zone.description}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Curated Housing Grid list */}
-                    <div className="space-y-4">
-                      <h2 className="font-serif font-black text-lg text-slate-900">
-                        {isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য বাছাইকৃত হোটেল" : "Curated Local Stays Selection"}
-                      </h2>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {activeHotel.hotels.map((room) => (
-                          <div key={room.name} className="border border-slate-205 p-5 bg-white rounded-xl shadow-sm flex flex-col justify-between">
-                            <div>
-                              <div className="flex justify-between items-center mb-2">
-                                <span className={`text-[9px] font-bold font-mono px-2 py-0.5 rounded-full uppercase border ${
-                                  room.category === "Luxury" ? "bg-amber-100 border-amber-300 text-amber-800" :
-                                  room.category === "Budget" ? "bg-emerald-100 border-emerald-300 text-emerald-800" :
-                                  "bg-indigo-100 border-indigo-300 text-indigo-805"
-                                }`}>
-                                  {room.category}
-                                </span>
-                                <span className="text-xs font-mono font-bold text-amber-500">{room.stars} ★</span>
-                              </div>
-                              <h4 className="font-bold text-slate-800 text-sm">{room.name}</h4>
-                              <p className="text-[11px] text-slate-450 mt-1 font-semibold italic flex items-center gap-1">
-                                <MapPin size={11} className="text-[#F6B73C] shrink-0" />
-                                <span>{room.neighborhood}</span>
-                              </p>
-                              
-                              <div className="flex flex-wrap gap-1 mt-3">
-                                {room.features.slice(0, 3).map((f) => (
-                                  <span key={f} className="text-[9px] font-mono bg-slate-100 text-brand-navy px-2 py-0.5 rounded border border-slate-200">{f}</span>
-                                ))}
-                              </div>
-                            </div>
-
-                            <div className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between">
-                              <div>
-                                <span className="text-xs font-mono text-slate-400 block">{isBn ? "প্রতি রাতের ভাড়া" : "Night Rate"}</span>
-                                <span className="text-sm font-bold text-slate-800">৳ {room.priceBdt.toLocaleString()} BDT</span>
-                              </div>
-                              
-                              <a
-                                id={`hotel-booking-btn-${room.name.toLowerCase().replace(/\s+/g, '-')}`}
-                                href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
-                                target="_blank"
-                                rel="noopener noreferrer sponsored"
-                                onClick={() => {
-                                  triggerAffiliateToast(
-                                    isBn
-                                      ? `${room.name}, ${room.neighborhood}-এর সেরা হোটেল ডিল খোলা হচ্ছে...`
-                                      : `Opening verified hotel rates for ${room.name}, ${room.neighborhood} on Klook...`
-                                  );
-                                }}
-                                className="bg-brand-navy text-white hover:bg-[#1a4166] text-[10px] font-bold px-3 py-1.5 rounded-md cursor-pointer flex items-center gap-1.5 transition-colors"
-                              >
-                                {isBn ? "বুক করুন" : "Book Stay"} <ExternalLink size={10} />
-                              </a>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* 🚕 Unified Airport Transfer & Travel Essentials Hub */}
-                    <React.Suspense fallback={null}>
-                      <TravelEssentials
-                        country={activeHotel.city}
-                        defaultTab="transfers"
-                        compactHeader
-                        lang={lang}
-                      />
-                    </React.Suspense>
-
-                    {/* Flight & Visa Loop linkups */}
-                    <div id="hotel-internal-loop" className="bg-brand-navy/5 border border-brand-navy/15 p-5 rounded-xl space-y-3">
-                      <span className="text-[10px] font-bold text-brand-navy font-mono tracking-widest uppercase block">
-                        <Zap size={12} className="inline-block mr-1.5 -mt-0.5" />{isBn ? "ফ্লাইট রুট ও ভিসা গাইড:" : "FLIGHT ROUTING & ENTRY DETAILS:"}
-                      </span>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
-                        <a
-                          id={`lnk-view-visa-from-hotel-${activeHotel.id}`}
-                          href={`/visa/${getCountryVisaId(activeHotel.country)}`}
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeHotel.country)}`); }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
-                        >
-                          <ShieldCheck size={14} className="text-brand-navy shrink-0" />
-                          <span>{isBn ? `${activeHotel.country} ভিসা চেকলিস্ট` : `Check ${activeHotel.country} Visa Checklist`}</span>
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </a>
-                        <a
-                          id={`lnk-view-flight-from-hotel-${activeHotel.id}`}
-                          href={`/flights/${getCountryFlightId(activeHotel.country)}`}
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/flights/${getCountryFlightId(activeHotel.country)}`); }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
-                        >
-                          <Plane size={14} className="text-brand-navy shrink-0" />
-                          <span>{isBn ? "ঢাকা থেকে ফ্লাইট রুট" : "Recommended Dhaka Flights"}</span>
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </a>
-                        <a
-                          href={AFFILIATE_LINKS.kiwitaxi}
-                          target="_blank"
-                          rel="noopener noreferrer sponsored"
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-250 rounded-lg text-left shadow-sm cursor-pointer"
-                        >
-                          <Car size={14} className="text-brand-navy shrink-0" />
-                          <span>{isBn ? "Airport Transfer ভাড়া তুলনা" : "Compare Transfer Prices"}</span>
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </a>
-                      </div>
-                    </div>
-
-                    {/* Widget */}
-                    {areTpScriptsReady ? (
-                      <React.Suspense
-                        fallback={
-                          <TravelpayoutsWidgetSkeleton
-                            variant="hotels"
-                            isBn={isBn}
-                            onInteract={() => setAreTpScriptsReady(true)}
-                          />
-                        }
-                      >
-                        <TravelpayoutsCustomWidget 
-                          initialTab="hotels"
-                          initialHotelCity={activeHotel.city}
-                          initialTo={getCountryCityWithIata(activeHotel.country)}
-                        />
-                      </React.Suspense>
-                    ) : (
-                      <TravelpayoutsWidgetSkeleton
-                        variant="hotels"
-                        isBn={isBn}
-                        onInteract={() => setAreTpScriptsReady(true)}
-                      />
-                    )}
-
-                    <TravelIntelligence
-                      pageTitle={isBn ? `${activeHotel.city}-এ কোথায় থাকবেন` : `Where to stay in ${activeHotel.city}`}
-                      quickAnswer={activeHotel.quickAnswer}
-                      keyFacts={activeHotel.keyFacts}
-                      faqs={activeHotel.faqs}
-                    />
-
-                  </div>
-                );
-              })()}
-            </div>
-
-          </div>
+        {section === "hotels" && localizedHotels.length > 0 && (
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <HotelsRouteView context={routeViewContext} />
+          </React.Suspense>
         )}
 
         {/* -------------------------------------------------------------
             🛂 VIEW 4: VISA SECTION
         ------------------------------------------------------------- */}
-        {section === "visa" && (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            
-            {/* Sidebar list */}
-            <div className="space-y-4">
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
-                {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "VISA GUIDES BY COUNTRY"}
-              </span>
-              <div className="space-y-2">
-                {localizedVisas.map((v) => (
-                  <button
-                    key={v.id}
-                    id={`btn-visa-select-${v.id}`}
-                    onClick={() => navigateTo(`/visa/${v.id}`)}
-                    className={`w-full text-left p-3.5 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
-                      parameterId === v.id
-                        ? "bg-brand-navy text-white border-brand-navy shadow-md"
-                        : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50 relative"
-                    }`}
-                  >
-                    <span className="inline-flex items-center gap-1.5">
-                      <ShieldCheck size={13} className={parameterId === v.id ? "text-[#F6B73C]" : "text-brand-navy"} />
-                      <span>{isBn ? `${v.country} ভিসা রিকোয়ারমেন্টস` : `${v.country} Visa Requirements`}</span>
-                    </span>
-                    <ArrowRight size={12} className={parameterId === v.id ? "text-[#F6B73C]" : "text-slate-450"} />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Content Details */}
-            <div className="lg:col-span-3 space-y-6">
-              {(() => {
-                const activeVisa = localizedVisas.find(v => v.id === parameterId) || localizedVisas[0];
-                return (
-                  <div className="space-y-8 animate-fade-in">
-                    
-                    {/* Header */}
-                    <div className="border-b border-slate-200 pb-5">
-<div className="flex flex-wrap items-center justify-between gap-4">
-                        <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
-                          {isBn
-                            ? `বাংলাদেশি পাসপোর্টধারীদের জন্য ${activeVisa.country} ভিসা গাইড ও চেকলিস্ট`
-                            : `${activeVisa.country} Visa Requirements for Bangladeshi Citizens`}
-                        </h1>
-                        <span className="bg-brand-navy text-white text-xs px-3 py-1 rounded-full font-bold font-mono">
-                          {activeVisa.requirementType}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* AEO Quote */}
-                    <div id="visa-aeo-box" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
-                      <span className="text-[10px] font-bold tracking-widest text-brand-navy font-mono block mb-1">
-                        {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
-                      </span>
-                      <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
-                        {activeVisa.quickAnswer}
-                      </p>
-                    </div>
-
-                    {/* Core facts */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      {activeVisa.keyFacts.map((fact) => (
-                        <div key={fact.label} className="bg-white border border-slate-200 p-4 rounded-xl text-center shadow-sm">
-                          <span className="text-[10px] font-bold text-slate-400 font-mono uppercase tracking-wider block">{fact.label}</span>
-                          <span className="text-xs font-semibold text-brand-navy font-mono block mt-1">{fact.value}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Step-by-step procedures */}
-                    <div className="space-y-4">
-                      <h2 className="font-serif font-black text-lg text-slate-900 border-b border-slate-100 pb-2">
-                        {isBn ? "ধাপে ধাপে ভিসা আবেদনের নিয়মাবলী" : "Step-by-Step Application Process"}
-                      </h2>
-                      <div className="space-y-3">
-                        {activeVisa.stepByStep.map((step, idx) => (
-                          <div key={idx} className="flex gap-4 text-sm sm:text-[14.5px] leading-relaxed text-slate-705 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                            <span className="w-6 h-6 rounded-full bg-brand-navy text-white font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">{idx + 1}</span>
-                            <span>{step}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Document structures */}
-                    <div className="space-y-4">
-                      <h2 className="font-serif font-black text-lg text-slate-900">
-                        {isBn ? "প্রয়োজনীয় ডকুমেন্ট চেকলিস্ট" : "Document Checklist"}
-                      </h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {activeVisa.documentChecklist.map((cat) => (
-                          <div key={cat.category} className="bg-slate-50 border border-slate-200 p-5 rounded-xl">
-                            <span className="text-xs font-bold font-mono uppercase tracking-wider text-brand-navy block border-b border-slate-200 pb-2 mb-3"><FileText size={12} className="inline-block mr-1.5 -mt-0.5" />{cat.category}</span>
-                            <ul className="space-y-2 text-sm sm:text-[14.5px] text-slate-700">
-                              {cat.items.map((item, idx) => (
-                                <li key={idx} className="flex items-start gap-2">
-                                  <span className="text-emerald-500 font-bold mt-0.5">✓</span>
-                                  <span>{item}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Flight booking CTA after visa checklist */}
-                    <div className="space-y-4 pt-4 border-t border-slate-200">
-                      <div className="text-center text-sm font-semibold text-slate-600 py-2">
-                        {isBn ? "আপনার ট্রিপ বুক করতে প্রস্তুত?" : "Ready to book your trip?"}
-                      </div>
-                      
-                      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
-                        <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
-                          {isBn ? "ঢাকা থেকে ফ্লাইট খুঁজুন" : "Find flights from Dhaka"}
-                        </span>
-                        {areTpScriptsReady ? (
-                          <React.Suspense
-                            fallback={
-                              <TravelpayoutsWidgetSkeleton
-                                variant="flights"
-                                isBn={isBn}
-                                onInteract={() => setAreTpScriptsReady(true)}
-                              />
-                            }
-                          >
-                            <TravelpayoutsEmbed
-                              defaultDestination={getCountryIata(activeVisa.country)}
-                            />
-                          </React.Suspense>
-                        ) : (
-                          <TravelpayoutsWidgetSkeleton
-                            variant="flights"
-                            isBn={isBn}
-                            onInteract={() => setAreTpScriptsReady(true)}
-                          />
-                        )}
-                      </div>
-
-                      <div className="flex flex-wrap gap-2.5">
-                        <PartnerLinkButton 
-                          href={AFFILIATE_LINKS.yesim} 
-                          label={isBn ? `${activeVisa.country} Yesim eSIM অ্যাপ` : `Get Yesim eSIM (${activeVisa.country})`} 
-                        />
-                        <PartnerLinkButton 
-                          href={AFFILIATE_LINKS.airalo} 
-                          label={isBn ? `${activeVisa.country} Airalo eSIM` : `Compare Airalo eSIM`} 
-                        />
-                        <PartnerLinkButton 
-                          href={AFFILIATE_LINKS.getTransfer} 
-                          label={isBn ? "Airport Transfer (GetTransfer)" : "Book Airport Transfer (GetTransfer)"} 
-                        />
-                      </div>
-                    </div>
-
-                    {/* 📶 Stay Connected widget block */}
-                    <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4 animate-fade-in">
-                      <div className="space-y-1">
-                        <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest block">
-                          <Wifi size={12} className="text-brand-navy" />
-                          <span>{isBn ? "ফ্লাইটে ওঠার আগে" : "Before You Fly"}</span>
-                        </span>
-                        <h2 className="font-serif text-lg font-bold text-slate-900">
-                          {isBn ? `${activeVisa.country}-এর জন্য লোকাল eSIM সংগ্রহ করুন` : `Get a Local eSIM for ${activeVisa.country}`}
-                        </h2>
-                        <p className="text-xs text-slate-500">
-                          {isBn ? "এয়ারপোর্টে নেমেই সাথে সাথে ইন্টারনেট চালু করুন — সিমের লাইনে দাঁড়ানোর ঝামেলা নেই।" : "Land with data already active — no SIM card counter, no roaming bill shock."}
-                        </p>
-                      </div>
-                      <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200">
-                        <AiraloEsimWidget />
-                      </div>
-                    </div>
-
-                    {/* Flight & Hotel loop structure */}
-                    <div id="visa-internal-loop" className="bg-brand-navy/5 border border-brand-navy/15 p-5 rounded-xl space-y-3">
-                      <span className="text-[10px] font-bold text-brand-navy font-mono tracking-widest uppercase block">
-                        {isBn ? "আপনার পুরো ট্রিপ প্ল্যান করুন" : "Plan Your Full Trip"}
-                      </span>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
-                        <a
-                          id={`lnk-view-hotel-from-visa-${activeVisa.id}`}
-                          href={`/hotels/${getCountryHotelId(activeVisa.country)}`}
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeVisa.country)}`); }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
-                        >
-                          <Building size={14} className="text-brand-navy shrink-0" />
-                          <span>{isBn ? `${activeVisa.country}-এর বাছাইকৃত হোটেল` : `Curated ${activeVisa.country} Hotels`}</span>
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </a>
-                        <a
-                          id={`lnk-view-flight-from-visa-${activeVisa.id}`}
-                          href={`/flights/${getCountryFlightId(activeVisa.country)}`}
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/flights/${getCountryFlightId(activeVisa.country)}`); }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
-                        >
-                          <Plane size={14} className="text-brand-navy shrink-0" />
-                          <span>{isBn ? "ঢাকা থেকে ফ্লাইট বুক করুন" : "Book Flights from Dhaka"}</span>
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </a>
-                        <a
-                          href={AFFILIATE_LINKS.airalo}
-                          target="_blank"
-                          rel="noopener noreferrer sponsored"
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm cursor-pointer"
-                        >
-                          <Wifi size={14} className="text-brand-navy shrink-0" />
-                          <span>{isBn ? "লোকাল eSIM নিন" : "Get a Local eSIM"}</span>
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </a>
-                      </div>
-                    </div>
-
-                    <TravelIntelligence
-                      pageTitle={isBn ? `${activeVisa.country} ভিসা প্রসেসিং গাইড` : `${activeVisa.country} Outbound Visa Process`}
-                      quickAnswer={activeVisa.quickAnswer}
-                      keyFacts={activeVisa.keyFacts}
-                      faqs={activeVisa.faqs}
-                    />
-
-                  </div>
-                );
-              })()}
-            </div>
-
-          </div>
+        {section === "visa" && localizedVisas.length > 0 && (
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <VisaRouteView context={routeViewContext} />
+          </React.Suspense>
         )}
 
         {/* -------------------------------------------------------------
             🌍 VIEW 5: DESTINATIONS ROADMAP SECTION
         ------------------------------------------------------------- */}
-        {section === "destinations" && (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            
-            {/* Sidebar list */}
-            <div className="space-y-4 font-mono">
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block font-sans">OUTBOUND ROUTE SUITES:</span>
-              <div className="space-y-2 text-xs">
-                {DESTINATIONS_DATA.map((des) => (
-                  <button
-                    key={des.id}
-                    id={`btn-dest-select-${des.id}`}
-                    onClick={() => navigateTo(`/destinations/${des.id}`)}
-                    className={`w-full text-left p-3.5 rounded-xl border font-semibold flex items-center justify-between transition-colors cursor-pointer ${
-                      parameterId === des.id
-                        ? "bg-brand-navy text-white border-brand-navy shadow-md font-sans"
-                        : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50 font-sans"
-                    }`}
-                  >
-                    <span className="inline-flex items-center gap-1.5">
-                      <Compass size={13} className={parameterId === des.id ? "text-[#F6B73C]" : "text-brand-navy"} />
-                      <span>{des.country} Travel Guide</span>
-                    </span>
-                    <ArrowRight size={12} className={parameterId === des.id ? "text-[#F6B73C]" : "text-slate-450"} />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Main Details content */}
-            <div className="lg:col-span-3 space-y-6">
-              {(() => {
-                const activeDes = DESTINATIONS_DATA.find(d => d.id === parameterId) || DESTINATIONS_DATA[0];
-                return activeDes.id === "dubai-guide" ? (
-                  <div className="space-y-10 animate-fade-in text-slate-800">
-                    {/* DESTINATION GUIDE HEADER */}
-                    <div className="border-b border-slate-200 pb-5">
-{/* 🟦 1. HERO SECTION (TOP OF PAGE) */}
-                          <h1 className="font-serif text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
-                            Dubai Travel Guide
-                          </h1>
-                          <p className="text-sm sm:text-base text-slate-500 mt-2 font-light">
-                            Find flights, hotels, and plan your Dubai trip instantly
-                          </p>
-                        </div>
-
-                        {/* 👉 INSERT FLIGHT SEARCH WIDGET (Travelpayouts) */}
-                        {/* Widget placement rule: Must be first interactive element on page, Above all content */}
-                        <div id="dubai-flight-conversion-widget" className="bg-brand-navy text-white p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl space-y-6 animate-pulse-subtle">
-                          <div className="space-y-2">
-                            <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/30 px-3 py-1 rounded-full inline-block">
-                              FLIGHTS TO DUBAI (DXB) — DIRECT & TRANSIT FARES
-                            </span>
-                            <h3 className="font-serif text-xl sm:text-2xl font-bold text-white">Search Cheapest Flights leaving Dhaka (DAC) to Dubai (DXB)</h3>
-                            <p className="text-xs text-slate-300 leading-relaxed font-light">
-                              Direct flights from Dhaka to Dubai take about 4 hours 45 minutes. Emirates, flydubai, Biman, and US-Bangla all fly this route. Roundtrip prices typically start around BDT 58,000.
-                            </p>
-                          </div>
-                          <div className="bg-[#0f1d2e] p-2 sm:p-4 rounded-xl border border-slate-700/60 text-slate-900">
-                            <span className="text-[10px] font-mono font-bold text-slate-500 uppercase block mb-3 px-1">LIVE FLIGHTS SEARCH</span>
-                            {areTpScriptsReady ? (
-                              <React.Suspense
-                                fallback={
-                                  <TravelpayoutsWidgetSkeleton
-                                    variant="flights"
-                                    isBn={isBn}
-                                    onInteract={() => setAreTpScriptsReady(true)}
-                                  />
-                                }
-                              >
-                                <TravelpayoutsEmbed defaultDestination="DXB" />
-                              </React.Suspense>
-                            ) : (
-                              <TravelpayoutsWidgetSkeleton
-                                variant="flights"
-                                isBn={isBn}
-                                onInteract={() => setAreTpScriptsReady(true)}
-                              />
-                            )}
-                          </div>
-                        </div>
-
-                        {/* 2. DUBAI QUICK SNAPSHOT */}
-                        <div id="dubai-quick-snapshot" className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-4">
-                          <div className="border-l-4 border-brand-navy pl-3">
-                            <h4 className="font-serif font-black text-sm text-brand-navy uppercase tracking-wider">Dubai Quick Snapshot</h4>
-                            <p className="text-[11px] text-slate-500 font-mono font-light">Instant travel context before you search accommodation options below.</p>
-                          </div>
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-sans">
-                            <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Best time to visit</span>
-                              <span className="font-serif font-bold text-slate-800 text-xs block">November – March</span>
-                            </div>
-                            <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Known for</span>
-                              <span className="font-serif font-bold text-slate-800 text-xs block">luxury lifestyle, skyscrapers, beaches, shopping</span>
-                            </div>
-                            <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Travel style</span>
-                              <span className="font-serif font-bold text-slate-800 text-xs block">budget to luxury options available</span>
-                            </div>
-                            <a
-                              href={AFFILIATE_LINKS.airalo}
-                              target="_blank"
-                              rel="noopener noreferrer sponsored"
-                              className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1 cursor-pointer hover:border-[#F6B73C] block"
-                            >
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Stay connected</span>
-                              <span className="font-serif font-bold text-slate-800 text-xs block">Local eSIM from Airalo</span>
-                            </a>
-                          </div>
-                        </div>
-
-                        {/* 3. ACCOMMODATION SECTION */}
-                        <div id="dubai-accommodation" className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4">
-                          <div className="space-y-1">
-                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest block">
-                              SECTION 2: ACCOMMODATION DIRECTORY
-                            </span>
-                            <h3 className="font-serif text-lg font-bold text-slate-900">Find Hotels in Dubai</h3>
-                            <p className="text-xs text-slate-500">
-                              Compare properties, locate perfect layovers, and secure custom partner rates instantly.
-                            </p>
-                          </div>
-                          <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200 text-slate-900">
-                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">LIVE HOTEL COMPARISON ENGINE</span>
-                            {areTpScriptsReady ? (
-                              <React.Suspense
-                                fallback={
-                                  <TravelpayoutsWidgetSkeleton
-                                    variant="hotels"
-                                    isBn={isBn}
-                                    onInteract={() => setAreTpScriptsReady(true)}
-                                  />
-                                }
-                              >
-                                <TravelpayoutsCustomWidget 
-                                  initialTab="hotels"
-                                  initialTo="Dubai (DXB)"
-                                  initialHotelCity="Dubai"
-                                />
-                              </React.Suspense>
-                            ) : (
-                              <TravelpayoutsWidgetSkeleton
-                                variant="hotels"
-                                isBn={isBn}
-                                onInteract={() => setAreTpScriptsReady(true)}
-                              />
-                            )}
-                          </div>
-                        </div>
-
-                        {/* 📍 4. BEST AREAS TO STAY */}
-                        <div id="dubai-best-areas" className="space-y-4 font-sans text-slate-800">
-                          <div className="border-b border-slate-200 pb-2">
-                            <h3 className="font-serif font-black text-lg text-slate-900">Best Areas to Stay</h3>
-                            <p className="text-xs text-slate-500">Curated neighborhoods targeting different traveler types & budget tiers.</p>
-                          </div>
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {[
-                              { area: "Downtown Dubai", details: "luxury stays, Burj Khalifa view", hint: "Perfect for shopping and premium fountain views.", estimate: "৳12,000 / night" },
-                              { area: "Dubai Marina", details: "nightlife, beach access, modern lifestyle", hint: "Unlocks spectacular marina harbor walks & yachts.", estimate: "৳18,000 / night" },
-                              { area: "Deira", details: "budget-friendly, cultural experience", hint: "Offers traditional gold/spice souks and affordable diners.", estimate: "৳8,500 / night" }
-                            ].map((item, index) => (
-                              <div key={index} className="bg-white border border-slate-200 hover:border-[#F6B73C] p-5 rounded-2xl shadow-sm flex flex-col justify-between transition-all transform hover:-translate-y-1">
-                                <div className="space-y-2">
-                                  <span className="text-[9px] font-mono font-bold uppercase bg-slate-100 text-brand-navy px-2 py-0.5 rounded-full inline-block">
-                                    <MapPin size={10} className="inline-block mr-1 -mt-0.5" />AREA RECOMMENDATION
-                                  </span>
-                                  <h4 className="font-serif font-bold text-sm text-slate-900">{item.area}</h4>
-                                  <p className="text-xs text-slate-705"><strong>Pros:</strong> {item.details}</p>
-                                  <p className="text-[11px] text-slate-500 font-light leading-relaxed">{item.hint}</p>
-                                </div>
-                                <div className="pt-4 flex items-center justify-between border-t border-slate-100 mt-4">
-                                  <div>
-                                    <span className="text-[9px] font-mono text-slate-400 block uppercase">Typical Baseline</span>
-                                    <span className="text-xs font-mono font-bold text-[#F6B73C]">{item.estimate}</span>
-                                  </div>
-                                  <button 
-                                    onClick={() => triggerAffiliateToast(`Finding the best available rates for hotels in ${item.area}. Opening booking page...`)}
-                                    className="bg-brand-navy hover:bg-[#F6B73C] hover:text-brand-navy text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
-                                  >
-                                    Check Hotels <ExternalLink size={10} />
-                                  </button>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* 🚗 4. UNIFIED TABBED TRAVEL ESSENTIALS (Welcome Pickups, Kiwitaxi, Klook, Airalo, QEEQ) */}
-                        <React.Suspense fallback={null}>
-                          <TravelEssentials country="Dubai, UAE" />
-                        </React.Suspense>
-
-                        {/* 💡 5. TRAVEL INSIGHTS SECTION */}
-                        <div id="dubai-insights" className="bg-brand-navy/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
-                          <div className="space-y-1">
-                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-wider block font-sans"><Lightbulb size={11} className="inline-block mr-1 -mt-0.5" />Booking Tips</span>
-                            <h4 className="font-serif text-base font-bold text-brand-navy">Essential Dubai Booking Tips & Cost Hacks</h4>
-                          </div>
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans">
-                            <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="text-amber-500 font-bold flex items-center gap-1.5"><Plane size={13} /> Airfare Timing</span>
-                              <p className="text-slate-650 leading-relaxed font-light">Mid-week flights are often cheaper</p>
-                            </div>
-                            <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="text-amber-500 font-bold flex items-center gap-1.5"><Building size={13} /> Hotel Demand Peak</span>
-                              <p className="text-slate-650 leading-relaxed font-light">Hotel prices increase during peak season (Dec–Jan)</p>
-                            </div>
-                            <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="text-amber-500 font-bold flex items-center gap-1.5"><ShieldCheck size={13} /> Advance Booking</span>
-                              <p className="text-slate-650 leading-relaxed font-light">Early booking improves price and availability</p>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* 🧭 7. THINGS TO DO IN DUBAI */}
-                        <div id="dubai-things-to-do" className="space-y-4">
-                          <div className="border-b border-slate-200 pb-2">
-                            <h3 className="font-serif font-black text-lg text-slate-900">Things to Do in Dubai</h3>
-                            <p className="text-xs text-slate-500">Unmissable attractions with deep-linked partner rates.</p>
-                          </div>
-                          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs font-sans">
-                            {[
-                              { title: "Burj Khalifa visit", sub: "Ride the world's fastest elevator to level 124/125." },
-                              { title: "Desert safari experience", sub: "Sunset dune bashing, camel riding, and Bedouin BBQ dining." },
-                              { title: "Dubai Mall shopping", sub: "Explore unlimited retail lanes, internal aquarium, and cinema nodes." },
-                              { title: "Marina cruise", sub: "Glide alongside multi-million yacht slips under starry nights." }
-                            ].map((thing, idx) => (
-                              <div key={idx} className="bg-white border border-slate-200 p-4 rounded-xl flex flex-col justify-between space-y-2 hover:border-[#F6B73C] transition-all">
-                                <div className="space-y-1">
-                                  <span className="font-mono text-[#F6B73C] text-[10px] block font-bold font-sans">#0{idx+1}</span>
-                                  <p className="font-serif font-extrabold text-slate-900 text-xs">{thing.title}</p>
-                                  <p className="text-[11px] text-slate-500 font-light">{thing.sub}</p>
-                                </div>
-                                <button
-                                  onClick={() => triggerAffiliateToast(`Checking availability for: ${thing.title}. Opening booking page...`)}
-                                  className="mt-2 text-[10px] text-brand-navy hover:text-[#F6B73C] hover:underline flex items-center gap-1 font-mono cursor-pointer font-bold"
-                                >
-                                  Secure Pass <ExternalLink size={8} />
-                                </button>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* 🚀 8. FINAL CALL TO ACTION */}
-                        <div id="dubai-final-cta" className="bg-brand-navy text-white p-8 rounded-2xl text-center space-y-4">
-                          <div className="space-y-1 max-w-xl mx-auto">
-                            <h4 className="font-serif font-black text-lg sm:text-2xl text-[#F6B73C]">Plan your Dubai trip now</h4>
-                            <p className="text-xs sm:text-sm text-slate-300 font-light font-sans leading-relaxed">
-                              Search flights, compare hotels, and book your journey
-                            </p>
-                          </div>
-                          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 text-xs font-semibold">
-                            <button 
-                              onClick={() => navigateTo("/flights")} 
-                              className="w-full sm:w-auto bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] px-6 py-2.5 rounded-lg transition-colors cursor-pointer"
-                            >
-                              Search Outbound Flights
-                            </button>
-                            <button 
-                              onClick={() => navigateTo("/hotels")} 
-                              className="w-full sm:w-auto bg-transparent border border-white/40 hover:border-white text-white px-6 py-2.5 rounded-lg transition-colors cursor-pointer"
-                            >
-                              Compare Luxury Accommodations
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* ⚙️ 9. INTERNAL LINKING (FOR SEO SCALING) */}
-                        <div id="dubai-internal-linking" className="border-t border-slate-200 pt-6 space-y-3">
-                          <span className="font-mono text-[9px] font-bold text-slate-400 block uppercase tracking-widest text-center font-sans">Explore More</span>
-                          <div className="flex flex-wrap justify-center items-center gap-2.5 text-xs">
-                            <button
-                              onClick={() => navigateTo("/flights")}
-                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 font-sans transition-all inline-flex items-center gap-1.5 cursor-pointer"
-                            >
-                              <Plane size={12} className="text-[#F6B73C]" />
-                              <span>Cheap flights page (Dubai route)</span>
-                            </button>
-                            <button
-                              onClick={() => navigateTo("/hotels")}
-                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 font-sans transition-all inline-flex items-center gap-1.5 cursor-pointer"
-                            >
-                              <Building size={12} className="text-[#F6B73C]" />
-                              <span>Hotel comparison page (Dubai)</span>
-                            </button>
-                            <button
-                              onClick={() => navigateTo("/blog")}
-                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 font-sans transition-all inline-flex items-center gap-1.5 cursor-pointer"
-                            >
-                              <FileText size={12} className="text-[#F6B73C]" />
-                              <span>Travel guide articles</span>
-                            </button>
-                          </div>
-                        </div>
-
-                        <TravelIntelligence
-                          pageTitle={`${activeDes.country} Travel Guide Itinerary`}
-                          quickAnswer={activeDes.quickAnswer}
-                          keyFacts={activeDes.keyFacts}
-                          faqs={activeDes.faqs}
-                        />
-                      </div>
-                    ) : (
-                      <div className="space-y-10 animate-fade-in text-slate-800">
-                        
-                        {/* DESTINATION GUIDE HEADER */}
-                        <div className="border-b border-slate-200 pb-5">
-                          <span className="text-[10px] font-mono font-bold tracking-widest text-[#F6B73C] bg-brand-navy px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 uppercase mb-2">
-                            <Compass size={11} className="text-[#F6B73C]" />
-                            <span>Destination Guide</span>
-                          </span>
-                          <h1 className="font-serif text-2xl sm:text-4xl font-black tracking-tight text-slate-900 leading-tight">
-                            {activeDes.title}
-                          </h1>
-                        </div>
-
-                        {/* 2. TOP SECTION (PRIMARY CONVERSION ZONE) - FLIGHTS WIDGET FIRST */}
-                        <div id="dest-primary-conversion" className="bg-brand-navy text-white p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl space-y-6">
-                          <div className="space-y-2">
-                            <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/30 px-3 py-1 rounded-full inline-flex items-center gap-1.5 font-sans">
-                              <Plane size={11} className="text-[#F6B73C]" />
-                              <span>Book Your Flight</span>
-                            </span>
-                            <h3 className="font-serif text-xl sm:text-2xl font-bold">Flights Leaving Dhaka (DAC) to {getCountryCityWithIata(activeDes.country)}</h3>
-                            <p className="text-xs text-slate-300 leading-relaxed max-w-2xl font-light font-sans">
-                              {activeDes.id === "nepal-guide" ? "Direct flights from Dhaka to Kathmandu take just 1 hour 30 minutes on Biman Bangladesh or Himalaya Airlines. Roundtrip fares typically run BDT 28,000–40,000. Compare prices for your dates below." :
-                              activeDes.id === "thailand-guide" ? "Dhaka to Bangkok takes about 2.5 hours direct. Thai Airways, Biman, US-Bangla, and Thai Lion Air fly this route. Roundtrip fares usually start around BDT 31,500." :
-                              activeDes.id === "malaysia-guide" ? "Dhaka to Kuala Lumpur takes about 3 hours 50 minutes. Malaysia Airlines, AirAsia, Biman, and Batik Air all fly direct. Expect BDT 36,000–48,000 roundtrip." :
-                              activeDes.id === "singapore-guide" ? "Direct flights from Dhaka to Singapore Changi (SIN) take 4 hours 15 minutes on Singapore Airlines, Biman, and US-Bangla. Roundtrip fares start around BDT 42,000." :
-                              activeDes.id === "maldives-guide" ? "Direct flights from Dhaka to Malé (MLE) take 4 hours 10 minutes on US-Bangla Airlines, or 1-stop via Colombo on SriLankan Airlines. Free 30-day Visa on Arrival for Bangladeshis." :
-                              activeDes.id === "dubai-guide" ? "Direct flights from Dhaka to Dubai take about 4 hours 45 minutes. Emirates, flydubai, Biman, and US-Bangla all fly this route. Roundtrip prices typically start around BDT 58,000." : "Lock down lowest flight options direct from Dhaka."}
-                            </p>
-                          </div>
-
-                          {/* Travelpayouts Flights widget */}
-                          <div className="bg-[#0f1d2e] p-2 sm:p-4 rounded-xl border border-slate-700/60 text-slate-900">
-                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">LIVE FLIGHTS COMPARISON ENGINE</span>
-                            {areTpScriptsReady ? (
-                              <React.Suspense
-                                fallback={
-                                  <TravelpayoutsWidgetSkeleton
-                                    variant="flights"
-                                    isBn={isBn}
-                                    onInteract={() => setAreTpScriptsReady(true)}
-                                  />
-                                }
-                              >
-                                <TravelpayoutsEmbed
-                                  defaultDestination={getCountryIata(activeDes.country)}
-                                  lang={lang}
-                                  onOpenPriceAlert={openPriceAlert}
-                                />
-                              </React.Suspense>
-                            ) : (
-                              <TravelpayoutsWidgetSkeleton
-                                variant="flights"
-                                isBn={isBn}
-                                onInteract={() => setAreTpScriptsReady(true)}
-                              />
-                            )}
-                          </div>
-                        </div>
-
-                        {/* 3. DESTINATION SNAPSHOT SECTION (FAST CONTEXT) */}
-                        <div id="dest-snapshot-bento" className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-4">
-                          <div className="border-l-4 border-brand-navy pl-3">
-                            <h4 className="font-serif font-black text-sm text-brand-navy uppercase tracking-wider">Quick Facts</h4>
-                            <p className="text-[11px] text-slate-500 font-mono">Quick decision support parameters before searching accommodation.</p>
-                          </div>
-
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-                            <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Best Time To Visit</span>
-                              <span className="font-serif font-bold text-slate-800 text-xs block">{activeDes.bestTimeToVisit}</span>
-                            </div>
-                            <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Average Cost Index</span>
-                              <span className="font-mono font-bold text-[#F6B73C] text-xs block">
-                                {activeDes.id === "nepal-guide" ? "Highly Budget-Friendly (approx BDT 3,500/day local expense)" :
-                                activeDes.id === "thailand-guide" ? "Affordable Mid-Range (approx BDT 6,000/day local expense)" :
-                                activeDes.id === "malaysia-guide" ? "Family-Friendly Budget (approx BDT 7,500/day local expense)" :
-                                activeDes.id === "singapore-guide" ? "Smart Urban Comfort (approx BDT 11,500/day local expense)" :
-                                activeDes.id === "maldives-guide" ? "Local Island Budget (approx BDT 8,500/day on Maafushi)" :
-                                activeDes.id === "dubai-guide" ? "Premium Business Luxury (approx BDT 14,000/day local expense)" : "Sufficient BDT 5,000/day"}
-                              </span>
-                            </div>
-                            <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Optimal Travel Style</span>
-                              <span className="text-slate-650 leading-snug block font-sans">
-                                {activeDes.id === "nepal-guide" ? "High-altitude trekking, organic dining, and historical pagoda walks." :
-                                activeDes.id === "thailand-guide" ? "Multi-mall shopping, marine activities, and street food market tasting." :
-                                activeDes.id === "malaysia-guide" ? "Urban adventure, Genting theme parks, and tropical reserve strolls." :
-                                activeDes.id === "singapore-guide" ? "MRT city exploration, Sentosa theme parks, Gardens by the Bay & Mustafa shopping." :
-                                activeDes.id === "maldives-guide" ? "Maafushi coral reef snorkeling, sandbank picnics, and 1-day luxury resort passes." :
-                                activeDes.id === "dubai-guide" ? "Desert dune riding, observation deck sightseeing, and beach luxury resorts." : "Casual exploration"}
-                              </span>
-                            </div>
-                            <a href={AFFILIATE_LINKS.airalo} target="_blank" rel="noopener noreferrer sponsored" className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm space-y-1 block hover:border-[#F6B73C] cursor-pointer">
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Stay Connected</span>
-                              <span className="font-serif font-bold text-slate-800 text-xs block">Local eSIM from Airalo</span>
-                            </a>
-                          </div>
-                        </div>
-
-                        {/* 4. HOTEL SEARCH SECTION (SECONDARY CONVERSION ZONE) */}
-                        <div id="dest-secondary-conversion" className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-4">
-                          <div className="space-y-1">
-                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest inline-flex items-center gap-1.5 font-sans">
-                              <Building size={11} className="text-brand-navy" />
-                              <span>Find a Hotel</span>
-                            </span>
-                            <h3 className="font-serif text-lg font-bold text-slate-900">Compare Accommodations in {getCountryCityName(activeDes.country)}</h3>
-                            <p className="text-xs text-slate-500">
-                              Now that your travel days are mapped, click to lock Halal-certified suites or cheap family units near critical transit points.
-                            </p>
-                          </div>
-
-                          <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200 text-slate-900">
-                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">LIVE ACCOMMODATION COMPARISON ENGINE</span>
-                            {areTpScriptsReady ? (
-                              <React.Suspense
-                                fallback={
-                                  <TravelpayoutsWidgetSkeleton
-                                    variant="hotels"
-                                    isBn={isBn}
-                                    onInteract={() => setAreTpScriptsReady(true)}
-                                  />
-                                }
-                              >
-                                <TravelpayoutsCustomWidget 
-                                  initialTab="hotels"
-                                  initialTo={getCountryCityWithIata(activeDes.country)}
-                                  initialHotelCity={getCountryCityName(activeDes.country)}
-                                />
-                              </React.Suspense>
-                            ) : (
-                              <TravelpayoutsWidgetSkeleton
-                                variant="hotels"
-                                isBn={isBn}
-                                onInteract={() => setAreTpScriptsReady(true)}
-                              />
-                            )}
-                          </div>
-                        </div>
-
-                        {/* 5. “TOP PLACES TO STAY” SECTION (SEO + AFFILIATE SUPPORT) */}
-                        <div id="dest-curated-stays" className="space-y-4">
-                          <div className="border-b border-slate-200 pb-2">
-                            <h3 className="font-serif font-black text-lg text-slate-900">Curated Stays & Recommended Neighborhoods</h3>
-                            <p className="text-xs text-slate-500">Hotels near the main attractions, picked for travelers from Bangladesh.</p>
-                          </div>
-
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {(activeDes.id === "nepal-guide" ? [
-                              { area: "Downtown Backpacker Zone (Thamel)", name: "Thamel Eco Resort & Spa", rate: "৳3,500 / night", star: "⭐ ⭐ ⭐", linkTip: "Free airport luggage pick-up and organic buffet included." },
-                              { area: "Airport Transit Hub (Sinamangal)", name: "The Suite Airport Guest House KTM", rate: "৳4,200 / night", star: "⭐ ⭐ ⭐", linkTip: "Walking distance to Tribhuvan airport gates; perfect for night arrivals." },
-                              { area: "Heritage Tourist Sector (Patan / Durbar)", name: "Durbar Square Boutique Heritage Lodge", rate: "৳5,800 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Stunning brick-lined traditional Newari apartments with city terrace view." }
-                            ] : activeDes.id === "thailand-guide" ? [
-                              { area: "Downtown Shopping Sector (Pratunam Market)", name: "Centara Watergate Pavillion Hotel Bangkok", rate: "৳9,800 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Direct access to market lanes and legendary Sukhumvit halal hub food lines." },
-                              { area: "Airport Connection (Suvarnabhumi Link)", name: "Mariya Boutique Residence BKK Node", rate: "৳5,200 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Complimentary sky train shuttle and early check-in options for Bangladeshis." },
-                              { area: "Vibrant Night Market District (Sukhumvit Road)", name: "Siam Star Premium Hotel Area", rate: "৳4,800 / night", star: "⭐ ⭐ ⭐", linkTip: "Very close to BTS Skytrain lines, making central transport entirely gridlock-free." }
-                            ] : activeDes.id === "malaysia-guide" ? [
-                              { area: "Downtown Action Core (Bukit Bintang Mallway)", name: "Gold 3 Boutique Family Hotel KL", rate: "৳4,500 / night", star: "⭐ ⭐ ⭐", linkTip: "Surrounded by local food courts, digital item hubs, and direct Monorail stations." },
-                              { area: "Airport Transit Zone (KLIA Sepang Node)", name: "Tune Airport Hotel KLIA2 Terminal", rate: "৳6,200 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Covered walkway directly to boarding check-in counters. Outstanding choice for child layovers." },
-                              { area: "Prestige Park Sector (KLCC Petronas Vista)", name: "Impiana KLCC Premium Resort Complex", rate: "৳9,500 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Skybridge walking path connects straight to Twin Towers and central park fountains." }
-                            ] : activeDes.id === "singapore-guide" ? [
-                              { area: "24/7 Bangladeshi Hub (Little India / Farrer Park)", name: "One Farrer Hotel / ibis budget Imperial", rate: "৳7,200 – ৳19,500 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Steps from 24-hour Mustafa Centre, MRT station, and halal Bangladeshi/Indian dining." },
-                              { area: "Halal Heritage Quarter (Bugis / Arab Street)", name: "Village Hotel Bugis & Hotel Boss", rate: "৳10,500 – ৳13,500 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Walkable to Sultan Mosque, Haji Lane, and Bugis MRT interchange." },
-                              { area: "Iconic Waterfront (Marina Bay Sands Zone)", name: "Marina Bay Waterfront Luxury Suites", rate: "৳34,000 / night", star: "⭐ ⭐ ⭐ ⭐ ⭐", linkTip: "Unbeatable views of Gardens by the Bay and nightly Spectra water show." }
-                            ] : activeDes.id === "maldives-guide" ? [
-                              { area: "Best Budget Island (Maafushi Bikini Beach)", name: "Kaani Palm Beach & Arena Beach Hotel", rate: "৳8,200 – ৳9,800 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "35-min shared speedboat ($25) from airport; $30 snorkeling & sandbank tours daily." },
-                              { area: "Airport Road Island (Hulhumalé Beachfront)", name: "h78 at Hulhumale Maldives", rate: "৳6,400 / night", star: "⭐ ⭐ ⭐", linkTip: "Connected to Malé Airport by bridge taxi ($8) — zero speedboat fees required." },
-                              { area: "Private Overwater Island (North Malé Atoll)", name: "Cinnamon Dhonveli Water Suites", rate: "৳38,000 / night", star: "⭐ ⭐ ⭐ ⭐ ⭐", linkTip: "Iconic overwater bungalows with all-inclusive halal dining and house reef." }
-                            ] : [
-                              { area: "Downtown Luxury Skyscrapers (Burj Vista Center)", name: "Rove Downtown Dubai Premium Suites", rate: "৳12,000 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Stellar views of Burj Khalifa and direct shuttle rides to the Dubai Mall gates." },
-                              { area: "Airport Sector & Budget Markets (Deira Creek)", name: "Ibis Styles Dubai Airport Transit Inn", rate: "৳8,500 / night", star: "⭐ ⭐ ⭐", linkTip: "Right beside metro lines; close to traditional gold souks and BDT-friendly diners." },
-                              { area: "Beach Side Promenade (Dubai Marina / JBR)", name: "Marina View Deluxe Hotel Apartment", rate: "৳18,000 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "High-altitude skyline balconies, private kitchen amenities, and direct yacht harbor lookouts." }
-                            ]).map((hotel, index) => (
-                              <div key={index} className="bg-white border border-slate-200 hover:border-[#F6B73C] p-5 rounded-2xl shadow-sm flex flex-col justify-between transition-all transform hover:-translate-y-1">
-                                <div className="space-y-2">
-                                  <div className="flex items-center justify-between">
-                                    <span className="text-[9px] font-mono font-bold uppercase bg-slate-100 text-brand-navy px-2 py-0.5 rounded-full">
-                                      {hotel.area}
-                                    </span>
-                                    <span className="text-amber-500 text-xs font-bold leading-none">{hotel.star}</span>
-                                  </div>
-                                  <h4 className="font-serif font-bold text-sm text-slate-900">{hotel.name}</h4>
-                                  <p className="text-[11px] text-slate-500 leading-relaxed font-light">{hotel.linkTip}</p>
-                                </div>
-
-                                <div className="pt-4 flex items-center justify-between border-t border-slate-100 mt-4">
-                                  <div>
-                                    <span className="text-[9px] font-mono text-slate-400 block uppercase">Estimate rates</span>
-                                    <span className="text-xs font-mono font-bold text-[#F6B73C]">{hotel.rate}</span>
-                                  </div>
-                                  <a
-                                    href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
-                                    target="_blank"
-                                    rel="noopener noreferrer sponsored"
-                                    onClick={() => triggerAffiliateToast(`Opening verified hotel rates for ${hotel.name}, ${hotel.area} on Klook...`)}
-                                    className="bg-brand-navy hover:bg-[#F6B73C] hover:text-brand-navy text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
-                                  >
-                                    Check Rates <ExternalLink size={10} />
-                                  </a>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* 🚗 TRAVEL ESSENTIALS & SERVICES (Taxis, eSIMs, Rentals, Activities) */}
-                        <React.Suspense fallback={null}>
-                          <TravelEssentials country={activeDes.country} />
-                        </React.Suspense>
-
-                        {/* 6. FLIGHT PRICE / DEAL INSIGHT SECTION */}
-                        <div id="dest-flight-insights" className="bg-brand-navy/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
-                          <div className="space-y-1">
-                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-wider block font-sans">Flight Prices & Timing</span>
-                            <h4 className="font-serif text-base font-bold text-brand-navy">Typical Flight Prices (Dhaka to {getCountryCityWithIata(activeDes.country)})</h4>
-                          </div>
-
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                            <div className="space-y-1">
-                              <span className="font-semibold block text-slate-700"><Calendar size={12} className="inline-block mr-1.5 -mt-0.5" />Best Months to Book Lower Fares:</span>
-                              <p className="text-slate-650 leading-relaxed font-sans">
-                                {activeDes.id === "nepal-guide" ? "September & May represent low tourism price cycles." :
-                                activeDes.id === "thailand-guide" ? "June & September mark monsoon sales with high airline availability." :
-                                activeDes.id === "malaysia-guide" ? "March & October see significant carrier promo codes online." :
-                                activeDes.id === "singapore-guide" ? "February–May and July–August offer lower hotel & airfare combinations." :
-                                activeDes.id === "maldives-guide" ? "May, October & November shoulder months drop resort & flight rates by 30%." :
-                                "July & August are extremely hot but yield major airfare drops."}
-                              </p>
-                            </div>
-                            <div className="space-y-1">
-                              <span className="font-semibold block text-slate-700"><DollarSign size={12} className="inline-block mr-1.5 -mt-0.5" />Return Airfare typical baseline:</span>
-                              <span className="text-[#F6B73C] font-mono font-extrabold text-xs block">
-                                {activeDes.id === "nepal-guide" ? "৳28,000 – ৳36,000 Return" :
-                                activeDes.id === "thailand-guide" ? "৳31,500 – ৳42,000 Return" :
-                                activeDes.id === "malaysia-guide" ? "৳36,000 – ৳46,000 Return" :
-                                activeDes.id === "singapore-guide" ? "৳42,000 – ৳56,000 Return" :
-                                activeDes.id === "maldives-guide" ? "৳46,000 – ৳62,000 Return" :
-                                "৳58,000 – ৳72,000 Return"}
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="bg-white/80 border border-slate-200 p-3.5 rounded-xl text-[11px] text-slate-650 flex items-start gap-2.5">
-                            <span className="text-amber-500 mt-0.5 shrink-0"><AlertTriangle size={14} /></span>
-                            <span className="font-sans"><b>Alert:</b> {
-                              activeDes.id === "nepal-guide" ? "Flights during festivals peak heavily. Book at least 3 weeks in advance!" :
-                              activeDes.id === "thailand-guide" ? "Weekend departure prices surge by 20%. Select Tuesday or Wednesday flights." :
-                              activeDes.id === "malaysia-guide" ? "Direct Biman or AirAsia paths get booked up. Lock flight slots early for families." :
-                              activeDes.id === "singapore-guide" ? "Submit your free SG Arrival Card within 72 hours before departure alongside your printed e-Visa!" :
-                              activeDes.id === "maldives-guide" ? "Complete the free IMUGA Traveller Declaration within 96 hours before flying to Malé!" :
-                              "Transit-based routes via Muscat are up to BDT 15,000 cheaper than direct options!"
-                            }</span>
-                          </div>
-                        </div>
-
-                        {/* 7. THINGS TO DO SECTION (CONTENT + RETENTION LAYER) */}
-                        <div id="dest-things-to-do" className="space-y-4">
-                          <h3 className="font-serif font-black text-lg text-slate-900 border-b border-slate-100 pb-2">Suggested Itinerary</h3>
-                          <div className="space-y-6">
-                            {activeDes.itinerary.map((dayPlan) => (
-                              <div key={dayPlan.day} className="relative pl-8 border-l-2 border-slate-200 ml-4 space-y-2 font-sans">
-                                {/* Visual Timeline Bulb */}
-                                <div className="absolute -left-3 top-1 w-5.5 h-5.5 rounded-full bg-brand-navy text-white flex items-center justify-center font-mono font-bold text-[10px]">
-                                  D{dayPlan.day}
-                                </div>
-                                <h4 className="font-serif text-base font-bold text-brand-navy">{dayPlan.title}</h4>
-                                <ul className="space-y-1.5 text-xs text-slate-650">
-                                  {dayPlan.activities.map((act, innerIndex) => (
-                                    <li key={innerIndex} className="flex gap-2">
-                                      <span className="text-slate-400 font-bold font-mono">▸</span>
-                                      <span>{act}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* local city transportation hacks */}
-                          <div className="space-y-3 bg-slate-50 border border-slate-200 p-5 rounded-2xl mt-4">
-                            <h4 className="font-serif font-bold text-sm text-slate-900">Local Inner-City Transport hacks</h4>
-                            <ul className="space-y-2 text-xs text-slate-700">
-                              {activeDes.localTransport.map((trans, idx) => (
-                                <li key={idx} className="flex items-start gap-2.5">
-                                  <span className="w-5 h-5 rounded bg-slate-200 text-brand-navy font-mono font-bold flex items-center justify-center shrink-0 mt-0.5 text-[10px]">✓</span>
-                                  <span>{trans}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-
-                        {/* 7B. KKDAY 10.10 WINTER SALE & ASIA TOURS */}
-                        {(activeDes.id === "thailand" ||
-                          activeDes.id === "malaysia" ||
-                          activeDes.id === "singapore") && (
-                          <KKdayPromoBanner
-                            lang={lang}
-                            variant="compact"
-                            cityContext={activeDes.country}
-                            onNavigate={navigateTo}
-                          />
-                        )}
-
-                        {/* 8. TRAVEL PLANNING CTA SECTION */}
-                        <div id="dest-planning-links-hub" className="bg-brand-navy/5 border border-slate-200/60 p-6 rounded-2xl space-y-4 text-center">
-                          <div className="space-y-1 max-w-xl mx-auto">
-                            <h4 className="font-serif font-bold text-slate-955 text-base">Ready to Book?</h4>
-                            <p className="text-xs text-slate-500">Move deeper into our integrated, certified airfare and hotel booking channels to guarantee secure pricing codes.</p>
-                          </div>
-
-                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-semibold">
-                            <a
-                              href="/flights"
-                              onClick={(e) => { e.preventDefault(); navigateTo("/flights"); }}
-                              className="bg-brand-navy text-white hover:bg-slate-800 p-3 rounded-xl transition-colors"
-                            >
-                              Find Cheap Flights →
-                            </a>
-                            <a
-                              href="/hotels"
-                              onClick={(e) => { e.preventDefault(); navigateTo("/hotels"); }}
-                              className="bg-brand-navy text-white hover:bg-slate-800 p-3 rounded-xl transition-colors"
-                            >
-                              Check Hotel Directories →
-                            </a>
-                            <a
-                              href={`/visa/${getCountryVisaId(activeDes.country)}`}
-                              onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeDes.country)}`); }}
-                              className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] p-3 rounded-xl transition-colors"
-                            >
-                              View Visa Guidelines →
-                            </a>
-                          </div>
-                        </div>
-
-                        {/* 9. INTERNAL SEO LINKING SECTION */}
-                        <div id="dest-seo-internal" className="border-t border-slate-200 pt-6 space-y-3">
-                          <span className="font-mono text-[9px] font-bold text-slate-400 block uppercase tracking-widest text-center font-sans">Other Destinations</span>
-                          <div className="flex flex-wrap justify-center items-center gap-2 text-xs">
-                            {DESTINATIONS_DATA.filter(d => d.id !== activeDes.id).map((other) => (
-                              <a
-                                key={other.id}
-                                href={`/destinations/${other.id}`}
-                                onClick={(e) => { e.preventDefault(); navigateTo(`/destinations/${other.id}`); }}
-                                className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium inline-flex items-center gap-1.5"
-                              >
-                                <Compass size={12} className="text-[#F6B73C] shrink-0" />
-                                <span>{other.country} Outbound Guide</span>
-                              </a>
-                            ))}
-                            <a
-                              href="/visa"
-                              onClick={(e) => { e.preventDefault(); navigateTo("/visa"); }}
-                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium inline-flex items-center gap-1.5"
-                            >
-                              <ShieldCheck size={12} className="text-[#F6B73C] shrink-0" />
-                              <span>Embassy Visa Center</span>
-                            </a>
-                            <a
-                              href="/costs"
-                              onClick={(e) => { e.preventDefault(); navigateTo("/costs"); }}
-                              className="bg-white border border-slate-200 hover:border-[#F6B73C] px-3.5 py-1.5 rounded-full text-slate-700 transition-all font-sans font-medium inline-flex items-center gap-1.5"
-                            >
-                              <CreditCard size={12} className="text-[#F6B73C] shrink-0" />
-                              <span>Dual-Currency Costs Analyzer</span>
-                            </a>
-                          </div>
-                        </div>
-
-                        <TravelIntelligence
-                          pageTitle={`${activeDes.country} Travel Guide Itinerary`}
-                          quickAnswer={activeDes.quickAnswer}
-                          keyFacts={activeDes.keyFacts}
-                          faqs={activeDes.faqs}
-                        />
-
-                      </div>
-                    )
-                  ;
-                })()}
-            </div>
-
-          </div>
+        {section === "destinations" && DESTINATIONS_DATA.length > 0 && (
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <DestinationsRouteView context={routeViewContext} />
+          </React.Suspense>
         )}
 
         {/* -------------------------------------------------------------
             💰 VIEW 6: TRIP COSTS ANALYZER (CONVERSION BOOSTER)
         ------------------------------------------------------------- */}
-        {section === "costs" && (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            
-            {/* Sidebar list */}
-            <div className="space-y-4 font-mono uppercase">
-              <span className="text-xs font-bold text-slate-500 block font-sans">
-                {isBn ? "দেশ অনুযায়ী ট্রিপ বাজেট গাইড" : "TRIP COST GUIDES"}
-              </span>
-              <div className="space-y-2 text-xs">
-                {localizedCosts.map((c) => (
-                  <button
-                    key={c.id}
-                    id={`btn-cost-select-${c.id}`}
-                    onClick={() => navigateTo(`/costs/${c.id}`)}
-                    className={`w-full text-left p-3.5 rounded-xl border font-semibold flex items-center justify-between transition-colors cursor-pointer ${
-                      parameterId === c.id
-                        ? "bg-brand-navy text-white border-brand-navy shadow-md font-sans"
-                        : "bg-white text-slate-705 border-slate-200 hover:bg-slate-50 font-sans"
-                    }`}
-                  >
-                    <span><DollarSign size={12} className="inline-block mr-1 -mt-0.5" />{isBn ? `${c.country} ভ্রমণ খরচ` : `${c.country} Trip Cost`}</span>
-                    <ArrowRight size={12} className={parameterId === c.id ? "text-[#F6B73C]" : "text-slate-450"} />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Cost View Content Template */}
-            <div className="lg:col-span-3 space-y-6">
-              {(() => {
-                const activeCost = localizedCosts.find(c => c.id === parameterId) || localizedCosts[0];
-                return (
-                  <div className="space-y-8 animate-fade-in">
-                    
-                    {/* Header */}
-                    <div className="border-b border-slate-200 pb-5">
-<h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-slate-900">
-                        {isBn
-                          ? `বাংলাদেশ থেকে ${activeCost.country} ভ্রমণের বিস্তারিত খরচ (BDT বাজেট চার্ট)`
-                          : `${activeCost.country} Trip Cost from Bangladesh: Complete Price Matrix`}
-                      </h1>
-                    </div>
-
-                    {/* AEO Quote */}
-                    <div id="cost-aeo-text-box" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
-                      <span className="text-[10px] font-bold tracking-widest text-brand-navy font-mono block mb-1">
-                        {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
-                      </span>
-                      <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
-                        {activeCost.quickAnswer}
-                      </p>
-                    </div>
-
-                    {/* Detailed matrix cost tables */}
-                    <div className="space-y-4">
-                      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-2">
-                        <h2 className="font-serif font-black text-lg text-slate-900">
-                          {isBn ? "খাতওয়ারী সম্পূর্ণ ভ্রমণ খরচের হিসাব (BDT)" : "Full Trip Cost Breakdown (BDT)"}
-                        </h2>
-                        <span className="text-xs text-brand-navy bg-emerald-50 border border-emerald-200 font-mono px-3 py-1 rounded">
-                          {isBn ? "এক্সচেঞ্জ রেট:" : "Exchange Rate:"} {activeCost.exchangeRateText}
-                        </span>
-                      </div>
-
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
-                          <thead>
-                            <tr className="bg-brand-navy text-white">
-                              <th className="p-4 font-serif font-bold">{isBn ? "খরচের খাত" : "What You'll Spend On"}</th>
-                              <th className="p-4 font-mono font-bold">{isBn ? "বাজেট (Budget)" : "Budget"}</th>
-                              <th className="p-4 font-mono font-bold">{isBn ? "মিড-রেঞ্জ (Mid-Range)" : "Mid-Range"}</th>
-                              <th className="p-4 font-mono font-bold">{isBn ? "লাক্সারি (Luxury)" : "Luxury"}</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-slate-100">
-                            {activeCost.categories.map((cat, idx) => (
-                              <tr key={idx} className="hover:bg-slate-50 transition-colors">
-                                <td className="p-4 font-medium text-slate-800">{cat.name}</td>
-                                <td className="p-4 font-mono text-emerald-650 font-bold">৳ {cat.lowBdt.toLocaleString()}</td>
-                                <td className="p-4 font-mono text-indigo-700 font-bold">৳ {cat.midBdt.toLocaleString()}</td>
-                                <td className="p-4 font-mono text-amber-700 font-bold">৳ {cat.highBdt.toLocaleString()}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-
-                      {/* Unified Conversion Widgets Block */}
-                      <div className="space-y-6 mt-6">
-                        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
-                          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono block">
-                            {isBn ? `ঢাকা থেকে ${activeCost.country} ফ্লাইটের আজকের ভাড়া দেখুন` : `Check today's flight prices from Dhaka to ${activeCost.country}`}
-                          </span>
-                          {areTpScriptsReady ? (
-                            <React.Suspense
-                              fallback={
-                                <TravelpayoutsWidgetSkeleton
-                                  variant="flights"
-                                  isBn={isBn}
-                                  onInteract={() => setAreTpScriptsReady(true)}
-                                />
-                              }
-                            >
-                              <TravelpayoutsEmbed
-                                defaultDestination={getCountryIata(activeCost.country)}
-                              />
-                            </React.Suspense>
-                          ) : (
-                            <TravelpayoutsWidgetSkeleton
-                              variant="flights"
-                              isBn={isBn}
-                              onInteract={() => setAreTpScriptsReady(true)}
-                            />
-                          )}
-                        </div>
-
-                        <React.Suspense fallback={null}>
-                          <TravelEssentials
-                            country={activeCost.country}
-                            defaultTab="transfers"
-                            compactHeader
-                            lang={lang}
-                          />
-                        </React.Suspense>
-                      </div>
-                    </div>
-
-                    {/* Seasonal variations description */}
-                    <div className="bg-slate-50 border border-slate-205 p-6 rounded-xl space-y-2">
-                      <h4 className="font-serif font-black text-base text-slate-900">
-                        {isBn ? "মৌসুম অনুযায়ী খরচের তারতম্য" : "How Prices Change by Season"}
-                      </h4>
-                      <p className="text-sm leading-relaxed text-slate-700 font-sans">
-                        {activeCost.seasonalVariation}
-                      </p>
-                    </div>
-
-                    {/* Money-saving hacks */}
-                    <div className="space-y-4">
-                      <h3 className="font-serif font-black text-lg text-brand-navy">
-                        {isBn ? "খরচ কমানোর পরীক্ষিত কৌশল" : "Tips to Spend Less"}
-                      </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {activeCost.moneyHacks.map((hack, idx) => (
-                          <div key={idx} className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm space-y-2">
-                            <span className="text-[10px] uppercase tracking-widest font-mono text-[#F6B73C] font-bold">
-                              {isBn ? `টিপস #${idx + 1}` : `Tip ${idx + 1}`}
-                            </span>
-                            <p className="text-sm text-slate-700 leading-relaxed font-sans">{hack}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Internal link graphs */}
-                    <div id="cost-internal-loop" className="bg-brand-navy/5 border border-brand-navy/15 p-5 rounded-xl space-y-3">
-                      <span className="text-[10px] font-bold text-brand-navy font-mono tracking-widest uppercase block">
-                        {isBn ? "এই ট্রিপের অন্যান্য গাইড" : "Also Plan For This Trip"}
-                      </span>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
-                        <a
-                          id={`lnk-view-visa-from-cost-${activeCost.id}`}
-                          href={`/visa/${getCountryVisaId(activeCost.country)}`}
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeCost.country)}`); }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
-                        >
-                          <ShieldCheck size={14} className="text-brand-navy shrink-0" />
-                          <span>{isBn ? "ভিসা চেকলিস্ট দেখুন" : "Passport Visa Checklist"}</span>
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </a>
-                        <a
-                          id={`lnk-view-dest-from-cost-${activeCost.id}`}
-                          href={`/destinations/${getCountryDestId(activeCost.country)}`}
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/destinations/${getCountryDestId(activeCost.country)}`); }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
-                        >
-                          <Compass size={14} className="text-brand-navy shrink-0" />
-                          <span>{isBn ? "ট্যুর আইটিনারারি দেখুন" : "View Travel Itinerary"}</span>
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </a>
-                        <a
-                          id={`lnk-view-hotel-from-cost-${activeCost.id}`}
-                          href={`/hotels/${getCountryHotelId(activeCost.country)}`}
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeCost.country)}`); }}
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
-                        >
-                          <Building size={14} className="text-brand-navy shrink-0" />
-                          <span>{isBn ? "সেরা হোটেল জোন" : "Curated Area Stays"}</span>
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-                        </a>
-                      </div>
-                    </div>
-
-                    <React.Suspense fallback={null}>
-                      <InteractiveTools />
-                    </React.Suspense>
-
-                    <TravelIntelligence
-                      pageTitle={isBn ? `${activeCost.country} ভ্রমণের খরচের হিসাব` : `${activeCost.country} Trip Cost calculations`}
-                      quickAnswer={activeCost.quickAnswer}
-                      keyFacts={activeCost.keyFacts}
-                      faqs={activeCost.faqs}
-                    />
-
-                  </div>
-                );
-              })()}
-            </div>
-
-          </div>
+        {section === "costs" && localizedCosts.length > 0 && (
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <CostsRouteView context={routeViewContext} />
+          </React.Suspense>
         )}
 
         {/* -------------------------------------------------------------
             🧰 VIEW 7: TRAVEL DATA UTILITY DESK
         ------------------------------------------------------------- */}
         {section === "tools" && (
-          <div className="space-y-6">
-            <div className="border-b border-slate-200 pb-4">
-              <h1 className="font-serif text-3xl font-bold tracking-tight text-slate-900">
-                {isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য স্মার্ট ট্রাভেল টুলস" : "Outbound Travel Tools Workspace"}
-              </h1>
-              <p className="text-xs text-slate-500 font-mono">
-                {isBn ? "BDT কারেন্সি কনভার্টার, ইমিগ্রেশন চেকলিস্ট এবং জরুরি ট্রাভেল ইউটিলিটি।" : "Dynamic calculators constructed specifically for South Asian travelers."}
-              </p>
-            </div>
-            
-            <React.Suspense fallback={null}>
-              <InteractiveTools />
-            </React.Suspense>
-
-            {isAdmin && (
-              <React.Suspense fallback={null}>
-                <TravelpayoutsOnboarding />
-              </React.Suspense>
-            )}
-
-            {/* Book Your Trip - Visual Step-by-Step Booking Checklist Funnel */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-8 mt-8">
-              <div className="border-b border-slate-100 pb-4">
-                <h2 className="font-serif text-xl font-bold text-slate-900">
-                  {isBn ? "ধাপে ধাপে আপনার ট্রিপ বুক করুন" : "Book Your Trip"}
-                </h2>
-                <p className="text-sm text-slate-500">
-                  {isBn
-                    ? "বাংলাদেশ থেকে বিদেশ ভ্রমণের জন্য ৪ ধাপে সম্পূর্ণ বুকিং চেকলিস্ট।"
-                    : "Your step-by-step planning and conversion dashboard built for outbound trips from Bangladesh."}
-                </p>
-              </div>
-
-              <div className="space-y-8 divide-y divide-slate-100">
-                {/* Step 1 */}
-                <div className="space-y-4 pt-0">
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-navy text-white font-mono text-sm font-bold shadow-sm">
-                      1
-                    </div>
-                    <h3 className="font-serif text-base font-bold text-brand-navy">
-                      {isBn ? "ধাপ ১: আপনার ফ্লাইট খুঁজুন" : "Step 1: Find your flight"}
-                    </h3>
-                  </div>
-                  <div className="pl-0 sm:pl-11">
-                    {areTpScriptsReady ? (
-                      <React.Suspense
-                        fallback={
-                          <TravelpayoutsWidgetSkeleton
-                            variant="flights"
-                            isBn={isBn}
-                            onInteract={() => setAreTpScriptsReady(true)}
-                          />
-                        }
-                      >
-                        <TravelpayoutsEmbed />
-                      </React.Suspense>
-                    ) : (
-                      <TravelpayoutsWidgetSkeleton
-                        variant="flights"
-                        isBn={isBn}
-                        onInteract={() => setAreTpScriptsReady(true)}
-                      />
-                    )}
-                  </div>
-                </div>
-
-                {/* Step 2 */}
-                <div className="space-y-4 pt-8">
-                  <div className="flex items-center gap-3 font-medium">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-navy text-white font-mono text-sm font-bold shadow-sm">
-                      2
-                    </div>
-                    <h3 className="font-serif text-base font-bold text-brand-navy">
-                      {isBn ? "ধাপ ২: আপনার হোটেল বুক করুন" : "Step 2: Book your hotel"}
-                    </h3>
-                  </div>
-                  <div className="pl-0 sm:pl-11">
-                    {areTpScriptsReady ? (
-                      <React.Suspense
-                        fallback={
-                          <TravelpayoutsWidgetSkeleton
-                            variant="hotels"
-                            isBn={isBn}
-                            onInteract={() => setAreTpScriptsReady(true)}
-                          />
-                        }
-                      >
-                        <TravelpayoutsCustomWidget initialTab="hotels" />
-                      </React.Suspense>
-                    ) : (
-                      <TravelpayoutsWidgetSkeleton
-                        variant="hotels"
-                        isBn={isBn}
-                        onInteract={() => setAreTpScriptsReady(true)}
-                      />
-                    )}
-                  </div>
-                </div>
-
-                {/* Step 3 */}
-                <div className="space-y-4 pt-8">
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-navy text-white font-mono text-sm font-bold shadow-sm">
-                      3
-                    </div>
-                    <h3 className="font-serif text-base font-bold text-brand-navy">
-                      {isBn ? "ধাপ ৩: Klook-এ ট্যুর ও অ্যাক্টিভিটি বুক করুন" : "Step 3: Plan activities with Klook"}
-                    </h3>
-                  </div>
-                  <div className="pl-0 sm:pl-11">
-                    <KlookActivitiesWidget />
-                  </div>
-                </div>
-
-                {/* Step 4 */}
-                <div className="space-y-4 pt-8">
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-navy text-white font-mono text-sm font-bold shadow-sm">
-                      4
-                    </div>
-                    <h3 className="font-serif text-base font-bold text-brand-navy">
-                      {isBn ? "ধাপ ৪: ট্রাভেল eSIM সংগ্রহ করুন" : "Step 4: Get your travel eSIM"}
-                    </h3>
-                  </div>
-                  <div className="pl-0 sm:pl-11">
-                    <AiraloEsimWidget />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Traveler Utility Desk FAQs & Travel Intelligence */}
-            <TravelIntelligence
-              pageTitle={isBn ? "বাংলাদেশি ভ্রমণকারীদের ট্রাভেল টুলস" : "Bangladeshi Traveler Utility Tools"}
-              quickAnswer={
-                isBn
-                  ? "আমাদের ট্রাভেল টুলস ড্যাশবোর্ডে বাংলাদেশি ভ্রমণকারীদের জন্য রয়েছে লাইভ BDT কারেন্সি কনভার্টার, বিভিন্ন দেশের পাওয়ার প্লাগ ও অ্যাডাপ্টার গাইড (Type C, D, G), ঢাকা এয়ারপোর্ট ইমিগ্রেশন চেকলিস্ট এবং জরুরি বিদেশি ভাষার ফ্রেজবুক।"
-                  : "Our travel tool suite equips outbound tourists from Bangladesh with live mid-market exchange rate calculators, comprehensive plug type adapters (Type C, D, G) by destination, an interactive packing checklist for Dhaka airport immigration, and essential phrases in Thai, Malay, Nepali, and Arabic."
-              }
-              keyFacts={[
-                { label: isBn ? "কারেন্সি রেট" : "Currency Rates", value: "Mid-Market BDT Live Tracker" },
-                { label: isBn ? "বার্ষিক এন্ডোর্সমেন্ট কোটা" : "Annual FX Quota", value: "$18,000 USD / Adult Passport (FE Circular 33)" },
-                { label: isBn ? "প্লাগ সাপোর্ট" : "Plug Compatibility", value: "Type C/D (Nepal), A/B (Thailand), G (MY/UAE)" },
-                { label: isBn ? "ইমিগ্রেশন প্যাক" : "Immigration Pack", value: "Passport + Ticket + Hotel + Solvency" }
-              ]}
-              faqs={SERVICE_TOOLS_FAQS}
-            />
-          </div>
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <ToolsRouteView context={routeViewContext} />
+          </React.Suspense>
         )}
 
         {/* -------------------------------------------------------------
             📰 VIEW 8: BLOG INTEL HUB (DIRECTORY LANDING VS. DEDICATED ARTICLE PAGE)
         ------------------------------------------------------------- */}
-        {section === "blog" && isLanding && (
-          <div className="space-y-12 animate-fade-in">
-            {/* 1. FULL-WIDTH EDGE-TO-EDGE HERO IMAGE WITH H1 HEADER & SHORT DESCRIPTION */}
-            <section
-              aria-labelledby="blog-hero-h1"
-              className="w-screen relative left-1/2 -translate-x-1/2 -mt-6 sm:-mt-8 bg-brand-navy text-white overflow-hidden border-b border-slate-800 shadow-xl"
-            >
-              <div className="absolute inset-0">
-                <ResponsiveImage
-                  src={blogHeroBannerImg}
-                  sizes="100vw"
-                  alt=""
-                  aria-hidden={true}
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  className="w-full h-full object-cover object-center opacity-45 pointer-events-none"
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(105deg, rgba(11,22,40,0.96) 0%, rgba(16,42,67,0.86) 55%, rgba(11,22,40,0.72) 100%)",
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-brand-navy/40" />
-              </div>
-
-              <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
-                <div className="max-w-4xl space-y-5">
-<h1
-                    id="blog-hero-h1"
-                    className="font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.12] text-balance"
-                  >
-                    {isBn
-                      ? "বাংলাদেশি ভ্রমণকারীদের জন্য Travel Guide, Hajj ও Umrah প্রস্তুতি এবং BDT বাজেট প্ল্যান"
-                      : "Bangladesh Outbound Travel Blog: Visa Checklists, DIY Umrah & BDT Trip Guides"}
-                  </h1>
-
-                  <p className="text-sm sm:text-base lg:text-lg text-slate-200 leading-relaxed max-w-3xl">
-                    {isBn
-                      ? "বাংলাদেশি পাসপোর্টধারীদের জন্য সহজ বাংলায় তৈরি ধাপে ধাপে গাইড—সরকারি নিয়মে Hajj রেজিস্ট্রেশন, Nusuk App দিয়ে DIY Umrah, Dual-Currency Card Endorsement, Dhaka Airport Immigration চেকলিস্ট এবং কম খরচে ফ্যামিলি ট্যুর পরিকল্পনা।"
-                      : "Step-by-step editorial playbooks researched for Bangladeshi passport holders—covering DIY Umrah with the Nusuk app, dual-currency card endorsement, Dhaka Airport immigration checklists, and BDT destination budgets."}
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* 2. INTERACTIVE CATEGORY FILTER TABS & SEARCH BAR */}
-            <div className="space-y-4">
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 pb-4">
-                <div
-                  role="tablist"
-                  aria-label="Filter travel guides by topic"
-                  className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 p-1.5 bg-slate-200/75 rounded-xl"
-                >
-                  {[
-                    {
-                      id: "all",
-                      label: isBn
-                        ? `সব গাইড (${localizedBlogs.length})`
-                        : `All Guides (${localizedBlogs.length})`,
-                    },
-                    {
-                      id: "Hajj & Umrah",
-                      label: isBn
-                        ? `হজ্জ ও ওমরাহ (${localizedBlogs.filter((b) => b.category === "Hajj & Umrah").length})`
-                        : `Hajj & Umrah (${localizedBlogs.filter((b) => b.category === "Hajj & Umrah").length})`,
-                    },
-                    {
-                      id: "Ziyarah & Stopovers",
-                      label: isBn
-                        ? `জিয়ারত ও স্টপওভার (${localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers").length})`
-                        : `Ziyarah & Stopovers (${localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers").length})`,
-                    },
-                    {
-                      id: "Visa & Immigration",
-                      label: isBn ? "ভিসা ও ইমিগ্রেশন (3)" : "Visa & Immigration (3)",
-                    },
-                    {
-                      id: "Banking & Payments",
-                      label: isBn ? "ডুয়াল-কারেন্সি কার্ড ও BDT (1)" : "Card Endorsement & BDT (1)",
-                    },
-                    {
-                      id: "Family & Budget",
-                      label: isBn ? "ফ্যামিলি ও বাজেট ট্রিপ (3)" : "Family & Budget Trips (3)",
-                    },
-                    {
-                      id: "Flights, Hotels & Food",
-                      label: isBn
-                        ? "ফ্লাইট, হোটেল ও হালাল খাবার (3)"
-                        : "Flights, Hotels & Halal Food (3)",
-                    },
-                  
-                    {
-                      id: "Travel Tips",
-                      label: isBn
-                        ? `ট্রাভেল টিপস (${localizedBlogs.filter((b) => b.category === "Travel Tips").length})`
-                        : `Travel Tips (${localizedBlogs.filter((b) => b.category === "Travel Tips").length})`,
-                    },
-                  ].map((tab) => {
-                    const isActive = blogCategoryFilter === tab.id;
-                    return (
-                      <button
-                        key={tab.id}
-                        type="button"
-                        role="tab"
-                        aria-selected={isActive}
-                        onClick={() => setBlogCategoryFilter(tab.id)}
-                        className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
-                          isActive
-                            ? "bg-brand-navy text-white shadow-xs"
-                            : "text-slate-700 hover:text-slate-900 hover:bg-white/60"
-                        }`}
-                      >
-                        {tab.label}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div className="relative w-full lg:w-72 shrink-0">
-                  <input
-                    type="search"
-                    value={blogSearchQuery}
-                    onChange={(e) => setBlogSearchQuery(e.target.value)}
-                    placeholder={
-                      isBn
-                        ? "Umrah, Card, Nepal, Visa লিখে খুঁজুন..."
-                        : "Search Umrah, card, Nepal, visa..."
-                    }
-                    aria-label="Search blog guides"
-                    className="w-full bg-white border border-slate-200 focus:border-brand-navy rounded-xl px-4 py-2.5 text-xs text-slate-800 outline-none transition-colors"
-                  />
-                  {blogSearchQuery && (
-                    <button
-                      type="button"
-                      onClick={() => setBlogSearchQuery("")}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-700 cursor-pointer"
-                    >
-                      {isBn ? "মুছুন" : "Clear"}
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* 3. 3-CARDS-PER-ROW BLOG GRID (UNIQUE THUMBNAIL + DARK H2 TITLE + ~50-WORD AEO SNIPPET + 'READ FULL BLOG' BUTTON) */}
-            {(() => {
-              const orderedBlogs = [
-                ...localizedBlogs.filter((b) => b.category === "Hajj & Umrah"),
-                ...localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers"),
-                ...localizedBlogs.filter((b) => b.category !== "Hajj & Umrah" && b.category !== "Ziyarah & Stopovers"),
-              ];
-
-              const filteredBlogs = orderedBlogs.filter((post) => {
-                const matchesCategory =
-                  blogCategoryFilter === "all"
-                    ? true
-                    : blogCategoryFilter === "Flights, Hotels & Food"
-                    ? ["Cheap Flight Tips", "Hotel Savings", "Food & Culture"].includes(post.category)
-                    : post.category === blogCategoryFilter;
-
-                const q = blogSearchQuery.trim().toLowerCase();
-                const matchesQuery =
-                  !q ||
-                  post.title.toLowerCase().includes(q) ||
-                  post.summary.toLowerCase().includes(q) ||
-                  post.category.toLowerCase().includes(q);
-
-                return matchesCategory && matchesQuery;
-              });
-
-              if (filteredBlogs.length === 0) {
-                return (
-                  <div className="bg-white border border-slate-200 rounded-2xl p-10 text-center space-y-3">
-                    <h3 className="font-serif text-[20px] font-bold text-brand-navy">
-                      {isBn ? "কোনো ট্রাভেল গাইড খুঁজে পাওয়া যায়নি" : "No matching travel guides found"}
-                    </h3>
-                    <p className="text-xs text-slate-600 max-w-md mx-auto">
-                      {isBn
-                        ? "অনুগ্রহ করে অন্য শব্দ দিয়ে খুঁজুন অথবা সব গাইড দেখতে নিচের বাটনে ক্লিক করুন।"
-                        : "Try clearing your search filter or switching back to All Guides to browse our complete library of Bangladeshi travel guides."}
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setBlogCategoryFilter("all");
-                        setBlogSearchQuery("");
-                      }}
-                      className="bg-brand-navy text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer"
-                    >
-                      {isBn
-                        ? `সবগুলো গাইড দেখুন (${localizedBlogs.length})`
-                        : `Show All ${localizedBlogs.length} Guides`}
-                    </button>
-                  </div>
-                );
-              }
-
-              return (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-                  {filteredBlogs.map((post) => {
-                    const coverImg = getBlogCoverImage(post.slug);
-                    const aeoSnippet50Words = getBlogAeoSnippet50Words(post.slug, isBn, post.summary);
-
-                    return (
-                      <article
-                        key={post.id}
-                        onClick={() => navigateTo(`/blog/${post.slug}`)}
-                        className="group bg-white border border-slate-200/90 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between cursor-pointer"
-                      >
-                        <div className="flex flex-col">
-                          {/* Unique Card Thumbnail Image */}
-                          <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
-                            <ResponsiveImage
-                              src={coverImg}
-                              sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                              alt={generateBlogCoverAltText({
-                                title: post.title,
-                                category: post.category,
-                                slug: post.slug,
-                                lang: isBn ? "bn" : "en",
-                              })}
-                              loading="lazy"
-                              fetchPriority="low"
-                              decoding="async"
-                              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent" />
-                            <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[11px] text-white/95 font-medium">
-                              <span className="bg-brand-navy/85 backdrop-blur-xs px-2.5 py-0.5 rounded-md border border-white/15">
-                                {post.category}
-                              </span>
-                              <span className="font-mono">{post.readTime}</span>
-                            </div>
-                          </div>
-
-                          {/* Card Body: Metadata + Dark H2 Title (20px-22px) + ~50-Word AEO Main Snippet (14px) */}
-                          <div className="p-6 space-y-3">
-                            <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500">
-                              <span>{post.date}</span>
-                              <span aria-hidden="true">·</span>
-                              <span>
-                                {isBn
-                                  ? `লেখক: ${post.author.split(" (")[0]}`
-                                  : `By ${post.author.split(" (")[0]}`}
-                              </span>
-                            </div>
-
-                            <h2 className="font-serif text-[20px] sm:text-[22px] font-bold text-brand-navy group-hover:text-brand-emerald leading-[1.3] text-balance">
-                              {post.title}
-                            </h2>
-
-                            <p className="text-[14px] text-slate-700 leading-[1.65]">
-                              {aeoSnippet50Words}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Card Footer: 'Read Full Blog' Button */}
-                        <div className="px-6 pb-6 pt-2">
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              navigateTo(`/blog/${post.slug}`);
-                            }}
-                            className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-between cursor-pointer"
-                          >
-                            <span>{isBn ? "সম্পূর্ণ ব্লগ পড়ুন · Read Full Blog" : "Read Full Blog"}</span>
-                            <ArrowRight size={14} className="text-[#F6B73C] group-hover:text-brand-navy transition-transform group-hover:translate-x-0.5" />
-                          </button>
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
-              );
-            })()}
-
-            {/* Admin-Only SEO Matrix (Hidden from regular site visitors) */}
-            {isAdmin && (
-              <React.Suspense fallback={null}>
-                <TopicalAuthorityBlueprint lang={lang} onNavigate={navigateTo} />
-              </React.Suspense>
-            )}
-
-            {/* 4. SMART CONVERSION WIDGETS SECTION ON BLOG DIRECTORY PAGE */}
-            <div className="pt-8 border-t border-slate-200 space-y-8">
-              <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-                  <div className="space-y-1">
-                    <div className="text-xs font-semibold text-brand-navy">
-                      {isBn
-                        ? "লাইভ Flight ও Umrah রুটের ভাড়া তুলনা"
-                        : "Live Airfare & Umrah Route Comparison"}
-                    </div>
-                    <h2 className="font-serif text-[22px] sm:text-[26px] font-bold text-brand-navy">
-                      {isBn
-                        ? "ঢাকা (DAC) থেকে ফ্লাইটের সর্বনিম্ন ভাড়া যাচাই করুন"
-                        : "Compare Flights from Dhaka (DAC) While You Plan"}
-                    </h2>
-                    <p className="text-xs text-slate-600">
-                      {isBn
-                        ? "Jeddah, Madinah, Kathmandu, Bangkok, Kuala Lumpur, Singapore, Malé ও Dubai-এর লাইভ ভাড়া দেখুন—অথবা Dual-Currency Card না থাকলে আমাদের WhatsApp BDT ডেস্কে মেসেজ দিন।"
-                        : "Search live fares to Jeddah, Madinah, Kathmandu, Bangkok, Kuala Lumpur, Singapore, Malé, and Dubai—or message our WhatsApp BDT Desk if you don't have a dual-currency card yet."}
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => navigateTo("/contact")}
-                    className="self-start sm:self-end text-xs font-semibold text-brand-navy hover:underline inline-flex items-center gap-1 whitespace-nowrap cursor-pointer"
-                  >
-                    <span>
-                      {isBn
-                        ? "BDT-তে টিকিট ও হোটেল বুকিং সহায়তা"
-                        : "Need BDT Booking Help? Contact Desk"}
-                    </span>
-                    <ArrowRight size={12} />
-                  </button>
-                </div>
-                {areTpScriptsReady ? (
-                  <React.Suspense
-                    fallback={
-                      <TravelpayoutsWidgetSkeleton
-                        variant="flights"
-                        isBn={isBn}
-                        onInteract={() => setAreTpScriptsReady(true)}
-                      />
-                    }
-                  >
-                    <TravelpayoutsEmbed defaultDestination="JED" />
-                  </React.Suspense>
-                ) : (
-                  <TravelpayoutsWidgetSkeleton
-                    variant="flights"
-                    isBn={isBn}
-                    onInteract={() => setAreTpScriptsReady(true)}
-                  />
-                )}
-              </div>
-
-              <React.Suspense fallback={null}>
-                <TravelEssentials country="Saudi Arabia & Asia" defaultTab="transfers" compactHeader lang={lang} />
-              </React.Suspense>
-
-              <TravelIntelligence
-                pageTitle={
-                  isBn
-                    ? "বাংলাদেশ থেকে Hajj, Umrah ও বিদেশ ভ্রমণের প্রস্তুতি — সাধারণ প্রশ্নোত্তর (FAQ)"
-                    : "Hajj, Umrah & Outbound Preparation from Bangladesh — Verified FAQs"
-                }
-                quickAnswer={
-                  isBn
-                    ? "বাংলাদেশি নাগরিকদের ফরজ Hajj-এর জন্য অবশ্যই ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ নিবন্ধন করতে হবে। তবে বছরের যেকোনো সময় ৯০ দিনের Umrah e-Visa, ৯৬ ঘণ্টার Saudia/Flynas Stopover Visa অথবা US/UK/Schengen ভিসাধারীদের অনলাইন e-Visa এবং Nusuk App ব্যবহার করে নিজে নিজে কম খরচে DIY Umrah পালন করা যায়।"
-                    : "Bangladeshi citizens must register via hajj.gov.bd for obligatory Hajj, while year-round Umrah can be planned independently using a 90-day Umrah e-Visa, a 96-hour Saudia/Flynas Stopover Visa, or a qualified US/UK/Schengen holder e-Visa, paired with the official Nusuk and Saudi Visa Bio apps."
-                }
-                keyFacts={[
-                  {
-                    label: isBn ? "Umrah e-Visa খরচ" : "Umrah e-Visa Cost",
-                    value: isBn ? "BDT 15,500 – 19,500 (২–৫ দিন)" : "BDT 15,500 – 19,500 (2–5 Days)",
-                  },
-                  {
-                    label: isBn ? "১০ দিনের DIY Umrah বাজেট" : "10-Day DIY Umrah Budget",
-                    value: isBn ? "BDT 1,16,000 – 1,32,000 / জন" : "BDT 1,16,000 – 1,32,000 / Person",
-                  },
-                  {
-                    label: isBn ? "বার্ষিক Card FX কোটা" : "Annual Card FX Quota",
-                    value: "$18,000 USD / Adult Passport (FE Circular 33)",
-                  },
-                  {
-                    label: isBn ? "বাধ্যতামূলক Umrah অ্যাপ" : "Mandatory Umrah Apps",
-                    value: "Saudi Visa Bio + Nusuk (nusuk.sa)",
-                  },
-                ]}
-                faqs={localizedHajjFaqs}
-              />
-            </div>
-          </div>
+        {section === "blog" && isLanding && localizedBlogs.length > 0 && (
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <BlogIndexRouteView context={routeViewContext} />
+          </React.Suspense>
         )}
 
         {/* -------------------------------------------------------------
             📖 DEDICATED SINGLE BLOG POST PAGE (/blog/...)
         ------------------------------------------------------------- */}
-        {section === "blog" && !isLanding && (
-          <div className="space-y-8 animate-fade-in">
-            {(() => {
-              const activePost = localizedBlogs.find((p) => p.slug === parameterId) || localizedBlogs[0];
-              // Body text: Bengali posts carry it inline in BLOG_DATA, English posts
-              // get it from the lazily loaded ./data/blogContent module (see the
-              // effect near the top of the component). Empty until that module
-              // resolves — the placeholder above covers that window.
-              const articleBody = activePost.content ?? blogBodies?.[activePost.slug] ?? "";
-              const canonicalAuthorRaw =
-                BLOG_DATA.find((post) => post.slug === activePost.slug)?.author ||
-                activePost.author;
-              const activeCoverImg = getBlogCoverImage(activePost.slug);
-              const sameCategoryPosts = localizedBlogs.filter(
-                (p) => p.slug !== activePost.slug && p.category === activePost.category
-              );
-              const relatedPosts = getRelatedBlogPosts(activePost, localizedBlogs, 3);
-
-              // First-Occurrence Semantic Contextual Internal Linker (Nathan Gotch / Koray Tugberk Silo Rule)
-              // Ensures each target URL is linked at most ONCE inside the article body (no spammy duplicate links, no self-links)
-              const usedInternalPaths = new Set<string>();
-              const currentBlogPath = `/blog/${activePost.slug}`;
-
-              const CONTEXTUAL_INTERNAL_LINK_RULES: { pattern: RegExp; path: string; title: string }[] = [
-                {
-                  pattern: /\b(Nusuk App|Nusuk portal|Rawdah Shareef permit|Riyazul Jannah|রিয়াজুল জান্নাত|Nusuk অ্যাপ)\b/i,
-                  path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
-                  title: "Nusuk App & Rawdah Shareef Permit Step-by-Step Guide",
-                },
-                {
-                  pattern: /\b(96-Hour Saudi Stopover Visa|Saudi Stopover Visa|৯৬ ঘণ্টার Saudi Stopover Visa|স্টপওভার ভিসা)\b/i,
-                  path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
-                  title: "96-Hour Saudi Stopover Visa Guide for Bangladeshis",
-                },
-                {
-                  pattern: /\b(Haramain Bullet Train|Haramain High-Speed Train|Jabal Omar|Mahbas Al Jin|হারামাইন বুলেট ট্রেন)\b/i,
-                  path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
-                  title: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide",
-                },
-                {
-                  pattern: /\b(Open-Jaw|Multi-City ticket|মাল্টি-সিটি টিকিট|Open-Jaw Flight)\b/i,
-                  path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia",
-                  title: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy",
-                },
-                {
-                  pattern: /\b(Dual-Currency Card|passport dollar endorsement|\$18,000 annual travel quota|\$12,000 annual travel quota|ডুয়াল-কারেন্সি কার্ড|ডলার এনডোর্সমেন্ট)\b/i,
-                  path: "/blog/dual-currency-card-endorsement-bangladesh",
-                  title: "Dual-Currency Card & $18,000 Passport Endorsement Guide",
-                },
-                {
-                  pattern: /\b(elderly parents|electric scooter|wheelchair assistance|বয়স্ক মা-বাবা|ইলেকট্রিক স্কুটার)\b/i,
-                  path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
-                  title: "Performing Umrah with Elderly Parents from Bangladesh",
-                },
-                {
-                  pattern: /\b(Ladies' Gates 25–29|Northern Gates 25 to 29|without a male Mahram|মাহরাম ছাড়া)\b/i,
-                  path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
-                  title: "Umrah Rules for Bangladeshi Women & Ladies' Gates 25–29",
-                },
-                {
-                  pattern: /\b(Miqat Qarn al-Manazil|wear Ihram|ইহরাম বাঁধার নিয়ম|মিকাত)\b/i,
-                  path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
-                  title: "Wearing Ihram from Dhaka Airport vs. Transit Flight Miqat Guide",
-                },
-                {
-                  pattern: /\b(5-liter sealed Zamzam|Zamzam carton|Ajwa dates|জমজম বক্স|আজওয়া খেজুর)\b/i,
-                  path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
-                  title: "Official Zamzam Water, Dates & Gold Customs Rules",
-                },
-                {
-                  pattern: /\b(Masjid Quba|Mount Uhud|Taif day trip|Hira Cultural District|মসজিদে কুবা|তায়েফ ডে-ট্রিপ)\b/i,
-                  path: "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide",
-                  title: "Complete Makkah, Madinah, Badr & Taif Ziyarah Guide",
-                },
-                {
-                  pattern: /\b(Sheikh Zayed Grand Mosque|Qasr Al Watan|শেখ জায়েদ গ্র্যান্ড মসজিদ)\b/i,
-                  path: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide",
-                  title: "Abu Dhabi Sheikh Zayed Mosque & Qasr Al Watan Day Trip Guide",
-                },
-                {
-                  pattern: /\b(Putrajaya Pink Mosque|Masjid Putra|Islamic Arts Museum Malaysia|পুত্রজায়া পিঙ্ক মসজিদ)\b/i,
-                  path: "/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide",
-                  title: "Malaysia Islamic Heritage & Putrajaya Halal Family Guide",
-                },
-                {
-                  pattern: /\b(Skip-the-Line|Louvre Museum|Colosseum|স্কিপ-দ্য-লাইন)\b/i,
-                  path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
-                  title: "Europe, UK & USA Sightseeing Skip-the-Line & Stopover Umrah Guide",
-                },
-                {
-                  pattern: /\b(Islamic Dual-Currency|Shariah-Compliant|Khidmah Card|Riba-Free|ইসলামিক ডুয়াল-কারেন্সি|শরীয়াহ-সম্মত)\b/i,
-                  path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
-                  title: "Best Shariah-Compliant Islamic Dual-Currency Cards in Bangladesh",
-                },
-                {
-                  pattern: /\b(RFCD Account|Resident Foreign Currency Deposit|\$300 single-transaction|RFCD একাউন্ট|\$300 ক্যাপ)\b/i,
-                  path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
-                  title: "RFCD Account vs. Regular Travel Quota ($300 Cap Solution)",
-                },
-                {
-                  pattern: /\b(bKash|Nagad|BDT Support Desk|local bank transfer|বিকাশ|নগদে পেমেন্ট)\b/i,
-                  path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
-                  title: "How to Book Flights & Makkah Hotels in BDT via bKash/Bank Transfer",
-                },
-                {
-                  pattern: /\b(Dynamic Currency Conversion|5% DCC|SuperRich|ডাবল কনভার্সন|DCC চার্জ)\b/i,
-                  path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
-                  title: "Cash SAR / USD vs. Dual-Currency Card & Avoiding 5% DCC Fees",
-                },
-                {
-                  pattern: /\b(thaievisa\.go\.th|Thailand e-Visa|Thailand Tourist Visa|থাইল্যান্ড ই-ভিসা)\b/i,
-                  path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
-                  title: "Thailand Official e-Visa Guide from Bangladesh (thaievisa.go.th)",
-                },
-                {
-                  pattern: /\b(Malaysia Digital Arrival Card|MDAC|malaysiavisa\.imi\.gov\.my|মালয়েশিয়া ই-ভিসা)\b/i,
-                  path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration",
-                  title: "Malaysia Online e-Visa & Free MDAC Arrival Card Guide",
-                },
-                {
-                  pattern: /\b(Form V39A|Letter of Introduction|Authorized Visa Agent|সিঙ্গাপুর ভিসা)\b/i,
-                  path: "/blog/singapore-visa-guide-bangladesh-agents",
-                  title: "Singapore Tourist Visa Guide from Bangladesh (LOI Form V39A)",
-                },
-                {
-                  pattern: /\b(Travel History Ladder|Fresh Passport|blank passport|নতুন পাসপোর্টে|ট্রাভেল হিস্ট্রি)\b/i,
-                  path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia",
-                  title: "First International Trip on a Fresh Bangladeshi Passport (3-Step Ladder)",
-                },
-                {
-                  pattern: /\b(SimplyGo|Mustafa Centre|Gardens by the Bay|Sentosa|সিঙ্গাপুর MRT)\b/i,
-                  path: "/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide",
-                  title: "Singapore 4-Day Budget Itinerary from Dhaka (MRT SimplyGo & Halal Food)",
-                },
-                {
-                  pattern: /\b(Bumrungrad|Bangkok Hospital|Samitivej|Medical Check-Up|বামরুনগ্রাদ|মেডিকেল ভিসা)\b/i,
-                  path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh",
-                  title: "Bangkok Medical Check-Up & Hospital Guide from Bangladesh (Bumrungrad & Bangkok Hospital)",
-                },
-                {
-                  pattern: /\b(Airalo|Travel eSIM|Schengen Travel Insurance|ট্রাভেল ই-সিম|ট্রাভেল ইন্স্যুরেন্স)\b/i,
-                  path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide",
-                  title: "Best Travel eSIM (Airalo) & Overseas Medical Insurance from Bangladesh",
-                },
-                {
-                  pattern: /\b(Sri Lanka ETA|Nine Arch Bridge|Nuwara Eliya|শ্রীলঙ্কা ভ্রমণ|শ্রীলঙ্কা ভিসা)\b/i,
-                  path: "/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost",
-                  title: "Sri Lanka 6-Day Budget Tour from Bangladesh (ETA Visa, Kandy & Ella Train)",
-                },
-                {
-                  pattern: /\b(epassport\.gov\.bd|e-Passport Renewal|Super Express Passport|ই-পাসপোর্ট রিনিউ|৬৪ পৃষ্ঠার পাসপোর্ট)\b/i,
-                  path: "/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide",
-                  title: "Bangladesh e-Passport Application & Urgent Renewal Guide (All 64 Districts)",
-                },
-                {
-                  pattern: /\b(AirHelp|EC 261\/2004|PIR Report|Flight Delay Compensation|ফ্লাইট ডিলে ক্ষতিপূরণ)\b/i,
-                  path: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
-                  title: "Flight Delay, Cancellation & Lost Baggage Compensation Guide for Bangladeshis",
-                },
-                {
-                  pattern: /\b(Biman vs\.? Saudia|46kg Baggage|২x২৩ কেজি|বিমান বনাম সৌদিয়া)\b/i,
-                  path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla",
-                  title: "Best Airlines Flying from Dhaka Compared (Biman, Saudia, Emirates, Qatar & Baggage Rules)",
-                },
-                {
-                  pattern: /\b(Dhaka Airport emigration|NOC|Government Order|ইমিগ্রেশন)\b/i,
-                  path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go",
-                  title: "Dhaka Airport Outbound Immigration Checklist (NOC & GO Rules)",
-                },
-                {
-                  pattern: /\b(DIY Umrah|10-day DIY Umrah|নিজে নিজে ওমরাহ)\b/i,
-                  path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
-                  title: "DIY Umrah & Hajj Preparation from Bangladesh (10-Day BDT Budget)",
-                },
-              ];
-
-              const injectContextualInternalLink = (textSegment: string, keyPrefix: string): React.ReactNode => {
-                if (usedInternalPaths.size >= 6) return textSegment;
-                for (const rule of CONTEXTUAL_INTERNAL_LINK_RULES) {
-                  if (rule.path === currentBlogPath || usedInternalPaths.has(rule.path)) continue;
-                  const match = rule.pattern.exec(textSegment);
-                  if (match && match.index !== undefined) {
-                    const matchedWord = match[0];
-                    const before = textSegment.slice(0, match.index);
-                    const after = textSegment.slice(match.index + matchedWord.length);
-                    usedInternalPaths.add(rule.path);
-                    return (
-                      <React.Fragment key={keyPrefix}>
-                        {before}
-                        <a
-                          href={rule.path}
-                          title={rule.title}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            navigateTo(rule.path);
-                          }}
-                          className="text-brand-navy font-semibold underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-brand-emerald transition-colors cursor-pointer"
-                        >
-                          {matchedWord}
-                        </a>
-                        {after}
-                      </React.Fragment>
-                    );
-                  }
-                }
-                return textSegment;
-              };
-
-              const renderFormattedText = (rawText: string) => {
-                const parts = rawText.split(/(\*\*[^*]+\*\*)/g);
-                return parts.map((part, pIdx) => {
-                  if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
-                    const boldInner = part.slice(2, -2);
-                    return (
-                      <strong key={pIdx} className="font-semibold text-brand-navy">
-                        {injectContextualInternalLink(boldInner, `bold-${pIdx}`)}
-                      </strong>
-                    );
-                  }
-                  return <React.Fragment key={pIdx}>{injectContextualInternalLink(part, `txt-${pIdx}`)}</React.Fragment>;
-                });
-              };
-
-              const officialGovSources =
-                activePost.category === "Hajj & Umrah" || activePost.category === "Ziyarah & Stopovers"
-                  ? [
-                      {
-                        name: isBn ? "ধর্ম মন্ত্রণালয় বাংলাদেশ (hajj.gov.bd)" : "BD Ministry of Religious Affairs (hajj.gov.bd)",
-                        url: "https://www.hajj.gov.bd",
-                      },
-                      {
-                        name: isBn ? "অফিশিয়াল Nusuk পোর্টাল (nusuk.sa)" : "Official Saudi Nusuk Portal (nusuk.sa)",
-                        url: "https://www.nusuk.sa",
-                      },
-                      {
-                        name: isBn ? "সৌদি হজ ও ওমরাহ মন্ত্রণালয় (haj.gov.sa)" : "Saudi Ministry of Hajj & Umrah (haj.gov.sa)",
-                        url: "https://www.haj.gov.sa",
-                      },
-                      {
-                        name: isBn ? "সৌদি ই-ভিসা পোর্টাল (ksavisa.sa)" : "Saudi Unified Visa Platform (ksavisa.sa)",
-                        url: "https://ksavisa.sa",
-                      },
-                      {
-                        name: isBn ? "হারামাইন বুলেট ট্রেন (sar.hhr.sa)" : "Haramain High-Speed Railway (sar.hhr.sa)",
-                        url: "https://sar.hhr.sa",
-                      },
-                      {
-                        name: isBn ? "UAE পোর্টাল (u.ae) ও JAKIM (islam.gov.my)" : "UAE Official Portal (u.ae) & Malaysia JAKIM (islam.gov.my)",
-                        url: "https://u.ae",
-                      },
-                    ]
-                  : [
-                      {
-                        name: isBn ? "বাংলাদেশ ই-পাসপোর্ট পোর্টাল (epassport.gov.bd)" : "BD e-Passport Portal (epassport.gov.bd)",
-                        url: "https://www.epassport.gov.bd",
-                      },
-                      {
-                        name: isBn ? "বাংলাদেশ ব্যাংক ট্রাভেল কোটা (bb.org.bd)" : "Bangladesh Bank FX Rules (bb.org.bd)",
-                        url: "https://www.bb.org.bd",
-                      },
-                      {
-                        name: isBn ? "জাতীয় রাজস্ব বোর্ড কাস্টমস (nbr.gov.bd)" : "Bangladesh Customs NBR (nbr.gov.bd)",
-                        url: "https://nbr.gov.bd",
-                      },
-                      {
-                        name: isBn ? "থাইল্যান্ড ই-ভিসা (thaievisa.go.th)" : "Official Thai e-Visa (thaievisa.go.th)",
-                        url: "https://www.thaievisa.go.th",
-                      },
-                      {
-                        name: isBn ? "মালয়েশিয়া ই-ভিসা ও MDAC (imi.gov.my)" : "Malaysia Immigration & MDAC (imi.gov.my)",
-                        url: "https://malaysiavisa.imi.gov.my",
-                      },
-                      {
-                        name: isBn ? "সিঙ্গাপুর ICA (ica.gov.sg)" : "Singapore ICA Portal (ica.gov.sg)",
-                        url: "https://www.ica.gov.sg",
-                      },
-                    ];
-
-              return (
-                <>
-                  {/* Top Navigation: Return to the blog index */}
-                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
-                    <a
-                      href="/blog"
-                      onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
-                      className="inline-flex items-center gap-2 text-xs font-semibold text-brand-navy hover:text-slate-900 bg-white border border-slate-200 hover:border-brand-navy px-4 py-2 rounded-xl transition-colors"
-                    >
-                      <ChevronLeft size={14} />
-                      <span>
-                        {isBn
-                          ? `সবগুলো ট্রাভেল ব্লগে ফিরে যান (${localizedBlogs.length})`
-                          : `Back to All Travel Guides (${localizedBlogs.length})`}
-                      </span>
-                    </a>
-
-                  </div>
-
-                  {/* Main Article 2-Column Layout (Content + Sticky Trip Planner Sidebar) */}
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    {/* Left Column: Full Article Content (8 Cols) with Dark H1 / H2 / H3 Hierarchy */}
-                    <article className="lg:col-span-8 space-y-7 bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-xs">
-                      {/* Primary Semantic H1 in Dark Color (#0B1426) & Large Pixel Scale (30px–38px) */}
-                      <header className="space-y-5 border-b border-slate-200 pb-6">
-                        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <span className="font-bold text-brand-navy">{activePost.category}</span>
-                            <span aria-hidden="true">·</span>
-                            <span>{activePost.date}</span>
-                            <span aria-hidden="true">·</span>
-                            <span>{activePost.readTime}</span>
-                            <span aria-hidden="true">·</span>
-                            <span>{isBn ? `লেখক: ${activePost.author}` : `By ${activePost.author}`}</span>
-                          </div>
-                          <span className="font-mono text-emerald-800 font-semibold inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md text-[11px]">
-                            <ShieldCheck size={12} className="text-emerald-600 shrink-0" />
-                            <span>{`SOURCE · CHECKED [${activePost.date}]`}</span>
-                          </span>
-                        </div>
-
-                        <h1 className="font-serif text-[28px] sm:text-[34px] lg:text-[38px] font-black text-brand-navy leading-[1.18] tracking-tight text-balance">
-                          {activePost.title}
-                        </h1>
-
-                        {/* Dedicated Unique Article Feature Photograph */}
-                        <figure className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-900">
-                          <ResponsiveImage
-                            src={activeCoverImg}
-                            sizes="(max-width: 767px) 100vw, 840px"
-                            alt={generateBlogCoverAltText({
-                              title: activePost.title,
-                              category: activePost.category,
-                              slug: activePost.slug,
-                              lang: isBn ? "bn" : "en",
-                            })}
-                            loading="eager"
-                            fetchPriority="high"
-                            decoding="async"
-                            className="w-full aspect-[16/9] object-cover object-center"
-                          />
-                        </figure>
-
-                        {/* Quick Answer & Key Takeaway Box (AEO-Structured Direct Answer) */}
-                        <div className="bg-slate-50 border-l-4 border-brand-navy p-5 rounded-r-xl space-y-1.5">
-                          <div className="text-xs font-bold text-brand-navy">
-                            {isBn
-                              ? "একনজরে মূল উত্তর ও সারসংক্ষেপ (Quick Answer & Key Takeaway)"
-                              : "Quick Answer & Key Takeaway"}
-                          </div>
-                          <p className="text-[15px] sm:text-[16px] text-slate-800 leading-[1.75]">
-                            {activePost.summary}
-                          </p>
-                        </div>
-
-                        {/* Official Government & Verified Sources Bar */}
-                        <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-xl p-4 space-y-2">
-                          <div className="text-xs font-bold text-brand-navy flex items-center justify-between">
-                            <span>
-                              {isBn
-                                ? "অফিশিয়াল সরকারি পোর্টাল ও যাচাইকৃত তথ্যসূত্র (Official Government Sources):"
-                                : "Verified Official Government Portals & Authentic Sources:"}
-                            </span>
-                            <span className="text-[11px] font-mono text-emerald-800">
-                              {isBn ? "হালনাগাদ: ২০২৬" : "Updated: 2026"}
-                            </span>
-                          </div>
-                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs">
-                            {officialGovSources.map((src, sIdx) => (
-                              <a
-                                key={sIdx}
-                                href={src.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="font-medium text-brand-navy hover:text-brand-emerald underline decoration-slate-300 hover:decoration-brand-navy inline-flex items-center gap-1"
-                              >
-                                <span>{src.name}</span>
-                                <ExternalLink size={11} className="opacity-70" />
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                      </header>
-
-                      {/* Breadcrumb navigation — visible on screen + semantic for screen readers */}
-                      <nav aria-label={isBn ? "ব্রেডক্রাম্ব" : "Breadcrumb"}>
-                        <ol className="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-500 mb-4">
-                          <li>
-                            <a
-                              href="/"
-                              onClick={(e) => { e.preventDefault(); navigateTo("/"); }}
-                              className="hover:text-brand-navy transition-colors"
-                            >
-                              {isBn ? "হোম" : "Home"}
-                            </a>
-                          </li>
-                          <li aria-hidden="true" className="text-slate-300 select-none">/</li>
-                          <li>
-                            <a
-                              href="/blog"
-                              onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
-                              className="hover:text-brand-navy transition-colors"
-                            >
-                              {isBn ? "ট্রাভেল গাইড" : "Travel Guides"}
-                            </a>
-                          </li>
-                          <li aria-hidden="true" className="text-slate-300 select-none">/</li>
-                          <li>
-                            <a
-                              href={`/blog/${activePost.slug}`}
-                              onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${activePost.slug}`); }}
-                              className="hover:text-brand-navy transition-colors line-clamp-1 max-w-[200px] sm:max-w-xs"
-                              aria-current="page"
-                            >
-                              {activePost.title}
-                            </a>
-                          </li>
-                        </ol>
-                      </nav>
-
-                      {/* Full Long-Form Verified Guide Content with Dark H2 (24px–26px), Dark H3 (19px–21px) & 16px Body */}
-                      <div className="max-w-none text-slate-800 leading-[1.8] space-y-6 text-[16px] sm:text-[17px] font-sans">
-                        {!articleBody && (
-                          // The body module is a separate chunk. On a cold article load it is
-                          // already being fetched (prerender injects a modulepreload for blog
-                          // routes), so this placeholder is normally invisible; it exists so a
-                          // slow connection never renders an empty article.
-                          <div className="space-y-4" aria-hidden="true" data-blog-body-placeholder>
-                            {[0, 1, 2, 3, 4].map((i) => (
-                              <div
-                                key={i}
-                                className={`h-4 rounded bg-slate-200 ${i % 3 === 2 ? "w-2/3" : "w-full"}`}
-                              />
-                            ))}
-                            <span className="sr-only">
-                              {isBn ? "গাইড লোড হচ্ছে…" : "Loading the guide…"}
-                            </span>
-                          </div>
-                        )}
-                        {articleBody && sanitizeExpiredPromoText(articleBody).split("\n\n").map((block, bIdx) => {
-                          const trimmed = block.trim();
-                          if (!trimmed) return null;
-
-                          // In-article editorial figure (opt-in via post.inlineFigure)
-                          if (trimmed === "[[figure]]") {
-                            const fig = activePost.inlineFigure;
-                            if (!fig) return null;
-                            return (
-                              <figure key={bIdx} className="my-6">
-                                <ResponsiveImage
-                                  src={fig.imageSrc}
-                                  alt={isBn ? fig.altBn : fig.altEn}
-                                  sizes="(max-width: 767px) 100vw, 840px"
-                                  className="w-full h-auto rounded-2xl"
-                                  loading="lazy"
-                                />
-                                <figcaption className="mt-2 text-xs text-slate-500 leading-relaxed">
-                                  {isBn ? fig.captionBn : fig.captionEn}
-                                </figcaption>
-                              </figure>
-                            );
-                          }
-
-                          const faqSection = getVisibleBlogFaqSection(
-                            activePost.slug,
-                            trimmed,
-                            isBn ? "bn" : "en"
-                          );
-                          if (faqSection) {
-                            return (
-                              <section
-                                key={bIdx}
-                                aria-labelledby="blog-article-faq-heading"
-                                className="space-y-4 pt-5"
-                              >
-                                <h2
-                                  id="blog-article-faq-heading"
-                                  className="font-serif text-[22px] sm:text-[26px] font-bold text-brand-navy leading-[1.3] pb-2 border-b border-slate-200"
-                                >
-                                  {faqSection.heading}
-                                </h2>
-                                <div className="space-y-4">
-                                  {faqSection.questions.map((faq, faqIdx) => (
-                                    <div key={faqIdx} className="space-y-1.5">
-                                      <h3 className="font-semibold text-brand-navy leading-[1.5]">
-                                        {faq.question}
-                                      </h3>
-                                      <p className="leading-[1.8] text-slate-800">
-                                        {faq.answer}
-                                      </p>
-                                    </div>
-                                  ))}
-                                </div>
-                              </section>
-                            );
-                          }
-
-                          // In-article callout box — matches any callout whose blockIdx lands on this paragraph
-                          {
-                            const callout = activePost.callouts?.find((c) => c.blockIdx === bIdx);
-                            if (callout) {
-                              const styles = {
-                                "pro-tip": { wrapper: "bg-emerald-50 border-emerald-300", icon: "💡", label: isBn ? "প্রো টিপ" : "Pro Tip", labelCls: "text-emerald-800", bodyCls: "text-emerald-900" },
-                                "key-fact": { wrapper: "bg-sky-50 border-sky-300",    icon: "🔑", label: isBn ? "মূল তথ্য" : "Key Fact",  labelCls: "text-sky-800",    bodyCls: "text-sky-900" },
-                                warning:     { wrapper: "bg-amber-50 border-amber-300", icon: "⚠️", label: isBn ? "সতর্কতা" : "Heads Up",   labelCls: "text-amber-800",  bodyCls: "text-amber-900" },
-                                insider:    { wrapper: "bg-violet-50 border-violet-300", icon: "🔎", label: isBn ? "ইনসাইডার তথ্য" : "Insider Insight", labelCls: "text-violet-800", bodyCls: "text-violet-900" },
-                              }[callout.type];
-                              return (
-                                <div
-                                  key={`callout-${bIdx}`}
-                                  role="note"
-                                  className={`my-6 rounded-2xl border-l-4 ${styles.wrapper} p-5`}
-                                >
-                                  <div className={`flex items-center gap-2 mb-2 text-sm font-bold ${styles.labelCls}`}>
-                                    <span aria-hidden="true">{styles.icon}</span>
-                                    <span>{styles.label}</span>
-                                  </div>
-                                  <p className={`text-[15px] leading-[1.75] ${styles.bodyCls}`}>{callout.text}</p>
-                                  {callout.note && (
-                                    <p className={`mt-2 text-[13px] leading-relaxed opacity-70 ${styles.bodyCls}`}>
-                                      {callout.note}
-                                    </p>
-                                  )}
-                                </div>
-                              );
-                            }
-                          }
-
-                          // Major numbered section heading -> Semantic H2 (Dark #0B1426, 22px–26px)
-                          if (/^([0-9]+|[০-৯]+)\.\s+/.test(trimmed) && trimmed.length < 170 && !trimmed.includes("\n")) {
-                            return (
-                              <h2
-                                key={bIdx}
-                                className="font-serif text-[22px] sm:text-[26px] font-bold text-brand-navy leading-[1.3] pt-5 pb-2 border-b border-slate-200"
-                              >
-                                {trimmed.replace(/\*\*/g, "")}
-                              </h2>
-                            );
-                          }
-
-                          // Sub-heading -> Semantic H3 (Dark #0B1426, 18px–21px)
-                          if (
-                            (/^(Step|Option|Tier|Zone|Route|Phase|Tip|Rule|Pathway|Scenario|ধাপ|অপশন|রুট|টিপস|নিয়ম|জোন|দৃশ্যপট)\s+/i.test(trimmed) ||
-                              (trimmed.endsWith(":") && trimmed.length < 120)) &&
-                            !trimmed.includes("\n")
-                          ) {
-                            return (
-                              <h3
-                                key={bIdx}
-                                className="font-serif text-[18px] sm:text-[21px] font-bold text-brand-navy leading-[1.35] pt-3"
-                              >
-                                {trimmed.replace(/\*\*/g, "")}
-                              </h3>
-                            );
-                          }
-
-                          // Multi-line block where the first line is a numbered H2 heading followed by body/bullets/H3s
-                          const lines = trimmed.split("\n");
-                          const firstLine = lines[0].trim();
-                          const isFirstLineH2 =
-                            /^([0-9]+|[০-৯]+)\.\s+/.test(firstLine) && firstLine.length < 170;
-                          const isFirstLineH3 =
-                            !isFirstLineH2 &&
-                            lines.length > 1 &&
-                            firstLine.length < 125 &&
-                            (firstLine.endsWith(":") ||
-                              /^(Step|Option|Tier|Zone|Route|Phase|Tip|Rule|Pathway|Scenario|ধাপ|অপশন|রুট|টিপস|নিয়ম|জোন|দৃশ্যপট)\s+/i.test(firstLine));
-
-                          const remainingLines =
-                            isFirstLineH2 || isFirstLineH3 ? lines.slice(1) : lines;
-
-                          return (
-                            <React.Fragment key={bIdx}>
-                              <div className="space-y-3.5">
-                                {isFirstLineH2 && (
-                                <h2 className="font-serif text-[22px] sm:text-[26px] font-bold text-brand-navy leading-[1.3] pt-5 pb-2 border-b border-slate-200">
-                                  {firstLine.replace(/\*\*/g, "")}
-                                </h2>
-                              )}
-                              {isFirstLineH3 && (
-                                <h3 className="font-serif text-[18px] sm:text-[21px] font-bold text-brand-navy leading-[1.35] pt-3">
-                                  {firstLine.replace(/\*\*/g, "")}
-                                </h3>
-                              )}
-                              {remainingLines.map((line, lIdx) => {
-                                const cleanLine = line.trim();
-                                if (!cleanLine) return null;
-
-                                // Check if an inner line is an H3 sub-heading (e.g., Step 1:, Rule 1:, Zone 1:, ধাপ ১:, নিয়ম ১:)
-                                if (
-                                  !/^(-|•|\*)\s+/.test(cleanLine) &&
-                                  cleanLine.length < 125 &&
-                                  (cleanLine.endsWith(":") ||
-                                    /^(Step|Option|Tier|Zone|Route|Phase|Tip|Rule|Pathway|Scenario|ধাপ|অপশন|রুট|টিপস|নিয়ম|জোন|দৃশ্যপট)\s+/i.test(cleanLine))
-                                ) {
-                                  return (
-                                    <h3
-                                      key={lIdx}
-                                      className="font-serif text-[18px] sm:text-[21px] font-bold text-brand-navy leading-[1.35] pt-3"
-                                    >
-                                      {cleanLine.replace(/\*\*/g, "")}
-                                    </h3>
-                                  );
-                                }
-
-                                if (/^(-|•|\*)\s+/.test(cleanLine)) {
-                                  const bulletText = cleanLine.replace(/^(-|•|\*)\s+/, "");
-                                  return (
-                                    <div
-                                      key={lIdx}
-                                      className="flex items-start gap-3 pl-2 text-slate-800"
-                                    >
-                                      <span className="text-brand-navy font-bold mt-1 shrink-0">•</span>
-                                      <span className="leading-[1.8]">
-                                        {renderFormattedText(bulletText)}
-                                      </span>
-                                    </div>
-                                  );
-                                }
-                                return (
-                                  <p key={lIdx} className="leading-[1.8] text-slate-800">
-                                    {renderFormattedText(cleanLine)}
-                                  </p>
-                                );
-                              })}
-                              </div>
-
-                              {/* Mid-Article Contextual Internal Link + Native Content-Analyzed Travelpayouts & BDT Hotel Conversion Card (Zero-CLS Native Replacement for Travelpayouts Drive) */}
-                              {bIdx === 2 && activePost.internalLinks[0] && (
-                                <div className="my-6 bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5">
-                                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
-                                    <div className="space-y-0.5">
-                                      <span className="text-[11px] font-bold text-brand-navy uppercase tracking-wider block">
-                                        {isBn ? "সংশ্লিষ্ট পরবর্তী ধাপ (Recommended Next Guide)" : "Recommended Next Step in This Topic"}
-                                      </span>
-                                      <a
-                                        href={activePost.internalLinks[0].path}
-                                        onClick={(e) => { e.preventDefault(); navigateTo(activePost.internalLinks[0].path); }}
-                                        className="text-left font-serif font-bold text-[16px] text-brand-navy hover:text-brand-emerald underline decoration-[#D4941A] decoration-2 underline-offset-3"
-                                      >
-                                        {activePost.internalLinks[0].text} →
-                                      </a>
-                                    </div>
-                                    <a
-                                      href="/umrah"
-                                      onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }}
-                                      className="self-start sm:self-center text-xs font-semibold text-brand-navy bg-white border border-slate-200 hover:border-brand-navy px-3 py-1.5 rounded-lg shrink-0"
-                                    >
-                                      {isBn ? "Umrah BDT ক্যালকুলেটর" : "Open Umrah BDT Calculator"}
-                                    </a>
-                                  </div>
-
-                                  <div className="flex flex-wrap items-center justify-between gap-3 pt-0.5">
-                                    <div className="text-xs text-slate-700 max-w-xl">
-                                      {isBn
-                                        ? "নিজে ডুয়াল-কারেন্সি কার্ডে অনলাইনে ফ্লাইট, পিকআপ ও ট্যুর পাস বুক করুন—অথবা কার্ড না থাকলে সরাসরি আমাদের ঢাকা ডেস্ক থেকে BDT-তে হোটেল ভাউচার ও টিকিট নিন:"
-                                        : "Book flights, airport transfers, or attraction passes online with your card—or book Makkah, Madinah, Dubai & KL hotels directly in BDT via our Dhaka Desk:"}
-                                    </div>
-                                    <div className="flex flex-wrap items-center gap-2">
-                                      <PartnerLinkButton
-                                        href={
-                                          activePost.affiliateCTA
-                                            ? AFFILIATE_LINKS[activePost.affiliateCTA.provider]
-                                            : AFFILIATE_LINKS.aviasales
-                                        }
-                                        label={
-                                          activePost.affiliateCTA?.provider === "tiqets"
-                                            ? isBn
-                                              ? "Skip-the-Line টিকিট দেখুন"
-                                              : "Check Skip-the-Line Passes"
-                                            : activePost.affiliateCTA?.provider === "klook" ||
-                                              activePost.affiliateCTA?.provider === "kkday"
-                                            ? isBn
-                                              ? "ট্যুর ও ডে-পাস ভাড়া দেখুন"
-                                              : "Compare Tour & Attraction Passes"
-                                            : activePost.affiliateCTA?.provider === "kiwitaxi" ||
-                                              activePost.affiliateCTA?.provider === "welcomePickups"
-                                            ? isBn
-                                              ? "প্রাইভেট কার ও পিকআপ ভাড়া দেখুন"
-                                              : "Check Private Car & Pickup Rates"
-                                            : activePost.affiliateCTA?.provider === "airalo"
-                                            ? isBn
-                                              ? "Saudi / ট্রাভেল eSIM দেখুন"
-                                              : "Check Travel eSIM Plans"
-                                            : isBn
-                                            ? "লাইভ বিমান ভাড়া তুলনা করুন"
-                                            : "Compare Live Flight Fares"
-                                        }
-                                        variant="dark"
-                                      />
-                                      <a
-                                        href={`https://wa.me/8801784385335?text=${encodeURIComponent(
-                                          `Assalamu Alaikum URAL Desk, I was reading "${activePost.title}" and want to check BDT hotel & flight package rates.`
-                                        )}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-1.5 bg-brand-navy hover:bg-slate-800 text-white font-semibold text-xs px-3.5 py-2.5 rounded-lg transition-colors"
-                                      >
-                                        <span>{isBn ? "BDT-তে হোটেল ও টিকিট বুকিং (WhatsApp)" : "Book Hotel & Flight in BDT (WhatsApp)"}</span>
-                                      </a>
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                            </React.Fragment>
-                          );
-                        })}
-                      </div>
-
-                      {/* Contextual Luggage Storage Offer Callout (Radical Storage on matching travel guides) */}
-                      <RadicalStorageContextualCallout slug={activePost.slug} lang={lang} />
-
-                      {/* Contextual Multi-Partner Callout (Yesim eSIM, Kiwi.com Multi-City, GetTransfer Vans & Go City Passes) */}
-                      <MultiPartnerBlogCallout slug={activePost.slug} lang={lang} />
-
-                      {/* Travelpayouts creator-referral callout (transparent "For Travel Creators & Bloggers" placement) */}
-                      <TravelpayoutsReferralCallout slug={activePost.slug} lang={lang} />
-
-                      {/* Contextual Affiliate Widget */}
-                      {activePost.affiliateCTA && (
-                        <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-3 text-left">
-                          <h3 className="text-xs font-bold text-brand-navy">
-                            {sanitizeExpiredPromoText(activePost.affiliateCTA.headline)}
-                          </h3>
-                          <p className="text-xs text-slate-600">
-                            {sanitizeExpiredPromoText(activePost.affiliateCTA.body)}
-                          </p>
-                          {activePost.affiliateCTA.provider === "klook" ? (
-                            <KlookActivitiesWidget />
-                          ) : activePost.affiliateCTA.provider === "tiqets" ? (
-                            <TiqetsEmbedWidget
-                              lang={lang}
-                              currency="USD"
-                              layout="horizontal"
-                              cityName={activePost.title.includes("Paris") ? "Paris" : activePost.title.includes("London") ? "London" : "Rome, Paris & London"}
-                              headline={
-                                isBn
-                                  ? "Tiqets লাইভ মিউজিয়াম ও স্কাইলাইন টিকিট সার্চ"
-                                  : "Tiqets Live Skip-the-Line Museum & Attraction Search"
-                              }
-                              subheadline={
-                                isBn
-                                  ? "ভ্রমণের তারিখ ও পাস নির্বাচন করে নিশ্চিত কিউআর মোবাইল টিকিট সংগ্রহ করুন।"
-                                  : "Select date & attraction to reserve instant mobile QR entry."
-                              }
-                            />
-                          ) : activePost.affiliateCTA.provider === "kiwitaxi" ? (
-                            <KiwitaxiTransferWidget />
-                          ) : activePost.affiliateCTA.provider === "airalo" ? (
-                            <AiraloEsimWidget />
-                          ) : activePost.affiliateCTA.provider === "qeeq" ? (
-                            <QeeqCarRentalWidget />
-                          ) : (
-                            <PartnerLinkButton
-                              href={AFFILIATE_LINKS[activePost.affiliateCTA.provider]}
-                              label={
-                                isBn
-                                  ? "লাইভ ভাড়া ও অ্যাভেইলেবিলিটি দেখুন"
-                                  : "Compare Live Prices & Availability"
-                              }
-                              variant="dark"
-                            />
-                          )}
-                        </div>
-                      )}
-
-                      {/* Author Bio — E-E-A-T signal at end of article content */}
-                      <AuthorBioCard authorRaw={canonicalAuthorRaw} isBengali={isBn} />
-
-                      {/* Visible Hajj, Umrah & Ziyarah Preparation FAQs (Matches JSON-LD FAQPage Schema 100%) */}
-                      {(activePost.category === "Hajj & Umrah" || activePost.category === "Ziyarah & Stopovers") && (
-                        <TravelIntelligence
-                          pageTitle={
-                            isBn
-                              ? "বাংলাদেশ থেকে Umrah ও Hajj প্রস্তুতি — সাধারণ প্রশ্নোত্তর (FAQ)"
-                              : "Umrah & Hajj Preparation from Bangladesh — Verified FAQs"
-                          }
-                          quickAnswer={
-                            isBn
-                              ? "বাংলাদেশি নাগরিকদের ফরজ Hajj-এর জন্য অবশ্যই ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ নিবন্ধন করতে হবে। তবে বছরের যেকোনো সময় ৯০ দিনের Umrah e-Visa, ৯৬ ঘণ্টার Saudia/Flynas Stopover Visa অথবা US/UK/Schengen ভিসাধারীদের অনলাইন e-Visa এবং Nusuk App ব্যবহার করে নিজে নিজে কম খরচে DIY Umrah পালন করা যায়।"
-                              : "Bangladeshi citizens must register via hajj.gov.bd for obligatory Hajj, while year-round Umrah can be planned independently using a 90-day Umrah e-Visa, a 96-hour Saudia/Flynas Stopover Visa, or a qualified US/UK/Schengen holder e-Visa, paired with the official Nusuk and Saudi Visa Bio apps."
-                          }
-                          keyFacts={[
-                            {
-                              label: isBn ? "Umrah e-Visa খরচ" : "Umrah e-Visa Cost",
-                              value: isBn ? "BDT 15,500 – 19,500 (২–৫ দিন)" : "BDT 15,500 – 19,500 (2–5 Days)",
-                            },
-                            {
-                              label: isBn ? "১০ দিনের DIY Umrah বাজেট" : "10-Day DIY Umrah Budget",
-                              value: isBn ? "BDT 1,16,000 – 1,32,000 / জন" : "BDT 1,16,000 – 1,32,000 / Person",
-                            },
-                            {
-                              label: isBn ? "বাধ্যতামূলক অ্যাপ" : "Mandatory Apps",
-                              value: "Saudi Visa Bio + Nusuk (nusuk.sa)",
-                            },
-                          ]}
-                          faqs={localizedHajjFaqs}
-                        />
-                      )}
-
-                    </article>
-
-                    {/* Right Column: Sticky Trip Planning & BDT Support Sidebar (4 Cols) */}
-                    <aside className="lg:col-span-4 space-y-5 lg:sticky lg:top-24">
-
-                      {/* 1. Stay Connected: eSIM + Nusuk + Saudi connectivity */}
-                      <div className="bg-brand-navy text-white rounded-2xl p-5 space-y-3.5 shadow-sm">
-                        <div className="text-[11px] font-bold uppercase tracking-wider text-[#F6B73C]">
-                          {isBn ? "সৌদি আরবে সংযুক্ত থাকুন" : "Stay Connected in Saudi Arabia"}
-                        </div>
-                        <p className="text-[13px] text-slate-200 leading-relaxed">
-                          {isBn
-                            ? "ঢাকা থেকে উড়ে নামার সাথে সাথেই আপনার Nusuk Rawdah পারমিট QR, Haramain ট্রেন টিকিট এবং Uber/Careem কাজ করবে — সৌদি আরব 4G/5G eSIM আগেই ইনস্টল করে রাখুন।"
-                            : "Install a Saudi Arabia 4G/5G eSIM before flying from Dhaka so your Nusuk Rawdah permit QR code, Haramain train ticket, and Uber/Careem work the moment you land at Jeddah Airport."}
-                        </p>
-                        <div className="space-y-2">
-                          <div className="text-[11px] font-bold text-slate-300 uppercase tracking-wide">
-                            {isBn ? "Travel eSIM প্ল্যান" : "Travel eSIM Plans"}
-                          </div>
-                          <div className="flex gap-2">
-                            <a
-                              href={AFFILIATE_LINKS.airalo}
-                              target="_blank"
-                              rel="noopener noreferrer sponsored"
-                              className="flex-1 bg-white text-brand-navy font-bold text-[12px] py-2.5 px-3 rounded-xl text-center hover:bg-[#F6B73C] hover:text-brand-navy transition-colors"
-                            >
-                              Airalo
-                            </a>
-                            <a
-                              href={AFFILIATE_LINKS.yesim}
-                              target="_blank"
-                              rel="noopener noreferrer sponsored"
-                              className="flex-1 bg-white text-brand-navy font-bold text-[12px] py-2.5 px-3 rounded-xl text-center hover:bg-[#F6B73C] hover:text-brand-navy transition-colors"
-                            >
-                              Yesim
-                            </a>
-                          </div>
-                        </div>
-                        <p className="text-[11px] text-slate-400 leading-relaxed">
-                          {isBn
-                            ? "গন্তব্য, ডেটা, মেয়াদ ও ডিভাইস সাপোর্ট প্রভাইডারের সাইটে চেক করুন। OTPs-এর জন্য বাংলাদেশি SIM রাখা কার্ডওয়াইজ, অপারেটর ও রোমিং সেটিংসের উপর নির্ভর করে।"
-                            : "Choose destination & plan on the provider's site. Check coverage, data allowance, validity, device compatibility, activation rules, and current price before you buy. Keeping a Bangladesh SIM for OTPs depends on your phone, operator, and roaming settings."}
-                        </p>
-                      </div>
-
-                      {/* 2. Share This Guide */}
-                      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3">
-                        <div className="text-[11px] font-bold uppercase tracking-wider text-brand-navy">
-                          {isBn ? "গাইডটি শেয়ার করুন" : "Share This Guide"}
-                        </div>
-                        <div className="flex gap-2">
-                          <a
-                            href={`https://wa.me/?text=${encodeURIComponent(`${activePost.title}\n\n${getBlogAeoSnippet50Words(activePost.slug, isBn, activePost.summary)}\n\nRead Full Guide on URAL: https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex-1 bg-brand-navy hover:bg-slate-800 text-white font-semibold text-[12px] py-2.5 px-3 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5"
-                          >
-                            <span>{isBn ? "WhatsApp" : "WhatsApp"}</span>
-                          </a>
-                          <a
-                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://ural-travel.pages.dev${isBn ? "/bn" : ""}/blog/${activePost.slug}`)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex-1 bg-white hover:bg-slate-100 text-brand-navy border border-slate-300 font-semibold text-[12px] py-2.5 px-3 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5"
-                          >
-                            <span>{isBn ? "Facebook" : "Facebook"}</span>
-                          </a>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const caption = isBn
-                                ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getBlogAeoSnippet50Words(activePost.slug, true, activePost.summary)}\n\n👉 সম্পূর্ণ গাইড: https://ural-travel.pages.dev/bn/blog/${activePost.slug}\n🌐 Facebook: ${URAL_SOCIAL_LINKS.facebook}\n💬 BDT বুকিং WhatsApp: +8801784385335`
-                                : `✈️ ${activePost.title}\n\n📌 Quick Summary:\n${getBlogAeoSnippet50Words(activePost.slug, false, activePost.summary)}\n\n👉 Read Full Guide: https://ural-travel.pages.dev/blog/${activePost.slug}\n🌐 Follow URAL: ${URAL_SOCIAL_LINKS.facebook}\n💬 BDT Booking via WhatsApp: +8801784385335`;
-                              navigator.clipboard?.writeText(caption);
-                              setAffiliateToast(isBn ? "কপি হয়েছে! এখন পেস্ট করুন।" : "Copied! Paste it anywhere.");
-                            }}
-                            className="flex-1 bg-brand-gold hover:bg-brand-gold-dark text-brand-navy font-bold text-[12px] py-2.5 px-3 rounded-xl text-center transition-colors cursor-pointer"
-                          >
-                            {isBn ? "কপি করুন" : "Copy Post"}
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* 3. About the Author (compact sidebar version) */}
-                      {(() => {
-                        const profile = getAuthorProfile(canonicalAuthorRaw);
-                        if (!profile) return null;
-                        return (
-                          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2.5">
-                            <div className="text-[11px] font-bold uppercase tracking-wider text-brand-navy">
-                              {isBn ? "লেখক সম্পর্কে" : "About the Author"}
-                            </div>
-                            <div className="flex items-start gap-3">
-                              <div className="w-9 h-9 rounded-full bg-brand-navy flex items-center justify-center shrink-0">
-                                <span className="text-white text-sm font-bold">{profile.name.split(" ").map((n) => n[0]).join("")}</span>
-                              </div>
-                              <div className="space-y-1 min-w-0">
-                                <div className="text-[13px] font-bold text-brand-navy">{profile.name}</div>
-                                <div className="text-[11px] text-slate-600 font-medium">Founder & Travel Editor, URAL</div>
-                              </div>
-                            </div>
-                            <p className="text-[12px] text-slate-700 leading-relaxed line-clamp-4">
-                              {isBn ? profile.bioBn : profile.bioEn}
-                            </p>
-                            <a
-                              href={profile.portfolioUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-emerald"
-                            >
-                              {isBn ? "পেশাগত পোর্টফোলিও দেখুন" : "View Portfolio"}
-                              <ExternalLink size={10} aria-hidden="true" />
-                            </a>
-                          </div>
-                        );
-                      })()}
-
-                      {/* 4. Quick Booking Links (3 essentials) */}
-                      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs space-y-2.5">
-                        <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                          {isBn ? "দ্রুত অনলাইন বুকিং" : "Quick Booking Links"}
-                        </div>
-                        <PartnerLinkButton href={AFFILIATE_LINKS.aviasales} label={isBn ? "Flight ভাড়া তুলনা করুন" : "Compare Flights from Dhaka"} variant="dark" />
-                        <PartnerLinkButton href={AFFILIATE_LINKS.klook} label={isBn ? "Tours ও টিকিট বুক করুন" : "Book Tours & Attractions"} variant="dark" />
-                        <PartnerLinkButton href={AFFILIATE_LINKS.airalo} label={isBn ? "Saudi / Travel eSIM নিন" : "Get Travel eSIM"} variant="dark" />
-                      </div>
-
-                      {/* 5. Related Calculators & Next Steps */}
-                      {activePost.internalLinks.length > 0 && (
-                        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs space-y-2.5">
-                          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                            {isBn ? "সংশ্লিষ্ট ক্যালকুলেটর ও পরবর্তী ধাপ" : "Related Calculators & Next Steps"}
-                          </div>
-                          <div className="space-y-2">
-                            {activePost.internalLinks.map((lnk, idx) => (
-                              <a
-                                key={idx}
-                                href={lnk.path}
-                                onClick={(e) => { e.preventDefault(); navigateTo(lnk.path); }}
-                                className="flex items-center justify-between bg-slate-50 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 hover:border-brand-navy px-3.5 py-2.5 rounded-xl transition-all text-[12px] font-medium group"
-                              >
-                                <span className="flex items-center gap-2">
-                                  <Link2 size={13} className="text-brand-emerald group-hover:text-[#F6B73C] shrink-0" />
-                                  <span className="line-clamp-1">{lnk.text}</span>
-                                </span>
-                                <ArrowRight size={12} className="shrink-0 opacity-60 group-hover:opacity-100" />
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* 6. WhatsApp BDT Desk */}
-                      <div className="bg-brand-navy text-white rounded-2xl p-5 space-y-3 shadow-sm">
-                        <div className="text-[11px] font-bold uppercase tracking-wider text-[#F6B73C]">
-                          {isBn ? "কার্ড ছাড়া BDT-তে বুক করুন" : "No Card? Pay in BDT via WhatsApp"}
-                        </div>
-                        <p className="text-[12px] text-slate-300 leading-relaxed">
-                          {isBn
-                            ? "ঢাকা সাপোর্ট ডেস্কে bKash, Nagad অথবা ব্যাংক ট্রান্সফার করে Flight, মক্কা/মদিনা হোটেল এবং এয়ারপোর্ট পিকআপ বুক করুন।"
-                            : "Our Dhaka desk issues flights, Makkah/Madinah hotel vouchers, and airport transfers using bKash, Nagad, or bank transfer."}
-                        </p>
-                        <a
-                          href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20was%20reading%20your%20travel%20guide%20and%20need%20help%20planning%20my%20trip!"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full bg-brand-emerald hover:bg-emerald-600 text-white font-bold text-[12px] py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
-                        >
-                          <span>{isBn ? "WhatsApp-এ মেসেজ দিন" : "Chat on WhatsApp (+8801784385335)"}</span>
-                        </a>
-                      </div>
-
-                    </aside>
-                  </div>
-
-                  {/* Bottom Section: 3 More Blog Cards in One Row (Unique Thumbnail + Dark H3 + 50-Word AEO Snippet + 'Read Full Blog' Button) */}
-                  <div className="pt-10 border-t border-slate-200 space-y-6">
-                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-                      <div className="space-y-1">
-                        <div className="text-xs font-semibold text-brand-navy">
-                          {isBn ? "আরও পড়ুন" : "Continue Reading"}
-                        </div>
-                        <h2 className="font-serif text-2xl font-bold text-brand-navy">
-                          {isBn
-                            ? "বাংলাদেশি ভ্রমণকারীদের জন্য আরও প্রয়োজনীয় গাইড"
-                            : "More Travel Guides for Bangladeshi Flyers"}
-                        </h2>
-                      </div>
-                      <a
-                        href="/blog"
-                        onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
-                        className="self-start sm:self-end bg-brand-navy text-white text-xs font-semibold px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5"
-                      >
-                        <span>
-                          {isBn
-                            ? `সবগুলো ব্লগ গাইড দেখুন (${localizedBlogs.length})`
-                            : `Back to All ${localizedBlogs.length} Blog Guides`}
-                        </span>
-                        <ArrowRight size={13} className="text-[#F6B73C]" />
-                      </a>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      {relatedPosts.map((post) => {
-                        const relatedSnippet = getBlogAeoSnippet50Words(post.slug, isBn, post.summary);
-
-                        return (
-                          <article
-                            key={post.id}
-                            className="bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs transition-all"
-                          >
-                            <a
-                              href={`/blog/${post.slug}`}
-                              onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${post.slug}`); }}
-                              className="group flex h-full flex-col justify-between"
-                            >
-                            <div>
-                              <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
-                                {/* 1 column below md (768), 3 columns above it — no 50vw band exists here */}
-                                <ResponsiveImage
-                                  src={getBlogCoverImage(post.slug)}
-                                  sizes="(max-width: 767px) 100vw, 33vw"
-                                  alt={generateBlogCoverAltText({
-                                    title: post.title,
-                                    category: post.category,
-                                    slug: post.slug,
-                                    lang: isBn ? "bn" : "en",
-                                  })}
-                                  loading="lazy"
-                                  fetchPriority="low"
-                                  decoding="async"
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                />
-                              </div>
-                              <div className="p-5 space-y-2.5">
-                                <div className="text-xs text-slate-500">
-                                  {post.category} · {post.readTime}
-                                </div>
-                                <h3 className="font-serif font-bold text-[18px] text-brand-navy group-hover:text-brand-emerald leading-snug">
-                                  {post.title}
-                                </h3>
-                                <p className="text-[13.5px] text-slate-700 leading-[1.65]">
-                                  {relatedSnippet}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="px-5 pb-5 pt-2">
-                              <span className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-between">
-                                <span>{isBn ? "সম্পূর্ণ ব্লগ পড়ুন · Read Full Blog" : "Read Full Blog"}</span>
-                                <ArrowRight size={13} />
-                              </span>
-                            </div>
-                            </a>
-                          </article>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </>
-              );
-            })()}
-          </div>
+        {section === "blog" && !isLanding && localizedBlogs.length > 0 && (
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <BlogPostRouteView context={routeViewContext} />
+          </React.Suspense>
         )}
 
       {/* 🟦 CONTENT & GROWTH: 4 FEATURED BANGLADESHI TRAVEL GUIDES IN ONE ROW */}
@@ -7196,7 +4303,7 @@ export default function App() {
                   {isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য যাচাইকৃত গাইড (2026)" : "Verified Playbooks for Bangladeshi Travelers (2026)"}
                 </span>
               </div>
-              <h2 className="font-serif text-2xl sm:text-3xl font-black text-brand-navy tracking-tight">
+              <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-black text-brand-navy tracking-tight">
                 {isBn
                   ? "বাংলাদেশি ভ্রমণকারীদের জন্য সবচেয়ে জরুরি ৪টি ট্রাভেল ও Umrah গাইড"
                   : "Essential Travel & Umrah Guides for Bangladeshi Flyers"}
@@ -7215,8 +4322,8 @@ export default function App() {
             >
               <span>
                 {isBn
-                  ? `সবগুলো ব্লগ দেখুন (${localizedBlogs.length})`
-                  : `View All ${localizedBlogs.length} Blogs`}
+                  ? `সবগুলো ব্লগ দেখুন (${blogPostCount})`
+                  : `View All ${blogPostCount} Blogs`}
               </span>
               <ArrowRight size={13} className="text-[#F6B73C]" />
             </button>
@@ -7255,7 +4362,7 @@ export default function App() {
                     </div>
 
                     <div className="p-4 space-y-2">
-                      <h3 className="font-serif font-bold text-base text-brand-navy group-hover:text-brand-emerald leading-snug">
+                      <h3 className="ural-card-title font-serif font-bold text-base text-brand-navy group-hover:text-brand-emerald leading-snug">
                         {topic.title}
                       </h3>
 
@@ -7289,586 +4396,19 @@ export default function App() {
           📞 VIEW 9: CONTACT US & DIRECT SUPPORT HUB
       ------------------------------------------------------------- */}
       {section === "contact" && (
-        <div className="space-y-10 animate-fade-in font-sans">
-          
-          {/* Visual Header Banner */}
-          <div className="bg-brand-navy text-white p-8 sm:p-12 rounded-3xl relative overflow-hidden shadow-xl border border-slate-800">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-[#F6B73C]/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-teal-500/5 rounded-full blur-2xl pointer-events-none" />
-            
-            <div className="relative z-10 max-w-3xl space-y-4">
-              <div className="inline-flex items-center gap-2 bg-[#F6B73C]/15 text-[#F6B73C] text-xs font-mono font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full">
-                <span className="w-2 h-2 rounded-full bg-[#F6B73C]"></span>
-                {isBn ? "সরাসরি সাপোর্ট হটলাইন" : "Direct Assistance Hotline"}
-              </div>
-              
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none">
-                {isBn ? "সরাসরি আমাদের সাথে যোগাযোগ করুন" : "Let's Connect Directly"}
-              </h1>
-              
-              <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
-                {isBn
-                  ? "ফ্লাইট বুকিং, ভিসা প্রসেসিং, কিংবা Umrah ও ট্যুর প্যাকেজ সম্পর্কে জানতে চান? সরাসরি কল করুন, WhatsApp-এ মেসেজ দিন অথবা নিচের ফর্মটি পূরণ করুন। আমরা দ্রুততম সময়ে উত্তর দিই!"
-                  : "Have inquiries about flight bookings, visa procedures, or destination travel packages? Contact our director directly through Call, WhatsApp, or the interactive travel inquiry form below. We respond instantly!"}
-              </p>
-            </div>
-          </div>
-
-          {/* Quick Contact Grid cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            {/* WhatsApp direct card */}
-            <div className="bg-white border border-slate-200 hover:border-brand-emerald/40 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
-              <div className="p-3.5 bg-brand-emerald/10 text-brand-emerald rounded-xl shrink-0">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.665.988 3.3 1.488 5.35 1.489 5.513 0 10.002-4.486 10.005-9.999.001-2.671-1.037-5.182-2.924-7.071C17.192 1.685 14.685.648 12.012.648c-5.516 0-10.01 4.488-10.014 10.002-.001 1.902.483 3.654 1.401 5.247l-.952 3.479 3.599-.944z" />
-                </svg>
-              </div>
-              <div className="space-y-2 flex-1">
-                <span className="text-[10px] font-mono font-bold text-brand-emerald block uppercase tracking-widest">WHATSAPP CHAT</span>
-                <h3 className="font-serif text-lg font-bold text-slate-900">
-                  {isBn ? "সরাসরি WhatsApp চ্যাট করুন" : "Start Direct Chat"}
-                </h3>
-                <p className="text-xs text-slate-500 leading-normal">
-                  {isBn
-                    ? "কাস্টম সাপোর্ট পাওয়ার সবচেয়ে দ্রুত মাধ্যম। ভিসা চেকলিস্ট, রিটার্ন এয়ার টিকেট বা হোটেল বুকিংয়ের জন্য মেসেজ দিন।"
-                    : "The fastest way to get custom support. Ask visa questions, seek roundtrip ticket packages, or request customized hotel bookings."}
-                </p>
-                <a 
-                  href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-brand-emerald text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
-                >
-                  {isBn ? "WhatsApp-এ মেসেজ দিন (+8801784385335)" : "Chat on WhatsApp (+8801784385335)"}
-                </a>
-              </div>
-            </div>
-
-            {/* Phone Direct call card */}
-            <div className="bg-white border border-slate-200 hover:border-brand-navy/30 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
-              <div className="p-3.5 bg-blue-50 text-blue-600 rounded-xl shrink-0">
-                <svg className="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-              </div>
-              <div className="space-y-2 flex-1">
-                <span className="text-[10px] font-mono font-bold text-blue-600 block uppercase tracking-widest">TELEPHONE HOTLINE</span>
-                <h3 className="font-serif text-lg font-bold text-slate-900">
-                  {isBn ? "সরাসরি ফোনে কথা বলুন" : "Direct Mobile Support"}
-                </h3>
-                <p className="text-xs text-slate-500 leading-normal">
-                  {isBn
-                    ? "সরাসরি আমাদের ডেস্কের সাথে কথা বলুন। ভিসা ডকুমেন্ট যাচাই, লাইভ ফ্লাইট ভাড়া এবং বিশ্বস্ত পরামর্শ পান।"
-                    : "Talk directly to the director. Get immediate verification of requirements, active flight check comparisons, and reliable counsel."}
-                </p>
-                <a 
-                  href="tel:+8801784385335" 
-                  className="inline-flex items-center gap-2 bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
-                >
-                  {isBn ? "সরাসরি কল করুন (+8801784385335)" : "Call Directly (+8801784385335)"}
-                </a>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Travel Inquiry Contact Form & Verification Section */}
-          <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            
-            {/* Left Form (Col 7) */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="border-b border-slate-100 pb-4">
-                <h2 className="font-serif text-xl font-bold text-slate-900">
-                  {isBn ? "আপনার ভ্রমণ জিজ্ঞাসা পাঠান" : "Send an Interactive Travel Inquiry"}
-                </h2>
-                <p className="text-xs text-slate-500 mt-1">
-                  {isBn ? "আপনার গন্তব্য এবং কী ধরনের সহায়তা প্রয়োজন তা উল্লেখ করুন, আমরা দ্রুত কলব্যাক করব।" : "Specify your target destination and desired assistance type to receive a custom callback."}
-                </p>
-              </div>
-
-              {contactSubmitted ? (
-                <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 text-center space-y-4 animate-fade-in">
-                  <div className="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center mx-auto text-xl shadow-sm shadow-emerald-500/20">
-                    ✓
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="font-serif text-lg font-bold text-slate-900">
-                      {isBn ? "আপনার বার্তা সফলভাবে গৃহীত হয়েছে!" : "Inquiry Received Successfully!"}
-                    </h3>
-                    <p className="text-xs text-slate-600 max-w-md mx-auto">
-                      {isBn ? (
-                        <>
-                          ধন্যবাদ <b>{contactName}</b>। আপনার <b>{contactSubject}</b> সংক্রান্ত অনুরোধটি নথিভুক্ত হয়েছে। আমরা দ্রুত <b>{contactPhone}</b> নাম্বারে কল বা WhatsApp-এ যোগাযোগ করব।
-                        </>
-                      ) : (
-                        <>
-                          Thank you <b>{contactName}</b>. Your request regarding <b>{contactSubject}</b> has been registered. We will contact you at <b>{contactPhone}</b> via Call and WhatsApp shortly.
-                        </>
-                      )}
-                    </p>
-                  </div>
-
-                  <div className="bg-white rounded-xl p-4 border border-emerald-150 text-left space-y-2 max-w-md mx-auto font-mono text-[11px] text-slate-600">
-                    <div className="flex justify-between border-b border-slate-100 pb-1">
-                      <span className="font-bold text-slate-400">SUBJECT:</span>
-                      <span className="text-slate-800 font-bold">{contactSubject}</span>
-                    </div>
-                    <div className="flex justify-between border-b border-slate-100 pb-1">
-                      <span className="font-bold text-slate-400">DESTINATION:</span>
-                      <span className="text-slate-800 font-bold">{contactDestination}</span>
-                    </div>
-                    <div className="flex justify-between pb-1">
-                      <span className="font-bold text-slate-400">SUBMISSION ID:</span>
-                      <span className="text-brand-navy font-bold">URAL-REQ-{Math.floor(1000 + Math.random() * 9000)}</span>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => {
-                      setContactSubmitted(false);
-                      setContactName("");
-                      setContactPhone("");
-                      setContactMessage("");
-                    }}
-                    className="bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs py-2 px-5 rounded-lg transition-colors"
-                  >
-                    {isBn ? "আরেকটি জিজ্ঞাসা পাঠান" : "Send Another Inquiry"}
-                  </button>
-                </div>
-              ) : (
-                <form 
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    if (!contactName || !contactPhone) {
-                      return;
-                    }
-                    setContactLoading(true);
-                    
-                    try {
-                      // POST to FormSubmit.co AJAX endpoint to route the inquiry safely and for free to your email
-                      await fetch("https://formsubmit.co/ajax/marcwriter2025@gmail.com", {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json",
-                          "Accept": "application/json"
-                        },
-                        body: JSON.stringify({
-                          Name: contactName,
-                          "Phone / WhatsApp": contactPhone,
-                          "Assistance Category": contactSubject,
-                          "Travel Destination": contactDestination,
-                          Message: contactMessage,
-                          "_subject": `New URAL Travel Inquiry from ${contactName}`,
-                          "_template": "table"
-                        })
-                      });
-                    } catch (err) {
-                      console.warn("Direct email delivery through FormSubmit was blocked or offline, simulating success locally:", err);
-                    } finally {
-                      setContactLoading(false);
-                      setContactSubmitted(true);
-                    }
-                  }}
-                  className="space-y-4 text-xs"
-                >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Name input */}
-                    <div className="space-y-1.5">
-                      <label htmlFor="contact-full-name" className="font-bold text-slate-700 block">
-                        {isBn ? "আপনার নাম" : "Full Name"} <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        id="contact-full-name"
-                        type="text"
-                        required
-                        placeholder={isBn ? "যেমন: Farhan Momen" : "e.g. Farhan Momen"}
-                        value={contactName}
-                        onChange={(e) => setContactName(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-4 py-3 text-slate-800 outline-none transition-all"
-                      />
-                    </div>
-
-                    {/* Phone input */}
-                    <div className="space-y-1.5">
-                      <label htmlFor="contact-phone-number" className="font-bold text-slate-700 block">
-                        {isBn ? "ফোন বা WhatsApp নাম্বার" : "Phone or WhatsApp Number"} <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        id="contact-phone-number"
-                        type="tel"
-                        required
-                        placeholder="e.g. +8801784385335"
-                        value={contactPhone}
-                        onChange={(e) => setContactPhone(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-4 py-3 text-slate-800 outline-none transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Assistance Category */}
-                    <div className="space-y-1.5">
-                      <label htmlFor="contact-subject-category" className="font-bold text-slate-700 block">
-                        {isBn ? "সহায়তার বিষয়" : "Subject / Assistance Category"}
-                      </label>
-                      <select
-                        id="contact-subject-category"
-                        value={contactSubject}
-                        onChange={(e) => setContactSubject(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-3 py-3 text-slate-800 outline-none transition-all cursor-pointer"
-                      >
-                        <option value="Visa Processing Checklist">{isBn ? "ভিসা প্রসেসিং চেকলিস্ট" : "Visa Processing Checklist"}</option>
-                        <option value="Cheap Flight Package comparison">{isBn ? "সাশ্রয়ী ফ্লাইট টিকেট তুলনা" : "Cheap Flight Package comparison"}</option>
-                        <option value="Custom Group Itinerary planning">{isBn ? "ফ্যামিলি বা গ্রুপ ট্যুর প্ল্যানিং" : "Custom Group Itinerary planning"}</option>
-                        <option value="Hotel Booking Assistance">{isBn ? "হোটেল বুকিং সহায়তা (BDT)" : "Hotel Booking Assistance"}</option>
-                        <option value="Umrah & Makkah/Madinah Booking">{isBn ? "Umrah ভিসা ও Makkah/Madinah হোটেল" : "Umrah & Makkah/Madinah Booking"}</option>
-                      </select>
-                    </div>
-
-                    {/* Target Destination */}
-                    <div className="space-y-1.5">
-                      <label htmlFor="contact-travel-destination" className="font-bold text-slate-700 block">
-                        {isBn ? "ভ্রমণ গন্তব্য" : "Travel Destination"}
-                      </label>
-                      <select
-                        id="contact-travel-destination"
-                        value={contactDestination}
-                        onChange={(e) => setContactDestination(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-3 py-3 text-slate-800 outline-none transition-all cursor-pointer"
-                      >
-                        <option value="Saudi Arabia (Umrah / Hajj)">Saudi Arabia (Umrah / Hajj) 🇸🇦</option>
-                        <option value="Nepal">Nepal 🇳🇵</option>
-                        <option value="Thailand">Thailand 🇹🇭</option>
-                        <option value="Malaysia">Malaysia 🇲🇾</option>
-                        <option value="Singapore">Singapore 🇸🇬</option>
-                        <option value="Maldives">Maldives 🇲🇻</option>
-                        <option value="United Arab Emirates">United Arab Emirates 🇦🇪</option>
-                        <option value="Other / Multi-Destination">Other / Multi-Destination</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Message */}
-                  <div className="space-y-1.5">
-                    <label htmlFor="contact-message-body" className="font-bold text-slate-700 block">
-                      {isBn ? "আপনার বার্তা / বিশেষ প্রয়োজন" : "Your Message / Specific Requirements"}
-                    </label>
-                    <textarea
-                      id="contact-message-body"
-                      rows={4}
-                      placeholder={
-                        isBn
-                          ? "আপনার সম্ভাব্য ভ্রমণের তারিখ, যাত্রীর সংখ্যা বা বাজেট সম্পর্কে লিখুন যাতে আমরা সঠিক তথ্য দিয়ে সাহায্য করতে পারি..."
-                          : "Please write down your budget constraints, travel dates, or special assistance needs so we can guide you effectively..."
-                      }
-                      value={contactMessage}
-                      onChange={(e) => setContactMessage(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-4 py-3 text-slate-800 outline-none transition-all resize-none"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={contactLoading}
-                    className="w-full bg-brand-navy hover:bg-slate-800 text-[#F6B73C] font-black text-xs uppercase py-3.5 rounded-xl shadow-md tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2"
-                  >
-                    {contactLoading ? (
-                      <>
-                        <span className="w-3.5 h-3.5 rounded-full border-2 border-white/20 border-t-white animate-spin"></span>
-                        <span>{isBn ? "পাঠানো হচ্ছে..." : "Processing Inquiry..."}</span>
-                      </>
-                    ) : (
-                      <>
-                        <span>{isBn ? "জিজ্ঞাসা সাবমিট করুন" : "Submit Travel Inquiry"}</span>
-                        <span>→</span>
-                      </>
-                    )}
-                  </button>
-                </form>
-              )}
-            </div>
-
-            {/* Right Side info card (Col 5) */}
-            <div className="lg:col-span-5 bg-slate-50 border border-slate-200 p-6 rounded-2xl flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                <span className="text-[10px] font-mono font-bold text-slate-400 block uppercase tracking-widest">SUPPORT COVENANT</span>
-                <h3 className="font-serif text-lg font-bold text-slate-900">
-                  {isBn ? "কেন সরাসরি URAL-এর সাথে কথা বলবেন?" : "Why Contact URAL Directly?"}
-                </h3>
-                
-                <div className="space-y-3.5 text-xs text-slate-650">
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-emerald-500 mt-0.5 shrink-0">✔</span>
-                    <p>
-                      {isBn ? (
-                        <>
-                          <b>১০০% ফ্রি পরামর্শ:</b> ভিসা ডকুমেন্ট চেক বা কম ভাড়ার ফ্লাইট খোঁজার জন্য আমরা কোনো কনসালটেশন ফি নিই না।
-                        </>
-                      ) : (
-                        <>
-                          <b>100% Free Consultation:</b> We never charge any fees to verify visa documents or search for cheap flights.
-                        </>
-                      )}
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-emerald-500 mt-0.5 shrink-0">✔</span>
-                    <p>
-                      {isBn ? (
-                        <>
-                          <b>ভেরিফায়েড পার্টনার নেটওয়ার্ক:</b> অনুমোদিত ভিসা ডেস্ক এবং বিশ্বস্ত ট্রাভেল অপারেটরের মাধ্যমে নিরাপদ বুকিং।
-                        </>
-                      ) : (
-                        <>
-                          <b>Authorized Referrals:</b> Connect to approved visa processing desks and Travelpayouts verified operators.
-                        </>
-                      )}
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-emerald-500 mt-0.5 shrink-0">✔</span>
-                    <p>
-                      {isBn ? (
-                        <>
-                          <b>দ্রুত কলব্যাক:</b> ফর্ম সাবমিট করার ১–২ ঘণ্টার মধ্যে আমাদের টিম সরাসরি কল বা WhatsApp-এ যোগাযোগ করে।
-                        </>
-                      ) : (
-                        <>
-                          <b>Direct Callback:</b> Bangladeshi tourists receive a personal callback within 1-2 hours of submission.
-                        </>
-                      )}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div className="bg-slate-250 p-4 rounded-xl border border-slate-300 text-center space-y-1">
-                  <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">DIRECT DIAL DESK</span>
-                  <span className="text-sm font-serif font-black text-brand-navy block">+8801784385335</span>
-                  <span className="text-[9px] text-slate-400 block">
-                    {isBn ? "২৪/৭ WhatsApp মেসেঞ্জারে সচল" : "Available 24/7 on WhatsApp Messenger"}
-                  </span>
-                </div>
-
-                {/* Official Social Profiles on Contact Page */}
-                <div className="bg-white p-4 rounded-xl border border-slate-200 space-y-2.5">
-                  <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">
-                    {isBn ? "অফিসিয়াল সোশ্যাল পেজ (@uraltravelbd)" : "OFFICIAL SOCIAL CHANNELS (@uraltravelbd)"}
-                  </span>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                    <a
-                      href={URAL_SOCIAL_LINKS.facebook}
-                      target="_blank"
-                      rel="me noopener noreferrer"
-                      className="bg-slate-50 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 rounded-lg py-2 px-2.5 font-semibold text-[11px] flex items-center justify-center gap-1.5 transition-colors"
-                    >
-                      <span>Facebook</span>
-                    </a>
-                    <a
-                      href={URAL_SOCIAL_LINKS.instagram}
-                      target="_blank"
-                      rel="me noopener noreferrer"
-                      className="bg-slate-50 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 rounded-lg py-2 px-2.5 font-semibold text-[11px] flex items-center justify-center gap-1.5 transition-colors"
-                    >
-                      <span>Instagram</span>
-                    </a>
-                    <a
-                      href={URAL_SOCIAL_LINKS.linkedin}
-                      target="_blank"
-                      rel="me noopener noreferrer"
-                      className="bg-slate-50 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 rounded-lg py-2 px-2.5 font-semibold text-[11px] flex items-center justify-center gap-1.5 transition-colors"
-                    >
-                      <span>LinkedIn</span>
-                    </a>
-                    <a
-                      href={URAL_SOCIAL_LINKS.tiktok}
-                      target="_blank"
-                      rel="me noopener noreferrer"
-                      className="bg-slate-50 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 rounded-lg py-2 px-2.5 font-semibold text-[11px] flex items-center justify-center gap-1.5 transition-colors"
-                    >
-                      <span>TikTok</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Contact & Booking Consultation FAQs */}
-          <TravelIntelligence
-            pageTitle={isBn ? "ট্রাভেল বুকিং সহায়তা ও সাপোর্ট ডেস্ক" : "Travel Booking Assistance & Desk Support"}
-            quickAnswer={
-              isBn
-                ? "URAL বাংলাদেশি ভ্রমণকারীদের জন্য ট্যুর প্ল্যানিং, ভিসা ডকুমেন্ট রিভিউ এবং সরাসরি এজেন্সি বুকিং সহায়তা প্রদান করে (+8801784385335 WhatsApp ও হটলাইন)। ফ্লাইট টিকেট ও হোটেল বুকিংয়ের পেমেন্ট bKash, Nagad বা লোকাল ব্যাংক ট্রান্সফারের মাধ্যমে বাংলাদেশি টাকায় (BDT) সম্পন্ন করা যায়।"
-                : "URAL connects Bangladeshi travelers with dedicated itinerary planning, visa checklist reviews, and direct agency booking services via WhatsApp (+8801784385335) and hotline. All ticket and hotel payments can be completed safely in BDT via domestic banking, bKash, or in person."
-            }
-            keyFacts={[
-              { label: isBn ? "হেল্পলাইন" : "Helpline", value: "+8801784385335 (Direct / WhatsApp)" },
-              { label: isBn ? "রেসপন্স সময়" : "Response Window", value: "15 to 30 Mins (Dhaka Time)" },
-              { label: isBn ? "পেমেন্ট মাধ্যম" : "Payment Flexibility", value: "BDT (bKash / Nagad / Bank Transfer)" },
-              { label: isBn ? "ভেরিফিকেশন" : "Desk Verification", value: "Verified IATA Agency Network" }
-            ]}
-            faqs={SERVICE_CONTACT_FAQS}
-          />
-
-        </div>
-      )}
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <ContactRouteView context={routeViewContext} />
+          </React.Suspense>
+        )}
 
       {/* -------------------------------------------------------------
           👤 VIEW 10: ABOUT US
       ------------------------------------------------------------- */}
       {section === "about" && (
-        <div className="space-y-10 animate-fade-in font-sans max-w-4xl mx-auto">
-
-          {/* Page Header */}
-          <div className="bg-brand-navy rounded-3xl p-8 sm:p-12 text-center space-y-4">
-            <span className="inline-flex items-center gap-2 text-[#F6B73C] text-xs font-mono font-bold uppercase tracking-widest">
-              {isBn ? "আমাদের সম্পর্কে" : "About URAL"}
-            </span>
-            <h1 className="text-3xl sm:text-4xl font-bold text-white font-serif leading-tight">
-              {isBn
-                ? "ভ্রমণ ইন্টেলিজেন্স — প্রচলিত এজেন্সি নয়"
-                : "Travel Intelligence. Not a Travel Agency."}
-            </h1>
-            <p className="text-slate-300 text-sm max-w-2xl mx-auto leading-relaxed">
-              {isBn
-                ? "URAL হলো বাংলাদেশি ভ্রমণকারীদের জন্য একটি স্বাধীন, নিরপেক্ষ ট্রাভেল গাইড প্ল্যাটফর্ম — যেখানে কোনো বিক্রিত রিভিউ, গোপন পার্টনার চুক্তি বা লুকানো কমিশন নেই।"
-                : "URAL is an independent, unbiased travel intelligence platform built for Bangladeshi and global travelers — with no sponsored reviews, hidden partner deals, or undisclosed commissions."}
-            </p>
-          </div>
-
-          {/* Mission & Model */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#F6B73C]/15 flex items-center justify-center text-[#F6B73C] font-bold text-lg">✦</div>
-              <h2 className="font-serif text-lg font-bold text-brand-navy">
-                {isBn ? "আমাদের লক্ষ্য" : "Our Mission"}
-              </h2>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                {isBn
-                  ? "বাংলাদেশি ভ্রমণকারীদের প্রথম সারির ভিসা তথ্য, BDT-ভিত্তিক বাজেট এবং সত্যিকারের হালাল-বান্ধব গন্তব্য রিভিউ দিয়ে সক্ষম করা — যাতে প্রতিটি আউটবাউন্ড ট্রিপ হয় উপভোগ্য, সাশ্রয়ী এবং সঠিকভাবে পরিকল্পিত।"
-                  : "To empower Bangladeshi travelers with first-hand visa intelligence, BDT-native budgets, and genuinely halal-friendly destination reviews — so every outbound trip is enjoyable, affordable, and correctly planned."}
-              </p>
-            </div>
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 font-bold text-lg">✓</div>
-              <h2 className="font-serif text-lg font-bold text-brand-navy">
-                {isBn ? "আমরা কী নই" : "What We Are Not"}
-              </h2>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                {isBn
-                  ? "URAL কোনো লাইসেন্সপ্রাপ্ত ট্রাভেল এজেন্সি নয়, টিকিট বিক্রেতা নয় এবং কোনো এয়ারলাইন বা হোটেলের অফিসিয়াল প্রতিনিধি নয়। আমরা একটি সম্পাদকীয় ইন্টেলিজেন্স সিস্টেম যা আপনাকে সিদ্ধান্ত নিতে সাহায্য করে।"
-                  : "URAL is not a licensed travel agency, ticket seller, or official representative of any airline or hotel brand. We are an editorial intelligence system that helps you make informed decisions."}
-              </p>
-            </div>
-          </div>
-
-          {/* Founder Profile */}
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-4">
-            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest block">
-              {isBn ? "প্রতিষ্ঠাতা ও প্রধান সম্পাদক" : "Founder & Editor-in-Chief"}
-            </span>
-            <div className="flex items-start gap-5">
-              <div className="w-16 h-16 rounded-full bg-brand-navy flex items-center justify-center text-[#F6B73C] font-bold text-2xl shrink-0 select-none" aria-hidden="true">
-                FM
-              </div>
-              <div className="space-y-2">
-                <h2 className="font-serif text-xl font-bold text-brand-navy">Farhan Momen</h2>
-                <p className="text-slate-500 text-xs font-medium">
-                  {isBn ? "প্রতিষ্ঠাতা ও ট্রাভেল এডিটর" : "Founder & Travel Editor"}
-                </p>
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  {isBn
-                    ? "ফারহান মোমেন বাংলাদেশ থেকে আউটবাউন্ড ভ্রমণের জটিলতা সরল করার জন্য URAL প্রতিষ্ঠা করেছেন। তাঁর লক্ষ্য হলো প্রতিটি বাংলাদেশি ভ্রমণকারীকে এমন তথ্য দেওয়া যা আগে শুধুমাত্র এজেন্সি ভেতরে থাকত।"
-                    : "Farhan Momen founded URAL to demystify outbound travel from Bangladesh. His goal is to give every Bangladeshi traveler access to the same information that was previously locked inside agency back offices."}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Trust Pillars */}
-          <div className="space-y-3">
-            <h2 className="font-serif text-xl font-bold text-brand-navy">
-              {isBn ? "আমাদের প্রতিশ্রুতি" : "Our Editorial Commitments"}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {[
-                {
-                  icon: "⚖️",
-                  titleBn: "নিরপেক্ষ তুলনা",
-                  titleEn: "Unbiased Comparisons",
-                  descBn: "কোনো এয়ারলাইন বা হোটেল ব্র্যান্ড থেকে পেইড এনডোর্সমেন্ট নেই।",
-                  descEn: "No paid endorsements from any airline or hotel brand.",
-                },
-                {
-                  icon: "📋",
-                  titleBn: "যাচাইকৃত তথ্য",
-                  titleEn: "Verified Information",
-                  descBn: "প্রতিটি গাইড সরকারি উৎস ও প্রথম হাতের অভিজ্ঞতা থেকে তৈরি।",
-                  descEn: "Every guide built from official sources and first-hand experience.",
-                },
-                {
-                  icon: "💰",
-                  titleBn: "কোনো লুকানো ফি নেই",
-                  titleEn: "No Hidden Fees",
-                  descBn: "অ্যাফিলিয়েট লিংক সম্পূর্ণ প্রকাশিত এবং আপনার জন্য বিনামূল্যে।",
-                  descEn: "Affiliate links are fully disclosed and cost you nothing extra.",
-                },
-                {
-                  icon: "🌐",
-                  titleBn: "বাংলা ও ইংরেজি",
-                  titleEn: "Bengali & English",
-                  descBn: "৭৯টি বাংলা ও ৮৬টি ইংরেজি পৃষ্ঠায় সম্পূর্ণ দ্বিভাষিক।",
-                  descEn: "Fully bilingual across 79 Bengali and 86 English pages.",
-                },
-              ].map((item, i) => (
-                <div key={i} className="bg-white border border-slate-200 rounded-xl p-4 flex gap-3">
-                  <span className="text-2xl shrink-0 leading-none mt-0.5" aria-hidden="true">{item.icon}</span>
-                  <div>
-                    <h3 className="text-sm font-bold text-brand-navy">{isBn ? item.titleBn : item.titleEn}</h3>
-                    <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{isBn ? item.descBn : item.descEn}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Contact CTA */}
-          <div className="bg-brand-navy rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <h2 className="text-white font-serif text-lg font-bold">
-                {isBn ? "যোগাযোগ করতে চান?" : "Want to Get in Touch?"}
-              </h2>
-              <p className="text-slate-400 text-xs mt-1">
-                {isBn
-                  ? "আমাদের WhatsApp বা হটলাইনে সরাসরি কথা বলুন — +8801784385335"
-                  : "Reach us directly on WhatsApp or hotline — +8801784385335"}
-              </p>
-            </div>
-            <div className="flex gap-2 shrink-0">
-              <a
-                href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20found%20you%20via%20the%20About%20page"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy font-bold text-xs px-4 py-2.5 rounded-xl transition-colors"
-              >
-                {isBn ? "WhatsApp-এ মেসেজ করুন" : "Message on WhatsApp"}
-              </a>
-              <button
-                type="button"
-                onClick={() => navigateTo("/contact")}
-                className="bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-4 py-2.5 rounded-xl border border-white/20 transition-colors"
-              >
-                {isBn ? "ইনকোয়েরি ফর্ম" : "Inquiry Form"}
-              </button>
-            </div>
-          </div>
-
-        </div>
-      )}
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <AboutRouteView context={routeViewContext} />
+          </React.Suspense>
+        )}
 
       {/* -------------------------------------------------------------
           🎟️ VIEW 11: GLOBAL ATTRACTIONS & SKIP-THE-LINE HUB (TIQETS & KLOOK)
@@ -7912,110 +4452,256 @@ export default function App() {
       )}
 
       {section === "notFound" && (
-        <div className="space-y-8 animate-fade-in">
-
-          {/* Hero Banner */}
-          <div className="bg-brand-navy rounded-3xl p-8 sm:p-12 text-center space-y-4">
-            <div className="font-mono text-6xl sm:text-7xl font-black text-[#F6B73C] opacity-20 select-none leading-none" aria-hidden="true">404</div>
-            <div className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#F6B73C]">
-              {isBn ? "পৃষ্ঠা পাওয়া যায়নি" : "Page Not Found"}
-            </div>
-            <h1 className="font-serif text-2xl sm:text-3xl font-black text-white leading-tight">
-              {isBn
-                ? "এই ভ্রমণ পৃষ্ঠাটি খুঁজে পাওয়া যায়নি"
-                : "This Travel Page Doesn't Exist"}
-            </h1>
-            <p className="text-slate-300 text-sm max-w-xl mx-auto leading-relaxed">
-              {isBn
-                ? "এই ঠিকানাটি পরিবর্তিত হয়েছে, সরানো হয়েছে বা গাইডটি আর পাওয়া যাচ্ছে না। নিচের লিংকগুলো ব্যবহার করে আপনার গন্তব্য খুঁজুন।"
-                : "The address may have changed, been moved, or the guide is no longer available. Use the links below to find your destination."}
-            </p>
-          </div>
-
-          {/* Quick Navigation Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {[
-              { labelBn: "হোমপেজ", labelEn: "Homepage", path: "/", icon: "⌂" },
-              { labelBn: "ব্লগ গাইড", labelEn: "Blog Guides", path: "/blog", icon: "✎" },
-              { labelBn: "ফ্লাইট গাইড", labelEn: "Flight Guides", path: "/flights", icon: "✈" },
-              { labelBn: "ভিসা চেকলিস্ট", labelEn: "Visa Checklists", path: "/visa", icon: "☑" },
-            ].map((item) => (
-              <button
-                key={item.path}
-                type="button"
-                onClick={() => navigateTo(item.path)}
-                className="bg-white border border-slate-200 rounded-2xl p-4 text-center hover:border-[#F6B73C] hover:shadow-md transition-all group"
-              >
-                <div className="text-2xl mb-2 select-none" aria-hidden="true">{item.icon}</div>
-                <div className="text-xs font-bold text-brand-navy group-hover:text-[#F6B73C] transition-colors">
-                  {isBn ? item.labelBn : item.labelEn}
-                </div>
-              </button>
-            ))}
-          </div>
-
-          {/* Popular Destination Quick Links */}
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
-            <h2 className="text-sm font-bold text-brand-navy mb-3">
-              {isBn ? "জনপ্রিয় গন্তব্যে যান" : "Jump to a Popular Destination"}
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {[
-                { label: isBn ? "নেপাল গাইড" : "Nepal Guide", path: "/destinations/nepal-guide" },
-                { label: isBn ? "থাইল্যান্ড গাইড" : "Thailand Guide", path: "/destinations/thailand-guide" },
-                { label: isBn ? "মালয়েশিয়া গাইড" : "Malaysia Guide", path: "/destinations/malaysia-guide" },
-                { label: isBn ? "দুবাই গাইড" : "Dubai Guide", path: "/destinations/dubai-guide" },
-                { label: isBn ? "ওমরাহ হাব" : "Umrah Hub", path: "/umrah" },
-                { label: isBn ? "সব গাইড দেখুন" : "All Guides", path: "/blog" },
-              ].map((link) => (
-                <button
-                  key={link.path}
-                  type="button"
-                  onClick={() => navigateTo(link.path)}
-                  className="text-xs font-semibold text-brand-navy bg-white border border-slate-300 rounded-full px-3 py-1.5 hover:border-[#F6B73C] hover:text-[#F6B73C] transition-colors"
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Contact CTA */}
-          <div className="bg-brand-navy rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <p className="text-white text-sm font-bold">
-                {isBn ? "আপনি যা খুঁজছিলেন খুঁজে পাননি?" : "Can't find what you were looking for?"}
-              </p>
-              <p className="text-slate-400 text-xs mt-0.5">
-                {isBn ? "আমাদের WhatsApp-এ মেসেজ করুন — আমরা সাহায্য করব।" : "Message us on WhatsApp — we'll point you in the right direction."}
-              </p>
-            </div>
-            <a
-              href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20was%20looking%20for%20something%20on%20your%20site%20but%20got%20a%20404%20error"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy font-bold text-xs px-4 py-2.5 rounded-xl transition-colors"
-            >
-              {isBn ? "WhatsApp-এ মেসেজ" : "Message on WhatsApp"}
-            </a>
-          </div>
-
-        </div>
-      )}
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <NotFoundRouteView context={routeViewContext} />
+          </React.Suspense>
+        )}
 
       </main>
 
+      {/* Shared sitewide subscription card: one email field, with distinct optional interests. */}
+      <section
+        id="sitewide-subscription"
+        aria-labelledby="sitewide-subscription-title"
+        className="relative isolate overflow-hidden bg-brand-navy"
+      >
+        {section === "home" && (
+          <ResponsiveImage
+            src={coxsBazarSunriseImg}
+            sizes="100vw"
+            alt=""
+            aria-hidden={true}
+            loading="lazy"
+            fetchPriority="low"
+            decoding="async"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+            style={{ objectPosition: "center 40%" }}
+          />
+        )}
+        <div
+          aria-hidden={true}
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-navy/70 via-brand-navy/90 to-brand-navy"
+        />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+          <div className="ural-panel mx-auto max-w-4xl border border-white/15 bg-slate-950/80 p-5 text-white shadow-2xl backdrop-blur-md sm:p-8 lg:p-10">
+            <div className="mx-auto max-w-2xl space-y-3 text-center">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#F6B73C]/30 bg-[#F6B73C]/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#F6B73C]">
+                <Bell size={13} aria-hidden="true" />
+                {section === "home"
+                  ? isBn
+                    ? "বাংলাদেশ থেকে বিশ্বজুড়ে যাত্রা"
+                    : "Live from Cox's Bazar to the World"
+                  : isBn
+                    ? "আপনার পছন্দের ট্রাভেল আপডেট"
+                    : "Travel updates, your way"}
+              </span>
+              <h2
+                id="sitewide-subscription-title"
+                className="ural-section-title font-serif text-2xl font-black leading-tight text-white sm:text-3xl lg:text-4xl"
+              >
+                {isBn ? "আপনি কোন আপডেট পেতে চান?" : "Choose the updates you want"}
+              </h2>
+              <p className="text-sm leading-relaxed text-slate-200 sm:text-base">
+                {isBn
+                  ? "একটি বা দুটিই বেছে নিন: ঢাকা থেকে নির্দিষ্ট রুটে ভাড়া কমার অ্যালার্ট এবং/অথবা URAL-এর ট্রাভেল গাইড, পরিকল্পনা ও ভিসা আপডেট।"
+                  : "Choose either or both: Dhaka fare-drop alerts on selected routes and/or the URAL travel newsletter with destination guides, planning tips, and visa updates."}
+              </p>
+            </div>
+
+            {emailSubscribed ? (
+              <div
+                role="status"
+                aria-live="polite"
+                className="mx-auto mt-7 max-w-2xl space-y-4 rounded-xl border border-emerald-400/25 bg-emerald-500/10 p-5 text-center"
+              >
+                <div className="space-y-1">
+                  <p className="font-serif text-lg font-bold text-white">
+                    {hasFareAlertPreference && hasNewsletterPreference
+                      ? isBn
+                        ? "দুই ধরনের আপডেটের জন্য আপনি সাবস্ক্রাইব করেছেন"
+                        : "You’re subscribed to both update types"
+                      : hasFareAlertPreference
+                        ? isBn
+                          ? "ফ্লাইট ভাড়া কমার অ্যালার্ট চালু হয়েছে"
+                          : "Dhaka fare-drop alerts are enabled"
+                        : hasNewsletterPreference
+                          ? isBn
+                            ? "ট্রাভেল নিউজলেটার সাবস্ক্রিপশন চালু হয়েছে"
+                            : "The travel newsletter is enabled"
+                          : isBn
+                            ? "আপনার আগের সাবস্ক্রিপশন সক্রিয় আছে"
+                            : "Your existing subscription remains active"}
+                  </p>
+                  <p className="break-all text-sm text-emerald-100">{userEmail}</p>
+                  {subscriptionId && (
+                    <p className="font-mono text-[11px] text-emerald-200">ID: {subscriptionId}</p>
+                  )}
+                </div>
+                {(hasFareAlertPreference || hasNewsletterPreference) && (
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {hasFareAlertPreference && (
+                      <span className="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs text-emerald-100">
+                        {isBn ? "ঢাকা ভাড়া অ্যালার্ট" : "Dhaka fare alerts"}
+                      </span>
+                    )}
+                    {hasNewsletterPreference && (
+                      <span className="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs text-emerald-100">
+                        {isBn ? "ট্রাভেল নিউজলেটার" : "Travel newsletter"}
+                      </span>
+                    )}
+                  </div>
+                )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEmailSubscribed(false);
+                    setEmailSubscribeError(null);
+                  }}
+                  className="min-h-11 rounded-xl border border-white/20 px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-[#F6B73C]/60 hover:text-[#F6B73C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+                >
+                  {isBn ? "পছন্দ পরিবর্তন করুন" : "Update preferences"}
+                </button>
+              </div>
+            ) : (
+              <form
+                id="sitewide-subscription-form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleEmailSubscription(userEmail, "Shared Pre-Footer Signup", selectedSubscriptionInterests);
+                }}
+                className="mx-auto mt-7 max-w-2xl space-y-5"
+              >
+                <fieldset
+                  aria-describedby={emailSubscribeError ? "sitewide-subscription-error" : undefined}
+                  className="space-y-3"
+                >
+                  <legend className="text-xs font-bold uppercase tracking-wider text-slate-200">
+                    {isBn ? "একটি বা দুটিই বেছে নিন" : "Select one or both"}
+                  </legend>
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <label
+                      htmlFor="subscription-interest-fare-alerts"
+                      className={`flex min-h-20 cursor-pointer items-start gap-3 rounded-xl border p-4 transition-colors ${
+                        hasFareAlertPreference
+                          ? "border-[#F6B73C]/70 bg-[#F6B73C]/10"
+                          : "border-white/15 bg-white/5 hover:border-white/30"
+                      }`}
+                    >
+                      <input
+                        id="subscription-interest-fare-alerts"
+                        type="checkbox"
+                        checked={hasFareAlertPreference}
+                        onChange={() => toggleSubscriptionInterest("dhaka-fare-alerts")}
+                        className="mt-1 h-5 w-5 shrink-0 accent-[#F6B73C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+                      />
+                      <span className="space-y-1">
+                        <span className="block text-sm font-bold text-white">
+                          {isBn
+                            ? "ঢাকা থেকে ফ্লাইটের ভাড়া কমলে সাথে সাথে এলার্ট পান"
+                            : "Get Flight Deal Alerts from Dhaka"}
+                        </span>
+                        <span className="block text-xs leading-relaxed text-slate-300">
+                          {isBn
+                            ? "ঢাকা থেকে Maldives, Nepal, Bangkok, Kuala Lumpur, Jeddah বা Dubai-এর ভাড়া কমলে BDT অ্যালার্ট পান।"
+                            : "Get BDT alerts when fares from Dhaka to Maldives, Nepal, Bangkok, Kuala Lumpur, or Dubai fall below BDT 20,000."}
+                        </span>
+                      </span>
+                    </label>
+                    <label
+                      htmlFor="subscription-interest-newsletter"
+                      className={`flex min-h-20 cursor-pointer items-start gap-3 rounded-xl border p-4 transition-colors ${
+                        hasNewsletterPreference
+                          ? "border-[#F6B73C]/70 bg-[#F6B73C]/10"
+                          : "border-white/15 bg-white/5 hover:border-white/30"
+                      }`}
+                    >
+                      <input
+                        id="subscription-interest-newsletter"
+                        type="checkbox"
+                        checked={hasNewsletterPreference}
+                        onChange={() => toggleSubscriptionInterest("travel-newsletter")}
+                        className="mt-1 h-5 w-5 shrink-0 accent-[#F6B73C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+                      />
+                      <span className="space-y-1">
+                        <span className="block text-sm font-bold text-white">
+                          {isBn ? "সাধারণ ট্রাভেল নিউজলেটার" : "General travel newsletter"}
+                        </span>
+                        <span className="block text-xs leading-relaxed text-slate-300">
+                          {isBn
+                            ? "গন্তব্য গাইড, ভ্রমণ পরিকল্পনার পরামর্শ ও ভিসা আপডেট পান।"
+                            : "Get destination guides, practical trip-planning tips, and visa updates."}
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+                  <div className="min-w-0 flex-1">
+                    <label htmlFor="sitewide-subscription-email" className="mb-1.5 block text-xs font-semibold text-slate-200">
+                      {isBn ? "ইমেইল ঠিকানা" : "Email address"}
+                    </label>
+                    <input
+                      id="sitewide-subscription-email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      value={userEmail}
+                      onChange={(e) => {
+                        setUserEmail(e.target.value);
+                        if (emailSubscribeError) setEmailSubscribeError(null);
+                      }}
+                      placeholder={isBn ? "আপনার ইমেইল ঠিকানা লিখুন" : "Enter your email address"}
+                      className="min-h-12 w-full rounded-xl border border-white/20 bg-brand-navy/80 px-4 py-3 text-sm text-white placeholder-slate-400 transition-colors focus:border-[#F6B73C] focus:outline-none focus:ring-2 focus:ring-[#F6B73C]/40"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={emailSubmitting}
+                    className="min-h-12 w-full shrink-0 rounded-xl bg-[#F6B73C] px-6 py-3 text-sm font-extrabold text-brand-navy shadow-md transition-colors hover:bg-[#ffc654] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy disabled:cursor-wait disabled:opacity-60 sm:w-auto"
+                  >
+                    {emailSubmitting
+                      ? isBn
+                        ? "যুক্ত হচ্ছে..."
+                        : "Subscribing..."
+                      : isBn
+                        ? "সাবস্ক্রাইব করুন"
+                        : "Subscribe"}
+                  </button>
+                </div>
+
+                {emailSubscribeError && (
+                  <p id="sitewide-subscription-error" role="alert" className="text-sm font-semibold text-amber-200">
+                    {emailSubscribeError}
+                  </p>
+                )}
+                <div className="flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-4 text-xs text-slate-300">
+                  <span>
+                    {isBn ? "স্প্যামমুক্ত · এক ক্লিকে আনসাবস্ক্রাইব" : "Spam-free · 1-Click Unsubscribe"}
+                  </span>
+                  <span>{isBn ? "BDT ভাড়া অ্যালার্ট ও ট্রাভেল আপডেট" : "BDT Pricing Alerts & Travel Updates"}</span>
+                  <span>{isBn ? "ইংরেজি ও বাংলায় আপডেট" : "English and Bengali support"}</span>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      </section>
+
       {/* 🔮 MASTER FOOTER BLOCK */}
-      <footer className="bg-brand-navy text-slate-300 pt-14 pb-10 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs mt-16">
+      <footer className="bg-brand-navy text-slate-300 pt-14 pb-10 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs">
         <div className="max-w-7xl mx-auto space-y-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
             
             {/* COLUMN 1 (3 Cols): Brand Lockup, Slogan & Social Media Community */}
             <div className="lg:col-span-3 space-y-4">
               <div className="space-y-1.5">
-                <div
-                  onClick={() => navigateTo("/")}
-                  className="inline-flex items-center gap-2.5 text-white cursor-pointer"
+                <a
+                  href={getLocalizedRouteHref("/")}
+                  onClick={(event) => handleNavigationAnchorClick(event, "/")}
+                  aria-label={isBn ? "URAL হোম পেজ" : "URAL home"}
+                  className="inline-flex items-center gap-2.5 text-white cursor-pointer focus-visible:outline-none"
                 >
                   <img
                     src="/assets/brand/svg/ural-wordmark-v1.svg"
@@ -8024,7 +4710,7 @@ export default function App() {
                     height="30"
                     className="h-7 w-auto"
                   />
-                </div>
+                </a>
                 <p className="text-[11px] font-semibold text-[#F6B73C] tracking-wide">
                   {isBn
                     ? "ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়"
@@ -8103,7 +4789,7 @@ export default function App() {
                       rel={social.rel}
                       aria-label={`URAL on ${social.name}`}
                       title={social.name}
-                      className="w-9 h-9 rounded-xl bg-slate-800/80 hover:bg-[#F6B73C] text-slate-300 hover:text-brand-navy border border-slate-700/70 hover:border-[#F6B73C] flex items-center justify-center transition-colors"
+                      className="w-11 h-11 rounded-xl bg-slate-800/80 hover:bg-[#F6B73C] text-slate-300 hover:text-brand-navy border border-slate-700/70 hover:border-[#F6B73C] flex items-center justify-center transition-colors"
                     >
                       {social.svg}
                     </a>
@@ -8157,7 +4843,15 @@ export default function App() {
                 <li><a href="/visa/malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/malaysia-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
                 <li><a href="/visa/singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/singapore-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Visa"}</a></li>
                 <li><a href="/visa/dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/dubai-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
-                <li><a href="/blog" onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সবগুলো ৪৬টি ট্রাভেল ব্লগ গাইড →" : "All 46 Travel Blog Guides →"}</a></li>
+                <li>
+                  <a
+                    href={getLocalizedRouteHref("/blog")}
+                    onClick={(event) => handleNavigationAnchorClick(event, "/blog")}
+                    className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer"
+                  >
+                    {isBn ? `সবগুলো ${blogPostCount}টি ট্রাভেল ব্লগ গাইড →` : `All ${blogPostCount} Travel Blog Guides →`}
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -8240,11 +4934,11 @@ export default function App() {
               </ul>
             </div>
 
-            {/* COLUMN 5 (3 Cols): Direct Support Desk + Sitewide Fare Alert Newsletter */}
+            {/* COLUMN 5 (3 Cols): Direct Support Desk */}
             <div className="lg:col-span-3 space-y-4">
               <div className="space-y-2">
                 <span className="text-white font-bold font-mono uppercase text-xs block">
-                  {isBn ? "সরাসরি সাপোর্ট ও ভাড়া অ্যালার্ট" : "Direct Desk & Fare Alerts"}
+                  {isBn ? "সরাসরি সাপোর্ট ডেস্ক" : "Direct Support Desk"}
                 </span>
                 <div className="space-y-1.5 text-xs">
                   <div className="flex items-center justify-between bg-slate-900/70 border border-slate-800 rounded-xl px-3 py-2">
@@ -8254,7 +4948,7 @@ export default function App() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={isBn ? "WhatsApp ডেস্ক: +880 1784-385335" : "Chat on WhatsApp: +880 1784-385335"}
-                      className="hover:text-white hover:underline text-emerald-400 font-mono font-bold"
+                      className="min-h-11 px-1 flex items-center hover:text-white hover:underline text-emerald-400 font-mono font-bold"
                     >
                       +880 1784-385335
                     </a>
@@ -8264,94 +4958,25 @@ export default function App() {
                     <a
                       href="tel:+8801784385335"
                       aria-label={isBn ? "সরাসরি কল: +880 1784-385335" : "Call directly: +880 1784-385335"}
-                      className="hover:text-white hover:underline text-[#F6B73C] font-mono font-bold"
+                      className="min-h-11 px-1 flex items-center hover:text-white hover:underline text-[#F6B73C] font-mono font-bold"
                     >
                       +880 1784-385335
                     </a>
                   </div>
                 </div>
+                <a
+                  href="/contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo("/contact");
+                  }}
+                  className="min-h-11 inline-flex items-center gap-1 text-xs font-semibold text-[#F6B73C] hover:text-white hover:underline"
+                >
+                  {isBn ? "যোগাযোগ ফর্ম →" : "Contact Form →"}
+                </a>
               </div>
 
-              {/* Sitewide Newsletter / Fare Alert Subscription Box */}
-              <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 space-y-2.5">
-                <div className="text-[11px] text-slate-200 font-semibold leading-snug">
-                  {isBn
-                    ? "ঢাকা থেকে ফ্লাইট ও হোটেল ডিল ইমেইলে পান:"
-                    : "Get Dhaka Flight Drops & Visa Updates:"}
-                </div>
-                {emailSubscribed ? (
-                  <div className="text-[11px] text-emerald-400 font-mono bg-emerald-500/10 border border-emerald-500/25 rounded-xl px-3 py-2 flex items-center justify-between gap-2">
-                    <span className="truncate">
-                      {isBn
-                        ? `✔ সাবস্ক্রাইবড (${userEmail || "সক্রিয়"})`
-                        : `✔ Subscribed (${userEmail || "Active"})`}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setEmailSubscribed(false);
-                        setEmailSubscribeError(null);
-                      }}
-                      className="shrink-0 text-[10px] text-[#F6B73C] hover:underline cursor-pointer font-sans font-semibold"
-                    >
-                      {isBn ? "পরিবর্তন" : "Change"}
-                    </button>
-                  </div>
-                ) : (
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      handleEmailSubscription(footerEmail, "Footer Sitewide Newsletter");
-                    }}
-                    className="space-y-1.5"
-                  >
-                    <div className="flex items-center gap-1.5">
-                      <label htmlFor="footer-newsletter-email" className="sr-only">
-                        {isBn ? "আপনার ইমেইল লিখুন" : "Your email address"}
-                      </label>
-                      <input
-                        id="footer-newsletter-email"
-                        type="email"
-                        required
-                        value={footerEmail}
-                        onChange={(e) => {
-                          setFooterEmail(e.target.value);
-                          if (emailSubscribeError) setEmailSubscribeError(null);
-                        }}
-                        placeholder={isBn ? "আপনার ইমেইল..." : "Your email address..."}
-                        className="min-w-0 flex-1 bg-brand-navy border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#F6B73C]"
-                      />
-                      <button
-                        type="submit"
-                        disabled={emailSubmitting}
-                        className="shrink-0 bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy font-extrabold text-xs px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
-                      >
-                        {emailSubmitting ? "..." : isBn ? "যুক্ত হোন" : "Join"}
-                      </button>
-                    </div>
-                    {emailSubscribeError && (
-                      <p role="alert" className="text-[10px] text-amber-300 font-sans">
-                        {emailSubscribeError}
-                      </p>
-                    )}
-                  </form>
-                )}
-                <div className="flex items-center justify-between pt-0.5">
-                  <span className="text-[10px] text-slate-300">
-                    {isBn ? "স্প্যাম মুক্ত · ফ্রি অ্যালার্ট" : "Zero spam · Unsubscribe anytime"}
-                  </span>
-                  <a
-                    href="/contact"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigateTo("/contact");
-                    }}
-                    className="text-[10px] font-bold text-[#F6B73C] hover:underline cursor-pointer"
-                  >
-                    {isBn ? "যোগাযোগ ফর্ম →" : "Contact Form →"}
-                  </a>
-                </div>
-              </div>
+
             </div>
 
           </div>
@@ -8378,7 +5003,7 @@ export default function App() {
                   e.preventDefault();
                   navigateTo(isBn ? "/bn/about" : "/about");
                 }}
-                className="hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
+                className="min-h-10 px-1 inline-flex items-center hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
               >
                 {isBn ? "আমাদের সম্পর্কে" : "About"}
               </a>
@@ -8389,7 +5014,7 @@ export default function App() {
                   e.preventDefault();
                   navigateTo("/contact");
                 }}
-                className="hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
+                className="min-h-10 px-1 inline-flex items-center hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
               >
                 {isBn ? "যোগাযোগ" : "Contact"}
               </a>
@@ -8400,7 +5025,7 @@ export default function App() {
                   e.preventDefault();
                   navigateTo(isBn ? "/bn/privacy" : "/privacy");
                 }}
-                className="hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
+                className="min-h-10 px-1 inline-flex items-center hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
               >
                 {isBn ? "গোপনীয়তা ও কুকি নীতিমালা" : "Privacy & Cookie Policy"}
               </a>
@@ -8413,7 +5038,7 @@ export default function App() {
                 onClick={() =>
                   window.dispatchEvent(new CustomEvent("ural:open-cookie-banner"))
                 }
-                className="hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
+                className="min-h-10 px-1 inline-flex items-center hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
               >
                 {isBn ? "কুকি সেটিংস" : "Cookie settings"}
               </button>
