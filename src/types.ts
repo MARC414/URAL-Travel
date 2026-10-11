@@ -158,4 +158,23 @@ export interface BlogPost {
   };
   internalLinks: { text: string; path: string }[];
   affiliateCTA?: { provider: "aviasales" | "klook" | "kkday" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage" | "yesim" | "kiwi" | "getTransfer" | "goCity"; headline: string; body: string };
+  /**
+   * In-article callout boxes injected at specific paragraph positions.
+   * blockIdx = the index in the \n\n-split body array where the callout renders.
+   * Use getBlogBody(slug).split("\n\n") to find the right index for a placement.
+   */
+  callouts?: CalloutBox[];
+}
+
+/** In-article highlighted callout box. */
+export interface CalloutBox {
+  blockIdx: number;
+  type: "pro-tip" | "key-fact" | "warning" | "insider";
+  /** Primary text shown inside the callout. */
+  text: string;
+  /**
+   * Optional secondary line (e.g., source attribution) rendered in muted style.
+   * Falls back to a default label derived from `type` when omitted.
+   */
+  note?: string;
 }

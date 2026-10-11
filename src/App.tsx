@@ -6529,6 +6529,37 @@ export default function App() {
                             );
                           }
 
+                          // In-article callout box — matches any callout whose blockIdx lands on this paragraph
+                          {
+                            const callout = activePost.callouts?.find((c) => c.blockIdx === bIdx);
+                            if (callout) {
+                              const styles = {
+                                "pro-tip": { wrapper: "bg-emerald-50 border-emerald-300", icon: "💡", label: isBn ? "প্রো টিপ" : "Pro Tip", labelCls: "text-emerald-800", bodyCls: "text-emerald-900" },
+                                "key-fact": { wrapper: "bg-sky-50 border-sky-300",    icon: "🔑", label: isBn ? "মূল তথ্য" : "Key Fact",  labelCls: "text-sky-800",    bodyCls: "text-sky-900" },
+                                warning:     { wrapper: "bg-amber-50 border-amber-300", icon: "⚠️", label: isBn ? "সতর্কতা" : "Heads Up",   labelCls: "text-amber-800",  bodyCls: "text-amber-900" },
+                                insider:    { wrapper: "bg-violet-50 border-violet-300", icon: "🔎", label: isBn ? "ইনসাইডার তথ্য" : "Insider Insight", labelCls: "text-violet-800", bodyCls: "text-violet-900" },
+                              }[callout.type];
+                              return (
+                                <div
+                                  key={`callout-${bIdx}`}
+                                  role="note"
+                                  className={`my-6 rounded-2xl border-l-4 ${styles.wrapper} p-5`}
+                                >
+                                  <div className={`flex items-center gap-2 mb-2 text-sm font-bold ${styles.labelCls}`}>
+                                    <span aria-hidden="true">{styles.icon}</span>
+                                    <span>{styles.label}</span>
+                                  </div>
+                                  <p className={`text-[15px] leading-[1.75] ${styles.bodyCls}`}>{callout.text}</p>
+                                  {callout.note && (
+                                    <p className={`mt-2 text-[13px] leading-relaxed opacity-70 ${styles.bodyCls}`}>
+                                      {callout.note}
+                                    </p>
+                                  )}
+                                </div>
+                              );
+                            }
+                          }
+
                           // Major numbered section heading -> Semantic H2 (Dark #0B1426, 22px–26px)
                           if (/^([0-9]+|[০-৯]+)\.\s+/.test(trimmed) && trimmed.length < 170 && !trimmed.includes("\n")) {
                             return (
@@ -6995,7 +7026,7 @@ export default function App() {
                       )}
 
                       {/* Author Bio — E-E-A-T signal: establishes human authorship identity */}
-                      <BlogAuthorBio authorRaw={canonicalAuthorRaw} isBengali={isBn} />
+                      <AuthorBioCard authorRaw={canonicalAuthorRaw} isBengali={isBn} />
                     </article>
 
                     {/* Right Column: Sticky Trip Planning & BDT Support Sidebar (4 Cols) */}
