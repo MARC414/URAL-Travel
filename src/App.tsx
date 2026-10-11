@@ -2133,7 +2133,7 @@ export default function App() {
                 onClick={() => navigateTo("/")}
                 aria-current={section === "home" ? "page" : undefined}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
-                  section === "home" ? "text-[#F6B73C] font-semibold" : "text-white/75"
+                  section === "home" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
                 }`}
               >
                 {t.navHome}
@@ -2146,7 +2146,7 @@ export default function App() {
                 onClick={() => navigateTo("/umrah")}
                 aria-current={section === "umrah" ? "page" : undefined}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-semibold hover:text-[#F6B73C] whitespace-nowrap flex items-center gap-1.5 py-2 ${
-                  section === "umrah" ? "text-[#F6B73C]" : "text-white"
+                  section === "umrah" ? "text-[#F6B73C]" : "text-slate-200"
                 }`}
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" aria-hidden="true" />
@@ -2160,7 +2160,7 @@ export default function App() {
                 onClick={() => navigateTo("/flights")}
                 aria-current={section === "flights" ? "page" : undefined}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
-                  section === "flights" ? "text-[#F6B73C] font-semibold" : "text-white/75"
+                  section === "flights" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
                 }`}
               >
                 {t.navFlights}
@@ -2173,7 +2173,7 @@ export default function App() {
                 onClick={() => navigateTo("/hotels")}
                 aria-current={section === "hotels" ? "page" : undefined}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
-                  section === "hotels" ? "text-[#F6B73C] font-semibold" : "text-white/75"
+                  section === "hotels" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
                 }`}
               >
                 {t.navHotels}
@@ -2186,7 +2186,7 @@ export default function App() {
                 onClick={() => navigateTo("/visa")}
                 aria-current={section === "visa" ? "page" : undefined}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
-                  section === "visa" ? "text-[#F6B73C] font-semibold" : "text-white/75"
+                  section === "visa" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
                 }`}
               >
                 {t.navVisa}
@@ -2202,7 +2202,7 @@ export default function App() {
                   className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap flex items-center gap-1 py-2 ${
                     section === "destinations" || section === "experiences"
                       ? "text-[#F6B73C] font-semibold"
-                      : "text-white/75"
+                      : "text-slate-300"
                   }`}
                 >
                   <span>{t.navDestinations}</span>
@@ -2444,7 +2444,7 @@ export default function App() {
                 onClick={() => navigateTo("/blog")}
                 aria-current={section === "blog" ? "page" : undefined}
                 className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-2 ${
-                  section === "blog" ? "text-[#F6B73C] font-semibold" : "text-white/75"
+                  section === "blog" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
                 }`}
               >
                 {t.navBlog}
@@ -2460,7 +2460,7 @@ export default function App() {
                   className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] flex items-center gap-1 py-2 whitespace-nowrap ${
                     ["costs", "tools", "contact", "sitemap"].includes(section)
                       ? "text-[#F6B73C] font-semibold"
-                      : "text-white/75"
+                      : "text-slate-300"
                   }`}
                 >
                   <span>{t.navTools}</span>
