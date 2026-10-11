@@ -2496,7 +2496,7 @@ export default function TravelpayoutsWidget({
           <div className="mt-4 pt-3.5 border-t border-slate-100 space-y-4">
             <div className="flex items-center justify-between gap-2 flex-wrap">
               <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 shrink-0 mr-0.5">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 shrink-0 mr-0.5">
                   {isBn ? 'জনপ্রিয় রুট:' : 'Popular Hubs:'}
                 </span>
                 {POPULAR_ROUTES.map((route) => {

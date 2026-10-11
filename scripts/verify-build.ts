@@ -798,6 +798,7 @@ const BANNED_CLASS_PATTERNS: Array<[string, string]> = [
   ["text-[9px] font-mono text-[#F6B73C]", "gold on white is 1.79:1 — use text-brand-gold-ink"],
   ["text-amber-600 bg-amber-50", "amber-600 on amber-50 is 3.07:1 — use amber-800"],
   ['className="text-[10px] text-slate-500"', "slate-500 on slate-900 is 3.75:1 — use slate-400 on dark"],
+  ["text-[11px] font-bold uppercase tracking-wider text-slate-400", "slate-400 on white card is 2.56:1 — use slate-500"],
 ];
 const bannedHits: string[] = [];
 for (const file of TSX_FILES) {
