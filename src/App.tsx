@@ -6993,6 +6993,9 @@ export default function App() {
                           faqs={localizedHajjFaqs}
                         />
                       )}
+
+                      {/* Author Bio — E-E-A-T signal: establishes human authorship identity */}
+                      <BlogAuthorBio authorRaw={canonicalAuthorRaw} isBengali={isBn} />
                     </article>
 
                     {/* Right Column: Sticky Trip Planning & BDT Support Sidebar (4 Cols) */}
