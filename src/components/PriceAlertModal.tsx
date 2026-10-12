@@ -93,7 +93,7 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs animate-in fade-in duration-200">
       <div 
-        className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden text-slate-850 animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden text-text-primary animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Strip */}
@@ -178,7 +178,7 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
 
             {/* Departure & Destination */}
             <div className="space-y-2">
-              <label className="text-xs font-bold text-slate-750 block">
+              <label className="text-xs font-bold text-text-primary block">
                 {lang === "bn" ? "১. আপনার গন্তব্য নির্বাচন করুন:" : "1. Select Destination from Dhaka (DAC):"}
               </label>
 
@@ -197,7 +197,7 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
                       className={`text-left px-3 py-2 rounded-xl text-xs font-medium border transition-all cursor-pointer ${
                         isSelected
                           ? "bg-amber-50 border-[#F6B73C] text-slate-900 font-bold shadow-xs ring-1 ring-[#F6B73C]"
-                          : "bg-white border-slate-250 text-slate-700 hover:border-slate-400"
+                          : "bg-white border-border-subtle text-slate-700 hover:border-slate-400"
                       }`}
                     >
                       <div className="truncate">{r.label}</div>
@@ -238,7 +238,7 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
 
             {/* Travel Timing Window */}
             <div className="space-y-1.5">
-              <label htmlFor="price-alert-travel-window" className="text-xs font-bold text-slate-750 block">
+              <label htmlFor="price-alert-travel-window" className="text-xs font-bold text-text-primary block">
                 {lang === "bn" ? "২. আনুমানিক কবে ভ্রমণ করবেন?" : "2. Approximate Travel Window:"}
               </label>
               <select
@@ -255,7 +255,7 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
 
             {/* Target Budget (Optional) */}
             <div className="space-y-1.5">
-              <label htmlFor="price-alert-target-budget" className="text-xs font-bold text-slate-750 flex items-center justify-between">
+              <label htmlFor="price-alert-target-budget" className="text-xs font-bold text-text-primary flex items-center justify-between">
                 <span>{lang === "bn" ? "৩. লক্ষ্যমাত্রা বাজেট (ঐচ্ছিক):" : "3. Target Budget in BDT (Optional):"}</span>
                 <span className="text-[10px] text-slate-400 font-normal">{lang === "bn" ? "খালি রাখলে যেকোনো অফার" : "Optional"}</span>
               </label>
@@ -271,7 +271,7 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
 
             {/* WhatsApp / Phone */}
             <div className="space-y-1.5">
-              <label htmlFor="price-alert-user-phone" className="text-xs font-bold text-slate-750 flex items-center justify-between">
+              <label htmlFor="price-alert-user-phone" className="text-xs font-bold text-text-primary flex items-center justify-between">
                 <span>{lang === "bn" ? "৪. আপনার মোবাইল / হোয়াটসঅ্যাপ নম্বর:" : "4. Your WhatsApp / Mobile Number:"}</span>
                 <span className="text-[10px] text-brand-emerald font-bold flex items-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5" /> Direct Support

@@ -545,7 +545,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
             </div>
 
             <h1
-              className="font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight"
+              className="ural-page-title font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight"
               style={{ textWrap: "balance" }}
             >
               {isBn
@@ -610,7 +610,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 <span className="text-[11px] font-mono text-[#F6B73C] font-semibold block">
                   {isBn ? "লাইভ সিটি পাস ও BDT ক্যালকুলেটর" : "City Pass & Availability Planner"}
                 </span>
-                <h2 className="font-serif text-base sm:text-lg font-bold text-white">
+                <h2 className="ural-section-title font-serif text-base sm:text-lg font-bold text-white">
                   {isBn
                     ? "১ দিনের ফুল-ডে বান্ডেল খরচ হিসাব করুন"
                     : "Calculate Full-Day City Bundle in BDT"}
@@ -864,7 +864,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                         : "Verified Klook Residency Best-Seller"}
                     </span>
                   </div>
-                  <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+                  <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-bold text-slate-900">
                     {isBn ? hub.cityBn : hub.city}
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-600">
@@ -936,7 +936,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                         <span>{item.duration}</span>
                       </div>
 
-                      <h3 className="font-serif text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                      <h3 className="ural-card-title font-serif text-base sm:text-lg font-bold text-slate-900 leading-snug">
                         {isBn ? item.titleBn : item.title}
                       </h3>
 
@@ -1021,11 +1021,11 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
               ? "বাংলাদেশি পাসপোর্টধারীদের জন্য পেমেন্ট সমাধান"
               : "Payment Guide for Bangladeshi Passport Holders"}
           </div>
-          <h3 className="font-serif text-xl sm:text-2xl font-bold text-white">
+          <h2 className="ural-section-title font-serif text-xl sm:text-2xl font-bold text-white">
             {isBn
               ? "Dual-Currency Card নেই? আমাদের ঢাকা ডেস্কের মাধ্যমে BDT-তে Tiqets ও Klook ভাউচার ইস্যু করুন"
               : "Don't Have a Dual-Currency Card Yet? Book Any Tiqets or Klook Pass in BDT"}
-          </h3>
+          </h2>
           <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
             {isBn
               ? "আপনার পাসপোর্টে যদি ডলার এন্ডোর্সমেন্ট করা থাকে, তবে সরাসরি উপরের Tiqets বা Klook লিংকে কার্ড দিয়ে পেমেন্ট করে সাথে সাথে QR টিকিট ডাউনলোড করতে পারবেন। আর কার্ড না থাকলে আমাদের WhatsApp ডেস্কে (+8801784385335) মেসেজ দিয়ে bKash/Nagad বা ব্যাংক ট্রান্সফারে বুক করুন।"

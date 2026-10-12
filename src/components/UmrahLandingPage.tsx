@@ -119,7 +119,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
 
               {/* PRIMARY SEO H1 HEADING (High-Intent Bangladeshi Search Keywords) */}
               <h1
-                className="font-serif text-3xl sm:text-4xl lg:text-[44px] font-black text-white tracking-tight leading-[1.15]"
+                className="ural-page-title font-serif text-3xl sm:text-4xl lg:text-[44px] font-black text-white tracking-tight leading-[1.15]"
                 style={{ textWrap: "balance" }}
               >
                 {isBn ? (
@@ -253,7 +253,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
 
               {bookingMode === "diy" ? (
                 <div className="space-y-4 text-xs">
-                  <h2 className="font-serif text-base sm:text-lg font-bold text-white">
+                  <h2 className="ural-section-title font-serif text-base sm:text-lg font-bold text-white">
                     {isBn
                       ? "Dual-Currency Card দিয়ে নিজে ওমরাহ প্ল্যান করার সুবিধা"
                       : "How DIY Umrah Saves Bangladeshi Families 25%–32%"}
@@ -297,7 +297,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 </div>
               ) : (
                 <div className="space-y-4 text-xs">
-                  <h2 className="font-serif text-base sm:text-lg font-bold text-white">
+                  <h2 className="ural-section-title font-serif text-base sm:text-lg font-bold text-white">
                     {isBn
                       ? "পাসপোর্টে ডলার এন্ডোর্সমেন্ট নেই? সম্পূর্ণ BDT-তে বুক করুন"
                       : "No Dual-Currency Card? Book Your Custom Umrah in BDT"}
@@ -392,7 +392,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                   : "Interactive Umrah Package Cost Calculator (2026)"}
               </span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+            <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-bold text-slate-900">
               {isBn
                 ? "বাংলাদেশ থেকে ওমরাহ খরচ কত? আপনার পরিবারের BDT বাজেট হিসাব করুন"
                 : "Umrah Cost from Bangladesh 2026: Calculate Your Exact BDT Budget"}
@@ -406,7 +406,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Controls (5 Cols) */}
           <div className="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-5">
-            <h3 className="font-serif text-base font-bold text-slate-900 border-b border-slate-200 pb-2.5">
+            <h3 className="ural-card-title font-serif text-base font-bold text-slate-900 border-b border-slate-200 pb-2.5">
               {isBn
                 ? "যাত্রী সংখ্যা, দিন ও মক্কা-মদিনা হোটেল মান নির্বাচন করুন"
                 : "Configure Pilgrims, Stay Duration & Haram Hotel Tier"}
@@ -549,7 +549,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
 
           {/* Breakdown & Savings Output (7 Cols) */}
           <div className="lg:col-span-7 space-y-5">
-            <h3 className="font-serif text-base font-bold text-slate-900">
+            <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
               {isBn
                 ? "খাতওয়ারি ২০২৬ ওমরাহ খরচের হিসাব (BDT ও USD)"
                 : "Itemized 2026 Umrah Cost Breakdown in Bangladeshi Taka (BDT)"}
@@ -678,7 +678,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               ? "প্যাকেজ মূল্য তুলনা ২০২৬ (জনপ্রতি হিসাব)"
               : "2026 Transparent Price Audit (Per Pilgrim Based on Double Occupancy)"}
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+          <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-bold text-slate-900">
             {isBn
               ? "নিজে প্ল্যান করা DIY ওমরাহ বনাম এজেন্সি প্যাকেজ খরচ তুলনা"
               : "DIY Umrah vs. Bangladeshi Agency Package Cost Comparison"}
@@ -819,7 +819,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               ? "ধাপ ০১ · ঢাকা (DAC) থেকে জেদ্দা (JED) ও মদিনা (MED) এয়ার টিকিট"
               : "Step 01 · Dhaka (DAC) to Jeddah (JED) & Madinah (MED) Airfare Guide"}
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+          <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-bold text-slate-900">
             {isBn
               ? "ঢাকা থেকে জেদ্দা ও মদিনা ফ্লাইটের ভাড়া তুলনা করুন (সৌদিয়া, বিমান ও ট্রানজিট)"
               : "Dhaka to Jeddah (JED) & Madinah (MED) Flight Price Comparison"}
@@ -837,7 +837,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             <span className="text-xs font-mono font-semibold text-brand-navy">
               6h 30m Non-Stop · 2×23kg + 5L Zamzam
             </span>
-            <h3 className="font-serif text-base font-bold text-slate-900">
+            <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
               {isBn
                 ? "১. ডিরেক্ট ফ্লাইট (Saudia ও Biman Bangladesh)"
                 : "1. Direct Flights (Saudia & Biman Bangladesh)"}
@@ -853,7 +853,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             <span className="text-xs font-mono font-semibold text-emerald-700">
               Lowest BDT Fare · 1-Stop Gulf Transit
             </span>
-            <h3 className="font-serif text-base font-bold text-slate-900">
+            <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
               {isBn
                 ? "২. সাশ্রয়ী ট্রানজিট (Flynas, SalamAir, Kuwait ও Gulf Air)"
                 : "2. Budget Transit (Flynas, SalamAir, Kuwait & Air Arabia)"}
@@ -869,7 +869,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             <span className="text-xs font-mono font-semibold text-brand-navy">
               Smart Routing · Save 5 Hours on Highway
             </span>
-            <h3 className="font-serif text-base font-bold text-slate-900">
+            <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
               {isBn
                 ? "৩. ওপেন-জ (Open-Jaw) টিকিট কৌশল (JED → MED)"
                 : "3. Open-Jaw Strategy: Arrive JED, Depart MED"}
@@ -898,7 +898,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               ? "ধাপ ০২ · মক্কা ও মদিনার সেরা হোটেল জোন গাইড"
               : "Step 02 · Makkah & Madinah Hotel Neighborhood Guide"}
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+          <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-bold text-slate-900">
             {isBn
               ? "মক্কা ও মদিনায় কোথায় থাকবেন? কাবা শরীফ ও মসজিদে নববীর ওয়াকিং জোন"
               : "Best Makkah & Madinah Hotel Zones for Elderly Parents & Families"}
@@ -949,7 +949,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             >
               <div className="space-y-2">
                 <div className="text-xs font-mono text-brand-navy font-semibold">{z.dist}</div>
-                <h3 className="font-serif text-base font-bold text-slate-900">{z.zone}</h3>
+                <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">{z.zone}</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">{z.desc}</p>
               </div>
               <div className="pt-3 border-t border-slate-200/80 text-xs font-mono font-bold text-slate-900">
@@ -960,7 +960,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         </div>
 
         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 space-y-3">
-          <h3 className="font-serif text-base font-bold text-brand-navy">
+          <h3 className="ural-card-title font-serif text-base font-bold text-brand-navy">
             {isBn
               ? "মক্কা ও মদিনার হোটেল রেট লাইভ সার্চ করুন:"
               : "Compare Live Makkah & Madinah Hotel Rates:"}
@@ -986,7 +986,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               ? "ধাপ ০৩ · সৌদি ওমরাহ ই-ভিসা, Nusuk অ্যাপ ও বায়োমেট্রিক্স নিয়ম ২০২৬"
               : "Step 03 · 2026 Saudi Umrah e-Visa, Nusuk App & Biometrics Requirements"}
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+          <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-bold text-slate-900">
             {isBn
               ? "বাংলাদেশি পাসপোর্টে সৌদি ওমরাহ ই-ভিসা ও Nusuk অ্যাপের ৪টি বাধ্যতামূলক ধাপ"
               : "Saudi Umrah e-Visa, Nusuk App & Biometrics Checklist from Bangladesh"}
@@ -1040,7 +1040,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 <span className="text-xs font-mono font-bold text-brand-navy block">
                   {item.step}
                 </span>
-                <h3 className="font-serif text-base font-bold text-slate-900 leading-snug">
+                <h3 className="ural-card-title font-serif text-base font-bold text-slate-900 leading-snug">
                   {item.title}
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed">{item.body}</p>
@@ -1063,7 +1063,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               ? "ধাপ ০৪ · এয়ারপোর্ট পিকআপ, মক্কা-মদিনা জিয়ারাহ ও সৌদি eSIM"
               : "Step 04 · Jeddah Airport Pickup, Makkah/Madinah Ziyarah & Saudi eSIM"}
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+          <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-bold text-slate-900">
             {isBn
               ? "জেদ্দা এয়ারপোর্ট প্রাইভেট কার, মক্কা-মদিনা জিয়ারাহ ট্যুর ও সৌদি ডাটা সিম"
               : "Jeddah Airport Private Pickup, Guided Ziyarah Tours & Saudi Arabia eSIM"}
@@ -1077,7 +1077,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               <span className="text-xs font-mono font-semibold text-brand-navy">
                 01. Jeddah (JED) → Makkah Hotel
               </span>
-              <h3 className="font-serif text-base font-bold text-slate-900">
+              <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
                 {isBn
                   ? "প্রাইভেট এয়ারপোর্ট পিকআপ (Welcome Pickups / Kiwitaxi)"
                   : "Private Arrival Gate Meet & Greet to Makkah"}
@@ -1107,7 +1107,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               <span className="text-xs font-mono font-semibold text-brand-navy">
                 02. Ziyarah & Bullet Train (Klook)
               </span>
-              <h3 className="font-serif text-base font-bold text-slate-900">
+              <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
                 {isBn
                   ? "মক্কা ও মদিনার ঐতিহাসিক জিয়ারাহ ট্যুর এবং তায়েফ ডে-ট্রিপ"
                   : "Makkah & Madinah Guided Ziyarah + Taif Day Tours"}
@@ -1137,7 +1137,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               <span className="text-xs font-mono font-semibold text-brand-navy">
                 03. Instant Saudi Data (Airalo eSIM)
               </span>
-              <h3 className="font-serif text-base font-bold text-slate-900">
+              <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
                 {isBn
                   ? "Nusuk অ্যাপ ও পরিবারের সাথে যোগাযোগের জন্য সৌদি eSIM"
                   : "Saudi Arabia Local eSIM for Nusuk & WhatsApp"}
@@ -1173,7 +1173,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
       />
 
       <section className="space-y-4">
-        <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+        <h2 className="ural-section-title font-serif text-xl sm:text-2xl font-bold text-slate-900">
           {isBn
             ? "ওমরাহ ও হজ্জ বিষয়ক বিস্তারিত গাইড ও চেকলিস্ট"
             : "In-Depth Umrah & Hajj Editorial Playbooks"}
@@ -1190,7 +1190,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             <span className="text-xs font-mono text-brand-navy font-semibold">
               {isBn ? "বিস্তারিত গাইড ০১" : "In-Depth Playbook 01"}
             </span>
-            <h3 className="font-serif text-lg font-bold text-slate-900">
+            <h3 className="ural-card-title font-serif text-lg font-bold text-slate-900">
               {isBn
                 ? "বাংলাদেশ থেকে ওমরাহ ও হজ্জ গাইড ২০২৬: Nusuk অ্যাপ, ই-ভিসা ও সম্পূর্ণ BDT বাজেট"
                 : "Umrah & Hajj Guide from Bangladesh 2026: Nusuk App, e-Visa & BDT Cost Breakdown"}
@@ -1213,7 +1213,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             <span className="text-xs font-mono text-brand-navy font-semibold">
               {isBn ? "বিস্তারিত গাইড ০২" : "In-Depth Playbook 02"}
             </span>
-            <h3 className="font-serif text-lg font-bold text-slate-900">
+            <h3 className="ural-card-title font-serif text-lg font-bold text-slate-900">
               {isBn
                 ? "মক্কা ও মদিনার সেরা হোটেল জোন গাইড এবং Haramain High-Speed Train টিউটোরিয়াল"
                 : "Makkah & Madinah Hotel Zones + Haramain High-Speed Train Guide for Bangladeshis"}

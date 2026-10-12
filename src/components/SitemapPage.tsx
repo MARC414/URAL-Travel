@@ -550,7 +550,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
               </span>
             </div>
             <h1
-              className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-white"
+              className="ural-page-title font-serif text-2xl sm:text-4xl font-bold tracking-tight text-white"
               style={{ textWrap: "balance" }}
             >
               {isBn
@@ -646,7 +646,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
             <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
               {isBn ? "📋 ইন্টারেক্টিভ প্রি-ফ্লাইট চেকলিস্ট" : "📋 INTERACTIVE PRE-FLIGHT VERIFICATION"}
             </span>
-            <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+            <h2 className="ural-section-title font-serif text-xl sm:text-2xl font-bold text-slate-900">
               {isBn
                 ? "বিমানবন্দরে যাওয়ার আগে ৯টি আবশ্যক ধাপ মিলিয়ে নিন"
                 : "9 Essential Checks Before Leaving for Dhaka Airport (DAC)"}
@@ -672,7 +672,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
                     <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-wider block">
                       {isBn ? stage.badgeBn : stage.badgeEn}
                     </span>
-                    <h3 className="font-serif text-base font-bold text-slate-900">
+                    <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
                       {isBn ? stage.titleBn : stage.titleEn}
                     </h3>
                   </div>
@@ -744,7 +744,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
           <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
             {isBn ? "🧳 লাগেজ, কাস্টমস ও বিমানবন্দর নিয়মাবলী" : "🧳 DAC BAGGAGE, ZAMZAM & CUSTOMS RULES"}
           </span>
-          <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+          <h2 className="ural-section-title font-serif text-xl sm:text-2xl font-bold text-slate-900">
             {isBn
               ? "হযরত শাহজালাল বিমানবন্দরে লাগেজ, পাওয়ার ব্যাংক ও কাস্টমস গাইড"
               : "Baggage Limits, Power Banks, Zamzam Water & Customs Allowance"}
@@ -826,7 +826,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
               ? "🇧🇩 প্রবাসে বাংলাদেশ দূতাবাস ও জরুরি হেল্পলাইন"
               : "🇧🇩 BANGLADESH EMBASSY & CONSULAR HELPLINES ABROAD"}
           </span>
-          <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+          <h2 className="ural-section-title font-serif text-xl sm:text-2xl font-bold text-slate-900">
             {isBn
               ? "বিদেশে পাসপোর্ট হারালে বা জরুরি প্রয়োজনে বাংলাদেশ মিশনের ঠিকানা ও ফোন নাম্বার"
               : "Verified Bangladesh Missions Abroad (Lost Passport & Emergency Support)"}
@@ -909,7 +909,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
             <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
               {isBn ? "🧭 এক ক্লিকে সব গন্তব্যের গাইড" : "🧭 ALL-IN-ONE DESTINATION QUICK FINDER"}
             </span>
-            <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+            <h2 className="ural-section-title font-serif text-xl sm:text-2xl font-bold text-slate-900">
               {isBn
                 ? "দেশ অনুযায়ী ফ্লাইট, ভিসা, হোটেল ও BDT বাজেট শিট বেছে নিন"
                 : "Jump Directly to Any Country's Flight, Visa, Hotel, or BDT Budget Guide"}
@@ -945,7 +945,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h3 className="font-serif text-lg font-bold text-slate-900 flex items-center gap-2">
+                  <h3 className="ural-card-title font-serif text-lg font-bold text-slate-900 flex items-center gap-2">
                     <span>{item.flag}</span>
                     <span>{isBn ? item.countryBn : item.countryEn}</span>
                   </h3>
@@ -1085,7 +1085,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
             </span>
             <h2
               id="predeparture-faq-heading"
-              className="font-serif text-xl sm:text-2xl font-bold text-slate-900"
+              className="ural-section-title font-serif text-xl sm:text-2xl font-bold text-slate-900"
             >
               {isBn
                 ? "ইমিগ্রেশন, লাগেজ, ডলার এন্ডোর্সমেন্ট ও জরুরি নিয়মাবলী (FAQ)"
@@ -1146,7 +1146,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
               ? "📚 সম্পূর্ণ সাইট ডিরেক্টরি (ব্লগ গাইড ও হাব পেজ)"
               : "📚 COMPLETE CRAWLABLE DIRECTORY · BLOG GUIDES & HUB PAGES"}
           </span>
-          <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
+          <h2 className="ural-section-title font-serif text-xl sm:text-2xl font-bold text-slate-900">
             {isBn
               ? "বাংলাদেশি ভ্রমণকারীদের জন্য সব গাইডের সরাসরি লিংক"
               : "Bangladesh Outbound Travel & Umrah Guides (Direct Anchor Index)"}
@@ -1195,7 +1195,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
 
         {/* Core Platform Hubs & Legal Transparency */}
         <div className="pt-6 border-t border-slate-200">
-          <h3 className="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-3">
+          <h3 className="ural-card-title text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-3">
             {isBn ? "🏛️ মূল প্ল্যাটফর্ম হাব ও আইনগত তথ্য" : "🏛️ Core Platform Hubs & Legal Information"}
           </h3>
           <div className="flex flex-wrap gap-2 text-xs">

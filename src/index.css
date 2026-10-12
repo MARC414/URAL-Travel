@@ -14,6 +14,8 @@
   /* === SECTION PADDING === */
   --section-py: 5rem;      /* 80px vertical padding for all sections */
   --section-py-sm: 3rem;   /* 48px for smaller sections */
+  --route-stack-gap: 2.5rem; /* 40px between major route sections */
+  --route-stack-gap-mobile: 1.75rem; /* 28px on small screens */
   --container-px: 1.5rem;  /* Side padding on mobile */
   --container-max: 1200px; /* Max content width */
 
@@ -87,8 +89,61 @@
 
   --color-text-primary: #0B1426;
   --color-text-secondary: #475569;
-  --color-text-muted: #94A3B8;
+  --color-text-muted: #64748B; /* readable muted text: 4.76:1 against white */
+  --color-border-faint: #F1F5F9;
+  --color-border-subtle: #E2E8F0;
+  --color-border-default: #CBD5E1;
+  --color-surface-soft: #F1F5F9;
   --color-text-white: #FFFFFF;
+}
+
+/* Shared typographic roles. Local text-size utilities remain in place so this
+   pass normalizes hierarchy without forcing page-specific title wrapping. */
+.ural-page-title {
+  font-weight: var(--fw-extrabold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.ural-section-title {
+  font-weight: var(--fw-extrabold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+}
+
+.ural-card-title {
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+}
+
+/* Shared surface roles keep card geometry consistent while leaving border
+   colors and hover/focus states to the local semantic Tailwind utilities. */
+.ural-card {
+  border-radius: var(--radius-lg);
+}
+
+.ural-panel {
+  border-radius: var(--radius-xl);
+}
+
+/* Page-level route rhythm: 40px on desktop, 28px on small screens. */
+.ural-route-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--route-stack-gap);
+}
+
+/* Components with standalone spacing retain it outside this layout utility. */
+.ural-route-stack > #travel-intelligence-panel,
+.ural-route-stack > #interactive-tools-panel,
+.ural-route-stack > #tp-onboarding-hub {
+  margin-block: 0;
+}
+
+@media (max-width: 639px) {
+  .ural-route-stack {
+    gap: var(--route-stack-gap-mobile);
+  }
 }
 
 @layer utilities {
@@ -397,3 +452,36 @@ body > :not(#root):not(script):not(style) {
   }
 }
 
+
+/* Navigation and footer focus visibility / comfortable link targets */
+#sticky-site-header a:focus-visible,
+#sticky-site-header button:focus-visible,
+#main-navbar-sticky a:focus-visible,
+#main-navbar-sticky button:focus-visible,
+#mobile-intent-drawer a:focus-visible,
+#mobile-intent-drawer button:focus-visible,
+footer a:focus-visible,
+footer button:focus-visible {
+  outline: 2px solid #F6B73C;
+  outline-offset: 3px;
+}
+
+footer ul li a[href] {
+  display: block;
+  min-height: 44px;
+  padding-block: 0.75rem;
+}
+
+.ural-guide-jump > summary::-webkit-details-marker {
+  display: none;
+}
+
+.ural-guide-jump[open] .ural-guide-jump-chevron {
+  transform: rotate(180deg);
+}
+
+.ural-guide-jump-target,
+#travel-intelligence-panel,
+#interactive-tools-panel {
+  scroll-margin-top: 7.5rem;
+}
