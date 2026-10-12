@@ -2380,8 +2380,8 @@ export default function TravelpayoutsWidget({
         {showQuickRoutes && (
           <div className="mt-5 border-t border-slate-100 pt-4">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="mr-1 text-[11px] font-bold uppercase tracking-wider text-slate-500">
-                {isBn ? 'জনপ্রিয় রুট:' : 'Popular Hubs:'}
+              <span className="mr-1 text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                {isBn ? 'জনপ্রিয় রুট:' : 'Popular Hubs:'}
               </span>
               {POPULAR_ROUTES.map((route) => {
                 const isSelected =

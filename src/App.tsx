@@ -4281,7 +4281,6 @@ export default function App() {
             <BlogPostRouteView context={routeViewContext} />
           </React.Suspense>
         )}
-
       {/* 🟦 CONTENT & GROWTH: 4 FEATURED BANGLADESHI TRAVEL GUIDES IN ONE ROW */}
       {section !== "blog" && section !== "notFound" && (
         <section
@@ -4982,7 +4981,7 @@ export default function App() {
           </div>
 
           {/* BOTTOM COMPLIANCE BAR: FTC / Partner Affiliate Disclosure & Copyright */}
-          <div className="pt-6 border-t border-slate-800/90 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 text-[11px] text-slate-300 leading-relaxed">
+          <div className="pt-6 border-t border-slate-800/90 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 text-[11px] text-slate-400 leading-relaxed">
             <p className="max-w-4xl">
               {isBn ? (
                 <>
