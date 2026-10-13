@@ -1,6 +1,7 @@
 import React from "react";
 
 import { GuideJumpNav } from "../components/GuideJumpNav";
+import { QuickAnswer } from "../components/QuickAnswer";
 
 import { Building, ArrowRight, MapPin, ExternalLink, Zap, ShieldCheck, Plane, Car } from "lucide-react";
 
@@ -40,21 +41,12 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
         </div>
 
-        <div id="hotel-aeo-quick-answer" className="rounded-r-xl border-l-4 border-[#F6B73C] bg-slate-50 p-5">
-
-          <span className="mb-1 block font-mono text-[10px] font-bold tracking-widest text-brand-navy">
-
-            {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
-
-          </span>
-
-          <p className="font-sans text-sm leading-relaxed text-slate-800 sm:text-[14.5px]">
-
-            {activeHotel.quickAnswer}
-
-          </p>
-
-        </div>
+        <QuickAnswer
+          id="hotel-aeo-quick-answer"
+          label={isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
+        >
+          {activeHotel.quickAnswer}
+        </QuickAnswer>
 
         <GuideJumpNav
 
@@ -216,7 +208,7 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
                               <div className="flex justify-between items-center mb-2">
 
-                                <span className={`text-[9px] font-bold font-mono px-2 py-0.5 rounded-full uppercase border ${
+                                <span className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded-full uppercase border ${
 
                                   room.category === "Luxury" ? "bg-amber-100 border-amber-300 text-amber-800" :
 
@@ -234,7 +226,7 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
                               </div>
 
-                              <h3 className="ural-card-title font-bold text-slate-800 text-sm">{room.name}</h3>
+                              <h3 className="ural-card-title font-serif font-bold text-slate-800 text-sm">{room.name}</h3>
 
                               <p className="text-[11px] text-text-muted mt-1 font-semibold italic flex items-center gap-1">
 
@@ -250,7 +242,7 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
                                 {room.features.slice(0, 3).map((f) => (
 
-                                  <span key={f} className="text-[9px] font-mono bg-slate-100 text-brand-navy px-2 py-0.5 rounded border border-slate-200">{f}</span>
+                                  <span key={f} className="text-[10px] font-mono bg-slate-100 text-brand-navy px-2 py-0.5 rounded border border-slate-200">{f}</span>
 
                                 ))}
 

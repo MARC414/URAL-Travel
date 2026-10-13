@@ -1,6 +1,7 @@
 import React from "react";
 
 import { GuideJumpNav } from "../components/GuideJumpNav";
+import { QuickAnswer } from "../components/QuickAnswer";
 
 import { AirHelpWidget } from "../components/AirHelpWidget";
 
@@ -74,21 +75,12 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
 
 
-        <div id="aeo-quick-answer-card" className="rounded-r-xl border-l-4 border-[#F6B73C] bg-slate-50 p-5">
-
-          <span className="mb-1 block font-mono text-[10px] font-bold tracking-widest text-brand-navy">
-
-            {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
-
-          </span>
-
-          <p className="font-sans text-sm leading-relaxed text-slate-800 sm:text-[14.5px]">
-
-            {activeRoute.quickAnswer}
-
-          </p>
-
-        </div>
+        <QuickAnswer
+          id="aeo-quick-answer-card"
+          label={isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
+        >
+          {activeRoute.quickAnswer}
+        </QuickAnswer>
 
         <GuideJumpNav
 

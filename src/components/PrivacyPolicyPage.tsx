@@ -354,7 +354,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
 
       {/* TABLE OF CONTENTS */}
       <section className="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 space-y-4">
-        <h2 className="text-sm font-bold font-mono uppercase text-[#F6B73C] tracking-wide">
+        <h2 className="text-sm font-bold uppercase text-[#F6B73C] tracking-wide">
           {isBn ? "সূচিপত্র (Table of Contents)" : "Table of Contents"}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs text-slate-300">

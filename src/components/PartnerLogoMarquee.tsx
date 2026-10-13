@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ExternalLink, Pause, Plane, Play } from "lucide-react";
+import React from "react";
+import { ExternalLink, Plane } from "lucide-react";
 import { AFFILIATE_LINKS, resolvePartnerUrl } from "./AffiliatePartners";
 import { Language } from "../translations";
 
@@ -29,7 +29,6 @@ interface PartnerItem {
  */
 export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "en" }) => {
   const isBn = lang === "bn";
-  const [isPaused, setIsPaused] = useState(false);
 
   const partners: PartnerItem[] = [
     {
@@ -216,7 +215,7 @@ export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "
       id="travel-booking-partners-section"
       aria-label={isBn ? "ট্রাভেল বুকিং পার্টনার" : "Travel booking partners"}
       aria-roledescription="carousel"
-      className={`partner-marquee ${isPaused ? "partner-marquee--paused" : ""}`}
+      className="partner-marquee"
     >
       <div className="partner-marquee__inner">
         <div className="partner-marquee__header">
@@ -236,32 +235,6 @@ export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "
             <span className="partner-marquee__count">
               {isBn ? "১৪টি পার্টনার · একসাথে ৫টি" : "14 partners · 5 shown at once"}
             </span>
-            <button
-              type="button"
-              className="partner-marquee__toggle"
-              onClick={() => setIsPaused((paused) => !paused)}
-              aria-pressed={isPaused}
-              aria-label={
-                isPaused
-                  ? isBn
-                    ? "পার্টনার লোগো স্ক্রল চালু করুন"
-                    : "Resume partner logo scrolling"
-                  : isBn
-                    ? "পার্টনার লোগো স্ক্রল থামান"
-                    : "Pause partner logo scrolling"
-              }
-            >
-              {isPaused ? <Play size={13} aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}
-              <span>
-                {isPaused
-                  ? isBn
-                    ? "চালু করুন"
-                    : "Resume"
-                  : isBn
-                    ? "থামান"
-                    : "Pause"}
-              </span>
-            </button>
           </div>
         </div>
 
@@ -340,26 +313,6 @@ export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "
           font: 500 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
           white-space: nowrap;
         }
-        .partner-marquee__toggle {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 6px;
-          min-height: 34px;
-          padding: 0 10px;
-          border: 1px solid #DCE3E8;
-          border-radius: 999px;
-          background: #fff;
-          color: #0B1426;
-          font: 700 11px/1 Inter, Arial, sans-serif;
-          cursor: pointer;
-          transition: background-color 160ms ease, border-color 160ms ease;
-        }
-        .partner-marquee__toggle:hover {
-          background: #F5F1E8;
-          border-color: #B7C1CA;
-        }
-        .partner-marquee__toggle:focus-visible,
         .partner-marquee__item:focus-visible {
           outline: 3px solid #0B1426;
           outline-offset: 3px;
@@ -378,7 +331,6 @@ export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "
           animation: ural-partner-marquee 76s linear infinite;
           will-change: transform;
         }
-        .partner-marquee--paused .partner-marquee__track,
         .partner-marquee__viewport:hover .partner-marquee__track,
         .partner-marquee__viewport:focus-within .partner-marquee__track {
           animation-play-state: paused;
@@ -514,7 +466,6 @@ export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "
           .partner-marquee__header { align-items: flex-start; margin-bottom: 12px; }
           .partner-marquee__description { font-size: 11px; }
           .partner-marquee__count { display: none; }
-          .partner-marquee__toggle { min-height: 32px; padding: 0 8px; }
           .partner-marquee__list-item { flex-basis: calc(50cqw - 6px); width: calc(50cqw - 6px); }
           .partner-marquee__item { min-height: 104px; padding: 10px 7px; }
           .partner-marquee__logo-lockup { min-height: 62px; gap: 4px; }
@@ -522,6 +473,36 @@ export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "
           .partner-marquee__wordmark { font-size: clamp(13px, 3.4vw, 15px); }
           .partner-marquee__wordmark--welcomePickups,
           .partner-marquee__wordmark--radicalStorage { font-size: clamp(11px, 3vw, 13px); }
+        }
+        /*
+          Touch devices get the same treatment as reduced-motion, and for the
+          same reason: this carousel's only pause controls are :hover and
+          :focus-within, and neither exists on a touch screen. Without this,
+          removing the Pause button would leave the majority of this site's
+          readers — who are on mid-range Android — watching a strip scroll with
+          no way to stop it, which is exactly what WCAG 2.2.2 (Pause, Stop,
+          Hide) exists to prevent.
+
+          On a device whose primary input cannot hover, the strip becomes a
+          swipeable, snapping rail instead of an animated one. Nobody loses a
+          partner: the full set is scrollable by hand, and the reader controls
+          the pace rather than the page. The clone group is hidden because it
+          exists only to make the animation loop seamlessly.
+        */
+        @media (hover: none) {
+          .partner-marquee__viewport {
+            overflow-x: auto;
+            mask-image: none;
+            -webkit-mask-image: none;
+            scrollbar-width: thin;
+            scroll-snap-type: x mandatory;
+          }
+          .partner-marquee__track {
+            animation: none;
+            will-change: auto;
+          }
+          .partner-marquee__group--clone { display: none; }
+          .partner-marquee__list-item { scroll-snap-align: start; }
         }
         @media (prefers-reduced-motion: reduce) {
           .partner-marquee__viewport {
@@ -532,8 +513,7 @@ export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "
             scroll-snap-type: x mandatory;
           }
           .partner-marquee__track { animation: none; will-change: auto; }
-          .partner-marquee__group--clone,
-          .partner-marquee__toggle { display: none; }
+          .partner-marquee__group--clone { display: none; }
           .partner-marquee__list-item { scroll-snap-align: start; }
           .partner-marquee__item { transition: none; }
         }

@@ -6,6 +6,21 @@ export const SITE_ORG_ID = `${BASE_URL}/#organization`;
 export const SITE_LOGO_ID = `${BASE_URL}/#logo`;
 export const SITE_WEBSITE_ID = `${BASE_URL}/#website`;
 
+/**
+ * The Wikidata item that identifies URAL as an entity.
+ *
+ * This is not decoration: `sameAs` is the machine-readable half of the claim the
+ * footer badge makes to humans. Search engines and answer engines use it to
+ * resolve "URAL Travel Intelligence" to one thing rather than to whichever page
+ * happens to rank. Keep this in step with the footer link in src/App.tsx.
+ *
+ * Note: Wikidata is a structured-data database, not Wikipedia. Neither is a
+ * source of dofollow links — every external link on every Wikimedia project
+ * carries rel="nofollow" and Wikipedia's own guideline states plainly that
+ * adding your site there does not help SEO. Its value here is identity.
+ */
+export const URAL_WIKIDATA_ENTITY_URL = "https://www.wikidata.org/wiki/Q141682382";
+
 export const URAL_SOCIAL_LINKS = {
   facebook: "https://web.facebook.com/uraltravelbd/",
   instagram: "https://www.instagram.com/uraltravelbd/",
@@ -140,6 +155,7 @@ export function getSiteGraphNodes() {
         URAL_SOCIAL_LINKS.linkedin,
         URAL_SOCIAL_LINKS.tiktok,
         URAL_SOCIAL_LINKS.whatsapp,
+        URAL_WIKIDATA_ENTITY_URL,
       ],
     },
     {

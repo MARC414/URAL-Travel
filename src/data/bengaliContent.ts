@@ -1,5 +1,6 @@
-import { BlogPost, FlightRoute, HotelGuide, VisaGuide, TripCostData } from "../types";
-import { BLOG_DATA, FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, TRIP_COSTS_DATA } from "../constants";
+import { BlogPost, DestinationGuide, FAQ, FlightRoute, HotelGuide, VisaGuide, TripCostData } from "../types";
+import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, TRIP_COSTS_DATA } from "../constants";
+import { BENGALI_DESTINATION_OVERRIDES } from "./bengaliDestinations";
 import { Language } from "../translations";
 import { HAJJ_UMRAH_FAQS } from "../hooks/useSeoMeta";
 
@@ -2440,6 +2441,27 @@ const BENGALI_COSTS_OVERRIDES: Record<string, Partial<TripCostData>> = {
   },
 };
 
+/**
+ * Destination guides (/destinations/*) in Bengali.
+ *
+ * These are the pages a Bengali reader reaches first when planning a trip, so
+ * they are translated at parity — itinerary, key facts and FAQs included — not
+ * summarised. The copy lives in src/data/bengaliDestinations.ts; this merge
+ * keeps the same { ...english, ...bengali } shape as every other locale helper.
+ *
+ * While a guide is still untranslated its Bengali page does NOT exist:
+ * /destinations is listed in DEFERRED_BN_GROUPS (src/utils/localeRoutes.ts)
+ * until all six are written, because a bn-BD page with an English body is
+ * worse than no Bengali page at all.
+ */
+export function getLocalizedDestinations(lang: Language): DestinationGuide[] {
+  if (lang === "en") return DESTINATIONS_DATA;
+  return DESTINATIONS_DATA.map((d) => {
+    const bn = BENGALI_DESTINATION_OVERRIDES[d.id];
+    return bn ? { ...d, ...bn } : d;
+  });
+}
+
 export function getLocalizedCosts(lang: Language): TripCostData[] {
   if (lang === "en") return TRIP_COSTS_DATA;
   return TRIP_COSTS_DATA.map((c) => {
@@ -2606,6 +2628,37 @@ function bnTitle(text: string): string {
   return `${bnClamp(clean, 60 - suffix.length)}${suffix}`;
 }
 
+/**
+ * Landing FAQs for the Bengali /destinations hub.
+ *
+ * The English hub answers four questions from LANDING_DESTINATION_FAQS. These
+ * are written for the Bengali reader rather than translated, and they carry the
+ * same facts the guides do - including that Thailand, Dubai and Singapore need
+ * an advance visa while Nepal and the Maldives do not.
+ */
+export const BENGALI_DESTINATION_HUB_FAQS: FAQ[] = [
+  {
+    question: "প্রথমবার বিদেশ ভ্রমণে বাংলাদেশিদের জন্য কোন গন্তব্যগুলো সবচেয়ে ভালো?",
+    answer:
+      "প্রথমবারের জন্য সবচেয়ে সহজ গন্তব্য নেপাল — আগে থেকে ভিসার দরকার নেই, ফ্লাইট মাত্র দেড় ঘণ্টার, আর দৈনিক খরচও অঞ্চলের মধ্যে সবচেয়ে কম। এরপর সাধারণত মালদ্বীপ (ফ্রি ভিসা অন অ্যারাইভাল, ৪ ঘণ্টার ফ্লাইট) আর মালয়েশিয়ার কথা আসে। থাইল্যান্ড, দুবাই ও সিঙ্গাপুরে যেতে আগে থেকেই ভিসা নিতে হয়, তাই সেগুলো দ্বিতীয় বা তৃতীয় ভ্রমণের জন্য বেশি উপযুক্ত।",
+  },
+  {
+    question: "ঢাকা থেকে সাধারণ বিদেশ ভ্রমণ কত দিনের হওয়া উচিত?",
+    answer:
+      "৪ থেকে ৫ দিনেই একটি শহর আর তার আশেপাশের মূল জায়গাগুলো আরামে ঘোরা যায় — এই গাইডগুলোর বেশিরভাগ রুট এই দৈর্ঘ্যের। নেপাল বা মালদ্বীপের মতো জায়গায় ৫ থেকে ৭ দিন নিলে গতি অনেক আরামদায়ক হয়, আর একসাথে একাধিক শহর ধরলে ৭ থেকে ১০ দিন লাগে। ঘুরতে যাওয়া আর ফেরার দিনগুলো হিসাব থেকে বাদ দিয়ে ভাবুন, কারণ ওই দিনগুলোতে ঘোরাঘুরির সময় প্রায় থাকে না।",
+  },
+  {
+    question: "বাংলাদেশি পর্যটকদের কি গাইডেড গ্রুপ ট্যুর দরকার, নাকি নিজে নিজে ঘোরা যায়?",
+    answer:
+      "এই গাইডগুলোর প্রায় সব রুটই নিজে নিজে ঘোরার কথা ধরে লেখা — হোটেল, ফ্লাইট আর স্থানীয় যাতায়াত আলাদা করে বুক করলে খরচ সাধারণত কম পড়ে। তবে ভিসার আবেদন, প্রথমবারের যাত্রা, বা বাবা-মা ও শিশু নিয়ে যাওয়ার সময় অনেকেই এজেন্সির সহায়তা নেন, কারণ তখন কাগজপত্রের কাজ সহজ হয়ে যায়। দুটোরই সুবিধা আছে; শুধু দেখে নিন প্যাকেজে বিমানভাড়া, ভিসা ফি আর টিপস আসলে কী কী ধরা আছে।",
+  },
+  {
+    question: "বাংলাদেশ থেকে কম খরচে বিদেশ ভ্রমণের জন্য কোন মাসগুলো ভালো?",
+    answer:
+      "স্কুলের ছুটি, ঈদ আর ডিসেম্বরের শেষের ভিড় এড়িয়ে যেতে পারলে বিমানভাড়া ও হোটেলের দাম অনেকটাই কমে। সাধারণভাবে ফেব্রুয়ারি–মার্চ আর সেপ্টেম্বর–অক্টোবর আন্তর্জাতিক ভ্রমণের জন্য ভালো সময় — আবহাওয়া সহনীয় থাকে আর দামও নিয়ন্ত্রণে থাকে। তবে গন্তব্য অনুযায়ী এটি বদলায়: নেপালে অক্টোবর–নভেম্বর, মালদ্বীপে নভেম্বর–এপ্রিল, আর থাইল্যান্ডে নভেম্বর–ফেব্রুয়ারি সবচেয়ে ভালো।",
+  },
+];
+
 const BENGALI_ROUTE_SEO: Record<string, BengaliSeoCopy> = {};
 
 // Flights — Bengali title from the localized route name, Bengali description
@@ -2652,6 +2705,21 @@ for (const cost of getLocalizedCosts("bn")) {
     title: bnTitle(`${country} ভ্রমণ খরচ: ঢাকা থেকে BDT বাজেট`),
     description: bnClamp(cost.quickAnswer, 160),
     h1: `ঢাকা থেকে ${country} ভ্রমণে কত টাকা লাগে? সম্পূর্ণ BDT বাজেট (২০২৬)`,
+  };
+}
+
+// Destination guides — the hand-written Bengali title becomes the H1 (and the
+// <title> after clamping), and the hand-written quick answer becomes the meta
+// description. Only guides that actually have Bengali content get a route, so a
+// future seventh destination cannot half-exist in Bengali by accident.
+for (const destination of getLocalizedDestinations("bn")) {
+  const bn = BENGALI_DESTINATION_OVERRIDES[destination.id];
+  if (!bn) continue;
+  const h1 = bn.title || destination.title;
+  BENGALI_ROUTE_SEO[`/destinations/${destination.id}`] = {
+    title: bnTitle(h1),
+    description: bnClamp(destination.quickAnswer, 160),
+    h1,
   };
 }
 

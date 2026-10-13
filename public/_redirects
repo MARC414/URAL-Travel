@@ -10,6 +10,7 @@
 /pre-departure  /sitemap      301
 /indexing       /sitemap      301
 /destinations/uae-guide  /destinations/dubai-guide  301
+/bn/destinations/uae-guide  /bn/destinations/dubai-guide  301
 
 # Retired blog slugs: keep older links and indexed URLs useful
 /blog/bangkok-medical-tourism-checkup-guide-bangladesh-bumrungrad-bangkok-hospital  /blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh  301

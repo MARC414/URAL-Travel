@@ -1195,7 +1195,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
 
         {/* Core Platform Hubs & Legal Transparency */}
         <div className="pt-6 border-t border-slate-200">
-          <h3 className="ural-card-title text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-3">
+          <h3 className="ural-card-title text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">
             {isBn ? "🏛️ মূল প্ল্যাটফর্ম হাব ও আইনগত তথ্য" : "🏛️ Core Platform Hubs & Legal Information"}
           </h3>
           <div className="flex flex-wrap gap-2 text-xs">

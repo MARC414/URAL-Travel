@@ -264,7 +264,7 @@ export function TravelpayoutsOnboarding() {
                   </div>
                   <div className="space-y-1">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest">{item.category}</span>
+                      <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">{item.category}</span>
                       <span className="text-[10px] bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded font-mono font-medium">🎥 Video @ {item.timestamp}</span>
                     </div>
                     <h4 className={`text-sm font-bold tracking-tight ${item.completed ? "text-slate-800 line-through decoration-slate-400" : "text-slate-900"}`}>
@@ -334,7 +334,7 @@ export function TravelpayoutsOnboarding() {
 
               {/* Right Simulator Panel (Col 7) */}
               <div className="lg:col-span-7 bg-slate-950 text-white rounded-2xl border border-slate-800 p-6 flex flex-col justify-between min-h-[360px] relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-3 bg-slate-900 border-b border-l border-slate-800 text-[9px] font-mono font-bold uppercase tracking-widest text-amber-400">
+                <div className="absolute top-0 right-0 p-3 bg-slate-900 border-b border-l border-slate-800 text-[10px] font-mono font-bold uppercase tracking-widest text-amber-400">
                   Drive AI Live Render Simulation
                 </div>
 
@@ -362,7 +362,7 @@ export function TravelpayoutsOnboarding() {
                         "For tourists seeking a safe, central, and buzzing zone, the absolute best choice is to{" "}
                         <span className="text-[#F6B73C] underline font-bold cursor-pointer hover:text-amber-300 relative inline-block group">
                           stay in Thamel
-                          <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[9px] font-mono py-0.5 px-2 rounded tracking-wider whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                          <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-mono py-0.5 px-2 rounded tracking-wider whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
                             affiliate_link_active
                           </span>
                         </span>
@@ -381,7 +381,7 @@ export function TravelpayoutsOnboarding() {
                       {/* Video-matched top 3 hotels block */}
                       <div className="bg-white border border-slate-200 text-slate-900 p-4 rounded-xl shadow-md space-y-3 font-sans">
                         <div className="flex items-center justify-between">
-                          <span className="text-[9px] bg-amber-500 text-white px-2 py-0.5 rounded font-mono font-bold uppercase tracking-wide">🏆 Recommended Stays (Kathmandu)</span>
+                          <span className="text-[10px] bg-amber-500 text-white px-2 py-0.5 rounded font-mono font-bold uppercase tracking-wide">🏆 Recommended Stays (Kathmandu)</span>
                           <span className="text-[10px] text-slate-400 font-medium">Score: 9.2/10</span>
                         </div>
                         
@@ -428,7 +428,7 @@ export function TravelpayoutsOnboarding() {
                           smartPreviewHovered ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"
                         }`}>
                           <div className="flex items-center justify-between">
-                            <span className="text-[9px] uppercase font-bold tracking-widest text-slate-400 font-mono">STATION PREVIEW</span>
+                            <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400 font-mono">STATION PREVIEW</span>
                             <span className="text-[10px] font-bold bg-indigo-50 text-indigo-700 px-1.5 py-0.5 rounded">9.1 out of 10</span>
                           </div>
                           <div>
@@ -481,8 +481,8 @@ export function TravelpayoutsOnboarding() {
 
                       {clickOfferLog.length > 0 && (
                         <div className="space-y-1">
-                          <span className="text-[9px] font-mono text-slate-500 block uppercase">Browser Tracking Console:</span>
-                          <div className="bg-slate-900 p-2.5 rounded border border-slate-800 text-[9px] font-mono text-slate-400 space-y-1">
+                          <span className="text-[10px] font-mono text-slate-500 block uppercase">Browser Tracking Console:</span>
+                          <div className="bg-slate-900 p-2.5 rounded border border-slate-800 text-[10px] font-mono text-slate-400 space-y-1">
                             {clickOfferLog.map((logLine, idx) => (
                               <div key={idx} className="truncate">{logLine}</div>
                             ))}

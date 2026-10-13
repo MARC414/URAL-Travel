@@ -13,6 +13,18 @@ import {
 // them EAGERLY: the prerendered article HTML is the SEO surface, so the text has
 // to be here. verify-build.ts fails if it ever stops being emitted.
 import { BLOG_BODY } from "../src/data/blogContent";
+// The visa-free pillar's content lives in one data file so the prerendered HTML
+// (this script), the React page (src/routes/VisaFreeCountriesRouteView.tsx) and
+// the FAQ schema can never disagree. See that file for the sourcing rules.
+import {
+  ALWAYS_CARRY,
+  COMMONLY_MISREAD,
+  LAST_VERIFIED as VISA_FREE_LAST_VERIFIED,
+  REMOTE_VISA_FREE,
+  REMOTE_VOA,
+  USABLE_NOW,
+  VISA_FREE_FAQS,
+} from "../src/data/visaFreeData";
 import {
   BASE_URL,
   breadcrumbSchema,
@@ -56,9 +68,11 @@ import {
 } from "../src/hooks/useSeoMeta";
 import {
   BENGALI_BLOG_OVERRIDES,
+  BENGALI_DESTINATION_HUB_FAQS,
   getBengaliRouteSeo,
   getLocalizedBlogs,
   getLocalizedCosts,
+  getLocalizedDestinations,
   getLocalizedFlights,
   getLocalizedHajjFaqs,
   getLocalizedHotels,
@@ -654,6 +668,7 @@ function renderVisaHubBody(title: string, description: string, faqSchema: Return
   return `<article>
     <h1>${escapeHtml(title)}</h1>
     <p>${escapeHtml(description)}</p>
+    <p>If you only need to know which destinations a Bangladeshi passport can enter with nothing arranged in advance, start with <a href="/visa-free-countries">visa-free countries for Bangladeshi passport holders</a> — it separates the destinations you can actually use from the ones that only look easy.</p>
     <p>This visa hub brings together entry-route, fee, processing-time and document guidance for popular destinations for Bangladeshi passport holders. Start with the country-specific guide below to understand whether the route described is visa-free, visa on arrival, electronic or an advance application. Requirements depend on the travel purpose, passport and current policy; the amounts and timeframes shown are guidance from the underlying destination pages, not an approval guarantee. Immigration rules can change without notice, so verify the latest requirements and application channel with the destination's official immigration department, embassy or authorized portal before booking or applying.</p>
     <section><h2>Country visa guides and application routes</h2><ul>${directory}</ul></section>
     <section><h2>Documents and steps by destination</h2>${guideDetails}</section>
@@ -749,7 +764,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       {
         question: "Which countries can Bangladeshi passport holders visit without a prior visa?",
         answer:
-          "Nepal and the Maldives grant free Visa on Arrival (with free online IMUGA declaration for the Maldives), while Sri Lanka issues an online Electronic Travel Authorization (ETA via eta.gov.lk) before departure. Bhutan requires an entry permit and a Sustainable Development Fee (SDF of Nu. 1,200/night). Note that Indonesia, Thailand, Malaysia, and Singapore do NOT grant Visa on Arrival to ordinary Bangladeshi passports, so an advance visa is required before flying from Dhaka. Indonesia's e-Visa is generally open to Bangladeshi applicants only through a local sponsor or guarantor, so most travellers apply for an embassy visa. Dubai's visa-on-arrival rules for Bangladeshi passports are conditional and change often, so confirm them with the UAE authorities before you book.",
+          "Nepal and the Maldives grant free Visa on Arrival (with free online IMUGA declaration for the Maldives), while Sri Lanka issues an online Electronic Travel Authorization (ETA via eta.gov.lk) before departure. Bhutan requires an entry permit and a Sustainable Development Fee (SDF of Nu. 1,200/night). Note that Indonesia, Thailand, Malaysia, and Singapore do NOT grant Visa on Arrival to ordinary Bangladeshi passports, so an advance visa is required before flying from Dhaka. Indonesia's e-Visa is generally open to Bangladeshi applicants only through a local sponsor or guarantor, so most travellers apply for an embassy visa. The UAE does not grant visa on arrival to ordinary Bangladeshi passports either: a Dubai or Abu Dhabi tourist visa must be arranged in advance through an airline, hotel, licensed agency or UAE sponsor, and it carries a fee. The UAE is not a visa-free destination for Bangladeshi passports.",
       },
       {
         question: "Is URAL a travel agency that sells tickets?",
@@ -865,7 +880,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         // ignore
       }
     }
-    const routeFaq = getFaqSchemaForPage("flights", r.id, false, routeUrl);
+    const routeFaq = getFaqSchemaForPage("flights", r.id, false, routeUrl, FLIGHTS_DATA);
     if (routeFaq) extraNodes.push(stripContext(routeFaq));
 
     routes.push({
@@ -973,7 +988,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         // ignore
       }
     }
-    const hotelFaq = getFaqSchemaForPage("hotels", h.id, false, hotelUrl);
+    const hotelFaq = getFaqSchemaForPage("hotels", h.id, false, hotelUrl, HOTELS_DATA);
     if (hotelFaq) extraNodes.push(stripContext(hotelFaq));
 
     routes.push({
@@ -1020,6 +1035,116 @@ function buildAllRoutes(): PrerenderRoute[] {
       `,
     });
   }
+
+  // 4b. Visa-Free Countries pillar (/visa-free-countries)
+  //
+  // The site's strongest natural link magnet: a factual, evergreen answer to
+  // "which countries can a Bangladeshi passport visit without a visa". Built
+  // entirely from src/data/visaFreeData.ts so the crawler HTML, the React page
+  // and the structured data cannot drift apart.
+  //
+  // Editorial stance: the visa-free list is long but mostly unusable, because
+  // reaching those destinations requires transiting a country a Bangladeshi
+  // passport holder needs a visa for. That correction is the value of the page —
+  // every competing article simply prints the list.
+  const visaFreeTitle =
+    "Visa-Free Countries for a Bangladeshi Passport (2026): What You Can Actually Use | URAL";
+  const visaFreeDesc =
+    "Which countries a Bangladeshi passport can enter without a prior visa in 2026 — the three usable directly from Dhaka, the full visa-free list, the transit-visa trap, and the destinations travellers wrongly assume are easy.";
+
+  // Kept typed (not stripContext'd) so renderLandingFaqs can read .mainEntity;
+  // the graph node below takes the stripped copy, as the visa hub does.
+  const visaFreeFaqNode = generateFAQSchema(VISA_FREE_FAQS, {
+    url: `${BASE_URL}/visa-free-countries`,
+    name: "Visa-free travel on a Bangladeshi passport — common questions",
+  });
+
+  const renderVisaFreeEntry = (entry: (typeof USABLE_NOW)[number]) => `
+            <section>
+              <h3>${escapeHtml(entry.country)}</h3>
+              <p><strong>${escapeHtml(entry.entry)}</strong> — maximum stay ${escapeHtml(entry.maxStay)}. Cost: ${escapeHtml(entry.cost)}. ${escapeHtml(entry.reach)}.</p>
+              <p>${escapeHtml(entry.note)}</p>
+              ${entry.caveat ? `<p>${escapeHtml(entry.caveat)}</p>` : ""}
+              <p><small>Source: ${escapeHtml(entry.source)}</small></p>
+            </section>`;
+
+  const visaFreeBodyHtml = `
+    <article>
+      <h1>Visa-Free Countries for a Bangladeshi Passport (2026)</h1>
+      <section id="visa-free-answer" aria-labelledby="visa-free-answer-heading">
+        <h2 id="visa-free-answer-heading">Quick Answer</h2>
+        <p>Direct from Dhaka, only three destinations require nothing arranged in advance: Nepal and the Maldives on a free visa on arrival, and Sri Lanka with an online ETA approved before you fly (USD 20 at the SAARC rate). The rest of the widely published list — Caribbean and Pacific island states — is genuinely visa-free, but reaching those countries means transiting a country that a Bangladeshi passport holder needs a visa for. The list is long; the usable part is not.</p>
+      </section>
+      <section aria-labelledby="visa-free-usable">
+        <h2 id="visa-free-usable">The ones you can actually use from Dhaka</h2>
+        <p>All three have direct flights from Dhaka, and none require an embassy visit.</p>
+        ${USABLE_NOW.map(renderVisaFreeEntry).join("\n")}
+        <p>Full step-by-step checklists: <a href="/visa/nepal-visa">Nepal visa guide</a>, <a href="/visa/maldives-visa">Maldives visa guide</a>, and <a href="/visa">all visa guides for Bangladeshi citizens</a>.</p>
+      </section>
+      <section aria-labelledby="visa-free-remote">
+        <h2 id="visa-free-remote">The rest of the list — and why it misleads</h2>
+        <p>These destinations require no visa in advance for a Bangladeshi passport. But getting to them from Dhaka almost always means transiting the United States, the United Kingdom, Europe or the Gulf, and a Bangladeshi passport holder needs a visa for those transit countries. A visa-free destination you cannot legally reach is not visa-free in any useful sense.</p>
+        <h3>Visa-free entry</h3>
+        <p>${REMOTE_VISA_FREE.map((item) => escapeHtml(remoteListLabel(item))).join(", ")}.</p>
+        <h3>Visa on arrival</h3>
+        <p>${REMOTE_VOA.map((item) => escapeHtml(remoteListLabel(item))).join(", ")}.</p>
+      </section>
+      <section aria-labelledby="visa-free-misread">
+        <h2 id="visa-free-misread">The ones people assume are easy — and aren't</h2>
+        <p>None of these will admit an ordinary Bangladeshi passport without a visa arranged first, and all of them are commonly assumed to.</p>
+        ${COMMONLY_MISREAD.map(
+          (entry) => `<section>
+              <h3>${escapeHtml(entry.country)}</h3>
+              <p><strong>${escapeHtml(entry.entry)}</strong> — ${escapeHtml(entry.cost)}, ${escapeHtml(entry.maxStay)}.</p>
+              <p>${escapeHtml(entry.note)}</p>
+              ${entry.caveat ? `<p>${escapeHtml(entry.caveat)}</p>` : ""}
+              <p><small>Source: ${escapeHtml(entry.source)}</small></p>
+            </section>`
+        ).join("\n")}
+      </section>
+      <section aria-labelledby="visa-free-carry">
+        <h2 id="visa-free-carry">Whatever the destination, carry these</h2>
+        <ul>${ALWAYS_CARRY.map((row) => `<li><strong>${escapeHtml(row.item)}</strong> — ${escapeHtml(row.detail)}</li>`).join("\n")}</ul>
+      </section>
+      ${renderLandingFaqs(
+        "visa-free-faqs",
+        "Visa-free travel on a Bangladeshi passport — common questions",
+        visaFreeFaqNode
+      )}
+      <section aria-labelledby="visa-free-verified">
+        <h2 id="visa-free-verified">How this list was verified</h2>
+        <p>Every rule on this page was cross-checked against the destination's immigration authority, embassy guidance and international passport indexing. Visa rules change often and rarely with notice, so confirm the current requirement on the destination's own immigration site or at its embassy in Dhaka before you book anything non-refundable. URAL does not process visa applications or issue visas.</p>
+        <p><small>Last verified: <time datetime="${VISA_FREE_LAST_VERIFIED}">${VISA_FREE_LAST_VERIFIED}</time></small></p>
+      </section>
+    </article>
+    `;
+
+  routes.push({
+    routePath: "/visa-free-countries",
+    canonicalUrl: `${BASE_URL}/visa-free-countries`,
+    title: visaFreeTitle,
+    description: visaFreeDesc,
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "Visa Guides", url: `${BASE_URL}/visa` },
+      { name: "Visa-Free Countries", url: `${BASE_URL}/visa-free-countries` },
+    ],
+    extraGraphNodes: [
+      ...(visaFreeFaqNode ? [stripContext(visaFreeFaqNode)] : []),
+      collectionPageSchema({
+        url: `${BASE_URL}/visa-free-countries`,
+        name: "Visa-free entry for Bangladeshi passport holders",
+        description: visaFreeDesc,
+        items: USABLE_NOW.map((entry) => ({
+          name: `${entry.country} — ${entry.entry}`,
+          url: `${BASE_URL}/visa`,
+          description: entry.note,
+        })),
+      }),
+    ],
+    bodyHtml: visaFreeBodyHtml,
+  });
 
   // 5. Visa Hub (/visa) + 6 Visa Guides (/visa/:id)
   const visaHubTitle = "Visa Requirements for Bangladeshi Citizens 2026: Guides & Checklists | URAL";
@@ -1070,7 +1195,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         // ignore
       }
     }
-    const vFaq = getFaqSchemaForPage("visa", v.id, false, visaUrl);
+    const vFaq = getFaqSchemaForPage("visa", v.id, false, visaUrl, VISA_DATA);
     if (vFaq) extraNodes.push(stripContext(vFaq));
 
     routes.push({
@@ -1090,6 +1215,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h1>${escapeHtml(title)}</h1>
           <p>${escapeHtml(v.quickAnswer || description)}</p>
           <p><strong>Entry route:</strong> ${escapeHtml(v.requirementType)} | <strong>Published fee/entry guidance:</strong> ${escapeHtml(v.costBdt)} | <strong>Indicative processing guidance:</strong> ${escapeHtml(v.processingTime)}</p>
+          <p>Comparing this route with the rest of the region? See <a href="/visa-free-countries">which countries a Bangladeshi passport can enter without a prior visa</a>.</p>
           <p>These details are an editorial planning summary, not an official decision. Rules, fees, forms and processing windows can change; verify the current requirements with the linked authority before applying or making non-refundable plans.</p>
           <h2>Key visa facts</h2>
           <ul>${v.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
@@ -1172,7 +1298,7 @@ function buildAllRoutes(): PrerenderRoute[] {
             : 95000,
       }),
     ];
-    const dFaq = getFaqSchemaForPage("destinations", d.id, false, destUrl);
+    const dFaq = getFaqSchemaForPage("destinations", d.id, false, destUrl, DESTINATIONS_DATA);
     if (dFaq) extraNodes.push(stripContext(dFaq));
 
     routes.push({
@@ -1197,6 +1323,10 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h2>Local transport options</h2>
           <ul>${d.localTransport.map((option) => `<li>${escapeHtml(option)}</li>`).join("")}</ul>
           <p><strong>Indicative local budget:</strong> ${escapeHtml(d.budgetBdt)}. Review international flights and current entry rules separately.</p>
+          <section>
+            <h2>${escapeHtml(d.country)} key facts for travelers from Bangladesh</h2>
+            <ul>${d.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
+          </section>
           ${renderLandingFaqs(`${d.id}-faqs`, `${d.country} itinerary questions for Bangladeshi travelers`, dFaq)}
         </article>
       `,
@@ -1245,7 +1375,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         ? "What a 5-day Nepal trip really costs from Bangladesh - flights, hotels, food, and transport in BDT, from budget (BDT 45,000) to luxury."
         : `Detailed BDT breakdown of flights, hotels, dining, and sightseeing costs for planning your trip from Dhaka to ${c.country}.`;
     const extraNodes: Record<string, unknown>[] = [];
-    const cFaq = getFaqSchemaForPage("costs", c.id, false, costUrl);
+    const cFaq = getFaqSchemaForPage("costs", c.id, false, costUrl, TRIP_COSTS_DATA);
     if (cFaq) extraNodes.push(stripContext(cFaq));
 
     routes.push({
@@ -1273,6 +1403,10 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h2>Budget planning tips</h2>
           <ul>${c.moneyHacks.map((tip) => `<li>${escapeHtml(tip)}</li>`).join("")}</ul>
           <p>These figures are planning estimates, not live quotes. Check current fares, hotel rates and exchange rates before booking.</p>
+          <section>
+            <h2>${escapeHtml(c.country)} cost facts at a glance</h2>
+            <ul>${c.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
+          </section>
           ${renderLandingFaqs(`${c.id}-faqs`, `${c.country} trip cost questions for Bangladeshi travelers`, cFaq)}
         </article>
       `,
@@ -1367,7 +1501,7 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/sitemap",
     canonicalUrl: `${BASE_URL}/sitemap`,
-    title: "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Complete 83-Page Sitemap | URAL",
+    title: "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Complete Site Directory | URAL",
     description:
       "Interactive pre-flight readiness checklist for Bangladeshi travelers departing Dhaka Airport (DAC), cabin & Zamzam baggage rules, Embassy emergency helplines, and complete 83-page directory.",
     imageUrl: defaultOgImage,
@@ -1378,7 +1512,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     extraGraphNodes: [sitemapFaq],
     bodyHtml: `
       <article>
-        <h1>Dhaka Airport (DAC) Pre-Departure Readiness Checklist &amp; Complete 83-Page Sitemap</h1>
+        <h1>Dhaka Airport (DAC) Pre-Departure Readiness Checklist &amp; Complete Site Directory</h1>
         <p>Interactive pre-flight checklist for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC), cabin &amp; 5L Zamzam baggage rules, Bangladesh Embassy emergency helplines abroad, and direct links to the travel guides.</p>
         ${renderLandingFaqs("sitemap-predeparture-faqs", "Dhaka Airport pre-departure and baggage questions", sitemapFaqSchema)}
       </article>
@@ -1394,6 +1528,12 @@ function buildAllRoutes(): PrerenderRoute[] {
     description:
       "Connect directly with our flight & visa support desk at +8801784385335. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.",
     imageUrl: defaultOgImage,
+    // The hero photo is the page's LCP element and is rendered client-side, so
+    // this preload is what decides the fetch. Emitted as AVIF (see the comment
+    // block in prerenderDistHtmlFiles); keep it in step with ResponsiveImage's
+    // first <source> or supporting browsers download the image twice.
+    lcpImageUrl: `/assets/images/contact_support_desk_agent_1791600000000-1200.webp`,
+    lcpImageSizes: "100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Contact Us", url: `${BASE_URL}/contact` },
@@ -1424,6 +1564,81 @@ function buildAllRoutes(): PrerenderRoute[] {
           </ul>
         </section>
         ${renderLandingFaqs("contact-desk-faqs", "Questions about URAL travel support and BDT booking", contactFaq)}
+      </article>
+    `,
+  });
+
+  // 11b. About / Editorial Standards (/about)
+  //
+  // This route existed in the app but was never prerendered, which meant the
+  // page holding the founder profile, the Organization and Person entities and
+  // the editorial-policy story was invisible to search engines — and 404'd for
+  // anyone who refreshed it or opened a shared link, because no about.html was
+  // written. The body below is written prose rather than a summary stub: it is
+  // the crawlable half of the page, and the thing an answer engine reads when
+  // asked who publishes this site.
+  routes.push({
+    routePath: "/about",
+    canonicalUrl: `${BASE_URL}/about`,
+    title: "About URAL Travel Intelligence | Farhan Momen, Founder & Travel Editor",
+    description:
+      "URAL is an independent travel intelligence desk in Dhaka — not a travel agency. Who writes it, how each guide is sourced and dated, and how the site is funded.",
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "About", url: `${BASE_URL}/about` },
+    ],
+    extraGraphNodes: [],
+    bodyHtml: `
+      <article>
+        <h1>About URAL: Travel Intelligence, Not a Travel Agency</h1>
+        <p>URAL is an independent outbound-travel desk in Dhaka. It publishes flight-fare guidance in Bangladeshi Taka, visa checklists built from official sources, Umrah and Hajj planning material, and trip budgets a family in Bangladesh can compare against its own income. It does not sell tickets, and it does not process visa applications.</p>
+
+        <section>
+          <h2>Who writes it</h2>
+          <p>Every guide on this site is written and edited by <strong>Farhan Momen</strong>, founder and travel editor. URAL is a single-editor publication, not a content farm: the same person researches the visa rule, prices the flights in BDT, and answers the WhatsApp messages when a reader disagrees with something on the page. That is unusual for a travel site, and it is the main reason the information here is dated and sourced rather than endlessly reworded from somewhere else.</p>
+        </section>
+
+        <section>
+          <h2>How the guides are researched</h2>
+          <p>Each guide starts with the authority that actually decides the question — an immigration department, an embassy, an airline's own baggage policy, or a government portal — and works backwards to the traveller. Where the official position is unclear, the page says so instead of choosing an answer that sounds confident. Where sources disagree, both are given with their dates.</p>
+          <p>Visa and fee pages carry the date they were last checked, because these rules change without notice and a page that hides its age cannot be trusted on a topic this volatile. The <a href="/visa-free-countries">visa-free countries guide for Bangladeshi passports</a> is the clearest example of the approach: it separates the destinations a Bangladeshi passport can genuinely use from the much longer list that only looks usable, because reaching those places requires transiting a country that requires a visa.</p>
+          <p>Prices are published as planning estimates in BDT, not as quotes. Fares, hotel rates and fees move constantly, and the pages say so rather than presenting a snapshot as a promise.</p>
+        </section>
+
+        <section>
+          <h2>How URAL is funded</h2>
+          <p>Some outbound links are affiliate links. If you book a hotel, an eSIM or an airport transfer through one of them, the partner pays URAL a commission and you pay exactly the same price. That is the entire revenue model — there is no sponsored content, no paid placement inside a guide, and no airline or hotel that can pay to change what a page says. The arrangement is disclosed in full in the footer of every page and in the <a href="/privacy">privacy and cookie policy</a>.</p>
+          <p>Because the commission comes from the booking rather than from advertising, the incentive is to write pages that are accurate enough to be worth returning to.</p>
+        </section>
+
+        <section>
+          <h2>Correcting mistakes</h2>
+          <p>Travel rules are exactly the kind of information that goes stale quietly, and a wrong visa detail can cost someone a denied boarding rather than an inconvenience. If a page here is wrong, the fastest correction is a message to the <a href="/contact">support desk</a> — the WhatsApp number and the form both reach the same person who writes the pages. Corrections are made to the page itself rather than appended as a note, and the verification date is updated with them.</p>
+        </section>
+
+        <section>
+          <h2>Bengali and English</h2>
+          <p>URAL publishes in both Bengali and English, and Bengali pages are written for Bengali readers rather than machine-translated from the English. The English edition is currently the more complete of the two: Bengali coverage is being brought to full parity section by section, starting with destination itineraries, visa rules and trip costs, because those are the pages a Bengali reader searches for first.</p>
+          <p>Where a Bengali page is a summary rather than a full translation, it is a summary by design and not a translation of the research. This page states that plainly because a reader planning around a visa rule or a fee needs to know how much of the detail they are getting.</p>
+        </section>
+
+        <section>
+          <h2>Where to start</h2>
+          <ul>
+            <li><a href="/visa-free-countries">Which countries a Bangladeshi passport can enter without a prior visa</a> — and which of them you can actually reach from Dhaka.</li>
+            <li><a href="/visa">Visa guides and checklists by country</a> — Nepal, Maldives, Thailand, Malaysia, Singapore and the UAE.</li>
+            <li><a href="/costs">What an international trip costs in BDT</a> — per-head budgets by destination.</li>
+            <li><a href="/tools">Travel calculators and pre-departure tools</a> — currency conversion, packing and airport checks.</li>
+            <li><a href="/umrah">Umrah and Hajj planning from Bangladesh</a> — Nusuk permits, hotel zones and BDT costs.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Contact</h2>
+          <p>URAL is a small desk, not a call centre. WhatsApp is the fastest route, on +880 1784-385335, and the <a href="/contact">contact form</a> reaches the same inbox.</p>
+          <p><small>Published by URAL Travel Intelligence, Dhaka, Bangladesh.</small></p>
+        </section>
       </article>
     `,
   });
@@ -1709,6 +1924,36 @@ const BN_COST_CATEGORY_LABELS: Record<string, string> = {
   "Speedboat / Ferry Transfers": "স্পিডবোট / ফেরি ট্রান্সফার",
 };
 
+/**
+ * Bengali digits for counts and durations in rendered Bengali bodies.
+ *
+ * The hand-written Bengali content uses Bengali digits for counts and durations
+ * ("৫ দিন", "১৫,০০০ দোকান") while leaving BDT amounts and app names in Latin.
+ * Rendered bodies must follow the same rule, otherwise a page mixes "৫ দিনের
+ * রুট" in its prose with "5 দিনের" in its heading.
+ */
+const BN_DIGITS = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+function bnDigits(value: number | string): string {
+  return String(value).replace(/[0-9]/g, (digit) => BN_DIGITS[Number(digit)]);
+}
+
+/**
+ * Renders one entry of the remote visa-free / visa-on-arrival lists.
+ *
+ * The detail used to be baked into the name string ("Cambodia (USD 30, 30
+ * days)"). It is now a separate field so the Bengali list can carry its own
+ * wording, so this reproduces the original form exactly for English and the
+ * same shape for Bengali.
+ */
+function remoteListLabel(
+  item: { name: string; nameBn: string; detail?: string; detailBn?: string },
+  bengali = false
+): string {
+  const base = bengali ? item.nameBn : item.name;
+  const detail = bengali ? item.detailBn : item.detail;
+  return detail ? `${base} (${detail})` : base;
+}
+
 function bnSection(heading: string, inner: string): string {
   return `<section><h2>${escapeHtml(heading)}</h2>${inner}</section>`;
 }
@@ -1730,6 +1975,14 @@ function bnLinkList(
   links: { label: string; path: string }[]
 ): string {
   const items = links
+    // Resolve aliases BEFORE the availability check and the /bn conversion.
+    // The English renderer already does this (normalizeInternalHref in the blog
+    // link builder); the Bengali one did not, so a Bengali link to the
+    // /pre-departure alias became /bn/pre-departure — a 404 — even though
+    // /pre-departure aliases to /sitemap, which does have a Bengali page. Three
+    // blog pages shipped that broken link. Every Bengali internal link is built
+    // here, so fixing the order here fixes all of them.
+    .map((link) => ({ ...link, path: normalizeInternalHref(link.path) }))
     .filter((link) => link.label && hasBengaliCounterpart(link.path))
     .map(
       (link) =>
@@ -1803,6 +2056,53 @@ function bnCountryCrossLinks(
   if (visa) push(`/visa/${visa.id}`, "ভিসার নিয়ম, ডকুমেন্ট চেকলিস্ট ও ফি");
   if (cost) push(`/costs/${cost.id}`, "৫ দিনের সম্পূর্ণ BDT খরচের হিসাব");
   return links;
+}
+
+/**
+ * Bengali crawl body for the /destinations hub.
+ *
+ * The English hub carries about 1,180 words. A Bengali hub that only listed six
+ * links would be a thin page - the exact failure this programme exists to fix -
+ * so all four of its sections are written in Bengali rather than translated
+ * sentence for sentence: an orientation paragraph, the guide directory with the
+ * best-time and budget notes read from the Bengali data, a comparison section
+ * describing each route's shape, and planning advice.
+ *
+ * The directory is gated on getBengaliRouteSeo(), the same check the route
+ * builder uses, so a destination without Bengali copy can never be linked from
+ * here as a Bengali page.
+ */
+function bnDestinationsHubBody(): string {
+  const guides = getLocalizedDestinations("bn").filter(
+    (guide) => getBengaliRouteSeo(`/destinations/${guide.id}`) !== null
+  );
+  const directory = guides
+    .map(
+      (guide) =>
+        `<li><a href="/bn/destinations/${escapeHtml(guide.id)}">${escapeHtml(guide.country)} ভ্রমণ গাইড</a> — যাওয়ার সেরা সময়: ${escapeHtml(guide.bestTimeToVisit)}; আনুমানিক স্থানীয় বাজেট: ${escapeHtml(guide.budgetBdt)}।</li>`
+    )
+    .join("");
+  const guideDetails = guides
+    .map(
+      (guide) => `
+      <section>
+        <h3>ঢাকা থেকে ${escapeHtml(guide.country)}: রুটের ধরন</h3>
+        <p>এই গাইডে ${bnDigits(guide.itinerary.length)} দিনের রুট আছে — থামার জায়গাগুলোর মধ্যে ${guide.itinerary
+        .map((day) => escapeHtml(day.title))
+        .join(", ")}। স্থানীয় যাতায়াতের অংশে ${bnDigits(guide.localTransport.length)}টি বিকল্প তুলনা করা হয়েছে। অর্থ খরচের হিসাবসহ বিস্তারিত দেখতে গাইডটি খুলুন।</p>
+      </section>`
+    )
+    .join("");
+  return `
+    <p>নিচের গাইডগুলো একটা সাধারণ ইচ্ছাকে কাজের ভ্রমণ পরিকল্পনায় বদলে দিতে সাহায্য করবে। প্রতিটি পাতায় দিনভিত্তিক রুট, যাওয়ার উপযুক্ত সময়, স্থানীয় যাতায়াতের বিকল্প আর টাকায় বাজেটের হিসাব একসাথে দেওয়া আছে — তাই কোথায় যাবেন ঠিক করার আগেই কোন যাত্রার গতি ও ধরন আপনার সঙ্গে মানাবে, সেটা মিলিয়ে নিতে পারবেন।</p>
+    <p>এগুলো ধরা-বাঁধা ট্যুর নয়, শুরুর খসড়া। ফ্লাইট কখন পৌঁছাবে, পরিবারের কারও হাঁটার সমস্যা আছে কি না, নামাজ ও খাবারের সময়, স্থানীয় বন্ধের দিন আর আবহাওয়া — এসব মিলিয়ে নিজের মতো বদলে নিন। ভিসা ও প্রবেশের নিয়ম আলাদাভাবে যাচাই করুন, আর রওনা হওয়ার আগে যাতায়াতের সময়সূচি, টিকিটের দাম ও খোলা-বন্ধের সময় আবার মিলিয়ে নিন।</p>
+    <section><h2>বাংলাদেশি ভ্রমণকারীদের জন্য গন্তব্য গাইড</h2><ul>${directory}</ul></section>
+    <section><h2>কোন রুট কেমন — এক নজরে তুলনা</h2>${guideDetails}</section>
+    <section><h2>রুটটা নিজের মতো সাজিয়ে নেওয়ার উপায়</h2>
+      <p>শুরু করুন রাতের সংখ্যা আর ফ্লাইটের নির্দিষ্ট সময় দিয়ে। একই দিনে দীর্ঘ আন্তঃনগর যাত্রা আর সময়-বাঁধা একাধিক দর্শনীয় স্থান একসাথে রাখবেন না। প্রতিটি হোটেলের আসল অবস্থান রুটের সঙ্গে মিলিয়ে দেখুন, আর যানজট, বিশ্রাম ও খারাপ আবহাওয়ার জন্য বাড়তি সময় রেখে দিন। একাধিক শহরে গেলে সড়ক, রেল ও বিমান — তিনটিরই সময় ও মোট খরচ তুলনা করুন; সবচেয়ে দ্রুত বিকল্পটাই যে সবচেয়ে সুবিধাজনক, তা ধরে নেবেন না।</p>
+      <p>পরিবার নিয়ে গেলে বা প্রথমবার বিদেশ যাওয়ার সময় হোটেল বারবার বদলানো কম রাখাই ভালো। খাবার, কেনাকাটা, সংস্কৃতি, প্রকৃতি বা ধর্মীয় স্থান — কোনটায় আগ্রহ বেশি সেটা ঠিক করে নিলে দিনের রুট থেকে অপ্রয়োজনীয় অংশ বাদ দিয়ে নিজের মতো সাজিয়ে নিতে পারবেন। এখানে দেওয়া বাজেট ও ঋতুর তথ্য আনুমানিক; টিকিটের দাম, স্থানীয় যাতায়াতের ভাড়া আর খোলা-বন্ধের সময় নির্ভরযোগ্য সূত্র থেকে মিলিয়ে নিন।</p>
+    </section>
+    ${bnFaqList("বাংলাদেশ থেকে আন্তর্জাতিক ভ্রমণ পরিকল্পনা: সাধারণ প্রশ্ন", BENGALI_DESTINATION_HUB_FAQS)}`;
 }
 
 /** Bengali crawl body for one route — always ends with internal links. */
@@ -2020,6 +2320,74 @@ function buildBengaliBody(
     return `<article>${parts.join("")}</article>`;
   }
 
+  if (group === "destinations") {
+    if (id) {
+      const destination = getLocalizedDestinations("bn").find((item) => item.id === id);
+      if (destination) {
+        // Cross-links match on the English country string, which is what the
+        // flights/hotels/visa/costs datasets use. Bengali country names such as
+        // "সংযুক্ত আরব আমিরাত" would match nothing and silently drop the links.
+        const englishCountry =
+          DESTINATIONS_DATA.find((entry) => entry.id === id)?.country ??
+          destination.country;
+
+        const days = destination.itinerary
+          .map(
+            (day) =>
+              `<li><strong>দিন ${bnDigits(day.day)} — ${escapeHtml(day.title)}:</strong> ${day.activities.map(escapeHtml).join("; ")}</li>`
+          )
+          .join("");
+        if (days) {
+          parts.push(
+            bnSection(
+              `${bnDigits(destination.itinerary.length)} দিনের রুট পরিকল্পনা`,
+              `<ol>${days}</ol>`
+            )
+          );
+        }
+
+        const transport = destination.localTransport
+          .filter((option) => option && option.trim())
+          .map((option) => `<li>${escapeHtml(option)}</li>`)
+          .join("");
+        if (transport) {
+          parts.push(bnSection("স্থানীয় যাতায়াত", `<ul>${transport}</ul>`));
+        }
+
+        parts.push(
+          bnSection(
+            "আনুমানিক স্থানীয় বাজেট",
+            `<p>${escapeHtml(destination.budgetBdt)}। আন্তর্জাতিক বিমানভাড়া ও সাম্প্রতিক ভিসা নিয়ম আলাদাভাবে মিলিয়ে নিন।</p>`
+          )
+        );
+
+        parts.push(
+          bnSection(
+            `${escapeHtml(destination.country)} সম্পর্কে জরুরি তথ্য`,
+            bnFactList(destination.keyFacts)
+          )
+        );
+
+        parts.push(
+          bnFaqList(
+            `${escapeHtml(destination.country)} ভ্রমণ নিয়ে সাধারণ প্রশ্ন`,
+            destination.faqs
+          )
+        );
+
+        parts.push(
+          bnLinkList(
+            "এই ট্রিপের বাকি পরিকল্পনা",
+            bnCountryCrossLinks(englishCountry, englishPath)
+          )
+        );
+      }
+    } else {
+      parts.push(bnDestinationsHubBody());
+    }
+    return `<article>${parts.join("")}</article>`;
+  }
+
   if (group === "umrah") {
     parts.push(
       bnFaqList("উমরাহ ও হজ: সাধারণ প্রশ্ন", getLocalizedHajjFaqs("bn"))
@@ -2033,6 +2401,100 @@ function buildBengaliBody(
     return `<article>${parts.join("")}</article>`;
   }
 
+  // The visa-free pillar has its own hand-written Bengali body, because it is
+  // the site's strongest link magnet and its Bengali page was the worst ratio
+  // on the site: 1,755 English crawlable words against 55. Every field comes
+  // from the `bn` twin held next to the English original in
+  // src/data/visaFreeData.ts, so the two languages cannot drift apart.
+  if (englishPath === "/visa-free-countries") {
+    const bnEntryCard = (
+      entry: (typeof USABLE_NOW)[number] | (typeof COMMONLY_MISREAD)[number],
+      withSource = false
+    ) =>
+      `<section><h3>${escapeHtml(entry.bn.country)}</h3>` +
+      `<p><strong>${escapeHtml(entry.bn.entry)}</strong> — ${escapeHtml(
+        entry.bn.cost
+      )}, ${escapeHtml(entry.bn.maxStay)}।</p>` +
+      `<p>${escapeHtml(entry.bn.note)}</p>` +
+      (entry.bn.caveat ? `<p>${escapeHtml(entry.bn.caveat)}</p>` : "") +
+      (withSource ? `<p><small>সূত্র: ${escapeHtml(entry.bn.source)}</small></p>` : "") +
+      `</section>`;
+
+    parts.push(
+      bnSection(
+        "সংক্ষিপ্ত উত্তর",
+        `<p>ঢাকা থেকে সরাসরি, আগে কিছু না করে যাওয়া যায় মাত্র তিনটি গন্তব্যে — নেপাল ও মালদ্বীপে ফ্রি ভিসা অন অ্যারাইভালে, আর শ্রীলংকায় উড়ার আগেই অনুমোদিত অনলাইন ETA-তে (SAARC রেটে USD 20)। বাকি যে তালিকাটি সব জায়গায় দেখা যায় — ক্যারিবিয়ান ও প্রশান্ত মহাসাগরের দ্বীপরাষ্ট্র — সেগুলো সত্যিই ভিসা-মুক্ত, কিন্তু সেখানে পৌঁছাতে এমন দেশ দিয়ে ট্রানজিট করতে হয় যার জন্য বাংলাদেশি পাসপোর্টধারীর ভিসা লাগে। তালিকাটি লম্বা; ব্যবহারযোগ্য অংশটি নয়।</p>`
+      )
+    );
+
+    parts.push(
+      bnSection(
+        "ঢাকা থেকে সত্যিই ব্যবহার করা যায়",
+        `<p>তিনটিতেই ঢাকা থেকে সরাসরি ফ্লাইট আছে, আর কোনোটিতেই দূতাবাসে যেতে হয় না।</p>` +
+          USABLE_NOW.map((entry) => bnEntryCard(entry)).join("\n")
+      )
+    );
+
+    parts.push(
+      bnSection(
+        "বাকি তালিকা — আর কেন এটি বিভ্রান্ত করে",
+        `<p>এই গন্তব্যগুলোতে আগে থেকে ভিসা লাগে না। কিন্তু ঢাকা থেকে সেখানে পৌঁছাতে প্রায় সবসময় আমেরিকা, ব্রিটেন, ইউরোপ বা উপসাগরীয় দেশ দিয়ে ট্রানজিট করতে হয়, আর ওই ট্রানজিট দেশে ঢুকতে বাংলাদেশি পাসপোর্টধারীর ভিসা লাগে। যে ভিসা-মুক্ত গন্তব্যে বৈধভাবে পৌঁছানোই যায় না, তা কোনো কাজে আসে না।</p>` +
+          `<h3>সম্পূর্ণ ভিসা-মুক্ত</h3><p>${REMOTE_VISA_FREE.map((item) =>
+            escapeHtml(remoteListLabel(item, true))
+          ).join(", ")}।</p>` +
+          `<h3>অন-অ্যারাইভাল ভিসা</h3><p>${REMOTE_VOA.map((item) =>
+            escapeHtml(remoteListLabel(item, true))
+          ).join(", ")}।</p>`
+      )
+    );
+
+    parts.push(
+      bnSection(
+        "যেগুলো সহজ ভাবা হয়, কিন্তু সহজ নয়",
+        COMMONLY_MISREAD.map((entry) => bnEntryCard(entry, true)).join("\n")
+      )
+    );
+
+    parts.push(
+      bnSection(
+        "গন্তব্য যেটিই হোক, সঙ্গে রাখুন",
+        `<ul>${ALWAYS_CARRY.map(
+          (row) =>
+            `<li><strong>${escapeHtml(row.itemBn)}</strong> — ${escapeHtml(
+              row.detailBn
+            )}</li>`
+        ).join("\n")}</ul>`
+      )
+    );
+
+    parts.push(
+      bnFaqList(
+        "ভিসা-মুক্ত ভ্রমণ নিয়ে সাধারণ প্রশ্ন",
+        VISA_FREE_FAQS.map((faq) => ({
+          question: faq.questionBn,
+          answer: faq.answerBn,
+        }))
+      )
+    );
+
+    parts.push(
+      bnSection(
+        "এই তালিকা কীভাবে যাচাই করা হয়েছে",
+        `<p>এই পাতার প্রতিটি নিয়ম গন্তব্য দেশের ইমিগ্রেশন কর্তৃপক্ষ, দূতাবাসের নির্দেশনা ও আন্তর্জাতিক পাসপোর্ট সূচকের সঙ্গে মিলিয়ে দেখা হয়েছে। ভিসার নিয়ম প্রায়ই বদলায় এবং আগাম জানানো হয় না, তাই অফেরতযোগ্য কিছু বুক করার আগে গন্তব্য দেশের নিজস্ব ইমিগ্রেশন সাইট বা ঢাকার দূতাবাস থেকে সর্বশেষ শর্তটি যাচাই করে নিন। URAL ভিসার আবেদন প্রক্রিয়া করে না বা ভিসা ইস্যু করে না।</p><p><small>সর্বশেষ যাচাই: <time datetime="${VISA_FREE_LAST_VERIFIED}">${VISA_FREE_LAST_VERIFIED}</time></small></p>`
+      )
+    );
+
+    parts.push(
+      bnLinkList("প্রতিটি গন্তব্যের বিস্তারিত চেকলিস্ট", [
+        { label: "নেপাল ভিসা গাইড", path: "/visa/nepal-visa" },
+        { label: "মালদ্বীপ ভিসা গাইড", path: "/visa/maldives-visa" },
+        { label: "বাংলাদেশি নাগরিকদের জন্য সব ভিসা গাইড", path: "/visa" },
+      ])
+    );
+
+    return `<article>${parts.join("")}</article>`;
+  }
+
   // Home + static/hub pages: Bengali intro plus a directory of the main hubs.
   const hubLinks = [
     { label: "ফ্লাইট গাইড", path: "/flights" },
@@ -2040,7 +2502,7 @@ function buildBengaliBody(
     { label: "ভিসা গাইড", path: "/visa" },
     { label: "ভ্রমণ খরচ", path: "/costs" },
     { label: "উমরাহ প্ল্যানার", path: "/umrah" },
-    { label: "৪৬টি ট্রাভেল ব্লগ", path: "/blog" },
+    { label: `সব ${bnDigits(BLOG_DATA.length)}টি ট্রাভেল ব্লগ`, path: "/blog" },
   ];
   parts.push(bnLinkList("কোথা থেকে শুরু করবেন", hubLinks));
   return `<article>${parts.join("")}</article>`;
@@ -2092,6 +2554,13 @@ function bnGuidanceFor(group: string): string[] {
       "আবেদন করার আগে পাসপোর্টের মেয়াদ (সাধারণত যাত্রার পর অন্তত ৬ মাস), দুই কপি ছবি, ব্যাংক স্টেটমেন্ট, এনওসি/ট্রেড লাইসেন্স এবং ট্রাভেল ইনস্যুরেন্স—এই ডকুমেন্টগুলো প্রস্তুত রাখুন। ফরম্যাট বা মেয়াদ সংক্রান্ত নিয়ম দেশভেদে আলাদা, তাই অফিসিয়াল সাইটের সর্বশেষ নির্দেশনা মানুন।",
       "ভিসা ফি ও সার্ভিস চার্জের পাশাপাশি প্রসেসিং সময় হিসাব করে টিকিটের তারিখ ঠিক করুন। অনেক ক্ষেত্রে ভিসা না পাওয়া পর্যন্ত নন-রিফান্ডেবল টিকিট কেনা ঝুঁকিপূর্ণ।",
       "এই পাতার তথ্য ২০২৬ সালের যাচাইকৃত সারসংক্ষেপ। নিয়ম বা ফি পরিবর্তিত হলে সংশ্লিষ্ট দেশের ইমিগ্রেশন বা দূতাবাসের ওয়েবসাইটই চূড়ান্ত সূত্র হিসেবে বিবেচ্য।",
+    ];
+  }
+  if (group === "destinations") {
+    return [
+      "এই রুটটা একটা খসড়া, চূড়ান্ত সূচি নয়। ফ্লাইট কখন পৌঁছাবে, পরিবারের কারও হাঁটার সমস্যা আছে কি না, নামাজের সময় আর স্থানীয় বন্ধের দিন — এসব মিলিয়ে দিনের ক্রম বদলে নিন। এক দিনে দুটোর বেশি দূরের জায়গা রাখবেন না; একটা বাদ দিলে বাকিটা আরামে দেখা যায়।",
+      "রওনা হওয়ার আগে প্রবেশের নিয়ম আলাদাভাবে যাচাই করে নিন — ভিসা লাগবে কি না, কত দিনের, আর ব্যাংক স্টেটমেন্ট বা স্পনসরের কাগজ দরকার কি না। অনেক দেশে এই নিয়ম বছরের মধ্যেই বদলায়, তাই পুরনো ব্লগ বা ফোরামের পোস্টের ওপর ভরসা না করে অফিসিয়াল সূত্র দেখুন।",
+      "খরচ দুটো ভাগে ভাবুন: আগেই যেগুলো লাগে (বিমানভাড়া, ভিসা ফি, কিছু অ্যাট্রাকশনের টিকিট) আর জায়গায় গিয়ে যেগুলো লাগে (হোটেল, খাবার, স্থানীয় যাতায়াত, কেনাকাটা)। এখানে দেওয়া বাজেট দ্বিতীয় ভাগের, আর বিনিময় হার ও মৌসুমি দাম অনুযায়ী ১৫–২৫% ওঠানামা করতে পারে।",
     ];
   }
   if (group === "costs") {
@@ -2185,6 +2654,38 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
             inLanguage: "bn-BD",
           })
         );
+      }
+    } else if (englishPath === "/destinations") {
+      // The hub's four landing answers, written in Bengali and marked bn-BD.
+      // The English hub's own FAQPage node is never copied here, so an English
+      // answer cannot end up on a Bengali page.
+      const bnHubFaq = stripContext(
+        generateFAQSchema(BENGALI_DESTINATION_HUB_FAQS, {
+          url: canonicalUrl,
+          name: copy.title,
+        })
+      );
+      bnHubFaq["@id"] = `${canonicalUrl}#faq`;
+      bnHubFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+      bnHubFaq["inLanguage"] = "bn-BD";
+      extraGraphNodes.push(bnHubFaq);
+    } else if (englishPath === "/visa-free-countries") {
+      // Built from the Bengali answers only, never from the English node, so an
+      // English question cannot reach the Bengali page.
+      const bnVisaFreeFaq = stripContext(
+        generateFAQSchema(
+          VISA_FREE_FAQS.map((faq) => ({
+            question: faq.questionBn,
+            answer: faq.answerBn,
+          })),
+          { url: canonicalUrl, name: copy.title }
+        )
+      );
+      if (bnVisaFreeFaq) {
+        bnVisaFreeFaq["@id"] = `${canonicalUrl}#faq`;
+        bnVisaFreeFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+        bnVisaFreeFaq["inLanguage"] = "bn-BD";
+        extraGraphNodes.push(bnVisaFreeFaq);
       }
     } else if (englishPath === "/umrah") {
       const bnUmrahFaq = stripContext(
@@ -2331,11 +2832,34 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
       );
     } else if (
       segments.length === 2 &&
-      ["flights", "hotels", "visa", "costs"].includes(segments[0])
+      ["flights", "hotels", "visa", "costs", "destinations"].includes(segments[0])
     ) {
+      // English FAQ schema must never appear on a Bengali page, so the English
+      // FAQPage node is dropped from every Bengali detail route. Whether a
+      // replacement is added depends on whether Bengali answers exist: the
+      // flights/hotels/visa/costs overrides still carry English faqs and their
+      // Bengali bodies therefore render no FAQ section at all, while the
+      // destination guides have their own Bengali answers.
       for (const node of en.extraGraphNodes) {
         if (node["@type"] !== "FAQPage") {
           extraGraphNodes.push(node);
+        }
+      }
+      if (segments[0] === "destinations") {
+        const destination = getLocalizedDestinations("bn").find(
+          (item) => item.id === segments[1]
+        );
+        if (destination && destination.faqs.length) {
+          const bnFaq = stripContext(
+            generateFAQSchema(destination.faqs, {
+              url: canonicalUrl,
+              name: copy.title,
+            })
+          );
+          bnFaq["@id"] = `${canonicalUrl}#faq`;
+          bnFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+          bnFaq["inLanguage"] = "bn-BD";
+          extraGraphNodes.push(bnFaq);
         }
       }
     }

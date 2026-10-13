@@ -1,6 +1,27 @@
 # 01 — Google Indexing & Crawling
 
-**Perspective:** getting all 83 pages indexed, not just the homepage.
+> ## ⚠️ PARTLY SUPERSEDED — re-measured against `dist/` on 2026-10-13
+>
+> **Root causes A and B below no longer hold. C and D (especially D) do.**
+>
+> | § | Claim (29 Sept) | Measured (13 Oct) |
+> |---|---|---|
+> | A | Blog posts prerender exactly 1 internal link; `/flights` hub has 6; deep pages are near-orphans | **0 orphans.** Blog posts carry **29–33 unique internal links** each; homepage **105**; `/flights` 6 → routine. **241 distinct internal URLs** linked. |
+> | B | Hub/money pages are thin | Route pages carry **800–1,200 words** of prerendered body copy with H1/H2/FAQ structure. *`dist/experiences.html` is the one exception: ~230 words.* |
+> | C | No `<lastmod>` freshness signal | **Resolved** — `<lastmod>` on every URL. (Counts in §1C have drifted: the sitemap now lists **173** URLs — 90 EN + 83 BN.) |
+> | D | Zero backlinks | **Still true, and now the single biggest lever.** See [07-backlinks-free.md](07-backlinks-free.md). |
+>
+> **Consequence:** the section §1 diagnosis was an outside-in reading of the site, and the site's own
+> build output has since contradicted it. **Do not start at §1.** Start by opening Google Search
+> Console and reading the **actual indexed-page count** — that number, not this file's assumption, is
+> the input you need. If indexing is still poor despite 0 orphans and adequate depth, the cause is D
+> (authority), and files 03–04 are the wrong place to spend effort.
+>
+> *The GSC setup, `lastmod`, IndexNow and verification procedures in §4 onward remain useful and are
+> unaffected by this correction.*
+
+
+**Perspective:** getting all pages indexed, not just the homepage. (173 routes: 90 EN + 83 BN as of 2026-10-13.)
 **Prereqs:** none — this is the first thing to fix.
 **Feeds into:** [02-internal-linking.md](02-internal-linking.md), [09-synchronization-maintenance.md](09-synchronization-maintenance.md).
 
@@ -73,9 +94,13 @@ If it still says "Couldn't fetch" after 48h with a valid live `200` XML file, us
   { "host": "ural-travel.pages.dev",
     "key": "uralindexnow2026bangladesh83pages",
     "keyLocation": "https://ural-travel.pages.dev/uralindexnow2026bangladesh83pages.txt",
-    "urlList": [ ...all 83 absolute URLs... ] }
+    "urlList": [ ...all 173 absolute URLs (90 EN + 83 BN)... ] }
   ```
 - **Note:** the key file's *contents* must equal the key value in the URL/body. Verify the file contains exactly `uralindexnow2026bangladesh83pages` (matching the filename stem) — if it contains something else, use that.
+- ⚠️ **Do NOT rename the key file, and do not treat the `83pages` in it as a page count.**
+  It is an **opaque credential** chosen in September, not a description of the site. The site now has
+  173 routes. Renaming the file invalidates the key registered with IndexNow and silently breaks
+  submission — so the stale-looking number stays. Add the URLs, never "fix" the key.
 - Bing, Yandex, Seznam, Naver honor IndexNow. Google does not consume it directly but it costs nothing.
 - **Permission tier:** medium (adds a network call to the build). Say so in the commit, don't ask.
 

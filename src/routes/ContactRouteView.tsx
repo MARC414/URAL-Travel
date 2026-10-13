@@ -1,5 +1,7 @@
 import { SERVICE_CONTACT_FAQS } from "../hooks/useSeoMeta";
 
+import { ResponsiveImage } from "../components/ResponsiveImage";
+
 import { TravelIntelligence } from "../components/AeoInspector";
 
 import { URAL_SOCIAL_LINKS } from "../utils/schema";
@@ -20,17 +22,33 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
 
 
-          {/* Visual Header Banner */}
+          {/* Hero banner — real support desk photo, text over the dark left side.
+              The image is the page's LCP element: it is preloaded as AVIF by
+              scripts/prerender.ts (lcpImageUrl), matching the first <source> that
+              ResponsiveImage renders. Keep both in step (see ResponsiveImage.tsx). */}
+          <div className="bg-brand-navy text-white rounded-3xl relative overflow-hidden shadow-xl border border-slate-800">
 
-          <div className="bg-brand-navy text-white p-8 sm:p-12 rounded-3xl relative overflow-hidden shadow-xl border border-slate-800">
+            <ResponsiveImage
+              src="/assets/images/contact_support_desk_agent_1791600000000-1200.webp"
+              sizes="100vw"
+              alt={
+                isBn
+                  ? "হেডসেট পরা একজন URAL সাপোর্ট এজেন্ট অফিস ডেস্কে গ্রাহকের কল ধরছেন"
+                  : "A URAL support agent wearing a headset at her desk, ready to take a traveller's call"
+              }
+              width={1200}
+              height={670}
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover object-right"
+            />
 
-            <div className="absolute top-0 right-0 w-80 h-80 bg-[#F6B73C]/10 rounded-full blur-3xl pointer-events-none" />
+            {/* Scrim: keeps the headline readable over the photo on every viewport.
+                Darkest at the left (where the text sits) and lighter to the right,
+                where the agent is. */}
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/92 to-brand-navy/55 sm:via-brand-navy/85 sm:to-brand-navy/25" />
 
-            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-teal-500/5 rounded-full blur-2xl pointer-events-none" />
-
-
-
-            <div className="relative z-10 max-w-3xl space-y-4">
+            <div className="relative z-10 p-8 sm:p-12 max-w-3xl space-y-4">
 
               <div className="inline-flex items-center gap-2 bg-[#F6B73C]/15 text-[#F6B73C] text-xs font-mono font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full">
 
@@ -50,135 +68,15 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
 
 
-              <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-200 max-w-2xl leading-relaxed">
 
                 {isBn
-
                   ? "ফ্লাইট বুকিং, ভিসা প্রসেসিং, কিংবা Umrah ও ট্যুর প্যাকেজ সম্পর্কে জানতে চান? সরাসরি কল করুন, WhatsApp-এ মেসেজ দিন অথবা নিচের ফর্মটি পূরণ করুন। আমরা দ্রুততম সময়ে উত্তর দিই!"
-
                   : "Have inquiries about flight bookings, visa procedures, or destination travel packages? Contact our director directly through Call, WhatsApp, or the interactive travel inquiry form below. We respond instantly!"}
 
               </p>
 
             </div>
-
-          </div>
-
-
-
-          {/* Quick Contact Grid cards */}
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-
-
-            {/* WhatsApp direct card */}
-
-            <div className="ural-card bg-white border border-slate-200 hover:border-brand-emerald/40 p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
-
-              <div className="p-3.5 bg-brand-emerald/10 text-brand-emerald rounded-xl shrink-0">
-
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.665.988 3.3 1.488 5.35 1.489 5.513 0 10.002-4.486 10.005-9.999.001-2.671-1.037-5.182-2.924-7.071C17.192 1.685 14.685.648 12.012.648c-5.516 0-10.01 4.488-10.014 10.002-.001 1.902.483 3.654 1.401 5.247l-.952 3.479 3.599-.944z" />
-
-                </svg>
-
-              </div>
-
-              <div className="space-y-2 flex-1">
-
-                <span className="text-[10px] font-mono font-bold text-brand-emerald block uppercase tracking-widest">WHATSAPP CHAT</span>
-
-                <h2 className="ural-section-title font-serif text-lg font-bold text-slate-900">
-
-                  {isBn ? "সরাসরি WhatsApp চ্যাট করুন" : "Start Direct Chat"}
-
-                </h2>
-
-                <p className="text-xs text-slate-500 leading-normal">
-
-                  {isBn
-
-                    ? "কাস্টম সাপোর্ট পাওয়ার সবচেয়ে দ্রুত মাধ্যম। ভিসা চেকলিস্ট, রিটার্ন এয়ার টিকেট বা হোটেল বুকিংয়ের জন্য মেসেজ দিন।"
-
-                    : "The fastest way to get custom support. Ask visa questions, seek roundtrip ticket packages, or request customized hotel bookings."}
-
-                </p>
-
-                <a
-
-                  href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
-
-                  target="_blank"
-
-                  rel="noopener noreferrer"
-
-                  className="inline-flex items-center gap-2 bg-brand-emerald text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
-
-                >
-
-                  {isBn ? "WhatsApp-এ মেসেজ দিন (+8801784385335)" : "Chat on WhatsApp (+8801784385335)"}
-
-                </a>
-
-              </div>
-
-            </div>
-
-
-
-            {/* Phone Direct call card */}
-
-            <div className="ural-card bg-white border border-slate-200 hover:border-brand-navy/30 p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
-
-              <div className="p-3.5 bg-blue-50 text-blue-600 rounded-xl shrink-0">
-
-                <svg className="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
-
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-
-                </svg>
-
-              </div>
-
-              <div className="space-y-2 flex-1">
-
-                <span className="text-[10px] font-mono font-bold text-blue-600 block uppercase tracking-widest">TELEPHONE HOTLINE</span>
-
-                <h2 className="ural-section-title font-serif text-lg font-bold text-slate-900">
-
-                  {isBn ? "সরাসরি ফোনে কথা বলুন" : "Direct Mobile Support"}
-
-                </h2>
-
-                <p className="text-xs text-slate-500 leading-normal">
-
-                  {isBn
-
-                    ? "সরাসরি আমাদের ডেস্কের সাথে কথা বলুন। ভিসা ডকুমেন্ট যাচাই, লাইভ ফ্লাইট ভাড়া এবং বিশ্বস্ত পরামর্শ পান।"
-
-                    : "Talk directly to the director. Get immediate verification of requirements, active flight check comparisons, and reliable counsel."}
-
-                </p>
-
-                <a
-
-                  href="tel:+8801784385335"
-
-                  className="inline-flex items-center gap-2 bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
-
-                >
-
-                  {isBn ? "সরাসরি কল করুন (+8801784385335)" : "Call Directly (+8801784385335)"}
-
-                </a>
-
-              </div>
-
-            </div>
-
-
 
           </div>
 
@@ -732,7 +630,7 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                   <span className="text-sm font-serif font-black text-brand-navy block">+8801784385335</span>
 
-                  <span className="text-[9px] text-slate-400 block">
+                  <span className="text-[10px] text-slate-400 block">
 
                     {isBn ? "২৪/৭ WhatsApp মেসেঞ্জারে সচল" : "Available 24/7 on WhatsApp Messenger"}
 
@@ -821,6 +719,124 @@ export default function ContactRouteView({ context }: RouteViewProps) {
                   </div>
 
                 </div>
+
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+
+
+          {/* Quick Contact Grid cards */}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+
+
+            {/* WhatsApp direct card */}
+
+            <div className="ural-card bg-white border border-slate-200 hover:border-brand-emerald/40 p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
+
+              <div className="p-3.5 bg-brand-emerald/10 text-brand-emerald rounded-xl shrink-0">
+
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.665.988 3.3 1.488 5.35 1.489 5.513 0 10.002-4.486 10.005-9.999.001-2.671-1.037-5.182-2.924-7.071C17.192 1.685 14.685.648 12.012.648c-5.516 0-10.01 4.488-10.014 10.002-.001 1.902.483 3.654 1.401 5.247l-.952 3.479 3.599-.944z" />
+
+                </svg>
+
+              </div>
+
+              <div className="space-y-2 flex-1">
+
+                <span className="text-[10px] font-mono font-bold text-brand-emerald block uppercase tracking-widest">WHATSAPP CHAT</span>
+
+                <h2 className="ural-section-title font-serif text-lg font-bold text-slate-900">
+
+                  {isBn ? "সরাসরি WhatsApp চ্যাট করুন" : "Start Direct Chat"}
+
+                </h2>
+
+                <p className="text-xs text-slate-500 leading-normal">
+
+                  {isBn
+
+                    ? "কাস্টম সাপোর্ট পাওয়ার সবচেয়ে দ্রুত মাধ্যম। ভিসা চেকলিস্ট, রিটার্ন এয়ার টিকেট বা হোটেল বুকিংয়ের জন্য মেসেজ দিন।"
+
+                    : "The fastest way to get custom support. Ask visa questions, seek roundtrip ticket packages, or request customized hotel bookings."}
+
+                </p>
+
+                <a
+
+                  href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
+
+                  target="_blank"
+
+                  rel="noopener noreferrer"
+
+                  className="inline-flex items-center gap-2 bg-brand-emerald text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
+
+                >
+
+                  {isBn ? "WhatsApp-এ মেসেজ দিন (+8801784385335)" : "Chat on WhatsApp (+8801784385335)"}
+
+                </a>
+
+              </div>
+
+            </div>
+
+
+
+            {/* Phone Direct call card */}
+
+            <div className="ural-card bg-white border border-slate-200 hover:border-brand-navy/30 p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
+
+              <div className="p-3.5 bg-blue-50 text-blue-600 rounded-xl shrink-0">
+
+                <svg className="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+
+                </svg>
+
+              </div>
+
+              <div className="space-y-2 flex-1">
+
+                <span className="text-[10px] font-mono font-bold text-blue-600 block uppercase tracking-widest">TELEPHONE HOTLINE</span>
+
+                <h2 className="ural-section-title font-serif text-lg font-bold text-slate-900">
+
+                  {isBn ? "সরাসরি ফোনে কথা বলুন" : "Direct Mobile Support"}
+
+                </h2>
+
+                <p className="text-xs text-slate-500 leading-normal">
+
+                  {isBn
+
+                    ? "সরাসরি আমাদের ডেস্কের সাথে কথা বলুন। ভিসা ডকুমেন্ট যাচাই, লাইভ ফ্লাইট ভাড়া এবং বিশ্বস্ত পরামর্শ পান।"
+
+                    : "Talk directly to the director. Get immediate verification of requirements, active flight check comparisons, and reliable counsel."}
+
+                </p>
+
+                <a
+
+                  href="tel:+8801784385335"
+
+                  className="inline-flex items-center gap-2 bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors"
+
+                >
+
+                  {isBn ? "সরাসরি কল করুন (+8801784385335)" : "Call Directly (+8801784385335)"}
+
+                </a>
 
               </div>
 

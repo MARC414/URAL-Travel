@@ -212,9 +212,9 @@ export default function AboutRouteView({ context }: RouteViewProps) {
 
                   titleEn: "Bengali & English",
 
-                  descBn: "৭৯টি বাংলা ও ৮৬টি ইংরেজি পৃষ্ঠায় সম্পূর্ণ দ্বিভাষিক।",
+                  descBn: "বাংলা পাঠকের জন্য লেখা বাংলা সংস্করণ — ধাপে ধাপে সম্প্রসারিত হচ্ছে।",
 
-                  descEn: "Fully bilingual across 79 Bengali and 86 English pages.",
+                  descEn: "A Bengali edition written for Bengali readers, expanded section by section.",
 
                 },
 
@@ -226,7 +226,7 @@ export default function AboutRouteView({ context }: RouteViewProps) {
 
                   <div>
 
-                    <h3 className="ural-card-title text-sm font-bold text-brand-navy">{isBn ? item.titleBn : item.titleEn}</h3>
+                    <h3 className="ural-card-title font-serif text-sm font-bold text-brand-navy">{isBn ? item.titleBn : item.titleEn}</h3>
 
                     <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{isBn ? item.descBn : item.descEn}</p>
 

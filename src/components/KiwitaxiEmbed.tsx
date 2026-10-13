@@ -35,7 +35,7 @@ export function KiwitaxiEmbed() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {/* Pickup */}
           <div>
-            <label htmlFor={`${uid}-pickup`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-pickup`} className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <MapPin size={9} className="text-emerald-500" /> From (Airport or City)
             </label>
             <input
@@ -51,7 +51,7 @@ export function KiwitaxiEmbed() {
 
           {/* Destination */}
           <div>
-            <label htmlFor={`${uid}-destination`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-destination`} className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <MapPin size={9} className="text-emerald-500" /> To (Hotel or Address)
             </label>
             <input
@@ -69,7 +69,7 @@ export function KiwitaxiEmbed() {
         <div className="grid grid-cols-2 gap-3">
           {/* Date */}
           <div>
-            <label htmlFor={`${uid}-date`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-date`} className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <Calendar size={9} className="text-emerald-500" /> Transfer Date
             </label>
             <input
@@ -84,7 +84,7 @@ export function KiwitaxiEmbed() {
 
           {/* Passengers */}
           <div>
-            <label htmlFor={`${uid}-passengers`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-passengers`} className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <Users size={9} className="text-emerald-500" /> Passengers
             </label>
             <select

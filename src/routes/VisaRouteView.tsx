@@ -1,10 +1,11 @@
 import React from "react";
 
 import { GuideJumpNav } from "../components/GuideJumpNav";
+import { QuickAnswer } from "../components/QuickAnswer";
 
 import { PartnerLinkButton, AFFILIATE_LINKS, AiraloEsimWidget } from "../components/AffiliatePartners";
 
-import { ShieldCheck, ArrowRight, FileText, Wifi, Building, Plane } from "lucide-react";
+import { ShieldCheck, ArrowRight, FileText, Wifi, Building, Plane, Globe } from "lucide-react";
 
 import { TravelIntelligence } from "../components/AeoInspector";
 
@@ -54,21 +55,12 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
         </div>
 
-        <div id="visa-aeo-box" className="rounded-r-xl border-l-4 border-[#F6B73C] bg-slate-50 p-5">
-
-          <span className="mb-1 block font-mono text-[10px] font-bold tracking-widest text-brand-navy">
-
-            {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
-
-          </span>
-
-          <p className="font-sans text-sm leading-relaxed text-slate-800 sm:text-[14.5px]">
-
-            {activeVisa.quickAnswer}
-
-          </p>
-
-        </div>
+        <QuickAnswer
+          id="visa-aeo-box"
+          label={isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
+        >
+          {activeVisa.quickAnswer}
+        </QuickAnswer>
 
         <GuideJumpNav
 
@@ -167,6 +159,23 @@ export default function VisaRouteView({ context }: RouteViewProps) {
               </button>
 
             ))}
+
+            <a
+              href="/visa-free-countries"
+              onClick={(event) => {
+                event.preventDefault();
+                navigateTo("/visa-free-countries");
+              }}
+              className="mt-1 flex w-full cursor-pointer items-start gap-2 rounded-xl border border-[#F6B73C]/50 bg-[#F6B73C]/5 p-3.5 text-left text-xs font-semibold text-brand-navy transition-colors hover:bg-[#F6B73C]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+            >
+              <Globe size={13} className="mt-0.5 shrink-0 text-[#F6B73C]" aria-hidden="true" />
+              <span>
+                {isBn ? "ভিসা ছাড়া যেসব দেশে যাওয়া যায়" : "Which countries are visa-free?"}
+                <span className="mt-0.5 block font-normal text-text-muted">
+                  {isBn ? "২০২৬ সালের যাচাই করা তালিকা" : "The verified 2026 list"}
+                </span>
+              </span>
+            </a>
 
           </div>
 
