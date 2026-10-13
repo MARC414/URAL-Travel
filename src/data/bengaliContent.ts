@@ -2677,6 +2677,21 @@ for (const cost of getLocalizedCosts("bn")) {
   };
 }
 
+// Destination guides — the hand-written Bengali title becomes the H1 (and the
+// <title> after clamping), and the hand-written quick answer becomes the meta
+// description. Only guides that actually have Bengali content get a route, so a
+// future seventh destination cannot half-exist in Bengali by accident.
+for (const destination of getLocalizedDestinations("bn")) {
+  const bn = BENGALI_DESTINATION_OVERRIDES[destination.id];
+  if (!bn) continue;
+  const h1 = bn.title || destination.title;
+  BENGALI_ROUTE_SEO[`/destinations/${destination.id}`] = {
+    title: bnTitle(h1),
+    description: bnClamp(destination.quickAnswer, 160),
+    h1,
+  };
+}
+
 // Blog guides — the overrides already carry a native Bengali title and summary.
 for (const post of getLocalizedBlogs("bn")) {
   const bn = BENGALI_BLOG_OVERRIDES[post.slug];

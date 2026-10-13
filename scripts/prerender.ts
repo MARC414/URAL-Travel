@@ -71,6 +71,7 @@ import {
   getBengaliRouteSeo,
   getLocalizedBlogs,
   getLocalizedCosts,
+  getLocalizedDestinations,
   getLocalizedFlights,
   getLocalizedHajjFaqs,
   getLocalizedHotels,
@@ -1922,6 +1923,19 @@ const BN_COST_CATEGORY_LABELS: Record<string, string> = {
   "Speedboat / Ferry Transfers": "স্পিডবোট / ফেরি ট্রান্সফার",
 };
 
+/**
+ * Bengali digits for counts and durations in rendered Bengali bodies.
+ *
+ * The hand-written Bengali content uses Bengali digits for counts and durations
+ * ("৫ দিন", "১৫,০০০ দোকান") while leaving BDT amounts and app names in Latin.
+ * Rendered bodies must follow the same rule, otherwise a page mixes "৫ দিনের
+ * রুট" in its prose with "5 দিনের" in its heading.
+ */
+const BN_DIGITS = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+function bnDigits(value: number | string): string {
+  return String(value).replace(/[0-9]/g, (digit) => BN_DIGITS[Number(digit)]);
+}
+
 function bnSection(heading: string, inner: string): string {
   return `<section><h2>${escapeHtml(heading)}</h2>${inner}</section>`;
 }
@@ -2241,6 +2255,79 @@ function buildBengaliBody(
     return `<article>${parts.join("")}</article>`;
   }
 
+  if (group === "destinations") {
+    if (id) {
+      const destination = getLocalizedDestinations("bn").find((item) => item.id === id);
+      if (destination) {
+        // Cross-links match on the English country string, which is what the
+        // flights/hotels/visa/costs datasets use. Bengali country names such as
+        // "সংযুক্ত আরব আমিরাত" would match nothing and silently drop the links.
+        const englishCountry =
+          DESTINATIONS_DATA.find((entry) => entry.id === id)?.country ??
+          destination.country;
+
+        const days = destination.itinerary
+          .map(
+            (day) =>
+              `<li><strong>দিন ${bnDigits(day.day)} — ${escapeHtml(day.title)}:</strong> ${day.activities.map(escapeHtml).join("; ")}</li>`
+          )
+          .join("");
+        if (days) {
+          parts.push(
+            bnSection(
+              `${bnDigits(destination.itinerary.length)} দিনের রুট পরিকল্পনা`,
+              `<ol>${days}</ol>`
+            )
+          );
+        }
+
+        const transport = destination.localTransport
+          .filter((option) => option && option.trim())
+          .map((option) => `<li>${escapeHtml(option)}</li>`)
+          .join("");
+        if (transport) {
+          parts.push(bnSection("স্থানীয় যাতায়াত", `<ul>${transport}</ul>`));
+        }
+
+        parts.push(
+          bnSection(
+            "আনুমানিক স্থানীয় বাজেট",
+            `<p>${escapeHtml(destination.budgetBdt)}। আন্তর্জাতিক বিমানভাড়া ও সাম্প্রতিক ভিসা নিয়ম আলাদাভাবে মিলিয়ে নিন।</p>`
+          )
+        );
+
+        parts.push(
+          bnSection(
+            `${escapeHtml(destination.country)} সম্পর্কে জরুরি তথ্য`,
+            bnFactList(destination.keyFacts)
+          )
+        );
+
+        parts.push(
+          bnFaqList(
+            `${escapeHtml(destination.country)} ভ্রমণ নিয়ে সাধারণ প্রশ্ন`,
+            destination.faqs
+          )
+        );
+
+        parts.push(
+          bnLinkList(
+            "এই ট্রিপের বাকি পরিকল্পনা",
+            bnCountryCrossLinks(englishCountry, englishPath)
+          )
+        );
+      }
+    } else {
+      parts.push(
+        bnDirectory(
+          "সব গন্তব্য গাইড",
+          englishPathsIn("/destinations", DESTINATIONS_DATA.map((entry) => entry.id))
+        )
+      );
+    }
+    return `<article>${parts.join("")}</article>`;
+  }
+
   if (group === "umrah") {
     parts.push(
       bnFaqList("উমরাহ ও হজ: সাধারণ প্রশ্ন", getLocalizedHajjFaqs("bn"))
@@ -2261,7 +2348,7 @@ function buildBengaliBody(
     { label: "ভিসা গাইড", path: "/visa" },
     { label: "ভ্রমণ খরচ", path: "/costs" },
     { label: "উমরাহ প্ল্যানার", path: "/umrah" },
-    { label: `সব ${BLOG_DATA.length}টি ট্রাভেল ব্লগ`, path: "/blog" },
+    { label: `সব ${bnDigits(BLOG_DATA.length)}টি ট্রাভেল ব্লগ`, path: "/blog" },
   ];
   parts.push(bnLinkList("কোথা থেকে শুরু করবেন", hubLinks));
   return `<article>${parts.join("")}</article>`;

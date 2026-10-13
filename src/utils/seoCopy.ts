@@ -467,6 +467,11 @@ function trimAtWord(text: string, maxLength: number): string {
  * generated for it — see DEFERRED_BN_GROUPS in src/utils/localeRoutes.ts.
  */
 export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
+  "/destinations": {
+    title: "বাংলাদেশ থেকে ট্রিপ ইটিনারারি: গন্তব্য গাইড | URAL",
+    description:
+      "নেপাল, থাইল্যান্ড, মালয়েশিয়া, দুবাই, সিঙ্গাপুর ও মালদ্বীপের দিনভিত্তিক ভ্রমণ পরিকল্পনা — ঢাকা থেকে যাওয়ার রুট, স্থানীয় যাতায়াত ও টাকায় বাজেটসহ।",
+  },
   "/about": {
     title: "URAL সম্পর্কে | ফারহান মোমেন — প্রতিষ্ঠাতা ও ট্রাভেল এডিটর",
     description:
