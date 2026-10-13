@@ -878,7 +878,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         // ignore
       }
     }
-    const routeFaq = getFaqSchemaForPage("flights", r.id, false, routeUrl);
+    const routeFaq = getFaqSchemaForPage("flights", r.id, false, routeUrl, FLIGHTS_DATA);
     if (routeFaq) extraNodes.push(stripContext(routeFaq));
 
     routes.push({
@@ -986,7 +986,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         // ignore
       }
     }
-    const hotelFaq = getFaqSchemaForPage("hotels", h.id, false, hotelUrl);
+    const hotelFaq = getFaqSchemaForPage("hotels", h.id, false, hotelUrl, HOTELS_DATA);
     if (hotelFaq) extraNodes.push(stripContext(hotelFaq));
 
     routes.push({
@@ -1193,7 +1193,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         // ignore
       }
     }
-    const vFaq = getFaqSchemaForPage("visa", v.id, false, visaUrl);
+    const vFaq = getFaqSchemaForPage("visa", v.id, false, visaUrl, VISA_DATA);
     if (vFaq) extraNodes.push(stripContext(vFaq));
 
     routes.push({
@@ -1296,7 +1296,7 @@ function buildAllRoutes(): PrerenderRoute[] {
             : 95000,
       }),
     ];
-    const dFaq = getFaqSchemaForPage("destinations", d.id, false, destUrl);
+    const dFaq = getFaqSchemaForPage("destinations", d.id, false, destUrl, DESTINATIONS_DATA);
     if (dFaq) extraNodes.push(stripContext(dFaq));
 
     routes.push({
@@ -1321,6 +1321,10 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h2>Local transport options</h2>
           <ul>${d.localTransport.map((option) => `<li>${escapeHtml(option)}</li>`).join("")}</ul>
           <p><strong>Indicative local budget:</strong> ${escapeHtml(d.budgetBdt)}. Review international flights and current entry rules separately.</p>
+          <section>
+            <h2>${escapeHtml(d.country)} key facts for travelers from Bangladesh</h2>
+            <ul>${d.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
+          </section>
           ${renderLandingFaqs(`${d.id}-faqs`, `${d.country} itinerary questions for Bangladeshi travelers`, dFaq)}
         </article>
       `,
@@ -1369,7 +1373,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         ? "What a 5-day Nepal trip really costs from Bangladesh - flights, hotels, food, and transport in BDT, from budget (BDT 45,000) to luxury."
         : `Detailed BDT breakdown of flights, hotels, dining, and sightseeing costs for planning your trip from Dhaka to ${c.country}.`;
     const extraNodes: Record<string, unknown>[] = [];
-    const cFaq = getFaqSchemaForPage("costs", c.id, false, costUrl);
+    const cFaq = getFaqSchemaForPage("costs", c.id, false, costUrl, TRIP_COSTS_DATA);
     if (cFaq) extraNodes.push(stripContext(cFaq));
 
     routes.push({
@@ -1397,6 +1401,10 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h2>Budget planning tips</h2>
           <ul>${c.moneyHacks.map((tip) => `<li>${escapeHtml(tip)}</li>`).join("")}</ul>
           <p>These figures are planning estimates, not live quotes. Check current fares, hotel rates and exchange rates before booking.</p>
+          <section>
+            <h2>${escapeHtml(c.country)} cost facts at a glance</h2>
+            <ul>${c.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
+          </section>
           ${renderLandingFaqs(`${c.id}-faqs`, `${c.country} trip cost questions for Bangladeshi travelers`, cFaq)}
         </article>
       `,
