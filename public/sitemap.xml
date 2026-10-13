@@ -218,42 +218,63 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/destinations</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations" />
     <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/destinations/nepal-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations/nepal-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations/nepal-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations/nepal-guide" />
     <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/destinations/thailand-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations/thailand-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations/thailand-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations/thailand-guide" />
     <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/destinations/malaysia-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations/malaysia-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations/malaysia-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations/malaysia-guide" />
     <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/destinations/dubai-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations/dubai-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations/dubai-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations/dubai-guide" />
     <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/destinations/singapore-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations/singapore-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations/singapore-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations/singapore-guide" />
     <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/destinations/maldives-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations/maldives-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations/maldives-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations/maldives-guide" />
     <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1019,6 +1040,69 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa/maldives-visa" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa/maldives-visa" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa/maldives-visa" />
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/destinations</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations" />
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/destinations/nepal-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations/nepal-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations/nepal-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations/nepal-guide" />
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/destinations/thailand-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations/thailand-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations/thailand-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations/thailand-guide" />
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/destinations/malaysia-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations/malaysia-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations/malaysia-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations/malaysia-guide" />
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/destinations/dubai-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations/dubai-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations/dubai-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations/dubai-guide" />
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/destinations/singapore-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations/singapore-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations/singapore-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations/singapore-guide" />
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/destinations/maldives-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/destinations/maldives-guide" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/destinations/maldives-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/destinations/maldives-guide" />
     <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

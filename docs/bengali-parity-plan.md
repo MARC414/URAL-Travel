@@ -89,6 +89,9 @@ That is ~43 strings of real Bengali per destination, ~260 for the section.
 | A5 | 🇦🇪 Dubai / UAE — written at parity (4 days, 3 transport, 5 key facts, 5 FAQs, 39 nested strings) | ✅ done |
 | A6 | 🇸🇬 Singapore — written at parity (4 days, 3 transport, 5 key facts, 3 FAQs, 35 nested strings) | ✅ done |
 | A7 | 🇲🇻 Maldives — written at parity (5 days, 3 transport, 4 key facts, 3 FAQs, 36 nested strings) | ✅ done |
+| A8 | Bengali SERP copy + body renderer for destinations (built dormant) | ✅ done |
+| A9 | Deferral lifted; Bengali hub content + per-route `bn-BD` FAQ schema | ✅ done |
+| A10 | Verified: 92 EN / 92 BN, hreflang reciprocal, sitemap clusters, 0 dead links | ✅ done |
 | A1 | `src/data/bengaliDestinations.ts` + `getLocalizedDestinations()` + client wiring | ✅ done |
 | A2 | Nepal guide | ✅ done |
 | A3 | Thailand guide | ☐ |
@@ -303,3 +306,91 @@ on:
 - **A9** — lift `/destinations` from `DEFERRED_BN_GROUPS`, add Bengali SERP copy
   for all seven routes, emit `bn-BD` FAQ schema per route
 - **A10** — verify 92/92 routes, hreflang pairing, sitemap clusters
+
+### A8 — SERP copy + body renderer — DONE
+Built so nothing changed on the site until A9 flipped the switch: the build
+emitted 92 EN + 85 BN throughout. `BENGALI_SEO_COPY` gained `/destinations`
+(the last hub still missing); `BENGALI_ROUTE_SEO` gained a destinations loop;
+`buildBengaliBody` gained a destinations branch. Two traps found while writing
+it: `bnCountryCrossLinks` matches on the **English** country string (the
+datasets store "UAE", not "সংযুক্ত আরব আমিরাত"), so passing the Bengali name
+would have silently dropped four cross-links from every page; and there was no
+Bengali-digit helper anywhere, so rendered bodies could not follow the house
+rule. Added one, and fixed the single existing offender ("সব 47টি ট্রাভেল ব্লগ").
+
+### A9 — deferral lifted — DONE
+`DEFERRED_BN_GROUPS` is now **empty**. `/destinations` was the last group.
+
+The first build after lifting exposed a real thin-page failure: the Bengali hub
+came out at **97 words against 1,183 English (8%)** — a bare list of six links,
+exactly the kind of page this programme exists to eliminate. Fixed before
+committing by writing the hub's four sections in Bengali rather than listing
+links: orientation, the guide directory carrying each guide's best-time and
+budget notes from the Bengali data, a route-comparison section, and planning
+advice, plus four Bengali landing FAQs with their own `bn-BD` FAQPage node. The
+hub went 97 → **1,124 words (95% of English)**.
+
+Destination detail pages also gained a `bnGuidanceFor("destinations")` section,
+so they are not just itinerary + facts.
+
+### A10 — verification — DONE
+
+| route | EN words | BN words | BN/EN | Bengali words |
+|---|---|---|---|---|
+| `/destinations` | 1,183 | 1,124 | 95% | 95% |
+| `/destinations/nepal-guide` | 808 | 571 | 71% | 92% |
+| `/destinations/thailand-guide` | 750 | 614 | 82% | 90% |
+| `/destinations/malaysia-guide` | 787 | 571 | 73% | 90% |
+| `/destinations/dubai-guide` | 809 | 622 | 77% | 89% |
+| `/destinations/singapore-guide` | 777 | 589 | 76% | 86% |
+| `/destinations/maldives-guide` | 810 | 584 | 72% | 92% |
+| **total** | **5,924** | **4,675** | **79%** | |
+
+Before this section: the same seven routes were **5,924 EN / 24 BN**.
+
+- **92 English + 92 Bengali routes** — exact parity, up from 92/85.
+- **hreflang reciprocal** on every pair: `en-bd`, `bn-bd`, `x-default`.
+- **sitemap: 184 `<loc>` entries, 92 Bengali**, each EN destinations URL carrying
+  its `bn-bd` alternate in the same `<url>` block.
+- **FAQ schema separated by language**: every Bengali page carries exactly one
+  `FAQPage` node whose 6–10 entries are all Bengali and marked `inLanguage:
+  bn-BD`; every English page carries only English entries. Parsed from the
+  JSON-LD, not pattern-matched.
+- **Dead-link sweep: 0 dead across 186 pages and 4,652 internal links.**
+- Bengali chunk 571,982 bytes; English routes load none of it.
+
+The client needed **no further edit** to start sending Bengali visitors to
+`/bn/destinations`: `74a69fd` had already routed the nav through
+`hasBengaliCounterpart()`, so lifting the deferral switched all five surfaces at
+once, exactly as that commit predicted.
+
+---
+
+## Section A complete. What remains is Section B.
+
+Section A (the seven deferred destination routes) is finished. The original
+measurement is what is left, and it is unchanged by this work:
+
+| page | EN words | BN words | share |
+|---|---|---|---|
+| home | 1,024 | 45 | 4% |
+| /visa | 1,338 | 80 | 6% |
+| /flights | 1,152 | 91 | 8% |
+| /hotels | 1,200 | 95 | 8% |
+| /costs | 1,073 | 95 | 9% |
+| /contact | 343 | 42 | 12% |
+| /about | 724 | 55 | 8% |
+| /visa-free-countries | 1,755 | 55 | 3% |
+| /umrah | 773 | 636 | 82% |
+| blog (median) | 965 | 625 | 65% |
+
+The hubs are still 3–12% shells. `bnGuidanceFor` gives each Bengali hub a
+"ব্যবহারিক পরামর্শ" section, which is honest but does not close a 1,300-to-80
+word gap. That is Section B, and it is the real remaining work.
+
+**One more gap worth recording.** The Bengali flights/hotels/visa/costs detail
+pages carry no FAQ section at all, because their overrides still fall through to
+the English `faqs`. Measured: 0 of 24 records have Bengali FAQs. Their English
+counterparts render 4–5 FAQs each after `6082fce`, so the Bengali pages are
+shorter by that much. Closing it needs roughly 24 records × 4–5 Q&As ≈ 110
+Bengali questions, and each route then earns its own `bn-BD` FAQPage node.

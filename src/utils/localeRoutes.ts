@@ -17,16 +17,19 @@ export const SITE_ORIGIN = "https://ural-travel.pages.dev";
 /**
  * Route groups whose Bengali counterpart does not exist yet.
  *
- * /destinations/* has no BENGALI_DESTINATIONS_OVERRIDES (and therefore no
- * getLocalizedDestinations), so generating /bn/destinations/... would ship an
- * English-bodied bn-BD page. Until that copy is written, those pages get no
- * Bengali URL, no bn-bd hreflang tag, and no sitemap xhtml:link cluster — a
- * hreflang pointing at a 404 is worse than no hreflang at all.
+ * This is a gate, not a list to maintain long-term. While a group is named here
+ * it gets no Bengali URL, no bn-bd hreflang tag and no sitemap xhtml:link
+ * cluster, because a hreflang pointing at a 404 is worse than no hreflang at
+ * all. The prerender and the client both read it, so the menu can never offer a
+ * link the build refused to publish.
  *
- * When Bengali destination guides land, remove the group here AND add the copy
- * in bengaliContent.ts; prerender requires both before it emits /bn routes.
+ * It is currently EMPTY: /destinations was the last deferred group and its six
+ * guides were written in Bengali before the group was removed. A route only
+ * gets a Bengali page when BOTH this gate is open AND the route has copy in
+ * bengaliContent.ts (BENGALI_ROUTE_SEO or BENGALI_SEO_COPY), so lifting the
+ * gate cannot publish an English-bodied bn-BD page.
  */
-export const DEFERRED_BN_GROUPS: readonly string[] = ["/destinations"];
+export const DEFERRED_BN_GROUPS: readonly string[] = [];
 
 /** Normalises a path (or full URL) to its English base ("/bn/blog/x?y=1" → "/blog/x"). */
 export function toEnglishBasePath(path: string): string {

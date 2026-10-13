@@ -68,6 +68,7 @@ import {
 } from "../src/hooks/useSeoMeta";
 import {
   BENGALI_BLOG_OVERRIDES,
+  BENGALI_DESTINATION_HUB_FAQS,
   getBengaliRouteSeo,
   getLocalizedBlogs,
   getLocalizedCosts,
@@ -2040,6 +2041,53 @@ function bnCountryCrossLinks(
   return links;
 }
 
+/**
+ * Bengali crawl body for the /destinations hub.
+ *
+ * The English hub carries about 1,180 words. A Bengali hub that only listed six
+ * links would be a thin page - the exact failure this programme exists to fix -
+ * so all four of its sections are written in Bengali rather than translated
+ * sentence for sentence: an orientation paragraph, the guide directory with the
+ * best-time and budget notes read from the Bengali data, a comparison section
+ * describing each route's shape, and planning advice.
+ *
+ * The directory is gated on getBengaliRouteSeo(), the same check the route
+ * builder uses, so a destination without Bengali copy can never be linked from
+ * here as a Bengali page.
+ */
+function bnDestinationsHubBody(): string {
+  const guides = getLocalizedDestinations("bn").filter(
+    (guide) => getBengaliRouteSeo(`/destinations/${guide.id}`) !== null
+  );
+  const directory = guides
+    .map(
+      (guide) =>
+        `<li><a href="/bn/destinations/${escapeHtml(guide.id)}">${escapeHtml(guide.country)} ভ্রমণ গাইড</a> — যাওয়ার সেরা সময়: ${escapeHtml(guide.bestTimeToVisit)}; আনুমানিক স্থানীয় বাজেট: ${escapeHtml(guide.budgetBdt)}।</li>`
+    )
+    .join("");
+  const guideDetails = guides
+    .map(
+      (guide) => `
+      <section>
+        <h3>ঢাকা থেকে ${escapeHtml(guide.country)}: রুটের ধরন</h3>
+        <p>এই গাইডে ${bnDigits(guide.itinerary.length)} দিনের রুট আছে — থামার জায়গাগুলোর মধ্যে ${guide.itinerary
+        .map((day) => escapeHtml(day.title))
+        .join(", ")}। স্থানীয় যাতায়াতের অংশে ${bnDigits(guide.localTransport.length)}টি বিকল্প তুলনা করা হয়েছে। অর্থ খরচের হিসাবসহ বিস্তারিত দেখতে গাইডটি খুলুন।</p>
+      </section>`
+    )
+    .join("");
+  return `
+    <p>নিচের গাইডগুলো একটা সাধারণ ইচ্ছাকে কাজের ভ্রমণ পরিকল্পনায় বদলে দিতে সাহায্য করবে। প্রতিটি পাতায় দিনভিত্তিক রুট, যাওয়ার উপযুক্ত সময়, স্থানীয় যাতায়াতের বিকল্প আর টাকায় বাজেটের হিসাব একসাথে দেওয়া আছে — তাই কোথায় যাবেন ঠিক করার আগেই কোন যাত্রার গতি ও ধরন আপনার সঙ্গে মানাবে, সেটা মিলিয়ে নিতে পারবেন।</p>
+    <p>এগুলো ধরা-বাঁধা ট্যুর নয়, শুরুর খসড়া। ফ্লাইট কখন পৌঁছাবে, পরিবারের কারও হাঁটার সমস্যা আছে কি না, নামাজ ও খাবারের সময়, স্থানীয় বন্ধের দিন আর আবহাওয়া — এসব মিলিয়ে নিজের মতো বদলে নিন। ভিসা ও প্রবেশের নিয়ম আলাদাভাবে যাচাই করুন, আর রওনা হওয়ার আগে যাতায়াতের সময়সূচি, টিকিটের দাম ও খোলা-বন্ধের সময় আবার মিলিয়ে নিন।</p>
+    <section><h2>বাংলাদেশি ভ্রমণকারীদের জন্য গন্তব্য গাইড</h2><ul>${directory}</ul></section>
+    <section><h2>কোন রুট কেমন — এক নজরে তুলনা</h2>${guideDetails}</section>
+    <section><h2>রুটটা নিজের মতো সাজিয়ে নেওয়ার উপায়</h2>
+      <p>শুরু করুন রাতের সংখ্যা আর ফ্লাইটের নির্দিষ্ট সময় দিয়ে। একই দিনে দীর্ঘ আন্তঃনগর যাত্রা আর সময়-বাঁধা একাধিক দর্শনীয় স্থান একসাথে রাখবেন না। প্রতিটি হোটেলের আসল অবস্থান রুটের সঙ্গে মিলিয়ে দেখুন, আর যানজট, বিশ্রাম ও খারাপ আবহাওয়ার জন্য বাড়তি সময় রেখে দিন। একাধিক শহরে গেলে সড়ক, রেল ও বিমান — তিনটিরই সময় ও মোট খরচ তুলনা করুন; সবচেয়ে দ্রুত বিকল্পটাই যে সবচেয়ে সুবিধাজনক, তা ধরে নেবেন না।</p>
+      <p>পরিবার নিয়ে গেলে বা প্রথমবার বিদেশ যাওয়ার সময় হোটেল বারবার বদলানো কম রাখাই ভালো। খাবার, কেনাকাটা, সংস্কৃতি, প্রকৃতি বা ধর্মীয় স্থান — কোনটায় আগ্রহ বেশি সেটা ঠিক করে নিলে দিনের রুট থেকে অপ্রয়োজনীয় অংশ বাদ দিয়ে নিজের মতো সাজিয়ে নিতে পারবেন। এখানে দেওয়া বাজেট ও ঋতুর তথ্য আনুমানিক; টিকিটের দাম, স্থানীয় যাতায়াতের ভাড়া আর খোলা-বন্ধের সময় নির্ভরযোগ্য সূত্র থেকে মিলিয়ে নিন।</p>
+    </section>
+    ${bnFaqList("বাংলাদেশ থেকে আন্তর্জাতিক ভ্রমণ পরিকল্পনা: সাধারণ প্রশ্ন", BENGALI_DESTINATION_HUB_FAQS)}`;
+}
+
 /** Bengali crawl body for one route — always ends with internal links. */
 function buildBengaliBody(
   englishPath: string,
@@ -2318,12 +2366,7 @@ function buildBengaliBody(
         );
       }
     } else {
-      parts.push(
-        bnDirectory(
-          "সব গন্তব্য গাইড",
-          englishPathsIn("/destinations", DESTINATIONS_DATA.map((entry) => entry.id))
-        )
-      );
+      parts.push(bnDestinationsHubBody());
     }
     return `<article>${parts.join("")}</article>`;
   }
@@ -2400,6 +2443,13 @@ function bnGuidanceFor(group: string): string[] {
       "আবেদন করার আগে পাসপোর্টের মেয়াদ (সাধারণত যাত্রার পর অন্তত ৬ মাস), দুই কপি ছবি, ব্যাংক স্টেটমেন্ট, এনওসি/ট্রেড লাইসেন্স এবং ট্রাভেল ইনস্যুরেন্স—এই ডকুমেন্টগুলো প্রস্তুত রাখুন। ফরম্যাট বা মেয়াদ সংক্রান্ত নিয়ম দেশভেদে আলাদা, তাই অফিসিয়াল সাইটের সর্বশেষ নির্দেশনা মানুন।",
       "ভিসা ফি ও সার্ভিস চার্জের পাশাপাশি প্রসেসিং সময় হিসাব করে টিকিটের তারিখ ঠিক করুন। অনেক ক্ষেত্রে ভিসা না পাওয়া পর্যন্ত নন-রিফান্ডেবল টিকিট কেনা ঝুঁকিপূর্ণ।",
       "এই পাতার তথ্য ২০২৬ সালের যাচাইকৃত সারসংক্ষেপ। নিয়ম বা ফি পরিবর্তিত হলে সংশ্লিষ্ট দেশের ইমিগ্রেশন বা দূতাবাসের ওয়েবসাইটই চূড়ান্ত সূত্র হিসেবে বিবেচ্য।",
+    ];
+  }
+  if (group === "destinations") {
+    return [
+      "এই রুটটা একটা খসড়া, চূড়ান্ত সূচি নয়। ফ্লাইট কখন পৌঁছাবে, পরিবারের কারও হাঁটার সমস্যা আছে কি না, নামাজের সময় আর স্থানীয় বন্ধের দিন — এসব মিলিয়ে দিনের ক্রম বদলে নিন। এক দিনে দুটোর বেশি দূরের জায়গা রাখবেন না; একটা বাদ দিলে বাকিটা আরামে দেখা যায়।",
+      "রওনা হওয়ার আগে প্রবেশের নিয়ম আলাদাভাবে যাচাই করে নিন — ভিসা লাগবে কি না, কত দিনের, আর ব্যাংক স্টেটমেন্ট বা স্পনসরের কাগজ দরকার কি না। অনেক দেশে এই নিয়ম বছরের মধ্যেই বদলায়, তাই পুরনো ব্লগ বা ফোরামের পোস্টের ওপর ভরসা না করে অফিসিয়াল সূত্র দেখুন।",
+      "খরচ দুটো ভাগে ভাবুন: আগেই যেগুলো লাগে (বিমানভাড়া, ভিসা ফি, কিছু অ্যাট্রাকশনের টিকিট) আর জায়গায় গিয়ে যেগুলো লাগে (হোটেল, খাবার, স্থানীয় যাতায়াত, কেনাকাটা)। এখানে দেওয়া বাজেট দ্বিতীয় ভাগের, আর বিনিময় হার ও মৌসুমি দাম অনুযায়ী ১৫–২৫% ওঠানামা করতে পারে।",
     ];
   }
   if (group === "costs") {
@@ -2494,6 +2544,20 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           })
         );
       }
+    } else if (englishPath === "/destinations") {
+      // The hub's four landing answers, written in Bengali and marked bn-BD.
+      // The English hub's own FAQPage node is never copied here, so an English
+      // answer cannot end up on a Bengali page.
+      const bnHubFaq = stripContext(
+        generateFAQSchema(BENGALI_DESTINATION_HUB_FAQS, {
+          url: canonicalUrl,
+          name: copy.title,
+        })
+      );
+      bnHubFaq["@id"] = `${canonicalUrl}#faq`;
+      bnHubFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+      bnHubFaq["inLanguage"] = "bn-BD";
+      extraGraphNodes.push(bnHubFaq);
     } else if (englishPath === "/umrah") {
       const bnUmrahFaq = stripContext(
         generateFAQSchema(getLocalizedHajjFaqs("bn"), {
@@ -2639,11 +2703,34 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
       );
     } else if (
       segments.length === 2 &&
-      ["flights", "hotels", "visa", "costs"].includes(segments[0])
+      ["flights", "hotels", "visa", "costs", "destinations"].includes(segments[0])
     ) {
+      // English FAQ schema must never appear on a Bengali page, so the English
+      // FAQPage node is dropped from every Bengali detail route. Whether a
+      // replacement is added depends on whether Bengali answers exist: the
+      // flights/hotels/visa/costs overrides still carry English faqs and their
+      // Bengali bodies therefore render no FAQ section at all, while the
+      // destination guides have their own Bengali answers.
       for (const node of en.extraGraphNodes) {
         if (node["@type"] !== "FAQPage") {
           extraGraphNodes.push(node);
+        }
+      }
+      if (segments[0] === "destinations") {
+        const destination = getLocalizedDestinations("bn").find(
+          (item) => item.id === segments[1]
+        );
+        if (destination && destination.faqs.length) {
+          const bnFaq = stripContext(
+            generateFAQSchema(destination.faqs, {
+              url: canonicalUrl,
+              name: copy.title,
+            })
+          );
+          bnFaq["@id"] = `${canonicalUrl}#faq`;
+          bnFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+          bnFaq["inLanguage"] = "bn-BD";
+          extraGraphNodes.push(bnFaq);
         }
       }
     }
