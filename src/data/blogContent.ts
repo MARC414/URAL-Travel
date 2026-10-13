@@ -145,6 +145,7 @@ Carry:
 - Your National ID (NID) card and 1 passport-size photo (for new prepaid cards)
 - Your bank account or prepaid card number
 Ask the officer to endorse your annual travel quota (for example, $1,500 to $5,000 USD depending on your needs—you don't have to deposit the full $18,000 at once; you simply deposit BDT as you spend!).
+  • **Endorsement fee:** Money-changer endorsement: approximately **BDT 300** per passport. Bank AD branch endorsement: approximately **BDT 100–200** per transaction (banks with RFCDF/currency trading facilities may charge at the prevailing BC rate instead of a flat fee—confirm with your branch).
 
 Step 3: Open the Foreign Currency & E-Commerce Part Before Booking Online
 Having the physical ink stamp in your passport is only half the process! Before you book a flight on Aviasales, a hotel in Bangkok or Kuala Lumpur, or an airport pickup on Welcome Pickups:
@@ -216,7 +217,7 @@ Once your Singapore e-Visa PDF arrives (usually within 5–7 working days), prin
 
 3. THAILAND (BANGKOK, PATTAYA & PHUKET) — BEST FOR SHOPPING, SAFARI WORLD & MEDICAL CHECKUPS
 - Flight Time from Dhaka: 2 hrs 35 mins direct (Biman, Thai Airways, US-Bangla, Thai Lion Air)
-- Visa for Bangladeshis: Official Thailand e-Visa via thaievisa.go.th (BDT 6,500 – 8,500; 5–10 days)
+- Visa for Bangladeshis: Official Thailand e-Visa via thaievisa.go.th — government portal fee ≈ **USD 40 (800 THB / ~BDT 4,800)** per person; agency service fees typically add **BDT 1,600–3,610** on top; confirm the live total at the portal before applying. Roughly **BDT 6,500–8,500** in total (gov fee + agent fee combined; non-refundable). Processing: 5–10 working days.
 - 5-Day Per-Person Budget (Family Sharing): BDT 72,000 – BDT 92,000
 - Why Families Love It: Now that Thailand has launched the online e-Visa portal for Dhaka applicants, families no longer have to leave physical passports at VFS for weeks. Stay in Pratunam or Sukhumvit for effortless Halal dining, take the kids to Safari World Bangkok or Chao Phraya dinner cruises via Klook, and pre-book a Welcome Pickups family minivan so your driver greets you right at Suvarnabhumi Arrival Gate 3.
 
@@ -290,7 +291,7 @@ Pathway C: Instant 1-Year Saudi Tourist e-Visa or Visa on Arrival (ONLY for US/U
 3. MANDATORY APPS & HEALTH REQUIREMENTS BEFORE FLYING FROM DHAKA
 - Saudi Visa Bio App (Biometrics): Download the official "Saudi Visa Bio" app on your smartphone to scan your passport, face, and 10 fingerprints before flying (mandatory for Hajj pilgrims and required for visa biometrics).
 - Official Nusuk App (nusuk.sa): Once your Umrah or Stopover visa is issued, create an account on the official Nusuk app using your Visa Number and Passport Number. You will use Nusuk to book your Umrah appointment slot and your mandatory Rawdah Shareef (Riyazul Jannah) permit in Masjid an-Nabawi, Madinah. Tip: Rawdah permits for men and women open on separate schedules—check Nusuk early!
-- Vaccination Certificate: Carry your Meningococcal Meningitis (ACWY-135) vaccination card (taken at least 10 days prior to travel) along with your printed e-Visa, confirmed return air ticket, hotel vouchers, and endorsed Dual-Currency Card / Cash USD or SAR.
+- Vaccination Certificate: Carry your Meningococcal Meningitis (ACWY-135) vaccination card. Two types exist — conjugate (valid **5 years**) and polysaccharide (valid **3 years**). Ensure the shot is taken **at least 10 days before travel**. Seasonal Influenza vaccination is also recommended. COVID-19 vaccination is **not mandatory** but may be **selectively advised** for pilgrims aged 65+, pregnant, or immunocompromised — check the latest Saudi MOH guidance before departure. Carry the card alongside your printed e-Visa, confirmed return air ticket, hotel vouchers, and endorsed Dual-Currency Card / Cash USD or SAR.
 
 4. FLIGHTS & HARAMAIN HIGH-SPEED TRAIN: SMART ROUTING FROM DHAKA
 - Best Flight Strategy ("Open-Jaw / Multi-City Ticket"): Instead of flying Dhaka → Jeddah → Dhaka and backtracking by road, book a Multi-City ticket: Fly Dhaka (DAC) → Jeddah (JED), wear your Ihram before crossing the Miqat (Yalamlam / Qarn al-Manazil—announced by the pilot 45 minutes before landing on Biman and Saudia flights), perform Umrah in Makkah, take the bullet train to Madinah, and fly home directly from Madinah (MED) → Dhaka (DAC).
@@ -359,7 +360,7 @@ During the 5 core days of Hajj (8 to 13 Dhul Hijjah), your comfort depends on yo
 - Maktab A & B (VIP Majr Al-Kabsh / Kidana Towers): Located right beside Jamarat (300m to 800m walk), featuring split air-conditioning, 3 daily buffet meals, and higher bathroom-to-pilgrim ratios.
 
 5. MANDATORY ASHOKNA HAJJ CAMP & SAUDI VISA BIO STEPS
-All Bangladeshi Hajj pilgrims must complete their 10-fingerprint biometrics on the official Saudi Visa Bio App, obtain their Meningitis (ACWY-135) and seasonal Influenza vaccinations at designated Civil Surgeon / Government Hospital centers, and collect their Nusuk Hajj Smart Card—which is mandatory to board the Mashair train and enter the Haram courtyard during Hajj.`,
+All Bangladeshi Hajj pilgrims must complete their 10-fingerprint biometrics on the official Saudi Visa Bio App, obtain their Meningitis (ACWY-135) vaccination (conjugate = 5 years validity; polysaccharide = 3 years; take at least 10 days before departure) and are recommended to get seasonal Influenza vaccination at designated Civil Surgeon / Government Hospital centers. COVID-19 vaccination is **not mandatory** but may be **selectively advised** for those aged 65+, pregnant, or immunocompromised — verify current Saudi MOH requirements. Collect your Nusuk Hajj Smart Card—which is mandatory to board the Mashair train and enter the Haram courtyard during Hajj.`,
   "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": `For millions of Bangladeshi children, taking elderly parents (Amma and Abba) to perform Umrah and pray inside Masjid an-Nabawi is the most rewarding trip of a lifetime. However, a single Umrah (Tawaf + Sa'i + walking to and from the hotel) involves 5 to 8 kilometers of walking on hard marble floors. With smart preparation, you can make your parents' journey completely pain-free.
 
 1. STEP 1: BOOK FREE AIRPORT WHEELCHAIR ASSISTANCE (WCHR) FROM DHAKA
