@@ -840,7 +840,11 @@ npm run preview
 **Last Updated:** 2026-10-04 (evening)
 
 - [x] Phase 1A: Self-host fonts ✅ (oversight fix in `29d8793`)
-- [x] Phase 1B: Extract critical CSS ✅ (inlined in `index.html`; `public/critical.css` is a leftover reference copy — the inline `<style>` block is the source of truth)
+- [x] Phase 1B: Extract critical CSS ✅ (inlined in `index.html` — the inline `<style>` block IS the source of truth).
+      `public/critical.css` was **deleted 2026-10-13**: unreferenced repo-wide, not guarded by
+      `verify-build.ts`, and shipped as a dead file. It had also gone stale — it hardcoded
+      `html{font-family:Inter,ui-sans-serif,system-ui,sans-serif}`, which would have silently undone
+      the self-hosted font stack had anyone trusted the filename and inlined it.
 - [x] Phase 1C: Add preconnect hints ✅
 - [x] Phase 1+: `/fonts/*` cache header ✅ (2026-10-04 evening)
 - [~] Phase 2A: Re-compress images — superseded: generate from JPG masters instead of WebP→WebP

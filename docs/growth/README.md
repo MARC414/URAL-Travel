@@ -17,11 +17,11 @@ These come from the security and correctness constraints established while build
 
 1. **Never commit secrets.** The parent folder `E:\e-COMMERCE BUSINESS WEBSITE\URAL` contains `Gemini AP Key.txt` and `Doamin.txt`. Never `git add` them, never initialize git in that parent folder, never print their contents. `.env*` stays gitignored except `.env.example`.
 2. **Never silently remove the `emrld.ltd` script.** It is the Travelpayouts affiliate revenue script and it hijacks native DOM methods. Its presence is a business decision the site owner must make, not a tool. See [06-core-web-vitals.md](06-core-web-vitals.md#emrld).
-3. **Every URL is prerendered.** The build (`npm run build`) runs `scripts/prerender.ts`, which generates static HTML for all 83 routes plus `sitemap.xml` and `rss.xml`. **Metadata, canonical, hreflang, schema and internal links must be correct in the prerendered HTML, not just in React** — Google's first-wave crawl reads the static HTML. Any content change must be verified in `dist/` after a build, not just in the browser.
+3. **Every URL is prerendered.** The build (`npm run build`) runs `scripts/prerender.ts`, which generates static HTML for all routes (173 as of 2026-10-13) plus `sitemap.xml` and `rss.xml`. **Metadata, canonical, hreflang, schema and internal links must be correct in the prerendered HTML, not just in React** — Google's first-wave crawl reads the static HTML. Any content change must be verified in `dist/` after a build, not just in the browser.
 4. **Keep the four synchronization factors aligned** on every page: canonical URL, `og:url`/`twitter:url`, `hreflang` self-reference, and the schema `@id` graph must all point at the same URL. See [09-synchronization-maintenance.md](09-synchronization-maintenance.md).
 5. **Verify before you claim.** After any change, run `npm run lint && npm run build`, then grep the built `dist/` output to confirm the change actually shipped. Never report a fix as done without checking the built HTML.
 6. **Bengali content is not crawlable yet.** It is a client-side toggle with no distinct URL. Do not emit `bn-BD` hreflang until real Bengali URLs exist. See [01-indexing-crawling.md](01-indexing-crawling.md) and [03-content-topical-authority.md](03-content-topical-authority.md).
-   - **Status update (2 October 2026):** resolved in commit `9146458`. The prerender now emits **76 crawlable `/bn/` routes** with reciprocal `hreflang` clusters and `inLanguage` schema (verified in `dist/sitemap.xml` and `dist/bn/**`). Bengali content **is** crawlable — link Bengali posts to `/bn/...` URLs and see [10-social-media-marketing.md](10-social-media-marketing.md).
+   - **Status update (2 October 2026):** resolved in commit `9146458`. The prerender now emits **83 crawlable `/bn/` routes** with reciprocal `hreflang` clusters and `inLanguage` schema (verified in `dist/sitemap.xml` and `dist/bn/**`). Bengali content **is** crawlable — link Bengali posts to `/bn/...` URLs and see [10-social-media-marketing.md](10-social-media-marketing.md).
 
 ### The three permission tiers (from the site owner's standing instructions)
 
@@ -33,7 +33,29 @@ These come from the security and correctness constraints established while build
 
 ## 1. The one-paragraph situation summary
 
-The site is technically sound: prerendered, 83 unique pages, correct canonicals, a clean schema `@id` graph, Brotli compression, AI-crawler allowlisting, and (as of commit `40cf42c`) fixed asset caching, code splitting, `<head>` order, hreflang, robots.txt grouping, and `<html lang>` syncing. **What is holding back traffic is not technical SEO — it is depth and authority:** deep pages have almost no internal links pointing at them, hub and route pages are thin, there are zero backlinks, the sitemap has no freshness signal, and the Bengali audience has no indexable page. That is what this playbook fixes.
+The site is technically sound: prerendered, correct canonicals, a clean schema `@id` graph, Brotli compression, AI-crawler allowlisting, and (as of commit `40cf42c`) fixed asset caching, code splitting, `<head>` order, hreflang, robots.txt grouping, and `<html lang>` syncing. **What is holding back traffic is not technical SEO — it is authority:** there are **zero backlinks**, and it is not yet confirmed which pages Google has indexed.
+
+> ### ⚠️ Re-measured against `dist/` on 2026-10-13 — read this before acting on §1's original diagnosis
+>
+> The paragraph above was rewritten after measurement. **Three of the four on-site problems this
+> playbook was written to fix no longer exist**, and building against them would be wasted work:
+>
+> | Original diagnosis (29 Sept) | Measured in the built output (13 Oct) |
+> |---|---|
+> | "deep pages have almost no internal links" | **0 orphans.** Blog posts carry 29–33 unique internal links each; the homepage 105; 241 distinct internal URLs linked. |
+> | "hub and route pages are thin" | Route pages carry **800–1,200 words** of prerendered copy with proper H1/H2/FAQ structure. |
+> | implied duplicate-content risk | Pairwise 8-gram overlap between route pages is **0.4–0.9%** — none. |
+> | "the Bengali audience has no indexable page" | **Resolved 2 Oct** (commit `9146458`): 83 crawlable `/bn/` routes with reciprocal hreflang (see §0 rule 6). |
+>
+> **What actually remains:** zero backlinks (file 07) and unverified indexing (file 01). The site
+> builds **173 routes** (90 EN + 83 BN), not the 83 stated throughout this playbook.
+>
+> **One real outlier:** `dist/experiences.html` renders ~230 words against ~1,100 on comparable
+> routes. Fixing that one page is worthwhile; re-running the internal-linking audit is not.
+>
+> **Before doing work from files 02, 03 or 04, open Google Search Console and look at the actual
+> indexed-page count.** This playbook's diagnostic layer was written from an outside-in reading of
+> the site and has since been falsified by its own build output. Verify the premise, then work.
 
 ---
 

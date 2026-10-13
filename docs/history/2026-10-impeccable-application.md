@@ -1,6 +1,25 @@
+> ## ⚠️ HISTORICAL RECORD — THIS WAS A WORK ORDER, AND THE WORK IS DONE
+>
+> Archived 2026-10-13. **Do not execute Parts 0–5 of this document** — they are a plan for work that
+> has since been carried out and shipped in PR #27. Executing it again would redo finished work and,
+> where the plan was corrected mid-flight, would undo the corrections.
+>
+> - **Want the results?** They live in `DESIGN.md` (the visual contract) and `PRODUCT.md` (product truth).
+> - **Want the outstanding work?** `docs/MASTER-REMEDIATION-PLAN.md` **Workstream F**.
+> - **Want to know what was decided and why?** Parts 6–8 below, especially the *"corrections to this
+>   document"* sections, which record where this plan was wrong and what was done instead.
+>
+> Parts 4 and 5 (the Impeccable-vs-URAL conflict map and the safe application plan) are still worth
+> reading for reasoning, **not** as instruction. The `overused-font` detector finding in Part 3 was
+> deliberately disobeyed — the reasoning is at `docs/history/2026-10-performance-and-fonts.md` §2's
+> companion note and in `DESIGN.md`.
+
 # URAL × Impeccable — Audit & Safe Application Plan
 
-**Status:** Analysis + Phase 0 and Phase 1 applied (see Part 7). Phase 2+ not started.
+**Status:** **EXECUTED — archived 2026-10-13.** Phase 0 through Phase 3 were applied and shipped
+in PR #27; Phases 4–5 were superseded by a decision to stop polishing and ship. See Parts 7 and 8
+for what was applied, and `docs/MASTER-REMEDIATION-PLAN.md` Workstream F for the deliberately-open
+remainder. (This line originally read *"Phase 2+ not started"* — it rotted within the same day.)
 **Audited commit:** `0ded5c1` (`arena/ed7a9384-ural-travel`, branched from `main`)
 **Audited:** 2026-10-13
 **Subject:** [github.com/pbakaus/impeccable](https://github.com/pbakaus/impeccable) v4.5.2
@@ -618,9 +637,10 @@ device before this work is called done:
 
 1. **The serif swap** — that Source Serif 4 reads well in your headings, and the metric
    overrides hold CLS at zero on a real network.
-2. **The blue-on-dark heading** behind the Cost & Budgeting panel — `text-brand-navy` on a
-   near-black background. This looks like a genuine contrast bug from reading the code, but
-   only a rendered page can confirm it.
+2. ~~**The blue-on-dark heading** behind the Cost & Budgeting panel~~ — **DISPROVED 2026-10-13.**
+   Every `text-brand-navy` occurrence was walked to its nearest ancestor background; all pair with
+   gold or white. **No contrast bug exists.** Kept struck through as a record, because the same
+   false reading will be tempting again.
 3. **The new QuickAnswer surface** — that the ivory tint reads as intended against both the
    white and soft-white section backgrounds.
 

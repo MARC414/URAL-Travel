@@ -123,14 +123,45 @@ D5. `/editorial-policy`; D6. image sitemap + `VideoObject` + pillar pages;
 D7. **custom domain** (biggest ranking lever; `*.pages.dev` indexes slowly —
 meanwhile submit sitemap in GSC + request indexing).
 
-## Workstream E — brand-asset de-nesting (`chore/de-nest-brand-assets`)
+## Workstream E — brand-asset de-nesting ✅ DONE (2026-10-13)
 
-Working tree has `src/URAL-brand-assets/ural-brand-assets/*` deleted and re-added
-at `src/URAL-brand-assets/*`. Take control:
-1. `grep -r "ural-brand-assets/ural-brand-assets"` across `src/ scripts/
-   index.html public/` — update any reference to the old nested path FIRST.
-2. Commit the move as one `chore: de-nest brand assets`, kept OUT of other PRs.
-(Shipped favicons live in `public/assets/brand/favicon/` and are unaffected — verify.)
+Resolved in the cleanup pass. The double nesting is gone and the kit no longer
+sits in `src/` (where it read as application code):
+
+- `src/URAL-brand-assets/ural-brand-assets/*` → **`brand-kit/*`** (63 files).
+- Both references updated: this file and `docs/growth/10-social-media-marketing.md`.
+- The kit is a **live asset library**, not dead weight: `docs/growth/10` uses its PNG
+  exports for avatars, covers and carousels. It was relocated, not deleted.
+- Shipped favicons remain in `public/assets/brand/favicon/` and are unaffected. 7 of the
+  kit's 8 favicon files are byte-identical to the shipped set (only `favicon.ico` differs);
+  they are kept so the kit stays a complete, hand-off-ready bundle.
+- A backup archive exists at `URAL-brand-kit-backup.zip` outside the repo.
+
+## Workstream F — carried forward from the Impeccable design pass (owner-guided, later)
+
+The 2026-10-13 typography/de-slopping work shipped in PR #27. These items were deliberately
+**not** done and are the honest remainder. None are defects; all are polish with real reflow risk.
+
+- **One-off type sizes** — `13.5px`, `14.5px`, `15px` (56 advisory hits). Genuine drift, but each
+  lives inside a different component's layout. Normalise **as those components are touched**, not in
+  a sweep that risks reflowing a dozen layouts at once.
+- **9 colour advisories** — mostly partner-brand colours in the logo marquee (those are third-party
+  marks and are *correct*), plus print `#555`/`#ccc`.
+- **5 radius advisories** — `2px`/`15px` in the marquee, `12px` in `.dark-panel`.
+- **Per-component focus audit** on the search widgets — needs real interaction testing.
+- **The 2 remaining primary detector findings** are both known static-shell artifacts, not app bugs.
+
+**Needs a real device — no browser exists in the build environment:**
+
+1. The serif swap reads well and the metric overrides hold CLS near zero on a real network.
+2. The new `QuickAnswer` surface reads as intended against both the white and soft-white sections.
+3. The `@media (hover: none)` swipeable rail behaves on a touch device.
+
+> The "blue-on-dark heading" contrast item previously listed here was **investigated and disproved**
+> on 2026-10-13: every `text-brand-navy` occurrence was walked to its nearest ancestor background and
+> all pair with gold or white. **No contrast bug exists.** Do not re-open it without a screenshot.
+
+---
 
 ## Verification (per branch, before PR)
 

@@ -5,7 +5,7 @@
 **Feeds into:** [07](07-backlinks-free.md) (brand mentions become links), [09](09-synchronization-maintenance.md) (the weekly loop), and the newsletter backend (`functions/api/subscribe.js`).
 **Prepared:** 2 October 2026 · **Owner:** URAL Dhaka Desk · **Review cycle:** monthly, or whenever an official portal changes a rule.
 
-> **Why now (what changed this week):** the Bengali prerender is live — 76 crawlable `/bn/` URLs with reciprocal `hreflang` clusters (`/bn/costs/nepal-costs` ↔ `/costs/nepal-costs`), plus 83 English routes. **Every Bangla post can now link to a Bangla page that Google can index.** Before this, Bengali content was a client-side toggle with no URL, so social traffic to Bengali had nowhere to land. This document is written for the post-`/bn/` world.
+> **Why now (what changed this week):** the Bengali prerender is live — 83 crawlable `/bn/` URLs with reciprocal `hreflang` clusters (`/bn/costs/nepal-costs` ↔ `/costs/nepal-costs`), plus 90 English routes (173 total). **Every Bangla post can now link to a Bangla page that Google can index.** Before this, Bengali content was a client-side toggle with no URL, so social traffic to Bengali had nowhere to land. This document is written for the post-`/bn/` world.
 
 ---
 
@@ -21,7 +21,7 @@
 | 41 blog guides, 6 visa guides, 6 destination cost datasets | `src/constants.ts` | The content mine — never write a post from scratch |
 | "Copy Ready FB Post" button on every blog page | `src/App.tsx` (share bar) | Generates a caption + link from `getBlogAeoSnippet50Words()` |
 | Newsletter capture + source labels | `functions/api/subscribe.js` | Owned audience; `source` field tracks placement |
-| Brand kit (navy `#0B192C`, gold `#F6B73C`, 3 colorways) | `src/URAL-brand-assets/` | Templates, avatars, covers |
+| Brand kit (navy `#0B1426`, gold `#F6B73C`, 3 colorways) | `brand-kit/` | Templates, avatars, covers |
 | Bengali SERP copy + plan | `BENGALI-SEO-PLAN.md` | Tone reference for BN headlines |
 
 **Nothing in this file requires a code change.** If you want new site features for social (e.g. a `/bn/` landing page for a campaign), that is a content task for [03-content-topical-authority.md](03-content-topical-authority.md), not a marketing improvisation.
@@ -496,8 +496,12 @@ Kill criterion:
 
 ## Appendix A — Brand & template conventions
 
-- **Colors:** navy `#0B192C` background, gold `#F6B73C` accents/CTA, white text. Bengali headline in gold, English subline in white/70%.
-- **Wordmark:** `/assets/brand/svg/ural-wordmark.svg`; ascent mark for avatars. Full kit: `src/URAL-brand-assets/`.
+- **Colors:** navy `#0B1426` background (the brand value in `DESIGN.md`), gold `#F6B73C` accents/CTA,
+  white text. Bengali headline in gold, English subline in white/70%.
+  - ⚠️ An older `#0B192C` is still hardcoded in a few non-critical surfaces (`public/travelpayouts-wl.html`,
+    the subscriber email in `functions/api/subscribe.js`, one cyan-button text colour in `App.tsx`).
+    It is visually near-identical but **`#0B1426` is the brand navy** — use it for new assets.
+- **Wordmark:** `/assets/brand/svg/ural-wordmark.svg`; ascent mark for avatars. Full kit: `brand-kit/` (PNG exports at every size needed for avatars, covers and carousels).
 - **Sizes:** 1080×1350 (carousel, FB/IG), 1080×1920 (Reels/Stories), 1200×630 (link previews — matches the generated `og-image.jpg`).
 - **Receipt stamp:** bottom-left `সূত্র: <portal> · যাচাই: <date>` in 11–12 pt equivalent. Identical on every proof image.
 - **Tone:** confident, plain, specific. Bangla: `আপনি` form, no over-formality, no fear-selling. English: factual, market-aware.

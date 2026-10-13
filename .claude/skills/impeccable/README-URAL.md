@@ -15,7 +15,7 @@ in a person's head do not survive — they drift. This project already has one s
 exactly that failure: `--font-serif` named "Lora" and "Playfair Display" for months while
 neither file was ever shipped, so 205 headings silently rendered in Georgia/Cambria/Times,
 and the Privacy Policy page rendered every heading in Inter because three shared title
-classes did not set a font-family (see `docs/IMPECCABLE-APPLICATION-PLAN.md`).
+classes did not set a font-family (see `docs/history/2026-10-impeccable-application.md`).
 
 `PRODUCT.md` and `DESIGN.md` at the repo root are the written rules. This skill is the
 tooling that reads them.

@@ -12,7 +12,7 @@ This document serves as the canonical technical handoff and architectural refere
   - Step-by-step Tourist, Medical, and Umrah Visa Checklists (`Nepal`, `Thailand`, `Malaysia`, `UAE/Dubai`, `Singapore`, `Maldives`, `Schengen`, `Saudi Arabia`).
   - Bilingual Support (`en` English & `bn` Bengali) with dynamic `<html lang>` synchronization.
   - Real-time Multi-Currency Display (`BDT`, `USD`, `EUR`, `GBP`, `SAR`, `AED`).
-  - Static Prerendering (`scripts/prerender.ts`) generating crawlable HTML, OpenGraph metadata, and Schema.org JSON-LD (`FAQPage`, `Article`, `TravelAgency`, `BreadcrumbList`) for all 70+ routes.
+  - Static Prerendering (`scripts/prerender.ts`) generating crawlable HTML, OpenGraph metadata, and Schema.org JSON-LD (`FAQPage`, `Article`, `TravelAgency`, `BreadcrumbList`) for all 173 routes (90 English + 83 Bengali).
 
 ---
 
@@ -59,3 +59,39 @@ All Travelpayouts partner links and promotional campaigns are managed centrally 
 - `npm run lint` — Runs `tsc --noEmit` to verify TypeScript types across `src/`.
 - `npm run build` — Runs `vite build` followed by `tsx scripts/prerender.ts` to generate static route HTML and sitemaps in `dist/`.
 - `npm run build:spa` — Runs `vite build` only.
+
+---
+
+## 6. Source Assets & Backups (outside this repository)
+
+Some asset masters deliberately live **outside** the repo, on the site owner's machine, because they
+are large and the optimized derivatives are what ships. Do not assume a missing original is lost:
+
+- **Image masters:** `E:\e-COMMERCE BUSINESS WEBSITE\URAL\image-masters-backup\` — the full-resolution
+  originals behind `public/img/` and `src/assets/optimized-social/`. This is where to go if a re-encode
+  at a different size or quality is ever needed.
+- **Brand kit backup:** `URAL-brand-kit-backup.zip` (workspace root, outside the repo) — a copy of
+  `brand-kit/` as it stood before the 2026-10-13 cleanup, in case the relocation needs reverting.
+- The parent folder also holds `Gemini AP Key.txt` and `Doamin.txt`. **Never `git add` them, never
+  initialize a repository in that parent folder, never print their contents.**
+
+## 7. Documentation Lifecycle — keep docs honest
+
+This repository accumulated documents that described a past state in the present tense, and then
+misled the next reader. The rule that prevents it:
+
+1. **A document states facts that are true today, or it says loudly that it is historical.**
+   Archived material goes in `docs/history/` behind a `HISTORICAL RECORD — DO NOT TREAT AS CURRENT
+   STATE` banner, with stale details marked as stale. Read `docs/history/2026-10-performance-and-fonts.md`
+   for the pattern.
+2. **No status banners in documents.** "COMPLETED ✅" and "Production Ready" belong to git commits and
+   pull requests, which are dated and immutable. A document's status rots silently — and then misleads.
+3. **No line numbers.** They are wrong within one commit. Name the symbol or the surrounding text instead.
+4. **Status updates go inline where they are read.** When a section becomes obsolete, replace it with a
+   dated resolution note rather than leaving the stale claim standing (see `docs/growth/README.md` §0
+   rule 6 for the pattern).
+5. **Delete work orders when the work lands.** A plan, checklist or audit that has been executed is not
+   documentation — it is a to-do list someone already finished. Its results belong in the code, in
+   `DESIGN.md`/`PRODUCT.md`, or in `docs/history/`.
+6. **Never record a projected performance number as if measured.** A "Lighthouse: 65 → 80" that was never
+   run will be quoted as fact forever. Measure, or say you did not.

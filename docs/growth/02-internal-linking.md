@@ -1,5 +1,32 @@
 # 02 — Internal Linking (page by page, line by line)
 
+> ## ✅ LARGELY RESOLVED — verified against `dist/` on 2026-10-13
+>
+> **Do not run the audit below as written.** Its central premise — that deep pages are
+> reachable only through `<button onClick>` and are therefore invisible to crawlers — no
+> longer holds. Measured in the built output:
+>
+> - **0 orphan pages.** Every route is reachable by a real `<a href>` in the prerendered HTML.
+> - **241 distinct internal URLs** are linked across the site. The homepage carries **105**;
+>   individual blog posts carry **29–33** each.
+> - Comparison of route pages pairwise by 8-gram overlap: **0.4–0.9%** — no duplicate-content risk.
+>
+> The **principles below remain correct and worth internalising** (anchors pass equity, buttons
+> don't; keep the real `href` alongside `navigateTo()`). They are the rule to apply to *new*
+> components, not a backlog to work through.
+>
+> **One genuine outlier survives the re-check:** `dist/experiences.html` renders ~**230 words**
+> against ~1,100 on comparable route pages. If you want a single target from this file, that is it.
+>
+> **The binding constraint has moved off-site.** With internal linking, content depth and
+> duplicate-content risk all measuring clean, the limiter is now **zero backlinks** and
+> uncertain indexing. Before acting on any 29-September diagnosis, check current indexing in
+> Google Search Console — this file's premise was already obsolete when re-measured.
+>
+> *Related: [01-indexing-crawling.md](01-indexing-crawling.md) (indexing is the live question),
+> [07-backlinks-free.md](07-backlinks-free.md) (the actual bottleneck).*
+
+
 **Perspective:** the single highest-leverage on-site fix. Turns the homepage's crawl equity into indexed deep pages.
 **Prereqs:** understand [01-indexing-crawling.md](01-indexing-crawling.md) §1 root cause A.
 **Feeds into:** [01](01-indexing-crawling.md) (indexing), [03](03-content-topical-authority.md) (content gives you things to link to), [04](04-keywords.md) (anchor text).
@@ -40,7 +67,11 @@ Do this everywhere internal navigation happens. Audit `App.tsx` and every compon
 | `/flights` hub | 6 (child routes only) | Too thin |
 | Other hubs (hotels/visa/destinations/costs) | ~7 each | Weak |
 
-The blog is where 41 of your 83 pages live, and each one is a near-orphan. **Fixing the blog interlinking alone should move the needle most.**
+The blog is where most of your pages live.
+
+> **Superseded 2026-10-13:** the "near-orphan" half of this sentence is false. Blog posts now
+> render **29–33 unique internal links** each, and there are **0 orphans** site-wide. The count is
+> also stale — 173 routes (90 EN + 83 BN), not 83. Kept for context; the action below is done.
 
 ---
 
