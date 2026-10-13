@@ -86,6 +86,7 @@ That is ~43 strings of real Bengali per destination, ~260 for the section.
 | A0b | Defect sweep — four defects found and fixed (see below) | ✅ done |
 | A3 | 🇹🇭 Thailand — written at parity (4 days, 3 transport, 5 key facts, 5 FAQs, 39 nested strings) | ✅ done |
 | A4 | 🇲🇾 Malaysia — written at parity (4 days, 3 transport, 5 key facts, 5 FAQs, 39 nested strings) | ✅ done |
+| A5 | 🇦🇪 Dubai / UAE — written at parity (4 days, 3 transport, 5 key facts, 5 FAQs, 39 nested strings) | ✅ done |
 | A1 | `src/data/bengaliDestinations.ts` + `getLocalizedDestinations()` + client wiring | ✅ done |
 | A2 | Nepal guide | ✅ done |
 | A3 | Thailand guide | ☐ |
@@ -224,3 +225,22 @@ English page does.
 Bengali chunk: 531,742 → **542,081 bytes**. Roughly 10 KB per guide, so the
 remaining two plus the hub land near 575 KB — still a chunk only Bengali readers
 download. tsc clean, 92 EN + 85 BN routes, verify:build 80/80, sweep 0/4,501.
+
+### A5 — Dubai / UAE — DONE
+`dubai-guide`. 6 prose fields, 4 itinerary days × 3 activities, 3 transport
+options, 5 key facts, 5 FAQs, 39 nested strings — all Bengali, counts matching
+English. `country` is "সংযুক্ত আরব আমিরাত", the Bengali name for the UAE, since
+that field heads the page's key-facts section.
+
+The visa FAQ states the trap plainly in Bengali: no visa on arrival, no direct
+embassy application, sponsor-based eVisa via Emirates, flydubai, Air Arabia or
+an approved Dhaka agent, 3 to 5 working days, six-month bank statement showing
+BDT 150,000. Cross-checked against `/visa/dubai-visa` programmatically.
+
+Bengali chunk: 542,081 → **551,997 bytes**. tsc clean, 92 EN + 85 BN,
+verify:build 80/80, sweep 0 of 4,501 links.
+
+### Guide count so far
+Nepal, Thailand, Malaysia, Dubai are written (4 of 6). Singapore and Maldives
+remain, then A8 (prerender body branch), A9 (lift the deferral + Bengali SERP
+copy for all seven routes) and A10 (verify 92/92 routes, hreflang, sitemap).
