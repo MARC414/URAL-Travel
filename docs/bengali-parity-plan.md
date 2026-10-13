@@ -406,7 +406,7 @@ React child — a `[object Object]` regression slipped past it mid-unit. So
 asserts (a) the Bengali render is at least 60% Bengali words and (b) no English
 sentence of five words or more survives into it. Negative control: reverting the
 field picker to always return English fails both checks — 20% Bengali, 60 leaked
-sentences. `verify:build` is 82 checks.
+sentences. `verify:build` gained these checks alongside the ones already there.
 
 | measure | before | after |
 |---|---|---|
@@ -431,7 +431,12 @@ B1c then closed the crawler side. The Bengali SERP copy already existed in
 each route listed there must reach a minimum share of its English crawlable word
 count and leak no English sentence. A route is added when its Bengali body
 lands, never before — which is also the rule for `docs/` claims. Negative
-control: raising the threshold to 95% fails the check. 84 checks total.
+control: raising the threshold to 95% fails the check.
+
+A count is deliberately not written here: the suite grew again on 2026-10-14
+when the footer was rendered for the first time (its support band, its `&amp;`
+entities) and `/contact` was smoke-rendered — see the comments in
+`scripts/verify-build.ts`. The number rots; the checks do not.
 
 **Note for the remaining Section B units.** `buildBengaliBody` is a *second*
 code path from the React page, so every hub needs its Bengali body written
