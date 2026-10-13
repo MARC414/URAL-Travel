@@ -1,5 +1,27 @@
 @import "tailwindcss";
 
+/* === ACCESSIBILITY: SKIP LINK === */
+/* Shown only on keyboard focus; visually hidden until then */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0.5rem;
+  z-index: 99999;
+  padding: 0.5rem 1rem;
+  background: #0b192c;
+  color: #f6b73c;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #f6b73c;
+  outline-offset: 2px;
+}
+
 :root {
   --font-primary: 'Inter', 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, sans-serif;
 
