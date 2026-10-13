@@ -5,7 +5,7 @@ import { QuickAnswer } from "../components/QuickAnswer";
 
 import { PartnerLinkButton, AFFILIATE_LINKS, AiraloEsimWidget } from "../components/AffiliatePartners";
 
-import { ShieldCheck, ArrowRight, FileText, Wifi, Building, Plane } from "lucide-react";
+import { ShieldCheck, ArrowRight, FileText, Wifi, Building, Plane, Globe } from "lucide-react";
 
 import { TravelIntelligence } from "../components/AeoInspector";
 
@@ -159,6 +159,23 @@ export default function VisaRouteView({ context }: RouteViewProps) {
               </button>
 
             ))}
+
+            <a
+              href="/visa-free-countries"
+              onClick={(event) => {
+                event.preventDefault();
+                navigateTo("/visa-free-countries");
+              }}
+              className="mt-1 flex w-full cursor-pointer items-start gap-2 rounded-xl border border-[#F6B73C]/50 bg-[#F6B73C]/5 p-3.5 text-left text-xs font-semibold text-brand-navy transition-colors hover:bg-[#F6B73C]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+            >
+              <Globe size={13} className="mt-0.5 shrink-0 text-[#F6B73C]" aria-hidden="true" />
+              <span>
+                {isBn ? "ভিসা ছাড়া যেসব দেশে যাওয়া যায়" : "Which countries are visa-free?"}
+                <span className="mt-0.5 block font-normal text-text-muted">
+                  {isBn ? "২০২৬ সালের যাচাই করা তালিকা" : "The verified 2026 list"}
+                </span>
+              </span>
+            </a>
 
           </div>
 

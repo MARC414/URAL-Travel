@@ -13,6 +13,18 @@ import {
 // them EAGERLY: the prerendered article HTML is the SEO surface, so the text has
 // to be here. verify-build.ts fails if it ever stops being emitted.
 import { BLOG_BODY } from "../src/data/blogContent";
+// The visa-free pillar's content lives in one data file so the prerendered HTML
+// (this script), the React page (src/routes/VisaFreeCountriesRouteView.tsx) and
+// the FAQ schema can never disagree. See that file for the sourcing rules.
+import {
+  ALWAYS_CARRY,
+  COMMONLY_MISREAD,
+  LAST_VERIFIED as VISA_FREE_LAST_VERIFIED,
+  REMOTE_VISA_FREE,
+  REMOTE_VOA,
+  USABLE_NOW,
+  VISA_FREE_FAQS,
+} from "../src/data/visaFreeData";
 import {
   BASE_URL,
   breadcrumbSchema,
@@ -654,6 +666,7 @@ function renderVisaHubBody(title: string, description: string, faqSchema: Return
   return `<article>
     <h1>${escapeHtml(title)}</h1>
     <p>${escapeHtml(description)}</p>
+    <p>If you only need to know which destinations a Bangladeshi passport can enter with nothing arranged in advance, start with <a href="/visa-free-countries">visa-free countries for Bangladeshi passport holders</a> — it separates the destinations you can actually use from the ones that only look easy.</p>
     <p>This visa hub brings together entry-route, fee, processing-time and document guidance for popular destinations for Bangladeshi passport holders. Start with the country-specific guide below to understand whether the route described is visa-free, visa on arrival, electronic or an advance application. Requirements depend on the travel purpose, passport and current policy; the amounts and timeframes shown are guidance from the underlying destination pages, not an approval guarantee. Immigration rules can change without notice, so verify the latest requirements and application channel with the destination's official immigration department, embassy or authorized portal before booking or applying.</p>
     <section><h2>Country visa guides and application routes</h2><ul>${directory}</ul></section>
     <section><h2>Documents and steps by destination</h2>${guideDetails}</section>
@@ -749,7 +762,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       {
         question: "Which countries can Bangladeshi passport holders visit without a prior visa?",
         answer:
-          "Nepal and the Maldives grant free Visa on Arrival (with free online IMUGA declaration for the Maldives), while Sri Lanka issues an online Electronic Travel Authorization (ETA via eta.gov.lk) before departure. Bhutan requires an entry permit and a Sustainable Development Fee (SDF of Nu. 1,200/night). Note that Indonesia, Thailand, Malaysia, and Singapore do NOT grant Visa on Arrival to ordinary Bangladeshi passports, so an advance visa is required before flying from Dhaka. Indonesia's e-Visa is generally open to Bangladeshi applicants only through a local sponsor or guarantor, so most travellers apply for an embassy visa. Dubai's visa-on-arrival rules for Bangladeshi passports are conditional and change often, so confirm them with the UAE authorities before you book.",
+          "Nepal and the Maldives grant free Visa on Arrival (with free online IMUGA declaration for the Maldives), while Sri Lanka issues an online Electronic Travel Authorization (ETA via eta.gov.lk) before departure. Bhutan requires an entry permit and a Sustainable Development Fee (SDF of Nu. 1,200/night). Note that Indonesia, Thailand, Malaysia, and Singapore do NOT grant Visa on Arrival to ordinary Bangladeshi passports, so an advance visa is required before flying from Dhaka. Indonesia's e-Visa is generally open to Bangladeshi applicants only through a local sponsor or guarantor, so most travellers apply for an embassy visa. The UAE does not grant visa on arrival to ordinary Bangladeshi passports either: a Dubai or Abu Dhabi tourist visa must be arranged in advance through an airline, hotel, licensed agency or UAE sponsor, and it carries a fee. The UAE is not a visa-free destination for Bangladeshi passports.",
       },
       {
         question: "Is URAL a travel agency that sells tickets?",
@@ -1021,6 +1034,116 @@ function buildAllRoutes(): PrerenderRoute[] {
     });
   }
 
+  // 4b. Visa-Free Countries pillar (/visa-free-countries)
+  //
+  // The site's strongest natural link magnet: a factual, evergreen answer to
+  // "which countries can a Bangladeshi passport visit without a visa". Built
+  // entirely from src/data/visaFreeData.ts so the crawler HTML, the React page
+  // and the structured data cannot drift apart.
+  //
+  // Editorial stance: the visa-free list is long but mostly unusable, because
+  // reaching those destinations requires transiting a country a Bangladeshi
+  // passport holder needs a visa for. That correction is the value of the page —
+  // every competing article simply prints the list.
+  const visaFreeTitle =
+    "Visa-Free Countries for a Bangladeshi Passport (2026): What You Can Actually Use | URAL";
+  const visaFreeDesc =
+    "Which countries a Bangladeshi passport can enter without a prior visa in 2026 — the three usable directly from Dhaka, the full visa-free list, the transit-visa trap, and the destinations travellers wrongly assume are easy.";
+
+  // Kept typed (not stripContext'd) so renderLandingFaqs can read .mainEntity;
+  // the graph node below takes the stripped copy, as the visa hub does.
+  const visaFreeFaqNode = generateFAQSchema(VISA_FREE_FAQS, {
+    url: `${BASE_URL}/visa-free-countries`,
+    name: "Visa-free travel on a Bangladeshi passport — common questions",
+  });
+
+  const renderVisaFreeEntry = (entry: (typeof USABLE_NOW)[number]) => `
+            <section>
+              <h3>${escapeHtml(entry.country)}</h3>
+              <p><strong>${escapeHtml(entry.entry)}</strong> — maximum stay ${escapeHtml(entry.maxStay)}. Cost: ${escapeHtml(entry.cost)}. ${escapeHtml(entry.reach)}.</p>
+              <p>${escapeHtml(entry.note)}</p>
+              ${entry.caveat ? `<p>${escapeHtml(entry.caveat)}</p>` : ""}
+              <p><small>Source: ${escapeHtml(entry.source)}</small></p>
+            </section>`;
+
+  const visaFreeBodyHtml = `
+    <article>
+      <h1>Visa-Free Countries for a Bangladeshi Passport (2026)</h1>
+      <section id="visa-free-answer" aria-labelledby="visa-free-answer-heading">
+        <h2 id="visa-free-answer-heading">Quick Answer</h2>
+        <p>Direct from Dhaka, only three destinations require nothing arranged in advance: Nepal and the Maldives on a free visa on arrival, and Sri Lanka with an online ETA approved before you fly (USD 20 at the SAARC rate). The rest of the widely published list — Caribbean and Pacific island states — is genuinely visa-free, but reaching those countries means transiting a country that a Bangladeshi passport holder needs a visa for. The list is long; the usable part is not.</p>
+      </section>
+      <section aria-labelledby="visa-free-usable">
+        <h2 id="visa-free-usable">The ones you can actually use from Dhaka</h2>
+        <p>All three have direct flights from Dhaka, and none require an embassy visit.</p>
+        ${USABLE_NOW.map(renderVisaFreeEntry).join("\n")}
+        <p>Full step-by-step checklists: <a href="/visa/nepal-visa">Nepal visa guide</a>, <a href="/visa/maldives-visa">Maldives visa guide</a>, and <a href="/visa">all visa guides for Bangladeshi citizens</a>.</p>
+      </section>
+      <section aria-labelledby="visa-free-remote">
+        <h2 id="visa-free-remote">The rest of the list — and why it misleads</h2>
+        <p>These destinations require no visa in advance for a Bangladeshi passport. But getting to them from Dhaka almost always means transiting the United States, the United Kingdom, Europe or the Gulf, and a Bangladeshi passport holder needs a visa for those transit countries. A visa-free destination you cannot legally reach is not visa-free in any useful sense.</p>
+        <h3>Visa-free entry</h3>
+        <p>${REMOTE_VISA_FREE.map(escapeHtml).join(", ")}.</p>
+        <h3>Visa on arrival</h3>
+        <p>${REMOTE_VOA.map(escapeHtml).join(", ")}.</p>
+      </section>
+      <section aria-labelledby="visa-free-misread">
+        <h2 id="visa-free-misread">The ones people assume are easy — and aren't</h2>
+        <p>None of these will admit an ordinary Bangladeshi passport without a visa arranged first, and all of them are commonly assumed to.</p>
+        ${COMMONLY_MISREAD.map(
+          (entry) => `<section>
+              <h3>${escapeHtml(entry.country)}</h3>
+              <p><strong>${escapeHtml(entry.entry)}</strong> — ${escapeHtml(entry.cost)}, ${escapeHtml(entry.maxStay)}.</p>
+              <p>${escapeHtml(entry.note)}</p>
+              ${entry.caveat ? `<p>${escapeHtml(entry.caveat)}</p>` : ""}
+              <p><small>Source: ${escapeHtml(entry.source)}</small></p>
+            </section>`
+        ).join("\n")}
+      </section>
+      <section aria-labelledby="visa-free-carry">
+        <h2 id="visa-free-carry">Whatever the destination, carry these</h2>
+        <ul>${ALWAYS_CARRY.map((row) => `<li><strong>${escapeHtml(row.item)}</strong> — ${escapeHtml(row.detail)}</li>`).join("\n")}</ul>
+      </section>
+      ${renderLandingFaqs(
+        "visa-free-faqs",
+        "Visa-free travel on a Bangladeshi passport — common questions",
+        visaFreeFaqNode
+      )}
+      <section aria-labelledby="visa-free-verified">
+        <h2 id="visa-free-verified">How this list was verified</h2>
+        <p>Every rule on this page was cross-checked against the destination's immigration authority, embassy guidance and international passport indexing. Visa rules change often and rarely with notice, so confirm the current requirement on the destination's own immigration site or at its embassy in Dhaka before you book anything non-refundable. URAL does not process visa applications or issue visas.</p>
+        <p><small>Last verified: <time datetime="${VISA_FREE_LAST_VERIFIED}">${VISA_FREE_LAST_VERIFIED}</time></small></p>
+      </section>
+    </article>
+    `;
+
+  routes.push({
+    routePath: "/visa-free-countries",
+    canonicalUrl: `${BASE_URL}/visa-free-countries`,
+    title: visaFreeTitle,
+    description: visaFreeDesc,
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "Visa Guides", url: `${BASE_URL}/visa` },
+      { name: "Visa-Free Countries", url: `${BASE_URL}/visa-free-countries` },
+    ],
+    extraGraphNodes: [
+      ...(visaFreeFaqNode ? [stripContext(visaFreeFaqNode)] : []),
+      collectionPageSchema({
+        url: `${BASE_URL}/visa-free-countries`,
+        name: "Visa-free entry for Bangladeshi passport holders",
+        description: visaFreeDesc,
+        items: USABLE_NOW.map((entry) => ({
+          name: `${entry.country} — ${entry.entry}`,
+          url: `${BASE_URL}/visa`,
+          description: entry.note,
+        })),
+      }),
+    ],
+    bodyHtml: visaFreeBodyHtml,
+  });
+
   // 5. Visa Hub (/visa) + 6 Visa Guides (/visa/:id)
   const visaHubTitle = "Visa Requirements for Bangladeshi Citizens 2026: Guides & Checklists | URAL";
   const visaHubDesc =
@@ -1090,6 +1213,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h1>${escapeHtml(title)}</h1>
           <p>${escapeHtml(v.quickAnswer || description)}</p>
           <p><strong>Entry route:</strong> ${escapeHtml(v.requirementType)} | <strong>Published fee/entry guidance:</strong> ${escapeHtml(v.costBdt)} | <strong>Indicative processing guidance:</strong> ${escapeHtml(v.processingTime)}</p>
+          <p>Comparing this route with the rest of the region? See <a href="/visa-free-countries">which countries a Bangladeshi passport can enter without a prior visa</a>.</p>
           <p>These details are an editorial planning summary, not an official decision. Rules, fees, forms and processing windows can change; verify the current requirements with the linked authority before applying or making non-refundable plans.</p>
           <h2>Key visa facts</h2>
           <ul>${v.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>

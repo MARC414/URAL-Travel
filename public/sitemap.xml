@@ -145,6 +145,15 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://ural-travel.pages.dev/visa-free-countries</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa-free-countries" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa-free-countries" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa-free-countries" />
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://ural-travel.pages.dev/visa</loc>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa" />
@@ -929,6 +938,15 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/hotels/maldives-hotels" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/hotels/maldives-hotels" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/hotels/maldives-hotels" />
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/visa-free-countries</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/visa-free-countries" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/visa-free-countries" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/visa-free-countries" />
     <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

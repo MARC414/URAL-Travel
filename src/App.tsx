@@ -160,6 +160,7 @@ const BlogPostRouteView = React.lazy(() => import("./routes/BlogPostRouteView"))
 const ContactRouteView = React.lazy(() => import("./routes/ContactRouteView"));
 const AboutRouteView = React.lazy(() => import("./routes/AboutRouteView"));
 const NotFoundRouteView = React.lazy(() => import("./routes/NotFoundRouteView"));
+const VisaFreeCountriesRouteView = React.lazy(() => import("./routes/VisaFreeCountriesRouteView"));
 
 const UmrahLandingPage = React.lazy(() =>
   import("./components/UmrahLandingPage").then((m) => ({ default: m.UmrahLandingPage }))
@@ -800,7 +801,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
   return `${cleanWords.slice(0, 50).join(" ").replace(/[.,;:!?-]+$/, "")}...`;
 }
 
-type SectionType = "home" | "flights" | "hotels" | "visa" | "destinations" | "experiences" | "umrah" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "privacy" | "about" | "notFound";
+type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "umrah" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "privacy" | "about" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
@@ -1373,6 +1374,9 @@ export default function App() {
       section = "hotels";
       parameterId = cityParam || "kathmandu-hotels";
       isLanding = !cityParam;
+    } else if (root === "visa-free-countries" && segs.length === 1) {
+      section = "visaFree";
+      isLanding = true;
     } else if (root === "visa" && segs.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
       section = "visa";
@@ -2151,6 +2155,19 @@ export default function App() {
       { name: "Home", url: siteUrl("/", lang) },
       { name: isBn ? "গোপনীয়তা ও কুকি নীতিমালা" : "Privacy & Cookie Policy", url: privacyUrl }
     ];
+  } else if (section === "visaFree") {
+    const visaFreeUrl = siteUrl("/visa-free-countries", lang);
+    seoTitle = isBn
+      ? "বাংলাদেশি পাসপোর্টে ভিসা ছাড়া যেসব দেশে যাওয়া যায় (২০২৬) | URAL"
+      : "Visa-Free Countries for a Bangladeshi Passport (2026) | URAL";
+    seoDescription = isBn
+      ? "বাংলাদেশি পাসপোর্টে আগে থেকে ভিসা ছাড়া যেসব দেশে যাওয়া যায় — ঢাকা থেকে বাস্তবে ব্যবহারযোগ্য তালিকা, ট্রানজিট ভিসার ফাঁদ, খরচ ও অবস্থানের নিয়মসহ।"
+      : "Which countries a Bangladeshi passport can enter without a prior visa in 2026: the three you can use directly from Dhaka, the full visa-free list, the transit-visa trap, and the destinations travellers wrongly assume are easy.";
+    seoBreadcrumbs = [
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: isBn ? "ভিসা গাইড" : "Visa Guides", url: siteUrl("/visa", lang) },
+      { name: isBn ? "ভিসা ছাড়া দেশ" : "Visa-Free Countries", url: visaFreeUrl }
+    ];
   }
 
   if (section === "notFound") {
@@ -2166,6 +2183,7 @@ export default function App() {
     if (section === "blog") return isLanding ? "/blog" : `/blog/${parameterId}`;
     if (section === "experiences") return "/experiences";
     if (section === "umrah") return "/umrah";
+    if (section === "visaFree") return "/visa-free-countries";
     if (section === "sitemap") return "/sitemap";
     if (section === "privacy") return "/privacy";
     if (section === "tools" || section === "contact") return `/${section}`;
@@ -4408,6 +4426,15 @@ export default function App() {
         )}
 
       {/* -------------------------------------------------------------
+          🛂 VISA-FREE COUNTRIES PILLAR (/visa-free-countries)
+      ------------------------------------------------------------- */}
+      {section === "visaFree" && (
+        <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+          <VisaFreeCountriesRouteView context={routeViewContext} />
+        </React.Suspense>
+      )}
+
+      {/* -------------------------------------------------------------
           🎟️ VIEW 11: GLOBAL ATTRACTIONS & SKIP-THE-LINE HUB (TIQETS & KLOOK)
       ------------------------------------------------------------- */}
       {section === "experiences" && (
@@ -4848,6 +4875,7 @@ export default function App() {
                 {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa Checklists"}
               </span>
               <ul className="space-y-1.5 text-xs">
+                <li><a href="/visa-free-countries" onClick={(e) => { e.preventDefault(); navigateTo("/visa-free-countries"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ভিসা ছাড়া যেসব দেশে যাওয়া যায় (২০২৬)" : "Visa-Free Countries (2026)"}</a></li>
                 <li><a href="/visa/nepal-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/nepal-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</a></li>
                 <li><a href="/visa/maldives-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/maldives-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</a></li>
                 <li><a href="/visa/thailand-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/thailand-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</a></li>

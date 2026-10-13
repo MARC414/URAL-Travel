@@ -467,6 +467,11 @@ function trimAtWord(text: string, maxLength: number): string {
  * generated for it — see DEFERRED_BN_GROUPS in src/utils/localeRoutes.ts.
  */
 export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
+  "/visa-free-countries": {
+    title: "বাংলাদেশি পাসপোর্টে ভিসা ছাড়া যেসব দেশে যাওয়া যায় (২০২৬) | URAL",
+    description:
+      "বাংলাদেশি পাসপোর্টে আগে থেকে ভিসা ছাড়া যেসব দেশে যাওয়া যায় — ঢাকা থেকে সরাসরি ব্যবহারযোগ্য গন্তব্য, সম্পূর্ণ তালিকা, ট্রানজিট ভিসার ফাঁদ এবং সহজ ভাবা হলেও যেগুলো আসলে নয়।",
+  },
   "/": {
     title: "বাংলাদেশ থেকে ভ্রমণ গাইড, ফ্লাইট ও ভিসা | URAL",
     description:
