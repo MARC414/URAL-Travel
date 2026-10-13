@@ -85,6 +85,7 @@ That is ~43 strings of real Bengali per destination, ~260 for the section.
 | A0 | Recon: data shape, consumer chain, scale | ✅ done |
 | A0b | Defect sweep — four defects found and fixed (see below) | ✅ done |
 | A3 | 🇹🇭 Thailand — written at parity (4 days, 3 transport, 5 key facts, 5 FAQs, 39 nested strings) | ✅ done |
+| A4 | 🇲🇾 Malaysia — written at parity (4 days, 3 transport, 5 key facts, 5 FAQs, 39 nested strings) | ✅ done |
 | A1 | `src/data/bengaliDestinations.ts` + `getLocalizedDestinations()` + client wiring | ✅ done |
 | A2 | Nepal guide | ✅ done |
 | A3 | Thailand guide | ☐ |
@@ -208,3 +209,18 @@ once. Until then this copy is verified data waiting for its route.
 
 Remaining in Section A: **A4 Malaysia → A5 Dubai → A6 Singapore → A7 Maldives**,
 then A8 prerender body, A9 lift deferral + Bengali SERP copy, A10 verify 92/92.
+
+### A4 — Malaysia — DONE
+`malaysia-guide`. Same contract as A3: 6 prose fields, 4 itinerary days × 3
+activities, 3 transport options, 5 key facts, 5 FAQs, 39 nested strings, all
+Bengali. Counts match the English source exactly.
+
+The visa FAQ reproduces the figures on `/visa/malaysia-visa` — checked
+programmatically, not by eye: BDT 3,800 to 4,200, bank balance BDT 80,000,
+2 to 4 working days, all confirmed present in both the visa page and the guide.
+JAKIM halal certification and the free GOKL city bus are stated by name, as the
+English page does.
+
+Bengali chunk: 531,742 → **542,081 bytes**. Roughly 10 KB per guide, so the
+remaining two plus the hub land near 575 KB — still a chunk only Bengali readers
+download. tsc clean, 92 EN + 85 BN routes, verify:build 80/80, sweep 0/4,501.
