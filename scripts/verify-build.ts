@@ -39,6 +39,7 @@ import { collectionPageSchema } from "../src/utils/schema";
 import {
   buildResponsiveSrcSet,
   RESPONSIVE_IMAGE_BREAKPOINTS,
+  RESPONSIVE_IMAGE_HEIGHTS,
 } from "../src/utils/imageAssets";
 import {
   cleanBlogTitleForAlt,
@@ -47,6 +48,8 @@ import {
 } from "../src/utils/blogAltText";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import App from "../src/App";
+import ContactRouteView from "../src/routes/ContactRouteView";
 import VisaFreeCountriesRouteView from "../src/routes/VisaFreeCountriesRouteView";
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -502,6 +505,38 @@ check(
       ? "all photo call sites use <ResponsiveImage> (no raw getResponsiveImageProps spread)"
       : `${rawSpreads.length} file(s) still spread getResponsiveImageProps, bypassing AVIF: ` +
           rawSpreads.map((f) => path.relative(ROOT_DIR, f)).slice(0, 3).join(", ")
+  );
+
+  // every optimized photo referenced from source has intrinsic dimensions.
+  // `getResponsiveImageDimensions` THROWS without an entry, and a throw inside a
+  // client-rendered route view blanks the page: /contact and /bn/contact shipped
+  // empty because the support-desk hero was added without its height. The
+  // prerender's <link rel="preload"> path never performs that lookup, so the
+  // build stayed green and only a rendered page could show it (see the footer
+  // section below for the same lesson).
+  const dimensionProblems: string[] = [];
+  let imageReferences = 0;
+  const referenceFiles = [
+    ...collectSourceFiles(path.join(ROOT_DIR, "src")),
+    ...collectSourceFiles(path.join(ROOT_DIR, "scripts")),
+  ];
+  for (const file of referenceFiles) {
+    const text = fs.readFileSync(file, "utf8");
+    for (const match of text.matchAll(
+      /\/assets\/images\/([A-Za-z0-9_-]+?)-(?:640|960|1200)\.(?:webp|avif)/g
+    )) {
+      imageReferences += 1;
+      if (!(match[1] in RESPONSIVE_IMAGE_HEIGHTS)) {
+        dimensionProblems.push(`${path.relative(ROOT_DIR, file)} → ${match[1]}`);
+      }
+    }
+  }
+  check(
+    imageReferences > 0 && dimensionProblems.length === 0,
+    dimensionProblems.length === 0
+      ? `all ${imageReferences} optimized-image references carry intrinsic dimensions`
+      : `${dimensionProblems.length} image reference(s) missing from RESPONSIVE_IMAGE_HEIGHTS — the page renders blank: ` +
+          dimensionProblems.slice(0, 3).join(", ")
   );
 }
 
@@ -2030,20 +2065,28 @@ const BILINGUAL_RENDER_VIEWS = [
   { name: "/visa-free-countries", view: VisaFreeCountriesRouteView },
 ] as const;
 
-function renderedText(isBn: boolean, view: (typeof BILINGUAL_RENDER_VIEWS)[number]["view"]) {
-  const html = renderToStaticMarkup(
-    React.createElement(view as any, {
-      context: { isBn, navigateTo: () => {}, lang: isBn ? "bn" : "en" },
-    })
-  );
-  return html
+/** The text a reader sees in a rendered fragment: tags stripped, one entity pass. */
+function visibleText(markup: string): string {
+  return markup
     .replace(/<script[\s\S]*?<\/script>/g, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/&amp;/g, "&")
     .replace(/&#x27;/g, "'")
     .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function renderedText(isBn: boolean, view: (typeof BILINGUAL_RENDER_VIEWS)[number]["view"]) {
+  return visibleText(
+    renderToStaticMarkup(
+      React.createElement(view as any, {
+        context: { isBn, navigateTo: () => {}, lang: isBn ? "bn" : "en" },
+      })
+    )
+  );
 }
 
 const words = (t: string) => t.split(/\s+/).filter(Boolean);
@@ -2085,6 +2128,251 @@ for (const { name, view } of BILINGUAL_RENDER_VIEWS) {
   );
 }
 
+// --- Footer render integrity (client-rendered, invisible to dist/) ---------
+//
+// scripts/prerender.ts never emits the footer, so no grep over dist/ can see
+// it; `tsc` cannot see a CSS class; and vite does not typecheck at all. A green
+// build therefore said nothing about the footer, and two defects shipped
+// through that gap in one commit:
+//
+//   1. The support band sat inside the footer's 12-column grid with no column
+//      span. It is a sibling of the five link columns, so it claimed 1/12 of
+//      the row (~90px on desktop), wrapped its own copy one word per line, and
+//      pushed the Travel Services column onto a second row.
+//   2. Ten labels carried `&amp;` inside JavaScript string literals. JSX *text*
+//      decodes an entity to the character for the reader; a JS string does not,
+//      so the footer printed the four literal characters. (The single entity
+//      that lives in JSX text — the affiliate disclosure — is correct and must
+//      stay; it is what makes "no literal &amp;" the right assertion rather
+//      than "no &amp; in the source".)
+//
+// Both are checked by rendering App and reading the markup a browser receives,
+// in both languages, because the footer is the one surface dist/ cannot show.
+// If the footer is redesigned on purpose, update the row arithmetic below with
+// the new intent — do not delete the check.
+
+const FOOTER_GRID_TAG = /<div[^>]*class="[^"]*lg:grid-cols-12/;
+const FOOTER_GRID_COLUMNS = 12;
+const VOID_ELEMENTS =
+  /^(?:area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)$/i;
+
+function elementClasses(attributes: string): string[] {
+  const match = /\bclass="([^"]*)"/.exec(attributes);
+  return match ? match[1].split(/\s+/).filter(Boolean) : [];
+}
+
+/**
+ * Direct children of the element whose opening tag begins at `start`.
+ * Depth-walked rather than regex-matched, because every footer column opens
+ * with a near-identical `<div class="lg:col-span-…` tag.
+ */
+function directChildren(
+  html: string,
+  start: number
+): Array<{ tag: string; classes: string[] }> {
+  const tagPattern = /<(\/?)([a-zA-Z][a-zA-Z0-9-]*)((?:[^>"']|"[^"]*"|'[^']*')*?)(\/?)>/g;
+  tagPattern.lastIndex = start;
+  const children: Array<{ tag: string; classes: string[] }> = [];
+  let depth = 0;
+  let insideContainer = false;
+  for (let match = tagPattern.exec(html); match; match = tagPattern.exec(html)) {
+    const [, closing, tag, attributes, selfClosing] = match;
+    if (closing) {
+      depth -= 1;
+      if (insideContainer && depth === 0) break;
+      continue;
+    }
+    if (!insideContainer) {
+      insideContainer = true;
+      depth = 1;
+      continue;
+    }
+    if (depth === 1) children.push({ tag, classes: elementClasses(attributes) });
+    if (!selfClosing && !VOID_ELEMENTS.test(tag)) depth += 1;
+  }
+  return children;
+}
+
+function columnSpan(classes: string[], breakpoint: "md" | "lg"): number | null {
+  const prefix = `${breakpoint}:col-span-`;
+  const match = classes.find((name) => name.startsWith(prefix));
+  return match ? Number(match.slice(prefix.length)) : null;
+}
+
+/**
+ * Render <App/> as a browser would have it at `path`, without a browser.
+ * English needs no help: App falls back to "/" when `window` is undefined. The
+ * Bengali locale is derived from window.location, so the two globals App reads
+ * during render — window and localStorage — are stubbed for that call only.
+ */
+function renderAppAtPath(routePath: string): string {
+  if (!routePath.startsWith("/bn")) {
+    return renderToStaticMarkup(React.createElement(App));
+  }
+
+  const scope = globalThis as unknown as Record<string, unknown>;
+  const previous = { window: scope.window, localStorage: scope.localStorage };
+  const storage = { getItem: () => null, setItem: () => {}, removeItem: () => {} };
+  scope.window = {
+    location: {
+      pathname: routePath,
+      search: "",
+      href: `https://ural-travel.pages.dev${routePath}`,
+    },
+    localStorage: storage,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    setTimeout: () => 0,
+    clearTimeout: () => {},
+    setInterval: () => 0,
+    clearInterval: () => {},
+    requestAnimationFrame: () => 0,
+    cancelAnimationFrame: () => {},
+    requestIdleCallback: () => 0,
+    scrollY: 0,
+    innerHeight: 800,
+    scrollTo: () => {},
+  };
+  scope.localStorage = storage;
+  try {
+    return renderToStaticMarkup(React.createElement(App));
+  } finally {
+    for (const key of ["window", "localStorage"] as const) {
+      if (previous[key] === undefined) delete scope[key];
+      else scope[key] = previous[key];
+    }
+  }
+}
+
+const FOOTER_RENDER_PATHS = [
+  { label: "footer (en)", path: "/" },
+  { label: "footer (bn)", path: "/bn/" },
+];
+
+for (const { label, path: routePath } of FOOTER_RENDER_PATHS) {
+  let markup = "";
+  try {
+    markup = renderAppAtPath(routePath);
+  } catch (error) {
+    check(false, `${label} renders as React markup (threw: ${String(error)})`);
+    continue;
+  }
+
+  const footerStart = markup.indexOf("<footer");
+  const footerEnd = footerStart === -1 ? -1 : markup.indexOf("</footer>", footerStart);
+  if (footerStart === -1 || footerEnd === -1) {
+    check(false, `${label} renders a <footer> element`);
+    continue;
+  }
+  const footer = markup.slice(footerStart, footerEnd);
+
+  // 1. What the reader sees. An entity decoded once must not survive: if it
+  //    does, it was written in a JS string, where nothing decodes it.
+  const entities = (visibleText(footer).match(/&amp;/g) ?? []).length;
+  check(
+    entities === 0,
+    entities === 0
+      ? `${label} prints no literal "&amp;" (entities belong in JSX text, never in JS strings)`
+      : `${label} prints "&amp;" ${entities} time(s) — an entity sits inside a JS string literal; JSX text decodes entities, JS strings do not`
+  );
+
+  // 2. The grid. The band takes the whole row; the columns that follow it must
+  //    still add up to exactly one row, because an unspanned child takes one
+  //    column and silently wraps everything after it.
+  const grid = FOOTER_GRID_TAG.exec(footer);
+  if (!grid) {
+    check(false, `${label} keeps its lg:grid-cols-${FOOTER_GRID_COLUMNS} grid`);
+    continue;
+  }
+  const [band, ...columns] = directChildren(footer, grid.index);
+  const bandSpan = band ? columnSpan(band.classes, "lg") : null;
+  const bandSpansFullRow =
+    bandSpan === FOOTER_GRID_COLUMNS && Boolean(band?.classes.includes("md:col-span-2"));
+  check(
+    bandSpansFullRow,
+    bandSpansFullRow
+      ? `${label} support band spans the full row (md:col-span-2 lg:col-span-12)`
+      : `${label} support band must span the full row: wanted md:col-span-2 lg:col-span-12, found ${
+          bandSpan === null ? "no lg col-span" : `lg:col-span-${bandSpan}`
+        }${band?.classes.includes("md:col-span-2") ? "" : " and no md col-span"}`
+  );
+
+  const spans = columns.map((column) => columnSpan(column.classes, "lg"));
+  const total = spans.reduce<number>((sum, span) => sum + (span ?? 0), 0);
+  const rowBalances = total === FOOTER_GRID_COLUMNS && !spans.includes(null);
+  check(
+    rowBalances,
+    rowBalances
+      ? `${label} columns after the band total exactly ${FOOTER_GRID_COLUMNS} (${spans.join(" + ")})`
+      : `${label} columns after the band total ${total} over ${columns.length} children (${spans
+          .map((span) => span ?? "none")
+          .join(" + ")}) against ${FOOTER_GRID_COLUMNS} tracks — a child with no col-span takes one column, so the rest of the row wraps`
+  );
+}
+
+// --- Route views render (a throw here blanks the whole page) ---------------
+//
+// A route view is the only thing between a URL and the reader, and nothing in
+// this file rendered one until now: /contact and /bn/contact shipped as blank
+// pages because `getResponsiveImageDimensions` throws when an optimized photo
+// has no entry in RESPONSIVE_IMAGE_HEIGHTS, and the new support-desk hero was
+// added without one. The prerender never calls that lookup (it writes its own
+// <link rel="preload"> URL), `tsc` cannot know the height, and the build stayed
+// green — the blank page only existed in a browser. Rendering the view is the
+// only check that can see it.
+//
+// The context below is a stub, deliberately minimal: these views read their data
+// from App's route context, and the check is "does it render at all", not "is
+// the copy right". If a view starts needing another context field to render,
+// extend the stub — do not delete the check.
+
+const ROUTE_RENDER_STUBS = {
+  "/contact": ContactRouteView,
+} as const;
+
+for (const [name, view] of Object.entries(ROUTE_RENDER_STUBS)) {
+  for (const isBn of [false, true]) {
+    const locale = isBn ? "bn" : "en";
+    try {
+      const markup = renderToStaticMarkup(
+        React.createElement(view as any, {
+          context: {
+            isBn,
+            lang: locale,
+            section: name.replace(/^\//, ""),
+            navigateTo: () => {},
+            contactDestination: "",
+            contactLoading: false,
+            contactMessage: "",
+            contactName: "",
+            contactPhone: "",
+            contactSubject: "",
+            contactSubmitted: false,
+            setContactDestination: () => {},
+            setContactLoading: () => {},
+            setContactMessage: () => {},
+            setContactName: () => {},
+            setContactPhone: () => {},
+            setContactSubject: () => {},
+            setContactSubmitted: () => {},
+          },
+        })
+      );
+      const text = visibleText(markup);
+      const heading = /<h1\b/.test(markup);
+      const wordCount = words(text).length;
+      check(
+        heading && wordCount >= 40,
+        heading && wordCount >= 40
+          ? `${name} (${locale}) renders ${wordCount} words and its heading`
+          : `${name} (${locale}) rendered ${wordCount} words with ${heading ? "a" : "no"} heading — the page is effectively empty`
+      );
+    } catch (error) {
+      check(false, `${name} (${locale}) renders without throwing (threw: ${String(error).slice(0, 160)})`);
+    }
+  }
+}
+
 // --- Crawlable Bengali parity ----------------------------------------------
 //
 // The bilingual render check above proves the React page is Bengali. It does not
@@ -2103,15 +2391,7 @@ function crawlableText(relativePath: string): string | null {
   if (!fs.existsSync(file)) return null;
   const html = fs.readFileSync(file, "utf8");
   const bodyIndex = html.indexOf("<body");
-  return html
-    .slice(bodyIndex === -1 ? 0 : bodyIndex)
-    .replace(/<script[\s\S]*?<\/script>/g, " ")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&#x27;/g, "'")
-    .replace(/&quot;/g, '"')
-    .replace(/\s+/g, " ")
-    .trim();
+  return visibleText(html.slice(bodyIndex === -1 ? 0 : bodyIndex));
 }
 
 for (const { path: routePath, minShare } of BENGALI_PARITY_ROUTES) {

@@ -5,8 +5,17 @@ export {
   type BlogCoverAltTextInput,
 } from "./blogAltText";
 
-/** Shared image metadata for optimized responsive site photography. */
-const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
+/**
+ * Shared image metadata for optimized responsive site photography.
+ *
+ * EVERY optimized photo must have an entry here: `getResponsiveImageDimensions`
+ * throws without one, and a throw inside a client-rendered route view takes the
+ * whole page down with it (this is how /contact and /bn/contact went blank —
+ * the hero was added without its height). verify-build.ts scans src/ and
+ * scripts/ for `-640/-960/-1200.webp|avif` references and fails when a name is
+ * missing, so the next photo cannot ship without one.
+ */
+export const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "airport_departure_board_delay_claim_1790520824658": 670,
   "ayutthaya_wat_phra_si_sanphet_chedis_1791427300000": 1054,
   "bangkok_destination_1781544149435": 655,
@@ -17,6 +26,7 @@ const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "blog_editorial_hero_banner_1790429994056": 670,
   "chefchaouen_blue_fountain_alley_1791427400000": 1063,
   "clouds_boat_hero_1781438671378": 670,
+  "contact_support_desk_agent_1791600000000": 670,
   "coxs_bazar_sunrise_1781620718331": 670,
   "dhaka_airport_widebody_airlines_tarmac_1790520836931": 670,
   "dubai_destination_1781544180311": 655,

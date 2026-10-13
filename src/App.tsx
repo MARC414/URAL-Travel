@@ -4754,8 +4754,17 @@ export default function App() {
               Previously the same phone number was printed twice in two
               near-identical boxes (one `wa.me`, one `tel:`), which made two
               rows of the footer carry one fact. The number now appears once;
-              tapping it calls, and WhatsApp and the form sit beside it. */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-4 sm:px-6 sm:py-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+              tapping it calls, and WhatsApp and the form sit beside it.
+
+              The span classes are load-bearing, not decoration. This band is a
+              child of the 12-column grid below it and sits ABOVE the five
+              columns, so it must claim the whole row: `md:col-span-2` on the
+              2-column tablet grid, `lg:col-span-12` on desktop. Without them
+              it takes a single 1/12 column (~90px), the copy wraps one word per
+              line, and the five columns that follow no longer fit in one row.
+              verify-build.ts renders this footer and asserts the spans, so the
+              "full width" band and its row arithmetic cannot drift again. */}
+          <div className="md:col-span-2 lg:col-span-12 rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-4 sm:px-6 sm:py-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div className="space-y-1">
               <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
                 {isBn ? "সরাসরি সাপোর্ট ডেস্ক" : "Direct Support Desk"}
@@ -4951,8 +4960,8 @@ export default function App() {
                 <li><a href={getLocalizedRouteHref("/flights/dhaka-singapore")} onClick={(event) => handleNavigationAnchorClick(event, "/flights/dhaka-singapore")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</a></li>
                 <li><a href={getLocalizedRouteHref("/flights/dhaka-maldives")} onClick={(event) => handleNavigationAnchorClick(event, "/flights/dhaka-maldives")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
                 <li><a href={getLocalizedRouteHref("/flights/dhaka-dubai")} onClick={(event) => handleNavigationAnchorClick(event, "/flights/dhaka-dubai")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
-                <li><a href={getLocalizedRouteHref("/umrah")} onClick={(event) => handleNavigationAnchorClick(event, "/umrah")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "ঢাকা → জেদ্দা ও মদিনা (ওমরাহ)" : "Dhaka → Jeddah &amp; Madinah (Umrah)"}</a></li>
-                <li><a href={getLocalizedRouteHref("/flights")} onClick={(event) => handleNavigationAnchorClick(event, "/flights")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সব ফ্লাইট রুট ও ভাড়া →" : "All flight routes &amp; fares →"}</a></li>
+                <li><a href={getLocalizedRouteHref("/umrah")} onClick={(event) => handleNavigationAnchorClick(event, "/umrah")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "ঢাকা → জেদ্দা ও মদিনা (ওমরাহ)" : "Dhaka → Jeddah & Madinah (Umrah)"}</a></li>
+                <li><a href={getLocalizedRouteHref("/flights")} onClick={(event) => handleNavigationAnchorClick(event, "/flights")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সব ফ্লাইট রুট ও ভাড়া →" : "All flight routes & fares →"}</a></li>
               </ul>
             </div>
 
@@ -4982,10 +4991,10 @@ export default function App() {
               </span>
               <ul className="space-y-1.5 text-xs">
                 <li><a href={getLocalizedRouteHref("/costs")} onClick={(event) => handleNavigationAnchorClick(event, "/costs")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ট্রিপের খরচ (BDT গাইড)" : "What a trip costs (BDT)"}</a></li>
-                <li><a href={getLocalizedRouteHref("/hotels")} onClick={(event) => handleNavigationAnchorClick(event, "/hotels")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "হোটেল এলাকা ও জোন" : "Hotel areas &amp; neighbourhoods"}</a></li>
-                <li><a href={getLocalizedRouteHref("/destinations")} onClick={(event) => handleNavigationAnchorClick(event, "/destinations")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "দেশভিত্তিক ইটিনারারি" : "Country itineraries &amp; tips"}</a></li>
-                <li><a href={getLocalizedRouteHref("/experiences")} onClick={(event) => handleNavigationAnchorClick(event, "/experiences")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "অ্যাট্রাকশন পাস ও অভিজ্ঞতা" : "Attraction passes &amp; experiences"}</a></li>
-                <li><a href={getLocalizedRouteHref("/tools")} onClick={(event) => handleNavigationAnchorClick(event, "/tools")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ট্রাভেল ক্যালকুলেটর ও টুলস" : "Travel calculators &amp; tools"}</a></li>
+                <li><a href={getLocalizedRouteHref("/hotels")} onClick={(event) => handleNavigationAnchorClick(event, "/hotels")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "হোটেল এলাকা ও জোন" : "Hotel areas & neighbourhoods"}</a></li>
+                <li><a href={getLocalizedRouteHref("/destinations")} onClick={(event) => handleNavigationAnchorClick(event, "/destinations")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "দেশভিত্তিক ইটিনারারি" : "Country itineraries & tips"}</a></li>
+                <li><a href={getLocalizedRouteHref("/experiences")} onClick={(event) => handleNavigationAnchorClick(event, "/experiences")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "অ্যাট্রাকশন পাস ও অভিজ্ঞতা" : "Attraction passes & experiences"}</a></li>
+                <li><a href={getLocalizedRouteHref("/tools")} onClick={(event) => handleNavigationAnchorClick(event, "/tools")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ট্রাভেল ক্যালকুলেটর ও টুলস" : "Travel calculators & tools"}</a></li>
                 <li><a href={getLocalizedRouteHref("/blog")} onClick={(event) => handleNavigationAnchorClick(event, "/blog")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? `সব ${blogPostCount}টি ট্রাভেল গাইড →` : `All ${blogPostCount} travel guides →`}</a></li>
               </ul>
             </div>
@@ -5007,7 +5016,7 @@ export default function App() {
                     rel="noopener noreferrer sponsored"
                     className="inline-flex items-center gap-1 py-1 hover:text-white hover:underline"
                   >
-                    {isBn ? "হোটেল, ট্যুর ও অ্যাক্টিভিটি" : "Hotels, Tours &amp; Activities"}
+                    {isBn ? "হোটেল, ট্যুর ও অ্যাক্টিভিটি" : "Hotels, Tours & Activities"}
                     <span aria-hidden="true" className="text-slate-500">↗</span>
                   </a>
                 </li>
@@ -5029,7 +5038,7 @@ export default function App() {
                     rel="noopener noreferrer sponsored"
                     className="inline-flex items-center gap-1 py-1 hover:text-white hover:underline"
                   >
-                    {isBn ? "মিউজিয়াম ও অ্যাট্রাকশন টিকিট" : "Museum &amp; Attraction Tickets"}
+                    {isBn ? "মিউজিয়াম ও অ্যাট্রাকশন টিকিট" : "Museum & Attraction Tickets"}
                     <span aria-hidden="true" className="text-slate-500">↗</span>
                   </a>
                 </li>
@@ -5051,7 +5060,7 @@ export default function App() {
                     rel="noopener noreferrer sponsored"
                     className="inline-flex items-center gap-1 py-1 hover:text-white hover:underline"
                   >
-                    {isBn ? "এয়ারপোর্ট পিকআপ ও ট্রান্সফার" : "Airport Pickup &amp; Transfers"}
+                    {isBn ? "এয়ারপোর্ট পিকআপ ও ট্রান্সফার" : "Airport Pickup & Transfers"}
                     <span aria-hidden="true" className="text-slate-500">↗</span>
                   </a>
                 </li>
@@ -5078,7 +5087,7 @@ export default function App() {
                 >
                   {isBn
                     ? "ঢাকা এয়ারপোর্ট (DAC) চেকলিস্ট ও সব গাইড ডিরেক্টরি →"
-                    : "Dhaka Airport (DAC) Checklist &amp; All Guides Directory →"}
+                    : "Dhaka Airport (DAC) Checklist & All Guides Directory →"}
                 </a>
               </div>
             </div>
