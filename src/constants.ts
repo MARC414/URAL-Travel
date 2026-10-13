@@ -1283,7 +1283,11 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       { label: "Optimal Duration", value: "4 to 6 Days" },
       { label: "Daily Local Budget", value: "BDT 6,000 - 9,000 / day" },
       { label: "Top Shopping Epicenter", value: "Pratunam & Siam Square" },
-      { label: "Bargain Rule", value: "Polite negotiation is highly accepted at open markets" }
+      { label: "Bargain Rule", value: "Polite negotiation is highly accepted at open markets" },
+      {
+        label: "Visa for Bangladeshis",
+        value: "No visa on arrival - an advance Tourist Visa (TR) via thaievisa.go.th is required"
+      }
     ],
     faqs: [
       {
@@ -1301,6 +1305,10 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       {
         question: "Is Bangkok safe for Bangladeshi families and solo tourists?",
         answer: "Yes, Bangkok is widely considered very safe for families and solo travelers with low violent crime rates. Use ride-hailing apps like Grab or Bolt for transparent fares, and take standard precautions with personal belongings in crowded night markets."
+      },
+      {
+        question: "Can Bangladeshi citizens get a visa on arrival in Thailand?",
+        answer: "No. Bangladeshi passport holders are not on Thailand's visa-on-arrival eligibility list and must hold a Tourist Visa (TR) before departure. Apply through the official Thai e-Visa portal (thaievisa.go.th) under the Dhaka jurisdiction. The visa allows a maximum stay of 60 days, costs approximately BDT 6,500 to 8,500 (THB 2,000 government fee), and takes 5 to 10 working days to process. You must upload a six-month bank statement showing a minimum balance of BDT 65,000 (THB 20,000) per person to qualify."
       }
     ],
     schemaMarkup: {
@@ -1332,7 +1340,11 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       { label: "Optimal Duration", value: "4 to 5 Days" },
       { label: "Daily Local Budget", value: "BDT 5,500 - 8,000 / day" },
       { label: "Free Transport Hack", value: "GOKL City Bus (Pink lines are completely free!)" },
-      { label: "Top Family Daytrip", value: "Genting Highlands (45 mins away)" }
+      { label: "Top Family Daytrip", value: "Genting Highlands (45 mins away)" },
+      {
+        label: "Visa for Bangladeshis",
+        value: "eVisa required - applied for fully online, with no embassy appointment"
+      }
     ],
     faqs: [
       {
@@ -1350,6 +1362,10 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       {
         question: "How many days are ideal for a vacation in Kuala Lumpur from Dhaka?",
         answer: "4 to 5 days is recommended for a balanced first trip. This gives you 2 days for city sights (KLCC Twin Towers, Bukit Bintang, Merdeka Square), 1 day for Batu Caves and Chinatown, and 1 full day for the mountain attractions and theme parks of Genting Highlands."
+      },
+      {
+        question: "Do Bangladeshi citizens need a visa for Malaysia, and how is it applied for?",
+        answer: "Yes, an eVisa is required. The application goes entirely online to the Immigration Department of Malaysia - there is no embassy appointment and no physical passport drop-off. You upload high-resolution bio-data page scans, professional passport photos, and a six-month bank statement showing a balance of BDT 80,000 or more. Total cost comes to roughly BDT 3,800 to 4,200, and approval typically arrives in 2 to 4 working days."
       }
     ],
     schemaMarkup: {
@@ -1381,7 +1397,11 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       { label: "Optimal Duration", value: "4 to 5 Days" },
       { label: "Daily Local Budget", value: "BDT 12,000 - 18,000 / day" },
       { label: "Nol transit card", value: "Nol Card is required for Metro, Tram, & Buses" },
-      { label: "Top Free Attraction", value: "The Dubai Mall Fountain shows" }
+      { label: "Top Free Attraction", value: "The Dubai Mall Fountain shows" },
+      {
+        label: "Visa for Bangladeshis",
+        value: "Sponsor-based eVisa - no visa on arrival, and no direct embassy application"
+      }
     ],
     faqs: [
       {
@@ -1399,6 +1419,10 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       {
         question: "Is Dubai too expensive for budget travelers from Bangladesh?",
         answer: "Budget trips from Dhaka to Dubai are very manageable. By staying in central Deira or Bur Dubai, eating at local cafeterias (AED 15-25 per meal), and utilizing the Dubai Metro, travelers can keep daily local spending around BDT 8,000 to BDT 12,000."
+      },
+      {
+        question: "How do Bangladeshi citizens get a Dubai tourist visa?",
+        answer: "The UAE does not offer a visa on arrival to Bangladeshi passport holders, and applications are not submitted directly to an embassy. Tourist eVisas (30 or 60 days) are sponsor-based: Emirates, flydubai, Air Arabia, or an approved Dhaka-based travel agent submits the application on your behalf. Processing usually takes 3 to 5 working days with no passport submission, and a six-month bank statement showing BDT 150,000 or more is recommended for a smooth security clearance. Print a colour copy of the approved eVisa for exit check-in at Dhaka and for entry at Dubai."
       }
     ],
     schemaMarkup: {
