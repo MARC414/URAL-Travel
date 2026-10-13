@@ -87,6 +87,7 @@ That is ~43 strings of real Bengali per destination, ~260 for the section.
 | A3 | 🇹🇭 Thailand — written at parity (4 days, 3 transport, 5 key facts, 5 FAQs, 39 nested strings) | ✅ done |
 | A4 | 🇲🇾 Malaysia — written at parity (4 days, 3 transport, 5 key facts, 5 FAQs, 39 nested strings) | ✅ done |
 | A5 | 🇦🇪 Dubai / UAE — written at parity (4 days, 3 transport, 5 key facts, 5 FAQs, 39 nested strings) | ✅ done |
+| A6 | 🇸🇬 Singapore — written at parity (4 days, 3 transport, 5 key facts, 3 FAQs, 35 nested strings) | ✅ done |
 | A1 | `src/data/bengaliDestinations.ts` + `getLocalizedDestinations()` + client wiring | ✅ done |
 | A2 | Nepal guide | ✅ done |
 | A3 | Thailand guide | ☐ |
@@ -244,3 +245,22 @@ verify:build 80/80, sweep 0 of 4,501 links.
 Nepal, Thailand, Malaysia, Dubai are written (4 of 6). Singapore and Maldives
 remain, then A8 (prerender body branch), A9 (lift the deferral + Bengali SERP
 copy for all seven routes) and A10 (verify 92/92 routes, hreflang, sitemap).
+
+### A6 — Singapore — DONE
+`singapore-guide`. 6 prose fields, 4 itinerary days × 3 activities, 3 transport
+options, 5 key facts, 3 FAQs — 35 nested strings, all Bengali. English is
+thinner here than for the other guides (it carried only 2 FAQs and 4 key facts),
+so the counts are lower by design: parity means matching the English source, not
+padding.
+
+Worth recording: Singapore's English guide *looked* like it covered visas —
+three matches for "visa" — but every one was the card brand in "dual-currency
+Visa/Mastercard". Bangladeshi passport holders in fact need a pre-arranged
+e-Visa through an embassy-authorised agent, and cannot apply at the Consulate in
+Dhaka. Added to the English guide first (`96c035d`), then translated, so neither
+locale is the odd one out. The Bengali FAQ carries the fee (~BDT 4,200–6,500),
+the 5–7 working days, the Form V39A Letter of Introduction and the
+BDT 1,50,000 bank balance.
+
+Bengali chunk: 551,997 → **561,948 bytes**. tsc clean, 92 EN + 85 BN,
+verify:build 80/80, sweep 0 of 4,501 links.
