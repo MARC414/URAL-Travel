@@ -3628,7 +3628,11 @@ export default function App() {
       )}
 
       {/* ⚡ ACTIVE TEMPLATE RENDER */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      {/* C1: Skip-to-content — WCAG 2.1 SC 2.4.1 */}
+      <a href="#main-content" className="skip-link">
+        {isBn ? "মূল বিষয়বস্তুতে যান" : "Skip to main content"}
+      </a>
+      <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
 
         {/* -------------------------------------------------------------
             🏠 VIEW 1: HOME PAGE (CONVERSION HUB)

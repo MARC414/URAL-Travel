@@ -109,7 +109,7 @@ export const BENGALI_BLOG_OVERRIDES: Record<
 
 ৫. ঢাকায় ফেরার ফ্লাইটে অফিশিয়াল ZAMZAM পানির নিয়ম
 - প্রতিটি Umrah e-Visa বা Nusuk Umrah পারমিটধারী যাত্রী Jeddah (JED) বা Madinah (MED) এয়ারপোর্টের নির্দিষ্ট কাউন্টার থেকে পাসপোর্ট স্ক্যান করে ১টি অফিশিয়াল ৫ লিটারের সিল করা Zamzam পানির বক্স কিনতে পারবেন (**SAR 9.50–12.50 / ~BDT 350–400**)।
-- Biman Bangladesh Airlines, Saudia, Gulf Air ও Kuwait Airways-এ এই ৫ লিটারের Zamzam বক্স আপনার নিয়মিত ৩০–৪৬ কেজি লাগেজ অ্যালাউন্সের বাইরে **সম্পূর্ণ বিনামূল্যে** বহন করা যায়।`,
+- Biman Bangladesh Airlines ও Saudia-এ (ঢাকা থেকে সরাসরি) এই ৫ লিটারের Zamzam বক্স আপনার নিয়মিত **২×২৩ কেজি (৪৬ কেজি মোট)** লাগেজ অ্যালাউন্সের বাইরে **সম্পূর্ণ বিনামূল্যে** বহন করা যায়। Gulf Air ও Kuwait Airways-এর লাগেজ সীমা ভিন্ন হতে পারে — চেক-ইন করার আগে আপনার এয়ারলাইন্সের সর্বশেষ নিয়ম যাচাই করুন।`,
     internalLinks: [
       { text: "সম্পূর্ণ Umrah ও Hajj Visa, Nusuk এবং BDT বাজেট গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Haramain Train বুকিংয়ের জন্য Dual-Currency Card গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },

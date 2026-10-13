@@ -336,7 +336,7 @@ Instead of paying per-person tour bus markups, a family of 3 to 6 can book a pri
 
 5. OFFICIAL ZAMZAM WATER RULE FOR RETURN FLIGHTS TO DHAKA
 - Every pilgrim holding an Umrah e-Visa (or Nusuk Umrah permit) is permitted to purchase one official 5-liter boxed bottle of Zamzam water from the automated kiosks outside Jeddah (JED) or Madinah (MED) Airport for SAR 9.50–12.50 (~BDT 350–400).
-- Full-service carriers flying to Dhaka (Biman Bangladesh Airlines, Saudia, Gulf Air, Kuwait Airways) carry this 5-liter sealed Zamzam box FREE of charge in addition to your regular 30kg–46kg baggage allowance.`,
+- Biman Bangladesh Airlines and Saudia (direct Dhaka flights, 2×23 kg = 46 kg total) carry this 5-liter sealed Zamzam box FREE of charge outside your regular checked baggage allowance. Gulf Air and Kuwait Airways have different baggage limits — verify the current policy directly with your carrier before packing.`,
   "hajj-registration-bangladesh-government-vs-private-package-cost": `For Bangladeshi Muslims, performing obligatory Fard Hajj is a life-defining spiritual journey. Because a typical Hajj package from Bangladesh costs between BDT 5,50,000 and BDT 9,50,000+ per person, knowing how the official digital e-Hajj system works protects your family from unlicensed middlemen (dalals) and ensures you select the right Maktab tent and hotel distance.
 
 1. STEP-BY-STEP: OFFICIAL 2-STAGE HAJJ REGISTRATION ON HAJJ.GOV.BD
