@@ -1,3 +1,25 @@
+/**
+ * ⚠️ UNWIRED — NOT IMPORTED BY ANYTHING. This component does not ship.
+ *
+ * Verified 2026-10-13: no module imports it, and its code does not reach the
+ * bundle (tree-shaken). Rendering it requires adding a route/entry in App.tsx.
+ *
+ * What it is: an expanded "global attractions" surface covering NINE cities
+ * (Amsterdam, Florence, Lisbon, London, Milan, New York, Paris, Rome, Venice)
+ * with 59 curated Tiqets attraction entries — a superset of the live
+ * ExperiencesPage, which covers only London, New York and Paris.
+ *
+ * Why it is kept rather than deleted: the curated data in
+ * `src/data/tiqetsAttractionsData.ts` is real affiliate content that would be
+ * expensive to research again. This looks like a stalled iteration of the
+ * experiences surface, not abandoned junk.
+ *
+ * If you are here to wire it up: that is a product decision (it needs a route,
+ * navigation placement and a design review). See `docs/MASTER-REMEDIATION-PLAN.md`
+ * → "Unshipped surfaces". If instead you have confirmed the idea is dead,
+ * deleting this file and its data file together is safe and changes no output.
+ */
+
 import React, { useState } from "react";
 import {
   ExternalLink,

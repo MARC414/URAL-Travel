@@ -1,3 +1,22 @@
+/**
+ * ⚠️ CONSUMED ONLY BY AN UNWIRED COMPONENT — nothing live reads this file.
+ *
+ * Its sole importer is `src/components/GlobalAttractionsHub.tsx`, which no
+ * module imports. The live site does not use this data.
+ *
+ * What it holds: 59 curated Tiqets attraction entries across nine cities
+ * (Amsterdam, Florence, Lisbon, London, Milan, New York, Paris, Rome, Venice).
+ * This is real, researched affiliate content — keep it unless the
+ * global-attractions surface is formally abandoned.
+ *
+ * Note: `TIQETS_PARTNER_LINK` below duplicates the canonical affiliate URL in
+ * `src/components/AffiliatePartners.tsx` (identical value today). If the
+ * partner link ever changes, change both — or have this file import the
+ * canonical constant instead of keeping its own copy.
+ *
+ * See `docs/MASTER-REMEDIATION-PLAN.md` → "Unshipped surfaces".
+ */
+
 export interface TiqetsAttractionItem {
   productId: string;
   cityId: string;

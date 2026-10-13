@@ -163,6 +163,28 @@ The 2026-10-13 typography/de-slopping work shipped in PR #27. These items were d
 
 ---
 
+## Unshipped surfaces — built, never wired (decision needed, not urgent)
+
+Code that exists, looks finished, and does **nothing**. Nothing is broken; the risk is that a
+future agent mistakes these for live code, or that genuinely good work is lost.
+
+### Global attractions hub — `src/components/GlobalAttractionsHub.tsx` (~49 KB, 871 lines)
+
+- **Status:** unwired. Nothing imports it; it is tree-shaken out of the bundle entirely.
+- **What it is:** an attractions surface for **nine** cities — Amsterdam, Florence, Lisbon, London,
+  Milan, New York, Paris, Rome, Venice — backed by `src/data/tiqetsAttractionsData.ts`
+  (**59 curated Tiqets entries**).
+- **Why it is probably not junk:** the live `ExperiencesPage` covers only **London, New York and
+  Paris**. This is a superset of that surface, which reads like a stalled next iteration.
+- **Decision required (owner):** wire it up, or abandon it. Both files now carry a header saying so.
+- **If abandoning:** deleting both files is provably safe — verified by rebuilding and confirming
+  `dist/` is byte-identical (612 files).
+
+> ⚠️ Do **not** delete the data file on tidiness grounds alone. The 59 curated entries are researched
+> affiliate content, not scaffolding, and re-creating them would mean re-sourcing every product ID.
+
+---
+
 ## Verification (per branch, before PR)
 
 1. `npm run lint` clean.
