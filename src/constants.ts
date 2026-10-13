@@ -1454,7 +1454,11 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       { label: "Ideal Trip Duration", value: "4 Days / 3 Nights" },
       { label: "Daily Local Budget", value: "BDT 10,000 - 15,000 / day" },
       { label: "Transit Payment Hack", value: "Tap Dual-Currency Card on MRT (SimplyGo)" },
-      { label: "Airport Must-See", value: "Jewel Changi Rain Vortex (Free)" }
+      { label: "Airport Must-See", value: "Jewel Changi Rain Vortex (Free)" },
+      {
+        label: "Visa for Bangladeshis",
+        value: "Pre-arranged e-Visa required - via an authorised visa agent only"
+      }
     ],
     faqs: [
       {
@@ -1464,6 +1468,10 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       {
         question: "How can I combine Singapore and Malaysia on a single trip from Dhaka?",
         answer: "Many Bangladeshi travelers fly Dhaka → Singapore (spend 3 days), take a luxury 5-hour coach bus across the Johor causeway to Kuala Lumpur for BDT 2,500, spend 3 days in Malaysia, and fly Kuala Lumpur → Dhaka on an open-jaw ticket."
+      },
+      {
+        question: "Do Bangladeshi citizens need a visa for Singapore, and how do they apply?",
+        answer: "Yes. Bangladeshi passport holders need a pre-arranged e-Visa, and you cannot apply directly at the Singapore Consulate in Dhaka - applications are submitted through an embassy-authorised visa agent. Expect approximately BDT 4,200 to 6,500 (SGD 30 government fee plus the agency charge) and 5 to 7 working days. A Letter of Introduction (Form V39A) from a Singapore-based contact or sponsor is normally required, along with a six-month bank statement showing at least BDT 1,50,000."
       }
     ],
     schemaMarkup: {
@@ -1506,6 +1514,10 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       {
         question: "Should I carry US Dollars or Maldivian Rufiyaa from Dhaka?",
         answer: "Carry crisp US Dollar ($50 and $100 bills printed after 2013 with no tears or ink stamps). In the Maldives, almost all guesthouses, speedboats, and excursion operators quote and accept USD directly."
+      },
+      {
+        question: "What is the IMUGA Traveller Declaration, and do I need it before flying to the Maldives?",
+        answer: "Yes. Maldives Immigration requires every traveller to submit the free IMUGA Traveller Declaration online within 96 hours before arrival. It is a separate step from the visa on arrival, which is issued at the airport desk - and without a submitted declaration you can be refused boarding at Dhaka. Have your passport details, flight numbers, and the address of your Maafushi or Hulhumalé hotel ready, then keep the confirmation QR code both on your phone and printed."
       }
     ],
     schemaMarkup: {
