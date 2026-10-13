@@ -5,6 +5,18 @@
 **Scope:** live production site (Cloudflare Pages) + source at `MARC414/URAL-Travel@main`
 **Stack:** React 19 · Vite 6 · TypeScript · Tailwind 4 · Cloudflare Pages + Pages Functions
 
+> ## 📌 HISTORICAL AUDIT (28 September 2026) — its findings are FIXED
+>
+> **Do not read this as a to-do list.** The defects it describes were committed and deployed (see
+> `docs/growth/README.md`, which tracks this file as the source of those fixes). Its purpose now is
+> to record *what was wrong on 28 September and why*, so the reasoning is not re-litigated.
+>
+> Two of its diagnoses have since been **re-measured and falsified** — see the banners in
+> `docs/growth/01-indexing-crawling.md` and `02-internal-linking.md`. Route and page counts below
+> ("83 pages") are also stale: the site now builds **173 routes (90 EN + 83 BN)**.
+>
+> For current work: `docs/MASTER-REMEDIATION-PLAN.md`. For current growth strategy:
+> `docs/growth/README.md`.
 ---
 
 ## 1. Executive summary

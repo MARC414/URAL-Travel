@@ -1,7 +1,25 @@
 # 03 — Content & Topical Authority
 
+> ## ⚠️ PARTLY SUPERSEDED — re-measured against `dist/` on 2026-10-13
+>
+> This file rests on **root cause B from [01](01-indexing-crawling.md)**: "hub and money pages are
+> thin." **That premise no longer holds.** Measured in the built output, route pages carry
+> **800–1,200 words** of prerendered body copy with correct H1/H2/FAQ structure.
+>
+> **One genuine exception:** `dist/experiences.html` renders ~**230 words** — if you want a single
+> content target from this file, that is it.
+>
+> **Consequence:** the "write more content to fix thin pages" work below is the right answer to a
+> question that has largely stopped being true. Writing **new** topical content (the authority half
+> of this file) is still valid and valuable; treating existing pages as thin is not.
+>
+> Before doing work from this file, confirm the diagnosis in Search Console. The measured live
+> constraint is **zero backlinks** ([07](07-backlinks-free.md)), not content depth.
+
+
 **Perspective:** giving Google and answer engines a reason to index and rank the pages.
-**Prereqs:** [01-indexing-crawling.md](01-indexing-crawling.md) root causes B (thin content).
+**Prereqs:** [01-indexing-crawling.md](01-indexing-crawling.md) — **read the banner first:** root
+cause B (thin content) has been re-measured and largely does not hold.
 **Feeds into:** [02-internal-linking.md](02-internal-linking.md) (things to link to), [04-keywords.md](04-keywords.md) (what to write about), [05-aeo-geo.md](05-aeo-geo.md) (answer-friendly formatting).
 
 ---

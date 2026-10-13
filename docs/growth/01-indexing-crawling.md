@@ -94,9 +94,13 @@ If it still says "Couldn't fetch" after 48h with a valid live `200` XML file, us
   { "host": "ural-travel.pages.dev",
     "key": "uralindexnow2026bangladesh83pages",
     "keyLocation": "https://ural-travel.pages.dev/uralindexnow2026bangladesh83pages.txt",
-    "urlList": [ ...all 83 absolute URLs... ] }
+    "urlList": [ ...all 173 absolute URLs (90 EN + 83 BN)... ] }
   ```
 - **Note:** the key file's *contents* must equal the key value in the URL/body. Verify the file contains exactly `uralindexnow2026bangladesh83pages` (matching the filename stem) — if it contains something else, use that.
+- ⚠️ **Do NOT rename the key file, and do not treat the `83pages` in it as a page count.**
+  It is an **opaque credential** chosen in September, not a description of the site. The site now has
+  173 routes. Renaming the file invalidates the key registered with IndexNow and silently breaks
+  submission — so the stale-looking number stays. Add the URLs, never "fix" the key.
 - Bing, Yandex, Seznam, Naver honor IndexNow. Google does not consume it directly but it costs nothing.
 - **Permission tier:** medium (adds a network call to the build). Say so in the commit, don't ask.
 

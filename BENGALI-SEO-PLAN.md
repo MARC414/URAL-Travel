@@ -2,7 +2,12 @@
 
 **Goal:** Turn Bengali from a client-only `lang==="bn"` toggle into a set of real, crawlable, self-canonicalizing `/bn/…` URLs with a reciprocal `en-bd / bn-bd / x-default` hreflang cluster — without regressing Core Web Vitals for the English majority.
 
-**Status:** Plan for review. Grounded in the actual codebase (line anchors below). This validates and corrects the "Gemini 3.8 Flash" 5-phase draft.
+**Status:** ✅ **EXECUTED — shipped 2 October 2026 (commit `9146458`).** This is now a historical
+record, not a proposal. Verified in the built output: **83 crawlable `/bn/` routes** with
+reciprocal `en-bd`/`bn-bd`/`x-default` hreflang clusters, self-canonicalising, each with
+`inLanguage` schema. Bengali content **is** crawlable.
+> **Do not act on the line anchors below** — they were correct on 28 September and have since
+> rotted. For current work see `docs/MASTER-REMEDIATION-PLAN.md` and `docs/growth/`.
 
 ---
 
