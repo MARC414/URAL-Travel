@@ -1059,23 +1059,6 @@ function buildAllRoutes(): PrerenderRoute[] {
     name: "Visa-free travel on a Bangladeshi passport — common questions",
   });
 
-  /**
-   * Renders one entry of the remote visa-free / visa-on-arrival lists.
-   *
-   * The detail used to be baked into the name string ("Cambodia (USD 30, 30
-   * days)"). It is now a separate field so the Bengali list can carry its own
-   * wording, so this reproduces the original form exactly for English and the
-   * same shape for Bengali.
-   */
-  const remoteListLabel = (
-    item: { name: string; nameBn: string; detail?: string; detailBn?: string },
-    bengali = false
-  ): string => {
-    const base = bengali ? item.nameBn : item.name;
-    const detail = bengali ? item.detailBn : item.detail;
-    return detail ? `${base} (${detail})` : base;
-  };
-
   const renderVisaFreeEntry = (entry: (typeof USABLE_NOW)[number]) => `
             <section>
               <h3>${escapeHtml(entry.country)}</h3>
@@ -1954,6 +1937,23 @@ function bnDigits(value: number | string): string {
   return String(value).replace(/[0-9]/g, (digit) => BN_DIGITS[Number(digit)]);
 }
 
+/**
+ * Renders one entry of the remote visa-free / visa-on-arrival lists.
+ *
+ * The detail used to be baked into the name string ("Cambodia (USD 30, 30
+ * days)"). It is now a separate field so the Bengali list can carry its own
+ * wording, so this reproduces the original form exactly for English and the
+ * same shape for Bengali.
+ */
+function remoteListLabel(
+  item: { name: string; nameBn: string; detail?: string; detailBn?: string },
+  bengali = false
+): string {
+  const base = bengali ? item.nameBn : item.name;
+  const detail = bengali ? item.detailBn : item.detail;
+  return detail ? `${base} (${detail})` : base;
+}
+
 function bnSection(heading: string, inner: string): string {
   return `<section><h2>${escapeHtml(heading)}</h2>${inner}</section>`;
 }
@@ -2401,6 +2401,100 @@ function buildBengaliBody(
     return `<article>${parts.join("")}</article>`;
   }
 
+  // The visa-free pillar has its own hand-written Bengali body, because it is
+  // the site's strongest link magnet and its Bengali page was the worst ratio
+  // on the site: 1,755 English crawlable words against 55. Every field comes
+  // from the `bn` twin held next to the English original in
+  // src/data/visaFreeData.ts, so the two languages cannot drift apart.
+  if (englishPath === "/visa-free-countries") {
+    const bnEntryCard = (
+      entry: (typeof USABLE_NOW)[number] | (typeof COMMONLY_MISREAD)[number],
+      withSource = false
+    ) =>
+      `<section><h3>${escapeHtml(entry.bn.country)}</h3>` +
+      `<p><strong>${escapeHtml(entry.bn.entry)}</strong> — ${escapeHtml(
+        entry.bn.cost
+      )}, ${escapeHtml(entry.bn.maxStay)}।</p>` +
+      `<p>${escapeHtml(entry.bn.note)}</p>` +
+      (entry.bn.caveat ? `<p>${escapeHtml(entry.bn.caveat)}</p>` : "") +
+      (withSource ? `<p><small>সূত্র: ${escapeHtml(entry.bn.source)}</small></p>` : "") +
+      `</section>`;
+
+    parts.push(
+      bnSection(
+        "সংক্ষিপ্ত উত্তর",
+        `<p>ঢাকা থেকে সরাসরি, আগে কিছু না করে যাওয়া যায় মাত্র তিনটি গন্তব্যে — নেপাল ও মালদ্বীপে ফ্রি ভিসা অন অ্যারাইভালে, আর শ্রীলংকায় উড়ার আগেই অনুমোদিত অনলাইন ETA-তে (SAARC রেটে USD 20)। বাকি যে তালিকাটি সব জায়গায় দেখা যায় — ক্যারিবিয়ান ও প্রশান্ত মহাসাগরের দ্বীপরাষ্ট্র — সেগুলো সত্যিই ভিসা-মুক্ত, কিন্তু সেখানে পৌঁছাতে এমন দেশ দিয়ে ট্রানজিট করতে হয় যার জন্য বাংলাদেশি পাসপোর্টধারীর ভিসা লাগে। তালিকাটি লম্বা; ব্যবহারযোগ্য অংশটি নয়।</p>`
+      )
+    );
+
+    parts.push(
+      bnSection(
+        "ঢাকা থেকে সত্যিই ব্যবহার করা যায়",
+        `<p>তিনটিতেই ঢাকা থেকে সরাসরি ফ্লাইট আছে, আর কোনোটিতেই দূতাবাসে যেতে হয় না।</p>` +
+          USABLE_NOW.map((entry) => bnEntryCard(entry)).join("\n")
+      )
+    );
+
+    parts.push(
+      bnSection(
+        "বাকি তালিকা — আর কেন এটি বিভ্রান্ত করে",
+        `<p>এই গন্তব্যগুলোতে আগে থেকে ভিসা লাগে না। কিন্তু ঢাকা থেকে সেখানে পৌঁছাতে প্রায় সবসময় আমেরিকা, ব্রিটেন, ইউরোপ বা উপসাগরীয় দেশ দিয়ে ট্রানজিট করতে হয়, আর ওই ট্রানজিট দেশে ঢুকতে বাংলাদেশি পাসপোর্টধারীর ভিসা লাগে। যে ভিসা-মুক্ত গন্তব্যে বৈধভাবে পৌঁছানোই যায় না, তা কোনো কাজে আসে না।</p>` +
+          `<h3>সম্পূর্ণ ভিসা-মুক্ত</h3><p>${REMOTE_VISA_FREE.map((item) =>
+            escapeHtml(remoteListLabel(item, true))
+          ).join(", ")}।</p>` +
+          `<h3>অন-অ্যারাইভাল ভিসা</h3><p>${REMOTE_VOA.map((item) =>
+            escapeHtml(remoteListLabel(item, true))
+          ).join(", ")}।</p>`
+      )
+    );
+
+    parts.push(
+      bnSection(
+        "যেগুলো সহজ ভাবা হয়, কিন্তু সহজ নয়",
+        COMMONLY_MISREAD.map((entry) => bnEntryCard(entry, true)).join("\n")
+      )
+    );
+
+    parts.push(
+      bnSection(
+        "গন্তব্য যেটিই হোক, সঙ্গে রাখুন",
+        `<ul>${ALWAYS_CARRY.map(
+          (row) =>
+            `<li><strong>${escapeHtml(row.itemBn)}</strong> — ${escapeHtml(
+              row.detailBn
+            )}</li>`
+        ).join("\n")}</ul>`
+      )
+    );
+
+    parts.push(
+      bnFaqList(
+        "ভিসা-মুক্ত ভ্রমণ নিয়ে সাধারণ প্রশ্ন",
+        VISA_FREE_FAQS.map((faq) => ({
+          question: faq.questionBn,
+          answer: faq.answerBn,
+        }))
+      )
+    );
+
+    parts.push(
+      bnSection(
+        "এই তালিকা কীভাবে যাচাই করা হয়েছে",
+        `<p>এই পাতার প্রতিটি নিয়ম গন্তব্য দেশের ইমিগ্রেশন কর্তৃপক্ষ, দূতাবাসের নির্দেশনা ও আন্তর্জাতিক পাসপোর্ট সূচকের সঙ্গে মিলিয়ে দেখা হয়েছে। ভিসার নিয়ম প্রায়ই বদলায় এবং আগাম জানানো হয় না, তাই অফেরতযোগ্য কিছু বুক করার আগে গন্তব্য দেশের নিজস্ব ইমিগ্রেশন সাইট বা ঢাকার দূতাবাস থেকে সর্বশেষ শর্তটি যাচাই করে নিন। URAL ভিসার আবেদন প্রক্রিয়া করে না বা ভিসা ইস্যু করে না।</p><p><small>সর্বশেষ যাচাই: <time datetime="${VISA_FREE_LAST_VERIFIED}">${VISA_FREE_LAST_VERIFIED}</time></small></p>`
+      )
+    );
+
+    parts.push(
+      bnLinkList("প্রতিটি গন্তব্যের বিস্তারিত চেকলিস্ট", [
+        { label: "নেপাল ভিসা গাইড", path: "/visa/nepal-visa" },
+        { label: "মালদ্বীপ ভিসা গাইড", path: "/visa/maldives-visa" },
+        { label: "বাংলাদেশি নাগরিকদের জন্য সব ভিসা গাইড", path: "/visa" },
+      ])
+    );
+
+    return `<article>${parts.join("")}</article>`;
+  }
+
   // Home + static/hub pages: Bengali intro plus a directory of the main hubs.
   const hubLinks = [
     { label: "ফ্লাইট গাইড", path: "/flights" },
@@ -2575,6 +2669,24 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
       bnHubFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
       bnHubFaq["inLanguage"] = "bn-BD";
       extraGraphNodes.push(bnHubFaq);
+    } else if (englishPath === "/visa-free-countries") {
+      // Built from the Bengali answers only, never from the English node, so an
+      // English question cannot reach the Bengali page.
+      const bnVisaFreeFaq = stripContext(
+        generateFAQSchema(
+          VISA_FREE_FAQS.map((faq) => ({
+            question: faq.questionBn,
+            answer: faq.answerBn,
+          })),
+          { url: canonicalUrl, name: copy.title }
+        )
+      );
+      if (bnVisaFreeFaq) {
+        bnVisaFreeFaq["@id"] = `${canonicalUrl}#faq`;
+        bnVisaFreeFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+        bnVisaFreeFaq["inLanguage"] = "bn-BD";
+        extraGraphNodes.push(bnVisaFreeFaq);
+      }
     } else if (englishPath === "/umrah") {
       const bnUmrahFaq = stripContext(
         generateFAQSchema(getLocalizedHajjFaqs("bn"), {

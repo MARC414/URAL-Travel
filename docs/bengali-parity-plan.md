@@ -387,7 +387,7 @@ headings over English paragraphs.
 |---|---|---|
 | B1a | Bengali for all nine entry records (`EntryCopyBn`, eight fields each) | ☑ |
 | B1b | Bengali for the chip lists, `ALWAYS_CARRY` and all six FAQs, then wire the component | ☑ |
-| B1c | Bengali SERP copy, a crawlable Bengali body in the prerender, and a `bn-BD` FaqPage node | ☐ |
+| B1c | Bengali crawlable body in the prerender, and a `bn-BD` FaqPage node | ☑ |
 
 **Why `bn` is required, not optional.** An `bn?: EntryCopyBn` field would have
 compiled happily with half the entries translated and reintroduced exactly this
@@ -415,9 +415,28 @@ sentences. `verify:build` is 82 checks.
 | English sentences leaking into Bengali | 60 | 0 |
 | English page | — | byte-identical; confirmed against the pre-change build |
 
-B1c remains: the crawlable HTML for `/bn/visa-free-countries` is still the
-55-word shell, so a crawler sees 55 words against the English page's 1,755. That
-is the next unit.
+B1c then closed the crawler side. The Bengali SERP copy already existed in
+`BENGALI_SEO_COPY`, so what was missing was the body: `buildBengaliBody` had no
+`visa-free-countries` branch and fell through to the generic hub shell.
+
+| measure | before | after |
+|---|---|---|
+| crawlable words, Bengali page | 55 | 1,521 (1,421 of them Bengali) |
+| crawlable words, English page | 1,755 | 1,755, byte-identical |
+| parity | 3% | 87% |
+| English sentences in the Bengali crawlable HTML | 55 | 0 |
+| `FAQPage` node | none | one, `inLanguage: bn-BD`, 6 questions, 0 with Latin text |
+
+`verify:build` now also holds that line with a `BENGALI_PARITY_ROUTES` registry:
+each route listed there must reach a minimum share of its English crawlable word
+count and leak no English sentence. A route is added when its Bengali body
+lands, never before — which is also the rule for `docs/` claims. Negative
+control: raising the threshold to 95% fails the check. 84 checks total.
+
+**Note for the remaining Section B units.** `buildBengaliBody` is a *second*
+code path from the React page, so every hub needs its Bengali body written
+twice — once as component copy, once as prerendered HTML. The render check and
+the crawlable check cover different halves of that, which is why both exist.
 
 **One more gap worth recording.** The Bengali flights/hotels/visa/costs detail
 pages carry no FAQ section at all, because their overrides still fall through to
