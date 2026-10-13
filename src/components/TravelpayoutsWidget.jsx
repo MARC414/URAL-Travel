@@ -2082,7 +2082,7 @@ export default function TravelpayoutsWidget({
                   style={{
                     transform: `rotate(${swapRotation}deg)`,
                   }}
-                  className="transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+                  className="transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
                 />
               </button>
 
@@ -2117,7 +2117,7 @@ export default function TravelpayoutsWidget({
                       <ArrowRightLeft
                         size={11}
                         style={{ transform: `rotate(${swapRotation}deg)` }}
-                        className="transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+                        className="transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
                       />
                       <span>{isBn ? 'অদলবদল' : 'Swap'}</span>
                     </button>

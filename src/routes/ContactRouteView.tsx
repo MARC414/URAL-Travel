@@ -732,7 +732,7 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                   <span className="text-sm font-serif font-black text-brand-navy block">+8801784385335</span>
 
-                  <span className="text-[9px] text-slate-400 block">
+                  <span className="text-[10px] text-slate-400 block">
 
                     {isBn ? "২৪/৭ WhatsApp মেসেঞ্জারে সচল" : "Available 24/7 on WhatsApp Messenger"}
 

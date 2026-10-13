@@ -36,7 +36,7 @@ export function QeeqEmbed() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {/* Pickup */}
           <div>
-            <label htmlFor={`${uid}-pickup-loc`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-pickup-loc`} className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <MapPin size={9} className="text-[#F6B73C]" /> Pick-up Location
             </label>
             <input
@@ -52,7 +52,7 @@ export function QeeqEmbed() {
 
           {/* Dropoff */}
           <div>
-            <label htmlFor={`${uid}-dropoff-loc`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-dropoff-loc`} className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <MapPin size={9} className="text-[#F6B73C]" /> Drop-off Location
             </label>
             <input
@@ -70,7 +70,7 @@ export function QeeqEmbed() {
         <div className="grid grid-cols-2 gap-3">
           {/* Pickup Date */}
           <div>
-            <label htmlFor={`${uid}-pickup-date`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-pickup-date`} className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <Calendar size={9} className="text-[#F6B73C]" /> Pick-up Date
             </label>
             <input
@@ -85,7 +85,7 @@ export function QeeqEmbed() {
 
           {/* Dropoff Date */}
           <div>
-            <label htmlFor={`${uid}-dropoff-date`} className="block text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <label htmlFor={`${uid}-dropoff-date`} className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
               <Calendar size={9} className="text-[#F6B73C]" /> Drop-off Date
             </label>
             <input

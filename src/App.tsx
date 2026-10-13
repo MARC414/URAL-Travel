@@ -2408,7 +2408,7 @@ export default function App() {
                 height="32"
                 className="h-7 sm:h-8 w-auto transition-opacity duration-200 group-hover:opacity-95"
               />
-              <span className="text-[9.5px] sm:text-[10px] font-medium tracking-wide text-slate-300/90 group-hover:text-[#F6B73C] transition-colors leading-none mt-1 whitespace-nowrap">
+              <span className="text-[10px] sm:text-[10px] font-medium tracking-wide text-slate-300/90 group-hover:text-[#F6B73C] transition-colors leading-none mt-1 whitespace-nowrap">
                 {isBn
                   ? "ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়"
                   : "Travel Intelligence System · Beyond a Typical Agency"}
@@ -3501,16 +3501,10 @@ export default function App() {
             </svg>
 
             {/* Master Left-Aligned Stack aligned perfectly with max-w-7xl content */}
-            <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col items-center sm:items-start justify-center space-y-6">
+            <div className="hero-enter relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col items-center sm:items-start justify-center space-y-6">
               
-              <span className="hero-badge font-sans tracking-widest uppercase inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 border leading-none bg-[#F6B73C]/15 border-[#F6B73C]/25 text-[#F6B73C] rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]"></span>
-                {isBn
-                  ? "বাংলাদেশি ভ্রমণকারীদের জন্য ট্রাভেল প্ল্যানিং"
-                  : "Travel planning for Bangladeshi travelers"}
-              </span>
-              
-              <h1 className="hero-h1 font-sans text-[clamp(2.3rem,6vw,4.5rem)] font-[900] leading-[1.1] tracking-tight text-white max-w-4xl drop-shadow text-center sm:text-left">
+
+              <h1 className="font-sans text-[clamp(2.3rem,6vw,4.5rem)] font-[900] leading-[1.1] tracking-tight text-white max-w-4xl drop-shadow text-center sm:text-left">
                 {isBn ? (
                   <>
                     বাংলাদেশ থেকে ভ্রমণ <br />
@@ -3524,7 +3518,7 @@ export default function App() {
                 )}
               </h1>
               
-              <p className="hero-subtitle text-white/80 text-[1.1rem] sm:text-[1.2rem] leading-[1.60] max-w-2xl font-sans text-center sm:text-left">
+              <p className="text-white/80 text-[1.1rem] sm:text-[1.2rem] leading-[1.60] max-w-2xl font-sans text-center sm:text-left">
                 {isBn
                   ? "বাংলাদেশি ভ্রমণকারীদের জন্য তৈরি Flight, Hotel, Visa চেকলিস্ট, Hajj ও Umrah প্রস্তুতি এবং BDT বাজেট গাইড—সবকিছু এক জায়গায়।"
                   : "Flights, hotels, visas, and destination guides — crafted specifically for Bangladeshi travelers. Your travel intelligence for the world."}
@@ -3542,7 +3536,7 @@ export default function App() {
                       document.getElementById("ural-global-dest-input")?.focus();
                     }, 420);
                   }}
-                  className="inline-flex items-center gap-2.5 bg-[#F6B73C] hover:bg-[#f5ad24] text-brand-navy font-black text-sm px-6 py-3.5 rounded-xl shadow-[0_10px_24px_-4px_rgba(246,183,60,0.5)] hover:shadow-[0_14px_28px_-4px_rgba(246,183,60,0.7)] transition-all cursor-pointer group"
+                  className="inline-flex items-center gap-2.5 bg-[#F6B73C] hover:bg-[#f5ad24] text-brand-navy font-black text-sm px-6 py-3.5 rounded-xl shadow-[0_10px_24px_-4px_rgba(246,183,60,0.5)] hover:shadow-[0_14px_28px_-4px_rgba(246,183,60,0.7)] active:scale-[0.985] transition-all cursor-pointer group"
                 >
                   <span>{isBn ? "গ্লোবাল ফ্লাইট খুঁজুন" : "Search Global Flights"}</span>
                   <ArrowRight size={16} className="stroke-[2.5] group-hover:translate-x-0.5 transition-transform" />
@@ -3915,7 +3909,7 @@ export default function App() {
                 <span className="text-[10px] font-mono font-bold text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full uppercase tracking-wider inline-block">
                   {isBn ? "ঢাকা থেকে আপনার পরবর্তী সফর সাজান" : "Plan your next trip from Dhaka"}
                 </span>
-                <h2 className="ural-section-title font-serif text-2xl sm:text-3.5xl font-black text-brand-navy tracking-tight">
+                <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-black text-brand-navy tracking-tight">
                   {isBn ? "বুকিং করার আগে যা যা জানা প্রয়োজন" : "Everything You Need Before You Book"}
                 </h2>
                 <p className="text-xs text-slate-600 leading-relaxed font-sans">
@@ -4118,7 +4112,7 @@ export default function App() {
                       ))}
                     </div>
                   </div>
-                  <span className="text-[9px] font-mono text-brand-gold-ink block mt-2 text-right">
+                  <span className="text-[10px] font-mono text-brand-gold-ink block mt-2 text-right">
                     {isBn ? "ইমিগ্রেশন চেকলিস্ট" : "Interactive Outbound checklist"}
                   </span>
                 </div>
@@ -4157,7 +4151,7 @@ export default function App() {
             {/* 🟦 SECTION 6: TRUST + ENGAGEMENT */}
             <div className="ural-panel bg-brand-navy text-white p-6 sm:p-8 border border-slate-800 text-center space-y-5 sm:space-y-6 flex flex-col justify-center">
               <div className="space-y-1">
-                <span className="text-[9px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest">
+                <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest">
                   {isBn ? "কেন ভ্রমণকারীরা URAL ব্যবহার করেন" : "Why Travelers Use URAL"}
                 </span>
                 <h2 className="ural-section-title font-serif text-2xl font-black">
@@ -4800,27 +4794,27 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="pt-1 text-[11px] font-semibold">
-                <a
-                  href="/sitemap"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateTo("/sitemap");
-                  }}
-                  className="text-[#F6B73C] hover:underline cursor-pointer inline-flex items-center gap-1"
-                >
-                  <span>
-                    {isBn
-                      ? "ঢাকা এয়ারপোর্ট (DAC) চেকলিস্ট ও সব গাইড ডিরেক্টরি →"
-                      : "Dhaka Airport (DAC) Checklist & All Guides Directory →"}
-                  </span>
-                </a>
-              </div>
+              {/* Affiliate disclosure, short form.
+                  The full legal statement lives in the bottom compliance bar.
+                  This one is deliberately a single scannable sentence: the
+                  brand column is the narrowest on the grid, so a 60-word
+                  paragraph here would stretch this column past every other and
+                  unbalance the 12-column layout. It also keeps the claim
+                  conspicuous next to the brand rather than only in 11px text
+                  at the very bottom of the page. */}
+              <p className="border-t border-slate-800/80 pt-3 text-[11px] leading-relaxed text-slate-400">
+                <strong className="font-semibold text-slate-300">
+                  {isBn ? "অ্যাফিলিয়েট ডিসক্লোজার:" : "Affiliate disclosure:"}
+                </strong>{" "}
+                {isBn
+                  ? "সাইটের কিছু আউটবাউন্ড লিংক অ্যাফিলিয়েট লিংক; আপনার অতিরিক্ত খরচ ছাড়াই আমরা কমিশন পেতে পারি — যা সব গাইড ফ্রি রাখে।"
+                  : "Some outbound links are affiliate links; we may earn a commission at no extra cost to you — which keeps every guide free."}
+              </p>
             </div>
 
             {/* COLUMN 2 (2 Cols): Flights & Umrah Directory */}
             <div className="lg:col-span-2 space-y-2.5">
-              <span className="text-white font-bold font-mono uppercase text-xs block">
+              <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
                 {isBn ? "জনপ্রিয় ফ্লাইট রুট" : "Flight Routes"}
               </span>
               <ul className="space-y-1.5 text-xs">
@@ -4831,12 +4825,26 @@ export default function App() {
                 <li><a href="/flights/dhaka-maldives" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-maldives"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
                 <li><a href="/flights/dhaka-dubai" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-dubai"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
                 <li><a href="/umrah" onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">Dhaka → Jeddah &amp; Madinah (Umrah)</a></li>
+                <li>
+                  <a
+                    href="/sitemap"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateTo("/sitemap");
+                    }}
+                    className="inline-block py-1 text-left font-semibold text-[#F6B73C] hover:underline cursor-pointer"
+                  >
+                    {isBn
+                      ? "ঢাকা এয়ারপোর্ট (DAC) চেকলিস্ট ও সব গাইড ডিরেক্টরি →"
+                      : "Dhaka Airport (DAC) Checklist & All Guides Directory →"}
+                  </a>
+                </li>
               </ul>
             </div>
 
             {/* COLUMN 3 (2 Cols): Visa Guides by Country */}
             <div className="lg:col-span-2 space-y-2.5">
-              <span className="text-white font-bold font-mono uppercase text-xs block">
+              <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
                 {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa Checklists"}
               </span>
               <ul className="space-y-1.5 text-xs">
@@ -4860,7 +4868,7 @@ export default function App() {
 
             {/* COLUMN 4 (2 Cols): Streamlined High-Converting Travel Services (Task-First, Zero Clutter) */}
             <div className="lg:col-span-2 space-y-2.5">
-              <span className="text-white font-bold font-mono uppercase text-xs block">
+              <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
                 {isBn ? "গ্লোবাল ট্রাভেল সার্ভিস" : "Travel Services"}
               </span>
               <ul className="space-y-1.5 text-xs">
@@ -4940,7 +4948,7 @@ export default function App() {
             {/* COLUMN 5 (3 Cols): Direct Support Desk */}
             <div className="lg:col-span-3 space-y-4">
               <div className="space-y-2">
-                <span className="text-white font-bold font-mono uppercase text-xs block">
+                <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
                   {isBn ? "সরাসরি সাপোর্ট ডেস্ক" : "Direct Support Desk"}
                 </span>
                 <div className="space-y-1.5 text-xs">

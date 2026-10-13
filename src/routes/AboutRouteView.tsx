@@ -226,7 +226,7 @@ export default function AboutRouteView({ context }: RouteViewProps) {
 
                   <div>
 
-                    <h3 className="ural-card-title text-sm font-bold text-brand-navy">{isBn ? item.titleBn : item.titleEn}</h3>
+                    <h3 className="ural-card-title font-serif text-sm font-bold text-brand-navy">{isBn ? item.titleBn : item.titleEn}</h3>
 
                     <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{isBn ? item.descBn : item.descEn}</p>
 

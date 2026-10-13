@@ -2,9 +2,10 @@ import React from "react";
 
 import { BLOG_DATA } from "../constants";
 
-import { ChevronLeft, CalendarDays, ExternalLink, Link2, ArrowRight } from "lucide-react";
+import { ChevronLeft, CalendarDays, ExternalLink, Link2, ArrowRight, Lightbulb, KeyRound, TriangleAlert, Telescope } from "lucide-react";
 
 import { ResponsiveImage } from "../components/ResponsiveImage";
+import { QuickAnswer } from "../components/QuickAnswer";
 
 import { TiqetsEmbedWidget } from "../components/TiqetsEmbedWidget";
 
@@ -834,25 +835,16 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                         {/* Quick Answer & Key Takeaway Box (AEO-Structured Direct Answer) */}
 
-                        <div className="bg-slate-50 border-l-4 border-brand-navy p-5 rounded-r-xl space-y-1.5">
-
-                          <div className="text-xs font-bold text-brand-navy">
-
-                            {isBn
-
-                              ? "একনজরে মূল উত্তর ও সারসংক্ষেপ (Quick Answer & Key Takeaway)"
-
-                              : "Quick Answer & Key Takeaway"}
-
-                          </div>
-
-                          <p className="text-[15px] sm:text-[16px] text-slate-800 leading-[1.75]">
-
-                            {activePost.summary}
-
-                          </p>
-
-                        </div>
+                        <QuickAnswer
+                          label={
+                            isBn
+                              ? "একনজরে মূল উত্তর ও সারসংক্ষেপ"
+                              : "Quick Answer & Key Takeaway"
+                          }
+                          bodyClassName="text-base leading-[1.75] text-slate-800"
+                        >
+                          {activePost.summary}
+                        </QuickAnswer>
 
 
 
@@ -1060,7 +1052,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                     <div key={faqIdx} className="space-y-1.5">
 
-                                      <h3 className="ural-card-title font-semibold text-brand-navy leading-[1.5]">
+                                      <h3 className="ural-card-title font-serif font-semibold text-brand-navy leading-[1.5]">
 
                                         {faq.question}
 
@@ -1096,13 +1088,13 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                               const styles = {
 
-                                "pro-tip": { wrapper: "bg-emerald-50 border-emerald-300", icon: "💡", label: isBn ? "প্রো টিপ" : "Pro Tip", labelCls: "text-emerald-800", bodyCls: "text-emerald-900" },
+                                "pro-tip": { wrapper: "bg-emerald-50 border border-emerald-300", Icon: Lightbulb, label: isBn ? "প্রো টিপ" : "Pro Tip", labelCls: "text-emerald-800", bodyCls: "text-emerald-900" },
 
-                                "key-fact": { wrapper: "bg-sky-50 border-sky-300",    icon: "🔑", label: isBn ? "মূল তথ্য" : "Key Fact",  labelCls: "text-sky-800",    bodyCls: "text-sky-900" },
+                                "key-fact": { wrapper: "bg-sky-50 border border-sky-300", Icon: KeyRound, label: isBn ? "মূল তথ্য" : "Key Fact",  labelCls: "text-sky-800",    bodyCls: "text-sky-900" },
 
-                                warning:     { wrapper: "bg-amber-50 border-amber-300", icon: "⚠️", label: isBn ? "সতর্কতা" : "Heads Up",   labelCls: "text-amber-800",  bodyCls: "text-amber-900" },
+                                warning:     { wrapper: "bg-amber-50 border border-amber-300", Icon: TriangleAlert, label: isBn ? "সতর্কতা" : "Heads Up",   labelCls: "text-amber-800",  bodyCls: "text-amber-900" },
 
-                                insider:    { wrapper: "bg-violet-50 border-violet-300", icon: "🔎", label: isBn ? "ইনসাইডার তথ্য" : "Insider Insight", labelCls: "text-violet-800", bodyCls: "text-violet-900" },
+                                insider:    { wrapper: "bg-violet-50 border border-violet-300", Icon: Telescope, label: isBn ? "ইনসাইডার তথ্য" : "Insider Insight", labelCls: "text-violet-800", bodyCls: "text-violet-900" },
 
                               }[callout.type];
 
@@ -1114,23 +1106,23 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                   role="note"
 
-                                  className={`my-6 rounded-2xl border-l-4 ${styles.wrapper} p-5`}
+                                  className={`my-6 rounded-2xl ${styles.wrapper} p-5`}
 
                                 >
 
                                   <div className={`flex items-center gap-2 mb-2 text-sm font-bold ${styles.labelCls}`}>
 
-                                    <span aria-hidden="true">{styles.icon}</span>
+                                    <styles.Icon size={14} aria-hidden="true" className="shrink-0" />
 
                                     <span>{styles.label}</span>
 
                                   </div>
 
-                                  <p className={`text-[15px] leading-[1.75] ${styles.bodyCls}`}>{callout.text}</p>
+                                  <p className={`text-base leading-[1.75] ${styles.bodyCls}`}>{callout.text}</p>
 
                                   {callout.note && (
 
-                                    <p className={`mt-2 text-[13px] leading-relaxed opacity-70 ${styles.bodyCls}`}>
+                                    <p className={`mt-2 text-sm leading-relaxed opacity-70 ${styles.bodyCls}`}>
 
                                       {callout.note}
 
@@ -1642,7 +1634,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                         <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-3 text-left">
 
-                          <h3 className="ural-card-title text-xs font-bold text-brand-navy">
+                          <h3 className="ural-card-title font-serif text-xs font-bold text-brand-navy">
 
                             {sanitizeExpiredPromoText(activePost.affiliateCTA.headline)}
 

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { GuideJumpNav } from "../components/GuideJumpNav";
+import { QuickAnswer } from "../components/QuickAnswer";
 
 import { DollarSign, ArrowRight, ShieldCheck, Compass, Building } from "lucide-react";
 
@@ -104,21 +105,12 @@ export default function CostsRouteView({ context }: RouteViewProps) {
 
                     {/* AEO Quote */}
 
-                    <div id="cost-aeo-text-box" className="bg-slate-50 border-l-4 border-[#F6B73C] p-5 rounded-r-xl">
-
-                      <span className="text-[10px] font-bold tracking-widest text-brand-navy font-mono block mb-1">
-
-                        {isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
-
-                      </span>
-
-                      <p className="text-slate-800 text-sm sm:text-[14.5px] font-sans leading-relaxed">
-
-                        {activeCost.quickAnswer}
-
-                      </p>
-
-                    </div>
+                    <QuickAnswer
+                      id="cost-aeo-text-box"
+                      label={isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
+                    >
+                      {activeCost.quickAnswer}
+                    </QuickAnswer>
 
 
 

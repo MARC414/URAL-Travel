@@ -86,8 +86,28 @@
 
 @theme {
   --font-sans: "Inter", "Noto Sans Bengali", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-serif: "Lora", "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: "JetBrains Mono", SFMono-Regular, Consolas, monospace;
+  /*
+   * "Source Serif 4" is self-hosted (public/fonts/source-serif-4-latin-v1.woff2,
+   * declared in index.html's critical CSS and fonts.css). Lora and Playfair
+   * Display used to be named here but were never shipped, so this stack
+   * silently resolved to Georgia/Cambria/Times — or the generic Android serif —
+   * on all 205 `font-serif` headings. Never re-add a family to this list
+   * without also shipping the file: a named-but-unloaded font is invisible in
+   * code review and only shows up as inconsistent typography on real devices.
+   */
+  --font-serif: "Source Serif 4", Georgia, Cambria, "Times New Roman", Times, serif;
+  /*
+   * No web font is shipped for mono, and none is needed: this role is used for
+   * measurement and data (airport codes, prices, dates, tabular figures) and
+   * for small tracked labels. "JetBrains Mono" used to be named here without a
+   * file, so it silently fell back per-device; a declared-but-missing family is
+   * worse than an honest system stack. Monospace fallbacks are metrically
+   * interchangeable (unlike serif), so this renders the same lookup-table look
+   * with zero bytes. A JetBrains Mono subset that covers ASCII still measures
+   * ~28 KiB, which is not a defensible cost for 10px decorative labels on a
+   * site that removed a preconnect to save one handshake.
+   */
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
 
   --color-brand-navy: #0B1426;
   --color-brand-emerald: #0F4A3F;
@@ -122,12 +142,14 @@
 /* Shared typographic roles. Local text-size utilities remain in place so this
    pass normalizes hierarchy without forcing page-specific title wrapping. */
 .ural-page-title {
+  font-family: var(--font-serif);
   font-weight: var(--fw-extrabold);
   line-height: var(--lh-tight);
   letter-spacing: var(--ls-tight);
 }
 
 .ural-section-title {
+  font-family: var(--font-serif);
   font-weight: var(--fw-extrabold);
   line-height: var(--lh-snug);
   letter-spacing: var(--ls-tight);
@@ -254,11 +276,30 @@
   animation: boatFloat 5s ease-in-out infinite;
 }
 
-/* === HERO CONTENT FADE-IN ANIMATION === */
-@keyframes heroFadeUp {
+/* === HERO ENTRANCE — ONE AUTHORED MOMENT ===
+   This replaced five rules (.hero-badge / .hero-h1 / .hero-subtitle /
+   .hero-widget / .hero-links) that ran the identical fade-up on five elements
+   with five different delays. Repeating one animation with staggered delays is
+   the signature of a generated page rather than a designed one: motion applied
+   for its own sake, where the layers arriving last read as slower rather than
+   richer. Two of the five (.hero-widget, .hero-links) were dead CSS — no
+   element referenced them.
+
+   What matters in the replacement:
+   - `both` instead of a base `opacity: 0`. The old rules left content at
+     opacity 0 and relied on the animation to reveal it, so anything that
+     prevented the animation from running (a blocked stylesheet, a browser or
+     extension with animations disabled) left the H1 permanently invisible. With
+     `both`, the resting state is the element's own — visible — and only the
+     animation's first frame hides it.
+   - cubic-bezier(0.16, 1, 0.3, 1) is a pure decelerating ease-out: confident
+     arrival, clean settle. No bounce, no elastic overshoot.
+   - 20px of travel rather than 24px: enough to read as motion, too little to
+     feel like latency. */
+@keyframes heroEnter {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -266,34 +307,8 @@
   }
 }
 
-.hero-badge {
-  animation: heroFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: 0.1s;
-  opacity: 0;
-}
-
-.hero-h1 {
-  animation: heroFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: 0.25s;
-  opacity: 0;
-}
-
-.hero-subtitle {
-  animation: heroFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: 0.4s;
-  opacity: 0;
-}
-
-.hero-widget {
-  animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: 0.55s;
-  opacity: 0;
-}
-
-.hero-links {
-  animation: heroFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: 0.7s;
-  opacity: 0;
+.hero-enter {
+  animation: heroEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* === STATS BAR === */
@@ -301,6 +316,61 @@
   background: rgba(11, 20, 38, 0.92);
   backdrop-filter: blur(8px);
   border-top: 1px solid rgba(246, 183, 60, 0.2);
+}
+
+/* ==========================================================================
+   BROWSER SURFACES
+   ==========================================================================
+   Text selection, the caret, link underlines and scrollbars ship with browser
+   defaults that belong to no design system — the standard blue selection, the
+   platform scrollbar. Theming them from the palette is the cheapest signal
+   that a page was built rather than assembled, and the one that gets skipped
+   most reliably, because none of it is visible in a static screenshot.
+
+   ::selection is gold-on-navy in both directions: a gold highlight with navy
+   text holds contrast on the light sections AND on the navy hero, so one rule
+   works everywhere. It also matches the brand's own highlight colour, which is
+   the only other place gold is used at this scale. */
+::selection {
+  background-color: var(--color-brand-gold);
+  color: var(--color-brand-navy);
+}
+
+/*
+   Underline offset. This does not create an underline — it only moves the ones
+   that already exist further from the baseline, so descenders (g, y, p) stop
+   colliding with the rule. The default 0px tests badly in prose at 16px.
+*/
+a {
+  text-underline-offset: 3px;
+}
+
+/*
+   Scrollbar tint. Deliberately `scrollbar-color` without `scrollbar-width`:
+   theming the thumb is a pleasant detail, but making it `thin` shrinks the
+   drag target, and the audience here is on touch devices where a narrow
+   scrollbar is a usability cost, not a style. Colour only.
+*/
+html {
+  scrollbar-color: rgba(11, 20, 38, 0.28) transparent;
+}
+
+/* ==========================================================================
+   PRESSED STATE
+   ==========================================================================
+   Hover, focus and disabled states existed throughout; nothing acknowledged
+   the press itself. That gap is most felt on a slow connection, where the
+   interval between tapping and the result arriving is exactly when the reader
+   needs to know the tap registered. `:active` is that acknowledgement.
+
+   Kept to a hair under 2% of scale: enough to be felt, small enough that it
+   never reads as the element jumping. */
+.btn-gold:active {
+  transform: scale(0.985);
+}
+
+.card-hover:active {
+  transform: translateY(-1px);
 }
 
 /* === OTHER URAL DESIGN UTILITIES === */
@@ -463,11 +533,7 @@ body > :not(#root):not(script):not(style) {
     animation: none !important;
   }
 
-  .hero-badge,
-  .hero-h1,
-  .hero-subtitle,
-  .hero-widget,
-  .hero-links {
+  .hero-enter {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

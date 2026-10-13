@@ -57,7 +57,7 @@ export function TravelIntelligence({
               SUMMARY
             </span>
             <div className="space-y-1">
-              <h3 className="ural-card-title text-xs font-mono font-bold tracking-wider text-brand-navy uppercase">
+              <h3 className="ural-card-title text-xs font-bold tracking-wider text-brand-navy uppercase">
                 Travel Summary & Key Takeaways
               </h3>
               <p className="text-slate-700 text-sm leading-relaxed font-sans">

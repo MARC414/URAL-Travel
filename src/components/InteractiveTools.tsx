@@ -335,7 +335,7 @@ export function InteractiveTools() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Controls Column */}
               <div className="ural-card space-y-4 bg-slate-100/70 p-5 border border-border-subtle">
-                <h4 className="text-xs font-black text-slate-500 uppercase tracking-wider font-mono">1. Trip Parameters</h4>
+                <h4 className="text-xs font-black text-slate-500 uppercase tracking-wider">1. Trip Parameters</h4>
 
                 <div>
                   <label htmlFor="calc-dest-select" className="block text-xs font-semibold text-slate-700 mb-1">Target Destination</label>
@@ -428,7 +428,7 @@ export function InteractiveTools() {
                   {/* Decorative mesh */}
                   <div className="absolute right-0 top-0 opacity-10 text-white font-serif text-9xl">৳</div>
                   <div>
-                    <h4 className="text-[10px] font-bold font-mono text-[#F6B73C] uppercase tracking-widest block mb-1">Estimated Trip Budget</h4>
+                    <h4 className="text-[10px] font-bold text-[#F6B73C] uppercase tracking-widest block mb-1">Estimated Trip Budget</h4>
                     <div className="text-4xl font-serif font-black tracking-tight text-white">
                       ৳ {grandBdtTotal.toLocaleString()} <span className="text-xs font-sans font-normal text-slate-300">BDT</span>
                     </div>
@@ -437,9 +437,9 @@ export function InteractiveTools() {
                     </p>
                   </div>
                   <div className="bg-slate-800/60 p-3 rounded-lg border border-slate-700 shrink-0 text-center md:min-w-[120px]">
-                    <span className="text-[9px] text-slate-400 uppercase font-mono block">Budget Per Person</span>
+                    <span className="text-[10px] text-slate-400 uppercase font-mono block">Budget Per Person</span>
                     <span className="text-sm font-bold text-white">৳ {Math.round(grandBdtTotal / calcPeeps).toLocaleString()}</span>
-                    <span className="text-[9px] text-slate-300 block mt-0.5">({calcPeeps} {calcPeeps === 1 ? "traveler" : "travelers"})</span>
+                    <span className="text-[10px] text-slate-300 block mt-0.5">({calcPeeps} {calcPeeps === 1 ? "traveler" : "travelers"})</span>
                   </div>
                 </div>
 

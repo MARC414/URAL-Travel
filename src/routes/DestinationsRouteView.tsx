@@ -224,7 +224,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                             <div className="ural-card bg-white p-4 border border-border-faint shadow-sm space-y-1">
 
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Best time to visit</span>
+                              <span className="font-mono text-[10px] font-bold text-slate-400 uppercase block">Best time to visit</span>
 
                               <span className="font-serif font-bold text-slate-800 text-xs block">November – March</span>
 
@@ -232,7 +232,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                             <div className="ural-card bg-white p-4 border border-border-faint shadow-sm space-y-1">
 
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Known for</span>
+                              <span className="font-mono text-[10px] font-bold text-slate-400 uppercase block">Known for</span>
 
                               <span className="font-serif font-bold text-slate-800 text-xs block">luxury lifestyle, skyscrapers, beaches, shopping</span>
 
@@ -240,7 +240,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                             <div className="ural-card bg-white p-4 border border-border-faint shadow-sm space-y-1">
 
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Travel style</span>
+                              <span className="font-mono text-[10px] font-bold text-slate-400 uppercase block">Travel style</span>
 
                               <span className="font-serif font-bold text-slate-800 text-xs block">budget to luxury options available</span>
 
@@ -258,7 +258,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                             >
 
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Stay connected</span>
+                              <span className="font-mono text-[10px] font-bold text-slate-400 uppercase block">Stay connected</span>
 
                               <span className="font-serif font-bold text-slate-800 text-xs block">Local eSIM from Airalo</span>
 
@@ -376,7 +376,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                                 <div className="space-y-2">
 
-                                  <span className="text-[9px] font-mono font-bold uppercase bg-slate-100 text-brand-navy px-2 py-0.5 rounded-full inline-block">
+                                  <span className="text-[10px] font-mono font-bold uppercase bg-slate-100 text-brand-navy px-2 py-0.5 rounded-full inline-block">
 
                                     <MapPin size={10} className="inline-block mr-1 -mt-0.5" />AREA RECOMMENDATION
 
@@ -394,7 +394,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                                   <div>
 
-                                    <span className="text-[9px] font-mono text-slate-400 block uppercase">Typical Baseline</span>
+                                    <span className="text-[10px] font-mono text-slate-400 block uppercase">Typical Baseline</span>
 
                                     <span className="text-xs font-mono font-bold text-[#F6B73C]">{item.estimate}</span>
 
@@ -436,11 +436,11 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                         {/* 💡 5. TRAVEL INSIGHTS SECTION */}
 
-                        <div id="dubai-insights" className="ural-guide-jump-target bg-brand-navy/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
+                        <div id="dubai-insights" className="ural-guide-jump-target rounded-2xl bg-brand-navy/5 p-6 ring-1 ring-brand-navy/[0.07] space-y-3">
 
                           <div className="space-y-1">
 
-                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-wider block font-sans"><Lightbulb size={11} className="inline-block mr-1 -mt-0.5" />Booking Tips</span>
+                            <span className="block font-sans text-[11px] font-bold uppercase tracking-[0.1em] text-brand-navy"><Lightbulb size={11} className="mr-1 -mt-0.5 inline-block" aria-hidden="true" />Booking Tips</span>
 
                             <h2 className="ural-section-title font-serif text-base font-bold text-brand-navy">Essential Dubai Booking Tips & Cost Hacks</h2>
 
@@ -590,7 +590,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                         <div id="dubai-internal-linking" className="border-t border-slate-200 pt-6 space-y-3">
 
-                          <span className="font-mono text-[9px] font-bold text-slate-400 block uppercase tracking-widest text-center font-sans">Explore More</span>
+                          <span className="font-mono text-[10px] font-bold text-slate-400 block uppercase tracking-widest text-center font-sans">Explore More</span>
 
                           <div className="flex flex-wrap justify-center items-center gap-2.5 text-xs">
 
@@ -822,7 +822,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                             <div className="ural-card bg-white p-4 border border-border-faint shadow-sm space-y-1">
 
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Best Time To Visit</span>
+                              <span className="font-mono text-[10px] font-bold text-slate-400 uppercase block">Best Time To Visit</span>
 
                               <span className="font-serif font-bold text-slate-800 text-xs block">{activeDes.bestTimeToVisit}</span>
 
@@ -830,7 +830,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                             <div className="ural-card bg-white p-4 border border-border-faint shadow-sm space-y-1">
 
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Average Cost Index</span>
+                              <span className="font-mono text-[10px] font-bold text-slate-400 uppercase block">Average Cost Index</span>
 
                               <span className="font-mono font-bold text-[#F6B73C] text-xs block">
 
@@ -852,7 +852,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                             <div className="ural-card bg-white p-4 border border-border-faint shadow-sm space-y-1">
 
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Optimal Travel Style</span>
+                              <span className="font-mono text-[10px] font-bold text-slate-400 uppercase block">Optimal Travel Style</span>
 
                               <span className="text-text-secondary leading-snug block font-sans">
 
@@ -874,7 +874,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                             <a href={AFFILIATE_LINKS.airalo} target="_blank" rel="noopener noreferrer sponsored" className="ural-card bg-white p-4 border border-border-faint shadow-sm space-y-1 block hover:border-[#F6B73C] cursor-pointer">
 
-                              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase block">Stay Connected</span>
+                              <span className="font-mono text-[10px] font-bold text-slate-400 uppercase block">Stay Connected</span>
 
                               <span className="font-serif font-bold text-slate-800 text-xs block">Local eSIM from Airalo</span>
 
@@ -1040,7 +1040,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                                   <div className="flex items-center justify-between">
 
-                                    <span className="text-[9px] font-mono font-bold uppercase bg-slate-100 text-brand-navy px-2 py-0.5 rounded-full">
+                                    <span className="text-[10px] font-mono font-bold uppercase bg-slate-100 text-brand-navy px-2 py-0.5 rounded-full">
 
                                       {hotel.area}
 
@@ -1062,7 +1062,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                                   <div>
 
-                                    <span className="text-[9px] font-mono text-slate-400 block uppercase">Estimate rates</span>
+                                    <span className="text-[10px] font-mono text-slate-400 block uppercase">Estimate rates</span>
 
                                     <span className="text-xs font-mono font-bold text-[#F6B73C]">{hotel.rate}</span>
 
@@ -1110,11 +1110,11 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                         {/* 6. FLIGHT PRICE / DEAL INSIGHT SECTION */}
 
-                        <div id="dest-flight-insights" className="ural-guide-jump-target bg-brand-navy/5 border-l-4 border-[#F6B73C] p-6 rounded-r-2xl space-y-3">
+                        <div id="dest-flight-insights" className="ural-guide-jump-target rounded-2xl bg-brand-navy/5 p-6 ring-1 ring-brand-navy/[0.07] space-y-3">
 
                           <div className="space-y-1">
 
-                            <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-wider block font-sans">Flight Prices & Timing</span>
+                            <span className="block font-sans text-[11px] font-bold uppercase tracking-[0.1em] text-brand-navy">Flight Prices &amp; Timing</span>
 
                             <h2 className="ural-section-title font-serif text-base font-bold text-brand-navy">Typical Flight Prices (Dhaka to {getCountryCityWithIata(activeDes.country)})</h2>
 
@@ -1364,7 +1364,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                         <div id="dest-seo-internal" className="border-t border-slate-200 pt-6 space-y-3">
 
-                          <span className="font-mono text-[9px] font-bold text-slate-400 block uppercase tracking-widest text-center font-sans">Other Destinations</span>
+                          <span className="font-mono text-[10px] font-bold text-slate-400 block uppercase tracking-widest text-center font-sans">Other Destinations</span>
 
                           <div className="flex flex-wrap justify-center items-center gap-2 text-xs">
 
