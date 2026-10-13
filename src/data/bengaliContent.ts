@@ -1,5 +1,6 @@
-import { BlogPost, FlightRoute, HotelGuide, VisaGuide, TripCostData } from "../types";
-import { BLOG_DATA, FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, TRIP_COSTS_DATA } from "../constants";
+import { BlogPost, DestinationGuide, FlightRoute, HotelGuide, VisaGuide, TripCostData } from "../types";
+import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, TRIP_COSTS_DATA } from "../constants";
+import { BENGALI_DESTINATION_OVERRIDES } from "./bengaliDestinations";
 import { Language } from "../translations";
 import { HAJJ_UMRAH_FAQS } from "../hooks/useSeoMeta";
 
@@ -2439,6 +2440,27 @@ const BENGALI_COSTS_OVERRIDES: Record<string, Partial<TripCostData>> = {
       "ঢাকা থেকে ৫ দিনের দুবাই ভ্রমণে রাউন্ডট্রিপ ফ্লাইট, UAE Tourist e-Visa, Deira এলাকার হোটেল, মেট্রো ও Desert Safari-সহ জনপ্রতি BDT 1,05,000 থেকে BDT 1,35,000 খরচ হয়।",
   },
 };
+
+/**
+ * Destination guides (/destinations/*) in Bengali.
+ *
+ * These are the pages a Bengali reader reaches first when planning a trip, so
+ * they are translated at parity — itinerary, key facts and FAQs included — not
+ * summarised. The copy lives in src/data/bengaliDestinations.ts; this merge
+ * keeps the same { ...english, ...bengali } shape as every other locale helper.
+ *
+ * While a guide is still untranslated its Bengali page does NOT exist:
+ * /destinations is listed in DEFERRED_BN_GROUPS (src/utils/localeRoutes.ts)
+ * until all six are written, because a bn-BD page with an English body is
+ * worse than no Bengali page at all.
+ */
+export function getLocalizedDestinations(lang: Language): DestinationGuide[] {
+  if (lang === "en") return DESTINATIONS_DATA;
+  return DESTINATIONS_DATA.map((d) => {
+    const bn = BENGALI_DESTINATION_OVERRIDES[d.id];
+    return bn ? { ...d, ...bn } : d;
+  });
+}
 
 export function getLocalizedCosts(lang: Language): TripCostData[] {
   if (lang === "en") return TRIP_COSTS_DATA;

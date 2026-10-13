@@ -1609,7 +1609,8 @@ function buildAllRoutes(): PrerenderRoute[] {
 
         <section>
           <h2>Bengali and English</h2>
-          <p>URAL publishes in both Bengali and English. The Bengali edition is a translation of the same research, not a summary of it, so a reader who searches in Bengali gets the same rules, fees and caveats as a reader who searches in English.</p>
+          <p>URAL publishes in both Bengali and English, and Bengali pages are written for Bengali readers rather than machine-translated from the English. The English edition is currently the more complete of the two: Bengali coverage is being brought to full parity section by section, starting with destination itineraries, visa rules and trip costs, because those are the pages a Bengali reader searches for first.</p>
+          <p>Where a Bengali page is a summary rather than a full translation, it is a summary by design and not a translation of the research. This page states that plainly because a reader planning around a visa rule or a fee needs to know how much of the detail they are getting.</p>
         </section>
 
         <section>

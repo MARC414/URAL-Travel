@@ -1473,7 +1473,9 @@ export default function App() {
   const localizedCosts = isBn && bnContent
     ? bnContent.getLocalizedCosts(lang)
     : contentData?.TRIP_COSTS_DATA ?? [];
-  const DESTINATIONS_DATA = contentData?.DESTINATIONS_DATA ?? [];
+  const DESTINATIONS_DATA = isBn && bnContent
+    ? bnContent.getLocalizedDestinations(lang)
+    : contentData?.DESTINATIONS_DATA ?? [];
   const BLOG_DATA = contentData?.BLOG_DATA ?? [];
 
   const validationRows =
