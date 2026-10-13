@@ -94,19 +94,6 @@ That is ~43 strings of real Bengali per destination, ~260 for the section.
 | A10 | Verified: 92 EN / 92 BN, hreflang reciprocal, sitemap clusters, 0 dead links | ✅ done |
 | A1 | `src/data/bengaliDestinations.ts` + `getLocalizedDestinations()` + client wiring | ✅ done |
 | A2 | Nepal guide | ✅ done |
-| A3 | Thailand guide | ☐ |
-| A4 | Malaysia guide | ☐ |
-| A5 | Dubai guide | ☐ |
-| A6 | Singapore guide | ☐ |
-| A7 | Maldives guide | ☐ |
-| A8 | Prerender body branch — render the localized data as crawlable Bengali | ☐ |
-| A9 | Lift the deferral + Bengali SERP copy for all 7 routes | ☐ |
-| A10 | Verify: 92/92 routes, reciprocal hreflang, sitemap clusters, build checks | ☐ |
-
-**Deferral lifts only at A9.** Removing `/destinations` from
-`DEFERRED_BN_GROUPS` before all six guides are written would ship English-bodied
-`bn-BD` pages — the exact failure the deferral was added to prevent.
-
 ## Recommended order after Section A
 
 B first (the flagship page, highest external value), then C and D (highest
@@ -387,6 +374,50 @@ measurement is what is left, and it is unchanged by this work:
 The hubs are still 3–12% shells. `bnGuidanceFor` gives each Bengali hub a
 "ব্যবহারিক পরামর্শ" section, which is honest but does not close a 1,300-to-80
 word gap. That is Section B, and it is the real remaining work.
+
+### B1 — /visa-free-countries (the flagship pillar)
+
+Scoped as three units because the page turned out to be worse than its word
+count suggested. `VisaFreeCountriesRouteView.tsx` had every heading switched on
+`isBn`, so the Bengali page *read* as finished — but the body came straight from
+`visaFreeData.ts`, which was English-only. A Bengali reader was getting Bengali
+headings over English paragraphs.
+
+| unit | what | state |
+|---|---|---|
+| B1a | Bengali for all nine entry records (`EntryCopyBn`, eight fields each) | ☑ |
+| B1b | Bengali for the chip lists, `ALWAYS_CARRY` and all six FAQs, then wire the component | ☑ |
+| B1c | Bengali SERP copy, a crawlable Bengali body in the prerender, and a `bn-BD` FaqPage node | ☐ |
+
+**Why `bn` is required, not optional.** An `bn?: EntryCopyBn` field would have
+compiled happily with half the entries translated and reintroduced exactly this
+bug. Required means TypeScript refuses to build a half-written entry.
+
+**Why the badge keeps its English key.** `EntryBadge` colours itself from
+`entry === "Visa on arrival" | "Visa-free" | "Visa required"`. The translated
+label is now a separate `label` prop, so a Bengali page shows Bengali text while
+the colour still means what it means. Keying the comparison off Bengali strings
+would silently drop every badge to the neutral tone.
+
+**How the fix was verified.** The component is client-rendered, so grepping
+`dist/` proves nothing about it, and `tsc` cannot see an object rendered as a
+React child — a `[object Object]` regression slipped past it mid-unit. So
+`scripts/verify-build.ts` now server-renders the page in both languages and
+asserts (a) the Bengali render is at least 60% Bengali words and (b) no English
+sentence of five words or more survives into it. Negative control: reverting the
+field picker to always return English fails both checks — 20% Bengali, 60 leaked
+sentences. `verify:build` is 82 checks.
+
+| measure | before | after |
+|---|---|---|
+| Bengali words in the reader-facing page | 55 (headings only) | 1,482 of 1,591 |
+| Latin words left | all body prose | 32, all proper nouns or currency codes (USD, SAARC, ETA, IMUGA, AED, MYR, SGD, GCC, Henley, URAL) |
+| English sentences leaking into Bengali | 60 | 0 |
+| English page | — | byte-identical; confirmed against the pre-change build |
+
+B1c remains: the crawlable HTML for `/bn/visa-free-countries` is still the
+55-word shell, so a crawler sees 55 words against the English page's 1,755. That
+is the next unit.
 
 **One more gap worth recording.** The Bengali flights/hotels/visa/costs detail
 pages carry no FAQ section at all, because their overrides still fall through to

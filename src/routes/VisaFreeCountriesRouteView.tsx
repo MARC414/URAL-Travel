@@ -26,8 +26,14 @@ const JUMP_LINKS = [
   { id: "faq", en: "Questions", bn: "প্রশ্নোত্তর" },
 ];
 
-/** Renders the entry-type badge. Colour carries meaning, so it is applied consistently. */
-function EntryBadge({ entry }: { entry: string }) {
+/**
+ * Renders the entry-type badge.
+ *
+ * `entry` is always the English `EntryType`, because the colour carries
+ * meaning and must not depend on translated wording. `label` is what the
+ * reader sees, so a Bengali page shows Bengali without losing its tone.
+ */
+function EntryBadge({ entry, label }: { entry: string; label?: string }) {
   const isGood = entry === "Visa on arrival" || entry === "Visa-free";
   const isWarning = entry === "Visa required";
   const tone = isGood
@@ -39,13 +45,20 @@ function EntryBadge({ entry }: { entry: string }) {
     <span
       className={`inline-block whitespace-nowrap rounded-full px-2.5 py-1 font-sans text-[11px] font-bold ring-1 ${tone}`}
     >
-      {entry}
+      {label ?? entry}
     </span>
   );
 }
 
 export default function VisaFreeCountriesRouteView({ context }: RouteViewProps) {
   const { isBn, navigateTo } = context;
+
+  /**
+   * Every prose field on this page has a Bengali twin held next to the English
+   * original in `visaFreeData.ts`. `bn` is required on `VisaFreeEntry`, so
+   * TypeScript refuses to compile an entry that has only been half written.
+   */
+  const pick = <T,>(english: T, bengali: T): T => (isBn ? bengali : english);
 
   const go = (e: React.MouseEvent, path: string) => {
     e.preventDefault();
@@ -106,9 +119,9 @@ export default function VisaFreeCountriesRouteView({ context }: RouteViewProps) 
                   <span aria-hidden="true" className="mr-1.5">
                     {entry.flag}
                   </span>
-                  {entry.country}
+                  {pick(entry.country, entry.bn.country)}
                 </h3>
-                <EntryBadge entry={entry.entry} />
+                <EntryBadge entry={entry.entry} label={pick(entry.entry, entry.bn.entry)} />
               </div>
 
               <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-3">
@@ -116,13 +129,13 @@ export default function VisaFreeCountriesRouteView({ context }: RouteViewProps) 
                   <dt className="font-sans text-[11px] font-bold uppercase tracking-[0.1em] text-slate-500">
                     {isBn ? "সর্বোচ্চ অবস্থান" : "Maximum stay"}
                   </dt>
-                  <dd className="mt-0.5 font-mono text-sm font-semibold text-slate-800">{entry.maxStay}</dd>
+                  <dd className="mt-0.5 font-mono text-sm font-semibold text-slate-800">{pick(entry.maxStay, entry.bn.maxStay)}</dd>
                 </div>
                 <div>
                   <dt className="font-sans text-[11px] font-bold uppercase tracking-[0.1em] text-slate-500">
                     {isBn ? "খরচ" : "Cost"}
                   </dt>
-                  <dd className="mt-0.5 font-mono text-sm font-semibold text-slate-800">{entry.cost}</dd>
+                  <dd className="mt-0.5 font-mono text-sm font-semibold text-slate-800">{pick(entry.cost, entry.bn.cost)}</dd>
                 </div>
                 <div>
                   <dt className="font-sans text-[11px] font-bold uppercase tracking-[0.1em] text-slate-500">
@@ -130,22 +143,22 @@ export default function VisaFreeCountriesRouteView({ context }: RouteViewProps) 
                   </dt>
                   <dd className="mt-0.5 flex items-center gap-1.5 font-mono text-sm font-semibold text-slate-800">
                     <Plane size={14} aria-hidden="true" className="text-emerald-700" />
-                    {entry.reach}
+                    {pick(entry.reach, entry.bn.reach)}
                   </dd>
                 </div>
               </dl>
 
-              <p className="mt-4 text-sm leading-relaxed text-slate-700">{entry.note}</p>
+              <p className="mt-4 text-sm leading-relaxed text-slate-700">{pick(entry.note, entry.bn.note)}</p>
 
-              {entry.caveat ? (
+              {pick(entry.caveat, entry.bn.caveat) ? (
                 <p className="mt-3 flex gap-2 rounded-lg bg-bg-subtle p-3 text-sm leading-relaxed text-slate-700">
                   <AlertTriangle size={16} aria-hidden="true" className="mt-0.5 shrink-0 text-[#8A5A00]" />
-                  <span>{entry.caveat}</span>
+                  <span>{pick(entry.caveat, entry.bn.caveat)}</span>
                 </p>
               ) : null}
 
               <p className="mt-4 border-t border-slate-100 pt-3 text-xs text-slate-500">
-                {isBn ? "সূত্র" : "Source"}: {entry.source}
+                {isBn ? "সূত্র" : "Source"}: {pick(entry.source, entry.bn.source)}
               </p>
             </article>
           ))}
@@ -201,12 +214,12 @@ export default function VisaFreeCountriesRouteView({ context }: RouteViewProps) 
               {isBn ? "প্রায় সবই ক্যারিবিয়ান ও প্রশান্ত মহাসাগরীয় দ্বীপ" : "Almost entirely Caribbean and Pacific islands"}
             </p>
             <ul className="mt-3 flex flex-wrap gap-1.5">
-              {REMOTE_VISA_FREE.map((name) => (
+              {REMOTE_VISA_FREE.map((item) => (
                 <li
-                  key={name}
+                  key={item.name}
                   className="rounded-full bg-bg-subtle px-2.5 py-1 font-sans text-xs font-medium text-slate-700"
                 >
-                  {name}
+                  {pick(item.name, item.nameBn)}
                 </li>
               ))}
             </ul>
@@ -220,12 +233,15 @@ export default function VisaFreeCountriesRouteView({ context }: RouteViewProps) 
               {isBn ? "ভিসা এয়ারপোর্টেই, তবে পৌঁছানোই আসল প্রশ্ন" : "Issued at the airport \u2014 but getting there is the real question"}
             </p>
             <ul className="mt-3 flex flex-wrap gap-1.5">
-              {REMOTE_VOA.map((name) => (
+              {REMOTE_VOA.map((item) => (
                 <li
-                  key={name}
+                  key={item.name}
                   className="rounded-full bg-bg-subtle px-2.5 py-1 font-sans text-xs font-medium text-slate-700"
                 >
-                  {name}
+                  {pick(item.name, item.nameBn)}
+                  {pick(item.detail, item.detailBn) ? (
+                    <span className="text-slate-500"> ({pick(item.detail, item.detailBn)})</span>
+                  ) : null}
                 </li>
               ))}
             </ul>
@@ -259,16 +275,16 @@ export default function VisaFreeCountriesRouteView({ context }: RouteViewProps) 
                   <span aria-hidden="true" className="mr-1.5">
                     {entry.flag}
                   </span>
-                  {entry.country}
+                  {pick(entry.country, entry.bn.country)}
                 </h3>
-                <EntryBadge entry={entry.entry} />
+                <EntryBadge entry={entry.entry} label={pick(entry.entry, entry.bn.entry)} />
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-slate-700">{entry.note}</p>
-              {entry.caveat ? (
-                <p className="mt-2 text-sm leading-relaxed text-[#8A5A00]">{entry.caveat}</p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-700">{pick(entry.note, entry.bn.note)}</p>
+              {pick(entry.caveat, entry.bn.caveat) ? (
+                <p className="mt-2 text-sm leading-relaxed text-[#8A5A00]">{pick(entry.caveat, entry.bn.caveat)}</p>
               ) : null}
               <p className="mt-3 font-mono text-xs text-slate-500">
-                {entry.cost} · {entry.maxStay}
+                {pick(entry.cost, entry.bn.cost)} · {pick(entry.maxStay, entry.bn.maxStay)}
               </p>
             </div>
           ))}
@@ -285,8 +301,12 @@ export default function VisaFreeCountriesRouteView({ context }: RouteViewProps) 
             <li key={row.item} className="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4">
               <CheckCircle2 size={18} aria-hidden="true" className="mt-0.5 shrink-0 text-emerald-700" />
               <div>
-                <p className="font-sans text-sm font-bold text-slate-900">{row.item}</p>
-                <p className="mt-1 text-sm leading-relaxed text-slate-600">{row.detail}</p>
+                <p className="font-sans text-sm font-bold text-slate-900">
+                  {pick(row.item, row.itemBn)}
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-slate-600">
+                  {pick(row.detail, row.detailBn)}
+                </p>
               </div>
             </li>
           ))}
@@ -303,7 +323,7 @@ export default function VisaFreeCountriesRouteView({ context }: RouteViewProps) 
             <details key={faq.question} className="group">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]">
                 <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
-                  {faq.question}
+                  {pick(faq.question, faq.questionBn)}
                 </h3>
                 <ArrowRight
                   size={16}
@@ -311,7 +331,9 @@ export default function VisaFreeCountriesRouteView({ context }: RouteViewProps) 
                   className="shrink-0 text-slate-400 transition-transform group-open:rotate-90"
                 />
               </summary>
-              <p className="px-5 pb-5 text-sm leading-relaxed text-slate-700">{faq.answer}</p>
+              <p className="px-5 pb-5 text-sm leading-relaxed text-slate-700">
+                {pick(faq.answer, faq.answerBn)}
+              </p>
             </details>
           ))}
         </div>

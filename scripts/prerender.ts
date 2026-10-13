@@ -1059,6 +1059,23 @@ function buildAllRoutes(): PrerenderRoute[] {
     name: "Visa-free travel on a Bangladeshi passport — common questions",
   });
 
+  /**
+   * Renders one entry of the remote visa-free / visa-on-arrival lists.
+   *
+   * The detail used to be baked into the name string ("Cambodia (USD 30, 30
+   * days)"). It is now a separate field so the Bengali list can carry its own
+   * wording, so this reproduces the original form exactly for English and the
+   * same shape for Bengali.
+   */
+  const remoteListLabel = (
+    item: { name: string; nameBn: string; detail?: string; detailBn?: string },
+    bengali = false
+  ): string => {
+    const base = bengali ? item.nameBn : item.name;
+    const detail = bengali ? item.detailBn : item.detail;
+    return detail ? `${base} (${detail})` : base;
+  };
+
   const renderVisaFreeEntry = (entry: (typeof USABLE_NOW)[number]) => `
             <section>
               <h3>${escapeHtml(entry.country)}</h3>
@@ -1085,9 +1102,9 @@ function buildAllRoutes(): PrerenderRoute[] {
         <h2 id="visa-free-remote">The rest of the list — and why it misleads</h2>
         <p>These destinations require no visa in advance for a Bangladeshi passport. But getting to them from Dhaka almost always means transiting the United States, the United Kingdom, Europe or the Gulf, and a Bangladeshi passport holder needs a visa for those transit countries. A visa-free destination you cannot legally reach is not visa-free in any useful sense.</p>
         <h3>Visa-free entry</h3>
-        <p>${REMOTE_VISA_FREE.map(escapeHtml).join(", ")}.</p>
+        <p>${REMOTE_VISA_FREE.map((item) => escapeHtml(remoteListLabel(item))).join(", ")}.</p>
         <h3>Visa on arrival</h3>
-        <p>${REMOTE_VOA.map(escapeHtml).join(", ")}.</p>
+        <p>${REMOTE_VOA.map((item) => escapeHtml(remoteListLabel(item))).join(", ")}.</p>
       </section>
       <section aria-labelledby="visa-free-misread">
         <h2 id="visa-free-misread">The ones people assume are easy — and aren't</h2>

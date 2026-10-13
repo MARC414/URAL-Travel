@@ -45,6 +45,9 @@ import {
   CURATED_BLOG_SCENES,
   generateBlogCoverAltText,
 } from "../src/utils/blogAltText";
+import React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import VisaFreeCountriesRouteView from "../src/routes/VisaFreeCountriesRouteView";
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIST_DIR = path.join(ROOT_DIR, "dist");
@@ -2010,6 +2013,77 @@ check(
     ? `all ${guideTargetCount} guide-map links resolve to route or shared section targets`
     : `guide-map links are missing targets: ${missingGuideTargets.slice(0, 5).join(", ") || "no guide links found"}`
 );
+
+// --- Bilingual render integrity --------------------------------------------
+//
+// `tsc` cannot see an object rendered as a React child and vite cannot see a
+// Bengali heading wrapped around English body text, so the /visa-free-countries
+// page shipped in exactly that state: every heading switched on `isBn`, every
+// paragraph pulled from English-only data. The component is client-rendered, so
+// grepping dist/ HTML cannot see it either — the page has to be rendered.
+//
+// Each entry below is rendered in both languages and checked for two things:
+// that the Bengali output is genuinely Bengali, and that no whole English
+// sentence survives into it. Add a route here as its Bengali content lands.
+
+const BILINGUAL_RENDER_VIEWS = [
+  { name: "/visa-free-countries", view: VisaFreeCountriesRouteView },
+] as const;
+
+function renderedText(isBn: boolean, view: (typeof BILINGUAL_RENDER_VIEWS)[number]["view"]) {
+  const html = renderToStaticMarkup(
+    React.createElement(view as any, {
+      context: { isBn, navigateTo: () => {}, lang: isBn ? "bn" : "en" },
+    })
+  );
+  return html
+    .replace(/<script[\s\S]*?<\/script>/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&#x27;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const words = (t: string) => t.split(/\s+/).filter(Boolean);
+const isBengali = (w: string) => /[\u0980-\u09FF]/.test(w);
+/** English sentences are compared whole, so legacy terminology is not flagged. */
+const sentences = (t: string) =>
+  t.split(/(?<=[.!?])\s+/).filter((x) => words(x).length >= 5);
+
+for (const { name, view } of BILINGUAL_RENDER_VIEWS) {
+  let english = "";
+  let bengali = "";
+  try {
+    english = renderedText(false, view);
+    bengali = renderedText(true, view);
+  } catch (error) {
+    check(false, `${name} renders in both languages (threw: ${String(error)})`);
+    continue;
+  }
+
+  const bengaliWords = words(bengali).filter(isBengali).length;
+  const bengaliShare =
+    words(bengali).filter((w) => !/^[\s\u2014\u00b7|]+$/.test(w)).length > 0
+      ? bengaliWords / words(bengali).length
+      : 0;
+  // A heading-only Bengali page scores near zero; a translated one scores ~0.9.
+  check(
+    bengaliShare >= 0.6,
+    bengaliShare >= 0.6
+      ? `${name} Bengali render is ${bengaliWords} Bengali words (${Math.round(bengaliShare * 100)}% of its visible text)`
+      : `${name} Bengali render is only ${Math.round(bengaliShare * 100)}% Bengali — English body text is leaking through`
+  );
+
+  const leaked = sentences(english).filter((x) => bengali.includes(x));
+  check(
+    leaked.length === 0,
+    leaked.length === 0
+      ? `${name} carries no English sentences in its Bengali render`
+      : `${name} still shows ${leaked.length} English sentence(s) in Bengali: "${leaked[0].slice(0, 90)}"`
+  );
+}
 
 // --- Report ----------------------------------------------------------------
 
