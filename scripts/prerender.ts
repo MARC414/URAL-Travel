@@ -1518,6 +1518,12 @@ function buildAllRoutes(): PrerenderRoute[] {
     description:
       "Connect directly with our flight & visa support desk at +8801784385335. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.",
     imageUrl: defaultOgImage,
+    // The hero photo is the page's LCP element and is rendered client-side, so
+    // this preload is what decides the fetch. Emitted as AVIF (see the comment
+    // block in prerenderDistHtmlFiles); keep it in step with ResponsiveImage's
+    // first <source> or supporting browsers download the image twice.
+    lcpImageUrl: `/assets/images/contact_support_desk_agent_1791600000000-1200.webp`,
+    lcpImageSizes: "100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Contact Us", url: `${BASE_URL}/contact` },

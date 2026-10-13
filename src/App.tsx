@@ -4717,6 +4717,52 @@ export default function App() {
       <footer className="bg-brand-navy text-slate-300 pt-14 pb-10 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs">
         <div className="max-w-7xl mx-auto space-y-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
+
+          {/* SUPPORT BAND — one action, three ways to take it.
+              Previously the same phone number was printed twice in two
+              near-identical boxes (one `wa.me`, one `tel:`), which made two
+              rows of the footer carry one fact. The number now appears once;
+              tapping it calls, and WhatsApp and the form sit beside it. */}
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-4 sm:px-6 sm:py-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div className="space-y-1">
+              <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
+                {isBn ? "সরাসরি সাপোর্ট ডেস্ক" : "Direct Support Desk"}
+              </span>
+              <p className="text-[11px] text-slate-400 leading-relaxed">
+                {isBn
+                  ? "ঢাকা ডেস্ক · ফ্লাইট ও হোটেল বুকিং, ভিসা ডকুমেন্ট ও ওমরাহ সহায়তা"
+                  : "Dhaka desk · flight & hotel booking, visa documents, Umrah support"}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <a
+                href="tel:+8801784385335"
+                aria-label={isBn ? "সরাসরি কল করুন: +880 1784-385335" : "Call the URAL desk: +880 1784-385335"}
+                className="min-h-11 inline-flex items-center px-1 font-mono text-sm font-bold tracking-tight text-[#F6B73C] hover:text-white hover:underline"
+              >
+                +880 1784-385335
+              </a>
+              <a
+                href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="min-h-11 inline-flex items-center gap-2 rounded-xl border border-brand-emerald/40 bg-brand-emerald/15 px-3.5 text-xs font-semibold text-emerald-300 hover:bg-brand-emerald/25 hover:text-white"
+              >
+                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.665.988 3.3 1.488 5.35 1.489 5.513 0 10.002-4.486 10.005-9.999.001-2.671-1.037-5.182-2.924-7.071C17.192 1.685 14.685.648 12.012.648c-5.516 0-10.01 4.488-10.014 10.002-.001 1.902.48 3.712 1.404 5.385.98 1.775 2.417 3.303 4.166 4.395l-1.13 4.126 4.22-1.114z" />
+                </svg>
+                {isBn ? "হোয়াটসঅ্যাপ" : "WhatsApp"}
+              </a>
+              <a
+                href={getLocalizedRouteHref("/contact")}
+                onClick={(event) => handleNavigationAnchorClick(event, "/contact")}
+                className="min-h-11 inline-flex items-center gap-2 rounded-xl border border-[#F6B73C]/40 bg-[#F6B73C]/10 px-3.5 text-xs font-semibold text-[#F6B73C] hover:bg-[#F6B73C]/20 hover:text-white"
+              >
+                {isBn ? "যোগাযোগ ফর্ম" : "Contact form"}
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
             
             {/* COLUMN 1 (3 Cols): Brand Lockup, Slogan & Social Media Community */}
             <div className="lg:col-span-3 space-y-4">
@@ -4795,16 +4841,10 @@ export default function App() {
                         </svg>
                       ),
                     },
-                    {
-                      name: "WhatsApp (+8801784385335)",
-                      href: "https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21",
-                      rel: "noopener noreferrer",
-                      svg: (
-                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.665.988 3.3 1.488 5.35 1.489 5.513 0 10.002-4.486 10.005-9.999.001-2.671-1.037-5.182-2.924-7.071C17.192 1.685 14.685.648 12.012.648c-5.516 0-10.01 4.488-10.014 10.002-.001 1.902.483 3.654 1.401 5.247l-.952 3.479 3.599-.944z" />
-                        </svg>
-                      ),
-                    },
+                    // WhatsApp deliberately omitted from this row: it is a support
+                    // channel, not a social profile, and it already has its own
+                    // button in the support band above. Listing it twice was the
+                    // same duplication as the old twin phone rows.
                   ].map((social) => (
                     <a
                       key={social.name}
@@ -4839,63 +4879,65 @@ export default function App() {
               </p>
             </div>
 
-            {/* COLUMN 2 (2 Cols): Flights & Umrah Directory */}
+            {/* COLUMN 2 (2 Cols): Flights & Routes. Every column in this footer
+                now ends with one gold "everything" link — a consistent pattern
+                rather than two unrelated gold links in two columns. */}
             <div className="lg:col-span-2 space-y-2.5">
               <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
-                {isBn ? "জনপ্রিয় ফ্লাইট রুট" : "Flight Routes"}
+                {isBn ? "ফ্লাইট রুট" : "Flight Routes"}
               </span>
               <ul className="space-y-1.5 text-xs">
-                <li><a href="/flights/dhaka-kathmandu" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kathmandu"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kathmandu (KTM)</a></li>
-                <li><a href="/flights/dhaka-bangkok" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-bangkok"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Bangkok (BKK)</a></li>
-                <li><a href="/flights/dhaka-kuala-lumpur" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-kuala-lumpur"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kuala Lumpur (KUL)</a></li>
-                <li><a href="/flights/dhaka-singapore" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-singapore"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</a></li>
-                <li><a href="/flights/dhaka-maldives" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-maldives"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
-                <li><a href="/flights/dhaka-dubai" onClick={(e) => { e.preventDefault(); navigateTo("/flights/dhaka-dubai"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
-                <li><a href="/umrah" onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">Dhaka → Jeddah &amp; Madinah (Umrah)</a></li>
-                <li>
-                  <a
-                    href="/sitemap"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigateTo("/sitemap");
-                    }}
-                    className="inline-block py-1 text-left font-semibold text-[#F6B73C] hover:underline cursor-pointer"
-                  >
-                    {isBn
-                      ? "ঢাকা এয়ারপোর্ট (DAC) চেকলিস্ট ও সব গাইড ডিরেক্টরি →"
-                      : "Dhaka Airport (DAC) Checklist & All Guides Directory →"}
-                  </a>
-                </li>
+                <li><a href={getLocalizedRouteHref("/flights/dhaka-kathmandu")} onClick={(event) => handleNavigationAnchorClick(event, "/flights/dhaka-kathmandu")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kathmandu (KTM)</a></li>
+                <li><a href={getLocalizedRouteHref("/flights/dhaka-bangkok")} onClick={(event) => handleNavigationAnchorClick(event, "/flights/dhaka-bangkok")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Bangkok (BKK)</a></li>
+                <li><a href={getLocalizedRouteHref("/flights/dhaka-kuala-lumpur")} onClick={(event) => handleNavigationAnchorClick(event, "/flights/dhaka-kuala-lumpur")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Kuala Lumpur (KUL)</a></li>
+                <li><a href={getLocalizedRouteHref("/flights/dhaka-singapore")} onClick={(event) => handleNavigationAnchorClick(event, "/flights/dhaka-singapore")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Singapore (SIN)</a></li>
+                <li><a href={getLocalizedRouteHref("/flights/dhaka-maldives")} onClick={(event) => handleNavigationAnchorClick(event, "/flights/dhaka-maldives")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Malé, Maldives (MLE)</a></li>
+                <li><a href={getLocalizedRouteHref("/flights/dhaka-dubai")} onClick={(event) => handleNavigationAnchorClick(event, "/flights/dhaka-dubai")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">Dhaka → Dubai (DXB)</a></li>
+                <li><a href={getLocalizedRouteHref("/umrah")} onClick={(event) => handleNavigationAnchorClick(event, "/umrah")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "ঢাকা → জেদ্দা ও মদিনা (ওমরাহ)" : "Dhaka → Jeddah &amp; Madinah (Umrah)"}</a></li>
+                <li><a href={getLocalizedRouteHref("/flights")} onClick={(event) => handleNavigationAnchorClick(event, "/flights")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সব ফ্লাইট রুট ও ভাড়া →" : "All flight routes &amp; fares →"}</a></li>
               </ul>
             </div>
 
-            {/* COLUMN 3 (2 Cols): Visa Guides by Country */}
+            {/* COLUMN 3 (2 Cols): Visa & entry rules — the site's authority column. */}
             <div className="lg:col-span-2 space-y-2.5">
               <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
-                {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa Checklists"}
+                {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa Checklists"}
               </span>
               <ul className="space-y-1.5 text-xs">
-                <li><a href="/visa-free-countries" onClick={(e) => { e.preventDefault(); navigateTo("/visa-free-countries"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ভিসা ছাড়া যেসব দেশে যাওয়া যায় (২০২৬)" : "Visa-Free Countries (2026)"}</a></li>
-                <li><a href="/visa/nepal-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/nepal-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</a></li>
-                <li><a href="/visa/maldives-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/maldives-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</a></li>
-                <li><a href="/visa/thailand-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/thailand-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</a></li>
-                <li><a href="/visa/malaysia-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/malaysia-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
-                <li><a href="/visa/singapore-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/singapore-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Visa"}</a></li>
-                <li><a href="/visa/dubai-visa" onClick={(e) => { e.preventDefault(); navigateTo("/visa/dubai-visa"); }} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
-                <li>
-                  <a
-                    href={getLocalizedRouteHref("/blog")}
-                    onClick={(event) => handleNavigationAnchorClick(event, "/blog")}
-                    className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer"
-                  >
-                    {isBn ? `সবগুলো ${blogPostCount}টি ট্রাভেল ব্লগ গাইড →` : `All ${blogPostCount} Travel Blog Guides →`}
-                  </a>
-                </li>
+                <li><a href={getLocalizedRouteHref("/visa-free-countries")} onClick={(event) => handleNavigationAnchorClick(event, "/visa-free-countries")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ভিসা ছাড়া যেসব দেশে যাওয়া যায় (২০২৬)" : "Visa-Free Countries (2026)"}</a></li>
+                <li><a href={getLocalizedRouteHref("/visa/nepal-visa")} onClick={(event) => handleNavigationAnchorClick(event, "/visa/nepal-visa")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Nepal ফ্রি Visa on Arrival" : "Nepal Free Visa on Arrival"}</a></li>
+                <li><a href={getLocalizedRouteHref("/visa/maldives-visa")} onClick={(event) => handleNavigationAnchorClick(event, "/visa/maldives-visa")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Maldives ফ্রি VOA + IMUGA" : "Maldives Free VOA + IMUGA"}</a></li>
+                <li><a href={getLocalizedRouteHref("/visa/thailand-visa")} onClick={(event) => handleNavigationAnchorClick(event, "/visa/thailand-visa")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Thailand অফিসিয়াল e-Visa" : "Thailand Official e-Visa"}</a></li>
+                <li><a href={getLocalizedRouteHref("/visa/malaysia-visa")} onClick={(event) => handleNavigationAnchorClick(event, "/visa/malaysia-visa")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Malaysia অনলাইন eVisa" : "Malaysia Online eVisa"}</a></li>
+                <li><a href={getLocalizedRouteHref("/visa/singapore-visa")} onClick={(event) => handleNavigationAnchorClick(event, "/visa/singapore-visa")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "Singapore অনুমোদিত এজেন্ট ভিসা" : "Singapore Authorized Visa"}</a></li>
+                <li><a href={getLocalizedRouteHref("/visa/dubai-visa")} onClick={(event) => handleNavigationAnchorClick(event, "/visa/dubai-visa")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "UAE Dubai ট্যুরিস্ট eVisa" : "UAE Dubai Tourist eVisa"}</a></li>
+                <li><a href={getLocalizedRouteHref("/visa")} onClick={(event) => handleNavigationAnchorClick(event, "/visa")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সব ভিসা গাইড →" : "All visa guides →"}</a></li>
               </ul>
             </div>
 
-            {/* COLUMN 4 (2 Cols): Streamlined High-Converting Travel Services (Task-First, Zero Clutter) */}
+            {/* COLUMN 4 (2 Cols): Plan Your Trip. Replaces the blog-directory link that
+                used to sit at the bottom of the visa column, and gives /costs, /hotels,
+                /destinations, /experiences and /tools their only footer entry. */}
             <div className="lg:col-span-2 space-y-2.5">
+              <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
+                {isBn ? "ট্রিপ পরিকল্পনা" : "Plan Your Trip"}
+              </span>
+              <ul className="space-y-1.5 text-xs">
+                <li><a href={getLocalizedRouteHref("/costs")} onClick={(event) => handleNavigationAnchorClick(event, "/costs")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ট্রিপের খরচ (BDT গাইড)" : "What a trip costs (BDT)"}</a></li>
+                <li><a href={getLocalizedRouteHref("/hotels")} onClick={(event) => handleNavigationAnchorClick(event, "/hotels")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "হোটেল এলাকা ও জোন" : "Hotel areas &amp; neighbourhoods"}</a></li>
+                <li><a href={getLocalizedRouteHref("/destinations")} onClick={(event) => handleNavigationAnchorClick(event, "/destinations")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "দেশভিত্তিক ইটিনারারি" : "Country itineraries &amp; tips"}</a></li>
+                <li><a href={getLocalizedRouteHref("/experiences")} onClick={(event) => handleNavigationAnchorClick(event, "/experiences")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "অ্যাট্রাকশন পাস ও অভিজ্ঞতা" : "Attraction passes &amp; experiences"}</a></li>
+                <li><a href={getLocalizedRouteHref("/tools")} onClick={(event) => handleNavigationAnchorClick(event, "/tools")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ট্রাভেল ক্যালকুলেটর ও টুলস" : "Travel calculators &amp; tools"}</a></li>
+                <li><a href={getLocalizedRouteHref("/blog")} onClick={(event) => handleNavigationAnchorClick(event, "/blog")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? `সব ${blogPostCount}টি ট্রাভেল গাইড →` : `All ${blogPostCount} travel guides →`}</a></li>
+              </ul>
+            </div>
+
+            {/* COLUMN 5 (3 Cols): Travel Services — one row per partner and per job.
+                Klook used to appear twice with two different labels pointing at the
+                identical URL (hotels + tours), so a reader saw seven offers where
+                there were six. The two are merged; Go City, Tiqets, Airalo, Welcome
+                Pickups and AirHelp stay. Labels say what you actually buy. */}
+            <div className="lg:col-span-3 space-y-2.5">
               <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
                 {isBn ? "গ্লোবাল ট্রাভেল সার্ভিস" : "Travel Services"}
               </span>
@@ -4905,19 +4947,10 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="inline-block py-1 hover:text-white hover:underline"
+                    className="inline-flex items-center gap-1 py-1 hover:text-white hover:underline"
                   >
-                    {isBn ? "গ্লোবাল হোটেল ও রিসোর্ট বুকিং" : "Global Hotels & Resorts"}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="inline-block py-1 hover:text-white hover:underline"
-                  >
-                    {isBn ? "এশিয়া ও দুবাই ট্যুর ও অ্যাক্টিভিটি" : "Asia & Dubai Tours & Passes"}
+                    {isBn ? "হোটেল, ট্যুর ও অ্যাক্টিভিটি" : "Hotels, Tours &amp; Activities"}
+                    <span aria-hidden="true" className="text-slate-500">↗</span>
                   </a>
                 </li>
                 <li>
@@ -4925,9 +4958,10 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="inline-block py-1 hover:text-white hover:underline"
+                    className="inline-flex items-center gap-1 py-1 hover:text-white hover:underline"
                   >
-                    {isBn ? "অল-ইনক্লুসিভ ও এক্সপ্লোরার সিটি পাস" : "All-Inclusive & Explorer Passes"}
+                    {isBn ? "সিটিসিপ পাস" : "Sightseeing City Passes"}
+                    <span aria-hidden="true" className="text-slate-500">↗</span>
                   </a>
                 </li>
                 <li>
@@ -4935,9 +4969,10 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.tiqets)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="inline-block py-1 hover:text-white hover:underline"
+                    className="inline-flex items-center gap-1 py-1 hover:text-white hover:underline"
                   >
-                    {isBn ? "ইউরোপ, UK ও USA মিউজিয়াম পাস" : "Europe, UK & USA Attractions"}
+                    {isBn ? "মিউজিয়াম ও অ্যাট্রাকশন টিকিট" : "Museum &amp; Attraction Tickets"}
+                    <span aria-hidden="true" className="text-slate-500">↗</span>
                   </a>
                 </li>
                 <li>
@@ -4945,9 +4980,10 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.airalo)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="inline-block py-1 hover:text-white hover:underline"
+                    className="inline-flex items-center gap-1 py-1 hover:text-white hover:underline"
                   >
-                    {isBn ? "ইনস্ট্যান্ট ট্রাভেল eSIM ডাটা" : "Global Travel eSIM Data"}
+                    {isBn ? "ট্রাভেল eSIM ডাটা" : "Travel eSIM Data"}
+                    <span aria-hidden="true" className="text-slate-500">↗</span>
                   </a>
                 </li>
                 <li>
@@ -4955,9 +4991,10 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.welcomePickups)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="inline-block py-1 hover:text-white hover:underline"
+                    className="inline-flex items-center gap-1 py-1 hover:text-white hover:underline"
                   >
-                    {isBn ? "প্রাইভেট এয়ারপোর্ট পিকআপ ও ট্রান্সফার" : "Airport Pickup & Transfers"}
+                    {isBn ? "এয়ারপোর্ট পিকআপ ও ট্রান্সফার" : "Airport Pickup &amp; Transfers"}
+                    <span aria-hidden="true" className="text-slate-500">↗</span>
                   </a>
                 </li>
                 <li>
@@ -4965,57 +5002,27 @@ export default function App() {
                     href={resolvePartnerUrl(AFFILIATE_LINKS.airhelp)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="inline-block py-1 hover:text-white hover:underline"
+                    className="inline-flex items-center gap-1 py-1 hover:text-white hover:underline"
                   >
-                    {isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600 পর্যন্ত)" : "Flight Delay Claims (Up to €600)"}
+                    {isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ" : "Flight Delay Compensation"}
+                    <span aria-hidden="true" className="text-slate-500">↗</span>
                   </a>
                 </li>
               </ul>
-            </div>
 
-            {/* COLUMN 5 (3 Cols): Direct Support Desk */}
-            <div className="lg:col-span-3 space-y-4">
-              <div className="space-y-2">
-                <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
-                  {isBn ? "সরাসরি সাপোর্ট ডেস্ক" : "Direct Support Desk"}
-                </span>
-                <div className="space-y-1.5 text-xs">
-                  <div className="flex items-center justify-between bg-slate-900/70 border border-slate-800 rounded-xl px-3 py-2">
-                    <span className="text-slate-300">{isBn ? "WhatsApp ডেস্ক:" : "WhatsApp Desk:"}</span>
-                    <a
-                      href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={isBn ? "WhatsApp ডেস্ক: +880 1784-385335" : "Chat on WhatsApp: +880 1784-385335"}
-                      className="min-h-11 px-1 flex items-center hover:text-white hover:underline text-emerald-400 font-mono font-bold"
-                    >
-                      +880 1784-385335
-                    </a>
-                  </div>
-                  <div className="flex items-center justify-between bg-slate-900/70 border border-slate-800 rounded-xl px-3 py-2">
-                    <span className="text-slate-300">{isBn ? "সরাসরি কল:" : "Direct Hotline:"}</span>
-                    <a
-                      href="tel:+8801784385335"
-                      aria-label={isBn ? "সরাসরি কল: +880 1784-385335" : "Call directly: +880 1784-385335"}
-                      className="min-h-11 px-1 flex items-center hover:text-white hover:underline text-[#F6B73C] font-mono font-bold"
-                    >
-                      +880 1784-385335
-                    </a>
-                  </div>
-                </div>
+              {/* Free tools, not a paid partner: separated by a rule so it reads as
+                  URAL's own resource sitting below the commercial links. */}
+              <div className="border-t border-slate-800/80 pt-2.5">
                 <a
-                  href="/contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateTo("/contact");
-                  }}
-                  className="min-h-11 inline-flex items-center gap-1 text-xs font-semibold text-[#F6B73C] hover:text-white hover:underline"
+                  href={getLocalizedRouteHref("/sitemap")}
+                  onClick={(event) => handleNavigationAnchorClick(event, "/sitemap")}
+                  className="inline-block py-1 text-xs font-semibold text-[#F6B73C] hover:text-white hover:underline cursor-pointer"
                 >
-                  {isBn ? "যোগাযোগ ফর্ম →" : "Contact Form →"}
+                  {isBn
+                    ? "ঢাকা এয়ারপোর্ট (DAC) চেকলিস্ট ও সব গাইড ডিরেক্টরি →"
+                    : "Dhaka Airport (DAC) Checklist &amp; All Guides Directory →"}
                 </a>
               </div>
-
-
             </div>
 
           </div>
@@ -5026,12 +5033,12 @@ export default function App() {
               {isBn ? (
                 <>
                   <strong className="text-slate-300 font-semibold">অ্যাফিলিয়েট ও সম্পাদকীয় স্বচ্ছতা (Affiliate Disclosure):</strong>{" "}
-                  URAL কোনো প্রথাগত ট্রাভেল এজেন্সি নয়—এটি একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স প্ল্যাটফর্ম। আমাদের সাইটের কিছু আউটবাউন্ড লিংক ভেরিফায়েড আন্তর্জাতিক বুকিং পার্টনারদের (যেমন Travelpayouts, Klook, Go City, Tiqets ও AirHelp) সাথে যুক্ত। এসব লিংকের মাধ্যমে আপনি বুকিং সম্পন্ন করলে আপনার অতিরিক্ত কোনো খরচ ছাড়াই URAL সামান্য রেফারেল কমিশন পেতে পারে, যা আমাদের সব গাইড ও ক্যালকুলেটর ১০০% ফ্রি রাখতে সাহায্য করে।
+                  URAL কোনো প্রথাগত ট্রাভেল এজেন্সি নয়—এটি একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স প্ল্যাটফর্ম। আমাদের সাইটের কিছু আউটবাউন্ড লিংক ভেরিফায়েড আন্তর্জাতিক বুকিং পার্টনারদের (যেমন Travelpayouts, Klook, Go City, Tiqets, Airalo, Welcome Pickups ও AirHelp) সাথে যুক্ত। এসব লিংকের মাধ্যমে আপনি বুকিং সম্পন্ন করলে আপনার অতিরিক্ত কোনো খরচ ছাড়াই URAL সামান্য রেফারেল কমিশন পেতে পারে, যা আমাদের সব গাইড ও ক্যালকুলেটর ১০০% ফ্রি রাখতে সাহায্য করে।
                 </>
               ) : (
                 <>
                   <strong className="text-slate-300 font-semibold">Affiliate &amp; Editorial Disclosure:</strong>{" "}
-                  URAL is an independent travel intelligence system, not a traditional ticket-selling agency. Some outbound links on this site connect to verified global travel partners (including Travelpayouts, Klook, Go City, Tiqets, and AirHelp). When you book through these links, URAL may earn a referral commission at zero additional cost to you—keeping our visa checklists, BDT calculators, and travel guides 100% free.
+                  URAL is an independent travel intelligence system, not a traditional ticket-selling agency. Some outbound links on this site connect to verified global travel partners (including Travelpayouts, Klook, Go City, Tiqets, Airalo, Welcome Pickups, and AirHelp). When you book through these links, URAL may earn a referral commission at zero additional cost to you—keeping our visa checklists, BDT calculators, and travel guides 100% free.
                 </>
               )}
             </p>
@@ -5045,17 +5052,6 @@ export default function App() {
                 className="min-h-10 px-1 inline-flex items-center hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
               >
                 {isBn ? "আমাদের সম্পর্কে" : "About"}
-              </a>
-              <span className="hidden sm:inline">•</span>
-              <a
-                href="/contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigateTo("/contact");
-                }}
-                className="min-h-10 px-1 inline-flex items-center hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
-              >
-                {isBn ? "যোগাযোগ" : "Contact"}
               </a>
               <span className="hidden sm:inline">•</span>
               <a
