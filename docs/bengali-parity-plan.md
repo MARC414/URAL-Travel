@@ -294,7 +294,7 @@ it with the QR-code guidance.
 source exactly, so no guide is a summary of another. `schemaMarkup` stays
 English in all six, by design.
 
-Bengali chunk: 561,948 → **574,106 bytes**. English routes still load none of it.
+Bengali chunk: 561,948 → **571,982 bytes**. English routes still load none of it.
 
 **Still dormant.** `/bn/destinations` remains deferred, so the site still serves
 92 EN + 85 BN routes. Nothing is visible to a reader yet. The next units turn it
