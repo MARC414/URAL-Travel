@@ -149,3 +149,32 @@ covers all of them.
 **Standing check after any Bengali work:** sweep every built page for internal
 links that do not resolve. A full sweep on 2026-10-14 checked 4,501 internal
 links across 179 pages and found zero dead targets.
+
+**3. Three destination guides never mentioned the visa requirement.** Nepal (the
+free-visa destination) named it six times; Thailand, Malaysia and the UAE named
+it zero times, and those are the three where a Bangladeshi passport holder needs
+an advance application. Each guide linked to its own visa page, but nothing in
+the guide itself said a visa was needed. Each now carries one key fact and one
+FAQ, stating only what the site's own visa pages already publish (`538fda7`).
+
+**4. Detail pages carried no FAQ content in their static HTML, and two verticals
+carried no key facts either.** `getFaqSchemaForPage()` reads its record from a
+fifth parameter, `routeItems`. The client passed it on all twelve calls; the
+prerenderer passed it on none of its five detail-page calls, so the lookup
+always returned `null` and both consumers went silent — the `FAQPage` node and
+the visible FAQ section built from the same object. Destinations and costs also
+never rendered `keyFacts`, though flights, hotels and visa did.
+
+Fixed by passing the five datasets and emitting the two missing key-facts
+sections (`6082fce`). Across the 30 detail pages: **crawlable words 21,401 →
+26,922 (+26%)**, **FAQPage schema 0/30 → 30/30**. This matters to the Bengali
+programme directly — the renderer that now emits the English answers is the same
+one that will emit the Bengali answers.
+
+Not a defect: the Bengali builder deliberately strips `FAQPage` nodes from the
+English detail routes (`prerender.ts` ~2558). English FAQ schema must not appear
+on a Bengali page. Bengali detail pages emit their own `bn-BD` FAQ schema when
+they have their own answers, the way the Umrah route and the Bengali blog posts
+already do. **This is a per-unit requirement at A3–A9, not a separate fix.**
+
+---
