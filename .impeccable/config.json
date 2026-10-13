@@ -1,0 +1,11 @@
+{
+  "detector": {
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "Inter",
+        "reason": "Inter is URAL's committed brand sans, not an unexamined default. It is self-hosted, subsetted by unicode-range, and metric-matched to Noto Sans Bengali via size-adjust/ascent-override so that mixed English+Bengali lines share one line box. Replacing it is a bilingual layout change, not a font swap. See DESIGN.md -> Typography -> Two voices, two jobs."
+      }
+    ]
+  }
+}
