@@ -88,6 +88,7 @@ That is ~43 strings of real Bengali per destination, ~260 for the section.
 | A4 | 🇲🇾 Malaysia — written at parity (4 days, 3 transport, 5 key facts, 5 FAQs, 39 nested strings) | ✅ done |
 | A5 | 🇦🇪 Dubai / UAE — written at parity (4 days, 3 transport, 5 key facts, 5 FAQs, 39 nested strings) | ✅ done |
 | A6 | 🇸🇬 Singapore — written at parity (4 days, 3 transport, 5 key facts, 3 FAQs, 35 nested strings) | ✅ done |
+| A7 | 🇲🇻 Maldives — written at parity (5 days, 3 transport, 4 key facts, 3 FAQs, 36 nested strings) | ✅ done |
 | A1 | `src/data/bengaliDestinations.ts` + `getLocalizedDestinations()` + client wiring | ✅ done |
 | A2 | Nepal guide | ✅ done |
 | A3 | Thailand guide | ☐ |
@@ -264,3 +265,41 @@ BDT 1,50,000 bank balance.
 
 Bengali chunk: 551,997 → **561,948 bytes**. tsc clean, 92 EN + 85 BN,
 verify:build 80/80, sweep 0 of 4,501 links.
+
+### A7 — Maldives — DONE
+`maldives-guide`. 6 prose fields, 5 itinerary days (14 activities), 3 transport
+options, 4 key facts, 3 FAQs — 36 nested strings, all Bengali.
+
+Added the IMUGA requirement to the English guide first (`96c035d`): the page
+correctly stated the free visa on arrival but never mentioned the free IMUGA
+Traveller Declaration that Maldives Immigration requires within 96 hours before
+arrival. It is a separate step from the visa issued at the airport desk, and
+without it a traveller can be refused boarding in Dhaka. The Bengali FAQ states
+it with the QR-code guidance.
+
+---
+
+## 🎉 Section A writing is COMPLETE — 265/265 strings
+
+| guide | Bengali | days | transport | facts | faqs |
+|---|---|---|---|---|---|
+| Nepal | 47/47 | 5 | 3 | 4 | 5 |
+| Thailand | 45/45 | 4 | 3 | 5 | 5 |
+| Malaysia | 45/45 | 4 | 3 | 5 | 5 |
+| UAE | 45/45 | 4 | 3 | 5 | 5 |
+| Singapore | 41/41 | 4 | 3 | 5 | 3 |
+| Maldives | 42/42 | 5 | 3 | 4 | 3 |
+
+**265 of 265 strings are Bengali — 100%.** Every count matches its English
+source exactly, so no guide is a summary of another. `schemaMarkup` stays
+English in all six, by design.
+
+Bengali chunk: 561,948 → **574,106 bytes**. English routes still load none of it.
+
+**Still dormant.** `/bn/destinations` remains deferred, so the site still serves
+92 EN + 85 BN routes. Nothing is visible to a reader yet. The next units turn it
+on:
+- **A8** — switch the destination prerender body to Bengali
+- **A9** — lift `/destinations` from `DEFERRED_BN_GROUPS`, add Bengali SERP copy
+  for all seven routes, emit `bn-BD` FAQ schema per route
+- **A10** — verify 92/92 routes, hreflang pairing, sitemap clusters
