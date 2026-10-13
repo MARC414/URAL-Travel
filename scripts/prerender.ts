@@ -1935,6 +1935,14 @@ function bnLinkList(
   links: { label: string; path: string }[]
 ): string {
   const items = links
+    // Resolve aliases BEFORE the availability check and the /bn conversion.
+    // The English renderer already does this (normalizeInternalHref in the blog
+    // link builder); the Bengali one did not, so a Bengali link to the
+    // /pre-departure alias became /bn/pre-departure — a 404 — even though
+    // /pre-departure aliases to /sitemap, which does have a Bengali page. Three
+    // blog pages shipped that broken link. Every Bengali internal link is built
+    // here, so fixing the order here fixes all of them.
+    .map((link) => ({ ...link, path: normalizeInternalHref(link.path) }))
     .filter((link) => link.label && hasBengaliCounterpart(link.path))
     .map(
       (link) =>

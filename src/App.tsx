@@ -2306,15 +2306,44 @@ export default function App() {
     setDesktopMenuOpen(null);
   };
 
+  /**
+   * Locale routing for links and navigation, with one rule that used to be
+   * missing: a route with no Bengali counterpart must never resolve to /bn/…
+   *
+   * `DEFERRED_BN_GROUPS` (src/utils/localeRoutes.ts) lists the route groups the
+   * prerender refuses to publish in Bengali — today that is /destinations, whose
+   * six guides and hub have no Bengali copy yet. The prerender has always
+   * honoured that gate; the client did not. So a Bengali reader could click
+   * "নেপাল গাইড" in the menu, the SPA would render it, and the URL in the address
+   * bar was /bn/destinations/nepal-guide — which 404s on refresh, on share, and
+   * for any crawler, because no such file exists.
+   *
+   * Both helpers now ask the same gate the build asks, which also means every
+   * surface is fixed at once (desktop mega-panel, mobile drawer, drawer CTA,
+   * homepage grid, footer) rather than five separate patches. When the Bengali
+   * destination guides ship, hasBengaliCounterpart() starts returning true and
+   * these routes become /bn/… again with no further change.
+   *
+   * The fallback is the English path, not a hidden link: the reader lands on a
+   * page that exists and works. Because `lang` is derived from the URL
+   * (see the setLang(locale) effect), the whole UI follows the URL, so the
+   * result is coherent rather than Bengali chrome around English content.
+   */
+  const hasBengaliTarget = (path: string) =>
+    lang === "bn" && hasBengaliCounterpart(normalizeRoutePath(path));
+
   // Navigation helper that emulates URL path routing with clean path URLs.
   // In Bengali mode every existing navigateTo("/x") call site resolves to
   // /bn/x automatically, so no call site needed to change.
   const navigateTo = (path: string) => {
-    pushPath(lang === "bn" ? toLocalePath(normalizeRoutePath(path), "bn") : path);
+    const normalized = normalizeRoutePath(path);
+    pushPath(hasBengaliTarget(normalized) ? toLocalePath(normalized, "bn") : normalized);
   };
 
-  const getLocalizedRouteHref = (path: string) =>
-    toLocalePath(normalizeRoutePath(path), lang);
+  const getLocalizedRouteHref = (path: string) => {
+    const normalized = normalizeRoutePath(path);
+    return hasBengaliTarget(normalized) ? toLocalePath(normalized, "bn") : normalized;
+  };
 
   const isCurrentNavigationPath = (path: string) =>
     getLocalizedRouteHref(path) === getLocalizedRouteHref(currentPath);

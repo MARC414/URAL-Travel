@@ -83,6 +83,7 @@ That is ~43 strings of real Bengali per destination, ~260 for the section.
 | Unit | Deliverable | State |
 |---|---|---|
 | A0 | Recon: data shape, consumer chain, scale | ✅ done |
+| A0b | Defect sweep — two live broken-link bugs found and fixed (see below) | ✅ done |
 | A1 | `src/data/bengaliDestinations.ts` + `getLocalizedDestinations()` + client wiring | ✅ done |
 | A2 | Nepal guide | ✅ done |
 | A3 | Thailand guide | ☐ |
@@ -116,3 +117,35 @@ search volume for a Bengali reader), then E, F. Tier 2 last.
    Latin script inside Bengali prose. Airport and app names keep their Latin
    form (`KTM`, `Pathao`) because they are searched that way.
 4. **No page claims parity until it has it.**
+
+---
+
+## Defects found while auditing (2026-10-14) — both fixed
+
+**1. The client did not honour `DEFERRED_BN_GROUPS`.** The prerender has always
+refused to publish deferred routes in Bengali; the client's `navigateTo()` and
+`getLocalizedRouteHref()` did not consult the same gate. So on every Bengali
+page, 7 menu links (the destinations hub + six guides) resolved to `/bn/…`
+URLs that do not exist: the SPA rendered them, but the address bar URL 404d on
+refresh, on share, and for any crawler. The footer's "Plan Your Trip" column
+added an 8th when it was written.
+
+Fixed in the two helpers rather than at the five surfaces that render those
+links (desktop mega-panel, mobile drawer, drawer CTA, homepage grid, footer),
+so future surfaces inherit the fix. The fallback is the English path — a page
+that exists — and because `lang` is derived from the URL, the whole UI follows
+into English coherently. **This self-heals at A9**: once the Bengali guides
+ship, `hasBengaliCounterpart()` returns true and the links return to `/bn/…`
+with no further edit.
+
+**2. `bnLinkList` converted paths to Bengali before resolving aliases.**
+`/pre-departure` aliases to `/sitemap` (which has a Bengali page), but the
+Bengali link builder applied `toBengaliPath()` first, producing
+`/bn/pre-departure` — a 404 in the crawlable HTML of three Bengali blog pages.
+The English link builder already resolved aliases first; the Bengali one did
+not. Every Bengali internal link is built by that one function, so the fix
+covers all of them.
+
+**Standing check after any Bengali work:** sweep every built page for internal
+links that do not resolve. A full sweep on 2026-10-14 checked 4,501 internal
+links across 179 pages and found zero dead targets.
