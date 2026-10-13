@@ -212,9 +212,9 @@ export default function AboutRouteView({ context }: RouteViewProps) {
 
                   titleEn: "Bengali & English",
 
-                  descBn: "৭৯টি বাংলা ও ৮৬টি ইংরেজি পৃষ্ঠায় সম্পূর্ণ দ্বিভাষিক।",
+                  descBn: "প্রতিটি হাব ও গাইড বাংলা এবং ইংরেজি — দুই ভাষাতেই প্রকাশিত।",
 
-                  descEn: "Fully bilingual across 79 Bengali and 86 English pages.",
+                  descEn: "Every hub and guide is published in both Bengali and English.",
 
                 },
 

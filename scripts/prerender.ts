@@ -1491,7 +1491,7 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/sitemap",
     canonicalUrl: `${BASE_URL}/sitemap`,
-    title: "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Complete 83-Page Sitemap | URAL",
+    title: "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Complete Site Directory | URAL",
     description:
       "Interactive pre-flight readiness checklist for Bangladeshi travelers departing Dhaka Airport (DAC), cabin & Zamzam baggage rules, Embassy emergency helplines, and complete 83-page directory.",
     imageUrl: defaultOgImage,
@@ -1502,7 +1502,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     extraGraphNodes: [sitemapFaq],
     bodyHtml: `
       <article>
-        <h1>Dhaka Airport (DAC) Pre-Departure Readiness Checklist &amp; Complete 83-Page Sitemap</h1>
+        <h1>Dhaka Airport (DAC) Pre-Departure Readiness Checklist &amp; Complete Site Directory</h1>
         <p>Interactive pre-flight checklist for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC), cabin &amp; 5L Zamzam baggage rules, Bangladesh Embassy emergency helplines abroad, and direct links to the travel guides.</p>
         ${renderLandingFaqs("sitemap-predeparture-faqs", "Dhaka Airport pre-departure and baggage questions", sitemapFaqSchema)}
       </article>
@@ -1554,6 +1554,80 @@ function buildAllRoutes(): PrerenderRoute[] {
           </ul>
         </section>
         ${renderLandingFaqs("contact-desk-faqs", "Questions about URAL travel support and BDT booking", contactFaq)}
+      </article>
+    `,
+  });
+
+  // 11b. About / Editorial Standards (/about)
+  //
+  // This route existed in the app but was never prerendered, which meant the
+  // page holding the founder profile, the Organization and Person entities and
+  // the editorial-policy story was invisible to search engines — and 404'd for
+  // anyone who refreshed it or opened a shared link, because no about.html was
+  // written. The body below is written prose rather than a summary stub: it is
+  // the crawlable half of the page, and the thing an answer engine reads when
+  // asked who publishes this site.
+  routes.push({
+    routePath: "/about",
+    canonicalUrl: `${BASE_URL}/about`,
+    title: "About URAL Travel Intelligence | Farhan Momen, Founder & Travel Editor",
+    description:
+      "URAL is an independent travel intelligence desk in Dhaka — not a travel agency. Who writes it, how each guide is sourced and dated, and how the site is funded.",
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "About", url: `${BASE_URL}/about` },
+    ],
+    extraGraphNodes: [],
+    bodyHtml: `
+      <article>
+        <h1>About URAL: Travel Intelligence, Not a Travel Agency</h1>
+        <p>URAL is an independent outbound-travel desk in Dhaka. It publishes flight-fare guidance in Bangladeshi Taka, visa checklists built from official sources, Umrah and Hajj planning material, and trip budgets a family in Bangladesh can compare against its own income. It does not sell tickets, and it does not process visa applications.</p>
+
+        <section>
+          <h2>Who writes it</h2>
+          <p>Every guide on this site is written and edited by <strong>Farhan Momen</strong>, founder and travel editor. URAL is a single-editor publication, not a content farm: the same person researches the visa rule, prices the flights in BDT, and answers the WhatsApp messages when a reader disagrees with something on the page. That is unusual for a travel site, and it is the main reason the information here is dated and sourced rather than endlessly reworded from somewhere else.</p>
+        </section>
+
+        <section>
+          <h2>How the guides are researched</h2>
+          <p>Each guide starts with the authority that actually decides the question — an immigration department, an embassy, an airline's own baggage policy, or a government portal — and works backwards to the traveller. Where the official position is unclear, the page says so instead of choosing an answer that sounds confident. Where sources disagree, both are given with their dates.</p>
+          <p>Visa and fee pages carry the date they were last checked, because these rules change without notice and a page that hides its age cannot be trusted on a topic this volatile. The <a href="/visa-free-countries">visa-free countries guide for Bangladeshi passports</a> is the clearest example of the approach: it separates the destinations a Bangladeshi passport can genuinely use from the much longer list that only looks usable, because reaching those places requires transiting a country that requires a visa.</p>
+          <p>Prices are published as planning estimates in BDT, not as quotes. Fares, hotel rates and fees move constantly, and the pages say so rather than presenting a snapshot as a promise.</p>
+        </section>
+
+        <section>
+          <h2>How URAL is funded</h2>
+          <p>Some outbound links are affiliate links. If you book a hotel, an eSIM or an airport transfer through one of them, the partner pays URAL a commission and you pay exactly the same price. That is the entire revenue model — there is no sponsored content, no paid placement inside a guide, and no airline or hotel that can pay to change what a page says. The arrangement is disclosed in full in the footer of every page and in the <a href="/privacy">privacy and cookie policy</a>.</p>
+          <p>Because the commission comes from the booking rather than from advertising, the incentive is to write pages that are accurate enough to be worth returning to.</p>
+        </section>
+
+        <section>
+          <h2>Correcting mistakes</h2>
+          <p>Travel rules are exactly the kind of information that goes stale quietly, and a wrong visa detail can cost someone a denied boarding rather than an inconvenience. If a page here is wrong, the fastest correction is a message to the <a href="/contact">support desk</a> — the WhatsApp number and the form both reach the same person who writes the pages. Corrections are made to the page itself rather than appended as a note, and the verification date is updated with them.</p>
+        </section>
+
+        <section>
+          <h2>Bengali and English</h2>
+          <p>URAL publishes in both Bengali and English. The Bengali edition is a translation of the same research, not a summary of it, so a reader who searches in Bengali gets the same rules, fees and caveats as a reader who searches in English.</p>
+        </section>
+
+        <section>
+          <h2>Where to start</h2>
+          <ul>
+            <li><a href="/visa-free-countries">Which countries a Bangladeshi passport can enter without a prior visa</a> — and which of them you can actually reach from Dhaka.</li>
+            <li><a href="/visa">Visa guides and checklists by country</a> — Nepal, Maldives, Thailand, Malaysia, Singapore and the UAE.</li>
+            <li><a href="/costs">What an international trip costs in BDT</a> — per-head budgets by destination.</li>
+            <li><a href="/tools">Travel calculators and pre-departure tools</a> — currency conversion, packing and airport checks.</li>
+            <li><a href="/umrah">Umrah and Hajj planning from Bangladesh</a> — Nusuk permits, hotel zones and BDT costs.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Contact</h2>
+          <p>URAL is a small desk, not a call centre. WhatsApp is the fastest route, on +880 1784-385335, and the <a href="/contact">contact form</a> reaches the same inbox.</p>
+          <p><small>Published by URAL Travel Intelligence, Dhaka, Bangladesh.</small></p>
+        </section>
       </article>
     `,
   });
@@ -2170,7 +2244,7 @@ function buildBengaliBody(
     { label: "ভিসা গাইড", path: "/visa" },
     { label: "ভ্রমণ খরচ", path: "/costs" },
     { label: "উমরাহ প্ল্যানার", path: "/umrah" },
-    { label: "৪৬টি ট্রাভেল ব্লগ", path: "/blog" },
+    { label: `সব ${BLOG_DATA.length}টি ট্রাভেল ব্লগ`, path: "/blog" },
   ];
   parts.push(bnLinkList("কোথা থেকে শুরু করবেন", hubLinks));
   return `<article>${parts.join("")}</article>`;

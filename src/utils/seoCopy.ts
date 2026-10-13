@@ -467,6 +467,11 @@ function trimAtWord(text: string, maxLength: number): string {
  * generated for it — see DEFERRED_BN_GROUPS in src/utils/localeRoutes.ts.
  */
 export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
+  "/about": {
+    title: "URAL সম্পর্কে | ফারহান মোমেন — প্রতিষ্ঠাতা ও ট্রাভেল এডিটর",
+    description:
+      "URAL ঢাকার একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স ডেস্ক — ট্রাভেল এজেন্সি নয়। কে লেখেন, প্রতিটি গাইড কীভাবে যাচাই ও তারিখসহ প্রকাশ করা হয়, এবং সাইটের আয়ের উৎস কী।",
+  },
   "/visa-free-countries": {
     title: "বাংলাদেশি পাসপোর্টে ভিসা ছাড়া যেসব দেশে যাওয়া যায় (২০২৬) | URAL",
     description:

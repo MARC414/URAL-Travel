@@ -2133,7 +2133,7 @@ export default function App() {
     ];
   } else if (section === "sitemap") {
     const sitemapUrl = siteUrl("/sitemap", lang);
-    seoTitle = "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Complete 83-Page Sitemap | URAL";
+    seoTitle = "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Complete Site Directory | URAL";
     seoDescription = "Interactive pre-flight readiness checklist for Bangladeshi travelers departing Dhaka Airport (DAC), cabin & Zamzam baggage rules, Embassy emergency helplines, and complete 83-page directory.";
     if (!isBn) {
       seoSchema = getPreDepartureFaqSchema({
