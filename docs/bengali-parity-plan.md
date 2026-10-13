@@ -83,7 +83,8 @@ That is ~43 strings of real Bengali per destination, ~260 for the section.
 | Unit | Deliverable | State |
 |---|---|---|
 | A0 | Recon: data shape, consumer chain, scale | ✅ done |
-| A0b | Defect sweep — two live broken-link bugs found and fixed (see below) | ✅ done |
+| A0b | Defect sweep — four defects found and fixed (see below) | ✅ done |
+| A3 | 🇹🇭 Thailand — written at parity (4 days, 3 transport, 5 key facts, 5 FAQs, 39 nested strings) | ✅ done |
 | A1 | `src/data/bengaliDestinations.ts` + `getLocalizedDestinations()` + client wiring | ✅ done |
 | A2 | Nepal guide | ✅ done |
 | A3 | Thailand guide | ☐ |
@@ -178,3 +179,32 @@ they have their own answers, the way the Umrah route and the Bengali blog posts
 already do. **This is a per-unit requirement at A3–A9, not a separate fix.**
 
 ---
+
+---
+
+## Unit log
+
+### A3 — Thailand — DONE
+`src/data/bengaliDestinations.ts`, entry `thailand-guide`. Every field of the
+English guide is translated: 6 prose fields, 4 itinerary days × 3 activities,
+3 local-transport options, 5 key facts and 5 FAQs — 39 nested strings. The
+counts match the English source exactly, so neither locale is a summary of the
+other. `schemaMarkup` deliberately stays English (machine-read JSON-LD).
+
+Checked by script, 22 assertions, all passing: locale arrays agree in length and
+order; every nested string contains Bengali; the English array is byte-identical
+to before; the Bengali title is its own text; BDT amounts keep Latin digits
+while counts use Bengali digits; the visa key fact says "Visa on Arrival নেই".
+
+Cost: the lazy Bengali chunk went 520,767 → **531,742 bytes (+11 KB)**. English
+routes load none of it. At this rate all six guides add roughly 65 KB to a chunk
+only Bengali readers ever download.
+
+**Dormant until A9, by design.** `/bn/destinations` is still deferred, so no
+Bengali URL, no hreflang, no sitemap entry, and nothing links to the page —
+`_redirects` has no SPA fallback, so it genuinely 404s. A8 switches the
+prerendered body to Bengali and A9 lifts the deferral for the whole section at
+once. Until then this copy is verified data waiting for its route.
+
+Remaining in Section A: **A4 Malaysia → A5 Dubai → A6 Singapore → A7 Maldives**,
+then A8 prerender body, A9 lift deferral + Bengali SERP copy, A10 verify 92/92.
