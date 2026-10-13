@@ -102,6 +102,7 @@ import {
   faqPageNodeSchema,
   howToSchema,
   URAL_SOCIAL_LINKS,
+  URAL_WIKIDATA_ENTITY_URL,
 } from "./utils/schema";
 import { getAuthorProfile } from "./data/authorProfiles";
 import {
@@ -4861,6 +4862,32 @@ export default function App() {
                 </div>
               </div>
 
+              {/* Entity signal, in the identity cluster where "who we are" lives.
+                  Text only, deliberately:
+                  - The old badge hotlinked a PNG from upload.wikimedia.org, which
+                    put a third-party DNS lookup, TLS handshake and request on all
+                    175 pages for a 20px icon.
+                  - Wikimedia logos are trademarks whose use "may require
+                    permission", and a logo here would imply an association that
+                    does not exist. The entity is stated, not decorated.
+                  The machine-readable half of this claim is `sameAs` on the
+                  Organization node (src/utils/schema.ts) — that is what actually
+                  feeds the knowledge graph; this link is for readers. */}
+              <a
+                href={URAL_WIKIDATA_ENTITY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={
+                  isBn
+                    ? "URAL Travel Intelligence-এর Wikidata সত্তা (Q141682382)"
+                    : "The Wikidata item that identifies URAL Travel Intelligence (Q141682382)"
+                }
+                className="inline-flex items-center gap-1.5 text-[11px] font-mono text-slate-400 hover:text-[#F6B73C] hover:underline"
+              >
+                <span aria-hidden="true">◈</span>
+                {isBn ? "Wikidata সত্তা Q141682382" : "Wikidata entity Q141682382"}
+              </a>
+
               {/* Affiliate disclosure, short form.
                   The full legal statement lives in the bottom compliance bar.
                   This one is deliberately a single scannable sentence: the
@@ -5083,29 +5110,6 @@ export default function App() {
                   ? "© 2026 URAL Travel Intelligence. সর্বস্বত্ব সংরক্ষিত।"
                   : "© 2026 URAL Travel Intelligence. All rights reserved."}
               </span>
-              <span className="hidden sm:inline">•</span>
-              {/* Wikidata entity verification badge */}
-              <a
-                href="https://www.wikidata.org/wiki/Q141682382"
-                target="_blank"
-                rel="noopener noreferrer"
-                title={isBn
-                  ? "URAL Travel — Wikidata-তে যাচাইকৃত Travel Intelligence সত্তা"
-                  : "URAL Travel on Wikidata — Verified travel intelligence entity"}
-                className="inline-flex items-center gap-1 hover:text-white transition-colors"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Wikidata-logo_inquares.svg/20px-Wikidata-logo_inquares.svg.png"
-                  alt="Wikidata"
-                  width={20}
-                  height={20}
-                  className="object-contain"
-                  loading="lazy"
-                />
-                <span>
-                  {isBn ? "Wikidata-তে তালিকাভুক্ত" : "Listed on Wikidata"}
-                </span>
-              </a>
             </div>
           </div>
         </div>
