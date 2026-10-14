@@ -608,7 +608,7 @@ function getBlogCoverImage(slug: string): string {
 function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: string): string {
   const snippetsEn: Record<string, string> = {
     "umrah-hajj-guide-bangladesh-nusuk-bdt-cost":
-      "A 10-day DIY Umrah from Bangladesh costs BDT 1,16,000–1,32,000 per person (family of 4 sharing), covering a 90-day Umrah e-Visa (BDT 15,500–19,500), roundtrip Dhaka–Jeddah/Madinah flights, hotels, and Haramain Bullet Train. Obligatory Fard Hajj requires separate registration via the official Ministry portal (hajj.gov.bd).",
+      "Bangladeshi travelers can use three Umrah visa categories: a Standard Umrah Visa through Nusuk or an external provider, an eligible 96-hour stopover, or an eligible Saudi tourist-visa route. The retained 10-day family-of-four-sharing estimate is BDT 1,16,000–1,32,000 per person, not a live quote. Fard Hajj registration and permits are separate.",
     "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh":
       "For flat wheelchair-friendly access in Makkah, stay in Jabal Omar or Clock Tower (3–5 minutes to Haram), or save 60% in Mahbas Al Jin shuttle hotels (BDT 4,200–7,500/night). In Madinah, book Markazia North near Ladies' Gates 25–29 and ride the 300 km/h Haramain Train (sar.hhr.sa).",
     "hajj-registration-bangladesh-government-vs-private-package-cost":
@@ -701,7 +701,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
 
   const snippetsBn: Record<string, string> = {
     "umrah-hajj-guide-bangladesh-nusuk-bdt-cost":
-      "ঢাকা থেকে ৪ জনের পরিবারের শেয়ারে ১০ দিনের DIY ওমরাহ করতে জনপ্রতি BDT ১,১৬,০০০–১,৩২,০০০ খরচ হয়—যার মধ্যে ৯০ দিনের ই-ভিসা (১৬,৫০০ টাকা), রিটার্ন ফ্লাইট, হোটেল ও হারামাইন বুলেট ট্রেন অন্তর্ভুক্ত। আর ফরজ হজের জন্য সরকারি পোর্টাল (hajj.gov.bd)-এ নিবন্ধন বাধ্যতামূলক।",
+      "বাংলাদেশি পাসপোর্টধারীরা Umrah-এর জন্য তিনটি visa route দেখতে পারেন: Nusuk বা বাইরের সেবাদাতার Standard Umrah Visa, শর্তসাপেক্ষ ৯৬ ঘণ্টার stopover, অথবা যোগ্য Saudi tourist-visa route। চারজনের পরিবারের শেয়ারে ১০ দিনের আগের planning estimate জনপ্রতি BDT 1,16,000–1,32,000; এটি live quote নয়। ফরজ Hajj-এর নিবন্ধন ও Saudi permit আলাদা।",
     "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh":
       "মক্কায় বয়স্ক মা-বাবার জন্য ঢালহীন সমতল রাস্তার Jabal Omar বা Clock Tower সেরা (৩–৫ মিনিটে হারাম), আর বাজেট বাঁচাতে Mahbas Al Jin শাটল হোটেল (রাত ৪,২০০–৭,৫০০ টাকা) বেছে নিন। মদিনায় মহিলাদের গেট ২৫–২৯ এর কাছে Markazia North-এ থাকুন ও হারামাইন ট্রেনে যাতায়াত করুন।",
     "hajj-registration-bangladesh-government-vs-private-package-cost":

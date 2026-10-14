@@ -75,6 +75,20 @@ The site is technically sound: prerendered, correct canonicals, a clean schema `
 
 ---
 
+## 2A. Content execution layer
+
+The numbered files above are the technical growth playbook. Use these separate documents to plan and ship individual content updates; they do not replace or rewrite [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md), the plan of record:
+
+- [CONTENT-OS.md](CONTENT-OS.md) — editorial evidence rules, bilingual stage gates, cluster sequencing, repository handoff, and release boundaries.
+- [AI-WRITING-PROMPTS.md](AI-WRITING-PROMPTS.md) — copy-paste prompts for cluster planning, one-article-at-a-time drafting (with EN/BN twins), build verification, owner-approved publishing, and measurement.
+- [CONTENT-QUEUE.md](CONTENT-QUEUE.md) — active work rows and claims ledgers; no volume/KD guesses.
+- [UMRAH-CLUSTER-PLAN.md](UMRAH-CLUSTER-PLAN.md) — current Umrah hub/spoke ownership, accuracy gates, and one-article-per-wave rollout.
+- [METHOD-NOTES.md](METHOD-NOTES.md) — primary-source research and the URAL adaptation of Koray Gübür and Nathan Gotch methods.
+
+`CONTENT-OS.md`, `AI-WRITING-PROMPTS.md`, `CONTENT-QUEUE.md`, and `METHOD-NOTES.md` were reconstructed on 14 October 2026 because the prior session's versions and referenced commit were not present in the checkout. Treat them as current execution guidance, not as a verbatim recovery. `UMRAH-CLUSTER-PLAN.md` was prepared on 15 October from that guidance and the current repository inventory.
+
+---
+
 ## 3. Definition of "done" for the whole playbook
 
 The site is "100% optimized to rank and earn" when all of the following are true and verified:

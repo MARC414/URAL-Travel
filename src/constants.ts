@@ -2034,19 +2034,141 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-11",
     slug: "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
-    title: "Umrah & Hajj Preparation Guide from Bangladesh (2026): Official Visa Rules, Nusuk App, Flights & BDT Cost Breakdown",
-    summary: "Every year, hundreds of thousands of Bangladeshi Muslims travel to Makkah and Madinah for Umrah and Hajj, yet confusing social media rumors often cause pilgrims to overpay or misunderstand current Saudi e-Visa rules. This verified 2026 guide clarifies the strict legal separation between obligatory Hajj registration via the Bangladesh Ministry of Religious Affairs portal (hajj.gov.bd) and year-round DIY Umrah planning. Explore the 3 legitimate Umrah visa pathways for Bangladeshi passport holders, mandatory Saudi Visa Bio and Nusuk Rawdah permit apps, open-jaw Dhaka–Jeddah/Madinah flight routing, and a complete 10-day BDT 1,16,000 to BDT 1,32,000 budget breakdown.",
+    title: "DIY Umrah from Bangladesh: Nusuk & Visa Routes, BDT Budget (2026–27)",
+    summary: "A Bangladesh-focused guide to three Umrah visa-route categories: Standard Umrah Visa (direct Nusuk or an external provider), eligible 96-hour stopover, and eligible tourist-visa routes. It separates Fard Hajj registration and permits, lists current 1448H dates, and keeps the 10-day family-of-four-sharing estimate of BDT 1,16,000–1,32,000 per person as an unrepriced planning reference.",
     category: "Hajj & Umrah",
     date: "September 26, 2026",
+    updatedAt: "2026-10-14",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "8 min read",
+    readTime: "11 min read",
     internalLinks: [
       { text: "Dual-Currency Card Endorsement Guide for Hotel & Train Bookings", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport Outbound Immigration Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Dubai Stopover & UAE Visa Guide from Dhaka", path: "/destinations/dubai-guide" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
     ],
-    affiliateCTA: { provider: "airalo", headline: "Stay Connected on Nusuk & WhatsApp in Makkah and Madinah", body: "Install a Saudi Arabia 4G/5G eSIM before flying from Dhaka so your Nusuk Rawdah permit QR code, Haramain train ticket, and Uber/Careem work the moment you land at Jeddah Airport." }
+    references: [
+      {
+        name: "Saudi Ministry of Hajj and Umrah — Nusuk Umrah launch for overseas pilgrims",
+        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — বিদেশি যাত্রীদের জন্য Nusuk Umrah সেবা চালুর ঘোষণা",
+        url: "https://haj.gov.sa/en/Media-Center/Ministry-News/Ministry-of-Hajj-and-Umrah-launches-Nusuk-Umrah-service-to-enable-pilgrims-from-outside-the-Kingdom",
+      },
+      {
+        name: "Nusuk Umrah — registration",
+        nameBn: "Nusuk Umrah — নিবন্ধন পেজ",
+        url: "https://umrah.nusuk.sa/registration/signup",
+      },
+      {
+        name: "Nusuk Umrah — Terms of Use",
+        nameBn: "Nusuk Umrah — ব্যবহারের শর্ত",
+        url: "https://umrah.nusuk.sa/TermsOfUse",
+      },
+      {
+        name: "Saudi Ministry of Hajj and Umrah — FAQ",
+        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — FAQ",
+        url: "https://haj.gov.sa/en/FAQ",
+      },
+      {
+        name: "Saudi Ministry — 1448H Umrah season calendar",
+        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — ১৪৪৮ হিজরি Umrah মৌসুমের calendar",
+        url: "https://haj.gov.sa/en/Media-Center/Ministry-News/2026/Ministry-of-Hajj-and-Umrah-Announces-the-Umrah-Season-Calendar-for-1448-AH",
+      },
+      {
+        name: "Visit Saudi — Saudi Stopover Visa",
+        nameBn: "Visit Saudi — Saudi Stopover Visa",
+        url: "https://www.visitsaudi.com/en/campaigns/saudi-stopover",
+      },
+      {
+        name: "Saudia — Transit Visa",
+        nameBn: "Saudia — Transit Visa আবেদন",
+        url: "https://www.saudia.com/transit-visa",
+      },
+      {
+        name: "Visit Saudi — Package Visa",
+        nameBn: "Visit Saudi — Package Visa",
+        url: "https://www.visitsaudi.com/en/campaigns/package-visa",
+      },
+      {
+        name: "Official Saudi eVisa portal",
+        nameBn: "সৌদি আরবের official eVisa portal",
+        url: "https://visa.visitsaudi.com/",
+      },
+      {
+        name: "Visit Saudi Help Center — used US, UK or Schengen visa eligibility",
+        nameBn: "Visit Saudi Help Center — আগে ব্যবহৃত US, UK বা Schengen visa-র যোগ্যতা",
+        url: "https://help.visitsaudi.com/hc/en-us/articles/360018933099-Can-I-get-a-visit-visa-if-I-have-a-valid-US-or-UK-or-Schengen-visa-",
+      },
+      {
+        name: "Bangladesh Haj Management Portal",
+        nameBn: "বাংলাদেশ Haj Management Portal",
+        url: "https://www.hajj.gov.bd/",
+      },
+      {
+        name: "Saudi Press Agency — 1447H Hajj permit-violation notice",
+        nameBn: "Saudi Press Agency — ১৪৪৭ হিজরি Hajj permit লঙ্ঘনের বিজ্ঞপ্তি",
+        url: "https://www.spa.gov.sa/en/N2559888",
+      },
+      {
+        name: "Saudi Ministry of Health — Pilgrim Health Requirements index",
+        nameBn: "Saudi Ministry of Health — Pilgrim Health Requirements সূচি",
+        url: "https://www.moh.gov.sa/en/healthawareness/pilgrims-health/pages/default.aspx",
+      },
+      {
+        name: "Saudi MOH — 1447H Umrah health regulations (season-specific)",
+        nameBn: "Saudi MOH — ১৪৪৭ হিজরি Umrah health rules (মৌসুমভিত্তিক)",
+        url: "https://www.moh.gov.sa/en/HealthAwareness/Pilgrims-Health/Documents/Health-Regulations-Umrah-EN.pdf",
+      },
+      {
+        name: "Saudi Ministry — Umrah Permit Application",
+        nameBn: "সৌদি মন্ত্রণালয় — Umrah Permit আবেদন",
+        url: "https://haj.gov.sa/en/E-Services/Umrah-Permit-Application",
+      },
+      {
+        name: "Saudi Ministry — permit to visit Al-Rawdah Al-Sharifiyah",
+        nameBn: "সৌদি মন্ত্রণালয় — Rawdah Al-Sharifiyah জিয়ারতের permit",
+        url: "https://haj.gov.sa/en/E-Services/Permit-to-Visit-Al-Rawdah-Al-Sharifiyah-for-Men-Women",
+      },
+      {
+        name: "Haramain High-Speed Railway — official fare table",
+        nameBn: "Haramain High-Speed Railway — official fare table",
+        url: "https://sar.hhr.sa/travel/fares",
+      },
+      {
+        name: "Haramain High-Speed Railway — baggage guidelines",
+        nameBn: "Haramain High-Speed Railway — baggage নির্দেশনা",
+        url: "https://sar.hhr.sa/travel/guidelines/baggage",
+      },
+      {
+        name: "Additional portal: Nusuk Saudi platform",
+        nameBn: "অতিরিক্ত portal: Nusuk Saudi platform",
+        url: "https://www.nusuk.sa",
+      },
+      {
+        name: "Additional portal: Saudi Ministry of Hajj and Umrah",
+        nameBn: "অতিরিক্ত portal: Saudi Ministry of Hajj and Umrah",
+        url: "https://www.haj.gov.sa",
+      },
+      {
+        name: "Additional portal: Saudi Unified Visa Platform",
+        nameBn: "অতিরিক্ত portal: Saudi Unified Visa Platform",
+        url: "https://ksavisa.sa",
+      },
+      {
+        name: "Additional portal: Haramain High-Speed Railway booking",
+        nameBn: "অতিরিক্ত portal: Haramain High-Speed Railway booking",
+        url: "https://sar.hhr.sa",
+      },
+      {
+        name: "Additional regional portal: UAE Government Portal (general reference only)",
+        nameBn: "অতিরিক্ত regional portal: UAE Government Portal (সৌদি Umrah নিয়মের উৎস নয়)",
+        url: "https://u.ae",
+      },
+    ],
+    affiliateCTA: {
+      provider: "airalo",
+      headline: "Check Saudi data coverage before your Umrah trip",
+      body: "Before buying an eSIM, check the provider's coverage, data, validity, device compatibility and activation terms. Mobile data or Nusuk permit availability is not guaranteed.",
+    },
   },
   {
     id: "blog-12",

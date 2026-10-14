@@ -1,6 +1,6 @@
 # First-pass keyword-to-URL map
 
-**Status:** implementation hypothesis, prepared 2026-09-28. No Search Console query export or Bangladesh-filtered keyword-tool dataset was available, so this map makes **no search-volume, difficulty, or ranking claims**. Validate it against Search Console page/query data before expanding titles or content around any term.
+**Status:** implementation hypotheses; first prepared 2026-09-28. The Umrah page roles were reconciled on 2026-10-15 with [`docs/growth/UMRAH-CLUSTER-PLAN.md`](docs/growth/UMRAH-CLUSTER-PLAN.md); the remaining rows retain their prior first-pass scope. No Search Console query export or Bangladesh-filtered keyword-tool dataset was available, so this map makes **no search-volume, difficulty, or ranking claims**. Validate hypotheses against Search Console page/query data before expanding titles or content around any term.
 
 ## Priority pages and intent boundaries
 
@@ -36,7 +36,7 @@
 - Keep the broad hub and supporting article visibly distinct: a route page answers route/fare questions, a visa page answers entry-process questions, a destination page answers itinerary questions, and a cost page answers budget questions.
 - Use internal links with descriptive, natural anchors between the matching hub, detail page and supporting article. Do not repeat the exact-match phrase in every link or force the same query onto multiple pages.
 - Visa, Hajj/Umrah, currency and travel-cost details can change. Cite the responsible official source in the page body, show a “checked” date where practical, and label estimates as estimates.
-- Bengali text is currently a client-side language toggle, not a separate crawlable URL. No Bengali `hreflang` target is emitted until stable Bengali page URLs exist.
+- English blog routes have crawlable Bengali twins under `/bn/` in the current repository. Keep the primary reader job and factual claims in parity across each pair; verify localized canonical/hreflang and built HTML during every release. Do not assign separate query intent to a Bengali twin unless query evidence supports it.
 
 ## Validation plan
 

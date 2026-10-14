@@ -29,6 +29,16 @@ type RouteViewProps = { context: Record<string, any> };
 
 
 
+const UMRAH_GUIDE_SLUG = "umrah-hajj-guide-bangladesh-nusuk-bdt-cost";
+const UMRAH_BUDGET_TABLE_MARKER = "[[UMRAH_BUDGET_TABLE]]";
+
+function formatReferenceNumber(index: number, isBengali: boolean): string {
+  const number = String(index + 1);
+  return isBengali
+    ? number.replace(/[0-9]/g, (digit) => "০১২৩৪৫৬৭৮৯"[Number(digit)])
+    : number;
+}
+
 function formatArticleDate(isoDate: string, isBengali: boolean) {
 
   return new Intl.DateTimeFormat(isBengali ? "bn-BD" : "en-BD", {
@@ -45,6 +55,68 @@ function formatArticleDate(isoDate: string, isBengali: boolean) {
 
 }
 
+function UmrahBudgetTable({ isBengali }: { isBengali: boolean }) {
+  return (
+    <section className="my-2 space-y-3" aria-labelledby="umrah-budget-table-heading">
+      <h2 id="umrah-budget-table-heading" className="font-serif text-lg font-bold text-brand-navy">
+        {isBengali ? "১০ দিনের DIY Umrah পরিকল্পনা-হিসাব" : "10-day DIY Umrah planning estimate"}
+      </h2>
+      <p className="text-sm leading-relaxed text-slate-700">
+        {isBengali
+          ? "চারজনের পরিবারের রুম-শেয়ারের আগের প্রকাশিত হিসাবটি রাখা হয়েছে; ১৪ অক্টোবর ২০২৬-এ নতুন করে দাম যাচাই করা হয়নি।"
+          : "The previously published family-of-four-sharing figure is retained; it was not re-priced on 14 October 2026."}
+      </p>
+      <div className="overflow-x-auto rounded-xl border border-slate-200">
+        <table className="min-w-[42rem] w-full border-collapse text-left text-sm">
+          <caption className="sr-only">
+            {isBengali
+              ? "আগের প্রকাশিত ১০ দিনের Umrah পরিকল্পনা-হিসাব ও quote তুলনার সীমাবদ্ধতা"
+              : "Previously published 10-day Umrah estimate and comparison limitation"}
+          </caption>
+          <thead className="bg-slate-100 text-brand-navy">
+            <tr>
+              <th scope="col" className="border-b border-slate-200 px-4 py-3 font-semibold">
+                {isBengali ? "পরিকল্পনার বিষয়" : "Planning item"}
+              </th>
+              <th scope="col" className="border-b border-slate-200 px-4 py-3 font-semibold">
+                {isBengali ? "প্রকাশিত অঙ্ক / অবস্থা" : "Published figure / status"}
+              </th>
+              <th scope="col" className="border-b border-slate-200 px-4 py-3 font-semibold">
+                {isBengali ? "ভিত্তি ও সীমাবদ্ধতা" : "Basis and limitation"}
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-200">
+            <tr>
+              <th scope="row" className="px-4 py-3 font-semibold text-slate-800">
+                {isBengali ? "DIY Umrah মোট (জনপ্রতি)" : "DIY Umrah total (per person)"}
+              </th>
+              <td className="px-4 py-3 font-semibold text-brand-navy">BDT 1,16,000–1,32,000</td>
+              <td className="px-4 py-3 text-slate-700">
+                {isBengali
+                  ? "১০ দিন; চারজনের পরিবারের রুম-শেয়ার। আগের পরিকল্পনা-হিসাব; live quote নয়।"
+                  : "10 days; family of four sharing. Inherited planning estimate, not a live quote."}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" className="px-4 py-3 font-semibold text-slate-800">
+                {isBengali ? "এজেন্সি package-এর সঙ্গে তুলনা" : "Comparison with an agency package"}
+              </th>
+              <td className="px-4 py-3 text-slate-700">
+                {isBengali ? "একই ভিত্তির quote পাওয়া যায়নি" : "No matched quote captured"}
+              </td>
+              <td className="px-4 py-3 text-slate-700">
+                {isBengali
+                  ? "একই তারিখ, সময়কাল, room occupancy, flight ও অন্তর্ভুক্ত সেবা ধরে itemized quote ছাড়া সাশ্রয় অনুমান করা যাবে না।"
+                  : "Do not infer savings without an itemized quote on the same dates, duration, room occupancy, flight and inclusions."}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
 
 
 export default function BlogPostRouteView({ context }: RouteViewProps) {
@@ -913,6 +985,13 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                           if (!trimmed) return null;
 
+                          if (
+                            trimmed === UMRAH_BUDGET_TABLE_MARKER &&
+                            activePost.slug === UMRAH_GUIDE_SLUG
+                          ) {
+                            return <UmrahBudgetTable key={bIdx} isBengali={isBn} />;
+                          }
+
 
 
                           // In-article editorial figure (opt-in via post.inlineFigure)
@@ -1508,17 +1587,15 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                         <p className="text-xs leading-relaxed text-slate-600">
 
                           {hasArticleSpecificSources
-
-                            ? isBn
-
-                              ? "গাইড হালনাগাদের সময় এই অফিশিয়াল পেজগুলো দেখা হয়েছে। নিয়ম বদলাতে পারে—আবেদনের আগে কর্তৃপক্ষের live নির্দেশনা মিলিয়ে নিন।"
-
-                              : "These official pages were reviewed while this guide was updated. Requirements can change; follow the authority's live instructions for your application."
-
+                            ? activePost.slug === UMRAH_GUIDE_SLUG
+                              ? isBn
+                                ? "নিচে গাইডে উদ্ধৃত সরকারি/operator সূত্রের পাশাপাশি application, booking ও একটি সাধারণ regional portal আছে; প্রতিটি link সব দাবির প্রমাণ নয়। নিয়ম বদলাতে পারে—আবেদন বা বুকিংয়ের আগে live নির্দেশনা মিলিয়ে নিন।"
+                                : "The list combines government/operator sources cited in the guide with application and booking portals plus one general regional portal; not every link supports every claim. Requirements can change, so confirm live instructions before applying or booking."
+                              : isBn
+                                ? "গাইড হালনাগাদের সময় এই অফিশিয়াল পেজগুলো দেখা হয়েছে। নিয়ম বদলাতে পারে—আবেদনের আগে কর্তৃপক্ষের live নির্দেশনা মিলিয়ে নিন।"
+                                : "These official pages were reviewed while this guide was updated. Requirements can change; follow the authority's live instructions for your application."
                             : isBn
-
                               ? "এগুলো ক্যাটাগরি-ভিত্তিক সাধারণ reference link—সবগুলো এই নির্দিষ্ট লেখার উদ্ধৃত উৎস নয়। সংশ্লিষ্ট কর্তৃপক্ষের সর্বশেষ নিয়ম যাচাই করুন।"
-
                               : "These are general category-level reference links, not citations for every statement in this article. Confirm current details with the relevant authority."}
 
                         </p>
@@ -1541,7 +1618,14 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                             >
 
-                              <span className="min-w-0 break-words">{src.name}</span>
+                              <span className="min-w-0 break-words">
+                                {activePost.slug === UMRAH_GUIDE_SLUG && (
+                                  <span className="mr-1 font-semibold text-emerald-800">[
+                                    {formatReferenceNumber(sIdx, isBn)}
+                                  ]</span>
+                                )}
+                                {src.name}
+                              </span>
 
                               <ExternalLink size={13} className="shrink-0 text-emerald-700" />
 
@@ -1677,7 +1761,8 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                       {/* Visible Hajj, Umrah & Ziyarah Preparation FAQs (Matches JSON-LD FAQPage Schema 100%) */}
 
-                      {(activePost.category === "Hajj & Umrah" || activePost.category === "Ziyarah & Stopovers") && (
+                      {(activePost.category === "Hajj & Umrah" || activePost.category === "Ziyarah & Stopovers") &&
+                        activePost.slug !== UMRAH_GUIDE_SLUG && (
 
                         <TravelIntelligence
 
@@ -1759,11 +1844,13 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                         <p className="text-[13px] text-slate-200 leading-relaxed">
 
-                          {isBn
-
-                            ? "ঢাকা থেকে উড়ে নামার সাথে সাথেই আপনার Nusuk Rawdah পারমিট QR, Haramain ট্রেন টিকিট এবং Uber/Careem কাজ করবে — সৌদি আরব 4G/5G eSIM আগেই ইনস্টল করে রাখুন।"
-
-                            : "Install a Saudi Arabia 4G/5G eSIM before flying from Dhaka so your Nusuk Rawdah permit QR code, Haramain train ticket, and Uber/Careem work the moment you land at Jeddah Airport."}
+                          {activePost.slug === UMRAH_GUIDE_SLUG
+                            ? isBn
+                              ? "কেনার আগে Saudi eSIM provider-এর coverage, data, validity, device compatibility ও activation নিয়ম যাচাই করুন। Nusuk permit ও booking-এর তথ্য offline কপিও রাখুন।"
+                              : "Before buying a Saudi eSIM, check the provider's coverage, data, validity, device compatibility and activation terms. Keep offline copies of Nusuk permits and booking details too."
+                            : isBn
+                              ? "ঢাকা থেকে উড়ে নামার সাথে সাথেই আপনার Nusuk Rawdah পারমিট QR, Haramain ট্রেন টিকিট এবং Uber/Careem কাজ করবে — সৌদি আরব 4G/5G eSIM আগেই ইনস্টল করে রাখুন।"
+                              : "Install a Saudi Arabia 4G/5G eSIM before flying from Dhaka so your Nusuk Rawdah permit QR code, Haramain train ticket, and Uber/Careem work the moment you land at Jeddah Airport."}
 
                         </p>
 
