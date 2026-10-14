@@ -537,6 +537,11 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "বাংলাদেশ থেকে Thailand ভ্রমণের BDT বাজেট দেখুন। Visa charge আলাদা করে itemized নয়; current government e-Visa fee, bank/payment charge ও optional agency service fee যাচাই করুন।",
   },
+  "/kkday-hotels": {
+    title: "KKday হোটেল ও স্টে ডিল: বাংলাদেশি ভ্রমণকারীদের জন্য | URAL",
+    description:
+      "বাংলাদেশ থেকে KKday-তে হোটেল ও স্টে তুলনা করুন। কাঠমান্ডু, ব্যাংকক, কুয়ালালামপুর, সিঙ্গাপুর, মালদ্বীপ ও দুবাইয়ের শহর গাইডসহ। বুকিংয়ের আগে বাতিলের শর্ত ও চূড়ান্ত দাম দেখে নিন।",
+  },
   "/experiences": {
     title: "বাংলাদেশি ভ্রমণকারীদের জন্য অ্যাক্টিভিটি গাইড | URAL",
     description:

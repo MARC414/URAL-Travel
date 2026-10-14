@@ -2129,8 +2129,12 @@ export default function App() {
     ];
   } else if (section === "kkdayHotels") {
     const kkdayHotelsUrl = siteUrl("/kkday-hotels", lang);
-    seoTitle = isBn ? "KKday হোটেল ও স্টে ডিল | URAL" : "KKday Hotel & Stay Deals for Bangladeshi Travelers | URAL";
-    seoDescription = "Compare hotels and stays on KKday from Bangladesh, with city guides for Kathmandu, Bangkok, Kuala Lumpur, Singapore, Maldives and Dubai. Check cancellation terms before paying.";
+    seoTitle = isBn
+      ? getBengaliSeoCopy("/kkday-hotels")?.title || "KKday হোটেল ও স্টে ডিল | URAL"
+      : "KKday Hotel & Stay Deals for Bangladeshi Travelers | URAL";
+    seoDescription = isBn
+      ? getBengaliSeoCopy("/kkday-hotels")?.description || ""
+      : "Compare hotels and stays on KKday from Bangladesh, with city guides for Kathmandu, Bangkok, Kuala Lumpur, Singapore, Maldives and Dubai. Check cancellation terms before paying.";
     seoBreadcrumbs = [
       { name: "Home", url: siteUrl("/", lang) },
       { name: "KKday Hotel & Stay Deals", url: kkdayHotelsUrl }

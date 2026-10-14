@@ -2153,6 +2153,13 @@ function buildBengaliBody(
     `<h1>${escapeHtml(h1)}</h1>`,
     `<p>${escapeHtml(description)}</p>`,
   ];
+  if (englishPath === "/kkday-hotels") {
+    // Same affiliate CTA as the English page (AFFILIATE_LINKS.kkday, see AffiliatePartners.tsx).
+    parts.push(
+      `<p><a href="https://kkday.tpo.li/3Ecyxris" rel="noopener noreferrer sponsored">KKday-তে হোটেল খুঁজুন</a></p>`,
+      `<p>এটি একটি অ্যাফিলিয়েট লিংক; বুকিংয়ে আমরা কমিশন পেতে পারি, আপনার খরচ বাড়ে না।</p>`
+    );
+  }
   const englishPathsIn = (prefix: string, ids: string[]) =>
     ids.map((value) => `${prefix}/${value}`);
 

@@ -353,6 +353,9 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/kkday-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/kkday-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/kkday-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/kkday-hotels" />
     <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1181,6 +1184,15 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/experiences" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/experiences" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/experiences" />
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/kkday-hotels</loc>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/kkday-hotels" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/kkday-hotels" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/kkday-hotels" />
     <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
