@@ -28,8 +28,8 @@ export interface AuthorProfile {
 export const EDITOR_PROFILE: AuthorProfile = {
   name: "Farhan Momen",
   alternateNames: [],
-  portfolioUrl: "https://github.com/MARC414/MARC",
-  sameAs: ["https://github.com/MARC414"],
+  portfolioUrl: "",
+  sameAs: [],
   creativeWorks: [
     {
       titleEn: "Tanchangya Tribe documentary",

@@ -2885,18 +2885,76 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-48",
     slug: "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
     title: "Dhaka to Kolkata by Train & Bus: Benapole Border Crossing, Maitree Express Status & Complete BDT Cost Guide (2026)",
-    summary: "India is the #1 outbound destination for Bangladeshi travelers — and the Dhaka–Kolkata land corridor via Benapole–Petrapole is the most affordable route. As of October 2026, the Maitree Express has been suspended since July 2024, but India resumed tourist visa processing for Bangladeshis in June 2026. This verified guide covers every practical option: the suspended Maitree Express and its potential Padma Bridge reroute, Green Line and Shyamoli bus fares in BDT/INR, the complete Benapole–Petrapole crossing procedure, India visa requirements via IVAC, and a full BDT cost table from BDT 8,000 (ultra-budget) to BDT 18,000 (comfortable 3-day Kolkata trip).",
-    category: "Destinations",
+    summary: "India is a major overland destination for Bangladeshi travelers, and the Dhaka–Kolkata land corridor via Benapole–Petrapole is the primary road route. Cross-border passenger trains (Maitree, Bandhan, and Mitali Express) have been suspended since July 2024 with no confirmed restart date as of our October 15, 2026 review. This guide covers the suspended rail status and Padma Bridge reroute proposal, active Dhaka–Benapole–Petrapole–Kolkata bus legs, the step-by-step border procedure, IVAC sticker-visa requirements (e-Visa is not available for Bangladeshi passports; verify live appointment availability at ivacbd.com), and an indicative 3-day Kolkata planning budget of BDT 8,000–18,000.",
+    category: "Family & Budget",
     date: "October 15, 2026",
+    updatedAt: "2026-10-15",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "8 min read",
     internalLinks: [
       { text: "Top 6 Budget-Friendly Family Destinations from Dhaka", path: "/blog/top-budget-family-destinations-from-dhaka" },
-      { text: "Dhaka Airport Outbound Immigration Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Best Time to Visit India from Bangladesh (Weather + Fares)", path: "/blog" },
-      { text: "India e-Visa & IVAC Visa Guide for Bangladeshis", path: "/blog" },
-      { text: "India Trip Cost Calculator in BDT", path: "/costs" },
+      { text: "Dhaka Airport Outbound Immigration Checklist (NOC & GO Rules)", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Dual-Currency Card & Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Global Flight Search & Dhaka Departure Fare Comparison", path: "/flights" },
+      { text: "Outbound Trip Cost Benchmarks & BDT Budget Planner", path: "/costs" },
     ],
+    references: [
+      {
+        name: "Bangladesh Railway — Official Portal & Passenger Service Notices",
+        nameBn: "বাংলাদেশ রেলওয়ে — অফিশিয়াল পোর্টাল ও যাত্রীসেবা বিজ্ঞপ্তি",
+        url: "https://railway.gov.bd/",
+      },
+      {
+        name: "Bangladesh Railway — Official e-Ticketing Service",
+        nameBn: "বাংলাদেশ রেলওয়ে — অফিশিয়াল ই-টিকিটিং পোর্টাল",
+        url: "https://eticket.railway.gov.bd/",
+      },
+      {
+        name: "Indian Railways — Official Passenger & Cross-Border Rail Portal",
+        nameBn: "ভারতীয় রেলওয়ে — অফিশিয়াল যাত্রী ও আন্তঃসীমান্ত রেল পোর্টাল",
+        url: "https://indianrailways.gov.in/",
+      },
+      {
+        name: "Indian Visa Application Centre (IVAC) Bangladesh — Notices, Fee & Appointment Portal",
+        nameBn: "ইন্ডিয়ান ভিসা অ্যাপ্লিকেশন সেন্টার (IVAC) বাংলাদেশ — বিজ্ঞপ্তি, ফি ও অ্যাপয়েন্টমেন্ট পোর্টাল",
+        url: "https://www.ivacbd.com/",
+      },
+      {
+        name: "IVAC Bangladesh — Visa Categories & Required Document Checklists",
+        nameBn: "IVAC বাংলাদেশ — ভিসা ক্যাটাগরি ও প্রয়োজনীয় কাগজপত্রের তালিকা",
+        url: "https://www.ivacbd.com/kind-of-visas-documents",
+      },
+      {
+        name: "Government of India — Online Visa Application Portal for Bangladesh",
+        nameBn: "ভারত সরকার — বাংলাদেশের জন্য অনলাইন ভিসা আবেদন পোর্টাল",
+        url: "https://indianvisa-bangladesh.nic.in/",
+      },
+      {
+        name: "High Commission of India, Dhaka — Consular & Visa Information",
+        nameBn: "ভারতীয় হাইকমিশন, ঢাকা — কনস্যুলার ও ভিসা বিজ্ঞপ্তি",
+        url: "https://www.hcidhaka.gov.in/",
+      },
+      {
+        name: "National Board of Revenue (NBR) Bangladesh — Travel Tax Rules",
+        nameBn: "জাতীয় রাজস্ব বোর্ড (NBR) বাংলাদেশ — স্থলসীমান্ত ভ্রমণ কর",
+        url: "https://nbr.gov.bd/",
+      },
+      {
+        name: "Bangladesh Land Port Authority (BLPA) — Benapole Land Port",
+        nameBn: "বাংলাদেশ স্থলবন্দর কর্তৃপক্ষ (BLPA) — বেনাপোল স্থলবন্দর তথ্য",
+        url: "https://blpa.gov.bd/",
+      },
+      {
+        name: "Land Ports Authority of India (LPAI) — ICP Petrapole",
+        nameBn: "ল্যান্ড পোর্টস অথরিটি অব ইন্ডিয়া (LPAI) — পেট্রাপোল ইন্টিগ্রেটেড চেক পোস্ট",
+        url: "https://lpai.gov.in/",
+      },
+    ],
+    affiliateCTA: {
+      provider: "aviasales",
+      headline: "Compare Dhaka to Kolkata Direct Flight Fares",
+      body: "While cross-border passenger trains remain suspended, direct Dhaka (DAC) to Kolkata (CCU) flights take about 1 hour 10 minutes — compare live fares and baggage terms across airlines before booking.",
+    },
   },
 ];
 

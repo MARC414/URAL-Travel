@@ -8,7 +8,7 @@ import {
   TRIP_COSTS_DATA,
   BLOG_DATA,
 } from "../src/constants";
-import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
+import { BLOG_SLUGS } from "../src/data/blogIndex";
 // The English blog bodies were split out of constants.ts so the client can load
 // them lazily on blog routes. This script runs in Node and deliberately imports
 // them EAGERLY: the prerendered article HTML is the SEO surface, so the text has
@@ -255,15 +255,18 @@ function renderAuthorBioHtml(
         )}</a></li>`
     )
     .join("");
+  const portfolioHtml = profile.portfolioUrl
+    ? `<p><a href="${escapeHtml(
+        profile.portfolioUrl
+      )}" target="_blank" rel="noopener noreferrer">${
+        isBengali ? "পেশাগত পোর্টফোলিও দেখুন" : "View professional portfolio"
+      }</a></p>`
+    : "";
   return `<aside aria-labelledby="blog-author-bio-heading"><h2 id="blog-author-bio-heading">${
     isBengali ? "লেখক সম্পর্কে" : "About the author"
   }</h2><p>${escapeHtml(isBengali ? profile.bioBn : profile.bioEn)}</p><section><h3>${
     isBengali ? "নির্বাচিত সৃজনশীল ও মিডিয়া কাজ" : "Selected creative &amp; media work"
-  }</h3><ul>${mediaLinks}</ul></section><p><a href="${escapeHtml(
-    profile.portfolioUrl
-  )}" target="_blank" rel="noopener noreferrer">${
-    isBengali ? "পেশাগত পোর্টফোলিও দেখুন" : "View professional portfolio"
-  }</a></p></aside>`;
+  }</h3><ul>${mediaLinks}</ul></section>${portfolioHtml}</aside>`;
 }
 
 function escapeXml(str: string): string {
@@ -898,7 +901,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     bodyHtml: `
       <article>
         <h1>Umrah &amp; Hajj Guide from Bangladesh (2026): DIY BDT Cost Calculator, Nusuk &amp; Flights</h1>
-        <p>Plan an independent 10-day Umrah trip from Dhaka (DAC) from BDT 1,16,000–1,32,000 per pilgrim or compare official Bangladesh Hajj registration packages (hajj.gov.bd).</p>
+        <p>Plan an independent 10-day Umrah trip from Dhaka (DAC) using our preserved planning estimate of BDT 1,16,000–1,32,000 per pilgrim (4-person sharing, unre-priced reference checked 14 October 2026; not a live quote) or compare official Bangladesh Hajj registration rules (hajj.gov.bd).</p>
         <section>
           <h2>Frequently Asked Questions on Umrah &amp; Hajj from Bangladesh</h2>
           ${HAJJ_UMRAH_FAQS.map(
@@ -2275,7 +2278,7 @@ function buildBengaliBody(
   if (group === "blog" && !id) {
     const postPaths = BLOG_SLUGS.map((slug) => `/blog/${slug}`);
     const directory = bnDirectory(
-      `সব ${bnDigits(BLOG_POST_COUNT)}টি বাংলা ট্রাভেল গাইড`,
+      "সব বাংলা ট্রাভেল গাইড",
       postPaths
     );
     parts.push(
@@ -2677,7 +2680,7 @@ function buildBengaliBody(
     { label: "ভিসা গাইড", path: "/visa" },
     { label: "ভ্রমণ খরচ", path: "/costs" },
     { label: "উমরাহ প্ল্যানার", path: "/umrah" },
-    { label: `সব ${bnDigits(BLOG_DATA.length)}টি ট্রাভেল ব্লগ`, path: "/blog" },
+    { label: "সব ট্রাভেল ব্লগ", path: "/blog" },
   ];
   parts.push(bnLinkList("কোথা থেকে শুরু করবেন", hubLinks));
   return `<article>${parts.join("")}</article>`;

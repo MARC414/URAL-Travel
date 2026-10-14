@@ -825,8 +825,8 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                       className="inline-flex shrink-0 items-center whitespace-nowrap text-xs font-semibold text-brand-navy hover:text-slate-900 transition-colors"
                     >
                       {isBn
-                        ? `সব ${localizedBlogs.length}টি গাইড →`
-                        : `All ${localizedBlogs.length} guides →`}
+                        ? "সব গাইড →"
+                        : "All guides →"}
                     </a>
                   </nav>
 
@@ -1619,7 +1619,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                             >
 
                               <span className="min-w-0 break-words">
-                                {activePost.slug === UMRAH_GUIDE_SLUG && (
+                                {hasArticleSpecificSources && (
                                   <span className="mr-1 font-semibold text-emerald-800">[
                                     {formatReferenceNumber(sIdx, isBn)}
                                   ]</span>
@@ -2032,23 +2032,27 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                             </p>
 
-                            <a
+                            {profile.portfolioUrl && (
 
-                              href={profile.portfolioUrl}
+                              <a
 
-                              target="_blank"
+                                href={profile.portfolioUrl}
 
-                              rel="noopener noreferrer"
+                                target="_blank"
 
-                              className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-emerald"
+                                rel="noopener noreferrer"
 
-                            >
+                                className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-emerald"
 
-                              {isBn ? "পেশাগত পোর্টফোলিও দেখুন" : "View Portfolio"}
+                              >
 
-                              <ExternalLink size={10} aria-hidden="true" />
+                                {isBn ? "পেশাগত পোর্টফোলিও দেখুন" : "View Portfolio"}
 
-                            </a>
+                                <ExternalLink size={10} aria-hidden="true" />
+
+                              </a>
+
+                            )}
 
                           </div>
 
@@ -2214,9 +2218,9 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                           {isBn
 
-                            ? `সবগুলো ব্লগ গাইড দেখুন (${localizedBlogs.length})`
+                            ? "সবগুলো ব্লগ দেখুন"
 
-                            : `Back to All ${localizedBlogs.length} Blog Guides`}
+                            : "View All Blogs"}
 
                         </span>
 
