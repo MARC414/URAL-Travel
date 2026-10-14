@@ -141,6 +141,7 @@ const BLOG_IMAGE_MAP: Record<string, string> = {
   "cheap-flight-booking-hacks-dhaka": "blog_editorial_hero_banner_1790429994056.jpg",
   "bangladesh-travelers-iata-airport-codes-directory-guide": "dhaka_airport_widebody_airlines_tarmac_1790520836931.jpg",
   "chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai": "dubai_skyline_burj_twilight_1790485747967.jpg",
+  "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide": "dhaka_kolkata_benapole_border_train_1791500000000.jpg",
 };
 
 function escapeHtml(str: string): string {

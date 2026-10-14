@@ -213,6 +213,10 @@ export const CURATED_BLOG_SCENES: Readonly<
     en: "Snow-covered Japanese mountains and ski resort slopes in Hokkaido with winter travelers",
     bn: "হোক্কাইডোর তুষারাবৃত পাহাড় ও স্কি রিসোর্টে শীতকালীন ভ্রমণকারীদের দৃশ্য",
   },
+  "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide": {
+    en: "Families with suitcases walking beside a green and yellow cross-border train at the Benapole–Petrapole land border station",
+    bn: "বেনাপোল–পেট্রাপোল স্থলসীমান্ত স্টেশনে সবুজ-হলুদ আন্তঃসীমান্ত ট্রেনের পাশ দিয়ে ট্রলি হাতে হেঁটে যাওয়া পরিবারগুলো",
+  },
 };
 
 /**

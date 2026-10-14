@@ -6,6 +6,23 @@
 
 > **Reconstruction note:** the previous session's `CONTENT-QUEUE.md` was not in the checkout and its commit was unavailable. This queue and its row format are reconstructed from the current repository conventions and task brief.
 
+> **Active execution order — 15 October 2026.** The **Umrah cluster** is the rollout in progress
+> ([`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md)); the row below is its current gate. **Fard Hajj stays a
+> separate, linked topic**, not an Umrah child. **No India row is queued**, regardless of how
+> [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md) §6/§12 numbers its sprints — a cluster opens here first,
+> with its own row.
+>
+> **Unqueued India page on the repository (reported 15 October 2026).** The merged branch
+> `docs/content-strategy-topical-authority` (PR #37) added
+> `/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` — English and Bengali — to `src/constants.ts`,
+> `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, and `src/data/blogIndex.ts`. It was merged with no
+> queue row, no Stage 2 claims ledger, and no `references`. It is a real published route now, so:
+> *add the row and complete Stages 1–9 (claims ledger included) before promoting, expanding, or linking it from
+> a hub*; treat its live status as shipped-but-unreviewed rather than as this cluster opening. Two of its
+> English `internalLinks` also point at `/blog` while the anchor text promises named guides that do not exist
+> yet, and its `date`/`CONTENT_UPDATED` relationship was never checked — both are review items, not findings
+> that the page is wrong.
+
 ---
 
 ## Queue rules

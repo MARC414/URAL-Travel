@@ -1664,6 +1664,7 @@ The bus route via Benapole–Petrapole is the cheapest option at approximately B
 
 **Can I cross into India from Bangladesh by land?**
 Yes, via the Benapole–Petrapole border crossing in Jessore District, which is open for passenger traffic. All other Bangladesh–India land borders are closed to foreign nationals.`,
+};
 
 /** Look up one body by slug; undefined for an unknown slug. */
 export function getBlogBody(slug: string): string | undefined {

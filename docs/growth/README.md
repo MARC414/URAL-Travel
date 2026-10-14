@@ -85,6 +85,24 @@ The numbered files above are the technical growth playbook. Use these separate d
 - [UMRAH-CLUSTER-PLAN.md](UMRAH-CLUSTER-PLAN.md) — current Umrah hub/spoke ownership, accuracy gates, and one-article-per-wave rollout.
 - [METHOD-NOTES.md](METHOD-NOTES.md) — primary-source research and the URAL adaptation of Koray Gübür and Nathan Gotch methods.
 
+> ### Which document wins on "what do we build next?" — 15 October 2026
+>
+> The **active cluster plan** does — today [`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md), with its row in
+> [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md). Order of work is:
+>
+> 1. **Umrah cluster — in progress.** Hub `/umrah` + `/bn/umrah` (wave 1), then the already-verified main DIY
+>    guide (wave 2), then one bilingual child asset per wave. Waves and gates are in the cluster plan.
+> 2. **Fard Hajj — separate, linked topic.** `hajj-registration-bangladesh-government-vs-private-package-cost`
+>    is a peer page the Umrah guide links to; it is never an Umrah child.
+> 3. **India — unscheduled gap.** [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md) §6 ranks the
+>    Dhaka↔Kolkata land route first and §12 opens with "Sprint 1 — the India pillar". That is the *gap
+>    analysis*, not the *schedule*; §5, §6 and §12 now carry dated deferral notes. **A tool that recommends
+>    Dhaka↔Kolkata as the first cluster is reading the strategy file's sprint list and missing the cluster plan.**
+>
+> These documents are tracked on `main` (merged in PR #36, 14 October 2026). If a checkout or another AI tool
+> cannot see them, that checkout is stale or on another branch — refresh it (`git fetch && git pull`) rather than
+> re-creating the files.
+
 `CONTENT-OS.md`, `AI-WRITING-PROMPTS.md`, `CONTENT-QUEUE.md`, and `METHOD-NOTES.md` were reconstructed on 14 October 2026 because the prior session's versions and referenced commit were not present in the checkout. Treat them as current execution guidance, not as a verbatim recovery. `UMRAH-CLUSTER-PLAN.md` was prepared on 15 October from that guidance and the current repository inventory.
 
 ---

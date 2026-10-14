@@ -20,6 +20,13 @@ Read these documents in this order before a content task:
 6. [`METHOD-NOTES.md`](METHOD-NOTES.md) — sourced Koray/Gotch methods and the limits on how they are applied.
 7. The target article and its live code/build representation — do not assume the metadata, body, localized content, or references are already in sync.
 
+**Before item 2 sets your agenda, read the active cluster plan when one exists** — currently
+[`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md). Item 2 supplies the site-wide inventory, the gap register and the
+scoring model; the cluster plan supplies the release order, page ownership and per-wave gates for the cluster being
+built. Where the two disagree about *what to build next*, the cluster plan and the queue row win. Today that means
+the **Umrah cluster is in progress**, **Fard Hajj stays a separate linked topic** (its own registration/package
+page, not an Umrah child), and the India pillar in `CONTENT-STRATEGY-2026.md` §5/§6/§12 is an unscheduled gap.
+
 If a source, legal rule, code contract, or owner instruction appears to conflict with a content requirement, stop before drafting or changing the live claim. Record the exact conflict, source, date checked, and the narrow decision needed. Do not silently “resolve” a high-impact legal or cost discrepancy.
 
 This execution layer governs editorial work. It does not replace routing, authoring, design, or affiliate conventions documented elsewhere in the repository.
@@ -97,7 +104,7 @@ A later stage does not override a failed earlier gate. If Stage 2 exposes an own
 
 For multi-page work, map the hub and supporting pages before drafting. Audit the existing site first: update a suitable hub in place instead of creating a duplicate, and give each child page one distinct reader job. Use available SERP and GSC evidence to prioritize; otherwise say “not measured.” Do not invent search metrics or produce all cluster pages in one drafting or publishing batch.
 
-Default release order is **hub first, then one supporting article per release wave**, publishing each article's English and Bengali locale routes together. The owner approves the page set, boundaries, links, and cadence. At each wave, take that one article asset through Stages 1–9 and owner review. Link to live pages only; after a child is deployed, add useful links from the hub and related live pages. Do not add `href`s to planned pages. A completed Stage 9 means the repository build is verified, not that the page has been deployed. Follow the owner-controlled post-deploy checks and measurement process in `AI-WRITING-PROMPTS.md`; do not require a ranking gain before starting the next scheduled wave.
+Default release order is **hub first, then one supporting article per release wave**, publishing each article's English and Bengali locale routes together. The rollout currently in progress is the Umrah cluster ([`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md)); Fard Hajj remains a separate linked pillar, not one of its children, and no other cluster from [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md) §6/§12 opens until the owner closes or re-prioritises those waves. The owner approves the page set, boundaries, links, and cadence. At each wave, take that one article asset through Stages 1–9 and owner review. Link to live pages only; after a child is deployed, add useful links from the hub and related live pages. Do not add `href`s to planned pages. A completed Stage 9 means the repository build is verified, not that the page has been deployed. Follow the owner-controlled post-deploy checks and measurement process in `AI-WRITING-PROMPTS.md`; do not require a ranking gain before starting the next scheduled wave.
 
 ## 5. Existing-page refresh contract
 
