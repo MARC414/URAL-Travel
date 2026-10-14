@@ -50,7 +50,7 @@ export const HAJJ_UMRAH_FAQS: FAQItem[] = [
   {
     question: "How can Bangladeshi citizens apply for an Umrah visa and use the Nusuk app in 2026?",
     answer:
-      "Bangladeshi passport holders can obtain a 90-day Saudi Umrah e-Visa in 2 to 5 working days through a Ministry-authorized Umrah agency in Dhaka (BDT 15,500–19,500 including medical insurance), via a 96-hour Saudia/Flynas Stopover Visa, or via a Saudi Tourist e-Visa/VOA if holding a valid used US, UK, or Schengen visa. Once the visa number is issued, pilgrims register on the official Nusuk app (nusuk.sa) to book their Umrah slot and Rawdah Shareef permit in Madinah.",
+      "Bangladeshi passport holders can obtain a 90-day Saudi Umrah e-Visa in 2 to 5 working days through a Ministry-authorized Umrah agency in Dhaka (recently BDT 15,500–19,500 including medical insurance — verify the current fee), via a 96-hour Saudia/Flynas Stopover Visa on eligible itineraries, or — for holders of valid, previously used US, UK or Schengen visas — visa-on-arrival where current conditions are met; check the official portal before assuming eligibility. Once the visa number is issued, pilgrims register on the official Nusuk app (nusuk.sa) to book their Umrah slot and Rawdah Shareef permit in Madinah.",
   },
   {
     question: "What is the official process for Hajj registration from Bangladesh?",
@@ -60,32 +60,32 @@ export const HAJJ_UMRAH_FAQS: FAQItem[] = [
   {
     question: "How much does a 10-day DIY Umrah trip from Dhaka cost in Bangladeshi Taka (BDT)?",
     answer:
-      "An independent 10-day Umrah trip from Dhaka (5 nights in Makkah and 4 nights in Madinah, family of 4 sharing) typically costs BDT 1,16,000 to BDT 1,32,000 per person for budget 3-star or shuttle-connected hotels, or BDT 1,65,000 to BDT 2,15,000 per person for 4-to-5 star hotels within walking distance of Masjid al-Haram and Masjid an-Nabawi, inclusive of roundtrip flights, Umrah e-Visa, and Haramain High-Speed Train transfers—saving BDT 25,000 to BDT 45,000 per pilgrim compared to fixed group packages.",
+      "An independent 10-day Umrah trip from Dhaka (5 nights in Makkah and 4 nights in Madinah, family of 4 sharing) has a retained planning estimate of BDT 1,16,000 to BDT 1,32,000 per person for budget 3-star or shuttle-connected hotels, covering roundtrip flights, the Umrah e-Visa and ground transport. The range was checked on 14 October 2026 and was not re-priced in this update — it is not a live quote, and no agency-savings figure can be inferred without a matched, itemized quote on the same dates and inclusions.",
   },
   {
     question: "Can Bangladeshi passport holders perform Umrah on a 96-hour Saudi Stopover Transit Visa?",
     answer:
-      "Yes. When booking an international transit flight on Saudia (Saudi Arabian Airlines) or Flynas with a layover in Jeddah (JED) or Madinah (MED), Bangladeshi travelers can select the electronic 96-hour Saudi Stopover Visa during ticket checkout (~SAR 39.50 plus mandatory medical insurance, ~BDT 4,500 total), allowing up to 4 days to perform Umrah and visit Madinah.",
+      "Yes, on eligible itineraries. When booking an international transit flight on Saudia (Saudi Arabian Airlines) or Flynas with a layover in Jeddah (JED) or Madinah (MED), Bangladeshi travelers can select the electronic 96-hour Saudi Stopover Visa during ticket checkout, allowing up to 4 days to perform Umrah and visit Madinah. Eligibility, insurance requirements and fees are set at checkout and change over time — verify them on the airline's booking page; there is no universal fixed price.",
   },
   {
     question: "What is the best flight route from Dhaka (DAC) to Makkah and Madinah for Umrah?",
     answer:
-      "The smartest flight strategy from Bangladesh is an Open-Jaw (Multi-City) ticket: fly inbound from Dhaka (DAC) to Jeddah (JED) to enter Ihram and perform Umrah first, take the Haramain High-Speed Bullet Train to Madinah, and fly outbound directly from Madinah (MED) back to Dhaka (DAC). This saves a 5-to-6 hour return highway transfer back to Jeddah Airport.",
+      "The smartest flight strategy from Bangladesh is an Open-Jaw (Multi-City) ticket: fly inbound from Dhaka (DAC) to Jeddah (JED) to enter Ihram and perform Umrah first, take the Haramain High-Speed Train to Madinah, and fly outbound directly from Madinah (MED) back to Dhaka (DAC). This avoids the long return road transfer back to Jeddah Airport.",
   },
   {
     question: "Which Makkah and Madinah hotel zones are best for elderly Bangladeshi parents and wheelchair users?",
     answer:
-      "For elderly parents or wheelchair users in Makkah, Abraj Al Bait (Clock Tower) and Jabal Omar offer zero-incline elevator access directly to the Haram courtyard, while Lower Ajyad Street (350m–600m) and Ibrahim Al Khalil Street (400m–850m) provide flat, paved walkways without steep hills. In Madinah, the Northern Central Area (Markazia North) sits 100m to 300m directly opposite the King Fahd Gate and Ladies' Prayer Gates.",
+      "For elderly parents or wheelchair users, the most popular Makkah search areas are Abraj Al Bait (Clock Tower) and Jabal Omar for the closest hotels to the Haram, and the Ajyad Street and Ibrahim Al Khalil streets for generally flatter approaches with familiar food options. In Madinah, the central Markazia North/West area sits near the Prophet's Mosque and the Ladies' Prayer Gates area. Distances, slopes and shuttle arrangements vary by property — confirm the exact address, walking route and access with your hotel before booking.",
   },
   {
     question: "How do Bangladeshi pilgrims book the Haramain High-Speed Bullet Train between Makkah, Jeddah, and Madinah?",
     answer:
-      "Pilgrims can pre-book tickets online via the official Haramain High-Speed Railway portal (sar.hhr.sa) or mobile app using an endorsed Bangladeshi Dual-Currency Visa/Mastercard. The 300 km/h electric bullet train connects Makkah and Madinah in 2 hours 20 minutes (~SAR 172.50 / BDT 5,600 in Economy) and Jeddah Airport (JED Terminal 1) to Makkah in just 54 minutes.",
+      "Pilgrims can pre-book tickets online via the official Haramain High-Speed Railway portal (sar.hhr.sa) or mobile app using an endorsed Bangladeshi Dual-Currency Visa/Mastercard. On 14 October 2026 the operator listed a SAR 162 base Economy fare for Makkah–Madinah (basic fare, before VAT and fees; live checkout prices vary by date and occupancy). Check the current timetable and checkout price on the official portal before planning connections.",
   },
   {
     question: "What biometric, vaccination, and Dhaka airport documents are required before flying for Umrah or Hajj?",
     answer:
-      "Before departing Hazrat Shahjalal International Airport (DAC), pilgrims must complete fingerprint and facial biometrics on the official Saudi Visa Bio app, carry an e-Passport valid for at least 6 months, a printed Umrah/Hajj e-Visa, confirmed roundtrip or multi-city air tickets, Makkah/Madinah hotel vouchers, a Meningococcal Meningitis (ACWY-135) vaccination certificate issued at least 10 days before travel, and endorsed foreign currency (USD/SAR cash or an active Dual-Currency Card).",
+      "Before departing Hazrat Shahjalal International Airport (DAC), pilgrims should complete any biometrics their visa application requires — the current Saudi Ministry FAQ lists Bangladesh for biometric enrollment on electronically issued Umrah visas via the official Saudi Visa Bio app; it is not a universal requirement for every tourist or stopover traveler. Also carry an e-Passport valid for at least 6 months, a printed Umrah/Hajj e-Visa, confirmed roundtrip or multi-city air tickets, Makkah/Madinah hotel vouchers, a Meningococcal Meningitis (ACWY-135) vaccination certificate issued at least 10 days before travel, and endorsed foreign currency (USD/SAR cash or an active Dual-Currency Card).",
   },
 ];
 

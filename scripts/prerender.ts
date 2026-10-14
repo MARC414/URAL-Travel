@@ -898,7 +898,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     bodyHtml: `
       <article>
         <h1>Umrah &amp; Hajj Guide from Bangladesh (2026): DIY BDT Cost Calculator, Nusuk &amp; Flights</h1>
-        <p>Plan an independent 10-day Umrah trip from Dhaka (DAC) from BDT 1,16,000–1,32,000 per pilgrim or compare official Bangladesh Hajj registration packages (hajj.gov.bd).</p>
+        <p>Plan an independent 10-day Umrah trip from Dhaka (DAC) — the retained planning estimate is BDT 1,16,000–1,32,000 per pilgrim (family-of-four sharing, checked 14 October 2026; not a live quote) — or compare official Bangladesh Hajj registration packages (hajj.gov.bd).</p>
         <section>
           <h2>Frequently Asked Questions on Umrah &amp; Hajj from Bangladesh</h2>
           ${HAJJ_UMRAH_FAQS.map(
@@ -2569,8 +2569,10 @@ function buildBengaliBody(
     );
     parts.push(
       bnLinkList("সম্পর্কিত গাইড", [
-        { label: "ঢাকা থেকে জেদ্দা ও মদিনার ফ্লাইট", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-        { label: "নেপাল ভিসা (ফ্রি Visa on Arrival)", path: "/visa/nepal-visa" },
+        { label: "ধাপে ধাপে DIY ওমরাহ ও BDT বাজেট গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+        { label: "Nusuk অ্যাপ, Saudi Visa Bio ও Rawdah পারমিট গাইড", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+        { label: "মক্কা-মদিনা হোটেল জোন ও Haramain ট্রেন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+        { label: "বাংলাদেশ থেকে হজ নিবন্ধন ও প্যাকেজ গাইড", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
       ])
     );
     return `<article>${parts.join("")}</article>`;
