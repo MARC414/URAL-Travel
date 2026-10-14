@@ -1042,6 +1042,7 @@ Rule 2: Official 2026 Bangladesh e-Passport Fee Chart (Including 15% VAT):
 Your citizenship does not matter—if your flight route or airline falls under these jurisdictions, you can claim statutory cash compensation:
 - **1. EU Regulation EC 261/2004 & UK 261 (Up to €600 / £520 ≈ BDT 78,000 per Passenger):**
   • Applies to **any flight departing from a UK or European Union airport** (even on Biman Bangladesh Airlines from London Heathrow/Manchester/Rome, Emirates, Qatar Airways, Saudia, or Turkish Airlines!) OR any flight **arriving into the EU/UK operated by an EU/UK airline**.
+  • EC 261 / UK 261 covers flights departing an EU/UK airport or operated by an EU/UK carrier; it generally does **NOT** cover Biman, Saudia, Emirates or Qatar flights on Dhaka↔Jeddah routes.
   • If you arrive at your final destination **3+ hours late** (due to airline technical fault, crew scheduling, or missed connection—not extreme weather), you are owed **€600 (~BDT 78,000) per ticket** for long-haul routes over 3,500 km!
 - **2. Saudi Arabia GACA Passenger Rights Regulation (For Umrah & Hajj Flights):**
   • Enforced by the **Saudi General Authority of Civil Aviation (GACA - gaca.gov.sa)** for all flights departing from Saudi airports (**Jeddah JED, Madinah MED, Riyadh RUH, Dammam DMM**) or operated by Saudi national carriers (**Saudia, Flynas, Flyadeal**) from Dhaka!
