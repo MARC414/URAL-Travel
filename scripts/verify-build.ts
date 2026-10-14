@@ -1395,10 +1395,26 @@ check(
     : `affiliate loader misbehaves: ${loaderFailures.join("; ")}`
 );
 
-// --- 3. Sitemap: structure + the lastmod invariant --------------------------: structure + the lastmod invariant --------------------------
+// --- 3. Sitemap: structure + the lastmod invariant --------------------------
 
 const sitemap = read(path.join(DIST_DIR, "sitemap.xml"));
 check(sitemap !== null, "dist/sitemap.xml generated");
+
+// The Travelpayouts widget shell is an iframe/popup target, not a landing page.
+// It must stay noindex and out of the sitemap so it cannot compete with /flights.
+{
+  const widgetShell = read(path.join(DIST_DIR, "travelpayouts-wl.html"));
+  const hasNoindex = (html: string) =>
+    /<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html);
+  check(widgetShell !== null && hasNoindex(widgetShell), "travelpayouts-wl.html carries a noindex robots meta");
+  check(
+    sitemap === null || !sitemap.includes("travelpayouts-wl"),
+    "travelpayouts-wl is not listed in sitemap.xml"
+  );
+  // Negative control: the detector must fail on a page with the tag removed.
+  const stripped = (widgetShell ?? "").replace(/<meta[^>]+name="robots"[^>]*>/i, "");
+  check(!hasNoindex(stripped), "noindex detector rejects the widget shell with its tag removed (negative control)");
+}
 
 if (sitemap) {
   const urlBlocks = sitemap
