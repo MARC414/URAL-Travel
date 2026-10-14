@@ -36,8 +36,6 @@ export default function ContactRouteView({ context }: RouteViewProps) {
                   ? "হেডসেট পরা একজন URAL সাপোর্ট এজেন্ট অফিস ডেস্কে গ্রাহকের কল ধরছেন"
                   : "A URAL support agent wearing a headset at her desk, ready to take a traveller's call"
               }
-              width={1200}
-              height={670}
               fetchPriority="high"
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover object-right"

@@ -53,6 +53,15 @@ export function ResponsiveImage({
 }: ResponsiveImageProps) {
   const { src: canonicalSrc, width, height } = getResponsiveImageDimensions(src);
 
+  // `width`/`height` are Omit'ed from the props type, but a type-level Omit is
+  // not a runtime guard: an unlisted prop still lands in `...imgProps`, which is
+  // spread AFTER the derived attributes below and would therefore win. A caller
+  // passing stale dimensions would silently override the dimension table and
+  // reintroduce the CLS this component exists to prevent. Drop them here so the
+  // table in src/utils/imageAssets.ts stays the only reader.
+  const { width: _width, height: _height, ...safeImgProps } =
+    imgProps as typeof imgProps & { width?: unknown; height?: unknown };
+
   return (
     <picture className="contents">
       <source
@@ -70,7 +79,7 @@ export function ResponsiveImage({
         alt={alt}
         width={width}
         height={height}
-        {...imgProps}
+        {...safeImgProps}
       />
     </picture>
   );
