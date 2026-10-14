@@ -145,7 +145,7 @@ Carry:
 - Your National ID (NID) card and 1 passport-size photo (for new prepaid cards)
 - Your bank account or prepaid card number
 Ask the officer to endorse your annual travel quota (for example, $1,500 to $5,000 USD depending on your needs—you don't have to deposit the full $18,000 at once; you simply deposit BDT as you spend!).
-  • **Endorsement fee:** Money-changer endorsement: approximately **BDT 300** per passport. Bank AD branch endorsement: approximately **BDT 100–200** per transaction (banks with RFCDF/currency trading facilities may charge at the prevailing BC rate instead of a flat fee—confirm with your branch).
+  • **Endorsement fee:** Money changers may charge a **maximum of BDT 300** per passport, irrespective of the amount exchanged (Bangladesh Bank circular, 7 January 2026); they must display the fee, give a written receipt, and endorse the passport and air ticket. Bank endorsement charges differ by bank and facility (some banks use the prevailing BC rate instead of a flat fee), so ask your branch for its current schedule before you buy.
 
 Step 3: Open the Foreign Currency & E-Commerce Part Before Booking Online
 Having the physical ink stamp in your passport is only half the process! Before you book a flight on Aviasales, a hotel in Bangkok or Kuala Lumpur, or an airport pickup on Welcome Pickups:
