@@ -1680,7 +1680,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         </section>
         <section>
           <h2>3. Affiliate Partnerships &amp; FTC Transparency</h2>
-          <p>URAL participates in Travelpayouts, Aviasales, Hotellook, Klook, KKday, Airalo, and other affiliate programs. Outbound links may earn referral commissions at zero added cost to visitors.</p>
+          <p>URAL participates in Travelpayouts, Aviasales, Klook, KKday, Airalo, and other affiliate programs. Outbound links may earn referral commissions at zero added cost to visitors.</p>
         </section>
       </article>
     `,
