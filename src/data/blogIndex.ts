@@ -50,6 +50,7 @@ export const BLOG_SLUGS = [
   "chefchaouen-morocco-travel-guide-bangladesh",
   "travel-creator-resources",
   "kkday-10-10-winter-sale-japan-tours-passes-guide",
+  "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
 ] as const;
 
 export const BLOG_POST_COUNT = BLOG_SLUGS.length;
