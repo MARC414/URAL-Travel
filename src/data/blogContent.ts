@@ -145,7 +145,7 @@ Carry:
 - Your National ID (NID) card and 1 passport-size photo (for new prepaid cards)
 - Your bank account or prepaid card number
 Ask the officer to endorse your annual travel quota (for example, $1,500 to $5,000 USD depending on your needs—you don't have to deposit the full $18,000 at once; you simply deposit BDT as you spend!).
-  • **Endorsement fee:** Money-changer endorsement: approximately **BDT 300** per passport. Bank AD branch endorsement: approximately **BDT 100–200** per transaction (banks with RFCDF/currency trading facilities may charge at the prevailing BC rate instead of a flat fee—confirm with your branch).
+  • **Endorsement fee:** Money changers may charge a **maximum of BDT 300** per passport, irrespective of the amount exchanged (Bangladesh Bank circular, 7 January 2026); they must display the fee, give a written receipt, and endorse the passport and air ticket. Bank endorsement charges differ by bank and facility (some banks use the prevailing BC rate instead of a flat fee), so ask your branch for its current schedule before you buy.
 
 Step 3: Open the Foreign Currency & E-Commerce Part Before Booking Online
 Having the physical ink stamp in your passport is only half the process! Before you book a flight on Aviasales, a hotel in Bangkok or Kuala Lumpur, or an airport pickup on Welcome Pickups:
@@ -336,7 +336,7 @@ Instead of paying per-person tour bus markups, a family of 3 to 6 can book a pri
 
 5. OFFICIAL ZAMZAM WATER RULE FOR RETURN FLIGHTS TO DHAKA
 - Every pilgrim holding an Umrah e-Visa (or Nusuk Umrah permit) is permitted to purchase one official 5-liter boxed bottle of Zamzam water from the automated kiosks outside Jeddah (JED) or Madinah (MED) Airport for SAR 9.50–12.50 (~BDT 350–400).
-- Biman Bangladesh Airlines and Saudia (direct Dhaka flights, 2×23 kg = 46 kg total) carry this 5-liter sealed Zamzam box FREE of charge outside your regular checked baggage allowance. Gulf Air and Kuwait Airways have different baggage limits — verify the current policy directly with your carrier before packing.`,
+- Biman Bangladesh Airlines and Saudia (direct Dhaka flights, 2×23 kg = 46 kg total (route- and fare-dependent; confirm on your e-ticket)) carry this 5-liter sealed Zamzam box FREE of charge outside your regular checked baggage allowance. Gulf Air and Kuwait Airways have different baggage limits — verify the current policy directly with your carrier before packing.`,
   "hajj-registration-bangladesh-government-vs-private-package-cost": `For Bangladeshi Muslims, performing obligatory Fard Hajj is a life-defining spiritual journey. Because a typical Hajj package from Bangladesh costs between BDT 5,50,000 and BDT 9,50,000+ per person, knowing how the official digital e-Hajj system works protects your family from unlicensed middlemen (dalals) and ensures you select the right Maktab tent and hotel distance.
 
 1. STEP-BY-STEP: OFFICIAL 2-STAGE HAJJ REGISTRATION ON HAJJ.GOV.BD
@@ -476,11 +476,11 @@ When searching for flights on online portals or through our BDT Booking Desk, ne
 Both national flag carriers operate daily wide-body (Boeing 777-300ER and Boeing 787 Dreamliner) direct non-stop flights taking **6 hours 15 minutes**:
 - **Biman Bangladesh Airlines (biman-airlines.com):**
   • Typical Roundtrip / Open-Jaw BDT Fare: **BDT 72,000 – BDT 88,000** (Off-peak) | **BDT 95,000+** (Ramadan/Peak Winter).
-  • Baggage & Zamzam Allowance: **2 pieces x 23 kg (46 kg total)** checked baggage + 7 kg cabin bag + **1 free 5-Liter official Zamzam carton**.
+  • Baggage & Zamzam Allowance: **2 pieces x 23 kg (46 kg total)** (route- and fare-dependent; confirm on your e-ticket) checked baggage + 7 kg cabin bag + **1 free 5-Liter official Zamzam carton**.
   • Advantages for Bangladeshis: Bangla-speaking cabin crew, clear Bangla Miqat announcement 45 minutes before Jeddah landing, and convenient flight departures from Dhaka Terminal 1/2.
 - **Saudia - Saudi Arabian Airlines (saudia.com):**
   • Typical Roundtrip / Open-Jaw BDT Fare: **BDT 74,000 – BDT 92,000**.
-  • Baggage & Zamzam Allowance: **2 pieces x 23 kg (46 kg total)** + 7 kg cabin + **1 free 5-Liter Zamzam carton**.
+  • Baggage & Zamzam Allowance: **2 pieces x 23 kg (46 kg total)** (route- and fare-dependent; confirm on your e-ticket) + 7 kg cabin + **1 free 5-Liter Zamzam carton**.
   • Advantages for Bangladeshis: Arrives at the ultra-modern **Jeddah Terminal 1 (KAIA)** where the Haramain High-Speed Bullet Train station is located indoors under the exact same roof, plus onboard prayer area (Musalla) at the back of wide-body aircraft!
 
 3. BUDGET 1-STOP TRANSIT AIRLINES FROM DHAKA (SAVES BDT 14,000 – BDT 22,000)
@@ -1042,6 +1042,7 @@ Rule 2: Official 2026 Bangladesh e-Passport Fee Chart (Including 15% VAT):
 Your citizenship does not matter—if your flight route or airline falls under these jurisdictions, you can claim statutory cash compensation:
 - **1. EU Regulation EC 261/2004 & UK 261 (Up to €600 / £520 ≈ BDT 78,000 per Passenger):**
   • Applies to **any flight departing from a UK or European Union airport** (even on Biman Bangladesh Airlines from London Heathrow/Manchester/Rome, Emirates, Qatar Airways, Saudia, or Turkish Airlines!) OR any flight **arriving into the EU/UK operated by an EU/UK airline**.
+  • EC 261 / UK 261 covers flights departing an EU/UK airport or operated by an EU/UK carrier; it generally does **NOT** cover Biman, Saudia, Emirates or Qatar flights on Dhaka↔Jeddah routes.
   • If you arrive at your final destination **3+ hours late** (due to airline technical fault, crew scheduling, or missed connection—not extreme weather), you are owed **€600 (~BDT 78,000) per ticket** for long-haul routes over 3,500 km!
 - **2. Saudi Arabia GACA Passenger Rights Regulation (For Umrah & Hajj Flights):**
   • Enforced by the **Saudi General Authority of Civil Aviation (GACA - gaca.gov.sa)** for all flights departing from Saudi airports (**Jeddah JED, Madinah MED, Riyadh RUH, Dammam DMM**) or operated by Saudi national carriers (**Saudia, Flynas, Flyadeal**) from Dhaka!

@@ -24,8 +24,7 @@ interface PartnerItem {
  * Travelpayouts partner wordmark carousel.
  *
  * Uses the partner artwork supplied under public/assets/partners rather than
- * hand-drawn lookalikes. HotelLook currently has a supplied PNG; use an SVG
- * only when an authorized vector is available.
+ * hand-drawn lookalikes. Use an SVG only when an authorized vector is available.
  */
 export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "en" }) => {
   const isBn = lang === "bn";
@@ -110,16 +109,6 @@ export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "
       roleBn: "ট্রাভেল eSIM",
       href: resolvePartnerUrl(AFFILIATE_LINKS.yesim),
       brandColor: "#168442",
-    },
-    {
-      id: "hotellook",
-      name: "Hotellook",
-      wordmark: "hotellook",
-      logoSrc: "/assets/partners/hotellook-logo.png",
-      roleEn: "Hotel search",
-      roleBn: "হোটেল সার্চ",
-      href: "https://search.hotellook.com/?marker=675992&trs=540277",
-      brandColor: "#287C3A",
     },
     {
       id: "kiwitaxi",

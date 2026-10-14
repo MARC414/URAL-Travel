@@ -689,7 +689,6 @@ export function TravelpayoutsCustomWidget({
     searchTab === "hotels" ? hotelIataCode : destCode
   }&flightSearch=${searchCode}&currency=${currency}&standalone=1`;
   const klookHotelsPartnerUrl = resolvePartnerUrl(AFFILIATE_LINKS.klook);
-  const kkdayStayPartnerUrl = resolvePartnerUrl(AFFILIATE_LINKS.kkday);
   const goCityPassUrl = resolvePartnerUrl(AFFILIATE_LINKS.goCity);
   const [swapRotated, setSwapRotated] = useState(false);
 
@@ -1298,12 +1297,10 @@ export function TravelpayoutsCustomWidget({
                 <ExternalLink size={11} />
               </a>
               <a
-                href={kkdayStayPartnerUrl}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
+                href="/kkday-hotels"
                 className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
               >
-                <span>KKday Stay Packages</span>
+                <span>KKday Hotel &amp; Stay Deals</span>
                 <ExternalLink size={11} />
               </a>
               <a
@@ -1556,12 +1553,10 @@ export function TravelpayoutsCustomWidget({
                       <ExternalLink size={13} />
                     </a>
                     <a
-                      href={kkdayStayPartnerUrl}
-                      target="_blank"
-                      rel="noopener noreferrer sponsored"
-                      className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                      href="/kkday-hotels"
+                                            className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
-                      <span>Compare KKday Stay Deals</span>
+                      <span>KKday Hotel &amp; Stay Deals</span>
                       <ExternalLink size={13} />
                     </a>
                   </>
@@ -1646,12 +1641,10 @@ export function TravelpayoutsCustomWidget({
                       <ExternalLink size={13} />
                     </a>
                     <a
-                      href={kkdayStayPartnerUrl}
-                      target="_blank"
-                      rel="noopener noreferrer sponsored"
-                      className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                      href="/kkday-hotels"
+                                            className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
-                      <span>Compare on KKday</span>
+                      <span>KKday Hotel &amp; Stay Deals</span>
                       <ExternalLink size={13} />
                     </a>
                   </>

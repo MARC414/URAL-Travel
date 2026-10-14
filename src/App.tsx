@@ -166,6 +166,9 @@ const VisaFreeCountriesRouteView = React.lazy(() => import("./routes/VisaFreeCou
 const UmrahLandingPage = React.lazy(() =>
   import("./components/UmrahLandingPage").then((m) => ({ default: m.UmrahLandingPage }))
 );
+const KkdayHotelsPage = React.lazy(() =>
+  import("./components/KkdayHotelsPage").then((m) => ({ default: m.KkdayHotelsPage }))
+);
 const ExperiencesPage = React.lazy(() =>
   import("./components/ExperiencesPage").then((m) => ({ default: m.ExperiencesPage }))
 );
@@ -685,7 +688,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp":
       "Bangladeshi passengers whose flights are delayed 3+ hours, cancelled, or overbooked on UK/EU routes (EC 261/2004) can claim €250–€600 (BDT 33,000–80,000), while Montreal Convention rules cover up to ~$1,700 (BDT 2,05,000) for lost or damaged baggage on Biman, Saudia, Emirates, or Qatar Airways.",
     "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla":
-      "Compare every major airline flying out of Dhaka (DAC): Biman and Saudia lead for direct 6.5-hour Jeddah/Madinah flights with 2x23kg (46kg) baggage and free 5L Zamzam water; Emirates, Qatar, and Gulf Air offer top 1-stop transit value; and Malaysia/Singapore Airlines lead on Asian routes.",
+      "Compare every major airline flying out of Dhaka (DAC): Biman and Saudia lead for direct 6.5-hour Jeddah/Madinah flights with 2x23kg (46kg) baggage (route- and fare-dependent; confirm on your e-ticket) and free 5L Zamzam water; Emirates, Qatar, and Gulf Air offer top 1-stop transit value; and Malaysia/Singapore Airlines lead on Asian routes.",
     "havana-cuba-travel-guide-bangladesh":
       "The Gran Teatro de La Habana Alicia Alonso (opened 1914) is home of the Ballet Nacional de Cuba, with tickets often just USD 10-30. Bangladeshi travelers need a Cuban tourist visa or e-Visa plus proof of health insurance, must plan on cash (US-issued cards rarely work), and should budget about BDT 220,000-360,000 for five days including flights.",
     "chefchaouen-morocco-travel-guide-bangladesh":
@@ -802,7 +805,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
   return `${cleanWords.slice(0, 50).join(" ").replace(/[.,;:!?-]+$/, "")}...`;
 }
 
-type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "umrah" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "privacy" | "about" | "notFound";
+type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "umrah" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "privacy" | "about" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
@@ -1395,6 +1398,9 @@ export default function App() {
       isLanding = !countryParam;
     } else if ((root === "experiences" || root === "attractions") && segs.length === 1) {
       section = "experiences";
+      isLanding = true;
+    } else if (root === "kkday-hotels" && segs.length === 1) {
+      section = "kkdayHotels";
       isLanding = true;
     } else if ((root === "umrah" || root === "hajj") && segs.length === 1) {
       section = "umrah";
@@ -2121,6 +2127,18 @@ export default function App() {
       { name: "Home", url: siteUrl("/", lang) },
       { name: "Attractions & Passes", url: experiencesUrl }
     ];
+  } else if (section === "kkdayHotels") {
+    const kkdayHotelsUrl = siteUrl("/kkday-hotels", lang);
+    seoTitle = isBn
+      ? getBengaliSeoCopy("/kkday-hotels")?.title || "KKday হোটেল ও স্টে ডিল | URAL"
+      : "KKday Hotel & Stay Deals for Bangladeshi Travelers | URAL";
+    seoDescription = isBn
+      ? getBengaliSeoCopy("/kkday-hotels")?.description || ""
+      : "Compare hotels and stays on KKday from Bangladesh, with city guides for Kathmandu, Bangkok, Kuala Lumpur, Singapore, Maldives and Dubai. Check cancellation terms before paying.";
+    seoBreadcrumbs = [
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: "KKday Hotel & Stay Deals", url: kkdayHotelsUrl }
+    ];
   } else if (section === "umrah") {
     const umrahUrl = siteUrl("/umrah", lang);
     seoTitle = "Umrah Cost from Bangladesh: DIY Guide & Nusuk | URAL";
@@ -2192,6 +2210,7 @@ export default function App() {
     if (section === "blog") return isLanding ? "/blog" : `/blog/${parameterId}`;
     if (section === "experiences") return "/experiences";
     if (section === "umrah") return "/umrah";
+    if (section === "kkdayHotels") return "/kkday-hotels";
     if (section === "visaFree") return "/visa-free-countries";
     if (section === "sitemap") return "/sitemap";
     if (section === "privacy") return "/privacy";
@@ -4487,6 +4506,15 @@ export default function App() {
       {/* -------------------------------------------------------------
           🕋 VIEW 12: DEDICATED UMRAH & HAJJ PAID-ADS LANDING PAGE
       ------------------------------------------------------------- */}
+      {section === "kkdayHotels" && (
+        <React.Suspense fallback={null}>
+          <KkdayHotelsPage
+            isBn={isBn}
+            onNavigate={navigateTo}
+          />
+        </React.Suspense>
+      )}
+
       {section === "umrah" && (
         <React.Suspense fallback={null}>
           <UmrahLandingPage

@@ -563,11 +563,11 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <p>
               {isBn ? (
                 <>
-                  URAL-এর নিজস্ব সার্ভারে <strong>কোনো ক্রেডিট কার্ড নম্বর, ব্যাংক সিভিসি (CVC), অনলাইন ব্যাংকিং পাসওয়ার্ড, বায়োমেট্রিক ডেটা বা পাসপোর্ট নম্বর</strong> ইনপুট নেওয়া বা সংরক্ষণ করা হয় না। আমাদের সাইটের সব বুকিং সার্চ সরাসরি আন্তর্জাতিক ভেরিফায়েড প্রোভাইডার (Aviasales, Hotellook, Klook, Kiwi.com, Biman, Flydubai) এর অফিসিয়াল সুরক্ষিত গেটওয়েতে রিডাইরেক্ট করে।
+                  URAL-এর নিজস্ব সার্ভারে <strong>কোনো ক্রেডিট কার্ড নম্বর, ব্যাংক সিভিসি (CVC), অনলাইন ব্যাংকিং পাসওয়ার্ড, বায়োমেট্রিক ডেটা বা পাসপোর্ট নম্বর</strong> ইনপুট নেওয়া বা সংরক্ষণ করা হয় না। আমাদের সাইটের সব বুকিং সার্চ সরাসরি আন্তর্জাতিক ভেরিফায়েড প্রোভাইডার (Aviasales, Klook, Kiwi.com, Biman, Flydubai) এর অফিসিয়াল সুরক্ষিত গেটওয়েতে রিডাইরেক্ট করে।
                 </>
               ) : (
                 <>
-                  URAL servers <strong>NEVER collect, process, or store credit card numbers, CVVs, bank account credentials, biometric records, or passport scans</strong>. When you book a flight or hotel, you are securely transferred to official airline, OTA, or partner platforms (e.g. Aviasales, Hotellook, Klook, Kiwi.com, Biman) operating under PCI-DSS Level 1 compliance.
+                  URAL servers <strong>NEVER collect, process, or store credit card numbers, CVVs, bank account credentials, biometric records, or passport scans</strong>. When you book a flight or hotel, you are securely transferred to official airline, OTA, or partner platforms (e.g. Aviasales, Klook, Kiwi.com, Biman) operating under PCI-DSS Level 1 compliance.
                 </>
               )}
             </p>
@@ -713,11 +713,11 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <p>
               {isBn ? (
                 <>
-                  <strong>FTC গাইডলাইন ও আন্তর্জাতিক নিয়মানুযায়ী স্পষ্ট ঘোষণা:</strong> URAL একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স প্ল্যাটফর্ম। আমাদের সাইটের বেশ কিছু আউটবাউন্ড লিংক ভেরিফায়েড আন্তর্জাতিক পার্টনারদের সাথে যুক্ত (যেমন Travelpayouts, Aviasales, Hotellook, Klook, KKday, Tiqets, Airalo, AirHelp, KiwiTaxi, Welcome Pickups, QEEQ, Yesim ও Kiwi.com)।
+                  <strong>FTC গাইডলাইন ও আন্তর্জাতিক নিয়মানুযায়ী স্পষ্ট ঘোষণা:</strong> URAL একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স প্ল্যাটফর্ম। আমাদের সাইটের বেশ কিছু আউটবাউন্ড লিংক ভেরিফায়েড আন্তর্জাতিক পার্টনারদের সাথে যুক্ত (যেমন Travelpayouts, Aviasales, Klook, KKday, Tiqets, Airalo, AirHelp, KiwiTaxi, Welcome Pickups, QEEQ, Yesim ও Kiwi.com)।
                 </>
               ) : (
                 <>
-                  <strong>FTC Compliance &amp; Global Advertising Disclosure:</strong> In full compliance with Federal Trade Commission (FTC) guidelines and international advertising transparency laws, URAL operates an affiliate monetization model. When you click an outbound link to one of our verified partners (including Travelpayouts, Aviasales, Hotellook, Klook, KKday, Tiqets, Airalo, AirHelp, KiwiTaxi, Welcome Pickups, QEEQ, Yesim, and Kiwi.com), we may earn a referral commission.
+                  <strong>FTC Compliance &amp; Global Advertising Disclosure:</strong> In full compliance with Federal Trade Commission (FTC) guidelines and international advertising transparency laws, URAL operates an affiliate monetization model. When you click an outbound link to one of our verified partners (including Travelpayouts, Aviasales, Klook, KKday, Tiqets, Airalo, AirHelp, KiwiTaxi, Welcome Pickups, QEEQ, Yesim, and Kiwi.com), we may earn a referral commission.
                 </>
               )}
             </p>

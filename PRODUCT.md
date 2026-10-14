@@ -52,7 +52,7 @@ Three things a generic travel aggregator cannot truthfully copy:
 ## Operating Context
 
 - Affiliate monetisation through Travelpayouts (white label `wl_id=22462`, `marker=675992`,
-  `trs=540277`) plus Aviasales, Hotellook, Kiwi.com, Klook, Tiqets, AirHelp, KKday,
+  `trs=540277`) plus Aviasales, Kiwi.com, Klook, Tiqets, AirHelp, KKday,
   KiwiTaxi, Welcome Pickups, Airalo, QEEQ and related partners. All partner URLs resolve
   through the registry in `src/components/AffiliatePartners.tsx` — never hardcoded.
 - Time-limited partner promos are gated on an expiry date and sanitised in blog body text

@@ -8,7 +8,7 @@ This document serves as the canonical technical handoff and architectural refere
 
 **URAL (উড়াল)** is an editorial **Travel Intelligence Platform** designed primarily for Bangladeshi travelers while serving global visitors worldwide.
 - **Core Capabilities:**
-  - Global Flight & Hotel Search powered by Travelpayouts White Label (`wl_id=22462`), Aviasales, Hotellook, and Kiwi.com (`marker=675992`, `trs=540277`).
+  - Global Flight & Hotel Search powered by Travelpayouts White Label (`wl_id=22462`), Aviasales, and Kiwi.com (`marker=675992`, `trs=540277`).
   - Step-by-step Tourist, Medical, and Umrah Visa Checklists (`Nepal`, `Thailand`, `Malaysia`, `UAE/Dubai`, `Singapore`, `Maldives`, `Schengen`, `Saudi Arabia`).
   - Bilingual Support (`en` English & `bn` Bengali) with dynamic `<html lang>` synchronization.
   - Real-time Multi-Currency Display (`BDT`, `USD`, `EUR`, `GBP`, `SAR`, `AED`).
@@ -40,7 +40,7 @@ All Travelpayouts partner links and promotional campaigns are managed centrally 
 2. **Global Hotel & Flight Custom Widget (`src/components/TravelpayoutsCustomWidget.tsx`)**:
    - Features the **Explore Popular Cities** 12-hub selector (`Makkah`, `Paris`, `Dubai`, `Madinah`, `Bangkok`, `Kuala Lumpur`, `London`, `Singapore`, `Maldives`, `Istanbul`, `Kathmandu`, `New York`) above the global search bar.
    - Supports any worldwide city or hotel query with live Travelpayouts autocomplete, check-in/check-out date pickers, guest counter, and 6-currency selector.
-   - Dispatches live hotel searches to `https://search.hotellook.com/?marker=675992&trs=540277...` and Klook (`AFFILIATE_LINKS.klook`).
+   - Dispatches live hotel searches to Klook (`AFFILIATE_LINKS.klook`); KKday stay search lives on its own `/kkday-hotels` page (`AFFILIATE_LINKS.kkday`).
 3. **Standalone & Embedded URAL White Label (`public/travelpayouts-wl.html`)**:
    - Uses Travelpayouts White Label `wl_id=22462` (`tpembd.com/wl_web/main.js?wl_id=22462`).
    - When opened in a new tab with `?standalone=1`, displays the full URAL Travel Intelligence Navy (`#0B192C`) & Gold (`#F6B73C`) header, navigation bar, and footer. When embedded inside an iframe, hides the standalone chrome and posts height updates to the parent window.

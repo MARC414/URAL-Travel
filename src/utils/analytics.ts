@@ -47,8 +47,8 @@ export function trackPageView(pagePath: string, pageTitle: string, canonicalUrl:
 /** Known partner identification from URL */
 export function identifyPartnerFromUrl(url: string): string {
   const lower = url.toLowerCase();
-  if (lower.includes("aviasales") || lower.includes("search.hotellook.com") || lower.includes("tpembd.com")) {
-    return lower.includes("hotellook") ? "Hotellook" : "Aviasales";
+  if (lower.includes("aviasales") || lower.includes("tpembd.com")) {
+    return "Aviasales";
   }
   if (lower.includes("klook")) return "Klook";
   if (lower.includes("airhelp")) return "AirHelp";
@@ -138,7 +138,6 @@ export function initGlobalClickTracking(): () => void {
       href.includes(".tpo.li") ||
       href.includes("travelpayouts") ||
       href.includes("aviasales") ||
-      href.includes("hotellook") ||
       href.includes("klook") ||
       href.includes("airhelp") ||
       href.includes("kiwitaxi") ||

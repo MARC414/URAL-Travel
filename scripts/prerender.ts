@@ -1462,6 +1462,49 @@ function buildAllRoutes(): PrerenderRoute[] {
     `,
   });
 
+  // 8b. KKday Hotel & Stay Deals (/kkday-hotels). Klook is the primary hotel
+  // search on /hotels/:city; KKday stays live on this dedicated page.
+  // Affiliate URL mirrors AFFILIATE_LINKS.kkday in src/components/AffiliatePartners.tsx.
+  routes.push({
+    routePath: "/kkday-hotels",
+    canonicalUrl: `${BASE_URL}/kkday-hotels`,
+    title: "KKday Hotel & Stay Deals for Bangladeshi Travelers | URAL",
+    description:
+      "Compare hotels and stays on KKday from Bangladesh, with city guides for Kathmandu, Bangkok, Kuala Lumpur, Singapore, Maldives and Dubai. Check cancellation terms before paying.",
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "KKday Hotel & Stay Deals", url: `${BASE_URL}/kkday-hotels` },
+    ],
+    bodyHtml: `
+      <article>
+        <h1>KKday Hotel &amp; Stay Deals</h1>
+        <p>Compare hotels and stays on KKday before you book. Check the final price, cancellation terms, and voucher details on KKday before you pay. This is an affiliate link: URAL may earn a commission at no extra cost to you.</p>
+        <p><a href="https://kkday.tpo.li/3Ecyxris" rel="noopener noreferrer sponsored">Search hotels on KKday</a></p>
+        <h2>Before you book</h2>
+        <ul>
+          <li>Make sure the guest name matches your passport exactly.</li>
+          <li>Compare the final price including taxes and fees, not just the room rate.</li>
+          <li>Read the cancellation and change policy before paying.</li>
+          <li>Check check-in and check-out times and how to reach the hotel from the airport.</li>
+          <li>For families, confirm the maximum occupancy of the room you pick.</li>
+        </ul>
+        <h2>Cards and currency</h2>
+        <p>Check which currency KKday shows prices in and what your card charges on foreign transactions. See our <a href="/blog/dual-currency-card-endorsement-bangladesh">dual-currency card and passport endorsement guide</a>.</p>
+        <h2>Hotel guides by city</h2>
+        <ul>
+          <li><a href="/hotels/kathmandu-hotels">Kathmandu &amp; Pokhara</a></li>
+          <li><a href="/hotels/bangkok-hotels">Bangkok</a></li>
+          <li><a href="/hotels/kuala-lumpur-hotels">Kuala Lumpur</a></li>
+          <li><a href="/hotels/singapore-hotels">Singapore</a></li>
+          <li><a href="/hotels/maldives-hotels">Maldives</a></li>
+          <li><a href="/hotels/dubai-hotels">Dubai</a></li>
+        </ul>
+      </article>
+    `,
+    extraGraphNodes: [],
+  });
+
   // 9. Tools Hub (/tools)
   const toolsFaq = getFaqSchemaForPage("tools", undefined, true, `${BASE_URL}/tools`);
   routes.push({
@@ -1680,7 +1723,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         </section>
         <section>
           <h2>3. Affiliate Partnerships &amp; FTC Transparency</h2>
-          <p>URAL participates in Travelpayouts, Aviasales, Hotellook, Klook, KKday, Airalo, and other affiliate programs. Outbound links may earn referral commissions at zero added cost to visitors.</p>
+          <p>URAL participates in Travelpayouts, Aviasales, Klook, KKday, Airalo, and other affiliate programs. Outbound links may earn referral commissions at zero added cost to visitors.</p>
         </section>
       </article>
     `,
@@ -2120,6 +2163,25 @@ function buildBengaliBody(
     `<h1>${escapeHtml(h1)}</h1>`,
     `<p>${escapeHtml(description)}</p>`,
   ];
+  if (englishPath === "/kkday-hotels") {
+    // Same affiliate CTA as the English page (AFFILIATE_LINKS.kkday, see AffiliatePartners.tsx).
+    parts.push(
+      `<p><a href="https://kkday.tpo.li/3Ecyxris" rel="noopener noreferrer sponsored">KKday-তে হোটেল খুঁজুন</a></p>`,
+      `<p>এটি একটি অ্যাফিলিয়েট লিংক; বুকিংয়ে আমরা কমিশন পেতে পারি, আপনার খরচ বাড়ে না।</p>`,
+      `<h2>বুকিংয়ের আগে যা দেখে নিন</h2>`,
+      `<ul>
+        <li>পাসপোর্টের নামের সঙ্গে বুকিংয়ের নাম হুবহু মিলিয়ে নিন।</li>
+        <li>কর ও ফি সহ চূড়ান্ত দাম দেখুন, আলাদা কোনো চার্জ আছে কিনা জেনে নিন।</li>
+        <li>বাতিল ও পরিবর্তনের শর্ত (cancellation policy) পড়ুন।</li>
+        <li>চেক-ইন ও চেক-আউটের সময় এবং বিমানবন্দর থেকে যাতায়াতের সুবিধা জেনে নিন।</li>
+        <li>পরিবার নিয়ে গেলে রুমে সর্বোচ্চ কতজন থাকতে পারেন, তা মিলিয়ে নিন।</li>
+      </ul>`,
+      `<h2>টাকা ও কার্ড</h2>
+      <p>KKday-তে দাম কোন মুদ্রায় দেখাচ্ছে এবং আপনার কার্ডে বিদেশি লেনদেনের চার্জ কত, তা আগে থেকে জেনে রাখুন। বিস্তারিত দেখুন: <a href="/bn/blog/dual-currency-card-endorsement-bangladesh">Dual-Currency Card ও পাসপোর্ট এনডোর্সমেন্ট গাইড</a>।</p>`,
+      `<h2>কোথায় থাকবেন</h2>
+      <p>এলাকা ঠিক করতে আগে শহরের গাইড দেখুন, তারপর KKday-তে সেই এলাকার দাম মিলিয়ে নিন।</p>`
+    );
+  }
   const englishPathsIn = (prefix: string, ids: string[]) =>
     ids.map((value) => `${prefix}/${value}`);
 
