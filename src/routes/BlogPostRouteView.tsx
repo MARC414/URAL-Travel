@@ -49,7 +49,7 @@ function formatArticleDate(isoDate: string, isBengali: boolean) {
 
 export default function BlogPostRouteView({ context }: RouteViewProps) {
 
-  const { AuthorBioCard, blogBodies, getBlogAeoSnippet50Words, getBlogCoverImage, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, parameterId, section, setAffiliateToast } = context;
+  const { AuthorBioCard, blogBodies, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, parameterId, section, setAffiliateToast } = context;
 
   return (
 
@@ -707,39 +707,56 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                 <>
 
-                  {/* Top Navigation: Return to the blog index */}
-
-                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
-
+                  {/* Keep the breadcrumb trail and the blog-index link in one compact row. */}
+                  <nav
+                    data-blog-breadcrumb
+                    aria-label={isBn ? "ব্রেডক্রাম্ব" : "Breadcrumb"}
+                    className="-mt-10 sm:-mt-12 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-slate-200 py-3"
+                  >
+                    <ol className="flex min-w-0 flex-1 flex-wrap items-center gap-x-1.5 text-xs text-slate-600">
+                      <li>
+                        <a
+                          data-blog-breadcrumb-item
+                          href={getLocalizedRouteHref("/")}
+                          onClick={(e) => { e.preventDefault(); navigateTo("/"); }}
+                          className="whitespace-nowrap hover:text-brand-navy transition-colors"
+                        >
+                          {isBn ? "হোম" : "Home"}
+                        </a>
+                      </li>
+                      <li aria-hidden="true" className="text-slate-300 select-none">/</li>
+                      <li>
+                        <a
+                          data-blog-breadcrumb-item
+                          href={getLocalizedRouteHref("/blog")}
+                          onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
+                          className="whitespace-nowrap hover:text-brand-navy transition-colors"
+                        >
+                          {isBn ? "ট্রাভেল গাইড" : "Travel Guides"}
+                        </a>
+                      </li>
+                      <li aria-hidden="true" className="text-slate-300 select-none">/</li>
+                      <li className="min-w-0 max-w-[5.5rem] sm:max-w-[24rem]">
+                        <span
+                          data-blog-breadcrumb-item
+                          aria-current="page"
+                          title={activePost.title}
+                          className="block truncate whitespace-nowrap text-slate-700"
+                        >
+                          {activePost.title}
+                        </span>
+                      </li>
+                    </ol>
                     <a
-
-                      href="/blog"
-
+                      href={getLocalizedRouteHref("/blog")}
                       onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
-
-                      className="inline-flex items-center gap-2 text-xs font-semibold text-brand-navy hover:text-slate-900 bg-white border border-slate-200 hover:border-brand-navy px-4 py-2 rounded-xl transition-colors"
-
+                      className="inline-flex shrink-0 items-center whitespace-nowrap text-xs font-semibold text-brand-navy hover:text-slate-900 transition-colors"
                     >
-
-                      <ChevronLeft size={14} />
-
-                      <span>
-
-                        {isBn
-
-                          ? `সবগুলো ট্রাভেল ব্লগে ফিরে যান (${localizedBlogs.length})`
-
-                          : `Back to All Travel Guides (${localizedBlogs.length})`}
-
-                      </span>
-
+                      {isBn
+                        ? `সব ${localizedBlogs.length}টি গাইড →`
+                        : `All ${localizedBlogs.length} guides →`}
                     </a>
-
-
-
-                  </div>
-
-
+                  </nav>
 
                   {/* Main Article 2-Column Layout (Content + Sticky Trip Planner Sidebar) */}
 
@@ -849,78 +866,6 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
                       </header>
-
-
-
-                      {/* Breadcrumb navigation — visible on screen + semantic for screen readers */}
-
-                      <nav aria-label={isBn ? "ব্রেডক্রাম্ব" : "Breadcrumb"}>
-
-                        <ol className="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-500 mb-4">
-
-                          <li>
-
-                            <a
-
-                              href="/"
-
-                              onClick={(e) => { e.preventDefault(); navigateTo("/"); }}
-
-                              className="hover:text-brand-navy transition-colors"
-
-                            >
-
-                              {isBn ? "হোম" : "Home"}
-
-                            </a>
-
-                          </li>
-
-                          <li aria-hidden="true" className="text-slate-300 select-none">/</li>
-
-                          <li>
-
-                            <a
-
-                              href="/blog"
-
-                              onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
-
-                              className="hover:text-brand-navy transition-colors"
-
-                            >
-
-                              {isBn ? "ট্রাভেল গাইড" : "Travel Guides"}
-
-                            </a>
-
-                          </li>
-
-                          <li aria-hidden="true" className="text-slate-300 select-none">/</li>
-
-                          <li>
-
-                            <a
-
-                              href={`/blog/${activePost.slug}`}
-
-                              onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${activePost.slug}`); }}
-
-                              className="hover:text-brand-navy transition-colors line-clamp-1 max-w-[200px] sm:max-w-xs"
-
-                              aria-current="page"
-
-                            >
-
-                              {activePost.title}
-
-                            </a>
-
-                          </li>
-
-                        </ol>
-
-                      </nav>
 
 
 

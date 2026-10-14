@@ -8,6 +8,7 @@ import {
   TRIP_COSTS_DATA,
   BLOG_DATA,
 } from "../src/constants";
+import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
 // The English blog bodies were split out of constants.ts so the client can load
 // them lazily on blog routes. This script runs in Node and deliberately imports
 // them EAGERLY: the prerendered article HTML is the SEO surface, so the text has
@@ -1149,7 +1150,7 @@ function buildAllRoutes(): PrerenderRoute[] {
   // 5. Visa Hub (/visa) + 6 Visa Guides (/visa/:id)
   const visaHubTitle = "Visa Requirements for Bangladeshi Citizens 2026: Guides & Checklists | URAL";
   const visaHubDesc =
-    "Check complete tourist visa guides for Bangladeshi citizens. Learn about free Visa on Arrival in Nepal, Thailand sticker visa rules, Malaysia eVisa, and Dubai visas.";
+    "Check current tourist visa guidance for Bangladeshi citizens, including Nepal entry rules, Thailand's official e-Visa process, Malaysia eVisa, and Dubai visas. Verify live government fees; bank/payment and optional agency charges are separate.";
   const visaFaq = getFaqSchemaForPage("visa", undefined, true, `${BASE_URL}/visa`);
   routes.push({
     routePath: "/visa",
@@ -1186,7 +1187,9 @@ function buildAllRoutes(): PrerenderRoute[] {
     const description =
       v.id === "nepal-visa"
         ? "Bangladeshi citizens get a free 30-day Nepal visa on arrival for their first trip each year. Full document checklist, fees for repeat visits, and step-by-step process."
-        : `Check complete visa requirements, costs in BDT, step-by-step instructions, and checklist for ${v.country} from Dhaka.`;
+        : v.id === "thailand-visa"
+          ? "Bangladeshi applicants use Thailand's official e-Visa portal. The Dhaka TR checklist updated November 30, 2022 lists BDT 60,000/person or BDT 120,000/family; verify current rules. Government, bank/payment and optional agency charges are separate."
+          : `Check complete visa requirements, costs in BDT, step-by-step instructions, and checklist for ${v.country} from Dhaka.`;
     const extraNodes: Record<string, unknown>[] = [];
     if (v.schemaMarkup?.code) {
       try {
@@ -1698,7 +1701,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     lcpImageSizes: "100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
-      { name: "Travel Blog", url: `${BASE_URL}/blog` },
+      { name: "Travel Guides", url: `${BASE_URL}/blog` },
     ],
     extraGraphNodes: [
       collectionPageSchema({
@@ -1837,7 +1840,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       lcpImageSizes: "(max-width: 767px) 100vw, 840px",
       breadcrumbs: [
         { name: "Home", url: `${BASE_URL}/` },
-        { name: "Travel Blog", url: `${BASE_URL}/blog` },
+        { name: "Travel Guides", url: `${BASE_URL}/blog` },
         { name: post.title, url: postUrl },
       ],
       extraGraphNodes: extraNodes,
@@ -2119,6 +2122,22 @@ function buildBengaliBody(
   ];
   const englishPathsIn = (prefix: string, ids: string[]) =>
     ids.map((value) => `${prefix}/${value}`);
+
+  if (group === "blog" && !id) {
+    const postPaths = BLOG_SLUGS.map((slug) => `/blog/${slug}`);
+    const directory = bnDirectory(
+      `সব ${bnDigits(BLOG_POST_COUNT)}টি বাংলা ট্রাভেল গাইড`,
+      postPaths
+    );
+    parts.push(
+      `<p>এই সূচিতে বাংলাদেশি ভ্রমণকারীদের জন্য ভিসা ও ইমিগ্রেশন, ফ্লাইট, হোটেল, পরিবারের বাজেট, হজ-ওমরাহ, জিয়ারত এবং খাবার নিয়ে বাংলা গাইড আছে। যে বিষয়ে পরিকল্পনা করছেন, সেই গাইডটি খুলে ধাপ, খরচ ও প্রয়োজনীয় নথির বিস্তারিত দেখুন।</p>`
+    );
+    parts.push(
+      `<p>ভিসার শর্ত, ফি ও বুকিংয়ের নিয়ম বদলাতে পারে। টিকিট বা হোটেল চূড়ান্ত করার আগে সংশ্লিষ্ট সরকারি কর্তৃপক্ষ ও সেবাদাতার সর্বশেষ তথ্য মিলিয়ে নিন।</p>`
+    );
+    if (directory) parts.push(directory);
+    return `<article>${parts.join("")}</article>`;
+  }
 
   if (group === "blog" && id) {
     const override = BENGALI_BLOG_OVERRIDES[id];
@@ -2599,11 +2618,13 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
     const canonicalUrl = `${BASE_URL}${bnPath === "/bn" ? "/bn/" : bnPath}`;
     const bnHomeUrl = `${BASE_URL}/bn/`;
 
+    const isBlogHub = englishPath === "/blog";
     const breadcrumbs = en.breadcrumbs.map((crumb, index) => {
       const isLast = index === en.breadcrumbs.length - 1;
-      if (isLast) return { name: copy.h1, url: canonicalUrl };
+      const localizedCrumbName = BN_BREADCRUMB_LABELS[crumb.name] || crumb.name;
+      if (isLast && !isBlogHub) return { name: copy.h1, url: canonicalUrl };
       return {
-        name: BN_BREADCRUMB_LABELS[crumb.name] || crumb.name,
+        name: localizedCrumbName,
         url: index === 0 ? bnHomeUrl : localizePublicSiteUrl(crumb.url, "bn"),
       };
     });

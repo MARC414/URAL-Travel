@@ -40,10 +40,10 @@
  * once this value is more than `CONTENT_UPDATED_MAX_AGE_DAYS` old, so it cannot
  * rot silently.
  *
- * Last derivation: `git log -1 -- src/constants.ts` → 2026-09-30 (c0de02e),
- * `src/data/bengaliContent.ts` → 2026-10-01 (fa82a7b). Highest wins.
+ * Last intentional refresh: 2026-10-14 — source-safe Thailand e-Visa fee,
+ * payment, agency-cost, and dated proof-of-funds clarification (B2).
  */
-export const CONTENT_UPDATED = "2026-10-08";
+export const CONTENT_UPDATED = "2026-10-14";
 
 /**
  * Warn (do not fail) once CONTENT_UPDATED is older than this. Chosen so a content

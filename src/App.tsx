@@ -647,7 +647,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide":
       "For Umrah, buy Saudi Riyals (SAR) directly in Dhaka for daily cash expenses to avoid losing 3% on double conversion (BDT→USD→SAR). When tapping your Dual-Currency Card at hotels or malls in Makkah, Bangkok, or Kuala Lumpur, always select 'Local Currency' on the POS terminal to avoid 5% DCC fees.",
     "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide":
-      "Thailand's official e-Visa portal handles online applications and emails approved confirmations, but decisions and timing are not guaranteed. Its general Tourist Visa page lists THB 20,000 financial evidence and recent bank statements or sponsorship; Dhaka Embassy's public TR checklist (updated Nov 30, 2022) lists BDT 60,000 per person or BDT 120,000 per family with six months of statements. Check current Dhaka requirements before applying.",
+      "Thailand's official e-Visa portal handles applications, but approval and timing are not guaranteed. The Dhaka TR checklist (updated Nov 30, 2022) lists BDT 60,000 per person or BDT 120,000 per family; confirm current requirements. Check the live government fee; bank/payment charges and optional agency fees are separate.",
     "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration":
       "Apply online at malaysiavisa.imi.gov.my for a 30-day Malaysia Tourist e-Visa (BDT 3,800–4,200; approved in 2–4 working days) with a 6-month bank statement showing BDT 80,000+ balance. Within 3 days before landing at KLIA, submit the mandatory free Malaysia Digital Arrival Card (MDAC).",
     "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia":
@@ -740,7 +740,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide":
       "ওমরাহর হাতখরচের জন্য ঢাকা থেকেই সরাসরি নগদ সৌদি রিয়াল (SAR) কিনলে ডাবল কনভার্সন (BDT→USD→SAR) লস বাঁচে। আর মক্কা, ব্যাংকক বা কুয়ালালামপুরে কার্ড পাঞ্চ করার সময় POS মেশিনে সবসময় 'Local Currency' সিলেক্ট করবেন—এতে ৫% অতিরিক্ত DCC চার্জ কাটবে না।",
     "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide":
-      "Thailand-এর official e-Visa portal-এ online আবেদন হয় এবং অনুমোদিত হলে confirmation email-এ আসে; সিদ্ধান্ত বা সময় নিশ্চিত নয়। সাধারণ Tourist Visa পেজে THB 20,000 আর্থিক প্রমাণের কথা আছে, আর Dhaka Embassy-র প্রকাশিত TR checklist (হালনাগাদ ৩০ নভেম্বর ২০২২) জনপ্রতি BDT 60,000 বা পরিবারপ্রতি BDT 120,000 ও ৬ মাসের statement উল্লেখ করে। আবেদনের আগে বর্তমান Dhaka checklist মিলিয়ে নিন।",
+      "Thailand-এর official e-Visa portal-এ আবেদন করুন; approval বা সময় নিশ্চিত নয়। Dhaka-র TR checklist (হালনাগাদ ৩০ নভেম্বর ২০২২) জনপ্রতি BDT 60,000/পরিবারে BDT 120,000 উল্লেখ করে—বর্তমান requirement যাচাই করুন। সরকারি fee, bank/payment charge ও optional agency fee আলাদা।",
     "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration":
       "অনলাইনে malaysiavisa.imi.gov.my পোর্টালে ৮০,০০০+ টাকা ব্যাংক ব্যালেন্স দেখিয়ে আবেদন করলে ২–৪ কার্যদিবসে ৩০ দিনের মালয়েশিয়া ই-ভিসা (BDT ৩,৮০০–৪,২০০) পাওয়া যায়। কুয়ালালামপুর (KLIA) ফ্লাইটের ৩ দিন আগে অবশ্যই ফ্রি Malaysia Digital Arrival Card (MDAC) পূরণ করে প্রিন্ট সাথে রাখুন।",
     "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia":
@@ -1752,7 +1752,9 @@ export default function App() {
 
     if (isLanding) {
       seoTitle = `Visa Requirements for Bangladeshi Citizens 2026: Guides & Checklists | URAL`;
-      seoDescription = "Check complete tourist visa guides for Bangladeshi citizens. Learn about free Visa on Arrival in Nepal, Thailand sticker visa rules, Malaysia eVisa, and Dubai visas.";
+      seoDescription = isBn
+        ? "বাংলাদেশি নাগরিকদের বর্তমান visa guidance দেখুন। Thailand e-Visa-এর সরকারি fee, bank/payment charge ও optional agency fee আলাদা; official source-এ যাচাই করুন।"
+        : "Check current tourist visa guidance for Bangladeshi citizens, including Nepal entry rules, Thailand's official e-Visa process, Malaysia eVisa, and Dubai visas. Verify live government fees; bank/payment and optional agency charges are separate.";
       const collectionNode = collectionPageSchema({
         url: hubUrl,
         name: seoTitle,
@@ -1779,7 +1781,11 @@ export default function App() {
         : `${activeVisa.country} Visa for Bangladeshi Travelers 2026 | URAL`;
       seoDescription = activeVisa.id === "nepal-visa"
         ? `Bangladeshi citizens get a free 30-day Nepal visa on arrival for their first trip each year. Full document checklist, fees for repeat visits, and step-by-step process.`
-        : `Check complete visa requirements, costs in BDT, step-by-step instructions, and checklist for ${activeVisa.country} from Dhaka.`;
+        : activeVisa.id === "thailand-visa"
+          ? isBn
+            ? "Thailand e-Visa-এর জন্য official portal ব্যবহার করুন। Dhaka TR checklist (হালনাগাদ ৩০ নভেম্বর ২০২২) জনপ্রতি BDT 60,000/পরিবারে BDT 120,000 উল্লেখ করে—বর্তমান requirement যাচাই করুন। সরকারি fee, bank/payment ও optional agency fee আলাদা।"
+            : "Bangladeshi applicants use Thailand's official e-Visa portal. The Dhaka TR checklist updated November 30, 2022 lists BDT 60,000/person or BDT 120,000/family; verify current rules. Government, bank/payment and optional agency charges are separate."
+          : `Check complete visa requirements, costs in BDT, step-by-step instructions, and checklist for ${activeVisa.country} from Dhaka.`;
 
       let schemaObj: any = undefined;
       try {
@@ -1962,7 +1968,7 @@ export default function App() {
       });
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
-        { name: "Travel Blog", url: hubUrl }
+        { name: "Travel Guides", url: hubUrl }
       ];
     } else {
       const postUrl = siteUrl(`/blog/${activePost.slug}`, lang);
@@ -2026,7 +2032,7 @@ export default function App() {
 
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
-        { name: "Travel Blog", url: hubUrl },
+        { name: "Travel Guides", url: hubUrl },
         { name: bnPostSeo?.h1 || activePost.title, url: postUrl }
       ];
     }
@@ -2237,11 +2243,14 @@ export default function App() {
     const bnLastLabel =
       bnContent?.getBengaliRouteSeo(seoRoutePath)?.h1 ??
       seoTitle.replace(/\s*\|\s*URAL.*$/i, "").trim();
+    const isBlogHubPage = section === "blog" && isLanding;
     seoBreadcrumbs = seoBreadcrumbs.map((crumb, idx) => {
       const isLast = idx === seoBreadcrumbs.length - 1;
       return {
         name: isLast
-          ? bnLastLabel
+          ? isBlogHubPage
+            ? BN_BREADCRUMB_LABELS[crumb.name] || crumb.name
+            : bnLastLabel
           : BN_BREADCRUMB_LABELS[crumb.name] || crumb.name,
         url: localizePublicSiteUrl(crumb.url, "bn"),
       };
@@ -2398,7 +2407,7 @@ export default function App() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const routeViewContext: Record<string, any> = { AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getBlogAeoSnippet50Words, getBlogCoverImage, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
+  const routeViewContext: Record<string, any> = { AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
 
   return (
     <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-brand-gold selection:text-brand-navy overflow-x-hidden">
@@ -3853,8 +3862,8 @@ export default function App() {
                     city: "Bangkok",
                     country: "Thailand",
                     tag: isBn
-                      ? "অনলাইন Thailand e-Visa (৫–১০ দিনে অনুমোদন)। হালাল স্ট্রিট ফুড, Pratunam শপিং, দ্বীপ ও মেডিকেল চেকআপ।"
-                      : "Online e-Visa — approved in 5–10 days. Street food, Pratunam shopping, islands, and golden temples.",
+                      ? "আগে অনলাইনে Thailand e-Visa আবেদন করুন; সিদ্ধান্ত ও সময় ভিন্ন হতে পারে। হালাল স্ট্রিট ফুড, Pratunam শপিং, দ্বীপ ও মেডিকেল চেকআপ।"
+                      : "Apply for Thailand's e-Visa online before travel; decisions and timing vary. Street food, Pratunam shopping, islands, and golden temples.",
                     code: "thailand-guide",
                     img: "🇹🇭",
                     path: "/destinations/thailand-guide",

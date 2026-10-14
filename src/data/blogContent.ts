@@ -39,7 +39,7 @@ Many local banks in Bangladesh (like EBL, SCB, City Bank, Mutual Trust Bank) run
   "nepal-vs-thailand-first-trip": `Choosing your very first international travel destination can feel daunting to Bangladeshi passport holders. Should you pick the high-altitude peaks of Nepal or the modern beaches and shopping plazas of Thailand? Here is our comparison to help you choose:
 
 1. THE VISA CHALLENGE: ADVANTAGE NEPAL
-For Bangladeshi applicants, Thailand's tourist visa must be arranged before travel. Applications use Thailand's official e-Visa portal, and approved applicants receive an e-Visa confirmation by email. Check the current Royal Thai Embassy, Dhaka instructions for the exact documents, fees, and processing time; approval is not guaranteed. Older sticker-only and visa-application-centre instructions may no longer describe the online process.
+For Bangladeshi applicants, Thailand's tourist visa must be arranged before travel. Applications use Thailand's official e-Visa portal, and approved applicants receive an e-Visa confirmation by email. Check the current Royal Thai Embassy, Dhaka instructions for the exact documents, fees, and processing time; approval is not guaranteed. Older offline-submission instructions may no longer describe the current online process.
 Nepal's Department of Immigration lists visa on arrival and a gratis tourist visa of up to 30 days for eligible SAARC nationals (except Afghanistan) on a first visit in a visa year. Bangladesh is a SAARC member, but check the latest eligibility, entry, and fee rules before departure.
 
 2. TOTAL FINANCIAL COST: ADVANTAGE NEPAL
@@ -63,7 +63,7 @@ In Bangkok, staying directly on Sukhumvit Road near Siam BTS is hyper-expensive.
 For South Asian travelers, breakfast is key. When booking, filters often overprice halal buffets. Look for hotels in areas like Pratunam (Bangkok), Bukit Bintang (Kuala Lumpur), or Deira (Dubai) where affordable Bengali, Indian, or Middle Eastern dinings are flanking the street corners.
 
 3. OPTIMIZE BOOKING WINDOWS & 12:00 PM CHECK-OUT LUGGAGE LOGISTICS
-Hotel rates on major portals tend to fluctuate mid-week. Always search for rooms in private incognito browsers and try booking non-refundable rates only after your visa sticker or eVisa approval is fully secured in-hand. Also note that serviced apartments in KLCC/Bukit Bintang and budget hotels in Bangkok or Deira enforce a strict 11:00 AM–12:00 PM check-out while most flights back to Dhaka depart late at night; instead of paying for an extra hotel night just to store bags, use a verified Radical Storage drop point near the nearest BTS/MRT/Metro station (~$6/day per suitcase) to enjoy your final day hands-free.`,
+Hotel rates on major portals tend to fluctuate mid-week. Always search for rooms in private incognito browsers and try booking non-refundable rates only after the required visa approval is secured. Also note that serviced apartments in KLCC/Bukit Bintang and budget hotels in Bangkok or Deira enforce a strict 11:00 AM–12:00 PM check-out while most flights back to Dhaka depart late at night; instead of paying for an extra hotel night just to store bags, use a verified Radical Storage drop point near the nearest BTS/MRT/Metro station (~$6/day per suitcase) to enjoy your final day hands-free.`,
   "halal-food-guide-bangkok-bangladesh": `When traveling to Thailand, finding delicious, certified Halal food is often a major concern for Bangladeshi tourists. Fortunately, Bangkok is highly welcoming, with vibrant Muslim neighborhoods and countless certified or Muslim-owned eateries. Here is our essential guide to navigating Halal dining in Bangkok without any stress.
 
 1. HOW TO IDENTIFY HALAL SIGNAGE
@@ -217,9 +217,9 @@ Once your Singapore e-Visa PDF arrives (usually within 5–7 working days), prin
 
 3. THAILAND (BANGKOK, PATTAYA & PHUKET) — BEST FOR SHOPPING, SAFARI WORLD & MEDICAL CHECKUPS
 - Flight Time from Dhaka: 2 hrs 35 mins direct (Biman, Thai Airways, US-Bangla, Thai Lion Air)
-- Visa for Bangladeshis: Official Thailand e-Visa via thaievisa.go.th — government portal fee ≈ **USD 40 (800 THB / ~BDT 4,800)** per person; agency service fees typically add **BDT 1,600–3,610** on top; confirm the live total at the portal before applying. Roughly **BDT 6,500–8,500** in total (gov fee + agent fee combined; non-refundable). Processing: 5–10 working days.
+- Visa for Bangladeshis: Apply in advance through Thailand's official e-Visa portal (thaievisa.go.th) and follow the current Dhaka mission checklist. Check the government visa fee in the live portal or Embassy schedule; bank/payment charges are separate, and optional agency service fees vary by provider. Request an itemized quote before paying. Approval and processing time are not guaranteed.
 - 5-Day Per-Person Budget (Family Sharing): BDT 72,000 – BDT 92,000
-- Why Families Love It: Now that Thailand has launched the online e-Visa portal for Dhaka applicants, families no longer have to leave physical passports at VFS for weeks. Stay in Pratunam or Sukhumvit for effortless Halal dining, take the kids to Safari World Bangkok or Chao Phraya dinner cruises via Klook, and pre-book a Welcome Pickups family minivan so your driver greets you right at Suvarnabhumi Arrival Gate 3.
+- Why Families Love It: Thailand's official e-Visa portal accepts online applications for Dhaka applicants; follow the current portal instructions for any additional documents or in-person action. Stay in Pratunam or Sukhumvit for effortless Halal dining, take the kids to Safari World Bangkok or Chao Phraya dinner cruises via Klook, and pre-book a Welcome Pickups family minivan so your driver greets you right at Suvarnabhumi Arrival Gate 3.
 
 4. MALDIVES (MAAFUSHI & HULHUMALÉ LOCAL ISLANDS) — BEST BEACH ESCAPE WITH ZERO VISA FEE
 - Flight Time from Dhaka: 4 hrs 15 mins direct (US-Bangla Airlines) or 1-stop via Colombo
@@ -833,6 +833,7 @@ Whenever you tap your Bangladeshi Visa, Mastercard, or Amex card at a hotel, mal
 Start with the live **Thai e-Visa portal** and select the correct mission for your application. The portal directs applicants to the relevant embassy or consulate for mission-specific requirements.
 - **Visa category:** The portal lists the single-entry Tourist Visa (**TR**) with a 3-month validity period. Check the approved e-Visa for its entry window and permitted stay before booking or travel.
 - **Processing time:** There is no guaranteed decision time for every application. Submit well in advance, monitor email and the application dashboard, and follow any additional-document request from the Royal Thai Embassy, Dhaka.
+- **Fees and payment:** Use the live e-Visa portal and the Embassy Dhaka's current fee schedule for the government visa fee; this guide does not publish an unverified amount. Bank or payment-provider charges are separate. Optional agency service fees are separate and vary by provider—request a written itemized quote before paying.
 - **Financial evidence:** The Ministry's general Tourist Visa page lists financial evidence of at least **THB 20,000**, with examples including bank statements for the last three months or a sponsorship letter. The Embassy Dhaka's public TR checklist—last updated **November 30, 2022**—lists a six-month bank statement, a solvency certificate, and **BDT 60,000 per person or BDT 120,000 per family**. These pages differ in age and detail; confirm the current Dhaka-specific checklist in the portal before relying on a threshold. A balance alone does not guarantee approval.
 
 2. DOCUMENT PREPARATION CHECKLIST (FOLLOW THE LIVE PORTAL)
@@ -853,7 +854,7 @@ Step 5: Review before submission:
 3. THREE PRACTICAL CHECKS BEFORE YOU SUBMIT
 - **Keep financial records clear:** Provide truthful statements and supporting evidence for the funds shown. Avoid artificial deposits or unexplained changes that you cannot document.
 - **Keep bookings consistent:** Make sure travel and accommodation details match the dates and purpose in your application; do not rely on dummy or misleading bookings.
-- **Check every identity field:** Review spelling, passport number, and dates before paying. Fees are non-refundable and the final decision rests with the relevant Thai authority.`,
+- **Check every identity field:** Review spelling, passport number, and dates before paying. Check the current official government fee, any separate bank/payment charge, optional agency pricing, and applicable refund terms; the final decision rests with the relevant Thai authority.`,
   "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration": `Whether you are planning a 5-day family holiday to **Kuala Lumpur, Putrajaya, and Genting Highlands**, or building your passport's travel history after visiting Nepal or the Maldives, **Malaysia's Official Online e-Visa** is one of the smoothest digital visa systems available to Bangladeshi citizens. Verified against the **Immigration Department of Malaysia (imi.gov.my / malaysiavisa.imi.gov.my)**, here is everything you need from application in Dhaka to clearing **KLIA immigration**.
 
 1. STEP-BY-STEP: HOW TO APPLY FOR A MALAYSIA TOURIST E-VISA FROM BANGLADESH

@@ -595,14 +595,14 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     secondaryKeywords: ["thaievisa.go.th dhaka payment", "bank balance needed for thailand visa bd", "thailand tourist visa processing time dhaka"],
     monthlyIntentSignal: "Very High · Digital Portal Transition Intent",
     customerPsychologyEn:
-      "Adapting to the New Online e-Visa Era: Since the Royal Thai Embassy Dhaka shifted to thaievisa.go.th, travelers want exact PDF scan specifications so they don't lose their non-refundable visa fee.",
+      "Travelers want clear, current guidance on the Dhaka mission checklist, digital document uploads, the government e-Visa fee, and separate bank/payment or optional agency charges.",
     customerPsychologyBn:
-      "নতুন অনলাইন ই-ভিসা পোর্টালে নির্ভুল আবেদন: thaievisa.go.th-এ ছবি ও ব্যাংক স্টেটমেন্ট কীভাবে আপলোড করলে প্রথমবারেই ভিসা অনুমোদন হবে তা জানা।",
+      "নতুন অনলাইন ই-ভিসা পোর্টালে আবেদন: thaievisa.go.th-এ বর্তমান checklist ও document upload-এর নিয়ম বুঝে সরকারি fee, bank/payment charge ও optional agency fee আলাদা করে যাচাই করা।",
     aeoDirectAnswerEn:
-      "Bangladeshi citizens apply online via thaievisa.go.th (Dhaka jurisdiction) for a 60-day Tourist Visa (TR) by uploading passport scans, return tickets, hotel bookings, and a 6-month bank statement showing at least BDT 65,000 (THB 20,000) per person. Processing takes 5–10 working days.",
+      "Bangladeshi applicants use Thailand's official e-Visa portal and should follow the current Dhaka mission checklist; approval and processing time are not guaranteed. The public Dhaka TR checklist, last updated November 30, 2022, lists six-month statements and BDT 60,000 per person or BDT 120,000 per family, but current portal prompts may differ. Verify the live requirement. Government visa fees, bank/payment charges, and optional agency service fees are separate; confirm the current government amount and request an itemized agency quote.",
     aeoDirectAnswerBn:
-      "thaievisa.go.th পোর্টালে জনপ্রতি অন্তত ৬৫,০০০ টাকা ব্যাংক ব্যালেন্স ও রিটার্ন টিকিট আপলোড করে আবেদন করলে ৫–১০ কার্যদিবসে ৬০ দিনের থাইল্যান্ড ই-ভিসা পাওয়া যায়।",
-    eavTriples: "Thailand Tourist e-Visa BD (Entity) → Minimum Bank Balance (Attribute) → BDT 65,000 / THB 20,000 per Person (Value)",
+      "বাংলাদেশি আবেদনকারীরা Thailand-এর official e-Visa portal ব্যবহার করবেন এবং Dhaka mission-এর বর্তমান checklist অনুসরণ করবেন; approval বা processing time নিশ্চিত নয়। Embassy-র প্রকাশিত TR checklist (হালনাগাদ ৩০ নভেম্বর ২০২২) ৬ মাসের statement ও জনপ্রতি BDT 60,000/পরিবারে BDT 120,000 উল্লেখ করে, তবে live portal prompt ভিন্ন হতে পারে। সরকারি visa fee, bank/payment charge ও optional agency fee আলাদা—বর্তমান অঙ্ক ও itemized quote যাচাই করুন।",
+    eavTriples: "Thailand Tourist e-Visa BD (Entity) → Fee categories (Attribute) → Government fee, bank/payment charges, and optional agency service fees are separate (Value)",
     targetPath: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
     isLiveBlog: false,
   },
@@ -662,14 +662,14 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     secondaryKeywords: ["cheapest country to visit from bangladesh with family", "5 day foreign trip under 50000 bdt", "best halal holiday from dhaka"],
     monthlyIntentSignal: "Very High · Eid & School Holiday Family Planning",
     customerPsychologyEn:
-      "Total Family Budget Predictability: A father or mother multiplying trip costs by 4 family members needs honest, all-inclusive 5-day BDT numbers before committing to a destination.",
+      "Total Family Budget Clarity: A family comparing five-day BDT ranges needs the trip categories shown clearly and any unitemized visa charges called out before choosing a destination.",
     customerPsychologyBn:
-      "সপরিবারে মোট খরচের সঠিক হিসাব: ৪ সদস্যের পরিবারের জন্য টিকিট, হোটেল ও খাবারসহ মোট কত টাকা লাগবে তা এক নজরে তুলনা করে সিদ্ধান্ত নেওয়া।",
+      "সপরিবারে খরচের স্বচ্ছ হিসাব: পাঁচ দিনের BDT বাজেটের কোন খাত দেখানো হয়েছে এবং visa-related charge itemized কি না—সিদ্ধান্তের আগে তা পরিষ্কার থাকা দরকার।",
     aeoDirectAnswerEn:
-      "Ranked by 5-day per-person family sharing cost from Dhaka: 1. Nepal (BDT 42k–55k, Free VOA), 2. Malaysia (BDT 68k–85k, Online e-Visa), 3. Thailand (BDT 72k–92k, e-Visa), 4. Maldives Maafushi (BDT 75k–98k, Free VOA), 5. Singapore (BDT 98k–1.35L), and 6. Dubai (BDT 1.10L–1.45L).",
+      "Five-day per-person family trip ranges from Dhaka: Nepal (BDT 42k–55k), Malaysia (BDT 68k–85k), Thailand (BDT 72k–92k), Maldives Maafushi (BDT 75k–98k), Singapore (BDT 98k–1.35L), and Dubai (BDT 1.10L–1.45L). Thailand visa charges are not itemized in these ranges; verify the current government e-Visa fee, bank/payment charges, and optional agency service fees separately.",
     aeoDirectAnswerBn:
-      "ঢাকা থেকে ৫ দিনের জনপ্রতি ফ্যামিলি খরচ: ১. নেপাল (৪২–৫৫ হাজার টাকা), ২. মালয়েশিয়া (৬৮–৮৫ হাজার), ৩. থাইল্যান্ড (৭২–৯২ হাজার), ৪. মালদ্বীপ মাফুশি (৭৫–৯৮ হাজার), ৫. সিঙ্গাপুর ও ৬. দুবাই।",
-    eavTriples: "Lowest-Cost Family Trip from Dhaka (Entity) → 5-Day All-In BDT Budget (Attribute) → Nepal at BDT 42,000–55,000/Person (Value)",
+      "ঢাকা থেকে ৫ দিনের জনপ্রতি ফ্যামিলি বাজেট: নেপাল (৪২–৫৫ হাজার টাকা), মালয়েশিয়া (৬৮–৮৫ হাজার), থাইল্যান্ড (৭২–৯২ হাজার), মালদ্বীপ মাফুশি (৭৫–৯৮ হাজার), সিঙ্গাপুর ও দুবাই। Thailand-এর visa-related charge এই range-এ আলাদা itemized নয়; current government fee, bank/payment charge ও optional agency fee যাচাই করুন।",
+    eavTriples: "Family Trip from Dhaka (Entity) → 5-Day BDT Budget Range; Thailand visa charges not itemized (Attribute) → Compare indicative destination ranges and verify the Thai government e-Visa fee, bank/payment charges, and optional agency service fees separately (Value)",
     targetPath: "/blog/top-budget-family-destinations-from-dhaka",
     isLiveBlog: false,
   },

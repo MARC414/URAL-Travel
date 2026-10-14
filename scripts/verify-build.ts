@@ -26,16 +26,27 @@ import zlib from "node:zlib";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
-import { BLOG_DATA } from "../src/constants";
+import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
 import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
 import { BLOG_BODY } from "../src/data/blogContent";
-import { BENGALI_BLOG_OVERRIDES } from "../src/data/bengaliContent";
+import {
+  BENGALI_BLOG_OVERRIDES,
+  getLocalizedBlogs,
+  getLocalizedCosts,
+  getLocalizedDestinations,
+  getLocalizedFlights,
+  getLocalizedHajjFaqs,
+  getLocalizedVisas,
+} from "../src/data/bengaliContent";
 import { EDITOR_PROFILE } from "../src/data/authorProfiles";
 import {
   getVisibleBlogFaqSection,
   getVisibleBlogHowTos,
 } from "../src/utils/blogStructuredData";
+import { COMMONLY_MISREAD } from "../src/data/visaFreeData";
+import { LANDING_DESTINATION_FAQS, LANDING_VISA_FAQS } from "../src/utils/faqSchema";
 import { collectionPageSchema } from "../src/utils/schema";
+import { BN_BREADCRUMB_LABELS } from "../src/utils/localeRoutes";
 import {
   buildResponsiveSrcSet,
   RESPONSIVE_IMAGE_BREAKPOINTS,
@@ -49,6 +60,7 @@ import {
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import App from "../src/App";
+import BlogPostRouteView from "../src/routes/BlogPostRouteView";
 import ContactRouteView from "../src/routes/ContactRouteView";
 import VisaFreeCountriesRouteView from "../src/routes/VisaFreeCountriesRouteView";
 
@@ -1968,6 +1980,230 @@ check(
     : "blog CollectionPage should list every guide and omit numberOfItems"
 );
 
+// Crawlability is separate from sitemap coverage: a detail page must also be
+// reachable through ordinary anchors from the Bengali blog hub.
+const bnBlogHubHtml = read(path.join(DIST_DIR, "bn", "blog.html")) ?? "";
+function bengaliBlogHubTargets(html: string): Set<string> {
+  return new Set(
+    [...html.matchAll(/href="(\/bn\/blog\/[^"/?#]+)"/g)].map((match) => match[1])
+  );
+}
+function hasCompleteBengaliBlogHubDirectory(html: string): boolean {
+  const targets = bengaliBlogHubTargets(html);
+  return (
+    BLOG_POST_COUNT === BLOG_SLUGS.length &&
+    targets.size === BLOG_POST_COUNT &&
+    BLOG_SLUGS.every((slug) => targets.has(`/bn/blog/${slug}`))
+  );
+}
+const bnBlogHubTargets = bengaliBlogHubTargets(bnBlogHubHtml);
+const bnBlogHubDirectoryIsComplete = hasCompleteBengaliBlogHubDirectory(bnBlogHubHtml);
+check(
+  bnBlogHubDirectoryIsComplete,
+  bnBlogHubDirectoryIsComplete
+    ? `/bn/blog links to every Bengali guide with crawlable anchors (${bnBlogHubTargets.size}/${BLOG_POST_COUNT})`
+    : `/bn/blog crawlable directory is incomplete (${bnBlogHubTargets.size}/${BLOG_POST_COUNT}); missing: ${BLOG_SLUGS.filter((slug) => !bnBlogHubTargets.has(`/bn/blog/${slug}`)).slice(0, 4).join(", ") || "unexpected/duplicate targets"}`
+);
+const bnBlogHubNegativeTarget = `/bn/blog/${BLOG_SLUGS[0]}`;
+const bnBlogHubNegativeControlHtml = bnBlogHubHtml.replace(
+  `href="${bnBlogHubNegativeTarget}"`,
+  'href="/bn/blog/negative-control"'
+);
+const bnBlogHubNegativeControlRejectsMissingPost =
+  bnBlogHubNegativeControlHtml !== bnBlogHubHtml &&
+  !hasCompleteBengaliBlogHubDirectory(bnBlogHubNegativeControlHtml);
+check(
+  bnBlogHubNegativeControlRejectsMissingPost,
+  bnBlogHubNegativeControlRejectsMissingPost
+    ? "Bengali blog-hub link guard rejects a deliberately removed post link (negative control)"
+    : "Bengali blog-hub link guard failed its missing-link negative control"
+);
+
+// A hub breadcrumb is a short category label, not the full ~60-character H1.
+const bnBlogHubBreadcrumb = getSeoSchemaGraph(bnBlogHubHtml).find((node) =>
+  hasSchemaType(node, "BreadcrumbList")
+);
+const bnBlogHubBreadcrumbItems = Array.isArray(bnBlogHubBreadcrumb?.itemListElement)
+  ? (bnBlogHubBreadcrumb.itemListElement as Record<string, unknown>[])
+  : [];
+const bnBlogHubFinalCrumbName = bnBlogHubBreadcrumbItems.at(-1)?.name;
+function isConciseBengaliBlogHubCrumb(name: unknown): boolean {
+  return (
+    typeof name === "string" &&
+    name === BN_BREADCRUMB_LABELS["Travel Guides"] &&
+    name.length <= 24
+  );
+}
+const bnBlogHubCrumbIsConcise = isConciseBengaliBlogHubCrumb(bnBlogHubFinalCrumbName);
+check(
+  bnBlogHubCrumbIsConcise,
+  bnBlogHubCrumbIsConcise
+    ? `Bengali /blog BreadcrumbList ends with the concise hub label "${String(bnBlogHubFinalCrumbName)}"`
+    : `Bengali /blog BreadcrumbList ends with a missing or overly long hub label (${String(bnBlogHubFinalCrumbName)})`
+);
+const bnLongHubTitleNegativeControl =
+  "বাংলাদেশি ভ্রমণকারীদের জন্য ভিসা, ওমরাহ, ফ্লাইট ও BDT বাজেটের সম্পূর্ণ ভ্রমণ নির্দেশিকা";
+const bnBlogHubCrumbNegativeControlRejectsLongTitle =
+  !isConciseBengaliBlogHubCrumb(bnLongHubTitleNegativeControl);
+check(
+  bnBlogHubCrumbNegativeControlRejectsLongTitle,
+  bnBlogHubCrumbNegativeControlRejectsLongTitle
+    ? "Bengali blog-hub crumb guard rejects a long H1 as a negative control"
+    : "Bengali blog-hub crumb guard failed its long-title negative control"
+);
+
+type BreadcrumbSnapshotItem = { name: string; href: string | null };
+
+function normalizeBreadcrumbHref(href: string | null): string | null {
+  if (href === null) return null;
+  try {
+    const parsed = new URL(href, "https://ural-travel.pages.dev");
+    if (parsed.origin !== "https://ural-travel.pages.dev") return parsed.href;
+    const withoutTrailingSlash = parsed.pathname.replace(/\/+$/, "") || "/";
+    const pathname = withoutTrailingSlash === "/bn" ? "/bn/" : withoutTrailingSlash;
+    return `${pathname}${parsed.search}${parsed.hash}`;
+  } catch {
+    return href;
+  }
+}
+
+function breadcrumbSchemaItems(html: string): BreadcrumbSnapshotItem[] | null {
+  const node = getSeoSchemaGraph(html).find((item) => hasSchemaType(item, "BreadcrumbList"));
+  if (!Array.isArray(node?.itemListElement)) return null;
+  const items: BreadcrumbSnapshotItem[] = [];
+  for (const entry of node.itemListElement) {
+    if (!entry || typeof entry !== "object") return null;
+    const crumb = entry as Record<string, unknown>;
+    if (typeof crumb.name !== "string") return null;
+    const rawItem = crumb.item;
+    const href =
+      typeof rawItem === "string"
+        ? rawItem
+        : rawItem && typeof rawItem === "object" && typeof (rawItem as Record<string, unknown>)["@id"] === "string"
+          ? String((rawItem as Record<string, unknown>)["@id"])
+          : null;
+    items.push({ name: normalizeStructuredText(crumb.name), href });
+  }
+  return items;
+}
+
+function visibleBlogBreadcrumbItems(markup: string): BreadcrumbSnapshotItem[] | null {
+  const nav = markup.match(
+    /<nav\b(?=[^>]*\bdata-blog-breadcrumb(?:\s|=|>))[^>]*>([\s\S]*?)<\/nav>/i
+  )?.[1];
+  if (!nav) return null;
+  const items: BreadcrumbSnapshotItem[] = [];
+  for (const match of nav.matchAll(/<(a|span)\b([^>]*)>([\s\S]*?)<\/\1>/gi)) {
+    const [, tag, attributes, inner] = match;
+    if (!/\bdata-blog-breadcrumb-item(?:\s|=|$)/.test(attributes)) continue;
+    const href = tag.toLowerCase() === "a"
+      ? attributes.match(/\bhref="([^"]*)"/)?.[1] ?? null
+      : null;
+    items.push({ name: normalizeStructuredText(inner), href });
+  }
+  return items;
+}
+
+function visibleAndStructuredBreadcrumbsMatch(
+  visible: BreadcrumbSnapshotItem[] | null,
+  structured: BreadcrumbSnapshotItem[] | null
+): boolean {
+  return Boolean(
+    visible &&
+      structured &&
+      visible.length > 0 &&
+      visible.length === structured.length &&
+      visible.every(
+        (crumb, index) =>
+          crumb.name === structured[index].name &&
+          normalizeBreadcrumbHref(crumb.href) === normalizeBreadcrumbHref(structured[index].href)
+      )
+  );
+}
+
+function renderBlogPostForBreadcrumb(locale: "en" | "bn", slug: string): string {
+  const isBn = locale === "bn";
+  const sourcePosts = getLocalizedBlogs(locale);
+  const sourcePost = sourcePosts.find((post) => post.slug === slug);
+  if (!sourcePost) throw new Error(`Missing ${locale} blog post ${slug}`);
+  const probePost = {
+    ...sourcePost,
+    content: isBn ? "এই যাচাইকরণ গাইডে ভ্রমণের গুরুত্বপূর্ণ তথ্য দেখুন।" : "Review the important travel details in this verification guide.",
+  };
+  const localizedBlogs = sourcePosts.map((post) => post.slug === slug ? probePost : post);
+  const getLocalizedRouteHref = (route: string) =>
+    isBn ? (route === "/" ? "/bn" : `/bn${route}`) : route;
+  const EmptyAuthorBioCard = () => null;
+
+  return renderToStaticMarkup(
+    React.createElement(BlogPostRouteView as any, {
+      context: {
+        AuthorBioCard: EmptyAuthorBioCard,
+        blogBodies: {},
+        getBlogAeoSnippet50Words: (_slug: string, _isBengali: boolean, fallback: string) => fallback,
+        // Use a known dimensioned image because this is a render probe, not an asset-map test.
+        getBlogCoverImage: () => "/assets/images/clouds_boat_hero_1781438671378-1200.webp",
+        getLocalizedRouteHref,
+        isBn,
+        isLanding: false,
+        lang: locale,
+        localizedBlogs,
+        localizedHajjFaqs: getLocalizedHajjFaqs(locale),
+        navigateTo: () => {},
+        parameterId: slug,
+        section: "blog",
+        setAffiliateToast: () => {},
+      },
+    })
+  );
+}
+
+const breadcrumbProbeSlug = BLOG_SLUGS[0];
+for (const locale of ["en", "bn"] as const) {
+  const routeFile =
+    locale === "en"
+      ? path.join(DIST_DIR, "blog", `${breadcrumbProbeSlug}.html`)
+      : path.join(DIST_DIR, "bn", "blog", `${breadcrumbProbeSlug}.html`);
+  try {
+    const rendered = renderBlogPostForBreadcrumb(locale, breadcrumbProbeSlug);
+    const visible = visibleBlogBreadcrumbItems(rendered);
+    const structured = breadcrumbSchemaItems(read(routeFile) ?? "");
+    const matched = visibleAndStructuredBreadcrumbsMatch(visible, structured);
+    check(
+      matched,
+      matched
+        ? `${locale} blog post visible breadcrumb labels/links match the emitted BreadcrumbList`
+        : `${locale} blog post visible breadcrumb labels/links disagree with its emitted BreadcrumbList (visible=${JSON.stringify(visible)}; schema=${JSON.stringify(structured)})`
+    );
+  } catch (error) {
+    check(false, `${locale} blog breadcrumb renders and can be compared (threw: ${String(error).slice(0, 180)})`);
+  }
+}
+const breadcrumbControlVisible: BreadcrumbSnapshotItem[] = [
+  { name: "Home", href: "/" },
+  { name: "Travel Guides", href: "/blog" },
+  { name: "Sample guide", href: null },
+];
+const breadcrumbControlSchema: BreadcrumbSnapshotItem[] = [
+  { name: "Home", href: "https://ural-travel.pages.dev/" },
+  { name: "Travel Guides", href: "https://ural-travel.pages.dev/blog" },
+  { name: "Sample guide", href: null },
+];
+const breadcrumbMismatchNegativeControlRejectsDrift =
+  visibleAndStructuredBreadcrumbsMatch(breadcrumbControlVisible, breadcrumbControlSchema) &&
+  !visibleAndStructuredBreadcrumbsMatch(
+    breadcrumbControlVisible.map((crumb, index) =>
+      index === 1 ? { ...crumb, name: "Travel Blog" } : crumb
+    ),
+    breadcrumbControlSchema
+  );
+check(
+  breadcrumbMismatchNegativeControlRejectsDrift,
+  breadcrumbMismatchNegativeControlRejectsDrift
+    ? "breadcrumb comparator rejects a deliberately divergent visible hub label (negative control)"
+    : "breadcrumb comparator failed its label-drift negative control"
+);
+
 const homepageHtml = distIndexHtml ?? "";
 const entitySchemaMatch = homepageHtml.match(
   /<script type="application\/ld\+json" id="site-entity-schema">([\s\S]*?)<\/script>/
@@ -2249,6 +2485,44 @@ const FOOTER_RENDER_PATHS = [
   { label: "footer (bn)", path: "/bn/" },
 ];
 
+// Class-level regression guard only: Tailwind tokens cannot prove the rendered
+// element meets the header at each viewport. That pixel evidence is measured by
+// the headless-browser pass; this catches the old 24/32px partial offsets.
+const blogIndexSource = read(path.join(ROOT_DIR, "src", "routes", "BlogIndexRouteView.tsx")) ?? "";
+const blogPostSource = read(path.join(ROOT_DIR, "src", "routes", "BlogPostRouteView.tsx")) ?? "";
+const appSpacingSource = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
+function classNameAfter(source: string, marker: string): string {
+  const markerIndex = source.indexOf(marker);
+  if (markerIndex === -1) return "";
+  return source.slice(markerIndex, markerIndex + 900).match(/className="([^"]+)"/)?.[1] ?? "";
+}
+function cancelsMainTopPadding(className: string): boolean {
+  const classes = new Set(className.split(/\s+/));
+  return classes.has("-mt-10") && classes.has("sm:-mt-12");
+}
+const mainTopPaddingIsKnown =
+  /<main id="main-content" className="[^"]*py-10 sm:py-12/.test(appSpacingSource);
+const blogHeroOffsetClasses = classNameAfter(blogIndexSource, 'aria-labelledby="blog-hero-h1"');
+const blogPostBreadcrumbOffsetClasses = classNameAfter(blogPostSource, "data-blog-breadcrumb");
+const blogSpacingClassContractHolds =
+  mainTopPaddingIsKnown &&
+  cancelsMainTopPadding(blogHeroOffsetClasses) &&
+  cancelsMainTopPadding(blogPostBreadcrumbOffsetClasses);
+check(
+  blogSpacingClassContractHolds,
+  blogSpacingClassContractHolds
+    ? "blog hero and article breadcrumb cancel main's py-10/sm:py-12 padding at class level (pixels checked in browser)"
+    : "blog hero and article breadcrumb must offset main's full py-10/sm:py-12 top padding"
+);
+const oldPartialOffsetNegativeControlRejectsRegression =
+  !cancelsMainTopPadding("-mt-6 sm:-mt-8");
+check(
+  oldPartialOffsetNegativeControlRejectsRegression,
+  oldPartialOffsetNegativeControlRejectsRegression
+    ? "blog spacing class guard rejects the old partial offsets (negative control)"
+    : "blog spacing class guard failed its old-offset negative control"
+);
+
 for (const { label, path: routePath } of FOOTER_RENDER_PATHS) {
   let markup = "";
   try {
@@ -2419,6 +2693,660 @@ for (const { path: routePath, minShare } of BENGALI_PARITY_ROUTES) {
       : `${routePath} shows ${leaked.length} English sentence(s) in its Bengali crawlable HTML: "${leaked[0].slice(0, 80)}"`
   );
 }
+
+// --- B2. Thailand visa fee, evidence, and route-copy regression guards -----
+//
+// These assertions cover source data AND the built pages that readers/crawlers
+// receive. Each assertion has a deliberately corrupted negative control: if a
+// stale amount, conflated cost, old submission flow, or missing dated caveat is
+// reintroduced, the positive guard must fail on that changed sample.
+
+const B2_THAI_VISA_ID = "thailand-visa";
+const B2_THAI_ARTICLE_SLUG = "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide";
+const B2_FAMILY_ARTICLE_SLUG = "top-budget-family-destinations-from-dhaka";
+const B2_THAI_EN = VISA_DATA.find((visa) => visa.id === B2_THAI_VISA_ID);
+const B2_THAI_BN = getLocalizedVisas("bn").find((visa) => visa.id === B2_THAI_VISA_ID);
+const B2_FLIGHT_EN = FLIGHTS_DATA.find((flight) => flight.id === "dhaka-bangkok");
+const B2_FLIGHT_BN = getLocalizedFlights("bn").find((flight) => flight.id === "dhaka-bangkok");
+const B2_VISA_FREE = COMMONLY_MISREAD.find((entry) => entry.country === "Thailand");
+const B2_THAI_COST_EN = TRIP_COSTS_DATA.find((cost) => cost.id === "thailand-costs");
+const B2_THAI_COST_BN = getLocalizedCosts("bn").find((cost) => cost.id === "thailand-costs");
+const B2_DESTINATION_EN = DESTINATIONS_DATA.find((destination) => destination.id === "thailand-guide");
+const B2_DESTINATION_BN = getLocalizedDestinations("bn").find((destination) => destination.id === "thailand-guide");
+const B2_ARTICLE_EN = BLOG_BODY[B2_THAI_ARTICLE_SLUG] ?? "";
+const B2_ARTICLE_BN = BENGALI_BLOG_OVERRIDES[B2_THAI_ARTICLE_SLUG]?.content ?? "";
+const B2_FAMILY_ARTICLE_EN = BLOG_BODY[B2_FAMILY_ARTICLE_SLUG] ?? "";
+const B2_FAMILY_ARTICLE_BN = BENGALI_BLOG_OVERRIDES[B2_FAMILY_ARTICLE_SLUG]?.content ?? "";
+const B2_EN_VISA_HTML = read(path.join(DIST_DIR, "visa", "thailand-visa.html")) ?? "";
+const B2_BN_VISA_HTML = read(path.join(DIST_DIR, "bn", "visa", "thailand-visa.html")) ?? "";
+const B2_EN_BLOG_HTML = read(path.join(DIST_DIR, "blog", `${B2_THAI_ARTICLE_SLUG}.html`)) ?? "";
+const B2_BN_BLOG_HTML = read(path.join(DIST_DIR, "bn", "blog", `${B2_THAI_ARTICLE_SLUG}.html`)) ?? "";
+const B2_EN_FLIGHT_HTML = read(path.join(DIST_DIR, "flights", "dhaka-bangkok.html")) ?? "";
+const B2_BN_FLIGHT_HTML = read(path.join(DIST_DIR, "bn", "flights", "dhaka-bangkok.html")) ?? "";
+const B2_EN_VISA_FREE_HTML = read(path.join(DIST_DIR, "visa-free-countries.html")) ?? "";
+const B2_EN_COST_HTML = read(path.join(DIST_DIR, "costs", "thailand-costs.html")) ?? "";
+const B2_BN_COST_HTML = read(path.join(DIST_DIR, "bn", "costs", "thailand-costs.html")) ?? "";
+const B2_EN_DESTINATION_HTML = read(path.join(DIST_DIR, "destinations", "thailand-guide.html")) ?? "";
+const B2_BN_DESTINATION_HTML = read(path.join(DIST_DIR, "bn", "destinations", "thailand-guide.html")) ?? "";
+
+function b2VisaCopy(visa: (typeof VISA_DATA)[number] | undefined): string {
+  if (!visa) return "";
+  return [
+    visa.requirementType,
+    visa.costBdt,
+    visa.quickAnswer,
+    ...visa.documentChecklist.flatMap((group) => [group.category, ...group.items]),
+    ...visa.stepByStep,
+    ...visa.keyFacts.map((fact) => `${fact.label}: ${fact.value}`),
+    ...visa.faqs.flatMap((faq) => [faq.question, faq.answer]),
+    visa.schemaMarkup?.description ?? "",
+    visa.schemaMarkup?.code ?? "",
+  ].join(" ");
+}
+
+const B2_UNVERIFIED_FEE_AMOUNT =
+  /\bUSD\s*(?:35\s*[–—-]\s*40|40)\b|\bTHB\s*2[,.]?000\b|\bBDT\s*(?:4[,.]?800|4[,.]?890|6[,.]?500|8[,.]?500)\b|\bBDT\s*1[,.]?600\s*[–—-]\s*3[,.]?610\b/i;
+function b2HasNoUnverifiedFeeAmount(text: string): boolean {
+  return !B2_UNVERIFIED_FEE_AMOUNT.test(text);
+}
+
+function b2HasSeparateFeeCategories(text: string, locale: "en" | "bn"): boolean {
+  if (!b2HasNoUnverifiedFeeAmount(text)) return false;
+  return locale === "en"
+    ? /government tourist e-visa fee/i.test(text) &&
+        /bank or payment-provider charges are separate/i.test(text) &&
+        /optional agency service fees are separate/i.test(text)
+    : /সরকারি Tourist e-Visa fee/i.test(text) &&
+        /Bank\/payment charge আলাদা/i.test(text) &&
+        /Optional agency service fee আলাদা/i.test(text);
+}
+
+function b2HasDatedFundsCaveat(text: string, locale: "en" | "bn"): boolean {
+  return locale === "en"
+    ? /November 30, 2022/.test(text) &&
+        /BDT 60,000 per person/.test(text) &&
+        /BDT 120,000 per family/.test(text) &&
+        /six-month bank statements?/i.test(text) &&
+        /current portal prompts may differ/i.test(text)
+    : /৩০ নভেম্বর ২০২২/.test(text) &&
+        /BDT 60,000/.test(text) &&
+        /BDT 120,000/.test(text) &&
+        /৬ মাসের statement/.test(text) &&
+        /ভিন্ন হতে পারে/.test(text);
+}
+
+const B2_EN_FEE_FIELD = B2_THAI_EN?.costBdt ?? "";
+const B2_BN_FEE_FIELD = B2_THAI_BN?.costBdt ?? "";
+const b2EnglishFeeCategoriesAreSeparate = b2HasSeparateFeeCategories(B2_EN_FEE_FIELD, "en");
+check(
+  b2EnglishFeeCategoriesAreSeparate,
+  b2EnglishFeeCategoriesAreSeparate
+    ? "Thailand English fee guidance separates the current government fee, bank/payment charges, and optional agency service fees without unverified amounts"
+    : "Thailand English fee guidance must separate government, bank/payment, and optional agency costs without hardcoded unverified amounts"
+);
+const b2EnglishFeeNegativeSample = B2_EN_FEE_FIELD.replace(
+  "Bank or payment-provider charges are separate",
+  "Bank or payment-provider charges are bundled"
+);
+const b2EnglishFeeNegativeControlWorks =
+  b2EnglishFeeCategoriesAreSeparate &&
+  b2EnglishFeeNegativeSample !== B2_EN_FEE_FIELD &&
+  !b2HasSeparateFeeCategories(b2EnglishFeeNegativeSample, "en");
+check(
+  b2EnglishFeeNegativeControlWorks,
+  b2EnglishFeeNegativeControlWorks
+    ? "English fee-separation guard rejects a deliberately bundled bank/payment charge (negative control)"
+    : "English fee-separation guard failed its bundled-charge negative control"
+);
+
+const b2BengaliFeeCategoriesAreSeparate = b2HasSeparateFeeCategories(B2_BN_FEE_FIELD, "bn");
+check(
+  b2BengaliFeeCategoriesAreSeparate,
+  b2BengaliFeeCategoriesAreSeparate
+    ? "Thailand Bengali fee guidance separates government, bank/payment, and optional agency costs without unverified amounts"
+    : "Thailand Bengali fee guidance must separately name government, bank/payment, and optional agency costs without hardcoded unverified amounts"
+);
+const b2BengaliFeeNegativeSample = B2_BN_FEE_FIELD.replace(
+  "Bank/payment charge আলাদা",
+  "Bank/payment charge একত্রে"
+);
+const b2BengaliFeeNegativeControlWorks =
+  b2BengaliFeeCategoriesAreSeparate &&
+  b2BengaliFeeNegativeSample !== B2_BN_FEE_FIELD &&
+  !b2HasSeparateFeeCategories(b2BengaliFeeNegativeSample, "bn");
+check(
+  b2BengaliFeeNegativeControlWorks,
+  b2BengaliFeeNegativeControlWorks
+    ? "Bengali fee-separation guard rejects a deliberately bundled bank/payment charge (negative control)"
+    : "Bengali fee-separation guard failed its bundled-charge negative control"
+);
+
+const B2_EN_FUNDS_TEXT = B2_THAI_EN?.quickAnswer ?? "";
+const B2_BN_FUNDS_TEXT = B2_THAI_BN?.quickAnswer ?? "";
+const b2EnglishFundsCaveatIsDated = b2HasDatedFundsCaveat(B2_EN_FUNDS_TEXT, "en");
+check(
+  b2EnglishFundsCaveatIsDated,
+  b2EnglishFundsCaveatIsDated
+    ? "English Thailand guidance preserves the dated Nov 30, 2022 BDT 60,000/120,000 funds caveat and says to confirm the live checklist"
+    : "English Thailand guidance must retain the dated Nov 30, 2022 BDT 60,000/120,000 caveat and current-checklist warning"
+);
+const b2EnglishFundsNegativeSample = B2_EN_FUNDS_TEXT.replace("November 30, 2022", "November 30, 2025");
+const b2EnglishFundsNegativeControlWorks =
+  b2EnglishFundsCaveatIsDated &&
+  b2EnglishFundsNegativeSample !== B2_EN_FUNDS_TEXT &&
+  !b2HasDatedFundsCaveat(b2EnglishFundsNegativeSample, "en");
+check(
+  b2EnglishFundsNegativeControlWorks,
+  b2EnglishFundsNegativeControlWorks
+    ? "English funds-caveat guard rejects a deliberately changed checklist date (negative control)"
+    : "English funds-caveat guard failed its changed-date negative control"
+);
+
+const b2BengaliFundsCaveatIsDated = b2HasDatedFundsCaveat(B2_BN_FUNDS_TEXT, "bn");
+check(
+  b2BengaliFundsCaveatIsDated,
+  b2BengaliFundsCaveatIsDated
+    ? "Bengali Thailand guidance preserves the dated BDT 60,000/120,000 funds caveat and current-portal warning"
+    : "Bengali Thailand guidance must retain the dated BDT 60,000/120,000 caveat and current-portal warning"
+);
+const b2BengaliFundsNegativeSample = B2_BN_FUNDS_TEXT.replace("৩০ নভেম্বর ২০২২", "৩০ নভেম্বর ২০২৫");
+const b2BengaliFundsNegativeControlWorks =
+  b2BengaliFundsCaveatIsDated &&
+  b2BengaliFundsNegativeSample !== B2_BN_FUNDS_TEXT &&
+  !b2HasDatedFundsCaveat(b2BengaliFundsNegativeSample, "bn");
+check(
+  b2BengaliFundsNegativeControlWorks,
+  b2BengaliFundsNegativeControlWorks
+    ? "Bengali funds-caveat guard rejects a deliberately changed checklist date (negative control)"
+    : "Bengali funds-caveat guard failed its changed-date negative control"
+);
+
+function b2ArticleFeeLine(body: string, marker: string): string {
+  return body.split("\n").find((line) => line.includes(marker)) ?? "";
+}
+const B2_EN_ARTICLE_FEE_LINE = b2ArticleFeeLine(B2_ARTICLE_EN, "**Fees and payment:**");
+const B2_BN_ARTICLE_FEE_LINE = b2ArticleFeeLine(B2_ARTICLE_BN, "**ফি ও পেমেন্ট:**");
+function b2HasArticleFeeSeparation(enLine: string, bnLine: string): boolean {
+  return (
+    /government visa fee/i.test(enLine) &&
+    /Bank or payment-provider charges are separate/i.test(enLine) &&
+    /optional agency service fees are separate/i.test(enLine) &&
+    b2HasNoUnverifiedFeeAmount(enLine) &&
+    /সরকারি visa fee/i.test(bnLine) &&
+    /Bank\/payment-provider charge আলাদা/i.test(bnLine) &&
+    /agency service fee-ও আলাদা/i.test(bnLine) &&
+    b2HasNoUnverifiedFeeAmount(bnLine)
+  );
+}
+const b2BilingualArticleFeeCopyIsSafe =
+  Boolean(B2_ARTICLE_EN && B2_ARTICLE_BN) &&
+  b2HasArticleFeeSeparation(B2_EN_ARTICLE_FEE_LINE, B2_BN_ARTICLE_FEE_LINE);
+check(
+  b2BilingualArticleFeeCopyIsSafe,
+  b2BilingualArticleFeeCopyIsSafe
+    ? "English and Bengali Thailand e-Visa articles separate all fee categories and publish no unverified current amount"
+    : "Both Thailand e-Visa articles must state separate government, payment, and optional agency costs without unverified amounts"
+);
+const b2BrokenArticleFeeLine = B2_EN_ARTICLE_FEE_LINE.replace(
+  "Bank or payment-provider charges are separate",
+  "Bank or payment-provider charges are included"
+);
+const b2ArticleFeeNegativeControlWorks =
+  b2BilingualArticleFeeCopyIsSafe &&
+  b2BrokenArticleFeeLine !== B2_EN_ARTICLE_FEE_LINE &&
+  !b2HasArticleFeeSeparation(b2BrokenArticleFeeLine, B2_BN_ARTICLE_FEE_LINE);
+check(
+  b2ArticleFeeNegativeControlWorks,
+  b2ArticleFeeNegativeControlWorks
+    ? "bilingual article fee guard rejects deliberately conflated payment charges (negative control)"
+    : "bilingual article fee guard failed its conflated-charge negative control"
+);
+
+const B2_FEE_SOURCE_URLS = [
+  "https://dhaka.thaiembassy.org/en/content/consular-service-fee-updated-september-2025?page=5d83296215e39c2540006a05&menu=5d83296215e39c2540006a0e",
+  "https://dhaka.thaiembassy.org/en/content/facilitation-ofe-visa-payment?page=5d83296215e39c2540006a05&menu=5d83296215e39c2540006a0e",
+];
+const B2_EN_ARTICLE_REFS = BLOG_DATA.find((post) => post.slug === B2_THAI_ARTICLE_SLUG)?.references;
+const B2_BN_ARTICLE_REFS = BENGALI_BLOG_OVERRIDES[B2_THAI_ARTICLE_SLUG]?.references;
+function b2HasFeeSourceLinks(references: readonly { url: string }[] | undefined): boolean {
+  return Boolean(references) && B2_FEE_SOURCE_URLS.every((url) => references?.some((ref) => ref.url === url));
+}
+const b2BothArticlesLinkOfficialFeeSources =
+  b2HasFeeSourceLinks(B2_EN_ARTICLE_REFS) && b2HasFeeSourceLinks(B2_BN_ARTICLE_REFS);
+check(
+  b2BothArticlesLinkOfficialFeeSources,
+  b2BothArticlesLinkOfficialFeeSources
+    ? "English and Bengali Thailand e-Visa articles link the Embassy's fee schedule and payment notice"
+    : "Both Thailand e-Visa articles must link the current Embassy fee schedule and payment notice"
+);
+const b2RefsWithoutPaymentNotice = (B2_BN_ARTICLE_REFS ?? []).filter(
+  (reference) => reference.url !== B2_FEE_SOURCE_URLS[1]
+);
+const b2FeeSourceNegativeControlWorks =
+  b2BothArticlesLinkOfficialFeeSources && !b2HasFeeSourceLinks(b2RefsWithoutPaymentNotice);
+check(
+  b2FeeSourceNegativeControlWorks,
+  b2FeeSourceNegativeControlWorks
+    ? "official-source guard rejects a Bengali article with its payment notice removed (negative control)"
+    : "official-source guard failed its removed-payment-notice negative control"
+);
+
+function b2RenderedVisaFeeCopyIsSafe(html: string, expectedCost: string, locale: "en" | "bn"): boolean {
+  const rendered = visibleText(html);
+  const hasDatedFunds = locale === "en"
+    ? /November 30, 2022/.test(rendered) && /BDT 60,000 per person/.test(rendered) && /BDT 120,000 per family/.test(rendered)
+    : /হালনাগাদ ৩০ নভেম্বর ২০২২/.test(rendered) &&
+        /জনপ্রতি BDT 60,000/.test(rendered) &&
+        /পরিবারে BDT 120,000/.test(rendered);
+  return Boolean(html && expectedCost && rendered.includes(expectedCost) && hasDatedFunds);
+}
+const b2EnglishVisaPageIsSafe = b2RenderedVisaFeeCopyIsSafe(B2_EN_VISA_HTML, B2_EN_FEE_FIELD, "en");
+check(
+  b2EnglishVisaPageIsSafe,
+  b2EnglishVisaPageIsSafe
+    ? "prerendered English Thailand visa page emits its source-safe fee breakdown and dated proof-of-funds caveat"
+    : "prerendered English Thailand visa page is missing the fee breakdown or dated proof-of-funds caveat"
+);
+const b2EnglishVisaPageNegativeHtml = B2_EN_VISA_HTML.replace(
+  B2_EN_FEE_FIELD,
+  "Government fee plus agency total: BDT 6,500"
+);
+const b2EnglishVisaPageNegativeControlWorks =
+  b2EnglishVisaPageIsSafe &&
+  Boolean(B2_EN_FEE_FIELD) &&
+  !b2RenderedVisaFeeCopyIsSafe(b2EnglishVisaPageNegativeHtml, B2_EN_FEE_FIELD, "en");
+check(
+  b2EnglishVisaPageNegativeControlWorks,
+  b2EnglishVisaPageNegativeControlWorks
+    ? "English visa-page output guard rejects a deliberately conflated, hardcoded fee (negative control)"
+    : "English visa-page output guard failed its conflated-fee negative control"
+);
+
+const b2BengaliVisaPageIsSafe = b2RenderedVisaFeeCopyIsSafe(B2_BN_VISA_HTML, B2_BN_FEE_FIELD, "bn");
+check(
+  b2BengaliVisaPageIsSafe,
+  b2BengaliVisaPageIsSafe
+    ? "prerendered Bengali Thailand visa page emits its localized fee breakdown and dated proof-of-funds caveat"
+    : "prerendered Bengali Thailand visa page is missing its localized fee breakdown or dated funds caveat"
+);
+const b2BengaliVisaPageNegativeHtml = B2_BN_VISA_HTML.replace(
+  B2_BN_FEE_FIELD,
+  "সরকারি fee ও agency fee মোট BDT 6,500"
+);
+const b2BengaliVisaPageNegativeControlWorks =
+  b2BengaliVisaPageIsSafe &&
+  Boolean(B2_BN_FEE_FIELD) &&
+  !b2RenderedVisaFeeCopyIsSafe(b2BengaliVisaPageNegativeHtml, B2_BN_FEE_FIELD, "bn");
+check(
+  b2BengaliVisaPageNegativeControlWorks,
+  b2BengaliVisaPageNegativeControlWorks
+    ? "Bengali visa-page output guard rejects a deliberately conflated, hardcoded fee (negative control)"
+    : "Bengali visa-page output guard failed its conflated-fee negative control"
+);
+
+function b2HasLegacyStickerWorkflow(text: string): boolean {
+  return /sticker\s*visa|VFS(?:\s+Global)?|Simon\s+Logistics/i.test(text);
+}
+function b2HasNoLegacyStickerWorkflow(text: string): boolean {
+  return !b2HasLegacyStickerWorkflow(text);
+}
+const B2_BD_ELIGIBILITY_SOURCE = read(path.join(ROOT_DIR, "src", "components", "InteractiveTools.tsx")) ?? "";
+const B2_BD_ELIGIBILITY_BLOCK = B2_BD_ELIGIBILITY_SOURCE.match(/bd:\s*\{([\s\S]*?)\n\s*},\s*in:/)?.[1] ?? "";
+const B2_INTERACTIVE_THAILAND_RESULT = B2_BD_ELIGIBILITY_BLOCK.match(/th:\s*\{([^}]*)\}/)?.[1] ?? "";
+const B2_TOPICAL_SOURCE = read(path.join(ROOT_DIR, "src", "components", "TopicalAuthorityBlueprint.tsx")) ?? "";
+const b2TopicalStart = B2_TOPICAL_SOURCE.indexOf('id: "iv-03"');
+const b2TopicalEnd = B2_TOPICAL_SOURCE.indexOf('id: "iv-04"', b2TopicalStart + 1);
+const B2_TOPICAL_THAILAND_BLOCK =
+  b2TopicalStart === -1 || b2TopicalEnd === -1
+    ? ""
+    : B2_TOPICAL_SOURCE.slice(b2TopicalStart, b2TopicalEnd);
+const b2FamilyBudgetStart = B2_TOPICAL_SOURCE.indexOf('id: "hf-01"');
+const b2FamilyBudgetEnd = B2_TOPICAL_SOURCE.indexOf('id: "hf-02"', b2FamilyBudgetStart + 1);
+const B2_FAMILY_BUDGET_TOPIC_BLOCK =
+  b2FamilyBudgetStart === -1 || b2FamilyBudgetEnd === -1
+    ? ""
+    : B2_TOPICAL_SOURCE.slice(b2FamilyBudgetStart, b2FamilyBudgetEnd);
+const B2_RELEVANT_THAILAND_COPY = [
+  b2VisaCopy(B2_THAI_EN),
+  b2VisaCopy(B2_THAI_BN),
+  B2_FLIGHT_EN ? `${B2_FLIGHT_EN.visaRequirement} ${B2_FLIGHT_EN.quickAnswer} ${B2_FLIGHT_EN.faqs.map((faq) => faq.answer).join(" ")}` : "",
+  B2_FLIGHT_BN ? `${B2_FLIGHT_BN.visaRequirement} ${B2_FLIGHT_BN.quickAnswer} ${B2_FLIGHT_BN.faqs.map((faq) => faq.answer).join(" ")}` : "",
+  B2_VISA_FREE ? `${B2_VISA_FREE.cost} ${B2_VISA_FREE.note} ${B2_VISA_FREE.caveat ?? ""} ${B2_VISA_FREE.bn.cost} ${B2_VISA_FREE.bn.note} ${B2_VISA_FREE.bn.caveat ?? ""}` : "",
+  LANDING_VISA_FAQS.map((faq) => `${faq.question} ${faq.answer}`).join(" "),
+  LANDING_DESTINATION_FAQS.map((faq) => `${faq.question} ${faq.answer}`).join(" "),
+  B2_DESTINATION_BN ? `${B2_DESTINATION_BN.quickAnswer} ${B2_DESTINATION_BN.faqs.map((faq) => faq.answer).join(" ")}` : "",
+  B2_INTERACTIVE_THAILAND_RESULT,
+  B2_TOPICAL_THAILAND_BLOCK,
+  B2_ARTICLE_EN,
+  B2_ARTICLE_BN,
+  B2_FAMILY_ARTICLE_EN,
+  B2_FAMILY_ARTICLE_BN,
+  visibleText(B2_EN_VISA_HTML),
+  visibleText(B2_BN_VISA_HTML),
+  visibleText(B2_EN_FLIGHT_HTML),
+  visibleText(B2_BN_FLIGHT_HTML),
+  visibleText(B2_EN_VISA_FREE_HTML),
+  visibleText(B2_BN_DESTINATION_HTML),
+].join("\n");
+const b2StaleStickerReferencesAreGone = b2HasNoLegacyStickerWorkflow(B2_RELEVANT_THAILAND_COPY);
+check(
+  b2StaleStickerReferencesAreGone,
+  b2StaleStickerReferencesAreGone
+    ? "Thailand/Bangladesh visa, FAQ, route, checker, article, and prerender copy contains no obsolete sticker/VFS workflow"
+    : "obsolete Thailand sticker-visa, VFS, or Simon Logistics instructions remain in relevant user-facing copy"
+);
+const b2LegacyStickerNegativeSample = `${B2_RELEVANT_THAILAND_COPY}\nPre-arranged sticker visa via VFS Global.`;
+const b2LegacyStickerNegativeControlWorks =
+  b2StaleStickerReferencesAreGone && !b2HasNoLegacyStickerWorkflow(b2LegacyStickerNegativeSample);
+check(
+  b2LegacyStickerNegativeControlWorks,
+  b2LegacyStickerNegativeControlWorks
+    ? "legacy workflow guard rejects an injected sticker/VFS instruction (negative control)"
+    : "legacy workflow guard failed its injected sticker/VFS negative control"
+);
+
+function b2FlightRouteIsCurrent(en: typeof B2_FLIGHT_EN, bn: typeof B2_FLIGHT_BN): boolean {
+  const enCopy = en ? `${en.visaRequirement} ${en.quickAnswer} ${en.faqs.map((faq) => faq.answer).join(" ")}` : "";
+  const bnCopy = bn ? `${bn.visaRequirement} ${bn.quickAnswer} ${bn.faqs.map((faq) => faq.answer).join(" ")}` : "";
+  return Boolean(
+    en &&
+      bn &&
+      /thaievisa\.go\.th/i.test(enCopy) &&
+      /official portal/i.test(enCopy) &&
+      /e-Visa/i.test(bnCopy) &&
+      b2HasNoLegacyStickerWorkflow(enCopy) &&
+      b2HasNoLegacyStickerWorkflow(bnCopy)
+  );
+}
+const b2FlightRouteCopyIsCurrent = b2FlightRouteIsCurrent(B2_FLIGHT_EN, B2_FLIGHT_BN);
+check(
+  b2FlightRouteCopyIsCurrent,
+  b2FlightRouteCopyIsCurrent
+    ? "Dhaka–Bangkok flight guidance points Bangladeshi travelers to the official e-Visa route in both locales"
+    : "Dhaka–Bangkok flight guidance must use the current official e-Visa route in English and Bengali"
+);
+const b2FlightNegativeControl = B2_FLIGHT_EN
+  ? { ...B2_FLIGHT_EN, visaRequirement: "Pre-arranged sticker visa via VFS Global" }
+  : undefined;
+const b2FlightNegativeControlWorks =
+  b2FlightRouteCopyIsCurrent &&
+  Boolean(b2FlightNegativeControl) &&
+  !b2FlightRouteIsCurrent(b2FlightNegativeControl, B2_FLIGHT_BN);
+check(
+  b2FlightNegativeControlWorks,
+  b2FlightNegativeControlWorks
+    ? "flight-route guard rejects a deliberately restored sticker/VFS requirement (negative control)"
+    : "flight-route guard failed its sticker/VFS negative control"
+);
+
+function b2VisaFreeThailandEntryIsSafe(entry: typeof B2_VISA_FREE): boolean {
+  if (!entry) return false;
+  const enCopy = `${entry.cost} ${entry.note} ${entry.caveat ?? ""}`;
+  const bnCopy = `${entry.bn.cost} ${entry.bn.note} ${entry.bn.caveat ?? ""}`;
+  return (
+    /current government e-Visa fee/i.test(entry.cost) &&
+    /official portal/i.test(entry.note) &&
+    /current financial evidence/i.test(entry.caveat ?? "") &&
+    /সরকারি e-Visa fee/i.test(entry.bn.cost) &&
+    /Tourist e-Visa/i.test(entry.bn.note) &&
+    /হালনাগাদ ৩০ নভেম্বর ২০২২/.test(entry.bn.caveat ?? "") &&
+    b2HasNoUnverifiedFeeAmount(enCopy) &&
+    b2HasNoUnverifiedFeeAmount(bnCopy) &&
+    b2HasNoLegacyStickerWorkflow(enCopy) &&
+    b2HasNoLegacyStickerWorkflow(bnCopy)
+  );
+}
+const b2VisaFreeEntryCopyIsSafe = b2VisaFreeThailandEntryIsSafe(B2_VISA_FREE);
+check(
+  b2VisaFreeEntryCopyIsSafe,
+  b2VisaFreeEntryCopyIsSafe
+    ? "visa-free-country Thailand entry distinguishes the current e-Visa fee check and dated evidence caveat in both locales"
+    : "Thailand visa-free-list entry must avoid unsupported fees and sticker wording while preserving the dated evidence caveat"
+);
+const b2VisaFreeEntryNegativeSample = B2_VISA_FREE
+  ? { ...B2_VISA_FREE, cost: `${B2_VISA_FREE.cost}; Approx. USD 35–40` }
+  : undefined;
+const b2VisaFreeEntryNegativeControlWorks =
+  b2VisaFreeEntryCopyIsSafe &&
+  Boolean(b2VisaFreeEntryNegativeSample) &&
+  !b2VisaFreeThailandEntryIsSafe(b2VisaFreeEntryNegativeSample);
+check(
+  b2VisaFreeEntryNegativeControlWorks,
+  b2VisaFreeEntryNegativeControlWorks
+    ? "visa-free-list guard rejects an injected unverified Thai visa fee (negative control)"
+    : "visa-free-list guard failed its unverified-fee negative control"
+);
+
+function b2LandingVisaFaqsAreSafe(
+  visaFaqs: typeof LANDING_VISA_FAQS,
+  destinationFaqs: typeof LANDING_DESTINATION_FAQS
+): boolean {
+  const funds = visaFaqs.find((faq) => /standard bank balance/i.test(faq.question))?.answer ?? "";
+  const timing = visaFaqs.find((faq) => /How long before travel/i.test(faq.question))?.answer ?? "";
+  const firstTrip = visaFaqs.find((faq) => /first-time Bangladeshi/i.test(faq.question))?.answer ?? "";
+  const destinationThailand = destinationFaqs.find((faq) => /best international holiday/i.test(faq.question))?.answer ?? "";
+  return (
+    /no universal balance requirement/i.test(funds) &&
+    /November 30, 2022/.test(funds) &&
+    /BDT 60,000 per person/.test(funds) &&
+    /BDT 120,000 per family/.test(funds) &&
+    !/BDT\s*60,000\s*(?:to|[-–])\s*BDT\s*150,000/i.test(funds) &&
+    /not guaranteed/i.test(timing) &&
+    b2HasNoLegacyStickerWorkflow(timing) &&
+    /approval is never guaranteed/i.test(firstTrip) &&
+    b2HasNoLegacyStickerWorkflow(destinationThailand)
+  );
+}
+const b2LandingFaqsAreSafe = b2LandingVisaFaqsAreSafe(LANDING_VISA_FAQS, LANDING_DESTINATION_FAQS);
+check(
+  b2LandingFaqsAreSafe,
+  b2LandingFaqsAreSafe
+    ? "landing visa and destination FAQs avoid a universal balance claim and use dated Thailand evidence with no sticker timeline"
+    : "landing visa FAQs must avoid the unsupported universal bank-balance range and stale sticker timeline"
+);
+const b2LandingFaqNegativeVisaFaqs = LANDING_VISA_FAQS.map((faq) =>
+  /standard bank balance/i.test(faq.question)
+    ? { ...faq, answer: `${faq.answer} Standard minimum BDT 60,000 to BDT 150,000.` }
+    : faq
+);
+const b2LandingFaqNegativeControlWorks =
+  b2LandingFaqsAreSafe &&
+  !b2LandingVisaFaqsAreSafe(b2LandingFaqNegativeVisaFaqs, LANDING_DESTINATION_FAQS);
+check(
+  b2LandingFaqNegativeControlWorks,
+  b2LandingFaqNegativeControlWorks
+    ? "landing FAQ guard rejects a deliberately reintroduced universal BDT 60,000–150,000 range (negative control)"
+    : "landing FAQ guard failed its universal-balance negative control"
+);
+
+function b2BangladeshEligibilityIsCurrent(text: string): boolean {
+  return (
+    /Advance Tourist e-Visa Required/.test(text) &&
+    /official e-Visa portal/i.test(text) &&
+    /current Dhaka mission checklist/i.test(text) &&
+    !/sticker|VFS|physical application|5-7 working days/i.test(text)
+  );
+}
+const b2BangladeshEligibilityIsSafe = b2BangladeshEligibilityIsCurrent(B2_INTERACTIVE_THAILAND_RESULT);
+check(
+  b2BangladeshEligibilityIsSafe,
+  b2BangladeshEligibilityIsSafe
+    ? "Bangladeshi Thailand eligibility tool reports the advance e-Visa route without VFS or a guaranteed timeline"
+    : "Bangladeshi Thailand eligibility tool must use the current advance e-Visa route"
+);
+const b2EligibilityNegativeSample = B2_INTERACTIVE_THAILAND_RESULT.replace(
+  "Advance Tourist e-Visa Required",
+  "Pre-arranged Sticker Visa Required"
+);
+const b2EligibilityNegativeControlWorks =
+  b2BangladeshEligibilityIsSafe &&
+  b2EligibilityNegativeSample !== B2_INTERACTIVE_THAILAND_RESULT &&
+  !b2BangladeshEligibilityIsCurrent(b2EligibilityNegativeSample);
+check(
+  b2EligibilityNegativeControlWorks,
+  b2EligibilityNegativeControlWorks
+    ? "eligibility-tool guard rejects a deliberately restored sticker-visa status (negative control)"
+    : "eligibility-tool guard failed its sticker-status negative control"
+);
+
+function b2TopicalAuthorityCopyIsSafe(text: string): boolean {
+  return (
+    /last updated November 30, 2022/i.test(text) &&
+    /BDT 60,000 per person or BDT 120,000 per family/i.test(text) &&
+    /৩০ নভেম্বর ২০২২/.test(text) &&
+    /BDT 60,000\/পরিবারে BDT 120,000/.test(text) &&
+    /Government visa fees, bank\/payment charges, and optional agency service fees are separate/i.test(text) &&
+    /সরকারি visa fee, bank\/payment charge ও optional agency fee আলাদা/.test(text) &&
+    !/BDT 65,000|THB 20,000 per Person|non-refundable visa fee/i.test(text) &&
+    !b2HasLegacyStickerWorkflow(text)
+  );
+}
+const b2TopicalCopyIsSafe = b2TopicalAuthorityCopyIsSafe(B2_TOPICAL_THAILAND_BLOCK);
+check(
+  b2TopicalCopyIsSafe,
+  b2TopicalCopyIsSafe
+    ? "topical-authority English/Bengali AEO answers use the dated evidence caveat and separate fee categories"
+    : "topical-authority Thailand answers must remove the old balance/fee claim and explain separate fee categories"
+);
+const b2TopicalNegativeSample = `${B2_TOPICAL_THAILAND_BLOCK}\nBDT 65,000 per person`;
+const b2TopicalNegativeControlWorks =
+  b2TopicalCopyIsSafe && !b2TopicalAuthorityCopyIsSafe(b2TopicalNegativeSample);
+check(
+  b2TopicalNegativeControlWorks,
+  b2TopicalNegativeControlWorks
+    ? "topical-authority guard rejects a deliberately restored BDT 65,000 threshold (negative control)"
+    : "topical-authority guard failed its stale-threshold negative control"
+);
+
+function b2MetaDescription(html: string): string {
+  return html.match(/<meta name="description" content="([^"]*)"\s*\/>/)?.[1]
+    ?.replace(/&amp;/g, "&")
+    ?.trim() ?? "";
+}
+function b2ThaiGuideMetaIsSafe(description: string, locale: "en" | "bn"): boolean {
+  return locale === "en"
+    ? /November 30, 2022/.test(description) &&
+        /BDT 60,000\/person/.test(description) &&
+        /BDT 120,000\/family/.test(description) &&
+        /Government, bank\/payment and optional agency charges are separate/i.test(description) &&
+        b2HasNoUnverifiedFeeAmount(description)
+    : /হালনাগাদ ৩০ নভেম্বর ২০২২/.test(description) &&
+        /জনপ্রতি BDT 60,000/.test(description) &&
+        /পরিবারে BDT 120,000/.test(description) &&
+        /সরকারি fee, bank\/payment ও optional agency fee আলাদা/.test(description) &&
+        b2HasNoUnverifiedFeeAmount(description);
+}
+function b2VisaHubMetaIsSafe(description: string, locale: "en" | "bn"): boolean {
+  return locale === "en"
+    ? /government e-Visa fee/i.test(description) &&
+        /bank\/payment charges/i.test(description) &&
+        /optional agency service fees are separate/i.test(description)
+    : /সরকারি fee/i.test(description) &&
+        /bank\/payment charge/i.test(description) &&
+        /optional agency fee আলাদা/i.test(description);
+}
+const B2_EN_GUIDE_META = b2MetaDescription(B2_EN_VISA_HTML);
+const B2_BN_GUIDE_META = b2MetaDescription(B2_BN_VISA_HTML);
+const B2_EN_HUB_META = b2MetaDescription(read(path.join(DIST_DIR, "visa.html")) ?? "");
+const B2_BN_HUB_META = b2MetaDescription(read(path.join(DIST_DIR, "bn", "visa.html")) ?? "");
+const b2LocalizedSeoCopyIsSafe =
+  b2ThaiGuideMetaIsSafe(B2_EN_GUIDE_META, "en") &&
+  b2ThaiGuideMetaIsSafe(B2_BN_GUIDE_META, "bn") &&
+  b2VisaHubMetaIsSafe(B2_EN_HUB_META, "en") &&
+  b2VisaHubMetaIsSafe(B2_BN_HUB_META, "bn");
+check(
+  b2LocalizedSeoCopyIsSafe,
+  b2LocalizedSeoCopyIsSafe
+    ? "English/Bengali Thai visa-guide and visa-hub meta descriptions carry current fee separation and dated evidence context"
+    : "visa-guide and visa-hub SEO descriptions must preserve the dated caveat and separate fee categories in both locales"
+);
+const b2BnMetaNegativeSample = B2_BN_GUIDE_META.replace(
+  "সরকারি fee, bank/payment ও optional agency fee আলাদা",
+  "সরকারি ও agency fees are bundled"
+);
+const b2SeoNegativeControlWorks =
+  b2LocalizedSeoCopyIsSafe &&
+  b2BnMetaNegativeSample !== B2_BN_GUIDE_META &&
+  !b2ThaiGuideMetaIsSafe(b2BnMetaNegativeSample, "bn");
+check(
+  b2SeoNegativeControlWorks,
+  b2SeoNegativeControlWorks
+    ? "localized SEO guard rejects a Bengali meta description with fee categories conflated (negative control)"
+    : "localized SEO guard failed its conflated-meta negative control"
+);
+
+function b2BudgetFeeDisclosureIsSafe(text: string, locale: "en" | "bn"): boolean {
+  return locale === "en"
+    ? /visa(?:-related)? charges are not itemized/i.test(text) &&
+        /government e-Visa fee/i.test(text) &&
+        /bank\/payment charges/i.test(text) &&
+        /optional agency(?: service)? fees?/i.test(text) &&
+        b2HasNoUnverifiedFeeAmount(text)
+    : /visa(?:-related)? charge.{0,80}itemized (?:নয়|নয়)/i.test(text) &&
+        /government.{0,20}fee/i.test(text) &&
+        /bank\/payment charge/i.test(text) &&
+        /optional agency(?: service)? fee/i.test(text) &&
+        b2HasNoUnverifiedFeeAmount(text);
+}
+function b2TripBudgetSurfacesAreSafe(enSurfaces: string[], bnSurfaces: string[]): boolean {
+  return (
+    enSurfaces.every((text) => Boolean(text) && b2BudgetFeeDisclosureIsSafe(text, "en")) &&
+    bnSurfaces.every((text) => Boolean(text) && b2BudgetFeeDisclosureIsSafe(text, "bn"))
+  );
+}
+const B2_EN_FAMILY_BUDGET_SUMMARY =
+  BLOG_DATA.find((post) => post.slug === B2_FAMILY_ARTICLE_SLUG)?.summary ?? "";
+const B2_BN_FAMILY_BUDGET_SUMMARY =
+  BENGALI_BLOG_OVERRIDES[B2_FAMILY_ARTICLE_SLUG]?.summary ?? "";
+const B2_EN_COST_META = b2MetaDescription(B2_EN_COST_HTML);
+const B2_BN_COST_META = b2MetaDescription(B2_BN_COST_HTML);
+const B2_EN_BUDGET_SURFACES = [
+  B2_THAI_COST_EN?.quickAnswer ?? "",
+  visibleText(B2_EN_COST_HTML),
+  B2_EN_COST_META,
+  B2_DESTINATION_EN?.budgetBdt ?? "",
+  B2_DESTINATION_EN?.quickAnswer ?? "",
+  visibleText(B2_EN_DESTINATION_HTML),
+  B2_EN_FAMILY_BUDGET_SUMMARY,
+  B2_FAMILY_BUDGET_TOPIC_BLOCK,
+];
+const B2_BN_BUDGET_SURFACES = [
+  B2_THAI_COST_BN?.quickAnswer ?? "",
+  visibleText(B2_BN_COST_HTML),
+  B2_BN_COST_META,
+  B2_DESTINATION_BN?.budgetBdt ?? "",
+  B2_DESTINATION_BN?.quickAnswer ?? "",
+  visibleText(B2_BN_DESTINATION_HTML),
+  B2_BN_FAMILY_BUDGET_SUMMARY,
+  B2_FAMILY_BUDGET_TOPIC_BLOCK,
+];
+const b2BudgetEstimateCopyIsSafe = b2TripBudgetSurfacesAreSafe(
+  B2_EN_BUDGET_SURFACES,
+  B2_BN_BUDGET_SURFACES
+);
+check(
+  b2BudgetEstimateCopyIsSafe,
+  b2BudgetEstimateCopyIsSafe
+    ? "Thailand trip-cost and family-budget estimates disclose that visa charges are not itemized and must be checked separately"
+    : "Thailand trip-cost, destination, and family-budget surfaces must not imply an unverified visa fee is included in their estimates"
+);
+const b2BudgetFeeNegativeSample = (B2_THAI_COST_EN?.quickAnswer ?? "").replace(
+  "Visa-related charges are not itemized",
+  "The current government visa fee is BDT 6,500"
+);
+const b2BudgetFeeNegativeControlWorks =
+  b2BudgetEstimateCopyIsSafe &&
+  b2BudgetFeeNegativeSample !== (B2_THAI_COST_EN?.quickAnswer ?? "") &&
+  !b2TripBudgetSurfacesAreSafe(
+    [b2BudgetFeeNegativeSample, ...B2_EN_BUDGET_SURFACES.slice(1)],
+    B2_BN_BUDGET_SURFACES
+  );
+check(
+  b2BudgetFeeNegativeControlWorks,
+  b2BudgetFeeNegativeControlWorks
+    ? "trip-budget guard rejects a deliberately hardcoded visa fee in an estimate (negative control)"
+    : "trip-budget guard failed its hardcoded-fee negative control"
+);
 
 // --- Report ----------------------------------------------------------------
 

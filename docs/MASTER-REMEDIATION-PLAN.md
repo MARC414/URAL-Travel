@@ -82,11 +82,19 @@ any `App.tsx` meta → one commit per fix → validate.
 - **B1. Vaccine validity (ENHANCE).** At ACWY/Meningococcal mentions add: conjugate
   = 5-yr / polysaccharide = 3-yr validity; ≥10 days before travel; COVID now
   **selective** (65+, pregnant, immunocompromised); flu recommended. Src: Saudi MOH.
-- **B2. Thailand fee clarity (ENHANCE).** Split the conflated price: **gov e-Visa
-  ≈ USD 40 (~BDT 4,890), bank transfer via Commercial Bank of Ceylon Bangladesh**;
-  **agency service fee (BDT 1,600–3,610) as a separate line**; add **proof-of-funds
-  floor** (verify exact figure at dhaka.thaiembassy.org; commonly ~BDT 60k indiv /
-  120k family). Do NOT add VoA language — site already says e-Visa.
+- **B2. Thailand fees and financial evidence (SOURCE-SAFE — completed 2026-10-14).**
+  Keep three costs distinct: the current government Tourist e-Visa fee (check the
+  live portal/Embassy schedule), separate bank/payment-provider charges, and
+  optional agency service fees (provider-set; request an itemized quote). Do not
+  publish a current government amount or agency range until its primary/current
+  source is confirmed. Preserve the dated evidence carefully: the Dhaka Embassy
+  TR checklist last updated **November 30, 2022** lists six-month statements and
+  BDT 60,000 per person / BDT 120,000 per family; the general Tourist Visa page
+  differs, so users must confirm the current Dhaka prompt in the portal. Retire
+  stale sticker/VFS instructions; do not imply approval or timing is guaranteed.
+  Sources: [official fee schedule](https://dhaka.thaiembassy.org/en/content/consular-service-fee-updated-september-2025?page=5d83296215e39c2540006a05&menu=5d83296215e39c2540006a0e),
+  [payment notice](https://dhaka.thaiembassy.org/en/content/facilitation-ofe-visa-payment?page=5d83296215e39c2540006a05&menu=5d83296215e39c2540006a0e),
+  [dated TR checklist](https://dhaka.thaiembassy.org/en/publicservice/tourist-visa-tr?page=5d83296315e39c2540006a6c&menu=5d83296315e39c2540006a6d).
 - **B3. EC261 carrier carve-out (ENHANCE).** Add: *"covers flights departing an
   EU/UK airport or on an EU/UK carrier; generally does NOT cover Biman, Saudia,
   Emirates, Qatar on Dhaka↔Jeddah."*

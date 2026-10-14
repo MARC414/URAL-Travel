@@ -28,7 +28,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
               aria-labelledby="blog-hero-h1"
 
-              className="w-screen relative left-1/2 -translate-x-1/2 -mt-6 sm:-mt-8 bg-brand-navy text-white overflow-hidden border-b border-slate-800 shadow-xl"
+              className="w-screen relative left-1/2 -translate-x-1/2 -mt-10 sm:-mt-12 bg-brand-navy text-white overflow-hidden border-b border-slate-800 shadow-xl"
 
             >
 

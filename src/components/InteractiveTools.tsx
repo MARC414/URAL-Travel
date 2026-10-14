@@ -162,7 +162,7 @@ export function InteractiveTools() {
   const visaEligibilityMap = {
     bd: {
       np: { status: "Visa On Arrival", color: "text-emerald-600 bg-emerald-50 border-emerald-200", text: "Bangladeshi passport holders receive an instant 15/30/90 days Visa on Arrival. First entry of the calendar year is completely GRATIS (Free) for SAARC nationals!" },
-      th: { status: "Pre-arranged Sticker Visa Required", color: "text-amber-700 bg-amber-50 border-amber-200", text: "Must submit a physical application with Bank Solvency, statement, and NOC via VFS Global Dhaka/Chattogram before departure. Typically takes 5-7 working days." },
+      th: { status: "Advance Tourist e-Visa Required", color: "text-amber-700 bg-amber-50 border-amber-200", text: "Apply through Thailand's official e-Visa portal and follow the current Dhaka mission checklist before departure. Approval and processing time are not guaranteed." },
       my: { status: "eVisa (Fast Online Approval)", color: "text-blue-700 bg-blue-50 border-blue-200", text: "An eVisa is easily applied for online with 100% approval rates when bank statements show BDT 80,000+ per person. Processing duration: 48-72 hours." },
       ae: { status: "eVisa via Register Agencies", color: "text-pink-700 bg-pink-50 border-pink-200", text: "Tourist visas are applied online via registered travel agencies or flies carriers (Emirates, flydubai) at least 5 days prior to boarding." }
     },
