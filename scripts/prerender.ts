@@ -1462,6 +1462,39 @@ function buildAllRoutes(): PrerenderRoute[] {
     `,
   });
 
+  // 8b. KKday Hotel & Stay Deals (/kkday-hotels). Klook is the primary hotel
+  // search on /hotels/:city; KKday stays live on this dedicated page.
+  // Affiliate URL mirrors AFFILIATE_LINKS.kkday in src/components/AffiliatePartners.tsx.
+  routes.push({
+    routePath: "/kkday-hotels",
+    canonicalUrl: `${BASE_URL}/kkday-hotels`,
+    title: "KKday Hotel & Stay Deals for Bangladeshi Travelers | URAL",
+    description:
+      "Compare hotels and stays on KKday from Bangladesh, with city guides for Kathmandu, Bangkok, Kuala Lumpur, Singapore, Maldives and Dubai. Check cancellation terms before paying.",
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "KKday Hotel & Stay Deals", url: `${BASE_URL}/kkday-hotels` },
+    ],
+    bodyHtml: `
+      <article>
+        <h1>KKday Hotel &amp; Stay Deals</h1>
+        <p>Compare hotels and stays on KKday before you book. Check the final price, cancellation terms, and voucher details on KKday before you pay. This is an affiliate link: URAL may earn a commission at no extra cost to you.</p>
+        <p><a href="https://kkday.tpo.li/3Ecyxris" rel="noopener noreferrer sponsored">Search hotels on KKday</a></p>
+        <h2>Hotel guides by city</h2>
+        <ul>
+          <li><a href="/hotels/kathmandu-hotels">Kathmandu &amp; Pokhara</a></li>
+          <li><a href="/hotels/bangkok-hotels">Bangkok</a></li>
+          <li><a href="/hotels/kuala-lumpur-hotels">Kuala Lumpur</a></li>
+          <li><a href="/hotels/singapore-hotels">Singapore</a></li>
+          <li><a href="/hotels/maldives-hotels">Maldives</a></li>
+          <li><a href="/hotels/dubai-hotels">Dubai</a></li>
+        </ul>
+      </article>
+    `,
+    extraGraphNodes: [],
+  });
+
   // 9. Tools Hub (/tools)
   const toolsFaq = getFaqSchemaForPage("tools", undefined, true, `${BASE_URL}/tools`);
   routes.push({
