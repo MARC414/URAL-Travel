@@ -352,6 +352,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://ural-travel.pages.dev/kkday-hotels</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://ural-travel.pages.dev/tools</loc>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools" />
