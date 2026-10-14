@@ -265,51 +265,81 @@ Because Nepal and the Maldives offer free Visa on Arrival to Bangladeshi citizen
 - Dress neatly and confidently.
 - Know your hotel name and your basic 4–5 day sightseeing plan (e.g., "We are staying 3 nights in Thamel, Kathmandu and 2 nights in Pokhara Lakeside").
 - Carry at least $300–$500 Cash USD in hand OR an endorsed Dual-Currency Card with your bank statement so you can immediately demonstrate sufficient funds.`,
-  "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": `Every year, hundreds of thousands of Bangladeshi Muslims travel to Makkah and Madinah for Umrah and Hajj. Because rules from the Saudi Ministry of Hajj & Umrah and the Bangladesh Ministry of Religious Affairs have modernized rapidly, having accurate, verified information is essential so your family is never overcharged or misled.
+  "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": `For a Bangladeshi passport holder, DIY Umrah means managing the trip independently where the selected visa route allows it; it does not mean every visa is sold on its own or that an agent is never needed. The three route categories are: a Standard Umrah Visa (direct Nusuk service or an external provider), an eligible 96-hour stopover visa, and an eligible Saudi tourist-visa route. The existing 10-day estimate remains BDT 1,16,000–1,32,000 per person for a family of four sharing; it was carried forward, not re-priced. Fard Hajj has separate Bangladesh registration and Saudi permit requirements.
 
-1. CRUCIAL DISTINCTION: OFFICIAL HAJJ VS. INDEPENDENT (DIY) UMRAH FOR BANGLADESHIS
-Before planning, every Bangladeshi pilgrim must understand the strict legal separation between Hajj and Umrah:
-- HAJJ (Strictly Regulated Quota System): You CANNOT perform obligatory Hajj independently on an Umrah visa, Transit visa, or Tourist visa. Saudi authorities strictly enforce a SAR 10,000+ fine, deportation, and a 10-year entry ban for anyone attempting Hajj without an official Hajj Permit/Nusuk Hajj Card. To perform Hajj from Bangladesh, you must complete official Pre-Registration (Prak-Nibondhon) and Final Registration (Nibondhon) through the Bangladesh Ministry of Religious Affairs portal (hajj.gov.bd) using your NID and e-Passport, under either the Government Hajj Package or a Ministry-Approved Licensed Hajj Agency.
-- UMRAH (Flexible Year-Round Outside the Hajj Season): Unlike Hajj, you DO NOT have to buy an overpriced all-inclusive group package to perform Umrah! Once you obtain a valid Saudi Umrah e-Visa (or Stopover Visa), you are legally free to book your own Dhaka–Jeddah/Madinah flights, choose your own Makkah and Madinah hotels near the Haram, and travel at your family's own pace.
+This guide was checked against official sources on 14 October 2026. Visa, season, permit and fare conditions can change; follow the current application and operator pages before booking.
 
-2. THE 3 VERIFIED UMRAH VISA PATHWAYS FOR BANGLADESHI PASSPORT HOLDERS
-Be careful of social media rumors claiming any Bangladeshi passport can apply for an instant Saudi Tourist e-Visa online—that rule only applies to specific visa holders. Here are the 3 authentic ways Bangladeshi citizens get an Umrah visa in 2026:
+1. Umrah and Fard Hajj use different systems
+Umrah and Hajj are distinct pilgrimages with different entry and permit rules. An Umrah, tourist or stopover visa is not a Hajj permit. For Fard Hajj from Bangladesh, use the Bangladesh Haj Management Portal's registration process and the Saudi authorities' current Hajj permit rules [11–12].
 
-Pathway A: 90-Day Umrah e-Visa via an Authorized Bangladesh Umrah Agency (Open to All Valid Passports)
-- Who qualifies: Any Bangladeshi citizen with an e-Passport or MRP valid for at least 6 months.
-- How it works: Submit your passport scan and passport photo to a Ministry/Nusuk-authorized Umrah agency in Dhaka for "Visa + Mandatory Saudi Health Insurance Only" (without buying their hotel or flight bundle).
-- Processing time & cost: Issued in 2 to 5 working days as a PDF e-Visa; typically costs BDT 15,500 – BDT 19,500 per person.
+The Bangladesh portal's notice for the 2027 Hajj season listed 26 September 2026 as the registration cutoff. That date had passed by this guide's review on 14 October 2026. Check the portal for any later extension or notice; do not assume registration is open or carry this year's cutoff into another season [11].
 
-Pathway B: 96-Hour Saudi Stopover / Transit Visa (When Flying Saudia or Flynas)
-- Who qualifies: Bangladeshi travelers booking an international transit flight on Saudia (Saudi Arabian Airlines) or Flynas (for example, flying Dhaka → Jeddah → Dubai/Istanbul/London or vice versa).
-- How it works: During flight checkout on the official Saudia or Flynas website, select the "Stopover Visa" option (up to 96 hours / 4 days stay in Saudi Arabia). The visa is issued electronically within minutes for ~SAR 39.50 + mandatory medical insurance (~BDT 3,500 – BDT 4,500 total), and eligible Saudia stopover tickets include 1 complimentary hotel night!
+For 1447H (2026), the Saudi Ministry of Interior notice reported by the Saudi Press Agency sets fines of up to SAR 20,000 for performing or attempting Hajj without a permit, and for visit-visa holders entering or remaining in Makkah or the Holy Sites during the specified restriction period. The notice's ten-year re-entry ban applies to the narrower category of deported infiltrators; it is not a universal ban for every visitor. These details are season-bound; check the next official notice for later Hajj seasons [12].
 
-Pathway C: Instant 1-Year Saudi Tourist e-Visa or Visa on Arrival (ONLY for US/UK/Schengen Visa Holders)
-- Who qualifies: Bangladeshi passport holders who hold a valid, physical US, UK, or Schengen tourist/business visa that has been stamped/used at least once to enter the issuing country (or permanent residents of the US, UK, or EU).
-- How it works: Eligible travelers can apply directly on visa.visitsaudi.com or obtain a Visa on Arrival at Jeddah (JED) or Madinah (MED) airport for ~SAR 480 (~BDT 15,500).
+2. The three visa routes for Bangladeshi passport holders
+Pathway 1: Standard Saudi Umrah Visa — direct Nusuk or an external provider
+The Ministry announced its Nusuk Umrah service for overseas pilgrims on 20 August 2025. As checked on 14 October 2026, Bangladesh appears in the Nusuk registration lists for nationality and residence. That makes the direct service worth checking; it does not guarantee approval or mean every service is available to every applicant. The launch announcement describes selecting services, while the current terms define packages as bundles of multiple services. Do not assume a stand-alone visa-only checkout: confirm the live offer and terms for your case [1–4].
 
-3. MANDATORY APPS & HEALTH REQUIREMENTS BEFORE FLYING FROM DHAKA
-- Saudi Visa Bio App (Biometrics): Download the official "Saudi Visa Bio" app on your smartphone to scan your passport, face, and 10 fingerprints before flying (mandatory for Hajj pilgrims and required for visa biometrics).
-- Official Nusuk App (nusuk.sa): Once your Umrah or Stopover visa is issued, create an account on the official Nusuk app using your Visa Number and Passport Number. You will use Nusuk to book your Umrah appointment slot and your mandatory Rawdah Shareef (Riyazul Jannah) permit in Masjid an-Nabawi, Madinah. Tip: Rawdah permits for men and women open on separate schedules—check Nusuk early!
-- Vaccination Certificate: Carry your Meningococcal Meningitis (ACWY-135) vaccination card. Two types exist — conjugate (valid **5 years**) and polysaccharide (valid **3 years**). Ensure the shot is taken **at least 10 days before travel**. Seasonal Influenza vaccination is also recommended. COVID-19 vaccination is **not mandatory** but may be **selectively advised** for pilgrims aged 65+, pregnant, or immunocompromised — check the latest Saudi MOH guidance before departure. Carry the card alongside your printed e-Visa, confirmed return air ticket, hotel vouchers, and endorsed Dual-Currency Card / Cash USD or SAR.
+A Ministry-authorized external Umrah agent is another channel within this same visa category. The Ministry FAQ says an external agent cannot issue an Umrah visa without accommodation and transport services. Before paying, verify the provider through the Ministry's current channel and get the included services, supplier, cancellation conditions and total in writing. Do not rely on an old “visa only” quote or an unlicensed intermediary [4].
 
-4. FLIGHTS & HARAMAIN HIGH-SPEED TRAIN: SMART ROUTING FROM DHAKA
-- Best Flight Strategy ("Open-Jaw / Multi-City Ticket"): Instead of flying Dhaka → Jeddah → Dhaka and backtracking by road, book a Multi-City ticket: Fly Dhaka (DAC) → Jeddah (JED), wear your Ihram before crossing the Miqat (Yalamlam / Qarn al-Manazil—announced by the pilot 45 minutes before landing on Biman and Saudia flights), perform Umrah in Makkah, take the bullet train to Madinah, and fly home directly from Madinah (MED) → Dhaka (DAC).
-- Direct Airlines from Dhaka: Biman Bangladesh Airlines and Saudia operate direct flights (~6 to 6.5 hours; roundtrip BDT 74,000 – BDT 92,000). Budget 1-stop options include Gulf Air, SalamAir, Jazeera Airways, Air Arabia, and Kuwait Airways (BDT 56,000 – BDT 68,000).
-- Haramain High-Speed Railway (sar.hhr.sa): Connects Jeddah Airport (KAIA Station inside Terminal 1) directly to Makkah Station in 55 minutes (Economy fare: SAR 60–75 / ~BDT 2,100), and connects Makkah to Madinah in just 2 hours 20 minutes at 300 km/h (Economy fare: SAR 150–220 / ~BDT 5,200–7,200).
+Pathway 2: Eligible 96-hour Saudi stopover visa
+Visit Saudi describes a stopover of up to 96 hours for eligible travelers booking a qualifying itinerary with Saudia or flynas. The flight and application conditions are route- and airline-specific; check the carrier's live checkout before buying. At the 14 October 2026 check, Visit Saudi listed Saudia's visa itself as free, with an application fee around SAR 39.50 and insurance from SAR 13. Those are checkout line items, not a guaranteed total for every airline or passenger. Do not book on the assumption that a hotel night is included [6–7].
 
-5. WHERE TO STAY IN MAKKAH & MADINAH (HOTEL ZONES EXPLAINED)
-- Makkah Walking-Distance Zones: Jabal Omar, Abraj Al Bait (Clock Tower), and northern Ajyad / Ibrahim Al Khalil Street (0 to 500 meters from Masjid al-Haram courtyard; ideal for elderly parents and children, from BDT 14,000 – BDT 32,000/night).
-- Makkah Budget Shuttle Zones: Mahbas Al Jin, Kudai, and Aziziyah / Naseem (3-to-4 star clean hotels with dedicated 24/7 free shuttle buses dropping you at the Haram tunnel in 8–10 minutes; from BDT 4,200 – BDT 7,500/night).
-- Madinah Best Zone for Families: Markazia North & West (Central Area) stays 100–300 meters from Masjid an-Nabawi gates. If traveling with female family members, book a hotel on the Northern side near Ladies' Gates 25 to 29 for effortless prayer access.
+Pathway 3: Eligible Saudi tourist-visa routes
+Bangladesh is not shown in the standard nationality-only eVisa list on the official portal as checked on 14 October 2026. Visit Saudi separately lists Bangladeshi passport holders for its Package Visa, which requires an integrated package through an approved provider with confirmed flights and accommodation. Treat this Package Visa as a sub-route of the tourist-visa category, not a fourth category [8–9].
 
-6. REALISTIC 10-DAY DIY UMRAH BUDGET FROM BANGLADESH (PER PERSON IN BDT, FAMILY OF 4 SHARING)
-- Roundtrip Flights (DAC–JED / MED–DAC): BDT 58,000 (1-Stop) to BDT 78,000 (Direct Biman/Saudia)
-- Umrah e-Visa + Mandatory Saudi Medical Insurance: BDT 16,500
-- 5 Nights Makkah + 4 Nights Madinah Hotels (Per Person Share): BDT 22,000 (Shuttle/Budget 3-Star) to BDT 55,000 (Walking-Distance 4/5-Star)
-- Haramain Bullet Train / Private Family GMC or Hyundai H1 Van: BDT 7,500 – BDT 11,000
-- Daily Halal Meals & Ziyarah Tours (Taif, Badr, Quba Mosque, Mount Uhud): BDT 12,000 – BDT 18,000
-- Total Estimated 10-Day Umrah Cost per Person: BDT 1,16,000 – BDT 1,32,000 (Budget Family Share) | BDT 1,65,000 – BDT 2,15,000 (Comfort Walking-Distance)`,
+Some travelers with a valid, previously used US, UK or Schengen tourist or business visa may qualify for a Saudi visit visa on arrival, subject to the live portal, carrier and arrival conditions [10]. GCC residents may have a separate route; check the current residence and occupation criteria on the official eVisa portal [9]. Confirm eligibility for your exact passport, residence and itinerary; do not assume a one-year or multiple-entry visa [9–10]. Any tourist-visa route used for Umrah remains subject to the visa conditions, Nusuk services and Hajj-season restrictions. It does not authorize Hajj [4, 8–9, 12].
+
+3. Check the visa season and entry window
+Saudi Umrah entry is subject to the current season calendar and Hajj restrictions; do not describe it as unrestricted year-round. The Ministry's 1448H calendar lists final visa issuance on 9 March 2027, final pilgrim entry on 23 March 2027 and final departure on 7 April 2027. These dates apply to 1448H only. Check the next Ministry calendar before choosing dates or buying non-refundable travel [5].
+
+4. A practical booking sequence
+- First choose the travel window and visa category. Confirm that the route, connecting itinerary and season fit your passport and plans; keep a copy of the official eligibility page you used.
+- Check the live visa requirements and application steps before paying for non-refundable flights or hotels. For the direct Nusuk service, read the current package terms; for an external agent, get accommodation and transport details in writing [2–4].
+- Compare date-specific flights from Dhaka. A multi-city or open-jaw itinerary such as Dhaka–Jeddah outbound and Madinah–Dhaka return may avoid backtracking, but it is not automatically cheaper. Check baggage, transit requirements, airport changes and cancellation terms with the airline before purchase.
+- Choose hotels by the exact property address and room terms, not by a neighborhood label or an unverified distance. Check the route to the gate your family will use, slopes, accessibility, occupancy, shuttle service and cancellation policy directly with the property. Our Makkah and Madinah hotel-zone guide is a starting point, not a substitute for checking the booked address.
+- After your visa is issued, follow the current Ministry/Nusuk instructions for any Umrah permit and choose only an available date and time. Rawdah visits in Madinah use a separate permit service. The official service pages show the live booking channel; they do not promise a fixed slot-release schedule or availability [15–16].
+- The Ministry FAQ lists Bangladesh among countries where biometrics are implemented for electronically issued Umrah visas. Follow the instructions in your own visa application and the official Saudi Visa Bio service; do not assume this requirement applies to every tourist or stopover visa [4].
+- Keep your passport, approved visa, flight details, accommodation and transport confirmations, permit details and emergency contacts accessible offline as well as on your phone. Check the airline's document requirements before departure.
+
+If you use a dual-currency card for online bookings, confirm international e-commerce access and your bank's current limits before checkout. See our Dual-Currency Card Endorsement Guide for the Bangladesh-side payment steps.
+
+5. Makkah–Madinah transport: check the current HHR fare and baggage rules
+Haramain High-Speed Railway booking and fare pages are the source for the latest schedule and ticket terms. On 14 October 2026, the official fare table listed base Economy fares of SAR 162 for Makkah–Madinah and SAR 65 for King Abdulaziz International Airport (KAIA)–Makkah. The operator says these are basic fares before VAT and fees; checkout prices vary by travel date, availability and other factors. Treat these figures as a dated reference, not a promised ticket price [17].
+
+The HHR baggage guidance allows one large item up to 25 kg and 65 × 55 × 35 cm, plus one hand item. Check the current operator page and your ticket conditions before packing; do not rely on the older, smaller dimensions copied into some travel posts [18].
+
+6. Health, permits and documents
+Saudi health requirements are seasonal and can depend on the traveler's origin. Check the Ministry of Health's current Umrah requirements for your travel season and country of departure. The linked 1447H PDF is specific to that season and should not be treated as the rule for 1448H or a later season [13–14].
+
+Use official Nusuk/Ministry services to check permit eligibility and appointment availability. An app account is not the same thing as an issued visa, a permit or permission to enter a restricted area. Keep those documents and dates separate when planning [2, 4, 15–16].
+
+7. Budget: retain one planning estimate
+The published total below is retained from the existing article. It has not been re-priced in this 14 October 2026 refresh, and the old component figures were not a verified, reconciled booking basket. Treat it as a planning reference—not a live quote, a guaranteed trip total or proof that DIY is cheaper than an agency package.
+
+[[UMRAH_BUDGET_TABLE]]
+
+No matched, itemized agency quote for the same dates, trip length, family room-sharing, flight baggage, visa, hotel nights, meals and transfers was captured for this update. To compare a package with DIY, request both totals on that same basis and check taxes, insurance, transport, cancellation terms and what is excluded. Neither route is automatically the cheaper one.
+
+8. Before departure: a verification checklist
+- Re-check the visa route, current season calendar and Hajj restriction dates on the official pages.
+- Confirm that the name, passport number, validity, entry count and permitted stay on the issued visa match the traveler and itinerary.
+- Confirm any visa-specific biometrics, Nusuk permit and Rawdah appointment from the current official service pages.
+- Reconfirm hotel address, room occupancy, accessibility and transport arrangements with the property or provider.
+- Recheck the HHR fare, baggage allowance and ticket details, and each airline's baggage and transit conditions.
+- Save official documents offline and retain provider receipts and written service terms.
+
+9. Frequently Asked Questions
+Can I apply for an Umrah visa directly through Nusuk from Bangladesh?
+Bangladesh is listed in the Nusuk registration options checked on 14 October 2026, so start by checking the live Nusuk Umrah service. Registration is not visa approval, and the available package or visa-only option depends on current checkout terms [1–4].
+Does an external Umrah agent issue a visa without accommodation and transport?
+The Ministry FAQ says an external agent cannot issue an Umrah visa without accommodation and transport services. Ask the provider to specify these services and all charges in a written contract [4].
+Can I use a tourist or stopover visa for Fard Hajj?
+No. An Umrah, tourist or stopover visa does not replace Bangladesh Hajj registration or the Saudi Hajj permit. Follow the current Bangladesh and Saudi Hajj instructions [11–12].
+Is the 10-day DIY Umrah figure a current booking quote?
+No. The table preserves the previously published family-of-four-sharing planning estimate; this refresh did not re-price it or verify it against a live booking basket.
+Where do I book Umrah and Rawdah permits?
+Use the official Ministry/Nusuk service shown for your case, then choose an available appointment. Umrah and Rawdah permits are separate services, and availability is not guaranteed [15–16].`,
   "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": `When Bangladeshi families plan an Umrah trip—especially with elderly parents or young children—the difference between an exhausting journey and a peaceful spiritual experience comes down to three ground logistics: choosing the right hotel zone near the Haramain, mastering the Haramain High-Speed Bullet Train, and knowing the official Zamzam and Ziyarah rules.
 
 1. MAKKAH HOTEL ZONES: FLAT WALKING ACCESS VS. STEEP HILLS

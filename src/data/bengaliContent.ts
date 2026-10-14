@@ -24,56 +24,215 @@ export const BENGALI_BLOG_OVERRIDES: Record<
   }
 > = {
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": {
-    title: "বাংলাদেশ থেকে Umrah ও Hajj প্রস্তুতি গাইড (2026): অফিশিয়াল Visa নিয়ম, Nusuk App, Flight ও BDT বাজেট",
+    title: "বাংলাদেশ থেকে DIY Umrah গাইড (২০২৬–২৭): Nusuk, Visa Route, BDT বাজেট ও ফরজ Hajj নিয়ম",
     summary:
-      "প্রতি বছর বাংলাদেশ থেকে লক্ষ লক্ষ মুসলিম মক্কা ও মদিনায় Umrah এবং Hajj পালনের জন্য যান। কিন্তু সোশ্যাল মিডিয়ার ভুল তথ্যের কারণে অনেকেই অতিরিক্ত টাকা খরচ করেন অথবা Saudi e-Visa নিয়ম নিয়ে বিভ্রান্তিতে পড়েন। এই যাচাইকৃত 2026 গাইডে বাংলাদেশ ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এর মাধ্যমে ফরজ Hajj রেজিস্ট্রেশন এবং নিজে নিজে কম খরচে DIY Umrah প্ল্যান করার নিয়ম সহজ বাংলায় তুলে ধরা হয়েছে। এখানে থাকছে বাংলাদেশি পাসপোর্টধারীদের জন্য ৩টি বৈধ Umrah Visa পদ্ধতি, বাধ্যতামূলক Saudi Visa Bio ও Nusuk App (Rawdah Permit), Dhaka–Jeddah/Madinah Open-Jaw Flight টিপস এবং ১০ দিনের সম্পূর্ণ BDT বাজেট (১,১৬,০০০ – ১,৩২,০০০ টাকা)।",
+      "বাংলাদেশি পাসপোর্টধারীদের Umrah-এর জন্য তিনটি visa route আছে: Nusuk বা বাইরের সেবাদাতার Standard Umrah Visa, শর্তসাপেক্ষ ৯৬ ঘণ্টার stopover, এবং যোগ্য Saudi tourist-visa route। এই গাইডে ফরজ Hajj-এর আলাদা নিবন্ধন ও permit, ১৪৪৮ হিজরি মৌসুম এবং চারজনের পরিবারের শেয়ারে ১০ দিনের আগের planning estimate জনপ্রতি BDT 1,16,000–1,32,000—নতুন করে দাম যাচাই না করে—তুলে ধরা হয়েছে।",
     category: "Hajj & Umrah",
     date: "২৬ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "৮ মিনিট পড়া",
-    content: `বাংলাদেশ থেকে পবিত্র মক্কা ও মদিনায় যাওয়ার পরিকল্পনা করার সময় প্রথমেই পরিষ্কারভাবে জানা জরুরি যে সৌদি সরকার এবং বাংলাদেশ সরকারের নিয়ম অনুযায়ী **ফরজ Hajj** এবং **Umrah**-এর প্রক্রিয়া সম্পূর্ণ আলাদা।
+    readTime: "১১ মিনিট পড়া",
+    references: [
+      {
+        name: "Saudi Ministry of Hajj and Umrah — Nusuk Umrah launch for overseas pilgrims",
+        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — বিদেশি যাত্রীদের জন্য Nusuk Umrah সেবা চালুর ঘোষণা",
+        url: "https://haj.gov.sa/en/Media-Center/Ministry-News/Ministry-of-Hajj-and-Umrah-launches-Nusuk-Umrah-service-to-enable-pilgrims-from-outside-the-Kingdom",
+      },
+      {
+        name: "Nusuk Umrah — registration",
+        nameBn: "Nusuk Umrah — নিবন্ধন পেজ",
+        url: "https://umrah.nusuk.sa/registration/signup",
+      },
+      {
+        name: "Nusuk Umrah — Terms of Use",
+        nameBn: "Nusuk Umrah — ব্যবহারের শর্ত",
+        url: "https://umrah.nusuk.sa/TermsOfUse",
+      },
+      {
+        name: "Saudi Ministry of Hajj and Umrah — FAQ",
+        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — FAQ",
+        url: "https://haj.gov.sa/en/FAQ",
+      },
+      {
+        name: "Saudi Ministry — 1448H Umrah season calendar",
+        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — ১৪৪৮ হিজরি Umrah মৌসুমের calendar",
+        url: "https://haj.gov.sa/en/Media-Center/Ministry-News/2026/Ministry-of-Hajj-and-Umrah-Announces-the-Umrah-Season-Calendar-for-1448-AH",
+      },
+      {
+        name: "Visit Saudi — Saudi Stopover Visa",
+        nameBn: "Visit Saudi — Saudi Stopover Visa",
+        url: "https://www.visitsaudi.com/en/campaigns/saudi-stopover",
+      },
+      {
+        name: "Saudia — Transit Visa",
+        nameBn: "Saudia — Transit Visa আবেদন",
+        url: "https://www.saudia.com/transit-visa",
+      },
+      {
+        name: "Visit Saudi — Package Visa",
+        nameBn: "Visit Saudi — Package Visa",
+        url: "https://www.visitsaudi.com/en/campaigns/package-visa",
+      },
+      {
+        name: "Official Saudi eVisa portal",
+        nameBn: "সৌদি আরবের official eVisa portal",
+        url: "https://visa.visitsaudi.com/",
+      },
+      {
+        name: "Visit Saudi Help Center — used US, UK or Schengen visa eligibility",
+        nameBn: "Visit Saudi Help Center — আগে ব্যবহৃত US, UK বা Schengen visa-র যোগ্যতা",
+        url: "https://help.visitsaudi.com/hc/en-us/articles/360018933099-Can-I-get-a-visit-visa-if-I-have-a-valid-US-or-UK-or-Schengen-visa-",
+      },
+      {
+        name: "Bangladesh Haj Management Portal",
+        nameBn: "বাংলাদেশ Haj Management Portal",
+        url: "https://www.hajj.gov.bd/",
+      },
+      {
+        name: "Saudi Press Agency — 1447H Hajj permit-violation notice",
+        nameBn: "Saudi Press Agency — ১৪৪৭ হিজরি Hajj permit লঙ্ঘনের বিজ্ঞপ্তি",
+        url: "https://www.spa.gov.sa/en/N2559888",
+      },
+      {
+        name: "Saudi Ministry of Health — Pilgrim Health Requirements index",
+        nameBn: "Saudi Ministry of Health — Pilgrim Health Requirements সূচি",
+        url: "https://www.moh.gov.sa/en/healthawareness/pilgrims-health/pages/default.aspx",
+      },
+      {
+        name: "Saudi MOH — 1447H Umrah health regulations (season-specific)",
+        nameBn: "Saudi MOH — ১৪৪৭ হিজরি Umrah health rules (মৌসুমভিত্তিক)",
+        url: "https://www.moh.gov.sa/en/HealthAwareness/Pilgrims-Health/Documents/Health-Regulations-Umrah-EN.pdf",
+      },
+      {
+        name: "Saudi Ministry — Umrah Permit Application",
+        nameBn: "সৌদি মন্ত্রণালয় — Umrah Permit আবেদন",
+        url: "https://haj.gov.sa/en/E-Services/Umrah-Permit-Application",
+      },
+      {
+        name: "Saudi Ministry — permit to visit Al-Rawdah Al-Sharifiyah",
+        nameBn: "সৌদি মন্ত্রণালয় — Rawdah Al-Sharifiyah জিয়ারতের permit",
+        url: "https://haj.gov.sa/en/E-Services/Permit-to-Visit-Al-Rawdah-Al-Sharifiyah-for-Men-Women",
+      },
+      {
+        name: "Haramain High-Speed Railway — official fare table",
+        nameBn: "Haramain High-Speed Railway — official fare table",
+        url: "https://sar.hhr.sa/travel/fares",
+      },
+      {
+        name: "Haramain High-Speed Railway — baggage guidelines",
+        nameBn: "Haramain High-Speed Railway — baggage নির্দেশনা",
+        url: "https://sar.hhr.sa/travel/guidelines/baggage",
+      },
+      {
+        name: "Additional portal: Nusuk Saudi platform",
+        nameBn: "অতিরিক্ত portal: Nusuk Saudi platform",
+        url: "https://www.nusuk.sa",
+      },
+      {
+        name: "Additional portal: Saudi Ministry of Hajj and Umrah",
+        nameBn: "অতিরিক্ত portal: Saudi Ministry of Hajj and Umrah",
+        url: "https://www.haj.gov.sa",
+      },
+      {
+        name: "Additional portal: Saudi Unified Visa Platform",
+        nameBn: "অতিরিক্ত portal: Saudi Unified Visa Platform",
+        url: "https://ksavisa.sa",
+      },
+      {
+        name: "Additional portal: Haramain High-Speed Railway booking",
+        nameBn: "অতিরিক্ত portal: Haramain High-Speed Railway booking",
+        url: "https://sar.hhr.sa",
+      },
+      {
+        name: "Additional regional portal: UAE Government Portal (general reference only)",
+        nameBn: "অতিরিক্ত regional portal: UAE Government Portal (সৌদি Umrah নিয়মের উৎস নয়)",
+        url: "https://u.ae",
+      },
+    ],
+    content: `বাংলাদেশি পাসপোর্টধারীরা নিজে Umrah ভ্রমণ পরিকল্পনা করতে পারেন—তবে DIY মানে এই নয় যে সব ভিসা আলাদা করে কেনা যায় বা কখনোই এজেন্টের প্রয়োজন হয় না। ভিসার তিনটি পথ হলো: Standard Umrah Visa (সরাসরি Nusuk অথবা বাইরের সেবাদাতা), শর্তসাপেক্ষ ৯৬ ঘণ্টার Saudi stopover visa, এবং যোগ্যতার ভিত্তিতে Saudi tourist-visa route। চারজনের পরিবারের রুম-শেয়ারে ১০ দিনের আগের পরিকল্পনা-হিসাবটি জনপ্রতি BDT 1,16,000–1,32,000 রাখা হয়েছে; নতুন করে দাম যাচাই করা হয়নি। ফরজ Hajj-এর নিবন্ধন ও Saudi permit আলাদা।
 
-১. ফরজ HAJJ বনাম UMRAH: বাংলাদেশিদের জন্য সরকারি নিয়ম
-- **ফরজ Hajj (শধুমাত্র বার্ষিক হজ মৌসুম — জিলহজ মাস):** কোনো বাংলাদেশি নাগরিক ট্যুরিস্ট ভিসা বা সাধারণ e-Visa দিয়ে নিজে নিজে পবিত্র Hajj পালন করতে পারবেন না। ফরজ Hajj-এর জন্য অবশ্যই বাংলাদেশ সরকারের ধর্ম বিষয়ক মন্ত্রণালয়ের অফিশিয়াল পোর্টাল (hajj.gov.bd)-এ প্রাক-নিবন্ধন (Pre-Registration) এবং নিবন্ধন সম্পন্ন করতে হবে—সরকারি ব্যবস্থাপনায় অথবা মন্ত্রণালয় অনুমোদিত বৈধ Hajj এজেন্সির মাধ্যমে। এছাড়া সৌদি হজ মন্ত্রণালয় অনুমোদিত **Hajj Permit / Nusuk Hajj Smart Card** ছাড়া হজের সময় মক্কা, মিনা, আরাফাত বা মুজদালিফায় প্রবেশ সম্পূর্ণ নিষিদ্ধ।
-- **পবিত্র Umrah (হজের নির্ধারিত মৌসুম ছাড়া সারা বছর):** বাংলাদেশি নাগরিকরা হজ মৌসুম ব্যতীত বছরের যেকোনো সময় সম্পূর্ণ স্বাধীনভাবে (DIY) অথবা যেকোনো ট্রাভেল এজেন্সির সহায়তায় **Flight, Makkah ও Madinah Hotel, Haramain High-Speed Train এবং Umrah e-Visa** বুক করে সহজেই Umrah পালন করতে পারেন।
+এই গাইডের তথ্য ১৪ অক্টোবর ২০২৬ তারিখে সরকারি সূত্রের সঙ্গে মিলিয়ে দেখা হয়েছে। Visa, season, permit ও fare-এর শর্ত বদলাতে পারে—বুকিংয়ের আগে সংশ্লিষ্ট live application এবং operator-এর নির্দেশনা দেখুন।
 
-২. বাংলাদেশি পাসপোর্টে UMRAH VISA পাওয়ার ৩টি বৈধ উপায় (2026)
-- **উপায় A — স্ট্যান্ডার্ড Saudi Umrah e-Visa (সবচেয়ে জনপ্রিয়):** যেকোনো অনুমোদিত বাংলাদেশি ট্রাভেল এজেন্সি বা সৌদি B2B Umrah প্ল্যাটফর্মের মাধ্যমে আবেদন করা যায়। ভিসার মেয়াদ সাধারণত ৯০ দিন এবং ২ থেকে ৫ কার্যদিবসের মধ্যে ইস্যু হয়। খরচ পড়ে আনুমানিক **BDT 15,500 – BDT 19,500** (সৌদি স্বাস্থ্য বীমা সহ)।
-- **উপায় B — ৯৬ ঘণ্টার Saudi Stopover / Transit Visa:** আপনি যদি **Saudia (Saudi Arabian Airlines)** অথবা **Flynas**-এ ঢাকা থেকে দুবাই, ইস্তাম্বুল, লন্ডন, ইউরোপ বা উত্তর আমেরিকা যাওয়ার টিকিট কাটেন, তবে টিকিট বুকিংয়ের সময় মাত্র **~SAR 95–110 (BDT 3,200 – BDT 3,800)** ফি দিয়ে ৯৬ ঘণ্টার Transit Visa নিতে পারবেন। এই ৪ দিনে আপনি বৈধভাবে Umrah পালন ও মদিনা জিয়ারত করতে পারবেন।
-- **উপায় C — US / UK / Schengen Visa থাকলে Instant e-Visa বা Visa on Arrival:** আপনার বাংলাদেশি পাসপোর্টে যদি বৈধ এবং অন্তত একবার ব্যবহৃত **USA, UK অথবা Schengen ভিসা** থাকে, তবে আপনি সৌদি ই-ভিসা পোর্টাল থেকে তাৎক্ষণিক ১ বছরের Multiple-Entry e-Visa বা Jeddah/Madinah এয়ারপোর্টে **Visa on Arrival** পাবেন।
+১. Umrah ও ফরজ Hajj-এর নিয়ম আলাদা
+Umrah ও Hajj পৃথক ইবাদত, এবং প্রবেশ ও permit-এর নিয়মও এক নয়। Umrah, tourist বা stopover visa Hajj permit নয়। বাংলাদেশ থেকে ফরজ Hajj করতে বাংলাদেশ Haj Management Portal-এর নিবন্ধনপ্রক্রিয়া এবং সৌদি কর্তৃপক্ষের বর্তমান Hajj permit-এর নিয়ম অনুসরণ করতে হয় [১১–১২]।
 
-৩. ঢাকা ত্যাগের আগে ২টি বাধ্যতামূলক মোবাইল অ্যাপ (SAUDI VISA BIO ও NUSUK)
-- **Saudi Visa Bio App:** সৌদি ভিসা ইস্যু হওয়ার আগে এই অফিশিয়াল সরকারি অ্যাপে পাসপোর্ট স্ক্যান, মুখমণ্ডলের ছবি এবং দুই হাতের ১০ আঙুলের ছাপ (Biometrics) ঘরে বসেই সাবমিট করা যায়।
-- **Nusuk App (nusuk.sa):** আপনার ভিসা নাম্বার দিয়ে Nusuk অ্যাপে একাউন্ট খুলুন। মদিনা শরীফে মসজিদে নববীর ভেতর **রিয়াজুল জান্নাত (Rawdah Sharif)**-এ নামাজ পড়ার জন্য Nusuk অ্যাপ থেকে আগেভাগেই ফ্রি **Rawdah Permit** বুক করা বাধ্যতামূলক।
+বাংলাদেশের পোর্টালে ২০২৭ সালের Hajj নিবন্ধনের শেষ তারিখ ২৬ সেপ্টেম্বর ২০২৬ দেখানো হয়েছিল। এই গাইড ১৪ অক্টোবর ২০২৬ তারিখে পর্যালোচনার সময় সেটি পেরিয়ে গেছে। পোর্টালে পরবর্তী কোনো মেয়াদবৃদ্ধি বা নতুন বিজ্ঞপ্তি আছে কি না দেখুন; নিবন্ধন খোলা আছে ধরে নেবেন না এবং এই বছরের তারিখ অন্য বছরে প্রয়োগ করবেন না [১১]।
 
-৪. ঢাকা থেকে সেরা FLIGHT রুট: কেন "OPEN-JAW" টিকিটে টাকা ও সময় বাঁচে
-ঢাকা থেকে Jeddah যাওয়া-আসার সাধারণ রাউন্ডট্রিপ টিকিট না কেটে **Multi-City / Open-Jaw Ticket** কাটুন:
-- **যাত্রা:** Dhaka (DAC) → Jeddah (JED) [ইহরাম বেঁধে নামুন, সরাসরি মক্কায় গিয়ে Umrah সম্পন্ন করুন]।
-- **ফিরতি:** Madinah (MED) → Dhaka (DAC) [মদিনা জিয়ারত শেষে আবার ৪৫০ কিমি পথ ভেঙে জেদ্দায় ফেরার কষ্ট ও সময় বাঁচবে]।
-- **ডিরেক্ট ফ্লাইট:** Biman Bangladesh Airlines এবং Saudia (~৬ ঘণ্টা, ভাড়া **BDT 68,000 – BDT 82,000**)।
-- **সাশ্রয়ী কানেক্টিং ফ্লাইট:** Air Arabia, SalamAir, Jazeera Airways, Gulf Air ও Kuwait Airways (ভাড়া **BDT 52,000 – BDT 64,000**)।
+১৪৪৭ হিজরি (২০২৬) মৌসুমের জন্য Saudi Press Agency-তে প্রকাশিত সৌদি স্বরাষ্ট্র মন্ত্রণালয়ের বিজ্ঞপ্তিতে permit ছাড়া Hajj করা বা করার চেষ্টা এবং নির্দিষ্ট নিষেধাজ্ঞার সময়ে visit visa নিয়ে Makkah বা Holy Sites-এ প্রবেশ/অবস্থানের ক্ষেত্রে সর্বোচ্চ SAR 20,000 জরিমানার কথা আছে। বিজ্ঞপ্তির ১০ বছরের পুনঃপ্রবেশ নিষেধাজ্ঞা কেবল নির্দিষ্টভাবে নির্বাসিত infiltrator শ্রেণির জন্য; প্রত্যেক দর্শনার্থীর জন্য নয়। এই নিয়ম ১৪৪৭ হিজরি মৌসুমের জন্য—পরের Hajj মৌসুমে নতুন সরকারি বিজ্ঞপ্তি দেখুন [১২]।
 
-৫. মক্কা ও মদিনার সেরা HOTEL এরিয়া এবং HARAMAIN BULলেট ট্রেন
-- **মক্কা (Makkah):** বয়স্ক বাবা-মা সাথে থাকলে **Jabal Omar, Ibrahim Al Khalil Road অথবা Ajyad** এলাকায় সমতল রাস্তার হোটেল নিন। আর বাজেট সাশ্রয় করতে চাইলে **Mahbas Al Jin বা Kudai** এলাকায় থাকুন (ভাড়া মাত্র **BDT 4,500 – BDT 7,000/রাত**, ২৪ ঘণ্টা ফ্রি শাটল বাস সরাসরি হারাম শরীফে যায়)।
-- **মদিনা (Madinah):** পরিবারের নারী সদস্যদের সুবিধার জন্য **Markazia North** এলাকার হোটেল বেছে নিন, কারণ মসজিদে নববীর মহিলাদের প্রধান গেটগুলো (Gate 25–29) উত্তর দিকে অবস্থিত।
-- **Haramain High-Speed Train (sar.hhr.sa):** ৩০০ কিমি/ঘণ্টা গতির এই বুলেট ট্রেনে Jeddah Airport থেকে মক্কা মাত্র ৫৪ মিনিট (**~SAR 60–75 / BDT 2,100**) এবং মক্কা থেকে মদিনা মাত্র ২ ঘণ্টা ২০ মিনিট (**~SAR 150–200 / BDT 5,200**)।
+২. বাংলাদেশি পাসপোর্টধারীদের জন্য ভিসার তিনটি পথ
+পথ ১: Standard Saudi Umrah Visa — সরাসরি Nusuk অথবা বাইরের সেবাদাতা
+সৌদি হজ ও Umrah মন্ত্রণালয় ২০ আগস্ট ২০২৫ তারিখে বিদেশি Umrah যাত্রীদের জন্য Nusuk Umrah সরাসরি সেবার ঘোষণা দেয়। ১৪ অক্টোবর ২০২৬ তারিখে দেখা Nusuk registration তালিকায় nationality ও residence—দুই ক্ষেত্রেই Bangladesh ছিল। এতে সরাসরি সেবাটি যাচাই করার সুযোগ বোঝায়; ভিসা অনুমোদন বা প্রত্যেক সেবার নিশ্চয়তা নয়। উদ্বোধনী ঘোষণায় আলাদা সেবা বেছে নেওয়ার কথা থাকলেও বর্তমান Terms-এ package-কে একাধিক সেবার সমন্বয় বলা হয়েছে। তাই একা visa-only checkout পাওয়া যাবে ধরে নেবেন না—নিজের আবেদনের সময়কার package ও শর্ত দেখুন [১–৪]।
 
-৬. ১০ দিনের DIY UMRAH খরচের বাস্তব হিসাব (প্রতি জন — ২ থেকে ৪ জনের ফ্যামিলি শেয়ারিং)
-- **Umrah e-Visa ও ইনস্যুরেন্স:** BDT 17,500
-- **Roundtrip / Open-Jaw Flight (DAC–JED / MED–DAC):** BDT 62,000 – BDT 75,000
-- **মক্কায় ৫ রাত + মদিনায় ৪ রাত হোটেল (প্রতি জনের শেয়ার):** BDT 18,000 – BDT 28,000
-- **Haramain High-Speed Train ও মক্কা-মদিনা Ziyarah ট্যাক্সি:** BDT 8,500
-- **খাবার (হালাল বাঙালি/পাকিস্তানি/আরবি রেস্টুরেন্ট) ও Saudi eSIM:** BDT 10,000
-- **মোট প্রাক্কলিত খরচ:** জনপ্রতি **BDT 1,16,000 থেকে BDT 1,32,000** (যেখানে সাধারণ প্যাকেজে ১,৫৫,০০০ – ১,৮০,০০০+ টাকা লেগে যায়)।`,
+অনুমোদিত বাইরের Umrah agent এই একই ভিসা-শ্রেণির আরেকটি সেবা-পথ। মন্ত্রণালয়ের FAQ অনুযায়ী, বাইরের agent আবাসন ও পরিবহন সেবা ছাড়া Umrah visa ইস্যু করতে পারে না। টাকা দেওয়ার আগে মন্ত্রণালয়ের বর্তমান চ্যানেলে সেবাদাতাকে যাচাই করুন এবং কী আবাসন/পরিবহন, কার কাছ থেকে, কী বাতিলের শর্তে পাচ্ছেন—সব লিখিতভাবে নিন। পুরোনো “শুধু visa” কোট বা অননুমোদিত মধ্যস্থতাকারীর কথায় নির্ভর করবেন না [৪]।
+
+পথ ২: যোগ্যতার ভিত্তিতে ৯৬ ঘণ্টার Saudi stopover visa
+Visit Saudi বলছে, যোগ্য যাত্রীরা Saudia বা flynas-এর নির্দিষ্ট connecting itinerary বুক করে সর্বোচ্চ ৯৬ ঘণ্টার stopover-এর জন্য আবেদন করতে পারেন। রুট ও airline-ভেদে টিকিট এবং আবেদন-শর্ত আলাদা; কেনার আগে airline-এর live checkout দেখুন। ১৪ অক্টোবর ২০২৬ তারিখে Visit Saudi-র তথ্যে Saudia-র visa নিজে বিনা মূল্যের, application fee প্রায় SAR 39.50 এবং insurance SAR 13 থেকে দেখানো হয়েছিল। এগুলো checkout-এর line item—সব airline বা যাত্রীর নিশ্চিত মোট খরচ নয়। হোটেল রাত অন্তর্ভুক্ত ধরে বুক করবেন না [৬–৭]।
+
+পথ ৩: যোগ্য Saudi tourist-visa route
+১৪ অক্টোবর ২০২৬ তারিখে দেখা official eVisa portal-এর সাধারণ nationality-only তালিকায় Bangladesh ছিল না। তবে Visit Saudi-র Package Visa পদ্ধতিতে বাংলাদেশি পাসপোর্টধারীদের জন্য অনুমোদিত সেবাদাতার মাধ্যমে নিশ্চিত flight ও accommodation-সহ সমন্বিত package লাগে। এই Package Visa tourist-visa শ্রেণির ভেতরের একটি উপ-পথ—চতুর্থ কোনো category নয় [৮–৯]।
+
+বৈধ এবং আগে ব্যবহার করা US, UK বা Schengen tourist/business visa-সহ কিছু যাত্রী শর্ত পূরণ করলে Saudi visit visa on arrival-এর যোগ্য হতে পারেন; live portal, carrier ও arrival-এর শর্ত প্রযোজ্য [১০]। GCC residents-দের জন্য আলাদা route থাকতে পারে; বর্তমান residence ও occupation criteria official eVisa portal-এ দেখুন [৯]। নিজের passport, residence ও itinerary দিয়ে eligibility যাচাই করুন; এক বছরের বা multiple-entry visa ধরে নেবেন না [৯–১০]। Tourist-visa route দিয়ে Umrah করলেও visa-র শর্ত, Nusuk service এবং Hajj-মৌসুমের নিষেধাজ্ঞা মানতে হবে। এই route Hajj করার অনুমতি দেয় না [৪, ৮–৯, ১২]।
+
+৩. Visa-র মৌসুম ও প্রবেশের সময়সীমা দেখুন
+Saudi Umrah-তে প্রবেশের সময় বর্তমান season calendar ও Hajj-সংক্রান্ত বিধিনিষেধের অধীন; Umrah-কে সারা বছর কোনো বাধা ছাড়াই করা যায় বলা ঠিক নয়। মন্ত্রণালয়ের ১৪৪৮ হিজরি calendar অনুযায়ী visa issue-এর শেষ তারিখ ৯ মার্চ ২০২৭, যাত্রী প্রবেশের শেষ তারিখ ২৩ মার্চ ২০২৭ এবং চূড়ান্ত departure-এর তারিখ ৭ এপ্রিল ২০২৭। এগুলো শুধু ১৪৪৮ হিজরি মৌসুমের তারিখ। ভ্রমণের তারিখ ঠিক করা বা non-refundable বুকিংয়ের আগে পরবর্তী calendar দেখুন [৫]।
+
+৪. বুকিংয়ের একটি নিরাপদ ক্রম
+- আগে ভ্রমণের সময় ও visa category বেছে নিন। আপনার passport, itinerary ও পরিকল্পনার সঙ্গে route এবং মৌসুম মেলে কি না দেখুন; যে official eligibility page অনুসরণ করেছেন তার কপি রাখুন।
+- non-refundable flight বা hotel কেনার আগে live visa requirement ও application ধাপ যাচাই করুন। সরাসরি Nusuk হলে বর্তমান package Terms পড়ুন; বাইরের agent হলে আবাসন ও পরিবহনের বিবরণ লিখিতভাবে নিন [২–৪]।
+- Dhaka থেকে তারিখভিত্তিক flight তুলনা করুন। Dhaka–Jeddah যাওয়া এবং Madinah–Dhaka ফেরার multi-city/open-jaw itinerary পথে পিছিয়ে আসা কমাতে পারে, কিন্তু এটি সবসময় সস্তা নয়। কেনার আগে baggage, transit, airport change এবং cancellation policy airline-এর সঙ্গে মিলিয়ে নিন।
+- পাড়ার নাম বা যাচাই না-করা দূরত্ব দেখে নয়—হোটেলের সুনির্দিষ্ট ঠিকানা ও room terms দেখে বুক করুন। পরিবারের ব্যবহৃত gate পর্যন্ত পথ, ঢাল, accessibility, room occupancy, shuttle এবং cancellation policy সরাসরি property-র সঙ্গে যাচাই করুন। আমাদের Makkah ও Madinah hotel-zone গাইড শুধু শুরু করার জন্য; বুক করা ঠিকানা যাচাইয়ের বিকল্প নয়।
+- Visa ইস্যুর পর Umrah permit-এর জন্য বর্তমান Ministry/Nusuk নির্দেশনা অনুসরণ করে খালি তারিখ ও সময় বেছে নিন। Madinah-তে Rawdah visit-এর permit আলাদা। Official service page-এ live booking channel থাকে; নির্দিষ্ট দিনে slot খোলা বা সবসময় পাওয়া যাবে—এমন নিশ্চয়তা নেই [১৫–১৬]।
+- মন্ত্রণালয়ের FAQ-তে electronically issued Umrah visa-র biometrics চালু থাকা দেশের তালিকায় Bangladesh আছে। নিজের visa application ও official Saudi Visa Bio নির্দেশনা অনুসরণ করুন; tourist বা stopover visa-র প্রত্যেক যাত্রীর জন্য একই নিয়ম ধরে নেবেন না [৪]।
+- Passport, approved visa, flight তথ্য, accommodation ও transport confirmation, permit এবং জরুরি যোগাযোগের তথ্য ফোনে ও offline কপি—দুইভাবেই রাখুন। যাত্রার আগে airline-এর document requirement দেখুন।
+
+Online booking-এ dual-currency card ব্যবহার করলে checkout-এর আগে international e-commerce সুবিধা ও ব্যাংকের বর্তমান limit যাচাই করুন। বাংলাদেশের পেমেন্ট ধাপের জন্য আমাদের Dual-Currency Card Endorsement Guide দেখুন।
+
+৫. Makkah–Madinah যাতায়াত: HHR-এর বর্তমান fare ও baggage দেখুন
+Haramain High-Speed Railway-এর booking ও fare page-ই বর্তমান schedule ও ticket শর্তের মূল সূত্র। ১৪ অক্টোবর ২০২৬ তারিখে official fare table-এ Makkah–Madinah রুটে Economy-র base fare SAR 162 এবং King Abdulaziz International Airport (KAIA)–Makkah রুটে SAR 65 দেখানো হয়েছিল। Operator জানিয়েছে, এগুলো VAT ও fee-র আগের base fare; ভ্রমণের তারিখ, আসন-প্রাপ্যতা ও অন্যান্য শর্তে checkout-এর দাম বদলায়। এগুলো তারিখ-চিহ্নিত তথ্য—নিশ্চিত ticket price নয় [১৭]।
+
+HHR baggage নির্দেশনায় সর্বোচ্চ ২৫ কেজি এবং ৬৫ × ৫৫ × ৩৫ সেন্টিমিটারের একটি বড় ব্যাগ, সঙ্গে একটি hand item অনুমোদিত। ব্যাগ গোছানোর আগে operator-এর বর্তমান পেজ ও নিজের ticket-এর শর্ত দেখুন; পুরোনো guide-এ থাকা ছোট মাপ ধরে নেবেন না [১৮]।
+
+৬. স্বাস্থ্য, permit ও প্রয়োজনীয় কাগজ
+Saudi health requirement মৌসুমভেদে বদলায় এবং যাত্রীর দেশ থেকেও নির্ভর করতে পারে। নিজের travel season ও departure country অনুযায়ী Ministry of Health-এর বর্তমান Umrah health requirement দেখুন। নিচে দেওয়া ১৪৪৭ হিজরি PDF শুধু ওই মৌসুমের জন্য; সেটিকে ১৪৪৮ হিজরি বা পরের মৌসুমের নিয়ম ধরে নেওয়া যাবে না [১৩–১৪]।
+
+Permit-এর যোগ্যতা ও appointment availability যাচাই করতে official Nusuk/Ministry service ব্যবহার করুন। App-এ account থাকা, visa ইস্যু হওয়া, permit পাওয়া এবং কোনো restricted এলাকায় প্রবেশের অনুমতি—এগুলো এক বিষয় নয়। পরিকল্পনায় এই নথি ও তারিখ আলাদা করে রাখুন [২, ৪, ১৫–১৬]।
+
+৭. বাজেট: আগের একটি পরিকল্পনা-হিসাবই রাখা হয়েছে
+নিচের মোট অঙ্কটি আগের article থেকে রাখা হয়েছে। ১৪ অক্টোবর ২০২৬-এর এই update-এ নতুন করে fare যাচাই করে হিসাব করা হয়নি; আগের cost component-গুলোর সমন্বিত booking basket-ও যাচাই করা হয়নি। তাই এটিকে planning reference হিসেবে দেখুন—live quote, নিশ্চিত trip total বা agency package-এর তুলনায় DIY সস্তা হওয়ার প্রমাণ হিসেবে নয়।
+
+[[UMRAH_BUDGET_TABLE]]
+
+একই তারিখ, trip length, পরিবারের room-sharing, flight baggage, visa, hotel রাত, খাবার ও transfer ধরে কোনো itemized agency quote এই update-এ সংগ্রহ করা হয়নি। Package-এর সঙ্গে DIY তুলনা করতে দুই পক্ষের একই ভিত্তির লিখিত total নিন এবং tax, insurance, transport, cancellation এবং বাদ থাকা খরচ মিলিয়ে দেখুন। কোনো পথই সবসময় সস্তা নয়।
+
+৮. যাত্রার আগে শেষ যাচাই
+- Official page-এ visa route, বর্তমান season calendar এবং Hajj restriction-এর তারিখ আবার দেখুন।
+- ইস্যু করা visa-তে নাম, passport number, validity, entry count ও অনুমোদিত stay আপনার যাত্রার সঙ্গে মেলে কি না দেখুন।
+- Visa-ভিত্তিক biometrics, Nusuk permit এবং Rawdah appointment বর্তমান official service page-এ নিশ্চিত করুন।
+- হোটেলের ঠিকানা, room occupancy, accessibility এবং transport ব্যবস্থা property বা provider-এর সঙ্গে পুনরায় মিলিয়ে নিন।
+- HHR fare, baggage allowance ও ticket তথ্য এবং airline-এর baggage/transit শর্ত আবার দেখুন।
+- Official কাগজপত্র offline-এ রাখুন; provider-এর receipt ও লিখিত service terms সংরক্ষণ করুন।
+
+৯. সচরাচর জিজ্ঞাসা
+বাংলাদেশ থেকে কি Nusuk-এ সরাসরি Umrah visa-র আবেদন করা যায়?
+১৪ অক্টোবর ২০২৬ তারিখে দেখা Nusuk registration option-এ Bangladesh আছে, তাই live Nusuk Umrah service দিয়ে শুরু করে দেখুন। Registration মানেই visa approval নয়; package বা visa-only option পাওয়া যাবে কি না তা বর্তমান checkout Terms-এর ওপর নির্ভর করে [১–৪]।
+বাইরের Umrah agent কি আবাসন ও পরিবহন ছাড়া visa দিতে পারে?
+মন্ত্রণালয়ের FAQ বলছে, বাইরের agent আবাসন ও পরিবহন সেবা ছাড়া Umrah visa ইস্যু করতে পারে না। Provider-কে লিখিত চুক্তিতে সেবাগুলো ও সব charge উল্লেখ করতে বলুন [৪]।
+Tourist বা stopover visa দিয়ে কি ফরজ Hajj করা যায়?
+না। Umrah, tourist বা stopover visa বাংলাদেশি Hajj নিবন্ধন এবং সৌদি Hajj permit-এর বিকল্প নয়। বাংলাদেশ ও সৌদি আরবের বর্তমান Hajj নির্দেশনা অনুসরণ করুন [১১–১২]।
+১০ দিনের DIY Umrah অঙ্কটি কি এখনকার booking quote?
+না। টেবিলে আগের চারজনের পরিবার-শেয়ারের planning estimate রাখা হয়েছে; এই update-এ live booking basket ধরে নতুন করে মূল্য যাচাই করা হয়নি।
+Umrah ও Rawdah permit কোথায় বুক করব?
+নিজের আবেদনের জন্য official Ministry/Nusuk service ব্যবহার করুন, তারপর খালি appointment বেছে নিন। Umrah ও Rawdah permit আলাদা সেবা এবং availability নিশ্চিত নয় [১৫–১৬]।`,
     internalLinks: [
       { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Dual-Currency Card ও Passport Endorsement গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport (DAC) Immigration ডকুমেন্ট চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "DIY Umrah Intelligence Portal ও BDT Calculator", path: "/umrah" },
     ],
     affiliateCTA: {
       provider: "airalo",
-      headline: "মক্কা ও মদিনায় Nusuk App এবং WhatsApp সচল রাখুন",
-      body: "ঢাকা থেকে ফ্লাইটে ওঠার আগেই ফোনে Saudi Arabia 4G/5G eSIM ইনস্টল করে নিন—যাতে Jeddah বা Madinah এয়ারপোর্টে নামার সাথে সাথেই Nusuk QR Code, Haramain Train টিকিট ও Careem ব্যবহার করতে পারেন।",
+      headline: "Umrah যাত্রায় Maps ও Nusuk-এর জন্য data যাচাই করুন",
+      body: "কেনার আগে provider-এর coverage, data, validity, device compatibility এবং activation শর্ত দেখুন। Mobile data বা Nusuk permit availability নিশ্চিত—এমন ধরে নেবেন না।",
     },
   },
 
@@ -2247,6 +2406,10 @@ export function getLocalizedBlogs(lang: Language): BlogPost[] {
       readTime: bn.readTime,
       content: bn.content,
       internalLinks: bn.internalLinks,
+      references:
+        post.slug === "umrah-hajj-guide-bangladesh-nusuk-bdt-cost"
+          ? bn.references || post.references
+          : post.references,
       affiliateCTA: bn.affiliateCTA || post.affiliateCTA,
     };
   });

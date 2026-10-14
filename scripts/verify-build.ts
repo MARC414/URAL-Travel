@@ -1662,6 +1662,8 @@ if (rss) {
       .trim();
   const emptyPrerenders: string[] = [];
   const truncatedPrerenders: string[] = [];
+  const umrahBudgetSlug = "umrah-hajj-guide-bangladesh-nusuk-bdt-cost";
+  const umrahBudgetMarker = "[[UMRAH_BUDGET_TABLE]]";
   for (const [slug, body] of Object.entries(BLOG_BODY)) {
     const html = read(path.join(DIST_DIR, "blog", `${slug}.html`));
     if (!html) {
@@ -1674,6 +1676,9 @@ if (rss) {
       .map((para) => para.trim())
       .filter(Boolean)
       .filter((para) => para !== "[[figure]]")
+      .filter(
+        (para) => !(slug === umrahBudgetSlug && para === umrahBudgetMarker)
+      )
       .filter((para) => !getVisibleBlogFaqSection(slug, para, "en"));
     const missing = paragraphs.filter((para) => !page.includes(normalise(para)));
     if (missing.length > 0) truncatedPrerenders.push(`${slug} (${missing.length}/${paragraphs.length})`);
@@ -1690,6 +1695,59 @@ if (rss) {
       ? `every blog paragraph survives into its prerendered HTML (${BLOG_DATA.length} articles, full text)`
       : `${truncatedPrerenders.length} prerendered blog page(s) are missing body text: ` +
           `${truncatedPrerenders.slice(0, 3).join(", ")} — Google would index a truncated article`
+  );
+
+  const umrahEnglishPage =
+    read(path.join(DIST_DIR, "blog", `${umrahBudgetSlug}.html`)) ?? "";
+  const umrahBengaliPage =
+    read(path.join(DIST_DIR, "bn", "blog", `${umrahBudgetSlug}.html`)) ?? "";
+  const hasSemanticUmrahBudgetTable = (html: string) => {
+    const tableCount = [...html.matchAll(/<table\b/g)].length;
+    return (
+      tableCount === 1 &&
+      /<caption\b/.test(html) &&
+      /<th[^>]*scope="col"/.test(html) &&
+      /<th[^>]*scope="row"/.test(html) &&
+      html.includes("BDT 1,16,000–1,32,000") &&
+      !html.includes(umrahBudgetMarker)
+    );
+  };
+  check(
+    hasSemanticUmrahBudgetTable(umrahEnglishPage) &&
+      hasSemanticUmrahBudgetTable(umrahBengaliPage),
+    "the Umrah budget marker becomes one semantic table with the retained BDT estimate in both prerendered locales"
+  );
+
+  const umrahEnglishPost = BLOG_DATA.find((post) => post.slug === umrahBudgetSlug);
+  const umrahBengaliPost = getLocalizedBlogs("bn").find((post) => post.slug === umrahBudgetSlug);
+  const englishReferenceSection = umrahEnglishPage.match(
+    /<section aria-labelledby="article-reference-links-heading">([\s\S]*?)<\/section>/
+  )?.[1];
+  const bengaliReferenceSection = umrahBengaliPage.match(
+    /<section aria-labelledby="article-reference-links-heading">([\s\S]*?)<\/section>/
+  )?.[1];
+  const expectedReferenceUrls = umrahEnglishPost?.references?.map((reference) => reference.url) ?? [];
+  const referencesAreLocalizedAndVisible = Boolean(
+    expectedReferenceUrls.length > 0 &&
+      umrahBengaliPost?.references?.length === expectedReferenceUrls.length &&
+      expectedReferenceUrls.every(
+        (url, index) =>
+          umrahBengaliPost.references?.[index]?.url === url &&
+          umrahEnglishPage.includes(`href="${url}"`) &&
+          umrahBengaliPage.includes(`href="${url}"`)
+      ) &&
+      Boolean(englishReferenceSection && /<ol\b/.test(englishReferenceSection)) &&
+      Boolean(bengaliReferenceSection && /<ol\b/.test(bengaliReferenceSection)) &&
+      englishReferenceSection?.includes("[1]") &&
+      bengaliReferenceSection?.includes("[১]") &&
+      (englishReferenceSection?.match(/<li\b/g) ?? []).length === expectedReferenceUrls.length &&
+      (bengaliReferenceSection?.match(/<li\b/g) ?? []).length === expectedReferenceUrls.length
+  );
+  check(
+    referencesAreLocalizedAndVisible,
+    referencesAreLocalizedAndVisible
+      ? `the ${expectedReferenceUrls.length} numbered source/portal links are rendered and propagated to the Bengali twin`
+      : "Umrah source links are missing, unordered, or not propagated to the Bengali route"
   );
 
   // The other half: the body must NOT be in what a non-blog page downloads.
@@ -1913,47 +1971,52 @@ const normalizeStructuredText = (value: string) =>
     .replace(/\s+/g, " ")
     .trim();
 
-const faqSlug = "travel-creator-resources";
+const faqSlugs = [
+  "travel-creator-resources",
+  "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+] as const;
 const faqCoverageIssues: string[] = [];
-for (const locale of ["en", "bn"] as const) {
-  const content =
-    locale === "en"
-      ? BLOG_BODY[faqSlug] || ""
-      : BENGALI_BLOG_OVERRIDES[faqSlug]?.content || "";
-  const expectedFaq = getVisibleBlogFaqSection(faqSlug, content, locale);
-  const routeFile =
-    locale === "en"
-      ? path.join(DIST_DIR, "blog", `${faqSlug}.html`)
-      : path.join(DIST_DIR, "bn", "blog", `${faqSlug}.html`);
-  const html = read(routeFile) ?? "";
-  const faqNode = getSeoSchemaGraph(html).find((node) => hasSchemaType(node, "FAQPage"));
-  const mainEntity = Array.isArray(faqNode?.mainEntity)
-    ? (faqNode.mainEntity as Record<string, unknown>[])
-    : [];
-  const exactSchemaPairs =
-    expectedFaq &&
-    mainEntity.length === expectedFaq.questions.length &&
-    expectedFaq.questions.every((faq, index) => {
-      const answer = mainEntity[index]?.acceptedAnswer as Record<string, unknown> | undefined;
-      return mainEntity[index]?.name === faq.question && answer?.text === faq.answer;
-    });
-  const visibleText = normalizeStructuredText(html);
-  const faqIsVisible =
-    expectedFaq &&
-    expectedFaq.questions.every(
-      (faq) =>
-        visibleText.includes(normalizeStructuredText(faq.question)) &&
-        visibleText.includes(normalizeStructuredText(faq.answer))
-    );
-  if (!expectedFaq || !exactSchemaPairs || !faqIsVisible) {
-    faqCoverageIssues.push(locale);
+for (const faqSlug of faqSlugs) {
+  for (const locale of ["en", "bn"] as const) {
+    const content =
+      locale === "en"
+        ? BLOG_BODY[faqSlug] || ""
+        : BENGALI_BLOG_OVERRIDES[faqSlug]?.content || "";
+    const expectedFaq = getVisibleBlogFaqSection(faqSlug, content, locale);
+    const routeFile =
+      locale === "en"
+        ? path.join(DIST_DIR, "blog", `${faqSlug}.html`)
+        : path.join(DIST_DIR, "bn", "blog", `${faqSlug}.html`);
+    const html = read(routeFile) ?? "";
+    const faqNode = getSeoSchemaGraph(html).find((node) => hasSchemaType(node, "FAQPage"));
+    const mainEntity = Array.isArray(faqNode?.mainEntity)
+      ? (faqNode.mainEntity as Record<string, unknown>[])
+      : [];
+    const exactSchemaPairs =
+      expectedFaq &&
+      mainEntity.length === expectedFaq.questions.length &&
+      expectedFaq.questions.every((faq, index) => {
+        const answer = mainEntity[index]?.acceptedAnswer as Record<string, unknown> | undefined;
+        return mainEntity[index]?.name === faq.question && answer?.text === faq.answer;
+      });
+    const visibleText = normalizeStructuredText(html);
+    const faqIsVisible =
+      expectedFaq &&
+      expectedFaq.questions.every(
+        (faq) =>
+          visibleText.includes(normalizeStructuredText(faq.question)) &&
+          visibleText.includes(normalizeStructuredText(faq.answer))
+      );
+    if (!expectedFaq || !exactSchemaPairs || !faqIsVisible) {
+      faqCoverageIssues.push(`${faqSlug} (${locale})`);
+    }
   }
 }
 check(
   faqCoverageIssues.length === 0,
   faqCoverageIssues.length === 0
-    ? "the visible Travel Creator Resources Q&As match FAQPage JSON-LD in English and Bengali"
-    : `FAQ content/schema mismatch for locale(s): ${faqCoverageIssues.join(", ")}`
+    ? "the visible Travel Creator Resources and DIY Umrah Q&As match FAQPage JSON-LD in English and Bengali"
+    : `FAQ content/schema mismatch for page(s): ${faqCoverageIssues.join(", ")}`
 );
 
 const howToCases = [
@@ -2287,6 +2350,71 @@ function renderBlogPostForBreadcrumb(locale: "en" | "bn", slug: string): string 
     })
   );
 }
+
+function renderFullUmrahBlogPost(locale: "en" | "bn"): string {
+  const slug = "umrah-hajj-guide-bangladesh-nusuk-bdt-cost";
+  const isBn = locale === "bn";
+  const sourcePosts = getLocalizedBlogs(locale);
+  const sourcePost = sourcePosts.find((post) => post.slug === slug);
+  if (!sourcePost) throw new Error(`Missing ${locale} blog post ${slug}`);
+  const fullPost = {
+    ...sourcePost,
+    content: isBn ? sourcePost.content : BLOG_BODY[slug],
+  };
+  const localizedBlogs = sourcePosts.map((post) => post.slug === slug ? fullPost : post);
+  const getLocalizedRouteHref = (route: string) =>
+    isBn ? (route === "/" ? "/bn" : `/bn${route}`) : route;
+  const EmptyAuthorBioCard = () => null;
+
+  return renderToStaticMarkup(
+    React.createElement(BlogPostRouteView as any, {
+      context: {
+        AuthorBioCard: EmptyAuthorBioCard,
+        blogBodies: {},
+        getBlogAeoSnippet50Words: (_slug: string, _isBengali: boolean, fallback: string) => fallback,
+        getBlogCoverImage: () => "/assets/images/clouds_boat_hero_1781438671378-1200.webp",
+        getLocalizedRouteHref,
+        isBn,
+        isLanding: false,
+        lang: locale,
+        localizedBlogs,
+        localizedHajjFaqs: getLocalizedHajjFaqs(locale),
+        navigateTo: () => {},
+        parameterId: slug,
+        section: "blog",
+        setAffiliateToast: () => {},
+      },
+    })
+  );
+}
+
+const umrahClientRenderIssues: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  try {
+    const markup = renderFullUmrahBlogPost(locale);
+    const localizedFaqHeading = locale === "bn" ? "সচরাচর জিজ্ঞাসা" : "Frequently Asked Questions";
+    const firstReferenceLabel = locale === "bn" ? "[১]" : "[1]";
+    if (
+      (markup.match(/<table\b/g) || []).length !== 1 ||
+      !markup.includes("BDT 1,16,000–1,32,000") ||
+      markup.includes("[[UMRAH_BUDGET_TABLE]]") ||
+      !markup.includes(localizedFaqHeading) ||
+      !markup.includes("article-reference-links-heading") ||
+      !markup.includes(firstReferenceLabel) ||
+      markup.includes('id="travel-intelligence-panel"')
+    ) {
+      umrahClientRenderIssues.push(locale);
+    }
+  } catch (error) {
+    umrahClientRenderIssues.push(`${locale} (${String(error).slice(0, 120)})`);
+  }
+}
+check(
+  umrahClientRenderIssues.length === 0,
+  umrahClientRenderIssues.length === 0
+    ? "the EN/BN Umrah React route renders one semantic budget table, its own FAQ/references, and no stale shared Hajj panel"
+    : `Umrah React route rendering failed for: ${umrahClientRenderIssues.join(", ")}`
+);
 
 const breadcrumbProbeSlug = BLOG_SLUGS[0];
 for (const locale of ["en", "bn"] as const) {

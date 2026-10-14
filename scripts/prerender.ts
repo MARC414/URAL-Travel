@@ -164,6 +164,82 @@ function renderVisibleFaqHtml(
     .join("")}</section>`;
 }
 
+const UMRAH_GUIDE_SLUG = "umrah-hajj-guide-bangladesh-nusuk-bdt-cost";
+const UMRAH_BUDGET_TABLE_MARKER = "[[UMRAH_BUDGET_TABLE]]";
+
+function renderUmrahBudgetTableHtml(locale: "en" | "bn"): string {
+  const isBengali = locale === "bn";
+  return `<section aria-labelledby="umrah-budget-table-heading"><h2 id="umrah-budget-table-heading">${
+    isBengali ? "১০ দিনের DIY Umrah পরিকল্পনা-হিসাব" : "10-day DIY Umrah planning estimate"
+  }</h2><p>${
+    isBengali
+      ? "চারজনের পরিবারের রুম-শেয়ারের আগের প্রকাশিত হিসাবটি রাখা হয়েছে; ১৪ অক্টোবর ২০২৬-এ নতুন করে দাম যাচাই করা হয়নি।"
+      : "The previously published family-of-four-sharing figure is retained; it was not re-priced on 14 October 2026."
+  }</p><div class="overflow-x-auto"><table><caption class="sr-only">${
+    isBengali
+      ? "আগের প্রকাশিত ১০ দিনের Umrah পরিকল্পনা-হিসাব ও quote তুলনার সীমাবদ্ধতা"
+      : "Previously published 10-day Umrah estimate and comparison limitation"
+  }</caption><thead><tr><th scope="col">${
+    isBengali ? "পরিকল্পনার বিষয়" : "Planning item"
+  }</th><th scope="col">${
+    isBengali ? "প্রকাশিত অঙ্ক / অবস্থা" : "Published figure / status"
+  }</th><th scope="col">${
+    isBengali ? "ভিত্তি ও সীমাবদ্ধতা" : "Basis and limitation"
+  }</th></tr></thead><tbody><tr><th scope="row">${
+    isBengali ? "DIY Umrah মোট (জনপ্রতি)" : "DIY Umrah total (per person)"
+  }</th><td>BDT 1,16,000–1,32,000</td><td>${
+    isBengali
+      ? "১০ দিন; চারজনের পরিবারের রুম-শেয়ার। আগের planning estimate, live quote নয়।"
+      : "10 days; family of four sharing. Inherited planning estimate, not a live quote."
+  }</td></tr><tr><th scope="row">${
+    isBengali ? "এজেন্সি package-এর সঙ্গে তুলনা" : "Comparison with an agency package"
+  }</th><td>${
+    isBengali ? "একই ভিত্তির quote পাওয়া যায়নি" : "No matched quote captured"
+  }</td><td>${
+    isBengali
+      ? "একই তারিখ, সময়কাল, room occupancy, flight ও অন্তর্ভুক্ত সেবা ধরে itemized quote ছাড়া সাশ্রয় অনুমান করা যাবে না।"
+      : "Do not infer savings without an itemized quote on the same dates, duration, room occupancy, flight and inclusions."
+  }</td></tr></tbody></table></div></section>`;
+}
+
+function renderArticleReferencesHtml(
+  references: { name: string; nameBn: string; url: string }[] | undefined,
+  locale: "en" | "bn",
+  updatedAt?: string
+): string {
+  if (!references?.length) return "";
+  const isBengali = locale === "bn";
+  const checkedDateLabel = updatedAt
+    ? new Intl.DateTimeFormat(isBengali ? "bn-BD" : "en-BD", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        timeZone: "Asia/Dhaka",
+      }).format(new Date(`${updatedAt}T12:00:00+06:00`))
+    : "";
+  const links = references
+    .map((reference, index) => {
+      const referenceNumber = isBengali ? bnDigits(index + 1) : String(index + 1);
+      return `<li><a href="${escapeHtml(reference.url)}" target="_blank" rel="noopener noreferrer"><span>[${referenceNumber}]</span> ${escapeHtml(
+        isBengali ? reference.nameBn : reference.name
+      )}</a></li>`;
+    })
+    .join("");
+  return `<section aria-labelledby="article-reference-links-heading"><h2 id="article-reference-links-heading">${
+    isBengali ? "এই গাইডের অফিশিয়াল তথ্যসূত্র" : "Official sources for this guide"
+  }</h2>${
+    updatedAt
+      ? `<p><time datetime="${escapeHtml(toIsoDate(updatedAt))}">${
+          isBengali ? "তথ্যসূত্র দেখা হয়েছে: " : "References checked: "
+        }${escapeHtml(checkedDateLabel)}</time></p>`
+      : ""
+  }<p>${
+    isBengali
+      ? "তালিকায় দাবির সঙ্গে যুক্ত সরকারি/operator সূত্রের পাশাপাশি application, booking ও একটি সাধারণ regional portal-ও আছে; প্রতিটি link সব দাবির প্রমাণ নয়। আবেদন বা বুকিংয়ের আগে live নির্দেশনা মিলিয়ে নিন।"
+      : "The list combines government/operator sources tied to claims with application and booking portals plus one general regional portal; not every link supports every claim. Confirm live instructions before applying or booking."
+  }</p><ol style="list-style: none; padding-left: 0">${links}</ol></section>`;
+}
+
 function renderAuthorBioHtml(
   profile: ReturnType<typeof getAuthorProfile>,
   locale: "en" | "bn"
@@ -1897,6 +1973,9 @@ function buildAllRoutes(): PrerenderRoute[] {
             .split("\n\n")
             .map((para) => {
               const trimmedPara = String(para).trim();
+              if (post.slug === UMRAH_GUIDE_SLUG && trimmedPara === UMRAH_BUDGET_TABLE_MARKER) {
+                return renderUmrahBudgetTableHtml("en");
+              }
               const faqSection = getVisibleBlogFaqSection(post.slug, trimmedPara, "en");
               if (faqSection) return renderVisibleFaqHtml(faqSection);
               if (trimmedPara === "[[figure]]") {
@@ -1910,6 +1989,7 @@ function buildAllRoutes(): PrerenderRoute[] {
               return `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`;
             })
             .join("\n")}
+          ${renderArticleReferencesHtml(post.references, "en", post.updatedAt)}
           ${renderAuthorBioHtml(getAuthorProfile(post.author), "en")}
           ${radicalStorageHtml}
           ${multiPartnerHtml}
@@ -2063,6 +2143,12 @@ function bnParagraphs(
   return String(text || "")
     .split(/\n{2,}/)
     .map((rawParagraph) => {
+      if (
+        slug === UMRAH_GUIDE_SLUG &&
+        rawParagraph.trim() === UMRAH_BUDGET_TABLE_MARKER
+      ) {
+        return renderUmrahBudgetTableHtml("bn");
+      }
       const faqSection = getVisibleBlogFaqSection(slug || "", rawParagraph, "bn");
       if (faqSection) return renderVisibleFaqHtml(faqSection);
       const paragraph = rawParagraph.replace(/\n/g, " ").replace(/\*\*/g, "").trim();
@@ -2215,6 +2301,13 @@ function buildBengaliBody(
           })()
         : undefined;
       parts.push(bnParagraphs(override.content, bnFigureHtml, id));
+      parts.push(
+        renderArticleReferencesHtml(
+          override.references || bnPost?.references,
+          "bn",
+          bnPost?.updatedAt
+        )
+      );
       parts.push(renderAuthorBioHtml(getAuthorProfile(bnPost?.author), "bn"));
       const refPlacementBn = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[id];
       if (refPlacementBn) {

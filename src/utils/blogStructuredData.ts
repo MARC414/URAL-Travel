@@ -21,7 +21,19 @@ export interface BlogHowToDocument {
   steps: BlogHowToStep[];
 }
 
-const BLOG_FAQ_SLUG = "travel-creator-resources";
+const BLOG_FAQ_CONFIGS: Record<
+  string,
+  { en: RegExp; bn: RegExp }
+> = {
+  "travel-creator-resources": {
+    en: /^\s*7\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৭\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
+  "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": {
+    en: /^\s*9\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৯\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
+};
 
 function isNumberedHeading(line: string): boolean {
   return /^\s*(?:\d+|[০-৯]+)[.)]\s+/.test(line);
@@ -29,21 +41,19 @@ function isNumberedHeading(line: string): boolean {
 
 /**
  * Reads the existing FAQ section from the visible English or Bengali article
- * body. This deliberately has a single allowlisted slug: schema is emitted
- * only where the page itself has a matching question-and-answer section.
+ * body. Only explicitly allowlisted slugs receive FAQ schema, and the visible
+ * question-and-answer section must match the locale-specific heading.
  */
 export function getVisibleBlogFaqSection(
   slug: string,
   content: string,
   locale: BlogStructuredDataLocale
 ): VisibleBlogFaqSection | undefined {
-  if (slug !== BLOG_FAQ_SLUG || !content.trim()) return undefined;
+  const faqConfig = BLOG_FAQ_CONFIGS[slug];
+  if (!faqConfig || !content.trim()) return undefined;
 
   const lines = content.split(/\r?\n/);
-  const headingPattern =
-    locale === "bn"
-      ? /^\s*৭\.\s*সচরাচর জিজ্ঞাসা\s*$/
-      : /^\s*7\.\s*Frequently Asked Questions\s*$/i;
+  const headingPattern = locale === "bn" ? faqConfig.bn : faqConfig.en;
   const headingIndex = lines.findIndex((line) => headingPattern.test(line));
   if (headingIndex < 0) return undefined;
 
