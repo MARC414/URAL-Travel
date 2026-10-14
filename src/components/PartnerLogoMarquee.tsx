@@ -181,7 +181,7 @@ export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "
       <span className="partner-marquee__logo-lockup" aria-hidden="true">
         <img
           src={partner.logoSrc}
-          alt=""
+          alt={`${partner.name} logo`}
           width={44}
           height={44}
           loading="lazy"

@@ -40,7 +40,11 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                   sizes="100vw"
 
-                  alt=""
+                  alt={
+                    isBn
+                      ? "বিমানবন্দরের লাউঞ্জে বসে যাত্রীরা, জানালা দিয়ে সূর্যাস্তের আলোয় বিমানের ডানা"
+                      : "Travelers in an airport lounge with an airplane wing glowing in sunset light beyond the window"
+                  }
 
                   aria-hidden={true}
 
