@@ -3,6 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- This page is a widget shell, not a destination. It is the <iframe src> on
+       the flight search components and the target of the "open in new tab" deep
+       link (?standalone=1) — never something a visitor should reach from search.
+       It is deliberately absent from sitemap.xml, but absence from a sitemap is
+       not a crawl directive: Googlebot renders JS, so it discovers this URL from
+       the iframe src and can index it as its own page. With a real <title> and
+       ~22 KB of flight-search chrome, that makes it a thin duplicate competing
+       with /flights. `noindex` is the only thing that actually keeps it out.
+       `follow` so the affiliate links inside are still crawled normally.
+       Do NOT add a canonical to /flights instead — the pages are not
+       equivalent, and a canonical is a hint while noindex is a directive. -->
+  <meta name="robots" content="noindex, follow" />
   <title>URAL Flight Search Engine</title>
   <!-- Widget shell, not a landing page: keep it out of the index so it does not compete with /flights. Crawlable (not robots.txt-blocked) so Google can read the noindex. -->
   <meta name="robots" content="noindex, follow" />

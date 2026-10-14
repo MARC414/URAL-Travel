@@ -1473,6 +1473,79 @@ if (sitemap) {
   );
 }
 
+// --- 3b. Indexability: every prerendered page is either in the sitemap or noindex
+
+{
+  // A page that is crawlable, absent from the sitemap, and carries no `noindex`
+  // is in the worst of all states: Google can find it (Googlebot renders JS, so
+  // an <iframe src> or a window.open target is a discovered URL) but nothing
+  // tells it what the page is for. public/travelpayouts-wl.html was exactly
+  // that — a 22 KB flight-search shell with a real <title>, competing with
+  // /flights as a thin duplicate. Absence from a sitemap is not a directive.
+  //
+  // The rule: a prerendered HTML page must be EITHER listed in sitemap.xml
+  // (a destination) OR marked noindex (a shell). Never neither.
+  const sitemapPaths = new Set(
+    [...(sitemap ?? "").matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => {
+      try {
+        return new URL(m[1]).pathname.replace(/\/$/, "") || "/";
+      } catch {
+        return m[1];
+      }
+    })
+  );
+
+  // Google Search Console's verification file is a bare token page it fetches
+  // directly; it is neither a destination nor something we control the head of.
+  const EXEMPT = new Set(["/404", "/googlee50f8d327b90754c"]);
+
+  const htmlPages: string[] = [];
+  (function walk(dir: string) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.name.endsWith(".html")) htmlPages.push(full);
+    }
+  })(DIST_DIR);
+
+  const isNoindex = (html: string) =>
+    /<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html);
+
+  const routeOf = (file: string) =>
+    "/" +
+    path
+      .relative(DIST_DIR, file)
+      .split(path.sep)
+      .join("/")
+      .replace(/\.html$/, "")
+      .replace(/(^|\/)index$/, "");
+
+  const ungoverned: string[] = [];
+  for (const file of htmlPages) {
+    const route = routeOf(file).replace(/\/$/, "") || "/";
+    if (EXEMPT.has(route)) continue;
+    if (sitemapPaths.has(route)) continue;
+    if (isNoindex(fs.readFileSync(file, "utf8"))) continue;
+    ungoverned.push(route);
+  }
+
+  check(
+    ungoverned.length === 0,
+    ungoverned.length === 0
+      ? `all ${htmlPages.length} prerendered pages are either in sitemap.xml or marked noindex`
+      : `${ungoverned.length} prerendered page(s) are crawlable, absent from sitemap.xml and not noindex ` +
+          `(add a robots noindex for shells, or a sitemap entry for destinations): ` +
+          ungoverned.slice(0, 5).join(", ")
+  );
+
+  // Negative control: the guard must actually fail on an ungoverned page.
+  const shellHtml = read(path.join(DIST_DIR, "travelpayouts-wl.html"));
+  check(
+    shellHtml !== null && isNoindex(shellHtml) && !isNoindex(shellHtml.replace(/noindex/gi, "index")),
+    "indexability guard detects a widget shell whose noindex was removed (negative control)"
+  );
+}
+
 // --- 4. RSS ----------------------------------------------------------------
 
 const rss = read(path.join(DIST_DIR, "rss.xml"));
