@@ -804,49 +804,120 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
   },
 
   "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": {
-    title: "Nusuk App ও Saudi Visa Bio ব্যবহারের সম্পূর্ণ বাংলা গাইড (2026): রিয়াজুল জান্নাত (Rawdah) পারমিট ও ফিঙ্গারপ্রিন্ট সমাধান",
+    title: "Nusuk App ও Saudi Visa Bio ব্যবহারের সম্পূর্ণ বাংলা গাইড (2026): রিয়াজুল জান্নাত (Rawdah) পারমিট, বায়োমেট্রিক ও অফিশিয়াল ধাপ",
     summary:
-      "বাংলাদেশ থেকে পবিত্র Umrah বা Hajj পালনের জন্য সৌদি সরকারের দুটি অফিশিয়াল মোবাইল অ্যাপ ব্যবহার করা বাধ্যতামূলক: সৌদি পররাষ্ট্র মন্ত্রণালয়ের Saudi Visa Bio অ্যাপ (১০ আঙুলের ছাপ ও ফেস বায়োমেট্রিকের জন্য) এবং সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের অফিশিয়াল Nusuk অ্যাপ (nusuk.sa — মক্কায় ওমরাহ স্লট এবং মদিনায় রিয়াজুল জান্নাত বা Rawdah Shareef পারমিটের জন্য)। এই সহজ গাইডে জানুন কীভাবে ১০ সংখ্যার ভিসা নম্বর দিয়ে একাউন্ট খুলবেন, বয়স্ক মা-বাবার ফিঙ্গারপ্রিন্ট না নিলে কী করবেন এবং প্রতি শুক্রবার ফ্রি রওজা শরীফ পারমিট বুক করবেন।",
+      "ওমরাহ পরিকল্পনায় বাংলাদেশি যাত্রীদের দুটি অফিশিয়াল সৌদি অ্যাপ প্রস্তুত রাখা উচিত: মক্কায় ওমরাহ স্লট এবং মদিনায় রিয়াজুল জান্নাত (Rawdah Shareef)-এর বাধ্যতামূলক অ্যাপয়েন্টমেন্ট পারমিটের জন্য Nusuk অ্যাপ (nusuk.sa), এবং বর্তমান সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের FAQ অনুযায়ী ইলেকট্রনিকভাবে ইস্যু হওয়া Umrah visa-র biometric enrollment-এর জন্য Saudi Visa Bio অ্যাপ। এই গাইডে জানুন ১০ সংখ্যার ভিসা নম্বর দিয়ে Nusuk-এ রেজিস্ট্রেশন, ঢাকায় বায়োমেট্রিকের ব্যবহারিক ধাপ, এবং নির্দিষ্ট সাপ্তাহিক রিলিজ ধরে না নিয়ে লাইভ অ্যাভেইলেবিলিটি চেক করে ফ্রি Rawdah পারমিট বুক করার নিয়ম। তথ্যসূত্র যাচাই: ১৪ অক্টোবর ২০২৬।",
     category: "Hajj & Umrah",
     date: "২৭ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "৭ মিনিট পড়া",
-    content: `ঢাকা হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর (DAC) থেকে জেদ্দা বা মদিনার ফ্লাইটে ওঠার আগেই প্রত্যেক বাংলাদেশি হজ ও ওমরাহ যাত্রীর ফোনে সৌদি সরকারের দুটি অফিশিয়াল অ্যাপ প্রস্তুত থাকা জরুরি। মসজিদে নববীর গেটে স্ক্রিনশট গ্রহণ করা হয় না—সরাসরি **Nusuk (nusuk.sa)** অ্যাপের লাইভ QR কোড স্ক্যান করা হয়।
+    readTime: "৭ মিনিট পড়া",
+    references: [
+      {
+        name: "Saudi Ministry of Hajj and Umrah — FAQ (biometric enrollment for Umrah visas)",
+        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — FAQ (Umrah visa-এর biometric enrollment)",
+        url: "https://haj.gov.sa/en/FAQ",
+      },
+      {
+        name: "Saudi Visa Bio app listing (Saudi Ministry of Foreign Affairs)",
+        nameBn: "Saudi Visa Bio অ্যাপের listing (Saudi Ministry of Foreign Affairs)",
+        url: "https://play.google.com/store/apps/details?id=sa.gov.mofa.saudivisabio",
+      },
+      {
+        name: "Saudi Ministry — Umrah Permit Application",
+        nameBn: "সৌদি মন্ত্রণালয় — Umrah Permit আবেদন",
+        url: "https://haj.gov.sa/en/E-Services/Umrah-Permit-Application",
+      },
+      {
+        name: "Saudi Ministry — permit to visit Al-Rawdah Al-Sharifiyah",
+        nameBn: "সৌদি মন্ত্রণালয় — Al-Rawdah Al-Sharifiyah জিয়ারতের permit",
+        url: "https://haj.gov.sa/en/E-Services/Permit-to-Visit-Al-Rawdah-Al-Sharifiyah-for-Men-Women",
+      },
+      {
+        name: "Nusuk Umrah — registration",
+        nameBn: "Nusuk Umrah — নিবন্ধন পেজ",
+        url: "https://umrah.nusuk.sa/registration/signup",
+      },
+      {
+        name: "Nusuk Umrah — Terms of Use",
+        nameBn: "Nusuk Umrah — ব্যবহারের শর্ত",
+        url: "https://umrah.nusuk.sa/TermsOfUse",
+      },
+      {
+        name: "Saudi Ministry of Hajj and Umrah — Nusuk Umrah launch for overseas pilgrims",
+        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — বিদেশি যাত্রীদের জন্য Nusuk Umrah সেবা চালুর ঘোষণা",
+        url: "https://haj.gov.sa/en/Media-Center/Ministry-News/Ministry-of-Hajj-and-Umrah-launches-Nusuk-Umrah-service-to-enable-pilgrims-from-outside-the-Kingdom",
+      },
+      {
+        name: "Saudi Unified Visa Platform",
+        nameBn: "সৌদি Unified Visa Platform",
+        url: "https://ksavisa.sa",
+      },
+      {
+        name: "Bangladesh Haj Management Portal",
+        nameBn: "বাংলাদেশ Haj Management Portal",
+        url: "https://www.hajj.gov.bd/",
+      },
+      {
+        name: "Official Nusuk platform",
+        nameBn: "অফিশিয়াল Nusuk platform",
+        url: "https://www.nusuk.sa",
+      },
+    ],
+    content: `ঢাকা হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর (DAC) থেকে জেদ্দা বা মদিনার ফ্লাইটে ওঠার আগেই আপনার প্রয়োজনীয় অফিশিয়াল সৌদি অ্যাপগুলো প্রস্তুত রাখুন: মক্কায় ওমরাহ স্লট এবং মদিনায় রিয়াজুল জান্নাত (Rawdah Shareef)-এর বাধ্যতামূলক অ্যাপয়েন্টমেন্ট পারমিটের জন্য Nusuk অ্যাপ (nusuk.sa)। Saudi Visa Bio অ্যাপ বর্তমান সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের FAQ-এ বাংলাদেশের জন্য ইলেকট্রনিকভাবে ইস্যু হওয়া Umrah visa-র biometric enrollment-এর তালিকাভুক্ত; এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার যাত্রীর জন্য সার্বজনীন বাধ্যবাধকতা নয়। মসজিদে নববীর গেটে স্ক্রিনশট গ্রহণ করা হয় না—সরাসরি **Nusuk (nusuk.sa)** অ্যাপের লাইভ QR কোড স্ক্যান করা হয়।
 
-১. ওমরাহ ও হজের জন্য সৌদি সরকারের বাধ্যতামূলক ২টি অ্যাপ কী কী?
-সৌদি হজ ও ওমরাহ মন্ত্রণালয় (**haj.gov.sa**) এবং বাংলাদেশ ধর্ম বিষয়ক মন্ত্রণালয়ের (**hajj.gov.bd**) নির্দেশনা অনুযায়ী:
-- **Saudi Visa Bio App (MOFA):** ঘরে বসেই পাসপোর্ট স্ক্যান, লাইভ সেলফি এবং দুই হাতের ১০ আঙুলের ছাপ (Biometrics) দেওয়ার সরকারি অ্যাপ।
-- **Official Nusuk App (nusuk.sa):** পবিত্র মক্কায় ওমরাহ পারমিট এবং মদিনায় মহানবী (সা.)-এর রওজা মোবারক সংলগ্ন **রিয়াজুল জান্নাতে (Rawdah Shareef)** নামাজ পড়ার ফ্রি অ্যাপয়েন্টমেন্ট বুক করার একক সরকারি মাধ্যম।
+এই গাইড ১৪ অক্টোবর ২০২৬-এ অফিশিয়াল সৌদি মন্ত্রণালয় ও Nusuk সূত্রের বিপরীতে যাচাই করা হয়েছে। visa, permit, অ্যাপ ও availability-র শর্ত বদলাতে পারে; যাত্রার আগে বর্তমান অফিশিয়াল পেজ অনুসরণ করুন।
 
-২. বাংলাদেশে বসে SAUDI VISA BIO অ্যাপে ফিঙ্গারপ্রিন্ট দেওয়ার সহজ নিয়ম কী?
-বয়স্ক মা-বাবার হাতের রেখা হালকা হয়ে গেলে ফোনের ক্যামেরায় অনেক সময় ছাপ নিতে চায় না। নিচের ৩টি ধাপ অনুসরণ করলে সহজেই সমাধান পাবেন:
+১. ২০২৬ সালে ওমরাহর জন্য অফিশিয়াল সরকারি অ্যাপ ও সূত্র কী কী?
+সৌদি হজ ও ওমরাহ মন্ত্রণালয় (**haj.gov.sa**) এবং বাংলাদেশ ধর্ম বিষয়ক মন্ত্রণালয়ের (**hajj.gov.bd**) নির্দেশনা অনুযায়ী:
+- **Official Nusuk App (nusuk.sa):** পবিত্র মক্কায় ওমরাহ পারমিট এবং মদিনায় মহানবী (সা.)-এর রওজা মোবারক সংলগ্ন **রিয়াজুল জান্নাতে (Rawdah Shareef)** নামাজ পড়ার বাধ্যতামূলক অ্যাপয়েন্টমেন্ট বুক করার একক সরকারি মাধ্যম।
+- **Saudi Visa Bio App (MOFA):** বর্তমান Ministry FAQ অনুযায়ী বাংলাদেশের জন্য ইলেকট্রনিকভাবে ইস্যু হওয়া Umrah visa-র biometric enrollment-এর তালিকাভুক্ত। আপনার বর্তমান অফিশিয়াল visa application ও অ্যাপের নির্দেশনা অনুসরণ করুন; এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার visa-র জন্য প্রযোজ্য বলে ধরে নেবেন না [১-২]।
+- **রাখতে হবে এমন অফিশিয়াল পোর্টাল:** Nusuk নিবন্ধন ও Terms of Use, মন্ত্রণালয়ের Umrah Permit ও Rawdah Permit সার্ভিস পেজ, Saudi Unified Visa Platform (ksavisa.sa), এবং ফরজ হজের জন্য Bangladesh Haj Management Portal (hajj.gov.bd) [৩-১০]।
+
+২. বাংলাদেশে বসে SAUDI VISA BIO অ্যাপে বায়োমেট্রিক তথ্য দেওয়ার ধাপ কী?
+শুধুমাত্র তখনই ব্যবহার করুন যখন আপনার বর্তমান অফিশিয়াল Umrah visa-র নির্দেশনায় তা চাওয়া হয়। বয়স্ক মা-বাবার হাতের রেখা হালকা হয়ে গেলে ফোনের ক্যামেরায় অনেক সময় ছাপ নিতে চায় না। নিচের ধাপগুলো অনুসরণ করুন:
 ধাপ ১: দিনের আলোতে পাসপোর্ট স্ক্যান করুন:
-- জানালার পাশে দাঁড়িয়ে দিনের স্বাভাবিক আলোতে পাসপোর্টের তথ্য পাতা (Bio-Page) স্ক্যান করুন, যাতে পাতার ওপর ঘরের লাইটের প্রতিফলন (Glare) না পড়ে।
+- জানালার পাশে দাঁড়িয়ে দিনের স্বাভাবিক আলোতে পাসপোর্টের তথ্য পাতা (Bio-Page) স্ক্যান করুন, যাতে পাতার ওপর ঘরের লাইটের প্রতিফলন (Glare) না পড়ে।
 ধাপ ২: সাদা কাগজের ওপর হাত রেখে আঙুলের ছাপ দিন:
 - টেবিলের ওপর একটি পরিষ্কার সাদা A4 কাগজ রেখে তার ওপর ৪টি আঙুল একসাথে মেলে ধরুন—এতে ক্যামেরা খুব দ্রুত ফোকাস করতে পারে।
-ধাপ ৩: বয়স্কদের হাতের রেখা অস্পষ্ট হলে করণীয়:
-- আঙুলের ছাপ নেওয়ার ১০ মিনিট আগে হালকা ভেজা কাপড় দিয়ে আঙুল মুছে সামান্য লোশন বা ভ্যাসলিন মেখে টিস্যু দিয়ে মুছে নিন; এতে আঙুলের রেখা স্পষ্ট ফুটে ওঠে।
+ধাপ ৩: বয়স্কদের হাতের রেখা অস্পষ্ট হলে করণীয়:
+- আঙুলের ছাপ নেওয়ার ১০ মিনিট আগে হালকা ভেজা কাপড় দিয়ে আঙুল মুছে সামান্য লোশন বা ভ্যাসলিন মেখে টিস্যু দিয়ে মুছে নিন; এতে আঙুলের রেখা স্পষ্ট ফুটে ওঠে।
 
-৩. ভিসা পাওয়ার পর NUSUK অ্যাপে একাউন্ট খোলার নিয়ম কী?
+৩. ভিসা পাওয়ার পর NUSUK অ্যাপে একাউন্ট খোলার নিয়ম কী?
 ধাপ ১: আপনার ১০ সংখ্যার Saudi Visa Number খুঁজে বের করুন:
-- আপনার অনুমোদিত PDF ই-ভিসার (**ksavisa.sa**) উপরের ডান দিকে থাকা ১০ সংখ্যার **Visa Number** (সাধারণত 60 বা 61 দিয়ে শুরু) নোট করুন।
+- আপনার অনুমোদিত PDF ই-ভিসার (**ksavisa.sa**) উপরের ডান দিকে থাকা ১০ সংখ্যার **Visa Number** (সাধারণত 60 বা 61 দিয়ে শুরু) নোট করুন।
 ধাপ ২: Visitor অপশনে রেজিস্ট্রেশন করুন:
-- Nusuk অ্যাপ খুলে **New User -> Visitor** সিলেক্ট করুন। এরপর Visa Number, Passport Number, জন্মতারিখ, Nationality (Bangladesh), ইমেইল ও ফোন নম্বর দিয়ে ইমেইলে আসা ৪ সংখ্যার OTP কোড বসিয়ে লগইন সম্পন্ন করুন।
+- Nusuk অ্যাপ খুলে **New User -> Visitor** সিলেক্ট করুন। এরপর Visa Number, Passport Number, জন্মতারিখ, Nationality (Bangladesh), ইমেইল ও ফোন নম্বর দিয়ে ইমেইলে আসা ৪ সংখ্যার OTP কোড বসিয়ে লগইন সম্পন্ন করুন।
 
-৪. মদিনায় ফ্রি রিয়াজুল জান্নাত (RAWDAH SHAREEF) পারমিট বুক করার গোপন কৌশল কী?
-নিয়ম ১: রওজা শরীফের পারমিট সম্পূর্ণ বিনামূল্যে পাওয়া যায়:
-- মদিনায় কোনো দালালকে টাকা দেবেন না! Nusuk অ্যাপের ভেতরে **Prophet's Mosque Services -> Praying in the Noble Rawdah** অপশন থেকে পুরুষ ও নারীদের জন্য সম্পূর্ণ ফ্রি পারমিট বুক করা যায়।
-নিয়ম ২: শুক্রবারের সাপ্তাহিক স্লট ও প্রতি ৩০ মিনিটের ইনস্ট্যান্ট ট্র্যাক:
-- প্রতি **শুক্রবার সকালে** পরবর্তী সপ্তাহের নতুন স্লট ওপেন হয়। আর মদিনায় পৌঁছানোর পর কোনো স্লট খালি না দেখলে মসজিদে নববীর চত্বরে ফোনের Location (GPS) চালু রেখে **প্রতি ঘণ্টার ০১ মিনিট ও ৩১ মিনিটে** (যেমন ১০:০১, ১০:৩১) অ্যাপ চেক করুন—বাতিল হওয়া স্লটগুলো তাৎক্ষণিকভাবে ওপেন হয়ে যায়!`,
+৪. মদিনায় ফ্রি রিয়াজুল জান্নাত (RAWDAH SHAREEF) পারমিট বুক করার নিয়ম কী?
+নিয়ম ১: রওজা শরীফের পারমিট Nusuk-এ ফ্রি অ্যাপয়েন্টমেন্ট হিসেবে বুক হয়:
+- মদিনায় কোনো দালালকে টাকা দেবেন না! Nusuk অ্যাপের ভেতরে **Prophet's Mosque Services -> Praying in the Noble Rawdah** অপশন থেকে পুরুষ ও নারীদের জন্য প্রতি ৩০ দিনে ১টি পারমিট বুক করা যায়—মন্ত্রণালয়ের সার্ভিস পেজের বর্তমান খরচ ও শর্ত সাপেক্ষে [৪]।
+নিয়ম ২: লাইভ অ্যাভেইলেবিলিটি চেক করুন; নির্দিষ্ট রিলিজ দিনের গ্যারান্টি নেই:
+- মন্ত্রণালয়ের Rawdah সার্ভিস পেজ ফ্রি অ্যাপয়েন্টমেন্ট পারমিট বর্ণনা করে এবং ব্যবহারকারীদের উপলব্ধ তারিখ/সময় স্লট বেছে নিতে বলে। সেখানে নির্দিষ্ট সাপ্তাহিক স্লট-রিলিজ সময়সূচি প্রকাশ করা হয় না [৪]।
+- মদিনায় পৌঁছানোর পর কোনো স্লট খালি না দেখলে মসজিদে নববীর চত্বরে ফোনের Location (GPS) চালু রেখে Nusuk নিয়মিত চেক করুন—বাতিল বা ইনস্ট্যান্ট-এন্ট্রি স্লট উপলব্ধ হতে পারে। অ্যাপে দেখা যেকোনো সময়কে লাইভ availability হিসেবে ধরুন, গ্যারান্টি হিসেবে নয়।
+
+৫. সচরাচর জিজ্ঞাসা
+Saudi Visa Bio কি প্রত্যেক বাংলাদেশি যাত্রীর জন্য বাধ্যতামূলক?
+না। বর্তমান সৌদি মন্ত্রণালয়ের FAQ বাংলাদেশকে ইলেকট্রনিকভাবে ইস্যু হওয়া Umrah visa-র biometric enrollment-এর তালিকাভুক্ত করে এবং Saudi Visa Bio-র নাম উল্লেখ করে। আপনার বর্তমান অফিশিয়াল visa application ও অ্যাপের নির্দেশনা অনুসরণ করুন; এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার visa-র জন্য প্রযোজ্য বলে ধরে নেবেন না [১-২]।
+প্রতি সপ্তাহে নির্দিষ্ট দিনে কি Rawdah বুক করা যায়?
+মন্ত্রণালয়ের Rawdah সার্ভিস পেজে নির্দিষ্ট সাপ্তাহিক রিলিজ দিন প্রকাশ করা হয় না। Nusuk-এ ফ্রি অ্যাপয়েন্টমেন্ট পারমিট বুক করুন এবং লাইভ availability চেক করুন; বাতিল বা ইনস্ট্যান্ট স্লট আসতে পারে [৪]।
+Rawdah পারমিটের স্ক্রিনশট কি গেটে গ্রহণ করা হয়?
+না। গার্ডরা Nusuk অ্যাপের লাইভ dynamic QR কোড স্ক্যান করেন, তাই মদিনায় মোবাইল ডেটা চালু রাখুন।
+ট্যুরিস্ট বা স্টপওভার visa দিয়ে কি ফরজ হজ করা যায়?
+না। Umrah, ট্যুরিস্ট বা স্টপওভার visa বাংলাদেশের হজ নিবন্ধন বা সৌদি হজ পারমিটের বিকল্প নয়। বর্তমান বাংলাদেশ ও সৌদি হজ নির্দেশনা অনুসরণ করুন [৯]।
+আমার ১০ সংখ্যার Saudi Visa Number কোথায় পাব?
+অনুমোদিত PDF Umrah e-Visa খুলে উপরের ডান দিকে থাকা ১০ সংখ্যার নম্বর (সাধারণত 60 বা 61 দিয়ে শুরু) নোট করুন—application/MOFA reference number নয়।
+
+`,
     internalLinks: [
       { text: "সম্পূর্ণ DIY Umrah ও ১০ দিনের BDT বাজেট গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "নারীদের জন্য ওমরাহ গাইড ও মদিনার Ladies' Gate 25–29", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
       { text: "hajj.gov.bd পোর্টালে সরকারি ও বেসরকারি হজ নিবন্ধন", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
     ],
     affiliateCTA: {
       provider: "airalo",
       headline: "রওজা শরীফের গেটে লাইভ Nusuk QR কোড দেখাতে ইন্টারনেট অপরিহার্য",
-      body: "মসজিদে নববীর গেটে স্ক্রিনশট গ্রহণ করা হয় না। ঢাকা ছাড়ার আগেই ফোনে Saudi Arabia 5G eSIM ইনস্টল করে নিন।",
+      body: "মসজিদে নববীর গেটে স্ক্রিনশট গ্রহণ করা হয় না। ঢাকা ছাড়ার আগেই ফোনে Saudi Arabia 5G eSIM ইনস্টল করে নিন।",
     },
   },
 
@@ -2598,7 +2669,8 @@ export function getLocalizedBlogs(lang: Language): BlogPost[] {
       content: bn.content,
       internalLinks: bn.internalLinks,
       references:
-        post.slug === "umrah-hajj-guide-bangladesh-nusuk-bdt-cost"
+        post.slug === "umrah-hajj-guide-bangladesh-nusuk-bdt-cost" ||
+        post.slug === "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit"
           ? bn.references || post.references
           : post.references,
       affiliateCTA: bn.affiliateCTA || post.affiliateCTA,
