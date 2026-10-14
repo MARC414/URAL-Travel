@@ -85,8 +85,8 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     airlines: ["Biman Bangladesh Airlines", "Thai Airways", "US-Bangla Airlines", "Thai Lion Air"],
     bestTimeToBook: "30-50 days before departure",
     duration: "2h 30m (Direct)",
-    visaRequirement: "Pre-arranged Visa (Sticker Visa via VFS Global Dhaka/Chattogram, or E-Visa)",
-    quickAnswer: "Direct flights from Dhaka to Bangkok take exactly 2 hours and 30 minutes, with economy roundtrip fares typically ranging from BDT 31,500 to BDT 45,000. Major carriers like Biman Bangladesh Airlines, Thai Airways, and US-Bangla Airlines fly daily to Suvarnabhumi Airport (BKK), while Thai Lion Air operates low-cost flights to Don Mueang Airport (DMK). Bangladeshi passport holders must secure a pre-arranged sticker visa or online e-visa prior to departure, as they are not eligible for visa-free entry or visa on arrival.",
+    visaRequirement: "Advance Tourist e-Visa via Thailand's official portal (thaievisa.go.th)",
+    quickAnswer: "Direct flights from Dhaka to Bangkok take about 2 hours and 30 minutes, with economy roundtrip fares typically ranging from BDT 31,500 to BDT 45,000. Major carriers like Biman Bangladesh Airlines, Thai Airways, and US-Bangla Airlines fly to Suvarnabhumi Airport (BKK), while Thai Lion Air operates to Don Mueang Airport (DMK). Bangladeshi passport holders should obtain an approved Tourist e-Visa through Thailand's official portal before departure; check current Dhaka mission instructions.",
     keyFacts: [
       { label: "Flight Time", value: "2 hours 30 mins" },
       { label: "Direct Airlines", value: "Thai Airways, Biman, US-Bangla, Thai Lion" },
@@ -100,7 +100,7 @@ export const FLIGHTS_DATA: FlightRoute[] = [
       },
       {
         question: "Can citizens of Bangladesh get a Visa on Arrival in Thailand?",
-        answer: "No, Bangladeshi citizens must obtain an eVisa or a physical sticker visa in advance from Royal Thai Embassy partner centers like VFS Global or Simon Logistics."
+        answer: "No. Bangladeshi citizens must obtain an advance Tourist e-Visa through Thailand's official portal (thaievisa.go.th). Follow the current Dhaka mission checklist and any instructions shown in your application."
       }
     ],
     schemaMarkup: {
@@ -757,8 +757,8 @@ export const VISA_DATA: VisaGuide[] = [
     id: "thailand-visa",
     country: "Thailand",
     requirementType: "e-Visa",
-    costBdt: "approx BDT 6,500 - 8,500 (Tourist Visa government fee ~THB 2,000, plus service charges if applying via an agency)",
-    processingTime: "5 - 10 Business Days (allow up to 15 in peak season - Oct to Feb)",
+    costBdt: "Government Tourist e-Visa fee: confirm the current amount in the official portal/Embassy schedule. Bank or payment-provider charges are separate. Optional agency service fees are separate and vary by provider; request an itemized quote before paying.",
+    processingTime: "Varies by application; check the live portal and Embassy notices. No decision time is guaranteed.",
     documentChecklist: [
       {
         category: "Core Documents (Uploaded Online via thaievisa.go.th)",
@@ -767,8 +767,8 @@ export const VISA_DATA: VisaGuide[] = [
           "Digital photo, 35mm x 45mm, white background, taken within the last 6 months",
           "Confirmed return flight ticket (Dhaka - Bangkok - Dhaka)",
           "Hotel booking confirmation for the full stay",
-          "6-month personal bank statement showing a minimum balance of THB 20,000 (approx BDT 65,000) per person, or THB 40,000 (approx BDT 1,30,000) per family",
-          "Bank Solvency Certificate confirming the above balance"
+          "Financial evidence requested by the current Dhaka mission checklist in the e-Visa portal. The general Thai Tourist Visa page lists at least THB 20,000 (for example, recent bank statements or sponsorship); the Dhaka Embassy TR checklist updated November 30, 2022 lists BDT 60,000 per person or BDT 120,000 per family, six-month statements, and a solvency certificate. Confirm which current requirement applies before applying.",
+          "Any bank solvency, sponsor, family-relationship, or additional evidence requested by the current portal checklist"
         ]
       },
       {
@@ -784,21 +784,21 @@ export const VISA_DATA: VisaGuide[] = [
     stepByStep: [
       "Create an account on Thailand's official e-Visa portal (thaievisa.go.th) and select the Dhaka jurisdiction for your application.",
       "Choose 'Tourist Visa (TR)', then enter your travel dates, passport details, and accommodation information exactly as they appear on your booking confirmations.",
-      "Upload clear digital scans: passport bio-page, recent 35x45mm photo, return flight ticket, hotel booking, 6-month bank statement, and the relevant occupational document for your category.",
-      "Pay the visa fee (approx THB 2,000) through the portal. Note: some applicants in Bangladesh may still be directed to pay via the Royal Thai Embassy or an authorised visa centre (VFS) due to local payment processing limits - the portal will indicate this if it applies to you.",
-      "Track your application status by email or on the portal. Processing typically takes 5-10 working days. Once approved, download and print the e-Visa approval notice in colour and present it at Dhaka airport check-in and to Thai immigration on arrival."
+      "Upload clear digital scans of the passport bio-page, a recent photo, return flight ticket, accommodation evidence, the financial documents requested by the current Dhaka mission checklist, and the relevant occupational documents for your category.",
+      "Follow the payment instructions and amount shown for your Dhaka application in the official e-Visa portal and the Embassy's current fee notice. Keep the government visa fee separate from any bank/payment processing charge; optional agency assistance is a third, provider-set cost. Confirm each amount and any agency quote before paying.",
+"Track your application status by email or on the portal. Decision times vary by application and are not guaranteed; monitor messages and follow any additional-document request. Once approved, download the notice and follow live Dhaka mission instructions for presenting it at check-in and to Thai immigration."
     ],
-    quickAnswer: "Bangladeshi passport holders cannot get a visa on arrival in Thailand and must apply for an advance e-visa or sticker visa. The tourist visa allows a maximum stay of 60 days, costs approximately BDT 6,500 to BDT 8,500 (THB 2,000 government fee), and takes 5 to 10 working days to process. All applications from Bangladesh are processed online through the official Thai e-Visa portal (thaievisa.go.th). You must upload a six-month bank statement showing a minimum balance of BDT 65,000 (THB 20,000) per person to qualify.",
+    quickAnswer: "Bangladeshi passport holders should obtain an advance Tourist e-Visa through Thailand's official portal (thaievisa.go.th). The Dhaka Embassy's public TR checklist, last updated November 30, 2022, lists six-month bank statements and BDT 60,000 per person or BDT 120,000 per family; current portal prompts may differ, so confirm the applicable Dhaka requirement. The government visa fee, bank/payment charges, and optional agency fee are separate—check the live amount and an itemized provider quote before paying. Approval and processing time are not guaranteed.",
     keyFacts: [
       { label: "Visa Route", value: "Official e-Visa Portal (thaievisa.go.th)" },
       { label: "Visa on Arrival Eligible?", value: "No - advance visa required" },
       { label: "Visa Validity / Stay", value: "60 days (Tourist Visa - TR)" },
-      { label: "Typical Processing Time", value: "5 - 10 working days" }
+      { label: "Processing Time", value: "Varies by application; no decision time is guaranteed" }
     ],
     faqs: [
       {
         question: "Can Bangladeshi passport holders get a visa on arrival in Thailand?",
-        answer: "No. Bangladeshi citizens are not on Thailand's visa-on-arrival eligibility list and must obtain a Tourist Visa (TR) before departure - either through the official e-Visa portal or, in some cases, through the Royal Thai Embassy or an authorised visa centre in Dhaka."
+        answer: "No. Bangladeshi citizens must obtain an advance Tourist e-Visa through Thailand's official portal (thaievisa.go.th). Follow the current Dhaka mission checklist and any additional instructions shown in your application."
       },
       {
         question: "Is the Thailand e-Visa for Bangladeshi citizens new?",
@@ -806,7 +806,7 @@ export const VISA_DATA: VisaGuide[] = [
       },
       {
         question: "How much bank balance do I need for a Thailand visa from Bangladesh?",
-        answer: "Plan for at least THB 20,000 (about BDT 65,000) per person, or THB 40,000 (about BDT 1,30,000) for a family travelling together, shown via a 6-month bank statement plus a bank solvency certificate."
+        answer: "Requirements can differ between the general e-Visa page and the Dhaka mission checklist. The Embassy Dhaka TR checklist, last updated November 30, 2022, lists BDT 60,000 per person or BDT 120,000 per family with six-month bank statements and a solvency certificate; the general Thai Tourist Visa page lists THB 20,000 financial evidence. Confirm the current Dhaka-specific prompt in the live portal before applying; the dated checklist may have changed."
       },
       {
         question: "How long can I stay in Thailand on a Tourist Visa (TR)?",
@@ -814,7 +814,7 @@ export const VISA_DATA: VisaGuide[] = [
       },
       {
         question: "Do I need to submit my passport in person for a Thailand visa from Bangladesh?",
-        answer: "Most applicants can now complete the process fully online through thaievisa.go.th. Some categories may still be asked to submit documents in person at the Royal Thai Embassy in Dhaka or an authorised visa centre - the portal will tell you if this applies to your application."
+        answer: "The current application is submitted through thaievisa.go.th. Follow the live portal if the Dhaka mission requests additional documents or any in-person action; older offline instructions may not apply."
       },
       {
         question: "Is one Thailand visa valid for Bangkok, Phuket, and Chiang Mai?",
@@ -844,13 +844,7 @@ export const VISA_DATA: VisaGuide[] = [
     {
       "@type": "HowTo",
       "name": "How to get a Thailand visa as a Bangladeshi citizen",
-      "description": "Bangladeshi passport holders are not eligible for visa-free entry or visa on arrival in Thailand and must apply in advance. Since January 2025, this is done through Thailand's official e-Visa portal (thaievisa.go.th), which replaced the old embassy-only sticker process for most applicants. The Tourist Visa (TR) allows a 60-day stay, costs around THB 2,000 (about BDT 6,500-8,500), and typically takes 5-10 working days to process.",
-      "totalTime": "P10D",
-      "estimatedCost": {
-        "@type": "MonetaryAmount",
-        "currency": "BDT",
-        "value": "6500"
-      },
+      "description": "Bangladeshi passport holders should apply in advance through Thailand's official e-Visa portal (thaievisa.go.th); approval and processing time are not guaranteed. The Tourist Visa (TR) permits a stay according to the approved e-Visa. Government visa fees, bank/payment processing charges, and optional agency service fees are separate; confirm current amounts in the live portal, Embassy schedule, and any provider quote.",
       "step": [
         {
           "@type": "HowToStep",
@@ -862,15 +856,15 @@ export const VISA_DATA: VisaGuide[] = [
         },
         {
           "@type": "HowToStep",
-          "text": "Upload clear digital scans: passport bio-page, recent 35x45mm photo, return flight ticket, hotel booking, 6-month bank statement, and the relevant occupational document for your category."
+          "text": "Upload clear digital scans of the passport bio-page, a recent photo, return flight ticket, accommodation evidence, the financial documents requested by the current Dhaka mission checklist, and the relevant occupational documents for your category."
         },
         {
           "@type": "HowToStep",
-          "text": "Pay the visa fee (approx THB 2,000) through the portal. Note: some applicants in Bangladesh may still be directed to pay via the Royal Thai Embassy or an authorised visa centre (VFS) due to local payment processing limits - the portal will indicate this if it applies to you."
+          "text": "Follow the payment instructions and amount shown for your Dhaka application in the official e-Visa portal and the Embassy's current fee notice. Keep the government visa fee separate from any bank/payment processing charge; optional agency assistance is a third, provider-set cost. Confirm each amount and any agency quote before paying."
         },
         {
           "@type": "HowToStep",
-          "text": "Track your application status by email or on the portal. Processing typically takes 5-10 working days. Once approved, download and print the e-Visa approval notice in colour and present it at Dhaka airport check-in and to Thai immigration on arrival."
+          "text": "Track your application status by email or on the portal. Decision times vary by application and are not guaranteed; monitor messages and follow any additional-document request. Once approved, download the notice and follow live Dhaka mission instructions for presenting it at check-in and to Thai immigration."
         }
       ]
     }
@@ -1277,8 +1271,8 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       { day: 4, title: "Floating Market Tour", activities: ["Book an early morning local minibus tour to Damnoen Saduak Floating Market", "Ride a longtail boat through local orchard channels, watching vendors cook directly on canoes", "Visit the nearby Maeklong Railway Market, where market awnings collapse as trains roll through"] }
     ],
     localTransport: ["BTS Skytrain & MRT Subway (extremely fast, air-conditioned, BDT 50-150 per ticket)", "Grab / Bolt Ride-sharing (highly transparent pricing, great for families to avoid taxi negotiations)", "Khlong Canal Boats (fast, off-the-grid transportation, BDT 30 per cruise)"],
-    budgetBdt: "BDT 35,000 - BDT 60,000 per person (Excluding airfare, based on comfortable shopping & dining)",
-    quickAnswer: "Bangkok represents the ultimate mix of retail and culinary travel. For a basic 4-day trip, budget BDT 35,000 for shopping, hotels, transport, and amazing food. Utilize the BTS Skytrain to skip Bangkok's infamous gridlock, and focus your food itinerary around Pratunam halal zones or Sukhumvit.",
+    budgetBdt: "BDT 35,000 - BDT 60,000 per person (excluding airfare; visa charges are not itemized—verify the government e-Visa fee, bank/payment charges, and optional agency fees separately)",
+    quickAnswer: "Bangkok represents the ultimate mix of retail and culinary travel. For a basic 4-day trip, budget BDT 35,000 for shopping, hotels, transport, and amazing food; airfare is separate. Visa-related charges are not itemized in this local budget: verify the current government e-Visa fee, bank/payment charges, and any optional agency service fee separately. Utilize the BTS Skytrain to skip Bangkok's infamous gridlock, and focus your food itinerary around Pratunam halal zones or Sukhumvit.",
     keyFacts: [
       { label: "Optimal Duration", value: "4 to 6 Days" },
       { label: "Daily Local Budget", value: "BDT 6,000 - 9,000 / day" },
@@ -1308,7 +1302,7 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       },
       {
         question: "Can Bangladeshi citizens get a visa on arrival in Thailand?",
-        answer: "No. Bangladeshi passport holders are not on Thailand's visa-on-arrival eligibility list and must hold a Tourist Visa (TR) before departure. Apply through the official Thai e-Visa portal (thaievisa.go.th) under the Dhaka jurisdiction. The visa allows a maximum stay of 60 days, costs approximately BDT 6,500 to 8,500 (THB 2,000 government fee), and takes 5 to 10 working days to process. You must upload a six-month bank statement showing a minimum balance of BDT 65,000 (THB 20,000) per person to qualify."
+        answer: "No. Bangladeshi citizens need an advance Tourist e-Visa through Thailand's official portal (thaievisa.go.th) and should follow the current Dhaka mission checklist. The dated Embassy TR checklist and general portal page give different financial-evidence details, so confirm the live requirement before applying. Check the current government fee in the portal/Embassy schedule; bank/payment charges and optional agency fees are separate, and approval or timing is not guaranteed."
       }
     ],
     schemaMarkup: {
@@ -1624,7 +1618,7 @@ export const TRIP_COSTS_DATA: TripCostData[] = [
       "Get a tourist VAT refund form (P.P.10) for purchases over 2,000 THB at major stores to claim 7% VAT cash back at Bangkok airport before exiting.",
       "Buy a 1-Day Pass for the BTS Skytrain for BDT 450, granting endless air-conditioned train travel and cutting transit cost."
     ],
-    quickAnswer: "Thailand travel budgets from Dhaka rely heavily on your shopping style. A 5-day shopping and leisure itinerary usually costs around BDT 70,000-80,000 (including flights!). Backpackers limiting shopping can experience Bangkok comfortably for BDT 55,000, while premium travelers staying in five-star hotels with fine dining should budget BDT 1,35,000+.",
+    quickAnswer: "Thailand travel budgets from Dhaka rely heavily on your shopping style. A 5-day shopping and leisure itinerary usually costs around BDT 70,000-80,000 (including flights!). Backpackers limiting shopping can experience Bangkok comfortably for BDT 55,000, while premium travelers staying in five-star hotels with fine dining should budget BDT 1,35,000+. Visa-related charges are not itemized in these broad estimates: verify the current government e-Visa fee, separate bank/payment charges, and any optional agency service fee before treating a total as all-in.",
     keyFacts: [
       { label: "Bargain Backpacker (5d)", value: "approx BDT 55,000" },
       { label: "Comfort Shopping (5d)", value: "approx BDT 80,000" },
@@ -1639,7 +1633,7 @@ export const TRIP_COSTS_DATA: TripCostData[] = [
     ],
     schemaMarkup: {
       type: "TripCostData",
-      description: "Thailand trip price matrix for Bangladesh",
+      description: "Thailand trip budget estimates for Bangladesh; visa-related charges are not itemized and should be verified separately.",
       code: `{
   "@context": "https://schema.org",
   "@type": "PriceSpecification",
@@ -2000,9 +1994,10 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-9",
     slug: "top-budget-family-destinations-from-dhaka",
     title: "Top 6 Budget-Friendly Family Destinations from Dhaka in 2026 (Ranked by BDT Cost & Visa Ease)",
-    summary: "Planning an international holiday from Dhaka with young children, a spouse, or elderly parents requires balancing flight duration, predictable visa approval, Halal food access, stroller-friendly streets, and total cost in Bangladeshi Taka. In this ranked 2026 family guide, we compare the top six outbound destinations from Bangladesh from lowest to highest 5-day per-person BDT budget: Nepal (from BDT 42,000 with free Visa on Arrival), Malaysia (from BDT 68,000 with 4-day online e-Visa and universal JAKIM Halal dining), Thailand (from BDT 72,000 with Safari World and medical check-up access), Maldives local islands (Maafushi & Hulhumalé from BDT 75,000), Singapore, and Dubai.",
+    summary: "Planning an international holiday from Dhaka with young children, a spouse, or elderly parents requires balancing flight duration, destination-specific visa requirements, Halal food access, stroller-friendly streets, and total cost in Bangladeshi Taka. In this ranked 2026 family guide, we compare the top six outbound destinations from Bangladesh from lowest to highest 5-day per-person BDT budget: Nepal (from BDT 42,000 with free Visa on Arrival), Malaysia (from BDT 68,000 with online e-Visa and JAKIM Halal dining), Thailand (from BDT 72,000 with Safari World and medical check-up access), Maldives local islands (Maafushi & Hulhumalé from BDT 75,000), Singapore, and Dubai. Visa approval and live prices can change; check current requirements before booking. Thailand visa-related charges are not itemized in these trip ranges; verify the current government e-Visa fee, bank/payment charges, and optional agency service fees separately.",
     category: "Family & Budget",
     date: "September 26, 2026",
+    updatedAt: "2026-10-14",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
     internalLinks: [
@@ -2414,10 +2409,10 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-32",
     slug: "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
     title: "Thailand Official e-Visa from Bangladesh: Dhaka Documents, Bank Evidence & Application Checks (2026)",
-    summary: "Bangladeshi applicants use Thailand's official e-Visa portal, but approval and processing time are not guaranteed. The Royal Thai Embassy Dhaka's public Tourist Visa TR checklist, last updated November 30, 2022, lists six-month bank statements and financial evidence of BDT 60,000 per person or BDT 120,000 per family. That dated checklist may not match every current online case, so confirm requirements on the live portal before applying.",
+    summary: "Bangladeshi applicants use Thailand's official e-Visa portal, but approval and processing time are not guaranteed. The Royal Thai Embassy Dhaka's public Tourist Visa TR checklist, last updated November 30, 2022, lists six-month bank statements and financial evidence of BDT 60,000 per person or BDT 120,000 per family; confirm current requirements on the live portal. Check the current government visa fee in the portal or Embassy schedule; bank/payment charges and optional agency fees are separate.",
     category: "Visa & Immigration",
     date: "September 27, 2026",
-    updatedAt: "2026-10-12",
+    updatedAt: "2026-10-14",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "3 min read",
     references: [
@@ -2435,6 +2430,16 @@ export const BLOG_DATA: BlogPost[] = [
         name: "Royal Thai Embassy Dhaka — Tourist Visa TR checklist (updated Nov 30, 2022)",
         nameBn: "রয়্যাল থাই এমব্যাসি ঢাকা — Tourist Visa TR চেকলিস্ট (হালনাগাদ: ৩০ নভেম্বর ২০২২)",
         url: "https://dhaka.thaiembassy.org/en/publicservice/tourist-visa-tr?page=5d83296315e39c2540006a6c&menu=5d83296315e39c2540006a6d",
+      },
+      {
+        name: "Royal Thai Embassy Dhaka — Consular Service Fee (updated September 2025)",
+        nameBn: "রয়্যাল থাই এমব্যাসি ঢাকা — কনস্যুলার সার্ভিস ফি (হালনাগাদ: সেপ্টেম্বর ২০২৫)",
+        url: "https://dhaka.thaiembassy.org/en/content/consular-service-fee-updated-september-2025?page=5d83296215e39c2540006a05&menu=5d83296215e39c2540006a0e",
+      },
+      {
+        name: "Royal Thai Embassy Dhaka — Facilitation of E-Visa Payment",
+        nameBn: "রয়্যাল থাই এমব্যাসি ঢাকা — ই-ভিসা পেমেন্টের নির্দেশনা",
+        url: "https://dhaka.thaiembassy.org/en/content/facilitation-ofe-visa-payment?page=5d83296215e39c2540006a05&menu=5d83296215e39c2540006a0e",
       },
     ],
     internalLinks: [

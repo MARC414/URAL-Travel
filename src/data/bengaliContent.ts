@@ -13,6 +13,7 @@ export const BENGALI_BLOG_OVERRIDES: Record<
     date: string;
     author: string;
     readTime: string;
+    references?: BlogPost["references"];
     content: string;
     internalLinks: { text: string; path: string }[];
     affiliateCTA?: {
@@ -177,7 +178,7 @@ export const BENGALI_BLOG_OVERRIDES: Record<
   "top-budget-family-destinations-from-dhaka": {
     title: "ঢাকা থেকে পরিবারের সাথে ঘোরার সেরা ৬টি বাজেট ফ্রেন্ডলি দেশ (2026 — BDT খরচ ও Visa তুলনা)",
     summary:
-      "ছোট বাচ্চা, স্ত্রী বা বয়স্ক বাবা-মাকে নিয়ে বাংলাদেশ থেকে বিদেশে ফ্যামিলি ট্যুরের পরিকল্পনা করতে গেলে ফ্লাইটের সময়, সহজ ভিসা প্রসেসিং, Halal খাবারের সুবিধা এবং বাংলাদেশি টাকায় (BDT) মোট বাজেটের দিকে খেয়াল রাখতে হয়। এই র‍্যাঙ্কিং গাইডে ঢাকা থেকে ৫ দিনের জনপ্রতি সর্বনিম্ন খরচের ক্রমানুসারে সেরা ৬টি দেশ তুলনা করা হয়েছে: Nepal (মাত্র ৪২,০০০ টাকা থেকে, ফ্রি Visa on Arrival), Malaysia (৬৮,০০০ টাকা থেকে, ৪ দিনে অনলাইন e-Visa ও শতভাগ হালাল খাবার), Thailand (৭২,০০০ টাকা থেকে, Safari World ও মেডিকেল চেকআপ), Maldives Local Islands (Maafushi ৭৫,০০০ টাকা থেকে), Singapore এবং Dubai।",
+      "ছোট বাচ্চা, স্ত্রী বা বয়স্ক বাবা-মাকে নিয়ে বাংলাদেশ থেকে বিদেশে ফ্যামিলি ট্যুরের পরিকল্পনা করতে গেলে ফ্লাইটের সময়, গন্তব্যভেদে visa requirement, Halal খাবারের সুবিধা এবং বাংলাদেশি টাকায় (BDT) মোট বাজেটের দিকে খেয়াল রাখতে হয়। এই র‍্যাঙ্কিং গাইডে ঢাকা থেকে ৫ দিনের জনপ্রতি সর্বনিম্ন খরচের ক্রমানুসারে সেরা ৬টি দেশ তুলনা করা হয়েছে: Nepal (মাত্র ৪২,০০০ টাকা থেকে, ফ্রি Visa on Arrival), Malaysia (৬৮,০০০ টাকা থেকে, অনলাইন e-Visa ও Halal খাবার), Thailand (৭২,০০০ টাকা থেকে, Safari World ও মেডিকেল চেকআপ), Maldives Local Islands (Maafushi ৭৫,০০০ টাকা থেকে), Singapore এবং Dubai। Visa approval ও live price বদলাতে পারে—বুকিংয়ের আগে বর্তমান নিয়ম যাচাই করুন। Thailand-এর visa-related charge এই trip range-এ আলাদা itemized নয়; current government e-Visa fee, bank/payment charge ও optional agency service fee আলাদা করে যাচাই করুন।",
     category: "Family & Budget",
     date: "২৬ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -198,7 +199,7 @@ export const BENGALI_BLOG_OVERRIDES: Record<
 
 ৩. THAILAND (ব্যাংকক, পাতায়া ও ফুকেট) — থিম পার্ক, শপিং ও ফ্যামিলি মেডিকেল চেকআপ
 - **৫ দিনের জনপ্রতি খরচ (ফ্যামিলি শেয়ারিং):** **BDT 72,000 – BDT 88,000**
-- **ভিসার নিয়ম:** অনলাইন **Thailand Official e-Visa** (thaievisa.go.th পোর্টালে আবেদন, ৫–১০ কার্যদিবসে PDF ভিসা ইমেইলে আসে) — সরকারি পোর্টাল ফি প্রতি জন **≈ USD 40 (~BDT 4,800)**; এজেন্ট সার্ভিস ফি সাধারণত অতিরিক্ত **BDT 1,600–3,610** যোগ হয়; মোট আনুমানিক **BDT 6,500–8,500** (ফি অফেরেবল নয়)।
+- **ভিসার নিয়ম:** যাত্রার আগে **Thailand Official e-Visa** (thaievisa.go.th) আবেদন করুন; approval বা নির্দিষ্ট processing time নিশ্চিত নয়। সরকারি visa fee portal/Embassy-এর বর্তমান schedule-এ দেখুন; bank/payment charge আলাদা এবং optional agency service fee provider-ভেদে বদলায়—agency নিলে লিখিত itemized quote নিন।
 - **ফ্লাইটের সময়:** ঢাকা থেকে মাত্র ২ ঘণ্টা ২৫ মিনিট।
 - **কেন পরিবারের জন্য সেরা:** বাচ্চাদের জন্য **Safari World Bangkok**, Sea Life Ocean World ও Chao Phraya ডিনার ক্রুজ যেমন আছে, তেমনি বয়স্ক বাবা-মায়ের জন্য Bumrungrad বা Bangkok Hospital-এ বার্ষিক হেলথ চেকআপ এবং Pratunam ও Sukhumvit Soi 3-এ প্রচুর হালাল রেস্টুরেন্ট রয়েছে।
 
@@ -318,7 +319,7 @@ Nepal এবং Maldives-এ বাংলাদেশিদের জন্য �
 
 ১. ভিসার সহজতা: NEPAL এগিয়ে
 - **Nepal:** Nepal Immigration-এর প্রকাশিত নিয়মে Afghanistan ছাড়া যোগ্য SAARC নাগরিকদের visa year-এ প্রথম সফরে সর্বোচ্চ ৩০ দিনের gratis tourist visa on arrival-এর কথা বলা হয়েছে। Bangladesh SAARC-এর সদস্য; তবু যাত্রার আগে বর্তমান যোগ্যতা, entry point ও fee নিশ্চিত করুন।
-- **Thailand:** বাংলাদেশি আবেদনকারীদের ভ্রমণের আগে tourist visa নিতে হয়। আবেদন official Thai e-Visa portal দিয়ে হয় এবং অনুমোদিত হলে confirmation email-এ আসে। Dhaka mission-এর বর্তমান checklist-এ প্রয়োজনীয় কাগজপত্র, ফি ও সময়সীমা যাচাই করুন—অনুমোদন বা নির্দিষ্ট processing time নিশ্চিত নয়। পুরোনো sticker-only বা visa application-centre নির্দেশনার ওপর নির্ভর করবেন না।
+- **Thailand:** বাংলাদেশি আবেদনকারীদের ভ্রমণের আগে Tourist e-Visa নিতে হয়। আবেদন official Thai e-Visa portal দিয়ে হয় এবং অনুমোদিত হলে confirmation email-এ আসে। Dhaka mission-এর বর্তমান checklist-এ প্রয়োজনীয় কাগজপত্র ও ফি যাচাই করুন—অনুমোদন বা নির্দিষ্ট processing time নিশ্চিত নয়। পুরোনো offline-submission নির্দেশনা বর্তমান portal flow-তে প্রযোজ্য নাও হতে পারে।
 
 ২. বাজেটের তুলনা (৫ দিনের ট্রিপ)
 - **Nepal:** ফ্লাইট, হোটেল ও খাবারসহ Kathmandu/Pokhara-তে ৫ দিনের আনুমানিক বাজেট **BDT 45,000–65,000**।
@@ -1333,7 +1334,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
   "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": {
     title: "বাংলাদেশ থেকে Thailand Official e-Visa: Dhaka ডকুমেন্ট, ব্যাংক প্রমাণ ও আবেদন যাচাই (2026)",
     summary:
-      "বাংলাদেশি আবেদনকারীরা Thailand-এর official e-Visa portal ব্যবহার করেন, তবে অনুমোদন বা processing time নিশ্চিত নয়। Thai e-Visa-এর সাধারণ tourist page-এ THB 20,000 financial evidence ও গত ৩ মাসের bank statement বা sponsor letter-এর কথা আছে। Dhaka Embassy-র প্রকাশিত TR checklist (হালনাগাদ ৩০ নভেম্বর ২০২২) ৬ মাসের statement এবং জনপ্রতি BDT 60,000 বা পরিবারপ্রতি BDT 120,000 উল্লেখ করে। দুই নির্দেশনার বয়স ও বিস্তারিত আলাদা—আবেদনের আগে live portal-এ Dhaka-র বর্তমান checklist যাচাই করুন।",
+      "বাংলাদেশি আবেদনকারীরা Thailand-এর official e-Visa portal ব্যবহার করেন; approval বা processing time নিশ্চিত নয়। Dhaka Embassy-র প্রকাশিত TR checklist (হালনাগাদ ৩০ নভেম্বর ২০২২) ৬ মাসের statement এবং জনপ্রতি BDT 60,000 বা পরিবারপ্রতি BDT 120,000 উল্লেখ করে, তবে বর্তমান portal prompt ভিন্ন হতে পারে। সরকারি visa fee portal/Embassy-এর বর্তমান schedule-এ যাচাই করুন; bank/payment charge ও optional agency service fee আলাদা।",
     category: "Visa & Immigration",
     date: "২৭ সেপ্টেম্বর, ২০২৬",
     author: "ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)",
@@ -1344,6 +1345,7 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 প্রথমে **Thai e-Visa portal**-এ সঠিক mission নির্বাচন করুন। নির্দিষ্ট দূতাবাস/কনস্যুলেটের অতিরিক্ত নিয়ম যাচাই করতে পোর্টাল নিজেই সংশ্লিষ্ট mission-এর নির্দেশনা দেখতে বলে।
 - **ভিসার ধরন:** পোর্টালে single-entry Tourist Visa (**TR**)-এর validity ৩ মাস দেখানো হয়েছে। ভ্রমণের আগে অনুমোদিত e-Visa-তে entry window ও কতদিন থাকা যাবে তা মিলিয়ে নিন।
 - **প্রসেসিং সময়:** সবার জন্য নির্দিষ্ট বা guaranteed processing time নেই। যথেষ্ট আগে আবেদন করুন, email ও application dashboard দেখুন, এবং ঢাকাস্থ রয়েল থাই দূতাবাস অতিরিক্ত কাগজ চাইলে সেই নির্দেশ অনুসরণ করুন।
+- **ফি ও পেমেন্ট:** সরকারি visa fee-এর বর্তমান অঙ্ক live e-Visa portal বা Embassy-এর fee schedule-এ যাচাই করুন। Bank/payment-provider charge আলাদা; ঐচ্ছিক agency service fee-ও আলাদা ও provider-ভেদে বদলায়। Agency ব্যবহার করলে payment-এর আগে লিখিত itemized quote নিন।
 - **আর্থিক প্রমাণ:** পররাষ্ট্র মন্ত্রণালয়ের সাধারণ Tourist Visa পেজে অন্তত **THB 20,000** financial evidence—যেমন গত ৩ মাসের bank statement বা sponsor letter—উল্লেখ করা আছে। ঢাকাস্থ দূতাবাসের প্রকাশিত TR checklist (সর্বশেষ হালনাগাদ **৩০ নভেম্বর ২০২২**) ৬ মাসের bank statement, solvency certificate এবং **জনপ্রতি BDT 60,000 বা পরিবারপ্রতি BDT 120,000** উল্লেখ করে। নির্দেশনা দুটির বয়স ও বিস্তারিত আলাদা; কোনো অঙ্কের ওপর নির্ভর করার আগে portal-এ Dhaka mission-এর বর্তমান checklist দেখুন। শুধু নির্দিষ্ট balance থাকলেই ভিসা নিশ্চিত হয় না।
 
 ২. ডকুমেন্ট প্রস্তুতির তালিকা (সর্বশেষ portal checklist অনুসরণ করুন)
@@ -1364,7 +1366,34 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
 ৩. আবেদন জমার আগে তিনটি ব্যবহারিক যাচাই
 - **আর্থিক নথি পরিষ্কার রাখুন:** ব্যাংক স্টেটমেন্টে দেখানো অর্থের উৎস ব্যাখ্যা করতে পারে—এমন সত্য ও সামঞ্জস্যপূর্ণ প্রমাণ দিন। ব্যাখ্যাহীন কৃত্রিম জমা এড়িয়ে চলুন।
 - **বুকিংয়ের তথ্য মিলিয়ে নিন:** ফ্লাইট ও থাকার পরিকল্পনা যেন আবেদনের তারিখ এবং উদ্দেশ্যের সঙ্গে মেলে; dummy বা বিভ্রান্তিকর booking ব্যবহার করবেন না।
-- **পরিচয়-তথ্য আবার পড়ুন:** payment-এর আগে নামের বানান, passport number ও তারিখ যাচাই করুন। ফি ফেরতযোগ্য নয় এবং চূড়ান্ত সিদ্ধান্ত সংশ্লিষ্ট থাই কর্তৃপক্ষের।`,
+- **পরিচয়-তথ্য আবার পড়ুন:** payment-এর আগে নামের বানান, passport number ও তারিখ যাচাই করুন। সরকারি fee, bank/payment charge, ঐচ্ছিক agency fee এবং প্রযোজ্য refund terms বর্তমান official/provider নির্দেশনায় মিলিয়ে নিন; চূড়ান্ত সিদ্ধান্ত সংশ্লিষ্ট থাই কর্তৃপক্ষের।`,
+    references: [
+      {
+        name: "Thailand e-Visa Portal — Ministry of Foreign Affairs",
+        nameBn: "Thailand e-Visa পোর্টাল — পররাষ্ট্র মন্ত্রণালয়",
+        url: "https://www.thaievisa.go.th/",
+      },
+      {
+        name: "Thailand e-Visa — Tourist Visa requirements",
+        nameBn: "Thailand e-Visa — Tourist Visa-এর প্রয়োজনীয়তা",
+        url: "https://www.thaievisa.go.th/visa/tourist-visa",
+      },
+      {
+        name: "Royal Thai Embassy Dhaka — Tourist Visa TR checklist (updated Nov 30, 2022)",
+        nameBn: "রয়্যাল থাই এমব্যাসি ঢাকা — Tourist Visa TR চেকলিস্ট (হালনাগাদ: ৩০ নভেম্বর ২০২২)",
+        url: "https://dhaka.thaiembassy.org/en/publicservice/tourist-visa-tr?page=5d83296315e39c2540006a6c&menu=5d83296315e39c2540006a6d",
+      },
+      {
+        name: "Royal Thai Embassy Dhaka — Consular Service Fee (updated September 2025)",
+        nameBn: "রয়্যাল থাই এমব্যাসি ঢাকা — কনস্যুলার সার্ভিস ফি (হালনাগাদ: সেপ্টেম্বর ২০২৫)",
+        url: "https://dhaka.thaiembassy.org/en/content/consular-service-fee-updated-september-2025?page=5d83296215e39c2540006a05&menu=5d83296215e39c2540006a0e",
+      },
+      {
+        name: "Royal Thai Embassy Dhaka — Facilitation of E-Visa Payment",
+        nameBn: "রয়্যাল থাই এমব্যাসি ঢাকা — ই-ভিসা পেমেন্টের নির্দেশনা",
+        url: "https://dhaka.thaiembassy.org/en/content/facilitation-ofe-visa-payment?page=5d83296215e39c2540006a05&menu=5d83296215e39c2540006a0e",
+      },
+    ],
     internalLinks: [
       { text: "Thailand ভিসা চেকলিস্ট ও ফি ক্যালকুলেটর", path: "/visa/thailand-visa" },
       { text: "Bangkok-এ Halal খাবারের সেরা জায়গা (Pratunam ও Sukhumvit)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
@@ -2381,8 +2410,12 @@ const BENGALI_VISA_OVERRIDES: Record<string, Partial<VisaGuide>> = {
   },
   "thailand-visa": {
     requirementType: "Official Online e-Visa",
+    costBdt:
+      "সরকারি Tourist e-Visa fee-এর বর্তমান অঙ্ক official portal/Embassy schedule-এ দেখুন। Bank/payment charge আলাদা। Optional agency service fee আলাদা ও provider-ভেদে বদলায়—payment-এর আগে লিখিত itemized quote নিন।",
+    processingTime:
+      "আবেদনভেদে সময় ভিন্ন; live portal ও Embassy notice দেখুন—সিদ্ধান্তের সময় নিশ্চিত নয়।",
     quickAnswer:
-      "বাংলাদেশি নাগরিকদের থাইল্যান্ড ভ্রমণের জন্য অফিশিয়াল পোর্টাল (thaievisa.go.th)-এর মাধ্যমে অনলাইনে Thailand Tourist e-Visa আবেদন করতে হয়। পাসপোর্ট জমা দিতে হয় না এবং ৫ থেকে ১০ কার্যদিবসের মধ্যে ইমেইলে PDF e-Visa পাওয়া যায়। সরকারি পোর্টাল ফি প্রতি জন **≈ USD 40 (~BDT 4,800)**; এজেন্ট সার্ভিস ফি অতিরিক্ত **BDT 1,600–3,610**; মোট আনুমানিক **BDT 6,500–8,500** (ফি অফেরেবল নয়)।",
+      "বাংলাদেশি নাগরিকদের Thailand যেতে আগে official portal-এ Tourist e-Visa আবেদন করতে হয়। Dhaka Embassy-র public TR checklist (শেষ হালনাগাদ ৩০ নভেম্বর ২০২২) ৬ মাসের statement ও solvency certificateসহ জনপ্রতি BDT 60,000 / পরিবারে BDT 120,000 উল্লেখ করে; live portal-এর বর্তমান prompt ভিন্ন হতে পারে—আবেদনের আগে যাচাই করুন। সরকারি visa fee, bank/payment charge ও optional agency service fee আলাদা; current amount এবং agency-র itemized quote যাচাই না করে নির্দিষ্ট অঙ্ক ধরে নেবেন না। Approval ও processing time নিশ্চিত নয়।",
   },
   "malaysia-visa": {
     requirementType: "100% Online e-Visa + MDAC",
@@ -2421,7 +2454,7 @@ const BENGALI_COSTS_OVERRIDES: Record<string, Partial<TripCostData>> = {
   },
   "thailand-costs": {
     quickAnswer:
-      "ঢাকা থেকে ৫ দিনের থাইল্যান্ড (ব্যাংকক ও পাতায়া) ভ্রমণে ফ্লাইট, e-Visa ফি, ৩-তারকা হোটেল, হালাল খাবার ও সাইটসিয়িংসহ জনপ্রতি BDT 68,000 থেকে BDT 88,000 খরচ হয়।",
+      "ঢাকা থেকে ৫ দিনের থাইল্যান্ড (ব্যাংকক ও পাতায়া) ভ্রমণে ফ্লাইট, ৩-তারকা হোটেল, হালাল খাবার ও সাইটসিয়িংসহ জনপ্রতি আনুমানিক BDT 68,000 থেকে BDT 88,000 খরচ হতে পারে। এই broad estimate-এ visa-related charge আলাদা করে itemized নয়; all-in বাজেট ধরার আগে current government e-Visa fee, bank/payment charge ও optional agency service fee যাচাই করুন।",
   },
   "malaysia-costs": {
     quickAnswer:

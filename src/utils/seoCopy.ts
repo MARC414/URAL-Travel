@@ -91,7 +91,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/visa": {
     title: "Visa Guides for Bangladeshi Citizens | URAL",
     description:
-      "Browse visa checklists for Bangladeshi passport holders, including entry processes, official links, documents and destination-specific planning notes.",
+      "Browse visa checklists for Bangladeshi passport holders. For Thailand, verify the current government e-Visa fee; bank/payment charges and optional agency service fees are separate.",
   },
   "/visa/nepal-visa": {
     title: "Nepal Visa for Bangladeshi Citizens | URAL",
@@ -101,7 +101,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/visa/thailand-visa": {
     title: "Thailand Visa from Bangladesh: Process & Documents | URAL",
     description:
-      "Explore Thailand visa planning from Bangladesh: application route, documents and financial evidence. Check current arrival requirements before applying.",
+      "Bangladeshi applicants use Thailand's official e-Visa portal. The Dhaka TR checklist updated November 30, 2022 lists BDT 60,000/person or BDT 120,000/family; verify current rules. Government, bank/payment and optional agency charges are separate.",
   },
   "/visa/malaysia-visa": {
     title: "Malaysia Visa from Bangladesh: eVisa & MDAC | URAL",
@@ -171,7 +171,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/costs/thailand-costs": {
     title: "Thailand Trip Cost from Bangladesh: BDT Budget | URAL",
     description:
-      "Estimate a 5-day Thailand trip cost from Bangladesh in BDT, covering Dhaka–Bangkok flights, e-Visa fees, hotels, halal meals, transport and sightseeing.",
+      "Plan a Thailand trip in BDT. Visa charges are not itemized; verify the current government e-Visa fee, bank/payment charges and optional agency service fees separately.",
   },
   "/costs/malaysia-costs": {
     title: "Malaysia Trip Cost from Bangladesh: BDT Budget | URAL",
@@ -535,7 +535,7 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
   "/costs/thailand-costs": {
     title: "বাংলাদেশ থেকে থাইল্যান্ড ভ্রমণ খরচ: টাকায় বাজেট | URAL",
     description:
-      "বাংলাদেশ থেকে ৫ দিনের থাইল্যান্ড ভ্রমণ খরচ টাকায় হিসাব করুন — ঢাকা–ব্যাংকক ফ্লাইট, e-Visa ফি, হোটেল, হালাল খাবার, যাতায়াত ও দর্শনীয় স্থান।",
+      "বাংলাদেশ থেকে Thailand ভ্রমণের BDT বাজেট দেখুন। Visa charge আলাদা করে itemized নয়; current government e-Visa fee, bank/payment charge ও optional agency service fee যাচাই করুন।",
   },
   "/experiences": {
     title: "বাংলাদেশি ভ্রমণকারীদের জন্য অ্যাক্টিভিটি গাইড | URAL",
@@ -630,7 +630,7 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
   "/visa": {
     title: "বাংলাদেশি নাগরিকদের জন্য ভিসা গাইড | URAL",
     description:
-      "বাংলাদেশি পাসপোর্টধারীদের জন্য ভিসা চেকলিস্ট দেখুন — প্রবেশ প্রক্রিয়া, অফিসিয়াল লিংক, কাগজপত্র ও গন্তব্যভিত্তিক পরিকল্পনা নোটসহ।",
+      "বাংলাদেশি পাসপোর্টধারীদের ভিসা গাইড দেখুন। Thailand e-Visa-এর সরকারি fee, bank/payment charge ও optional agency fee আলাদা; বর্তমান নিয়ম ও অঙ্ক official source-এ যাচাই করুন।",
   },
   "/visa/dubai-visa": {
     title: "বাংলাদেশ থেকে দুবাই ও UAE ভিসা: ট্যুরিস্ট eVisa | URAL",
@@ -660,7 +660,7 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
   "/visa/thailand-visa": {
     title: "বাংলাদেশ থেকে থাইল্যান্ড ভিসা: প্রক্রিয়া ও কাগজপত্র | URAL",
     description:
-      "বাংলাদেশ থেকে থাইল্যান্ড ভিসা পরিকল্পনা দেখুন — আবেদন প্রক্রিয়া, কাগজপত্র ও আর্থিক প্রমাণ। আবেদনের আগে বর্তমান প্রবেশ শর্ত যাচাই করুন।",
+      "Thailand e-Visa-এর জন্য official portal ব্যবহার করুন। Dhaka TR checklist (হালনাগাদ ৩০ নভেম্বর ২০২২) জনপ্রতি BDT 60,000/পরিবারে BDT 120,000 উল্লেখ করে—বর্তমান requirement যাচাই করুন। সরকারি fee, bank/payment ও optional agency fee আলাদা।",
   },
 };
 

@@ -82,15 +82,15 @@ export const LANDING_VISA_FAQS: FAQItem[] = [
   },
   {
     question: "What is the standard bank balance requirement for tourist visa applications from Bangladesh?",
-    answer: "For popular destinations like Thailand, Malaysia, and Dubai, embassies typically require an active personal bank statement of the last 6 months with a minimum closing balance of BDT 60,000 to BDT 150,000 per applicant (often equivalent to $700-$1,000 USD), accompanied by an official bank solvency certificate."
+    answer: "There is no universal balance requirement; it varies by destination, visa category, and mission. The Royal Thai Embassy Dhaka's public Tourist Visa TR checklist, last updated November 30, 2022, lists BDT 60,000 per person or BDT 120,000 per family with six-month statements and a solvency certificate, while the general Thai e-Visa page may show different financial evidence. Check the live, destination-specific portal before applying."
   },
   {
     question: "How long before travel should Bangladeshi citizens apply for a tourist visa?",
-    answer: "It is recommended to apply 3 to 4 weeks prior to your intended departure date. While Malaysia eVisas and Dubai tourist visas are typically processed within 3 to 5 working days, Thailand sticker visas or high-season applications may take 7 to 10 working days at VFS Global Dhaka."
+    answer: "Apply well ahead of departure and use the current portal and mission instructions for timing. Thai e-Visa decisions and processing times are not guaranteed and may vary by application; use the live portal and mission notices for current guidance."
   },
   {
     question: "Can first-time Bangladeshi international travelers easily get tourist visas for Nepal and Thailand?",
-    answer: "Yes. Nepal is the easiest first international trip since it requires zero advance visa paperwork for Bangladeshis. Thailand is also welcoming to first-time travelers who provide complete employment/business documents, valid return flight tickets, confirmed hotel bookings, and a healthy bank statement."
+    answer: "Nepal may offer eligible Bangladeshi travelers a first-entry SAARC gratis visa on arrival under current rules. Thailand requires an advance Tourist e-Visa application; follow the live Dhaka mission checklist, submit genuine supporting documents, and remember that approval is never guaranteed."
   }
 ];
 
@@ -116,7 +116,7 @@ export const LANDING_COST_FAQS: FAQItem[] = [
 export const LANDING_DESTINATION_FAQS: FAQItem[] = [
   {
     question: "What are the best international holiday destinations for first-time Bangladeshi travelers?",
-    answer: "Nepal and Thailand are the premier choices for first-time outbound tourists from Bangladesh. Nepal offers hassle-free free Visa on Arrival and short 1.5-hour flights, while Thailand provides world-class shopping, incredible street food, and straightforward sticker visa processing."
+    answer: "Nepal may offer eligible Bangladeshi travelers a first-entry SAARC gratis visa on arrival under current rules. Thailand offers shopping and food destinations, but Bangladeshi citizens need an advance Tourist e-Visa and should verify the live Dhaka mission requirements before travel."
   },
   {
     question: "How long should a standard international vacation be from Dhaka?",
