@@ -4,6 +4,19 @@
 > **Method:** Koray Tuğberk Gübür's *Semantic SEO / Topical Authority* framework + Nathan Gotch's *content-gap & search-intent* architecture, adapted to a brand-new domain with no backlink authority yet.
 > **Grounding:** this plan was written against the **actual** codebase (47 blog posts, 6 destination pillars, the real category system), not a guess. Where an earlier analysis assumed a gap that does not exist, this document corrects it.
 
+> **Update — 15 October 2026: this file is the site-wide gap inventory and scoring model, not the current schedule.**
+> Release order is owned by the **active cluster plan** ([`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md)),
+> under the pipeline rules in [`CONTENT-OS.md`](CONTENT-OS.md) and the rows in [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md):
+>
+> - **The Umrah cluster is the rollout in progress** — `/umrah` + `/bn/umrah` hardened first (wave 1), then the
+>   already-verified main guide (wave 2), then one bilingual child asset per wave. This supersedes the "Sprint 1"
+>   scheduling in §12; §12's Sprint 0 (consolidate the Umrah cluster) is what is actually being executed, as waves.
+> - **Fard Hajj remains a separate, linked topic** — `hajj-registration-bangladesh-government-vs-private-package-cost`
+>   is a peer page for the Umrah guide to link to, never an Umrah child.
+> - **India is still a real gap and still unscheduled.** Pillar E (§5), gap-register items #1–#2 (§6) and "Sprint 1"
+>   (§12) stay valid as *analysis*. None of them is the next work item, so a tool that reads only this file will
+>   recommend "Dhaka↔Kolkata land route" first — that recommendation is stale as a schedule.
+
 ---
 
 ## 0. Read this first — the honest data note
@@ -131,6 +144,10 @@ Each hub currently = capital only. Add the obvious second cities (big intent, ze
 - Maldives: ✅ Maafushi budget → ➕ **IMUGA arrival-form step-by-step** (real gap, high urgency) · ➕ *local-island vs resort for BD families*.
 
 ### Pillar E — ➕ **INDIA — the missing pillar (highest-impact gap)**
+
+> **Still no date (15 Oct 2026).** This is the largest *content* gap, not the next cluster. Do not start here;
+> the rollout in progress is Umrah (see the dated note at the top of this file).
+
 India is the **#1 outbound destination for Bangladeshis** by a wide margin, and you have **zero** coverage. For the Central Entity to look complete to Google, India cannot be absent. Build it as a full pillar mirroring the other six:
 - ➕ *Dhaka↔Kolkata by land: Maitree Express train + Shyamoli/Green Line bus, Benapole/Petrapole border, BDT cost* (very high volume, operational intent).
 - ➕ *India e-Visa (tourist/medical) for Bangladeshi passport — step-by-step* · ➕ *India medical-visa + attendant visa (Vellore/Chennai/Kolkata hospitals)* (medical tourism is massive and ShareTrip only touches Malaysia).
@@ -172,7 +189,7 @@ Instead of fake volume numbers, score each candidate **0–3 on five axes** and 
 | 9 | **Malaysia: Langkawi + Penang** | 2 | 3 | 2 | 2 | 2 | **11** | Finishes Malaysia pillar. |
 | 10 | **"Is it halal-friendly?" set (KL/SG/DXB/Maldives)** | 2 | 1 | 2 | 2 | 3 | **10** | Cheap outer-section; strong internal-link fuel; matches your Islamic-travel identity. |
 
-> **How to use it:** work top-down, but **finish a pillar before you jump pillars** (Koray's momentum rule). Example: items 1→2 (+ India costs/flights/itinerary) complete the India pillar as a *block* — that block is worth more than 5 scattered high-score posts across 5 pillars.
+> **How to use it:** **finish a pillar before you jump pillars** (Koray's momentum rule). Work order, however, comes from the active cluster plan, not from this table alone — see the dated note at the top of this file. Example: items 1→2 (+ India costs/flights/itinerary) would complete the India pillar as a *block*, which is worth more than 5 scattered high-score posts across 5 pillars.
 
 ---
 
@@ -264,6 +281,13 @@ Your `robots.txt` already welcomes GPTBot, ClaudeBot, PerplexityBot, Google-Exte
 ## 12. Execution roadmap (sequenced, ~6 months, momentum-first)
 
 Cadence target: **2–4 publishable pieces/week** (one *block* roughly every 2–3 weeks). Finish pillars; don't scatter.
+
+> **Superseded as a schedule — 15 October 2026.** This roadmap still describes the work, but the *order and
+> cadence* now come from [`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md): the Umrah cluster is split into
+> waves, and a wave is **one bilingual asset** (English + Bengali routes together) awaiting owner release — not
+> a 2–4-piece publishing week. **Sprint 0 is the work in progress.** **Sprint 1 (India) is deferred, not
+> cancelled**: do not open it before the owner closes or re-prioritises the Umrah waves, and Fard Hajj stays a
+> separate linked topic throughout.
 
 **Sprint 0 — Hygiene & consolidation (week 1, no new content).**
 - Cannibalization audit (§7): designate canonical Umrah cost + hotels nodes; add up-links.

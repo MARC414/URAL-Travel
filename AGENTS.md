@@ -95,3 +95,11 @@ misled the next reader. The rule that prevents it:
    `DESIGN.md`/`PRODUCT.md`, or in `docs/history/`.
 6. **Never record a projected performance number as if measured.** A "Lighthouse: 65 → 80" that was never
    run will be quoted as fact forever. Measure, or say you did not.
+7. **Content and growth work starts from the execution layer, not from a sprint list.** Read
+   `docs/growth/CONTENT-OS.md` §1 for the order, then the **active cluster plan**
+   (`docs/growth/UMRAH-CLUSTER-PLAN.md`) and its row in `docs/growth/CONTENT-QUEUE.md`. Release order comes
+   from the cluster plan and queue. `docs/growth/CONTENT-STRATEGY-2026.md` is the site-wide gap inventory and
+   scoring model — its §6 gap register and §12 sprints are **analysis, not schedule**: its India pillar
+   ("Dhaka↔Kolkata land route") is the largest *content* gap and is explicitly **not** the next work item.
+   The cluster in progress is **Umrah**; **Fard Hajj is a separate, linked topic**. `docs/growth/README.md`
+   §2A carries the same precedence note.
