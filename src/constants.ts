@@ -2759,6 +2759,23 @@ export const BLOG_DATA: BlogPost[] = [
       body: "Use promo codes 1010TOURS, 1010MOVE, and 1010TIX on KKday before quotas run out.",
     },
   },
+  {
+    id: "blog-48",
+    slug: "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
+    title: "Dhaka to Kolkata by Train & Bus: Benapole Border Crossing, Maitree Express Status & Complete BDT Cost Guide (2026)",
+    summary: "India is the #1 outbound destination for Bangladeshi travelers — and the Dhaka–Kolkata land corridor via Benapole–Petrapole is the most affordable route. As of October 2026, the Maitree Express has been suspended since July 2024, but India resumed tourist visa processing for Bangladeshis in June 2026. This verified guide covers every practical option: the suspended Maitree Express and its potential Padma Bridge reroute, Green Line and Shyamoli bus fares in BDT/INR, the complete Benapole–Petrapole crossing procedure, India visa requirements via IVAC, and a full BDT cost table from BDT 8,000 (ultra-budget) to BDT 18,000 (comfortable 3-day Kolkata trip).",
+    category: "Destinations",
+    date: "October 15, 2026",
+    author: "Farhan Momen (Founder & Travel Editor)",
+    readTime: "8 min read",
+    internalLinks: [
+      { text: "Top 6 Budget-Friendly Family Destinations from Dhaka", path: "/blog/top-budget-family-destinations-from-dhaka" },
+      { text: "Dhaka Airport Outbound Immigration Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "Best Time to Visit India from Bangladesh (Weather + Fares)", path: "/blog" },
+      { text: "India e-Visa & IVAC Visa Guide for Bangladeshis", path: "/blog" },
+      { text: "India Trip Cost Calculator in BDT", path: "/costs" },
+    ],
+  },
 ];
 
 
