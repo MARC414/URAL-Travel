@@ -137,9 +137,10 @@ Resolved in the cleanup pass. The double nesting is gone and the kit no longer
 sits in `src/` (where it read as application code):
 
 - `src/URAL-brand-assets/ural-brand-assets/*` → **`brand-kit/*`** (63 files).
-- Both references updated: this file and `docs/growth/10-social-media-marketing.md`.
-- The kit is a **live asset library**, not dead weight: `docs/growth/10` uses its PNG
-  exports for avatars, covers and carousels. It was relocated, not deleted.
+- Reference updated in this file.
+- The kit is a **live asset library**, not dead weight: the social/marketing
+  workflow uses its PNG exports for avatars, covers and carousels. It was
+  relocated, not deleted.
 - Shipped favicons remain in `public/assets/brand/favicon/` and are unaffected. 7 of the
   kit's 8 favicon files are byte-identical to the shipped set (only `favicon.ico` differs);
   they are kept so the kit stays a complete, hand-off-ready bundle.
