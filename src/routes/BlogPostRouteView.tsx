@@ -825,8 +825,8 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                       className="inline-flex shrink-0 items-center whitespace-nowrap text-xs font-semibold text-brand-navy hover:text-slate-900 transition-colors"
                     >
                       {isBn
-                        ? `সব ${localizedBlogs.length}টি গাইড →`
-                        : `All ${localizedBlogs.length} guides →`}
+                        ? "সব গাইড →"
+                        : "All guides →"}
                     </a>
                   </nav>
 
@@ -1619,7 +1619,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                             >
 
                               <span className="min-w-0 break-words">
-                                {activePost.slug === UMRAH_GUIDE_SLUG && (
+                                {hasArticleSpecificSources && (
                                   <span className="mr-1 font-semibold text-emerald-800">[
                                     {formatReferenceNumber(sIdx, isBn)}
                                   ]</span>
@@ -2214,9 +2214,9 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                           {isBn
 
-                            ? `সবগুলো ব্লগ গাইড দেখুন (${localizedBlogs.length})`
+                            ? "সবগুলো ব্লগ দেখুন"
 
-                            : `Back to All ${localizedBlogs.length} Blog Guides`}
+                            : "View All Blogs"}
 
                         </span>
 

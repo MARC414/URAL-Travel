@@ -29,6 +29,7 @@ export const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "contact_support_desk_agent_1791600000000": 670,
   "coxs_bazar_sunrise_1781620718331": 670,
   "dhaka_airport_widebody_airlines_tarmac_1790520836931": 670,
+  "dhaka_kolkata_benapole_border_train_1791500000000": 670,
   "dubai_destination_1781544180311": 655,
   "dubai_skyline_burj_twilight_1790485747967": 670,
   "haramain_bullet_train_1790484312808": 896,

@@ -136,11 +136,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       id: "all",
 
-                      label: isBn
-
-                        ? `সব গাইড (${localizedBlogs.length})`
-
-                        : `All Guides (${localizedBlogs.length})`,
+                      label: isBn ? "সব গাইড" : "All Guides",
 
                     },
 
@@ -148,11 +144,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       id: "Hajj & Umrah",
 
-                      label: isBn
-
-                        ? `হজ্জ ও ওমরাহ (${localizedBlogs.filter((b) => b.category === "Hajj & Umrah").length})`
-
-                        : `Hajj & Umrah (${localizedBlogs.filter((b) => b.category === "Hajj & Umrah").length})`,
+                      label: isBn ? "হজ্জ ও ওমরাহ" : "Hajj & Umrah",
 
                     },
 
@@ -160,11 +152,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       id: "Ziyarah & Stopovers",
 
-                      label: isBn
-
-                        ? `জিয়ারত ও স্টপওভার (${localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers").length})`
-
-                        : `Ziyarah & Stopovers (${localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers").length})`,
+                      label: isBn ? "জিয়ারত ও স্টপওভার" : "Ziyarah & Stopovers",
 
                     },
 
@@ -172,7 +160,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       id: "Visa & Immigration",
 
-                      label: isBn ? "ভিসা ও ইমিগ্রেশন (3)" : "Visa & Immigration (3)",
+                      label: isBn ? "ভিসা ও ইমিগ্রেশন" : "Visa & Immigration",
 
                     },
 
@@ -180,7 +168,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       id: "Banking & Payments",
 
-                      label: isBn ? "ডুয়াল-কারেন্সি কার্ড ও BDT (1)" : "Card Endorsement & BDT (1)",
+                      label: isBn ? "ডুয়াল-কারেন্সি কার্ড ও BDT" : "Card Endorsement & BDT",
 
                     },
 
@@ -188,7 +176,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       id: "Family & Budget",
 
-                      label: isBn ? "ফ্যামিলি ও বাজেট ট্রিপ (3)" : "Family & Budget Trips (3)",
+                      label: isBn ? "ফ্যামিলি ও বাজেট ট্রিপ" : "Family & Budget Trips",
 
                     },
 
@@ -198,23 +186,17 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       label: isBn
 
-                        ? "ফ্লাইট, হোটেল ও হালাল খাবার (3)"
+                        ? "ফ্লাইট, হোটেল ও হালাল খাবার"
 
-                        : "Flights, Hotels & Halal Food (3)",
+                        : "Flights, Hotels & Halal Food",
 
                     },
-
-
 
                     {
 
                       id: "Travel Tips",
 
-                      label: isBn
-
-                        ? `ট্রাভেল টিপস (${localizedBlogs.filter((b) => b.category === "Travel Tips").length})`
-
-                        : `Travel Tips (${localizedBlogs.filter((b) => b.category === "Travel Tips").length})`,
+                      label: isBn ? "ট্রাভেল টিপস" : "Travel Tips",
 
                     },
 
@@ -404,9 +386,9 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       {isBn
 
-                        ? `সবগুলো গাইড দেখুন (${localizedBlogs.length})`
+                        ? "সবগুলো গাইড দেখুন"
 
-                        : `Show All ${localizedBlogs.length} Guides`}
+                        : "Show All Guides"}
 
                     </button>
 

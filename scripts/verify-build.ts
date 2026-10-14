@@ -1974,6 +1974,7 @@ const normalizeStructuredText = (value: string) =>
 const faqSlugs = [
   "travel-creator-resources",
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+  "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
 ] as const;
 const faqCoverageIssues: string[] = [];
 for (const faqSlug of faqSlugs) {
