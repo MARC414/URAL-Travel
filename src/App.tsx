@@ -940,15 +940,17 @@ function AuthorBioCard({
             </div>
           )}
         </div>
-        <a
-          href={profile.portfolioUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex shrink-0 items-center gap-1.5 self-start text-sm font-semibold text-brand-navy underline decoration-brand-gold underline-offset-4 hover:text-brand-emerald"
-        >
-          {isBengali ? "পেশাগত পোর্টফোলিও দেখুন" : "View professional portfolio"}
-          <ExternalLink size={13} aria-hidden="true" />
-        </a>
+        {profile.portfolioUrl && (
+          <a
+            href={profile.portfolioUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center gap-1.5 self-start text-sm font-semibold text-brand-navy underline decoration-brand-gold underline-offset-4 hover:text-brand-emerald"
+          >
+            {isBengali ? "পেশাগত পোর্টফোলিও দেখুন" : "View professional portfolio"}
+            <ExternalLink size={13} aria-hidden="true" />
+          </a>
+        )}
       </div>
     </aside>
   );

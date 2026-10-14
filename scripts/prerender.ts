@@ -255,15 +255,18 @@ function renderAuthorBioHtml(
         )}</a></li>`
     )
     .join("");
+  const portfolioHtml = profile.portfolioUrl
+    ? `<p><a href="${escapeHtml(
+        profile.portfolioUrl
+      )}" target="_blank" rel="noopener noreferrer">${
+        isBengali ? "পেশাগত পোর্টফোলিও দেখুন" : "View professional portfolio"
+      }</a></p>`
+    : "";
   return `<aside aria-labelledby="blog-author-bio-heading"><h2 id="blog-author-bio-heading">${
     isBengali ? "লেখক সম্পর্কে" : "About the author"
   }</h2><p>${escapeHtml(isBengali ? profile.bioBn : profile.bioEn)}</p><section><h3>${
     isBengali ? "নির্বাচিত সৃজনশীল ও মিডিয়া কাজ" : "Selected creative &amp; media work"
-  }</h3><ul>${mediaLinks}</ul></section><p><a href="${escapeHtml(
-    profile.portfolioUrl
-  )}" target="_blank" rel="noopener noreferrer">${
-    isBengali ? "পেশাগত পোর্টফোলিও দেখুন" : "View professional portfolio"
-  }</a></p></aside>`;
+  }</h3><ul>${mediaLinks}</ul></section>${portfolioHtml}</aside>`;
 }
 
 function escapeXml(str: string): string {

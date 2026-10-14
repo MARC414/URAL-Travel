@@ -2032,23 +2032,27 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                             </p>
 
-                            <a
+                            {profile.portfolioUrl && (
 
-                              href={profile.portfolioUrl}
+                              <a
 
-                              target="_blank"
+                                href={profile.portfolioUrl}
 
-                              rel="noopener noreferrer"
+                                target="_blank"
 
-                              className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-emerald"
+                                rel="noopener noreferrer"
 
-                            >
+                                className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-emerald"
 
-                              {isBn ? "পেশাগত পোর্টফোলিও দেখুন" : "View Portfolio"}
+                              >
 
-                              <ExternalLink size={10} aria-hidden="true" />
+                                {isBn ? "পেশাগত পোর্টফোলিও দেখুন" : "View Portfolio"}
 
-                            </a>
+                                <ExternalLink size={10} aria-hidden="true" />
+
+                              </a>
+
+                            )}
 
                           </div>
 

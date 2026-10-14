@@ -2886,7 +2886,7 @@ export const BLOG_DATA: BlogPost[] = [
     slug: "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
     title: "Dhaka to Kolkata by Train & Bus: Benapole Border Crossing, Maitree Express Status & Complete BDT Cost Guide (2026)",
     summary: "India is a major overland destination for Bangladeshi travelers, and the Dhaka–Kolkata land corridor via Benapole–Petrapole is the primary road route. Cross-border passenger trains (Maitree, Bandhan, and Mitali Express) have been suspended since July 2024 with no confirmed restart date as of our October 15, 2026 review. This guide covers the suspended rail status and Padma Bridge reroute proposal, active Dhaka–Benapole–Petrapole–Kolkata bus legs, the step-by-step border procedure, IVAC sticker-visa requirements (e-Visa is not available for Bangladeshi passports; verify live appointment availability at ivacbd.com), and an indicative 3-day Kolkata planning budget of BDT 8,000–18,000.",
-    category: "Destinations",
+    category: "Family & Budget",
     date: "October 15, 2026",
     updatedAt: "2026-10-15",
     author: "Farhan Momen (Founder & Travel Editor)",
