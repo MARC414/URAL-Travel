@@ -336,7 +336,7 @@ Instead of paying per-person tour bus markups, a family of 3 to 6 can book a pri
 
 5. OFFICIAL ZAMZAM WATER RULE FOR RETURN FLIGHTS TO DHAKA
 - Every pilgrim holding an Umrah e-Visa (or Nusuk Umrah permit) is permitted to purchase one official 5-liter boxed bottle of Zamzam water from the automated kiosks outside Jeddah (JED) or Madinah (MED) Airport for SAR 9.50–12.50 (~BDT 350–400).
-- Biman Bangladesh Airlines and Saudia (direct Dhaka flights, 2×23 kg = 46 kg total) carry this 5-liter sealed Zamzam box FREE of charge outside your regular checked baggage allowance. Gulf Air and Kuwait Airways have different baggage limits — verify the current policy directly with your carrier before packing.`,
+- Biman Bangladesh Airlines and Saudia (direct Dhaka flights, 2×23 kg = 46 kg total (route- and fare-dependent; confirm on your e-ticket)) carry this 5-liter sealed Zamzam box FREE of charge outside your regular checked baggage allowance. Gulf Air and Kuwait Airways have different baggage limits — verify the current policy directly with your carrier before packing.`,
   "hajj-registration-bangladesh-government-vs-private-package-cost": `For Bangladeshi Muslims, performing obligatory Fard Hajj is a life-defining spiritual journey. Because a typical Hajj package from Bangladesh costs between BDT 5,50,000 and BDT 9,50,000+ per person, knowing how the official digital e-Hajj system works protects your family from unlicensed middlemen (dalals) and ensures you select the right Maktab tent and hotel distance.
 
 1. STEP-BY-STEP: OFFICIAL 2-STAGE HAJJ REGISTRATION ON HAJJ.GOV.BD
@@ -476,11 +476,11 @@ When searching for flights on online portals or through our BDT Booking Desk, ne
 Both national flag carriers operate daily wide-body (Boeing 777-300ER and Boeing 787 Dreamliner) direct non-stop flights taking **6 hours 15 minutes**:
 - **Biman Bangladesh Airlines (biman-airlines.com):**
   • Typical Roundtrip / Open-Jaw BDT Fare: **BDT 72,000 – BDT 88,000** (Off-peak) | **BDT 95,000+** (Ramadan/Peak Winter).
-  • Baggage & Zamzam Allowance: **2 pieces x 23 kg (46 kg total)** checked baggage + 7 kg cabin bag + **1 free 5-Liter official Zamzam carton**.
+  • Baggage & Zamzam Allowance: **2 pieces x 23 kg (46 kg total)** (route- and fare-dependent; confirm on your e-ticket) checked baggage + 7 kg cabin bag + **1 free 5-Liter official Zamzam carton**.
   • Advantages for Bangladeshis: Bangla-speaking cabin crew, clear Bangla Miqat announcement 45 minutes before Jeddah landing, and convenient flight departures from Dhaka Terminal 1/2.
 - **Saudia - Saudi Arabian Airlines (saudia.com):**
   • Typical Roundtrip / Open-Jaw BDT Fare: **BDT 74,000 – BDT 92,000**.
-  • Baggage & Zamzam Allowance: **2 pieces x 23 kg (46 kg total)** + 7 kg cabin + **1 free 5-Liter Zamzam carton**.
+  • Baggage & Zamzam Allowance: **2 pieces x 23 kg (46 kg total)** (route- and fare-dependent; confirm on your e-ticket) + 7 kg cabin + **1 free 5-Liter Zamzam carton**.
   • Advantages for Bangladeshis: Arrives at the ultra-modern **Jeddah Terminal 1 (KAIA)** where the Haramain High-Speed Bullet Train station is located indoors under the exact same roof, plus onboard prayer area (Musalla) at the back of wide-body aircraft!
 
 3. BUDGET 1-STOP TRANSIT AIRLINES FROM DHAKA (SAVES BDT 14,000 – BDT 22,000)
