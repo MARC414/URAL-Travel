@@ -1406,14 +1406,55 @@ check(sitemap !== null, "dist/sitemap.xml generated");
   const widgetShell = read(path.join(DIST_DIR, "travelpayouts-wl.html"));
   const hasNoindex = (html: string) =>
     /<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html);
+  const robotsTags = (html: string) => html.match(/<meta[^>]+name=["']robots["'][^>]*>/gi) ?? [];
   check(widgetShell !== null && hasNoindex(widgetShell), "travelpayouts-wl.html carries a noindex robots meta");
   check(
     sitemap === null || !sitemap.includes("travelpayouts-wl"),
     "travelpayouts-wl is not listed in sitemap.xml"
   );
-  // Negative control: the detector must fail on a page with the tag removed.
-  const stripped = (widgetShell ?? "").replace(/<meta[^>]+name="robots"[^>]*>/i, "");
+  // Negative control: the detector must fail once EVERY robots directive is gone.
+  // The strip is global on purpose. It used to remove only the first match, which
+  // is exactly how the duplicate below slipped through: the page carried two
+  // identical tags (PR #31 added one, PR #32 added the other without seeing it),
+  // so stripping one left the other and the guard still called the page clean.
+  const stripped = (widgetShell ?? "").replace(/<meta[^>]+name=["']robots["'][^>]*>/gi, "");
   check(!hasNoindex(stripped), "noindex detector rejects the widget shell with its tag removed (negative control)");
+
+  // ...and the removal has to be total, or the control above is vacuous. This
+  // asserts the strip really deleted every tag rather than one of two.
+  check(
+    robotsTags(widgetShell ?? "").length === robotsTags(stripped).length + 1,
+    "negative control removes exactly the shell's one robots directive"
+  );
+
+  // Two identical directives on one page are always a merge accident, never an
+  // intent, so fail on the class rather than on this one filename. That accident
+  // is what turned CI red for three consecutive merges (#32, #33, #34) while
+  // every "content" check kept passing.
+  const robotsTagsIn = (file: string) => robotsTags(read(file) ?? "").length;
+  const overDirective: string[] = [];
+  (function walk(dir: string) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.name.endsWith(".html")) {
+        const count = robotsTagsIn(full);
+        if (count > 1) overDirective.push(`${path.relative(DIST_DIR, full)} (${count})`);
+      }
+    }
+  })(DIST_DIR);
+  check(
+    overDirective.length === 0,
+    overDirective.length === 0
+      ? "no prerendered page carries a duplicated robots directive"
+      : `page(s) carry more than one robots meta tag, which always means a merge kept both: ${overDirective.join(", ")}`
+  );
+
+  // Negative control for the duplicate guard: a doubled document must be caught.
+  check(
+    robotsTags(`${widgetShell ?? ""}${widgetShell ?? ""}`).length > 1,
+    "duplicate robots-directive guard rejects a doubled shell (negative control)"
+  );
 }
 
 if (sitemap) {
