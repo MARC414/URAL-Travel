@@ -2044,6 +2044,7 @@ const faqSlugs = [
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
   "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
   "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
+  "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
 ] as const;
 const faqCoverageIssues: string[] = [];
 for (const faqSlug of faqSlugs) {
@@ -3681,6 +3682,125 @@ check(
   b2BudgetFeeNegativeControlWorks
     ? "trip-budget guard rejects a deliberately hardcoded visa fee in an estimate (negative control)"
     : "trip-budget guard failed its hardcoded-fee negative control"
+);
+
+// --- Wave 3B: the 96-hour stopover guide must not republish an invented fee --
+//
+// The page used to carry a fixed "~SAR 135 (BDT 4,200)" fee, a "BDT 3,800–4,500"
+// total and a "complimentary 1-night hotel voucher", none of which exists on any
+// official source. Removed on 2026-10-15 against the Visit Saudi and Saudia
+// stopover pages (ledger ST-01/ST-02 in docs/growth/CONTENT-QUEUE.md). These
+// patterns are pinned so the figures cannot return silently through a rewrite.
+const STOPOVER_SLUG = "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah";
+const DUBAI_COMBO_SLUG = "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide";
+const STOPOVER_BANNED_PATTERNS: { label: string; pattern: RegExp }[] = [
+  { label: "invented SAR 135 fee total", pattern: /SAR\s*135/i },
+  { label: "promised complimentary hotel night", pattern: /complimentary\s+1-night|\u0995\u09ae\u09aa\u09cd\u09b2\u09bf\u09ae\u09c7\u09a8\u09cd\u099f\u09be\u09b0\u09bf\s+\u09b9\u09cb\u099f\u09c7\u09b2\s+\u09ad\u09be\u0989\u099a\u09be\u09b0|\u09e7\s*\u09b0\u09be\u09a4\s*\u09ab\u09cd\u09b0\u09bf\s*\u09b9\u09cb\u099f\u09c7\u09b2/i },
+  { label: "universal eligibility claim", pattern: /open to ALL Bangladeshi passport holders|\u09b8\u0995\u09b2\s+\u09ac\u09c8\u09a7\u09ac\u09bf\s+\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09bf/i },
+  { label: "unverified train journey time", pattern: /54\s*minute|2h\s*20m|\u09eb\u09ea\s+\u09ae\u09bf\u09a8\u09bf\u099f|\u09e8\s+\u0998\u09a3\u09cd\u099f\u09be\s+\u09e8\u09e6\s+\u09ae\u09bf\u09a8\u09bf\u099f/i },
+  { label: "invented visa processing window", pattern: /within 5 to 30 minutes|\u09eb\s+\u09a5\u09c7\u0995\u09c7\s+\u09e9\u09e6\s+\u09ae\u09bf\u09a8\u09bf\u099f/i },
+];
+// The converted-fee patterns are asserted on the two stopover article bodies
+// only: a BDT figure is legitimate copy on unrelated cards rendered beside the
+// article (nightly hotel rates, for example).
+const STOPOVER_BODY_BANNED_PATTERNS: { label: string; pattern: RegExp }[] = [
+  { label: "invented BDT fee range/total", pattern: /BDT\s*(?:3,800|4,200|4,500)/ },
+  { label: "invented BDT fee range/total (Bengali numerals)", pattern: /(?:\u09e9,\u09ee\u09e6\u09e6\s*\u2013\s*\u09ea,\u09eb\u09e6\u09e6|\u09ea,\u09e8\u09e6\u09e6\s*\u099f\u09be\u0995\u09be)/ },
+];
+const STOPOVER_FEE_PATTERNS = [STOPOVER_BANNED_PATTERNS[0], STOPOVER_BANNED_PATTERNS[1]];
+function stopoverViolations(
+  text: string,
+  patterns: { label: string; pattern: RegExp }[] = STOPOVER_BANNED_PATTERNS
+): string[] {
+  return patterns.filter((entry) => entry.pattern.test(text)).map((entry) => entry.label);
+}
+const stopoverRouteHtml = [
+  read(path.join(DIST_DIR, "blog", `${STOPOVER_SLUG}.html`)) ?? "",
+  read(path.join(DIST_DIR, "bn", "blog", `${STOPOVER_SLUG}.html`)) ?? "",
+];
+const dubaiComboHtml = [
+  read(path.join(DIST_DIR, "blog", `${DUBAI_COMBO_SLUG}.html`)) ?? "",
+  read(path.join(DIST_DIR, "bn", "blog", `${DUBAI_COMBO_SLUG}.html`)) ?? "",
+];
+const stopoverBodies = [
+  BLOG_BODY[STOPOVER_SLUG] || "",
+  BENGALI_BLOG_OVERRIDES[STOPOVER_SLUG]?.content || "",
+];
+const stopoverFoundIssues = [
+  ...stopoverRouteHtml.map((html, index) => [index, visibleText(html), true] as const),
+  ...stopoverBodies.map((body, index) => [index + 100, body, true] as const),
+].flatMap(([index, text, includeBodyPatterns]) =>
+  stopoverViolations(
+    text,
+    includeBodyPatterns
+      ? [...STOPOVER_BANNED_PATTERNS, ...STOPOVER_BODY_BANNED_PATTERNS]
+      : STOPOVER_BANNED_PATTERNS
+  ).map((label) => `${index}: ${label}`)
+);
+// The Dubai-combo twin inherits only the fee/hotel check: its own rail and
+// schedule copy belongs to a later wave (UMRAH-CLUSTER-PLAN.md §4 Wave 4).
+const dubaiComboIssues = dubaiComboHtml
+  .map((html, index) => [index, visibleText(html)] as const)
+  .flatMap(([index, text]) =>
+    stopoverViolations(text, STOPOVER_FEE_PATTERNS).map((label) => `${index}: ${label}`)
+  );
+check(
+  [...stopoverRouteHtml, ...dubaiComboHtml].every((html) => html.length > 0) &&
+    stopoverFoundIssues.length === 0 &&
+    dubaiComboIssues.length === 0,
+  stopoverFoundIssues.length === 0 && dubaiComboIssues.length === 0
+    ? "the 96-hour stopover guide (EN/BN) and the Dubai-combo twin carry no invented fee, hotel promise, universal-eligibility or timing claim"
+    : `stopover surfaces republish a removed claim -> ${[...stopoverFoundIssues, ...dubaiComboIssues].join(", ")}`
+);
+const stopoverNegativeControlWorks =
+  stopoverFoundIssues.length === 0 &&
+  stopoverViolations(
+    "Total Cost: approximately SAR 135 (BDT 4,200) with a complimentary 1-night hotel voucher",
+    [...STOPOVER_BANNED_PATTERNS, ...STOPOVER_BODY_BANNED_PATTERNS]
+  ).length >= 3;
+check(
+  stopoverNegativeControlWorks,
+  stopoverNegativeControlWorks
+    ? "the stopover guard rejects a deliberately reintroduced SAR 135 / free-hotel sentence (negative control)"
+    : "stopover guard failed its reintroduced-fee negative control"
+);
+const stopoverCheckoutCopyIsSafe =
+  /no fixed fee is published/i.test(stopoverBodies[0]) &&
+  /Ministry of Foreign Affairs regulations/i.test(stopoverBodies[0]) &&
+  stopoverBodies[1].includes("কোনো নির্দিষ্ট ফি প্রকাশিত নেই") &&
+  stopoverBodies[1].includes("হোটেল অন্তর্ভুক্ত নয়") &&
+  stopoverBodies[1].includes("এক বাহকের checkout line item") &&
+  stopoverRouteHtml.every(
+    (html) =>
+      /Nusuk\.sa/i.test(html) &&
+      /not a permit|ভিসা permit নয়/i.test(html) &&
+      /visa\.visitsaudi\.com|ksavisa\.sa/i.test(html)
+  );
+check(
+  stopoverCheckoutCopyIsSafe,
+  stopoverCheckoutCopyIsSafe
+    ? "the stopover pages teach the checkout-price rule, the visa-vs-permit boundary and the official verification portals in both locales"
+    : "stopover pages lost the checkout-price rule, the Nusuk permit boundary or the official verification links"
+);
+const stopoverReferencesAreLocalized = (() => {
+  const enRefs = BLOG_DATA.find((post) => post.slug === STOPOVER_SLUG)?.references;
+  const bnRefs = BENGALI_BLOG_OVERRIDES[STOPOVER_SLUG]?.references;
+  const enHtml = stopoverRouteHtml[0];
+  const bnHtml = stopoverRouteHtml[1];
+  return Boolean(
+    enRefs &&
+      enRefs.length === 8 &&
+      bnRefs?.length === enRefs.length &&
+      enRefs.every((ref, index) => ref.url === bnRefs[index]?.url && enHtml.includes(`href="${ref.url}"`) && bnHtml.includes(`href="${ref.url}"`)) &&
+      /\u098f\u0987 \u0997\u09be\u0987\u09a1\u09c7\u09b0 \u0985\u09ab\u09bf\u09b6\u09bf\u09df\u09be\u09b2 \u09a4\u09a5\u09cd\u09af\u09b8\u09c2\u09a4\u09cd\u09b0/.test(bnHtml) &&
+      BLOG_DATA.find((post) => post.slug === STOPOVER_SLUG)?.updatedAt === "2026-10-15"
+  );
+})();
+check(
+  stopoverReferencesAreLocalized,
+  stopoverReferencesAreLocalized
+    ? "the stopover guide renders 8 claim-linked references in both locales and carries updatedAt 2026-10-15"
+    : "stopover references are missing, unlocalized, or the update date is not recorded"
 );
 
 // --- Report ----------------------------------------------------------------

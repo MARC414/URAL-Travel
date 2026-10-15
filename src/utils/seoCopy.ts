@@ -321,7 +321,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": {
     title: "96-Hour Saudi Stopover Visa for Bangladeshis | URAL",
     description:
-      "Learn how Bangladeshi travelers flying Saudia or Flynas can book a 96-hour Saudi Stopover Visa to perform Umrah and visit Madinah during transit.",
+      "Bangladeshi travelers on Saudia or flynas can add a 96-hour Saudi stopover for Umrah. No fixed fee or free hotel is published; charges are set at checkout.",
   },
   "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": {
     title: "Nusuk App & Saudi Visa Bio Guide for Bangladesh | URAL",

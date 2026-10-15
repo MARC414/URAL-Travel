@@ -619,7 +619,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
       "When taking elderly parents for Umrah from Dhaka, attach a free airline Wheelchair (WCHR) request 48 hours before departure and bring a foldable wheelchair from Bangladesh (carried free). Inside Masjid al-Haram, rent official roof-level electric scooters (SAR 115 full Umrah) and stay on flat Jabal Omar streets.",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
-      "Bangladeshi passport holders flying Saudia or Flynas to the UK, US, Europe, Istanbul, or Dubai can book a 96-Hour Saudi Stopover Visa during flight checkout for ~SAR 135 (BDT 4,200) with 1 free hotel night on Saudia. US/UK/Schengen visa holders also qualify for a 1-year Saudi e-Visa.",
+      "Bangladeshi passport holders flying Saudia or flynas on a qualifying through-itinerary can add the 96-hour Saudi Stopover Visa while booking the ticket, without a previously used US/UK/Schengen visa. No fixed fee and no free hotel is published: visa, insurance and service charges are calculated at airline checkout, so use the amount on your own booking.",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
       "Bangladeshi pilgrims should prepare the Nusuk app (nusuk.sa) for Umrah slots and the mandatory Rawdah Shareef (Riyazul Jannah) appointment permit in Madinah. The current Saudi Ministry FAQ lists Bangladesh for biometric enrollment for electronically issued Umrah visas via Saudi Visa Bio; it is not a universal rule for every tourist or stopover traveler. Book the free Rawdah permit in Nusuk and check live availability.",
     "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
@@ -714,7 +714,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
       "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ যাত্রায় ফ্লাইটের ৪৮ ঘণ্টা আগে ফ্রি এয়ারপোর্ট হুইলচেয়ার (WCHR) বুক করুন এবং দেশ থেকে একটি ফোল্ডিং হুইলচেয়ার সাথে নিন (ফ্লাইটে ফ্রি)। মসজিদুল হারামের ছাদে অফিশিয়াল ইলেকট্রিক স্কুটার (তাওয়াফ+সাঈ ১১৫ রিয়াল) ও সমতল রাস্তার হোটেল ব্যবহার করুন।",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
-      "Saudia বা Flynas এয়ারলাইন্সে লন্ডন, ইউরোপ, আমেরিকা, ইস্তাম্বুল বা দুবাই যাওয়ার পথে বাংলাদেশি পাসপোর্টধারীরা মাত্র ১৩৫ সৌদি রিয়াল (~৪,২০০ টাকা) খরচে ৯৬ ঘণ্টার Saudi Stopover Visa ও ১ রাত ফ্রি হোটেল নিয়ে ওমরাহ করতে পারেন। এছাড়া US/UK/Schengen ভিসাধারীরা ১ বছরের ই-ভিসা পান।",
+      "বাংলাদেশি পাসপোর্টধারীরা Saudia বা flynas-এর যোগ্য ট্রানজিট ইটিনারারিতে টিকিট বুক করার সময় ৯৬ ঘণ্টার Saudi Stopover Visa নিতে পারেন, আগে US/UK/Schengen ভিসা ব্যবহার করা লাগে না। কোনো নির্দিষ্ট ফি বা ফ্রি হোটেল সুবিধা প্রকাশিত নেই—ভিসা, ইনস্যুরেন্স ও সার্ভিস চার্জ এয়ারলাইন্সের checkout-এ নির্ধারিত হয়, তাই নিজের বুকিংয়ের অঙ্কই আসল খরচ।",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
       "ওমরাহ যাত্রীদের মক্কায় ওমরাহ স্লট ও মদিনায় রিয়াজুল জান্নাত (Rawdah Shareef) অ্যাপয়েন্টমেন্ট পারমিটের জন্য Nusuk অ্যাপ (nusuk.sa) প্রস্তুত রাখতে হবে। বর্তমান সৌদি মন্ত্রণালয়ের FAQ বাংলাদেশকে ইলেকট্রনিক Umrah visa-র biometric enrollment-এর জন্য Saudi Visa Bio-তে তালিকাভুক্ত করে; এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার যাত্রীর জন্য সার্বজনীন নিয়ম নয়। Nusuk-এ ফ্রি Rawdah পারমিট বুক করুন এবং লাইভ availability চেক করুন।",
     "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
