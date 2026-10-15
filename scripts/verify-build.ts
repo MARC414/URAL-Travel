@@ -2044,6 +2044,7 @@ const faqSlugs = [
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
   "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
   "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
+  "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
 ] as const;
 const faqCoverageIssues: string[] = [];
 for (const faqSlug of faqSlugs) {
@@ -3681,6 +3682,398 @@ check(
   b2BudgetFeeNegativeControlWorks
     ? "trip-budget guard rejects a deliberately hardcoded visa fee in an estimate (negative control)"
     : "trip-budget guard failed its hardcoded-fee negative control"
+);
+
+// --- Wave 3B: the 96-hour stopover guide must not republish an invented fee --
+//
+// The page used to carry a fixed "~SAR 135 (BDT 4,200)" fee, a "BDT 3,800–4,500"
+// total and a "complimentary 1-night hotel voucher", none of which exists on any
+// official source. Removed on 2026-10-15 against the Visit Saudi and Saudia
+// stopover pages (ledger ST-01/ST-02 in docs/growth/CONTENT-QUEUE.md). These
+// patterns are pinned so the figures cannot return silently through a rewrite.
+const STOPOVER_SLUG = "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah";
+const DUBAI_COMBO_SLUG = "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide";
+const STOPOVER_BANNED_PATTERNS: { label: string; pattern: RegExp }[] = [
+  { label: "invented SAR 135 fee total", pattern: /SAR\s*135/i },
+  { label: "promised complimentary hotel night", pattern: /complimentary\s+1-night|\u0995\u09ae\u09aa\u09cd\u09b2\u09bf\u09ae\u09c7\u09a8\u09cd\u099f\u09be\u09b0\u09bf\s+\u09b9\u09cb\u099f\u09c7\u09b2\s+\u09ad\u09be\u0989\u099a\u09be\u09b0|\u09e7\s*\u09b0\u09be\u09a4\s*\u09ab\u09cd\u09b0\u09bf\s*\u09b9\u09cb\u099f\u09c7\u09b2/i },
+  { label: "universal eligibility claim", pattern: /open to ALL Bangladeshi passport holders|\u09b8\u0995\u09b2\s+\u09ac\u09c8\u09a7\u09ac\u09bf\s+\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09bf/i },
+  { label: "unverified train journey time", pattern: /54\s*minute|2h\s*20m|\u09eb\u09ea\s+\u09ae\u09bf\u09a8\u09bf\u099f|\u09e8\s+\u0998\u09a3\u09cd\u099f\u09be\s+\u09e8\u09e6\s+\u09ae\u09bf\u09a8\u09bf\u099f/i },
+  { label: "invented visa processing window", pattern: /within 5 to 30 minutes|\u09eb\s+\u09a5\u09c7\u0995\u09c7\s+\u09e9\u09e6\s+\u09ae\u09bf\u09a8\u09bf\u099f/i },
+];
+// The converted-fee patterns are asserted on the two stopover article bodies
+// only: a BDT figure is legitimate copy on unrelated cards rendered beside the
+// article (nightly hotel rates, for example).
+const STOPOVER_BODY_BANNED_PATTERNS: { label: string; pattern: RegExp }[] = [
+  { label: "invented BDT fee range/total", pattern: /BDT\s*(?:3,800|4,200|4,500)/ },
+  { label: "invented BDT fee range/total (Bengali numerals)", pattern: /(?:\u09e9,\u09ee\u09e6\u09e6\s*\u2013\s*\u09ea,\u09eb\u09e6\u09e6|\u09ea,\u09e8\u09e6\u09e6\s*\u099f\u09be\u0995\u09be)/ },
+];
+const STOPOVER_FEE_PATTERNS = [STOPOVER_BANNED_PATTERNS[0], STOPOVER_BANNED_PATTERNS[1]];
+function stopoverViolations(
+  text: string,
+  patterns: { label: string; pattern: RegExp }[] = STOPOVER_BANNED_PATTERNS
+): string[] {
+  return patterns.filter((entry) => entry.pattern.test(text)).map((entry) => entry.label);
+}
+const stopoverRouteHtml = [
+  read(path.join(DIST_DIR, "blog", `${STOPOVER_SLUG}.html`)) ?? "",
+  read(path.join(DIST_DIR, "bn", "blog", `${STOPOVER_SLUG}.html`)) ?? "",
+];
+const dubaiComboHtml = [
+  read(path.join(DIST_DIR, "blog", `${DUBAI_COMBO_SLUG}.html`)) ?? "",
+  read(path.join(DIST_DIR, "bn", "blog", `${DUBAI_COMBO_SLUG}.html`)) ?? "",
+];
+const stopoverBodies = [
+  BLOG_BODY[STOPOVER_SLUG] || "",
+  BENGALI_BLOG_OVERRIDES[STOPOVER_SLUG]?.content || "",
+];
+const stopoverFoundIssues = [
+  ...stopoverRouteHtml.map((html, index) => [index, visibleText(html), true] as const),
+  ...stopoverBodies.map((body, index) => [index + 100, body, true] as const),
+].flatMap(([index, text, includeBodyPatterns]) =>
+  stopoverViolations(
+    text,
+    includeBodyPatterns
+      ? [...STOPOVER_BANNED_PATTERNS, ...STOPOVER_BODY_BANNED_PATTERNS]
+      : STOPOVER_BANNED_PATTERNS
+  ).map((label) => `${index}: ${label}`)
+);
+// The Dubai-combo twin inherits only the fee/hotel check: its own rail and
+// schedule copy belongs to a later wave (UMRAH-CLUSTER-PLAN.md §4 Wave 4).
+const dubaiComboIssues = dubaiComboHtml
+  .map((html, index) => [index, visibleText(html)] as const)
+  .flatMap(([index, text]) =>
+    stopoverViolations(text, STOPOVER_FEE_PATTERNS).map((label) => `${index}: ${label}`)
+  );
+check(
+  [...stopoverRouteHtml, ...dubaiComboHtml].every((html) => html.length > 0) &&
+    stopoverFoundIssues.length === 0 &&
+    dubaiComboIssues.length === 0,
+  stopoverFoundIssues.length === 0 && dubaiComboIssues.length === 0
+    ? "the 96-hour stopover guide (EN/BN) and the Dubai-combo twin carry no invented fee, hotel promise, universal-eligibility or timing claim"
+    : `stopover surfaces republish a removed claim -> ${[...stopoverFoundIssues, ...dubaiComboIssues].join(", ")}`
+);
+const stopoverNegativeControlWorks =
+  stopoverFoundIssues.length === 0 &&
+  stopoverViolations(
+    "Total Cost: approximately SAR 135 (BDT 4,200) with a complimentary 1-night hotel voucher",
+    [...STOPOVER_BANNED_PATTERNS, ...STOPOVER_BODY_BANNED_PATTERNS]
+  ).length >= 3;
+check(
+  stopoverNegativeControlWorks,
+  stopoverNegativeControlWorks
+    ? "the stopover guard rejects a deliberately reintroduced SAR 135 / free-hotel sentence (negative control)"
+    : "stopover guard failed its reintroduced-fee negative control"
+);
+const stopoverCheckoutCopyIsSafe =
+  /no fixed fee is published/i.test(stopoverBodies[0]) &&
+  /Ministry of Foreign Affairs regulations/i.test(stopoverBodies[0]) &&
+  stopoverBodies[1].includes("কোনো নির্দিষ্ট ফি প্রকাশিত নেই") &&
+  stopoverBodies[1].includes("হোটেল অন্তর্ভুক্ত নয়") &&
+  stopoverBodies[1].includes("এক বাহকের checkout line item") &&
+  stopoverRouteHtml.every(
+    (html) =>
+      /Nusuk\.sa/i.test(html) &&
+      /not a permit|ভিসা permit নয়/i.test(html) &&
+      /visa\.visitsaudi\.com|ksavisa\.sa/i.test(html)
+  );
+check(
+  stopoverCheckoutCopyIsSafe,
+  stopoverCheckoutCopyIsSafe
+    ? "the stopover pages teach the checkout-price rule, the visa-vs-permit boundary and the official verification portals in both locales"
+    : "stopover pages lost the checkout-price rule, the Nusuk permit boundary or the official verification links"
+);
+const stopoverReferencesAreLocalized = (() => {
+  const enRefs = BLOG_DATA.find((post) => post.slug === STOPOVER_SLUG)?.references;
+  const bnRefs = BENGALI_BLOG_OVERRIDES[STOPOVER_SLUG]?.references;
+  const enHtml = stopoverRouteHtml[0];
+  const bnHtml = stopoverRouteHtml[1];
+  return Boolean(
+    enRefs &&
+      enRefs.length === 8 &&
+      bnRefs?.length === enRefs.length &&
+      enRefs.every((ref, index) => ref.url === bnRefs[index]?.url && enHtml.includes(`href="${ref.url}"`) && bnHtml.includes(`href="${ref.url}"`)) &&
+      /\u098f\u0987 \u0997\u09be\u0987\u09a1\u09c7\u09b0 \u0985\u09ab\u09bf\u09b6\u09bf\u09df\u09be\u09b2 \u09a4\u09a5\u09cd\u09af\u09b8\u09c2\u09a4\u09cd\u09b0/.test(bnHtml) &&
+      BLOG_DATA.find((post) => post.slug === STOPOVER_SLUG)?.updatedAt === "2026-10-15"
+  );
+})();
+check(
+  stopoverReferencesAreLocalized,
+  stopoverReferencesAreLocalized
+    ? "the stopover guide renders 8 claim-linked references in both locales and carries updatedAt 2026-10-15"
+    : "stopover references are missing, unlocalized, or the update date is not recorded"
+);
+
+// --- Wave 3C: shared Umrah-visa framing on hub surfaces must stay sourced ----
+//
+// `/umrah`, `/blog` and the Umrah-category article pages used to publish a
+// "90-day Saudi Umrah e-Visa in 2 to 5 working days" priced at
+// "BDT 15,500 – 19,500", "year-round Umrah", and "Mandatory ... Apps" tiles.
+// The Ministry of Hajj and Umrah FAQ (opened 2026-10-15) publishes only a fee
+// "estimated at 300 Saudi Riyals", requires an accommodation-and-transport
+// service package for agent-issued visas, scopes biometric enrollment to five
+// named countries, and contradicts itself on permitted stay (30 vs 90 days).
+// So these shared surfaces may carry the dated official anchor and nothing that
+// reads like a published BDT price, a processing guarantee or a blanket rule.
+// Ledger P-01..P-06 in docs/growth/CONTENT-QUEUE.md.
+const SHARED_UMRAH_BANNED_PATTERNS: { label: string; pattern: RegExp }[] = [
+  { label: "un-ledgered BDT Umrah visa price", pattern: /BDT\s*15,500\s*[–\-]\s*(?:BDT\s*)?19,500/ },
+  { label: "un-ledgered BDT Umrah visa price (Bengali numerals)", pattern: /১৫,৫০০\s*[–\-]\s*১৯,৫০০/ },
+  { label: "flat \"90-day Umrah e-Visa\" label", pattern: /90-day Saudi Umrah e-Visa|Standard 90-Day Umrah e-Visa|৯০ দিনের (?:স্ট্যান্ডার্ড )?Saudi Umrah e-Visa/i },
+  { label: "unpublished Umrah visa processing promise", pattern: /2(?: ?to ?| ?[–-] ?)?[45] working days|২–৪ কার্যদিবস|২–৫ কার্যদিবস/i },
+  { label: "universal year-round Umrah framing", pattern: /year-round Umrah|বছরের যেকোনো সময় ওমরাহ/ },
+  { label: "apps presented as a universal mandate", pattern: /Mandatory Umrah Apps|"Mandatory Apps"|বাধ্যতামূলক Umrah অ্যাপ/ },
+];
+const SHARED_UMRAH_EN_ANCHOR = /300 Saudi Riyals|SAR 300/;
+const SHARED_UMRAH_BN_ANCHOR = /৩০০ সৌদি রিয়াল|SAR ৩০০/;
+const SHARED_UMRAH_DATE = /15 Oct(ober)? 2026/;
+const SHARED_UMRAH_BN_DATE = /১৫ অক্টোবর ২০২৬/;
+
+const sharedUmrahSurfaces: { label: string; text: string; needs: RegExp[] }[] = [
+  {
+    label: "shared Ministry FAQ answer (EN)",
+    text: getLocalizedHajjFaqs("en")[0]?.answer ?? "",
+    needs: [SHARED_UMRAH_EN_ANCHOR, SHARED_UMRAH_DATE],
+  },
+  {
+    label: "shared Ministry FAQ answer (BN)",
+    text: getLocalizedHajjFaqs("bn")[0]?.answer ?? "",
+    needs: [SHARED_UMRAH_BN_ANCHOR, SHARED_UMRAH_BN_DATE],
+  },
+  {
+    label: "/blog hub copy (source)",
+    text: read(path.join(ROOT_DIR, "src/routes/BlogIndexRouteView.tsx")) ?? "",
+    needs: [SHARED_UMRAH_EN_ANCHOR, SHARED_UMRAH_BN_ANCHOR, SHARED_UMRAH_DATE],
+  },
+  {
+    label: "blog-post hub copy (source)",
+    text: read(path.join(ROOT_DIR, "src/routes/BlogPostRouteView.tsx")) ?? "",
+    needs: [SHARED_UMRAH_EN_ANCHOR, SHARED_UMRAH_BN_ANCHOR, SHARED_UMRAH_DATE],
+  },
+  {
+    label: "Dubai-combo article (EN)",
+    text: BLOG_BODY[DUBAI_COMBO_SLUG] ?? "",
+    needs: [SHARED_UMRAH_EN_ANCHOR, SHARED_UMRAH_DATE],
+  },
+  {
+    label: "Dubai-combo article (BN)",
+    text: BENGALI_BLOG_OVERRIDES[DUBAI_COMBO_SLUG]?.content ?? "",
+    needs: [SHARED_UMRAH_BN_ANCHOR, SHARED_UMRAH_BN_DATE],
+  },
+];
+const sharedUmrahIssues: string[] = [];
+for (const surface of sharedUmrahSurfaces) {
+  if (!surface.text) {
+    sharedUmrahIssues.push(`${surface.label}: surface is empty`);
+    continue;
+  }
+  for (const entry of SHARED_UMRAH_BANNED_PATTERNS) {
+    if (entry.pattern.test(surface.text)) {
+      sharedUmrahIssues.push(`${surface.label}: ${entry.label}`);
+    }
+  }
+  for (const needed of surface.needs) {
+    if (!needed.test(surface.text)) {
+      sharedUmrahIssues.push(`${surface.label}: missing ${needed.source.slice(0, 28)}`);
+    }
+  }
+}
+check(
+  sharedUmrahIssues.length === 0,
+  `the shared Umrah-visa framing on /umrah, /blog, blog posts and the Dubai combo carries only the dated official fee anchor [${sharedUmrahIssues.slice(0, 2).join("; ")}]`
+);
+
+// The hub tiles are client-rendered only, so a `dist` grep cannot see them. Render
+// a Umrah-category article through the real route component and assert the panel
+// exists there with the qualified copy.
+function renderSharedUmrahPanel(locale: "en" | "bn"): string {
+  const slug = STOPOVER_SLUG;
+  const isBn = locale === "bn";
+  const sourcePosts = getLocalizedBlogs(locale);
+  const sourcePost = sourcePosts.find((post) => post.slug === slug);
+  if (!sourcePost) throw new Error(`Missing ${locale} blog post ${slug}`);
+  const fullPost = { ...sourcePost, content: isBn ? sourcePost.content : BLOG_BODY[slug] };
+  const localizedBlogs = sourcePosts.map((post) => (post.slug === slug ? fullPost : post));
+  const getLocalizedRouteHref = (route: string) => (route === "/" ? (isBn ? "/bn" : "/") : isBn ? `/bn${route}` : route);
+  const EmptyAuthorBioCard = () => null;
+  return renderToStaticMarkup(
+    React.createElement(BlogPostRouteView as any, {
+      context: {
+        AuthorBioCard: EmptyAuthorBioCard,
+        blogBodies: {},
+        getBlogAeoSnippet50Words: (_slug: string, _isBengali: boolean, fallback: string) => fallback,
+        getBlogCoverImage: () => "/assets/images/clouds_boat_hero_1781438671378-1200.webp",
+        getLocalizedRouteHref,
+        isBn,
+        isLanding: false,
+        lang: locale,
+        localizedBlogs,
+        localizedHajjFaqs: getLocalizedHajjFaqs(locale),
+        navigateTo: () => {},
+        parameterId: slug,
+        section: "blog",
+        setAffiliateToast: () => {},
+      },
+    })
+  );
+}
+const sharedUmrahPanelIssues: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  try {
+    const markup = renderSharedUmrahPanel(locale);
+    if (!markup.includes('id="travel-intelligence-panel"')) {
+      sharedUmrahPanelIssues.push(`${locale}: hub panel did not render`);
+    }
+    if (!(locale === "bn" ? SHARED_UMRAH_BN_ANCHOR : SHARED_UMRAH_EN_ANCHOR).test(markup)) {
+      sharedUmrahPanelIssues.push(`${locale}: no official fee anchor in the tiles`);
+    }
+    for (const entry of SHARED_UMRAH_BANNED_PATTERNS) {
+      if (entry.pattern.test(markup)) sharedUmrahPanelIssues.push(`${locale}: ${entry.label}`);
+    }
+  } catch (error) {
+    sharedUmrahPanelIssues.push(`${locale} (${String(error).slice(0, 120)})`);
+  }
+}
+check(
+  sharedUmrahPanelIssues.length === 0,
+  `the client-rendered hub tiles on Umrah-category posts show the SAR fee anchor and no BDT visa price [${sharedUmrahPanelIssues.slice(0, 2).join("; ")}]`
+);
+
+// The prerendered hub page is the one surface that feeds both readers and
+// FAQPage JSON-LD, so the corrected answer has to be visible in the output.
+const umrahHubHtml = [
+  read(path.join(DIST_DIR, "umrah.html")) ?? "",
+  read(path.join(DIST_DIR, "bn", "umrah.html")) ?? "",
+];
+const umrahHubIsGrounded =
+  umrahHubHtml.every((html) => html.length > 0) &&
+  SHARED_UMRAH_EN_ANCHOR.test(umrahHubHtml[0]) &&
+  SHARED_UMRAH_BN_ANCHOR.test(umrahHubHtml[1]) &&
+  !SHARED_UMRAH_BANNED_PATTERNS.some((entry) =>
+    umrahHubHtml.some((html) => entry.pattern.test(html))
+  );
+check(
+  umrahHubIsGrounded,
+  "/umrah and /bn/umrah publish the dated Ministry Umrah visa fee without the BDT band, the 90-day label or the processing promise"
+);
+
+const SHARED_UMRAH_REINTRODUCED =
+  "Bangladeshi passport holders can obtain a 90-day Saudi Umrah e-Visa in 2 to 5 working days " +
+  "(recently BDT 15,500 – 19,500 including medical insurance), because year-round Umrah can be " +
+  "planned independently; see the Mandatory Umrah Apps tile. " +
+  "বছরের যেকোনো সময় ওমরাহ এবং BDT ১৫,৫০০–১৯,৫০০ খরচে ২–৫ কার্যদিবসে বাধ্যতামূলক Umrah অ্যাপের কথা লেখা আছে।";
+const sharedUmrahControl = SHARED_UMRAH_BANNED_PATTERNS.filter((entry) =>
+  entry.pattern.test(SHARED_UMRAH_REINTRODUCED)
+).length;
+
+check(
+  sharedUmrahControl >= SHARED_UMRAH_BANNED_PATTERNS.length - 1,
+  `the shared-surface guard rejects a deliberately reintroduced 90-day / BDT band / year-round sentence (matched ${sharedUmrahControl} of ${SHARED_UMRAH_BANNED_PATTERNS.length} patterns)`
+);
+
+// --- Wave 4: the hotel-zones and rail guide must quote the operator, not an agent
+//
+// This page used to state train times to the minute, SAR fare ranges with BDT
+// conversions, hotel nightly bands, a "shuttle every 5 minutes" promise, fixed
+// gate numbers for the women's Rawdah entrance, a 60% savings figure and a
+// Zamzam price. Re-checked on 2026-10-15 against the operator's own tariff,
+// baggage and station-services pages (ledger W4-01..W4-05 in
+// docs/growth/CONTENT-QUEUE.md). The patterns below pin what may not come back.
+const HOTEL_SLUG = "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh";
+const HOTEL_BANNED_PATTERNS: { label: string; pattern: RegExp }[] = [
+  { label: "baggage dimensions the operator does not publish", pattern: /65 x 45 x 30|65x45x30/ },
+  { label: "unsourced rail fare ranges", pattern: /SAR 60[ \u2013-]*75|SAR 150[ \u2013-]*220/ },
+  {
+    label: "converted BDT totals for rail, hotels, ziyarah or Zamzam",
+    pattern: /BDT[ ]*(2,100|3,900|4,200|4,900|5,200|5,900|7,200|7,500|11,500|14,800|15,000|18,000|19,500|35,000)(?![0-9])|\u09e7\u09ef,\u09eb\u09e6\u09e6|\u09ea,\u09e8,\u09e6\u09e6|\u09ed,\u09eb\u09e6\u09e6|\u09e8,\u09e7\u09e6\u09e6|\u09eb,\u09e8,\u09e6\u09e6/,
+  },
+  { label: "train journey stated to the minute", pattern: /54 minutes|2 hours 20 minutes|\u09eb\u09ea \u09ae\u09bf\u09a8\u09bf\u099f|\u09e8 \u0998\u09a3\u09cd\u099f\u09be ২০ মিনিট/ },
+  { label: "marketing top speed in a logistics page", pattern: /300 KM[/]H|৩০০ কিমি[/]ঘণ্টা/ },
+  { label: "fixed gate numbers for the women's entrance", pattern: /Gates 25 to 29|Gate 25|25[ \u2013-]*29/ },
+  { label: "shuttle frequency promise", pattern: /every 5 minutes|\u09aa\u09cd\u09b0\u09a4\u09bf \u09ea \u09ae\u09bf\u09a8\u09bf\u099f \u09aa\u09b0\u09aa\u09b0/ },
+  { label: "percent savings claim", pattern: /save 60%|\u09ec\u09e6% \u09ac\u09be\u0981\u099a/ },
+  { label: "Zamzam price repeated outside its own guide", pattern: /SAR 9\.50|SAR \u09ef\.\u09eb\u09e6|\u09ef\.\u09eb\u09e6 \u09b8\u09cc\u09a6\u09bf/ },
+  { label: "unverified walking minutes", pattern: /3 to 6 minutes|3[ \u2013-]*5 minutes|৩ থেকে ৬ মিনিট/ },
+];
+const hotelSurfaces: { label: string; text: string }[] = [
+  { label: "article body (EN)", text: BLOG_BODY[HOTEL_SLUG] ?? "" },
+  { label: "article body (BN)", text: BENGALI_BLOG_OVERRIDES[HOTEL_SLUG]?.content ?? "" },
+  { label: "article page (EN)", text: read(path.join(DIST_DIR, "blog", `${HOTEL_SLUG}.html`)) ?? "" },
+  { label: "article page (BN)", text: read(path.join(DIST_DIR, "bn", "blog", `${HOTEL_SLUG}.html`)) ?? "" },
+  { label: "/blog hub (EN)", text: read(path.join(DIST_DIR, "blog.html")) ?? "" },
+  { label: "/bn/blog hub (BN)", text: read(path.join(DIST_DIR, "bn", "blog.html")) ?? "" },
+];
+// The blog hub lists every article summary, so only the claims unique to this
+// page are asserted there; the BDT bands, gate numbers and walking minutes below
+// are legitimate copy on other cards and must not be banned site-wide.
+const HOTEL_HUB_ONLY_PATTERNS: RegExp[] = [
+  /65 x 45 x 30/,
+  /SAR 60[ \u2013-]*75|SAR 150[ \u2013-]*220/,
+  /54 minutes|2 hours 20 minutes/,
+  /every 5 minutes/,
+  /save 60%/,
+  /flattest walking-distance|Gates 25 to 29 for Madinah walks|২৪ ঘণ্টা ফ্রি শাটল/,
+];
+const hotelIssues: string[] = [];
+hotelSurfaces.forEach((surface, index) => {
+  if (!surface.text) {
+    hotelIssues.push(`${surface.label}: missing output`);
+    return;
+  }
+  const patterns: RegExp[] =
+    index >= 4 ? HOTEL_HUB_ONLY_PATTERNS : HOTEL_BANNED_PATTERNS.map((entry) => entry.pattern);
+  for (const entry of patterns) {
+    const hit = surface.text.match(entry);
+    if (hit) hotelIssues.push(`${surface.label}: ${entry.source.slice(0, 24)} -> ${hit[0].slice(0, 28)}`);
+  }
+});
+check(
+  hotelIssues.length === 0,
+  `the hotel-zone and Haramain guide (EN/BN bodies, both article pages and both hub pages) carries no invented fare, timing, gate, shuttle or savings claim [${hotelIssues.slice(0, 3).join("; ")}]`
+);
+
+const hotelBodyPair: [string, string] = [
+  BLOG_BODY[HOTEL_SLUG] ?? "",
+  BENGALI_BLOG_OVERRIDES[HOTEL_SLUG]?.content ?? "",
+];
+const HOTEL_ANCHORS: { label: string; pattern: RegExp }[] = [
+  { label: "the operator's baggage envelope", pattern: /65 x 55 x 35 cm/ },
+  { label: "the operator portal named as the fare source", pattern: /sar\.hhr\.sa/ },
+  { label: "the dated Makkah-Madinah base fare", pattern: /SAR 162/ },
+  { label: "the dated airport-station base fare", pattern: /SAR 65/ },
+  { label: "the 25 kg ceiling", pattern: /25 kg|২৫ কেজি/ },
+  { label: "the no-BDT-conversion rule", pattern: /No BDT figure is published|কোনো BDT অঙ্ক নেই/ },
+  { label: "excess baggage is not carried", pattern: /Excess baggage is not carried|অতিরিক্ত লাগেজ মোটেই নেওয়া হয় না/ },
+  { label: "the distance claim treated as unverified until the property confirms it", pattern: /Treat any distance claim as unverified|যাচাই-না-করা ত/ },
+];
+const hotelMissing: string[] = [];
+(["EN", "BN"] as const).forEach((locale, li) => {
+  const body = hotelBodyPair[li];
+  for (const anchor of HOTEL_ANCHORS) {
+    if (!anchor.pattern.test(body)) hotelMissing.push(`${locale}: ${anchor.label}`);
+  }
+});
+check(
+  hotelMissing.length === 0,
+  `both locales of the hotel-zone guide teach the operator's real baggage limit, the dated base fares and the no-BDT rule [${hotelMissing.slice(0, 3).join("; ")}]`
+);
+
+const hotelRefLinks = [
+  read(path.join(DIST_DIR, "blog", `${HOTEL_SLUG}.html`)) ?? "",
+  read(path.join(DIST_DIR, "bn", "blog", `${HOTEL_SLUG}.html`)) ?? "",
+].map((html) => (html.match(/href="https:\/\/sar\.hhr\.sa/g) || []).length);
+check(
+  hotelRefLinks.length === 2 && hotelRefLinks.every((n) => n === 3),
+  `the hotel-zone guide renders 3 operator reference links in both locales (got ${hotelRefLinks.join(" / ")})`
+);
+
+const HOTEL_REINTRODUCED =
+  "Jeddah Airport to Makkah takes just 54 minutes (SAR 60\u201375 Economy / ~BDT 2,100), the 300 KM/H train " +
+  "allows one suitcase at 65 x 45 x 30 cm, free shuttles run every 5 minutes, and Markazia North hotels sit " +
+  "by Gates 25 to 29 \u2014 save 60% with BDT 4,200\u2013BDT 7,500 rooms and buy Zamzam for SAR 9.50.";
+const hotelControl = HOTEL_BANNED_PATTERNS.filter((entry) => entry.pattern.test(HOTEL_REINTRODUCED)).length;
+check(
+  hotelControl >= HOTEL_BANNED_PATTERNS.length - 2,
+  `the hotel-zone guard rejects a deliberately reintroduced fare, timing, gate, shuttle and savings sentence (matched ${hotelControl} of ${HOTEL_BANNED_PATTERNS.length} patterns)`
 );
 
 // --- Report ----------------------------------------------------------------

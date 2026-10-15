@@ -2174,17 +2174,38 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-12",
     slug: "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
     title: "Makkah & Madinah Hotel Zones, Haramain Bullet Train & Ziyarah Guide for Bangladeshi Pilgrims (2026)",
-    summary: "Picking the wrong hotel street in Makkah or Madinah can mean pushing elderly parents up steep hills in 40°C heat or waiting 45 minutes for crowded elevators after every prayer. This practical ground-logistics guide for Bangladeshi Umrah and Hajj pilgrims compares Makkah's flattest walking-distance zones (Jabal Omar, Clock Tower, and Northern Ajyad) against high-value 24/7 shuttle districts (Mahbas Al Jin and Kudai), shows how to book hotels near Masjid an-Nabawi Ladies' Gates 25–29 in Madinah Markazia North, and walks through Haramain High-Speed Railway baggage rules, Zamzam water allowance at Jeddah/Madinah airports, and private Ziyarah taxi rates in SAR and BDT.",
+    summary: "Hotel distances in Makkah and Madinah are quoted to the Haram wall, not to the gate you will use - and the rail operator's own rules decide whether your suitcases get on the train. This guide carries the 15 October 2026 Haramain base fares, the baggage limits, the station-shuttle reality and what to confirm with a hotel before you pay; no ziyarah car or Zamzam price is published, because none is official.",
     category: "Hajj & Umrah",
     date: "September 26, 2026",
+    updatedAt: "2026-10-15",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
+    references: [
+      {
+        name: "Haramain High Speed Railway - station services (shuttles, taxis, trolleys, parking)",
+        nameBn: "Haramain High Speed Railway - স্টেশন সার্ভিস (শাটল, ট্যাক্স, ট্রলি, পার্কিং)",
+        url: "https://sar.hhr.sa/services/stations-services",
+      },
+      {
+        name: "Haramain High Speed Railway - published tariff, discounts and ticket rules",
+        nameBn: "Haramain High Speed Railway - প্রকাশিত ট্যারিফ, ছাড় ও টিকিটের নিয়ম",
+        url: "https://sar.hhr.sa/travel/fares",
+      },
+      {
+        name: "Haramain High Speed Railway - baggage allowance and prohibited items",
+        nameBn: "Haramain High Speed Railway - ব্যাগেজের সীমা ও নিষিদ্ধ জিনিস",
+        url: "https://sar.hhr.sa/web/portal/travel/guidelines/baggage",
+      },
+    ],
     internalLinks: [
       { text: "Complete Umrah & Hajj Visa, Nusuk & BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Dual-Currency Card Endorsement for Booking Haramain Train", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport Outbound Immigration Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Dual-Currency Card Endorsement for Booking the Train", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Umrah Rules for Women: Mahram, Visa and Ladies' Gates", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
+      { text: "Wearing Ihram at Dhaka Airport or at the Miqat", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "Zamzam, Dates and Gold: Customs Rules on the Return Flight", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
     ],
+
     affiliateCTA: { provider: "airalo", headline: "Need Data for Haramain Train & Nusuk Permits?", body: "Get an instant Saudi Arabia eSIM before flying from Dhaka so your Nusuk QR codes and Careem rides work seamlessly across Makkah and Madinah." }
   },
   {
@@ -2225,13 +2246,58 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-15",
     slug: "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
     title: "96-Hour Saudi Stopover Visa for Bangladeshis (2026): Perform Umrah on Saudia & Flynas Transit Flights",
-    summary: "Did you know that Bangladeshi passport holders flying to London, New York, Toronto, Europe, Istanbul, or Dubai on Saudia (Saudi Arabian Airlines) or Flynas can add a 4-day (96-hour) Umrah stopover in Makkah and Madinah for roughly BDT 3,800—including a complimentary 1-night hotel stay on eligible Saudia tickets? This step-by-step guide explains how to book the official 96-Hour Saudi Stopover Visa during flight checkout, how Bangladeshi travelers holding a valid used US, UK, or Schengen visa can unlock a 1-year multiple-entry Saudi Tourist e-Visa or Visa on Arrival, and how to plan a seamless 4-day Jeddah–Makkah–Madinah itinerary.",
+    summary:
+      "Bangladeshi travelers flying to London, New York, Toronto, Europe, Istanbul or Dubai on Saudia (Saudi Arabian Airlines) or flynas can add a 96-hour (4-day) Umrah stopover to a qualifying through-itinerary while booking the ticket, and it does not require a previously used US/UK/Schengen visa. Saudi Arabia publishes no fixed stopover fee and no universal hotel benefit: visa, insurance and service charges are calculated at the airline's checkout and can change, so the amount shown on your own booking is the only reliable figure. This guide covers the published conditions, the booking sequence, the visa-versus-permit boundary, the conditional used-visa eVisa/VOA route and a realistic 4-day Jeddah–Makkah–Madinah plan. Re-checked against official Visit Saudi and Saudia sources on 15 October 2026.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
+    updatedAt: "2026-10-15",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "6 min read",
+    readTime: "7 min read",
+    references: [
+      {
+        name: "Visit Saudi — Stopover Transit Visa campaign page",
+        nameBn: "Visit Saudi — Stopover Transit Visa ক্যাম্পেজ পেজ",
+        url: "https://www.visitsaudi.com/en/campaigns/saudi-stopover",
+      },
+      {
+        name: "Saudia — Stopover Transit Visa: how to book, conditions and charges",
+        nameBn: "Saudia — Stopover Transit Visa: বুকিং পদ্ধতি, শর্ত ও খরচ",
+        url: "https://www.saudia.com/transit-visa",
+      },
+      {
+        name: "flynas — official booking site (stopover option shown at checkout)",
+        nameBn: "flynas — অফিশিয়াল বুকিং সাইট (checkout-এ stopover option দেখানো হয়)",
+        url: "https://www.flynas.com/en",
+      },
+      {
+        name: "Official Nusuk platform — Umrah and Rawdah appointments",
+        nameBn: "অফিশিয়াল Nusuk platform — ওমরাহ ও Rawdah appointment",
+        url: "https://www.nusuk.sa",
+      },
+      {
+        name: "Saudi Unified Visa Platform — verify an issued visa",
+        nameBn: "Saudi Unified Visa Platform — ইস্যু হওয়া ভিসা যাচাই",
+        url: "https://ksavisa.sa",
+      },
+      {
+        name: "Visit Saudi tourist eVisa portal — eligibility list and current terms",
+        nameBn: "Visit Saudi tourist eVisa পোর্টাল — যোগ্যতার তালিকা ও বর্তমান শর্ত",
+        url: "https://visa.visitsaudi.com/",
+      },
+      {
+        name: "Visit Saudi help — visit visa with a used US, UK or Schengen visa",
+        nameBn: "Visit Saudi help — আগে ব্যবহৃত US, UK বা Schengen ভিসা নিয়ে visit visa",
+        url: "https://help.visitsaudi.com/hc/en-us/articles/360018933099-Can-I-get-a-visit-visa-if-I-have-a-valid-US-or-UK-or-Schengen-visa-",
+      },
+      {
+        name: "Haramain High Speed Rail — fares and booking terms",
+        nameBn: "Haramain High Speed Rail — ট্যারিফ ও বুকিং শর্ত",
+        url: "https://sar.hhr.sa/travel/fares",
+      },
+    ],
     internalLinks: [
       { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Nusuk App, Saudi Visa Bio & Rawdah Permit Guide", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Dual-Currency Card Endorsement Guide for Online Flight Booking", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }

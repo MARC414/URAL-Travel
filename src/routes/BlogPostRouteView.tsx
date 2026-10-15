@@ -1780,9 +1780,9 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                             isBn
 
-                              ? "বাংলাদেশি নাগরিকদের ফরজ Hajj-এর জন্য অবশ্যই ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ নিবন্ধন করতে হবে। তবে বছরের যেকোনো সময় ৯০ দিনের Umrah e-Visa, ৯৬ ঘণ্টার Saudia/Flynas Stopover Visa অথবা US/UK/Schengen ভিসাধারীদের অনলাইন e-Visa এবং Nusuk App ব্যবহার করে নিজে নিজে কম খরচে DIY Umrah পালন করা যায়।"
+                              ? "বাংলাদেশি নাগরিকদের ফরজ হজের জন্য ধর্ম বিষয়ক মন্ত্রণালয়ের অফিশিয়াল পোর্টাল (hajj.gov.bd)-এ নিবন্ধন করতে হবে। ওমরাহ মন্ত্রণালয়ের সিজন ক্যালেন্ডার অনুযায়ী চলে—১৪৪৮ হিজরিতে Umrah ভিসা ইস্যু সর্বশেষ ৯ মার্চ ২০২৭ এবং প্রবেশ সর্বশেষ ২৩ মার্চ ২০২৭, তাই বুক করার আগে বর্তমান ক্যালেন্ডার দেখে নিন। সরকারি Umrah ভিসার ফি 'আনুমানিক ৩০০ সৌদি রিয়াল' বলা হয়েছে (১৫ অক্টোবর ২০২৬ যাচাই); ইনস্যুরেন্স ও সার্ভিস প্যাকেজের অঙ্ক ইস্যুর সময় নির্ধারিত হয়, তাই এখানে কোনো BDT মোট খরচ প্রকাশ করা হলো না। যোগ্য Saudia বা flynas ইটিনারারিতে চেকআউটে ৯৬ ঘণ্টার stopover ভিসা যোগ করা যায়, আর বৈধ ও আগে ব্যবহৃত US/UK/Schengen ভিসা থাকলে বর্তমান শর্তে visa-on-arrival প্রযোজ্য হতে পারে।"
 
-                              : "Bangladeshi citizens must register via hajj.gov.bd for obligatory Hajj, while year-round Umrah can be planned independently using a 90-day Umrah e-Visa, a 96-hour Saudia/Flynas Stopover Visa, or a qualified US/UK/Schengen holder e-Visa, paired with the official Nusuk and Saudi Visa Bio apps."
+                              : "Bangladeshi citizens must register via hajj.gov.bd for obligatory Hajj. Umrah follows the Ministry's season calendar — for 1448H, Umrah visas are issued through 9 March 2027 and entry closes 23 March 2027, so check the current calendar before booking. The government Umrah visa fee is stated as 'estimated at 300 Saudi Riyals' (checked 15 October 2026), with insurance and the service package priced at issuance; no BDT total is published. A 96-hour stopover can be added at Saudia or flynas checkout on a qualifying itinerary, and a valid, previously used US, UK or Schengen visa may qualify for visa-on-arrival where current conditions are met."
 
                           }
 
@@ -1790,9 +1790,9 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                             {
 
-                              label: isBn ? "Umrah e-Visa খরচ" : "Umrah e-Visa Cost",
+                              label: isBn ? "Umrah ভিসার সরকারি ফি" : "Umrah visa government fee",
 
-                              value: isBn ? "BDT 15,500 – 19,500 (২–৫ দিন)" : "BDT 15,500 – 19,500 (2–5 Days)",
+                              value: isBn ? "SAR ৩০০ ('আনুমানিক', ১৫ অক্টোবর ২০২৬ যাচাই) — প্যাকেজসহ মোট অঙ্ক ইস্যুর সময় জানা যায়" : "SAR 300 (stated as an estimate; checked 15 Oct 2026) — insurance and package priced at issuance",
 
                             },
 
@@ -1800,15 +1800,15 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                               label: isBn ? "১০ দিনের DIY Umrah বাজেট" : "10-Day DIY Umrah Budget",
 
-                              value: isBn ? "BDT 1,16,000 – 1,32,000 / জন" : "BDT 1,16,000 – 1,32,000 / Person",
+                              value: isBn ? "BDT ১,১৬,০০০ – ১,৩২,০০০ / জন (১৪ অক্টোবর ২০২৬ যাচাই; লাইভ কোট নয়)" : "BDT 1,16,000 – 1,32,000 / Person (checked 14 Oct 2026; not a live quote)",
 
                             },
 
                             {
 
-                              label: isBn ? "বাধ্যতামূলক অ্যাপ" : "Mandatory Apps",
+                              label: isBn ? "বায়োমেট্রিক ও পারমিট অ্যাপ (ভিসাভেদে প্রযোজ্য)" : "Biometric & permit apps (visa-specific)",
 
-                              value: "Saudi Visa Bio + Nusuk (nusuk.sa)",
+                              value: isBn ? "Nusuk (nusuk.sa) + প্রযোজ্য হলে Saudi Visa Bio" : "Nusuk (nusuk.sa) + Saudi Visa Bio where your visa application requires it",
 
                             },
 

@@ -41,6 +41,10 @@ const BLOG_FAQ_CONFIGS: Record<
     en: /^\s*7\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৭\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
+  "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": {
+    en: /^\s*5\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৫\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
 };
 
 function isNumberedHeading(line: string): boolean {

@@ -163,13 +163,13 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     secondaryKeywords: ["saudia free stopover hotel makkah", "us uk schengen visa saudi evisa bangladesh", "perform umrah on transit visa"],
     monthlyIntentSignal: "High · Smart Value & NRB Transit Intent",
     customerPsychologyEn:
-      "Smart Value Maximization ('Ek Tir-e Dui Pakhi'): Bangladeshi NRBs, students, and tourists flying to UK/USA/Europe/Dubai love unlocking a 4-day Umrah + 1 free hotel night for just BDT 3,800.",
+      "Smart Value Maximization ('Ek Tir-e Dui Pakhi'): Bangladeshi NRBs, students and tourists flying to the UK/USA/Europe/Dubai want a 4-day Umrah inside their connection. Do not market a price or a free hotel night here: charges are set at airline checkout and no hotel benefit is published (ledger ST-01/ST-02, checked 15 October 2026).",
     customerPsychologyBn:
-      "এক খরচে দুই সুবিধা: ইউরোপ, লন্ডন, আমেরিকা বা দুবাইগামী বাংলাদেশিরা মাত্র ৩,৮০০ টাকায় ৪ দিনের স্টপওভার ওমরাহ ও সৌদিয়ার ১ রাত ফ্রি হোটেল পেতে আগ্রহী।",
+      "এক খরচে দুই সুবিধা: ইউরোপ, লন্ডন, আমেরিকা বা দুবাইগামী বাংলাদেশিরা যাত্রাবিরতির ভেতরে ৪ দিনের স্টপওভার ওমরাহ করতে চান। এখানে দাম বা ফ্রি হোটেলের প্রতিশ্রুতি দেওয়া যাবে না—ফি checkout-এ নির্ধারিত হয় এবং কোনো হোটেল সুবিধা প্রকাশিত নেই (ledger ST-01/ST-02, ১৫ অক্টোবর ২০২৬ যাচাই)",
     aeoDirectAnswerEn:
-      "All Bangladeshi passport holders flying Saudia or Flynas can book a 96-hour (4-day) Saudi Stopover Visa during ticket checkout for ~SAR 135 (BDT 3,800–4,500 including medical insurance), with 1 free hotel night on eligible Saudia routes.",
+      "Travelers holding a qualifying Saudia or flynas through-itinerary can request the 96-hour Saudi Stopover Visa during checkout. Visit Saudi's current Saudia offer lists the visa fee as free with an application fee around SAR 39.50 and medical insurance from SAR 13, and no hotel benefit is published. Publish no SAR/BDT total: eligibility and charges are confirmed at the airline's checkout. [Verified 15 October 2026; the earlier ~SAR 135 (BDT 3,800–4,500) plus free-hotel answer was not supported by any official source.]",
     aeoDirectAnswerBn:
-      "Saudia বা Flynas-এ ট্রানজিট টিকিট কাটার সময় যেকোনো বাংলাদেশি পাসপোর্টধারী ~SAR 135 (BDT ৩,৮০০–৪,৫০০) ফি দিয়ে ৯৬ ঘণ্টার স্টপওভার ওমরাহ ভিসা ও ১ রাত ফ্রি হোটেল পেতে পারেন।",
+      "যোগ্য Saudia বা flynas ইটিনারারিতে টিকিট কাটার সময় ৯৬ ঘণ্টার Saudi Stopover Visa-র জন্য আবেদন করা যায়। Visit Saudi-র বর্তমান Saudia অফারে ভিসা ফি ফ্রি, application fee প্রায় SAR 39.50 এবং medical insurance SAR 13 থেকে দেখানো আছে; কোনো হোটেল সুবিধা প্রকাশিত নেই। কোনো SAR/BDT মোট প্রকাশ করবেন না—যোগ্যতা ও খরচ এয়ারলাইন্সের checkout-এ নিশ্চিত হন। [১৫ অক্টোবর ২০২৬ যাচাই; পূর্বের ~SAR 135 (BDT ৩,৮০০–৪,৫০০) ও ফ্রি হোটেলের কপি কোনো সরকারি সূত্রে নেই।]",
     eavTriples: "Saudi Stopover Visa (Entity) → Maximum Stay Duration (Attribute) → 96 Hours / 4 Days (Value)",
     targetPath: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
     isLiveBlog: false,

@@ -311,7 +311,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": {
     title: "Makkah & Madinah Hotel Zones & Haramain Train | URAL",
     description:
-      "Compare flat, wheelchair-accessible Makkah and Madinah hotel streets near the Haram and learn how to book Haramain High-Speed Bullet Train tickets.",
+      "Check what a Makkah or Madinah hotel distance claim really measures, then read the Haramain rail operator's own tariff, baggage limits and station shuttles.",
   },
   "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
     title: "Umrah with Elderly Parents: Wheelchair & Hotel Guide | URAL",
@@ -321,7 +321,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": {
     title: "96-Hour Saudi Stopover Visa for Bangladeshis | URAL",
     description:
-      "Learn how Bangladeshi travelers flying Saudia or Flynas can book a 96-hour Saudi Stopover Visa to perform Umrah and visit Madinah during transit.",
+      "Bangladeshi travelers on Saudia or flynas can add a 96-hour Saudi stopover for Umrah. No fixed fee or free hotel is published; charges are set at checkout.",
   },
   "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": {
     title: "Nusuk App & Saudi Visa Bio Guide for Bangladesh | URAL",
