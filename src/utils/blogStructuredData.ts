@@ -1,3 +1,5 @@
+import { SCHEDULED_BLOG_FAQ_HEADINGS } from "../data/scheduledBlogSeo.generated";
+
 export type BlogStructuredDataLocale = "en" | "bn";
 
 export interface VisibleBlogFaq {
@@ -62,11 +64,14 @@ export function getVisibleBlogFaqSection(
   locale: BlogStructuredDataLocale
 ): VisibleBlogFaqSection | undefined {
   const faqConfig = BLOG_FAQ_CONFIGS[slug];
-  if (!faqConfig || !content.trim()) return undefined;
+  const scheduledHeading = SCHEDULED_BLOG_FAQ_HEADINGS[slug]?.[locale];
+  if ((!faqConfig && !scheduledHeading) || !content.trim()) return undefined;
 
   const lines = content.split(/\r?\n/);
-  const headingPattern = locale === "bn" ? faqConfig.bn : faqConfig.en;
-  const headingIndex = lines.findIndex((line) => headingPattern.test(line));
+  const headingPattern = faqConfig?.[locale];
+  const headingIndex = lines.findIndex((line) =>
+    headingPattern ? headingPattern.test(line) : line.trim() === scheduledHeading?.trim(),
+  );
   if (headingIndex < 0) return undefined;
 
   let sectionEnd = lines.length;

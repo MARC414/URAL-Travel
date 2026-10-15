@@ -1,4 +1,5 @@
 import { FlightRoute, HotelGuide, VisaGuide, DestinationGuide, TripCostData, BlogPost } from "./types";
+import { SCHEDULED_BLOG_DATA } from "./data/scheduledBlogPosts.generated";
 
 export const FLIGHTS_DATA: FlightRoute[] = [
   {
@@ -3075,6 +3076,7 @@ export const BLOG_DATA: BlogPost[] = [
       body: "While cross-border passenger trains remain suspended, direct Dhaka (DAC) to Kolkata (CCU) flights take about 1 hour 10 minutes — compare live fares and baggage terms across airlines before booking.",
     },
   },
+  ...SCHEDULED_BLOG_DATA,
 ];
 
 

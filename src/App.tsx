@@ -45,6 +45,8 @@ import { FlightRoute, HotelGuide, VisaGuide, DestinationGuide, TripCostData, Blo
 
 // Database Constants
 import { BLOG_SLUGS } from "./data/blogIndex";
+import { SCHEDULED_BLOG_COVER_IMAGES } from "./data/scheduledBlogIndex.generated";
+import { SCHEDULED_BLOG_SNIPPETS } from "./data/scheduledBlogSeo.generated";
 
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
@@ -511,6 +513,9 @@ const chefchaouenFountainImg = "/assets/images/chefchaouen_blue_fountain_alley_1
 const dhakaKolkataBorderTrainImg = "/assets/images/dhaka_kolkata_benapole_border_train_1791500000000-1200.webp";
 
 function getBlogCoverImage(slug: string): string {
+  const scheduledCover = SCHEDULED_BLOG_COVER_IMAGES[slug];
+  if (scheduledCover) return scheduledCover;
+
   switch (slug) {
     case "umrah-hajj-guide-bangladesh-nusuk-bdt-cost":
       return umrahMakkahImg;
@@ -805,6 +810,8 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
   if (map[slug]) {
     return map[slug];
   }
+  const scheduledSnippet = SCHEDULED_BLOG_SNIPPETS[slug]?.[isBn ? "bn" : "en"];
+  if (scheduledSnippet) return scheduledSnippet;
 
   // Fallback: clean ~50-word excerpt
   const cleanWords = fallbackSummary.replace(/\*\*/g, "").replace(/\s+/g, " ").trim().split(" ");

@@ -4,13 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build --mode production && tsx scripts/prerender.ts",
-    "build:spa": "vite build",
+    "generate:scheduled": "tsx scripts/generate-scheduled-blogs.ts",
+    "dev": "npm run generate:scheduled && vite --port=3000 --host=0.0.0.0",
+    "dev:drafts": "tsx scripts/generate-scheduled-blogs.ts --include-unpublished && vite --port=3000 --host=0.0.0.0",
+    "build": "npm run generate:scheduled && vite build --mode production && tsx scripts/prerender.ts",
+    "build:spa": "npm run generate:scheduled && vite build",
     "verify:build": "tsx scripts/verify-build.ts",
+    "test:scheduling": "tsx scripts/test-scheduled-posts.ts",
+    "scheduled:check": "tsx scripts/check-scheduled-posts.ts",
     "preview": "vite preview",
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
-    "lint": "tsc --noEmit"
+    "lint": "npm run generate:scheduled && tsc --noEmit"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
@@ -28,6 +32,7 @@
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
-    "vite": "^6.2.3"
+    "vite": "^6.2.3",
+    "yaml": "^2.9.1"
   }
 }

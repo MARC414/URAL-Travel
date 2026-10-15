@@ -1,0 +1,60 @@
+name: Scheduled blog publishing
+
+on:
+  # 03:00 UTC is 09:00 Asia/Dhaka. GitHub may queue scheduled workflows a few
+  # minutes late; the article remains hidden until the Cloudflare rebuild lands.
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+    inputs:
+      include_overdue:
+        description: Include scheduled articles whose publish date has passed
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: scheduled-blog-publish
+  cancel-in-progress: false
+
+jobs:
+  publish-due-posts:
+    name: Check Dhaka publish dates and rebuild Pages if due
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout production branch
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check for posts scheduled for today in Dhaka
+        id: due
+        env:
+          INCLUDE_OVERDUE: ${{ inputs.include_overdue }}
+        run: npm run scheduled:check -- --github-output
+
+      - name: Trigger Cloudflare Pages production rebuild
+        if: steps.due.outputs.publish == 'true'
+        env:
+          CLOUDFLARE_PAGES_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}
+        run: |
+          if [[ -z "${CLOUDFLARE_PAGES_DEPLOY_HOOK:-}" ]]; then
+            echo "::error::Missing repository secret CLOUDFLARE_PAGES_DEPLOY_HOOK. Add the Cloudflare Pages deploy-hook URL in GitHub Actions secrets."
+            exit 1
+          fi
+          status="$(curl --silent --show-error --fail --output /dev/null --write-out '%{http_code}' --request POST "$CLOUDFLARE_PAGES_DEPLOY_HOOK")"
+          echo "Cloudflare Pages accepted the scheduled rebuild (HTTP ${status})."
+
+      - name: No post is due today
+        if: steps.due.outputs.publish != 'true'
+        run: echo "No scheduled article is due in Dhaka today; Cloudflare was not triggered."

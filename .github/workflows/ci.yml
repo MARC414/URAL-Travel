@@ -44,6 +44,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify scheduled-publish rules
+        run: npm run test:scheduling
+
       - name: Type-check
         run: npm run lint
 

@@ -1,11 +1,13 @@
+import { SCHEDULED_BLOG_SEO_COPY } from "../data/scheduledBlogSeo.generated";
+
 export interface SeoCopy {
   title: string;
   description: string;
 }
 
 /**
- * First-pass search copy for all 83 canonical URLs. These are intent hypotheses
- * based on the site's existing content, not claims about measured search volume or rank.
+ * First-pass search copy for the prioritized canonical routes. These are intent
+ * hypotheses based on the site's existing content, not measured search volume or rank.
  */
 export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/": {
@@ -452,16 +454,13 @@ function trimAtWord(text: string, maxLength: number): string {
 /**
  * Bengali search copy, hand-written for SERP intent (title + meta description).
  *
- * Covers all 35 localised routes: the hub/static pages plus every flight,
- * hotel, visa and trip-cost guide. Detail routes ALSO have copy generated from
- * the localized data in src/data/bengaliContent.ts, but this table wins —
- * that copy was derived mechanically, whereas these titles lead with the phrase
- * a Bengali reader actually searches ("ঢাকা টু কাঠমান্ডু", "ব্যাংককে কোথায় থাকবেন")
- * and their descriptions are complete sentences that carry no live prices to
- * go stale. The generated H1 is still used for the on-page heading.
- *
- * Blogs are absent here: their titles/descriptions are generated from
- * BENGALI_BLOG_OVERRIDES (there is no hand-written alternative).
+ * Covers localized hubs, static pages, and selected flight, hotel, visa and
+ * trip-cost routes. Other detail-route copy is generated from the localized
+ * data in src/data/bengaliContent.ts; scheduled-post overrides are generated
+ * separately from content/blog frontmatter and remain absent until publication.
+ * This table wins over mechanical fallback copy when a specific Bengali query
+ * phrase or a complete, non-volatile description needs to lead the snippet.
+ * The generated H1 remains the on-page heading.
  *
  * /destinations/* has no entry and no Bengali content, so no /bn route is
  * generated for it — see DEFERRED_BN_GROUPS in src/utils/localeRoutes.ts.
@@ -675,7 +674,12 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
  * fallback so the prerendered HTML and the client-rendered <title> agree.
  */
 export function getBengaliSeoCopy(path: string): SeoCopy | null {
-  return BENGALI_SEO_COPY[stripLocalePrefix(path)] ?? null;
+  const key = stripLocalePrefix(path);
+  const scheduled = SCHEDULED_BLOG_SEO_COPY[key]?.bn;
+  if (scheduled?.title && scheduled.description) {
+    return { title: scheduled.title, description: scheduled.description };
+  }
+  return BENGALI_SEO_COPY[key] ?? null;
 }
 
 /**
@@ -706,10 +710,9 @@ function compactDescription(description: string): string {
 /**
  * Keep generated fallback metadata concise while preserving its source wording.
  *
- * `locale` selects the copy table: English uses PRIORITY_SEO_COPY (all 83
- * canonical routes), Bengali uses BENGALI_SEO_COPY for hub/static routes and
- * falls back to the caller-provided (already Bengali) title/description for
- * detail routes. A Bengali call must never return the English priority copy —
+ * `locale` selects the copy table: English uses PRIORITY_SEO_COPY, while Bengali
+ * uses BENGALI_SEO_COPY and falls back to caller-provided Bengali metadata where
+ * no hand-written override exists. A Bengali call must never return English copy —
  * a bn-BD page advertising English metadata is exactly the mismatch the
  * /bn rollout exists to remove.
  */
@@ -720,18 +723,15 @@ export function getSeoCopy(
   locale: "en" | "bn" = "en"
 ): SeoCopy {
   const key = stripLocalePrefix(path);
+  const scheduledCopy = SCHEDULED_BLOG_SEO_COPY[key]?.[locale];
+  const generatedCopy = {
+    title: scheduledCopy?.title ?? compactTitle(title),
+    description: scheduledCopy?.description ?? compactDescription(description),
+  };
   if (locale === "bn") {
-    return (
-      BENGALI_SEO_COPY[key] ?? {
-        title: compactTitle(title),
-        description: compactDescription(description),
-      }
-    );
+    return BENGALI_SEO_COPY[key] ?? generatedCopy;
   }
   const priorityCopy = PRIORITY_SEO_COPY[key];
   if (priorityCopy) return priorityCopy;
-  return {
-    title: compactTitle(title),
-    description: compactDescription(description),
-  };
+  return generatedCopy;
 }

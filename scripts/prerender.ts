@@ -9,6 +9,8 @@ import {
   BLOG_DATA,
 } from "../src/constants";
 import { BLOG_SLUGS } from "../src/data/blogIndex";
+import { SCHEDULED_BLOG_DIRECTORY } from "../src/data/scheduledBlogIndex.generated";
+import { SCHEDULED_BLOG_IMAGE_MAP } from "../src/data/scheduledBlogSeo.generated";
 // The English blog bodies were split out of constants.ts so the client can load
 // them lazily on blog routes. This script runs in Node and deliberately imports
 // them EAGERLY: the prerendered article HTML is the SEO surface, so the text has
@@ -142,6 +144,7 @@ const BLOG_IMAGE_MAP: Record<string, string> = {
   "bangladesh-travelers-iata-airport-codes-directory-guide": "dhaka_airport_widebody_airlines_tarmac_1790520836931.jpg",
   "chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai": "dubai_skyline_burj_twilight_1790485747967.jpg",
   "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide": "dhaka_kolkata_benapole_border_train_1791500000000.jpg",
+  ...SCHEDULED_BLOG_IMAGE_MAP,
 };
 
 function escapeHtml(str: string): string {
@@ -151,6 +154,17 @@ function escapeHtml(str: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+function injectScheduledBlogDirectory(html: string): string {
+  const marker = "<!-- SCHEDULED_BLOG_DIRECTORY -->";
+  if (!html.includes(marker)) {
+    throw new Error("The source homepage is missing the scheduled blog directory marker.");
+  }
+  const links = SCHEDULED_BLOG_DIRECTORY.map(
+    (post) => `<li><a href="/blog/${escapeHtml(post.slug)}">${escapeHtml(post.title)}</a></li>`,
+  ).join("\n            ");
+  return html.replace(marker, `${links}${links ? "\n            " : ""}${marker}`);
 }
 
 function renderVisibleFaqHtml(
@@ -227,7 +241,7 @@ function renderArticleReferencesHtml(
     })
     .join("");
   return `<section aria-labelledby="article-reference-links-heading"><h2 id="article-reference-links-heading">${
-    isBengali ? "এই গাইডের অফিশিয়াল তথ্যসূত্র" : "Official sources for this guide"
+    isBengali ? "এই গাইডের তথ্যসূত্র" : "Sources for this guide"
   }</h2>${
     updatedAt
       ? `<p><time datetime="${escapeHtml(toIsoDate(updatedAt))}">${
@@ -236,8 +250,8 @@ function renderArticleReferencesHtml(
       : ""
   }<p>${
     isBengali
-      ? "তালিকায় দাবির সঙ্গে যুক্ত সরকারি/operator সূত্রের পাশাপাশি application, booking ও একটি সাধারণ regional portal-ও আছে; প্রতিটি link সব দাবির প্রমাণ নয়। আবেদন বা বুকিংয়ের আগে live নির্দেশনা মিলিয়ে নিন।"
-      : "The list combines government/operator sources tied to claims with application and booking portals plus one general regional portal; not every link supports every claim. Confirm live instructions before applying or booking."
+      ? "তালিকায় সরকারি, এয়ারলাইন্স, সংবাদমাধ্যম ও বুকিং-সংক্রান্ত সূত্র আছে; প্রতিটি link সব দাবির প্রমাণ নয়। ভ্রমণ বা বুকিংয়ের আগে সংশ্লিষ্ট কর্তৃপক্ষের live নির্দেশনা মিলিয়ে নিন।"
+      : "The list includes government, airline, news and booking sources; not every link supports every claim. Confirm live details with the relevant authority or carrier before travel or booking."
   }</p><ol style="list-style: none; padding-left: 0">${links}</ol></section>`;
 }
 
@@ -581,8 +595,17 @@ function copyStaticSeoImages() {
     targetDirs.push(DIST_DIR);
   }
 
+  const expectedBlogImages = new Set(BLOG_DATA.map((post) => `${post.slug}.jpg`));
   for (const baseDir of targetDirs) {
-    fs.mkdirSync(path.join(baseDir, "img", "blog"), { recursive: true });
+    const blogImageDir = path.join(baseDir, "img", "blog");
+    fs.mkdirSync(blogImageDir, { recursive: true });
+    // The folder is generated and ignored by Git. Remove stale files when a
+    // scheduled preview or retired post is no longer part of this build.
+    for (const entry of fs.readdirSync(blogImageDir, { withFileTypes: true })) {
+      if (entry.isFile() && entry.name.endsWith(".jpg") && !expectedBlogImages.has(entry.name)) {
+        fs.unlinkSync(path.join(blogImageDir, entry.name));
+      }
+    }
     if (fs.existsSync(ogSrc)) {
       fs.copyFileSync(ogSrc, path.join(baseDir, "og-image.jpg"));
     }
@@ -3092,22 +3115,18 @@ function applySharedSeoCopy(
   }
 }
 
-function generateSitemapXml(routes: PrerenderRoute[]) {
+function renderSitemapXml(routesToRender: PrerenderRoute[]): string {
   // Weak crawl-priority hints. The homepage and the five category hubs are the
   // freshest, most important entry points; individual guides and blog posts
   // change less often. These are hints only — Google largely ignores priority,
   // but a truthful changefreq/priority costs nothing and never hurts.
-  // Priority/changefreq are computed on the English base path so a Bengali twin
-  // inherits the same hint as its English counterpart.
   const isHub = (p: string) =>
     p === "/" ||
-    ["/flights", "/hotels", "/visa", "/destinations", "/costs", "/blog"].includes(
-      p
-    );
+    ["/flights", "/hotels", "/visa", "/destinations", "/costs", "/blog"].includes(p);
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${routes
+${routesToRender
   .map((r) => {
     const englishPath = toEnglishBasePath(r.routePath);
     const lastmod = r.lastmod || CONTENT_DATA_LASTMOD;
@@ -3133,21 +3152,28 @@ ${routes
   .join("\n")}
 </urlset>
 `;
-  fs.writeFileSync(path.join(PUBLIC_DIR, "sitemap.xml"), xml, "utf8");
+}
+
+function generateSitemapXml(routes: PrerenderRoute[]) {
+  // The committed public/ sitemap is the static-content snapshot checked by CI.
+  // Scheduled pages are generated into dist only, so a publish date does not
+  // require a second commit merely to keep that snapshot reproducible.
+  const scheduledSlugs = new Set(SCHEDULED_BLOG_DIRECTORY.map((post) => post.slug));
+  const scheduledPaths = new Set(
+    [...scheduledSlugs].flatMap((slug) => [`/blog/${slug}`, `/bn/blog/${slug}`]),
+  );
+  const publicRoutes = routes.filter((route) => !scheduledPaths.has(route.routePath));
+  fs.writeFileSync(path.join(PUBLIC_DIR, "sitemap.xml"), renderSitemapXml(publicRoutes), "utf8");
   if (fs.existsSync(DIST_DIR)) {
-    fs.writeFileSync(path.join(DIST_DIR, "sitemap.xml"), xml, "utf8");
+    fs.writeFileSync(path.join(DIST_DIR, "sitemap.xml"), renderSitemapXml(routes), "utf8");
   }
 }
 
-function generateRssXml() {
-  const rssItems = BLOG_DATA.map((post) => {
+function renderRssXml(posts: typeof BLOG_DATA): string {
+  const rssItems = posts.map((post) => {
     const postUrl = `${BASE_URL}/blog/${post.slug}`;
-    // toIsoDate already returns a full ISO-8601 timestamp (e.g.
-    // "2026-10-03T09:00:00+06:00"). Appending a time again produced
-    // "...T09:00:00+06:00T06:00:00+06:00", so `new Date(...)` was NaN and every
-    // <pubDate> shipped as the literal string "Invalid Date" — invisible to tsc,
-    // to a successful build, and to verify:build. toUTCString() yields the
-    // RFC 1123 form ("Fri, 03 Oct 2026 03:00:00 GMT") that feed readers expect.
+    // toIsoDate already returns a full ISO-8601 timestamp. toUTCString yields
+    // the RFC 1123 form expected by feed readers.
     const pubDate = new Date(toIsoDate(post.date)).toUTCString();
     return `    <item>
       <title>${escapeXml(post.title)}</title>
@@ -3159,7 +3185,7 @@ function generateRssXml() {
     </item>`;
   }).join("\n");
 
-  const rss = `<?xml version="1.0" encoding="UTF-8"?>
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>URAL — Flights, Hotels, Umrah &amp; Visa Guides for Bangladeshi Travelers</title>
@@ -3171,9 +3197,16 @@ ${rssItems}
   </channel>
 </rss>
 `;
-  fs.writeFileSync(path.join(PUBLIC_DIR, "rss.xml"), rss, "utf8");
+}
+
+function generateRssXml() {
+  // Keep committed public/rss.xml reproducible from static content. The deployed
+  // dist feed is complete and includes every due scheduled article.
+  const scheduledSlugs = new Set(SCHEDULED_BLOG_DIRECTORY.map((post) => post.slug));
+  const publicPosts = BLOG_DATA.filter((post) => !scheduledSlugs.has(post.slug));
+  fs.writeFileSync(path.join(PUBLIC_DIR, "rss.xml"), renderRssXml(publicPosts), "utf8");
   if (fs.existsSync(DIST_DIR)) {
-    fs.writeFileSync(path.join(DIST_DIR, "rss.xml"), rss, "utf8");
+    fs.writeFileSync(path.join(DIST_DIR, "rss.xml"), renderRssXml(BLOG_DATA), "utf8");
   }
 }
 
@@ -3420,6 +3453,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     }
 
     if (r.routePath === "/") {
+      pageHtml = injectScheduledBlogDirectory(pageHtml);
       fs.writeFileSync(path.join(DIST_DIR, "index.html"), pageHtml, "utf8");
     } else if (r.routePath === "/bn") {
       // The Bengali home is served as a directory index so that /bn/ (the
