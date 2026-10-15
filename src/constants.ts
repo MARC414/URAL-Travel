@@ -2174,17 +2174,38 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-12",
     slug: "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
     title: "Makkah & Madinah Hotel Zones, Haramain Bullet Train & Ziyarah Guide for Bangladeshi Pilgrims (2026)",
-    summary: "Picking the wrong hotel street in Makkah or Madinah can mean pushing elderly parents up steep hills in 40°C heat or waiting 45 minutes for crowded elevators after every prayer. This practical ground-logistics guide for Bangladeshi Umrah and Hajj pilgrims compares Makkah's flattest walking-distance zones (Jabal Omar, Clock Tower, and Northern Ajyad) against high-value 24/7 shuttle districts (Mahbas Al Jin and Kudai), shows how to book hotels near Masjid an-Nabawi Ladies' Gates 25–29 in Madinah Markazia North, and walks through Haramain High-Speed Railway baggage rules, Zamzam water allowance at Jeddah/Madinah airports, and private Ziyarah taxi rates in SAR and BDT.",
+    summary: "Hotel distances in Makkah and Madinah are quoted to the Haram wall, not to the gate you will use - and the rail operator's own rules decide whether your suitcases get on the train. This guide carries the 15 October 2026 Haramain base fares, the baggage limits, the station-shuttle reality and what to confirm with a hotel before you pay; no ziyarah car or Zamzam price is published, because none is official.",
     category: "Hajj & Umrah",
     date: "September 26, 2026",
+    updatedAt: "2026-10-15",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
+    references: [
+      {
+        name: "Haramain High Speed Railway - station services (shuttles, taxis, trolleys, parking)",
+        nameBn: "Haramain High Speed Railway - স্টেশন সার্ভিস (শাটল, ট্যাক্স, ট্রলি, পার্কিং)",
+        url: "https://sar.hhr.sa/services/stations-services",
+      },
+      {
+        name: "Haramain High Speed Railway - published tariff, discounts and ticket rules",
+        nameBn: "Haramain High Speed Railway - প্রকাশিত ট্যারিফ, ছাড় ও টিকিটের নিয়ম",
+        url: "https://sar.hhr.sa/travel/fares",
+      },
+      {
+        name: "Haramain High Speed Railway - baggage allowance and prohibited items",
+        nameBn: "Haramain High Speed Railway - ব্যাগেজের সীমা ও নিষিদ্ধ জিনিস",
+        url: "https://sar.hhr.sa/web/portal/travel/guidelines/baggage",
+      },
+    ],
     internalLinks: [
       { text: "Complete Umrah & Hajj Visa, Nusuk & BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Dual-Currency Card Endorsement for Booking Haramain Train", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport Outbound Immigration Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Dual-Currency Card Endorsement for Booking the Train", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Umrah Rules for Women: Mahram, Visa and Ladies' Gates", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
+      { text: "Wearing Ihram at Dhaka Airport or at the Miqat", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "Zamzam, Dates and Gold: Customs Rules on the Return Flight", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
     ],
+
     affiliateCTA: { provider: "airalo", headline: "Need Data for Haramain Train & Nusuk Permits?", body: "Get an instant Saudi Arabia eSIM before flying from Dhaka so your Nusuk QR codes and Careem rides work seamlessly across Makkah and Madinah." }
   },
   {

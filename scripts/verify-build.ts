@@ -3970,6 +3970,112 @@ check(
   `the shared-surface guard rejects a deliberately reintroduced 90-day / BDT band / year-round sentence (matched ${sharedUmrahControl} of ${SHARED_UMRAH_BANNED_PATTERNS.length} patterns)`
 );
 
+// --- Wave 4: the hotel-zones and rail guide must quote the operator, not an agent
+//
+// This page used to state train times to the minute, SAR fare ranges with BDT
+// conversions, hotel nightly bands, a "shuttle every 5 minutes" promise, fixed
+// gate numbers for the women's Rawdah entrance, a 60% savings figure and a
+// Zamzam price. Re-checked on 2026-10-15 against the operator's own tariff,
+// baggage and station-services pages (ledger W4-01..W4-05 in
+// docs/growth/CONTENT-QUEUE.md). The patterns below pin what may not come back.
+const HOTEL_SLUG = "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh";
+const HOTEL_BANNED_PATTERNS: { label: string; pattern: RegExp }[] = [
+  { label: "baggage dimensions the operator does not publish", pattern: /65 x 45 x 30|65x45x30/ },
+  { label: "unsourced rail fare ranges", pattern: /SAR 60[ \u2013-]*75|SAR 150[ \u2013-]*220/ },
+  {
+    label: "converted BDT totals for rail, hotels, ziyarah or Zamzam",
+    pattern: /BDT[ ]*(2,100|3,900|4,200|4,900|5,200|5,900|7,200|7,500|11,500|14,800|15,000|18,000|19,500|35,000)(?![0-9])|\u09e7\u09ef,\u09eb\u09e6\u09e6|\u09ea,\u09e8,\u09e6\u09e6|\u09ed,\u09eb\u09e6\u09e6|\u09e8,\u09e7\u09e6\u09e6|\u09eb,\u09e8,\u09e6\u09e6/,
+  },
+  { label: "train journey stated to the minute", pattern: /54 minutes|2 hours 20 minutes|\u09eb\u09ea \u09ae\u09bf\u09a8\u09bf\u099f|\u09e8 \u0998\u09a3\u09cd\u099f\u09be ২০ মিনিট/ },
+  { label: "marketing top speed in a logistics page", pattern: /300 KM[/]H|৩০০ কিমি[/]ঘণ্টা/ },
+  { label: "fixed gate numbers for the women's entrance", pattern: /Gates 25 to 29|Gate 25|25[ \u2013-]*29/ },
+  { label: "shuttle frequency promise", pattern: /every 5 minutes|\u09aa\u09cd\u09b0\u09a4\u09bf \u09ea \u09ae\u09bf\u09a8\u09bf\u099f \u09aa\u09b0\u09aa\u09b0/ },
+  { label: "percent savings claim", pattern: /save 60%|\u09ec\u09e6% \u09ac\u09be\u0981\u099a/ },
+  { label: "Zamzam price repeated outside its own guide", pattern: /SAR 9\.50|SAR \u09ef\.\u09eb\u09e6|\u09ef\.\u09eb\u09e6 \u09b8\u09cc\u09a6\u09bf/ },
+  { label: "unverified walking minutes", pattern: /3 to 6 minutes|3[ \u2013-]*5 minutes|৩ থেকে ৬ মিনিট/ },
+];
+const hotelSurfaces: { label: string; text: string }[] = [
+  { label: "article body (EN)", text: BLOG_BODY[HOTEL_SLUG] ?? "" },
+  { label: "article body (BN)", text: BENGALI_BLOG_OVERRIDES[HOTEL_SLUG]?.content ?? "" },
+  { label: "article page (EN)", text: read(path.join(DIST_DIR, "blog", `${HOTEL_SLUG}.html`)) ?? "" },
+  { label: "article page (BN)", text: read(path.join(DIST_DIR, "bn", "blog", `${HOTEL_SLUG}.html`)) ?? "" },
+  { label: "/blog hub (EN)", text: read(path.join(DIST_DIR, "blog.html")) ?? "" },
+  { label: "/bn/blog hub (BN)", text: read(path.join(DIST_DIR, "bn", "blog.html")) ?? "" },
+];
+// The blog hub lists every article summary, so only the claims unique to this
+// page are asserted there; the BDT bands, gate numbers and walking minutes below
+// are legitimate copy on other cards and must not be banned site-wide.
+const HOTEL_HUB_ONLY_PATTERNS: RegExp[] = [
+  /65 x 45 x 30/,
+  /SAR 60[ \u2013-]*75|SAR 150[ \u2013-]*220/,
+  /54 minutes|2 hours 20 minutes/,
+  /every 5 minutes/,
+  /save 60%/,
+  /flattest walking-distance|Gates 25 to 29 for Madinah walks|২৪ ঘণ্টা ফ্রি শাটল/,
+];
+const hotelIssues: string[] = [];
+hotelSurfaces.forEach((surface, index) => {
+  if (!surface.text) {
+    hotelIssues.push(`${surface.label}: missing output`);
+    return;
+  }
+  const patterns: RegExp[] =
+    index >= 4 ? HOTEL_HUB_ONLY_PATTERNS : HOTEL_BANNED_PATTERNS.map((entry) => entry.pattern);
+  for (const entry of patterns) {
+    const hit = surface.text.match(entry);
+    if (hit) hotelIssues.push(`${surface.label}: ${entry.source.slice(0, 24)} -> ${hit[0].slice(0, 28)}`);
+  }
+});
+check(
+  hotelIssues.length === 0,
+  `the hotel-zone and Haramain guide (EN/BN bodies, both article pages and both hub pages) carries no invented fare, timing, gate, shuttle or savings claim [${hotelIssues.slice(0, 3).join("; ")}]`
+);
+
+const hotelBodyPair: [string, string] = [
+  BLOG_BODY[HOTEL_SLUG] ?? "",
+  BENGALI_BLOG_OVERRIDES[HOTEL_SLUG]?.content ?? "",
+];
+const HOTEL_ANCHORS: { label: string; pattern: RegExp }[] = [
+  { label: "the operator's baggage envelope", pattern: /65 x 55 x 35 cm/ },
+  { label: "the operator portal named as the fare source", pattern: /sar\.hhr\.sa/ },
+  { label: "the dated Makkah-Madinah base fare", pattern: /SAR 162/ },
+  { label: "the dated airport-station base fare", pattern: /SAR 65/ },
+  { label: "the 25 kg ceiling", pattern: /25 kg|২৫ কেজি/ },
+  { label: "the no-BDT-conversion rule", pattern: /No BDT figure is published|কোনো BDT অঙ্ক নেই/ },
+  { label: "excess baggage is not carried", pattern: /Excess baggage is not carried|অতিরিক্ত লাগেজ মোটেই নেওয়া হয় না/ },
+  { label: "the distance claim treated as unverified until the property confirms it", pattern: /Treat any distance claim as unverified|যাচাই-না-করা ত/ },
+];
+const hotelMissing: string[] = [];
+(["EN", "BN"] as const).forEach((locale, li) => {
+  const body = hotelBodyPair[li];
+  for (const anchor of HOTEL_ANCHORS) {
+    if (!anchor.pattern.test(body)) hotelMissing.push(`${locale}: ${anchor.label}`);
+  }
+});
+check(
+  hotelMissing.length === 0,
+  `both locales of the hotel-zone guide teach the operator's real baggage limit, the dated base fares and the no-BDT rule [${hotelMissing.slice(0, 3).join("; ")}]`
+);
+
+const hotelRefLinks = [
+  read(path.join(DIST_DIR, "blog", `${HOTEL_SLUG}.html`)) ?? "",
+  read(path.join(DIST_DIR, "bn", "blog", `${HOTEL_SLUG}.html`)) ?? "",
+].map((html) => (html.match(/href="https:\/\/sar\.hhr\.sa/g) || []).length);
+check(
+  hotelRefLinks.length === 2 && hotelRefLinks.every((n) => n === 3),
+  `the hotel-zone guide renders 3 operator reference links in both locales (got ${hotelRefLinks.join(" / ")})`
+);
+
+const HOTEL_REINTRODUCED =
+  "Jeddah Airport to Makkah takes just 54 minutes (SAR 60\u201375 Economy / ~BDT 2,100), the 300 KM/H train " +
+  "allows one suitcase at 65 x 45 x 30 cm, free shuttles run every 5 minutes, and Markazia North hotels sit " +
+  "by Gates 25 to 29 \u2014 save 60% with BDT 4,200\u2013BDT 7,500 rooms and buy Zamzam for SAR 9.50.";
+const hotelControl = HOTEL_BANNED_PATTERNS.filter((entry) => entry.pattern.test(HOTEL_REINTRODUCED)).length;
+check(
+  hotelControl >= HOTEL_BANNED_PATTERNS.length - 2,
+  `the hotel-zone guard rejects a deliberately reintroduced fare, timing, gate, shuttle and savings sentence (matched ${hotelControl} of ${HOTEL_BANNED_PATTERNS.length} patterns)`
+);
+
 // --- Report ----------------------------------------------------------------
 
 for (const label of checks) console.log(`  \u2713 ${label}`);

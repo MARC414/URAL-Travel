@@ -613,7 +613,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "umrah-hajj-guide-bangladesh-nusuk-bdt-cost":
       "Bangladeshi travelers can use three Umrah visa categories: a Standard Umrah Visa through Nusuk or an external provider, an eligible 96-hour stopover, or an eligible Saudi tourist-visa route. The retained 10-day family-of-four-sharing estimate is BDT 1,16,000–1,32,000 per person, not a live quote. Fard Hajj registration and permits are separate.",
     "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh":
-      "For flat wheelchair-friendly access in Makkah, stay in Jabal Omar or Clock Tower (3–5 minutes to Haram), or save 60% in Mahbas Al Jin shuttle hotels (BDT 4,200–7,500/night). In Madinah, book Markazia North near Ladies' Gates 25–29 and ride the 300 km/h Haramain Train (sar.hhr.sa).",
+      "Hotel distances in Makkah are measured to the Haram wall, not to the gate you will use, and Haramain Rail carries one 25 kg bag per passenger at 65 x 55 x 35 cm. Read the operator's 15 October 2026 base fares and confirm shuttles, gates and live rates with the hotel before you pay.",
     "hajj-registration-bangladesh-government-vs-private-package-cost":
       "Obligatory Hajj from Bangladesh requires two-stage registration on hajj.gov.bd: Pre-Registration with your NID and ~BDT 30,000 deposit to get a tracking N-Serial, followed by Final Registration (BDT 5,20,000–6,00,000 for Government packages or BDT 5,80,000–9,50,000+ for licensed Private Agency Maktab A/B/D packages).",
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
@@ -708,7 +708,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "umrah-hajj-guide-bangladesh-nusuk-bdt-cost":
       "বাংলাদেশি পাসপোর্টধারীরা Umrah-এর জন্য তিনটি visa route দেখতে পারেন: Nusuk বা বাইরের সেবাদাতার Standard Umrah Visa, শর্তসাপেক্ষ ৯৬ ঘণ্টার stopover, অথবা যোগ্য Saudi tourist-visa route। চারজনের পরিবারের শেয়ারে ১০ দিনের আগের planning estimate জনপ্রতি BDT 1,16,000–1,32,000; এটি live quote নয়। ফরজ Hajj-এর নিবন্ধন ও Saudi permit আলাদা।",
     "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh":
-      "মক্কায় বয়স্ক মা-বাবার জন্য ঢালহীন সমতল রাস্তার Jabal Omar বা Clock Tower সেরা (৩–৫ মিনিটে হারাম), আর বাজেট বাঁচাতে Mahbas Al Jin শাটল হোটেল (রাত ৪,২০০–৭,৫০০ টাকা) বেছে নিন। মদিনায় মহিলাদের গেট ২৫–২৯ এর কাছে Markazia North-এ থাকুন ও হারামাইন ট্রেনে যাতায়াত করুন।",
+      "মক্কায় হোটেলের দূরত্ব মাপা হয় হারামের দেয়াল পর্যন্ত, আপনি যে গেট দিয়ে প্রবেশ করবেন সেখান্ত নয়; আর Haramain ট্রেনে জনপ্রতি 25 কিজির (65 x 55 x 35 cm) একটি লাগেজ নেওয়া যায়। 15 অক্টোবর 2026 তারিখের operator-এর base fare দেখুন, আর শাটল, গেট ও লাইভ রেট হোটেলেই নিশ্চিত করুন।",
     "hajj-registration-bangladesh-government-vs-private-package-cost":
       "বাংলাদেশ থেকে ফরজ হজের জন্য ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ ২ ধাপে নিবন্ধন করতে হয়: NID ও ৩০,০০০ টাকা জমা দিয়ে প্রাক-নিবন্ধন (N-Serial) এবং কোটা অনুযায়ী চূড়ান্ত নিবন্ধন (সরকারি প্যাকেজ ৫.২০–৬.০০ লক্ষ টাকা; বেসরকারি এজেন্সি ৫.৮০–৯.৫০+ লক্ষ টাকা)।",
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":

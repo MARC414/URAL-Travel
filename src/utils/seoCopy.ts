@@ -311,7 +311,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": {
     title: "Makkah & Madinah Hotel Zones & Haramain Train | URAL",
     description:
-      "Compare flat, wheelchair-accessible Makkah and Madinah hotel streets near the Haram and learn how to book Haramain High-Speed Bullet Train tickets.",
+      "Check what a Makkah or Madinah hotel distance claim really measures, then read the Haramain rail operator's own tariff, baggage limits and station shuttles.",
   },
   "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
     title: "Umrah with Elderly Parents: Wheelchair & Hotel Guide | URAL",
