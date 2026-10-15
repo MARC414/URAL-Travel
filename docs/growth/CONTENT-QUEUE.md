@@ -368,3 +368,5 @@ and the Specialist Guides directory; zero banned strings in HTML or bundles.
 - Airline promotions and fees are dynamic. Re-open ST-01/ST-02 against the Visit Saudi and Saudia pages before any future season refresh, and only publish a BDT figure if a dated exchange rate is recorded alongside it.
 
 **Release boundary:** code and generated repository artifacts are ready for owner review. Deployment, live-route checks (HTTP status, `<html lang>`, canonical/hreflang, visible FAQ, outbound source links) and Search Console measurement have not been performed.
+
+Reviewed on: PR #41 (`arena/206fa060-ural-travel` → `main`, commit `1f948ea`); CI “Type-check, build and verify prerender output” and the Cloudflare Pages preview check both pass. Merging and production deployment are the owner's action.
