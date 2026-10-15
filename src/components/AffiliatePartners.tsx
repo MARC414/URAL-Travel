@@ -721,6 +721,28 @@ export interface MultiPartnerBlogPlacement {
 }
 
 export const MULTI_PARTNER_BLOG_PLACEMENTS: Record<string, MultiPartnerBlogPlacement> = {
+  "dual-currency-card-endorsement-bangladesh": {
+    primaryPartner: "aviasales",
+    secondaryPartner: "airalo",
+    badgeEn: "✈️ PUT YOUR ENDORSED CARD TO WORK",
+    badgeBn: "✈️ এনডোর্স করা কার্ড দিয়ে শুরু করুন",
+    headlineEn: "Card Endorsed and Activated? Put It to Work on Your First Bookings",
+    headlineBn: "কার্ড এনডোর্স ও চালু হয়েছে? এবার প্রথম বুকিংগুলো করুন",
+    bodyBeforeAnchorEn:
+      "Once your foreign-currency and e-commerce part is open, compare live flight fares from Dhaka on ",
+    anchorTextEn: "Aviasales",
+    bodyAfterAnchorEn:
+      " and pay with your endorsed dual-currency card. A travel eSIM for your destination is another small first purchase that proves the card works before you travel — check coverage and price before buying.",
+    bodyBeforeAnchorBn:
+      "Foreign-currency ও e-commerce অংশ চালু হলে ঢাকা থেকে লাইভ ফ্লাইট ভাড়া তুলনা করুন ",
+    anchorTextBn: "Aviasales-এ",
+    bodyAfterAnchorBn:
+      " এবং এনডোর্স করা dual-currency card দিয়ে পেমেন্ট করুন। গন্তব্যের travel eSIM আরেকটি ছোট প্রথম কেনাকাটা, যা ভ্রমণের আগেই কার্ড কাজ করছে কিনা যাচাই করে — কেনার আগে coverage ও দাম দেখে নিন।",
+    primaryButtonEn: "Compare Flight Fares on Aviasales",
+    primaryButtonBn: "Aviasales-এ ফ্লাইট ভাড়া দেখুন",
+    secondaryButtonEn: "Check Airalo eSIM for Your Trip",
+    secondaryButtonBn: "ভ্রমণের জন্য Airalo eSIM দেখুন"
+  },
   "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": {
     primaryPartner: "getTransfer",
     secondaryPartner: "yesim",

@@ -858,7 +858,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       {
         question: "How do I get a dual-currency card endorsement on a Bangladeshi passport?",
         answer:
-          "Visit an authorized bank branch in Bangladesh with your original valid passport and NID to endorse up to USD $18,000 per calendar year under the Bangladesh Bank travel quota (FE/PD-1 Circular No. 33), then enable E-Commerce and 3D-Secure online transactions in your bank app before booking flights or hotels.",
+          "Visit an authorized bank branch in Bangladesh with your original valid passport and NID to endorse up to USD $18,000 per calendar year under the Bangladesh Bank travel quota (FEPD-1 Circular No. 33), then enable E-Commerce and 3D-Secure online transactions in your bank app before booking flights or hotels.",
       },
       {
         question: "What are the top budget-friendly family destinations from Dhaka?",

@@ -43,7 +43,7 @@
  * Last intentional refresh: 2026-10-14 — source-safe Thailand e-Visa fee,
  * payment, agency-cost, and dated proof-of-funds clarification (B2).
  */
-export const CONTENT_UPDATED = "2026-10-14";
+export const CONTENT_UPDATED = "2026-10-16";
 
 /**
  * Warn (do not fail) once CONTENT_UPDATED is older than this. Chosen so a content

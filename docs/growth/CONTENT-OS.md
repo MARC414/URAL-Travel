@@ -90,8 +90,8 @@ The prompts live in `AI-WRITING-PROMPTS.md`; this is the short gate map.
 |---|---|---|
 | 1. Select / queue | URL verdict, primary query, audience, intent hypothesis, owner constraints, scope | Existing-page/cluster check done; no invented metrics; decision recorded |
 | 2. Verify | Claims ledger with primary sources and dated checks | High-impact claims verified or explicitly escalated; no silent conflicts |
-| 3. Brief | Query network, macro/micro scope, SERP/format notes, differentiation, outline, link map | One clear job, no cannibalization, sources mapped to sections |
-| 4. English draft | Complete source-backed draft with answer-first lead | Every assertive factual detail maps to ledger; no unsupported number |
+| 3. Brief | Query network, macro/micro scope, SERP/format notes, differentiation, outline, link map — **v2: component column per section, layout-intent/centerpiece choice, QD verdicts** | One clear job, no cannibalization, sources mapped to sections |
+| 4. English draft | Complete source-backed draft with answer-first lead — **v2: factual definition→rule→attribute openings; segmented practical-modality sections with no unledgered facts** | Every assertive factual detail maps to ledger; no unsupported number |
 | 5. Bengali localization | Full-parity Bengali version, not a short summary | Same task, qualifications, source trail, FAQs, and internal-link intent |
 | 6. Publication package | Title, description, AEO answer, FAQ, references, internal links, update date | Metadata matches body; FAQs are unique/visible; references resolve |
 | 7. Editorial preflight | Cross-language/content consistency, page contract, link and source checks | No mismatched totals, slugs, facts, language parity, or broken links |

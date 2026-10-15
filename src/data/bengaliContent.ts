@@ -307,41 +307,47 @@ Umrah ও Rawdah permit কোথায় বুক করব?
   "dual-currency-card-endorsement-bangladesh": {
     title: "বাংলাদেশে Dual-Currency Card ও Passport Dollar Endorsement করার নিয়ম (2026 গাইড)",
     summary:
-      "বাংলাদেশ থেকে আন্তর্জাতিক Flight, Agoda বা Booking.com-এ Hotel, Haramain Bullet Train টিকিট কিংবা Klook-এ অ্যাক্টিভিটি বুক করার আগে আপনার ব্যাংক কার্ডে অবশ্যই পাসপোর্টের বিপরীতে বাংলাদেশ ব্যাংকের বার্ষিক USD $18,000 Travel Quota (FE Circular 33) এনডোর্স (Endorse) করে নিতে হবে। এই ধাপে ধাপে গাইডে জানুন কোন কোন ব্যাংকে ক্রেডিট কার্ড ছাড়াই দ্রুত Dual-Currency Debit বা Prepaid Card পাওয়া যায় (EBL Aqua, City Bank Amex/Visa, BRAC Multi-Currency, MTB ও Islami Bank), পাসপোর্টে সিল দেওয়ার জন্য কী কী ডকুমেন্ট লাগে, ব্যাংকের অ্যাপ থেকে USD E-Commerce ও 3D-Secure চালু করার নিয়ম এবং বিদেশে ৫% DCC চার্জ বাঁচানোর কৌশল।",
+      "Passport dollar endorsement হলো বাংলাদেশের বাসিন্দার বিদেশ ভ্রমণের বৈদেশিক মুদ্রা পাসপোর্টের বিপরীতে রেকর্ড করা — বাংলাদেশ ব্যাংকের FEPD-1 Circular No. 33 (৬ সেপ্টেম্বর ২০২৬) অনুযায়ী প্রতি ক্যালেন্ডার বছরে সর্বোচ্চ USD 18,000, যার মধ্যে ডলার নোট হিসেবে সর্বোচ্চ USD 5,000। এই যাচাইকৃত গাইডে Authorized Dealer ব্যাংকে endorsement, dual-currency card অনলাইনে কাজ করাতে আলাদা activation ধাপ, USD 300 single-transaction online-payment নিয়ম এবং RFCD account-এর পার্থক্য ব্যাখ্যা করা হয়েছে।",
     category: "Banking & Payments",
     date: "২৬ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "৭ মিনিট পড়া",
-    content: `বাংলাদেশ থেকে প্রথমবার বিদেশ ভ্রমণের প্রস্তুতি নেওয়ার সময় বেশিরভাগ ভ্রমণকারী যে সমস্যায় পড়েন তা হলো: সাধারণ লোকাল ডেবিট বা bKash/Nagad দিয়ে আন্তর্জাতিক এয়ারলাইন্স বা বিদেশি হোটেল সাইটে পেমেন্ট করা যায় না। বাংলাদেশ ব্যাংকের নিয়ম অনুযায়ী, আপনার একটি **Dual-Currency Card** থাকতে হবে এবং সেখানে পাসপোর্টে **Dollar Endorsement** করা থাকতে হবে।
+    content: `বাংলাদেশের বাসিন্দা হিসেবে বিদেশে খরচের অনুমতি পাসপোর্টের বিপরীতে রেকর্ড করাকেই Passport Dollar Endorsement বলে, যা নগদ অর্থ বা আন্তর্জাতিক কার্ডের মাধ্যমে ব্যবহার করা যায়। শুধু ব্যাংকের সিলই যথেষ্ট নয়: ভ্রমণের পেমেন্টে কার্ড কাজ করাতে হলে কার্ডের foreign-currency ও e-commerce অংশও চালু করতে হবে। এই গাইডটি ১৬ অক্টোবর ২০২৬ তারিখে বাংলাদেশ ব্যাংকের FEPD-1 Circular No. 33 (৬ সেপ্টেম্বর ২০২৬) এবং Guidelines for Foreign Exchange Transactions (GFET)-এর কার্ড-নিয়ম অনুযায়ী যাচাই করা হয়েছে।
 
-১. PASSPORT DOLLAR ENDORSEMENT কী? (বার্ষিক $18,000 USD কোটা)
-বাংলাদেশ ব্যাংকের ফরেন এক্সচেঞ্জ নীতিমালা (FE/PD-1 Circular No. 33) অনুযায়ী, প্রতিটি প্রাপ্তবয়স্ক বাংলাদেশি নাগরিক তার বৈধ পাসপোর্টে প্রতি ক্যালেন্ডার বছরে (১ জানুয়ারি – ৩১ ডিসেম্বর) ব্যক্তিগত বিদেশ ভ্রমণের জন্য সর্বোচ্চ **USD $18,000** পর্যন্ত খরচ করার অনুমতি পান।
-- ব্যাংকের ফরেন এক্সচেঞ্জ ডেস্কে গিয়ে আপনার পাসপোর্টের নির্দিষ্ট পাতায় সিল ও স্বাক্ষর নেওয়াকেই **Passport Endorsement** বলা হয়।
-- একবার পাসপোর্টে ডলার এনডোর্স হয়ে গেলে আপনি ব্যাংক একাউন্টে বাংলাদেশি টাকা (BDT) জমা রাখবেন, আর অনলাইনে বা বিদেশের POS মেশিনে কার্ড পাঞ্চ করলে ব্যাংক স্বয়ংক্রিয়ভাবে তা ডলারে কনভার্ট করে পেমেন্ট সম্পন্ন করবে।
+১. Passport Dollar Endorsement কী — এবং $18,000 কোটা
+Endorsement হলো Authorized Dealer (AD) ব্যাংক কর্তৃক বিদেশ ভ্রমণের জন্য আপনাকে ছাড় করা বৈদেশিক মুদ্রা রেকর্ড করা। বাংলাদেশ ব্যাংক AD ব্যাংকগুলোকে বাংলাদেশে বসবাসকারী প্রাপ্তবয়স্ক বাংলাদেশি নাগরিকের জন্য প্রতি ক্যালেন্ডার বছরে সর্বোচ্চ USD 18,000 বা সমপরিমাণ অর্থ ছাড় করার অনুমতি দেয় [1]। ১২ বছরের কম বয়সী অপ্রাপ্তবয়স্কদের entitlement প্রাপ্তবয়স্কদের ৫০ শতাংশ — সর্বোচ্চ USD 9,000। entitlement-এর সর্বোচ্চ USD 5,000 মার্কিন ডলার নোট হিসেবে ছাড় করা যায়; বাকি অংশ non-cash, যেমন আন্তর্জাতিক debit, prepaid বা credit card। কোটা একটি সর্বোচ্চ সীমা, স্বয়ংক্রিয় অনুমোদন নয়: ব্যাংক আপনার ভ্রমণের নথি অনুযায়ী বৈদেশিক মুদ্রা ছাড় করে, এবং অব্যবহৃত entitlement পরের ক্যালেন্ডার বছরের সীমা বদলায় না। নগদ ও কার্ড মিলিয়ে endorsement করা যায়, তবে ক্যালেন্ডার বছরে মোট ছাড় করা অর্থ সীমার মধ্যেই থাকতে হবে।
 
-২. ক্রেডিট কার্ড ছাড়াই সেরা DUAL-CURRENCY DEBIT ও PREPAID CARD
-আপনার যদি উচ্চ বেতনের স্যালারি স্লিপ বা ক্রেডিট কার্ড না থাকে, তবুও নিচের ব্যাংকগুলো থেকে সহজেই Dual-Currency Card নিতে পারবেন:
-- **EBL (Eastern Bank) Aqua Prepaid / Classic Dual-Currency Debit Card:** ভ্রমণকারীদের কাছে অত্যন্ত জনপ্রিয়। EBL Skybanking অ্যাপ থেকেই তাৎক্ষণিক USD ও E-Commerce পার্ট চালু করা যায়।
-- **The City Bank (American Express / Visa Dual-Currency Debit Card):** Citytouch অ্যাপের মাধ্যমে সহজেই ফরেন কারেন্সি কন্ট্রোল করা যায়।
-- **BRAC Bank Multi-Currency Debit Card ও Astha App:** সরাসরি Astha অ্যাপ থেকে USD লিমিট অন/অফ করা যায় এবং কোনো লুকানো চার্জ নেই।
-- **Mutual Trust Bank (MTB), Prime Bank এবং Islami Bank (IBBL) Khidmah / Dual-Currency Card:** ওমরাহ ও পারিবারিক ভ্রমণের জন্য শরীয়াহ-সম্মত কার্ডের ক্ষেত্রে দারুণ অপশন।
+২. ধাপে ধাপে: Authorized Dealer ব্যাংকে Endorsement
+১. **পাসপোর্ট ও কার্ড ব্যাংকে নিন:** আপনার আসল বৈধ পাসপোর্ট এবং যে dual-currency debit, prepaid বা credit card-টি endorsement করতে চান তা সঙ্গে নিন (অথবা আগে ব্যাংকে একটি কার্ড খুলুন — debit বা prepaid card রাখতে credit card বা বেতনের ইতিহাস লাগে না)।
+২. **Travel-quota endorsement চান:** আপনার ব্যাংকের Authorized Dealer শাখায় যান এবং পাসপোর্টের বিপরীতে travel-quota endorsement চান; পুরো বার্ষিক সীমা না চেয়ে এই ভ্রমণের জন্য প্রয়োজনীয় পরিমাণ উল্লেখ করুন।
+৩. **Form পূরণ করে endorsement রেকর্ড করান:** ব্যাংকের travel form (ব্যাংক চাইলে TM form) পূরণ করুন। কর্মকর্তা ব্যাংকের সিল ও স্বাক্ষরসহ আপনার পাসপোর্টে endorsement রেকর্ড করবেন।
+৪. **Money changer ব্যবহার করলে fee-র সীমা যাচাই করুন:** ডলার নোট licensed money changer-এর কাছ থেকে কিনলে, বাংলাদেশ ব্যাংকের ৭ জানুয়ারি ২০২৬-এর circular অনুযায়ী endorsement fee প্রতি পাসপোর্টে সর্বোচ্চ BDT 300, পরিমাণ যাই হোক; fee প্রদর্শিত থাকতে হবে এবং আপনাকে লিখিত রসিদ দিতে হবে [5]। এই সীমা money changer-এর জন্য — ব্যাংকের চার্জ আলাদা, তাই পরিশোধের আগে আপনার শাখার নিজস্ব schedule জেনে নিন।
+৫. **ভ্রমণের আগে কার্ড চালু করুন:** ভ্রমণের আগে পরের ধাপের activation সম্পন্ন করুন। activation ছাড়া endorsement-ই checkout-এ কার্ড ব্যর্থ হওয়ার সবচেয়ে সাধারণ কারণ।
 
-৩. ধাপে ধাপে ব্যাংকে PASSPORT ENDORSEMENT করার নিয়ম
-১. **ডকুমেন্ট সাথে নিন:** আপনার আসল পাসপোর্ট (কমপক্ষে ৬ মাসের মেয়াদ থাকতে হবে), আপনার Dual-Currency Card, এবং ১ কপি পাসপোর্ট সাইজ ছবি ও NID কপি।
-২. **Authorized Dealer (AD) শাখায় যান:** ব্যাংকের যে শাখায় ফরেন এক্সচেঞ্জ বা লকার সুবিধা আছে সেখানে গিয়ে বলুন: *"আমি আমার পাসপোর্টে Travel Quota-তে ডলার এনডোর্স করতে চাই।"*
-৩. **TM Form পূরণ ও পাসপোর্টে সিল:** অফিসার আপনার পাসপোর্টের শেষের দিকে "Endorsement" পাতায় (যেমন $2,000 বা $5,000 USD) সিল ও স্বাক্ষর দেবেন। এজন্য ব্যাংক ভেদে মাত্র **BDT 200 – BDT 575** সার্ভিস চার্জ কাটতে পারে।
-৪. **USD ও 3D-Secure E-Commerce পার্ট চালু করুন (সবচেয়ে জরুরি ধাপ!):** শুধু পাসপোর্টে সিল নিলেই অনলাইনে পেমেন্ট হবে না! ব্যাংকের অ্যাপে (Skybanking / Astha / Citytouch) ঢুকে অথবা কাস্টমাইজড কল সেন্টারে ফোন করে বলুন: *"আমার কার্ডের USD International Part এবং 3D-Secure E-Commerce Transaction আগামী ৭ দিনের জন্য ওপেন করে দিন।"*
+৩. Foreign-Currency ও E-Commerce অংশ চালু করুন
+Endorsement রেকর্ড করা প্রক্রিয়ার অর্ধেক মাত্র। অনলাইনে flight, hotel বা attraction ticket বুক করার আগে আপনার ব্যাংককে — অ্যাপে card control থাকলে সেখানে, অথবা ফোন/শাখায় — কার্ডের foreign-currency অংশ খুলতে এবং আপনার ভ্রমণের সময়ের জন্য e-commerce / 3D-Secure online transaction ও overseas POS/ATM ব্যবহার চালু করতে বলুন। এভাবে বলুন: "Please open the USD foreign-currency part of my endorsed card and enable e-commerce and overseas use until [আপনার ফেরার তারিখ]." Endorsed পরিমাণ ও ভ্রমণের তারিখ আপনার টিকিটের সঙ্গে মিলিয়ে রাখুন, কারণ ব্যাংক সেই নথি অনুযায়ী বৈদেশিক মুদ্রা ছাড় করে।
 
-৪. RFCD ACCOUNT বনাম সাধারণ TRAVEL QUOTA
-- **Travel Quota ($18,000/বছর):** আপনি একাউন্টে BDT জমা রাখবেন এবং আন্তর্জাতিক পেমেন্টের সময় ব্যাংক দিনের USD রেট + সামান্য মার্কআপ অনুযায়ী টাকা কাটবে। তবে বাংলাদেশ ব্যাংকের নিয়ম অনুযায়ী একক অনলাইন ট্রানজেকশনে কখনো কখনো **$300 USD ক্যাপ** থাকতে পারে।
-- **RFCD (Resident Foreign Currency Deposit) Account:** আপনি যদি বিদেশ সফর শেষে ফেরার সময় নগদ ডলার সাথে আনেন, তবে তা ব্যাংকে জমা দিয়ে RFCD একাউন্ট ও ডেবিট কার্ড খুলতে পারবেন। RFCD কার্ডে কোনো $300 ট্রানজেকশন ক্যাপ থাকে না—বড় অঙ্কের হোটেল বা ফ্লাইট পেমেন্ট অনায়াসে করা যায়।
+৪. বড় Flight বা Hotel পেমেন্ট Decline হলে (the $300 Rule)
+বাংলাদেশ ব্যাংকের কার্ড-নিয়মে general online-payment অনুচ্ছেদে একক online কেনাকাটার সীমা USD 300, তাই travel-quota card-এ বড় flight বা hotel checkout প্রায়ই decline হয় [2]। ভ্রমণ-সংক্রান্ত পেমেন্ট আলাদা বিধানের অধীনে পড়ে, এবং বাস্তবে ব্যাংক নথিভুক্ত বড় ভ্রমণ-পেমেন্ট প্রক্রিয়া করতে পারে — টিকিট বা হোটেলের প্রমাণ প্রস্তুত রেখে পেমেন্টের আগে ব্যাংকের সঙ্গে কথা বলুন; সিদ্ধান্ত ব্যাংকের, স্বয়ংক্রিয় অধিকার নয়। Decline হলে পেমেন্ট ভাগ করবেন না বা বারবার চেষ্টা করবেন না; কার্ড block হওয়া এড়াতে আগে ব্যাংকের সঙ্গে কথা বলুন। RFCD account-এর বিপরীতে ইস্যু করা কার্ড আলাদা: বাংলাদেশ ব্যাংক সেগুলোকে প্রকৃত পরিমাণে (at actual) online payment-এর জন্য স্পষ্টভাবে অনুমতি দিয়েছে [3]।
 
-৫. বিদেশে কার্ড ব্যবহারের সময় ৫% DCC চার্জ বাঁচানোর গোপন টিপস
-থাইল্যান্ড, মালয়েশিয়া, সিঙ্গাপুর, দুবাই বা সৌদি আরবে শপিং মল ও হোটেলে কার্ড পাঞ্চ করার সময় মেশিনের স্ক্রিনে জানতে চাইবে: *"Pay in BDT or Pay in Local Currency (THB / MYR / AED / SAR)?"*
-- **সবসময় Local Currency (THB / MYR / AED / SAR / USD) সিলেক্ট করবেন!** ভুল করেও সেখানে BDT সিলেক্ট করবেন না, কারণ বিদেশি মেশিনে BDT সিলেক্ট করলে Dynamic Currency Conversion (DCC) বাবদ আপনার কাছ থেকে ৪% থেকে ৬% অতিরিক্ত টাকা কেটে নেওয়া হবে।
+৫. Travel-Quota Card বনাম RFCD Account — এক নজরে
+Travel-quota card পেমেন্টের সময় রূপান্তরিত বাংলাদেশি টাকা খরচ করে, আপনার endorsed বার্ষিক entitlement ও ক্যালেন্ডার বছরের সীমার মধ্যে। RFCD (Resident Foreign Currency Deposit) account-এ থাকে বিদেশ ভ্রমণ থেকে আপনি শারীরিকভাবে ফিরিয়ে আনা বৈদেশিক মুদ্রা: customs declaration ছাড়াই USD 10,000 বা সমপরিমাণ পর্যন্ত জমা দিতে পারেন, এবং আগমনের সময় করা FMJ declaration দিয়ে বড় অঙ্কও জমা করা যায় — সেই ঘোষিত অঙ্ক ৩০ দিনের মধ্যে জমা করতে হবে [4]। RFCD account-এ বিদেশ থেকে remittance বা আয় গ্রহণ করা যায় না, এবং এর কার্ড প্রকৃত পরিমাণে online payment করতে পারে [3]। সম্পূর্ণ তুলনা ও $300 সমস্যার বিস্তারিত সমাধানের জন্য আমাদের RFCD বনাম travel quota গাইডটি পড়ুন।
 
-৬. যদি আপনার DUAL-CURRENCY CARD না থাকে তবে কীভাবে বুক করবেন?
-আপনার যদি পাসপোর্ট এনডোর্সমেন্ট বা কার্ড রেডি না থাকে, তবে একদমই চিন্তার কারণ নেই। আমাদের **URAL WhatsApp BDT Support Desk (+8801784385335)**-এ মেসেজ দিন—আপনি দেশীয় ব্যাংক ট্রান্সফার, bKash বা Nagad-এ বাংলাদেশি টাকায় (BDT) পেমেন্ট করেই আপনার কনফার্মড ফ্লাইট টিকিট, হোটেল ভাউচার ও এয়ারপোর্ট ট্রান্সফার বুক করতে পারবেন।`,
+৬. বিদেশে পেমেন্ট: Local Currency বেছে নিন
+বিদেশে card terminal-এ BDT বা আপনার "home currency"-তে চার্জের প্রস্তাব এলে তা প্রত্যাখ্যান করে local currency (SAR, THB, MYR, AED, SGD ইত্যাদি) বেছে নিন। Home currency বেছে নিলে merchant-এর ব্যাংক নিজস্ব হারে রূপান্তর করে, সাধারণত network rate-এর ওপরে markup সহ; local currency বেছে নিলে রূপান্তরটি আপনার নিজের ব্যাংক ও card network করে। Markup terminal অনুযায়ী বদলায়, তাই কোনো নির্দিষ্ট শতাংশ নয় — "সবসময় local currency বেছে নিন" এটিকেই নিয়ম হিসেবে ধরুন। কখন local cash রাখা এখনও যুক্তিযুক্ত, তা আমাদের cash বনাম card গাইডে ব্যাখ্যা করা হয়েছে।
+
+৭. ব্যবহারিক নোট
+$18,000 অঙ্কটি ৬ সেপ্টেম্বর ২০২৬ থেকে কার্যকর — ওই circular-এর আগে সীমা ছিল USD 12,000, তাই পুরনো নিবন্ধ, ভিডিও এমনকি ব্যাংকের লিফলেটেও পুরনো সংখ্যাটি থাকতে পারে। Endorsement-এর রসিদ ও পাসপোর্ট পৃষ্ঠার কপি ভ্রমণের নথির সঙ্গে রাখুন, এবং প্রতি ভ্রমণের কিছু আগে কোটা ও ব্যাংকের card setting আবার যাচাই করুন: entitlement প্রতি ব্যক্তি ও প্রতি ক্যালেন্ডার বছরের জন্য, এবং ভ্রমণের মাঝে card control বন্ধ হয়ে যেতে পারে।
+
+৮. সচরাচর জিজ্ঞাসা
+আমি কি একসঙ্গে পুরো $18,000 endorse করতে পারি?
+বাংলাদেশ ব্যাংক USD 18,000-কে AD ব্যাংক এক ক্যালেন্ডার বছরে ছাড় করতে পারে এমন সর্বোচ্চ সীমা হিসেবে নির্ধারণ করেছে, আপনাকে নিতেই হবে এমন পরিমাণ হিসেবে নয়। আপনার ভ্রমণের প্রয়োজন অনুযায়ী endorse করুন; ব্যাংক আপনার ভ্রমণের নথি অনুযায়ী ছাড় করে [1]।
+কোটা কি প্রতি বছর reset হয়?
+হ্যাঁ — entitlement প্রতি ক্যালেন্ডার বছরের জন্য। ১২ বছরের কম বয়সীরা প্রাপ্তবয়স্কদের ৫০ শতাংশ পায়, এবং প্রতি ব্যক্তির জন্য USD 5,000-এর বেশি মার্কিন ডলার নোট হিসেবে ছাড় করা যায় না [1]।
+পাসপোর্টে endorsement আছে কিন্তু অনলাইনে কার্ড ব্যর্থ হচ্ছে কেন?
+Endorsement ও activation আলাদা বিষয়। ব্যাংককে কার্ডের foreign-currency অংশ খুলতে এবং আপনার ভ্রমণের তারিখের জন্য e-commerce / 3D-Secure ও overseas ব্যবহার চালু করতে বলুন, এবং পেমেন্ট বড় হলে $300 single-transaction নিয়মটি যাচাই করুন [2]।
+আমি কি entitlement নগদ ও কার্ডে ভাগ করতে পারি?
+হ্যাঁ। ক্যালেন্ডার বছরের সর্বোচ্চ সীমা মোট ছাড়ের ওপর প্রযোজ্য; AD ব্যাংক এক অংশ মার্কিন ডলার নোট হিসেবে (সর্বোচ্চ USD 5,000) এবং বাকি অংশ endorsed আন্তর্জাতিক কার্ডের মতো non-cash আকারে ছাড় করতে পারে, মোট পরিমাণ আপনার entitlement-এর মধ্যে থাকলেই হলো [1].`,
     internalLinks: [
       { text: "ওমরাহর জন্য সেরা শরীয়াহ-সম্মত ইসলামিক ডুয়াল-কারেন্সি কার্ড", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account বনাম সাধারণ Travel Quota ($300 লিমিট সমাধান)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
@@ -3027,7 +3033,7 @@ export function getFeaturedGrowthTopics(lang: Language) {
       searchQuery: "“How to get dual-currency card endorsement”",
       title: "How to Get Dual-Currency Card Endorsement (2026 Passport Dollar Quota Guide)",
       excerpt:
-        "Step-by-step guide to the $18,000 annual passport endorsement quota (Bangladesh Bank FE Circular No. 33), RFCD vs. Travel Quota cards (EBL, City Bank, BRAC), 3D-Secure activation, and avoiding 5% DCC fees.",
+        "Step-by-step guide to the $18,000 annual passport endorsement quota (Bangladesh Bank FEPD-1 Circular No. 33), endorsement and card activation, the $300 online-payment rule, and RFCD vs. travel-quota cards.",
       slug: "dual-currency-card-endorsement-bangladesh",
     },
     {

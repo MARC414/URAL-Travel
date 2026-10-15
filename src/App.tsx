@@ -128,7 +128,7 @@ const ENGLISH_FEATURED_GROWTH_TOPICS = [
     searchQuery: "“How to get dual-currency card endorsement”",
     title: "How to Get Dual-Currency Card Endorsement (2026 Passport Dollar Quota Guide)",
     excerpt:
-      "Step-by-step guide to the $18,000 annual passport endorsement quota (Bangladesh Bank FE Circular No. 33), RFCD vs. Travel Quota cards (EBL, City Bank, BRAC), 3D-Secure activation, and avoiding 5% DCC fees.",
+      "Step-by-step guide to the $18,000 annual passport endorsement quota (Bangladesh Bank FEPD-1 Circular No. 33), endorsement and card activation, the $300 online-payment rule, and RFCD vs. travel-quota cards.",
     slug: "dual-currency-card-endorsement-bangladesh",
   },
   {
@@ -664,7 +664,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia":
       "Build a strong travel history on a blank Bangladeshi e-Passport in 3 steps: Step 1 — Get a zero-risk free Visa on Arrival in Nepal or the Maldives; Step 2 — Obtain online e-Visas for Malaysia and Thailand; Step 3 — Unlock Singapore, Dubai + Umrah, and Schengen/UK/US visas.",
     "dual-currency-card-endorsement-bangladesh":
-      "Under Bangladesh Bank rules (FE/PD-1 Circular No. 33), adult passport holders can endorse up to USD $18,000 per calendar year on a Dual-Currency Debit, Prepaid, or Credit Card (EBL, City Bank Amex, BRAC, MTB). After getting the physical passport stamp, unlock E-Commerce and 3D-Secure in your bank app before booking online.",
+      "Since 6 September 2026, Bangladesh Bank allows up to USD 18,000 per calendar year in travel foreign exchange for an adult resident (FEPD-1 Circular No. 33), with at most USD 5,000 as dollar notes. Endorsement at an Authorized Dealer bank records the amount in your passport; you must also activate the card's foreign-currency and e-commerce part before it will pay online.",
     "dhaka-airport-outbound-immigration-checklist-noc-go":
       "Clear Dhaka Airport (DAC) outbound emigration in under 2 minutes by carrying 5 printed documents in your cabin folder: a 6-month valid passport (with old passports), printed visa or arrival QR code, confirmed return air ticket, paid hotel voucher, passport dollar endorsement, and your Job NOC, GO, or Trade License.",
     "cheap-flight-booking-hacks-dhaka":
@@ -759,7 +759,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia":
       "নতুন সাদা পাসপোর্টে ভিসা রিজেকশন এড়াতে ৩ ধাপে ট্রাভেল হিস্ট্রি গড়ুন: ১ম ধাপে নেপাল বা মালদ্বীপে নিশ্চিত ফ্রি Visa on Arrival সফর করুন; ২য় ধাপে মালয়েশিয়া ও থাইল্যান্ডের অনলাইন ই-ভিসা নিন; এবং ৩য় ধাপে সিঙ্গাপুর, দুবাই, সৌদি ওমরাহ ও ইউরোপের ভিসার আবেদন করুন।",
     "dual-currency-card-endorsement-bangladesh":
-      "বাংলাদেশ ব্যাংকের নিয়মে প্রাপ্তবয়স্ক পাসপোর্টধারীরা বছরে সর্বোচ্চ ১৮,০০০ মার্কিন ডলার ডুয়াল-কারেন্সি ডেবিট, প্রিপেইড বা ক্রেডিট কার্ডে এনডোর্সমেন্ট করতে পারেন। ব্যাংকে পাসপোর্ট স্ট্যাম্প নেওয়ার পর অনলাইনে ফ্লাইট বা হোটেল বুকিংয়ের আগে ব্যাংক অ্যাপ বা হটলাইনে E-Commerce ও 3D-Secure চালু করে নিন।",
+      "৬ সেপ্টেম্বর ২০২৬ থেকে বাংলাদেশ ব্যাংক প্রাপ্তবয়স্ক বাসিন্দার ভ্রমণের জন্য প্রতি ক্যালেন্ডার বছরে সর্বোচ্চ USD 18,000 বৈদেশিক মুদ্রা অনুমোদন করেছে (FEPD-1 Circular No. 33), যার মধ্যে ডলার নোট সর্বোচ্চ USD 5,000। Authorized Dealer ব্যাংকে endorsement পাসপোর্টে পরিমাণটি রেকর্ড করে; অনলাইনে পেমেন্টের আগে কার্ডের foreign-currency ও e-commerce অংশও চালু করতে হবে।",
     "dhaka-airport-outbound-immigration-checklist-noc-go":
       "ঢাকা বিমানবন্দরে (DAC) মাত্র ২ মিনিটে ইমিগ্রেশন সম্পন্ন করতে হাতের ফাইলে ৫টি প্রিন্টেড কাগজ রাখুন: ৬ মাসের মেয়াদসহ পাসপোর্ট (পুরাতন পাসপোর্টসহ), ভিসা বা Arrival QR প্রিন্ট, রিটার্ন এয়ার টিকিট, হোটেল ভাউচার, ডলার এনডোর্সমেন্ট এবং পেশাগত NOC, GO অথবা ট্রেড লাইসেন্স।",
     "cheap-flight-booking-hacks-dhaka":
@@ -1636,7 +1636,7 @@ export default function App() {
         {
           question: "How do I get a dual-currency card endorsement on a Bangladeshi passport?",
           answer:
-            "Visit your authorised dealer bank with your original passport and NID. Under Bangladesh Bank FE/PD-1 Circular No. 33 (6 September 2026), banks may release up to USD 18,000 per calendar year to an adult Bangladeshi resident, with US dollar cash notes capped at USD 5,000 per person within that limit. Confirm the endorsement process with your bank, then enable e-commerce and 3D Secure in your bank app before booking abroad.",
+            "Visit your authorised dealer bank with your original passport and NID. Under Bangladesh Bank FEPD-1 Circular No. 33 (6 September 2026), banks may release up to USD 18,000 per calendar year to an adult Bangladeshi resident, with US dollar cash notes capped at USD 5,000 per person within that limit. Confirm the endorsement process with your bank, then enable e-commerce and 3D Secure in your bank app before booking abroad.",
         },
         {
           question: "What are the top budget-friendly family destinations from Dhaka?",

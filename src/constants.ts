@@ -1943,19 +1943,47 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-6",
     slug: "dual-currency-card-endorsement-bangladesh",
     title: "How to Get Dual-Currency Card Endorsement in Bangladesh (2026 Passport Dollar Endorsement Guide)",
-    summary: "Before you can book international flights, Agoda or Booking.com hotels, Haramain bullet train tickets, or Klook attraction passes from Bangladesh, your bank card must be endorsed against your passport under Bangladesh Bank's USD $18,000 annual personal travel quota (FE/PD-1 Circular No. 33). This step-by-step banking guide explains which Bangladeshi banks issue fast dual-currency debit and prepaid cards without credit history (EBL Aqua, City Bank Amex/Visa, BRAC Multi-Currency, MTB, and Islami Bank), what documents to bring for the physical passport stamp, how to unlock the USD e-commerce and 3D-Secure part via your bank app, RFCD vs. Travel Quota accounts, and how to avoid 5% DCC currency conversion traps abroad.",
+    summary: "Passport dollar endorsement is how a Bangladeshi resident gets foreign exchange for travel recorded against their passport — up to USD 18,000 per calendar year since Bangladesh Bank's FEPD-1 Circular No. 33 (6 September 2026), with at most USD 5,000 as dollar notes. This checked guide explains endorsement at an Authorized Dealer bank, the separate activation step that makes a dual-currency card work online, the USD 300 single-transaction online-payment rule, and how an RFCD account differs.",
     category: "Banking & Payments",
     date: "September 26, 2026",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
+    updatedAt: "2026-10-16",
+    references: [
+      {
+        name: "Bangladesh Bank — FEPD-1 Circular No. 33 (6 September 2026): travel entitlement raised to USD 18,000",
+        nameBn: "বাংলাদেশ ব্যাংক — FEPD-1 Circular No. 33 (৬ সেপ্টেম্বর ২০২৬): ভ্রমণ entitlement USD 18,000-এ বৃদ্ধি",
+        url: "https://www.bb.org.bd/mediaroom/circulars/fepd/sep062026fepd-133e.pdf",
+      },
+      {
+        name: "Bangladesh Bank — Guidelines for Foreign Exchange Transactions, Chapter 19: Payment through International Cards",
+        nameBn: "বাংলাদেশ ব্যাংক — Guidelines for Foreign Exchange Transactions, Chapter 19: আন্তর্জাতিক কার্ডে পেমেন্ট",
+        url: "https://www.bb.org.bd/aboutus/regulationguideline/foreignexchange/feguidevol1/19.pdf",
+      },
+      {
+        name: "Bangladesh Bank — FE Circular Letter No. 05 (9 May 2024): RFCD international cards, online payment at actual",
+        nameBn: "বাংলাদেশ ব্যাংক — FE Circular Letter No. 05 (৯ মে ২০২৪): RFCD আন্তর্জাতিক কার্ড, প্রকৃত পরিমাণে online payment",
+        url: "https://www.bb.org.bd/mediaroom/circulars/fepd/may092024fepdl05e.pdf",
+      },
+      {
+        name: "Eastern Bank (EBL) — RFCD Account: deposit, FMJ and 30-day rules",
+        nameBn: "ইস্টার্ন ব্যাংক (EBL) — RFCD Account: জমা, FMJ ও ৩০ দিনের নিয়ম",
+        url: "https://www.ebl.com.bd/retail-deposit/EBL-RFCD-Account",
+      },
+      {
+        name: "BSS — Bangladesh Bank fixes passport endorsement fee at BDT 300 for money changers (7 January 2026)",
+        nameBn: "BSS — মানি চেঞ্জারদের passport endorsement fee BDT 300 নির্ধারণ করেছে বাংলাদেশ ব্যাংক (৭ জানুয়ারি ২০২৬)",
+        url: "https://www.bssnews.net/business/348822",
+      },
+    ],
     internalLinks: [
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-      { text: "RFCD Account vs. Regular Travel Quota ($300 Cap Fix)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
-      { text: "Cash SAR / USD vs. Card Abroad (Avoid 5% DCC Trap)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
+      { text: "RFCD Account vs. Travel Quota (the $300 online-payment rule)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
+      { text: "Cash SAR / USD vs. Card Abroad (choose local currency, avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
       { text: "Book Flights & Makkah Hotels in BDT via bKash/Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" }
     ],
-    affiliateCTA: { provider: "aviasales", headline: "Card Endorsed & Ready?", body: "Compare live international flight fares from Dhaka and book directly with zero agency markup." }
+    affiliateCTA: { provider: "aviasales", headline: "Card Endorsed & Ready?", body: "Compare live international flight fares from Dhaka and book with your endorsed card." }
   },
   {
     id: "blog-7",
