@@ -37,6 +37,10 @@ const BLOG_FAQ_CONFIGS: Record<
     en: /^\s*5\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৫\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
+  "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide": {
+    en: /^\s*7\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৭\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
 };
 
 function isNumberedHeading(line: string): boolean {

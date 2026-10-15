@@ -46,9 +46,14 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
   const [season, setSeason] = useState<"regular" | "peak">("regular");
   const [bookingMode, setBookingMode] = useState<"diy" | "bdtDesk">("diy");
 
-  // Illustrative 2026 BDT planning defaults (checked Oct 2026)
+  // Illustrative planning estimator assumptions (unre-priced model inputs; not live quotes).
+  // The preserved 10-day, 4-person sharing planning baseline in CONTENT-QUEUE.md (U-12, checked 14 Oct 2026)
+  // is BDT 1,16,000–1,32,000 per person. Individual component sliders below are illustrative scenario inputs.
   const baseFlightPerPerson = season === "regular" ? 66000 : 84000;
   const visaWithInsurancePerPerson = 17500;
+  // Haramain High-Speed Railway official base Economy fares checked 14 Oct 2026 (sar.hhr.sa/travel/fares):
+  // SAR 65 (KAIA JED Airport -> Makkah) + SAR 162 (Makkah -> Madinah) = SAR 227 before 15% VAT & dynamic seat pricing,
+  // plus an illustrative local station/hotel transfer buffer.
   const haramainTrainAndTransfersPerPerson = 9500;
 
   const nightlyRoomRateBdt =
@@ -182,26 +187,32 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-5 border-t border-white/15 text-left">
                 <div>
                   <div className="text-lg sm:text-xl font-bold text-[#F6B73C] font-mono tabular-nums">
-                    ৳ 1,16,000
+                    ৳ 1.16L–1.32L
                   </div>
                   <div className="text-[11px] text-slate-300">
-                    {isBn ? "১০ দিনের DIY আনুমানিক খরচ (অক্টো ২০২৬)" : "10-Day DIY Estimate (Oct 2026)"}
+                    {isBn
+                      ? "১০ দিনের রেফারেন্স (৪ জন শেয়ারিং, ১৪ অক্টো ২০২৬)"
+                      : "10-Day Reference (4-Sharing, Unre-Priced · 14 Oct 2026)"}
                   </div>
                 </div>
                 <div>
                   <div className="text-lg sm:text-xl font-bold text-[#F6B73C] font-mono tabular-nums">
-                    2–5 Days
+                    {isBn ? "৩টি রুট" : "3 Visa Paths"}
                   </div>
                   <div className="text-[11px] text-slate-300">
-                    {isBn ? "ওমরাহ ই-ভিসা প্রসেসিং (সাধারণত)" : "Umrah e-Visa Processing (Typical)"}
+                    {isBn
+                      ? "স্ট্যান্ডার্ড ওমরাহ · ৯৬ঘণ্টা স্টপওভার · যোগ্য ভিসা"
+                      : "Standard Umrah · 96h Stopover · Eligible Tourist"}
                   </div>
                 </div>
                 <div>
                   <div className="text-lg sm:text-xl font-bold text-[#F6B73C] font-mono tabular-nums">
-                    3 Zones
+                    1448H
                   </div>
                   <div className="text-[11px] text-slate-300">
-                    {isBn ? "হারাম-কাছাকাছি ওয়াকিং জোন" : "Walkable Haram Areas"}
+                    {isBn
+                      ? "ওমরাহ মৌসুম (৩১ মে ২০২৬ – ৭ এপ্রিল ২০২৭)"
+                      : "Season Window (31 May 2026 – 7 Apr 2027)"}
                   </div>
                 </div>
                 <div>
@@ -209,7 +220,9 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                     ≈2¼ h
                   </div>
                   <div className="text-[11px] text-slate-300">
-                    {isBn ? "মক্কা–মদিনা রেল (আনুমানিক)" : "Makkah–Madinah Rail (Approx.)"}
+                    {isBn
+                      ? "মক্কা–মদিনা HHR ট্রেন (SAR 162 বেস + VAT)"
+                      : "Makkah–Madinah HHR (SAR 162 Base · 14 Oct 2026)"}
                   </div>
                 </div>
               </div>
@@ -250,9 +263,9 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               {bookingMode === "diy" ? (
                 <div className="space-y-4 text-xs">
                   <h2 className="ural-section-title font-serif text-base sm:text-lg font-bold text-white">
-                      {isBn
-                      ? "Dual-Currency Card দিয়ে নিজে ওমরাহ প্ল্যান করার সুবিধা"
-                      : "The Advantage of Planning Your Own Umrah"}
+                    {isBn
+                      ? "Dual-Currency Card দিয়ে নিজে ওমরাহ প্ল্যান করার সুবিধা"
+                      : "Why Plan Your Own Umrah Itinerary (DIY Route)"}
                   </h2>
                   <ul className="space-y-2.5 text-slate-200 leading-relaxed">
                     <li className="flex items-start gap-2.5">
@@ -260,23 +273,23 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                       <span>
                         {isBn
                           ? "ওপেন-জ (Open-Jaw) ফ্লাইট: ঢাকা থেকে জেদ্দা (JED) নেমে ওমরাহ শেষে মদিনা (MED) থেকে সরাসরি ঢাকায় ফিরুন।"
-                          : "Open-Jaw Flights: Land in Jeddah (JED) for Makkah first, then fly home directly from Madinah (MED) to skip the long highway drive back to Jeddah."}
+                          : "Open-Jaw Flights: Land in Jeddah (JED) for Makkah first, then fly home directly from Madinah (MED) to avoid backtracking to Jeddah."}
                       </span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check size={14} className="text-[#F6B73C] shrink-0 mt-0.5" />
                       <span>
                         {isBn
-                          ? "সঠিক হোটেল জোন: Ajyad বা মদিনার Markazia এলাকায় হোটেল খুঁজুন—বুকিংয়ের আগে হোটেলের সাথে হাঁটার রুট ও ঢাল যাচাই করে নিন।"
-                          : "Choose the Right Hotel Zone: Search Ajyad or Madinah Markazia North, then verify the walking route and slope with the hotel before booking."}
+                          ? "হোটেল পিন যাচাই: ম্যাপ দেখে কাবা শরীফ (Ajyad / Clock Tower) ও মসজিদে নববীর (Markazia) আশপাশের হোটেলের সঠিক দূরত্ব ও ঢাল যাচাই করে বুক করুন।"
+                          : "Hotel Pin Control: Verify exact property addresses, street inclines, and shuttle schedules around Ajyad, Clock Tower, or Madinah Markazia before paying."}
                       </span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check size={14} className="text-[#F6B73C] shrink-0 mt-0.5" />
                       <span>
                         {isBn
-                          ? "Saudia বা Flynas-এর যোগ্য ট্রানজিট ফ্লাইটে বুকিংয়ের সময় ৯৬ ঘণ্টার Stopover Visa নেওয়া যায়—যোগ্যতা, ফি ও শর্ত প্রযোজ্য; এয়ারলাইন্সের বুকিং পেজে যাচাই করুন।"
-                          : "96-Hour Stopover Visa: Eligible Saudia or Flynas itineraries can add a 96-hour stopover at flight checkout — eligibility, fees and conditions apply; verify on the airline's booking page."}
+                          ? "Saudia বা Flynas থ্রু-টিকিটে যোগ্য রুটে ৯৬ ঘণ্টার Stopover Visa আবেদনের সুযোগ (চেকআউটের শর্ত সাপেক্ষে)।"
+                          : "96-Hour Stopover Option: Eligible Saudia or flynas through-itineraries allow applying for a 96-hour stopover visa (subject to airline checkout terms)."}
                       </span>
                     </li>
                   </ul>
@@ -300,8 +313,8 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                   </h2>
                   <p className="text-slate-300 leading-relaxed">
                     {isBn
-                      ? "আপনি নিজের পছন্দমতো ফ্লাইট ও মক্কা-মদিনার হোটেল বাছাই করুন—আমাদের ঢাকা টিম আপনার ৯০ দিনের সৌদি ওমরাহ ই-ভিসা, রিটার্ন এয়ার টিকিট, হোটেল ভাউচার এবং জেদ্দা এয়ারপোর্ট পিকআপ বাংলাদেশি টাকায় (ব্যাংক ট্রান্সফার / bKash / Nagad) সম্পন্ন করে দেবে।"
-                      : "Choose your exact flight dates and walkable Makkah/Madinah hotels—our Dhaka desk processes your 90-day Saudi Umrah e-Visa, air tickets, hotel vouchers, and Jeddah airport transfer in BDT via local bank transfer or bKash."}
+                      ? "আপনি নিজের পছন্দমতো ফ্লাইট ও মক্কা-মদিনার হোটেল বাছাই করুন—আমাদের ঢাকা টিম অনুমোদিত প্রক্রিয়ায় সৌদি ওমরাহ ভিসা (হোটেল ও ট্রান্সপোর্টসহ), রিটার্ন এয়ার টিকিট ও এয়ারপোর্ট পিকআপ বাংলাদেশি টাকায় (ব্যাংক ট্রান্সফার / bKash / Nagad) সম্পন্ন করতে সহায়তা করবে।"
+                      : "Choose your preferred flight dates and Makkah/Madinah hotels—our Dhaka desk assists with authorized Saudi Umrah visa packages (bundled with accommodation and transport per Ministry rules), air tickets, and transfers in BDT."}
                   </p>
                   <div className="bg-[#071120] border border-slate-800 rounded-xl p-3.5 space-y-1">
                     <div className="text-[11px] text-slate-400 font-mono">
@@ -383,19 +396,21 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             <div className="flex items-center gap-2 text-xs text-slate-500">
               <Calculator size={14} className="text-brand-navy" />
               <span className="font-semibold text-brand-navy">
-                  {isBn
-                  ? "ইলাস্ট্রেটিভ ওমরাহ BDT বাজেট ক্যালকুলেটর"
-                  : "Illustrative Umrah BDT Budget Calculator"}
+                {isBn
+                  ? "উদাহরণভিত্তিক ওমরাহ বাজেট এস্টিমেটর (লাইভ কোটেশন নয়)"
+                  : "Illustrative Umrah Planning Estimator (Model Assumptions · Not a Live Quote)"}
               </span>
             </div>
             <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-bold text-slate-900">
-                {isBn
-                ? "বাংলাদেশ থেকে ওমরাহ খরচ কত? একটি ইলাস্ট্রেটিভ BDT বাজেট তৈরি করুন"
-                : "Umrah Cost from Bangladesh: Build an Illustrative BDT Budget"}
+              {isBn
+                ? "বাংলাদেশ থেকে ওমরাহ খরচ কত? আপনার পরিবারের সম্ভাব্য BDT বাজেট সাজান"
+                : "Umrah Cost from Bangladesh: Model Your Illustrative BDT Planning Scenario"}
             </h2>
           </div>
           <span className="text-xs font-mono text-slate-500">
-            1 SAR ≈ 32.2 BDT · 1 USD ≈ 120 BDT (indicative, Oct 2026)
+            {isBn
+              ? "হিসাবের ভিত্তি: 1 SAR ≈ 32.2 BDT · 1 USD ≈ 120 BDT (বাংলাদেশ ব্যাংক রেট যাচাই করুন)"
+              : "Model FX assumption: 1 SAR ≈ 32.2 BDT · 1 USD ≈ 120 BDT (verify live BB FX)"}
           </span>
         </div>
 
@@ -410,8 +425,8 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
           <div className="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-5">
             <h3 className="ural-card-title font-serif text-base font-bold text-slate-900 border-b border-slate-200 pb-2.5">
               {isBn
-                ? "যাত্রী সংখ্যা, দিন ও মক্কা-মদিনা হোটেল মান নির্বাচন করুন"
-                : "Configure Pilgrims, Stay Duration & Haram Hotel Tier"}
+                ? "যাত্রী সংখ্যা, দিন ও হোটেল ক্যাটাগরির উদাহরণ নির্বাচন করুন"
+                : "Select Illustrative Pilgrims, Duration & Accommodation Tier"}
             </h3>
 
             <div>
@@ -468,37 +483,37 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-2">
                 {isBn
-                  ? "৩. মক্কা ও মদিনায় হোটেলের ক্যাটাগরি:"
-                  : "3. Makkah & Madinah Hotel Proximity:"}
+                  ? "৩. মক্কা ও মদিনায় হোটেল জোনের উদাহরণ:"
+                  : "3. Illustrative Hotel Zone Tier:"}
               </label>
               <div className="space-y-2">
                 {[
                   {
                     id: "shuttle",
                     title: isBn
-                      ? "বাজেট শাটল হোটেল (Kudai / Aziziyah)"
-                      : "Budget 3-Star Shuttle-Zone Hotels (Kudai / Aziziyah)",
+                      ? "আউটার শাটল জোন (Kudai / Aziziyah)"
+                      : "Outer Shuttle Zone Tier (e.g. Kudai / Aziziyah)",
                     sub: isBn
-                      ? "প্রায় ৳৪,৮০০/রাত (পরিকল্পনার অনুমান) · শাটল হোটেলের সাথে যাচাই করুন"
-                      : "~BDT 4,800/night (planning default) · confirm shuttle with hotel",
+                      ? "মডেল ইনপুট: ~৳৪,৮০০–৭,২০০/রাত · হোটেলের শাটল শিডিউল যাচাই করুন"
+                      : "Model input: ~BDT 4,800–7,200/night · Verify hotel shuttle schedule",
                   },
                   {
                     id: "walkable",
                     title: isBn
-                      ? "ওয়াকিং জোনের ৪-স্টার (Ajyad / Markazia)"
-                      : "Walkable-Zone 4-Star (Ajyad / Markazia)",
+                      ? "মধ্যাঞ্চল জোন (Ajyad / Markazia এরিয়া)"
+                      : "Mid-Range Central Zone Tier (e.g. Ajyad / Markazia)",
                     sub: isBn
-                      ? "প্রায় ৳১০,৫০০/রাত (পরিকল্পনার অনুমান) · পরিবারের জন্য জনপ্রিয়"
-                      : "~BDT 10,500/night (planning default) · popular with families",
+                      ? "মডেল ইনপুট: ~৳১০,৫০০–১৫,৫০০/রাত · ম্যাপে ঢাল ও দূরত্ব যাচাই করুন"
+                      : "Model input: ~BDT 10,500–15,500/night · Check exact map pin & slope",
                   },
                   {
                     id: "haramView",
                     title: isBn
-                      ? "৫-স্টার হারাম ভিউ হোটেল (ক্লক টাওয়ার এলাকা)"
-                      : "5-Star Haram-View Hotels (Clock Tower Area)",
+                      ? "হারাম পেভমেন্ট / ক্লক টাওয়ার জোন (Abraj Al Bait / Jabal Omar)"
+                      : "Courtyard Perimeter Tower Tier (e.g. Abraj Al Bait / Jabal Omar)",
                     sub: isBn
-                      ? "প্রায় ৳২৬,০০০/রাত (পরিকল্পনার অনুমান) · নির্দিষ্ট হোটেল যাচাই করুন"
-                      : "~BDT 26,000/night (planning default) · verify the exact property",
+                      ? "মডেল ইনপুট: ~৳২৬,০০০–৩৯,০০০/রাত · তারিখভেদে রেট পরিবর্তিত হয়"
+                      : "Model input: ~BDT 26,000–39,000/night · Live rates vary by date",
                   },
                 ].map((tier) => (
                   <button
@@ -549,49 +564,52 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             </div>
           </div>
 
-          {/* Breakdown & Savings Output (7 Cols) */}
+          {/* Breakdown Output (7 Cols) */}
           <div className="lg:col-span-7 space-y-5">
             <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
-                {isBn
-                ? "খাতওয়ারি ওমরাহ খরচের হিসাব (অনুমানিক ডিফল্ট — অক্টোবর ২০২৬)"
-                : "Itemized Umrah Cost Breakdown (Illustrative Defaults — Oct 2026)"}
+              {isBn
+                ? "খাতওয়ারি উদাহরণভিত্তিক বাজেট কাঠামো (BDT ও USD — লাইভ কোটেশন নয়)"
+                : "Illustrative Scenario Breakdown in BDT (Unre-Priced Model Inputs)"}
             </h3>
 
             <div className="bg-brand-navy text-white rounded-2xl p-6 grid grid-cols-1 sm:grid-cols-3 gap-4 border border-slate-800">
               <div>
                 <span className="text-[11px] text-slate-400 block">
-                  {isBn ? "জনপ্রতি আনুমানিক খরচ" : "Estimated Cost Per Pilgrim"}
+                  {isBn ? "মডেল অনুযায়ী জনপ্রতি হিসাব" : "Scenario Per Pilgrim"}
                 </span>
                 <span className="text-2xl sm:text-3xl font-serif font-bold text-[#F6B73C] tabular-nums">
                   ৳ {diyPerPersonBdt.toLocaleString()}
                 </span>
                 <span className="text-[11px] text-slate-400 block mt-0.5 font-mono">
-                  (~${Math.round(diyPerPersonBdt / 120).toLocaleString()} USD)
+                  (~${Math.round(diyPerPersonBdt / 120).toLocaleString()} USD @ 120 BDT)
                 </span>
               </div>
 
               <div>
                 <span className="text-[11px] text-slate-400 block">
                   {isBn
-                    ? `মোট খরচ (${pilgrims} জন, ${days} দিন)`
-                    : `Total for ${pilgrims} Pilgrim${pilgrims > 1 ? "s" : ""}`}
+                    ? `মোট মডেল বাজেট (${pilgrims} জন, ${days} রাত)`
+                    : `Scenario Total (${pilgrims} Pilgrim${pilgrims > 1 ? "s" : ""}, ${days}N)`}
                 </span>
                 <span className="text-2xl sm:text-3xl font-serif font-bold text-white tabular-nums">
                   ৳ {diyGrandTotalBdt.toLocaleString()}
                 </span>
                 <span className="text-[11px] text-slate-400 block mt-0.5">
-                  {isBn ? "ফ্লাইট + ভিসা + হোটেল + যাতায়াত" : "Flights + visa + hotels + transport"}
+                  {isBn ? "খাবার, জিয়ারাহ ও ব্যক্তিগত খরচ বাদে" : "Excludes meals, Ziyarah & personal spend"}
                 </span>
               </div>
 
-              <div className="bg-amber-400/15 border border-amber-400/30 rounded-xl p-3.5">
-                <span className="text-[11px] text-amber-300 font-semibold block">
-                  {isBn ? "এই মোটে যা অন্তর্ভুক্ত নয়" : "Not included in this total"}
+              <div className="bg-white/8 border border-white/15 rounded-xl p-3.5">
+                <span className="text-[11px] text-[#F6B73C] font-semibold block">
+                  {isBn ? "সংরক্ষিত ১০ দিনের প্ল্যানিং রেফারেন্স" : "Preserved 10-Day Reference (U-12)"}
                 </span>
-                <span className="text-[11px] text-amber-100/90 block mt-1 leading-relaxed">
+                <span className="text-lg sm:text-xl font-mono font-bold text-white tabular-nums">
+                  ৳ 1,16,000–1,32,000
+                </span>
+                <span className="text-[10px] text-slate-300 block mt-0.5">
                   {isBn
-                    ? "খাবার · কেনাকাটা · জিয়ারত টুর · অতিরিক্ত ব্যাগেজ · পিক-সিজন সারচার্জ"
-                    : "Meals · Shopping · Ziyarah tours · Extra baggage · Peak-date surcharges"}
+                    ? "জনপ্রতি (৪ জন শেয়ারিং · ১৪ অক্টো ২০২৬; পুনঃমূল্যায়িত নয়)"
+                    : "Per person (4-sharing · 14 Oct 2026; unre-priced)"}
                 </span>
               </div>
             </div>
@@ -602,19 +620,21 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-mono">
                   <tr>
                     <th className="py-3 px-4">{isBn ? "খরচের খাত" : "Cost Component"}</th>
-                    <th className="py-3 px-4">{isBn ? "বিস্তারিত" : "Details"}</th>
-                    <th className="py-3 px-4 text-right">{isBn ? "মোট (BDT)" : "Total (BDT)"}</th>
+                    <th className="py-3 px-4">{isBn ? "মডেল ভিত্তি ও অফিসিয়াল শর্ত" : "Scenario Basis & Official Conditions"}</th>
+                    <th className="py-3 px-4 text-right">{isBn ? "মডেল যোগফল (BDT)" : "Model Subtotal (BDT)"}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   <tr>
                     <td className="py-3.5 px-4 font-semibold text-slate-900">
                       {isBn
-                        ? "১. রাউন্ডট্রিপ ফ্লাইট (DAC → JED / MED)"
-                        : "1. Roundtrip Flights (DAC → JED / MED)"}
+                        ? "১. রাউন্ডট্রিপ ফ্লাইট (DAC ↔ JED / MED)"
+                        : "1. Roundtrip Airfare (DAC ↔ JED / MED)"}
                     </td>
                     <td className="py-3.5 px-4 text-slate-600">
-                      {pilgrims} × ৳{baseFlightPerPerson.toLocaleString()} (Saudia / Biman / Gulf Transit)
+                      {isBn
+                        ? `${pilgrims} × ৳${baseFlightPerPerson.toLocaleString()} (উদাহরণভিত্তিক ইনপুট; Saudia, Biman বা ট্রানজিট এয়ারলাইন্সের লাইভ ভাড়া তারিখ ও ব্যাগেজ অনুযায়ী পরিবর্তিত হয়)`
+                        : `${pilgrims} × ৳${baseFlightPerPerson.toLocaleString()} (illustrative model input; live Saudia, Biman, or transit fares vary by date, seat class & baggage)`}
                     </td>
                     <td className="py-3.5 px-4 text-right font-mono font-bold text-slate-900 tabular-nums">
                       ৳ {totalFlightBdt.toLocaleString()}
@@ -623,11 +643,13 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                   <tr>
                     <td className="py-3.5 px-4 font-semibold text-slate-900">
                       {isBn
-                        ? "২. ৯০ দিনের ওমরাহ ই-ভিসা ও হেলথ ইনস্যুরেন্স"
-                        : "2. 90-Day Saudi Umrah e-Visa + Insurance"}
+                        ? "২. সৌদি ভিসা রুট ও বাধ্যতামূলক ইনস্যুরেন্স"
+                        : "2. Saudi Visa Route + Mandatory Insurance"}
                     </td>
                     <td className="py-3.5 px-4 text-slate-600">
-                      {pilgrims} × ৳{visaWithInsurancePerPerson.toLocaleString()} ({isBn ? "ইনস্যুরেন্সসহ; বর্তমান ফি যাচাই করুন" : "with insurance; verify current fee"})
+                      {isBn
+                        ? `${pilgrims} × ৳${visaWithInsurancePerPerson.toLocaleString()} (মডেল বাজেট; প্রকৃত খরচ নির্ভর করে umrah.nusuk.sa, অনুমোদিত এজেন্ট [হোটেল+ট্রান্সপোর্ট আবশ্যক] বা ৯৬ ঘণ্টার স্টপওভার ভিসার ওপর)`
+                        : `${pilgrims} × ৳${visaWithInsurancePerPerson.toLocaleString()} (illustrative allowance; actual fee depends on umrah.nusuk.sa, external agent [requires hotel+transport per haj.gov.sa/en/FAQ], or 96h stopover checkout)`}
                     </td>
                     <td className="py-3.5 px-4 text-right font-mono font-bold text-slate-900 tabular-nums">
                       ৳ {totalVisaBdt.toLocaleString()}
@@ -636,11 +658,13 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                   <tr>
                     <td className="py-3.5 px-4 font-semibold text-slate-900">
                       {isBn
-                        ? `৩. মক্কা ও মদিনা হোটেল (${days} রাত)`
-                        : `3. Makkah & Madinah Hotels (${days} Nights)`}
+                        ? `৩. মক্কা ও মদিনা আবাসন (${days} রাত)`
+                        : `3. Makkah & Madinah Accommodation (${days} Nights)`}
                     </td>
                     <td className="py-3.5 px-4 text-slate-600">
-                      {roomsNeeded} Room(s) × ৳{nightlyRoomRateBdt.toLocaleString()}/night
+                      {isBn
+                        ? `${roomsNeeded}টি রুম × ৳${nightlyRoomRateBdt.toLocaleString()}/রাত (মডেল ইনপুট; নির্দিষ্ট হোটেল, দূরত্ব ও মৌসুমভেদে ভাড়া আলাদা হয়)`
+                        : `${roomsNeeded} Room(s) × ৳${nightlyRoomRateBdt.toLocaleString()}/night (illustrative input; verify live property rates, street slope & taxes before booking)`}
                     </td>
                     <td className="py-3.5 px-4 text-right font-mono font-bold text-slate-900 tabular-nums">
                       ৳ {totalHotelsBdt.toLocaleString()}
@@ -649,11 +673,13 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                   <tr>
                     <td className="py-3.5 px-4 font-semibold text-slate-900">
                       {isBn
-                        ? "৪. Haramain বুলেট ট্রেন ও এয়ারপোর্ট ট্রান্সফার"
-                        : "4. Haramain High-Speed Train & Jeddah Pickup"}
+                        ? "৪. Haramain ট্রেন ও লোকাল ট্রান্সফার"
+                        : "4. Haramain High-Speed Rail & Transfers"}
                     </td>
                     <td className="py-3.5 px-4 text-slate-600">
-                      {isBn ? "জেদ্দা এয়ারপোর্ট → মক্কা → মদিনা ট্রান্সফার" : "Jeddah Airport → Makkah → Madinah transport"}
+                      {isBn
+                        ? "অফিসিয়াল HHR বেস ইকোনমি ভাড়া (১৪ অক্টো ২০২৬, VAT বাদে): JED এয়ারপোর্ট–মক্কা SAR 65 + মক্কা–মদিনা SAR 162 (sar.hhr.sa/travel/fares) এবং লোকাল ট্রান্সফার বাফার"
+                        : "Includes checked HHR base Economy fares (14 Oct 2026, before 15% VAT): JED Airport–Makkah SAR 65 + Makkah–Madinah SAR 162 (sar.hhr.sa/travel/fares) plus local transfer buffer"}
                     </td>
                     <td className="py-3.5 px-4 text-right font-mono font-bold text-slate-900 tabular-nums">
                       ৳ {totalTransportBdt.toLocaleString()}
@@ -662,17 +688,18 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 </tbody>
               </table>
             </div>
+
             <p className="text-[11px] text-slate-500 leading-relaxed">
               {isBn
-                ? "* কম্পোনেন্টের দাম পরিকল্পনার অনুমান (অক্টোবর ২০২৬), লাইভ দাম নয়। ভিসা ফি, ভাড়া ও হোটেল রেট পরিবর্তিত হয় — বুকিংয়ের আগে যাচাই করুন।"
-                : "* Component figures are illustrative planning defaults (Oct 2026), not live prices. Visa fees, fares and hotel rates change — verify before booking."}
+                ? "দ্রষ্টব্য (তথ্য যাচাইয়ের তারিখ: ১৪ অক্টোবর ২০২৬): উপরের ক্যালকুলেটরটি শুধুমাত্র পরিকল্পনা বোঝার একটি উদাহরণ—কোনো লাইভ টিকিট বা এজেন্সি কোটেশন নয়। প্রতিদিনের খাবার, জিয়ারাহ ট্যাক্সি, সিম/eSIM এবং ব্যক্তিগত খরচ এর বাইরে। বুকিংয়ের আগে সংশ্লিষ্ট এয়ারলাইন্স, হোটেল এবং অফিসিয়াল সৌদি পোর্টালে (umrah.nusuk.sa, sar.hhr.sa, visitsaudi.com) সর্বশেষ মূল্য যাচাই করুন।"
+                : "Scope & Exclusions Note (Checked 14 October 2026): This calculator uses illustrative planning inputs to help families model room-sharing and stay duration—it is not a live booking quote or guaranteed savings claim. Daily meals, local Ziyarah taxis, eSIMs, and personal expenses are excluded. Always verify live prices and terms on the official carrier, hotel, and Saudi portals (umrah.nusuk.sa, sar.hhr.sa, visitsaudi.com) at checkout."}
             </p>
           </div>
         </div>
       </section>
 
       {/* =====================================================================
-          3. H2: DIY UMRAH VS. AGENCY PACKAGE COST COMPARISON MATRIX (2026)
+          3. H2: DIY UMRAH VS. AGENCY PACKAGE QUALITATIVE CHECKLIST (U-13)
       ===================================================================== */}
       <section
         id="umrah-diy-vs-agency"
@@ -681,86 +708,127 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         <div className="space-y-1 border-b border-slate-100 pb-5">
           <span className="text-xs font-mono font-semibold text-brand-navy">
             {isBn
-              ? "তুলনামূলক সিদ্ধান্ত কাঠামো"
-              : "A Like-for-Like Comparison Framework"}
+              ? "বুকিং পদ্ধতি তুলনা ও কোটেশন যাচাইয়ের চেকলিস্ট (U-13)"
+              : "Booking Path Comparison & Apples-to-Apples Quote Checklist (Checked 14 Oct 2026)"}
           </span>
           <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-bold text-slate-900">
             {isBn
-              ? "নিজে প্ল্যান করা DIY ওমরাহ বনাম এজেন্সি প্যাকেজ: কীভাবে তুলনা করবেন"
-              : "DIY Umrah vs. an Agency Package: How to Compare Like-for-Like"}
+              ? "নিজে প্ল্যান করা (DIY) বনাম এজেন্সি ওমরাহ প্যাকেজ: কীভাবে তুলনা করবেন"
+              : "DIY Umrah vs. Agency Package: What to Compare Before You Book"}
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 max-w-3xl">
             {isBn
-              ? "প্যাকেজের হেডলাইন দাম প্রায়ই শেয়ারিং রুম ও শাটল-জোন হোটেল ধরে দেওয়া হয়, আর DIY দাম আপনার নিজের পছন্দের ওপর নির্ভর করে। একই তারিখ, সময়কাল, রুম ওকুপেন্সি, ফ্লাইট ও অন্তর্ভুক্তি রেখে like-for-like তুলনা করুন:"
-              : "Package headline prices often assume shared rooms and shuttle-zone hotels, while DIY totals depend on the choices you make yourself. Compare on the same dates, duration, room occupancy, flight and inclusions:"}
+              ? "নিজে বুকিং অথবা এজেন্সি প্যাকেজ—কোনোটিই সবসময় স্বয়ংক্রিয়ভাবে সস্তা নয়। একই তারিখ, একই ফ্লাইট রুট, প্রতি রুমে যাত্রীর সংখ্যা এবং হোটেলের সঠিক ম্যাপ লোকেশন মিলিয়ে তুলনা করার জন্য নিচের ৩টি মানদণ্ড ব্যবহার করুন:"
+              : "Neither DIY booking nor a Bangladeshi agency package is automatically cheaper across every season. Because agency quotes often bundle 4- or 5-bed room sharing or outer shuttle zones without itemizing each component, use these three verified criteria to compare options on the exact same travel dates:"}
           </p>
         </div>
 
-        <div className="border border-slate-200 rounded-2xl overflow-hidden">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-mono">
-              <tr>
-                <th className="py-3 px-4">{isBn ? "যা দেখবেন" : "What to compare"}</th>
-                <th className="py-3 px-4">{isBn ? "নিজে বুক করলে (DIY)" : "Planning it yourself (DIY)"}</th>
-                <th className="py-3 px-4">{isBn ? "এজেন্সি প্যাকেজ" : "An agency package"}</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {[
-                {
-                  row: isBn ? "দামের স্বচ্ছতা" : "Price transparency",
-                  diy: isBn
-                    ? "ফ্লাইট, ভিসা, হোটেল, যাতায়াত — প্রতিটি লাইন আলাদা দেখা ও নিয়ন্ত্রণ করা যায়"
-                    : "You see and control each line — flight, visa, hotel, transport",
-                  agency: isBn
-                    ? "একটিমাত্র প্যাকেজ দাম; itemized ব্রেকডাউন চেয়ে নিন"
-                    : "One package price — ask for the itemized breakdown",
-                },
-                {
-                  row: isBn ? "হোটেল ও রুম" : "Hotel & room",
-                  diy: isBn
-                    ? "জোন, প্রপার্টি ও রুম ওকুপেন্সি আপনি বেছে নেন"
-                    : "You pick the zone, property and room occupancy",
-                  agency: isBn
-                    ? "সাধারণত আগে থেকে নির্দিষ্ট জোন ও শেয়ারিং (প্রায়ই কোয়াড)"
-                    : "Usually pre-set zone and sharing (often quad)",
-                },
-                {
-                  row: isBn ? "ফ্লাইট" : "Flights",
-                  diy: isBn
-                    ? "রুটিং (ডিরেক্ট/ট্রানজিট/ওপেন-জ) ও ব্যাগেজ আপনি ঠিক করেন"
-                    : "You choose routing (direct/transit/open-jaw) and baggage",
-                  agency: isBn
-                    ? "নির্দিষ্ট গ্রুপ ফ্লাইট; পরিবর্তনের নিয়ম কঠিন হতে পারে"
-                    : "Fixed group flights; change rules can be strict",
-                },
-                {
-                  row: isBn ? "সহায়তা" : "Support",
-                  diy: isBn
-                    ? "বুকিং আপনি সামলান (অথবা URAL-এর BDT ডেস্কের সহায়তা নিন)"
-                    : "You manage bookings yourself (or use URAL's BDT desk)",
-                  agency: isBn
-                    ? "গন্তব্যে গ্রুপ হ্যান্ডলিং"
-                    : "In-destination group handling",
-                },
-                {
-                  row: isBn ? "দামের উৎস" : "Where the price comes from",
-                  diy: isBn
-                    ? "কোনো মার্কআপ নেই, তবে গ্রুপ রেটও নেই"
-                    : "No markup, but no negotiated group rates either",
-                  agency: isBn
-                    ? "পিক সিজনে গ্রুপ রেট সাশ্রয়ী হতে পারে"
-                    : "Group rates can beat DIY on peak dates",
-                },
-              ].map((item, i) => (
-                <tr key={i}>
-                  <td className="py-3.5 px-4 font-semibold text-slate-900">{item.row}</td>
-                  <td className="py-3.5 px-4 text-slate-600">{item.diy}</td>
-                  <td className="py-3.5 px-4 text-slate-600">{item.agency}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              badge: isBn ? "০১ · ভিসা ও সার্ভিস বান্ডলিং" : "01 · Visa & Service Bundling Rules",
+              tier: isBn
+                ? "সরাসরি Nusuk বনাম অনুমোদিত এজেন্ট শর্ত"
+                : "Direct Nusuk vs. External Agent Rules",
+              diyLabel: isBn ? "সরাসরি ও স্টপওভার রুট:" : "Direct / Stopover Route:",
+              diyPoint: isBn
+                ? "umrah.nusuk.sa-এ বিদেশি যাত্রীদের সরাসরি আবেদনের সুযোগ রয়েছে; অথবা Saudia/flynas থ্রু-টিকিটে ৯৬ ঘণ্টার স্টপওভার ভিসা নেওয়া যায়।"
+                : "Overseas pilgrims can apply via umrah.nusuk.sa or use an eligible 96-hour Saudia/flynas stopover visa subject to live portal checkout rules.",
+              agencyLabel: isBn ? "এক্সটার্নাল এজেন্টের নিয়ম:" : "External Agent Requirement:",
+              agencyPoint: isBn
+                ? "সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের FAQ (haj.gov.sa/en/FAQ) অনুযায়ী, কোনো এক্সটার্নাল এজেন্ট হোটেল ও ট্রান্সপোর্ট ছাড়া শুধু স্ট্যান্ডঅ্যালোন ওমরাহ ভিসা ইস্যু করতে পারে না।"
+                : "Per the Saudi Ministry of Hajj & Umrah FAQ (haj.gov.sa/en/FAQ), an external agent cannot issue a standalone Umrah visa without bundling accommodation and transport services.",
+            },
+            {
+              badge: isBn ? "০২ · ফ্লাইট ও রুম শেয়ারিং" : "02 · Flights & Room Occupancy",
+              tier: isBn
+                ? "ওপেন-জ (Open-Jaw) ফ্লাইট ও প্রাইভেট রুম নিয়ন্ত্রণ"
+                : "Open-Jaw Routing & Room Sharing Control",
+              featured: true,
+              diyLabel: isBn ? "নিজে পরিকল্পনার সুবিধা:" : "Self-Planned Control:",
+              diyPoint: isBn
+                ? "ঢাকা → জেদ্দা (JED) এবং ফিরতি পথে মদিনা (MED) → ঢাকা মাল্টি-সিটি টিকিট ও পরিবারের জন্য নির্দিষ্ট ডাবল/ফ্যামিলি রুম নিজে বেছে নেওয়া যায়।"
+                : "Select your own multi-city (DAC → JED, MED → DAC) flight times, baggage tier, and private double/family room occupancy.",
+              agencyLabel: isBn ? "গ্রুপ প্যাকেজে যা দেখবেন:" : "What to Check in Group Quotes:",
+              agencyPoint: isBn
+                ? "প্যাকেজ মূল্যে ৪–৫ জন এক রুমে শেয়ারিং (Quad/Quint), রিটার্ন জেদ্দা বাস যাত্রা বা লম্বা ট্রানজিট দেওয়া হয়েছে কি না তা লিখিতভাবে জেনে নিন।"
+                : "Confirm whether a headline package price assumes 4–5 strangers sharing one room (quad/quint) and a 450 km return bus ride back to Jeddah Airport.",
+            },
+            {
+              badge: isBn ? "০৩ · হোটেল পিন ও লিখিত কোটেশন" : "03 · Property Pin & Written Quote",
+              tier: isBn
+                ? "হোটেলের সঠিক নাম, ঢাল ও ট্রেন টিকিট যাচাই"
+                : "Apples-to-Apples Quote Verification Checklist",
+              diyLabel: isBn ? "বুকিংয়ের আগে যাচাই:" : "Verify Before Paying:",
+              diyPoint: isBn
+                ? "শুধু 'হারামের কাছে' কথায় নির্ভর না করে হোটেলের সঠিক নাম, গুগল ম্যাপ পিন, রাস্তার ঢাল (incline) এবং শাটল বাসের সময়সূচি মিলিয়ে নিন।"
+                : "Never rely on generic 'walkable' labels—check the exact property name, Google Maps pin, street slope, and hotel shuttle schedule.",
+              agencyLabel: isBn ? "একই ভিত্তির তুলনা:" : "Same-Basis Comparison:",
+              agencyPoint: isBn
+                ? "যেকোনো এজেন্সি কোটেশনের বিপরীতে একই তারিখ, একই হোটেল, Haramain ট্রেন (নাকি বাস) ও ভিসা-ইনস্যুরেন্সের খাতওয়ারি হিসাব মিলিয়ে সিদ্ধান্ত নিন।"
+                : "Ask for itemized written inclusions (exact hotel names, Haramain rail vs. highway bus, visa/insurance, and baggage) on the same dates before comparing totals.",
+            },
+          ].map((card, i) => (
+            <div
+              key={i}
+              className={`rounded-2xl p-6 border flex flex-col justify-between space-y-4 ${
+                card.featured
+                  ? "bg-brand-navy text-white border-[#F6B73C]"
+                  : "bg-slate-50 text-slate-900 border-slate-200"
+              }`}
+            >
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`text-[11px] font-mono font-bold ${
+                      card.featured ? "text-[#F6B73C]" : "text-brand-navy"
+                    }`}
+                  >
+                    {card.badge}
+                  </span>
+                </div>
+
+                <h3
+                  className={`font-serif text-lg font-bold ${
+                    card.featured ? "text-white" : "text-slate-900"
+                  }`}
+                >
+                  {card.tier}
+                </h3>
+              </div>
+
+              <div
+                className={`pt-4 border-t space-y-3 text-xs leading-relaxed ${
+                  card.featured ? "border-slate-800" : "border-slate-200"
+                }`}
+              >
+                <div>
+                  <span
+                    className={`font-bold block mb-0.5 ${
+                      card.featured ? "text-[#F6B73C]" : "text-slate-900"
+                    }`}
+                  >
+                    {card.diyLabel}
+                  </span>
+                  <span className={card.featured ? "text-slate-200" : "text-slate-600"}>
+                    {card.diyPoint}
+                  </span>
+                </div>
+                <div>
+                  <span
+                    className={`font-bold block mb-0.5 ${
+                      card.featured ? "text-emerald-300" : "text-slate-800"
+                    }`}
+                  >
+                    {card.agencyLabel}
+                  </span>
+                  <span className={card.featured ? "text-slate-300" : "text-slate-600"}>
+                    {card.agencyPoint}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         <p className="text-xs text-slate-500 leading-relaxed max-w-3xl">
@@ -771,7 +839,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
       </section>
 
       {/* =====================================================================
-          4. H2: STEP 01 — DHAKA TO JEDDAH (JED) & MADINAH (MED) FLIGHT PRICES
+          4. H2: STEP 01 — DHAKA TO JEDDAH (JED) & MADINAH (MED) FLIGHT ROUTING
       ===================================================================== */}
       <section
         id="umrah-step-flights"
@@ -780,18 +848,18 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         <div className="space-y-1.5 border-b border-slate-100 pb-5">
           <span className="text-xs font-mono font-semibold text-brand-navy">
             {isBn
-              ? "ধাপ ০১ · ঢাকা (DAC) থেকে জেদ্দা (JED) ও মদিনা (MED) এয়ার টিকিট"
-              : "Step 01 · Dhaka (DAC) to Jeddah (JED) & Madinah (MED) Airfare Guide"}
+              ? "ধাপ ০১ · ঢাকা (DAC) থেকে জেদ্দা (JED) ও মদিনা (MED) ফ্লাইট রুট"
+              : "Step 01 · Dhaka (DAC) to Jeddah (JED) & Madinah (MED) Flight Routing"}
           </span>
           <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-bold text-slate-900">
             {isBn
-              ? "ঢাকা থেকে জেদ্দা ও মদিনা ফ্লাইটের ভাড়া তুলনা করুন (সৌদিয়া, বিমান ও ট্রানজিট)"
-              : "Dhaka to Jeddah (JED) & Madinah (MED) Flight Price Comparison"}
+              ? "ঢাকা থেকে জেদ্দা ও মদিনা ফ্লাইট তুলনা (ডিরেক্ট, ১-স্টপ ট্রানজিট ও ওপেন-জ)"
+              : "Dhaka to Jeddah (JED) & Madinah (MED) Flight Options: Direct, Transit & Open-Jaw"}
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 max-w-3xl">
             {isBn
-              ? "ওমরাহ খরচের সবচেয়ে বড় অংশ হলো বিমানের টিকিট। নিচে ডিরেক্ট ফ্লাইট বনাম সাশ্রয়ী মধ্যপ্রাচ্য ট্রানজিট ফ্লাইটের নিয়ম ও লাইভ সার্চ ইঞ্জিন দেওয়া হলো:"
-              : "Airfare accounts for roughly 50% of an Umrah budget from Bangladesh. Compare direct wide-body carriers against budget Gulf transit routes below:"}
+              ? "ওমরাহ বাজেটের সবচেয়ে বড় পরিবর্তনশীল খাত হলো বিমানের টিকিট, যা মৌসুম, সিট ক্লাস এবং ব্যাগেজ শর্তের ওপর নির্ভর করে। নিচে ডিরেক্ট ফ্লাইট, মধ্যপ্রাচ্য ট্রানজিট এবং ওপেন-জ (Multi-City) রুটের নিয়ম ও লাইভ সার্চ ইঞ্জিন দেওয়া হলো:"
+              : "Airfare is typically the largest variable component of an Umrah trip from Bangladesh and fluctuates by season, departure window, and fare family. Compare non-stop carriers, 1-stop Gulf transit routes, and open-jaw (multi-city) itineraries below:"}
           </p>
         </div>
 
@@ -799,7 +867,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
             <span className="text-xs font-mono font-semibold text-brand-navy">
-              {isBn ? "~৬ ঘ ৩০ মি ডিরেক্ট · ব্যাগেজ: ভাড়ার নিয়ম দেখুন" : "~6h 30m Non-Stop · Baggage: check fare rules"}
+              Non-Stop DAC–JED / DAC–MED · Check Carrier Terms
             </span>
             <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
               {isBn
@@ -808,40 +876,40 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               {isBn
-                ? "বয়স্ক বাবা-মা ও শিশুদের জন্য সৌদি এয়ারলাইন্স এবং বিমান বাংলাদেশ সেরা। ফ্লাইটে ইহরামের মিকাত ঘোষণা করা হয়। জমজম ও ব্যাগেজ ভাতা এয়ারলাইন্স ও ভাড়াভিত্তিক আলাদা — যাত্রার আগে যাচাই করুন। এই রুটের ইলাস্ট্রেটিভ ভাড়া সীমা: ~৳৭২,০০০–৮৬,০০০ (লাইভ দাম দেখুন)।"
-                : "Best for elderly parents. Both Saudia and Biman announce the Miqat boundary mid-air for Ihram. Zamzam and baggage allowances vary by carrier and fare — verify before you fly. Illustrative fare band seen on this route: BDT 72,000–86,000 (check live prices)."}
+                ? "বয়স্ক বাবা-মা ও পরিবারের জন্য Saudia এবং Biman Bangladesh ঢাকা থেকে জেদ্দা (JED) ও মদিনা (MED) রুটে সরাসরি ফ্লাইট পরিচালনা করে। কেবিনে মীকাত ঘোষণা করা হয়; ফেরার পথে ৫ লিটার সিল করা জমজম পানির নিয়ম ও চেকড ব্যাগেজ সীমা টিকিট কাটার সময় সংশ্লিষ্ট এয়ারলাইন্সের পোর্টালে (saudia.com / biman-airlines.com) যাচাই করুন।"
+                : "Saudia and Biman Bangladesh operate non-stop flights linking Dhaka (DAC) with Jeddah (JED) and Madinah (MED) with onboard Miqat announcements. Verify live fares, checked baggage allowances, and carrier-specific 5-liter sealed Zamzam carriage rules directly on saudia.com or biman-airlines.com before booking."}
             </p>
           </div>
 
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
             <span className="text-xs font-mono font-semibold text-emerald-700">
-              {isBn ? "প্রায়ই সস্তা · ১-স্টপ গালফ ট্রানজিট" : "Often Cheaper · 1-Stop Gulf Transit"}
+              1-Stop Gulf Transit · Compare Total Fare + Baggage
             </span>
             <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
               {isBn
-                ? "২. সাশ্রয়ী ট্রানজিট (Flynas, SalamAir, Kuwait ও Gulf Air)"
-                : "2. Budget Transit (Flynas, SalamAir, Kuwait & Air Arabia)"}
+                ? "২. ১-স্টপ ট্রানজিট (flynas, SalamAir, Kuwait ও Air Arabia)"
+                : "2. 1-Stop Transit (flynas, SalamAir, Kuwait & Air Arabia)"}
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               {isBn
-                ? "মাস্কাট, শারজাহ, কুয়েত বা বাহরাইন হয়ে ১-স্টপ ট্রানজিট ফ্লাইট প্রায়ই সরাসরি ফ্লাইটের চেয়ে সস্তা হয় — নিজের তারিখে like-for-like তুলনা করুন। এই রুটের ইলাস্ট্রেটিভ রাউন্ডট্রিপ ভাড়া সীমা: ~৳৫৬,০০০–৬৬,০০০ (লাইভ দাম দেখুন)।"
-                : "1-stop itineraries via Muscat, Sharjah, Kuwait or Bahrain often undercut direct fares — compare like-for-like on your dates. Illustrative roundtrip fare band seen on this route: BDT 56,000–66,000 (check live prices)."}
+                ? "মাস্কাট, শারজাহ, কুয়েত বা বাহরাইন হয়ে ১-স্টপ ফ্লাইটে অনেক সময় অফ-পিক মৌসুমে কম ভাড়া পাওয়া যায়। তবে লো-কস্ট ক্যারিয়ারে চেকড ব্যাগেজ (২০–৩০ কেজি), খাবার এবং ফেরার পথে জমজম পানির চার্জ আলাদা হতে পারে—চূড়ান্ত ভাড়ার সাথে এগুলো যোগ করে তুলনা করুন।"
+                : "One-stop connections via Muscat, Sharjah, Kuwait, or Bahrain can price lower during off-peak periods, though fares vary by season. On low-cost carriers, always check whether 20–30 kg checked baggage, meals, and return Zamzam carriage are included or charged separately."}
             </p>
           </div>
 
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
             <span className="text-xs font-mono font-semibold text-brand-navy">
-              {isBn ? "স্মার্ট রুটিং · রিটার্ন ড্রাইভ বাদ" : "Smart Routing · Skip the Return Drive"}
+              Multi-City Routing · JED Arrival & MED Return
             </span>
             <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
               {isBn
-                ? "৩. ওপেন-জ (Open-Jaw) টিকিট কৌশল (JED → MED)"
-                : "3. Open-Jaw Strategy: Arrive JED, Depart MED"}
+                ? "৩. ওপেন-জ (Open-Jaw) কৌশল: JED অবতরণ, MED প্রস্থান"
+                : "3. Open-Jaw Strategy: Land JED, Depart MED"}
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               {isBn
-                ? "মাল্টি-সিটি (Multi-City) অপশনে ঢাকা → জেদ্দা এবং ফেরার পথে মদিনা → ঢাকা বুক করুন। ওমরাহ শেষে Haramain হাই-স্পিড ট্রেনে মদিনায় যান এবং ফেরার সময় সরাসরি মদিনা এয়ারপোর্ট থেকে ঢাকায় ফিরুন। এতে মদিনা থেকে আবার জেদ্দা এয়ারপোর্টের দীর্ঘ রিটার্ন ড্রাইভের কষ্ট ও খরচ দুটোই বাঁচে।"
-                : "Book Multi-City: Fly Dhaka → Jeddah (perform Umrah in Makkah first), take the Haramain high-speed train to Madinah, and fly home directly from Madinah Airport (MED) to Dhaka. This avoids the long return drive back to Jeddah Airport."}
+                ? "মাল্টি-সিটি অপশনে ঢাকা → জেদ্দা (JED) এবং ফেরার পথে মদিনা (MED) → ঢাকা বুক করুন। জেদ্দা এয়ারপোর্ট (KAIA স্টেশন) থেকে Haramain ট্রেনে (SAR 65 বেস ইকোনমি + VAT, ১৪ অক্টো ২০২৬) বা সড়কপথে মক্কায় যান, এরপর মক্কা–মদিনা বুলেট ট্রেনে (SAR 162 বেস ইকোনমি + VAT, ~২ ঘণ্টা ২০ মিনিট) মদিনায় গিয়ে সরাসরি MED এয়ারপোর্ট থেকে ফিরুন।"
+                : "Book Multi-City: fly Dhaka → Jeddah (JED), transfer from KAIA Terminal 1 to Makkah by Haramain rail (SAR 65 base Economy before VAT, checked 14 Oct 2026) or road (~60–90 mins to hotel door), take the Makkah–Madinah bullet train (SAR 162 base Economy before VAT, ~2h 20m), and fly home directly from Madinah Airport (MED)."}
             </p>
           </div>
         </div>
@@ -850,7 +918,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
       </section>
 
       {/* =====================================================================
-          5. H2: STEP 02 — MAKKAH & MADINAH WALKABLE HOTEL ZONES + LIVE SEARCH
+          5. H2: STEP 02 — MAKKAH & MADINAH HOTEL ZONES (QUALIFIED PER U-11)
       ===================================================================== */}
       <section
         id="umrah-step-hotels"
@@ -859,18 +927,18 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         <div className="space-y-1.5 border-b border-slate-100 pb-5">
           <span className="text-xs font-mono font-semibold text-brand-navy">
             {isBn
-              ? "ধাপ ০২ · মক্কা ও মদিনার সেরা হোটেল জোন গাইড"
-              : "Step 02 · Makkah & Madinah Hotel Neighborhood Guide"}
+              ? "ধাপ ০২ · মক্কা ও মদিনার হোটেল এলাকা পরিচিতি (U-11)"
+              : "Step 02 · Makkah & Madinah Accommodation Search Zones (U-11)"}
           </span>
           <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-bold text-slate-900">
             {isBn
-              ? "মক্কা ও মদিনায় কোথায় থাকবেন? কাবা শরীফ ও মসজিদে নববীর ওয়াকিং জোন"
-              : "Best Makkah & Madinah Hotel Zones for Elderly Parents & Families"}
+              ? "মক্কা ও মদিনায় কোথায় থাকবেন? হোটেল জোন ও ম্যাপ যাচাইয়ের গাইড"
+              : "Where to Stay in Makkah & Madinah: Neighborhood Starting Points"}
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 max-w-3xl">
             {isBn
-              ? "মক্কায় সস্তা হোটেলগুলো প্রায়ই পাহাড়ি ঢালে থাকে। পরিবার ও বয়স্কদের জন্য নিচের ৩টি এলাকা সন্ধানের শুরুর পয়েন্ট — বুকিংয়ের আগে নির্দিষ্ট হোটেলের ঠিকানা, হাঁটার রুট, ঢাল ও শাটল সুবিধা হোটেলের সাথে যাচাই করে নিন:"
-              : "Makkah's cheaper hotels are often spread up steep inclines. These three areas are the most popular search starting points for families and older pilgrims — verify the exact property, walking route and any shuttle with the hotel before booking:"}
+              ? "শুধুমাত্র এলাকার নাম দেখে হোটেলের প্রকৃত দূরত্ব, রাস্তার ঢাল (incline), রাস্তা বন্ধ থাকা বা শাটল বাসের নিশ্চয়তা পাওয়া যায় না। নিচের ৩টি জোন থেকে খোঁজা শুরু করুন এবং বুকিংয়ের আগে নির্দিষ্ট হোটেলের গুগল ম্যাপ পিন, গেটের পথ ও লাইভ ভাড়া যাচাই করুন:"
+              : "Neighborhood names alone do not guarantee an individual hotel's exact walking distance, street incline, road-closure diversions, or shuttle frequency. Use these three areas as search starting points and verify the specific property address, route to your intended gate, and live nightly rate before booking:"}
           </p>
         </div>
 
@@ -880,31 +948,31 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               zone: isBn
                 ? "১. আবরাজ আল বাইত (Clock Tower) ও Jabal Omar"
                 : "1. Abraj Al Bait (Clock Tower) & Jabal Omar",
-              dist: isBn ? "সবচেয়ে কেন্দ্রীয় এলাকা" : "Most central area",
-              price: isBn ? "আপার-মিড থেকে লাক্সারি · লাইভ রেট দেখুন" : "Upper-mid to luxury · check live rates",
+              dist: isBn ? "হারাম চত্বর সংলগ্ন জোন · পিন যাচাই করুন" : "Courtyard Perimeter Zone · Verify Exact Tower Pin",
+              price: isBn ? "প্রিমিয়াম টিয়ার · তারিখভেদে ভাড়া পরিবর্তিত হয়" : "Premium Tier · Live Rates Vary by Date & View",
               desc: isBn
-                ? "ক্লক টাওয়ার কমপ্লেক্স ও Jabal Omar এলাকার হোটেল হারামের সবচেয়ে কাছে; আশপাশের মলে দক্ষিণ এশীয় খাবারের কোর্ট আছে। নির্দিষ্ট প্রবেশপথ ও প্রবেশাধিকার হোটেলের সাথে যাচাই করুন।"
-                : "Hotels around the Clock Tower complex and Jabal Omar sit closest to the Haram; nearby malls have South Asian food courts. Confirm the exact entrance and access route with your hotel.",
+                ? "কাবা চত্বরের ঠিক পাশের বহুতল কমপ্লেক্স ও শপিং মল এলাকা। তবে বড় কমপ্লেক্সের ভেতর কোন টাওয়ার এবং লিফট লবি থেকে চত্বরে নামতে কতটুকু হাঁটতে হয় তা নির্দিষ্ট হোটেলের রিভিউ দেখে নিশ্চিত করুন।"
+                : "High-rise complexes bordering the southern and western Haram plazas with indoor mall and food-court access. Because tower blocks vary in distance and elevator changes, check the exact tower pin and lobby-to-courtyard access route.",
             },
             {
               zone: isBn
-                ? "২. আজইয়াদ (Ajyad) ও ইব্রাহিম আল খলিল রোড"
-                : "2. Ajyad Street & Ibrahim Al Khalil Road (Misfaq)",
-              dist: isBn ? "জনপ্রিয় মিড-রেঞ্জ এলাকা" : "Popular mid-range area",
-              price: isBn ? "মিড-রেঞ্জ · লাইভ রেট দেখুন" : "Mid-range · check live rates",
+                ? "২. আজইয়াদ (Ajyad), ইব্রাহিম আল খলিল রোড ও শাটল জোন"
+                : "2. Ajyad, Ibrahim Al Khalil Road & Outer Shuttle Zones",
+              dist: isBn ? "সেন্ট্রাল করিডোর ও শাটল এরিয়া · ঢাল যাচাই করুন" : "Central Corridors & Shuttle Zones · Check Street Slope",
+              price: isBn ? "মিড-রেঞ্জ ও বাজেট টিয়ার · শাটল শিডিউল দেখুন" : "Mid-Range & Shuttle Tiers · Confirm Shuttle Terms",
               desc: isBn
-                ? "ইব্রাহিম আল খলিল রোড ও আজইয়াদের রাস্তাগুলো তুলনামূলক সমতল এবং এখানে বাংলাদেশি রেস্টুরেন্ট, ফার্মেসি ও মানি এক্সচেঞ্জ আছে — হোটেলের হাঁটার রুট যাচাই করে নিন।"
-                : "Ibrahim Al Khalil Road and the Ajyad streets are among the flatter approaches and are lined with Bangladeshi restaurants, pharmacies and currency exchanges — check your hotel's exact walking route.",
+                ? "ইব্রাহিম আল খলিল রোড ও আজইয়াদে প্রচুর দক্ষিণ এশীয় খাবার ও ফার্মেসি রয়েছে, তবে আজইয়াদের কিছু শাখা রাস্তায় ঢাল (incline) আছে। আর Kudai বা Aziziyah জোনে বুক করলে হোটেলের নিজস্ব শাটল বাসের সময়সূচি ও ড্রপ-অফ পয়েন্ট আগেই লিখিতভাবে জেনে নিন।"
+                : "Ibrahim Al Khalil Road and Ajyad offer South Asian dining and pharmacies, though side streets off Ajyad can have uphill gradients. For outer zones (Kudai / Aziziyah), verify the hotel's current shuttle timetable and drop-off terminal directly with the property.",
             },
             {
               zone: isBn
-                ? "৩. মদিনা মারকাজিয়া নর্থ ও ওয়েস্ট (Markazia)"
-                : "3. Madinah Central Area (Markazia North/West)",
-              dist: isBn ? "মদিনার কেন্দ্রীয় এলাকা" : "Central Madinah area",
-              price: isBn ? "মিড থেকে আপার · লাইভ রেট দেখুন" : "Mid-range to upper · check live rates",
+                ? "৩. মদিনা সেন্ট্রাল এরিয়া (Markazia — ১ম রিং রোডের ভেতর)"
+                : "3. Madinah Central Area (Markazia Inside 1st Ring Road)",
+              dist: isBn ? "মসজিদে নববী চত্বর এলাকা · বর্তমান গেট দেখুন" : "Masjid an-Nabawi Perimeter · Check Current Gate Access",
+              price: isBn ? "মৌসুম ও দিকভেদে ভাড়া ভিন্ন হয়" : "Dynamic Rates by Direction (North / West / South)",
               desc: isBn
-                ? "Markazia North/West জোন মসজিদে নববী কমপ্লেক্স ও লেডিস গেট (২৫–২৯) এলাকার কাছে — হোটেলের অবস্থান ও রুট হোটেলের সাথে যাচাই করুন।"
-                : "Markazia North/West keeps you near the Prophet's Mosque complex and the Ladies' Gates area (25–29) — verify the property's location and route with the hotel.",
+                ? "মদিনায় ১ম রিং রোডের ভেতর (Markazia North/West/South) হোটেল নিলে মসজিদে নববীর চত্বরে সহজে যাওয়া যায়। নারী যাত্রীদের প্রবেশের গেট ও রিয়াজুল জান্নাত (Al-Rawdah) ভিজিটের সময়সূচি পরিবর্তনশীল—বুকিংয়ের সময় হোটেলের অবস্থান ও অফিসিয়াল Nusuk অ্যাপের নির্দেশনা মিলিয়ে নিন।"
+                : "Staying inside Madinah's 1st Ring Road (Markazia) places you around the Prophet's Mosque courtyard perimeter. Because women's prayer section gates and Al-Rawdah entry arrangements can change, check the property's exact side (North/West/South) and follow the live instructions in your Nusuk permit.",
             },
           ].map((z, i) => (
             <div
@@ -938,7 +1006,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
       </section>
 
       {/* =====================================================================
-          6. H2: STEP 03 — SAUDI UMRAH E-VISA, NUSUK APP & BIOMETRICS RULES
+          6. H2: STEP 03 — SAUDI UMRAH VISA ROUTES, NUSUK & BIOMETRICS (U-01..U-09)
       ===================================================================== */}
       <section
         id="umrah-visa-nusuk-guide"
@@ -947,53 +1015,53 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         <div className="space-y-1.5 border-b border-slate-100 pb-5">
           <span className="text-xs font-mono font-semibold text-brand-navy">
             {isBn
-              ? "ধাপ ০৩ · সৌদি ওমরাহ ই-ভিসা, Nusuk অ্যাপ ও বায়োমেট্রিক্স নিয়ম ২০২৬"
-              : "Step 03 · 2026 Saudi Umrah e-Visa, Nusuk App & Biometrics Requirements"}
+              ? "ধাপ ০৩ · সৌদি ওমরাহ ভিসার ৩টি ক্যাটাগরি, বায়োমেট্রিক্স ও Nusuk (১৪ অক্টো ২০২৬ যাচাইকৃত)"
+              : "Step 03 · Eligible Saudi Visa Pathways, Biometrics, Health & Nusuk Rules (Checked 14 Oct 2026)"}
           </span>
           <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-bold text-slate-900">
             {isBn
-              ? "বাংলাদেশি পাসপোর্টে সৌদি ওমরাহ ই-ভিসা ও Nusuk অ্যাপের ৪টি বাধ্যতামূলক ধাপ"
-              : "Saudi Umrah e-Visa, Nusuk App & Biometrics Checklist from Bangladesh"}
+              ? "বাংলাদেশি পাসপোর্টে ওমরাহ ভিসা রুট, Saudi Visa Bio এবং Nusuk পারমিটের নিয়ম"
+              : "Saudi Umrah Visa Pathways, Biometrics & Nusuk Permit Checklist from Bangladesh"}
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {[
             {
-              step: "01 · Visa Type",
+              step: "01 · 3 Visa Pathways (U-01–U-04)",
               title: isBn
-                ? "৯০ দিনের Umrah e-Visa অথবা ৯৬ ঘণ্টার Stopover Visa"
-                : "90-Day Umrah e-Visa or 96-Hour Stopover Visa",
+                ? "স্ট্যান্ডার্ড ওমরাহ, ৯৬ ঘণ্টার স্টপওভার ও যোগ্য ট্যুরিস্ট রুট"
+                : "Standard Umrah, 96-Hour Stopover & Eligible Tourist Routes",
               body: isBn
-                ? "সাধারণ বাংলাদেশি পাসপোর্টধারীরা অনুমোদিত প্ল্যাটফর্ম বা আমাদের ঢাকা ডেস্কের মাধ্যমে ৯০ দিনের ওমরাহ ই-ভিসার আবেদন করতে পারেন (প্রায় ২–৫ দিনে ইস্যু; ইনস্যুরেন্সসহ ফি সাম্প্রতিকভাবে ~৳১৫,৫০০–১৯,৫০০ — বর্তমান ফি যাচাই করুন)। বৈধ ও আগে ব্যবহৃত US/UK/Schengen ভিসা থাকলে বর্তমান শর্ত পূরণ হলে visa-on-arrival পাওয়া যেতে পারে; স্বয়ংক্রিয় e-Visa যোগ্যতা ধরে নেবেন না — অফিশিয়াল পোর্টালে আগে যাচাই করুন।"
-                : "Standard BD passports apply for a 90-day Umrah e-Visa through Nusuk or an approved provider (often issued in 2–5 days; the fee with insurance has recently been around BDT 15,500–19,500 — verify the current fee). Holders of valid, previously used US, UK or Schengen visas may qualify for visa-on-arrival if current conditions are met — do not assume automatic e-Visa eligibility; check the official portal first.",
+                ? "১) স্ট্যান্ডার্ড ওমরাহ ভিসা: umrah.nusuk.sa বা অনুমোদিত এক্সটার্নাল এজেন্টের মাধ্যমে (এজেন্টের ক্ষেত্রে হোটেল ও ট্রান্সপোর্ট বান্ডল বাধ্যতামূলক — haj.gov.sa/en/FAQ)। ২) ৯৬ ঘণ্টার স্টপওভার ভিসা: Saudia বা flynas থ্রু-টিকিটে (visitsaudi.com)। ৩) ট্যুরিস্ট ভিসা রুট: সাধারণ বাংলাদেশি পাসপোর্ট একক ন্যাশনালিটি ই-ভিসা তালিকায় নেই; তবে Package Visa, পূর্বে ব্যবহৃত বৈধ US/UK/Schengen ভিসাধারীদের VOA বা যোগ্য GCC রেসিডেন্ট রুট প্রযোজ্য।"
+                : "1) Standard Umrah Visa via umrah.nusuk.sa or an approved external agent (external agents must bundle hotel + transport per haj.gov.sa/en/FAQ). 2) 96-Hour Stopover Visa on Saudia or flynas through-tickets (visitsaudi.com). 3) Tourist routes: ordinary BD passports are not on the standalone nationality eVisa list (visa.visitsaudi.com), but may qualify via Package Visa, Visa-on-Arrival with a valid used US/UK/Schengen visa, or GCC residency.",
             },
             {
-              step: "02 · Biometrics",
+              step: "02 · Biometrics & Health (U-07–U-08)",
               title: isBn
-                ? "Saudi Visa Bio বায়োমেট্রিক (ভিসা যেখানে চায়)"
-                : "Biometrics via Saudi Visa Bio (Where Your Visa Requires It)",
+                ? "Saudi Visa Bio অ্যাপ ও মেনিনজাইটিস (ACYW) টিকা"
+                : "Saudi Visa Bio App & Mandatory ACYW Vaccine",
               body: isBn
-                ? "ইলেকট্রনিকভাবে ইস্যুকৃত ওমরাহ ভিসার বায়োমেট্রিকের জন্য বর্তমান সৌদি মন্ত্রণালয়ের FAQ বাংলাদেশকে অফিশিয়াল 'Saudi Visa Bio' অ্যাপে (পাসপোর্ট স্ক্যান, ফেস ও আঙুলের ছাপ) তালিকাভুক্ত করে। আপনার ভিসা আবেদনের সংযুক্ত নির্দেশনা অনুসরণ করুন — এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার ভ্রমণকারীর জন্য সার্বজনীন বাধ্যবাধকতা নয়।"
-                : "For electronically issued Umrah visas, the current Saudi Ministry FAQ lists Bangladesh for biometric enrollment via the official 'Saudi Visa Bio' app (passport scan, face and fingerprints). Follow the instruction attached to your visa application — it is not a universal requirement for every tourist or stopover traveler.",
+                ? "সৌদি মন্ত্রণালয়ের FAQ (haj.gov.sa/en/FAQ) ইলেকট্রনিক ওমরাহ ভিসার বায়োমেট্রিক্স তালিকায় বাংলাদেশের নাম অন্তর্ভুক্ত করেছে—আপনার ভিসা আবেদনের নির্দেশনা অনুযায়ী অফিসিয়াল 'Saudi Visa Bio' অ্যাপে মুখের ছবি ও আঙুলের ছাপ দিন। এছাড়া সৌদি স্বাস্থ্য মন্ত্রণালয়ের ১৪৪৭ হিজরি নিয়ম (moh.gov.sa) অনুযায়ী ভ্রমণের কমপক্ষে ১০ দিন আগে নেওয়া কোয়াড্রিভ্যালেন্ট ACYW মেনিনজাইটিস টিকার সনদ আবশ্যক।"
+                : "The Ministry FAQ (haj.gov.sa/en/FAQ) lists Bangladesh for electronic Umrah-visa biometrics via the official 'Saudi Visa Bio' app—follow your visa channel's instructions. Under the 1447H Saudi MOH health regulations PDF (moh.gov.sa), all Umrah travelers must hold a valid quadrivalent ACYW meningococcal vaccination certificate administered at least 10 days before arrival.",
             },
             {
-              step: "03 · Nusuk Permits",
+              step: "03 · Nusuk & 1448H Window (U-02, U-09)",
               title: isBn
-                ? "Nusuk অ্যাপে ওমরাহ ও রিয়াজুল জান্নাত (Rawdah) স্লট"
-                : "Nusuk App (nusuk.sa) Umrah & Rawdah Permits",
+                ? "Nusuk পারমিট ও ১৪৪৮ হিজরি মৌসুমের সময়সীমা"
+                : "Nusuk Permits & 1448H Season Calendar",
               body: isBn
-                ? "ভিসা নম্বর পাওয়ার সাথে সাথে Nusuk অ্যাপে অ্যাকাউন্ট খুলে মক্কায় ওমরাহ পালনের স্লট এবং মদিনায় রিয়াজুল জান্নাতে (Noble Rawdah) নামাজের QR পারমিট বুক করুন। অ্যাপে উপলব্ধ তারিখ/সময় বেছে নিন এবং লাইভ অ্যাভেইলেবিলিটি যাচাই করুন — কোনো নির্দিষ্ট সাপ্তাহিক রিলিজ দিন প্রকাশিত নেই।"
-                : "As soon as your visa number is issued, register on the official Nusuk app to book your Umrah slot and the Rawdah (Riyazul Jannah) prayer permit. Select an available date/time slot in the app and check live availability — no fixed weekly release day is published.",
+                ? "মক্কায় ওমরাহ এবং মদিনায় আল-রওজা আল-শরীফাহ (Rawdah) জিয়ারতের ফ্রি অ্যাপয়েন্টমেন্ট পারমিটের জন্য অফিসিয়াল Nusuk অ্যাপ/ওয়েবসাইটে (haj.gov.sa) উপলব্ধ স্লট বুক করুন (স্লট রিলিজের নির্দিষ্ট সাপ্তাহিক দিন নির্ধারিত নয়)। ১৪৪৮ হিজরি ক্যালেন্ডার অনুযায়ী ভিসা ইস্যুর শেষ তারিখ ৯ মার্চ ২০২৭, সর্বশেষ প্রবেশ ২৩ মার্চ ২০২৭ এবং সর্বশেষ প্রস্থান ৭ এপ্রিল ২০২৭।"
+                : "Reserve your Umrah slot and free Al-Rawdah Al-Sharifiyah appointment permit in the official Nusuk app/portal (haj.gov.sa E-Services); slot availability is dynamic with no fixed weekly release day. For the 1448H season (checked 14 Oct 2026), final visa issuance is 9 March 2027, final entry is 23 March 2027, and final departure is 7 April 2027.",
             },
             {
-              step: "04 · DAC Departure",
+              step: "04 · Fard Hajj Separation (U-05–U-06)",
               title: isBn
-                ? "ঢাকা এয়ারপোর্ট (DAC) ইহরাম ও ইমিগ্রেশন চেকলিস্ট"
-                : "Dhaka Airport (DAC) Ihram & Immigration Checklist",
+                ? "ফরজ হজ্জের পৃথক নিবন্ধন ও পারমিট লঙ্ঘনের জরিমানা"
+                : "Fard Hajj Registration & Permit-Violation Rules",
               body: isBn
-                ? "প্রথমে মক্কায় গেলে ঢাকা এয়ারপোর্ট থেকেই ইহরামের কাপড় পরে বিমানে উঠুন (মীকাত অতিক্রমের সময় নিয়ত করবেন)। সাথে প্রিন্টেড ই-ভিসা, রিটার্ন টিকিট ও হোটেল ভাউচার রাখুন।"
-                : "If flying Dhaka → Jeddah first, wear your Ihram garments at Dhaka Airport before boarding (make Niyyah at the Miqat announcement). Carry printed copies of your e-Visa, return ticket, and hotel vouchers.",
+                ? "ওমরাহ, স্টপওভার বা ভিজিট ভিসা দিয়ে কখনোই ফরজ হজ্জ পালন করা যায় না। বাংলাদেশি হজ্জযাত্রীদের অবশ্যই ধর্ম মন্ত্রণালয়ের hajj.gov.bd পোর্টালে নিবন্ধন করতে হয়। সৌদি প্রেস এজেন্সির (spa.gov.sa/en/N2559888) ১৪৪৭ হিজরি বিজ্ঞপ্তি অনুযায়ী হজ্জ পারমিট ছাড়া হজ্জের চেষ্টা বা নিষিদ্ধ সময়ে মক্কায় প্রবেশে সর্বোচ্চ SAR 20,000 জরিমানা এবং বহিষ্কৃত অনুপ্রবেশকারীদের ক্ষেত্রে ১০ বছরের নিষেধাজ্ঞা প্রযোজ্য।"
+                : "An Umrah, stopover, or visit visa never permits Fard Hajj. Bangladeshi pilgrims must register through hajj.gov.bd. Under the 1447H Interior Ministry notice reported by SPA (spa.gov.sa/en/N2559888), performing or attempting Hajj without a permit or entering Makkah during restriction dates carries a fine up to SAR 20,000, with a 10-year re-entry ban for deported infiltrators/overstayers.",
             },
           ].map((item, idx) => (
             <div
@@ -1048,8 +1116,8 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 {isBn
-                  ? "ইহরাম বাঁধা অবস্থায় দীর্ঘ ফ্লাইটের পর ট্যাক্সি চালকদের সাথে দরদাম না করে আগে থেকেই ফিক্সড রেটে প্রাইভেট সেডান বা ফ্যামিলি ভ্যান বুক করুন (~৭৫ মিনিট যাত্রা)।"
-                  : "Avoid haggling in Ihram outside Jeddah Terminal 1. Pre-book a fixed-fare private car or family minivan directly to your Makkah hotel door (~75 mins)."}
+                  ? "ইহরাম বাঁধা অবস্থায় দীর্ঘ ফ্লাইটের পর ট্যাক্সি চালকদের সাথে দরদাম না করে আগে থেকেই প্রাইভেট সেডান বা ফ্যামিলি ভ্যানের রেট দেখে নিতে পারেন (সড়কপথে সাধারণত ~৬০–৯০ মিনিট)।"
+                  : "Avoid haggling in Ihram outside Jeddah Terminal 1. Compare pre-booked private car or family minivan transfers directly to your Makkah hotel door (~60–90 mins by road)."}
               </p>
             </div>
             <div className="space-y-2 pt-2">
@@ -1078,8 +1146,8 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 {isBn
-                  ? "জাবালে নূর (হেরা গুহা), জাবালে সাওর, আরাফাত, মিনা, উহুদ পাহাড় ও মসজিদে কুবা ভ্রমণের জন্য Klook-এ ইংলিশ/উর্দু গাইডসহ প্রাইভেট জিয়ারাহ কার বুক করুন।"
-                  : "Book private air-conditioned Ziyarah tours covering Jabal al-Nour, Mount Uhud, Masjid Quba, and Badr/Taif day excursions with verified Klook local operators."}
+                  ? "জাবালে নূর (হেরা গুহা), জাবালে সাওর, আরাফাত, মিনা, উহুদ পাহাড় ও মসজিদে কুবা ভ্রমণের জন্য Klook-এ প্রাইভেট জিয়ারাহ ট্যুরের অপশন ও শর্ত যাচাই করুন।"
+                  : "Compare private air-conditioned Ziyarah tours covering Jabal al-Nour, Mount Uhud, Masjid Quba, and Badr/Taif day excursions on Klook."}
               </p>
             </div>
             <div className="pt-2">
@@ -1108,8 +1176,8 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 {isBn
-                  ? "মদিনায় রিয়াজুল জান্নাত (Rawdah)-এ প্রবেশের সময় গেটে লাইভ Nusuk App QR কোড দেখাতে হয়। এয়ারপোর্টের সিমের লাইনে না দাঁড়িয়ে ঢাকা থেকেই সৌদি eSIM অ্যাক্টিভ করে যান।"
-                  : "Keep your Nusuk Rawdah permit QR code, Careem/Uber app, and family WhatsApp connected the moment your plane touches down in Jeddah."}
+                  ? "সৌদি আরবে পৌঁছানোর পর Nusuk অ্যাপ, ম্যাপ ও পরিবারের সাথে যোগাযোগের জন্য ঢাকা থেকেই আপনার ফোনের eSIM সাপোর্ট, কভারেজ ও মেয়াদ যাচাই করে ডাটা প্যাক নিতে পারেন।"
+                  : "Check device compatibility, coverage, and validity before departure so you have mobile data ready for Nusuk permits, navigation, and WhatsApp upon landing."}
               </p>
             </div>
             <div className="pt-2">
@@ -1124,7 +1192,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
       </section>
 
       {/* =====================================================================
-          8. CONTEXTUAL AIRHELP FLIGHT PROTECTION & DEEP-DIVE EDITORIAL GUIDES
+          8. CONTEXTUAL AIRHELP FLIGHT PROTECTION, CLUSTER DIRECTORY & SOURCES
       ===================================================================== */}
       <AirHelpWidget
         lang={lang}
@@ -1152,17 +1220,17 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             className="block bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl p-6 space-y-2 cursor-pointer transition-colors"
           >
             <span className="text-xs font-mono text-brand-navy font-semibold">
-              {isBn ? "বিস্তারিত গাইড ০১" : "In-Depth Playbook 01"}
+              {isBn ? "বিস্তারিত গাইড ০১ · মূল প্রক্রিয়া গাইড" : "In-Depth Playbook 01 · Main Process Guide"}
             </span>
             <h3 className="ural-card-title font-serif text-lg font-bold text-slate-900">
               {isBn
-                ? "বাংলাদেশ থেকে ওমরাহ ও হজ্জ গাইড ২০২৬: Nusuk অ্যাপ, ই-ভিসা ও সম্পূর্ণ BDT বাজেট"
-                : "Umrah & Hajj Guide from Bangladesh 2026: Nusuk App, e-Visa & BDT Cost Breakdown"}
+                ? "বাংলাদেশ থেকে DIY Umrah: Nusuk ও ভিসা রুট এবং BDT বাজেট (২০২৬–২৭)"
+                : "DIY Umrah from Bangladesh: Nusuk & Visa Routes, BDT Budget (2026–27)"}
             </h3>
             <p className="text-xs text-slate-600">
               {isBn
-                ? "ধাপে ধাপে ভিসার পথ, Nusuk পারমিট ধাপ ও তারিখসহ ১০ দিনের পরিকল্পনা অনুমান পড়ুন →"
-                : "Read the step-by-step visa pathways, Nusuk permit steps and the dated 10-day planning estimate →"}
+                ? "১৪ অক্টোবর ২০২৬ তারিখে যাচাইকৃত ২৩টি অফিসিয়াল সোর্সসহ ৩টি ভিসা ক্যাটাগরি, ১৪৪৮ হিজরি ক্যালেন্ডার, Haramain ট্রেন এবং ১০ দিনের বাজেট রেফারেন্স পড়ুন →"
+                : "Read the verified step-by-step guide with 23 official sources covering all 3 visa categories, the 1448H calendar, Haramain rail fares, and the 10-day planning reference →"}
             </p>
           </a>
 
@@ -1175,17 +1243,17 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             className="block bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl p-6 space-y-2 cursor-pointer transition-colors"
           >
             <span className="text-xs font-mono text-brand-navy font-semibold">
-              {isBn ? "বিস্তারিত গাইড ০২" : "In-Depth Playbook 02"}
+              {isBn ? "বিস্তারিত গাইড ০২ · হোটেল ও ট্রেন" : "In-Depth Playbook 02 · Hotels & Rail"}
             </span>
             <h3 className="ural-card-title font-serif text-lg font-bold text-slate-900">
               {isBn
-                ? "মক্কা ও মদিনার সেরা হোটেল জোন গাইড এবং Haramain High-Speed Train টিউটোরিয়াল"
+                ? "মক্কা ও মদিনার হোটেল জোন গাইড এবং Haramain High-Speed Train টিউটোরিয়াল"
                 : "Makkah & Madinah Hotel Zones + Haramain High-Speed Train Guide for Bangladeshis"}
             </h3>
             <p className="text-xs text-slate-600">
               {isBn
-                ? "হোটেল জোন, হোটেলের সাথে যা যাচাই করবেন এবং Haramain ট্রেন টিকিট বুকিং শিখুন →"
-                : "Learn the hotel zones, what to verify with each hotel, and how to book the Haramain train →"}
+                ? "মক্কা-মদিনার এলাকাভিত্তিক হোটেল তুলনা, হুইলচেয়ার অ্যাক্সেস যাচাই এবং Haramain বুলেট ট্রেন বুকিংয়ের নিয়ম পড়ুন →"
+                : "Compare Makkah and Madinah hotel neighborhoods, accessibility checks, and official Haramain High-Speed Railway booking rules →"}
             </p>
           </a>
         </div>
@@ -1364,6 +1432,100 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         </div>
       </section>
 
+      {/* Verified Primary Official Sources & Portals (Checked 14 October 2026) */}
+      <section
+        id="umrah-official-sources"
+        className="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-4"
+      >
+        <div className="space-y-1">
+          <span className="text-xs font-mono font-semibold text-brand-navy">
+            {isBn
+              ? "অফিসিয়াল সোর্স ও সরকারি পোর্টাল (যাচাইয়ের তারিখ: ১৪ অক্টোবর ২০২৬)"
+              : "Verified Official Sources & Portals (Checked 14 October 2026)"}
+          </span>
+          <h2 className="ural-section-title font-serif text-lg sm:text-xl font-bold text-slate-900">
+            {isBn
+              ? "ভিসা, Nusuk, স্বাস্থ্যবিধি, Haramain ট্রেন ও হজ্জ নিবন্ধনের প্রাথমিক উৎসসমূহ"
+              : "Primary Government, Airline & Rail Portals Used on This Hub"}
+          </h2>
+          <p className="text-xs text-slate-600">
+            {isBn
+              ? "মৌসুমভিত্তিক তারিখ, ভিসার শর্ত, ট্রেনের ভাড়া ও এয়ারলাইন্স ব্যাগেজ নিয়ম পরিবর্তনশীল। বুকিংয়ের আগে নিচের অফিসিয়াল পোর্টালগুলো থেকে সর্বশেষ তথ্য মিলিয়ে নিন:"
+              : "Seasonal calendars, visa rules, rail tariffs, and carrier baggage policies can change. Confirm live conditions directly on these official portals before booking:"}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+          {[
+            {
+              label: isBn
+                ? "১. সৌদি হজ ও ওমরাহ মন্ত্রণালয় — Nusuk Umrah ঘোষণা ও FAQ"
+                : "1. Saudi Ministry of Hajj & Umrah — Official FAQ & Nusuk Rules",
+              url: "https://haj.gov.sa/en/FAQ",
+            },
+            {
+              label: isBn
+                ? "২. Nusuk Umrah — বিদেশি যাত্রীদের সরাসরি নিবন্ধন"
+                : "2. Nusuk Umrah — Overseas Pilgrim Registration Portal",
+              url: "https://umrah.nusuk.sa/registration/signup",
+            },
+            {
+              label: isBn
+                ? "৩. সৌদি মন্ত্রণালয় — ১৪৪৮ হিজরি ওমরাহ মৌসুমের ক্যালেন্ডার"
+                : "3. Saudi Ministry — 1448H Umrah Season Calendar (2026–27)",
+              url: "https://haj.gov.sa/en/Media-Center/Ministry-News/2026/Ministry-of-Hajj-and-Umrah-Announces-the-Umrah-Season-Calendar-for-1448-AH",
+            },
+            {
+              label: isBn
+                ? "৪. Visit Saudi — ৯৬ ঘণ্টার Saudi Stopover Visa (Saudia / flynas)"
+                : "4. Visit Saudi — 96-Hour Stopover Visa Campaign & Rules",
+              url: "https://www.visitsaudi.com/en/campaigns/saudi-stopover",
+            },
+            {
+              label: isBn
+                ? "৫. Visit Saudi — বাংলাদেশি পাসপোর্টে Package Visa ও eVisa পোর্টাল"
+                : "5. Visit Saudi — Package Visa & Official eVisa Eligibility",
+              url: "https://www.visitsaudi.com/en/campaigns/package-visa",
+            },
+            {
+              label: isBn
+                ? "৬. Visit Saudi Help Center — ব্যবহৃত US/UK/Schengen ভিসা VOA শর্ত"
+                : "6. Visit Saudi Help Center — Used US/UK/Schengen Visa on Arrival",
+              url: "https://help.visitsaudi.com/hc/en-us/articles/360018933099-Can-I-get-a-visit-visa-if-I-have-a-valid-US-or-UK-or-Schengen-visa-",
+            },
+            {
+              label: isBn
+                ? "৭. Haramain High-Speed Railway — অফিসিয়াল ভাড়া ও ব্যাগেজ নিয়ম"
+                : "7. Haramain High-Speed Railway — Official Fares (SAR 65 / SAR 162 Base)",
+              url: "https://sar.hhr.sa/travel/fares",
+            },
+            {
+              label: isBn
+                ? "৮. সৌদি স্বাস্থ্য মন্ত্রণালয় (MOH) — ১৪৪৭ হিজরি ওমরাহ টিকা (ACYW) নিয়ম"
+                : "8. Saudi MOH — 1447H Umrah Health & ACYW Vaccine Regulations PDF",
+              url: "https://www.moh.gov.sa/en/HealthAwareness/Pilgrims-Health/Documents/Health-Regulations-Umrah-EN.pdf",
+            },
+            {
+              label: isBn
+                ? "৯. বাংলাদেশ হজ্জ ব্যবস্থাপনা পোর্টাল (hajj.gov.bd) ও SPA বিজ্ঞপ্তি"
+                : "9. Bangladesh Haj Portal (hajj.gov.bd) & SPA 1447H Permit Notice",
+              url: "https://www.hajj.gov.bd/",
+            },
+          ].map((src, idx) => (
+            <a
+              key={idx}
+              href={src.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white border border-slate-200 hover:border-brand-navy rounded-xl p-3 flex items-center justify-between gap-2 text-slate-700 hover:text-brand-navy transition-colors"
+            >
+              <span className="font-medium leading-snug">{src.label}</span>
+              <ExternalLink size={13} className="shrink-0 text-slate-400" />
+            </a>
+          ))}
+        </div>
+      </section>
+
       {/* =====================================================================
           9. VERIFIED FAQ SCHEMA SECTION
       ===================================================================== */}
@@ -1375,25 +1537,31 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         }
         quickAnswer={
           isBn
-            ? "বাংলাদেশি নাগরিকদের ফরজ হজ্জের জন্য ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ নিবন্ধন করতে হয়। ওমরাহ বর্তমান মৌসুমের ভিসা উইন্ডোর মধ্যে (১৪৪৮ হিজরি — প্রবেশ ২৩ মার্চ ২০২৭ পর্যন্ত; বর্তমান ক্যালেন্ডার যাচাই করুন) পরিকল্পনা করা যায়। ১০ দিনের DIY ওমরাহর (পরিবারের সাথে রুম শেয়ারিং) সংরক্ষিত পরিকল্পনা অনুমান জনপ্রতি ১,১৬,০০০–১,৩২,০০০ টাকা (১৪ অক্টোবর ২০২৬-এ যাচাইকৃত, লাইভ কোটেশন নয়) — ৯০ দিনের ওমরাহ ই-ভিসা বা যোগ্য ৯৬ ঘণ্টার Saudia/Flynas Stopover Visa, অফিশিয়াল Nusuk অ্যাপ এবং ভিসা যেখানে চায় সেখানে Saudi Visa Bio ব্যবহার করে।"
-            : "Bangladeshi citizens register via hajj.gov.bd for obligatory Hajj. Umrah can be planned independently within the current season's visa window (1448H — entry through 23 March 2027; check the current calendar), and a 10-day family-sharing trip has a retained planning estimate of BDT 1,16,000–1,32,000 per person (checked 14 October 2026, not a live quote) using an Umrah e-Visa or eligible 96-hour Saudia/Flynas Stopover Visa, the official Nusuk app, and Saudi Visa Bio where your visa requires biometrics."
+            ? "বাংলাদেশি নাগরিকদের ফরজ হজ্জের জন্য ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ নিবন্ধন করতে হয়। আর ওমরাহ পালনের জন্য ৩টি ভিসা ক্যাটাগরি রয়েছে: ১) স্ট্যান্ডার্ড ওমরাহ ভিসা (umrah.nusuk.sa বা হোটেল-ট্রান্সপোর্টসহ অনুমোদিত এজেন্ট), ২) Saudia বা flynas থ্রু-টিকিটে ৯৬ ঘণ্টার স্টপওভার ভিসা এবং ৩) যোগ্য Package Visa বা পূর্বে ব্যবহৃত বৈধ US/UK/Schengen ভিসাধারীদের ভিসা-অন-অ্যারাইভাল। ১০ দিনের (৪ জন শেয়ারিং) সংরক্ষিত প্ল্যানিং রেফারেন্স বাজেট জনপ্রতি BDT 1,16,000–1,32,000 (১৪ অক্টোবর ২০২৬; পুনঃমূল্যায়িত নয়—লাইভ কোটেশন নয়)।"
+            : "Bangladeshi citizens register via hajj.gov.bd for obligatory Fard Hajj. For Umrah, three eligible visa-route categories apply (checked 14 Oct 2026): (1) Standard Umrah Visa via umrah.nusuk.sa or an approved external agent bundling hotel and transport, (2) a 96-hour Saudia or flynas stopover visa, or (3) eligible Package Visa / used US, UK, or Schengen visa-on-arrival routes. Our preserved 10-day, 4-person sharing planning estimate is BDT 1,16,000–1,32,000 per person (unre-priced reference; not a live quote)."
         }
         keyFacts={[
           {
-            label: isBn ? "Umrah e-Visa ফি (সাধারণত)" : "Umrah e-Visa Fee (Typical)",
-            value: isBn ? "BDT ১৫,৫০০ – ১৯,৫০০ (বর্তমান ফি যাচাই করুন)" : "BDT 15,500 – 19,500 (verify current fee)",
+            label: isBn ? "১০ দিনের প্ল্যানিং রেফারেন্স" : "10-Day Planning Estimate",
+            value: isBn
+              ? "BDT 1,16,000–1,32,000 / জন (৪ জন শেয়ারিং, পুনঃমূল্যায়িত নয়)"
+              : "BDT 1,16,000–1,32,000 / Person (4-Sharing, Unre-Priced)",
           },
           {
-            label: isBn ? "১০ দিনের DIY অনুমান (অক্টো ২০২৬)" : "10-Day DIY Estimate (Oct 2026)",
-            value: isBn ? "BDT ১,১৬,০০০ – ১,৩২,০০০ / জন (লাইভ কোট নয়)" : "BDT 1,16,000 – 1,32,000 / person (not a quote)",
+            label: isBn ? "১৪৪৮ হিজরি ওমরাহ মৌসুম" : "1448H Season Window",
+            value: isBn ? "৩১ মে ২০২৬ – ৭ এপ্রিল ২০২৭ (haj.gov.sa)" : "31 May 2026 – 7 Apr 2027 (haj.gov.sa)",
           },
           {
-            label: isBn ? "মক্কা–মদিনা ট্রেন" : "Makkah–Madinah Rail",
-            value: isBn ? "Haramain রেল · sar.hhr.sa (লাইভ ভাড়া দেখুন)" : "Haramain Rail · sar.hhr.sa (check live fares)",
+            label: isBn ? "Haramain ট্রেন বেস ভাড়া" : "Haramain Rail Base Fare",
+            value: isBn
+              ? "JED–মক্কা SAR 65 · মক্কা–মদিনা SAR 162 (VAT বাদে, ১৪ অক্টো ২০২৬)"
+              : "JED–Makkah SAR 65 · Makkah–Madinah SAR 162 (Excl. VAT)",
           },
           {
-            label: isBn ? "BDT বুকিং হেল্পলাইন" : "BDT Booking Helpline",
-            value: "+8801784385335 (WhatsApp)",
+            label: isBn ? "বাধ্যতামূলক টিকা (MOH)" : "Mandatory Health Rule",
+            value: isBn
+              ? "ACYW মেনিনজাইটিস টিকা (ভ্রমণের ≥১০ দিন আগে)"
+              : "ACYW Meningococcal Vaccine (≥10 Days Prior)",
           },
         ]}
         faqs={localizedHajjFaqs}

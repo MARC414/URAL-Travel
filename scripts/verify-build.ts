@@ -2043,6 +2043,7 @@ const faqSlugs = [
   "travel-creator-resources",
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
   "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
+  "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
 ] as const;
 const faqCoverageIssues: string[] = [];
 for (const faqSlug of faqSlugs) {
@@ -2168,17 +2169,24 @@ for (const locale of ["en", "bn"] as const) {
       visibleText.includes(normalizeStructuredText(expectedTitle))
     );
   });
+  const portfolioMatches = EDITOR_PROFILE.portfolioUrl
+    ? author?.url === EDITOR_PROFILE.portfolioUrl &&
+      html.includes(EDITOR_PROFILE.portfolioUrl)
+    : author?.url === undefined && !html.includes("https://github.com/MARC414");
+  const sameAsMatches =
+    EDITOR_PROFILE.sameAs.length > 0
+      ? Array.isArray(author?.sameAs) &&
+        EDITOR_PROFILE.sameAs.every((url) => (author.sameAs as string[]).includes(url))
+      : author?.sameAs === undefined;
   if (
     !author ||
     author.name !== EDITOR_PROFILE.name ||
     author.description !== expectedBio ||
-    author.url !== EDITOR_PROFILE.portfolioUrl ||
-    !Array.isArray(author.sameAs) ||
-    !author.sameAs.includes(EDITOR_PROFILE.sameAs[0]) ||
+    !portfolioMatches ||
+    !sameAsMatches ||
     !EDITOR_PROFILE.alternateNames.every((name) => alternateNames.includes(name)) ||
     !worksMatch ||
-    !visibleText.includes(normalizeStructuredText(expectedBio)) ||
-    !html.includes(EDITOR_PROFILE.portfolioUrl)
+    !visibleText.includes(normalizeStructuredText(expectedBio))
   ) {
     authorBioIssues.push(locale);
   }

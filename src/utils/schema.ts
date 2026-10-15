@@ -84,8 +84,8 @@ export function parseAuthor(authorRaw?: string, inLanguage = "en-BD") {
           description: inLanguage.toLowerCase().startsWith("bn")
             ? profile.bioBn
             : profile.bioEn,
-          url: profile.portfolioUrl,
-          sameAs: profile.sameAs,
+          ...(profile.portfolioUrl ? { url: profile.portfolioUrl } : {}),
+          ...(profile.sameAs.length > 0 ? { sameAs: profile.sameAs } : {}),
           subjectOf: profile.creativeWorks.map((work) => ({
             "@type": "CreativeWork" as const,
             name: inLanguage.toLowerCase().startsWith("bn")

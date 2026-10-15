@@ -1500,187 +1500,80 @@ If you are booking from Bangladesh using an endorsed Dual-Currency card:
 2. At **08:00 AM UTC+8 on October 10**, apply code \`1010TOURS\` for tours, \`1010MOVE\` for transport, or \`1010TIX\` for attractions.
 3. Complete checkout immediately with your endorsed card before the promo quotas expire.
 4. Save your digital QR vouchers to Apple Wallet or Google Wallet for seamless offline presentation at Japan train gates and attraction turnstiles.`,
-  "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide": `India is the single most-visited country by Bangladeshi passport holders — and the cheapest, most culturally familiar international journey you can take from Dhaka. Kolkata, Shiliguri, Darjeeling, and Varanasi are all reachable overland. Here is the complete, verified 2026 picture: which trains are running (suspension status confirmed), how to cross the Benapole–Petrapole land border step by step, current India visa procedures, and a full BDT cost table so you can budget accurately.
+  "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide": `India is one of the most frequently visited international destinations for Bangladeshi passport holders, and the Dhaka–Kolkata overland corridor via Benapole–Petrapole is the primary road route. Cross-border passenger trains (Maitree Express, Bandhan Express, and Mitali Express) have been suspended since July 2024, with no confirmed restart timetable as of our 15 October 2026 review [1, 3]. While rail service remains on hold, travelers with a valid Indian sticker visa endorsed for the Haridaspur/Benapole checkpost use direct or split-leg buses across the Benapole–Petrapole land border. An indicative 3-day, 2-night overland Kolkata trip budget remains BDT 8,000–18,000 per person as a planning reference, not a live quote.
 
----
+This guide was reviewed against official rail, visa, tax, and land-port portals on 15 October 2026. Because cross-border rail resumption, IVAC appointment availability, border taxes, and operator fares can change without notice, verify live status on the cited official portals before booking non-refundable travel [1–10].
 
-## 1. Is the Maitree Express Running in 2026?
+1. Is the Maitree Express Running in 2026?
+No — cross-border passenger trains have been suspended since July 2024. The Maitree Express (Dhaka Cantonment–Kolkata Chitpur), Bandhan Express (Khulna–Kolkata), and Mitali Express (Dhaka–New Jalpaiguri) were all halted in mid-2024. As of 15 October 2026, neither Bangladesh Railway nor Indian Railways has published a confirmed resumption date or booking schedule. Check the official Bangladesh Railway portal (railway.gov.bd), the Bangladesh Railway e-ticketing service (eticket.railway.gov.bd), and Indian Railways (indianrailways.gov.in) before planning around train travel [1–3].
 
-**No — suspended since July 19, 2024.** The Maitree Express, Bandhan Express (Kolkata–Khulna), and Mitali Express (New Jalpaiguri–Dhaka) were all halted mid-2024 amid security concerns. As of October 2026, no official restart date has been confirmed by Bangladesh Railway or Indian Railways. Check the official Bangladesh Railway Western Route portal (railwayticket.bd) before planning around it.
+What Could Change: Padma Bridge Reroute Proposal:
+Railway officials have previously discussed routing the Dhaka–Kolkata passenger train over the Padma Bridge corridor instead of the longer Jamuna Bridge–Darsana alignment:
+- **Proposed journey time:** projected to drop from roughly 8–10 hours to around 6 hours if implemented.
+- **Fare & schedule status:** any Padma Bridge timetable or fare adjustment remains an unconfirmed proposal pending bilateral operational agreement [1, 3].
 
-### What Could Change: Padma Bridge Reroute Proposal
+2. Pre-Suspension Rail Fare Benchmarks (Planning Reference Only)
+While cross-border trains are suspended, historical rail tariffs help travelers compare overland transport against buses and flights. Distinguish between domestic Bangladesh Railway intercity fares to the border and international Maitree Express cross-border fares [1–3]:
+- **Maitree Express cross-border benchmark (suspended):** prior to suspension, international Dhaka Cantonment–Kolkata fares were pegged in USD (roughly USD 20 for AC Chair and USD 30 for AC Seat/Cabin before Bangladesh travel tax, VAT, and exchange-rate adjustments), issued through designated railway counters [1, 3].
+- **Domestic Bangladesh Railway intercity benchmark (Dhaka–Benapole route):** domestic intercity classes on the Bangladesh Railway network (such as Shovon Chair, Snigdha AC Chair, AC Seat, and AC Berth on eticket.railway.gov.bd) historically ranged from roughly BDT 319 to BDT 1,181 depending on seat class and route table, before any seasonal or tax revisions [1–2].
+- **Verification rule:** do not treat historical or domestic tariff figures as a live international ticket quote. Confirm current fares and counter rules on railway.gov.bd and indianrailways.gov.in if service resumes [1–3].
 
-India formally proposed in September 2024 that the Maitree Express use the Padma Bridge route instead of the previous Jamuna Bridge–Darsana corridor. If implemented:
-- **Journey time:** drops from ~8–10 hours to ~6 hours
-- **Fare:** could fall by approximately BDT 1,000 per ticket
+3. How to Cross the Benapole–Petrapole Land Border (Step by Step)
+Until cross-border passenger rail resumes, the Benapole (Jashore District, Bangladesh) to ICP Petrapole (North 24 Parganas, West Bengal, India) land crossing is the main overland passenger corridor between Dhaka and Kolkata [9–10]. Ensure your Indian visa explicitly allows entry and exit via **Haridaspur / Benapole** (or the matching endorsement printed on your visa sticker) [4–6].
 
-These are projections pending final operational agreement — not confirmed. We will update this article when Bangladesh Railway or Indian Railways issues a formal resumption announcement.
+Step 1: Travel from Dhaka to Benapole by Road
+Major bus operators run AC and non-AC coaches from Dhaka (Gabtoli, Kalyanpur, Arambagh, and Malibagh terminals) to Benapole via the Padma Bridge highway in roughly 4.5 to 6 hours, depending on traffic:
+- **Through-ticket cross-border operators (Green Line, Shyamoli, Desh Travels, Souhardo):** many operators sell coordinated Dhaka–Kolkata journeys where passengers change coaches at the Benapole–Petrapole border after completing immigration on foot.
+- **Split-leg booking:** travelers can also take a domestic bus from Dhaka to Benapole (indicative planning range: BDT 500–1,200 depending on non-AC vs AC coach class), cross the border independently, and board an onward bus or local train from Petrapole/Bongaon to Kolkata.
+- **Timing tip:** overnight buses leaving Dhaka late in the evening typically reach Benapole around dawn so passengers can join the morning immigration queue when the land port opens.
 
----
+Step 2: Complete Exit and Entry Formalities at Benapole–Petrapole
+For an outbound journey from Dhaka to Kolkata, you clear Bangladesh exit controls at Benapole first, walk across no-man's land, and then clear Indian entry controls at ICP Petrapole [8–10]:
+- **1. Bangladesh Exit — Benapole Land Port (Jashore):** enter the Benapole passenger terminal, pay the mandatory Bangladesh government land-border travel/departure tax at the designated bank/port counter (or through your bus operator's handling desk, which may add a small service charge; keep the official receipt), and present your passport, valid Indian visa, and occupational NOC/GO (if applicable) to Bangladesh Immigration Police for your exit stamp [8–9].
+- **2. No-Man's Land Walk:** walk roughly 200–500 meters between the Bangladesh and India passenger terminals with your luggage (authorized porters are available at posted port rates; agree on any fee before handing over bags) [9–10].
+- **3. India Entry — ICP Petrapole (West Bengal):** pass the Border Security Force (BSF) checkpoint, submit your passport, Indian visa, and arrival disembarkation slip at Indian Bureau of Immigration counters, and clear Indian Customs with your baggage [10].
+- **Border operating hours:** passenger immigration at Benapole–Petrapole generally operates during daytime hours (typically around 6:00 AM–6:00 PM local border schedule; confirm holiday or security adjustments before travel). Crossing between 7:00 AM and 10:00 AM usually avoids the heaviest midday queues [9–10].
 
-## 2. Maitree Express Pre-Suspension Fares (for planning — verify before travel)
+Step 3: Continue from Petrapole to Kolkata (or Return to Dhaka)
+- **Petrapole → Kolkata by bus:** connecting AC coaches operated by cross-border bus companies wait outside the Petrapole terminal for the roughly 3 to 4 hour drive to Kolkata Esplanade / Marquis Street (indicative local leg: INR 300–400, or included in a through-ticket of roughly INR 1,400–1,800 / BDT equivalent depending on operator and class).
+- **Petrapole → Bongaon → Kolkata Sealdah by suburban train:** budget travelers sometimes take an auto-rickshaw from Petrapole border to Bongaon Junction and ride the Eastern Railway suburban train to Kolkata Sealdah Station [3].
 
-Even though the train is suspended, the fare structure gives you a reliable benchmark for the land-corridor cost. Bangladesh Railway's official table (railwayticket.bd, updated October 2026 for WTT-54) shows:
+4. India Visa for Bangladeshi Passport Holders (IVAC Process & Caveats)
+Important caveat — live IVAC appointment availability was not measured in this 15 October 2026 review: Indian visa processing capacity and appointment slots for Bangladeshi citizens have fluctuated since 2024. While secondary travel reports in 2026 noted broader resumption of tourist-visa submissions across IVAC centers (Dhaka, Chattogram, Sylhet, Rajshahi, Khulna), the official IVAC Bangladesh portal (ivacbd.com) and High Commission of India Dhaka (hcidhaka.gov.in) notices remain the sole authority on current slot availability and eligible categories [4–7].
+- **No Indian e-Visa for Bangladeshi passports:** ordinary Bangladeshi passport holders are not eligible for the Indian e-Visa and must apply for a physical sticker visa through the IVAC process [4–6].
+- **Visa fee vs IVAC processing charge:** under bilateral arrangements, the Government of India does not charge a visa fee for Bangladeshi nationals, while IVAC Bangladesh collects a mandatory Visa Processing Fee (historically published around BDT 800–1,500 plus digital payment charges depending on center and current notice; confirm the exact fee on ivacbd.com before paying) [4–5].
+- **Checkpost endorsement:** when filling out the online application at indianvisa-bangladesh.nic.in, select the correct entry/exit checkpost (such as **Haridaspur** for the Benapole–Petrapole land border, and/or **By Air** if you may fly one way) [5–6].
 
-| Seat Class | Code | BDT (1 Oct 2026) | BDT (from 10 Nov 2026) |
-|---|---|---|---|
-| Shovon (non-AC bench) | SHOVAN | ৳206 | ৳206 |
-| Shovon Chair | S_CHAIR | ৳319 | ৳319 |
-| First Class Chair | F_CHAIR | ৳506 | ৳506 |
-| Snigdha (AC Chair) | SNIGDHA | ৳656 | ৳656 |
-| AC Seat | AC_S | ৳788 | BDT 900 (est.) |
-| AC Berth (Sleeper) | AC_B | ৳1,181 | BDT 1,181 |
+Step-by-Step IVAC Sticker Visa Application:
+- **Step 1 — Online application:** complete and print the official Indian Visa Application form at indianvisa-bangladesh.nic.in with a recent 2×2 inch white-background photo [6].
+- **Step 2 — IVAC fee & appointment:** pay the IVAC processing fee online and book an appointment slot for your jurisdiction at ivacbd.com (walk-in submissions without an appointment are generally not accepted) [4].
+- **Step 3 — Document checklist:** prepare your original passport (at least 6 months validity and 2 blank pages) plus all old passports, NID copy, recent utility bill (address proof), 3–6 month bank statement or passport dollar endorsement (minimum USD 150 per official checklist rules; see our Dual-Currency Card Endorsement Guide), occupational proof (employer NOC, GO, trade license, or student ID), and itinerary details [5].
+- **Step 4 — Biometrics & passport collection:** submit your file and biometrics at the selected IVAC center and track passport return status on ivacbd.com [4].
 
-**Note:** Bangladesh Railway announced a fare increase of up to BDT 150 per ticket from November 10, 2026, due to travel tax and USD exchange rate changes. AC Seat fare is estimated; verify the exact new rate at railwayticket.bd.
+5. Indicative 3-Day Kolkata Overland Budget in BDT (Planning Reference)
+The budget table below preserves the article's 3-day, 2-night overland planning estimate of **BDT 8,000–18,000 per person** from Dhaka via Benapole–Petrapole. It was not re-priced from live operator or hotel checkouts on 15 October 2026; treat it as an indicative planning model rather than a live quote, as actual costs depend on coach class, NBR travel-tax rate, INR/BDT exchange rate, and hotel dates:
+- **Roundtrip overland transport (Dhaka ↔ Benapole/Petrapole ↔ Kolkata by bus):** roughly BDT 3,500–5,500 (budget split-leg / non-AC to standard AC) or BDT 5,500–7,500 (premium through-coach AC sleeper/business class).
+- **IVAC visa processing fee & Bangladesh land-border travel tax:** roughly BDT 1,800–2,500 combined (subject to current ivacbd.com processing fee schedule and NBR Finance Act land-border travel tax rate at Benapole) [4, 8].
+- **Kolkata accommodation (2 nights, Sudder Street / Esplanade / New Market area):** roughly BDT 1,500–3,000 (budget guesthouse or shared room) or BDT 4,000–6,000 (comfortable mid-range AC hotel, per person sharing).
+- **Meals, local Kolkata metro/taxi transit & basic sightseeing (3 days):** roughly BDT 1,200–2,000 (budget) or BDT 3,500–4,500 (comfortable).
+- **Indicative 3-day overland total (per person):** **BDT 8,000–12,000 (Budget tier)** to **BDT 15,000–18,000 (Comfortable tier)**. Excludes shopping, medical consultations, intercity Indian rail beyond Kolkata, and emergency buffer funds.
 
-On the Indian side, the approved cross-border fare was approximately USD 30 for an AC seat and USD 20 for an AC chair. Bookings were made at indianrailways.gov.in or through Bangladeshi agents.
+6. Dhaka–Kolkata by Air: When Flying Makes Sense
+When cross-border trains are suspended or you want to avoid an overnight road journey and border walk, direct flights between Hazrat Shahjalal International Airport, Dhaka (DAC) and Netaji Subhas Chandra Bose International Airport, Kolkata (CCU) take about 1 hour 10 minutes. Indicative historical one-way economy fares often start around BDT 6,500–12,000 before seasonal peaks and baggage add-ons on carriers such as Biman Bangladesh Airlines, US-Bangla Airlines, and IndiGo. Because airfares and cabin/checked baggage rules change daily, compare live date-specific fares on our Global Flight Search & Fare Benchmark hub (/flights) and confirm that your Indian visa allows entry **By Air** [5–6].
 
----
-
-## 3. How to Cross the Benapole–Petrapole Land Border (Step by Step)
-
-Until the Maitree Express resumes, the Benapole–Petrapole land border crossing is the practical overland route between Bangladesh and India.
-
-**Key fact:** Bangladeshi citizens pay a **BDT 300 departure tax** when exiting Bangladesh by road at Benapole. This is collected at the border and must be paid before crossing.
-
-### Step 1: Get to the Benapole Border from Bangladesh
-
-From Dhaka, multiple bus operators run directly to the Benapole border:
-- **Green Line Paribahan:** Kolkata Esplanade (Marquis Street) → Benapole (INR 350 per person, ~3.5 hours); Dhaka → Benapole (BDT 400–600)
-- **Shyamoli Paribahan:** Kolkata → Benapole (INR 300 per person); Dhaka → Benapole (BDT 400–600)
-- **SADHUS / Desh Travels:** Kolkata → Benapole (INR 280–300 per person)
-
-Tickets can be booked at bus operator offices near Sudder Street and Esplanade in Kolkata, or at Benapole bus stands on the Bangladesh side.
-
-From Dhaka, buses depart from Gabtoli, Arambagh (Sadarghat), and Kalyanpur terminals. Most direct Dhaka–Kolkata buses depart in the evening and arrive at Benapole around midnight, crossing the border in the early morning.
-
-### Step 2: Cross the Border
-
-**India side — Petrapole (West Bengal):**
-1. Exit the bus at the Petrapole terminal.
-2. Present your passport and Indian visa to BSF (Border Security Force) officers at the immigration counter.
-3. Complete customs declaration if carrying dutiable goods.
-
-**No-man's land:** A short walk of approximately 200–500 meters connects the Indian and Bangladeshi immigration buildings.
-
-**Bangladesh side — Benapole (Jessore District):**
-1. Enter the Benapole Immigration Hall.
-2. Present your Bangladesh passport or NID (for returning citizens).
-3. Pay the **BDT 300 departure tax** at the designated counter (bus operators sometimes collect this on your behalf for a small convenience fee of BDT 50–150).
-4. Collect your exit stamp and proceed.
-
-**Border hours:** Typically 8:00 AM to 6:00 PM IST (Indian Standard Time). Crossing is fastest in early morning (8:00–10:00 AM) to avoid queues.
-
-### Step 3: Continue to Kolkata or Dhaka
-
-**Benapole → Kolkata by bus:** Green Line and Shyamoli buses meet arriving passengers on the Bangladesh side for the continuation to Kolkata (INR 1,400–1,500 total ticket) or Khulna/Jessore.
-
-**Benapole → Dhaka by bus:** Buses depart from the Benapole bus stand throughout the day. Journey time is approximately 4–5 hours via the Padma Bridge route (opened December 2024), significantly faster than the pre-bridge journey of 8–10 hours.
-
----
-
-## 4. India Visa for Bangladeshi Passport Holders (2026)
-
-**Important caveat — not measured from live IVAC system:** The information below is synthesized from secondary travel sources (Tripzic, goFLY) and the IVAC Bangladesh portal (ivacbd.com). We have not accessed the live IVAC appointment system or confirmed real-time processing status.
-
-**What sources report:**
-- India resumed tourist visa processing for Bangladeshi nationals from **June 28, 2026** (per Tripzic, October 2026; goFLY, October 2026).
-- IVAC centres in Dhaka, Chittagong, Sylhet, Rajshahi, and Khulna resumed services.
-- The Indian visa itself is **free** for Bangladeshi nationals under bilateral agreement.
-- The IVAC service charge is **BDT 1,500** (all-inclusive; no separate government fee).
-
-**What ivacbd.com currently states (as of research date):**
-IVAC Bangladesh (ivacbd.com) carries advisories noting it is currently processing "limited" visas of an "emergency and humanitarian nature." This may indicate that appointment slots remain restricted even after the June 2026 reopening.
-
-**⚠️ Verify current status directly at [ivacbd.com](https://www.ivacbd.com) before making travel plans.** IVAC processes applications by appointment only; walk-ins are not accepted.
-
-**Indian e-Visa is NOT available for Bangladeshi passport holders.** You must apply through the IVAC sticker visa process.
-
-### How to Apply for an Indian Visa from Bangladesh
-
-1. **Fill the online form** at [indianvisa-bangladesh.nic.in](https://indianvisa-bangladesh.nic.in) — mandatory for all categories.
-2. **Book an IVAC appointment** for your nearest centre (Dhaka, Chittagong, Sylhet, Rajshahi, Khulna) at [ivacbd.com](https://www.ivacbd.com).
-3. **Prepare documents:** valid passport (min. 6 months, 2 blank pages), NID, 2×2 colour photo, bank statement (3 months), employment/sponsorship letter, proof of travel.
-4. **Submit at IVAC** with biometrics; pay the BDT 1,500 service charge.
-5. **Track status** at ivacbd.com using your Application ID and passport number.
-6. **Collect passport** with sticker visa (typically 4–7 working days).
-
-**Documents needed for Indian tourist visa from Bangladesh (summarized from ivacbd.com and ivacbd.com/kind-of-visas-documents):**
-- Passport (original, min. 6 months validity, 2 blank pages) + all old passports
-- NID card copy + utility bill (proof of Bangladesh residence)
-- 2×2 colour photo (white background, less than 3 months old)
-- Bank statement (3–6 months) or international travel card endorsement (USD 150 minimum)
-- Employment letter or student ID
-- Confirmed return ticket and hotel booking
-- Online visa application form printout
-
----
-
-## 5. Complete BDT Cost Table: Dhaka–Kolkata by Land
-
-### Option A: Maitree Express (when resumed — verify status)
-
-| Item | Cost |
-|---|---|
-| Dhaka Cant → Kolkata (AC Chair, Snigdha) | ৳656 |
-| Dhaka Cant → Kolkata (AC Seat) | ৳788–৳900 (post Nov 10, 2026) |
-| Dhaka Cant → Kolkata (AC Berth/Sleeper) | ৳1,181 |
-| Indian side cross-border supplement | ~USD 20–30 |
-| Bangladesh departure tax (Benapole) | ৳300 |
-| Indian visa (IVAC service charge) | ৳1,500 |
-| **Estimated total one-way (AC Chair)** | **৳3,000–৳3,500** |
-
-### Option B: Bus via Benapole (currently operating)
-
-| Item | Cost |
-|---|---|
-| Dhaka → Benapole bus | ৳400–600 |
-| Benapole departure tax | ৳300 |
-| Petrapole–Kolkata bus (Green Line/Shyamoli) | INR 300–350 (~৳400–500) |
-| Indian visa (IVAC service charge) | ৳1,500 |
-| Kolkata → Dhaka return bus | INR 1,400–1,500 + ৳400–600 |
-| **Estimated total roundtrip (budget bus)** | **৳5,000–৳7,000** |
-
-### 3-Day Kolkata Trip Budget (Land Route)
-
-| Category | Budget | Comfortable |
-|---|---|---|
-| Roundtrip transport (bus) | ৳5,000–৳7,000 | ৳8,000–৳10,000 |
-| India visa (IVAC charge) | ৳1,500 | ৳1,500 |
-| Accommodation (2 nights) | ৳1,500–৳3,000 | ৳4,000–৳8,000 |
-| Food & meals | ৳2,000–৳3,500 | ৳4,000–৳6,000 |
-| Sightseeing / local transport | ৳500–৳1,000 | ৳1,500–৳3,000 |
-| **Total** | **৳8,000–৳12,000** | **৳15,000–৳18,000** |
-
----
-
-## 6. Dhaka–Kolkata by Air: Quick Comparison
-
-If the land route feels complex or the Maitree Express is not running, flying is straightforward. Direct flights from Dhaka (DAC) to Kolkata (CCU) take 1 hour 10 minutes. One-way fares range from BDT 6,500 (basic economy) to BDT 12,000 (flex economy) on Biman Bangladesh Airlines, IndiGo, and SpiceJet. Air travel is significantly faster but costs 2–3× more than the land route.
-
-Use the [URAL flight search](https://ural-travel.pages.dev/flights) to compare live fares across all airlines for your dates.
-
----
-
-## 7. FAQ: Dhaka–Kolkata Land Route
-
-**Is the Maitree Express running in 2026?**
-No. The Maitree Express, Bandhan Express, and Mitali Express have been suspended since mid-2024. Bangladesh Railway and Indian Railways have discussed rerouting via the Padma Bridge, which could reduce travel time to 6 hours, but no resumption has been confirmed as of October 2026.
-
-**Is India visa available for Bangladeshis in 2026?**
-India resumed tourist visa processing for Bangladeshis reportedly from June 28, 2026, through IVAC centres. However, IVAC advisories on ivacbd.com indicate limited processing capacity. Verify current appointment availability directly at ivacbd.com before making travel plans. Indian e-Visa is not available for Bangladeshi passport holders.
-
-**How much does the India visa cost for Bangladeshis?**
-The Indian visa itself is free for Bangladeshi nationals. The IVAC Bangladesh service charge is BDT 1,500 (all-inclusive). No separate government fee applies.
-
-**How much is the Bangladesh departure tax at Benapole?**
-BDT 300, payable at the Benapole Immigration Hall before crossing into India. Bus operators may collect this on your behalf with a small convenience fee of BDT 50–150.
-
-**What is the cheapest way to travel from Dhaka to Kolkata?**
-The bus route via Benapole–Petrapole is the cheapest option at approximately BDT 5,000–৳7,000 roundtrip including visa and border tax. Flying costs approximately BDT 13,000–24,000 roundtrip.
-
-**Can I cross into India from Bangladesh by land?**
-Yes, via the Benapole–Petrapole border crossing in Jessore District, which is open for passenger traffic. All other Bangladesh–India land borders are closed to foreign nationals.`,
+7. Frequently Asked Questions
+Is the Maitree Express running between Dhaka and Kolkata in 2026?
+No. The Maitree Express, Bandhan Express, and Mitali Express have been suspended since July 2024. As of 15 October 2026, no official restart date has been confirmed; check railway.gov.bd, eticket.railway.gov.bd, and indianrailways.gov.in for official resumption notices [1–3].
+Can Bangladeshi passport holders apply for an Indian e-Visa?
+No. Ordinary Bangladeshi passport holders are not eligible for the Indian e-Visa and must apply for a sticker visa using the online form at indianvisa-bangladesh.nic.in and an appointment at IVAC Bangladesh (ivacbd.com) [4–6].
+How much does an Indian tourist visa cost from Bangladesh?
+Under bilateral arrangements, there is no Indian government visa fee for Bangladeshi citizens, but applicants pay a mandatory IVAC Visa Processing Fee (historically around BDT 800–1,500 plus payment charges depending on center and current notice). Confirm the live fee and slot availability on ivacbd.com before applying [4–5].
+What is the crossing order at the Benapole–Petrapole land border from Dhaka?
+Traveling from Dhaka to Kolkata, you first complete Bangladesh exit immigration and pay the mandatory Bangladesh land-border travel tax at Benapole Land Port, walk across the 200–500 meter no-man's land corridor, and then complete Indian BSF, immigration, and customs formalities at ICP Petrapole [8–10].
+What is the indicative budget for a 3-day Dhaka to Kolkata overland trip?
+An indicative 3-day, 2-night overland trip by bus via Benapole–Petrapole ranges from roughly BDT 8,000–12,000 per person (budget tier) to BDT 15,000–18,000 per person (comfortable AC tier), including roundtrip bus transport, IVAC processing fee, border tax, two hotel nights, and meals. Treat this as a planning reference, not a live quote.
+Which land border should be endorsed on my Indian visa for Dhaka–Kolkata travel?
+The Benapole–Petrapole corridor corresponds to the Haridaspur / Benapole checkpost endorsement on an Indian visa. Always verify that the entry and exit points printed on your visa sticker match your planned land or air route before departure [4–6, 9–10].`,
 };
 
 /** Look up one body by slug; undefined for an unknown slug. */

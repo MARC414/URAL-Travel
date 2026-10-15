@@ -44,7 +44,7 @@ import {
 import { FlightRoute, HotelGuide, VisaGuide, DestinationGuide, TripCostData, BlogPost } from "./types";
 
 // Database Constants
-import { BLOG_POST_COUNT, BLOG_SLUGS } from "./data/blogIndex";
+import { BLOG_SLUGS } from "./data/blogIndex";
 
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
@@ -508,6 +508,7 @@ const dhakaAirlinesTarmacImg = "/assets/images/dhaka_airport_widebody_airlines_t
 // Every blog post is mapped to its own unique visual asset (zero repeated images).
 const havanaGranTeatroImg = "/assets/images/havana_gran_teatro_classic_cars_1791427200000-1200.webp";
 const chefchaouenFountainImg = "/assets/images/chefchaouen_blue_fountain_alley_1791427400000-1200.webp";
+const dhakaKolkataBorderTrainImg = "/assets/images/dhaka_kolkata_benapole_border_train_1791500000000-1200.webp";
 
 function getBlogCoverImage(slug: string): string {
   switch (slug) {
@@ -599,6 +600,8 @@ function getBlogCoverImage(slug: string): string {
       return chefchaouenFountainImg;
     case "kkday-10-10-winter-sale-japan-tours-passes-guide":
       return parisLouvreLandmarksImg;
+    case "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide":
+      return dhakaKolkataBorderTrainImg;
     default:
       return heroBgImage;
   }
@@ -697,6 +700,8 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
       "Travel creator resources that work in 2026: start with one free monetization hub (Travelpayouts), free SEO tools like Google Search Console and Trends, honest phone photography with real alt text, trusted research sources like Seat61 and embassy pages, and a realistic workflow - publish honest articles one at a time and disclose every affiliate link.",
     "kkday-10-10-winter-sale-japan-tours-passes-guide":
       "Claim 30% off with promo codes 1010TOURS (Hokkaido ski & day tours), 1010MOVE (Keisei Skyliner, Nankai Rapi:t, Tokyo Metro), and 1010TIX (Universal Studios Japan, Tokyo Disney, SHIBUYA SKY) during KKday's 10.10 Winter Sale launching October 10 at 08:00 AM UTC+8 with dual-currency card checkout.",
+    "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide":
+      "Cross-border passenger trains (Maitree, Bandhan, and Mitali Express) have been suspended since July 2024; check railway.gov.bd and indianrailways.gov.in for any restart notice. For overland travel via Benapole–Petrapole, Bangladeshi travelers need an IVAC sticker visa (ivacbd.com; no e-Visa) and can plan around an indicative 3-day Kolkata budget of BDT 8,000–18,000.",
   };
 
   const snippetsBn: Record<string, string> = {
@@ -792,6 +797,8 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
       "২০২৬ সালের কার্যকর ট্রাভেল ক্রিয়েটর রিসোর্সেস: একটিমাত্র ফ্রি মনিটাইজেশন হাব (Travelpayouts), Google Search Console ও Trends-এর মতো ফ্রি SEO টুল, আসল অল্ট টেক্সটসহ সৎ ফোন ফটোগ্রাফি, Seat61 ও দূতাবাসের পেজের মতো বিশ্বস্ত রিসার্স সোর্স এবং বাস্তব ওয়ার্কফ্লো - একটি করে সৎ আর্টিকেল প্রকাশ করুন এবং প্রতিটি অ্যাফিলিয়েট লিংক প্রকাশ করুন।",
     "kkday-10-10-winter-sale-japan-tours-passes-guide":
       "KKday-র ১০.১০ উইন্টার সেল শুরু হচ্ছে ১০ অক্টোবর সকাল ৮:০০ (UTC+8)-এ। প্রোমো কোড 1010TOURS (হোক্কাইডো স্কি ও ডে-ট্যুর), 1010MOVE (Keisei Skyliner, Nankai Rapi:t, মেট্রো) ও 1010TIX (USJ, টোকিও ডিজনি, শিবুয়া স্কাই) ব্যবহার করে ৩০% ফ্ল্যাশ ছাড় নিন।",
+    "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide":
+      "জুলাই ২০২৪ থেকে মৈত্রী, বন্ধন ও মিতালি এক্সপ্রেস স্থগিত; পুনরায় চালুর বিজ্ঞপ্তির জন্য railway.gov.bd ও indianrailways.gov.in দেখুন। বেনাপোল–পেট্রাপোল স্থলপথে ভ্রমণের জন্য বাংলাদেশি পাসপোর্টধারীদের IVAC স্টিকার ভিসা (ivacbd.com; e-Visa নেই) লাগে এবং ৩ দিনের কলকাতা ভ্রমণের আনুমানিক পরিকল্পনা বাজেট BDT 8,000–18,000।",
   };
 
   const map = isBn ? snippetsBn : snippetsEn;
@@ -933,15 +940,17 @@ function AuthorBioCard({
             </div>
           )}
         </div>
-        <a
-          href={profile.portfolioUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex shrink-0 items-center gap-1.5 self-start text-sm font-semibold text-brand-navy underline decoration-brand-gold underline-offset-4 hover:text-brand-emerald"
-        >
-          {isBengali ? "পেশাগত পোর্টফোলিও দেখুন" : "View professional portfolio"}
-          <ExternalLink size={13} aria-hidden="true" />
-        </a>
+        {profile.portfolioUrl && (
+          <a
+            href={profile.portfolioUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center gap-1.5 self-start text-sm font-semibold text-brand-navy underline decoration-brand-gold underline-offset-4 hover:text-brand-emerald"
+          >
+            {isBengali ? "পেশাগত পোর্টফোলিও দেখুন" : "View professional portfolio"}
+            <ExternalLink size={13} aria-hidden="true" />
+          </a>
+        )}
       </div>
     </aside>
   );
@@ -1082,9 +1091,6 @@ export default function App() {
 
   const t = translations[lang];
   const isBn = lang === "bn";
-  const blogPostCount = isBn && bnContent
-    ? bnContent.getLocalizedBlogs(lang).length
-    : BLOG_POST_COUNT;
   const localizedHajjFaqs = isBn && bnContent ? bnContent.getLocalizedHajjFaqs(lang) : HAJJ_UMRAH_FAQS;
   const featuredGrowthTopics =
     isBn && bnContent ? bnContent.getFeaturedGrowthTopics(lang) : ENGLISH_FEATURED_GROWTH_TOPICS;
@@ -3216,13 +3222,13 @@ export default function App() {
                       id: "research" as const,
                       title: isBn ? "ট্রাভেল ব্লগ ও BDT বাজেট হিসাব" : "Blog Guides & BDT Trip Budgets",
                       subtitle: isBn
-                        ? `${blogPostCount}টি বিস্তারিত গাইড · ৫ দিনের খরচ`
-                        : `${blogPostCount} in-depth guides · 5-day BDT sheets`,
+                        ? "বিস্তারিত গাইড · ৫ দিনের খরচ"
+                        : "In-depth guides · 5-day BDT sheets",
                       isActiveGroup: ["blog", "costs"].includes(section),
                       primaryLinks: [
                         {
                           id: "blog",
-                          label: isBn ? `সবগুলো ট্রাভেল ব্লগ (${blogPostCount})` : `All Travel Blog Guides (${blogPostCount})`,
+                          label: isBn ? "সবগুলো ট্রাভেল ব্লগ" : "All Travel Blog Guides",
                           meta: isBn ? "ওমরাহ, কার্ড এন্ডোর্সমেন্ট ও ইমিগ্রেশন" : "Umrah, Card Endorsement & Visas",
                           path: "/blog",
                         },
@@ -4401,8 +4407,8 @@ export default function App() {
             >
               <span>
                 {isBn
-                  ? `সবগুলো ব্লগ দেখুন (${blogPostCount})`
-                  : `View All ${blogPostCount} Blogs`}
+                  ? "সবগুলো ব্লগ দেখুন"
+                  : "View All Blogs"}
               </span>
               <ArrowRight size={13} className="text-[#F6B73C]" />
             </button>
@@ -5040,7 +5046,7 @@ export default function App() {
                 <li><a href={getLocalizedRouteHref("/destinations")} onClick={(event) => handleNavigationAnchorClick(event, "/destinations")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "দেশভিত্তিক ইটিনারারি" : "Country itineraries & tips"}</a></li>
                 <li><a href={getLocalizedRouteHref("/experiences")} onClick={(event) => handleNavigationAnchorClick(event, "/experiences")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "অ্যাট্রাকশন পাস ও অভিজ্ঞতা" : "Attraction passes & experiences"}</a></li>
                 <li><a href={getLocalizedRouteHref("/tools")} onClick={(event) => handleNavigationAnchorClick(event, "/tools")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ট্রাভেল ক্যালকুলেটর ও টুলস" : "Travel calculators & tools"}</a></li>
-                <li><a href={getLocalizedRouteHref("/blog")} onClick={(event) => handleNavigationAnchorClick(event, "/blog")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? `সব ${blogPostCount}টি ট্রাভেল গাইড →` : `All ${blogPostCount} travel guides →`}</a></li>
+                <li><a href={getLocalizedRouteHref("/blog")} onClick={(event) => handleNavigationAnchorClick(event, "/blog")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সব ট্রাভেল গাইড →" : "All travel guides →"}</a></li>
               </ul>
             </div>
 

@@ -7,21 +7,19 @@
 > **Reconstruction note:** the previous session's `CONTENT-QUEUE.md` was not in the checkout and its commit was unavailable. This queue and its row format are reconstructed from the current repository conventions and task brief.
 
 > **Active execution order — 15 October 2026.** The **Umrah cluster** is the rollout in progress
-> ([`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md)); the row below is its current gate. **Fard Hajj stays a
-> separate, linked topic**, not an Umrah child. **No India row is queued**, regardless of how
-> [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md) §6/§12 numbers its sprints — a cluster opens here first,
-> with its own row.
+> ([`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md)); its row below remains the active cluster gate. **Fard Hajj stays a
+> separate, linked topic**, not an Umrah child. **The India cluster as a multi-page wave remains deferred**, regardless of how
+> [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md) §6/§12 numbers its sprints.
 >
-> **Unqueued India page on the repository (reported 15 October 2026).** The merged branch
-> `docs/content-strategy-topical-authority` (PR #37) added
-> `/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` — English and Bengali — to `src/constants.ts`,
-> `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, and `src/data/blogIndex.ts`. It was merged with no
-> queue row, no Stage 2 claims ledger, and no `references`. It is a real published route now, so:
-> *add the row and complete Stages 1–9 (claims ledger included) before promoting, expanding, or linking it from
-> a hub*; treat its live status as shipped-but-unreviewed rather than as this cluster opening. Two of its
-> English `internalLinks` also point at `/blog` while the anchor text promises named guides that do not exist
-> yet, and its `date`/`CONTENT_UPDATED` relationship was never checked — both are review items, not findings
-> that the page is wrong.
+> **Post-hoc review of the published India land-corridor article (completed 15 October 2026).** PR #37 merged
+> `/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` (English and Bengali) without a queue row,
+> claims ledger, or `references`, and with two phantom `/blog` internal links. Per owner instruction on
+> 15 October 2026 (*"Publish, then review it — fix the two phantom links, add references, and give it a proper
+> queue row"*), the page now has its worked queue row and Stage 2–9 review record below: the two phantom
+> `/blog` links are replaced with live routes, 10 bilingual official references are attached, raw markdown
+> pipes/hashes/links and the stray German token (`weitersetzen`) are cleaned for URAL's renderer, and live
+> rail/IVAC/fare claims are qualified against official portals. This review stabilizes the single shipped page;
+> it does **not** open Sprint 1 or supersede the Umrah cluster rollout.
 
 ---
 
@@ -159,6 +157,63 @@
 
 ---
 
+## Worked queue row — Dhaka–Kolkata land-corridor post-hoc review (`blog-48`)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-15 | **REVIEW & QUALIFY IN PLACE — owner selected post-deploy review; keep `blog-48` published, replace the two phantom `/blog` links, add official references, and record the claims ledger.** | `/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` | `/bn/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` | **Dhaka to Kolkata by train and bus (Benapole border & BDT cost)** (`CONTENT-STRATEGY-2026.md` §5/§6 gap #1; live Bangladesh SERP/volume not measured) | Operational overland border-crossing and transport guide for Bangladeshi passport holders comparing the suspended Maitree Express, active Dhaka–Benapole–Petrapole–Kolkata bus corridor, IVAC sticker-visa process, and an indicative 3-day Kolkata planning budget. Live Bangladesh SERP was not measured in this session. | Stages 1–8 completed on 2026-10-15; Stage 8 scores 15/16 with no zero and no hard fail. Stage 9 passed lint/build/verify (145 checks) on 2026-10-15. Two phantom `/blog` links replaced with live routes; 10 bilingual official references added; EN/BN formatting and FAQPage JSON-LD aligned. Do **not** open additional India cluster pages until the active Umrah cluster waves in `UMRAH-CLUSTER-PLAN.md` close or are re-prioritised by the owner. |
+
+### Scope and owner constraints
+
+- Keep `/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` and `/bn/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` live as `blog-48` (48 published blog posts total).
+- Remove the two phantom English `internalLinks` that pointed at `/blog` while promising non-existent India guides (`"Best Time to Visit India from Bangladesh (Weather + Fares)"` and `"India e-Visa & IVAC Visa Guide for Bangladeshis"`), replace them with real, relevant live routes (`/blog/dual-currency-card-endorsement-bangladesh` and `/flights`), make the `/costs` anchor text honest (`"Outbound Trip Cost Benchmarks & BDT Budget Planner"`), and bring the Bengali `internalLinks` to 5-link parity.
+- Add 10 bilingual official primary references (`railway.gov.bd`, `eticket.railway.gov.bd`, `indianrailways.gov.in`, `ivacbd.com`, `ivacbd.com/kind-of-visas-documents`, `indianvisa-bangladesh.nic.in`, `hcidhaka.gov.in`, `nbr.gov.bd`, `blpa.gov.bd`, `lpai.gov.in`) in both `src/constants.ts` and `src/data/bengaliContent.ts`, with `updatedAt: "2026-10-15"`.
+- Preserve the existing 3-day, 2-night Kolkata overland planning budget of **BDT 8,000–18,000 per person** (`BDT 8,000–12,000` budget tier; `BDT 15,000–18,000` comfortable tier) as an explicitly qualified planning reference rather than a live operator or hotel quote.
+- Leave `src/data/contentMeta.ts` (`CONTENT_UPDATED = "2026-10-14"`) untouched so the 77 non-blog hub `<lastmod>` timestamps in `public/sitemap.xml` are not churned by a single-article review; blog posts carry their own ISO timestamp from `BLOG_DATA[].date` / `updatedAt`.
+
+---
+
+## Stage 2 — Dhaka–Kolkata claims ledger (checked 15 October 2026)
+
+| ID | Claim / section | Primary source / portal | Finding as of 2026-10-15 | Status / safe action |
+|---|---|---|---|---|
+| IN-01 | Section 1: Cross-border passenger train status (Maitree Express Dhaka–Kolkata, Bandhan Express Khulna–Kolkata, Mitali Express Dhaka–New Jalpaiguri) suspended since July 2024. | Bangladesh Railway: <https://railway.gov.bd/> and <https://eticket.railway.gov.bd/>; Indian Railways: <https://indianrailways.gov.in/> | Cross-border passenger rail services were halted in mid-July 2024 and no official restart timetable was confirmed in this checkout. PR #37 cited a non-existent domain (`railwayticket.bd`) instead of the official Bangladesh Railway portals (`railway.gov.bd` and `eticket.railway.gov.bd`). | **QUALIFIED / PORTAL FIXED.** Replace `railwayticket.bd` with `railway.gov.bd` and `eticket.railway.gov.bd` `[1–2]` plus `indianrailways.gov.in` `[3]`. State that trains have been suspended since July 2024 with no confirmed restart date as of 15 October 2026, and instruct readers to check the official railway portals before planning. |
+| IN-02 | Section 1: Padma Bridge reroute proposal (~6-hour journey time and potential fare reduction). | Bangladesh Railway: <https://railway.gov.bd/>; Indian Railways: <https://indianrailways.gov.in/> | Routing Dhaka–Kolkata passenger trains via the Padma Bridge corridor instead of Jamuna Bridge–Darsana has been discussed bilaterally, but no official international timetable or tariff table has been published. | **QUALIFIED.** Present the ~6-hour duration and any fare change strictly as unconfirmed proposals pending bilateral operational agreement `[1, 3]`. |
+| IN-03 | Section 2: Pre-suspension rail fare figures (domestic Dhaka–Benapole classes BDT 319–1,181 vs Maitree Express USD-pegged international fares ~USD 20–30). | Bangladesh Railway: <https://railway.gov.bd/>, <https://eticket.railway.gov.bd/>; Indian Railways: <https://indianrailways.gov.in/> | PR #37 mixed domestic Bangladesh Railway intercity class codes (`SHOVAN`, `S_CHAIR`, `SNIGDHA`, `AC_S`, `AC_B`, BDT 206–1,181) with USD-pegged Maitree Express cross-border fares (~USD 20 AC Chair / ~USD 30 AC Seat before travel tax and VAT), and formatted them as raw markdown pipe tables (`\|---\|---\|`) that rendered as literal pipe text. | **QUALIFIED / REFORMATTED.** Clearly separate historical Maitree Express USD-pegged cross-border benchmarks from domestic Dhaka–Benapole intercity rail benchmarks, qualify all figures as historical planning references (not live quotes), and replace raw pipe syntax with clean bullet lists `[1–3]`. |
+| IN-04 | Section 3: Benapole–Petrapole land border crossing sequence, operating hours, and visa checkpost rule. | Bangladesh Land Port Authority: <https://blpa.gov.bd/>; Land Ports Authority of India (ICP Petrapole): <https://lpai.gov.in/>; IVAC Bangladesh: <https://www.ivacbd.com/kind-of-visas-documents> | PR #37's Step 2 listed Indian entry at Petrapole before Bangladesh exit at Benapole for a Dhaka departure, contained a stray German token (`weitersetzen`) in the Bengali twin, and over-generalized that "all other Bangladesh–India land borders are closed to foreign nationals." | **CORRECTED / QUALIFIED.** Order outbound Dhaka→Kolkata border steps physically (1. Bangladesh exit & travel tax at Benapole; 2. 200–500 m no-man's land walk; 3. Indian BSF, immigration & customs at ICP Petrapole), remove `weitersetzen` in Bengali, and state that land entry/exit must match the checkpost endorsed on the traveler's Indian visa (e.g., `Haridaspur / Benapole`) `[4–6, 8–10]`. |
+| IN-05 | Section 3 & 5: Mandatory Bangladesh land-border travel/departure tax at Benapole. | National Board of Revenue (NBR) Bangladesh: <https://nbr.gov.bd/>; Bangladesh Land Port Authority: <https://blpa.gov.bd/> | Outbound land travelers from Bangladesh must pay government land-border travel tax at the designated bank/port counter (or through a bus operator's handling desk for a small service fee). Exact statutory rates follow the current NBR Finance Act schedule. | **QUALIFIED.** State that mandatory Bangladesh land-border travel/departure tax is payable at Benapole before exit immigration (with official receipt), and note that the exact BDT rate is governed by the current NBR Finance Act schedule `[8–9]`. |
+| IN-06 | Section 3: Dhaka–Benapole and Petrapole–Kolkata bus operators and indicative fares. | Operator counter schedules (Green Line, Shyamoli, Desh Travels, Souhardo); Eastern Railway suburban network: <https://indianrailways.gov.in/> | No live dated operator checkout was captured in this session. Bus fares in BDT and INR vary by operator, coach class (non-AC, standard AC, business/sleeper), and whether booked as a coordinated through-ticket or split at the border. | **QUALIFIED.** Present BDT and INR bus figures as indicative planning ranges, not live operator quotes, and note the budget suburban rail option from Bongaon Junction to Kolkata Sealdah `[3]`. |
+| IN-07 | Section 4: India visa eligibility for Bangladeshi passport holders, IVAC appointment availability, and IVAC processing fee. | IVAC Bangladesh: <https://www.ivacbd.com/> and <https://www.ivacbd.com/kind-of-visas-documents>; Online Visa Portal: <https://indianvisa-bangladesh.nic.in/>; High Commission of India Dhaka: <https://www.hcidhaka.gov.in/> | Ordinary Bangladeshi passport holders are not eligible for the Indian e-Visa and must apply for a sticker visa via `indianvisa-bangladesh.nic.in` and IVAC (`ivacbd.com`). Under bilateral arrangements there is no Indian government visa fee, while IVAC collects a mandatory processing fee (historically published around BDT 800–1,500 plus payment charges). Live IVAC slot availability was not measured in this session. | **QUALIFIED.** Retain the prominent caveat that live IVAC slot availability was not measured on 15 October 2026; instruct readers to verify current appointment capacity and the exact IVAC processing fee directly on `ivacbd.com` and `hcidhaka.gov.in` before making travel plans `[4–7]`. |
+| IN-08 | Section 5: Indicative 3-day, 2-night Kolkata overland budget of BDT 8,000–18,000 per person. | Inherited article planning estimate (PR #37); no matched live operator/hotel checkout basket in this session. | The headline and summary state BDT 8,000–18,000 (`BDT 8,000–12,000` budget tier; `BDT 15,000–18,000` comfortable tier) for a 3-day, 2-night overland trip via Benapole–Petrapole. PR #37 had three separate raw markdown pipe tables that broke URAL's renderer. | **PRESERVE & QUALIFY.** Consolidate into one coherent 3-day overland budget breakdown in Section 5 (`BDT 8,000–12,000` budget; `BDT 15,000–18,000` comfortable), state inclusions/exclusions and that it was not re-priced on 15 October 2026, and format cleanly for URAL's renderer without raw pipes. |
+| IN-09 | Section 6: Dhaka (DAC) to Kolkata (CCU) flight duration and indicative one-way fare band. | URAL flight search hub (`/flights`); no dated live airline checkout captured. | Direct DAC–CCU flights take about 1 hour 10 minutes on Biman Bangladesh Airlines, US-Bangla Airlines, or IndiGo. Airfares and baggage allowances vary by date and fare family. | **QUALIFIED.** Label the one-way BDT 6,500–12,000 range as an indicative historical benchmark before peak-season surcharges and baggage add-ons, route readers to `/flights`, and remind them to verify `By Air` visa endorsement `[5–6]`. |
+| IN-10 | Article metadata, internal links, references, cover image dimensions, AEO snippet, and FAQ schema contract. | `src/constants.ts`, `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, `src/App.tsx`, `src/utils/imageAssets.ts`, `src/utils/blogStructuredData.ts`, `src/routes/BlogPostRouteView.tsx`, `scripts/prerender.ts`, `scripts/verify-build.ts` | PR #37 had two phantom `/blog` links, no `references`, raw markdown (`##`, `---`, `\|---\|`, `[text](url)`), missing `RESPONSIVE_IMAGE_HEIGHTS` entry (`670`), missing `getBlogCoverImage` / `getBlogAeoSnippet50Words` entries in `src/App.tsx`, and an un-allowlisted FAQ section. | **IMPLEMENTED / VERIFIED.** Replaced the two phantom links with live routes (`/blog/dual-currency-card-endorsement-bangladesh` and `/flights`); aligned 5 EN/BN `internalLinks`; added 10 bilingual `references`; registered image height `670` and SPA cover/AEO snippet in `src/App.tsx`; allowlisted `7. Frequently Asked Questions` / `৭. সচরাচর জিজ্ঞাসা` for `FAQPage` JSON-LD parity. |
+
+### Stage 3–8 execution record — Dhaka–Kolkata review (15 October 2026)
+
+- **Stage 3 — Brief: complete.** The page job is to help a Bangladeshi passport holder evaluate overland travel between Dhaka and Kolkata while cross-border trains are suspended, follow the physical Benapole–Petrapole border sequence, check IVAC sticker-visa requirements and live slot caveats, and plan around one qualified 3-day BDT budget.
+- **Stage 4 — English: complete.** Formatted in URAL's clean numbered-section structure (`1.`–`7. Frequently Asked Questions`), with numbered citations `[1–10]`, corrected Benapole→Petrapole outbound crossing sequence, official railway domains (`railway.gov.bd`, `eticket.railway.gov.bd`, `indianrailways.gov.in`), and one consolidated 3-day planning budget (`BDT 8,000–12,000` budget; `BDT 15,000–18,000` comfortable).
+- **Stage 5 — Bengali: complete.** Full decision-level parity across all seven sections (`১.`–`৭. সচরাচর জিজ্ঞাসা`), 10 localized references `[১–১০]`, 5 localized internal links, 6 FAQ pairs, and removal of the stray German word `weitersetzen` and raw markdown pipes.
+- **Stage 6 — package: complete.** `updatedAt: "2026-10-15"`, 10 bilingual `references`, 5 verified `internalLinks`, `aviasales` `affiliateCTA`, `RESPONSIVE_IMAGE_HEIGHTS` (`670`), `getBlogCoverImage`, `getBlogAeoSnippet50Words` (EN & BN), and `BLOG_FAQ_CONFIGS` (`FAQPage` JSON-LD) are all wired.
+- **Stage 7 — preflight: passed.** Checked EN/BN citation numbering `[1–10]` / `[১–১০]`, border sequence parity, BDT 8,000–18,000 budget parity, internal-link targets, and `date`/`updatedAt`/`CONTENT_UPDATED` separation (`CONTENT_UPDATED` kept at `2026-10-14` so non-blog hub `<lastmod>` values do not churn).
+- **Stage 8 — red team:**
+
+  | Dimension | Score / 4 | Reason |
+  |---|---:|---|
+  | Intent and format | 3 | Clear answer-first overland guide and step-by-step border sequence; live Bangladesh SERP remains unmeasured. |
+  | Factual evidence and safety | 4 | Every rail, IVAC, tax, and fare claim is qualified against 10 official portals; fake `railwayticket.bd` domain replaced with `railway.gov.bd` / `eticket.railway.gov.bd`. |
+  | Usability and actionability | 4 | Correct physical Dhaka→Benapole→Petrapole→Kolkata order, IVAC checklist, one coherent 3-day BDT budget, and 5 real internal links. |
+  | Locale, trust, and release | 4 | Full EN/BN parity, 10 numbered bilingual references, visible FAQ + `FAQPage` JSON-LD in both locales, and SPA/prerender image parity. |
+  | **Total** | **15 / 16** | **Pass (≥13); no zero scores and no hard fail.** |
+
+---
+
+## Stage 9 — Dhaka–Kolkata repository verification (15 October 2026)
+
+- Updated files: `src/constants.ts`, `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, `src/App.tsx`, `src/utils/imageAssets.ts`, `src/utils/blogStructuredData.ts`, `src/routes/BlogPostRouteView.tsx`, `scripts/verify-build.ts`, `public/rss.xml`, and `docs/growth/CONTENT-QUEUE.md`.
+- `npm run lint`, `npm run build`, and `npm run verify:build` (all 145 checks) verified clean on 15 October 2026.
+
+---
+
 ## Worked queue row — Wave 1: Umrah hub hardening (`/umrah` + `/bn/umrah`)
 
 | Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
@@ -214,3 +269,30 @@
 - Inspected `dist/umrah.html` and `dist/bn/umrah.html`: zero occurrences of the removed claims ("25%–32%", the 1,65,000–2,15,000 comfort range, ~SAR 39.50 fixed fee, 300–500m / "Zero uphill" precision, "All-inclusive estimate", "year-round Umrah", SAR 172.50 / "2 hours 20", agency line-through prices, "Estimated Savings"); retained copy carries "not a live quote" / "লাইভ কোটেশন নয়" qualifiers and the dated SAR 162 base fare; the specialist-guide directory links (incl. blog-16 and the Hajj registration guide) are present on both locales.
 
 Deployment gate: **owner approval + live-route review** of `/umrah` and `/bn/umrah` before publish.
+## 2026-10-15 — POST-MERGE NOTE (main `aa0156b` merged into PR #40 branch)
+
+PR #39 (session `arena/0eb5e492`) landed a parallel Wave 1 with complementary
+work. This branch merged `origin/main` (6 conflicted files resolved as a
+**superset**, never a regression):
+
+- `src/components/UmrahLandingPage.tsx` — main's verified Wave 1 kept
+  (SAR 65 JED–Makkah / SAR 162 Makkah–Madinah excl-VAT fare citations,
+  "Verified Official Sources & Portals (Checked 14 October 2026)" section,
+  U-13 like-for-like quote checklist, three visa categories, dated model
+  inputs) and this branch's additions retained (locale-aware `blogHref`,
+  "Specialist Guides by Topic" cluster directory with 11 specialist slugs,
+  H-10 zone grid as the sole distance grid).
+- `src/utils/blogStructuredData.ts` — FAQ schema allowlist now covers BOTH
+  `umrah-hajj-guide-bangladesh-nusuk-bdt-cost` (5./৫.) and
+  `dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` (7./৭.).
+- `docs/growth/CONTENT-QUEUE.md` — complete records for both sessions kept
+  (Wave 3A U-ledger → blog-48 IN-ledger → Wave 1 H-01…H-15).
+- `scripts/prerender.ts` — main's /umrah intro phrasing + this branch's
+  `/bn/umrah` related-link labels/slugs fix (labels matched EN-only slugs).
+- `scripts/verify-build.ts` — union of both check sets.
+- `src/data/bengaliContent.ts` — both blog-48 and blog-16 BN work kept.
+
+**Post-merge verification (2026-10-15):** `npm run lint` ✅ →
+`npm run build` ✅ (94 EN + 94 BN routes) → `npm run verify:build` ✅
+**149/149 checks**. Built bundles contain both the Verified Sources section
+and the Specialist Guides directory; zero banned strings in HTML or bundles.

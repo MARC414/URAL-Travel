@@ -14,9 +14,25 @@ type RouteViewProps = { context: Record<string, any> };
 
 
 
+const BLOGS_PER_PAGE = 15;
+const BENGALI_DIGITS = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+function formatPageNumber(num: number, isBn: boolean): string {
+  if (!isBn) return String(num);
+  return String(num)
+    .split("")
+    .map((ch) => BENGALI_DIGITS[Number(ch)] ?? ch)
+    .join("");
+}
+
 export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
   const { TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, getBlogAeoSnippet50Words, getBlogCoverImage, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, section, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery } = context;
+
+  const [currentPage, setCurrentPage] = React.useState(1);
+
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [blogCategoryFilter, blogSearchQuery]);
 
   return (
 
@@ -120,7 +136,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
             {/* 2. INTERACTIVE CATEGORY FILTER TABS & SEARCH BAR */}
 
-            <div className="space-y-4">
+            <div id="blog-directory-grid" className="scroll-mt-24 space-y-4">
 
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 pb-4">
 
@@ -140,11 +156,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       id: "all",
 
-                      label: isBn
-
-                        ? `সব গাইড (${localizedBlogs.length})`
-
-                        : `All Guides (${localizedBlogs.length})`,
+                      label: isBn ? "সব গাইড" : "All Guides",
 
                     },
 
@@ -152,11 +164,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       id: "Hajj & Umrah",
 
-                      label: isBn
-
-                        ? `হজ্জ ও ওমরাহ (${localizedBlogs.filter((b) => b.category === "Hajj & Umrah").length})`
-
-                        : `Hajj & Umrah (${localizedBlogs.filter((b) => b.category === "Hajj & Umrah").length})`,
+                      label: isBn ? "হজ্জ ও ওমরাহ" : "Hajj & Umrah",
 
                     },
 
@@ -164,11 +172,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       id: "Ziyarah & Stopovers",
 
-                      label: isBn
-
-                        ? `জিয়ারত ও স্টপওভার (${localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers").length})`
-
-                        : `Ziyarah & Stopovers (${localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers").length})`,
+                      label: isBn ? "জিয়ারত ও স্টপওভার" : "Ziyarah & Stopovers",
 
                     },
 
@@ -176,7 +180,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       id: "Visa & Immigration",
 
-                      label: isBn ? "ভিসা ও ইমিগ্রেশন (3)" : "Visa & Immigration (3)",
+                      label: isBn ? "ভিসা ও ইমিগ্রেশন" : "Visa & Immigration",
 
                     },
 
@@ -184,7 +188,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       id: "Banking & Payments",
 
-                      label: isBn ? "ডুয়াল-কারেন্সি কার্ড ও BDT (1)" : "Card Endorsement & BDT (1)",
+                      label: isBn ? "ডুয়াল-কারেন্সি কার্ড ও BDT" : "Card Endorsement & BDT",
 
                     },
 
@@ -192,7 +196,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       id: "Family & Budget",
 
-                      label: isBn ? "ফ্যামিলি ও বাজেট ট্রিপ (3)" : "Family & Budget Trips (3)",
+                      label: isBn ? "ফ্যামিলি ও বাজেট ট্রিপ" : "Family & Budget Trips",
 
                     },
 
@@ -202,23 +206,17 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       label: isBn
 
-                        ? "ফ্লাইট, হোটেল ও হালাল খাবার (3)"
+                        ? "ফ্লাইট, হোটেল ও হালাল খাবার"
 
-                        : "Flights, Hotels & Halal Food (3)",
+                        : "Flights, Hotels & Halal Food",
 
                     },
-
-
 
                     {
 
                       id: "Travel Tips",
 
-                      label: isBn
-
-                        ? `ট্রাভেল টিপস (${localizedBlogs.filter((b) => b.category === "Travel Tips").length})`
-
-                        : `Travel Tips (${localizedBlogs.filter((b) => b.category === "Travel Tips").length})`,
+                      label: isBn ? "ট্রাভেল টিপস" : "Travel Tips",
 
                     },
 
@@ -344,6 +342,10 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                     ? ["Cheap Flight Tips", "Hotel Savings", "Food & Culture"].includes(post.category)
 
+                    : blogCategoryFilter === "Travel Tips"
+
+                    ? ["Travel Tips", "Travel Deals & Intelligence", "ট্রাভেল ডিল ও ইন্টেলিজেন্স"].includes(post.category)
+
                     : post.category === blogCategoryFilter;
 
 
@@ -408,9 +410,9 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       {isBn
 
-                        ? `সবগুলো গাইড দেখুন (${localizedBlogs.length})`
+                        ? "সবগুলো গাইড দেখুন"
 
-                        : `Show All ${localizedBlogs.length} Guides`}
+                        : "Show All Guides"}
 
                     </button>
 
@@ -422,11 +424,47 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
 
 
+              const totalPages = Math.max(1, Math.ceil(filteredBlogs.length / BLOGS_PER_PAGE));
+
+              const safePage = Math.min(currentPage, totalPages);
+
+              const paginatedBlogs = filteredBlogs.slice(
+
+                (safePage - 1) * BLOGS_PER_PAGE,
+
+                safePage * BLOGS_PER_PAGE,
+
+              );
+
+              const goToPage = (page: number) => {
+
+                const next = Math.max(1, Math.min(page, totalPages));
+
+                setCurrentPage(next);
+
+                if (typeof document !== "undefined") {
+
+                  document.getElementById("blog-directory-grid")?.scrollIntoView({
+
+                    behavior: "smooth",
+
+                    block: "start",
+
+                  });
+
+                }
+
+              };
+
+
+
               return (
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                <div className="space-y-8">
 
-                  {filteredBlogs.map((post) => {
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+
+                    {paginatedBlogs.map((post) => {
 
                     const coverImg = getBlogCoverImage(post.slug);
 
@@ -575,6 +613,96 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
                     );
 
                   })}
+
+                  </div>
+
+
+
+                  {totalPages > 1 && (
+
+                    <nav
+
+                      aria-label={isBn ? "ব্লগ পেজ নেভিগেশন" : "Blog pagination"}
+
+                      className="flex flex-wrap items-center justify-center gap-2 pt-2"
+
+                    >
+
+                      <button
+
+                        type="button"
+
+                        disabled={safePage <= 1}
+
+                        onClick={() => goToPage(safePage - 1)}
+
+                        className="px-3.5 py-2 rounded-xl text-xs font-semibold border border-slate-200 bg-white text-slate-700 hover:border-brand-navy hover:text-brand-navy disabled:opacity-45 disabled:pointer-events-none transition-colors cursor-pointer"
+
+                      >
+
+                        {isBn ? "← আগের পেজ" : "← Previous"}
+
+                      </button>
+
+
+
+                      {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((pageNum) => {
+
+                        const isCurrent = pageNum === safePage;
+
+                        return (
+
+                          <button
+
+                            key={pageNum}
+
+                            type="button"
+
+                            aria-current={isCurrent ? "page" : undefined}
+
+                            onClick={() => goToPage(pageNum)}
+
+                            className={`min-w-[38px] h-[38px] px-3 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
+
+                              isCurrent
+
+                                ? "bg-brand-navy text-white border-brand-navy shadow-xs"
+
+                                : "bg-white text-slate-700 border-slate-200 hover:border-brand-navy hover:text-brand-navy"
+
+                            }`}
+
+                          >
+
+                            {formatPageNumber(pageNum, isBn)}
+
+                          </button>
+
+                        );
+
+                      })}
+
+
+
+                      <button
+
+                        type="button"
+
+                        disabled={safePage >= totalPages}
+
+                        onClick={() => goToPage(safePage + 1)}
+
+                        className="px-3.5 py-2 rounded-xl text-xs font-semibold border border-slate-200 bg-white text-slate-700 hover:border-brand-navy hover:text-brand-navy disabled:opacity-45 disabled:pointer-events-none transition-colors cursor-pointer"
+
+                      >
+
+                        {isBn ? "পরের পেজ →" : "Next →"}
+
+                      </button>
+
+                    </nav>
+
+                  )}
 
                 </div>
 
