@@ -708,7 +708,7 @@ Let us compare booking two separate trips from Dhaka versus one integrated Multi
 2. WHICH TWO VISAS DO BANGLADESHI PASSPORT HOLDERS NEED FOR THIS COMBO TRIP?
 To execute this itinerary smoothly, your family needs one Saudi authorization and one UAE authorization before flying from Dhaka:
 Step 1: Saudi Umrah Visa (Choose Your Eligible Pathway on nusuk.sa / ksavisa.sa):
-- **Pathway A — Standard 90-Day Umrah e-Visa:** Issued in 2–4 working days (**BDT 15,500 – BDT 19,500** with medical insurance).
+- **Pathway A — Ministry Umrah visa:** the official Ministry of Hajj and Umrah FAQ states a government fee 'estimated at 300 Saudi Riyals' (checked 15 October 2026) and says an external agent cannot issue the Umrah visa without an accommodation-and-transport service package, so your all-in figure is what the approved platform or agent shows at issuance. No BDT total is published here, no processing time is guaranteed, and the entry window and permitted stay are the dates printed on your own visa.
 - **Pathway B — 96-Hour Saudi Stopover Visa:** On a qualifying Saudia or flynas through-itinerary you can add the 96-hour stopover while booking the ticket. No fixed price is published anywhere: the visa, insurance and service charges are calculated at the airline's checkout and change, and no hotel night should be assumed. Read the 96-hour stopover guide for the current conditions before you pay.
 Step 2: UAE / Dubai Visa (Issued via u.ae / gdrfad.gov.ae Authorized Channels):
 - **Option A — 96-Hour (4-Day) UAE Transit/Stopover Visa:** Available when flying Emirates or flydubai through Dubai International Airport (DXB) for **~AED 180 – AED 250 (~BDT 6,200 – BDT 8,500)**.

@@ -3803,6 +3803,173 @@ check(
     : "stopover references are missing, unlocalized, or the update date is not recorded"
 );
 
+// --- Wave 3C: shared Umrah-visa framing on hub surfaces must stay sourced ----
+//
+// `/umrah`, `/blog` and the Umrah-category article pages used to publish a
+// "90-day Saudi Umrah e-Visa in 2 to 5 working days" priced at
+// "BDT 15,500 – 19,500", "year-round Umrah", and "Mandatory ... Apps" tiles.
+// The Ministry of Hajj and Umrah FAQ (opened 2026-10-15) publishes only a fee
+// "estimated at 300 Saudi Riyals", requires an accommodation-and-transport
+// service package for agent-issued visas, scopes biometric enrollment to five
+// named countries, and contradicts itself on permitted stay (30 vs 90 days).
+// So these shared surfaces may carry the dated official anchor and nothing that
+// reads like a published BDT price, a processing guarantee or a blanket rule.
+// Ledger P-01..P-06 in docs/growth/CONTENT-QUEUE.md.
+const SHARED_UMRAH_BANNED_PATTERNS: { label: string; pattern: RegExp }[] = [
+  { label: "un-ledgered BDT Umrah visa price", pattern: /BDT\s*15,500\s*[–\-]\s*(?:BDT\s*)?19,500/ },
+  { label: "un-ledgered BDT Umrah visa price (Bengali numerals)", pattern: /১৫,৫০০\s*[–\-]\s*১৯,৫০০/ },
+  { label: "flat \"90-day Umrah e-Visa\" label", pattern: /90-day Saudi Umrah e-Visa|Standard 90-Day Umrah e-Visa|৯০ দিনের (?:স্ট্যান্ডার্ড )?Saudi Umrah e-Visa/i },
+  { label: "unpublished Umrah visa processing promise", pattern: /2(?: ?to ?| ?[–-] ?)?[45] working days|২–৪ কার্যদিবস|২–৫ কার্যদিবস/i },
+  { label: "universal year-round Umrah framing", pattern: /year-round Umrah|বছরের যেকোনো সময় ওমরাহ/ },
+  { label: "apps presented as a universal mandate", pattern: /Mandatory Umrah Apps|"Mandatory Apps"|বাধ্যতামূলক Umrah অ্যাপ/ },
+];
+const SHARED_UMRAH_EN_ANCHOR = /300 Saudi Riyals|SAR 300/;
+const SHARED_UMRAH_BN_ANCHOR = /৩০০ সৌদি রিয়াল|SAR ৩০০/;
+const SHARED_UMRAH_DATE = /15 Oct(ober)? 2026/;
+const SHARED_UMRAH_BN_DATE = /১৫ অক্টোবর ২০২৬/;
+
+const sharedUmrahSurfaces: { label: string; text: string; needs: RegExp[] }[] = [
+  {
+    label: "shared Ministry FAQ answer (EN)",
+    text: getLocalizedHajjFaqs("en")[0]?.answer ?? "",
+    needs: [SHARED_UMRAH_EN_ANCHOR, SHARED_UMRAH_DATE],
+  },
+  {
+    label: "shared Ministry FAQ answer (BN)",
+    text: getLocalizedHajjFaqs("bn")[0]?.answer ?? "",
+    needs: [SHARED_UMRAH_BN_ANCHOR, SHARED_UMRAH_BN_DATE],
+  },
+  {
+    label: "/blog hub copy (source)",
+    text: read(path.join(ROOT_DIR, "src/routes/BlogIndexRouteView.tsx")) ?? "",
+    needs: [SHARED_UMRAH_EN_ANCHOR, SHARED_UMRAH_BN_ANCHOR, SHARED_UMRAH_DATE],
+  },
+  {
+    label: "blog-post hub copy (source)",
+    text: read(path.join(ROOT_DIR, "src/routes/BlogPostRouteView.tsx")) ?? "",
+    needs: [SHARED_UMRAH_EN_ANCHOR, SHARED_UMRAH_BN_ANCHOR, SHARED_UMRAH_DATE],
+  },
+  {
+    label: "Dubai-combo article (EN)",
+    text: BLOG_BODY[DUBAI_COMBO_SLUG] ?? "",
+    needs: [SHARED_UMRAH_EN_ANCHOR, SHARED_UMRAH_DATE],
+  },
+  {
+    label: "Dubai-combo article (BN)",
+    text: BENGALI_BLOG_OVERRIDES[DUBAI_COMBO_SLUG]?.content ?? "",
+    needs: [SHARED_UMRAH_BN_ANCHOR, SHARED_UMRAH_BN_DATE],
+  },
+];
+const sharedUmrahIssues: string[] = [];
+for (const surface of sharedUmrahSurfaces) {
+  if (!surface.text) {
+    sharedUmrahIssues.push(`${surface.label}: surface is empty`);
+    continue;
+  }
+  for (const entry of SHARED_UMRAH_BANNED_PATTERNS) {
+    if (entry.pattern.test(surface.text)) {
+      sharedUmrahIssues.push(`${surface.label}: ${entry.label}`);
+    }
+  }
+  for (const needed of surface.needs) {
+    if (!needed.test(surface.text)) {
+      sharedUmrahIssues.push(`${surface.label}: missing ${needed.source.slice(0, 28)}`);
+    }
+  }
+}
+check(
+  sharedUmrahIssues.length === 0,
+  `the shared Umrah-visa framing on /umrah, /blog, blog posts and the Dubai combo carries only the dated official fee anchor [${sharedUmrahIssues.slice(0, 2).join("; ")}]`
+);
+
+// The hub tiles are client-rendered only, so a `dist` grep cannot see them. Render
+// a Umrah-category article through the real route component and assert the panel
+// exists there with the qualified copy.
+function renderSharedUmrahPanel(locale: "en" | "bn"): string {
+  const slug = STOPOVER_SLUG;
+  const isBn = locale === "bn";
+  const sourcePosts = getLocalizedBlogs(locale);
+  const sourcePost = sourcePosts.find((post) => post.slug === slug);
+  if (!sourcePost) throw new Error(`Missing ${locale} blog post ${slug}`);
+  const fullPost = { ...sourcePost, content: isBn ? sourcePost.content : BLOG_BODY[slug] };
+  const localizedBlogs = sourcePosts.map((post) => (post.slug === slug ? fullPost : post));
+  const getLocalizedRouteHref = (route: string) => (route === "/" ? (isBn ? "/bn" : "/") : isBn ? `/bn${route}` : route);
+  const EmptyAuthorBioCard = () => null;
+  return renderToStaticMarkup(
+    React.createElement(BlogPostRouteView as any, {
+      context: {
+        AuthorBioCard: EmptyAuthorBioCard,
+        blogBodies: {},
+        getBlogAeoSnippet50Words: (_slug: string, _isBengali: boolean, fallback: string) => fallback,
+        getBlogCoverImage: () => "/assets/images/clouds_boat_hero_1781438671378-1200.webp",
+        getLocalizedRouteHref,
+        isBn,
+        isLanding: false,
+        lang: locale,
+        localizedBlogs,
+        localizedHajjFaqs: getLocalizedHajjFaqs(locale),
+        navigateTo: () => {},
+        parameterId: slug,
+        section: "blog",
+        setAffiliateToast: () => {},
+      },
+    })
+  );
+}
+const sharedUmrahPanelIssues: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  try {
+    const markup = renderSharedUmrahPanel(locale);
+    if (!markup.includes('id="travel-intelligence-panel"')) {
+      sharedUmrahPanelIssues.push(`${locale}: hub panel did not render`);
+    }
+    if (!(locale === "bn" ? SHARED_UMRAH_BN_ANCHOR : SHARED_UMRAH_EN_ANCHOR).test(markup)) {
+      sharedUmrahPanelIssues.push(`${locale}: no official fee anchor in the tiles`);
+    }
+    for (const entry of SHARED_UMRAH_BANNED_PATTERNS) {
+      if (entry.pattern.test(markup)) sharedUmrahPanelIssues.push(`${locale}: ${entry.label}`);
+    }
+  } catch (error) {
+    sharedUmrahPanelIssues.push(`${locale} (${String(error).slice(0, 120)})`);
+  }
+}
+check(
+  sharedUmrahPanelIssues.length === 0,
+  `the client-rendered hub tiles on Umrah-category posts show the SAR fee anchor and no BDT visa price [${sharedUmrahPanelIssues.slice(0, 2).join("; ")}]`
+);
+
+// The prerendered hub page is the one surface that feeds both readers and
+// FAQPage JSON-LD, so the corrected answer has to be visible in the output.
+const umrahHubHtml = [
+  read(path.join(DIST_DIR, "umrah.html")) ?? "",
+  read(path.join(DIST_DIR, "bn", "umrah.html")) ?? "",
+];
+const umrahHubIsGrounded =
+  umrahHubHtml.every((html) => html.length > 0) &&
+  SHARED_UMRAH_EN_ANCHOR.test(umrahHubHtml[0]) &&
+  SHARED_UMRAH_BN_ANCHOR.test(umrahHubHtml[1]) &&
+  !SHARED_UMRAH_BANNED_PATTERNS.some((entry) =>
+    umrahHubHtml.some((html) => entry.pattern.test(html))
+  );
+check(
+  umrahHubIsGrounded,
+  "/umrah and /bn/umrah publish the dated Ministry Umrah visa fee without the BDT band, the 90-day label or the processing promise"
+);
+
+const SHARED_UMRAH_REINTRODUCED =
+  "Bangladeshi passport holders can obtain a 90-day Saudi Umrah e-Visa in 2 to 5 working days " +
+  "(recently BDT 15,500 – 19,500 including medical insurance), because year-round Umrah can be " +
+  "planned independently; see the Mandatory Umrah Apps tile. " +
+  "বছরের যেকোনো সময় ওমরাহ এবং BDT ১৫,৫০০–১৯,৫০০ খরচে ২–৫ কার্যদিবসে বাধ্যতামূলক Umrah অ্যাপের কথা লেখা আছে।";
+const sharedUmrahControl = SHARED_UMRAH_BANNED_PATTERNS.filter((entry) =>
+  entry.pattern.test(SHARED_UMRAH_REINTRODUCED)
+).length;
+
+check(
+  sharedUmrahControl >= SHARED_UMRAH_BANNED_PATTERNS.length - 1,
+  `the shared-surface guard rejects a deliberately reintroduced 90-day / BDT band / year-round sentence (matched ${sharedUmrahControl} of ${SHARED_UMRAH_BANNED_PATTERNS.length} patterns)`
+);
+
 // --- Report ----------------------------------------------------------------
 
 for (const label of checks) console.log(`  \u2713 ${label}`);
