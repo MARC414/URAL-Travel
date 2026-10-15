@@ -182,6 +182,20 @@ Gotch's work treats link/competitive context and content relevance as separate d
 
 ---
 
+## 5A. Addendum — Goldie × Gübür podcast research (owner-supplied summary, 16 October 2026)
+
+A NotebookLM-style summary of a Julian Goldie × Koray Tuğberk Gübür podcast (visual semantics,
+centerpiece annotations, topical-map scaling, dual language modalities). This is a **secondary
+summary of practitioner claims**, not a primary source and not Google documentation. The URAL
+adaptation — component-spec briefs, QD-Page/Heading/Section verdicts, competitor coverage-gap
+method, factual definition→rule→attribute openings, segmented practical-modality sections, and
+the centerpiece rule — is operationalised in [`CONTENT-SYSTEM-V2.md`](CONTENT-SYSTEM-V2.md).
+
+Explicitly **not adopted** from the same summary (see CONTENT-SYSTEM-V2 §9): AI-detection
+bypass, proxy/account warm-ups, randomized publishing to evade scaled-content filters, volume
+ramps, fabricated UGC/forum sections, syndication spam, and attribute-claim link schemes.
+Where the summary's claims conflict with this file's §5 limits, §5 wins.
+
 ## 6. Primary-source reading list (checked 14 October 2026)
 
 ### Koray Tuğberk Gübür / Holistic SEO & Digital

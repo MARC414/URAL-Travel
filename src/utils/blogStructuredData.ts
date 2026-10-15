@@ -47,6 +47,10 @@ const BLOG_FAQ_CONFIGS: Record<
     en: /^\s*5\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৫\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
+  "dual-currency-card-endorsement-bangladesh": {
+    en: /^\s*8\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৮\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
 };
 
 function isNumberedHeading(line: string): boolean {
@@ -131,14 +135,14 @@ const HOW_TO_CONFIGS: Record<string, BlogHowToConfig[]> = {
     {
       idSuffix: "howto-card-endorsement",
       en: {
-        start: /^2\.\s*STEP-BY-STEP:\s*HOW TO GET YOUR DUAL-CURRENCY CARD ENDORSED/i,
-        end: /^3\.\s*RFCD ACCOUNT/i,
+        start: /^2\.\s*Step by Step:\s*Endorse at an Authorized Dealer Bank/i,
+        end: /^3\.\s*Activate the Foreign-Currency/i,
         name: "How to get a dual-currency card endorsed at a bank in Bangladesh",
         parseStep: englishNumberedStep,
       },
       bn: {
-        start: /^৩\.\s*ধাপে ধাপে ব্যাংকে PASSPORT ENDORSEMENT/i,
-        end: /^৪\.\s*RFCD ACCOUNT/i,
+        start: /^২\.\s*ধাপে ধাপে:\s*Authorized Dealer ব্যাংকে Endorsement/i,
+        end: /^৩\.\s*Foreign-Currency/i,
         name: "বাংলাদেশে ব্যাংকের মাধ্যমে ডুয়াল-কারেন্সি কার্ডে পাসপোর্ট এনডোর্স করার ধাপ",
         parseStep: (line) => {
           const match = line

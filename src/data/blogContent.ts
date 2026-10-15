@@ -126,46 +126,47 @@ TOTAL BUDGET SUMMARY PER PERSON (IN BDT)
 - Food & Snacks: BDT 4,000 - BDT 6,000
 - Heritage/Attraction Permits: BDT 1,000 - BDT 2,000
 - TOTAL ESTIMATED BUDGET: BDT 40,000 - BDT 54,000 per person for an unforgettable independent holiday!`,
-  "dual-currency-card-endorsement-bangladesh": `One of the biggest hurdles for Bangladeshi travelers planning an independent trip abroad isn't the visa—it is getting a Dual-Currency Debit, Prepaid, or Credit Card endorsed and unlocked for international flights, hotels, and attraction tickets. Here is the complete, up-to-date 2026 playbook for getting your passport dollar endorsement and paying abroad smoothly.
+  "dual-currency-card-endorsement-bangladesh": `Passport dollar endorsement is how a Bangladeshi resident gets permission to spend foreign currency from Bangladesh, recorded against their passport and used through cash or an international card. A bank stamp alone is not enough: the foreign-currency and e-commerce part of the card must also be activated before the card will work for travel payments. This guide was checked on 16 October 2026 against Bangladesh Bank's FEPD-1 Circular No. 33 (6 September 2026) and its Guidelines for Foreign Exchange Transactions (GFET) card rules.
 
-1. WHAT IS PASSPORT DOLLAR ENDORSEMENT & THE $18,000 ANNUAL TRAVEL QUOTA?
-Under Bangladesh Bank foreign exchange regulations (FE/PD-1 Circular No. 33), every adult Bangladeshi citizen holding a valid Machine-Readable Passport (MRP) or e-Passport is entitled to endorse up to USD $18,000 per calendar year (January 1 to December 31) for personal international travel (with a cash note ceiling of $5,000, and USD $9,000 per year for children under 12).
-- "Endorsement" means an authorized dealer (AD) bank branch in Bangladesh stamps the back pages of your physical passport, records the USD limit allocated to your card or cash, and unlocks the Foreign Currency (USD) wallet on your card.
-- Without this physical stamp and system activation, Bangladeshi bank cards are automatically blocked from paying on international websites like Booking.com, Agoda, Klook, Airalo, or foreign airlines.
+1. What Passport Dollar Endorsement Is — and the $18,000 Quota
+Endorsement is the recording, by an Authorized Dealer (AD) bank, of foreign exchange released to you for travel abroad. Bangladesh Bank allows AD banks to release up to USD 18,000 or equivalent per calendar year for an adult Bangladeshi national residing in Bangladesh [1]. The entitlement for minors below 12 years is 50 percent of the adult amount — up to USD 9,000. At most USD 5,000 of the entitlement may be released as US-dollar notes; the rest is non-cash, for example an international debit, prepaid or credit card. The quota is a ceiling, not an automatic grant: your bank releases foreign exchange against your travel documents, and unused entitlement does not change the next calendar year's limit. An entitlement can be endorsed across cash and card together, as long as the total released in the calendar year stays within the limit.
 
-2. STEP-BY-STEP: HOW TO GET YOUR DUAL-CURRENCY CARD ENDORSED AT ANY BANK
-Step 1: Choose a Card (No Credit History Needed!)
-You do not need a high-salary credit card. Almost every major bank in Bangladesh now issues instant or 48-hour Dual-Currency Debit or Prepaid Cards if you have a valid passport and NID:
-- Eastern Bank (EBL): Aqua MasterCard Prepaid Card or Lifestyle Dual-Currency Debit Card
-- The City Bank: American Express or Visa Dual-Currency Debit Card
-- BRAC Bank: Multi-Currency Visa Debit Card & Tara Card
-- Standard Chartered, Mutual Trust Bank (MTB), Prime Bank & Islami Bank (Khidmah / Dual-Currency Debit)
+2. Step by Step: Endorse at an Authorized Dealer Bank
+Step 1: Take your passport and card to the bank
+Take your original valid passport and the dual-currency debit, prepaid or credit card you want endorsed, or open one at the bank first — you do not need a credit card or a salary history to hold a debit or prepaid card.
+Step 2: Ask for travel-quota endorsement
+Go to an Authorized Dealer branch of your bank and ask for travel-quota endorsement against your passport, stating the amount you need for this trip rather than the full annual ceiling.
+Step 3: Complete the form and get the endorsement recorded
+Complete the bank's travel form (TM form where the bank requires it). The officer records the endorsement in your passport with the bank's seal and signature.
+Step 4: If you use a money changer, check the fee cap
+If you are buying dollar notes from a licensed money changer instead, Bangladesh Bank's circular of 7 January 2026 caps the endorsement fee at BDT 300 per passport regardless of the amount; the fee must be displayed, and you must receive a written receipt [5]. This cap is for money changers — bank charges are separate, so ask your branch for its own schedule before you pay.
+Step 5: Activate the card before you travel
+Before you travel, complete the activation step in the next section. Endorsement without activation is the most common reason a card fails at checkout.
 
-Step 2: Visit Your Bank's Foreign Exchange / Card Desk with 3 Documents
-Carry:
-- Your original valid Passport (minimum 6 months validity recommended)
-- Your National ID (NID) card and 1 passport-size photo (for new prepaid cards)
-- Your bank account or prepaid card number
-Ask the officer to endorse your annual travel quota (for example, $1,500 to $5,000 USD depending on your needs—you don't have to deposit the full $18,000 at once; you simply deposit BDT as you spend!).
-  • **Endorsement fee:** Money changers may charge a **maximum of BDT 300** per passport, irrespective of the amount exchanged (Bangladesh Bank circular, 7 January 2026); they must display the fee, give a written receipt, and endorse the passport and air ticket. Bank endorsement charges differ by bank and facility (some banks use the prevailing BC rate instead of a flat fee), so ask your branch for its current schedule before you buy.
+3. Activate the Foreign-Currency and E-Commerce Part
+Having the endorsement recorded is only half of the process. Before booking a flight, hotel or attraction ticket online, ask your bank — in the app where it offers card controls, or by phone/branch — to open the foreign-currency part of the card and enable e-commerce / 3D-Secure online transactions and overseas POS/ATM use for your travel period. Say this: "Please open the USD foreign-currency part of my endorsed card and enable e-commerce and overseas use until [your return date]." Keep the endorsed amount and your travel dates consistent with your ticket, because the bank releases foreign exchange against those documents.
 
-Step 3: Open the Foreign Currency & E-Commerce Part Before Booking Online
-Having the physical ink stamp in your passport is only half the process! Before you book a flight on Aviasales, a hotel in Bangkok or Kuala Lumpur, or an airport pickup on Welcome Pickups:
-- Log into your bank mobile app (EBL Skybanking, Citytouch, BRAC Astha) OR call your bank's 24/7 hotline (e.g., 16230 for EBL, 16234 for City Bank, 16221 for BRAC).
-- Tell the agent: "Please open my USD Foreign Currency part AND enable E-Commerce / 3D-Secure Online Transactions and Overseas POS/ATM for [Number] days."
-- Note on Single-Transaction Caps: Some banks cap single online transactions at $300–$500 USD by default. If you are buying family flight tickets costing $800+, inform the call center 15 minutes before clicking 'Pay'.
+4. If a Big Flight or Hotel Payment Is Declined (the $300 Rule)
+Bangladesh Bank's card rules cap a single online purchase at USD 300 under the general online-payment paragraph, which is why large flight or hotel checkouts are often declined on travel-quota cards [2]. Travel-specific payments sit under separate provisions, and in practice banks may process a larger documented travel payment — ask your bank before paying, with your ticket or hotel proof ready; the decision is the bank's, not an automatic right. Do not split a payment or retry repeatedly after a decline; speak to the bank first so the card is not blocked. Cards issued against an RFCD account are different: Bangladesh Bank expressly allows them to be used for online payment at the actual amount [3].
 
-3. RFCD ACCOUNT VS. REGULAR TRAVEL QUOTA: WHICH ONE IS BETTER?
-When you return to Dhaka with leftover cash USD from a trip (up to $10,000 without declaration, or more with an FMJ form), you can deposit that foreign cash into a Resident Foreign Currency Deposit (RFCD) account at your bank.
-- Regular Travel Quota Card: You deposit BDT, and the bank converts it to USD at the daily BC selling rate + passport endorsement limit.
-- RFCD International Card: Your money stays in USD, earns interest, never expires with the calendar year, and has no $300 single-transaction e-commerce hassle!
+5. Travel-Quota Card vs. RFCD Account — in One View
+A travel-quota card spends Bangladeshi taka converted at payment time, within your endorsed annual entitlement and calendar-year limit. An RFCD (Resident Foreign Currency Deposit) account holds foreign currency you physically brought back from a trip abroad: you can deposit up to USD 10,000 or equivalent without a customs declaration, and larger amounts with the FMJ declaration made on arrival — that declared amount must be deposited within 30 days [4]. An RFCD account cannot receive remittances or income from abroad, and its card can pay online at the actual amount [3]. For the full comparison and the $300 workaround in detail, read our RFCD vs. travel quota guide.
 
-4. HOW TO AVOID HIDDEN 5% DYNAMIC CURRENCY CONVERSION (DCC) FEES ABROAD
-When tapping your Bangladeshi card at hotels or malls in Bangkok (Sukhumvit/Pratunam), Kuala Lumpur (Bukit Bintang), Singapore (Mustafa Centre), or Dubai (Deira), the POS machine will often ask: "Pay in USD or Local Currency (THB/MYR/SGD/AED)?"
-- Always select the LOCAL currency of the country you are visiting (or USD if your bank bills directly in USD without markup). Never select BDT on an overseas card terminal, or you will lose 4%–6% on poor conversion rates.
+6. Paying Abroad: Choose Local Currency
+When a card terminal abroad offers to charge you in BDT or your "home currency," decline and choose the local currency (SAR, THB, MYR, AED, SGD and so on). Choosing home currency makes the merchant's bank convert at its own rate, usually with a markup above the network rate; choosing local currency lets your own bank and card network do the conversion. The markup varies by terminal, so treat "always choose local currency" as the rule rather than any fixed percentage. Our cash-versus-card guide explains when carrying local cash still makes sense.
 
-5. WHAT IF YOU DON'T HAVE A DUAL-CURRENCY CARD YET?
-Don't let card delays cause you to miss a cheap flight fare or hotel room! You can message the URAL Support Desk directly on WhatsApp (+8801784385335) and pay in BDT via local bank transfer, bKash, or Nagad while we complete your verified flight, hotel, or Welcome Pickups airport transfer reservation.`,
+7. Practical Notes
+The $18,000 figure dates from 6 September 2026 — before that circular the ceiling was USD 12,000, so older articles, videos and even bank leaflets may still quote the old number. Keep your endorsement receipts and the passport page copy with your travel documents, and re-check the quota and your bank's card settings shortly before each trip: entitlements are per person and per calendar year, and card controls can be switched off between trips.
+
+8. Frequently Asked Questions
+Can I endorse the full $18,000 at once?
+Bangladesh Bank sets USD 18,000 as the maximum an AD bank may release in a calendar year, not an amount you must take. Endorse what your trip needs; the bank releases against your travel documents [1].
+Does the quota reset every year?
+Yes — the entitlement is per calendar year. Minors below 12 years get 50 percent of the adult amount, and no more than USD 5,000 per person may be released as US-dollar notes [1].
+My passport is endorsed but my card still fails online. Why?
+Endorsement and activation are separate. Ask your bank to open the card's foreign-currency part and enable e-commerce / 3D-Secure and overseas use for your travel dates, and check the $300 single-transaction rule if the payment is large [2].
+Can I split my entitlement between cash and card?
+Yes. The calendar-year ceiling applies to the total released to you; an AD bank can release part as US-dollar notes (up to USD 5,000) and the rest in non-cash form such as an endorsed international card, as long as the combined total stays within your entitlement [1].`,
   "maldives-budget-trip-bangladesh-maafushi": `For years, Bangladeshi travelers assumed a trip to the Maldives required BDT 2,50,000+ per person because private overwater villas charge $500+ a night and $300 for resort speedboats. Today, thanks to local island tourism on Maafushi and Hulhumalé, you can experience the exact same turquoise Indian Ocean lagoons for a fraction of the price.
 
 1. LOCAL ISLAND (MAAFUSHI) VS. PRIVATE RESORT ISLAND

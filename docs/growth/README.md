@@ -84,6 +84,7 @@ The numbered files above are the technical growth playbook. Use these separate d
 - [CONTENT-QUEUE.md](CONTENT-QUEUE.md) — active work rows and claims ledgers; no volume/KD guesses.
 - [UMRAH-CLUSTER-PLAN.md](UMRAH-CLUSTER-PLAN.md) — current Umrah hub/spoke ownership, accuracy gates, and one-article-per-wave rollout.
 - [METHOD-NOTES.md](METHOD-NOTES.md) — primary-source research and the URAL adaptation of Koray Gübür and Nathan Gotch methods.
+- [CONTENT-SYSTEM-V2.md](CONTENT-SYSTEM-V2.md) — 16 Oct 2026 upgrade: visual semantics/centerpiece rule, component-spec briefs, QD-Page/Heading/Section decisions, topical coverage-gap method, dual-modality sentence rules, and the tactics explicitly not adopted.
 
 > ### Which document wins on "what do we build next?" — 15 October 2026
 >

@@ -43,6 +43,7 @@ Use the sourced methods in [`METHOD-NOTES.md`](METHOD-NOTES.md) as editorial too
 - **Gotch / upgrade first:** look at the existing asset, its query/page performance if available, links and age, and the cost of preserving its accumulated value. Improve, consolidate, redirect, or retire only with evidence and permission appropriate to the change. For the same intent on a chosen URL, upgrade that URL; do not publish a near-duplicate.
 - **Information gain:** add a source-backed local constraint, first-party data, useful decision rule, or verified step a generic competitor cannot supply. If no original evidence exists, be transparent and do not invent a first-hand angle.
 - **No proxy for success:** word count, content scores, “semantic terms,” schema, and an answer box do not prove quality or ranking. Use them only when they serve reader comprehension and the repository contract.
+- **v2 visual semantics (see [`CONTENT-SYSTEM-V2.md`](CONTENT-SYSTEM-V2.md)):** specify the centerpiece for the page's intent and a render component for every section in the brief; keep text as short as the verified ledger allows. Factual sections open definition→rule→attribute; practical/judgement sections are visually segmented, may use editorial first/second person, and must never fabricate experience, reviews, or community answers. Never write, structure, or schedule content to evade AI detection, spam filters, or platform rules — §9 of the v2 file lists rejected tactics that must be escalated to the owner, not implemented.
 
 ---
 
@@ -148,6 +149,8 @@ STAGE 3 — BRIEF
 Using the Stage 1 decision and Stage 2 ledger, create a one-page brief. State: the reader and moment of need; primary query; intent and requested outcome; dominant page format seen in a dated local SERP review (or “not checked”); macro-context and page boundary; query network of prerequisites, attributes, sub-questions and follow-ups; micro-context sections that stay within this task; facts/proof that make the page specifically useful to a Bangladeshi reader; must-include/must-not-claim items; one cost model if applicable; source map; existing pages to link to and from; and a short section outline.
 
 Inspect competing pages by relevance, not just domain name. Make a gap table with (a) expected/table-stakes coverage, (b) what a useful competing page answers, (c) the unanswered Bangladesh-specific question, and (d) URAL's evidence-backed contribution. Do not copy a competitor's headings. Separate this intent from `/umrah`, visa, hotel, train, Hajj, or child-guide intents; link to them rather than duplicating their full answer.
+
+Apply CONTENT-SYSTEM-V2.md: record a QD-Page / QD-Heading / QD-Section / QD-Link verdict for each candidate query; choose the centerpiece from the layout-matches-intent table; and output the outline as the v2 brief table (heading, intent, component from the approved inventory, ledger IDs, modality, internal link out). A component outside the inventory becomes a dev ticket with a prose fallback, not an invented design.
 
 Do not add sections simply to make the page longer. Each section must complete a step, answer a related sub-question, support a decision, or establish a necessary boundary.
 ```

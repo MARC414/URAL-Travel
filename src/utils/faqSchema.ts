@@ -71,7 +71,7 @@ export const LANDING_HOTEL_FAQS: FAQItem[] = [
   },
   {
     question: "Do hotels abroad accept dual-currency cards endorsed against a Bangladeshi passport?",
-    answer: "Yes, major international hotels worldwide accept Visa, Mastercard, and American Express cards endorsed under the Bangladesh Bank annual travel quota ($18,000 per calendar year under FE/PD-1 Circular No. 33). Always notify your bank before flying abroad to activate international POS transactions."
+    answer: "Yes, major international hotels worldwide accept Visa, Mastercard, and American Express cards endorsed under the Bangladesh Bank annual travel quota ($18,000 per calendar year under FEPD-1 Circular No. 33). Always notify your bank before flying abroad to activate international POS transactions."
   }
 ];
 
@@ -101,7 +101,7 @@ export const LANDING_COST_FAQS: FAQItem[] = [
   },
   {
     question: "How much foreign currency can a Bangladeshi citizen endorse per calendar year?",
-    answer: "Under Bangladesh Bank regulations (FE/PD-1 Circular No. 33), an adult citizen with a valid passport can endorse up to $18,000 USD per calendar year for private travel across personal dual-currency cards and cash notes."
+    answer: "Under Bangladesh Bank regulations (FEPD-1 Circular No. 33), an adult citizen with a valid passport can endorse up to $18,000 USD per calendar year for private travel across personal dual-currency cards and cash notes."
   },
   {
     question: "What is the most effective way to carry money when traveling abroad from Dhaka?",
@@ -204,7 +204,7 @@ export const PRE_DEPARTURE_SITEMAP_FAQS: FAQItem[] = [
   },
   {
     question: "How much foreign currency and gold can a Bangladeshi traveler carry through Dhaka Airport customs?",
-    answer: "Adult Bangladeshi passport holders can endorse up to USD $18,000 per calendar year under the Bangladesh Bank private travel quota (FE/PD-1 Circular No. 33) across a dual-currency Visa/Mastercard and cash USD notes. Returning passengers may bring up to 100 grams of personal gold ornaments and up to 2 mobile phones duty-free through the DAC Green Channel."
+    answer: "Adult Bangladeshi passport holders can endorse up to USD $18,000 per calendar year under the Bangladesh Bank private travel quota (FEPD-1 Circular No. 33) across a dual-currency Visa/Mastercard and cash USD notes. Returning passengers may bring up to 100 grams of personal gold ornaments and up to 2 mobile phones duty-free through the DAC Green Channel."
   },
   {
     question: "What is the Zamzam water allowance for Bangladeshi Umrah and Hajj pilgrims returning to Dhaka?",

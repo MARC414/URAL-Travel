@@ -71,6 +71,20 @@ references:
     nameBn: 'NOVOAIR — DAC–CXB, ১৫ নভেম্বর ২০২৬-এর অফিশিয়াল বুকিং ফলাফল'
     url: >-
       https://secure.flynovoair.com/bookings/flight_selection.aspx?TT=OW&SS=&RT=&FL=on&DC=DAC&AC=CXB&AM=2026-11&AD=15&PA=1
+  - name: >-
+      Bangladesh Police Special Branch — Visa on Arrival information
+      (general document requirements)
+    nameBn: >-
+      বাংলাদেশ পুলিশ স্পেশাল ব্রাঞ্চ — ভিসা অন অ্যারাইভাল তথ্য (সাধারণ
+      নথি-সংক্রান্ত শর্ত)
+    url: 'https://voa.specialbranch.gov.bd/public/voa-info.html'
+  - name: >-
+      Bangladesh Online MRV Portal (visa.gov.bd) — online application form
+      only; not the source of the gratis tourist rule
+    nameBn: >-
+      বাংলাদেশ অনলাইন MRV পোর্টাল (visa.gov.bd) — শুধু অনলাইন আবেদন ফর্ম;
+      ফ্রি পর্যটক-ভিসা নিয়মের উৎস নয়
+    url: 'https://visa.gov.bd/'
 internalLinksEn:
   - text: Nepal itinerary for Bangladeshi travelers (Bangladesh → Nepal)
     path: /destinations/nepal-guide
@@ -104,9 +118,15 @@ Before paying, check the ticket document and PNR, operating carriers, baggage ta
 On 15 October 2026, NOVOAIR’s official booking engine was searched for one adult, one-way Dhaka (DAC) to Cox’s Bazar (CXB) on 15 November 2026. It returned nonstop options with a lowest displayed fare of BDT 5,349 [6]. This is only the domestic leg after Dhaka—not a Kathmandu–Cox’s Bazar fare. The review did not verify the final payable checkout total or whether additional charges apply. Fares and availability change; rerun the exact dates and check the final amount, baggage and fare conditions before payment.
 
 4. Bangladesh Visa Guidance for Nepali Tourists
-The Embassy of Bangladesh in Kathmandu says a Nepali national visiting Bangladesh for tourism may receive a 30-day, single-entry visa without a fee once per year at any international airport in Bangladesh. Subsequent visits within that year are fee-based according to the stay and number of entries; the Embassy advises an appropriate visa for study, business or work [4]. “May receive” is not a guarantee of admission: verify the Embassy’s current instructions and airline document checks before departure.
+The Embassy of Bangladesh in Kathmandu says a Nepali national visiting Bangladesh for tourism may receive a 30-day, single-entry visa without a fee once per year at any international airport in Bangladesh. The Embassy’s own tourist-visa fee table for Nepalese nationals lists USD 0 for the first time, USD 55 for re-entry and USD 100 for multiple entry, and says fees for subsequent visits within a year depend on the stay and number of entries; it advises an appropriate visa for study, business or work [4]. The Embassy does not define whether “once a year” means a calendar year or a rolling 12 months, so do not assume either — ask the Embassy if the timing matters for your trip. “May receive” is not a guarantee of admission: verify the Embassy’s current instructions and airline document checks before departure.
 
-CAAB’s AIP lists customs and immigration at Cox’s Bazar Airport [3], but airport designation does not establish that a Kathmandu flight is operating or guarantee a particular passenger’s processing there. This review did not verify a separate 48-hour visa arrangement specific to Cox’s Bazar in a current official source; do not rely on that claim without confirmation from Bangladesh immigration or the Embassy.
+On the Kathmandu–Dhaka–Cox’s Bazar route described above, Dhaka (DAC) is your first port of entry into Bangladesh, so international immigration and any visa-on-arrival processing happen at Dhaka; the onward DAC–CXB flight is a domestic leg. Do not plan to arrive in Bangladesh for the first time at Cox’s Bazar on this itinerary. CAAB’s AIP lists customs and immigration at Cox’s Bazar Airport [3], but airport designation does not establish that a Kathmandu flight is operating or guarantee a particular passenger’s processing there. This review did not verify a separate 48-hour visa arrangement specific to Cox’s Bazar in a current official source; do not rely on that claim without confirmation from Bangladesh immigration or the Embassy.
+
+Carry the documents Bangladesh’s general visa-on-arrival rules require: the Special Branch’s VoA information says applicants (other than those on government duty) must show at least USD 500 in cash or a credit card and a return ticket for a short stay, and that VoA is for a maximum of 30 days, single entry [7]. Those are the general VoA document requirements; your gratis eligibility itself comes from the Embassy rule above [4], and the immigration officer at the port of entry makes the final decision.
+
+If you need to file an online visa application form, the official MRV portal is visa.gov.bd [8]. Treat it as the application-form portal only: its generic country fee chart is not the source of the Embassy’s gratis tourist rule, and it does not override the Embassy wording above.
+
+Nepal and Bangladesh share no land border, so any overland version of this trip crosses India. Do not attempt it without first confirming the Indian transit or tourist visa you need for that crossing, plus the current land-port rules on both sides.
 
 5. Booking Checklist Before You Pay
 - Confirm that an airline sells the direct KTM–CXB flight for your exact date; a proposal or terminal readiness notice is not a ticket.
@@ -114,12 +134,13 @@ CAAB’s AIP lists customs and immigration at Cox’s Bazar Airport [3], but air
 - If booking separate tickets, confirm immigration, baggage collection and re-check requirements with both carriers, and choose a buffer that reflects the actual arrival and departure times.
 - Compare the final payable total—not only a displayed fare—including any baggage, seat, payment or service charges shown at checkout.
 - Recheck visa, schedule and fare information with the official authority or airline shortly before travel.
+- Nepali tourists relying on visa on arrival: carry a return ticket and proof of at least USD 500 in cash or a credit card, as Bangladesh’s general VoA rules require [7].
 
 6. Frequently Asked Questions
 Is there a direct Kathmandu–Cox’s Bazar flight to book now?
 This review did not confirm a scheduled or sellable direct passenger service as of 15 October 2026. The 14 October report describes the route as a proposal, with no published launch date or fare [1].
-Does the Embassy’s Nepali-tourist visa rule include Cox’s Bazar?
-The Embassy says Nepali tourists may receive a free 30-day, single-entry visa once per year at any international airport in Bangladesh [4]. CAAB lists customs and immigration at Cox’s Bazar Airport [3], but neither fact proves a direct flight is operating or guarantees a visa grant. Confirm current arrangements before travel.
+Where do I clear immigration on a Kathmandu–Dhaka–Cox’s Bazar trip?
+At Dhaka (DAC), your first port of entry into Bangladesh; the DAC–CXB flight onward is domestic. The Embassy says Nepali tourists may receive a free 30-day, single-entry visa once per year at any international airport in Bangladesh [4], and general VoA rules require at least USD 500 in cash or a credit card plus a return ticket [7], but neither fact proves a direct KTM–CXB flight is operating or guarantees a visa grant. Confirm current arrangements before travel.
 What does the BDT 5,349 fare cover?
 It was the lowest displayed fare in a one-way NOVOAIR search for DAC–CXB on 15 November 2026, checked on 15 October. It covers only the displayed domestic-leg result; the final checkout total and the KTM–DAC fare were not verified [6].
 Can I book KTM–DAC–CXB on one ticket?
@@ -140,9 +161,15 @@ Biman’s site offers a multi-city search and lists all three airports, but this
 ১৫ অক্টোবর ২০২৬-এ NOVOAIR-এর অফিশিয়াল booking engine-এ একজন প্রাপ্তবয়স্কের জন্য ১৫ নভেম্বর ২০২৬-এর একমুখী ঢাকা (DAC) থেকে কক্সবাজার (CXB) সার্চ করা হয়েছিল। ফলাফলে nonstop বিকল্প এবং সর্বনিম্ন প্রদর্শিত ভাড়া BDT 5,349 দেখা যায় [৬]। এটি ঢাকায় পৌঁছানোর পরের domestic leg মাত্র—কাঠমান্ডু–কক্সবাজারের মোট ভাড়া নয়। পর্যালোচনায় চূড়ান্ত checkout-এর payable total বা অতিরিক্ত চার্জ আছে কি না যাচাই করা হয়নি। ভাড়া ও আসন-প্রাপ্যতা বদলায়; পেমেন্টের আগে একই তারিখ আবার সার্চ করে মোট অঙ্ক, ব্যাগেজ ও fare condition দেখুন।
 
 ৪. নেপালি পর্যটকদের জন্য বাংলাদেশের ভিসা
-কাঠমান্ডুতে বাংলাদেশ দূতাবাস জানিয়েছে, বাংলাদেশে পর্যটনে আসা নেপালি নাগরিক বছরে একবার বাংলাদেশের যেকোনো আন্তর্জাতিক বিমানবন্দরে ৩০ দিনের single-entry ভিসা বিনা ফিতে পেতে পারেন। একই বছরে পরবর্তী সফরে অবস্থানের সময় ও entry-র সংখ্যার ওপর ফি প্রযোজ্য; পড়াশোনা, ব্যবসা বা কাজের জন্য উপযুক্ত ভিসা নেওয়ার পরামর্শ দেয় দূতাবাস [৪]। “পেতে পারেন” মানে প্রবেশের নিশ্চয়তা নয়—যাত্রার আগে দূতাবাসের বর্তমান নির্দেশনা ও এয়ারলাইন্সের নথি-যাচাই নিশ্চিত করুন।
+কাঠমান্ডুতে বাংলাদেশ দূতাবাস জানিয়েছে, বাংলাদেশে পর্যটনে আসা নেপালি নাগরিক বছরে একবার বাংলাদেশের যেকোনো আন্তর্জাতিক বিমানবন্দরে ৩০ দিনের single-entry ভিসা বিনা ফিতে পেতে পারেন। দূতাবাসের নিজস্ব পর্যটক-ভিসা ফি-তালিকায় নেপালি নাগরিকদের জন্য প্রথমবার USD 0, re-entry USD 55 এবং multiple entry USD 100 দেখানো হয়েছে; একই বছরে পরবর্তী সফরে অবস্থানের সময় ও entry-র সংখ্যার ওপর ফি প্রযোজ্য। পড়াশোনা, ব্যবসা বা কাজের জন্য উপযুক্ত ভিসা নেওয়ার পরামর্শ দেয় দূতাবাস [৪]। “বছরে একবার” বলতে calendar year নাকি ধারাবাহিক ১২ মাস—দূতাবাস তা সংজ্ঞায়িত করেনি; আপনার যাত্রার জন্য সময়টি গুরুত্বপূর্ণ হলে কোনোটিই ধরে না নিয়ে দূতাবাসকে জিজ্ঞাসা করুন। “পেতে পারেন” মানে প্রবেশের নিশ্চয়তা নয়—যাত্রার আগে দূতাবাসের বর্তমান নির্দেশনা ও এয়ারলাইন্সের নথি-যাচাই নিশ্চিত করুন।
 
-CAAB-এর AIP-তে কক্সবাজার বিমানবন্দরে কাস্টমস ও ইমিগ্রেশনের কথা আছে [৩], কিন্তু আন্তর্জাতিক বিমানবন্দর ঘোষণা কোনো কাঠমান্ডু ফ্লাইট চালু থাকার প্রমাণ নয়, এবং নির্দিষ্ট যাত্রীর প্রবেশ নিশ্চিত করে না। কক্সবাজারের জন্য আলাদা ৪৮ ঘণ্টার ভিসা-ব্যবস্থা বর্তমান কোনো অফিশিয়াল সূত্রে এই পর্যালোচনায় যাচাই করা যায়নি; বাংলাদেশ ইমিগ্রেশন বা দূতাবাস নিশ্চিত না করলে এ দাবির ওপর ভরসা করবেন না।
+উপরে বর্ণিত কাঠমান্ডু–ঢাকা–কক্সবাজার রুটে ঢাকা (DAC) বাংলাদেশে আপনার প্রথম প্রবেশ-বন্দর, তাই আন্তর্জাতিক ইমিগ্রেশন ও visa-on-arrival প্রক্রিয়া ঢাকাতেই সম্পন্ন হবে; এরপরের DAC–CXB ফ্লাইটটি domestic leg. এই itinerary-তে প্রথমবার কক্সবাজারে নেমে বাংলাদেশে প্রবেশের পরিকল্পনা করবেন না। CAAB-এর AIP-তে কক্সবাজার বিমানবন্দরে কাস্টমস ও ইমিগ্রেশনের কথা আছে [৩], কিন্তু আন্তর্জাতিক বিমানবন্দর ঘোষণা কোনো কাঠমান্ডু ফ্লাইট চালু থাকার প্রমাণ নয়, এবং নির্দিষ্ট যাত্রীর প্রবেশ নিশ্চিত করে না। কক্সবাজারের জন্য আলাদা ৪৮ ঘণ্টার ভিসা-ব্যবস্থা বর্তমান কোনো অফিশিয়াল সূত্রে এই পর্যালোচনায় যাচাই করা যায়নি; বাংলাদেশ ইমিগ্রেশন বা দূতাবাস নিশ্চিত না করলে এ দাবির ওপর ভরসা করবেন না।
+
+বাংলাদেশের সাধারণ visa-on-arrival নিয়মে যে নথি লাগে, সেগুলো সঙ্গে রাখুন: স্পেশাল ব্রাঞ্চের VoA তথ্য অনুযায়ী আবেদনকারীকে (সরকারি দায়িত্বে থাকা ব্যক্তি ছাড়া) কমপক্ষে USD 500 নগদ বা credit card এবং স্বল্পমেয়াদি অবস্থানের জন্য return ticket দেখাতে হয়, এবং VoA সর্বোচ্চ ৩০ দিনের single entry [৭]। এগুলো সাধারণ VoA নথি-শর্ত; আপনার ফ্রি ভিসার যোগ্যতা আসে উপরের দূতাবাস-নিয়ম থেকে [৪], এবং চূড়ান্ত সিদ্ধান্ত প্রবেশ-বন্দরের ইমিগ্রেশন কর্মকর্তার।
+
+অনলাইনে ভিসার আবেদন ফর্ম পূরণ করতে হলে অফিশিয়াল MRV পোর্টাল visa.gov.bd [৮]। এটিকে শুধু আবেদন-ফর্ম পোর্টাল হিসেবে দেখুন: এর সাধারণ দেশভিত্তিক ফি-তালিকা দূতাবাসের ফ্রি পর্যটক-ভিসা নিয়মের উৎস নয় এবং উপরের দূতাবাস-বক্তব্যকে বাতিলও করে না।
+
+নেপাল ও বাংলাদেশের মধ্যে সরাসরি স্থলসীমান্ত নেই, তাই এই ভ্রমণের যেকোনো স্থলপথ ভারতের ভেতর দিয়ে যায়। সেই crossing-এর জন্য প্রয়োজনীয় ভারতীয় transit বা tourist visa এবং দুই পাশের বর্তমান land-port নিয়ম আগে নিশ্চিত না করে স্থলপথে রওনা দেবেন না।
 
 ৫. পেমেন্টের আগে বুকিং-চেকলিস্ট
 - নির্দিষ্ট তারিখে KTM–CXB সরাসরি ফ্লাইট এয়ারলাইন্স বিক্রি করছে কি না নিশ্চিত করুন; প্রস্তাব বা টার্মিনাল প্রস্তুতির খবর টিকিট নয়।
@@ -154,8 +181,8 @@ CAAB-এর AIP-তে কক্সবাজার বিমানবন্দ�
 ৬. সচরাচর জিজ্ঞাসা
 এখন কি কাঠমান্ডু–কক্সবাজার সরাসরি ফ্লাইট বুক করা যায়?
 ১৫ অক্টোবর ২০২৬-এর পর্যালোচনায় নির্ধারিত বা বিক্রির জন্য উপলভ্য সরাসরি যাত্রীবাহী ফ্লাইট নিশ্চিত করা যায়নি। ১৪ অক্টোবরের প্রতিবেদন রুটটিকে প্রস্তাব বলেছে; সেখানে launch date বা fare প্রকাশ করা হয়নি [১]।
-দূতাবাসের নেপালি পর্যটক ভিসার নিয়ম কি কক্সবাজারেও প্রযোজ্য?
-দূতাবাস বলেছে, নেপালি পর্যটক বছরে একবার বাংলাদেশের যেকোনো আন্তর্জাতিক বিমানবন্দরে বিনা ফিতে ৩০ দিনের single-entry ভিসা পেতে পারেন [৪]। CAAB কক্সবাজার বিমানবন্দরে কাস্টমস ও ইমিগ্রেশন তালিকাভুক্ত করেছে [৩], কিন্তু এই দুই তথ্য সরাসরি ফ্লাইট চালু থাকা বা ভিসা মঞ্জুরের নিশ্চয়তা নয়। যাত্রার আগে বর্তমান ব্যবস্থা নিশ্চিত করুন।
+কাঠমান্ডু–ঢাকা–কক্সবাজার যাত্রায় ইমিগ্রেশন কোথায় করতে হবে?
+ঢাকায় (DAC)—বাংলাদেশে আপনার প্রথম প্রবেশ-বন্দরে; এরপরের DAC–CXB ফ্লাইট domestic. দূতাবাস বলেছে, নেপালি পর্যটক বছরে একবার বাংলাদেশের যেকোনো আন্তর্জাতিক বিমানবন্দরে বিনা ফিতে ৩০ দিনের single-entry ভিসা পেতে পারেন [৪], এবং সাধারণ VoA নিয়মে কমপক্ষে USD 500 নগদ বা credit card ও return ticket লাগে [৭]; কিন্তু এই তথ্যগুলো সরাসরি KTM–CXB ফ্লাইট চালু থাকা বা ভিসা মঞ্জুরের নিশ্চয়তা নয়। যাত্রার আগে বর্তমান ব্যবস্থা নিশ্চিত করুন।
 BDT 5,349 ভাড়া কোন অংশের?
 এটি ১৫ অক্টোবর তারিখে ১৫ নভেম্বর ২০২৬-এর DAC–CXB একমুখী NOVOAIR সার্চে প্রদর্শিত সর্বনিম্ন ভাড়া। এটি শুধু domestic leg; চূড়ান্ত checkout total এবং KTM–DAC ভাড়া যাচাই করা হয়নি [৬]।
 KTM–DAC–CXB কি একই টিকিটে বুক করা যাবে?
