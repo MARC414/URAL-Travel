@@ -1550,9 +1550,9 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                               ? isBn
 
-                                ? "এই গাইডের অফিশিয়াল তথ্যসূত্র"
+                                ? "এই গাইডের তথ্যসূত্র"
 
-                                : "Official sources for this guide"
+                                : "Sources for this guide"
 
                               : isBn
 
@@ -1592,8 +1592,8 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                                 ? "নিচে গাইডে উদ্ধৃত সরকারি/operator সূত্রের পাশাপাশি application, booking ও একটি সাধারণ regional portal আছে; প্রতিটি link সব দাবির প্রমাণ নয়। নিয়ম বদলাতে পারে—আবেদন বা বুকিংয়ের আগে live নির্দেশনা মিলিয়ে নিন।"
                                 : "The list combines government/operator sources cited in the guide with application and booking portals plus one general regional portal; not every link supports every claim. Requirements can change, so confirm live instructions before applying or booking."
                               : isBn
-                                ? "গাইড হালনাগাদের সময় এই অফিশিয়াল পেজগুলো দেখা হয়েছে। নিয়ম বদলাতে পারে—আবেদনের আগে কর্তৃপক্ষের live নির্দেশনা মিলিয়ে নিন।"
-                                : "These official pages were reviewed while this guide was updated. Requirements can change; follow the authority's live instructions for your application."
+                                ? "গাইড হালনাগাদের সময় এই তথ্যসূত্রগুলো দেখা হয়েছে। নিয়ম বদলাতে পারে—ভ্রমণ, আবেদন বা বুকিংয়ের আগে সংশ্লিষ্ট কর্তৃপক্ষ ও এয়ারলাইন্সের live নির্দেশনা মিলিয়ে নিন।"
+                                : "These sources were reviewed while this guide was updated. Details can change; confirm live requirements with the relevant authority and airline before travel, application or booking."
                             : isBn
                               ? "এগুলো ক্যাটাগরি-ভিত্তিক সাধারণ reference link—সবগুলো এই নির্দিষ্ট লেখার উদ্ধৃত উৎস নয়। সংশ্লিষ্ট কর্তৃপক্ষের সর্বশেষ নিয়ম যাচাই করুন।"
                               : "These are general category-level reference links, not citations for every statement in this article. Confirm current details with the relevant authority."}

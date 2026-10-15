@@ -3,6 +3,7 @@ import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, TRI
 import { BENGALI_DESTINATION_OVERRIDES } from "./bengaliDestinations";
 import { Language } from "../translations";
 import { HAJJ_UMRAH_FAQS } from "../hooks/useSeoMeta";
+import { SCHEDULED_BENGALI_BLOG_OVERRIDES } from "./scheduledBengaliBlogs.generated";
 
 export const BENGALI_BLOG_OVERRIDES: Record<
   string,
@@ -23,6 +24,7 @@ export const BENGALI_BLOG_OVERRIDES: Record<
     };
   }
 > = {
+  ...SCHEDULED_BENGALI_BLOG_OVERRIDES,
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": {
     title: "বাংলাদেশ থেকে DIY Umrah গাইড (২০২৬–২৭): Nusuk, Visa Route, BDT বাজেট ও ফরজ Hajj নিয়ম",
     summary:

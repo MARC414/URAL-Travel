@@ -19,6 +19,8 @@
  * ⚠️ Do not import this from a module that is eagerly reachable from the app
  * shell, or the split silently undoes itself.
  */
+import { SCHEDULED_BLOG_BODY } from "./scheduledBlogBodies.generated";
+
 export const BLOG_BODY: Readonly<Record<string, string>> = {
   "cheap-flight-booking-hacks-dhaka": `Booking outbound flights from Dhaka often feels frustrating with prices suddenly spiking overnight. Here is how expert Bangladeshi travelers secure tickets for up to 30% cheaper.
 
@@ -1597,6 +1599,7 @@ What is the indicative budget for a 3-day Dhaka to Kolkata overland trip?
 An indicative 3-day, 2-night overland trip by bus via Benapole–Petrapole ranges from roughly BDT 8,000–12,000 per person (budget tier) to BDT 15,000–18,000 per person (comfortable AC tier), including roundtrip bus transport, IVAC processing fee, border tax, two hotel nights, and meals. Treat this as a planning reference, not a live quote.
 Which land border should be endorsed on my Indian visa for Dhaka–Kolkata travel?
 The Benapole–Petrapole corridor corresponds to the Haridaspur / Benapole checkpost endorsement on an Indian visa. Always verify that the entry and exit points printed on your visa sticker match your planned land or air route before departure [4–6, 9–10].`,
+  ...SCHEDULED_BLOG_BODY,
 };
 
 /** Look up one body by slug; undefined for an unknown slug. */

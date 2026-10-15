@@ -1,3 +1,5 @@
+import { SCHEDULED_BLOG_SLUGS } from "./scheduledBlogIndex.generated";
+
 /**
  * Small URL index for route resolution and home-page counts.
  * Full article metadata lives in constants.ts and is loaded only on blog routes.
@@ -51,6 +53,7 @@ export const BLOG_SLUGS = [
   "travel-creator-resources",
   "kkday-10-10-winter-sale-japan-tours-passes-guide",
   "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
+  ...SCHEDULED_BLOG_SLUGS,
 ] as const;
 
 export const BLOG_POST_COUNT = BLOG_SLUGS.length;

@@ -6,6 +6,7 @@
  * English and Bengali by slug; a concise destination/category fallback is used
  * for new or unmapped posts.
  */
+import { SCHEDULED_BLOG_ALT_TEXT } from "../data/scheduledBlogIndex.generated";
 
 export interface BlogCoverAltTextInput {
   /** The article title in English or Bengali. */
@@ -483,7 +484,9 @@ export function generateBlogCoverAltText(
   const cleanedTitle = cleanBlogTitleForAlt(title).toLowerCase();
   const normalizedCategory = cat.trim().toLowerCase();
   const normalizedSlug = postSlug.trim().toLowerCase();
-  const curated = normalizedSlug ? CURATED_BLOG_SCENES[normalizedSlug] : undefined;
+  const curated = normalizedSlug
+    ? CURATED_BLOG_SCENES[normalizedSlug] ?? SCHEDULED_BLOG_ALT_TEXT[normalizedSlug]
+    : undefined;
 
   if (curated) {
     return normalizeAltText(isBn ? curated.bn : curated.en, isBn);

@@ -28,7 +28,9 @@ import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
 import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
+import { SCHEDULED_BLOG_ALT_TEXT } from "../src/data/scheduledBlogIndex.generated";
 import { BLOG_BODY } from "../src/data/blogContent";
+import { loadScheduledBlogPosts } from "./scheduledPosts";
 import {
   BENGALI_BLOG_OVERRIDES,
   getLocalizedBlogs,
@@ -123,6 +125,33 @@ check(
     : "src/data/blogIndex.ts must match BLOG_DATA slugs and count in order"
 );
 
+const CXB_DRAFT_SLUG = "kathmandu-to-coxs-bazar-flights-route-status-booking";
+const cxbDraft = loadScheduledBlogPosts().find((post) => post.slug === CXB_DRAFT_SLUG);
+const cxbDraftHtmlRoutesAreAbsent = [
+  path.join(DIST_DIR, "blog", `${CXB_DRAFT_SLUG}.html`),
+  path.join(DIST_DIR, "bn", "blog", `${CXB_DRAFT_SLUG}.html`),
+].every((file) => !fs.existsSync(file));
+const cxbDraftFeedOutputs = [
+  read(path.join(DIST_DIR, "sitemap.xml")) ?? "",
+  read(path.join(DIST_DIR, "rss.xml")) ?? "",
+  read(path.join(DIST_DIR, "index.html")) ?? "",
+].join("\n");
+const cxbDraftStaysHidden =
+  cxbDraft?.status === "draft" &&
+  !cxbDraft.publishDate &&
+  cxbDraft.englishBody.includes("no confirmed scheduled passenger service") &&
+  cxbDraft.bengaliBody.includes("নির্ধারিত যাত্রীবাহী ফ্লাইটের নিশ্চিত সময়সূচি পাওয়া যায়নি") &&
+  !BLOG_DATA.some((post) => post.slug === CXB_DRAFT_SLUG) &&
+  !BLOG_SLUGS.includes(CXB_DRAFT_SLUG as never) &&
+  cxbDraftHtmlRoutesAreAbsent &&
+  !cxbDraftFeedOutputs.includes(CXB_DRAFT_SLUG);
+check(
+  cxbDraftStaysHidden,
+  cxbDraftStaysHidden
+    ? "the bilingual Cox’s Bazar guide is retained as a draft and excluded from routes, homepage, sitemap, and RSS"
+    : "the Cox’s Bazar draft must remain complete in content/blog and absent from production output until scheduled",
+);
+
 const blogImgDir = path.join(DIST_DIR, "img", "blog");
 const blogImages = fs.existsSync(blogImgDir)
   ? fs.readdirSync(blogImgDir).filter((f) => f.endsWith(".jpg"))
@@ -138,7 +167,7 @@ const postsMissingGeneratedImage = BLOG_DATA.filter(
   (post) => !fs.existsSync(path.join(generatedBlogImgDir, `${post.slug}.jpg`)),
 ).map((post) => post.slug);
 const postsMissingCuratedAlt = BLOG_DATA.filter(
-  (post) => !CURATED_BLOG_SCENES[post.slug],
+  (post) => !CURATED_BLOG_SCENES[post.slug] && !SCHEDULED_BLOG_ALT_TEXT[post.slug],
 ).map((post) => post.slug);
 const orphanedCuratedAlt = Object.keys(CURATED_BLOG_SCENES).filter(
   (slug) => !postSlugs.has(slug),
@@ -1979,6 +2008,7 @@ check(
         duplicateRouteDescriptions.slice(0, 3).join("; ")
 );
 
+
 const missingArticleSchema: string[] = [];
 const requiredArticleFields = [
   "headline",
@@ -3792,7 +3822,8 @@ const stopoverReferencesAreLocalized = (() => {
       enRefs.length === 8 &&
       bnRefs?.length === enRefs.length &&
       enRefs.every((ref, index) => ref.url === bnRefs[index]?.url && enHtml.includes(`href="${ref.url}"`) && bnHtml.includes(`href="${ref.url}"`)) &&
-      /\u098f\u0987 \u0997\u09be\u0987\u09a1\u09c7\u09b0 \u0985\u09ab\u09bf\u09b6\u09bf\u09df\u09be\u09b2 \u09a4\u09a5\u09cd\u09af\u09b8\u09c2\u09a4\u09cd\u09b0/.test(bnHtml) &&
+      /\u098f\u0987 \u0997\u09be\u0987\u09a1\u09c7\u09b0 \u09a4\u09a5\u09cd\u09af\u09b8\u09c2\u09a4\u09cd\u09b0/.test(bnHtml) &&
+      enHtml.includes("Sources for this guide") &&
       BLOG_DATA.find((post) => post.slug === STOPOVER_SLUG)?.updatedAt === "2026-10-15"
   );
 })();
