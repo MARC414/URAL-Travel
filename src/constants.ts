@@ -2241,12 +2241,65 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-16",
     slug: "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
-    title: "Nusuk App & Saudi Visa Bio Step-by-Step Guide for Bangladeshis (2026): Rawdah Shareef Permit & Biometrics",
-    summary: "Every Bangladeshi Umrah and Hajj pilgrim must use two official Saudi government smartphone apps before and during their journey: the Saudi Visa Bio app (operated by the Saudi Ministry of Foreign Affairs for 10-fingerprint biometric verification) and the official Nusuk app (nusuk.sa, operated by the Saudi Ministry of Hajj & Umrah for Umrah slots and mandatory Rawdah Shareef entry permits in Madinah). This easy-to-read, verified guide walks through registering your account with your 10-digit Saudi Visa Number, fixing common smartphone camera fingerprint errors in Dhaka, and booking free Riyazul Jannah (Rawdah) QR permits on the Friday release schedule.",
+    title: "Nusuk App & Saudi Visa Bio Guide for Bangladeshis (2026): Rawdah Permit, Biometrics & Official Steps",
+    summary: "Bangladeshi pilgrims planning Umrah should prepare two official Saudi apps: the Nusuk app (nusuk.sa) for Umrah slots and the mandatory Rawdah Shareef (Riyazul Jannah) appointment permit in Madinah, and, where the current Saudi Ministry FAQ applies, the Saudi Visa Bio app for biometric enrollment for electronically issued Umrah visas. This guide explains Nusuk visitor registration with your 10-digit Saudi Visa Number, practical biometric steps in Dhaka, and how to request a free Rawdah appointment permit while checking live availability—without assuming a fixed weekly release day. Checked against official Saudi Ministry and Nusuk sources on 14 October 2026.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
+    updatedAt: "2026-10-14",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
+    references: [
+      {
+        name: "Saudi Ministry of Hajj and Umrah — FAQ (biometric enrollment for Umrah visas)",
+        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — FAQ (Umrah visa-এর biometric enrollment)",
+        url: "https://haj.gov.sa/en/FAQ",
+      },
+      {
+        name: "Saudi Visa Bio app listing (Saudi Ministry of Foreign Affairs)",
+        nameBn: "Saudi Visa Bio অ্যাপের listing (Saudi Ministry of Foreign Affairs)",
+        url: "https://play.google.com/store/apps/details?id=sa.gov.mofa.saudivisabio",
+      },
+      {
+        name: "Saudi Ministry — Umrah Permit Application",
+        nameBn: "সৌদি মন্ত্রণালয় — Umrah Permit আবেদন",
+        url: "https://haj.gov.sa/en/E-Services/Umrah-Permit-Application",
+      },
+      {
+        name: "Saudi Ministry — permit to visit Al-Rawdah Al-Sharifiyah",
+        nameBn: "সৌদি মন্ত্রণালয় — Al-Rawdah Al-Sharifiyah জিয়ারতের permit",
+        url: "https://haj.gov.sa/en/E-Services/Permit-to-Visit-Al-Rawdah-Al-Sharifiyah-for-Men-Women",
+      },
+      {
+        name: "Nusuk Umrah — registration",
+        nameBn: "Nusuk Umrah — নিবন্ধন পেজ",
+        url: "https://umrah.nusuk.sa/registration/signup",
+      },
+      {
+        name: "Nusuk Umrah — Terms of Use",
+        nameBn: "Nusuk Umrah — ব্যবহারের শর্ত",
+        url: "https://umrah.nusuk.sa/TermsOfUse",
+      },
+      {
+        name: "Saudi Ministry of Hajj and Umrah — Nusuk Umrah launch for overseas pilgrims",
+        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — বিদেশি যাত্রীদের জন্য Nusuk Umrah সেবা চালুর ঘোষণা",
+        url: "https://haj.gov.sa/en/Media-Center/Ministry-News/Ministry-of-Hajj-and-Umrah-launches-Nusuk-Umrah-service-to-enable-pilgrims-from-outside-the-Kingdom",
+      },
+      {
+        name: "Saudi Unified Visa Platform",
+        nameBn: "সৌদি Unified Visa Platform",
+        url: "https://ksavisa.sa",
+      },
+      {
+        name: "Bangladesh Haj Management Portal",
+        nameBn: "বাংলাদেশ Haj Management Portal",
+        url: "https://www.hajj.gov.bd/",
+      },
+      {
+        name: "Official Nusuk platform",
+        nameBn: "অফিশিয়াল Nusuk platform",
+        url: "https://www.nusuk.sa",
+      },
+    ],
     internalLinks: [
       { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Umrah Rules for Bangladeshi Women & Ladies' Gates 25–29", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },

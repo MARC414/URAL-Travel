@@ -621,7 +621,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
       "Bangladeshi passport holders flying Saudia or Flynas to the UK, US, Europe, Istanbul, or Dubai can book a 96-Hour Saudi Stopover Visa during flight checkout for ~SAR 135 (BDT 4,200) with 1 free hotel night on Saudia. US/UK/Schengen visa holders also qualify for a 1-year Saudi e-Visa.",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
-      "Every Bangladeshi pilgrim must complete 10-fingerprint biometrics on the official Saudi Visa Bio app before flying and register on the Nusuk app (nusuk.sa) using their 10-digit Visa Number. Inside Nusuk, book your free Umrah slot and mandatory Rawdah Shareef (Riyazul Jannah) permit in Madinah.",
+      "Bangladeshi pilgrims should prepare the Nusuk app (nusuk.sa) for Umrah slots and the mandatory Rawdah Shareef (Riyazul Jannah) appointment permit in Madinah. The current Saudi Ministry FAQ lists Bangladesh for biometric enrollment for electronically issued Umrah visas via Saudi Visa Bio; it is not a universal rule for every tourist or stopover traveler. Book the free Rawdah permit in Nusuk and check live availability.",
     "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
       "Under updated Saudi Ministry of Hajj & Umrah (haj.gov.sa) rules, Bangladeshi women can obtain an Umrah e-Visa without a mandatory male Mahram restriction in the visa portal. In Madinah, book hotels in Markazia North facing Ladies' Gates 25–29 for direct women's prayer hall and Rawdah access.",
     "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
@@ -716,7 +716,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
       "Saudia বা Flynas এয়ারলাইন্সে লন্ডন, ইউরোপ, আমেরিকা, ইস্তাম্বুল বা দুবাই যাওয়ার পথে বাংলাদেশি পাসপোর্টধারীরা মাত্র ১৩৫ সৌদি রিয়াল (~৪,২০০ টাকা) খরচে ৯৬ ঘণ্টার Saudi Stopover Visa ও ১ রাত ফ্রি হোটেল নিয়ে ওমরাহ করতে পারেন। এছাড়া US/UK/Schengen ভিসাধারীরা ১ বছরের ই-ভিসা পান।",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
-      "ওমরাহ ও হজযাত্রীদের ফ্লাইটের আগেই Saudi Visa Bio অ্যাপে ১০ আঙুলের ছাপ দিতে হয় এবং ভিসা ইস্যুর পর ১০ ডিজিটের ভিসা নম্বর দিয়ে অফিশিয়াল Nusuk অ্যাপে (nusuk.sa) একাউন্ট খুলতে হয়। Nusuk অ্যাপ থেকেই মদিনায় রিয়াজুল জান্নাত (Rawdah Shareef) জিয়ারতের ফ্রি পারমিট বুক করা যায়।",
+      "ওমরাহ যাত্রীদের মক্কায় ওমরাহ স্লট ও মদিনায় রিয়াজুল জান্নাত (Rawdah Shareef) অ্যাপয়েন্টমেন্ট পারমিটের জন্য Nusuk অ্যাপ (nusuk.sa) প্রস্তুত রাখতে হবে। বর্তমান সৌদি মন্ত্রণালয়ের FAQ বাংলাদেশকে ইলেকট্রনিক Umrah visa-র biometric enrollment-এর জন্য Saudi Visa Bio-তে তালিকাভুক্ত করে; এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার যাত্রীর জন্য সার্বজনীন নিয়ম নয়। Nusuk-এ ফ্রি Rawdah পারমিট বুক করুন এবং লাইভ availability চেক করুন।",
     "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
       "সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের (haj.gov.sa) হালনাগাদ নিয়মে বাংলাদেশি নারীরা মাহরাম ছাড়াও ওমরাহ ই-ভিসার আবেদন করতে পারেন। মদিনায় মা ও বোনদের সহজে নামাজ ও রিয়াজুল জান্নাতে প্রবেশের জন্য উত্তর দিকের Ladies' Gates 25–29 সংলগ্ন Markazia North হোটেলে থাকা সবচেয়ে সুবিধাজনক।",
     "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
@@ -3517,7 +3517,11 @@ export default function App() {
             <ResponsiveImage
               src={heroBgImage}
               sizes="100vw"
-              alt=""
+              alt={
+                isBn
+                  ? "সূর্যাস্তের মেঘের সমুদ্রের উপর ভাসমান কাঠের নৌকার ডেক, সাথে ভ্রমণ খাতা ও ক্যামেরা"
+                  : "Wooden sailboat deck above a sea of sunset clouds with a travel journal and camera"
+              }
               aria-hidden={true}
               loading="eager"
               fetchPriority="high"
@@ -4568,7 +4572,11 @@ export default function App() {
           <ResponsiveImage
             src={coxsBazarSunriseImg}
             sizes="100vw"
-            alt=""
+            alt={
+              isBn
+                ? "কক্সবাজার সৈকতে সূর্যোদয়ের সোনালি আলো, দূরে মাছ ধরার নৌকা"
+                : "Golden sunrise over Cox's Bazar beach with fishing boats in the distance"
+            }
             aria-hidden={true}
             loading="lazy"
             fetchPriority="low"

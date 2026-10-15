@@ -106,6 +106,57 @@
 
 ---
 
+## Worked queue row — Nusuk / Rawdah / Saudi Visa Bio guide (Wave 3A)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-14 | **UPDATE IN PLACE — fixed slug; no second page.** | `/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit` | `/bn/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit` | **Nusuk app and Saudi Visa Bio guide for Bangladeshi pilgrims** | Informational / execution-intent guide: official apps, biometric steps, Nusuk visitor registration, Rawdah appointment permit, live availability. Live Bangladesh SERP was not measured. | Stages 1–9 completed in this wave; lint/build/verify:build to be recorded below. Code verified, not externally deployed. |
+
+### Must-preserve and scope notes from the owner
+
+- Keep the same English URL and Bengali twin; no slug change.
+- Scope **Saudi Visa Bio** to the current Saudi Ministry FAQ: Bangladesh is listed for biometric enrollment for electronically issued Umrah visas. Do not claim every tourist or stopover traveler must use it.
+- Remove any fixed weekly ("Friday") Rawdah slot-release guarantee. State that the Rawdah service page describes a free appointment permit and instructs users to select an available date/time slot; no fixed weekly schedule is published.
+- Keep visa permission distinct from a Nusuk permit. Keep full English/Bengali decision parity.
+- `CONTENT_UPDATED` stays 2026-10-14; use `updatedAt` on `blog-16`.
+
+### Stage 2 — Nusuk / Rawdah / Saudi Visa Bio claims ledger (checked 14 October 2026)
+
+| ID | Claim / proposed section | Primary source checked | Finding as of 2026-10-14 | Status / safe action |
+|---|---|---|---|---|
+| U-01 | Standard Umrah Visa channel and Nusuk registration. | Ministry Nusuk Umrah launch; registration; Terms; Ministry FAQ. | Overseas pilgrims can apply directly without an intermediary; Bangladesh listed in signup; external agent cannot issue an Umrah visa without accommodation and transport services. | **QUALIFIED.** Keep direct Nusuk and external provider as channels; state the Ministry FAQ's accommodation-plus-transport condition for external agents. |
+| U-02 | 1448H visa and entry window; Umrah is not unrestricted year-round. | Ministry 1448H calendar. | Visa issuance and pilgrim entry began 31 May 2026; final visa issuance 9 March 2027; final entry 23 March 2027; final departure 7 April 2027. Season-bound. | **VERIFIED / SEASON-BOUND.** Label as current checked guidance; tell readers to check the next calendar. |
+| U-08 | Saudi Visa Bio for applicants from Bangladesh. | Ministry FAQ biometric answers; Saudi Visa Bio app listing. | Ministry FAQ lists Bangladesh among countries where biometric enrollment has been implemented for electronically issued Umrah visas and names Saudi Visa Bio. Requirement is visa/application-specific. | **QUALIFIED.** Say the current Ministry FAQ lists Bangladesh for Umrah-visa biometrics; follow current official visa application and app. Avoid saying every pilgrim must use it before flying. |
+| U-09 | Nusuk Umrah permit and Rawdah permit timing/booking. | Ministry Umrah permit service; Rawdah service. | Service pages list visitors among eligible users, name the Nusuk App and website, and instruct users to select an available date/time slot. Rawdah service page describes a free appointment permit. No fixed weekly slot-release schedule is published. | **VERIFIED / QUALIFIED.** Explain steps and advise checking live availability. Do not state a fixed day, guaranteed window, or "free Rawdah every time" beyond the service page's current cost/terms. |
+
+### Stage 3–8 execution record (14 October 2026)
+
+- **Stage 3 — Brief: complete.** Page job: help a Bangladeshi passport holder prepare the official Nusuk and, where applicable, Saudi Visa Bio steps, register as a Visitor, and book a Rawdah appointment permit without overclaiming biometric or slot-release rules. `/umrah` and the main DIY guide remain the broader planning/process owners.
+- **Stage 4 — English: complete.** Answer leads; Saudi Visa Bio scoped to the Ministry FAQ's Umrah-visa biometric listing; fixed Friday Rawdah release removed; live availability emphasized; five FAQs added; numbered references added.
+- **Stage 5 — Bengali: complete.** Bengali override carries the same sections, qualifications, references, and five FAQs; not a shortened summary.
+- **Stage 6 — package: complete.** EN/BN title, summary, 14 October review date, AEO snippets, visible FAQ/schema, numbered references, retained internal links aligned.
+- **Stage 7 — preflight: passed.** Claim/citation numbering, Saudi Visa Bio scope, absence of fixed Friday guarantee, FAQ pairs, route links, and EN/BN parity reviewed.
+- **Stage 8 — red team:**
+
+  | Dimension | Score / 4 | Reason |
+  |---|---:|---|
+  | Intent and format | 3 | Direct execution answer and useful guide structure; live Bangladesh SERP format remains unmeasured. |
+  | Factual evidence and safety | 4 | Primary-source ledger; Saudi Visa Bio scoped to official FAQ; no fixed slot-release claim. |
+  | Usability and actionability | 4 | Biometric steps, Nusuk registration, Rawdah booking steps, FAQs, source links. |
+  | Locale, trust, and release | 4 | Full BN decision parity, visible cited sources, FAQ/schema parity, route/build checks. |
+  | **Total** | **15 / 16** | **Pass (≥13); no zero scores and no hard fail.** |
+
+### Stage 9 — repository handoff and verification (14 October 2026)
+
+**Repository implementation verified; not externally deployed.** The in-place article update is in `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, and `src/constants.ts`; target AEO copy is in `src/App.tsx`. FAQPage allowlisting is in `src/utils/blogStructuredData.ts` and `scripts/verify-build.ts`. `src/data/contentMeta.ts` was left unchanged at 2026-10-14; `updatedAt` on `blog-16` is 2026-10-14.
+
+- `npm run lint` — **PASS** (`tsc --noEmit`).
+- `npm run build` — **PASS**; 94 English + 94 Bengali canonical routes prerendered.
+- `npm run verify:build` — **PASS, all 145 checks**. FAQPage coverage now includes blog-16 in both locales; HowTo coverage already included it.
+- Inspected `dist/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit.html` and `dist/bn/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit.html`: FAQPage JSON-LD present, numbered references rendered, no 'Friday' Rawdah release claim, Saudi Visa Bio scoped to the Ministry FAQ.
+
+---
+
 ## Worked queue row — Dhaka–Kolkata land-corridor post-hoc review (`blog-48`)
 
 | Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
@@ -161,3 +212,87 @@
 - Updated files: `src/constants.ts`, `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, `src/App.tsx`, `src/utils/imageAssets.ts`, `src/utils/blogStructuredData.ts`, `src/routes/BlogPostRouteView.tsx`, `scripts/verify-build.ts`, `public/rss.xml`, and `docs/growth/CONTENT-QUEUE.md`.
 - `npm run lint`, `npm run build`, and `npm run verify:build` (all 145 checks) verified clean on 15 October 2026.
 
+---
+
+## Worked queue row — Wave 1: Umrah hub hardening (`/umrah` + `/bn/umrah`)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-15 | **UPDATE IN PLACE — one bilingual page asset; no new hub URL.** Accuracy gate #1 of `UMRAH-CLUSTER-PLAN.md`: correct or qualify the static calculator and savings comparison. | `/umrah` | `/bn/umrah` | **Umrah cost from Bangladesh / DIY Umrah budget** (hub planning-and-cost job) | Informational planning hub: broad cost framework + routes into the detailed guide and live specialist guides. | Stages 1–8 complete (ledger below). Stage 9 lint/build/verify recorded below. Deployment gate: owner approval + live-route review. |
+
+### Must-preserve and scope notes (owner + plan)
+
+- Keep the broad planning/cost job on the hub; the detailed execution article keeps `blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost`.
+- Preserve the existing 10-day, family-of-four-sharing DIY total of **BDT 1,16,000–1,32,000 per person**. Any retained figure must show its checked basis/exclusions and date; it is not a live quote.
+- Any illustrative scenario must be unmistakably labeled; no agency-savings figure without a same-basis, dated source basket.
+- Expose clear links to the detailed guide and the relevant live specialist guides (plan §5 link map), with localized EN/BN anchor text.
+- Scope Saudi Visa Bio to the Ministry FAQ's Bangladesh electronic-Umrah-visa biometric listing; no fixed weekly/Friday Rawdah slot-release claim; keep full EN/BN decision parity.
+
+### Stage 2 — Hub claims ledger (checked 15 October 2026)
+
+| ID | Claim / surface | Primary source checked | Finding | Status / action taken |
+|---|---|---|---|---|
+| H-01 | Calculator "Estimated Savings vs. Agency" tile + `agencyMultiplier` (1.28/1.32) + DIY-vs-agency cards "Save ৳35,000 / 44,500 / 72,000" with line-through agency quotes. | None — figures had no dated source basket. | Fabricated comparison totals. | **REMOVED.** Savings tile replaced with a "not included" exclusions tile; §3 rebuilt as a qualitative like-for-like comparison table + note that no agency-savings figure can be published without a matched, itemized quote (same dates, duration, occupancy, flight, inclusions). |
+| H-02 | Hero headline "How DIY Umrah Saves Bangladeshi Families 25%–32%". | None. | Unsupported savings range. | **REMOVED** → "The Advantage of Planning Your Own Umrah" (BN already neutral). |
+| H-03 | Calculator "All-inclusive estimate" + "Package Cost Calculator (2026)". | Scope unclear; totals omitted common trip costs. | Misleading scope. | **QUALIFIED.** Relabeled illustrative planning framework (Oct 2026 assumed rates): economy return airfare + Umrah e-Visa with insurance + one double room per two pilgrims + basic intercity transport; excludes meals, shopping, ziyarah tours, extra baggage, peak surcharges; not a live quote. |
+| H-04 | BDT 1,16,000–1,32,000 (10-day, family-of-4 sharing). | Owner-fixed; ledger U-12 (checked 14 Oct 2026; not re-priced). | Retained by owner decision. | **RETAINED + DATED** on every display surface (hero chip, keyFacts, quickAnswer, FAQ answer, prerender intro): "checked 14 October 2026, not a live quote." |
+| H-05 | Shared FAQ second range "BDT 1,65,000–2,15,000" + "saving BDT 25,000–45,000 per pilgrim vs fixed group packages" (`HAJJ_UMRAH_FAQS` EN+BN, shown on hub, blog index, blog posts). | U-12 ("do not add the previous comfort range"); no savings source. | Contradicts owner decision; fabricated savings. | **REMOVED** from both locale FAQ sets; replaced by the retained estimate with basis/exclusions and the itemized-quote caveat. |
+| H-06 | Stopover "~SAR 39.50 + mandatory insurance ≈ BDT 4,500 total" (FAQ) + "free 96-hour Stopover Umrah Visa" (hero bullet). | U-04. | Conditional product; fees/eligibility set at checkout and change. | **QUALIFIED** EN+BN: eligible Saudia/Flynas itineraries can add the 96-hour stopover at ticket checkout; eligibility, insurance and fees shown at checkout — verify on the airline's booking page; no universal fixed price. |
+| H-07 | "Mandatory Saudi Visa Bio App Registration" + FAQ "pilgrims must complete fingerprint and facial biometrics on Saudi Visa Bio". | U-08 (Ministry FAQ lists Bangladesh for e-Umrah-visa biometrics). | Universal-requirement claim unsupported for all travelers. | **SCOPED** EN+BN: for electronically issued Umrah visas the Ministry FAQ lists Bangladesh for biometric enrollment via Saudi Visa Bio; follow the instruction attached to your visa application; not universal for every tourist/stopover traveler. |
+| H-08 | Rawdah permit card ("mandatory QR entry permit") + slot availability. | U-09. | Permit real; no fixed weekly release day published. | **QUALIFIED** EN+BN: book the Umrah slot and Rawdah (Riyazul Jannah) permit in Nusuk; select an available date/time slot and check live availability; no fixed weekly release day is published. |
+| H-09 | quickAnswer "year-round Umrah". | U-02 (1448H calendar: entry through 23 Mar 2027). | Season-bound. | **SCOPED** EN+BN: current season's visa window (1448H — entry through 23 March 2027; check the current calendar). |
+| H-10 | Hotel zone distances ("0–150m", "400m–700m", "100m–300m"), "Zero uphill walking", "Direct elevator to Haram courtyard", "Free 24/7 shuttle", nightly rate bands. | U-11 (no property-level verification exists). | False precision + absolute guarantees. | **REMOVED** precision/absolutes EN+BN; zones kept as search starting points + verify address, walking route, slope and shuttle with the hotel; calculator nightly rates labeled planning defaults. |
+| H-11 | Rail "2h 20m", "~SAR 172.50 / BDT 5,600", "54 minutes" (FAQ + chips). | U-10 (operator tariff 14 Oct 2026: SAR 162 base Makkah–Madinah Economy, before VAT/fees; live checkout varies). | Unverified fare/time figures. | **REPLACED** EN+BN: SAR 162 dated base fare (before VAT/fees; checkout varies); check current timetable and checkout price; duration hedged (≈2¼ h / "approx.") or omitted. |
+| H-12 | Flight bands "BDT 72,000–86,000 / 56,000–66,000", "Save BDT 12,000–18,000 per ticket", "complimentary 5-liter Zamzam", "2×23kg + 5L Zamzam". | None dated; carrier policies vary. | Presented as current prices/allowances. | **QUALIFIED** EN+BN: fare bands labeled illustrative (check live prices); per-ticket save claim removed; Zamzam/baggage allowances carrier- and fare-specific — verify with the airline. |
+| H-13 | Visa card "Holders of valid US, UK, or Schengen visas qualify for instant online e-Visa / VOA". | U-04 (tourist e-Visa nationality list; VOA conditions). | Not automatic for BD passport holders. | **QUALIFIED** EN+BN: may qualify for visa-on-arrival where current conditions are met; do not assume automatic e-Visa eligibility; check the official portal first. |
+| H-14 | Hero telemetry chips ("300–500m Verified Haram Walkable", "2–5 Days", "2h 20m", "৳1,16,000 10-Day DIY Umrah Starting"). | H-04/U-10/U-11 resolutions. | Mix of stale precision and unqualified estimates. | **RELABELED** EN+BN: "3 Zones / Walkable Haram Areas"; "Umrah e-Visa Processing (Typical)"; "≈2¼ h / Makkah–Madinah Rail (Approx.)"; "৳ 1,16,000 / 10-Day DIY Estimate (Oct 2026)". Hero chip "✓ Nusuk & e-Visa Verified" → "✓ Official Nusuk & visa sources checked (Oct 2026)". |
+| H-15 | Link map (plan §5) on the hub + `/bn/umrah` static body. | Plan §5; route inventory (all 11 slugs exist in `BLOG_DATA`). | Hub showed only 2 cards; BN static body linked a mislabeled "Dhaka→Jeddah/Madinah flights" label to the main guide and an irrelevant Nepal visa link. | **ADDED/FIXED.** §8 keeps the 2 featured playbook cards (now locale-aware `/blog/` ↔ `/bn/blog/` links) + a grouped neutral directory: visa/permit (blog-16, stopover), flights/hotels/rail (open-jaw, hotel zones), family/accessibility (elderly, women), preparation/seasonal (Ihram/Miqat, Ramadan/Itikaf, Zamzam/customs), food/Ziyarah (food, ziyarah taxi), Hajj (registration/packages). `/bn/umrah` static related-links corrected to the main guide, blog-16, hotel zones, Hajj registration with descriptive BN anchors. |
+
+**Cross-surface note:** `HAJJ_UMRAH_FAQS` (EN `src/hooks/useSeoMeta.ts`, BN `src/data/bengaliContent.ts`) is shared by `/umrah`, `/blog` index and Hajj/Umrah blog posts. The H-05/H-06/H-07/H-11 fixes therefore also land on those surfaces — intended, since they carry the same flagged claim classes. Shared FAQ questions themselves were not restructured.
+
+### Stage 3–8 execution record (15 October 2026)
+
+- **Stage 3 — Brief: complete.** Hub keeps the broad planning/cost job; every retained number shows basis + exclusions + checked date; illustrative scenarios unmistakably labeled; links to the detailed guide and specialist guides exposed in both locales.
+- **Stage 4 — English: complete.** Calculator relabeled + assumptions note; savings surfaces removed; hero/telemetry/visa/hotel/flight claims aligned to H-01..H-14; directory added.
+- **Stage 5 — Bengali: complete.** Every EN change mirrored in Bengali at decision level, including the shared BN FAQ answers and the `/bn/umrah` static link list.
+- **Stage 6 — package: complete.** Hub FAQ quickAnswer/keyFacts, visible FAQ data, prerendered `/umrah` + `/bn/umrah` copy and meta description reviewed for parity.
+- **Stage 7 — preflight: passed.** No remaining agency-savings figures, comfort-range totals, fixed stopover fee, universal Visa Bio claim, fixed Rawdah release day, unqualified distance/rate precision or per-ticket savings claim on either locale surface.
+- **Stage 8 — red team:** intent 3/4 (hub job clear; live SERP unmeasured), evidence & safety 4/4 (every retained figure dated and scoped; fabricated comparisons removed), usability 4/4 (planning framework + honest comparison matrix + directory), locale/trust 4/4 (EN/BN parity; caveats visible) = **15/16, pass**.
+
+### Stage 9 — repository handoff and verification (15 October 2026)
+
+**Repository implementation verified; not externally deployed.** Edits in `src/components/UmrahLandingPage.tsx`, `src/hooks/useSeoMeta.ts`, `src/data/bengaliContent.ts`, `scripts/prerender.ts`. `src/data/contentMeta.ts` untouched.
+
+- `npm run lint` — **PASS** (`tsc --noEmit`).
+- `npm run build` — **PASS**; 94 English + 94 Bengali canonical routes prerendered.
+- `npm run verify:build` — **PASS, all 149 checks** (hub savings copy is unpinned in `verify-build.ts`, so the Wave 1 rewrites are assertion-free by design; existing pins unaffected).
+- Inspected `dist/umrah.html` and `dist/bn/umrah.html`: zero occurrences of the removed claims ("25%–32%", the 1,65,000–2,15,000 comfort range, ~SAR 39.50 fixed fee, 300–500m / "Zero uphill" precision, "All-inclusive estimate", "year-round Umrah", SAR 172.50 / "2 hours 20", agency line-through prices, "Estimated Savings"); retained copy carries "not a live quote" / "লাইভ কোটেশন নয়" qualifiers and the dated SAR 162 base fare; the specialist-guide directory links (incl. blog-16 and the Hajj registration guide) are present on both locales.
+
+Deployment gate: **owner approval + live-route review** of `/umrah` and `/bn/umrah` before publish.
+## 2026-10-15 — POST-MERGE NOTE (main `aa0156b` merged into PR #40 branch)
+
+PR #39 (session `arena/0eb5e492`) landed a parallel Wave 1 with complementary
+work. This branch merged `origin/main` (6 conflicted files resolved as a
+**superset**, never a regression):
+
+- `src/components/UmrahLandingPage.tsx` — main's verified Wave 1 kept
+  (SAR 65 JED–Makkah / SAR 162 Makkah–Madinah excl-VAT fare citations,
+  "Verified Official Sources & Portals (Checked 14 October 2026)" section,
+  U-13 like-for-like quote checklist, three visa categories, dated model
+  inputs) and this branch's additions retained (locale-aware `blogHref`,
+  "Specialist Guides by Topic" cluster directory with 11 specialist slugs,
+  H-10 zone grid as the sole distance grid).
+- `src/utils/blogStructuredData.ts` — FAQ schema allowlist now covers BOTH
+  `umrah-hajj-guide-bangladesh-nusuk-bdt-cost` (5./৫.) and
+  `dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` (7./৭.).
+- `docs/growth/CONTENT-QUEUE.md` — complete records for both sessions kept
+  (Wave 3A U-ledger → blog-48 IN-ledger → Wave 1 H-01…H-15).
+- `scripts/prerender.ts` — main's /umrah intro phrasing + this branch's
+  `/bn/umrah` related-link labels/slugs fix (labels matched EN-only slugs).
+- `scripts/verify-build.ts` — union of both check sets.
+- `src/data/bengaliContent.ts` — both blog-48 and blog-16 BN work kept.
+
+**Post-merge verification (2026-10-15):** `npm run lint` ✅ →
+`npm run build` ✅ (94 EN + 94 BN routes) → `npm run verify:build` ✅
+**149/149 checks**. Built bundles contain both the Verified Sources section
+and the Specialist Guides directory; zero banned strings in HTML or bundles.

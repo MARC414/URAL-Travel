@@ -401,7 +401,7 @@ const staticHeroHasPicture =
   distIndexHtml.indexOf('<picture>', staticHeroStart) < staticHeroMainStart &&
   distIndexHtml.indexOf('class="pre-hydration-hero__image"', staticHeroStart) > staticHeroStart &&
   distIndexHtml.indexOf('class="pre-hydration-hero__image"', staticHeroStart) < staticHeroMainStart &&
-  distIndexHtml.includes('width="1200" height="670" alt="" aria-hidden="true" loading="eager" fetchpriority="high"');
+  distIndexHtml.includes('width="1200" height="670" alt="Wooden sailboat deck above a sea of sunset clouds with a travel journal and camera" aria-hidden="true" loading="eager" fetchpriority="high"');
 check(
   staticHeroHasPicture,
   staticHeroHasPicture
@@ -430,6 +430,74 @@ check(
   RESONSIVE_AVIF_HERO_FILES.every((f) => fs.existsSync(path.join(responsiveImgDir, f))),
   "the 3 hero AVIF files referenced by the shell preload exist in dist"
 );
+
+// (1e) every <img> in shipped HTML carries a non-empty alt attribute.
+//
+// Bing Webmaster reports "Alt attribute for images is missing" for the homepage
+// when the prerendered hero <img> ships alt="" — an empty alt is a missing alt to
+// the crawler, even though it is the correct ARIA pattern for a purely decorative
+// image. Every shipped image therefore gets descriptive alt text (kept on the
+// aria-hidden decorations too, where screen readers still ignore it).
+function imgsMissingAlt(html: string): string[] {
+  return [...html.matchAll(/<img\b[^>]*>/g)]
+    .map((m) => m[0])
+    .filter((tag) => {
+      const alt = tag.match(/\balt="([^"]*)"/);
+      return !alt || alt[1].trim() === "";
+    });
+}
+{
+  const offenders: string[] = [];
+  for (const file of distHtmlFiles) {
+    const html = fs.readFileSync(file, "utf8");
+    for (const tag of imgsMissingAlt(html)) {
+      offenders.push(`${path.relative(DIST_DIR, file)} → ${tag.slice(0, 110)}`);
+    }
+  }
+  check(
+    offenders.length === 0,
+    offenders.length === 0
+      ? `every <img> in ${distHtmlFiles.length} shipped HTML files carries a non-empty alt attribute`
+      : `${offenders.length} <img> tag(s) missing alt text: ${offenders.slice(0, 5).join(" | ")}`
+  );
+  const negativeControl = imgsMissingAlt(distIndexHtml ?? "");
+  const emptiedHero = (distIndexHtml ?? "").replace(
+    /alt="Wooden sailboat deck above a sea of sunset clouds with a travel journal and camera"/,
+    'alt=""'
+  );
+  check(
+    negativeControl.length === 0 && imgsMissingAlt(emptiedHero).length >= 1,
+    "alt guard rejects the homepage hero when its alt text is emptied (negative control)"
+  );
+}
+
+// (1e-2) the client-rendered images (hero background, partner logos, subscription
+// background, blog hero) are not in the prerendered HTML, so guard the sources:
+// an `alt=""` in JSX is exactly what Bing flags once the page hydrates.
+{
+  const emptyAltInSources: string[] = [];
+  const scanDir = (dir: string) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) scanDir(full);
+      else if (entry.name.endsWith(".tsx")) {
+        const src = fs.readFileSync(full, "utf8");
+        if (/alt=\{?""\}?/.test(src)) emptyAltInSources.push(path.relative(ROOT_DIR, full));
+      }
+    }
+  };
+  scanDir(path.join(ROOT_DIR, "src"));
+  check(
+    emptyAltInSources.length === 0,
+    emptyAltInSources.length === 0
+      ? "no React source ships an empty alt=\"\" on an image (Bing: alt attribute missing)"
+      : `source file(s) with empty image alt: ${emptyAltInSources.join(", ")}`
+  );
+  check(
+    /alt=\{?""\}?/.test('<img alt="" />') && !/alt=\{?""\}?/.test('<img alt="URAL" />'),
+    "source alt guard flags alt=\"\" and accepts descriptive alt (negative control)"
+  );
+}
 
 // (1d) AVIF rollout guards (Appendix A.6).
 //
@@ -1974,6 +2042,7 @@ const normalizeStructuredText = (value: string) =>
 const faqSlugs = [
   "travel-creator-resources",
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+  "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
   "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
 ] as const;
 const faqCoverageIssues: string[] = [];

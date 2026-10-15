@@ -439,17 +439,20 @@ If you hold a Bangladeshi passport AND have a valid, currently active Tourist or
 - Day 2 (Makkah Prayers & Ziyarah): Pray 5 Waqt in Masjid al-Haram and take a 2-hour morning taxi Ziyarah to Jabal al-Noor, Mina, and Arafat.
 - Day 3 (Bullet Train to Madinah & Rawdah): Catch the morning 2h 20m Haramain Bullet Train to Madinah, check into Markazia North, and visit Rawdah Shareef using your pre-booked Nusuk App permit.
 - Day 4 (Masjid Quba & Onward Flight): Visit Masjid Quba after Fajr, take the afternoon train back to Jeddah Airport (or fly directly out of Madinah), and board your onward flight!`,
-  "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": `Before flying from Hazrat Shahjalal International Airport (DAC) to Jeddah or Madinah, every Bangladeshi pilgrim needs to set up two official Saudi government applications on their smartphone. Because security gates at Masjid an-Nabawi strictly scan live dynamic QR codes (screenshots are rejected), understanding how **Saudi Visa Bio** and **Nusuk (nusuk.sa)** work will save your family from disappointment in Madinah.
+  "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": `Before flying from Hazrat Shahjalal International Airport (DAC) to Jeddah or Madinah, prepare the official Saudi apps you will actually need: the Nusuk app (nusuk.sa) for Umrah slots and the mandatory Rawdah Shareef (Riyazul Jannah) appointment permit in Madinah. The Saudi Visa Bio app is listed in the current Saudi Ministry of Hajj and Umrah FAQ for biometric enrollment for electronically issued Umrah visas for Bangladesh; it is not a blanket requirement for every tourist or stopover traveler. Because security gates at Masjid an-Nabawi scan live dynamic QR codes (screenshots are rejected), understanding how Nusuk works will save your family from disappointment in Madinah.
 
-1. WHAT ARE THE OFFICIAL GOVERNMENT APPS REQUIRED FOR UMRAH & HAJJ IN 2026?
-According to the **Saudi Ministry of Hajj and Umrah (haj.gov.sa)** and the **Bangladesh Ministry of Religious Affairs (hajj.gov.bd)**, Bangladeshi pilgrims must rely only on official government portals:
-- **Saudi Visa Bio App (Saudi Ministry of Foreign Affairs - MOFA):** Mandatory for capturing your live facial photo, passport MRZ chip/bio-page scan, and all 10 fingerprints from home before visa issuance or departure.
-- **Official Nusuk App (nusuk.sa):** The single official digital gateway for booking your **Umrah Permit** in Makkah and your mandatory **Praying in the Noble Rawdah (Riyazul Jannah)** permit inside Masjid an-Nabawi in Madinah.
+This guide was checked against official Saudi Ministry and Nusuk sources on 14 October 2026. Visa, permit, app and availability conditions can change; follow the current official pages before you travel.
 
-2. HOW TO COMPLETE FINGERPRINT BIOMETRICS ON THE SAUDI VISA BIO APP FROM BANGLADESH?
-Many Bangladeshi pilgrims struggle when scanning elderly parents' fingers on the Saudi Visa Bio app. Follow these exact steps for 100% approval:
+1. WHAT ARE THE OFFICIAL GOVERNMENT APPS AND SOURCES FOR UMRAH IN 2026?
+According to the Saudi Ministry of Hajj and Umrah (haj.gov.sa) and the Bangladesh Ministry of Religious Affairs (hajj.gov.bd), Bangladeshi pilgrims should rely only on official government portals and apps:
+- **Official Nusuk App (nusuk.sa):** The single official digital gateway for booking your **Umrah Permit** in Makkah and your mandatory **Praying in the Noble Rawdah (Riyazul Jannah)** appointment permit inside Masjid an-Nabawi in Madinah.
+- **Saudi Visa Bio App (Saudi Ministry of Foreign Affairs - MOFA):** Listed in the current Ministry FAQ for biometric enrollment for electronically issued Umrah visas for Bangladesh. Follow the instructions in your current official visa application and in the app; do not assume it applies to every tourist or stopover visa [1-2].
+- **Official portals to keep:** Nusuk registration and Terms of Use, the Ministry's Umrah Permit and Rawdah Permit service pages, the Saudi Unified Visa Platform (ksavisa.sa), and the Bangladesh Haj Management Portal (hajj.gov.bd) for Fard Hajj [3-10].
+
+2. HOW TO COMPLETE BIOMETRIC ENROLLMENT ON THE SAUDI VISA BIO APP FROM BANGLADESH?
+Use this only when your current official Umrah visa instructions require it. Many Bangladeshi pilgrims struggle when scanning elderly parents' fingers. Follow these practical steps:
 Step 1: Download the official Saudi Visa Bio App:
-- Install "Saudi Visa Bio" from the Google Play Store or Apple App Store and select your visa type (Umrah or Hajj).
+- Install "Saudi Visa Bio" from the Google Play Store or Apple App Store and select your visa type (Umrah) as instructed by your official visa application.
 Step 2: Scan the e-Passport or MRP Bio-Page in Natural Daylight:
 - Place your Bangladeshi passport flat near a window during daytime so no ceiling bulb glare reflects off the laminate page. Ensure the two machine-readable lines (MRZ) at the bottom are sharp.
 Step 3: Fix Faded Fingerprints for Elderly Parents:
@@ -459,18 +462,32 @@ Step 3: Fix Faded Fingerprints for Elderly Parents:
 3. HOW TO CREATE YOUR NUSUK APP ACCOUNT ONCE YOUR UMRAH VISA IS ISSUED?
 Never register as a "Citizen/Resident" if you are traveling from Bangladesh. Follow this sequence:
 Step 1: Find Your 10-Digit Saudi Visa Number:
-- Open your approved PDF Umrah e-Visa or 96-Hour Stopover Visa (verified via **ksavisa.sa**). Your **Visa Number** is the 10-digit number printed near the top right (usually starting with 60 or 61), NOT your Application/MOFA reference number.
+- Open your approved PDF Umrah e-Visa or 96-Hour Stopover Visa (verified via ksavisa.sa). Your **Visa Number** is the 10-digit number printed near the top right (usually starting with 60 or 61), NOT your Application/MOFA reference number.
 Step 2: Register Under "Visitor" Tab on Nusuk:
 - Open the Nusuk app, tap **New User -> Visitor**, enter your 10-digit Visa Number, Passport Number, Date of Birth, Nationality (Bangladesh), active email address, and mobile number.
 - Enter the 4-digit OTP sent to your email (tip: use Email OTP while still in Dhaka so you never miss an SMS code!).
 
-4. HOW TO BOOK A FREE RAWDAH SHAREEF (RIYAZUL JANNAH) PERMIT IN MADINAH?
+4. HOW TO BOOK A FREE RAWDAH SHAREEF (RIYAZUL JANNAH) APPOINTMENT PERMIT IN MADINAH?
 Entering the blessed green-carpeted **Rawdah Shareef (Riyazul Jannah)** between the Prophet's (PBUH) Sacred Chamber and his Pulpit requires an active Nusuk QR Permit:
-Rule 1: Rawdah Permits Are 100% Free on Nusuk:
-- Do not pay street touts in Madinah who claim they can sell Rawdah entry! Every visa holder can book 1 Rawdah permit every 30 days completely free inside the Nusuk app under **Prophet's Mosque Services -> Praying in the Noble Rawdah (Men / Women)**.
-Rule 2: The Friday Weekly Slot Release & 30-Minute Instant Track:
-- Standard weekly Rawdah appointment slots open **every Friday morning** (Saudi time) for the upcoming week.
-- If all calendar dates look grayed out when you arrive in Madinah, turn on the location GPS on your phone near Masjid an-Nabawi and check Nusuk **at :01 and :31 past every hour**—the system releases cancelled and instant-entry slots every 30 minutes for pilgrims physically within the Haram boundary!`,
+Rule 1: Rawdah Permits Are Booked as a Free Appointment on Nusuk:
+- Do not pay street touts in Madinah who claim they can sell Rawdah entry! Every visa holder can book 1 Rawdah permit every 30 days completely free inside the Nusuk app under **Prophet's Mosque Services -> Praying in the Noble Rawdah (Men / Women)**, subject to the service page's current cost and terms [4].
+Rule 2: Check Live Availability; No Fixed Release Day Is Guaranteed:
+- The Ministry's Rawdah service page describes a free appointment permit and instructs users to select an available date/time slot. It does not publish a fixed weekly slot-release schedule [4].
+- If all calendar dates look grayed out when you arrive in Madinah, turn on the location GPS on your phone near Masjid an-Nabawi and check Nusuk regularly—cancelled and instant-entry slots may appear for pilgrims physically within the Haram boundary. Treat any timing you see in the app as live availability, not a guarantee.
+
+5. Frequently Asked Questions
+Is Saudi Visa Bio mandatory for every Bangladeshi traveler?
+No. The current Saudi Ministry FAQ lists Bangladesh for biometric enrollment for electronically issued Umrah visas and names Saudi Visa Bio. Follow your current official visa application and the app's instructions; do not assume it applies to every tourist or stopover visa [1-2].
+Can I book Rawdah on a fixed day every week?
+No fixed weekly release day is published on the Ministry's Rawdah service page. Book the free appointment permit in Nusuk and check live availability; cancelled or instant slots may appear [4].
+Are screenshots of Rawdah permits accepted at the gate?
+No. Guards scan the live dynamic QR code in the Nusuk app, so keep mobile data active in Madinah.
+Can I use a tourist or stopover visa for Fard Hajj?
+No. An Umrah, tourist or stopover visa does not replace Bangladesh Hajj registration or the Saudi Hajj permit. Follow the current Bangladesh and Saudi Hajj instructions [9].
+Where do I find my 10-digit Saudi Visa Number?
+Open your approved PDF Umrah e-Visa and read the 10-digit number near the top right (usually starting with 60 or 61), not the application/MOFA reference number.
+
+`,
   "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": `Whether you are a Bangladeshi mother traveling with your family, a daughter accompanying your elderly mother, or a female doctor/professional planning Umrah from Dhaka, knowing the official Saudi women's regulations and Haram gate layouts makes your spiritual journey safe, dignified, and stress-free.
 
 1. WHAT IS THE OFFICIAL SAUDI VISA RULE ON MAHRAM FOR WOMEN IN 2026?

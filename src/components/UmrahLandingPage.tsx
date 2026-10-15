@@ -37,8 +37,9 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
   coverImage,
 }) => {
   const isBn = lang === "bn";
+  const blogHref = (slug: string) => (isBn ? "/bn/blog/" : "/blog/") + slug;
 
-  // Interactive Umrah Cost & Agency Savings Calculator States
+  // Interactive Umrah cost calculator state (illustrative planning defaults)
   const [pilgrims, setPilgrims] = useState<number>(2);
   const [days, setDays] = useState<7 | 10 | 14>(10);
   const [hotelTier, setHotelTier] = useState<"shuttle" | "walkable" | "haramView">("walkable");
@@ -113,7 +114,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             <div className="lg:col-span-7 space-y-6">
               <div className="flex flex-wrap items-center gap-2 text-xs text-slate-300">
                 <span className="font-mono text-[11px] text-emerald-300">
-                  {isBn ? "✓ Nusuk (nusuk.sa) ও ই-ভিসা ভেরিফায়েড" : "✓ Nusuk (nusuk.sa) & e-Visa Verified"}
+                  {isBn ? "✓ অফিশিয়াল Nusuk ও ভিসা উৎস যাচাইকৃত (অক্টোবর ২০২৬)" : "✓ Official Nusuk & visa sources checked (Oct 2026)"}
                 </span>
               </div>
 
@@ -216,7 +217,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 </div>
                 <div>
                   <div className="text-lg sm:text-xl font-bold text-[#F6B73C] font-mono tabular-nums">
-                    2h 20m
+                    ≈2¼ h
                   </div>
                   <div className="text-[11px] text-slate-300">
                     {isBn
@@ -411,6 +412,12 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               ? "হিসাবের ভিত্তি: 1 SAR ≈ 32.2 BDT · 1 USD ≈ 120 BDT (বাংলাদেশ ব্যাংক রেট যাচাই করুন)"
               : "Model FX assumption: 1 SAR ≈ 32.2 BDT · 1 USD ≈ 120 BDT (verify live BB FX)"}
           </span>
+        </div>
+
+        <div className="bg-amber-50 border border-amber-200 text-amber-900 text-xs leading-relaxed rounded-2xl px-4 py-3">
+          {isBn
+            ? "এই হিসাব কেবল পরিকল্পনার খসড়া (অক্টোবর ২০২৬-এর অনুমানিক রেট): রাউন্ডট্রিপ ইকোনমি ফ্লাইট, ইনস্যুরেন্সসহ ওমরাহ ই-ভিসা, প্রতি ২ জনে ১টি ডাবল রুম ও মৌলিক আন্তঃনগর যাতায়াত ধরা হয়েছে। খাবার, কেনাকাটা, জিয়ারত টুর, অতিরিক্ত ব্যাগেজ ও পিক-সিজন সারচার্জ অন্তর্ভুক্ত নয়। এটি লাইভ কোটেশন নয় — বুকিংয়ের আগে বর্তমান দাম যাচাই করুন।"
+            : "This calculator is an illustrative planning framework built on assumed rates (Oct 2026): an economy return airfare, Umrah e-Visa with insurance, one double room per two pilgrims, and basic intercity transport. It excludes meals, shopping, ziyarah tours, extra baggage and peak-date surcharges. It is not a live quote — verify current prices before booking."}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -823,6 +830,12 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             </div>
           ))}
         </div>
+
+        <p className="text-xs text-slate-500 leading-relaxed max-w-3xl">
+          {isBn
+            ? "একই তারিখ, সময়কাল, রুম ওকুপেন্সি, ফ্লাইট ও অন্তর্ভুক্তির itemized কোটেশন ছাড়া URAL কোনো এজেন্সি-সাশ্রয়ের সংখ্যা প্রকাশ করতে পারে না। এজেন্সির কাছ থেকে কোটেশন নিলে প্রতিটি লাইন আলাদা করে মিলিয়ে দেখুন — শুধু হেডলাইন দাম নয়।"
+            : "URAL cannot publish an agency-savings figure without a matched, itemized quote on the same dates, duration, room occupancy, flight and inclusions. If an agency quotes you, compare every line — not just the headline."}
+        </p>
       </section>
 
       {/* =====================================================================
@@ -1194,15 +1207,15 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
       <section className="space-y-4">
         <h2 className="ural-section-title font-serif text-xl sm:text-2xl font-bold text-slate-900">
           {isBn
-            ? "ওমরাহ ও হজ্জ বিষয়ক বিস্তারিত গাইড ও চেকলিস্ট"
+            ? "ওমরাহ ও হজ্জ বিষয়ক বিস্তারিত গাইড ও চেকলিস্ট"
             : "In-Depth Umrah & Hajj Editorial Playbooks"}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <a
-            href="/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost"
+            href={blogHref("umrah-hajj-guide-bangladesh-nusuk-bdt-cost")}
             onClick={(e) => {
               e.preventDefault();
-              onNavigate("/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost");
+              onNavigate(blogHref("umrah-hajj-guide-bangladesh-nusuk-bdt-cost"));
             }}
             className="block bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl p-6 space-y-2 cursor-pointer transition-colors"
           >
@@ -1222,10 +1235,10 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
           </a>
 
           <a
-            href="/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh"
+            href={blogHref("makkah-madinah-hotel-zones-haramain-train-guide-bangladesh")}
             onClick={(e) => {
               e.preventDefault();
-              onNavigate("/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh");
+              onNavigate(blogHref("makkah-madinah-hotel-zones-haramain-train-guide-bangladesh"));
             }}
             className="block bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl p-6 space-y-2 cursor-pointer transition-colors"
           >
@@ -1243,6 +1256,179 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 : "Compare Makkah and Madinah hotel neighborhoods, accessibility checks, and official Haramain High-Speed Railway booking rules →"}
             </p>
           </a>
+        </div>
+
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-5">
+          <h3 className="ural-card-title font-serif text-base font-bold text-slate-900">
+            {isBn ? "বিষয়ভিত্তিক স্পেশালিস্ট গাইড" : "Specialist Guides by Topic"}
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+            {[
+              {
+                group: isBn ? "ভিসা ও পারমিট" : "Visa & permits",
+                links: [
+                  {
+                    slug: "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
+                    label: isBn
+                      ? "Nusuk অ্যাপ, Saudi Visa Bio ও Rawdah পারমিট গাইড"
+                      : "Nusuk app, Saudi Visa Bio & Rawdah permit guide",
+                    note: isBn
+                      ? "ই-ভিসা বায়োমেট্রিক (যেখানে প্রযোজ্য), স্লট বুকিং ও পারমিট ধাপ"
+                      : "e-Visa biometrics where required, slot booking and permit steps",
+                  },
+                  {
+                    slug: "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
+                    label: isBn
+                      ? "৯৬ ঘণ্টার Saudi Stopover Visa গাইড"
+                      : "96-hour Saudi Stopover Visa guide",
+                    note: isBn
+                      ? "যোগ্যতা, শর্ত ও বুকিং ধাপ (ফি চেকআউটে দেখুন)"
+                      : "Eligibility, conditions and booking steps (fees shown at checkout)",
+                  },
+                ],
+              },
+              {
+                group: isBn ? "ফ্লাইট, হোটেল ও রেল" : "Flights, hotels & rail",
+                links: [
+                  {
+                    slug: "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia",
+                    label: isBn
+                      ? "ওপেন-জ ফ্লাইট কৌশল (DAC → JED, MED → DAC)"
+                      : "Open-jaw flight strategy (DAC → JED, MED → DAC)",
+                    note: isBn
+                      ? "মাল্টি-সিটি বুকিং ও রিটার্ন ড্রাইভ এড়ানোর নিয়ম"
+                      : "Multi-city booking and skipping the return drive",
+                  },
+                  {
+                    slug: "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
+                    label: isBn
+                      ? "হোটেল জোন ও Haramain ট্রেন গাইড"
+                      : "Hotel zones & Haramain train guide",
+                    note: isBn
+                      ? "জোনভিত্তিক সন্ধান ও ট্রেন টিকিট বুকিং"
+                      : "Zone-by-zone search and train ticket booking",
+                  },
+                ],
+              },
+              {
+                group: isBn ? "পরিবার ও প্রবেশযোগ্যতা" : "Family & accessibility",
+                links: [
+                  {
+                    slug: "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
+                    label: isBn
+                      ? "বয়স্ক বাবা-মাকে নিয়ে ওমরাহ"
+                      : "Umrah with elderly parents",
+                    note: isBn
+                      ? "হুইলচেয়ার, ওষুধ ও সহজ পরিকল্পনা"
+                      : "Wheelchairs, medication and easier pacing",
+                  },
+                  {
+                    slug: "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
+                    label: isBn
+                      ? "নারীদের ওমরাহ নিয়ম: মাহরাম, ভিসা ও লেডিস গেট"
+                      : "Umrah rules for women: mahram, visa & ladies' gates",
+                    note: isBn
+                      ? "নারী যাত্রীদের জন্য প্রযোজ্য নিয়ম"
+                      : "What applies to women travelers",
+                  },
+                ],
+              },
+              {
+                group: isBn ? "প্রস্তুতি ও মৌসুম" : "Preparation & seasonal",
+                links: [
+                  {
+                    slug: "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
+                    label: isBn
+                      ? "ইহরাম ও মীকাত: ঢাকা এয়ারপোর্ট বনাম ট্রানজিট"
+                      : "Ihram & Miqat: Dhaka airport vs. transit",
+                    note: isBn
+                      ? "কোথায় ও কখন ইহরাম পরবেন"
+                      : "Where and when to assume Ihram",
+                  },
+                  {
+                    slug: "ramadan-umrah-itikaf-guide-bangladesh-booking-budget",
+                    label: isBn
+                      ? "রমজান ওমরাহ ও ইতিকাফ গাইড"
+                      : "Ramadan Umrah & Itikaf guide",
+                    note: isBn
+                      ? "রমজানের বুকিং ও বাজেট পরিকল্পনা"
+                      : "Ramadan booking and budget planning",
+                  },
+                  {
+                    slug: "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
+                    label: isBn
+                      ? "জমজম পানি ও কাস্টমস নিয়ম"
+                      : "Zamzam water & customs rules",
+                    note: isBn
+                      ? "ফেরার পথে বহন ও ঢাকা এয়ারপোর্ট নিয়ম"
+                      : "Carrying it home and DAC airport rules",
+                  },
+                ],
+              },
+              {
+                group: isBn ? "খাবার ও জিয়ারত" : "Food & Ziyarah",
+                links: [
+                  {
+                    slug: "bangladeshi-halal-food-guide-makkah-madinah-budget-meals",
+                    label: isBn
+                      ? "মক্কা-মদিনায় বাংলাদেশি ও বাজেট খাবার"
+                      : "Bangladeshi & budget food in Makkah–Madinah",
+                    note: isBn
+                      ? "সস্তায় খাবারের ব্যবস্থা"
+                      : "Eating affordably",
+                  },
+                  {
+                    slug: "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide",
+                    label: isBn
+                      ? "ঐতিহাসিক জিয়ারাহ ও ট্যাক্সি গাইড"
+                      : "Historical Ziyarah & taxi guide",
+                    note: isBn
+                      ? "মক্কা-মদিনা, বদর ও তায়েফের রুট"
+                      : "Makkah, Madinah, Badr and Taif routes",
+                  },
+                ],
+              },
+              {
+                group: isBn ? "হজ (আলাদা প্রক্রিয়া)" : "Hajj (separate process)",
+                links: [
+                  {
+                    slug: "hajj-registration-bangladesh-government-vs-private-package-cost",
+                    label: isBn
+                      ? "বাংলাদেশ থেকে হজ নিবন্ধন ও প্যাকেজ"
+                      : "Bangladesh Hajj registration & packages",
+                    note: isBn
+                      ? "সরকারি বনাম প্রাইভেট প্যাকেজ; ওমরাহ ভিসায় হজ নয়"
+                      : "Government vs. private packages; Hajj is not on an Umrah visa",
+                  },
+                ],
+              },
+            ].map((g) => (
+              <div key={g.group} className="space-y-2">
+                <h4 className="text-xs font-mono font-semibold text-brand-navy uppercase tracking-wider">
+                  {g.group}
+                </h4>
+                <ul className="space-y-2">
+                  {g.links.map((l) => (
+                    <li key={l.slug}>
+                      <a
+                        href={blogHref(l.slug)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onNavigate(blogHref(l.slug));
+                        }}
+                        className="block group cursor-pointer"
+                      >
+                        <span className="text-sm font-semibold text-slate-900 group-hover:text-brand-navy">
+                          {l.label}
+                        </span>
+                        <span className="block text-xs text-slate-500">{l.note}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
