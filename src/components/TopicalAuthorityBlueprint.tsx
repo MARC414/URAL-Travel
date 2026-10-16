@@ -480,20 +480,20 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     id: "bf-03",
     clusterId: "banking-fx",
     funnelStage: "MoFu (Decision & Comparison)",
-    titleEn: "RFCD Account vs. Regular Travel Quota in Bangladesh: How to Avoid the $300 Single-Transaction Cap",
-    titleBn: "RFCD Account বনাম সাধারণ Travel Quota: আন্তর্জাতিক ফ্লাইট ও হোটেল পেমেন্টে $300 লিমিট সমস্যার সমাধান",
+    titleEn: "RFCD Account vs. Travel Quota in Bangladesh: How to Handle the $300 Online-Payment Rule",
+    titleBn: "RFCD Account বনাম Travel Quota: $300 Online-Payment Rule কীভাবে সামলাবেন",
     primaryKeyword: "rfcd account bangladesh benefits",
     secondaryKeywords: ["300 dollar transaction limit bangladesh bank", "how to open rfcd account in ebl city bank", "pay large hotel bill from bangladesh"],
     monthlyIntentSignal: "High · High-Ticket Payment Troubleshooting Intent",
     customerPsychologyEn:
-      "Frustration When a $900 Flight Payment Declines: Travelers get stuck at checkout when banks enforce a $300 e-commerce cap. Explaining RFCD accounts and call-center limit relaxation wins immediate trust.",
+      "A large flight or hotel checkout may fail under the general USD 300 online-payment rule. The useful answer distinguishes a bank-reviewed documented travel payment from an RFCD card's permission to pay online at the actual amount, without guaranteeing approval or transaction success.",
     customerPsychologyBn:
-      "বড় অঙ্কের টিকিট কাটতে গিয়ে কার্ড ডিক্লাইন হওয়ার হতাশা: অনেক ব্যাংকে একবারে $300-এর বেশি পেমেন্ট আটকে যায়; RFCD একাউন্ট ও কল সেন্টার প্রি-অথরাইজেশনের নিয়ম জানলে এই ঝামেলা থাকে না।",
+      "সাধারণ USD 300 online-payment rule-এর কারণে বড় flight বা hotel checkout ব্যর্থ হতে পারে। কাজে লাগার মতো উত্তরটি documented travel payment-এর bank review ও RFCD card-এর online-এ প্রকৃত amount payment-এর অনুমতির পার্থক্য দেখায়—approval বা transaction success নিশ্চিত বলে না।",
     aeoDirectAnswerEn:
-      "Depositing leftover foreign currency cash upon returning to Bangladesh lets you open an RFCD (Resident Foreign Currency Deposit) account and international debit card, which holds balances directly in USD/GBP/EUR with zero single-transaction e-commerce caps.",
+      "Bangladesh Bank generally caps a single online purchase on a travel-quota card at USD 300. Ask the issuing bank before a larger documented travel payment; approval is its decision. An RFCD card may pay online at the actual amount from eligible foreign cash brought back after travel.",
     aeoDirectAnswerBn:
-      "বিদেশ থেকে ফেরার সময় বেঁচে যাওয়া নগদ ডলার ব্যাংকে জমা দিয়ে RFCD একাউন্ট খুললে সরাসরি ডলারে ব্যালেন্স থাকে এবং বড় অঙ্কের ফ্লাইট বা হোটেল বুকিংয়ে কোনো $300 ক্যাপ থাকে না।",
-    eavTriples: "RFCD Account Bangladesh (Entity) → Key Advantage (Attribute) → No $300 Single E-Commerce Cap (Value)",
+      "Travel-quota card-এ একবারে online purchase-এর সাধারণ limit USD 300। বড় documented travel payment-এর আগে issuing bank-কে জিজ্ঞেস করুন; approval তাদের সিদ্ধান্ত। RFCD card বিদেশ সফর থেকে সঙ্গে আনা eligible foreign cash-এর balance থেকে online-এ প্রকৃত amount payment করতে পারে।",
+    eavTriples: "RFCD Account Bangladesh (Entity) → Online Payment Treatment (Attribute) → Payment at Actual from Eligible Deposited Balance (Value)",
     targetPath: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
     isLiveBlog: false,
   },

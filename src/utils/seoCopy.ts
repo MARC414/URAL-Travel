@@ -391,9 +391,9 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Compare Shariah-compliant Islamic dual-currency debit and pre-paid cards in Bangladesh for booking Nusuk, Haramain trains and Makkah hotels without riba.",
   },
   "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": {
-    title: "RFCD Account vs Travel Quota in Bangladesh | URAL",
+    title: "RFCD vs Travel Quota: $300 Online Limit | URAL",
     description:
-      "Understand the difference between Bangladesh Bank's $18,000 annual travel quota and RFCD accounts, and how to clear per-transaction online payment limits.",
+      "See why Bangladesh's USD 300 online-purchase rule affects travel-quota cards, how documented travel approval works, and when an RFCD account fits.",
   },
   "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": {
     title: "Book Flights & Makkah Hotels in BDT Without a Card | URAL",

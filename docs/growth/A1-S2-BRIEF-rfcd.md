@@ -73,3 +73,51 @@ paragraph + link back.
 ## Gate
 
 ✋ Owner approval = S3 EN draft. S1 facts are already approved (shared ledger M1–M3).
+
+## S3–S5 execution record (16 Oct 2026)
+
+- No recoverable local RFCD draft commit was present in this checkout, so EN and BN were rebuilt from
+  approved ledger wordings M1–M3 and this brief. EN is 905 words; BN preserves the same six sections,
+  decision rules, five citations, four FAQs, five internal destinations and number set.
+- S5 package: H1/search title and summaries rewritten without the invented decline SMS or "permanent
+  solution" promise; `updatedAt` set to `2026-10-16`; five article-specific references added (three
+  Bangladesh Bank primary documents plus EBL and SIBL operator pages); EN/BN AEO snippets rewritten;
+  target FAQ config added for the visible four-question sections.
+- Existing Aviasales `affiliateCTA` retained with source-safe copy; no new body or partner placement was
+  added. The public blog-map answer and contextual tooltip for this URL were corrected from "zero/no cap"
+  framing to Bangladesh Bank's "online payment at actual" wording.
+
+## S6 preflight and red-team record (16 Oct 2026)
+
+- Source liveness rechecked: all five reference URLs opened; GFET Ch. 19 ¶17 supplies the USD 300 general
+  online-purchase rule, ¶14/¶16 the separate visa/hotel provisions, and FE Circular Letter No. 05 the
+  RFCD "at actual" wording. EBL and SIBL still publish the deposit/card terms used.
+- Automated source preflight: **54/54 PASS** — slug/date, six-section EN/BN structure, number/decision
+  parity, citations [1]–[5], four visible FAQs per locale, five references, five internal links and
+  forbidden-claim scan. Absolutist scan found only sourced requirements or explicit negations/caveats.
+- No `HowTo` node was added: this URL's dominant intent is comparative; its visible, schema-matched
+  component is `FAQPage`. The Option A steps remain a readable checklist without recasting the whole page
+  as a procedural HowTo.
+
+| Dimension | Score / 4 | Evidence / reason | Remaining limitation |
+|---|---:|---|---|
+| Intent & coverage | 3 | Answers the $300 decline, documented-bank route, RFCD eligibility and situation-based choice without duplicating the endorsement guide | Fresh SERP/demand measurement was not part of this segment |
+| Factual evidence | 4 | Every material rule maps to M1–M3; 3 primary BB documents + 2 bank operator pages; uncertainties and bank discretion are explicit | None |
+| Usability & actionability | 3 | Quick answer, Option A checklist, RFCD facts, structured comparison, practical notes and 4 distinct FAQs | Renderer-supported structured list used instead of a semantic comparison table, per approved R1 |
+| Locale, trust & release | 4 | EN/BN decision parity; matched references/links/FAQ schema; checked date and canonical slug retained | None |
+| **Total** | **14/16** | **PASS** | No zero and no hard fail |
+
+**Hard fails:** none. v2 centerpiece, component, fabricated-experience and QD checks all pass.
+
+## S7 handoff record (16 Oct 2026)
+
+- `npm run lint` PASS · `npm run build` PASS (94 EN + 94 BN canonical routes) ·
+  `npm run verify:build` PASS — **all 162 checks**.
+- Built EN/BN inspected: `en-BD` / `bn-BD`, self-canonical plus complete three-link hreflang clusters,
+  `dateModified` 2026-10-16, four visible FAQs matching four-question `FAQPage` nodes, all five reference
+  URLs, four sibling-blog links plus the tools route, and zero dropped hype/MCC/rate strings.
+- Search metadata now says "how documented travel approval works" rather than promising a cap clear;
+  title/description are distinct in both locales. RSS changes only this item's title/description; sitemap
+  changes only this slug's EN+BN `lastmod`.
+- **Not deployed or merged.** PR review is the owner gate. Wave C remains next after this RFCD release;
+  Airalo-Oman belongs in the existing eSIM article's turn, not a new URL.

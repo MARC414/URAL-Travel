@@ -403,7 +403,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                   path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
 
-                  title: "RFCD Account vs. Regular Travel Quota ($300 Cap Solution)",
+                  title: "RFCD Account vs. Travel Quota (the $300 online-payment rule)",
 
                 },
 

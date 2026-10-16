@@ -652,7 +652,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah":
       "Top Shariah-compliant Riba-free cards in Bangladesh for Umrah and Halal travel include Islami Bank (IBBL) Dual-Currency Debit & Khidmah Card, City Islamic Amex/Visa, EBL Islamic Debit Card, Al-Arafah La-Riba, and Standard Chartered Saadiq—all supporting the $18,000 passport travel quota (FE Circular 33) for Haramain Train and Makkah hotel bookings.",
     "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix":
-      "When Bangladeshi banks block online flight or hotel payments above $300 USD on regular Travel Quota cards, call your bank's 24/7 hotline 15 minutes before checkout to lift the merchant cap—or open a Resident Foreign Currency Deposit (RFCD) account using leftover travel cash for zero single-transaction caps.",
+      "Bangladesh Bank generally caps a single online purchase on a travel-quota card at USD 300. For a larger documented flight or hotel payment, ask your bank before checkout; approval is its decision. An RFCD card may pay online at the actual amount, but the account can hold only foreign cash brought back from travel.",
     "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card":
       "Travelers without an endorsed Dual-Currency Card can message the URAL Dhaka Desk on WhatsApp (+8801784385335) to book confirmed airline PNR tickets, Makkah/Madinah or Asian hotel vouchers, and Haramain train tickets in Bangladeshi Taka (BDT) via local bank transfer, bKash, or Nagad.",
     "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide":
@@ -747,7 +747,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah":
       "ওমরাহ ও হালাল ভ্রমণে সুদমুক্ত (Riba-Free) লেনদেনের জন্য ইসলামী ব্যাংক (IBBL) ডুয়াল-কারেন্সি ডেবিট ও খিদমাহ কার্ড, সিটি ইসলামিক অ্যামেক্স/ভিসা, ইবিএল ইসলামিক, আল-আরাফাহ লা-রিবা এবং স্ট্যান্ডার্ড চার্টার্ড সাদিক কার্ডে $18,000 পাসপোর্ট এনডোর্সমেন্ট (FE Circular 33) করে হারামাইন ট্রেন ও মক্কার হোটেল বুক করা যায়।",
     "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix":
-      "সাধারণ ডুয়াল-কারেন্সি কার্ডে $300 USD-এর বেশি ফ্লাইট বা হোটেল পেমেন্ট ডিক্লাইন হলে পেমেন্টের ১৫ মিনিট আগে ব্যাংকের হটলাইনে কল করে লিমিট আনলক করুন। আর স্থায়ী সমাধানের জন্য বিদেশ থেকে ফেরার পর বেঁচে যাওয়া নগদ ডলার জমা দিয়ে ব্যাংকে RFCD Account ও কার্ড খুলুন।",
+      "Bangladesh Bank-এর সাধারণ rule-এ travel-quota card দিয়ে একবারে online purchase-এর limit USD 300। বড় documented flight বা hotel payment-এর জন্য checkout-এর আগে bank-কে বলুন; approval তাদের সিদ্ধান্ত। RFCD card online-এ প্রকৃত amount payment করতে পারে, তবে account-এ শুধু travel থেকে সঙ্গে আনা foreign cash রাখা যায়।",
     "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card":
       "হাতে এনডোর্স করা Dual-Currency Card না থাকলে সরাসরি URAL-এর ঢাকা WhatsApp ডেস্কে (+8801784385335) যোগাযোগ করে দেশীয় ব্যাংক ট্রান্সফার, bKash বা Nagad-এ (BDT) পেমেন্ট করেই কনফার্মড ফ্লাইট PNR, মক্কা/মদিনা বা এশিয়ার হোটেল ভাউচার ও হারামাইন ট্রেন টিকিট বুক করতে পারেন।",
     "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide":
