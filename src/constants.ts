@@ -2494,11 +2494,29 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-20",
     slug: "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
     title: "Wearing Ihram from Dhaka Airport vs. Transit Flight (2026): Official Miqat Rules (Qarn al-Manazil & Yalamlam)",
-    summary: "One of the most stressful questions for first-time Bangladeshi Umrah and Hajj pilgrims is: 'Where do I wear my Ihram garments and make Niyyah when flying from Dhaka to Jeddah?' Crossing the aerial Miqat boundary without entering the state of Ihram requires returning to a Miqat or paying a Dam (sacrificial penalty). This clear, step-by-step guide explains the exact difference between flying direct on Biman Bangladesh Airlines or Saudia versus flying 1-stop transit on Air Arabia, SalamAir, Gulf Air, Emirates, or Qatar Airways—plus why flying into Madinah first requires no Ihram on the plane.",
+    summary: "Crossing the aerial Miqat boundary without entering Ihram is a critical concern for pilgrims flying to Jeddah for Umrah. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidance, this guide explains when and where to put on Ihram garments and formulate Niyyah: non-stop flights from Dhaka (Biman/Saudia), layovers in Gulf transit airports, and why flying to Madinah first requires no Ihram on the plane.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "6 min read",
+    references: [
+      {
+        name: "Ministry of Hajj and Umrah — Official Miqat locations and Ihram guidelines",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — অফিশিয়াল মিকাত ও ইহরামের নির্দেশনা",
+        url: "https://www.haj.gov.sa",
+      },
+      {
+        name: "General Authority of Civil Aviation (GACA) — Flight passenger briefing on Miqat",
+        nameBn: "সৌদি সিভিল এভিয়েশন অথরিটি (GACA) — মিকাত ফ্লাইটে যাত্রীদের নির্দেশনা",
+        url: "https://gaca.gov.sa",
+      },
+      {
+        name: "Nusuk — Pilgrim advisory on Ihram preparation & Haramain transit",
+        nameBn: "নুসুক — ওমরাহযাত্রীদের ইহরাম ও হারামাইন ট্রানজিট নির্দেশনা",
+        url: "https://www.nusuk.sa",
+      },
+    ],
     internalLinks: [
       { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
       { text: "Umrah Rules for Bangladeshi Women & Modest Ihram Guide", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },

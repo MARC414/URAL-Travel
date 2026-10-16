@@ -607,32 +607,39 @@ According to the **General Authority for the Care of the Affairs of the Grand Mo
 4. PRACTICAL IFTAR, SUHOOR & TARAWEEH SURVIVAL TIPS FOR BANGLADESHI PILGRIMS
 - **Free Haram Iftar Dastarkhwan:** Arrive at least **60 to 75 minutes before Maghrib** to sit along the official Iftar spreads inside the Haram (offering dates, Zamzam, laban/yogurt, Arabic coffee, and bread).
 - **Performing Tawaf Without Heat Exhaustion:** During Ramadan fasting hours, never perform ground-floor Mataf Tawaf between 11:00 AM and 3:30 PM. Perform your Umrah either **right after Isha/Taraweeh (10:30 PM – 2:00 AM)** or **after Fajr prayer (6:00 AM – 8:30 AM)**.`,
-  "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": `According to authentic Islamic jurisprudence and the **Saudi Ministry of Hajj and Umrah (haj.gov.sa)** guidelines, every pilgrim flying to **Jeddah (King Abdulaziz International Airport - JED)** with the intention of performing Umrah or Hajj MUST enter the sacred state of Ihram before the aircraft crosses the designated aerial **Miqat** boundary. Because Jeddah lies inside the Miqat perimeter, you cannot wait until landing at Jeddah Airport to put on your Ihram!
+  "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": `For Bangladeshi pilgrims embarking on Umrah or Hajj, entering the sacred state of Ihram before crossing the designated geographic boundary (Miqat) is an obligatory rite under Islamic jurisprudence and Saudi Ministry of Hajj & Umrah directives. Because King Abdulaziz International Airport (JED) in Jeddah lies inside the perimeter of the Miqats, pilgrims landing in Jeddah cannot postpone their Ihram until reaching the airport terminal. Understanding your flight routing—whether flying non-stop from Dhaka, transiting through Gulf hubs, or landing in Madinah first—determines exactly when and where to put on your Ihram garments and formulate your Niyyah. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidance, GACA flight operation notices, and established Sunnah principles.
 
-1. WHAT IS THE DESIGNATED AIR MIQAT FOR FLIGHTS FROM BANGLADESH TO JEDDAH?
-Depending on the flight path over the Arabian Peninsula or the Red Sea, flights from Dhaka (DAC) or Gulf transit hubs cross one of two official Miqat lines approximately **35 to 50 minutes before landing at Jeddah Airport**:
-- **Qarn al-Manazil (Al-Sayl al-Kabir):** Crossed by flights approaching Jeddah from the East/Central route (including Dhaka direct flights and transit flights via Riyadh, Dammam, Dubai, Sharjah, Doha, Bahrain, and Kuwait).
-- **Yalamlam (As-Sa'diyyah):** Crossed by flights approaching Jeddah from the Southern route (including some flights via Muscat or southern corridors).
+1. Geographic and Aerial Miqat Boundaries for Flights from Bangladesh
+The Prophet Muhammad (peace be upon him) designated specific geographical boundary points around Makkah for entering Ihram:
+- **Qarn al-Manazil (As-Sayl al-Kabir):** The designated Miqat for travelers arriving from the east and central regions. Flights flying direct from Hazrat Shahjalal International Airport (DAC) across central Arabia or transiting via Riyadh, Dammam, Dubai, Sharjah, Doha, Bahrain, or Kuwait typically cross the aerial projection of Qarn al-Manazil approximately 30 to 45 minutes prior to touchdown at Jeddah [1][2].
+- **Yalamlam (As-Sa'diyyah):** The designated Miqat for travelers approaching from the south (Yemen and southern oceanic corridors). Certain flight paths, such as those routing via Muscat or southern Oman airspace, may cross the aerial alignment of Yalamlam prior to descent into Jeddah [1][2].
+- **Dhul Hulayfah (Abyar Ali):** The designated Miqat for residents of Madinah and those departing Madinah towards Makkah. It is located approximately 11 kilometers outside Madinah city center and is used when travelling overland or via the Haramain High-Speed Train towards Makkah [1][3].
 
-2. SCENARIO A: FLYING DIRECT NON-STOP FROM DHAKA TO JEDDAH (BIMAN OR SAUDIA)
-If you are flying non-stop from **Hazrat Shahjalal International Airport (DAC) to Jeddah (JED)** on Biman Bangladesh Airlines or Saudia:
-Step 1: Wear Your Two White Ihram Towels in Dhaka Before Boarding:
-- Do NOT try to change into unstitched Ihram towels inside a tiny airplane lavatory! Perform Ghusl (bath) at home in Dhaka, or change into your Ihram garments at the **Ashkona Hajj Camp mosque** or the **Prayer Room inside Dhaka Airport Terminal 1/2** after check-in, and pray 2 Rakah Sunnah of Ihram while your head is still covered.
-Step 2: Wait Until the Pilot's Miqat Announcement to Make Niyyah & Talbiyah:
-- Wearing the white cloth alone does not put you under Ihram restrictions yet. Sit comfortably on the plane.
-- About **45 minutes before landing at Jeddah**, the Biman or Saudia captain will announce in Bangla, Arabic, and English that the aircraft is approaching the **Miqat**. At that moment (or 10 minutes before), uncover your head (for men), make your verbal intention: **"Labbayka Allahumma Umrah"**, and begin reciting the **Talbiyah** aloud.
+2. Scenario A: Direct Non-Stop Flights from Dhaka to Jeddah (Biman or Saudia)
+When flying non-stop from Dhaka (DAC) directly to Jeddah (JED) with the intention of performing Umrah:
+- **Step 1 — Put on Ihram Garments in Dhaka Before Boarding:** Changing into unstitched sheets inside an aircraft lavatory during flight is cramped and physically challenging. It is recommended to perform Ghusl (ritual bath) at home in Dhaka or use the prayer rooms at Dhaka Airport Terminal 1/2 or Ashkona Hajj Camp after check-in. Put on the two unstitched white towels (Izar and Rida) for men or modest attire for women before boarding the flight [1]. Keep footwear accessible.
+- **Step 2 — Wait for the In-Flight Miqat Announcement to Formulate Niyyah:** Putting on the physical Ihram clothing does not initiate the sacred state of Ihram. You remain in your normal state until you verbally state your intention (Niyyah) and begin the Talbiyah. Approximately 30 to 45 minutes before landing at King Abdulaziz International Airport, the flight crew on Biman or Saudia will announce in Bengali, English, and Arabic that the aircraft is approaching the Miqat [1]. At that time, uncover your head (for male pilgrims), make your intention (**"Labbayk Allahumma Umrah"**), and recite the Talbiyah (**"Labbayk Allahumma Labbayk..."**) [1].
 
-3. SCENARIO B: FLYING 1-STOP TRANSIT (DUBAI, SHARJAH, MUSCAT, DOHA, KUWAIT OR BAHRAIN)
-If you are flying Air Arabia (via Sharjah), SalamAir (via Muscat), Gulf Air (via Bahrain), Kuwait Airways, Jazeera Airways, Emirates, or Qatar Airways:
-Step 1: Fly Dhaka -> Transit Airport in Regular Modest Clothes:
-- Keep your clean white Ihram towels, belt, and unscented sandals inside your **7kg Cabin Hand-Carry Backpack** (never pack your Ihram inside your checked-in 23kg suitcase!).
-Step 2: Change into Ihram During Your Layover at the Transit Airport:
-- Sharjah, Dubai, Muscat, Doha, Bahrain, and Kuwait airports all have dedicated **Ablution & Ihram Changing Rooms / Prayer Halls (Musalla)** inside the transit terminal.
-- Change into your Ihram garments during the layover, board the second flight (Transit -> Jeddah), and make your Niyyah + Talbiyah as soon as you board the Jeddah-bound plane or when the Miqat is announced.
+3. Scenario B: One-Stop Connecting Flights via Gulf Transit Hubs
+When flying on connecting flights via Gulf hubs (such as Air Arabia via Sharjah, flydubai or Emirates via Dubai, Qatar Airways via Doha, Gulf Air via Bahrain, SalamAir via Muscat, or Kuwait Airways):
+- **Step 1 — Fly the First Leg in Comfortable Everyday Clothing:** Wear normal modest clothing for the Dhaka to transit hub leg. Keep your clean Ihram sheets, Ihram money belt, and supportive footwear inside your 7 kg carry-on cabin bag; never pack your Ihram essentials in your checked hold baggage [1].
+- **Step 2 — Change into Ihram During Your Airport Layover:** Major transit terminals across Sharjah, Dubai, Doha, Muscat, and Bahrain feature dedicated airport prayer rooms (Musalla) equipped with ablution and changing facilities. Change into your Ihram garments comfortably during your layover before boarding the connecting flight to Jeddah [1].
+- **Step 3 — Formulate Niyyah on the Connecting Flight:** Once airborne on the second leg heading towards Jeddah, formulate your intention and recite Talbiyah when the captain announces the Miqat or roughly 30 minutes before arrival [1][2].
 
-4. SCENARIO C: FLYING DHAKA TO MADINAH (MED) FIRST — NO IHRAM ON THE PLANE!
-- If your outbound ticket lands at **Madinah Airport (MED)** first, you **DO NOT wear Ihram** at Dhaka Airport or on the airplane!
-- You fly to Madinah in normal everyday clothes, spend 3 to 5 peaceful days praying in Masjid an-Nabawi, and on the day you travel from Madinah to Makkah (by Haramain Bullet Train or car), you bathe and wear your Ihram at your Madinah hotel and make Niyyah at **Miqat Dhul Hulayfah (Masjid Abyar Ali)**.`,
+4. Scenario C: Flights Landing in Madinah First (Prince Mohammad Bin Abdulaziz Airport - MED)
+If your itinerary flies from Dhaka into Madinah first, the operational and religious sequence is substantially simplified:
+- **No Ihram Required on the Flight:** Because Madinah lies outside the sacred boundary (Haram) of Makkah, you travel from Dhaka to Madinah in your normal everyday clothing [1]. You do not wear Ihram garments on the plane and you do not make Niyyah during flight descent into MED.
+- **Enter Ihram in Madinah Before Departing to Makkah:** After spending your scheduled days praying in Masjid an-Nabawi, perform Ghusl and put on your Ihram garments at your Madinah hotel on the day you depart for Makkah. If traveling by road, stop at Miqat Dhul Hulayfah (Masjid Abyar Ali) to pray and make Niyyah. If traveling on the Haramain High-Speed Train, formulate your intention and recite Talbiyah as the train departs or passes the Miqat zone outside Madinah [1][3].
+
+5. Frequently Asked Questions
+Can I put on my Ihram after landing at Jeddah Airport?
+No. Jeddah is located within the geographic Miqat boundary [1]. If your intention is to perform Umrah directly, you must enter the state of Ihram before the aircraft passes the aerial Miqat line [1][2]. Crossing the Miqat without Ihram requires either returning to a Miqat or offering a compensatory sacrifice (Dam) under classical jurisprudence.
+When does the flight crew announce the Miqat?
+On direct flights from Dhaka or connecting flights from Gulf airports to Jeddah, operating carriers announce the approach to Miqat Qarn al-Manazil or Yalamlam approximately 30 to 45 minutes before scheduled landing [1].
+Does wearing the Ihram cloth alone place you in the sacred state?
+No. Putting on the physical towels or modest garments does not initiate Ihram restrictions. The sacred state commences when you make the formal intention (Niyyah) in your heart, utter the intention verbally, and begin reciting the Talbiyah [1].
+Do I need to wear Ihram if my flight lands in Madinah?
+No. If your ticket flies from Dhaka directly or via transit to Madinah (MED), you do not wear Ihram on the aircraft [1]. You enter Ihram later from Madinah at Miqat Dhul Hulayfah before travelling onward to Makkah [1][3].`,
   "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": `At the end of your Umrah or Hajj journey, returning smoothly through **Jeddah (JED)** or **Madinah (MED)** departure terminals and clearing **Dhaka Hazrat Shahjalal International Airport (DAC)** customs requires following the official aviation and customs laws of both countries.
 
 1. WHAT ARE THE OFFICIAL GACA RULES FOR CARRYING ZAMZAM WATER FROM JEDDAH OR MADINAH AIRPORT?

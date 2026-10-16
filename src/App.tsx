@@ -634,7 +634,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
       "Performing Umrah in Ramadan equals the reward of Hajj, but Last-10-Days Makkah hotel rates triple to BDT 2,20,000+ per person. Cut your budget by 50% (to BDT 1,35,000–1,55,000) by flying in late Sha'ban and performing Umrah during the first week of Ramadan, or register early on Nusuk for I'tikaf.",
     "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
-      "When flying direct from Dhaka to Jeddah on Biman or Saudia, put on your unstitched Ihram garments at Dhaka Airport and make Niyyah when the pilot announces Miqat Qarn al-Manazil 45 minutes before landing. On 1-stop transit flights, change into Ihram during your Gulf airport layover.",
+      "When flying direct from Dhaka to Jeddah on Biman or Saudia, put on your Ihram garments at Dhaka Airport and make Niyyah when the pilot announces Miqat Qarn al-Manazil before landing. On connecting flights via Gulf hubs, change into Ihram during your layover; flying into Madinah first requires no Ihram on the aircraft.",
     "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
       "Never pack loose Zamzam bottles inside checked suitcases. Buy one official 5-liter sealed Zamzam box (SAR 9.50–12.50) at the Jeddah or Madinah airport kiosk, carried free by Biman and Saudia. Returning Bangladeshi passengers can also bring 5–10 kg of Madinah dates and up to 100g of gold jewelry duty-free.",
     "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
@@ -729,7 +729,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
       "রমজান মাসে ওমরাহ পালনে হজের সমান সওয়াব পাওয়া যায়, তবে শেষ ১০ দিনে মক্কার হোটেল ভাড়া তিনগুণ বেড়ে জনপ্রতি ২.২০ লক্ষ+ টাকা ছাড়িয়ে যায়। শাবানের শেষ সপ্তাহে মদিনায় গিয়ে রমজানের প্রথম সপ্তাহে মক্কায় ওমরাহ করলে মাত্র ১.৩৫–১.৫৫ লক্ষ টাকায় (৫০% কমে) রমজান ওমরাহ সম্পন্ন করা সম্ভব।",
     "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
-      "বিমান বা সৌদিয়ার ডিরেক্ট ফ্লাইটে জেদ্দা গেলে ঢাকা এয়ারপোর্টেই ইহরামের কাপড় পরুন এবং ল্যান্ডিংয়ের ৪৫ মিনিট আগে পাইলট মিকাত (কারনুল মানাজিল) ঘোষণা করলে নিয়ত ও তালবিয়াহ পড়ুন। আর ট্রানজিট ফ্লাইটে গেলে দুবাই/শারজাহ/মাস্কাট যাত্রাবিরতিতে ইহরাম পরে নিন।",
+      "সরাসরি জেদ্দাগামী ফ্লাইটে ঢাকা এয়ারপোর্টেই ইহরাম পরে নিন এবং অবতরণের আগে পাইলট মিকাত ঘোষণা করলে নিয়ত ও তালবিয়া পাঠ করুন। উপসাগরীয় ট্রানজিট ফ্লাইটে লেওভারের সময় ইহরাম পরুন; আর প্রথমে মদিনায় নামলে প্লেনে ইহরাম পরার প্রয়োজন নেই।",
     "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
       "লাগেজের ভেতর খোলা বোতলে জমজমের পানি ভরলে এক্স-রে স্ক্যানারে তা জব্দ হয়। জেদ্দা বা মদিনা এয়ারপোর্টের অফিশিয়াল কিয়স্ক থেকে পাসপোর্ট দেখিয়ে ৫ লিটারের সিল করা জমজম বক্স (৯.৫০–১২.৫০ রিয়াল) কিনুন, যা বিমান ও সৌদিয়া ফ্রি বহন করে। সাথে ৫–১০ কেজি খেজুর ও ১০০ গ্রাম স্বর্ণালংকার শুল্কমুক্ত আনা যায়।",
     "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":

@@ -590,4 +590,17 @@ Stage 2 is complete **for the narrow claims the route guide actually makes**: th
   - Updated metadata \`updatedAt: "2026-10-18"\` to reflect the scheduled release date.
 - **Verification:** \`npm run test:scheduling\`, \`npm run lint\`, \`npm run build\`, and \`npm run verify:build\` all passed cleanly with 162/162 checks passing.
 
+### Stage 3–9 execution record — Wave 5 Specialist 3: Wearing Ihram from Dhaka Airport vs. Transit Flight & Miqat Rules (16 October 2026, scheduled for 19 October)
+
+- **Execution scope:** In-place bilingual update of \`blog-20\` (\`/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules\` and its \`/bn/\` twin).
+- **Substantive changes applied:**
+  - Resolved blog audit finding F10: added 3 primary official references (\`haj.gov.sa\`, \`gaca.gov.sa\`, \`nusuk.sa\`) with English and Bengali metadata parity.
+  - Sourced classical and aviation Miqat boundary coordinates for incoming Dhaka/Bangladesh flights: Qarn al-Manazil (As-Sayl al-Kabir) for eastern/central routes (Biman, Saudia direct, and transit flights from Riyadh, Dammam, Dubai, Sharjah, Doha, Kuwait, Bahrain); Yalamlam (As-Sa'diyyah) for southern air corridors via Muscat/Oman; and Dhul Hulayfah (Abyar Ali) for pilgrims traveling overland or by Haramain High-Speed Rail from Madinah to Makkah.
+  - Established operational protocol for non-stop direct flights (Biman / Saudia): putting on Ihram garments at Dhaka Airport terminal prayer halls before departure due to confined aircraft lavatories, and initiating formal Niyyah and Talbiyah when the flight deck broadcasts the official 30–45 minute pre-landing Miqat announcement.
+  - Outlined step-by-step logistics for 1-stop Gulf transit carriers (Air Arabia, flydubai, Emirates, Qatar Airways, Gulf Air, SalamAir, Kuwait Airways): traveling in normal comfortable modest clothes during leg 1, utilizing spacious airport transit prayer halls (musallah) and ablution areas during layovers to change into Ihram, and making Niyyah on the connecting aircraft upon pilot notification.
+  - Clarified open-jaw / Madinah-first routing: flights landing first at Prince Mohammad Bin Abdulaziz International Airport (MED) require no Ihram garments or Niyyah on the aircraft or in Dhaka, as Madinah lies outside the Haram precinct; pilgrims enter Ihram days later when journeying to Makkah from Madinah via Miqat Dhul Hulayfah.
+  - Added matching 4-question bilingual FAQ sections in \`src/utils/blogStructuredData.ts\`, updated AEO 50-word snippets in \`src/App.tsx\`, and refreshed metadata in \`src/constants.ts\` with \`updatedAt: "2026-10-19"\`.
+- **Verification:** \`npm run test:scheduling\`, \`npm run lint\`, \`npm run build\`, and \`npm run verify:build\` all passed cleanly with 162/162 checks passing.
+
+
 
