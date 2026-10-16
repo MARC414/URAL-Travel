@@ -589,7 +589,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                         <a
 
-                          href={rule.path}
+                          href={getLocalizedRouteHref(rule.path)}
 
                           title={rule.title}
 
@@ -1380,7 +1380,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                       <a
 
-                                        href={activePost.internalLinks[0].path}
+                                        href={getLocalizedRouteHref(activePost.internalLinks[0].path)}
 
                                         onClick={(e) => { e.preventDefault(); navigateTo(activePost.internalLinks[0].path); }}
 
@@ -2102,7 +2102,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                 key={idx}
 
-                                href={lnk.path}
+                                href={getLocalizedRouteHref(lnk.path)}
 
                                 onClick={(e) => { e.preventDefault(); navigateTo(lnk.path); }}
 

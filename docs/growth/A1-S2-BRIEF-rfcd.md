@@ -116,6 +116,8 @@ paragraph + link back.
 - Built EN/BN inspected: `en-BD` / `bn-BD`, self-canonical plus complete three-link hreflang clusters,
   `dateModified` 2026-10-16, four visible FAQs matching four-question `FAQPage` nodes, all five reference
   URLs, four sibling-blog links plus the tools route, and zero dropped hype/MCC/rate strings.
+- S7 locale defect found and fixed: hydrated Bengali contextual, recommended-next and related-step anchors
+  now call `getLocalizedRouteHref`, so their visible `href`s retain `/bn/` just like prerendered HTML.
 - Search metadata now says "how documented travel approval works" rather than promising a cap clear;
   title/description are distinct in both locales. RSS changes only this item's title/description; sitemap
   changes only this slug's EN+BN `lastmod`.
