@@ -153,15 +153,20 @@ Legend: Refs = article-level references · Upd = `updatedAt` · Risk = fix prior
 
 ## 7. Proposed fix order (owner approval required per wave)
 
+**Latest owner sequencing — 16 October 2026:** after C1 evidence review, the owner set aside unfinished C1 and selected **C2 Airalo–Oman** for a whole-article EN/BN review and short plan before editing. C1 is paused, not completed; AHTPO11 and its promotion must remain untouched. PR #44 RFCD is the merged baseline, not a reopened task. The earlier wave proposal below does not override the current [queue](CONTENT-QUEUE.md) or [C2 review/plan](C2-ESIM-INSURANCE-REVIEW-2026-10-16.md).
+
 1. **Wave A — P0 legal/money (one article at a time, Stage 1–9):** dual-currency endorsement →
    RFCD/travel quota → shariah cards → DCC/money exchange (one money cluster, reconciled
    numbers) → ePassport → Malaysia eVisa/MDAC → Singapore visa → airport NOC/GO checklist.
 2. **Wave B — Umrah-cluster siblings (F10):** Hajj registration (season-bound — re-verify
    first) → women/mahram → Zamzam/customs → elderly/medical → Ramadan → ihram → open-jaw fares
    → ziyarah/food/Dubai-combo.
-3. **Wave C — compensation + AirHelp (merges with the parked AirHelp Oman update):**
-   rebuild `flight-delay-cancellation…airhelp` on EC261/UK261/GACA/SHY/Montreal primary
-   sources, *then* add Oman.
+3. **Wave C — C1 paused; C2 Airalo–Oman review active:**
+   C1 updates only the existing `flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp`
+   article and its Bengali twin, on verified EC261/UK261/GACA/SHY/Montreal evidence and separate
+   commercial terms when resumed. No Oman content in C1. The owner has now moved to C2 for a proper re-audit
+   of the existing `best-travel-esim-and-schengen-travel-insurance-bangladesh-guide` and its
+   Bengali twin for **Airalo–Oman**, not AirHelp–Oman. No new compensation or Oman URL.
 4. **Wave D — costs/fares (P1):** family-destinations table, Pokhara, Maldives, Singapore
    itinerary, baggage rules, CGP–Dubai, Europe passes, hotel-savings, cheap-flight hacks
    (rewrite or merge per QD verdict).

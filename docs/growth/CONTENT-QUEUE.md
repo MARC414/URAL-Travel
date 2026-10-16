@@ -6,10 +6,7 @@
 
 > **Reconstruction note:** the previous session's `CONTENT-QUEUE.md` was not in the checkout and its commit was unavailable. This queue and its row format are reconstructed from the current repository conventions and task brief.
 
-> **Active execution order — 15 October 2026.** The **Umrah cluster** is the rollout in progress
-> ([`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md)); its row below remains the active cluster gate. **Fard Hajj stays a
-> separate, linked topic**, not an Umrah child. **The India cluster as a multi-page wave remains deferred**, regardless of how
-> [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md) §6/§12 numbers its sprints.
+> **Latest owner sequencing — 16 October 2026.** **C2 is now active for review and a short update plan:** Airalo–Oman within the existing bilingual eSIM/insurance article. The owner explicitly set aside unfinished C1 and instructed us to move on; C1 is paused, not completed. **Keep AHTPO11 and its promotion untouched; no further proof request in this task.** C2 is a whole-article review, not an unsupported Oman paragraph or a new page. Show the plan before live edits. PR #44 RFCD remains the merged baseline. Remaining Wave A/B work and the multi-page India cluster stay deferred; Fard Hajj remains separate from Umrah.
 >
 > **Post-hoc review of the published India land-corridor article (completed 15 October 2026).** PR #37 merged
 > `/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` (English and Bengali) without a queue row,
@@ -508,3 +505,30 @@ Stage 2 is complete **for the narrow claims the route guide actually makes**: th
 - **Historical article validation (before scheduling was added):** `npm run lint`, `npm run build`, and `npm run verify:build` previously passed with both locales rendered, concise localized titles/descriptions, Article and FAQPage schema (four FAQs each), all six references, the Cox’s Bazar cover/JPEG and responsive English preload, the homepage directory entry, both sitemap/hreflang routes, and the English RSS item. That content validation is retained as history; the new production guard instead verifies the article remains hidden while it is a draft.
 - **Scheduling state:** keep `status: draft` until the source caveat below is cleared and an actual publication date is chosen. When ready, use `status: scheduled` and a quoted `publishDate: "YYYY-MM-DD"`; the scheduled GitHub Action runs at 03:00 UTC (09:00 Asia/Dhaka), then asks Cloudflare Pages to rebuild. Future dates and drafts remain excluded. If the scheduled run is missed, manually dispatch the workflow with `include_overdue` enabled.
 - **Publication gate remains:** direct fetches of the Embassy visa page still return an error; the article uses qualified wording from the official indexed text and records that limitation. Reopen the live Embassy visa page and confirm its current wording before publication or refresh. The guide remains unpublished.
+
+---
+
+## Wave C1 — compensation review (16 October 2026; paused by owner)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query / audience / job | Intent evidence | Next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-16 | **UPDATE IN PLACE** (`blog-40`); one bilingual asset, no new compensation URL | `/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp` | `/bn/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp` | **Flight delay, cancellation and lost-baggage compensation for Bangladeshi travellers** — owner-selected task, existing article and `TopicalAuthorityBlueprint` query hypothesis. Help a disrupted traveller identify the applicable route/carrier rules, separate entitlements, preserve evidence and choose airline-direct or optional paid claims assistance. | Informational decision support with a procedural sub-intent; SERP, GSC, volume/KD and conversion data **not measured**. No centerpiece chosen before Stage 3. | Stage 1 inventory and Stage 2 ledger in [`C1-COMPENSATION-EVIDENCE-2026-10-16.md`](C1-COMPENSATION-EVIDENCE-2026-10-16.md). Owner decisions recorded 2026-10-16: retain AHTPO11 for now (terms still unverified); withhold unverified Saudi numeric promises; include focused shared-widget corrections in the rewrite plan. Subsequent owner instruction pauses C1 and moves to C2; no C1 implementation now. |
+
+- Baseline checked with `git fetch origin main` and `git merge-base --is-ancestor`: `origin/main` is `ce36ebeb9c783ca19ba0fb6445da723def6364bc` (PR #44 merge). Work stays on `arena/9081bd01-ural-travel`; RFCD is untouched.
+- Existing publication date: 2026-09-27 (EN and BN); no article `updatedAt` or article-specific references. Keep dates unchanged during evidence review.
+- Scope: inventory target body, metadata, snippets, renderer, schema, affiliate and generated-output paths, plus repository-wide contradictions. Owner approved planning a focused shared-widget correction: remove unsupported payout predictions and label AirHelp as an optional paid service. Promotion removal was rejected. Broader shared changes remain separately gated; implementation still requires brief approval.
+- Connected existing routes: `/tools?tab=airhelp`, `/flights`, airline baggage comparison, Jeddah/Madinah open-jaw, Europe sightseeing passes, and eSIM/insurance. C1 owns post-disruption rights; other pages own booking/baggage allowance/connectivity tasks. No duplicate compensation article found in `BLOG_SLUGS`; `SEO-KEYWORD-MAP.md` has no explicit AirHelp/compensation row.
+- Must preserve: fixed EN/BN URLs, full decision parity, legal/service distinction, honest sponsored placement, numbered checked sources after approval, and target-only sitemap/RSS changes. Neither remaining Wave A/B articles nor C2 may start in this pass.
+- **Sequencing superseded by owner:** C1 is paused and C2 is active for review/plan below. No Oman content in C1 and no new Oman page; AHTPO11 remains untouched.
+
+
+## Wave C2 — eSIM/insurance review and proposed plan (16 October 2026)
+
+| Verdict / asset | Reader task and scope | Evidence / next step |
+|---|---|---|
+| **UPDATE IN PLACE**, `blog-37`; `/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide` and its `/bn/` twin | Arrange connectivity and appropriate travel medical insurance from Bangladesh; review the whole EN/BN article, including Airalo–Oman as a section. No new URL. Informational preparation intent; demand/rankings not measured. | [Review, sources, 28-entry ledger and short proposed plan](C2-ESIM-INSURANCE-REVIEW-2026-10-16.md). Await plan approval before live edits. |
+
+- Latest owner instruction overrides the former C1-first gate; this does not certify or complete C1.
+- Keep AHTPO11 and its promotion untouched. AirHelp, RFCD and unrelated articles are outside this task.
+- Plan: supported-device/activation/OTP checks, qualitative connectivity choices, verified Oman product context, correct EUR30,000 Schengen rule and policy-specific insurance caveats. No invented price savings, speed/issuance guarantees or blanket visa requirements.
+- Publication remains 2026-09-27; no `updatedAt`, live content, sitemap or RSS changes during review. Proposed target-only rendering and bilingual callout work await approval.
