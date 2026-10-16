@@ -35,11 +35,30 @@ assert.equal(getPostsDueForPublishing(dueFixtures, nowAtPublish).length, 1);
 assert.equal(getPostsDueForPublishing(dueFixtures, nowAtPublish, true).length, 2);
 
 const repoPosts = loadScheduledBlogPosts();
-assert.equal(repoPosts.length, 1, "the existing Cox’s Bazar article should be retained in content/blog");
-const coxsBazarPost = repoPosts[0];
+assert.equal(repoPosts.length, 2, "both Cox’s Bazar articles should be retained in content/blog");
+const coxsBazarPost = repoPosts.find(
+  (post) => post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking",
+);
+assert.ok(coxsBazarPost, "the existing Cox’s Bazar article should be retained in content/blog");
 assert.equal(coxsBazarPost.status, "scheduled");
 assert.equal(coxsBazarPost.publishDate, "2026-10-16");
 assert.ok(coxsBazarPost.englishBody.includes("no confirmed scheduled passenger service"));
+const coxsBazarGuidePost = repoPosts.find(
+  (post) => post.slug === "coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh",
+);
+assert.ok(coxsBazarGuidePost, "the Cox’s Bazar travel guide should be retained in content/blog");
+assert.equal(coxsBazarGuidePost.status, "scheduled");
+assert.equal(coxsBazarGuidePost.publishDate, "2026-10-16");
+assert.ok(
+  coxsBazarGuidePost.englishBody.includes(
+    "NOTAM A0325/26 suspends international scheduled and non-scheduled movements",
+  ),
+);
+assert.ok(
+  coxsBazarGuidePost.bengaliBody.includes(
+    "A0325/26 নির্ধারিত আন্তর্জাতিক সার্ভিস শুরু না হওয়া পর্যন্ত",
+  ),
+);
 assert.ok(coxsBazarPost.bengaliBody.includes("নির্ধারিত যাত্রীবাহী ফ্লাইটের নিশ্চিত সময়সূচি পাওয়া যায়নি"));
 const nowOct16AtPublish = new Date("2026-10-16T03:00:00.000Z"); // 09:00:00 on Oct 16 in Dhaka
 assert.equal(isPostIncludedInBuild(coxsBazarPost, nowOct16AtPublish), true);
