@@ -1396,7 +1396,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                     <a
 
-                                      href="/umrah"
+                                      href={getLocalizedRouteHref("/umrah")}
 
                                       onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }}
 
@@ -2206,7 +2206,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                       <a
 
-                        href="/blog"
+                        href={getLocalizedRouteHref("/blog")}
 
                         onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
 
@@ -2252,7 +2252,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                             <a
 
-                              href={`/blog/${post.slug}`}
+                              href={getLocalizedRouteHref(`/blog/${post.slug}`)}
 
                               onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${post.slug}`); }}
 
