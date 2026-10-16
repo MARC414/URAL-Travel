@@ -1533,43 +1533,92 @@ Haramain Railway (**sar.hhr.sa**), Nusuk, Aviasales এবং সৌদি আ�
   },
 
   "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": {
-    title: "RFCD Account বনাম সাধারণ Travel Quota (2026): অনলাইন পেমেন্টে $300 লিমিট ও কার্ড ডিক্লাইন সমস্যার সমাধান",
+    title: "বাংলাদেশে RFCD বনাম Travel Quota: $300 লিমিট (2026)",
     summary:
-      "আপনি কি কখনো বাংলাদেশি Dual-Currency Card দিয়ে ৯৫,০০০ টাকার ($780) আন্তর্জাতিক বিমান টিকিট বা মক্কার ফ্যামিলি হোটেল বুক করতে গিয়ে 'Transaction Declined: Exceeds Single Transaction Limit' মেসেজ পেয়েছেন? বাংলাদেশের অনেক ব্যাংক সাধারণ Travel Quota (TQ) কার্ডে ডিফল্টভাবে একক ই-কমার্স লেনদেনে $300 USD ক্যাপ দিয়ে রাখে। বাংলাদেশ ব্যাংকের ফরেন এক্সচেঞ্জ নীতিমালা (bb.org.bd) অনুযায়ী এই সমস্যার দুটি স্থায়ী সমাধান রয়েছে: বিদেশ থেকে ফেরার পর বেঁচে যাওয়া ডলারে RFCD Account খোলা অথবা কল সেন্টারে ফোন করে High-Ticket Travel Limit প্রি-অথরাইজ করা।",
+      "Travel-quota card-এর online purchase limit USD 300; বড় documented payment-এ bank approval চান, আর বিদেশ থেকে cash ফিরলে RFCD terms তুলনা করুন। Approval bank-এর সিদ্ধান্ত। RFCD card online-এ প্রকৃত পরিমাণে payment করতে পারে, তবে account-এ শুধু বিদেশ সফর থেকে সঙ্গে আনা foreign cash রাখা যায়—remittance বা বিদেশি আয় নয়। ১৬ অক্টোবর ২০২৬ তারিখে Bangladesh Bank GFET Chapter 19, FE Circular Letter No. 05 এবং EBL/SIBL-এর RFCD terms অনুযায়ী যাচাই করা হয়েছে।",
     category: "Banking & Payments",
     date: "২৭ সেপ্টেম্বর, ২০২৬",
     author: "ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)",
     readTime: "৭ মিনিট পড়া",
-    content: `ঢাকা (DAC) থেকে সপরিবারে জেদ্দা, ব্যাংকক বা কুয়ালালামপুরের কম ভাড়ার ফ্লাইট খুঁজে পাওয়ার পর পেমেন্ট পেজে OTP দেওয়ার সাথে সাথে যদি দেখেন **$300 USD (~BDT 36,600)**-এর বেশি হওয়ার কারণে পেমেন্ট ডিক্লাইন হয়েছে—তবে তা অত্যন্ত হতাশাজনক। **বাংলাদেশ ব্যাংকের (bb.org.bd)** নিয়ম অনুযায়ী সাধারণ **Travel Quota (TQ) Card** এবং **Resident Foreign Currency Deposit (RFCD) Account**-এর পার্থক্য জানলে এই সমস্যা চিরতরে সমাধান করা যায়।
+    content: `১. $300 Online-Payment Decline কেন হয়
+Travel-quota card হলো পাসপোর্টে endorsed বৈদেশিক মুদ্রার বিপরীতে ইস্যু করা international card। বাংলাদেশ ব্যাংকের সাধারণ online-payment rule বৈধ পণ্য বা সেবার জন্য প্রযোজ্য entitlement-এর মধ্যে একবারে সর্বোচ্চ USD 300 online purchase-এর অনুমতি দেয় [1]। Visa-fee payment ও online hotel booking GFET-এর আলাদা paragraph-এ আছে। বাস্তবে bank বড় documented travel payment—যেমন flight বা hotel booking—process করতে পারে; তবে payment-এর আগে জিজ্ঞেস করুন, কারণ approval issuing bank-এর সিদ্ধান্ত।
 
-১. সাধারণ কার্ডে $300-এর বেশি অনলাইন পেমেন্ট কেন আটকে যায় এবং ৫ মিনিটে সমাধানের উপায় কী?
-বাংলাদেশ ব্যাংকের নিয়মে প্রাপ্তবয়স্ক নাগরিকদের বার্ষিক ট্রাভেল কোটা **$18,000 USD (FE Circular No. 33 অনুযায়ী)** হলেও, ডিজিটাল জালিয়াতি রোধে অনেক দেশীয় ব্যাংক সাধারণ BDT-ভিত্তিক কার্ডে **একবারে সর্বোচ্চ $300 থেকে $500 USD ই-কমার্স পেমেন্ট ক্যাপ** সেট করে রাখে:
-- **সাধারণ Travel Quota কার্ডে $300+ ফ্লাইট বা হোটেল পেমেন্ট আনলক করার উপায়:**
-  • আপনি যখন **EBL, City Bank, BRAC, MTB বা SCB**-এর সাধারণ ডুয়াল-কারেন্সি কার্ড দিয়ে **$600–$2,500 USD** মূল্যের ফ্লাইট টিকিট বা হোটেল বুক করবেন, তখন পেমেন্ট করার **১৫ মিনিট আগে ব্যাংকের ২৪/৭ হটলাইনে কল করুন**।
-  • অফিসারকে বলুন: *"আমি আমার এনডোর্স করা পাসপোর্ট ট্রাভেল কোটার অধীনে ভেরিফাইড ট্রাভেল (Airline / Hotel MCC Category) পেমেন্ট করছি। অনুগ্রহ করে আগামী ২৪ ঘণ্টার জন্য আমার Single E-Commerce Transaction Limit বাড়িয়ে $[Amount] USD করে দিন।"*
-  • এয়ারলাইন্স এবং হোটেল বুকিং বৈধ ভ্রমণ খাত হওয়ায় ব্যাংক সাথে সাথেই লিমিট রিল্যাক্স করে দেয়।
+২. Option A: Documented Travel Payment-এর জন্য ব্যাংকের Approval চান
+একবারের flight বা hotel purchase USD 300-এর বেশি হলে OTP দেওয়ার আগে card-issuing bank-এর সঙ্গে কথা বলুন। এটি documented travel payment-এর request—limit বাড়ার নিশ্চয়তা নয়।
 
-২. RFCD ACCOUNT কী এবং কেন এটি নিয়মিত ভ্রমণকারীদের জন্য সবচেয়ে বড় আশীর্বাদ?
-বাংলাদেশ ব্যাংকের **Resident Foreign Currency Deposit (RFCD)** নীতিমালা অনুযায়ী:
-নিয়ম ১: কারা RFCD একাউন্ট খুলতে পারবেন?
-- যেকোনো বাংলাদেশি নাগরিক বিদেশ সফর (**সৌদি আরবে ওমরাহ, থাইল্যান্ড/মালয়েশিয়া/সিঙ্গাপুর ভ্রমণ বা বিজনেস ট্রিপ**) শেষে দেশে ফেরার পর তাঁর কাছে বেঁচে যাওয়া নগদ বৈদেশিক মুদ্রা (**USD, GBP, EUR ইত্যাদি**) জমা দিয়ে যেকোনো ব্যাংকের AD শাখায় **RFCD Account** খুলতে পারেন।
-নিয়ম ২: কত ডলার জমা দেওয়া যায়?
-- এয়ারপোর্টে কাস্টমস ডিক্লারেশন ছাড়াই সর্বোচ্চ **USD $10,000 (দশ হাজার ডলার)** পর্যন্ত এবং **FMJ Form**-এ ঘোষণা সাপেক্ষে যেকোনো পরিমাণ বৈদেশিক মুদ্রা জমা দেওয়া যায়।
-নিয়ম ৩: RFCD International Debit Card-এর ৪টি বিশাল সুবিধা:
-- **১. কোনো $300 একক ট্রানজেকশন ক্যাপ নেই:** যেহেতু RFCD একাউন্টে আপনার নিজস্ব ডলার সরাসরি USD হিসেবেই জমা থাকে, তাই RFCD কার্ড দিয়ে এক ক্লিকেই $2,500 ডলারের ফ্যামিলি ফ্লাইট বা মক্কার হোটেল বিল পেমেন্ট করা যায়!
-- **২. প্রতি বছর পাসপোর্ট এনডোর্সমেন্ট নবায়নের ঝামেলা নেই:** সাধারণ ট্রাভেল কোটা প্রতি বছর ৩১ ডিসেম্বর রিসেট হয়, কিন্তু RFCD একাউন্টের ডলার বছরের পর বছর মেয়াদহীনভাবে ব্যবহার করা যায়।
-- **৩. ডলারেই মুনাফা লাভ:** অনেক ব্যাংক RFCD ব্যালেন্সের ওপর বছরে ৪.৫% থেকে ৬.৫% পর্যন্ত ডলারে রিটার্ন দেয়।
-- **৪. পরিবারের জন্য সাপ্লিমেন্টারি কার্ড:** স্বামী/স্ত্রী বা সন্তানদের জন্য সহজেই সাপ্লিমেন্টারি কার্ড নেওয়া যায়।`,
+ধাপ ১: Card প্রস্তুত আছে কি না যাচাই করুন
+Passport endorsement, card-এর foreign-currency অংশ, e-commerce এবং ব্যাংকের প্রয়োজনীয় online security setting চালু আছে কি না নিশ্চিত করুন। এই মূল কাজগুলো বাকি থাকলে আগে passport dollar endorsement guide অনুসরণ করুন।
+
+ধাপ ২: ব্যাংককে Payment-এর সঠিক তথ্য দিন
+Merchant, purpose ও exact amount জানান। Bank যেন travel-payment process অনুযায়ী request যাচাই করতে পারে, সে জন্য ticket itinerary, airline checkout বা hotel booking-এর প্রমাণ প্রস্তুত রাখুন [1]।
+
+ধাপ ৩: Payment-এর আগে ব্যাংকের সিদ্ধান্তের জন্য অপেক্ষা করুন
+Bank নির্দিষ্ট payment-টি process করবে কি না জেনে তাদের নির্দেশ অনুসরণ করুন। Approval-কে automatic বলবেন না: প্রযোজ্য documents, card control ও সিদ্ধান্ত issuing bank-এর।
+
+৩. Option B: RFCD Account-এর যে Rules জানা জরুরি
+Resident Foreign Currency Deposit (RFCD) account-এ বাংলাদেশের কোনো বাসিন্দা বিদেশ সফর থেকে শারীরিকভাবে সঙ্গে আনা যোগ্য foreign currency রাখেন। এটি প্রথম সফরের আগে BDT convert করার account নয় এবং এতে inward remittance বা বিদেশি আয় নেওয়া যায় না [3]।
+- **FMJ declaration ছাড়া deposit:** বিদেশ সফর থেকে আনা USD 10,000 বা সমপরিমাণ পর্যন্ত customs declaration ছাড়াই জমা দেওয়া যায় [3]।
+- **USD 10,000-এর বেশি deposit:** দেশে আসার সময় FMJ form-এ amount declare করতে হবে এবং EBL-এর terms অনুযায়ী declared amount আগমনের 30 দিনের মধ্যে জমা দিতে হবে [3]। 30 দিনের rule প্রতিটি RFCD account বা প্রতিটি deposit খোলার deadline নয়।
+- **Online card use:** বাংলাদেশ ব্যাংক RFCD account-এর বিপরীতে ইস্যু করা international card-কে available balance ও bank-এর card terms সাপেক্ষে online-এ প্রকৃত পরিমাণে (at actual) payment-এর স্পষ্ট অনুমতি দিয়েছে [2]।
+- **Transfer ও card access:** এই guide-এর জন্য দেখা bank terms-এ RFCD balance বিদেশে transfer এবং balance-এর বিপরীতে international card-এর সুবিধা আছে; product ও supported currency bank-ভেদে আলাদা [3][4]।
+
+৪. RFCD বনাম Travel Quota: আপনার জন্য কোনটি উপযুক্ত?
+- **Funds-এর উৎস:** Travel-quota card আপনার travel entitlement-এর বিপরীতে Authorized Dealer bank-এর ছাড় করা foreign exchange ব্যবহার করে। RFCD account বিদেশ সফর থেকে শারীরিকভাবে সঙ্গে আনা foreign cash ব্যবহার করে; inward remittance দিয়ে এটি fund করা যায় না [3]।
+- **Limit-এর ধরন:** Adult travel entitlement প্রতি calendar year-এ সর্বোচ্চ USD 18,000-এর ceiling; bank travel documents দেখে amount release করে, এটি automatic allowance নয় [5]। RFCD card-এ নিজের deposited foreign-currency balance থেকে খরচ হয়।
+- **Online-payment treatment:** Travel-quota card-এর সাধারণ online-purchase limit একবারে USD 300; এর বেশি documented travel payment issuing bank রাজি হলেই process হতে পারে। RFCD card online-এ প্রকৃত amount payment-এর জন্য স্পষ্টভাবে অনুমোদিত [1][2]।
+- **সময় ও paperwork:** সফরের জন্য passport endorsement-এর মাধ্যমে travel quota arrange করা হয়। RFCD funding শুরু হয় সফর থেকে eligible foreign currency ফেরত আনার পর; FMJ declaration ও 30 দিনের deposit window শুধু USD 10,000-এর বেশি amount-এর ক্ষেত্রে প্রাসঙ্গিক [3]।
+- **ব্যবহারিক সিদ্ধান্ত:** একবারের বড় ticket বা hotel payment হলে আগে বর্তমান card issuer-কে জিজ্ঞেস করুন। নিয়মিত travel করেন এবং সত্যিই leftover foreign cash থাকে—এমন হলে Authorized Dealer bankগুলোর RFCD account ও card terms তুলনা করুন। কোনো option-ই প্রতিটি merchant transaction সফল হওয়ার নিশ্চয়তা নয়।
+
+৫. সিদ্ধান্তের আগে ব্যবহারিক নোট
+Passport-এর arrival stamp এবং প্রযোজ্য হলে FMJ declaration bank-এর চাওয়া deposit documents-এর সঙ্গে রাখুন। Bank কোন currency নেয়, কোন international card দেয় এবং account, card, POS ও ATM-এর কী terms আছে তা জেনে নিন। RFCD freelance earning বা বিদেশ থেকে পাঠানো অন্য অর্থ নেওয়ার পথ নয়; দেখা EBL terms-এ inward remittance অনুমোদিত নয় [3]। Travel-quota endorsement ও card activation-এর জন্য এই comparison-কে পুরো procedure না ধরে dedicated endorsement guide দেখুন।
+
+৬. সচরাচর জিজ্ঞাসা
+Freelance income বা remittance কি RFCD account-এ নেওয়া যায়?
+না। এই guide-এর জন্য দেখা EBL RFCD terms-এ inward remittance অনুমোদিত নয়; eligible funds হলো বিদেশ সফর থেকে শারীরিকভাবে সঙ্গে আনা foreign currency [3]।
+প্রথম international trip-এর আগে কি RFCD account fund করতে পারি?
+এই উদ্দেশ্যে convert করা BDT দিয়ে নয়। এখানে বর্ণিত RFCD funding আসে বিদেশ সফর থেকে সঙ্গে আনা eligible foreign currency থেকে; account-opening process ও documents Authorized Dealer bank-এর কাছে জেনে নিন [3]।
+RFCD account-এ কি supplementary card নেওয়া যায়?
+SIBL তাদের RFCD card facility-তে সর্বোচ্চ 2টি supplementary card-এর কথা বলেছে। এটি bank-specific term; আপনার পছন্দের product-এর terms যাচাই করুন [4]।
+RFCD card কি POS বা ATM limit-ও সরিয়ে দেয়?
+৯ মে ২০২৪-এর Bangladesh Bank circular বিশেষভাবে online-এ প্রকৃত amount payment-এর অনুমতি দেয়। এতে প্রতিটি POS বা ATM limit উঠে যায়—এমন কথা নেই; issuing bank-এর কাছে সেই limit নিশ্চিত করুন [2]।`,
+    references: [
+      {
+        name: "Bangladesh Bank — GFET Volume 1, Chapter 19: Payment through International Cards",
+        nameBn: "বাংলাদেশ ব্যাংক — GFET Volume 1, Chapter 19: আন্তর্জাতিক কার্ডে পেমেন্ট",
+        url: "https://www.bb.org.bd/aboutus/regulationguideline/foreignexchange/feguidevol1/19.pdf",
+      },
+      {
+        name: "Bangladesh Bank — FE Circular Letter No. 05 (9 May 2024): RFCD cards and online payment at actual",
+        nameBn: "বাংলাদেশ ব্যাংক — FE Circular Letter No. 05 (৯ মে ২০২৪): RFCD কার্ড ও প্রকৃত পরিমাণে online payment",
+        url: "https://www.bb.org.bd/mediaroom/circulars/fepd/may092024fepdl05e.pdf",
+      },
+      {
+        name: "Eastern Bank (EBL) — RFCD Account: deposits, FMJ window and no inward remittance",
+        nameBn: "ইস্টার্ন ব্যাংক (EBL) — RFCD Account: জমা, FMJ সময়সীমা ও inward remittance নিষেধ",
+        url: "https://www.ebl.com.bd/retail-deposit/EBL-RFCD-Account",
+      },
+      {
+        name: "Social Islami Bank (SIBL) — RFCD Account: transfers and international card facility",
+        nameBn: "সোশ্যাল ইসলামী ব্যাংক (SIBL) — RFCD Account: transfer ও আন্তর্জাতিক card facility",
+        url: "https://www.siblbd.com/rfcd-account",
+      },
+      {
+        name: "Bangladesh Bank — FEPD-1 Circular No. 33 (6 September 2026): travel entitlement raised to USD 18,000",
+        nameBn: "বাংলাদেশ ব্যাংক — FEPD-1 Circular No. 33 (৬ সেপ্টেম্বর ২০২৬): travel entitlement USD 18,000-এ বৃদ্ধি",
+        url: "https://www.bb.org.bd/mediaroom/circulars/fepd/sep062026fepd-133e.pdf",
+      },
+    ],
     internalLinks: [
-      { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "ওমরাহর জন্য সেরা শরীয়াহ-সম্মত ইসলামিক ডুয়াল-কারেন্সি কার্ড", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-      { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুকিং", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "নগদ রিয়াল/ডলার বনাম কার্ড: ৫% DCC চার্জ বাঁচানোর উপায়", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
+      { text: "Passport Dollar Endorsement ও Card Activation Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "বিদেশে Cash বনাম Card (local currency বেছে DCC এড়ান)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
+      { text: "Umrah-এর জন্য Shariah-Compliant Islamic Dual-Currency Card", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
+      { text: "Card নেই? bKash বা Bank Transfer-এ BDT Payment", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "Dual-Currency Card Fee ও Markup Calculator", path: "/tools?tab=currency" },
     ],
     affiliateCTA: {
       provider: "aviasales",
-      headline: "আপনার কার্ড দিয়ে ঢাকা থেকে আন্তর্জাতিক ফ্লাইটের লাইভ ভাড়া দেখুন",
-      body: "জেদ্দা, মদিনা, ব্যাংকক, কুয়ালালামপুর ও দুবাইয়ের রাউন্ডট্রিপ বিমান ভাড়া তুলনা করে সরাসরি বুক করুন।",
+      headline: "Bank-কে বলার আগে Flight Fare তুলনা করুন",
+      body: "Live flight price ও checkout-এর exact amount দেখুন, তারপর payment-এর আগে documented travel-payment approval সম্পর্কে card issuer-কে জিজ্ঞেস করুন।",
     },
   },
 

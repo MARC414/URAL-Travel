@@ -829,31 +829,47 @@ Step 2: Enable USD E-Commerce & 3D-Secure OTP:
 - Open your bank app or call the helpline 30 minutes before booking on **sar.hhr.sa** or **Aviasales** to turn ON the **USD Foreign Currency + 3D-Secure Online Channel**.
 Step 3: Always Select "SAR" (Saudi Riyal) at Makkah & Madinah POS Terminals:
 - When paying at **Al Baik, Bin Dawood Supermarket, or pharmacies near Masjid al-Haram**, always choose **Local Currency (SAR)** on the card terminal to avoid 5% Dynamic Currency Conversion (DCC) surcharges.`,
-  "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": `Nothing is more stressful than finding a cheap roundtrip family flight from **Dhaka (DAC) to Jeddah, Bangkok, or Kuala Lumpur**, entering your card OTP at checkout, and watching the payment fail because the total exceeds **$300 USD (~BDT 36,600)**. Understanding the legal difference between a **Regular Travel Quota (TQ) Card** and a **Resident Foreign Currency Deposit (RFCD) Account** under **Bangladesh Bank (bb.org.bd)** rules solves this problem permanently.
+  "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": `1. Why the $300 Online-Payment Decline Happens
+A travel-quota card is an international card issued against foreign exchange endorsed in your passport. Bangladesh Bank's general online-payment rule permits a single online purchase of up to USD 300 for legitimate goods or services within the applicable entitlement [1]. Visa-fee payments and online hotel bookings sit in separate GFET paragraphs. In practice, a bank may process a larger documented travel payment such as a flight or hotel booking—but ask before paying, because approval is the issuing bank's decision.
 
-1. WHY DO SOME BANGLADESHI CARDS DECLINE ONLINE PAYMENTS ABOVE $300 USD?
-Under **Bangladesh Bank Foreign Exchange Guidelines**, every adult citizen has an **$18,000 USD annual personal travel quota (raised from $12,000 under FE Circular No. 33)**. However, to prevent unauthorized cross-border digital spending, several domestic banks configure their card switches with a **default $300 to $500 USD per-transaction e-commerce ceiling** on standard BDT-funded Travel Quota cards:
-- **How to Unlock a $300+ Flight or Hotel Payment on a Regular Travel Quota Card (5-Minute Fix):**
-  • If you are using a regular endorsed Dual-Currency Debit/Prepaid/Credit card (EBL, City Bank, BRAC, MTB, SCB) to buy a **$600–$2,500 airline ticket or hotel stay**, call your bank's 24/7 hotline **15 minutes before checkout**.
-  • Tell the officer: *"I am booking verified travel (Airline/Hotel MCC Category) under my endorsed Passport Travel Quota. Please temporarily raise my single e-commerce transaction cap to $[Amount] USD for the next 24 hours."*
-  • Because **Airlines (MCC 3000–3299 / 4511)** and **Hotels (MCC 3501–3999 / 7011)** are bona fide travel expenses, banks immediately lift the cap once verified.
+2. Option A: Ask Your Bank to Approve a Documented Travel Payment
+For a one-off flight or hotel purchase above USD 300, ask the card-issuing bank before you enter the OTP. This is a request for a documented travel payment, not a guaranteed limit increase.
 
-2. WHAT IS AN RFCD ACCOUNT IN BANGLADESH & WHY IS IT A GAME-CHANGER FOR TRAVELERS?
-According to **Bangladesh Bank FE Circulars on Resident Foreign Currency Deposit (RFCD) Accounts**:
-Rule 1: Who Can Open an RFCD Account?
-- Any Bangladeshi resident returning from abroad (whether from **Umrah in Saudi Arabia, a holiday in Thailand/Malaysia/Singapore, or a business trip**) can open an **RFCD Account** at any Authorized Dealer (AD) bank branch within **30 days of arrival** (or anytime with declared foreign currency) by depositing unused foreign cash (**USD, GBP, EUR, etc.**).
-Rule 2: How Much Foreign Cash Can You Deposit?
-- You can deposit up to **USD $10,000 (or equivalent)** in cash without needing a customs declaration form, or **any higher amount** if declared on the **Bangladesh Bank / Customs FMJ Form** at Dhaka Airport upon arrival.
-Rule 3: The 4 Massive Advantages of an RFCD International Debit Card:
-- **1. Zero $300 Single-Transaction Cap:** Because the funds in an RFCD account are your own deposited foreign currency (held directly in USD, not converted from BDT quota), RFCD Visa/Mastercard/Amex debit cards have **no $300 e-commerce cap**—you can pay $2,500 for family flights or Makkah hotels in a single click!
-- **2. No Annual Passport Re-Endorsement Hassle:** Regular Travel Quota endorsements expire on December 31 or with your card's annual cycle. An RFCD balance remains in USD year after year without needing annual quota stamps.
-- **3. Tax-Exempt Foreign Currency Profit/Interest:** Many banks pay **4.5% to 6.5%+ annual return in USD** on RFCD balances.
-- **4. Supplementary Cards for Family:** You can issue supplementary RFCD cards for your spouse or children travelling abroad.
+Step 1: Confirm the card is ready
+Make sure passport endorsement, the foreign-currency part of the card, e-commerce and any bank-required online security setting are active. If those basics are not complete, follow the passport dollar endorsement guide first.
 
-3. HEAD-TO-HEAD COMPARISON: REGULAR TRAVEL QUOTA CARD VS. RFCD CARD
-- **Funding Source:** Regular Travel Quota = Deposit BDT at bank branch/app (converted to USD at daily BC rate) | RFCD Account = Deposit physical USD/EUR/GBP cash brought back from abroad.
-- **Annual Limit:** Regular Travel Quota = Capped at **USD $18,000 per calendar year** | RFCD Account = Up to **100% of your deposited foreign currency balance**.
-- **Best Strategy for Frequent Flyers:** Use your regular Travel Quota card or cash USD for your first trip, bring back **$500–$2,000 in leftover USD cash**, and deposit it into an **EBL, City Bank, BRAC, or SCB RFCD Account** so you never face a card limit decline again!`,
+Step 2: Give the bank the exact payment details
+Tell the bank the merchant, purpose and exact amount. Keep the ticket itinerary, airline checkout or hotel booking evidence ready so the bank can assess the request under its travel-payment process [1].
+
+Step 3: Wait for the bank's decision before paying
+Ask whether the bank will process that specific payment and follow its instructions. Do not describe approval as automatic: the applicable documents, card controls and decision belong to the issuing bank.
+
+3. Option B: RFCD Account Rules That Matter
+A Resident Foreign Currency Deposit (RFCD) account holds eligible foreign currency that a Bangladeshi resident physically brings back after travel. It is not an account for converting BDT before a first trip, and it cannot receive inward remittances or foreign income [3].
+- **Deposit without an FMJ declaration:** Up to USD 10,000 or equivalent brought back from travel may be deposited without a customs declaration [3].
+- **Deposit above USD 10,000:** The amount must have been declared on the FMJ form on arrival, and EBL states that the declared amount must be deposited within 30 days of arrival [3]. The 30-day rule is not a deadline for every RFCD account or every deposit.
+- **Online card use:** Bangladesh Bank expressly allows an international card issued against an RFCD account to pay online at the actual amount, subject to the available balance and the bank's card terms [2].
+- **Transfer and card access:** Bank terms reviewed for this guide describe RFCD balances as transferable abroad and offer international cards against the balance; products and supported currencies differ by bank [3][4].
+
+4. RFCD vs. Travel Quota: Which Fits Your Situation?
+- **Source of funds:** A travel-quota card uses foreign exchange released by an Authorized Dealer bank against your travel entitlement. An RFCD account uses foreign cash you physically brought back from travel; it cannot be funded by an inward remittance [3].
+- **Limit structure:** The adult travel entitlement is a calendar-year ceiling of up to USD 18,000, released by the bank against travel documents—not an automatic allowance [5]. RFCD card spending comes from the deposited foreign-currency balance.
+- **Online-payment treatment:** The general travel-quota online-purchase rule is USD 300 per transaction, while a larger documented travel payment may be processed only after the issuing bank agrees. An RFCD card is expressly permitted to pay online at the actual amount [1][2].
+- **Timing and paperwork:** Travel quota is arranged for a trip through passport endorsement. RFCD funding begins with eligible foreign currency brought back after a trip; an FMJ declaration and 30-day deposit window matter only for amounts above USD 10,000 [3].
+- **Practical fit:** For one large ticket or hotel payment, ask your existing card issuer first. If you travel repeatedly and genuinely hold leftover foreign cash, compare RFCD account and card terms at Authorized Dealer banks. Neither option is a promise that every merchant transaction will succeed.
+
+5. Practical Notes Before You Choose
+Keep the passport arrival stamp and, when applicable, the FMJ declaration with the deposit documents your bank requests. Ask which currencies the bank accepts, which international card it issues, and what account, card, POS and ATM terms apply. RFCD is not a route for freelance earnings or other money sent from abroad; the reviewed EBL terms do not allow inward remittance [3]. For travel-quota endorsement and card activation, use the dedicated endorsement guide rather than treating this comparison as the full procedure.
+
+6. Frequently Asked Questions
+Can freelance income or a remittance go into an RFCD account?
+No. The EBL RFCD terms reviewed for this guide say inward remittance is not allowed; the eligible funds are foreign currency physically brought back after travel [3].
+Can I fund an RFCD account before my first international trip?
+Not with BDT converted for that purpose. RFCD funding covered here comes from eligible foreign currency brought back after travel; ask an Authorized Dealer bank about its account-opening process and documents [3].
+Can an RFCD account have supplementary cards?
+SIBL states that its RFCD card facility allows up to two supplementary cards. Treat that as a bank-specific term and check the product you choose [4].
+Does an RFCD card remove POS or ATM limits too?
+The 9 May 2024 Bangladesh Bank circular specifically permits online payment at the actual amount. It does not establish that every POS or ATM limit disappears, so confirm those limits with the issuing bank [2].`,
   "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": `What happens when you spot a **BDT 56,000 roundtrip Dhaka–Jeddah Umrah flight** or a **BDT 6,500/night hotel near Masjid al-Haram**, but you don't have a **Dual-Currency Card**, your passport dollar endorsement isn't stamped yet, or your bank's $300 e-commerce cap blocks your checkout? For Bangladeshi families in Dhaka, Chattogram, Sylhet, and across the country, paying directly in **Bangladeshi Taka (BDT)** via local banking or mobile financial services (**bKash / Nagad**) is the fastest, zero-stress alternative.
 
 1. WHY SO MANY BANGLADESHI TRAVELERS PREFER BDT ASSISTED BOOKING OVER INTERNATIONAL CARDS

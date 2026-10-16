@@ -2623,20 +2623,48 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-29",
     slug: "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
-    title: "RFCD Account vs. Regular Travel Quota in Bangladesh (2026): How to Fix the $300 E-Commerce Limit",
-    summary: "Have you ever tried booking a BDT 95,000 ($780) international flight or a 5-night Makkah family hotel room with your Bangladeshi Dual-Currency Card—only to receive an instant 'Transaction Declined: Exceeds Single Transaction Limit' SMS? Many Bangladeshi banks enforce a default $300 USD single-transaction cap on regular Travel Quota (TQ) e-commerce payments unless pre-authorized. Verified against Bangladesh Bank Foreign Exchange Circulars (bb.org.bd), this guide explains the two permanent solutions: opening a Resident Foreign Currency Deposit (RFCD) account using leftover travel cash, or requesting a temporary High-Ticket Merchant Relaxation on your regular Travel Quota card.",
+    title: "RFCD Account vs. Travel Quota in Bangladesh (2026): How to Handle the $300 Online-Payment Limit",
+    summary: "Bangladesh Bank's general card rule caps a single online purchase on a travel-quota card at USD 300. For a larger documented flight or hotel payment, ask your bank before checkout; approval is the bank's decision. An RFCD card may pay online at the actual amount, but its account can hold only foreign cash brought back from travel—not remittances or foreign income. Checked 16 October 2026 against Bangladesh Bank GFET Chapter 19, FE Circular Letter No. 05, and EBL/SIBL RFCD terms.",
     category: "Banking & Payments",
     date: "September 27, 2026",
+    updatedAt: "2026-10-16",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
-    internalLinks: [
-      { text: "Step-by-Step $18,000 Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-      { text: "No Card? Pay in BDT via bKash/Bank Transfer (URAL Desk)", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "Cash SAR / USD vs. Card Abroad (5% DCC Fee Guide)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
-      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" }
+    references: [
+      {
+        name: "Bangladesh Bank — GFET Volume 1, Chapter 19: Payment through International Cards",
+        nameBn: "বাংলাদেশ ব্যাংক — GFET Volume 1, Chapter 19: আন্তর্জাতিক কার্ডে পেমেন্ট",
+        url: "https://www.bb.org.bd/aboutus/regulationguideline/foreignexchange/feguidevol1/19.pdf",
+      },
+      {
+        name: "Bangladesh Bank — FE Circular Letter No. 05 (9 May 2024): RFCD cards and online payment at actual",
+        nameBn: "বাংলাদেশ ব্যাংক — FE Circular Letter No. 05 (৯ মে ২০২৪): RFCD কার্ড ও প্রকৃত পরিমাণে online payment",
+        url: "https://www.bb.org.bd/mediaroom/circulars/fepd/may092024fepdl05e.pdf",
+      },
+      {
+        name: "Eastern Bank (EBL) — RFCD Account: deposits, FMJ window and no inward remittance",
+        nameBn: "ইস্টার্ন ব্যাংক (EBL) — RFCD Account: জমা, FMJ সময়সীমা ও inward remittance নিষেধ",
+        url: "https://www.ebl.com.bd/retail-deposit/EBL-RFCD-Account",
+      },
+      {
+        name: "Social Islami Bank (SIBL) — RFCD Account: transfers and international card facility",
+        nameBn: "সোশ্যাল ইসলামী ব্যাংক (SIBL) — RFCD Account: transfer ও আন্তর্জাতিক card facility",
+        url: "https://www.siblbd.com/rfcd-account",
+      },
+      {
+        name: "Bangladesh Bank — FEPD-1 Circular No. 33 (6 September 2026): travel entitlement raised to USD 18,000",
+        nameBn: "বাংলাদেশ ব্যাংক — FEPD-1 Circular No. 33 (৬ সেপ্টেম্বর ২০২৬): travel entitlement USD 18,000-এ বৃদ্ধি",
+        url: "https://www.bb.org.bd/mediaroom/circulars/fepd/sep062026fepd-133e.pdf",
+      },
     ],
-    affiliateCTA: { provider: "aviasales", headline: "Test Your Unlocked Card on Live Dhaka Flight Fares", body: "Search and compare roundtrip airfares from Dhaka to Jeddah, Madinah, Bangkok, Kuala Lumpur, and Dubai." }
+    internalLinks: [
+      { text: "Passport Dollar Endorsement and Card Activation Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Cash vs. Card Abroad (choose local currency and avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
+      { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
+      { text: "No Card? Pay in BDT via bKash or Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "Dual-Currency Card Fee and Markup Calculator", path: "/tools?tab=currency" }
+    ],
+    affiliateCTA: { provider: "aviasales", headline: "Compare the Fare Before You Ask Your Bank", body: "Check the live flight price and exact checkout amount, then ask your card issuer about documented travel-payment approval before paying." }
   },
   {
     id: "blog-30",

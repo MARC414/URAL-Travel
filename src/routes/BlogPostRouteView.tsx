@@ -403,7 +403,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                   path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
 
-                  title: "RFCD Account vs. Regular Travel Quota ($300 Cap Solution)",
+                  title: "RFCD Account vs. Travel Quota (the $300 online-payment rule)",
 
                 },
 
@@ -589,7 +589,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                         <a
 
-                          href={rule.path}
+                          href={getLocalizedRouteHref(rule.path)}
 
                           title={rule.title}
 
@@ -1380,7 +1380,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                       <a
 
-                                        href={activePost.internalLinks[0].path}
+                                        href={getLocalizedRouteHref(activePost.internalLinks[0].path)}
 
                                         onClick={(e) => { e.preventDefault(); navigateTo(activePost.internalLinks[0].path); }}
 
@@ -1396,7 +1396,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                     <a
 
-                                      href="/umrah"
+                                      href={getLocalizedRouteHref("/umrah")}
 
                                       onClick={(e) => { e.preventDefault(); navigateTo("/umrah"); }}
 
@@ -2102,7 +2102,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                 key={idx}
 
-                                href={lnk.path}
+                                href={getLocalizedRouteHref(lnk.path)}
 
                                 onClick={(e) => { e.preventDefault(); navigateTo(lnk.path); }}
 
@@ -2206,7 +2206,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                       <a
 
-                        href="/blog"
+                        href={getLocalizedRouteHref("/blog")}
 
                         onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
 
@@ -2252,7 +2252,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                             <a
 
-                              href={`/blog/${post.slug}`}
+                              href={getLocalizedRouteHref(`/blog/${post.slug}`)}
 
                               onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${post.slug}`); }}
 
