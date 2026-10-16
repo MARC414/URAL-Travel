@@ -2258,11 +2258,29 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-14",
     slug: "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
     title: "Performing Umrah with Elderly Parents from Bangladesh: Wheelchair Booking, Flat-Street Hotels & Medical Guide",
-    summary: "Taking aging parents to Makkah and Madinah for Umrah is one of the most cherished dreams for Bangladeshi sons and daughters, yet physical exhaustion from walking 6 to 8 kilometers across marble courtyards or climbing steep Ajyad streets can quickly overwhelm seniors with diabetes, knee arthritis, or hypertension. This practical caregiver playbook covers how to request free WCHR/WCHS wheelchair assistance from Dhaka Airport to Jeddah/Madinah, how to reserve official electric mobility scooters (SAR 115) and licensed pushers inside Masjid al-Haram via the Nusuk and Tanaqol systems, which flat-street Makkah and Madinah hotels have zero incline, and what Bangla-labeled prescription medicines to pack.",
+    summary: "Taking aging parents to Makkah and Madinah for Umrah requires careful advance planning for airport transit, marble plaza walking, and heat management. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidelines, this guide covers requesting free airline WCHR/WCHS assistance, using personal folding wheelchairs, official electric mobility scooters at Masjid al-Haram, flat-street hotel selection, and medical packing.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
+    updatedAt: "2026-10-18",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
+    references: [
+      {
+        name: "Saudia / Airline Special Assistance — Wheelchair (WCHR/WCHS) carriage rules",
+        nameBn: "সৌদিয়া / এয়ারলাইন্স স্পেশাল অ্যাসিস্ট্যান্স — হুইলচেয়ার (WCHR/WCHS) পরিবহন নিয়ম",
+        url: "https://www.saudia.com",
+      },
+      {
+        name: "Ministry of Hajj and Umrah — Official pilgrim guidelines & Nusuk services",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — অফিশিয়াল গাইডলাইন ও নুসুক সেবা",
+        url: "https://www.haj.gov.sa",
+      },
+      {
+        name: "General Authority for the Care of the Two Holy Mosques — Mobility carts & accessibility",
+        nameBn: "দুই পবিত্র মসজিদ পরিচালনা কর্তৃপক্ষ — মোবিলিটি স্কুটার ও প্রতিবন্ধী সেবা",
+        url: "https://gacr.gov.sa",
+      },
+    ],
     internalLinks: [
       { text: "Makkah & Madinah Flat Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },

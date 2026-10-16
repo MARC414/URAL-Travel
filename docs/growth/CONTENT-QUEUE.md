@@ -576,3 +576,18 @@ Stage 2 is complete **for the narrow claims the route guide actually makes**: th
   - Updated metadata \`updatedAt: "2026-10-17"\` to reflect the scheduled release date.
 - **Verification:** \`npm run test:scheduling\`, \`npm run lint\`, \`npm run build\`, and \`npm run verify:build\` all passed cleanly with 162/162 checks passing.
 
+### Stage 3–9 execution record — Wave 5 Specialist 2: Umrah with Elderly Parents (16 October 2026, scheduled for 18 October)
+
+- **Execution scope:** In-place bilingual update of \`blog-14\` (\`/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide\` and its \`/bn/\` twin).
+- **Substantive changes applied:**
+  - Resolved blog audit finding F10: added 3 primary official references (\`saudia.com\`, \`haj.gov.sa\`, \`gacr.gov.sa\`) with full English and Bengali metadata parity.
+  - Aligned airline mobility assistance procedures: requesting standardized IATA Special Service Request (SSR) codes WCHR (ramp/distance) and WCHS (steps) at least 48 hours in advance at no additional airline fee.
+  - Sourced airline carriage rules for personal manual folding wheelchairs outside checked baggage allowances and explained gate-checking workflows.
+  - Sourced Masjid al-Haram accessibility: dedicated upper-level wheelchair tracks for personal push wheelchairs (Mataf and Sa'i lanes), official electric mobility scooters on the mezzanine circuit (Tanaqol / Nusuk), and official serialized vest pushers.
+  - Added caregiver guidance on accommodation selection (flat, zero-incline corridors in Jabal Omar, lower Ibrahim Al-Khalil, Clock Tower vs. steep Ajyad gradients) and Northern Markazia proximity for female prayer areas.
+  - Sourced medical carry rules: maintenance prescription supplies (hypertension, diabetes, heart) in original packaging, signed English doctor summaries, insulin cold-chain travel pouches, and hydration/air-conditioning care.
+  - Added matching 4-question bilingual FAQ sections in \`src/utils/blogStructuredData.ts\`, updated AEO 50-word snippets in \`src/App.tsx\`, and refreshed SERP metadata in \`src/utils/seoCopy.ts\`.
+  - Updated metadata \`updatedAt: "2026-10-18"\` to reflect the scheduled release date.
+- **Verification:** \`npm run test:scheduling\`, \`npm run lint\`, \`npm run build\`, and \`npm run verify:build\` all passed cleanly with 162/162 checks passing.
+
+

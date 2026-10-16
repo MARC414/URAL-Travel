@@ -622,7 +622,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "hajj-registration-bangladesh-government-vs-private-package-cost":
       "Obligatory Hajj from Bangladesh requires two-stage registration on hajj.gov.bd: Pre-Registration with your NID and ~BDT 30,000 deposit to get a tracking N-Serial, followed by Final Registration (BDT 5,20,000–6,00,000 for Government packages or BDT 5,80,000–9,50,000+ for licensed Private Agency Maktab A/B/D packages).",
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
-      "When taking elderly parents for Umrah from Dhaka, attach a free airline Wheelchair (WCHR) request 48 hours before departure and bring a foldable wheelchair from Bangladesh (carried free). Inside Masjid al-Haram, rent official roof-level electric scooters (SAR 115 full Umrah) and stay on flat Jabal Omar streets.",
+      "When taking elderly parents for Umrah from Dhaka, request airline Wheelchair (WCHR) assistance 48 hours before departure and bring a manual folding wheelchair (transported free). Inside Masjid al-Haram, use dedicated upper-level wheelchair tracks or official electric scooters, and choose flat-street hotels in Jabal Omar or lower Ibrahim Al-Khalil.",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
       "Bangladeshi passport holders flying Saudia or flynas on a qualifying through-itinerary can add the 96-hour Saudi Stopover Visa while booking the ticket, without a previously used US/UK/Schengen visa. No fixed fee and no free hotel is published: visa, insurance and service charges are calculated at airline checkout, so use the amount on your own booking.",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
@@ -717,7 +717,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "hajj-registration-bangladesh-government-vs-private-package-cost":
       "বাংলাদেশ থেকে ফরজ হজের জন্য ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ ২ ধাপে নিবন্ধন করতে হয়: NID ও ৩০,০০০ টাকা জমা দিয়ে প্রাক-নিবন্ধন (N-Serial) এবং কোটা অনুযায়ী চূড়ান্ত নিবন্ধন (সরকারি প্যাকেজ ৫.২০–৬.০০ লক্ষ টাকা; বেসরকারি এজেন্সি ৫.৮০–৯.৫০+ লক্ষ টাকা)।",
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
-      "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ যাত্রায় ফ্লাইটের ৪৮ ঘণ্টা আগে ফ্রি এয়ারপোর্ট হুইলচেয়ার (WCHR) বুক করুন এবং দেশ থেকে একটি ফোল্ডিং হুইলচেয়ার সাথে নিন (ফ্লাইটে ফ্রি)। মসজিদুল হারামের ছাদে অফিশিয়াল ইলেকট্রিক স্কুটার (তাওয়াফ+সাঈ ১১৫ রিয়াল) ও সমতল রাস্তার হোটেল ব্যবহার করুন।",
+      "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ যাত্রায় ফ্লাইটের ৪৮ ঘণ্টা আগে এয়ারলাইন্স হুইলচেয়ার (WCHR) বুক করুন এবং নিজস্ব ফোল্ডিং হুইলচেয়ার সাথে নিন (ফ্লাইটে ফ্রি)। মসজিদুল হারামে ওপরের তলার হুইলচেয়ার ট্র্যাক বা অফিশিয়াল ইলেকট্রিক স্কুটার ব্যবহার করুন এবং জাবাল ওমরের মতো সমতল রাস্তার হোটেল বেছে নিন।",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
       "বাংলাদেশি পাসপোর্টধারীরা Saudia বা flynas-এর যোগ্য ট্রানজিট ইটিনারারিতে টিকিট বুক করার সময় ৯৬ ঘণ্টার Saudi Stopover Visa নিতে পারেন, আগে US/UK/Schengen ভিসা ব্যবহার করা লাগে না। কোনো নির্দিষ্ট ফি বা ফ্রি হোটেল সুবিধা প্রকাশিত নেই—ভিসা, ইনস্যুরেন্স ও সার্ভিস চার্জ এয়ারলাইন্সের checkout-এ নির্ধারিত হয়, তাই নিজের বুকিংয়ের অঙ্কই আসল খরচ।",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
