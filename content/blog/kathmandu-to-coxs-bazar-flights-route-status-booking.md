@@ -2,178 +2,204 @@
 slug: kathmandu-to-coxs-bazar-flights-route-status-booking
 status: scheduled
 publishDate: "2026-10-16"
-title: "Kathmandu to Cox’s Bazar Flights: Route Status, Dhaka Connection & Fare
-  Guide (2026)"
-titleBn: "কাঠমান্ডু থেকে কক্সবাজার ফ্লাইট: রুটের অবস্থা, ঢাকা সংযোগ ও ভাড়ার গাইড (২০২৬)"
-summary: No scheduled KTM–CXB flight was confirmed on 15 October 2026. Check the
-  Dhaka search path, dated DAC–CXB fare (domestic leg only) and Nepali
-  tourist-visa rule.
-summaryBn: ১৫ অক্টোবর ২০২৬-এ KTM–CXB নির্ধারিত ফ্লাইট নিশ্চিত হয়নি। ঢাকা হয়ে
-  সার্চ, DAC–CXB-এর domestic-leg নমুনা ভাড়া এবং নেপালি পর্যটকদের ভিসা-নিয়ম
-  দেখুন।
+title: "Kathmandu to Cox's Bazar Flights (2026): No Direct Route Yet — Dhaka Connection, Fares & Visa Guide"
+titleBn: "কাঠমান্ডু থেকে কক্সবাজার ফ্লাইট (২০২৬): সরাসরি রুট এখনো নেই — ঢাকা সংযোগ, ভাড়া ও ভিসা গাইড"
+summary: "On 15 October 2026, our review found no confirmed scheduled passenger service from Kathmandu to Cox's Bazar. Check the Dhaka search path, a dated domestic-leg fare and the visa guidance for Nepali visitors."
+summaryBn: "১৫ অক্টোবর ২০২৬-এর পর্যালোচনায় কাঠমান্ডু–কক্সবাজার সরাসরি নির্ধারিত ফ্লাইট নিশ্চিত হয়নি। ঢাকা হয়ে সম্ভাব্য সংযোগ, নির্দিষ্ট তারিখের domestic fare এবং নেপালি পর্যটকদের ভিসা-নিয়ম দেখুন।"
 category: Cheap Flight Tips
 categoryBn: এয়ারলাইন্স ও লাগেজ
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
-readTime: 7 min read
-readTimeBn: ৭ মিনিট পঠন
-updatedAt: 2026-10-15
+readTime: 8 min read
+readTimeBn: ৮ মিনিট পঠন
+updatedAt: "2026-10-16"
 coverImage: coxs_bazar_sunrise_1781620718331
-coverAltEn: A low sunrise over waves breaking onto Cox’s Bazar beach.
+coverAltEn: A low sunrise over waves breaking onto Cox's Bazar beach.
 coverAltBn: কক্সবাজার সমুদ্রসৈকতে ঢেউয়ের ওপর উদিত হচ্ছে নিচু সূর্য।
-seoTitle: "Kathmandu to Cox’s Bazar Flights: Status & Fare | URAL"
-seoDescription: No scheduled KTM–CXB flight was confirmed on 15 October 2026.
-  Check the Dhaka search path, dated DAC–CXB fare (domestic leg only) and Nepali
-  tourist-visa rule.
-seoTitleBn: "কাঠমান্ডু থেকে কক্সবাজার ফ্লাইট: রুট ও ভাড়া | URAL"
-seoDescriptionBn: ১৫ অক্টোবর ২০২৬-এ KTM–CXB নির্ধারিত ফ্লাইট নিশ্চিত হয়নি। ঢাকা
-  হয়ে সার্চ, DAC–CXB-এর domestic-leg নমুনা ভাড়া এবং নেপালি পর্যটকদের ভিসা-নিয়ম
-  দেখুন।
-snippet: On 15 October 2026, this review found no scheduled Kathmandu
-  (KTM)–Cox’s Bazar (CXB) service; the Nepal–CXB proposal has no launch date or
-  fare. Search a Dhaka connection in Biman’s multi-city tool; verify ticket/PNR,
-  baggage and missed-connection terms. NOVOAIR’s dated DAC–CXB fare covers one
-  domestic leg, not the full trip.
-snippetBn: ১৫ অক্টোবর ২০২৬-এর পর্যালোচনায় KTM–CXB নির্ধারিত ফ্লাইট নিশ্চিত হয়নি;
-  নেপাল–কক্সবাজার রুটটি প্রস্তাব। Biman-এর multi-city সার্চে KTM, DAC ও CXB দিয়ে
-  ঢাকা হয়ে সংযোগ খুঁজুন, তবে এক টিকিট, ব্যাগেজ ও missed-connection সুরক্ষা যাচাই
-  করুন। NOVOAIR-এর BDT 5,349 নমুনা ভাড়া শুধু ১৫ নভেম্বরের DAC–CXB domestic
-  leg—সম্পূর্ণ Nepal trip নয়।
-faqHeadingEn: 6. Frequently Asked Questions
-faqHeadingBn: ৬. সচরাচর জিজ্ঞাসা
+seoTitle: "Kathmandu–Cox's Bazar Flights: No Direct Route Yet | URAL"
+seoDescription: "No confirmed scheduled Kathmandu–Cox's Bazar service was found on 15 October 2026. Check the Dhaka connection search path, a dated domestic fare and Nepali visitor visa rules."
+seoTitleBn: "কাঠমান্ডু–কক্সবাজার ফ্লাইট: সরাসরি রুট নেই | URAL"
+seoDescriptionBn: "১৫ অক্টোবর ২০২৬-এ কাঠমান্ডু–কক্সবাজার নির্ধারিত ফ্লাইট নিশ্চিত হয়নি। ঢাকা হয়ে সংযোগ, domestic fare-এর নমুনা এবং নেপালি পর্যটকদের ভিসা-নিয়ম দেখুন।"
+snippet: "As of 15 October 2026, our review found no confirmed scheduled passenger service from Kathmandu (KTM) to Cox's Bazar (CXB). The reported route is a proposal, not a published flight. Test KTM–DAC–CXB in Biman's multi-city search, but verify a priced itinerary, ticket/PNR, baggage and connection terms. NOVOAIR's dated BDT 5,349 result covers only the DAC–CXB domestic leg."
+snippetBn: "১৫ অক্টোবর ২০২৬-এর পর্যালোচনায় কাঠমান্ডু (KTM) থেকে কক্সবাজারে (CXB) নির্ধারিত যাত্রীবাহী ফ্লাইটের নিশ্চিত সময়সূচি পাওয়া যায়নি। খবরের রুটটি প্রস্তাব, বিক্রির টিকিট নয়। Biman-এর multi-city search-এ KTM–DAC–CXB পরীক্ষা করুন; ভাড়া, এক টিকিট/PNR, ব্যাগেজ ও সংযোগের শর্ত যাচাই করুন। NOVOAIR-এর BDT 5,349 নমুনা ভাড়া শুধু DAC–CXB domestic leg-এর।"
+faqHeadingEn: "6. Frequently Asked Questions"
+faqHeadingBn: "৬. সচরাচর জিজ্ঞাসা"
 references:
-  - name: The Business Standard — Bangladesh eyes Nepal–Cox’s Bazar flights
-    nameBn: দ্য বিজনেস স্ট্যান্ডার্ড — নেপাল–কক্সবাজার ফ্লাইটের প্রস্তাব
-    url: https://www.tbsnews.net/economy/aviation/bangladesh-eyes-nepal-coxs-bazar-flights-nepal-wants-dhaka-pokhara-1572766
-  - name: The Business Standard — Cox’s Bazar international terminal trial operations
-    nameBn: দ্য বিজনেস স্ট্যান্ডার্ড — কক্সবাজার আন্তর্জাতিক টার্মিনালের পরীক্ষামূলক
-      কার্যক্রম
-    url: https://www.tbsnews.net/economy/aviation/coxs-bazar-airports-new-intl-terminal-begins-trial-operations-1556121
-  - name: CAAB — AIP Supplement 06/25, Cox’s Bazar Airport (VGCB)
-    nameBn: CAAB — AIP Supplement 06/25, কক্সবাজার বিমানবন্দর (VGCB)
-    url: https://new.caab.gov.bd/aip/sup/AIP%20SUP%2006-25
-  - name: Embassy of Bangladesh in Kathmandu — Visa information for Nepali citizens
-    nameBn: কাঠমান্ডুতে বাংলাদেশ দূতাবাস — নেপালি নাগরিকদের ভিসা তথ্য
-    url: https://kathmandu.mofa.gov.bd/bn/site/page/VISA
-  - name: Biman Bangladesh Airlines — Official flight search and multi-city booking
-    nameBn: বিমান বাংলাদেশ এয়ারলাইন্স — অফিশিয়াল ফ্লাইট সার্চ ও মাল্টি-সিটি বুকিং
-    url: https://www.biman-airlines.com/
-  - name: NOVOAIR — Official booking result for DAC–CXB, 15 November 2026
-    nameBn: NOVOAIR — DAC–CXB, ১৫ নভেম্বর ২০২৬-এর অফিশিয়াল বুকিং ফলাফল
-    url: https://secure.flynovoair.com/bookings/flight_selection.aspx?TT=OW&SS=&RT=&FL=on&DC=DAC&AC=CXB&AM=2026-11&AD=15&PA=1
-  - name: Bangladesh Police Special Branch — Visa on Arrival information (general
-      document requirements)
-    nameBn: বাংলাদেশ পুলিশ স্পেশাল ব্রাঞ্চ — ভিসা অন অ্যারাইভাল তথ্য (সাধারণ
-      নথি-সংক্রান্ত শর্ত)
-    url: https://voa.specialbranch.gov.bd/public/voa-info.html
-  - name: Bangladesh Online MRV Portal (visa.gov.bd) — online application form only;
-      not the source of the gratis tourist rule
-    nameBn: বাংলাদেশ অনলাইন MRV পোর্টাল (visa.gov.bd) — শুধু অনলাইন আবেদন ফর্ম; ফ্রি
-      পর্যটক-ভিসা নিয়মের উৎস নয়
-    url: https://visa.gov.bd/
-  - name: CAAB — NOTAM Summary (A0325/26, VGCB international flights suspended)
-    nameBn: CAAB — নোতাম সারসংক্ষেপ (A0325/26, VGCB আন্তর্জাতিক ফ্লাইট স্থগিত)
-    url: https://new.caab.gov.bd/aip/NOTAM%20Summary.pdf
+  - name: "The Business Standard — Bangladesh eyes Kathmandu–Cox's Bazar flights, Nepal wants Dhaka–Pokhara"
+    nameBn: "দ্য বিজনেস স্ট্যান্ডার্ড — বাংলাদেশ কাঠমান্ডু–কক্সবাজার ফ্লাইট চায়, নেপাল চায় ঢাকা–পোখরা রুট"
+    url: "https://www.tbsnews.net/economy/aviation/bangladesh-eyes-nepal-coxs-bazar-flights-nepal-wants-dhaka-pokhara-1572766"
+  - name: "The Business Standard — Cox's Bazar Airport's new international terminal begins trial operations"
+    nameBn: "দ্য বিজনেস স্ট্যান্ডার্ড — কক্সবাজার বিমানবন্দরের নতুন আন্তর্জাতিক টার্মিনালে পরীক্ষামূলক কার্যক্রম শুরু"
+    url: "https://www.tbsnews.net/economy/aviation/coxs-bazar-airports-new-intl-terminal-begins-trial-operations-1556121"
+  - name: "CAAB — AIP Supplement 06/25, Cox's Bazar Airport (VGCB)"
+    nameBn: "CAAB — AIP Supplement 06/25, কক্সবাজার বিমানবন্দর (VGCB)"
+    url: "https://new.caab.gov.bd/aip/sup/AIP%20SUP%2006-25"
+  - name: "Embassy of Bangladesh in Kathmandu — Visa information for Nepali citizens"
+    nameBn: "কাঠমান্ডুতে বাংলাদেশ দূতাবাস — নেপালি নাগরিকদের ভিসা তথ্য"
+    url: "https://kathmandu.mofa.gov.bd/bn/site/page/VISA"
+  - name: "Biman Bangladesh Airlines — Official multi-city flight search"
+    nameBn: "বিমান বাংলাদেশ এয়ারলাইন্স — অফিশিয়াল multi-city ফ্লাইট সার্চ"
+    url: "https://booking.biman-airlines.com/dx/BGDX/#/home?journeyType=multi-city&awardBooking=false&class=Economy&ADT=1&C11=0&INF=0&origin="
+  - name: "NOVOAIR — Official DAC–CXB booking search for 15 November 2026"
+    nameBn: "NOVOAIR — ১৫ নভেম্বর ২০২৬-এর DAC–CXB অফিশিয়াল বুকিং সার্চ"
+    url: "https://secure.flynovoair.com/bookings/flight_selection.aspx?TT=OW&SS=&RT=&FL=on&DC=DAC&AC=CXB&AM=2026-11&AD=15&PA=1"
+  - name: "Bangladesh Police Special Branch — Visa on Arrival information and general document requirements"
+    nameBn: "বাংলাদেশ পুলিশ স্পেশাল ব্রাঞ্চ — Visa on Arrival ও সাধারণ নথি-সংক্রান্ত শর্ত"
+    url: "https://voa.specialbranch.gov.bd/public/voa-info.html"
+  - name: "Bangladesh Online MRV Portal (visa.gov.bd) — online visa application form"
+    nameBn: "বাংলাদেশ অনলাইন MRV পোর্টাল (visa.gov.bd) — অনলাইন ভিসা আবেদন ফর্ম"
+    url: "https://visa.gov.bd/"
+  - name: "CAAB — October 2026 NOTAM Summary (A0325/26; VGCB international operations suspended through 31 October as listed)"
+    nameBn: "CAAB — অক্টোবর ২০২৬ NOTAM Summary (A0325/26; তালিকাভুক্ত তথ্য অনুযায়ী ৩১ অক্টোবর পর্যন্ত VGCB-তে আন্তর্জাতিক কার্যক্রম স্থগিত)"
+    url: "https://new.caab.gov.bd/aip/NOTAM%20Summary.pdf"
 internalLinksEn:
-  - text: Nepal itinerary for Bangladeshi travelers (Bangladesh → Nepal)
-    path: /destinations/nepal-guide
-  - text: Nepal visa for Bangladeshi passport holders (opposite travel direction)
-    path: /visa/nepal-visa
-  - text: Kathmandu–Pokhara itinerary from Dhaka (Bangladesh-origin travel)
+  - text: "Dhaka to Kathmandu flight guide (Bangladesh-origin route)"
+    path: /flights/dhaka-kathmandu
+  - text: "Nepal itinerary for Bangladeshi travelers (the reverse direction)"
     path: /blog/nepal-pokhara-itinerary-bangladesh
-  - text: Global flight search and fare comparison (check live date inventory)
+  - text: "Nepal visa guide for Bangladeshi passport holders (the reverse direction)"
+    path: /visa/nepal-visa
+  - text: "Search live flight options and compare fares"
     path: /flights
 internalLinksBn:
-  - text: "বাংলাদেশ থেকে নেপাল ভ্রমণ: নেপাল itinerary (উল্টো দিকের যাত্রা)"
-    path: /destinations/nepal-guide
-  - text: বাংলাদেশি পাসপোর্টধারীদের Nepal Visa Guide (বাংলাদেশ → Nepal)
-    path: /visa/nepal-visa
-  - text: ঢাকা থেকে কাঠমান্ডু–পোখরা itinerary (বাংলাদেশ-উৎপত্তির যাত্রা)
+  - text: "ঢাকা–কাঠমান্ডু ফ্লাইট গাইড (বাংলাদেশ থেকে নেপাল)"
+    path: /flights/dhaka-kathmandu
+  - text: "বাংলাদেশি ভ্রমণকারীদের জন্য নেপাল itinerary (উল্টো দিকের যাত্রা)"
     path: /blog/nepal-pokhara-itinerary-bangladesh
-  - text: গ্লোবাল ফ্লাইট সার্চ ও live fare তুলনা (তারিখভিত্তিক inventory যাচাই করুন)
+  - text: "বাংলাদেশি পাসপোর্টধারীদের Nepal Visa Guide (উল্টো দিকের যাত্রা)"
+    path: /visa/nepal-visa
+  - text: "লাইভ ফ্লাইট সার্চ ও ভাড়া তুলনা"
     path: /flights
 ---
 
-On 15 October 2026, this review found no confirmed scheduled passenger service from Kathmandu (KTM) to Cox’s Bazar (CXB). The 14 October report describes Nepal–Cox’s Bazar flights as a proposal: it records Bangladesh’s interest and a hope for a future Himalaya Airlines service, but gives no airline commitment, launch date, timetable, ticket-sale link or fare [1]. Treat a direct-flight announcement as unconfirmed until an airline’s live booking system returns a dated, purchasable result.
+Who this guide is for: Travelers starting in Kathmandu—Nepali nationals or anyone departing from KTM—who want to reach Cox's Bazar. Bangladeshi travelers planning the reverse trip should see our Nepal itinerary guide for Bangladeshi travelers.
 
-1. Direct Kathmandu–Cox’s Bazar Route Status
-Cox’s Bazar’s international-airport designation is real, but active international flight operations remain suspended. CAAB’s AIP Supplement 06/25 designated Cox’s Bazar Airport (VGCB) international, effective 2 October 2025, and listed customs and immigration as available [3]. A 28 September 2026 report noted the new terminal had begun trial operations while serving domestic passengers; CAAB stated the terminal was ready for international flights [2]. However, CAAB’s active aeronautical notice (NOTAM A0325/26, replacing A0189/26) officially confirms that movements of international scheduled and non-scheduled flights to and from Cox’s Bazar Airport remain suspended, and the airport will not be used for international flights until scheduled international operations formally commence [9]. These facts describe aerodrome facilities and current regulatory restrictions—not an active Kathmandu passenger route. Recheck airline and CAAB notices close to travel.
+Quick Answer
+As of 15 October 2026, our review found no confirmed scheduled passenger service from Kathmandu (KTM) to Cox's Bazar (CXB). The only route reported in the press is a proposal: Bangladesh is pushing for a future connection, and a minister expressed hope that Himalaya Airlines might launch it. The report does not announce an airline commitment, launch date, timetable, ticket sale or fare [1].
 
-2. Route to Check: Kathmandu–Dhaka–Cox’s Bazar
-A possible route to investigate—not a confirmed itinerary—is KTM → DAC → CXB. Biman’s official booking site exposes a multi-city search and lists Kathmandu, Dhaka and Cox’s Bazar in its airport choices [5]. This is a search mechanism only: this review did not retrieve a date-specific priced itinerary or confirm that the two legs can be issued on one ticket or PNR.
+The route to investigate is KTM → DAC → CXB, via Dhaka. Biman's official multi-city search lists all three airports as choices [5], but that does not confirm a priced itinerary, one ticket/PNR or through-checked baggage for your dates. Treat this as a search lead—not a confirmed connection.
 
-Before paying, check the ticket document and PNR, operating carriers, baggage tag destination, minimum connection time, and the carrier’s delay, missed-connection, change and refund terms. If you buy separate tickets, ask each airline whether you must clear Bangladesh immigration, collect checked baggage and check in again; arrange any required entry permission and leave a suitable buffer. Do not assume a separate domestic booking is protected if the Kathmandu–Dhaka flight is delayed.
+1. Direct Route Status
+Cox's Bazar Airport (VGCB) was designated an international airport effective 2 October 2025. CAAB's AIP Supplement lists customs and immigration facilities and sets out procedures for international flights [3]. A separate report says the new international passenger terminal began trial operations on 28 September 2026 while serving domestic passengers; CAAB said it was ready to handle international flights [2].
 
-3. One Dated Domestic Fare Example — Not the Full Trip Price
-On 15 October 2026, NOVOAIR’s official booking engine was searched for one adult, one-way Dhaka (DAC) to Cox’s Bazar (CXB) on 15 November 2026. It returned nonstop options with a lowest displayed fare of BDT 5,349 [6]. This is only the domestic leg after Dhaka—not a Kathmandu–Cox’s Bazar fare. The review did not verify the final payable checkout total or whether additional charges apply. Fares and availability change; rerun the exact dates and check the final amount, baggage and fare conditions before payment.
+Infrastructure and an international designation do not mean international services are operating. CAAB's October 2026 NOTAM summary lists A0325/26, replacing A0189/26: international scheduled and non-scheduled flight movements to and from Cox's Bazar remain suspended. It also says the airport will not be used for international non-scheduled, emergency or diversion flights until scheduled international flight movements start. The summary lists the notice through 31 October 2026 [9]. Recheck CAAB's latest NOTAMs close to your travel date; this notice may be amended or replaced.
 
-4. Bangladesh Visa Guidance for Nepali Tourists
-The Embassy of Bangladesh in Kathmandu says a Nepali national visiting Bangladesh for tourism may receive a 30-day, single-entry visa without a fee once per year at any international airport in Bangladesh. The Embassy’s own tourist-visa fee table for Nepalese nationals lists USD 0 for the first time, USD 55 for re-entry and USD 100 for multiple entry, and says fees for subsequent visits within a year depend on the stay and number of entries; it advises an appropriate visa for study, business or work [4]. The Embassy does not define whether “once a year” means a calendar year or a rolling 12 months, so do not assume either — ask the Embassy if the timing matters for your trip. “May receive” is not a guarantee of admission: verify the Embassy’s current instructions and airline document checks before departure.
+2. The Practical Workaround: Kathmandu–Dhaka–Cox's Bazar
+The itinerary to test is KTM → DAC → CXB: fly from Kathmandu to Dhaka, then take a domestic flight from Dhaka to Cox's Bazar.
 
-On the Kathmandu–Dhaka–Cox’s Bazar route described above, Dhaka (DAC) is your first port of entry into Bangladesh, so international immigration and any visa-on-arrival processing happen at Dhaka; the onward DAC–CXB flight is a domestic leg. Do not plan to arrive in Bangladesh for the first time at Cox’s Bazar on this itinerary. CAAB’s AIP lists customs and immigration at Cox’s Bazar Airport [3], but airport designation does not establish that a Kathmandu flight is operating or guarantee a particular passenger’s processing there. This review did not verify a separate 48-hour visa arrangement specific to Cox’s Bazar in a current official source; do not rely on that claim without confirmation from Bangladesh immigration or the Embassy.
+Biman's official booking site offers a multi-city search with Kathmandu, Dhaka and Cox's Bazar in its airport choices [5]. This confirms the search option—not a bookable itinerary. We did not confirm a date-specific combined fare, single ticket/PNR or through-checked baggage. Search your exact dates before making plans.
 
-Carry the documents Bangladesh’s general visa-on-arrival rules require: the Special Branch’s VoA information says applicants (other than those on government duty) must show at least USD 500 in cash or a credit card and a return ticket for a short stay, and that VoA is for a maximum of 30 days, single entry [7]. Those are the general VoA document requirements; your gratis eligibility itself comes from the Embassy rule above [4], and the immigration officer at the port of entry makes the final decision.
+Before paying, check:
+- Whether both legs are sold on one ticket/PNR or as separate bookings
+- The operating airline on each leg, not only the marketing name
+- The minimum connection time at Dhaka
+- Whether baggage is checked through; with separate tickets, you may need to collect and recheck it
+- Each carrier's delay, missed-connection, change and refund terms
 
-If you need to file an online visa application form, the official MRV portal is visa.gov.bd [8]. Treat it as the application-form portal only: its generic country fee chart is not the source of the Embassy’s gratis tourist rule, and it does not override the Embassy wording above.
+If you book two separate tickets, treat them as independent journeys. A delay on KTM–DAC may leave you responsible for the onward DAC–CXB flight; do not assume another airline will rebook you. Allow a connection buffer that reflects this risk and confirm the immigration and baggage process with both carriers.
 
-Nepal and Bangladesh share no land border, so any overland version of this trip crosses India. Do not attempt it without first confirming the Indian transit or tourist visa you need for that crossing, plus the current land-port rules on both sides.
+3. One Dated Fare Example (Domestic Leg Only)
+On 15 October 2026, we searched NOVOAIR's official booking engine for one adult, one-way, Dhaka (DAC) to Cox's Bazar (CXB), departing 15 November 2026. The lowest nonstop fare displayed was BDT 5,349 [6].
 
-5. Booking Checklist Before You Pay
-- Confirm that an airline sells the direct KTM–CXB flight for your exact date; a proposal or terminal readiness notice is not a ticket.
-- For a Dhaka connection, test the exact dates in Biman’s multi-city search. Proceed only if the system returns a priced itinerary for your dates and the ticketing, baggage and connection terms are clear.
-- If booking separate tickets, confirm immigration, baggage collection and re-check requirements with both carriers, and choose a buffer that reflects the actual arrival and departure times.
-- Compare the final payable total—not only a displayed fare—including any baggage, seat, payment or service charges shown at checkout.
-- Recheck visa, schedule and fare information with the official authority or airline shortly before travel.
-- Nepali tourists relying on visa on arrival: carry a return ticket and proof of at least USD 500 in cash or a credit card, as Bangladesh’s general VoA rules require [7].
+This is a benchmark for the domestic leg only—not a Kathmandu–Cox's Bazar fare. The search was not carried through to final checkout, so it does not establish the final payable total or whether baggage, seat or payment fees apply. Fares and availability change; search your exact dates again before paying.
+
+Need the Kathmandu–Dhaka leg priced too? Compare live international fares →
+
+4. Bangladesh Visa Rules for Nepali Tourists
+The Embassy of Bangladesh in Kathmandu says Nepali nationals visiting Bangladesh for tourism may receive a 30-day, single-entry visa without a fee once per year at any international airport in Bangladesh. The Embassy's tourist-visa fee table lists USD 0 for the first visit, USD 55 for re-entry and USD 100 for multiple entry; fees for later visits in the same year depend on the length of stay and number of entries [4]. The Embassy does not define whether “once a year” means a calendar year or a rolling 12 months. If that distinction matters to you, ask the Embassy rather than assuming. “May receive” is not a guarantee of entry.
+
+On the KTM–DAC–CXB itinerary, Dhaka is your first port of entry into Bangladesh. You clear international immigration there; DAC–CXB is a domestic flight. Do not plan to make your first entry into Bangladesh at Cox's Bazar on this itinerary. CAAB's AIP lists customs and immigration facilities at VGCB [3], but that describes airport facilities, not an active Kathmandu route or a guarantee that international arrivals are being processed there.
+
+Bangladesh Police Special Branch's general Visa on Arrival guidance lists a valid passport, at least USD 500 in cash or a credit card, and a return ticket for a short-term stay; it also states that VoA is for a maximum of 30 days, single entry [7]. Carry the listed documents if relying on VoA, and confirm any fee-payment requirement that applies to your case. These are general VoA requirements; the Nepal-specific fee waiver comes from the Embassy's guidance above [4]. The immigration officer at the port of entry makes the final decision.
+
+If you need to complete an online visa form, use the official MRV portal at visa.gov.bd [8]. Treat it as the application portal: its general fee chart does not replace the Embassy's Nepal-specific tourist-visa information [4].
+
+Nepal and Bangladesh do not share a land border. Any overland route between them passes through India, so confirm the Indian transit or tourist visa and current land-port rules before planning that journey.
+
+5. Booking Checklist
+- Confirm an airline is actually selling KTM–CXB for your exact date; a proposal or terminal-readiness notice is not a ticket.
+- Test your dates in Biman's multi-city search, but proceed only if it returns a priced itinerary with clear ticketing, baggage and connection terms.
+- If buying separate tickets, confirm immigration, baggage collection and re-check-in requirements with both airlines; leave a realistic connection buffer.
+- Compare the final checkout total, not only the headline fare.
+- Recheck visa and flight details with the Embassy, CAAB and airlines shortly before departure.
+- If relying on Visa on Arrival, carry the required supporting documents, including a return ticket and proof of at least USD 500 in cash or a credit card [7].
 
 6. Frequently Asked Questions
-Is there a direct Kathmandu–Cox’s Bazar flight to book now?
-This review did not confirm a scheduled or sellable direct passenger service as of 15 October 2026. The 14 October report describes the route as a proposal, with no published launch date or fare [1].
-Where do I clear immigration on a Kathmandu–Dhaka–Cox’s Bazar trip?
-At Dhaka (DAC), your first port of entry into Bangladesh; the DAC–CXB flight onward is domestic. The Embassy says Nepali tourists may receive a free 30-day, single-entry visa once per year at any international airport in Bangladesh [4], and general VoA rules require at least USD 500 in cash or a credit card plus a return ticket [7], but neither fact proves a direct KTM–CXB flight is operating or guarantees a visa grant. Confirm current arrangements before travel.
+Is there a direct Kathmandu–Cox's Bazar flight I can book now?
+As of 15 October 2026, our review found no confirmed scheduled passenger service for KTM–CXB. The press report describes a proposal and gives no launch date, timetable or fare [1].
+
+Where do I clear immigration on a Kathmandu–Dhaka–Cox's Bazar trip?
+At Dhaka (DAC), your first port of entry into Bangladesh. The DAC–CXB leg is domestic. The Embassy says Nepali tourists may receive a free 30-day, single-entry visa once a year [4]; the general VoA guidance lists a return ticket and proof of at least USD 500 in cash or a credit card [7]. Neither source guarantees entry or proves a direct KTM–CXB flight is operating.
+
 What does the BDT 5,349 fare cover?
-It was the lowest displayed fare in a one-way NOVOAIR search for DAC–CXB on 15 November 2026, checked on 15 October. It covers only the displayed domestic-leg result; the final checkout total and the KTM–DAC fare were not verified [6].
-Can I book KTM–DAC–CXB on one ticket?
-Biman’s site offers a multi-city search and lists all three airports, but this review did not retrieve a sellable combined itinerary or confirm a single PNR, through-baggage or missed-connection protection [5]. Verify those terms in the actual booking before paying.
+Only the one-way NOVOAIR DAC–CXB domestic-leg search for 15 November 2026, checked on 15 October. It does not include the KTM–DAC fare, and the final checkout total was not verified [6].
+
+Can I book Kathmandu–Dhaka–Cox's Bazar as one ticket?
+Biman's site offers a multi-city search with all three airports [5], but we did not confirm a priced combined itinerary, one PNR, through-baggage or missed-connection protection. Verify the actual ticket and terms for your dates before paying.
 
 <!-- lang:bn -->
-১৫ অক্টোবর ২০২৬-এর পর্যালোচনায় কাঠমান্ডু (KTM) থেকে কক্সবাজার (CXB)-এ নির্ধারিত যাত্রীবাহী ফ্লাইটের নিশ্চিত সময়সূচি পাওয়া যায়নি। ১৪ অক্টোবরের প্রতিবেদনে নেপাল–কক্সবাজার ফ্লাইটকে প্রস্তাব হিসেবে উল্লেখ করা হয়েছে: প্রতিবেদনে বাংলাদেশের আগ্রহ এবং হিমালয়া এয়ারলাইন্স ভবিষ্যতে চালু করতে পারে বলে আশার কথা আছে; তবে কোনো airline commitment, launch date, timetable, ticket sale বা fare দেওয়া হয়নি [১]। আপনার তারিখের airline live booking search-এ কেনার উপযোগী ফ্লাইট না দেখানো পর্যন্ত সরাসরি ফ্লাইট নিশ্চিত ধরে নেবেন না।
 
-১. কাঠমান্ডু–কক্সবাজার সরাসরি রুটের অবস্থা
-কক্সবাজারকে আন্তর্জাতিক বিমানবন্দর হিসেবে ঘোষণা করা হলেও বর্তমানে সব ধরনের আন্তর্জাতিক ফ্লাইট চলাচল স্থগিত রাখা হয়েছে। CAAB-এর AIP Supplement 06/25-এ ২ অক্টোবর ২০২৫ থেকে কক্সবাজার বিমানবন্দর (VGCB)-কে আন্তর্জাতিক হিসেবে ঘোষণা করা হয় এবং কাস্টমস ও ইমিগ্রেশন সুবিধার কথা উল্লেখ করা হয় [৩]। ২৮ সেপ্টেম্বর ২০২৬-এর প্রতিবেদনে বলা হয়, নতুন টার্মিনালের পরীক্ষামূলক কার্যক্রম শুরু হয়েছিল এবং তখনও যাত্রীসেবা ছিল অভ্যন্তরীণ ফ্লাইটে; CAAB জানিয়েছিল টার্মিনাল আন্তর্জাতিক ফ্লাইটের জন্য প্রস্তুত [২]। তবে CAAB-এর কার্যকর অ্যারোনটিক্যাল নোটিশ (NOTAM A0325/26, যা A0189/26-এর স্থলাভিষিক্ত) নিশ্চিত করেছে যে কক্সবাজার বিমানবন্দরে নির্ধারিত ও অনির্ধারিত আন্তর্জাতিক ফ্লাইট চলাচল স্থগিত থাকবে এবং নির্ধারিত আন্তর্জাতিক ফ্লাইট শুরু না হওয়া পর্যন্ত আন্তর্জাতিক ফ্লাইটের জন্য বিমানবন্দরটি ব্যবহার করা যাবে না [৯]। এটি বিমানবন্দরের অবকাঠামোগত প্রস্তুতি ও বর্তমান নিয়ন্ত্রক স্থগিতাদেশ বোঝায়—কোনো সক্রিয় কাঠমান্ডু রুট নয়। যাত্রার আগে এয়ারলাইন্স ও CAAB-এর সর্বশেষ বিজ্ঞপ্তি দেখুন।
+এই গাইড তাদের জন্য, যারা কাঠমান্ডু (KTM) থেকে কক্সবাজার যেতে চান—নেপালি নাগরিক বা KTM থেকে যাত্রা করা অন্য যাত্রী। বাংলাদেশ থেকে উল্টো পথে নেপাল যেতে চাইলে আমাদের বাংলাদেশি ভ্রমণকারীদের জন্য নেপাল itinerary গাইডটি দেখুন।
 
-২. যে রুটটি যাচাই করতে পারেন: কাঠমান্ডু–ঢাকা–কক্সবাজার
-যাচাই করার সম্ভাব্য রুট—নিশ্চিত ইটিনারারি নয়—KTM → DAC → CXB। Biman-এর অফিশিয়াল বুকিং সাইটে multi-city search আছে এবং airport selector-এ Kathmandu, Dhaka ও Cox’s Bazar দেখা যায় [৫]। এটি সার্চের সুযোগ মাত্র: এই পর্যালোচনায় নির্দিষ্ট তারিখের দামসহ বুকযোগ্য ইটিনারারি পাওয়া যায়নি, কিংবা দুই লেগ একই ticket/PNR-এ ইস্যু হবে কি না নিশ্চিত করা যায়নি।
+সংক্ষিপ্ত উত্তর
+১৫ অক্টোবর ২০২৬-এর পর্যালোচনায় কাঠমান্ডু (KTM) থেকে কক্সবাজারে (CXB) নির্ধারিত যাত্রীবাহী ফ্লাইটের নিশ্চিত সময়সূচি পাওয়া যায়নি। সংবাদে যে রুটের কথা এসেছে, সেটি প্রস্তাব: বাংলাদেশ সরাসরি যোগাযোগের পক্ষে আগ্রহ দেখিয়েছে, আর এক মন্ত্রী আশা প্রকাশ করেছেন যে হিমালয়া এয়ারলাইন্স ভবিষ্যতে রুটটি চালু করতে পারে। প্রতিবেদনে এয়ারলাইন্সের নিশ্চিত ঘোষণা, চালুর তারিখ, সময়সূচি, টিকিট বিক্রি বা ভাড়া নেই [১]।
 
-পেমেন্টের আগে ticket document ও PNR, operating carrier, baggage tag কোথায় যাবে, minimum connection time এবং delay, missed connection, পরিবর্তন ও refund-এর নিয়ম যাচাই করুন। আলাদা টিকিট কিনলে বাংলাদেশে ইমিগ্রেশন পার হতে হবে কি না, checked baggage নিতে হবে কি না এবং আবার check-in করতে হবে কি না—দুই এয়ারলাইন্সকে জিজ্ঞাসা করুন; প্রয়োজনীয় প্রবেশ-অনুমতি ও বাস্তবসম্মত connection buffer নিশ্চিত করুন। কাঠমান্ডু–ঢাকা ফ্লাইট দেরি হলে আলাদা domestic booking সুরক্ষিত থাকবে—এমন ধরে নেবেন না।
+যে রুটটি যাচাই করতে পারেন তা হলো KTM → DAC → CXB—ঢাকা হয়ে। Biman-এর অফিশিয়াল multi-city সার্চে তিনটি বিমানবন্দরই বেছে নেওয়া যায় [৫], কিন্তু এতে আপনার তারিখে বুকযোগ্য ভাড়া, এক টিকিট/PNR বা ব্যাগেজ সরাসরি পৌঁছে দেওয়ার নিশ্চয়তা মেলে না। এটিকে সার্চের সূত্র হিসেবে দেখুন, নিশ্চিত সংযোগ হিসেবে নয়।
 
-৩. নির্দিষ্ট তারিখের একটি domestic fare — পুরো ভ্রমণের দাম নয়
-১৫ অক্টোবর ২০২৬-এ NOVOAIR-এর অফিশিয়াল booking engine-এ একজন প্রাপ্তবয়স্কের জন্য ১৫ নভেম্বর ২০২৬-এর একমুখী ঢাকা (DAC) থেকে কক্সবাজার (CXB) সার্চ করা হয়েছিল। ফলাফলে nonstop বিকল্প এবং সর্বনিম্ন প্রদর্শিত ভাড়া BDT 5,349 দেখা যায় [৬]। এটি ঢাকায় পৌঁছানোর পরের domestic leg মাত্র—কাঠমান্ডু–কক্সবাজারের মোট ভাড়া নয়। পর্যালোচনায় চূড়ান্ত checkout-এর payable total বা অতিরিক্ত চার্জ আছে কি না যাচাই করা হয়নি। ভাড়া ও আসন-প্রাপ্যতা বদলায়; পেমেন্টের আগে একই তারিখ আবার সার্চ করে মোট অঙ্ক, ব্যাগেজ ও fare condition দেখুন।
+১. সরাসরি রুটের অবস্থা
+কক্সবাজার বিমানবন্দর (VGCB)-কে ২ অক্টোবর ২০২৫ থেকে আন্তর্জাতিক বিমানবন্দর হিসেবে ঘোষণা করা হয়। CAAB-এর AIP Supplement-এ কাস্টমস ও ইমিগ্রেশন সুবিধার কথা আছে এবং আন্তর্জাতিক ফ্লাইটের জন্য প্রযোজ্য পদ্ধতি দেওয়া হয়েছে [৩]। আলাদা এক প্রতিবেদনে বলা হয়েছে, নতুন আন্তর্জাতিক যাত্রী টার্মিনালে ২৮ সেপ্টেম্বর ২০২৬ থেকে পরীক্ষামূলক কার্যক্রম শুরু হয়; তখন যাত্রীসেবা চলছিল দেশীয় ফ্লাইটে, আর CAAB জানায় টার্মিনাল আন্তর্জাতিক ফ্লাইট পরিচালনার জন্য প্রস্তুত [২]।
+
+তবে অবকাঠামো প্রস্তুত থাকা বা আন্তর্জাতিক বিমানবন্দর হিসেবে ঘোষিত হওয়া মানেই আন্তর্জাতিক ফ্লাইট চালু থাকা নয়। CAAB-এর অক্টোবর ২০২৬ NOTAM summary-তে A0325/26 (যা A0189/26-এর স্থলাভিষিক্ত) অনুযায়ী কক্সবাজারে আন্তর্জাতিক নির্ধারিত ও অনির্ধারিত ফ্লাইট চলাচল স্থগিত বলা হয়েছে। নির্ধারিত আন্তর্জাতিক ফ্লাইট চলাচল শুরু না হওয়া পর্যন্ত বিমানবন্দরটি আন্তর্জাতিক অনির্ধারিত, জরুরি বা diversion ফ্লাইটের জন্যও ব্যবহার করা হবে না। ওই summary-তে নোটিশটির মেয়াদ ৩১ অক্টোবর ২০২৬ পর্যন্ত দেখানো হয়েছে [৯]। যাত্রার কাছাকাছি সময়ে CAAB-এর সর্বশেষ NOTAM দেখুন—নোটিশটি পরিবর্তন বা প্রতিস্থাপিত হতে পারে।
+
+২. বাস্তবসম্মত বিকল্প: কাঠমান্ডু–ঢাকা–কক্সবাজার
+যে itinerary-টি সার্চ করে দেখতে পারেন: KTM → DAC → CXB—কাঠমান্ডু থেকে ঢাকা, তারপর ঢাকা থেকে কক্সবাজারের domestic ফ্লাইট।
+
+Biman-এর অফিশিয়াল বুকিং সাইটে multi-city সার্চ আছে এবং বিমানবন্দরের তালিকায় Kathmandu, Dhaka ও Cox's Bazar পাওয়া যায় [৫]। এতে শুধু সার্চের সুযোগ নিশ্চিত হয়—বুকযোগ্য itinerary নয়। এই পর্যালোচনায় নির্দিষ্ট তারিখের সম্মিলিত ভাড়া, এক টিকিট/PNR বা ব্যাগেজ সরাসরি পৌঁছে দেওয়ার নিয়ম নিশ্চিত করা যায়নি। পরিকল্পনার আগে নিজের তারিখ দিয়ে সার্চ করুন।
+
+টাকা দেওয়ার আগে যাচাই করুন:
+- দুই লেগ এক টিকিট/PNR-এ হবে, নাকি আলাদা বুকিং করতে হবে
+- প্রতিটি ফ্লাইট আসলে কোন এয়ারলাইন্স পরিচালনা করবে
+- ঢাকায় ন্যূনতম সংযোগ-সময়ের শর্ত
+- লাগেজ সরাসরি কক্সবাজার পর্যন্ত যাবে কি না; আলাদা টিকিট হলে ঢাকায় ব্যাগ সংগ্রহ করে আবার জমা দিতে হতে পারে
+- বিলম্ব, সংযোগ মিস, পরিবর্তন ও রিফান্ডের ক্ষেত্রে প্রতিটি এয়ারলাইন্সের নিয়ম
+
+দুটি আলাদা টিকিট কাটলে দুটিকে আলাদা যাত্রা হিসেবে ধরুন। KTM–DAC ফ্লাইট দেরি হলে পরের DAC–CXB ফ্লাইটের দায়িত্ব আপনার ওপর পড়তে পারে; অন্য এয়ারলাইন্স বিনা খরচে পুনরায় বুক করে দেবে—এমন ধরে নেবেন না। দুই এয়ারলাইন্সের কাছে ইমিগ্রেশন ও ব্যাগেজের প্রক্রিয়া জেনে নিন এবং ঝুঁকি অনুযায়ী যথেষ্ট সময় রাখুন।
+
+৩. নির্দিষ্ট তারিখের একটি ভাড়ার উদাহরণ (শুধু domestic leg)
+১৫ অক্টোবর ২০২৬-এ NOVOAIR-এর অফিশিয়াল বুকিং ইঞ্জিনে একজন প্রাপ্তবয়স্কের জন্য ১৫ নভেম্বর ২০২৬ তারিখে একমুখী ঢাকা (DAC) থেকে কক্সবাজার (CXB) সার্চ করা হয়েছিল। সার্চে nonstop ফ্লাইটের সর্বনিম্ন প্রদর্শিত ভাড়া ছিল BDT 5,349 [৬]।
+
+এটি শুধু ঢাকা–কক্সবাজার domestic leg-এর নমুনা—কাঠমান্ডু থেকে কক্সবাজারের মোট ভাড়া নয়। সার্চটি final checkout পর্যন্ত নেওয়া হয়নি, তাই চূড়ান্ত payable total বা ব্যাগেজ, আসন ও payment fee প্রযোজ্য কি না—তা নিশ্চিত নয়। ভাড়া ও আসন-প্রাপ্যতা বদলায়; পেমেন্টের আগে একই তারিখ আবার সার্চ করুন।
+
+কাঠমান্ডু–ঢাকা লেগের ভাড়াও দেখতে চান? লাইভ ফ্লাইট ভাড়া তুলনা করুন →
 
 ৪. নেপালি পর্যটকদের জন্য বাংলাদেশের ভিসা
-কাঠমান্ডুতে বাংলাদেশ দূতাবাস জানিয়েছে, বাংলাদেশে পর্যটনে আসা নেপালি নাগরিক বছরে একবার বাংলাদেশের যেকোনো আন্তর্জাতিক বিমানবন্দরে ৩০ দিনের single-entry ভিসা বিনা ফিতে পেতে পারেন। দূতাবাসের নিজস্ব পর্যটক-ভিসা ফি-তালিকায় নেপালি নাগরিকদের জন্য প্রথমবার USD 0, re-entry USD 55 এবং multiple entry USD 100 দেখানো হয়েছে; একই বছরে পরবর্তী সফরে অবস্থানের সময় ও entry-র সংখ্যার ওপর ফি প্রযোজ্য। পড়াশোনা, ব্যবসা বা কাজের জন্য উপযুক্ত ভিসা নেওয়ার পরামর্শ দেয় দূতাবাস [৪]। “বছরে একবার” বলতে calendar year নাকি ধারাবাহিক ১২ মাস—দূতাবাস তা সংজ্ঞায়িত করেনি; আপনার যাত্রার জন্য সময়টি গুরুত্বপূর্ণ হলে কোনোটিই ধরে না নিয়ে দূতাবাসকে জিজ্ঞাসা করুন। “পেতে পারেন” মানে প্রবেশের নিশ্চয়তা নয়—যাত্রার আগে দূতাবাসের বর্তমান নির্দেশনা ও এয়ারলাইন্সের নথি-যাচাই নিশ্চিত করুন।
+কাঠমান্ডুতে বাংলাদেশ দূতাবাসের তথ্য অনুযায়ী, বাংলাদেশে পর্যটনে আসা নেপালি নাগরিক বছরে একবার বাংলাদেশের যেকোনো আন্তর্জাতিক বিমানবন্দরে ৩০ দিনের single-entry ভিসা বিনা ফিতে পেতে পারেন। দূতাবাসের পর্যটক-ভিসা ফি-তালিকায় প্রথমবারের জন্য USD 0, re-entry-তে USD 55 এবং multiple entry-তে USD 100 উল্লেখ আছে; একই বছরে পরবর্তী সফরের ফি অবস্থানের সময় ও entry-র সংখ্যার ওপর নির্ভর করে [৪]। “বছরে একবার” বলতে calendar year নাকি পরপর ১২ মাস—দূতাবাস তা স্পষ্ট করেনি। বিষয়টি আপনার ক্ষেত্রে গুরুত্বপূর্ণ হলে অনুমান না করে দূতাবাসকে জিজ্ঞাসা করুন। “পেতে পারেন” মানে প্রবেশ নিশ্চিত নয়।
 
-উপরে বর্ণিত কাঠমান্ডু–ঢাকা–কক্সবাজার রুটে ঢাকা (DAC) বাংলাদেশে আপনার প্রথম প্রবেশ-বন্দর, তাই আন্তর্জাতিক ইমিগ্রেশন ও visa-on-arrival প্রক্রিয়া ঢাকাতেই সম্পন্ন হবে; এরপরের DAC–CXB ফ্লাইটটি domestic leg. এই itinerary-তে প্রথমবার কক্সবাজারে নেমে বাংলাদেশে প্রবেশের পরিকল্পনা করবেন না। CAAB-এর AIP-তে কক্সবাজার বিমানবন্দরে কাস্টমস ও ইমিগ্রেশনের কথা আছে [৩], কিন্তু আন্তর্জাতিক বিমানবন্দর ঘোষণা কোনো কাঠমান্ডু ফ্লাইট চালু থাকার প্রমাণ নয়, এবং নির্দিষ্ট যাত্রীর প্রবেশ নিশ্চিত করে না। কক্সবাজারের জন্য আলাদা ৪৮ ঘণ্টার ভিসা-ব্যবস্থা বর্তমান কোনো অফিশিয়াল সূত্রে এই পর্যালোচনায় যাচাই করা যায়নি; বাংলাদেশ ইমিগ্রেশন বা দূতাবাস নিশ্চিত না করলে এ দাবির ওপর ভরসা করবেন না।
+KTM–DAC–CXB itinerary-তে ঢাকা (DAC) বাংলাদেশে আপনার প্রথম প্রবেশ-বন্দর। আন্তর্জাতিক ইমিগ্রেশন সেখানেই হবে; DAC–CXB ফ্লাইটটি domestic. এই itinerary-তে বাংলাদেশে প্রথম প্রবেশ কক্সবাজারে হবে—এমন পরিকল্পনা করবেন না। CAAB-এর AIP-তে VGCB-তে কাস্টমস ও ইমিগ্রেশন সুবিধার কথা আছে [৩], কিন্তু সেটি বিমানবন্দরের অবকাঠামোর তথ্য; সক্রিয় কাঠমান্ডু রুট বা সেখানে আন্তর্জাতিক যাত্রী প্রক্রিয়াকরণের নিশ্চয়তা নয়।
 
-বাংলাদেশের সাধারণ visa-on-arrival নিয়মে যে নথি লাগে, সেগুলো সঙ্গে রাখুন: স্পেশাল ব্রাঞ্চের VoA তথ্য অনুযায়ী আবেদনকারীকে (সরকারি দায়িত্বে থাকা ব্যক্তি ছাড়া) কমপক্ষে USD 500 নগদ বা credit card এবং স্বল্পমেয়াদি অবস্থানের জন্য return ticket দেখাতে হয়, এবং VoA সর্বোচ্চ ৩০ দিনের single entry [৭]। এগুলো সাধারণ VoA নথি-শর্ত; আপনার ফ্রি ভিসার যোগ্যতা আসে উপরের দূতাবাস-নিয়ম থেকে [৪], এবং চূড়ান্ত সিদ্ধান্ত প্রবেশ-বন্দরের ইমিগ্রেশন কর্মকর্তার।
+বাংলাদেশ পুলিশ স্পেশাল ব্রাঞ্চের সাধারণ Visa on Arrival নির্দেশনায় বৈধ পাসপোর্ট, অন্তত USD 500 নগদ বা ক্রেডিট কার্ড এবং স্বল্পমেয়াদি ভ্রমণের জন্য return ticket দেখানোর কথা বলা হয়েছে; VoA সর্বোচ্চ ৩০ দিনের single entry [৭]। VoA-এর ওপর নির্ভর করলে এসব নথি সঙ্গে রাখুন এবং আপনার ক্ষেত্রে কোনো ফি প্রযোজ্য কি না যাচাই করুন। এগুলো সাধারণ VoA শর্ত; নেপালি পর্যটকদের ফি-ছাড়ের তথ্য আসে দূতাবাসের আলাদা নিয়ম থেকে [৪]। প্রবেশের চূড়ান্ত সিদ্ধান্ত ইমিগ্রেশন কর্মকর্তার।
 
-অনলাইনে ভিসার আবেদন ফর্ম পূরণ করতে হলে অফিশিয়াল MRV পোর্টাল visa.gov.bd [৮]। এটিকে শুধু আবেদন-ফর্ম পোর্টাল হিসেবে দেখুন: এর সাধারণ দেশভিত্তিক ফি-তালিকা দূতাবাসের ফ্রি পর্যটক-ভিসা নিয়মের উৎস নয় এবং উপরের দূতাবাস-বক্তব্যকে বাতিলও করে না।
+অনলাইনে ভিসা ফর্ম পূরণ করতে হলে অফিশিয়াল MRV পোর্টাল visa.gov.bd ব্যবহার করুন [৮]। এটিকে আবেদন করার পোর্টাল হিসেবেই দেখুন; এর সাধারণ ফি-চার্ট দূতাবাসের নেপাল-নির্দিষ্ট পর্যটক-ভিসা তথ্যের বিকল্প নয় [৪]।
 
-নেপাল ও বাংলাদেশের মধ্যে সরাসরি স্থলসীমান্ত নেই, তাই এই ভ্রমণের যেকোনো স্থলপথ ভারতের ভেতর দিয়ে যায়। সেই crossing-এর জন্য প্রয়োজনীয় ভারতীয় transit বা tourist visa এবং দুই পাশের বর্তমান land-port নিয়ম আগে নিশ্চিত না করে স্থলপথে রওনা দেবেন না।
+নেপাল ও বাংলাদেশের মধ্যে সরাসরি স্থলসীমান্ত নেই। স্থলপথে গেলে ভারত হয়ে যেতে হবে, তাই পরিকল্পনার আগে প্রয়োজনীয় ভারতীয় transit বা tourist visa এবং বর্তমান land-port নিয়ম নিশ্চিত করুন।
 
-৫. পেমেন্টের আগে বুকিং-চেকলিস্ট
-- নির্দিষ্ট তারিখে KTM–CXB সরাসরি ফ্লাইট এয়ারলাইন্স বিক্রি করছে কি না নিশ্চিত করুন; প্রস্তাব বা টার্মিনাল প্রস্তুতির খবর টিকিট নয়।
-- ঢাকা হয়ে যাত্রায় Biman-এর multi-city search-এ সঠিক তারিখ দিন। বুকযোগ্য ফল পাওয়া গেলে তবেই ticketing, baggage ও connection-এর শর্ত পরিষ্কার করে এগোন।
-- আলাদা টিকিট হলে দুই carrier-এর কাছে immigration, baggage সংগ্রহ ও পুনরায় check-in-এর নিয়ম জেনে নিন; বাস্তব arrival/departure time অনুযায়ী buffer রাখুন।
-- শুধু প্রথমে দেখানো ভাড়া নয়, checkout-এর চূড়ান্ত payable total তুলনা করুন—বাগেজ, আসন, payment বা service charge থাকলে সেগুলোসহ।
-- যাত্রার অল্প আগে ভিসা, schedule ও fare আবার দূতাবাস বা এয়ারলাইন্সের অফিশিয়াল সূত্রে যাচাই করুন।
+৫. টিকিট কাটার আগে বুকিং-চেকলিস্ট
+- আপনার তারিখে কোনো এয়ারলাইন্স সত্যিই KTM–CXB টিকিট বিক্রি করছে কি না নিশ্চিত করুন; প্রস্তাব বা টার্মিনাল প্রস্তুতির খবর টিকিট নয়।
+- Biman-এর multi-city সার্চে সঠিক তারিখ দিন। বুকযোগ্য ভাড়া ও টিকিটিং, ব্যাগেজ এবং সংযোগের শর্ত স্পষ্ট না হলে এগোবেন না।
+- আলাদা টিকিট হলে দুই এয়ারলাইন্সের কাছে ইমিগ্রেশন, ব্যাগেজ সংগ্রহ ও পুনরায় check-in-এর নিয়ম জেনে নিন; বাস্তবসম্মত connection buffer রাখুন।
+- শুধু প্রথমে দেখা ভাড়া নয়, checkout-এর চূড়ান্ত payable total তুলনা করুন।
+- যাত্রার আগে দূতাবাস, CAAB ও এয়ারলাইন্সের সর্বশেষ ভিসা এবং ফ্লাইট-তথ্য আবার যাচাই করুন।
+- Visa on Arrival-এর ওপর নির্ভর করলে প্রয়োজনীয় কাগজপত্রের সঙ্গে return ticket এবং USD 500 নগদ বা ক্রেডিট কার্ডের প্রমাণ রাখুন [৭]।
 
 ৬. সচরাচর জিজ্ঞাসা
-এখন কি কাঠমান্ডু–কক্সবাজার সরাসরি ফ্লাইট বুক করা যায়?
-১৫ অক্টোবর ২০২৬-এর পর্যালোচনায় নির্ধারিত বা বিক্রির জন্য উপলভ্য সরাসরি যাত্রীবাহী ফ্লাইট নিশ্চিত করা যায়নি। ১৪ অক্টোবরের প্রতিবেদন রুটটিকে প্রস্তাব বলেছে; সেখানে launch date বা fare প্রকাশ করা হয়নি [১]।
-কাঠমান্ডু–ঢাকা–কক্সবাজার যাত্রায় ইমিগ্রেশন কোথায় করতে হবে?
-ঢাকায় (DAC)—বাংলাদেশে আপনার প্রথম প্রবেশ-বন্দরে; এরপরের DAC–CXB ফ্লাইট domestic. দূতাবাস বলেছে, নেপালি পর্যটক বছরে একবার বাংলাদেশের যেকোনো আন্তর্জাতিক বিমানবন্দরে বিনা ফিতে ৩০ দিনের single-entry ভিসা পেতে পারেন [৪], এবং সাধারণ VoA নিয়মে কমপক্ষে USD 500 নগদ বা credit card ও return ticket লাগে [৭]; কিন্তু এই তথ্যগুলো সরাসরি KTM–CXB ফ্লাইট চালু থাকা বা ভিসা মঞ্জুরের নিশ্চয়তা নয়। যাত্রার আগে বর্তমান ব্যবস্থা নিশ্চিত করুন।
-BDT 5,349 ভাড়া কোন অংশের?
-এটি ১৫ অক্টোবর তারিখে ১৫ নভেম্বর ২০২৬-এর DAC–CXB একমুখী NOVOAIR সার্চে প্রদর্শিত সর্বনিম্ন ভাড়া। এটি শুধু domestic leg; চূড়ান্ত checkout total এবং KTM–DAC ভাড়া যাচাই করা হয়নি [৬]।
-KTM–DAC–CXB কি একই টিকিটে বুক করা যাবে?
-Biman-এর সাইটে multi-city search আছে এবং তিনটি বিমানবন্দরই তালিকায় রয়েছে, কিন্তু এই পর্যালোচনায় বুকযোগ্য একত্রিত ইটিনারারি পাওয়া যায়নি; একই PNR, through-baggage বা missed-connection protection-ও নিশ্চিত নয় [৫]। পেমেন্টের আগে আসল বুকিংয়ের শর্ত যাচাই করুন।
+এখনই কি কাঠমান্ডু–কক্সবাজার সরাসরি ফ্লাইট বুক করা যাবে?
+১৫ অক্টোবর ২০২৬-এর পর্যালোচনায় KTM–CXB নির্ধারিত যাত্রীবাহী ফ্লাইটের নিশ্চিত সময়সূচি পাওয়া যায়নি। সংবাদে রুটটিকে প্রস্তাব বলা হয়েছে; চালুর তারিখ, সময়সূচি বা ভাড়া নেই [১]।
+
+কাঠমান্ডু–ঢাকা–কক্সবাজার গেলে ইমিগ্রেশন কোথায় হবে?
+ঢাকায় (DAC)—বাংলাদেশে আপনার প্রথম প্রবেশ-বন্দরে। এরপরের DAC–CXB ফ্লাইট domestic. দূতাবাসের তথ্য অনুযায়ী নেপালি পর্যটক বছরে একবার বিনা ফিতে ৩০ দিনের single-entry ভিসা পেতে পারেন [৪]; সাধারণ VoA নির্দেশনায় return ticket ও অন্তত USD 500 নগদ বা ক্রেডিট কার্ডের কথা আছে [৭]। কোনোটিই প্রবেশের নিশ্চয়তা দেয় না বা সরাসরি KTM–CXB ফ্লাইট চালু থাকার প্রমাণ নয়।
+
+BDT 5,349 ভাড়ায় কী অন্তর্ভুক্ত?
+এটি ১৫ অক্টোবরের NOVOAIR সার্চে ১৫ নভেম্বর ২০২৬-এর একমুখী DAC–CXB domestic leg-এর সর্বনিম্ন প্রদর্শিত ভাড়া। KTM–DAC ভাড়া এতে নেই, আর final checkout total যাচাই করা হয়নি [৬]।
+
+কাঠমান্ডু–ঢাকা–কক্সবাজার কি এক টিকিটে বুক করা যাবে?
+Biman-এর সাইটে multi-city সার্চে তিনটি বিমানবন্দরই পাওয়া যায় [৫], কিন্তু এই পর্যালোচনায় বুকযোগ্য সম্মিলিত itinerary, এক PNR, through-baggage বা missed-connection সুরক্ষা নিশ্চিত হয়নি। পেমেন্টের আগে আপনার তারিখের আসল টিকিট ও শর্ত যাচাই করুন।
