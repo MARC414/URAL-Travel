@@ -47,6 +47,9 @@ jobs:
       - name: Verify scheduled-publish rules
         run: npm run test:scheduling
 
+      - name: Verify sitemap validation guards
+        run: npm run test:sitemaps
+
       - name: Type-check
         run: npm run lint
 
@@ -62,12 +65,12 @@ jobs:
       # A non-empty diff here means the build is stamping build-time values again.
       - name: Sitemap and RSS must be reproducible
         run: |
-          if ! git diff --quiet -- public/sitemap.xml public/rss.xml; then
+          if ! git diff --quiet -- public/sitemap.xml public/sitemap.txt public/rss.xml; then
             echo "::error::Build output differs from the committed feed files."
             echo "Either a non-deterministic value crept back into the prerender"
             echo "(see src/data/contentMeta.ts), or content changed without a"
-            echo "rebuild. Commit the regenerated public/sitemap.xml and rss.xml."
-            git --no-pager diff --stat -- public/sitemap.xml public/rss.xml
+            echo "rebuild. Commit the regenerated public/sitemap.xml, sitemap.txt and rss.xml."
+            git --no-pager diff --stat -- public/sitemap.xml public/sitemap.txt public/rss.xml
             exit 1
           fi
           echo "Feed files are reproducible."

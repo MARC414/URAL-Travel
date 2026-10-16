@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { validateSitemapPair } from "./sitemapValidation";
 import {
   FLIGHTS_DATA,
   HOTELS_DATA,
@@ -3143,10 +3144,10 @@ ${routesToRender
           `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(r.enUrl)}" />`
         : "";
     return `  <url>
-    <loc>${escapeXml(r.canonicalUrl)}</loc>${alternates}
+    <loc>${escapeXml(r.canonicalUrl)}</loc>
     <lastmod>${escapeXml(lastmod)}</lastmod>
     <changefreq>${changefreq}</changefreq>
-    <priority>${priority}</priority>
+    <priority>${priority}</priority>${alternates}
   </url>`;
   })
   .join("\n")}
@@ -3154,7 +3155,19 @@ ${routesToRender
 `;
 }
 
-function generateSitemapXml(routes: PrerenderRoute[]) {
+function writeSitemaps(directory: string, routes: PrerenderRoute[]) {
+  // Both formats use the exact same route set and order. Text URLs must not be
+  // XML-escaped: a literal query-string ampersand remains an ampersand here.
+  const xml = renderSitemapXml(routes);
+  const text = `${routes.map((route) => route.canonicalUrl).join("\n")}\n`;
+  // Fail the build instead of deploying flattened text, malformed XML or a
+  // backup that has drifted out of sync with the XML sitemap.
+  validateSitemapPair(xml, text);
+  fs.writeFileSync(path.join(directory, "sitemap.xml"), xml, "utf8");
+  fs.writeFileSync(path.join(directory, "sitemap.txt"), text, "utf8");
+}
+
+function generateSitemaps(routes: PrerenderRoute[]) {
   // The committed public/ sitemap is the static-content snapshot checked by CI.
   // Scheduled pages are generated into dist only, so a publish date does not
   // require a second commit merely to keep that snapshot reproducible.
@@ -3163,9 +3176,9 @@ function generateSitemapXml(routes: PrerenderRoute[]) {
     [...scheduledSlugs].flatMap((slug) => [`/blog/${slug}`, `/bn/blog/${slug}`]),
   );
   const publicRoutes = routes.filter((route) => !scheduledPaths.has(route.routePath));
-  fs.writeFileSync(path.join(PUBLIC_DIR, "sitemap.xml"), renderSitemapXml(publicRoutes), "utf8");
+  writeSitemaps(PUBLIC_DIR, publicRoutes);
   if (fs.existsSync(DIST_DIR)) {
-    fs.writeFileSync(path.join(DIST_DIR, "sitemap.xml"), renderSitemapXml(routes), "utf8");
+    writeSitemaps(DIST_DIR, routes);
   }
 }
 
@@ -3517,11 +3530,11 @@ function main() {
   applySharedSeoCopy(enRoutes, "en");
   applySharedSeoCopy(bnRoutes, "bn");
   warnIfContentDateStale();
-  generateSitemapXml(routes);
+  generateSitemaps(routes);
   generateRssXml();
   prerenderDistHtmlFiles(routes);
   console.log(
-    `[SEO Prerender] Generated ${enRoutes.length} English + ${bnRoutes.length} Bengali canonical routes, clean sitemap.xml (with xhtml:link hreflang clusters), rss.xml, optimized og-image.jpg & ${BLOG_DATA.length} blog JPEGs.`
+    `[SEO Prerender] Generated ${enRoutes.length} English + ${bnRoutes.length} Bengali canonical routes, validated sitemap.xml (with xhtml:link hreflang clusters), sitemap.txt, rss.xml, optimized og-image.jpg & ${BLOG_DATA.length} blog JPEGs.`
   );
 }
 
