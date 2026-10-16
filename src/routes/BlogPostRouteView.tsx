@@ -131,6 +131,9 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
               const activePost = localizedBlogs.find((p) => p.slug === parameterId) || localizedBlogs[0];
 
+              const isCoxsBazarFlightGuide =
+                activePost.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking";
+
               const canonicalPost = BLOG_DATA.find((post) => post.slug === activePost.slug);
 
               const updatedAt = canonicalPost?.updatedAt || activePost.updatedAt;
@@ -256,6 +259,27 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
               const CONTEXTUAL_INTERNAL_LINK_RULES: { pattern: RegExp; path: string; title: string }[] = [
+
+                {
+
+                  pattern: /(?:Nepal itinerary guide for Bangladeshi travelers|বাংলাদেশি ভ্রমণকারীদের জন্য নেপাল itinerary গাইড)/i,
+
+                  path: "/blog/nepal-pokhara-itinerary-bangladesh",
+
+                  title: "Nepal itinerary for Bangladeshi travelers (the reverse direction)",
+
+                },
+
+                {
+
+                  pattern: /(?:Compare live international fares|লাইভ ফ্লাইট ভাড়া তুলনা করুন)/i,
+
+                  path: "/flights",
+
+                  title: "Search live flight options and compare fares",
+
+                },
+
 
                 {
 
@@ -1364,7 +1388,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                               {/* Mid-Article Contextual Internal Link + Native Content-Analyzed Travelpayouts & BDT Hotel Conversion Card (Zero-CLS Native Replacement for Travelpayouts Drive) */}
 
-                              {bIdx === contextualLinkInsertionIndex && activePost.internalLinks[0] && (
+                              {!isCoxsBazarFlightGuide && bIdx === contextualLinkInsertionIndex && activePost.internalLinks[0] && (
 
                                 <div className="my-6 bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5">
 
@@ -1755,9 +1779,68 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                       {/* Author Bio — E-E-A-T signal at end of article content */}
 
-                      <AuthorBioCard authorRaw={canonicalAuthorRaw} isBengali={isBn} />
+                      {isCoxsBazarFlightGuide ? (
+                        <aside
+                          aria-labelledby="blog-author-bio-heading"
+                          className="mt-7 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6"
+                        >
+                          <h2
+                            id="blog-author-bio-heading"
+                            className="font-serif text-lg font-bold text-brand-navy"
+                          >
+                            {isBn ? "লেখক সম্পর্কে" : "About the author"}
+                          </h2>
+                          <p className="mt-2 text-sm leading-7 text-slate-700">
+                            {isBn
+                              ? "ফারহান মোমেন URAL Travel-এর প্রতিষ্ঠাতা ও ট্রাভেল এডিটর। বাংলাদেশের ডিজিটাল কনটেন্ট ও SEO খাতে তাঁর ১৫ বছরের বেশি অভিজ্ঞতা রয়েছে; প্রকাশের আগে ভাড়া, ফি ও নিয়ম অফিশিয়াল সূত্রে যাচাই করেন।"
+                              : "Farhan Momen is URAL Travel's Founder and Travel Editor. He has 15+ years of experience in Bangladesh's digital content and SEO industry and verifies fares, fees and rules against official sources before publication."}
+                          </p>
+                          <a
+                            href={getLocalizedRouteHref("/about")}
+                            onClick={(e) => { e.preventDefault(); navigateTo("/about"); }}
+                            className="mt-3 inline-flex text-sm font-semibold text-brand-navy underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-brand-emerald"
+                          >
+                            {isBn ? "সম্পূর্ণ বায়ো →" : "Full bio →"}
+                          </a>
+                        </aside>
+                      ) : (
+                        <AuthorBioCard authorRaw={canonicalAuthorRaw} isBengali={isBn} />
+                      )}
 
-
+                      {isCoxsBazarFlightGuide && (
+                        <section
+                          aria-labelledby="cxb-bdt-booking-heading"
+                          className="mt-6 rounded-2xl border border-brand-navy bg-brand-navy p-5 text-white sm:p-6"
+                        >
+                          <h2
+                            id="cxb-bdt-booking-heading"
+                            className="font-serif text-lg font-bold text-[#F6B73C]"
+                          >
+                            {isBn
+                              ? "BDT-তে বা আন্তর্জাতিক কার্ড ছাড়াই বুক করতে চান?"
+                              : "Need to book in BDT or without an international card?"}
+                          </h2>
+                          <p className="mt-2 text-sm leading-6 text-slate-200">
+                            {isBn
+                              ? "আমাদের ঢাকা ডেস্ক bKash, Nagad বা ব্যাংক ট্রান্সফারে ফ্লাইট টিকিট ও হোটেল ভাউচার নিতে সাহায্য করতে পারে। পেমেন্টের আগে লাইভ প্রাপ্যতা ও চূড়ান্ত অঙ্ক নিশ্চিত করুন।"
+                              : "Our Dhaka desk can help arrange flight tickets and hotel vouchers via bKash, Nagad or bank transfer. Confirm live availability and the final amount before paying."}
+                          </p>
+                          <a
+                            href={`https://wa.me/8801784385335?text=${encodeURIComponent(
+                              isBn
+                                ? "আসসালামু আলাইকুম URAL ডেস্ক, কাঠমান্ডু থেকে কক্সবাজার ভ্রমণের ফ্লাইট বা হোটেল BDT-তে বুক করতে সাহায্য চাই।"
+                                : "Hello URAL desk, I need help booking flights or a hotel for Kathmandu to Cox's Bazar and would like to pay in BDT."
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-4 inline-flex items-center rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-brand-navy underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:bg-[#F6B73C]"
+                          >
+                            {isBn
+                              ? "WhatsApp-এ URAL ঢাকা ডেস্কে কথা বলুন →"
+                              : "Chat with the URAL Dhaka desk on WhatsApp →"}
+                          </a>
+                        </section>
+                      )}
 
                       {/* Visible Hajj, Umrah & Ziyarah Preparation FAQs (Matches JSON-LD FAQPage Schema 100%) */}
 
@@ -1832,9 +1915,10 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
 
-                      {/* 1. Stay Connected: eSIM + Nusuk + Saudi connectivity */}
+                      {/* Saudi eSIM offers are hidden on this Nepal–Bangladesh route guide. */}
 
-                      <div className="bg-brand-navy text-white rounded-2xl p-5 space-y-3.5 shadow-sm">
+                      {!isCoxsBazarFlightGuide && (
+                        <div className="bg-brand-navy text-white rounded-2xl p-5 space-y-3.5 shadow-sm">
 
                         <div className="text-[11px] font-bold uppercase tracking-wider text-[#F6B73C]">
 
@@ -1910,7 +1994,8 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                         </p>
 
-                      </div>
+                        </div>
+                      )}
 
 
 
@@ -1996,7 +2081,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                         const profile = getAuthorProfile(canonicalAuthorRaw);
 
-                        if (!profile) return null;
+                        if (isCoxsBazarFlightGuide || !profile) return null;
 
                         return (
 
@@ -2062,9 +2147,10 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
 
-                      {/* 4. Quick Booking Links (3 essentials) */}
+                      {/* Generic tours and eSIM links are hidden for this route guide. */}
 
-                      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs space-y-2.5">
+                      {!isCoxsBazarFlightGuide && (
+                        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs space-y-2.5">
 
                         <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
 
@@ -2078,7 +2164,8 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                         <PartnerLinkButton href={AFFILIATE_LINKS.airalo} label={isBn ? "Saudi / Travel eSIM নিন" : "Get Travel eSIM"} variant="dark" />
 
-                      </div>
+                        </div>
+                      )}
 
 
 
@@ -2090,7 +2177,13 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                           <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
 
-                            {isBn ? "সংশ্লিষ্ট ক্যালকুলেটর ও পরবর্তী ধাপ" : "Related Calculators & Next Steps"}
+                            {isCoxsBazarFlightGuide
+                              ? isBn
+                                ? "সম্পর্কিত ভ্রমণ গাইড ও পরবর্তী ধাপ"
+                                : "Related Travel Guides & Next Steps"
+                              : isBn
+                                ? "সংশ্লিষ্ট ক্যালকুলেটর ও পরবর্তী ধাপ"
+                                : "Related Calculators & Next Steps"}
 
                           </div>
 
@@ -2132,9 +2225,10 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
 
-                      {/* 6. WhatsApp BDT Desk */}
+                      {/* The route-specific BDT booking CTA is placed after the article, not in the sidebar. */}
 
-                      <div className="bg-brand-navy text-white rounded-2xl p-5 space-y-3 shadow-sm">
+                      {!isCoxsBazarFlightGuide && (
+                        <div className="bg-brand-navy text-white rounded-2xl p-5 space-y-3 shadow-sm">
 
                         <div className="text-[11px] font-bold uppercase tracking-wider text-[#F6B73C]">
 
@@ -2168,7 +2262,8 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                         </a>
 
-                      </div>
+                        </div>
+                      )}
 
 
 

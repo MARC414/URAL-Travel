@@ -256,6 +256,35 @@ function renderArticleReferencesHtml(
   }</p><ol style="list-style: none; padding-left: 0">${links}</ol></section>`;
 }
 
+function renderCoxsBazarBookingCtaHtml(locale: "en" | "bn"): string {
+  const isBengali = locale === "bn";
+  const message = isBengali
+    ? "আসসালামু আলাইকুম URAL ডেস্ক, কাঠমান্ডু থেকে কক্সবাজার ভ্রমণের ফ্লাইট বা হোটেল BDT-তে বুক করতে সাহায্য চাই।"
+    : "Hello URAL desk, I need help booking flights or a hotel for Kathmandu to Cox's Bazar and would like to pay in BDT.";
+  const whatsappUrl = `https://wa.me/8801784385335?text=${encodeURIComponent(message)}`;
+  return `<section aria-labelledby="cxb-bdt-booking-heading"><h2 id="cxb-bdt-booking-heading">${
+    isBengali ? "BDT-তে বা আন্তর্জাতিক কার্ড ছাড়াই বুক করতে চান?" : "Need to book in BDT or without an international card?"
+  }</h2><p>${
+    isBengali
+      ? "আমাদের ঢাকা ডেস্ক bKash, Nagad বা ব্যাংক ট্রান্সফারে ফ্লাইট টিকিট ও হোটেল ভাউচার নিতে সাহায্য করতে পারে। পেমেন্টের আগে লাইভ প্রাপ্যতা ও চূড়ান্ত অঙ্ক নিশ্চিত করুন।"
+      : "Our Dhaka desk can help arrange flight tickets and hotel vouchers via bKash, Nagad or bank transfer. Confirm live availability and the final amount before paying."
+  }</p><p><a href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener noreferrer">${
+    isBengali ? "WhatsApp-এ URAL ঢাকা ডেস্কে কথা বলুন →" : "Chat with the URAL Dhaka desk on WhatsApp →"
+  }</a></p></section>`;
+}
+
+function renderCoxsBazarAuthorBioHtml(locale: "en" | "bn"): string {
+  const isBengali = locale === "bn";
+  const aboutHref = isBengali ? "/bn/about" : "/about";
+  return `<aside aria-labelledby="blog-author-bio-heading"><h2 id="blog-author-bio-heading">${
+    isBengali ? "লেখক সম্পর্কে" : "About the author"
+  }</h2><p>${
+    isBengali
+      ? "ফারহান মোমেন URAL Travel-এর প্রতিষ্ঠাতা ও ট্রাভেল এডিটর। বাংলাদেশের ডিজিটাল কনটেন্ট ও SEO খাতে তাঁর ১৫ বছরের বেশি অভিজ্ঞতা রয়েছে; প্রকাশের আগে ভাড়া, ফি ও নিয়ম অফিশিয়াল সূত্রে যাচাই করেন।"
+      : "Farhan Momen is URAL Travel's Founder and Travel Editor. He has 15+ years of experience in Bangladesh's digital content and SEO industry and verifies fares, fees and rules against official sources before publication."
+  }</p><p><a href="${escapeHtml(aboutHref)}">${isBengali ? "সম্পূর্ণ বায়ো →" : "Full bio →"}</a></p></aside>`;
+}
+
 function renderAuthorBioHtml(
   profile: ReturnType<typeof getAuthorProfile>,
   locale: "en" | "bn"
@@ -2018,12 +2047,13 @@ function buildAllRoutes(): PrerenderRoute[] {
             })
             .join("\n")}
           ${renderArticleReferencesHtml(post.references, "en", post.updatedAt)}
-          ${renderAuthorBioHtml(getAuthorProfile(post.author), "en")}
+          ${post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking" ? renderCoxsBazarAuthorBioHtml("en") : renderAuthorBioHtml(getAuthorProfile(post.author), "en")}
           ${radicalStorageHtml}
           ${multiPartnerHtml}
           ${travelpayoutsReferralHtml}
           ${planLinksHtml}
           ${relatedGuidesHtml}
+          ${post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking" ? renderCoxsBazarBookingCtaHtml("en") : ""}
         </article>
       `,
     });
@@ -2336,7 +2366,11 @@ function buildBengaliBody(
           bnPost?.updatedAt
         )
       );
-      parts.push(renderAuthorBioHtml(getAuthorProfile(bnPost?.author), "bn"));
+      parts.push(
+        id === "kathmandu-to-coxs-bazar-flights-route-status-booking"
+          ? renderCoxsBazarAuthorBioHtml("bn")
+          : renderAuthorBioHtml(getAuthorProfile(bnPost?.author), "bn")
+      );
       const refPlacementBn = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[id];
       if (refPlacementBn) {
         parts.push(
@@ -2351,6 +2385,9 @@ function buildBengaliBody(
         .map((link) => ({ label: link.text, path: link.path }));
       const related = bnLinkList("সম্পর্কিত গাইড", internal);
       if (related) parts.push(related);
+      if (id === "kathmandu-to-coxs-bazar-flights-route-status-booking") {
+        parts.push(renderCoxsBazarBookingCtaHtml("bn"));
+      }
     }
     return `<article>${parts.join("")}</article>`;
   }
