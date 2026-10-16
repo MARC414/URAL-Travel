@@ -514,30 +514,40 @@ Where do I find my 10-digit Saudi Visa Number?
 Open your approved PDF Umrah e-Visa and read the 10-digit number near the top right (usually starting with 60 or 61), not the application/MOFA reference number.
 
 `,
-  "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": `Whether you are a Bangladeshi mother traveling with your family, a daughter accompanying your elderly mother, or a female doctor/professional planning Umrah from Dhaka, knowing the official Saudi women's regulations and Haram gate layouts makes your spiritual journey safe, dignified, and stress-free.
+  "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": `Whether you are a Bangladeshi mother traveling with your family, a daughter accompanying your elderly mother, or a woman planning Umrah independently from Dhaka, knowing the official Saudi visa policies, Haram boundary layouts, and verified logistics makes your spiritual journey calm, safe, and stress-free. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah directives, the Nusuk portal, and the General Presidency for the Affairs of the Two Holy Mosques.
 
-1. WHAT IS THE OFFICIAL SAUDI VISA RULE ON MAHRAM FOR WOMEN IN 2026?
-Let us separate the **Official Saudi Government Visa Portal Rule** from **Traditional Fiqh Travel Etiquette**:
-- **Official Saudi Ministry of Hajj & Umrah Visa Rule (haj.gov.sa & nusuk.sa):** Since the Kingdom's regulatory update, the Saudi Ministry of Hajj and Umrah no longer requires a male guardian (Mahram) to be linked in the electronic visa system for women of any age applying for an **Umrah e-Visa**, **96-Hour Stopover Visa**, or **Tourist e-Visa**.
-- **Practical Dhaka Immigration & Family Group Advice:** While the Saudi e-Visa system issues visas to solo women or mother-daughter pairs without a male Mahram, Bangladeshi women traveling without a husband, father, son, or brother should carry their **NOC / Leave Letter**, **Marriage Certificate or Birth Certificate (NID)**, return ticket, and confirmed hotel voucher—or travel alongside trusted female family companions for smooth Dhaka Airport (DAC) emigration clearance.
+1. Official Saudi Visa Rules on Mahram for Women
+Understanding the distinction between official Saudi immigration law and personal religious jurisprudence (fiqh) is essential when planning travel:
+- **Ministry of Hajj and Umrah Visa Regulations:** The Saudi Ministry of Hajj and Umrah (haj.gov.sa) and the official Nusuk portal (nusuk.sa) permit women of any age to apply for an Umrah e-Visa, 96-Hour Stopover Visa, or Tourist eVisa without a requirement to link an accompanying male guardian (Mahram) in the electronic visa portal [1][2]. Electronic visas are issued directly to individual female applicants who meet standard passport and documentation requirements [1][2].
+- **Religious Rulings and Fiqh Boundaries:** While civil entry permits no longer require a recorded male guardian on the visa file, classical and contemporary Islamic schools of jurisprudence hold differing perspectives on solo travel without a Mahram or travel within a trustworthy female companion group. Travelers should consult their trusted religious scholars to align their personal journey with their school of jurisprudence, separate from civil visa issuance rules.
+- **Dhaka Airport Departure and Transit Preparation:** When traveling independently or in female-only groups, ensure complete documentation is on hand for airline check-in and immigration review at Hazrat Shahjalal International Airport (DAC). Carry printed hotel booking confirmations in Makkah and Madinah, round-trip flight itineraries with confirmed return bookings, personal identification (NID/Passport copies), and an official employment Leave Certificate / No-Objection Certificate (NOC) if employed in government or corporate sectors.
 
-2. WHICH GATES AT MASJID AN-NABAWI (MADINAH) ARE FOR WOMEN?
-One of the biggest mistakes Bangladeshi families make in Madinah is booking a hotel on the Southern side (near Baqi or Bilal Mosque) when traveling with women:
-Rule 1: Book Near Northern Ladies' Gates 25 to 29 (Markazia North):
-- The largest, most comfortable **Women's Prayer Halls** inside Masjid an-Nabawi are accessed through **Northern Gates 23, 24, 25, 28, and 29** (directly opposite Dar Al Taqwa, Anwar Al Madinah Mövenpick, and Emaar Royal hotels).
-Rule 2: Women's Rawdah Shareef (Riyazul Jannah) Entry Point & Timings:
-- Women enter Rawdah Shareef during dedicated female time windows (typically **after Fajr sunrise until before Dhuhr**, and **after Isha prayer until midnight**—exact slot shown on your Nusuk App permit).
-- The official assembly and QR-scanning queue for women's Rawdah permits is located outside **Gate 25 and Gate 32 (Uthman Ibn Affan Gate)** on the North-Eastern courtyard.
+2. Masjid an-Nabawi in Madinah: Female Prayer Sections and Rawdah Access
+Madinah's Masjid an-Nabawi features distinct sector arrangements and separate scheduling windows for female worshippers:
+- **Ladies' Prayer Halls and Northern Courtyard:** The primary, dedicated internal prayer areas and shaded external courtyard sections for women are located along the northern and north-eastern side of the Prophet's Mosque, primarily around Gates 21 through 26 and eastern entrances [3]. Selecting accommodations situated in Markazia North (Northern Central Area) allows female pilgrims and elderly family members direct, flat, step-free access into women's prayer spaces without navigating long perimeter walks around the exterior plaza [3].
+- **Women's Rawdah Shareef (Riyad al-Jannah) Scheduling:** Access to the sacred Rawdah is strictly controlled through mandatory advance appointment slots booked via the official Nusuk mobile app [2]. The General Presidency schedules dedicated women's Rawdah visitation periods, typically divided into a morning session (from after Fajr until before Dhuhr prayer) and an evening session (after Isha prayer until midnight) [2][3].
+- **Verification and Crowd Entry Protocol:** Entry gates for female Rawdah appointment holders are managed on-site by female security personnel and crowd marshals. Assembly queues typically organize through the designated northern courtyard checkpoints. Always confirm the exact reporting gate and time window displayed directly on your confirmed active Nusuk digital permit before arriving at the courtyard [2][3].
 
-3. WHAT IS THE PROPER IHRAM DRESS & FOOTWEAR FOR BANGLADESHI WOMEN?
-Unlike men (who wear two unstitched white towels), women wear normal stitched, loose, modest Islamic clothing for Ihram:
-- **Best Ihram Outfit from Dhaka:** Wear a breathable, loose **100% cotton or soft linen Abaya / Borka or loose Salwar-Kameez with a wide Khimar/Hijab** in black, navy, dark beige, or white. Avoid heavy synthetic polyester fabrics that trap heat during Tawaf.
-- **Face Veil (Niqab) & Gloves Rule in Ihram:** During the state of Ihram, a woman's face should not have a tied cloth (Niqab) pressed directly against the skin, nor should she wear stitched hand gloves. Women who observe purdah simply wear a **baseball-cap visor under their Hijab/Khimar** so a loose veil hangs forward without touching the face.
-- **Footwear Tip:** Women are permitted to wear completely covered shoes, slip-on walking sneakers, or thick gripping socks on the cool marble floors of Masjid al-Haram.
+3. Ihram Guidelines and Dress Regulations for Women
+Unlike male pilgrims who must wear two unstitched white towels (Izar and Rida), the rules of Ihram for female pilgrims emphasize modesty, loose coverage, and simplicity without restrictive garment mandates:
+- **Permitted Attire:** Women enter Ihram in ordinary, modest, stitched clothing. The recommended outfit from Bangladesh is a breathable, loose-fitting cotton or linen Abaya, Burkha, or modest Salwar-Kameez paired with a wide, opaque Hijab or Khimar. Neutral colors (black, navy, dark gray, or white) are customary; lightweight natural fabrics help maintain comfort during crowded Tawaf in warm temperatures.
+- **Face Covering and Hand Rules in Ihram:** Under authentic Sunnah guidelines, a woman in the state of Ihram should not wear a fitted, tied face veil (Niqab) pressed against the facial skin, nor should she wear stitched hand gloves [1]. Women who observe full purdah may loosely drape an open scarf or sheer fabric down over the face when passing men, or wear a soft visor cap beneath the hijab to allow the draped fabric to hang freely without directly binding against facial skin.
+- **Footwear and Socks:** Women in Ihram are permitted to wear normal stitched socks, slip-on walking shoes, supportive athletic sneakers, or padded prayer footwear to cushion joints on the hard marble tiles of Masjid al-Haram during Tawaf and Sa'i.
 
-4. HOW SHOULD WOMEN PERFORM TAQSIR (TRIMMING HAIR) TO EXIT IHRAM?
-- Never cut your hair openly in the Marwah marble gallery in front of crowds!
-- After completing the 7th lap of Sa'i at Marwah, either gather the tips of your hair under your Hijab in a private corner of the women's prayer section, OR walk back to your hotel room with your family (remaining in Ihram rules until you reach the room) and trim **one fingertip's length (approx. 1 inch / 2 cm)** from the ends of your hair using small nail scissors packed in your checked suitcase.`,
+4. Performing Taqsir (Hair Trimming) to Exit Ihram
+The final rite completing Umrah is Taqsir, which officially releases the pilgrim from the restrictions of Ihram:
+- **Proper Method:** A woman exits Ihram by cutting approximately one fingertip's length (about one inch or 2.5 cm) from the tips of all the strands of her hair.
+- **Privacy and Modesty:** Women must not uncover their heads or cut hair openly in public viewing areas around the crowded Marwah hill where male pilgrims and spectators congregate. Perform Taqsir discreetly in private female prayer alcoves, designated women's restrooms with mirrors, or return directly to your private hotel room while remaining mindful of Ihram prohibitions until the trimming is finalized.
+
+5. Frequently Asked Questions
+Can a Bangladeshi woman perform Umrah without a Mahram in 2026?
+Under official Saudi Ministry of Hajj and Umrah regulations, women of any age may apply for and receive an Umrah e-Visa, Stopover Visa, or Tourist eVisa without a registered male guardian (Mahram) [1][2]. However, whether one chooses to travel solo or with a trusted group is a religious matter governed by individual Islamic schools of jurisprudence; consult your trusted religious scholar for personal guidance.
+Which hotel area in Madinah is most convenient for women?
+Markazia North (the Northern Central Area) is the most practical location for female travelers and families. The dedicated women's prayer halls and Nusuk Rawdah assembly areas are situated on the northern side of Masjid an-Nabawi, allowing quick, step-free access into the ladies' courtyards without extensive detours around the perimeter [3].
+How do women book Rawdah Shareef permits in Nusuk?
+Log into the official Nusuk mobile application, select the Rawdah Shareef permit option for women, and choose an available calendar time slot during designated morning or evening female windows [2]. Arrive at the assigned courtyard assembly gate with the active QR code loaded on your mobile screen [2].
+Are gloves or standard niqabs allowed during Ihram?
+No. Prophetic instructions prohibit wearing tailored hand gloves and tight, tied niqabs while in the sacred state of Ihram [1]. Women wishing to observe face concealment may loosely drape an unstitched headscarf over the front of the face without pressing or binding it firmly to the skin.`,
   "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": `Airfare accounts for nearly 55% of a Bangladeshi pilgrim's total DIY Umrah budget. Choosing the right routing and understanding airline baggage and Zamzam policies under **Saudi General Authority of Civil Aviation (GACA - gaca.gov.sa)** rules can save your family both BDT 15,000+ per ticket and 7 hours of unnecessary highway travel.
 
 1. WHY SHOULD YOU ALWAYS BOOK AN "OPEN-JAW" (MULTI-CITY) FLIGHT FOR UMRAH?

@@ -333,7 +333,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": {
     title: "Umrah Rules for Bangladeshi Women: Visa & Gates | URAL",
     description:
-      "Review Saudi Umrah visa rules for Bangladeshi women, Madinah Ladies' Prayer Gates 25–29 for Rawdah access, abaya guidelines and travel safety tips.",
+      "Review Saudi Umrah e-visa rules for women without a male Mahram, Madinah ladies' prayer access in Markazia North, modest Ihram clothing, and Taqsir etiquette.",
   },
   "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": {
     title: "Dhaka to Jeddah & Madinah Open-Jaw Flight Guide | URAL",

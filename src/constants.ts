@@ -2407,14 +2407,32 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-17",
     slug: "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
     title: "Umrah Rules for Bangladeshi Women (2026): Mahram-Free Visa Policy, Madinah Ladies' Gates 25–29 & Ihram Guide",
-    summary: "Can Bangladeshi women apply for an Umrah visa without a male Mahram in 2026? Which gates at Masjid an-Nabawi in Madinah are dedicated to women for daily prayers and Rawdah Shareef access? Based on updated Saudi Ministry of Hajj & Umrah (haj.gov.sa) regulations and authentic Islamic jurisprudence, this complete guide for Bangladeshi mothers, sisters, and female professionals explains current visa rules, modest Ihram clothing comfort tips, private hair-trimming (Taqsir) rules after Sa'i, and why booking a hotel near Northern Gates 25 to 29 in Madinah saves kilometers of walking.",
+    summary: "Can Bangladeshi women apply for an Umrah visa without a male Mahram in 2026? How do women access daily prayer halls and book Rawdah Shareef permits at Masjid an-Nabawi in Madinah? Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah (haj.gov.sa) directives and the Nusuk portal, this guide explains mahram-free e-visa rules, modest Ihram clothing, private hair-trimming (Taqsir) etiquette, and hotel selection in Markazia North.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
+    updatedAt: "2026-10-17",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
+    references: [
+      {
+        name: "Ministry of Hajj and Umrah — Official Saudi portal guidelines & visa regulations",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — অফিশিয়াল পোর্টাল গাইডলাইন ও ভিসা নীতিমালা",
+        url: "https://www.haj.gov.sa",
+      },
+      {
+        name: "Nusuk — Official Saudi pilgrim platform for Umrah & Rawdah appointments",
+        nameBn: "নুসুক — ওমরাহ ও রওজা শরিফ পারমিটের অফিশিয়াল প্ল্যাটফর্ম",
+        url: "https://www.nusuk.sa",
+      },
+      {
+        name: "General Authority for the Care of the Two Holy Mosques — Mosque services & prayer zones",
+        nameBn: "দুই পবিত্র মসজিদ পরিচালনা কর্তৃপক্ষ — মসজিদ চত্বর ও সেবা নির্দেশনা",
+        url: "https://gacr.gov.sa",
+      },
+    ],
     internalLinks: [
       { text: "Nusuk App & Rawdah Shareef Permit Step-by-Step Guide", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
-      { text: "Makkah & Madinah Hotel Zones (Near Ladies' Gates 25–29)", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Makkah & Madinah Hotel Zones & Haramain High-Speed Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Umrah with Elderly Parents: Wheelchair & Scooter Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],

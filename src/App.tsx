@@ -628,7 +628,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
       "Bangladeshi pilgrims should prepare the Nusuk app (nusuk.sa) for Umrah slots and the mandatory Rawdah Shareef (Riyazul Jannah) appointment permit in Madinah. The current Saudi Ministry FAQ lists Bangladesh for biometric enrollment for electronically issued Umrah visas via Saudi Visa Bio; it is not a universal rule for every tourist or stopover traveler. Book the free Rawdah permit in Nusuk and check live availability.",
     "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
-      "Under updated Saudi Ministry of Hajj & Umrah (haj.gov.sa) rules, Bangladeshi women can obtain an Umrah e-Visa without a mandatory male Mahram restriction in the visa portal. In Madinah, book hotels in Markazia North facing Ladies' Gates 25–29 for direct women's prayer hall and Rawdah access.",
+      "Under updated Saudi Ministry of Hajj & Umrah (haj.gov.sa) regulations, women can obtain an Umrah e-Visa without a mandatory male Mahram in the visa portal. In Madinah, staying in Markazia North provides convenient, flat access to the northern ladies' prayer halls and Nusuk Rawdah appointment checkpoints.",
     "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
       "Save 6 hours of highway travel by booking an Open-Jaw (Multi-City) ticket: fly Dhaka (DAC) to Jeddah (JED) outbound and return directly from Madinah (MED) to Dhaka. Direct Biman and Saudia flights cost BDT 72,000–92,000 with 46kg baggage, while 1-stop Gulf carriers start at BDT 54,000.",
     "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
@@ -723,7 +723,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
       "ওমরাহ যাত্রীদের মক্কায় ওমরাহ স্লট ও মদিনায় রিয়াজুল জান্নাত (Rawdah Shareef) অ্যাপয়েন্টমেন্ট পারমিটের জন্য Nusuk অ্যাপ (nusuk.sa) প্রস্তুত রাখতে হবে। বর্তমান সৌদি মন্ত্রণালয়ের FAQ বাংলাদেশকে ইলেকট্রনিক Umrah visa-র biometric enrollment-এর জন্য Saudi Visa Bio-তে তালিকাভুক্ত করে; এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার যাত্রীর জন্য সার্বজনীন নিয়ম নয়। Nusuk-এ ফ্রি Rawdah পারমিট বুক করুন এবং লাইভ availability চেক করুন।",
     "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
-      "সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের (haj.gov.sa) হালনাগাদ নিয়মে বাংলাদেশি নারীরা মাহরাম ছাড়াও ওমরাহ ই-ভিসার আবেদন করতে পারেন। মদিনায় মা ও বোনদের সহজে নামাজ ও রিয়াজুল জান্নাতে প্রবেশের জন্য উত্তর দিকের Ladies' Gates 25–29 সংলগ্ন Markazia North হোটেলে থাকা সবচেয়ে সুবিধাজনক।",
+      "সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের (haj.gov.sa) হালনাগাদ নিয়মে নারীরা মাহরাম ছাড়াও অনলাইনে ওমরাহ ই-ভিসার আবেদন করতে পারেন। মদিনায় মা ও বোনদের সহজে নামাজ ও রিয়াজুল জান্নাতে প্রবেশের জন্য উত্তর দিকের Markazia North এলাকায় অবস্থান করা সবচেয়ে সুবিধাজনক।",
     "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
       "ওমরাহ শেষে মদিনা থেকে জেদ্দা বিমানবন্দরের ৬ ঘণ্টার ক্লান্তিকর সড়কপথ এড়াতে Multi-City (Open-Jaw) টিকিট কাটুন: ঢাকা থেকে জেদ্দা (DAC–JED) যান এবং মদিনা থেকে সরাসরি ঢাকা (MED–DAC) ফিরুন। বিমান ও সৌদিয়ার ডিরেক্ট ফ্লাইট ৭২–৯২ হাজার টাকা এবং ট্রানজিট ফ্লাইট ৫৪ হাজার টাকা থেকে শুরু।",
     "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":

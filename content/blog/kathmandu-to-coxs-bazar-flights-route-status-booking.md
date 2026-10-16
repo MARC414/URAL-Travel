@@ -1,6 +1,7 @@
 ---
 slug: kathmandu-to-coxs-bazar-flights-route-status-booking
-status: draft
+status: scheduled
+publishDate: "2026-10-16"
 title: "Kathmandu to Cox’s Bazar Flights: Route Status, Dhaka Connection & Fare
   Guide (2026)"
 titleBn: "কাঠমান্ডু থেকে কক্সবাজার ফ্লাইট: রুটের অবস্থা, ঢাকা সংযোগ ও ভাড়ার গাইড (২০২৬)"

@@ -560,3 +560,19 @@ Stage 2 is complete **for the narrow claims the route guide actually makes**: th
   - Clarified airline-direct submission at zero cost versus optional paid commercial claims services (AirHelp).
   - Added 13 numbered primary references, matching 4-question bilingual FAQ sections, updated 50-word AEO snippets in \`src/App.tsx\`, and refreshed SERP metadata in \`src/utils/seoCopy.ts\`.
 - **Verification:** \`npm run test:scheduling\`, \`npm run lint\`, \`npm run build\`, and \`npm run verify:build\` all passed cleanly with 162/162 checks passing.
+
+### Stage 3–9 execution record — Wave 5 Specialist 1: Umrah Rules for Women (16 October 2026, scheduled for 17 October)
+
+- **Execution scope:** In-place bilingual update of \`blog-17\` (\`/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates\` and its \`/bn/\` twin).
+- **Substantive changes applied:**
+  - Resolved blog audit finding F10: added 3 primary official references (\`haj.gov.sa\`, \`nusuk.sa\`, \`gacr.gov.sa\`) with full English and Bengali metadata parity.
+  - Aligned Saudi Ministry of Hajj & Umrah civil e-visa portal rules permitting women of any age to apply for Umrah, Stopover, or Tourist e-visas without a mandatory male Mahram link.
+  - Rigorously separated official civil immigration issuance from personal Islamic jurisprudence (fiqh) and classical/contemporary rulings regarding solo vs. group travel.
+  - Specified practical Dhaka Airport (DAC) departure requirements (confirmed hotel bookings, return flights, NOC/leave documentation) for solo/female groups.
+  - Clarified Masjid an-Nabawi ladies' prayer sections in Northern Markazia and Nusuk advance appointment scheduling for Rawdah Shareef (morning and evening sessions) with dynamic QR codes.
+  - Sourced authentic Ihram regulations: modest loose clothing (abaya, salwar-kameez, khimar), prohibition on tight stitched niqabs and gloves, and permitted draped coverings.
+  - Outlined discreet Taqsir (hair trimming of ~1 inch/fingertip length) in private areas/hotel rooms rather than public Marwah crowds.
+  - Added matching 4-question bilingual FAQ sections in \`src/utils/blogStructuredData.ts\`, updated AEO 50-word snippets in \`src/App.tsx\`, and updated SERP metadata in \`src/utils/seoCopy.ts\`.
+  - Updated metadata \`updatedAt: "2026-10-17"\` to reflect the scheduled release date.
+- **Verification:** \`npm run test:scheduling\`, \`npm run lint\`, \`npm run build\`, and \`npm run verify:build\` all passed cleanly with 162/162 checks passing.
+
