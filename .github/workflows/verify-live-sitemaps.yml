@@ -1,8 +1,10 @@
-# Run after Cloudflare Pages reports a successful production deployment.
-# This checks the real public HTTP responses, not just the build artifacts.
+# Check the real public HTTP responses, not just the build artifacts.
+# Retries give Cloudflare Pages time to publish the new production build.
 name: Verify live sitemaps
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
