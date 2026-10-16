@@ -688,13 +688,13 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh":
       "Bangladeshi patients visiting Bumrungrad International (Sukhumvit Soi 3), Bangkok Hospital, or Samitivej can book executive health check-up packages online (THB 6,900–24,500 / BDT 24,500–87,000) with complimentary Bengali medical interpreters, free airport wheelchair assistance, and patient apartments within a 5-minute walk.",
     "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide":
-      "Avoid BDT 1,200/day international roaming charges by installing an Airalo Travel eSIM ($4.50–$9.00 via your Dual-Currency Card) in Dhaka before departure so 5G data activates upon landing in Jeddah, Bangkok, KL, or Singapore—and pair it with a $30,000+ Travel Medical Insurance policy.",
+      "Prepare for international travel from Dhaka with a verified connectivity and insurance strategy. Dual-SIM handsets let you use an Airalo or Yesim travel eSIM for mobile data abroad while keeping your Bangladeshi SIM active for bank SMS OTPs. Schengen visa applicants must also secure compliant €30,000 medical insurance.",
     "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost":
       "A 6-day Sri Lanka tour (Colombo, Kandy, Nuwara Eliya, Ella Nine Arch Bridge, and Galle Fort) from Dhaka costs BDT 68,000–82,000 per person including roundtrip flights. Bangladeshi passport holders apply online at eta.gov.lk ($20 USD SAARC fee) and enjoy abundant HAC-certified Halal dining.",
     "bangladesh-epassport-application-renewal-64-districts-fee-guide":
       "Apply or renew your Bangladeshi e-Passport across all 64 Regional Passport Offices at epassport.gov.bd without brokers. A 10-year 48-page e-Passport costs BDT 5,750 (Regular), BDT 8,050 (Express), or BDT 10,350 (Super Express, 2 days); always select the 64-page booklet (BDT 8,050+) if you travel frequently.",
     "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp":
-      "Bangladeshi passengers whose flights are delayed 3+ hours, cancelled, or overbooked on UK/EU routes (EC 261/2004) can claim €250–€600 (BDT 33,000–80,000), while Montreal Convention rules cover up to ~$1,700 (BDT 2,05,000) for lost or damaged baggage on Biman, Saudia, Emirates, or Qatar Airways.",
+      "Bangladeshi passengers facing disruptions on qualifying European and UK routes can claim statutory compensation up to €600 or £520 for 3+ hour delays under EC 261/UK 261 rules. For international flights, the Montreal Convention sets a maximum liability limit of 1,519 SDR per passenger for proven baggage losses.",
     "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla":
       "Compare every major airline flying out of Dhaka (DAC): Biman and Saudia lead for direct 6.5-hour Jeddah/Madinah flights with 2x23kg (46kg) baggage (route- and fare-dependent; confirm on your e-ticket) and free 5L Zamzam water; Emirates, Qatar, and Gulf Air offer top 1-stop transit value; and Malaysia/Singapore Airlines lead on Asian routes.",
     "havana-cuba-travel-guide-bangladesh":
@@ -783,7 +783,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh":
       "ব্যাংককের Bumrungrad International (Sukhumvit Soi 3), Bangkok Hospital ও Samitivej-এ অনলাইনে অ্যাপয়েন্টমেন্ট নিয়ে ফ্রি দোভাষী সুবিধাসহ হেলথ চেকআপ (৬,৯০০–২৪,৫০০ বাথ / ২৪,৫০০–৮৭,০০০ টাকা) করা যায়। গুরুতর রোগীদের দ্রুত ভিসার জন্য হাসপাতাল থেকে ফ্রি Medical Invitation Letter পাওয়া যায়।",
     "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide":
-      "বিদেশে প্রতিদিন ১,২০০ টাকার রোমিং বিল বাঁচাতে ঢাকা থেকেই ডুয়াল-কারেন্সি কার্ড দিয়ে Airalo অ্যাপে Travel eSIM ($4.50–$9.00) ইনস্টল করুন—যাতে জেদ্দা, ব্যাংকক বা কুয়ালালামপুরে ল্যান্ড করার সাথে সাথেই 5G ইন্টারনেট চালু হয়। সাথে রাখুন ট্রাভেল মেডিকেল ইন্স্যুরেন্স।",
+      "ঢাকা থেকে বিদেশ ভ্রমণের আগে ডুয়াল-সিম ফোনে Airalo বা Yesim ট্রাভেল eSIM ব্যবহার করে বিদেশে ইন্টারনেট সচল রাখা যায়, আর ফিজিক্যাল দেশীয় সিম দিয়ে ব্যাংকের ওটিপি এসএমএস পাওয়া যায়। শেনজেন ভিসার জন্য ইউরোপীয় ইউনিয়নের নিয়ম মেনে ন্যূনতম €30,000 কভারেজের মেডিকেল ইনস্যুরেন্স নিশ্চিত করুন।",
     "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost":
       "ঢাকা থেকে ফ্লাইটসহ জনপ্রতি মাত্র ৬৮,০০০–৮২,০০০ টাকায় ৬ দিনের শ্রীলঙ্কা (কলম্বো, ক্যান্ডি, নুওয়ারা এলিয়া, এলা Nine Arch Bridge ও গল ফোর্ট) ভ্রমণ করা যায়। বাংলাদেশি পাসপোর্টধারীরা অফিশিয়াল পোর্টালে (eta.gov.lk) মাত্র ২০ ডলারে SAARC ETA ভিসা পান।",
     "bangladesh-epassport-application-guide-64-districts-urgent-fees":
@@ -791,7 +791,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "bangladesh-epassport-application-renewal-64-districts-fee-guide":
       "দালাল ছাড়াই দেশের ৬৪ জেলার পাসপোর্ট অফিসে epassport.gov.bd পোর্টালে ১০ বছর মেয়াদী ৪৮ পৃষ্ঠার ই-পাসপোর্ট করতে ৫,৭৫০ টাকা (রেগুলার), ৮,০৫০ টাকা (এক্সপ্রেস) বা ১০,৩৫০ টাকা (সুপার এক্সপ্রেস, ২ দিনে) লাগে। নিয়মিত ভ্রমণকারীদের জন্য ৬৪ পৃষ্ঠার পাসপোর্ট সেরা।",
     "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp":
-      "ফ্লাইট ৩+ ঘণ্টা দেরি (Delay), বাতিল বা ওভারবুকিং হলে ইউরোপ/যুক্তরাজ্য রুটে EC 261/2004 আইন অনুযায়ী €250–€600 (৩৩,০০০–৮০,০০০ টাকা) এবং যেকোনো আন্তর্জাতিক এয়ারলাইন্সে লাগেজ হারালে মন্ট্রিয়ল কনভেনশনে সর্বোচ্চ ২,০৫,০০০ টাকা পর্যন্ত ক্ষতিপূরণ দাবি করা যায়।",
+      "ইউরোপ বা যুক্তরাজ্যের যোগ্য ফ্লাইটে ৩ ঘণ্টার বেশি দেরি হলে EC 261 বা UK 261 নিয়মে সর্বোচ্চ €৬০০ বা £৫২০ পর্যন্ত ক্ষতিপূরণ দাবি করা সম্ভব। যেকোনো আন্তর্জাতিক রুটে লাগেজ হারালে বা ক্ষতিগ্রস্ত হলে মন্ট্রিল কনভেনশন অনুযায়ী সর্বোচ্চ ১,৫১৯ SDR পর্যন্ত প্রমাণিত ক্ষতির ব্যয় ক্লেইম করা যায়।",
     "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla":
       "ঢাকা (DAC) থেকে সরাসরি জেদ্দা/মদিনা ওমরাহ ফ্লাইটে ৪৬ কেজি (২x২৩ কেজি) ব্যাগেজ ও ৫ লিটার ফ্রি জমজম পানির সুবিধায় Biman ও Saudia সেরা। সাশ্রয়ী ১-স্টপ ট্রানজিটে Emirates, Qatar ও Gulf Air এবং এশিয়া রুটে Malaysia ও Singapore Airlines শীর্ষে।",
     "havana-cuba-travel-guide-bangladesh":

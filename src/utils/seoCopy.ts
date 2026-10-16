@@ -281,9 +281,9 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Review Bangladesh e-passport application and renewal steps, required documents and official guidance before booking international travel.",
   },
   "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp": {
-    title: "Flight Delays & Baggage Claims: Passenger Guide | URAL",
+    title: "Flight Delay, Cancellation & Baggage Compensation Guide | URAL",
     description:
-      "Understand which passenger-rights rules may apply to delays, cancellations or baggage issues, and what records to keep when seeking assistance.",
+      "Understand international air passenger rights for delays and baggage under EC 261, UK 261, Turkish SHY-PASS, Saudi GACA and Montreal Convention rules.",
   },
   "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla": {
     title: "Airlines from Dhaka: Routes & Baggage Guide | URAL",
@@ -421,9 +421,9 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Plan a Bangkok medical checkup from Bangladesh: booking Bumrungrad or Bangkok Hospital appointments, free Bengali interpreters, visas and BDT package costs.",
   },
   "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": {
-    title: "Travel eSIM & Insurance Guide from Bangladesh | URAL",
+    title: "Travel eSIM & Insurance from Bangladesh: Oman & Schengen | URAL",
     description:
-      "Compare Airalo travel eSIMs with Bangladeshi roaming and review travel medical insurance options for Umrah, Southeast Asia and Schengen visa applications.",
+      "Compare travel eSIM options with mobile roaming, check Oman data packages, review EUR 30,000 Schengen visa medical insurance rules and family policy exclusions.",
   },
   "/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost": {
     title: "Sri Lanka + Maldives 7-Day Combo Tour in BDT | URAL",

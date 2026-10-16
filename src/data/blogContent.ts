@@ -1045,26 +1045,70 @@ When traveling with elderly parents who need fasting blood tests at 7:00 AM, sta
 
 4. HOW TO PAY LARGE HOSPITAL BILLS BEYOND YOUR $18,000 TRAVEL QUOTA
 Under **Bangladesh Bank Foreign Exchange Guidelines (bb.org.bd)**, in addition to your regular **$18,000 annual personal travel quota**, Bangladeshi citizens can release up to **USD $10,000+ under the Medical Treatment Quota** through an Authorized Dealer (AD) bank branch by submitting the hospital's official cost estimate invoice and doctor recommendation!`,
-  "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": `Two small digital purchases made **24 hours before flying from Dhaka (DAC)** prevent 90% of arrival headaches abroad: a **Pre-Installed Travel eSIM** (so your phone has 5G data the second the plane touches the runway) and **International Travel Medical Insurance** (to protect your family against BDT 5,00,000+ overseas hospital emergencies and satisfy embassy visa checklists).
+  "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": `Before departing from Dhaka (DAC), international travelers face two essential digital preparations: arranging dependable mobile connectivity and securing appropriate travel medical insurance. Rather than relying on unverified claims of universal savings or instant activation, evaluate your specific itinerary against network compatibility, bank verification needs and consular visa rules. Checked on 16 October 2026 against provider product documentation, consular checklists and the EU Visa Code.
 
-1. TRAVEL ESIM (AIRALO / YESIM) VS. BANGLADESHI TELCO ROAMING VS. AIRPORT SIM CARDS
-Why have seasoned Bangladeshi flyers switched from physical airport SIM cards to **Airalo and Yesim Travel eSIMs**?
-- **1. Keep Your Bangladeshi SIM Active for Bank 3D-Secure SMS OTPs:**
-  • When you use an **eSIM** on your iPhone, Samsung Galaxy, or Google Pixel, your **physical Grameenphone, Robi, Banglalink, or Airtel SIM stays inside Slot 1** to receive free incoming banking OTP SMS messages from EBL, City Bank, or BRAC—while your **Airalo / Yesim eSIM handles all 4G/5G mobile data**!
-- **2. Zero Airport Queues at Midnight Landings:**
-  • Flights from Dhaka to **Jeddah (JED), Bangkok (BKK), Kuala Lumpur (KUL), and Malé (MLE)** frequently land late at night when airport SIM booths have 45-minute queues or sell overpriced $25–$35 tourist bundles.
-- **3. 2026 Price Comparison for Bangladeshi Travelers:**
-  • **Airalo / Yesim Country eSIM (Saudi Arabia, Thailand, Malaysia, Singapore, UAE):** Starts at **$4.50 to $9.00 USD (~BDT 550 – BDT 1,100)** for 1GB to 5GB (7–30 days).
-  • **Airalo 'Asialink' or 'Menalink' Regional eSIM:** Ideal for **Malaysia + Thailand + Singapore** or **Umrah + Dubai Multi-City trips**—one single eSIM automatically switches networks as you cross borders!
+1. Travel eSIM vs. Home Roaming vs. Local Airport SIM
+Choosing the right mobile connectivity depends on your trip length, destination and whether you must receive security codes on your Bangladeshi phone number.
+- **Travel eSIM (Airalo / Yesim):**
+  A digital SIM downloaded to an unlocked, eSIM-compatible handset [3][4]. It provides local or regional mobile data without physically swapping cards. Best suited for short visits and multi-country trips where you want data immediately upon connecting to a supported overseas network.
+- **Bangladeshi Mobile Roaming:**
+  Activating international roaming on your existing Grameenphone, Robi, Banglalink or Teletalk line. While high-volume mobile data roaming can be costly, keeping your home SIM active on a minimal roaming or SMS profile allows incoming bank OTPs and transaction alerts to arrive [5].
+- **Local Physical Airport SIM:**
+  Purchasing a physical SIM card upon arrival at destination airport kiosks or city shops. Often provides generous local data bundles at competitive domestic prices, but requires waiting in kiosk queues, physical SIM swapping and identity registration.
 
-2. WHEN IS TRAVEL MEDICAL INSURANCE MANDATORY FOR BANGLADESHI PASSPORT HOLDERS?
-Even a minor 24-hour hospital admission for food poisoning, dehydration, or a slip-and-fall in **Dubai, Singapore, Makkah, or Europe** can cost **USD $3,000 to $10,000+ (BDT 3.6 Lakhs to 12 Lakhs)**. Furthermore, travel insurance is legally required or strongly checked for:
-- **1. Schengen Visa Applications (Mandatory €30,000 Minimum Coverage):**
-  • Under **EU Visa Code (Article 15)**, every Bangladeshi applying for a Schengen visa (France, Italy, Germany, Sweden, Spain, Switzerland) at VFS Dhaka must submit a travel medical insurance certificate with at least **€30,000 (~USD $35,000) coverage**, including emergency hospitalization and repatriation, valid across all 29 Schengen states.
-- **2. Thailand e-Visa (thaievisa.go.th), Malaysia & Family Trips (Travel Insurance):**
-  • Purchasing an international travel medical policy gives you an instant English PDF policy accepted by embassies and airlines, covering medical emergencies, lost checked baggage, and flight delays.
-- **3. Saudi Umrah & 96-Hour Stopover Visa:**
-  • Basic emergency coverage is bundled into your official Saudi visa fee, but families traveling with **elderly parents (Age 60+)** should add a supplemental senior medical & baggage policy so flight delays and pre-existing stabilization are covered.`,
+2. What to Check Before Buying an Oman eSIM
+If your travel includes Oman (such as Muscat, Salalah or a regional Gulf stopover), evaluate the destination package carefully rather than assuming global parity.
+- **Network Partner & Coverage:**
+  Airalo’s Oman eSIM currently operates on the Omantel network [1]. Confirm whether your travel destinations within Oman fall within stable coverage areas.
+- **Data-Only vs. Voice Capability:**
+  Most travel eSIMs for Oman are data-only profiles without a local phone number [1][7]. Traditional voice calls and local SMS are not supported; plan to use internet-based messaging apps.
+- **Regional vs. Country Plans:**
+  If visiting multiple Middle Eastern destinations (e.g. Oman and UAE or Saudi Arabia), compare a single-country Oman profile against a regional Middle East & North Africa (MENA) package [6], checking that each stop is explicitly listed on the provider's covered countries table.
+- **Activation & Validity Rules:**
+  Review whether package validity starts immediately upon installation or only when the eSIM connects to a supported local network in Oman [2][7].
+
+3. Preparing Your Phone & Keeping Your Bangladesh Number Active
+Using a travel eSIM alongside your primary Bangladeshi SIM requires deliberate phone configuration.
+Step 1: Verify device compatibility and carrier lock
+Ensure your smartphone supports eSIM technology and is completely carrier-unlocked [3]. Certain regional phone variants do not support eSIM functionality; check manufacturer specifications before purchasing.
+Step 2: Install the eSIM over a stable Wi-Fi connection
+Install your eSIM profile prior to departure using a reliable Wi-Fi network at home or work [2]. Keep the QR code or installation instructions accessible.
+Step 3: Configure Dual-SIM settings for mobile data and voice
+Assign the travel eSIM strictly as your primary line for "Mobile Data". Keep your physical Bangladeshi SIM designated as the line for calls and SMS so you can continue receiving essential 3D-Secure bank OTPs [4][5].
+Step 4: Enable data roaming on the travel eSIM line
+In cellular settings, turn on "Data Roaming" for the travel eSIM profile while keeping data roaming switched off for your Bangladeshi SIM to prevent unexpected background charges.
+
+4. Schengen Visa Travel Insurance Requirements
+For Bangladeshi passport holders applying for a Schengen visa (such as France, Germany, Italy, Spain, Sweden or Switzerland), travel medical insurance is a mandatory legal requirement under European Union regulations.
+- **Article 15 Minimum Coverage (€30,000):**
+  Under Article 15 of the EU Visa Code (Regulation EC No 810/2009), applicants must hold valid travel medical insurance with a minimum coverage limit of €30,000 [8].
+- **Required Inclusions:**
+  The insurance policy must cover emergency medical expenses, urgent hospital treatment, and repatriation for medical reasons or in the event of death [8][9].
+- **Territory & Duration:**
+  The certificate must be valid throughout the entire territory of the Schengen Member States and cover the full duration of the intended stay or first planned visit [8][9].
+- **Consular Verification Checklist:**
+  Consulates and visa processing centers in Dhaka require an official insurance certificate reflecting the applicant name, policy number, exact validity window and €30,000 coverage limit [9]. Certain missions do not accept insurance bundled with credit cards; check your specific embassy checklist before submission.
+
+5. Family Trips, Senior Travelers & Pre-Existing Medical Exclusions
+Travel medical insurance is equally valuable for non-Schengen destinations (such as Southeast Asia or Saudi Arabia), but policy wordings contain critical exclusions that travelers must review before departure.
+- **Pre-Existing Medical Conditions:**
+  Standard travel insurance policies generally exclude pre-existing, chronic or previously diagnosed medical conditions [10][11][12]. Emergency hospitalization resulting from a declared or undeclared pre-existing ailment is often non-payable.
+- **Senior Travelers (Age 60+):**
+  Insurance providers apply specific age limits, medical declarations, premium adjustments or deductibles for senior family members [10][11]. Request written confirmation regarding age eligibility and hospital coverage limits.
+- **Medical Coverage vs. Travel Disruption:**
+  A basic emergency medical policy does not automatically insure against lost checked baggage, flight cancellations or hotel booking losses [11][12]. If you require comprehensive coverage for travel inconvenience, verify that baggage and flight disruption benefits are explicitly scheduled.
+- **Saudi Umrah & Stopover Insurance:**
+  When booking official Saudi Umrah or stopover transit visas, mandatory emergency health insurance is itemized or issued during official visa processing [13]. For extended stays or older dependents, evaluate whether additional personal travel medical coverage is appropriate.
+
+6. Frequently Asked Questions
+Does every smartphone support a travel eSIM?
+No. Your handset must have eSIM hardware and be carrier-unlocked. Certain regional phone models do not include eSIM support; verify your exact model specifications before ordering [3][4].
+Can I receive Bangladeshi bank SMS OTPs on a data eSIM?
+A data-only eSIM cannot receive SMS. However, on a dual-SIM phone, your physical Bangladeshi SIM remains in place to receive incoming SMS OTPs while the eSIM provides data [4][5].
+When does my eSIM validity period start?
+Validity rules depend on the provider and package. Some profiles activate on installation, while most activate only when connecting to a supported partner network at your destination [2][7].
+Is €30,000 travel insurance mandatory for all international travel?
+The €30,000 coverage minimum is legally mandatory for Schengen visa applications under EU Visa Code Article 15 [8]. Other destinations have differing visa conditions or recommend insurance as optional medical protection [10].`,
   "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost": `For Bangladeshi honeymooners, families, and travelers building their **Passport Travel History**, the **Sri Lanka + Maldives 7-Day Combo Tour** is South Asia's ultimate "2-in-1" itinerary. Because **Colombo Bandaranaike Airport (CMB)** is only a 1 hour 20 minute flight from **Malé Velana Airport (MLE)**, combining Sri Lanka's emerald tea mountains with the Maldives' crystal-clear coral lagoons costs barely **BDT 18,000 more** than visiting the Maldives alone!
 
 1. VISA RULES FOR BANGLADESHI PASSPORTS: SRI LANKA ETA + MALDIVES FREE VOA
@@ -1125,30 +1169,39 @@ Rule 2: Official 2026 Bangladesh e-Passport Fee Chart (Including 15% VAT):
 3. DOES MRP-TO-E-PASSPORT RENEWAL REQUIRE POLICE VERIFICATION?
 - **No Police Verification for Unchanged Renewals!** If you already hold a valid or expired Bangladeshi **MRP or e-Passport**, and you are renewing with the **exact same Name, Father's Name, Mother's Name, Date of Birth, and Permanent Address**, police verification (SB check) is **waived**—meaning your Express e-Passport is printed much faster!
 - **Crucial Post-Renewal Step for Travelers:** Always ask the Passport Officer to stamp **"Cancelled without Prejudice — Old Passport Returned to Bearer"** and **staple/bind your old passport together with your new e-Passport** when flying from Dhaka Airport so immigration officers can see your old visas and travel history!`,
-  "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp": `Most Bangladeshi travelers believe that when an international flight is delayed by 5 hours, cancelled at the last minute, or loses their checked suitcase on the way to **Jeddah, London, Paris, Rome, Istanbul, or Dubai**, the airline owes them nothing more than a polite apology. In reality, **international aviation passenger rights treaties protect you regardless of your nationality or passport**!
+  "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp": `When international flights are severely delayed, cancelled on short notice, or arrive without checked luggage, many Bangladeshi travelers assume the airline owes nothing beyond an apology or a meal voucher. In reality, statutory passenger rights and international aviation treaties protect passengers on eligible routes regardless of nationality or passport type. Understanding which legal regime applies to your itinerary helps you assert valid claims for care, refunds, baggage damages or cash compensation. Checked on 16 October 2026 against the EU Visa Code, EC Regulation 261/2004, UK CAA guidance, the Montreal Convention and Turkish DGCA regulations.
 
-1. THE 4 INTERNATIONAL PASSENGER RIGHTS LAWS THAT PROTECT BANGLADESHI FLYERS
-Your citizenship does not matter—if your flight route or airline falls under these jurisdictions, you can claim statutory cash compensation:
-- **1. EU Regulation EC 261/2004 & UK 261 (Up to €600 / £520 ≈ BDT 78,000 per Passenger):**
-  • Applies to **any flight departing from a UK or European Union airport** (even on Biman Bangladesh Airlines from London Heathrow/Manchester/Rome, Emirates, Qatar Airways, Saudia, or Turkish Airlines!) OR any flight **arriving into the EU/UK operated by an EU/UK airline**.
-  • EC 261 / UK 261 covers flights departing an EU/UK airport or operated by an EU/UK carrier; it generally does **NOT** cover Biman, Saudia, Emirates or Qatar flights on Dhaka↔Jeddah routes.
-  • If you arrive at your final destination **3+ hours late** (due to airline technical fault, crew scheduling, or missed connection—not extreme weather), you are owed **€600 (~BDT 78,000) per ticket** for long-haul routes over 3,500 km!
-- **2. Saudi Arabia GACA Passenger Rights Regulation (For Umrah & Hajj Flights):**
-  • Enforced by the **Saudi General Authority of Civil Aviation (GACA - gaca.gov.sa)** for all flights departing from Saudi airports (**Jeddah JED, Madinah MED, Riyadh RUH, Dammam DMM**) or operated by Saudi national carriers (**Saudia, Flynas, Flyadeal**) from Dhaka!
-  • Entitles passengers to statutory care, hotel accommodation for 6+ hour delays, and **SDR / SAR cash payouts for prolonged delays, denied boarding, or lost baggage**.
-- **3. Turkish SHY-PASS Regulation:**
-  • Protects Bangladeshi flyers transiting through **Istanbul Airport (IST)** on **Turkish Airlines** who suffer cancellations, overbooking, or qualifying long delays.
-- **4. The Montreal Convention (Up to ~€1,600 / BDT 2,00,000+ for Lost, Delayed or Damaged Baggage):**
-  • Applies to nearly **all international flights worldwide** (including Dhaka to Jeddah, Bangkok, Kuala Lumpur, Singapore, Dubai, Toronto, and New York). If the airline loses, damages, or delays your checked suitcase for more than 21 days, they are legally liable for documented expenses and bag replacement.
+1. International Passenger Rights Frameworks for Bangladeshi Travelers
+Statutory compensation is governed by route endpoints, the operating carrier and specific disruption causes—not your passport.
+- **European Regulation EC 261/2004 (EU Flights):**
+  Applies to all flights departing from an EU airport (regardless of carrier nationality, including Biman from Rome or Gulf/Turkish carriers departing Europe) and flights arriving into an EU airport if operated by an EU carrier [1][2]. For long-haul itineraries over 3,500 km arriving 3+ hours late at the final destination due to operational reasons within the airline's control, passengers may be entitled to statutory compensation of €300 (between 3 and 4 hours) or €600 (4+ hours) [1][2]. Extreme weather and air traffic control restrictions are extraordinary circumstances that exempt carriers from cash compensation, though duty of care remains.
+- **UK 261 Regulations (Flights Involving the United Kingdom):**
+  Applies to flights departing UK airports (such as London Heathrow or Manchester on Biman, Emirates or Qatar Airways) on any airline, and flights into the UK operated by UK or EU carriers [3][4]. Under UK statutory compensation rates, long-haul flight delays exceeding 4 hours entitle qualifying passengers to up to £520 per ticket, or £260 for delays between 3 and 4 hours [4][5].
+- **Saudi Arabia GACA Passenger Rights Regulations (Umrah & Transit Routes):**
+  Enforced by the Saudi General Authority of Civil Aviation (GACA) for departures from Saudi airports (such as Jeddah, Madinah, Riyadh, and Dammam) and Saudi national carriers [13]. For prolonged departure delays, airlines must provide refreshments, meals, and hotel accommodation when delays exceed statutory thresholds. Regulated claim channels require submitting claims directly to the carrier before escalating to GACA.
+- **Turkish DGCA SHY-PASS Regulations (Transit via Istanbul):**
+  Covers flights operated by Turkish air carriers to/from Turkey and foreign carriers departing Turkish airports [11]. When long delays reaching the final destination (3+ hours late) occur due to technical or operational factors within the carrier's control, passengers may be entitled to tiered statutory compensation payable in local currency equivalent [11].
+- **The Montreal Convention (Checked Baggage Delays, Damage & Loss):**
+  Governs international carriage between participating states (including Bangladesh, Saudi Arabia, the UAE, Thailand, the UK and the US) [8][10]. Under official ICAO liability revisions effective 28 December 2024, an airline's liability limit for proven baggage damage, loss, or delay is up to 1,519 Special Drawing Rights (SDR) per passenger [9][10]. This is not an automatic flat payment: passengers must provide documented evidence of necessary expenses, damaged contents or item valuations.
 
-2. 3 MANDATORY STEPS TO TAKE AT THE AIRPORT WHEN YOUR FLIGHT IS DELAYED OR BAG IS LOST
-Never walk out of the arrival hall empty-handed:
-Step 1: Keep Your Physical Boarding Pass & 6-Digit PNR e-Ticket:
-- Take a clear smartphone photo of your **printed boarding pass**, **checked baggage tag sticker**, and the **airport departure board** showing the delay.
-Step 2: For Delayed or Missing Suitcases, File a "PIR" (Property Irregularity Report) Before Exiting Customs:
-- At **Jeddah Terminal 1, Madinah Airport, or Dhaka Airport (DAC) Lost & Found Baggages Desk**, demand an official **Property Irregularity Report (PIR)** with a 10-character reference code (e.g., \`JEDSV12345\` or \`DACBG54321\`) BEFORE you leave the baggage hall! Without a PIR number, airlines will reject your baggage claim.
-Step 3: Check Your Eligibility in 2 Minutes on AirHelp (Zero Upfront Cost):
-- Airlines routinely ignore individual emails from passengers. By entering your flight number and date into **AirHelp** (and using promo code **\`AHTPO11\`** for an **11% discount on AirHelp+ Smart & Pro protection**), their aviation legal team handles the entire claim on a **"No-Win, No-Fee"** basis—and you can even claim for disrupted flights from the **last 3 years**!`,
+2. Essential Steps at the Airport During a Delay or Baggage Disruption
+Preserving contemporaneous evidence at the airport is critical to substantiating any subsequent airline claim:
+Step 1: Retain all travel documentation and boarding passes
+Keep your paper or digital boarding passes, electronic ticket receipt showing the 6-digit PNR, checked baggage claim tag receipts, and screenshots of airport departure displays or airline delay notifications [1][8].
+Step 2: Obtain a Property Irregularity Report (PIR) before leaving customs
+If your checked suitcase is missing or visibly damaged upon arrival at Dhaka (DAC), Jeddah (JED) or any international destination, report it immediately to the operating airline's baggage service desk before exiting the baggage hall. Secure an official Property Irregularity Report (PIR) and file a written notice within statutory deadlines: within 7 days of receipt for damaged baggage, and within 21 days of baggage arrival for delayed baggage expenses [8].
+Step 3: Decide between direct airline submission or claims assistance
+You always have the legal right to submit your compensation or reimbursement claim directly to the operating airline at zero cost [2][7]. If an airline rejects a valid claim or fails to respond, optional third-party commercial claims services such as AirHelp evaluate flight disruption claims under a no-win, no-fee model (charging a service fee only upon successful recovery, with promotional code AHTPO11 offering 11% off AirHelp+ membership protection).
+
+3. Frequently Asked Questions
+Does EU/UK compensation apply to Dhaka to Jeddah flights on Gulf carriers?
+Generally no. Itineraries originating in Dhaka and terminating in Saudi Arabia operated by Biman, Saudia, Emirates or Qatar Airways do not touch EU or UK airspace or involve EU/UK operating carriers, so EC 261 and UK 261 do not apply [1][3].
+Is airline baggage compensation an automatic cash payout?
+No. Under the Montreal Convention, the 1,519 SDR ceiling is a maximum liability limit [9]. Airlines reimburse proven, documented expenses for necessary emergency purchases (for delayed bags) or substantiated valuations for damaged and lost belongings [8].
+How long do I have to file a baggage claim with the airline?
+Under the Montreal Convention, you must file a written complaint within 7 days of receiving damaged luggage, and within 21 days from when delayed luggage was delivered [8]. Legal action must be initiated within 2 years [8].
+Can I submit a flight compensation claim directly without paying a third party?
+Yes. Official consumer protection guidelines in the EU and UK advise submitting your initial complaint directly to the operating carrier at no charge [2][7]. Commercial claim companies are optional paid services that take a percentage fee if they secure a settlement.`,
   "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla": `Not all airline tickets priced at **BDT 45,000 or BDT 75,000** from **Dhaka (DAC)** deliver the same value. A low-cost carrier ticket that appears BDT 6,000 cheaper online can end up costing **BDT 15,000 more** once you pay for 30kg checked luggage, hot Halal meals, and Zamzam water carriage. Here is our verified **2026 comparison of the top airlines operating from Hazrat Shahjalal International Airport (DAC)** so you always book the smartest fare.
 
 1. WEIGHT CONCEPT (30 KG) VS. PIECE CONCEPT (2 X 23 KG = 46 KG): THE #1 BAGGAGE RULE FROM DHAKA

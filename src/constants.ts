@@ -2845,20 +2845,91 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-37",
     slug: "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide",
-    title: "Best Travel eSIM (Airalo vs. Roaming) & Mandatory Travel Insurance for Bangladeshi Travelers in 2026 (Umrah, Asia & Schengen)",
-    summary: "Landing at Jeddah, Bangkok, Kuala Lumpur, or Paris Airport without mobile internet means you cannot pull up your live Nusuk Rawdah QR code, call a Grab/Careem car, or receive 3D-Secure bank OTPs—while queuing at airport SIM kiosks wastes 45 minutes and costs 3x more. At the same time, embassies for Schengen Europe, Thailand, and Saudi Umrah require verifiable travel medical insurance. This 2026 comparison shows Bangladeshi travelers how to install an instant Airalo/Yesim eSIM before leaving Dhaka for $4.50–$9, and how to buy official €30,000 Schengen-compliant and Asia travel insurance online.",
+    title: "Travel eSIM & Schengen Travel Insurance Guide for Bangladeshi Travelers (2026 — Umrah, Asia & Europe)",
+    summary: "Reliable mobile data and verified travel medical insurance are essential preparations before flying from Dhaka. Review travel eSIM options versus roaming, key Oman plan checks, EUR 30,000 Schengen visa insurance requirements and family medical exclusions.",
     category: "Family & Budget",
     date: "September 27, 2026",
+    updatedAt: "2026-10-16",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "6 min read",
-    internalLinks: [
-      { text: "How to Use Nusuk App in Makkah & Madinah (Requires Live Data)", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
-      { text: "Dual-Currency Card Endorsement for Buying eSIM & Insurance", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "Europe, UK & USA Sightseeing & Schengen Guide", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
-      { text: "Compare eSIM & Travel Insurance in Travel Tools Hub", path: "/tools" },
-      { text: "Travel eSIM Comparison (Yesim vs. Airalo)", path: "/tools?tab=esim" }
+    readTime: "7 min read",
+    references: [
+      {
+        name: "Airalo — Oman eSIM product specifications (Omantel network)",
+        nameBn: "Airalo — ওমান eSIM প্রোডাক্ট বিবরণ (Omantel নেটওয়ার্ক)",
+        url: "https://www.airalo.com/oman-esim",
+      },
+      {
+        name: "Airalo Help Center — Installation and validity activation timing",
+        nameBn: "Airalo হেল্প সেন্টার — ইনস্টলেশন ও মেয়াদ শুরুর সময় সংক্রান্ত নিয়ম",
+        url: "https://www.airalo.com/help/getting-started-with-airalo/E8DFWD88SHUX/when-can-i-install-my-esim/EQOCBMXDPSB2",
+      },
+      {
+        name: "Airalo Help Center — Device compatibility and carrier unlock requirements",
+        nameBn: "Airalo হেল্প সেন্টার — ডিভাইসের সামঞ্জস্য ও ক্যারিয়ার আনলক শর্তাবলী",
+        url: "https://www.airalo.com/help/about-airalo/NFHQSUXFCZOM/what-devices-support-esim/D2N6OZSVVM9W",
+      },
+      {
+        name: "Apple Support — Using Dual SIM with an eSIM for separate data and voice lines",
+        nameBn: "অ্যাপল সাপোর্ট — ডাটা ও ভয়েস লাইনের জন্য ডুয়াল সিম ও eSIM ব্যবহার",
+        url: "https://support.apple.com/en-us/109317",
+      },
+      {
+        name: "Grameenphone — International SMS Roaming terms and incoming SMS",
+        nameBn: "গ্রামীণফোন — আন্তর্জাতিক এসএমএস রোমিং শর্ত ও ইনকামিং বার্তা",
+        url: "https://roaming.grameenphone.com/personal/services/roaming/sms-roaming",
+      },
+      {
+        name: "Airalo — Middle East and North Africa (MENA) regional eSIM coverage",
+        nameBn: "Airalo — মধ্যপ্রাচ্য ও উত্তর আফ্রিকা (MENA) রিজিওনাল eSIM কভারেজ",
+        url: "https://www.airalo.com/middle-east-and-north-africa-esim",
+      },
+      {
+        name: "Yesim — Oman data eSIM plan details and activation terms",
+        nameBn: "Yesim — ওমান ডাটা eSIM প্ল্যানের বিবরণ ও অ্যাক্টিভেশন শর্ত",
+        url: "https://yesim.app/country/oman/",
+      },
+      {
+        name: "EUR-Lex — Regulation (EC) No 810/2009 (EU Visa Code), Article 15",
+        nameBn: "EUR-Lex — রেগুলেশন (EC) No 810/2009 (ইইউ ভিসা কোড), আর্টিকেল ১৫",
+        url: "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0810-20240611",
+      },
+      {
+        name: "Embassy of Germany, Dhaka — Schengen visa required documents and insurance checklist",
+        nameBn: "জার্মান দূতাবাস ঢাকা — শেনজেন ভিসা প্রয়োজনীয় কাগজপত্র ও ইনস্যুরেন্স চেকলিস্ট",
+        url: "https://dhaka.diplo.de/bd-en/service/2689060-2689060",
+      },
+      {
+        name: "Delta Life Insurance — Overseas Mediclaim Policy scope and terms",
+        nameBn: "ডেল্টা লাইফ ইনস্যুরেন্স — ওভারসিজ মেডিক্লেইম পলিসির পরিধি ও শর্ত",
+        url: "https://www.deltalife.org/overseas-mediclaim-policy",
+      },
+      {
+        name: "Delta Life Insurance — Policy Terms and pre-existing condition exclusions",
+        nameBn: "ডেল্টা লাইফ ইনস্যুরেন্স — পলিসি শর্তাবলী ও পূর্ববর্তী অসুস্থতা সংক্রান্ত ছাড়",
+        url: "https://www.deltalife.org/assets/userfiles/OMP_Terms_and_Conditions_v9.pdf",
+      },
+      {
+        name: "Green Delta Insurance — Overseas Mediclaim Policy wording and coverage limitations",
+        nameBn: "গ্রীন ডেল্টা ইনস্যুরেন্স — ওভারসিজ মেডিক্লেইম পলিসি ও কভারেজ সীমাবদ্ধতা",
+        url: "https://green-delta.com/wp-content/uploads/2024/03/BH-Policy-Wording_-Including-19-Covid-Cover-2.pdf",
+      },
+      {
+        name: "Visit Saudi — Official Stopover Transit Visa insurance terms",
+        nameBn: "ভিজিট সৌদি — অফিশিয়াল স্টপওভার ট্রানজিট ভিসা স্বাস্থ্যবীমা শর্ত",
+        url: "https://www.visitsaudi.com/en/campaigns/saudi-stopover",
+      },
     ],
-    affiliateCTA: { provider: "airalo", headline: "Download Your Airalo eSIM in 3 Minutes", body: "Install your destination eSIM before leaving Dhaka so your WhatsApp, Uber/Grab, and Nusuk QR codes work the moment you land." }
+    internalLinks: [
+      { text: "How to Use Nusuk App in Makkah & Madinah (Rawdah Permit Guide)", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "Passport Dollar Endorsement and Card Activation Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
+      { text: "Europe, UK & USA Sightseeing and City Passes Guide", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
+      { text: "Travel Tools Hub: Currency & Preparation Tools", path: "/tools" },
+    ],
+    affiliateCTA: {
+      provider: "airalo",
+      headline: "Browse Airalo Travel eSIM Plans for Your Destination",
+      body: "Install your eSIM over Wi-Fi before flying from Dhaka so you can connect to a supported mobile network when you land abroad.",
+    },
   },
   {
     id: "blog-38",
@@ -2901,20 +2972,92 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-40",
     slug: "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
-    title: "Flight Delay, Cancellation & Lost Baggage Compensation for Bangladeshi Flyers (2026): Claim Up to €600 (BDT 78,000)",
-    summary: "Every year, thousands of Bangladeshi passengers endure 4-to-12 hour flight delays, sudden cancellations, missed transit connections in the Gulf, or delayed/damaged Umrah suitcases without receiving a single Taka beyond a meal voucher. Yet under international aviation laws—including European Regulation EC 261/2004, UK 261, Saudi GACA Passenger Rights, Turkish SHY-PASS, and the Montreal Convention—Bangladeshi passport holders are legally entitled to between €250 and €600 (BDT 32,500 to BDT 78,000) per passenger in cash compensation! Here is how to verify eligibility and file a no-win, no-fee claim via AirHelp.",
+    title: "Flight Delay, Cancellation & Baggage Compensation Guide for Bangladeshi Flyers (2026)",
+    summary: "Understand your legal rights when international flights are delayed, cancelled or arrive without luggage. Review EC 261/UK 261 rules, Turkish SHY-PASS, Saudi GACA passenger regulations, Montreal Convention limits (1,519 SDR) and how to file directly or via AirHelp.",
     category: "Cheap Flight Tips",
     date: "September 27, 2026",
+    updatedAt: "2026-10-16",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
-    internalLinks: [
-      { text: "Check Flight Compensation & AirHelp Promo Code in Travel Tools", path: "/tools?tab=airhelp" },
-      { text: "Top Airlines Operating from Dhaka: Baggage & Service Comparison", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
-      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "Best Travel eSIM & Schengen Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
-      { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
+    references: [
+      {
+        name: "EUR-Lex — Regulation (EC) No 261/2004 (Air passenger rights and compensation)",
+        nameBn: "EUR-Lex — রেগুলেশন (EC) No 261/2004 (বিমানযাত্রী অধিকার ও ক্ষতিপূরণ)",
+        url: "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32004R0261",
+      },
+      {
+        name: "European Union (Your Europe) — Air passenger rights and delay assistance rules",
+        nameBn: "ইউরোপীয় ইউনিয়ন (Your Europe) — বিমানযাত্রী অধিকার ও ফ্লাইট বিলম্ব সহায়তা নিয়ম",
+        url: "https://europa.eu/youreurope/citizens/travel/passenger-rights/air/index_en.htm",
+      },
+      {
+        name: "UK Civil Aviation Authority (CAA) — UK261 route applicability and scope",
+        nameBn: "যুক্তরাজ্য সিভিল এভিয়েশন অথরিটি (CAA) — UK261 রুট ও আইনি পরিধি",
+        url: "https://www.caa.co.uk/media/jn3npj1h/uk-261-annex-1.pdf",
+      },
+      {
+        name: "UK Civil Aviation Authority (CAA) — Flight delays: passenger care and compensation rates",
+        nameBn: "যুক্তরাজ্য সিভিল এভিয়েশন অথরিটি (CAA) — ফ্লাইট বিলম্ব: যাত্রী সহায়তা ও ক্ষতিপূরণের হার",
+        url: "https://www.caa.co.uk/air-passengers/travel-problems-and-rights/flight-delays-and-cancellations/delays/",
+      },
+      {
+        name: "UK Legislation — Regulation (EC) No 261/2004 (as incorporated into UK law), Article 7",
+        nameBn: "যুক্তরাজ্য আইন — রেগুলেশন (EC) No 261/2004 (যুক্তরাজ্যের আইনে অন্তর্ভুক্ত), আর্টিকেল ৭",
+        url: "https://www.legislation.gov.uk/eur/2004/261/article/7",
+      },
+      {
+        name: "UK Civil Aviation Authority (CAA) — Flight cancellations, notice periods and refunds",
+        nameBn: "যুক্তরাজ্য সিভিল এভিয়েশন অথরিটি (CAA) — ফ্লাইট বাতিল, নোটিশের সময়সীমা ও রিফান্ড",
+        url: "https://www.caa.co.uk/air-passengers/travel-problems-and-rights/flight-delays-and-cancellations/cancellations/",
+      },
+      {
+        name: "UK Civil Aviation Authority (CAA) — Claiming compensation directly from airlines",
+        nameBn: "যুক্তরাজ্য সিভিল এভিয়েশন অথরিটি (CAA) — সরাসরি এয়ারলাইন্সে ক্ষতিপূরণ দাবি নির্দেশিকা",
+        url: "https://www.caa.co.uk/air-passengers/travel-problems-and-rights/travel-complaints/making-a-claim/claiming-for-costs-and-compensation/",
+      },
+      {
+        name: "EUR-Lex — The Montreal Convention (Convention for the Unification of Certain Rules for International Carriage by Air)",
+        nameBn: "EUR-Lex — মন্ট্রিল কনভেনশন (আন্তর্জাতিক বিমান পরিবহনের অভিন্ন নীতিমালা চুক্তি)",
+        url: "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:22001A0718(01)",
+      },
+      {
+        name: "International Civil Aviation Organization (ICAO) — Revised 2024 liability limits for baggage and delay",
+        nameBn: "আন্তর্জাতিক বেসামরিক বিমান চলাচল সংস্থা (ICAO) — ২০২৪ সংশোধিত লাগেজ ও বিলম্ব দায়সীমা",
+        url: "https://www.icao.int/news/international-air-travel-liability-limits-set-increase-enhancing-customer-compensation-0",
+      },
+      {
+        name: "International Civil Aviation Organization (ICAO) — List of Parties to the Montreal Convention 1999",
+        nameBn: "আন্তর্জাতিক বেসামরিক বিমান চলাচল সংস্থা (ICAO) — ১৯৯৯ মন্ট্রিল কনভেনশনের সদস্য রাষ্ট্রের তালিকা",
+        url: "https://www.icao.int/sites/default/files/secretariat/legal/CurrentListofParties/Mtl99_EN.pdf",
+      },
+      {
+        name: "Directorate General of Civil Aviation, Turkey (SHGM) — SHY-YOLCU Passenger Rights Regulation",
+        nameBn: "তুরস্ক বেসামরিক বিমান চলাচল মহাপরিচালক (SHGM) — SHY-YOLCU যাত্রী অধিকার নীতিমালা",
+        url: "https://web.shgm.gov.tr/doc4/shy-yolcu.pdf",
+      },
+      {
+        name: "AirHelp — Service Terms and no-win, no-fee claims processing conditions",
+        nameBn: "AirHelp — সেবা শর্তাবলী ও নো-উইন নো-ফি ক্লেইম প্রক্রিয়াকরণ নীতিমালা",
+        url: "https://www.airhelp.com/en/terms/",
+      },
+      {
+        name: "General Authority of Civil Aviation, Saudi Arabia (GACA) — Passenger Rights Protection portal",
+        nameBn: "সৌদি জেনারেল অথরিটি অব সিভিল এভিয়েশন (GACA) — যাত্রী অধিকার সুরক্ষা পোর্টাল",
+        url: "https://gaca.gov.sa/en/",
+      },
     ],
-    affiliateCTA: { provider: "airhelp", headline: "Had a Delayed Flight or Lost Bag in the Last 3 Years? Claim Up to €600", body: "Check your flight eligibility for free in 2 minutes with AirHelp (Use Promo Code AHTPO11 for 11% OFF AirHelp+ Smart & Pro)." }
+    internalLinks: [
+      { text: "AirHelp Flight Compensation & Promo Code in Travel Tools", path: "/tools?tab=airhelp" },
+      { text: "Best Airlines Flying from Dhaka Compared (Baggage Rules)", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
+      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "Best Travel eSIM and Schengen Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
+      { text: "Global Flight Search and Live Inventory", path: "/flights" },
+    ],
+    affiliateCTA: {
+      provider: "airhelp",
+      headline: "Check Your Flight Disruption or Baggage Compensation Eligibility",
+      body: "Test your flight details free on AirHelp to check statutory compensation rights (Use code AHTPO11 for 11% off AirHelp+ protection).",
+    },
   },
   {
     id: "blog-41",

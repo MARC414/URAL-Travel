@@ -55,6 +55,14 @@ const BLOG_FAQ_CONFIGS: Record<
     en: /^\s*6\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৬\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
+  "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": {
+    en: /^\s*6\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৬\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
+  "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp": {
+    en: /^\s*3\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৩\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
 };
 
 function isNumberedHeading(line: string): boolean {
