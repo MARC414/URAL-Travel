@@ -35,13 +35,14 @@ assert.equal(getPostsDueForPublishing(dueFixtures, nowAtPublish).length, 1);
 assert.equal(getPostsDueForPublishing(dueFixtures, nowAtPublish, true).length, 2);
 
 const repoPosts = loadScheduledBlogPosts();
-assert.equal(repoPosts.length, 1, "the existing Cox’s Bazar article should be retained as a repo draft");
-const coxsBazarDraft = repoPosts[0];
-assert.equal(coxsBazarDraft.status, "draft");
-assert.equal(coxsBazarDraft.publishDate, undefined);
-assert.ok(coxsBazarDraft.englishBody.includes("no confirmed scheduled passenger service"));
-assert.ok(coxsBazarDraft.bengaliBody.includes("নির্ধারিত যাত্রীবাহী ফ্লাইটের নিশ্চিত সময়সূচি পাওয়া যায়নি"));
-assert.equal(isPostIncludedInBuild(coxsBazarDraft, nowAtPublish), false);
-assert.equal(isPostIncludedInBuild(coxsBazarDraft, nowAtPublish, true), true);
+assert.equal(repoPosts.length, 1, "the existing Cox’s Bazar article should be retained in content/blog");
+const coxsBazarPost = repoPosts[0];
+assert.equal(coxsBazarPost.status, "scheduled");
+assert.equal(coxsBazarPost.publishDate, "2026-10-16");
+assert.ok(coxsBazarPost.englishBody.includes("no confirmed scheduled passenger service"));
+assert.ok(coxsBazarPost.bengaliBody.includes("নির্ধারিত যাত্রীবাহী ফ্লাইটের নিশ্চিত সময়সূচি পাওয়া যায়নি"));
+const nowOct16AtPublish = new Date("2026-10-16T03:00:00.000Z"); // 09:00:00 on Oct 16 in Dhaka
+assert.equal(isPostIncludedInBuild(coxsBazarPost, nowOct16AtPublish), true);
+assert.equal(isPostIncludedInBuild(coxsBazarPost, nowAtPublish), false);
 
-console.log("Scheduled blog parser, Dhaka 9 AM date gates, and current bilingual draft all pass.");
+console.log("Scheduled blog parser, Dhaka 9 AM date gates, and current scheduled post all pass.");

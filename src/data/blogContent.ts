@@ -395,29 +395,39 @@ During the 5 core days of Hajj (8 to 13 Dhul Hijjah), your comfort depends on yo
 
 5. MANDATORY ASHOKNA HAJJ CAMP & SAUDI VISA BIO STEPS
 All Bangladeshi Hajj pilgrims must complete their 10-fingerprint biometrics on the official Saudi Visa Bio App, obtain their Meningitis (ACWY-135) vaccination (conjugate = 5 years validity; polysaccharide = 3 years; take at least 10 days before departure) and are recommended to get seasonal Influenza vaccination at designated Civil Surgeon / Government Hospital centers. COVID-19 vaccination is **not mandatory** but may be **selectively advised** for those aged 65+, pregnant, or immunocompromised — verify current Saudi MOH requirements. Collect your Nusuk Hajj Smart Card—which is mandatory to board the Mashair train and enter the Haram courtyard during Hajj.`,
-  "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": `For millions of Bangladeshi children, taking elderly parents (Amma and Abba) to perform Umrah and pray inside Masjid an-Nabawi is the most rewarding trip of a lifetime. However, a single Umrah (Tawaf + Sa'i + walking to and from the hotel) involves 5 to 8 kilometers of walking on hard marble floors. With smart preparation, you can make your parents' journey completely pain-free.
+  "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": `Taking aging parents to Makkah and Madinah for Umrah is one of the most cherished dreams for Bangladeshi families. However, the physical reality of Umrah involves several kilometers of walking across vast marble plazas, navigating temperature shifts between intense outdoor heat and cooled prayer halls, and managing joint strain. With proper advance logistics, caregiver preparation, and knowledge of official accessibility services, you can protect your parents' dignity and physical health. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidelines, General Authority for the Care of the Two Holy Mosques accessibility services, and international airline special service request (SSR) regulations.
 
-1. STEP 1: BOOK FREE AIRPORT WHEELCHAIR ASSISTANCE (WCHR) FROM DHAKA
-Never let elderly parents stand in 90-minute check-in and immigration queues at Hazrat Shahjalal International Airport (DAC) or Jeddah Terminal 1:
-- Requesting WCHR on Biman, Saudia & Gulf Carriers: At least 48 hours before departure, log into "Manage Booking" on your airline's website or ask our BDT Booking Desk to attach the SSR "WCHR" (Wheelchair for Ramp/Long Distance) code to your parents' tickets. This service is 100% FREE on all airlines.
-- Should You Bring a Folding Wheelchair from Dhaka? YES! Buying a lightweight foldable wheelchair in Dhaka (from BDT 7,500 – BDT 11,500 at Shahbagh/BMA Market) and checking it in for free on the flight is the single smartest decision. Airlines carry medical wheelchairs free of charge outside your baggage limit, and you can push your parents straight from the hotel elevator into the Haram courtyard every prayer time!
+1. Airline Wheelchair Assistance (WCHR / WCHS) and Airport Transit
+Never rely on finding an unreserved wheelchair at the airport on your departure day:
+- **Requesting Special Service Codes in Advance:** Airlines designate mobility assistance under standardized IATA Special Service Request (SSR) codes. The most common is **WCHR** (Wheelchair for Ramp/Distance, for passengers who can climb aircraft stairs and walk to their seat but cannot walk long concourse distances) and **WCHS** (Wheelchair for Steps, for passengers who cannot ascend or descend aircraft stairs but can walk inside the cabin). Add this request through your airline's official website manage-booking portal or issuing travel desk at least 48 hours before departure [1][2]. The service is provided without an additional airline fee across major scheduled carriers departing Hazrat Shahjalal International Airport (DAC) [1].
+- **Bringing a Personal Foldable Wheelchair:** Airlines transport personal manual wheelchairs free of charge outside your standard checked luggage allowance [1]. You can use your own wheelchair through check-in and security up to the boarding gate, where ground staff will gate-check it into the aircraft hold and return it to you at the aircraft door upon arrival in Jeddah (JED) or Madinah (MED). A lightweight folding wheelchair ensures seamless transport from your hotel room straight to the Haram courtyards for every prayer.
 
-2. STEP 2: ELECTRIC SCOOTERS VS. PUSH WHEELCHAIRS FOR TAWAF & SA'I
-Inside Masjid al-Haram in Makkah, you have three official options for performing Tawaf and Sa'i with senior parents:
-- Option A — Push Your Own Foldable Wheelchair (100% Free): If you bring your own foldable wheelchair (or borrow a free green Haram wheelchair at the outer plazas with a refundable ID deposit), family members can push parents on the designated Mezzanine / First Floor Wheelchair Mataf Bridge and the dedicated wheelchair lane between Safa and Marwah at zero cost.
-- Option B — Official Roof-Level Electric Mobility Scooters (Tanaqol / Nusuk): Located on the Mezzanine/Roof level (accessible via King Abdulaziz Gate escalators or Ajyad Bridge elevators). Single-seat and two-seat electric golf scooters can be rented easily:
-  • Tawaf Only: SAR 57.50 (~BDT 1,900)
-  • Sa'i Only: SAR 57.50 (~BDT 1,900)
-  • Full Umrah (Tawaf + Sa'i Combined): SAR 115 (~BDT 3,800) for a 1-seater or SAR 230 for a 2-seater (where you sit beside your parent and drive with a simple lever—no strength required!).
-- Option C — Official Licensed Wheelchair Pushers: Only hire pushers wearing official numbered vests inside the Haram (approx. SAR 150 – 250 for full Umrah). Avoid unlicensed street pushers outside the gates who may abandon the wheelchair mid-crowd.
+2. Mobility inside Masjid al-Haram: Wheelchairs, Electric Scooters & Tanaqol
+Masjid al-Haram provides dedicated multi-level facilities for pilgrims requiring mobility assistance during Tawaf and Sa'i:
+- **Personal & Manual Push Wheelchairs:** Family members pushing a personal wheelchair can access dedicated wheelchair corridors on the upper levels (First Floor Wheelchair Mataf track and the designated Sa'i wheelchair lanes) [3]. This keeps senior pilgrims away from the dense pedestrian compression of the ground-level Mataf.
+- **Official Electric Mobility Scooters (Mezzanine Level):** The General Authority provides official electric mobility scooters operating on a dedicated mezzanine circuit accessible via elevators and designated ramps (such as King Abdulaziz Gate and Ajyad Bridge entries) [3]. Both single-seat and two-seat electric scooters are available, enabling an adult child to accompany an elderly parent and steer the scooter via intuitive hand controls. Rental rates are set by the operating authority and displayed at the official dispatch counters; confirm live fees and book slots via the official Nusuk/Tanaqol mobile platforms before peak hours [2][3].
+- **Licensed Wheelchair Attendants:** If family members cannot push a manual wheelchair due to physical exhaustion, only engage official licensed attendants wearing serialized, government-issued vests inside the mosque [3]. Never contract unofficial individuals outside the mosque gates.
 
-3. STEP 3: FLAT-STREET HOTEL ZONES WITH ZERO HILLS (CRITICAL FOR BAD KNEES)
-- In Makkah: Book Jabal Omar (Conrad, Hilton Suites, Hyatt Regency, Jabal Omar Marriott), Abraj Al Bait Clock Tower (Fairmont, Swissôtel Al Maqam—which has direct elevator access to the Haram courtyard!), or the first 300 meters of Ibrahim Al Khalil Road. Avoid hillside hotels in Upper Ajyad or Jabal Kaaba where even a 400-meter walk feels like climbing a 5-story staircase.
-- In Madinah: Book Markazia North (Dar Al Taqwa, Anwar Al Madinah Mövenpick, Emaar Royal, or Taiba Front) just 100–250 meters from Ladies' Gates 25–29 so elderly mothers have a flat, shaded 3-minute walk.
+3. Accommodation Logistics: Flat-Street Access and Avoiding Elevation
+Choosing the right hotel location is the single most critical factor in preventing senior knee strain and exhaustion:
+- **Prioritize Flat, Zero-Incline Corridors:** In Makkah, look for properties situated along flat, direct access routes such as Jabal Omar, the lower section of Ibrahim Al-Khalil Road, or the Clock Tower complex with direct elevator connectivity to the western and southern plaza levels. Strictly avoid hotels located on steep hillside gradients (such as elevated sections of Upper Ajyad or hilly roads in Jabal Kaaba), where a nominal 400-meter walk involves severe cardiovascular and joint exertion.
+- **Madinah Proximity to Senior Entrances:** In Madinah, the surrounding plaza of Masjid an-Nabawi is level and paved. However, because women's prayer sectors and Rawdah assembly points are concentrated on the northern side, accommodations located in Markazia North (Northern Central Area) eliminate exhausting perimeter walks for elderly mothers [3]. Always confirm with the property beforehand whether their entrance features step-free ramp access and functioning elevator banks adequate for wheelchairs.
 
-4. STEP 4: MEDICAL & PRESCRIPTION CHECKLIST FROM BANGLADESH
-- Carry a 15-day supply of all regular blood pressure, diabetes (including insulin cooling pouches in cabin baggage), gastric, and heart medications in their original strips, accompanied by a printed English doctor's prescription from Bangladesh.
-- Pack ORS (Oral Rehydration Salts), unscented Vaseline/ointment (for chafing during Ihram), soft orthopedic velcro sandals, and a light shawl—because while outside temperatures in Makkah reach 38°C–42°C, the air conditioning inside Masjid al-Haram and the Haramain Bullet Train is kept at a chilly 20°C!`,
+4. Medical Preparation, Prescription Rules & Heat Care
+Managing chronic conditions during travel requires strict medication discipline:
+- **Prescription Carry Rules:** Pack a minimum 20-day supply of all maintenance medications (for hypertension, diabetes, cardiac conditions, or arthritis) in their original pharmaceutical packaging inside carry-on luggage. Carry a signed English medical summary and prescription from a registered physician in Bangladesh detailing the generic names and dosages to present at airport security or customs if inspected [1].
+- **Insulin & Cold-Chain Storage:** If an elderly parent uses insulin, carry insulin pens in certified cooling travel pouches or insulated vacuum flasks with chilled gel packs. Avoid putting insulin in checked baggage where aircraft hold temperatures risk freezing the medication. Confirm that your hotel room includes a functioning in-room mini-fridge for insulin storage upon arrival.
+- **Temperature & Hydration Management:** While ambient outdoor temperatures in Makkah can be very warm, air conditioning inside Masjid al-Haram, hotel lobbies, and the Haramain High-Speed Train is kept at cool temperatures. Pack lightweight cardigans or shawls, orthopedic supportive footwear, oral rehydration salts (ORS), and unperfumed skin lubricants to prevent chafing during Ihram.
+
+5. Frequently Asked Questions
+How do I book an airline wheelchair for elderly parents from Dhaka?
+Contact your operating airline or add a Special Service Request (SSR code WCHR or WCHS) in your online booking management portal at least 48 hours prior to scheduled departure [1]. The service provides wheelchair transit from DAC check-in through departure gates and upon arrival at Jeddah or Madinah [1].
+Can we bring our own wheelchair to Makkah and Madinah?
+Yes. Airlines carry personal manual folding wheelchairs free of charge in addition to your ticketed baggage allowance [1]. You can push the wheelchair through airport concourses up to the boarding gate, and use it freely throughout your hotel stay and the Haram courtyards [3].
+Are electric scooters available for Tawaf and Sa'i in Makkah?
+Yes. Official electric mobility scooters are operated on the dedicated Mezzanine level of Masjid al-Haram [3]. Both single-passenger and double-passenger scooters are available; book and verify operating procedures via the official Nusuk or Tanaqol application [2][3].
+What medical documents should seniors carry from Bangladesh?
+Bring original medication packaging in carry-on bags accompanied by an English prescription or medical letter signed by a registered physician stating the patient's chronic diagnoses and prescribed generic medications [1].`,
   "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": `For Bangladeshi expatriates (NRBs), international students, business travelers and families flying between Dhaka and the UK, USA, Canada, Europe, Turkey or the Gulf, the 96-Hour Saudi Stopover Visa can turn a long connection into a 4-day Umrah trip without a separate visa application. This guide was re-checked against the official Visit Saudi and Saudia stopover pages on 15 October 2026. Two things are not published anywhere by the Ministry or the carriers: a fixed stopover fee and a universal free-hotel benefit. The visa, insurance and service charges you see are line items inside your airline checkout, and they change. Where a current official figure does not exist, this page says so instead of inventing one. If you are weighing a stopover against a separate trip, our main DIY guide carries one dated planning estimate — BDT 1,16,000–1,32,000 per person for 10 days, family of four sharing, checked 14 October 2026 and not a live quote — rather than a headline saving.
 
 1. WHAT THE 96-HOUR SAUDI STOPOVER VISA ACTUALLY OFFERS
@@ -514,30 +524,40 @@ Where do I find my 10-digit Saudi Visa Number?
 Open your approved PDF Umrah e-Visa and read the 10-digit number near the top right (usually starting with 60 or 61), not the application/MOFA reference number.
 
 `,
-  "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": `Whether you are a Bangladeshi mother traveling with your family, a daughter accompanying your elderly mother, or a female doctor/professional planning Umrah from Dhaka, knowing the official Saudi women's regulations and Haram gate layouts makes your spiritual journey safe, dignified, and stress-free.
+  "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": `Whether you are a Bangladeshi mother traveling with your family, a daughter accompanying your elderly mother, or a woman planning Umrah independently from Dhaka, knowing the official Saudi visa policies, Haram boundary layouts, and verified logistics makes your spiritual journey calm, safe, and stress-free. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah directives, the Nusuk portal, and the General Presidency for the Affairs of the Two Holy Mosques.
 
-1. WHAT IS THE OFFICIAL SAUDI VISA RULE ON MAHRAM FOR WOMEN IN 2026?
-Let us separate the **Official Saudi Government Visa Portal Rule** from **Traditional Fiqh Travel Etiquette**:
-- **Official Saudi Ministry of Hajj & Umrah Visa Rule (haj.gov.sa & nusuk.sa):** Since the Kingdom's regulatory update, the Saudi Ministry of Hajj and Umrah no longer requires a male guardian (Mahram) to be linked in the electronic visa system for women of any age applying for an **Umrah e-Visa**, **96-Hour Stopover Visa**, or **Tourist e-Visa**.
-- **Practical Dhaka Immigration & Family Group Advice:** While the Saudi e-Visa system issues visas to solo women or mother-daughter pairs without a male Mahram, Bangladeshi women traveling without a husband, father, son, or brother should carry their **NOC / Leave Letter**, **Marriage Certificate or Birth Certificate (NID)**, return ticket, and confirmed hotel voucher—or travel alongside trusted female family companions for smooth Dhaka Airport (DAC) emigration clearance.
+1. Official Saudi Visa Rules on Mahram for Women
+Understanding the distinction between official Saudi immigration law and personal religious jurisprudence (fiqh) is essential when planning travel:
+- **Ministry of Hajj and Umrah Visa Regulations:** The Saudi Ministry of Hajj and Umrah (haj.gov.sa) and the official Nusuk portal (nusuk.sa) permit women of any age to apply for an Umrah e-Visa, 96-Hour Stopover Visa, or Tourist eVisa without a requirement to link an accompanying male guardian (Mahram) in the electronic visa portal [1][2]. Electronic visas are issued directly to individual female applicants who meet standard passport and documentation requirements [1][2].
+- **Religious Rulings and Fiqh Boundaries:** While civil entry permits no longer require a recorded male guardian on the visa file, classical and contemporary Islamic schools of jurisprudence hold differing perspectives on solo travel without a Mahram or travel within a trustworthy female companion group. Travelers should consult their trusted religious scholars to align their personal journey with their school of jurisprudence, separate from civil visa issuance rules.
+- **Dhaka Airport Departure and Transit Preparation:** When traveling independently or in female-only groups, ensure complete documentation is on hand for airline check-in and immigration review at Hazrat Shahjalal International Airport (DAC). Carry printed hotel booking confirmations in Makkah and Madinah, round-trip flight itineraries with confirmed return bookings, personal identification (NID/Passport copies), and an official employment Leave Certificate / No-Objection Certificate (NOC) if employed in government or corporate sectors.
 
-2. WHICH GATES AT MASJID AN-NABAWI (MADINAH) ARE FOR WOMEN?
-One of the biggest mistakes Bangladeshi families make in Madinah is booking a hotel on the Southern side (near Baqi or Bilal Mosque) when traveling with women:
-Rule 1: Book Near Northern Ladies' Gates 25 to 29 (Markazia North):
-- The largest, most comfortable **Women's Prayer Halls** inside Masjid an-Nabawi are accessed through **Northern Gates 23, 24, 25, 28, and 29** (directly opposite Dar Al Taqwa, Anwar Al Madinah Mövenpick, and Emaar Royal hotels).
-Rule 2: Women's Rawdah Shareef (Riyazul Jannah) Entry Point & Timings:
-- Women enter Rawdah Shareef during dedicated female time windows (typically **after Fajr sunrise until before Dhuhr**, and **after Isha prayer until midnight**—exact slot shown on your Nusuk App permit).
-- The official assembly and QR-scanning queue for women's Rawdah permits is located outside **Gate 25 and Gate 32 (Uthman Ibn Affan Gate)** on the North-Eastern courtyard.
+2. Masjid an-Nabawi in Madinah: Female Prayer Sections and Rawdah Access
+Madinah's Masjid an-Nabawi features distinct sector arrangements and separate scheduling windows for female worshippers:
+- **Ladies' Prayer Halls and Northern Courtyard:** The primary, dedicated internal prayer areas and shaded external courtyard sections for women are located along the northern and north-eastern side of the Prophet's Mosque, primarily around Gates 21 through 26 and eastern entrances [3]. Selecting accommodations situated in Markazia North (Northern Central Area) allows female pilgrims and elderly family members direct, flat, step-free access into women's prayer spaces without navigating long perimeter walks around the exterior plaza [3].
+- **Women's Rawdah Shareef (Riyad al-Jannah) Scheduling:** Access to the sacred Rawdah is strictly controlled through mandatory advance appointment slots booked via the official Nusuk mobile app [2]. The General Presidency schedules dedicated women's Rawdah visitation periods, typically divided into a morning session (from after Fajr until before Dhuhr prayer) and an evening session (after Isha prayer until midnight) [2][3].
+- **Verification and Crowd Entry Protocol:** Entry gates for female Rawdah appointment holders are managed on-site by female security personnel and crowd marshals. Assembly queues typically organize through the designated northern courtyard checkpoints. Always confirm the exact reporting gate and time window displayed directly on your confirmed active Nusuk digital permit before arriving at the courtyard [2][3].
 
-3. WHAT IS THE PROPER IHRAM DRESS & FOOTWEAR FOR BANGLADESHI WOMEN?
-Unlike men (who wear two unstitched white towels), women wear normal stitched, loose, modest Islamic clothing for Ihram:
-- **Best Ihram Outfit from Dhaka:** Wear a breathable, loose **100% cotton or soft linen Abaya / Borka or loose Salwar-Kameez with a wide Khimar/Hijab** in black, navy, dark beige, or white. Avoid heavy synthetic polyester fabrics that trap heat during Tawaf.
-- **Face Veil (Niqab) & Gloves Rule in Ihram:** During the state of Ihram, a woman's face should not have a tied cloth (Niqab) pressed directly against the skin, nor should she wear stitched hand gloves. Women who observe purdah simply wear a **baseball-cap visor under their Hijab/Khimar** so a loose veil hangs forward without touching the face.
-- **Footwear Tip:** Women are permitted to wear completely covered shoes, slip-on walking sneakers, or thick gripping socks on the cool marble floors of Masjid al-Haram.
+3. Ihram Guidelines and Dress Regulations for Women
+Unlike male pilgrims who must wear two unstitched white towels (Izar and Rida), the rules of Ihram for female pilgrims emphasize modesty, loose coverage, and simplicity without restrictive garment mandates:
+- **Permitted Attire:** Women enter Ihram in ordinary, modest, stitched clothing. The recommended outfit from Bangladesh is a breathable, loose-fitting cotton or linen Abaya, Burkha, or modest Salwar-Kameez paired with a wide, opaque Hijab or Khimar. Neutral colors (black, navy, dark gray, or white) are customary; lightweight natural fabrics help maintain comfort during crowded Tawaf in warm temperatures.
+- **Face Covering and Hand Rules in Ihram:** Under authentic Sunnah guidelines, a woman in the state of Ihram should not wear a fitted, tied face veil (Niqab) pressed against the facial skin, nor should she wear stitched hand gloves [1]. Women who observe full purdah may loosely drape an open scarf or sheer fabric down over the face when passing men, or wear a soft visor cap beneath the hijab to allow the draped fabric to hang freely without directly binding against facial skin.
+- **Footwear and Socks:** Women in Ihram are permitted to wear normal stitched socks, slip-on walking shoes, supportive athletic sneakers, or padded prayer footwear to cushion joints on the hard marble tiles of Masjid al-Haram during Tawaf and Sa'i.
 
-4. HOW SHOULD WOMEN PERFORM TAQSIR (TRIMMING HAIR) TO EXIT IHRAM?
-- Never cut your hair openly in the Marwah marble gallery in front of crowds!
-- After completing the 7th lap of Sa'i at Marwah, either gather the tips of your hair under your Hijab in a private corner of the women's prayer section, OR walk back to your hotel room with your family (remaining in Ihram rules until you reach the room) and trim **one fingertip's length (approx. 1 inch / 2 cm)** from the ends of your hair using small nail scissors packed in your checked suitcase.`,
+4. Performing Taqsir (Hair Trimming) to Exit Ihram
+The final rite completing Umrah is Taqsir, which officially releases the pilgrim from the restrictions of Ihram:
+- **Proper Method:** A woman exits Ihram by cutting approximately one fingertip's length (about one inch or 2.5 cm) from the tips of all the strands of her hair.
+- **Privacy and Modesty:** Women must not uncover their heads or cut hair openly in public viewing areas around the crowded Marwah hill where male pilgrims and spectators congregate. Perform Taqsir discreetly in private female prayer alcoves, designated women's restrooms with mirrors, or return directly to your private hotel room while remaining mindful of Ihram prohibitions until the trimming is finalized.
+
+5. Frequently Asked Questions
+Can a Bangladeshi woman perform Umrah without a Mahram in 2026?
+Under official Saudi Ministry of Hajj and Umrah regulations, women of any age may apply for and receive an Umrah e-Visa, Stopover Visa, or Tourist eVisa without a registered male guardian (Mahram) [1][2]. However, whether one chooses to travel solo or with a trusted group is a religious matter governed by individual Islamic schools of jurisprudence; consult your trusted religious scholar for personal guidance.
+Which hotel area in Madinah is most convenient for women?
+Markazia North (the Northern Central Area) is the most practical location for female travelers and families. The dedicated women's prayer halls and Nusuk Rawdah assembly areas are situated on the northern side of Masjid an-Nabawi, allowing quick, step-free access into the ladies' courtyards without extensive detours around the perimeter [3].
+How do women book Rawdah Shareef permits in Nusuk?
+Log into the official Nusuk mobile application, select the Rawdah Shareef permit option for women, and choose an available calendar time slot during designated morning or evening female windows [2]. Arrive at the assigned courtyard assembly gate with the active QR code loaded on your mobile screen [2].
+Are gloves or standard niqabs allowed during Ihram?
+No. Prophetic instructions prohibit wearing tailored hand gloves and tight, tied niqabs while in the sacred state of Ihram [1]. Women wishing to observe face concealment may loosely drape an unstitched headscarf over the front of the face without pressing or binding it firmly to the skin.`,
   "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": `Airfare accounts for nearly 55% of a Bangladeshi pilgrim's total DIY Umrah budget. Choosing the right routing and understanding airline baggage and Zamzam policies under **Saudi General Authority of Civil Aviation (GACA - gaca.gov.sa)** rules can save your family both BDT 15,000+ per ticket and 7 hours of unnecessary highway travel.
 
 1. WHY SHOULD YOU ALWAYS BOOK AN "OPEN-JAW" (MULTI-CITY) FLIGHT FOR UMRAH?
@@ -587,32 +607,39 @@ According to the **General Authority for the Care of the Affairs of the Grand Mo
 4. PRACTICAL IFTAR, SUHOOR & TARAWEEH SURVIVAL TIPS FOR BANGLADESHI PILGRIMS
 - **Free Haram Iftar Dastarkhwan:** Arrive at least **60 to 75 minutes before Maghrib** to sit along the official Iftar spreads inside the Haram (offering dates, Zamzam, laban/yogurt, Arabic coffee, and bread).
 - **Performing Tawaf Without Heat Exhaustion:** During Ramadan fasting hours, never perform ground-floor Mataf Tawaf between 11:00 AM and 3:30 PM. Perform your Umrah either **right after Isha/Taraweeh (10:30 PM – 2:00 AM)** or **after Fajr prayer (6:00 AM – 8:30 AM)**.`,
-  "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": `According to authentic Islamic jurisprudence and the **Saudi Ministry of Hajj and Umrah (haj.gov.sa)** guidelines, every pilgrim flying to **Jeddah (King Abdulaziz International Airport - JED)** with the intention of performing Umrah or Hajj MUST enter the sacred state of Ihram before the aircraft crosses the designated aerial **Miqat** boundary. Because Jeddah lies inside the Miqat perimeter, you cannot wait until landing at Jeddah Airport to put on your Ihram!
+  "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": `For Bangladeshi pilgrims embarking on Umrah or Hajj, entering the sacred state of Ihram before crossing the designated geographic boundary (Miqat) is an obligatory rite under Islamic jurisprudence and Saudi Ministry of Hajj & Umrah directives. Because King Abdulaziz International Airport (JED) in Jeddah lies inside the perimeter of the Miqats, pilgrims landing in Jeddah cannot postpone their Ihram until reaching the airport terminal. Understanding your flight routing—whether flying non-stop from Dhaka, transiting through Gulf hubs, or landing in Madinah first—determines exactly when and where to put on your Ihram garments and formulate your Niyyah. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidance, GACA flight operation notices, and established Sunnah principles.
 
-1. WHAT IS THE DESIGNATED AIR MIQAT FOR FLIGHTS FROM BANGLADESH TO JEDDAH?
-Depending on the flight path over the Arabian Peninsula or the Red Sea, flights from Dhaka (DAC) or Gulf transit hubs cross one of two official Miqat lines approximately **35 to 50 minutes before landing at Jeddah Airport**:
-- **Qarn al-Manazil (Al-Sayl al-Kabir):** Crossed by flights approaching Jeddah from the East/Central route (including Dhaka direct flights and transit flights via Riyadh, Dammam, Dubai, Sharjah, Doha, Bahrain, and Kuwait).
-- **Yalamlam (As-Sa'diyyah):** Crossed by flights approaching Jeddah from the Southern route (including some flights via Muscat or southern corridors).
+1. Geographic and Aerial Miqat Boundaries for Flights from Bangladesh
+The Prophet Muhammad (peace be upon him) designated specific geographical boundary points around Makkah for entering Ihram:
+- **Qarn al-Manazil (As-Sayl al-Kabir):** The designated Miqat for travelers arriving from the east and central regions. Flights flying direct from Hazrat Shahjalal International Airport (DAC) across central Arabia or transiting via Riyadh, Dammam, Dubai, Sharjah, Doha, Bahrain, or Kuwait typically cross the aerial projection of Qarn al-Manazil approximately 30 to 45 minutes prior to touchdown at Jeddah [1][2].
+- **Yalamlam (As-Sa'diyyah):** The designated Miqat for travelers approaching from the south (Yemen and southern oceanic corridors). Certain flight paths, such as those routing via Muscat or southern Oman airspace, may cross the aerial alignment of Yalamlam prior to descent into Jeddah [1][2].
+- **Dhul Hulayfah (Abyar Ali):** The designated Miqat for residents of Madinah and those departing Madinah towards Makkah. It is located approximately 11 kilometers outside Madinah city center and is used when travelling overland or via the Haramain High-Speed Train towards Makkah [1][3].
 
-2. SCENARIO A: FLYING DIRECT NON-STOP FROM DHAKA TO JEDDAH (BIMAN OR SAUDIA)
-If you are flying non-stop from **Hazrat Shahjalal International Airport (DAC) to Jeddah (JED)** on Biman Bangladesh Airlines or Saudia:
-Step 1: Wear Your Two White Ihram Towels in Dhaka Before Boarding:
-- Do NOT try to change into unstitched Ihram towels inside a tiny airplane lavatory! Perform Ghusl (bath) at home in Dhaka, or change into your Ihram garments at the **Ashkona Hajj Camp mosque** or the **Prayer Room inside Dhaka Airport Terminal 1/2** after check-in, and pray 2 Rakah Sunnah of Ihram while your head is still covered.
-Step 2: Wait Until the Pilot's Miqat Announcement to Make Niyyah & Talbiyah:
-- Wearing the white cloth alone does not put you under Ihram restrictions yet. Sit comfortably on the plane.
-- About **45 minutes before landing at Jeddah**, the Biman or Saudia captain will announce in Bangla, Arabic, and English that the aircraft is approaching the **Miqat**. At that moment (or 10 minutes before), uncover your head (for men), make your verbal intention: **"Labbayka Allahumma Umrah"**, and begin reciting the **Talbiyah** aloud.
+2. Scenario A: Direct Non-Stop Flights from Dhaka to Jeddah (Biman or Saudia)
+When flying non-stop from Dhaka (DAC) directly to Jeddah (JED) with the intention of performing Umrah:
+- **Step 1 — Put on Ihram Garments in Dhaka Before Boarding:** Changing into unstitched sheets inside an aircraft lavatory during flight is cramped and physically challenging. It is recommended to perform Ghusl (ritual bath) at home in Dhaka or use the prayer rooms at Dhaka Airport Terminal 1/2 or Ashkona Hajj Camp after check-in. Put on the two unstitched white towels (Izar and Rida) for men or modest attire for women before boarding the flight [1]. Keep footwear accessible.
+- **Step 2 — Wait for the In-Flight Miqat Announcement to Formulate Niyyah:** Putting on the physical Ihram clothing does not initiate the sacred state of Ihram. You remain in your normal state until you verbally state your intention (Niyyah) and begin the Talbiyah. Approximately 30 to 45 minutes before landing at King Abdulaziz International Airport, the flight crew on Biman or Saudia will announce in Bengali, English, and Arabic that the aircraft is approaching the Miqat [1]. At that time, uncover your head (for male pilgrims), make your intention (**"Labbayk Allahumma Umrah"**), and recite the Talbiyah (**"Labbayk Allahumma Labbayk..."**) [1].
 
-3. SCENARIO B: FLYING 1-STOP TRANSIT (DUBAI, SHARJAH, MUSCAT, DOHA, KUWAIT OR BAHRAIN)
-If you are flying Air Arabia (via Sharjah), SalamAir (via Muscat), Gulf Air (via Bahrain), Kuwait Airways, Jazeera Airways, Emirates, or Qatar Airways:
-Step 1: Fly Dhaka -> Transit Airport in Regular Modest Clothes:
-- Keep your clean white Ihram towels, belt, and unscented sandals inside your **7kg Cabin Hand-Carry Backpack** (never pack your Ihram inside your checked-in 23kg suitcase!).
-Step 2: Change into Ihram During Your Layover at the Transit Airport:
-- Sharjah, Dubai, Muscat, Doha, Bahrain, and Kuwait airports all have dedicated **Ablution & Ihram Changing Rooms / Prayer Halls (Musalla)** inside the transit terminal.
-- Change into your Ihram garments during the layover, board the second flight (Transit -> Jeddah), and make your Niyyah + Talbiyah as soon as you board the Jeddah-bound plane or when the Miqat is announced.
+3. Scenario B: One-Stop Connecting Flights via Gulf Transit Hubs
+When flying on connecting flights via Gulf hubs (such as Air Arabia via Sharjah, flydubai or Emirates via Dubai, Qatar Airways via Doha, Gulf Air via Bahrain, SalamAir via Muscat, or Kuwait Airways):
+- **Step 1 — Fly the First Leg in Comfortable Everyday Clothing:** Wear normal modest clothing for the Dhaka to transit hub leg. Keep your clean Ihram sheets, Ihram money belt, and supportive footwear inside your 7 kg carry-on cabin bag; never pack your Ihram essentials in your checked hold baggage [1].
+- **Step 2 — Change into Ihram During Your Airport Layover:** Major transit terminals across Sharjah, Dubai, Doha, Muscat, and Bahrain feature dedicated airport prayer rooms (Musalla) equipped with ablution and changing facilities. Change into your Ihram garments comfortably during your layover before boarding the connecting flight to Jeddah [1].
+- **Step 3 — Formulate Niyyah on the Connecting Flight:** Once airborne on the second leg heading towards Jeddah, formulate your intention and recite Talbiyah when the captain announces the Miqat or roughly 30 minutes before arrival [1][2].
 
-4. SCENARIO C: FLYING DHAKA TO MADINAH (MED) FIRST — NO IHRAM ON THE PLANE!
-- If your outbound ticket lands at **Madinah Airport (MED)** first, you **DO NOT wear Ihram** at Dhaka Airport or on the airplane!
-- You fly to Madinah in normal everyday clothes, spend 3 to 5 peaceful days praying in Masjid an-Nabawi, and on the day you travel from Madinah to Makkah (by Haramain Bullet Train or car), you bathe and wear your Ihram at your Madinah hotel and make Niyyah at **Miqat Dhul Hulayfah (Masjid Abyar Ali)**.`,
+4. Scenario C: Flights Landing in Madinah First (Prince Mohammad Bin Abdulaziz Airport - MED)
+If your itinerary flies from Dhaka into Madinah first, the operational and religious sequence is substantially simplified:
+- **No Ihram Required on the Flight:** Because Madinah lies outside the sacred boundary (Haram) of Makkah, you travel from Dhaka to Madinah in your normal everyday clothing [1]. You do not wear Ihram garments on the plane and you do not make Niyyah during flight descent into MED.
+- **Enter Ihram in Madinah Before Departing to Makkah:** After spending your scheduled days praying in Masjid an-Nabawi, perform Ghusl and put on your Ihram garments at your Madinah hotel on the day you depart for Makkah. If traveling by road, stop at Miqat Dhul Hulayfah (Masjid Abyar Ali) to pray and make Niyyah. If traveling on the Haramain High-Speed Train, formulate your intention and recite Talbiyah as the train departs or passes the Miqat zone outside Madinah [1][3].
+
+5. Frequently Asked Questions
+Can I put on my Ihram after landing at Jeddah Airport?
+No. Jeddah is located within the geographic Miqat boundary [1]. If your intention is to perform Umrah directly, you must enter the state of Ihram before the aircraft passes the aerial Miqat line [1][2]. Crossing the Miqat without Ihram requires either returning to a Miqat or offering a compensatory sacrifice (Dam) under classical jurisprudence.
+When does the flight crew announce the Miqat?
+On direct flights from Dhaka or connecting flights from Gulf airports to Jeddah, operating carriers announce the approach to Miqat Qarn al-Manazil or Yalamlam approximately 30 to 45 minutes before scheduled landing [1].
+Does wearing the Ihram cloth alone place you in the sacred state?
+No. Putting on the physical towels or modest garments does not initiate Ihram restrictions. The sacred state commences when you make the formal intention (Niyyah) in your heart, utter the intention verbally, and begin reciting the Talbiyah [1].
+Do I need to wear Ihram if my flight lands in Madinah?
+No. If your ticket flies from Dhaka directly or via transit to Madinah (MED), you do not wear Ihram on the aircraft [1]. You enter Ihram later from Madinah at Miqat Dhul Hulayfah before travelling onward to Makkah [1][3].`,
   "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": `At the end of your Umrah or Hajj journey, returning smoothly through **Jeddah (JED)** or **Madinah (MED)** departure terminals and clearing **Dhaka Hazrat Shahjalal International Airport (DAC)** customs requires following the official aviation and customs laws of both countries.
 
 1. WHAT ARE THE OFFICIAL GACA RULES FOR CARRYING ZAMZAM WATER FROM JEDDAH OR MADINAH AIRPORT?
@@ -1045,26 +1072,70 @@ When traveling with elderly parents who need fasting blood tests at 7:00 AM, sta
 
 4. HOW TO PAY LARGE HOSPITAL BILLS BEYOND YOUR $18,000 TRAVEL QUOTA
 Under **Bangladesh Bank Foreign Exchange Guidelines (bb.org.bd)**, in addition to your regular **$18,000 annual personal travel quota**, Bangladeshi citizens can release up to **USD $10,000+ under the Medical Treatment Quota** through an Authorized Dealer (AD) bank branch by submitting the hospital's official cost estimate invoice and doctor recommendation!`,
-  "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": `Two small digital purchases made **24 hours before flying from Dhaka (DAC)** prevent 90% of arrival headaches abroad: a **Pre-Installed Travel eSIM** (so your phone has 5G data the second the plane touches the runway) and **International Travel Medical Insurance** (to protect your family against BDT 5,00,000+ overseas hospital emergencies and satisfy embassy visa checklists).
+  "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": `Before departing from Dhaka (DAC), international travelers face two essential digital preparations: arranging dependable mobile connectivity and securing appropriate travel medical insurance. Rather than relying on unverified claims of universal savings or instant activation, evaluate your specific itinerary against network compatibility, bank verification needs and consular visa rules. Checked on 16 October 2026 against provider product documentation, consular checklists and the EU Visa Code.
 
-1. TRAVEL ESIM (AIRALO / YESIM) VS. BANGLADESHI TELCO ROAMING VS. AIRPORT SIM CARDS
-Why have seasoned Bangladeshi flyers switched from physical airport SIM cards to **Airalo and Yesim Travel eSIMs**?
-- **1. Keep Your Bangladeshi SIM Active for Bank 3D-Secure SMS OTPs:**
-  • When you use an **eSIM** on your iPhone, Samsung Galaxy, or Google Pixel, your **physical Grameenphone, Robi, Banglalink, or Airtel SIM stays inside Slot 1** to receive free incoming banking OTP SMS messages from EBL, City Bank, or BRAC—while your **Airalo / Yesim eSIM handles all 4G/5G mobile data**!
-- **2. Zero Airport Queues at Midnight Landings:**
-  • Flights from Dhaka to **Jeddah (JED), Bangkok (BKK), Kuala Lumpur (KUL), and Malé (MLE)** frequently land late at night when airport SIM booths have 45-minute queues or sell overpriced $25–$35 tourist bundles.
-- **3. 2026 Price Comparison for Bangladeshi Travelers:**
-  • **Airalo / Yesim Country eSIM (Saudi Arabia, Thailand, Malaysia, Singapore, UAE):** Starts at **$4.50 to $9.00 USD (~BDT 550 – BDT 1,100)** for 1GB to 5GB (7–30 days).
-  • **Airalo 'Asialink' or 'Menalink' Regional eSIM:** Ideal for **Malaysia + Thailand + Singapore** or **Umrah + Dubai Multi-City trips**—one single eSIM automatically switches networks as you cross borders!
+1. Travel eSIM vs. Home Roaming vs. Local Airport SIM
+Choosing the right mobile connectivity depends on your trip length, destination and whether you must receive security codes on your Bangladeshi phone number.
+- **Travel eSIM (Airalo / Yesim):**
+  A digital SIM downloaded to an unlocked, eSIM-compatible handset [3][4]. It provides local or regional mobile data without physically swapping cards. Best suited for short visits and multi-country trips where you want data immediately upon connecting to a supported overseas network.
+- **Bangladeshi Mobile Roaming:**
+  Activating international roaming on your existing Grameenphone, Robi, Banglalink or Teletalk line. While high-volume mobile data roaming can be costly, keeping your home SIM active on a minimal roaming or SMS profile allows incoming bank OTPs and transaction alerts to arrive [5].
+- **Local Physical Airport SIM:**
+  Purchasing a physical SIM card upon arrival at destination airport kiosks or city shops. Often provides generous local data bundles at competitive domestic prices, but requires waiting in kiosk queues, physical SIM swapping and identity registration.
 
-2. WHEN IS TRAVEL MEDICAL INSURANCE MANDATORY FOR BANGLADESHI PASSPORT HOLDERS?
-Even a minor 24-hour hospital admission for food poisoning, dehydration, or a slip-and-fall in **Dubai, Singapore, Makkah, or Europe** can cost **USD $3,000 to $10,000+ (BDT 3.6 Lakhs to 12 Lakhs)**. Furthermore, travel insurance is legally required or strongly checked for:
-- **1. Schengen Visa Applications (Mandatory €30,000 Minimum Coverage):**
-  • Under **EU Visa Code (Article 15)**, every Bangladeshi applying for a Schengen visa (France, Italy, Germany, Sweden, Spain, Switzerland) at VFS Dhaka must submit a travel medical insurance certificate with at least **€30,000 (~USD $35,000) coverage**, including emergency hospitalization and repatriation, valid across all 29 Schengen states.
-- **2. Thailand e-Visa (thaievisa.go.th), Malaysia & Family Trips (Travel Insurance):**
-  • Purchasing an international travel medical policy gives you an instant English PDF policy accepted by embassies and airlines, covering medical emergencies, lost checked baggage, and flight delays.
-- **3. Saudi Umrah & 96-Hour Stopover Visa:**
-  • Basic emergency coverage is bundled into your official Saudi visa fee, but families traveling with **elderly parents (Age 60+)** should add a supplemental senior medical & baggage policy so flight delays and pre-existing stabilization are covered.`,
+2. What to Check Before Buying an Oman eSIM
+If your travel includes Oman (such as Muscat, Salalah or a regional Gulf stopover), evaluate the destination package carefully rather than assuming global parity.
+- **Network Partner & Coverage:**
+  Airalo’s Oman eSIM currently operates on the Omantel network [1]. Confirm whether your travel destinations within Oman fall within stable coverage areas.
+- **Data-Only vs. Voice Capability:**
+  Most travel eSIMs for Oman are data-only profiles without a local phone number [1][7]. Traditional voice calls and local SMS are not supported; plan to use internet-based messaging apps.
+- **Regional vs. Country Plans:**
+  If visiting multiple Middle Eastern destinations (e.g. Oman and UAE or Saudi Arabia), compare a single-country Oman profile against a regional Middle East & North Africa (MENA) package [6], checking that each stop is explicitly listed on the provider's covered countries table.
+- **Activation & Validity Rules:**
+  Review whether package validity starts immediately upon installation or only when the eSIM connects to a supported local network in Oman [2][7].
+
+3. Preparing Your Phone & Keeping Your Bangladesh Number Active
+Using a travel eSIM alongside your primary Bangladeshi SIM requires deliberate phone configuration.
+Step 1: Verify device compatibility and carrier lock
+Ensure your smartphone supports eSIM technology and is completely carrier-unlocked [3]. Certain regional phone variants do not support eSIM functionality; check manufacturer specifications before purchasing.
+Step 2: Install the eSIM over a stable Wi-Fi connection
+Install your eSIM profile prior to departure using a reliable Wi-Fi network at home or work [2]. Keep the QR code or installation instructions accessible.
+Step 3: Configure Dual-SIM settings for mobile data and voice
+Assign the travel eSIM strictly as your primary line for "Mobile Data". Keep your physical Bangladeshi SIM designated as the line for calls and SMS so you can continue receiving essential 3D-Secure bank OTPs [4][5].
+Step 4: Enable data roaming on the travel eSIM line
+In cellular settings, turn on "Data Roaming" for the travel eSIM profile while keeping data roaming switched off for your Bangladeshi SIM to prevent unexpected background charges.
+
+4. Schengen Visa Travel Insurance Requirements
+For Bangladeshi passport holders applying for a Schengen visa (such as France, Germany, Italy, Spain, Sweden or Switzerland), travel medical insurance is a mandatory legal requirement under European Union regulations.
+- **Article 15 Minimum Coverage (€30,000):**
+  Under Article 15 of the EU Visa Code (Regulation EC No 810/2009), applicants must hold valid travel medical insurance with a minimum coverage limit of €30,000 [8].
+- **Required Inclusions:**
+  The insurance policy must cover emergency medical expenses, urgent hospital treatment, and repatriation for medical reasons or in the event of death [8][9].
+- **Territory & Duration:**
+  The certificate must be valid throughout the entire territory of the Schengen Member States and cover the full duration of the intended stay or first planned visit [8][9].
+- **Consular Verification Checklist:**
+  Consulates and visa processing centers in Dhaka require an official insurance certificate reflecting the applicant name, policy number, exact validity window and €30,000 coverage limit [9]. Certain missions do not accept insurance bundled with credit cards; check your specific embassy checklist before submission.
+
+5. Family Trips, Senior Travelers & Pre-Existing Medical Exclusions
+Travel medical insurance is equally valuable for non-Schengen destinations (such as Southeast Asia or Saudi Arabia), but policy wordings contain critical exclusions that travelers must review before departure.
+- **Pre-Existing Medical Conditions:**
+  Standard travel insurance policies generally exclude pre-existing, chronic or previously diagnosed medical conditions [10][11][12]. Emergency hospitalization resulting from a declared or undeclared pre-existing ailment is often non-payable.
+- **Senior Travelers (Age 60+):**
+  Insurance providers apply specific age limits, medical declarations, premium adjustments or deductibles for senior family members [10][11]. Request written confirmation regarding age eligibility and hospital coverage limits.
+- **Medical Coverage vs. Travel Disruption:**
+  A basic emergency medical policy does not automatically insure against lost checked baggage, flight cancellations or hotel booking losses [11][12]. If you require comprehensive coverage for travel inconvenience, verify that baggage and flight disruption benefits are explicitly scheduled.
+- **Saudi Umrah & Stopover Insurance:**
+  When booking official Saudi Umrah or stopover transit visas, mandatory emergency health insurance is itemized or issued during official visa processing [13]. For extended stays or older dependents, evaluate whether additional personal travel medical coverage is appropriate.
+
+6. Frequently Asked Questions
+Does every smartphone support a travel eSIM?
+No. Your handset must have eSIM hardware and be carrier-unlocked. Certain regional phone models do not include eSIM support; verify your exact model specifications before ordering [3][4].
+Can I receive Bangladeshi bank SMS OTPs on a data eSIM?
+A data-only eSIM cannot receive SMS. However, on a dual-SIM phone, your physical Bangladeshi SIM remains in place to receive incoming SMS OTPs while the eSIM provides data [4][5].
+When does my eSIM validity period start?
+Validity rules depend on the provider and package. Some profiles activate on installation, while most activate only when connecting to a supported partner network at your destination [2][7].
+Is €30,000 travel insurance mandatory for all international travel?
+The €30,000 coverage minimum is legally mandatory for Schengen visa applications under EU Visa Code Article 15 [8]. Other destinations have differing visa conditions or recommend insurance as optional medical protection [10].`,
   "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost": `For Bangladeshi honeymooners, families, and travelers building their **Passport Travel History**, the **Sri Lanka + Maldives 7-Day Combo Tour** is South Asia's ultimate "2-in-1" itinerary. Because **Colombo Bandaranaike Airport (CMB)** is only a 1 hour 20 minute flight from **Malé Velana Airport (MLE)**, combining Sri Lanka's emerald tea mountains with the Maldives' crystal-clear coral lagoons costs barely **BDT 18,000 more** than visiting the Maldives alone!
 
 1. VISA RULES FOR BANGLADESHI PASSPORTS: SRI LANKA ETA + MALDIVES FREE VOA
@@ -1125,30 +1196,39 @@ Rule 2: Official 2026 Bangladesh e-Passport Fee Chart (Including 15% VAT):
 3. DOES MRP-TO-E-PASSPORT RENEWAL REQUIRE POLICE VERIFICATION?
 - **No Police Verification for Unchanged Renewals!** If you already hold a valid or expired Bangladeshi **MRP or e-Passport**, and you are renewing with the **exact same Name, Father's Name, Mother's Name, Date of Birth, and Permanent Address**, police verification (SB check) is **waived**—meaning your Express e-Passport is printed much faster!
 - **Crucial Post-Renewal Step for Travelers:** Always ask the Passport Officer to stamp **"Cancelled without Prejudice — Old Passport Returned to Bearer"** and **staple/bind your old passport together with your new e-Passport** when flying from Dhaka Airport so immigration officers can see your old visas and travel history!`,
-  "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp": `Most Bangladeshi travelers believe that when an international flight is delayed by 5 hours, cancelled at the last minute, or loses their checked suitcase on the way to **Jeddah, London, Paris, Rome, Istanbul, or Dubai**, the airline owes them nothing more than a polite apology. In reality, **international aviation passenger rights treaties protect you regardless of your nationality or passport**!
+  "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp": `When international flights are severely delayed, cancelled on short notice, or arrive without checked luggage, many Bangladeshi travelers assume the airline owes nothing beyond an apology or a meal voucher. In reality, statutory passenger rights and international aviation treaties protect passengers on eligible routes regardless of nationality or passport type. Understanding which legal regime applies to your itinerary helps you assert valid claims for care, refunds, baggage damages or cash compensation. Checked on 16 October 2026 against the EU Visa Code, EC Regulation 261/2004, UK CAA guidance, the Montreal Convention and Turkish DGCA regulations.
 
-1. THE 4 INTERNATIONAL PASSENGER RIGHTS LAWS THAT PROTECT BANGLADESHI FLYERS
-Your citizenship does not matter—if your flight route or airline falls under these jurisdictions, you can claim statutory cash compensation:
-- **1. EU Regulation EC 261/2004 & UK 261 (Up to €600 / £520 ≈ BDT 78,000 per Passenger):**
-  • Applies to **any flight departing from a UK or European Union airport** (even on Biman Bangladesh Airlines from London Heathrow/Manchester/Rome, Emirates, Qatar Airways, Saudia, or Turkish Airlines!) OR any flight **arriving into the EU/UK operated by an EU/UK airline**.
-  • EC 261 / UK 261 covers flights departing an EU/UK airport or operated by an EU/UK carrier; it generally does **NOT** cover Biman, Saudia, Emirates or Qatar flights on Dhaka↔Jeddah routes.
-  • If you arrive at your final destination **3+ hours late** (due to airline technical fault, crew scheduling, or missed connection—not extreme weather), you are owed **€600 (~BDT 78,000) per ticket** for long-haul routes over 3,500 km!
-- **2. Saudi Arabia GACA Passenger Rights Regulation (For Umrah & Hajj Flights):**
-  • Enforced by the **Saudi General Authority of Civil Aviation (GACA - gaca.gov.sa)** for all flights departing from Saudi airports (**Jeddah JED, Madinah MED, Riyadh RUH, Dammam DMM**) or operated by Saudi national carriers (**Saudia, Flynas, Flyadeal**) from Dhaka!
-  • Entitles passengers to statutory care, hotel accommodation for 6+ hour delays, and **SDR / SAR cash payouts for prolonged delays, denied boarding, or lost baggage**.
-- **3. Turkish SHY-PASS Regulation:**
-  • Protects Bangladeshi flyers transiting through **Istanbul Airport (IST)** on **Turkish Airlines** who suffer cancellations, overbooking, or qualifying long delays.
-- **4. The Montreal Convention (Up to ~€1,600 / BDT 2,00,000+ for Lost, Delayed or Damaged Baggage):**
-  • Applies to nearly **all international flights worldwide** (including Dhaka to Jeddah, Bangkok, Kuala Lumpur, Singapore, Dubai, Toronto, and New York). If the airline loses, damages, or delays your checked suitcase for more than 21 days, they are legally liable for documented expenses and bag replacement.
+1. International Passenger Rights Frameworks for Bangladeshi Travelers
+Statutory compensation is governed by route endpoints, the operating carrier and specific disruption causes—not your passport.
+- **European Regulation EC 261/2004 (EU Flights):**
+  Applies to all flights departing from an EU airport (regardless of carrier nationality, including Biman from Rome or Gulf/Turkish carriers departing Europe) and flights arriving into an EU airport if operated by an EU carrier [1][2]. For long-haul itineraries over 3,500 km arriving 3+ hours late at the final destination due to operational reasons within the airline's control, passengers may be entitled to statutory compensation of €300 (between 3 and 4 hours) or €600 (4+ hours) [1][2]. Extreme weather and air traffic control restrictions are extraordinary circumstances that exempt carriers from cash compensation, though duty of care remains.
+- **UK 261 Regulations (Flights Involving the United Kingdom):**
+  Applies to flights departing UK airports (such as London Heathrow or Manchester on Biman, Emirates or Qatar Airways) on any airline, and flights into the UK operated by UK or EU carriers [3][4]. Under UK statutory compensation rates, long-haul flight delays exceeding 4 hours entitle qualifying passengers to up to £520 per ticket, or £260 for delays between 3 and 4 hours [4][5].
+- **Saudi Arabia GACA Passenger Rights Regulations (Umrah & Transit Routes):**
+  Enforced by the Saudi General Authority of Civil Aviation (GACA) for departures from Saudi airports (such as Jeddah, Madinah, Riyadh, and Dammam) and Saudi national carriers [13]. For prolonged departure delays, airlines must provide refreshments, meals, and hotel accommodation when delays exceed statutory thresholds. Regulated claim channels require submitting claims directly to the carrier before escalating to GACA.
+- **Turkish DGCA SHY-PASS Regulations (Transit via Istanbul):**
+  Covers flights operated by Turkish air carriers to/from Turkey and foreign carriers departing Turkish airports [11]. When long delays reaching the final destination (3+ hours late) occur due to technical or operational factors within the carrier's control, passengers may be entitled to tiered statutory compensation payable in local currency equivalent [11].
+- **The Montreal Convention (Checked Baggage Delays, Damage & Loss):**
+  Governs international carriage between participating states (including Bangladesh, Saudi Arabia, the UAE, Thailand, the UK and the US) [8][10]. Under official ICAO liability revisions effective 28 December 2024, an airline's liability limit for proven baggage damage, loss, or delay is up to 1,519 Special Drawing Rights (SDR) per passenger [9][10]. This is not an automatic flat payment: passengers must provide documented evidence of necessary expenses, damaged contents or item valuations.
 
-2. 3 MANDATORY STEPS TO TAKE AT THE AIRPORT WHEN YOUR FLIGHT IS DELAYED OR BAG IS LOST
-Never walk out of the arrival hall empty-handed:
-Step 1: Keep Your Physical Boarding Pass & 6-Digit PNR e-Ticket:
-- Take a clear smartphone photo of your **printed boarding pass**, **checked baggage tag sticker**, and the **airport departure board** showing the delay.
-Step 2: For Delayed or Missing Suitcases, File a "PIR" (Property Irregularity Report) Before Exiting Customs:
-- At **Jeddah Terminal 1, Madinah Airport, or Dhaka Airport (DAC) Lost & Found Baggages Desk**, demand an official **Property Irregularity Report (PIR)** with a 10-character reference code (e.g., \`JEDSV12345\` or \`DACBG54321\`) BEFORE you leave the baggage hall! Without a PIR number, airlines will reject your baggage claim.
-Step 3: Check Your Eligibility in 2 Minutes on AirHelp (Zero Upfront Cost):
-- Airlines routinely ignore individual emails from passengers. By entering your flight number and date into **AirHelp** (and using promo code **\`AHTPO11\`** for an **11% discount on AirHelp+ Smart & Pro protection**), their aviation legal team handles the entire claim on a **"No-Win, No-Fee"** basis—and you can even claim for disrupted flights from the **last 3 years**!`,
+2. Essential Steps at the Airport During a Delay or Baggage Disruption
+Preserving contemporaneous evidence at the airport is critical to substantiating any subsequent airline claim:
+Step 1: Retain all travel documentation and boarding passes
+Keep your paper or digital boarding passes, electronic ticket receipt showing the 6-digit PNR, checked baggage claim tag receipts, and screenshots of airport departure displays or airline delay notifications [1][8].
+Step 2: Obtain a Property Irregularity Report (PIR) before leaving customs
+If your checked suitcase is missing or visibly damaged upon arrival at Dhaka (DAC), Jeddah (JED) or any international destination, report it immediately to the operating airline's baggage service desk before exiting the baggage hall. Secure an official Property Irregularity Report (PIR) and file a written notice within statutory deadlines: within 7 days of receipt for damaged baggage, and within 21 days of baggage arrival for delayed baggage expenses [8].
+Step 3: Decide between direct airline submission or claims assistance
+You always have the legal right to submit your compensation or reimbursement claim directly to the operating airline at zero cost [2][7]. If an airline rejects a valid claim or fails to respond, optional third-party commercial claims services such as AirHelp evaluate flight disruption claims under a no-win, no-fee model (charging a service fee only upon successful recovery, with promotional code AHTPO11 offering 11% off AirHelp+ membership protection).
+
+3. Frequently Asked Questions
+Does EU/UK compensation apply to Dhaka to Jeddah flights on Gulf carriers?
+Generally no. Itineraries originating in Dhaka and terminating in Saudi Arabia operated by Biman, Saudia, Emirates or Qatar Airways do not touch EU or UK airspace or involve EU/UK operating carriers, so EC 261 and UK 261 do not apply [1][3].
+Is airline baggage compensation an automatic cash payout?
+No. Under the Montreal Convention, the 1,519 SDR ceiling is a maximum liability limit [9]. Airlines reimburse proven, documented expenses for necessary emergency purchases (for delayed bags) or substantiated valuations for damaged and lost belongings [8].
+How long do I have to file a baggage claim with the airline?
+Under the Montreal Convention, you must file a written complaint within 7 days of receiving damaged luggage, and within 21 days from when delayed luggage was delivered [8]. Legal action must be initiated within 2 years [8].
+Can I submit a flight compensation claim directly without paying a third party?
+Yes. Official consumer protection guidelines in the EU and UK advise submitting your initial complaint directly to the operating carrier at no charge [2][7]. Commercial claim companies are optional paid services that take a percentage fee if they secure a settlement.`,
   "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla": `Not all airline tickets priced at **BDT 45,000 or BDT 75,000** from **Dhaka (DAC)** deliver the same value. A low-cost carrier ticket that appears BDT 6,000 cheaper online can end up costing **BDT 15,000 more** once you pay for 30kg checked luggage, hot Halal meals, and Zamzam water carriage. Here is our verified **2026 comparison of the top airlines operating from Hazrat Shahjalal International Airport (DAC)** so you always book the smartest fare.
 
 1. WEIGHT CONCEPT (30 KG) VS. PIECE CONCEPT (2 X 23 KG = 46 KG): THE #1 BAGGAGE RULE FROM DHAKA

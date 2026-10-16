@@ -39,6 +39,18 @@ const BLOG_FAQ_CONFIGS: Record<
     en: /^\s*5\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৫\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
+  "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": {
+    en: /^\s*5\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৫\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
+  "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
+    en: /^\s*5\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৫\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
+  "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": {
+    en: /^\s*5\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৫\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
   "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide": {
     en: /^\s*7\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৭\.\s*সচরাচর জিজ্ঞাসা\s*$/,
@@ -54,6 +66,14 @@ const BLOG_FAQ_CONFIGS: Record<
   "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": {
     en: /^\s*6\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৬\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
+  "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": {
+    en: /^\s*6\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৬\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
+  "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp": {
+    en: /^\s*3\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৩\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
 };
 

@@ -1,44 +1,40 @@
 ---
 slug: kathmandu-to-coxs-bazar-flights-route-status-booking
-status: draft
-title: >-
-  Kathmandu to Cox’s Bazar Flights: Route Status, Dhaka Connection & Fare Guide
-  (2026)
-titleBn: 'কাঠমান্ডু থেকে কক্সবাজার ফ্লাইট: রুটের অবস্থা, ঢাকা সংযোগ ও ভাড়ার গাইড (২০২৬)'
-summary: >-
-  No scheduled KTM–CXB flight was confirmed on 15 October 2026. Check the Dhaka
-  search path, dated DAC–CXB fare (domestic leg only) and Nepali tourist-visa
-  rule.
-summaryBn: >-
-  ১৫ অক্টোবর ২০২৬-এ KTM–CXB নির্ধারিত ফ্লাইট নিশ্চিত হয়নি। ঢাকা হয়ে সার্চ,
-  DAC–CXB-এর domestic-leg নমুনা ভাড়া এবং নেপালি পর্যটকদের ভিসা-নিয়ম দেখুন।
+status: scheduled
+publishDate: "2026-10-16"
+title: "Kathmandu to Cox’s Bazar Flights: Route Status, Dhaka Connection & Fare
+  Guide (2026)"
+titleBn: "কাঠমান্ডু থেকে কক্সবাজার ফ্লাইট: রুটের অবস্থা, ঢাকা সংযোগ ও ভাড়ার গাইড (২০২৬)"
+summary: No scheduled KTM–CXB flight was confirmed on 15 October 2026. Check the
+  Dhaka search path, dated DAC–CXB fare (domestic leg only) and Nepali
+  tourist-visa rule.
+summaryBn: ১৫ অক্টোবর ২০২৬-এ KTM–CXB নির্ধারিত ফ্লাইট নিশ্চিত হয়নি। ঢাকা হয়ে
+  সার্চ, DAC–CXB-এর domestic-leg নমুনা ভাড়া এবং নেপালি পর্যটকদের ভিসা-নিয়ম
+  দেখুন।
 category: Cheap Flight Tips
 categoryBn: এয়ারলাইন্স ও লাগেজ
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 7 min read
 readTimeBn: ৭ মিনিট পঠন
-updatedAt: '2026-10-15'
+updatedAt: 2026-10-15
 coverImage: coxs_bazar_sunrise_1781620718331
 coverAltEn: A low sunrise over waves breaking onto Cox’s Bazar beach.
 coverAltBn: কক্সবাজার সমুদ্রসৈকতে ঢেউয়ের ওপর উদিত হচ্ছে নিচু সূর্য।
-seoTitle: 'Kathmandu to Cox’s Bazar Flights: Status & Fare | URAL'
-seoDescription: >-
-  No scheduled KTM–CXB flight was confirmed on 15 October 2026. Check the Dhaka
-  search path, dated DAC–CXB fare (domestic leg only) and Nepali tourist-visa
-  rule.
-seoTitleBn: 'কাঠমান্ডু থেকে কক্সবাজার ফ্লাইট: রুট ও ভাড়া | URAL'
-seoDescriptionBn: >-
-  ১৫ অক্টোবর ২০২৬-এ KTM–CXB নির্ধারিত ফ্লাইট নিশ্চিত হয়নি। ঢাকা হয়ে সার্চ,
-  DAC–CXB-এর domestic-leg নমুনা ভাড়া এবং নেপালি পর্যটকদের ভিসা-নিয়ম দেখুন।
-snippet: >-
-  On 15 October 2026, this review found no scheduled Kathmandu (KTM)–Cox’s Bazar
-  (CXB) service; the Nepal–CXB proposal has no launch date or fare. Search a
-  Dhaka connection in Biman’s multi-city tool; verify ticket/PNR, baggage and
-  missed-connection terms. NOVOAIR’s dated DAC–CXB fare covers one domestic leg,
-  not the full trip.
-snippetBn: >-
-  ১৫ অক্টোবর ২০২৬-এর পর্যালোচনায় KTM–CXB নির্ধারিত ফ্লাইট নিশ্চিত হয়নি;
+seoTitle: "Kathmandu to Cox’s Bazar Flights: Status & Fare | URAL"
+seoDescription: No scheduled KTM–CXB flight was confirmed on 15 October 2026.
+  Check the Dhaka search path, dated DAC–CXB fare (domestic leg only) and Nepali
+  tourist-visa rule.
+seoTitleBn: "কাঠমান্ডু থেকে কক্সবাজার ফ্লাইট: রুট ও ভাড়া | URAL"
+seoDescriptionBn: ১৫ অক্টোবর ২০২৬-এ KTM–CXB নির্ধারিত ফ্লাইট নিশ্চিত হয়নি। ঢাকা
+  হয়ে সার্চ, DAC–CXB-এর domestic-leg নমুনা ভাড়া এবং নেপালি পর্যটকদের ভিসা-নিয়ম
+  দেখুন।
+snippet: On 15 October 2026, this review found no scheduled Kathmandu
+  (KTM)–Cox’s Bazar (CXB) service; the Nepal–CXB proposal has no launch date or
+  fare. Search a Dhaka connection in Biman’s multi-city tool; verify ticket/PNR,
+  baggage and missed-connection terms. NOVOAIR’s dated DAC–CXB fare covers one
+  domestic leg, not the full trip.
+snippetBn: ১৫ অক্টোবর ২০২৬-এর পর্যালোচনায় KTM–CXB নির্ধারিত ফ্লাইট নিশ্চিত হয়নি;
   নেপাল–কক্সবাজার রুটটি প্রস্তাব। Biman-এর multi-city সার্চে KTM, DAC ও CXB দিয়ে
   ঢাকা হয়ে সংযোগ খুঁজুন, তবে এক টিকিট, ব্যাগেজ ও missed-connection সুরক্ষা যাচাই
   করুন। NOVOAIR-এর BDT 5,349 নমুনা ভাড়া শুধু ১৫ নভেম্বরের DAC–CXB domestic
@@ -48,43 +44,36 @@ faqHeadingBn: ৬. সচরাচর জিজ্ঞাসা
 references:
   - name: The Business Standard — Bangladesh eyes Nepal–Cox’s Bazar flights
     nameBn: দ্য বিজনেস স্ট্যান্ডার্ড — নেপাল–কক্সবাজার ফ্লাইটের প্রস্তাব
-    url: >-
-      https://www.tbsnews.net/economy/aviation/bangladesh-eyes-nepal-coxs-bazar-flights-nepal-wants-dhaka-pokhara-1572766
-  - name: >-
-      The Business Standard — Cox’s Bazar international terminal trial
-      operations
-    nameBn: >-
-      দ্য বিজনেস স্ট্যান্ডার্ড — কক্সবাজার আন্তর্জাতিক টার্মিনালের পরীক্ষামূলক
+    url: https://www.tbsnews.net/economy/aviation/bangladesh-eyes-nepal-coxs-bazar-flights-nepal-wants-dhaka-pokhara-1572766
+  - name: The Business Standard — Cox’s Bazar international terminal trial operations
+    nameBn: দ্য বিজনেস স্ট্যান্ডার্ড — কক্সবাজার আন্তর্জাতিক টার্মিনালের পরীক্ষামূলক
       কার্যক্রম
-    url: >-
-      https://www.tbsnews.net/economy/aviation/coxs-bazar-airports-new-intl-terminal-begins-trial-operations-1556121
-  - name: 'CAAB — AIP Supplement 06/25, Cox’s Bazar Airport (VGCB)'
-    nameBn: 'CAAB — AIP Supplement 06/25, কক্সবাজার বিমানবন্দর (VGCB)'
-    url: 'https://new.caab.gov.bd/aip/sup/AIP%20SUP%2006-25'
+    url: https://www.tbsnews.net/economy/aviation/coxs-bazar-airports-new-intl-terminal-begins-trial-operations-1556121
+  - name: CAAB — AIP Supplement 06/25, Cox’s Bazar Airport (VGCB)
+    nameBn: CAAB — AIP Supplement 06/25, কক্সবাজার বিমানবন্দর (VGCB)
+    url: https://new.caab.gov.bd/aip/sup/AIP%20SUP%2006-25
   - name: Embassy of Bangladesh in Kathmandu — Visa information for Nepali citizens
     nameBn: কাঠমান্ডুতে বাংলাদেশ দূতাবাস — নেপালি নাগরিকদের ভিসা তথ্য
-    url: 'https://kathmandu.mofa.gov.bd/bn/site/page/VISA'
+    url: https://kathmandu.mofa.gov.bd/bn/site/page/VISA
   - name: Biman Bangladesh Airlines — Official flight search and multi-city booking
     nameBn: বিমান বাংলাদেশ এয়ারলাইন্স — অফিশিয়াল ফ্লাইট সার্চ ও মাল্টি-সিটি বুকিং
-    url: 'https://www.biman-airlines.com/'
-  - name: 'NOVOAIR — Official booking result for DAC–CXB, 15 November 2026'
-    nameBn: 'NOVOAIR — DAC–CXB, ১৫ নভেম্বর ২০২৬-এর অফিশিয়াল বুকিং ফলাফল'
-    url: >-
-      https://secure.flynovoair.com/bookings/flight_selection.aspx?TT=OW&SS=&RT=&FL=on&DC=DAC&AC=CXB&AM=2026-11&AD=15&PA=1
-  - name: >-
-      Bangladesh Police Special Branch — Visa on Arrival information
-      (general document requirements)
-    nameBn: >-
-      বাংলাদেশ পুলিশ স্পেশাল ব্রাঞ্চ — ভিসা অন অ্যারাইভাল তথ্য (সাধারণ
+    url: https://www.biman-airlines.com/
+  - name: NOVOAIR — Official booking result for DAC–CXB, 15 November 2026
+    nameBn: NOVOAIR — DAC–CXB, ১৫ নভেম্বর ২০২৬-এর অফিশিয়াল বুকিং ফলাফল
+    url: https://secure.flynovoair.com/bookings/flight_selection.aspx?TT=OW&SS=&RT=&FL=on&DC=DAC&AC=CXB&AM=2026-11&AD=15&PA=1
+  - name: Bangladesh Police Special Branch — Visa on Arrival information (general
+      document requirements)
+    nameBn: বাংলাদেশ পুলিশ স্পেশাল ব্রাঞ্চ — ভিসা অন অ্যারাইভাল তথ্য (সাধারণ
       নথি-সংক্রান্ত শর্ত)
-    url: 'https://voa.specialbranch.gov.bd/public/voa-info.html'
-  - name: >-
-      Bangladesh Online MRV Portal (visa.gov.bd) — online application form
-      only; not the source of the gratis tourist rule
-    nameBn: >-
-      বাংলাদেশ অনলাইন MRV পোর্টাল (visa.gov.bd) — শুধু অনলাইন আবেদন ফর্ম;
-      ফ্রি পর্যটক-ভিসা নিয়মের উৎস নয়
-    url: 'https://visa.gov.bd/'
+    url: https://voa.specialbranch.gov.bd/public/voa-info.html
+  - name: Bangladesh Online MRV Portal (visa.gov.bd) — online application form only;
+      not the source of the gratis tourist rule
+    nameBn: বাংলাদেশ অনলাইন MRV পোর্টাল (visa.gov.bd) — শুধু অনলাইন আবেদন ফর্ম; ফ্রি
+      পর্যটক-ভিসা নিয়মের উৎস নয়
+    url: https://visa.gov.bd/
+  - name: CAAB — NOTAM Summary (A0325/26, VGCB international flights suspended)
+    nameBn: CAAB — নোতাম সারসংক্ষেপ (A0325/26, VGCB আন্তর্জাতিক ফ্লাইট স্থগিত)
+    url: https://new.caab.gov.bd/aip/NOTAM%20Summary.pdf
 internalLinksEn:
   - text: Nepal itinerary for Bangladeshi travelers (Bangladesh → Nepal)
     path: /destinations/nepal-guide
@@ -95,7 +84,7 @@ internalLinksEn:
   - text: Global flight search and fare comparison (check live date inventory)
     path: /flights
 internalLinksBn:
-  - text: 'বাংলাদেশ থেকে নেপাল ভ্রমণ: নেপাল itinerary (উল্টো দিকের যাত্রা)'
+  - text: "বাংলাদেশ থেকে নেপাল ভ্রমণ: নেপাল itinerary (উল্টো দিকের যাত্রা)"
     path: /destinations/nepal-guide
   - text: বাংলাদেশি পাসপোর্টধারীদের Nepal Visa Guide (বাংলাদেশ → Nepal)
     path: /visa/nepal-visa
@@ -104,10 +93,11 @@ internalLinksBn:
   - text: গ্লোবাল ফ্লাইট সার্চ ও live fare তুলনা (তারিখভিত্তিক inventory যাচাই করুন)
     path: /flights
 ---
+
 On 15 October 2026, this review found no confirmed scheduled passenger service from Kathmandu (KTM) to Cox’s Bazar (CXB). The 14 October report describes Nepal–Cox’s Bazar flights as a proposal: it records Bangladesh’s interest and a hope for a future Himalaya Airlines service, but gives no airline commitment, launch date, timetable, ticket-sale link or fare [1]. Treat a direct-flight announcement as unconfirmed until an airline’s live booking system returns a dated, purchasable result.
 
 1. Direct Kathmandu–Cox’s Bazar Route Status
-Cox’s Bazar’s international-airport designation is real, but it is not a flight schedule. CAAB’s AIP Supplement 06/25 designates Cox’s Bazar Airport (VGCB) international, effective 2 October 2025, and lists customs and immigration as available [3]. A 28 September 2026 report said the new terminal had begun trial operations while serving domestic passengers; CAAB said the terminal was ready for international flights [2]. These facts describe airport status and facilities, not a scheduled Kathmandu service or a currently bookable international passenger route. Recheck airline and airport notices close to travel.
+Cox’s Bazar’s international-airport designation is real, but active international flight operations remain suspended. CAAB’s AIP Supplement 06/25 designated Cox’s Bazar Airport (VGCB) international, effective 2 October 2025, and listed customs and immigration as available [3]. A 28 September 2026 report noted the new terminal had begun trial operations while serving domestic passengers; CAAB stated the terminal was ready for international flights [2]. However, CAAB’s active aeronautical notice (NOTAM A0325/26, replacing A0189/26) officially confirms that movements of international scheduled and non-scheduled flights to and from Cox’s Bazar Airport remain suspended, and the airport will not be used for international flights until scheduled international operations formally commence [9]. These facts describe aerodrome facilities and current regulatory restrictions—not an active Kathmandu passenger route. Recheck airline and CAAB notices close to travel.
 
 2. Route to Check: Kathmandu–Dhaka–Cox’s Bazar
 A possible route to investigate—not a confirmed itinerary—is KTM → DAC → CXB. Biman’s official booking site exposes a multi-city search and lists Kathmandu, Dhaka and Cox’s Bazar in its airport choices [5]. This is a search mechanism only: this review did not retrieve a date-specific priced itinerary or confirm that the two legs can be issued on one ticket or PNR.
@@ -150,7 +140,7 @@ Biman’s site offers a multi-city search and lists all three airports, but this
 ১৫ অক্টোবর ২০২৬-এর পর্যালোচনায় কাঠমান্ডু (KTM) থেকে কক্সবাজার (CXB)-এ নির্ধারিত যাত্রীবাহী ফ্লাইটের নিশ্চিত সময়সূচি পাওয়া যায়নি। ১৪ অক্টোবরের প্রতিবেদনে নেপাল–কক্সবাজার ফ্লাইটকে প্রস্তাব হিসেবে উল্লেখ করা হয়েছে: প্রতিবেদনে বাংলাদেশের আগ্রহ এবং হিমালয়া এয়ারলাইন্স ভবিষ্যতে চালু করতে পারে বলে আশার কথা আছে; তবে কোনো airline commitment, launch date, timetable, ticket sale বা fare দেওয়া হয়নি [১]। আপনার তারিখের airline live booking search-এ কেনার উপযোগী ফ্লাইট না দেখানো পর্যন্ত সরাসরি ফ্লাইট নিশ্চিত ধরে নেবেন না।
 
 ১. কাঠমান্ডু–কক্সবাজার সরাসরি রুটের অবস্থা
-কক্সবাজারকে আন্তর্জাতিক বিমানবন্দর হিসেবে ঘোষণা করা হয়েছে—কিন্তু এটি ফ্লাইটের সময়সূচি নয়। CAAB-এর AIP Supplement 06/25-এ ২ অক্টোবর ২০২৫ থেকে কক্সবাজার বিমানবন্দর (VGCB)-কে আন্তর্জাতিক হিসেবে দেখানো হয়েছে এবং কাস্টমস ও ইমিগ্রেশন সুবিধার কথা আছে [৩]। ২৮ সেপ্টেম্বর ২০২৬-এর প্রতিবেদনে বলা হয়, নতুন টার্মিনালের পরীক্ষামূলক কার্যক্রম শুরু হয়েছিল, তখনও যাত্রীসেবা ছিল অভ্যন্তরীণ ফ্লাইটে; CAAB জানিয়েছিল টার্মিনাল আন্তর্জাতিক ফ্লাইটের জন্য প্রস্তুত [২]। এই তথ্য বিমানবন্দরের অবস্থা ও সুবিধা বোঝায়—কাঠমান্ডু থেকে নির্ধারিত যাত্রীবাহী ফ্লাইট বা বর্তমানে বুক করা যায় এমন আন্তর্জাতিক রুট নয়। যাত্রার আগে এয়ারলাইন্স ও বিমানবন্দরের সর্বশেষ বিজ্ঞপ্তি দেখুন।
+কক্সবাজারকে আন্তর্জাতিক বিমানবন্দর হিসেবে ঘোষণা করা হলেও বর্তমানে সব ধরনের আন্তর্জাতিক ফ্লাইট চলাচল স্থগিত রাখা হয়েছে। CAAB-এর AIP Supplement 06/25-এ ২ অক্টোবর ২০২৫ থেকে কক্সবাজার বিমানবন্দর (VGCB)-কে আন্তর্জাতিক হিসেবে ঘোষণা করা হয় এবং কাস্টমস ও ইমিগ্রেশন সুবিধার কথা উল্লেখ করা হয় [৩]। ২৮ সেপ্টেম্বর ২০২৬-এর প্রতিবেদনে বলা হয়, নতুন টার্মিনালের পরীক্ষামূলক কার্যক্রম শুরু হয়েছিল এবং তখনও যাত্রীসেবা ছিল অভ্যন্তরীণ ফ্লাইটে; CAAB জানিয়েছিল টার্মিনাল আন্তর্জাতিক ফ্লাইটের জন্য প্রস্তুত [২]। তবে CAAB-এর কার্যকর অ্যারোনটিক্যাল নোটিশ (NOTAM A0325/26, যা A0189/26-এর স্থলাভিষিক্ত) নিশ্চিত করেছে যে কক্সবাজার বিমানবন্দরে নির্ধারিত ও অনির্ধারিত আন্তর্জাতিক ফ্লাইট চলাচল স্থগিত থাকবে এবং নির্ধারিত আন্তর্জাতিক ফ্লাইট শুরু না হওয়া পর্যন্ত আন্তর্জাতিক ফ্লাইটের জন্য বিমানবন্দরটি ব্যবহার করা যাবে না [৯]। এটি বিমানবন্দরের অবকাঠামোগত প্রস্তুতি ও বর্তমান নিয়ন্ত্রক স্থগিতাদেশ বোঝায়—কোনো সক্রিয় কাঠমান্ডু রুট নয়। যাত্রার আগে এয়ারলাইন্স ও CAAB-এর সর্বশেষ বিজ্ঞপ্তি দেখুন।
 
 ২. যে রুটটি যাচাই করতে পারেন: কাঠমান্ডু–ঢাকা–কক্সবাজার
 যাচাই করার সম্ভাব্য রুট—নিশ্চিত ইটিনারারি নয়—KTM → DAC → CXB। Biman-এর অফিশিয়াল বুকিং সাইটে multi-city search আছে এবং airport selector-এ Kathmandu, Dhaka ও Cox’s Bazar দেখা যায় [৫]। এটি সার্চের সুযোগ মাত্র: এই পর্যালোচনায় নির্দিষ্ট তারিখের দামসহ বুকযোগ্য ইটিনারারি পাওয়া যায়নি, কিংবা দুই লেগ একই ticket/PNR-এ ইস্যু হবে কি না নিশ্চিত করা যায়নি।

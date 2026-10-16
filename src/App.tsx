@@ -622,19 +622,19 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "hajj-registration-bangladesh-government-vs-private-package-cost":
       "Obligatory Hajj from Bangladesh requires two-stage registration on hajj.gov.bd: Pre-Registration with your NID and ~BDT 30,000 deposit to get a tracking N-Serial, followed by Final Registration (BDT 5,20,000–6,00,000 for Government packages or BDT 5,80,000–9,50,000+ for licensed Private Agency Maktab A/B/D packages).",
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
-      "When taking elderly parents for Umrah from Dhaka, attach a free airline Wheelchair (WCHR) request 48 hours before departure and bring a foldable wheelchair from Bangladesh (carried free). Inside Masjid al-Haram, rent official roof-level electric scooters (SAR 115 full Umrah) and stay on flat Jabal Omar streets.",
+      "When taking elderly parents for Umrah from Dhaka, request airline Wheelchair (WCHR) assistance 48 hours before departure and bring a manual folding wheelchair (transported free). Inside Masjid al-Haram, use dedicated upper-level wheelchair tracks or official electric scooters, and choose flat-street hotels in Jabal Omar or lower Ibrahim Al-Khalil.",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
       "Bangladeshi passport holders flying Saudia or flynas on a qualifying through-itinerary can add the 96-hour Saudi Stopover Visa while booking the ticket, without a previously used US/UK/Schengen visa. No fixed fee and no free hotel is published: visa, insurance and service charges are calculated at airline checkout, so use the amount on your own booking.",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
       "Bangladeshi pilgrims should prepare the Nusuk app (nusuk.sa) for Umrah slots and the mandatory Rawdah Shareef (Riyazul Jannah) appointment permit in Madinah. The current Saudi Ministry FAQ lists Bangladesh for biometric enrollment for electronically issued Umrah visas via Saudi Visa Bio; it is not a universal rule for every tourist or stopover traveler. Book the free Rawdah permit in Nusuk and check live availability.",
     "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
-      "Under updated Saudi Ministry of Hajj & Umrah (haj.gov.sa) rules, Bangladeshi women can obtain an Umrah e-Visa without a mandatory male Mahram restriction in the visa portal. In Madinah, book hotels in Markazia North facing Ladies' Gates 25–29 for direct women's prayer hall and Rawdah access.",
+      "Under updated Saudi Ministry of Hajj & Umrah (haj.gov.sa) regulations, women can obtain an Umrah e-Visa without a mandatory male Mahram in the visa portal. In Madinah, staying in Markazia North provides convenient, flat access to the northern ladies' prayer halls and Nusuk Rawdah appointment checkpoints.",
     "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
       "Save 6 hours of highway travel by booking an Open-Jaw (Multi-City) ticket: fly Dhaka (DAC) to Jeddah (JED) outbound and return directly from Madinah (MED) to Dhaka. Direct Biman and Saudia flights cost BDT 72,000–92,000 with 46kg baggage, while 1-stop Gulf carriers start at BDT 54,000.",
     "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
       "Performing Umrah in Ramadan equals the reward of Hajj, but Last-10-Days Makkah hotel rates triple to BDT 2,20,000+ per person. Cut your budget by 50% (to BDT 1,35,000–1,55,000) by flying in late Sha'ban and performing Umrah during the first week of Ramadan, or register early on Nusuk for I'tikaf.",
     "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
-      "When flying direct from Dhaka to Jeddah on Biman or Saudia, put on your unstitched Ihram garments at Dhaka Airport and make Niyyah when the pilot announces Miqat Qarn al-Manazil 45 minutes before landing. On 1-stop transit flights, change into Ihram during your Gulf airport layover.",
+      "When flying direct from Dhaka to Jeddah on Biman or Saudia, put on your Ihram garments at Dhaka Airport and make Niyyah when the pilot announces Miqat Qarn al-Manazil before landing. On connecting flights via Gulf hubs, change into Ihram during your layover; flying into Madinah first requires no Ihram on the aircraft.",
     "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
       "Never pack loose Zamzam bottles inside checked suitcases. Buy one official 5-liter sealed Zamzam box (SAR 9.50–12.50) at the Jeddah or Madinah airport kiosk, carried free by Biman and Saudia. Returning Bangladeshi passengers can also bring 5–10 kg of Madinah dates and up to 100g of gold jewelry duty-free.",
     "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
@@ -688,13 +688,13 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh":
       "Bangladeshi patients visiting Bumrungrad International (Sukhumvit Soi 3), Bangkok Hospital, or Samitivej can book executive health check-up packages online (THB 6,900–24,500 / BDT 24,500–87,000) with complimentary Bengali medical interpreters, free airport wheelchair assistance, and patient apartments within a 5-minute walk.",
     "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide":
-      "Avoid BDT 1,200/day international roaming charges by installing an Airalo Travel eSIM ($4.50–$9.00 via your Dual-Currency Card) in Dhaka before departure so 5G data activates upon landing in Jeddah, Bangkok, KL, or Singapore—and pair it with a $30,000+ Travel Medical Insurance policy.",
+      "Prepare for international travel from Dhaka with a verified connectivity and insurance strategy. Dual-SIM handsets let you use an Airalo or Yesim travel eSIM for mobile data abroad while keeping your Bangladeshi SIM active for bank SMS OTPs. Schengen visa applicants must also secure compliant €30,000 medical insurance.",
     "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost":
       "A 6-day Sri Lanka tour (Colombo, Kandy, Nuwara Eliya, Ella Nine Arch Bridge, and Galle Fort) from Dhaka costs BDT 68,000–82,000 per person including roundtrip flights. Bangladeshi passport holders apply online at eta.gov.lk ($20 USD SAARC fee) and enjoy abundant HAC-certified Halal dining.",
     "bangladesh-epassport-application-renewal-64-districts-fee-guide":
       "Apply or renew your Bangladeshi e-Passport across all 64 Regional Passport Offices at epassport.gov.bd without brokers. A 10-year 48-page e-Passport costs BDT 5,750 (Regular), BDT 8,050 (Express), or BDT 10,350 (Super Express, 2 days); always select the 64-page booklet (BDT 8,050+) if you travel frequently.",
     "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp":
-      "Bangladeshi passengers whose flights are delayed 3+ hours, cancelled, or overbooked on UK/EU routes (EC 261/2004) can claim €250–€600 (BDT 33,000–80,000), while Montreal Convention rules cover up to ~$1,700 (BDT 2,05,000) for lost or damaged baggage on Biman, Saudia, Emirates, or Qatar Airways.",
+      "Bangladeshi passengers facing disruptions on qualifying European and UK routes can claim statutory compensation up to €600 or £520 for 3+ hour delays under EC 261/UK 261 rules. For international flights, the Montreal Convention sets a maximum liability limit of 1,519 SDR per passenger for proven baggage losses.",
     "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla":
       "Compare every major airline flying out of Dhaka (DAC): Biman and Saudia lead for direct 6.5-hour Jeddah/Madinah flights with 2x23kg (46kg) baggage (route- and fare-dependent; confirm on your e-ticket) and free 5L Zamzam water; Emirates, Qatar, and Gulf Air offer top 1-stop transit value; and Malaysia/Singapore Airlines lead on Asian routes.",
     "havana-cuba-travel-guide-bangladesh":
@@ -717,19 +717,19 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "hajj-registration-bangladesh-government-vs-private-package-cost":
       "বাংলাদেশ থেকে ফরজ হজের জন্য ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ ২ ধাপে নিবন্ধন করতে হয়: NID ও ৩০,০০০ টাকা জমা দিয়ে প্রাক-নিবন্ধন (N-Serial) এবং কোটা অনুযায়ী চূড়ান্ত নিবন্ধন (সরকারি প্যাকেজ ৫.২০–৬.০০ লক্ষ টাকা; বেসরকারি এজেন্সি ৫.৮০–৯.৫০+ লক্ষ টাকা)।",
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
-      "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ যাত্রায় ফ্লাইটের ৪৮ ঘণ্টা আগে ফ্রি এয়ারপোর্ট হুইলচেয়ার (WCHR) বুক করুন এবং দেশ থেকে একটি ফোল্ডিং হুইলচেয়ার সাথে নিন (ফ্লাইটে ফ্রি)। মসজিদুল হারামের ছাদে অফিশিয়াল ইলেকট্রিক স্কুটার (তাওয়াফ+সাঈ ১১৫ রিয়াল) ও সমতল রাস্তার হোটেল ব্যবহার করুন।",
+      "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ যাত্রায় ফ্লাইটের ৪৮ ঘণ্টা আগে এয়ারলাইন্স হুইলচেয়ার (WCHR) বুক করুন এবং নিজস্ব ফোল্ডিং হুইলচেয়ার সাথে নিন (ফ্লাইটে ফ্রি)। মসজিদুল হারামে ওপরের তলার হুইলচেয়ার ট্র্যাক বা অফিশিয়াল ইলেকট্রিক স্কুটার ব্যবহার করুন এবং জাবাল ওমরের মতো সমতল রাস্তার হোটেল বেছে নিন।",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
       "বাংলাদেশি পাসপোর্টধারীরা Saudia বা flynas-এর যোগ্য ট্রানজিট ইটিনারারিতে টিকিট বুক করার সময় ৯৬ ঘণ্টার Saudi Stopover Visa নিতে পারেন, আগে US/UK/Schengen ভিসা ব্যবহার করা লাগে না। কোনো নির্দিষ্ট ফি বা ফ্রি হোটেল সুবিধা প্রকাশিত নেই—ভিসা, ইনস্যুরেন্স ও সার্ভিস চার্জ এয়ারলাইন্সের checkout-এ নির্ধারিত হয়, তাই নিজের বুকিংয়ের অঙ্কই আসল খরচ।",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
       "ওমরাহ যাত্রীদের মক্কায় ওমরাহ স্লট ও মদিনায় রিয়াজুল জান্নাত (Rawdah Shareef) অ্যাপয়েন্টমেন্ট পারমিটের জন্য Nusuk অ্যাপ (nusuk.sa) প্রস্তুত রাখতে হবে। বর্তমান সৌদি মন্ত্রণালয়ের FAQ বাংলাদেশকে ইলেকট্রনিক Umrah visa-র biometric enrollment-এর জন্য Saudi Visa Bio-তে তালিকাভুক্ত করে; এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার যাত্রীর জন্য সার্বজনীন নিয়ম নয়। Nusuk-এ ফ্রি Rawdah পারমিট বুক করুন এবং লাইভ availability চেক করুন।",
     "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
-      "সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের (haj.gov.sa) হালনাগাদ নিয়মে বাংলাদেশি নারীরা মাহরাম ছাড়াও ওমরাহ ই-ভিসার আবেদন করতে পারেন। মদিনায় মা ও বোনদের সহজে নামাজ ও রিয়াজুল জান্নাতে প্রবেশের জন্য উত্তর দিকের Ladies' Gates 25–29 সংলগ্ন Markazia North হোটেলে থাকা সবচেয়ে সুবিধাজনক।",
+      "সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের (haj.gov.sa) হালনাগাদ নিয়মে নারীরা মাহরাম ছাড়াও অনলাইনে ওমরাহ ই-ভিসার আবেদন করতে পারেন। মদিনায় মা ও বোনদের সহজে নামাজ ও রিয়াজুল জান্নাতে প্রবেশের জন্য উত্তর দিকের Markazia North এলাকায় অবস্থান করা সবচেয়ে সুবিধাজনক।",
     "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
       "ওমরাহ শেষে মদিনা থেকে জেদ্দা বিমানবন্দরের ৬ ঘণ্টার ক্লান্তিকর সড়কপথ এড়াতে Multi-City (Open-Jaw) টিকিট কাটুন: ঢাকা থেকে জেদ্দা (DAC–JED) যান এবং মদিনা থেকে সরাসরি ঢাকা (MED–DAC) ফিরুন। বিমান ও সৌদিয়ার ডিরেক্ট ফ্লাইট ৭২–৯২ হাজার টাকা এবং ট্রানজিট ফ্লাইট ৫৪ হাজার টাকা থেকে শুরু।",
     "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
       "রমজান মাসে ওমরাহ পালনে হজের সমান সওয়াব পাওয়া যায়, তবে শেষ ১০ দিনে মক্কার হোটেল ভাড়া তিনগুণ বেড়ে জনপ্রতি ২.২০ লক্ষ+ টাকা ছাড়িয়ে যায়। শাবানের শেষ সপ্তাহে মদিনায় গিয়ে রমজানের প্রথম সপ্তাহে মক্কায় ওমরাহ করলে মাত্র ১.৩৫–১.৫৫ লক্ষ টাকায় (৫০% কমে) রমজান ওমরাহ সম্পন্ন করা সম্ভব।",
     "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
-      "বিমান বা সৌদিয়ার ডিরেক্ট ফ্লাইটে জেদ্দা গেলে ঢাকা এয়ারপোর্টেই ইহরামের কাপড় পরুন এবং ল্যান্ডিংয়ের ৪৫ মিনিট আগে পাইলট মিকাত (কারনুল মানাজিল) ঘোষণা করলে নিয়ত ও তালবিয়াহ পড়ুন। আর ট্রানজিট ফ্লাইটে গেলে দুবাই/শারজাহ/মাস্কাট যাত্রাবিরতিতে ইহরাম পরে নিন।",
+      "সরাসরি জেদ্দাগামী ফ্লাইটে ঢাকা এয়ারপোর্টেই ইহরাম পরে নিন এবং অবতরণের আগে পাইলট মিকাত ঘোষণা করলে নিয়ত ও তালবিয়া পাঠ করুন। উপসাগরীয় ট্রানজিট ফ্লাইটে লেওভারের সময় ইহরাম পরুন; আর প্রথমে মদিনায় নামলে প্লেনে ইহরাম পরার প্রয়োজন নেই।",
     "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
       "লাগেজের ভেতর খোলা বোতলে জমজমের পানি ভরলে এক্স-রে স্ক্যানারে তা জব্দ হয়। জেদ্দা বা মদিনা এয়ারপোর্টের অফিশিয়াল কিয়স্ক থেকে পাসপোর্ট দেখিয়ে ৫ লিটারের সিল করা জমজম বক্স (৯.৫০–১২.৫০ রিয়াল) কিনুন, যা বিমান ও সৌদিয়া ফ্রি বহন করে। সাথে ৫–১০ কেজি খেজুর ও ১০০ গ্রাম স্বর্ণালংকার শুল্কমুক্ত আনা যায়।",
     "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
@@ -783,7 +783,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh":
       "ব্যাংককের Bumrungrad International (Sukhumvit Soi 3), Bangkok Hospital ও Samitivej-এ অনলাইনে অ্যাপয়েন্টমেন্ট নিয়ে ফ্রি দোভাষী সুবিধাসহ হেলথ চেকআপ (৬,৯০০–২৪,৫০০ বাথ / ২৪,৫০০–৮৭,০০০ টাকা) করা যায়। গুরুতর রোগীদের দ্রুত ভিসার জন্য হাসপাতাল থেকে ফ্রি Medical Invitation Letter পাওয়া যায়।",
     "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide":
-      "বিদেশে প্রতিদিন ১,২০০ টাকার রোমিং বিল বাঁচাতে ঢাকা থেকেই ডুয়াল-কারেন্সি কার্ড দিয়ে Airalo অ্যাপে Travel eSIM ($4.50–$9.00) ইনস্টল করুন—যাতে জেদ্দা, ব্যাংকক বা কুয়ালালামপুরে ল্যান্ড করার সাথে সাথেই 5G ইন্টারনেট চালু হয়। সাথে রাখুন ট্রাভেল মেডিকেল ইন্স্যুরেন্স।",
+      "ঢাকা থেকে বিদেশ ভ্রমণের আগে ডুয়াল-সিম ফোনে Airalo বা Yesim ট্রাভেল eSIM ব্যবহার করে বিদেশে ইন্টারনেট সচল রাখা যায়, আর ফিজিক্যাল দেশীয় সিম দিয়ে ব্যাংকের ওটিপি এসএমএস পাওয়া যায়। শেনজেন ভিসার জন্য ইউরোপীয় ইউনিয়নের নিয়ম মেনে ন্যূনতম €30,000 কভারেজের মেডিকেল ইনস্যুরেন্স নিশ্চিত করুন।",
     "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost":
       "ঢাকা থেকে ফ্লাইটসহ জনপ্রতি মাত্র ৬৮,০০০–৮২,০০০ টাকায় ৬ দিনের শ্রীলঙ্কা (কলম্বো, ক্যান্ডি, নুওয়ারা এলিয়া, এলা Nine Arch Bridge ও গল ফোর্ট) ভ্রমণ করা যায়। বাংলাদেশি পাসপোর্টধারীরা অফিশিয়াল পোর্টালে (eta.gov.lk) মাত্র ২০ ডলারে SAARC ETA ভিসা পান।",
     "bangladesh-epassport-application-guide-64-districts-urgent-fees":
@@ -791,7 +791,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "bangladesh-epassport-application-renewal-64-districts-fee-guide":
       "দালাল ছাড়াই দেশের ৬৪ জেলার পাসপোর্ট অফিসে epassport.gov.bd পোর্টালে ১০ বছর মেয়াদী ৪৮ পৃষ্ঠার ই-পাসপোর্ট করতে ৫,৭৫০ টাকা (রেগুলার), ৮,০৫০ টাকা (এক্সপ্রেস) বা ১০,৩৫০ টাকা (সুপার এক্সপ্রেস, ২ দিনে) লাগে। নিয়মিত ভ্রমণকারীদের জন্য ৬৪ পৃষ্ঠার পাসপোর্ট সেরা।",
     "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp":
-      "ফ্লাইট ৩+ ঘণ্টা দেরি (Delay), বাতিল বা ওভারবুকিং হলে ইউরোপ/যুক্তরাজ্য রুটে EC 261/2004 আইন অনুযায়ী €250–€600 (৩৩,০০০–৮০,০০০ টাকা) এবং যেকোনো আন্তর্জাতিক এয়ারলাইন্সে লাগেজ হারালে মন্ট্রিয়ল কনভেনশনে সর্বোচ্চ ২,০৫,০০০ টাকা পর্যন্ত ক্ষতিপূরণ দাবি করা যায়।",
+      "ইউরোপ বা যুক্তরাজ্যের যোগ্য ফ্লাইটে ৩ ঘণ্টার বেশি দেরি হলে EC 261 বা UK 261 নিয়মে সর্বোচ্চ €৬০০ বা £৫২০ পর্যন্ত ক্ষতিপূরণ দাবি করা সম্ভব। যেকোনো আন্তর্জাতিক রুটে লাগেজ হারালে বা ক্ষতিগ্রস্ত হলে মন্ট্রিল কনভেনশন অনুযায়ী সর্বোচ্চ ১,৫১৯ SDR পর্যন্ত প্রমাণিত ক্ষতির ব্যয় ক্লেইম করা যায়।",
     "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla":
       "ঢাকা (DAC) থেকে সরাসরি জেদ্দা/মদিনা ওমরাহ ফ্লাইটে ৪৬ কেজি (২x২৩ কেজি) ব্যাগেজ ও ৫ লিটার ফ্রি জমজম পানির সুবিধায় Biman ও Saudia সেরা। সাশ্রয়ী ১-স্টপ ট্রানজিটে Emirates, Qatar ও Gulf Air এবং এশিয়া রুটে Malaysia ও Singapore Airlines শীর্ষে।",
     "havana-cuba-travel-guide-bangladesh":
