@@ -1,0 +1,32 @@
+# Run after Cloudflare Pages reports a successful production deployment.
+# This checks the real public HTTP responses, not just the build artifacts.
+name: Verify live sitemaps
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify production sitemap responses
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify HTTP status, content types, XML structure and matching text URLs
+        env:
+          SITEMAP_VERIFY_ATTEMPTS: "20"
+        run: npm run verify:sitemaps:live

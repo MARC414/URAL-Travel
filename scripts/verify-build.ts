@@ -24,6 +24,7 @@
 import fs from "node:fs";
 import zlib from "node:zlib";
 import path from "node:path";
+import { validateSitemapPair } from "./sitemapValidation";
 import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
@@ -1495,6 +1496,29 @@ check(
 
 const sitemap = read(path.join(DIST_DIR, "sitemap.xml"));
 check(sitemap !== null, "dist/sitemap.xml generated");
+const sitemapText = read(path.join(DIST_DIR, "sitemap.txt"));
+check(sitemapText !== null, "dist/sitemap.txt generated");
+for (const directory of ["public", "dist"]) {
+  try {
+    const urls = validateSitemapPair(
+      fs.readFileSync(path.join(ROOT_DIR, directory, "sitemap.xml"), "utf8"),
+      fs.readFileSync(path.join(ROOT_DIR, directory, "sitemap.txt"), "utf8"),
+    );
+    check(true, `${directory} sitemap is well-formed protocol XML; text backup matches all ${urls.length} URLs`);
+  } catch (error) {
+    check(false, `${directory} sitemap validation failed: ${error instanceof Error ? error.message : String(error)}`);
+  }
+}
+const deployedHeaders = read(path.join(DIST_DIR, "_headers")) ?? "";
+for (const [file, type] of [["sitemap.xml", "application/xml"], ["sitemap.txt", "text/plain"]]) {
+  const block = deployedHeaders.split(/\r?\n\r?\n/).find((part) => part.split(/\r?\n/).includes(`/${file}`));
+  check(!!block?.includes(`  Content-Type: ${type}; charset=utf-8`), `dist/_headers serves /${file} as ${type}`);
+}
+const deployedRobots = read(path.join(DIST_DIR, "robots.txt")) ?? "";
+for (const file of ["sitemap.xml", "sitemap.txt"]) {
+  check(deployedRobots.includes(`Sitemap: https://ural-travel.pages.dev/${file}`), `robots.txt advertises ${file}`);
+}
+
 
 // The Travelpayouts widget shell is an iframe/popup target, not a landing page.
 // It must stay noindex and out of the sitemap so it cannot compete with /flights.
