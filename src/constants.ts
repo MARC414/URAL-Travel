@@ -2425,7 +2425,7 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-17",
     slug: "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
     title: "Umrah Rules for Bangladeshi Women (2026): Mahram-Free Visa Policy, Madinah Ladies' Gates 25–29 & Ihram Guide",
-    summary: "Can Bangladeshi women apply for an Umrah visa without a male Mahram in 2026? How do women access daily prayer halls and book Rawdah Shareef permits at Masjid an-Nabawi in Madinah? Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah (haj.gov.sa) directives and the Nusuk portal, this guide explains mahram-free e-visa rules, modest Ihram clothing, private hair-trimming (Taqsir) etiquette, and hotel selection in Markazia North.",
+    summary: "Can Bangladeshi women apply for an Umrah visa without a male Mahram in 2026? How do women access daily prayer halls and book Rawdah Shareef permits at Masjid an-Nabawi in Madinah? Checked on 17 October 2026 against official Saudi Ministry of Hajj & Umrah (haj.gov.sa) directives and the Nusuk portal, this guide explains mahram-free e-visa rules, modest Ihram clothing, private hair-trimming (Taqsir) etiquette, and hotel selection in Markazia North.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
     updatedAt: "2026-10-17",
