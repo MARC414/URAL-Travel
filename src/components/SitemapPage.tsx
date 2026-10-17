@@ -28,6 +28,14 @@ import {
 interface SitemapPageProps {
   onNavigate: (path: string) => void;
   lang?: Language;
+  /**
+   * "pre-departure" renders the DAC readiness hub (hero, checklist, baggage,
+   * embassies, FAQs). "sitemap" renders the site directory (country quick
+   * finder + full anchor index). One component, two canonical URLs — keep the
+   * section sets disjoint so /pre-departure and /sitemap never duplicate
+   * substantial copy (the 2026-10 SEO split).
+   */
+  variant?: "pre-departure" | "sitemap";
 }
 
 interface ChecklistItem {
@@ -77,7 +85,7 @@ const PRE_DEPARTURE_CHECKLIST: ChecklistItem[] = [
       "দাগ বা ভাঁজ ছাড়া নতুন সিরিজের $১০০ ডলার নোট সাথে রাখুন—অন-অ্যারাইভাল ভিসা ফি, থাইল্যান্ড ইমিগ্রেশন বা জরুরি মানি এক্সচেঞ্জে প্রয়োজন হয়।",
     actionLabelEn: "Open BDT Currency Tool",
     actionLabelBn: "কারেন্সি কনভার্টার দেখুন",
-    actionPath: "/tools",
+    actionPath: "/tools/currency-converter",
   },
   {
     id: "return-ticket-hotel",
@@ -321,8 +329,14 @@ const COUNTRY_QUICK_MATRIX = [
 
 const STORAGE_KEY = "ural_dac_predeparture_checked_v1";
 
-export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en" as Language }) => {
+export const SitemapPage: React.FC<SitemapPageProps> = ({
+  onNavigate,
+  lang = "en" as Language,
+  variant = "pre-departure",
+}) => {
   const isBn = lang === "bn";
+  const isPreDeparture = variant !== "sitemap";
+  const isSitemapVariant = variant === "sitemap";
 
   const [checkedIds, setCheckedIds] = useState<string[]>(() => {
     if (typeof window === "undefined") return ["passport-6m", "return-ticket-hotel"];
@@ -432,11 +446,13 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
     return [...baseFaqs, ...dynamicChecklistFaqs];
   }, [uncheckedChecklistItems]);
 
-  // Dynamically synchronize the Schema.org FAQPage JSON-LD in document.head when checklist or country filter state updates
+  // Dynamically synchronize the Schema.org FAQPage JSON-LD in document.head when checklist or country filter state updates.
+  // Pre-departure variant only: /sitemap renders no FAQ section, so injecting
+  // an FAQPage node there would violate the visible-content rule.
   useEffect(() => {
-    if (typeof document === "undefined") return;
+    if (typeof document === "undefined" || variant !== "pre-departure") return;
     const dynamicSchema = getPreDepartureFaqSchema({
-      url: "https://ural-travel.pages.dev/sitemap",
+      url: "https://ural-travel.pages.dev/pre-departure",
       uncheckedChecklistItems: uncheckedChecklistItems.map((i) => ({
         title: i.titleEn,
         detail: i.detailEn,
@@ -455,8 +471,8 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
             (n: Record<string, unknown>) => n && n["@type"] === "FAQPage"
           );
           const { "@context": _ctx, ...faqNode } = dynamicSchema as unknown as Record<string, unknown>;
-          faqNode["@id"] = "https://ural-travel.pages.dev/sitemap#faq";
-          faqNode["mainEntityOfPage"] = { "@id": "https://ural-travel.pages.dev/sitemap#webpage" };
+          faqNode["@id"] = "https://ural-travel.pages.dev/pre-departure#faq";
+          faqNode["mainEntityOfPage"] = { "@id": "https://ural-travel.pages.dev/pre-departure#webpage" };
           if (idx >= 0) {
             parsed["@graph"][idx] = faqNode;
           } else {
@@ -537,7 +553,8 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
 
   return (
     <div className="space-y-12 animate-fade-in">
-      {/* 1. HERO HEADER BANNER */}
+      {/* 1. HERO HEADER BANNER (pre-departure variant) */}
+      {isPreDeparture && (
       <div className="bg-brand-navy text-white rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-xl space-y-6">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div className="space-y-3 max-w-3xl">
@@ -560,7 +577,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
             <p className="text-sm text-slate-300 leading-relaxed">
               {isBn
                 ? "বিমানবন্দরে রওনা দেওয়ার আগে আপনার পাসপোর্ট এন্ডোর্সমেন্ট, NOC/GO, রিটার্ন টিকেট ও ডিজিটাল অ্যারাইভাল কার্ড যাচাই করে নিন। পাশাপাশি কেবিন লাগেজ, জমজম পানির নিয়ম এবং বিদেশে বাংলাদেশ দূতাবাসের জরুরি নাম্বারগুলো হাতের কাছে রাখুন।"
-                : "Everything a Bangladeshi traveler needs in the final 72 hours before flying out of Dhaka (DAC) — verify your immigration documents, check cabin & Zamzam baggage rules, save Bangladesh Embassy emergency numbers, or jump directly to any country guide."}
+                : "Everything a Bangladeshi traveler needs in the final 72 hours before flying out of Dhaka (DAC) — verify your immigration documents, check cabin & Zamzam baggage rules, save Bangladesh Embassy emergency numbers, then jump to the complete site directory for any country guide."}
             </p>
           </div>
 
@@ -638,8 +655,63 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
           ))}
         </div>
       </div>
+      )}
 
-      {/* 2. INTERACTIVE 3-STAGE PRE-DEPARTURE CHECKLIST */}
+      {/* 1b. SITE DIRECTORY HERO (sitemap variant — mirrors prerendered /sitemap H1) */}
+      {isSitemapVariant && (
+      <div className="bg-brand-navy text-white rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-xl space-y-6">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <div className="space-y-3 max-w-3xl">
+            <div className="inline-flex items-center gap-2 text-xs text-[#F6B73C] font-mono bg-[#F6B73C]/10 border border-[#F6B73C]/25 px-3.5 py-1 rounded-full">
+              <BookOpen size={13} />
+              <span>
+                {isBn
+                  ? "সব পেজ এক জায়গায় · সাইট ডিরেক্টরি"
+                  : "Every page in one place · Site Directory"}
+              </span>
+            </div>
+            <h1
+              className="ural-page-title font-serif text-2xl sm:text-4xl font-bold tracking-tight text-white"
+              style={{ textWrap: "balance" }}
+            >
+              {isBn
+                ? "URAL ভ্রমণ সাইট ডিরেক্টরি ও গাইড ইনডেক্স"
+                : "Complete URAL Travel Site Directory & Guide Index"}
+            </h1>
+            <p className="text-sm text-slate-300 leading-relaxed">
+              {isBn
+                ? "ফ্লাইট, ভিসা, হোটেল, টাকার বাজেট, গন্তব্য গাইড, ওমরাহ প্রস্তুতি, ভ্রমণ টুল ও দূতাবাস হেল্পলাইন — বাংলাদেশি ভ্রমণকারীদের জন্য URAL-এর প্রতিটি পেজ নিচে সরাসরি লিংকে পাওয়া যাচ্ছে।"
+                : "Flights, visas, hotels, BDT budgets, destination itineraries, Umrah preparation, travel tools and embassy helplines — every page URAL publishes for Bangladeshi travelers, linked directly below."}
+            </p>
+          </div>
+
+          <div className="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-5 min-w-[260px] space-y-2.5 shrink-0">
+            <span className="text-xs font-mono uppercase tracking-wider text-slate-400 block">
+              {isBn ? "প্রি-ডিপার্চার হাব" : "Pre-Departure Hub"}
+            </span>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              {isBn
+                ? "ঢাকা এয়ারপোর্ট চেকলিস্ট, লাগেজ নিয়ম ও দূতাবাস নম্বর আলাদা পেজে।"
+                : "The DAC checklist, baggage rules and embassy numbers now live on their own page."}
+            </p>
+            <a
+              href="/pre-departure"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate("/pre-departure");
+              }}
+              className="w-full inline-flex items-center justify-between gap-2 rounded-xl bg-[#F6B73C] hover:bg-[#D4941A] text-brand-navy font-bold text-xs px-3.5 py-2.5 transition-colors cursor-pointer"
+            >
+              <span>{isBn ? "প্রি-ডিপার্চার হাব খুলুন" : "Open the Pre-Departure Hub"}</span>
+              <ArrowRight size={13} />
+            </a>
+          </div>
+        </div>
+      </div>
+      )}
+
+      {/* 2. INTERACTIVE 3-STAGE PRE-DEPARTURE CHECKLIST (pre-departure variant) */}
+      {isPreDeparture && (
       <section className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
           <div className="space-y-1">
@@ -737,8 +809,10 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
           })}
         </div>
       </section>
+      )}
 
-      {/* 3. DHAKA AIRPORT (DAC) BAGGAGE, ZAMZAM & CUSTOMS RULES */}
+      {/* 3. DHAKA AIRPORT (DAC) BAGGAGE, ZAMZAM & CUSTOMS RULES (pre-departure variant) */}
+      {isPreDeparture && (
       <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
         <div className="space-y-1">
           <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
@@ -817,8 +891,10 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
           </div>
         </div>
       </section>
+      )}
 
-      {/* 4. OVERSEAS BANGLADESH EMBASSY & HIGH COMMISSION EMERGENCY DIRECTORY */}
+      {/* 4. OVERSEAS BANGLADESH EMBASSY & HIGH COMMISSION EMERGENCY DIRECTORY (pre-departure variant) */}
+      {isPreDeparture && (
       <section className="space-y-5">
         <div className="space-y-1">
           <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
@@ -901,8 +977,10 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
           ))}
         </div>
       </section>
+      )}
 
-      {/* 5. ONE-CLICK COUNTRY & GUIDE QUICK FINDER */}
+      {/* 5. ONE-CLICK COUNTRY & GUIDE QUICK FINDER (sitemap variant) */}
+      {isSitemapVariant && (
       <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="space-y-1">
@@ -1058,10 +1136,10 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
               📖 {isBn ? "সব ট্রাভেল ব্লগ ও গাইড" : "All Travel Blog Guides"}
             </a>
             <a
-              href="/tools?tab=airhelp"
+              href="/tools/flight-delay-claim"
               onClick={(e) => {
                 e.preventDefault();
-                onNavigate("/tools?tab=airhelp");
+                onNavigate("/tools/flight-delay-claim");
               }}
               className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
             >
@@ -1070,8 +1148,10 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
           </div>
         </div>
       </section>
+      )}
 
-      {/* 6. DYNAMIC PRE-DEPARTURE READINESS & DHAKA AIRPORT (DAC) FAQS */}
+      {/* 6. DYNAMIC PRE-DEPARTURE READINESS & DHAKA AIRPORT (DAC) FAQS (pre-departure variant) */}
+      {isPreDeparture && (
       <section
         aria-labelledby="predeparture-faq-heading"
         className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6"
@@ -1137,8 +1217,37 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
           })}
         </div>
       </section>
+      )}
 
-      {/* 7. COMPLETE CRAWLABLE HTML SITEMAP DIRECTORY (BLOG GUIDES & 42 HUBS) */}
+      {/* Cross-link band: pre-departure hub points at the directory (sitemap variant) */}
+      {isPreDeparture && (
+      <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <h2 className="ural-section-title font-serif text-lg sm:text-xl font-bold text-slate-900">
+            {isBn ? "প্রতিটি দেশের গাইড সাইট ডিরেক্টরিতে" : "Find any country guide in the site directory"}
+          </h2>
+          <p className="text-xs text-slate-500">
+            {isBn
+              ? "ফ্লাইট, ভিসা, হোটেল ও টাকার বাজেট শিটসহ সম্পূর্ণ পেজ তালিকা।"
+              : "The complete page index — flights, visas, hotels and BDT budget sheets in one click."}
+          </p>
+        </div>
+        <a
+          href="/sitemap"
+          onClick={(e) => {
+            e.preventDefault();
+            onNavigate("/sitemap");
+          }}
+          className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs px-5 py-3 transition-colors cursor-pointer"
+        >
+          <span>{isBn ? "সাইট ডিরেক্টরি খুলুন" : "Open the Site Directory"}</span>
+          <ArrowRight size={13} className="text-[#F6B73C]" />
+        </a>
+      </div>
+      )}
+
+      {/* 7. COMPLETE CRAWLABLE HTML SITEMAP DIRECTORY (BLOG GUIDES & 42 HUBS) (sitemap variant) */}
+      {isSitemapVariant && (
       <section className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
         <div className="space-y-1">
           <span className="text-xs font-mono font-bold text-brand-navy uppercase tracking-wider block">
@@ -1231,6 +1340,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate, lang = "en
           </div>
         </div>
       </section>
+      )}
     </div>
   );
 };

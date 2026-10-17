@@ -89,6 +89,12 @@ import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
 import { getBengaliSeoCopy, getSeoCopy } from "./utils/seoCopy";
 import {
+  isToolSlug,
+  toolPathForTab,
+  SLUG_TO_TOOL_TAB,
+  TOOL_PAGE_SEO,
+} from "./utils/toolRoutes";
+import {
   BN_BREADCRUMB_LABELS,
   hasBengaliCounterpart,
   localizePublicSiteUrl,
@@ -819,7 +825,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
   return `${cleanWords.slice(0, 50).join(" ").replace(/[.,;:!?-]+$/, "")}...`;
 }
 
-type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "umrah" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "privacy" | "about" | "notFound";
+type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "umrah" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "privacy" | "about" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
@@ -1418,9 +1424,17 @@ export default function App() {
     } else if ((root === "umrah" || root === "hajj") && segs.length === 1) {
       section = "umrah";
       isLanding = true;
-    } else if (root === "tools" && segs.length === 1) {
-      section = "tools";
-      isLanding = true;
+    } else if (root === "tools" && segs.length <= 2) {
+      // Canonical tool paths: /tools/<slug> (e.g. /tools/flight-delay-claim).
+      // An unknown slug deliberately falls through to notFound (noindex) so a
+      // mistyped tool URL can never be indexed as a second /tools hub.
+      if (!subSegment) {
+        section = "tools";
+        isLanding = true;
+      } else if (isToolSlug(subSegment)) {
+        section = "tools";
+        parameterId = subSegment;
+      }
     } else if (root === "blog" && segs.length <= 2) {
       const slugParam = searchParams.get("slug") || subSegment;
       if (!slugParam || BLOG_SLUGS.includes(slugParam as (typeof BLOG_SLUGS)[number])) {
@@ -1434,8 +1448,13 @@ export default function App() {
     } else if (root === "about" && segs.length === 1) {
       section = "about";
       isLanding = true;
+    } else if (root === "pre-departure" && segs.length === 1) {
+      // Standalone pre-departure hub (split out of the old combined /sitemap
+      // page in 2026-10). /indexing stays an alias of the directory page.
+      section = "preDeparture";
+      isLanding = true;
     } else if (
-      ["sitemap", "pre-departure", "indexing"].includes(root) &&
+      ["sitemap", "indexing"].includes(root) &&
       segs.length === 1
     ) {
       section = "sitemap";
@@ -1552,7 +1571,7 @@ export default function App() {
   const getDefaultDrawerGroup = (sec: SectionType): "booking" | "destinations" | "research" | "tools" => {
     if (sec === "destinations" || sec === "experiences") return "destinations";
     if (sec === "blog" || sec === "costs") return "research";
-    if (sec === "tools" || sec === "sitemap" || sec === "contact") return "tools";
+    if (sec === "tools" || sec === "sitemap" || sec === "preDeparture" || sec === "contact") return "tools";
     return "booking";
   };
 
@@ -1949,22 +1968,50 @@ export default function App() {
     }
 
   } else if (section === "tools") {
+    const activeToolSlug = isToolSlug(parameterId) ? parameterId : null;
+    const activeToolTab = activeToolSlug ? SLUG_TO_TOOL_TAB[activeToolSlug] : null;
     const toolsUrl = siteUrl("/tools", lang);
-    seoTitle = "Bangladeshi Traveler Utility Tools & Services (2026) | URAL";
-    seoDescription = "Access handy travel utility tools for Bangladeshi outbound tourists: live BDT exchange rates, power plug specifications, packing checklist, and translation aids.";
-    const toolsServiceNode = serviceSchema({
-      url: toolsUrl,
-      idSuffix: "service-travel-tools",
-      name: "Bangladesh Outbound Currency, Visa Odds & Flight Delay Claim Tools",
-      description: seoDescription,
-      serviceType: "Travel Planning & Flight Compensation Utility",
-    });
-    const faqSchema = isBn ? null : getFaqSchemaForPage("tools", undefined, true, toolsUrl);
-    seoSchema = faqSchema ? [toolsServiceNode, faqSchema] : [toolsServiceNode];
-    seoBreadcrumbs = [
-      { name: "Home", url: siteUrl("/", lang) },
-      { name: "Travel Tools", url: toolsUrl }
-    ];
+    if (activeToolSlug && activeToolTab) {
+      // Canonical /tools/<slug> page: unique title, description and
+      // breadcrumbs per tool (the FAQ node stays on the hub only — the same
+      // four Q&As must not be emitted as duplicate FAQPage graphs on six URLs).
+      const toolUrl = siteUrl(`/tools/${activeToolSlug}`, lang);
+      const toolCopy = TOOL_PAGE_SEO[activeToolSlug];
+      seoTitle = (toolCopy?.titleEn) || "Travel Planning Tools for Bangladesh Travelers | URAL";
+      seoDescription = (toolCopy?.descriptionEn) ||
+        "Access handy travel utility tools for Bangladeshi outbound tourists: live BDT exchange rates, power plug specifications, packing checklist, and translation aids.";
+      seoSchema = serviceSchema({
+        url: toolUrl,
+        idSuffix: `service-travel-tools-${activeToolSlug}`,
+        name: toolCopy?.serviceNameEn || "Bangladesh Outbound Travel Planning Utility",
+        description: seoDescription,
+        serviceType: "Travel Planning & Flight Compensation Utility",
+      });
+      seoBreadcrumbs = [
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: isBn ? "ভ্রমণ টুলস" : "Travel Tools", url: toolsUrl },
+        {
+          name: isBn ? (toolCopy?.nameBn || toolCopy?.nameEn || "টুল") : (toolCopy?.nameEn || "Tool"),
+          url: toolUrl,
+        },
+      ];
+    } else {
+      seoTitle = "Bangladeshi Traveler Utility Tools & Services (2026) | URAL";
+      seoDescription = "Access handy travel utility tools for Bangladeshi outbound tourists: live BDT exchange rates, power plug specifications, packing checklist, and translation aids.";
+      const toolsServiceNode = serviceSchema({
+        url: toolsUrl,
+        idSuffix: "service-travel-tools",
+        name: "Bangladesh Outbound Currency, Visa Odds & Flight Delay Claim Tools",
+        description: seoDescription,
+        serviceType: "Travel Planning & Flight Compensation Utility",
+      });
+      const faqSchema = isBn ? null : getFaqSchemaForPage("tools", undefined, true, toolsUrl);
+      seoSchema = faqSchema ? [toolsServiceNode, faqSchema] : [toolsServiceNode];
+      seoBreadcrumbs = [
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: "Travel Tools", url: toolsUrl }
+      ];
+    }
 
   } else if (section === "blog" && localizedBlogs.length > 0) {
     const activePost = localizedBlogs.find(p => p.slug === parameterId) || localizedBlogs[0];
@@ -2170,18 +2217,28 @@ export default function App() {
       { name: "Home", url: siteUrl("/", lang) },
       { name: "Umrah & Hajj Hub", url: umrahUrl }
     ];
-  } else if (section === "sitemap") {
-    const sitemapUrl = siteUrl("/sitemap", lang);
-    seoTitle = "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Complete Site Directory | URAL";
-    seoDescription = "Interactive pre-flight readiness checklist for Bangladeshi travelers departing Dhaka Airport (DAC), cabin & Zamzam baggage rules, Embassy emergency helplines, and complete 83-page directory.";
+  } else if (section === "preDeparture") {
+    const preDepartureUrl = siteUrl("/pre-departure", lang);
+    seoTitle = "Dhaka Airport (DAC) Pre-Departure Checklist & Helplines | URAL";
+    seoDescription = "Interactive pre-flight readiness checklist for Bangladeshi travelers departing Dhaka Airport (DAC): cabin & Zamzam baggage rules, digital arrival cards and verified Bangladesh Embassy emergency helplines abroad.";
     if (!isBn) {
       seoSchema = getPreDepartureFaqSchema({
-        url: sitemapUrl,
+        url: preDepartureUrl,
       });
     }
     seoBreadcrumbs = [
       { name: "Home", url: siteUrl("/", lang) },
-      { name: "Pre-Departure & Complete Sitemap", url: sitemapUrl }
+      { name: isBn ? "প্রি-ডিপার্চার হাব" : "Pre-Departure Hub", url: preDepartureUrl }
+    ];
+  } else if (section === "sitemap") {
+    const sitemapUrl = siteUrl("/sitemap", lang);
+    seoTitle = "Complete URAL Travel Site Directory & Guide Index | URAL";
+    seoDescription = "Every URAL page in one place: flights, visas, hotels, BDT budgets, destination itineraries, Umrah preparation, travel tools and the full blog index for Bangladeshi travelers.";
+    // No FAQPage node here — the pre-departure FAQs live on /pre-departure
+    // now, and a duplicate FAQ graph on the directory page would compete.
+    seoBreadcrumbs = [
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: isBn ? "সাইট ডিরেক্টরি" : "Site Directory", url: sitemapUrl }
     ];
   } else if (section === "privacy") {
     const privacyUrl = siteUrl("/privacy", lang);
@@ -2225,9 +2282,13 @@ export default function App() {
     if (section === "umrah") return "/umrah";
     if (section === "kkdayHotels") return "/kkday-hotels";
     if (section === "visaFree") return "/visa-free-countries";
+    if (section === "preDeparture") return "/pre-departure";
     if (section === "sitemap") return "/sitemap";
     if (section === "privacy") return "/privacy";
-    if (section === "tools" || section === "contact") return `/${section}`;
+    if (section === "tools") {
+      return isToolSlug(parameterId) ? `/tools/${parameterId}` : "/tools";
+    }
+    if (section === "contact") return "/contact";
     return new URL(currentPath, "https://ural-travel.pages.dev").pathname;
   })();
 
@@ -2312,7 +2373,13 @@ export default function App() {
       if (p === "/destinations" && sp.get("country")) return `/destinations/${sp.get("country")}`;
       if (p === "/costs" && sp.get("country")) return `/costs/${sp.get("country")}`;
       if (p === "/blog" && sp.get("slug")) return `/blog/${sp.get("slug")}`;
-      if (p === "/pre-departure" || p === "/indexing") return "/sitemap";
+      if (p === "/tools") {
+        // Legacy ?tab= deep links converge on the canonical tool paths in-app
+        // (functions/_middleware.js 301s the same hop at the edge).
+        const toolPath = toolPathForTab(sp.get("tab"));
+        if (toolPath) return toolPath;
+      }
+      if (p === "/indexing") return "/sitemap";
       return u.pathname + u.search + u.hash;
     } catch {
       return rawPath;
@@ -2977,11 +3044,39 @@ export default function App() {
                         path: "/costs",
                       },
                       {
-                        id: "tools",
+                        id: "currency-converter",
+                        icon: DollarSign,
+                        label: isBn ? "BDT কারেন্সি কনভার্টার" : "BDT Currency Converter",
+                        sub: isBn ? "লাইভ রেট ও কার্ড মার্কআপ নোট" : "USD, AED, SAR, NPR, THB rates & markup notes",
+                        path: "/tools/currency-converter",
+                      },
+                      {
+                        id: "budget-calculator",
                         icon: Calculator,
-                        label: isBn ? "কারেন্সি কনভার্টার ও প্যাকিং" : "Currency, Packing & Visa Odds",
-                        sub: isBn ? "লাইভ BDT রেট ও প্যাকিং লিস্ট" : "Live BDT FX converter & trip tools",
-                        path: "/tools",
+                        label: isBn ? "ট্রিপ বাজেট ক্যালকুলেটর" : "Trip Budget Calculator",
+                        sub: isBn ? "মানুষ ও দিনভিত্তিক BDT খরচের হিসাব" : "BDT trip totals by travellers & days",
+                        path: "/tools/budget-calculator",
+                      },
+                      {
+                        id: "packing-checklist",
+                        icon: Check,
+                        label: isBn ? "স্মার্ট প্যাকিং চেকলিস্ট" : "Smart Packing Checklist",
+                        sub: isBn ? "কেবিন ওজন, তরল ও পাওয়ার ব্যাংক নিয়ম" : "Carry-on, 100ml liquids & power-bank rules",
+                        path: "/tools/packing-checklist",
+                      },
+                      {
+                        id: "visa-checker",
+                        icon: FileText,
+                        label: isBn ? "ভিসা অডস চেকার" : "Visa Odds Checker",
+                        sub: isBn ? "VOA ও eVisa স্ট্যাটাস যাচাই" : "VOA & eVisa status for Bangladeshi passports",
+                        path: "/tools/visa-checker",
+                      },
+                      {
+                        id: "airport-codes",
+                        icon: MapPin,
+                        label: isBn ? "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)" : "IATA Airport Codes Directory",
+                        sub: isBn ? "DAC সহ বিশ্বব্যাপী কোড ও টার্মিনাল" : "DAC & worldwide codes with terminals",
+                        path: "/tools/airport-codes",
                       },
                       {
                         id: "pre-departure",
@@ -3001,7 +3096,7 @@ export default function App() {
                           : isBn
                           ? "No Win, No Fee · ৭৮,০০০ টাকা পর্যন্ত"
                           : "No Win, No Fee · Up to BDT 78k payout",
-                        path: "/tools?tab=airhelp",
+                        path: "/tools/flight-delay-claim",
                       },
                       {
                         id: "contact",
@@ -3271,12 +3366,12 @@ export default function App() {
                       subtitle: isBn
                         ? "কারেন্সি কনভার্টার · দূতাবাস · €600 ক্লেইম"
                         : "FX tool · DAC checklist · €600 claim",
-                      isActiveGroup: ["tools", "sitemap", "contact"].includes(section),
+                      isActiveGroup: ["tools", "sitemap", "preDeparture", "contact"].includes(section),
                       primaryLinks: [
                         {
                           id: "tools",
-                          label: isBn ? "কারেন্সি কনভার্টার ও প্যাকিং টুলস" : "BDT Currency & Packing Tools",
-                          meta: isBn ? "লাইভ BDT রেট ও ভিসা ক্যালকুলেটর" : "Live BDT FX & readiness tools",
+                          label: isBn ? "সব ট্রাভেল টুলস হাব" : "All Travel Tools Hub",
+                          meta: isBn ? "লাইভ BDT রেট, ক্যালকুলেটর ও চেকলিস্ট" : "FX, budget & checklist workspace",
                           path: "/tools",
                         },
                         {
@@ -3295,7 +3390,7 @@ export default function App() {
                             : isBn
                             ? "No Win, No Fee · ৭৮,০০০ টাকা পর্যন্ত"
                             : "No Win, No Fee · Up to BDT 78k payout",
-                          path: "/tools?tab=airhelp",
+                          path: "/tools/flight-delay-claim",
                         },
                         {
                           id: "contact",
@@ -3304,7 +3399,28 @@ export default function App() {
                           path: "/contact",
                         },
                       ],
-                      quickChips: [],
+                      quickChips: [
+                        {
+                          label: isBn ? "কারেন্সি কনভার্টার" : "Currency Converter",
+                          path: "/tools/currency-converter",
+                        },
+                        {
+                          label: isBn ? "বাজেট ক্যালকুলেটর" : "Budget Calculator",
+                          path: "/tools/budget-calculator",
+                        },
+                        {
+                          label: isBn ? "প্যাকিং চেকলিস্ট" : "Packing Checklist",
+                          path: "/tools/packing-checklist",
+                        },
+                        {
+                          label: isBn ? "ভিসা অডস চেকার" : "Visa Odds Checker",
+                          path: "/tools/visa-checker",
+                        },
+                        {
+                          label: isBn ? "এয়ারপোর্ট কোড" : "Airport Codes",
+                          path: "/tools/airport-codes",
+                        },
+                      ],
                     },
                   ]).map((group) => {
                     const isExpanded = expandedDrawerGroup === group.id;
@@ -3831,10 +3947,10 @@ export default function App() {
                     </p>
                   </div>
                   <a
-                    href="/tools?tab=airports"
+                    href="/tools/airport-codes"
                     onClick={(e) => {
                       e.preventDefault();
-                      navigateTo("/tools?tab=airports");
+                      navigateTo("/tools/airport-codes");
                     }}
                     className="inline-flex min-h-11 w-full shrink-0 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-xs font-semibold text-brand-navy transition-colors hover:border-brand-navy hover:bg-brand-navy hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] md:w-auto"
                   >
@@ -4374,15 +4490,105 @@ export default function App() {
             <BlogPostRouteView context={routeViewContext} />
           </React.Suspense>
         )}
-      {/* 🟦 CONTENT & GROWTH: 4 FEATURED BANGLADESHI TRAVEL GUIDES IN ONE ROW */}
+      {/* -------------------------------------------------------------
+          📞 VIEW 9: CONTACT US & DIRECT SUPPORT HUB
+      ------------------------------------------------------------- */}
+      {section === "contact" && (
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <ContactRouteView context={routeViewContext} />
+          </React.Suspense>
+        )}
+
+      {/* -------------------------------------------------------------
+          👤 VIEW 10: ABOUT US
+      ------------------------------------------------------------- */}
+      {section === "about" && (
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <AboutRouteView context={routeViewContext} />
+          </React.Suspense>
+        )}
+
+      {/* -------------------------------------------------------------
+          🛂 VISA-FREE COUNTRIES PILLAR (/visa-free-countries)
+      ------------------------------------------------------------- */}
+      {section === "visaFree" && (
+        <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+          <VisaFreeCountriesRouteView context={routeViewContext} />
+        </React.Suspense>
+      )}
+
+      {/* -------------------------------------------------------------
+          🎟️ VIEW 11: GLOBAL ATTRACTIONS & SKIP-THE-LINE HUB (TIQETS & KLOOK)
+      ------------------------------------------------------------- */}
+      {section === "experiences" && (
+        <React.Suspense fallback={null}>
+          <ExperiencesPage lang={lang} onNavigate={navigateTo} />
+        </React.Suspense>
+      )}
+
+      {/* -------------------------------------------------------------
+          🕋 VIEW 12: DEDICATED UMRAH & HAJJ PAID-ADS LANDING PAGE
+      ------------------------------------------------------------- */}
+      {section === "kkdayHotels" && (
+        <React.Suspense fallback={null}>
+          <KkdayHotelsPage
+            isBn={isBn}
+            onNavigate={navigateTo}
+          />
+        </React.Suspense>
+      )}
+
+      {section === "umrah" && (
+        <React.Suspense fallback={null}>
+          <UmrahLandingPage
+            lang={lang}
+            localizedHajjFaqs={localizedHajjFaqs}
+            onNavigate={navigateTo}
+            coverImage={umrahMakkahImg}
+          />
+        </React.Suspense>
+      )}
+
+      {/* -------------------------------------------------------------
+          ✈️ VIEW 10: DHAKA AIRPORT (DAC) PRE-DEPARTURE HUB + SITE DIRECTORY
+          Two canonical URLs, one component: /pre-departure renders the
+          checklist variant, /sitemap renders the directory variant.
+      ------------------------------------------------------------- */}
+      {(section === "sitemap" || section === "preDeparture") && (
+        <React.Suspense fallback={null}>
+          <SitemapPage
+            onNavigate={navigateTo}
+            lang={lang}
+            variant={section === "preDeparture" ? "pre-departure" : "sitemap"}
+          />
+        </React.Suspense>
+      )}
+
+      {/* -------------------------------------------------------------
+          🔒 VIEW 11: PRIVACY & COOKIE POLICY HUB
+      ------------------------------------------------------------- */}
+      {section === "privacy" && (
+        <React.Suspense fallback={null}>
+          <PrivacyPolicyPage onNavigate={navigateTo} lang={lang} />
+        </React.Suspense>
+      )}
+
+      {section === "notFound" && (
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <NotFoundRouteView context={routeViewContext} />
+          </React.Suspense>
+        )}
+
+      {/* -------------------------------------------------------------
+          🟦 CONTENT & GROWTH: 4 FEATURED BANGLADESHI TRAVEL GUIDES
+          Rendered at the end of <main> on every page (except the Blog hub
+          and 404) so each route STARTS with its own content and this
+          cross-promo band sits immediately above the subscription section.
+      ------------------------------------------------------------- */}
       {section !== "blog" && section !== "notFound" && (
         <section
           id="content-and-growth-hub"
-          className={`${
-            ["umrah", "contact", "experiences", "sitemap"].includes(section)
-              ? "mt-4 pt-4 mb-14 sm:mb-20 pb-12 sm:pb-16 border-b border-slate-200/80"
-              : "mt-20 pt-16 border-t border-slate-200/80"
-          } space-y-6`}
+          className="mt-16 pt-12 border-t border-slate-200/80 space-y-6"
         >
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="space-y-1.5 max-w-2xl">
@@ -4483,89 +4689,6 @@ export default function App() {
           </div>
         </section>
       )}
-
-      {/* -------------------------------------------------------------
-          📞 VIEW 9: CONTACT US & DIRECT SUPPORT HUB
-      ------------------------------------------------------------- */}
-      {section === "contact" && (
-          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
-            <ContactRouteView context={routeViewContext} />
-          </React.Suspense>
-        )}
-
-      {/* -------------------------------------------------------------
-          👤 VIEW 10: ABOUT US
-      ------------------------------------------------------------- */}
-      {section === "about" && (
-          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
-            <AboutRouteView context={routeViewContext} />
-          </React.Suspense>
-        )}
-
-      {/* -------------------------------------------------------------
-          🛂 VISA-FREE COUNTRIES PILLAR (/visa-free-countries)
-      ------------------------------------------------------------- */}
-      {section === "visaFree" && (
-        <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
-          <VisaFreeCountriesRouteView context={routeViewContext} />
-        </React.Suspense>
-      )}
-
-      {/* -------------------------------------------------------------
-          🎟️ VIEW 11: GLOBAL ATTRACTIONS & SKIP-THE-LINE HUB (TIQETS & KLOOK)
-      ------------------------------------------------------------- */}
-      {section === "experiences" && (
-        <React.Suspense fallback={null}>
-          <ExperiencesPage lang={lang} onNavigate={navigateTo} />
-        </React.Suspense>
-      )}
-
-      {/* -------------------------------------------------------------
-          🕋 VIEW 12: DEDICATED UMRAH & HAJJ PAID-ADS LANDING PAGE
-      ------------------------------------------------------------- */}
-      {section === "kkdayHotels" && (
-        <React.Suspense fallback={null}>
-          <KkdayHotelsPage
-            isBn={isBn}
-            onNavigate={navigateTo}
-          />
-        </React.Suspense>
-      )}
-
-      {section === "umrah" && (
-        <React.Suspense fallback={null}>
-          <UmrahLandingPage
-            lang={lang}
-            localizedHajjFaqs={localizedHajjFaqs}
-            onNavigate={navigateTo}
-            coverImage={umrahMakkahImg}
-          />
-        </React.Suspense>
-      )}
-
-      {/* -------------------------------------------------------------
-          ✈️ VIEW 10: DHAKA AIRPORT (DAC) PRE-DEPARTURE & EMBASSY HUB
-      ------------------------------------------------------------- */}
-      {section === "sitemap" && (
-        <React.Suspense fallback={null}>
-          <SitemapPage onNavigate={navigateTo} lang={lang} />
-        </React.Suspense>
-      )}
-
-      {/* -------------------------------------------------------------
-          🔒 VIEW 11: PRIVACY & COOKIE POLICY HUB
-      ------------------------------------------------------------- */}
-      {section === "privacy" && (
-        <React.Suspense fallback={null}>
-          <PrivacyPolicyPage onNavigate={navigateTo} lang={lang} />
-        </React.Suspense>
-      )}
-
-      {section === "notFound" && (
-          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
-            <NotFoundRouteView context={routeViewContext} />
-          </React.Suspense>
-        )}
 
       </main>
 
@@ -5137,15 +5260,22 @@ export default function App() {
 
               {/* Free tools, not a paid partner: separated by a rule so it reads as
                   URAL's own resource sitting below the commercial links. */}
-              <div className="border-t border-slate-800/80 pt-2.5">
+              <div className="border-t border-slate-800/80 pt-2.5 flex flex-wrap gap-x-4">
+                <a
+                  href={getLocalizedRouteHref("/pre-departure")}
+                  onClick={(event) => handleNavigationAnchorClick(event, "/pre-departure")}
+                  className="inline-block py-1 text-xs font-semibold text-[#F6B73C] hover:text-white hover:underline cursor-pointer"
+                >
+                  {isBn
+                    ? "ঢাকা এয়ারপোর্ট (DAC) প্রি-ডিপার্চার চেকলিস্ট →"
+                    : "Dhaka Airport (DAC) Pre-Departure Checklist →"}
+                </a>
                 <a
                   href={getLocalizedRouteHref("/sitemap")}
                   onClick={(event) => handleNavigationAnchorClick(event, "/sitemap")}
                   className="inline-block py-1 text-xs font-semibold text-[#F6B73C] hover:text-white hover:underline cursor-pointer"
                 >
-                  {isBn
-                    ? "ঢাকা এয়ারপোর্ট (DAC) চেকলিস্ট ও সব গাইড ডিরেক্টরি →"
-                    : "Dhaka Airport (DAC) Checklist & All Guides Directory →"}
+                  {isBn ? "সব গাইড ডিরেক্টরি →" : "All Guides Directory →"}
                 </a>
               </div>
             </div>

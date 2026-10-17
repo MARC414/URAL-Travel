@@ -54,8 +54,20 @@ const AIRPORTS_DIRECTORY: AirportItem[] = [
   { code: "IST", city: "Istanbul", name: "Istanbul Airport", country: "Turkey", category: "global", airlines: "Turkish Airlines, Biman" },
 ];
 
-export function InteractiveTools() {
-  const [activeTool, setActiveTool] = useState<"converter" | "calculator" | "packing" | "visa-checker" | "airhelp" | "airports">(() => {
+type ActiveTool = "converter" | "calculator" | "packing" | "visa-checker" | "airhelp" | "airports";
+
+interface InteractiveToolsProps {
+  /**
+   * Tool selected by the canonical path URL (e.g. /tools/flight-delay-claim).
+   * Path slugs take precedence over the legacy ?tab= query so a shared clean
+   * URL always opens the tool it names, even next to an old query string.
+   */
+  initialTool?: ActiveTool;
+}
+
+export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
+  const [activeTool, setActiveTool] = useState<ActiveTool>(() => {
+    if (initialTool) return initialTool;
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const tab = params.get("tab");
@@ -67,13 +79,19 @@ export function InteractiveTools() {
   });
 
   React.useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || initialTool) return;
     const params = new URLSearchParams(window.location.search);
     const tab = params.get("tab");
     if (tab === "airhelp" || tab === "converter" || tab === "calculator" || tab === "packing" || tab === "visa-checker" || tab === "airports") {
       setActiveTool(tab);
     }
-  }, [typeof window !== "undefined" ? window.location.search : ""]);
+  }, [typeof window !== "undefined" ? window.location.search : "", initialTool]);
+
+  // Path-driven selection: moving between /tools/<slug> routes (SPA navigation
+  // keeps this component mounted) must follow the URL, not the previous tab.
+  React.useEffect(() => {
+    if (initialTool) setActiveTool(initialTool);
+  }, [initialTool]);
 
   // 1. Currency Converter State
   const [bdtAmount, setBdtAmount] = useState<number>(10000);

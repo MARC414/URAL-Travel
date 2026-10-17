@@ -1705,7 +1705,7 @@ RFCD card কি POS বা ATM limit-ও সরিয়ে দেয়?
       { text: "বিদেশে Cash বনাম Card (local currency বেছে DCC এড়ান)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
       { text: "Umrah-এর জন্য Shariah-Compliant Islamic Dual-Currency Card", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "Card নেই? bKash বা Bank Transfer-এ BDT Payment", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "Dual-Currency Card Fee ও Markup Calculator", path: "/tools?tab=currency" },
+      { text: "Dual-Currency Card Fee ও Markup Calculator", path: "/tools/currency-converter" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -2278,7 +2278,7 @@ eSIM-এর মেয়াদ কখন থেকে শুরু হয়?
 কোনো থার্ড-পার্টি সার্ভিস ছাড়াই কি সরাসরি ক্ষতিপূরণ দাবি করা সম্ভব?
 হ্যাঁ। ইউরোপীয় ইউনিয়ন ও যুক্তরাজ্যের যাত্রী অধিকার নীতিমালা অনুযায়ী প্রথমে পরিচালনাকারী এয়ারলাইন্সের ওয়েবসাইটে সরাসরি বিনা খরচে আবেদন করার পরামর্শ দেওয়া হয় [২][৭]। থার্ড-পার্টি কোম্পানিগুলো ঐচ্ছিক বাণিজ্যিক সেবা।`,
     internalLinks: [
-      { text: "Travel Tools হাবে ফ্লাইট ক্ষতিপূরণ ও AirHelp প্রোমো কোড দেখুন", path: "/tools?tab=airhelp" },
+      { text: "Travel Tools হাবে ফ্লাইট ক্ষতিপূরণ ও AirHelp প্রোমো কোড দেখুন", path: "/tools/flight-delay-claim" },
       { text: "ঢাকা থেকে পরিচালিত প্রধান এয়ারলাইন্সের লাগেজ ও সার্ভিস নিয়ম", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
       { text: "ঢাকা থেকে জেদ্দা ও মদিনা Open-Jaw Flight কৌশল", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
       { text: "বিদেশ ভ্রমণে সেরা Travel eSIM ও ট্রাভেল ইনস্যুরেন্স গাইড", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
@@ -2369,9 +2369,9 @@ eSIM-এর মেয়াদ কখন থেকে শুরু হয়?
 ৪. ট্রাভেল ডেস্কে দ্রুত কোটেশন পাওয়ার নিয়ম
 URAL বা যেকোনো এয়ারলাইন্স এজেন্সিকে মেসেজ দেওয়ার সময় *"DAC to DXB on 15 Oct, 1 Passenger"* লিখে পাঠালে এজেন্ট মাত্র ১০ সেকেন্ডে গ্লোবাল সিস্টেমে সার্চ করে সেরা BDT ভাড়া জানাতে পারে। আমাদের **Travel Tools**-এর এয়ারপোর্ট কোড সেকশন থেকে সরাসরি হোয়াটসঅ্যাপে মেসেজ ফরম্যাট ড্রাফট করে পাঠাতে পারেন।`,
     internalLinks: [
-      { text: "টুলস ডেস্কে সার্চেবল এয়ারপোর্ট ডিরেক্টরি ও হোয়াটসঅ্যাপ কোটেশন", path: "/tools?tab=airports" },
+      { text: "টুলস ডেস্কে সার্চেবল এয়ারপোর্ট ডিরেক্টরি ও হোয়াটসঅ্যাপ কোটেশন", path: "/tools/airport-codes" },
       { text: "ঢাকা থেকে দুবাই ফ্লাইট শিডিউল ও বিমান ভাড়া", path: "/flights/dhaka-dubai" },
-      { text: "ফ্লাইট ডিলে ক্ষতিপূরণ চেকার (€600)", path: "/tools?tab=airhelp" },
+      { text: "ফ্লাইট ডিলে ক্ষতিপূরণ চেকার (€600)", path: "/tools/flight-delay-claim" },
       { text: "ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার ইমিগ্রেশন চেকলিস্ট", path: "/pre-departure" },
       { text: "গ্লোবাল ফ্লাইট সার্চ ও ফেয়ার বেঞ্চমার্ক", path: "/flights" },
     ],
@@ -2414,8 +2414,8 @@ URAL বা যেকোনো এয়ারলাইন্স এজেন্স
       { text: "ঢাকা থেকে দুবাই ফ্লাইট শিডিউল ও BDT ভাড়া", path: "/flights/dhaka-dubai" },
       { text: "দুবাই হোটেল এলাকা ও মেট্রো স্টেশন গাইড", path: "/hotels/dubai-hotels" },
       { text: "দুবাই ৫ দিনের সম্পূর্ণ BDT ভ্রমণ খরচ হিসাব", path: "/costs/dubai-costs" },
-      { text: "এয়ারপোর্ট কোড ও হোয়াটসঅ্যাপ টিকিট অনুসন্ধান টুল", path: "/tools?tab=airports" },
-      { text: "ফ্লাইট ডিলে ক্ষতিপূরণ চেকার (€600)", path: "/tools?tab=airhelp" },
+      { text: "এয়ারপোর্ট কোড ও হোয়াটসঅ্যাপ টিকিট অনুসন্ধান টুল", path: "/tools/airport-codes" },
+      { text: "ফ্লাইট ডিলে ক্ষতিপূরণ চেকার (€600)", path: "/tools/flight-delay-claim" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -2495,7 +2495,7 @@ URAL বা যেকোনো এয়ারলাইন্স এজেন্স
       { text: "ডুয়াল-কারেন্সি কার্ড এন্ডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "RFCD অ্যাকাউন্ট বনাম BDT ৩০০ ট্রাভেল কোটা গাইড", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "গ্লোবাল ফ্লাইট সার্চ ও ভাড়া বেঞ্চমার্ক", path: "/flights" },
-      { text: "ফ্লাইট ডিলে ক্ষতিপূরণ চেকার (€600)", path: "/tools?tab=airhelp" },
+      { text: "ফ্লাইট ডিলে ক্ষতিপূরণ চেকার (€600)", path: "/tools/flight-delay-claim" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -2564,7 +2564,7 @@ URAL বা যেকোনো এয়ারলাইন্স এজেন্স
       { text: "সেরা ট্রাভেল eSIM ও ট্রাভেল ইনস্যুরেন্স গাইড", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
       { text: "ডুয়াল-কারেন্সি কার্ড এন্ডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "গ্লোবাল ফ্লাইট সার্চ ও ভাড়া বেঞ্চমার্ক", path: "/flights" },
-      { text: "ফ্লাইট ডিলে ক্ষতিপূরণ চেকার (€600)", path: "/tools?tab=airhelp" },
+      { text: "ফ্লাইট ডিলে ক্ষতিপূরণ চেকার (€600)", path: "/tools/flight-delay-claim" },
     ],
     affiliateCTA: {
       provider: "aviasales",

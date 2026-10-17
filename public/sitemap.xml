@@ -370,6 +370,69 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools" />
   </url>
   <url>
+    <loc>https://ural-travel.pages.dev/tools/currency-converter</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools/currency-converter" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools/currency-converter" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools/currency-converter" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/tools/budget-calculator</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools/budget-calculator" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools/budget-calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools/budget-calculator" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/tools/packing-checklist</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools/packing-checklist" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools/packing-checklist" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools/packing-checklist" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/tools/visa-checker</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools/visa-checker" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools/visa-checker" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools/visa-checker" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/tools/flight-delay-claim</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools/flight-delay-claim" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools/flight-delay-claim" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools/flight-delay-claim" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/tools/airport-codes</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools/airport-codes" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools/airport-codes" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools/airport-codes" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/pre-departure</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/pre-departure" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/pre-departure" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/pre-departure" />
+  </url>
+  <url>
     <loc>https://ural-travel.pages.dev/sitemap</loc>
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
@@ -1214,6 +1277,69 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/tools/currency-converter</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools/currency-converter" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools/currency-converter" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools/currency-converter" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/tools/budget-calculator</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools/budget-calculator" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools/budget-calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools/budget-calculator" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/tools/packing-checklist</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools/packing-checklist" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools/packing-checklist" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools/packing-checklist" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/tools/visa-checker</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools/visa-checker" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools/visa-checker" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools/visa-checker" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/tools/flight-delay-claim</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools/flight-delay-claim" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools/flight-delay-claim" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools/flight-delay-claim" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/tools/airport-codes</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/tools/airport-codes" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/tools/airport-codes" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/tools/airport-codes" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/pre-departure</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/pre-departure" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/pre-departure" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/pre-departure" />
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/bn/sitemap</loc>
