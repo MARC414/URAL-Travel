@@ -146,6 +146,7 @@ Then inspect:
 
 - the EN and `/bn/` prerendered HTML for the same slug;
 - visible title, canonical, hreflang, language, dateModified, body, FAQ, and references;
+- the `FAQPage` node in the `dist` HTML of **both** locales: the prerender pairs every line from the FAQ heading to the next numbered heading, so any paragraph left after the FAQ block makes the count odd and silently deletes the schema while the visible FAQ still renders correctly — `npm run test:scheduling` now asserts the pairing rule for every scheduled post;
 - the sitemap entries and RSS item for the target post;
 - `git diff -- public/sitemap.xml public/rss.xml` to confirm no unrelated feed or URL changes;
 - the verifier's total check count and any warnings.
