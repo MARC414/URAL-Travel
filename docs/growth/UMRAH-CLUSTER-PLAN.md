@@ -71,6 +71,12 @@ Each wave uses the current Stages 1–9 in `AI-WRITING-PROMPTS.md`, plus the own
 
 Plan the links now; add links to a page only when its destination exists and is published.
 
+> **All eleven Umrah children are live.** They are in `BLOG_DATA` and prerendered to `dist/`, so the "live pages only"
+> rule is satisfied for every slug in this cluster — it is not a reason to defer linking. The acceptance floor
+> (≥4 internal links, ≥2 blog→blog, ≥1 hub, per locale) and the enforced checks are in
+> [`10-CONTENT-UPGRADE-STANDARD.md`](10-CONTENT-UPGRADE-STANDARD.md) §3. "Do not force a fixed link count" below
+> means *do not pad with irrelevant links*; it does not lower the floor, and no published post is currently below it.
+
 - **Hub down:** `/umrah` links to the main DIY process guide and a short, grouped directory of live specialist pages (visa/permit, flights, hotels/rail, accessibility, preparation, seasonal, return logistics, food/Ziyarah). Prioritize useful choices rather than listing every related blog in one undifferentiated block.
 - **Main guide up and down:** the detailed guide links back to `/umrah` for the broader planning tool and sends readers to the relevant child at the point where that task appears. It should not duplicate each child's full instructions.
 - **Child up:** each published child links back to both the broad `/umrah` hub and the detailed process guide where contextually useful. Add one or two sibling links only when they are a genuine next step; do not force a fixed link count.

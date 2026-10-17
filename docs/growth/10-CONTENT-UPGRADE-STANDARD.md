@@ -207,15 +207,27 @@ when a verified price exists; name the passport and departure context. Lead with
 the primary question without hype. Never imply URAL booked, tested, interviewed or measured anything unless the
 repository contains that evidence. Full contract: [`AI-WRITING-PROMPTS.md`](AI-WRITING-PROMPTS.md) §0.5.
 
-### 6.2 Upgrade pattern
+### 6.2 Upgrade pattern — the "conversational" style, defined
 
-Use the pattern shipped in the recent cluster upgrades:
+The style used in the October 2026 upgrade wave (the Cox's Bazar pillar is the reference article) is not loose
+chattiness. It is a fixed five-beat structure:
 
-1. a heading phrased as the reader's question;
-2. the direct answer in the first two sentences;
-3. the practical detail — cost, condition, document, step;
-4. the caveat **beside** the claim, not in a footnote;
-5. the next action, linked (§3).
+1. **"Who this guide is for"** — one sentence naming the reader, their origin and their decision. No generic intro.
+2. **"Quick Answer"** — the dated, specific answer in the first two sentences, with citation markers.
+3. **Question-shaped headings** — "Cox's Bazar Airport Status in 2026: International Flights Still Suspended", not
+   "Airport".
+4. **The practical detail** — cost, condition, document, step, with the date basis beside it.
+5. **The caveat beside the claim** and the next action, linked (§3).
+
+Write to one traveller, in the second person, in short factual sentences. Conversational means *direct*, not casual:
+no filler ("In today's world…"), no jokes in a religious or legal section, no "we" unless the repository contains the
+evidence for it.
+
+```text
+YES  Who this guide is for: families leaving Dhaka who need a plan they can verify today.
+YES  Quick Answer — As of 16 October 2026, three routes operate: … [5]. International flights are not operating: … [2].
+NO   Planning a trip to Cox's Bazar? Read on to discover everything you need to know!
+```
 
 ### 6.3 Factual vs practical sections
 
