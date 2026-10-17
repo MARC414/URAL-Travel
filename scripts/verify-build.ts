@@ -28,6 +28,7 @@ import { validateSitemapPair } from "./sitemapValidation";
 import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
+import { AFFILIATE_LINKS } from "../src/components/AffiliatePartners";
 import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
 import { SCHEDULED_BLOG_ALT_TEXT } from "../src/data/scheduledBlogIndex.generated";
 import { BLOG_BODY } from "../src/data/blogContent";
@@ -4211,6 +4212,183 @@ check(
   (customsArticle?.references?.length ?? 0) >= 3,
   `blog-21: references array present with at least 3 sources (Nusuk, NBR, Biman)`
 );
+
+// --- Content contract (docs/growth/10-CONTENT-UPGRADE-STANDARD.md) ---------
+//
+// Structure only. The standard's editorial gates (right next step, primary
+// source, real localization) cannot be asserted from code. These four can, and
+// each one has already failed at least once:
+//   - a curated link pointed at a slug that does not exist
+//   - a Bengali override carried no internalLinks (no fallback exists)
+//   - an affiliateCTA.provider drifted outside AFFILIATE_LINKS
+//   - metadata advertised links the rendered page never carried
+//
+// The 2026-10-17 false audit is the reason this block is paired with the
+// header comment in src/data/blogContent.ts: absence from the body file is not
+// absence from the post.
+
+type LinkAuditPost = {
+  id: string;
+  slug: string;
+  internalLinks?: { text: string; path: string }[];
+  affiliateCTA?: { provider: string };
+};
+
+function auditPostLinks(posts: LinkAuditPost[], slugSet: Set<string>): string[] {
+  const issues: string[] = [];
+  for (const post of posts) {
+    const links = post.internalLinks ?? [];
+    if (links.length === 0) issues.push(`${post.id}: no internal links`);
+    const seen = new Set<string>();
+    for (const link of links) {
+      if (!link.path.startsWith("/")) {
+        issues.push(`${post.id}: non-absolute path ${link.path}`);
+        continue;
+      }
+      if (seen.has(link.path)) issues.push(`${post.id}: duplicate ${link.path}`);
+      seen.add(link.path);
+      if (link.path === `/blog/${post.slug}`) issues.push(`${post.id}: self-link ${link.path}`);
+      if (link.path.startsWith("/blog/")) {
+        const target = link.path.slice("/blog/".length).split(/[?#]/, 1)[0];
+        if (!slugSet.has(target)) issues.push(`${post.id}: dead blog target ${link.path}`);
+      }
+    }
+    if (post.affiliateCTA && !Object.prototype.hasOwnProperty.call(AFFILIATE_LINKS, post.affiliateCTA.provider)) {
+      issues.push(`${post.id}: unknown affiliate provider "${post.affiliateCTA.provider}"`);
+    }
+  }
+  return issues;
+}
+
+const CONTENT_SLUGS = new Set(BLOG_DATA.map((post) => post.slug));
+const contentLinkIssues = auditPostLinks(BLOG_DATA, CONTENT_SLUGS);
+check(
+  contentLinkIssues.length === 0,
+  `content contract: every post has internal links that resolve, are unique and never self-referential [${
+    contentLinkIssues.slice(0, 3).join("; ")
+  }]`
+);
+
+// Negative control: the validator must still reject each failure mode. Without
+// this, a refactor that returns [] would leave a green check protecting nothing.
+const LINK_AUDIT_CONTROL: LinkAuditPost[] = [
+  { id: "healthy", slug: "healthy", internalLinks: [{ text: "x", path: `/blog/${BLOG_DATA[0].slug}` }] },
+  { id: "dead", slug: "dead", internalLinks: [{ text: "x", path: "/blog/does-not-exist" }] },
+  { id: "self", slug: "self", internalLinks: [{ text: "x", path: "/blog/self" }] },
+  { id: "duplicate", slug: "duplicate", internalLinks: [
+    { text: "x", path: `/blog/${BLOG_DATA[0].slug}` },
+    { text: "y", path: `/blog/${BLOG_DATA[0].slug}` },
+  ] },
+  { id: "provider", slug: "provider", internalLinks: [{ text: "x", path: `/blog/${BLOG_DATA[0].slug}` }], affiliateCTA: { provider: "not-a-partner" } },
+  { id: "empty", slug: "empty", internalLinks: [] },
+];
+const linkAuditControlProblems = auditPostLinks(LINK_AUDIT_CONTROL, CONTENT_SLUGS);
+const linkAuditControlCaught = ["dead", "self", "duplicate", "provider", "empty"].every((id) =>
+  linkAuditControlProblems.some((problem) => problem.startsWith(`${id}:`))
+);
+check(
+  !linkAuditControlProblems.some((problem) => problem.startsWith("healthy:")) &&
+    linkAuditControlCaught &&
+    linkAuditControlProblems.length >= 5,
+  `content contract: the link validator still rejects dead, self, duplicate, unknown-provider and empty fixtures (found ${linkAuditControlProblems.length})`
+);
+
+// Flagship cluster: the Umrah articles are the pages being actively upgraded, so
+// the full minimum applies to them today. Legacy destination posts are reported
+// as debt below, not retro-failed.
+const FLAGSHIP_CATEGORY = "Hajj & Umrah";
+const flagshipPosts = BLOG_DATA.filter((post) => post.category === FLAGSHIP_CATEGORY);
+const flagshipBlogLinks = (post: { slug: string; internalLinks?: { path: string }[] }) =>
+  (post.internalLinks ?? []).filter(
+    (link) =>
+      link.path.startsWith("/blog/") &&
+      link.path !== `/blog/${post.slug}` &&
+      CONTENT_SLUGS.has(link.path.slice("/blog/".length))
+  );
+const flagshipIssues = flagshipPosts
+  .map((post) => ({
+    id: post.id,
+    blogLinks: flagshipBlogLinks(post).length,
+    hasCta: Boolean(post.affiliateCTA),
+  }))
+  .filter((row) => row.blogLinks < 2 || !row.hasCta)
+  .map((row) => `${row.id}: ${row.blogLinks} blog links, cta=${row.hasCta}`);
+check(
+  flagshipPosts.length >= 10 && flagshipIssues.length === 0,
+  `content contract: every ${FLAGSHIP_CATEGORY} article defines >=2 blog links and an affiliate CTA [${
+    flagshipIssues.slice(0, 3).join("; ")
+  }]`
+);
+
+const flagshipRenderIssues: string[] = [];
+for (const post of flagshipPosts) {
+  const enHtml = read(path.join(DIST_DIR, "blog", `${post.slug}.html`)) ?? "";
+  const bnHtml = read(path.join(DIST_DIR, "bn", "blog", `${post.slug}.html`)) ?? "";
+  if (!enHtml) {
+    flagshipRenderIssues.push(`${post.id}: EN page missing`);
+    continue;
+  }
+  if (!bnHtml) {
+    flagshipRenderIssues.push(`${post.id}: BN page missing`);
+    continue;
+  }
+  for (const link of flagshipBlogLinks(post)) {
+    if (!enHtml.includes(`href="${link.path}"`)) {
+      flagshipRenderIssues.push(`${post.id}: EN missing ${link.path}`);
+    }
+  }
+  const bnAnchors = new Set(
+    [...bnHtml.matchAll(/href="(\/bn\/blog\/[^"]+)"/g)].map((match) => match[1])
+  );
+  if (bnAnchors.size < 2) flagshipRenderIssues.push(`${post.id}: BN has ${bnAnchors.size} blog anchors`);
+}
+check(
+  flagshipRenderIssues.length === 0,
+  `content contract: the ${FLAGSHIP_CATEGORY} pages actually render the curated blog anchors in both locales [${
+    flagshipRenderIssues.slice(0, 3).join("; ")
+  }]`
+);
+
+// Non-blocking debt report. Printed on every run so the numbers in §10 of the
+// standard are reproducible, but never counted as a pass.
+const contentDebt: string[] = [];
+const noBlogLink = BLOG_DATA.filter((post) => flagshipBlogLinks(post).length === 0).map((post) => post.id);
+const noCta = BLOG_DATA.filter((post) => !post.affiliateCTA).map((post) => post.id);
+const noRefs = BLOG_DATA.filter((post) => (post.references?.length ?? 0) === 0).map((post) => post.id);
+const inboundLinks = new Map<string, number>();
+for (const post of BLOG_DATA) {
+  for (const link of post.internalLinks ?? []) {
+    if (!link.path.startsWith("/blog/")) continue;
+    const target = link.path.slice("/blog/".length);
+    if (!CONTENT_SLUGS.has(target) || target === post.slug) continue;
+    inboundLinks.set(target, (inboundLinks.get(target) ?? 0) + 1);
+  }
+}
+const orphaned = BLOG_DATA.filter((post) => (inboundLinks.get(post.slug) ?? 0) === 0).map((post) => post.id);
+const bnBare: string[] = [];
+for (const post of BLOG_DATA) {
+  const bnHtml = read(path.join(DIST_DIR, "bn", "blog", `${post.slug}.html`)) ?? "";
+  const anchors = new Set([...bnHtml.matchAll(/href="(\/bn\/blog\/[^"]+)"/g)].map((match) => match[1]));
+  if (anchors.size === 0) bnBare.push(post.id);
+}
+const bnLocalizedById = new Map(getLocalizedBlogs("bn").map((post) => [post.id, post]));
+const bnParityShort = BLOG_DATA.filter((post) => {
+  const bn = bnLocalizedById.get(post.id);
+  return bn && (bn.internalLinks?.length ?? 0) < (post.internalLinks?.length ?? 0);
+}).map((post) => {
+  const bnCount = bnLocalizedById.get(post.id)?.internalLinks?.length ?? 0;
+  return `${post.id}(${bnCount}/${post.internalLinks?.length ?? 0})`;
+});
+if (noBlogLink.length) contentDebt.push(`no blog->blog link (${noBlogLink.length}): ${noBlogLink.join(", ")}`);
+if (noCta.length) contentDebt.push(`no affiliateCTA (${noCta.length}): ${noCta.join(", ")}`);
+if (noRefs.length) contentDebt.push(`no references (${noRefs.length}): ${noRefs.join(", ")}`);
+if (orphaned.length) contentDebt.push(`no editorial inbound link (${orphaned.length}): ${orphaned.join(", ")}`);
+if (bnBare.length) contentDebt.push(`BN page renders no blog anchors (${bnBare.length}): ${bnBare.join(", ")}`);
+if (bnParityShort.length)
+  contentDebt.push(
+    `Bengali internalLinks shorter than English (${bnParityShort.length}): ${bnParityShort.join(", ")}`
+  );
+for (const line of contentDebt) console.log(`[content-debt] ${line}`);
 
 // --- Report ----------------------------------------------------------------
 // Keep this block LAST. The checks above only count if it runs after them; when

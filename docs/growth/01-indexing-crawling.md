@@ -33,13 +33,18 @@ Only the homepage (`/`) is indexed. Google has *discovered* the other URLs (they
 
 This is **not** a technical blocker (there is no `noindex`, no robots block, canonicals are correct). It is a **priority/quality** decision by Google. A new site with no external authority gets a small crawl budget, and Google spends it on pages it judges most valuable. Right now that's only the homepage, because:
 
-### Root cause A — internal-linking dead-ends (the big one)
-Verified from the built `dist/`:
-- Homepage prerenders **83 crawlable `<a href>` links** — the full site graph.
-- **Each blog post prerenders exactly 1 internal link** (`href="/blog"`, "← Back to All 41 Bangladesh Travel Guides").
-- The `/flights` hub prerenders only **6** links (its own child routes).
+### Root cause A — internal-linking dead-ends (resolved 2026-10-17)
 
-So link equity flows *into* the homepage and dies there. Deep pages are near-orphans. Google sees pages that nothing meaningfully links to and concludes they're low-priority. **Fix in [02-internal-linking.md](02-internal-linking.md) — this is the #1 lever.**
+> **This diagnosis is historical.** Its measurements were taken in September against a pre-link build. Measured from
+> `dist/` on the merged `main` on 17 October 2026: every English blog page renders at least four distinct `/blog/`
+> anchors (curated `internalLinks` plus `getRelatedBlogPosts`), the Hajj & Umrah pages also render their hub links,
+> and the Bengali pages carry their own curated links. The remaining gaps — 8 legacy destination posts with no
+> blog→blog link, 9 Bengali pages with no blog anchor, and 9 editorial orphans — are tracked in
+> [`10-CONTENT-UPGRADE-STANDARD.md`](10-CONTENT-UPGRADE-STANDARD.md) §10. The `/flights` hub link count was not
+> re-measured here.
+>
+> Do not act on the September premise. The structural contract that keeps this resolved is file 10, and
+> `npm run verify:build` now fails if a flagship article's curated anchors are missing from either locale.
 
 ### Root cause B — thin content on hub/money pages
 - `/flights` hub prerenders ~803 characters of body content vs the homepage's ~4,511.

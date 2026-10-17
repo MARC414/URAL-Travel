@@ -31,6 +31,27 @@ All Travelpayouts partner links and promotional campaigns are managed centrally 
 
 ---
 
+## 2b. Content Authoring Contract (normative)
+
+**Before writing, upgrading, or auditing an article, read
+[`docs/growth/10-CONTENT-UPGRADE-STANDARD.md`](docs/growth/10-CONTENT-UPGRADE-STANDARD.md).** It is the acceptance
+contract for one article and applies to every AI tool and contributor.
+
+- **Fields live in three files, not one.** Bodies are in `src/data/blogContent.ts`; English metadata
+  (`references`, `internalLinks`, `affiliateCTA`, dates) is in `src/constants.ts`; Bengali overrides are in
+  `src/data/bengaliContent.ts`. An audit that greps only the body file will report a fully linked post as unlinked —
+  that is what produced the false "blog-17 has no internal links" report on 2026-10-17. Verify in `dist/`, never from
+  a single-file grep.
+- **"Done" is six gates:** body, ≥3 primary references, ≥4 internal links (≥2 blog→blog, ≥1 hub/money), one relevant
+  affiliate CTA, Bengali parity, and build proof. `verify:build` can only assert the structural half.
+- **Bengali links have no fallback.** `getLocalizedBlogs("bn")` assigns `internalLinks` from the Bengali override
+  only. Omitting the array ships a Bengali article with zero editorial links.
+- **CI enforces the structure.** `npm run verify:build` fails on dead, duplicate, or self links, unknown affiliate
+  providers, a Hajj & Umrah article with fewer than two blog links, and curated anchors missing from the rendered EN
+  or BN page. It also prints a non-blocking `[content-debt]` report; green CI is not a pass on the debt.
+
+---
+
 ## 3. Global Flight & Hotel Search Architecture
 
 1. **Global Flight Scanner (`src/components/TravelpayoutsWidget.jsx`)**:
@@ -58,6 +79,8 @@ All Travelpayouts partner links and promotional campaigns are managed centrally 
 
 - `npm run lint` — Runs `tsc --noEmit` to verify TypeScript types across `src/`.
 - `npm run build` — Runs `vite build` followed by `tsx scripts/prerender.ts` to generate static route HTML and sitemaps in `dist/`.
+- `npm run verify:build` — Runs the post-build assertions against `dist/` (metadata, sitemap `lastmod`, schema,
+  rendered content, and the content-linking contract). It must exit 0 before a change is reported as shipped.
 - `npm run build:spa` — Runs `vite build` only.
 
 ---
