@@ -2419,7 +2419,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Umrah Rules for Bangladeshi Women & Ladies' Gates 25–29", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
       { text: "Hajj Registration on hajj.gov.bd & PID Verification", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Ramadan Umrah & I'tikaf Guide: Booking, Budget & Season Rules from Bangladesh", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Live Nusuk QR Code Requires Active Mobile Data at Rawdah Gates", body: "Screenshots of Nusuk Rawdah permits are not accepted by Masjid an-Nabawi guards. Install a Saudi Arabia 5G eSIM before flying from Dhaka so your live dynamic QR code loads instantly." }
   },
@@ -2454,7 +2455,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Nusuk App & Rawdah Shareef Permit Step-by-Step Guide", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Makkah & Madinah Hotel Zones & Haramain High-Speed Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Umrah with Elderly Parents: Wheelchair & Scooter Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Ramadan Umrah & I'tikaf Guide: Booking, Budget & Season Rules from Bangladesh", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Safe Private Family Airport Transfers in Jeddah & Madinah", body: "Traveling with mothers, sisters, or children? Pre-book a vetted door-to-door family car from Jeddah or Madinah Airport straight to your Markazia North hotel." }
   },
