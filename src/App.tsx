@@ -1849,14 +1849,14 @@ export default function App() {
 
     if (isLanding) {
       seoTitle = `Outbound Travel Plans & Itineraries from Bangladesh | URAL`;
-      seoDescription = "Explore hand-crafted 5-day itineraries and travel plans for Bangladeshi tourists visiting Nepal, Thailand, Malaysia, and the UAE with BDT budgets.";
+      seoDescription = "Browse destination guides from Bangladesh with practical itinerary outlines, local planning notes and links to existing travel tools.";
       const collectionNode = collectionPageSchema({
         url: hubUrl,
         name: seoTitle,
         description: seoDescription,
         inLanguage: pageLanguage,
         items: DESTINATIONS_DATA.map((d) => ({
-          name: `${d.country} 5-Day Itinerary from Bangladesh`,
+          name: `${d.country} destination guide from Bangladesh`,
           url: siteUrl(`/destinations/${d.id}`, lang),
           description: d.quickAnswer,
         })),
@@ -1871,9 +1871,39 @@ export default function App() {
       const destUrl = siteUrl(`/destinations/${activeDes.id}`, lang);
       seoTitle = activeDes.id === "nepal-guide"
         ? `Nepal Trip Plan from Bangladesh: 5-Day Itinerary & Costs (2026) | URAL`
+        : activeDes.id === "thailand-guide"
+        ? "Bangkok Destination Guide from Bangladesh: Four-Day Plan | URAL"
+        : activeDes.id === "dubai-guide"
+        ? "Dubai Destination Guide from Bangladesh: Four-Day Plan | URAL"
+        : activeDes.id === "maldives-guide"
+        ? "Maldives Destination Guide from Bangladesh: Island Planning | URAL"
+        : activeDes.id === "london-guide"
+        ? "London Destination Guide from Bangladesh: Landmarks & Planning | URAL"
+        : activeDes.id === "italy-guide"
+        ? "Italy Itinerary from Bangladesh: Rome, Milan & Venice | URAL"
+        : activeDes.id === "paris-guide"
+        ? "Paris Itinerary from Bangladesh: Landmarks & Planning | URAL"
+        : activeDes.id === "new-york-guide"
+        ? "New York City Itinerary from Bangladesh: Landmarks & Planning | URAL"
         : `${activeDes.country} Tour Itinerary & Travel Plan from Bangladesh | URAL`;
       seoDescription = activeDes.id === "nepal-guide"
-        ? `A day-by-day Nepal itinerary for Bangladeshi travelers - Kathmandu and Pokhara highlights, local transport, food, and a realistic budget in BDT.`
+        ? "Plan a flexible Nepal trip around Kathmandu, nearby heritage sites and Pokhara. Check current entry, transport, access and cost details for your dates."
+        : activeDes.id === "thailand-guide"
+        ? "Plan a flexible four-day Bangkok visit with riverside sights, city neighborhoods and an optional day trip. Check current opening, transport and entry details for your dates."
+        : activeDes.id === "singapore-guide"
+        ? "Plan four flexible days in Singapore around waterfront sights, a heritage neighborhood and optional Sentosa. Check current attraction access, transit and entry details for your dates."
+        : activeDes.id === "dubai-guide"
+        ? "Plan a flexible four-day Dubai visit around Downtown, the Creek and an optional excursion. Check current attraction access, transport, tour terms and entry details for your dates."
+        : activeDes.id === "maldives-guide"
+        ? "Plan a flexible Maldives stay around one island base, transfers and optional marine activities. Check current access, local rules, schedules and entry details for your dates."
+        : activeDes.id === "london-guide"
+        ? "Plan a London visit around landmarks, museums, river experiences and local transport. Check current attraction, entry and transport details for your dates."
+        : activeDes.id === "italy-guide"
+        ? "Plan a flexible six-day route through Rome, Milan and Venice. Compare current intercity transport, attraction access and official entry guidance for your travel dates."
+        : activeDes.id === "paris-guide"
+        ? "Plan a flexible Paris itinerary around museums, landmarks and the Seine. Check current opening, ticket, transport and entry information for your dates."
+        : activeDes.id === "new-york-guide"
+        ? "Plan New York City around harbor sights, parks, museums and selected neighborhoods. Check current attraction, transport and entry information for your dates."
         : `Find tourist route plans, day-by-day itineraries, local transport guides, and estimated daily spends in BDT.`;
 
       let schemaObj: any = undefined;
@@ -1886,26 +1916,14 @@ export default function App() {
       }
       const tripNode = touristTripSchema({
         url: destUrl,
-        name: `${activeDes.country} 5-Day Itinerary from Dhaka`,
-        description: seoDescription,
+        name: `${activeDes.country} destination guide from Dhaka`,
+        description: isBn ? activeDes.quickAnswer : seoDescription,
         country: activeDes.country,
         places: activeDes.itinerary?.map((p) => p.title) || [activeDes.country],
-        estimatedPriceBdt:
-          activeDes.id === "nepal-guide"
-            ? 45000
-            : activeDes.id === "thailand-guide"
-            ? 68000
-            : activeDes.id === "malaysia-guide"
-            ? 68000
-            : activeDes.id === "singapore-guide"
-            ? 88000
-            : activeDes.id === "maldives-guide"
-            ? 76000
-            : 95000,
         inLanguage: pageLanguage,
       });
       const faqSchema = isBn ? null : getFaqSchemaForPage("destinations", activeDes.id, false, destUrl, DESTINATIONS_DATA);
-      seoSchema = [schemaObj, tripNode, faqSchema].filter(Boolean);
+      seoSchema = [isBn ? undefined : schemaObj, tripNode, faqSchema].filter(Boolean);
 
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -2418,19 +2436,12 @@ export default function App() {
    * Locale routing for links and navigation, with one rule that used to be
    * missing: a route with no Bengali counterpart must never resolve to /bn/…
    *
-   * `DEFERRED_BN_GROUPS` (src/utils/localeRoutes.ts) lists the route groups the
-   * prerender refuses to publish in Bengali — today that is /destinations, whose
-   * six guides and hub have no Bengali copy yet. The prerender has always
-   * honoured that gate; the client did not. So a Bengali reader could click
-   * "নেপাল গাইড" in the menu, the SPA would render it, and the URL in the address
-   * bar was /bn/destinations/nepal-guide — which 404s on refresh, on share, and
-   * for any crawler, because no such file exists.
-   *
-   * Both helpers now ask the same gate the build asks, which also means every
-   * surface is fixed at once (desktop mega-panel, mobile drawer, drawer CTA,
-   * homepage grid, footer) rather than five separate patches. When the Bengali
-   * destination guides ship, hasBengaliCounterpart() starts returning true and
-   * these routes become /bn/… again with no further change.
+   * `DEFERRED_BN_GROUPS` (src/utils/localeRoutes.ts) lists route groups the
+   * prerender intentionally withholds in Bengali until localized content exists.
+   * Destination guides now have Bengali counterparts, so hasBengaliCounterpart()
+   * allows their `/bn/…` paths while keeping future untranslated routes on the
+   * safe English fallback. The client and prerender use the same gate across the
+   * desktop mega-panel, mobile drawer, homepage grid and footer.
    *
    * The fallback is the English path, not a hidden link: the reader lands on a
    * page that exists and works. Because `lang` is derived from the URL
@@ -2506,7 +2517,7 @@ export default function App() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const routeViewContext: Record<string, any> = { AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
+  const routeViewContext: Record<string, any> = { AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedDestinations: DESTINATIONS_DATA, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
 
   return (
     <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-brand-gold selection:text-brand-navy overflow-x-hidden">
@@ -2797,22 +2808,22 @@ export default function App() {
                           {
                             label: isBn ? "🇫🇷 প্যারিস, ফ্রান্স (Paris)" : "🇫🇷 Paris, France (Schengen)",
                             sub: isBn ? "লুভর, আইফেল টাওয়ার ও সেইন ক্রুজ" : "Louvre, Eiffel Tower & Seine Cruise",
-                            path: "/experiences?region=west&city=paris",
+                            path: "/destinations/paris-guide",
                           },
                           {
                             label: isBn ? "🇬🇧 লন্ডন, যুক্তরাজ্য (London)" : "🇬🇧 London, United Kingdom",
                             sub: isBn ? "লন্ডন আই, টাওয়ার অব লন্ডন ও টেমস" : "Tower of London, Thames & London Eye",
-                            path: "/experiences?region=west&city=london",
+                            path: "/destinations/london-guide",
                           },
                           {
                             label: isBn ? "🇮🇹 রোম, মিলান ও ভেনিস (Italy)" : "🇮🇹 Rome, Milan & Venice (Italy)",
                             sub: isBn ? "কলোসিয়াম, দুওমো ও ভেনিস গন্ডোলা" : "Colosseum, Milan Duomo & Gondola",
-                            path: "/experiences?region=west&city=rome-italy",
+                            path: "/destinations/italy-guide",
                           },
                           {
                             label: isBn ? "🇺🇸 নিউ ইয়র্ক সিটি (USA)" : "🇺🇸 New York City (USA)",
                             sub: isBn ? "স্ট্যাচু অব লিবার্টি ও SUMMIT ডেক" : "Statue of Liberty, Harbor & SUMMIT",
-                            path: "/experiences?region=west&city=new-york",
+                            path: "/destinations/new-york-guide",
                           },
                         ].map((item, idx) => (
                           <a
@@ -3316,7 +3327,11 @@ export default function App() {
                         { label: isBn ? "সিঙ্গাপুর" : "Singapore", path: "/destinations/singapore-guide" },
                         { label: isBn ? "মালদ্বীপ" : "Maldives", path: "/destinations/maldives-guide" },
                         { label: isBn ? "দুবাই ও UAE" : "Dubai / UAE", path: "/destinations/dubai-guide" },
-                        { label: isBn ? "ইউরোপ ও UK" : "Europe & UK", path: "/experiences?region=west" },
+                        { label: isBn ? "লন্ডন গাইড" : "London Guide", path: "/destinations/london-guide" },
+                        { label: isBn ? "ইতালি গাইড" : "Italy Guide", path: "/destinations/italy-guide" },
+                        { label: isBn ? "প্যারিস গাইড" : "Paris Guide", path: "/destinations/paris-guide" },
+                        { label: isBn ? "নিউ ইয়র্ক গাইড" : "New York Guide", path: "/destinations/new-york-guide" },
+                        { label: isBn ? "ইউরোপ ও UK অ্যাক্টিভিটি" : "Europe & UK Activities", path: "/experiences?region=west" },
                         { label: isBn ? "এশিয়া অ্যাক্টিভিটি" : "Asia Passes", path: "/experiences?region=asia" },
                       ],
                     },

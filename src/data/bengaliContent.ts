@@ -3174,9 +3174,9 @@ const BENGALI_COSTS_OVERRIDES: Record<string, Partial<TripCostData>> = {
  * summarised. The copy lives in src/data/bengaliDestinations.ts; this merge
  * keeps the same { ...english, ...bengali } shape as every other locale helper.
  *
- * While a guide is still untranslated its Bengali page does NOT exist:
- * /destinations is listed in DEFERRED_BN_GROUPS (src/utils/localeRoutes.ts)
- * until all six are written, because a bn-BD page with an English body is
+ * A Bengali destination page exists only when its guide has a corresponding
+ * Bengali override and the route group is not listed in DEFERRED_BN_GROUPS
+ * (src/utils/localeRoutes.ts), because a bn-BD page with an English body is
  * worse than no Bengali page at all.
  */
 export function getLocalizedDestinations(lang: Language): DestinationGuide[] {

@@ -1208,112 +1208,70 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
   {
     id: "nepal-guide",
     country: "Nepal",
-    title: "Nepal Trip Plan from Bangladesh: 5-Day Itinerary, Costs & Visa Guide",
-    description: "Nestled in the mighty Himalayas, Nepal is a backpacker's wonderland complete with beautiful stupas, massive mountain vistas, rich culture, and extremely budget-friendly organic tea houses.",
-    bestTimeToVisit: "October to November (crystal clear autumn skies perfect for mountain viewing) and March to April (spring blooms and pleasant temperatures)",
+    title: "Nepal Destination Guide from Bangladesh: Kathmandu & Pokhara",
+    description: "A flexible Nepal planning guide for travelers considering Kathmandu, nearby heritage areas and Pokhara. Use the outline to shape a trip, then check current access, transport and entry details for your dates.",
+    bestTimeToVisit: "Choose dates around your interests, preferred weather and daylight. Before booking, check current local conditions, attraction calendars and cross-city transport information for the dates you plan to travel.",
     itinerary: [
-      { day: 1, title: "Kathmandu Valley Arrival", activities: ["Land at Tribhuvan Airport KTM & claim your Gratis Visa", "Check into your Thamel hostel or boutique hotel", "Wander through Thamel streets, try Momo at Western Tandoori, buy local outdoor supplies"] },
-      { day: 2, title: "Cultural Landmarks of Kathmandu", activities: ["Early morning visit to Boudhanath Stupa to watch monks circumambulate", "Explore Soyambhunath (The Monkey Temple) at sunset looking over the valley skyline", "Experience the sacred evening aarti on the banks of Bagmati river at Pashupatinath Temple"] },
-      { day: 3, title: "Ancient Durbar Squares", activities: ["Take a taxi to Patan Durbar Square to admire historic Newari brick palaces", "Visit the golden temple and historic craft guilds", "Travel to Bhaktapur, known for pottery workshops, hand-curd Juju Dhau, and historical pagoda arches"] },
-      { day: 4, title: "Scenic Pokhara Escape", activities: ["Take an early tourist bus from Kathmandu to Pokhara (6-8 hours scenic highway drive)", "Check in lakeside, row a wooden boat across Phewa Lake under the reflection of Fishtail Mountain", "Enjoy a warm woodfired pizza directly beside the lake"] },
-      { day: 5, title: "Sarangkot Sunrise & Departure", activities: ["Wake up early at 4:30 AM to catch the glorious Annapurna range sunrise from Sarangkot peak", "Rent a motorbike to explore Devi's falls and Gupteshwor cave", "Catch your evening flight or bus back to Kathmandu/Dhaka"] }
+      { day: 1, title: "Arrive in Kathmandu", activities: ["Keep the first day flexible around arrival time, accommodation and rest.", "Choose a nearby walk or meal, and confirm the current route from the airport with your transport provider."] },
+      { day: 2, title: "Kathmandu Valley cultural sites", activities: ["Choose from Boudhanath, Swayambhunath or Pashupatinath based on opening information, access and your interests.", "Check visitor rules and local conditions at religious sites, and leave time for travel between stops."] },
+      { day: 3, title: "Patan or Bhaktapur", activities: ["Focus on Patan or Bhaktapur for the day; add a second heritage area only if current travel times and opening hours allow.", "Check local entry conditions and transport before setting a fixed schedule."] },
+      { day: 4, title: "Travel to Pokhara", activities: ["Compare currently available road and air connections, including departure points, luggage terms and door-to-door time.", "Keep plans after arrival light and confirm local transport to your accommodation."] },
+      { day: 5, title: "Pokhara at a flexible pace", activities: ["Choose a lakeside walk, viewpoint or other activity based on weather and current access information.", "If visiting a viewpoint or natural site, confirm local transport and conditions before departure."] },
+      { day: 6, title: "Return or departure connection", activities: ["Check the current return connection and leave a buffer for weather, road conditions or schedule changes.", "If connecting onward from Kathmandu, consider an overnight buffer rather than relying on a same-day transfer without confirmation."] }
     ],
-    localTransport: ["Tourist buses for cross-city travel (Kathmandu to Pokhara: BDT 1,200 - 1,800)", "Local ride-sharing apps (Pathao now operates actively in Kathmandu for super cheap rides!)", "Metered prepaid yellow taxis (negotiating a flat rate in advance is standard practice)"],
-    budgetBdt: "BDT 20,000 - BDT 35,000 per person (Excluding airfare, based on budget backpacking / mid hotels)",
-    quickAnswer: "A complete 5-day Nepal tour itinerary from Bangladesh costs between BDT 20,000 and BDT 35,000 per person in local expenses, excluding international airfare. This budget covers standard sightseeing in Kathmandu, Bhaktapur, and Pokhara alongside local meals and tourist bus transport. Bangladeshi passport holders qualify for a free 30-day Visa on Arrival for their first trip of each calendar year, saving an extra USD 30 in entry fees. The optimal months to visit for clear Himalayan views are October through November and March through April.",
+    localTransport: ["For Kathmandu–Pokhara travel, compare current road and air services by schedule, departure location, baggage conditions and total door-to-door time.", "Within cities, check current public transport, taxi and ride-hailing availability with the relevant operator; service coverage can change.", "Confirm intercity tickets, transfer details and cancellation terms directly with the provider before travel.", "Allow time for traffic, walking and service changes, and recheck important journeys on the day."],
+    budgetBdt: "No whole-trip total is quoted. Airfare, accommodation, intercity travel, local transport, meals and attraction costs vary by date and travel style; compare current prices and terms before booking.",
+    quickAnswer: "This six-day outline connects Kathmandu, a nearby heritage area and Pokhara at a flexible pace. Compare current transport options and allow time for changing road, weather and attraction conditions. Check Nepal's current entry requirements for your circumstances; this page is not a live price quote or visa decision.",
     keyFacts: [
-      { label: "Recommended Trip Length", value: "5 to 8 Days" },
-      { label: "Daily Local Budget (BDT)", value: "3,000 - 4,500 / day" },
-      { label: "Main Cities to Visit", value: "Kathmandu, Pokhara, Bhaktapur" },
-      { label: "Visa for Bangladeshis", value: "Free on Arrival (1st trip/year)" }
+      { label: "Route focus", value: "Kathmandu, one nearby heritage area and Pokhara" },
+      { label: "Sample duration", value: "Six flexible days, including intercity transfers" },
+      { label: "Costs", value: "No trip total is quoted; check current prices for your dates" },
+      { label: "Entry requirements", value: "Check current official Nepal guidance for your circumstances" }
     ],
     faqs: [
-      {
-        question: "How many days do I need for a Nepal trip from Bangladesh?",
-        answer: "5 days is enough for a solid first trip - typically 3 days in Kathmandu (including a side trip to Bhaktapur) and 2 days in Pokhara. If you want time to relax by Phewa Lake or do a short hike, 7-8 days gives a more comfortable pace."
-      },
-      {
-        question: "What is the best time to visit Nepal from Bangladesh?",
-        answer: "October to November offers the clearest skies and best mountain views, ideal right after the monsoon. March to April brings pleasant spring temperatures and blooming rhododendrons. Both are considered Nepal's best travel seasons."
-      },
-      {
-        question: "Can I travel around Nepal without booking a tour package?",
-        answer: "Yes, independent travel is straightforward in Nepal's main tourist areas. Tourist buses connect Kathmandu and Pokhara affordably, ride-hailing apps like Pathao operate within Kathmandu Valley, and most hotels and guesthouses can arrange local sightseeing."
-      },
-      {
-        question: "Is Nepal a good first international trip for Bangladeshi travelers?",
-        answer: "Yes - Nepal is widely considered one of the easiest first international trips for Bangladeshis: there's no advance visa to arrange (free Visa on Arrival for the first trip each year), the flight is just 1.5 hours, and daily costs are among the lowest in the region."
-      },
-      {
-        question: "What food should I try in Nepal as a Bangladeshi traveler?",
-        answer: "Momo (steamed or fried dumplings) and Dal Bhat (lentils, rice, and vegetable curry) are Nepal's everyday staples and widely available. Many dishes share familiar South Asian flavors, and vegetarian options are easy to find throughout Kathmandu and Pokhara."
-      }
+      { question: "How many days should I plan for Nepal?", answer: "This outline uses six days across Kathmandu, a nearby heritage area and Pokhara. If your stay is shorter, focus on one region rather than trying to fit every stop into the itinerary." },
+      { question: "How should I travel between Kathmandu and Pokhara?", answer: "Compare current road and air connections for your dates. Check the departure location, schedule, baggage terms, cancellation conditions and total door-to-door time." },
+      { question: "When should I visit Nepal?", answer: "Choose dates based on your priorities and check current weather, daylight, local conditions and attraction opening information before booking. Conditions can vary by region and change over time." },
+      { question: "Does this guide confirm visa eligibility for Bangladeshi travelers?", answer: "No. Entry requirements depend on the traveler and current policy. Check the official Nepal immigration or relevant government guidance before booking." }
     ],
     schemaMarkup: {
       type: "DestinationGuide",
-      description: "Nepal itineraries",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "TouristDestination",
-  "name": "Nepal"
-}`
+      description: "Nepal destination planning guide",
+      code: `{"@context":"https://schema.org","@type":"TouristDestination","name":"Nepal"}`
     }
   },
   {
     id: "thailand-guide",
     country: "Thailand",
-    title: "Bangkok & Beyond: Street Food, Markets, and Golden Temples",
-    description: "Thailand is an absolute powerhouse of modern retail, culinary brilliance, and historic Buddhist artwork. This guide explores the vibrant capital Bangkok, perfectly optimized for first-time visitors.",
-    bestTimeToVisit: "November to February (dry, coolest winter weather, perfect for walking the markets and boat rides)",
+    title: "Bangkok Destination Guide from Bangladesh: Four-Day Plan",
+    description: "A practical starting point for a first Bangkok visit, with a flexible four-day outline for riverside landmarks, city neighborhoods and an optional market or day trip. Check current opening, transport and entry details for your dates.",
+    bestTimeToVisit: "Choose dates around your interests, preferred weather and local events. Check current weather, attraction calendars and transport information for your dates before booking; conditions and operating schedules can vary.",
     itinerary: [
-      { day: 1, title: "Bangkok Arrival & Pratunam Shopping", activities: ["Arrive at BKK, take the fast Airport Rail Link straight to Phaya Thai", "Check into your hotel near Pratunam Mall", "Wander around night food stalls, and shop at Platinum Fashion Mall"] },
-      { day: 2, title: "Historical River Tour", activities: ["Take the BTS Skytrain to Sathorn Pier, board the Chao Phraya Tourist Boat", "Visit Wat Arun (The Temple of Dawn) with its dazzling porcelain mosaics", "Cross the river to see Wat Pho's grand Reclining Buddha"] },
-      { day: 3, title: "Shopping Extravaganza", activities: ["Spend the morning bargaining at Chatuchak Weekend Market (over 15,000 stalls!)", "Explore high-end Siam Paragon, CentralWorld, and MBK Center", "Taste high-quality premium mango sticky rice at Siam Bazaar"] },
-      { day: 4, title: "Floating Market Tour", activities: ["Book an early morning local minibus tour to Damnoen Saduak Floating Market", "Ride a longtail boat through local orchard channels, watching vendors cook directly on canoes", "Visit the nearby Maeklong Railway Market, where market awnings collapse as trains roll through"] }
+      { day: 1, title: "Arrive and settle in", activities: ["Keep the first day light and plan around your arrival time, accommodation and rest.", "Check the current airport-to-hotel options and choose a nearby meal or walk if time allows."] },
+      { day: 2, title: "Riverside and temple area", activities: ["Choose riverside sights such as Wat Arun or Wat Pho after checking current opening, ticket and visitor information.", "Check local dress and visitor guidance at religious sites, and leave time for river crossings and other transfers."] },
+      { day: 3, title: "Explore a city neighborhood", activities: ["Pick a market, museum or shopping area that matches your interests and check its operating days and hours.", "Use current transit maps to group nearby stops instead of trying to cross the city repeatedly."] },
+      { day: 4, title: "Flexible market or day-trip option", activities: ["Choose one market visit or day trip based on current schedules, travel time and your pace.", "If considering destinations outside central Bangkok, confirm the operator, departure point, return arrangements and cancellation terms before booking."] }
     ],
-    localTransport: ["BTS Skytrain & MRT Subway (extremely fast, air-conditioned, BDT 50-150 per ticket)", "Grab / Bolt Ride-sharing (highly transparent pricing, great for families to avoid taxi negotiations)", "Khlong Canal Boats (fast, off-the-grid transportation, BDT 30 per cruise)"],
-    budgetBdt: "BDT 35,000 - BDT 60,000 per person (excluding airfare; visa charges are not itemized—verify the government e-Visa fee, bank/payment charges, and optional agency fees separately)",
-    quickAnswer: "Bangkok represents the ultimate mix of retail and culinary travel. For a basic 4-day trip, budget BDT 35,000 for shopping, hotels, transport, and amazing food; airfare is separate. Visa-related charges are not itemized in this local budget: verify the current government e-Visa fee, bank/payment charges, and any optional agency service fee separately. Utilize the BTS Skytrain to skip Bangkok's infamous gridlock, and focus your food itinerary around Pratunam halal zones or Sukhumvit.",
+    localTransport: ["Use current BTS Skytrain and MRT information to check routes, operating hours, fares and payment options for your journey.", "River boats and ferries can be useful on routes they serve; check the operator's current stops and schedule before setting plans.", "Check taxi and ride-hailing availability, pickup rules and fare terms directly with the provider; coverage and conditions can change.", "Allow extra time for road traffic, transfers and walking, especially when connecting to a fixed booking."],
+    budgetBdt: "No whole-trip total is quoted. Lodging, meals, local transport, attraction tickets and any day trip vary by date and travel style; compare current prices and terms before booking. International airfare is separate. Visa-related charges are not itemized; verify the current government e-Visa fee, bank/payment charges, and optional agency service fees separately.",
+    quickAnswer: "This flexible four-day outline focuses on Bangkok, with one optional market or day trip. Group nearby sights, check current opening and transport information, and leave room for traffic or schedule changes. Verify entry requirements for your circumstances through official sources; this page is not a visa decision or live price quote. Visa-related charges are not itemized; verify the current government e-Visa fee, bank/payment charges, and optional agency service fees separately.",
     keyFacts: [
-      { label: "Optimal Duration", value: "4 to 6 Days" },
-      { label: "Daily Local Budget", value: "BDT 6,000 - 9,000 / day" },
-      { label: "Top Shopping Epicenter", value: "Pratunam & Siam Square" },
-      { label: "Bargain Rule", value: "Polite negotiation is highly accepted at open markets" },
-      {
-        label: "Visa for Bangladeshis",
-        value: "No visa on arrival - an advance Tourist Visa (TR) via thaievisa.go.th is required"
-      }
+      { label: "Sample duration", value: "Four flexible days" },
+      { label: "Route focus", value: "Bangkok, with one optional market or day trip" },
+      { label: "Costs", value: "No trip total is quoted; check current prices for your dates" },
+      { label: "Planning checks", value: "Confirm opening days, transit schedules and entry guidance" }
     ],
     faqs: [
-      {
-        question: "How do I avoid heavy traffic jams in Bangkok?",
-        answer: "Always stay near a BTS Skytrain or MRT Subway station. Avoid taking traditional taxis or Tuk-Tuks on main streets like Sukhumvit or Pratunam during peak rush hours (8am-10am, 5pm-8pm)."
-      },
-      {
-        question: "Where can Bangladeshi travelers find halal food in Bangkok?",
-        answer: "Halal food is abundant around Sukhumvit Soi 3 to 11 (Nana Arab Street), the Pratunam wholesale market area, and around the Phaya Thai / Ramkhamhaeng neighborhoods. Major shopping malls like MBK Center and Platinum Fashion Mall have certified halal food court counters."
-      },
-      {
-        question: "Can I pay for street shopping in Bangkok using international cards?",
-        answer: "Street markets like Chatuchak, Pratunam, and night markets operate predominantly on cash Thai Baht (THB). Carry cash exchanged at SuperRich counters in Bangkok for the best rates, and use your endorsed dual-currency debit/credit card for malls and hotel payments."
-      },
-      {
-        question: "Is Bangkok safe for Bangladeshi families and solo tourists?",
-        answer: "Yes, Bangkok is widely considered very safe for families and solo travelers with low violent crime rates. Use ride-hailing apps like Grab or Bolt for transparent fares, and take standard precautions with personal belongings in crowded night markets."
-      },
-      {
-        question: "Can Bangladeshi citizens get a visa on arrival in Thailand?",
-        answer: "No. Bangladeshi citizens need an advance Tourist e-Visa through Thailand's official portal (thaievisa.go.th) and should follow the current Dhaka mission checklist. The dated Embassy TR checklist and general portal page give different financial-evidence details, so confirm the live requirement before applying. Check the current government fee in the portal/Embassy schedule; bank/payment charges and optional agency fees are separate, and approval or timing is not guaranteed."
-      }
+      { question: "Are four days enough for Bangkok?", answer: "Four days can provide a flexible first outline for central sights and neighborhoods, with room for one market or day trip. If you add a longer excursion, reduce the number of city stops rather than packing the schedule." },
+      { question: "What is a practical way to get around Bangkok?", answer: "Compare current BTS, MRT, river-boat, taxi and ride-hailing options for each journey. Check operating hours, stops, fares and pickup details directly with the relevant operator, and allow extra time for road traffic." },
+      { question: "Should I include a day trip from Bangkok?", answer: "It depends on your interests and available time. Choose one excursion, then check current travel time, departure arrangements, operating schedules and return options before booking." },
+      { question: "When should I visit Bangkok?", answer: "Choose dates based on your priorities, then check current weather, local events and attraction schedules. Conditions and opening information can change, so verify them close to travel." },
+      { question: "Does this guide confirm entry or visa eligibility for Bangladeshi travelers?", answer: "No. Entry requirements depend on the traveler, purpose and current policy. Check the official Thai government visa or immigration guidance and relevant embassy information before booking." }
     ],
     schemaMarkup: {
       type: "DestinationGuide",
-      description: "Bangkok itineraries",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "TouristDestination",
-  "name": "Bangkok"
-}`
+      description: "Bangkok destination planning guide",
+      code: `{"@context":"https://schema.org","@type":"TouristDestination","name":"Bangkok"}`
     }
   },
   {
@@ -1376,154 +1334,219 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
   {
     id: "dubai-guide",
     country: "UAE",
-    title: "Dubai & Beyond: Skyscrapers, Deserts, and Spice Markets",
-    description: "A futuristic skyline rising from golden desert dunes, Dubai is a city of superlatives. Perfect for shopping expeditions, architectural marvels, and modern entertainment parks.",
-    bestTimeToVisit: "November to March (glorious cool temperatures, perfect for outdoor canal strolls and desert safaris)",
+    title: "Dubai Destination Guide from Bangladesh: A Flexible Four-Day Plan",
+    description: "A flexible starting point for Dubai, with ideas for Downtown, the Creek, a waterfront area and an optional desert excursion. Check current attraction access, transport, tour terms and entry requirements for your dates.",
+    bestTimeToVisit: "Choose dates around your preferred weather, outdoor plans and local events. Check current weather conditions, attraction calendars and operator schedules before booking; outdoor conditions can affect plans.",
     itinerary: [
-      { day: 1, title: "Futuristic Core & Burj Khalifa", activities: ["Land at DXB terminal 1/3, board the driverless Dubai Metro", "Check into your central hotel", "Take in the beautiful Burj Khalifa lake fountain light displays, then explore the massive Dubai Mall"] },
-      { day: 2, title: "Historical Deira & Creekside Souks", activities: ["Stroll through historical Al Fahidi historic district, discovering ancient architectural windtowers", "Ride a traditional wooden Abra boat across Dubai Creek for just AED 1", "Bargain for aromatic incense, saffron, and gold bullion at Deira's markets and souks"] },
-      { day: 3, title: "Desert Safari Sunset Expedition", activities: ["Board a 4x4 Land Cruiser at your hotel lobby around 2:30 PM", "Experience thrilling dune bashing across the red Arabian desert", "Enjoy a starlit barbecue dinner with traditional Tanoura dance performances in a Bedouin style camp"] },
-      { day: 4, title: "Marina Skyline & Beachside Walks", activities: ["Ride the Dubai Tram to Marina Walk, taking photos of the beautiful twisted Cayan Tower", "Relax at the Beach at JBR, or catch the sunset over the palm island", "Enjoy your farewell gourmet dinner overlooks the marina canal lights"] }
+      { day: 1, title: "Arrive and settle into your chosen area", activities: ["Keep the first day light around arrival time and accommodation location.", "Check current airport-to-hotel transport options and choose a nearby meal or walk if time permits."] },
+      { day: 2, title: "Downtown sights", activities: ["Choose the Downtown attractions that fit your interests, checking official access, ticket and opening information for your date.", "Leave time for walking, security procedures and transfers between venues."] },
+      { day: 3, title: "Dubai Creek and historic neighborhoods", activities: ["Explore a section of the Creek or a historic neighborhood after checking current visitor access and operating hours.", "If using a boat crossing or local market, confirm service and payment details with the operator on the day."] },
+      { day: 4, title: "Waterfront or optional desert excursion", activities: ["Choose a waterfront walk or one desert excursion based on weather, current availability and your pace.", "For a tour, verify the operator, pickup location, included items, safety requirements, cancellation terms and return time before booking."] }
     ],
-    localTransport: ["Dubai Metro and Tram networks (flawless, ultra-modern, zones based Nol card fares BDT 100-300)", "RTA Public Taxis (safe, fair, metered starting from BDT 355 base fare)", "Careem / Uber App ride-shares (excellent premium services and instant street bookings)"],
-    budgetBdt: "BDT 65,000 - BDT 95,000 per person (Excluding airfare, based on desert tours, dining, and metro rides)",
-    quickAnswer: "Dubai represents a spectacular modern playground of science-fiction proportions. A basic 4-day trip from Dhaka requires BDT 65,000 local spending covering premium Dubai Metro travel, delicious Deira foods, Burj Khalifa entries, and magical desert safaris. Travel during the cooler winter months (November-March) for the best outdoor experience.",
+    localTransport: ["Check current RTA information for Metro, Tram and bus routes, service notices, fare rules and Nol-card use.", "For taxi and ride-hailing journeys, confirm pickup, fare and payment terms with the provider; coverage and conditions can change.", "Compare airport transfer options by pickup point, luggage arrangements, cancellation terms and total journey time.", "Allow extra time for road traffic, walking and transfers, especially when connecting to a timed attraction or tour pickup."],
+    budgetBdt: "No whole-trip total is quoted. Airfare, accommodation, local transport, attraction tickets, meals and any tour vary by date and travel style; compare current prices and terms before booking. Entry-related charges should be checked separately through official or authorized channels.",
+    quickAnswer: "This flexible four-day outline combines a Downtown visit, a Creek-area walk and one optional waterfront or desert activity. Check current access, transport and tour terms, and leave room for traffic and schedule changes. Verify entry requirements for your circumstances through official sources; this page is not a visa decision or live price quote.",
     keyFacts: [
-      { label: "Optimal Duration", value: "4 to 5 Days" },
-      { label: "Daily Local Budget", value: "BDT 12,000 - 18,000 / day" },
-      { label: "Nol transit card", value: "Nol Card is required for Metro, Tram, & Buses" },
-      { label: "Top Free Attraction", value: "The Dubai Mall Fountain shows" },
-      {
-        label: "Visa for Bangladeshis",
-        value: "Sponsor-based eVisa - no visa on arrival, and no direct embassy application"
-      }
+      { label: "Sample duration", value: "Four flexible days" },
+      { label: "Route focus", value: "Downtown, the Creek area and one optional excursion" },
+      { label: "Costs", value: "No trip total is quoted; check current prices for your dates" },
+      { label: "Planning checks", value: "Confirm attraction access, transport, tour terms and entry guidance" }
     ],
     faqs: [
-      {
-        question: "Is Dubai Metro easy for visitors to navigate?",
-        answer: "Extremely easy. The metro has two active lines (Red and Green), is strictly bilingual (English and Arabic), and is directly linked to major shopping terminals including Dubai Mall, Mall of the Emirates, and Deira City Centre."
-      },
-      {
-        question: "What dress code should Bangladeshi tourists observe in Dubai?",
-        answer: "Dubai is cosmopolitan and modern. Casual tourist clothes (t-shirts, jeans, modest shorts, summer dresses) are standard in shopping malls, hotels, and beaches. Conservative clothing covering shoulders and knees is only required when visiting mosques or government buildings."
-      },
-      {
-        question: "How does the Dubai Nol card work for tourists?",
-        answer: "The Silver Nol Card can be bought at any metro station for AED 25 (includes AED 19 e-purse credit) and gives discounted contactless taps across the Dubai Metro, Tram, RTA public buses, and water buses. It is rechargeable at station ticket machines."
-      },
-      {
-        question: "Is Dubai too expensive for budget travelers from Bangladesh?",
-        answer: "Budget trips from Dhaka to Dubai are very manageable. By staying in central Deira or Bur Dubai, eating at local cafeterias (AED 15-25 per meal), and utilizing the Dubai Metro, travelers can keep daily local spending around BDT 8,000 to BDT 12,000."
-      },
-      {
-        question: "How do Bangladeshi citizens get a Dubai tourist visa?",
-        answer: "The UAE does not offer a visa on arrival to Bangladeshi passport holders, and applications are not submitted directly to an embassy. Tourist eVisas (30 or 60 days) are sponsor-based: Emirates, flydubai, Air Arabia, or an approved Dhaka-based travel agent submits the application on your behalf. Processing usually takes 3 to 5 working days with no passport submission, and a six-month bank statement showing BDT 150,000 or more is recommended for a smooth security clearance. Print a colour copy of the approved eVisa for exit check-in at Dhaka and for entry at Dubai."
-      }
+      { question: "Are four days enough for Dubai?", answer: "Four days can provide a flexible first outline for a Downtown visit, a Creek-area walk and one optional excursion. If you add a longer tour, reduce the number of other stops rather than packing the schedule." },
+      { question: "What is a practical way to get around Dubai?", answer: "Compare current Metro, Tram, bus, taxi and ride-hailing options for each journey. Check route coverage, service hours, fare rules and payment options with the relevant operator, and allow time for traffic." },
+      { question: "Should I book a desert tour in advance?", answer: "Check current availability, pickup arrangements, inclusions, safety requirements and cancellation terms with the operator. Consider weather and your own mobility or health needs before choosing an activity." },
+      { question: "When should I visit Dubai?", answer: "Choose dates based on your priorities and check current weather, outdoor conditions, event calendars and attraction schedules. Conditions and opening information can change, so verify them close to travel." },
+      { question: "Does this guide confirm UAE visa eligibility for Bangladeshi travelers?", answer: "No. Entry requirements depend on the traveler, purpose and current policy. Check official UAE immigration guidance or an authorized channel before booking." }
     ],
     schemaMarkup: {
       type: "DestinationGuide",
-      description: "Dubai itineraries details",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "TouristDestination",
-  "name": "Dubai"
-}`
+      description: "Dubai destination planning guide",
+      code: `{"@context":"https://schema.org","@type":"TouristDestination","name":"Dubai"}`
     }
   },
   {
     id: "singapore-guide",
     country: "Singapore",
-    title: "Singapore Trip Plan from Bangladesh: 4-Day Itinerary, MRT Hacks & Halal Guide",
-    description: "Clean, safe, and effortlessly connected by MRT trains, Singapore packs futuristic indoor rainforests, world-class theme parks on Sentosa Island, and 24-hour shopping in Little India into one compact island nation.",
-    bestTimeToVisit: "February to April and July to October (warm, pleasant weather with lower rainfall and great shopping festivals)",
+    title: "Singapore Destination Guide from Bangladesh: A Flexible Four-Day Plan",
+    description: "A flexible first-visit outline for Singapore, with ideas for Marina Bay, Gardens by the Bay, heritage neighborhoods and Sentosa. Check current opening, access, transport and entry details for your dates.",
+    bestTimeToVisit: "Choose dates around your interests, preferred weather and local events. Check current weather, attraction calendars and public-holiday schedules before booking; opening times and event schedules can change.",
     itinerary: [
-      { day: 1, title: "Changi Jewel, Little India & Marina Bay Light Show", activities: ["Land at Changi Airport and visit the HSBC Rain Vortex indoor waterfall inside Jewel Changi (free entry!)", "Take the MRT or Grab to your hotel in Little India / Bugis", "Catch the free 8:00 PM Spectra Light & Water Show outside Marina Bay Sands and walk across the Helix Bridge"] },
-      { day: 2, title: "Gardens by the Bay & Historic Arab Street", activities: ["Spend the morning inside the cooled Cloud Forest and Flower Dome conservatories at Gardens by the Bay", "Afternoon heritage walk around Sultan Mosque, Arab Street, and colorful Haji Lane for Turkish/Malay halal lunch", "Return to Supertree Grove at 7:45 PM for the free Garden Rhapsody musical light show"] },
-      { day: 3, title: "Sentosa Island & Universal Studios", activities: ["Take the MRT to HarbourFront (VivoCity) and ride the Sentosa Express monorail onto Sentosa Island", "Spend the day at Universal Studios Singapore, S.E.A. Aquarium, or relaxing at Siloso and Palawan Beaches", "Dinner at Malaysian Food Street (Halal options) or VivoCity waterfront"] },
-      { day: 4, title: "24-Hour Mustafa Shopping & Departure", activities: ["Morning souvenir, chocolate, watch, and electronics shopping at Mustafa Centre on Serangoon Road", "Claim your 9% Tourist GST Refund at Changi Airport eTRS kiosks before check-in", "Fly direct back to Dhaka (DAC)"] }
+      { day: 1, title: "Arrive and explore at an easy pace", activities: ["Plan around your arrival time and allow time to reach your accommodation.", "If visiting Jewel Changi or another airport attraction, check current access and operating information before building it into the day."] },
+      { day: 2, title: "Marina Bay and Gardens by the Bay", activities: ["Choose the Marina Bay sights and Gardens by the Bay areas that interest you, checking current opening hours, access and ticket conditions.", "If you want to see a light or sound show, check the organizer's current schedule for your date and arrive with a flexible plan."] },
+      { day: 3, title: "Explore a heritage neighborhood", activities: ["Choose Little India, Kampong Glam, Chinatown or another area based on your interests; check opening days for specific museums, shops and places of worship.", "For dietary needs, confirm ingredients and any certification directly with the venue rather than relying on a neighborhood-wide assumption."] },
+      { day: 4, title: "Sentosa or a second city day", activities: ["Choose Sentosa or another city area based on your interests, current attraction access and the time available.", "Check transport and ticket arrangements in advance, and leave a suitable buffer for your onward flight or other departure plans."] }
     ],
-    localTransport: ["SimplyGo Contactless Card: Tap your Bangladeshi dual-currency Visa/Mastercard directly at MRT train and public bus gates (no need to buy paper tickets; fares are BDT 90–200 per ride)", "Grab / Gojek / Zig Apps: Reliable point-to-point car rides when traveling with elderly parents or heavy luggage", "Sentosa Express Monorail: SGD 4 entry from VivoCity Level 3 into Sentosa Island"],
-    budgetBdt: "BDT 48,000 - BDT 75,000 per person (Excluding airfare, covering 3 nights hotel, MRT, meals & attractions)",
-    quickAnswer: "A 4-day Singapore itinerary from Bangladesh costs approximately BDT 48,000 to BDT 75,000 per person in local expenses (excluding airfare). By staying near Farrer Park or Lavender MRT, tapping your dual-currency Visa/Mastercard directly on MRT trains via SimplyGo, and combining paid icons (Universal Studios, Cloud Forest) with world-class free shows (Jewel Vortex, Supertree Grove light show, Spectra at Marina Bay), Bangladeshi families can enjoy Singapore comfortably without overspending.",
+    localTransport: ["Use the current MRT and public-bus network information to plan routes, operating hours, fares and transfers.", "Before relying on a contactless bank card, check which cards are accepted, any foreign-card fees and the current fare-payment rules; consider an alternative payment method.", "Compare taxi and ride-hailing options for journeys where public transit is less convenient, and confirm pickup and fare terms with the provider.", "Allow time for walking, station transfers and queues, especially when connecting to a timed attraction or airport departure."],
+    budgetBdt: "No whole-trip total is quoted. Accommodation, meals, local transport, attraction tickets and optional activities vary by date and travel style; compare current prices and terms before booking. International airfare and entry-related charges should be checked separately.",
+    quickAnswer: "This flexible four-day outline combines Singapore's waterfront, a heritage neighborhood and an optional Sentosa visit. Check current attraction access, transit and event schedules, and leave room for transfers and queues. Verify entry requirements for your circumstances through official sources; this page is not a visa decision or live price quote.",
     keyFacts: [
-      { label: "Ideal Trip Duration", value: "4 Days / 3 Nights" },
-      { label: "Daily Local Budget", value: "BDT 10,000 - 15,000 / day" },
-      { label: "Transit Payment Hack", value: "Tap Dual-Currency Card on MRT (SimplyGo)" },
-      { label: "Airport Must-See", value: "Jewel Changi Rain Vortex (Free)" },
-      {
-        label: "Visa for Bangladeshis",
-        value: "Pre-arranged e-Visa required - via an authorised visa agent only"
-      }
+      { label: "Sample duration", value: "Four flexible days" },
+      { label: "Route focus", value: "Marina Bay, a heritage neighborhood and optional Sentosa" },
+      { label: "Costs", value: "No trip total is quoted; check current prices for your dates" },
+      { label: "Planning checks", value: "Confirm attraction access, transit payment rules and entry guidance" }
     ],
     faqs: [
-      {
-        question: "Can I use my Bangladeshi dual-currency credit or debit card directly on Singapore MRT trains and buses?",
-        answer: "Yes! Singapore's SimplyGo system allows foreign contactless Visa and Mastercard cards to be tapped directly at MRT gates and bus readers—saving you the non-refundable SGD 5 card fee of buying a physical EZ-Link card."
-      },
-      {
-        question: "How can I combine Singapore and Malaysia on a single trip from Dhaka?",
-        answer: "Many Bangladeshi travelers fly Dhaka → Singapore (spend 3 days), take a luxury 5-hour coach bus across the Johor causeway to Kuala Lumpur for BDT 2,500, spend 3 days in Malaysia, and fly Kuala Lumpur → Dhaka on an open-jaw ticket."
-      },
-      {
-        question: "Do Bangladeshi citizens need a visa for Singapore, and how do they apply?",
-        answer: "Yes. Bangladeshi passport holders need a pre-arranged e-Visa, and you cannot apply directly at the Singapore Consulate in Dhaka - applications are submitted through an embassy-authorised visa agent. Expect approximately BDT 4,200 to 6,500 (SGD 30 government fee plus the agency charge) and 5 to 7 working days. A Letter of Introduction (Form V39A) from a Singapore-based contact or sponsor is normally required, along with a six-month bank statement showing at least BDT 1,50,000."
-      }
+      { question: "Are four days enough for Singapore?", answer: "Four days can work as a flexible first outline for central sights, one heritage neighborhood and an optional Sentosa visit. If you add more paid attractions or longer visits, reduce the number of stops rather than overloading each day." },
+      { question: "What is a practical way to get around Singapore?", answer: "Plan with current MRT and public-bus information, and compare taxi or ride-hailing for journeys where they fit better. Check current fare-payment rules and foreign-card fees before relying on a bank card for transit." },
+      { question: "Should I include Sentosa in a short Singapore trip?", answer: "It depends on your interests and the attractions you want to visit. Check current access, opening times, tickets and travel arrangements, then allow enough time for the return journey." },
+      { question: "Does this guide confirm Singapore visa eligibility for Bangladeshi travelers?", answer: "No. Entry requirements depend on the traveler, purpose and current policy. Check the Singapore government's official immigration guidance and relevant Bangladesh mission information before booking." }
     ],
     schemaMarkup: {
       type: "DestinationGuide",
-      description: "Singapore 4-day travel itinerary for Bangladeshi tourists",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "TouristDestination",
-  "name": "Singapore"
-}`
+      description: "Singapore destination planning guide",
+      code: `{"@context":"https://schema.org","@type":"TouristDestination","name":"Singapore"}`
     }
   },
   {
     id: "maldives-guide",
     country: "Maldives",
-    title: "Maldives Trip Plan from Bangladesh: 5-Day Maafushi & Resort Island Itinerary",
-    description: "Crystal-clear turquoise lagoons, coral reefs teeming with nurse sharks and sea turtles, and powdery white sandbanks—the Maldives is just a 4-hour flight from Dhaka with free Visa on Arrival for Bangladeshis.",
-    bestTimeToVisit: "November to April (sunny skies, calmest turquoise water, and highest underwater visibility for snorkeling)",
+    title: "Maldives Destination Guide from Bangladesh: Islands & Flexible Planning",
+    description: "Plan a Maldives stay around one island base, with room to compare local-island and resort options, transfers and marine activities. Check current access, transfer schedules, local rules and entry details for your dates.",
+    bestTimeToVisit: "Choose dates around your preferred weather, sea conditions and activities. Check current marine conditions, local weather and transfer schedules before booking; conditions can vary by atoll and change quickly.",
     itinerary: [
-      { day: 1, title: "Arrival at Malé & Speedboat to Maafushi Island", activities: ["Land at Velana International Airport (MLE) and clear free Visa on Arrival immigration", "Board the 35-minute shared speedboat ($25) directly from the airport jetty across turquoise atolls to Maafushi Island", "Watch the Indian Ocean sunset from Bikini Beach and enjoy a beachfront grilled seafood dinner"] },
-      { day: 2, title: "Half-Day Snorkeling, Dolphin Cruise & Sandbank Picnic", activities: ["Join a $30–$35 full-day boat excursion to snorkel at Turtle Reef and Coral Garden", "Have a picnic lunch on a secluded white-sandbank in the middle of the ocean (free drone photos often included by local operators!)", "Spot spinner dolphins jumping alongside the boat on the sunset ride back"] },
-      { day: 3, title: "Luxury Private Resort Day-Pass OR Shipwreck & Shark Bay", activities: ["Option A: Book a $110–$140 All-Inclusive Resort Day Pass (includes return boat, pool, beach & buffet at a 4/5-star private resort)", "Option B: Take the Vaavu Atoll Shipwreck & friendly Nurse Shark snorkeling tour ($55)", "Evening stroll through Maafushi's sandy streets and souvenir shops"] },
-      { day: 4, title: "Transfer to Hulhumalé & Malé Capital Tour", activities: ["Take the morning speedboat back to Malé / Hulhumalé", "Explore Malé City: Friday Mosque, Sultan Park, and the bustling Local Fish Market", "Check into a beachfront hotel in Hulhumalé and relax at Central Park & Hulhumalé Beach"] },
-      { day: 5, title: "Morning Ocean Swim & Flight Back to Dhaka", activities: ["Enjoy a sunrise walk along Hulhumalé beachfront with coffee", "Take a 15-minute road taxi ($8) across the Sinamalé Bridge to Velana Airport for your flight back to Dhaka"] }
+      { day: 1, title: "Arrive and confirm your onward transfer", activities: ["Plan around your international arrival and keep the first day flexible.", "Confirm where your onward transfer departs, how to check in and what happens if your flight is delayed."] },
+      { day: 2, title: "Travel to one island base", activities: ["Choose an inhabited island or resort base after comparing accommodation, access, local rules and available activities.", "Check the current boat or domestic-flight schedule and keep plans light after arrival."] },
+      { day: 3, title: "Explore at an island pace", activities: ["Choose a beach, local walk or activity offered by your accommodation or a current local operator.", "Check local visitor guidance and respect any access, clothing or environmental rules that apply at the location."] },
+      { day: 4, title: "Optional marine activity or relaxed day", activities: ["If conditions and your interests allow, compare snorkeling or other marine excursions with a local operator.", "Ask about safety equipment, weather cancellation, wildlife practices, inclusions and return arrangements before booking."] },
+      { day: 5, title: "Return and departure buffer", activities: ["Confirm the return transfer against your international flight and leave a practical buffer for weather or schedule changes.", "Consider staying near the departure airport the night before an early flight if the transfer plan is uncertain."] }
     ],
-    localTransport: ["Airport-to-Maafushi Shared Speedboat: Runs every 1–2 hours directly from Malé Airport jetty ($25 USD / approx BDT 3,000 one-way, 35 mins)", "MTCC Public Ferry: Ultra-cheap government ferry from Malé to Maafushi ($2 USD / BDT 240, 90 mins, does not run on Fridays)", "Hulhumalé Highway Bus & Taxis: Direct road connection from Malé Airport to Hulhumalé for $1–$8 USD"],
-    budgetBdt: "BDT 35,000 - BDT 55,000 per person on Local Islands (Excluding airfare; Private Water Villa Resorts start at BDT 1,40,000+)",
-    quickAnswer: "A 5-day Maldives trip from Bangladesh does not require a millionaire budget. By basing yourself on Maafushi local island for 3 nights and Hulhumalé for 1 night, your local expenses (beachfront hotel, airport speedboats, meals, and coral/sandbank excursions) come to just BDT 35,000 to BDT 55,000 per person excluding flights. You can even visit a luxury private water-villa resort for a day using a $120 All-Inclusive Resort Day Pass.",
+    localTransport: ["Inter-island travel may involve scheduled ferries, speedboats or domestic flights; confirm the current operator, departure point, baggage terms and schedule.", "Ask your accommodation or transfer provider how delays, missed connections, weather changes and cancellations are handled.", "Check whether your island base is reachable on your arrival and departure days; do not assume transfers run at every flight time.", "Compare the full transfer route and terms before paying, including any required local connections or overnight stays."],
+    budgetBdt: "No whole-trip total is quoted. Accommodation, transfers, meals, activities and any applicable local charges vary by island, date and travel style; compare current prices and what is included before booking. International airfare and entry requirements should be checked separately.",
+    quickAnswer: "This five-day outline centers on one island base, with an optional marine activity and a return-transfer buffer. Compare local-island and resort stays, confirm transfers for your dates and check current weather and operator terms. Verify entry requirements for your circumstances through official sources; this page is not a visa decision or live price quote.",
     keyFacts: [
-      { label: "Recommended Length", value: "4 to 5 Days" },
-      { label: "Local Island Budget", value: "BDT 7,000 - 10,500 / day" },
-      { label: "Top Money-Saving Hack", value: "Stay in Maafushi + Take a 1-Day Resort Pass" },
-      { label: "Visa for Bangladeshis", value: "Free 30-Day Visa on Arrival" }
+      { label: "Sample duration", value: "Five flexible days, including transfer buffers" },
+      { label: "Route focus", value: "One island base with optional marine activities" },
+      { label: "Stay style", value: "Compare inhabited-island and resort options" },
+      { label: "Costs", value: "No trip total is quoted; check current prices and inclusions" }
     ],
     faqs: [
-      {
-        question: "How can I get overwater villa photos in the Maldives without paying BDT 50,000/night?",
-        answer: "Stay at a comfortable hotel on Maafushi Island (around BDT 8,000/night) and book a 1-Day Private Resort Tour (around $110–$140 USD per person). This includes speedboat transfers, access to the resort's overwater walkways, infinity pool, beaches, and buffet lunch."
-      },
-      {
-        question: "Should I carry US Dollars or Maldivian Rufiyaa from Dhaka?",
-        answer: "Carry crisp US Dollar ($50 and $100 bills printed after 2013 with no tears or ink stamps). In the Maldives, almost all guesthouses, speedboats, and excursion operators quote and accept USD directly."
-      },
-      {
-        question: "What is the IMUGA Traveller Declaration, and do I need it before flying to the Maldives?",
-        answer: "Yes. Maldives Immigration requires every traveller to submit the free IMUGA Traveller Declaration online within 96 hours before arrival. It is a separate step from the visa on arrival, which is issued at the airport desk - and without a submitted declaration you can be refused boarding at Dhaka. Have your passport details, flight numbers, and the address of your Maafushi or Hulhumalé hotel ready, then keep the confirmation QR code both on your phone and printed."
-      }
+      { question: "How many days should I plan for the Maldives?", answer: "This outline uses five flexible days around one island base. If your stay is shorter, avoid adding multiple island transfers unless the current schedules and connection buffers fit your dates." },
+      { question: "How do I choose between a local island and a resort?", answer: "Compare accommodation, meals, activities, transfer arrangements, local visitor rules and the total current price for your dates. Check directly with the property about what is included and any restrictions." },
+      { question: "How should I arrange island transfers?", answer: "Confirm the operator, departure point, schedule, baggage terms and missed-connection policy directly with your accommodation or transfer provider. Leave a buffer for weather and schedule changes." },
+      { question: "Does this guide confirm entry or visa eligibility for Bangladeshi travelers?", answer: "No. Entry requirements depend on the traveler and current policy. Check the Maldives Immigration guidance and any required pre-arrival steps for your circumstances before booking." }
     ],
     schemaMarkup: {
       type: "DestinationGuide",
-      description: "Maldives 5-day itinerary for Bangladeshi travelers",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "TouristDestination",
-  "name": "Maldives"
-}`
+      description: "Maldives island destination planning guide",
+      code: `{"@context":"https://schema.org","@type":"TouristDestination","name":"Maldives"}`
     }
+  },
+  {
+    id: "london-guide",
+    country: "London, United Kingdom",
+    title: "London Destination Guide from Bangladesh: Landmarks & Planning",
+    description: "Plan a London visit around its landmarks, river experiences and neighborhoods. This guide organizes existing URAL attraction-planning material; schedules, access and prices should be checked for your dates.",
+    bestTimeToVisit: "Choose dates around your preferred weather, daylight and event calendar; check local conditions and attraction opening information before booking.",
+    itinerary: [
+      { day: 1, title: "Westminster and the Thames", activities: ["Plan a walk around Westminster and the river using current access information.", "Choose a river or city-view activity and confirm its schedule before travel."] },
+      { day: 2, title: "Tower of London and central sights", activities: ["Set aside time for the Tower of London and nearby riverfront sights.", "Check official ticket, entry and opening details for your chosen date."] },
+      { day: 3, title: "A flexible final day", activities: ["Choose a museum, viewpoint or neighborhood based on your interests and opening hours.", "Use current Transport for London service information to plan local journeys."] }
+    ],
+    localTransport: ["Use current Transport for London route, fare and service information.", "Allow time for walking, interchange and service changes; check the route on the day.", "Confirm airport-transfer options and terms with the relevant operator."],
+    budgetBdt: "No trip total is quoted. Airfare, accommodation, local transport and attraction costs vary by date and traveler; check live prices before booking.",
+    quickAnswer: "Plan a London visit around the landmarks and experiences that matter to you, then check current transport, opening hours and ticket terms for your travel dates. This page is a destination overview, not a live price quote or visa decision.",
+    keyFacts: [
+      { label: "Planning focus", value: "Landmarks, museums, river experiences and local transport" },
+      { label: "Ticket prices", value: "Check the provider for your date" },
+      { label: "Entry requirements", value: "Check current official UK guidance" }
+    ],
+    faqs: [
+      { question: "How should I plan a first London visit?", answer: "Group nearby sights by area, check each attraction's current opening and ticket conditions, and leave time for local travel between stops." },
+      { question: "Can I rely on an attraction price example?", answer: "Treat third-party price examples as indicative unless confirmed for your dates at checkout. The provider's current terms control." },
+      { question: "Where should I check transport details?", answer: "Use current Transport for London information for routes, service updates and fares, and confirm airport-transfer terms with the operator." },
+      { question: "Does this page confirm UK visa eligibility?", answer: "No. Visa and entry requirements depend on the traveler and can change. Check current official UK guidance before booking." }
+    ],
+    schemaMarkup: { type: "DestinationGuide", description: "London destination planning guide", code: `{"@context":"https://schema.org","@type":"TouristDestination","name":"London"}` }
+  },
+  {
+    id: "italy-guide",
+    country: "Rome, Milan & Venice, Italy",
+    title: "Italy Itinerary from Bangladesh: Rome, Milan & Venice",
+    description: "A flexible multi-city outline for travelers considering Rome, Milan and Venice. Use it to compare the pace and sequence, then confirm current transport, attraction access and entry requirements for your dates.",
+    bestTimeToVisit: "Choose dates around your preferred weather, daylight and local events. Check opening calendars and current transport schedules before settling the route, especially around holidays and major events.",
+    itinerary: [
+      { day: 1, title: "Arrive and settle in Rome", activities: ["Keep the first day flexible around your arrival time and accommodation location.", "Choose a nearby walk or meal rather than relying on a tight, timed attraction booking."] },
+      { day: 2, title: "Rome's historic center", activities: ["Plan a focused visit around the Colosseum and nearby archaeological sites; check official access, ticket and opening information for your date.", "Leave time for walking between areas and for security or entry procedures."] },
+      { day: 3, title: "Transfer to Milan", activities: ["Compare current intercity rail and other available options, including station locations, luggage and total door-to-door time.", "After arrival, keep the afternoon light and check current visitor information for the Duomo area."] },
+      { day: 4, title: "Milan at a flexible pace", activities: ["Choose a museum, neighborhood or landmark based on your interests and confirmed opening hours.", "Avoid stacking multiple timed-entry visits before checking distances and booking terms."] },
+      { day: 5, title: "Transfer to Venice", activities: ["Check the current route and schedule to Venice and allow time for station access and onward local transport.", "Use the remaining time for an unhurried walk near your accommodation or the historic center."] },
+      { day: 6, title: "Venice and departure planning", activities: ["Choose a short list of sights or an optional lagoon-area visit only after checking current services and opening times.", "Allow a practical buffer for your departure connection; confirm airport or station transfer details with the operator."] }
+    ],
+    localTransport: ["For intercity legs, compare current rail and other available services by door-to-door time, station location, luggage rules and fare conditions.", "In each city, check current public-transport routes, service notices and ticket rules with the local operator.", "Venice has different local travel patterns from road-based cities; verify the current route from your arrival point to your accommodation before booking.", "Build in time for walking, transfers and service changes; recheck the journey on the day."],
+    budgetBdt: "No whole-trip total is quoted. Airfare, accommodation, intercity travel, local transport, meals and attraction tickets vary by date and travel style; compare current prices before booking.",
+    quickAnswer: "This six-day outline links Rome, Milan and Venice at a deliberately flexible pace. Compare the city order and travel connections for your dates, and check attraction access, transport schedules and entry requirements before booking; this page is not a live price quote or visa decision.",
+    keyFacts: [
+      { label: "Route focus", value: "Rome, Milan and Venice" },
+      { label: "Sample duration", value: "Six days across three city bases; reduce stops or add nights if the pace feels tight" },
+      { label: "Tickets and schedules", value: "Check current official or operator information for your travel dates" },
+      { label: "Entry requirements", value: "Check current official Italian and Schengen guidance for your circumstances" }
+    ],
+    faqs: [
+      { question: "Is six days enough for Rome, Milan and Venice?", answer: "The outline uses six days across three city bases, but two intercity transfers make the pace active. If you prefer slower travel, remove a city or add nights rather than trying to fit every landmark in." },
+      { question: "How should I travel between the cities?", answer: "Compare currently available rail and other options for your dates. Check door-to-door time, station locations, luggage conditions, fare rules and the time needed to reach your accommodation." },
+      { question: "Should I book attraction tickets in advance?", answer: "Check each attraction's official opening calendar, timed-entry requirements and ticket terms for your date. Book only after confirming the schedule and cancellation conditions." },
+      { question: "Does this itinerary confirm Schengen visa eligibility?", answer: "No. Visa and entry decisions depend on your circumstances and current rules. Check the official Italian or relevant Schengen authority guidance before booking." }
+    ],
+    schemaMarkup: { type: "DestinationGuide", description: "Italy destination planning guide", code: `{"@context":"https://schema.org","@type":"TouristDestination","name":"Italy"}` }
+  },
+  {
+    id: "paris-guide",
+    country: "Paris, France",
+    title: "Paris Itinerary from Bangladesh: Landmarks & Planning",
+    description: "A flexible Paris outline for travelers planning around museums, landmarks and the Seine. Check current attraction access, local transport and entry requirements for your dates.",
+    bestTimeToVisit: "Choose dates around your preferred weather, daylight and local events. Check current opening calendars and transport information before booking, particularly during public holidays and major events.",
+    itinerary: [
+      { day: 1, title: "Arrival and a gentle first walk", activities: ["Keep plans light around your arrival time and accommodation location.", "Choose a nearby neighborhood walk or river-side area, and confirm any booked activity's operating schedule."] },
+      { day: 2, title: "The Louvre area and central Paris", activities: ["Plan a focused visit to the Louvre only after checking its official opening calendar, entry conditions and ticket options for your date.", "Leave time for the surrounding gardens and nearby central sights; check local access information before setting a tight schedule."] },
+      { day: 3, title: "Eiffel Tower and Seine", activities: ["Check current access and timed-entry terms before planning an Eiffel Tower visit.", "If choosing a Seine cruise, confirm the departure point, schedule and operating conditions with the provider."] },
+      { day: 4, title: "A flexible final day", activities: ["Choose another museum, viewpoint or neighborhood based on your interests and confirmed opening hours.", "Allow time for local travel and keep a buffer before your onward flight or train."] }
+    ],
+    localTransport: ["Check current public-transport routes, service notices and ticket rules with the local operator before each journey.", "Allow time for walking and transfers; compare the station or airport location with your accommodation rather than relying on a map distance alone.", "Confirm airport-transfer options, schedules, luggage conditions and fare terms with the operator for your travel date.", "For timed-entry attractions and river activities, plan the route to the stated entrance or departure point and recheck it on the day."],
+    budgetBdt: "No whole-trip total is quoted. Airfare, accommodation, local transport, meals and attraction tickets vary by date and travel style; compare current prices and terms before booking.",
+    quickAnswer: "Plan Paris around a short list of museums, landmarks and river experiences, leaving time to move between them. Check current opening times, ticket conditions, transport schedules and entry requirements for your dates; this guide is not a live price quote or visa decision.",
+    keyFacts: [
+      { label: "Planning focus", value: "Museums, landmarks, the Seine and neighborhood time" },
+      { label: "Sample duration", value: "Four flexible days; add time if you prefer a slower pace or more museums" },
+      { label: "Tickets and schedules", value: "Check current official or operator information for your dates" },
+      { label: "Entry requirements", value: "Check current official French and Schengen guidance for your circumstances" }
+    ],
+    faqs: [
+      { question: "How many days should I plan for Paris?", answer: "This outline gives four flexible days, but the right length depends on your interests and pace. Pick a few priorities and leave space for travel between them rather than trying to cover every major sight." },
+      { question: "Should I reserve Louvre or Eiffel Tower tickets in advance?", answer: "Check each attraction's official opening calendar, entry requirements and ticket terms for your date. If timed entry is offered, confirm the selected time and cancellation conditions before booking." },
+      { question: "How should I plan local transport?", answer: "Use current route and service information from the local operator, allow time for station access and transfers, and recheck the route on the day." },
+      { question: "Does this guide confirm Schengen visa eligibility?", answer: "No. Visa and entry decisions depend on your circumstances and current rules. Check the official French or relevant Schengen authority guidance before booking." }
+    ],
+    schemaMarkup: { type: "DestinationGuide", description: "Paris destination planning guide", code: `{"@context":"https://schema.org","@type":"TouristDestination","name":"Paris"}` }
+  },
+  {
+    id: "new-york-guide",
+    country: "New York City, USA",
+    title: "New York City Itinerary from Bangladesh: Landmarks & Planning",
+    description: "A flexible New York City outline for planning around harbor sights, parks, museums and neighborhoods. Check current attraction access, local transport and entry requirements for your dates.",
+    bestTimeToVisit: "Choose dates around your preferred weather, daylight and local event calendar. Check attraction opening information and current transport service notices before finalizing the plan.",
+    itinerary: [
+      { day: 1, title: "Arrival and a nearby first walk", activities: ["Keep the first day light around your arrival time, accommodation and airport transfer.", "Choose a nearby neighborhood or public space, and check current local conditions before setting a timed activity."] },
+      { day: 2, title: "Harbor and Statue of Liberty planning", activities: ["If visiting the Statue of Liberty, confirm the official ferry departure point, schedule, ticket terms and security requirements for your date.", "Allow time for the full harbor visit and the return journey; avoid adding several distant attractions to the same day."] },
+      { day: 3, title: "Central Park and a museum", activities: ["Choose a section of Central Park and one museum or cultural stop based on current opening hours and your interests.", "Check the museum's official entry and ticket information, and leave time for local travel between stops."] },
+      { day: 4, title: "Neighborhoods and departure buffer", activities: ["Pick one or two neighborhoods or viewpoints rather than trying to cover the whole city.", "Leave a practical buffer for airport or station travel and verify the current route before departure."] }
+    ],
+    localTransport: ["Use current Metropolitan Transportation Authority route, service and fare information for subway and bus journeys.", "Compare airport-transfer options using the actual terminal, accommodation address, luggage and time of travel; confirm fares and terms with the operator.", "Check the official ferry operator's departure location and schedule before planning harbor attractions.", "Allow time for walking, transfers and service changes; recheck important connections on the day."],
+    budgetBdt: "No whole-trip total is quoted. Airfare, accommodation, local transport, meals and attraction tickets vary by date and travel style; compare current prices and terms before booking.",
+    quickAnswer: "Plan New York City around a few priorities—such as a harbor visit, a park, a museum and selected neighborhoods—and allow time to move between them. Check current attraction access, transport service and entry requirements for your dates; this page is not a live price quote or visa decision.",
+    keyFacts: [
+      { label: "Planning focus", value: "Harbor sights, parks, museums and selected neighborhoods" },
+      { label: "Sample duration", value: "Four flexible days; choose a smaller set of priorities if your stay is shorter" },
+      { label: "Tickets and services", value: "Check current official or operator information for your dates" },
+      { label: "Entry requirements", value: "Check current official U.S. guidance for your circumstances" }
+    ],
+    faqs: [
+      { question: "How many days should I plan for New York City?", answer: "This outline uses four flexible days, but the right duration depends on your interests and arrival or departure times. Focus on a few areas and leave time for travel between them." },
+      { question: "What should I check before visiting the Statue of Liberty?", answer: "Confirm the official ferry departure point, schedule, ticket terms and security instructions for your date. Allow time for the harbor trip and return transfer." },
+      { question: "How should I plan public transport?", answer: "Check current subway and bus routes, service notices and fare information with the Metropolitan Transportation Authority, then recheck important connections on the day." },
+      { question: "Does this guide confirm U.S. visa eligibility?", answer: "No. Visa and entry decisions depend on your circumstances and current rules. Check current official U.S. guidance before booking." }
+    ],
+    schemaMarkup: { type: "DestinationGuide", description: "New York City destination planning guide", code: `{"@context":"https://schema.org","@type":"TouristDestination","name":"New York City"}` }
   }
 ];
 

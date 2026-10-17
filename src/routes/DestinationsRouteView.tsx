@@ -6,7 +6,8 @@ import { AFFILIATE_LINKS, resolvePartnerUrl } from "../components/AffiliatePartn
 
 import { Compass, ArrowRight, MapPin, ExternalLink, Lightbulb, Plane, Building, ShieldCheck, FileText, Calendar, DollarSign, AlertTriangle, CreditCard } from "lucide-react";
 
-import { DESTINATIONS_DATA } from "../constants";
+import { DESTINATIONS_DATA as EN_DESTINATIONS_DATA } from "../constants";
+import CityDestinationLanding from "../components/CityDestinationLanding";
 
 import { KKdayPromoBanner } from "../components/KKdayPromoBanner";
 
@@ -20,7 +21,15 @@ type RouteViewProps = { context: Record<string, any> };
 
 export default function DestinationsRouteView({ context }: RouteViewProps) {
 
-  const { TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryCityName, getCountryCityWithIata, getCountryIata, getCountryVisaId, isBn, lang, navigateTo, openPriceAlert, parameterId, section, setAreTpScriptsReady, triggerAffiliateToast } = context;
+  const { TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryCityName, getCountryCityWithIata, getCountryIata, getCountryVisaId, isBn, lang, localizedBlogs, navigateTo, openPriceAlert, parameterId, section, setAreTpScriptsReady, triggerAffiliateToast } = context;
+  const DESTINATIONS_DATA = context.localizedDestinations ?? EN_DESTINATIONS_DATA;
+
+  if (["nepal-guide", "thailand-guide", "malaysia-guide", "singapore-guide", "maldives-guide", "dubai-guide", "london-guide", "italy-guide", "paris-guide", "new-york-guide"].includes(parameterId)) {
+    const destinationGuide = DESTINATIONS_DATA.find((destination: any) => destination.id === parameterId);
+    if (destinationGuide) {
+      return <CityDestinationLanding guide={destinationGuide} blogs={localizedBlogs ?? []} lang={lang} onNavigate={navigateTo} />;
+    }
+  }
 
   return (
 

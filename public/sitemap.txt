@@ -29,6 +29,10 @@ https://ural-travel.pages.dev/destinations/malaysia-guide
 https://ural-travel.pages.dev/destinations/dubai-guide
 https://ural-travel.pages.dev/destinations/singapore-guide
 https://ural-travel.pages.dev/destinations/maldives-guide
+https://ural-travel.pages.dev/destinations/london-guide
+https://ural-travel.pages.dev/destinations/italy-guide
+https://ural-travel.pages.dev/destinations/paris-guide
+https://ural-travel.pages.dev/destinations/new-york-guide
 https://ural-travel.pages.dev/costs
 https://ural-travel.pages.dev/costs/nepal-costs
 https://ural-travel.pages.dev/costs/thailand-costs
@@ -130,6 +134,10 @@ https://ural-travel.pages.dev/bn/destinations/malaysia-guide
 https://ural-travel.pages.dev/bn/destinations/dubai-guide
 https://ural-travel.pages.dev/bn/destinations/singapore-guide
 https://ural-travel.pages.dev/bn/destinations/maldives-guide
+https://ural-travel.pages.dev/bn/destinations/london-guide
+https://ural-travel.pages.dev/bn/destinations/italy-guide
+https://ural-travel.pages.dev/bn/destinations/paris-guide
+https://ural-travel.pages.dev/bn/destinations/new-york-guide
 https://ural-travel.pages.dev/bn/costs
 https://ural-travel.pages.dev/bn/costs/nepal-costs
 https://ural-travel.pages.dev/bn/costs/thailand-costs

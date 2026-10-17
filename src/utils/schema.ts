@@ -363,7 +363,7 @@ export function collectionPageSchema(options: {
 }
 
 /**
- * Builds a Schema.org TouristTrip node for 5-day destination itineraries.
+ * Builds a Schema.org TouristTrip node. An Offer is emitted only when an explicitly supported price is supplied.
  */
 export function touristTripSchema(options: {
   url: string;
@@ -380,11 +380,11 @@ export function touristTripSchema(options: {
     description,
     country,
     places,
-    estimatedPriceBdt = 48000,
+    estimatedPriceBdt,
     inLanguage = "en-BD",
   } = options;
 
-  return {
+  const tripNode: Record<string, unknown> = {
     "@type": "TouristTrip",
     "@id": `${url}#trip`,
     name,
@@ -408,15 +408,19 @@ export function touristTripSchema(options: {
         },
       })),
     },
-    offers: {
+  };
+
+  if (typeof estimatedPriceBdt === "number" && Number.isFinite(estimatedPriceBdt)) {
+    tripNode.offers = {
       "@type": "Offer",
       url,
       price: estimatedPriceBdt,
       priceCurrency: "BDT",
       availability: "https://schema.org/InStock",
       seller: { "@id": SITE_ORG_ID },
-    },
-  };
+    };
+  }
+  return tripNode;
 }
 
 /**
