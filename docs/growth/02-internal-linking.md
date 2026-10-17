@@ -99,6 +99,11 @@ Target a **hub-and-spoke with lateral links** (a "topic cluster" model):
 - **Every hub links DOWN** to all its spokes (mostly done) **and laterally** to 2–3 sibling hubs.
 - **Every spoke links ACROSS** to 3–5 genuinely related spokes (e.g., "Dubai visa guide" → "Dubai hotels", "Dubai flights", "Dubai cost", "Dubai destinations guide").
 - **Every blog post links to 3–5 relevant money pages and 3–5 related blog posts**, plus the back-to-blog link it already has.
+  > **Operative minimums (2026-10-17):** the per-article floor and the CI-enforced rules live in
+  > [`10-CONTENT-UPGRADE-STANDARD.md`](10-CONTENT-UPGRADE-STANDARD.md) §3 — ≥4 internal links, of which ≥2 are
+  > blog→blog and ≥1 is a hub or money page, **per locale**. The 3–5 + 3–5 figure is a long-term target for
+  > high-value cluster pages, not a release gate; no post currently meets it. Where the two disagree, file 10 is the
+  > contract.
 - Breadcrumbs on every page as real `<a>` links (you already emit `BreadcrumbList` schema with `#breadcrumb` `@id` — make the *visible* breadcrumb anchors match it).
 
 ---

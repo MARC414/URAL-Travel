@@ -1,6 +1,14 @@
 /**
  * Long-form English blog bodies, split out of `src/constants.ts`.
  *
+ * ⚠️ BODY TEXT ONLY. Post metadata — title, summary, `references`,
+ * `internalLinks` and `affiliateCTA` — lives in `src/constants.ts` (English) and
+ * is mirrored per locale in `src/data/bengaliContent.ts`. A grep of this file
+ * cannot tell you whether a post has internal links or an affiliate CTA; on
+ * 2026-10-17 an audit did exactly that and reported a fully-linked article as
+ * unlinked. Read `docs/growth/10-CONTENT-UPGRADE-STANDARD.md` §0 before drawing
+ * that conclusion, and verify against the built HTML, not the prose.
+ *
  * WHY THIS FILE EXISTS: Long-form post bodies are much larger than the compact
  * metadata needed for blog listings and route lookup. App.tsx `import()`s this
  * module only on blog sections; post metadata is itself loaded in the
