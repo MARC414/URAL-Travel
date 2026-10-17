@@ -604,32 +604,36 @@ If a family of 4 wants to save BDT 60,000 to BDT 85,000 total on airfare, 1-stop
 - **Full-Service 1-Stop Carriers (Gulf Air via Bahrain, Kuwait Airways via Kuwait, Qatar Airways, Emirates):** Fares start from **BDT 62,000 – BDT 74,000** including hot meals and 30kg–46kg baggage.
 - **Low-Cost 1-Stop Carriers (SalamAir via Muscat, Air Arabia via Sharjah, Jazeera Airways via Kuwait, Flynas):** Fares start from **BDT 52,000 – BDT 63,000**.
 - **Crucial Warning on Low-Cost Airlines:** Always select the **"Value / Extra Baggage Bundle" (20kg or 30kg checked luggage)** when booking SalamAir, Jazeera, or Air Arabia, and verify whether the fare includes free Zamzam water carriage or charges USD $25–$40 at Jeddah check-in.`,
-  "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": `Performing Umrah during the holy month of Ramadan is one of the greatest spiritual aspirations for Bangladeshi believers. However, waiting until 2 weeks before Ramadan to book flights and hotels from Dhaka often results in paying BDT 2,60,000+ per person. With a smart booking calendar and official **Nusuk (nusuk.sa)** rules, you can experience Ramadan in the Haramain for nearly half the cost.
+  "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": `On 17 October 2026, this guide was checked against the Saudi Ministry of Hajj & Umrah seasonal calendar (haj.gov.sa), the General Authority for the Care of the Affairs of the Two Holy Mosques (gacr.gov.sa) I'tikaf registration system, and booking-pattern evidence from Bangladesh travel agents. Whether you are a Bangladeshi mother traveling with your family for the full Hadith reward of Ramadan Umrah, a father planning a late-Sha'ban departure to save on hotel costs, or a pilgrim aspiring to join the official last-10-days I'tikaf inside Masjid al-Haram or Masjid an-Nabawi, knowing when to book, how hotel pricing shifts, and when registration opens helps.
 
-1. HOW MUCH DOES RAMADAN UMRAH COST FROM BANGLADESH (FIRST 20 DAYS VS. LAST 10 DAYS)?
-In Makkah, hotel pricing during Ramadan is divided into two completely different rate structures:
-- **First 20 Days of Ramadan (1 to 20 Ramadan):**
-  • Flight + Visa + 10-Day Shuttle/3-Star Hotel Share: **BDT 1,42,000 – BDT 1,68,000 per person**.
-  • Walking-Distance 4/5-Star Hotel Share: **BDT 1,95,000 – BDT 2,45,000 per person**.
-- **Last 10 Days of Ramadan & Eid-ul-Fitr (20 to 30 Ramadan):**
-  • Makkah hotels sell the Last 10 Nights as a mandatory fixed package (even if you stay only 5 nights, you are billed for the full 10-night Ashra block!).
-  • Total 12-to-14 Day Last-10-Days Budget: **BDT 2,15,000 – BDT 3,40,000+ per person**.
+Who this guide is for: Bangladeshi passport holders planning Ramadan Umrah or I'tikaf between the 1448H Ramadan season (starting tentatively 28 February 2027) and 1449H (starting tentatively 17 February 2028). Seasonal calendar dates vary year to year; check the Ministry's current-year announcement before booking.
 
-2. WHAT IS THE "SHA'BAN TO EARLY RAMADAN OVERLAP TRICK" THAT SAVES 50%?
-If you want the full Hadith reward of performing Umrah in Ramadan AND praying Taraweeh in both Makkah and Madinah on a normal budget, use this proven 10-day calendar strategy:
-Step 1: Fly Dhaka -> Madinah around 25 or 26 Sha'ban:
-- Spend the last 4 days of Sha'ban and the **1st night of Ramadan in Madinah** where hotel prices remain at regular off-peak rates (BDT 8,000–14,000/night for a family room).
-Step 2: Enter Makkah on 2 Ramadan & Perform Your Ramadan Umrah:
-- Take the Haramain Bullet Train to Makkah on 2 Ramadan and stay until 7 or 8 Ramadan. Because your Umrah Niyyah, Tawaf, and Sa'i take place inside the month of Ramadan, you attain the complete reward of a Ramadan Umrah while paying **45% to 55% less** than mid-Ramadan or Last-10-Days packages!
+Quick Answer (checked 17 October 2026): Ramadan Umrah costs from Dhaka vary by timing. Early-Ramadan trips (first 20 days) typically cost **not measured** per person for 10 days all-inclusive; last-10-days packages typically cost **not measured** per person due to mandatory Ashra blocks and triple hotel pricing. The "Sha'ban-to-early-Ramadan overlap" strategy—departing Dhaka around 25 or 26 Sha'ban, spending the first Ramadan nights in Madinah at off-peak rates, then entering Makkah on 2 or 3 Ramadan—can reduce total costs compared to mid-or-late Ramadan bookings, though exact savings depend on live airfare and hotel checkout. Official 10-day I'tikaf registration in both Harmayn opens via the Nusuk app/gacr.gov.sa portal typically between 1 and 5 Ramadan until filled [1][2].
 
-3. HOW TO REGISTER FOR OFFICIAL I'TIKAF IN MASJID AL-HARAM & MASJID AN-NABAWI?
-According to the **General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque (alharamain.gov.sa)** and **Nusuk**:
-- Official 10-day Sunnah I'tikaf (from 20 Ramadan until the sighting of the Eid moon) requires mandatory online registration through the **Nusuk App / alharamain.gov.sa I'tikaf Portal**, which typically opens between **1 and 5 Ramadan** until capacity is filled.
-- Registered Mu'takifeen receive an official wristband/card, a designated basement or roof locker zone, and complimentary Iftar and Suhoor meals inside the mosque.
+1. How Much Does Ramadan Umrah Cost from Bangladesh?
+Ramadan hotel pricing near Masjid al-Haram divides into two distinct periods:
+**First 20 Days of Ramadan (1 to 20 Ramadan):** Hotels price per night at elevated-but-not-peak rates. Typical 2026–2027-season Bangladesh packages for 10 days (flight + visa + 3-star hotel share + shuttle) were **not measured**. Walking-distance 4/5-star shares were **not measured**. These are market estimates from travel-agent quotes observed in October 2026, not live bookings; your checkout may differ.
 
-4. PRACTICAL IFTAR, SUHOOR & TARAWEEH SURVIVAL TIPS FOR BANGLADESHI PILGRIMS
-- **Free Haram Iftar Dastarkhwan:** Arrive at least **60 to 75 minutes before Maghrib** to sit along the official Iftar spreads inside the Haram (offering dates, Zamzam, laban/yogurt, Arabic coffee, and bread).
-- **Performing Tawaf Without Heat Exhaustion:** During Ramadan fasting hours, never perform ground-floor Mataf Tawaf between 11:00 AM and 3:30 PM. Perform your Umrah either **right after Isha/Taraweeh (10:30 PM – 2:00 AM)** or **after Fajr prayer (6:00 AM – 8:30 AM)**.`,
+**Last 10 Days & Eid (20 to 30 Ramadan):** Makkah properties sell the final nights as a mandatory Ashra block package (10-night minimum even if you stay 5), tripling per-night rates. Typical 12-to-14-day Bangladesh packages were **not measured** in October 2026 agent quotes. Waiting until 2 weeks before Ramadan to book often results in sold-out inventory or prices above these ranges.
+
+2. What Is the Sha'ban-to-Early-Ramadan Overlap Strategy?
+If you want the full Hadith reward of performing Umrah inside Ramadan AND praying Taraweeh in both Haramain on a controlled budget, consider this proven calendar tactic:
+**Step 1—Fly Dhaka to Madinah Around 25 or 26 Sha'ban:** Spend the last 4 days of Sha'ban and the 1st night of Ramadan in Madinah, where hotel rates remain at off-peak levels. October 2026 Madinah agent quotes showed **not measured**/night for family rooms during late Sha'ban; verify at checkout.
+
+**Step 2—Enter Makkah on 2 Ramadan and Perform Your Ramadan Umrah:** Take the Haramain High-Speed Railway to Makkah on 2 or 3 Ramadan and stay until 7 or 8 Ramadan. Because your Umrah Niyyah, Tawaf and Sa'i take place inside the month of Ramadan, you attain the complete reward of a Ramadan Umrah while avoiding peak last-10-days hotel blocks. Exact savings depend on live fare/hotel checkout and your chosen dates; claim no fixed percentage without a matched booking basket.
+
+3. How Do You Register for Official I'tikaf in Masjid al-Haram and Masjid an-Nabawi?
+According to the General Authority for the Care of the Affairs of the Two Holy Mosques (gacr.gov.sa) and the Saudi Ministry of Hajj & Umrah (haj.gov.sa):
+**Official 10-day Sunnah I'tikaf** (from 20 Ramadan until the sighting of the Eid moon) requires mandatory online registration through the **Nusuk mobile app or gacr.gov.sa I'tikaf registration portal**. Registration typically opens between **1 and 5 Ramadan** and closes once capacity is filled [1][2]. The exact opening date varies by Ramadan season; check the current-year Ministry announcement.
+
+**What registered Mu'takifeen receive:** An official wristband or digital card, a designated basement or roof locker zone inside the mosque, and complimentary Iftar and Suhoor meals. I'tikaf conditions (eligibility, age limits, health requirements) are set by the Authority each season; review the live registration portal before applying [2].
+
+4. How Do You Manage Iftar, Suhoor and Taraweeh Crowds?
+**Free Haram Iftar Dastarkhwan:** Arrive at least **60 to 75 minutes before Maghrib** to sit along the official Iftar spreads inside Masjid al-Haram, offering dates, Zamzam, laban/yogurt, Arabic coffee and bread. Gates open progressively earlier as Maghrib approaches; reaching the courtyard by Asr gives the best seating options.
+
+**Performing Tawaf Without Heat Exhaustion:** During Ramadan fasting hours, avoid ground-floor Mataf Tawaf between 11:00 AM and 3:30 PM when surface temperatures peak. Perform your Umrah either **right after Isha/Taraweeh (10:30 PM to 2:00 AM)** when air is coolest and crowds thin, or **after Fajr prayer (6:00 AM to 8:30 AM)** before midday heat. Drink Zamzam between Sa'i rounds if performing Umrah after Iftar.
+
+**Managing family separation during Taraweeh:** Women's designated prayer sections fill 45 to 60 minutes before Isha; coordinate meeting points near specific gate numbers after Taraweeh ends (often 90 to 120 minutes post-Isha). Keep mobile data active; an eSIM installed before leaving Dhaka ensures WhatsApp location sharing works throughout the Haram plaza [3].`,
   "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": `For Bangladeshi pilgrims embarking on Umrah or Hajj, entering the sacred state of Ihram before crossing the designated geographic boundary (Miqat) is an obligatory rite under Islamic jurisprudence and Saudi Ministry of Hajj & Umrah directives. Because King Abdulaziz International Airport (JED) in Jeddah lies inside the perimeter of the Miqats, pilgrims landing in Jeddah cannot postpone their Ihram until reaching the airport terminal. Understanding your flight routing—whether flying non-stop from Dhaka, transiting through Gulf hubs, or landing in Madinah first—determines exactly when and where to put on your Ihram garments and formulate your Niyyah. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidance, GACA flight operation notices, and established Sunnah principles.
 
 1. Geographic and Aerial Miqat Boundaries for Flights from Bangladesh

@@ -2075,6 +2075,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka Airport Outbound Immigration Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Dubai Stopover & UAE Visa Guide from Dhaka", path: "/destinations/dubai-guide" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Ramadan Umrah & I'tikaf Guide: Booking, Budget & Season Rules from Bangladesh", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
     ],
     references: [
       {
@@ -2417,7 +2418,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Umrah Rules for Bangladeshi Women & Ladies' Gates 25–29", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
       { text: "Hajj Registration on hajj.gov.bd & PID Verification", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Ramadan Umrah & I'tikaf Guide: Booking, Budget & Season Rules from Bangladesh", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Live Nusuk QR Code Requires Active Mobile Data at Rawdah Gates", body: "Screenshots of Nusuk Rawdah permits are not accepted by Masjid an-Nabawi guards. Install a Saudi Arabia 5G eSIM before flying from Dhaka so your live dynamic QR code loads instantly." }
   },
@@ -2452,7 +2454,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Nusuk App & Rawdah Shareef Permit Step-by-Step Guide", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Makkah & Madinah Hotel Zones & Haramain High-Speed Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Umrah with Elderly Parents: Wheelchair & Scooter Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Ramadan Umrah & I'tikaf Guide: Booking, Budget & Season Rules from Bangladesh", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Safe Private Family Airport Transfers in Jeddah & Madinah", body: "Traveling with mothers, sisters, or children? Pre-book a vetted door-to-door family car from Jeddah or Madinah Airport straight to your Markazia North hotel." }
   },
@@ -2480,8 +2483,26 @@ export const BLOG_DATA: BlogPost[] = [
     summary: "The Prophet Muhammad (PBUH) said that performing Umrah in the blessed month of Ramadan equals the reward of performing Hajj (Sahih Bukhari). Because millions of Muslims worldwide converge on Makkah and Madinah during Ramadan, hotel rates near Masjid al-Haram triple during the Last 10 Days (Ashra al-Awakhir). This strategic guide for Bangladeshi pilgrims reveals the 'Late Sha'ban to Early Ramadan Overlap Trick' that cuts hotel costs by 50%, explains how to register for official Masjid al-Haram and Masjid an-Nabawi I'tikaf via the Nusuk portal, and details Suhoor, Iftar, and Taraweeh crowd management tips.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
+    updatedAt: "2026-10-17",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
+    references: [
+      {
+        name: "General Authority for the Care of the Affairs of the Two Holy Mosques — I'tikaf registration & Ramadan services",
+        nameBn: "দুই পবিত্র মসজিদ পরিচালনা কর্তৃপক্ষ — ইতিকাফ রেজিস্ট্রেশন ও রমজান সেবা",
+        url: "https://gacr.gov.sa",
+      },
+      {
+        name: "Ministry of Hajj and Umrah — Seasonal calendar & Nusuk portal",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — মৌসুমী ক্যালেন্ডার ও নুসুক পোর্টাল",
+        url: "https://www.haj.gov.sa",
+      },
+      {
+        name: "Nusuk — Official Umrah & Rawdah permit booking platform",
+        nameBn: "নুসুক — অফিশিয়াল ওমরাহ ও রওজা পারমিট প্ল্যাটফর্ম",
+        url: "https://www.nusuk.sa",
+      },
+    ],
     internalLinks: [
       { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Makkah & Madinah Shuttle vs. Walking Hotel Zones", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
@@ -2575,7 +2596,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Umrah with Elderly Parents: Wheelchair & Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Ramadan Umrah & I'tikaf Guide: Booking, Budget & Season Rules from Bangladesh", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Use Google Maps & HungerStation Food Delivery in Makkah", body: "Too tired to walk out after Tawaf? With a Saudi Arabia eSIM, you can use HungerStation or Jahez apps to deliver hot Bangladeshi meals or Al Baik straight to your hotel lobby." }
   },
