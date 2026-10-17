@@ -64,4 +64,41 @@ const nowOct16AtPublish = new Date("2026-10-16T03:00:00.000Z"); // 09:00:00 on O
 assert.equal(isPostIncludedInBuild(coxsBazarPost, nowOct16AtPublish), true);
 assert.equal(isPostIncludedInBuild(coxsBazarPost, nowAtPublish), false);
 
+/**
+ * The prerendered FAQPage JSON-LD node is built by locating the FAQ heading in
+ * the whole body and pairing every following line until the next numbered
+ * heading (see isNumberedHeading in src/utils/blogStructuredData.ts). Anything
+ * that leaves an odd line count — a trailing paragraph, a missing answer —
+ * silently drops the structured data while the page still looks correct, so the
+ * pairing rule is asserted here for every scheduled article in both locales.
+ */
+const numberedHeadingLine = /^\s*(?:\d+|[\u09e6-\u09ef]+)[.)]\s+/;
+for (const post of repoPosts) {
+  const locales = [
+    ["English", post.faqHeadingEn, post.englishBody],
+    ["Bengali", post.faqHeadingBn, post.bengaliBody],
+  ] as const;
+  for (const [label, heading, body] of locales) {
+    if (!heading) continue;
+    const lines = body.split(/\r?\n/);
+    const headingIndex = lines.findIndex((line) => line.trim() === heading.trim());
+    assert.ok(
+      headingIndex >= 0,
+      `${post.slug}: the ${label} body must carry the FAQ heading "${heading}" verbatim for FAQ schema`,
+    );
+    let sectionEnd = lines.length;
+    for (let index = headingIndex + 1; index < lines.length; index += 1) {
+      if (numberedHeadingLine.test(lines[index])) {
+        sectionEnd = index;
+        break;
+      }
+    }
+    const faqLines = lines.slice(headingIndex + 1, sectionEnd).map((line) => line.trim()).filter(Boolean);
+    assert.ok(
+      faqLines.length >= 2 && faqLines.length % 2 === 0,
+      `${post.slug}: the ${label} FAQ block needs question and answer lines in pairs (got ${faqLines.length}); nothing may follow it except another numbered heading`,
+    );
+  }
+}
+
 console.log("Scheduled blog parser, Dhaka 9 AM date gates, and current scheduled post all pass.");
