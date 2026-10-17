@@ -39,6 +39,13 @@ https://ural-travel.pages.dev/costs/maldives-costs
 https://ural-travel.pages.dev/experiences
 https://ural-travel.pages.dev/kkday-hotels
 https://ural-travel.pages.dev/tools
+https://ural-travel.pages.dev/tools/currency-converter
+https://ural-travel.pages.dev/tools/budget-calculator
+https://ural-travel.pages.dev/tools/packing-checklist
+https://ural-travel.pages.dev/tools/visa-checker
+https://ural-travel.pages.dev/tools/flight-delay-claim
+https://ural-travel.pages.dev/tools/airport-codes
+https://ural-travel.pages.dev/pre-departure
 https://ural-travel.pages.dev/sitemap
 https://ural-travel.pages.dev/contact
 https://ural-travel.pages.dev/about
@@ -133,6 +140,13 @@ https://ural-travel.pages.dev/bn/costs/maldives-costs
 https://ural-travel.pages.dev/bn/experiences
 https://ural-travel.pages.dev/bn/kkday-hotels
 https://ural-travel.pages.dev/bn/tools
+https://ural-travel.pages.dev/bn/tools/currency-converter
+https://ural-travel.pages.dev/bn/tools/budget-calculator
+https://ural-travel.pages.dev/bn/tools/packing-checklist
+https://ural-travel.pages.dev/bn/tools/visa-checker
+https://ural-travel.pages.dev/bn/tools/flight-delay-claim
+https://ural-travel.pages.dev/bn/tools/airport-codes
+https://ural-travel.pages.dev/bn/pre-departure
 https://ural-travel.pages.dev/bn/sitemap
 https://ural-travel.pages.dev/bn/contact
 https://ural-travel.pages.dev/bn/about

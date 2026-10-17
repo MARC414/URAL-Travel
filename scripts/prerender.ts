@@ -49,6 +49,7 @@ import {
   getVisibleBlogHowTos,
 } from "../src/utils/blogStructuredData";
 import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
+import { TOOL_PAGE_SEO, TOOL_SLUGS } from "../src/utils/toolRoutes";
 import { buildResponsiveSrcSet, getResponsiveImageDimensions } from "../src/utils/imageAssets";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
 import {
@@ -319,7 +320,8 @@ function escapeXml(str: string): string {
 
 const INTERNAL_ROUTE_ALIASES: Record<string, string> = {
   "/indexing": "/sitemap",
-  "/pre-departure": "/sitemap",
+  // /pre-departure used to alias here too — it is a standalone canonical page
+  // since the 2026-10 split (see the /pre-departure route entry below).
 };
 
 function normalizeInternalHref(rawPath: string): string {
@@ -378,6 +380,44 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
     { href: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide", text: "Travel eSIM and insurance guide for Bangladeshi travelers" },
     { href: "/blog/dual-currency-card-endorsement-bangladesh", text: "Dual-currency card endorsement and travel quota guide" },
     { href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go", text: "Dhaka Airport outbound immigration checklist" },
+  ],
+  // Canonical /tools/<slug> pages share the tools guide set, with the most
+  // relevant anchor first for each tool's intent.
+  "/tools/currency-converter": [
+    { href: "/blog/dual-currency-card-endorsement-bangladesh", text: "Dual-currency card endorsement and travel quota guide" },
+    { href: "/costs", text: "Trip cost matrices in BDT by country" },
+    { href: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp", text: "Flight delay, cancellation and baggage claim guide" },
+  ],
+  "/tools/budget-calculator": [
+    { href: "/costs", text: "Trip cost matrices in BDT by country" },
+    { href: "/blog/dual-currency-card-endorsement-bangladesh", text: "Dual-currency card endorsement and travel quota guide" },
+    { href: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card", text: "How to book travel in BDT by bKash or bank transfer" },
+  ],
+  "/tools/packing-checklist": [
+    { href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go", text: "Dhaka Airport outbound immigration checklist" },
+    { href: "/pre-departure", text: "Pre-departure checklist, baggage rules and embassy helplines" },
+    { href: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide", text: "Travel eSIM and insurance guide for Bangladeshi travelers" },
+  ],
+  "/tools/visa-checker": [
+    { href: "/visa", text: "Visa requirements for Bangladeshi passport holders" },
+    { href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go", text: "Dhaka Airport outbound immigration checklist" },
+    { href: "/visa-free-countries", text: "Visa-free countries for a Bangladeshi passport" },
+  ],
+  "/tools/flight-delay-claim": [
+    { href: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp", text: "Flight delay, cancellation and baggage claim guide" },
+    { href: "/flights", text: "Compare international flights from Dhaka" },
+    { href: "/contact", text: "Contact the URAL Dhaka support desk" },
+  ],
+  "/tools/airport-codes": [
+    { href: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp", text: "Flight delay, cancellation and baggage claim guide" },
+    { href: "/flights", text: "Compare international flights from Dhaka" },
+    { href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go", text: "Dhaka Airport outbound immigration checklist" },
+  ],
+  "/pre-departure": [
+    { href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go", text: "Dhaka Airport outbound immigration checklist" },
+    { href: "/blog/dual-currency-card-endorsement-bangladesh", text: "Dual-currency card endorsement and travel quota guide" },
+    { href: "/tools/packing-checklist", text: "Smart packing checklist for flights from Dhaka" },
+    { href: "/sitemap", text: "Complete site directory of every URAL guide" },
   ],
   "/contact": [
     { href: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card", text: "How to book travel in BDT by bKash or bank transfer" },
@@ -495,19 +535,21 @@ function addInternalLinkSections(
           "Complete travel page directory",
           directoryLinks
         );
-      } else if (STANDALONE_PAGE_LINKS[route.routePath]) {
-        extraLinks = renderLinkSection(
-          "related-standalone-guides",
-          route.routePath === "/umrah"
-            ? "Related Umrah and Hajj guides"
-            : route.routePath === "/experiences"
-              ? "Related attraction and destination guides"
-              : route.routePath === "/tools"
-                ? "Guides for using travel tools"
-                : "Helpful guides before you contact URAL",
-          STANDALONE_PAGE_LINKS[route.routePath]
-        );
-      }
+            } else if (STANDALONE_PAGE_LINKS[route.routePath]) {
+              extraLinks = renderLinkSection(
+                "related-standalone-guides",
+                route.routePath === "/umrah"
+                  ? "Related Umrah and Hajj guides"
+                  : route.routePath === "/experiences"
+                    ? "Related attraction and destination guides"
+                    : route.routePath.startsWith("/tools")
+                      ? "Guides for using travel tools"
+                      : route.routePath === "/pre-departure"
+                        ? "Guides to read before you depart"
+                        : "Helpful guides before you contact URAL",
+                STANDALONE_PAGE_LINKS[route.routePath]
+              );
+            }
     }
 
     if (extraLinks) {
@@ -1671,34 +1713,93 @@ function buildAllRoutes(): PrerenderRoute[] {
     `,
   });
 
-  // 10. Sitemap & Pre-Departure Hub (/sitemap)
-  const sitemapFaqSchema = getPreDepartureFaqSchema({ url: `${BASE_URL}/sitemap` });
-  const sitemapFaq = stripContext(sitemapFaqSchema);
-  sitemapFaq["@id"] = `${BASE_URL}/sitemap#faq`;
-  sitemapFaq["mainEntityOfPage"] = { "@id": `${BASE_URL}/sitemap#webpage` };
+  // 9b. Canonical tool sub-pages (/tools/<slug>) — one static, indexable URL
+  // per tool (the old /tools?tab= query URLs now301 here at the edge).
+  for (const toolSlug of TOOL_SLUGS) {
+    const meta = TOOL_PAGE_SEO[toolSlug];
+    const toolPath = `/tools/${toolSlug}`;
+    routes.push({
+      routePath: toolPath,
+      canonicalUrl: `${BASE_URL}${toolPath}`,
+      // Titles/descriptions are re-derived from PRIORITY_SEO_COPY (same
+      // TOOL_PAGE_SEO source) by applySharedSeoCopy below.
+      title: meta.titleEn,
+      description: meta.descriptionEn,
+      imageUrl: defaultOgImage,
+      breadcrumbs: [
+        { name: "Home", url: `${BASE_URL}/` },
+        { name: "Travel Tools", url: `${BASE_URL}/tools` },
+        { name: meta.nameEn, url: `${BASE_URL}${toolPath}` },
+      ],
+      // WebPage + BreadcrumbList nodes are attached automatically in
+      // prerenderDistHtmlFiles (no CollectionPage/FAQ graph on tool pages).
+      extraGraphNodes: [],
+      bodyHtml: `
+      <article>
+        <h1>${escapeHtml(meta.h1En)}</h1>
+        <p>${escapeHtml(meta.subEn)}</p>
+        <section>
+          <h2>How this tool helps travellers from Dhaka</h2>
+          <p>${escapeHtml(meta.descriptionEn)}</p>
+        </section>
+      </article>
+    `,
+    });
+  }
+
+  // 10. Pre-Departure Hub (/pre-departure) — split from /sitemap (2026-10) so
+  // the checklist intent and the directory intent each keep one canonical URL.
+  const preDepartureFaqSchema = getPreDepartureFaqSchema({
+    url: `${BASE_URL}/pre-departure`,
+  });
+  const preDepartureFaq = stripContext(preDepartureFaqSchema);
+  preDepartureFaq["@id"] = `${BASE_URL}/pre-departure#faq`;
+  preDepartureFaq["mainEntityOfPage"] = { "@id": `${BASE_URL}/pre-departure#webpage` };
 
   routes.push({
-    routePath: "/sitemap",
-    canonicalUrl: `${BASE_URL}/sitemap`,
-    title: "Dhaka Airport (DAC) Pre-Departure Checklist, Baggage & Complete Site Directory | URAL",
+    routePath: "/pre-departure",
+    canonicalUrl: `${BASE_URL}/pre-departure`,
+    title: "Dhaka Airport (DAC) Pre-Departure Checklist & Helplines | URAL",
     description:
-      "Interactive pre-flight readiness checklist for Bangladeshi travelers departing Dhaka Airport (DAC), cabin & Zamzam baggage rules, Embassy emergency helplines, and complete 83-page directory.",
+      "Interactive pre-flight checklist for Bangladeshi travelers: passport endorsement, NOC/GO, digital arrival cards, cabin & Zamzam baggage rules and Bangladesh Embassy emergency numbers.",
     imageUrl: defaultOgImage,
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
-      { name: "Pre-Departure & Complete Sitemap", url: `${BASE_URL}/sitemap` },
+      { name: "Pre-Departure Hub", url: `${BASE_URL}/pre-departure` },
     ],
-    extraGraphNodes: [sitemapFaq],
+    extraGraphNodes: [preDepartureFaq],
     bodyHtml: `
       <article>
-        <h1>Dhaka Airport (DAC) Pre-Departure Readiness Checklist &amp; Complete Site Directory</h1>
-        <p>Interactive pre-flight checklist for Bangladeshi travelers departing Hazrat Shahjalal International Airport (DAC), cabin &amp; 5L Zamzam baggage rules, Bangladesh Embassy emergency helplines abroad, and direct links to the travel guides.</p>
-        ${renderLandingFaqs("sitemap-predeparture-faqs", "Dhaka Airport pre-departure and baggage questions", sitemapFaqSchema)}
+        <h1>Dhaka Airport (DAC) Pre-Departure Checklist &amp; Traveler Emergency Hub</h1>
+        <p>Everything a Bangladeshi traveler needs in the final 72 hours before flying out of Dhaka (DAC) — verify your immigration documents, check cabin &amp; Zamzam baggage rules, save Bangladesh Embassy emergency numbers, then jump to the complete site directory for any country guide.</p>
+        ${renderLandingFaqs("predeparture-faqs", "Dhaka Airport pre-departure and baggage questions", preDepartureFaqSchema)}
       </article>
     `,
   });
 
-  // 11. Contact Hub (/contact)
+  // 11. Site Directory (/sitemap) — directory-only since the split; the
+  // pre-departure FAQs moved to /pre-departure so the two URLs never compete.
+  routes.push({
+    routePath: "/sitemap",
+    canonicalUrl: `${BASE_URL}/sitemap`,
+    title: "Complete URAL Travel Site Directory & Guide Index | URAL",
+    description:
+      "Every URAL page in one place: flights, visas, hotels, BDT budgets, destination itineraries, Umrah preparation, travel tools and the full blog index for Bangladeshi travelers.",
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "Site Directory", url: `${BASE_URL}/sitemap` },
+    ],
+    extraGraphNodes: [],
+    bodyHtml: `
+      <article>
+        <h1>Complete URAL Travel Site Directory &amp; Guide Index</h1>
+        <p>Every page URAL publishes for Bangladeshi travelers — flights, visas, hotels, BDT budgets, destination itineraries, Umrah preparation, travel tools and embassy helplines — linked directly below.</p>
+      </article>
+    `,
+  });
+
+  // 12. Contact Hub (/contact)
   const contactFaq = getFaqSchemaForPage("contact", undefined, true, `${BASE_URL}/contact`);
   routes.push({
     routePath: "/contact",
@@ -2736,6 +2837,139 @@ function buildBengaliBody(
     return `<article>${parts.join("")}</article>`;
   }
 
+  if (englishPath === "/pre-departure") {
+    // Hand-written Bengali body mirroring the English hub's verified facts
+    // (FE Circular 33 quota, DAC timings, cabin/Zamzam rules) — never a
+    // machine translation, per the BN content policy in bnGuidanceFor.
+    parts.push(
+      bnSection(
+        "ঢাকা বিমানবন্দর (DAC): যা যা মিলিয়ে নিন",
+        bnFactList([
+          {
+            label: "পাসপোর্ট ও কাগজপত্র",
+            value:
+              "ফেরার তারিখ থেকে অন্তত ৬ মাস মেয়াদের পাসপোর্ট, ছাপানো রিটার্ন টিকিট, হোটেল ভাউচার, বৈধ ভিসা বা ই-ভিসা এবং পেশার প্রমাণ (NOC-সহ আইডি কার্ড, GO, ট্রেড লাইসেন্স বা স্টুডেন্ট আইডি)।",
+          },
+          {
+            label: "রিপোর্টিং সময়",
+            value:
+              "আন্তর্জাতিক ফ্লাইটের নির্ধারিত সময়ের ৩.৫–৪ ঘণ্টা আগে (টার্মিনাল ১, ২ বা ৩)।",
+          },
+          {
+            label: "ক্যাবিন ব্যাগ ও পাওয়ার ব্যাংক",
+            value:
+              "হ্যান্ড ক্যারি সর্বোচ্চ ৭ কেজি; তরল, অ্যারোসল ও জেল ১০০ মিলিলিটারের ছোট কনটেইনারে। পাওয়ার ব্যাংক সর্বোচ্চ ২০,০০০ mAh (১০০Wh) এবং স্পেয়ার ব্যাটারি শুধু হ্যান্ড ব্যাগে—চেক-ইন ব্যাগে নয়; mAh ক্ষমতা বডিতে স্পষ্ট লেখা থাকতে হবে।",
+          },
+          {
+            label: "মুদ্রা ও সোনা",
+            value:
+              "বছরে সর্বোচ্চ USD ১৮,০০০ পর্যন্ত এনডোর্স (FE সার্কুলার ৩৩): ডুয়াল-কারেন্সি কার্ড ও নগদ ডলার। ফেরার সময় ব্যক্তিগত সোনার অলংকার ১০০ গ্রাম ও মোবাইল ফোন সর্বোচ্চ ২টি পর্যন্ত শুল্কমুক্ত (Green Channel)।",
+          },
+          {
+            label: "জামজাম পানি",
+            value:
+              "ইউমরাহ বা হজ ভিসাসহ যাত্রীরা অফিসিয়াল সিলবন্ধ ৫ লিটারের ১ কার্টন স্ট্যান্ডার্ড চেক-ইন ভাতার বাইরে বিনামূল্যে আনতে পারেন (জেদ্দা/মদিনা থেকে)।",
+          },
+          {
+            label: "ডিজিটাল আরাইভাল কার্ড",
+            value:
+              "ছাড়ার ৭২ ঘণ্টার মধ্যে মালয়েশিয়া (MDAC), সিঙ্গাপুর (SGAC/MyICA), মালদ্বীপ (IMUGA) ও থাইল্যান্ড (TDAC)-এর ফর্ম পূরণ করুন; উমরাহযাত্রীদের জন্য Saudi Visa Bio ও Nusuk অ্যাপে রেজিস্ট্রেশন প্রয়োজন।",
+          },
+        ])
+      )
+    );
+    parts.push(
+      bnSection(
+        "হারানো পাসপোর্ট বা জরুরি অবস্থা",
+        `<p>বিদেশে পাসপোর্ট হারালে বা চুরি হলে প্রথমে স্থানীয় পুলিশে জিডি (GD) করান, তারপর নিকটবর্তী বাংলাদেশ দূতাবাস বা হাই কমিশনে (কাঠমান্ডু, ব্যাংকক, কুয়ালালামপুর, সিঙ্গাপুর, মালে, আবুধাবি/দুবাই, রিয়াদ/জেদ্দা) হারানো পাসপোর্টের কপি ও এনআইডি নিয়ে ইমার্জেন্সি ট্রাভেল পারমিট (ট্রাভেল পাস) নিন—এতেই ঢাকা ফেরার ব্যবস্থা হয়।</p>`
+      )
+    );
+    parts.push(
+      bnLinkList("প্রস্তুতির টুলস ও সূচি", [
+        { label: "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)", path: "/tools/airport-codes" },
+        { label: "স্মার্ট প্যাকিং চেকলিস্ট", path: "/tools/packing-checklist" },
+        { label: "কারেন্সি কনভার্টার (BDT)", path: "/tools/currency-converter" },
+        { label: "ট্রিপ বাজেট ক্যালকুলেটর", path: "/tools/budget-calculator" },
+        { label: "ভিসা অডস চেকার", path: "/tools/visa-checker" },
+        { label: "ফ্লাইট ডিলে ক্ষতিপূরণ (AirHelp)", path: "/tools/flight-delay-claim" },
+        { label: "সম্পূর্ণ সাইট ডিরেক্টরি", path: "/sitemap" },
+      ])
+    );
+    return `<article>${parts.join("")}</article>`;
+  }
+
+  if (group === "tools") {
+    // Hub and the six /tools/<slug> twins both land here (id is the slug).
+    const toolLinks = [
+      { label: "কারেন্সি কনভার্টার (BDT ⇄ বিদেশি মুদ্রা)", path: "/tools/currency-converter" },
+      { label: "ট্রিপ বাজেট ক্যালকুলেটর", path: "/tools/budget-calculator" },
+      { label: "স্মার্ট প্যাকিং চেকলিস্ট", path: "/tools/packing-checklist" },
+      { label: "ভিসা অডস চেকার", path: "/tools/visa-checker" },
+      { label: "ফ্লাইট ডিলে ক্ষতিপূরণ (AirHelp)", path: "/tools/flight-delay-claim" },
+      { label: "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)", path: "/tools/airport-codes" },
+    ];
+    parts.push(
+      bnLinkList(id ? "আরও ফ্রি টুল" : "সব ফ্রি ট্রাভেল টুল", toolLinks)
+    );
+    const guidance = bnGuidanceFor("tools");
+    if (guidance.length) {
+      parts.push(
+        bnSection(
+          "কীভাবে ব্যবহার করবেন",
+          guidance.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")
+        )
+      );
+    }
+    const related: { label: string; path: string }[] =
+      id === "airport-codes" || id === "flight-delay-claim"
+        ? [{ label: "ঢাকা থেকে আন্তর্জাতিক ফ্লাইট গাইড", path: "/flights" }]
+        : id === "currency-converter" || id === "budget-calculator"
+          ? [{ label: "দেশভিত্তিক ভ্রমণ খরচ (BDT)", path: "/costs" }]
+          : id === "visa-checker"
+            ? [{ label: "বাংলাদেশি পাসপোর্টের ভিসা গাইড", path: "/visa" }]
+            : id === "packing-checklist"
+              ? [{ label: "প্রি-ডিপার্চার চেকলিস্ট ও ব্যাগেজ নিয়ম", path: "/pre-departure" }]
+              : [];
+    if (related.length) parts.push(bnLinkList("সম্পর্কিত পরিকল্পনা", related));
+    return `<article>${parts.join("")}</article>`;
+  }
+
+  if (englishPath === "/sitemap") {
+    // The Bengali site directory: grouped hub links so the static twin works
+    // as an actual index (and survives without JS), not just an intro + 6 hubs.
+    parts.push(
+      bnLinkList("প্ল্যানিং ও বুকিং", [
+        { label: "ফ্লাইট গাইড", path: "/flights" },
+        { label: "হোটেল গাইড", path: "/hotels" },
+        { label: "ভিসা গাইড", path: "/visa" },
+        { label: "ভ্রমণ খরচ (BDT)", path: "/costs" },
+        { label: "গন্তব্য ও ইটিনারারি", path: "/destinations" },
+        { label: "উমরাহ প্ল্যানার", path: "/umrah" },
+      ])
+    );
+    parts.push(
+      bnLinkList("ফ্রি টুলস ও প্রি-ডিপার্চার", [
+        { label: "ট্রাভেল টুলস হাব", path: "/tools" },
+        { label: "কারেন্সি কনভার্টার (BDT)", path: "/tools/currency-converter" },
+        { label: "ট্রিপ বাজেট ক্যালকুলেটর", path: "/tools/budget-calculator" },
+        { label: "স্মার্ট প্যাকিং চেকলিস্ট", path: "/tools/packing-checklist" },
+        { label: "ভিসা অডস চেকার", path: "/tools/visa-checker" },
+        { label: "ফ্লাইট ডিলে ক্ষতিপূরণ (AirHelp)", path: "/tools/flight-delay-claim" },
+        { label: "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)", path: "/tools/airport-codes" },
+        { label: "প্রি-ডিপার্চার হাব", path: "/pre-departure" },
+      ])
+    );
+    parts.push(
+      bnLinkList("পড়ার জায়গা", [
+        { label: "সব বাংলা ট্রাভেল ব্লগ", path: "/blog" },
+        { label: "এক্সপিরিয়েন্স ও টিকট", path: "/experiences" },
+        { label: "আমাদের সম্পর্কে", path: "/about" },
+        { label: "যোগাযোগ", path: "/contact" },
+      ])
+    );
+    return `<article>${parts.join("")}</article>`;
+  }
+
   // Home + static/hub pages: Bengali intro plus a directory of the main hubs.
   const hubLinks = [
     { label: "ফ্লাইট গাইড", path: "/flights" },
@@ -2809,6 +3043,13 @@ function bnGuidanceFor(group: string): string[] {
       "খরচের হিসাবটি জনপ্রতি এবং ন্যূনতম থেকে মিড-রেঞ্জ ধরে করা; সিজন, এয়ারলাইন্সের ভাড়া ও রুমের ধরন অনুযায়ী চূড়ান্ত বাজেট ১৫–২৫% ওঠানামা করতে পারে।",
       "বাজেটে জরুরি খরচের জন্য ১০% আলাদা রাখুন—এয়ারপোর্ট ট্যাক্সি, অতিরিক্ত ব্যাগেজ, রিসোর্ট ফি বা অসুস্থতার মতো খরচ প্রায়ই হিসাবের বাইরে থাকে।",
       "পরিবারের সঙ্গে ভ্রমণ করলে ফ্লাইট ও থাকার খরচে গ্রুপ ডিসকাউন্ট, আর অফ-সিজনে হোটেলে উল্লেখযোগ্য ছাড় পাওয়া যায়—তারিখ নমনীয় থাকলে খরচ অনেক কমতে পারে।",
+    ];
+  }
+  if (group === "tools") {
+    return [
+      "সব টুলই ফ্রি—কোনো লগইন বা সাবস্ক্রিপশন লাগে না। ফলাফল আপনার ব্রাউজারেই তৈরি হয়, তাই তথ্য দেখতে গিয়ে কোনো অর্ডার বা পেমেন্ট পর্যন্ত যেতে হয় না।",
+      "কারেন্সি রেট ও ভিসার সম্ভাবনা আনুমানিক সূচক। চূড়ান্ত রেট আপনার ব্যাংক, কার্ড কোম্পানি বা এক্সচেঞ্জ হাউসের হিসাবই ভিত্তি, আর ভিসার সিদ্ধান্ত সংশ্লিষ্ট দেশের কর্তৃপক্ষের।",
+      "ফ্লাইট ডিলে ক্ষতিপূরণের যোগ্যতা রুট, দেরির সময় ও প্রযোজ্য নিয়মের ওপর নির্ভর করে—ফ্লাইট নম্বর ও তারিখ দিয়ে টুলে মিলিয়ে দেখেই আবেদন শুরু করুন।",
     ];
   }
   return [];

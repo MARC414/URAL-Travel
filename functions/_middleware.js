@@ -5,6 +5,20 @@ const LEGACY_QUERY_ROUTES = {
   "/destinations": { parameter: "country", prefix: "/destinations" },
   "/costs": { parameter: "country", prefix: "/costs" },
   "/blog": { parameter: "slug", prefix: "/blog" },
+  "/tools": { parameter: "tab", prefix: "/tools" },
+};
+
+// Legacy /tools?tab= values (including the pre-tab-list alias "currency") →
+// canonical slug. Keep in step with TOOL_TAB_TO_SLUG/LEGACY_TAB_TO_SLUG in
+// src/utils/toolRoutes.ts — that table is the source of truth.
+const LEGACY_TOOL_TAB_SLUGS = {
+  converter: "currency-converter",
+  currency: "currency-converter",
+  calculator: "budget-calculator",
+  packing: "packing-checklist",
+  "visa-checker": "visa-checker",
+  airhelp: "flight-delay-claim",
+  airports: "airport-codes",
 };
 
 // These slugs appeared in older internal links and should converge in one hop.
@@ -55,6 +69,15 @@ export async function onRequest(context) {
   if (legacyRoute) {
     const legacyId = url.searchParams.get(legacyRoute.parameter);
     if (legacyId) {
+      if (legacyRoute.parameter === "tab") {
+        // Every known ?tab= value converges on its /tools/<slug> page; an
+        // unknown tab still lands on the hub instead of a 404 sub-path.
+        // Only the mapped param is dropped — utm/fbclid etc. must survive.
+        const slug = LEGACY_TOOL_TAB_SLUGS[legacyId];
+        url.pathname = slug ? `/tools/${slug}` : "/tools";
+        url.searchParams.delete("tab");
+        return Response.redirect(url.toString(), 301);
+      }
       const routeId =
         legacyRoute.parameter === "slug"
           ? LEGACY_BLOG_SLUGS[legacyId] || legacyId

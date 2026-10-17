@@ -1835,7 +1835,7 @@ export const BLOG_DATA: BlogPost[] = [
     internalLinks: [
       { text: "Dhaka to Kathmandu flights Guide", path: "/flights/dhaka-kathmandu" },
       { text: "Dhaka to Bangkok Flight Costs", path: "/flights/dhaka-bangkok" },
-      { text: "Flight Delay & Cancellation Compensation Checker", path: "/tools?tab=airhelp" },
+      { text: "Flight Delay & Cancellation Compensation Checker", path: "/tools/flight-delay-claim" },
       { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Ready to check today's fares?", body: "Compare live Dhaka departure prices before they change." }
@@ -1981,7 +1981,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "RFCD Account vs. Travel Quota (the $300 online-payment rule)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "Cash SAR / USD vs. Card Abroad (choose local currency, avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
       { text: "Book Flights & Makkah Hotels in BDT via bKash/Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" }
+      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Card Endorsed & Ready?", body: "Compare live international flight fares from Dhaka and book with your endorsed card." }
   },
@@ -2075,7 +2075,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka Airport Outbound Immigration Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Dubai Stopover & UAE Visa Guide from Dhaka", path: "/destinations/dubai-guide" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
-      { text: "Ramadan Umrah & I'tikaf Guide: Booking, Budget & Season Rules from Bangladesh", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
+      { text: "Ramadan Umrah booking dates & I'tikaf registration", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
     ],
     references: [
       {
@@ -2234,6 +2234,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Umrah Rules for Women: Mahram, Visa and Ladies' Gates", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
       { text: "Wearing Ihram at Dhaka Airport or at the Miqat", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
       { text: "Zamzam, Dates and Gold: Customs Rules on the Return Flight", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
+      { text: "Ramadan Umrah dates & last-10-nights booking plan", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
     ],
 
     affiliateCTA: { provider: "airalo", headline: "Need Data for Haramain Train & Nusuk Permits?", body: "Get an instant Saudi Arabia eSIM before flying from Dhaka so your Nusuk QR codes and Careem rides work seamlessly across Makkah and Madinah." }
@@ -2479,28 +2480,43 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-19",
     slug: "ramadan-umrah-itikaf-guide-bangladesh-booking-budget",
-    title: "Ramadan Umrah & Last 10 Days I'tikaf Guide from Bangladesh (2026–2027): Early Booking & 50% Hotel Savings",
-    summary: "The Prophet Muhammad (PBUH) said that performing Umrah in the blessed month of Ramadan equals the reward of performing Hajj (Sahih Bukhari). Because millions of Muslims worldwide converge on Makkah and Madinah during Ramadan, hotel rates near Masjid al-Haram triple during the Last 10 Days (Ashra al-Awakhir). This strategic guide for Bangladeshi pilgrims reveals the 'Late Sha'ban to Early Ramadan Overlap Trick' that cuts hotel costs by 50%, explains how to register for official Masjid al-Haram and Masjid an-Nabawi I'tikaf via the Nusuk portal, and details Suhoor, Iftar, and Taraweeh crowd management tips.",
+    title: "Ramadan Umrah & Last 10 Days I'tikaf Guide from Bangladesh (2026–2027): Dates, Registration & Budget Plan",
+    summary: "The Prophet Muhammad (PBUH) said: \"Perform Umrah when Ramadan comes, for Umrah in Ramadan is equal to Hajj in reward\" (Sahih al-Bukhari 1782). Ramadan 1448 is expected 8 February – 8 March 2027 on the official Umm al-Qura calendar, subject to moon sighting. This guide gives Bangladeshi pilgrims the checked dates, the official General Authority I'tikaf registration process as it actually ran last season, and a candid budget framework — this site no longer publishes Ramadan BDT tables or savings percentages it cannot verify against a dated source.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
     updatedAt: "2026-10-17",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "7 min read",
+    readTime: "6 min read",
     references: [
       {
-        name: "General Authority for the Care of the Affairs of the Two Holy Mosques — I'tikaf registration & Ramadan services",
-        nameBn: "দুই পবিত্র মসজিদ পরিচালনা কর্তৃপক্ষ — ইতিকাফ রেজিস্ট্রেশন ও রমজান সেবা",
-        url: "https://gacr.gov.sa",
+        name: "Umm al-Qura Calendar — Annual reference 1448 AH (Ramadan 1448 dates)",
+        nameBn: "উম্মুল কুরা ক্যালেন্ডার — ১৪৪৮ হিজরি বার্ষিক রেফারেন্স (রমজান ১৪৪৮-এর তারিখ)",
+        url: "https://www.ummulqura.org.sa/en/annual-reference",
       },
       {
-        name: "Ministry of Hajj and Umrah — Seasonal calendar & Nusuk portal",
-        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — মৌসুমী ক্যালেন্ডার ও নুসুক পোর্টাল",
-        url: "https://www.haj.gov.sa",
+        name: "General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque — I'tikaf service & annual registration notices",
+        nameBn: "মসজিদুল হারাম ও মসজিদে নববীর তত্ত্বাবধায়ন কর্তৃপক্ষ — ইতিকাফ সেবা ও বার্ষিক নিবন্ধন বিজ্ঞপ্তি",
+        url: "https://alharamain.gov.sa/public/?site=en",
       },
       {
-        name: "Nusuk — Official Umrah & Rawdah permit booking platform",
-        nameBn: "নুসুক — অফিশিয়াল ওমরাহ ও রওজা পারমিট প্ল্যাটফর্ম",
-        url: "https://www.nusuk.sa",
+        name: "Saudi Press Agency — I'tikaf registration at the Two Holy Mosques opens 3 Ramadan 1447 (20 February 2026)",
+        nameBn: "সৌদি প্রেস এজেন্সি — ৩ রমজান ১৪৪৭ (২০ ফেব্রুয়ারি ২০২৬) থেকে দুই হারাম মসজিদে ইতিকাফ নিবন্ধন",
+        url: "https://spa.gov.sa/en/N2518728",
+      },
+      {
+        name: "Ministry of Hajj and Umrah — Umrah Season Calendar for 1448 AH",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — ১৪৪৮ হিজরি ওমরাহ সিজন ক্যালেন্ডার",
+        url: "https://haj.gov.sa/en/Media-Center/Ministry-News/2026/Ministry-of-Hajj-and-Umrah-Announces-the-Umrah-Season-Calendar-for-1448-AH",
+      },
+      {
+        name: "Sahih al-Bukhari 1782 — \"'Umra in (the month of) Ramadan\"",
+        nameBn: "সহীহ বুখারী ১৭৮২ — \"রমজান মাসে ওমরাহ\"",
+        url: "https://sunnah.com/bukhari:1782",
+      },
+      {
+        name: "Saudi Railways (SAR) — Official Haramain High-Speed Railway booking portal",
+        nameBn: "সৌদি রেলওয়ে (SAR) — অফিশিয়াল হারামাইন হাই-স্পিড রেলওয়ে বুকিং পোর্টাল",
+        url: "https://sar.hhr.sa/",
       },
     ],
     internalLinks: [
@@ -2509,7 +2525,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Bangladeshi Halal Food & Suhoor/Iftar Guide in Makkah", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "airalo", headline: "Traveling in Ramadan Crowds? Keep Family Connected 24/7", body: "During Taraweeh and Qiyam-ul-Layl when 2 million worshippers exit Masjid al-Haram simultaneously, an active Saudi 5G eSIM ensures you can always call and locate your family." }
+    affiliateCTA: { provider: "airalo", headline: "Traveling in Ramadan Crowds? Keep Family Connected 24/7", body: "When the Haram courtyards fill after Taraweeh, an active Saudi 5G eSIM keeps you and your family reachable — set it up from Dhaka before you fly." }
   },
   {
     id: "blog-20",
@@ -2597,7 +2613,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
-      { text: "Ramadan Umrah & I'tikaf Guide: Booking, Budget & Season Rules from Bangladesh", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" }
+      { text: "Ramadan Suhoor, Iftar and Taraweeh crowd tips", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Use Google Maps & HungerStation Food Delivery in Makkah", body: "Too tired to walk out after Tawaf? With a Saudi Arabia eSIM, you can use HungerStation or Jahez apps to deliver hot Bangladeshi meals or Al Baik straight to your hotel lobby." }
   },
@@ -2710,7 +2726,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "No Card? Book Flights & Umrah Hotels in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "10-Day DIY Umrah Cost Calculator in BDT", path: "/umrah" },
-      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" }
+      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare Dhaka–Jeddah & Madinah Flights with Your Islamic Card", body: "Check live Biman, Saudia, and Gulf carrier fares and pay directly with your endorsed Shariah-compliant dual-currency card." }
   },
@@ -2756,7 +2772,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Cash vs. Card Abroad (choose local currency and avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "No Card? Pay in BDT via bKash or Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "Dual-Currency Card Fee and Markup Calculator", path: "/tools?tab=currency" }
+      { text: "Dual-Currency Card Fee and Markup Calculator", path: "/tools/currency-converter" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare the Fare Before You Ask Your Bank", body: "Check the live flight price and exact checkout amount, then ask your card issuer about documented travel-payment approval before paying." }
   },
@@ -2774,7 +2790,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dual-Currency Card Endorsement ($18,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" },
+      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" },
       { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Check Live Flight Prices First, Then Book by Card or BDT WhatsApp", body: "Compare real-time airline fares from Dhaka so you know the exact market price before booking." }
@@ -2793,7 +2809,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account vs. Regular Travel Quota ($300 Cap Fix)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "Bangladeshi Halal Food in Makkah & Madinah (SAR Meal Prices)", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
-      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" }
+      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Get Instant Bank OTPs & Rate Checks Abroad with an eSIM", body: "Install an Airalo eSIM before departure so your mobile banking app and live currency calculator work the moment you land." }
   },
@@ -2859,7 +2875,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Malaysia 5-Day Trip Cost Breakdown in BDT", path: "/costs/malaysia-costs" },
       { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" },
-      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools?tab=currency" },
+      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" },
       { text: "Dhaka to Kuala Lumpur Flight Schedule & Fares", path: "/flights/dhaka-kuala-lumpur" },
       { text: "Where to Stay in KL: Hotel Neighborhoods", path: "/hotels/kuala-lumpur-hotels" }
     ],
@@ -3141,7 +3157,7 @@ export const BLOG_DATA: BlogPost[] = [
       },
     ],
     internalLinks: [
-      { text: "AirHelp Flight Compensation & Promo Code in Travel Tools", path: "/tools?tab=airhelp" },
+      { text: "AirHelp Flight Compensation & Promo Code in Travel Tools", path: "/tools/flight-delay-claim" },
       { text: "Best Airlines Flying from Dhaka Compared (Baggage Rules)", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
       { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
       { text: "Best Travel eSIM and Schengen Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
@@ -3167,7 +3183,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
       { text: "Flight Delay & Lost Baggage Compensation (Claim Up to €600)", path: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" },
       { text: "Official Zamzam Water & Gold Customs Rules at Dhaka Airport", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
-      { text: "Flight Delay & Cancellation Compensation Checker", path: "/tools?tab=airhelp" },
+      { text: "Flight Delay & Cancellation Compensation Checker", path: "/tools/flight-delay-claim" },
       { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare All 10 Airlines from Dhaka on One Screen", body: "Check live roundtrip and multi-city fares across Biman, Saudia, US-Bangla, Emirates, Qatar Airways, and low-cost carriers." }
@@ -3182,9 +3198,9 @@ export const BLOG_DATA: BlogPost[] = [
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "5 min read",
     internalLinks: [
-      { text: "Open Interactive Airport Codes & WhatsApp Inquiry Tool", path: "/tools?tab=airports" },
+      { text: "Open Interactive Airport Codes & WhatsApp Inquiry Tool", path: "/tools/airport-codes" },
       { text: "Dhaka to Dubai Flight Schedule & Fares", path: "/flights/dhaka-dubai" },
-      { text: "Flight Delay & Cancellation Compensation Checker", path: "/tools?tab=airhelp" },
+      { text: "Flight Delay & Cancellation Compensation Checker", path: "/tools/flight-delay-claim" },
       { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" },
       { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
@@ -3204,8 +3220,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka to Dubai Flight Schedule & Fares", path: "/flights/dhaka-dubai" },
       { text: "Where to Stay in Dubai: Metro & Marina Hotels", path: "/hotels/dubai-hotels" },
       { text: "Dubai 5-Day Trip Cost Calculator in BDT", path: "/costs/dubai-costs" },
-      { text: "Airport Codes & WhatsApp Inquiry Tool", path: "/tools?tab=airports" },
-      { text: "Flight Delay Compensation Checker (€600)", path: "/tools?tab=airhelp" }
+      { text: "Airport Codes & WhatsApp Inquiry Tool", path: "/tools/airport-codes" },
+      { text: "Flight Delay Compensation Checker (€600)", path: "/tools/flight-delay-claim" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare Direct Flights from Chattogram (CGP)", body: "Search direct flights from Shah Amanat International Airport to Dubai, Sharjah, Abu Dhabi, and Muscat." }
   },
@@ -3226,7 +3242,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dual-Currency Card Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "RFCD Account vs. BDT 300 Travel Quota Guide", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "Global Flight Search & Fare Benchmark", path: "/flights" },
-      { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools?tab=airhelp" }
+      { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools/flight-delay-claim" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Comparing fares to Havana?", body: "Search multi-city routings from Dhaka via Istanbul or European gateways and watch how fares move before you lock your travel dates." }
   },
@@ -3247,7 +3263,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Best Travel eSIM & Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
       { text: "Dual-Currency Card Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Global Flight Search & Fare Benchmark", path: "/flights" },
-      { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools?tab=airhelp" }
+      { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools/flight-delay-claim" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Comparing fares to Morocco?", body: "Search multi-city routings from Dhaka via Istanbul, Dubai or Doha to Casablanca or Tangier and watch how fares move before you lock your dates." }
   },

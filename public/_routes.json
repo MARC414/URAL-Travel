@@ -6,7 +6,8 @@
     "/visa",
     "/destinations",
     "/costs",
-    "/blog"
+    "/blog",
+    "/tools"
   ],
   "exclude": []
 }

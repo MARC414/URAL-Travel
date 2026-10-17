@@ -6,15 +6,22 @@ import { SERVICE_TOOLS_FAQS } from "../hooks/useSeoMeta";
 
 import { TravelIntelligence } from "../components/AeoInspector";
 
+import { SLUG_TO_TOOL_TAB, TOOL_PAGE_SEO, type ToolTabId } from "../utils/toolRoutes";
+
 
 
 type RouteViewProps = { context: Record<string, any> };
 
-
-
 export default function ToolsRouteView({ context }: RouteViewProps) {
 
-  const { InteractiveTools, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, isAdmin, isBn, section, setAreTpScriptsReady } = context;
+  const { InteractiveTools, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, isAdmin, isBn, parameterId, section, setAreTpScriptsReady } = context;
+
+  // Per-tool hero copy for /tools/<slug> — see TOOL_PAGE_SEO (single source
+  // shared with seoCopy.ts, App.tsx breadcrumbs and scripts/prerender.ts).
+  const toolCopy = parameterId ? TOOL_PAGE_SEO[parameterId] : undefined;
+  const initialTool: ToolTabId | undefined = parameterId
+    ? SLUG_TO_TOOL_TAB[parameterId]
+    : undefined;
 
   return (
 
@@ -24,13 +31,17 @@ export default function ToolsRouteView({ context }: RouteViewProps) {
 
               <h1 className="ural-page-title font-serif text-3xl font-bold tracking-tight text-slate-900">
 
-                {isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য স্মার্ট ট্রাভেল টুলস" : "Outbound Travel Tools Workspace"}
+                {toolCopy
+                  ? (isBn ? toolCopy.h1Bn : toolCopy.h1En)
+                  : (isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য স্মার্ট ট্রাভেল টুলস" : "Outbound Travel Tools Workspace")}
 
               </h1>
 
               <p className="text-xs text-slate-500 font-mono">
 
-                {isBn ? "BDT কারেন্সি কনভার্টার, ইমিগ্রেশন চেকলিস্ট এবং জরুরি ট্রাভেল ইউটিলিটি।" : "Dynamic calculators constructed specifically for South Asian travelers."}
+                {toolCopy
+                  ? (isBn ? toolCopy.subBn : toolCopy.subEn)
+                  : (isBn ? "BDT কারেন্সি কনভার্টার, ইমিগ্রেশন চেকলিস্ট এবং জরুরি ট্রাভেল ইউটিলিটি।" : "Dynamic calculators constructed specifically for South Asian travelers.")}
 
               </p>
 
@@ -40,7 +51,7 @@ export default function ToolsRouteView({ context }: RouteViewProps) {
 
             <React.Suspense fallback={null}>
 
-              <InteractiveTools />
+              <InteractiveTools initialTool={initialTool} />
 
             </React.Suspense>
 
@@ -232,7 +243,7 @@ export default function ToolsRouteView({ context }: RouteViewProps) {
 
                     <h3 className="ural-card-title font-serif text-base font-bold text-brand-navy">
 
-                      {isBn ? "ধাপ ৩: Klook-এ ট্যুর ও অ্যাক্টিভিটি বুক করুন" : "Step 3: Plan activities with Klook"}
+                      {isBn ? "ধাপ ৩: Klook-এ টুর ও অ্যাক্টিভিটি বুক করুন" : "Step 3: Plan activities with Klook"}
 
                     </h3>
 
@@ -292,7 +303,7 @@ export default function ToolsRouteView({ context }: RouteViewProps) {
 
                 isBn
 
-                  ? "আমাদের ট্রাভেল টুলস ড্যাশবোর্ডে বাংলাদেশি ভ্রমণকারীদের জন্য রয়েছে লাইভ BDT কারেন্সি কনভার্টার, বিভিন্ন দেশের পাওয়ার প্লাগ ও অ্যাডাপ্টার গাইড (Type C, D, G), ঢাকা এয়ারপোর্ট ইমিগ্রেশন চেকলিস্ট এবং জরুরি বিদেশি ভাষার ফ্রেজবুক।"
+                  ? "আমাদের ট্রাভেল টুলস ড্যাশবোর্ডে বাংলাদেশি ভ্রমণকারীদের জন্য রয়েছে লাইভ BDT কারেন্সি কনভার্টার, বিভিন্ন দেশের পাওয়ার প্লাগ ও অ্যাডাপ্টার গাইড (Type C, D, G), ঢাকা এয়ারপোর্ট ইমিগ্রেশন চেকলিস্ট এবং জরুরি বিদেশি ভাষার ফ্রেজবুক।"
 
                   : "Our travel tool suite equips outbound tourists from Bangladesh with live mid-market exchange rate calculators, comprehensive plug type adapters (Type C, D, G) by destination, an interactive packing checklist for Dhaka airport immigration, and essential phrases in Thai, Malay, Nepali, and Arabic."
 

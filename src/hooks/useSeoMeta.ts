@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { trackPageView } from "../utils/analytics";
 import { hasBengaliCounterpart } from "../utils/localeRoutes";
+import { SLUG_TO_TOOL_TAB, toolPathForTab } from "../utils/toolRoutes";
 import {
   generateFaqSchema,
   getFaqSchemaForPage,
@@ -122,7 +123,7 @@ export interface PreDepartureFaqSchemaOptions {
 export function getPreDepartureFaqSchema(
   options?: PreDepartureFaqSchemaOptions
 ): FaqPageSchema {
-  const url = options?.url || "https://ural-travel.pages.dev/sitemap";
+  const url = options?.url || "https://ural-travel.pages.dev/pre-departure";
   const name =
     options?.name ||
     "Dhaka Airport (DAC) Pre-Departure Readiness, Baggage & Embassy Emergency Hub FAQs";
@@ -334,8 +335,24 @@ export function useSeoMeta({
       if (searchParams.has("slug") && slugId) {
         cleanPathTarget = `/blog/${slugId}`;
       }
-    } else if (rootSection === "pre-departure" || rootSection === "sitemap") {
+    } else if (rootSection === "pre-departure") {
+      routePath = "/pre-departure";
+    } else if (rootSection === "sitemap") {
       routePath = "/sitemap";
+    } else if (rootSection === "tools") {
+      // Canonical tool paths: /tools/<slug> is self-canonical; the legacy
+      // ?tab= query upgrades to the clean path in place (mirrors ?route= etc).
+      if (subSegment && Object.prototype.hasOwnProperty.call(SLUG_TO_TOOL_TAB, subSegment)) {
+        routePath = `/tools/${subSegment}`;
+      } else {
+        const toolPath = toolPathForTab(searchParams.get("tab"));
+        if (toolPath) {
+          routePath = toolPath;
+          cleanPathTarget = toolPath;
+        } else {
+          routePath = "/tools";
+        }
+      }
     } else if (rootSection === "attractions" || rootSection === "experiences") {
       routePath = "/experiences";
     } else if (rootSection === "hajj" || rootSection === "umrah") {

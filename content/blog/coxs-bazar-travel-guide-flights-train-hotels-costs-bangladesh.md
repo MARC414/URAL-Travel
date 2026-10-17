@@ -79,7 +79,7 @@ internalLinksEn:
   - text: "Search live hotel rates for Cox's Bazar and other Bangladesh stays"
     path: /hotels
   - text: "Travel tools: airport code reference for DAC, CGP and CXB"
-    path: /tools?tab=airports
+    path: /tools/airport-codes
   - text: "Kathmandu to Cox's Bazar route status (for travellers coming from Nepal)"
     path: /blog/kathmandu-to-coxs-bazar-flights-route-status-booking
   - text: "Family trip planning on a BDT budget from Dhaka"
@@ -92,7 +92,7 @@ internalLinksBn:
   - text: "কক্সবাজার ও বাংলাদেশের অন্যান্য থাকার জায়গার লাইভ দাম সার্চ"
     path: /hotels
   - text: "ট্রাভেল টুলস: DAC, CGP ও CXB-এর বিমানবন্দর কোড রেফারেন্স"
-    path: /tools?tab=airports
+    path: /tools/airport-codes
   - text: "কাঠমান্ডু থেকে কক্সবাজার রুটের অবস্থা (নেপাল থেকে আসা ভ্রমণকারীদের জন্য)"
     path: /blog/kathmandu-to-coxs-bazar-flights-route-status-booking
   - text: "ঢাকা থেকে পরিবারসহ BDT বাজেটে ভ্রমণের পরিকল্পনা"

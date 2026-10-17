@@ -130,6 +130,8 @@ export const BN_BREADCRUMB_LABELS: Record<string, string> = {
   "Umrah & Hajj Hub": "উমরাহ ও হজ",
   "Travel Tools": "ভ্রমণ টুলস",
   "Pre-Departure & Complete Sitemap": "প্রস্থান-পূর্ব প্রস্তুতি ও সাইটম্যাপ",
+  "Pre-Departure Hub": "প্রি-ডিপার্চার হাব",
+  "Site Directory": "সাইট ডিরেক্টরি",
   "Contact Us": "যোগাযোগ",
   "Attractions & Passes": "অভিজ্ঞতা ও টিকিট",
   "Privacy & Cookie Policy": "গোপনীয়তা ও কুকি নীতিমালা",

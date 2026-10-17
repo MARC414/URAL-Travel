@@ -12,7 +12,7 @@ This document serves as the canonical technical handoff and architectural refere
   - Step-by-step Tourist, Medical, and Umrah Visa Checklists (`Nepal`, `Thailand`, `Malaysia`, `UAE/Dubai`, `Singapore`, `Maldives`, `Schengen`, `Saudi Arabia`).
   - Bilingual Support (`en` English & `bn` Bengali) with dynamic `<html lang>` synchronization.
   - Real-time Multi-Currency Display (`BDT`, `USD`, `EUR`, `GBP`, `SAR`, `AED`).
-  - Static Prerendering (`scripts/prerender.ts`) generating crawlable HTML, OpenGraph metadata, and Schema.org JSON-LD (`FAQPage`, `Article`, `TravelAgency`, `BreadcrumbList`) for all 173 routes (90 English + 83 Bengali).
+  - Static Prerendering (`scripts/prerender.ts`) generating crawlable HTML, OpenGraph metadata, and Schema.org JSON-LD (`FAQPage`, `Article`, `TravelAgency`, `BreadcrumbList`) for all 206 routes (103 English + 103 Bengali).
 
 ---
 

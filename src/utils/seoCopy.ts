@@ -1,4 +1,5 @@
 import { SCHEDULED_BLOG_SEO_COPY } from "../data/scheduledBlogSeo.generated";
+import { TOOL_PAGE_SEO } from "./toolRoutes";
 
 export interface SeoCopy {
   title: string;
@@ -6,10 +7,32 @@ export interface SeoCopy {
 }
 
 /**
+ * EN/BN SERP copy for the six canonical /tools/<slug> pages, derived from the
+ * single per-tool table in src/utils/toolRoutes.ts so the <title> clients set,
+ * the prerendered <title> and the sitemap stay byte-identical.
+ */
+const TOOL_SLUG_SEO_COPY: Record<"en" | "bn", Record<string, SeoCopy>> = {
+  en: Object.fromEntries(
+    Object.entries(TOOL_PAGE_SEO).map(([slug, meta]) => [
+      `/tools/${slug}`,
+      { title: meta.titleEn, description: meta.descriptionEn },
+    ])
+  ),
+  bn: Object.fromEntries(
+    Object.entries(TOOL_PAGE_SEO).map(([slug, meta]) => [
+      `/tools/${slug}`,
+      { title: meta.titleBn, description: meta.descriptionBn },
+    ])
+  ),
+};
+
+/**
  * First-pass search copy for the prioritized canonical routes. These are intent
  * hypotheses based on the site's existing content, not measured search volume or rank.
  */
 export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
+  // Canonical tool sub-pages (see TOOL_PAGE_SEO).
+  ...TOOL_SLUG_SEO_COPY.en,
   "/": {
     title: "Bangladesh Travel Guides, Flights & Visas from Dhaka | URAL",
     description:
@@ -205,10 +228,15 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "Use practical travel-planning tools for Bangladeshi travelers, including currency conversion, packing and pre-departure checks.",
   },
-  "/sitemap": {
-    title: "Dhaka Airport Departure Checklist & Site Directory | URAL",
+  "/pre-departure": {
+    title: "Dhaka Airport (DAC) Pre-Departure Checklist & Helplines | URAL",
     description:
-      "Review a practical departure checklist for Dhaka Airport, baggage-planning notes, overseas Bangladesh embassy contacts and links to URAL travel guides.",
+      "Interactive pre-flight checklist for Bangladeshi travelers: passport endorsement, NOC/GO, digital arrival cards, cabin & Zamzam baggage rules and Bangladesh Embassy emergency numbers.",
+  },
+  "/sitemap": {
+    title: "Complete URAL Travel Site Directory & Guide Index | URAL",
+    description:
+      "Every URAL page in one place: flights, visas, hotels, BDT budgets, destination itineraries, Umrah preparation, travel tools and the full blog index for Bangladeshi travelers.",
   },
   "/contact": {
     title: "Contact URAL Travel Support in Dhaka | URAL",
@@ -343,7 +371,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget": {
     title: "Ramadan Umrah & I'tikaf Guide from Bangladesh | URAL",
     description:
-      "Plan Ramadan Umrah and Last 10 Days I'tikaf from Bangladesh with early booking timelines, shuttle hotel savings, Suhoor/Iftar tips and BDT budgets.",
+      "Ramadan 1448 dates (8 Feb – 8 Mar 2027, moon sighting), the official General Authority I'tikaf registration flow, and a claim-free budget plan for Umrah from Bangladesh.",
   },
   "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": {
     title: "Wearing Ihram from Dhaka vs Transit: Miqat Rules | URAL",
@@ -466,6 +494,8 @@ function trimAtWord(text: string, maxLength: number): string {
  * generated for it — see DEFERRED_BN_GROUPS in src/utils/localeRoutes.ts.
  */
 export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
+  // Canonical tool sub-pages, Bengali twin (see TOOL_PAGE_SEO).
+  ...TOOL_SLUG_SEO_COPY.bn,
   "/destinations": {
     title: "বাংলাদেশ থেকে ট্রিপ ইটিনারারি: গন্তব্য গাইড | URAL",
     description:
@@ -616,10 +646,15 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "বাংলাদেশি ভ্রমণকারীদের জন্য সিঙ্গাপুরের হোটেল এলাকা তুলনা করুন — মুস্তাফা সেন্টারের কাছে লিটল ইন্ডিয়া, বুগিস ও মেরিনা বে, MRT ও টাকায় বাজেট নোটসহ।",
   },
-  "/sitemap": {
-    title: "ঢাকা বিমানবন্দর ডিপার্চার চেকলিস্ট ও সাইট ডিরেক্টরি | URAL",
+  "/pre-departure": {
+    title: "ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার চেকলিস্ট, লাগেজ নিয়ম ও দূতাবাস হেল্পলাইন | URAL",
     description:
-      "ঢাকা বিমানবন্দরের জন্য ব্যবহারিক ডিপার্চার চেকলিস্ট, ব্যাগেজ পরিকল্পনা নোট, বিদেশে বাংলাদেশ দূতাবাসের যোগাযোগ ও URAL ভ্রমণ গাইডের লিংক দেখুন।",
+      "বিমানবন্দরে রওনার আগের চেকলিস্ট: পাসপোর্ট এন্ডোর্সমেন্ট, NOC/GO, রিটার্ন টিকেট, ডিজিটাল অ্যারাইভাল কার্ড, কেবিন ও জমজম ব্যাগেজের নিয়ম এবং প্রবাসে বাংলাদেশ দূতাবাসের জরুরি নম্বর।",
+  },
+  "/sitemap": {
+    title: "URAL ভ্রমণ সাইট ডিরেক্টরি ও গাইড ইনডেক্স | URAL",
+    description:
+      "ফ্লাইট, ভিসা, হোটেল, টাকার বাজেট, গন্তব্য গাইড, ওমরাহ প্রস্তুতি ও ভ্রমণ টুলসহ URAL-এর প্রতিটি পেজের সরাসরি লিংক এক জায়গায়।",
   },
   "/tools": {
     title: "বাংলাদেশি ভ্রমণকারীদের জন্য ভ্রমণ পরিকল্পনা টুল | URAL",

@@ -8,7 +8,6 @@
 # Canonical 301 redirects for duplicate alias routes
 /hajj           /umrah        301
 /attractions    /experiences  301
-/pre-departure  /sitemap      301
 /indexing       /sitemap      301
 /destinations/uae-guide  /destinations/dubai-guide  301
 /bn/destinations/uae-guide  /bn/destinations/dubai-guide  301

@@ -336,9 +336,15 @@ check(
 );
 
 // The six tool tabs are public deep-link targets; a label or refactor must not
-// silently stop `?tab=` links from selecting their corresponding tool.
+// silently stop `?tab=` links from selecting their corresponding tool. The
+// canonical /tools/<slug> + /pre-departure URLs must stay wired end to end:
+// menu links → client route table → edge 301 for legacy ?tab= → clean sitemap.
 const interactiveToolsSource = read(path.join(ROOT_DIR, "src", "components", "InteractiveTools.tsx")) ?? "";
 const toolsAppSource = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
+const toolRoutesSource = read(path.join(ROOT_DIR, "src", "utils", "toolRoutes.ts")) ?? "";
+const middlewareSource = read(path.join(ROOT_DIR, "functions", "_middleware.js")) ?? "";
+const redirectsSource = read(path.join(ROOT_DIR, "public", "_redirects")) ?? "";
+const routesConfigSource = read(path.join(ROOT_DIR, "public", "_routes.json")) ?? "";
 const supportedToolTabs = ["airports", "calculator", "converter", "packing", "visa-checker", "airhelp"];
 const toolDeepLinksArePreserved =
   interactiveToolsSource.includes('new URLSearchParams(window.location.search)') &&
@@ -346,13 +352,47 @@ const toolDeepLinksArePreserved =
     const queryChecks = interactiveToolsSource.match(new RegExp(`tab === "${tab}"`, "g")) ?? [];
     return queryChecks.length >= 2 && interactiveToolsSource.includes(`id="tool-nav-${tab}"`);
   }) &&
-  toolsAppSource.includes("/tools?tab=airhelp") &&
-  toolsAppSource.includes("/tools?tab=airports");
+  // Menu / in-page links use the canonical tool paths, not query URLs.
+  toolsAppSource.includes("/tools/flight-delay-claim") &&
+  toolsAppSource.includes("/tools/airport-codes") &&
+  toolsAppSource.includes("/tools/currency-converter") &&
+  // Legacy ?tab= URLs converge in-app …
+  toolsAppSource.includes("toolPathForTab") &&
+  // … and at the edge (middleware rule included in _routes.json) …
+  middlewareSource.includes('"/tools": { parameter: "tab"') &&
+  middlewareSource.includes("LEGACY_TOOL_TAB_SLUGS") &&
+  routesConfigSource.includes('"/tools"') &&
+  toolRoutesSource.includes("flight-delay-claim") &&
+  // … while /pre-departure is a standalone canonical page (no 301 to /sitemap).
+  !redirectsSource.split("\n").some((line) => line.startsWith("/pre-departure"));
 check(
   toolDeepLinksArePreserved,
   toolDeepLinksArePreserved
-    ? "all six tool tabs and existing AirHelp/airport ?tab= deep links remain wired"
-    : "all six tool tab values, navigation controls, and existing deep links must remain wired"
+    ? "all six tool tabs, canonical /tools/<slug> links, legacy ?tab= edge 301s, and the standalone /pre-departure URL remain wired"
+    : "tool deep links regressed: keep the six tabs, canonical /tools/<slug> menu links, the middleware ?tab= rule, and no /pre-departure→/sitemap redirect"
+);
+
+// The split routes must actually ship as prerendered static files (no SPA
+// fallback exists — an unprerendered path is a hard 404 with noindex 404.html).
+const expectedSplitRoutes = [
+  "pre-departure.html",
+  "tools/currency-converter.html",
+  "tools/budget-calculator.html",
+  "tools/packing-checklist.html",
+  "tools/visa-checker.html",
+  "tools/flight-delay-claim.html",
+  "tools/airport-codes.html",
+  "bn/pre-departure.html",
+  "bn/tools/flight-delay-claim.html",
+];
+const missingSplitRoutes = expectedSplitRoutes.filter(
+  (rel) => !fs.existsSync(path.join(DIST_DIR, rel))
+);
+check(
+  missingSplitRoutes.length === 0,
+  missingSplitRoutes.length === 0
+    ? `all ${expectedSplitRoutes.length} split tool/pre-departure routes ship prerendered HTML (en + bn)`
+    : `missing prerendered files: ${missingSplitRoutes.join(", ")}`
 );
 
 // (1a) every responsive image stem ships every breakpoint
