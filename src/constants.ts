@@ -2075,6 +2075,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka Airport Outbound Immigration Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Dubai Stopover & UAE Visa Guide from Dhaka", path: "/destinations/dubai-guide" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Ramadan Umrah booking dates & I'tikaf registration", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
     ],
     references: [
       {
@@ -2233,6 +2234,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Umrah Rules for Women: Mahram, Visa and Ladies' Gates", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
       { text: "Wearing Ihram at Dhaka Airport or at the Miqat", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
       { text: "Zamzam, Dates and Gold: Customs Rules on the Return Flight", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
+      { text: "Ramadan Umrah dates & last-10-nights booking plan", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
     ],
 
     affiliateCTA: { provider: "airalo", headline: "Need Data for Haramain Train & Nusuk Permits?", body: "Get an instant Saudi Arabia eSIM before flying from Dhaka so your Nusuk QR codes and Careem rides work seamlessly across Makkah and Madinah." }
@@ -2476,19 +2478,52 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-19",
     slug: "ramadan-umrah-itikaf-guide-bangladesh-booking-budget",
-    title: "Ramadan Umrah & Last 10 Days I'tikaf Guide from Bangladesh (2026–2027): Early Booking & 50% Hotel Savings",
-    summary: "The Prophet Muhammad (PBUH) said that performing Umrah in the blessed month of Ramadan equals the reward of performing Hajj (Sahih Bukhari). Because millions of Muslims worldwide converge on Makkah and Madinah during Ramadan, hotel rates near Masjid al-Haram triple during the Last 10 Days (Ashra al-Awakhir). This strategic guide for Bangladeshi pilgrims reveals the 'Late Sha'ban to Early Ramadan Overlap Trick' that cuts hotel costs by 50%, explains how to register for official Masjid al-Haram and Masjid an-Nabawi I'tikaf via the Nusuk portal, and details Suhoor, Iftar, and Taraweeh crowd management tips.",
+    title: "Ramadan Umrah & Last 10 Days I'tikaf Guide from Bangladesh (2026–2027): Dates, Registration & Budget Plan",
+    summary: "The Prophet Muhammad (PBUH) said: \"Perform Umrah when Ramadan comes, for Umrah in Ramadan is equal to Hajj in reward\" (Sahih al-Bukhari 1782). Ramadan 1448 is expected 8 February – 8 March 2027 on the official Umm al-Qura calendar, subject to moon sighting. This guide gives Bangladeshi pilgrims the checked dates, the official General Authority I'tikaf registration process as it actually ran last season, and a candid budget framework — this site no longer publishes Ramadan BDT tables or savings percentages it cannot verify against a dated source.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
+    updatedAt: "2026-10-17",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "7 min read",
+    readTime: "6 min read",
+    references: [
+      {
+        name: "Umm al-Qura Calendar — Annual reference 1448 AH (Ramadan 1448 dates)",
+        nameBn: "উম্মুল কুরা ক্যালেন্ডার — ১৪৪৮ হিজরি বার্ষিক রেফারেন্স (রমজান ১৪৪৮-এর তারিখ)",
+        url: "https://www.ummulqura.org.sa/en/annual-reference",
+      },
+      {
+        name: "General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque — I'tikaf service & annual registration notices",
+        nameBn: "মসজিদুল হারাম ও মসজিদে নববীর তত্ত্বাবধায়ন কর্তৃপক্ষ — ইতিকাফ সেবা ও বার্ষিক নিবন্ধন বিজ্ঞপ্তি",
+        url: "https://alharamain.gov.sa/public/?site=en",
+      },
+      {
+        name: "Saudi Press Agency — I'tikaf registration at the Two Holy Mosques opens 3 Ramadan 1447 (20 February 2026)",
+        nameBn: "সৌদি প্রেস এজেন্সি — ৩ রমজান ১৪৪৭ (২০ ফেব্রুয়ারি ২০২৬) থেকে দুই হারাম মসজিদে ইতিকাফ নিবন্ধন",
+        url: "https://spa.gov.sa/en/N2518728",
+      },
+      {
+        name: "Ministry of Hajj and Umrah — Umrah Season Calendar for 1448 AH",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — ১৪৪৮ হিজরি ওমরাহ সিজন ক্যালেন্ডার",
+        url: "https://haj.gov.sa/en/Media-Center/Ministry-News/2026/Ministry-of-Hajj-and-Umrah-Announces-the-Umrah-Season-Calendar-for-1448-AH",
+      },
+      {
+        name: "Sahih al-Bukhari 1782 — \"'Umra in (the month of) Ramadan\"",
+        nameBn: "সহীহ বুখারী ১৭৮২ — \"রমজান মাসে ওমরাহ\"",
+        url: "https://sunnah.com/bukhari:1782",
+      },
+      {
+        name: "Saudi Railways (SAR) — Official Haramain High-Speed Railway booking portal",
+        nameBn: "সৌদি রেলওয়ে (SAR) — অফিশিয়াল হারামাইন হাই-স্পিড রেলওয়ে বুকিং পোর্টাল",
+        url: "https://sar.hhr.sa/",
+      },
+    ],
     internalLinks: [
       { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Makkah & Madinah Shuttle vs. Walking Hotel Zones", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Bangladeshi Halal Food & Suhoor/Iftar Guide in Makkah", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "airalo", headline: "Traveling in Ramadan Crowds? Keep Family Connected 24/7", body: "During Taraweeh and Qiyam-ul-Layl when 2 million worshippers exit Masjid al-Haram simultaneously, an active Saudi 5G eSIM ensures you can always call and locate your family." }
+    affiliateCTA: { provider: "airalo", headline: "Traveling in Ramadan Crowds? Keep Family Connected 24/7", body: "When the Haram courtyards fill after Taraweeh, an active Saudi 5G eSIM keeps you and your family reachable — set it up from Dhaka before you fly." }
   },
   {
     id: "blog-20",
@@ -2575,7 +2610,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Umrah with Elderly Parents: Wheelchair & Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Ramadan Suhoor, Iftar and Taraweeh crowd tips", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" }
     ],
     affiliateCTA: { provider: "airalo", headline: "Use Google Maps & HungerStation Food Delivery in Makkah", body: "Too tired to walk out after Tawaf? With a Saudi Arabia eSIM, you can use HungerStation or Jahez apps to deliver hot Bangladeshi meals or Al Baik straight to your hotel lobby." }
   },

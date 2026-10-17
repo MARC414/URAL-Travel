@@ -371,7 +371,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget": {
     title: "Ramadan Umrah & I'tikaf Guide from Bangladesh | URAL",
     description:
-      "Plan Ramadan Umrah and Last 10 Days I'tikaf from Bangladesh with early booking timelines, shuttle hotel savings, Suhoor/Iftar tips and BDT budgets.",
+      "Ramadan 1448 dates (8 Feb – 8 Mar 2027, moon sighting), the official General Authority I'tikaf registration flow, and a claim-free budget plan for Umrah from Bangladesh.",
   },
   "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": {
     title: "Wearing Ihram from Dhaka vs Transit: Miqat Rules | URAL",

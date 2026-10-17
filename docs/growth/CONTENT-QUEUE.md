@@ -676,3 +676,35 @@ The owner supplied their own Bengali draft to replace the machine parity transla
 **Publishing-system finding (fixed, with a new guard):** a paragraph placed *after* the FAQ block silently deletes the FAQPage structured data. The visible renderer passes each paragraph separately, so the FAQ still looks correct on the page, while the schema builder scans the whole body from the FAQ heading to the next numbered heading and returns nothing when the line count is odd. The BDT-desk line was moved above `৯. সচরাচর জিজ্ঞাসা` / `9. Frequently Asked Questions`, and `scripts/test-scheduled-posts.ts` now asserts for every scheduled post, in both locales, that the FAQ heading is present verbatim and that its following lines pair up — the exact condition the prerender requires. `docs/growth/CONTENT-OS.md` Stage 6 and the bilingual row in the pipeline table are the standing rules this enforces.
 
 **Verification after the swap:** `npm run generate:scheduled` (2 publishable posts) → `npm run test:scheduling` (pass, including the new FAQ pairing guard) → `npm run lint` (pass) → `npm run build` (96 EN + 96 BN routes) → `npm run verify:build` (**all 169 checks passed**). `dist/blog/<slug>.html` and `dist/bn/blog/<slug>.html` inspected: localized title/H1 (BN H1 = the owner's headline), Article node with the correct `inLanguage`, **FAQPage node with 5 questions in both locales** (this had been missing before the fix above), the visible FAQ section, 16 references in the list with matching inline markers `[1]…[16]` / `[১]…[১৬]`, 6 internal links per locale all resolving to live routes with `/bn/` prefixes on the Bengali twin, both blog hubs listing the post, the dist sitemap carrying EN+BN entries with hreflang alternates and the dist RSS carrying the post. Paragraph counts 37 EN / 40 BN; word counts ≈2,976 EN / ≈2,800 BN. No placeholder text, no `**`, no `](`, no `{#` and no `arena.ai` URL remains in the file.
+
+---
+
+## Worked queue row — content-upgrade standard pass on `blog-19` (Ramadan / I'tikaf) (17 October 2026)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-17 | **UPDATE IN PLACE — fixed slug; no second page.** Executes `10-CONTENT-UPGRADE-STANDARD.md` §10 ("highest-value orphan") and `UMRAH-CLUSTER-PLAN.md` row 9 (seasonal node). | `/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget` | `/bn/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget` | **Ramadan Umrah from Bangladesh / I'tikaf registration** (existing URL's page job; Bangladesh SERP demand not measured) | Informational/seasonal planning guide: checked dates, official registration process, claim-free budget framework. | Stages 1–9 completed 2026-10-17: lint, build (103 EN + 103 BN), verify:build **179/179**, sitemaps (23 controls), scheduling all pass; §8 dist proofs recorded below. Repository-verified, not deployed; publish gate is owner approval + live route review before the Ramadan season. |
+
+### What changed (both locales, one bilingual asset)
+
+- **Body rewritten** in the §6.2 five-beat pattern. The BDT price tables (`BDT 1,42,000–1,68,000`, `2,15,000–3,40,000+`, `BDT 8,000–14,000/night`), the "50% / 45–55% savings" claims, the "rates triple" multiplier, the "1–5 Ramadan" registration window, and the unsourced iftar "60–75 minutes" / meal-locker specifics were **deleted, not softened** (§5 S7). What remains is dated and checkable: Ramadan 1448 = 8 Feb – 8 Mar 2027 (Umm al-Qura, moon-sighting qualified), night of 21 Ramadan arithmetic from that calendar, the 1447 I'tikaf registration precedent as a dated example (opened Fri 3 Ramadan 1447 = 20 Feb 2026, 11:00 a.m., eservices.alharamain.gov.sa / Nafath, capacity + SMS), the season-bound Ministry 1448H windows, and the routing pattern with an explicit "not a savings promise" disclaimer. The only BDT figure retained is the main guide's owner-approved, dated, unre-priced baseline, named as non-Ramadan and not a quote.
+- **References:** 0 → **6** primary-first entries with `name` + `nameBn` + `url`: Umm al-Qura annual reference 1448, General Authority I'tikaf service, SPA 1447 registration notice, Ministry 1448H Umrah season calendar, Sahih al-Bukhari 1782, SAR/Haramain booking portal. `updatedAt` = 2026-10-17; both locales render the sources block with `[1]…[6]` / `[১]…[৬]` markers matching.
+- **Title/summary/snippets:** EN `BLOG_DATA` title + summary, `PRIORITY_SEO_COPY` description, `snippetsEn`/`snippetsBn` and the BN override title/summary were all carrying the savings/triple claims (three separate metadata locations — §0's three-file rule applied). All six are now claim-free and consistent with the body; the short SERP titles (`… | URAL`) were already claim-free and are unchanged.
+- **Links:** blog-19 keeps its 4 `internalLinks` (3 blog→blog + `/umrah`); the BN override gained the missing `/umrah` entry (3 → 4, floor met in both locales). **R2 orphan closed:** added to three siblings in both locales — main DIY guide ("Ramadan Umrah booking dates & I'tikaf registration"), hotel-zones ("Ramadan Umrah dates & last-10-nights booking plan"), halal-food ("Ramadan Suhoor, Iftar and Taraweeh crowd tips") — with varied descriptive anchors (R4). airalo CTA kept in both locales (§4.2 connectivity relevance); the EN CTA's "2 million worshippers" figure was removed as unverifiable.
+- **Debt register movement:** blog-19 exits both `no references` (33 → 32) and `no editorial inbound link` (9 → 8) in the verify:build `[content-debt]` report.
+
+### §8 dist proofs (2026-10-17)
+
+- `dist/blog/<slug>.html`: title `Ramadan Umrah & I'tikaf Guide from Bangladesh | URAL`, meta = the new claim-free description, H1 = the new full title, 4 curated `/blog/` anchors + `/umrah`, `Sources for this guide` present, markers `[1]…[6]`, zero occurrences of any deleted claim string.
+- `dist/bn/blog/<slug>.html`: H1 = new BN title, meta = new BN summary, 3 `/bn/blog/` anchors + `/bn/umrah` (≥4 links total), `এই গাইডের তথ্যসূত্র` present, markers `[১]…[৬]`, zero deleted-claim strings.
+- Sibling pages each render `href="/blog/<slug>"` and `href="/bn/blog/<slug>"` (main guide, hotel-zones, halal-food — EN and BN).
+
+### Claim status (Stage 2 summary, checked 2026-10-17)
+
+| Claim class | Status / safe action |
+|---|---|
+| Ramadan 1448 dates, Eid, night of 21 | **VERIFIED** — ummulqura.org.sa annual reference 1448; kept with moon-sighting caveat. |
+| I'tikaf process (portal, Nafath, capacity, SMS, 20–30 Ramadan) | **VERIFIED (dated precedent)** — SPA N2518728 (1447) + alharamain official service/FAQ; 1448 dates marked "not yet announced". |
+| Season entry/visa windows | **VERIFIED / SEASON-BOUND** — Ministry 1448H calendar (checked 17 Oct 2026); re-check before each season. |
+| Ramadan hotel price tables, % savings, rate multipliers | **DELETED** — no dated same-basis basket exists; never to return without one. |
+| Iftar/tawaf minute-level specifics, meal/locker services | **DELETED / QUALIFIED** — replaced with practical advice carrying no invented numbers. |

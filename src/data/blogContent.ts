@@ -604,32 +604,41 @@ If a family of 4 wants to save BDT 60,000 to BDT 85,000 total on airfare, 1-stop
 - **Full-Service 1-Stop Carriers (Gulf Air via Bahrain, Kuwait Airways via Kuwait, Qatar Airways, Emirates):** Fares start from **BDT 62,000 – BDT 74,000** including hot meals and 30kg–46kg baggage.
 - **Low-Cost 1-Stop Carriers (SalamAir via Muscat, Air Arabia via Sharjah, Jazeera Airways via Kuwait, Flynas):** Fares start from **BDT 52,000 – BDT 63,000**.
 - **Crucial Warning on Low-Cost Airlines:** Always select the **"Value / Extra Baggage Bundle" (20kg or 30kg checked luggage)** when booking SalamAir, Jazeera, or Air Arabia, and verify whether the fare includes free Zamzam water carriage or charges USD $25–$40 at Jeddah check-in.`,
-  "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": `Performing Umrah during the holy month of Ramadan is one of the greatest spiritual aspirations for Bangladeshi believers. However, waiting until 2 weeks before Ramadan to book flights and hotels from Dhaka often results in paying BDT 2,60,000+ per person. With a smart booking calendar and official **Nusuk (nusuk.sa)** rules, you can experience Ramadan in the Haramain for nearly half the cost.
+  "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": `This guide is for Bangladeshi pilgrims deciding whether to travel for Ramadan 1448 — expected 8 February to 8 March 2027 [1] — whether to register for I'tikaf in the Two Holy Mosques, and how to build a budget they can verify instead of trusting a savings slogan. The Prophet Muhammad (PBUH) said: "Perform Umrah when Ramadan comes, for Umrah in Ramadan is equal to Hajj (in reward)" [5].
 
-1. HOW MUCH DOES RAMADAN UMRAH COST FROM BANGLADESH (FIRST 20 DAYS VS. LAST 10 DAYS)?
-In Makkah, hotel pricing during Ramadan is divided into two completely different rate structures:
-- **First 20 Days of Ramadan (1 to 20 Ramadan):**
-  • Flight + Visa + 10-Day Shuttle/3-Star Hotel Share: **BDT 1,42,000 – BDT 1,68,000 per person**.
-  • Walking-Distance 4/5-Star Hotel Share: **BDT 1,95,000 – BDT 2,45,000 per person**.
-- **Last 10 Days of Ramadan & Eid-ul-Fitr (20 to 30 Ramadan):**
-  • Makkah hotels sell the Last 10 Nights as a mandatory fixed package (even if you stay only 5 nights, you are billed for the full 10-night Ashra block!).
-  • Total 12-to-14 Day Last-10-Days Budget: **BDT 2,15,000 – BDT 3,40,000+ per person**.
+Quick Answer — Ramadan 1448 begins Monday 8 February 2027 on Saudi Arabia's official Umm al-Qura calendar, with the religious start confirmed by moon sighting on the evening of 29 Sha'ban (a day either way) [1]. Official I'tikaf registration is online-only, free and capacity-limited through the General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque [2][3]. No authority publishes Ramadan hotel prices, so treat every BDT figure you see as unverified until it matches a dated quote in your name — this guide publishes dates, rules and process, not savings percentages.
 
-2. WHAT IS THE "SHA'BAN TO EARLY RAMADAN OVERLAP TRICK" THAT SAVES 50%?
-If you want the full Hadith reward of performing Umrah in Ramadan AND praying Taraweeh in both Makkah and Madinah on a normal budget, use this proven 10-day calendar strategy:
-Step 1: Fly Dhaka -> Madinah around 25 or 26 Sha'ban:
-- Spend the last 4 days of Sha'ban and the **1st night of Ramadan in Madinah** where hotel prices remain at regular off-peak rates (BDT 8,000–14,000/night for a family room).
-Step 2: Enter Makkah on 2 Ramadan & Perform Your Ramadan Umrah:
-- Take the Haramain Bullet Train to Makkah on 2 Ramadan and stay until 7 or 8 Ramadan. Because your Umrah Niyyah, Tawaf, and Sa'i take place inside the month of Ramadan, you attain the complete reward of a Ramadan Umrah while paying **45% to 55% less** than mid-Ramadan or Last-10-Days packages!
+1. WHEN IS RAMADAN UMRAH 2026–2027, AND WHEN SHOULD I BOOK?
+- The calendar: 1 Ramadan 1448 falls on Monday 8 February 2027 and the Umm al-Qura calendar gives the month 29 days, putting Eid al-Fitr on 9 March 2027 — both subject to the official moon-sighting announcement [1].
+- The contested window: the last ten nights begin with the night of 21 Ramadan. On that calendar 21 Ramadan falls on 28 February 2027, so that night starts at sunset on 27 February [1]. Inventory for the final Ashra and Eid is the tightest of the whole Umrah year — decide that leg first if you need it.
+- The entry window: Umrah visa issuance, entry and departure dates for each season are set by the Ministry of Hajj and Umrah's season calendar; for 1448H that window runs from the season opening through the published final visa, entry and exit dates (checked 17 October 2026 — season-bound, re-check the current notice before you pay) [4].
+- Book in that order: a dated flight quote first, then hotels against the season window, then the train.
 
-3. HOW TO REGISTER FOR OFFICIAL I'TIKAF IN MASJID AL-HARAM & MASJID AN-NABAWI?
-According to the **General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque (alharamain.gov.sa)** and **Nusuk**:
-- Official 10-day Sunnah I'tikaf (from 20 Ramadan until the sighting of the Eid moon) requires mandatory online registration through the **Nusuk App / alharamain.gov.sa I'tikaf Portal**, which typically opens between **1 and 5 Ramadan** until capacity is filled.
-- Registered Mu'takifeen receive an official wristband/card, a designated basement or roof locker zone, and complimentary Iftar and Suhoor meals inside the mosque.
+2. WHAT DOES A RAMADAN UMRAH FROM BANGLADESH ACTUALLY COST?
+There is no official Ramadan price list and no authority that certifies a package price. We removed the BDT tables this article used to carry: none of them could be verified against a dated, same-basis source basket, and repeating them would be guessing. Here is what you can plan around instead:
+- What is fixed: your own costs at home (passport, endorsements, flights you can quote on the day) and every official fee a government or carrier publishes for your booking.
+- What floats: Makkah hotel and package prices are set by sellers per date, per room and per package — the first twenty nights and the final Ashra are sold as different products, and only a dated quote tells you which number applies to you. The DIY Umrah guide publishes this site's only dated planning range (BDT 1,16,000–1,32,000 per person, standard 10-day, four-sharing basis, unre-priced since its 14 October 2026 approval) as a non-Ramadan baseline; Ramadan quotes come on top of that shape and must be re-quoted — check the live guide before relying on that baseline.
+- Three levers that actually move your total: travel dates (first twenty nights versus final Ashra), trip length, and routing (Madinah first versus Makkah direct). Compare live flight quotes before any hotel money changes hands, and use our DIY portal only as an illustrative planner — never as a quote.
 
-4. PRACTICAL IFTAR, SUHOOR & TARAWEEH SURVIVAL TIPS FOR BANGLADESHI PILGRIMS
-- **Free Haram Iftar Dastarkhwan:** Arrive at least **60 to 75 minutes before Maghrib** to sit along the official Iftar spreads inside the Haram (offering dates, Zamzam, laban/yogurt, Arabic coffee, and bread).
-- **Performing Tawaf Without Heat Exhaustion:** During Ramadan fasting hours, never perform ground-floor Mataf Tawaf between 11:00 AM and 3:30 PM. Perform your Umrah either **right after Isha/Taraweeh (10:30 PM – 2:00 AM)** or **after Fajr prayer (6:00 AM – 8:30 AM)**.`,
+3. HOW TO REGISTER FOR OFFICIAL I'TIKAF IN MAKKAH AND MADINAH
+The I'tikaf permit for the last ten days of Ramadan in the Two Holy Mosques is issued by the General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque through its electronic service [2]. What last season actually looked like (dated precedent, not a promise for next season): registration opened Friday 3 Ramadan 1447H — 20 February 2026 — at 11:00 a.m. Saudi time through eservices.alharamain.gov.sa or the Nafath platform; I'tikaf ran from 20 Ramadan to the end of 30 Ramadan under the approved organizational plan; applications were reviewed against capacity and successful applicants were notified by SMS [3].
+For Ramadan 1448 the Authority announces dates annually through its official accounts [2] — as of 17 October 2026 that announcement has not been made, so do not plan around last year's opening day. Read the current conditions on the portal when it opens: eligibility, required status and documents are set by the Authority for that season.
+
+4. SUHOOR, IFTAR AND TAWAF IN THE CROWDS
+- Agree a family meeting point and a fallback before you enter the Haram — the courtyards after Taraweeh are where groups get separated.
+- Schedule your Tawaf for after Fajr or after Isha/Taraweeh rather than the midday sun while you are fasting; less heat, shorter waits, safer pacing.
+- For iftar, eat at your hotel or at mosque iftar services where they are offered, and arrive well before Maghrib if you want a place in the spread.
+- Keep a digital copy of your passport and visa, and save the hotel's address in Arabic for taxi drivers.
+
+5. A CALENDAR SHAPE THAT KEEPS YOUR UMRAH INSIDE RAMADAN
+If you want your Umrah performed inside Ramadan without anchoring the whole trip on the final Ashra, one routing pattern works on any budget: fly into Madinah in late Sha'ban, perform Umrah once Ramadan begins, then continue to Makkah. The Haramain high-speed railway links Madinah and Makkah in about two and a half hours, booked only through the official Saudi Railways portal (sar.hhr.sa) [6]. This is a routing pattern, not a savings promise — we publish no percentage because we have not verified a same-basis price comparison. Ask every seller for a dated, itemized quote (visa, hotel, transport, meals) and compare like for like.
+
+6. BEFORE YOU PAY: THE CHECKLIST
+- Dated quote in writing with inclusions named; no deal you cannot re-check the next day.
+- Season window verified against the current Ministry calendar before any non-refundable payment [4].
+- I'tikaf dates watched on the Authority's official channels the moment Ramadan approaches [2][3].
+- Passport validity, visa channel and document checklist confirmed in the DIY guide (linked below).
+- References checked 17 October 2026. Prices, permits and timetables change every season — re-check every source beside every number.`,
   "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": `For Bangladeshi pilgrims embarking on Umrah or Hajj, entering the sacred state of Ihram before crossing the designated geographic boundary (Miqat) is an obligatory rite under Islamic jurisprudence and Saudi Ministry of Hajj & Umrah directives. Because King Abdulaziz International Airport (JED) in Jeddah lies inside the perimeter of the Miqats, pilgrims landing in Jeddah cannot postpone their Ihram until reaching the airport terminal. Understanding your flight routing—whether flying non-stop from Dhaka, transiting through Gulf hubs, or landing in Madinah first—determines exactly when and where to put on your Ihram garments and formulate your Niyyah. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidance, GACA flight operation notices, and established Sunnah principles.
 
 1. Geographic and Aerial Miqat Boundaries for Flights from Bangladesh

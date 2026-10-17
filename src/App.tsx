@@ -638,7 +638,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
       "Save 6 hours of highway travel by booking an Open-Jaw (Multi-City) ticket: fly Dhaka (DAC) to Jeddah (JED) outbound and return directly from Madinah (MED) to Dhaka. Direct Biman and Saudia flights cost BDT 72,000–92,000 with 46kg baggage, while 1-stop Gulf carriers start at BDT 54,000.",
     "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
-      "Performing Umrah in Ramadan equals the reward of Hajj, but Last-10-Days Makkah hotel rates triple to BDT 2,20,000+ per person. Cut your budget by 50% (to BDT 1,35,000–1,55,000) by flying in late Sha'ban and performing Umrah during the first week of Ramadan, or register early on Nusuk for I'tikaf.",
+      "Ramadan 1448 is expected 8 February – 8 March 2027 on the Umm al-Qura calendar, confirmed by moon sighting. I'tikaf registration at the Two Holy Mosques is free, online and capacity-limited through the General Authority's portal — last season it opened on 3 Ramadan at 11:00 a.m. No authority publishes Ramadan hotel prices, so compare dated quotes instead of trusting savings claims.",
     "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
       "When flying direct from Dhaka to Jeddah on Biman or Saudia, put on your Ihram garments at Dhaka Airport and make Niyyah when the pilot announces Miqat Qarn al-Manazil before landing. On connecting flights via Gulf hubs, change into Ihram during your layover; flying into Madinah first requires no Ihram on the aircraft.",
     "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
@@ -733,7 +733,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
       "ওমরাহ শেষে মদিনা থেকে জেদ্দা বিমানবন্দরের ৬ ঘণ্টার ক্লান্তিকর সড়কপথ এড়াতে Multi-City (Open-Jaw) টিকিট কাটুন: ঢাকা থেকে জেদ্দা (DAC–JED) যান এবং মদিনা থেকে সরাসরি ঢাকা (MED–DAC) ফিরুন। বিমান ও সৌদিয়ার ডিরেক্ট ফ্লাইট ৭২–৯২ হাজার টাকা এবং ট্রানজিট ফ্লাইট ৫৪ হাজার টাকা থেকে শুরু।",
     "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
-      "রমজান মাসে ওমরাহ পালনে হজের সমান সওয়াব পাওয়া যায়, তবে শেষ ১০ দিনে মক্কার হোটেল ভাড়া তিনগুণ বেড়ে জনপ্রতি ২.২০ লক্ষ+ টাকা ছাড়িয়ে যায়। শাবানের শেষ সপ্তাহে মদিনায় গিয়ে রমজানের প্রথম সপ্তাহে মক্কায় ওমরাহ করলে মাত্র ১.৩৫–১.৫৫ লক্ষ টাকায় (৫০% কমে) রমজান ওমরাহ সম্পন্ন করা সম্ভব।",
+      "রমজান ১৪৪৮ আনুমানিক ৮ ফেব্রুয়ারি – ৮ মার্চ ২০২৭ (উম্মুল কুরা ক্যালেন্ডার, চাঁদ দেখায় নিশ্চিত হবে)। দুই হারাম মসজিদে ইতিকাফের নিবন্ধন অনলাইনে, বিনামূল্যে ও আসনসীমার ভিত্তিতে কর্তৃপক্ষের ই-সার্ভিসে — গত সিজনে ৩ রমজান সকাল ১১টায় খুলেছিল। রমজানের হোটেল ভাড়ার কোনো অফিশিয়াল তালিকা নেই; সাশ্রয়ের দাবির বদলে তারিখসহ কোট তুলনা করুন।",
     "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
       "সরাসরি জেদ্দাগামী ফ্লাইটে ঢাকা এয়ারপোর্টেই ইহরাম পরে নিন এবং অবতরণের আগে পাইলট মিকাত ঘোষণা করলে নিয়ত ও তালবিয়া পাঠ করুন। উপসাগরীয় ট্রানজিট ফ্লাইটে লেওভারের সময় ইহরাম পরুন; আর প্রথমে মদিনায় নামলে প্লেনে ইহরাম পরার প্রয়োজন নেই।",
     "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
