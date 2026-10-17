@@ -28,7 +28,12 @@ import { validateSitemapPair } from "./sitemapValidation";
 import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
-import { AFFILIATE_LINKS } from "../src/components/AffiliatePartners";
+import { AFFILIATE_LINKS, resolvePartnerUrl } from "../src/components/AffiliatePartners";
+import {
+  DESTINATION_AFFILIATE_PARTNERS,
+  DESTINATION_PARTNER_COPY,
+  DESTINATION_RELATED_BLOG_SLUGS,
+} from "../src/data/destinationResources";
 import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
 import { SCHEDULED_BLOG_ALT_TEXT } from "../src/data/scheduledBlogIndex.generated";
 import { BLOG_BODY } from "../src/data/blogContent";
@@ -1635,6 +1640,290 @@ if (sitemap) {
   const locOf = (block: string) => (block.match(/<loc>([^<]+)<\/loc>/) || [])[1] ?? "";
   const enBlocks = urlBlocks.filter((b) => !locOf(b).includes("/bn/"));
   const bnBlocks = urlBlocks.filter((b) => locOf(b).includes("/bn/"));
+  const nepalEnPath = "/destinations/nepal-guide";
+  const nepalBnPath = "/bn/destinations/nepal-guide";
+  const nepalEnHtml = read(path.join(DIST_DIR, "destinations/nepal-guide.html"));
+  const nepalBnHtml = read(path.join(DIST_DIR, "bn/destinations/nepal-guide.html"));
+  const nepalEnBlock = urlBlocks.find((block) => locOf(block).endsWith(nepalEnPath));
+  const nepalBnBlock = urlBlocks.find((block) => locOf(block).endsWith(nepalBnPath));
+  check(
+    !!nepalEnHtml && !!nepalBnHtml &&
+      nepalEnHtml.includes("Nepal Destination Guide from Bangladesh: Kathmandu &amp; Pokhara") &&
+      nepalEnHtml.includes("This six-day outline connects Kathmandu") &&
+      nepalBnHtml.includes("নেপাল ভ্রমণ পরিকল্পনা: কাঠমান্ডু ও পোখারা") &&
+      nepalBnHtml.includes("এই ছয় দিনের রূপরেখায় কাঠমান্ডু") &&
+      !nepalEnHtml.includes("BDT 20,000") &&
+      !nepalBnHtml.includes("BDT 20,000"),
+    "Nepal destination guide is prerendered in English and Bengali without legacy fixed trip budgets"
+  );
+  check(
+    !!nepalEnHtml && !!nepalBnHtml && !!nepalEnBlock && !!nepalBnBlock &&
+      nepalEnHtml.includes(`rel="canonical" href="${locOf(nepalEnBlock)}"`) &&
+      nepalBnHtml.includes(`rel="canonical" href="${locOf(nepalBnBlock)}"`) &&
+      nepalEnBlock.includes(`href="${locOf(nepalBnBlock)}"`) &&
+      nepalBnBlock.includes(`href="${locOf(nepalEnBlock)}"`),
+    "Nepal EN/BN canonical routes are included in the sitemap and linked by hreflang"
+  );
+  check(
+    !!nepalEnHtml && !!nepalBnHtml &&
+      nepalEnHtml.includes("/flights") &&
+      nepalBnHtml.includes("/bn/flights") &&
+      !nepalEnHtml.includes("/experiences") &&
+      !nepalBnHtml.includes("/bn/experiences") &&
+      !nepalEnHtml.includes("free 30-day Visa on Arrival") &&
+      !nepalBnHtml.includes("ফ্রি Visa on Arrival"),
+    "Nepal uses destination-first navigation and avoids unsupported visa and generic activity claims"
+  );
+
+  const thailandEnPath = "/destinations/thailand-guide";
+  const thailandBnPath = "/bn/destinations/thailand-guide";
+  const thailandEnHtml = read(path.join(DIST_DIR, "destinations/thailand-guide.html"));
+  const thailandBnHtml = read(path.join(DIST_DIR, "bn/destinations/thailand-guide.html"));
+  const thailandEnBlock = urlBlocks.find((block) => locOf(block).endsWith(thailandEnPath));
+  const thailandBnBlock = urlBlocks.find((block) => locOf(block).endsWith(thailandBnPath));
+  check(
+    !!thailandEnHtml && !!thailandBnHtml &&
+      thailandEnHtml.includes("Bangkok Destination Guide from Bangladesh: Four-Day Plan") &&
+      thailandEnHtml.includes("This flexible four-day outline focuses on Bangkok") &&
+      thailandBnHtml.includes("থাইল্যান্ড ভ্রমণ পরিকল্পনা: ব্যাংককের নমনীয় চার দিনের গাইড") &&
+      thailandBnHtml.includes("এই নমনীয় চার দিনের রূপরেখায় ব্যাংকককে") &&
+      !thailandEnHtml.includes("BDT 35,000") &&
+      !thailandBnHtml.includes("BDT 35,000"),
+    "Thailand destination guide is prerendered in English and Bengali without legacy fixed trip budgets"
+  );
+  check(
+    !!thailandEnHtml && !!thailandBnHtml && !!thailandEnBlock && !!thailandBnBlock &&
+      thailandEnHtml.includes(`rel="canonical" href="${locOf(thailandEnBlock)}"`) &&
+      thailandBnHtml.includes(`rel="canonical" href="${locOf(thailandBnBlock)}"`) &&
+      thailandEnBlock.includes(`href="${locOf(thailandBnBlock)}"`) &&
+      thailandBnBlock.includes(`href="${locOf(thailandEnBlock)}"`),
+    "Thailand EN/BN canonical routes are included in the sitemap and linked by hreflang"
+  );
+  check(
+    !!thailandEnHtml && !!thailandBnHtml &&
+      thailandEnHtml.includes("/flights") &&
+      thailandBnHtml.includes("/bn/flights") &&
+      !thailandEnHtml.includes("/experiences") &&
+      !thailandBnHtml.includes("/bn/experiences") &&
+      !thailandEnHtml.includes("No visa on arrival") &&
+      !thailandBnHtml.includes("Visa on Arrival নেই"),
+    "Thailand uses destination-first navigation and avoids unsupported visa and generic activity claims"
+  );
+
+  const singaporeEnPath = "/destinations/singapore-guide";
+  const singaporeBnPath = "/bn/destinations/singapore-guide";
+  const singaporeEnHtml = read(path.join(DIST_DIR, "destinations/singapore-guide.html"));
+  const singaporeBnHtml = read(path.join(DIST_DIR, "bn/destinations/singapore-guide.html"));
+  const singaporeEnBlock = urlBlocks.find((block) => locOf(block).endsWith(singaporeEnPath));
+  const singaporeBnBlock = urlBlocks.find((block) => locOf(block).endsWith(singaporeBnPath));
+  check(
+    !!singaporeEnHtml && !!singaporeBnHtml &&
+      singaporeEnHtml.includes("Singapore Destination Guide from Bangladesh: Four-Day Plan") &&
+      singaporeEnHtml.includes("This flexible four-day outline combines Singapore") &&
+      singaporeBnHtml.includes("সিঙ্গাপুর ভ্রমণ পরিকল্পনা: নমনীয় চার দিনের গাইড") &&
+      singaporeBnHtml.includes("এই নমনীয় চার দিনের রূপরেখায় সিঙ্গাপুরের") &&
+      !singaporeEnHtml.includes("BDT 48,000") &&
+      !singaporeBnHtml.includes("BDT 48,000") &&
+      !singaporeEnHtml.includes("9% Tourist GST Refund") &&
+      !singaporeBnHtml.includes("৯% টুরিস্ট GST রিফান্ড"),
+    "Singapore destination guide is prerendered in English and Bengali without legacy fixed prices or refund promises"
+  );
+  check(
+    !!singaporeEnHtml && !!singaporeBnHtml && !!singaporeEnBlock && !!singaporeBnBlock &&
+      singaporeEnHtml.includes(`rel="canonical" href="${locOf(singaporeEnBlock)}"`) &&
+      singaporeBnHtml.includes(`rel="canonical" href="${locOf(singaporeBnBlock)}"`) &&
+      singaporeEnBlock.includes(`href="${locOf(singaporeBnBlock)}"`) &&
+      singaporeBnBlock.includes(`href="${locOf(singaporeEnBlock)}"`),
+    "Singapore EN/BN canonical routes are included in the sitemap and linked by hreflang"
+  );
+  check(
+    !!singaporeEnHtml && !!singaporeBnHtml &&
+      singaporeEnHtml.includes("/flights") &&
+      singaporeBnHtml.includes("/bn/flights") &&
+      !singaporeEnHtml.includes("/experiences") &&
+      !singaporeBnHtml.includes("/bn/experiences") &&
+      singaporeEnHtml.includes("Entry requirements depend on the traveler, purpose and current policy") &&
+      singaporeBnHtml.includes("প্রবেশের নিয়ম ভ্রমণকারী, ভ্রমণের উদ্দেশ্য ও বর্তমান নীতির ওপর নির্ভর করে"),
+    "Singapore uses destination-first navigation and directs visa questions to official guidance"
+  );
+
+  const londonEnPath = "/destinations/london-guide";
+  const londonBnPath = "/bn/destinations/london-guide";
+  const londonEnHtml = read(path.join(DIST_DIR, "destinations/london-guide.html"));
+  const londonBnHtml = read(path.join(DIST_DIR, "bn/destinations/london-guide.html"));
+  const londonEnBlock = urlBlocks.find((block) => locOf(block).endsWith(londonEnPath));
+  const londonBnBlock = urlBlocks.find((block) => locOf(block).endsWith(londonBnPath));
+  check(
+    !!londonEnHtml && !!londonBnHtml &&
+      londonEnHtml.includes("London Destination Guide from Bangladesh") &&
+      londonEnHtml.includes("Westminster and the Thames") &&
+      londonBnHtml.includes("বাংলাদেশ থেকে লন্ডন ভ্রমণ গাইড") &&
+      londonBnHtml.includes("ওয়েস্টমিনস্টার ও টেমস নদী"),
+    "London destination guide is prerendered with English and Bengali content"
+  );
+  check(
+    !!londonEnHtml && !!londonBnHtml && !!londonEnBlock && !!londonBnBlock &&
+      londonEnHtml.includes(`rel="canonical" href="${locOf(londonEnBlock)}"`) &&
+      londonBnHtml.includes(`rel="canonical" href="${locOf(londonBnBlock)}"`) &&
+      londonEnHtml.includes('hreflang="bn-bd"') &&
+      londonBnHtml.includes('hreflang="en-bd"') &&
+      londonEnBlock.includes(`href="${locOf(londonBnBlock)}"`) &&
+      londonBnBlock.includes(`href="${locOf(londonEnBlock)}"`),
+    "London EN/BN canonical routes are included in the sitemap and linked by hreflang"
+  );
+  check(
+    !!londonEnHtml && !!londonBnHtml &&
+      londonEnHtml.includes("/experiences?region=west&amp;city=london") &&
+      londonBnHtml.includes("/bn/experiences?region=west&amp;city=london") &&
+      londonBnHtml.includes('"inLanguage":"bn-BD"') &&
+      londonBnHtml.includes("আপনার পছন্দের লন্ডন দর্শনীয় স্থান") &&
+      !londonEnHtml.includes('"@type":"Offer"') &&
+      !londonBnHtml.includes('"@type":"Offer"'),
+    "London keeps filtered activities secondary, localizes TouristTrip schema and emits no unsupported trip-price Offer"
+  );
+
+  const italyEnPath = "/destinations/italy-guide";
+  const italyBnPath = "/bn/destinations/italy-guide";
+  const italyEnHtml = read(path.join(DIST_DIR, "destinations/italy-guide.html"));
+  const italyBnHtml = read(path.join(DIST_DIR, "bn/destinations/italy-guide.html"));
+  const italyEnBlock = urlBlocks.find((block) => locOf(block).endsWith(italyEnPath));
+  const italyBnBlock = urlBlocks.find((block) => locOf(block).endsWith(italyBnPath));
+  check(
+    !!italyEnHtml && !!italyBnHtml &&
+      italyEnHtml.includes("Italy Itinerary from Bangladesh: Rome, Milan &amp; Venice") &&
+      italyEnHtml.includes("Transfer to Venice") &&
+      italyBnHtml.includes("বাংলাদেশ থেকে ইতালি ভ্রমণ পরিকল্পনা") &&
+      italyBnHtml.includes("ভেনিসে যাত্রা"),
+    "Italy destination guide is prerendered with English and Bengali content"
+  );
+  check(
+    !!italyEnHtml && !!italyBnHtml && !!italyEnBlock && !!italyBnBlock &&
+      italyEnHtml.includes(`rel="canonical" href="${locOf(italyEnBlock)}"`) &&
+      italyBnHtml.includes(`rel="canonical" href="${locOf(italyBnBlock)}"`) &&
+      italyEnBlock.includes(`href="${locOf(italyBnBlock)}"`) &&
+      italyBnBlock.includes(`href="${locOf(italyEnBlock)}"`),
+    "Italy EN/BN canonical routes are included in the sitemap and linked by hreflang"
+  );
+  check(
+    !!italyEnHtml && !!italyBnHtml &&
+      italyEnHtml.includes("/experiences?region=west&amp;city=rome-italy") &&
+      italyBnHtml.includes("/bn/experiences?region=west&amp;city=rome-italy") &&
+      italyBnHtml.includes('"inLanguage":"bn-BD"') &&
+      !italyEnHtml.includes('"@type":"Offer"') &&
+      !italyBnHtml.includes('"@type":"Offer"'),
+    "Italy keeps filtered activities secondary, localizes TouristTrip schema and emits no unsupported trip-price Offer"
+  );
+
+  const parisEnPath = "/destinations/paris-guide";
+  const parisBnPath = "/bn/destinations/paris-guide";
+  const parisEnHtml = read(path.join(DIST_DIR, "destinations/paris-guide.html"));
+  const parisBnHtml = read(path.join(DIST_DIR, "bn/destinations/paris-guide.html"));
+  const parisEnBlock = urlBlocks.find((block) => locOf(block).endsWith(parisEnPath));
+  const parisBnBlock = urlBlocks.find((block) => locOf(block).endsWith(parisBnPath));
+  check(
+    !!parisEnHtml && !!parisBnHtml &&
+      parisEnHtml.includes("Paris Itinerary from Bangladesh: Landmarks &amp; Planning") &&
+      parisEnHtml.includes("Eiffel Tower and Seine") &&
+      parisBnHtml.includes("বাংলাদেশ থেকে প্যারিস ভ্রমণ পরিকল্পনা") &&
+      parisBnHtml.includes("আইফেল টাওয়ার ও সেইন"),
+    "Paris destination guide is prerendered with English and Bengali content"
+  );
+  check(
+    !!parisEnHtml && !!parisBnHtml && !!parisEnBlock && !!parisBnBlock &&
+      parisEnHtml.includes(`rel="canonical" href="${locOf(parisEnBlock)}"`) &&
+      parisBnHtml.includes(`rel="canonical" href="${locOf(parisBnBlock)}"`) &&
+      parisEnBlock.includes(`href="${locOf(parisBnBlock)}"`) &&
+      parisBnBlock.includes(`href="${locOf(parisEnBlock)}"`),
+    "Paris EN/BN canonical routes are included in the sitemap and linked by hreflang"
+  );
+  check(
+    !!parisEnHtml && !!parisBnHtml &&
+      parisEnHtml.includes("/experiences?region=west&amp;city=paris") &&
+      parisBnHtml.includes("/bn/experiences?region=west&amp;city=paris") &&
+      parisBnHtml.includes('"inLanguage":"bn-BD"') &&
+      !parisEnHtml.includes('"@type":"Offer"') &&
+      !parisBnHtml.includes('"@type":"Offer"'),
+    "Paris keeps filtered activities secondary, localizes TouristTrip schema and emits no unsupported trip-price Offer"
+  );
+
+  const newYorkEnPath = "/destinations/new-york-guide";
+  const newYorkBnPath = "/bn/destinations/new-york-guide";
+  const newYorkEnHtml = read(path.join(DIST_DIR, "destinations/new-york-guide.html"));
+  const newYorkBnHtml = read(path.join(DIST_DIR, "bn/destinations/new-york-guide.html"));
+  const newYorkEnBlock = urlBlocks.find((block) => locOf(block).endsWith(newYorkEnPath));
+  const newYorkBnBlock = urlBlocks.find((block) => locOf(block).endsWith(newYorkBnPath));
+  check(
+    !!newYorkEnHtml && !!newYorkBnHtml &&
+      newYorkEnHtml.includes("New York City Itinerary from Bangladesh: Landmarks &amp; Planning") &&
+      newYorkEnHtml.includes("Harbor and Statue of Liberty planning") &&
+      newYorkBnHtml.includes("বাংলাদেশ থেকে নিউ ইয়র্ক সিটি ভ্রমণ পরিকল্পনা") &&
+      newYorkBnHtml.includes("বন্দর এলাকা ও স্ট্যাচু অব লিবার্টি পরিকল্পনা"),
+    "New York City destination guide is prerendered with English and Bengali content"
+  );
+  check(
+    !!newYorkEnHtml && !!newYorkBnHtml && !!newYorkEnBlock && !!newYorkBnBlock &&
+      newYorkEnHtml.includes(`rel="canonical" href="${locOf(newYorkEnBlock)}"`) &&
+      newYorkBnHtml.includes(`rel="canonical" href="${locOf(newYorkBnBlock)}"`) &&
+      newYorkEnBlock.includes(`href="${locOf(newYorkBnBlock)}"`) &&
+      newYorkBnBlock.includes(`href="${locOf(newYorkEnBlock)}"`),
+    "New York City EN/BN canonical routes are included in the sitemap and linked by hreflang"
+  );
+  check(
+    !!newYorkEnHtml && !!newYorkBnHtml &&
+      newYorkEnHtml.includes("/experiences?region=west&amp;city=new-york") &&
+      newYorkBnHtml.includes("/bn/experiences?region=west&amp;city=new-york") &&
+      newYorkBnHtml.includes('"inLanguage":"bn-BD"') &&
+      !newYorkEnHtml.includes('"@type":"Offer"') &&
+      !newYorkBnHtml.includes('"@type":"Offer"'),
+    "New York City keeps filtered activities secondary, localizes TouristTrip schema and emits no unsupported trip-price Offer"
+  );
+  const maldivesEnHtml = read(path.join(DIST_DIR, "destinations/maldives-guide.html"));
+  const maldivesBnHtml = read(path.join(DIST_DIR, "bn/destinations/maldives-guide.html"));
+  const dubaiEnHtml = read(path.join(DIST_DIR, "destinations/dubai-guide.html"));
+  const dubaiBnHtml = read(path.join(DIST_DIR, "bn/destinations/dubai-guide.html"));
+  check(
+    !!maldivesEnHtml && !!maldivesBnHtml && !!dubaiEnHtml && !!dubaiBnHtml &&
+      maldivesEnHtml.includes("Maldives Destination Guide from Bangladesh: Island Planning") &&
+      maldivesEnHtml.includes("one island base") &&
+      maldivesEnHtml.includes("No whole-trip total is quoted") &&
+      maldivesEnHtml.includes("this page is not a visa decision") &&
+      maldivesBnHtml.includes("মালদ্বীপ ভ্রমণ পরিকল্পনা") &&
+      maldivesBnHtml.includes("দ্বীপ বাছাই") &&
+      dubaiEnHtml.includes("Dubai Destination Guide from Bangladesh: Four-Day Plan") &&
+      dubaiEnHtml.includes("Downtown sights") &&
+      dubaiEnHtml.includes("No whole-trip total is quoted") &&
+      dubaiEnHtml.includes("this page is not a visa decision") &&
+      dubaiBnHtml.includes("দুবাই ভ্রমণ পরিকল্পনা") &&
+      dubaiBnHtml.includes("নমনীয় চার দিনের গাইড"),
+    "Maldives and Dubai guides are prerendered in English and Bengali with flexible plans, current-detail checks and no fixed trip total or visa assurance"
+  );
+
+  let destinationResourceLinksPresent = true;
+  for (const destinationId of Object.keys(DESTINATION_RELATED_BLOG_SLUGS)) {
+    const enHtml = read(path.join(DIST_DIR, "destinations", `${destinationId}.html`)) ?? "";
+    const bnHtml = read(path.join(DIST_DIR, "bn/destinations", `${destinationId}.html`)) ?? "";
+    const blogSlugs = DESTINATION_RELATED_BLOG_SLUGS[destinationId] ?? [];
+    const partners = DESTINATION_AFFILIATE_PARTNERS[destinationId] ?? [];
+    const blogLinksPresent = blogSlugs.every((slug) =>
+      enHtml.includes(`href="/blog/${slug}"`) && bnHtml.includes(`href="/bn/blog/${slug}"`)
+    );
+    const partnerLinksPresent = partners.every((partner) => {
+      const copy = DESTINATION_PARTNER_COPY[partner];
+      const url = resolvePartnerUrl(AFFILIATE_LINKS[partner]);
+      return enHtml.includes(url) && bnHtml.includes(url) &&
+        enHtml.includes(copy.ctaEn) && bnHtml.includes(copy.ctaBn);
+    });
+    const destinationOk = !!enHtml && !!bnHtml && blogLinksPresent && partnerLinksPresent;
+    if (!destinationOk) {
+      destinationResourceLinksPresent = false;
+      console.error(`[VERIFY] Missing destination resource link(s): ${destinationId}`);
+    }
+  }
+  check(
+    destinationResourceLinksPresent,
+    "all ten English and Bengali destination landings expose curated existing blog links and content-matched affiliate partners"
+  );
+
   check(
     enBlocks.length >= MIN_EN_ROUTES,
     `sitemap has >= ${MIN_EN_ROUTES} English URLs (found ${enBlocks.length})`

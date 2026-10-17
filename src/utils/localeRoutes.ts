@@ -23,8 +23,8 @@ export const SITE_ORIGIN = "https://ural-travel.pages.dev";
  * all. The prerender and the client both read it, so the menu can never offer a
  * link the build refused to publish.
  *
- * It is currently EMPTY: /destinations was the last deferred group and its six
- * guides were written in Bengali before the group was removed. A route only
+ * It is currently EMPTY: /destinations was the last deferred group, and all
+ * destination guides now have Bengali copy. A route only
  * gets a Bengali page when BOTH this gate is open AND the route has copy in
  * bengaliContent.ts (BENGALI_ROUTE_SEO or BENGALI_SEO_COPY), so lifting the
  * gate cannot publish an English-bodied bn-BD page.

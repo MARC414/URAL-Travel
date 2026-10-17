@@ -92,6 +92,11 @@ import {
   toEnglishBasePath,
 } from "../src/utils/localeRoutes";
 import { BENGALI_SEO_COPY, getBengaliSeoCopy } from "../src/utils/seoCopy";
+import {
+  DESTINATION_AFFILIATE_PARTNERS,
+  DESTINATION_PARTNER_COPY,
+  DESTINATION_RELATED_BLOG_SLUGS,
+} from "../src/data/destinationResources";
 
 const ROOT_DIR = process.cwd();
 const PUBLIC_DIR = path.join(ROOT_DIR, "public");
@@ -502,6 +507,45 @@ function renderLinkSection(id: string, heading: string, links: InternalLinkItem[
     .join("\n")}</ul></section>`;
 }
 
+function renderDestinationRelatedBlogSection(
+  destinationId: string,
+  locale: "en" | "bn"
+): string {
+  const slugs = DESTINATION_RELATED_BLOG_SLUGS[destinationId] ?? [];
+  const localizedPosts = getLocalizedBlogs(locale);
+  const links = slugs
+    .map((slug) => localizedPosts.find((post) => post.slug === slug))
+    .filter((post): post is (typeof localizedPosts)[number] => Boolean(post))
+    .map((post) => ({
+      href: `${locale === "bn" ? "/bn" : ""}/blog/${post.slug}`,
+      text: post.title,
+    }));
+  if (!links.length) return "";
+  return renderLinkSection(
+    `destination-related-blogs-${destinationId}`,
+    locale === "bn" ? "সম্পর্কিত ভ্রমণ-লেখা" : "Related travel articles",
+    links
+  );
+}
+
+function renderDestinationPartnerSection(
+  destinationId: string,
+  locale: "en" | "bn"
+): string {
+  const partners = DESTINATION_AFFILIATE_PARTNERS[destinationId] ?? [];
+  if (!partners.length) return "";
+  const items = partners.map((partner) => {
+    const copy = DESTINATION_PARTNER_COPY[partner];
+    const label = locale === "bn" ? copy.ctaBn : copy.ctaEn;
+    return `<li><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[partner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(label)}</a></li>`;
+  }).join("\\n");
+  const disclosure = locale === "bn"
+    ? "এগুলো সহযোগী লিংক। লিংকের মাধ্যমে বুকিং হলে URAL কমিশন পেতে পারে—আপনার অতিরিক্ত খরচ ছাড়াই। গন্তব্যের তালিকা, প্রাপ্যতা, মূল্য ও শর্ত পার্টনারের সাইটে যাচাই করুন।"
+    : "These are affiliate links. URAL may earn a commission if you book through them, at no extra cost to you. Check destination listings, availability, prices and terms on the partner site.";
+  const heading = locale === "bn" ? "প্রাসঙ্গিক বুকিং পার্টনার" : "Relevant booking partners";
+  return `<section aria-labelledby="destination-partners-${destinationId}"><h2 id="destination-partners-${destinationId}">${escapeHtml(heading)}</h2><p>${escapeHtml(disclosure)}</p><ul>${items}</ul></section>`;
+}
+
 function addInternalLinkSections(
   routes: PrerenderRoute[],
   bnRouteByCanonicalUrl?: Map<string, PrerenderRoute>
@@ -521,11 +565,23 @@ function addInternalLinkSections(
       const country = findCountryForRoute(route.routePath);
       if (country) {
         const tripLinks = getTripCrossLinks(country, route.routePath);
-        const blogLinks = getRelatedBlogsForRoute(country, route.routePath).map((post) => ({
-          href: `/blog/${post.slug}`,
-          text: post.title,
-        }));
-        extraLinks = `${renderLinkSection("complete-trip-links", `Complete your ${country} trip`, tripLinks)}${renderLinkSection("related-destination-guides", `Related ${country} travel guides`, blogLinks)}`;
+        const destinationId = route.routePath.startsWith("/destinations/")
+          ? route.routePath.split("/")[2]
+          : undefined;
+        const relatedSection = destinationId && DESTINATION_RELATED_BLOG_SLUGS[destinationId]
+          ? renderDestinationRelatedBlogSection(destinationId, "en")
+          : renderLinkSection(
+              "related-destination-guides",
+              `Related ${country} travel guides`,
+              getRelatedBlogsForRoute(country, route.routePath).map((post) => ({
+                href: `/blog/${post.slug}`,
+                text: post.title,
+              }))
+            );
+        const partnerSection = destinationId
+          ? renderDestinationPartnerSection(destinationId, "en")
+          : "";
+        extraLinks = `${renderLinkSection("complete-trip-links", `Complete your ${country} trip`, tripLinks)}${relatedSection}${partnerSection}`;
       } else if (route.routePath === "/sitemap") {
         const directoryLinks = routes
           .filter((entry) => entry.routePath !== "/sitemap")
@@ -872,7 +928,7 @@ function renderDestinationsHubBody(title: string, description: string, faqSchema
   return `<article>
     <h1>${escapeHtml(title)}</h1>
     <p>${escapeHtml(description)}</p>
-    <p>Use these destination guides to turn a broad idea into a practical trip plan from Bangladesh. Each linked page combines a day-by-day outline with seasonal context, local transport notes and a budget reference, so you can compare the pace and style of different destinations before deciding where to go. The outlines are starting points rather than fixed tours: adjust them for flight arrival times, family mobility, prayer and meal needs, local opening days and weather. Confirm entry requirements separately, then recheck transport schedules, attraction access and prices close to travel.</p>
+    <p>Use these destination guides to turn a broad idea into a practical trip plan from Bangladesh. Each linked page combines a day-by-day outline with seasonal context, local transport notes and budget context where available, so you can compare the pace and style of different destinations before deciding where to go. The outlines are starting points rather than fixed tours: adjust them for flight arrival times, family mobility, prayer and meal needs, local opening days and weather. Confirm entry requirements separately, then recheck transport schedules, attraction access and prices close to travel.</p>
     <section><h2>Destination itineraries for Bangladeshi travelers</h2><ul>${directory}</ul></section>
     <section><h2>Compare sample itineraries and local planning notes</h2>${guideDetails}</section>
     <section><h2>How to adapt an itinerary to your trip</h2>
@@ -1414,10 +1470,10 @@ function buildAllRoutes(): PrerenderRoute[] {
     });
   }
 
-  // 6. Destinations Hub (/destinations) + 6 Destination Guides (/destinations/:id)
-  const destHubTitle = "Outbound Travel Plans & Itineraries from Bangladesh | URAL";
+  // Destinations Hub (/destinations) + data-driven Destination Guides (/destinations/:id)
+  const destHubTitle = "Destination Guides from Bangladesh | URAL";
   const destHubDesc =
-    "Explore hand-crafted 5-day itineraries and travel plans for Bangladeshi tourists visiting Nepal, Thailand, Malaysia, and the UAE with BDT budgets.";
+    "Browse destination guides from Bangladesh with practical itinerary outlines, local planning notes and links to existing travel tools.";
   const destFaq = getFaqSchemaForPage("destinations", undefined, true, `${BASE_URL}/destinations`);
   routes.push({
     routePath: "/destinations",
@@ -1435,7 +1491,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         name: destHubTitle,
         description: destHubDesc,
         items: DESTINATIONS_DATA.map((d) => ({
-          name: `${d.country} 5-Day Itinerary from Bangladesh`,
+          name: `${d.country} destination guide from Bangladesh`,
           url: `${BASE_URL}/destinations/${d.id}`,
           description: d.quickAnswer,
         })),
@@ -1449,31 +1505,49 @@ function buildAllRoutes(): PrerenderRoute[] {
     const destUrl = `${BASE_URL}/destinations/${d.id}`;
     const title =
       d.id === "nepal-guide"
-        ? "Nepal Trip Plan from Bangladesh: 5-Day Itinerary & Costs (2026) | URAL"
+        ? "Nepal Destination Guide from Bangladesh: Kathmandu & Pokhara | URAL"
+        : d.id === "thailand-guide"
+        ? "Bangkok Destination Guide from Bangladesh: Four-Day Plan | URAL"
+        : d.id === "dubai-guide"
+        ? "Dubai Destination Guide from Bangladesh: Four-Day Plan | URAL"
+        : d.id === "maldives-guide"
+        ? "Maldives Destination Guide from Bangladesh: Island Planning | URAL"
+        : d.id === "london-guide"
+        ? "London Destination Guide from Bangladesh: Landmarks & Planning | URAL"
+        : d.id === "italy-guide"
+        ? "Italy Itinerary from Bangladesh: Rome, Milan & Venice | URAL"
+        : d.id === "paris-guide"
+        ? "Paris Itinerary from Bangladesh: Landmarks & Planning | URAL"
+        : d.id === "new-york-guide"
+        ? "New York City Itinerary from Bangladesh: Landmarks & Planning | URAL"
         : `${d.country} Tour Itinerary & Travel Plan from Bangladesh | URAL`;
     const description =
       d.id === "nepal-guide"
-        ? "A day-by-day Nepal itinerary for Bangladeshi travelers - Kathmandu and Pokhara highlights, local transport, food, and a realistic budget in BDT."
-        : `Find tourist route plans, day-by-day itineraries, local transport guides, and estimated daily spends in BDT.`;
+        ? "Plan a flexible Nepal trip around Kathmandu, nearby heritage sites and Pokhara. Check current entry, transport, access and cost details for your dates."
+        : d.id === "thailand-guide"
+        ? "Plan a flexible four-day Bangkok visit with riverside sights, city neighborhoods and an optional day trip. Check current opening, transport and entry details for your dates."
+        : d.id === "singapore-guide"
+        ? "Plan four flexible days in Singapore around waterfront sights, a heritage neighborhood and optional Sentosa. Check current attraction access, transit and entry details for your dates."
+        : d.id === "dubai-guide"
+        ? "Plan a flexible four-day Dubai visit around Downtown, the Creek and an optional excursion. Check current attraction access, transport, tour terms and entry details for your dates."
+        : d.id === "maldives-guide"
+        ? "Plan a flexible Maldives stay around one island base, transfers and optional marine activities. Check current access, local rules, schedules and entry details for your dates."
+        : d.id === "london-guide"
+        ? "Plan a London visit around landmarks, museums, river experiences and local transport. Check current attraction, entry and transport details for your dates."
+        : d.id === "italy-guide"
+        ? "Plan a flexible six-day route through Rome, Milan and Venice. Compare current intercity transport, attraction access and official entry guidance for your travel dates."
+        : d.id === "paris-guide"
+        ? "Plan a flexible Paris itinerary around museums, landmarks and the Seine. Check current opening, ticket, transport and entry information for your dates."
+        : d.id === "new-york-guide"
+        ? "Plan New York City around harbor sights, parks, museums and selected neighborhoods. Check current attraction, transport and entry information for your dates."
+        : `Find tourist route plans, day-by-day itineraries and local planning notes. Check current costs, access and schedules for your dates.`;
     const extraNodes: Record<string, unknown>[] = [
       touristTripSchema({
         url: destUrl,
-        name: `${d.country} 5-Day Itinerary from Dhaka`,
+        name: `${d.country} destination guide from Dhaka`,
         description,
         country: d.country,
         places: d.itinerary?.map((p) => p.title) || [d.country],
-        estimatedPriceBdt:
-          d.id === "nepal-guide"
-            ? 45000
-            : d.id === "thailand-guide"
-            ? 68000
-            : d.id === "malaysia-guide"
-            ? 68000
-            : d.id === "singapore-guide"
-            ? 88000
-            : d.id === "maldives-guide"
-            ? 76000
-            : 95000,
       }),
     ];
     const dFaq = getFaqSchemaForPage("destinations", d.id, false, destUrl, DESTINATIONS_DATA);
@@ -1500,7 +1574,8 @@ function buildAllRoutes(): PrerenderRoute[] {
           <ol>${d.itinerary.map((day) => `<li><strong>Day ${escapeHtml(String(day.day))} — ${escapeHtml(day.title)}:</strong> ${day.activities.map(escapeHtml).join("; ")}</li>`).join("")}</ol>
           <h2>Local transport options</h2>
           <ul>${d.localTransport.map((option) => `<li>${escapeHtml(option)}</li>`).join("")}</ul>
-          <p><strong>Indicative local budget:</strong> ${escapeHtml(d.budgetBdt)}. Review international flights and current entry rules separately.</p>
+          <p><strong>Budget planning note:</strong> ${escapeHtml(d.budgetBdt)}. Review international flights and current entry rules separately.</p>
+          ${d.id === "london-guide" ? '<p><a href="/experiences?region=west&amp;city=london">Explore London activities and experiences</a></p>' : d.id === "italy-guide" ? '<p><a href="/experiences?region=west&amp;city=rome-italy">Explore Italy activities and experiences</a></p>' : d.id === "paris-guide" ? '<p><a href="/experiences?region=west&amp;city=paris">Explore Paris activities and experiences</a></p>' : d.id === "new-york-guide" ? '<p><a href="/experiences?region=west&amp;city=new-york">Explore New York City activities and experiences</a></p>' : ""}
           <section>
             <h2>${escapeHtml(d.country)} key facts for travelers from Bangladesh</h2>
             <ul>${d.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
@@ -2352,8 +2427,8 @@ function bnCountryCrossLinks(
 /**
  * Bengali crawl body for the /destinations hub.
  *
- * The English hub carries about 1,180 words. A Bengali hub that only listed six
- * links would be a thin page - the exact failure this programme exists to fix -
+ * The English hub carries about 1,180 words. A Bengali hub that only listed
+ * destination links would be a thin page - the exact failure this programme exists to fix -
  * so all four of its sections are written in Bengali rather than translated
  * sentence for sentence: an orientation paragraph, the guide directory with the
  * best-time and budget notes read from the Bengali data, a comparison section
@@ -2380,12 +2455,12 @@ function bnDestinationsHubBody(): string {
         <h3>ঢাকা থেকে ${escapeHtml(guide.country)}: রুটের ধরন</h3>
         <p>এই গাইডে ${bnDigits(guide.itinerary.length)} দিনের রুট আছে — থামার জায়গাগুলোর মধ্যে ${guide.itinerary
         .map((day) => escapeHtml(day.title))
-        .join(", ")}। স্থানীয় যাতায়াতের অংশে ${bnDigits(guide.localTransport.length)}টি বিকল্প তুলনা করা হয়েছে। অর্থ খরচের হিসাবসহ বিস্তারিত দেখতে গাইডটি খুলুন।</p>
+        .join(", ")}। স্থানীয় যাতায়াতের অংশে ${bnDigits(guide.localTransport.length)}টি বিকল্প তুলনা করা হয়েছে। বাজেট-সংক্রান্ত তথ্যসহ বিস্তারিত দেখতে গাইডটি খুলুন।</p>
       </section>`
     )
     .join("");
   return `
-    <p>নিচের গাইডগুলো একটা সাধারণ ইচ্ছাকে কাজের ভ্রমণ পরিকল্পনায় বদলে দিতে সাহায্য করবে। প্রতিটি পাতায় দিনভিত্তিক রুট, যাওয়ার উপযুক্ত সময়, স্থানীয় যাতায়াতের বিকল্প আর টাকায় বাজেটের হিসাব একসাথে দেওয়া আছে — তাই কোথায় যাবেন ঠিক করার আগেই কোন যাত্রার গতি ও ধরন আপনার সঙ্গে মানাবে, সেটা মিলিয়ে নিতে পারবেন।</p>
+    <p>নিচের গাইডগুলো একটা সাধারণ ইচ্ছাকে কাজের ভ্রমণ পরিকল্পনায় বদলে দিতে সাহায্য করবে। প্রতিটি পাতায় দিনভিত্তিক রুট, যাওয়ার উপযুক্ত সময়, স্থানীয় যাতায়াতের বিকল্প আর যেখানে তথ্য আছে সেখানে বাজেট-সংক্রান্ত প্রসঙ্গ দেওয়া হয়েছে — তাই কোথায় যাবেন ঠিক করার আগেই কোন যাত্রার গতি ও ধরন আপনার সঙ্গে মানাবে, সেটা মিলিয়ে নিতে পারবেন।</p>
     <p>এগুলো ধরা-বাঁধা ট্যুর নয়, শুরুর খসড়া। ফ্লাইট কখন পৌঁছাবে, পরিবারের কারও হাঁটার সমস্যা আছে কি না, নামাজ ও খাবারের সময়, স্থানীয় বন্ধের দিন আর আবহাওয়া — এসব মিলিয়ে নিজের মতো বদলে নিন। ভিসা ও প্রবেশের নিয়ম আলাদাভাবে যাচাই করুন, আর রওনা হওয়ার আগে যাতায়াতের সময়সূচি, টিকিটের দাম ও খোলা-বন্ধের সময় আবার মিলিয়ে নিন।</p>
     <section><h2>বাংলাদেশি ভ্রমণকারীদের জন্য গন্তব্য গাইড</h2><ul>${directory}</ul></section>
     <section><h2>কোন রুট কেমন — এক নজরে তুলনা</h2>${guideDetails}</section>
@@ -2696,7 +2771,7 @@ function buildBengaliBody(
 
         parts.push(
           bnSection(
-            "আনুমানিক স্থানীয় বাজেট",
+            "বাজেট পরিকল্পনার নোট",
             `<p>${escapeHtml(destination.budgetBdt)}। আন্তর্জাতিক বিমানভাড়া ও সাম্প্রতিক ভিসা নিয়ম আলাদাভাবে মিলিয়ে নিন।</p>`
           )
         );
@@ -2721,6 +2796,37 @@ function buildBengaliBody(
             bnCountryCrossLinks(englishCountry, englishPath)
           )
         );
+        parts.push(renderDestinationRelatedBlogSection(id, "bn"));
+        parts.push(renderDestinationPartnerSection(id, "bn"));
+        if (id === "london-guide") {
+          parts.push(
+            bnSection(
+              "লন্ডনের আকর্ষণ ও কার্যক্রম",
+              '<p><a href="/bn/experiences?region=west&amp;city=london">লন্ডনের কার্যক্রম ও অভিজ্ঞতা দেখুন</a></p>'
+            )
+          );
+        } else if (id === "italy-guide") {
+          parts.push(
+            bnSection(
+              "ইতালির আকর্ষণ ও কার্যক্রম",
+              '<p><a href="/bn/experiences?region=west&amp;city=rome-italy">ইতালির কার্যক্রম ও অভিজ্ঞতা দেখুন</a></p>'
+            )
+          );
+        } else if (id === "paris-guide") {
+          parts.push(
+            bnSection(
+              "প্যারিসের আকর্ষণ ও কার্যক্রম",
+              '<p><a href="/bn/experiences?region=west&amp;city=paris">প্যারিসের কার্যক্রম ও অভিজ্ঞতা দেখুন</a></p>'
+            )
+          );
+        } else if (id === "new-york-guide") {
+          parts.push(
+            bnSection(
+              "নিউ ইয়র্ক সিটির আকর্ষণ ও কার্যক্রম",
+              '<p><a href="/bn/experiences?region=west&amp;city=new-york">নিউ ইয়র্ক সিটির কার্যক্রম ও অভিজ্ঞতা দেখুন</a></p>'
+            )
+          );
+        }
       }
     } else {
       parts.push(bnDestinationsHubBody());
@@ -3318,14 +3424,14 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
       segments.length === 2 &&
       ["flights", "hotels", "visa", "costs", "destinations"].includes(segments[0])
     ) {
-      // English FAQ schema must never appear on a Bengali page, so the English
-      // FAQPage node is dropped from every Bengali detail route. Whether a
-      // replacement is added depends on whether Bengali answers exist: the
+      // English FAQ and TouristTrip nodes must never be copied onto a Bengali
+      // detail page. FAQs and destination-trip data are rebuilt from localized
+      // Bengali content; the
       // flights/hotels/visa/costs overrides still carry English faqs and their
       // Bengali bodies therefore render no FAQ section at all, while the
       // destination guides have their own Bengali answers.
       for (const node of en.extraGraphNodes) {
-        if (node["@type"] !== "FAQPage") {
+        if (node["@type"] !== "FAQPage" && node["@type"] !== "TouristTrip") {
           extraGraphNodes.push(node);
         }
       }
@@ -3333,6 +3439,20 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
         const destination = getLocalizedDestinations("bn").find(
           (item) => item.id === segments[1]
         );
+        if (destination) {
+          extraGraphNodes.push(
+            stripContext(
+              touristTripSchema({
+                url: canonicalUrl,
+                name: `${destination.country} গন্তব্য গাইড`,
+                description: destination.quickAnswer,
+                country: destination.country,
+                places: destination.itinerary.map((day) => day.title),
+                inLanguage: "bn-BD",
+              })
+            )
+          );
+        }
         if (destination && destination.faqs.length) {
           const bnFaq = stripContext(
             generateFAQSchema(destination.faqs, {

@@ -149,19 +149,19 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Review Maldives tourist entry rules for Bangladeshi passport holders, including visa on arrival requirements, hotel voucher checks and the free IMUGA form.",
   },
   "/destinations": {
-    title: "Trip Itineraries from Bangladesh | URAL",
+    title: "Destination Guides from Bangladesh | URAL",
     description:
-      "Browse trip itineraries for Nepal, Thailand, Malaysia and more, with practical day plans for travelers departing from Bangladesh.",
+      "Browse destination guides for trips from Bangladesh, with practical itinerary outlines, local planning notes and links to existing travel tools.",
   },
   "/destinations/nepal-guide": {
-    title: "Nepal 5-Day Itinerary from Bangladesh | URAL",
+    title: "Nepal Destination Guide from Bangladesh: Kathmandu & Pokhara | URAL",
     description:
-      "Plan a 5-day Kathmandu and Pokhara itinerary from Bangladesh, with route ideas, local transport notes and a BDT budget framework.",
+      "Plan a flexible Nepal trip around Kathmandu, nearby heritage sites and Pokhara. Check current entry, transport, access and cost details for your dates.",
   },
   "/destinations/thailand-guide": {
-    title: "Bangkok Itinerary from Bangladesh: 4-Day Guide | URAL",
+    title: "Bangkok Destination Guide from Bangladesh: Four-Day Plan | URAL",
     description:
-      "Plan a Bangkok trip from Bangladesh with a day-by-day route, temple and market stops, local transport notes and BDT budget context.",
+      "Plan a flexible four-day Bangkok visit with riverside sights, city neighborhoods and an optional day trip. Check current opening, transport and entry details for your dates.",
   },
   "/destinations/malaysia-guide": {
     title: "Kuala Lumpur Itinerary from Bangladesh | URAL",
@@ -169,19 +169,39 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Plan a Kuala Lumpur trip from Bangladesh with a day-by-day route, city sights, transport options and BDT budget context.",
   },
   "/destinations/dubai-guide": {
-    title: "Dubai Itinerary from Bangladesh: 4-Day Guide | URAL",
+    title: "Dubai Destination Guide from Bangladesh: Four-Day Plan | URAL",
     description:
-      "Plan a Dubai trip from Bangladesh with a four-day route, creek and souk visits, metro notes, a desert-safari option and BDT budget context.",
+      "Plan a flexible four-day Dubai visit around Downtown, the Creek and an optional excursion. Check current attraction access, transport, tour terms and entry details for your dates.",
   },
   "/destinations/singapore-guide": {
-    title: "Singapore 4-Day Itinerary from Bangladesh | URAL",
+    title: "Singapore Destination Guide from Bangladesh: Four-Day Plan | URAL",
     description:
-      "Plan four days in Singapore with a day-by-day route, MRT guidance, major attractions, halal-food areas and BDT budget context for Bangladesh travelers.",
+      "Plan four flexible days in Singapore around waterfront sights, a heritage neighborhood and optional Sentosa. Check current attraction access, transit and entry details for your dates.",
   },
   "/destinations/maldives-guide": {
-    title: "Maldives 5-Day Itinerary from Bangladesh | URAL",
+    title: "Maldives Destination Guide from Bangladesh: Island Planning | URAL",
     description:
-      "Plan a five-day Maldives trip with Maafushi and Hulhumalé stops, transfer options, island activities and local-cost context for Bangladesh travelers.",
+      "Plan a flexible Maldives stay around one island base, transfers and optional marine activities. Check current access, local rules, schedules and entry details for your dates.",
+  },
+  "/destinations/london-guide": {
+    title: "London Destination Guide from Bangladesh: Landmarks & Planning | URAL",
+    description:
+      "Plan a London visit around landmarks, museums, river experiences and local transport. Check current attraction, entry and transport details for your dates.",
+  },
+  "/destinations/italy-guide": {
+    title: "Italy Itinerary from Bangladesh: Rome, Milan & Venice | URAL",
+    description:
+      "Plan a flexible six-day route through Rome, Milan and Venice. Compare current intercity transport, attraction access and official entry guidance for your travel dates.",
+  },
+  "/destinations/paris-guide": {
+    title: "Paris Itinerary from Bangladesh: Landmarks & Planning | URAL",
+    description:
+      "Plan a flexible Paris itinerary around museums, landmarks and the Seine. Check current opening, ticket, transport and entry information for your dates.",
+  },
+  "/destinations/new-york-guide": {
+    title: "New York City Itinerary from Bangladesh: Landmarks & Planning | URAL",
+    description:
+      "Plan New York City around harbor sights, parks, museums and selected neighborhoods. Check current attraction, transport and entry information for your dates.",
   },
   "/costs": {
     title: "Trip Costs from Bangladesh: BDT Travel Budgets | URAL",
