@@ -4130,7 +4130,92 @@ check(
   `the hotel-zone guard rejects a deliberately reintroduced fare, timing, gate, shuttle and savings sentence (matched ${hotelControl} of ${HOTEL_BANNED_PATTERNS.length} patterns)`
 );
 
+// --- Wave 6: Zamzam & Customs Claims Guards (2026-10-17) ------------------
+// Guard against reintroducing the outdated SAR 9.50-12.50 Zamzam price range
+// (now 48 SAR per Nusuk 2026), unqualified "free" airline claims for Zamzam
+// cartons, and the missing references array. Ledger: W6-01, W6-02, W6-03 in
+// docs/growth/CONTENT-QUEUE.md.
+
+const ZAMZAM_SLUG = "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport";
+const zamzamBodyPair = [
+  BLOG_BODY[ZAMZAM_SLUG] ?? "",
+  BENGALI_BLOG_OVERRIDES[ZAMZAM_SLUG]?.content ?? "",
+];
+
+// Guard: No outdated Zamzam pricing (the SAR 9.50-12.50 range is obsolete;
+// Nusuk's 2026 price is 48 SAR). Each pattern anchors on the decimal bounds or
+// the 9->12 range, because this same article legitimately quotes "SAR 12 - 20
+// per kg" for dates and "SAR 120 - 160" for a sedan. An unanchored "SAR 9|12"
+// match flagged those and failed CI on 2026-10-17.
+// A list, not one regex: the Bengali body may carry the range in Bengali digits,
+// and `\b` cannot anchor them (Bengali digits are not \w).
+const ZAMZAM_OBSOLETE_PRICE_PATTERNS: { label: string; pattern: RegExp }[] = [
+  { label: "decimal bounds (EN)", pattern: /\bSAR\s*(?:9|12)[.,]50\b/i },
+  { label: "range (EN)", pattern: /\bSAR\s*9\s*(?:-|\u2013|\u2014|to)\s*(?:SAR\s*)?12\b/i },
+  { label: "decimal bounds (BN)", pattern: /SAR\s*(?:\u09ef|\u09e7\u09e8)[.,]\u09eb\u09e6/ },
+  {
+    label: "range (BN)",
+    pattern: /\u09ef[.,]\u09eb\u09e6[^\u09e6-\u09ef]{0,20}\u09e7\u09e8[.,]\u09eb\u09e6/,
+  },
+];
+const findObsoleteZamzamPrice = (text: string) =>
+  ZAMZAM_OBSOLETE_PRICE_PATTERNS.find((entry) => entry.pattern.test(text))?.label;
+const zamzamSurfaces: { label: string; text: string }[] = [
+  { label: "article body (EN)", text: BLOG_BODY[ZAMZAM_SLUG] ?? "" },
+  { label: "article body (BN)", text: BENGALI_BLOG_OVERRIDES[ZAMZAM_SLUG]?.content ?? "" },
+  { label: "article page (EN)", text: read(path.join(DIST_DIR, "blog", `${ZAMZAM_SLUG}.html`)) ?? "" },
+  { label: "article page (BN)", text: read(path.join(DIST_DIR, "bn", "blog", `${ZAMZAM_SLUG}.html`)) ?? "" },
+];
+const zamzamMissing = zamzamSurfaces.filter((surface) => !surface.text).map((surface) => surface.label);
+const zamzamOutdatedPrice = zamzamSurfaces
+  .map((surface) => ({ label: surface.label, hit: findObsoleteZamzamPrice(surface.text) }))
+  .filter((surface) => surface.hit !== undefined)
+  .map((surface) => `${surface.label}: ${surface.hit}`);
+check(
+  zamzamMissing.length === 0,
+  `blog-21: both bodies and both rendered pages exist${zamzamMissing.length ? ` (missing: ${zamzamMissing.join(", ")})` : ""}`
+);
+check(
+  zamzamOutdatedPrice.length === 0,
+  `blog-21: no outdated Zamzam price range SAR 9.50-12.50 (now 48 SAR per Nusuk 2026) in either locale${
+    zamzamOutdatedPrice.length ? ` (found in: ${zamzamOutdatedPrice.join("; ")})` : ""
+  }`
+);
+const zamzamPriceControl = [
+  "Buy the sealed carton for SAR 9.50 - SAR 12.50 at the kiosk.",
+  "One carton costs SAR 9.50.",
+  "সৌদি রিয়াল ৯.৫০ থেকে ১২.৫০",
+].every((control) => findObsoleteZamzamPrice(control) !== undefined);
+const zamzamPriceFalsePositives = [
+  "Allowance: one sealed 5-liter box costing 48 SAR (~BDT 620).",
+  "Dates cost SAR 12 - 20 per kg and a sedan SAR 120 - 160.",
+  "Grade-A Ajwa dates: SAR 35 - SAR 50 per kg.",
+].every((control) => findObsoleteZamzamPrice(control) === undefined);
+check(
+  zamzamPriceControl && zamzamPriceFalsePositives,
+  `blog-21: the Zamzam price guard rejects the retired SAR 9.50-12.50 range in both numeral systems and still passes the current 48 SAR and the article's unrelated date/taxi prices (negative control)`
+);
+
+// Guard: No unqualified "free" Zamzam airline claims
+const zamzamFreeClaims = zamzamBodyPair.filter((body) =>
+  /100%\s*FREE.*baggage|free.*dedicated.*conveyor/i.test(body)
+);
+check(
+  zamzamFreeClaims.length === 0,
+  `blog-21: no unqualified 'free' or '100% FREE outside baggage' Zamzam airline claims — primary sources don't verify`
+);
+
+// Guard: References array required for customs article
+const customsArticle = BLOG_DATA.find((p) => p.slug === ZAMZAM_SLUG);
+check(
+  (customsArticle?.references?.length ?? 0) >= 3,
+  `blog-21: references array present with at least 3 sources (Nusuk, NBR, Biman)`
+);
+
 // --- Report ----------------------------------------------------------------
+// Keep this block LAST. The checks above only count if it runs after them; when
+// it sat in the middle of the file, guards appended below it could fail without
+// ever failing the build or printing a line.
 
 for (const label of checks) console.log(`  \u2713 ${label}`);
 if (failures.length > 0) {
@@ -4145,42 +4230,3 @@ if (failures.length > 0) {
 } else {
   console.log(`\n[verify:build] All ${checks.length} checks passed.`);
 }
-
-// --- Wave 6: Zamzam & Customs Claims Guards (2026-10-17) ------------------
-// Guard against reintroducing the outdated SAR 9.50-12.50 Zamzam price range
-// (now 48 SAR per Nusuk 2026), unqualified "free" airline claims for Zamzam
-// cartons, and the missing references array. Ledger: W6-01, W6-02, W6-03 in
-// docs/growth/CONTENT-QUEUE.md.
-
-const ZAMZAM_SLUG = "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport";
-const zamzamBodyPair = [
-  BLOG_BODY[ZAMZAM_SLUG] ?? "",
-  BENGALI_BLOG_OVERRIDES[ZAMZAM_SLUG]?.content ?? "",
-];
-
-// Guard: No outdated Zamzam pricing (SAR 9-12 range is obsolete)
-const zamzamOutdatedPrice = zamzamBodyPair.filter((body) =>
-  /SAR\s*9[\s.-]*(?:50)?|SAR\s*1[0-2][\s.-]*(?:50)?/i.test(body)
-);
-check(
-  zamzamOutdatedPrice.length === 0,
-  `blog-21: no outdated Zamzam price range SAR 9.50-12.50 (now 48 SAR per Nusuk 2026) in EN or BN body`
-);
-
-// Guard: No unqualified "free" Zamzam airline claims
-const zamzamFreeClaims = zamzamBodyPair.filter((body) =>
-  /100%\s*FREE.*baggage|free.*dedicated.*conveyor/i.test(body)
-);
-check(
-  zamzamFreeClaims.length === 0,
-  `blog-21: no unqualified 'free' or '100% FREE outside baggage' Zamzam airline claims — primary sources don't verify`
-);
-
-// Guard: References array required for customs article
-const customsArticle = BLOG_DATA.find(
-  (p) => p.slug === "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport"
-);
-check(
-  customsArticle?.references && customsArticle.references.length >= 3,
-  `blog-21: references array present with at least 3 sources (Nusuk, NBR, Biman)`
-);
