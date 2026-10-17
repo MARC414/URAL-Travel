@@ -2534,6 +2534,7 @@ export const BLOG_DATA: BlogPost[] = [
     summary: "Every Bangladeshi pilgrim returning from Makkah and Madinah wishes to bring blessed Zamzam water, Madinah Ajwa and Sukkari dates, and gold jewelry for family members back home. However, packing loose Zamzam bottles inside checked suitcases leads to immediate baggage confiscation at Jeddah and Madinah airport X-ray scanners. Verified against Saudi General Authority of Civil Aviation (GACA - gaca.gov.sa) directives and Bangladesh National Board of Revenue (NBR - nbr.gov.bd) Passenger Baggage Rules, this guide explains the official 5-liter Zamzam kiosk rule, date weight allowances, and duty-free gold limits at Dhaka Airport.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
+    updatedAt: "2026-10-17",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
     internalLinks: [
@@ -2542,7 +2543,24 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Complete DIY Umrah & 10-Day BDT Cost Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "kiwitaxi", headline: "Returning with 46kg Suitcases & Zamzam Boxes?", body: "Book a large 7-seater family van from your Makkah or Madinah hotel to the airport so all your suitcases and Zamzam cartons fit comfortably in one vehicle." }
+    affiliateCTA: { provider: "kiwitaxi", headline: "Returning with 46kg Suitcases & Zamzam Boxes?", body: "Book a large 7-seater family van from your Makkah or Madinah hotel to the airport so all your suitcases and Zamzam cartons fit comfortably in one vehicle." },
+    references: [
+      {
+        name: "Nusuk App Official Zamzam Pricing",
+        nameBn: "নুসুক অ্যাপ অফিশিয়াল জমজম মূল্য",
+        url: "https://lifeinsaudiarabia.net/buy-zamzam-water-from-nusuk-app-online/"
+      },
+      {
+        name: "Bangladesh Customs Baggage Rules (NBR)",
+        nameBn: "বাংলাদেশ কাস্টমস ব্যাগেজ নিয়ম (এনবিআর)",
+        url: "https://bdvisa.com/luggage-rules.html"
+      },
+      {
+        name: "Biman Bangladesh Airlines Baggage Policy",
+        nameBn: "বিমান বাংলাদেশ এয়ারলাইন্স ব্যাগেজ নীতি",
+        url: "https://biman-airlines.com/index.php/baggageAll"
+      }
+    ]
   },
   {
     id: "blog-22",

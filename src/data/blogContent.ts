@@ -648,8 +648,8 @@ Rule 1: Strict Ban on Loose Bottles Inside Checked Suitcases:
 - Never place plastic bottles or gallons of Zamzam water inside your checked-in suitcases! High-speed airport X-ray scanners detect liquid containers inside luggage and automatically divert your bag off the conveyor belt.
 Rule 2: Buy Only the Official 5-Liter Sealed Zamzam Carton at the Airport Kiosk:
 - Present your passport and **Umrah e-Visa / Nusuk App Permit** at the official **Zamzam Sales Kiosk** located just outside the Departure Hall of Jeddah Terminal 1 (Gate B/C outer plaza) or Madinah Airport.
-- **Allowance & Official Price:** Strictly **1 sealed 5-liter box per pilgrim** costing **SAR 9.50 to SAR 12.50 (~BDT 350–400)** payable by card or cash.
-- **Free Dedicated Conveyor Belt:** Write your name, flight number, and mobile number in permanent marker on the carton and drop it at the dedicated **"Zamzam Only" conveyor counter** during airline check-in. Biman Bangladesh Airlines, Saudia, Gulf Air, and Kuwait Airways carry this 5-liter box **100% FREE outside your 46kg baggage limit**.
+- **Allowance & Official Price:** Strictly **1 sealed 5-liter box per pilgrim** costing **48 SAR (~BDT 620)** via the official Nusuk app or airport kiosks, payable by card or cash.
+- **Airline Baggage Allowance:** Most airlines flying pilgrims home from Saudi Arabia allow one sealed 5-litre Zamzam can per passenger. **Check your airline's current Zamzam policy at check-in**—some carriers include it in your checked baggage allowance, while others may waive the weight. Label the carton clearly with your name, flight number, and mobile number in permanent marker.
 
 2. HOW MANY KILOGRAMS OF MADINAH AJWA & SUKKARI DATES CAN YOU BRING TO BANGLADESH?
 Buying dates from the **Madinah Central Date Market (Souq Al-Tamr, 1 km south of Masjid an-Nabawi)** or Al-Kaaki wholesale shops saves 40% compared to hotel gift shops:
@@ -661,7 +661,7 @@ Buying dates from the **Madinah Central Date Market (Souq Al-Tamr, 1 km south of
 
 3. WHAT IS THE OFFICIAL BANGLADESH NBR CUSTOMS RULE FOR GOLD JEWELRY & ELECTRONICS AT DHAKA AIRPORT?
 Under the updated **Bangladesh National Board of Revenue (NBR - nbr.gov.bd) Passenger (Non-Tourist) Baggage Rules**:
-- **22K / 21K Gold Ornaments (Jewelry):** An adult passenger arriving at Dhaka Airport (DAC) may bring up to **100 grams (approx. 8.57 Bhori) of gold ornaments** (not exceeding 12 pieces of a single item type) **duty-free** for personal/family use.
+- **22K / 21K Gold Ornaments (Jewelry):** An adult passenger arriving at Dhaka Airport (DAC) may bring up to **100 grams (approx. 8.57 Bhori) of gold ornaments** (not exceeding 12 pieces of a single item type) **duty-free** for personal/family use, as per official Bangladesh Customs baggage rules.
 - **Gold Bars / Bullion:** Strictly regulated; requires formal declaration at the Dhaka Customs Red Channel and payment of statutory customs duty per Bhori (11.664g), subject to maximum once-a-year passenger frequency limits.
 - **Saudi VAT Refund (15% Tax-Free ZATCA):** Always ask licensed Makkah/Madinah gold shops for an official digital QR invoice.`,
   "bangladeshi-halal-food-guide-makkah-madinah-budget-meals": `Every restaurant in Makkah and Madinah is 100% Halal by law under **Saudi Food and Drug Authority (SFDA - sfda.gov.sa)** and municipal hygiene inspections. However, for Bangladeshi pilgrims—especially seniors over 60 with diabetes or sensitive stomachs—finding warm, lightly spiced **Desi rice, daal, fish, and vegetable bhaji** near the Haram makes all the difference.
