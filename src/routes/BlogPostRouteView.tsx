@@ -31,6 +31,8 @@ type RouteViewProps = { context: Record<string, any> };
 
 const UMRAH_GUIDE_SLUG = "umrah-hajj-guide-bangladesh-nusuk-bdt-cost";
 const UMRAH_BUDGET_TABLE_MARKER = "[[UMRAH_BUDGET_TABLE]]";
+const HAJJ_RESOURCE_DOWNLOAD_MARKER = "[[HAJJ_RESOURCE_DOWNLOAD]]";
+const HAJJ_RESOURCE_DOWNLOAD_SLUG = "hajj-registration-bangladesh-government-vs-private-package-cost";
 
 function formatReferenceNumber(index: number, isBengali: boolean): string {
   const number = String(index + 1);
@@ -53,6 +55,36 @@ function formatArticleDate(isoDate: string, isBengali: boolean) {
 
   }).format(new Date(`${isoDate}T12:00:00+06:00`));
 
+}
+
+function HajjResourceDownloadCard({ isBengali }: { isBengali: boolean }) {
+  return (
+    <section
+      className="my-5 rounded-2xl border border-emerald-300 bg-emerald-50 p-5 shadow-sm"
+      aria-label={isBengali ? "হজ প্রস্তুতির ডাউনলোড" : "Hajj preparation download"}
+    >
+      <p className="mb-1 text-xs font-bold uppercase tracking-wide text-emerald-900">
+        {isBengali ? "ডাউনলোড রিসোর্স · ইংরেজি PDF" : "Download resource · English PDF"}
+      </p>
+      <h2 className="font-serif text-lg font-bold leading-snug text-brand-navy">
+        {isBengali
+          ? "URAL-এর Hajj প্রস্তুতি চেকলিস্ট"
+          : "URAL’s Hajj preparation checklist"}
+      </h2>
+      <p className="mt-2 text-sm leading-relaxed text-slate-700">
+        {isBengali
+          ? "২ পৃষ্ঠার সহায়ক চেকলিস্ট। এটি URAL-এর সম্পাদনামূলক রিসোর্স—সরকারি ফর্ম নয়। মৌসুমভিত্তিক নিয়ম, দাম ও স্বাস্থ্য-নির্দেশনা hajj.gov.bd এবং সংশ্লিষ্ট সরকারি নোটিশে মিলিয়ে নিন।"
+          : "A two-page planning aid. This is a URAL editorial resource, not a government form. Confirm season-specific rules, prices and health requirements against hajj.gov.bd and the relevant official notices."}
+      </p>
+      <a
+        href="/downloads/ural-hajj-preparation-checklist-2027-en.pdf"
+        download="ural-hajj-preparation-checklist-2027-en.pdf"
+        className="mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-brand-navy px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-emerald focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-navy"
+      >
+        {isBengali ? "PDF ডাউনলোড করুন" : "Download the PDF"}
+      </a>
+    </section>
+  );
 }
 
 function UmrahBudgetTable({ isBengali }: { isBengali: boolean }) {
@@ -1014,6 +1046,13 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                             activePost.slug === UMRAH_GUIDE_SLUG
                           ) {
                             return <UmrahBudgetTable key={bIdx} isBengali={isBn} />;
+                          }
+
+                          if (
+                            trimmed === HAJJ_RESOURCE_DOWNLOAD_MARKER &&
+                            activePost.slug === HAJJ_RESOURCE_DOWNLOAD_SLUG
+                          ) {
+                            return <HajjResourceDownloadCard key={bIdx} isBengali={isBn} />;
                           }
 
 

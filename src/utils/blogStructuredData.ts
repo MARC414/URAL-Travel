@@ -216,39 +216,25 @@ const HOW_TO_CONFIGS: Record<string, BlogHowToConfig[]> = {
   ],
   "hajj-registration-bangladesh-government-vs-private-package-cost": [
     {
-      idSuffix: "howto-official-hajj-registration",
+      idSuffix: "hajj-deadline-next-steps",
       en: {
-        start: /^1\.\s*STEP-BY-STEP:\s*OFFICIAL 2-STAGE HAJJ REGISTRATION/i,
-        end: /^2\.\s*GOVERNMENT HAJJ PACKAGE/i,
-        name: "How to register for Hajj through Bangladesh's official Hajj system",
+        start: /^1\.\s*WHAT TO DO AFTER THE HAJJ 2027 REGISTRATION DEADLINE/i,
+        end: /^2\.\s*GOVERNMENT-MANAGED VS\. PRIVATE HAJJ ARRANGEMENTS/i,
+        name: "What to do after the Hajj 2027 registration deadline",
         parseStep: (line) => {
-          const stage = line
-            .trim()
-            .match(/^-\s*Stage\s+(\d+)\s*:\s*(.+)$/i);
-          if (stage) {
-            const titleSplit = stage[2].match(/^([^:]+):\s*(.*)$/);
-            return {
-              name: titleSplit
-                ? `Stage ${stage[1]}: ${titleSplit[1].trim()}`
-                : `Stage ${stage[1]}`,
-              inlineText: titleSplit?.[2]?.trim() || stage[2].trim(),
-            };
-          }
-          const verify = line
-            .trim()
-            .match(/^-\s*How to Verify Your Registration Online:\s*(.*)$/i);
-          return verify
-            ? {
-                name: "How to Verify Your Registration Online",
-                inlineText: verify[1].trim(),
-              }
-            : undefined;
+          const step = line.trim().match(/^-\s*Step\s+(\d+)\s*:\s*(.+)$/i);
+          if (!step) return undefined;
+          const titleSplit = step[2].match(/^([^:]+):\s*(.*)$/);
+          return {
+            name: titleSplit ? `Step ${step[1]}: ${titleSplit[1].trim()}` : `Step ${step[1]}`,
+            inlineText: titleSplit?.[2]?.trim() || step[2].trim(),
+          };
         },
       },
       bn: {
-        start: /^১\.\s*ধাপে ধাপে সরকারি ২-স্তরের HAJJ নিবন্ধন/i,
-        end: /^২\.\s*সরকারি হজ প্যাকেজ/i,
-        name: "বাংলাদেশের সরকারি ই-হজ ব্যবস্থায় কীভাবে নিবন্ধন করবেন",
+        start: /^১\.\s*২০২৭ সালের হজ নিবন্ধনের সময়সীমার পর করণীয়/i,
+        end: /^২\.\s*সরকারি ব্যবস্থাপনা বনাম বেসরকারি হজের ব্যবস্থা/i,
+        name: "হজ ২০২৭ নিবন্ধনের সময়সীমা পেরোনোর পর করণীয়",
         parseStep: (line) => {
           const match = line
             .trim()

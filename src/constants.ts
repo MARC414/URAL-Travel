@@ -2265,10 +2265,58 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-13",
     slug: "hajj-registration-bangladesh-government-vs-private-package-cost",
-    title: "Hajj Registration from Bangladesh (2026–2027): Official hajj.gov.bd Process, Govt vs. Private Packages & BDT Cost",
-    summary: "For Bangladeshi Muslims, performing obligatory Hajj is a once-in-a-lifetime spiritual milestone often funded by decades of family savings, making agency verification and transparent BDT pricing critical. This comprehensive guide explains the mandatory 2-stage Bangladesh Ministry of Religious Affairs registration system on hajj.gov.bd: how to complete Pre-Registration (Prak-Nibondhon) with your NID and BDT 30,000 deposit to receive your official Pilgrim ID (PID) tracking serial, how to compare Government General/Special Hajj Packages against Ministry-Licensed Private Agency tiers (Maktab A, B, and D tents in Mina and Arafat), shifting versus non-shifting Aziziya apartments, and how to verify an agency license before paying a single Taka.",
+    title: "Hajj Registration from Bangladesh for 2027: Status, Official Portal & Package Costs",
+    summary: "The latest supplied MoRA notice lists Hajj 2027 primary registration from 27 July to 24 September 2026, with no extension. The window has passed. Check hajj.gov.bd for later notices. The sources supplied do not establish 2027 package prices; 2026 prices are historical, not current quotes.",
+    references: [
+      {
+        name: "Bangladesh Haj Management Portal — Hajj 2027 notices and e-Hajj services",
+        nameBn: "বাংলাদেশ হজ ব্যবস্থাপনা পোর্টাল — ২০২৭ সালের হজ বিজ্ঞপ্তি ও ই-হজ সেবা",
+        url: "https://hajj.gov.bd/",
+      },
+      {
+        name: "e-Hajj BD — Hajj 2027 Passport Relaxation Notice",
+        nameBn: "ই-হজ বিডি — ২০২৭ সালের হজে পাসপোর্ট-শিথিলতার বিজ্ঞপ্তি",
+        url: "https://ehaj.hajj.gov.bd/news/uploads/6aabddbc34a0d0.215566001789648316.pdf",
+      },
+      {
+        name: "e-Hajj BD — Signed Bank Registration Certificate Notice",
+        nameBn: "ই-হজ বিডি — স্বাক্ষরিত ব্যাংক নিবন্ধন সনদের বিজ্ঞপ্তি",
+        url: "https://ehaj.hajj.gov.bd/news/uploads/6ab4d8a90e95d0.059743001790236841.pdf",
+      },
+      {
+        name: "Saudi Ministry of Health — Hajj Health Requirements (1447H/2026; historical)",
+        nameBn: "সৌদি স্বাস্থ্য মন্ত্রণালয় — হজের স্বাস্থ্যবিধি (১৪৪৭ হিজরি/২০২৬; ঐতিহাসিক)",
+        url: "https://www.moh.gov.sa/HealthAwareness/Pilgrims-Health/Documents/Hajj-Health-Requirements-English-language.pdf",
+      },
+      {
+        name: "Saudi Press Agency — Hajj permit announcement (2026; historical)",
+        nameBn: "Saudi Press Agency — Hajj permit বিজ্ঞপ্তি (২০২৬; ঐতিহাসিক)",
+        url: "https://www.spa.gov.sa/en/w2579415",
+      },
+      {
+        name: "Saudi Press Agency — Nusuk Smart Card announcement (2026; historical)",
+        nameBn: "Saudi Press Agency — Nusuk Smart Card বিজ্ঞপ্তি (২০২৬; ঐতিহাসিক)",
+        url: "https://www.spa.gov.sa/en/N2597343",
+      },
+      {
+        name: "Saudi Ministry of Hajj and Umrah — official portal; check current Hajj season",
+        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — সরকারি portal; চলতি হজ-মৌসুমের তথ্য দেখুন",
+        url: "https://www.haj.gov.sa/",
+      },
+      {
+        name: "Nusuk Hajj — official services portal; confirm Bangladesh applicability",
+        nameBn: "Nusuk Hajj — সরকারি সেবা portal; বাংলাদেশি যাত্রীর ক্ষেত্রে প্রযোজ্যতা যাচাই করুন",
+        url: "https://hajj.nusuk.sa/",
+      },
+      {
+        name: "Saudi Ministry of Health — official portal; check current Hajj health requirements",
+        nameBn: "সৌদি স্বাস্থ্য মন্ত্রণালয় — সরকারি portal; চলতি হজের স্বাস্থ্যবিধি দেখুন",
+        url: "https://www.moh.gov.sa/en/Pages/Default.aspx",
+      },
+    ],
     category: "Hajj & Umrah",
     date: "September 27, 2026",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "8 min read",
     internalLinks: [
@@ -2277,7 +2325,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "airalo", headline: "Keep Family Location Sharing Active in Mina & Arafat", body: "Install a Saudi Arabia 5G eSIM before flying from Dhaka so your WhatsApp live location and Nusuk Hajj Smart Card app never lose connection during the 5 days of Hajj." }
+    affiliateCTA: { provider: "airalo", headline: "Plan mobile data for your Hajj trip", body: "Consider mobile data for family messaging and maps in Saudi Arabia. Before choosing an eSIM, check device compatibility, network coverage, data allowance and activation terms." }
   },
   {
     id: "blog-14",

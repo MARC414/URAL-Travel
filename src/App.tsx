@@ -626,7 +626,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh":
       "Hotel distances in Makkah are measured to the Haram wall, not to the gate you will use, and Haramain Rail carries one 25 kg bag per passenger at 65 x 55 x 35 cm. Read the operator's 15 October 2026 base fares and confirm shuttles, gates and live rates with the hotel before you pay.",
     "hajj-registration-bangladesh-government-vs-private-package-cost":
-      "Obligatory Hajj from Bangladesh requires two-stage registration on hajj.gov.bd: Pre-Registration with your NID and ~BDT 30,000 deposit to get a tracking N-Serial, followed by Final Registration (BDT 5,20,000–6,00,000 for Government packages or BDT 5,80,000–9,50,000+ for licensed Private Agency Maktab A/B/D packages).",
+      "The latest MoRA 2027 notice supplied for this guide lists primary registration from 27 July to 24 September 2026, with no extension. The window has passed. Check hajj.gov.bd for later notices. The supplied sources do not establish 2027 package prices; 2026 figures are historical only.",
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
       "When taking elderly parents for Umrah from Dhaka, request airline Wheelchair (WCHR) assistance 48 hours before departure and bring a manual folding wheelchair (transported free). Inside Masjid al-Haram, use dedicated upper-level wheelchair tracks or official electric scooters, and choose flat-street hotels in Jabal Omar or lower Ibrahim Al-Khalil.",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
@@ -721,7 +721,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh":
       "মক্কায় হোটেলের দূরত্ব মাপা হয় হারামের দেয়াল পর্যন্ত, আপনি যে গেট দিয়ে প্রবেশ করবেন সেখান্ত নয়; আর Haramain ট্রেনে জনপ্রতি 25 কিজির (65 x 55 x 35 cm) একটি লাগেজ নেওয়া যায়। 15 অক্টোবর 2026 তারিখের operator-এর base fare দেখুন, আর শাটল, গেট ও লাইভ রেট হোটেলেই নিশ্চিত করুন।",
     "hajj-registration-bangladesh-government-vs-private-package-cost":
-      "বাংলাদেশ থেকে ফরজ হজের জন্য ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ ২ ধাপে নিবন্ধন করতে হয়: NID ও ৩০,০০০ টাকা জমা দিয়ে প্রাক-নিবন্ধন (N-Serial) এবং কোটা অনুযায়ী চূড়ান্ত নিবন্ধন (সরকারি প্যাকেজ ৫.২০–৬.০০ লক্ষ টাকা; বেসরকারি এজেন্সি ৫.৮০–৯.৫০+ লক্ষ টাকা)।",
+      "সর্বশেষ দেওয়া MoRA ২০২৭ বিজ্ঞপ্তিতে প্রাথমিক নিবন্ধনের সময় ২৭ জুলাই–২৪ সেপ্টেম্বর ২০২৬ বলা হয়েছে; সময়সীমা বাড়ানো হবে না। সময় শেষ। পরবর্তী নোটিশের জন্য hajj.gov.bd দেখুন। দেওয়া সূত্রে ২০২৭ প্যাকেজের দাম নিশ্চিত নয়; ২০২৬ সালের অঙ্ক আগের মৌসুমের তথ্য।",
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
       "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ যাত্রায় ফ্লাইটের ৪৮ ঘণ্টা আগে এয়ারলাইন্স হুইলচেয়ার (WCHR) বুক করুন এবং নিজস্ব ফোল্ডিং হুইলচেয়ার সাথে নিন (ফ্লাইটে ফ্রি)। মসজিদুল হারামে ওপরের তলার হুইলচেয়ার ট্র্যাক বা অফিশিয়াল ইলেকট্রিক স্কুটার ব্যবহার করুন এবং জাবাল ওমরের মতো সমতল রাস্তার হোটেল বেছে নিন।",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
