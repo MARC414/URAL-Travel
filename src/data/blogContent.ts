@@ -379,30 +379,48 @@ The 5-litre sealed carton, the airport kiosk process, what each carrier accepts 
 
 Hotel access questions - the walking route, the gates, the shuttle, accessibility and the live rate - belong to the property, and asking before you pay costs nothing. Read the map pin, then read the reviews that name the gate you intend to use.
 `,
-  "hajj-registration-bangladesh-government-vs-private-package-cost": `For Bangladeshi Muslims, performing obligatory Fard Hajj is a life-defining spiritual journey. Because a typical Hajj package from Bangladesh costs between BDT 5,50,000 and BDT 9,50,000+ per person, knowing how the official digital e-Hajj system works protects your family from unlicensed middlemen (dalals) and ensures you select the right Maktab tent and hotel distance.
+  "hajj-registration-bangladesh-government-vs-private-package-cost": `Who this guide is for: Bangladeshi pilgrims comparing government and private arrangements for Hajj 2027.
 
-1. STEP-BY-STEP: OFFICIAL 2-STAGE HAJJ REGISTRATION ON HAJJ.GOV.BD
-In Bangladesh, all Hajj pilgrims—whether flying under Government management or a Private Hajj Agency—are tracked through the Ministry of Religious Affairs unified e-Hajj portal (hajj.gov.bd).
-- Stage 1: Pre-Registration (Prak-Nibondhon): Bring your valid National ID Card (NID) (or Digital Birth Registration Certificate for minors under 18), mobile phone number, and valid e-Passport to an authorized Hajj Registration Bank (such as Sonali Bank, Islami Bank, Al-Arafah Islami Bank, or Standard Bank) or a licensed Hajj Agency. Deposit the government-set Pre-Registration fee (approx. BDT 30,000) to generate your unique N-Serial / Tracking Number.
-- Stage 2: Final Registration (Churanto Nibondhon): When the Ministry announces the annual quota cutoff for your serial range, you pay the remaining package balance through the designated bank voucher to receive your official Pilgrim ID (PID) and Nusuk Hajj Smart Card integration.
-- How to Verify Your Registration Online: Never rely on a verbal promise from a sub-agent! Visit hajj.gov.bd and enter your Tracking Number or Passport Number in the "Pilgrim Search" box to verify that your name, agency license number, and bank voucher are officially recorded in the government server.
+Quick answer — The latest MoRA 2027 notice supplied for this guide says primary registration ran from 27 July to 24 September 2026 and that the deadline would not be extended. As of 18 October 2026, that window has passed. Check hajj.gov.bd for any later notice. The supplied sources do not establish 2027 package prices; 2026 figures are historical, not current quotes [1].
 
-2. GOVERNMENT HAJJ PACKAGE VS. PRIVATE LICENSED AGENCY PACKAGE
-- Government Hajj Package (General & Special Tiers): Managed directly by the Ministry of Religious Affairs and Ashkona Hajj Camp. Highly reliable flight scheduling on Biman Bangladesh Airlines/Saudia, fixed transparent BDT pricing (approx. BDT 5,20,000 – BDT 6,00,000), and full medical mission support in Makkah and Madinah. However, hotel rooms are shared (4 to 6 beds per room) and may involve Aziziya shuttle stays.
-- Private Licensed Agency Packages (Economy, Classic & VIP 5-Star): Ideal for families who want private 2-bed or 3-bed rooms in Jabal Omar / Clock Tower, shorter 14-to-21 day customized Hajj durations (Short Hajj Package), or upgraded Maktab A/B air-conditioned gypsum-board tents in Mina near the Jamarat bridge.
+[[HAJJ_RESOURCE_DOWNLOAD]]
 
-3. SHIFTING VS. NON-SHIFTING HAJJ PACKAGES EXPLAINED
-When comparing Dhaka Hajj agency brochures, always ask whether the package is "Shifting" or "Non-Shifting":
-- Shifting Package (Saves BDT 80,000 – BDT 1,40,000): During the peak 8–12 Dhul Hijjah days, you check out of your Haram-area hotel and move to an apartment building in Aziziya (near Mina/Jamarat), then move to a hotel near Masjid al-Haram either before or after the 5 Hajj days. Moving to Aziziya during Hajj days is actually very practical because you can walk to Jamarat without getting stuck in Makkah traffic!
-- Non-Shifting Package: You keep your exact same hotel room near Masjid al-Haram (and an additional transit apartment in Aziziya) throughout the entire stay without packing and moving suitcases.
+Season note: The supplied sources do not establish Hajj 2027 package prices or 1448H/2027 Saudi health and permit requirements. This guide identifies historical material as such. Before paying or travelling, check the latest MoRA/e-Hajj and Saudi Ministry notices for your Hajj season.
 
-4. UNDERSTANDING MINA & ARAFAT TENT CATEGORIES (MAKTAB A, B, C, D)
-During the 5 core days of Hajj (8 to 13 Dhul Hijjah), your comfort depends on your Mina Maktab zone:
-- Maktab D (Standard South Asian Zone / Muaissim): Located 2.5 to 4 km from Jamarat. Uses cooler/AC tents with sofa-cum-beds; requires walking carefully in groups at night or after Asr to pelt the Jamarat.
-- Maktab A & B (VIP Majr Al-Kabsh / Kidana Towers): Located right beside Jamarat (300m to 800m walk), featuring split air-conditioning, 3 daily buffet meals, and higher bathroom-to-pilgrim ratios.
+1. WHAT TO DO AFTER THE HAJJ 2027 REGISTRATION DEADLINE
+The latest supplied MoRA circular says Hajj 2027 primary registration closed on 24 September 2026 and stated that the deadline would not be extended. Check hajj.gov.bd for any later notice before taking action [1].
+- Step 1: If you registered: Keep your e-Hajj registration reference, payment receipt and signed bank registration certificate if issued. The supplied e-Hajj notice concerns a signed certificate after registration payment; read the notice and obtain the certificate required for your case [3].
+- Step 2: Check the passport condition: The supplied 2027 passport-relaxation notice discusses an exception for expired passports during primary registration, but its scope and passport-update deadline must be checked in the official notice before use. Do not assume an expired passport will be accepted or that a stated deadline applies to your case [2].
+- Step 3: If you missed registration: Do not assume registration is still open or pay an intermediary based on an old deadline or amount. Check the official portal for any new circular or reopening notice; the supplied sources do not establish a 2027 package price [1].
 
-5. MANDATORY ASHOKNA HAJJ CAMP & SAUDI VISA BIO STEPS
-All Bangladeshi Hajj pilgrims must complete their 10-fingerprint biometrics on the official Saudi Visa Bio App, obtain their Meningitis (ACWY-135) vaccination (conjugate = 5 years validity; polysaccharide = 3 years; take at least 10 days before departure) and are recommended to get seasonal Influenza vaccination at designated Civil Surgeon / Government Hospital centers. COVID-19 vaccination is **not mandatory** but may be **selectively advised** for those aged 65+, pregnant, or immunocompromised — verify current Saudi MOH requirements. Collect your Nusuk Hajj Smart Card—which is mandatory to board the Mashair train and enter the Haram courtyard during Hajj.`,
+2. GOVERNMENT-MANAGED VS. PRIVATE HAJJ ARRANGEMENTS
+The sources supplied for this update do not establish Hajj 2027 package prices for either arrangement. Do not treat any 2026 price, deposit, or claimed saving as a current 2027 quote.
+- Government-managed option: Use the current Ministry of Religious Affairs (MoRA) notice to confirm which 2027 package tiers are offered, their full prices, payment milestones, services, and conditions. Start from the official Haj Management Portal and follow its latest notice [1].
+- Private-agency option: Before paying, check the agency's authorization for the 2027 season through the official portal or current MoRA notice. Request a dated, itemized written offer and confirm how the pilgrim's registration and payment will be recorded in the official system [1]. Do not assume that labels such as “Economy,” “Classic,” or “VIP” mean the same services across agencies.
+- Compare like with like: Ask both providers to state the full payable total, deadlines and refund/cancellation terms; flight route and baggage; accommodation dates, location and room-sharing basis; transport, meals and pilgrim support; and every included or excluded service and extra fee. A package label alone does not prove hotel proximity, a shorter stay, a particular Mina tent, or better value.
+No matched 2027 offers are available in the supplied sources, so this guide cannot say which option costs less. Check the current notice and written offer before making a decision [1].
+3. “SHIFTING” AND “NON-SHIFTING” PACKAGE TERMS
+Some Hajj offers use the labels “shifting” and “non-shifting,” but the supplied sources do not establish a standard definition, a current 2027 service pattern, or a price difference. Do not rely on the old BDT 80,000–140,000 “saving” claim as a current or verified amount.
+Before booking, ask the provider—in writing:
+- Does the accommodation change during the trip? If so, list each property, location and stay dates, including where pilgrims stay during the Hajj days.
+- Who arranges and pays for each transfer, and how are luggage moves handled?
+- What room type and sharing basis are included at each property, and what extra charges or exclusions apply?
+- What are the cancellation, refund and change terms if an accommodation or transfer changes?
+Compare the written itinerary and total price for the same dates and services. Do not assume that “shifting” means a specific Aziziya stay, easier access to Jamarat, or a lower price; the provider's current offer and official season rules control.
+4. MINA & ARAFAT ACCOMMODATION: VERIFY THE CURRENT-SEASON DETAILS
+The sources supplied for this guide do not verify Hajj 2027 Maktab labels or assignments, camp locations, distances from Jamarat, or tent facilities. The older distance, cooling, bedding and meal claims below are not current 2027 guidance. Do not select a package based on them.
+Before paying, request a dated written offer that identifies:
+- the assigned camp, Maktab or zone, and the current-season notice or contract term supporting it;
+- the exact accommodation location and a map or route reference, rather than an unqualified distance claim;
+- which tent facilities and services are actually included, such as cooling, bedding, meals and toilets;
+- the transport arrangements, extra charges and what happens if the assigned accommodation changes.
+Check the current Bangladesh and Saudi Hajj-season instructions and ask the provider to put any promised location or facility in the contract. Do not assume a Maktab label by itself guarantees a particular distance, comfort level or service.
+5. HEALTH, BIOMETRICS, HAJJ PERMITS & NUSUK CARD: CHECK THE CURRENT SEASON
+Health, biometrics, visa, permit and card instructions can change by Hajj season and pilgrim category. The health source available for this review is the Saudi MOH 1447H/2026 document, and the permit and Nusuk Smart Card sources are 2026 announcements only [4–6]. They do not establish the rules for 1448H/2027. The former claims about mandatory 10-fingerprint Saudi Visa Bio enrollment, vaccine type/validity/timing, COVID status, or Smart Card access requirements for the Mashair train and Haram courtyard are not verified for 1448H; do not rely on them as current instructions [4–6].
+Before departure:
+- Check the Saudi MOH Hajj health document for the applicable season, including vaccine requirements, validity periods, timing and any category-specific conditions [4, 9].
+- Follow current Saudi Ministry/Nusuk and Bangladesh MoRA/e-Hajj instructions for Hajj visa biometrics, permits and any card or transport access requirements [1, 7–8]. Use Saudi Visa Bio only if the current official visa instructions for your application require it.
+- Save the current official notices and your own application instructions. Do not substitute an old-season PDF, agency brochure or general app listing for the applicable rule.`,
   "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": `Taking aging parents to Makkah and Madinah for Umrah is one of the most cherished dreams for Bangladeshi families. However, the physical reality of Umrah involves several kilometers of walking across vast marble plazas, navigating temperature shifts between intense outdoor heat and cooled prayer halls, and managing joint strain. With proper advance logistics, caregiver preparation, and knowledge of official accessibility services, you can protect your parents' dignity and physical health. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidelines, General Authority for the Care of the Two Holy Mosques accessibility services, and international airline special service request (SSR) regulations.
 
 1. Airline Wheelchair Assistance (WCHR / WCHS) and Airport Transit

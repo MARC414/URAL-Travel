@@ -286,7 +286,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/hajj-registration-bangladesh-government-vs-private-package-cost": {
     title: "Hajj Registration in Bangladesh: Process & Packages | URAL",
     description:
-      "Review Bangladesh Hajj registration steps, the official portal and package-planning considerations. Confirm current-season instructions with the ministry.",
+      "Hajj 2027 registration from Bangladesh: the supplied MoRA notice lists a 24 September 2026 cutoff. Check hajj.gov.bd for later notices; 2027 package prices were not established in the supplied sources.",
   },
   "/blog/dual-currency-card-endorsement-bangladesh": {
     title: "Dual-Currency Card Endorsement in Bangladesh | URAL",

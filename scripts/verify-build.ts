@@ -2114,6 +2114,8 @@ if (rss) {
   const truncatedPrerenders: string[] = [];
   const umrahBudgetSlug = "umrah-hajj-guide-bangladesh-nusuk-bdt-cost";
   const umrahBudgetMarker = "[[UMRAH_BUDGET_TABLE]]";
+  const hajjResourceSlug = "hajj-registration-bangladesh-government-vs-private-package-cost";
+  const hajjResourceMarker = "[[HAJJ_RESOURCE_DOWNLOAD]]";
   for (const [slug, body] of Object.entries(BLOG_BODY)) {
     const html = read(path.join(DIST_DIR, "blog", `${slug}.html`));
     if (!html) {
@@ -2128,6 +2130,9 @@ if (rss) {
       .filter((para) => para !== "[[figure]]")
       .filter(
         (para) => !(slug === umrahBudgetSlug && para === umrahBudgetMarker)
+      )
+      .filter(
+        (para) => !(slug === hajjResourceSlug && para === hajjResourceMarker)
       )
       .filter((para) => !getVisibleBlogFaqSection(slug, para, "en"));
     const missing = paragraphs.filter((para) => !page.includes(normalise(para)));
@@ -2145,6 +2150,41 @@ if (rss) {
       ? `every blog paragraph survives into its prerendered HTML (${BLOG_DATA.length} articles, full text)`
       : `${truncatedPrerenders.length} prerendered blog page(s) are missing body text: ` +
           `${truncatedPrerenders.slice(0, 3).join(", ")} — Google would index a truncated article`
+  );
+
+  const hajjEnglishPage =
+    read(path.join(DIST_DIR, "blog", `${hajjResourceSlug}.html`)) ?? "";
+  const hajjBengaliPage =
+    read(path.join(DIST_DIR, "bn", "blog", `${hajjResourceSlug}.html`)) ?? "";
+  const hajjDownloadPath = "/downloads/ural-hajj-preparation-checklist-2027-en.pdf";
+  const hajjDownloadName = "ural-hajj-preparation-checklist-2027-en.pdf";
+  const hajjDownloadAsset = path.join(DIST_DIR, "downloads", hajjDownloadName);
+  const hajjDownloadIsInPosition = (html: string, answer: string, card: string, warning: string) => {
+    const answerAt = html.indexOf(answer);
+    const cardAt = html.indexOf(card);
+    const warningAt = html.indexOf(warning);
+    return (
+      answerAt >= 0 && cardAt > answerAt && warningAt > cardAt &&
+      html.includes(`href="${hajjDownloadPath}" download="${hajjDownloadName}"`) &&
+      !html.includes(hajjResourceMarker)
+    );
+  };
+  check(
+    hajjDownloadIsInPosition(
+      hajjEnglishPage,
+      "Quick answer — The latest MoRA 2027 notice",
+      "URAL’s Hajj preparation checklist",
+      "Season note: The supplied sources do not establish"
+    ) &&
+      hajjDownloadIsInPosition(
+        hajjBengaliPage,
+        "দ্রুত উত্তর — এই গাইডের জন্য দেওয়া সর্বশেষ MoRA",
+        "URAL-এর Hajj প্রস্তুতি চেকলিস্ট",
+        "মৌসুম-সংক্রান্ত সতর্কতা:"
+      ) &&
+      fs.existsSync(hajjDownloadAsset) &&
+      fs.statSync(hajjDownloadAsset).size > 1000,
+    "the bilingual Hajj checklist download renders below the current-season answer and the PDF is present in dist"
   );
 
   const umrahEnglishPage =

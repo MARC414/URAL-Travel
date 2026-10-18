@@ -188,6 +188,8 @@ function renderVisibleFaqHtml(
 
 const UMRAH_GUIDE_SLUG = "umrah-hajj-guide-bangladesh-nusuk-bdt-cost";
 const UMRAH_BUDGET_TABLE_MARKER = "[[UMRAH_BUDGET_TABLE]]";
+const HAJJ_RESOURCE_DOWNLOAD_MARKER = "[[HAJJ_RESOURCE_DOWNLOAD]]";
+const HAJJ_RESOURCE_DOWNLOAD_SLUG = "hajj-registration-bangladesh-government-vs-private-package-cost";
 
 function renderUmrahBudgetTableHtml(locale: "en" | "bn"): string {
   const isBengali = locale === "bn";
@@ -222,6 +224,33 @@ function renderUmrahBudgetTableHtml(locale: "en" | "bn"): string {
       ? "একই তারিখ, সময়কাল, room occupancy, flight ও অন্তর্ভুক্ত সেবা ধরে itemized quote ছাড়া সাশ্রয় অনুমান করা যাবে না।"
       : "Do not infer savings without an itemized quote on the same dates, duration, room occupancy, flight and inclusions."
   }</td></tr></tbody></table></div></section>`;
+}
+
+function renderHajjResourceDownloadHtml(locale: "en" | "bn"): string {
+  const isBengali = locale === "bn";
+  const heading = isBengali
+    ? "URAL-এর Hajj প্রস্তুতি চেকলিস্ট"
+    : "URAL’s Hajj preparation checklist";
+  const description = isBengali
+    ? "২ পৃষ্ঠার সহায়ক চেকলিস্ট। এটি URAL-এর সম্পাদনামূলক রিসোর্স—সরকারি ফর্ম নয়। মৌসুমভিত্তিক নিয়ম, দাম ও স্বাস্থ্য-নির্দেশনা hajj.gov.bd এবং সংশ্লিষ্ট সরকারি নোটিশে মিলিয়ে নিন।"
+    : "A two-page planning aid. This is a URAL editorial resource, not a government form. Confirm season-specific rules, prices and health requirements against hajj.gov.bd and the relevant official notices.";
+  const button = isBengali ? "PDF ডাউনলোড করুন" : "Download the PDF";
+  const ariaLabel = isBengali
+    ? "ইংরেজি ভাষার URAL Hajj প্রস্তুতি চেকলিস্ট PDF ডাউনলোড করুন"
+    : "Download URAL’s English Hajj preparation checklist PDF";
+  return `<section class="my-5 rounded-2xl border border-emerald-300 bg-emerald-50 p-5 shadow-sm" aria-label="${
+    isBengali ? "হজ প্রস্তুতির ডাউনলোড" : "Hajj preparation download"
+  }"><p class="mb-1 text-xs font-bold uppercase tracking-wide text-emerald-900">${
+    isBengali ? "ডাউনলোড রিসোর্স · ইংরেজি PDF" : "Download resource · English PDF"
+  }</p><h2 class="font-serif text-lg font-bold leading-snug text-brand-navy">${escapeHtml(
+    heading
+  )}</h2><p class="mt-2 text-sm leading-relaxed text-slate-700">${escapeHtml(
+    description
+  )}</p><a href="/downloads/ural-hajj-preparation-checklist-2027-en.pdf" download="ural-hajj-preparation-checklist-2027-en.pdf" aria-label="${escapeHtml(
+    ariaLabel
+  )}" class="mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-brand-navy px-4 py-2.5 text-sm font-bold text-white">${escapeHtml(
+    button
+  )}</a></section>`;
 }
 
 function renderArticleReferencesHtml(
@@ -2209,6 +2238,9 @@ function buildAllRoutes(): PrerenderRoute[] {
               if (post.slug === UMRAH_GUIDE_SLUG && trimmedPara === UMRAH_BUDGET_TABLE_MARKER) {
                 return renderUmrahBudgetTableHtml("en");
               }
+              if (post.slug === HAJJ_RESOURCE_DOWNLOAD_SLUG && trimmedPara === HAJJ_RESOURCE_DOWNLOAD_MARKER) {
+                return renderHajjResourceDownloadHtml("en");
+              }
               const faqSection = getVisibleBlogFaqSection(post.slug, trimmedPara, "en");
               if (faqSection) return renderVisibleFaqHtml(faqSection);
               if (trimmedPara === "[[figure]]") {
@@ -2382,6 +2414,12 @@ function bnParagraphs(
         rawParagraph.trim() === UMRAH_BUDGET_TABLE_MARKER
       ) {
         return renderUmrahBudgetTableHtml("bn");
+      }
+      if (
+        slug === HAJJ_RESOURCE_DOWNLOAD_SLUG &&
+        rawParagraph.trim() === HAJJ_RESOURCE_DOWNLOAD_MARKER
+      ) {
+        return renderHajjResourceDownloadHtml("bn");
       }
       const faqSection = getVisibleBlogFaqSection(slug || "", rawParagraph, "bn");
       if (faqSection) return renderVisibleFaqHtml(faqSection);
