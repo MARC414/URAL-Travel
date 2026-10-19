@@ -113,3 +113,16 @@ permission is not all-route/age eligibility or personal religious/clinical advic
 review, actual route/booking/childcare and release gates remain. Six core pairs plus Hajj remain; hub gate separate.
 No main health/visa boundary changed and no reviewed revision deployed. Next independent agent-owned asset:
 older travellers/elderly parents. The closure register is current progress; earlier checkpoint counts are historical.
+
+
+## Subsequent older-traveller checkpoint — 19 October 2026
+
+`ELDERLY-UMRAH-SOURCE-REVIEW.md` records the seventh revised/tested core EN/BN pair: 20 targeted tests, nine specific
+primary references, five point-of-action cautions, one four-step airline-request HowTo and seven FAQs; **291 build
+checks**. The universal free-airport-service and gate-delivery claims are replaced by per-carrier confirmation;
+the fixed Haram level/gate map is replaced by the published service points and the Tanaqol platform; the hotel
+ranking and Madinah northern-cluster promise are replaced by a property questionnaire; and the fixed medicine days,
+insulin storage and Haram air-conditioning premise are replaced by attributed Ministry guidance with 1448H recorded
+as unverified. Seven core pairs done; five plus adjacent Hajj remain; hub and release gates are separate. No main
+health or visa boundary changed and no reviewed revision deployed. Next independent agent-owned asset: Ihram/Miqat.
+The closure register is current progress; earlier checkpoint counts are historical.

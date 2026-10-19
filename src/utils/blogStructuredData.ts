@@ -45,8 +45,8 @@ const BLOG_FAQ_CONFIGS: Record<
     bn: /^\s*৭\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
   "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
-    en: /^\s*5\.\s*Frequently Asked Questions\s*$/i,
-    bn: /^\s*৫\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+    en: /^\s*6\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৬\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
   "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": {
     en: /^\s*5\.\s*Frequently Asked Questions\s*$/i,
@@ -176,6 +176,21 @@ const HOW_TO_CONFIGS: Record<string, BlogHowToConfig[]> = {
       start: /^৩\.\s*নারীরা RAWDAH APPOINTMENT/,
       end: /^৪\.\s*নারীদের ইহরামের পোশাক/,
       name: "নিজের booking instruction অনুযায়ী নারীদের Rawdah appointment-এর প্রস্তুতি",
+      parseStep: bengaliNumberedStep,
+    },
+  }],
+  "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": [{
+    idSuffix: "howto-elderly-airline-assistance",
+    en: {
+      start: /^1\.\s*WHAT CAN THE AIRLINE ARRANGE/i,
+      end: /^2\.\s*CAN YOU BRING YOUR OWN WHEELCHAIR/i,
+      name: "How to request airline wheelchair assistance for an elderly parent from Bangladesh",
+      parseStep: englishNumberedStep,
+    },
+    bn: {
+      start: /^১\.\s*এয়ারলাইন কী ব্যবস্থা করতে পারে/,
+      end: /^২\.\s*নিজের হুইলচেয়ার/,
+      name: "বাংলাদেশ থেকে বয়স্ক বাবা-মার জন্য এয়ারলাইন হুইলচেয়ার সহায়তা চাওয়ার ধাপ",
       parseStep: bengaliNumberedStep,
     },
   }],

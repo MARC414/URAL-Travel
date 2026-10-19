@@ -859,3 +859,40 @@ passed (107 EN +107 BN routes), including twelve omitted-warning controls and ei
 live application/slot, personal fatwa/medical review, inspected route, care booking, ride, visual QA or deployment.
 Current progress 6/12 core pairs by article-review count only; six core plus adjacent Hajj remain, alongside hub/
 qualified-review/release gates. Next independent agent-owned asset: older travellers/elderly parents.
+
+### 2026-10-19 — independent older-traveller / elderly-parents Umrah EN/BN revision
+
+Owner selected the next existing pair; no new URL. `ELDERLY-UMRAH-SOURCE-REVIEW.md` holds the pre-edit audit, the
+claim ledger, the nine opened pages and the retrieval failures. The prior "checked against official guidelines"
+sentence was not evidence: its three references were homepages and `gacr.gov.sa` did not resolve.
+
+Removed or corrected: the universal "no additional airline fee across major scheduled carriers departing DAC"
+statement; the general "airlines carry personal wheelchairs free" rule; the promised return "at the aircraft door";
+the fixed first-floor/mezzanine Haram circuit and the two-gate entrance map; the Nusuk/Tanaqol booking conflation;
+the Jabal Omar / lower Ibrahim Al-Khalil / Clock Tower zero-incline ranking and the 400 m comparison; the Madinah
+level-plaza and northern women's-cluster promise; the 20-day medicine supply, insulin cold-chain instruction,
+mini-fridge requirement, Haram air-conditioning premise and ORS/lubricant list; and the "never wait in taxi queues"
+transfer promise.
+
+Attributed and added: Saudia's free carriage of wheelchairs and up to two mobility items, hold carriage and return
+"according to airport procedures"; the POC sequence (48-hour statement, three-hour check-in, two spare cabin
+batteries); WCHC alongside WCHR/WCHS, with the weight request and companion expectation; Biman's mandatory
+booking-time request, contacts and 48-hour recommendation; the Ministry's own-wheelchair permission through
+designated entrances and its general health guidance (physician check, vaccinations, adequate supply, medical report,
+glucose monitor); the authority's free manual wheelchairs, paid ground-Sa'i service and Tanaqol platform; the March
+2025 end of manual cart booking, over-65 online recommendation, service-point fallback and free direct access for
+people with disabilities; Nusuk and Tanaqol as different services; and 1448H health requirements recorded as
+unverified.
+
+Nine specific primary references replace three homepages; five curated links per locale (hotel/rail, main DIY, Nusuk,
+Ihram, `/umrah`); five immediate accessible cautions (`elderlyAirline`, `elderlyEquipment`, `elderlyHaram`,
+`elderlyHotel`, `elderlyHealth`); one four-step administrative airline-request HowTo; seven visible/schema FAQs.
+Original publication 27 Sep, author and slug retained; update 19 Oct inherited by BN. The generic TravelIntelligence
+panel is suppressed for this reviewed slug; its independent positive-control fixture is unchanged.
+
+Elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25 passed;
+scheduling/sitemap 23 negative controls, lint, build and **291 build checks** passed (107 EN + 107 BN routes),
+including sixteen older-traveller output/caution controls and seven retired-claim fixtures. No airline, cart,
+property, route or booking was tested; no visual QA, deployment or live check. Current progress **7/12 core pairs**
+by article-review count only; five core plus adjacent Hajj remain, alongside hub, qualified-review and release
+gates. Next independent agent-owned asset: Ihram/Miqat.

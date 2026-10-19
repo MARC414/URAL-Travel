@@ -23,7 +23,8 @@
     "test:stopover-guide": "tsx scripts/test-stopover-guide.ts",
     "test:hotel-rail-guide": "tsx scripts/test-hotel-rail-guide.ts",
     "test:flight-strategy": "tsx scripts/test-flight-strategy.ts",
-    "test:women-umrah-guide": "tsx scripts/test-women-umrah-guide.ts"
+    "test:women-umrah-guide": "tsx scripts/test-women-umrah-guide.ts",
+    "test:elderly-umrah-guide": "tsx scripts/test-elderly-umrah-guide.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",

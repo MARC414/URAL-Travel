@@ -10,8 +10,14 @@
 records the sixth source-reviewed core EN/BN revision after main, Nusuk, stopover, hotel/rail and flights. **6/12 core
 pairs** revised/tested by article count only; six remain, plus adjacent Hajj. This is not weighted effort or release
 completion. Hub mechanism is separate from a full fresh hub audit; no reviewed revision deployed in this session.
-Next independent asset: older travellers/elderly parents. Current validation: 275 build checks; personal eligibility,
+Current validation: 275 build checks at that checkpoint; personal eligibility,
 actual access/booking, qualified religious review and visual/approval/release gates remain in the closure register.
+
+**19 October older-traveller follow-up:** [`ELDERLY-UMRAH-SOURCE-REVIEW.md`](ELDERLY-UMRAH-SOURCE-REVIEW.md) records
+the seventh source-reviewed core EN/BN revision. **7/12 core pairs** revised/tested by article count only; five core
+pairs plus adjacent Hajj remain. Carrier charges and approval, cart booking/level, property routes and clinical
+fitness are not resolved by the revision. Current validation: 20 older-traveller tests, **291 build checks**;
+visual, approval and release gates remain separate. Next independent agent-owned asset: Ihram/Miqat.
 
 **Use with:** [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md), [`SEO-KEYWORD-MAP.md`](../../SEO-KEYWORD-MAP.md), [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md), [`CONTENT-OS.md`](CONTENT-OS.md), and [`AI-WRITING-PROMPTS.md`](AI-WRITING-PROMPTS.md).
 

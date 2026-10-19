@@ -364,9 +364,9 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Compare exact Makkah/Madinah rooms and access routes; check HHR baggage, basic fares, transfers and ticket conditions before booking.",
   },
   "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
-    title: "Umrah with Elderly Parents: Wheelchair & Hotel Guide | URAL",
+    title: "Umrah with Elderly Parents: Wheelchair & Mobility Guide | URAL",
     description:
-      "Plan a smooth Umrah from Bangladesh with elderly parents: airline wheelchair requests, flat-street Makkah and Madinah hotels, electric carts and medical tips.",
+      "Request airline wheelchair help at booking, check device approval, use the Grand Mosque's free wheelchairs or Tanaqol carts, and verify the actual hotel route.",
   },
   "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": {
     title: "96-Hour Saudi Stopover Visa for Bangladeshis | URAL",

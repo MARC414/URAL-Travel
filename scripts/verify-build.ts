@@ -4800,6 +4800,63 @@ check(womenClaimSurfaces.every((surface) => surface && !WOMEN_RETIRED_CLAIMS.tes
 check(["women of any age may apply", "Gates 25–29", "Gates 21 through 26", "direct, flat, step-free access", "soft visor cap", "about one inch or 2.5 cm", "এশার পর থেকে মধ্যরাত", "vetted door-to-door"].every((fixture) => WOMEN_RETIRED_CLAIMS.test(fixture)),
   "women-specific retired-claim guard rejects all eight reintroduced civil/access/religious/supplier claims (negative controls)");
 
+// Older-traveller guide: airline assistance, equipment approval, Haram mobility, hotel route and clinical care
+// are separate gates. Ledger: docs/growth/ELDERLY-UMRAH-SOURCE-REVIEW.md (2026-10-19).
+const ELDERLY_UMRAH_SLUG = "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide";
+const ELDERLY_NOTE_KEYS = ["elderlyAirline", "elderlyEquipment", "elderlyHaram", "elderlyHotel", "elderlyHealth"];
+const ELDERLY_RETIRED_CLAIMS = /no additional airline fee across|without an additional airline fee|free of charge across major scheduled carriers|returned to you at the aircraft door|zero-incline|zero incline|400-meter|400 m walk|20-day supply|mezzanine circuit|single-passenger and double-passenger|serialized, government-issued vests|Nusuk\/Tanaqol|Nusuk or Tanaqol|air conditioning inside Masjid al-Haram|হুইলচেয়ার ফ্রি|৪০০ মিটার|৫ তলা|জিরো-ইনক্লাইন|২০ দিনের|মেজানাইন|সিরিয়ালযুক্ত ভেস্ট|Nusuk বা Tanaqol/i;
+const elderlyClaimSurfaces: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  const html = read(path.join(DIST_DIR, ...(locale === "bn" ? ["bn"] : []), "blog", `${ELDERLY_UMRAH_SLUG}.html`)) ?? "";
+  const post = getLocalizedBlogs(locale).find((entry) => entry.slug === ELDERLY_UMRAH_SLUG);
+  const body = locale === "en" ? BLOG_BODY[ELDERLY_UMRAH_SLUG] : post?.content ?? "";
+  const text = normalizeStructuredText(html);
+  elderlyClaimSurfaces.push(body, post?.title ?? "", post?.summary ?? "", JSON.stringify(post?.affiliateCTA), text);
+  const graph = getSeoSchemaGraph(html);
+  const procedures = graph.filter((node) => hasSchemaType(node, "HowTo"));
+  const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
+  const notes = body.split(/\n{2,}/).map(getTravellerCheck).filter((note) => note !== null);
+  const cautionPresent = (candidate: string, key: string) => {
+    const note = notes.find((entry) => entry.key === key);
+    return Boolean(note && candidate.includes(normalizeStructuredText(note.title)) && candidate.includes(normalizeStructuredText(note.text)));
+  };
+  check(
+    post?.updatedAt === "2026-10-19" && post.references?.length === 9 &&
+      post.references.every((reference) => html.includes(reference.url.replace(/&/g, "&amp;")) || html.includes(reference.url)) &&
+      procedures.length === 1 && procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${ELDERLY_UMRAH_SLUG}#howto-elderly-airline-assistance` &&
+      Array.isArray(procedures[0].step) && procedures[0].step.length === 4 &&
+      Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 7 &&
+      notes.every((note) => !JSON.stringify(procedures).includes(note.text)),
+    `${locale} older-traveller output preserves nine sources, update, four airline steps and seven FAQs`
+  );
+  check(
+    [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((match) => match[1]).join(",") === ELDERLY_NOTE_KEYS.join(",") &&
+      ELDERLY_NOTE_KEYS.every((key) => cautionPresent(text, key)) &&
+      text.includes(locale === "en" ? "according to airport procedures" : "এয়ারপোর্টের প্রক্রিয়া অনুযায়ী") &&
+      text.includes(locale === "en" ? "Tanaqol" : "তানাকুল") &&
+      text.includes(locale === "en" ? "1448H" : "১৪৪৮হি.") &&
+      text.includes(locale === "en" ? "ask about any charge" : "চার্জ"),
+    `${locale} older-traveller output retains five complete cautions and carrier, cart and clinical limits`
+  );
+  for (const key of ELDERLY_NOTE_KEYS) {
+    const note = notes.find((entry) => entry.key === key);
+    check(Boolean(note) && !cautionPresent(text.replace(normalizeStructuredText(note!.text), ""), key),
+      `${locale} older-traveller caution guard rejects removed ${key} body (negative control)`);
+  }
+}
+check(elderlyClaimSurfaces.every((surface) => surface && !ELDERLY_RETIRED_CLAIMS.test(surface)),
+  "older-traveller EN/BN source, metadata and generated pages do not restore blanket free-service, gate-delivery, area or clinical claims");
+check([
+  "no additional airline fee across major scheduled carriers departing DAC",
+  "returned to you at the aircraft door upon arrival",
+  "Pack a minimum 20-day supply",
+  "nominal 400-meter walk",
+  "official electric mobility scooters on the mezzanine circuit",
+  "book slots via the official Nusuk/Tanaqol mobile platforms",
+  "serialized, government-issued vests",
+].every((fixture) => ELDERLY_RETIRED_CLAIMS.test(fixture)),
+  "older-traveller retired-claim guard rejects all seven reintroduction fixtures (negative controls)");
+
 // --- Wave 6: Zamzam & Customs Claims Guards (2026-10-17) ------------------
 // Guard against reintroducing the outdated SAR 9.50-12.50 Zamzam price range
 // (now 48 SAR per Nusuk 2026), unqualified "free" airline claims for Zamzam

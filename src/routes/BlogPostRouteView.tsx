@@ -368,7 +368,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                 {
 
-                  pattern: /\b(elderly parents|electric scooter|wheelchair assistance|বয়স্ক মা-বাবা|ইলেকট্রিক স্কুটার)\b/i,
+                  pattern: /\\b(elderly parents|wheelchair assistance|electric cart|golf cart|বয়স্ক মা-বাবা|ইলেকট্রিক কার্ট|গলফ কার্ট)\\b/i,
 
                   path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
 
@@ -1895,7 +1895,8 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                         activePost.slug !== "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" &&
                         activePost.slug !== "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" &&
                         activePost.slug !== "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" &&
-                        activePost.slug !== "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" && (
+                        activePost.slug !== "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" &&
+                        activePost.slug !== "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" && (
 
                         <TravelIntelligence
 

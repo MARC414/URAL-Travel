@@ -507,39 +507,97 @@ Before departure:
 - Check the Saudi MOH Hajj health document for the applicable season, including vaccine requirements, validity periods, timing and any category-specific conditions [4, 9].
 - Follow current Saudi Ministry/Nusuk and Bangladesh MoRA/e-Hajj instructions for Hajj visa biometrics, permits and any card or transport access requirements [1, 7–8]. Use Saudi Visa Bio only if the current official visa instructions for your application require it.
 - Save the current official notices and your own application instructions. Do not substitute an old-season PDF, agency brochure or general app listing for the applicable rule.`,
-  "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": `Taking aging parents to Makkah and Madinah for Umrah is one of the most cherished dreams for Bangladeshi families. However, the physical reality of Umrah involves several kilometers of walking across vast marble plazas, navigating temperature shifts between intense outdoor heat and cooled prayer halls, and managing joint strain. With proper advance logistics, caregiver preparation, and knowledge of official accessibility services, you can protect your parents' dignity and physical health. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidelines, General Authority for the Care of the Two Holy Mosques accessibility services, and international airline special service request (SSR) regulations.
+  "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": `This guide is for Bangladeshi families planning Umrah with an older parent or relative who is frail, uses a wheelchair or cannot walk long distances. Use it to separate three decisions that are often mixed together: what the airline can arrange, what the mosque authority publishes about on-site mobility, and what only your clinician, the property and the staff on the day can answer. It is not a medical clearance, a tested booking or an inspected route.
 
-1. Airline Wheelchair Assistance (WCHR / WCHS) and Airport Transit
-Never rely on finding an unreserved wheelchair at the airport on your departure day:
-- **Requesting Special Service Codes in Advance:** Airlines designate mobility assistance under standardized IATA Special Service Request (SSR) codes. The most common is **WCHR** (Wheelchair for Ramp/Distance, for passengers who can climb aircraft stairs and walk to their seat but cannot walk long concourse distances) and **WCHS** (Wheelchair for Steps, for passengers who cannot ascend or descend aircraft stairs but can walk inside the cabin). Add this request through your airline's official website manage-booking portal or issuing travel desk at least 48 hours before departure [1][2]. The service is provided without an additional airline fee across major scheduled carriers departing Hazrat Shahjalal International Airport (DAC) [1].
-- **Bringing a Personal Foldable Wheelchair:** Airlines transport personal manual wheelchairs free of charge outside your standard checked luggage allowance [1]. You can use your own wheelchair through check-in and security up to the boarding gate, where ground staff will gate-check it into the aircraft hold and return it to you at the aircraft door upon arrival in Jeddah (JED) or Madinah (MED). A lightweight folding wheelchair ensures seamless transport from your hotel room straight to the Haram courtyards for every prayer.
+Quick Answer — Checked 19 October 2026: request airline assistance when you book, not at the airport. Biman says the request is mandatory at booking and recommends at least 48 hours; Saudia publishes free wheelchair assistance and free carriage of wheelchairs and up to two mobility items on its own flights, and sets out the WCHR, WCHS and WCHC categories. Inside the Grand Mosque the authority publishes free manual wheelchairs in designated areas and paid electric carts booked through its Tanaqol platform; people with disabilities can use cart service points free of charge. None of that is a personal approval, a free service on every carrier, or a step-free hotel route. [1–9]
 
-2. Mobility inside Masjid al-Haram: Wheelchairs, Electric Scooters & Tanaqol
-Masjid al-Haram provides dedicated multi-level facilities for pilgrims requiring mobility assistance during Tawaf and Sa'i:
-- **Personal & Manual Push Wheelchairs:** Family members pushing a personal wheelchair can access dedicated wheelchair corridors on the upper levels (First Floor Wheelchair Mataf track and the designated Sa'i wheelchair lanes) [3]. This keeps senior pilgrims away from the dense pedestrian compression of the ground-level Mataf.
-- **Official Electric Mobility Scooters (Mezzanine Level):** The General Authority provides official electric mobility scooters operating on a dedicated mezzanine circuit accessible via elevators and designated ramps (such as King Abdulaziz Gate and Ajyad Bridge entries) [3]. Both single-seat and two-seat electric scooters are available, enabling an adult child to accompany an elderly parent and steer the scooter via intuitive hand controls. Rental rates are set by the operating authority and displayed at the official dispatch counters; confirm live fees and book slots via the official Nusuk/Tanaqol mobile platforms before peak hours [2][3].
-- **Licensed Wheelchair Attendants:** If family members cannot push a manual wheelchair due to physical exhaustion, only engage official licensed attendants wearing serialized, government-issued vests inside the mosque [3]. Never contract unofficial individuals outside the mosque gates.
+1. WHAT CAN THE AIRLINE ARRANGE — AND WHAT DOES THE CODE NOT GUARANTEE?
+Start with what your parent can actually do, because the category decides the help. Saudia publishes three: WCHR for a passenger who can climb stairs but cannot walk long distances, WCHS for a passenger who cannot manage aircraft stairs but can walk in the cabin, and WCHC for a passenger who cannot walk at all. For WCHC it asks for the passenger's weight and expects an accompanying person seated nearby. Each carrier applies the codes on its own special-assistance form, so describe the need in words as well. [2]
 
-3. Accommodation Logistics: Flat-Street Access and Avoiding Elevation
-Choosing the right hotel location is the single most critical factor in preventing senior knee strain and exhaustion:
-- **Prioritize Flat, Zero-Incline Corridors:** In Makkah, look for properties situated along flat, direct access routes such as Jabal Omar, the lower section of Ibrahim Al-Khalil Road, or the Clock Tower complex with direct elevator connectivity to the western and southern plaza levels. Strictly avoid hotels located on steep hillside gradients (such as elevated sections of Upper Ajyad or hilly roads in Jabal Kaaba), where a nominal 400-meter walk involves severe cardiovascular and joint exertion.
-- **Madinah Proximity to Senior Entrances:** In Madinah, the surrounding plaza of Masjid an-Nabawi is level and paved. However, because women's prayer sectors and Rawdah assembly points are concentrated on the northern side, accommodations located in Markazia North (Northern Central Area) eliminate exhausting perimeter walks for elderly mothers [3]. Always confirm with the property beforehand whether their entrance features step-free ramp access and functioning elevator banks adequate for wheelchairs.
+Ask at booking. Biman states that informing it at booking is mandatory, publishes a wheelchair email address and phone line, and recommends making the request at least 48 hours before departure; it also warns that a wheelchair requested only at the airport is subject to availability. Saudia's special-assistance text asks for 48 hours' advance warning for a powered wheelchair and for two pieces of mobility equipment, subject to space and dangerous-goods rules. Treat 48 hours as a floor, not a guarantee: ask the specific carrier whether it needs longer. [1][2][3]
 
-4. Medical Preparation, Prescription Rules & Heat Care
-Managing chronic conditions during travel requires strict medication discipline:
-- **Prescription Carry Rules:** Pack a minimum 20-day supply of all maintenance medications (for hypertension, diabetes, cardiac conditions, or arthritis) in their original pharmaceutical packaging inside carry-on luggage. Carry a signed English medical summary and prescription from a registered physician in Bangladesh detailing the generic names and dosages to present at airport security or customs if inspected [1].
-- **Insulin & Cold-Chain Storage:** If an elderly parent uses insulin, carry insulin pens in certified cooling travel pouches or insulated vacuum flasks with chilled gel packs. Avoid putting insulin in checked baggage where aircraft hold temperatures risk freezing the medication. Confirm that your hotel room includes a functioning in-room mini-fridge for insulin storage upon arrival.
-- **Temperature & Hydration Management:** While ambient outdoor temperatures in Makkah can be very warm, air conditioning inside Masjid al-Haram, hotel lobbies, and the Haramain High-Speed Train is kept at cool temperatures. Pack lightweight cardigans or shawls, orthopedic supportive footwear, oral rehydration salts (ORS), and unperfumed skin lubricants to prevent chafing during Ihram.
+A code in a booking is not a confirmed service at every airport. It has to reach each operating carrier and each station in the itinerary, including a connection. Get the confirmation in writing, keep it with the ticket, and recheck it a few days before departure and again at check-in. Arrive early: Saudia's wheelchair page asks passengers using the service to be at the airport two hours before departure and at the gate before boarding begins. [2]
 
-5. Frequently Asked Questions
-How do I book an airline wheelchair for elderly parents from Dhaka?
-Contact your operating airline or add a Special Service Request (SSR code WCHR or WCHS) in your online booking management portal at least 48 hours prior to scheduled departure [1]. The service provides wheelchair transit from DAC check-in through departure gates and upon arrival at Jeddah or Madinah [1].
-Can we bring our own wheelchair to Makkah and Madinah?
-Yes. Airlines carry personal manual folding wheelchairs free of charge in addition to your ticketed baggage allowance [1]. You can push the wheelchair through airport concourses up to the boarding gate, and use it freely throughout your hotel stay and the Haram courtyards [3].
-Are electric scooters available for Tawaf and Sa'i in Makkah?
-Yes. Official electric mobility scooters are operated on the dedicated Mezzanine level of Masjid al-Haram [3]. Both single-passenger and double-passenger scooters are available; book and verify operating procedures via the official Nusuk or Tanaqol application [2][3].
-What medical documents should seniors carry from Bangladesh?
-Bring original medication packaging in carry-on bags accompanied by an English prescription or medical letter signed by a registered physician stating the patient's chronic diagnoses and prescribed generic medications [1].`,
+Step 1: Describe the help your parent needs in plain words.
+Say whether they can walk to the seat, manage aircraft stairs, or cannot walk at all. Ask the carrier which category it will record and whether it requires a medical form or a companion. [2]
+
+Step 2: Add the request when you book and keep the confirmation.
+Use the carrier's own booking channel, or its published special-assistance contacts. Capture the reference, the flight segments covered and any charge in writing. [2][3]
+
+Step 3: Check every operating carrier and every airport in the itinerary.
+A return ticket can involve two carriers and a transit point. Ask each one to confirm the assistance and the handover, including who provides the wheelchair at the transit airport. [2]
+
+Step 4: Reconfirm before departure and arrive early.
+Call or check the booking before you fly, then present yourselves at the special-assistance desk at check-in. Leave time for the walk, security and the gate. [2]
+
+Traveller check (elderlyAirline): Before you pay, ask the operating carrier to confirm the category, the flight segments covered, any charge, the handover point and whether a companion or medical form is required. Keep the written confirmation with the ticket. A code on a booking, an agent's assurance or a website's general promise is not confirmation for your parent's flights. Do not send passport scans or medical records to URAL or in public chat.
+
+2. CAN YOU BRING YOUR OWN WHEELCHAIR OR MOBILITY DEVICE?
+Saudia publishes that wheelchairs and crutches are carried free of charge, and that up to two pieces of mobility equipment, including an electric wheelchair, are accepted in addition to the free checked allowance. It also says these aids are normally carried in the hold, handed over before boarding and returned on arrival according to airport procedures. That is Saudia's published rule for its own flights, not a universal airline entitlement. [1]
+
+The return point is the part families most often get wrong. This review found no basis for promising that the wheelchair comes back at the aircraft door. Depending on the airport and ground handler it may be returned at the gate or on the baggage belt. Ask at check-in where it will be handed over and where it will be returned, and plan the arrival transfer for the slower case. [1]
+
+Powered wheelchairs, batteries, oxygen concentrators and other devices are separate approvals. Saudia, for example, lists approved portable oxygen concentrator models, requires the physician's statement at least 48 hours before departure and check-in at least three hours before, and allows a maximum of two spare batteries in the cabin. Do not assume that every battery type, device or airline is accepted on the same terms. [1]
+
+Your own wheelchair and the airline's airport wheelchair are different services. A personal wheelchair is useful in the hotel and the mosque courtyards, but it does not replace the assistance the airline provides to the gate. The Ministry of Hajj and Umrah says a pilgrim may bring a wheelchair to the Grand Mosque and use it, provided they enter through the places designated for wheelchairs. [4]
+
+Traveller check (elderlyEquipment): Confirm the device, its battery type and its dimensions with the operating carrier before the ticket becomes non-refundable, and keep the approval with the medical documents. A folded wheelchair, a powered wheelchair and a portable oxygen concentrator are not interchangeable approvals. Check the return point at the arrival airport and make sure your transfer can carry the folded chair. This page does not certify any device for any flight.
+
+3. WHAT MOBILITY HELP IS AVAILABLE INSIDE THE GRAND MOSQUE?
+The authority publishes a free manual wheelchair service in designated areas; its announcements describe the service as operating around the clock. Its service page names the eastern square at Bab Al-Salam (Gate 19) and the western square at Al-Shubika, and lists a separate paid manual service at the ground Sa'i (Gate 14). The Saudi Press Agency has reported the western gate number differently, so treat printed numbers as a starting point and follow current signs and identified staff. [5][6][8][9]
+
+Electric carts moved to electronic booking. In March 2025 the authority discontinued manual golf-cart booking and required reservations through its transport platform, Tanaqol. The same notice recommends online booking for visitors over 65, keeps service points for those who cannot book, and says people with disabilities can go directly to cart service points free of charge without an online reservation. Arrive on time with your ticket and ID. [6]
+
+Tanaqol is the authority's mobility platform for carts. Nusuk, run by the Ministry, is where Umrah and Rawdah permits are handled; they are different services. Do not assume that a Nusuk permit books a cart, or that a cart booking creates a permit. [4][6][9]
+
+The published 2024 pickup points for electric vehicles were Al-Marwah Gate 25, Al-Arqam Gate 16, Ajyad Gate 5 and Al-Shubika Gate 66. Seating and who may ride or drive are set by the operator, so ask at the service point rather than assuming a companion can ride or steer. [9]
+
+Use the official service points. The authority publishes a licensed wheelchair-assistant function and reported in 2026 that it had trained thousands of wheelchair service providers. Accept help at the counters and from identified staff; decline offers made outside the gates. [5][7]
+
+Traveller check (elderlyHaram): Check the current service point, level and opening arrangement on the day, in the app or with staff. A published gate number, a screenshot or last season's route is not today's arrangement. Keep the group together at the handover point and agree what happens if the cart queue is long. Do not buy a "guaranteed" slot from anyone outside the official service.
+
+4. HOW DO YOU CHOOSE A HOTEL AND THE ACTUAL ROUTE?
+An area name is not an accessibility guarantee. "Near the Haram", "Clock Tower", "Jabal Omar" or "Markazia North" are search labels; none of them proves a step-free door, a working lift or a short walk. The distance from a lobby to the entrance you will actually use, at the time you will walk, is the fact that matters.
+
+Ask the property specific questions and keep the answers in writing:
+- Which entrance will we use, and is there a step, ramp or kerb at that door?
+- How wide is the lift, is it working for our dates, and is the room on a low floor near it?
+- What is the route to the mosque entrance, including crossings, slopes, barriers and any temporary closure?
+- What is the return route after dark, and where can we wait if the courtyard is crowded?
+- Does the bathroom have a step, a grab rail or a walk-in shower?
+
+In Madinah, the mosque has many gates and prayer areas. A hotel described as "north" is not automatically the closest to an elderly woman's prayer area or to a Rawdah reporting point. The women's guide owns women's prayer and appointment detail; the hotel and Haramain guide owns the property, station and rail questions. [4]
+
+For the Haramain High-Speed Rail, check the actual station, platform, lift, luggage rules and transfer at both ends; the published rail limits are recorded in the hotel and rail guide. A short rail journey is not automatically easier than a road transfer for a parent who cannot stand for long.
+
+Traveller check (elderlyHotel): Confirm the exact entrance, room, lift and return route with the property for your dates, and keep it in writing. Do not accept "near the Haram" or an area name as an access promise. A transfer or hotel booking does not establish wheelchair access to the mosque, and no room, route or shuttle was inspected for this page.
+
+5. WHAT HEALTH PREPARATION BELONGS WITH A CLINICIAN?
+The Ministry of Hajj and Umrah advises pilgrims to consult a physician before travel to confirm that the health condition is stable and the person is physically able to perform the rituals; to receive required vaccinations well in advance, especially older people and those with chronic disease; to bring an adequate supply of medication; and to carry a medical report listing conditions, medicines and dosages. It also advises diabetic pilgrims to bring their own glucose monitor and to move periodically on long journeys. [4]
+
+That is general pilgrimage guidance, not a fitness certificate for your parent. How much medicine to carry, whether a medicine is controlled in Saudi Arabia, whether a device may be used in the cabin, how insulin must be stored, and whether your parent should travel at all are decisions for the prescriber and the carrier. This page does not give doses, day counts, storage methods or a substitute for travel insurance.
+
+This review did not establish the current 1448H travel-health requirements. The health material inspected elsewhere in this project identifies 1447H/2026. Recheck the Saudi Ministry of Health and your carrier close to travel instead of relying on an old PDF, an agency leaflet or this page.
+
+Carry the medical report and prescriptions in hand luggage, keep medicines in their original packaging where possible, and keep a separate copy with a companion. Ask the clinician and the carrier about any medicine that needs approval, and check Saudi customs rules for controlled medicines before departure. Do not post prescription images or medical records in public chat.
+
+Traveller check (elderlyHealth): Make the fitness, medicine, device and insurance decisions with the treating clinician and the operating carrier, and record who approved what. This article cannot clear an elderly parent for travel, change a dose or confirm that a medicine may enter Saudi Arabia. Current 1448H health requirements are not established here, so recheck the official sources close to departure.
+
+6. FREQUENTLY ASKED QUESTIONS
+How do I request a wheelchair for an elderly parent flying from Dhaka?
+Request it when you book, or through the carrier's published special-assistance contacts, and choose the category that matches what your parent can do. Biman says the request is mandatory at booking and recommends at least 48 hours; Saudia asks for 48 hours' advance warning for a powered wheelchair. Get written confirmation for every flight and ask about any charge. [2][3]
+Can we bring our own wheelchair to Saudi Arabia?
+Ask the operating carrier first. Saudia publishes free carriage of wheelchairs and up to two pieces of mobility equipment, including an electric wheelchair, in addition to its free checked allowance. Other carriers set their own terms. The Ministry says a pilgrim may bring a wheelchair to the Grand Mosque and use it through the designated entrances. [1][4]
+Will the wheelchair be returned at the aircraft door?
+Do not count on it. Saudia says mobility aids are returned on arrival according to airport procedures, which may mean the gate or the baggage belt. Ask at check-in and plan your transfer for the slower case. [1]
+Are there free wheelchairs inside the Grand Mosque?
+Yes. The authority publishes a free manual wheelchair service in designated areas, and its service page lists the eastern and western squares. Locations and gate numbers can differ between notices, so confirm on the day with identified staff. [5][6]
+How do we book an electric cart for Tawaf or Sa'i?
+Use the authority's Tanaqol platform. Manual cart booking was discontinued in March 2025, and the authority recommends online booking for visitors over 65 while keeping service points for those who cannot book. People with disabilities may go directly to cart service points free of charge. Take your ticket and ID. [6][9]
+Can a family member ride with the elderly parent on the cart?
+Ask at the service point or in the booking. Seating and who may ride or drive are set by the operator, and this page found no basis for promising a free companion seat or that a relative may steer. [9]
+What medical documents should an elderly parent carry?
+The Ministry advises carrying an adequate supply of medication and a medical report listing conditions, medicines and dosages, and diabetic pilgrims should bring a glucose monitor. The quantity, approvals and storage method must come from your clinician and carrier. [4]`,
   "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": `Who this guide is for: Bangladeshi passport holders considering a short Saudi visit within an international onward journey, including NRB families and students. Use it to decide whether the stopover fits your documents, airline booking and available time—not as an approval or a completed-booking report.
 
 Quick Answer

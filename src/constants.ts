@@ -2372,37 +2372,68 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-14",
     slug: "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
-    title: "Performing Umrah with Elderly Parents from Bangladesh: Wheelchair Booking, Flat-Street Hotels & Medical Guide",
-    summary: "Taking aging parents to Makkah and Madinah for Umrah requires careful advance planning for airport transit, marble plaza walking, and heat management. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidelines, this guide covers requesting free airline WCHR/WCHS assistance, using personal folding wheelchairs, official electric mobility scooters at Masjid al-Haram, flat-street hotel selection, and medical packing.",
+    title: "Umrah with Elderly Parents from Bangladesh: Airline Wheelchair, Haram Mobility & Medical Preparation",
+    summary: "Checked 19 October 2026: what a carrier can confirm for an older parent, how a personal wheelchair and powered device are handled, where the Grand Mosque's free wheelchairs and paid electric carts are booked, and which hotel and clinical questions only the property and your doctor can answer. No universal free service, guaranteed gate delivery, step-free hotel route or medical clearance.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
-    updatedAt: "2026-10-18",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "7 min read",
+    readTime: "10 min read",
     references: [
       {
-        name: "Saudia / Airline Special Assistance — Wheelchair (WCHR/WCHS) carriage rules",
-        nameBn: "সৌদিয়া / এয়ারলাইন্স স্পেশাল অ্যাসিস্ট্যান্স — হুইলচেয়ার (WCHR/WCHS) পরিবহন নিয়ম",
-        url: "https://www.saudia.com",
+        name: "Saudia — Special baggage: wheelchairs, mobility aids and portable oxygen concentrators",
+        nameBn: "সৌদিয়া — বিশেষ লাগেজ: হুইলচেয়ার, মোবিলিটি এইড ও পোর্টেবল অক্সিজেন কনসেনট্রেটর",
+        url: "https://www.saudia.com/manage/baggage/special-baggage",
       },
       {
-        name: "Ministry of Hajj and Umrah — Official pilgrim guidelines & Nusuk services",
-        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — অফিশিয়াল গাইডলাইন ও নুসুক সেবা",
-        url: "https://www.haj.gov.sa",
+        name: "Saudia — Special assistance: wheelchair services and WCHR/WCHS/WCHC categories",
+        nameBn: "সৌদিয়া — স্পেশাল অ্যাসিস্ট্যান্স: হুইলচেয়ার সেবা ও WCHR/WCHS/WCHC ক্যাটাগরি",
+        url: "https://www.saudia.com/before-flying/special-assistance/special-care/travelling-for-people-with-a-disability/wheelchair-services",
       },
       {
-        name: "General Authority for the Care of the Two Holy Mosques — Mobility carts & accessibility",
-        nameBn: "দুই পবিত্র মসজিদ পরিচালনা কর্তৃপক্ষ — মোবিলিটি স্কুটার ও প্রতিবন্ধী সেবা",
-        url: "https://gacr.gov.sa",
+        name: "Biman Bangladesh Airlines — Wheelchair assistance and request contacts",
+        nameBn: "বিমান বাংলাদেশ এয়ারলাইন্স — হুইলচেয়ার সহায়তা ও আবেদনের যোগাযোগ",
+        url: "https://www.biman-airlines.com/special-care/wheelchair-assistance",
+      },
+      {
+        name: "Ministry of Hajj and Umrah — Things to remember: health advice, gates and using wheelchairs",
+        nameBn: "হজ ও ওমরাহ মন্ত্রণালয় — মনে রাখার বিষয়: স্বাস্থ্য পরামর্শ, গেট ও হুইলচেয়ার ব্যবহার",
+        url: "https://haj.gov.sa/en/Hajj/Things-To-Remember?id=3",
+      },
+      {
+        name: "General Authority for the Care of the Grand Mosque and the Prophet's Mosque — mobility services",
+        nameBn: "দুই পবিত্র মসজিদ পরিচর্যা ও ব্যবস্থাপনা কর্তৃপক্ষ — মোবিলিটি সেবা",
+        url: "https://alharamain.gov.sa/public/?main_subject=nw&module=subj-ar&subject=subject_708051",
+      },
+      {
+        name: "Saudi Press Agency — Grand Mosque golf cart bookings shift to digital (20 March 2025)",
+        nameBn: "সৌদি প্রেস এজেন্সি — গ্র্যান্ড মসজিদের গলফ কার্ট বুকিং ডিজিটাল (২০ মার্চ ২০২৫)",
+        url: "https://www.spa.gov.sa/en/N2285176",
+      },
+      {
+        name: "Saudi Press Agency — Smart mobility system at the Two Holy Mosques (4 March 2026)",
+        nameBn: "সৌদি প্রেস এজেন্সি — দুই পবিত্র মসজিদে স্মার্ট মোবিলিটি ব্যবস্থা (৪ মার্চ ২০২৬)",
+        url: "https://www.spa.gov.sa/en/N2527804",
+      },
+      {
+        name: "Saudi Press Agency — Free 24-hour wheelchair service and golf carts (9 August 2024)",
+        nameBn: "সৌদি প্রেস এজেন্সি — ২৪ ঘণ্টার বিনামূল্যে হুইলচেয়ার সেবা ও গলফ কার্ট (৯ আগস্ট ২০২৪)",
+        url: "https://www.spa.gov.sa/en/N2151450",
+      },
+      {
+        name: "Saudi Press Agency — Tanaqol electric vehicle booking and service areas (14 May 2024)",
+        nameBn: "সৌদি প্রেস এজেন্সি — তানাকুল ইলেকট্রিক ভেহিকল বুকিং ও সেবা এলাকা (১৪ মে ২০২৪)",
+        url: "https://www.spa.gov.sa/en/N2102395",
       },
     ],
     internalLinks: [
-      { text: "Makkah & Madinah Flat Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Dhaka Airport Pre-Departure & Baggage Rules Hub", path: "/pre-departure" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "Makkah & Madinah hotel zones, room access and Haramain train", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Complete DIY Umrah and Nusuk guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Nusuk app and Rawdah permit step by step", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "Wearing Ihram from Dhaka airport or on a transit flight", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "DIY Umrah planning portal and BDT calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "kiwitaxi", headline: "Pre-Book a Door-to-Door Family GMC or Minivan at Jeddah Airport", body: "Traveling with elderly parents and wheelchairs? Pre-book a private 7-seater minivan from Jeddah Airport straight to your Makkah hotel lobby so your parents never wait in taxi queues." }
+    affiliateCTA: { provider: "kiwitaxi", headline: "Compare a private airport transfer for a party with a folded wheelchair", body: "If your parent uses a wheelchair, compare a pre-booked vehicle against airport taxis and confirm the vehicle size, folded-wheelchair storage, assistance at pickup and cancellation terms before paying. A transfer booking does not provide airline wheelchair assistance or access to the mosque." }
   },
   {
     id: "blog-15",
@@ -2623,7 +2654,7 @@ export const BLOG_DATA: BlogPost[] = [
     internalLinks: [
       { text: "Nusuk visitor registration and Rawdah confirmation guide", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Hotel room/access, Haramain and separate transfer checks", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Older-traveller assistance guide — separate medical/equipment review", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "Umrah with older parents: airline assistance, Haram carts and medical checks", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
       { text: "Quote-input Umrah planning and budget hub", path: "/umrah" },
       { text: "Ramadan and I’tikaf — separate season-specific review", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
       { text: "Main DIY guide — actual visa route, application and permit sequence", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
@@ -2841,7 +2872,7 @@ export const BLOG_DATA: BlogPost[] = [
     readTime: "8 min read",
     internalLinks: [
       { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Umrah with Elderly Parents: Wheelchair & Electric Scooter Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "Umrah with Elderly Parents: Wheelchair & Haram Cart Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
       { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],

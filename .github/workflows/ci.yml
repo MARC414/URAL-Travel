@@ -75,6 +75,9 @@ jobs:
       - name: Verify women-specific Umrah source boundaries and locale parity
         run: npm run test:women-umrah-guide
 
+      - name: Verify older-traveller assistance, Haram mobility and clinical boundaries
+        run: npm run test:elderly-umrah-guide
+
       - name: Type-check
         run: npm run lint
 

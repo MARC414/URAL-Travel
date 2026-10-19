@@ -10,18 +10,18 @@ published inventory. All twelve core Umrah articles already exist; earlier audit
 
 | Scope | Recorded local outcome | Still outstanding |
 |---|---|---|
-| 12 core Umrah article pairs | **6 revised/tested:** main DIY, Nusuk, stopover, hotel/rail, flights, women (12 locale pages) | **6 independent reviews:** older travellers, Ihram, Ramadan/I'tikaf, Zamzam/customs, food, Ziyarah (12 locale pages) |
+| 12 core Umrah article pairs | **7 revised/tested:** main DIY, Nusuk, stopover, hotel/rail, flights, women, older travellers (14 locale pages) | **5 independent reviews:** Ihram, Ramadan/I'tikaf, Zamzam/customs, food, Ziyarah (10 locale pages) |
 | Planning hub EN/BN | Quote-input mechanism and no-fake-savings correction tested | Full release-time fact/graph/visual checks; no matched live price basket claimed |
 | Adjacent Hajj article pair / checklist | Deadline conflict and attachment/health limitations recorded | Own source-led article/FAQ/HowTo/download reconciliation and current-source review (2 locale pages plus resource) |
 | 2 optional bridge pairs | Existing inventory; excluded from the 12-core-article count | Independent later review, not a prerequisite to count core article revisions |
 | Release in this session | No reviewed revision deployed or production-verified | Approval, visual checks, actual deployment and live EN/BN checks |
 
-**6/12 = 50% by core article count only.** This is not a weighted completion percentage: effort differs per article,
-the hub fix is a separate partial workstream, Hajj is adjacent, and release work remains. **Seven article pairs remain**
+**7/12 = 58% by core article count only.** This is not a weighted completion percentage: effort differs per article,
+the hub fix is a separate partial workstream, Hajj is adjacent, and release work remains. **Six article pairs remain**
 for core Umrah plus adjacent Hajj, alongside hub/release gates. Public-source research and edits remain agent-owned;
 owner decisions are publication approval and optional genuinely private/field evidence, not delegated web research.
-Current implementation validation: women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25, scheduling/sitemap controls, lint/build,
-**275 build checks**, 107 EN + 107 BN routes. Counts do not verify unresolved source claims or authenticated flows.
+Current implementation validation: older travellers 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25, scheduling/sitemap controls, lint/build,
+**291 build checks**, 107 EN + 107 BN routes. Counts do not verify unresolved source claims or authenticated flows.
 
 ## Quality contract and order
 
@@ -166,7 +166,7 @@ of the cluster map.
 | Hotels/Haramain + BN | 19 October EN/BN revision: six primary references, six-step plan, six FAQs, three contextual cautions; 17 targeted tests and 245 build checks | Exact room/route/shuttle, assistance and selected fare/channel rules remain untested; source limits explicit. Approval, visual/deploy/live gates open. Record: `HOTEL-RAIL-SOURCE-REVIEW.md` |
 | Flights + BN | 19 October source-led EN/BN revision: five primary references, six-step same-basis comparison, six FAQs and three immediate cautions; 17 targeted tests and 257 build checks | No live fare/dated schedule or personal transit assessment; carrier-specific baggage, packaging and connection limits visible. Visual/approval/deploy/live gates open. Record: `FLIGHT-STRATEGY-SOURCE-REVIEW.md` |
 | Women + BN | 19 October EN/BN revision: ten claim-specific primary sources, four-step Rawdah preparation, seven FAQs and six contextual cautions; 17 targeted tests and 275 build checks | Personal eligibility, actual booking/childcare/access and religious/clinical decisions untested. Qualified religious editorial review plus approval/visual/deploy/live gates remain. Record: `WOMEN-UMRAH-SOURCE-REVIEW.md` |
-| Older travellers + BN | Not reaudited here | Provider assistance/accessibility/medical claims and actual charges |
+| Older travellers + BN | 19 October EN/BN revision: nine specific primary pages, six sections, four-step airline-request HowTo, seven FAQs and five immediate cautions; 20 targeted tests and 291 build checks | Carrier charge/approval, cart booking/level, property route and clinical fitness untested; 1448H health unverified. Approval, visual/deploy/live gates open. Record: `ELDERLY-UMRAH-SOURCE-REVIEW.md` |
 | Ihram/Miqat + BN | Not reaudited here | Qualified religious evidence and routing/intention distinctions |
 | Ramadan/I'tikaf + BN | Earlier audit exists; not freshly certified here | Current 1448 announcement vs dated precedent; correct itinerary sequence and season claims |
 | Zamzam/customs + BN | Earlier audit exists; not freshly certified here | Current carrier/airport and NBR evidence; inspect snippets/CTAs as well as bodies |
@@ -272,3 +272,25 @@ article suites/budget 25/scheduling/sitemap 23/lint/build pass; 275 build assert
 scholarly editorial review, personal religious/clinical advice, actual booking/access and release gates remain.
 No route, childcare, ride, application or permit tested; nothing deployed. Six core pairs plus adjacent Hajj remain.
 Next independent agent-owned asset: older travellers/elderly parents.
+
+
+### Older-traveller checkpoint — 19 October 2026
+
+Seventh core EN/BN pair revised/tested. `ELDERLY-UMRAH-SOURCE-REVIEW.md` records the pre-edit ledger, nine opened
+primary pages, retrieval failures and conflicts. The universal "free wheelchair on every carrier" and "returned at
+the aircraft door" claims are removed: Saudia's free carriage (two mobility items, hold, return according to airport
+procedures) is attributed, Biman's booking-time requirement and 48-hour recommendation are recorded, and each carrier
+is asked about charges and its own notice period. WCHC was added for a parent who cannot walk at all.
+The Haram section separates free manual wheelchairs, the paid ground-Sa'i service and the Tanaqol electronic-cart
+platform; the fixed mezzanine circuit and fixed gate map are removed, Nusuk is distinguished from Tanaqol, and the
+March 2025 end of manual cart booking plus free direct access for people with disabilities are stated. The hotel
+section replaces Jabal Omar/Upper Ajyad "zero-incline" rankings and the 400 m comparison with a property
+questionnaire; the Madinah northern-cluster promise is dropped. The medical section replaces the 20-day supply,
+insulin cold-chain instruction and Haram air-conditioning premise with attributed Ministry guidance, and records
+**1448H requirements as unverified**. Five point-of-action cautions, one four-step administrative HowTo, seven visible
+FAQs and five curated links per locale match schema and rendered output. Nine specific references replace three
+homepages. 20 targeted older-traveller tests plus the preceding article suites, budget 25, scheduling/sitemap 23,
+lint/build and **291 build assertions** pass; 107 EN + 107 BN routes. No airline, cart, property, route or booking was
+tested; no visual, deployment or live check. Qualified clinical and religious/scholarly review, current-season
+airline/cart rechecks and all release gates remain. **Seven core pairs done; five core pairs plus adjacent Hajj
+remain.** Next independent agent-owned asset: Ihram/Miqat.

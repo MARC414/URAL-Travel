@@ -20,10 +20,15 @@ const TITLES = {
   registration: { en: "Check the current registration screen", bn: "বর্তমান নিবন্ধন স্ক্রিন যাচাই করুন" },
   rawdah: { en: "Check your actual Rawdah booking", bn: "নিজের Rawdah বুকিং যাচাই করুন" },
   network: { en: "Check access on your phone and network", bn: "নিজের ফোন ও নেটওয়ার্কে প্রবেশ যাচাই করুন" },
+  elderlyAirline: { en: "Confirm the request, not just the code", bn: "কোড নয়, নিশ্চিত request দেখুন" },
+  elderlyEquipment: { en: "Check the actual device and carrier approval", bn: "আসল device ও carrier approval যাচাই করুন" },
+  elderlyHaram: { en: "Confirm the service point and level today", bn: "আজকের service point ও level নিশ্চিত করুন" },
+  elderlyHotel: { en: "Confirm the door-to-door route", bn: "দরজা থেকে দরজা route নিশ্চিত করুন" },
+  elderlyHealth: { en: "Keep clinical decisions with your clinician", bn: "Clinical সিদ্ধান্ত চিকিৎসকের সঙ্গে রাখুন" },
 } as const;
 
 export function getTravellerCheck(paragraph: string) {
-  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir)\):\s+([\s\S]+)$/);
+  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth)\):\s+([\s\S]+)$/);
   if (!match) return null;
   const key = match[2] as keyof typeof TITLES;
   const locale = match[1] === "Traveller check" ? "en" : "bn";

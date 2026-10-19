@@ -628,7 +628,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "hajj-registration-bangladesh-government-vs-private-package-cost":
       "The latest MoRA 2027 notice supplied for this guide lists primary registration from 27 July to 24 September 2026, with no extension. The window has passed. Check hajj.gov.bd for later notices. The supplied sources do not establish 2027 package prices; 2026 figures are historical only.",
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
-      "When taking elderly parents for Umrah from Dhaka, request airline Wheelchair (WCHR) assistance 48 hours before departure and bring a manual folding wheelchair (transported free). Inside Masjid al-Haram, use dedicated upper-level wheelchair tracks or official electric scooters, and choose flat-street hotels in Jabal Omar or lower Ibrahim Al-Khalil.",
+      "Request airline wheelchair help at booking, not at the airport: Biman calls it mandatory and recommends 48 hours, while Saudia publishes free carriage of wheelchairs and up to two mobility items. Inside the Grand Mosque, free manual wheelchairs and paid Tanaqol carts are separate services. No universal free airport service, guaranteed gate delivery or step-free hotel route is promised.",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
       "A Saudi stopover may allow up to 96 hours, including Umrah, subject to eligibility, visa approval and separate appointments. Check exact documents and the airline’s itemized charges before payment. Saudia publishes a booking sequence; detailed current flynas conditions remain unverified. No universal free hotel, instant issuance or two-city feasibility is promised.",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
@@ -723,7 +723,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "hajj-registration-bangladesh-government-vs-private-package-cost":
       "সর্বশেষ দেওয়া MoRA ২০২৭ বিজ্ঞপ্তিতে প্রাথমিক নিবন্ধনের সময় ২৭ জুলাই–২৪ সেপ্টেম্বর ২০২৬ বলা হয়েছে; সময়সীমা বাড়ানো হবে না। সময় শেষ। পরবর্তী নোটিশের জন্য hajj.gov.bd দেখুন। দেওয়া সূত্রে ২০২৭ প্যাকেজের দাম নিশ্চিত নয়; ২০২৬ সালের অঙ্ক আগের মৌসুমের তথ্য।",
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
-      "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ যাত্রায় ফ্লাইটের ৪৮ ঘণ্টা আগে এয়ারলাইন্স হুইলচেয়ার (WCHR) বুক করুন এবং নিজস্ব ফোল্ডিং হুইলচেয়ার সাথে নিন (ফ্লাইটে ফ্রি)। মসজিদুল হারামে ওপরের তলার হুইলচেয়ার ট্র্যাক বা অফিশিয়াল ইলেকট্রিক স্কুটার ব্যবহার করুন এবং জাবাল ওমরের মতো সমতল রাস্তার হোটেল বেছে নিন।",
+      "এয়ারপোর্টে নয়, বুকিংয়ের সময়ই এয়ারলাইন হুইলচেয়ার সহায়তা চাইুন: বিমান এটি বাধ্যতামূলক বলে ও ৪৮ ঘণ্টা আগে আবেদনের পরামর্শ দেয়; সৌদিয়া হুইলচেয়ার ও সর্বোচ্চ দুইটি মোবিলিটি সামগ্রী বিনামূল্যে বহনের কথা বলে। মসজিদুল হারামে বিনামূল্যে ম্যানুয়াল হুইলচেয়ার ও সাশুল্ক তানাকুল কার্ট আলাদা সেবা। সবার জন্য বিনামূল্যে এয়ারপোর্ট সেবা, দরজায় ফেরত বা ধাপবিহীন হোটেল রুটের প্রতিশ্রুতি নয়।",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
       "যোগ্যতা, visa approval ও আলাদা appointment সাপেক্ষে Saudi stopover-এ ওমরাহসহ সর্বোচ্চ ৯৬ ঘণ্টা থাকা যেতে পারে। টাকা দেওয়ার আগে exact document ও airline-এর itemized charge দেখুন। Saudia booking sequence প্রকাশ করে; flynas-এর বর্তমান detailed conditions যাচাই হয়নি। সবার জন্য free hotel, instant issuance বা দুই শহরের plan নিশ্চিত নয়।",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
