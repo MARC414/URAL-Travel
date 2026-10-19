@@ -55,6 +55,11 @@ export default defineConfig(() => {
             if (id.includes('src/data/blogContent')) {
               return 'blog-content';
             }
+            // Tiqets attraction data is imported by AttractionDetailPage (React.lazy).
+            // Stable name lets prerender.ts preload it on /attractions routes.
+            if (id.includes('src/data/tiqetsAttractionsData')) {
+              return 'attraction-data';
+            }
             return undefined;
           },
         },

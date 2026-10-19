@@ -64,6 +64,22 @@ const LEGACY_BLOG_SLUGS = {
 // serves the page.
 export async function onRequest(context) {
   const url = new URL(context.request.url);
+
+  // --- Legacy /experiences?region= → clean static paths (301) ---
+  if (url.pathname === "/experiences") {
+    const region = url.searchParams.get("region");
+    if (region === "west") {
+      url.pathname = "/experiences/europe";
+      url.searchParams.delete("region");
+      return Response.redirect(url.toString(), 301);
+    }
+    if (region === "asia") {
+      url.pathname = "/experiences/asia";
+      url.searchParams.delete("region");
+      return Response.redirect(url.toString(), 301);
+    }
+  }
+
   const legacyRoute = LEGACY_QUERY_ROUTES[url.pathname];
 
   if (legacyRoute) {

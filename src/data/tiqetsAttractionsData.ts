@@ -31,6 +31,8 @@ export interface TiqetsAttractionItem {
   skipTheLine?: boolean;
   audioGuide?: boolean;
   rooftopAccess?: boolean;
+  wheelchairAccess?: boolean;
+  familyFriendly?: boolean;
   priceUsd: number;
   priceBdt: number;
   commissionTier: "High-Ticket (6-8%)" | "Core Anchor (5-7%)" | "Fast Add-On (3.5-5%)";

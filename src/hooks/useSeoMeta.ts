@@ -520,6 +520,23 @@ export function useSeoMeta({
     }
     twitterImg.setAttribute("content", resolvedImage);
 
+    // 6a. Set/Update twitter:site & twitter:creator per-route
+    let twitterSite = document.querySelector('meta[name="twitter:site"]');
+    if (!twitterSite) {
+      twitterSite = document.createElement("meta");
+      twitterSite.setAttribute("name", "twitter:site");
+      document.head.appendChild(twitterSite);
+    }
+    twitterSite.setAttribute("content", "@uraltravelbd");
+
+    let twitterCreator = document.querySelector('meta[name="twitter:creator"]');
+    if (!twitterCreator) {
+      twitterCreator = document.createElement("meta");
+      twitterCreator.setAttribute("name", "twitter:creator");
+      document.head.appendChild(twitterCreator);
+    }
+    twitterCreator.setAttribute("content", "@uraltravelbd");
+
     // 6. Consolidated @graph JSON-LD Schema Script Update
     document
       .querySelectorAll('script[data-seo-schema="true"]')
