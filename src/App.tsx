@@ -642,7 +642,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
       "Entering Ihram means intending Umrah or Hajj and beginning the Talbiyah, not just wearing the cloth. The Saudi Ministry of Hajj and Umrah says air arrivals must not pass the Miqat or the point parallel to it without entering Ihram, and that Jeddah airport is neither a Miqat nor a place for entering Ihram — so on a direct flight the step happens before landing. Which of the five points applies depends on the route your flight actually flies.",
     "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
-      "Never pack loose Zamzam bottles inside checked suitcases. Buy one official 5-liter sealed Zamzam box (SAR 9.50–12.50) at the Jeddah or Madinah airport kiosk, carried free by Biman and Saudia. Returning Bangladeshi passengers can also bring 5–10 kg of Madinah dates and up to 100g of gold jewelry duty-free.",
+      "One sealed 5-litre Zamzam bottle per pilgrim, bought at the airport and carried separately — the Madinah operator lists it at SAR 12.50. Bangladesh allows 100 g of gold ornaments and 200 g of silver once a calendar year, plus one declared bar up to 117 g. There is no published kilogram allowance for dates: personal use passes, a commercial quantity can be seized.",
     "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
       "Skip expensive hotel buffets and oily fast food during Umrah: walk 5 minutes from Masjid al-Haram into Ibrahim Al Khalil Road (Misflah) or Lower Ajyad in Makkah, and Bengalee Lane (West Markazia) in Madinah, for fresh Bangladeshi rice, fish curry, daal, and bharta at SAR 12–18 (BDT 390–580).",
     "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide":
@@ -737,7 +737,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
       "ইহরামে প্রবেশ মানে ওমরাহ বা হজের নিয়ত করে তালবিয়া শুরু করা, শুধু কাপড় পরা নয়। সৌদি হজ ও ওমরাহ মন্ত্রণালয় বলছে, আকাশপথে আগত যাত্রী মিকাত বা তার সমান্তরাল বিন্দু অতিক্রমের আগে ইহরামে প্রবেশ করতে হবে, আর জেদ্দা বিমানবন্দর মিকাতও নয়, ইহরামে প্রবেশের স্থানও নয় — তাই সরাসরি ফ্লাইটে এই ধাপটি অবতরণের আগেই। পাঁচটি মিকাতের কোনটি প্রযোজ্য তা নির্ভর করে আপনার ফ্লাইটের প্রকৃত রুটের ওপর।",
     "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
-      "লাগেজের ভেতর খোলা বোতলে জমজমের পানি ভরলে এক্স-রে স্ক্যানারে তা জব্দ হয়। জেদ্দা বা মদিনা এয়ারপোর্টের অফিশিয়াল কিয়স্ক থেকে পাসপোর্ট দেখিয়ে ৫ লিটারের সিল করা জমজম বক্স (৯.৫০–১২.৫০ রিয়াল) কিনুন, যা বিমান ও সৌদিয়া ফ্রি বহন করে। সাথে ৫–১০ কেজি খেজুর ও ১০০ গ্রাম স্বর্ণালংকার শুল্কমুক্ত আনা যায়।",
+      "প্রতি হাজীর জন্য একটি সিল করা ৫ লিটার জমজম বোতল, বিমানবন্দর থেকে কেনা ও আলাদাভাবে বহন — মদিনার পরিচালক দাম লিখেছে ১২.৫০ রিয়াল। বাংলাদেশে বছরে একবার ১০০ গ্রাম স্বর্ণালংকার ও ২০০ গ্রাম রুপা, সঙ্গে ঘোষণা সাপেক্ষে ১১৭ গ্রাম পর্যন্ত একটি বার। খেজুরে কেজিতে প্রকাশিত ছাড় নেই: ব্যক্তিগত ব্যবহার চলে, বাণিজ্যিক পরিমাণ জব্দ হতে পারে।",
     "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
       "ওমরাহ সফরে প্রতিদিন ফাস্টফুড না খেয়ে মক্কার ইব্রাহিম আল খলিল রোড (মিসফালাহ) ও আজইয়াদ এবং মদিনার বাঙালি লেনে (গেট ৫–৯ এর কাছে) মাত্র ১২–১৮ রিয়ালে (৩৯০–৫৮০ টাকা) গরম ভাত, মাছের ঝোল, ডাল ও ভর্তা খেতে পারেন। এছাড়া জাবাল ওমর ও তায়্যিবা সেন্টারে পাবেন অফিশিয়াল Al Baik।",
     "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide":

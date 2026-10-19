@@ -948,3 +948,37 @@ including fourteen Ramadan output/caution controls and five retired-claim fixtur
 identity flow; no 1448 conditions published; no quote, booking, visual QA, deployment or live check. Progress
 **9/12 core pairs** by article-review count only; three core plus adjacent Hajj remain. Next independent agent-owned
 asset: Zamzam/customs.
+
+### 19 October 2026 — Zamzam/customs pair revised (10/12 core Umrah pairs)
+
+`official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport` EN/BN rewritten against
+[`ZAMZAM-CUSTOMS-SOURCE-REVIEW.md`](ZAMZAM-CUSTOMS-SOURCE-REVIEW.md): the Madinah airport operator, Saudia's conditions
+of carriage, the Ministry of Hajj and Umrah's Zamzam guidance as reported by Saudi Gazette, the HSIA customs page, the
+NBR's 2025 baggage rules as reported by BSS, the NBR tariff chapter for dates, and two VAT-refund sources.
+
+Price correction, in both directions: the 5-litre pilgrim bottle is **SAR 12.50** per the airport operator, not 48 SAR.
+The 48 SAR figure is the Nusuk-app 24 × 330 ml home-delivery carton and is now named as a different product; the bin
+containing the old price guard was inverted (it banned 12.50 and passed 48) and replaced with a paragraph-scoped check
+plus a negative control. The BDT conversion is gone.
+
+Dates: the "5–10 kg duty-free" allowance had no source and is removed. The page now states the HSIA test — personal
+goods exempt unless considered commercial, commercial quantities seized, dried dates at 25% CD when assessed as a
+consignment — and prints no per-kilogram price. Gold: the 100 g ornaments (22 carat or below, at most 12 of one type)
+and 200 g silver allowances are now once per **calendar year**, alongside the single 117 g/10 tola bar at Tk 5,000 per
+11.664 g, the declaration duty, confiscation above the cap and the criminal consequence of an undeclared find. VAT:
+reframed as a refund on unused goods with the SAR 500, 90-day, original-packaging and validation conditions, and worn
+jewellery is explicitly ineligible. Airline handling is per carrier — Saudia counts one bottle inside the checked
+allowance from JED/MED only and does not compensate loss; Biman publishes no allowance — so "most airlines" and
+"free extra piece" are gone.
+
+Six visible/schema FAQs, five cautions (`zamzamBox`, `zamzamAirline`, `datesAllowance`, `goldDeclare`, `vatRefund`),
+nine references, six curated links per locale including `/umrah`, optional qualified vehicle CTA, price panel
+suppressed, no HowTo. Original 27 Sep publication, author and slug retained; `updatedAt` 2026-10-19.
+
+Zamzam 28 + Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk
+16 + budget 25, scheduling and 23 sitemap controls, lint, build and **326 build checks** passed (107 EN + 107 BN
+routes), including eight new blog-21 output controls and five price negative controls. Two unintended citation
+renumbers in the women's and flight articles were caught by those suites and restored. No airport, counter or customs
+hall was observed; no price was verified on site; no GACA circular could be opened; no legal advice, deployment, PR or
+live check. Progress **10/12 core pairs** by article-review count only; food and Ziyarah remain. Next independent
+agent-owned asset: the Makkah/Madinah food guide.

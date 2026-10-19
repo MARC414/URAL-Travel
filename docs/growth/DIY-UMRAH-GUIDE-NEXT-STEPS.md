@@ -149,4 +149,10 @@ season dates (visa 9 March, entry 23 March, departure 7 April, season opened 31 
 Six FAQs match schema, five cautions sit at the decisions, six links per locale include `/umrah`, and the CTA is
 optional and qualified. 28 targeted tests, all prior suites, lint, build and **323 build checks** pass. No portal,
 application or identity flow was touched, no 1448 conditions exist, and no scholar reviewed the wording. Three core
-pairs plus adjacent Hajj remain; next asset Zamzam/customs.
+pairs plus adjacent Hajj remain.
+
+**Zamzam/customs, 19 October:** the tenth core pair is revised and tested against
+[`ZAMZAM-CUSTOMS-SOURCE-REVIEW.md`](ZAMZAM-CUSTOMS-SOURCE-REVIEW.md) — SAR 12.50 from the airport operator, no dates
+kilogram allowance, the calendar-year gold conditions, and a conditional VAT refund. 28 targeted tests, all prior
+suites and **326 build checks** pass. Ten of twelve core pairs are done; food and Ziyarah remain, and the next asset is
+the food guide.

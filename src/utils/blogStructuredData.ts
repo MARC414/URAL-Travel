@@ -48,6 +48,10 @@ const BLOG_FAQ_CONFIGS: Record<
     en: /^\s*6\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৬\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
+  "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": {
+    en: /^\s*8\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৮\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
   "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": {
     en: /^\s*8\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৮\.\s*সচরাচর জিজ্ঞাসা\s*$/,

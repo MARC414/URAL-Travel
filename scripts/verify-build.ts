@@ -4979,24 +4979,25 @@ const zamzamBodyPair = [
   BENGALI_BLOG_OVERRIDES[ZAMZAM_SLUG]?.content ?? "",
 ];
 
-// Guard: No outdated Zamzam pricing (the SAR 9.50-12.50 range is obsolete;
-// Nusuk's 2026 price is 48 SAR). Each pattern anchors on the decimal bounds or
-// the 9->12 range, because this same article legitimately quotes "SAR 12 - 20
-// per kg" for dates and "SAR 120 - 160" for a sedan. An unanchored "SAR 9|12"
-// match flagged those and failed CI on 2026-10-17.
-// A list, not one regex: the Bengali body may carry the range in Bengali digits,
-// and `\b` cannot anchor them (Bengali digits are not \w).
-const ZAMZAM_OBSOLETE_PRICE_PATTERNS: { label: string; pattern: RegExp }[] = [
-  { label: "decimal bounds (EN)", pattern: /\bSAR\s*(?:9|12)[.,]50\b/i },
-  { label: "range (EN)", pattern: /\bSAR\s*9\s*(?:-|\u2013|\u2014|to)\s*(?:SAR\s*)?12\b/i },
-  { label: "decimal bounds (BN)", pattern: /SAR\s*(?:\u09ef|\u09e7\u09e8)[.,]\u09eb\u09e6/ },
-  {
-    label: "range (BN)",
-    pattern: /\u09ef[.,]\u09eb\u09e6[^\u09e6-\u09ef]{0,20}\u09e7\u09e8[.,]\u09eb\u09e6/,
-  },
+// Guard: the 5-litre pilgrim bottle is priced by the airport operator (SAR 12.50).
+// The 48 SAR figure that an earlier wave installed is the Nusuk home-delivery carton
+// (24 x 330 ml) — a different product — so both the old range guard and the 48 SAR
+// assertion were wrong in opposite directions. Ledger: docs/growth/ZAMZAM-CUSTOMS-SOURCE-REVIEW.md.
+const ZAMZAM_WRONG_PRICE_PATTERNS: { label: string; pattern: RegExp }[] = [
+  { label: "retired 9.50 range (EN)", pattern: /SAR\s*9[.,]50/i },
+  { label: "retired 9.50 range (BN)", pattern: /৯[.,]৫০/ },
 ];
-const findObsoleteZamzamPrice = (text: string) =>
-  ZAMZAM_OBSOLETE_PRICE_PATTERNS.find((entry) => entry.pattern.test(text))?.label;
+const ZAMZAM_CARTON_PRICE = /(?<![0-9০-৯])(?:48|৪৮)\s*(?:SAR|রিয়াল)/;
+// 48 SAR is the Nusuk-app 24 x 330 ml home-delivery carton. It may appear only in the
+// paragraph that says so — never as the price of the 5-litre pilgrim bottle.
+const ZAMZAM_CARTON_CONTEXT = /different product|home-delivery|24 × 330|Nusuk|অন্য একটি পণ্য|হোম ডেলিভারি|২৪ × ৩৩০|নুসুক/;
+const findWrongZamzamPrice = (text: string) => {
+  const line = text
+    .split(/\n+/)
+    .find((entry) => ZAMZAM_CARTON_PRICE.test(entry) && !ZAMZAM_CARTON_CONTEXT.test(entry));
+  if (line) return `48 SAR as the bottle price: ${line.slice(0, 80)}`;
+  return ZAMZAM_WRONG_PRICE_PATTERNS.find((entry) => entry.pattern.test(text))?.label;
+};
 const zamzamSurfaces: { label: string; text: string }[] = [
   { label: "article body (EN)", text: BLOG_BODY[ZAMZAM_SLUG] ?? "" },
   { label: "article body (BN)", text: BENGALI_BLOG_OVERRIDES[ZAMZAM_SLUG]?.content ?? "" },
@@ -5004,8 +5005,8 @@ const zamzamSurfaces: { label: string; text: string }[] = [
   { label: "article page (BN)", text: read(path.join(DIST_DIR, "bn", "blog", `${ZAMZAM_SLUG}.html`)) ?? "" },
 ];
 const zamzamMissing = zamzamSurfaces.filter((surface) => !surface.text).map((surface) => surface.label);
-const zamzamOutdatedPrice = zamzamSurfaces
-  .map((surface) => ({ label: surface.label, hit: findObsoleteZamzamPrice(surface.text) }))
+const zamzamWrongPrice = zamzamSurfaces
+  .map((surface) => ({ label: surface.label, hit: findWrongZamzamPrice(surface.text) }))
   .filter((surface) => surface.hit !== undefined)
   .map((surface) => `${surface.label}: ${surface.hit}`);
 check(
@@ -5013,24 +5014,27 @@ check(
   `blog-21: both bodies and both rendered pages exist${zamzamMissing.length ? ` (missing: ${zamzamMissing.join(", ")})` : ""}`
 );
 check(
-  zamzamOutdatedPrice.length === 0,
-  `blog-21: no outdated Zamzam price range SAR 9.50-12.50 (now 48 SAR per Nusuk 2026) in either locale${
-    zamzamOutdatedPrice.length ? ` (found in: ${zamzamOutdatedPrice.join("; ")})` : ""
+  zamzamWrongPrice.length === 0,
+  `blog-21: the pilgrim bottle is not priced at 48 SAR (home-delivery carton) or the retired 9.50 range${
+    zamzamWrongPrice.length ? ` (found in: ${zamzamWrongPrice.join("; ")})` : ""
   }`
 );
 const zamzamPriceControl = [
-  "Buy the sealed carton for SAR 9.50 - SAR 12.50 at the kiosk.",
+  "Allowance: one sealed 5-liter box per pilgrim costing 48 SAR.",
   "One carton costs SAR 9.50.",
-  "সৌদি রিয়াল ৯.৫০ থেকে ১২.৫০",
-].every((control) => findObsoleteZamzamPrice(control) !== undefined);
+  "প্রতি হাজীর জন্য ৪৮ রিয়াল",
+  "সৌদি রিয়াল ৯.৫০",
+].every((control) => findWrongZamzamPrice(control) !== undefined);
 const zamzamPriceFalsePositives = [
-  "Allowance: one sealed 5-liter box costing 48 SAR (~BDT 620).",
+  "The Madinah operator lists one 5-litre bottle at SAR 12.50.",
+  "A previous version of this page said 48 SAR; that figure belongs to a different product — a 24 × 330 ml carton sold through the Nusuk app.",
+  "একটি ২৪ × ৩৩০ মিলি কার্টন — নুসুক অ্যাপে ৪৮ রিয়াল, সম্পূর্ণ অন্য একটি পণ্য।",
   "Dates cost SAR 12 - 20 per kg and a sedan SAR 120 - 160.",
-  "Grade-A Ajwa dates: SAR 35 - SAR 50 per kg.",
-].every((control) => findObsoleteZamzamPrice(control) === undefined);
+  "A gold bar carries Tk 5,000 duty per 11.664 g.",
+].every((control) => findWrongZamzamPrice(control) === undefined);
 check(
   zamzamPriceControl && zamzamPriceFalsePositives,
-  `blog-21: the Zamzam price guard rejects the retired SAR 9.50-12.50 range in both numeral systems and still passes the current 48 SAR and the article's unrelated date/taxi prices (negative control)`
+  "blog-21: the price guard rejects 48 SAR and 9.50 in both numeral systems while passing 12.50, date prices and the gold duty (negative control)"
 );
 
 // Guard: No unqualified "free" Zamzam airline claims
@@ -5045,8 +5049,38 @@ check(
 // Guard: References array required for customs article
 const customsArticle = BLOG_DATA.find((p) => p.slug === ZAMZAM_SLUG);
 check(
-  (customsArticle?.references?.length ?? 0) >= 3,
-  `blog-21: references array present with at least 3 sources (Nusuk, NBR, Biman)`
+  (customsArticle?.references?.length ?? 0) === 9,
+  `blog-21: nine specific sources replace the three homepages (operator, carrier, Ministry, HSIA, NBR x2, VAT x2, press)`
+);
+
+// Guard: no dates kilogram allowance (the figure the old copy printed was unsourced)
+const zamzamDatesAllowanceClaim =
+  /(?:duty[- ]free|tax[- ]free|শুল্কমুক্ত)[^.\n]{0,40}\d+\s*(?:kg|কেজি)|\d+\s*(?:kg|কেজি)[^.\n]{0,25}(?:duty[- ]free|শুল্কমুক্ত)/i;
+check(
+  zamzamBodyPair.every((body) => !zamzamDatesAllowanceClaim.test(body)),
+  "blog-21: no '5-10 kg duty-free' dates allowance — HSIA tests personal use against commercial quantity"
+);
+
+// Guard: gold allowance keeps the once-a-year control and the declaration duty
+check(
+  zamzamBodyPair.every(
+    (body) =>
+      /(once per calendar year|ক্যালেন্ডার বছরে একবার)/.test(body) &&
+      /(117|১১৭)/.test(body) &&
+      /(5,000|৫,০০০)/.test(body) &&
+      /(confiscated|জব্দ)/.test(body)
+  ),
+  "blog-21: the gold section keeps the calendar-year limit, the 117 g bar cap, the Tk 5,000 duty and confiscation"
+);
+
+// Guard: the VAT refund is never promised without its conditions
+const zamzamVatPromise = /(15%[^.\n]{0,30}(?:back|refund|ফেরত))|((?:tax[- ]?free|ভ্যাট ফেরত)[^.\n]{0,20}15%)/i;
+const zamzamVatConditions = /(SAR\s*500|৫০০ রিয়াল)/;
+check(
+  zamzamBodyPair.every(
+    (body) => !zamzamVatPromise.test(body) || (zamzamVatConditions.test(body) && /(90|৯০)/.test(body))
+  ),
+  "blog-21: any 15% VAT-refund sentence is accompanied by the SAR 500 minimum and the 90-day export limit"
 );
 
 // --- Content contract (docs/growth/10-CONTENT-UPGRADE-STANDARD.md) ---------

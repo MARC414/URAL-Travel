@@ -399,10 +399,11 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Where to enter Ihram flying from Dhaka: the Ministry's air-travel rule, why Jeddah airport is not a Miqat, Gulf transit, and Madinah-first routes.",
   },
   "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": {
-    title: "Zamzam, Dates & Gold Customs Rules: Jeddah & Dhaka | URAL",
+    title: "Zamzam, Dates & Gold Limits for Dhaka Arrivals | URAL",
     description:
-      "Check official airline and customs rules for bringing 5L Zamzam water, Madinah Ajwa dates and gold jewelry from Jeddah or Madinah back to Dhaka Airport.",
+      "One 5L Zamzam bottle at SAR 12.50, no dates kilogram allowance, and 100 g of gold ornaments or a declared 117 g bar once a year — what the operators and NBR actually publish.",
   },
+
   "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals": {
     title: "Bangladeshi Food Guide in Makkah & Madinah | URAL",
     description:

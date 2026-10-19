@@ -37,6 +37,14 @@ portal, application or identity flow was observed; no 1448 conditions exist yet.
 tests, **323 build checks**; visual, qualified-review, approval and release gates remain separate. Next independent
 agent-owned asset: Zamzam/customs.
 
+**19 October Zamzam/customs follow-up:** [`ZAMZAM-CUSTOMS-SOURCE-REVIEW.md`](ZAMZAM-CUSTOMS-SOURCE-REVIEW.md) records
+the tenth source-reviewed core EN/BN revision. **10/12 core pairs** revised/tested by article count only; food and
+Ziyarah remain. The pilgrim bottle is priced at SAR 12.50 by the airport operator (48 SAR is the Nusuk delivery
+carton), the invented dates kilogram allowance is replaced by the HSIA personal-use/commercial-quantity test, the gold
+allowance now carries its calendar-year, 22-carat and silver conditions, and the VAT refund is conditional on unused
+goods. Current validation: 28 Zamzam tests, **326 build checks**; visual, qualified-review, approval and release gates
+remain separate. Next independent agent-owned asset: the food guide.
+
 **Use with:** [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md), [`SEO-KEYWORD-MAP.md`](../../SEO-KEYWORD-MAP.md), [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md), [`CONTENT-OS.md`](CONTENT-OS.md), and [`AI-WRITING-PROMPTS.md`](AI-WRITING-PROMPTS.md).
 
 This is an operational plan for consolidating URAL's existing Umrah content, not a replacement for or rewrite of the strategy plan of record. It uses the current repository inventory and the Umrah research ledger checked on 14 October 2026. Bangladesh SERP observations and a Search Console query export were not present in those materials; demand and format hypotheses below are **not measured**. Re-check season-sensitive rules and prices against primary sources immediately before each release.

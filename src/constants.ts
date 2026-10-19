@@ -2837,37 +2837,69 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-21",
     slug: "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
-    title: "Official Zamzam Water, Ajwa Dates & Gold Customs Rules at Jeddah, Madinah & Dhaka Airport (2026)",
-    summary: "Every Bangladeshi pilgrim returning from Makkah and Madinah wishes to bring blessed Zamzam water, Madinah Ajwa and Sukkari dates, and gold jewelry for family members back home. However, packing loose Zamzam bottles inside checked suitcases leads to immediate baggage confiscation at Jeddah and Madinah airport X-ray scanners. Verified against Saudi General Authority of Civil Aviation (GACA - gaca.gov.sa) directives and Bangladesh National Board of Revenue (NBR - nbr.gov.bd) Passenger Baggage Rules, this guide explains the official 5-liter Zamzam kiosk rule, date weight allowances, and duty-free gold limits at Dhaka Airport.",
+    title: "Zamzam, Dates & Gold: What You Can Actually Bring Back to Bangladesh (2026)",
+    summary: "Checked on 19 October 2026 against the Madinah airport operator, Saudia's conditions of carriage, the Ministry of Hajj and Umrah's Zamzam guidance, Dhaka airport customs and the NBR's 2025 baggage rules: one sealed 5-litre Zamzam bottle at SAR 12.50, no published kilogram allowance for dates (a personal-use test instead), and 100 g of gold ornaments or 200 g of silver once a calendar year, with a 117 g declared bar cap.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
-    updatedAt: "2026-10-17",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "7 min read",
+    readTime: "9 min read",
     internalLinks: [
-      { text: "Dhaka Airport Pre-Departure & Baggage Allowance Hub", path: "/pre-departure" },
-      { text: "Dhaka to Jeddah & Madinah Flight Baggage Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "Complete DIY Umrah & 10-Day BDT Cost Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Dhaka Airport Pre-Departure & Baggage Hub", path: "/pre-departure" },
+      { text: "Ihram & Miqat Rules for Flights from Bangladesh", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "kiwitaxi", headline: "Returning with 46kg Suitcases & Zamzam Boxes?", body: "Book a large 7-seater family van from your Makkah or Madinah hotel to the airport so all your suitcases and Zamzam cartons fit comfortably in one vehicle." },
+    affiliateCTA: { provider: "kiwitaxi", headline: "Returning with 46 kg suitcases and a Zamzam box?", body: "Compare an optional larger vehicle from your Makkah or Madinah hotel to the airport so the boxes and suitcases fit in one trip. Seats, luggage capacity and availability must be confirmed with the provider — a vehicle does not change the airline's Zamzam or baggage rules." },
     references: [
       {
-        name: "Nusuk App Official Zamzam Pricing",
-        nameBn: "নুসুক অ্যাপ অফিশিয়াল জমজম মূল্য",
-        url: "https://lifeinsaudiarabia.net/buy-zamzam-water-from-nusuk-app-online/"
+        name: "Tibah Airports (Madinah) — Zamzam Sale Point: SAR 12.50 per 5-litre bottle, passport required, one per purchase, carried separately, not in checked baggage",
+        nameBn: "তিবাহ এয়ারপোর্টস (মদিনা) — জমজম বিক্রয়কেন্দ্র: ৫ লিটার বোতল ১২.৫০ রিয়াল, পাসপোর্ট প্রয়োজন, প্রতি ক্রয়ে একটি, আলাদাভাবে বহন, চেক-ইন লাগেজে নয়",
+        url: "https://tibahairports.com/en-EN/airport-services-facilities/page/zamzam-sales-service-en",
       },
       {
-        name: "Bangladesh Customs Baggage Rules (NBR)",
-        nameBn: "বাংলাদেশ কাস্টমস ব্যাগেজ নিয়ম (এনবিআর)",
-        url: "https://bdvisa.com/luggage-rules.html"
+        name: "Saudia — General Conditions of Carriage: one 5-litre Zamzam bottle from Jeddah or Madinah, counted in the checked allowance, extras as excess, no compensation for loss or delay",
+        nameBn: "সৌদিয়া — জেনারেল কন্ডিশনস অব ক্যারেজ: জেদ্দা বা মদিনা থেকে একটি ৫ লিটার জমজম, চেক-ইন ছাড়ের ভেতরে গণ্য, অতিরিক্তে এক্সেস, হারানো বা দেরিতে ক্ষতিপূরণ নেই",
+        url: "https://www.saudia.com/information/terms-and-conditions/general-conditions-of-carriage",
       },
       {
-        name: "Biman Bangladesh Airlines Baggage Policy",
-        nameBn: "বিমান বাংলাদেশ এয়ারলাইন্স ব্যাগেজ নীতি",
-        url: "https://biman-airlines.com/index.php/baggageAll"
-      }
-    ]
+        name: "Saudi Gazette — Ministry of Hajj and Umrah guidance on carrying Zamzam: authorised airport sales points, designated belts, not in checked luggage, one bottle, Umrah visa or Nusuk permit",
+        nameBn: "সৌদি গেজেট — জমজম বহনে হজ ও ওমরাহ মন্ত্রণালয়ের নির্দেশনা: বিমানবন্দরের অনুমোদিত কেন্দ্র, নির্ধারিত বেল্ট, লাগেজে নয়, একটি বোতল, ওমরাহ ভিসা বা নুসুক পারমিট",
+        url: "https://saudigazette.com.sa/article/650555",
+      },
+      {
+        name: "Hazrat Shahjalal International Airport — Customs: duty-free list (100 g gold, 200 g silver, 12 of a type), gold-bar duty, 117 g cap, once per year, confiscation, commercial quantities seized (SRO 261-Act/2025)",
+        nameBn: "হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর — কাস্টমস: শুল্কমুক্ত তালিকা (১০০ গ্রাম স্বর্ণ, ২০০ গ্রাম রুপা, একই ধরনের ১২টি), স্বর্ণবারের শুল্ক, ১১৭ গ্রাম সীমা, বছরে একবার, জব্দ, বাণিজ্যিক পরিমাণ আটক (এসআরও ২৬১-অ্যাক্ট/২০২৫)",
+        url: "https://www.hsia.gov.bd/content-details/10/Customs",
+      },
+      {
+        name: "National Board of Revenue via BSS — 2025 baggage rules: 100 g gold or 200 g silver per calendar year, one 10-tola bar at Tk 5,000/tola, declaration mandatory before leaving the customs hall",
+        nameBn: "জাতীয় রাজস্ব বোর্ড, বিএসএস সূত্রে — ২০২৫ ব্যাগেজ বিধি: ক্যালেন্ডার বছরে ১০০ গ্রাম স্বর্ণ বা ২০০ গ্রাম রুপা, ১০ তোলার একটি বার প্রতি তোলায় ৫,০০০ টাকা, কাস্টমস হল ছাড়ার আগে ঘোষণা বাধ্যতামূলক",
+        url: "https://www.bssnews.net/others/288568",
+      },
+      {
+        name: "Dhaka Tribune — Biman Zamzam delivery delay on a Madinah–Dhaka flight (October 2026) and the airline's response",
+        nameBn: "ঢাকা ট্রিবিউন — মদিনা–ঢাকা ফ্লাইটে বিমানের জমজম সরবরাহে দেরি (অক্টোবর ২০২৬) ও এয়ারলাইন্সের প্রতিক্রিয়া",
+        url: "https://www.dhakatribune.com/bangladesh/421147/",
+      },
+      {
+        name: "National Board of Revenue — Bangladesh Customs Tariff, Chapter 8: dried dates (HS 0804.10.21/29) at 25% customs duty when assessed as a consignment",
+        nameBn: "জাতীয় রাজস্ব বোর্ড — বাংলাদেশ কাস্টমস ট্যারিফ, অধ্যায় ৮: শুকনো খেজুর (এইচএস ০৮০৪.১০.২১/২৯) চালান হিসেবে গণ্য হলে ২৫% শুল্ক",
+        url: "https://nbr.gov.bd/uploads/tariff_schedule/Chapter-8.pdf",
+      },
+      {
+        name: "Tibah Airports (Madinah) — Tax Refunds: Global Blue desk in the main terminal",
+        nameBn: "তিবাহ এয়ারপোর্টস (মদিনা) — ট্যাক্স রিফান্ড: মেইন টার্মিনালে গ্লোবাল ব্লু ডেস্ক",
+        url: "https://tibahairports.com/en-EN/airport-services-facilities/page/tax-refunds-en",
+      },
+      {
+        name: "Saudi Gazette — tourist VAT refund scheme launch: 15% VAT, SAR 500 minimum per retailer, unused goods, 90-day export, verification points at Riyadh, Jeddah and Dammam",
+        nameBn: "সৌদি গেজেট — পর্যটক ভ্যাট ফেরত স্কিমের সূচনা: ১৫% ভ্যাট, প্রতি বিক্রেতায় ৫০০ রিয়াল, অব্যবহৃত পণ্য, ৯০ দিনে রপ্তানি, রিয়াদ/জেদ্দা/দাম্মামে যাচাই কেন্দ্র",
+        url: "https://saudigazette.com.sa/article/653942",
+      },
+    ],
   },
   {
     id: "blog-22",

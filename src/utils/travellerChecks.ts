@@ -35,10 +35,15 @@ const TITLES = {
   ramadanAnnouncement: { en: "Wait for the Authority's own notice", bn: "কর্তৃপক্ষের নিজের বিজ্ঞপ্তির অপেক্ষা করুন" },
   ramadanBudget: { en: "Compare two dated quotes", bn: "তারিখসহ দুটি কোট তুলনা করুন" },
   ramadanRoute: { en: "Confirm visa, entry and permit before booking", bn: "বুকিংয়ের আগে ভিসা, প্রবেশ ও পারমিট নিশ্চিত করুন" },
+  zamzamBox: { en: "Buy at the airport, carry it separately", bn: "বিমানবন্দরে কিনুন, আলাদাভাবে বহন করুন" },
+  zamzamAirline: { en: "Confirm free or counted with your carrier", bn: "ফ্রি না গণনায়, ক্যারিয়ারের কাছে নিশ্চিত করুন" },
+  datesAllowance: { en: "Personal use, not commercial quantity", bn: "ব্যক্তিগত ব্যবহার, বাণিজ্যিক পরিমাণ নয়" },
+  goldDeclare: { en: "Weigh, count and declare", bn: "ওজন মাপুন, গুনুন, ঘোষণা দিন" },
+  vatRefund: { en: "Keep it boxed or skip the refund", bn: "বাক্সেই রাখুন, নাহলে ফেরত বাদ দিন" },
 } as const;
 
 export function getTravellerCheck(paragraph: string) {
-  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth|ihramPoint|ihramGarments|ihramTransit|ihramMadinah|ihramPersonal|ramadanDeadline|ramadanItikaf|ramadanAnnouncement|ramadanBudget|ramadanRoute)\):\s+([\s\S]+)$/);
+  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth|ihramPoint|ihramGarments|ihramTransit|ihramMadinah|ihramPersonal|ramadanDeadline|ramadanItikaf|ramadanAnnouncement|ramadanBudget|ramadanRoute|zamzamBox|zamzamAirline|datesAllowance|goldDeclare|vatRefund)\):\s+([\s\S]+)$/);
   if (!match) return null;
   const key = match[2] as keyof typeof TITLES;
   const locale = match[1] === "Traveller check" ? "en" : "bn";

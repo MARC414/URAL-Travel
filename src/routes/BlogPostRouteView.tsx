@@ -1898,7 +1898,8 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                         activePost.slug !== "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" &&
                         activePost.slug !== "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" &&
                         activePost.slug !== "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" &&
-                        activePost.slug !== "ramadan-umrah-itikaf-guide-bangladesh-booking-budget" && (
+                        activePost.slug !== "ramadan-umrah-itikaf-guide-bangladesh-booking-budget" &&
+                        activePost.slug !== "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" && (
 
                         <TravelIntelligence
 

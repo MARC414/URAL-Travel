@@ -1086,30 +1086,80 @@ Do I need Ihram on a flight that lands in Madinah?
 No. Madinah is not crossed on the way to Makkah on that flight, so you enter Ihram later from Dhul Hulayfah, wearing the garments at your hotel and completing the intention before the route reaches the parallel point. [1][2]
 What happens if I pass the Miqat without entering Ihram?
 The Ministry's page gives two outcomes: a pilgrim who passes it must return to it, and one who assumes Ihram after passing it must offer a Fidyah (compensation). Which applies to your case, and what to do if returning is impossible, is a question for a qualified scholar — this page does not decide it. [1]`,
-  "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": `At the end of your Umrah or Hajj journey, returning smoothly through **Jeddah (JED)** or **Madinah (MED)** departure terminals and clearing **Dhaka Hazrat Shahjalal International Airport (DAC)** customs requires following the official aviation and customs laws of both countries.
+  "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": `Coming home from Umrah or Hajj, three things cause almost every customs argument at Dhaka: the Zamzam box, the dates, and the gold. This guide covers exactly those three — what each rule actually says, who publishes it, and where the common advice you were given in Makkah stops being true. It is not legal advice, and no officer is obliged to assess your bag the way this page describes.
 
-1. WHAT ARE THE OFFICIAL GACA RULES FOR CARRYING ZAMZAM WATER FROM JEDDAH OR MADINAH AIRPORT?
-According to the **Saudi General Authority of Civil Aviation (gaca.gov.sa)** and the **King Abdullah bin Abdulaziz Zamzam Water Project**:
-Rule 1: Strict Ban on Loose Bottles Inside Checked Suitcases:
-- Never place plastic bottles or gallons of Zamzam water inside your checked-in suitcases! High-speed airport X-ray scanners detect liquid containers inside luggage and automatically divert your bag off the conveyor belt.
-Rule 2: Buy Only the Official 5-Liter Sealed Zamzam Carton at the Airport Kiosk:
-- Present your passport and **Umrah e-Visa / Nusuk App Permit** at the official **Zamzam Sales Kiosk** located just outside the Departure Hall of Jeddah Terminal 1 (Gate B/C outer plaza) or Madinah Airport.
-- **Allowance & Official Price:** Strictly **1 sealed 5-liter box per pilgrim** costing **48 SAR (~BDT 620)** via the official Nusuk app or airport kiosks, payable by card or cash.
-- **Airline Baggage Allowance:** Most airlines flying pilgrims home from Saudi Arabia allow one sealed 5-litre Zamzam can per passenger. **Check your airline's current Zamzam policy at check-in**—some carriers include it in your checked baggage allowance, while others may waive the weight. Label the carton clearly with your name, flight number, and mobile number in permanent marker.
+Quick Answer — Checked 19 October 2026: one sealed 5-litre bottle of Zamzam per pilgrim, bought at the airport and never packed inside a suitcase; the Madinah airport operator lists it at SAR 12.50 [1]. Bangladesh allows 100 g of gold ornaments and 200 g of silver, no more than 12 pieces of one type, once per calendar year, and one gold bar up to 117 g (10 tola) with Tk 5,000 duty per 11.664 g — declared, or it is seized [4][5]. There is no published kilogram allowance for dates: the test is personal use, and a commercial quantity can be taken [4].
 
-2. HOW MANY KILOGRAMS OF MADINAH AJWA & SUKKARI DATES CAN YOU BRING TO BANGLADESH?
-Buying dates from the **Madinah Central Date Market (Souq Al-Tamr, 1 km south of Masjid an-Nabawi)** or Al-Kaaki wholesale shops saves 40% compared to hotel gift shops:
-- **Realistic 2026 Date Prices in Madinah:**
-  • Grade-A Jumbo Ajwa Dates: **SAR 35 – SAR 50 per kg (~BDT 1,150 – 1,620/kg)**.
-  • Medium Ajwa Dates: **SAR 22 – SAR 30 per kg (~BDT 720 – 980/kg)**.
-  • Safawi (Kalmi) & Sukkari Rutab Dates: **SAR 12 – SAR 20 per kg (~BDT 390 – 650/kg)**.
-- **Packing & Customs Rule:** Pack dates in 1kg or 2kg vacuum-sealed packets inside your regular 23kg checked suitcases (not in cabin hand-carry if syrupy/wet). Bangladesh Customs (**nbr.gov.bd**) permits up to **5 kg to 10 kg of dates per passenger** for personal family consumption duty-free within your airline baggage weight limit.
+1. THE ZAMZAM BOX: ONE BOTTLE, BOUGHT AT THE AIRPORT, CARRIED SEPARATELY
+The rule is not about how much water you own; it is about which container is allowed on the aircraft. The operator of Madinah airport states that a passenger may buy one 5-litre bottle at the dedicated Zamzam sales point, that a valid passport is required, that each passenger is limited to one bottle per purchase, and that bottles "must be carried separately and are prohibited from being placed in checked baggage" [1]. Saudia's conditions of carriage say the same: the bottle is not permitted inside checked baggage [2].
 
-3. WHAT IS THE OFFICIAL BANGLADESH NBR CUSTOMS RULE FOR GOLD JEWELRY & ELECTRONICS AT DHAKA AIRPORT?
-Under the updated **Bangladesh National Board of Revenue (NBR - nbr.gov.bd) Passenger (Non-Tourist) Baggage Rules**:
-- **22K / 21K Gold Ornaments (Jewelry):** An adult passenger arriving at Dhaka Airport (DAC) may bring up to **100 grams (approx. 8.57 Bhori) of gold ornaments** (not exceeding 12 pieces of a single item type) **duty-free** for personal/family use, as per official Bangladesh Customs baggage rules.
-- **Gold Bars / Bullion:** Strictly regulated; requires formal declaration at the Dhaka Customs Red Channel and payment of statutory customs duty per Bhori (11.664g), subject to maximum once-a-year passenger frequency limits.
-- **Saudi VAT Refund (15% Tax-Free ZATCA):** Always ask licensed Makkah/Madinah gold shops for an official digital QR invoice.`,
+The Ministry of Hajj and Umrah's guidance, reported in March 2025, adds the purchase side: buy from authorised sales points at the airport, hand the bottle over to be placed on the designated belt, and present a valid Umrah visa or a Nusuk permit [3]. The Madinah operator's own page asks for the passport; treat the visa or permit as the Ministry's condition and the passport as the counter's [1][3].
+
+Do not buy loose bottles in Makkah or Madinah and expect them to fly. Do not decant water into your own bottles, and do not wrap a bottle in clothes inside a suitcase. The accepted item is the factory-sealed container from the King Abdullah bin Abdulaziz Zamzam Water Project, sold at the airport, tagged and loaded apart from your bags [1][2][3].
+
+Traveller check (zamzamBox): Buy the box at the airport on the day of travel, keep the seal intact, and hand it in at the counter rather than packing it. If anyone offers you a cheaper sealed box outside the airport, it is not the item the airline will accept, and you will be the one repacking at the check-in queue.
+
+2. WHAT THE BOX COSTS, AND WHETHER IT EATS INTO YOUR BAGGAGE
+The Madinah operator publishes SAR 12.50 for the 5-litre bottle [1]. Jeddah counters have repeatedly been reported at around SAR 12, but the airport's own counter price governs on the day. A previous version of this page said 48 SAR; that figure belongs to a different product — a 24 × 330 ml carton sold through the Nusuk app for delivery inside the Kingdom — and it is not the price of the pilgrim bottle [1].
+
+Whether the box is free or counted is an airline question, and the answer differs by carrier. Saudia's published conditions allow one 5-litre bottle free of charge for guests travelling from Jeddah or Madinah, counted as part of the allowable checked baggage; extra bottles are treated as excess baggage; and Saudia states it will not compensate a guest if the bottle is lost or delayed, though it will provide an alternative when possible [2]. That is the opposite of the "free extra piece, always" advice that circulates in WhatsApp groups.
+
+For Biman, this review could not find a published Zamzam allowance on the airline's baggage pages. Biman does carry the boxes — a delayed Zamzam delivery on a Madinah–Dhaka flight in October 2026 became a public complaint — but carriage practice is not a published allowance [6]. Ask Biman at check-in, in writing if you can, whether the box is additional to your ticket or counts inside it.
+
+Traveller check (zamzamAirline): Before you buy, confirm two things with the operating carrier: whether the 5-litre box is additional to your checked allowance or inside it, and whether it can be lost without compensation. A 5-litre bottle weighs over 5 kg, so if your carrier counts it, you have that much less for everything else.
+
+3. DATES: THERE IS NO KILOGRAM ALLOWANCE — THERE IS A PERSONAL-USE TEST
+Bangladesh's airport customs guidance is blunt about the dividing line: goods carried by a passenger are exempt from duty "unless considered commercial", and "any quantity of goods brought for commercial purposes will be seized" [4]. Dried dates carry a 25% customs duty when they are assessed as a consignment rather than personal baggage [7]. What does not exist, in anything that could be opened for this review, is a published "5 kg" or "10 kg" per-passenger dates allowance — the figure this page used to print had no source behind it.
+
+In practice that means: a family's own consumption, packed in sealed retail or vacuum packs with the grade and packing date visible, sits inside your personal baggage allowance. Several cartons bought to distribute as gifts across a neighbourhood, or quantities that look like stock for resale, invite the commercial judgement, and with it assessment or seizure [4][7].
+
+Date prices move by grade, shop and season, so this page no longer prints a per-kilogram table that cannot be re-checked. Ask the price per kilogram, look at the packing date, compare two shops rather than trusting a "wholesale price", and remember that the cheapest carton is often last season's stock.
+
+Traveller check (datesAllowance): Keep dates for your household, not for sale, in sealed packs you could open and show. If you are carrying a large quantity as gifts, declare it and expect a question about commercial use — the answer to that question, not the weight, decides the outcome.
+
+4. GOLD: WHAT BANGLADESH ACTUALLY ALLOWS DUTY-FREE
+Dhaka airport's customs page sets out the duty-free list: "100 gram gold ornaments and 200 gram silver ornaments (not more than 12 of the same type of ornaments)", under SRO No. 261-Act/2025/71/Customs of 2 June 2025 [4]. The 2025 baggage rules add two conditions that the old version of this page missed: the allowance is **per calendar year**, regardless of how many trips you make, and the jewellery must be ornaments of 22 carats or below — the definition was tightened so that melted 24-carat bars cannot pass as bangles [5][8].
+
+The bar is separate and stricter. A passenger may bring a maximum of 117 g or 10 tola of gold bar or ingot, once per year, by declaring it and paying Tk 5,000 per 11.664 g — roughly Tk 50,000 for the full 117 g [4]. The airport's page is unambiguous about what follows: any amount above 117 g is confiscated, and carrying gold bar, ingot or other non-ornament gold without declaring it is illegal, with detention and a criminal case following an undeclared find [4].
+
+One more restriction worth knowing before you shop: budget reporting in 2024 excluded passengers under 12 from the gold allowance altogether. Treat that as the reported position and confirm it with the current SRO before a child is listed as the carrier of a family's gold [8].
+
+Traveller check (goldDeclare): Weigh your ornaments before you fly and count pieces of the same type. Below 100 g of ornaments, of 22 carats or less, in fewer than 12 identical pieces, you can use the green channel. Anything else — including any bar — is declared before you leave the customs hall, and an attempted undeclared carry is treated as smuggling, not as a paperwork error.
+
+5. THE 15% VAT REFUND: A REAL SCHEME WITH CONDITIONS MOST PILGRIMS MISS
+Saudi Arabia charges 15% VAT, and since April 2025 non-resident visitors can claim it back on eligible goods bought from participating retailers, through the scheme operator Global Blue [9]. The conditions matter more than the headline: the buyer must be 18 or older and a non-resident, the purchase must reach SAR 500 at one retailer on one day (up to three invoices may be combined), the goods must be unused and in their original packaging, and they must leave the Kingdom within 90 days, validated at an airport before departure [9].
+
+Jewellery is where this goes wrong. A ring you wore through Ramadan is used, not unused, and it fails the scheme regardless of the invoice. Keep the piece boxed, keep the original tax-free form and invoice, and present them at the validation counter before check-in. The Madinah airport operator lists a Global Blue tax-refund desk in the main terminal, so the service is not limited to Jeddah — but confirm the desk is staffed on your departure date and terminal [8][9].
+
+This is a refund of tax you paid, not a discount, and it is not available on food, drink, tobacco, hotels or restaurant bills [9]. Treat any shop that promises an instant 15% off at the till as a shop describing something else.
+
+Traveller check (vatRefund): Decide before you shop whether the item will stay boxed until you fly. If it will be worn, skip the refund form and negotiate the price instead; if it stays boxed, check the SAR 500 minimum, keep every invoice, and confirm the validation counter at your departure airport.
+
+6. PACKING ORDER FOR THE FLIGHT HOME
+- Zamzam: buy at the airport, keep it sealed, hand it over at the counter, never inside a suitcase [1][2].
+- Dates: sealed retail or vacuum packs, personal quantity, packing date visible [4].
+- Gold: ornaments only within the allowance; everything else declared, with the duty ready to pay [4][5].
+- Receipts: keep the tax-free forms and invoices with the goods, not in the checked bag [9].
+- Medicines and liquids: the 100 ml cabin rule still applies to everything except the sealed Zamzam box handled at check-in.
+
+7. THE DHAKA ARRIVAL, IN ORDER
+Land, collect your bags, then decide the channel honestly. If you are inside the ornaments allowance and carrying nothing dutiable, the green channel is the normal route [4]. If you are carrying a bar, more than 100 g of ornaments, or anything you are unsure about, use the red channel and declare before leaving the customs hall — the 2025 rules made an early declaration mandatory rather than optional, and it can also be filed online [5].
+
+Declaring is not a penalty; it is the procedure that makes the duty payable instead of the goods seizable. The expensive mistake is being found with undeclared gold, which the airport's own page describes as a criminal matter rather than a tax adjustment [4].
+
+8. FREQUENTLY ASKED QUESTIONS
+How much Zamzam water can I bring to Bangladesh?
+One factory-sealed 5-litre bottle per pilgrim, bought at an authorised airport sales point and carried separately — never inside checked baggage. The Madinah operator lists it at SAR 12.50 and asks for a passport; the Ministry asks for an Umrah visa or Nusuk permit. [1][3]
+Is the Zamzam box free on top of my baggage?
+It depends on the airline. Saudia allows one 5-litre bottle free of charge from Jeddah or Madinah but counts it inside your checked allowance, charges excess for extras, and does not compensate if it is lost or delayed. Biman publishes no Zamzam allowance that this review could find, so ask at check-in. [2][6]
+How many kilograms of dates can I bring duty-free?
+There is no published per-passenger kilogram allowance. Personal-use quantities inside your baggage allowance are exempt; quantities that look commercial can be seized, and dried dates assessed as a consignment carry 25% duty. [4][7]
+How much gold jewellery is duty-free at Dhaka airport?
+100 g of gold ornaments and 200 g of silver ornaments, no more than 12 pieces of the same type, once per calendar year, and the gold must be ornaments of 22 carats or below. [4][5][8]
+Can I bring a gold bar?
+One bar up to 117 g (10 tola) per year, declared, with Tk 5,000 duty per 11.664 g. Anything above 117 g is confiscated, and undeclared gold is treated as a criminal matter. [4]
+Can I get the 15% Saudi VAT back on gold I buy in Makkah or Madinah?
+Only if the conditions are met: SAR 500 at one retailer, goods unused in original packaging, departure within 90 days, and validation at an airport counter before you fly. Jewellery you wear is used and does not qualify. [8][9]`,
   "bangladeshi-halal-food-guide-makkah-madinah-budget-meals": `Every restaurant in Makkah and Madinah is 100% Halal by law under **Saudi Food and Drug Authority (SFDA - sfda.gov.sa)** and municipal hygiene inspections. However, for Bangladeshi pilgrims—especially seniors over 60 with diabetes or sensitive stomachs—finding warm, lightly spiced **Desi rice, daal, fish, and vegetable bhaji** near the Haram makes all the difference.
 
 1. WHERE TO FIND AUTHENTIC BANGLADESHI & BENGALI RESTAURANTS IN MAKKAH?
