@@ -1,3 +1,8 @@
+import { TravellerCheckNote } from "../src/components/TravellerCheckNote";
+import { getTravellerCheck } from "../src/utils/travellerChecks";
+import React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { UmrahBudgetCalculator } from "../src/components/UmrahBudgetCalculator";
 import fs from "node:fs";
 import path from "node:path";
 import { validateSitemapPair } from "./sitemapValidation";
@@ -197,8 +202,8 @@ function renderUmrahBudgetTableHtml(locale: "en" | "bn"): string {
     isBengali ? "১০ দিনের DIY Umrah পরিকল্পনা-হিসাব" : "10-day DIY Umrah planning estimate"
   }</h2><p>${
     isBengali
-      ? "চারজনের পরিবারের রুম-শেয়ারের আগের প্রকাশিত হিসাবটি রাখা হয়েছে; ১৪ অক্টোবর ২০২৬-এ নতুন করে দাম যাচাই করা হয়নি।"
-      : "The previously published family-of-four-sharing figure is retained; it was not re-priced on 14 October 2026."
+      ? "১৪ অক্টোবর ২০২৬-এ রাখা চারজনের পরিবারের রুম-শেয়ারের পুরোনো reference বহাল আছে; ১৯ অক্টোবর ২০২৬-এ নতুন দাম যাচাই করা হয়নি।"
+      : "The family-of-four-sharing reference carried forward on 14 October 2026 is retained; it was not re-priced on 19 October 2026."
   }</p><div class="overflow-x-auto"><table><caption class="sr-only">${
     isBengali
       ? "আগের প্রকাশিত ১০ দিনের Umrah পরিকল্পনা-হিসাব ও quote তুলনার সীমাবদ্ধতা"
@@ -1081,7 +1086,8 @@ function buildAllRoutes(): PrerenderRoute[] {
     bodyHtml: `
       <article>
         <h1>Umrah &amp; Hajj Guide from Bangladesh (2026): DIY BDT Cost Calculator, Nusuk &amp; Flights</h1>
-        <p>Plan an independent 10-day Umrah trip from Dhaka (DAC) using our preserved planning estimate of BDT 1,16,000–1,32,000 per pilgrim (4-person sharing, unre-priced reference checked 14 October 2026; not a live quote) or compare official Bangladesh Hajj registration rules (hajj.gov.bd).</p>
+        <p>Who this guide is for: families and independent travellers leaving Bangladesh who need to choose an eligible Umrah route, collect comparable quotes and plan the next booking step. Start with your visa route, then use the BDT worksheet. Hajj registration is a separate process.</p>
+        ${renderToStaticMarkup(React.createElement(UmrahBudgetCalculator, { isBn: false }))}
         <section>
           <h2>Frequently Asked Questions on Umrah &amp; Hajj from Bangladesh</h2>
           ${HAJJ_UMRAH_FAQS.map(
@@ -2241,6 +2247,9 @@ function buildAllRoutes(): PrerenderRoute[] {
               if (post.slug === HAJJ_RESOURCE_DOWNLOAD_SLUG && trimmedPara === HAJJ_RESOURCE_DOWNLOAD_MARKER) {
                 return renderHajjResourceDownloadHtml("en");
               }
+              if (getTravellerCheck(trimmedPara)) {
+                return renderToStaticMarkup(React.createElement(TravellerCheckNote, { paragraph: trimmedPara }));
+              }
               const faqSection = getVisibleBlogFaqSection(post.slug, trimmedPara, "en");
               if (faqSection) return renderVisibleFaqHtml(faqSection);
               if (trimmedPara === "[[figure]]") {
@@ -2420,6 +2429,9 @@ function bnParagraphs(
         rawParagraph.trim() === HAJJ_RESOURCE_DOWNLOAD_MARKER
       ) {
         return renderHajjResourceDownloadHtml("bn");
+      }
+      if (getTravellerCheck(rawParagraph)) {
+        return renderToStaticMarkup(React.createElement(TravellerCheckNote, { paragraph: rawParagraph }));
       }
       const faqSection = getVisibleBlogFaqSection(slug || "", rawParagraph, "bn");
       if (faqSection) return renderVisibleFaqHtml(faqSection);
@@ -2873,6 +2885,7 @@ function buildBengaliBody(
   }
 
   if (group === "umrah") {
+    parts.push(renderToStaticMarkup(React.createElement(UmrahBudgetCalculator, { isBn: true })));
     parts.push(
       bnFaqList("উমরাহ ও হজ: সাধারণ প্রশ্ন", getLocalizedHajjFaqs("bn"))
     );

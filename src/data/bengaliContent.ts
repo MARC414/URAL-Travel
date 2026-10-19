@@ -26,13 +26,12 @@ export const BENGALI_BLOG_OVERRIDES: Record<
 > = {
   ...SCHEDULED_BENGALI_BLOG_OVERRIDES,
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": {
-    title: "বাংলাদেশ থেকে DIY Umrah গাইড (২০২৬–২৭): Nusuk, Visa Route, BDT বাজেট ও ফরজ Hajj নিয়ম",
-    summary:
-      "বাংলাদেশি পাসপোর্টধারীদের Umrah-এর জন্য তিনটি visa route আছে: Nusuk বা বাইরের সেবাদাতার Standard Umrah Visa, শর্তসাপেক্ষ ৯৬ ঘণ্টার stopover, এবং যোগ্য Saudi tourist-visa route। এই গাইডে ফরজ Hajj-এর আলাদা নিবন্ধন ও permit, ১৪৪৮ হিজরি মৌসুম এবং চারজনের পরিবারের শেয়ারে ১০ দিনের আগের planning estimate জনপ্রতি BDT 1,16,000–1,32,000—নতুন করে দাম যাচাই না করে—তুলে ধরা হয়েছে।",
+    title: "বাংলাদেশ থেকে DIY ওমরাহ: ভিসার পথ, Nusuk ধাপ ও বাজেট যাচাই",
+    summary: "বাংলাদেশ থেকে শর্তসাপেক্ষ ওমরাহ ভিসার পথ, প্রকাশিত ১৪৪৮ হিজরি তারিখ এবং আবেদন থেকে পারমিটের সঠিক ক্রম। Package Visa-র শর্ত, সূত্রের সীমা ও পুরোনো ১০ দিনের বাজেট আছে—লাইভ কোট নয়। অফিশিয়াল নির্দেশনা ১৯ অক্টোবর ২০২৬-এ দেখা; ব্যক্তিগত অ্যাপ পরীক্ষা করা হয়নি।",
     category: "Hajj & Umrah",
     date: "২৬ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "১১ মিনিট পড়া",
+    readTime: "১২ মিনিট পড়া",
     references: [
       {
         name: "Saudi Ministry of Hajj and Umrah — Nusuk Umrah launch for overseas pilgrims",
@@ -80,9 +79,9 @@ export const BENGALI_BLOG_OVERRIDES: Record<
         url: "https://visa.visitsaudi.com/",
       },
       {
-        name: "Visit Saudi Help Center — used US, UK or Schengen visa eligibility",
-        nameBn: "Visit Saudi Help Center — আগে ব্যবহৃত US, UK বা Schengen visa-র যোগ্যতা",
-        url: "https://help.visitsaudi.com/hc/en-us/articles/360018933099-Can-I-get-a-visit-visa-if-I-have-a-valid-US-or-UK-or-Schengen-visa-",
+        name: "Visit Saudi — current visa requirements and eligibility checker",
+        nameBn: "Visit Saudi — বর্তমান ভিসার শর্ত ও যোগ্যতা যাচাই",
+        url: "https://www.visitsaudi.com/en/plan-your-trip/visa-regulations",
       },
       {
         name: "Bangladesh Haj Management Portal",
@@ -125,6 +124,21 @@ export const BENGALI_BLOG_OVERRIDES: Record<
         url: "https://sar.hhr.sa/travel/guidelines/baggage",
       },
       {
+        name: "Saudi Ministry of Tourism — Tourist Visa Regulations, Articles 5–6 (revision date unconfirmed)",
+        nameBn: "সৌদি পর্যটন মন্ত্রণালয় — Tourist Visa Regulations, Article 5–6 (revision date অনিশ্চিত)",
+        url: "https://cdn.mt.gov.sa/mtportal/mt-fe-production/content/policies-regulations/documents/tourism-regulations/Tourist-Visa-Regulations-En-V012.pdf",
+      },
+      {
+        name: "SPA — Ministry foreign-visa and permanent-residence announcement, 12 June 2023",
+        nameBn: "SPA — বিদেশি ভিসা ও permanent residence নিয়ে মন্ত্রণালয়ের ঘোষণা, ১২ জুন ২০২৩",
+        url: "https://www.spa.gov.sa/w1919582",
+      },
+      {
+        name: "SPA — GCC-resident eVisa without specific professions, 2 May 2023",
+        nameBn: "SPA — নির্দিষ্ট পেশার শর্ত ছাড়া GCC-resident eVisa, ২ মে ২০২৩",
+        url: "https://www.spa.gov.sa/w1895923",
+      },
+      {
         name: "Additional portal: Nusuk Saudi platform",
         nameBn: "অতিরিক্ত portal: Nusuk Saudi platform",
         url: "https://www.nusuk.sa",
@@ -150,82 +164,117 @@ export const BENGALI_BLOG_OVERRIDES: Record<
         url: "https://u.ae",
       },
     ],
-    content: `বাংলাদেশি পাসপোর্টধারীরা নিজে Umrah ভ্রমণ পরিকল্পনা করতে পারেন—তবে DIY মানে এই নয় যে সব ভিসা আলাদা করে কেনা যায় বা কখনোই এজেন্টের প্রয়োজন হয় না। ভিসার তিনটি পথ হলো: Standard Umrah Visa (সরাসরি Nusuk অথবা বাইরের সেবাদাতা), শর্তসাপেক্ষ ৯৬ ঘণ্টার Saudi stopover visa, এবং যোগ্যতার ভিত্তিতে Saudi tourist-visa route। চারজনের পরিবারের রুম-শেয়ারে ১০ দিনের আগের পরিকল্পনা-হিসাবটি জনপ্রতি BDT 1,16,000–1,32,000 রাখা হয়েছে; নতুন করে দাম যাচাই করা হয়নি। ফরজ Hajj-এর নিবন্ধন ও Saudi permit আলাদা।
+    content: `এই গাইড কাদের জন্য: ঢাকা থেকে ওমরাহে যেতে চান এমন বাংলাদেশি পাসপোর্টধারী, যাঁরা যোগ্য ভিসার পথ, টাকা দেওয়ার আগে করণীয় এবং আবেদন, ভিসা ও পারমিটের সঠিক ক্রম বুঝতে চান।
 
-এই গাইডের তথ্য ১৪ অক্টোবর ২০২৬ তারিখে সরকারি সূত্রের সঙ্গে মিলিয়ে দেখা হয়েছে। Visa, season, permit ও fare-এর শর্ত বদলাতে পারে—বুকিংয়ের আগে সংশ্লিষ্ট live application এবং operator-এর নির্দেশনা দেখুন।
+সংক্ষিপ্ত উত্তর
+১৯ অক্টোবর ২০২৬-এ যাচাই অনুযায়ী তিনটি শর্তসাপেক্ষ ভিসা-শ্রেণি বিবেচনা করুন: সরাসরি Nusuk বা অনুমোদিত বাইরের সেবাদাতার Standard Umrah Visa; যোগ্য airline stopover; অথবা যোগ্য tourist-visa route। DIY মানে সব ভিসা আলাদা কেনা যায় বা অনুমোদন নিশ্চিত—এমন নয় [১–৪, ৬–১০]। আগে যোগ্যতা ও মৌসুম দেখুন, আবেদনে চাইলে তখন বায়োমেট্রিক দিন, এরপর ইস্যু হওয়া ভিসা মিলিয়ে ভিজিটর নিবন্ধন ও আলাদা পারমিট বুক করুন [৪–৫, ১৫–১৬]।
 
-১. Umrah ও ফরজ Hajj-এর নিয়ম আলাদা
-Umrah ও Hajj পৃথক ইবাদত, এবং প্রবেশ ও permit-এর নিয়মও এক নয়। Umrah, tourist বা stopover visa Hajj permit নয়। বাংলাদেশ থেকে ফরজ Hajj করতে বাংলাদেশ Haj Management Portal-এর নিবন্ধনপ্রক্রিয়া এবং সৌদি কর্তৃপক্ষের বর্তমান Hajj permit-এর নিয়ম অনুসরণ করতে হয় [১১–১২]।
+এটি প্রকাশিত অফিশিয়াল নির্দেশনার যাচাই; সম্পন্ন ভিসা আবেদন বা যাত্রীর লগইন করা অ্যাপের পরীক্ষা নয়। নিচের জনপ্রতি BDT 1,16,000–1,32,000 হলো ১৪ অক্টোবর ২০২৬-এর আগের ১০ দিন ও পরিবারের চারজনের রুম-শেয়ারের হিসাব; নতুন করে দাম যাচাই হয়নি। নিজের বর্তমান খরচের জন্য ওমরাহ হাবের কোট-ইনপুট worksheet ব্যবহার করুন।
 
-বাংলাদেশের পোর্টালে ২০২৭ সালের Hajj নিবন্ধনের শেষ তারিখ ২৬ সেপ্টেম্বর ২০২৬ দেখানো হয়েছিল। এই গাইড ১৪ অক্টোবর ২০২৬ তারিখে পর্যালোচনার সময় সেটি পেরিয়ে গেছে। পোর্টালে পরবর্তী কোনো মেয়াদবৃদ্ধি বা নতুন বিজ্ঞপ্তি আছে কি না দেখুন; নিবন্ধন খোলা আছে ধরে নেবেন না এবং এই বছরের তারিখ অন্য বছরে প্রয়োগ করবেন না [১১]।
+১. DIY ওমরাহ ও ফরজ হজ কি একই প্রক্রিয়া?
+না। Umrah, tourist বা stopover visa হজের পারমিট নয়। বাংলাদেশের হজ নিবন্ধন, প্যাকেজ ও সৌদি হজ পারমিট আলাদা প্রক্রিয়ার বিষয়; আলাদা হজ নিবন্ধন গাইড এবং বাংলাদেশের অফিশিয়াল পোর্টাল দেখুন [১১]।
 
-১৪৪৭ হিজরি (২০২৬) মৌসুমের জন্য Saudi Press Agency-তে প্রকাশিত সৌদি স্বরাষ্ট্র মন্ত্রণালয়ের বিজ্ঞপ্তিতে permit ছাড়া Hajj করা বা করার চেষ্টা এবং নির্দিষ্ট নিষেধাজ্ঞার সময়ে visit visa নিয়ে Makkah বা Holy Sites-এ প্রবেশ/অবস্থানের ক্ষেত্রে সর্বোচ্চ SAR 20,000 জরিমানার কথা আছে। বিজ্ঞপ্তির ১০ বছরের পুনঃপ্রবেশ নিষেধাজ্ঞা কেবল নির্দিষ্টভাবে নির্বাসিত infiltrator শ্রেণির জন্য; প্রত্যেক দর্শনার্থীর জন্য নয়। এই নিয়ম ১৪৪৭ হিজরি মৌসুমের জন্য—পরের Hajj মৌসুমে নতুন সরকারি বিজ্ঞপ্তি দেখুন [১২]।
+ওমরাহ গাইডে কপি করা হজের শেষ তারিখ ধরে পরিকল্পনা করবেন না। আলাদা হজ পর্যালোচনায় পোর্টালের ব্যানার ও তারিখযুক্ত বিজ্ঞপ্তির সেপ্টেম্বরের সময়সীমায় অমিল নথিভুক্ত আছে; এখানে তার সমাধান করা হয়নি। রাখা SPA বিজ্ঞপ্তিটি ১৪৪৭ হিজরি/২০২৬-এর হজ বিধিনিষেধের, সব ১৪৪৮ হিজরি/২০২৭ নিয়মের প্রমাণ নয় [১২]। যাত্রার আগে নিজের মৌসুমের বর্তমান সৌদি বিধিনিষেধ দেখুন।
 
-২. বাংলাদেশি পাসপোর্টধারীদের জন্য ভিসার তিনটি পথ
+২. ভিসার তিনটি শ্রেণির কোনটি আপনার জন্য প্রযোজ্য?
 পথ ১: Standard Saudi Umrah Visa — সরাসরি Nusuk অথবা বাইরের সেবাদাতা
-সৌদি হজ ও Umrah মন্ত্রণালয় ২০ আগস্ট ২০২৫ তারিখে বিদেশি Umrah যাত্রীদের জন্য Nusuk Umrah সরাসরি সেবার ঘোষণা দেয়। ১৪ অক্টোবর ২০২৬ তারিখে দেখা Nusuk registration তালিকায় nationality ও residence—দুই ক্ষেত্রেই Bangladesh ছিল। এতে সরাসরি সেবাটি যাচাই করার সুযোগ বোঝায়; ভিসা অনুমোদন বা প্রত্যেক সেবার নিশ্চয়তা নয়। উদ্বোধনী ঘোষণায় আলাদা সেবা বেছে নেওয়ার কথা থাকলেও বর্তমান Terms-এ package-কে একাধিক সেবার সমন্বয় বলা হয়েছে। তাই একা visa-only checkout পাওয়া যাবে ধরে নেবেন না—নিজের আবেদনের সময়কার package ও শর্ত দেখুন [১–৪]।
+মন্ত্রণালয়ের ২০ আগস্ট ২০২৫-এর ঘোষণায় Nusuk Umrah দিয়ে বিদেশ থেকে সরাসরি আবেদন এবং স্বীকৃত এজেন্টের কথা আছে। ১৯ অক্টোবর ২০২৬-এ আবার খোলা nationality ও residence তালিকায় Bangladesh আছে। নিবন্ধন মানেই অনুমোদন বা শুধু ভিসার checkout পাওয়ার প্রমাণ নয় [১–২]।
 
-অনুমোদিত বাইরের Umrah agent এই একই ভিসা-শ্রেণির আরেকটি সেবা-পথ। মন্ত্রণালয়ের FAQ অনুযায়ী, বাইরের agent আবাসন ও পরিবহন সেবা ছাড়া Umrah visa ইস্যু করতে পারে না। টাকা দেওয়ার আগে মন্ত্রণালয়ের বর্তমান চ্যানেলে সেবাদাতাকে যাচাই করুন এবং কী আবাসন/পরিবহন, কার কাছ থেকে, কী বাতিলের শর্তে পাচ্ছেন—সব লিখিতভাবে নিন। পুরোনো “শুধু visa” কোট বা অননুমোদিত মধ্যস্থতাকারীর কথায় নির্ভর করবেন না [৪]।
+শুধু উদ্বোধনী ঘোষণা নয়, বর্তমান অফার পড়ুন। Nusuk-এর শর্তে individual package একাধিক সেবার সমন্বয়; লক্ষ্য দেশ ও সেবা বদলাতে পারে। বাইরের এজেন্টের ক্ষেত্রে মন্ত্রণালয়ের FAQ বলে, আবাসন ও পরিবহন ছাড়া Umrah visa ইস্যু করা যায় না [৩–৪]। টাকা দেওয়ার আগে অফিশিয়াল মাধ্যমে সেবাদাতা যাচাই করে সুনির্দিষ্ট সেবা, সরবরাহকারী, মোট খরচ, পেমেন্টের ধাপ এবং বাতিল/ফেরতের শর্ত লিখিতভাবে নিন। ভিসার টাকা ফেরতযোগ্য বা ফেরত সঙ্গে সঙ্গে হবে ধরে নেবেন না।
 
-পথ ২: যোগ্যতার ভিত্তিতে ৯৬ ঘণ্টার Saudi stopover visa
-Visit Saudi বলছে, যোগ্য যাত্রীরা Saudia বা flynas-এর নির্দিষ্ট connecting itinerary বুক করে সর্বোচ্চ ৯৬ ঘণ্টার stopover-এর জন্য আবেদন করতে পারেন। রুট ও airline-ভেদে টিকিট এবং আবেদন-শর্ত আলাদা; কেনার আগে airline-এর live checkout দেখুন। ১৪ অক্টোবর ২০২৬ তারিখে Visit Saudi-র তথ্যে Saudia-র visa নিজে বিনা মূল্যের, application fee প্রায় SAR 39.50 এবং insurance SAR 13 থেকে দেখানো হয়েছিল। এগুলো checkout-এর line item—সব airline বা যাত্রীর নিশ্চিত মোট খরচ নয়। হোটেল রাত অন্তর্ভুক্ত ধরে বুক করবেন না [৬–৭]।
+পথ ২: যোগ্য airline stopover — সর্বোচ্চ ৯৬ ঘণ্টা
+Stopover হলো পরবর্তী গন্তব্যে যাওয়ার পথে ছোট বিরতি, ১০ দিনের ওমরাহের পথ নয়। যাচাই করা Saudia নির্দেশনায় ফ্লাইট বুকিংয়ের মধ্যেই ভিসা আবেদন করতে হয়; অন্তত ছয় মাস মেয়াদের পাসপোর্ট, পরবর্তী গন্তব্যের নিশ্চিত টিকিট এবং প্রযোজ্য হলে সেই দেশের ভিসা বা বসবাসের অনুমতি লাগে। চূড়ান্ত প্রবেশ passport control-এর সিদ্ধান্তের অধীন [৬–৭]।
 
-পথ ৩: যোগ্য Saudi tourist-visa route
-১৪ অক্টোবর ২০২৬ তারিখে দেখা official eVisa portal-এর সাধারণ nationality-only তালিকায় Bangladesh ছিল না। তবে Visit Saudi-র Package Visa পদ্ধতিতে বাংলাদেশি পাসপোর্টধারীদের জন্য অনুমোদিত সেবাদাতার মাধ্যমে নিশ্চিত flight ও accommodation-সহ সমন্বিত package লাগে। এই Package Visa tourist-visa শ্রেণির ভেতরের একটি উপ-পথ—চতুর্থ কোনো category নয় [৮–৯]।
+কেনার আগে নিজের airline-এর প্রকৃত checkout পড়ুন। Saudia বলে, visa, service, medical ও insurance-এর খরচ MOFA নিয়মে হিসাব হয়; Visit Saudi-র প্রচারিত line-item উদাহরণ আপনার নিশ্চিত মোট প্রদেয় খরচ নয়। ফ্রি হোটেল বা নিশ্চিত processing time ধরে পরিকল্পনা করবেন না। অন্য carrier হলে তার নিজস্ব বর্তমান itinerary ও আবেদন-শর্ত যাচাই করুন। ছোট এই সফরের বিস্তারিত আলাদা stopover গাইডে আছে [৬–৭]।
 
-বৈধ এবং আগে ব্যবহার করা US, UK বা Schengen tourist/business visa-সহ কিছু যাত্রী শর্ত পূরণ করলে Saudi visit visa on arrival-এর যোগ্য হতে পারেন; live portal, carrier ও arrival-এর শর্ত প্রযোজ্য [১০]। GCC residents-দের জন্য আলাদা route থাকতে পারে; বর্তমান residence ও occupation criteria official eVisa portal-এ দেখুন [৯]। নিজের passport, residence ও itinerary দিয়ে eligibility যাচাই করুন; এক বছরের বা multiple-entry visa ধরে নেবেন না [৯–১০]। Tourist-visa route দিয়ে Umrah করলেও visa-র শর্ত, Nusuk service এবং Hajj-মৌসুমের নিষেধাজ্ঞা মানতে হবে। এই route Hajj করার অনুমতি দেয় না [৪, ৮–৯, ১২]।
+পথ ৩: Package Visa-সহ যোগ্য tourist-visa route
+১৯ অক্টোবর ২০২৬-এ আবার খোলা সাধারণ nationality-only eVisa তালিকায় Bangladesh নেই। Visit Saudi আলাদাভাবে অনুমোদিত পর্যটন সেবাদাতার Package Visa-তে বাংলাদেশি পাসপোর্টধারীদের নাম বলে। এটি tourist শ্রেণির উপ-পথ, চতুর্থ শ্রেণি বা বাধাহীন শুধু ভিসা কেনার সুযোগ নয় [৮–৯]।
 
-৩. Visa-র মৌসুম ও প্রবেশের সময়সীমা দেখুন
-Saudi Umrah-তে প্রবেশের সময় বর্তমান season calendar ও Hajj-সংক্রান্ত বিধিনিষেধের অধীন; Umrah-কে সারা বছর কোনো বাধা ছাড়াই করা যায় বলা ঠিক নয়। মন্ত্রণালয়ের ১৪৪৮ হিজরি calendar অনুযায়ী visa issue-এর শেষ তারিখ ৯ মার্চ ২০২৭, যাত্রী প্রবেশের শেষ তারিখ ২৩ মার্চ ২০২৭ এবং চূড়ান্ত departure-এর তারিখ ৭ এপ্রিল ২০২৭। এগুলো শুধু ১৪৪৮ হিজরি মৌসুমের তারিখ। ভ্রমণের তারিখ ঠিক করা বা non-refundable বুকিংয়ের আগে পরবর্তী calendar দেখুন [৫]।
+যাচাই করা Package Visa FAQ অনুযায়ী নিশ্চিত যাওয়া-আসার ফ্লাইট এবং মন্ত্রণালয়ের লাইসেন্সপ্রাপ্ত অন্তত চার তারকার হোটেলে নিশ্চিত আবাসন লাগে। প্রকাশিত package minimum জনপ্রতি প্রাপ্তবয়স্কের প্রথম দুই দিন মিলিয়ে SAR 4,000, এরপর প্রতিটি পরবর্তী দিনের জন্য SAR 1,000। এগুলো তারিখযুক্ত প্রকাশিত শর্ত, আপনার পরিবারের কোট বা BDT রূপান্তর নয়। টাকা দেওয়ার আগে বর্তমান অফার, মোট, অন্তর্ভুক্ত সেবা ও ফেরতের শর্ত নিশ্চিত করুন; পুরোনো বাজেটের সঙ্গে একই সেবার হিসাব ধরে তুলনা করবেন না [৮]।
 
-৪. বুকিংয়ের একটি নিরাপদ ক্রম
-- আগে ভ্রমণের সময় ও visa category বেছে নিন। আপনার passport, itinerary ও পরিকল্পনার সঙ্গে route এবং মৌসুম মেলে কি না দেখুন; যে official eligibility page অনুসরণ করেছেন তার কপি রাখুন।
-- non-refundable flight বা hotel কেনার আগে live visa requirement ও application ধাপ যাচাই করুন। সরাসরি Nusuk হলে বর্তমান package Terms পড়ুন; বাইরের agent হলে আবাসন ও পরিবহনের বিবরণ লিখিতভাবে নিন [২–৪]।
-- Dhaka থেকে তারিখভিত্তিক flight তুলনা করুন। Dhaka–Jeddah যাওয়া এবং Madinah–Dhaka ফেরার multi-city/open-jaw itinerary পথে পিছিয়ে আসা কমাতে পারে, কিন্তু এটি সবসময় সস্তা নয়। কেনার আগে baggage, transit, airport change এবং cancellation policy airline-এর সঙ্গে মিলিয়ে নিন।
-- পাড়ার নাম বা যাচাই না-করা দূরত্ব দেখে নয়—হোটেলের সুনির্দিষ্ট ঠিকানা ও room terms দেখে বুক করুন। পরিবারের ব্যবহৃত gate পর্যন্ত পথ, ঢাল, accessibility, room occupancy, shuttle এবং cancellation policy সরাসরি property-র সঙ্গে যাচাই করুন। আমাদের Makkah ও Madinah hotel-zone গাইড শুধু শুরু করার জন্য; বুক করা ঠিকানা যাচাইয়ের বিকল্প নয়।
-- Visa ইস্যুর পর Umrah permit-এর জন্য বর্তমান Ministry/Nusuk নির্দেশনা অনুসরণ করে খালি তারিখ ও সময় বেছে নিন। Madinah-তে Rawdah visit-এর permit আলাদা। Official service page-এ live booking channel থাকে; নির্দিষ্ট দিনে slot খোলা বা সবসময় পাওয়া যাবে—এমন নিশ্চয়তা নেই [১৫–১৬]।
-- মন্ত্রণালয়ের FAQ-তে electronically issued Umrah visa-র biometrics চালু থাকা দেশের তালিকায় Bangladesh আছে। নিজের visa application ও official Saudi Visa Bio নির্দেশনা অনুসরণ করুন; tourist বা stopover visa-র প্রত্যেক যাত্রীর জন্য একই নিয়ম ধরে নেবেন না [৪]।
-- Passport, approved visa, flight তথ্য, accommodation ও transport confirmation, permit এবং জরুরি যোগাযোগের তথ্য ফোনে ও offline কপি—দুইভাবেই রাখুন। যাত্রার আগে airline-এর document requirement দেখুন।
+প্রকাশিত বিদেশি ভিসা ও residence-এর শর্ত আসলে কী বলে?
+Ministry of Tourism-এর ইংরেজি Tourist Visa Regulations-এর Article 6(2) এবং ১২ জুন ২০২৩-এ SPA-তে প্রকাশিত মন্ত্রণালয়ের ঘোষণা standard nationality list-এর বাইরে থাকা ব্যক্তিদের জন্য ব্যতিক্রম বর্ণনা করে। ১৯ অক্টোবর ২০২৬-এ আবার দেখা সূত্রগুলো নিচের document-এর পার্থক্য করে; পাওয়া PDF থেকে সর্বশেষ revision date নিশ্চিত হয়নি [১৯–২০]:
+- US, UK বা Schengen visa: Article 6(2)(b)-তে বৈধ tourist বা business visa বলা আছে, যা দিয়ে অন্তত একবার ভিসা প্রদানকারী দেশে প্রবেশ করা হয়েছে। কখনো ব্যবহার করা হয়নি এমন ভিসা এই শর্তের বর্ণনার সঙ্গে মেলে না। Tourist/business category-তে student বা work visa-ও চলবে ধরে নেবেন না [১৯–২০]।
+- US, UK বা EU residence: Article 6(2)(c)-তে permanent residence বলা আছে। সব temporary residence permit-কে স্থায়ী বসবাসের অনুমতি ভাববেন না। জুন ২০২৩-এর ঘোষণায় আগাম eVisa এবং visa-on-arrival—দুই ব্যবস্থার কথাই আছে; এগুলো আলাদা আবেদনপদ্ধতি, আপনার নামে ইতিমধ্যে ইস্যু হওয়া ভিসা নয় [১৯–২০]।
+- সঙ্গে যাওয়া পরিবার: regulation-এ যোগ্য visa বা permanent-residence holder-এর সঙ্গে আসা first-degree relatives-কে অন্তর্ভুক্ত করা হয়েছে। প্রত্যেক যাত্রীর নিজস্ব আবেদন ও সঙ্গে ভ্রমণের শর্ত নিশ্চিত করুন; এটি সবার জন্য একটিমাত্র family visa নয় [১৯]।
+- GCC residence: এটি আলাদা category; GCC citizenship বা GCC tourist visa নয়। পাওয়া PDF-তে residence visa-র অন্তত তিন মাস মেয়াদ ও পেশার শর্ত আছে, কিন্তু ২ মে ২০২৩-এর SPA প্রতিবেদনে নির্দিষ্ট পেশার শর্ত ছাড়া GCC-resident eVisa-র কথা আছে। PDF-এর পেশার কথাকে যাচাইকৃত বর্তমান নিষেধাজ্ঞা হিসেবে প্রয়োগ করবেন না; শুধু GCC residence দিয়েই visa on arrival মিলবে ধরবেন না। অফিশিয়াল checker-এ বর্তমান route ও residence-validity requirement নিশ্চিত করুন [১০, ১৯, ২১]।
 
-Online booking-এ dual-currency card ব্যবহার করলে checkout-এর আগে international e-commerce সুবিধা ও ব্যাংকের বর্তমান limit যাচাই করুন। বাংলাদেশের পেমেন্ট ধাপের জন্য আমাদের Dual-Currency Card Endorsement Guide দেখুন।
+যাত্রীর যাচাই (visaEligibility): এই পথে টাকা দেওয়ার আগে নিজের সুনির্দিষ্ট বাংলাদেশি passport, visa type, validity, আগে ব্যবহার বা permanent-residence category দিয়ে অফিশিয়াল eligibility checker ও KSA Visa দেখুন। যে airline ফ্লাইটটি চালাবে তার সঙ্গে boarding-এর document মিলিয়ে নিন—আগের প্রবেশের প্রমাণ এবং airline/arrival-port শর্তসহ। বর্তমান carrier restriction এবং শুধু digital entry evidence গ্রহণযোগ্য কি না এখানে নিশ্চিত হয়নি। প্রকাশিত শর্ত ব্যক্তিগত অনুমোদন নয়; কোনো আবেদন বা boarding test করা হয়নি। যোগ্যতা ধরে non-refundable ভ্রমণ কিনবেন না; URAL/chat-এ passport scan, visa number বা login detail পাঠাবেন না। [১০, ১৯–২১]
 
-৫. Makkah–Madinah যাতায়াত: HHR-এর বর্তমান fare ও baggage দেখুন
-Haramain High-Speed Railway-এর booking ও fare page-ই বর্তমান schedule ও ticket শর্তের মূল সূত্র। ১৪ অক্টোবর ২০২৬ তারিখে official fare table-এ Makkah–Madinah রুটে Economy-র base fare SAR 162 এবং King Abdulaziz International Airport (KAIA)–Makkah রুটে SAR 65 দেখানো হয়েছিল। Operator জানিয়েছে, এগুলো VAT ও fee-র আগের base fare; ভ্রমণের তারিখ, আসন-প্রাপ্যতা ও অন্যান্য শর্তে checkout-এর দাম বদলায়। এগুলো তারিখ-চিহ্নিত তথ্য—নিশ্চিত ticket price নয় [১৭]।
+Tourist route দিয়ে ওমরাহ করলেও visa terms, permit ও মৌসুমের বিধিনিষেধ প্রযোজ্য; এটি হজের অনুমতি দেয় না [৫, ৯, ১২, ১৫–১৬, ১৯]।
 
-HHR baggage নির্দেশনায় সর্বোচ্চ ২৫ কেজি এবং ৬৫ × ৫৫ × ৩৫ সেন্টিমিটারের একটি বড় ব্যাগ, সঙ্গে একটি hand item অনুমোদিত। ব্যাগ গোছানোর আগে operator-এর বর্তমান পেজ ও নিজের ticket-এর শর্ত দেখুন; পুরোনো guide-এ থাকা ছোট মাপ ধরে নেবেন না [১৮]।
+৩. আপনার সফরে কোন মৌসুম ও প্রবেশের সময়সীমা প্রযোজ্য?
+মন্ত্রণালয়ের প্রকাশিত ১৪৪৮ হিজরি ওমরাহ calendar ১৯ অক্টোবর ২০২৬-এ আবার দেখা হয়েছে। এতে ওমরাহ ভিসা ইস্যুর শেষ তারিখ ৯ মার্চ ২০২৭, ওমরাহ যাত্রীর প্রবেশের শেষ তারিখ ২৩ মার্চ ২০২৭ এবং চূড়ান্ত প্রস্থানের তারিখ ৭ এপ্রিল ২০২৭। এগুলো ওই ওমরাহ মৌসুমের জন্য; হজ নিবন্ধনের বিকল্প বা সব tourist visa-র সার্বজনীন মেয়াদ নয় [৫]।
 
-৬. স্বাস্থ্য, permit ও প্রয়োজনীয় কাগজ
-Saudi health requirement মৌসুমভেদে বদলায় এবং যাত্রীর দেশ থেকেও নির্ভর করতে পারে। নিজের travel season ও departure country অনুযায়ী Ministry of Health-এর বর্তমান Umrah health requirement দেখুন। নিচে দেওয়া ১৪৪৭ হিজরি PDF শুধু ওই মৌসুমের জন্য; সেটিকে ১৪৪৮ হিজরি বা পরের মৌসুমের নিয়ম ধরে নেওয়া যাবে না [১৩–১৪]।
+ভ্রমণের তারিখ বাছার আগে পরবর্তী মন্ত্রণালয় বিজ্ঞপ্তি আছে কি না দেখুন এবং নিজের visa validity, entry count ও permitted stay পড়ুন। মৌসুমের সাধারণ শেষ তারিখ নিজের ভিসার আগের expiry বাড়ায় না। ওমরাহ সারা বছর বিধিনিষেধহীন—বলবেন না; route বা মৌসুমের অমিল না মিটিয়ে non-refundable বুকিং করবেন না [৩, ৫]।
 
-Permit-এর যোগ্যতা ও appointment availability যাচাই করতে official Nusuk/Ministry service ব্যবহার করুন। App-এ account থাকা, visa ইস্যু হওয়া, permit পাওয়া এবং কোনো restricted এলাকায় প্রবেশের অনুমতি—এগুলো এক বিষয় নয়। পরিকল্পনায় এই নথি ও তারিখ আলাদা করে রাখুন [২, ৪, ১৫–১৬]।
+৪. টাকা দেওয়ার আগে, আবেদনের সময় ও ভিসা ইস্যুর পরে কী করবেন?
+নিচের ক্রম সিদ্ধান্তের checklist, অনুমোদনের প্রতিশ্রুতি নয়। Package route-এ আবেদনের সময়ই কিছু ভ্রমণসেবা লাগতে পারে; সব ফ্লাইট ভিসার পরে কেনা যাবে না ধরে প্রকৃত পূর্বশর্ত ও বাতিলের শর্ত জেনে নিন [৩, ৭–৮]। অনলাইনে পেমেন্ট করলে আগে ব্যাংকে international e-commerce সুবিধা ও বর্তমান limit দেখুন; dual-currency-card গাইডে বাংলাদেশের প্রস্তুতি আছে।
 
-৭. বাজেট: আগের একটি পরিকল্পনা-হিসাবই রাখা হয়েছে
-নিচের মোট অঙ্কটি আগের article থেকে রাখা হয়েছে। ১৪ অক্টোবর ২০২৬-এর এই update-এ নতুন করে fare যাচাই করে হিসাব করা হয়নি; আগের cost component-গুলোর সমন্বিত booking basket-ও যাচাই করা হয়নি। তাই এটিকে planning reference হিসেবে দেখুন—live quote, নিশ্চিত trip total বা agency package-এর তুলনায় DIY সস্তা হওয়ার প্রমাণ হিসেবে নয়।
+ধাপ ১: যোগ্যতা, মৌসুম ও প্রযোজ্য স্বাস্থ্য নির্দেশনা নিশ্চিত করুন।
+- নিজের প্রকৃত passport, residence ও visa category ব্যবহার করুন। মন্ত্রণালয়ের calendar দেখুন এবং নিজের origin ও পরিস্থিতির জন্য বর্তমান মৌসুমের MOH নির্দেশনা নিন। পুরোনো PDF-কে বর্তমান স্বাস্থ্য নির্দেশনার বিকল্প করবেন না [৫, ৮–১০, ১৩–১৪]।
+
+ধাপ ২: টাকা দেওয়ার আগে সেবাদাতা ও প্রয়োজনীয় বুকিংয়ের খরচ যাচাই করুন।
+- প্রকৃত package/application-এর পূর্বশর্ত, অন্তর্ভুক্ত সেবা, মোট ও বাতিলের শর্ত লিখিতভাবে নিন। নির্দিষ্ট তারিখের ফ্লাইট, baggage ও transit document তুলনা করুন। হোটেলের ঠিকানা, room occupancy, প্রবেশের পথ ও shuttle-এর শর্ত সরাসরি property-র সঙ্গে নিশ্চিত করুন। কোনো এলাকার নাম বা estimate দিয়ে এগুলো নিশ্চিত হয় না [১–৪, ৭–৮]।
+
+ধাপ ৩: বেছে নেওয়া অফিশিয়াল মাধ্যমে আবেদন ও চাওয়া বায়োমেট্রিক সম্পন্ন করুন।
+- আবেদনপ্রক্রিয়া অনুসরণ করে সেই আবেদনে চাইলে Saudi Visa Bio ব্যবহার করুন। মন্ত্রণালয়ের FAQ ইলেকট্রনিক Umrah visa-র biometrics-এর জন্য Bangladesh বলে; এটি সব tourist বা stopover যাত্রীর ভিসা ইস্যুর পরের সার্বজনীন কাজ নয়। পৃথক প্রক্রিয়া ও গোপনীয়তার সতর্কতার জন্য Nusuk/biometrics গাইড দেখুন [৪]।
+
+ধাপ ৪: Nusuk ভিজিটর নিবন্ধনের আগে ইস্যু হওয়া ভিসা মিলিয়ে নিন।
+- যাত্রী, পাসপোর্টের তথ্য, validity, entry count ও permitted stay সফরের সঙ্গে মিলিয়ে দেখুন। মন্ত্রণালয়ের FAQ বলে, বৈধ ভিসা থাকলে বিদেশ থেকে ভিজিটর নিবন্ধন করা যায়। নিজের প্রকৃত অবস্থার উপযুক্ত visitor route নিন; package-platform account পারমিট অ্যাকাউন্ট বা অনুমোদনের সমান নয় [২–৪]।
+
+ধাপ ৫: প্রযোজ্য পৃথক ওমরাহ ও Rawdah পারমিটের ব্যবস্থা করুন।
+- অফিশিয়াল সেবা ও শুধু খালি অ্যাপয়েন্টমেন্ট ব্যবহার করুন। ওমরাহ পারমিট Rawdah অ্যাপয়েন্টমেন্ট নয়। নিজের বুকিংয়ের বর্তমান confirmation, entry-code ও reporting নির্দেশনা অনুসরণ করুন; বিশেষায়িত Nusuk গাইডে তারিখযুক্ত প্রকাশিত Rawdah ধাপ আছে। ভিসা বা অ্যাকাউন্ট কোনোটিই স্লট নিশ্চিত করে না [১৫–১৬]।
+
+ধাপ ৬: যাত্রার আগে বুকিং ও নিজের নথিতে প্রবেশ যাচাই করুন।
+- ফ্লাইট, transit ও baggage, hotel/transport confirmation এবং provider support contact দেখুন। নিরাপদ offline কপি backup হিসেবে রাখুন, তবে যে ফোন/নেটওয়ার্ক ব্যবহার করবেন তাতেই ইস্যু হওয়া পারমিট খুলে দেখুন। সংরক্ষিত ছবি প্রবেশ নিশ্চিত করে না। credentials, biometrics বা ব্যবহারযোগ্য permit QR code URAL বা অননুমোদিত সহায়তাকারীকে দেবেন না [৩, ১৫–১৬]।
+
+৫. ফ্লাইট, হোটেল ও মক্কা–মদিনা যাতায়াত কীভাবে পরিকল্পনা করবেন?
+Dhaka–Jeddah যাওয়া ও Madinah–Dhaka ফেরার itinerary পিছিয়ে আসা কমাতে পারে, তবে একই তারিখ, baggage, connection ও change terms তুলনা করে বাছুন; এই গাইডে সাশ্রয় প্রমাণের matched fare basket নেই। Flight-strategy গাইড checklist, live fare quote নয়। হোটেলের ঠিকানা, পরিবার যে gate ব্যবহার করবে সেখানকার পথ, room-sharing, accessibility ও shuttle-এর বিবরণ লিখিতভাবে নিন। বিস্তারিত room, access ও transport check-এর জন্য Hotel/rail গাইড দেখুন; সেটি কোনো নির্দিষ্ট property-র সেবার প্রমাণ নয়।
+
+১৯ অক্টোবর ২০২৬-এ আবার দেখা HHR tariff-এ Makkah–Madinah Economy base fare SAR 162 এবং King Abdulaziz International Airport (KAIA)–Makkah SAR 65, VAT ও fee-এর আগে। Operator বলে, তারিখ, ট্রেনের আসন-প্রাপ্যতা ও অন্যান্য কারণে প্রকৃত দাম বদলায়। এই tariff থেকে বানানো BDT trip cost নয়, চূড়ান্ত checkout দেখুন [১৭]।
+
+যাচাই করা HHR baggage পেজে সর্বোচ্চ ২৫ কেজি ও ৬৫ × ৫৫ × ৩৫ সেন্টিমিটারের একটি বড় ব্যাগ, সঙ্গে একটি hand item অনুমোদিত। নিজের ব্যাগ মাপুন, বর্তমান ticket/operator terms দেখুন এবং station transfer নিজের transport quote-এ রাখুন। Airline baggage allowance একই ব্যাগ ট্রেনে নেওয়ার অনুমতির প্রমাণ নয় [১৮]।
+
+৬. স্বাস্থ্য নির্দেশনা ও পারমিটে আর কী ব্যক্তিগত যাচাই বাকি?
+MOH index ও সংযুক্ত Umrah PDF ১৯ অক্টোবর ২০২৬-এ আবার খোলা হয়েছে। PDF-এর প্রথম পৃষ্ঠায় স্পষ্টভাবে ১৪৪৭ হিজরি (২০২৬) লেখা। এটি আপনার ১৪৪৮ হিজরি সফরের শর্ত প্রতিষ্ঠা করে না। যাত্রার আগে MOH ও নিজের অফিশিয়াল আবেদন/সেবাদাতা থেকে প্রযোজ্য বর্তমান মৌসুম ও origin-এর নির্দেশনা নিন; ব্যক্তিগত টিকা, ওষুধ বা শারীরিক সক্ষমতার প্রশ্নে যোগ্য চিকিৎসকের পরামর্শ নিন। নতুন নথি যাচাই না হওয়া মানে কোনো স্বাস্থ্যশর্ত নেই—এমন নয় [১৩–১৪]।
+
+Visa approval, Nusuk account, Umrah permit ও Rawdah appointment আলাদা রাখুন। আপনার লগইন করা অ্যাকাউন্ট, ব্যক্তিগত যোগ্যতা, biometric capture, network বা gate admission পরীক্ষা করা হয়নি। Nusuk গাইডের সংশ্লিষ্ট ধাপের সতর্কতা অনুসরণ করুন; সমস্যা হলে বর্তমান অফিশিয়াল সহায়তা নিন। ভুয়া আবেদন বা অনুশীলনের জন্য স্লট নেবেন না [৩–৪, ১৫–১৬]।
+
+৭. নিজের BDT বাজেট কীভাবে তৈরি করবেন?
+একমাত্র টেবিলটি ১৪ অক্টোবর ২০২৬-এর আগের planning reference রাখে। ১৯ অক্টোবর ২০২৬-এ নতুন দাম যাচাই করা হয়নি; পুরোনো component amount-ও মিলিয়ে দেখা live booking basket ছিল না। একে পুরোনো প্রেক্ষাপট ভাবুন—আজকের অফার, নিশ্চিত মোট বা DIY সস্তা হওয়ার প্রমাণ নয়।
 
 [[UMRAH_BUDGET_TABLE]]
 
-একই তারিখ, trip length, পরিবারের room-sharing, flight baggage, visa, hotel রাত, খাবার ও transfer ধরে কোনো itemized agency quote এই update-এ সংগ্রহ করা হয়নি। Package-এর সঙ্গে DIY তুলনা করতে দুই পক্ষের একই ভিত্তির লিখিত total নিন এবং tax, insurance, transport, cancellation এবং বাদ থাকা খরচ মিলিয়ে দেখুন। কোনো পথই সবসময় সস্তা নয়।
+বর্তমান হিসাবের জন্য /umrah-এর কোট-ইনপুট worksheet খুলুন। নির্দিষ্ট তারিখের কোট থেকে পুরো দলের BDT মোট লিখুন: flight, visa/insurance/services, দুই শহরের আলাদা accommodation, transport, meals, extras ও contingency। সত্যিই অন্তর্ভুক্ত বা প্রযোজ্য নয় হলেই কোনো খাতে শূন্য দিন। Package-এ hotel বা transport থাকলে আবার যোগ করবেন না। Worksheet বাজারের দাম এনে দেয় না।
 
-৮. যাত্রার আগে শেষ যাচাই
-- Official page-এ visa route, বর্তমান season calendar এবং Hajj restriction-এর তারিখ আবার দেখুন।
-- ইস্যু করা visa-তে নাম, passport number, validity, entry count ও অনুমোদিত stay আপনার যাত্রার সঙ্গে মেলে কি না দেখুন।
-- Visa-ভিত্তিক biometrics, Nusuk permit এবং Rawdah appointment বর্তমান official service page-এ নিশ্চিত করুন।
-- হোটেলের ঠিকানা, room occupancy, accessibility এবং transport ব্যবস্থা property বা provider-এর সঙ্গে পুনরায় মিলিয়ে নিন।
-- HHR fare, baggage allowance ও ticket তথ্য এবং airline-এর baggage/transit শর্ত আবার দেখুন।
-- Official কাগজপত্র offline-এ রাখুন; provider-এর receipt ও লিখিত service terms সংরক্ষণ করুন।
+একই তারিখ, সময়কাল, চারজনের sharing, flight baggage, visa, nights, meals, transfers ও cancellation terms-এর matched itemized agency quote নেই। তুলনার আগে একই ভিত্তিতে দুই হিসাব নিন। কোনো route সবসময় সস্তা নয়; আলাদা visa/package minimum লুকিয়ে সাশ্রয়ের দাবি করবেন না।
+
+৮. ঢাকা ছাড়ার আগে কী মিলিয়ে নেবেন?
+- প্রযোজ্য visa/season ও health নির্দেশনা আবার খুলুন, পরবর্তী বিজ্ঞপ্তি দেখুন।
+- প্রত্যেক যাত্রীর ইস্যু হওয়া নথি itinerary ও অনুমোদিত তারিখের সঙ্গে মিলিয়ে নিন।
+- প্রকৃত provider-এর সঙ্গে room occupancy/access, transport, baggage ও transit document নিশ্চিত করুন।
+- Nusuk account access, issued permit, confirmation deadline এবং ব্যবহারযোগ্য phone/network দেখুন।
+- receipt, লিখিত service/refund terms, নিরাপদ document backup ও official support contact কাছে রাখুন।
+- যে কাজ করছেন তার সংযুক্ত specialist guide দেখুন; website build সফল হওয়া আপনার booking যাচাই করে না।
 
 ৯. সচরাচর জিজ্ঞাসা
-বাংলাদেশ থেকে কি Nusuk-এ সরাসরি Umrah visa-র আবেদন করা যায়?
-১৪ অক্টোবর ২০২৬ তারিখে দেখা Nusuk registration option-এ Bangladesh আছে, তাই live Nusuk Umrah service দিয়ে শুরু করে দেখুন। Registration মানেই visa approval নয়; package বা visa-only option পাওয়া যাবে কি না তা বর্তমান checkout Terms-এর ওপর নির্ভর করে [১–৪]।
-বাইরের Umrah agent কি আবাসন ও পরিবহন ছাড়া visa দিতে পারে?
-মন্ত্রণালয়ের FAQ বলছে, বাইরের agent আবাসন ও পরিবহন সেবা ছাড়া Umrah visa ইস্যু করতে পারে না। Provider-কে লিখিত চুক্তিতে সেবাগুলো ও সব charge উল্লেখ করতে বলুন [৪]।
-Tourist বা stopover visa দিয়ে কি ফরজ Hajj করা যায়?
-না। Umrah, tourist বা stopover visa বাংলাদেশি Hajj নিবন্ধন এবং সৌদি Hajj permit-এর বিকল্প নয়। বাংলাদেশ ও সৌদি আরবের বর্তমান Hajj নির্দেশনা অনুসরণ করুন [১১–১২]।
-১০ দিনের DIY Umrah অঙ্কটি কি এখনকার booking quote?
-না। টেবিলে আগের চারজনের পরিবার-শেয়ারের planning estimate রাখা হয়েছে; এই update-এ live booking basket ধরে নতুন করে মূল্য যাচাই করা হয়নি।
-Umrah ও Rawdah permit কোথায় বুক করব?
-নিজের আবেদনের জন্য official Ministry/Nusuk service ব্যবহার করুন, তারপর খালি appointment বেছে নিন। Umrah ও Rawdah permit আলাদা সেবা এবং availability নিশ্চিত নয় [১৫–১৬]।`,
+বাংলাদেশ থেকে সরাসরি Nusuk-এ Umrah visa আবেদন করা যায়?
+মন্ত্রণালয় সরাসরি আবেদনের কথা বলে এবং ১৯ অক্টোবর ২০২৬-এ দেখা signup তালিকায় Bangladesh আছে। নিজের ক্ষেত্রে বর্তমান service/package availability দেখুন; নিবন্ধন ভিসা অনুমোদন বা শুধু ভিসার checkout নিশ্চিত করে না [১–৩]।
+বাইরের Umrah agent কি accommodation ও transport ছাড়া visa দেয়?
+মন্ত্রণালয়ের FAQ বলে, বাইরের agent আবাসন ও পরিবহন ছাড়া Umrah visa ইস্যু করতে পারে না। সেবা, মোট ও বাতিলের শর্ত লিখিতভাবে নিন [৪]।
+Tourist বা stopover visa দিয়ে ফরজ হজ করা যায়?
+না। এগুলো হজ পারমিট নয়। বাংলাদেশের পৃথক নিবন্ধন ও বর্তমান সৌদি হজ নির্দেশনা অনুসরণ করুন; আগের ১৪৪৭ হিজরি নিয়ম স্বয়ংক্রিয়ভাবে ১৪৪৮ হিজরির শর্ত হয় না [১১–১২]।
+১০ দিনের DIY Umrah figure কি বর্তমান booking quote?
+না। এটি রাখা ১৪ অক্টোবর ২০২৬-এর ১০ দিন/চারজনের sharing-এর reference; ১৯ অক্টোবর নতুন দাম যাচাই হয়নি। নিজের হিসাবে তারিখযুক্ত matched quote ও hub worksheet নিন; পুরোনো range agency saving প্রমাণ করে না।
+Umrah ও Rawdah permit কোথায় বুক করব?
+প্রতিটি কাজের অফিশিয়াল Ministry/Nusuk service ব্যবহার করুন। এগুলো আলাদা অ্যাপয়েন্টমেন্ট; live availability ও বর্তমান booking নির্দেশনা প্রযোজ্য। Account বা initial reservation-কে নিশ্চিত প্রবেশ না ধরে confirmation ও entry-code access যাচাই করুন [১৫–১৬]।`,
     internalLinks: [
+      { text: "Nusuk নিবন্ধন, Visa Bio ও Rawdah যাচাই", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "Saudi stopover: আলাদা ৯৬ ঘণ্টার সফর", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
+      { text: "হোটেলে প্রবেশ ও Haramain রেল পরিকল্পনা", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "ঢাকা–জেদ্দা/মদিনা ফ্লাইট পরিকল্পনার চেকলিস্ট", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "বাংলাদেশের পৃথক হজ নিবন্ধন ও প্যাকেজ গাইড", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
       { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Dual-Currency Card ও Passport Endorsement গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport (DAC) Immigration ডকুমেন্ট চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
@@ -234,63 +283,136 @@ Umrah ও Rawdah permit কোথায় বুক করব?
     ],
     affiliateCTA: {
       provider: "airalo",
-      headline: "Umrah যাত্রায় Maps ও Nusuk-এর জন্য data যাচাই করুন",
-      body: "কেনার আগে provider-এর coverage, data, validity, device compatibility এবং activation শর্ত দেখুন। Mobile data বা Nusuk permit availability নিশ্চিত—এমন ধরে নেবেন না।",
+      headline: "মানচিত্র ও মেসেজের জন্য ঐচ্ছিক ডেটা প্ল্যান যাচাই করুন",
+      body: "eSIM মানচিত্র ও মেসেজের জন্য ঐচ্ছিক, Nusuk পারমিটের শর্ত নয়। ফোনের সামঞ্জস্য, provider coverage, activation, validity ও মোট দাম দেখুন; network access বা appointment নিশ্চিত নয়।",
     },
   },
 
   "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": {
-    title: "Makkah ও Madinah হোটেল জোন, Haramain Bullet Train এবং Ziyarah গাইড (বাংলাদেশি হাজীদের জন্য)",
+    title: "Makkah ও Madinah hotel বাছাই: access check ও Haramain train (২০২৬)",
     summary:
-      "মক্কা-মদিনায় হোটেলের “হারাম থেকে দূরত্ব” মাপা হয় দেওয়াল পর্যন্ত, আপনি যে গেট দিয়ে ঢুকবেন সেটি পর্যন্ত নয়-আর ট্রেনে আপনার লাগেজ উঠবে কি না তা ঠিক করে operator-এর নিজের নিয়ম। এই গাইডে ১৫ অক্টোবর ২০২৬ তারিখের Haramain base fare, ব্যাগেজের সীমা, স্টেশন শাটলের বাস্তবতা আর হোটেলে টাকা দেওয়ার আগে যা যা জেনে নিতে হবে তা-ই আছে; Ziyarah গাড়ি বা Zamzam-এর দাম এখানে নেই, কারণ তার কোনো অফিশিয়াল তালিকা নেই।",
+      "১৯ অক্টোবর ২০২৬-এ দেখা HHR fare, baggage ও station service এবং hotel-owned উদাহরণ। নির্দিষ্ট room, mosque route, shuttle ও ticket condition নিশ্চিত করে book করুন; area-wide accessibility, live room rate বা guaranteed transfer দাবি নয়।",
     category: "Hajj & Umrah",
     date: "২৬ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "৭ মিনিট পড়া",
-    content: `
-বাংলাদেশি পরিবার—বিশেষ করে বয়স্ক বাবা-মা বা ছোট সন্তানসহ—যখন ওমরাহর পরিকল্পনা করে, তখন সফরের আরাম নির্ভর করে তিনটি বাস্তব বিষয়ের ওপর: হোটেলটি প্রকৃতপক্ষে কোন রাস্তায়, Haramain High-Speed Rail যাতায়াত আসলে কীভাবে কাজ করে, আর Zamzam ও Ziyarah-এর নিয়ম কী। এই পাতার তথ্য ১৫ অক্টোবর ২০২৬ তারিখে রেল operator-এর নিজস্ব প্রকাশিত পেজ থেকে যাচাই করা হয়েছে। যেসব সংখ্যা কোথাও প্রকাশিত নেই, সেখানে এই গাইড সেই কথাটিই বলে—কোনো সংখ্যা বানায় না।
+    readTime: "১০ মিনিট পড়া",
+    content: `কার জন্য: Makkah ও Madinah-তে accommodation বাছছেন এবং নিজের luggage, mobility need ও connection-এর সঙ্গে Haramain train মেলে কি না দেখছেন এমন বাংলাদেশি পরিবার। এটি তারিখযুক্ত operator evidence-সহ booking checklist; hotel inspection, rate quote বা tested accessible journey নয়।
 
-১. মক্কার হোটেল জোন: বিজ্ঞাপনের দূরত্ব যা বলে না
-বুকিং সাইটে প্রায়ই লেখা থাকে "হারাম শরীফ থেকে ৬০০ মিটার", কিন্তু কোন গেট পর্যন্ত ৬০০ মিটার—তা লেখা থাকে না। তাই যেকোনো দূরত্বের দাবিকে যাচাই-না-করা তথ্য ধরুন এবং টাকা দেওয়ার আগে হোটেলের কাছ থেকে এই চারটি বিষয় নিশ্চিত করুন: আপনি আসলে কোন গেট দিয়ে ঢুকবেন, পথটি সমতল নাকি সিঁড়ি ও ঢাল আছে, শাটল কি বিনামূল্যে ও আপনার নামাজের সময়ে চলে আর কোথায় নামায়, এবং বিকের রোদে হাঁটতে আসলে কত সময় লাগে—ছবিতে যেটা দেখায় সেটায় নয়।
-- Jabal Omar ও Ibrahim Al Khalil Street (উত্তর-পশ্চিম পাশ): হুইলচেয়ার ব্যবহারকারী ও বয়স্ক যাত্রীদের জন্য সবচেয়ে বেশি প্রস্তাবিত এলাকা, কারণ এখানে র‍্যাম্প, লিফট ও ঢাকা সংযোগপথ আছে। তবুও "একদম সমতল" বা "মাত্র কয়েক মিনিট"—কোনো তালিকার এই দাবি মানবেন না; আপনি যে গেট দিয়ে ঢুকবেন, সেই পথটি হোটেলকেই বর্ণনা করতে বলুন। রাতের ভাড়া তারিখ, রুম ও যাত্রীসংখ্যা অনুযায়ী বদলায়—তাই ব্লগে দেওয়া ব্যান্ড নয়, নিজের লাইভ রেট দেখুন।
-- Lower Ajyad: King Abdulaziz Gate-এর পাশে, দক্ষিণ এশীয় রেস্তোরাঁয় ভরা এলাকা। Upper Ajyad (Bir Balila)-তে ঢাল আছে, তাই হোটেল শাটল লিখিতভাবে নিশ্চিত না করতে পারলে বয়স্কদের নিয়ে সেখানে বুক করবেন না।
-- Mahbas Al Jin ও Kudai: বাজেটের ৩ ও ৪ তারকা টাওয়ার, যার ভরসা শাটল। বুকিংয়ের আগে শাটলের সময়সীমা, কম্পাঙ্ক ও নামার জায়গা লিখে নিন, আর শাটল বন্ধ থাকলে হাঁটার বিকল্প হিসেব রাখুন।
-মক্কার Haramain স্টেশন Ar-Rusayfah-এ, আর মদিনার স্টেশন চত্বরের বাইরে; operator-এর Station services পেজে দুটি স্টেশনেই Al-Haram-এর দিকে শাটল বাস, ট্যাক্সি, লাগেজ ট্রলি ও স্বল্প ও দীর্ঘমেয়াদি পার্কিং-এর কথা আছে [১]। অর্থাৎ "স্টেশনের কাছে" মানেই "হারামের কাছে" নয়।
+দ্রুত উত্তর
+১৯ অক্টোবর ২০২৬-এ দেখা সূত্র অনুযায়ী নির্দিষ্ট hotel, room ও যে mosque entrance ব্যবহার করবেন সেখানকার route বাছুন—শুধু এলাকার নাম বা সরলরেখার দূরত্ব নয়। HHR জনপ্রতি একটি বড় bag সর্বোচ্চ ২৫ কেজি ও 65 x 55 x 35 cm, সঙ্গে একটি hand item প্রকাশ করে। Basic Economy fare-এ KAIA–Makkah SAR 65 ও Makkah–Madinah SAR 162 আছে, VAT ও fee বাদে; আসল ticket price বদলায়। টাকা দেওয়ার আগে hotel access, transfer এবং নিজের ticket-এর change/refund rule নিশ্চিত করুন [১–৩, ৫–৬]।
 
-২. মদিনা: উত্তর পাশ পরিবারের সুবিধার প্রশ্ন, গেট নম্বরের নয়
-মসজিদে নববীর চারপাশের চত্বর সমতল, তাই হোটেলের আসল তফাত—আপনারা যে অংশে নামাজ পড়বেন, সেখানে পৌঁছাতে চত্বর ঘুরে কত দূর হাঁটতে হবে। মহিলাদের নামাজের স্থান ও Rawdah প্রবেশের গেট নির্ধারণ General Presidency ঋতুভেদে বদলান, যা পারমিট বুকিংয়ের সময়ই দেখা যায়; কোনো ব্লগে তা স্থির নয়। প্রথমে Nusuk অ্যাপে বর্তমান গেট ও সময় দেখে নিন, তারপর সেই গেট ধরে হোটেল মাপুন—"হারাম" ধরে নয়। নারীদের গেট ও mahram-এর বিস্তারিত আলাদা গাইডে আছে (নিচে লিঙ্ক)।
+১. Makkah-র hotel area কীভাবে তুলনা করবেন?
+Jabal Omar, Ibrahim Al Khalil, Ajyad, Mahbas Al Jin ও Kudai—এই নামগুলো search সাজাতে ব্যবহার করুন; price, সমতল route বা নির্ভরযোগ্য shuttle-এর প্রমাণ হিসেবে নয়। এই review-তে property-specific evidence দিয়ে কোনো পুরো এলাকাকে wheelchair-এর জন্য best বলা বা সব hotel-কে walkable/shuttle-dependent ভাগ করা হয়নি।
 
-৩. HARAMAIN HIGH-SPEED RAIL: ভাড়া, সময় আর যে ব্যাগেজ নিয়ম ভ্রমণ ভেঙে দিতে পারে
-টিকিট operator-এর নিজস্ব portal (sar.hhr.sa) বা HHR app থেকে কাটুন; দুটিতেই একই ট্যারিফ। ১৫ অক্টোবর ২০২৬ যাচাইয়ে প্রকাশিত base fare (Economy | Business, VAT ও ফি বাদে) ছিল: King Abdulaziz International Airport (KAIA)–Makkah SAR 65 | SAR 101.40, Jeddah Al-Sulimaniyah–Makkah SAR 43 | SAR 90, এবং Makkah–Madinah SAR 162 | SAR 455 [২]। operator স্পষ্টই বলে এগুলো basic fare—ভ্রমণের তারিখ, ট্রেনের দখল ও অন্যান্য শর্তে আসল দাম বদলায়। তাই এই পাতায় কোনো BDT অঙ্ক নেই: তারিখবিহীন বিনিময় হারে SAR গুণলে যে সংখ্যা দাঁড়ায়, তার কোনো সূত্র নেই।
-- ভ্রমণের সময়: আপনার ট্রেনটি বাছাই করলে booking engine যে সময় দেখাবে সেটাই ধরুন। এয়ারপোর্ট–মক্কা সেগমেন্ট নেটওয়ার্কের সবচেয়ে ছোট, আর Makkah–Madinah সরাসরি ট্রেনে সাধারণত প্রায় পৌনে তিন ঘণ্টা দেখানো হয়। সড়ক পথে সময় বেশি লাগে এবং তা যানজতের ওপর নির্ভর করে।
-- একই ট্যারিফ পেজে যেসব ছাড় ও নিয়ম পরিবারের চারটি সিট কেনার আগে জানা দরকার: Economy-তে শিশুদের base fare-এর ৫০% ও Business-এ ৪০% ছাড়, আসন শেয়ার করা দুধের শিশুর ৯০%, এবং উপযুক্ত প্রতিবন্ধীত্ব প্রমাণপত্র থাকলে ৫০%। আসন নির্বাচন ফ্রি। বোর্ডিং ছাড়ার ৬০ মিনিট আগে থেকে ১০ মিনিট আগে পর্যন্ত। স্টেশন অফিস বা ভেন্ডিং মেশিনে কেনা টিকিট বদলানো বা ফেরত দেওয়া যায় না; portal থেকে পরিবর্তন-বাতিলের চার্জ সময়ভেদে—Economy minimum-price ফ্রে ২৪ ঘণ্টা আগে পর্যন্ত ফ্রি, তারপর ২০ মিনিট আগে পর্যন্ত পরিবর্তনে ১০% ও বাতিলে ৩৫% [২]।
-- ব্যাগেজ: জনপ্রতি একটি বড় লাগেজ, সর্বোচ্চ ২৫ কেজি ও 65 x 55 x 35 cm, এবং সঙ্গে একটি হ্যান্ড আইটেম (ব্যাকপ্যাক, ল্যাপটব ব্যাগ, ক্যামেরা ব্যাগ, পার্স)। ট্রেনে অতিরিক্ত লাগেজ মোটেই নেওয়া হয় না, আর প্ল্যাটফর্মে ঢোকার আগে সব লাগেজ সিকিউরিটি স্ক্যান হয় [৩]। ঢাকা থেকে আসা চেক-ইন স্যুটকেস প্রায়ই এই সীমার চেয়ে বড়—তাই চারজনের পরিবারে চারটি বড় লাগেজ থাকলে চারটি টিকিট নয়, সড়ক স্থানান্তর বা কুরিয়ার পরিকল্পনা করুন। ট্রেনে নিষিদ্ধ জিনিসের মধ্যে আছে ধারালো অস্ত্র, চাপে থাকা গ্যাস সিলিন্ডার, খেলনা অস্ত্র এবং SAR ৬০,০০০-এর বেশি মূল্যের স্বর্ণ, অলংকার বা নগদ টাকা [৩]।
-- Jeddah Airport-এ ihram অবস্থায় নামা: KAIA স্টেশন এয়ারপোর্ট চত্বরের ভেতরেই, তাই সাইন অনুসরণ করুন এবং সিকিউরিটি স্ক্যানের বাস্তব সময় ধরে রাখুন—"পাঁচ মিনিটের পথ" ধরে নিয়ে চলবেন না। miqat সিদ্ধান্তের বিস্তারিত ihram গাইডে (নিচে লিঙ্ক)।
+প্রতিটি candidate-এর আসল accommodation entrance থেকে Masjid al-Haram-এর যে entrance ব্যবহার করবেন তা তুলনা করুন। Advertised distance কী পর্যন্ত—map point, boundary, entrance না পুরো pedestrian route—জিজ্ঞেস করুন। Mosque view বা station-এর কাছে hotel মানেই আপনার পরিবারের আসল হাঁটার পথ নিশ্চিত নয়।
 
-৪. ঐতিহাসিক ZIYARAH: কোনো প্রকাশিত গাড়ি ভাড়া নেই
-মক্কা, মদিনা বা তায়েফে ব্যক্তিগত Ziyarah গাড়ির কোনো সরকারি ভাড়ার তালিকা প্রকাশিত নেই; ট্যুর বাসের জনপ্রতি চার্জও কোথাও itemize করা হয় না। তাই এই পাতায় SAR বা BDT দাম দেওয়া হলো না। বাস্তবে যা কাজে দেয়: পুরো গাড়ির মোট টাকা ও মোট সময় ঠিক করুন, জনপ্রতি নয়; থেমে আবার চলা ও পার্কিং কার ভাগে পড়ে তা জানুন; আগে থেকে নির্দিষ্ট দাম দেখতে চাইলে metered ট্যাক্সি বা ride-hailing app ব্যবহার করুন; এবং চালক রাজি থাকলে ভ্রমণ শেষে টাকা দিন। মক্কায় অর্ধ-দিনের ভ্রমণে সাধারণত থাকে জাবালে নূর ও হেরা গুহার পাদদেশ, জাবালে সওর, মিনা, মুজদালিফা, আরাফাত ও জাবালে রহমাহ এবং মসজিদে জিন। মদিনায়: মসজিদে কুবা, উহুদ পাহাড় ও শহীদদের কবরস্থান, মসজিদে কিবলাতাইন ও খন্দক (সাত মসজিদ)। মক্কা থেকে তায়েফ দিনভ্রমণে সাধারণত Qarn al-Manazil (Al-Hadaiq) miqat ও গোলাপের বাগান পড়ে—সেখানে ihram বাঁধার পরিকল্পনা থাকলে আগে ihram গাইড পড়ুন।
+Supplier-এর একটি কার্যকর উদাহরণ—recommendation নয়—Hilton-এর নিজস্ব Makkah/Madinah page। সেখানে Jabal Omar property আছে এবং নির্দিষ্ট Hilton Hotel & Convention Jabal Omar Makkah-তে free shuttle প্রচার করা হয়। এটি একটি property-র দাবি, সব Jabal Omar hotel-এর নয়; আজকের frequency, boarding point, wheelchair access বা পরিবারের seat প্রমাণ করে না। সরাসরি property থেকে বর্তমান terms নিন [৫]।
 
-৫. ZAMZAM ও ফেরার ফ্লাইট: নিয়ম পড়ার একটাই জায়গা
-৫ লিটারের সিল করা Zamzam বক্স, এয়ারপোর্টের কিওস্ক প্রক্রিয়া, বিমান সংস্থাগুলো নিয়মিত লাগেজ অ্যালাউন্সের বাইরে কী নেয়, আর ঢাকায় পৌঁছে বাংলাদেশ কাস্টমস কী মঞ্জুর করে—সব আমাদের আলাদা Zamzam, খেজুর ও স্বর্ণ কাস্টমস গাইডে আছে। প্যাক করার আগে সেই পাতাটাই আবার খুলে দেখুন: কিওস্ক, দাম ও এয়ারলাইন্সের নিয়ম বদলায়, আর হোটেলের লবিতে শুনে পাওয়া সংখ্যা প্রমাণ নয়। তাই এই পাতায় কোনো Zamzam দাম উল্লেখ করা হলো না; খেজুর, স্বর্ণের ২২কে/২১কে দাম বা VAT রিফান্ডের ইনভয়েসেও একই সতর্কতা।
-`,
+শুধু nightly headline নয়: exact date/night, adult/child ও বয়স, permitted occupancy, bed configuration, extra bed নিশ্চিত কি না, meal, tax, check-in/out, cancellation ও total payment currency তুলনা করুন। এই review-তে nightly BDT band বা room availability যাচাই হয়নি। পুরোনো estimate থেকে saving না বানিয়ে Umrah hub worksheet-এ নিজের whole-party quote দিন।
+
+২. Madinah hotel বা accessible room বাছলে কী আলাদা দেখবেন?
+Madinah-তে intended activity ও entrance ধরে বাছুন; hotel advertisement থেকে স্থির women's gate number নয়। সাধারণ mosque visit ও booked Rawdah appointment আলাদা কাজ; বর্তমান on-site direction ও নিজের permit instruction অনুসরণ করুন। Nusuk guide-এ আলাদা appointment check আছে।
+
+Station access আর mosque access-ও আলাদা। Hilton-এর নিজস্ব page DoubleTree by Hilton Madinah Gate-কে Madinah Gate Mall ও high-speed train station-এর সঙ্গে connected বলে। Rail-linked option বুঝতে এটি কাজে লাগে; Prophet's Mosque-এ ছোট হাঁটার পথ বা আপনার তারিখে available mosque shuttle প্রমাণ করে না [৫]। শুধু hotel name নয়, পুরো transfer plan দিয়ে station-linked stay ও mosque-oriented stay তুলনা করুন।
+
+Accessible room-এর room-level confirmation দরকার। Hilton accessibility help বলে feature hotel ও room অনুযায়ী বদলায়; roll-in shower ও accessible bath/shower configuration আলাদা room type। Chain label বা accessible lobby দিয়ে booked bathroom বা outdoor route আপনার wheelchair-এর উপযোগী প্রমাণ হয় না [৬]। Exact room type, doorway clearance, bed/bathroom layout, lift access এবং room, hotel exit, vehicle ও intended entrance-এর মধ্যে step আছে কি না জিজ্ঞেস করুন। হাঁটা সম্ভব না হলে confirmed transport alternative রাখুন; হাঁটাকে নিরাপদ fallback ভাববেন না।
+
+যাত্রীর যাচাই (hotelAccess): Non-refundable hotel payment-এর আগে exact property entrance, room/occupancy ও bed confirmation, intended entrance পর্যন্ত পুরো pedestrian route, step/slope এবং shuttle-এর operating time, fare, pickup/drop-off ও accessible boarding arrangement লিখিতভাবে নিন। Closure এবং নিজের prayer/travel time জিজ্ঞেস করুন। এখানে route, room, shuttle বা wheelchair journey test হয়নি; supplier marketing description ব্যক্তিগত accessibility clearance নয়। URAL/chat-এ passport scan বা private booking credential পাঠাবেন না। [৫–৬]
+
+৩. HHR-এর station, baggage ও ticket page আসলে কী নিশ্চিত করে?
+HHR station-services page Makkah ও Madinah station থেকে Al-Haram shuttle bus, taxi, luggage trolley এবং station-এর মধ্যে চলাচলের wheelchair বলে। আপনার journey-র verified timetable, hotel stop, fare বা availability দেয় না। Station shuttle, hotel shuttle ও airport transfer-কে একই assumed free service ভাববেন না [১]।
+
+Baggage জনপ্রতি দেখবেন। HHR একটি বড় bag সর্বোচ্চ ২৫ কেজি ও 65 x 55 x 35 cm, সঙ্গে backpack, laptop bag বা nursery bag-এর মতো একটি extra hand item অনুমতি দেয়। Weight ও dimension দুটোই লাগে; train access-এর আগে security check হয়। Fare page বলে excess baggage allowed নয় [২–৩]। Airline allowance দিয়ে rail allowance বদলায় না।
+
+চার passenger-এর চারটি compliant bag থাকলেই road transfer দরকার—এমন নয়। Dhaka থেকে আসা সব suitcase বড় ধরে না নিয়ে প্রতিটি মাপুন ও ওজন করুন। Bag না মিললে প্রকৃত allowance-এর মধ্যে repack করুন অথবা booking-এর আগে আলাদা বৈধ transport, price, handling ও collection নিশ্চিত করুন। Train-এ courier বা paid excess-baggage option আছে ধরে নেবেন না [২–৩]।
+
+যাত্রীর যাচাই (railBaggage): Train ticket কেনার আগে প্রতিটি traveller-এর আসল bag মেপে ওজন করুন এবং HHR-এর বর্তমান allowance-এর সঙ্গে hand item গুনে মিলিয়ে নিন। Mobility equipment, assistance ও অস্পষ্ট item operator-কে জিজ্ঞেস করুন। Noncompliant bag-এর পুরো journey নিশ্চিত করুন; পৌঁছে excess-baggage exception কেনা যাবে ভাববেন না। এই review-তে আপনার bag দেখা বা acceptance test হয়নি। [১–৪]
+
+প্রকাশিত tariff দিয়ে budget কীভাবে করবেন?
+Operator-এর sar.hhr.sa fare page ১৯ অক্টোবর ২০২৬-এ আবার দেখে KAIA–Makkah basic Economy SAR 65 এবং Makkah–Madinah SAR 162 পাওয়া গেছে, VAT ও fee বাদে। Page বলে date, occupancy ও অন্য কারণে আসল price বদলায়। এগুলো tariff example, নিজের ticket total, discount entitlement বা price guarantee নয়। এখানে কোনো BDT অঙ্ক নেই: assumed exchange rate নয়, আসল ticket charge ও bank/payment cost ব্যবহার করুন [২]।
+
+সঠিক station বাছুন: fare table-এ KAIA ও Jeddah আলাদা entry। Flight terminal থেকে নির্বাচিত station-এর প্রকৃত route, train departure ও onward hotel transfer নিশ্চিত করুন। Booked train-এর duration পড়ুন; immigration, baggage, transfer, screening ও disruption-এর সময় রাখুন। এই review-তে fixed train time, road comparison বা airport-connection buffer যাচাই হয়নি [১–৪]।
+
+Ticket ও boarding rule-এ কী বাড়তি সতর্কতা দরকার?
+HHR fare page departure-এর ৬০ মিনিট থেকে ১০ মিনিট আগে boarding বলে। এটি প্রকাশিত boarding window; departure-এর মাত্র দশ মিনিট আগে station-এ পৌঁছানোর অনুমতি নয়। Travel tips সঠিক ticket ও identification নিয়ে আগে আসতে বলে [২, ৪]।
+
+নিজের fare ও sales-channel condition পড়ুন। Fare page station-office ও vending-machine ticket change/refund হয় না বলে, কিন্তু station-services page ticket desk-এ cancellation/refund/update function বলে। এগুলো দিয়ে নিজের ticket refundable প্রমাণ হয় না। পাওয়া fare page-এ একাধিক fee table-এর class label extraction-এ যথেষ্ট পরিষ্কার ছিল না, তাই Economy-তে free-change promise দেওয়া যায় না। আগের guide-এর class-specific percentage-এর ওপর ভরসা করবেন না; নির্বাচিত ticket-এর rule HHR থেকে নিন [১–২]।
+
+Child, infant ও assistance discount হলো eligibility category, automatic family saving নয়। প্রতিটি শিশুর বয়স, own/shared seat ও প্রতিটি traveller-এর accepted identification booking-এ কী প্রভাব ফেলে জিজ্ঞেস করুন। এই review-তে family fare calculation বা বাংলাদেশি disability document গ্রহণযোগ্যতা যাচাই হয়নি [২, ৪]।
+
+যাত্রীর যাচাই (railTicket): Payment-এর আগে selected station, date, passenger/seat category, final total, boarding instruction এবং ওই sales channel-এর exact change, cancellation ও no-show rule সংরক্ষণ করুন। Desk description, tariff table বা checkout না মিললে সবচেয়ে উদার refund ধরে না নিয়ে HHR-কে মেটাতে বলুন। Station-to-hotel transport ও assistance আলাদাভাবে নিশ্চিত করুন। এখানে ticket purchase, refund বা connection test হয়নি; URAL/chat-এ payment detail, booking code বা ব্যবহারযোগ্য ticket barcode দেবেন না। [১–৪]
+
+৪. Hotel ও train একসঙ্গে কীভাবে book করবেন?
+এটি planning sequence, tested checkout নয়; visa ও season eligibility না মিটিয়ে non-refundable service কেনার পরামর্শও নয়। Required package arrangement আলাদা হতে পারে; main DIY guide সেই সিদ্ধান্তের জায়গা।
+
+ধাপ ১: Route, date ও traveller নিশ্চিত করুন।
+- প্রযোজ্য visa/season requirement, arrival/departure station, flight terminal, party age ও mobility need দেখুন। কাছাকাছি নামের দুটি hotel-কে একই property ভাববেন না।
+
+ধাপ ২: Exact room ও access route নিশ্চিত করুন।
+- Room/bed/occupancy, tax, meal, cancellation ও check-in/out term লিখিতভাবে নিন। আসল entrance, intended mosque route ও shuttle বা accessible transport arrangement নিশ্চিত করুন [৫–৬]।
+
+ধাপ ৩: প্রত্যেক passenger-এর baggage ও assistance need দেখুন।
+- HHR-এর size, weight ও hand-item allowance প্রতিটি bag-এ মিলিয়ে নিন। টাকা দেওয়ার আগে noncompliant luggage ও mobility-equipment arrangement operator-এর সঙ্গে মিটিয়ে নিন [১–৪]।
+
+ধাপ ৪: আসল rail ticket ও transfer total তুলনা করুন।
+- সঠিক station, train ও passenger category বাছুন। Final fare, boarding ও sales-channel change/refund rule পড়ুন; বানানো BDT conversion ছাড়া আলাদা station/hotel transfer যোগ করুন [১–৪]।
+
+ধাপ ৫: বুঝে নেওয়া terms-এ payment করে confirmation দেখুন।
+- Official supplier-এর মাধ্যমে traveller name ও booking detail দেখুন। Receipt ও আসল hotel/ticket condition রাখুন; supplier নিশ্চিত না করলে payment দিয়ে special-access request confirmed হয় না।
+
+ধাপ ৬: প্রতিটি travel day-র আগে service আবার নিশ্চিত করুন।
+- Train notice, hotel access/shuttle arrangement ও প্রাসঙ্গিক permit instruction আবার দেখুন। Document হাতে রাখুন, screening-এর সময় দিন এবং assumed timetable নয়, operator/property-র সঙ্গে change মেটান [১, ৪]।
+
+৫. কোন detail অন্য guide-এর বিষয়?
+Visa/application order-এর জন্য main DIY guide, নিজের quote input-এর জন্য hub ব্যবহার করুন। Umrah/Rawdah appointment Nusuk guide-এ; older-traveller guide আলাদা assistance checklist, কোনো property accessible-এর প্রমাণ নয়। Optional Ziyarah, Ihram/Miqat ও return-flight Zamzam/customs-এর নিজস্ব source review আছে; এই hotel/rail check সেগুলো certify করে না বা কোনো published price নেই প্রমাণ করে না। Rail valuables rule-কে Bangladesh customs exemption ভাববেন না [৩]।
+
+৬. সচরাচর জিজ্ঞাসা
+বয়স্ক মা-বাবার জন্য Makkah-র কোন hotel area best?
+এই review সবার জন্য best area প্রমাণ করে না। নির্দিষ্ট room, exit থেকে intended entrance-এর route, step, lift ও confirmed transport ব্যক্তির প্রয়োজনের সঙ্গে তুলনা করুন; এলাকার নাম বা accessible lobby যথেষ্ট নয় [৫–৬]।
+Free hotel shuttle মানে prayer time-এ নিশ্চিত ride?
+না। খোলা Hilton page নির্দিষ্ট property-তে shuttle প্রচার করে, সব hotel বা guaranteed timetable নয়। Current hour, pickup/drop-off, capacity, fare ও accessible boarding আসল hotel-এ নিশ্চিত করুন [৫]।
+চার পরিবারের সদস্য চার suitcase নিয়ে Haramain-এ যেতে পারবেন?
+প্রত্যেক passenger-এর bag allowance মেলাতে হবে: একটি বড় bag সর্বোচ্চ ২৫ কেজি ও 65 x 55 x 35 cm, সঙ্গে একটি hand item। চার passenger-এর চার compliant bag স্বয়ংক্রিয়ভাবে নিষিদ্ধ নয়; নিজের bag ও special item যাচাই করুন [২–৩]।
+SAR 65 ও SAR 162 কি final ticket price?
+না। ১৯ অক্টোবর ২০২৬-এ আবার দেখা KAIA–Makkah ও Makkah–Madinah basic Economy tariff example, VAT ও fee বাদে। নিজের date-specific checkout ও আলাদা transfer cost পড়ুন [২]।
+Economy change বা refund free ধরে নিতে পারি?
+না। Selected fare ও sales-channel condition পড়ুন। পাওয়া operator page-এ table-label ও ticket-desk wording-এর সীমা আছে; সাধারণ service description-কে refund entitlement ভাববেন না [১–২]।
+Madinah train station-এর পাশের hotel নিলে mosque transfer বাদ যায়?
+অবশ্যই নয়। Hilton নির্দিষ্ট Madinah Gate property-কে station-connected বলে; তা দিয়ে আপনার stay-র outdoor route বা mosque transfer প্রমাণ হয় না। Booking-এর আগে আসল route ও transport নিশ্চিত করুন [১, ৫]।`,
     references: [
       {
-        name: "Haramain High Speed Railway - station services (shuttles, taxis, trolleys, parking)",
-        nameBn: "Haramain High Speed Railway - স্টেশন সার্ভিস (শাটল, ট্যাক্স, ট্রলি, পার্কিং)",
+        name: "HHR — station services (operation and availability require confirmation)",
+        nameBn: "HHR — station service (operation ও availability নিশ্চিত করতে হবে)",
         url: "https://sar.hhr.sa/services/stations-services",
       },
       {
-        name: "Haramain High Speed Railway - published tariff, discounts and ticket rules",
-        nameBn: "Haramain High Speed Railway - প্রকাশিত ট্যারিফ, ছাড় ও টিকিটের নিয়ম",
+        name: "HHR — basic fares, boarding and ticket-channel conditions",
+        nameBn: "HHR — basic fare, boarding ও ticket-channel condition",
         url: "https://sar.hhr.sa/travel/fares",
       },
       {
-        name: "Haramain High Speed Railway - baggage allowance and prohibited items",
-        nameBn: "Haramain High Speed Railway - ব্যাগেজের সীমা ও নিষিদ্ধ জিনিস",
-        url: "https://sar.hhr.sa/web/portal/travel/guidelines/baggage",
+        name: "HHR — baggage allowance and prohibited items",
+        nameBn: "HHR — baggage allowance ও prohibited item",
+        url: "https://sar.hhr.sa/travel/guidelines/baggage",
+      },
+      {
+        name: "HHR — travel tips and identification/assistance checks",
+        nameBn: "HHR — travel tips ও identification/assistance check",
+        url: "https://sar.hhr.sa/travel/travel-tips",
+      },
+      {
+        name: "Hilton — named Makkah/Madinah property descriptions (not a room or route inspection)",
+        nameBn: "Hilton — নির্দিষ্ট Makkah/Madinah property description (room/route inspection নয়)",
+        url: "https://www.hilton.com/en/p/discover-travel/emea/religious-travel/",
+      },
+      {
+        name: "Hilton — accessibility varies by hotel and room",
+        nameBn: "Hilton — hotel ও room অনুযায়ী accessibility বদলায়",
+        url: "https://www.hilton.com/en-gb/help-center/hotel-information/accessible-features-and-rooms/",
       },
     ],
     internalLinks: [
+      { text: "Nusuk visitor ও আলাদা Rawdah appointment check", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "সম্পূর্ণ Umrah ও Hajj Visa, Nusuk এবং BDT বাজেট গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "DIY Umrah পোর্টাল ও BDT ক্যালকুলেটর", path: "/umrah" },
       { text: "Haramain Train বুকিংয়ের জন্য Dual-Currency Card গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
@@ -300,9 +422,9 @@ Umrah ও Rawdah permit কোথায় বুক করব?
       { text: "রমজান ওমরাহ তারিখ ও শেষ দশকের বুকিং পরিকল্পনা", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
     ],
     affiliateCTA: {
-      provider: "airalo",
-      headline: "Haramain Train ও Nusuk Permit-এর জন্য ইন্টারনেট প্রয়োজন?",
-      body: "ঢাকা ছাড়ার আগেই ফোনে Saudi Arabia eSIM অ্যাক্টিভেট করে নিন, যাতে মক্কা ও মদিনায় নির্বিঘ্নে Nusuk অ্যাপ ও Careem ব্যবহার করতে পারেন।",
+      provider: "klook",
+      headline: "নির্দিষ্ট hotel ও room-এর terms তুলনা করুন",
+      body: "নিজের date ও party দিয়ে accommodation খুঁজুন, তারপর total, room/bed, cancellation ও access সরাসরি property-তে নিশ্চিত করুন। Search result দিয়ে wheelchair route বা shuttle নিশ্চিত হয় না।",
     },
   },
 
@@ -843,100 +965,134 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
   },
 
   "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": {
-    title: "বাংলাদেশিদের জন্য ৯৬ ঘণ্টার Saudi Stopover Visa (2026): Saudia ও Flynas ট্রানজিট ফ্লাইটে ৪ দিনের ওমরাহ গাইড",
+    title: "বাংলাদেশ থেকে ৯৬ ঘণ্টার Saudi Stopover: যোগ্যতা, বুকিং ও ওমরাহ",
     summary:
-      "লন্ডন, নিউ ইয়র্ক, টরন্টো, ইউরোপ, ইস্তাম্বুল বা দুবাইগামী বাংলাদেশি যাত্রীরা Saudia (Saudi Arabian Airlines) বা flynas-এর যোগ্য ট্রানজিট ইটিনারারিতে টিকিট কাটার সময় ৯৬ ঘণ্টার (৪ দিনের) Saudi Stopover Visa নিতে পারেন—আগে US/UK/Schengen ভিসা ব্যবহার করা লাগে না। তবে সরকারি কোনো নির্দিষ্ট ফি বা ফ্রি হোটেল সুবিধা প্রকাশিত নেই: ভিসা, ইনস্যুরেন্স ও সার্ভিস চার্জ checkout-এ নির্ধারিত হয়, তাই নিজের বুকিংয়ের অঙ্কই আসল খরচ। এই গাইডে বুকিং ধাপ, ভিসা ও permit-এর সীমানা, US/UK/Schengen ভিসাধারীদের শর্তসাপেক্ষ eVisa/VOA পথ এবং ৪ দিনের মক্কা–মদিনা পরিকল্পনা—১৫ অক্টোবর ২০২৬ তারিখে অফিশিয়াল সূত্র দেখে।",
+      "১৯ অক্টোবর ২০২৬-এ দেখা Saudia stopover sequence, সর্বোচ্চ ৯৬ ঘণ্টা, onward document ও checkout খরচের শর্ত। flynas-এর বর্তমান detailed eligibility যাচাই হয়নি; আলাদা Umrah/Rawdah permit ও সময়ের buffer দরকার। Universal approval, free hotel বা instant issuance-এর প্রতিশ্রুতি নয়।",
     category: "Hajj & Umrah",
     date: "২৭ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "৭ মিনিট পড়া",
-    content: `প্রবাসী বাংলাদেশি (NRB), উচ্চশিক্ষার শিক্ষার্থী, ব্যবসায়ী এবং যারা ঢাকা থেকে যুক্তরাজ্য, আমেরিকা, কানাডা, ইউরোপ, তুরস্ক বা মধ্যপ্রাচ্যে যাতায়াত করেন—তাদের জন্য **৯৬ ঘণ্টার Saudi Stopover Visa** দীর্ঘ যাত্রাবিরতিকে ৪ দিনের ওমরাহ ভ্রমণে বদলে দিতে পারে, আলাদা ভিসা আবেদন ছাড়াই। অফিশিয়াল Visit Saudi ও Saudia stopover পেজ দেখে এই গাইডটি ১৫ অক্টোবর ২০২৬ তারিখে হালনাগাদ করা হয়েছে। মন্ত্রণালয় বা এয়ারলাইন্স—কারোর কাছেই দুটি জিনিস প্রকাশিত নেই: নির্দিষ্ট stopover ফি এবং সার্বজনীন ফ্রি হোটেল সুবিধা। ভিসা, ইনস্যুরেন্স ও সার্ভিস চার্জ আপনার এয়ারলাইন্স checkout-এর line item, এবং এগুলো বদলায়। কোনো বর্তমান সরকারি সংখ্যা না পাওয়া গেলে এই পাতা সেটাই লেখে, সংখ্যা বানায় না। আলাদা ট্রিপের সঙ্গে তুলনা করলে আমাদের মূল DIY গাইডের একটি তারিখসহ planning estimate ধরে রাখুন—১০ দিন, চারজনের পরিবারের শেয়ারে জনপ্রতি BDT 1,16,000–1,32,000 (১৪ অক্টোবর ২০২৬ check করা; লাইভ কোটেশন নয়)—কোনো "সাশ্রয়" দাবি নয়।
+    readTime: "৯ মিনিট পড়া",
+    content: `কার জন্য: আন্তর্জাতিক onward journey-র মধ্যে সৌদিতে স্বল্প সময় থাকতে চান এমন বাংলাদেশি পাসপোর্টধারী—প্রবাসী পরিবার ও শিক্ষার্থীসহ। নিজের document, airline booking ও সময়ের সঙ্গে stopover মেলে কি না বুঝতে এই গাইড; এটি অনুমোদন বা সম্পন্ন বুকিংয়ের প্রতিবেদন নয়।
 
-১. ৯৬ ঘণ্টার SAUDI STOPOVER VISA আসলে কী দেয়
-Visit Saudi বলছে, জাতীয় বাহকদের যোগ্য itinerary বুক করলে সৌদি আরবের মধ্য দিয়ে ট্রানজিট করা যাত্রীরা সর্বোচ্চ ৯৬ ঘণ্টার জন্য দেশে প্রবেশ করতে পারবেন—ওমরাহও এর অন্তর্ভুক্ত [১]।
-- **যোগ্য এয়ারলাইন্স:** Saudia (Saudi Arabian Airlines) ও flynas, একটি মাত্র ticketed itinerary-এর ভেতরে সৌদি সংযোগ থাকলে। এটি আপনার বুকিংয়ের ভেতরের stopover—আলাদাভাবে কেনা দুই leg-এ যুক্ত করার মতো ভিসা নয় [১-৩]।
-- **আগের ভিসার শর্ত:** tourist eVisa-র কথা আলাদা—stopover route-এ আগে ব্যবহৃত US/UK/Schengen ভিসা লাগবে না। তবে যোগ্যতা নির্ধারণ করছে আপনার itinerary ও এয়ারলাইন্সের বর্তমান নিয়ম; বাংলাদেশি পাসপোর্টের জন্য কোনো সার্বজনীন entitlement প্রকাশিত নেই। Saudia-র নিজের help flow "দেশ যোগ্য না হলে" পরিস্থিতির কথাও বলে, তাই পেমেন্টের আগে আপনার বুকিংয়ে stopover option আসছে কি না নিশ্চিত হন [১-২]।
-- **মেয়াদ ও অবস্থানকাল:** ইস্যুর দিন থেকে ৯০ দিন (৩ মাস) মেয়াদ, একক প্রবেশ (single entry), সর্বোচ্চ ৯৬ ঘণ্টা (৪ দিন) মক্কা, মদিনা বা যেকোনো শহরে অবস্থান। ভিসা extend করা যায় না এবং প্রতি বুকিংয়ে একটি মাত্র stopover যাত্রা [১-২]।
-- **আপনি যা দেবেন:** কোনো নির্দিষ্ট ফি প্রকাশিত নেই। ১৫ অক্টোবর ২০২৬ check-এ Visit Saudi-তে Saudia অফারে দেখানো ছিল—ভিসা ফি ফ্রি, application fee প্রায় SAR 39.50 (USD 10.50) এবং medical insurance SAR 13 থেকে [১]। Saudia স্পষ্ট করে বলছে, ভিসা ফি, সার্ভিস চার্জ, মেডিকেল ফি ও ইনস্যুরেন্স খরচ বুকিংয়ের সময় Ministry of Foreign Affairs-এর বিধি অনুযায়ী হিসাব হয় [২]। এগুলো এক বাহকের checkout line item—সব এয়ারলাইন্স, রুট বা যাত্রীর নিশ্চিত মোট খরচ নয়, এবং flynas-এর দামও নয়। আমরা কোনো BDT অঙ্ক প্রকাশ করছি না: তারিখভিত্তিক বিনিময় হার ছাড়া SAR line item-কে টাকায় রূপান্তর করলে এমন দাম তৈরি হয় যা কোনো সরকারি সূত্রে নেই।
-- **হোটেল অন্তর্ভুক্ত নয়:** ফ্রি রাতের হিসাবে বাজেট বানাবেন না। Visit Saudi-র stopover পেজে বর্তমানে কোনো হোটেল সুবিধার উল্লেখ নেই, আর Saudia হোটেল বুকিংকে "শুধু round-trip বুকিং ও নির্দিষ্ট কয়েকটি destination-এর জন্য" একটি optional add-on হিসেবে দেখায় [১-২]। এক রাতের কমপ্লিমেন্টারি হোটেল ২০২৩ সালের চালুর সময়ের একটি Saudia Holidays প্রমোশন ছিল, নির্দিষ্ট itinerary ও নির্দিষ্ট শহরে (মক্কা কখনোই নয়) সীমিত এবং availability-এর শর্তসাপেক্ষ—এই জাতীয় প্রমোশন বিনা নোটিশে তুলে নেওয়া হয়। মক্কা ও মদিনার রাত নিজে বুক করে খরচ ধরুন।
-- **ভিসা permit নয়:** Visit Saudi অনুযায়ী মক্কা বা মদিনায় যাওয়ার আগে ধর্মীয় যাত্রীদের Nusuk.sa-এ Umrah বা Ziyarah appointment নিতে হবে [১,৪]। Stopover, tourist বা Umrah visa—কোনোটাই Hajj permit নয়।
-- **প্রবেশের শর্ত:** কমপক্ষে ৬ মাস মেয়াদি পাসপোর্ট, চূড়ান্ত গন্তব্যের confirmed onward ticket, এবং (অব্যাহতি না থাকলে) সেই দেশের বৈধ entry visa বা residence permit। ভিসা ইস্যু হলেই প্রবেশ নিশ্চিত নয়—এয়ারপোর্টে passport control চূড়ান্ত সিদ্ধান্ত দেয় [২]।
+দ্রুত উত্তর
+১৯ অক্টোবর ২০২৬-এ দেখা সূত্র অনুযায়ী Visit Saudi ওমরাহসহ সর্বোচ্চ ৯৬ ঘণ্টার stopover stay বর্ণনা করে; Saudia ফ্লাইট বুকিংয়ের সময় আবেদনের ধাপ প্রকাশ করেছে। ভিসা নিয়ে প্রবেশের মেয়াদ ও থাকার অনুমোদিত সময় এক নয়। টাকা দেওয়ার আগে নিজের passport, onward destination-এর অনুমতি, itinerary ও airline-এর শর্ত মিলিয়ে নিন; flight বা visa দিয়ে প্রবেশ কিংবা Nusuk appointment নিশ্চিত হয় না [১–২, ৪, ৯]। Redirect হওয়া guide থেকে flynas-এর বর্তমান বিস্তারিত যোগ্যতা যাচাই হয়নি। তাদের ৩০ জানুয়ারি ২০২৩-এর launch ঘোষণা পুরোনো প্রমাণ, বর্তমান checkout test নয় [৩, ১০]।
 
-২. টিকিট বুক করার সময় ধাপে ধাপে আবেদন
-Saudia-র প্রকাশিত flow সবচেয়ে স্পষ্ট; flynas-এর বুকিং ইঞ্জিনেও মিল থাকা stopover ধাপ আছে—প্রতিটি স্ক্রিন নিজের বুকিংয়ে মিলিয়ে নিন [২-৩]।
-১. Jeddah (JED) বা Riyadh (RUH) সংযোগসহ আন্তর্জাতিক রুট সার্চ করুন, যাত্রাবিরতি সর্বোচ্চ ৯৬ ঘণ্টা (যেমন ঢাকা DAC → লন্ডন LHR বা ঢাকা DAC → ইস্তাম্বুল IST)।
-২. একই বুকিংয়ে stopover শহর এবং যাওয়ার বা ফেরার পথে কত ঘণ্টা থাকবেন (সর্বোচ্চ ৯৬ ঘণ্টা) তা বেছে নিন।
-৩. Checkout-এর extras/additional-services ধাপে Stopover Transit Visa-র জন্য আবেদন করুন এবং ফরমের চাওয়া পাসপোর্ট ছবিটি আগেই তৈরি রাখুন (Saudia 200 × 200 px, সর্বোচ্চ 20 KB উল্লেখ করে) [২]।
-৪. টিকিট ও ভিসা একটিই লেনদেনে পেমেন্ট করুন। ওই পেজে line item হিসেবে যে SAR অঙ্ক দেখা যায়, চার্জও ঠিক তাই—অনলাইনে শোনা কোনো সংখ্যা নয়।
-৫. ইমেইলে আসা ভিসা ও ইনস্যুরেন্সের কাগজপত্র রাখুন এবং উড়ার আগে Saudi Unified Visa Platform-এ ইস্যু হওয়া ভিসা যাচাই করুন [২,৫]।
-প্রসেসিং সময়ের কোনো গ্যারান্টি প্রকাশিত নেই। সাধারণত পেমেন্ট সম্পূর্ণ হলে ভিসা ইস্যু হয় এবং এটি বুকিংয়ের সময়ই নিতে হয়, পরে যোগ করা যায় না—তাই stopover-এর সিদ্ধান্ত শেষ মুহূর্তে ফেলবেন না।
+১. Stopover visa কী দেয়—আগে কী যাচাই করবেন?
+Saudia-র নির্দিষ্ট transit page অনুযায়ী ইস্যু থেকে visa validity ৯০ দিন, থাকা সর্বোচ্চ ৯৬ ঘণ্টা, মেয়াদ বাড়ানো যায় না এবং প্রতি booking-এ একটি stopover trip। Visit Saudi Saudia offer-কে single entry ও তিন মাস validity বলে। প্রবেশের সময়সীমাকে তিন মাস থাকার অনুমতি ভাববেন না: ইস্যু হওয়া visa পড়ে নিজের অনুমোদিত entry ও departure time নিশ্চিত করুন [১–২]।
 
-৩. ইতিমধ্যে ব্যবহৃত US, UK বা SCHENGEN ভিসা থাকলে
-USA, UK বা কোনো Schengen দেশের বৈধ ও অন্তত একবার ব্যবহৃত tourist/business ভিসা (বা সেসব দেশের স্থায়ী রেসিডেন্সি) আলাদা একটা পথ—এটি শর্তসাপেক্ষ, স্বয়ংক্রিয় নয়। সাধারণ বাংলাদেশি পাসপোর্ট nationality-only tourist eVisa তালিকায় নেই, তাই ১ বছরের multiple-entry eVisa আপনার নামে অনিবার্যভাবে ইস্যু হবে ধরে বুকবেন না [৬]। অফিশিয়াল পোর্টালে বর্তমান শর্ত দেখে নিন: বৈধ ও আগে ব্যবহৃত US/UK/Schengen ভিসাধারীরা প্রকাশিত air-arrival ও carrier শর্ত পূরণ করলে visa-on-arrival-এর যোগ্য হতে পারেন [৬-৭]। খরচ হলো পোর্টাল বা arrival counter-এ যা দেখানো হয়—সরকারি ভিসা ফি, বাধ্যতামূলক medical insurance, আর শুধু অনলাইন আবেদনের ক্ষেত্রে platform charge; তাই রূপান্তর করা সংখ্যা দেখে বাজেট না বেঁধে অফিশিয়াল পেজের SAR মোট দেখুন। Tourist ভিসাও Nusuk-এর Umrah appointment-এর বিকল্প নয় [৪]।
+Saudia স্বীকৃত passport-এর অন্তত ছয় মাস মেয়াদ—প্রযোজ্য দ্বিপক্ষীয় চুক্তির শর্তসাপেক্ষে—confirmed onward ticket এবং প্রয়োজন হলে destination visa বা residence permission চায়; visa exemption থাকলে ব্যতিক্রম। চূড়ান্ত গন্তব্যের অনুমতি আর বিদেশি document দিয়ে Saudi tourist visa-র যোগ্যতা এক প্রশ্ন নয়। পাওয়া শর্ত থেকে সব বাংলাদেশির entitlement বা সব prior-visa requirement থেকে নিঃশর্ত ছাড় প্রমাণ হয় না [২]।
 
-৪. ৯৬ ঘণ্টার (৪ দিনের) বাস্তবসম্মত মক্কা ও মদিনা পরিকল্পনা
-সময় স্থির: সর্বোচ্চ ৯৬ ঘণ্টা, extend করা যাবে না [২]। পরিকল্পনা উল্টো দিক থেকে শুরু করুন—আগে onward ফ্লাইট ঠিক রাখুন।
-- **১ম দিন—জেদ্দা থেকে মক্কা:** King Abdulaziz International (JED)-এ নামুন, ইমিগ্রেশন শেষ করে Haramain High Speed Rail স্টেশনে গিয়ে মক্কায় চলুন। ১৪ অক্টোবর ২০২৬ check-এ operator-এর ট্যারিফে KAIA–Makkah সেগমেন্টের base Economy ফি SAR 65 দেখানো ছিল (VAT ও অন্যান্য ফি বাদে); লাইভ checkout-এ তারিখ ও ট্রাভেল ক্লাস অনুযায়ী দাম বদলায় [৮]। টার্মিনাল থেকে স্টেশন ও লাগেজের সময় ধরে রাখুন, হোটেলে উঠুন, এবং বুক করা Nusuk slot-এ ওমরাহ সম্পন্ন করুন।
-- **২য় দিন—মক্কা:** মসজিদুল হারামে ৫ ওয়াক্ত নামাজ এবং অর্ধ-দিবসের জিয়ারত (জাবালে নূর, মিনা, আরাফাত)। ট্যাক্সি বা ট্যুরের দাম বুকিংয়ের সময়ই ঠিক করুন, পৌঁছে নয়।
-- **৩য় দিন—মক্কা থেকে মদিনা:** Haramain ট্রেনে প্রকাশিত সময়সূচি অনুযায়ী আনুমানিক ২ ঘণ্টা ১৫ মিনিট; একই ১৪ অক্টোবর ২০২৬ check-এ Makkah–Madinah-এর base Economy ফি SAR 162 (VAT ও ফি বাদে) দেখানো ছিল—দুটোই নির্দেশক, operator সাইটে মিলিয়ে নিন [৮]। মদিনায় আগে থেকে বুক করা Rawdah appointment permit নিয়ে মসজিদে নববীতে নামাজ পড়ুন।
-- **৪র্থ দিন—মদিনা, তারপর onward:** ফজরের পর মসজিদে কুবা, তারপর জেদ্দা ফিরে onward ফ্লাইটে উঠুন। মদিনা থেকেই উড়তে চাইলে সেই leg-টি একই ticketed itinerary-এ থাকতে হবে—প্রতি বুকিংয়ে একটিই stopover, তাই বুক করার সময়ই যাচাই করুন [২]।
-হোটেলের হাঁটার পথ, গেট, শাটল, ঢাল-সিঁড়ি ও রুম ভাড়ার প্রশ্ন আমাদের Makkah ও Madinah হোটেল জোন গাইডে আছে; নির্দিষ্ট ঠিকানা ও যে গেটে যাবেন সেই রুট হোটেলে জিজ্ঞেস করে নিন—শুধু এলাকার নাম হাঁটার সময় প্রমাণ করে না।
+Saudia ও flynas আলাদাভাবে যাচাই করতে হবে। Saudia-র নির্দিষ্ট page-এ নিচের booking sequence আছে। flynas guide URL homepage-এ নিয়ে গেছে; public form-এ Stop Over Booking option দেখা গেছে, কোনো বাংলাদেশি যাত্রীর visa result নয়। খোলা flynas ঘোষণাটি ৩০ জানুয়ারি ২০২৩-এর। সেটি service launch ও ticket কেনার পরে আবেদনের কথা বলে; আজকের eligible destination, required foreign visa, price, refund rule বা application screen প্রমাণ করে না [৩, ১০]।
+
+যাত্রীর যাচাই (stopoverEligibility): Flight কেনার আগে নিজের সুনির্দিষ্ট passport, onward destination ও entry document দিয়ে নির্বাচিত airline-কে stopover route নিশ্চিত করতে বলুন—qualifying visa বা residence লাগলে সেটিসহ। flynas-এর জন্য বর্তমান নির্দেশনা নিন; redirect হওয়া guide বা Saudia-র flow একই ধরে নেবেন না। Booking option দেখা মানে visa approval নয়। যোগ্যতা বা ticket কেনার পরে visa আবেদনের ঝুঁকি অস্পষ্ট হলে non-refundable payment-এর আগে official support-এ মিটিয়ে নিন। এখানে কোনো application বা booking test করা হয়নি; URAL/chat-এ passport scan, visa number বা credential পাঠাবেন না। [১–৩, ১০]
+
+Visa ও hotel-এর বাজেটে কী রাখবেন?
+Visit Saudi Saudia offer-এ promotional free visa-fee line-এর সঙ্গে application ও insurance charge প্রকাশ করে। প্রকাশিত উদাহরণ all-in quote নয়। Saudia বলছে visa fee, service charge, medical fee ও insurance cost Ministry of Foreign Affairs-এর বিধি অনুযায়ী হিসাব হয়। নিজের itemized checkout total, payment currency ও bank charge লিখে রাখুন; promotional starting price রূপান্তর করে বানানো BDT মোট নয় [১–২]।
+
+Hotel সবার জন্য অন্তর্ভুক্ত—এমন যাচাই হয়নি। Saudia-র নির্দিষ্ট page বলছে hotel booking round-trip ও selected destination-এর জন্য; তা দিয়ে আপনার booking-এ free room প্রমাণ হয় না। কোনো inclusion দাবি থাকলে property, city, date, tax ও cancellation terms লিখিতভাবে নিন। তা না হলে নিজের accommodation-এর বাজেট রাখুন। এই যাচাইয়ে hotel voucher পরীক্ষা বা কোনো conditional promotion নেই—এমন সিদ্ধান্ত নেওয়া হয়নি [১–২]।
+
+২. Saudia-তে stopover-এর আবেদন কীভাবে করবেন?
+এটি Saudia-র প্রকাশিত sequence; flynas procedure বা login করা screen-এর test নয়। Ticket আগেই ইস্যু হলে visa আবেদন করা যাবে কি না এবং কীভাবে—carrier-কে জিজ্ঞেস করুন; new-booking flow পরে যোগ করা যাবে ধরে নেবেন না [২]।
+
+Saudia-র page দ্রুত email issuance প্রচার করে; এই যাচাইয়ে timing test বা আপনার application-এর guaranteed processing deadline নিশ্চিত হয়নি। অতিরিক্ত check বা failure-এর জন্য সময় রাখুন; marketing promise ধরে সঙ্গে সঙ্গে departure পরিকল্পনা করবেন না [২]।
+
+ধাপ ১: কেনার আগে onward journey ও stopover নিশ্চিত করুন।
+- Passport, destination permission ও airline eligibility দেখুন। Airline-এর stopover booking flow-তে Saudi connection ও duration বাছুন। আলাদা কেনা flight leg যোগ্য বা এক journey হিসেবে সুরক্ষিত ধরে নেবেন না [২]।
+
+ধাপ ২: প্রকৃত visa, fare ও cancellation terms পড়ুন।
+- কোন যাত্রীর visa লাগবে, তারিখ, baggage ও hotel arrangement দেখুন। Visa দেরি বা refusal হলে ticket ও অন্য payment-এর কী হবে জিজ্ঞেস করুন; refund নিশ্চিত ভাববেন না [১–২]।
+
+ধাপ ৩: Booking-এর সময় stopover visa request পূরণ করুন।
+- Saudia আবেদনের জন্য Seats & Extras / Additional Services বলে। প্রকাশিত FAQ-তে photo ২০০ × ২০০ pixel ও সর্বোচ্চ ২০ KB; বর্তমান form আলাদা কিছু চাইলে সেই নির্দেশনা অনুসরণ করুন। এটি Saudia-র নির্দেশনা, flynas-এর সার্বজনীন photo specification নয় [২]।
+
+ধাপ ৪: টাকা দেওয়ার আগে itemized total দেখুন।
+- Saudia flight ও visa একসঙ্গে payment-এর কথা বলে। অনুমতি দেওয়ার আগে insurance, অন্য charge, currency ও terms দেখুন। Payment করা visa approval-এর প্রমাণ নয় [২]।
+
+ধাপ ৫: ইস্যু হওয়া visa ও insurance document পরীক্ষা করুন।
+- Saudia বলছে document email-এ আসে। Traveller, passport detail, entry count, validity ও permitted stay onward flight-এর সঙ্গে মিলিয়ে নিন; কিছু অনুপস্থিত বা অমিল হলে official visa service বা carrier support ব্যবহার করুন [২, ৫]।
+
+ধাপ ৬: Permit ও departure logistics আবার নিশ্চিত করুন।
+- Valid visa নিয়ে প্রযোজ্য Nusuk visitor process এবং available Umrah/Rawdah service অনুসরণ করুন। যাওয়ার আগে flight, transfer, accommodation, বর্তমান মৌসুমের health instruction ও প্রকৃত permit খুলতে পারছেন কি না দেখুন [৪, ৯]। Confirmation ও privacy check-এর জন্য পর্যালোচিত Nusuk guide পড়ুন।
+
+৩. ব্যবহৃত US, UK বা Schengen visa কি একই route?
+না। Onward itinerary-র stopover permission আর foreign visa বা residence-এর ভিত্তিতে tourist-visa exception আলাদা route। Main guide-এর পৃথক review-তে ব্যবহৃত standard nationality-only eVisa list-এ Bangladesh নেই। Main DIY guide-এ সূত্রসহ tourist/business prior-use ও permanent-residence category আছে; বর্তমান carrier, GCC ও accepted-entry-evidence-এর সীমাও বলা আছে [৬–৭]। বিকল্প route-এর জন্য সেই guide ও official checker দেখুন; যেকোনো student/work visa, residence card বা আগের trip দিয়েই automatic eligibility ভাববেন না। এই stopover review বিকল্প route-এর fine print নতুন করে যাচাই করেনি।
+
+Visa permit নয়। Ministry Nusuk.sa-এর মাধ্যমে আলাদা Umrah ও Rawdah appointment service দেয়, যোগ্যতা ও availability সাপেক্ষে। Rawdah appointment আর মসজিদে নববীতে সাধারণ visit এক নয়; মসজিদের প্রতিটি নামাজে Rawdah permit লাগে—এমন দাবি করবেন না। Stopover visa হজের অনুমতি দেয় না [১, ৪, ৯]।
+
+যাত্রীর যাচাই (stopoverPermits): দুই শহরের plan চূড়ান্ত করার আগে issued visa-র time window এবং আপনার জন্য প্রকৃত available Umrah ও আলাদা Rawdah appointment দেখুন। Flight booking দিয়ে slot বা entry নিশ্চিত হয় না। যে phone/network ব্যবহার করবেন তাতে booking-এর বর্তমান confirmation ও entry-code instruction অনুসরণ করুন; saved image প্রবেশের নিশ্চয়তা নয়। Trial slot নেবেন না বা OTP, passport detail কিংবা ব্যবহারযোগ্য QR code শেয়ার করবেন না। বর্তমান মৌসুমের health ও access restriction এখনও যাচাই করতে হবে। [১, ৪, ৯]
+
+৪. চার দিনের plan-এ বাস্তবে কী রাখবেন?
+নিচেরটি উদাহরণভিত্তিক সময় বণ্টন; tested connection বা ৯৬ ঘণ্টায় দুই শহর ঘোরার প্রতিশ্রুতি নয়। Confirmed onward flight থেকে উল্টো হিসাব করুন—immigration, baggage, station/airport transfer, check-in, rest ও disruption-এর সময় রেখে। চারটি calendar label নয়, issued visa-র অনুমোদিত window দিয়ে plan মেলে কি না দেখুন [২]।
+- দিন ১: Ticketed stopover Jeddah হলেই সেখানে নামুন, confirmed Makkah accommodation-এ যান এবং available booked time-এ Umrah করুন। Slot বা transfer না মিললে arrival day-তেই শেষ হবে বলবেন না।
+- দিন ২: Makkah-কে base রাখুন; পরিবারের সামর্থ্য অনুযায়ী বিশ্রাম ও ইবাদত করুন। Optional visit ওমরাহের অতিরিক্ত বাধ্যতামূলক কাজ নয়; guaranteed taxi tour ভরে দেবেন না।
+- দিন ৩: Makkah-তে থাকুন, অথবা প্রকৃত train, luggage rule, hotel, appointment ও return/onward connection-এ পর্যাপ্ত সময় থাকলেই Madinah ভাবুন। Rawdah appointment আলাদা availability-র প্রশ্ন, itinerary-র নিশ্চিত অংশ নয়।
+- দিন ৪: Onward departure-কে অগ্রাধিকার দিন। Ticketed departure airport-এ যথেষ্ট buffer রেখে ফিরুন; Jeddah flight-এর বদলে Madinah departure নেওয়া যাবে ধরে নেবেন না। সময় কম হলে extension-এর ওপর ভরসা না করে Madinah বাদ দিন।
+
+Rail-এর প্রকৃত schedule, ticket terms ও fare operator-এর current booking-এ দেখুন; এই review-তে rail-এর নতুন দাম বা fixed journey time যাচাই হয়নি [৮]। Property access, intended gate, room occupancy ও shuttle-এর প্রশ্ন hotel/rail guide-এর কাজ; booking-এর আগে আসল property-তে নিশ্চিত করুন। দীর্ঘ independent trip-এর সঙ্গে তুলনায় Umrah hub worksheet-এ সত্যিকারের matched basket ব্যবহার করুন—অনুমান করা stopover saving নয়।
 
 ৫. সচরাচর জিজ্ঞাসা
 ৯৬ ঘণ্টার Saudi stopover visa-র খরচ কত?
-কোনো নির্দিষ্ট দাম প্রকাশিত নেই। বর্তমান Visit Saudi-র Saudia অফারে ভিসা ফি ফ্রি, application fee প্রায় SAR 39.50 এবং medical insurance SAR 13 থেকে দেখানো আছে; Saudia বলছে ভিসা, সার্ভিস, মেডিকেল ও ইনস্যুরেন্স খরচ বুকিংয়ের সময় MOFA বিধি অনুযায়ী হিসাব হয় [১-২]। আপনার নিজের checkout-এ যে অঙ্ক দেখাবে, সেটিই বাজেট। এই গাইড কোনো রূপান্তরিত BDT মোট প্রকাশ করছে না, কারণ তার পেছনে তারিখসহ হার নেই।
-stopover ভিসায় কি ফ্রি হোটেল রাত পাওয়া যায়?
-না—এমন ধরে হিসাব করবেন না। Visit Saudi-র stopover পেজে আজ কোনো হোটেল সুবিধার কথা নেই, আর Saudia হোটেলকে শুধু round-trip বুকিং ও নির্দিষ্ট কয়েকটি destination-এর জন্য optional add-on হিসেবে দেখায় [১-২]। যা ছিল তা Saudia Holidays-এর একটি airline promotion—নির্দিষ্ট itinerary ও শহরে, availability-এর শর্তে, এবং তা তুলে নেওয়া যেতে পারে। মক্কা ও মদিনার রাতের খরচ নিজে বহন করুন।
-সকল বাংলাদেশি পাসপোর্টধারীর জন্য কি stopover visa উন্মুক্ত?
-কোনো প্রকাশিত সার্বজনীন অধিকার হিসেবে নয়। এটি যোগ্য Saudia বা flynas itineraryধারীদের দেওয়া হয়, আর Saudia-র help পেজে "দেশ যোগ্য না হলে" পরিস্থিতিও রয়েছে [১-৩]। যা সত্যি তা হলো—stopover-এর আগে US/UK/Schengen ভিসা ব্যবহার করা লাগে না। পেমেন্টের আগে নিজের বুকিংয়ে optionটি আসছে কি না দেখে নিন।
-যাত্রাবিরতিতে কি ওমরাহ করা যাবে?
-হ্যাঁ, তবে শুধু ভিসাই যথেষ্ট নয়। Visit Saudi অনুযায়ী মক্কা বা মদিনায় যাওয়ার আগে Nusuk.sa-তে Umrah বা Ziyarah appointment নিতে হয়, তাই আগে permit slot বুক করুন এবং গেটে লাইভ QR হাতে রাখুন [১,৪]। stopover visa কখনো Hajj permit নয়, আর ফরজ Hajj-এর জন্য বাংলাদেশে আলাদা নিবন্ধন লাগে।
-ভিসা কত দ্রুত ইস্যু হয়?
-Saudia-র flow বলছে বুকিং ও ভিসা পেমেন্ট সম্পূর্ণ হলেই ইমেইলে ভিসা ও ইনস্যুরেন্সের কাগজপত্র আসে, এবং আবেদন বুকিংয়ের সময়ই করতে হয়। কোনো প্রসেসিং সময় প্রকাশিত বা গ্যারান্টিযুক্ত নয়—তাই শেষ মুহূর্তে বুকিং এড়িয়ে যান এবং ইস্যু হওয়া ভিসা Saudi Unified Visa Platform-এ মিলিয়ে নিন [২,৫]।
-onward টিকিট ও গন্তব্যের ভিসা কি লাগবে?
-হ্যাঁ। Saudia-র শর্ত—কমপক্ষে ৬ মাস মেয়াদি পাসপোর্ট, চূড়ান্ত গন্তব্যের confirmed onward ticket, এবং সেই দেশের বৈধ entry visa বা residence permit (অব্যাহতি থাকলে ছাড়া)। ভিসা ইস্যু হলেও সৌদি প্রবেশ এয়ারপোর্টের passport control-এর চূড়ান্ত অনুমোদনের ওপর নির্ভরশীল [২]।
-
-`,
+Visit Saudi promotional Saudia line item প্রকাশ করে, আপনার all-in bill নয়। Saudia বলে MOFA বিধি অনুযায়ী charge হিসাব হয়। নিজের passenger ও itinerary-র itemized total এবং bank/payment charge ধরুন; এখানে বানানো BDT মোট বা flynas price নেই [১–২]।
+Stopover visa-তে কি free hotel night থাকে?
+সবার জন্য free-night entitlement যাচাই হয়নি। Saudia round-trip ও selected destination-এ hotel booking বলে। Booking-specific inclusion লিখিতভাবে নিশ্চিত করুন; তা না হলে আলাদা বাজেট রাখুন [১–২]।
+সব বাংলাদেশি passport holder কি যোগ্য?
+এই review তা প্রমাণ করে না। টাকা দেওয়ার আগে exact passport, itinerary, destination permission ও অন্য required document airline-এর সঙ্গে নিশ্চিত করুন। Saudia ও flynas একই নয়; redirect হওয়া flynas guide থেকে বর্তমান detailed conditions পাওয়া যায়নি [২–৩, ১০]।
+Stopover-এ Umrah ও Rawdah visit করা যাবে?
+Visit Saudi stopover activity-তে Umrah বলে, কিন্তু visa দিয়ে appointment নিশ্চিত হয় না। প্রযোজ্য আলাদা Umrah ও Rawdah service নিন; সাধারণ mosque visit আর Rawdah-তে প্রবেশ এক নয়। হজের জন্য নিজস্ব অনুমোদন লাগে [১, ৪, ৯]।
+Payment-এর পরই কি visa ইস্যু হয়?
+Saudia দ্রুত email delivery প্রচার করে, পুরোনো flynas launch-এও immediate issuance-এর কথা ছিল। কোনোটিই আপনার ক্ষেত্রে tested processing guarantee নয়। যাওয়ার আগে প্রকৃত issuance ও visa detail দেখুন; document না এলে carrier-কে জানান [২–৩, ৫]।
+Onward ticket ও destination visa লাগবে?
+Saudia-র প্রকাশিত শর্তে confirmed onward ticket ও প্রয়োজন হলে destination entry visa বা residence permission লাগে, exemption থাকলে ব্যতিক্রম; passport-এর অন্তত ছয় মাস মেয়াদও দ্বিপক্ষীয় চুক্তিসাপেক্ষে লাগে। এগুলো দিয়ে Saudi admission নিশ্চিত হয় না; চূড়ান্ত সিদ্ধান্ত passport control-এর [২]।`,
     references: [
       {
-        name: "Visit Saudi — Stopover Transit Visa campaign page",
-        nameBn: "Visit Saudi — Stopover Transit Visa ক্যাম্পেজ পেজ",
+        name: "Visit Saudi — stopover campaign, Saudia offer and Nusuk note",
+        nameBn: "Visit Saudi — stopover campaign, Saudia offer ও Nusuk নির্দেশনা",
         url: "https://www.visitsaudi.com/en/campaigns/saudi-stopover",
       },
       {
-        name: "Saudia — Stopover Transit Visa: how to book, conditions and charges",
-        nameBn: "Saudia — Stopover Transit Visa: বুকিং পদ্ধতি, শর্ত ও খরচ",
+        name: "Saudia — dedicated transit visa conditions and booking sequence",
+        nameBn: "Saudia — নির্দিষ্ট transit visa শর্ত ও booking sequence",
         url: "https://www.saudia.com/transit-visa",
       },
       {
-        name: "flynas — official booking site (stopover option shown at checkout)",
-        nameBn: "flynas — অফিশিয়াল বুকিং সাইট (checkout-এ stopover option দেখানো হয়)",
-        url: "https://www.flynas.com/en",
+        name: "flynas — stopover launch, 30 January 2023 (historical)",
+        nameBn: "flynas — stopover launch, ৩০ জানুয়ারি ২০২৩ (পুরোনো ঘোষণা)",
+        url: "https://www.flynas.com/en/media-center/news-updates/stopover-visa",
       },
       {
-        name: "Official Nusuk platform — Umrah and Rawdah appointments",
-        nameBn: "অফিশিয়াল Nusuk platform — ওমরাহ ও Rawdah appointment",
-        url: "https://www.nusuk.sa",
+        name: "Ministry of Hajj and Umrah — Umrah Permit Application",
+        nameBn: "হজ ও ওমরাহ মন্ত্রণালয় — Umrah Permit Application",
+        url: "https://haj.gov.sa/en/E-Services/Umrah-Permit-Application",
       },
       {
-        name: "Saudi Unified Visa Platform — verify an issued visa",
-        nameBn: "Saudi Unified Visa Platform — ইস্যু হওয়া ভিসা যাচাই",
+        name: "KSA Visa — official visa services (navigation)",
+        nameBn: "KSA Visa — official visa service (navigation)",
         url: "https://ksavisa.sa",
       },
       {
-        name: "Visit Saudi tourist eVisa portal — eligibility list and current terms",
-        nameBn: "Visit Saudi tourist eVisa পোর্টাল — যোগ্যতার তালিকা ও বর্তমান শর্ত",
+        name: "Official tourist eVisa nationality list — see separate main-guide review",
+        nameBn: "Official tourist eVisa nationality list — পৃথক main-guide review দেখুন",
         url: "https://visa.visitsaudi.com/",
       },
       {
-        name: "Visit Saudi help — visit visa with a used US, UK or Schengen visa",
-        nameBn: "Visit Saudi help — আগে ব্যবহৃত US, UK বা Schengen ভিসা নিয়ে visit visa",
-        url: "https://help.visitsaudi.com/hc/en-us/articles/360018933099-Can-I-get-a-visit-visa-if-I-have-a-valid-US-or-UK-or-Schengen-visa-",
+        name: "Visit Saudi — official eligibility checker (personal result untested)",
+        nameBn: "Visit Saudi — official eligibility checker (ব্যক্তিগত result পরীক্ষা হয়নি)",
+        url: "https://www.visitsaudi.com/en/plan-your-trip/visa-regulations",
       },
       {
-        name: "Haramain High Speed Rail — fares and booking terms",
-        nameBn: "Haramain High Speed Rail — ট্যারিফ ও বুকিং শর্ত",
+        name: "Haramain railway — fare/booking navigation, not repriced in this review",
+        nameBn: "Haramain railway — fare/booking navigation, এই review-তে নতুন দাম যাচাই হয়নি",
         url: "https://sar.hhr.sa/travel/fares",
+      },
+      {
+        name: "Ministry of Hajj and Umrah — separate Rawdah permit service",
+        nameBn: "হজ ও ওমরাহ মন্ত্রণালয় — আলাদা Rawdah permit service",
+        url: "https://haj.gov.sa/en/E-Services/Permit-to-Visit-Al-Rawdah-Al-Sharifiyah-for-Men-Women",
+      },
+      {
+        name: "flynas — public booking site, not personal eligibility evidence",
+        nameBn: "flynas — public booking site, ব্যক্তিগত যোগ্যতার প্রমাণ নয়",
+        url: "https://www.flynas.com/en",
       },
     ],
     internalLinks: [
@@ -948,239 +1104,478 @@ onward টিকিট ও গন্তব্যের ভিসা কি ল�
     ],
     affiliateCTA: {
       provider: "airalo",
-      headline: "৪ দিনের স্টপওভারে সিমের লাইনে সময় নষ্ট করবেন না",
-      body: "ঢাকা ছাড়ার আগেই ফোনে Saudi Arabia eSIM অ্যাক্টিভেট করে নিন—যাতে জেদ্দায় নামার সাথে সাথেই Haramain Train ও Nusuk অ্যাপ ব্যবহার করতে পারেন।",
+      headline: "জেদ্দায় Nusuk ও transfer-এর জন্য data প্রস্তুত রাখুন",
+      body: "যে phone-এ permit খুলবেন সেটি eSIM সমর্থন করে কি না দেখুন এবং coverage ও price তুলনা করুন। Paid data ঐচ্ছিক—visa, appointment বা entry নিশ্চিত করে না।",
     },
   },
 
   "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": {
-    title: "Nusuk App ও Saudi Visa Bio ব্যবহারের সম্পূর্ণ বাংলা গাইড (2026): রিয়াজুল জান্নাত (Rawdah) পারমিট, বায়োমেট্রিক ও অফিশিয়াল ধাপ",
+    title: "বাংলাদেশিদের Nusuk ও Saudi Visa Bio গাইড: নিবন্ধন, বায়োমেট্রিক ও Rawdah পারমিট",
     summary:
-      "ওমরাহ পরিকল্পনায় বাংলাদেশি যাত্রীদের দুটি অফিশিয়াল সৌদি অ্যাপ প্রস্তুত রাখা উচিত: মক্কায় ওমরাহ স্লট এবং মদিনায় রিয়াজুল জান্নাত (Rawdah Shareef)-এর বাধ্যতামূলক অ্যাপয়েন্টমেন্ট পারমিটের জন্য Nusuk অ্যাপ (nusuk.sa), এবং বর্তমান সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের FAQ অনুযায়ী ইলেকট্রনিকভাবে ইস্যু হওয়া Umrah visa-র biometric enrollment-এর জন্য Saudi Visa Bio অ্যাপ। এই গাইডে জানুন ১০ সংখ্যার ভিসা নম্বর দিয়ে Nusuk-এ রেজিস্ট্রেশন, ঢাকায় বায়োমেট্রিকের ব্যবহারিক ধাপ, এবং নির্দিষ্ট সাপ্তাহিক রিলিজ ধরে না নিয়ে লাইভ অ্যাভেইলেবিলিটি চেক করে ফ্রি Rawdah পারমিট বুক করার নিয়ম। তথ্যসূত্র যাচাই: ১৪ অক্টোবর ২০২৬।",
+      "বাংলাদেশি ভিজিটরের জন্য আবেদনভেদে Saudi Visa Bio, Nusuk নিবন্ধন এবং আলাদা ওমরাহ/Rawdah পারমিটের ধাপ। তারিখসহ বার্ষিক বুকিংয়ের নিয়ম, confirmation window ও entry code দেখুন—নির্দিষ্ট OTP দৈর্ঘ্য, সার্বজনীন স্ক্রিনশট নিষেধ বা পেইড ডেটার বাধ্যবাধকতা ছাড়া। প্রকাশিত অফিশিয়াল উৎস পর্যালোচনা: ১৯ অক্টোবর ২০২৬; লগইন করা অ্যাপ স্ক্রিন পরীক্ষা করা হয়নি।",
     category: "Hajj & Umrah",
     date: "২৭ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "৭ মিনিট পড়া",
+    readTime: "১০ মিনিট পড়া",
     references: [
       {
-        name: "Saudi Ministry of Hajj and Umrah — FAQ (biometric enrollment for Umrah visas)",
-        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — FAQ (Umrah visa-এর biometric enrollment)",
+        name: "Saudi Ministry FAQ — Umrah biometrics and visitor registration",
+        nameBn: "সৌদি মন্ত্রণালয়ের FAQ — ওমরাহ বায়োমেট্রিক ও ভিজিটর নিবন্ধন",
         url: "https://haj.gov.sa/en/FAQ",
       },
       {
-        name: "Saudi Visa Bio app listing (Saudi Ministry of Foreign Affairs)",
-        nameBn: "Saudi Visa Bio অ্যাপের listing (Saudi Ministry of Foreign Affairs)",
+        name: "Saudi Visa Bio — MOFA KSA official app listing",
+        nameBn: "Saudi Visa Bio — MOFA KSA-এর অফিশিয়াল অ্যাপ listing",
         url: "https://play.google.com/store/apps/details?id=sa.gov.mofa.saudivisabio",
       },
       {
         name: "Saudi Ministry — Umrah Permit Application",
-        nameBn: "সৌদি মন্ত্রণালয় — Umrah Permit আবেদন",
+        nameBn: "সৌদি মন্ত্রণালয় — ওমরাহ পারমিট আবেদন",
         url: "https://haj.gov.sa/en/E-Services/Umrah-Permit-Application",
       },
       {
-        name: "Saudi Ministry — permit to visit Al-Rawdah Al-Sharifiyah",
-        nameBn: "সৌদি মন্ত্রণালয় — Al-Rawdah Al-Sharifiyah জিয়ারতের permit",
+        name: "Saudi Ministry — Rawdah Permit service",
+        nameBn: "সৌদি মন্ত্রণালয় — Rawdah পারমিট সেবা",
         url: "https://haj.gov.sa/en/E-Services/Permit-to-Visit-Al-Rawdah-Al-Sharifiyah-for-Men-Women",
       },
       {
-        name: "Nusuk Umrah — registration",
-        nameBn: "Nusuk Umrah — নিবন্ধন পেজ",
+        name: "Nusuk — Rawdah booking, confirmation and entry code (Arabic)",
+        nameBn: "Nusuk — Rawdah বুকিং, confirmation ও entry code (আরবি)",
+        url: "https://www.nusuk.sa/rawdah",
+      },
+      {
+        name: "Nusuk services — visitor and Nafath login options",
+        nameBn: "Nusuk সেবা — ভিজিটর ও Nafath login অপশন",
+        url: "https://services.nusuk.sa/nusuk-svc/auth/login",
+      },
+      {
+        name: "Nusuk Umrah — package-platform registration",
+        nameBn: "Nusuk Umrah — প্যাকেজ প্ল্যাটফর্মের নিবন্ধন",
         url: "https://umrah.nusuk.sa/registration/signup",
       },
       {
-        name: "Nusuk Umrah — Terms of Use",
-        nameBn: "Nusuk Umrah — ব্যবহারের শর্ত",
+        name: "Nusuk Umrah — package-platform Terms of Use",
+        nameBn: "Nusuk Umrah — প্যাকেজ প্ল্যাটফর্ম ব্যবহারের শর্ত",
         url: "https://umrah.nusuk.sa/TermsOfUse",
       },
       {
-        name: "Saudi Ministry of Hajj and Umrah — Nusuk Umrah launch for overseas pilgrims",
-        nameBn: "সৌদি হজ ও Umrah মন্ত্রণালয় — বিদেশি যাত্রীদের জন্য Nusuk Umrah সেবা চালুর ঘোষণা",
-        url: "https://haj.gov.sa/en/Media-Center/Ministry-News/Ministry-of-Hajj-and-Umrah-launches-Nusuk-Umrah-service-to-enable-pilgrims-from-outside-the-Kingdom",
+        name: "Saudi Ministry — Nusuk access without data consumption (6 August 2025 announcement)",
+        nameBn: "সৌদি মন্ত্রণালয় — ডেটা খরচ ছাড়া Nusuk ব্যবহার (৬ আগস্ট ২০২৫-এর ঘোষণা)",
+        url: "https://haj.gov.sa/en/Media-Center/Ministry-News/Ministry-of-Hajj-and-Umrah-activates-the-Nusuk-application-without-internet-consumption-to-serve-the",
       },
       {
-        name: "Saudi Unified Visa Platform",
-        nameBn: "সৌদি Unified Visa Platform",
-        url: "https://ksavisa.sa",
+        name: "Saudi Ministry — current contact and support channels",
+        nameBn: "সৌদি মন্ত্রণালয় — বর্তমান যোগাযোগ ও সহায়তা চ্যানেল",
+        url: "https://haj.gov.sa/en/Contact-us",
       },
       {
-        name: "Bangladesh Haj Management Portal",
-        nameBn: "বাংলাদেশ Haj Management Portal",
-        url: "https://www.hajj.gov.bd/",
-      },
-      {
-        name: "Official Nusuk platform",
-        nameBn: "অফিশিয়াল Nusuk platform",
-        url: "https://www.nusuk.sa",
+        name: "Bangladesh Haj Management Portal — separate Hajj process",
+        nameBn: "বাংলাদেশ হজ ব্যবস্থাপনা পোর্টাল — আলাদা হজ প্রক্রিয়া",
+        url: "https://hajj.gov.bd/",
       },
     ],
-    content: `ঢাকা হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর (DAC) থেকে জেদ্দা বা মদিনার ফ্লাইটে ওঠার আগেই আপনার প্রয়োজনীয় অফিশিয়াল সৌদি অ্যাপগুলো প্রস্তুত রাখুন: মক্কায় ওমরাহ স্লট এবং মদিনায় রিয়াজুল জান্নাত (Rawdah Shareef)-এর বাধ্যতামূলক অ্যাপয়েন্টমেন্ট পারমিটের জন্য Nusuk অ্যাপ (nusuk.sa)। Saudi Visa Bio অ্যাপ বর্তমান সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের FAQ-এ বাংলাদেশের জন্য ইলেকট্রনিকভাবে ইস্যু হওয়া Umrah visa-র biometric enrollment-এর তালিকাভুক্ত; এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার যাত্রীর জন্য সার্বজনীন বাধ্যবাধকতা নয়। মসজিদে নববীর গেটে স্ক্রিনশট গ্রহণ করা হয় না—সরাসরি **Nusuk (nusuk.sa)** অ্যাপের লাইভ QR কোড স্ক্যান করা হয়।
+    content: `এই গাইড কাদের জন্য: ঢাকা থেকে ওমরাহে যাওয়া বাংলাদেশি ভিজিটর, যাঁরা Saudi Visa Bio, Nusuk-এ ভিজিটর অ্যাকাউন্ট এবং ওমরাহ বা Rawdah পারমিটের ধাপ বুঝতে চান—কোনোটিকে ভিসা অনুমোদনের সঙ্গে গুলিয়ে না ফেলে।
 
-এই গাইড ১৪ অক্টোবর ২০২৬-এ অফিশিয়াল সৌদি মন্ত্রণালয় ও Nusuk সূত্রের বিপরীতে যাচাই করা হয়েছে। visa, permit, অ্যাপ ও availability-র শর্ত বদলাতে পারে; যাত্রার আগে বর্তমান অফিশিয়াল পেজ অনুসরণ করুন।
+সংক্ষিপ্ত উত্তর
+১৯ অক্টোবর ২০২৬-এ দেখা সৌদি মন্ত্রণালয়ের FAQ বাংলাদেশকে ইলেকট্রনিকভাবে ইস্যু হওয়া Umrah visa-র বায়োমেট্রিক নিবন্ধনের জন্য Saudi Visa Bio-তে তালিকাভুক্ত করে। নিজের আবেদনের নির্দেশনা অনুসরণ করুন; এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার যাত্রীর নিয়ম নয় [১–২]। Nusuk-এ ওমরাহ ও মদিনার Rawdah-এর পারমিট সেবা আলাদা। মন্ত্রণালয় Rawdah অ্যাপয়েন্টমেন্ট সেবা বিনামূল্যে বলে; Nusuk সাধারণ বুকিং বছরে একবার এবং কাছাকাছি থাকা ভিজিটরের জন্য প্রাপ্যতাসাপেক্ষ আলাদা Instant Track বর্ণনা করে—প্রতি ৩০ দিনে একটি পারমিট নয় [৩–৫]।
 
-১. ২০২৬ সালে ওমরাহর জন্য অফিশিয়াল সরকারি অ্যাপ ও সূত্র কী কী?
-সৌদি হজ ও ওমরাহ মন্ত্রণালয় (**haj.gov.sa**) এবং বাংলাদেশ ধর্ম বিষয়ক মন্ত্রণালয়ের (**hajj.gov.bd**) নির্দেশনা অনুযায়ী:
-- **Official Nusuk App (nusuk.sa):** পবিত্র মক্কায় ওমরাহ পারমিট এবং মদিনায় মহানবী (সা.)-এর রওজা মোবারক সংলগ্ন **রিয়াজুল জান্নাতে (Rawdah Shareef)** নামাজ পড়ার বাধ্যতামূলক অ্যাপয়েন্টমেন্ট বুক করার একক সরকারি মাধ্যম।
-- **Saudi Visa Bio App (MOFA):** বর্তমান Ministry FAQ অনুযায়ী বাংলাদেশের জন্য ইলেকট্রনিকভাবে ইস্যু হওয়া Umrah visa-র biometric enrollment-এর তালিকাভুক্ত। আপনার বর্তমান অফিশিয়াল visa application ও অ্যাপের নির্দেশনা অনুসরণ করুন; এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার visa-র জন্য প্রযোজ্য বলে ধরে নেবেন না [১-২]।
-- **রাখতে হবে এমন অফিশিয়াল পোর্টাল:** Nusuk নিবন্ধন ও Terms of Use, মন্ত্রণালয়ের Umrah Permit ও Rawdah Permit সার্ভিস পেজ, Saudi Unified Visa Platform (ksavisa.sa), এবং ফরজ হজের জন্য Bangladesh Haj Management Portal (hajj.gov.bd) [৩-১০]।
+এটি প্রকাশিত অফিশিয়াল নির্দেশনার পর্যালোচনা; লগইন করা অ্যাপ অ্যাকাউন্ট পরীক্ষা বা মসজিদের গেটে সরেজমিন যাচাই নয়। স্ক্রিন ও শর্ত বদলাতে পারে। নিজের আবেদন, বুকিং ও পারমিটে দেখানো বর্তমান নির্দেশনা অনুসরণ করুন।
 
-২. বাংলাদেশে বসে SAUDI VISA BIO অ্যাপে বায়োমেট্রিক তথ্য দেওয়ার ধাপ কী?
-শুধুমাত্র তখনই ব্যবহার করুন যখন আপনার বর্তমান অফিশিয়াল Umrah visa-র নির্দেশনায় তা চাওয়া হয়। বয়স্ক মা-বাবার হাতের রেখা হালকা হয়ে গেলে ফোনের ক্যামেরায় অনেক সময় ছাপ নিতে চায় না। নিচের ধাপগুলো অনুসরণ করুন:
-ধাপ ১: দিনের আলোতে পাসপোর্ট স্ক্যান করুন:
-- জানালার পাশে দাঁড়িয়ে দিনের স্বাভাবিক আলোতে পাসপোর্টের তথ্য পাতা (Bio-Page) স্ক্যান করুন, যাতে পাতার ওপর ঘরের লাইটের প্রতিফলন (Glare) না পড়ে।
-ধাপ ২: সাদা কাগজের ওপর হাত রেখে আঙুলের ছাপ দিন:
-- টেবিলের ওপর একটি পরিষ্কার সাদা A4 কাগজ রেখে তার ওপর ৪টি আঙুল একসাথে মেলে ধরুন—এতে ক্যামেরা খুব দ্রুত ফোকাস করতে পারে।
-ধাপ ৩: বয়স্কদের হাতের রেখা অস্পষ্ট হলে করণীয়:
-- আঙুলের ছাপ নেওয়ার ১০ মিনিট আগে হালকা ভেজা কাপড় দিয়ে আঙুল মুছে সামান্য লোশন বা ভ্যাসলিন মেখে টিস্যু দিয়ে মুছে নিন; এতে আঙুলের রেখা স্পষ্ট ফুটে ওঠে।
+১. কোন Nusuk সেবা দরকার—আর সেটি কী করে না?
+প্রযোজ্য ভিসা আবেদনের সময় বায়োমেট্রিক তথ্য জমা দেওয়ার জন্য Saudi Visa Bio। বায়োমেট্রিক সম্পন্ন হলেই ভিসা ইস্যু হয় না। মন্ত্রণালয়ের FAQ ইলেকট্রনিক Umrah visa-র জন্য বাংলাদেশের নাম বলে; MOFA-র অ্যাপ listing পাসপোর্টের তথ্য, মুখের ছবি ও আঙুলের ছাপের কথা জানায় [১–২]।
 
-৩. ভিসা পাওয়ার পর NUSUK অ্যাপে একাউন্ট খোলার নিয়ম কী?
-ধাপ ১: আপনার ১০ সংখ্যার Saudi Visa Number খুঁজে বের করুন:
-- আপনার অনুমোদিত PDF ই-ভিসার (**ksavisa.sa**) উপরের ডান দিকে থাকা ১০ সংখ্যার **Visa Number** (সাধারণত 60 বা 61 দিয়ে শুরু) নোট করুন।
-ধাপ ২: Visitor অপশনে রেজিস্ট্রেশন করুন:
-- Nusuk অ্যাপ খুলে **New User -> Visitor** সিলেক্ট করুন। এরপর Visa Number, Passport Number, জন্মতারিখ, Nationality (Bangladesh), ইমেইল ও ফোন নম্বর দিয়ে ইমেইলে আসা ৪ সংখ্যার OTP কোড বসিয়ে লগইন সম্পন্ন করুন।
+Nusuk অ্যাপ ও পারমিট সেবায় ওমরাহ অ্যাপয়েন্টমেন্ট এবং মদিনায় আলাদা Rawdah অ্যাপয়েন্টমেন্ট আছে। অ্যাকাউন্ট থাকা মানেই পারমিট ইস্যু হওয়া নয়, আর ওমরাহ পারমিট Rawdah অ্যাপয়েন্টমেন্ট নয় [৩–৫]। Nusuk সাধারণ মসজিদে নববীতে প্রবেশ ও Rawdah-এ প্রবেশকেও আলাদা করে; মসজিদে প্রতিবার যাওয়ার জন্য Rawdah অ্যাপয়েন্টমেন্ট লাগে ধরে নেবেন না [৫]।
 
-৪. মদিনায় ফ্রি রিয়াজুল জান্নাত (RAWDAH SHAREEF) পারমিট বুক করার নিয়ম কী?
-নিয়ম ১: রওজা শরীফের পারমিট Nusuk-এ ফ্রি অ্যাপয়েন্টমেন্ট হিসেবে বুক হয়:
-- মদিনায় কোনো দালালকে টাকা দেবেন না! Nusuk অ্যাপের ভেতরে **Prophet's Mosque Services -> Praying in the Noble Rawdah** অপশন থেকে পুরুষ ও নারীদের জন্য প্রতি ৩০ দিনে ১টি পারমিট বুক করা যায়—মন্ত্রণালয়ের সার্ভিস পেজের বর্তমান খরচ ও শর্ত সাপেক্ষে [৪]।
-নিয়ম ২: লাইভ অ্যাভেইলেবিলিটি চেক করুন; নির্দিষ্ট রিলিজ দিনের গ্যারান্টি নেই:
-- মন্ত্রণালয়ের Rawdah সার্ভিস পেজ ফ্রি অ্যাপয়েন্টমেন্ট পারমিট বর্ণনা করে এবং ব্যবহারকারীদের উপলব্ধ তারিখ/সময় স্লট বেছে নিতে বলে। সেখানে নির্দিষ্ট সাপ্তাহিক স্লট-রিলিজ সময়সূচি প্রকাশ করা হয় না [৪]।
-- মদিনায় পৌঁছানোর পর কোনো স্লট খালি না দেখলে মসজিদে নববীর চত্বরে ফোনের Location (GPS) চালু রেখে Nusuk নিয়মিত চেক করুন—বাতিল বা ইনস্ট্যান্ট-এন্ট্রি স্লট উপলব্ধ হতে পারে। অ্যাপে দেখা যেকোনো সময়কে লাইভ availability হিসেবে ধরুন, গ্যারান্টি হিসেবে নয়।
+যাত্রীর যাচাই (services): এগোনোর আগে ভিসা আবেদন, Nusuk অ্যাকাউন্ট, ওমরাহ পারমিট ও Rawdah অ্যাপয়েন্টমেন্ট আলাদা করতে পারছেন কি না দেখুন। এগুলো চারটি পৃথক কাজ। বাংলা বা ইংরেজি কোনো অংশ অস্পষ্ট হলে টাকা দেওয়া বা বুকিংয়ের আগে সংশ্লিষ্ট অংশ আবার পড়ুন, প্রয়োজনে অফিশিয়াল সহায়তা নিন।
+
+Nusuk Umrah-এর প্যাকেজ বুকিং ওয়েবসাইট আরেকটি সেবার মাধ্যম। তার signup-এ বসবাসের দেশ, জাতীয়তা ও ইমেইল চাওয়া হয়। তালিকায় বাংলাদেশ থাকা মানে ভিসা অনুমোদন, শুধু ভিসার অফার বা পারমিট অ্যাপের স্ক্রিন নিশ্চিত হওয়া নয়। এই সাইটের শর্তে একাধিক সেবার প্যাকেজের কথা আছে [৭–৮]।
+
+ফরজ হজের জন্য বাংলাদেশের আলাদা নিবন্ধন প্রক্রিয়া ও সৌদির বর্তমান হজ নির্দেশনা অনুসরণ করুন। এই অ্যাপ গাইড হজের যোগ্যতা, নিবন্ধনের শেষ তারিখ বা প্যাকেজের দাম নির্ধারণ করে না [১১]।
+
+২. নিজের আবেদনে Saudi Visa Bio চাইলে কীভাবে এগোবেন?
+অফিশিয়াল নির্দেশনায় বায়োমেট্রিক চাওয়া হলে ভিসা আবেদনের সময় এই ধাপ অনুসরণ করুন—সব যাত্রীর ভিসা ইস্যুর পরের কাজ হিসেবে নয়। মন্ত্রণালয়ের FAQ পাসপোর্ট স্ক্যান, মুখ যাচাই ও দশ আঙুলের ছাপের কথা বলে [১]। MOFA-র listing অনুযায়ী অ্যাপ ব্যবহারের বয়স ৬ বছর বা বেশি এবং ১৮ বছরের নিচে প্রাপ্তবয়স্কের তত্ত্বাবধান লাগে। এটি অ্যাপ ব্যবহারের শর্ত, শিশুর ভিসা বা বায়োমেট্রিক অব্যাহতির প্রমাণ নয় [২]।
+
+
+যাত্রীর যাচাই (biometrics): আপনার আবেদন বা বায়োমেট্রিক গ্রহণ আমরা পরীক্ষা করিনি। শুরু করার আগে নিজের নির্দিষ্ট আবেদনে Saudi Visa Bio চাওয়া হয়েছে কি না নিশ্চিত করুন। বারবার ছবি গ্রহণে ব্যর্থ হলে অফিশিয়াল অ্যাপ বা আবেদন সহায়তায় নিজের ক্ষেত্রে প্রযোজ্য পরের পদ্ধতি জিজ্ঞাসা করুন। পরীক্ষার জন্য আবেদন তৈরি করবেন না। আঙুলের ছাপ, মুখের ছবি, পাসপোর্ট স্ক্যান বা আবেদনের তথ্য URAL বা চ্যাটে পাঠাবেন না।
+
+ধাপ ১: আবেদনের নির্দেশনা ও অ্যাপের প্রকাশক মিলিয়ে নিন।
+- নিজের ভিসা আবেদনে Saudi Visa Bio চাওয়া হয়েছে কি না দেখুন। Ministry of Foreign Affairs KSA প্রকাশিত অফিশিয়াল listing ব্যবহার করুন। বিজ্ঞাপন বা মেসেজের লিংক থেকে একই ধরনের নামের অ্যাপ ইনস্টল করবেন না [১–২]।
+
+ধাপ ২: পাসপোর্ট ও আবেদনের তথ্য প্রস্তুত রাখুন।
+- অ্যাপে চাওয়া পাসপোর্ট, আবেদনের তথ্য ও ইমেইল কাছে রাখুন। পাসপোর্টের ছবি ও যাচাইয়ের বর্তমান নির্দেশনা অনুসরণ করুন। আন্দাজে নম্বর বসাবেন না বা অননুমোদিত সহায়তাকারীকে পাসপোর্টের ছবি পাঠাবেন না [২]।
+
+ধাপ ৩: অ্যাপের নির্দেশনায় মুখ ও আঙুলের ছবি নিন।
+- মুখের ছবি ও আঙুলের ছাপ নেওয়ার ক্রম অ্যাপ অনুযায়ী অনুসরণ করুন; মন্ত্রণালয় দশ আঙুলের ছাপ নেওয়ার কথা বলে। একবার চার আঙুল স্ক্যান করলেই পুরো প্রক্রিয়া শেষ ধরে নেবেন না। স্ক্যান গ্রহণ করানোর জন্য অযাচাইকৃত ত্বক-পরিচর্যার কৌশল ব্যবহার করবেন না [১–২]।
+
+ধাপ ৪: জমা দেওয়ার অবস্থা দেখুন; বারবার ব্যর্থ হলে অফিশিয়াল সাহায্য নিন।
+- অ্যাপ ছাড়ার আগে সম্পন্ন হওয়ার বা ত্রুটির বার্তা পড়ুন। ছবি গ্রহণ করা মানেই ভিসা অনুমোদন নয়। বারবার ত্রুটি হলে অ্যাপের অফিশিয়াল listing-এর support এবং নিজের ভিসা আবেদনের অনুমোদিত সহায়তা চ্যানেলে যোগাযোগ করুন। নিজের আবেদনে পরের পদ্ধতি কী জেনে নিন; অব্যাহতি বা স্বয়ংক্রিয় বিকল্প ধরে নেবেন না [২]।
+
+৩. বিদেশ থেকে ভিজিটর হিসেবে Nusuk-এ কীভাবে নিবন্ধন করবেন?
+মন্ত্রণালয়ের FAQ অনুযায়ী বৈধ ভিসা থাকলে সৌদির বাইরে থেকেও ভিজিটর নিবন্ধন করা যায়। সেখানে পাসপোর্ট নম্বর, ভিসা নম্বর, জন্মতারিখ, জাতীয়তা, মোবাইল ও ইমেইল চাওয়ার কথা আছে; আন্তর্জাতিক ফোন নম্বরও সমর্থিত বলা হয়েছে [১]। সেবার প্রকাশ্য login-এ visitor, citizen/resident ও GCC অপশন এবং আলাদা Nafath অংশ আছে। সাধারণ ওয়েব নির্দেশনায় Nafath লেখা মানেই প্রত্যেক বিদেশি ভিজিটরকে সৌদি রেসিডেন্ট login নিতে হবে নয় [৩–৪, ৬]।
+
+যাত্রীর যাচাই (registration): লগইন করা ভিজিটর স্ক্রিন স্বাধীনভাবে পরীক্ষা করা হয়নি। শুধু নিজের প্রকৃত যোগ্য অ্যাকাউন্ট ও বর্তমানে দেখানো ঘর ব্যবহার করুন। সমস্যা হলে অফিশিয়াল সহায়তার জন্য তারিখ, অ্যাপ/OS সংস্করণ, অ্যাকাউন্টের ধরন, ঘরের নাম ও যাচাইয়ের চ্যানেল লিখে রাখুন—কোডটি নয়। OTP, পাসওয়ার্ড, পাসপোর্ট বা ভিসার তথ্য শেয়ার করবেন না।
+
+ধাপ ১: বৈধ ইস্যু হওয়া ভিসা ও মিল থাকা পাসপোর্ট রাখুন।
+- Visa Number চাইলে ইস্যু হওয়া নথির ওই নামের ঘরের নম্বর ব্যবহার করুন। সব ভিসায় একই দৈর্ঘ্য, শুরুর সংখ্যা বা পাতার অবস্থান থাকে ধরে নেবেন না। নম্বর গ্রহণ না করলে নথির লেবেল মিলিয়ে অফিশিয়াল সহায়তা নিন; আন্দাজ করবেন না [১, ১০]।
+
+ধাপ ২: নিজের প্রকৃত অবস্থার সঙ্গে মিল থাকা অ্যাকাউন্ট বাছুন।
+- বিদেশি ভিজিটর অফিশিয়াল সেবার visitor অপশন ব্যবহার করবেন। প্রকৃত সৌদি রেসিডেন্ট নিজের অবস্থার উপযুক্ত পথ ব্যবহার করবেন; শুধু ঢাকা থেকে রওনা হওয়া অ্যাকাউন্টের ধরন নির্ধারণ করে না [১, ৬]।
+
+ধাপ ৩: নথির সঙ্গে মিলিয়ে চাওয়া তথ্য লিখুন।
+- পাসপোর্ট ও ভিসার তথ্য, জন্মতারিখ ও জাতীয়তা মিলিয়ে দিন। নিজের ব্যবহারযোগ্য ইমেইল ও মোবাইল নম্বর দিন। প্রকাশ্য FAQ এই তথ্যগুলোর কথা নিশ্চিত করে, অপরিবর্তনীয় মোবাইল-মেনুর বিন্যাস নয় [১]।
+
+ধাপ ৪: দেখানো যাচাই শেষ করে অ্যাকাউন্টে ঢুকতে পারছেন কি না দেখুন।
+- FAQ-এ ইমেইল verification code-এর কথা আছে। কোড কোথায় আসবে ও তার ধরন বর্তমান স্ক্রিন অনুযায়ী অনুসরণ করুন; নির্দিষ্ট দৈর্ঘ্য ধরে নেবেন না। কোড না এলে দেওয়া যোগাযোগের তথ্য ও ইমেইলের spam folder দেখুন; সমস্যা চললে অফিশিয়াল সাহায্য নিন। পারমিট দেওয়ার প্রস্তাব করা কাউকে OTP বা পাসওয়ার্ড দেবেন না [১, ১০]।
+
+৪. Rawdah অ্যাপয়েন্টমেন্ট কীভাবে বুক, নিশ্চিত ও ব্যবহার করবেন?
+মন্ত্রণালয়ের Rawdah সেবা পেজ বিনামূল্যের অ্যাপয়েন্টমেন্ট এবং উপলব্ধ তারিখ/সময় বেছে নেওয়ার কথা বলে। ১৯ অক্টোবর ২০২৬-এ দেখা Nusuk-এর Rawdah পেজে নিচের confirmation ও entry code-এর বিস্তারিত আছে [৪–৫]। এগুলো প্রকাশিত নির্দেশনা, আপনার অ্যাকাউন্টে স্লট পাওয়ার নিশ্চয়তা নয়।
+
+ধাপ ১: ওমরাহ অ্যাপয়েন্টমেন্ট নয়, Rawdah সেবা বাছুন।
+- Nusuk-এ Rawdah অ্যাপয়েন্টমেন্ট খুলে সঠিক যাত্রী এবং প্রযোজ্য পুরুষ বা নারীর সময়সূচি দেখুন। ওমরাহ পারমিট দরকার হলে আলাদা ওমরাহ সেবা ব্যবহার করুন [৩–৫]।
+
+ধাপ ২: আবার যাওয়ার পরিকল্পনার আগে পুনরায় বুকিংয়ের যোগ্যতা দেখুন।
+- Nusuk সাধারণ Rawdah বুকিং বছরে একবার এবং আবার যাওয়ার জন্য কাছাকাছি থাকা ভিজিটরের আলাদা Instant Track বর্ণনা করে। বর্তমান সেবাই আপনার যোগ্যতা ও খালি অ্যাপয়েন্টমেন্ট নির্ধারণ করে। ভিসা থাকা বা কাছে উপস্থিত থাকা—কোনোটিই স্লটের নিশ্চয়তা নয় [৫]।
+
+ধাপ ৩: খালি অ্যাপয়েন্টমেন্ট বা দেখানো বিকল্প বেছে নিন।
+- উপলব্ধ তারিখ/সময় বাছুন। উপযুক্ত সময় না পেলে নিজের ক্ষেত্রে দেখানো হলে waitlist বা কাছাকাছি থাকা ভিজিটরের Instant Track দেখুন। স্ক্রিনের location নির্দেশনা অনুসরণ করুন; ভুয়া location ব্যবহার করবেন না। নির্দিষ্ট সাপ্তাহিক রিলিজ দিন ধরে নেবেন না বা নিশ্চিত প্রবেশের প্রতিশ্রুতিতে কাউকে টাকা দেবেন না [৪–৫]।
+
+ধাপ ৪: দেখানো সময়সীমার মধ্যে উপস্থিতি নিশ্চিত করুন।
+- ১৯ অক্টোবর ২০২৬-এর উৎস যাচাইয়ে Nusuk জানায়, visit-এর ৪৮ ঘণ্টা আগে confirmation খোলে এবং ২ ঘণ্টা আগে বন্ধ হয়। নিশ্চিত করার পর একবার ব্যবহারযোগ্য entry QR দেখা যায় বলা হয়েছে। নিজের বুকিংয়ের বর্তমান deadline ও confirmation status দেখুন; প্রাথমিক reservation হলেই প্রক্রিয়া শেষ নয় [৫]।
+
+যাত্রীর যাচাই (rawdah): আপনার অ্যাকাউন্টে সরাসরি বুকিং পরীক্ষা করা হয়নি। সত্যিই যে অ্যাপয়েন্টমেন্টে যাবেন, তার দেখানো confirmation deadline, নিশ্চিত হওয়ার অবস্থা, entry code পাওয়া যাচ্ছে কি না এবং পুনরায় ভিজিট বা Instant Track-এর যোগ্যতার বার্তা দেখুন। পরীক্ষার জন্য স্লট নেবেন না, ভুয়া বুকিং বা location ব্যবহার করবেন না এবং ব্যবহারযোগ্য QR/barcode শেয়ার করবেন না।
+
+ধাপ ৫: হোটেল ছাড়ার আগে entry code ও রিপোর্ট করার নির্দেশনা দেখুন।
+- Nusuk-এ ইস্যু হওয়া পারমিট ও নির্ধারিত entry code খুলুন। দেখা পেজে ৩০ মিনিট আগে পৌঁছাতে বলা হয়েছে। পুরোনো গেট নম্বর নয়, নিজের বুকিংয়ের reporting point ও কর্মীদের নির্দেশনা অনুসরণ করুন। সেভ করা ছবি ব্যাকআপ, প্রবেশের নিশ্চয়তা নয়; সেটি বর্তমান permit display-এর বিকল্প ধরে নেবেন না [৫]।
+
+Nusuk ব্যবহারের জন্য কি eSIM কিনতেই হবে?
+দেখা উৎসগুলোতে পেইড eSIM কেনা বাধ্যতামূলক প্রতিষ্ঠিত হয়নি। ৬ আগস্ট ২০২৫-এর ঘোষণায় মন্ত্রণালয় সৌদির ভেতরে SIM ব্যবহারকারীদের জন্য STC, Mobily ও Zain-এর সহযোগিতায় ডেটা খরচ ছাড়া Nusuk ব্যবহারের কথা বলেছে। এতে প্রত্যেক travel eSIM, roaming সংযোগ বা ফোনে একই সুবিধার নিশ্চয়তা মেলে না [৯]।
+
+ব্যবহারিক প্রস্তুতি হিসেবে প্রয়োজনের আগেই নিজের ফোন ও নেটওয়ার্কে অ্যাপ খুলছে কি না দেখুন। মানচিত্র, মেসেজ ও অন্য বুকিংয়ে আলাদা ডেটা প্ল্যান কাজে লাগতে পারে; কেনার আগে compatibility, coverage, activation ও দাম দেখুন। পারমিট দেখা না গেলে বা login না হলে বিক্রেতার কৌশলে নির্ভর না করে Nusuk help বা মন্ত্রণালয়ের বর্তমান contact page ব্যবহার করুন [১০]।
+
+যাত্রীর যাচাই (network): আপনার ফোন বা অপারেটরে প্রবেশ স্বাধীনভাবে পরীক্ষা করা হয়নি। অ্যাপয়েন্টমেন্টে রওনা হওয়ার আগে যে ফোন ও প্রকৃত Saudi SIM, roaming বা travel eSIM ব্যবহার করবেন, তাতেই ইস্যু হওয়া পারমিট খুলে দেখুন। না খুললে অফিশিয়াল সহায়তা নিন। নিজের provider-এ বিনা ডেটা খরচের সুবিধা আছে বা সংরক্ষিত screenshot প্রবেশ নিশ্চিত করে—ধরে নেবেন না। পেইড ডেটা প্ল্যান ঐচ্ছিক, পারমিটের শর্ত নয়।
 
 ৫. সচরাচর জিজ্ঞাসা
 Saudi Visa Bio কি প্রত্যেক বাংলাদেশি যাত্রীর জন্য বাধ্যতামূলক?
-না। বর্তমান সৌদি মন্ত্রণালয়ের FAQ বাংলাদেশকে ইলেকট্রনিকভাবে ইস্যু হওয়া Umrah visa-র biometric enrollment-এর তালিকাভুক্ত করে এবং Saudi Visa Bio-র নাম উল্লেখ করে। আপনার বর্তমান অফিশিয়াল visa application ও অ্যাপের নির্দেশনা অনুসরণ করুন; এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার visa-র জন্য প্রযোজ্য বলে ধরে নেবেন না [১-২]।
-প্রতি সপ্তাহে নির্দিষ্ট দিনে কি Rawdah বুক করা যায়?
-মন্ত্রণালয়ের Rawdah সার্ভিস পেজে নির্দিষ্ট সাপ্তাহিক রিলিজ দিন প্রকাশ করা হয় না। Nusuk-এ ফ্রি অ্যাপয়েন্টমেন্ট পারমিট বুক করুন এবং লাইভ availability চেক করুন; বাতিল বা ইনস্ট্যান্ট স্লট আসতে পারে [৪]।
-Rawdah পারমিটের স্ক্রিনশট কি গেটে গ্রহণ করা হয়?
-না। গার্ডরা Nusuk অ্যাপের লাইভ dynamic QR কোড স্ক্যান করেন, তাই মদিনায় মোবাইল ডেটা চালু রাখুন।
-ট্যুরিস্ট বা স্টপওভার visa দিয়ে কি ফরজ হজ করা যায়?
-না। Umrah, ট্যুরিস্ট বা স্টপওভার visa বাংলাদেশের হজ নিবন্ধন বা সৌদি হজ পারমিটের বিকল্প নয়। বর্তমান বাংলাদেশ ও সৌদি হজ নির্দেশনা অনুসরণ করুন [৯]।
-আমার ১০ সংখ্যার Saudi Visa Number কোথায় পাব?
-অনুমোদিত PDF Umrah e-Visa খুলে উপরের ডান দিকে থাকা ১০ সংখ্যার নম্বর (সাধারণত 60 বা 61 দিয়ে শুরু) নোট করুন—application/MOFA reference number নয়।
-
+মন্ত্রণালয়ের FAQ বাংলাদেশকে ইলেকট্রনিকভাবে ইস্যু হওয়া Umrah visa-র বায়োমেট্রিক নিবন্ধনের জন্য বলে। নিজের বর্তমান আবেদনের নির্দেশনা অনুসরণ করুন; এতে প্রত্যেক ট্যুরিস্ট বা স্টপওভার ভিসার সার্বজনীন নিয়ম প্রতিষ্ঠিত হয় না [১–২]।
+প্রতি ৩০ দিনে কি Rawdah বুক করা যায়?
+মাসিক অধিকার ধরে পরিকল্পনা করবেন না। ১৯ অক্টোবর ২০২৬-এ দেখা Nusuk পেজ সাধারণ বুকিং বছরে একবার এবং কাছাকাছি থাকা ভিজিটরের আলাদা Instant Track বলে। বর্তমান যোগ্যতা ও ধারণক্ষমতার শর্তও প্রযোজ্য [৫]।
+Rawdah reservation কি নিশ্চিত করতে হয়?
+দেখা Nusuk পেজে visit-এর ৪৮ ঘণ্টা আগে attendance confirmation খোলা এবং ২ ঘণ্টা আগে বন্ধ হওয়ার কথা আছে। নিশ্চিত করার পর একবার ব্যবহারযোগ্য entry QR পাওয়া যায়। নিজের বুকিংয়ে দেখানো deadline ও status অনুসরণ করুন [৫]।
+প্রতি সপ্তাহে নিশ্চিত স্লট-রিলিজ দিন আছে কি?
+দেখা মন্ত্রণালয়ের সেবা পেজে উপলব্ধ তারিখ/সময় বেছে নিতে বলা হয়; নির্দিষ্ট সাপ্তাহিক রিলিজ দিন নেই। Nusuk waitlist ও কাছাকাছি থাকা ভিজিটরের Instant Track বলে, কিন্তু কোনোটি অ্যাপয়েন্টমেন্ট নিশ্চিত করে না [৪–৫]।
+গেটে শুধু স্ক্রিনশটের ওপর নির্ভর করা যাবে?
+Nusuk-এ ইস্যু হওয়া পারমিট ও entry code দেখার ব্যবস্থা রাখুন এবং বর্তমান display নির্দেশনা অনুসরণ করুন। সেভ করা ছবি প্রবেশের নিশ্চয়তা নয়। দেখা উৎসে সব ক্ষেত্রে স্ক্রিনশট বাতিলের সার্বজনীন নিয়ম প্রতিষ্ঠিত হয়নি [৫]।
+Nusuk-এর জন্য কি পেইড মোবাইল ডেটা লাগে?
+সব ক্ষেত্রে নয়। মন্ত্রণালয়ের ৬ আগস্ট ২০২৫-এর ঘোষণা সৌদিতে নির্দিষ্ট অপারেটরের সহযোগিতায় ডেটা খরচ ছাড়া Nusuk ব্যবহারের কথা বলে। নিজের SIM/eSIM, নেটওয়ার্ক ও ফোন যাচাই করুন। সব provider অন্তর্ভুক্ত বা ডেটা কিনলেই অ্যাপ চলা নিশ্চিত ধরে নেবেন না [৯]।
+Nusuk নিবন্ধন ও ভিসা অনুমোদন কি একই?
+না। ভিসা আবেদন ও ইস্যু হওয়া ভিসা, অ্যাকাউন্ট নিবন্ধন, ওমরাহ পারমিট এবং Rawdah অ্যাপয়েন্টমেন্ট আলাদা রাখুন। প্রতিটি সেবার যোগ্যতা ও নির্দেশনা অনুসরণ করুন; প্যাকেজ-প্ল্যাটফর্মে signup পারমিট ইস্যু নয় [১–৮]।
+ভিসা নম্বর গ্রহণ না করলে বা পারমিট না দেখালে কোথায় সাহায্য পাব?
+আবেদনের নিজস্ব support বা মন্ত্রণালয়ের বর্তমান contact page ব্যবহার করুন। ১৯ অক্টোবর ২০২৬-এ দেখা পেজে +966 920002814 এবং সৌদির ভেতরে 1966 আছে। অনুমোদিত সহায়তা চ্যানেলেই ব্যক্তিগত তথ্য দিন; প্রকাশ্য পোস্ট বা অননুমোদিত পারমিট বিক্রেতাকে নয় [১০]।
 `,
     internalLinks: [
       { text: "সম্পূর্ণ DIY Umrah ও ১০ দিনের BDT বাজেট গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "নারীদের জন্য ওমরাহ গাইড ও মদিনার Ladies' Gate 25–29", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
+      { text: "নারীদের ওমরাহ ভ্রমণ ও Rawdah-এ প্রবেশের নির্দেশনা", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
       { text: "hajj.gov.bd পোর্টালে সরকারি ও বেসরকারি হজ নিবন্ধন", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "নিজের কোটেশন দিয়ে BDT ওমরাহ বাজেট হিসাব", path: "/umrah" },
+      { text: "রমজান ওমরাহ ও ইতিকাফ: বুকিং ও মৌসুমের নিয়ম", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
     ],
     affiliateCTA: {
       provider: "airalo",
-      headline: "রওজা শরীফের গেটে লাইভ Nusuk QR কোড দেখাতে ইন্টারনেট অপরিহার্য",
-      body: "মসজিদে নববীর গেটে স্ক্রিনশট গ্রহণ করা হয় না। ঢাকা ছাড়ার আগেই ফোনে Saudi Arabia 5G eSIM ইনস্টল করে নিন।",
+      headline: "মানচিত্র ও মেসেজের জন্য ঐচ্ছিক সৌদি ডেটা প্ল্যান তুলনা করুন",
+      body: "eSIM কেনা Nusuk পারমিটের শর্ত নয়। ফোনের compatibility, provider coverage, activation-এর শর্ত ও চূড়ান্ত দাম দেখুন; নিজের নেটওয়ার্কে সেবা ভিন্ন হতে পারে।",
     },
   },
 
   "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": {
-    title: "নারীদের জন্য Umrah গাইড (2026): মাহরাম ছাড়া ভিসার নিয়ম, মদিনার Ladies' Gate ও পর্দাশীল ইহরাম",
+    title: "নারীদের ওমরাহ: মাহরাম, ভিসা, Rawdah ও ইহরাম যাচাই (২০২৬)",
     summary:
-      "২০২৬ সালে বাংলাদেশি নারীরা কি মাহরাম ছাড়া ওমরাহ ভিসা পেতে পারেন? মদিনায় মসজিদে নববীতে নারীদের নামাজ ও রিয়াজুল জান্নাতে প্রবেশের নিয়ম কী? সৌদি হজ ও ওমরাহ মন্ত্রণালয় (haj.gov.sa) ও নুসুক পোর্টালের অফিশিয়াল নির্দেশনার আলোকে তৈরি এই গাইডে জানুন নারীদের ওমরাহ ভিসা নীতিমালা, ইহরামের সঠিক পোশাক ও মুখের পর্দার নিয়ম, সাঈ শেষে পর্দা বজায় রেখে চুল কাটার (তাকসীর) পদ্ধতি এবং মদিনার উত্তর পাশের মার্কাজিয়া এলাকায় হোটেল নির্বাচনের সুবিধা।",
+      "১৯ অক্টোবর ২০২৬-এর source review: মাহরাম ছাড়া Umrah-এর Ministry উত্তরকে route/age eligibility ও ব্যক্তিগত ধর্মীয় পরামর্শ থেকে আলাদা করুন। Actual Rawdah booking, hotel route, Ihram, মাসিকের contingency ও private Taqsir check; universal gate, safe route বা personal ruling নয়।",
     category: "Hajj & Umrah",
     date: "২৭ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "৭ মিনিট পড়া",
-    content: `পরিবারের সাথে মা-বোনদের নিয়ে ওমরাহ করা কিংবা নারী ভ্রমণকারীদের ঢাকা থেকে পবিত্র মক্কা ও মদিনা সফরের আগে সৌদি সরকারের হালনাগাদ ভিসা নীতিমালা, হারামাইন চত্বরের প্রবেশপথ এবং অন-গ্রাউন্ড লজিস্টিকস সম্পর্কে স্পষ্ট ধারণা থাকলে পুরো আধ্যাত্মিক সফর নিরাপদ, মর্যাদাপূর্ণ ও নির্বিঘ্ন হয়। এই গাইডের প্রতিটি তথ্য ১৬ অক্টোবর ২০২৬ তারিখে সৌদি হজ ও ওমরাহ মন্ত্রণালয়, নুসুক প্ল্যাটফর্ম এবং দুই পবিত্র মসজিদের জেনারেল প্রেসিডেন্সির অফিশিয়াল নির্দেশনা অনুযায়ী যাচাই করা হয়েছে।
+    readTime: "১১ মিনিট পড়া",
+    content: `এই গাইড বাংলাদেশি নারীদের জন্য, যারা একা, পরিবারের সঙ্গে বা দলে ওমরাহ পরিকল্পনা করছেন। তিনটি সিদ্ধান্ত আলাদা রাখুন: নিজের visa route-এ সফরটি করা যাবে কি না, ব্যক্তিগত ধর্মীয় নির্দেশনা কী এবং বাস্তবে নামাজ, appointment ও যাতায়াতের ব্যবস্থা কীভাবে করবেন। এটি ব্যক্তিগত ফতোয়া, চিকিৎসা পরামর্শ, পরীক্ষিত visa application বা সরেজমিনে দেখা mosque-to-hotel route নয়।
 
-১. নারীদের জন্য মাহরাম সংক্রান্ত সৌদি অফিশিয়াল ভিসা নিয়ম
-সফরের পরিকল্পনা করার সময় সৌদি আরবের রাষ্ট্রীয় ইমিগ্রেশন আইন এবং ব্যক্তিগত ধর্মীয় অনুশাসন (ফিকহ)-এর পার্থক্য বোঝা অপরিহার্য:
-- **হজ ও ওমরাহ মন্ত্রণালয়ের ভিসা নীতিমালা:** সৌদি হজ ও ওমরাহ মন্ত্রণালয় (haj.gov.sa) এবং কেন্দ্রীয় নুসুক পোর্টালের (nusuk.sa) হালনাগাদ নিয়ম অনুযায়ী, যেকোনো বয়সের নারী অনলাইনে Umrah e-Visa, 96-Hour Stopover Visa বা Tourist eVisa পাওয়ার ক্ষেত্রে ভিসা পোর্টালে পুরুষ অভিভাবক (মাহরাম) যুক্ত করা আর বাধ্যতামূলক নয় [১][২]। নির্ধারিত পাসপোর্ট ও সাধারণ শর্ত পূরণ সাপেক্ষে নারীদের নামে এককভাবেই ইলেকট্রনিক ভিসা ইস্যু করা হয় [১][২]।
-- **শরীয়াহ ও ফিকহের নির্দেশনা:** সরকারিভাবে ভিসা পাওয়ার ক্ষেত্রে মাহরামের বাধ্যবাধকতা তুলে নেওয়া হলেও, ইসলামি ফিকহের বিভিন্ন মাজহাব অনুযায়ী একা মাহরাম ছাড়া ভ্রমণ কিংবা নিরাপদ নারী কাফেলার সাথে সফরের বিষয়ে সুনির্দিষ্ট আলেমগণের দৃষ্টিভঙ্গি রয়েছে। তাই ভিসা পাওয়ার প্রশাসনিক নিয়মের পাশাপাশি ব্যক্তিগত আমলের ক্ষেত্রে আপনার নির্ভরযোগ্য ফিকহি আলেম বা মুফতির দিকনির্দেশনা অনুসরণ করুন।
-- **ঢাকা এয়ারপোর্ট ইমিগ্রেশন ও প্রস্তুতি:** হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর (DAC) দিয়ে একা বা শুধু নারী সদস্যদের নিয়ে গঠিত দলের ভ্রমণের ক্ষেত্রে প্রয়োজনীয় সব কাগজপত্র সঙ্গে রাখুন। মক্কা ও মদিনার নিশ্চিত হোটেল বুকিং ভাউচার, ফিরতি টিকিটসহ রাউন্ড-ট্রিপ ফ্লাইট আইটিনারারি, জাতীয় পরিচয়পত্র/পাসপোর্টের কপি এবং সরকারি বা করপোরেট চাকুরিজীবী হলে অফিসিয়াল ছুটির অনুমোদনপত্র (NOC) সাথে রাখা জরুরি।
+দ্রুত উত্তর — ১৯ অক্টোবর ২০২৬-এ দেখা তথ্য: হজ ও ওমরাহ মন্ত্রণালয় সরাসরি বলেছে, নারী মাহরাম ছাড়া ওমরাহ করতে আসতে পারেন। এতে প্রত্যেক নারী, শিশু বা বাংলাদেশি passport holder সব visa route-এ eligible প্রমাণ হয় না। ধর্মীয় পরামর্শ আলাদা। Nusuk সাধারণ mosque prayer ও Rawdah appointment আলাদা করেছে এবং নারী-পুরুষের visit time ভিন্ন বলেছে; স্থায়ী gate map বা hotel-area promise নয়, নিজের booking ও staff direction অনুসরণ করুন। [1][2][3][5]
 
-২. মদিনার মসজিদে নববী: নারীদের নামাজের স্থান ও রওজা শরীফ জিয়ারত
-মসজিদে নববীতে নারী মুসল্লিদের জন্য বিশেষ নামাজের জোন ও নির্ধারিত সময়ে প্রবেশের ব্যবস্থা রয়েছে:
-- **মহিলাদের নামাজ কক্ষ ও উত্তর চত্বর:** মসজিদে নববীতে নারীদের জন্য মূল অভ্যন্তরীণ নামাজের স্থান এবং ছায়াযুক্ত বহিরাঙ্গন চত্বরটি মূলত উত্তর ও উত্তর-পূর্ব দিকে অবস্থিত, বিশেষ করে গেট ২১ থেকে ২৬ এবং পূর্ব দিকের প্রবেশপথ সংলগ্ন [৩]। মদিনায় হোটেল বাছাইয়ের ক্ষেত্রে Markazia North (উত্তর কেন্দ্রীয় এলাকা) বেছে নিলে মা-বোন এবং বয়স্কদের জন্য চত্বরে দীর্ঘ পথ না হেঁটে সমতল ও ছায়াযুক্ত পথে সরাসরি নামাজ কক্ষে পৌঁছানো সহজ হয় [৩]।
-- **নারীদের রিয়াজুল জান্নাত (রওজা শরীফ) জিয়ারতের শিডিউল:** পবিত্র রওজা শরীফে প্রবেশের জন্য অফিশিয়াল নুসুক (Nusuk) মোবাইল অ্যাপের মাধ্যমে আগে থেকেই অ্যাপয়েন্টমেন্ট নেওয়া বাধ্যতামূলক [২]। জেনারেল প্রেসিডেন্সি নারীদের জন্য সাধারণত দুটি প্রধান জিয়ারত সেশন নির্ধারণ করে থাকে: প্রথমটি ফজরের পর থেকে যোহরের পূর্ব পর্যন্ত সকালের সেশন, এবং দ্বিতীয়টি এশার পর থেকে মধ্যরাত পর্যন্ত রাতের সেশন [২][৩]।
-- **লাইন ও চত্বরের প্রবেশ প্রটোকল:** রওজা পারমিটধারীদের প্রবেশপথ নারী নিরাপত্তা কর্মী ও মার্শালদের দ্বারা পরিচালিত হয়। চত্বরে নির্ধারিত নারী প্রবেশ চেকপয়েন্টে লাইন শুরু হয়। মসজিদে নববীর চত্বরে যাওয়ার আগে আপনার নুসুক অ্যাপে অনুমোদিত ডিজিটাল পারমিটের লাইভ কিউআর কোড এবং নির্দেশিত গেট নম্বরটি পুনরায় মিলিয়ে নিন [২][৩]।
+১. মাহরাম ছাড়া সফর করা যাবে—তবু কোন ভিসার শর্ত প্রযোজ্য?
+মন্ত্রণালয়ের FAQ-এ “Is a woman allowed to come to perform Umrah without a mahram?” প্রশ্নের উত্তর “Yes, it is allowed.” এটি ওই নির্দিষ্ট administrative উত্তরকে সমর্থন করে। Automatic visa issuance, minor-এর independent travel, প্রত্যেক nationality-এর tourist eVisa eligibility বা নির্দিষ্ট stopover itinerary-এর condition প্রতিষ্ঠা করে না। Hajj registration আলাদা বিষয়। [1]
 
-৩. নারীদের ইহরামের পোশাক ও সাজসজ্জার সঠিক নিয়ম
-পুরুষদের মতো নারীদের জন্য কোনো সেলাইবিহীন বিশেষ কাপড়ের বাধ্যবাধকতা নেই; তাদের ইহরামের মূল উদ্দেশ্য হলো শালীনতা, সরলতা ও ঢিলেঢালা পর্দা বজায় রাখা:
-- **অনুমোদিত পোশাক:** নারীরা তাদের সাধারণ সেলাই করা শালীন পোশাকেই ইহরাম বাঁধেন। বাংলাদেশ থেকে সফরের জন্য ১০০% সুতি বা লিনেনের ঢিলেঢালা আরামদায়ক আবায়া/বোরকা অথবা বড় খিমার/হিজাবসহ সালোয়ার-কামিজ সবচেয়ে উপযোগী। স্বাভাবিক রঙের (কালো, নেভি ব্লু, গাঢ় ধূসর বা সাদা) পোশাক পরিধান করা প্রচলিত; হালকা প্রাকৃতিক কাপড় দীর্ঘ তাওয়াফের সময় গরমে স্বস্তি দেয়।
-- **ইহরামে মুখের পর্দা ও হাতমোজার বিধান:** সহীহ সুন্নাহর নির্দেশনা অনুযায়ী, ইহরাম অবস্থায় মুখমণ্ডলে চামড়ার সাথে চেপে বাঁধা নিকাব এবং সেলাই করা হাতমোজা পরা নিষিদ্ধ [১]। তবে যেসকল নারী পরপুরুষের সামনে চেহারা আবৃত রাখতে চান, তারা হিজাবের নিচে মাথার সামনে একটি নরম ক্যাপ (Visor Cap) ব্যবহার করে তার ওপর দিয়ে পাতলা ওড়না বা কাপড় এমনভাবে মুখের ওপর ঝুলিয়ে রাখতে পারেন যাতে তা সরাসরি মুখের চামড়ায় আটকে না থাকে।
-- **জুতা ও মোজা:** নারীরা ইহরাম অবস্থায় স্বাভাবিক সেলাই করা পায়ের মোজা, আরামদায়ক ফ্ল্যাট জুতা, স্লিপ-অন স্নিকার্স বা গ্রিপিং মোজা ব্যবহার করতে পারেন, যা মসজিদুল হারামের মার্বেল মেঝের ওপর হাঁটার সময় পায়ের সুরক্ষা দেয়।
+Tourist eVisa service-এর official terms-এ user/applicant অন্তত ১৮ বছর এবং minor-এর হয়ে আবেদন করলে authorized representation বলা আছে। খোলা nationality-based permitted-country list-এ Bangladesh নেই। এতে additional-document বা residence route-সহ প্রত্যেক বাংলাদেশি সবভাবে ineligible প্রমাণ হয় না: নিজের পরিস্থিতির জন্য main DIY guide ও আসল official route দেখুন। Terms-এ payment approval নিশ্চিত করে না এবং visa entry নিশ্চিত করে না-ও বলা আছে। সেখানে থাকা ২০২৫ সালের seasonal clause ১৪৪৮-এর travel calendar নয়। [2]
 
-৪. সাঈ শেষে ইহরাম থেকে মুক্ত হতে চুল কাটার (তাকসীর) নিয়ম
-ওমরাহর আনুষ্ঠানিক ইবাদত সমাপ্ত হয় তাকসীরের মাধ্যমে, যার ফলে ইহরামের সকল বিধিনিষেধ থেকে মুক্ত হওয়া যায়:
-- **সঠিক পদ্ধতি:** একজন নারী তার সমস্ত চুলের আগা একত্রিত করে আঙুলের এক কর পরিমাণ (আনুমানিক ১ ইঞ্চি বা ২.৫ সেন্টিমিটার) চুল কাটার মাধ্যমে ইহরাম সম্পন্ন করবেন।
-- **পর্দা ও সতর্কতা:** মারওয়া পাহাড়ের উন্মুক্ত জায়গায় যেখানে পুরুষদের ভিড় থাকে, সেখানে কখনোই হিজাব খুলে প্রকাশ্যে চুল কাটবেন না। মারওয়ার পাশে নারীদের সংরক্ষিত নামাজ স্থানে, ওযুখখানার আয়নার সামনে অথবা নিজের হোটেল রুমে ফিরে গিয়ে একা বা পরিবারের নারীদের সহায়তায় এই তাকসীর সম্পন্ন করুন; চুল কাটার আগ পর্যন্ত ইহরামের নিয়মাবলি বহাল থাকবে।
+Visa permission ব্যক্তিগত ধর্মীয় ফতোয়া নয়। উদাহরণ হিসেবে Jordan-এর General Iftaa Department-এর ৩০ জুলাই ২০২৩-এর fatwa 3785-এ ভিন্ন reasoning ও condition, obligatory বনাম non-obligatory travel এবং safety আলোচনা আছে। ওই conditional আলোচনা থেকে প্রত্যেক voluntary trip-এর blanket permission বানাবেন না বা visa portal-কে নিজের মাজহাবের ফিকহি কর্তৃপক্ষ ধরবেন না। নিজের journey, companion ও intention বিশ্বস্ত যোগ্য আলেমের সঙ্গে আলোচনা করুন। [3]
 
-৫. সচরাচর জিজ্ঞাসা
-২০২৬ সালে বাংলাদেশি নারীরা কি মাহরাম ছাড়া ওমরাহ করতে পারেন?
-সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের অফিশিয়াল নিয়মে যেকোনো বয়সের নারী পুরুষ অভিভাবক (মাহরাম) ছাড়া এককভাবেই Umrah e-Visa, Stopover Visa বা Tourist eVisa-র আবেদন করতে পারেন [১][২]। তবে একা বা দলের সাথে সফরের ধর্মীয় অনুমোদনের বিষয়ে ফিকহি মাজহাবগুলোর নিজস্ব দৃষ্টিভঙ্গি রয়েছে; ব্যক্তিগত আমলের জন্য আপনার নির্ভরযোগ্য আলেমের পরামর্শ নিন।
-মদিনায় নারীদের জন্য কোন এলাকার হোটেল সবচেয়ে সুবিধাজনক?
-Markazia North (উত্তর কেন্দ্রীয় এলাকা) নারীদের জন্য সবচেয়ে আরামদায়ক ও উপযোগী। মসজিদে নববীর নারীদের নামাজের স্থান ও রওজার প্রবেশদ্বারগুলো উত্তর চত্বরে অবস্থিত হওয়ায় দীর্ঘ পথ না হেঁটেই সরাসরি প্রবেশ করা যায় [৩]।
-নুসুক অ্যাপে নারীদের রওজা পারমিট কীভাবে বুক করতে হয়?
-অফিশিয়াল Nusuk মোবাইল অ্যাপে লগইন করে ‘Praying in the Noble Rawdah - Women’ অপশন নির্বাচন করুন এবং ক্যালেন্ডার থেকে সকাল বা রাতের উপলব্ধ টাইম স্লট বেছে নিন [২]। নির্ধারিত সময়ে ফোনের স্ক্রিনে লাইভ কিউআর কোড প্রস্তুত রেখে নির্দেশিত চত্বরে উপস্থিত হোন [২]।
-ইহরাম অবস্থায় কি গ্লাভস বা সাধারণ নিকাব পরা যায়?
-না। ইহরামের পবিত্র অবস্থায় সেলাই করা হাতমোজা (গ্লাভস) এবং মুখের সাথে আঁটসাঁট করে বাঁধা সাধারণ নিকাব পরা নিষিদ্ধ [১]। চেহারা ঢাকতে চাইলে হিজাবের ওপর দিয়ে আলগা কাপড় ঝুলিয়ে দেওয়া যায় যাতে তা সরাসরি মুখের চামড়ায় চেপে না বসে।`,
+যাত্রীর যাচাই (womenVisa): Non-refundable payment-এর আগে responsible official channel ও carrier-এর কাছে visa category, passport/residence বা additional-document basis, age এবং companion/minor arrangement নিশ্চিত করুন। ধর্মীয় পরামর্শ আলাদা নিন; mahram field না থাকা বা seller-এর আশ্বাস approval নয়। Blog-এর universal employer-NOC rule নয়, আসল document checklist অনুসরণ করুন। Public chat-এ passport scan, OTP বা ব্যবহারযোগ্য booking code দেবেন না।
+
+নিজের route-এ প্রযোজ্য check-এর জন্য issued visa এবং আসল flight, accommodation ও transport confirmation ব্যক্তিগতভাবে রাখুন। Employer, authority বা carrier NOC বা child-travel document চাইলে সেই requirement অনুযায়ী ব্যবস্থা করুন; এখানে সবার জন্য NOC requirement—বা exemption—প্রতিষ্ঠিত নয়। বড় visa/season, biometrics ও current travel-health check main DIY ও Nusuk guide-এর কাজ; এই women-specific review সেগুলো certify করে না।
+
+২. আসলে কোন নামাজের প্রবেশপথ ও হোটেলের পথ ব্যবহার করবেন?
+Nusuk মসজিদে নববীতে নারী-পুরুষের আলাদা নামাজের জায়গা এবং সাধারণ mosque entry-কে Rawdah entry থেকে পৃথক করেছে; সাধারণ প্রবেশে Rawdah appointment লাগে না। নারীদের prayer entrance আপনা থেকেই Rawdah booking-এর reporting point নয়। নিজের প্রয়োজনীয় service অনুযায়ী current sign ও mosque staff-এর নির্দেশনা মানুন। এটি mosque entry নিয়ে ব্যক্তিগত ধর্মীয় প্রশ্নের ওপর প্রাধান্য পায় না। [5]
+
+Markazia North বা অন্য এলাকার নাম search label হিসেবে নিন; flat, step-free বা ছোট পথের guarantee হিসেবে নয়। আসল hotel-এর কাছে entrance, নারীদের prayer area বা assigned reporting point-এর পথ, crossing, step, gradient, সচল lift, temporary closure ও ফেরার পথ জিজ্ঞেস করুন। Shuttle থাকলে stop, operating arrangement এবং নিজের party ও mobility equipment নেওয়া যাবে কি না নিশ্চিত করুন। এই review-তে outdoor route, gate number, room বা shuttle সরেজমিনে পরীক্ষা হয়নি।
+
+যাত্রীর যাচাই (womenAccess): Non-refundable room বাছার আগে property ও সংশ্লিষ্ট on-site staff-এর কাছে নিজের date ও mobility need অনুযায়ী intended entrance ও পুরো route নিশ্চিত করুন। Internal door, courtyard gate ও appointment assembly point আলাদা করুন। Room access, lift এবং কার্যকর return/meeting plan জিজ্ঞেস করুন; “হারামের কাছে” বা পুরো এলাকার accessibility promise-এর ওপর নির্ভর করবেন না। Transfer booking mosque access প্রতিষ্ঠা করে না।
+
+Controlled entry route-এর বাইরে meeting point, companion-এর সঙ্গে যোগাযোগের উপায় এবং আলাদা হয়ে গেলে বা entrance বদলালে বিকল্প ঠিক করুন। Hotel address ও support contact ব্যক্তিগতভাবে খুলতে পারার ব্যবস্থা রাখুন। বিস্তারিত room, transfer ও আসল baggage comparison hotel/Haramain guide-এর কাজ; এই page older-traveller guide-এর medical বা equipment claim নতুন করে certify করে না।
+
+৩. নারীরা RAWDAH APPOINTMENT-এর প্রস্তুতি কীভাবে নেবেন?
+মন্ত্রণালয় visitor-সহ নারী-পুরুষের জন্য free Rawdah appointment service, available date/time বাছার ব্যবস্থা বলেছে। Nusuk-এর detailed page নারী-পুরুষের ভিন্ন visit time নিশ্চিত করে। Blog-এর recurring morning/evening window ধরে trip বানাবেন না বা hotel booking-এ slot মিলে যায় ভাববেন না। Published procedure tested account session নয়। [4][5]
+
+খোলা Nusuk page annual regular booking এবং কাছাকাছি অবস্থানের জন্য availability-সাপেক্ষ আলাদা Instant Track বলে; পুরোনো Ministry FAQ-এ এখনো ৩০ দিন লেখা। Monthly revisit বা guaranteed same-day slot-এর promise করবেন না। Nusuk children-এর Rawdah entry নিষিদ্ধও বলেছে; সাধারণ mosque visit ও advertised childcare আলাদা। FAQ-এর পুরোনো age wording child-entry promise নয়। Childcare place, age acceptance বা family/group appointment পরীক্ষা হয়নি। [1][5]
+
+যাত্রীর যাচাই (womenRawdah): বের হওয়ার আগে নিজের booking-এ actual women's service, eligibility, appointment, confirmation instruction ও reporting point দেখুন। Companion বা child থাকলে প্রত্যেকের acceptance এবং care-এর দায়িত্ব কার নিশ্চিত করুন; সব family member একসঙ্গে ঢুকবেন বা advertised childcare booked ধরে নেবেন না। Guaranteed slot কিনবেন না বা practice reservation করবেন না। Password, OTP ও ব্যবহারযোগ্য entry QR code গোপন রাখুন; booking ও public guidance বিরোধ হলে official support নিন।
+
+ধাপ ১: নিজের আসল status-এর account route ব্যবহার করুন।
+Foreign visitor বৈধ issued visa দিয়ে current visitor registration instruction অনুসরণ করবেন। Ministry service page-এর Nafath wording দিয়ে visitor-কে Saudi resident account পেতে হবে প্রমাণ হয় না। Reviewed Nusuk guide-এ registration ও application-specific biometrics আলাদা আছে। [1][4]
+
+ধাপ ২: যে available women's appointment-এ সত্যিই যেতে পারবেন, সেটি বাছুন।
+Applicable Rawdah service ও offered date/time বাছুন; included person ও travel arrangement মিলিয়ে নিন। নারী-পুরুষের visit time ভিন্ন; নিজের appointment দেখে companion-এর appointment ধরে নেবেন না। Availability guaranteed নয়। [4][5]
+
+ধাপ ৩: Actual booking অনুযায়ী প্রয়োজনীয় confirmation শেষ করুন।
+Nusuk visit-এর ৪৮ ঘণ্টা আগে থেকে ২ ঘণ্টা আগ পর্যন্ত attendance confirmation প্রকাশ করেছে; confirmation-এর পরে one-use entry QR আসে। Group guidance-এ organizer-কে confirmation-এর দায়িত্ব দিয়েছে। Unconfirmed reservation বা শুধু saved screenshot নয়, নিজের booking-এর current instruction অনুসরণ করুন। [5]
+
+ধাপ ৪: Reporting point আবার মিলিয়ে current instruction অনুযায়ী পৌঁছান।
+Public Nusuk page entry code নিয়ে appointment-এর ৩০ মিনিট আগে পৌঁছাতে বলে। নিজের notice পড়ে journey ও assistance-এর জন্য অতিরিক্ত সময় রাখুন এবং staff direction মানুন। এই arrival advice মাপা hotel walking time বা পুরোনো gate number ব্যবহারের permission নয়। [5]
+
+৪. নারীদের ইহরামের পোশাক নিয়ে কী যাচাই করবেন?
+নারীদের Ihram clothing নিয়ে নিজের published উত্তরে Shaykh Ibn Baz বলেছেন, নারীদের বিশেষ Ihram uniform নেই; সাধারণ অনাকর্ষণীয় পোশাক ব্যবহার করা যায়। নির্দিষ্ট colour বা পুরুষের two-cloth outfit-কে নারীর universal requirement ভেবে কিনবেন না। Travel ও worship-এ নিজে সামলাতে পারবেন এমন modest clothing রাখুন; নিজের coverage-এর প্রশ্ন যোগ্য আলেমের কাছে মিটিয়ে নিন। [6]
+
+Sahih al-Bukhari 1838-এ Ihram অবস্থায় নারী niqab বা gloves পরবেন না—এ নির্দেশ আছে। এটি ধর্মীয় text; mosque-এর administrative dress notice বা medical-mask ruling নয়। কাপড় ত্বকে লাগছে কি না—এমন loophole বানাবেন না, বা visor বা sheer scarf-কে approved solution ভাববেন না। [7]
+
+যাত্রীর যাচাই (womenIhram): Ihram-এ প্রবেশের আগে নিজের অনুসৃত মাজহাব অনুযায়ী intended clothing, face covering, footwear ও medical need নিয়ে যোগ্য আলেমকে জিজ্ঞেস করুন। এই article face-covering workaround দেয় না, necessity diagnose করে না বা penalty ঠিক করে না। Practical বা clinical requirement আলাদা মেটান; visa বা Rawdah appointment দিয়ে এসব প্রশ্ন মেটে না।
+
+৫. মাসিক আপনার সফর বা ইবাদতের পরিকল্পনায় প্রভাব ফেললে কী করবেন?
+Sahih al-Bukhari 305-এ Aisha-র Hajj-এর বর্ণনায় পবিত্র হওয়া পর্যন্ত Tawaf না করার নির্দেশ আছে। এটি ওই নির্দিষ্ট ধর্মীয় বিষয়ের source; Umrah journey-এর প্রতিটি stage, irregular bleeding বা mosque/Rawdah entry নিয়ে ব্যক্তিগত সিদ্ধান্ত নয়। Booked appointment বা কাছাকাছি flight নিজে থেকেই ritual permission নির্ধারণ করে না। [8]
+
+যাত্রীর যাচাই (womenHealth): Bleeding শুরু হলে বা date worship-এর সঙ্গে না মিললে কোন rite শেষ করেছেন ও travel constraint কী—যোগ্য আলেমকে ব্যক্তিগতভাবে জানান; health বা medication প্রশ্নে clinician-এর পরামর্শ নিন। Ihram পিছিয়ে দিতে বা আপনা থেকে ছাড়তে পারবেন ধরে না নিয়ে travel বা Miqat-এ পৌঁছানোর আগে guidance নিন। Blog দেখে period-delay medication শুরু বা পরিবর্তন করবেন না। এখানে personal exception, dosage বা current 1448 travel-health clearance প্রতিষ্ঠিত নয়।
+
+বাস্তব contingency রাখুন: কার সঙ্গে যোগাযোগ করবেন, ticket/hotel change condition কী এবং plan বদলালে কী support পাবেন জানুন। Public group বা booking intermediary-কে menstrual detail জানানোর দরকার নেই। Itinerary-তে change মানানো কঠিন হলে ritual shortcut বানানো বা seller-এর promise-এর বদলে দ্রুত case-specific advice নিন।
+
+৬. পদ্ধতি আন্দাজ না করে ব্যক্তিগতভাবে তাকসীরের ব্যবস্থা কীভাবে করবেন?
+Nusuk-এর Umrah Journey page Tawaf ও Sa'i-এর পরে hair cutting রেখেছে, নারীর hair end থেকে ১–২ সেমি কাটার example দেয় এবং residence-এ ফেরা পর্যন্ত cutting পিছানো যেতে পারে, তবে Ihram restriction চলবে বলেছে। Sunan Abi Dawud 1985-এ নারীদের shaving নয় clipping-এর কথা আছে। এগুলো attributed source statement; প্রত্যেক মাজহাবের minimum amount বা layered/short hair-এর treatment এই site ঠিক করছে না। [9][10]
+
+যাত্রীর যাচাই (womenTaqsir): Trimming-এর আগে নিজের পরিস্থিতিতে required stage, amount ও extent যোগ্য আলেমের কাছে নিশ্চিত করুন। Accommodation-এর মতো উপযুক্ত private place ও প্রয়োজনে trusted help-এর ব্যবস্থা করুন। Prayer alcove বা mosque restroom-কে approved haircutting facility ভাববেন না, প্রকাশ্যে মাথা অনাবৃত করবেন না বা hotel-এ পৌঁছানোকেই automatic release from Ihram ধরবেন না। Completion পর্যন্ত applicable religious guidance অনুসরণ করুন।
+
+Journey/intention-এর আলাদা কাজের জন্য wider Ihram guide তার নিজস্ব review সাপেক্ষে দেখুন। Ritual advice ও scissors-এর airline security rule আলাদা রাখুন। Optional transfer link শুধু transport তুলনায় সাহায্য করে: operator-এর কাছে pickup/dropoff, আসল passenger ও bag capacity, assistance, privacy need, price ও cancellation নিশ্চিত করুন; এখানে female-driver, safety বা wheelchair-access guarantee দেওয়া হচ্ছে না।
+
+৭. সচরাচর জিজ্ঞাসা
+বাংলাদেশি নারী কি যেকোনো বয়সে যেকোনো ভিসায় মাহরাম ছাড়া ওমরাহ করতে আসতে পারেন?
+মন্ত্রণালয় মাহরাম ছাড়া ওমরাহ করতে আসা allowed বলেছে; প্রত্যেক visa/age/nationality entitlement প্রতিষ্ঠা করেনি। Tourist eVisa terms adulthood, minor representation ও permitted nationality আলাদা করেছে। নিজের route যাচাই করে ব্যক্তিগত ধর্মীয় পরামর্শ আলাদা নিন। [1][2][3]
+মদিনার কোন hotel area বা gate নারীদের জন্য guaranteed best?
+এখানে কোনোটিই verified নয়। আসল property থেকে intended prayer/reporting route ও current on-site direction নিশ্চিত করুন। Area name দিয়ে step-free access, open gate বা নির্দিষ্ট Rawdah assembly point প্রতিষ্ঠিত হয় না। [5]
+নারীরা Rawdah visit কীভাবে book ও confirm করবেন?
+Actual women's service, available appointment ও current confirmation/reporting instruction ব্যবহার করুন। Nusuk নারী-পুরুষের ভিন্ন time, annual regular booking, কাছের Instant Track ও entry code-এর আগে attendance confirmation বলেছে। Live slot বা entry guaranteed নয়। [4][5]
+আমার সন্তানরা কি আপনা থেকেই আমার সঙ্গে Rawdah-তে ঢুকতে পারবে?
+এমন entitlement প্রতিষ্ঠিত নয়। Nusuk page children-এর Rawdah entry নিষিদ্ধ বলেছে; সাধারণ mosque visit ও advertised childcare আলাদা। পুরোনো age statement বা family booking assumption নয়, current booking condition ও আসল care arrangement নিশ্চিত করুন। [1][5]
+Ihram-এ সাধারণ পোশাক, niqab ও gloves কি একইভাবে গণ্য?
+না। Cited Ibn Baz answer-এ নারীদের special Ihram uniform নেই; Bukhari 1838-এ niqab ও gloves আলাদা নির্দেশে আছে। Blog-এর skin-contact workaround নয়, নিজের coverage ও medical need যোগ্য আলেমকে জিজ্ঞেস করুন। [6][7]
+মাসিকের সঙ্গে Tawaf বা Rawdah appointment না মিললে কী করব?
+Bukhari 305-এ পবিত্র হওয়া পর্যন্ত Tawaf অপেক্ষার কথা আছে। নিজের exact ritual stage, mosque entry, travel deadline ও treatment আলাদা religious/clinical advice চায়। Permit বা return flight ব্যক্তিগত ruling নয়; নিজে থেকে period-delay medication নেবেন না। [8]
+প্রত্যেক নারীর কি একই universal amount-এ mosque restroom-এ চুল কাটতে হবে?
+এই guide সে নিয়ম প্রতিষ্ঠা করে না। Nusuk ১–২ সেমি example এবং restriction চলা অবস্থায় residence পর্যন্ত postponement বলেছে; Abu Dawud নারীর clipping বর্ণনা করে। Trimming-এর আগে নিজের applicable method ও উপযুক্ত private place নিশ্চিত করুন। [9][10]`,
     references: [
       {
-        name: "Ministry of Hajj and Umrah — Official Saudi portal guidelines & visa regulations",
-        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — অফিশিয়াল পোর্টাল গাইডলাইন ও ভিসা নীতিমালা",
-        url: "https://www.haj.gov.sa",
+        name: "Ministry of Hajj and Umrah — specific no-mahram Umrah answer (other FAQ items have separate limits)",
+        nameBn: "হজ ও ওমরাহ মন্ত্রণালয় — নির্দিষ্ট no-mahram Umrah উত্তর (অন্য FAQ-এর সীমা আলাদা)",
+        url: "https://haj.gov.sa/en/FAQ",
       },
       {
-        name: "Nusuk — Official Saudi pilgrim platform for Umrah & Rawdah appointments",
-        nameBn: "নুসুক — ওমরাহ ও রওজা শরিফ পারমিটের অফিশিয়াল প্ল্যাটফর্ম",
-        url: "https://www.nusuk.sa",
+        name: "Official tourist eVisa terms — age, representation, nationality list and discretion",
+        nameBn: "Official tourist eVisa terms — age, representation, nationality list ও discretion",
+        url: "https://visa.visitsaudi.com/Home/TermsConditions",
       },
       {
-        name: "General Authority for the Care of the Two Holy Mosques — Mosque services & prayer zones",
-        nameBn: "দুই পবিত্র মসজিদ পরিচালনা কর্তৃপক্ষ — মসজিদ চত্বর ও সেবা নির্দেশনা",
-        url: "https://gacr.gov.sa",
+        name: "Jordan General Iftaa — fatwa 3785, 30 July 2023 (conditional religious advice, not visa law)",
+        nameBn: "Jordan General Iftaa — fatwa 3785, ৩০ জুলাই ২০২৩ (শর্তসাপেক্ষ ধর্মীয় advice, visa law নয়)",
+        url: "https://www.aliftaa.jo/research-fatwa-english/3785/Islamic-Ruling-Regarding-a-Womans-Travel-for-Hajj-or-Umrah-without-a-Mahram-or-her-Husband",
+      },
+      {
+        name: "Ministry — Rawdah appointment service for men and women",
+        nameBn: "মন্ত্রণালয় — নারী-পুরুষের Rawdah appointment service",
+        url: "https://haj.gov.sa/en/E-Services/Permit-to-Visit-Al-Rawdah-Al-Sharifiyah-for-Men-Women",
+      },
+      {
+        name: "Nusuk — Rawdah visiting, confirmation, children and ordinary mosque access (Arabic)",
+        nameBn: "Nusuk — Rawdah visit, confirmation, child ও সাধারণ mosque access (আরবি)",
+        url: "https://www.nusuk.sa/rawdah",
+      },
+      {
+        name: "Shaykh Ibn Baz official archive — women’s Ihram clothing, fatwa 5222 (Arabic)",
+        nameBn: "Shaykh Ibn Baz official archive — নারীর Ihram clothing, fatwa 5222 (আরবি)",
+        url: "https://binbaz.org.sa/fatwas/5222/%D8%B5%D9%81%D8%A9-%D9%84%D8%A8%D8%A7%D8%B3-%D8%A7%D9%84%D9%85%D8%B1%D8%A7%D8%A9-%D8%A7%D9%84%D9%85%D8%AD%D8%B1%D9%85%D8%A9",
+      },
+      {
+        name: "Sahih al-Bukhari 1838 — niqab and gloves in Ihram",
+        nameBn: "Sahih al-Bukhari 1838 — Ihram-এ niqab ও gloves",
+        url: "https://sunnah.com/bukhari:1838",
+      },
+      {
+        name: "Sahih al-Bukhari 305 — Aisha’s Hajj report and Tawaf until purity",
+        nameBn: "Sahih al-Bukhari 305 — Aisha-র Hajj বর্ণনা ও পবিত্রতা পর্যন্ত Tawaf",
+        url: "https://sunnah.com/bukhari:305",
+      },
+      {
+        name: "Nusuk Umrah Journey — sequence and published women’s hair-trimming example",
+        nameBn: "Nusuk Umrah Journey — sequence ও নারীর hair-trimming-এর published example",
+        url: "https://umrah.nusuk.sa/Journey",
+      },
+      {
+        name: "Sunan Abi Dawud 1985 — women’s clipping rather than shaving",
+        nameBn: "Sunan Abi Dawud 1985 — নারীর shaving নয় clipping",
+        url: "https://sunnah.com/abudawud:1985",
       },
     ],
     internalLinks: [
-      { text: "Nusuk App ও ফ্রি Rawdah Permit বুকিং গাইড", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
-      { text: "মক্কা ও মদিনার সেরা ফ্যামিলি হোটেল জোন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ ও হুইলচেয়ার গাইড", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
-      { text: "DIY ওমরাহ প্ল্যানিং ও BDT খরচ ক্যালকুলেটর", path: "/umrah" },
+      { text: "Nusuk visitor registration ও Rawdah confirmation guide", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "Hotel room/access, Haramain ও আলাদা transfer check", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "বয়স্ক traveller assistance guide — আলাদা medical/equipment review", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "নিজের quote দিয়ে Umrah planning ও budget hub", path: "/umrah" },
+      { text: "Ramadan ও I’tikaf — আলাদা season-specific review", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
+      { text: "Main DIY guide — actual visa route, application ও permit sequence", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Ihram journey/intention guidance — আলাদা specialist review", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
     ],
     affiliateCTA: {
       provider: "kiwitaxi",
-      headline: "পরিবার ও মা-বোনদের জন্য নিরাপদ প্রাইভেট এয়ারপোর্ট কার",
-      body: "জেদ্দা বা মদিনা এয়ারপোর্টে নেমে সরাসরি আপনার হোটেলের গেটে পৌঁছাতে আগেভাগেই প্রাইভেট ফ্যামিলি গাড়ি বুক করুন।",
+      headline: "নিজের party-এর জন্য airport transfer option তুলনা করুন",
+      body: "ঐচ্ছিক transport search: operator-এর কাছে exact pickup/dropoff, passenger/bag capacity, assistance, privacy need, total ও cancellation নিশ্চিত করুন। Female driver, wheelchair access বা mosque-entry permission এখানে নিশ্চিত করা হচ্ছে না; কোনো ride বা live quote পরীক্ষা হয়নি।",
     },
   },
 
   "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": {
-    title: "ঢাকা থেকে জেদ্দা ও মদিনা Open-Jaw Flight কৌশল (2026): Biman বনাম Saudia বনাম সাশ্রয়ী এয়ারলাইন্স তুলনা",
+    title: "ঢাকা–জেদ্দা/মদিনা ফ্লাইট: Open-Jaw, Baggage ও Quote তুলনা (২০২৬)",
     summary:
-      "সাধারণ রাউন্ডট্রিপ টিকিটে ঢাকা থেকে জেদ্দা (DAC–JED–DAC) গেলে সফর শেষে মদিনা থেকে আবার ৪৫০ কিলোমিটার সড়কপথে ৬ ঘণ্টা জার্নি করে জেদ্দা এয়ারপোর্টে ফিরে আসতে হয়। এই গাইডে জানুন কীভাবে স্মার্ট Multi-City (Open-Jaw) টিকিট কেটে যাওয়ার সময় ঢাকা থেকে জেদ্দা (DAC–JED) এবং ফেরার সময় সরাসরি মদিনা থেকে ঢাকা (MED–DAC) ফিরবেন—পাশাপাশি Biman Bangladesh Airlines ও Saudia ডিরেক্ট ফ্লাইট বনাম Gulf Air, SalamAir, Air Arabia ও Kuwait Airways-এর ভাড়া, ৪৬ কেজি লাগেজ এবং ফ্রি ৫ লিটার জমজমের তুলনা।",
+      "১৯ অক্টোবর ২০২৬-এর source review: roundtrip ও open-jaw একই date, passenger, baggage ও terms-এ তুলনা করুন। Biman-এর directional baggage, Saudia-র Zamzam wording ও connection risk দেখুন; এখানে live fare, guaranteed savings বা daily schedule যাচাই করা হয়নি।",
     category: "Hajj & Umrah",
     date: "২৭ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "৭ মিনিট পড়া",
-    content: `বাংলাদেশ থেকে ওমরাহ বাজেটের সবচেয়ে বড় অংশ হলো বিমানের টিকিট। সৌদি সিভিল এভিয়েশন (**GACA - gaca.gov.sa**) ও এয়ারলাইন্সগুলোর নিয়ম মেনে সঠিক রুটে টিকিট কাটলে জনপ্রতি ১৫,০০০+ টাকা এবং ৬ ঘণ্টার ক্লান্তিকর বাস ভ্রমণ দুটোই বাঁচানো যায়।
+    readTime: "১০ মিনিট পড়া",
+    content: `এই গাইড বাংলাদেশি ওমরাহযাত্রীদের জন্য, যারা Jeddah roundtrip, দুই শহরে arrival/return এবং connecting itinerary-এর মধ্যে বাছছেন। শুধু headline fare নয়—bag, transfer ও change condition-সহ যে flight সত্যিই কিনতে পারবেন, সেটি তুলনা করাই উদ্দেশ্য। এই review-তে live fare basket, ticket purchase বা airport connection পরীক্ষা করা হয়নি।
 
-১. ওমরাহর জন্য কেন সবসময় "OPEN-JAW" (MULTI-CITY) টিকিট কাটবেন?
-টিকিট খোঁজার সময় কখনোই সাধারণ "Roundtrip Dhaka to Jeddah" সার্চ না করে **Multi-City** অপশন ব্যবহার করুন:
-- **রুট ১ — যাওয়া: Dhaka (DAC) -> Jeddah (JED) এবং ফেরা: Madinah (MED) -> Dhaka (DAC):** ঢাকা থেকে ইহরাম পরে জেদ্দায় নেমে প্রথমে মক্কায় ওমরাহ সম্পন্ন করুন, এরপর বুলেট ট্রেনে মদিনায় যান এবং সফর শেষে মসজিদে নববী থেকে মাত্র ২০ মিনিট দূরের **মদিনা এয়ারপোর্ট (MED)** থেকে সরাসরি ঢাকায় ফিরুন!
-- **রুট ২ — যাওয়া: Dhaka (DAC) -> Madinah (MED) এবং ফেরা: Jeddah (JED) -> Dhaka (DAC):** বয়স্ক মা-বাবা সাথে থাকলে প্রথমে মদিনায় নামুন (ফ্লাইটে ইহরাম বাঁধার কোনো ঝামেলা নেই!), মদিনায় ৪ দিন বিশ্রাম ও ইবাদত শেষে হোটেল থেকে ইহরাম পরে মক্কায় গিয়ে ওমরাহ করুন এবং জেদ্দা হয়ে ফিরুন।
+দ্রুত উত্তর — ১৯ অক্টোবর ২০২৬-এ দেখা তথ্য: একই date ও passenger basis-এ DAC–JED / MED–DAC এবং DAC–MED / JED–DAC-এর সঙ্গে same-city roundtrip তুলনা করুন। Open-jaw-তে arrival airport-এ ফিরে যাওয়া এড়ানো যেতে পারে; তবে এটি সবসময় সস্তা বা ভালো নয়। Biman-এর published baggage direction ও fare class অনুযায়ী বদলায়; Saudia-র খোলা terms দিয়ে সবার জন্য extra Zamzam allowance প্রতিষ্ঠিত হয় না। Payment-এর আগে আসল ticket ও connecting carrier-এর condition মিলিয়ে নিন। [1][2][4]
 
-২. ডিরেক্ট ফ্লাইট তুলনা: BIMAN BANGLADESH AIRLINES বনাম SAUDIA
-মাত্র **৬ ঘণ্টা ১৫ মিনিটে** সরাসরি উড়ালের জন্য দুটি এয়ারলাইন্সই সেরা:
-- **Biman Bangladesh Airlines (biman-airlines.com):**
-  • রাউন্ডট্রিপ / মাল্টি-সিটি ভাড়া: **BDT 72,000 – BDT 88,000** (সাধারণ সময়)।
-  • লাগেজ ও জমজম সুবিধা: **২টি ২৩ কেজি লাগেজ (মোট ৪৬ কেজি)** + ৭ কেজি হ্যান্ডব্যাগ + **১টি ফ্রি ৫ লিটার জমজম বক্স**।
-  • বিশেষ সুবিধা: বাংলায় মিকাতের ঘোষণা এবং দেশীয় খাবার।
-- **Saudia - Saudi Arabian Airlines (saudia.com):**
-  • রাউন্ডট্রিপ / মাল্টি-সিটি ভাড়া: **BDT 74,000 – BDT 92,000**।
-  • লাগেজ ও জমজম সুবিধা: **২টি ২৩ কেজি লাগেজ (মোট ৪৬ কেজি)** + ৭ কেজি হ্যান্ডব্যাগ + **১টি ফ্রি ৫ লিটার জমজম বক্স**।
-  • বিশেষ সুবিধা: সৌদিয়া ল্যান্ড করে অত্যাধুনিক **Jeddah Terminal 1**-এ, যার নিচতলাতেই Haramain Bullet Train স্টেশন এবং প্লেনের ভেতরে নামাজের জায়গা (Musalla) থাকে!
+১. MAKKAH ও MADINAH পরিকল্পনায় কোন ROUTE SHAPE মানায়?
+Open-jaw মানে এক শহরে নেমে অন্য শহর থেকে ফেরা। এই উদাহরণে Jeddah/Makkah ও Madinah-এর মধ্যকার journey আলাদা surface leg; international ticket-এ সেটি included ধরে নেবেন না। Saudia-র terms-ও নিজেদের দেওয়া service ছাড়া airfare থেকে surface transport আলাদা করেছে। [2]
 
-৩. সাশ্রয়ী ১-স্টপ কানেক্টিং ফ্লাইট (জনপ্রতি ১৪,০০০ – ২২,০০০ টাকা সাশ্রয়)
-- **ফুল-সার্ভিস ট্রানজিট এয়ারলাইন্স (Gulf Air, Kuwait Airways, Qatar Airways, Emirates):** ভাড়া **BDT 62,000 – BDT 74,000** (খাবার, ৩০–৪৬ কেজি লাগেজ ও ফ্রি জমজমসহ)।
-- **বাজেট ক্যারিয়ার (SalamAir, Air Arabia, Jazeera Airways, Flynas):** ভাড়া মাত্র **BDT 52,000 – BDT 63,000** থেকে শুরু (টিকিট কাটার সময় অবশ্যই ২০ বা ৩০ কেজি চেকড লাগেজ বান্ডেল যুক্ত করে নেবেন)।`,
+- **Jeddah first — DAC থেকে JED, পরে MED থেকে DAC:** প্রথম stay Makkah ও শেষ stay Madinah হলে এটি তুলনা করুন। Airport-to-Makkah transfer, intercity journey এবং Madinah airport transfer আলাদা করে quote নিন। Return nonstop না হয়ে connecting-ও হতে পারে; প্রতিটি segment পড়ুন।
+- **Madinah first — DAC থেকে MED, পরে JED থেকে DAC:** প্রথমে Madinah-তে থাকতে চাইলে এটি তুলনা করুন। পরের Makkah journey ও শেষের Jeddah airport transfer যোগ করুন। এই routing example থেকে ধর্মীয় exemption বা medical benefit ধরে নেবেন না; নিজের পরিস্থিতির জন্য আলাদা Ihram ও older-traveller guidance দেখুন।
+- **Same-city roundtrip — DAC থেকে JED হয়ে ফেরা, অথবা DAC থেকে MED হয়ে ফেরা:** এটিও comparison-এ রাখুন। Return surface journey থাকলেও date বা total cost-এর জন্য মানাতে পারে। Roundtrip মানেই নির্দিষ্ট সময়ের bus journey বাধ্যতামূলক নয়; আসল ground option ও শেষ রাতের অবস্থান তুলনা করুন।
+
+কোনো route-ই প্রতিটি শহরে নির্দিষ্ট সংখ্যক দিন থাকার নির্দেশ নয়। Visa/season condition, intended stay, confirmed assistance need ও আসল ticket availability মিলিয়ে sequence বাছুন। Entry/permit boundary-এর মালিক main DIY guide; এই flight comparison দিয়ে Saudi Arabia বা transit country-তে প্রবেশের অনুমতি প্রতিষ্ঠিত হয় না।
+
+২. NONSTOP FLIGHT ও CONNECTION কীভাবে যাচাই করবেন?
+নিজের date দিয়ে Biman ও Saudia খোঁজা শুরু করুন; তবে প্রতিটি city pair-এ দুটিরই daily flight বা Madinah return nonstop ধরে নেবেন না। Review-তে Biman timetable page পাওয়া যায়নি; date-specific carrier itinerary-ও ধরা হয়নি। এতে flight cancelled প্রমাণ হয় না। এখানে current daily frequency, aircraft, terminal, onboard prayer space বা fixed flight duration নিশ্চিত করা হচ্ছে না।
+
+Result-টি পুরো itinerary হিসেবে পড়ুন: departure/arrival date ও local time, overnight date change, প্রতিটি airport ও terminal, শুধু marketing airline নয় operating carrier, stop, layover এবং total elapsed time। Route label বা airline logo যথেষ্ট নয়। Departure-এর আগে carrier-এর travel alert ও flight status আবার দেখুন।
+
+Connection হলে জিজ্ঞেস করুন flight-গুলো এক through ticket-এ, নাকি separately issued ticket; bag through-check হবে কি না, missed connection কে সামলাবে এবং airport/terminal বদলাতে immigration লাগবে কি না। এক payment বা booking reference দিয়েই protected connection প্রমাণ হয় না। নির্দিষ্ট উদাহরণ হিসেবে Emirates-এর Dubai page-এ তাদের connecting partner-সহ booked journey ও separately booked flight আলাদা: শেষেরটিতে baggage collection, immigration ও visa লাগতে পারে, অথবা শর্তসাপেক্ষ paid baggage-transfer service। এটি Emirates/Dubai-এর উদাহরণ, প্রতিটি Gulf hub-এর নিয়ম নয়। [4]
+
+যাত্রীর যাচাই (flightConnection): Connection-এর payment-এর আগে seller ও operating carrier-এর কাছে ticket structure, baggage handover, disruption responsibility এবং আসল terminal অনুযায়ী connection time নিশ্চিত করুন। নিজের passport ও itinerary অনুযায়ী transit বা entry permission যাচাই করুন; Saudi visa দিয়ে অন্য দেশে প্রবেশ করা যাবে ধরে নেবেন না। প্রয়োজনে assistance, immigration বা overnight stay-এর সময় রাখুন। এখানে সবার জন্য safe layover বা airport-to-hotel buffer যাচাই করা হয়নি।
+
+One-stop quote nonstop-এর চেয়ে কমও হতে পারে, বেশিও হতে পারে। Meal, seat, baggage, transit cost ও extra hotel night মিলিয়ে তুলনা করুন; family savings amount প্রতিষ্ঠিত নয়। Airline-কে low-cost বলেই baggage bundle কিনবেন না—আসল bag-এর জন্য প্রয়োজনীয় allowance কিনুন।
+
+৩. নিজের নির্দিষ্ট FARE-এ কী BAGGAGE আছে?
+**Biman:** খোলা sector table-এ Economy Bangladesh-to-Jeddah ৩০ কেজি এবং Jeddah-to-Bangladesh ৫০ কেজি। এগুলো published directional example; সব fare বা Madinah-এর প্রতিশ্রুতি নয়। একই page-এ special G-class-এর baggage sector অনুযায়ী ২০–২৩ কেজি এবং S-class-এ checked baggage নেই। Generic per-piece section ও Important Notice-এ per-piece wording ভিন্নও আছে: নিজের ticket-এর জন্য Biman-এর কাছে মিলিয়ে নিন, total weight-কে একটি অত্যন্ত ভারী bag ধরে নেবেন না। [1]
+
+Biman-এর published Economy cabin example একটি piece সর্বোচ্চ ৭ কেজি, handle, pocket ও wheel-সহ 56 x 36 x 23 cm। Ticketed cabin allowance ও current restriction-ও নিশ্চিত করুন। Retrieved paginated table-এ Madinah row দেখা যায়নি; তাই এখানে Madinah-এর checked-baggage number দেওয়া হচ্ছে না। [1]
+
+**Saudia:** খোলা Conditions of Carriage-এ baggage ticket condition-এর অধীন। পুরোনো baggage URL branded-fares page-এ redirect হয়েছে, যাচাইযোগ্য current baggage table-এ নয়। পুরোনো search snippet দেখে দুটি ২৩ কেজির piece, সবার cabin allowance এক, অথবা যাওয়া-ফেরায় সমান benefit ধরে নেবেন না। Selected fare পড়ে কোনো inconsistency থাকলে payment-এর আগে Saudia-র কাছে সমাধান নিন। [2][3]
+
+**নির্দিষ্ট বিকল্পের উদাহরণ Air Arabia:** page-এ route availability ও fee সাপেক্ষে ২০, ৩০ বা ৪০ কেজি checked option আছে। ২০ কেজি option একটি piece; ৩০/৪০ কেজি সর্বোচ্চ দুই piece-এ ভাগ করা যায়। এটি live DAC–Saudi itinerary বা অন্য airline-এ required bundle-এর প্রমাণ নয়। Bangladesh flight-এ carton box নিষিদ্ধও বলা আছে; নিচে special Zamzam packaging আলাদা করে দেখুন। [5]
+
+যাত্রীর যাচাই (flightBaggage): প্রতিটি traveller ও flight-এর checked piece, total ও per-piece weight, dimension, cabin allowance এবং addition-এর দাম লিখুন। Child/infant, codeshare ও connecting-carrier rule আলাদা যাচাই করুন; adult allowance দিয়ে পুরো family গুণ করবেন না। আসল bag ওজন ও মাপুন। Page ও ticket wording বিরোধ হলে carrier-এর কাছে সমাধান নিন; Haramain নিলে rail baggage আলাদা যাচাই করুন—airline allowance সেখানে চলে না।
+
+৪. ZAMZAM কি আপনা থেকেই FREE ও EXTRA?
+এখানে খোলা source দিয়ে সবার extra-piece entitlement প্রতিষ্ঠিত হয় না। Saudia-র current Conditions of Carriage-এ Jeddah/Madinah থেকে যাত্রীর একটি ৫ লিটার bottle বলা হয়েছে এবং ৫ লিটার bottle allowable checked baggage-এর অংশ হিসেবে গণনার কথা আছে; extra bottle excess। Allowance-এর মধ্যে “free” মানেই “প্রতিটি ticket-এর bag-এর অতিরিক্ত” নয়। এই page দিয়ে সব packaging, visa, departure-terminal বা connecting-carrier condition মিটে যায় না। [2]
+
+Biman-এর public baggage page-এর চারটি returned chunk-এ Zamzam-specific allowance পাওয়া যায়নি। এতে Biman Zamzam নেয় না বা আলাদা policy নেই প্রমাণ হয় না। অর্থ হলো এই review থেকে Biman-এর bottle-কে free extra item বলা যাচ্ছে না; নিজের flight-এর condition নিন। [1]
+
+Air Arabia Saudi Arabia থেকে একটি free ৫ লিটার bottle প্রকাশ করেছে: authorized airport sales outlet থেকে কিনতে হবে এবং air transport-এর জন্য তৈরি sealed packaging-এ হতে হবে। Published condition মিলিয়ে Bangladesh-bound আসল connection-এ carton-box restriction-এর পাশে special package কীভাবে গ্রহণ করা হবে নিশ্চিত করুন। এই benefit Saudia, Biman বা সব budget airline-এ প্রয়োগ করবেন না; USD surcharge-ও বানিয়ে বলবেন না। [5]
+
+যাত্রীর যাচাই (flightZamzam): পানি কেনার আগে departure ও connecting carrier-এর কাছে permitted volume, authorized packaging, separate handover, visa/permit condition, ticketed baggage-এর মধ্যে গণনা হবে কি না এবং fee জিজ্ঞেস করুন। শুধু প্রথম sector নয়, Dhaka পর্যন্ত acceptance নিশ্চিত করুন। বড় bottle cabin bag-এ রাখবেন না বা retail sales rule-কে airline carriage-এর অনুমতি ভাববেন না। Source বিরোধ হলে itinerary-specific উত্তর নিন; এই গাইডকে permission ধরবেন না।
+
+বিস্তারিত Zamzam, dates, gold ও Bangladesh customs প্রশ্ন আলাদা guide-এর কাজ; airline baggage allowance বা এই flight article দিয়ে customs exemption প্রতিষ্ঠিত হয় না।
+
+৫. একই BASIS-এ FLIGHT QUOTE কীভাবে তুলনা করবেন?
+এটি editorial comparison workflow; পরীক্ষিত airline checkout বা guaranteed booking procedure নয়।
+
+ধাপ ১: Comparison basis ঠিক করুন।
+Date, permitted flexibility, trip length, passenger age, cabin, actual bag ও assistance need লিখুন। Non-refundable travel-এ commit করার আগে main DIY guide-এর visa/season limit মিলিয়ে নিন।
+
+ধাপ ২: তিন route shape খুঁজুন।
+যেখানে পাওয়া যায় same-city roundtrip ও open-jaw-এর দুই direction-এর quote নিন। প্রতিটি flight segment ও আলাদা surface leg লিখুন; দুই-flight trip-এর সঙ্গে অসম্পূর্ণ one-way quote তুলনা করবেন না।
+
+ধাপ ৩: Ticket ও connection structure তুলনা করুন।
+প্রতিটি candidate-এর operating carrier, total elapsed time, local arrival date, terminal, এক through ticket না separate ticket, baggage handover এবং disruption কে সামলাবে লিখুন। আসল passport ও itinerary অনুযায়ী transit/entry requirement যাচাই করুন। [2][4]
+
+ধাপ ৪: প্রতিটি candidate-এর একটি total বানান।
+Quoted airfare ও tax, seller/payment charge, required baggage/seat/meal, transit বা overnight cost এবং সব airport/intercity transfer যোগ করুন। Currency ও quote timestamp লিখুন। একই passenger basis রাখুন; per-person headline-এর সঙ্গে family total তুলনা করবেন না। এখানে BDT fare band বা fixed exchange rate দেওয়া নেই। [2]
+
+ধাপ ৫: Payment-এর আগে selected condition পড়ুন।
+Change, cancellation, no-show, fare difference ও seller fee-এর fare-family rule রাখুন; baggage/Zamzam ও assistance প্রশ্ন মিটিয়ে নিন। Saudia-র fare-family comparison-এ change/cancellation condition ভিন্ন; terms-এ unused বা out-of-sequence coupon বাকি itinerary-তে প্রভাব ফেলতে পারে বলা আছে। Carrier-এর সঙ্গে arrangement ছাড়া route পাল্টাতে flight skip করবেন না। [1][2][3][5]
+
+ধাপ ৬: Issued journey নিশ্চিত করে আবার যাচাই করুন।
+Purchase-এর পরে actual e-ticket, name, date, airport, flight coupon, baggage ও confirmed assistance কেনার উদ্দেশ্যের সঙ্গে মিলিয়ে নিন। Confirmation ব্যক্তিগতভাবে রাখুন। Travel-এর আগে carrier notice, flight status ও departure/check-in instruction আবার দেখুন; saved quote ticket বা operation অপরিবর্তিত থাকার প্রমাণ নয়। [1][2]
+
+যে option-এর total, condition ও workload আপনারা সামলাতে পারবেন, সেটি বাছুন। Matched dated quote ছাড়া open-jaw বা connection-এ টাকা বা নির্দিষ্ট ঘণ্টা বাঁচে এই guide প্রমাণ করতে পারে না।
+
+৬. এরপর কোন GUIDE ব্যবহার করবেন?
+বড় visa/permit sequence ও নিজের quote-based budget-এর জন্য main DIY guide ও Umrah hub; আলাদা surface journey এবং আসল bag/access check-এর জন্য reviewed hotel/Haramain guide ব্যবহার করুন। Flight landing time guaranteed train connection বা hotel arrival time নয়।
+
+সেই route-এ Saudi Arabia-তে প্রবেশের ইচ্ছা থাকলেই stopover guide দেখুন; ordinary airside connection আপনা থেকে Saudi stopover-visa application নয়। আলাদা ধর্মীয় কাজের জন্য Ihram guide দেখুন, fixed crew-announcement countdown নয়। Detailed customs guide আলাদা review lane; এখানে নতুন করে certified নয়। Optional flight comparison link শুরু করার জায়গা: purchase-এর আগে seller, ticket structure ও full condition যাচাই করুন। Public chat-এ passport scan, OTP, full booking reference বা ব্যবহারযোগ্য boarding-pass barcode পাঠাবেন না।
+
+৭. সচরাচর জিজ্ঞাসা
+Open-jaw Umrah ticket কি সবসময় সস্তা?
+না। একই date, passenger/baggage basis ও full trip cost-এ open-jaw-এর দুই direction ও roundtrip তুলনা করুন। Arrival airport-এ ফেরা এড়ানো যেতে পারে; এখানে matched quote basket বা guaranteed savings প্রতিষ্ঠিত নয়।
+Biman-এর সব Saudi ticket-এ কি ৪৬ কেজি থাকে?
+সবার জন্য allowance যাচাই হয়নি। Published Jeddah Economy example Bangladesh থেকে যাওয়ায় ৩০ কেজি, ফেরায় ৫০ কেজি; fare-class exception আছে। Retrieved table-এ Madinah দেখা যায়নি। Exact ticket ব্যবহার করে per-piece condition Biman-এর কাছে মিলিয়ে নিন। [1]
+Saudia কি সবাইকে free extra Zamzam bottle দেয়?
+ধরে নেবেন না। খোলা Conditions of Carriage-এ Jeddah/Madinah থেকে একটি ৫ লিটার bottle এবং allowable checked baggage-এর মধ্যে গণনার কথা আছে। নিজের journey-এর departure terminal, visa ও প্রতিটি carrier-এ প্রযোজ্য condition জিজ্ঞেস করুন। [2]
+সব low-cost airline কি Zamzam-এর charge ও একই baggage bundle চায়?
+না। Air Arabia-র published example-এ conditional free ৫ লিটার bottle ও ভিন্ন checked-baggage option আছে। Special packaging-এর পাশে Bangladesh carton rule-ও যাচাই করতে হবে। অন্য airline ও fare product আলাদা check চায়; এখানে generic surcharge প্রযোজ্য নয়। [5]
+এক booking reference মানেই কি protected connection?
+না। Through-ticket না separate-ticket structure, baggage transfer এবং flight delay হলে দায়িত্ব নিশ্চিত করুন। Emirates-এর Dubai transfer page-এ arrangement-এর পার্থক্যের উদাহরণ আছে; প্রতিটি hub বা airline-এর universal rule নয়। [4]
+Landing থেকে train বা আরেক flight-এর মাঝে কত সময় রাখব?
+এই guide-এ universal verified buffer নেই। আসল terminal, immigration, bag collection/recheck, assistance ও deadline নিয়ে relevant carrier/operator-কে জিজ্ঞেস করে নিজের party-এর contingency রাখুন। Scheduled arrival time দিয়েই onward journey নিশ্চিত হয় না। [2][4]`,
+    references: [
+      {
+        name: "Biman — route/fare-specific baggage, cabin rules and notices",
+        nameBn: "Biman — route/fare অনুযায়ী baggage, cabin rule ও notice",
+        url: "https://www.biman-airlines.com/baggageAll",
+      },
+      {
+        name: "Saudia — Conditions of Carriage, ticket sequence, baggage and Zamzam (relevant sections)",
+        nameBn: "Saudia — Conditions of Carriage, ticket sequence, baggage ও Zamzam (প্রাসঙ্গিক অংশ)",
+        url: "https://www.saudia.com/information/terms-and-conditions/general-conditions-of-carriage",
+      },
+      {
+        name: "Saudia — branded fare comparison (not a priced itinerary)",
+        nameBn: "Saudia — branded fare comparison (priced itinerary নয়)",
+        url: "https://www.saudia.com/book/travel-information/branded-fares",
+      },
+      {
+        name: "Emirates — Dubai connections and separate-ticket transfer conditions",
+        nameBn: "Emirates — Dubai connection ও separate-ticket transfer condition",
+        url: "https://www.emirates.com/us/english/before-you-fly/dubai-international-airport/transferring-between-terminals/",
+      },
+      {
+        name: "Air Arabia — checked baggage and conditional Zamzam carriage",
+        nameBn: "Air Arabia — checked baggage ও শর্তসাপেক্ষ Zamzam carriage",
+        url: "https://www.airarabia.com/en/help/baggage-enquiries/checked-baggage_baggage-enquiries",
+      },
+    ],
     internalLinks: [
-      { text: "ঢাকা এয়ারপোর্ট বনাম ট্রানজিট ফ্লাইটে ইহরাম বাঁধার নিয়ম", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
-      { text: "জেদ্দা ও ঢাকা এয়ারপোর্টে জমজম পানি ও খেজুর আনার নিয়ম", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
-      { text: "সম্পূর্ণ DIY Umrah ১০ দিনের BDT বাজেট গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "নিজের journey-তে Ihram planning — আলাদা ধর্মীয় guidance", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "বিস্তারিত Zamzam ও Bangladesh customs guide — আলাদা review lane", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
+      { text: "Main DIY Umrah process ও entry/permit boundary", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Hotel access, Haramain baggage ও আলাদা transfer", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Saudia/flynas stopover route ও permission check", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
+      { text: "নিজের quote দিয়ে Umrah budget planner", path: "/umrah" },
+      { text: "Flight search — full itinerary ও seller term যাচাই করুন", path: "/flights" },
     ],
     affiliateCTA: {
       provider: "aviasales",
-      headline: "ঢাকা থেকে জেদ্দা ও মদিনার লাইভ ফ্লাইট ভাড়া তুলনা করুন",
-      body: "Biman, Saudia ও ট্রানজিট এয়ারলাইন্সের সর্বনিম্ন ভাড়া দেখুন অথবা আমাদের WhatsApp ডেস্কে BDT-তে টিকিট বুক করুন।",
+      headline: "নিজের date ও passenger দিয়ে flight option তুলনা করুন",
+      body: "ঐচ্ছিক search starting point; সব multi-city combination বা seller এখানে থাকবে এমন নিশ্চয়তা নেই। Carrier বা authorized seller-এর কাছে full itinerary, baggage, payment total ও connection protection যাচাই করুন; search result ticket বা savings-এর প্রমাণ নয়।",
     },
   },
 
@@ -1343,7 +1738,7 @@ Markazia North (উত্তর কেন্দ্রীয় এলাকা) ন
 - **স্বর্ণের বার (Gold Bar):** স্বর্ণের বার আনলে ঢাকা কাস্টমস কাউন্টারে ঘোষণা দিয়ে সরকারি নির্ধারিত শুল্ক পরিশোধ করতে হবে।`,
     internalLinks: [
       { text: "ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার ও লাগেজ নিয়ম হাব", path: "/pre-departure" },
-      { text: "ঢাকা থেকে জেদ্দা ও মদিনা ফ্লাইট এবং ৪৬ কেজি লাগেজ গাইড", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "ঢাকা–জেদ্দা/মদিনা flight ও ticket-specific baggage guide", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
       { text: "সম্পূর্ণ DIY Umrah ও ১০ দিনের BDT খরচ গাইড", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
     ],
     affiliateCTA: {
@@ -3224,11 +3619,11 @@ export function getFeaturedGrowthTopics(lang: Language) {
     return [
       {
         id: "trend-umrah-hajj",
-        category: "Hajj & Umrah · ৮ মিনিট পড়া",
+        category: "Hajj & Umrah · ১২ মিনিট পড়া",
         searchQuery: "“DIY Umrah cost & Nusuk guide Bangladesh”",
-        title: "বাংলাদেশ থেকে Umrah ও Hajj প্রস্তুতি গাইড (2026 অফিশিয়াল নিয়ম ও BDT খরচ)",
+        title: "বাংলাদেশ থেকে DIY ওমরাহ: ভিসার পথ, Nusuk ধাপ ও বাজেট যাচাই",
         excerpt:
-          "সরকারি Hajj নিবন্ধন (hajj.gov.bd) বনাম নিজে নিজে DIY Umrah প্ল্যানিং, ৩টি বৈধ Umrah Visa পদ্ধতি, Nusuk Rawdah Permit, Haramain Bullet Train ভাড়া ও ১০ দিনের BDT বাজেট।",
+          "ওমরাহের শর্তসাপেক্ষ ভিসার পথ, আবেদন ও পারমিটের ক্রম এবং পুরোনো বাজেটের সীমা। বর্তমান মোট পেতে নিজের কোট ব্যবহার করুন; হজ আলাদা প্রক্রিয়া।",
         slug: "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
       },
       {
@@ -3264,11 +3659,11 @@ export function getFeaturedGrowthTopics(lang: Language) {
   return [
     {
       id: "trend-umrah-hajj",
-      category: "Religious Travel · 8 min",
+      category: "Religious Travel · 12 min",
       searchQuery: "“DIY Umrah cost & Nusuk guide Bangladesh”",
-      title: "Umrah & Hajj Preparation Guide from Bangladesh (2026 Official Rules & BDT Cost)",
+      title: "DIY Umrah from Bangladesh: Visa Routes, Nusuk Steps & Budget Checks",
       excerpt:
-        "Official Hajj registration (hajj.gov.bd) vs. DIY Umrah planning, 3 verified Umrah visa pathways, Nusuk Rawdah permits, Haramain bullet train fares, and 10-day BDT budgets.",
+        "Conditional Umrah visa routes, application-to-permit steps and the limits of the historical budget. Use your own quotes for current totals; Hajj is a separate process.",
       slug: "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
     },
     {

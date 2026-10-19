@@ -1,8 +1,7 @@
 # CI — build and verify every change.
 #
-# This project has no unit tests, so the guard is the thing that actually
-# catches regressions: a clean `tsc`, a successful prerender, and an assertion
-# pass over the built output.
+# Guard regressions with focused tests, a clean `tsc`, a successful prerender,
+# and assertions over the built output.
 #
 # It exists because of a real bug. The sitemap `<lastmod>` silently became the
 # build date on 77 of 159 URLs in Cloudflare's shallow checkout — while `tsc`
@@ -44,11 +43,37 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Article suites import constants/localized data, which depend on ignored generated modules.
+      # Generate them before tests so a clean checkout behaves like an existing worktree.
+      - name: Generate scheduled article modules
+        run: npm run generate:scheduled
+
       - name: Verify scheduled-publish rules
         run: npm run test:scheduling
 
       - name: Verify sitemap validation guards
         run: npm run test:sitemaps
+
+      - name: Verify quote-based Umrah budget
+        run: npm run test:umrah-budget
+
+      - name: Verify Nusuk article safety and locale/schema parity
+        run: npm run test:nusuk-guide
+
+      - name: Verify DIY Umrah guide sequence and source boundaries
+        run: npm run test:diy-umrah-guide
+
+      - name: Verify stopover carrier boundaries and locale/schema parity
+        run: npm run test:stopover-guide
+
+      - name: Verify hotel access and Haramain guide boundaries
+        run: npm run test:hotel-rail-guide
+
+      - name: Verify flight comparison and carrier-specific conditions
+        run: npm run test:flight-strategy
+
+      - name: Verify women-specific Umrah source boundaries and locale parity
+        run: npm run test:women-umrah-guide
 
       - name: Type-check
         run: npm run lint

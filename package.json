@@ -16,7 +16,14 @@
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
     "lint": "npm run generate:scheduled && tsc --noEmit",
     "test:sitemaps": "tsx scripts/test-sitemaps.ts",
-    "verify:sitemaps:live": "tsx scripts/verify-live-sitemaps.ts"
+    "verify:sitemaps:live": "tsx scripts/verify-live-sitemaps.ts",
+    "test:umrah-budget": "tsx scripts/test-umrah-budget.ts",
+    "test:nusuk-guide": "tsx scripts/test-nusuk-guide.ts",
+    "test:diy-umrah-guide": "tsx scripts/test-diy-umrah-guide.ts",
+    "test:stopover-guide": "tsx scripts/test-stopover-guide.ts",
+    "test:hotel-rail-guide": "tsx scripts/test-hotel-rail-guide.ts",
+    "test:flight-strategy": "tsx scripts/test-flight-strategy.ts",
+    "test:women-umrah-guide": "tsx scripts/test-women-umrah-guide.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",

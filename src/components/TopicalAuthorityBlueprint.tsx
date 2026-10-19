@@ -77,7 +77,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "বাংলাদেশ থেকে নিজে নিজে DIY Umrah ও Hajj প্রস্তুতি (2026): অফিশিয়াল ভিসা, Nusuk অ্যাপ ও ১০ দিনের BDT খরচ",
     primaryKeyword: "umrah cost from bangladesh 2026",
     secondaryKeywords: ["diy umrah from dhaka", "umrah package price in bangladesh", "nusuk app umrah guide bd"],
-    monthlyIntentSignal: "Very High · Transactional Cost & Process Intent",
+    monthlyIntentSignal: "Not measured · Transactional Cost & Process Intent",
     customerPsychologyEn:
       "Desire for Price Transparency & Autonomy: Middle-class Bangladeshi families want to perform Umrah without paying BDT 45,000+ per person in opaque agency markups or being forced into distant group hotels.",
     customerPsychologyBn:
@@ -98,7 +98,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "বাংলাদেশ থেকে সরকারি ও বেসরকারি Hajj রেজিস্ট্রেশন (2026–2027): hajj.gov.bd নিয়ম, PID ট্র্যাকিং ও BDT প্যাকেজ খরচ",
     primaryKeyword: "hajj package price in bangladesh",
     secondaryKeywords: ["hajj registration check by nid", "hajj.gov.bd pre registration fee", "shifting vs non shifting hajj"],
-    monthlyIntentSignal: "Very High · High-Ticket Trust & Verification Intent",
+    monthlyIntentSignal: "Not measured · High-Ticket Trust & Verification Intent",
     customerPsychologyEn:
       "Fear of Fraud & Losing Life Savings: Families investing BDT 6–9 Lakhs per person fear unlicensed sub-agents (dalals). Explaining PID verification on hajj.gov.bd and Mina Maktab A/B vs D tents builds instant authority.",
     customerPsychologyBn:
@@ -119,7 +119,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "বয়স্ক মা-বাবাকে নিয়ে বাংলাদেশ থেকে Umrah গাইড: ফ্রি হুইলচেয়ার, ইলেকট্রিক স্কুটার ও সমতল রাস্তার হোটেল",
     primaryKeyword: "umrah with elderly parents bangladesh",
     secondaryKeywords: ["makkah electric scooter tawaf price", "wheelchair assistance biman saudia dhaka", "flat street hotels near haram"],
-    monthlyIntentSignal: "High · Emotional Caregiver & Family Intent",
+    monthlyIntentSignal: "Not measured · Emotional Caregiver & Family Intent",
     customerPsychologyEn:
       "Filial Devotion ('Amma-Abba'r Sheba'): Adult children taking 65+ parents with knee pain or diabetes want zero physical hardship—seeking flat streets, direct elevators, and SAR 115 roof electric scooters.",
     customerPsychologyBn:
@@ -140,7 +140,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "Makkah ও Madinah হোটেল জোন, Haramain Bullet Train এবং Ziyarah গাইড (বাংলাদেশি হাজীদের জন্য)",
     primaryKeyword: "best hotel area in makkah and madinah for family",
     secondaryKeywords: ["haramain high speed train ticket booking bangladesh", "mahbas al jin shuttle hotel", "madinah ladies gate 25 hotel"],
-    monthlyIntentSignal: "Very High · Accommodation & Ground Transit Intent",
+    monthlyIntentSignal: "Not measured · Accommodation & Ground Transit Intent",
     customerPsychologyEn:
       "Avoiding Steep Hill Traps: Many pilgrims book '600m from Haram' hotels online only to discover a brutal uphill climb in Upper Ajyad. Mapping flat streets vs. 24/7 shuttle zones solves their #1 hotel fear.",
     customerPsychologyBn:
@@ -161,7 +161,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "বাংলাদেশিদের জন্য ৯৬ ঘণ্টার Saudi Stopover Visa (2026): Saudia ও Flynas ট্রানজিট ফ্লাইটে ৪ দিনের ওমরাহ",
     primaryKeyword: "saudi 96 hours transit visa for bangladeshi",
     secondaryKeywords: ["saudia free stopover hotel makkah", "us uk schengen visa saudi evisa bangladesh", "perform umrah on transit visa"],
-    monthlyIntentSignal: "High · Smart Value & NRB Transit Intent",
+    monthlyIntentSignal: "Not measured · Smart Value & NRB Transit Intent",
     customerPsychologyEn:
       "Smart Value Maximization ('Ek Tir-e Dui Pakhi'): Bangladeshi NRBs, students and tourists flying to the UK/USA/Europe/Dubai want a 4-day Umrah inside their connection. Do not market a price or a free hotel night here: charges are set at airline checkout and no hotel benefit is published (ledger ST-01/ST-02, checked 15 October 2026).",
     customerPsychologyBn:
@@ -182,7 +182,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "Nusuk App ও Saudi Visa Bio ব্যবহারের সম্পূর্ণ গাইড: রিয়াজুল জান্নাত (Rawdah) পারমিট ও ফিঙ্গারপ্রিন্ট সমাধান",
     primaryKeyword: "how to book rawdah permit in nusuk app from bangladesh",
     secondaryKeywords: ["saudi visa bio app fingerprint problem bd", "nusuk app registration with visa number", "riyazul jannah booking time"],
-    monthlyIntentSignal: "Very High · Technical App Friction Intent",
+    monthlyIntentSignal: "Not measured · Technical App Friction Intent",
     customerPsychologyEn:
       "Fear of Missing Rawdah Shareef: Pilgrims worry they will reach Madinah and be denied entry to Riyazul Jannah because they didn't know how to book the free Nusuk QR slot on the Friday release window.",
     customerPsychologyBn:
@@ -203,7 +203,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "নারীদের জন্য Umrah গাইড (2026): মাহরাম ছাড়া ভিসার নিয়ম, মদিনার Ladies' Gate 25–29 ও পর্দাশীল ইহরাম",
     primaryKeyword: "umrah rules for women without mahram bangladesh",
     secondaryKeywords: ["ladies rawdah gate number madinah", "women ihram dress rules bangla", "female umrah group from dhaka"],
-    monthlyIntentSignal: "High · Female Pilgrim Safety & Fiqh Clarity Intent",
+    monthlyIntentSignal: "Not measured · Female Pilgrim Safety & Fiqh Clarity Intent",
     customerPsychologyEn:
       "Safety, Modesty & Crowd Confusion: Bangladeshi mothers, sisters, and female doctors/professionals want clarity on Saudi Arabia's updated Mahram visa rules, dedicated women's prayer gates, and hair-trimming (Taqsir) privacy.",
     customerPsychologyBn:
@@ -224,7 +224,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "ঢাকা থেকে জেদ্দা ও মদিনা Open-Jaw Flight কৌশল: Biman বনাম Saudia বনাম সাশ্রয়ী কানেক্টিং এয়ারলাইন্স তুলনা",
     primaryKeyword: "dhaka to jeddah flight ticket price bdt",
     secondaryKeywords: ["dhaka to jeddah return from madinah multi city", "biman vs saudia umrah baggage allowance", "cheapest umrah flight from dhaka"],
-    monthlyIntentSignal: "Very High · Direct Transactional Airfare Intent",
+    monthlyIntentSignal: "Not measured · Direct Transactional Airfare Intent",
     customerPsychologyEn:
       "Eliminating Wasted Backtracking: Flying DAC→JED and returning MED→DAC saves a grueling 6-hour bus ride back to Jeddah and SAR 400 in transport costs.",
     customerPsychologyBn:
@@ -245,7 +245,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "রমজানে Umrah ও শেষ ১০ দিনের ইতিকাফ গাইড: বাংলাদেশ থেকে কম খরচে বুকিংয়ের সেরা সময় ও প্রস্তুতি",
     primaryKeyword: "ramadan umrah package from bangladesh",
     secondaryKeywords: ["last 10 days ramadan makkah hotel cost", "itikaf registration masjid al haram nusuk", "shaban to ramadan umrah trick"],
-    monthlyIntentSignal: "Very High Seasonal Spike · Spiritual Peak Intent",
+    monthlyIntentSignal: "Not measured · Spiritual Peak Intent",
     customerPsychologyEn:
       "Hadith Reward ('Umrah in Ramadan equals Hajj in reward') vs. Price Shock: Teaching the 'Late Sha'ban Entry + Early Ramadan Exit' trick saves Bangladeshi families 50% on Makkah hotel rates.",
     customerPsychologyBn:
@@ -266,7 +266,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "ঢাকা এয়ারপোর্ট বনাম ট্রানজিট ফ্লাইটে ইহরাম বাঁধার নিয়ম: মিকাত (কারনুল মানাজিল ও ইয়ালামলাম) গাইড",
     primaryKeyword: "where to wear ihram from dhaka to jeddah",
     secondaryKeywords: ["miqat for bangladesh flight", "ihram rules in transit flight dubai sharjah", "biman saudia miqat announcement"],
-    monthlyIntentSignal: "High · Ritual Accuracy & Dam Penalty Anxiety",
+    monthlyIntentSignal: "Not measured · Ritual Accuracy & Dam Penalty Anxiety",
     customerPsychologyEn:
       "Fear of Crossing Miqat Without Ihram (Incurring 'Dam' Penalty): First-time pilgrims flying direct vs. transiting in Dubai/Sharjah/Muscat need exact clarity on where to change into Ihram clothes and make Niyyah.",
     customerPsychologyBn:
@@ -287,7 +287,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "জেদ্দা ও মদিনা এয়ারপোর্ট থেকে Zamzam পানি, আজওয়া খেজুর ও স্বর্ণ আনার অফিশিয়াল কাস্টমস নিয়ম (2026)",
     primaryKeyword: "zamzam water rules jeddah airport bangladesh",
     secondaryKeywords: ["how many liters zamzam allowed in biman", "ajwa dates price in madinah market", "gold allowance dhaka airport customs"],
-    monthlyIntentSignal: "High · Post-Umrah Return Logistics Intent",
+    monthlyIntentSignal: "Not measured · Post-Umrah Return Logistics Intent",
     customerPsychologyEn:
       "Bringing Barakah Home Safely: Every Bangladeshi pilgrim must bring Zamzam water and Madinah Ajwa dates for relatives without getting bottles confiscated at Jeddah check-in.",
     customerPsychologyBn:
@@ -308,7 +308,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "মক্কা ও মদিনায় দেশি খাবারের গাইড: ভাত, মাছ, ডাল ও আলু ভর্তা কোথায় পাবেন এবং প্রতি বেলার খরচ কত?",
     primaryKeyword: "bangladeshi hotel and food in makkah madinah",
     secondaryKeywords: ["bengali restaurant in makkah ibrahim khalil", "food cost in umrah per day", "al baik location near haram makkah"],
-    monthlyIntentSignal: "High · Daily Comfort & Elderly Diet Intent",
+    monthlyIntentSignal: "Not measured · Daily Comfort & Elderly Diet Intent",
     customerPsychologyEn:
       "Craving Familiar Desi Comfort Food for Seniors: After 3 days of eating fast food or spicy broast, elderly Bangladeshi parents need warm white rice, daal, fish curry, and bharta to keep their digestion healthy.",
     customerPsychologyBn:
@@ -333,7 +333,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "মক্কা, মদিনা, বদর প্রান্তর ও তায়েফ জিয়ারত গাইড: ঐতিহাসিক স্থানগুলোর তালিকা ও প্রাইভেট গাড়ি ভাড়া",
     primaryKeyword: "makkah madinah ziyarat places list bangla",
     secondaryKeywords: ["taif day trip from makkah cost", "masjid quba 2 rakat umrah reward", "badr battlefield distance from madinah"],
-    monthlyIntentSignal: "High · Spiritual Enrichment & Local Transport Intent",
+    monthlyIntentSignal: "Not measured · Spiritual Enrichment & Local Transport Intent",
     customerPsychologyEn:
       "Connecting History with Faith: Pilgrims want their children to understand the Seerah at Mount Uhud, Cave Hira, Quba Mosque, and Taif without getting overcharged by street taxi touts.",
     customerPsychologyBn:
@@ -354,7 +354,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "একই ট্রিপে Umrah + Dubai ভ্রমণ গাইড: ঢাকা থেকে ১০ দিনে মক্কা, মদিনা ও দুবাই ঘোরার মাল্টি-সিটি বাজেট",
     primaryKeyword: "umrah with dubai tour package from bangladesh",
     secondaryKeywords: ["dhaka to jeddah to dubai to dhaka flight", "uae transit visa with umrah", "umrah and dubai family trip cost bdt"],
-    monthlyIntentSignal: "High · High-AOV Family Holiday + Spiritual Combo",
+    monthlyIntentSignal: "Not measured · High-AOV Family Holiday + Spiritual Combo",
     customerPsychologyEn:
       "Fulfilling Spiritual Duty + Kids' Vacation in One Airfare: Families flying via the Gulf love performing Umrah first and spending 3 days in Dubai (Burj Khalifa & Desert Safari) on the way back to Dhaka.",
     customerPsychologyBn:
@@ -375,7 +375,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "দুবাই থেকে আবুধাবি ডে-ট্রিপ গাইড: শেখ জায়েদ গ্র্যান্ড মসজিদ, কাসর আল ওয়াতান ও লুভর মিউজিয়াম",
     primaryKeyword: "dubai to abu dhabi day trip bangladesh",
     secondaryKeywords: ["sheikh zayed grand mosque dress code", "e100 bus dubai to abu dhabi fare", "qasr al watan ticket price bdt"],
-    monthlyIntentSignal: "Medium-High · Cultural & Architectural Sightseeing",
+    monthlyIntentSignal: "Not measured · Cultural & Architectural Sightseeing",
     customerPsychologyEn:
       "Awe for Islamic Architectural Grandeur: Bangladeshi travelers visiting the UAE consider Sheikh Zayed Grand Mosque an absolute must-visit alongside Dubai's modern skyline.",
     customerPsychologyBn:
@@ -396,7 +396,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "মালয়েশিয়া ইসলামিক হেরিটেজ ও হালাল ফ্যামিলি ট্যুর: পুত্রজায়া পিঙ্ক মসজিদ, ইসলামিক আর্টস মিউজিয়াম ও KLCC",
     primaryKeyword: "malaysia halal family tour from bangladesh",
     secondaryKeywords: ["putrajaya mosque tour from kl", "islamic arts museum malaysia ticket", "best family area in kuala lumpur"],
-    monthlyIntentSignal: "High · Stress-Free Muslim Family Vacation Intent",
+    monthlyIntentSignal: "Not measured · Stress-Free Muslim Family Vacation Intent",
     customerPsychologyEn:
       "Zero Cultural Friction: Bangladeshi families feel immediately at home in Malaysia because JAKIM Halal food and clean prayer rooms (Surau) exist inside every shopping mall and theme park.",
     customerPsychologyBn:
@@ -417,7 +417,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     titleBn: "ইউরোপ, লন্ডন ও আমেরিকা ভ্রমণে বাংলাদেশিদের গাইড: আইফেল টাওয়ার, লন্ডন আই ও মিউজিয়াম স্কিপ-দ্য-লাইন পাস",
     primaryKeyword: "paris london italy tour guide from bangladesh",
     secondaryKeywords: ["louvre eiffel tower ticket booking bd", "london eye thames cruise ticket", "us uk schengen stopover umrah"],
-    monthlyIntentSignal: "Medium-High · High-Net-Worth & NRB Diaspora Intent",
+    monthlyIntentSignal: "Not measured · High-Net-Worth & NRB Diaspora Intent",
     customerPsychologyEn:
       "Bridging Western Travel with Umrah Eligibility: Travelers holding US/UK/Schengen visas represent the exact demographic eligible for instant 1-year Saudi e-Visas AND high-ticket Tiqets attraction bundles.",
     customerPsychologyBn:
@@ -945,6 +945,7 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
         {filteredNodes.map((node, index) => (
           <article
             key={node.id}
+            data-topic-id={node.id}
             onClick={() => onNavigate(node.targetPath)}
             className="group bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl p-5 sm:p-6 flex flex-col justify-between gap-4 transition-all cursor-pointer shadow-2xs hover:shadow-md"
           >
@@ -957,7 +958,9 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
                   </span>
                   <span className="font-medium text-slate-700">{node.funnelStage}</span>
                   <span aria-hidden="true">·</span>
-                  <span>{node.monthlyIntentSignal}</span>
+                  <span>{node.clusterId === "hajj-umrah" || node.clusterId === "islamic-stopover"
+                    ? (isBn ? "বাংলাদেশের সার্চ চাহিদা: পরিমাপ করা হয়নি" : "Bangladesh search demand: not measured")
+                    : node.monthlyIntentSignal}</span>
                 </div>
                 {node.isLiveBlog && (
                   <span className="text-[11px] font-semibold text-emerald-700">
@@ -974,7 +977,7 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
               {/* Real Target Search Keywords */}
               <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 space-y-1">
                 <div className="text-[11px] font-mono text-slate-500">
-                  {isBn ? "টার্গেট সার্চ কিউওয়ার্ড (Real Search Queries):" : "Target Search Queries (Primary + LSI):"}
+                  {isBn ? "প্রস্তাবিত প্রশ্ন ও কিওয়ার্ড (পরিমাপ করা হয়নি):" : "Candidate Queries & Keywords (Not Measured):"}
                 </div>
                 <div className="text-xs font-mono font-semibold text-emerald-800 break-words">
                   “{node.primaryKeyword}”{" "}
@@ -984,6 +987,15 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
                 </div>
               </div>
 
+              {/* Unreviewed planning copy is not public travel guidance. Keep the
+                  legacy research fields out of Hajj/Umrah and bridge cards. */}
+              {node.clusterId === "hajj-umrah" || node.clusterId === "islamic-stopover" ? (
+                <p className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-slate-700 leading-relaxed">
+                  {isBn
+                    ? "এটি বিষয় ও প্রশ্নের পরিকল্পনা, যাচাইকৃত ভ্রমণ-উত্তর বা সার্চ চাহিদার প্রমাণ নয়। বিস্তারিত গাইড খুলুন; বুকিংয়ের আগে সংশ্লিষ্ট বর্তমান অফিসিয়াল নিয়ম ও কোটেশন মিলিয়ে নিন।"
+                    : "This is a topic and question map, not verified travel advice or measured search demand. Open the detailed guide, then confirm current official rules and supplier quotes before booking."}
+                </p>
+              ) : <>
               {/* Customer Psychology & Pain Point */}
               <div className="space-y-1">
                 <div className="text-xs font-bold text-brand-navy">
@@ -1010,6 +1022,7 @@ export const TopicalAuthorityBlueprint: React.FC<TopicalAuthorityBlueprintProps>
                   EAV: {node.eavTriples}
                 </div>
               </div>
+              </>}
             </div>
 
             {/* Footer Action */}
