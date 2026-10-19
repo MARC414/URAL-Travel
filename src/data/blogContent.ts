@@ -1160,33 +1160,82 @@ Can I bring a gold bar?
 One bar up to 117 g (10 tola) per year, declared, with Tk 5,000 duty per 11.664 g. Anything above 117 g is confiscated, and undeclared gold is treated as a criminal matter. [4]
 Can I get the 15% Saudi VAT back on gold I buy in Makkah or Madinah?
 Only if the conditions are met: SAR 500 at one retailer, goods unused in original packaging, departure within 90 days, and validation at an airport counter before you fly. Jewellery you wear is used and does not qualify. [8][9]`,
-  "bangladeshi-halal-food-guide-makkah-madinah-budget-meals": `Every restaurant in Makkah and Madinah is 100% Halal by law under **Saudi Food and Drug Authority (SFDA - sfda.gov.sa)** and municipal hygiene inspections. However, for Bangladeshi pilgrims—especially seniors over 60 with diabetes or sensitive stomachs—finding warm, lightly spiced **Desi rice, daal, fish, and vegetable bhaji** near the Haram makes all the difference.
+  "bangladeshi-halal-food-guide-makkah-madinah-budget-meals": `Halal is the easy part of eating in Makkah and Madinah. The hard parts are finding a kitchen that cooks rice, dal and fish the way your parents will actually eat, paying a price you agreed to, and keeping an elderly traveller's stomach settled for ten days. This guide covers those three, and it deliberately prints no per-plate price and names no restaurant: the figures in the previous version of this page could not be re-checked against any openable source, so they are gone rather than replaced with better-sounding guesses.
 
-1. WHERE TO FIND AUTHENTIC BANGLADESHI & BENGALI RESTAURANTS IN MAKKAH?
-You do not need to take a taxi to find Bangladeshi food in Makkah. Walk 5 to 8 minutes from the Southern/Western courtyard of Masjid al-Haram into these three neighborhoods:
-Zone 1: Ibrahim Al Khalil Road & Misflah (400m to 800m South-West of King Fahd Gate):
-- Known affectionately by pilgrims as the **"Bangla Bazar of Makkah"**, the side lanes behind Ibrahim Al Khalil Street host dozens of Bangladeshi-run and Pakistani-run hotels and dining halls (such as **Dhaka Restaurant, Chittagong Hotel, Sonargaon, and Al-Madinah Bangla**) where staff speak fluent Bangla and Sylheti/Chittagonian!
-- **Menu & Price:** Steaming Miniket/Basmati rice + thick daal + Alu/Begun Bharta + Rui/Telapia/Hilsha fish or Chicken/Beef curry costs just **SAR 12 to SAR 18 (~BDT 390 – BDT 580)** per plate.
-Zone 2: Lower Ajyad Street & Bir Balila Alleys (East of King Abdulaziz Gate):
-- Right behind the Safwah Royale Orchid and Clock Tower food courts, the side alleys of Ajyad offer fresh parathas, daal fry, omelette, and milk tea (Doodh Cha / Karak) after Fajr for **SAR 5 to SAR 8 (~BDT 165 – BDT 260)**.
-Zone 3: Clock Tower (Abraj Al Bait) & Jabal Omar Food Courts (Inside AC Malls):
-- Located on Levels P3/P4 of the Clock Tower and inside Souq Al Khalil (Jabal Omar), offering clean family seating with Turkish Mandi, Kabsa, Shawarma, and Indian/Pakistani thalis for **SAR 20 to SAR 35 (~BDT 650 – BDT 1,140)**.
+Quick Answer — Checked 19 October 2026: the Saudi Food and Drug Authority has stated that all food sold in the Kingdom is halal, and alcohol and pork are prohibited imports, so the halal question is settled at the national level [1][2][3]. Cleanliness is not settled by that: municipal health certificates cover food workers in Makkah and Madinah [4], but a certificate is a floor, not an inspection result. The documented South Asian food streets in Makkah are Hijra Road and Ibrahim Khaleel Road in the Misfalah area [6]; Al Baik's own branch list, with map pins, is the only reliable way to pick a branch [7]; and BinDawood's locator lists the supermarket branches near both mosques [9].
 
-2. WHERE ARE THE CLOSEST AL BAIK BRANCHES NEAR MASJID AL-HARAM & MASJID AN-NABAWI?
-Almost every Bangladeshi traveler wants to taste Saudi Arabia's famous **Al Baik** crispy broast chicken and garlic sauce (SAR 17–21 / ~BDT 550–680 for a 4-piece meal):
-- **Makkah Al Baik Locations:**
-  1. **Jabal Omar Mall (Ibrahim Al Khalil side):** Express branch (serves Chicken Nuggets, Fillet Sandwiches, and Shrimp—shortest queue!).
-  2. **Abraj Al Bait / Clock Tower Basement:** Very close to Haram gates (expect 20–35 minute queues after Isha).
-  3. **Aziziyah & Kudai Drive-Thru Branches:** Full bone-in 4-piece and 8-piece family Broast menu.
-- **Madinah Al Baik Locations:**
-  1. **Taiba Commercial Center / Markazia North-West (200m from Haram courtyard):** Huge two-level branch right beside the hotels!
+1. IS THE FOOD HALAL — AND DOES HALAL ALSO MEAN SAFE?
+The halal question has a clearer answer in Saudi Arabia than almost anywhere else a Bangladeshi family travels. The Saudi Food and Drug Authority has publicly reaffirmed that all food sold in the Kingdom is halal [2], and the Kingdom prohibits the import of alcohol, pork and pork products [3]. You do not need to interrogate a kitchen about whether the meat is halal in the way you might in Bangkok or London.
 
-3. WHERE TO EAT BANGLADESHI FOOD IN MADINAH (MARKAZIA SOUTH & BENGALEE LANE)?
-- Walk 250 meters from **Gates 5 to 9 (West/South-West side of Masjid an-Nabawi, near Al-Ghamamah Mosque)** into the old market lanes, where several Bangladeshi and Pakistani restaurants serve fresh rice, fish curry, khichuri, and mutton rezala for **SAR 12 to SAR 20**.
+What that statement does not do is certify the tray of biryani that has been sitting under a lamp since before Maghrib. Municipal authorities issue health certificates for workers in food establishments, and Makkah and Madinah are both included in the health-education programme that accompanies them [4]. That is a licensing baseline — a kitchen can hold every certificate and still leave cooked food out too long.
 
-4. DAILY FOOD BUDGET & ELDERLY DIET TIPS FOR A 10-DAY UMRAH TRIP
-- **Budget Desi Dining + Tamimi/BinDawood Supermarket Breakfast:** **SAR 30 – SAR 40 per person/day (~BDT 980 – BDT 1,300/day)**.
-- **Smart Family Grocery Hack:** Visit **BinDawood Supermarket** (located inside Clock Tower Makkah, Jabal Omar, and Taiba Center Madinah) to buy fresh bananas, Laban (yogurt drink), oats, whole-wheat bread, honey, and bottled water at standard Saudi supermarket prices!`,
+The practical test is the one WHO teaches for any kitchen anywhere: keep food clean, separate raw from cooked, cook it thoroughly, keep it at safe temperatures, and use safe water [5]. In restaurant terms: order what is cooked to order, avoid the dish that has been sitting in the display since the previous rush, drink bottled water, and if a place is empty at peak meal time, ask yourself why.
+
+Traveller check (foodHalal): Halal is the national default, so spend your scepticism on hygiene instead: freshly cooked food, a busy room, clean surfaces, and bottled water. A certificate on the wall is a starting point, not an answer.
+
+2. WHERE DO BANGLADESHI AND SOUTH ASIAN KITCHENS CLUSTER IN MAKKAH?
+The best-documented cluster is the Misfalah side of the city, along Hijra Road and Ibrahim Khaleel Road. A June 2026 report in The Daily Star describes restaurants across those two roads adapting their food for pilgrims from Bangladesh, Pakistan and India, with the same shop sometimes signed in Bengali and in Urdu, staff speaking Chittagonian, and biryani, porota, dal, desi curry and milk tea on offer [6]. If you are looking for the food your parents recognise, that is the area to walk to — not a single named restaurant.
+
+Ajyad Street, on the other side of the central area, is the other traditional food street, with small restaurants and street food. The mall food courts in the central towers are the third option: air-conditioned, family seating, higher prices and food that is reliable rather than memorable.
+
+Restaurant names in all three areas change with tenancy and with the season. That is why this page does not print a list of them. Instead, open a map app, search "Pakistani restaurant" or "Bangladeshi restaurant" around your hotel, filter to places with photographs from the last month, read the recent reviews that mention the actual dishes, and walk to the one that is busy. A name copied from a 2024 blog is the least reliable guide you can carry.
+
+Traveller check (foodMakkah): Treat the street pair as the destination and the restaurant as a same-day decision. Search the map from your hotel, check recent photos, and walk to a full room rather than an empty one with a familiar signboard.
+
+3. WHAT WILL A MEAL COST — AND WHY THIS PAGE PRINTS NO PRICE LIST
+Al Baik, which is the most corporate of the options, publishes its full menu online and still does not print prices on it [8]. The small desi kitchens publish nothing at all. Any per-plate figure in a blog is therefore either a snapshot from one visit or an invention, and it will be wrong the moment the season, the rent or the pilgrim volume changes.
+
+So the number you budget with has to be the number you agree at the counter. Ask three questions before you sit down: is the quoted price per plate or per person; what comes with it — rice, bread, salad, tea; and is there a smaller portion for a child or an older person who eats little. Then order one plate, see the size, and order a second only if you need it. That single habit saves more than any price table.
+
+Paying in riyals and converting in your head is where BDT budgets drift. Use the day's rate for a single calculation, and use our DIY budget calculator for the trip total rather than multiplying each meal by a rate you half-remember.
+
+Traveller check (foodPrice): Agree the price and what it includes before the food is plated. If nobody can tell you what a plate costs, that is your answer about how the bill will end.
+
+4. AL BAIK: WHICH BRANCHES ARE LISTED, AND HOW TO IGNORE QUEUE FOLKLORE
+Al Baik is the one chain a Bangladeshi family usually wants to try, and it is also the one with the most confident misinformation attached to it. The operator's own branch page is the only list worth using, and every branch name on it links to a map pin [7].
+
+In Makkah the listed branches include ALBAIK-MAKKAH JABAL OMAR, ALBAIK-CLOCK TOWER MAKKAH, ALBAIK-MAKKAH TOWER, ALBAIK-MAKKAH AZEEZIA, ALBAIK-MAKKAH DIYAFAH and ALBAIK-MAKKAH JABAL NOOR [7]. In Madinah they include ALBAIK-MADINAH TAIBA, ALBAIK-TAIBA TOWER, ALBAIK-MADINAH CITY, ALBAIK-MADINAH CITY 2 KHALEDIAH and ALBAIK-MADINA TRAIN STATION [7]. Use the pin for the branch you choose, and let the map tell you the walk.
+
+The menu is published, item by item — chicken meals, nuggets, shrimp, fillet sandwiches, falafel, sides and drinks — but without prices [8]. Check the app or the board at the branch for what you will actually pay. What the company does not publish, and what no honest guide can promise, is a queue length at a given hour: a minute figure quoted for the post-Isha rush is a guess wearing a number.
+
+5. WHERE DO I EAT IN MADINAH, AND HOW DO I CHECK A KITCHEN BEFORE SITTING DOWN?
+Madinah's central blocks work on the same national halal baseline, and South Asian kitchens are part of the commercial mix around the Prophet's Mosque — the same 2026 reporting describes the pattern across the holy cities, not only in Makkah [6]. What changes from Makkah is that the central area is more mall-and-hotel, and the cheaper kitchens sit further out along the roads leading away from the mosque.
+
+The anchors that can actually be verified are the chains and the supermarket. Al Baik lists several Madinah branches, including ALBAIK-MADINAH TAIBA, ALBAIK-TAIBA TOWER, ALBAIK-MADINAH CITY and ALBAIK-MADINAH CITY 2 KHALEDIAH [7]. BinDawood lists TAIBA, Al Anwar, Al Hijra, Rotana and Al Jammat among its Madinah branches [9]. Beyond that, the decision is a door check, not a blog: does the price board exist and show prices, is the kitchen visible, is the room busy with families, and does the staff know what "kam mirchi" means.
+
+Traveller check (foodMadinah): Do not walk to a lane because an old article named a gate. Pick two or three candidates on the map, look at the most recent photos, and choose at the door on what you can see and what the board says.
+
+6. HOW DO I FEED AN ELDERLY PARENT OR A YOUNG CHILD FOR TEN DAYS?
+The families who struggle are rarely the ones who could not find food. They are the ones who ate restaurant curry twice a day for a week because it was easier than deciding. Three habits make the difference, and none of them is medical advice.
+
+First, build the day around one cooked meal and two simple ones: supermarket bread, laban, bananas, dates and tea in the room, then one hot meal of rice, dal and a boiled or lightly cooked vegetable. Second, ask the kitchen to go easy — "kam mirchi, kam tel" is understood in the South Asian kitchens, and a plain dal with rice is usually the safest thing on any menu. Third, keep the water bottled and the pace slow: a parent who is dehydrated and overtired will not enjoy any meal.
+
+If your parent has a diagnosed condition and a clinician has given dietary instructions, those instructions govern, not this page. Carry the medicines and the prescription, and do not test a new diet in Makkah.
+
+Traveller check (foodElderly): One hot meal, two simple ones, less chilli and oil, bottled water, and a ground-floor table away from the door. Clinical decisions stay with your own clinician.
+
+7. HOW DO I SELF-CATER AND KEEP THE DAILY BUDGET HONEST?
+Self-catering is what turns an unpredictable food bill into a plan. BinDawood, which calls itself the "Pilgrim's Brand" and lists 26 locations, has branches on both sides of the two mosques, including Abraj Al Bait and Jabal Omar in Makkah and Taiba and Al Anwar in Madinah [9][10]. Buy breakfast and snacks there: laban, bread, bananas, dates, oats, honey, bottled water.
+
+Then do the one thing almost nobody does: record what you spend for the first two days, add it up, and divide. That number — not a figure from an article — is your daily food budget, and you can adjust it while you still have most of the trip left. Keep the receipts; they also tell you which shop is cheaper for the same basket.
+
+Food delivery apps are useful when a parent cannot walk out again, but coverage depends on the hotel address. Order only if the app shows your building, and expect to meet the driver at the entrance. And if you plan to carry dates or food home, read the customs rules before you buy — the allowance is a personal-use test, not a weight you can fill.
+
+Traveller check (foodGrocery): Shop where the locator says there is a branch, write down two days of spending, and set the daily figure from your own receipts rather than from a blog. Check the customs page before buying gifts to carry home.
+
+8. FREQUENTLY ASKED QUESTIONS
+Is all food in Makkah and Madinah halal?
+Yes, at the national level: the Saudi Food and Drug Authority has stated that all food sold in the Kingdom is halal, and alcohol and pork are prohibited imports. That is a statement about the food supply, not about a particular kitchen's hygiene — check the room and the freshness yourself. [1][2][3]
+Where are the Bangladeshi restaurants in Makkah?
+The documented cluster is along Hijra Road and Ibrahim Khaleel Road in the Misfalah area, where the 2026 reporting found Bengali and Urdu signage and Chittagonian-speaking staff. Names change, so choose on the map and at the door. [6]
+How much does a meal cost in Makkah or Madinah?
+No reliable published price exists for the desi kitchens, and Al Baik publishes a menu without prices. Ask whether the quote is per plate or per person, confirm what it includes, and order one plate first. [8]
+Which Al Baik branch is closest to the Haram?
+The operator lists several branches in each city, each with a map pin: Jabal Omar, Clock Tower, Makkah Tower, Azeezia, Diyafah and Jabal Noor in Makkah; Madinah Taiba, Taiba Tower, Madinah City and others in Madinah. Follow the pin rather than a blog's walking time. [7]
+Where can I buy groceries near the mosques?
+BinDawood lists branches at Abraj Al Bait and Jabal Omar in Makkah, and Taiba, Al Anwar, Al Hijra, Rotana and Al Jammat in Madinah. Check the locator for the branch nearest your hotel before walking. [9][10]
+Can I take leftover dates or food home to Bangladesh?
+Dates and food are subject to Bangladesh's personal-use test at Dhaka airport, not a published kilogram allowance. Read the customs guide before you fill a suitcase.`,
   "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": `When Bangladeshi families travel for DIY Umrah or Hajj, dedicating one morning in Makkah, one morning in Madinah, and an optional day trip to Taif or the Battlefield of Badr transforms the journey into a lifelong Islamic history lesson for your children and parents.
 
 1. WHAT ARE THE MUST-VISIT HISTORICAL ZIYARAH SITES IN MAKKAH & HOW MUCH DOES A PRIVATE CAR COST?

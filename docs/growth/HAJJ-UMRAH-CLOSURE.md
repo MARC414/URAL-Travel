@@ -10,15 +10,15 @@ published inventory. All twelve core Umrah articles already exist; earlier audit
 
 | Scope | Recorded local outcome | Still outstanding |
 |---|---|---|
-| 12 core Umrah article pairs | **10 revised/tested:** main DIY, Nusuk, stopover, hotel/rail, flights, women, older travellers, Ihram/Miqat, Ramadan/I'tikaf, Zamzam/customs (20 locale pages) | **2 independent reviews:** food, Ziyarah (4 locale pages) |
+| 12 core Umrah article pairs | **11 revised/tested:** main DIY, Nusuk, stopover, hotel/rail, flights, women, older travellers, Ihram/Miqat, Ramadan/I'tikaf, Zamzam/customs, food (22 locale pages) | **1 independent review:** Ziyarah (2 locale pages) |
 | Planning hub EN/BN | Quote-input mechanism and no-fake-savings correction tested | Full release-time fact/graph/visual checks; no matched live price basket claimed |
 | Adjacent Hajj article pair / checklist | Deadline conflict and attachment/health limitations recorded | Own source-led article/FAQ/HowTo/download reconciliation and current-source review (2 locale pages plus resource) |
 | 2 optional bridge pairs | Existing inventory; excluded from the 12-core-article count | Independent later review, not a prerequisite to count core article revisions |
 | Release in this session | No reviewed revision deployed or production-verified | Approval, visual checks, actual deployment and live EN/BN checks |
 
-**10/12 = 83% by core article count only.** This is not a weighted completion percentage: effort differs per article,
-the hub fix is a separate partial workstream, Hajj is adjacent, and release work remains. **Two core article pairs remain**
-plus adjacent Hajj, alongside hub/release gates. Public-source research and edits remain agent-owned;
+**11/12 = 92% by core article count only.** This is not a weighted completion percentage: effort differs per article,
+the hub fix is a separate partial workstream, Hajj is adjacent, and release work remains. **One core article pair remains**
+(the Ziyarah pair), plus adjacent Hajj, alongside hub/release gates. Public-source research and edits remain agent-owned;
 owner decisions are publication approval and optional genuinely private/field evidence, not delegated web research.
 Current implementation validation: Ramadan 28 + Ihram/Miqat 28 + older travellers 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25, scheduling/sitemap controls, lint/build,
 **323 build checks**, 107 EN + 107 BN routes. Counts do not verify unresolved source claims or authenticated flows.
@@ -347,3 +347,15 @@ tax with SAR 500, 90-day and validation conditions; worn jewellery is ineligible
 locale include `/umrah`, and the CTA is optional and qualified. 28 targeted tests, every prior suite, lint/build and
 **326 build assertions** pass; 107 EN + 107 BN routes. No airport, counter or customs hall was observed and no legal
 advice is given. **Ten core pairs done; food and Ziyarah remain.** Next independent agent-owned asset: the food guide.
+
+**Food guide, 19 October (eleventh pair):** the EN/BN pair was rewritten against
+[`FOOD-GUIDE-SOURCE-REVIEW.md`](FOOD-GUIDE-SOURCE-REVIEW.md). Halal is now presented as the national baseline (SFDA's
+own statement, plus the pork and alcohol import bans) and explicitly separated from kitchen hygiene, which is checked
+with Balady's health-certificate baseline and WHO's five keys. Every per-plate price, BDT conversion, walking time,
+gate number and queue estimate is gone, as are the four named restaurants and the "Bangla Bazar" nickname; Al Baik is
+described only by the operator's own branch names and map pins, and the guide teaches a three-question price check
+instead of printing a figure. Six cautions sit at the decisions, ten references and six links per locale include
+`/umrah` and the customs guide, the FAQ carries six questions matched to schema, and the CTA is optional and qualified.
+26 targeted tests, every prior suite, lint/build and **329 build assertions** pass; 107 EN + 107 BN routes. No
+restaurant or menu was visited and no price was observed. **Eleven core pairs done; Ziyarah remains.** Next independent
+agent-owned asset: the Ziyarah pair.

@@ -982,3 +982,33 @@ renumbers in the women's and flight articles were caught by those suites and res
 hall was observed; no price was verified on site; no GACA circular could be opened; no legal advice, deployment, PR or
 live check. Progress **10/12 core pairs** by article-review count only; food and Ziyarah remain. Next independent
 agent-owned asset: the Makkah/Madinah food guide.
+
+### 19 October 2026 — Food-guide pair revised (11/12 core Umrah pairs)
+
+`bangladeshi-halal-food-guide-makkah-madinah-budget-meals` EN/BN rewritten against
+[`FOOD-GUIDE-SOURCE-REVIEW.md`](FOOD-GUIDE-SOURCE-REVIEW.md): the SFDA's halal page and its January 2023 statement,
+the U.S. trade guide's list of prohibited Saudi imports, Balady's health-certificate service, WHO's Five Keys to Safer
+Food, the operator's Al Baik branch and menu pages, BinDawood's store locator and holding page, and The Daily Star's
+June 2026 report on the South Asian kitchens of Makkah.
+
+The article no longer prints a single meal price, BDT conversion, walking time, gate number or queue estimate, and it
+names no restaurant. The "every restaurant is 100% Halal by law, so the kitchen is clean" inference is split into its
+two halves: halal as the national baseline (SFDA statement plus the pork and alcohol import bans) and hygiene as a local
+check (municipal health certificates, a certificate is a floor not an inspection result, WHO's five keys). Makkah's
+documented food streets — Hijra Road and Ibrahim Khaleel Road in Misfalah — replace the invented "Bangla Bazar"
+nickname, and Al Baik is described only by the operator's own branch names and map pins. Madinah is anchored on the
+listed Al Baik and BinDawood branches plus a door check, not on gate numbers. The price section teaches three questions
+to ask at the counter, and the elderly section gives practical food and seating guidance while leaving clinical
+decisions with the reader's clinician.
+
+Six visible/schema FAQs, six cautions (`foodHalal`, `foodMakkah`, `foodPrice`, `foodMadinah`, `foodElderly`,
+`foodGrocery`), ten references, six curated links per locale including `/umrah` and the customs guide, optional
+qualified eSIM CTA, no HowTo. The shared price panel stays on this page because it is the fixture for that panel's own
+build test. Original 27 Sep publication, author and slug retained; `updatedAt` 2026-10-19.
+
+Food 26 + Zamzam 28 + Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 +
+Nusuk 16 + budget 25, scheduling and 23 sitemap controls, lint, build and **329 build checks** passed (107 EN + 107 BN
+routes), including four new blog-22 output controls and three retired-claim fixtures. No restaurant, menu, hotel or
+counter was observed; the Balady news pages returned HTTP 500 and are not cited; no deployment, PR or live check.
+Progress **11/12 core pairs** by article-review count only; the Ziyarah pair remains. Next independent agent-owned
+asset: the Ziyarah pair.

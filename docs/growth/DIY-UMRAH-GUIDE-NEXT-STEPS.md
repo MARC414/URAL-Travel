@@ -151,6 +151,11 @@ optional and qualified. 28 targeted tests, all prior suites, lint, build and **3
 application or identity flow was touched, no 1448 conditions exist, and no scholar reviewed the wording. Three core
 pairs plus adjacent Hajj remain.
 
+**Food guide, 19 October:** the eleventh core pair is revised against
+[`FOOD-GUIDE-SOURCE-REVIEW.md`](FOOD-GUIDE-SOURCE-REVIEW.md) — halal split from hygiene, no per-plate price, no gate
+number, no named restaurant, and the operator's own Al Baik branch names. 26 targeted tests, all prior suites and **329
+build checks** pass. Eleven of twelve core pairs are done; the Ziyarah pair remains and is the next asset.
+
 **Zamzam/customs, 19 October:** the tenth core pair is revised and tested against
 [`ZAMZAM-CUSTOMS-SOURCE-REVIEW.md`](ZAMZAM-CUSTOMS-SOURCE-REVIEW.md) — SAR 12.50 from the airport operator, no dates
 kilogram allowance, the calendar-year gold conditions, and a conditional VAT refund. 28 targeted tests, all prior

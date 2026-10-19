@@ -40,10 +40,16 @@ const TITLES = {
   datesAllowance: { en: "Personal use, not commercial quantity", bn: "ব্যক্তিগত ব্যবহার, বাণিজ্যিক পরিমাণ নয়" },
   goldDeclare: { en: "Weigh, count and declare", bn: "ওজন মাপুন, গুনুন, ঘোষণা দিন" },
   vatRefund: { en: "Keep it boxed or skip the refund", bn: "বাক্সেই রাখুন, নাহলে ফেরত বাদ দিন" },
+  foodHalal: { en: "Halal is the baseline, hygiene is the check", bn: "হালাল নিয়ম, যাচাই করুন পরিচ্ছন্নতা" },
+  foodMakkah: { en: "Pick the street, choose the kitchen today", bn: "রাস্তা বাছুন, রেস্তোরাঁ আজকের সিদ্ধান্ত" },
+  foodPrice: { en: "Agree the plate price before ordering", bn: "অর্ডারের আগে প্লেটের দাম ঠিক করুন" },
+  foodMadinah: { en: "Choose at the door, not from an old blog", bn: "পুরোনো ব্লগ নয়, দরজায় দেখে বাছুন" },
+  foodElderly: { en: "One hot meal, two simple ones", bn: "এক বেলা গরম, দুই বেলা সহজ" },
+  foodGrocery: { en: "Set the budget from your own receipts", bn: "নিজের রসিদ থেকেই বাজেট ঠিক করুন" },
 } as const;
 
 export function getTravellerCheck(paragraph: string) {
-  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth|ihramPoint|ihramGarments|ihramTransit|ihramMadinah|ihramPersonal|ramadanDeadline|ramadanItikaf|ramadanAnnouncement|ramadanBudget|ramadanRoute|zamzamBox|zamzamAirline|datesAllowance|goldDeclare|vatRefund)\):\s+([\s\S]+)$/);
+  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth|ihramPoint|ihramGarments|ihramTransit|ihramMadinah|ihramPersonal|ramadanDeadline|ramadanItikaf|ramadanAnnouncement|ramadanBudget|ramadanRoute|zamzamBox|zamzamAirline|datesAllowance|goldDeclare|vatRefund|foodHalal|foodMakkah|foodPrice|foodMadinah|foodElderly|foodGrocery)\):\s+([\s\S]+)$/);
   if (!match) return null;
   const key = match[2] as keyof typeof TITLES;
   const locale = match[1] === "Traveller check" ? "en" : "bn";

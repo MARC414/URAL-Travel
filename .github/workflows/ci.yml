@@ -87,6 +87,9 @@ jobs:
       - name: Verify Zamzam, dates and gold rules against operator and NBR sources
         run: npm run test:zamzam-customs-guide
 
+      - name: Verify the food guide against SFDA, Balady and operator sources
+        run: npm run test:food-guide
+
       - name: Type-check
         run: npm run lint
 

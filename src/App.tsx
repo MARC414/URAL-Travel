@@ -644,7 +644,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
       "One sealed 5-litre Zamzam bottle per pilgrim, bought at the airport and carried separately — the Madinah operator lists it at SAR 12.50. Bangladesh allows 100 g of gold ornaments and 200 g of silver once a calendar year, plus one declared bar up to 117 g. There is no published kilogram allowance for dates: personal use passes, a commercial quantity can be seized.",
     "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
-      "Skip expensive hotel buffets and oily fast food during Umrah: walk 5 minutes from Masjid al-Haram into Ibrahim Al Khalil Road (Misflah) or Lower Ajyad in Makkah, and Bengalee Lane (West Markazia) in Madinah, for fresh Bangladeshi rice, fish curry, daal, and bharta at SAR 12–18 (BDT 390–580).",
+      "Halal is the national baseline in Saudi Arabia — the food authority has stated that all food sold in the Kingdom is halal and pork imports are banned — so the real question is hygiene and price. The documented South Asian food streets in Makkah are Hijra Road and Ibrahim Khaleel Road in Misfalah; Al Baik's own branch list, with map pins, is the only reliable branch guide; and no per-plate price is printed here because no kitchen publishes one that can be re-checked.",
     "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide":
       "A private 4-seater sedan for a 3-hour morning Ziyarah costs SAR 150–200 in Makkah (Jabal al-Noor Hira Cultural District, Jabal Thawr, Mina, Arafat) and SAR 120–160 in Madinah (Masjid Quba—where 2 Rakah equals an Umrah reward—Mount Uhud, and Qiblatain), while a Taif highland day trip costs SAR 350–450.",
     "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide":
@@ -739,7 +739,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
       "প্রতি হাজীর জন্য একটি সিল করা ৫ লিটার জমজম বোতল, বিমানবন্দর থেকে কেনা ও আলাদাভাবে বহন — মদিনার পরিচালক দাম লিখেছে ১২.৫০ রিয়াল। বাংলাদেশে বছরে একবার ১০০ গ্রাম স্বর্ণালংকার ও ২০০ গ্রাম রুপা, সঙ্গে ঘোষণা সাপেক্ষে ১১৭ গ্রাম পর্যন্ত একটি বার। খেজুরে কেজিতে প্রকাশিত ছাড় নেই: ব্যক্তিগত ব্যবহার চলে, বাণিজ্যিক পরিমাণ জব্দ হতে পারে।",
     "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
-      "ওমরাহ সফরে প্রতিদিন ফাস্টফুড না খেয়ে মক্কার ইব্রাহিম আল খলিল রোড (মিসফালাহ) ও আজইয়াদ এবং মদিনার বাঙালি লেনে (গেট ৫–৯ এর কাছে) মাত্র ১২–১৮ রিয়ালে (৩৯০–৫৮০ টাকা) গরম ভাত, মাছের ঝোল, ডাল ও ভর্তা খেতে পারেন। এছাড়া জাবাল ওমর ও তায়্যিবা সেন্টারে পাবেন অফিশিয়াল Al Baik।",
+      "সৌদি আরবে হালাল জাতীয় নিয়ম — খাদ্য কর্তৃপক্ষ জানিয়েছে রাজ্যে বিক্রি হওয়া সব খাবার হালাল এবং শূকরের মাংস আমদানি নিষিদ্ধ — তাই আসল প্রশ্ন পরিচ্ছন্নতা ও দাম। মক্কায় দক্ষিণ এশীয় খাবারের নথিভুক্ত রাস্তা মিসফালাহর হিজরা রোড ও ইব্রাহিম খলিল রোড; আল বাইকের নিজের শাখা-তালিকা ও ম্যাপ পিনই ভরসাযোগ্য; আর এখানে প্রতি প্লেটের দাম নেই, কারণ কোনো রেস্তোরাঁ এমন দাম প্রকাশ করে না যা আবার যাচাই করা যায়।",
     "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide":
       "প্রাইভেট ৪-সিটার গাড়িতে ৩ ঘণ্টার মক্কা জিয়ারত (জাবালে নূর হেরা ডিস্ট্রিক্ট, গারে সাওর, মিনা, আরাফাত) ১৫০–২০০ রিয়াল এবং মদিনা জিয়ারত (মসজিদে কুবা—যেখানে ২ রাকাত নামাজে ১টি ওমরাহর সওয়াব—উহুদ ও কিবলাতাইন) ১২০–১৬০ রিয়ালে করা যায়। আর তায়েফ ডে-ট্রিপের ভাড়া ৩৫০–৪৫০ রিয়াল।",
     "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide":

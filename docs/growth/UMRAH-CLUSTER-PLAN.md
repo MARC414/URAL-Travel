@@ -45,6 +45,14 @@ allowance now carries its calendar-year, 22-carat and silver conditions, and the
 goods. Current validation: 28 Zamzam tests, **326 build checks**; visual, qualified-review, approval and release gates
 remain separate. Next independent agent-owned asset: the food guide.
 
+**19 October Food-guide follow-up:** [`FOOD-GUIDE-SOURCE-REVIEW.md`](FOOD-GUIDE-SOURCE-REVIEW.md) records the
+eleventh source-reviewed core EN/BN revision. **11/12 core pairs** revised/tested by article count only; Ziyarah remains.
+The guide now separates halal (national baseline, SFDA statement and import bans) from hygiene (Balady certificate as a
+floor, WHO five keys), names the documented Makkah streets instead of four unverifiable restaurants, uses the operator's
+Al Baik branch names and map pins, and prints no meal price or BDT figure at all. Current validation: 26 food tests,
+**329 build checks**; visual, qualified-review, approval and release gates remain separate. Next independent
+agent-owned asset: the Ziyarah pair.
+
 **Use with:** [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md), [`SEO-KEYWORD-MAP.md`](../../SEO-KEYWORD-MAP.md), [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md), [`CONTENT-OS.md`](CONTENT-OS.md), and [`AI-WRITING-PROMPTS.md`](AI-WRITING-PROMPTS.md).
 
 This is an operational plan for consolidating URAL's existing Umrah content, not a replacement for or rewrite of the strategy plan of record. It uses the current repository inventory and the Umrah research ledger checked on 14 October 2026. Bangladesh SERP observations and a Search Console query export were not present in those materials; demand and format hypotheses below are **not measured**. Re-check season-sensitive rules and prices against primary sources immediately before each release.

@@ -5053,6 +5053,68 @@ check(
   `blog-21: nine specific sources replace the three homepages (operator, carrier, Ministry, HSIA, NBR x2, VAT x2, press)`
 );
 
+// --- Food guide (blog-22) -------------------------------------------------
+// The old copy sold a restaurant map with invented prices, walking times, gate
+// numbers and a "100% Halal by law therefore clean" inference. The rewrite keeps
+// the halal baseline, names no restaurant and prints no price. Ledger:
+// docs/growth/FOOD-GUIDE-SOURCE-REVIEW.md.
+const FOOD_SLUG = "bangladeshi-halal-food-guide-makkah-madinah-budget-meals";
+const foodBodyPair = [
+  BLOG_BODY[FOOD_SLUG] ?? "",
+  BENGALI_BLOG_OVERRIDES[FOOD_SLUG]?.content ?? "",
+];
+const foodSurfaces = [
+  { label: "article body (EN)", text: foodBodyPair[0] },
+  { label: "article body (BN)", text: foodBodyPair[1] },
+  { label: "article page (EN)", text: read(path.join(DIST_DIR, "blog", `${FOOD_SLUG}.html`)) ?? "" },
+  { label: "article page (BN)", text: read(path.join(DIST_DIR, "bn", "blog", `${FOOD_SLUG}.html`)) ?? "" },
+];
+const FOOD_RETIRED: { label: string; pattern: RegExp }[] = [
+  { label: "absolute halal-equals-clean claim", pattern: /100%\s*Halal\s*by\s*law/i },
+  { label: "invented per-plate price band", pattern: /(?:SAR|রিয়াল)\s*\d+\s*(?:to|–|-)\s*(?:SAR\s*)?\d+/i },
+  { label: "gate-number walking instruction", pattern: /Gates?\s*(?:5|5–9|5-9)\b/i },
+  { label: "micro-distance to a lane", pattern: /\b250\s*(?:m|meters|metres|মিটার)\b/i },
+];
+const FOOD_RETIRED_BODY_ONLY: { label: string; pattern: RegExp }[] = [
+  { label: "BDT conversion of a meal price", pattern: /BDT\s*\d+/i },
+];
+const foodHits = foodSurfaces.flatMap((surface) => {
+  const patterns = /body/.test(surface.label) ? [...FOOD_RETIRED, ...FOOD_RETIRED_BODY_ONLY] : FOOD_RETIRED;
+  const hit = patterns.find((entry) => entry.pattern.test(surface.text));
+  return hit ? [`${surface.label}: ${hit.label}`] : [];
+});
+const foodDailyBdt = foodSurfaces.some((surface) =>
+  /BDT\s*\d+[^<]{0,30}(?:per plate|per person per day|প্রতি প্লেট|প্রতি দিন)/i.test(surface.text)
+);
+const foodControls = [
+  "Rice, dal and fish cost SAR 12 to SAR 18 (BDT 390–580) per plate.",
+  "Exit Gates 5 to 9 and walk 250 meters to the Bengali lane.",
+  "Every restaurant is 100% Halal by law, so hygiene is guaranteed.",
+].every((control) => FOOD_RETIRED.some((entry) => entry.pattern.test(control)));
+const foodFalsePositives = [
+  "BinDawood lists 26 locations across the Kingdom.",
+  "The Madinah branch list includes TAIBA and Al Anwar.",
+  "Ask whether the price is per plate or per person before ordering.",
+].every((control) => FOOD_RETIRED.every((entry) => !entry.pattern.test(control)));
+check(
+  foodControls && foodFalsePositives,
+  "blog-22: the food guard rejects price bands, BDT figures, gate numbers and the halal-equals-clean claim while passing branch counts and the price question (negative control)"
+);
+const foodArticle = BLOG_DATA.find((post) => post.slug === FOOD_SLUG);
+check(
+  (foodArticle?.references?.length ?? 0) === 10 &&
+    foodBodyPair.every(
+      (body) =>
+        (body.match(/Traveller check \(/g) ?? []).length + (body.match(/যাত্রীর যাচাই \(/g) ?? []).length === 6
+    ),
+  "blog-22: ten opened references and six cautions sit in both bodies"
+);
+check(
+  (foodArticle?.internalLinks?.filter((link) => link.path.startsWith("/blog/")).length ?? 0) >= 5 &&
+    (foodArticle?.internalLinks?.some((link) => link.path === "/umrah") ?? false),
+  "blog-22: at least five sibling links plus the /umrah hub"
+);
+
 // Guard: no dates kilogram allowance (the figure the old copy printed was unsourced)
 const zamzamDatesAllowanceClaim =
   /(?:duty[- ]free|tax[- ]free|শুল্কমুক্ত)[^.\n]{0,40}\d+\s*(?:kg|কেজি)|\d+\s*(?:kg|কেজি)[^.\n]{0,25}(?:duty[- ]free|শুল্কমুক্ত)/i;

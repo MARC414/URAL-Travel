@@ -2904,20 +2904,78 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-22",
     slug: "bangladeshi-halal-food-guide-makkah-madinah-budget-meals",
-    title: "Bangladeshi & Pakistani Halal Food Guide in Makkah & Madinah (2026): Best Budget Desi Meals & BDT Costs",
-    summary: "When traveling to Makkah and Madinah with elderly Bangladeshi parents or young children, eating fried fast food for 10 days straight often causes gastric acidity and fatigue. Knowing exactly which streets around Masjid al-Haram and Masjid an-Nabawi serve fresh Bangladeshi white rice (bhaat), masoor daal, rui/hilsha fish curry, alu bharta, and beef bhuna at SAR 12 to SAR 20 (BDT 390–650) per meal keeps your family healthy and cuts your food budget in half. Here is our street-by-street Halal dining map for Makkah and Madinah.",
+    title: "Bangladeshi & Pakistani Food in Makkah & Madinah (2026): Where to Eat and How to Budget Honestly",
+    summary: "Checked on 19 October 2026 against the SFDA's halal statements, the Balady municipal health-certificate service, WHO food-safety guidance, the official Al Baik branch and menu pages, BinDawood's store locator and a June 2026 Daily Star report: halal is the national baseline, hygiene is a local question, the documented South Asian food streets in Makkah are Hijra Road and Ibrahim Khaleel Road, and no per-plate price is printed because no kitchen publishes one that can be re-checked.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "6 min read",
+    readTime: "7 min read",
     internalLinks: [
       { text: "Umrah with Elderly Parents: Wheelchair & Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
-      { text: "Ramadan Suhoor, Iftar and Taraweeh crowd tips", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" }
+      { text: "Zamzam, Dates & Gold: Bangladesh Customs Rules", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
+      { text: "Ramadan Suhoor, Iftar and Taraweeh Crowd Tips", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "airalo", headline: "Use Google Maps & HungerStation Food Delivery in Makkah", body: "Too tired to walk out after Tawaf? With a Saudi Arabia eSIM, you can use HungerStation or Jahez apps to deliver hot Bangladeshi meals or Al Baik straight to your hotel lobby." }
+    affiliateCTA: {
+      provider: "airalo",
+      headline: "Using maps and delivery apps while you eat your way around the Haram",
+      body: "An optional Saudi Arabia eSIM makes it easier to open a branch map pin or a delivery app without hunting for hotel Wi-Fi. Coverage and speed depend on the network on the day, and an app only helps if it shows your hotel address — it changes no restaurant's price or the customs rules for food you carry home.",
+    },
+    references: [
+      {
+        name: "Saudi Food and Drug Authority — Halal Center: certification, audits and the halal standards applied in the Kingdom",
+        nameBn: "সৌদি খাদ্য ও ওষুধ কর্তৃপক্ষ — হালাল সেন্টার: সনদ, অডিট ও রাজ্যে প্রযোজ্য হালাল মান",
+        url: "https://www.sfda.gov.sa/en/halal",
+      },
+      {
+        name: "Saudi Gazette — SFDA statement (5 January 2023): all food sold in the Kingdom is halal",
+        nameBn: "সৌদি গেজেট — এসএফডিএ বিবৃতি (৫ জানুয়ারি ২০২৩): রাজ্যে বিক্রি হওয়া সব খাবার হালাল",
+        url: "https://saudigazette.com.sa/article/628636",
+      },
+      {
+        name: "U.S. International Trade Administration — Saudi Arabia prohibited and restricted imports: alcohol, pork and pork products (page last published 11 May 2026)",
+        nameBn: "মার্কিন আন্তর্জাতিক বাণিজ্য প্রশাসন — সৌদি আরবে নিষিদ্ধ আমদানি: মদ, শূকরের মাংস ও তার পণ্য (সর্বশেষ প্রকাশ ১১ মে ২০২৬)",
+        url: "https://www.trade.gov/country-commercial-guides/saudi-arabia-prohibited-and-restricted-imports",
+      },
+      {
+        name: "Balady (Ministry of Municipalities and Housing) — health certificates for food and public-health workers, with Makkah and Madinah in the health-education programme",
+        nameBn: "বালাদি (পৌর ও আবাসন মন্ত্রণালয়) — খাদ্য ও জনস্বাস্থ্য প্রতিষ্ঠানের কর্মীদের স্বাস্থ্যসনদ, মক্কা ও মদিনা স্বাস্থ্য-শিক্ষা কর্মসূচিতে",
+        url: "https://balady.gov.sa/en/services/issuance-health-certificate",
+      },
+      {
+        name: "World Health Organization — Five Keys to Safer Food",
+        nameBn: "বিশ্ব স্বাস্থ্য সংস্থা — নিরাপদ খাবারের পাঁচ নিয়ম",
+        url: "https://www.who.int/activities/promoting-safe-food-handling",
+      },
+      {
+        name: "The Daily Star — 'Where Chittagong meets Makkah' (3 June 2026): Bangladeshi kitchens on Hijra Road and Ibrahim Khaleel Road, signage, dishes and the Misfalah street economy",
+        nameBn: "দ্য ডেইলি স্টার — 'হোয়ার চিটাগং মিটস মক্কা' (৩ জুন ২০২৬): হিজরা রোড ও ইব্রাহিম খলিল রোডের বাংলাদেশি রেস্তোরাঁ, সাইনবোর্ড, খাবার ও মিসফালাহর বাজার",
+        url: "https://www.thedailystar.net/slow-reads/big-picture/news/where-chittagong-meets-makkah-4189471",
+      },
+      {
+        name: "ALBAIK — official branch list for Makkah and Madinah, each branch linked to a map pin",
+        nameBn: "আল বাইক — মক্কা ও মদিনার অফিশিয়াল শাখা-তালিকা, প্রতিটি শাখা ম্যাপ পিনে সংযুক্ত",
+        url: "https://www.albaik.com/branches",
+      },
+      {
+        name: "ALBAIK — official menu (items published, prices not published)",
+        nameBn: "আল বাইক — অফিশিয়াল মেনু (আইটেম প্রকাশিত, দাম প্রকাশিত নয়)",
+        url: "https://www.albaik.com/menu",
+      },
+      {
+        name: "BinDawood — store locator: Makkah (Abraj Al Bait, Jabal Omar, Al Kakiyyah, Azizia) and Madinah (Taiba, Al Anwar, Al Hijra, Rotana, Al Jammat)",
+        nameBn: "বিনদাউদ — স্টোর লোকেটর: মক্কা (আবরাজ আল বাইত, জাবাল ওমর, আল কাকিয়্যাহ, আজিজিয়া) ও মদিনা (তাইবা, আল আনোয়ার, আল হিজরা, রোটানা, আল জাম্মাত)",
+        url: "https://bindawood.sa/en/store_locations/",
+      },
+      {
+        name: "BinDawood Holding — 26 locations, 'Pilgrim's Brand', branch directory for Makkah and Madinah",
+        nameBn: "বিনদাউদ হোল্ডিং — ২৬টি লোকেশন, 'পিলগ্রিমস ব্র্যান্ড', মক্কা ও মদিনার শাখা-তালিকা",
+        url: "https://www.bindawoodholding.com/bindawood-supermarkets/",
+      },
+    ],
   },
   {
     id: "blog-23",

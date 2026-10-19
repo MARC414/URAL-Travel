@@ -405,10 +405,11 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   },
 
   "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals": {
-    title: "Bangladeshi Food Guide in Makkah & Madinah | URAL",
+    title: "Bangladeshi & Pakistani Food in Makkah & Madinah | URAL",
     description:
-      "Find familiar Bangladeshi, Pakistani and Indian halal meals near Masjid al-Haram and Masjid an-Nabawi, with daily food budgets in SAR and BDT.",
+      "Where the documented South Asian kitchens are, how to check a restaurant at the door, and why this guide prints no per-plate price — verified against SFDA, Balady and the operators.",
   },
+
   "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": {
     title: "Makkah, Madinah, Badr & Taif Ziyarah Taxi Guide | URAL",
     description:
