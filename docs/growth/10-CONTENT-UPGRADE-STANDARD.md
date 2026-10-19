@@ -3,11 +3,12 @@
 **Applies to:** every article written, upgraded, localized, or reviewed on `https://ural-travel.pages.dev` — by a
 person or by an AI tool. **Baseline:** 17 October 2026, measured against `dist/` built from `main`.
 
-> This file is the acceptance contract for **one article**. It does not decide *what* to write next; that is
-> [`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md) and the active row in [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md),
-> sequenced by [`CONTENT-OS.md`](CONTENT-OS.md) §1. Where a planning document and this file disagree about **how a
-> post must be wired and verified**, this file wins. Where they disagree about **what to build next**, the cluster
-> plan wins.
+> This file is the acceptance contract for **one article**. It does not decide *what* to write next; that is the active
+> cluster plan — [`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md) (opened 19 October 2026), or
+> [`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md) for the Umrah cluster — and the active row in
+> [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md), sequenced by [`CONTENT-OS.md`](CONTENT-OS.md) §1. Where a planning document and
+> this file disagree about **how a post must be wired and verified**, this file wins. Where they disagree about **what to
+> build next**, the cluster plan wins.
 
 ---
 

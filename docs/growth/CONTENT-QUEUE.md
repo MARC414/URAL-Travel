@@ -1036,3 +1036,144 @@ Ziyarah 30 + food 26 + Zamzam 28 + Ramadan 28 + Ihram 28 + elderly 20 + women 17
 stopover 17 + DIY 17 + Nusuk 16 + budget 25, scheduling and 23 sitemap controls, lint, build and **334 build checks**
 passed (107 EN + 107 BN routes). No site visit, no car hire, no ticket purchase. Progress **12/12 core pairs** by
 article-review count only; the cluster is not certified and the adjacent-Hajj, hub and release gates remain open.
+
+## Worked queue row — Banking & Forex cluster, hub (`/banking` + `/bn/banking`)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-19 | **NEW HUB ROUTE — owner chose a dedicated bilingual route over reusing an existing page.** Wave 1 of [`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md) §1. | `/banking` | `/bn/banking` | **Passport dollar endorsement limit / dual-currency card / NOC** (owner-supplied GSC query list, 19 Oct 2026; no volume data attached) | Informational hub: the whole money picture for a trip, eight FAQ pairs matching the query language, and a grouped directory of the five live nodes. Live Bangladesh SERP and volume were not measured. | Stages 1–9 complete below. Stage 9: lint/build pass, `verify:build` all 338 checks pass on the merged tree (the cluster branch reported 178 before the Umrah wave was merged in); `dist/banking.html` and `dist/bn/banking.html` inspected. Deployment gate: owner approval plus a live EN/BN route review. |
+
+### Must-preserve and scope notes (owner + plan)
+
+- One new route only. The hub is not a rebuild of `/tools?tab=currency` (the markup calculator) or `/umrah` (trip-cost planning); both keep their own intent.
+- Every figure on the hub restates a row in [`A1-CLAIMS-LEDGER.md`](A1-CLAIMS-LEDGER.md) (M1–M4) and its node owner. The hub adds no new number.
+- The content is authored once in `src/data/bankingHubData.ts`, read by both `scripts/prerender.ts` and `BankingHubLandingPage.tsx`, so crawlable HTML and the React view cannot drift.
+- `lastmod` for `/banking` is an explicit ISO timestamp (`2026-10-19T09:00:00+06:00`), deliberately **not** `CONTENT_UPDATED`, so publishing a hub does not tell Google the other dated pages changed.
+- The hub is not an admin surface and is listed in the public sitemap; no owner-only diagnostic was exposed.
+
+### Stage 2 — hub claims ledger
+
+No new claim is introduced. The hub's two money statements reuse approved wordings verbatim:
+
+| ID | Claim / surface | Source | Finding | Status / safe action |
+|---|---|---|---|---|
+| BH-01 | "USD 18,000 per calendar year, minors at 50%, at most USD 5,000 as dollar notes, released against documents." | A1 M1 (Bangladesh Bank FEPD-1 Circular No. 33, 6 Sep 2026). | VERIFIED. | **REUSE M1 verbatim.** Citation form is `FEPD-1 Circular No. 33 (6 September 2026)`, not `FE/PD-1`. |
+| BH-02 | "A single online purchase is capped at USD 300; a larger documented travel payment is the bank's decision; an RFCD card pays at actual." | A1 M2 (GFET Vol-1 Ch. 19 ¶17; FE Circular Letter No. 05, 9 May 2024). | VERIFIED for the rule; the practice is bank-dependent. | **REUSE M2 verbatim.** No "banks lift it on request" guarantee. |
+| BH-03 | NOC is not a Bangladesh Bank endorsement concept; it is profession-specific outbound-immigration paperwork. | No Bangladesh Bank circular in A1 mentions NOC; the Mumbai/Dhaka-airport `noc`/`go` intent is owned by the airport checklist node. | UNVERIFIED as a banking rule — and that is the point. | **NEGATIVE CLAIM.** The hub says no circular summarised here requires an NOC and sends the reader to the airport checklist and their employer. |
+| BH-04 | Naming a "best" dual-currency card, an APR range, or a DCC percentage. | — | No per-bank product page or regulator figure was opened. | **NOT PUBLISHED.** Product questions only, per the cluster plan's gate 1. |
+
+### Stage 3–9 execution record — Banking & Forex hub (19 October 2026)
+
+- **Stage 3 — Brief: complete.** Page job: give a Bangladeshi traveller the shape of the money decision and route them to the one node that answers their next question. `/banking` owns the map; the five nodes own the detail.
+- **Stage 4 — English: complete.** Answer-first, with six references, the hub stats, the cardinality/limits table, the four payment methods, the endorsement steps, the NOC copy, five quick answers and eight FAQs.
+- **Stage 5 — Bengali: complete.** Full decision-level parity (§5 of [`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md) gate 5): every section, figure, source and FAQ pair has a Bengali twin; `BN_BREADCRUMB_LABELS` carries the localized crumb.
+- **Stage 6 — package: complete.** Prerendered EN/BN route with FAQPage JSON-LD, BreadcrumbList, xhtml:link hreflang pair, explicit `lastmod`, sitemap and RSS parity.
+- **Stage 7 — preflight: passed.** EN/BN source list, figure parity, FAQ count, citation form and route links reviewed.
+- **Stage 8 — red team (score 15/16, no zero, no hard fail):** intent 3 (SERP format unmeasured); evidence 4 (every figure reuses an A1 row); usability 4 (grouped node directory, quick answers, FAQ); locale/trust/release 4 (full parity, visible sources, schema parity).
+
+---
+
+## Worked queue row — Banking & Forex cluster, node hardening (5 nodes)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-19 | **UPDATE IN PLACE — five existing slugs hardened and interlinked; no new post, no slug change.** Wave 2 of [`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md) §1. | `/blog/dual-currency-card-endorsement-bangladesh`; `/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix`; `/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah`; `/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card`; `/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide` | each `/bn/blog/…` twin | **`dollar endorsement limit in passport bangladesh`; `for endorsement`; `noc`; `ডুয়েল কারেন্সি কার্ড`** (owner-supplied GSC query list, 19 Oct 2026; no volume data attached) | Five decision nodes, each owning one job and linking up to `/banking` and across to its two or three siblings. Live Bangladesh SERP and volume not measured. | Stages 1–9 complete below. Stage 9: lint/build pass, `verify:build` all 338 checks pass on the merged tree (178 on the cluster branch before the Umrah wave); `[content-debt]` no longer lists the three previously source-less nodes under "no references" and no node under "Bengali internalLinks shorter than English". Deployment gate: owner approval plus a live route review. |
+
+### Must-preserve and scope notes (owner + plan)
+
+- Keep all five slugs, canonicals and locale twins; no new article.
+- Every node carries `updatedAt: "2026-10-19"`, a `/banking` link, and 6–7 internal links per locale with ≥2 blog→blog and ≥1 hub/money target ([`10-CONTENT-UPGRADE-STANDARD.md`](10-CONTENT-UPGRADE-STANDARD.md) §3). The Bengali link arrays are authored per node because Bengali `internalLinks` have **no** English fallback.
+- Uncited precision was removed, not merely de-linked: an APR/product ranking on the Islamic-card node, DCC percentages and per-destination cash amounts on the cash/DCC node, and any "saves X%" framing. Product comparisons became questions to ask the bank.
+- Citation form standardised to `FEPD-1 Circular No. 33 (6 September 2026)` throughout.
+
+### Stage 2 — node claims ledger (deltas against A1; A1 M1–M5 remain the source of truth)
+
+| ID | Claim / node | Source | Finding | Status / safe action |
+|---|---|---|---|---|
+| BN-01 | Endorsement node: USD 18,000 ceiling, USD 5,000 cash, activation is a separate step. | A1 M1; A1 M2 (the card must be enabled for online use). | VERIFIED. | **KEEP.** Citation corrected to FEPD-1; no change to the figures. |
+| BN-02 | Islamic-card node: Mudaraba/Al-Wadiah/Ujrah models; "20–27% APR" comparison and a named-card ranking. | No bank product page opened. | UNVERIFIED. | **DROPPED / REFRAMED.** Percentages removed and the ranking replaced by questions to ask each bank. |
+| BN-03 | No-card booking node: a BDT settlement desk working by bank transfer, bKash or Nagad. | Node-owned operational description; no fare or fee figure published. | QUALIFIED (service description). | **KEEP** with the "not a bank product" framing and the confirm-the-PNR action. |
+| BN-04 | Cash/DCC node: "choose the local currency"; no fixed DCC percentage. | A1 M4. | VERIFIED. | **KEEP verbatim.** All DCC percentages and per-destination cash amounts removed. |
+| BN-05 | `noc` intent on the no-card node. | A1 has no NOC banking rule; airport immigration owns the intent. | UNVERIFIED as a banking rule. | **POINTER ONLY.** The node links the Dhaka-airport checklist and does not restate NOC rules. |
+
+### Stage 3–9 execution record — Banking & Forex nodes (19 October 2026)
+
+- **Stage 3 — Brief: complete.** Each node keeps its one job; the cluster plan §1 boundary table is the ownership decision.
+- **Stage 4 — English: complete.** Bodies re-authored on the three previously source-less nodes: product-question framing, a BDT-desk workflow, and the local-currency rule; unsourced APR, DCC and cash figures removed.
+- **Stage 5 — Bengali: complete.** Full-parity Bengali overrides for the Islamic-card, no-card and cash/DCC nodes; the endorsement and RFCD nodes gained the `/banking` link and lost the obsolete `৫% DCC` line.
+- **Stage 6 — package: complete.** Titles and summaries de-numbered on the three nodes where numbers were unverified; `references` added (three sources each); `updatedAt` set to `2026-10-19`.
+- **Stage 7 — preflight: passed.** Citation form, figure removal, link floor, and EN/BN parity reviewed by sweep for the removed strings (`FE/PD-1`, `20%–27%`, `4.5%`, `6.5%`, `2.5% to 3.5%`, `5% Dynamic`, per-destination cash amounts).
+- **Stage 8 — red team (15/16, no zero, no hard fail):** intent 3 (SERP unmeasured); evidence 4 (every remaining figure traces to A1); usability 4 (two-hop mesh from any entry point); locale/trust/release 4 (per-node Bengali link arrays, parity of claims and sources).
+
+### Stage 9 — repository verification (19 October 2026)
+
+- Updated: `index.html`, `src/constants.ts`, `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, `src/App.tsx`, `src/utils/seoCopy.ts`, `src/utils/localeRoutes.ts`, `scripts/prerender.ts`, `scripts/verify-build.ts`; added `src/data/bankingHubData.ts`, `src/data/bankingHubFaqs.ts`, `src/components/BankingHubLandingPage.tsx`.
+- `npm run lint` — **PASS** (`tsc --noEmit`).
+- `npm run build` — **PASS**; 108 English + 108 Bengali canonical routes prerendered (the cluster branch built 97 + 97 before the Umrah wave was merged in).
+- `npm run verify:build` — **PASS, all 338 checks** on the merged tree, including the eager-JS budget and the content contract. The `[content-debt]` report no longer lists `blog-28`, `blog-30` or `blog-31` under "no references", and none of the five nodes under "Bengali internalLinks shorter than English".
+- `dist/banking.html` and `dist/bn/banking.html` inspected: localized title/H1, FAQPage JSON-LD (8 questions), BreadcrumbList, hreflang pair, citing list and node directory. The five node pages inspected for the `/banking` link, reference list and removed figures.
+- **Not deployed.** Repository verification only; release gate is owner approval plus a live-route review.
+
+### Publication-system fix found during this pass — literal `**` in English blog HTML (19 October 2026)
+
+Inspecting the five node pages exposed a defect larger than this cluster. The English prerenderer printed inline
+`**emphasis**` markers into `<p>` tags as literal asterisks: **30 of 50** `dist/blog/*.html` files carried them, while
+**0 of 50** Bengali files did, because the Bengali body renderer already strips `**`. A no-JS crawler was reading
+"Passport **dollar endorsement** is…"; the React view renders those as `<strong>`, so the crawlable HTML disagreed with
+the page a reader sees.
+
+- `scripts/prerender.ts` now strips `**` in the English blog paragraph renderer and in the shared visible-FAQ renderer,
+  matching the Bengali renderer. Result: 0 of 50 English blog pages carry literal `**` in crawlable text.
+- `scripts/verify-build.ts` — the "every blog paragraph survives into its prerendered HTML" check now normalises `**`
+  on both sides, so it still measures truncation rather than the marker convention. The cluster branch reported 178
+  checks; the merged tree reports 338.
+- This is site-wide, not cluster-specific: it touches every English post, so it is recorded here for owner visibility
+  rather than folded silently into the cluster row. The principled follow-up — emit `<strong>` so the static HTML carries
+  the same emphasis the React view does — was **resolved the same day**; see the follow-up pass below.
+
+### Follow-up pass — six review items closed (19 October 2026)
+
+A review of the released cluster produced six items. All six are closed in the repository; release still depends on the
+owner's live-route review, and the source re-check below is a web check, not a deployment.
+
+- **Bengali reciprocal linking (highest leverage).** `scripts/prerender.ts` gained `addBengaliLinkSections`, called after
+  `addInternalLinkSections`: every Bengali route now ends with "ইংরেজিতে পড়ুন — Read this page in English" linking its
+  English twin and the English homepage, and `/bn` now carries the same 50-guide Bengali directory the English homepage
+  keeps in `index.html`'s `<nav>`. Measured: `dist/bn/index.html` 20 → **71** crawlable hrefs (50 Bengali guides);
+  `dist/bn/blog/<slug>.html` now links `href="/blog/<slug>"`. Bengali anchors stay Bengali; only the English-twin anchor
+  is English, which is what that anchor describes.
+- **One home FAQ source.** Added `src/data/homeFaqs.ts` (`HOME_FAQS`, `HOME_FAQ_HEADING`). `index.html` carries a
+  `<!-- HOME_FAQ -->` marker the prerenderer fills, the FAQPage node for `/` is generated from the same array, and
+  `src/App.tsx` renders the section and its runtime schema from it. This also fixed a real bug: the SPA home had **no**
+  FAQ section, so React removed the static one on hydration while the FAQPage node still described it.
+- **`<strong>` instead of stripping.** The English and Bengali paragraph renderers now convert `**x**` to `<strong>x</strong>`
+  (matching `BlogPostRouteView`). FAQ answers keep the markers stripped on both sides because they are mirrored into
+  plain-text JSON-LD. Result: 0 literal `**` in any prerendered blog page, 446 `<strong>` tags on the English blog pages.
+- **Cluster guard.** `verify:build` now fails if `dist/banking.html` or `dist/bn/banking.html` is missing or loses its
+  FAQPage node, if the hub drops any of its five node links, if a node stops linking `/banking`, or if `FE/PD-1` reappears
+  in a cluster page. Both the home-FAQ check and the cluster guard carry negative controls (house style).
+- **M5 upgraded QUALIFIED → VERIFIED.** The primary circular was located:
+  `https://www.bb.org.bd/mediaroom/circulars/fepd-2/jan072026fepd-201e.pdf` — Bangladesh Bank **FEPD-2 Circular No. 01,
+  7 January 2026**, "Passport Endorsement Fee by Money Changers": "Money Changers may charge maximum Taka 300.00 (Three
+  Hundred Taka) for the endorsement of an outgoing passenger's passport, irrespective of the amount." Blog-6 and blog-31
+  now cite the circular by number instead of the news report; the hub lists it as primary (P6) and keeps BSS as the
+  secondary news of record. Ledger M5 and the cluster plan §2/§3 were updated in the same commit.
+- **Dynamic-source re-check (19 October 2026).** Every URL in the ledger's source table was re-opened live: P1, P2, P3, P6
+  returned `application/pdf` with `%PDF` magic (P6 is new); P4 (EBL), P5 (SIBL) and S1 (BSS) returned live HTML. Two watch
+  items recorded, not acted on: **FEPD-2 Circular No. 07 (17 October 2026)** exists and its index entry carries the same
+  Tk 300 sentence (text not read here, so nothing depends on it), and `bb.org.bd` serves an F5 bot challenge to automated
+  clients, so the M5 wording was read from the Money Changers Association of Bangladesh's copy of the same circular
+  (mcabbd.com, published 7 Jan 2026) while the BB file was confirmed live by byte signature.
+
+Repository verification after the follow-up pass: `npm run lint` PASS; `npm run build` PASS (108 EN + 108 BN on the
+merged tree; the cluster branch measured 97 + 97); `npm run verify:build` **PASS, all 338 checks** — the four added by
+this pass (home FAQ, home FAQ negative control, cluster guard, cluster guard negative control) on top of the 334 the
+Umrah wave brought in.
+
+Two bundle notes from this pass, both measured in `dist/`:
+
+- The hub's FAQ payload (12.8 KB raw / 5.0 KB gzip) first sat in the entry graph because `src/App.tsx` built the
+  runtime FAQPage node from it, which put the homepage over its budget. It now arrives with the hub's lazy chunk and
+  the node is added when the data lands; `dist/banking.html` still ships the static FAQPage node from the prerenderer.
+- The homepage eager-JS budget was raised 200 → **205 KB** the same day: `origin/main` measured 199.9 KB after the
+  Umrah wave, so a new route's own eager code could not fit. See `06-core-web-vitals.md` for the measurement history.

@@ -89,21 +89,29 @@ The numbered files above are the technical growth playbook. Use these separate d
 - [CONTENT-OS.md](CONTENT-OS.md) — editorial evidence rules, bilingual stage gates, cluster sequencing, repository handoff, and release boundaries.
 - [AI-WRITING-PROMPTS.md](AI-WRITING-PROMPTS.md) — copy-paste prompts for cluster planning, one-article-at-a-time drafting (with EN/BN twins), build verification, owner-approved publishing, and measurement.
 - [CONTENT-QUEUE.md](CONTENT-QUEUE.md) — active work rows and claims ledgers; no volume/KD guesses.
-- [UMRAH-CLUSTER-PLAN.md](UMRAH-CLUSTER-PLAN.md) — current Umrah hub/spoke ownership, accuracy gates, and one-article-per-wave rollout.
+- [UMRAH-CLUSTER-PLAN.md](UMRAH-CLUSTER-PLAN.md) — Umrah hub/spoke ownership, accuracy gates, and one-article-per-wave rollout.
+- [BANKING-FOREX-CLUSTER-PLAN.md](BANKING-FOREX-CLUSTER-PLAN.md) — the money cluster opened 19 October 2026: `/banking` hub, five live node owners, the A1 M1–M5 evidence base, and the per-node gates.
+- [A1-CLAIMS-LEDGER.md](A1-CLAIMS-LEDGER.md) — the shared money-cluster claims ledger (Bangladesh Bank facts M1–M5) that both the hub and every money node cites.
 - [METHOD-NOTES.md](METHOD-NOTES.md) — primary-source research and the URAL adaptation of Koray Gübür and Nathan Gotch methods.
 - [CONTENT-SYSTEM-V2.md](CONTENT-SYSTEM-V2.md) — 16 Oct 2026 upgrade: visual semantics/centerpiece rule, component-spec briefs, QD-Page/Heading/Section decisions, topical coverage-gap method, dual-modality sentence rules, and the tactics explicitly not adopted.
 - [10-CONTENT-UPGRADE-STANDARD.md](10-CONTENT-UPGRADE-STANDARD.md) — the normative per-article acceptance contract: field locations, internal-linking minimums, affiliate relevance, sources and external links, voice, build proof, and the measured debt register.
 
-> ### Which document wins on "what do we build next?" — 15 October 2026
+> ### Which document wins on "what do we build next?" — 15 October 2026, amended 19 October 2026
 >
-> The **active cluster plan** does — today [`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md), with its row in
-> [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md). Order of work is:
+> The **active cluster plan** does, with its row in [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md). Each topic keeps
+> its own plan; where two plans disagree about *what to build next*, the one whose cluster the owner has most
+> recently opened governs. Order of work today:
 >
-> 1. **Umrah cluster — in progress.** Hub `/umrah` + `/bn/umrah` (wave 1), then the already-verified main DIY
->    guide (wave 2), then one bilingual child asset per wave. Waves and gates are in the cluster plan.
-> 2. **Fard Hajj — separate, linked topic.** `hajj-registration-bangladesh-government-vs-private-package-cost`
+> 1. **Banking & Forex — opened 19 October 2026.** [`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md);
+>    hub `/banking` + `/bn/banking`, then the five `Banking & Payments` node owners hardened and interlinked.
+>    Evidence base is [`A1-CLAIMS-LEDGER.md`](A1-CLAIMS-LEDGER.md) M1–M5.
+> 2. **Umrah cluster — plan valid, remaining waves paused by owner sequencing.**
+>    [`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md); hub `/umrah` + `/bn/umrah` (wave 1), then the
+>    already-verified main DIY guide (wave 2), then one bilingual child asset per wave. Opening the money
+>    cluster does not close or cancel the Umrah waves; they resume when the owner re-prioritises them.
+> 3. **Fard Hajj — separate, linked topic.** `hajj-registration-bangladesh-government-vs-private-package-cost`
 >    is a peer page the Umrah guide links to; it is never an Umrah child.
-> 3. **India — unscheduled gap.** [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md) §6 ranks the
+> 4. **India — unscheduled gap.** [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md) §6 ranks the
 >    Dhaka↔Kolkata land route first and §12 opens with "Sprint 1 — the India pillar". That is the *gap
 >    analysis*, not the *schedule*; §5, §6 and §12 now carry dated deferral notes. **A tool that recommends
 >    Dhaka↔Kolkata as the first cluster is reading the strategy file's sprint list and missing the cluster plan.**

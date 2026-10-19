@@ -4,13 +4,17 @@
 > **Method:** Koray Tuğberk Gübür's *Semantic SEO / Topical Authority* framework + Nathan Gotch's *content-gap & search-intent* architecture, adapted to a brand-new domain with no backlink authority yet.
 > **Grounding:** this plan was written against the **actual** codebase (47 blog posts, 6 destination pillars, the real category system), not a guess. Where an earlier analysis assumed a gap that does not exist, this document corrects it.
 
-> **Update — 15 October 2026: this file is the site-wide gap inventory and scoring model, not the current schedule.**
-> Release order is owned by the **active cluster plan** ([`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md)),
-> under the pipeline rules in [`CONTENT-OS.md`](CONTENT-OS.md) and the rows in [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md):
+> **Update — 15 October 2026, amended 19 October 2026: this file is the site-wide gap inventory and scoring model, not the current schedule.**
+> Release order is owned by the **active cluster plan** — [`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md)
+> for the money cluster opened on 19 October 2026, and [`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md) for the Umrah
+> cluster — under the pipeline rules in [`CONTENT-OS.md`](CONTENT-OS.md) and the rows in [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md):
 >
-> - **The Umrah cluster is the rollout in progress** — `/umrah` + `/bn/umrah` hardened first (wave 1), then the
->   already-verified main guide (wave 2), then one bilingual child asset per wave. This supersedes the "Sprint 1"
->   scheduling in §12; §12's Sprint 0 (consolidate the Umrah cluster) is what is actually being executed, as waves.
+> - **The Banking & Forex cluster is the most recently opened work** — hub `/banking` + `/bn/banking`, then the five
+>   `Banking & Payments` node owners hardened and interlinked, on the [`A1-CLAIMS-LEDGER.md`](A1-CLAIMS-LEDGER.md)
+>   evidence base.
+> - **The Umrah cluster's remaining waves are paused, not closed** — `/umrah` + `/bn/umrah` hardened first (wave 1), then
+>   the already-verified main guide (wave 2), then one bilingual child asset per wave. This supersedes the "Sprint 1"
+>   scheduling in §12; §12's Sprint 0 (consolidate the Umrah cluster) is what was being executed, as waves.
 > - **Fard Hajj remains a separate, linked topic** — `hajj-registration-bangladesh-government-vs-private-package-cost`
 >   is a peer page for the Umrah guide to link to, never an Umrah child.
 > - **India is still a real gap and still unscheduled.** Pillar E (§5), gap-register items #1–#2 (§6) and "Sprint 1"
@@ -282,12 +286,13 @@ Your `robots.txt` already welcomes GPTBot, ClaudeBot, PerplexityBot, Google-Exte
 
 Cadence target: **2–4 publishable pieces/week** (one *block* roughly every 2–3 weeks). Finish pillars; don't scatter.
 
-> **Superseded as a schedule — 15 October 2026.** This roadmap still describes the work, but the *order and
-> cadence* now come from [`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md): the Umrah cluster is split into
-> waves, and a wave is **one bilingual asset** (English + Bengali routes together) awaiting owner release — not
-> a 2–4-piece publishing week. **Sprint 0 is the work in progress.** **Sprint 1 (India) is deferred, not
-> cancelled**: do not open it before the owner closes or re-prioritises the Umrah waves, and Fard Hajj stays a
-> separate linked topic throughout.
+> **Superseded as a schedule — 15 October 2026, amended 19 October 2026.** This roadmap still describes the work, but
+> the *order and cadence* now come from the active cluster plan — [`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md)
+> (the money cluster opened 19 October 2026) and [`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md) for the Umrah cluster:
+> each cluster is split into waves, and a wave is **one bilingual asset** (English + Bengali routes together) awaiting
+> owner release — not a 2–4-piece publishing week. **Sprint 1 (India) is deferred, not cancelled**: do not open it
+> before the owner closes or re-prioritises the open cluster waves, and Fard Hajj stays a separate linked topic
+> throughout.
 
 **Sprint 0 — Hygiene & consolidation (week 1, no new content).**
 - Cannibalization audit (§7): designate canonical Umrah cost + hotels nodes; add up-links.

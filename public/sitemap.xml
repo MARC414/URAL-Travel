@@ -19,6 +19,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/umrah" />
   </url>
   <url>
+    <loc>https://ural-travel.pages.dev/banking</loc>
+    <lastmod>2026-10-19T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/banking" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/banking" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/banking" />
+  </url>
+  <url>
     <loc>https://ural-travel.pages.dev/flights</loc>
     <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -560,7 +569,7 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/dual-currency-card-endorsement-bangladesh</loc>
-    <lastmod>2026-10-16T09:00:00+06:00</lastmod>
+    <lastmod>2026-10-19T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/dual-currency-card-endorsement-bangladesh" />
@@ -758,7 +767,7 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah</loc>
-    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <lastmod>2026-10-19T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" />
@@ -767,7 +776,7 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix</loc>
-    <lastmod>2026-10-16T09:00:00+06:00</lastmod>
+    <lastmod>2026-10-19T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" />
@@ -776,7 +785,7 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card</loc>
-    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <lastmod>2026-10-19T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" />
@@ -785,7 +794,7 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide</loc>
-    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <lastmod>2026-10-19T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" />
@@ -962,6 +971,15 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/umrah" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/umrah" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/umrah" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/banking</loc>
+    <lastmod>2026-10-19T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/banking" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/banking" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/banking" />
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/bn/flights</loc>
@@ -1505,7 +1523,7 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/bn/blog/dual-currency-card-endorsement-bangladesh</loc>
-    <lastmod>2026-10-16T09:00:00+06:00</lastmod>
+    <lastmod>2026-10-19T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/dual-currency-card-endorsement-bangladesh" />
@@ -1703,7 +1721,7 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/bn/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah</loc>
-    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <lastmod>2026-10-19T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" />
@@ -1712,7 +1730,7 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/bn/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix</loc>
-    <lastmod>2026-10-16T09:00:00+06:00</lastmod>
+    <lastmod>2026-10-19T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" />
@@ -1721,7 +1739,7 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/bn/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card</loc>
-    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <lastmod>2026-10-19T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" />
@@ -1730,7 +1748,7 @@
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/bn/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide</loc>
-    <lastmod>2026-09-27T09:00:00+06:00</lastmod>
+    <lastmod>2026-10-19T09:00:00+06:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" />

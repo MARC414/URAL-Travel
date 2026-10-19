@@ -12,7 +12,7 @@ This document serves as the canonical technical handoff and architectural refere
   - Step-by-step Tourist, Medical, and Umrah Visa Checklists (`Nepal`, `Thailand`, `Malaysia`, `UAE/Dubai`, `Singapore`, `Maldives`, `Schengen`, `Saudi Arabia`).
   - Bilingual Support (`en` English & `bn` Bengali) with dynamic `<html lang>` synchronization.
   - Real-time Multi-Currency Display (`BDT`, `USD`, `EUR`, `GBP`, `SAR`, `AED`).
-  - Static Prerendering (`scripts/prerender.ts`) generating crawlable HTML, OpenGraph metadata, and Schema.org JSON-LD (`FAQPage`, `Article`, `TravelAgency`, `BreadcrumbList`) for all 206 routes (103 English + 103 Bengali).
+  - Static Prerendering (`scripts/prerender.ts`) generating crawlable HTML, OpenGraph metadata, and Schema.org JSON-LD (`FAQPage`, `Article`, `TravelAgency`, `BreadcrumbList`) for all 216 routes (108 English + 108 Bengali).
 
 ---
 
@@ -119,10 +119,12 @@ misled the next reader. The rule that prevents it:
 6. **Never record a projected performance number as if measured.** A "Lighthouse: 65 → 80" that was never
    run will be quoted as fact forever. Measure, or say you did not.
 7. **Content and growth work starts from the execution layer, not from a sprint list.** Read
-   `docs/growth/CONTENT-OS.md` §1 for the order, then the **active cluster plan**
-   (`docs/growth/UMRAH-CLUSTER-PLAN.md`) and its row in `docs/growth/CONTENT-QUEUE.md`. Release order comes
-   from the cluster plan and queue. `docs/growth/CONTENT-STRATEGY-2026.md` is the site-wide gap inventory and
-   scoring model — its §6 gap register and §12 sprints are **analysis, not schedule**: its India pillar
-   ("Dhaka↔Kolkata land route") is the largest *content* gap and is explicitly **not** the next work item.
-   The cluster in progress is **Umrah**; **Fard Hajj is a separate, linked topic**. `docs/growth/README.md`
-   §2A carries the same precedence note.
+   `docs/growth/CONTENT-OS.md` §1 for the order, then the **active cluster plan** and its row in
+   `docs/growth/CONTENT-QUEUE.md`. Release order comes from the cluster plan and queue; each cluster has its
+   own plan, and the most recently opened one is `docs/growth/BANKING-FOREX-CLUSTER-PLAN.md` (19 October
+   2026), while `docs/growth/UMRAH-CLUSTER-PLAN.md` remains valid for the Umrah cluster.
+   `docs/growth/CONTENT-STRATEGY-2026.md` is the site-wide gap inventory and scoring model — its §6 gap
+   register and §12 sprints are **analysis, not schedule**: its India pillar ("Dhaka↔Kolkata land route") is
+   the largest *content* gap and is explicitly **not** the next work item. The clusters in progress are
+   **Banking & Forex** and **Umrah**; **Fard Hajj is a separate, linked topic**. `docs/growth/README.md` §2A
+   carries the same precedence note.

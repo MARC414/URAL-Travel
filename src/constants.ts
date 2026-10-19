@@ -1971,7 +1971,7 @@ export const BLOG_DATA: BlogPost[] = [
     date: "September 26, 2026",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
-    updatedAt: "2026-10-16",
+    updatedAt: "2026-10-19",
     references: [
       {
         name: "Bangladesh Bank — FEPD-1 Circular No. 33 (6 September 2026): travel entitlement raised to USD 18,000",
@@ -1994,12 +1994,13 @@ export const BLOG_DATA: BlogPost[] = [
         url: "https://www.ebl.com.bd/retail-deposit/EBL-RFCD-Account",
       },
       {
-        name: "BSS — Bangladesh Bank fixes passport endorsement fee at BDT 300 for money changers (7 January 2026)",
-        nameBn: "BSS — মানি চেঞ্জারদের passport endorsement fee BDT 300 নির্ধারণ করেছে বাংলাদেশ ব্যাংক (৭ জানুয়ারি ২০২৬)",
-        url: "https://www.bssnews.net/business/348822",
+        name: "Bangladesh Bank — FEPD-2 Circular No. 01 (7 January 2026): passport endorsement fee by money changers capped at BDT 300",
+        nameBn: "বাংলাদেশ ব্যাংক — FEPD-2 Circular No. 01 (৭ জানুয়ারি ২০২৬): মানি চেঞ্জারের passport endorsement fee সর্বোচ্চ BDT 300",
+        url: "https://www.bb.org.bd/mediaroom/circulars/fepd-2/jan072026fepd-201e.pdf",
       },
     ],
     internalLinks: [
+      { text: "Money & Banking Hub: endorsement, cards, USD 300 rule and NOC", path: "/banking" },
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account vs. Travel Quota (the $300 online-payment rule)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "Cash SAR / USD vs. Card Abroad (choose local currency, avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
@@ -3094,16 +3095,35 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-28",
     slug: "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
-    title: "Best Shariah-Compliant Islamic Dual-Currency Cards in Bangladesh for Umrah & Halal Travel (2026)",
-    summary: "Many devout Bangladeshi Muslims preparing for Umrah, Hajj, or a Halal family holiday want the convenience of booking Haramain High-Speed Bullet Train tickets (sar.hhr.sa), Makkah and Madinah hotels, and international airlines online—without touching a conventional interest-bearing (Riba) credit card. Under Bangladesh Bank's Islamic Banking guidelines and the USD $18,000 annual personal travel quota (FE/PD-1 Circular No. 33), several leading Islamic banks and Shariah windows in Dhaka now issue 100% Riba-free Mudaraba and Ujrah-based Dual-Currency Debit, Prepaid, and Khidmah cards. Here is our verified 2026 comparison of the top Shariah-compliant travel cards in Bangladesh, passport endorsement rules, and how to use them in Makkah and Madinah.",
+    title: "Shariah-Compliant Dual-Currency Cards in Bangladesh: Riba-Free Travel Card Guide (2026)",
+    summary: "Many Bangladeshi Muslims preparing for Umrah, Hajj or a Halal family holiday want to book flights, Makkah and Madinah hotels and the Haramain High-Speed Train online without using an interest-bearing card. A Shariah-compliant dual-currency debit or prepaid card lets you spend your own endorsed travel-quota foreign exchange, while an Ujrah charge card substitutes a disclosed fee for a loan. Structures, fees and features differ by bank, so this checked guide explains how the two models work, the questions to ask each bank, the USD 300 single online-purchase rule that applies whoever issued the card, and three practical steps for using the card in Makkah and Madinah.",
     category: "Banking & Payments",
     date: "September 27, 2026",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
+    references: [
+      {
+        name: "Bangladesh Bank — FEPD-1 Circular No. 33 (6 September 2026): travel entitlement raised to USD 18,000",
+        nameBn: "বাংলাদেশ ব্যাংক — FEPD-1 Circular No. 33 (৬ সেপ্টেম্বর ২০২৬): ভ্রমণ entitlement USD 18,000-এ বৃদ্ধি",
+        url: "https://www.bb.org.bd/mediaroom/circulars/fepd/sep062026fepd-133e.pdf",
+      },
+      {
+        name: "Bangladesh Bank — GFET Volume 1, Chapter 19: payment through international cards (USD 300 single online purchase)",
+        nameBn: "বাংলাদেশ ব্যাংক — GFET Volume 1, Chapter 19: আন্তর্জাতিক কার্ডে পেমেন্ট (একবারে USD 300 online purchase)",
+        url: "https://www.bb.org.bd/aboutus/regulationguideline/foreignexchange/feguidevol1/19.pdf",
+      },
+      {
+        name: "Bangladesh Bank — FE Circular Letter No. 05 (9 May 2024): RFCD cards may pay online at the actual amount",
+        nameBn: "বাংলাদেশ ব্যাংক — FE Circular Letter No. 05 (৯ মে ২০২৪): RFCD কার্ড প্রকৃত পরিমাণে online payment করতে পারে",
+        url: "https://www.bb.org.bd/mediaroom/circulars/fepd/may092024fepdl05e.pdf",
+      },
+    ],
     internalLinks: [
       { text: "Complete $18,000 Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "No Card? Book Flights & Umrah Hotels in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+      { text: "Money & Banking Hub: endorsement, cards, USD 300 rule and NOC", path: "/banking" },
       { text: "10-Day DIY Umrah Cost Calculator in BDT", path: "/umrah" },
       { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" }
     ],
@@ -3116,7 +3136,7 @@ export const BLOG_DATA: BlogPost[] = [
     summary: "Bangladesh Bank's general card rule caps a single online purchase on a travel-quota card at USD 300. For a larger documented flight or hotel payment, ask your bank before checkout; approval is the bank's decision. An RFCD card may pay online at the actual amount, but its account can hold only foreign cash brought back from travel—not remittances or foreign income. Checked 16 October 2026 against Bangladesh Bank GFET Chapter 19, FE Circular Letter No. 05, and EBL/SIBL RFCD terms.",
     category: "Banking & Payments",
     date: "September 27, 2026",
-    updatedAt: "2026-10-16",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
     references: [
@@ -3147,6 +3167,7 @@ export const BLOG_DATA: BlogPost[] = [
       },
     ],
     internalLinks: [
+      { text: "Money & Banking Hub: endorsement, cards, USD 300 rule and NOC", path: "/banking" },
       { text: "Passport Dollar Endorsement and Card Activation Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Cash vs. Card Abroad (choose local currency and avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
@@ -3158,13 +3179,32 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-30",
     slug: "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
-    title: "How to Book International Flights, Makkah Hotels & Airport Transfers in BDT via bKash/Bank Transfer (No Card Needed)",
-    summary: "Over 70% of first-time Bangladeshi travelers, families outside Dhaka, and elderly Umrah pilgrims do not have an endorsed Dual-Currency Card ready when a cheap flight fare or Haram-view hotel discount appears online. Instead of losing BDT 20,000+ waiting a week for a bank card or paying inflated markups to middlemen, you can lock in live global airline tickets, Makkah/Madinah and Asian hotel vouchers, and airport transfers in Bangladeshi Taka (BDT) via local Bank Transfer, bKash, or Nagad through the URAL Dhaka Assisted-Booking Desk (+8801784385335). Here is how our transparent BDT booking workflow protects your trip and Dhaka Airport immigration folder.",
+    title: "How to Book Flights, Makkah Hotels & Airport Transfers in BDT (bKash / Bank Transfer, No Card Needed)",
+    summary: "Not every Bangladeshi traveller has an endorsed dual-currency card ready when a cheap fare or a Haram-view hotel rate appears online. Waiting for a new card — or paying an unverified middleman — is not the only option: you can reserve international air tickets, Makkah/Madinah or Asian hotel vouchers and airport transfers in Bangladeshi Taka (BDT) through a local bank transfer, bKash or Nagad booking desk. This checked guide explains how a transparent BDT-assisted booking workflow works, what to verify before you pay, and what to keep for the Dhaka Airport immigration folder.",
     category: "Banking & Payments",
     date: "September 27, 2026",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "6 min read",
+    references: [
+      {
+        name: "Bangladesh Bank — FEPD-1 Circular No. 33 (6 September 2026): travel entitlement raised to USD 18,000",
+        nameBn: "বাংলাদেশ ব্যাংক — FEPD-1 Circular No. 33 (৬ সেপ্টেম্বর ২০২৬): ভ্রমণ entitlement USD 18,000-এ বৃদ্ধি",
+        url: "https://www.bb.org.bd/mediaroom/circulars/fepd/sep062026fepd-133e.pdf",
+      },
+      {
+        name: "Bangladesh Bank — GFET Volume 1, Chapter 19: payment through international cards (USD 300 single online purchase)",
+        nameBn: "বাংলাদেশ ব্যাংক — GFET Volume 1, Chapter 19: আন্তর্জাতিক কার্ডে পেমেন্ট (একবারে USD 300 online purchase)",
+        url: "https://www.bb.org.bd/aboutus/regulationguideline/foreignexchange/feguidevol1/19.pdf",
+      },
+      {
+        name: "Saudi Ministry of Hajj and Umrah — official FAQ (Umrah visa, permit and biometric answers)",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — অফিশিয়াল FAQ (উমরাহ ভিসা, পারমিট ও বায়োমেট্রিক)",
+        url: "https://haj.gov.sa/en/FAQ",
+      },
+    ],
     internalLinks: [
+      { text: "Money & Banking Hub: endorsement, cards, USD 300 rule and NOC", path: "/banking" },
       { text: "10-Day DIY Umrah Cost Calculator & Hotel Zones", path: "/umrah" },
       { text: "Dual-Currency Card Endorsement ($18,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
@@ -3177,13 +3217,32 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-31",
     slug: "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
-    title: "Cash SAR / USD vs. Dual-Currency Card in Makkah, Bangkok & Kuala Lumpur: Avoiding 5% DCC & Money Changer Traps",
-    summary: "Should Bangladeshi pilgrims buy Saudi Riyals (SAR) in Dhaka or carry US Dollars (USD) to exchange in Makkah? And why do travelers lose BDT 5,000 to BDT 9,000 on a single family trip through airport money changers and POS Dynamic Currency Conversion (DCC) surcharges? Verified against Bangladesh Bank FX regulations (bb.org.bd) and ground exchange rates in Makkah (Ibrahim Al Khalil/Aziziyah), Bangkok (SuperRich Pratunam), and Kuala Lumpur (Bukit Bintang), here is the smartest Cash vs. Dual-Currency Card strategy for every destination from Dhaka.",
+    title: "Cash SAR / USD vs. Dual-Currency Card Abroad: Choosing the Local Currency and Avoiding Money-Changer Traps",
+    summary: "Should Bangladeshi pilgrims buy Saudi Riyals (SAR) in Dhaka or carry US Dollars (USD) to exchange in Makkah? And how much do travellers lose through airport money changers and POS Dynamic Currency Conversion (DCC)? Bangladesh Bank publishes no fixed DCC percentage — the prescribed rule is simply to choose the local currency at the terminal, so the markup you actually pay depends on the machine and the network. Checked against Bangladesh Bank FX rules and ground exchange practice in Makkah, Bangkok (SuperRich Pratunam) and Kuala Lumpur (Bukit Bintang), this is a practical Cash vs. Dual-Currency Card strategy from Dhaka.",
     category: "Banking & Payments",
     date: "September 27, 2026",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
+    references: [
+      {
+        name: "Bangladesh Bank — FEPD-1 Circular No. 33 (6 September 2026): travel entitlement raised to USD 18,000",
+        nameBn: "বাংলাদেশ ব্যাংক — FEPD-1 Circular No. 33 (৬ সেপ্টেম্বর ২০২৬): ভ্রমণ entitlement USD 18,000-এ বৃদ্ধি",
+        url: "https://www.bb.org.bd/mediaroom/circulars/fepd/sep062026fepd-133e.pdf",
+      },
+      {
+        name: "Bangladesh Bank — FEPD-2 Circular No. 01 (7 January 2026): passport endorsement fee by money changers capped at BDT 300",
+        nameBn: "বাংলাদেশ ব্যাংক — FEPD-2 Circular No. 01 (৭ জানুয়ারি ২০২৬): মানি চেঞ্জারের passport endorsement fee সর্বোচ্চ BDT 300",
+        url: "https://www.bb.org.bd/mediaroom/circulars/fepd-2/jan072026fepd-201e.pdf",
+      },
+      {
+        name: "Bangladesh Bank — GFET Volume 1, Chapter 19: payment through international cards (choose local currency, USD 300 single online purchase)",
+        nameBn: "বাংলাদেশ ব্যাংক — GFET Volume 1, Chapter 19: আন্তর্জাতিক কার্ডে পেমেন্ট (local currency বেছে নিন, একবারে USD 300 online purchase)",
+        url: "https://www.bb.org.bd/aboutus/regulationguideline/foreignexchange/feguidevol1/19.pdf",
+      },
+    ],
     internalLinks: [
+      { text: "Money & Banking Hub: endorsement, cards, USD 300 rule and NOC", path: "/banking" },
       { text: "How to Get Dual-Currency Card Endorsement ($18,000 Quota)", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account vs. Regular Travel Quota ($300 Cap Fix)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },

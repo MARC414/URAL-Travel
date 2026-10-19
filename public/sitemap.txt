@@ -1,5 +1,6 @@
 https://ural-travel.pages.dev/
 https://ural-travel.pages.dev/umrah
+https://ural-travel.pages.dev/banking
 https://ural-travel.pages.dev/flights
 https://ural-travel.pages.dev/flights/dhaka-kathmandu
 https://ural-travel.pages.dev/flights/dhaka-bangkok
@@ -105,6 +106,7 @@ https://ural-travel.pages.dev/blog/kkday-10-10-winter-sale-japan-tours-passes-gu
 https://ural-travel.pages.dev/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide
 https://ural-travel.pages.dev/bn/
 https://ural-travel.pages.dev/bn/umrah
+https://ural-travel.pages.dev/bn/banking
 https://ural-travel.pages.dev/bn/flights
 https://ural-travel.pages.dev/bn/flights/dhaka-kathmandu
 https://ural-travel.pages.dev/bn/flights/dhaka-bangkok

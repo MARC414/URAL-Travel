@@ -1,6 +1,8 @@
 # A1-S1 — Shared Claims Ledger: Money Cluster (Bangladesh Bank facts)
 
 **Segment:** A1-S1 (shared ledger for 4 articles) · **Checked:** 16 October 2026
+**Re-checked:** 19 October 2026 — all source URLs re-opened on the live web. M5 upgraded QUALIFIED → **VERIFIED**: its
+primary circular was located (P6). No money figure changed in the re-check.
 **Articles covered:** `dual-currency-card-endorsement-bangladesh`,
 `rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix`,
 `shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah`,
@@ -18,7 +20,8 @@ CONFLICT = sources/articles disagree · UNVERIFIED = not yet sourced · DROP = r
 | P3 | Bangladesh Bank, **GFET Vol-1 Ch. 19 (Payment through International Cards)** — https://www.bb.org.bd/aboutus/regulationguideline/foreignexchange/feguidevol1/19.pdf | Government (primary) | ¶17: online payment **≤ USD 300 per single transaction** for legitimate purchases of goods/services, within unused travel quota + up to $1,000/yr additional. ¶3: international card issued against travel quota with passport endorsement. ¶¶14–16: visa-fee and online hotel-booking uses. |
 | P4 | **EBL (bank) RFCD page** — https://www.ebl.com.bd/retail-deposit/EBL-RFCD-Account | Operator | Deposit ≤ $10,000 on return; **> $10,000 on FMJ must be deposited within 30 days of arrival**; no inward remittance; docs incl. passport with arrival stamp; freely convertible/remittable. |
 | P5 | **SIBL (bank) RFCD page** — https://www.siblbd.com/rfcd-account | Operator | Any FMJ-declared amount + up to $10,000; balances freely transferable abroad incl. onward travel; international debit/credit/prepaid card; max 2 supplementary cards. |
-| S1 | BSS (state news agency), 7 Jan 2026 — https://www.bssnews.net/business/348822 + Daily Star, 7 Jan 2026 | Secondary (strong) | BB circular of 7 Jan 2026 caps **money-changer passport endorsement fee at BDT 300/passport**, regardless of amount; display, receipt, record duties. *BB PDF not yet located — treat as QUALIFIED until P-level confirmation.* |
+| P6 | Bangladesh Bank, **FEPD-2 Circular No. 01, 7 Jan 2026** — https://www.bb.org.bd/mediaroom/circulars/fepd-2/jan072026fepd-201e.pdf | Government (primary) | "Money Changers may charge maximum Taka 300.00 (Three Hundred Taka) for the endorsement of an outgoing passenger's passport, irrespective of the amount." Also: fee must be displayed prominently, a written receipt must be given, records must be kept, and "other relevant instructions shall remain unchanged". Signed Monoar Uddin Ahmed, Director (FEPD-2). Refers back to GFET-2018 Vol-1 ¶6 Ch. 2 (money changers sell notes/coins/TCs to an outgoing resident against the annual private travel entitlement, recorded in passport and air ticket). |
+| S1 | BSS (state news agency), 7 Jan 2026 — https://www.bssnews.net/business/348822 | Secondary (strong) | News of record for the cap: **money-changer passport endorsement fee BDT 300/passport regardless of amount**; display, receipt, record duties. Re-confirmed live 19 Oct 2026. Now corroboration only — the claim itself cites P6. |
 
 ## Ledger — shared claims M1–M5
 
@@ -80,15 +83,25 @@ CONFLICT = sources/articles disagree · UNVERIFIED = not yet sourced · DROP = r
   (rewrite as spread explanation), and unsourced per-destination cash amounts
   (SAR 1,000–1,500 etc.) become labelled planning suggestions, not rules.
 
-### M5 — Money-changer endorsement fee BDT 300 — ⚠️ QUALIFIED (S1; primary PDF pending)
-- Corroborated by BSS + Daily Star + New Age (all 7 Jan 2026): max BDT 300 per passport
-  regardless of amount; fee must be displayed; written receipt; records kept; fee is the
-  **money changer's**, for selling notes/TCs under GFET-2018 — not a bank endorsement fee.
-- Article currently states this correctly in substance ("Bangladesh Bank circular, 7 January
-  2026"). **Fix:** separate it clearly from bank charges (article already does — keep), and at
-  S3 either link the BB circular PDF if located or cite it as "Bangladesh Bank circular,
-  7 January 2026 (fee cap for licensed money changers)".
-- TODO for S3 session: locate the BB PDF filename (FEPD-2 circular, Jan 2026) to upgrade to VERIFIED.
+### M5 — Money-changer endorsement fee BDT 300 — ✅ VERIFIED (P6; S1 corroborates)
+- Primary located: **Bangladesh Bank, FEPD-2 Circular No. 01, dated 7 January 2026** — "Passport Endorsement Fee by Money
+  Changers", signed Monoar Uddin Ahmed, Director (FEPD-2) —
+  https://www.bb.org.bd/mediaroom/circulars/fepd-2/jan072026fepd-201e.pdf. Live on 19 Oct 2026 (`application/pdf`, `%PDF`).
+- Exact wording, ¶02: "Money Changers may charge maximum Taka 300.00 (Three Hundred Taka) for the endorsement of an
+  outgoing passenger's passport, **irrespective of the amount**." ¶03–05 add the duties: display the fee prominently,
+  give a written receipt, keep a proper record. Closing line: "Other relevant instructions shall remain unchanged."
+- Applies to **licensed money changers** selling FC notes/coins/TCs to an outgoing resident under GFET-2018 Vol-1 ¶6
+  Ch. 2 — it is the changer's fee, **not** a bank charge, and it caps the fee, not the purchase.
+- **Safe wording:** "Bangladesh Bank's FEPD-2 Circular No. 01 (7 January 2026) caps a licensed money changer's passport
+  endorsement fee at BDT 300 per passport, whatever the amount; the fee must be displayed and receipted. [P6]"
+- Reading note (honesty about method): bb.org.bd serves an F5 bot challenge to automated clients, so the wording above was
+  read sentence-for-sentence from the Money Changers Association of Bangladesh's copy of the same circular
+  (mcabbd.com, published 7 Jan 2026) while the BB-published file was confirmed live by byte signature. Same document,
+  two hosts.
+- Watch item for the next re-check: **FEPD-2 Circular No. 07 (17 October 2026)**
+  (https://www.bb.org.bd/mediaroom/circulars/fepd-2/oct172026fepd-207e.pdf) is live and its search-index entry carries the
+  same Tk 300 sentence. Its text was not read here, so nothing on the site depends on it; confirm whether No. 07 replaces
+  No. 01 at the next release.
 
 ## Per-article consequences (for S2 briefs — not yet approved)
 
@@ -101,7 +114,10 @@ CONFLICT = sources/articles disagree · UNVERIFIED = not yet sourced · DROP = r
 
 ## Gate result
 
-**S1 complete for shared facts.** Two items remain QUALIFIED by design (M2 practice element,
-M5 pending BB PDF) and are worded safely above. M4 precision is DROP.
+**S1 complete for shared facts.** One item remains QUALIFIED by design (the M2 *practice* element — banks may process a
+larger documented travel payment, but that is a decision, not a right); M5 is now **VERIFIED** against its primary
+circular (P6, 19 October 2026). M4 precision stays DROP.
 ✋ **Owner sign-off requested on the safe wordings M1–M5** before S2 briefs are written.
-No article prose changed in this segment.
+Status of this ledger as a document: the S1 field note above ("no article prose changed in this segment") describes the
+16 October audit only — the Banking & Forex pass executed those wordings on 19 October 2026 and recorded the changes in
+[`CONTENT-QUEUE.md`](CONTENT-QUEUE.md).

@@ -36,7 +36,7 @@ hypothesis per CONTENT-OS; the page's own job does not depend on it.
 | How to avoid DCC abroad? | QD-Section (§5, rule only) + QD-Link → cash/DCC guide | M4 rule without percentages; detail lives on sibling |
 | Shariah-compliant dual-currency cards | **QD-Link only** | Sibling owns it; this page must not borrow its product claims |
 | I have no card — pay in BDT/bKash | **QD-Link only** → `book-flights-makkah-hotels-in-bdt…` | Commercial service page owns it; body §5 (WhatsApp pitch) is **dropped** (see §6) |
-| Money-changer endorsement fee BDT 300 | QD-Section (§2 note) | M5 QUALIFIED wording; clearly separated from bank charges |
+| Money-changer endorsement fee BDT 300 | QD-Section (§2 note) | M5 wording — **VERIFIED 19 Oct 2026** (FEPD-2 Circular No. 01, 7 Jan 2026); clearly separated from bank charges |
 | Named bank products & hotlines (EBL Aqua, 16230…) | **Drop from body** | Perishable, unverified this segment; replaced by "what to ask any AD bank" (see Recommendation R1) |
 
 ## 4. Component table (v2 §3 — brief format)

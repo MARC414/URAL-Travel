@@ -147,7 +147,7 @@ Go to an Authorized Dealer branch of your bank and ask for travel-quota endorsem
 Step 3: Complete the form and get the endorsement recorded
 Complete the bank's travel form (TM form where the bank requires it). The officer records the endorsement in your passport with the bank's seal and signature.
 Step 4: If you use a money changer, check the fee cap
-If you are buying dollar notes from a licensed money changer instead, Bangladesh Bank's circular of 7 January 2026 caps the endorsement fee at BDT 300 per passport regardless of the amount; the fee must be displayed, and you must receive a written receipt [5]. This cap is for money changers — bank charges are separate, so ask your branch for its own schedule before you pay.
+If you are buying dollar notes from a licensed money changer instead, Bangladesh Bank's FEPD-2 Circular No. 01 (7 January 2026) caps the endorsement fee at BDT 300 per passport regardless of the amount; the fee must be displayed, and you must receive a written receipt [5]. This cap is for money changers — bank charges are separate, so ask your branch for its own schedule before you pay.
 Step 5: Activate the card before you travel
 Before you travel, complete the activation step in the next section. Endorsement without activation is the most common reason a card fails at checkout.
 
@@ -1435,38 +1435,35 @@ Unlike Asian attractions where walk-up tickets are often available, Europe and N
 3. HOW TO PAY FOR EUROPEAN/US PASSES & CLAIM UP TO €600 (BDT 78,000) FOR DELAYED FLIGHTS
 - **Paying with a Bangladeshi Dual-Currency Card:** Ensure your passport's **$18,000 annual travel quota** is endorsed at your bank in Dhaka and **3D-Secure USD/EUR E-Commerce** is active so your online **Tiqets** bookings process seamlessly with zero foreign agent markups.
 - **Know Your EU261 / UK261 Passenger Rights (€600 Compensation):** Under **European Union Regulation EC 261/2004** and **UK261**, if your flight departing from Paris, Rome, Frankfurt, Amsterdam, or London (or arriving on an EU/UK carrier) is delayed by **3+ hours** or cancelled, you are legally entitled to up to **€600 / £520 (~BDT 78,000 per passenger)** via **AirHelp**!`,
-  "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah": `When preparing for a sacred journey to **Makkah and Madinah**, ensuring that every Taka spent is 100% pure and free from **Riba (interest)** is a top priority for Bangladeshi pilgrims. Fortunately, you do not need a conventional interest-charging credit card to book your **DIY Umrah flights, Jabal Omar hotels, or Haramain High-Speed Train tickets**. Under **Bangladesh Bank (bb.org.bd)** regulations, you can endorse your **$18,000 annual travel quota (FE/PD-1 Circular No. 33)** onto a **Shariah-Compliant Islamic Dual-Currency Debit or Prepaid Card**.
+  "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah": `When preparing for a sacred journey to **Makkah and Madinah**, many Bangladeshi pilgrims want their travel spending to stay free of **Riba (interest)** — and still book **DIY Umrah flights, Makkah and Madinah hotels and Haramain High-Speed Train tickets** online. You do not need a conventional interest-charging credit card to do that. Since 6 September 2026, Bangladesh Bank allows an authorized dealer (AD) bank to release up to **USD 18,000 per calendar year** for an adult resident's travel abroad; minors under 12 stay at 50% (up to USD 9,000), and at most USD 5,000 of the entitlement may be released as US-dollar notes [1]. The card that spends that foreign exchange can be a **Shariah-compliant dual-currency debit or prepaid card** issued by an Islamic bank or an Islamic banking window.
 
-1. HOW SHARIAH-COMPLIANT DUAL-CURRENCY CARDS AVOID RIBA (INTEREST)
-Conventional credit cards charge compound interest (20%–27% APR) if a balance is carried past the due date. By contrast, Islamic banks and Islamic banking windows in Bangladesh structure their dual-currency cards under two Shariah Supervisory Board-approved principles:
-Rule 1: Mudaraba / Al-Wadiah Dual-Currency Debit & Prepaid Cards (Zero Debt, 100% Own Funds):
-- You deposit your own **Bangladeshi Taka (BDT)** into a Shariah-compliant Mudaraba or Al-Wadiah account. When you pay online in **Saudi Riyals (SAR) or US Dollars (USD)**—or tap your card at a POS terminal in Makkah, Madinah, Dubai, or Kuala Lumpur—the bank converts your own deposited BDT at the daily authorized exchange rate with **zero interest ever charged**.
-Rule 2: Bai-Murabaha / Ujrah Charge Cards (e.g., Khidmah Cards):
-- Instead of lending money on interest, Islamic charge cards operate on a fixed annual management fee (**Ujrah**) with zero compounding late-interest mechanism.
+1. HOW A SHARIAH-COMPLIANT TRAVEL CARD AVOIDS RIBA (INTEREST)
+Islamic banks and Islamic windows in Bangladesh generally offer travel cards on two models. The structure, name and fee differ by bank, so read the description below as a question to put to the branch — not as any one bank's product sheet.
+Rule 1: Debit or prepaid cards that spend your own money:
+- You deposit your own **Bangladeshi Taka (BDT)** into a Mudaraba or Al-Wadiah account. When you pay in **Saudi Riyals (SAR)** or **US Dollars (USD)** — online or at a POS terminal — the bank converts your own deposited balance at its authorized rate. Because the money is yours, no loan and no compounding interest arises.
+Rule 2: Charge cards that use a fixed fee (Ujrah):
+- Some Islamic charge cards operate on a disclosed annual or service fee (**Ujrah**) with a zero-compounding-late-interest mechanism. Ask the bank to show the fee schedule in writing and to explain what happens if a balance is not settled on time.
 
-2. TOP 5 SHARIAH-COMPLIANT ISLAMIC DUAL-CURRENCY CARDS IN BANGLADESH (2026 COMPARISON)
-Compare the leading Islamic dual-currency cards accepted on **sar.hhr.sa (Haramain Train), Nusuk, Aviasales, and Saudi POS terminals**:
-- **1. Islami Bank Bangladesh PLC (IBBL) — Dual-Currency Debit Card & Khidmah Card:**
-  • **Best For:** Pilgrims who already hold an IBBL Mudaraba Savings Account or CellFin app.
-  • **Key Features:** Supports full **$18,000 annual passport endorsement** at any IBBL Authorized Dealer (AD) branch; works seamlessly on Saudi POS machines (Al-Rajhi, SNB) in Makkah and Madinah.
-- **2. The City Bank (City Islamic) — Islamic American Express & Visa Dual-Currency Debit Card:**
-  • **Best For:** Fast 3D-Secure online flight and hotel bookings via the **Citytouch app**.
-  • **Key Features:** Dedicated Shariah supervisory board governance, instant USD Foreign Currency toggle inside Citytouch, and complimentary Balaka Executive Lounge access on select tiers at Dhaka Airport.
-- **3. Eastern Bank PLC (EBL Islamic) — Islamic Dual-Currency Visa/Mastercard Debit Card:**
-  • **Best For:** Reliable international E-Commerce (Haramain Railway, Saudia, Airalo, Klook) via **EBL Skybanking**.
-  • **Key Features:** Strict segregation of Islamic funds under EBL Islamic Window with 24/7 hotline (16230) support to open USD online payment windows for Umrah.
-- **4. Al-Arafah Islami Bank & Shahjalal Islami Bank (SJIBL) — La-Riba Dual-Currency Cards:**
-  • **Best For:** Business owners and families banking with full-fledged Shariah banks who need straightforward passport dollar endorsement and Saudi ATM cash withdrawal access.
-- **5. Standard Chartered Saadiq & BRAC Bank Islamic (Sabbir) Dual-Currency Debit Cards:**
-  • **Best For:** Global acceptance across Saudi Arabia, UAE, Malaysia, Europe, and the UK with instant app-based USD travel quota management.
+2. THE PRODUCT QUESTIONS TO ASK BEFORE YOU APPLY
+Card features change without notice, and a bank's current terms are the only reliable source. Rather than ranking named products from a blog, ask each candidate bank these questions and keep the written answers:
+- **Riba structure:** Is the card a debit or prepaid product that spends my own balance, or a charge card with a fixed Ujrah fee? Exactly what is charged, and when?
+- **Travel quota:** Can I use my passport's endorsed **USD 18,000 annual entitlement** on this card, and does the bank record the release against my passport? [1]
+- **Online activation:** Does the card support international e-commerce and 3D-Secure, and how do I switch on the foreign-currency wallet or toggle in the app?
+- **The USD 300 rule:** A single online purchase on a travel-quota card is generally capped at **USD 300**; for a larger documented flight or hotel payment, ask the bank before you pay, because approval is the bank's decision [2]. A card issued against a Resident Foreign Currency Deposit (RFCD) account is expressly allowed to pay online at the actual amount, but that is a different product — do not assume every Islamic travel card works that way [3].
+- **Acceptance abroad:** Which networks does the card run on, and are there any POS or ATM restrictions in Saudi Arabia?
+- **Fees:** What are the issuance, annual, foreign-exchange and cash-withdrawal fees? Get them in writing.
+- **Shariah basis:** On what Shariah Supervisory Board basis is the card structured, and how are any profit, penalty or charity charges handled?
 
-3. STEP-BY-STEP: HOW TO USE YOUR ISLAMIC CARD FOR HARAMAIN TRAIN & MAKKAH HOTELS
-Step 1: Endorse Your Passport at an AD Branch:
-- Bring your **valid e-Passport/MRP** and **NID** to your bank's Foreign Exchange desk to stamp your annual USD Travel Quota (e.g., $2,000–$5,000 endorsement).
-Step 2: Enable USD E-Commerce & 3D-Secure OTP:
-- Open your bank app or call the helpline 30 minutes before booking on **sar.hhr.sa** or **Aviasales** to turn ON the **USD Foreign Currency + 3D-Secure Online Channel**.
-Step 3: Always Select "SAR" (Saudi Riyal) at Makkah & Madinah POS Terminals:
-- When paying at **Al Baik, Bin Dawood Supermarket, or pharmacies near Masjid al-Haram**, always choose **Local Currency (SAR)** on the card terminal to avoid 5% Dynamic Currency Conversion (DCC) surcharges.`,
+3. STEP BY STEP: USING THE CARD FOR THE HARAMAIN TRAIN AND MAKKAH HOTELS
+Step 1: Endorse your passport at an Authorized Dealer branch:
+- Take your **valid e-Passport** and **NID** to your bank's foreign-exchange desk and ask for the travel entitlement to be recorded against your passport. The ceiling is annual and is released against your travel documents, not automatically.
+Step 2: Activate the card's foreign-currency side:
+- In the bank's app or by phone, switch on the **USD foreign-currency wallet**, **international e-commerce** and **3D-Secure** before you book on **sar.hhr.sa** (Haramain High-Speed Railway) or an airline. Test with a small payment before the flight or hotel checkout.
+Step 3: At a Makkah or Madinah POS terminal, choose the local currency:
+- When the terminal asks, select **SAR (local currency)**. If you press **BDT**, the merchant's bank converts at its own rate, usually with a markup of several percent; the exact markup varies by terminal, so the rule is to choose the local currency rather than trust a fixed percentage.
+
+4. WHAT THIS GUIDE DOES NOT CLAIM
+It does not rank or recommend a specific bank or card, and it is not a promise that a particular transaction will go through. Structures, fees and acceptance differ by bank and change over time. Confirm the current Bangladesh Bank circular and the branch's own card terms before you commit money, and use the cluster guides linked below for the USD 300 payment question and the cash-versus-card decision abroad.`,
   "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": `1. Why the $300 Online-Payment Decline Happens
 A travel-quota card is an international card issued against foreign exchange endorsed in your passport. Bangladesh Bank's general online-payment rule permits a single online purchase of up to USD 300 for legitimate goods or services within the applicable entitlement [1]. Visa-fee payments and online hotel bookings sit in separate GFET paragraphs. In practice, a bank may process a larger documented travel payment such as a flight or hotel booking—but ask before paying, because approval is the issuing bank's decision.
 
@@ -1508,52 +1505,62 @@ Can an RFCD account have supplementary cards?
 SIBL states that its RFCD card facility allows up to two supplementary cards. Treat that as a bank-specific term and check the product you choose [4].
 Does an RFCD card remove POS or ATM limits too?
 The 9 May 2024 Bangladesh Bank circular specifically permits online payment at the actual amount. It does not establish that every POS or ATM limit disappears, so confirm those limits with the issuing bank [2].`,
-  "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": `What happens when you spot a **BDT 56,000 roundtrip Dhaka–Jeddah Umrah flight** or a **BDT 6,500/night hotel near Masjid al-Haram**, but you don't have a **Dual-Currency Card**, your passport dollar endorsement isn't stamped yet, or your bank's $300 e-commerce cap blocks your checkout? For Bangladeshi families in Dhaka, Chattogram, Sylhet, and across the country, paying directly in **Bangladeshi Taka (BDT)** via local banking or mobile financial services (**bKash / Nagad**) is the fastest, zero-stress alternative.
+  "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": `What happens when you spot a good **Dhaka–Jeddah Umrah fare** or a hotel within walking distance of Masjid al-Haram, but you do not have a **dual-currency card**, your passport dollar endorsement is not stamped yet, or your card's single-purchase limit blocks the checkout? For Bangladeshi families in Dhaka, Chattogram, Sylhet and beyond, settling the booking in **Bangladeshi Taka (BDT)** through a local travel desk — by bank transfer, **bKash** or **Nagad** — is one option that does not require a card.
 
-1. WHY SO MANY BANGLADESHI TRAVELERS PREFER BDT ASSISTED BOOKING OVER INTERNATIONAL CARDS
-Even experienced travelers frequently use local BDT settlement for three practical reasons:
-- **1. Preserving Your $18,000 Passport Travel Quota for Overseas Spending:**
-  • When you pay for your **airline tickets (BDT 75,000+) and Makkah/Madinah or Bangkok/KL hotels** in local **BDT** before leaving Bangladesh, your entire **USD $18,000 passport travel quota** stays untouched for shopping, dining, and emergencies abroad!
-- **2. Zero Bank Endorsement Delays or 3D-Secure OTP Failures:**
-  • Airline promotional seats on **Biman, Saudia, AirAsia, Thai Lion Air, and US-Bangla** often sell out in hours. If your passport is currently at an embassy or Umrah agency for visa processing, you physically *cannot* take it to a bank branch for endorsement.
-- **3. Official Hotel Vouchers for Visa & Dhaka Airport Immigration:**
-  • Embassies (**Thailand thaievisa.go.th, Malaysia e-Visa, Singapore AVA**) and **Dhaka Airport (DAC) outbound emigration officers** require a **printed, paid hotel booking voucher** with every guest's name and booking reference.
+1. WHY SOME BANGLADESHI TRAVELLERS CHOOSE A BDT BOOKING DESK
+Settling in Taka is a practical arrangement, not a Bangladesh Bank product. Three reasons travellers use it:
+- **Keeping the passport travel quota for spending abroad:** When flights and hotel vouchers are paid in BDT before departure, the passport's endorsed foreign exchange stays available for spending, dining and emergencies abroad. The entitlement is a ceiling released by the bank against travel documents, not a fixed sum you must spend [1].
+- **When the passport is not available or the card is not ready:** Airline promotional seats can sell out quickly. If your passport is with an embassy or a visa-processing agency, you cannot take it to a branch for endorsement, and a card may not be activated in time.
+- **Paperwork for visa and airport checks:** Embassies and Dhaka airport emigration officers may ask for a paid, confirmed booking showing the guest names and a reference number. A desk issues exactly that.
 
-2. STEP-BY-STEP: HOW TO BOOK YOUR FLIGHT, HOTEL OR TRANSFER IN BDT VIA URAL WHATSAPP DESK
-Our Dhaka support team (**WhatsApp: +8801784385335**) turns any route or hotel you find on URAL into a confirmed, immigration-ready BDT reservation in 3 simple steps:
-Step 1: Choose Your Flight, Hotel Zone, or Airport Transfer on URAL:
-- Use our **Flights Hub**, **Umrah Cost Calculator**, or **Hotel Guides** (Makkah Jabal Omar/Ajyad, Madinah Markazia North, Bangkok Pratunam/Sukhumvit, Kuala Lumpur Bukit Bintang/KLCC, Maafushi Maldives, or Singapore Little India) to pick your exact dates and passenger count.
-Step 2: Send Your Details on WhatsApp (+8801784385335):
-- Message us your **travel dates, route/hotel preference, and passport bio-page scan** (for accurate passenger name spelling on PNR tickets).
-- Within minutes, our desk sends you a transparent **All-Inclusive BDT Quote** (converted at the live bank/GDS rate with zero hidden foreign currency DCC fees).
-Step 3: Pay in BDT via Local Bank Transfer, bKash, or Nagad & Receive Instant PDF Vouchers:
-- Complete payment in **BDT** via any Bangladeshi bank transfer (NPSB/BEFTN/RTGS), **bKash**, or **Nagad**.
-- You receive your **verifiable Airline e-Ticket (with live 6-digit Airline PNR)**, **Confirmed Hotel Voucher PDF**, and **Welcome Pickups / Ziyarah Car Confirmation** directly on WhatsApp and email—ready to print for your Dhaka Airport immigration folder!
+2. WHAT TO VERIFY BEFORE YOU PAY A BOOKING DESK
+A desk settles in Taka and gives you an airline PNR and a hotel voucher. Treat it as a service arrangement between you and the desk, not as a bank product, and check these before paying:
+- **The all-in BDT quote:** Compare the desk's total with the airline's or hotel's own card price for the same date and room, and ask whether any conversion, service or amendment fee is inside the number.
+- **The PNR:** Ask for the airline's six-character PNR and confirm the booking directly with the airline before you treat the ticket as issued.
+- **The voucher:** The hotel voucher should carry every guest's name, the property, the dates and a booking reference the hotel can verify.
+- **Cancellation and refund terms:** Read the airline fare rules and the hotel's cancellation policy in writing, and check who bears the refund if the trip changes.
+- **The recipient:** Pay only to the business account or wallet the desk names in writing, and keep the receipt.
 
-3. WHAT CAN YOU BOOK IN BDT WITHOUT A DUAL-CURRENCY CARD?
-- **🕋 Complete DIY Umrah Components:** 90-Day Saudi Umrah e-Visa + Insurance, Dhaka–Jeddah / Madinah–Dhaka Open-Jaw Flights, Makkah & Madinah Hotels (Walking-Distance or Shuttle), **Haramain High-Speed Bullet Train Tickets**, and Private Makkah/Madinah Ziyarah Cars.
-- **🌏 Asian & Middle East Family Holidays:** Flights, e-Visas, 3-to-5 Star Halal-Friendly Hotels, and Airport Minivans for **Nepal, Thailand, Malaysia, Maldives, Singapore, and Dubai/Abu Dhabi**.`,
-  "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": `Poor currency exchange choices quietly drain **BDT 5,000 to BDT 9,000** from the average Bangladeshi family's travel budget. Whether you are flying from **Dhaka (DAC)** to **Jeddah/Madinah for Umrah**, or heading to **Bangkok, Kuala Lumpur, Singapore, Dubai, or the Maldives**, knowing when to carry **direct local cash (SAR)**, when to carry **crisp $100 USD bills**, and how to swipe your **Dual-Currency Card** without triggering **5% Dynamic Currency Conversion (DCC)** keeps your hard-earned Taka in your pocket.
+3. STEP BY STEP: HOW A BDT BOOKING WORKS
+Step 1: Choose the flight, hotel zone or transfer:
+- Pick the exact dates, passenger count and route or hotel area the desk will quote on, using the flight search and Umrah planning tools on this site.
+Step 2: Send your details:
+- Message the desk your travel dates, route or hotel preference and a passport bio-page scan so the passenger names on the PNR are spelled correctly.
+- The desk replies with an all-inclusive BDT quote converted at its stated rate.
+Step 3: Pay in BDT and receive the documents:
+- Pay by bank transfer, **bKash** or **Nagad**, then receive the airline e-ticket with its PNR, a hotel voucher and any transfer confirmation by email or WhatsApp, ready for the airport folder.
+- Where an Umrah component is involved, confirm the current visa, permit and health requirements on the official Saudi pages before booking rather than relying on a blog [3].
 
-1. UMRAH CURRENCY RULE: BUY SAUDI RIYALS (SAR) IN DHAKA OR CARRY USD?
-This is one of the most frequent questions from Bangladeshi Umrah pilgrims:
-Rule 1: For Cash Expenses (Food, Ziyarah Taxis, Barber, Dates), Buy SAR Directly in Dhaka!
-- **Why?** If you use Bangladeshi Taka (BDT) to buy **US Dollars (USD)** in Dhaka, and then exchange those USD into **Saudi Riyals (SAR)** at a money changer in Makkah or Madinah, you pay the buy-sell exchange spread **twice (BDT → USD → SAR)**, losing roughly **2.5% to 3.5%**.
-- Instead, buy **physical Saudi Riyal (SAR) banknotes (50, 100, and 500 SAR notes, plus small 5 and 10 SAR notes for tips/taxis)** directly from an authorized bank or licensed money changer in Dhaka (Motijheel, Gulshan, Banani, or Baitul Mukarram) and get the SAR amount endorsed on your passport.
-Rule 2: For Hotels, Haramain Train & Supermarkets (Bin Dawood / Al Baik), Tap Your Dual-Currency Card in SAR:
-- Saudi Arabia has nearly 100% contactless POS coverage (\`Mada / Visa / Mastercard\`). Using your endorsed Bangladeshi **Dual-Currency Card** for large expenses means you don't have to carry bulky cash inside your Ihram belt.
+4. WHAT CAN BE SETTLED IN BDT
+- **Umrah components:** flights, Makkah and Madinah hotels, the Haramain High-Speed Train and private transfers, each subject to the traveller holding the right visa or permit and to the airline's and hotel's own terms.
+- **Asian and Middle East holiday components:** flights, hotels and airport transfers for Nepal, Thailand, Malaysia, the Maldives, Singapore and the UAE, again subject to the traveller's own visa status.
 
-2. WHAT IS THE 5% DYNAMIC CURRENCY CONVERSION (DCC) TRAP ON OVERSEAS POS MACHINES?
-Whenever you tap your Bangladeshi Visa, Mastercard, or Amex card at a hotel, mall, or restaurant in **Makkah, Dubai, Bangkok, Kuala Lumpur, or Singapore**, the payment terminal detects a foreign card and pops up a screen asking:
-- *"Choose Currency: [1] Local Currency (SAR / AED / THB / MYR / SGD) OR [2] Home Currency (BDT / USD with Guaranteed Conversion)?"*
-- **THE GOLDEN RULE: ALWAYS SELECT LOCAL CURRENCY (SAR, THB, MYR, AED, SGD)!**
-- If you press "BDT" (or let the cashier press it for you), the overseas merchant's bank applies **Dynamic Currency Conversion (DCC)**—embedding an instant **4.5% to 6.5% markup** on top of the exchange rate! By selecting the **Local Currency**, Visa/Mastercard processes the conversion at official network wholesale rates.
+5. THE CARD ROUTE IS STILL THE DEFAULT FOR MANY TRIPS
+A BDT desk is a useful fallback, not a replacement for a card you control. If you can endorse your passport and activate a dual-currency card in time, your own name and account stay on the booking, the PNR and the receipt. The USD 300 single-online-purchase rule and the bank's decision on a larger documented payment are explained in the cluster guides linked below [2].`,
+  "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": `Poor currency exchange choices quietly drain a family's travel budget. Whether you are flying from **Dhaka (DAC)** to **Jeddah or Madinah** for Umrah, or heading to **Bangkok, Kuala Lumpur, Singapore, Dubai or the Maldives**, three decisions matter most: when to carry **local cash**, when to carry **US dollars**, and how to use a **dual-currency card** at an overseas terminal without converting twice.
 
-3. DESTINATION-BY-DESTINATION CASH VS. CARD CHEAT SHEET FOR BANGLADESHIS
-- **🇸🇦 Saudi Arabia (Makkah & Madinah):** Carry **SAR 1,000–1,500 in cash** (bought in Dhaka) for Bengali restaurants on Ibrahim Al Khalil Road and local Ziyarah taxis + **Dual-Currency Card** (always select SAR on POS).
-- **🇹🇭 Thailand (Bangkok, Pattaya, Phuket):** Carry **crisp, post-2017 $100 USD bills** (no ink stamps, folds, or pinholes!). Exchange only $20–$30 at Suvarnabhumi Airport basement (near Airport Rail Link **SuperRich** booth) and exchange the rest at **SuperRich Thailand (Green or Orange) in Pratunam / Ratchadamri** for the best THB rates in Asia.
-- **🇲🇾 Malaysia (Kuala Lumpur & Putrajaya):** Tap your **Dual-Currency Card** at malls/Grab, and exchange crisp **$100 USD bills** at licensed money changers inside **Mid Valley Megamall, Pavilion Bukit Bintang, or Masjid India** (avoid airport booths which charge 6% worse rates).
-- **🇲🇻 Maldives (Malé & Maafushi) & 🇳🇵 Nepal (Kathmandu):** In the Maldives, guesthouses, $25 speedboats, and $30 snorkeling tours accept **cash USD directly** (bring clean post-2013 $50/$100 bills). In Nepal, exchange USD in **Thamel** or tap your card at hotels.`,
+1. UMRAH CURRENCY: BUY SAUDI RIYALS IN DHAKA, OR CARRY US DOLLARS?
+This is one of the most frequent questions from Bangladeshi pilgrims.
+Rule 1: For everyday cash, buy Saudi Riyals (SAR) directly in Dhaka where you can:
+- If you use Taka to buy **US Dollars** in Dhaka and then exchange those dollars into **Saudi Riyals** at a money changer in Makkah or Madinah, you pay the buy–sell spread twice. Buying SAR directly from an authorized bank or a licensed money changer in Dhaka (for example in Motijheel, Gulshan or Baitul Mukarram) pays one spread instead of two. The exact spread varies by dealer and by day — compare the counter rate rather than trusting a percentage.
+- Licensed money changers are subject to Bangladesh Bank's FEPD-2 Circular No. 01 (7 January 2026), which caps their passport endorsement fee at **BDT 300 per passport** regardless of the amount, and requires the fee to be displayed and receipted [2]. That fee belongs to the money changer, for selling notes, and is separate from any bank charge.
+Rule 2: For hotels, the Haramain train and supermarkets, use a dual-currency card and pay in SAR:
+- Saudi Arabia has wide contactless POS coverage (\`Mada / Visa / Mastercard\`). Using a dual-currency card for larger expenses means you are not carrying bulky cash, and the terminal still works for you if you choose the local currency.
+
+2. THE TERMINAL RULE THAT MATTERS MORE THAN ANY PERCENTAGE
+At a hotel, mall or restaurant overseas, the card terminal may detect a foreign card and offer a choice:
+- *"Pay in [local currency] (SAR / THB / MYR / AED / SGD), or in [home currency] (BDT / USD) with a guaranteed conversion?"*
+- **Choose the local currency.** If you or the cashier choose BDT, the merchant's bank performs **Dynamic Currency Conversion (DCC)** — it converts at its own rate, usually with a markup of several percent above the network rate. Choosing the local currency lets your own bank and card network do the conversion.
+- **There is no fixed DCC percentage.** No regulator or card network publishes one; it is set per merchant and acquirer, so naming a single figure would mislead [3]. The rule is to choose the local currency, every time.
+
+3. DESTINATION NOTES
+- **Saudi Arabia (Makkah and Madinah):** Carry enough SAR cash for restaurants, taxis and tips, and use the card for hotels and larger purchases — always selecting SAR on the terminal. Treat any cash amount as your own planning estimate, not a rule.
+- **Thailand (Bangkok, Pattaya, Phuket):** Exchange dollars at licensed money changers such as the SuperRich offices in Pratunam or Ratchadamri rather than at a single airport booth, and check the counter rate on the day.
+- **Malaysia (Kuala Lumpur):** Use the card at malls and in ride-hailing apps, and compare exchange counters in Mid Valley, Pavilion Bukit Bintang or Masjid India rather than assuming an airport booth is best.
+- **The Maldives (Malé and Maafushi) and Nepal (Kathmandu):** Guesthouses and small operators may accept dollar cash directly; elsewhere, exchange in Thamel or use the card at hotels. Confirm the accepted currency before you commit.
+
+4. BEFORE YOU FLY
+Endorse the passport amount you actually expect to spend, up to the annual ceiling of **USD 18,000** for an adult resident [1], and activate the card's foreign-currency and e-commerce settings as the cluster's endorsement guide explains. Carry a small amount of the destination's own currency for arrival day, keep a backup card and some cash separate from each other, and choose the local currency at every terminal. This guide is a decision map, not a rate promise — confirm current rates and fees with your bank and a licensed money changer.`,
   "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": `Thailand is a popular choice for family holidays, Pratunam shopping, Phuket beaches, and medical travel. Bangladeshi applicants use Thailand's official **e-Visa portal (thaievisa.go.th)**; the Ministry of Foreign Affairs says applications are submitted online and an approved e-Visa confirmation is sent by email. Applicants do not submit passports and supporting papers in person through the current portal flow. Every application remains subject to approval, so no checklist can guarantee a visa.
 
 1. THAILAND OFFICIAL E-VISA: ROUTE, TIMING & FINANCIAL EVIDENCE

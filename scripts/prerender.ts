@@ -35,6 +35,24 @@ import {
   VISA_FREE_FAQS,
 } from "../src/data/visaFreeData";
 import {
+  BANKING_CLUSTER_NODES,
+  BANKING_ENDORSEMENT_STEPS,
+  BANKING_HUB_CLOSING,
+  BANKING_HUB_FAQS,
+  BANKING_HUB_INTRO,
+  BANKING_HUB_LASTMOD,
+  BANKING_HUB_QUICK_ANSWER,
+  BANKING_HUB_REFERENCES,
+  BANKING_HUB_STATS,
+  BANKING_NOC_COPY,
+  BANKING_PAYMENT_METHODS,
+  BANKING_RELATED_HUBS,
+} from "../src/data/bankingHubData";
+// The homepage's four FAQ pairs. One array drives the visible block in
+// dist/index.html, the static FAQPage node, and the React render in App.tsx, so
+// the marked-up answer and the visible answer cannot diverge.
+import { HOME_FAQS, HOME_FAQ_HEADING } from "../src/data/homeFaqs";
+import {
   BASE_URL,
   breadcrumbSchema,
   webPageSchema,
@@ -179,6 +197,48 @@ function injectScheduledBlogDirectory(html: string): string {
   return html.replace(marker, `${links}${links ? "\n            " : ""}${marker}`);
 }
 
+/**
+ * `**bold**` is authored inside body paragraphs. The React view renders it as
+ * `<strong>`, so the crawlable HTML must carry the same emphasis instead of
+ * either leaking the markers as literal text or silently dropping the bold.
+ * Convert AFTER escaping: `*` is not escaped, so the markers survive escapeHtml.
+ */
+function renderInlineEmphasis(escapedText: string): string {
+  return escapedText.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+}
+
+/**
+ * Plain-text rendering for surfaces that are mirrored into JSON-LD (FAQ answers,
+ * HowTo steps). The schema is plain text, so the marked-up copy must match it
+ * exactly — emphasis is dropped on both sides rather than added to one.
+ */
+function stripInlineEmphasis(text: string): string {
+  return text.replace(/\*\*/g, "");
+}
+
+/**
+ * Renders the homepage's visible FAQ block from `HOME_FAQS`.
+ *
+ * `src/index.html` carries only the marker, so the visible question and answer
+ * text and the FAQPage node in the same document are generated from one array.
+ * A missing marker throws rather than shipping a page whose schema describes text
+ * the reader cannot see.
+ */
+function injectHomeFaq(html: string): string {
+  const marker = "<!-- HOME_FAQ -->";
+  if (!html.includes(marker)) {
+    throw new Error("The source homepage is missing the home FAQ marker.");
+  }
+  const sections = HOME_FAQS.map(
+    (faq) =>
+      `          <section>\n            <h3>${escapeHtml(faq.question)}</h3>\n            <p>${escapeHtml(faq.answer)}</p>\n          </section>`
+  ).join("\n");
+  const block = `        <section aria-labelledby="home-faqs">\n          <h2 id="home-faqs">${escapeHtml(
+    HOME_FAQ_HEADING
+  )}</h2>\n${sections}\n        </section>`;
+  return html.replace(`        ${marker}`, block);
+}
+
 function renderVisibleFaqHtml(
   section: ReturnType<typeof getVisibleBlogFaqSection>
 ): string {
@@ -186,7 +246,7 @@ function renderVisibleFaqHtml(
   return `<section aria-labelledby="blog-article-faq-heading"><h2 id="blog-article-faq-heading">${escapeHtml(section.heading)}</h2>${section.questions
     .map(
       (faq) =>
-        `<div><h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p></div>`
+        `<div><h3>${stripInlineEmphasis(escapeHtml(faq.question))}</h3><p>${stripInlineEmphasis(escapeHtml(faq.answer))}</p></div>`
     )
     .join("")}</section>`;
 }
@@ -404,6 +464,32 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
     {
       href: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
       text: "Saudi stopover visa and Umrah routing guide",
+    },
+  ],
+  "/banking": [
+    {
+      href: "/blog/dual-currency-card-endorsement-bangladesh",
+      text: "Passport dollar endorsement and dual-currency card activation",
+    },
+    {
+      href: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
+      text: "RFCD account vs. travel quota and the USD 300 online-payment rule",
+    },
+    {
+      href: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
+      text: "Shariah-compliant Islamic dual-currency cards for Umrah",
+    },
+    {
+      href: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
+      text: "Book flights and hotels in BDT without a dual-currency card",
+    },
+    {
+      href: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
+      text: "Cash, card and choosing the local currency abroad",
+    },
+    {
+      href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go",
+      text: "Dhaka airport outbound immigration checklist for NOC and GO",
     },
   ],
   "/experiences": [
@@ -630,13 +716,15 @@ function addInternalLinkSections(
                 "related-standalone-guides",
                 route.routePath === "/umrah"
                   ? "Related Umrah and Hajj guides"
-                  : route.routePath === "/experiences"
-                    ? "Related attraction and destination guides"
-                    : route.routePath.startsWith("/tools")
-                      ? "Guides for using travel tools"
-                      : route.routePath === "/pre-departure"
-                        ? "Guides to read before you depart"
-                        : "Helpful guides before you contact URAL",
+                  : route.routePath === "/banking"
+                    ? "Related money, card and NOC guides"
+                    : route.routePath === "/experiences"
+                      ? "Related attraction and destination guides"
+                      : route.routePath.startsWith("/tools")
+                        ? "Guides for using travel tools"
+                        : route.routePath === "/pre-departure"
+                          ? "Guides to read before you depart"
+                          : "Helpful guides before you contact URAL",
                 STANDALONE_PAGE_LINKS[route.routePath]
               );
             }
@@ -687,6 +775,70 @@ function addInternalLinkSections(
         route.bodyHtml += langSection;
       }
     }
+  }
+}
+
+/**
+ * Bengali-side counterpart of `addInternalLinkSections`.
+ *
+ * The English shell gives every page two things the Bengali shell did not have:
+ * a link back to its twin in the other language, and a sitewide block of the main
+ * planning hubs. Without them a Bengali page was a dead end for a crawler — it
+ * linked out to Bengali detail pages but never back to English, and the Bengali
+ * homepage carried 20 crawlable hrefs against the English homepage's 110 because
+ * the 50-guide directory that lives in index.html's `<nav>` had no Bengali twin.
+ *
+ * Additive only: this appends sections to `bodyHtml` after the article body, so it
+ * cannot displace content the Bengali renderers already emit. Hub labels come from
+ * `getBengaliRouteSeo`, never from `CATEGORY_HUB_LINKS.text`, so a Bengali page
+ * stays Bengali; only the reciprocal English anchor is English, and it is the
+ * English page's own title, which is what the anchor should describe.
+ */
+function addBengaliLinkSections(
+  bnRoutes: PrerenderRoute[],
+  enByPath: Map<string, PrerenderRoute>
+): void {
+  for (const route of bnRoutes) {
+    const englishPath = toEnglishBasePath(route.routePath);
+    const en = enByPath.get(englishPath);
+    const sections: string[] = [];
+
+    // 1. Reciprocal link to the English twin. English pages have carried the
+    //    mirrored "বাংলায় পড়ুন" section since the locale split; without this the
+    //    hreflang cluster existed in the <head> only, with no editorial path
+    //    between the two language trees.
+    if (englishPath === "/") {
+      sections.push(
+        renderLinkSection("read-in-english", "ইংরেজিতে পড়ুন — Read this page in English", [
+          { href: "/", text: "URAL Travel Intelligence (English homepage)" },
+        ])
+      );
+    } else {
+      sections.push(
+        renderLinkSection("read-in-english", "ইংরেজিতে পড়ুন — Read this page in English", [
+          {
+            href: englishPath,
+            text: en ? stripBrandSuffix(en.title) : "English version",
+          },
+          { href: "/", text: "URAL Travel Intelligence English homepage" },
+        ])
+      );
+    }
+
+    // 2. The Bengali homepage gets the same all-guides directory the English
+    //    homepage carries in index.html's <nav>. `bnDirectory` drops any English
+    //    path without a Bengali twin, so no link here can 404.
+    if (englishPath === "/") {
+      sections.push(
+        bnDirectory("সব বাংলা ট্রাভেল গাইড", BLOG_SLUGS.map((slug) => `/blog/${slug}`))
+      );
+    }
+
+    const sectionHtml = sections.filter(Boolean).join("");
+    if (!sectionHtml) continue;
+    route.bodyHtml = route.bodyHtml.includes("</article>")
+      ? route.bodyHtml.replace("</article>", `${sectionHtml}</article>`)
+      : route.bodyHtml + sectionHtml;
   }
 }
 
@@ -1006,6 +1158,139 @@ function renderCostsHubBody(title: string, description: string, faqSchema: Retur
   </article>`;
 }
 
+/**
+ * Crawlable body for the Banking & Forex hub (/banking) in either locale.
+ *
+ * Every sentence is read from src/data/bankingHubData.ts, which the React page
+ * also renders. The Bengali branch is written in Bengali and never machine
+ * translated from the English one, so the two pages answer the same questions
+ * in their own search language.
+ */
+function renderBankingHubSections(locale: "en" | "bn"): string {
+  const isBn = locale === "bn";
+  const copy = (en: string, bn: string) => (isBn ? bn : en);
+  const href = (path: string) => escapeHtml(isBn ? toBengaliPath(path) : path);
+
+  const stats = `<ul>${BANKING_HUB_STATS.map(
+    (stat) =>
+      `<li><strong>${escapeHtml(stat.value)}</strong> — ${escapeHtml(
+        isBn ? stat.labelBn : stat.label
+      )}</li>`
+  ).join("")}</ul>`;
+
+  const methods = BANKING_PAYMENT_METHODS.map((method) => {
+    const title = escapeHtml(isBn ? method.labelBn : method.label);
+    const bestFor = escapeHtml(isBn ? method.bestForBn : method.bestFor);
+    const rule = escapeHtml(isBn ? method.ruleBn : method.rule);
+    const watch = escapeHtml(isBn ? method.watchBn : method.watch);
+    const label = escapeHtml(isBn ? method.nodeLabelBn : method.nodeLabel);
+    return `<h3>${title}</h3><p><strong>${copy(
+      "Best for:",
+      "কাদের জন্য:"
+    )}</strong> ${bestFor}</p><p><strong>${copy(
+      "The rule:",
+      "যে নিয়মে চলে:"
+    )}</strong> ${rule}</p><p><strong>${copy(
+      "Where it snags:",
+      "যেখানে আটকায়:"
+    )}</strong> ${watch}</p><p><a href="${href(
+      `/blog/${method.nodeSlug}`
+    )}">${label}</a></p>`;
+  }).join("\n");
+
+  const steps = `<ol>${BANKING_ENDORSEMENT_STEPS.steps
+    .map((step) => {
+      const title = escapeHtml(isBn ? step.titleBn : step.title);
+      const body = escapeHtml(isBn ? step.bodyBn : step.body);
+      return `<li><strong>${title}</strong> — ${body}</li>`;
+    })
+    .join("")}</ol>`;
+
+  const nodes = `<ul>${BANKING_CLUSTER_NODES.map((node) => {
+    const title = escapeHtml(isBn ? node.titleBn : node.title);
+    const description = escapeHtml(isBn ? node.descriptionBn : node.description);
+    const kicker = escapeHtml(isBn ? node.kickerBn : node.kicker);
+    return `<li><a href="${href(`/blog/${node.slug}`)}">${title}</a> (${kicker}) — ${description}</li>`;
+  }).join("")}</ul>`;
+
+  const related = `<ul>${BANKING_RELATED_HUBS.map(
+    (hub) =>
+      `<li><a href="${href(hub.path.split("?")[0])}${
+        hub.path.includes("?") ? `?${escapeHtml(hub.path.split("?")[1])}` : ""
+      }">${escapeHtml(isBn ? hub.labelBn : hub.label)}</a></li>`
+  ).join("")}</ul>`;
+
+  const faqs = BANKING_HUB_FAQS.map(
+    (faq) =>
+      `<h3>${escapeHtml(isBn ? faq.questionBn : faq.question)}</h3><p>${escapeHtml(
+        isBn ? faq.answerBn : faq.answer
+      )}</p>`
+  ).join("\n");
+
+  return `
+    <section>
+      <h2>${copy("Quick answer", "সংক্ষিপ্ত উত্তর")}</h2>
+      <p>${escapeHtml(isBn ? BANKING_HUB_QUICK_ANSWER.bn : BANKING_HUB_QUICK_ANSWER.en)}</p>
+      ${stats}
+    </section>
+    <section>
+      <h2>${copy(
+        "Four ways to pay for a trip from Bangladesh",
+        "বিদেশ ভ্রমণের টাকা দেওয়ার চার উপায়"
+      )}</h2>
+      <p>${copy(
+        "Pick by what you already hold, not by which sounds cheapest. Each route below states the rule it runs on and the point where it usually goes wrong.",
+        "আপনার হাতে কী আছে তার ওপর উপায়টি নির্ভর করে — কোনটি শুনতে সস্তা তার ওপর নয়। প্রতিটি উপায়ে নিয়ম ও যে জায়গায় সমস্যা হয়, দুটোই আলাদা করে লেখা আছে।"
+      )}</p>
+      ${methods}
+    </section>
+    <section>
+      <h2>${escapeHtml(
+        isBn ? BANKING_ENDORSEMENT_STEPS.heading.bn : BANKING_ENDORSEMENT_STEPS.heading.en
+      )}</h2>
+      <p>${escapeHtml(
+        isBn ? BANKING_ENDORSEMENT_STEPS.intro.bn : BANKING_ENDORSEMENT_STEPS.intro.en
+      )}</p>
+      ${steps}
+    </section>
+    <section>
+      <h2>${escapeHtml(isBn ? BANKING_NOC_COPY.heading.bn : BANKING_NOC_COPY.heading.en)}</h2>
+      ${BANKING_NOC_COPY.paragraphs
+        .map((paragraph) => `<p>${escapeHtml(isBn ? paragraph.bn : paragraph.en)}</p>`)
+        .join("")}
+      <p><a href="${href(BANKING_NOC_COPY.linkPath)}">${escapeHtml(
+        isBn ? BANKING_NOC_COPY.linkLabel.bn : BANKING_NOC_COPY.linkLabel.en
+      )}</a></p>
+    </section>
+    <section>
+      <h2>${copy(
+        "The five guides in this cluster",
+        "এই ক্লাস্টারের পাঁচটি বিস্তারিত গাইড"
+      )}</h2>
+      ${nodes}
+      ${related}
+    </section>
+    <section>
+      <h2>${copy(
+        "Dollar endorsement, cards and NOC: common questions",
+        "ডলার এনডোর্সমেন্ট, কার্ড ও NOC নিয়ে সাধারণ প্রশ্ন"
+      )}</h2>
+      ${faqs}
+    </section>
+    ${renderArticleReferencesHtml(
+      BANKING_HUB_REFERENCES,
+      locale,
+      BANKING_HUB_LASTMOD.slice(0, 10)
+    )}
+    <section>
+      <p>${escapeHtml(isBn ? BANKING_HUB_CLOSING.bn : BANKING_HUB_CLOSING.en)}</p>
+      <p>${copy(
+        "URAL does not sell tickets or process visas. This page explains the rules; it does not promise an approval.",
+        "URAL টিকিট বিক্রি করে না এবং ভিসা প্রসেস করে না। এই পাতাটি তথ্য দেয়, অনুমোদনের নিশ্চয়তা দেয় না।"
+      )}</p>
+    </section>`;
+}
+
 function buildAllRoutes(): PrerenderRoute[] {
   const routes: PrerenderRoute[] = [];
   const defaultOgImage = `${BASE_URL}/og-image.jpg`;
@@ -1015,30 +1300,10 @@ function buildAllRoutes(): PrerenderRoute[] {
   // already emitted in full on /umrah and on each Hajj/Umrah blog post, so
   // borrowing from it made the same two Q&A pairs appear at three different
   // URLs — answer engines pick one URL per answer and drop the rest.
-  const homeFaq = stripContext(
-    generateFAQSchema([
-      {
-        question: "How do I get a dual-currency card endorsement on a Bangladeshi passport?",
-        answer:
-          "Visit an authorized bank branch in Bangladesh with your original valid passport and NID to endorse up to USD $18,000 per calendar year under the Bangladesh Bank travel quota (FEPD-1 Circular No. 33), then enable E-Commerce and 3D-Secure online transactions in your bank app before booking flights or hotels.",
-      },
-      {
-        question: "What are the top budget-friendly family destinations from Dhaka?",
-        answer:
-          "Nepal (from BDT 42,000 per person with free Visa on Arrival), Malaysia (from BDT 68,000 with 4-day online e-Visa and universal Halal dining), Thailand, and the Maldives local islands (Maafushi and Hulhumalé) are the top budget-friendly family destinations from Dhaka.",
-      },
-      {
-        question: "Which countries can Bangladeshi passport holders visit without a prior visa?",
-        answer:
-          "Nepal and the Maldives grant free Visa on Arrival (with free online IMUGA declaration for the Maldives), while Sri Lanka issues an online Electronic Travel Authorization (ETA via eta.gov.lk) before departure. Bhutan requires an entry permit and a Sustainable Development Fee (SDF of Nu. 1,200/night). Note that Indonesia, Thailand, Malaysia, and Singapore do NOT grant Visa on Arrival to ordinary Bangladeshi passports, so an advance visa is required before flying from Dhaka. Indonesia's e-Visa is generally open to Bangladeshi applicants only through a local sponsor or guarantor, so most travellers apply for an embassy visa. The UAE does not grant visa on arrival to ordinary Bangladeshi passports either: a Dubai or Abu Dhabi tourist visa must be arranged in advance through an airline, hotel, licensed agency or UAE sponsor, and it carries a fee. The UAE is not a visa-free destination for Bangladeshi passports.",
-      },
-      {
-        question: "Is URAL a travel agency that sells tickets?",
-        answer:
-          "No. URAL is an independent outbound travel intelligence desk for Bangladeshi travellers: it publishes flight price guidance in BDT, official visa checklists, itineraries and realistic trip-cost breakdowns, then links out to the airline, hotel or visa portal so you book directly at the source price.",
-      },
-    ])
-  );
+  //
+  // The pairs come from src/data/homeFaqs.ts, which also renders the visible
+  // #home-faqs block in index.html and the runtime schema in src/App.tsx.
+  const homeFaq = stripContext(generateFAQSchema(HOME_FAQS));
   homeFaq["@id"] = `${BASE_URL}/#faq`;
   homeFaq["mainEntityOfPage"] = { "@id": `${BASE_URL}/#webpage` };
 
@@ -1094,6 +1359,44 @@ function buildAllRoutes(): PrerenderRoute[] {
             (f) => `<h3>${escapeHtml(f.question)}</h3><p>${escapeHtml(f.answer)}</p>`
           ).join("\n")}
         </section>
+      </article>
+    `,
+  });
+
+  // 2b. Banking & Forex Hub (/banking)
+  const bankingFaq = stripContext(
+    generateFAQSchema(
+      BANKING_HUB_FAQS.map((faq) => ({
+        question: faq.question,
+        answer: faq.answer,
+      })),
+      {
+        url: `${BASE_URL}/banking`,
+        name: "Banking & Forex Hub for Bangladeshi Travellers (2026)",
+      }
+    )
+  );
+  bankingFaq["@id"] = `${BASE_URL}/banking#faq`;
+  bankingFaq["mainEntityOfPage"] = { "@id": `${BASE_URL}/banking#webpage` };
+
+  routes.push({
+    routePath: "/banking",
+    canonicalUrl: `${BASE_URL}/banking`,
+    title: "Dollar Endorsement Limit, Dual-Currency Card & NOC | URAL",
+    description:
+      "Bangladesh's passport dollar-endorsement limit, dual-currency cards, the USD 300 online-payment rule, RFCD accounts and NOC paperwork, with primary sources.",
+    imageUrl: defaultOgImage,
+    lastmod: BANKING_HUB_LASTMOD,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "Money & Banking Hub", url: `${BASE_URL}/banking` },
+    ],
+    extraGraphNodes: [bankingFaq],
+    bodyHtml: `
+      <article>
+        <h1>Dollar Endorsement, Dual-Currency Cards &amp; NOC: Bangladesh Banking Guide (2026)</h1>
+        <p>${escapeHtml(BANKING_HUB_INTRO.en)}</p>
+        ${renderBankingHubSections("en")}
       </article>
     `,
   });
@@ -2260,7 +2563,13 @@ function buildAllRoutes(): PrerenderRoute[] {
                   buildResponsiveSrcSet(dims.src, "webp")
                 )}" sizes="(max-width: 767px) 100vw, 840px" width="${dims.width}" height="${dims.height}" loading="lazy" alt="${escapeHtml(fig.altEn)}"><figcaption>${escapeHtml(fig.captionEn)}</figcaption></figure>`;
               }
-              return `<p>${escapeHtml(sanitizeExpiredPromoText(String(para)))}</p>`;
+              // `**bold**` is authored in the body and the React view renders it as
+              // <strong>. Emit the same tag here so a no-JS crawler reads the
+              // sentence the reader sees, emphasis included. FAQ answers keep the
+              // markers stripped because they are mirrored into plain-text JSON-LD.
+              return `<p>${renderInlineEmphasis(
+                escapeHtml(sanitizeExpiredPromoText(String(para)))
+              )}</p>`;
             })
             .join("\n")}
           ${renderArticleReferencesHtml(post.references, "en", post.updatedAt)}
@@ -2435,11 +2744,11 @@ function bnParagraphs(
       }
       const faqSection = getVisibleBlogFaqSection(slug || "", rawParagraph, "bn");
       if (faqSection) return renderVisibleFaqHtml(faqSection);
-      const paragraph = rawParagraph.replace(/\n/g, " ").replace(/\*\*/g, "").trim();
+      const paragraph = rawParagraph.replace(/\n/g, " ").trim();
       if (!paragraph) return "";
       return paragraph === "[[figure]]"
         ? figureHtml ?? ""
-        : `<p>${escapeHtml(paragraph)}</p>`;
+        : `<p>${renderInlineEmphasis(escapeHtml(paragraph))}</p>`;
     })
     .filter(Boolean)
     .join("");
@@ -3127,6 +3436,13 @@ function buildBengaliBody(
     return `<article>${parts.join("")}</article>`;
   }
 
+  // The Banking & Forex hub has its own bilingual body: the Bengali page is not
+  // a translation of the English one but answers the same questions in Bengali.
+  if (englishPath === "/banking") {
+    parts.push(renderBankingHubSections("bn"));
+    return `<article>${parts.join("")}</article>`;
+  }
+
   // Home + static/hub pages: Bengali intro plus a directory of the main hubs.
   const hubLinks = [
     { label: "ফ্লাইট গাইড", path: "/flights" },
@@ -3328,6 +3644,22 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
         bnVisaFreeFaq["inLanguage"] = "bn-BD";
         extraGraphNodes.push(bnVisaFreeFaq);
       }
+    } else if (englishPath === "/banking") {
+      // Built from the Bengali answers only, never from the English node, so an
+      // English question cannot reach the Bengali page.
+      const bnBankingFaq = stripContext(
+        generateFAQSchema(
+          BANKING_HUB_FAQS.map((faq) => ({
+            question: faq.questionBn,
+            answer: faq.answerBn,
+          })),
+          { url: canonicalUrl, name: copy.title }
+        )
+      );
+      bnBankingFaq["@id"] = `${canonicalUrl}#faq`;
+      bnBankingFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+      bnBankingFaq["inLanguage"] = "bn-BD";
+      extraGraphNodes.push(bnBankingFaq);
     } else if (englishPath === "/umrah") {
       const bnUmrahFaq = stripContext(
         generateFAQSchema(getLocalizedHajjFaqs("bn"), {
@@ -3916,6 +4248,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
 
     if (r.routePath === "/") {
       pageHtml = injectScheduledBlogDirectory(pageHtml);
+      pageHtml = injectHomeFaq(pageHtml);
       fs.writeFileSync(path.join(DIST_DIR, "index.html"), pageHtml, "utf8");
     } else if (r.routePath === "/bn") {
       // The Bengali home is served as a directory index so that /bn/ (the
@@ -3976,6 +4309,10 @@ function main() {
   // (the English renderer would inject English anchor text into /bn pages).
   const bnByCanonicalUrl = new Map(bnRoutes.map((r) => [r.canonicalUrl, r]));
   addInternalLinkSections(enRoutes, bnByCanonicalUrl);
+  // Bengali bodies carry their own Bengali links; this adds the reciprocal
+  // English link and the homepage directory the Bengali tree was missing.
+  const enByPath = new Map(enRoutes.map((route) => [route.routePath, route]));
+  addBengaliLinkSections(bnRoutes, enByPath);
   applySharedSeoCopy(enRoutes, "en");
   applySharedSeoCopy(bnRoutes, "bn");
   warnIfContentDateStale();

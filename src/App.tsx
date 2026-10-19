@@ -47,6 +47,8 @@ import { FlightRoute, HotelGuide, VisaGuide, DestinationGuide, TripCostData, Blo
 import { BLOG_SLUGS } from "./data/blogIndex";
 import { SCHEDULED_BLOG_COVER_IMAGES } from "./data/scheduledBlogIndex.generated";
 import { SCHEDULED_BLOG_SNIPPETS } from "./data/scheduledBlogSeo.generated";
+import type { BankingFaq } from "./data/bankingHubFaqs";
+import { HOME_FAQS, HOME_FAQ_HEADING } from "./data/homeFaqs";
 
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
@@ -173,6 +175,9 @@ const VisaFreeCountriesRouteView = React.lazy(() => import("./routes/VisaFreeCou
 
 const UmrahLandingPage = React.lazy(() =>
   import("./components/UmrahLandingPage").then((m) => ({ default: m.UmrahLandingPage }))
+);
+const BankingHubLandingPage = React.lazy(() =>
+  import("./components/BankingHubLandingPage").then((m) => ({ default: m.BankingHubLandingPage }))
 );
 const KkdayHotelsPage = React.lazy(() =>
   import("./components/KkdayHotelsPage").then((m) => ({ default: m.KkdayHotelsPage }))
@@ -656,13 +661,13 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide":
       "Bangladeshi passport holders with a valid used US, UK, or Schengen visa qualify for an instant 1-year Saudi e-Visa or Visa on Arrival to perform Umrah on their return leg. In Paris, London, Rome, and New York, pre-book official Tiqets skip-the-line passes to avoid 2.5-hour museum queues.",
     "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah":
-      "Top Shariah-compliant Riba-free cards in Bangladesh for Umrah and Halal travel include Islami Bank (IBBL) Dual-Currency Debit & Khidmah Card, City Islamic Amex/Visa, EBL Islamic Debit Card, Al-Arafah La-Riba, and Standard Chartered Saadiq—all supporting the $18,000 passport travel quota (FE Circular 33) for Haramain Train and Makkah hotel bookings.",
+      "Shariah-compliant dual-currency cards are issued by Islamic banks and Islamic windows in Bangladesh: a debit or prepaid card spends your own endorsed foreign exchange, while a charge card uses a fixed Ujrah fee instead of interest. Structures, fees and features differ by bank, so ask each bank about its own product; the USD 18,000 passport travel entitlement and the USD 300 single online-purchase rule apply whoever issued the card.",
     "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix":
       "Bangladesh Bank generally caps a single online purchase on a travel-quota card at USD 300. For a larger documented flight or hotel payment, ask your bank before checkout; approval is its decision. An RFCD card may pay online at the actual amount, but the account can hold only foreign cash brought back from travel.",
     "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card":
       "Travelers without an endorsed Dual-Currency Card can message the URAL Dhaka Desk on WhatsApp (+8801784385335) to book confirmed airline PNR tickets, Makkah/Madinah or Asian hotel vouchers, and Haramain train tickets in Bangladeshi Taka (BDT) via local bank transfer, bKash, or Nagad.",
     "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide":
-      "For Umrah, buy Saudi Riyals (SAR) directly in Dhaka for daily cash expenses to avoid losing 3% on double conversion (BDT→USD→SAR). When tapping your Dual-Currency Card at hotels or malls in Makkah, Bangkok, or Kuala Lumpur, always select 'Local Currency' on the POS terminal to avoid 5% DCC fees.",
+      "For Umrah, buying Saudi Riyals (SAR) directly in Dhaka for daily cash spending avoids paying the buy–sell spread twice (BDT→USD→SAR). At any card terminal abroad, choose the local currency: if you pick BDT, the merchant's bank converts at its own rate, usually with a markup of several percent. There is no fixed DCC percentage — the markup varies by terminal, so the rule is to choose local currency.",
     "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide":
       "Thailand's official e-Visa portal handles applications, but approval and timing are not guaranteed. The Dhaka TR checklist (updated Nov 30, 2022) lists BDT 60,000 per person or BDT 120,000 per family; confirm current requirements. Check the live government fee; bank/payment charges and optional agency fees are separate.",
     "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration":
@@ -751,13 +756,13 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide":
       "বাংলাদেশি পাসপোর্টে বৈধ ও একবার ব্যবহৃত (Used) US, UK বা Schengen ভিসা থাকলে ফেরার পথে তাৎক্ষণিক ১ বছরের সৌদি ই-ভিসা নিয়ে ওমরাহ করা যায়। এছাড়া প্যারিসের লুভর, আইফেল টাওয়ার, লন্ডন আই ও রোমের কলোসিয়ামে ২–৩ ঘণ্টার লাইন এড়াতে Tiqets স্কিপ-দ্য-লাইন পাস বুক করুন।",
     "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah":
-      "ওমরাহ ও হালাল ভ্রমণে সুদমুক্ত (Riba-Free) লেনদেনের জন্য ইসলামী ব্যাংক (IBBL) ডুয়াল-কারেন্সি ডেবিট ও খিদমাহ কার্ড, সিটি ইসলামিক অ্যামেক্স/ভিসা, ইবিএল ইসলামিক, আল-আরাফাহ লা-রিবা এবং স্ট্যান্ডার্ড চার্টার্ড সাদিক কার্ডে $18,000 পাসপোর্ট এনডোর্সমেন্ট (FE Circular 33) করে হারামাইন ট্রেন ও মক্কার হোটেল বুক করা যায়।",
+      "বাংলাদেশে ইসলামি ব্যাংক ও ইসলামিক উইন্ডো শরীয়াহ-সম্মত ডুয়েল-কারেন্সি কার্ড দেয়: ডেবিট বা প্রিপেইড কার্ড আপনার নিজের এনডোর্স করা বৈদেশিক মুদ্রা খরচ করে, আর চার্জ কার্ড সুদের বদলে নির্দিষ্ট উজরাহ ফি নেয়। গঠন, ফি ও সুবিধা ব্যাংকভেদে আলাদা, তাই প্রতিটি ব্যাংকের নিজের পণ্য সম্পর্কে জেনে নিন; USD 18,000 পাসপোর্ট ট্রাভেল entitlement ও USD 300 একবারের অনলাইন-কেনাকাটার নিয়ম যে কার্ডেই প্রযোজ্য।",
     "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix":
       "Bangladesh Bank-এর সাধারণ rule-এ travel-quota card দিয়ে একবারে online purchase-এর limit USD 300। বড় documented flight বা hotel payment-এর জন্য checkout-এর আগে bank-কে বলুন; approval তাদের সিদ্ধান্ত। RFCD card online-এ প্রকৃত amount payment করতে পারে, তবে account-এ শুধু travel থেকে সঙ্গে আনা foreign cash রাখা যায়।",
     "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card":
       "হাতে এনডোর্স করা Dual-Currency Card না থাকলে সরাসরি URAL-এর ঢাকা WhatsApp ডেস্কে (+8801784385335) যোগাযোগ করে দেশীয় ব্যাংক ট্রান্সফার, bKash বা Nagad-এ (BDT) পেমেন্ট করেই কনফার্মড ফ্লাইট PNR, মক্কা/মদিনা বা এশিয়ার হোটেল ভাউচার ও হারামাইন ট্রেন টিকিট বুক করতে পারেন।",
     "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide":
-      "ওমরাহর হাতখরচের জন্য ঢাকা থেকেই সরাসরি নগদ সৌদি রিয়াল (SAR) কিনলে ডাবল কনভার্সন (BDT→USD→SAR) লস বাঁচে। আর মক্কা, ব্যাংকক বা কুয়ালালামপুরে কার্ড পাঞ্চ করার সময় POS মেশিনে সবসময় 'Local Currency' সিলেক্ট করবেন—এতে ৫% অতিরিক্ত DCC চার্জ কাটবে না।",
+      "ওমরাহর হাতখরচের জন্য ঢাকা থেকেই সরাসরি নগদ সৌদি রিয়াল (SAR) কিনলে BDT→USD→SAR দুইবার spread দিতে হয় না। আর বিদেশে যেকোনো POS মেশিনে সবসময় local currency বেছে নিন: BDT বেছে নিলে merchant-এর ব্যাংক নিজের হারে (সাধারণত কয়েক শতাংশ markup-এ) convert করে। DCC-এর নির্দিষ্ট শতাংশ নেই—টার্মিনালভেদে বদলায়।",
     "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide":
       "Thailand-এর official e-Visa portal-এ আবেদন করুন; approval বা সময় নিশ্চিত নয়। Dhaka-র TR checklist (হালনাগাদ ৩০ নভেম্বর ২০২২) জনপ্রতি BDT 60,000/পরিবারে BDT 120,000 উল্লেখ করে—বর্তমান requirement যাচাই করুন। সরকারি fee, bank/payment charge ও optional agency fee আলাদা।",
     "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration":
@@ -825,7 +830,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
   return `${cleanWords.slice(0, 50).join(" ").replace(/[.,;:!?-]+$/, "")}...`;
 }
 
-type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "umrah" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "privacy" | "about" | "notFound";
+type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "privacy" | "about" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
@@ -1088,6 +1093,9 @@ export default function App() {
   // Route content is a dynamic dependency: a homepage visit needs only the
   // tiny blog URL index, not every flight/hotel/visa/destination/blog record.
   const [contentData, setContentData] = useState<typeof import("./constants") | null>(null);
+  // The Banking & Forex hub's FAQ pairs live in the hub's lazy chunk: importing
+  // them into the entry graph pushed the homepage over its gzip budget.
+  const [bankingFaqs, setBankingFaqs] = useState<BankingFaq[] | null>(null);
 
   // The document language is baked into index.html as lang="en", but the UI can
   // switch to Bengali entirely client-side. Without this, <html lang> keeps
@@ -1424,6 +1432,9 @@ export default function App() {
     } else if ((root === "umrah" || root === "hajj") && segs.length === 1) {
       section = "umrah";
       isLanding = true;
+    } else if (root === "banking" && segs.length === 1) {
+      section = "banking";
+      isLanding = true;
     } else if (root === "tools" && segs.length <= 2) {
       // Canonical tool paths: /tools/<slug> (e.g. /tools/flight-delay-claim).
       // An unknown slug deliberately falls through to notFound (noindex) so a
@@ -1641,6 +1652,21 @@ export default function App() {
     };
   }, [mobileMenuOpen]);
 
+  // Fetch the Banking & Forex hub FAQ pairs only when the hub is opened, then
+  // let useSeoMeta rebuild the graph with the FAQPage node. Until it lands the
+  // page keeps its breadcrumbs, and dist/banking.html already ships the static
+  // FAQPage node, so the live graph never describes text the page does not show.
+  useEffect(() => {
+    if (section !== "banking" || bankingFaqs) return;
+    let cancelled = false;
+    void import("./data/bankingHubFaqs").then((mod) => {
+      if (!cancelled) setBankingFaqs(mod.BANKING_HUB_FAQS);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [section, bankingFaqs]);
+
   // Dynamically compute metadata and schema
   let seoTitle = "URAL — Compare Flights, Hotels & Visa Guides for Bangladeshi Travelers";
   let seoDescription = "Compare flight prices from Dhaka to Nepal, Thailand, Malaysia and Dubai, check visa requirements step by step, and plan your trip budget in BDT.";
@@ -1651,28 +1677,9 @@ export default function App() {
 
   if (section === "home") {
     if (!isBn) {
-      seoSchema = generateFAQSchema([
-        {
-          question: "How do I get a dual-currency card endorsement on a Bangladeshi passport?",
-          answer:
-            "Visit your authorised dealer bank with your original passport and NID. Under Bangladesh Bank FEPD-1 Circular No. 33 (6 September 2026), banks may release up to USD 18,000 per calendar year to an adult Bangladeshi resident, with US dollar cash notes capped at USD 5,000 per person within that limit. Confirm the endorsement process with your bank, then enable e-commerce and 3D Secure in your bank app before booking abroad.",
-        },
-        {
-          question: "What are the top budget-friendly family destinations from Dhaka?",
-          answer:
-            "Nepal (from BDT 42,000 per person with free Visa on Arrival), Malaysia (from BDT 68,000 with 4-day online e-Visa and universal Halal dining), Thailand, and the Maldives local islands (Maafushi and Hulhumalé) are the top budget-friendly family destinations from Dhaka.",
-        },
-        {
-          question: "Which countries can Bangladeshi passport holders visit without a visa before departure?",
-          answer:
-            "According to the July 2026 Henley Passport Index, six Asian destinations are accessible without a traditional visa obtained in advance: Nepal, Bhutan, the Maldives, Cambodia and Timor-Leste (visa-free or on arrival) and Sri Lanka (online ETA). Henley is a ranking, not a government source, so confirm fees, stay limits and entry conditions on each country's official immigration site before booking.",
-        },
-        {
-          question: "Is URAL a travel agency that sells tickets?",
-          answer:
-            "No. URAL is an independent outbound travel intelligence desk for Bangladeshi travellers: it publishes flight price guidance in BDT, official visa checklists, itineraries and realistic trip-cost breakdowns, then links out to the airline, hotel or visa portal so you book directly at the source price.",
-        },
-      ]);
+      // Same array that renders the visible #home-faqs section below and the
+      // static FAQPage node in scripts/prerender.ts. See src/data/homeFaqs.ts.
+      seoSchema = generateFAQSchema(HOME_FAQS);
     }
     seoBreadcrumbs = [
       { name: "Home", url: siteUrl("/", lang) }
@@ -2235,6 +2242,37 @@ export default function App() {
       { name: "Home", url: siteUrl("/", lang) },
       { name: "Umrah & Hajj Hub", url: umrahUrl }
     ];
+  } else if (section === "banking") {
+    const bankingUrl = siteUrl("/banking", lang);
+    seoTitle = isBn
+      ? getBengaliSeoCopy("/banking")?.title || "ডলার এনডোর্সমেন্ট ও ডুয়েল কারেন্সি কার্ড | URAL"
+      : "Dollar Endorsement Limit, Dual-Currency Card & NOC | URAL";
+    seoDescription = isBn
+      ? getBengaliSeoCopy("/banking")?.description ||
+        "পাসপোর্টে ডলার এনডোর্সমেন্টের সীমা, ডুয়েল কারেন্সি কার্ড, USD 300 অনলাইন নিয়ম, RFCD ও NOC — বাংলাদেশ ব্যাংকের সূত্রসহ।"
+      : "Bangladesh's passport dollar-endorsement limit, dual-currency cards, the USD 300 online-payment rule, RFCD accounts and NOC paperwork, with primary sources.";
+    const bankingFaqPairs = bankingFaqs?.map((faq) => ({
+      question: isBn ? faq.questionBn : faq.question,
+      answer: isBn ? faq.answerBn : faq.answer,
+    }));
+    const bankingFaqNode = bankingFaqPairs
+      ? (generateFAQSchema(bankingFaqPairs, {
+          url: bankingUrl,
+          name: isBn
+            ? getBengaliSeoCopy("/banking")?.title || "ব্যাংকিং ও ফরেক্স হাব"
+            : "Banking & Forex Hub for Bangladeshi Travellers (2026)",
+        }) as unknown as Record<string, unknown>)
+      : undefined;
+    if (bankingFaqNode) {
+      bankingFaqNode["@id"] = `${bankingUrl}#faq`;
+      bankingFaqNode["mainEntityOfPage"] = { "@id": `${bankingUrl}#webpage` };
+      bankingFaqNode["inLanguage"] = pageLanguage;
+      seoSchema = bankingFaqNode;
+    }
+    seoBreadcrumbs = [
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: "Money & Banking Hub", url: bankingUrl }
+    ];
   } else if (section === "preDeparture") {
     const preDepartureUrl = siteUrl("/pre-departure", lang);
     seoTitle = "Dhaka Airport (DAC) Pre-Departure Checklist & Helplines | URAL";
@@ -2298,6 +2336,7 @@ export default function App() {
     if (section === "blog") return isLanding ? "/blog" : `/blog/${parameterId}`;
     if (section === "experiences") return "/experiences";
     if (section === "umrah") return "/umrah";
+    if (section === "banking") return "/banking";
     if (section === "kkdayHotels") return "/kkday-hotels";
     if (section === "visaFree") return "/visa-free-countries";
     if (section === "preDeparture") return "/pre-departure";
@@ -3008,9 +3047,9 @@ export default function App() {
                     id="nav-tools-megamenu"
                     href={getLocalizedRouteHref("/tools")}
                     onClick={(event) => handleNavigationAnchorClick(event, "/tools")}
-                    aria-current={["costs", "tools", "contact", "sitemap"].includes(section) ? "page" : undefined}
+                    aria-current={["costs", "tools", "contact", "sitemap", "banking"].includes(section) ? "page" : undefined}
                     className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
-                      ["costs", "tools", "contact", "sitemap"].includes(section)
+                      ["costs", "tools", "contact", "sitemap", "banking"].includes(section)
                         ? "text-[#F6B73C] font-semibold"
                         : "text-slate-300"
                     }`}
@@ -3088,6 +3127,13 @@ export default function App() {
                         label: isBn ? "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)" : "IATA Airport Codes Directory",
                         sub: isBn ? "DAC সহ বিশ্বব্যাপী কোড ও টার্মিনাল" : "DAC & worldwide codes with terminals",
                         path: "/tools/airport-codes",
+                      },
+                      {
+                        id: "banking",
+                        icon: CreditCard,
+                        label: isBn ? "ডলার এনডোর্সমেন্ট ও ডুয়েল কারেন্সি কার্ড" : "Dollar Endorsement & Dual-Currency Cards",
+                        sub: isBn ? "USD 18,000 সীমা, $300 নিয়ম ও NOC" : "USD 18,000 ceiling, $300 rule & NOC",
+                        path: "/banking",
                       },
                       {
                         id: "pre-departure",
@@ -3341,13 +3387,19 @@ export default function App() {
                       subtitle: isBn
                         ? "বিস্তারিত গাইড · ৫ দিনের খরচ"
                         : "In-depth guides · 5-day BDT sheets",
-                      isActiveGroup: ["blog", "costs"].includes(section),
+                      isActiveGroup: ["blog", "costs", "banking"].includes(section),
                       primaryLinks: [
                         {
                           id: "blog",
                           label: isBn ? "সবগুলো ট্রাভেল ব্লগ" : "All Travel Blog Guides",
                           meta: isBn ? "ওমরাহ, কার্ড এন্ডোর্সমেন্ট ও ইমিগ্রেশন" : "Umrah, Card Endorsement & Visas",
                           path: "/blog",
+                        },
+                        {
+                          id: "banking",
+                          label: isBn ? "ডলার এন্ডোর্সমেন্ট ও ব্যাংকিং হাব" : "Dollar Endorsement & Banking Hub",
+                          meta: isBn ? "USD 18,000 সীমা, $300 নিয়ম ও NOC" : "USD 18,000 ceiling, $300 rule & NOC",
+                          path: "/banking",
                         },
                         {
                           id: "costs",
@@ -3360,6 +3412,10 @@ export default function App() {
                         {
                           label: isBn ? "কার্ড এন্ডোর্সমেন্ট" : "Card Endorsement",
                           path: "/blog/dual-currency-card-endorsement-bangladesh",
+                        },
+                        {
+                          label: isBn ? "ব্যাংকিং হাব" : "Banking Hub",
+                          path: "/banking",
                         },
                         {
                           label: isBn ? "ঢাকা ইমিগ্রেশন" : "DAC Immigration",
@@ -4565,6 +4621,15 @@ export default function App() {
       )}
 
       {/* -------------------------------------------------------------
+          VIEW 14: BANKING & FOREX CLUSTER HUB (/banking)
+      ------------------------------------------------------------- */}
+      {section === "banking" && (
+        <React.Suspense fallback={null}>
+          <BankingHubLandingPage lang={lang} onNavigate={navigateTo} />
+        </React.Suspense>
+      )}
+
+      {/* -------------------------------------------------------------
           ✈️ VIEW 10: DHAKA AIRPORT (DAC) PRE-DEPARTURE HUB + SITE DIRECTORY
           Two canonical URLs, one component: /pre-departure renders the
           checklist variant, /sitemap renders the directory variant.
@@ -4702,6 +4767,27 @@ export default function App() {
               );
             })}
           </div>
+        </section>
+      )}
+
+      {/* -------------------------------------------------------------
+          VIEW 13: HOMEPAGE FAQ (visible text + FAQPage schema)
+          Rendered from src/data/homeFaqs.ts, the same array the prerenderer
+          writes into dist/index.html. Without this, the static FAQ was the
+          only copy and React removed it on mount, leaving the FAQPage node
+          describing text that was no longer on the page.
+      ------------------------------------------------------------- */}
+      {section === "home" && !isBn && (
+        <section aria-labelledby="home-faqs" className="mt-10 space-y-4">
+          <h2 id="home-faqs" className="ural-section-title font-serif text-2xl font-black text-brand-navy sm:text-3xl">
+            {HOME_FAQ_HEADING}
+          </h2>
+          {HOME_FAQS.map((faq) => (
+            <div key={faq.question} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+              <h3 className="font-serif text-lg font-bold text-brand-navy">{faq.question}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-700">{faq.answer}</p>
+            </div>
+          ))}
         </section>
       )}
 

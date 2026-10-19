@@ -43,6 +43,11 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "Plan Umrah from Dhaka with a BDT cost framework, Saudi visa and Nusuk guidance, Makkah–Madinah travel options, and a practical preparation checklist.",
   },
+  "/banking": {
+    title: "Dollar Endorsement Limit, Dual-Currency Card & NOC | URAL",
+    description:
+      "Bangladesh's passport dollar-endorsement limit, dual-currency cards, the USD 300 online-payment rule, RFCD accounts and NOC paperwork, with primary sources.",
+  },
   "/flights": {
     title: "Flights from Dhaka: Routes, Fares & Airlines | URAL",
     description:
@@ -687,6 +692,11 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
     title: "বাংলাদেশ থেকে ওমরাহ খরচ: নিজে করুন গাইড ও নুসুক | URAL",
     description:
       "ঢাকা থেকে ওমরাহ পরিকল্পনা করুন — টাকায় খরচের কাঠামো, সৌদি ভিসা ও নুসুক গাইড, মক্কা–মদিনা যাতায়াত এবং প্রস্তুতির চেকলিস্টসহ।",
+  },
+  "/banking": {
+    title: "পাসপোর্টে ডলার এনডোর্সমেন্ট সীমা, ডুয়েল কারেন্সি কার্ড ও NOC | URAL",
+    description:
+      "পাসপোর্টে ডলার এনডোর্সমেন্টের সীমা, ডুয়েল কারেন্সি কার্ড, USD 300 অনলাইন নিয়ম, RFCD account ও NOC — বাংলাদেশ ব্যাংকের সূত্রসহ যাচাই করা গাইড।",
   },
   "/visa": {
     title: "বাংলাদেশি নাগরিকদের জন্য ভিসা গাইড | URAL",

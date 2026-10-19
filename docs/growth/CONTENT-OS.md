@@ -21,11 +21,14 @@ Read these documents in this order before a content task:
 7. The target article and its live code/build representation — do not assume the metadata, body, localized content, or references are already in sync.
 
 **Before item 2 sets your agenda, read the active cluster plan when one exists** — currently
-[`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md). Item 2 supplies the site-wide inventory, the gap register and the
-scoring model; the cluster plan supplies the release order, page ownership and per-wave gates for the cluster being
-built. Where the two disagree about *what to build next*, the cluster plan and the queue row win. Today that means
-the **Umrah cluster is in progress**, **Fard Hajj stays a separate linked topic** (its own registration/package
-page, not an Umrah child), and the India pillar in `CONTENT-STRATEGY-2026.md` §5/§6/§12 is an unscheduled gap.
+[`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md) (opened 19 October 2026), with
+[`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md) still valid for the Umrah cluster. Item 2 supplies the site-wide
+inventory, the gap register and the scoring model; a cluster plan supplies the release order, page ownership and
+per-wave gates for the cluster being built. Where the two disagree about *what to build next*, the cluster plan and the
+queue row win. Today that means the **Banking & Forex cluster is the open work** (hub `/banking`, five live node owners,
+evidence base [`A1-CLAIMS-LEDGER.md`](A1-CLAIMS-LEDGER.md) M1–M5), the **Umrah cluster's remaining waves are paused, not
+closed**, **Fard Hajj stays a separate linked topic** (its own registration/package page, not an Umrah child), and the
+India pillar in `CONTENT-STRATEGY-2026.md` §5/§6/§12 is an unscheduled gap.
 
 If a source, legal rule, code contract, or owner instruction appears to conflict with a content requirement, stop before drafting or changing the live claim. Record the exact conflict, source, date checked, and the narrow decision needed. Do not silently “resolve” a high-impact legal or cost discrepancy.
 
