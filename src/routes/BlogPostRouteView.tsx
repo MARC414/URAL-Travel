@@ -1,3 +1,5 @@
+import { TravellerCheckNote } from "../components/TravellerCheckNote";
+import { getTravellerCheck } from "../utils/travellerChecks";
 import React from "react";
 
 import { BLOG_DATA } from "../constants";
@@ -30,6 +32,7 @@ type RouteViewProps = { context: Record<string, any> };
 
 
 const UMRAH_GUIDE_SLUG = "umrah-hajj-guide-bangladesh-nusuk-bdt-cost";
+const NUSUK_GUIDE_SLUG = "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit";
 const UMRAH_BUDGET_TABLE_MARKER = "[[UMRAH_BUDGET_TABLE]]";
 const HAJJ_RESOURCE_DOWNLOAD_MARKER = "[[HAJJ_RESOURCE_DOWNLOAD]]";
 const HAJJ_RESOURCE_DOWNLOAD_SLUG = "hajj-registration-bangladesh-government-vs-private-package-cost";
@@ -95,8 +98,8 @@ function UmrahBudgetTable({ isBengali }: { isBengali: boolean }) {
       </h2>
       <p className="text-sm leading-relaxed text-slate-700">
         {isBengali
-          ? "চারজনের পরিবারের রুম-শেয়ারের আগের প্রকাশিত হিসাবটি রাখা হয়েছে; ১৪ অক্টোবর ২০২৬-এ নতুন করে দাম যাচাই করা হয়নি।"
-          : "The previously published family-of-four-sharing figure is retained; it was not re-priced on 14 October 2026."}
+          ? "১৪ অক্টোবর ২০২৬-এ রাখা চারজনের পরিবারের রুম-শেয়ারের পুরোনো reference বহাল আছে; ১৯ অক্টোবর ২০২৬-এ নতুন দাম যাচাই করা হয়নি।"
+          : "The family-of-four-sharing reference carried forward on 14 October 2026 is retained; it was not re-priced on 19 October 2026."}
       </p>
       <div className="overflow-x-auto rounded-xl border border-slate-200">
         <table className="min-w-[42rem] w-full border-collapse text-left text-sm">
@@ -1057,6 +1060,10 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
 
+                          if (getTravellerCheck(trimmed)) {
+                            return <TravellerCheckNote key={bIdx} paragraph={trimmed} />;
+                          }
+
                           // In-article editorial figure (opt-in via post.inlineFigure)
 
                           if (trimmed === "[[figure]]") {
@@ -1884,7 +1891,11 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                       {/* Visible Hajj, Umrah & Ziyarah Preparation FAQs (Matches JSON-LD FAQPage Schema 100%) */}
 
                       {(activePost.category === "Hajj & Umrah" || activePost.category === "Ziyarah & Stopovers") &&
-                        activePost.slug !== UMRAH_GUIDE_SLUG && (
+                        activePost.slug !== UMRAH_GUIDE_SLUG && activePost.slug !== NUSUK_GUIDE_SLUG &&
+                        activePost.slug !== "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" &&
+                        activePost.slug !== "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" &&
+                        activePost.slug !== "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" &&
+                        activePost.slug !== "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" && (
 
                         <TravelIntelligence
 
@@ -1967,7 +1978,11 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                         <p className="text-[13px] text-slate-200 leading-relaxed">
 
-                          {activePost.slug === UMRAH_GUIDE_SLUG
+                          {activePost.slug === NUSUK_GUIDE_SLUG
+                            ? isBn
+                              ? "মানচিত্র ও মেসেজের জন্য ডেটা প্ল্যান ঐচ্ছিক; এটি Nusuk পারমিটের শর্ত নয়। ফোন, provider coverage, activation ও নিজের নেটওয়ার্কে অ্যাপ চলছে কি না যাচাই করুন।"
+                              : "A data plan is optional for maps and messages, not a Nusuk permit requirement. Check phone compatibility, provider coverage and activation, and test app access on your actual network."
+                            : activePost.slug === UMRAH_GUIDE_SLUG
                             ? isBn
                               ? "কেনার আগে Saudi eSIM provider-এর coverage, data, validity, device compatibility ও activation নিয়ম যাচাই করুন। Nusuk permit ও booking-এর তথ্য offline কপিও রাখুন।"
                               : "Before buying a Saudi eSIM, check the provider's coverage, data, validity, device compatibility and activation terms. Keep offline copies of Nusuk permits and booking details too."

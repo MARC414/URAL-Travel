@@ -121,11 +121,11 @@ import {
 const ENGLISH_FEATURED_GROWTH_TOPICS = [
   {
     id: "trend-umrah-hajj",
-    category: "Religious Travel · 8 min",
+    category: "Religious Travel · 12 min",
     searchQuery: "“DIY Umrah cost & Nusuk guide Bangladesh”",
-    title: "Umrah & Hajj Preparation Guide from Bangladesh (2026 Official Rules & BDT Cost)",
+    title: "DIY Umrah from Bangladesh: Visa Routes, Nusuk Steps & Budget Checks",
     excerpt:
-      "Official Hajj registration (hajj.gov.bd) vs. DIY Umrah planning, 3 verified Umrah visa pathways, Nusuk Rawdah permits, Haramain bullet train fares, and 10-day BDT budgets.",
+      "Conditional Umrah visa routes, application-to-permit steps and the limits of the historical budget. Use your own quotes for current totals; Hajj is a separate process.",
     slug: "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
   },
   {
@@ -622,21 +622,21 @@ function getBlogCoverImage(slug: string): string {
 function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: string): string {
   const snippetsEn: Record<string, string> = {
     "umrah-hajj-guide-bangladesh-nusuk-bdt-cost":
-      "Bangladeshi travelers can use three Umrah visa categories: a Standard Umrah Visa through Nusuk or an external provider, an eligible 96-hour stopover, or an eligible Saudi tourist-visa route. The retained 10-day family-of-four-sharing estimate is BDT 1,16,000–1,32,000 per person, not a live quote. Fard Hajj registration and permits are separate.",
+      "Check your eligible Umrah visa route and season before paying. Complete biometrics when the application requests them, then check the issued visa before Nusuk visitor registration and separate permits. Package conditions vary. The ten-day/four-sharing BDT reference is historical, not a current quote or evidence of agency savings.",
     "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh":
-      "Hotel distances in Makkah are measured to the Haram wall, not to the gate you will use, and Haramain Rail carries one 25 kg bag per passenger at 65 x 55 x 35 cm. Read the operator's 15 October 2026 base fares and confirm shuttles, gates and live rates with the hotel before you pay.",
+      "Choose the exact Makkah or Madinah hotel room and route, not an area-wide accessibility promise. HHR allows one large bag up to 25 kg and 65 x 55 x 35 cm plus one hand item. Its published basic fares are not checkout totals; confirm transfers and ticket conditions before payment.",
     "hajj-registration-bangladesh-government-vs-private-package-cost":
       "The latest MoRA 2027 notice supplied for this guide lists primary registration from 27 July to 24 September 2026, with no extension. The window has passed. Check hajj.gov.bd for later notices. The supplied sources do not establish 2027 package prices; 2026 figures are historical only.",
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
       "When taking elderly parents for Umrah from Dhaka, request airline Wheelchair (WCHR) assistance 48 hours before departure and bring a manual folding wheelchair (transported free). Inside Masjid al-Haram, use dedicated upper-level wheelchair tracks or official electric scooters, and choose flat-street hotels in Jabal Omar or lower Ibrahim Al-Khalil.",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
-      "Bangladeshi passport holders flying Saudia or flynas on a qualifying through-itinerary can add the 96-hour Saudi Stopover Visa while booking the ticket, without a previously used US/UK/Schengen visa. No fixed fee and no free hotel is published: visa, insurance and service charges are calculated at airline checkout, so use the amount on your own booking.",
+      "A Saudi stopover may allow up to 96 hours, including Umrah, subject to eligibility, visa approval and separate appointments. Check exact documents and the airline’s itemized charges before payment. Saudia publishes a booking sequence; detailed current flynas conditions remain unverified. No universal free hotel, instant issuance or two-city feasibility is promised.",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
-      "Bangladeshi pilgrims should prepare the Nusuk app (nusuk.sa) for Umrah slots and the mandatory Rawdah Shareef (Riyazul Jannah) appointment permit in Madinah. The current Saudi Ministry FAQ lists Bangladesh for biometric enrollment for electronically issued Umrah visas via Saudi Visa Bio; it is not a universal rule for every tourist or stopover traveler. Book the free Rawdah permit in Nusuk and check live availability.",
+      "Saudi Visa Bio applies when your Umrah visa application requires biometrics; it is not a universal tourist/stopover rule. Nusuk manages separate permits. The official Rawdah page describes annual regular booking, nearby Instant Track and attendance confirmation before an entry QR is available. Follow current booking instructions; paid data is not a permit requirement.",
     "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
-      "Under updated Saudi Ministry of Hajj & Umrah (haj.gov.sa) regulations, women can obtain an Umrah e-Visa without a mandatory male Mahram in the visa portal. In Madinah, staying in Markazia North provides convenient, flat access to the northern ladies' prayer halls and Nusuk Rawdah appointment checkpoints.",
+      "The Ministry says women may come for Umrah without a mahram; visa-route, age and nationality conditions still need checking, and religious advice is separate. Ordinary mosque prayer differs from a Rawdah appointment. Follow your actual booking and staff directions, confirm the hotel route, and seek qualified guidance for Ihram, menstruation and Taqsir.",
     "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
-      "Save 6 hours of highway travel by booking an Open-Jaw (Multi-City) ticket: fly Dhaka (DAC) to Jeddah (JED) outbound and return directly from Madinah (MED) to Dhaka. Direct Biman and Saudia flights cost BDT 72,000–92,000 with 46kg baggage, while 1-stop Gulf carriers start at BDT 54,000.",
+      "Compare a Jeddah or Madinah roundtrip with both open-jaw directions on the same dates, passengers, baggage and full-trip basis. No live fare or guaranteed savings is established. Biman baggage varies by direction and fare; check Saudia Zamzam conditions, ticket structure, transit permission and every operating carrier before paying.",
     "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
       "Ramadan 1448 is expected 8 February – 8 March 2027 on the Umm al-Qura calendar, confirmed by moon sighting. I'tikaf registration at the Two Holy Mosques is free, online and capacity-limited through the General Authority's portal — last season it opened on 3 Ramadan at 11:00 a.m. No authority publishes Ramadan hotel prices, so compare dated quotes instead of trusting savings claims.",
     "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
@@ -717,21 +717,21 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
 
   const snippetsBn: Record<string, string> = {
     "umrah-hajj-guide-bangladesh-nusuk-bdt-cost":
-      "বাংলাদেশি পাসপোর্টধারীরা Umrah-এর জন্য তিনটি visa route দেখতে পারেন: Nusuk বা বাইরের সেবাদাতার Standard Umrah Visa, শর্তসাপেক্ষ ৯৬ ঘণ্টার stopover, অথবা যোগ্য Saudi tourist-visa route। চারজনের পরিবারের শেয়ারে ১০ দিনের আগের planning estimate জনপ্রতি BDT 1,16,000–1,32,000; এটি live quote নয়। ফরজ Hajj-এর নিবন্ধন ও Saudi permit আলাদা।",
+      "টাকা দেওয়ার আগে প্রযোজ্য ওমরাহ ভিসার পথ ও মৌসুম দেখুন। আবেদনে চাইলে বায়োমেট্রিক দিন; এরপর ইস্যু হওয়া ভিসা মিলিয়ে Nusuk ভিজিটর নিবন্ধন ও আলাদা পারমিট নিন। Package-এর শর্ত আলাদা। ১০ দিন/চারজনের sharing-এর BDT reference পুরোনো, বর্তমান কোট বা agency saving-এর প্রমাণ নয়।",
     "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh":
-      "মক্কায় হোটেলের দূরত্ব মাপা হয় হারামের দেয়াল পর্যন্ত, আপনি যে গেট দিয়ে প্রবেশ করবেন সেখান্ত নয়; আর Haramain ট্রেনে জনপ্রতি 25 কিজির (65 x 55 x 35 cm) একটি লাগেজ নেওয়া যায়। 15 অক্টোবর 2026 তারিখের operator-এর base fare দেখুন, আর শাটল, গেট ও লাইভ রেট হোটেলেই নিশ্চিত করুন।",
+      "পুরো এলাকার accessibility ধরে নয়, নির্দিষ্ট Makkah/Madinah hotel room ও route বাছুন। HHR জনপ্রতি একটি বড় bag সর্বোচ্চ ২৫ কেজি ও 65 x 55 x 35 cm, সঙ্গে একটি hand item দেয়। Published basic fare checkout total নয়; payment-এর আগে transfer ও ticket condition নিশ্চিত করুন।",
     "hajj-registration-bangladesh-government-vs-private-package-cost":
       "সর্বশেষ দেওয়া MoRA ২০২৭ বিজ্ঞপ্তিতে প্রাথমিক নিবন্ধনের সময় ২৭ জুলাই–২৪ সেপ্টেম্বর ২০২৬ বলা হয়েছে; সময়সীমা বাড়ানো হবে না। সময় শেষ। পরবর্তী নোটিশের জন্য hajj.gov.bd দেখুন। দেওয়া সূত্রে ২০২৭ প্যাকেজের দাম নিশ্চিত নয়; ২০২৬ সালের অঙ্ক আগের মৌসুমের তথ্য।",
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
       "বয়স্ক মা-বাবাকে নিয়ে ওমরাহ যাত্রায় ফ্লাইটের ৪৮ ঘণ্টা আগে এয়ারলাইন্স হুইলচেয়ার (WCHR) বুক করুন এবং নিজস্ব ফোল্ডিং হুইলচেয়ার সাথে নিন (ফ্লাইটে ফ্রি)। মসজিদুল হারামে ওপরের তলার হুইলচেয়ার ট্র্যাক বা অফিশিয়াল ইলেকট্রিক স্কুটার ব্যবহার করুন এবং জাবাল ওমরের মতো সমতল রাস্তার হোটেল বেছে নিন।",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
-      "বাংলাদেশি পাসপোর্টধারীরা Saudia বা flynas-এর যোগ্য ট্রানজিট ইটিনারারিতে টিকিট বুক করার সময় ৯৬ ঘণ্টার Saudi Stopover Visa নিতে পারেন, আগে US/UK/Schengen ভিসা ব্যবহার করা লাগে না। কোনো নির্দিষ্ট ফি বা ফ্রি হোটেল সুবিধা প্রকাশিত নেই—ভিসা, ইনস্যুরেন্স ও সার্ভিস চার্জ এয়ারলাইন্সের checkout-এ নির্ধারিত হয়, তাই নিজের বুকিংয়ের অঙ্কই আসল খরচ।",
+      "যোগ্যতা, visa approval ও আলাদা appointment সাপেক্ষে Saudi stopover-এ ওমরাহসহ সর্বোচ্চ ৯৬ ঘণ্টা থাকা যেতে পারে। টাকা দেওয়ার আগে exact document ও airline-এর itemized charge দেখুন। Saudia booking sequence প্রকাশ করে; flynas-এর বর্তমান detailed conditions যাচাই হয়নি। সবার জন্য free hotel, instant issuance বা দুই শহরের plan নিশ্চিত নয়।",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
-      "ওমরাহ যাত্রীদের মক্কায় ওমরাহ স্লট ও মদিনায় রিয়াজুল জান্নাত (Rawdah Shareef) অ্যাপয়েন্টমেন্ট পারমিটের জন্য Nusuk অ্যাপ (nusuk.sa) প্রস্তুত রাখতে হবে। বর্তমান সৌদি মন্ত্রণালয়ের FAQ বাংলাদেশকে ইলেকট্রনিক Umrah visa-র biometric enrollment-এর জন্য Saudi Visa Bio-তে তালিকাভুক্ত করে; এটি প্রত্যেক ট্যুরিস্ট বা স্টপওভার যাত্রীর জন্য সার্বজনীন নিয়ম নয়। Nusuk-এ ফ্রি Rawdah পারমিট বুক করুন এবং লাইভ availability চেক করুন।",
+      "নিজের Umrah visa আবেদনে বায়োমেট্রিক চাইলে Saudi Visa Bio ব্যবহার করুন; এটি প্রত্যেক ট্যুরিস্ট/স্টপওভার যাত্রীর নিয়ম নয়। Nusuk-এ পারমিট আলাদা। অফিশিয়াল Rawdah পেজ সাধারণ বার্ষিক বুকিং, কাছাকাছি ভিজিটরের Instant Track এবং entry QR পাওয়ার আগে attendance confirmation বলে। নিজের বুকিংয়ের নির্দেশনা অনুসরণ করুন; পেইড ডেটা পারমিটের শর্ত নয়।",
     "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
-      "সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের (haj.gov.sa) হালনাগাদ নিয়মে নারীরা মাহরাম ছাড়াও অনলাইনে ওমরাহ ই-ভিসার আবেদন করতে পারেন। মদিনায় মা ও বোনদের সহজে নামাজ ও রিয়াজুল জান্নাতে প্রবেশের জন্য উত্তর দিকের Markazia North এলাকায় অবস্থান করা সবচেয়ে সুবিধাজনক।",
+      "মন্ত্রণালয় নারীর মাহরাম ছাড়া Umrah করতে আসা allowed বলেছে; visa-route, age ও nationality condition যাচাই বাকি, ধর্মীয় advice আলাদা। সাধারণ mosque prayer ও Rawdah appointment এক নয়। নিজের booking ও staff direction মানুন, hotel route নিশ্চিত করুন এবং Ihram, মাসিক ও Taqsir-এর জন্য যোগ্য পরামর্শ নিন।",
     "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia":
-      "ওমরাহ শেষে মদিনা থেকে জেদ্দা বিমানবন্দরের ৬ ঘণ্টার ক্লান্তিকর সড়কপথ এড়াতে Multi-City (Open-Jaw) টিকিট কাটুন: ঢাকা থেকে জেদ্দা (DAC–JED) যান এবং মদিনা থেকে সরাসরি ঢাকা (MED–DAC) ফিরুন। বিমান ও সৌদিয়ার ডিরেক্ট ফ্লাইট ৭২–৯২ হাজার টাকা এবং ট্রানজিট ফ্লাইট ৫৪ হাজার টাকা থেকে শুরু।",
+      "একই date, passenger, baggage ও full-trip basis-এ Jeddah বা Madinah roundtrip-এর সঙ্গে open-jaw-এর দুই direction তুলনা করুন। Live fare বা guaranteed savings প্রতিষ্ঠিত নয়। Biman baggage direction ও fare অনুযায়ী বদলায়; payment-এর আগে Saudia Zamzam condition, ticket structure, transit permission ও প্রতিটি operating carrier যাচাই করুন।",
     "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
       "রমজান ১৪৪৮ আনুমানিক ৮ ফেব্রুয়ারি – ৮ মার্চ ২০২৭ (উম্মুল কুরা ক্যালেন্ডার, চাঁদ দেখায় নিশ্চিত হবে)। দুই হারাম মসজিদে ইতিকাফের নিবন্ধন অনলাইনে, বিনামূল্যে ও আসনসীমার ভিত্তিতে কর্তৃপক্ষের ই-সার্ভিসে — গত সিজনে ৩ রমজান সকাল ১১টায় খুলেছিল। রমজানের হোটেল ভাড়ার কোনো অফিশিয়াল তালিকা নেই; সাশ্রয়ের দাবির বদলে তারিখসহ কোট তুলনা করুন।",
     "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":

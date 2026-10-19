@@ -1,3 +1,4 @@
+import { getTravellerCheck } from "./travellerChecks";
 import { SCHEDULED_BLOG_FAQ_HEADINGS } from "../data/scheduledBlogSeo.generated";
 
 export type BlogStructuredDataLocale = "en" | "bn";
@@ -40,8 +41,8 @@ const BLOG_FAQ_CONFIGS: Record<
     bn: /^\s*৫\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
   "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": {
-    en: /^\s*5\.\s*Frequently Asked Questions\s*$/i,
-    bn: /^\s*৫\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+    en: /^\s*7\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৭\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
   "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
     en: /^\s*5\.\s*Frequently Asked Questions\s*$/i,
@@ -54,6 +55,14 @@ const BLOG_FAQ_CONFIGS: Record<
   "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide": {
     en: /^\s*7\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৭\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
+  "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": {
+    en: /^\s*7\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৭\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
+  "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": {
+    en: /^\s*6\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৬\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
   "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": {
     en: /^\s*5\.\s*Frequently Asked Questions\s*$/i,
@@ -155,6 +164,81 @@ function bengaliNumberedStep(line: string) {
 }
 
 const HOW_TO_CONFIGS: Record<string, BlogHowToConfig[]> = {
+  "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": [{
+    idSuffix: "howto-women-rawdah-preparation",
+    en: {
+      start: /^3\.\s*How should women prepare a Rawdah/i,
+      end: /^4\.\s*What should you check about women/i,
+      name: "How to prepare a women's Rawdah appointment using actual booking instructions",
+      parseStep: englishNumberedStep,
+    },
+    bn: {
+      start: /^৩\.\s*নারীরা RAWDAH APPOINTMENT/,
+      end: /^৪\.\s*নারীদের ইহরামের পোশাক/,
+      name: "নিজের booking instruction অনুযায়ী নারীদের Rawdah appointment-এর প্রস্তুতি",
+      parseStep: bengaliNumberedStep,
+    },
+  }],
+  "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": [{
+    idSuffix: "howto-compare-umrah-flights",
+    en: {
+      start: /^5\.\s*How do you compare flight quotes/i,
+      end: /^6\.\s*Which guide/i,
+      name: "How to compare Umrah flight quotes on the same basis",
+      parseStep: englishNumberedStep,
+    },
+    bn: {
+      start: /^৫\.\s*একই BASIS-এ FLIGHT QUOTE/,
+      end: /^৬\.\s*এরপর কোন GUIDE/,
+      name: "একই basis-এ Umrah flight quote তুলনার ধাপ",
+      parseStep: bengaliNumberedStep,
+    },
+  }],
+  "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": [{
+    idSuffix: "howto-hotel-rail-plan",
+    en: {
+      start: /^4\.\s*How should you book the hotel and train/i,
+      end: /^5\.\s*Which details belong/i,
+      name: "How to plan hotel access and Haramain tickets with confirmed arrangements",
+      parseStep: englishNumberedStep,
+    },
+    bn: {
+      start: /^৪\.\s*Hotel ও train/,
+      end: /^৫\.\s*কোন detail/,
+      name: "নিশ্চিত arrangement দিয়ে hotel access ও Haramain ticket পরিকল্পনার ধাপ",
+      parseStep: bengaliNumberedStep,
+    },
+  }],
+  "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": [{
+    idSuffix: "howto-saudia-stopover-request",
+    en: {
+      start: /^2\.\s*How do you request a stopover through Saudia/i,
+      end: /^3\.\s*Is a used US/i,
+      name: "How to prepare a Saudia stopover request subject to eligibility and approval",
+      parseStep: englishNumberedStep,
+    },
+    bn: {
+      start: /^২\.\s*Saudia-তে stopover-এর আবেদন/,
+      end: /^৩\.\s*ব্যবহৃত US/,
+      name: "যোগ্যতা ও অনুমোদনসাপেক্ষে Saudia stopover আবেদনের প্রস্তুতি",
+      parseStep: bengaliNumberedStep,
+    },
+  }],
+  "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": [{
+    idSuffix: "howto-diy-umrah-sequence",
+    en: {
+      start: /^4\.\s*What should you do before paying/i,
+      end: /^5\.\s*How should you plan flights/i,
+      name: "How to plan the visa application and permit sequence for DIY Umrah from Bangladesh",
+      parseStep: englishNumberedStep,
+    },
+    bn: {
+      start: /^৪\.\s*টাকা দেওয়ার আগে/,
+      end: /^৫\.\s*ফ্লাইট, হোটেল/,
+      name: "বাংলাদেশ থেকে DIY ওমরাহের আবেদন ও পারমিটের ক্রম",
+      parseStep: bengaliNumberedStep,
+    },
+  }],
   "dual-currency-card-endorsement-bangladesh": [
     {
       idSuffix: "howto-card-endorsement",
@@ -186,30 +270,45 @@ const HOW_TO_CONFIGS: Record<string, BlogHowToConfig[]> = {
     {
       idSuffix: "howto-saudi-visa-bio",
       en: {
-        start: /^2\.\s*HOW TO COMPLETE FINGERPRINT BIOMETRICS/i,
-        end: /^3\.\s*HOW TO CREATE YOUR NUSUK/i,
-        name: "How to complete fingerprint biometrics in the Saudi Visa Bio app",
+        start: /^2\.\s*How should you complete Saudi Visa Bio/i,
+        end: /^3\.\s*How do you register in Nusuk/i,
+        name: "How to prepare Saudi Visa Bio enrollment when your visa application requires it",
         parseStep: englishNumberedStep,
       },
       bn: {
-        start: /^২\.\s*বাংলাদেশে বসে SAUDI VISA BIO/i,
-        end: /^৩\.\s*ভিসা পাওয়ার পর NUSUK/i,
-        name: "Saudi Visa Bio অ্যাপে বায়োমেট্রিক তথ্য দেওয়ার ধাপ",
+        start: /^২\.\s*নিজের আবেদনে Saudi Visa Bio/,
+        end: /^৩\.\s*বিদেশ থেকে/,
+        name: "আবেদনে চাওয়া হলে Saudi Visa Bio-তে বায়োমেট্রিক দেওয়ার প্রস্তুতি",
         parseStep: bengaliNumberedStep,
       },
     },
     {
       idSuffix: "howto-nusuk-visitor-registration",
       en: {
-        start: /^3\.\s*HOW TO CREATE YOUR NUSUK APP ACCOUNT/i,
-        end: /^4\.\s*HOW TO BOOK A FREE RAWDAH/i,
-        name: "How to create a Nusuk visitor account after your Saudi visa is issued",
+        start: /^3\.\s*How do you register in Nusuk/i,
+        end: /^4\.\s*How do you book, confirm/i,
+        name: "How to register in Nusuk as an overseas visitor with a valid visa",
         parseStep: englishNumberedStep,
       },
       bn: {
-        start: /^৩\.\s*ভিসা পাওয়ার পর NUSUK/i,
-        end: /^৪\.\s*মদিনায় ফ্রি রিয়াজুল জান্নাত/i,
-        name: "সৌদি ভিসা পাওয়ার পর Nusuk অ্যাপে Visitor হিসেবে নিবন্ধনের ধাপ",
+        start: /^৩\.\s*বিদেশ থেকে/,
+        end: /^৪\.\s*Rawdah অ্যাপয়েন্টমেন্ট/,
+        name: "বৈধ ভিসা নিয়ে বিদেশি ভিজিটর হিসেবে Nusuk-এ নিবন্ধনের ধাপ",
+        parseStep: bengaliNumberedStep,
+      },
+    },
+    {
+      idSuffix: "howto-rawdah-booking",
+      en: {
+        start: /^4\.\s*How do you book, confirm/i,
+        end: /^Does Nusuk require you to buy an eSIM/i,
+        name: "How to request and confirm a Rawdah appointment subject to eligibility and availability",
+        parseStep: englishNumberedStep,
+      },
+      bn: {
+        start: /^৪\.\s*Rawdah অ্যাপয়েন্টমেন্ট/,
+        end: /^Nusuk ব্যবহারের জন্য কি eSIM/,
+        name: "যোগ্যতা ও প্রাপ্যতা অনুযায়ী Rawdah অ্যাপয়েন্টমেন্ট বুক ও নিশ্চিত করার ধাপ",
         parseStep: bengaliNumberedStep,
       },
     },
@@ -275,6 +374,8 @@ function extractHowToSteps(
   };
 
   for (const line of lines) {
+    // These visible evidence/privacy notes are not an extra instruction or a continuation of the last step.
+    if (getTravellerCheck(line)) continue;
     const parsed = parseStep(line);
     if (parsed) {
       finishStep();

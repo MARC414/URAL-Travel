@@ -708,3 +708,154 @@ The owner supplied their own Bengali draft to replace the machine parity transla
 | Season entry/visa windows | **VERIFIED / SEASON-BOUND** — Ministry 1448H calendar (checked 17 Oct 2026); re-check before each season. |
 | Ramadan hotel price tables, % savings, rate multipliers | **DELETED** — no dated same-basis basket exists; never to return without one. |
 | Iftar/tawaf minute-level specifics, meal/locker services | **DELETED / QUALIFIED** — replaced with practical advice carrying no invented numbers. |
+
+## 2026-10-18 — owner-prioritized Hajj/Umrah cluster closure
+
+| Checked | Asset / action | Audience and page job | Evidence / constraints | Next gate |
+|---|---|---|---|---|
+| 2026-10-18 | `/umrah` + `/bn/umrah`, update in place; first active asset | Bangladesh-based families calculating a quote-based trip budget; query hypothesis: “Umrah cost from Bangladesh” from the existing map, not measured demand | Owner requests Hajj/Umrah before other clusters and Cox's Bazar house style. Preserve URLs, existing links, affiliate registry, and U-12's dated/unre-priced reference. No matched current price basket or agency quote exists. Replace preset calculator prices/FX with explicit user inputs, not another invented range. | Repository check passed: 25 budget/topic-map tests, scheduling/sitemap suites, lint/build and 207 build assertions. Owner-controlled deployment/live checks remain separate; main process guide is the next independent asset review. |
+
+The execution order, individual article evidence gates and search/Hajj source gaps are recorded in
+[`HAJJ-UMRAH-CLOSURE.md`](HAJJ-UMRAH-CLOSURE.md). This is sequential repository work, not permission to
+publish all children in one batch. No other topical cluster is being commissioned.
+
+## 2026-10-19 — owner split: main-guide plan, Nusuk execution
+
+| Checked | Asset / action | Page job and boundaries | Evidence / preservation | Next gate |
+|---|---|---|---|---|
+| 2026-10-19 | Main DIY guide, plan only; existing EN/BN URLs | Help a Bangladeshi passport holder select a route and follow the booking/application sequence; `/umrah` owns the worksheet, Hajj owns registration/packages | Owner requests step-by-step instructions. Preserve URLs and historical U-12 scope. Plan and owner checks: `DIY-UMRAH-GUIDE-NEXT-STEPS.md`. This original planning row was superseded by the later execution instruction below. | See the 19 October source-led execution record below; publication remains owner-controlled. |
+| 2026-10-19 | Nusuk/Rawdah/Saudi Visa Bio article, update in place; `/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit` and its BN twin | Explain visa-specific biometric preparation, visitor account registration and separate permit/Rawdah steps, not broad trip eligibility or pricing | Explicitly authorized by owner while main-guide work is planned. Reopened Ministry FAQ/service pages, MOFA listing, Nusuk Rawdah, visitor login and Umrah signup/terms; record claim-by-claim findings in `NUSUK-BIOMETRICS-AUDIT.md`. Preserve publication date, slugs and useful links. | Repository/source-safe rewrite verified: 13 Nusuk tests, 25 hub tests, scheduling/sitemap suites, lint/build and 213 build assertions pass. Eleven references, five curated links, eight FAQs and three HowTos (4/4/5 steps) in both locales. App/device checks, owner publication approval and production live checks remain open. |
+
+This owner-directed split supersedes the previous “main guide, then Nusuk” next-action note for this task only.
+Bangladesh demand remains unmeasured; no new GSC data has been supplied in this turn.
+
+## 2026-10-19 — owner follow-up: inline traveller cautions, then source-led main-guide execution
+
+Owner explicitly requested reader-facing instructions beside the relevant untested Nusuk flows, and authorized the
+agent to validate/execute the DIY guide from supplied sources one phase at a time. Scope remains these existing EN/BN
+assets, no unrelated cluster or automatic publication.
+
+| Asset | Source/editorial outcome | Repository evidence | Remaining release/source limits |
+|---|---|---|---|
+| Nusuk/biometrics EN/BN | Five localized point-of-action warning boxes; genuine-account/network checks only, no fake application/practice slot or private-data sharing | 16 targeted tests; complete cautions render in React/static, independent placement/schema checks and deletion negative controls | Authenticated device/gate and visual checks unperformed; approval/deploy/live open |
+| Main DIY EN/BN | Supplied sources reopened, 1448 Umrah dates retained as published; three conditional routes, Package Visa prerequisites/minimums, six-step application-to-permit order, historical budget, task links and scope-safe Hajj boundary | 17 targeted tests; 26 references/portals, 10 EN / 9 BN curated links, five FAQs, six-step HowTo; original publication preserved, `updatedAt` 2026-10-19 | Attributed regulation/SPA foreign-document criteria added; current carrier/digital-entry/GCC operational conditions and PDF revision remain unverified; historical MOH PDF is not 1448 evidence; personal quotes absent; approval/deploy/live open |
+
+Both guide packages plus hub regression suite verified: 13 DIY + 16 Nusuk + 25 budget tests, scheduling/sitemaps,
+lint/build and **221 build assertions** pass; 107 EN + 107 BN canonical routes. No production publication, browser
+visual QA, private app QA or measured Bangladesh demand claimed. Main evidence ledger:
+[`DIY-UMRAH-SOURCE-REVIEW.md`](DIY-UMRAH-SOURCE-REVIEW.md); current owner handoff:
+[`DIY-UMRAH-GUIDE-NEXT-STEPS.md`](DIY-UMRAH-GUIDE-NEXT-STEPS.md). The original plan is explicitly historical.
+Next independent review: stopover, then hotel/rail; wider cluster and separate Hajj source gates remain open.
+
+
+### 2026-10-19 — smallest-step health-source inspection
+
+Reopened both chunks of the official MOH health index and followed its actual English/Arabic Umrah PDF links.
+English opening explicitly says 1447H (2026); Arabic extracted opening also contains 1447/2026, but garbled extraction
+prevents claiming a full language/clinical comparison. Index last-update (28 September 2026) is not a PDF revision or
+1448 applicability date. Current health gap remains qualified, not closed; no inference that no newer official PDF
+exists. No article/code/download/date change, build or deployment in this step. Evidence and next agent-owned
+English/Arabic official-source discovery checkpoint: `DIY-UMRAH-SOURCE-REVIEW.md`.
+
+
+### 2026-10-19 — health Step 1: bounded official-source discovery recorded
+
+Five targeted MOH/PHA English/Arabic searches plus opened MOH index/PDF, PHA Hajj index, its linked border-prevention
+PDF and the first returned PHA catalogue chunk did not verify an applicable 1448 Umrah health document. PHA PDF's
+opening identifies 1447/2026; no season extension or replacement established. Arabic MOH legacy index fetch returned
+Not Found. Search dates/page modifications are not clinical applicability evidence. Full retrieval limits and exact
+PHA document URL are in `DIY-UMRAH-SOURCE-REVIEW.md`. D-07 stays UNVERIFIED for current requirements, not “no health
+rules” or “no newer PDF exists.” Existing EN/BN caution retained; documentation-only step, no build/deploy or article
+restamp. Next serial research checkpoint is foreign-visa eligibility; manual health refresh gate remains open.
+
+
+### 2026-10-19 — foreign-visa fine-print checkpoint applied to main DIY EN/BN
+
+D-05 now has retrieved Ministry of Tourism regulation Article 6 and dated SPA announcement evidence, with explicit
+revision-date/current-flow limitations. Added tourist/business + prior-use, permanent vs temporary residence,
+accompanying-family and GCC distinctions, plus immediate EN/BN amber pre-payment warning. Three primary cards
+appended after original numbered references (26 total cards). Current carrier/port/digital-only entry evidence,
+GCC operational fine print and PDF latest revision remain unverified; no broad entitlement or application tested.
+Full redirect/source-conflict record: `DIY-UMRAH-SOURCE-REVIEW.md`. Same-day article date retained; health unchanged.
+**17 DIY + 16 Nusuk + 25 budget tests**, scheduling/sitemaps (23 negative controls), lint/build and **225 build checks**
+passed, 107 EN + 107 BN routes. No deployment or visual/authenticated QA. Next serial asset: independent stopover
+review; old Saudia tourist URL now redirects to internally inconsistent visa copy, not reliable old indexed answers.
+
+
+### 2026-10-19 — independent stopover revision and cluster progress
+
+Owner authorized continuing stopover and requested distance to cluster completion. Evidence/claim decisions and
+implemented EN/BN changes are in `STOPOVER-SOURCE-REVIEW.md`; current counts are at the top of `HAJJ-UMRAH-CLOSURE.md`.
+Saudia-only sequence, no assumed flynas equivalence, no blanket prior-visa exemption or published-price denial;
+two contextual accessible caution boxes, ten scoped references, six FAQs and a six-step HowTo. Optional Madinah,
+no fixed train times/fares or unverified eSIM price. Snippets/SEO/CTA and stopover-only lastmod aligned to 19 October;
+original 27 September publication preserved. Generic client-only visa-price panel suppressed; independent common-
+panel regression fixture retained on another article, not discarded. Current flynas detailed eligibility remains
+unverified: live guide redirected/404, and 2023 launch is historical evidence only.
+
+Stopover17 + DIY 17 + Nusuk 16 + budget 25 tests, scheduling/sitemap suite (23 negative controls), lint/build and
+235 post-build checks passed; 107 EN + 107 BN routes. Complete warning text remains asserted, including apostrophe
+encoding regression controls and four omitted-warning negative controls. No visual/app/booking/deploy/live claim.
+Three of twelve core Umrah article pairs now revised/tested in this closure cycle (25% by count only); nine core
+pairs plus adjacent Hajj remain, along with hub/release gates. All articles already exist; not building from zero.
+Two optional bridges are excluded. Next agent-owned independent asset: hotels/Haramain.
+
+
+### 2026-10-19 — independent hotel/Haramain EN/BN revision
+
+Owner accepted next asset. `HOTEL-RAIL-SOURCE-REVIEW.md` records actual HHR fare/baggage/station/travel-tips pages,
+opened Hilton chain/property-description and accessibility pages, and failed property-detail fetches. Named supplier
+examples not promoted to route/room inspections. Removed area-wide accessibility rankings, fixed gate/time/road and
+unsupported tour details; actual room/route/occupancy/shuttle questions plus three immediate cautions. Retained dated
+dynamic Economy base fares and actual per-passenger baggage; fixed inference that four compliant bags/four travellers
+need road transport. Exact fare/channel refund rules remain qualified because extracted class labels and ticket-desk
+wording do not establish an entitlement. Six localized sources, eight curated links, six-step HowTo, six FAQs;
+metadata/snippets/relevant hotel CTA and 19 October article lastmod aligned. Original publication preserved.
+
+Hotel/rail17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25 tests passed, scheduling/sitemap 23 controls/lint/build and
+245 build checks passed (107 EN + 107 BN routes), including six removed-warning negative controls. No source gate
+waived, no visual/accessibility journey or purchase tested, no deployment. Four of twelve core pairs now revised/
+tested in this accuracy-upgrade cycle; eight core plus adjacent Hajj remain. Hub/release/medical/visa limits remain
+separate. Next agent-owned independent asset: Dhaka–Jeddah/Madinah flight strategy.
+
+
+### 2026-10-19 — independent Dhaka–Jeddah/Madinah flight-strategy EN/BN revision
+
+Owner explicitly authorized this next asset. Source/brief/claim record before rewrite is
+`FLIGHT-STRATEGY-SOURCE-REVIEW.md`: Biman full returned baggage page (direction/fare exceptions and unresolved
+per-piece wording), relevant Saudia carriage terms and fare-brand comparison, Emirates Dubai connection and
+Air Arabia baggage/Zamzam. Biman timetable HTTP500 and Saudia old baggage-page redirects logged; no cached schedule,
+Madinah baggage row, live quote or universal benefit manufactured. Three route shapes, same-basis full-trip totals,
+carrier-specific baggage/Zamzam, separate surface/transit and disruption questions replace fixed fare/percentage/
+time and always-open-jaw claims. Three immediate accessible notes, five references, seven links per locale,
+six-step comparison HowTo and six visible FAQs. Snippets/metadata/optional comparison CTA aligned; original 27 Sep
+publication and author preserved, editorial update 19 Oct inherited by BN. Stale inbound46kg label and main hotel's
+next-task wording corrected without certifying sibling bodies. Customs/medical/religious sources remain separate.
+
+Flight17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 tests passed; budget 25, scheduling, sitemap 23 negative controls,
+lint/build and 257 build assertions passed (107 EN +107 BN routes). New build assertions include six omitted-warning
+negative controls and retired-claim reintroduction fixtures. Generic panel fixture moved to food guide, not removed.
+No browser visual, route search/checkout, supplier reply, ticket purchase, transit assessment or deployment/live
+verification. Current progress 5/12 core pairs by review count only; seven core plus adjacent Hajj remain, alongside
+hub/release gates. Next independent asset: women-specific Umrah guidance. Research remains agent-owned.
+
+
+### 2026-10-19 — independent women-specific Umrah EN/BN revision
+
+Owner authorized this next specialist pair. `WOMEN-UMRAH-SOURCE-REVIEW.md` holds the pre-edit brief/claim ledger,
+opened sources and limitations. Ministry specifically permits a woman to come for Umrah without mahram; official
+eVisa age/minor/nationality terms not overridden. Fiqh conditionality, qualified personal advice, ordinary mosque
+prayer vs women's Rawdah appointments and actual hotel/access route separated. Fixed gates, recurring women's
+hours, whole-area step-free promise, universal NOC, skin-contact/visor workaround and unqualified haircut amount/
+public-location instructions removed. Menstrual planning has private religious/clinical referral, not medication
+or personal exceptions. Current1448 health/Hajj source limits unchanged; qualified religious editorial review remains.
+
+Ten claim-specific administrative/religious references, seven curated links per language, six immediate accessible
+cautions, four Rawdah-preparation steps and seven visible/schema FAQs. App/SEO/metadata/optional qualified Kiwitaxi
+CTA aligned, original publication 27 Sep retained/update 19 Oct inherited by BN. No sibling body certification or new
+page; generic price-panel guard remains independently tested on food article. Women17 + flights 17 + hotel/rail 17 +
+stopover 17 + DIY 17 + Nusuk 16 + budget 25 passed; scheduling/sitemap 23 negative controls/lint/build and 275 build checks
+passed (107 EN +107 BN routes), including twelve omitted-warning controls and eight retired-claim fixtures. No
+live application/slot, personal fatwa/medical review, inspected route, care booking, ride, visual QA or deployment.
+Current progress 6/12 core pairs by article-review count only; six core plus adjacent Hajj remain, alongside hub/
+qualified-review/release gates. Next independent agent-owned asset: older travellers/elderly parents.

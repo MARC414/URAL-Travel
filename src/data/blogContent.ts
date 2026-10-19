@@ -276,109 +276,195 @@ Because Nepal and the Maldives offer free Visa on Arrival to Bangladeshi citizen
 - Dress neatly and confidently.
 - Know your hotel name and your basic 4–5 day sightseeing plan (e.g., "We are staying 3 nights in Thamel, Kathmandu and 2 nights in Pokhara Lakeside").
 - Carry at least $300–$500 Cash USD in hand OR an endorsed Dual-Currency Card with your bank statement so you can immediately demonstrate sufficient funds.`,
-  "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": `For a Bangladeshi passport holder, DIY Umrah means managing the trip independently where the selected visa route allows it; it does not mean every visa is sold on its own or that an agent is never needed. The three route categories are: a Standard Umrah Visa (direct Nusuk service or an external provider), an eligible 96-hour stopover visa, and an eligible Saudi tourist-visa route. The existing 10-day estimate remains BDT 1,16,000–1,32,000 per person for a family of four sharing; it was carried forward, not re-priced. Fard Hajj has separate Bangladesh registration and Saudi permit requirements.
+  "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": `Who this guide is for: Bangladeshi passport holders planning Umrah from Dhaka who want to choose an eligible visa route, know what to arrange before paying and keep application, visa and permit steps in the right order.
 
-This guide was checked against official sources on 14 October 2026. Visa, season, permit and fare conditions can change; follow the current application and operator pages before booking.
+Quick Answer
+As checked on 19 October 2026, plan around three conditional visa-route categories: Standard Umrah Visa through direct Nusuk or an authorized external provider; an eligible airline stopover; or an eligible tourist-visa route. DIY does not mean every visa is sold separately or approval is automatic [1–4, 6–10]. Check eligibility and season first, complete biometrics when the application requests them, then check the issued visa before visitor registration and separate permit booking [4–5, 15–16].
 
-1. Umrah and Fard Hajj use different systems
-Umrah and Hajj are distinct pilgrimages with different entry and permit rules. An Umrah, tourist or stopover visa is not a Hajj permit. For Fard Hajj from Bangladesh, use the Bangladesh Haj Management Portal's registration process and the Saudi authorities' current Hajj permit rules [11–12].
+This guide checks published official instructions, not a completed visa application or a traveller's authenticated app. The BDT 1,16,000–1,32,000 per-person reference below is the existing 14 October 2026 estimate for ten days with four family members sharing; it has not been re-priced. Use the quote-input worksheet on our Umrah hub for your own current basket.
 
-The Bangladesh portal's notice for the 2027 Hajj season listed 26 September 2026 as the registration cutoff. That date had passed by this guide's review on 14 October 2026. Check the portal for any later extension or notice; do not assume registration is open or carry this year's cutoff into another season [11].
+1. Is DIY Umrah the same process as Fard Hajj?
+No. An Umrah, tourist or stopover visa is not a Hajj permit. Bangladesh Hajj registration, packages and Saudi Hajj permits belong to the separate Hajj process; use the dedicated Hajj registration guide and official Bangladesh portal [11].
 
-For 1447H (2026), the Saudi Ministry of Interior notice reported by the Saudi Press Agency sets fines of up to SAR 20,000 for performing or attempting Hajj without a permit, and for visit-visa holders entering or remaining in Makkah or the Holy Sites during the specified restriction period. The notice's ten-year re-entry ban applies to the narrower category of deported infiltrators; it is not a universal ban for every visitor. These details are season-bound; check the next official notice for later Hajj seasons [12].
+Do not plan around a Hajj cutoff copied into an Umrah article. The separate Hajj review records a September deadline conflict between the portal banner and dated circulars, which is not resolved here. The retained SPA notice concerns 1447H/2026 Hajj restrictions, not proof of every 1448H/2027 rule [12]. Check the applicable current Saudi restrictions before travel.
 
-2. The three visa routes for Bangladeshi passport holders
+2. Which of the three visa-route categories fits your case?
 Pathway 1: Standard Saudi Umrah Visa — direct Nusuk or an external provider
-The Ministry announced its Nusuk Umrah service for overseas pilgrims on 20 August 2025. As checked on 14 October 2026, Bangladesh appears in the Nusuk registration lists for nationality and residence. That makes the direct service worth checking; it does not guarantee approval or mean every service is available to every applicant. The launch announcement describes selecting services, while the current terms define packages as bundles of multiple services. Do not assume a stand-alone visa-only checkout: confirm the live offer and terms for your case [1–4].
+The Ministry's 20 August 2025 announcement describes direct overseas applications through Nusuk Umrah as well as accredited agents. Bangladesh appears in the nationality and residence lists reopened on 19 October 2026. Registration is not approval or proof that a particular visa-only checkout is available [1–2].
 
-A Ministry-authorized external Umrah agent is another channel within this same visa category. The Ministry FAQ says an external agent cannot issue an Umrah visa without accommodation and transport services. Before paying, verify the provider through the Ministry's current channel and get the included services, supplier, cancellation conditions and total in writing. Do not rely on an old “visa only” quote or an unlicensed intermediary [4].
+Read the current offer, not just the launch announcement. Nusuk's terms define individual packages as multiple services and say target countries and services can change. For the external-agent channel, the Ministry FAQ says an Umrah visa cannot be issued without accommodation and transport services [3–4]. Before paying, verify the provider through official channels and obtain the exact services, suppliers, total, payment milestones and cancellation/refund terms in writing. Do not assume a refundable visa or an instant refund.
 
-Pathway 2: Eligible 96-hour Saudi stopover visa
-Visit Saudi describes a stopover of up to 96 hours for eligible travelers booking a qualifying itinerary with Saudia or flynas. The flight and application conditions are route- and airline-specific; check the carrier's live checkout before buying. At the 14 October 2026 check, Visit Saudi listed Saudia's visa itself as free, with an application fee around SAR 39.50 and insurance from SAR 13. Those are checkout line items, not a guaranteed total for every airline or passenger. Do not book on the assumption that a hotel night is included [6–7].
+Pathway 2: An eligible airline stopover of up to 96 hours
+A stopover is a short stay within an onward itinerary, not a ten-day Umrah route. Saudia's checked instructions put the visa application inside flight booking and require a passport with at least six months' validity, an onward ticket and the destination visa/residence permission where required. Final admission remains subject to passport control [6–7].
 
-Pathway 3: Eligible Saudi tourist-visa routes
-Bangladesh is not shown in the standard nationality-only eVisa list on the official portal as checked on 14 October 2026. Visit Saudi separately lists Bangladeshi passport holders for its Package Visa, which requires an integrated package through an approved provider with confirmed flights and accommodation. Treat this Package Visa as a sub-route of the tourist-visa category, not a fourth category [8–9].
+Read your airline's actual checkout before purchase. Saudia says visa, service, medical and insurance costs are calculated under MOFA rules; Visit Saudi's advertised line-item examples are not your guaranteed payable total. Do not add a free hotel or guaranteed processing time to the plan. If using another carrier, verify that carrier's own current itinerary and application conditions. The dedicated stopover guide covers this shorter trip separately [6–7].
 
-Some travelers with a valid, previously used US, UK or Schengen tourist or business visa may qualify for a Saudi visit visa on arrival, subject to the live portal, carrier and arrival conditions [10]. GCC residents may have a separate route; check the current residence and occupation criteria on the official eVisa portal [9]. Confirm eligibility for your exact passport, residence and itinerary; do not assume a one-year or multiple-entry visa [9–10]. Any tourist-visa route used for Umrah remains subject to the visa conditions, Nusuk services and Hajj-season restrictions. It does not authorize Hajj [4, 8–9, 12].
+Pathway 3: An eligible tourist-visa route, including Package Visa
+Bangladesh is not on the nationality-only eVisa list reopened on 19 October 2026. Visit Saudi separately names Bangladeshi passport holders for Package Visa through approved tourism providers. This is a tourist sub-route, not a fourth category and not an unrestricted visa-only purchase [8–9].
 
-3. Check the visa season and entry window
-Saudi Umrah entry is subject to the current season calendar and Hajj restrictions; do not describe it as unrestricted year-round. The Ministry's 1448H calendar lists final visa issuance on 9 March 2027, final pilgrim entry on 23 March 2027 and final departure on 7 April 2027. These dates apply to 1448H only. Check the next Ministry calendar before choosing dates or buying non-refundable travel [5].
+The checked Package Visa FAQ requires confirmed round-trip flights and accommodation in a Ministry-licensed hotel rated at least four stars. It publishes a package minimum of SAR 4,000 per adult for the first two days combined, plus SAR 1,000 for each consecutive day. These are dated published conditions, not a quote for your family or a BDT conversion. Confirm the current offer, total, inclusions and refund terms before payment; do not compare it with the old budget reference as if the baskets match [8].
 
-4. A practical booking sequence
-- First choose the travel window and visa category. Confirm that the route, connecting itinerary and season fit your passport and plans; keep a copy of the official eligibility page you used.
-- Check the live visa requirements and application steps before paying for non-refundable flights or hotels. For the direct Nusuk service, read the current package terms; for an external agent, get accommodation and transport details in writing [2–4].
-- Compare date-specific flights from Dhaka. A multi-city or open-jaw itinerary such as Dhaka–Jeddah outbound and Madinah–Dhaka return may avoid backtracking, but it is not automatically cheaper. Check baggage, transit requirements, airport changes and cancellation terms with the airline before purchase.
-- Choose hotels by the exact property address and room terms, not by a neighborhood label or an unverified distance. Check the route to the gate your family will use, slopes, accessibility, occupancy, shuttle service and cancellation policy directly with the property. Our Makkah and Madinah hotel-zone guide is a starting point, not a substitute for checking the booked address.
-- After your visa is issued, follow the current Ministry/Nusuk instructions for any Umrah permit and choose only an available date and time. Rawdah visits in Madinah use a separate permit service. The official service pages show the live booking channel; they do not promise a fixed slot-release schedule or availability [15–16].
-- The Ministry FAQ lists Bangladesh among countries where biometrics are implemented for electronically issued Umrah visas. Follow the instructions in your own visa application and the official Saudi Visa Bio service; do not assume this requirement applies to every tourist or stopover visa [4].
-- Keep your passport, approved visa, flight details, accommodation and transport confirmations, permit details and emergency contacts accessible offline as well as on your phone. Check the airline's document requirements before departure.
+What do the published foreign-visa and residence rules actually say?
+The Ministry of Tourism's English Tourist Visa Regulations, Article 6(2), and its announcement reported by SPA on 12 June 2023 describe exceptions for people whose nationality is not on the standard list. Reopened on 19 October 2026, these sources distinguish the following documents; the retrieved PDF does not establish its latest revision date [19–20]:
+- US, UK or Schengen visa: Article 6(2)(b) specifies a valid tourist or business visa, used at least once to enter the country granting it. A visa that has never been used is not what this provision describes. Do not assume a student or work visa qualifies under this tourist/business category [19–20].
+- US, UK or EU residence: Article 6(2)(c) specifies permanent residence. Do not treat every temporary residence permit as permanent residence. The June 2023 announcement describes both advance eVisa access and visa-on-arrival provisions; those are separate application methods, not a visa already issued to you [19–20].
+- Accompanying family: the regulation includes first-degree relatives coming with the qualifying visa or permanent-residence holder. Confirm each traveller's own application and accompanying-person requirements; this is not one shared family visa [19].
+- GCC residence: this is a separate category, not GCC citizenship or a GCC tourist visa. The retrieved PDF mentions at least three months' residence-visa validity and a profession condition, while an SPA report dated 2 May 2023 describes GCC-resident eVisas without specific professions. Do not apply the PDF's occupation wording as a verified current restriction or assume GCC residence alone grants visa on arrival. Confirm the current route and residence-validity requirements through the official checker [10, 19, 21].
 
-If you use a dual-currency card for online bookings, confirm international e-commerce access and your bank's current limits before checkout. See our Dual-Currency Card Endorsement Guide for the Bangladesh-side payment steps.
+Traveller check (visaEligibility): Before paying for this route, check your exact Bangladeshi passport, visa type, validity, prior use or permanent-residence category through the official eligibility checker and KSA Visa. Confirm with your operating carrier the documents accepted for boarding, including proof of prior entry and any airline/arrival-port conditions. Current carrier restrictions and acceptance of digital-only entry evidence were not established here. Published criteria are not personal approval; no application or boarding test was performed. Do not buy non-refundable travel on an assumed entitlement or send passport scans, visa numbers or login details to URAL/chat. [10, 19–21]
 
-5. Makkah–Madinah transport: check the current HHR fare and baggage rules
-Haramain High-Speed Railway booking and fare pages are the source for the latest schedule and ticket terms. On 14 October 2026, the official fare table listed base Economy fares of SAR 162 for Makkah–Madinah and SAR 65 for King Abdulaziz International Airport (KAIA)–Makkah. The operator says these are basic fares before VAT and fees; checkout prices vary by travel date, availability and other factors. Treat these figures as a dated reference, not a promised ticket price [17].
+Any tourist route used for Umrah remains subject to visa terms, permits and season restrictions; it does not authorize Hajj [5, 9, 12, 15–16, 19].
 
-The HHR baggage guidance allows one large item up to 25 kg and 65 × 55 × 35 cm, plus one hand item. Check the current operator page and your ticket conditions before packing; do not rely on the older, smaller dimensions copied into some travel posts [18].
+3. Which season and entry window apply to your trip?
+The Ministry's published 1448H Umrah calendar was reopened on 19 October 2026. It gives 9 March 2027 as final Umrah visa issuance, 23 March 2027 as final Umrah pilgrim entry and 7 April 2027 as final departure. These dates are for that Umrah season, not a substitute for Hajj registration or a universal expiry date for every tourist visa [5].
 
-6. Health, permits and documents
-Saudi health requirements are seasonal and can depend on the traveler's origin. Check the Ministry of Health's current Umrah requirements for your travel season and country of departure. The linked 1447H PDF is specific to that season and should not be treated as the rule for 1448H or a later season [13–14].
+Before choosing travel dates, check for a later Ministry notice and read your own visa's validity, entry count and permitted stay. A general season deadline does not extend an earlier personal visa expiry. Do not describe Umrah as unrestricted year-round or commit to non-refundable travel before resolving a route/season mismatch [3, 5].
 
-Use official Nusuk/Ministry services to check permit eligibility and appointment availability. An app account is not the same thing as an issued visa, a permit or permission to enter a restricted area. Keep those documents and dates separate when planning [2, 4, 15–16].
+4. What should you do before paying, during application and after visa issue?
+Use the sequence below as a decision checklist, not an application approval promise. Package routes may require travel services during application; obtain their actual prerequisites and cancellation terms rather than assuming that every flight can wait until visa issue [3, 7–8]. If paying online, first check international e-commerce access and current limits with your bank; the dual-currency-card guide explains the Bangladesh-side preparation.
 
-7. Budget: retain one planning estimate
-The published total below is retained from the existing article. It has not been re-priced in this 14 October 2026 refresh, and the old component figures were not a verified, reconciled booking basket. Treat it as a planning reference—not a live quote, a guaranteed trip total or proof that DIY is cheaper than an agency package.
+Step 1: Confirm eligibility, season and applicable health instructions.
+- Use your real passport, residence and visa category. Check the Ministry season calendar and seek the applicable current-season MOH requirements for your origin and circumstances. Do not substitute a historical PDF for current health instructions [5, 8–10, 13–14].
+
+Step 2: Verify the provider and price the required arrangements before payment.
+- Get the actual package/application prerequisites and written inclusions, total and cancellation terms. Compare date-specific flights, baggage and transit documents. For hotels, verify the exact address, room occupancy, access route and any shuttle terms with the property. No neighbourhood name or booking estimate guarantees those details [1–4, 7–8].
+
+Step 3: Apply through the selected official channel and complete requested biometrics.
+- Follow the application sequence and complete Saudi Visa Bio when that application requires it. The Ministry FAQ names Bangladesh for electronically issued Umrah-visa biometrics; it does not establish a universal after-visa task for every tourist or stopover traveller. Use the Nusuk/biometrics guide for the separate procedure and privacy cautions [4].
+
+Step 4: Check the issued visa before registering as a Nusuk visitor.
+- Match the traveller, passport details, validity, entry count and permitted stay to the trip. The Ministry FAQ says an overseas visitor can register with a valid visa. Use the visitor route appropriate to your status; a package-platform account is not the same as a permit account or approval [2–4].
+
+Step 5: Arrange separate Umrah and Rawdah permits as applicable.
+- Use the official services and only available appointments. An Umrah permit is not a Rawdah appointment. Follow the booking's current confirmation, entry-code and reporting instructions; the specialist Nusuk guide covers the dated published Rawdah procedure. Neither a visa nor an account guarantees a slot [15–16].
+
+Step 6: Reconfirm the trip and check access to your documents before departure.
+- Check flights, transit and baggage, hotel/transport confirmations and provider support contacts. Keep secure offline copies as backup, but open the issued permit on the phone/network you will actually use. A saved image is not a guarantee of entry. Never share credentials, biometrics or usable permit QR codes with URAL or unofficial helpers [3, 15–16].
+
+5. How should you plan flights, hotels and Makkah–Madinah transport?
+A Dhaka–Jeddah outbound and Madinah–Dhaka return itinerary may reduce backtracking, but compare the same dates, baggage, connections and change terms before choosing it; this guide has no matched fare basket proving savings. Use the flight-strategy guide as a checklist, not a live fare quote. For hotels, get the exact property address and route to the gate your family will use, room-sharing basis, accessibility and shuttle details in writing. Use the hotel/rail guide for the detailed room, access and transport checks; it is not proof of a particular property's services.
+
+The HHR official tariff reopened on 19 October 2026 lists Economy base fares of SAR 162 for Makkah–Madinah and SAR 65 for King Abdulaziz International Airport (KAIA)–Makkah, before VAT and fees. The operator says the actual ticket price varies by date, train occupancy and other factors. Read the final checkout rather than converting this tariff into an invented BDT trip cost [17].
+
+The checked HHR baggage page allows one large item up to 25 kg and 65 × 55 × 35 cm, plus one hand item. Measure the bags you will bring, check the current ticket/operator terms and include station transfers in your own transport quote. Airline baggage allowance is not proof that the same bags can travel by train [18].
+
+6. Which health instructions and permits still need personal checks?
+The MOH index and linked Umrah PDF were reopened on 19 October 2026. The PDF's first page explicitly says 1447H (2026). It does not establish the requirements for your 1448H trip. Obtain the applicable current-season and country-of-origin instructions from MOH and your official application/provider before travel; discuss personal vaccination, medication or fitness questions with a qualified clinician. An unverified newer document is not evidence that no health requirements apply [13–14].
+
+Keep visa approval, the Nusuk account, Umrah permit and Rawdah appointment separate. We have not tested your authenticated account, personal eligibility, biometric capture, network or gate admission. Use the point-of-action checks in the Nusuk guide and current official support if something fails; do not create fake applications or reserve practice slots [3–4, 15–16].
+
+7. How should you build your BDT budget?
+The single table preserves the existing 14 October 2026 planning reference. It was not re-priced on 19 October 2026, and the old component amounts were not a reconciled live booking basket. Treat it as historical context—not today's offer, a guaranteed total or proof that DIY is cheaper.
 
 [[UMRAH_BUDGET_TABLE]]
 
-No matched, itemized agency quote for the same dates, trip length, family room-sharing, flight baggage, visa, hotel nights, meals and transfers was captured for this update. To compare a package with DIY, request both totals on that same basis and check taxes, insurance, transport, cancellation terms and what is excluded. Neither route is automatically the cheaper one.
+For a current calculation, open the quote-input worksheet on /umrah. Enter whole-party BDT totals from dated quotes for flights, visa/insurance/services, each city's accommodation, transport, meals, extras and contingency; mark a category zero only when it really is included or not applicable. Avoid adding hotel or transport twice when bundled into a package. The worksheet does not fetch market prices.
 
-8. Before departure: a verification checklist
-- Re-check the visa route, current season calendar and Hajj restriction dates on the official pages.
-- Confirm that the name, passport number, validity, entry count and permitted stay on the issued visa match the traveler and itinerary.
-- Confirm any visa-specific biometrics, Nusuk permit and Rawdah appointment from the current official service pages.
-- Reconfirm hotel address, room occupancy, accessibility and transport arrangements with the property or provider.
-- Recheck the HHR fare, baggage allowance and ticket details, and each airline's baggage and transit conditions.
-- Save official documents offline and retain provider receipts and written service terms.
+No matched, itemized agency quote is available for the same dates, duration, four-sharing, flight baggage, visa, nights, meals, transfers and cancellation conditions. Request both baskets on that basis before comparing. Neither route is automatically cheaper; different visa/package minimums must not be hidden in a savings claim.
+
+8. What should you check before leaving Dhaka?
+- Reopen the applicable visa/season and health instructions, and check for later notices.
+- Match every traveller's issued documents to the itinerary and permitted dates.
+- Confirm hotel room occupancy/access, transport, baggage and transit documentation with the actual providers.
+- Check Nusuk account access, issued permits, confirmation deadlines and the phone/network you will use.
+- Keep receipts, written service/refund terms, secure document backups and official support contacts accessible.
+- Follow the linked specialist guide for the task you are completing; a green website build does not verify your booking.
 
 9. Frequently Asked Questions
 Can I apply for an Umrah visa directly through Nusuk from Bangladesh?
-Bangladesh is listed in the Nusuk registration options checked on 14 October 2026, so start by checking the live Nusuk Umrah service. Registration is not visa approval, and the available package or visa-only option depends on current checkout terms [1–4].
+The Ministry describes direct applications and Bangladesh is in the signup lists checked on 19 October 2026. Check current service/package availability for your case; registration does not guarantee visa approval or a visa-only checkout [1–3].
 Does an external Umrah agent issue a visa without accommodation and transport?
-The Ministry FAQ says an external agent cannot issue an Umrah visa without accommodation and transport services. Ask the provider to specify these services and all charges in a written contract [4].
+The Ministry FAQ says an external agent cannot issue an Umrah visa without accommodation and transport services. Obtain the services, total and cancellation terms in writing [4].
 Can I use a tourist or stopover visa for Fard Hajj?
-No. An Umrah, tourist or stopover visa does not replace Bangladesh Hajj registration or the Saudi Hajj permit. Follow the current Bangladesh and Saudi Hajj instructions [11–12].
+No. Those visas are not Hajj permits. Use the separate Bangladesh registration process and current Saudi Hajj instructions; historical 1447H rules are not automatically 1448H requirements [11–12].
 Is the 10-day DIY Umrah figure a current booking quote?
-No. The table preserves the previously published family-of-four-sharing planning estimate; this refresh did not re-price it or verify it against a live booking basket.
+No. It is the retained 14 October 2026 ten-day/four-sharing reference and was not re-priced on 19 October. Use dated matched quotes and the hub worksheet for your own calculation; the old range proves no agency saving.
 Where do I book Umrah and Rawdah permits?
-Use the official Ministry/Nusuk service shown for your case, then choose an available appointment. Umrah and Rawdah permits are separate services, and availability is not guaranteed [15–16].`,
-  "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": `
-When Bangladeshi families plan an Umrah trip - especially with elderly parents or young children - the difference between an exhausting journey and a calm one comes down to three ground logistics: which street the hotel actually sits on, how the Haramain High-Speed Rail transfer really works, and what the Zamzam and ziyarah rules say. Everything on this page was re-checked against the rail operator's own published pages on 15 October 2026. Where a number is not published anywhere, this guide says so instead of inventing one.
+Use the official Ministry/Nusuk service for each task. They are separate appointments with live availability and current booking instructions. Check confirmation and entry-code access rather than treating an account or initial reservation as guaranteed admission [15–16].`,
+  "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": `Who this guide is for: Bangladeshi families choosing Makkah and Madinah accommodation and deciding whether their luggage, mobility needs and connections fit the Haramain train. This is a booking checklist with dated operator evidence, not a hotel inspection, rate quote or tested accessible journey.
 
-1. MAKKAH HOTEL ZONES: WHAT AN ADVERTISED DISTANCE HIDES
-Booking sites quote "600 meters from Masjid al-Haram" and rarely say what that distance is measured to. Treat any distance claim as unverified until the property confirms four things: which gate you will actually enter through, whether the route is flat or contains steps and slopes, whether the shuttle is free and running at your prayer times and where it drops you, and how long the walk really takes in afternoon heat rather than in the listing photo.
-- Jabal Omar and Ibrahim Al Khalil Street (north-west side): the area most often recommended for wheelchair users and older pilgrims, because the approaches are built around ramps, lifts and covered links toward the King Fahd Gate side. Do not accept "zero slope" or a minute count from a listing - ask the hotel to describe the route to the gate you will use. Nightly rates move with date, room type and occupancy, so read your own live rate instead of a band quoted in a blog.
-- Lower Ajyad: close to the King Abdulaziz Gate side and dense with South Asian restaurants. Upper Ajyad (Bir Balila) climbs, so only book there if the property confirms a shuttle for the people travelling with you.
-- Mahbas Al Jin and Kudai: budget 3- and 4-star towers that depend on shuttle service. Get the shuttle's hours, frequency and drop-off point in writing before you pay, and keep a walking option for the times it is not running.
-The Makkah Haramain station is at Ar-Rusayfah and the Madinah station sits outside the courtyard; the operator's own station-services page lists shuttle buses toward Al-Haram at both, along with taxis, luggage trolleys and short- and long-term parking [1]. A hotel "near the station" is therefore not a hotel near the Haram.
+Quick Answer
+Checked on 19 October 2026: choose the exact hotel, room and route to your intended mosque entrance—not a neighbourhood label or a straight-line distance. HHR publishes one large bag per passenger up to 25 kg and 65 x 55 x 35 cm, plus one hand item. Its basic Economy fares include SAR 65 for KAIA–Makkah and SAR 162 for Makkah–Madinah, before VAT and fees; actual tickets vary. Confirm hotel access, transfers and your ticket's change/refund rules before paying [1–3, 5–6].
 
-2. MADINAH: THE NORTH SIDE IS A FAMILY QUESTION, NOT A GATE NUMBER
-Masjid an-Nabawi sits inside a flat paved courtyard, so the practical difference between hotels is how far around that courtyard you must walk to reach the section you are allowed to use. Gate assignments for the women's prayer areas and the Rawdah entrances are set by the General Presidency and change with the season; they are shown when you book the permit and are not fixed in any blog. Check the current gate and time in the Nusuk app first, then measure your hotel against that gate. The women's gates and mahram detail has its own guide, linked below.
+1. How should you compare Makkah hotel areas?
+Use names such as Jabal Omar, Ibrahim Al Khalil, Ajyad, Mahbas Al Jin and Kudai to organize a search, not as proof of price, a flat route or a reliable shuttle. This review has no property-specific evidence to rank one whole area as best for wheelchairs or to classify every hotel there as walkable or shuttle-dependent.
 
-3. HARAMAIN HIGH-SPEED RAIL: FARES, TIME, AND THE BAGGAGE RULE THAT BREAKS TRIPS
-Book on the operator's own portal (sar.hhr.sa) or the HHR app; both use the same tariff. At the 15 October 2026 check the published base fares (Economy | Business, before VAT and fees) were King Abdulaziz International Airport (KAIA) to Makkah SAR 65 | SAR 101.40, Jeddah Al-Sulimaniyah to Makkah SAR 43 | SAR 90, and Makkah to Madinah SAR 162 | SAR 455 [2]. The operator states these are basic fares and the actual ticket price varies with travel date, how full the train is and other factors. No BDT figure is published on this page: multiplying an SAR fare by an undated exchange rate manufactures a price no source supports.
-- Journey time: select your train and read the duration the booking engine shows. The airport-to-Makkah sector is the shortest on the network, and a direct Makkah-to-Madinah service is generally listed at around two and a quarter hours. A road transfer takes longer and is exposed to traffic.
-- The same tariff page lists discounts and ticket rules worth knowing before you buy a family's four seats: children get 50% off the Economy base fare and 40% off Business, an infant occupying a shared seat gets 90%, and a passenger with an eligible disability document gets 50%. Seat selection is free. Boarding runs from 60 minutes up to 10 minutes before departure. Tickets bought at a station office or vending machine cannot be changed or refunded, and portal changes and cancellations are charged by how close to departure you are - on Economy minimum-price fares, free up to 24 hours before, then 10% for a change and 35% for a cancellation up to 20 minutes before departure [2].
-- Baggage: each passenger may bring one large piece, up to 25 kg and 65 x 55 x 35 cm, plus one hand item such as a backpack, laptop bag, camera bag or purse. Excess baggage is not carried on the train at all, and every bag is security-scanned before you reach the platform [3]. A standard checked suitcase from a Dhaka flight is usually larger than that allowance, so a family of four arriving with four big cases needs a road transfer or a courier - not four train tickets. Prohibited onboard items include sharp tools, compressed gas containers, toy weapons and gold, jewellery or cash worth more than SAR 60,000 [3].
-- Landing at Jeddah Airport in ihram: the KAIA station is inside the airport complex, so follow the signs and allow real time for the security scan instead of assuming a five-minute hop. The miqat decision itself belongs to the ihram guide linked below.
+For each candidate, compare the actual accommodation entrance with the entrance you intend to use at Masjid al-Haram. Ask what the advertised distance measures: a map point, the boundary, an entrance or the full pedestrian route. Neither a view of the mosque nor a hotel near a station establishes the walk your family will make.
 
-4. HISTORIC ZIYARAH: NO PUBLISHED CAR TARIFF EXISTS
-There is no official fare table for a private ziyarah car in Makkah, Madinah or Taif, and per-person tour-bus markups are not itemised anywhere either, so this page publishes no SAR or BDT price for them. What works in practice: agree the total for the whole car and the total hours, not a per-person rate; confirm whether waiting between stops is included and who pays for parking; use a metered taxi or a ride-hailing app if you would rather see a fixed fare before the trip starts; and pay after the tour where the driver accepts it. A Makkah half-day usually covers Jabal al-Noor and the Cave Hira base, Jabal Thawr, Mina, Muzdalifah, Arafat and Jabal al-Rahmah, and Masjid Jin. In Madinah: Masjid Quba, Mount Uhud and the Martyrs' Cemetery, Masjid Qiblatain and the Seven Mosques (Khandaq). A full-day Taif run from Makkah normally includes the Qarn al-Manazil (Al-Hadaiq) miqat and the rose terraces - read the ihram guide first if you intend to enter ihram there.
+A useful supplier example—not an endorsement—is Hilton's own Makkah/Madinah page. It lists Jabal Omar properties and advertises a free shuttle at the named Hilton Hotel & Convention Jabal Omar Makkah. That is a claim about one property, not every Jabal Omar hotel, and it does not establish today's frequency, boarding point, wheelchair access or a seat for your family. Get the current terms directly from the property [5].
 
-5. ZAMZAM AND THE RETURN FLIGHT: ONE PLACE TO READ THE RULE
-The 5-litre sealed carton, the airport kiosk process, what each carrier accepts outside the normal baggage allowance and what Bangladesh Customs permits on arrival are all covered in our dedicated Zamzam, dates and gold customs guide. That page is the one to re-open before you pack: kiosks, prices and carrier allowances all change, and a figure repeated in a hotel lobby is not evidence. This page therefore publishes no Zamzam price, and the same caution applies to dates, gold and VAT-refund invoices.
+Compare more than the nightly headline: exact dates and nights, adults/children and ages, permitted occupancy, bed configuration, whether an extra bed is confirmed, meals, taxes, check-in/out, cancellation and the total payment currency. No nightly BDT band or room availability was verified in this review. Put your actual whole-party quote into the Umrah hub worksheet rather than deriving a saving from an old estimate.
 
-Hotel access questions - the walking route, the gates, the shuttle, accessibility and the live rate - belong to the property, and asking before you pay costs nothing. Read the map pin, then read the reviews that name the gate you intend to use.
-`,
+2. What changes when choosing a Madinah hotel or an accessible room?
+In Madinah, choose around your intended activities and entrance, not a fixed women's gate number copied from a hotel advertisement. General mosque visits and a booked Rawdah appointment are different tasks; use current on-site directions and your actual permit instructions. The Nusuk guide explains the separate appointment checks.
+
+Station access and mosque access are also different. Hilton's own page describes DoubleTree by Hilton Madinah Gate as connected to Madinah Gate Mall and the high-speed train station. That is useful for understanding a rail-linked option; it does not establish a short walk to the Prophet's Mosque or an available mosque shuttle for your dates [5]. Compare a station-linked stay with a mosque-oriented stay using the complete transfer plan, not the hotel name alone.
+
+Accessible rooms need room-level confirmation. Hilton's accessibility help says features vary by hotel and room, and roll-in showers and accessible bath/shower configurations are different room types. A chain label or an accessible lobby does not prove the booked bathroom or the outdoor route suits your wheelchair [6]. Ask about the exact room type, doorway clearance, bed/bathroom layout, lift access and steps between the room, hotel exit, vehicle and intended entrance. If walking is not feasible, arrange a confirmed transport alternative rather than treating walking as a safe fallback.
+
+Traveller check (hotelAccess): Before non-refundable hotel payment, obtain the exact property entrance, room/occupancy and bed confirmation, full pedestrian route to your intended entrance, steps/slopes and any shuttle's operating times, fare, pickup/drop-off and accessible boarding arrangements in writing. Ask about closures and your actual prayer/travel times. No route, room, shuttle or wheelchair journey was tested here; a supplier's marketing description is not personal accessibility clearance. Do not send passport scans or private booking credentials to URAL/chat. [5–6]
+
+3. What do HHR's station, baggage and ticket pages actually establish?
+HHR's station-services page lists shuttle buses to Al-Haram at the Makkah and Madinah stations, taxis, luggage trolleys and wheelchairs for movement within the station. It does not provide a verified timetable, hotel stop, fare or availability for your journey. Do not merge the station shuttle, a hotel's shuttle and an airport transfer into one assumed free service [1].
+
+Baggage is checked per passenger. HHR allows one large bag up to 25 kg and 65 x 55 x 35 cm, plus one extra hand item such as a backpack, laptop bag or nursery bag. Both weight and dimensions matter, and bags undergo security checks before train access. The fares page says excess baggage is not allowed [2–3]. An airline allowance does not override this rail allowance.
+
+Four passengers with four bags that each comply do not automatically need a road transfer. Measure and weigh each bag instead of assuming every suitcase from Dhaka is too large. If a bag does not comply, repack within the actual allowance or confirm separate lawful transport and its price, handling and collection arrangements before booking. Do not assume a courier or paid excess-baggage option exists on the train [2–3].
+
+Traveller check (railBaggage): Before buying train tickets, measure and weigh each traveller's actual bag and count the hand items against HHR's current allowance. Ask the operator about mobility equipment, assistance and any item whose treatment is unclear. Confirm the whole journey for a noncompliant bag; do not arrive expecting to buy an excess-baggage exception. This review did not inspect your bags or test baggage acceptance. [1–4]
+
+What does the published tariff mean for your budget?
+The operator's sar.hhr.sa fare page reopened on 19 October 2026 shows basic Economy fares of SAR 65 for KAIA–Makkah and SAR 162 for Makkah–Madinah, excluding VAT and fees. It says actual prices vary with date, occupancy and other factors. These are tariff examples, not your ticket total, a discount entitlement or a price guarantee. No BDT figure is published here: use the actual ticket charge and your bank/payment costs rather than an assumed exchange rate [2].
+
+Choose the correct station: KAIA and Jeddah are separate entries on the fare table. Confirm your flight terminal and the actual route to the selected station, train departure and onward hotel transfer. Read the booked train's duration and allow time for immigration, baggage, transfers, screening and disruption. No fixed train time, road comparison or airport-connection buffer was verified in this review [1–4].
+
+Which ticket and boarding rules need extra care?
+HHR's fare page states boarding from 60 minutes to 10 minutes before departure. That is a published boarding window, not permission to reach the station only ten minutes before departure; its travel tips advise arriving early with correct ticket and identification details [2, 4].
+
+Read the exact fare and sales-channel conditions. The fare page says station-office and vending-machine tickets cannot be changed or refunded, while the station-services page lists cancellation/refund/update functions at the ticket desk. Those statements do not establish that your ticket is refundable. The retrieved fare page also contains several fee tables with class labels that were not sufficiently clear in extraction to assign a free-change promise to Economy. Do not rely on the old guide's class-specific percentages; obtain the rules for your selected ticket from HHR [1–2].
+
+Child, infant and assistance discounts are eligibility categories, not an automatic family saving. Ask how each child's age, own/shared seat and each traveller's accepted identification affect the booking. This review did not complete a family fare calculation or verify acceptance of a Bangladeshi disability document [2, 4].
+
+Traveller check (railTicket): Before payment, save the selected stations, dates, passenger/seat categories, final total, boarding instructions and the exact change, cancellation and no-show rules for that sales channel. If the desk description, tariff table or checkout disagree, ask HHR to resolve it rather than assuming the most generous refund. Confirm station-to-hotel transport and assistance separately. No ticket purchase, refund or connection was tested here; do not share payment details, booking codes or usable ticket barcodes with URAL/chat. [1–4]
+
+4. How should you book the hotel and train together?
+Use this sequence for planning, not as a tested checkout or a recommendation to buy non-refundable services before resolving visa and season eligibility. Required package arrangements may differ; the main DIY guide owns that decision.
+
+Step 1: Confirm your route, dates and travellers.
+- Check the applicable visa/season requirements, arrival and departure stations, flight terminal, party ages and mobility needs. Do not treat two hotels with similar names as the same property.
+
+Step 2: Confirm the exact room and access route.
+- Obtain written room/bed/occupancy, taxes, meals, cancellation and check-in/out terms. Confirm the real entrance, intended mosque route and any shuttle or accessible transport arrangements [5–6].
+
+Step 3: Check every passenger's baggage and assistance needs.
+- Apply HHR's size, weight and hand-item allowance to each bag. Resolve noncompliant luggage and mobility-equipment arrangements with the operator before paying [1–4].
+
+Step 4: Compare the actual rail ticket and transfer total.
+- Select the correct stations, train and passenger categories. Read the final fare, boarding and sales-channel change/refund rules; include separate station/hotel transfers without invented BDT conversions [1–4].
+
+Step 5: Pay only on understood terms and check the confirmations.
+- Check traveller names and booking details through the official supplier. Retain receipts and the actual hotel/ticket conditions; payment is not confirmation of a special-access request unless the supplier confirms it.
+
+Step 6: Reconfirm services before each travel day.
+- Recheck train notices, the hotel's access/shuttle arrangements and any relevant permit instructions. Keep your documents accessible, allow time for screening and resolve changes with the operator or property—not an assumed timetable [1, 4].
+
+5. Which details belong in the other guides?
+Use the main DIY guide for visa/application order and the hub for your own quote inputs. Use Nusuk for Umrah/Rawdah appointments, and the older-traveller guide as a separate assistance checklist, not proof that a property is accessible. Optional Ziyarah, Ihram/Miqat and return-flight Zamzam/customs rules have their own source reviews; this hotel/rail check does not certify them or establish that no published price exists. Do not copy a rail valuables rule into a Bangladesh customs exemption [3].
+
+6. Frequently Asked Questions
+Which Makkah hotel area is best for an elderly parent?
+This review does not establish a universally best area. Compare the exact room, exit-to-intended-entrance route, steps, lifts and confirmed transport against the person's needs; an area name or accessible lobby is not enough [5–6].
+Does a free hotel shuttle mean a guaranteed ride at prayer time?
+No. The opened Hilton page advertises a shuttle at a named property, not every hotel or a guaranteed timetable. Confirm current hours, pickup/drop-off, capacity, fare and accessible boarding with the actual hotel [5].
+Can four family members take four suitcases on Haramain?
+Each passenger's bag must meet the allowance: one large bag up to 25 kg and 65 x 55 x 35 cm, plus one hand item. Four compliant bags for four passengers are not automatically disallowed; verify your actual bags and special items [2–3].
+Are SAR 65 and SAR 162 the final ticket prices?
+No. They are basic Economy tariff examples reopened on 19 October 2026 for KAIA–Makkah and Makkah–Madinah, before VAT and fees. Read your date-specific checkout and separate transfer costs [2].
+Can I assume Economy changes or refunds are free?
+No. Read the selected fare and sales-channel conditions. The retrieved operator pages have table-label and ticket-desk wording limits; do not turn a general service description into a refund entitlement [1–2].
+Does a hotel beside Madinah's train station remove the mosque transfer?
+Not necessarily. Hilton describes a named Madinah Gate property as station-connected; that does not prove the outdoor route or mosque transfer for your stay. Confirm the actual route and transport before booking [1, 5].`,
+
   "hajj-registration-bangladesh-government-vs-private-package-cost": `Who this guide is for: Bangladeshi pilgrims comparing government and private arrangements for Hajj 2027.
 
 Quick answer — The latest MoRA 2027 notice supplied for this guide says primary registration ran from 27 July to 24 September 2026 and that the deadline would not be extended. As of 18 October 2026, that window has passed. Check hajj.gov.bd for any later notice. The supplied sources do not establish 2027 package prices; 2026 figures are historical, not current quotes [1].
@@ -454,174 +540,343 @@ Are electric scooters available for Tawaf and Sa'i in Makkah?
 Yes. Official electric mobility scooters are operated on the dedicated Mezzanine level of Masjid al-Haram [3]. Both single-passenger and double-passenger scooters are available; book and verify operating procedures via the official Nusuk or Tanaqol application [2][3].
 What medical documents should seniors carry from Bangladesh?
 Bring original medication packaging in carry-on bags accompanied by an English prescription or medical letter signed by a registered physician stating the patient's chronic diagnoses and prescribed generic medications [1].`,
-  "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": `For Bangladeshi expatriates (NRBs), international students, business travelers and families flying between Dhaka and the UK, USA, Canada, Europe, Turkey or the Gulf, the 96-Hour Saudi Stopover Visa can turn a long connection into a 4-day Umrah trip without a separate visa application. This guide was re-checked against the official Visit Saudi and Saudia stopover pages on 15 October 2026. Two things are not published anywhere by the Ministry or the carriers: a fixed stopover fee and a universal free-hotel benefit. The visa, insurance and service charges you see are line items inside your airline checkout, and they change. Where a current official figure does not exist, this page says so instead of inventing one. If you are weighing a stopover against a separate trip, our main DIY guide carries one dated planning estimate — BDT 1,16,000–1,32,000 per person for 10 days, family of four sharing, checked 14 October 2026 and not a live quote — rather than a headline saving.
+  "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": `Who this guide is for: Bangladeshi passport holders considering a short Saudi visit within an international onward journey, including NRB families and students. Use it to decide whether the stopover fits your documents, airline booking and available time—not as an approval or a completed-booking report.
 
-1. WHAT THE 96-HOUR SAUDI STOPOVER VISA ACTUALLY OFFERS
-Visit Saudi describes a stopover visa that lets travelers transiting Saudi Arabia enter the Kingdom for up to 96 hours — including to perform Umrah — when they book a qualifying itinerary with the national carriers [1].
-- Eligible carriers: Saudia (Saudi Arabian Airlines) and flynas, on one ticketed itinerary that contains the Saudi connection. It is a stopover inside your booking, not a visa you can attach to separately purchased legs [1-3].
-- Prior-visa history: unlike the tourist eVisa conversation, the stopover route does not require a previously used US/UK/Schengen visa. What decides your eligibility is the itinerary and the carrier's current rules — not a published blanket entitlement for Bangladeshi passports. Saudia's own help flow covers the case where a country is not eligible, so confirm the stopover option actually appears in your booking before you pay [1-2].
-- Validity and stay: valid 90 days (3 months) from issuance, single entry, stay up to 96 hours (4 days) anywhere in Saudi Arabia, including Makkah and Madinah. It is not extendable, and it allows one stopover trip per booking [1-2].
-- What you pay: no fixed fee is published. At the 15 October 2026 check, Visit Saudi listed the Saudia offer as visa fee Free, application fee approximately SAR 39.50 (USD 10.50) and medical insurance from SAR 13 [1]. Saudia states that visa fees, service charges, medical fees and insurance costs are calculated according to Ministry of Foreign Affairs regulations during booking [2]. Those are one carrier's checkout line items — not a guaranteed total for every airline, route or passenger, and not a price list for flynas. We deliberately publish no BDT figure: converting an SAR line item into taka without a dated exchange rate manufactures a price that no official source supports.
-- No hotel included: do not build a budget on a free night. Visit Saudi's stopover page currently lists no hotel benefit, and Saudia treats hotels as an optional add-on available "for round-trip bookings and selected destinations only" [1-2]. A complimentary one-night stay existed as a launch-era Saudia Holidays promotion for selected itineraries and selected cities — never Makkah — subject to availability and advance booking, and promotions of that kind are withdrawn without notice. Book and pay for your Makkah and Madinah nights yourself.
-- The visa is not a permit: Visit Saudi requires religious visitors to schedule Umrah or Ziyarah appointments through Nusuk.sa before visiting Makkah or Madinah [1,4]. A stopover, tourist or Umrah visa is never a Hajj permit.
-- Entry conditions: passport valid at least six months, a confirmed onward ticket to your final destination, and a valid entry visa or residence permit for that destination unless you are exempt. Issuance does not guarantee entry — passport control officers decide at arrival [2].
+Quick Answer
+Checked on 19 October 2026: Visit Saudi describes a stopover stay of up to 96 hours, including Umrah, and Saudia publishes an application during flight booking. The visa's entry-validity period is different from its permitted stay. Confirm your exact passport, onward-destination permission, itinerary and airline conditions before payment; neither a flight nor a visa guarantees admission or a Nusuk appointment [1–2, 4, 9]. Detailed current flynas eligibility could not be verified from its redirected guide. Its 30 January 2023 launch is historical evidence, not a current checkout test [3, 10].
 
-2. STEP-BY-STEP: ADDING THE STOPOVER WHILE BOOKING THE FLIGHT
-Saudia's published flow is the clearest reference; flynas's booking engine carries a comparable stopover step, so confirm each screen on your own booking [2-3].
-1. Search the international itinerary with a Jeddah (JED) or Riyadh (RUH) connection and a layover of up to 96 hours — for example Dhaka DAC → London LHR or Dhaka DAC → Istanbul IST.
-2. Select the stopover city and how long you want to stay (up to 96 hours), on the outbound or the return leg, inside the same booking.
-3. Apply for the Stopover Transit Visa on the extras/additional-services step of checkout, and have the passport photo the form asks for ready (Saudia specifies 200 × 200 px, maximum 20 KB) [2].
-4. Pay the ticket and the visa in a single transaction. The SAR amounts itemized on that page are the amounts you are charged — that, not any figure quoted online, is your real cost.
-5. Keep the emailed visa and insurance documents, and verify the issued visa on the Saudi Unified Visa Platform before you fly [2,5].
-There is no published processing-time guarantee. The visa is normally issued once the payment completes and must be requested during booking rather than added later, so do not leave the stopover decision to the last minute.
+1. What does the stopover visa cover—and what needs checking first?
+Saudia's dedicated transit page says the visa is valid for 90 days from issue, permits a stay of up to 96 hours, is not extendable and allows one stopover trip per booking. Visit Saudi describes the Saudia offer as single entry with three-month validity. Do not mistake the entry-validity window for permission to remain for three months: read the issued visa and confirm your permitted entry and departure times [1–2].
 
-3. IF YOU ALREADY HOLD A USED US, UK OR SCHENGEN VISA
-A valid, previously used tourist or business visa from the USA, UK or a Schengen country (or permanent residency there) is a different route, and it is conditional rather than automatic. Ordinary Bangladeshi passports are not on the nationality-only tourist eVisa list, so do not assume a 1-year multiple-entry eVisa will simply be issued to you [6]. Check the current conditions on the official portal: travelers holding a valid, previously used US/UK/Schengen visa may qualify for visa-on-arrival where the published air-arrival and carrier conditions are met [6-7]. The price is whatever the portal or the arrival counter shows — a government visa fee plus mandatory medical insurance and, for online applications only, a platform charge — so read the total in SAR on the official page instead of budgeting from a converted number. A tourist visa also does not replace the Nusuk Umrah appointment [4].
+Saudia lists a recognized passport with at least six months remaining, subject to applicable bilateral agreements, a confirmed onward ticket and a destination visa or residence permission where required unless exempt. Permission for your final destination is not the same question as qualifying for a Saudi tourist visa through a foreign document. The retrieved conditions do not establish a universal Bangladesh entitlement or an unconditional exemption from every prior-visa requirement [2].
 
-4. A REALISTIC 96-HOUR (4-DAY) UMRAH AND MADINAH PLAN
-The clock is fixed: up to 96 hours, no extension [2]. Plan backwards from your onward flight.
-- Day 1 — arrive, Jeddah to Makkah: land at King Abdulaziz International (JED), clear immigration, and transfer to the Haramain High Speed Rail station for Makkah. The operator's tariff showed a SAR 65 base Economy fare for the KAIA–Makkah leg at our 14 October 2026 check, before VAT and fees, with the live fare varying by date and travel class [8]. Allow a real buffer for the terminal-to-station transfer and luggage, check in, then complete Umrah on your booked Nusuk slot.
-- Day 2 — Makkah: pray 5 waqt in Masjid al-Haram and keep a half-day ziyarah (Jabal al-Noor, Mina, Arafat). Agree any taxi or tour price at booking, not on arrival.
-- Day 3 — Makkah to Madinah: the Haramain train takes roughly 2¼ hours on the published schedule, with a SAR 162 base Economy fare for Makkah–Madinah before VAT and fees at the same 14 October 2026 check — treat both as indicative and confirm on the operator's site [8]. In Madinah, pray in Masjid an-Nabawi using your pre-booked Rawdah appointment permit.
-- Day 4 — Madinah, then onward: Masjid Quba after Fajr, then return to Jeddah for your onward flight. Departing from Madinah instead works only if that leg sits inside the same ticketed itinerary — the stopover is limited to one per booking, so verify it when you book [2].
-Hotel access questions — walking route, gates, shuttles, accessibility, live rates — belong to our Makkah & Madinah hotel-zones guide. Check the exact property address and the route to the gate you intend to use, because a neighborhood name proves nothing about the walk.
+Saudia and flynas must be checked separately. Saudia's current dedicated page provides the booking sequence below. The flynas guide URL redirected to its homepage; the public form showed a Stop Over Booking option, not a visa result for a Bangladeshi traveller. The opened flynas announcement is dated 30 January 2023. It describes the service launch and application after ticket purchase, but does not prove today's eligible destinations, required foreign visas, price, refund rules or application screens [3, 10].
+
+Traveller check (stopoverEligibility): Before buying the flight, ask your selected airline to confirm the stopover route for your exact passport, onward destination and entry documents, including any qualifying-visa or residence requirement. For flynas, obtain current instructions rather than relying on the redirected guide or assuming Saudia's flow applies. A visible booking option is not visa approval. If eligibility or the visa-after-ticket risk is unclear, resolve it with official support before non-refundable payment. No application or booking was tested here; do not send passport scans, visa numbers or credentials to URAL/chat. [1–3, 10]
+
+What should you budget for the visa and hotel?
+Visit Saudi publishes a promotional free visa-fee line plus application and insurance charges for the Saudia offer. Those published examples are not an all-in quote. Saudia says visa fees, service charges, medical fees and insurance costs are calculated under Ministry of Foreign Affairs regulations. Record your actual itemized checkout total, payment currency and bank charges rather than converting a promotional starting price into an invented BDT total [1–2].
+
+A hotel is not a verified universal inclusion. Saudia's dedicated page says hotel bookings are available for round-trip bookings and selected destinations only; that does not establish a free room for your booking. Get any claimed inclusion, property, city, dates, taxes and cancellation terms in writing. Otherwise budget for your own accommodation. This review did not test a hotel voucher or establish that no conditional promotion exists [1–2].
+
+2. How do you request a stopover through Saudia?
+This is Saudia's published sequence, not a flynas procedure or an authenticated screen test. If a ticket has already been issued, ask the carrier whether and how a visa can be requested; do not assume this new-booking flow can be added later [2].
+
+Saudia's page advertises fast email issuance, but this review did not test timing or establish a guaranteed processing deadline for your application. Leave room for checks or failure; do not plan an immediate departure on a marketing promise [2].
+
+Step 1: Confirm the onward journey and stopover before purchase.
+- Check your passport, destination permission and airline eligibility. Select the Saudi connection and duration inside the airline's stopover booking flow. Do not assume independently purchased flight legs qualify or are protected as one journey [2].
+
+Step 2: Read the actual visa, fare and cancellation conditions.
+- Identify which travellers need a visa, the proposed dates, baggage and any hotel arrangements. Ask what happens to the ticket and other payments if the visa is delayed or refused; do not assume a refund [1–2].
+
+Step 3: Complete the stopover visa request during booking.
+- Saudia describes Seats & Extras / Additional Services for the application. Its published FAQ specifies a 200 × 200 pixel photo up to 20 KB; follow the current form if its requirements differ. These are Saudia instructions, not universal flynas photo specifications [2].
+
+Step 4: Check the itemized total before paying.
+- Saudia describes paying the flight and visa together. Check the insurance, other charges, currency and terms before authorizing payment. Payment is not proof of visa approval [2].
+
+Step 5: Inspect the issued visa and insurance documents.
+- Saudia says the documents arrive by email. Match the traveller, passport details, entry count, validity and permitted stay to the onward flight; use official visa services or carrier support if anything is missing or inconsistent [2, 5].
+
+Step 6: Arrange permits and reconfirm departure logistics.
+- With a valid visa, follow the applicable Nusuk visitor process and available Umrah/Rawdah services. Recheck flights, transfers, accommodation, current-season health instructions and access to your actual permit before departure [4, 9]. Use the reviewed Nusuk guide for confirmation and privacy checks.
+
+3. Is a used US, UK or Schengen visa the same route?
+No. Stopover permission within an onward itinerary and a tourist-visa exception based on a foreign visa or residence are different routes. Bangladesh is not on the standard nationality-only eVisa list used in the main guide's separate review. The main DIY guide explains the attributed tourist/business prior-use and permanent-residence categories, with current carrier, GCC and accepted-entry-evidence limits [6–7]. Use that guide and the official checker for the alternative route; do not assume that any student/work visa, residence card or previous trip creates automatic eligibility. This stopover review does not newly verify that alternative's fine print.
+
+A visa is not a permit. The Ministry offers separate Umrah and Rawdah appointment services through Nusuk.sa, subject to eligibility and availability. A Rawdah appointment is distinct from an ordinary visit to the Prophet's Mosque; do not turn it into a claim that every mosque prayer needs a Rawdah permit. A stopover visa does not authorize Hajj [1, 4, 9].
+
+Traveller check (stopoverPermits): Before committing to a two-city plan, check the issued visa's time window and the Umrah and separate Rawdah appointments actually available to you. No slot or entry is guaranteed by the flight booking. Follow your booking's current confirmation and entry-code instructions on the phone/network you will use; a saved image is not an admission guarantee. Do not consume a trial slot or share OTPs, passport details or usable QR codes. Current-season health and access restrictions still need checking. [1, 4, 9]
+
+4. What can a four-day plan realistically include?
+Treat the following as an illustrative allocation, not a tested connection or a promise to fit two cities into 96 hours. Build backwards from your confirmed onward flight, allowing for immigration, baggage, station/airport transfers, check-in, rest and disruption. Use the issued visa's allowed window, not four calendar labels, to decide whether the plan fits [2].
+- Day 1: arrive in Jeddah only if that is your ticketed stopover, transfer to your confirmed Makkah accommodation and perform Umrah at the available booked time. Do not promise to complete it on arrival day if the slot or transfer does not work.
+- Day 2: keep Makkah as the base, with rest and worship around your family's capacity. Optional visits are not an extra Umrah requirement; do not pack in a guaranteed taxi tour.
+- Day 3: remain in Makkah, or consider Madinah only if the actual train, luggage rules, hotel, appointment and return/onward connections leave adequate time. A Rawdah appointment is a separate availability question, not a promised part of this itinerary.
+- Day 4: prioritize the onward departure. Return to the ticketed departure airport with a substantial buffer; do not assume a Madinah departure can replace a Jeddah flight. If timing is tight, omit Madinah rather than rely on an extension.
+
+For exact rail schedules, ticket conditions and fares, use the operator's current booking; this review did not reprice rail or verify a fixed journey time [8]. The hotel/rail guide owns property access, intended gate, room occupancy and shuttle questions. Get those details from the actual property before booking. For a longer independent trip, compare a genuinely matched basket using the Umrah hub worksheet—not an assumed stopover saving.
 
 5. Frequently Asked Questions
 How much does the 96-hour Saudi stopover visa cost?
-There is no published fixed price. Visit Saudi's current Saudia offer shows the visa fee as free with an application fee of about SAR 39.50 and medical insurance from SAR 13, and Saudia says visa, service, medical and insurance charges are calculated under Ministry of Foreign Affairs rules during booking [1-2]. Budget from the amount your own checkout displays. This guide publishes no converted BDT total, because no dated rate supports one.
+Visit Saudi publishes promotional Saudia line items, not your all-in bill. Saudia says charges are calculated under MOFA rules. Use the itemized total for your passenger and itinerary, plus bank/payment charges; this guide provides no invented BDT total or flynas price [1–2].
 Does the stopover visa include a free hotel night?
-No — do not plan on it. Visit Saudi's stopover page lists no hotel benefit today, and Saudia treats hotels as an optional add-on for round-trip bookings and selected destinations only [1-2]. Any complimentary night was an airline promotion booked through Saudia Holidays for selected itineraries and cities, subject to availability, and it can be withdrawn. Pay for your own Makkah and Madinah nights.
-Is the stopover visa open to every Bangladeshi passport holder?
-Not as a published entitlement. It is offered to travelers holding a qualifying Saudia or flynas itinerary, and Saudia's help pages cover the situation where a country is not eligible [1-3]. What is genuinely true is that the stopover does not require a previously used US/UK/Schengen visa. Confirm the option appears in your own booking before you pay.
-Can I perform Umrah during the stopover?
-Yes, but the visa alone is not enough. Visit Saudi requires religious visitors to schedule Umrah or Ziyarah appointments through Nusuk.sa before traveling to Makkah or Madinah, so book the permit slot first and keep the live QR code available at the gate [1,4]. The stopover visa is never a Hajj permit, and Fard Hajj requires separate Bangladesh registration.
-How fast is the visa issued?
-Saudia's flow says the visa and insurance documents arrive by email once the booking and visa payment are completed, and the visa has to be requested during booking. No processing time is published or guaranteed, so avoid a last-minute booking and verify the issued visa on the Saudi Unified Visa Platform [2,5].
-Do I need an onward ticket and a visa for my final destination?
-Yes. Saudia's stated conditions are a passport valid at least six months, a confirmed onward ticket to your final destination, and a valid entry visa or residence permit for that country unless you are exempt. Entry to Saudi Arabia remains subject to passport control on arrival even after the visa is issued [2].
+No universal free-night entitlement was verified. Saudia lists hotel bookings for round-trip bookings and selected destinations. Confirm any booking-specific inclusion in writing; otherwise budget separately [1–2].
+Is every Bangladeshi passport holder eligible?
+This review does not establish that. Confirm the exact passport, itinerary, destination permission and any other required document with the airline before payment. Saudia and flynas are not interchangeable; current detailed flynas conditions were not retrievable from its redirected guide [2–3, 10].
+Can I perform Umrah and visit Rawdah on a stopover?
+Visit Saudi includes Umrah in the stopover activities, but a visa does not guarantee appointments. Use the separate Umrah and Rawdah services as applicable; an ordinary mosque visit is not the same as entering Rawdah. Hajj needs its own authorization [1, 4, 9].
+Is issuance immediate after payment?
+Saudia advertises fast email delivery, and the historical flynas launch used immediate-issuance language. Neither is a tested processing guarantee for your case. Check actual issuance and visa details before departure; contact the carrier if documents are missing [2–3, 5].
+Do I need an onward ticket and destination visa?
+Saudia's published conditions require a confirmed onward ticket and destination entry visa or residence permission where required, unless exempt, plus at least six months' passport validity subject to bilateral agreements. These documents do not guarantee Saudi admission; passport control makes the final decision [2].`,
 
-`,
-  "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": `Before flying from Hazrat Shahjalal International Airport (DAC) to Jeddah or Madinah, prepare the official Saudi apps you will actually need: the Nusuk app (nusuk.sa) for Umrah slots and the mandatory Rawdah Shareef (Riyazul Jannah) appointment permit in Madinah. The Saudi Visa Bio app is listed in the current Saudi Ministry of Hajj and Umrah FAQ for biometric enrollment for electronically issued Umrah visas for Bangladesh; it is not a blanket requirement for every tourist or stopover traveler. Because security gates at Masjid an-Nabawi scan live dynamic QR codes (screenshots are rejected), understanding how Nusuk works will save your family from disappointment in Madinah.
+  "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": `Who this guide is for: Bangladeshi visitors leaving Dhaka who need to understand Saudi Visa Bio, create a Nusuk visitor account and arrange an Umrah or Rawdah permit without confusing those tasks with visa approval.
 
-This guide was checked against official Saudi Ministry and Nusuk sources on 14 October 2026. Visa, permit, app and availability conditions can change; follow the current official pages before you travel.
+Quick Answer
+As checked on 19 October 2026, the Saudi Ministry FAQ lists Bangladesh for biometric enrollment for electronically issued Umrah visas through Saudi Visa Bio; follow the instructions in your own application, not a rule for every tourist or stopover traveller [1–2]. Nusuk handles separate Umrah and Rawdah permit services. The Ministry lists the Rawdah appointment service as free, while Nusuk describes regular Rawdah booking once a year, with a separate nearby Instant Track option subject to availability—not a permit every 30 days [3–5].
 
-1. WHAT ARE THE OFFICIAL GOVERNMENT APPS AND SOURCES FOR UMRAH IN 2026?
-According to the Saudi Ministry of Hajj and Umrah (haj.gov.sa) and the Bangladesh Ministry of Religious Affairs (hajj.gov.bd), Bangladeshi pilgrims should rely only on official government portals and apps:
-- **Official Nusuk App (nusuk.sa):** The single official digital gateway for booking your **Umrah Permit** in Makkah and your mandatory **Praying in the Noble Rawdah (Riyazul Jannah)** appointment permit inside Masjid an-Nabawi in Madinah.
-- **Saudi Visa Bio App (Saudi Ministry of Foreign Affairs - MOFA):** Listed in the current Ministry FAQ for biometric enrollment for electronically issued Umrah visas for Bangladesh. Follow the instructions in your current official visa application and in the app; do not assume it applies to every tourist or stopover visa [1-2].
-- **Official portals to keep:** Nusuk registration and Terms of Use, the Ministry's Umrah Permit and Rawdah Permit service pages, the Saudi Unified Visa Platform (ksavisa.sa), and the Bangladesh Haj Management Portal (hajj.gov.bd) for Fard Hajj [3-10].
+This is a review of official published instructions, not a test of an authenticated app account or an inspection at a mosque gate. Screens and conditions can change; use the current application, booking and permit instructions for your case.
 
-2. HOW TO COMPLETE BIOMETRIC ENROLLMENT ON THE SAUDI VISA BIO APP FROM BANGLADESH?
-Use this only when your current official Umrah visa instructions require it. Many Bangladeshi pilgrims struggle when scanning elderly parents' fingers. Follow these practical steps:
-Step 1: Download the official Saudi Visa Bio App:
-- Install "Saudi Visa Bio" from the Google Play Store or Apple App Store and select your visa type (Umrah) as instructed by your official visa application.
-Step 2: Scan the e-Passport or MRP Bio-Page in Natural Daylight:
-- Place your Bangladeshi passport flat near a window during daytime so no ceiling bulb glare reflects off the laminate page. Ensure the two machine-readable lines (MRZ) at the bottom are sharp.
-Step 3: Fix Faded Fingerprints for Elderly Parents:
-- Hold four fingers together flat against a plain white A4 paper background in bright daylight.
-- If your mother or father has dry skin or worn fingerprint ridges, gently wipe their fingertips with a slightly damp cloth and apply a tiny drop of lotion 10 minutes before scanning so the smartphone camera macro lens can focus clearly.
+1. Which Nusuk service do you need—and what does it not do?
+Saudi Visa Bio is for submitting biometrics during an applicable visa application. Completing biometrics does not itself issue a visa. The Ministry FAQ names Bangladesh for electronically issued Umrah visas, and the MOFA app listing describes passport details, a facial image and fingerprints [1–2].
 
-3. HOW TO CREATE YOUR NUSUK APP ACCOUNT ONCE YOUR UMRAH VISA IS ISSUED?
-Never register as a "Citizen/Resident" if you are traveling from Bangladesh. Follow this sequence:
-Step 1: Find Your 10-Digit Saudi Visa Number:
-- Open your approved PDF Umrah e-Visa or 96-Hour Stopover Visa (verified via ksavisa.sa). Your **Visa Number** is the 10-digit number printed near the top right (usually starting with 60 or 61), NOT your Application/MOFA reference number.
-Step 2: Register Under "Visitor" Tab on Nusuk:
-- Open the Nusuk app, tap **New User -> Visitor**, enter your 10-digit Visa Number, Passport Number, Date of Birth, Nationality (Bangladesh), active email address, and mobile number.
-- Enter the 4-digit OTP sent to your email (tip: use Email OTP while still in Dhaka so you never miss an SMS code!).
+The Nusuk app and permit services cover Umrah appointments and the separate Rawdah appointment in Madinah. An account is not an issued permit, and an Umrah permit is not a Rawdah appointment [3–5]. Nusuk also distinguishes Rawdah entry from ordinary entry to Masjid an-Nabawi; do not assume a Rawdah appointment is needed for every visit to the mosque [5].
 
-4. HOW TO BOOK A FREE RAWDAH SHAREEF (RIYAZUL JANNAH) APPOINTMENT PERMIT IN MADINAH?
-Entering the blessed green-carpeted **Rawdah Shareef (Riyazul Jannah)** between the Prophet's (PBUH) Sacred Chamber and his Pulpit requires an active Nusuk QR Permit:
-Rule 1: Rawdah Permits Are Booked as a Free Appointment on Nusuk:
-- Do not pay street touts in Madinah who claim they can sell Rawdah entry! Every visa holder can book 1 Rawdah permit every 30 days completely free inside the Nusuk app under **Prophet's Mosque Services -> Praying in the Noble Rawdah (Men / Women)**, subject to the service page's current cost and terms [4].
-Rule 2: Check Live Availability; No Fixed Release Day Is Guaranteed:
-- The Ministry's Rawdah service page describes a free appointment permit and instructs users to select an available date/time slot. It does not publish a fixed weekly slot-release schedule [4].
-- If all calendar dates look grayed out when you arrive in Madinah, turn on the location GPS on your phone near Masjid an-Nabawi and check Nusuk regularly—cancelled and instant-entry slots may appear for pilgrims physically within the Haram boundary. Treat any timing you see in the app as live availability, not a guarantee.
+Traveller check (services): Before continuing, can you distinguish visa application, Nusuk account, Umrah permit and Rawdah appointment? These are four different tasks. If either language leaves this unclear, reread the relevant section or ask official support before paying or booking.
 
-5. Frequently Asked Questions
-Is Saudi Visa Bio mandatory for every Bangladeshi traveler?
-No. The current Saudi Ministry FAQ lists Bangladesh for biometric enrollment for electronically issued Umrah visas and names Saudi Visa Bio. Follow your current official visa application and the app's instructions; do not assume it applies to every tourist or stopover visa [1-2].
-Can I book Rawdah on a fixed day every week?
-No fixed weekly release day is published on the Ministry's Rawdah service page. Book the free appointment permit in Nusuk and check live availability; cancelled or instant slots may appear [4].
-Are screenshots of Rawdah permits accepted at the gate?
-No. Guards scan the live dynamic QR code in the Nusuk app, so keep mobile data active in Madinah.
-Can I use a tourist or stopover visa for Fard Hajj?
-No. An Umrah, tourist or stopover visa does not replace Bangladesh Hajj registration or the Saudi Hajj permit. Follow the current Bangladesh and Saudi Hajj instructions [9].
-Where do I find my 10-digit Saudi Visa Number?
-Open your approved PDF Umrah e-Visa and read the 10-digit number near the top right (usually starting with 60 or 61), not the application/MOFA reference number.
+Nusuk Umrah's package-booking website is another service surface. Its signup asks for residence, nationality and email; Bangladesh appearing in a list is not proof of approval, a visa-only offer or the permit app's exact registration screens. Its terms describe multi-service packages [7–8].
 
-`,
-  "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": `On 17 October 2026, this guide was checked against official Saudi Ministry of Hajj & Umrah directives (haj.gov.sa), the Nusuk portal (nusuk.sa), and the General Presidency for the Affairs of the Two Holy Mosques (gacr.gov.sa). Whether you are a Bangladeshi mother traveling with your family, a daughter accompanying your elderly mother, or a woman planning Umrah independently from Dhaka, knowing the current visa policies, Masjid an-Nabawi prayer zones, and ground logistics helps.
+For Fard Hajj, use the separate Bangladesh registration process and current Saudi Hajj instructions. This app guide does not establish Hajj eligibility, a registration deadline or a package price [11].
 
-1. Official Saudi Visa Rules on Mahram for Women
-The distinction between official Saudi immigration law and personal religious jurisprudence (fiqh) matters when you plan travel.
+2. How should you complete Saudi Visa Bio when your application requires it?
+Use this sequence during the visa application, when your official instructions request biometric enrollment—not as a universal task after visa issuance. The Ministry FAQ describes passport scanning, face verification and all ten fingerprints [1]. The MOFA listing says the app is for users aged 6 and above, with adult supervision under 18; that is an app-use condition, not proof of a child's visa or biometric exemption [2].
 
-**Ministry visa regulations:** The Saudi Ministry of Hajj and Umrah (haj.gov.sa) and the Nusuk portal (nusuk.sa) let women of any age apply for an Umrah e-Visa, 96-Hour Stopover Visa, or Tourist eVisa without linking a male guardian (Mahram) in the visa portal [1][2]. Electronic visas are issued directly to individual women who meet standard passport and documentation requirements [1][2].
+Traveller check (biometrics): We have not tested your application or biometric capture. Before starting, confirm that your exact application requests Saudi Visa Bio. For repeated capture failures, ask the official app/application support which procedure applies. Do not create a trial application or send fingerprints, face images, passport scans or application details to URAL or chat.
 
-**Religious rulings:** Civil entry permits no longer require a recorded male guardian on the visa file. Classical and contemporary Islamic schools of jurisprudence hold differing views on solo travel without a Mahram or travel within a trustworthy female companion group. Consult your trusted religious scholars to align your personal journey with your school of jurisprudence, separate from civil visa issuance rules.
+Step 1: Check the application request and the app publisher.
+- Confirm that your own visa application requests Saudi Visa Bio. Use the official listing published by Ministry of Foreign Affairs KSA; do not install a similarly named app from an advertisement or messaging link [1–2].
 
-**Dhaka Airport preparation:** When traveling independently or in female-only groups, keep complete documentation ready for airline check-in and immigration review at Hazrat Shahjalal International Airport (DAC). Carry printed hotel booking confirmations in Makkah and Madinah, round-trip flight itineraries with confirmed return bookings, personal identification (NID/Passport copies), and an official employment Leave Certificate or No-Objection Certificate (NOC) if employed in government or corporate sectors.
+Step 2: Prepare your passport and application details.
+- Have the passport, application information and email requested by the app available. Follow its passport-photo and verification prompts. Do not substitute a guessed number or send passport images to an unofficial helper [2].
 
-2. Masjid an-Nabawi in Madinah: Female Prayer Sections and Rawdah Access
-Masjid an-Nabawi has distinct prayer zones and scheduling windows for women.
+Step 3: Complete face and fingerprint capture as prompted.
+- Follow the app's instructions for the facial image and fingerprint sequence; the Ministry describes capturing all ten fingerprints. Do not treat one four-finger scan as the completed process or use unverified skin-treatment tricks to force acceptance [1–2].
 
-**Ladies' prayer halls and northern courtyard:** The dedicated internal prayer areas and shaded external courtyard sections for women sit along the northern and north-eastern side of the Prophet's Mosque, primarily around Gates 21 through 26 and eastern entrances [3]. Pick accommodations in Markazia North (Northern Central Area). Female pilgrims and elderly family members get direct, flat, step-free access into women's prayer spaces without long perimeter walks around the exterior plaza [3].
+Step 4: Check the submission status and seek official help if capture fails.
+- Read the completion or error message before leaving the app. A completed capture is not visa approval. For repeated errors, use the support route in the official app listing and your visa application's authorized support channel; ask what procedure applies to your application rather than assuming an exemption or an automatic alternative [2].
 
-**Women's Rawdah Shareef (Riyad al-Jannah) scheduling:** Access to the sacred Rawdah runs through mandatory advance appointment slots booked via the official Nusuk mobile app [2]. The General Presidency schedules dedicated women's Rawdah visitation periods, typically a morning session (after Fajr until before Dhuhr prayer) and an evening session (after Isha prayer until midnight) [2][3].
+3. How do you register in Nusuk as an overseas visitor?
+The Ministry FAQ says a visitor outside Saudi Arabia can register with a valid visa. It lists passport number, visa number, date of birth, nationality, mobile number and email; it also says international phone numbers are supported [1]. The public service login has visitor, citizen/resident and GCC options as well as a separate Nafath panel. Do not confuse the generic web page's Nafath instructions with a requirement that every foreign visitor obtain a Saudi resident login [3–4, 6].
 
-**Entry protocol:** Female security personnel and crowd marshals manage entry gates for Rawdah appointment holders. Assembly queues form through the designated northern courtyard checkpoints. Confirm the exact reporting gate and time window shown on your active Nusuk digital permit before arriving at the courtyard [2][3].
+Traveller check (registration): The logged-in visitor screens have not been independently tested. Use only your real eligible account and the fields shown now. If troubleshooting, note the date, app/OS version, account type, field labels and verification channel for official support—not the code itself. Do not share OTPs, passwords, passport or visa details.
 
-3. Ihram Guidelines and Dress Regulations for Women
-Male pilgrims must wear two unstitched white towels (Izar and Rida). The rules of Ihram for women emphasize modesty, loose coverage, and simplicity without restrictive garment mandates.
+Step 1: Have your valid issued visa and matching passport ready.
+- Use the number labelled Visa Number on the issued document when that field is requested. Do not assume a universal number length, prefix or position on every visa format. If it is rejected, check the document labels and contact official support rather than guessing [1, 10].
 
-**Permitted attire:** Women enter Ihram in ordinary, modest, stitched clothing. The recommended outfit from Bangladesh is a breathable, loose-fitting cotton or linen Abaya, Burkha, or modest Salwar-Kameez paired with a wide, opaque Hijab or Khimar. Neutral colors (black, navy, dark gray, or white) are customary. Lightweight natural fabrics help maintain comfort during crowded Tawaf in warm temperatures.
+Step 2: Choose the account route that matches your status.
+- An overseas visitor should use the visitor option presented by the official service. A genuine Saudi resident should use the route for their actual status; departing from Dhaka alone does not determine the account type [1, 6].
 
-**Face covering and hand rules in Ihram:** Under authentic Sunnah guidelines, a woman in the state of Ihram should not wear a fitted, tied face veil (Niqab) pressed against the facial skin, nor should she wear stitched hand gloves [1]. Women who observe full purdah may loosely drape an open scarf or sheer fabric down over the face when passing men, or wear a soft visor cap beneath the hijab to allow the draped fabric to hang freely without directly binding against facial skin.
+Step 3: Enter the requested details exactly as documented.
+- Match your passport and visa details, date of birth and nationality. Use your own accessible email and mobile number. The public FAQ establishes these fields, not an unchanging mobile-menu layout [1].
 
-**Footwear and socks:** Women in Ihram can wear normal stitched socks, slip-on walking shoes, supportive athletic sneakers, or padded prayer footwear to cushion joints on the hard marble tiles of Masjid al-Haram during Tawaf and Sa'i.
+Step 4: Complete the verification shown and check account access.
+- The FAQ describes an email verification code. Follow the current screen for delivery and format; do not rely on a fixed code length. If a code does not arrive, check the entered contact details and email spam folder, then use official support if the problem continues. Never share an OTP or password with someone offering a permit [1, 10].
 
-4. Performing Taqsir (Hair Trimming) to Exit Ihram
-The final rite completing Umrah is Taqsir. It officially releases the pilgrim from the restrictions of Ihram.
+4. How do you book, confirm and use a Rawdah appointment?
+The Ministry's Rawdah service page lists a free appointment service and available date/time selection. Nusuk's Rawdah page, checked on 19 October 2026, supplies the more detailed confirmation and entry-code instructions below [4–5]. These are published instructions, not a guarantee that your account will show a slot.
 
-**Proper method:** A woman exits Ihram by cutting approximately one fingertip's length (about one inch or 2.5 cm) from the tips of all the strands of her hair.
+Step 1: Select the Rawdah service, not an Umrah appointment.
+- Open the Rawdah appointment service in Nusuk and check the correct traveller and applicable men's or women's schedule. Request any Umrah permit separately through the Umrah service [3–5].
 
-**Privacy and modesty:** Do not uncover your head or cut hair openly in public viewing areas around the crowded Marwah hill where male pilgrims and spectators gather. Perform Taqsir discreetly in private female prayer alcoves, designated women's restrooms with mirrors, or return directly to your private hotel room. Remain mindful of Ihram prohibitions until the trimming is finalized.
+Step 2: Check repeat-visit eligibility before planning around another visit.
+- Nusuk describes regular Rawdah booking once a year and a separate nearby Instant Track route for repeat visits. The live service decides your eligibility and available appointments; neither a visa nor physical proximity guarantees a slot [5].
+
+Step 3: Choose an available appointment or use an offered alternative.
+- Select an available date/time. If no suitable appointment appears, check the waitlist or nearby Instant Track option if offered for your circumstances. Follow the location instructions shown; do not spoof your location. Do not assume a fixed weekly release day or pay someone promising guaranteed access [4–5].
+
+Step 4: Complete attendance confirmation within the displayed deadline.
+- At the 19 October 2026 source check, Nusuk said confirmation opens 48 hours before the visit and closes 2 hours before it. It says the one-use entry QR appears after confirmation. Check your booking for the current deadline and confirmation status; an initial reservation is not the end of the process [5].
+
+Traveller check (rawdah): We have not tested a live booking on your account. For an appointment you genuinely intend to attend, check the displayed confirmation deadline, confirmation status, entry-code availability and any repeat-visit or Instant Track eligibility message. Do not reserve a trial slot, create a fake booking, spoof location or share a usable QR/barcode.
+
+Step 5: Check the entry code and reporting instructions before leaving your hotel.
+- Open the issued permit and assigned entry code in Nusuk. The checked page advises arriving 30 minutes early. Follow your actual booking's reporting point and staff instructions rather than a copied gate number. A saved image is a backup, not a guarantee of admission; do not assume it replaces the current permit display [5].
+
+Does Nusuk require you to buy an eSIM?
+No paid eSIM requirement is established by the sources checked. In its 6 August 2025 announcement, the Ministry described Nusuk access without data consumption in cooperation with STC, Mobily and Zain for SIM users within Saudi Arabia. That is not a promise that every travel eSIM, roaming connection or phone will receive the same access [9].
+
+As practical preparation, check that your app opens on your own phone and network before you need it. An optional data plan may help with maps, messages and other bookings; check compatibility, coverage, activation and price before buying. If the permit is missing or you cannot log in, use Nusuk help or the Ministry's current contact page rather than relying on a seller's workaround [10].
+
+Traveller check (network): Access on your phone/operator has not been independently tested. Before leaving for the appointment, open the issued permit on the phone and actual Saudi SIM, roaming connection or travel eSIM you will use. If it fails, use official support. Do not assume zero-rated access covers your provider or that a saved screenshot guarantees entry. A paid data plan is optional, not a permit requirement.
 
 5. Frequently Asked Questions
+Is Saudi Visa Bio mandatory for every Bangladeshi traveller?
+The Ministry FAQ names Bangladesh for biometric enrollment for electronically issued Umrah visas. Follow your own current application instructions; that does not establish a universal rule for every tourist or stopover visa [1–2].
+Can I book Rawdah every 30 days?
+Do not plan on a monthly entitlement. As checked on 19 October 2026, Nusuk describes regular booking once a year and a separate nearby Instant Track option. Current eligibility and capacity still apply [5].
+Does a Rawdah reservation need confirmation?
+The checked Nusuk page says attendance confirmation opens 48 hours before the visit and closes 2 hours before it, with a one-use entry QR available after confirmation. Follow the deadline and status shown on your own booking [5].
+Is there a guaranteed weekly slot-release day?
+The checked Ministry service page tells users to select an available date/time; it does not publish a fixed weekly release day. Nusuk describes a waitlist and nearby Instant Track, but neither guarantees an appointment [4–5].
+Can I rely only on a screenshot at the gate?
+Keep access to the issued permit and entry code in Nusuk and follow current display instructions. A saved image is not a guarantee of entry. The sources checked do not establish a universal screenshot-rejection rule [5].
+Do I need paid mobile data for Nusuk?
+Not necessarily. The Ministry's 6 August 2025 announcement describes operator-scoped Nusuk access without data consumption in Saudi Arabia. Check your actual SIM/eSIM, network and device; do not assume every provider is covered or that buying data guarantees app access [9].
+Are Nusuk registration and visa approval the same thing?
+No. Keep the visa application and issued visa, account registration, Umrah permit and Rawdah appointment separate. Follow the service and eligibility instructions for each; a package-platform signup is not permit issuance [1–8].
+Where should I seek help with a rejected visa number or missing permit?
+Use the application's own support or the Ministry's current contact page. The page checked on 19 October 2026 lists +966 920002814 and 1966 within Saudi Arabia. Share personal details only through the authorized support channel, not a public post or an unofficial permit seller [10].
+`,
+  "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": `This guide is for Bangladeshi women planning Umrah independently, with family or with a group. Use it to separate three decisions: whether your visa route allows your journey, what religious guidance applies to you, and how to arrange the actual prayer, appointment and access requirements. It is not a personal fatwa, medical consultation, tested visa application or inspected mosque-to-hotel route.
 
-Can a Bangladeshi woman perform Umrah without a Mahram in 2026?
-Under official Saudi Ministry of Hajj and Umrah regulations, women of any age may apply for and receive an Umrah e-Visa, Stopover Visa, or Tourist eVisa without a registered male guardian (Mahram) [1][2]. Whether one chooses to travel solo or with a trusted group is a religious matter governed by individual Islamic schools of jurisprudence. Consult your trusted religious scholar for personal guidance.
+Quick Answer — Checked 19 October 2026: the Ministry of Hajj and Umrah explicitly answers that a woman may come for Umrah without a mahram. That does not mean every woman, child or Bangladeshi passport holder qualifies for every visa route. Religious advice is separate. Nusuk distinguishes ordinary mosque prayer from Rawdah appointments and assigns different visiting times to men and women; use the actual booking and staff directions, not a permanent gate map or hotel-area promise. [1][2][3][5]
 
-Which hotel area in Madinah is most convenient for women?
-Markazia North (the Northern Central Area) is the most practical location for female travelers and families. The dedicated women's prayer halls and Nusuk Rawdah assembly areas sit on the northern side of Masjid an-Nabawi. You get quick, step-free access into the ladies' courtyards without extensive detours around the perimeter [3].
+1. CAN YOU TRAVEL WITHOUT A MAHRAM—AND WHICH VISA RULES STILL APPLY?
+The Ministry FAQ asks, “Is a woman allowed to come to perform Umrah without a mahram?” and answers, “Yes, it is allowed.” This supports that specific administrative answer. It does not establish automatic visa issuance, independent travel by minors, every nationality's tourist eVisa eligibility or the conditions of a particular stopover itinerary. Hajj registration is a separate subject. [1]
 
-How do women book Rawdah Shareef permits in Nusuk?
-Log into the official Nusuk mobile application. Select the Rawdah Shareef permit option for women. Choose an available calendar time slot during designated morning or evening female windows [2]. Arrive at the assigned courtyard assembly gate with the active QR code loaded on your mobile screen [2].
+For the tourist eVisa service, the official terms require a user/applicant aged at least 18 and authorized representation for a minor. Bangladesh is not in the opened nationality-based permitted-country list. That is not a finding that every Bangladeshi is ineligible under every additional-document or residence route: use the main DIY guide and the actual official route for your circumstances. The terms also say payment does not guarantee approval and a visa does not guarantee entry. Their dated 2025 seasonal clause is not a 1448 travel calendar. [2]
 
-Are gloves or standard niqabs allowed during Ihram?
-No. Prophetic instructions prohibit wearing tailored hand gloves and tight, tied niqabs while in the sacred state of Ihram [1]. Women wishing to observe face concealment may loosely drape an unstitched headscarf over the front of the face without pressing or binding it firmly to the skin.`,
-  "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": `Airfare accounts for nearly 55% of a Bangladeshi pilgrim's total DIY Umrah budget. Choosing the right routing and understanding airline baggage and Zamzam policies under **Saudi General Authority of Civil Aviation (GACA - gaca.gov.sa)** rules can save your family both BDT 15,000+ per ticket and 7 hours of unnecessary highway travel.
+Visa permission is not a personal religious ruling. For example, Jordan's General Iftaa Department's fatwa 3785 of 30 July 2023 discusses differing reasoning and conditions, including obligatory versus non-obligatory travel and safety. Do not turn that conditional discussion into blanket permission for every voluntary trip, or treat a visa portal as the authority on your school of fiqh. Discuss your journey, companions and intention with a qualified scholar you trust. [3]
 
-1. WHY SHOULD YOU ALWAYS BOOK AN "OPEN-JAW" (MULTI-CITY) FLIGHT FOR UMRAH?
-When searching for flights on online portals or through our BDT Booking Desk, never search "Roundtrip Dhaka to Jeddah" without checking **Multi-City** first:
-- **Option A — Outbound DAC -> JED, Return MED -> DAC (Best for Starting with Umrah):** You wear Ihram at Dhaka Airport (or transit), land at Jeddah (JED), travel 54 minutes to Makkah to complete Umrah immediately while fresh, take the Haramain Bullet Train to Madinah on Day 6, and fly home directly from **Prince Mohammad Bin Abdulaziz Airport in Madinah (MED)** just 20 minutes from Masjid an-Nabawi!
-- **Option B — Outbound DAC -> MED, Return JED -> DAC (Best for Seniors Who Want Rest First):** Fly directly into Madinah (no Ihram required on the flight!), rest and pray in Masjid an-Nabawi for 4 days, wear Ihram at your Madinah hotel (passing Miqat Abyar Ali / Dhul Hulayfah), travel to Makkah for Umrah, and fly home from Jeddah (JED) just 1 hour away.
+Traveller check (womenVisa): Before non-refundable payment, confirm the visa category, passport/residence or additional-document basis, age and companion/minor arrangements with the responsible official channel and carrier. Obtain religious advice separately; neither the absence of a mahram field nor a seller's assurance is approval. Use the actual document checklist, not a universal employer-NOC rule from a blog. Never share passport scans, OTPs or usable booking codes in public chat.
 
-2. DIRECT FLIGHTS FROM DHAKA: BIMAN BANGLADESH AIRLINES VS. SAUDIA
-Both national flag carriers operate daily wide-body (Boeing 777-300ER and Boeing 787 Dreamliner) direct non-stop flights taking **6 hours 15 minutes**:
-- **Biman Bangladesh Airlines (biman-airlines.com):**
-  • Typical Roundtrip / Open-Jaw BDT Fare: **BDT 72,000 – BDT 88,000** (Off-peak) | **BDT 95,000+** (Ramadan/Peak Winter).
-  • Baggage & Zamzam Allowance: **2 pieces x 23 kg (46 kg total)** (route- and fare-dependent; confirm on your e-ticket) checked baggage + 7 kg cabin bag + **1 free 5-Liter official Zamzam carton**.
-  • Advantages for Bangladeshis: Bangla-speaking cabin crew, clear Bangla Miqat announcement 45 minutes before Jeddah landing, and convenient flight departures from Dhaka Terminal 1/2.
-- **Saudia - Saudi Arabian Airlines (saudia.com):**
-  • Typical Roundtrip / Open-Jaw BDT Fare: **BDT 74,000 – BDT 92,000**.
-  • Baggage & Zamzam Allowance: **2 pieces x 23 kg (46 kg total)** (route- and fare-dependent; confirm on your e-ticket) + 7 kg cabin + **1 free 5-Liter Zamzam carton**.
-  • Advantages for Bangladeshis: Arrives at the ultra-modern **Jeddah Terminal 1 (KAIA)** where the Haramain High-Speed Bullet Train station is located indoors under the exact same roof, plus onboard prayer area (Musalla) at the back of wide-body aircraft!
+Keep the issued visa and the actual flight, accommodation and transport confirmations available privately for the checks that apply to your route. If an employer, authority or carrier requires an NOC or child-travel document, arrange it under that requirement; no universal NOC requirement—or exemption—is established here. Wider visa/season, biometrics and current travel-health checks remain in the main DIY and Nusuk guides, not certified by this women-specific review.
 
-3. BUDGET 1-STOP TRANSIT AIRLINES FROM DHAKA (SAVES BDT 14,000 – BDT 22,000)
-If a family of 4 wants to save BDT 60,000 to BDT 85,000 total on airfare, 1-stop Gulf carriers offer excellent connections:
-- **Full-Service 1-Stop Carriers (Gulf Air via Bahrain, Kuwait Airways via Kuwait, Qatar Airways, Emirates):** Fares start from **BDT 62,000 – BDT 74,000** including hot meals and 30kg–46kg baggage.
-- **Low-Cost 1-Stop Carriers (SalamAir via Muscat, Air Arabia via Sharjah, Jazeera Airways via Kuwait, Flynas):** Fares start from **BDT 52,000 – BDT 63,000**.
-- **Crucial Warning on Low-Cost Airlines:** Always select the **"Value / Extra Baggage Bundle" (20kg or 30kg checked luggage)** when booking SalamAir, Jazeera, or Air Arabia, and verify whether the fare includes free Zamzam water carriage or charges USD $25–$40 at Jeddah check-in.`,
+2. WHICH PRAYER ENTRANCE AND HOTEL ROUTE WILL YOU ACTUALLY USE?
+Nusuk describes separate prayer areas for women and men at the Prophet's Mosque and distinguishes ordinary mosque entry, which does not require a Rawdah appointment, from entry to the Rawdah. A women's prayer entrance is not automatically the reporting point for a Rawdah booking. Follow the current signs and mosque staff for the service you need. This does not override a personal religious question about mosque entry. [5]
+
+Treat Markazia North or another neighbourhood name as a search label, not a guarantee of a flat, step-free or short route. Ask the actual hotel for its entrance, the route to the women's prayer area or your assigned reporting point, crossings, steps, gradients, working lifts, temporary closures and the return journey. If a shuttle is offered, confirm where it stops, its operating arrangements and whether it can accommodate your party and mobility equipment. No outdoor route, gate number, room or shuttle was inspected for this review.
+
+Traveller check (womenAccess): Before choosing a non-refundable room, confirm the intended entrance and full route for your dates and mobility needs with the property and relevant on-site staff. Distinguish internal doors, courtyard gates and appointment assembly points. Ask about room access, lifts and a workable return/meeting plan; do not rely on “near the Haram” or an area-wide accessibility promise. A transfer booking does not establish mosque access.
+
+Agree a meeting point outside the controlled entry route, a way to contact companions and an alternative if you become separated or an entrance changes. Keep your hotel's address and support contact privately accessible. The hotel/Haramain guide owns the detailed room, transfer and actual baggage comparison; this page does not newly certify the older-traveller guide's medical or equipment claims.
+
+3. HOW SHOULD WOMEN PREPARE A RAWDAH APPOINTMENT?
+The Ministry lists a free Rawdah appointment service for men and women, including visitors, with available date/time selection. Nusuk's detailed page confirms separate women's and men's visiting times. Do not build a trip around a blog's recurring morning/evening window or assume a hotel booking provides a slot. The published procedure is not a tested account session. [4][5]
+
+The opened Nusuk page describes annual regular booking and a separate nearby Instant Track subject to availability; an older Ministry FAQ still says 30 days. Do not promise a monthly revisit or a guaranteed same-day slot. Nusuk also says children are not allowed into the Rawdah, while ordinary mosque visits and advertised childcare are separate. The FAQ's older age wording is not a child-entry promise. No childcare place, age acceptance or family/group appointment was tested. [1][5]
+
+Traveller check (womenRawdah): Check the actual women's service, eligibility, appointment, confirmation instructions and reporting point in your own booking before setting out. For companions or children, confirm each person's acceptance and who is responsible for care; do not assume all family members enter together or that advertised childcare is booked. Do not buy guaranteed slots or make practice reservations. Keep passwords, OTPs and usable entry QR codes private; use official support if the booking and public guidance disagree.
+
+Step 1: Use the account route that matches your real status.
+A foreign visitor should follow the current visitor registration instructions with a valid issued visa. The Ministry service page's Nafath wording is not proof that a visitor must obtain a Saudi resident account. The reviewed Nusuk guide covers registration and application-specific biometrics separately. [1][4]
+
+Step 2: Choose an available women's appointment you can actually attend.
+Select the applicable Rawdah service and an offered date/time, checking the people included and travel arrangements. Men and women have different visiting times; do not infer a companion's appointment from your own. Availability is not guaranteed. [4][5]
+
+Step 3: Complete the confirmation required by the actual booking.
+Nusuk publishes attendance confirmation from 48 hours before the visit until 2 hours before it; the one-use entry QR appears after confirmation. Its group guidance assigns confirmation to the organizer. Follow the current instructions for your booking rather than relying on an unconfirmed reservation or a saved screenshot alone. [5]
+
+Step 4: Recheck the reporting point and arrive under current instructions.
+The public Nusuk page advises arrival 30 minutes before the appointment with the entry code. Read your actual notice, allow additional time for the journey and assistance, and follow staff directions. That arrival advice is not a measured hotel walking time or permission to use an old gate number. [5]
+
+4. WHAT SHOULD YOU CHECK ABOUT WOMEN'S IHRAM CLOTHING?
+In his published answer on women's Ihram clothing, Shaykh Ibn Baz says women have no special Ihram uniform and may use ordinary, unobtrusive clothing. Do not buy a particular colour or the men's two-cloth outfit as though it were a universal women's requirement. Pack modest clothing you can manage during travel and worship, and settle your own coverage questions with a qualified scholar. [6]
+
+Sahih al-Bukhari 1838 contains the instruction that a woman in Ihram should not wear a niqab or gloves. This is a religious text, not a mosque administrative dress notice or a medical-mask ruling. Do not reduce it to a loophole about whether fabric touches the skin, or assume a visor or sheer scarf is an approved solution. [7]
+
+Traveller check (womenIhram): Before entering Ihram, ask a qualified scholar about your intended clothing, face covering, footwear and any medical need, following the school you practise. This article does not prescribe a face-covering workaround, diagnose necessity or decide a penalty. Arrange any practical or clinical requirement separately; a visa or Rawdah appointment does not settle these questions.
+
+5. WHAT IF MENSTRUATION AFFECTS YOUR TRAVEL OR WORSHIP?
+In Sahih al-Bukhari 305, Aisha's report of Hajj includes the instruction not to perform Tawaf until she is pure. The report is a source for that specific religious point, not an individualized decision about every stage of an Umrah journey, irregular bleeding or mosque/Rawdah entry. A booked appointment or approaching flight does not itself determine ritual permission. [8]
+
+Traveller check (womenHealth): If bleeding begins or your dates may conflict with worship, explain privately to a qualified scholar which rites you have completed and your travel constraints; consult a clinician for health or medication questions. Seek guidance before travel or reaching the Miqat rather than assuming you can defer Ihram or leave it automatically. Do not start or change period-delay medication from a blog. No personal exception, dosage or current 1448 travel-health clearance is established here.
+
+Build a practical contingency: know whom to contact, the ticket/hotel change conditions and the support available if the plan changes. You need not disclose menstrual details to a public group or booking intermediary. Where your itinerary cannot accommodate a change, seek case-specific advice promptly rather than inventing a ritual shortcut or relying on a seller's promise.
+
+6. HOW SHOULD YOU PLAN PRIVATE TAQSIR WITHOUT GUESSING THE METHOD?
+Nusuk's Umrah Journey page places hair cutting after Tawaf and Sa'i, gives a women's example of 1–2 cm from the hair ends, and says cutting may be postponed until returning to the residence while Ihram restrictions continue. Sunan Abi Dawud 1985 describes clipping, not shaving, for women. These are attributed source statements, not this site's determination of every school's minimum amount or treatment of layered/short hair. [9][10]
+
+Traveller check (womenTaqsir): Before trimming, confirm the required stage, amount and extent for your circumstances with a qualified scholar. Arrange an appropriate private place, such as your accommodation, and any trusted help needed. Do not assume prayer alcoves or mosque restrooms are approved haircutting facilities, uncover publicly, or treat arrival at the hotel as automatic release from Ihram. Follow the applicable religious guidance until completion.
+
+Use the wider Ihram guide for that separate journey/intention task, subject to its own review. Keep ritual advice separate from airline security rules about scissors. The optional transfer link only helps compare transport: confirm pickup/dropoff, actual passenger and bag capacity, assistance, privacy needs, price and cancellation with the operator; no female-driver, safety or wheelchair-access guarantee is made here.
+
+7. Frequently Asked Questions
+May a Bangladeshi woman come for Umrah without a mahram, at any age and on any visa?
+The Ministry says coming for Umrah without a mahram is allowed, but does not establish every visa/age/nationality entitlement. Tourist eVisa terms separately address adulthood, minor representation and permitted nationalities. Check your route and obtain personal religious guidance separately. [1][2][3]
+Which Madinah hotel area or gate is guaranteed best for women?
+None is verified here. Confirm the exact property-to-intended-prayer/reporting route and current on-site directions. An area name does not establish step-free access, an open gate or a particular Rawdah assembly point. [5]
+How do women book and confirm Rawdah visits?
+Use the actual women's service, available appointment and current confirmation/reporting instructions. Nusuk publishes different men's/women's times, annual regular booking, nearby Instant Track and attendance confirmation before the entry code. No live slot or entry is guaranteed. [4][5]
+Can my children automatically enter Rawdah with me?
+No such entitlement is established. Nusuk's page says children are not allowed into Rawdah; ordinary mosque visits and advertised childcare are separate. Confirm current booking conditions and actual care arrangements rather than relying on an older age statement or a family booking assumption. [1][5]
+Are ordinary clothes, niqab and gloves all treated the same in Ihram?
+No. The cited Ibn Baz answer says women have no special Ihram uniform; Bukhari 1838 separately addresses niqab and gloves. Ask a qualified scholar about your own coverage and medical needs rather than using a skin-contact workaround from a blog. [6][7]
+What should I do if my period conflicts with Tawaf or a Rawdah appointment?
+Bukhari 305 reports delaying Tawaf until purity. Your exact ritual stage, mosque entry, travel deadline and any treatment require separate religious/clinical advice. A permit or return flight is not a personal ruling; do not self-prescribe period-delay medication. [8]
+Must every woman use one universal trimming amount in a mosque restroom?
+This guide does not establish that rule. Nusuk publishes a 1–2 cm example and permits postponement to the residence while restrictions continue; Abu Dawud describes women's clipping. Confirm your applicable method and a suitable private place before trimming. [9][10]`,
+
+  "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": `This guide is for Bangladeshi Umrah travellers choosing between a Jeddah roundtrip, two-city arrival/return, and a connecting itinerary. It helps you compare the flight you can actually buy—not a headline fare stripped of bags, transfers and change conditions. No live fare basket, ticket purchase or airport connection was tested for this review.
+
+Quick Answer — Checked 19 October 2026: compare DAC–JED / MED–DAC and DAC–MED / JED–DAC with a same-city roundtrip on the same dates and passenger basis. Open-jaw may avoid returning to your arrival airport, but it is not automatically cheaper or better. Biman's published baggage varies by direction and fare class; Saudia's opened terms do not establish a universal extra Zamzam allowance. Check the actual ticket and connecting carriers before paying. [1][2][4]
+
+1. Which route shape fits your Makkah and Madinah plan?
+Open-jaw means arriving in one city and departing from another. In these examples, the journey between Jeddah/Makkah and Madinah is a separate surface leg; do not assume that leg is included in the international ticket. Saudia's terms specifically distinguish airfare from surface transport unless it supplies the service. [2]
+
+- **Jeddah first — DAC to JED, then MED to DAC:** compare this if Makkah is your first stay and Madinah your last. Price the airport-to-Makkah transfer, intercity journey and Madinah airport transfer separately. The return can be connecting rather than nonstop; read every segment.
+- **Madinah first — DAC to MED, then JED to DAC:** compare this if you prefer Madinah as the first stay. Include the later journey to Makkah and the final transfer to Jeddah airport. Do not infer a religious exemption or medical benefit from this routing example; consult the separate Ihram and older-traveller guidance for your circumstances.
+- **Same-city roundtrip — DAC to JED and back, or DAC to MED and back:** keep this in the comparison. It can suit your dates or total cost even with a return surface journey. A roundtrip does not compel a bus journey of a fixed duration; compare the actual ground options and the final night's location.
+
+Neither route dictates a fixed number of days in either city. Choose the sequence against your visa/season conditions, intended stays, confirmed assistance needs and actual ticket availability. The main DIY guide owns current entry/permit boundaries; this flight comparison does not establish permission to enter Saudi Arabia or a transit country.
+
+2. How do you check nonstop flights and a connection?
+Start by checking Biman and Saudia for your dates, but do not assume either carrier operates every city pair daily or that a Madinah return is nonstop. The Biman timetable page could not be retrieved during this review; no date-specific carrier itinerary was captured. This is not evidence that a flight is cancelled. No current daily frequency, aircraft, terminal, onboard prayer space or fixed flight duration is certified here.
+
+Read the result as a complete itinerary: departure/arrival dates and local times, overnight date changes, each airport and terminal, operating carrier rather than just the marketing airline, stops, layover and total elapsed time. A route label or airline logo is not enough. Recheck the carrier's travel alerts and flight status before departure.
+
+For a connection, ask whether the flights are on one through ticket or separately issued tickets, whether bags are checked through, who handles a missed connection and whether airport/terminal changes require immigration. A single payment or booking reference alone is not proof of a protected connection. As a specific example, Emirates' Dubai page distinguishes journeys booked with its connecting partners from separately booked flights, which may require baggage collection, immigration and a visa, or a conditional paid baggage-transfer service. That is an Emirates/Dubai example, not a rule for every Gulf hub. [4]
+
+Traveller check (flightConnection): Before paying for a connection, have the seller and operating carriers confirm ticket structure, baggage handover, disruption responsibility and the required connection time for your actual terminals. Check transit or entry permission against your passport and itinerary; do not assume a Saudi visa covers another country. Leave room for assistance, immigration or an overnight stay where needed. No universal safe layover or airport-to-hotel buffer is verified here.
+
+A one-stop quote may be lower or higher than a nonstop quote. Compare meals, seats, baggage, transit costs and any extra hotel night; no family savings amount is established. Do not buy a baggage bundle solely because an airline is described as low-cost—buy the allowance your actual bags require.
+
+3. What baggage does your exact fare include?
+**Biman:** the opened sector table lists Economy Bangladesh-to-Jeddah at 30 kg and Jeddah-to-Bangladesh at 50 kg. Those are published directional examples, not a promise for every fare or for Madinah. The same page gives special G-class baggage of 20–23 kg depending on sector and S-class with no checked baggage. It also contains generic per-piece sections and an Important Notice with differing per-piece wording: resolve any mismatch with Biman for your ticket rather than turning a total weight into one very heavy bag. [1]
+
+Biman's published Economy cabin example is one piece up to 7 kg, 56 x 36 x 23 cm including handles, pockets and wheels. Confirm the ticketed cabin allowance and current restrictions too. The retrieved paginated table did not expose a Madinah row, so this guide does not assign Madinah a checked-baggage number. [1]
+
+**Saudia:** its opened Conditions of Carriage make baggage subject to ticket conditions. The old baggage URLs redirected to a branded-fares page, not a verifiable current baggage table. Do not assume two 23 kg pieces, a universal cabin allowance or identical outbound/return benefits from an older search snippet. Read the selected fare and ask Saudia to resolve any inconsistency before payment. [2][3]
+
+**Air Arabia, as one specific alternative:** its page offers 20, 30 or 40 kg checked options, subject to route availability and fees. The 20 kg option is one piece; 30/40 kg can be split into up to two pieces. This is not evidence of a live DAC–Saudi itinerary or a required bundle on another airline. Its page also prohibits carton boxes on Bangladesh flights; check special Zamzam packaging separately below. [5]
+
+Traveller check (flightBaggage): For every traveller and every flight, record checked pieces, total and per-piece weight, dimensions, cabin allowance and the price of any addition. Check children/infants, codeshares and connecting-carrier rules separately; do not multiply an adult allowance across the family. Weigh and measure the actual bags. Resolve conflicting page and ticket wording with the carrier, and check rail baggage separately if taking Haramain—the airline allowance does not carry over.
+
+4. Is Zamzam automatically free and extra?
+No universal extra-piece entitlement is established by the sources opened here. Saudia's current Conditions of Carriage mention one 5-litre bottle for guests travelling from Jeddah/Madinah and state that a 5-litre bottle counts as part of the allowable checked baggage; extra bottles are excess. Do not turn the word “free” within an allowance into “additional to every ticket's bags.” This page does not settle all packaging, visa, departure-terminal or connecting-carrier conditions. [2]
+
+No Zamzam-specific allowance was found in the four returned chunks of Biman's public baggage page. That does not mean Biman refuses Zamzam or that no separate policy exists. It means this review cannot label a bottle a free extra item for Biman; obtain the conditions for your flight. [1]
+
+Air Arabia publishes one free 5-litre bottle from Saudi Arabia, purchased at authorized airport sales outlets and in sealed packaging designed for air transport. Apply those stated conditions, then confirm how the special package is accepted on the actual Bangladesh-bound connection alongside its carton-box restriction. Do not generalize this benefit to Saudia, Biman or all budget airlines, or invent a USD surcharge. [5]
+
+Traveller check (flightZamzam): Before buying water, ask the departure and connecting carriers about permitted volume, authorized packaging, separate handover, visa/permit conditions, whether it counts within ticketed baggage and any fee. Confirm acceptance through to Dhaka, not just the first sector. Do not put a large bottle in your cabin bag or assume a retail sales rule grants airline carriage. If sources disagree, seek an itinerary-specific answer rather than treating this guide as permission.
+
+Detailed Zamzam, dates, gold and Bangladesh customs questions belong to the separate guide; neither an airline baggage allowance nor this flight article establishes a customs exemption.
+
+5. How do you compare flight quotes on the same basis?
+This is an editorial comparison workflow, not a tested airline checkout or guaranteed booking procedure.
+
+Step 1: Fix the comparison basis.
+Write down dates, permitted flexibility, trip length, passenger ages, cabin, actual bags and assistance needs. Check the main DIY guide's visa/season limits before committing to non-refundable travel.
+
+Step 2: Search three route shapes.
+Request a same-city roundtrip and both open-jaw directions, where available. Record every flight segment and the separate surface leg; do not compare a two-flight trip with an incomplete one-way quote.
+
+Step 3: Compare ticket and connection structure.
+For each candidate, record operating carriers, total elapsed time, local arrival dates, terminals, one through ticket versus separate tickets, baggage handover and who deals with disruption. Verify transit/entry requirements for the actual passport and itinerary. [2][4]
+
+Step 4: Build one total per candidate.
+Add the quoted airfare and taxes, seller/payment charges, required baggage/seats/meals, any transit or overnight costs and all airport/intercity transfers. Record the currency and quote timestamp. Use the same passenger basis; do not compare a per-person headline with a family total. No BDT fare band or fixed exchange rate is supplied here. [2]
+
+Step 5: Read the selected conditions before paying.
+Keep the fare-family rules for changes, cancellation, no-show, fare difference and seller fees, then resolve baggage/Zamzam and assistance questions. Saudia's fare-family comparison shows differing change/cancellation conditions; its terms warn that unused or out-of-sequence coupons can affect the remaining itinerary. Do not skip a flight to alter the route without arranging it with the carrier. [1][2][3][5]
+
+Step 6: Confirm the issued journey and recheck it.
+After purchase, check the actual e-ticket, names, dates, airports, flight coupons, baggage and any confirmed assistance against what you intended to buy. Save confirmations privately. Before travel, recheck carrier notices, flight status and departure/check-in instructions; a saved quote is not a ticket or proof of unchanged operation. [1][2]
+
+Choose the option whose total, conditions and workload your party can manage. Without matched dated quotes, this guide cannot prove that open-jaw or a connection saves money or a particular number of hours.
+
+6. Which guide should you use next?
+Use the main DIY guide and Umrah hub for the wider visa/permit sequence and your own quote-based budget; use the reviewed hotel/Haramain guide for the separate surface journey and actual bag/access checks. A flight landing time is not a guaranteed train connection or hotel arrival time.
+
+Use the stopover guide only if you intend to enter Saudi Arabia on that route; an ordinary airside connection is not automatically a Saudi stopover-visa application. Use the Ihram guide for that separate religious task, not a fixed crew-announcement countdown. The detailed customs guide is a separate review lane, not newly certified here. Optional flight comparison links are a starting point: verify the seller, ticket structure and full conditions before purchase. Never send passport scans, OTPs, full booking references or usable boarding-pass barcodes into public chat.
+
+7. Frequently Asked Questions
+Is an open-jaw Umrah ticket always cheaper?
+No. Compare the same dates, passenger/baggage basis and full trip costs for both open-jaw directions and a roundtrip. It may avoid returning to your arrival airport, but no matched quote basket or guaranteed savings is established here.
+Does every Biman Saudi ticket include 46 kg?
+No blanket allowance is verified. The published Jeddah Economy examples are 30 kg outbound from Bangladesh and 50 kg returning, with fare-class exceptions. Madinah was not visible in the retrieved table. Use the exact ticket and resolve per-piece conditions with Biman. [1]
+Does Saudia give everyone a free extra Zamzam bottle?
+Do not assume that. The opened Conditions of Carriage discuss one 5-litre bottle from Jeddah/Madinah and count it within allowable checked baggage. Ask for the conditions applying to the departure terminal, visa and every carrier on your actual journey. [2]
+Do all low-cost airlines charge for Zamzam and require the same baggage bundle?
+No. Air Arabia's published example includes a conditional free 5-litre bottle and different checked-baggage options. Its Bangladesh carton rule also needs checking with special packaging. Other airlines and fare products require their own checks; no generic surcharge applies here. [5]
+Does one booking reference prove my connection is protected?
+No. Confirm through-ticket versus separate-ticket structure, baggage transfer and responsibility if a flight is delayed. Emirates' Dubai transfer page illustrates how arrangements differ; it is not a universal rule for every hub or airline. [4]
+How much time should I leave between landing and a train or another flight?
+There is no universal verified buffer in this guide. Ask the relevant carrier/operator about the actual terminals, immigration, bag collection/recheck, assistance and deadlines, and allow contingency for your party. A scheduled arrival time alone does not guarantee the onward journey. [2][4]`,
+
   "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": `This guide is for Bangladeshi pilgrims deciding whether to travel for Ramadan 1448 — expected 8 February to 8 March 2027 [1] — whether to register for I'tikaf in the Two Holy Mosques, and how to build a budget they can verify instead of trusting a savings slogan. The Prophet Muhammad (PBUH) said: "Perform Umrah when Ramadan comes, for Umrah in Ramadan is equal to Hajj (in reward)" [5].
 
 Quick Answer — Ramadan 1448 begins Monday 8 February 2027 on Saudi Arabia's official Umm al-Qura calendar, with the religious start confirmed by moon sighting on the evening of 29 Sha'ban (a day either way) [1]. Official I'tikaf registration is online-only, free and capacity-limited through the General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque [2][3]. No authority publishes Ramadan hotel prices, so treat every BDT figure you see as unverified until it matches a dated quote in your name — this guide publishes dates, rules and process, not savings percentages.

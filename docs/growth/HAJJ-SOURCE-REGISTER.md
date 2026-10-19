@@ -119,3 +119,38 @@ Verification: `npm run lint`, `npm run build`, and `npm run verify:build` passed
 - Confirm current government package tiers and prices, payment milestones, deposit requirements, inclusions/exclusions, and any private-agency minimum directly from a Hajj 2027 notice. The 2026 prices are historical only.
 - Confirm the current registration workflow and how a pilgrim can verify registration and licensed agency status.
 - Confirm 1448H / 2027 Saudi Hajj permit, Nusuk-card, visa, and health requirements from season-applicable official Saudi sources. The supplied health PDF is for 1447H / 2026.
+
+## Independent source follow-up — 18 October 2026
+
+Earlier stage entries describe what was available in their supplied packet; they are not a statement that no
+2027 package notice exists. Some prior entries are dated 19 October; retained as earlier repository records,
+**not evidence of a future check performed in this 18 October session**.
+
+- Opened `https://hajj.gov.bd/`. Its banner says the Saudi-announced 2027 registration deadline is
+  **26 September 2026**. This conflicts with the selected **24 September** date. Do not silently replace one
+  with the other or assume the portal establishes an extension.
+- Independently opened the existing bank-certificate PDF:
+  `https://ehaj.hajj.gov.bd/news/uploads/6ab4d8a90e95d0.059743001790236841.pdf`.
+  Its header dates it **23 September 2026**, while the portal lists it on 24 September. The operative paragraph
+  says registration started **27 July 2026**, ends **24 September 2026**, and asks pilgrims to deposit the
+  primary-registration/registration amount and collect the bank's **signed registration certificate**.
+  This now provides a direct, checked document for that paragraph; the earlier “exact wording not checked”
+  limitation for this PDF is superseded. Extraction contains an anomalous isolated date near the signature;
+  do not use that artifact to reinterpret the clearly dated header/operative text.
+- Independently opened the portal's agency instruction:
+  `https://ehaj.hajj.gov.bd/news/uploads/6ab3e62c16dc00.093635001790174764.pdf`.
+  Header: **23 September 2026**, memo ending **906**. Its first paragraph also says the 2027 registration
+  deadline is **24 September 2026**. This corroborates the dated notice, **not** why the banner says 26 September.
+  The agency list is not evidence for a new package price or a general pilgrim eligibility rule.
+- Search discovered MoRA's **“হজ প্যাকেজ ও গাইডলাইন ২০২৭।”** page:
+  `https://mora.gov.bd/pages/notices/হজ-প্যাকেজ-ও-গাইডলাইন-২০২৭-w7znd5-6a5f7c6c7e496b056519403f`.
+  Search indexes a **21 July 2026** publication date. Opening exposed only accessibility links, not its
+  attachment. **Document contents/prices remain unverified here.** Inspect the actual attachment and any
+  amendments before adding price tiers, payment stages or inclusions. Do not import secondary news prices.
+- The portal's latest displayed list included 14 October licence notices and a 9 October Hajj-mission-visa
+  information request. These titles alone do not establish new pilgrim prices, a deadline extension or
+  1448H health/permit rules. No such rule is certified by this follow-up.
+
+No article, HowTo or checklist PDF has been changed in this follow-up. The next Hajj asset review must cite the
+checked PDFs, visibly distinguish a dated notice from a current banner, reconcile the conflict, and inspect
+package/1448H source documents. This is a manual research check, not automatic ongoing monitoring.

@@ -281,7 +281,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost": {
     title: "DIY Umrah from Bangladesh: Cost, Visa & Nusuk | URAL",
     description:
-      "Plan independent Umrah from Dhaka with a BDT budget framework, Saudi visa considerations, Nusuk steps and a practical Makkah–Madinah itinerary.",
+      "Plan Umrah from Bangladesh: conditional visa routes, 1448H dates and application-to-Nusuk steps. Budget reference is historical; check current quotes.",
   },
   "/blog/hajj-registration-bangladesh-government-vs-private-package-cost": {
     title: "Hajj Registration in Bangladesh: Process & Packages | URAL",
@@ -361,7 +361,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": {
     title: "Makkah & Madinah Hotel Zones & Haramain Train | URAL",
     description:
-      "Check what a Makkah or Madinah hotel distance claim really measures, then read the Haramain rail operator's own tariff, baggage limits and station shuttles.",
+      "Compare exact Makkah/Madinah rooms and access routes; check HHR baggage, basic fares, transfers and ticket conditions before booking.",
   },
   "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
     title: "Umrah with Elderly Parents: Wheelchair & Hotel Guide | URAL",
@@ -371,22 +371,22 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": {
     title: "96-Hour Saudi Stopover Visa for Bangladeshis | URAL",
     description:
-      "Bangladeshi travelers on Saudia or flynas can add a 96-hour Saudi stopover for Umrah. No fixed fee or free hotel is published; charges are set at checkout.",
+      "Check eligibility for a Saudi stopover of up to 96 hours: Saudia booking steps, flynas evidence limits, actual charges and separate Umrah/Rawdah permits.",
   },
   "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": {
     title: "Nusuk App & Saudi Visa Bio Guide for Bangladesh | URAL",
     description:
-      "Step-by-step guide for Bangladeshi pilgrims to complete Saudi Visa Bio fingerprint enrollment and book Umrah and Rawdah Shareef permits on the Nusuk app.",
+      "Bangladesh-focused Nusuk visitor registration, application-specific Visa Bio and Rawdah booking/confirmation checks. Follow current official instructions.",
   },
   "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": {
-    title: "Umrah Rules for Bangladeshi Women: Visa & Gates | URAL",
+    title: "Umrah for Women: Visa, Rawdah & Religious Guidance | URAL",
     description:
-      "Review Saudi Umrah e-visa rules for women without a male Mahram, Madinah ladies' prayer access in Markazia North, modest Ihram clothing, and Taqsir etiquette.",
+      "Separate visa eligibility and religious advice; check women’s Rawdah bookings, actual access routes, Ihram, menstrual contingencies and private Taqsir.",
   },
   "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": {
-    title: "Dhaka to Jeddah & Madinah Open-Jaw Flight Guide | URAL",
+    title: "Dhaka–Jeddah/Madinah Flight Planning & Baggage | URAL",
     description:
-      "Save 5–6 hours of highway travel on Umrah by booking a Multi-City (Open-Jaw) ticket into Jeddah and out of Madinah on Biman, Saudia or Gulf carriers.",
+      "Compare roundtrip and open-jaw Umrah flights from Dhaka: ticketed baggage, Zamzam conditions, connections and same-basis quotes—not promised savings.",
   },
   "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget": {
     title: "Ramadan Umrah & I'tikaf Guide from Bangladesh | URAL",

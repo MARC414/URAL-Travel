@@ -1,3 +1,4 @@
+import { getTravellerCheck } from "../src/utils/travellerChecks";
 /**
  * Post-build verification for the prerendered output.
  *
@@ -70,6 +71,8 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import App from "../src/App";
 import BlogPostRouteView from "../src/routes/BlogPostRouteView";
+import { UmrahBudgetCalculator } from "../src/components/UmrahBudgetCalculator";
+import { calculateUmrahBudget, emptyUmrahBudget, UMRAH_BUDGET_ITEMS } from "../src/utils/umrahBudget";
 import ContactRouteView from "../src/routes/ContactRouteView";
 import VisaFreeCountriesRouteView from "../src/routes/VisaFreeCountriesRouteView";
 
@@ -2107,9 +2110,13 @@ if (rss) {
       .replace(/&lt;/g, "<")
       .replace(/&gt;/g, ">")
       .replace(/&quot;/g, '"')
-      .replace(/&#0?39;|&apos;/g, "'")
+      .replace(/&#(?:0?39|x0?27);|&apos;/gi, "'")
       .replace(/\s+/g, " ")
       .trim();
+  check(
+    ["carrier&#39;s", "carrier&#x27;s", "carrier&apos;s"].every((sample) => normalise(sample) === "carrier's"),
+    "full-body comparison decodes decimal, React hexadecimal and named apostrophes without dropping warning text"
+  );
   const emptyPrerenders: string[] = [];
   const truncatedPrerenders: string[] = [];
   const umrahBudgetSlug = "umrah-hajj-guide-bangladesh-nusuk-bdt-cost";
@@ -2134,7 +2141,12 @@ if (rss) {
       .filter(
         (para) => !(slug === hajjResourceSlug && para === hajjResourceMarker)
       )
-      .filter((para) => !getVisibleBlogFaqSection(slug, para, "en"));
+      .filter((para) => !getVisibleBlogFaqSection(slug, para, "en"))
+      .flatMap((para) => {
+        const note = getTravellerCheck(para);
+        // Check both rendered parts; never drop a caution from the full-body coverage guard.
+        return note ? [note.title, note.text] : [para];
+      });
     const missing = paragraphs.filter((para) => !page.includes(normalise(para)));
     if (missing.length > 0) truncatedPrerenders.push(`${slug} (${missing.length}/${paragraphs.length})`);
   }
@@ -2456,11 +2468,17 @@ const normalizeStructuredText = (value: string) =>
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
-    .replace(/&#0?39;|&apos;/g, "'")
+    .replace(/&#(?:0?39|x0?27);|&apos;/gi, "'")
     .replace(/\*/g, "")
     .replace(/(^|\s)[-•]\s+/g, "$1")
     .replace(/\s+/g, " ")
     .trim();
+
+check(
+  ["<p>carrier&#39;s rule</p>", "<p>carrier&#x27;s rule</p>", "<p>carrier&apos;s rule</p>"].every((sample) =>
+    normalizeStructuredText(sample) === "carrier's rule"),
+  "structured-text comparison preserves complete words across static and React apostrophe encodings"
+);
 
 const faqSlugs = [
   "travel-creator-resources",
@@ -2565,6 +2583,101 @@ check(
     ? "HowTo JSON-LD steps match the visible bilingual instructions on the selected procedural guides"
     : `HowTo content/schema mismatch for route(s): ${howToCoverageIssues.join(", ")}`
 );
+
+// The Nusuk review must survive prerendering, not merely exist in a body file.
+const nusukReviewSlug = "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit";
+for (const locale of ["en", "bn"] as const) {
+  const post = getLocalizedBlogs(locale).find((entry) => entry.slug === nusukReviewSlug);
+  const html = read(path.join(DIST_DIR, ...(locale === "bn" ? ["bn"] : []), "blog", `${nusukReviewSlug}.html`)) ?? "";
+  const text = normalizeStructuredText(html);
+  const graph = getSeoSchemaGraph(html);
+  const howTos = graph.filter((node) => hasSchemaType(node, "HowTo"));
+  const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
+  check(
+    !!post && post.references?.length === 11 &&
+      post.references.every((reference) => html.includes(`href="${reference.url}"`)) &&
+      post.updatedAt === "2026-10-19",
+    `${locale} Nusuk page renders all eleven reviewed sources with its truthful update date`
+  );
+  check(
+    howTos.length === 3 &&
+      ["howto-saudi-visa-bio", "howto-nusuk-visitor-registration", "howto-rawdah-booking"].every(
+        (id, index) => howTos[index]?.["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${nusukReviewSlug}#${id}`
+      ) &&
+      [4, 4, 5].every((steps, index) => Array.isArray(howTos[index]?.step) && (howTos[index].step as unknown[]).length === steps) &&
+      Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 8,
+    `${locale} Nusuk page emits three complete visible HowTos (4/4/5 steps) and eight matching FAQs`
+  );
+  const noteKeys = [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((match) => match[1]);
+  const sourceBody = (locale === "bn" ? post?.content : BLOG_BODY[nusukReviewSlug]) ?? "";
+  const notes = sourceBody.split(/\n{2,}/).map(getTravellerCheck).filter((note) => note !== null);
+  const noteTextIsPresent = (candidate: string) => notes.length === 5 && notes.every(
+    (note) => candidate.includes(normalizeStructuredText(note.title)) && candidate.includes(normalizeStructuredText(note.text))
+  );
+  check(
+    noteTextIsPresent(text) &&
+      JSON.stringify(noteKeys) === JSON.stringify(["services", "biometrics", "registration", "rawdah", "network"]) &&
+      [...html.matchAll(/<aside role="note"/g)].length === 5 &&
+      !text.includes(locale === "bn" ? "যাত্রীর যাচাই (" : "Traveller check ("),
+    `${locale} Nusuk static page renders all five localized accessible caution boxes in order, not raw author syntax`
+  );
+  check(
+    notes.length === 5 && !noteTextIsPresent(text.replace(normalizeStructuredText(notes[2].text), "")),
+    `${locale} caution completeness guard rejects an omitted registration warning (negative control)`
+  );
+  const required = locale === "en"
+    ? ["once a year", "48 hours", "2 hours", "all ten fingerprints", "not a test of an authenticated app account"]
+    : ["বছরে একবার", "৪৮ ঘণ্টা", "২ ঘণ্টা", "দশ আঙুল", "লগইন করা অ্যাপ অ্যাকাউন্ট পরীক্ষা"];
+  check(
+    required.every((phrase) => text.includes(phrase)) &&
+      !/every visa holder can book 1 Rawdah permit every 30 days|প্রতি ৩০ দিনে ১টি পারমিট বুক করা যায়|tiny drop of lotion|ভ্যাসলিন|4-digit OTP|৪ সংখ্যার OTP/i.test(text),
+    `${locale} Nusuk output retains the corrected booking, biometric and evidence-limit guidance without retired hacks`
+  );
+}
+
+// Independent expectations: a missing main-guide procedure must not pass a self-derived count.
+const diyReviewSlug = "umrah-hajj-guide-bangladesh-nusuk-bdt-cost";
+for (const locale of ["en", "bn"] as const) {
+  const html = read(path.join(DIST_DIR, ...(locale === "bn" ? ["bn"] : []), "blog", `${diyReviewSlug}.html`)) ?? "";
+  const graph = getSeoSchemaGraph(html);
+  const procedures = graph.filter((node) => hasSchemaType(node, "HowTo"));
+  const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
+  check(
+    procedures.length === 1 &&
+      procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${diyReviewSlug}#howto-diy-umrah-sequence` &&
+      Array.isArray(procedures[0].step) && procedures[0].step.length === 6 &&
+      Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 5,
+    `${locale} DIY guide renders one six-step application-to-permit procedure and five visible FAQs`
+  );
+  const post = getLocalizedBlogs(locale).find((entry) => entry.slug === diyReviewSlug);
+  const text = normalizeStructuredText(html);
+  check(
+    post?.updatedAt === "2026-10-19" && post.references?.length === 26 &&
+      post.references.every((reference) => html.includes(`href="${reference.url}"`)) &&
+      text.includes("SAR 4,000") && text.includes("SAR 1,000") &&
+      text.includes(locale === "bn" ? "সর্বশেষ revision date নিশ্চিত হয়নি" : "does not establish its latest revision date") &&
+      text.includes(locale === "bn" ? "নতুন দাম যাচাই করা হয়নি" : "not re-priced on 19 October 2026"),
+    `${locale} DIY output retains all sources, Package Visa conditions, fine-print limit and historical budget basis`
+  );
+  const body = (locale === "bn" ? post?.content : BLOG_BODY[diyReviewSlug]) ?? "";
+  const visaNote = body.split(/\n{2,}/).map(getTravellerCheck).find((note) => note?.key === "visaEligibility");
+  const hasVisaCaution = (visible: string) => Boolean(visaNote &&
+    visible.includes(normalizeStructuredText(visaNote.title)) &&
+    visible.includes(normalizeStructuredText(visaNote.text)));
+  const requiredVisaCriteria = locale === "bn"
+    ? ["tourist বা business", "অন্তত একবার", "temporary residence", "নির্দিষ্ট পেশার শর্ত ছাড়া"]
+    : ["tourist or business", "used at least once", "temporary residence", "without specific professions"];
+  check(
+    [...html.matchAll(/data-traveller-check="visaEligibility"/g)].length === 1 &&
+      hasVisaCaution(text) && requiredVisaCriteria.every((phrase) => text.includes(phrase)) &&
+      !JSON.stringify(procedures).includes(visaNote?.text ?? "visaEligibility"),
+    `${locale} DIY output renders the full point-of-payment visa caution and qualified foreign-document criteria`
+  );
+  check(
+    Boolean(visaNote) && !hasVisaCaution(text.replace(normalizeStructuredText(visaNote!.text), "")),
+    `${locale} DIY visa caution guard rejects an omitted warning body (negative control)`
+  );
+}
 
 const authorBioSlug = "dual-currency-card-endorsement-bangladesh";
 const authorBioIssues: string[] = [];
@@ -4188,15 +4301,15 @@ check(
     : "stopover guard failed its reintroduced-fee negative control"
 );
 const stopoverCheckoutCopyIsSafe =
-  /no fixed fee is published/i.test(stopoverBodies[0]) &&
+  /not an all-in quote/i.test(stopoverBodies[0]) &&
   /Ministry of Foreign Affairs regulations/i.test(stopoverBodies[0]) &&
-  stopoverBodies[1].includes("কোনো নির্দিষ্ট ফি প্রকাশিত নেই") &&
-  stopoverBodies[1].includes("হোটেল অন্তর্ভুক্ত নয়") &&
-  stopoverBodies[1].includes("এক বাহকের checkout line item") &&
+  stopoverBodies[1].includes("প্রকাশিত উদাহরণ all-in quote নয়") &&
+  stopoverBodies[1].includes("সবার জন্য অন্তর্ভুক্ত") &&
+  stopoverBodies[1].includes("itemized checkout total") &&
   stopoverRouteHtml.every(
     (html) =>
       /Nusuk\.sa/i.test(html) &&
-      /not a permit|ভিসা permit নয়/i.test(html) &&
+      /not a permit|Visa permit নয়/i.test(html) &&
       /visa\.visitsaudi\.com|ksavisa\.sa/i.test(html)
   );
 check(
@@ -4212,20 +4325,54 @@ const stopoverReferencesAreLocalized = (() => {
   const bnHtml = stopoverRouteHtml[1];
   return Boolean(
     enRefs &&
-      enRefs.length === 8 &&
+      enRefs.length === 10 &&
       bnRefs?.length === enRefs.length &&
       enRefs.every((ref, index) => ref.url === bnRefs[index]?.url && enHtml.includes(`href="${ref.url}"`) && bnHtml.includes(`href="${ref.url}"`)) &&
       /\u098f\u0987 \u0997\u09be\u0987\u09a1\u09c7\u09b0 \u09a4\u09a5\u09cd\u09af\u09b8\u09c2\u09a4\u09cd\u09b0/.test(bnHtml) &&
       enHtml.includes("Sources for this guide") &&
-      BLOG_DATA.find((post) => post.slug === STOPOVER_SLUG)?.updatedAt === "2026-10-15"
+      BLOG_DATA.find((post) => post.slug === STOPOVER_SLUG)?.updatedAt === "2026-10-19"
   );
 })();
 check(
   stopoverReferencesAreLocalized,
   stopoverReferencesAreLocalized
-    ? "the stopover guide renders 8 claim-linked references in both locales and carries updatedAt 2026-10-15"
+    ? "the stopover guide renders 10 scoped references in both locales and carries updatedAt 2026-10-19"
     : "stopover references are missing, unlocalized, or the update date is not recorded"
 );
+
+// Stopover's source limitations, cautions and actual procedure must survive prerendering.
+for (const [index, locale] of (["en", "bn"] as const).entries()) {
+  const html = stopoverRouteHtml[index];
+  const graph = getSeoSchemaGraph(html);
+  const procedures = graph.filter((node) => hasSchemaType(node, "HowTo"));
+  const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
+  const notes = stopoverBodies[index].split(/\n{2,}/).map(getTravellerCheck).filter((note) => note !== null);
+  const text = normalizeStructuredText(html);
+  const cautionPresent = (visible: string, key: string) => {
+    const note = notes.find((entry) => entry.key === key);
+    return Boolean(note && visible.includes(normalizeStructuredText(note.title)) && visible.includes(normalizeStructuredText(note.text)));
+  };
+  check(
+    procedures.length === 1 && procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${STOPOVER_SLUG}#howto-saudia-stopover-request` &&
+      Array.isArray(procedures[0].step) && procedures[0].step.length === 6 &&
+      Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 6 &&
+      notes.every((note) => !JSON.stringify(procedures).includes(note.text)),
+    `${locale} stopover output has the Saudia-only six-step procedure and six matching FAQ answers`
+  );
+  check(
+    [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((m) => m[1]).join(",") === "stopoverEligibility,stopoverPermits" &&
+      cautionPresent(text, "stopoverEligibility") && cautionPresent(text, "stopoverPermits") &&
+      text.includes(locale === "en" ? "Detailed current flynas eligibility could not be verified" : "flynas-এর বর্তমান বিস্তারিত যোগ্যতা যাচাই হয়নি") &&
+      text.includes(locale === "en" ? "illustrative allocation" : "উদাহরণভিত্তিক সময় বণ্টন") &&
+      !/does not require a previously used|আগে US\/UK\/Schengen ভিসা ব্যবহার করা লাগে না/.test(stopoverBodies[index]),
+    `${locale} stopover output preserves both full caution bodies, flynas evidence limits and illustrative planning`
+  );
+  for (const key of ["stopoverEligibility", "stopoverPermits"]) {
+    const note = notes.find((entry) => entry.key === key);
+    check(Boolean(note) && !cautionPresent(text.replace(normalizeStructuredText(note!.text), ""), key),
+      `${locale} stopover caution guard rejects removed ${key} body (negative control)`);
+  }
+}
 
 // --- Wave 3C: shared Umrah-visa framing on hub surfaces must stay sourced ----
 //
@@ -4310,7 +4457,8 @@ check(
 // a Umrah-category article through the real route component and assert the panel
 // exists there with the qualified copy.
 function renderSharedUmrahPanel(locale: "en" | "bn"): string {
-  const slug = STOPOVER_SLUG;
+  // Reviewed procedural guides suppress this generic price panel. Preserve its independent regression fixture.
+  const slug = "bangladeshi-halal-food-guide-makkah-madinah-budget-meals";
   const isBn = locale === "bn";
   const sourcePosts = getLocalizedBlogs(locale);
   const sourcePost = sourcePosts.find((post) => post.slug === slug);
@@ -4368,6 +4516,27 @@ const umrahHubHtml = [
   read(path.join(DIST_DIR, "umrah.html")) ?? "",
   read(path.join(DIST_DIR, "bn", "umrah.html")) ?? "",
 ];
+// The price worksheet must be visible without JavaScript in both locales,
+// and its initial state must not imply unknown inputs are a zero-cost holiday.
+for (const [index, locale] of (["en", "bn"] as const).entries()) {
+  const worksheet = renderToStaticMarkup(React.createElement(UmrahBudgetCalculator, { isBn: locale === "bn" }));
+  check(
+    umrahHubHtml[index].includes(worksheet) &&
+      UMRAH_BUDGET_ITEMS.every(({ key }) => worksheet.includes(`id="umrah-cost-${key}"`)) &&
+      !worksheet.includes('data-umrah-budget-total="true"'),
+    `${locale} /umrah prerenders the shared quote-input worksheet with no fabricated initial total`
+  );
+}
+check(
+  calculateUmrahBudget(emptyUmrahBudget(), 2).totalBdt === null,
+  "unknown Umrah quote inputs cannot be interpreted as zero-cost travel"
+);
+const umrahLandingSource = read(path.join(ROOT_DIR, "src", "components", "UmrahLandingPage.tsx")) ?? "";
+check(
+  umrahLandingSource.includes("<UmrahBudgetCalculator isBn={isBn} />") &&
+    !/baseFlightPerPerson|visaWithInsurancePerPerson|nightlyRoomRateBdt|diyGrandTotalBdt|agencyMultiplier/.test(umrahLandingSource),
+  "the hydrated Umrah hub uses the shared worksheet instead of a hidden preset price model"
+);
 const umrahHubIsGrounded =
   umrahHubHtml.every((html) => html.length > 0) &&
   SHARED_UMRAH_EN_ANCHOR.test(umrahHubHtml[0]) &&
@@ -4466,8 +4635,8 @@ const HOTEL_ANCHORS: { label: string; pattern: RegExp }[] = [
   { label: "the dated airport-station base fare", pattern: /SAR 65/ },
   { label: "the 25 kg ceiling", pattern: /25 kg|২৫ কেজি/ },
   { label: "the no-BDT-conversion rule", pattern: /No BDT figure is published|কোনো BDT অঙ্ক নেই/ },
-  { label: "excess baggage is not carried", pattern: /Excess baggage is not carried|অতিরিক্ত লাগেজ মোটেই নেওয়া হয় না/ },
-  { label: "the distance claim treated as unverified until the property confirms it", pattern: /Treat any distance claim as unverified|যাচাই-না-করা ত/ },
+  { label: "excess baggage is not carried", pattern: /excess baggage is not allowed|excess baggage allowed নয়/i },
+  { label: "the distance claim treated as unverified until the property confirms it", pattern: /Ask what the advertised distance measures|Advertised distance কী পর্যন্ত/ },
 ];
 const hotelMissing: string[] = [];
 (["EN", "BN"] as const).forEach((locale, li) => {
@@ -4486,8 +4655,8 @@ const hotelRefLinks = [
   read(path.join(DIST_DIR, "bn", "blog", `${HOTEL_SLUG}.html`)) ?? "",
 ].map((html) => (html.match(/href="https:\/\/sar\.hhr\.sa/g) || []).length);
 check(
-  hotelRefLinks.length === 2 && hotelRefLinks.every((n) => n === 3),
-  `the hotel-zone guide renders 3 operator reference links in both locales (got ${hotelRefLinks.join(" / ")})`
+  hotelRefLinks.length === 2 && hotelRefLinks.every((n) => n === 4),
+  `the hotel-zone guide renders 4 operator reference links in both locales (got ${hotelRefLinks.join(" / ")})`
 );
 
 const HOTEL_REINTRODUCED =
@@ -4499,6 +4668,137 @@ check(
   hotelControl >= HOTEL_BANNED_PATTERNS.length - 2,
   `the hotel-zone guard rejects a deliberately reintroduced fare, timing, gate, shuttle and savings sentence (matched ${hotelControl} of ${HOTEL_BANNED_PATTERNS.length} patterns)`
 );
+
+// Independent hotel/rail article output expectations; warnings must remain complete in both locales.
+for (const locale of ["en", "bn"] as const) {
+  const html = read(path.join(DIST_DIR, ...(locale === "bn" ? ["bn"] : []), "blog", `${HOTEL_SLUG}.html`)) ?? "";
+  const post = getLocalizedBlogs(locale).find((entry) => entry.slug === HOTEL_SLUG);
+  const body = locale === "en" ? BLOG_BODY[HOTEL_SLUG] : post?.content ?? "";
+  const graph = getSeoSchemaGraph(html);
+  const procedures = graph.filter((node) => hasSchemaType(node, "HowTo"));
+  const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
+  const notes = body.split(/\n{2,}/).map(getTravellerCheck).filter((note) => note !== null);
+  const text = normalizeStructuredText(html);
+  const cautionPresent = (candidate: string, key: string) => {
+    const note = notes.find((entry) => entry.key === key);
+    return Boolean(note && candidate.includes(normalizeStructuredText(note.title)) && candidate.includes(normalizeStructuredText(note.text)));
+  };
+  check(
+    post?.updatedAt === "2026-10-19" && post.references?.length === 6 &&
+      post.references.every((reference) => html.includes(`href="${reference.url}"`)) &&
+      procedures.length === 1 && procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${HOTEL_SLUG}#howto-hotel-rail-plan` &&
+      Array.isArray(procedures[0].step) && procedures[0].step.length === 6 &&
+      Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 6 &&
+      notes.every((note) => !JSON.stringify(procedures).includes(note.text)),
+    `${locale} hotel/rail output preserves six references, update date, six-step procedure and six FAQs`
+  );
+  check(
+    [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((m) => m[1]).join(",") === "hotelAccess,railBaggage,railTicket" &&
+      ["hotelAccess", "railBaggage", "railTicket"].every((key) => cautionPresent(text, key)) &&
+      text.includes(locale === "en" ? "Four passengers with four bags that each comply" : "চার passenger-এর চারটি compliant bag") &&
+      text.includes(locale === "en" ? "class labels that were not sufficiently clear" : "class label extraction-এ যথেষ্ট পরিষ্কার ছিল না"),
+    `${locale} hotel/rail output retains all three complete cautions and baggage/refund qualifications`
+  );
+  for (const key of ["hotelAccess", "railBaggage", "railTicket"]) {
+    const note = notes.find((entry) => entry.key === key);
+    check(Boolean(note) && !cautionPresent(text.replace(normalizeStructuredText(note!.text), ""), key),
+      `${locale} hotel/rail caution guard rejects removed ${key} body (negative control)`);
+  }
+}
+
+// Reviewed flight-strategy guide: source-specific facts, full cautions and visible/schema parity.
+const FLIGHT_STRATEGY_SLUG = "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia";
+const FLIGHT_RETIRED_CLAIMS = /55%|BDT\s*(?:15,000|72,000|74,000|52,000|54,000|62,000)|USD\s*\$?25|6 hours 15 minutes|54 minutes|45 minutes before|daily wide-body|always book an|সবসময়.*টিকিট কাটবেন|৭২–৯২|১৫,০০০\+|৬ ঘণ্টা ১৫ মিনিট|৪৫০ কিলোমিটার/i;
+const flightClaimSurfaces: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  const html = read(path.join(DIST_DIR, ...(locale === "bn" ? ["bn"] : []), "blog", `${FLIGHT_STRATEGY_SLUG}.html`)) ?? "";
+  const post = getLocalizedBlogs(locale).find((entry) => entry.slug === FLIGHT_STRATEGY_SLUG);
+  const body = locale === "en" ? BLOG_BODY[FLIGHT_STRATEGY_SLUG] : post?.content ?? "";
+  flightClaimSurfaces.push(body, post?.title ?? "", post?.summary ?? "", JSON.stringify(post?.affiliateCTA), normalizeStructuredText(html));
+  const graph = getSeoSchemaGraph(html);
+  const procedures = graph.filter((node) => hasSchemaType(node, "HowTo"));
+  const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
+  const notes = body.split(/\n{2,}/).map(getTravellerCheck).filter((note) => note !== null);
+  const text = normalizeStructuredText(html);
+  const cautionPresent = (candidate: string, key: string) => {
+    const note = notes.find((entry) => entry.key === key);
+    return Boolean(note && candidate.includes(normalizeStructuredText(note.title)) && candidate.includes(normalizeStructuredText(note.text)));
+  };
+  check(
+    post?.updatedAt === "2026-10-19" && post.references?.length === 5 &&
+      post.references.every((reference) => html.includes(`href="${reference.url}"`)) &&
+      procedures.length === 1 && procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${FLIGHT_STRATEGY_SLUG}#howto-compare-umrah-flights` &&
+      Array.isArray(procedures[0].step) && procedures[0].step.length === 6 &&
+      Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 6 &&
+      notes.every((note) => !JSON.stringify(procedures).includes(note.text)),
+    `${locale} flight-strategy output preserves five sources, update date, six-step comparison and six FAQs`
+  );
+  check(
+    [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((match) => match[1]).join(",") === "flightConnection,flightBaggage,flightZamzam" &&
+      ["flightConnection", "flightBaggage", "flightZamzam"].every((key) => cautionPresent(text, key)) &&
+      text.includes(locale === "en" ? "S-class with no checked baggage" : "S-class-এ checked baggage নেই") &&
+      text.includes(locale === "en" ? "does not mean Biman refuses" : "Biman Zamzam নেয় না") &&
+      text.includes(locale === "en" ? "part of the allowable checked baggage" : "allowable checked baggage-এর অংশ") &&
+      text.includes(locale === "en" ? "30 kg and Jeddah-to-Bangladesh at 50 kg" : "৩০ কেজি এবং Jeddah-to-Bangladesh ৫০ কেজি"),
+    `${locale} flight-strategy output retains three complete cautions and directional baggage/Zamzam limits`
+  );
+  for (const key of ["flightConnection", "flightBaggage", "flightZamzam"]) {
+    const note = notes.find((entry) => entry.key === key);
+    check(Boolean(note) && !cautionPresent(text.replace(normalizeStructuredText(note!.text), ""), key),
+      `${locale} flight-strategy caution guard rejects removed ${key} body (negative control)`);
+  }
+}
+check(flightClaimSurfaces.every((surface) => surface && !FLIGHT_RETIRED_CLAIMS.test(surface)),
+  "flight-strategy EN/BN source, metadata and generated pages do not restore invented fare, savings or fixed-time claims");
+check(["Airfare is 55%", "Save BDT 15,000+", "daily wide-body in 6 hours 15 minutes", "54 minutes transfer", "৭২–৯২ হাজার", "১৫,০০০+ টাকা"].every((fixture) => FLIGHT_RETIRED_CLAIMS.test(fixture)),
+  "flight-strategy retired-claim guard rejects all six EN/BN reintroduction fixtures (negative controls)");
+
+// Women-specific guide: civil eligibility, personal fiqh and actual access are separate evidence gates.
+const WOMEN_UMRAH_SLUG = "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates";
+const WOMEN_NOTE_KEYS = ["womenVisa", "womenAccess", "womenRawdah", "womenIhram", "womenHealth", "womenTaqsir"];
+const WOMEN_RETIRED_CLAIMS = /women of any age (?:may|can|apply)|Gates? (?:21 through 26|25[–-]29)|গেট ২১ থেকে ২৬|যেকোনো বয়সের নারী.*(?:ভিসা|Visa)|direct, flat, step-free access|quick, step-free access|গরমে স্বস্তি দেয়|soft visor cap|নরম ক্যাপ \(Visor Cap\)|about one inch or 2\.5 cm|২\.৫ সেন্টিমিটার|after Isha prayer until midnight|এশার পর থেকে মধ্যরাত|safe private family|vetted door-to-door/i;
+const womenClaimSurfaces: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  const html = read(path.join(DIST_DIR, ...(locale === "bn" ? ["bn"] : []), "blog", `${WOMEN_UMRAH_SLUG}.html`)) ?? "";
+  const post = getLocalizedBlogs(locale).find((entry) => entry.slug === WOMEN_UMRAH_SLUG);
+  const body = locale === "en" ? BLOG_BODY[WOMEN_UMRAH_SLUG] : post?.content ?? "";
+  const text = normalizeStructuredText(html);
+  womenClaimSurfaces.push(body, post?.title ?? "", post?.summary ?? "", JSON.stringify(post?.affiliateCTA), text);
+  const graph = getSeoSchemaGraph(html);
+  const procedures = graph.filter((node) => hasSchemaType(node, "HowTo"));
+  const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
+  const notes = body.split(/\n{2,}/).map(getTravellerCheck).filter((note) => note !== null);
+  const cautionPresent = (candidate: string, key: string) => {
+    const note = notes.find((entry) => entry.key === key);
+    return Boolean(note && candidate.includes(normalizeStructuredText(note.title)) && candidate.includes(normalizeStructuredText(note.text)));
+  };
+  check(
+    post?.updatedAt === "2026-10-19" && post.references?.length === 10 &&
+      post.references.every((reference) => html.includes(`href="${reference.url}"`)) &&
+      procedures.length === 1 && procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${WOMEN_UMRAH_SLUG}#howto-women-rawdah-preparation` &&
+      Array.isArray(procedures[0].step) && procedures[0].step.length === 4 &&
+      Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 7 &&
+      notes.every((note) => !JSON.stringify(procedures).includes(note.text)),
+    `${locale} women-specific output preserves ten sources, update, four appointment-preparation steps and seven FAQs`
+  );
+  check(
+    [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((match) => match[1]).join(",") === WOMEN_NOTE_KEYS.join(",") &&
+      WOMEN_NOTE_KEYS.every((key) => cautionPresent(text, key)) &&
+      text.includes(locale === "en" ? "not a finding that every Bangladeshi is ineligible" : "প্রত্যেক বাংলাদেশি সবভাবে ineligible প্রমাণ হয় না") &&
+      text.includes(locale === "en" ? "older Ministry FAQ still says 30 days" : "পুরোনো Ministry FAQ-এ এখনো ৩০ দিন") &&
+      text.includes(locale === "en" ? "not this site's determination" : "এই site ঠিক করছে না"),
+    `${locale} women-specific output retains six complete cautions and civil, booking and personal-ruling limits`
+  );
+  for (const key of WOMEN_NOTE_KEYS) {
+    const note = notes.find((entry) => entry.key === key);
+    check(Boolean(note) && !cautionPresent(text.replace(normalizeStructuredText(note!.text), ""), key),
+      `${locale} women-specific caution guard rejects removed ${key} body (negative control)`);
+  }
+}
+check(womenClaimSurfaces.every((surface) => surface && !WOMEN_RETIRED_CLAIMS.test(surface)),
+  "women-specific EN/BN source, metadata and generated pages do not restore blanket visa, gate, access, dress or trimming claims");
+check(["women of any age may apply", "Gates 25–29", "Gates 21 through 26", "direct, flat, step-free access", "soft visor cap", "about one inch or 2.5 cm", "এশার পর থেকে মধ্যরাত", "vetted door-to-door"].every((fixture) => WOMEN_RETIRED_CLAIMS.test(fixture)),
+  "women-specific retired-claim guard rejects all eight reintroduced civil/access/religious/supplier claims (negative controls)");
 
 // --- Wave 6: Zamzam & Customs Claims Guards (2026-10-17) ------------------
 // Guard against reintroducing the outdated SAR 9.50-12.50 Zamzam price range
