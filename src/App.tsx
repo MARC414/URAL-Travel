@@ -185,6 +185,12 @@ const KkdayHotelsPage = React.lazy(() =>
 const ExperiencesPage = React.lazy(() =>
   import("./components/ExperiencesPage").then((m) => ({ default: m.ExperiencesPage }))
 );
+const GlobalAttractionsHub = React.lazy(() =>
+  import("./components/GlobalAttractionsHub").then((m) => ({ default: m.GlobalAttractionsHub }))
+);
+const AttractionDetailPage = React.lazy(() =>
+  import("./components/AttractionDetailPage").then((m) => ({ default: m.AttractionDetailPage }))
+);
 const SitemapPage = React.lazy(() =>
   import("./components/SitemapPage").then((m) => ({ default: m.SitemapPage }))
 );
@@ -349,7 +355,7 @@ export function TravelpayoutsWidgetSkeleton({
             />
           ))}
         </div>
-        <div className="flex items-center gap-2 text-[11px] font-mono text-slate-500">
+        <div className="flex items-center gap-2 text-[11px] font-mono text-slate-600">
           <span className="w-2 h-2 rounded-full bg-[#07C369]" />
           <span>
             {isBn
@@ -830,7 +836,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
   return `${cleanWords.slice(0, 50).join(" ").replace(/[.,;:!?-]+$/, "")}...`;
 }
 
-type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "privacy" | "about" | "notFound";
+type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "attractions" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "privacy" | "about" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
@@ -1423,9 +1429,22 @@ export default function App() {
       section = "costs";
       parameterId = countryParam || "nepal-costs";
       isLanding = !countryParam;
-    } else if ((root === "experiences" || root === "attractions") && segs.length === 1) {
+    } else if (root === "experiences" && segs.length <= 2) {
       section = "experiences";
       isLanding = true;
+      // Clean static region paths: /experiences/europe (west) and /experiences/asia
+      if (segs.length === 2 && (segs[1] === "europe" || segs[1] === "asia")) {
+        parameterId = segs[1];
+      }
+    } else if (root === "attractions" && segs.length <= 2) {
+      section = "attractions";
+      if (segs.length === 1) {
+        isLanding = true;
+      } else if (segs.length === 2) {
+        // /attractions/:cityId:attractionId detail page (e.g. /attractions/london:992434)
+        parameterId = segs[1];
+        isLanding = false;
+      }
     } else if (root === "kkday-hotels" && segs.length === 1) {
       section = "kkdayHotels";
       isLanding = true;
@@ -1580,7 +1599,7 @@ export default function App() {
 
   // Mobile Drawer User-Intent Accordion State (reduces vertical scroll depth)
   const getDefaultDrawerGroup = (sec: SectionType): "booking" | "destinations" | "research" | "tools" => {
-    if (sec === "destinations" || sec === "experiences") return "destinations";
+    if (sec === "destinations" || sec === "experiences" || sec === "attractions") return "destinations";
     if (sec === "blog" || sec === "costs") return "research";
     if (sec === "tools" || sec === "sitemap" || sec === "preDeparture" || sec === "contact") return "tools";
     return "booking";
@@ -1705,7 +1724,7 @@ export default function App() {
           description: r.quickAnswer,
         })),
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("flights", undefined, true, hubUrl, localizedFlights);
+      const faqSchema = getFaqSchemaForPage("flights", undefined, true, hubUrl, localizedFlights);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -1728,7 +1747,7 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = isBn ? null : getFaqSchemaForPage("flights", activeRoute.id, false, routeUrl, localizedFlights);
+      const faqSchema = getFaqSchemaForPage("flights", activeRoute.id, false, routeUrl, localizedFlights);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
@@ -1758,7 +1777,7 @@ export default function App() {
           description: h.quickAnswer,
         })),
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("hotels", undefined, true, hubUrl, localizedHotels);
+      const faqSchema = getFaqSchemaForPage("hotels", undefined, true, hubUrl, localizedHotels);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -1781,7 +1800,7 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = isBn ? null : getFaqSchemaForPage("hotels", activeHotel.id, false, hotelUrl, localizedHotels);
+      const faqSchema = getFaqSchemaForPage("hotels", activeHotel.id, false, hotelUrl, localizedHotels);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
@@ -1813,7 +1832,7 @@ export default function App() {
           description: v.quickAnswer,
         })),
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("visa", undefined, true, hubUrl, localizedVisas);
+      const faqSchema = getFaqSchemaForPage("visa", undefined, true, hubUrl, localizedVisas);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -1840,7 +1859,7 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = isBn ? null : getFaqSchemaForPage("visa", activeVisa.id, false, visaUrl, localizedVisas);
+      const faqSchema = getFaqSchemaForPage("visa", activeVisa.id, false, visaUrl, localizedVisas);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
@@ -1868,7 +1887,7 @@ export default function App() {
           description: d.quickAnswer,
         })),
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("destinations", undefined, true, hubUrl, DESTINATIONS_DATA);
+      const faqSchema = getFaqSchemaForPage("destinations", undefined, true, hubUrl, DESTINATIONS_DATA);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -1929,7 +1948,7 @@ export default function App() {
         places: activeDes.itinerary?.map((p) => p.title) || [activeDes.country],
         inLanguage: pageLanguage,
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("destinations", activeDes.id, false, destUrl, DESTINATIONS_DATA);
+      const faqSchema = getFaqSchemaForPage("destinations", activeDes.id, false, destUrl, DESTINATIONS_DATA);
       seoSchema = [isBn ? undefined : schemaObj, tripNode, faqSchema].filter(Boolean);
 
       seoBreadcrumbs = [
@@ -1959,7 +1978,7 @@ export default function App() {
           description: c.quickAnswer,
         })),
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("costs", undefined, true, hubUrl, localizedCosts);
+      const faqSchema = getFaqSchemaForPage("costs", undefined, true, hubUrl, localizedCosts);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -1982,7 +2001,7 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = isBn ? null : getFaqSchemaForPage("costs", activeCost.id, false, costUrl, localizedCosts);
+      const faqSchema = getFaqSchemaForPage("costs", activeCost.id, false, costUrl, localizedCosts);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
@@ -2030,7 +2049,7 @@ export default function App() {
         description: seoDescription,
         serviceType: "Travel Planning & Flight Compensation Utility",
       });
-      const faqSchema = isBn ? null : getFaqSchemaForPage("tools", undefined, true, toolsUrl);
+      const faqSchema = getFaqSchemaForPage("tools", undefined, true, toolsUrl);
       seoSchema = faqSchema ? [toolsServiceNode, faqSchema] : [toolsServiceNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -2139,7 +2158,7 @@ export default function App() {
         "Visa checklist review, document preparation, and flight/hotel booking in Bangladeshi Taka via bKash or bank transfer for Bangladeshi passport holders.",
       serviceType: "Visa Assistance",
     });
-    const faqSchema = isBn ? null : getFaqSchemaForPage("contact", undefined, true, contactUrl);
+    const faqSchema = getFaqSchemaForPage("contact", undefined, true, contactUrl);
     seoSchema = faqSchema ? [contactServiceNode, faqSchema] : [contactServiceNode];
     seoBreadcrumbs = [
       { name: "Home", url: siteUrl("/", lang) },
@@ -2183,9 +2202,18 @@ export default function App() {
       { name: isBn ? "আমাদের সম্পর্কে" : "About", url: aboutUrl }
     ];
   } else if (section === "experiences") {
-    const experiencesUrl = siteUrl("/experiences", lang);
-    seoTitle = "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub) | URAL";
-    seoDescription = "Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and KL.";
+    const region = parameterId === "europe" ? "europe" : parameterId === "asia" ? "asia" : "all";
+    const experiencesUrl = siteUrl(parameterId ? `/experiences/${parameterId}` : "/experiences", lang);
+    if (region === "europe") {
+      seoTitle = "European Attraction Passes & Skip-the-Line Tickets (Tiqets) | URAL";
+      seoDescription = "Skip the line in Paris, London, Rome, Milan, and Venice with official Tiqets passes. Louvre, Eiffel Tower, Colosseum, Duomo, and more for Bangladeshi Schengen visa travelers.";
+    } else if (region === "asia") {
+      seoTitle = "Asian Attraction Passes & Tours (Klook) | URAL";
+      seoDescription = "Book discounted Klook tours in Dubai, Bangkok, Singapore, and Kuala Lumpur. Skip-the-line entry, city passes, and attraction bundles for Bangladeshi travelers.";
+    } else {
+      seoTitle = "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub) | URAL";
+      seoDescription = "Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and KL.";
+    }
     seoSchema = [
       productOfferSchema({
         url: experiencesUrl,
@@ -2212,6 +2240,61 @@ export default function App() {
       { name: "Home", url: siteUrl("/", lang) },
       { name: "Attractions & Passes", url: experiencesUrl }
     ];
+  } else if (section === "attractions") {
+    const attractionsUrl = siteUrl("/attractions", lang);
+    if (!parameterId) {
+      seoTitle = isBn
+        ? "ইউরোপের আকর্ষণ এবং টিকিট পাস (Tiqets) | URAL"
+        : "European Attractions & Skip-the-Line Passes (Tiqets) | URAL";
+      seoDescription = isBn
+        ? "প্যারিস, লন্ডন, রোম, মিলান, ভেনিস এবং নিউ ইয়র্কে লাইনে না দাঁড়িয়ে টিকিট পান Tiqets পাসের মাধ্যমে। লুভর, আইফেল টাওয়ার, কলোজিয়াম, ডুয়োমো ও আরও ৫৯টি আকর্ষণ ৯টি ইউরোপিয়ন শহরে।"
+        : "Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes. Louvre, Eiffel Tower, Colosseum, Duomo, and 59 curated attractions across 9 European cities for Bangladeshi travelers.";
+      seoSchema = [
+        productOfferSchema({
+          url: attractionsUrl,
+          idSuffix: "product-tiqets-paris-pass",
+          name: "Paris Louvre, Eiffel Tower & Seine River Skip-the-Line Bundle",
+          description:
+            "Official mobile-entry attraction bundle for Bangladeshi Schengen visa travelers visiting Paris.",
+          sku: "tiqets-paris-bundle-2026",
+          brandName: "Tiqets",
+          priceBdt: 9800,
+        }),
+      ];
+      seoBreadcrumbs = [
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: isBn ? "ইউরোপীয় আকর্ষণ" : "European Attractions", url: attractionsUrl }
+      ];
+    } else {
+      // Attraction detail page: /attractions/cityId:attractionId
+      const [cityId, attractionId] = parameterId.split(":");
+      const attractionUrl = siteUrl(`/attractions/${parameterId}`, lang);
+      const cityLabel = cityId.replace(/-/g, " ");
+      const attrLabel = attractionId.replace(/-/g, " ");
+      seoTitle = isBn
+        ? `${attrLabel} — টিকিট ও পাস | URAL`
+        : `${attrLabel} — Tickets & Passes | URAL`;
+      seoDescription = isBn
+        ? `${attrLabel} — ${cityLabel}-এ স্কিপ-দ্য-লাইন টিকেট ও Tiqets পাস। বাংলাদেশী ভ্রমণকারীদের জন্য দ্রুত বুকিং করুন।`
+        : `${attrLabel} in ${cityLabel} — Skip-the-line tickets & Tiqets passes for Bangladeshi travelers. Book instantly before your trip from Dhaka.`;
+      seoSchema = [
+        productOfferSchema({
+          url: attractionUrl,
+          idSuffix: `product-tiqets-${attractionId}`,
+          name: attrLabel,
+          description: `${attrLabel} — ${cityLabel} attraction pass for Bangladeshi travelers.`,
+          sku: `tiqets-${attractionId}`,
+          brandName: "Tiqets",
+          priceBdt: 0,
+        }),
+      ];
+      seoBreadcrumbs = [
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: isBn ? "ইউরোপীয় আকর্ষণ" : "European Attractions", url: attractionsUrl },
+        { name: cityLabel, url: siteUrl(`/attractions/${cityId}`, lang) },
+        { name: attrLabel, url: attractionUrl }
+      ];
+    }
   } else if (section === "kkdayHotels") {
     const kkdayHotelsUrl = siteUrl("/kkday-hotels", lang);
     seoTitle = isBn
@@ -2334,7 +2417,8 @@ export default function App() {
       return isLanding ? `/${section}` : `/${section}/${parameterId}`;
     }
     if (section === "blog") return isLanding ? "/blog" : `/blog/${parameterId}`;
-    if (section === "experiences") return "/experiences";
+    if (section === "experiences") return parameterId ? `/experiences/${parameterId}` : "/experiences";
+    if (section === "attractions") return isLanding ? "/attractions" : `/attractions/${parameterId}`;
     if (section === "umrah") return "/umrah";
     if (section === "banking") return "/banking";
     if (section === "kkdayHotels") return "/kkday-hotels";
@@ -2448,7 +2532,7 @@ export default function App() {
    * Idempotent: a path that already carries the /bn prefix is normalised back to
    * the English base first, so toLocalePath(toLocalePath(p, "bn"), "bn") is
    * stable and switching languages twice can never produce /bn/bn/…
-   * Query strings and hashes are preserved ("/experiences?region=west").
+   * Query strings and hashes are preserved ("/experiences/europe").
    */
   const toLocalePath = (path: string, target: Language): string => {
     const match = String(path || "/").match(/^([^?#]*)([\s\S]*)$/);
@@ -2730,9 +2814,9 @@ export default function App() {
                     id="nav-destinations-megamenu"
                     href={getLocalizedRouteHref("/destinations")}
                     onClick={(event) => handleNavigationAnchorClick(event, "/destinations")}
-                    aria-current={section === "destinations" || section === "experiences" ? "page" : undefined}
+                    aria-current={section === "destinations" || section === "experiences" || section === "attractions" ? "page" : undefined}
                     className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
-                      section === "destinations" || section === "experiences"
+                      section === "destinations" || section === "experiences" || section === "attractions"
                         ? "text-[#F6B73C] font-semibold"
                         : "text-slate-300"
                     }`}
@@ -2879,14 +2963,25 @@ export default function App() {
                       </div>
 
                       <a
-                        href={getLocalizedRouteHref("/experiences?region=west")}
-                        onClick={(event) => handleNavigationAnchorClick(event, "/experiences?region=west")}
-                        aria-current={isCurrentNavigationPath("/experiences?region=west") ? "page" : undefined}
-                        className={`w-full text-left px-3 pt-1 text-xs font-semibold text-[#F6B73C] hover:underline cursor-pointer ${isCurrentNavigationPath("/experiences?region=west") ? "underline underline-offset-2" : ""}`}
+                        href={getLocalizedRouteHref("/experiences/europe")}
+                        onClick={(event) => handleNavigationAnchorClick(event, "/experiences/europe")}
+                        aria-current={isCurrentNavigationPath("/experiences/europe") ? "page" : undefined}
+                        className={`w-full text-left px-3 pt-1 text-xs font-semibold text-[#F6B73C] hover:underline cursor-pointer ${isCurrentNavigationPath("/experiences/europe") ? "underline underline-offset-2" : ""}`}
                       >
                         {isBn
                           ? "ইউরোপ, UK ও USA-এর সব পাস দেখুন →"
                           : "Browse Europe, UK & USA Hub →"}
+                      </a>
+
+                      <a
+                        href={getLocalizedRouteHref("/attractions")}
+                        onClick={(event) => handleNavigationAnchorClick(event, "/attractions")}
+                        aria-current={isCurrentNavigationPath("/attractions") ? "page" : undefined}
+                        className={`w-full text-left px-3 pt-1 text-xs font-semibold text-emerald-400 hover:underline cursor-pointer ${isCurrentNavigationPath("/attractions") ? "underline underline-offset-2" : ""}`}
+                      >
+                        {isBn
+                          ? "৫৯টি ইউরোপিয়ন আকর্ষণ দেখুন →"
+                          : "Browse 59 European Attractions →"}
                       </a>
                     </div>
 
@@ -2909,17 +3004,17 @@ export default function App() {
                             {
                               label: isBn ? "🇦🇪 দুবাই সাফারি ও বুর্জ খলিফা" : "🇦🇪 Dubai Safari & Burj Khalifa",
                               sub: isBn ? "মিউজিয়াম অব দ্য ফিউচার ও ডিনার ক্রুজ" : "Museum of the Future + Red Dunes",
-                              path: "/experiences?region=asia&city=dubai-klook",
+                              path: "/experiences/asia",
                             },
                             {
                               label: isBn ? "🇹🇭 ব্যাংকক সাফারি ওয়ার্ল্ড ও ক্রুজ" : "🇹🇭 Bangkok Safari World & Cruise",
                               sub: isBn ? "হালাল চাও ফ্রায়া ডিনার ও স্কাইওয়াক" : "Halal Chao Phraya Cruise & SkyWalk",
-                              path: "/experiences?region=asia&city=bangkok-klook",
+                              path: "/experiences/asia",
                             },
                             {
                               label: isBn ? "🇸🇬 সিঙ্গাপুর ও গেন্টিং হাইল্যান্ডস" : "🇸🇬 Universal Studios & Genting",
                               sub: isBn ? "গার্ডেন্স বাই দ্য বে ও কেবল কার" : "Gardens by the Bay & Awana SkyWay",
-                              path: "/experiences?region=asia&city=singapore-kl",
+                              path: "/experiences/asia",
                             },
                           ].map((item, idx) => (
                             <a
@@ -3351,7 +3446,7 @@ export default function App() {
                       subtitle: isBn
                         ? "এশিয়া গাইড · ইউরোপ, UK ও USA পাস"
                         : "6 Asian hubs · Europe, UK & USA passes",
-                      isActiveGroup: ["destinations", "experiences"].includes(section),
+                      isActiveGroup: ["destinations", "experiences", "attractions"].includes(section),
                       primaryLinks: [
                         {
                           id: "destinations",
@@ -3377,8 +3472,8 @@ export default function App() {
                         { label: isBn ? "ইতালি গাইড" : "Italy Guide", path: "/destinations/italy-guide" },
                         { label: isBn ? "প্যারিস গাইড" : "Paris Guide", path: "/destinations/paris-guide" },
                         { label: isBn ? "নিউ ইয়র্ক গাইড" : "New York Guide", path: "/destinations/new-york-guide" },
-                        { label: isBn ? "ইউরোপ ও UK অ্যাক্টিভিটি" : "Europe & UK Activities", path: "/experiences?region=west" },
-                        { label: isBn ? "এশিয়া অ্যাক্টিভিটি" : "Asia Passes", path: "/experiences?region=asia" },
+                        { label: isBn ? "ইউরোপ ও UK অ্যাক্টিভিটি" : "Europe & UK Activities", path: "/experiences/europe" },
+                        { label: isBn ? "এশিয়া অ্যাক্টিভিটি" : "Asia Passes", path: "/experiences/asia" },
                       ],
                     },
                     {
@@ -4593,7 +4688,21 @@ export default function App() {
       ------------------------------------------------------------- */}
       {section === "experiences" && (
         <React.Suspense fallback={null}>
-          <ExperiencesPage lang={lang} onNavigate={navigateTo} />
+          <ExperiencesPage lang={lang} region={parameterId === "europe" || parameterId === "asia" ? parameterId : undefined} onNavigate={navigateTo} />
+        </React.Suspense>
+      )}
+
+      {/* -------------------------------------------------------------
+          🎟️ VIEW 11.5: GLOBAL ATTRACTIONS HUB (TIQETS — 9 EUROPEAN CITIES)
+      ------------------------------------------------------------- */}
+      {section === "attractions" && !parameterId && (
+        <React.Suspense fallback={null}>
+          <GlobalAttractionsHub lang={lang} onNavigate={navigateTo} />
+        </React.Suspense>
+      )}
+      {section === "attractions" && parameterId && (
+        <React.Suspense fallback={null}>
+          <AttractionDetailPage lang={lang} parameterId={parameterId} onNavigate={navigateTo} />
         </React.Suspense>
       )}
 

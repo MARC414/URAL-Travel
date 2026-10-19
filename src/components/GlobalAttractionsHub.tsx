@@ -852,6 +852,49 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
         </div>
       )}
 
+      {/* CROSS-LINK: ALSO EXPLORE CITY PASSES & BUNDLES ON EXPERIENCES HUB */}
+      <div className="bg-brand-navy/5 border border-brand-navy/15 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="space-y-1.5">
+          <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-brand-navy block">
+            {isBn ? "অন্যান্য অন্বেষণ করুন" : "Also Explore"}
+          </span>
+          <h3 className="font-serif font-bold text-slate-900 text-sm sm:text-base">
+            {isBn
+              ? "সিটি পাস ও বান্ডেল ডিল দেখুন এক্সপেরিয়েন্সেস হাবে"
+              : "See City Passes & Bundle Deals on Our Experiences Hub"}
+          </h3>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            {isBn
+              ? "ইউরোপ ও এশিয়ার সিটি পাস, বান্ডেল এবং স্কিপ-দ্য-লাইন ডিলের জন্য আমাদের /experiences পেজ ভিজিট করুন।"
+              : "Visit our /experiences page for city passes, bundles, and skip-the-line deals across Europe and Asia."}
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2 sm:gap-3">
+          <a
+            href="/experiences/europe"
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate("/experiences/europe");
+            }}
+            className="bg-white border border-slate-200 text-brand-navy font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+          >
+            <span>{isBn ? "ইউরোপ পাস →" : "Europe Passes →"}</span>
+            <ArrowRight size={12} />
+          </a>
+          <a
+            href="/experiences/asia"
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate("/experiences/asia");
+            }}
+            className="bg-white border border-slate-200 text-brand-navy font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+          >
+            <span>{isBn ? "এশিয়া পাস →" : "Asia Passes →"}</span>
+            <ArrowRight size={12} />
+          </a>
+        </div>
+      </div>
+
       {/* 💳 BANGLADESHI DUAL-CURRENCY CARD & VISA HOLDER ADVISORY */}
       <div className="bg-brand-navy/5 border border-brand-navy/15 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="space-y-1.5 max-w-2xl">

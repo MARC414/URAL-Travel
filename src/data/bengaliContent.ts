@@ -1,6 +1,7 @@
 import { BlogPost, DestinationGuide, FAQ, FlightRoute, HotelGuide, VisaGuide, TripCostData } from "../types";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, TRIP_COSTS_DATA } from "../constants";
 import { BENGALI_DESTINATION_OVERRIDES } from "./bengaliDestinations";
+import { TIQETS_TOP_ATTRACTIONS, TIQETS_CITY_STACKS } from "./tiqetsAttractionsData";
 import { Language } from "../translations";
 import { HAJJ_UMRAH_FAQS } from "../hooks/useSeoMeta";
 import { SCHEDULED_BENGALI_BLOG_OVERRIDES } from "./scheduledBengaliBlogs.generated";
@@ -4376,6 +4377,26 @@ for (const destination of getLocalizedDestinations("bn")) {
     title: bnTitle(h1),
     description: bnClamp(destination.quickAnswer, 160),
     h1,
+  };
+}
+
+// Attractions hub — hand-written Bengali SERP copy for /attractions landing page.
+BENGALI_ROUTE_SEO["/attractions"] = {
+  title: "ইউরোপের আকর্ষণ ও স্কিপ-দ্য-লাইন টিকিট (Tiqets) | URAL",
+  description: "প্যারিস, লন্ডন, রোম, মিলান, ভেনিস ও নিউ ইয়র্কে লাইনে না দাঁড়িয়ে টিকিট পান Tiqets পাসের মাধ্যমে। লুভর, আইফেল টাওয়ার, কলোজিয়াম, ডুয়োমো ও আরও ৫৯টি আকর্ষণ ৯টি ইউরোপিয়ন শহরে।",
+  h1: "ইউরোপের আকর্ষণ ও টিকিট পাস (Tiqets)",
+};
+
+// Attraction detail pages — one Bengali URL per attraction, using the curated
+// Bengali title (titleBn) and the city's Bengali name (cityNameBn).
+for (const attraction of TIQETS_TOP_ATTRACTIONS) {
+  const cityStack = TIQETS_CITY_STACKS.find((c) => c.cityId === attraction.cityId);
+  if (!cityStack) continue;
+  const routePath = `/attractions/${attraction.cityId}:${attraction.productId}`;
+  BENGALI_ROUTE_SEO[routePath] = {
+    title: `${attraction.titleBn} — টিকিট ও পাস | URAL`,
+    description: `${attraction.titleBn} — ${cityStack.cityNameBn}-এ স্কিপ-দ্য-লাইন টিকেট ও Tiqets পাস। বাংলাদেশী ভ্রমণকারীদের জন্য দ্রুত বুকিং করুন।`,
+    h1: `${attraction.titleBn} — টিকিট ও পাস`,
   };
 }
 

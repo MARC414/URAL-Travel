@@ -287,6 +287,7 @@ export function generateFaqSchema(
  * @param parameterId The specific route/city/country id, e.g. 'dhaka-kathmandu', 'nepal-visa'
  * @param isLanding Whether this is the top-level section landing page
  * @param pageUrl Optional canonical URL of the page
+ * @param routeItems Route-specific FAQ entries for detail pages
  */
 export function getFaqSchemaForPage(
   page: "flights" | "hotels" | "visa" | "costs" | "destinations" | "tools" | "contact" | "services" | "sitemap" | "pre-departure",

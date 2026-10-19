@@ -75,6 +75,7 @@ import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
 import { TOOL_PAGE_SEO, TOOL_SLUGS } from "../src/utils/toolRoutes";
 import { buildResponsiveSrcSet, getResponsiveImageDimensions } from "../src/utils/imageAssets";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
+import { TIQETS_TOP_ATTRACTIONS, TIQETS_CITY_STACKS } from "../src/data/tiqetsAttractionsData";
 import {
   CONTENT_UPDATED,
   CONTENT_UPDATED_MAX_AGE_DAYS,
@@ -115,6 +116,7 @@ import {
   toEnglishBasePath,
 } from "../src/utils/localeRoutes";
 import { BENGALI_SEO_COPY, getBengaliSeoCopy } from "../src/utils/seoCopy";
+import { getBnFaqSchemaForPage } from "../src/utils/bn-faq-schema";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
   DESTINATION_PARTNER_COPY,
@@ -2050,6 +2052,50 @@ function buildAllRoutes(): PrerenderRoute[] {
     `,
   });
 
+  // 8c. Attraction detail pages (/attractions/:cityId:attractionId) — one
+  // static, indexable URL per attraction (the old /attractions?city= query
+  // URLs now 301 here at the edge). These are client-rendered SPA routes but
+  // are listed in sitemap.xml so Google can discover and crawl them.
+  for (const attraction of TIQETS_TOP_ATTRACTIONS) {
+    const cityStack = TIQETS_CITY_STACKS.find((c) => c.cityId === attraction.cityId);
+    if (!cityStack) continue;
+    const routePath = `/attractions/${attraction.cityId}:${attraction.productId}`;
+    routes.push({
+      routePath,
+      canonicalUrl: `${BASE_URL}${routePath}`,
+      title: `${attraction.title} — Tickets & Passes | URAL`,
+      description: `${attraction.title} in ${cityStack.cityName} — Skip-the-line tickets & Tiqets passes for Bangladeshi travelers. Book instantly before your trip from Dhaka.`,
+      imageUrl: defaultOgImage,
+      breadcrumbs: [
+        { name: "Home", url: `${BASE_URL}/` },
+        { name: "European Attractions", url: `${BASE_URL}/attractions` },
+        { name: cityStack.cityName, url: `${BASE_URL}/attractions/${attraction.cityId}` },
+        { name: attraction.title, url: `${BASE_URL}${routePath}` },
+      ],
+      extraGraphNodes: [
+        productOfferSchema({
+          url: `${BASE_URL}${routePath}`,
+          idSuffix: `product-tiqets-${attraction.productId}`,
+          name: attraction.title,
+          description: `${attraction.title} — ${cityStack.cityName}, ${attraction.country} attraction pass for Bangladeshi travelers.`,
+          sku: `tiqets-${attraction.productId}`,
+          brandName: "Tiqets",
+          priceBdt: attraction.priceBdt,
+        }),
+        touristTripSchema({
+          url: `${BASE_URL}${routePath}`,
+          name: attraction.title,
+          description: `${attraction.title} — ${cityStack.cityName}, ${attraction.country}`,
+          country: attraction.country,
+          places: [cityStack.cityName],
+          inLanguage: "en-BD",
+        }),
+      ],
+      bodyHtml: `\n      <article>\n        <h1>${escapeHtml(attraction.title)}</h1>\n        <p>${escapeHtml(attraction.title)} in ${escapeHtml(cityStack.cityName)} — book skip-the-line tickets via Tiqets.</p>\n      </article>\n    `,
+      lastmod: CONTENT_DATA_LASTMOD,
+    });
+  }
+
   // 8b. KKday Hotel & Stay Deals (/kkday-hotels). Klook is the primary hotel
   // search on /hotels/:city; KKday stays live on this dedicated page.
   // Affiliate URL mirrors AFFILIATE_LINKS.kkday in src/components/AffiliatePartners.tsx.
@@ -3443,6 +3489,32 @@ function buildBengaliBody(
     return `<article>${parts.join("")}</article>`;
   }
 
+  // Attraction hub (/attractions) and detail pages (/attractions/:cityId:attractionId).
+  if (englishPath === "/attractions" || englishPath.startsWith("/attractions/")) {
+    const cityLinks = TIQETS_CITY_STACKS.map(
+      (c) => ({ label: c.cityNameBn || c.cityName, path: `/attractions/${c.cityId}` })
+    );
+    parts.push(
+      bnSection(
+        "৯টি ইউরোপীয় শহরের আকর্ষণ",
+        `<p>লন্ডন, প্যারিস, রোম, মিলান, ভেনিস, আমস্টারডাম, ফ্লোরেন্স, লিসবন ও নিউ ইয়র্কের ৫৯টি কিউরেটেড আকর্ষণের টিকিট ও পাস Tiqets-এ উপলব্ধ। স্কিপ-দ্য-লাইন প্রবেশ, সময়াক্রান্ত স্লট ও মুছে ফলাও ভাউচারের সুবিধা পান।</p>` +
+          bnLinkList("শহর অনুযায়ী দেখুন", cityLinks)
+      )
+    );
+    if (englishPath.startsWith("/attractions/") && englishPath.split("/").length === 4) {
+      const [, cityId, attractionId] = englishPath.split("/");
+      const attraction = TIQETS_TOP_ATTRACTIONS.find(
+        (a) => a.cityId === cityId && a.productId === attractionId
+      );
+      if (attraction) {
+        parts.push(
+          `<p>${escapeHtml(attraction.titleBn || attraction.title)} — স্কিপ-দ্য-লাইন টিকেট এখনই বুক করুন।</p>`
+        );
+      }
+    }
+    return `<article>${parts.join("")}</article>`;
+  }
+
   // Home + static/hub pages: Bengali intro plus a directory of the main hubs.
   const hubLinks = [
     { label: "ফ্লাইট গাইড", path: "/flights" },
@@ -3687,6 +3759,15 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           })),
         })
       );
+      const bnFlightsFaq = stripContext(
+        getBnFaqSchemaForPage("flights", undefined, true, canonicalUrl)
+      );
+      if (bnFlightsFaq) {
+        bnFlightsFaq["@id"] = `${canonicalUrl}#faq`;
+        bnFlightsFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+        bnFlightsFaq["inLanguage"] = "bn-BD";
+        extraGraphNodes.push(bnFlightsFaq);
+      }
     } else if (englishPath === "/hotels") {
       extraGraphNodes.push(
         collectionPageSchema({
@@ -3703,6 +3784,15 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           })),
         })
       );
+      const bnHotelsFaq = stripContext(
+        getBnFaqSchemaForPage("hotels", undefined, true, canonicalUrl)
+      );
+      if (bnHotelsFaq) {
+        bnHotelsFaq["@id"] = `${canonicalUrl}#faq`;
+        bnHotelsFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+        bnHotelsFaq["inLanguage"] = "bn-BD";
+        extraGraphNodes.push(bnHotelsFaq);
+      }
     } else if (englishPath === "/visa") {
       extraGraphNodes.push(
         collectionPageSchema({
@@ -3719,6 +3809,15 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           })),
         })
       );
+      const bnVisaFaq = stripContext(
+        getBnFaqSchemaForPage("visa", undefined, true, canonicalUrl)
+      );
+      if (bnVisaFaq) {
+        bnVisaFaq["@id"] = `${canonicalUrl}#faq`;
+        bnVisaFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+        bnVisaFaq["inLanguage"] = "bn-BD";
+        extraGraphNodes.push(bnVisaFaq);
+      }
     } else if (englishPath === "/costs") {
       extraGraphNodes.push(
         collectionPageSchema({
@@ -3735,6 +3834,15 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           })),
         })
       );
+      const bnCostsFaq = stripContext(
+        getBnFaqSchemaForPage("costs", undefined, true, canonicalUrl)
+      );
+      if (bnCostsFaq) {
+        bnCostsFaq["@id"] = `${canonicalUrl}#faq`;
+        bnCostsFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+        bnCostsFaq["inLanguage"] = "bn-BD";
+        extraGraphNodes.push(bnCostsFaq);
+      }
     } else if (englishPath === "/blog") {
       extraGraphNodes.push(
         collectionPageSchema({
@@ -3836,17 +3944,74 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
             )
           );
         }
-        if (destination && destination.faqs.length) {
-          const bnFaq = stripContext(
-            generateFAQSchema(destination.faqs, {
-              url: canonicalUrl,
-              name: copy.title,
+      if (destination && destination.faqs.length) {
+        const bnFaq = stripContext(
+          generateFAQSchema(destination.faqs, {
+            url: canonicalUrl,
+            name: copy.title,
+          })
+        );
+        bnFaq["@id"] = `${canonicalUrl}#faq`;
+        bnFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+        bnFaq["inLanguage"] = "bn-BD";
+        extraGraphNodes.push(bnFaq);
+        }
+      }
+    } else if (
+      segments.length >= 2 &&
+      segments[0] === "attractions"
+    ) {
+      // Attraction hub (/attractions) and detail pages (/attractions/:cityId:attractionId).
+      // Build Bengali productOffer + TouristTrip nodes from the curated Tiqets data
+      // so Bengali pages carry the same structured data as English, localized.
+      if (segments.length === 2) {
+        // /attractions landing — collection page over all city stacks.
+        extraGraphNodes.push(
+          collectionPageSchema({
+            url: canonicalUrl,
+            name: copy.title,
+            description: copy.description,
+            inLanguage: "bn-BD",
+            items: TIQETS_CITY_STACKS.map((c) => ({
+              name: c.cityNameBn || c.cityName,
+              url: siteUrl(`/attractions/${c.cityId}`, "bn"),
+              description: c.bundleTitleBn || c.bundleTitle,
+            })),
+          })
+        );
+      } else if (segments.length === 3) {
+        // /attractions/:cityId:attractionId — product + tourist trip.
+        const [, cityId, attractionId] = segments;
+        const attraction = TIQETS_TOP_ATTRACTIONS.find(
+          (a) => a.cityId === cityId && a.productId === attractionId
+        );
+        const cityStack = TIQETS_CITY_STACKS.find((c) => c.cityId === cityId);
+        if (attraction && cityStack) {
+          const productUrl = siteUrl(
+            `/attractions/${cityId}:${attractionId}`,
+            "bn"
+          );
+          extraGraphNodes.push(
+            productOfferSchema({
+              url: productUrl,
+              idSuffix: `product-tiqets-${attractionId}`,
+              name: attraction.titleBn || attraction.title,
+              description: `${attraction.titleBn || attraction.title} — ${cityStack.cityNameBn || cityStack.cityName} আকর্ষণ পাস, বাংলাদেশী ভ্রমণকারীদের জন্য।`,
+              sku: `tiqets-${attractionId}`,
+              brandName: "Tiqets",
+              priceBdt: attraction.priceBdt,
             })
           );
-          bnFaq["@id"] = `${canonicalUrl}#faq`;
-          bnFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
-          bnFaq["inLanguage"] = "bn-BD";
-          extraGraphNodes.push(bnFaq);
+          extraGraphNodes.push(
+            touristTripSchema({
+              url: productUrl,
+              name: attraction.titleBn || attraction.title,
+              description: `${attraction.titleBn || attraction.title} — ${cityStack.cityNameBn || cityStack.cityName}`,
+              country: attraction.country,
+              places: [cityStack.cityNameBn || cityStack.cityName],
+              inLanguage: "bn-BD",
+            })
+          );
         }
       }
     }
@@ -3963,6 +4128,55 @@ function generateSitemaps(routes: PrerenderRoute[]) {
   }
 }
 
+/**
+ * IndexNow submission — notifies Bing, Yandex, Seznam and Naver that URLs have
+ * changed, so they recrawl promptly. Best-effort: a failed submission never
+ * breaks the build or blocks deployment; IndexNow is a notification channel,
+ * not a prerequisite for going live.
+ *
+ * The key file `public/uralindexnow2026bangladesh83pages.txt` holds the opaque
+ * credential. Its contents MUST equal the `key` value sent to the API — never
+ * rename the file or "fix" the number in it (it is not a page count).
+ */
+async function submitIndexNow(urls: string[]): Promise<void> {
+  const keyFile = path.join(PUBLIC_DIR, "uralindexnow2026bangladesh83pages.txt");
+  let key: string;
+  try {
+    key = fs.readFileSync(keyFile, "utf8").trim();
+  } catch {
+    console.log("[IndexNow] key file not found — skipping submission");
+    return;
+  }
+  if (!key) {
+    console.log("[IndexNow] empty key — skipping submission");
+    return;
+  }
+
+  const host = BASE_URL.replace(/^https?:\/\//, "");
+  const payload = {
+    host,
+    key,
+    keyLocation: `${BASE_URL}/uralindexnow2026bangladesh83pages.txt`,
+    urlList: urls,
+  };
+
+  try {
+    const res = await fetch("https://api.indexnow.org/indexnow", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify(payload),
+    });
+    const body = await res.text();
+    console.log(
+      `[IndexNow] submitted ${urls.length} URL(s) — HTTP ${res.status}: ${body.slice(0, 200)}`,
+    );
+  } catch (err) {
+    console.log(
+      `[IndexNow] submission failed: ${err instanceof Error ? err.message : String(err)}`,
+    );
+  }
+}
+
 function renderRssXml(posts: typeof BLOG_DATA): string {
   const rssItems = posts.map((post) => {
     const postUrl = `${BASE_URL}/blog/${post.slug}`;
@@ -4055,6 +4269,45 @@ function getBlogBodyChunkPath(): string | null {
   return null;
 }
 
+/**
+ * Attraction data chunk path — preloaded on /attractions routes so the
+ * Tiqets data starts downloading during HTML parse instead of waiting for
+ * React.lazy to discover it on click.
+ */
+function getAttractionDataChunkPath(): string | null {
+  // First, try the build manifest (like content-data and blog-body chunks).
+  try {
+    const manifestPath = path.join(DIST_DIR, ".vite", "manifest.json");
+    if (fs.existsSync(manifestPath)) {
+      const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8")) as Record<
+        string,
+        { file?: string; isDynamicEntry?: boolean }
+      >;
+      for (const [key, entry] of Object.entries(manifest)) {
+        if (key.includes("data/tiqetsAttractionsData") && entry.file) return `/${entry.file}`;
+      }
+    }
+  } catch (err) {
+    console.warn("  ! could not read the build manifest for the attraction-data preload:", err);
+  }
+  // Fallback: scan dist/assets for the attraction-data chunk file created by
+  // vite.config.ts manualChunks. This works even if the manifest entry key
+  // doesn't match our lookup pattern.
+  try {
+    const assetsDir = path.join(DIST_DIR, "assets");
+    if (fs.existsSync(assetsDir)) {
+      for (const file of fs.readdirSync(assetsDir)) {
+        if (file.startsWith("attraction-data-") && file.endsWith(".js")) {
+          return `/assets/${file}`;
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("  ! could not scan dist/assets for attraction-data chunk:", err);
+  }
+  return null;
+}
+
 function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
   const distIndex = path.join(DIST_DIR, "index.html");
   if (!fs.existsSync(distIndex)) return;
@@ -4070,6 +4323,11 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     console.log(`  preloading blog body chunk on blog routes: ${blogBodyChunk}`);
   }
   let blogPreloadCount = 0;
+  const attractionDataChunk = getAttractionDataChunkPath();
+  if (attractionDataChunk) {
+    console.log(`  preloading attraction data chunk on /attractions routes: ${attractionDataChunk}`);
+  }
+  let attractionDataPreloadCount = 0;
 
   for (const r of routes) {
     const hasCollectionNode = r.extraGraphNodes.some(
@@ -4239,6 +4497,21 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       blogPreloadCount++;
     }
 
+    // Preload attraction data chunk on /attractions routes so Tiqets entries
+    // start downloading during HTML parse instead of waiting for React.lazy.
+    if (
+      attractionDataChunk &&
+      /^\/attractions(\/|$)/.test(r.routePath) &&
+      !r.routePath.startsWith("/bn/") &&
+      pageHtml.includes("</head>")
+    ) {
+      pageHtml = pageHtml.replace(
+        "</head>",
+        `  <link rel="modulepreload" crossorigin href="${attractionDataChunk}" />\n  </head>`
+      );
+      attractionDataPreloadCount++;
+    }
+
     if (r.routePath !== "/") {
       pageHtml = pageHtml.replace(
         /<div id="root">[\s\S]*?<\/main>\s*<\/div>/,
@@ -4272,7 +4545,10 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
   if (blogBodyChunk) {
     console.log(`  modulepreload added to ${blogPreloadCount} blog pages`);
   }
-  if (contentDataChunk || blogBodyChunk) {
+  if (attractionDataChunk) {
+    console.log(`  attraction-data modulepreload added to ${attractionDataPreloadCount} pages`);
+  }
+  if (contentDataChunk || blogBodyChunk || attractionDataChunk) {
     // Read once, then drop it: the manifest is a build-time artifact and nothing
     // in the deployed site or the verify pass needs it.
     try {
@@ -4283,7 +4559,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
   }
 }
 
-function main() {
+async function main() {
   copyStaticSeoImages();
   const enRoutes = buildAllRoutes();
   for (const route of enRoutes) {
@@ -4317,6 +4593,9 @@ function main() {
   applySharedSeoCopy(bnRoutes, "bn");
   warnIfContentDateStale();
   generateSitemaps(routes);
+  // Notify IndexNow (Bing, Yandex, Seznam, Naver) about all canonical URLs so
+  // they recrawl promptly after every deploy. Best-effort — never blocks deploy.
+  await submitIndexNow(routes.map((r) => r.canonicalUrl));
   generateRssXml();
   prerenderDistHtmlFiles(routes);
   console.log(
@@ -4324,4 +4603,7 @@ function main() {
   );
 }
 
-main();
+main().catch((err) => {
+  console.error("Prerender failed:", err);
+  process.exit(1);
+});

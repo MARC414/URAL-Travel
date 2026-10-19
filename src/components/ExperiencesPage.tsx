@@ -26,6 +26,8 @@ import { Language } from "../translations";
 interface ExperiencesPageProps {
   lang: Language;
   onNavigate: (path: string) => void;
+  /** Optional region filter from clean static route: "europe" (maps to "west") or "asia". */
+  region?: "europe" | "asia";
 }
 
 interface AttractionItem {
@@ -469,15 +471,19 @@ const EXPERIENCES_FAQS = [
   },
 ];
 
-export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNavigate }) => {
+export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNavigate, region }) => {
   const isBn = lang === "bn";
+  // Map clean static route region to internal filter: "europe" → "west", "asia" → "asia"
+  const initialRegion = region === "europe" ? "west" : region === "asia" ? "asia" : "all";
   const [regionFilter, setRegionFilter] = useState<"all" | "west" | "asia">(() => {
     if (typeof window !== "undefined") {
+      // Respect clean static route prop first; fall back to query string for legacy links
+      if (region === "europe" || region === "asia") return initialRegion;
       const params = new URLSearchParams(window.location.search);
       const r = params.get("region");
       if (r === "west" || r === "asia") return r;
     }
-    return "all";
+    return initialRegion;
   });
   const [selectedCityId, setSelectedCityId] = useState<string>(() => {
     if (typeof window !== "undefined") {
@@ -494,6 +500,8 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
   React.useEffect(() => {
     if (typeof window === "undefined") return;
     const syncFromUrl = () => {
+      // If a clean static route prop is set, never let query string override it
+      if (region === "europe" || region === "asia") return;
       const params = new URLSearchParams(window.location.search);
       const r = params.get("region");
       const c = params.get("city");
@@ -512,7 +520,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
     syncFromUrl();
     window.addEventListener("popstate", syncFromUrl);
     return () => window.removeEventListener("popstate", syncFromUrl);
-  }, [ typeof window !== "undefined" ? window.location.search : "" ]);
+  }, [typeof window !== "undefined" ? window.location.search : "", region]);
 
   const visibleCities = CITY_HUBS.filter((hub) => {
     const matchesRegion = regionFilter === "all" || hub.region === regionFilter;
@@ -802,6 +810,36 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
             )}
           </div>
         </div>
+      </div>
+
+      {/* 2A. CROSS-LINK: EXPLORE MORE ON ATTRACTIONS HUB */}
+      <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="space-y-1.5">
+          <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-700 block">
+            {isBn ? "আরো অন্বেষণ করুন" : "Explore More"}
+          </span>
+          <h3 className="font-serif font-bold text-slate-900 text-sm sm:text-base">
+            {isBn
+              ? "৫৯টি ইউরোপীয় আকর্ষণ দেখুন আমাদের অ্যাকশন হাবে"
+              : "Discover 59 European Attractions on Our Attractions Hub"}
+          </h3>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            {isBn
+              ? "লন্ডন, প্যারিস, রোম, মিলান, ভেনিস ও নিউ ইয়র্কের ৫৯টি কিউরেটেড আকর্ষণের জন্য আমাদের আলাদা /attractions পেজ ভিজিট করুন।"
+              : "Visit our dedicated /attractions page for 59 curated attractions across London, Paris, Rome, Milan, Venice, and New York."}
+          </p>
+        </div>
+        <a
+          href="/attractions"
+          onClick={(e) => {
+            e.preventDefault();
+            onNavigate("/attractions");
+          }}
+          className="bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+        >
+          <span>{isBn ? "আকর্ষণ হাব দেখুন →" : "Browse Attractions Hub →"}</span>
+          <ArrowRight size={12} />
+        </a>
       </div>
 
       {/* 2B. KKDAY 10.10 WINTER TRAVEL SALE SPOTLIGHT (30% OFF CODES: 1010TOURS, 1010MOVE, 1010TIX) */}

@@ -263,6 +263,21 @@
       })();
     </script>
 
+    <!-- Initial pageview — queued before GTM loads (GTM is deferred below).
+         Tiny inline push: no DOM writes, no network, no async. Placed after the
+         LCP/font preloads and critical CSS so it cannot delay first paint. -->
+    <script>
+      (function(){
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'page_view',
+          page_path: window.location.pathname + window.location.search,
+          page_title: document.title,
+          page_location: window.location.href,
+        });
+      })();
+    </script>
+
     <!-- Google Tag Manager - Deferred to user interaction or idle callback -->
     <script>
       (function(){
