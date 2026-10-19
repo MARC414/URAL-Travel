@@ -4800,6 +4800,173 @@ check(womenClaimSurfaces.every((surface) => surface && !WOMEN_RETIRED_CLAIMS.tes
 check(["women of any age may apply", "Gates 25–29", "Gates 21 through 26", "direct, flat, step-free access", "soft visor cap", "about one inch or 2.5 cm", "এশার পর থেকে মধ্যরাত", "vetted door-to-door"].every((fixture) => WOMEN_RETIRED_CLAIMS.test(fixture)),
   "women-specific retired-claim guard rejects all eight reintroduced civil/access/religious/supplier claims (negative controls)");
 
+// Older-traveller guide: airline assistance, equipment approval, Haram mobility, hotel route and clinical care
+// are separate gates. Ledger: docs/growth/ELDERLY-UMRAH-SOURCE-REVIEW.md (2026-10-19).
+const ELDERLY_UMRAH_SLUG = "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide";
+const ELDERLY_NOTE_KEYS = ["elderlyAirline", "elderlyEquipment", "elderlyHaram", "elderlyHotel", "elderlyHealth"];
+const ELDERLY_RETIRED_CLAIMS = /no additional airline fee across|without an additional airline fee|free of charge across major scheduled carriers|returned to you at the aircraft door|zero-incline|zero incline|400-meter|400 m walk|20-day supply|mezzanine circuit|single-passenger and double-passenger|serialized, government-issued vests|Nusuk\/Tanaqol|Nusuk or Tanaqol|air conditioning inside Masjid al-Haram|হুইলচেয়ার ফ্রি|৪০০ মিটার|৫ তলা|জিরো-ইনক্লাইন|২০ দিনের|মেজানাইন|সিরিয়ালযুক্ত ভেস্ট|Nusuk বা Tanaqol/i;
+const elderlyClaimSurfaces: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  const html = read(path.join(DIST_DIR, ...(locale === "bn" ? ["bn"] : []), "blog", `${ELDERLY_UMRAH_SLUG}.html`)) ?? "";
+  const post = getLocalizedBlogs(locale).find((entry) => entry.slug === ELDERLY_UMRAH_SLUG);
+  const body = locale === "en" ? BLOG_BODY[ELDERLY_UMRAH_SLUG] : post?.content ?? "";
+  const text = normalizeStructuredText(html);
+  elderlyClaimSurfaces.push(body, post?.title ?? "", post?.summary ?? "", JSON.stringify(post?.affiliateCTA), text);
+  const graph = getSeoSchemaGraph(html);
+  const procedures = graph.filter((node) => hasSchemaType(node, "HowTo"));
+  const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
+  const notes = body.split(/\n{2,}/).map(getTravellerCheck).filter((note) => note !== null);
+  const cautionPresent = (candidate: string, key: string) => {
+    const note = notes.find((entry) => entry.key === key);
+    return Boolean(note && candidate.includes(normalizeStructuredText(note.title)) && candidate.includes(normalizeStructuredText(note.text)));
+  };
+  check(
+    post?.updatedAt === "2026-10-19" && post.references?.length === 9 &&
+      post.references.every((reference) => html.includes(reference.url.replace(/&/g, "&amp;")) || html.includes(reference.url)) &&
+      procedures.length === 1 && procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${ELDERLY_UMRAH_SLUG}#howto-elderly-airline-assistance` &&
+      Array.isArray(procedures[0].step) && procedures[0].step.length === 4 &&
+      Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 7 &&
+      notes.every((note) => !JSON.stringify(procedures).includes(note.text)),
+    `${locale} older-traveller output preserves nine sources, update, four airline steps and seven FAQs`
+  );
+  check(
+    [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((match) => match[1]).join(",") === ELDERLY_NOTE_KEYS.join(",") &&
+      ELDERLY_NOTE_KEYS.every((key) => cautionPresent(text, key)) &&
+      text.includes(locale === "en" ? "according to airport procedures" : "এয়ারপোর্টের প্রক্রিয়া অনুযায়ী") &&
+      text.includes(locale === "en" ? "Tanaqol" : "তানাকুল") &&
+      text.includes(locale === "en" ? "1448H" : "১৪৪৮হি.") &&
+      text.includes(locale === "en" ? "ask about any charge" : "চার্জ"),
+    `${locale} older-traveller output retains five complete cautions and carrier, cart and clinical limits`
+  );
+  for (const key of ELDERLY_NOTE_KEYS) {
+    const note = notes.find((entry) => entry.key === key);
+    check(Boolean(note) && !cautionPresent(text.replace(normalizeStructuredText(note!.text), ""), key),
+      `${locale} older-traveller caution guard rejects removed ${key} body (negative control)`);
+  }
+}
+check(elderlyClaimSurfaces.every((surface) => surface && !ELDERLY_RETIRED_CLAIMS.test(surface)),
+  "older-traveller EN/BN source, metadata and generated pages do not restore blanket free-service, gate-delivery, area or clinical claims");
+check([
+  "no additional airline fee across major scheduled carriers departing DAC",
+  "returned to you at the aircraft door upon arrival",
+  "Pack a minimum 20-day supply",
+  "nominal 400-meter walk",
+  "official electric mobility scooters on the mezzanine circuit",
+  "book slots via the official Nusuk/Tanaqol mobile platforms",
+  "serialized, government-issued vests",
+].every((fixture) => ELDERLY_RETIRED_CLAIMS.test(fixture)),
+  "older-traveller retired-claim guard rejects all seven reintroduction fixtures (negative controls)");
+
+// Ihram / Miqat guide: the boundary rule, the Jeddah-airport statement, intention-plus-Talbiyah
+// and the return/Fidyah sequence are Ministry claims, not site rulings, and no announcement
+// timing, crew language or corridor mapping may return. Ledger: docs/growth/IHRAM-MIQAT-SOURCE-REVIEW.md (2026-10-19).
+const IHRAM_SLUG = "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules";
+const IHRAM_NOTE_KEYS = ["ihramPoint", "ihramPersonal", "ihramGarments", "ihramTransit", "ihramTransit", "ihramMadinah"];
+const IHRAM_RETIRED_CLAIMS = /30 to 45 minutes|30–45 minutes|30-45 minutes|in Bengali, English and Arabic|বাংলা, ইংরেজি ও আরবিতে|১১ কিলোমিটার|11 kilometres|11 kilometers|Ashkona|আশকোনা|Terminal 1\/2|টার্মিনাল ১\/২|Yalamlam for|Qarn al-Manazil is the|কারনুল মানাজিল.*রিয়াদ|ট্রেনে গেলে ট্রেন ছাড়ার পর|offer a Dam|compensatory sacrifice|inside the perimeter|সীমারেখার অভ্যন্তরে অবস্থিত; ফলে|7 kg cabin|৭ কেজি কেবিন/i;
+const ihramClaimSurfaces: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  const html = read(path.join(DIST_DIR, ...(locale === "bn" ? ["bn"] : []), "blog", `${IHRAM_SLUG}.html`)) ?? "";
+  const post = getLocalizedBlogs(locale).find((entry) => entry.slug === IHRAM_SLUG);
+  const body = locale === "en" ? BLOG_BODY[IHRAM_SLUG] : post?.content ?? "";
+  const text = normalizeStructuredText(html);
+  ihramClaimSurfaces.push(body, post?.title ?? "", post?.summary ?? "", JSON.stringify(post?.affiliateCTA), text);
+  const graph = getSeoSchemaGraph(html);
+  const procedures = graph.filter((node) => hasSchemaType(node, "HowTo"));
+  const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
+  const notes = body.split(/\n+/).map(getTravellerCheck).filter((note) => note !== null);
+  const cautionPresent = (candidate: string, key: string) => {
+    const note = notes.find((entry) => entry.key === key);
+    return Boolean(note && candidate.includes(normalizeStructuredText(note.title)) && candidate.includes(normalizeStructuredText(note.text)));
+  };
+  check(
+    post?.updatedAt === "2026-10-19" && post.references?.length === 6 &&
+      post.references.every((reference) => html.includes(reference.url.replace(/&/g, "&amp;")) || html.includes(reference.url)) &&
+      procedures.length === 0 &&
+      Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 6,
+    `${locale} Ihram guide output preserves six sources, update, six FAQs and no procedure schema`
+  );
+  check(
+    [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((match) => match[1]).join(",") === IHRAM_NOTE_KEYS.join(",") &&
+      IHRAM_NOTE_KEYS.every((key) => cautionPresent(text, key)) &&
+      (locale === "en"
+        ? text.includes("neither a Miqat nor a place for entering Ihram") && text.includes("must return to it") && text.includes("Fidyah") && text.includes("420 km") && text.includes("usually announce")
+        : text.includes("ইহরামে প্রবেশের স্থানও নয়") && text.includes("ফিরে যাবে") && text.includes("ফিদইয়া") && text.includes("৪২০ কিমি") && text.includes("সাধারণত ঘোষণা দেয়")),
+    `${locale} Ihram guide output retains the Ministry rule, distances, Fidyah sequence and six cautions`
+  );
+  for (const key of [...new Set(IHRAM_NOTE_KEYS)]) {
+    const note = notes.find((entry) => entry.key === key);
+    check(Boolean(note) && !cautionPresent(text.replace(normalizeStructuredText(note!.text), ""), key),
+      `${locale} Ihram caution guard rejects removed ${key} body (negative control)`);
+  }
+}
+check(ihramClaimSurfaces.every((surface) => surface && !IHRAM_RETIRED_CLAIMS.test(surface)),
+  "Ihram EN/BN source, metadata and generated pages do not restore minute counts, crew-language scripts, corridor maps or folklore");
+check([
+  "The captain announces the Miqat approximately 30 to 45 minutes before touchdown.",
+  "Announcements are made in Bengali, English and Arabic.",
+  "Dhul Hulayfah is 11 kilometres outside Madinah.",
+  "Wearing the 7 kg cabin bag limit, pack the Ihram in your 7 kg cabin allowance.",
+  "Crossing without Ihram requires offering a Dam as a compensatory sacrifice.",
+].every((fixture) => IHRAM_RETIRED_CLAIMS.test(fixture)),
+  "Ihram retired-claim guard rejects all five reintroduction fixtures (negative controls)");
+
+// Ramadan / I'tikaf: the calendar, the Ministry's season cut-offs and the Authority's published
+// permit conditions are external claims; no journey time, sales-channel exclusive or promised
+// I'tikaf place may return. Ledger: docs/growth/RAMADAN-ITIKAF-SOURCE-REVIEW.md (2026-10-19).
+const RAMADAN_SLUG = "ramadan-umrah-itikaf-guide-bangladesh-booking-budget";
+const RAMADAN_NOTE_KEYS = ["ramadanDeadline", "ramadanItikaf", "ramadanAnnouncement", "ramadanBudget", "ramadanRoute"];
+const RAMADAN_RETIRED_CLAIMS = /two and a half hours|two-and-a-half hours|booked only through|online-only, free|আড়াই ঘণ্টা|কেবল অফিশিয়াল পোর্টাল|guaranteed place for every pilgrim|every pilgrim is guaranteed an I'tikaf|প্রত্যেক যাত্রীই ইতিকাফের জায়গা পাবেন|Ramadan packages start at BDT/i;
+const ramadanClaimSurfaces: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  const html = read(path.join(DIST_DIR, ...(locale === "bn" ? ["bn"] : []), "blog", `${RAMADAN_SLUG}.html`)) ?? "";
+  const post = getLocalizedBlogs(locale).find((entry) => entry.slug === RAMADAN_SLUG);
+  const body = locale === "en" ? BLOG_BODY[RAMADAN_SLUG] : post?.content ?? "";
+  const text = normalizeStructuredText(html);
+  ramadanClaimSurfaces.push(body, post?.title ?? "", post?.summary ?? "", JSON.stringify(post?.affiliateCTA), text);
+  const graph = getSeoSchemaGraph(html);
+  const procedures = graph.filter((node) => hasSchemaType(node, "HowTo"));
+  const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
+  const notes = body.split(/\n+/).map(getTravellerCheck).filter((note) => note !== null);
+  const cautionPresent = (candidate: string, key: string) => {
+    const note = notes.find((entry) => entry.key === key);
+    return Boolean(note && candidate.includes(normalizeStructuredText(note.title)) && candidate.includes(normalizeStructuredText(note.text)));
+  };
+  check(
+    post?.updatedAt === "2026-10-19" && post.references?.length === 8 &&
+      post.references.every((reference) => html.includes(reference.url.replace(/&/g, "&amp;")) || html.includes(reference.url)) &&
+      procedures.length === 0 &&
+      Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 6,
+    `${locale} Ramadan guide output preserves eight sources, update, six FAQs and no procedure schema`
+  );
+  check(
+    [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((match) => match[1]).join(",") === RAMADAN_NOTE_KEYS.join(",") &&
+      RAMADAN_NOTE_KEYS.every((key) => cautionPresent(text, key)) &&
+      (locale === "en"
+        ? text.includes("8 February 2027") && text.includes("9 March 2027") && text.includes("23 March 2027") &&
+          text.includes("citizens or residents in the Kingdom holding a valid residency permit") &&
+          text.includes("no announcement yet as of 19 October 2026")
+        : text.includes("৮ ফেব্রুয়ারি ২০২৭") && text.includes("৯ মার্চ ২০২৭") && text.includes("২৩ মার্চ ২০২৭") &&
+          text.includes("বৈধ ইকামাধারী বাসিন্দা") &&
+          text.includes("১৯ অক্টোবর ২০২৬ পর্যন্ত কোনো ঘোষণা নেই")),
+    `${locale} Ramadan guide output retains the calendar, the Ministry cut-offs and the published permit conditions`
+  );
+  for (const key of RAMADAN_NOTE_KEYS) {
+    const note = notes.find((entry) => entry.key === key);
+    check(Boolean(note) && !cautionPresent(text.replace(normalizeStructuredText(note!.text), ""), key),
+      `${locale} Ramadan caution guard rejects removed ${key} body (negative control)`);
+  }
+}
+check(ramadanClaimSurfaces.every((surface) => surface && !RAMADAN_RETIRED_CLAIMS.test(surface)),
+  "Ramadan EN/BN source, metadata and generated pages do not restore journey-time, channel-exclusive or promised-place claims");
+check([
+  "the Haramain high-speed railway takes two and a half hours",
+  "tickets are booked only through the official portal",
+  "registration is online-only, free and instant",
+  "every pilgrim is guaranteed an I'tikaf place",
+  "Ramadan packages start at BDT 95,000 per person",
+].every((fixture) => RAMADAN_RETIRED_CLAIMS.test(fixture)),
+  "Ramadan retired-claim guard rejects all five reintroduction fixtures (negative controls)");
+
 // --- Wave 6: Zamzam & Customs Claims Guards (2026-10-17) ------------------
 // Guard against reintroducing the outdated SAR 9.50-12.50 Zamzam price range
 // (now 48 SAR per Nusuk 2026), unqualified "free" airline claims for Zamzam
@@ -4812,24 +4979,25 @@ const zamzamBodyPair = [
   BENGALI_BLOG_OVERRIDES[ZAMZAM_SLUG]?.content ?? "",
 ];
 
-// Guard: No outdated Zamzam pricing (the SAR 9.50-12.50 range is obsolete;
-// Nusuk's 2026 price is 48 SAR). Each pattern anchors on the decimal bounds or
-// the 9->12 range, because this same article legitimately quotes "SAR 12 - 20
-// per kg" for dates and "SAR 120 - 160" for a sedan. An unanchored "SAR 9|12"
-// match flagged those and failed CI on 2026-10-17.
-// A list, not one regex: the Bengali body may carry the range in Bengali digits,
-// and `\b` cannot anchor them (Bengali digits are not \w).
-const ZAMZAM_OBSOLETE_PRICE_PATTERNS: { label: string; pattern: RegExp }[] = [
-  { label: "decimal bounds (EN)", pattern: /\bSAR\s*(?:9|12)[.,]50\b/i },
-  { label: "range (EN)", pattern: /\bSAR\s*9\s*(?:-|\u2013|\u2014|to)\s*(?:SAR\s*)?12\b/i },
-  { label: "decimal bounds (BN)", pattern: /SAR\s*(?:\u09ef|\u09e7\u09e8)[.,]\u09eb\u09e6/ },
-  {
-    label: "range (BN)",
-    pattern: /\u09ef[.,]\u09eb\u09e6[^\u09e6-\u09ef]{0,20}\u09e7\u09e8[.,]\u09eb\u09e6/,
-  },
+// Guard: the 5-litre pilgrim bottle is priced by the airport operator (SAR 12.50).
+// The 48 SAR figure that an earlier wave installed is the Nusuk home-delivery carton
+// (24 x 330 ml) — a different product — so both the old range guard and the 48 SAR
+// assertion were wrong in opposite directions. Ledger: docs/growth/ZAMZAM-CUSTOMS-SOURCE-REVIEW.md.
+const ZAMZAM_WRONG_PRICE_PATTERNS: { label: string; pattern: RegExp }[] = [
+  { label: "retired 9.50 range (EN)", pattern: /SAR\s*9[.,]50/i },
+  { label: "retired 9.50 range (BN)", pattern: /৯[.,]৫০/ },
 ];
-const findObsoleteZamzamPrice = (text: string) =>
-  ZAMZAM_OBSOLETE_PRICE_PATTERNS.find((entry) => entry.pattern.test(text))?.label;
+const ZAMZAM_CARTON_PRICE = /(?<![0-9০-৯])(?:48|৪৮)\s*(?:SAR|রিয়াল)/;
+// 48 SAR is the Nusuk-app 24 x 330 ml home-delivery carton. It may appear only in the
+// paragraph that says so — never as the price of the 5-litre pilgrim bottle.
+const ZAMZAM_CARTON_CONTEXT = /different product|home-delivery|24 × 330|Nusuk|অন্য একটি পণ্য|হোম ডেলিভারি|২৪ × ৩৩০|নুসুক/;
+const findWrongZamzamPrice = (text: string) => {
+  const line = text
+    .split(/\n+/)
+    .find((entry) => ZAMZAM_CARTON_PRICE.test(entry) && !ZAMZAM_CARTON_CONTEXT.test(entry));
+  if (line) return `48 SAR as the bottle price: ${line.slice(0, 80)}`;
+  return ZAMZAM_WRONG_PRICE_PATTERNS.find((entry) => entry.pattern.test(text))?.label;
+};
 const zamzamSurfaces: { label: string; text: string }[] = [
   { label: "article body (EN)", text: BLOG_BODY[ZAMZAM_SLUG] ?? "" },
   { label: "article body (BN)", text: BENGALI_BLOG_OVERRIDES[ZAMZAM_SLUG]?.content ?? "" },
@@ -4837,8 +5005,8 @@ const zamzamSurfaces: { label: string; text: string }[] = [
   { label: "article page (BN)", text: read(path.join(DIST_DIR, "bn", "blog", `${ZAMZAM_SLUG}.html`)) ?? "" },
 ];
 const zamzamMissing = zamzamSurfaces.filter((surface) => !surface.text).map((surface) => surface.label);
-const zamzamOutdatedPrice = zamzamSurfaces
-  .map((surface) => ({ label: surface.label, hit: findObsoleteZamzamPrice(surface.text) }))
+const zamzamWrongPrice = zamzamSurfaces
+  .map((surface) => ({ label: surface.label, hit: findWrongZamzamPrice(surface.text) }))
   .filter((surface) => surface.hit !== undefined)
   .map((surface) => `${surface.label}: ${surface.hit}`);
 check(
@@ -4846,24 +5014,27 @@ check(
   `blog-21: both bodies and both rendered pages exist${zamzamMissing.length ? ` (missing: ${zamzamMissing.join(", ")})` : ""}`
 );
 check(
-  zamzamOutdatedPrice.length === 0,
-  `blog-21: no outdated Zamzam price range SAR 9.50-12.50 (now 48 SAR per Nusuk 2026) in either locale${
-    zamzamOutdatedPrice.length ? ` (found in: ${zamzamOutdatedPrice.join("; ")})` : ""
+  zamzamWrongPrice.length === 0,
+  `blog-21: the pilgrim bottle is not priced at 48 SAR (home-delivery carton) or the retired 9.50 range${
+    zamzamWrongPrice.length ? ` (found in: ${zamzamWrongPrice.join("; ")})` : ""
   }`
 );
 const zamzamPriceControl = [
-  "Buy the sealed carton for SAR 9.50 - SAR 12.50 at the kiosk.",
+  "Allowance: one sealed 5-liter box per pilgrim costing 48 SAR.",
   "One carton costs SAR 9.50.",
-  "সৌদি রিয়াল ৯.৫০ থেকে ১২.৫০",
-].every((control) => findObsoleteZamzamPrice(control) !== undefined);
+  "প্রতি হাজীর জন্য ৪৮ রিয়াল",
+  "সৌদি রিয়াল ৯.৫০",
+].every((control) => findWrongZamzamPrice(control) !== undefined);
 const zamzamPriceFalsePositives = [
-  "Allowance: one sealed 5-liter box costing 48 SAR (~BDT 620).",
+  "The Madinah operator lists one 5-litre bottle at SAR 12.50.",
+  "A previous version of this page said 48 SAR; that figure belongs to a different product — a 24 × 330 ml carton sold through the Nusuk app.",
+  "একটি ২৪ × ৩৩০ মিলি কার্টন — নুসুক অ্যাপে ৪৮ রিয়াল, সম্পূর্ণ অন্য একটি পণ্য।",
   "Dates cost SAR 12 - 20 per kg and a sedan SAR 120 - 160.",
-  "Grade-A Ajwa dates: SAR 35 - SAR 50 per kg.",
-].every((control) => findObsoleteZamzamPrice(control) === undefined);
+  "A gold bar carries Tk 5,000 duty per 11.664 g.",
+].every((control) => findWrongZamzamPrice(control) === undefined);
 check(
   zamzamPriceControl && zamzamPriceFalsePositives,
-  `blog-21: the Zamzam price guard rejects the retired SAR 9.50-12.50 range in both numeral systems and still passes the current 48 SAR and the article's unrelated date/taxi prices (negative control)`
+  "blog-21: the price guard rejects 48 SAR and 9.50 in both numeral systems while passing 12.50, date prices and the gold duty (negative control)"
 );
 
 // Guard: No unqualified "free" Zamzam airline claims
@@ -4878,8 +5049,198 @@ check(
 // Guard: References array required for customs article
 const customsArticle = BLOG_DATA.find((p) => p.slug === ZAMZAM_SLUG);
 check(
-  (customsArticle?.references?.length ?? 0) >= 3,
-  `blog-21: references array present with at least 3 sources (Nusuk, NBR, Biman)`
+  (customsArticle?.references?.length ?? 0) === 9,
+  `blog-21: nine specific sources replace the three homepages (operator, carrier, Ministry, HSIA, NBR x2, VAT x2, press)`
+);
+
+// --- Food guide (blog-22) -------------------------------------------------
+// The old copy sold a restaurant map with invented prices, walking times, gate
+// numbers and a "100% Halal by law therefore clean" inference. The rewrite keeps
+// the halal baseline, names no restaurant and prints no price. Ledger:
+// docs/growth/FOOD-GUIDE-SOURCE-REVIEW.md.
+const FOOD_SLUG = "bangladeshi-halal-food-guide-makkah-madinah-budget-meals";
+const foodBodyPair = [
+  BLOG_BODY[FOOD_SLUG] ?? "",
+  BENGALI_BLOG_OVERRIDES[FOOD_SLUG]?.content ?? "",
+];
+const foodSurfaces = [
+  { label: "article body (EN)", text: foodBodyPair[0] },
+  { label: "article body (BN)", text: foodBodyPair[1] },
+  { label: "article page (EN)", text: read(path.join(DIST_DIR, "blog", `${FOOD_SLUG}.html`)) ?? "" },
+  { label: "article page (BN)", text: read(path.join(DIST_DIR, "bn", "blog", `${FOOD_SLUG}.html`)) ?? "" },
+];
+const FOOD_RETIRED: { label: string; pattern: RegExp }[] = [
+  { label: "absolute halal-equals-clean claim", pattern: /100%\s*Halal\s*by\s*law/i },
+  { label: "invented per-plate price band", pattern: /(?:SAR|রিয়াল)\s*\d+\s*(?:to|–|-)\s*(?:SAR\s*)?\d+/i },
+  { label: "gate-number walking instruction", pattern: /Gates?\s*(?:5|5–9|5-9)\b/i },
+  { label: "micro-distance to a lane", pattern: /\b250\s*(?:m|meters|metres|মিটার)\b/i },
+];
+const FOOD_RETIRED_BODY_ONLY: { label: string; pattern: RegExp }[] = [
+  { label: "BDT conversion of a meal price", pattern: /BDT\s*\d+/i },
+];
+const foodHits = foodSurfaces.flatMap((surface) => {
+  const patterns = /body/.test(surface.label) ? [...FOOD_RETIRED, ...FOOD_RETIRED_BODY_ONLY] : FOOD_RETIRED;
+  const hit = patterns.find((entry) => entry.pattern.test(surface.text));
+  return hit ? [`${surface.label}: ${hit.label}`] : [];
+});
+const foodDailyBdt = foodSurfaces.some((surface) =>
+  /BDT\s*\d+[^<]{0,30}(?:per plate|per person per day|প্রতি প্লেট|প্রতি দিন)/i.test(surface.text)
+);
+const foodControls = [
+  "Rice, dal and fish cost SAR 12 to SAR 18 (BDT 390–580) per plate.",
+  "Exit Gates 5 to 9 and walk 250 meters to the Bengali lane.",
+  "Every restaurant is 100% Halal by law, so hygiene is guaranteed.",
+].every((control) => FOOD_RETIRED.some((entry) => entry.pattern.test(control)));
+const foodFalsePositives = [
+  "BinDawood lists 26 locations across the Kingdom.",
+  "The Madinah branch list includes TAIBA and Al Anwar.",
+  "Ask whether the price is per plate or per person before ordering.",
+].every((control) => FOOD_RETIRED.every((entry) => !entry.pattern.test(control)));
+check(
+  foodControls && foodFalsePositives,
+  "blog-22: the food guard rejects price bands, BDT figures, gate numbers and the halal-equals-clean claim while passing branch counts and the price question (negative control)"
+);
+const foodArticle = BLOG_DATA.find((post) => post.slug === FOOD_SLUG);
+check(
+  (foodArticle?.references?.length ?? 0) === 10 &&
+    foodBodyPair.every(
+      (body) =>
+        (body.match(/Traveller check \(/g) ?? []).length + (body.match(/যাত্রীর যাচাই \(/g) ?? []).length === 6
+    ),
+  "blog-22: ten opened references and six cautions sit in both bodies"
+);
+check(
+  (foodArticle?.internalLinks?.filter((link) => link.path.startsWith("/blog/")).length ?? 0) >= 5 &&
+    (foodArticle?.internalLinks?.some((link) => link.path === "/umrah") ?? false),
+  "blog-22: at least five sibling links plus the /umrah hub"
+);
+
+// --- Ziyarah guide (blog-23) ----------------------------------------------
+// The old copy sold a car tariff, a 6:00-9:30 "best window", a 1.2 km cemetery
+// distance, a Taif drive time and temperature band, a Badr roundtrip price and a
+// Sahih Muslim attribution for the Quba hadith. None of those survived the
+// source review. Ledger: docs/growth/ZIYARAH-SOURCE-REVIEW.md.
+const ZIYARAH_SLUG = "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide";
+const ziyarahBodyPair = [
+  BLOG_BODY[ZIYARAH_SLUG] ?? "",
+  BENGALI_BLOG_OVERRIDES[ZIYARAH_SLUG]?.content ?? "",
+];
+const ziyarahSurfaces = [
+  { label: "article body (EN)", text: ziyarahBodyPair[0] },
+  { label: "article body (BN)", text: ziyarahBodyPair[1] },
+  { label: "article page (EN)", text: read(path.join(DIST_DIR, "blog", `${ZIYARAH_SLUG}.html`)) ?? "" },
+  { label: "article page (BN)", text: read(path.join(DIST_DIR, "bn", "blog", `${ZIYARAH_SLUG}.html`)) ?? "" },
+];
+const ZIYARAH_RETIRED: { label: string; pattern: RegExp }[] = [
+  { label: "Makkah sedan tariff", pattern: /SAR\s*150\s*(?:–|-|to)\s*(?:SAR\s*)?200/i },
+  { label: "Madinah sedan tariff", pattern: /SAR\s*120\s*(?:–|-|to)\s*(?:SAR\s*)?160/i },
+  { label: "Taif day-trip tariff", pattern: /SAR\s*350\s*(?:–|-|to)\s*(?:SAR\s*)?450/i },
+  { label: "Badr roundtrip tariff", pattern: /SAR\s*280\s*(?:–|-|to)\s*(?:SAR\s*)?350/i },
+  { label: "old hop-on bus fare", pattern: /SAR\s*80\b/i },
+  { label: "invented Fajr window", pattern: /6:00\s*AM\s*(?:to|–|-)\s*9:30/i },
+  { label: "unverified cemetery distance", pattern: /\b1\.2\s*(?:km|কিমি)/i },
+  { label: "Taif drive-time claim", pattern: /6\s*(?:to|–|-)\s*7\s*hours/i },
+  { label: "Badr stopover length", pattern: /4[- ]hour roundtrip/i },
+  { label: "unsourced rcmc attribution", pattern: /rcmc\.gov\.sa/i },
+  { label: "wheelchair flat-surface guarantee", pattern: /completely\s+flat/i },
+  { label: "unverified mosque count", pattern: /(?:Sab'a Masajid|Seven Mosques)/i },
+  { label: "unverified mosque name", pattern: /Sayyid al-Shuhada/i },
+  { label: "wrong hadith attribution", pattern: /Sahih Muslim[^.\n]{0,40}(?:Quba|Umrah)|(?:Quba|Umrah)[^.\n]{0,40}Sahih Muslim/i },
+];
+const ZIYARAH_RETIRED_BODY_ONLY: { label: string; pattern: RegExp }[] = [
+  { label: "BDT conversion of a Ziyarah fare", pattern: /BDT\s*\d/i },
+];
+const ziyarahHits = ziyarahSurfaces.flatMap((surface) => {
+  const patterns = /body/.test(surface.label)
+    ? [...ZIYARAH_RETIRED, ...ZIYARAH_RETIRED_BODY_ONLY]
+    : ZIYARAH_RETIRED;
+  const hit = patterns.find((entry) => entry.pattern.test(surface.text));
+  return hit ? [`${surface.label}: ${hit.label}`] : [];
+});
+const ziyarahControls = [
+  "A 3-hour Makkah Ziyarah costs SAR 150 - SAR 200 in a sedan and SAR 120 - SAR 160 in Madinah.",
+  "A Taif day trip is SAR 350 to SAR 450 and takes 6 to 7 hours.",
+  "Badr is SAR 280 - SAR 350 as a 4-hour roundtrip stop.",
+  "The 24-hour hop-on bus ticket costs SAR 80.",
+  "Start after Fajr between 6:00 AM to 9:30 AM.",
+  "Jannat al-Mu'alla is 1.2 km north of Masjid al-Haram.",
+  "Under the rcmc.gov.sa upgrade the sites are completely flat for wheelchairs.",
+  "Visit the Sab'a Masajid and pray at Sayyid al-Shuhada Mosque.",
+  "The reward of Quba is in Sahih Muslim and is often quoted as an Umrah.",
+  "The sedan cost BDT 4,900 for the morning.",
+].every((control) => [...ZIYARAH_RETIRED, ...ZIYARAH_RETIRED_BODY_ONLY].some((entry) => entry.pattern.test(control)));
+const ziyarahFalsePositives = [
+  "The operator sells SR 90 for 24 hours, SR 125 for 48 hours and SR 15 for a single ride.",
+  "Masjid al-Qiblatain is 3.8 km north-west of the Prophet's Mosque.",
+  "Visit Saudi puts Badr about 150 km west of Madinah; other sources say 130 km.",
+  "The wording quoted is Sunan Ibn Majah 1412, graded Hasan by Darussalam.",
+  "Qarn al-Manazil sits about 80 km north-east of Makkah and 35 km north of Taif.",
+  "The Al-Hada cable car runs 4,200 m each way in 17 minutes.",
+].every((control) => [...ZIYARAH_RETIRED, ...ZIYARAH_RETIRED_BODY_ONLY].every((entry) => !entry.pattern.test(control)));
+check(
+  ziyarahHits.length === 0 && ziyarahControls && ziyarahFalsePositives,
+  `blog-23: the Ziyarah guard rejects car tariffs, BDT figures, the Fajr window, 1.2 km, the rcmc attribution, the flat-surface promise and the Sahih Muslim attribution while passing SR 90, 3.8 km, 150 km and Ibn Majah 1412 (negative control) [${ziyarahHits.slice(0, 3).join("; ")}]`
+);
+const ziyarahArticle = BLOG_DATA.find((post) => post.slug === ZIYARAH_SLUG);
+check(
+  (ziyarahArticle?.references?.length ?? 0) === 15 &&
+    ziyarahBodyPair.every(
+      (body) =>
+        (body.match(/Traveller check \(/g) ?? []).length +
+          (body.match(/যাত্রীর যাচাই \(/g) ?? []).length === 7
+    ),
+  "blog-23: fifteen opened references and seven cautions sit in both bodies"
+);
+check(
+  (ziyarahArticle?.internalLinks?.filter((link) => link.path.startsWith("/blog/")).length ?? 0) >= 5 &&
+    (ziyarahArticle?.internalLinks?.some((link) => link.path === "/umrah") ?? false),
+  "blog-23: at least five sibling links plus the /umrah hub"
+);
+check(
+  ziyarahBodyPair[0].includes("9. FREQUENTLY ASKED QUESTIONS") &&
+    ziyarahBodyPair[1].includes("৯. সচরাচর জিজ্ঞাসা"),
+  "blog-23: the FAQ heading that the schema allowlist expects is present in both locales"
+);
+check(
+  ziyarahBodyPair.every(
+    (body) =>
+      /(?:SR\s*90|৯০ রিয়াল)/.test(body) &&
+      /(?:3\.8\s*km|৩\.৮\s*কিমি)/.test(body) &&
+      /(?:150\s*km|১৫০\s*কিমি)/.test(body) &&
+      /1412|১৪১২/.test(body) &&
+      /(?:Hasan|হাসান)/.test(body)
+  ),
+  "blog-23: both bodies keep the verified anchors (bus fare, Qiblatain distance, Badr distance, Ibn Majah 1412 and its grade)"
+);
+
+// Guard: no dates kilogram allowance (the figure the old copy printed was unsourced)
+const zamzamDatesAllowanceClaim =
+  /(?:duty[- ]free|tax[- ]free|শুল্কমুক্ত)[^.\n]{0,40}\d+\s*(?:kg|কেজি)|\d+\s*(?:kg|কেজি)[^.\n]{0,25}(?:duty[- ]free|শুল্কমুক্ত)/i;
+check(
+  zamzamBodyPair.every((body) => !zamzamDatesAllowanceClaim.test(body)),
+  "blog-21: no '5-10 kg duty-free' dates allowance — HSIA tests personal use against commercial quantity"
+);
+
+// Guard: gold allowance keeps the once-a-year control and the declaration duty
+check(
+  zamzamBodyPair.every(
+    (body) =>
+      /(once per calendar year|ক্যালেন্ডার বছরে একবার)/.test(body) &&
+      /(117|১১৭)/.test(body) &&
+      /(5,000|৫,০০০)/.test(body) &&
+      /(confiscated|জব্দ)/.test(body)
+  ),
+  "blog-21: the gold section keeps the calendar-year limit, the 117 g bar cap, the Tk 5,000 duty and confiscation"
+);
+
+// Guard: the VAT refund is never promised without its conditions
+const zamzamVatPromise = /(15%[^.\n]{0,30}(?:back|refund|ফেরত))|((?:tax[- ]?free|ভ্যাট ফেরত)[^.\n]{0,20}15%)/i;
+const zamzamVatConditions = /(SAR\s*500|৫০০ রিয়াল)/;
+check(
+  zamzamBodyPair.every(
+    (body) => !zamzamVatPromise.test(body) || (zamzamVatConditions.test(body) && /(90|৯০)/.test(body))
+  ),
+  "blog-21: any 15% VAT-refund sentence is accompanied by the SAR 500 minimum and the 90-day export limit"
 );
 
 // --- Content contract (docs/growth/10-CONTENT-UPGRADE-STANDARD.md) ---------

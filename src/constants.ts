@@ -2372,37 +2372,68 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-14",
     slug: "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
-    title: "Performing Umrah with Elderly Parents from Bangladesh: Wheelchair Booking, Flat-Street Hotels & Medical Guide",
-    summary: "Taking aging parents to Makkah and Madinah for Umrah requires careful advance planning for airport transit, marble plaza walking, and heat management. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidelines, this guide covers requesting free airline WCHR/WCHS assistance, using personal folding wheelchairs, official electric mobility scooters at Masjid al-Haram, flat-street hotel selection, and medical packing.",
+    title: "Umrah with Elderly Parents from Bangladesh: Airline Wheelchair, Haram Mobility & Medical Preparation",
+    summary: "Checked 19 October 2026: what a carrier can confirm for an older parent, how a personal wheelchair and powered device are handled, where the Grand Mosque's free wheelchairs and paid electric carts are booked, and which hotel and clinical questions only the property and your doctor can answer. No universal free service, guaranteed gate delivery, step-free hotel route or medical clearance.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
-    updatedAt: "2026-10-18",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "7 min read",
+    readTime: "10 min read",
     references: [
       {
-        name: "Saudia / Airline Special Assistance — Wheelchair (WCHR/WCHS) carriage rules",
-        nameBn: "সৌদিয়া / এয়ারলাইন্স স্পেশাল অ্যাসিস্ট্যান্স — হুইলচেয়ার (WCHR/WCHS) পরিবহন নিয়ম",
-        url: "https://www.saudia.com",
+        name: "Saudia — Special baggage: wheelchairs, mobility aids and portable oxygen concentrators",
+        nameBn: "সৌদিয়া — বিশেষ লাগেজ: হুইলচেয়ার, মোবিলিটি এইড ও পোর্টেবল অক্সিজেন কনসেনট্রেটর",
+        url: "https://www.saudia.com/manage/baggage/special-baggage",
       },
       {
-        name: "Ministry of Hajj and Umrah — Official pilgrim guidelines & Nusuk services",
-        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — অফিশিয়াল গাইডলাইন ও নুসুক সেবা",
-        url: "https://www.haj.gov.sa",
+        name: "Saudia — Special assistance: wheelchair services and WCHR/WCHS/WCHC categories",
+        nameBn: "সৌদিয়া — স্পেশাল অ্যাসিস্ট্যান্স: হুইলচেয়ার সেবা ও WCHR/WCHS/WCHC ক্যাটাগরি",
+        url: "https://www.saudia.com/before-flying/special-assistance/special-care/travelling-for-people-with-a-disability/wheelchair-services",
       },
       {
-        name: "General Authority for the Care of the Two Holy Mosques — Mobility carts & accessibility",
-        nameBn: "দুই পবিত্র মসজিদ পরিচালনা কর্তৃপক্ষ — মোবিলিটি স্কুটার ও প্রতিবন্ধী সেবা",
-        url: "https://gacr.gov.sa",
+        name: "Biman Bangladesh Airlines — Wheelchair assistance and request contacts",
+        nameBn: "বিমান বাংলাদেশ এয়ারলাইন্স — হুইলচেয়ার সহায়তা ও আবেদনের যোগাযোগ",
+        url: "https://www.biman-airlines.com/special-care/wheelchair-assistance",
+      },
+      {
+        name: "Ministry of Hajj and Umrah — Things to remember: health advice, gates and using wheelchairs",
+        nameBn: "হজ ও ওমরাহ মন্ত্রণালয় — মনে রাখার বিষয়: স্বাস্থ্য পরামর্শ, গেট ও হুইলচেয়ার ব্যবহার",
+        url: "https://haj.gov.sa/en/Hajj/Things-To-Remember?id=3",
+      },
+      {
+        name: "General Authority for the Care of the Grand Mosque and the Prophet's Mosque — mobility services",
+        nameBn: "দুই পবিত্র মসজিদ পরিচর্যা ও ব্যবস্থাপনা কর্তৃপক্ষ — মোবিলিটি সেবা",
+        url: "https://alharamain.gov.sa/public/?main_subject=nw&module=subj-ar&subject=subject_708051",
+      },
+      {
+        name: "Saudi Press Agency — Grand Mosque golf cart bookings shift to digital (20 March 2025)",
+        nameBn: "সৌদি প্রেস এজেন্সি — গ্র্যান্ড মসজিদের গলফ কার্ট বুকিং ডিজিটাল (২০ মার্চ ২০২৫)",
+        url: "https://www.spa.gov.sa/en/N2285176",
+      },
+      {
+        name: "Saudi Press Agency — Smart mobility system at the Two Holy Mosques (4 March 2026)",
+        nameBn: "সৌদি প্রেস এজেন্সি — দুই পবিত্র মসজিদে স্মার্ট মোবিলিটি ব্যবস্থা (৪ মার্চ ২০২৬)",
+        url: "https://www.spa.gov.sa/en/N2527804",
+      },
+      {
+        name: "Saudi Press Agency — Free 24-hour wheelchair service and golf carts (9 August 2024)",
+        nameBn: "সৌদি প্রেস এজেন্সি — ২৪ ঘণ্টার বিনামূল্যে হুইলচেয়ার সেবা ও গলফ কার্ট (৯ আগস্ট ২০২৪)",
+        url: "https://www.spa.gov.sa/en/N2151450",
+      },
+      {
+        name: "Saudi Press Agency — Tanaqol electric vehicle booking and service areas (14 May 2024)",
+        nameBn: "সৌদি প্রেস এজেন্সি — তানাকুল ইলেকট্রিক ভেহিকল বুকিং ও সেবা এলাকা (১৪ মে ২০২৪)",
+        url: "https://www.spa.gov.sa/en/N2102395",
       },
     ],
     internalLinks: [
-      { text: "Makkah & Madinah Flat Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Dhaka Airport Pre-Departure & Baggage Rules Hub", path: "/pre-departure" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "Makkah & Madinah hotel zones, room access and Haramain train", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Complete DIY Umrah and Nusuk guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Nusuk app and Rawdah permit step by step", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "Wearing Ihram from Dhaka airport or on a transit flight", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "DIY Umrah planning portal and BDT calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "kiwitaxi", headline: "Pre-Book a Door-to-Door Family GMC or Minivan at Jeddah Airport", body: "Traveling with elderly parents and wheelchairs? Pre-book a private 7-seater minivan from Jeddah Airport straight to your Makkah hotel lobby so your parents never wait in taxi queues." }
+    affiliateCTA: { provider: "kiwitaxi", headline: "Compare a private airport transfer for a party with a folded wheelchair", body: "If your parent uses a wheelchair, compare a pre-booked vehicle against airport taxis and confirm the vehicle size, folded-wheelchair storage, assistance at pickup and cancellation terms before paying. A transfer booking does not provide airline wheelchair assistance or access to the mosque." }
   },
   {
     id: "blog-15",
@@ -2623,7 +2654,7 @@ export const BLOG_DATA: BlogPost[] = [
     internalLinks: [
       { text: "Nusuk visitor registration and Rawdah confirmation guide", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Hotel room/access, Haramain and separate transfer checks", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Older-traveller assistance guide — separate medical/equipment review", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "Umrah with older parents: airline assistance, Haram carts and medical checks", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
       { text: "Quote-input Umrah planning and budget hub", path: "/umrah" },
       { text: "Ramadan and I’tikaf — separate season-specific review", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
       { text: "Main DIY guide — actual visa route, application and permit sequence", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
@@ -2693,159 +2724,294 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-19",
     slug: "ramadan-umrah-itikaf-guide-bangladesh-booking-budget",
-    title: "Ramadan Umrah & Last 10 Days I'tikaf Guide from Bangladesh (2026–2027): Dates, Registration & Budget Plan",
-    summary: "The Prophet Muhammad (PBUH) said: \"Perform Umrah when Ramadan comes, for Umrah in Ramadan is equal to Hajj in reward\" (Sahih al-Bukhari 1782). Ramadan 1448 is expected 8 February – 8 March 2027 on the official Umm al-Qura calendar, subject to moon sighting. This guide gives Bangladeshi pilgrims the checked dates, the official General Authority I'tikaf registration process as it actually ran last season, and a candid budget framework — this site no longer publishes Ramadan BDT tables or savings percentages it cannot verify against a dated source.",
-    category: "Hajj & Umrah",
-    date: "September 27, 2026",
-    updatedAt: "2026-10-17",
-    author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "6 min read",
-    references: [
-      {
-        name: "Umm al-Qura Calendar — Annual reference 1448 AH (Ramadan 1448 dates)",
-        nameBn: "উম্মুল কুরা ক্যালেন্ডার — ১৪৪৮ হিজরি বার্ষিক রেফারেন্স (রমজান ১৪৪৮-এর তারিখ)",
-        url: "https://www.ummulqura.org.sa/en/annual-reference",
-      },
-      {
-        name: "General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque — I'tikaf service & annual registration notices",
-        nameBn: "মসজিদুল হারাম ও মসজিদে নববীর তত্ত্বাবধায়ন কর্তৃপক্ষ — ইতিকাফ সেবা ও বার্ষিক নিবন্ধন বিজ্ঞপ্তি",
-        url: "https://alharamain.gov.sa/public/?site=en",
-      },
-      {
-        name: "Saudi Press Agency — I'tikaf registration at the Two Holy Mosques opens 3 Ramadan 1447 (20 February 2026)",
-        nameBn: "সৌদি প্রেস এজেন্সি — ৩ রমজান ১৪৪৭ (২০ ফেব্রুয়ারি ২০২৬) থেকে দুই হারাম মসজিদে ইতিকাফ নিবন্ধন",
-        url: "https://spa.gov.sa/en/N2518728",
-      },
-      {
-        name: "Ministry of Hajj and Umrah — Umrah Season Calendar for 1448 AH",
-        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — ১৪৪৮ হিজরি ওমরাহ সিজন ক্যালেন্ডার",
-        url: "https://haj.gov.sa/en/Media-Center/Ministry-News/2026/Ministry-of-Hajj-and-Umrah-Announces-the-Umrah-Season-Calendar-for-1448-AH",
-      },
-      {
-        name: "Sahih al-Bukhari 1782 — \"'Umra in (the month of) Ramadan\"",
-        nameBn: "সহীহ বুখারী ১৭৮২ — \"রমজান মাসে ওমরাহ\"",
-        url: "https://sunnah.com/bukhari:1782",
-      },
-      {
-        name: "Saudi Railways (SAR) — Official Haramain High-Speed Railway booking portal",
-        nameBn: "সৌদি রেলওয়ে (SAR) — অফিশিয়াল হারামাইন হাই-স্পিড রেলওয়ে বুকিং পোর্টাল",
-        url: "https://sar.hhr.sa/",
-      },
-    ],
-    internalLinks: [
-      { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Makkah & Madinah Shuttle vs. Walking Hotel Zones", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Bangladeshi Halal Food & Suhoor/Iftar Guide in Makkah", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
-    ],
-    affiliateCTA: { provider: "airalo", headline: "Traveling in Ramadan Crowds? Keep Family Connected 24/7", body: "When the Haram courtyards fill after Taraweeh, an active Saudi 5G eSIM keeps you and your family reachable — set it up from Dhaka before you fly." }
-  },
-  {
-    id: "blog-20",
-    slug: "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
-    title: "Wearing Ihram from Dhaka Airport vs. Transit Flight (2026): Official Miqat Rules (Qarn al-Manazil & Yalamlam)",
-    summary: "Crossing the aerial Miqat boundary without entering Ihram is a critical concern for pilgrims flying to Jeddah for Umrah. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidance, this guide explains when and where to put on Ihram garments and formulate Niyyah: non-stop flights from Dhaka (Biman/Saudia), layovers in Gulf transit airports, and why flying to Madinah first requires no Ihram on the plane.",
+    title: "Ramadan 1448 Umrah & I'tikaf Guide from Bangladesh (2027): Dates, Season Deadlines and Who Can Register",
+    summary: "Ramadan 1448 is expected to begin on Monday 8 February 2027, and the Ministry of Hajj and Umrah closes Umrah visa issuance on 9 March 2027, entry on 23 March and departure on 7 April. Checked on 19 October 2026 against the Umm al-Qura calendar, the Ministry's 1448 season calendar and the Authority's own I'tikaf announcements, this guide separates the dates you can plan on from the permit nobody should promise you — the published I'tikaf conditions have been aimed at citizens and residents, not visitors on an Umrah visa.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "6 min read",
+    readTime: "9 min read",
     references: [
       {
-        name: "Ministry of Hajj and Umrah — Official Miqat locations and Ihram guidelines",
-        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — অফিশিয়াল মিকাত ও ইহরামের নির্দেশনা",
-        url: "https://www.haj.gov.sa",
+        name: "Umm al-Qura Calendar — Annual reference 1448 AH (1 Ramadan 1448 = Monday 8 February 2027)",
+        nameBn: "উম্মুল কুরা ক্যালেন্ডার — ১৪৪৮ হিজরি বার্ষিক রেফারেন্স (১ রমজান ১৪৪৮ = সোমবার ৮ ফেব্রুয়ারি ২০২৭)",
+        url: "https://www.ummulqura.org.sa/en/annual-reference",
       },
       {
-        name: "General Authority of Civil Aviation (GACA) — Flight passenger briefing on Miqat",
-        nameBn: "সৌদি সিভিল এভিয়েশন অথরিটি (GACA) — মিকাত ফ্লাইটে যাত্রীদের নির্দেশনা",
-        url: "https://gaca.gov.sa",
+        name: "Ministry of Hajj and Umrah — Umrah Season Calendar for 1448 AH: visa issuance to 1 Shawwal (9 March 2027), entry to 15 Shawwal (23 March), departure by 30 Shawwal (7 April)",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — ১৪৪৮ হিজরি ওমরাহ সিজন ক্যালেন্ডার: ভিসা ১ শাওয়াল (৯ মার্চ ২০২৭), প্রবেশ ১৫ শাওয়াল (২৩ মার্চ), প্রস্থান ৩০ শাওয়াল (৭ এপ্রিল)",
+        url: "https://haj.gov.sa/en/Media-Center/Ministry-News/2026/Ministry-of-Hajj-and-Umrah-Announces-the-Umrah-Season-Calendar-for-1448-AH",
       },
       {
-        name: "Nusuk — Pilgrim advisory on Ihram preparation & Haramain transit",
-        nameBn: "নুসুক — ওমরাহযাত্রীদের ইহরাম ও হারামাইন ট্রানজিট নির্দেশনা",
-        url: "https://www.nusuk.sa",
+        name: "Saudi Press Agency — I'tikaf registration at the Two Holy Mosques opens 3 Ramadan 1447 (20 February 2026): 20–30 Ramadan, portal or Nafath, capacity review, SMS nomination",
+        nameBn: "সৌদি প্রেস এজেন্সি — ৩ রমজান ১৪৪৭ (২০ ফেব্রুয়ারি ২০২৬) থেকে দুই হারাম মসজিদে ইতিকাফ নিবন্ধন: ২০–৩০ রমজান, পোর্টাল বা Nafath, আসন যাচাই, এসএমএস মনোনয়ন",
+        url: "https://spa.gov.sa/en/N2518728",
+      },
+      {
+        name: "Saudi Press Agency — I'tikaf permit service described by the Authority (5 March 2025): 18+, citizens or residents with valid residency, free of charge, awareness video, Arabic/English/Urdu",
+        nameBn: "সৌদি প্রেস এজেন্সি — কর্তৃপক্ষের বর্ণিত ইতিকাফ পারমিট সেবা (৫ মার্চ ২০২৫): ১৮+, নাগরিক বা বৈধ ইকামাধারী বাসিন্দা, বিনামূল্যে, সচেতনতা ভিডিও, আরবি/ইংরেজি/উর্দু",
+        url: "https://spa.gov.sa/en/N2275662",
+      },
+      {
+        name: "Saudi Press Agency — parallel I'tikaf registration announcement for the Prophet's Mosque in Madinah, Ramadan 1447",
+        nameBn: "সৌদি প্রেস এজেন্সি — মদিনার মসজিদে নববীর জন্য সমান্তরাল ইতিকাফ নিবন্ধন ঘোষণা, রমজান ১৪৪৭",
+        url: "https://spa.gov.sa/en/N2518742",
+      },
+      {
+        name: "Sahih al-Bukhari 1782 — \"Perform Umrah when Ramadan comes, for Umrah in Ramadan is equal to Hajj (in reward)\", or words to that effect",
+        nameBn: "সহীহ বুখারি ১৭৮২ — “রমজান এলে ওমরাহ কর, রমজানের ওমরাহ হজের সমান (সওয়াবে)”, অথবা এর কাছাকাছি কথায়",
+        url: "https://sunnah.com/bukhari:1782",
+      },
+      {
+        name: "Saudi Railways (SAR) — Haramain High-Speed Railway timetable, booking portal and accessibility terms",
+        nameBn: "সৌদি রেলওয়ে (SAR) — হারামাইন হাই-স্পিড রেলওয়ের সময়সূচি, বুকিং পোর্টাল ও অ্যাক্সেসিবিলিটি শর্ত",
+        url: "https://sar.hhr.sa/en",
+      },
+      {
+        name: "General Authority for the Care of the Two Holy Mosques — I'tikaf e-service registration portal named in the announcements (login required; not tested)",
+        nameBn: "দুই হারাম মসজিদের তত্ত্বাবধায়ন কর্তৃপক্ষ — ঘোষণায় উল্লিখিত ইতিকাফ ই-সেবা নিবন্ধন পোর্টাল (লগইন প্রয়োজন; পরীক্ষা করা হয়নি)",
+        url: "https://eservices.alharamain.gov.sa/login",
       },
     ],
     internalLinks: [
-      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "Umrah Rules for Bangladeshi Women & Modest Ihram Guide", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
+      { text: "Ihram & Miqat Rules for Flights from Bangladesh", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "Nusuk App, Visa & Rawdah Permit Guide", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
-      { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" },
-      { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
+      { text: "Bangladeshi Halal Food, Suhoor & Iftar Guide", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "kiwitaxi", headline: "Landing at Jeddah Terminal 1 in Ihram?", body: "Book a private air-conditioned sedan or family minivan waiting at Jeddah Arrivals to take you directly to your Makkah hotel near Masjid al-Haram." }
+    affiliateCTA: { provider: "airalo", headline: "Ramadan crowds, separated family, no signal?", body: "An optional Saudi data eSIM lets you reach your group after Taraweeh if you keep the same numbers and test the connection before you rely on it. Coverage, speed and device compatibility must be confirmed by the provider — a data plan does not replace an agreed meeting point." }
+  },
+  {
+    id: "blog-20",
+    slug: "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
+    title: "Ihram & Miqat Rules for Flights from Bangladesh (2026): Direct to Jeddah, Gulf Transit or Madinah First",
+    summary: "Where exactly do you enter Ihram when flying from Dhaka? Checked on 19 October 2026 against the Saudi Ministry of Hajj and Umrah's Miqat page and its official Ihram guide, this explains the published boundary rule, why Jeddah airport is not a place for entering Ihram, how the point parallel to the Miqat works on a connecting route, why a Madinah-first flight needs no Ihram on board, and what the Ministry says happens if the boundary is crossed without Ihram.",
+    category: "Hajj & Umrah",
+    date: "September 27, 2026",
+    updatedAt: "2026-10-19",
+    author: "Farhan Momen (Founder & Travel Editor)",
+    readTime: "9 min read",
+    references: [
+      {
+        name: "Ministry of Hajj and Umrah — Miqat locations, the air-travel rule, distances and the return/Fidyah sequence (page stamp 18 October 2026)",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — মিকাতের স্থান, আকাশপথের বিধান, দূরত্ব এবং ফিরে যাওয়া/ফিদইয়ার ক্রম (পেজ স্ট্যাম্প ১৮ অক্টোবর ২০২৬)",
+        url: "https://haj.gov.sa/en/Umrah/Miqaats",
+      },
+      {
+        name: "Ministry of Hajj and Umrah — Ihram Awareness Guide (English PDF, G07_EN_V3): intention and Talbiyah, garments, prohibitions, categories of pilgrims, airline announcement practice",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — ইহরাম সচেতনতা গাইড (ইংরেজি পিডিএফ, G07_EN_V3): নিয়ত ও তালবিয়া, পোশাক, নিষেধাজ্ঞা, যাত্রীর শ্রেণি, বিমানের ঘোষণা",
+        url: "https://haj.gov.sa/-/media/Project/HAJJ/PDF-and-FILES/Awareness-Guides/Ihram-Guide/English/en-ihram-guide.pdf",
+      },
+      {
+        name: "Sahih al-Bukhari 1526 — Ibn Abbas on the Mawaqit appointed by the Prophet, for residents and for those who pass them",
+        nameBn: "সহিহ বুখারি ১৫২৬ — ইবনে আব্বাস (রা.): রাসূলুল্লাহ (সা.) নির্ধারিত মাওয়াকিত, বাসিন্দা ও পথ অতিক্রমকারীদের জন্য",
+        url: "https://sunnah.com/bukhari:1526",
+      },
+      {
+        name: "Nusuk — Umrah Journey: Ihram as the first step (intention and Talbiyah)",
+        nameBn: "নুসুক — ওমরাহ জার্নি: প্রথম ধাপ ইহরাম (নিয়ত ও তালবিয়া)",
+        url: "https://umrah.nusuk.sa/Journey",
+      },
+      {
+        name: "Nusuk Hajj — Hajj rituals: intention for Ihram when the aircraft approaches the Miqat, and recommended pre-Ihram acts",
+        nameBn: "নুসুক হজ — হজের ইবাদত: বিমান মিকাতের কাছে এলে ইহরামের নিয়ত এবং ইহরামের আগের সুন্নত কাজ",
+        url: "https://hajj.nusuk.sa/nusuk/hajj-rituals",
+      },
+      {
+        name: "Jordan General Iftaa Department, Fatwa 2982 (29 September 2014) — wearing Ihram garments before the flight and making the intention at the point parallel to the Miqat",
+        nameBn: "জর্ডান জেনারেল ইফতা বিভাগ, ফতোয়া ২৯৮২ (২৯ সেপ্টেম্বর ২০১৪) — উড়ানের আগে ইহরামের কাপড় এবং মিকাতের সমান্তরাল বিন্দুতে নিয়ত",
+        url: "https://aliftaa.jo/research-fatwa-english/2982/A-Pilgrim-Traveling-by-Plane-Assumes-Ihram-upon-Reaching-the-Miqat",
+      },
+    ],
+    internalLinks: [
+      { text: "Umrah Rules for Bangladeshi Women: Mahram, Visa & Ihram Clothing", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
+      { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+    ],
+    affiliateCTA: { provider: "kiwitaxi", headline: "Landing at Jeddah in Ihram with family and luggage?", body: "Compare an optional private sedan or family minivan from Jeddah Arrivals to your Makkah hotel. Vehicle size, luggage capacity, meet-and-greet and availability must be confirmed with the provider before you rely on it — a transfer does not change when or where you enter Ihram." }
   },
   {
     id: "blog-21",
     slug: "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
-    title: "Official Zamzam Water, Ajwa Dates & Gold Customs Rules at Jeddah, Madinah & Dhaka Airport (2026)",
-    summary: "Every Bangladeshi pilgrim returning from Makkah and Madinah wishes to bring blessed Zamzam water, Madinah Ajwa and Sukkari dates, and gold jewelry for family members back home. However, packing loose Zamzam bottles inside checked suitcases leads to immediate baggage confiscation at Jeddah and Madinah airport X-ray scanners. Verified against Saudi General Authority of Civil Aviation (GACA - gaca.gov.sa) directives and Bangladesh National Board of Revenue (NBR - nbr.gov.bd) Passenger Baggage Rules, this guide explains the official 5-liter Zamzam kiosk rule, date weight allowances, and duty-free gold limits at Dhaka Airport.",
+    title: "Zamzam, Dates & Gold: What You Can Actually Bring Back to Bangladesh (2026)",
+    summary: "Checked on 19 October 2026 against the Madinah airport operator, Saudia's conditions of carriage, the Ministry of Hajj and Umrah's Zamzam guidance, Dhaka airport customs and the NBR's 2025 baggage rules: one sealed 5-litre Zamzam bottle at SAR 12.50, no published kilogram allowance for dates (a personal-use test instead), and 100 g of gold ornaments or 200 g of silver once a calendar year, with a 117 g declared bar cap.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
-    updatedAt: "2026-10-17",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "7 min read",
+    readTime: "9 min read",
     internalLinks: [
-      { text: "Dhaka Airport Pre-Departure & Baggage Allowance Hub", path: "/pre-departure" },
-      { text: "Dhaka to Jeddah & Madinah Flight Baggage Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "Complete DIY Umrah & 10-Day BDT Cost Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Dhaka Airport Pre-Departure & Baggage Hub", path: "/pre-departure" },
+      { text: "Ihram & Miqat Rules for Flights from Bangladesh", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "kiwitaxi", headline: "Returning with 46kg Suitcases & Zamzam Boxes?", body: "Book a large 7-seater family van from your Makkah or Madinah hotel to the airport so all your suitcases and Zamzam cartons fit comfortably in one vehicle." },
+    affiliateCTA: { provider: "kiwitaxi", headline: "Returning with 46 kg suitcases and a Zamzam box?", body: "Compare an optional larger vehicle from your Makkah or Madinah hotel to the airport so the boxes and suitcases fit in one trip. Seats, luggage capacity and availability must be confirmed with the provider — a vehicle does not change the airline's Zamzam or baggage rules." },
     references: [
       {
-        name: "Nusuk App Official Zamzam Pricing",
-        nameBn: "নুসুক অ্যাপ অফিশিয়াল জমজম মূল্য",
-        url: "https://lifeinsaudiarabia.net/buy-zamzam-water-from-nusuk-app-online/"
+        name: "Tibah Airports (Madinah) — Zamzam Sale Point: SAR 12.50 per 5-litre bottle, passport required, one per purchase, carried separately, not in checked baggage",
+        nameBn: "তিবাহ এয়ারপোর্টস (মদিনা) — জমজম বিক্রয়কেন্দ্র: ৫ লিটার বোতল ১২.৫০ রিয়াল, পাসপোর্ট প্রয়োজন, প্রতি ক্রয়ে একটি, আলাদাভাবে বহন, চেক-ইন লাগেজে নয়",
+        url: "https://tibahairports.com/en-EN/airport-services-facilities/page/zamzam-sales-service-en",
       },
       {
-        name: "Bangladesh Customs Baggage Rules (NBR)",
-        nameBn: "বাংলাদেশ কাস্টমস ব্যাগেজ নিয়ম (এনবিআর)",
-        url: "https://bdvisa.com/luggage-rules.html"
+        name: "Saudia — General Conditions of Carriage: one 5-litre Zamzam bottle from Jeddah or Madinah, counted in the checked allowance, extras as excess, no compensation for loss or delay",
+        nameBn: "সৌদিয়া — জেনারেল কন্ডিশনস অব ক্যারেজ: জেদ্দা বা মদিনা থেকে একটি ৫ লিটার জমজম, চেক-ইন ছাড়ের ভেতরে গণ্য, অতিরিক্তে এক্সেস, হারানো বা দেরিতে ক্ষতিপূরণ নেই",
+        url: "https://www.saudia.com/information/terms-and-conditions/general-conditions-of-carriage",
       },
       {
-        name: "Biman Bangladesh Airlines Baggage Policy",
-        nameBn: "বিমান বাংলাদেশ এয়ারলাইন্স ব্যাগেজ নীতি",
-        url: "https://biman-airlines.com/index.php/baggageAll"
-      }
-    ]
+        name: "Saudi Gazette — Ministry of Hajj and Umrah guidance on carrying Zamzam: authorised airport sales points, designated belts, not in checked luggage, one bottle, Umrah visa or Nusuk permit",
+        nameBn: "সৌদি গেজেট — জমজম বহনে হজ ও ওমরাহ মন্ত্রণালয়ের নির্দেশনা: বিমানবন্দরের অনুমোদিত কেন্দ্র, নির্ধারিত বেল্ট, লাগেজে নয়, একটি বোতল, ওমরাহ ভিসা বা নুসুক পারমিট",
+        url: "https://saudigazette.com.sa/article/650555",
+      },
+      {
+        name: "Hazrat Shahjalal International Airport — Customs: duty-free list (100 g gold, 200 g silver, 12 of a type), gold-bar duty, 117 g cap, once per year, confiscation, commercial quantities seized (SRO 261-Act/2025)",
+        nameBn: "হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর — কাস্টমস: শুল্কমুক্ত তালিকা (১০০ গ্রাম স্বর্ণ, ২০০ গ্রাম রুপা, একই ধরনের ১২টি), স্বর্ণবারের শুল্ক, ১১৭ গ্রাম সীমা, বছরে একবার, জব্দ, বাণিজ্যিক পরিমাণ আটক (এসআরও ২৬১-অ্যাক্ট/২০২৫)",
+        url: "https://www.hsia.gov.bd/content-details/10/Customs",
+      },
+      {
+        name: "National Board of Revenue via BSS — 2025 baggage rules: 100 g gold or 200 g silver per calendar year, one 10-tola bar at Tk 5,000/tola, declaration mandatory before leaving the customs hall",
+        nameBn: "জাতীয় রাজস্ব বোর্ড, বিএসএস সূত্রে — ২০২৫ ব্যাগেজ বিধি: ক্যালেন্ডার বছরে ১০০ গ্রাম স্বর্ণ বা ২০০ গ্রাম রুপা, ১০ তোলার একটি বার প্রতি তোলায় ৫,০০০ টাকা, কাস্টমস হল ছাড়ার আগে ঘোষণা বাধ্যতামূলক",
+        url: "https://www.bssnews.net/others/288568",
+      },
+      {
+        name: "Dhaka Tribune — Biman Zamzam delivery delay on a Madinah–Dhaka flight (October 2026) and the airline's response",
+        nameBn: "ঢাকা ট্রিবিউন — মদিনা–ঢাকা ফ্লাইটে বিমানের জমজম সরবরাহে দেরি (অক্টোবর ২০২৬) ও এয়ারলাইন্সের প্রতিক্রিয়া",
+        url: "https://www.dhakatribune.com/bangladesh/421147/",
+      },
+      {
+        name: "National Board of Revenue — Bangladesh Customs Tariff, Chapter 8: dried dates (HS 0804.10.21/29) at 25% customs duty when assessed as a consignment",
+        nameBn: "জাতীয় রাজস্ব বোর্ড — বাংলাদেশ কাস্টমস ট্যারিফ, অধ্যায় ৮: শুকনো খেজুর (এইচএস ০৮০৪.১০.২১/২৯) চালান হিসেবে গণ্য হলে ২৫% শুল্ক",
+        url: "https://nbr.gov.bd/uploads/tariff_schedule/Chapter-8.pdf",
+      },
+      {
+        name: "Tibah Airports (Madinah) — Tax Refunds: Global Blue desk in the main terminal",
+        nameBn: "তিবাহ এয়ারপোর্টস (মদিনা) — ট্যাক্স রিফান্ড: মেইন টার্মিনালে গ্লোবাল ব্লু ডেস্ক",
+        url: "https://tibahairports.com/en-EN/airport-services-facilities/page/tax-refunds-en",
+      },
+      {
+        name: "Saudi Gazette — tourist VAT refund scheme launch: 15% VAT, SAR 500 minimum per retailer, unused goods, 90-day export, verification points at Riyadh, Jeddah and Dammam",
+        nameBn: "সৌদি গেজেট — পর্যটক ভ্যাট ফেরত স্কিমের সূচনা: ১৫% ভ্যাট, প্রতি বিক্রেতায় ৫০০ রিয়াল, অব্যবহৃত পণ্য, ৯০ দিনে রপ্তানি, রিয়াদ/জেদ্দা/দাম্মামে যাচাই কেন্দ্র",
+        url: "https://saudigazette.com.sa/article/653942",
+      },
+    ],
   },
   {
     id: "blog-22",
     slug: "bangladeshi-halal-food-guide-makkah-madinah-budget-meals",
-    title: "Bangladeshi & Pakistani Halal Food Guide in Makkah & Madinah (2026): Best Budget Desi Meals & BDT Costs",
-    summary: "When traveling to Makkah and Madinah with elderly Bangladeshi parents or young children, eating fried fast food for 10 days straight often causes gastric acidity and fatigue. Knowing exactly which streets around Masjid al-Haram and Masjid an-Nabawi serve fresh Bangladeshi white rice (bhaat), masoor daal, rui/hilsha fish curry, alu bharta, and beef bhuna at SAR 12 to SAR 20 (BDT 390–650) per meal keeps your family healthy and cuts your food budget in half. Here is our street-by-street Halal dining map for Makkah and Madinah.",
+    title: "Bangladeshi & Pakistani Food in Makkah & Madinah (2026): Where to Eat and How to Budget Honestly",
+    summary: "Checked on 19 October 2026 against the SFDA's halal statements, the Balady municipal health-certificate service, WHO food-safety guidance, the official Al Baik branch and menu pages, BinDawood's store locator and a June 2026 Daily Star report: halal is the national baseline, hygiene is a local question, the documented South Asian food streets in Makkah are Hijra Road and Ibrahim Khaleel Road, and no per-plate price is printed because no kitchen publishes one that can be re-checked.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "6 min read",
+    readTime: "7 min read",
     internalLinks: [
       { text: "Umrah with Elderly Parents: Wheelchair & Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
-      { text: "Ramadan Suhoor, Iftar and Taraweeh crowd tips", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" }
+      { text: "Zamzam, Dates & Gold: Bangladesh Customs Rules", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
+      { text: "Ramadan Suhoor, Iftar and Taraweeh Crowd Tips", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "airalo", headline: "Use Google Maps & HungerStation Food Delivery in Makkah", body: "Too tired to walk out after Tawaf? With a Saudi Arabia eSIM, you can use HungerStation or Jahez apps to deliver hot Bangladeshi meals or Al Baik straight to your hotel lobby." }
+    affiliateCTA: {
+      provider: "airalo",
+      headline: "Using maps and delivery apps while you eat your way around the Haram",
+      body: "An optional Saudi Arabia eSIM makes it easier to open a branch map pin or a delivery app without hunting for hotel Wi-Fi. Coverage and speed depend on the network on the day, and an app only helps if it shows your hotel address — it changes no restaurant's price or the customs rules for food you carry home.",
+    },
+    references: [
+      {
+        name: "Saudi Food and Drug Authority — Halal Center: certification, audits and the halal standards applied in the Kingdom",
+        nameBn: "সৌদি খাদ্য ও ওষুধ কর্তৃপক্ষ — হালাল সেন্টার: সনদ, অডিট ও রাজ্যে প্রযোজ্য হালাল মান",
+        url: "https://www.sfda.gov.sa/en/halal",
+      },
+      {
+        name: "Saudi Gazette — SFDA statement (5 January 2023): all food sold in the Kingdom is halal",
+        nameBn: "সৌদি গেজেট — এসএফডিএ বিবৃতি (৫ জানুয়ারি ২০২৩): রাজ্যে বিক্রি হওয়া সব খাবার হালাল",
+        url: "https://saudigazette.com.sa/article/628636",
+      },
+      {
+        name: "U.S. International Trade Administration — Saudi Arabia prohibited and restricted imports: alcohol, pork and pork products (page last published 11 May 2026)",
+        nameBn: "মার্কিন আন্তর্জাতিক বাণিজ্য প্রশাসন — সৌদি আরবে নিষিদ্ধ আমদানি: মদ, শূকরের মাংস ও তার পণ্য (সর্বশেষ প্রকাশ ১১ মে ২০২৬)",
+        url: "https://www.trade.gov/country-commercial-guides/saudi-arabia-prohibited-and-restricted-imports",
+      },
+      {
+        name: "Balady (Ministry of Municipalities and Housing) — health certificates for food and public-health workers, with Makkah and Madinah in the health-education programme",
+        nameBn: "বালাদি (পৌর ও আবাসন মন্ত্রণালয়) — খাদ্য ও জনস্বাস্থ্য প্রতিষ্ঠানের কর্মীদের স্বাস্থ্যসনদ, মক্কা ও মদিনা স্বাস্থ্য-শিক্ষা কর্মসূচিতে",
+        url: "https://balady.gov.sa/en/services/issuance-health-certificate",
+      },
+      {
+        name: "World Health Organization — Five Keys to Safer Food",
+        nameBn: "বিশ্ব স্বাস্থ্য সংস্থা — নিরাপদ খাবারের পাঁচ নিয়ম",
+        url: "https://www.who.int/activities/promoting-safe-food-handling",
+      },
+      {
+        name: "The Daily Star — 'Where Chittagong meets Makkah' (3 June 2026): Bangladeshi kitchens on Hijra Road and Ibrahim Khaleel Road, signage, dishes and the Misfalah street economy",
+        nameBn: "দ্য ডেইলি স্টার — 'হোয়ার চিটাগং মিটস মক্কা' (৩ জুন ২০২৬): হিজরা রোড ও ইব্রাহিম খলিল রোডের বাংলাদেশি রেস্তোরাঁ, সাইনবোর্ড, খাবার ও মিসফালাহর বাজার",
+        url: "https://www.thedailystar.net/slow-reads/big-picture/news/where-chittagong-meets-makkah-4189471",
+      },
+      {
+        name: "ALBAIK — official branch list for Makkah and Madinah, each branch linked to a map pin",
+        nameBn: "আল বাইক — মক্কা ও মদিনার অফিশিয়াল শাখা-তালিকা, প্রতিটি শাখা ম্যাপ পিনে সংযুক্ত",
+        url: "https://www.albaik.com/branches",
+      },
+      {
+        name: "ALBAIK — official menu (items published, prices not published)",
+        nameBn: "আল বাইক — অফিশিয়াল মেনু (আইটেম প্রকাশিত, দাম প্রকাশিত নয়)",
+        url: "https://www.albaik.com/menu",
+      },
+      {
+        name: "BinDawood — store locator: Makkah (Abraj Al Bait, Jabal Omar, Al Kakiyyah, Azizia) and Madinah (Taiba, Al Anwar, Al Hijra, Rotana, Al Jammat)",
+        nameBn: "বিনদাউদ — স্টোর লোকেটর: মক্কা (আবরাজ আল বাইত, জাবাল ওমর, আল কাকিয়্যাহ, আজিজিয়া) ও মদিনা (তাইবা, আল আনোয়ার, আল হিজরা, রোটানা, আল জাম্মাত)",
+        url: "https://bindawood.sa/en/store_locations/",
+      },
+      {
+        name: "BinDawood Holding — 26 locations, 'Pilgrim's Brand', branch directory for Makkah and Madinah",
+        nameBn: "বিনদাউদ হোল্ডিং — ২৬টি লোকেশন, 'পিলগ্রিমস ব্র্যান্ড', মক্কা ও মদিনার শাখা-তালিকা",
+        url: "https://www.bindawoodholding.com/bindawood-supermarkets/",
+      },
+    ],
   },
   {
     id: "blog-23",
     slug: "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide",
-    title: "Complete Makkah, Madinah, Badr & Taif Historical Ziyarah Guide (2026): Official Sites & Private Family Taxi Rates in SAR & BDT",
-    summary: "Visiting the sacred historical landmarks (Ziyarah) of Makkah, Madinah, Badr, and the cool mountain city of Taif connects your family directly with the Seerah of Prophet Muhammad (PBUH). However, street taxi touts outside Masjid al-Haram often overcharge Bangladeshi families or rush through sites in 90 minutes. Verified against Saudi Tourism Authority (visitsaudi.com), Royal Commission for Makkah City and Holy Sites (rcmc.gov.sa), and Nusuk guidelines, this complete guide lists every authentic Ziyarah site, the Hadith reward of Masjid Quba, Hira Cultural District cable/shuttle access, and exact 2026 private 4-seater sedan vs. 7-seater GMC/Staria rates in SAR and BDT.",
-    category: "Ziyarah & Stopovers",
+    title: "Makkah, Madinah, Badr & Taif Ziyarah Guide (2026): Verified Sites, Opening Hours and How to Book a Car Honestly",
+    summary: "Checked on 19 October 2026 against the Hira district site, two SPA releases, Visit Saudi, Saudipedia, the Madinah bus operator and the Ministry of Tourism. The Hira museums publish three different schedules and all three are printed; the Quba hadith is Ibn Majah 1412, Hasan; the Madinah bus is SR 90 for 24 hours; Badr is about 150 km west. No car tariff is published anywhere, so the guide prints none and teaches the reader to fix the total, the hours and the stops first.",    category: "Ziyarah & Stopovers",
     date: "September 27, 2026",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "8 min read",
+    readTime: "10 min read",
+    references: [
+      { name: "Hira Cultural District — hours, ticketed experiences, ticket link", nameBn: "হেরা কালচারাল ডিস্ট্রিক্ট — সময়, টিকিট, লিংক", url: "https://hiradistrict.com/en/" },
+      { name: "SPA, 31 Jul 2026 — museums 24 h except Friday 07:00–15:30", nameBn: "সৌদি প্রেস এজেন্সি, ৩১ জুলাই ২০২৬ — শুক্রবার ০৭:০০–১৫:৩০ বাদে ২৪ ঘণ্টা", url: "https://www.spa.gov.sa/en/w2609834" },
+      { name: "Visit Saudi — Revelation Exhibition, from SAR 25, daily 07:30–23:30", nameBn: "Visit Saudi — রেভেলেশন এক্সিবিশন, ২৫ রিয়াল থেকে", url: "https://www.visitsaudi.com/en/makkah/attractions/revelation-exhibition" },
+      { name: "Sunan Ibn Majah 1412 — Quba hadith, Hasan (Darussalam)", nameBn: "সুনান ইবনে মাজাহ ১৪১২ — কুবার হাদিস, হাসান", url: "https://sunnah.com/ibnmajah:1412" },
+      { name: "Visit Saudi — Masjid Quba, 3 km walkway, no booking", nameBn: "Visit Saudi — মসজিদে কুবা, ৩ কিমি পথ", url: "https://www.visitsaudi.com/en/madinah/attractions/masjid-quba-in-madinah" },
+      { name: "Visit Saudi — Masjid al-Qiblatain, 3.8 km north-west", nameBn: "Visit Saudi — মসজিদে কিবলাতাইন, ৩.৮ কিমি", url: "https://www.visitsaudi.com/en/madinah/attractions/masjid-al-qiblatain-in-madinah" },
+      { name: "Visit Saudi — Uhud Mountain and battle site", nameBn: "Visit Saudi — উহুদ পাহাড় ও যুদ্ধস্থল", url: "https://www.visitsaudi.com/en/madinah/attractions/uhud-mountain-in-madinah" },
+      { name: "Visit Saudi — Badr Battle Site, about 150 km west", nameBn: "Visit Saudi — বদর যুদ্ধস্থল, প্রায় ১৫০ কিমি পশ্চিমে", url: "https://www.visitsaudi.com/en/madinah/attractions/badr-battle-site" },
+      { name: "City Sightseeing Al-Madinah — fares, routes, stops, 920014044", nameBn: "City Sightseeing Al-Madinah — ভাড়া, রুট, স্টপ, ৯২০০১৪০৪৪", url: "https://csmadinah.com/" },
+      { name: "SPA, 18 Jul 2026 — Al-Hada cable car specifications", nameBn: "সৌদি প্রেস এজেন্সি, ১৮ জুলাই ২০২৬ — আল-হাদা কেবল কার", url: "https://www.spa.gov.sa/en/N2636455" },
+      { name: "Visit Saudi — Al-Hada and the Al-Kar Tourist Village", nameBn: "Visit Saudi — আল-হাদা ও আল-কার ট্যুরিস্ট ভিলেজ", url: "https://www.visitsaudi.com/en/destinations/taif/attractions/alhada-mountain-in-taif" },
+      { name: "Saudipedia — Qarn al-Manazil (as-Sayl al-Kabir)", nameBn: "সৌদিপিডিয়া — কারন আল-মানাজিল", url: "https://saudipedia.com/en/qarn-al-manazil" },
+      { name: "Saudipedia — Taif Governorate, Ibn Abbas mosque and Masjid Addas", nameBn: "সৌদিপিডিয়া — তায়েফ গভর্নরেট, ইবনে আব্বাস ও মসজিদে আদাস", url: "https://saudipedia.com/en/taif-governorate" },
+      { name: "Jannat al-Mu'alla — north of the Haram, 1925–26 demolition", nameBn: "জান্নাতুল মুআল্লা — হারামের উত্তরে, ১৯২৫–২৬ ভাঙন", url: "https://en.wikipedia.org/wiki/Jannat_al-Mu%27alla" },
+      { name: "Ministry of Tourism — tourists' rights and guide licensing", nameBn: "ট্যুরিজম মন্ত্রণালয় — পর্যটকদের অধিকার ও গাইড লাইসেন্স", url: "https://cdn.mt.gov.sa/files/A360/TouristsRights-EN.pdf" },
+    ],
     internalLinks: [
-      { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Umrah with Elderly Parents: Wheelchair & Electric Scooter Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Umrah with Elderly Parents: Wheelchair & Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
       { text: "Complete DIY Umrah 10-Day BDT Budget Breakdown", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Zamzam, Dates & Gold: Bangladesh Customs Rules", path: "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" },
+      { text: "Bangladeshi Halal Food Guide for Makkah & Madinah", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "kiwitaxi", headline: "Pre-Book Private Family Chauffeur Cars & Airport Transfers in Saudi Arabia", body: "Avoid bargaining with street taxi touts outside the Haram. Lock in fixed-rate private sedans and 7-seater family vans for Jeddah/Madinah transfers or rent a car via QEEQ." }
+    affiliateCTA: { provider: "kiwitaxi", headline: "Pre-book a car only when the total, the hours and the stops are written down", body: "An optional pre-booked transfer gives you a fixed price before you land, which is the same discipline this guide asks of any car you hire for Ziyarah. Vehicle class, luggage space, waiting time, cancellation terms and availability must be confirmed with the supplier — a transfer booking does not change any site's opening hours or any rule about ihram." }
   },
   {
     id: "blog-24",

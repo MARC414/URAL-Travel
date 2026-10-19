@@ -507,39 +507,97 @@ Before departure:
 - Check the Saudi MOH Hajj health document for the applicable season, including vaccine requirements, validity periods, timing and any category-specific conditions [4, 9].
 - Follow current Saudi Ministry/Nusuk and Bangladesh MoRA/e-Hajj instructions for Hajj visa biometrics, permits and any card or transport access requirements [1, 7–8]. Use Saudi Visa Bio only if the current official visa instructions for your application require it.
 - Save the current official notices and your own application instructions. Do not substitute an old-season PDF, agency brochure or general app listing for the applicable rule.`,
-  "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": `Taking aging parents to Makkah and Madinah for Umrah is one of the most cherished dreams for Bangladeshi families. However, the physical reality of Umrah involves several kilometers of walking across vast marble plazas, navigating temperature shifts between intense outdoor heat and cooled prayer halls, and managing joint strain. With proper advance logistics, caregiver preparation, and knowledge of official accessibility services, you can protect your parents' dignity and physical health. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidelines, General Authority for the Care of the Two Holy Mosques accessibility services, and international airline special service request (SSR) regulations.
+  "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": `This guide is for Bangladeshi families planning Umrah with an older parent or relative who is frail, uses a wheelchair or cannot walk long distances. Use it to separate three decisions that are often mixed together: what the airline can arrange, what the mosque authority publishes about on-site mobility, and what only your clinician, the property and the staff on the day can answer. It is not a medical clearance, a tested booking or an inspected route.
 
-1. Airline Wheelchair Assistance (WCHR / WCHS) and Airport Transit
-Never rely on finding an unreserved wheelchair at the airport on your departure day:
-- **Requesting Special Service Codes in Advance:** Airlines designate mobility assistance under standardized IATA Special Service Request (SSR) codes. The most common is **WCHR** (Wheelchair for Ramp/Distance, for passengers who can climb aircraft stairs and walk to their seat but cannot walk long concourse distances) and **WCHS** (Wheelchair for Steps, for passengers who cannot ascend or descend aircraft stairs but can walk inside the cabin). Add this request through your airline's official website manage-booking portal or issuing travel desk at least 48 hours before departure [1][2]. The service is provided without an additional airline fee across major scheduled carriers departing Hazrat Shahjalal International Airport (DAC) [1].
-- **Bringing a Personal Foldable Wheelchair:** Airlines transport personal manual wheelchairs free of charge outside your standard checked luggage allowance [1]. You can use your own wheelchair through check-in and security up to the boarding gate, where ground staff will gate-check it into the aircraft hold and return it to you at the aircraft door upon arrival in Jeddah (JED) or Madinah (MED). A lightweight folding wheelchair ensures seamless transport from your hotel room straight to the Haram courtyards for every prayer.
+Quick Answer — Checked 19 October 2026: request airline assistance when you book, not at the airport. Biman says the request is mandatory at booking and recommends at least 48 hours; Saudia publishes free wheelchair assistance and free carriage of wheelchairs and up to two mobility items on its own flights, and sets out the WCHR, WCHS and WCHC categories. Inside the Grand Mosque the authority publishes free manual wheelchairs in designated areas and paid electric carts booked through its Tanaqol platform; people with disabilities can use cart service points free of charge. None of that is a personal approval, a free service on every carrier, or a step-free hotel route. [1–9]
 
-2. Mobility inside Masjid al-Haram: Wheelchairs, Electric Scooters & Tanaqol
-Masjid al-Haram provides dedicated multi-level facilities for pilgrims requiring mobility assistance during Tawaf and Sa'i:
-- **Personal & Manual Push Wheelchairs:** Family members pushing a personal wheelchair can access dedicated wheelchair corridors on the upper levels (First Floor Wheelchair Mataf track and the designated Sa'i wheelchair lanes) [3]. This keeps senior pilgrims away from the dense pedestrian compression of the ground-level Mataf.
-- **Official Electric Mobility Scooters (Mezzanine Level):** The General Authority provides official electric mobility scooters operating on a dedicated mezzanine circuit accessible via elevators and designated ramps (such as King Abdulaziz Gate and Ajyad Bridge entries) [3]. Both single-seat and two-seat electric scooters are available, enabling an adult child to accompany an elderly parent and steer the scooter via intuitive hand controls. Rental rates are set by the operating authority and displayed at the official dispatch counters; confirm live fees and book slots via the official Nusuk/Tanaqol mobile platforms before peak hours [2][3].
-- **Licensed Wheelchair Attendants:** If family members cannot push a manual wheelchair due to physical exhaustion, only engage official licensed attendants wearing serialized, government-issued vests inside the mosque [3]. Never contract unofficial individuals outside the mosque gates.
+1. WHAT CAN THE AIRLINE ARRANGE — AND WHAT DOES THE CODE NOT GUARANTEE?
+Start with what your parent can actually do, because the category decides the help. Saudia publishes three: WCHR for a passenger who can climb stairs but cannot walk long distances, WCHS for a passenger who cannot manage aircraft stairs but can walk in the cabin, and WCHC for a passenger who cannot walk at all. For WCHC it asks for the passenger's weight and expects an accompanying person seated nearby. Each carrier applies the codes on its own special-assistance form, so describe the need in words as well. [2]
 
-3. Accommodation Logistics: Flat-Street Access and Avoiding Elevation
-Choosing the right hotel location is the single most critical factor in preventing senior knee strain and exhaustion:
-- **Prioritize Flat, Zero-Incline Corridors:** In Makkah, look for properties situated along flat, direct access routes such as Jabal Omar, the lower section of Ibrahim Al-Khalil Road, or the Clock Tower complex with direct elevator connectivity to the western and southern plaza levels. Strictly avoid hotels located on steep hillside gradients (such as elevated sections of Upper Ajyad or hilly roads in Jabal Kaaba), where a nominal 400-meter walk involves severe cardiovascular and joint exertion.
-- **Madinah Proximity to Senior Entrances:** In Madinah, the surrounding plaza of Masjid an-Nabawi is level and paved. However, because women's prayer sectors and Rawdah assembly points are concentrated on the northern side, accommodations located in Markazia North (Northern Central Area) eliminate exhausting perimeter walks for elderly mothers [3]. Always confirm with the property beforehand whether their entrance features step-free ramp access and functioning elevator banks adequate for wheelchairs.
+Ask at booking. Biman states that informing it at booking is mandatory, publishes a wheelchair email address and phone line, and recommends making the request at least 48 hours before departure; it also warns that a wheelchair requested only at the airport is subject to availability. Saudia's special-assistance text asks for 48 hours' advance warning for a powered wheelchair and for two pieces of mobility equipment, subject to space and dangerous-goods rules. Treat 48 hours as a floor, not a guarantee: ask the specific carrier whether it needs longer. [1][2][3]
 
-4. Medical Preparation, Prescription Rules & Heat Care
-Managing chronic conditions during travel requires strict medication discipline:
-- **Prescription Carry Rules:** Pack a minimum 20-day supply of all maintenance medications (for hypertension, diabetes, cardiac conditions, or arthritis) in their original pharmaceutical packaging inside carry-on luggage. Carry a signed English medical summary and prescription from a registered physician in Bangladesh detailing the generic names and dosages to present at airport security or customs if inspected [1].
-- **Insulin & Cold-Chain Storage:** If an elderly parent uses insulin, carry insulin pens in certified cooling travel pouches or insulated vacuum flasks with chilled gel packs. Avoid putting insulin in checked baggage where aircraft hold temperatures risk freezing the medication. Confirm that your hotel room includes a functioning in-room mini-fridge for insulin storage upon arrival.
-- **Temperature & Hydration Management:** While ambient outdoor temperatures in Makkah can be very warm, air conditioning inside Masjid al-Haram, hotel lobbies, and the Haramain High-Speed Train is kept at cool temperatures. Pack lightweight cardigans or shawls, orthopedic supportive footwear, oral rehydration salts (ORS), and unperfumed skin lubricants to prevent chafing during Ihram.
+A code in a booking is not a confirmed service at every airport. It has to reach each operating carrier and each station in the itinerary, including a connection. Get the confirmation in writing, keep it with the ticket, and recheck it a few days before departure and again at check-in. Arrive early: Saudia's wheelchair page asks passengers using the service to be at the airport two hours before departure and at the gate before boarding begins. [2]
 
-5. Frequently Asked Questions
-How do I book an airline wheelchair for elderly parents from Dhaka?
-Contact your operating airline or add a Special Service Request (SSR code WCHR or WCHS) in your online booking management portal at least 48 hours prior to scheduled departure [1]. The service provides wheelchair transit from DAC check-in through departure gates and upon arrival at Jeddah or Madinah [1].
-Can we bring our own wheelchair to Makkah and Madinah?
-Yes. Airlines carry personal manual folding wheelchairs free of charge in addition to your ticketed baggage allowance [1]. You can push the wheelchair through airport concourses up to the boarding gate, and use it freely throughout your hotel stay and the Haram courtyards [3].
-Are electric scooters available for Tawaf and Sa'i in Makkah?
-Yes. Official electric mobility scooters are operated on the dedicated Mezzanine level of Masjid al-Haram [3]. Both single-passenger and double-passenger scooters are available; book and verify operating procedures via the official Nusuk or Tanaqol application [2][3].
-What medical documents should seniors carry from Bangladesh?
-Bring original medication packaging in carry-on bags accompanied by an English prescription or medical letter signed by a registered physician stating the patient's chronic diagnoses and prescribed generic medications [1].`,
+Step 1: Describe the help your parent needs in plain words.
+Say whether they can walk to the seat, manage aircraft stairs, or cannot walk at all. Ask the carrier which category it will record and whether it requires a medical form or a companion. [2]
+
+Step 2: Add the request when you book and keep the confirmation.
+Use the carrier's own booking channel, or its published special-assistance contacts. Capture the reference, the flight segments covered and any charge in writing. [2][3]
+
+Step 3: Check every operating carrier and every airport in the itinerary.
+A return ticket can involve two carriers and a transit point. Ask each one to confirm the assistance and the handover, including who provides the wheelchair at the transit airport. [2]
+
+Step 4: Reconfirm before departure and arrive early.
+Call or check the booking before you fly, then present yourselves at the special-assistance desk at check-in. Leave time for the walk, security and the gate. [2]
+
+Traveller check (elderlyAirline): Before you pay, ask the operating carrier to confirm the category, the flight segments covered, any charge, the handover point and whether a companion or medical form is required. Keep the written confirmation with the ticket. A code on a booking, an agent's assurance or a website's general promise is not confirmation for your parent's flights. Do not send passport scans or medical records to URAL or in public chat.
+
+2. CAN YOU BRING YOUR OWN WHEELCHAIR OR MOBILITY DEVICE?
+Saudia publishes that wheelchairs and crutches are carried free of charge, and that up to two pieces of mobility equipment, including an electric wheelchair, are accepted in addition to the free checked allowance. It also says these aids are normally carried in the hold, handed over before boarding and returned on arrival according to airport procedures. That is Saudia's published rule for its own flights, not a universal airline entitlement. [1]
+
+The return point is the part families most often get wrong. This review found no basis for promising that the wheelchair comes back at the aircraft door. Depending on the airport and ground handler it may be returned at the gate or on the baggage belt. Ask at check-in where it will be handed over and where it will be returned, and plan the arrival transfer for the slower case. [1]
+
+Powered wheelchairs, batteries, oxygen concentrators and other devices are separate approvals. Saudia, for example, lists approved portable oxygen concentrator models, requires the physician's statement at least 48 hours before departure and check-in at least three hours before, and allows a maximum of two spare batteries in the cabin. Do not assume that every battery type, device or airline is accepted on the same terms. [1]
+
+Your own wheelchair and the airline's airport wheelchair are different services. A personal wheelchair is useful in the hotel and the mosque courtyards, but it does not replace the assistance the airline provides to the gate. The Ministry of Hajj and Umrah says a pilgrim may bring a wheelchair to the Grand Mosque and use it, provided they enter through the places designated for wheelchairs. [4]
+
+Traveller check (elderlyEquipment): Confirm the device, its battery type and its dimensions with the operating carrier before the ticket becomes non-refundable, and keep the approval with the medical documents. A folded wheelchair, a powered wheelchair and a portable oxygen concentrator are not interchangeable approvals. Check the return point at the arrival airport and make sure your transfer can carry the folded chair. This page does not certify any device for any flight.
+
+3. WHAT MOBILITY HELP IS AVAILABLE INSIDE THE GRAND MOSQUE?
+The authority publishes a free manual wheelchair service in designated areas; its announcements describe the service as operating around the clock. Its service page names the eastern square at Bab Al-Salam (Gate 19) and the western square at Al-Shubika, and lists a separate paid manual service at the ground Sa'i (Gate 14). The Saudi Press Agency has reported the western gate number differently, so treat printed numbers as a starting point and follow current signs and identified staff. [5][6][8][9]
+
+Electric carts moved to electronic booking. In March 2025 the authority discontinued manual golf-cart booking and required reservations through its transport platform, Tanaqol. The same notice recommends online booking for visitors over 65, keeps service points for those who cannot book, and says people with disabilities can go directly to cart service points free of charge without an online reservation. Arrive on time with your ticket and ID. [6]
+
+Tanaqol is the authority's mobility platform for carts. Nusuk, run by the Ministry, is where Umrah and Rawdah permits are handled; they are different services. Do not assume that a Nusuk permit books a cart, or that a cart booking creates a permit. [4][6][9]
+
+The published 2024 pickup points for electric vehicles were Al-Marwah Gate 25, Al-Arqam Gate 16, Ajyad Gate 5 and Al-Shubika Gate 66. Seating and who may ride or drive are set by the operator, so ask at the service point rather than assuming a companion can ride or steer. [9]
+
+Use the official service points. The authority publishes a licensed wheelchair-assistant function and reported in 2026 that it had trained thousands of wheelchair service providers. Accept help at the counters and from identified staff; decline offers made outside the gates. [5][7]
+
+Traveller check (elderlyHaram): Check the current service point, level and opening arrangement on the day, in the app or with staff. A published gate number, a screenshot or last season's route is not today's arrangement. Keep the group together at the handover point and agree what happens if the cart queue is long. Do not buy a "guaranteed" slot from anyone outside the official service.
+
+4. HOW DO YOU CHOOSE A HOTEL AND THE ACTUAL ROUTE?
+An area name is not an accessibility guarantee. "Near the Haram", "Clock Tower", "Jabal Omar" or "Markazia North" are search labels; none of them proves a step-free door, a working lift or a short walk. The distance from a lobby to the entrance you will actually use, at the time you will walk, is the fact that matters.
+
+Ask the property specific questions and keep the answers in writing:
+- Which entrance will we use, and is there a step, ramp or kerb at that door?
+- How wide is the lift, is it working for our dates, and is the room on a low floor near it?
+- What is the route to the mosque entrance, including crossings, slopes, barriers and any temporary closure?
+- What is the return route after dark, and where can we wait if the courtyard is crowded?
+- Does the bathroom have a step, a grab rail or a walk-in shower?
+
+In Madinah, the mosque has many gates and prayer areas. A hotel described as "north" is not automatically the closest to an elderly woman's prayer area or to a Rawdah reporting point. The women's guide owns women's prayer and appointment detail; the hotel and Haramain guide owns the property, station and rail questions. [4]
+
+For the Haramain High-Speed Rail, check the actual station, platform, lift, luggage rules and transfer at both ends; the published rail limits are recorded in the hotel and rail guide. A short rail journey is not automatically easier than a road transfer for a parent who cannot stand for long.
+
+Traveller check (elderlyHotel): Confirm the exact entrance, room, lift and return route with the property for your dates, and keep it in writing. Do not accept "near the Haram" or an area name as an access promise. A transfer or hotel booking does not establish wheelchair access to the mosque, and no room, route or shuttle was inspected for this page.
+
+5. WHAT HEALTH PREPARATION BELONGS WITH A CLINICIAN?
+The Ministry of Hajj and Umrah advises pilgrims to consult a physician before travel to confirm that the health condition is stable and the person is physically able to perform the rituals; to receive required vaccinations well in advance, especially older people and those with chronic disease; to bring an adequate supply of medication; and to carry a medical report listing conditions, medicines and dosages. It also advises diabetic pilgrims to bring their own glucose monitor and to move periodically on long journeys. [4]
+
+That is general pilgrimage guidance, not a fitness certificate for your parent. How much medicine to carry, whether a medicine is controlled in Saudi Arabia, whether a device may be used in the cabin, how insulin must be stored, and whether your parent should travel at all are decisions for the prescriber and the carrier. This page does not give doses, day counts, storage methods or a substitute for travel insurance.
+
+This review did not establish the current 1448H travel-health requirements. The health material inspected elsewhere in this project identifies 1447H/2026. Recheck the Saudi Ministry of Health and your carrier close to travel instead of relying on an old PDF, an agency leaflet or this page.
+
+Carry the medical report and prescriptions in hand luggage, keep medicines in their original packaging where possible, and keep a separate copy with a companion. Ask the clinician and the carrier about any medicine that needs approval, and check Saudi customs rules for controlled medicines before departure. Do not post prescription images or medical records in public chat.
+
+Traveller check (elderlyHealth): Make the fitness, medicine, device and insurance decisions with the treating clinician and the operating carrier, and record who approved what. This article cannot clear an elderly parent for travel, change a dose or confirm that a medicine may enter Saudi Arabia. Current 1448H health requirements are not established here, so recheck the official sources close to departure.
+
+6. FREQUENTLY ASKED QUESTIONS
+How do I request a wheelchair for an elderly parent flying from Dhaka?
+Request it when you book, or through the carrier's published special-assistance contacts, and choose the category that matches what your parent can do. Biman says the request is mandatory at booking and recommends at least 48 hours; Saudia asks for 48 hours' advance warning for a powered wheelchair. Get written confirmation for every flight and ask about any charge. [2][3]
+Can we bring our own wheelchair to Saudi Arabia?
+Ask the operating carrier first. Saudia publishes free carriage of wheelchairs and up to two pieces of mobility equipment, including an electric wheelchair, in addition to its free checked allowance. Other carriers set their own terms. The Ministry says a pilgrim may bring a wheelchair to the Grand Mosque and use it through the designated entrances. [1][4]
+Will the wheelchair be returned at the aircraft door?
+Do not count on it. Saudia says mobility aids are returned on arrival according to airport procedures, which may mean the gate or the baggage belt. Ask at check-in and plan your transfer for the slower case. [1]
+Are there free wheelchairs inside the Grand Mosque?
+Yes. The authority publishes a free manual wheelchair service in designated areas, and its service page lists the eastern and western squares. Locations and gate numbers can differ between notices, so confirm on the day with identified staff. [5][6]
+How do we book an electric cart for Tawaf or Sa'i?
+Use the authority's Tanaqol platform. Manual cart booking was discontinued in March 2025, and the authority recommends online booking for visitors over 65 while keeping service points for those who cannot book. People with disabilities may go directly to cart service points free of charge. Take your ticket and ID. [6][9]
+Can a family member ride with the elderly parent on the cart?
+Ask at the service point or in the booking. Seating and who may ride or drive are set by the operator, and this page found no basis for promising a free companion seat or that a relative may steer. [9]
+What medical documents should an elderly parent carry?
+The Ministry advises carrying an adequate supply of medication and a medical report listing conditions, medicines and dosages, and diabetic pilgrims should bring a glucose monitor. The quantity, approvals and storage method must come from your clinician and carrier. [4]`,
   "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": `Who this guide is for: Bangladeshi passport holders considering a short Saudi visit within an international onward journey, including NRB families and students. Use it to decide whether the stopover fits your documents, airline booking and available time—not as an approval or a completed-booking report.
 
 Quick Answer
@@ -877,159 +935,407 @@ No. Confirm through-ticket versus separate-ticket structure, baggage transfer an
 How much time should I leave between landing and a train or another flight?
 There is no universal verified buffer in this guide. Ask the relevant carrier/operator about the actual terminals, immigration, bag collection/recheck, assistance and deadlines, and allow contingency for your party. A scheduled arrival time alone does not guarantee the onward journey. [2][4]`,
 
-  "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": `This guide is for Bangladeshi pilgrims deciding whether to travel for Ramadan 1448 — expected 8 February to 8 March 2027 [1] — whether to register for I'tikaf in the Two Holy Mosques, and how to build a budget they can verify instead of trusting a savings slogan. The Prophet Muhammad (PBUH) said: "Perform Umrah when Ramadan comes, for Umrah in Ramadan is equal to Hajj (in reward)" [5].
+  "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": `This guide is for Bangladeshi pilgrims deciding whether to travel for Ramadan 1448 — expected 8 February to 8 March 2027 [1] — whether to chase an I'tikaf place in the Two Holy Mosques, and how to plan a budget without a price list that does not exist. The Prophet Muhammad (PBUH) said: "Perform Umrah when Ramadan comes, for Umrah in Ramadan is equal to Hajj (in reward)" — or words to that effect [6].
 
-Quick Answer — Ramadan 1448 begins Monday 8 February 2027 on Saudi Arabia's official Umm al-Qura calendar, with the religious start confirmed by moon sighting on the evening of 29 Sha'ban (a day either way) [1]. Official I'tikaf registration is online-only, free and capacity-limited through the General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque [2][3]. No authority publishes Ramadan hotel prices, so treat every BDT figure you see as unverified until it matches a dated quote in your name — this guide publishes dates, rules and process, not savings percentages.
+Quick Answer — Checked 19 October 2026: on the Umm al-Qura calendar, 1 Ramadan 1448 is Monday 8 February 2027 and 1 Shawwal is Tuesday 9 March 2027, both subject to the official moon sighting [1][2]. The Ministry of Hajj and Umrah's 1448 season calendar closes Umrah visa issuance on 1 Shawwal (9 March 2027), the last entry on 15 Shawwal (23 March 2027) and the last departure on 30 Shawwal (7 April 2027) [2]. Official I'tikaf registration is a capacity-limited permit service of the General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque, and its published conditions have been aimed at citizens and residents holding a valid residency permit — not at visitors on an Umrah visa [3][4]. Nothing for 1448 has been announced yet, and nothing about it should be paid for in advance.
 
-1. WHEN IS RAMADAN UMRAH 2026–2027, AND WHEN SHOULD I BOOK?
-- The calendar: 1 Ramadan 1448 falls on Monday 8 February 2027 and the Umm al-Qura calendar gives the month 29 days, putting Eid al-Fitr on 9 March 2027 — both subject to the official moon-sighting announcement [1].
-- The contested window: the last ten nights begin with the night of 21 Ramadan. On that calendar 21 Ramadan falls on 28 February 2027, so that night starts at sunset on 27 February [1]. Inventory for the final Ashra and Eid is the tightest of the whole Umrah year — decide that leg first if you need it.
-- The entry window: Umrah visa issuance, entry and departure dates for each season are set by the Ministry of Hajj and Umrah's season calendar; for 1448H that window runs from the season opening through the published final visa, entry and exit dates (checked 17 October 2026 — season-bound, re-check the current notice before you pay) [4].
-- Book in that order: a dated flight quote first, then hotels against the season window, then the train.
+1. WHEN IS RAMADAN 1448, AND WHAT ARE THE SEASON DEADLINES?
+- Start and end: 1 Ramadan 1448 falls on Monday 8 February 2027 on the Umm al-Qura calendar, and 1 Shawwal 1448 is dated Tuesday 9 March 2027 — the Ministry itself uses that date for the end of the Umrah season. Both remain subject to the sighting announcement, so keep a day either way [1][2].
+- The last ten nights: they begin with the night of 21 Ramadan, which starts at sunset on Saturday 27 February 2027 on this calendar. If your trip is built around the final Ashra, that sunset — not 1 Ramadan — is the date your flights and hotel nights have to fit [1].
+- The visa cut-off is the trap: Umrah visa issuance for the 1448 season ends on 9 March 2027, the day Eid is expected. A decision taken "after Eid" cannot produce a new Umrah visa for this season at all [2].
+- The entry cut-off: pilgrims must enter the Kingdom by 23 March 2027, and every Umrah pilgrim must have departed by 7 April 2027 [2].
+- The season opened on 31 May 2026, with Makkah entry and Nusuk Umrah permits from 1 June 2026, so the window has been running for months already [2].
 
-2. WHAT DOES A RAMADAN UMRAH FROM BANGLADESH ACTUALLY COST?
-There is no official Ramadan price list and no authority that certifies a package price. We removed the BDT tables this article used to carry: none of them could be verified against a dated, same-basis source basket, and repeating them would be guessing. Here is what you can plan around instead:
-- What is fixed: your own costs at home (passport, endorsements, flights you can quote on the day) and every official fee a government or carrier publishes for your booking.
-- What floats: Makkah hotel and package prices are set by sellers per date, per room and per package — the first twenty nights and the final Ashra are sold as different products, and only a dated quote tells you which number applies to you. The DIY Umrah guide publishes this site's only dated planning range (BDT 1,16,000–1,32,000 per person, standard 10-day, four-sharing basis, unre-priced since its 14 October 2026 approval) as a non-Ramadan baseline; Ramadan quotes come on top of that shape and must be re-quoted — check the live guide before relying on that baseline.
-- Three levers that actually move your total: travel dates (first twenty nights versus final Ashra), trip length, and routing (Madinah first versus Makkah direct). Compare live flight quotes before any hotel money changes hands, and use our DIY portal only as an illustrative planner — never as a quote.
+Traveller check (ramadanDeadline): Put the three Ministry dates — 9 March for visa issuance, 23 March for entry, 7 April for departure — into your own calendar before you compare any package. A seller who quotes you a Ramadan trip that starts after 23 March is selling something the season calendar does not allow. Confirm every date against the current calendar on haj.gov.sa before a non-refundable payment, because seasons are re-issued.
 
-3. HOW TO REGISTER FOR OFFICIAL I'TIKAF IN MAKKAH AND MADINAH
-The I'tikaf permit for the last ten days of Ramadan in the Two Holy Mosques is issued by the General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque through its electronic service [2]. What last season actually looked like (dated precedent, not a promise for next season): registration opened Friday 3 Ramadan 1447H — 20 February 2026 — at 11:00 a.m. Saudi time through eservices.alharamain.gov.sa or the Nafath platform; I'tikaf ran from 20 Ramadan to the end of 30 Ramadan under the approved organizational plan; applications were reviewed against capacity and successful applicants were notified by SMS [3].
-For Ramadan 1448 the Authority announces dates annually through its official accounts [2] — as of 17 October 2026 that announcement has not been made, so do not plan around last year's opening day. Read the current conditions on the portal when it opens: eligibility, required status and documents are set by the Authority for that season.
+2. WHAT IS AN OFFICIAL I'TIKAF PERMIT, AND WHO HAS ACTUALLY BEEN ELIGIBLE?
+The Authority's e-service takes applications for a permit to stay in the Two Holy Mosques during the last ten days of Ramadan [3][8]. It is not a hotel booking, not a package add-on and not a ticket you can buy: applicants choose the mosque, accept conditions after an awareness brief, and are then reviewed against available capacity [3][4].
 
-4. SUHOOR, IFTAR AND TAWAF IN THE CROWDS
-- Agree a family meeting point and a fallback before you enter the Haram — the courtyards after Taraweeh are where groups get separated.
-- Schedule your Tawaf for after Fajr or after Isha/Taraweeh rather than the midday sun while you are fasting; less heat, shorter waits, safer pacing.
-- For iftar, eat at your hotel or at mosque iftar services where they are offered, and arrive well before Maghrib if you want a place in the spread.
-- Keep a digital copy of your passport and visa, and save the hotel's address in Arabic for taxi drivers.
+The published conditions matter more than the process. When the Authority described the service in 2025, it said permits were for applicants at least 18 years old who were "either citizens or residents in the Kingdom holding a valid residency permit", that permits were free of charge, and that the service was available in Arabic, English and Urdu [4]. The 2026 announcement routed identity through Nafath "for citizens and residents" and did not announce a visitor route [3][5]. Nothing in the two announcements promises a place to someone arriving on an Umrah visa.
 
-5. A CALENDAR SHAPE THAT KEEPS YOUR UMRAH INSIDE RAMADAN
-If you want your Umrah performed inside Ramadan without anchoring the whole trip on the final Ashra, one routing pattern works on any budget: fly into Madinah in late Sha'ban, perform Umrah once Ramadan begins, then continue to Makkah. The Haramain high-speed railway links Madinah and Makkah in about two and a half hours, booked only through the official Saudi Railways portal (sar.hhr.sa) [6]. This is a routing pattern, not a savings promise — we publish no percentage because we have not verified a same-basis price comparison. Ask every seller for a dated, itemized quote (visa, hotel, transport, meals) and compare like for like.
+For a Bangladeshi household that means planning on the honest assumption: you can pray, perform Tawaf and spend the night in the Haram as a pilgrim, but an official I'tikaf place is a separate, residency-oriented service, and it may simply not be open to you. Check the current conditions on the Authority's portal for 1448 rather than trusting a 2026 precedent, and take any religious question about the validity or scope of your own I'tikaf to a qualified scholar [8].
 
-6. BEFORE YOU PAY: THE CHECKLIST
-- Dated quote in writing with inclusions named; no deal you cannot re-check the next day.
-- Season window verified against the current Ministry calendar before any non-refundable payment [4].
-- I'tikaf dates watched on the Authority's official channels the moment Ramadan approaches [2][3].
-- Passport validity, visa channel and document checklist confirmed in the DIY guide (linked below).
-- References checked 17 October 2026. Prices, permits and timetables change every season — re-check every source beside every number.`,
-  "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": `For Bangladeshi pilgrims embarking on Umrah or Hajj, entering the sacred state of Ihram before crossing the designated geographic boundary (Miqat) is an obligatory rite under Islamic jurisprudence and Saudi Ministry of Hajj & Umrah directives. Because King Abdulaziz International Airport (JED) in Jeddah lies inside the perimeter of the Miqats, pilgrims landing in Jeddah cannot postpone their Ihram until reaching the airport terminal. Understanding your flight routing—whether flying non-stop from Dhaka, transiting through Gulf hubs, or landing in Madinah first—determines exactly when and where to put on your Ihram garments and formulate your Niyyah. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidance, GACA flight operation notices, and established Sunnah principles.
+Traveller check (ramadanItikaf): Do not buy a "guaranteed I'tikaf place" from any agent. The permit is applied for by the individual through the Authority's own service, is reviewed against capacity, and the published conditions have been tied to citizens and residents. Nothing this page says changes your right to worship in the Haram; it only refuses to promise you a reserved place.
 
-1. Geographic and Aerial Miqat Boundaries for Flights from Bangladesh
-The Prophet Muhammad (peace be upon him) designated specific geographical boundary points around Makkah for entering Ihram:
-- **Qarn al-Manazil (As-Sayl al-Kabir):** The designated Miqat for travelers arriving from the east and central regions. Flights flying direct from Hazrat Shahjalal International Airport (DAC) across central Arabia or transiting via Riyadh, Dammam, Dubai, Sharjah, Doha, Bahrain, or Kuwait typically cross the aerial projection of Qarn al-Manazil approximately 30 to 45 minutes prior to touchdown at Jeddah [1][2].
-- **Yalamlam (As-Sa'diyyah):** The designated Miqat for travelers approaching from the south (Yemen and southern oceanic corridors). Certain flight paths, such as those routing via Muscat or southern Oman airspace, may cross the aerial alignment of Yalamlam prior to descent into Jeddah [1][2].
-- **Dhul Hulayfah (Abyar Ali):** The designated Miqat for residents of Madinah and those departing Madinah towards Makkah. It is located approximately 11 kilometers outside Madinah city center and is used when travelling overland or via the Haramain High-Speed Train towards Makkah [1][3].
+3. HOW REGISTRATION WORKED IN 1447 — AND WHAT TO WATCH FOR 1448
+The dated precedent, not a promise: on 2 Ramadan 1447H (19 February 2026) the Authority announced that registration would open the next day, Friday 3 Ramadan (20 February 2026) at 11:00 a.m. Saudi time. Registration ran through eservices.alharamain.gov.sa by logging in or creating an account, or through Nafath for citizens and residents. Applicants selected the location in either mosque, agreed to the terms, completed the details and submitted; applications were reviewed according to available capacity and successful applicants were told by text message with nomination details. I'tikaf itself ran from 20 Ramadan to the end of the month, with a parallel announcement for the Prophet's Mosque in Madinah [3][5][8].
 
-2. Scenario A: Direct Non-Stop Flights from Dhaka to Jeddah (Biman or Saudia)
-When flying non-stop from Dhaka (DAC) directly to Jeddah (JED) with the intention of performing Umrah:
-- **Step 1 — Put on Ihram Garments in Dhaka Before Boarding:** Changing into unstitched sheets inside an aircraft lavatory during flight is cramped and physically challenging. It is recommended to perform Ghusl (ritual bath) at home in Dhaka or use the prayer rooms at Dhaka Airport Terminal 1/2 or Ashkona Hajj Camp after check-in. Put on the two unstitched white towels (Izar and Rida) for men or modest attire for women before boarding the flight [1]. Keep footwear accessible.
-- **Step 2 — Wait for the In-Flight Miqat Announcement to Formulate Niyyah:** Putting on the physical Ihram clothing does not initiate the sacred state of Ihram. You remain in your normal state until you verbally state your intention (Niyyah) and begin the Talbiyah. Approximately 30 to 45 minutes before landing at King Abdulaziz International Airport, the flight crew on Biman or Saudia will announce in Bengali, English, and Arabic that the aircraft is approaching the Miqat [1]. At that time, uncover your head (for male pilgrims), make your intention (**"Labbayk Allahumma Umrah"**), and recite the Talbiyah (**"Labbayk Allahumma Labbayk..."**) [1].
+For 1448 there is no announcement yet as of 19 October 2026, and that is normal rather than a delay: the 1447 notice appeared one day before registration opened, not months ahead. So there is nothing legitimate to "pre-book" in October, and no reason to pay an intermediary to watch the page for you. Watch the Authority's official channels as Ramadan approaches, and read the conditions that season publishes [3][4].
 
-3. Scenario B: One-Stop Connecting Flights via Gulf Transit Hubs
-When flying on connecting flights via Gulf hubs (such as Air Arabia via Sharjah, flydubai or Emirates via Dubai, Qatar Airways via Doha, Gulf Air via Bahrain, SalamAir via Muscat, or Kuwait Airways):
-- **Step 1 — Fly the First Leg in Comfortable Everyday Clothing:** Wear normal modest clothing for the Dhaka to transit hub leg. Keep your clean Ihram sheets, Ihram money belt, and supportive footwear inside your 7 kg carry-on cabin bag; never pack your Ihram essentials in your checked hold baggage [1].
-- **Step 2 — Change into Ihram During Your Airport Layover:** Major transit terminals across Sharjah, Dubai, Doha, Muscat, and Bahrain feature dedicated airport prayer rooms (Musalla) equipped with ablution and changing facilities. Change into your Ihram garments comfortably during your layover before boarding the connecting flight to Jeddah [1].
-- **Step 3 — Formulate Niyyah on the Connecting Flight:** Once airborne on the second leg heading towards Jeddah, formulate your intention and recite Talbiyah when the captain announces the Miqat or roughly 30 minutes before arrival [1][2].
+Two permits are easy to confuse. The Nusuk Umrah permit lets you enter Makkah and perform Umrah; the I'tikaf permit is a separate application to stay in the mosque in the last ten days. Neither guarantees the other [2][8].
 
-4. Scenario C: Flights Landing in Madinah First (Prince Mohammad Bin Abdulaziz Airport - MED)
-If your itinerary flies from Dhaka into Madinah first, the operational and religious sequence is substantially simplified:
-- **No Ihram Required on the Flight:** Because Madinah lies outside the sacred boundary (Haram) of Makkah, you travel from Dhaka to Madinah in your normal everyday clothing [1]. You do not wear Ihram garments on the plane and you do not make Niyyah during flight descent into MED.
-- **Enter Ihram in Madinah Before Departing to Makkah:** After spending your scheduled days praying in Masjid an-Nabawi, perform Ghusl and put on your Ihram garments at your Madinah hotel on the day you depart for Makkah. If traveling by road, stop at Miqat Dhul Hulayfah (Masjid Abyar Ali) to pray and make Niyyah. If traveling on the Haramain High-Speed Train, formulate your intention and recite Talbiyah as the train departs or passes the Miqat zone outside Madinah [1][3].
+Traveller check (ramadanAnnouncement): Treat any "I'tikaf registration is open for 1448" message you see before the Authority announces it as unverified — including forwarded screenshots. Confirm the date, time and link on the Authority's own service before entering personal details, and never send your passport, OTP or account credentials to anyone offering to register on your behalf.
 
-5. Frequently Asked Questions
-Can I put on my Ihram after landing at Jeddah Airport?
-No. Jeddah is located within the geographic Miqat boundary [1]. If your intention is to perform Umrah directly, you must enter the state of Ihram before the aircraft passes the aerial Miqat line [1][2]. Crossing the Miqat without Ihram requires either returning to a Miqat or offering a compensatory sacrifice (Dam) under classical jurisprudence.
-When does the flight crew announce the Miqat?
-On direct flights from Dhaka or connecting flights from Gulf airports to Jeddah, operating carriers announce the approach to Miqat Qarn al-Manazil or Yalamlam approximately 30 to 45 minutes before scheduled landing [1].
-Does wearing the Ihram cloth alone place you in the sacred state?
-No. Putting on the physical towels or modest garments does not initiate Ihram restrictions. The sacred state commences when you make the formal intention (Niyyah) in your heart, utter the intention verbally, and begin reciting the Talbiyah [1].
-Do I need to wear Ihram if my flight lands in Madinah?
-No. If your ticket flies from Dhaka directly or via transit to Madinah (MED), you do not wear Ihram on the aircraft [1]. You enter Ihram later from Madinah at Miqat Dhul Hulayfah before travelling onward to Makkah [1][3].`,
-  "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": `At the end of your Umrah or Hajj journey, returning smoothly through **Jeddah (JED)** or **Madinah (MED)** departure terminals and clearing **Dhaka Hazrat Shahjalal International Airport (DAC)** customs requires following the official aviation and customs laws of both countries.
+4. WHAT A RAMADAN UMRAH ACTUALLY COSTS
+There is no official Ramadan price list, and no authority certifies a package price. We removed the BDT tables this article used to carry because none of them could be checked against a dated, same-basis source, and repeating them would be guessing. What you can plan around instead:
+- Fixed costs: your own documents and endorsements, flights you can quote for your dates, and every fee a government or carrier publishes for your specific booking.
+- Floating costs: Makkah and Madinah hotel prices are set by sellers per date, per room and per package. The first twenty nights and the final Ashra are different products at different prices, and only a dated quote tells you which number applies to you.
+- A labelled baseline, not a Ramadan price: the DIY Umrah guide publishes this site's only dated planning range (BDT 1,16,000–1,32,000 per person, standard 10-day, four-sharing basis, unre-priced since its 14 October 2026 approval) as a non-Ramadan shape. Ramadan quotes sit on top of that shape and have to be re-quoted for your dates.
+- The three levers that actually move the total: which ten days you travel, how long you stay, and whether you land in Madinah or Jeddah first.
 
-1. WHAT ARE THE OFFICIAL GACA RULES FOR CARRYING ZAMZAM WATER FROM JEDDAH OR MADINAH AIRPORT?
-According to the **Saudi General Authority of Civil Aviation (gaca.gov.sa)** and the **King Abdullah bin Abdulaziz Zamzam Water Project**:
-Rule 1: Strict Ban on Loose Bottles Inside Checked Suitcases:
-- Never place plastic bottles or gallons of Zamzam water inside your checked-in suitcases! High-speed airport X-ray scanners detect liquid containers inside luggage and automatically divert your bag off the conveyor belt.
-Rule 2: Buy Only the Official 5-Liter Sealed Zamzam Carton at the Airport Kiosk:
-- Present your passport and **Umrah e-Visa / Nusuk App Permit** at the official **Zamzam Sales Kiosk** located just outside the Departure Hall of Jeddah Terminal 1 (Gate B/C outer plaza) or Madinah Airport.
-- **Allowance & Official Price:** Strictly **1 sealed 5-liter box per pilgrim** costing **48 SAR (~BDT 620)** via the official Nusuk app or airport kiosks, payable by card or cash.
-- **Airline Baggage Allowance:** Most airlines flying pilgrims home from Saudi Arabia allow one sealed 5-litre Zamzam can per passenger. **Check your airline's current Zamzam policy at check-in**—some carriers include it in your checked baggage allowance, while others may waive the weight. Label the carton clearly with your name, flight number, and mobile number in permanent marker.
+Traveller check (ramadanBudget): Ask for a dated, itemised quote — visa, hotel nights, transport, meals, and what is excluded — and compare two quotes on the same dates before paying. A per-person "Ramadan discount" with no date and no room type is not a price you can verify, and this page publishes no savings percentage because none has been established.
 
-2. HOW MANY KILOGRAMS OF MADINAH AJWA & SUKKARI DATES CAN YOU BRING TO BANGLADESH?
-Buying dates from the **Madinah Central Date Market (Souq Al-Tamr, 1 km south of Masjid an-Nabawi)** or Al-Kaaki wholesale shops saves 40% compared to hotel gift shops:
-- **Realistic 2026 Date Prices in Madinah:**
-  • Grade-A Jumbo Ajwa Dates: **SAR 35 – SAR 50 per kg (~BDT 1,150 – 1,620/kg)**.
-  • Medium Ajwa Dates: **SAR 22 – SAR 30 per kg (~BDT 720 – 980/kg)**.
-  • Safawi (Kalmi) & Sukkari Rutab Dates: **SAR 12 – SAR 20 per kg (~BDT 390 – 650/kg)**.
-- **Packing & Customs Rule:** Pack dates in 1kg or 2kg vacuum-sealed packets inside your regular 23kg checked suitcases (not in cabin hand-carry if syrupy/wet). Bangladesh Customs (**nbr.gov.bd**) permits up to **5 kg to 10 kg of dates per passenger** for personal family consumption duty-free within your airline baggage weight limit.
+5. SUHOOR, IFTAR AND TAWAF IN THE CROWDS
+- Agree a family meeting point and a fallback outside the Haram before you separate; the courtyards after Taraweeh are where groups lose each other.
+- Move Tawaf to after Fajr or after Isha and Taraweeh rather than the middle of a fasting day, and keep the pace you can actually sustain.
+- For iftar, eat at your hotel or at the mosque services where they are offered, and arrive well before Maghrib if you want a place at the spread.
+- Carry a digital copy of your passport and visa, save the hotel address in Arabic, and keep the group's phone numbers written down as well as in a phone.
+- If anyone in the family has a medical condition, the pacing questions belong with their own clinician before the trip, not with a travel article.
 
-3. WHAT IS THE OFFICIAL BANGLADESH NBR CUSTOMS RULE FOR GOLD JEWELRY & ELECTRONICS AT DHAKA AIRPORT?
-Under the updated **Bangladesh National Board of Revenue (NBR - nbr.gov.bd) Passenger (Non-Tourist) Baggage Rules**:
-- **22K / 21K Gold Ornaments (Jewelry):** An adult passenger arriving at Dhaka Airport (DAC) may bring up to **100 grams (approx. 8.57 Bhori) of gold ornaments** (not exceeding 12 pieces of a single item type) **duty-free** for personal/family use, as per official Bangladesh Customs baggage rules.
-- **Gold Bars / Bullion:** Strictly regulated; requires formal declaration at the Dhaka Customs Red Channel and payment of statutory customs duty per Bhori (11.664g), subject to maximum once-a-year passenger frequency limits.
-- **Saudi VAT Refund (15% Tax-Free ZATCA):** Always ask licensed Makkah/Madinah gold shops for an official digital QR invoice.`,
-  "bangladeshi-halal-food-guide-makkah-madinah-budget-meals": `Every restaurant in Makkah and Madinah is 100% Halal by law under **Saudi Food and Drug Authority (SFDA - sfda.gov.sa)** and municipal hygiene inspections. However, for Bangladeshi pilgrims—especially seniors over 60 with diabetes or sensitive stomachs—finding warm, lightly spiced **Desi rice, daal, fish, and vegetable bhaji** near the Haram makes all the difference.
+6. A ROUTING SHAPE THAT PUTS UMRAH INSIDE RAMADAN
+If the point is to perform Umrah inside Ramadan without anchoring everything to the last ten nights, one pattern works on most budgets: fly to Madinah in Sha'ban, wait for the month to begin, then travel to Makkah in Ihram and perform Umrah when you arrive. The Ihram for that leg is entered at Dhul Hulayfah before the journey, not in Makkah — our Ihram and Miqat guide covers the route rule in detail.
 
-1. WHERE TO FIND AUTHENTIC BANGLADESHI & BENGALI RESTAURANTS IN MAKKAH?
-You do not need to take a taxi to find Bangladeshi food in Makkah. Walk 5 to 8 minutes from the Southern/Western courtyard of Masjid al-Haram into these three neighborhoods:
-Zone 1: Ibrahim Al Khalil Road & Misflah (400m to 800m South-West of King Fahd Gate):
-- Known affectionately by pilgrims as the **"Bangla Bazar of Makkah"**, the side lanes behind Ibrahim Al Khalil Street host dozens of Bangladeshi-run and Pakistani-run hotels and dining halls (such as **Dhaka Restaurant, Chittagong Hotel, Sonargaon, and Al-Madinah Bangla**) where staff speak fluent Bangla and Sylheti/Chittagonian!
-- **Menu & Price:** Steaming Miniket/Basmati rice + thick daal + Alu/Begun Bharta + Rui/Telapia/Hilsha fish or Chicken/Beef curry costs just **SAR 12 to SAR 18 (~BDT 390 – BDT 580)** per plate.
-Zone 2: Lower Ajyad Street & Bir Balila Alleys (East of King Abdulaziz Gate):
-- Right behind the Safwah Royale Orchid and Clock Tower food courts, the side alleys of Ajyad offer fresh parathas, daal fry, omelette, and milk tea (Doodh Cha / Karak) after Fajr for **SAR 5 to SAR 8 (~BDT 165 – BDT 260)**.
-Zone 3: Clock Tower (Abraj Al Bait) & Jabal Omar Food Courts (Inside AC Malls):
-- Located on Levels P3/P4 of the Clock Tower and inside Souq Al Khalil (Jabal Omar), offering clean family seating with Turkish Mandi, Kabsa, Shawarma, and Indian/Pakistani thalis for **SAR 20 to SAR 35 (~BDT 650 – BDT 1,140)**.
+Two timing checks make or break this plan. First, the Umrah visa must be issued before 9 March 2027 and you must enter the Kingdom by 23 March 2027, so a Sha'ban arrival has to sit inside that window [2]. Second, confirm the Nusuk Umrah permit before you head for the Haram; the visa alone is not the permit [2].
 
-2. WHERE ARE THE CLOSEST AL BAIK BRANCHES NEAR MASJID AL-HARAM & MASJID AN-NABAWI?
-Almost every Bangladeshi traveler wants to taste Saudi Arabia's famous **Al Baik** crispy broast chicken and garlic sauce (SAR 17–21 / ~BDT 550–680 for a 4-piece meal):
-- **Makkah Al Baik Locations:**
-  1. **Jabal Omar Mall (Ibrahim Al Khalil side):** Express branch (serves Chicken Nuggets, Fillet Sandwiches, and Shrimp—shortest queue!).
-  2. **Abraj Al Bait / Clock Tower Basement:** Very close to Haram gates (expect 20–35 minute queues after Isha).
-  3. **Aziziyah & Kudai Drive-Thru Branches:** Full bone-in 4-piece and 8-piece family Broast menu.
-- **Madinah Al Baik Locations:**
-  1. **Taiba Commercial Center / Markazia North-West (200m from Haram courtyard):** Huge two-level branch right beside the hotels!
+For the Madinah–Makkah leg, the Haramain High-Speed Railway publishes its own timetable and sells through its own portal, with separate accessibility terms for wheelchair users [7]. Check the journey time and the date you actually need on that timetable rather than relying on a remembered figure, and book the leg you can afford to miss if the first choice sells out.
 
-3. WHERE TO EAT BANGLADESHI FOOD IN MADINAH (MARKAZIA SOUTH & BENGALEE LANE)?
-- Walk 250 meters from **Gates 5 to 9 (West/South-West side of Masjid an-Nabawi, near Al-Ghamamah Mosque)** into the old market lanes, where several Bangladeshi and Pakistani restaurants serve fresh rice, fish curry, khichuri, and mutton rezala for **SAR 12 to SAR 20**.
+Traveller check (ramadanRoute): Before booking a Madinah-first arrival, confirm three things in writing: your visa issue date, your entry date, and your Nusuk Umrah permit. Then confirm where the Ihram is entered for the Makkah leg. A cheap Sha'ban flight is worthless if the visa cannot be issued in time or the permit is not in place.
 
-4. DAILY FOOD BUDGET & ELDERLY DIET TIPS FOR A 10-DAY UMRAH TRIP
-- **Budget Desi Dining + Tamimi/BinDawood Supermarket Breakfast:** **SAR 30 – SAR 40 per person/day (~BDT 980 – BDT 1,300/day)**.
-- **Smart Family Grocery Hack:** Visit **BinDawood Supermarket** (located inside Clock Tower Makkah, Jabal Omar, and Taiba Center Madinah) to buy fresh bananas, Laban (yogurt drink), oats, whole-wheat bread, honey, and bottled water at standard Saudi supermarket prices!`,
-  "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": `When Bangladeshi families travel for DIY Umrah or Hajj, dedicating one morning in Makkah, one morning in Madinah, and an optional day trip to Taif or the Battlefield of Badr transforms the journey into a lifelong Islamic history lesson for your children and parents.
+7. BEFORE YOU PAY: THE CHECKLIST
+- A dated, itemised quote in writing, with inclusions and exclusions named.
+- The three season dates verified against the current Ministry calendar, not a screenshot [2].
+- The Nusuk Umrah permit confirmed for the dates you will actually be in Makkah [2].
+- An I'tikaf expectation you can defend: the Authority's conditions, not an agent's promise [3][4].
+- Passport validity, visa channel and document checks confirmed in the DIY guide before any non-refundable payment.
+- Sources on this page checked 19 October 2026. Dates, permits and prices change every season — re-check each source beside each number.
 
-1. WHAT ARE THE MUST-VISIT HISTORICAL ZIYARAH SITES IN MAKKAH & HOW MUCH DOES A PRIVATE CAR COST?
-Always start your Makkah Ziyarah immediately after Fajr prayer (**6:00 AM to 9:30 AM**) before the desert sun peaks:
-Route 1: The Eastern Seerah & Hajj Ritual Trail (3 Hours):
-- **Jabal al-Noor & Hira Cultural District (Revelation Exhibition):** Where Prophet Muhammad (PBUH) received the first revelation of Surah Al-Alaq inside Cave Hira. Under the **Royal Commission for Makkah City (rcmc.gov.sa)** upgrade, families can visit the air-conditioned **Revelation Exhibition Museum** at the base of Jabal al-Noor and take the paved mountain path or shuttle up toward the cave without climbing dangerous loose rocks.
-- **Jabal Thawr (Cave of Hijrah):** South of Makkah, where the Prophet (PBUH) and Abu Bakr As-Siddiq (RA) sheltered for 3 nights during the migration to Madinah.
-- **Mina (Tent City & Jamarat Bridge), Muzdalifah & Plains of Arafat (Jabal al-Rahmah):** Walk up the gentle steps of Mount of Mercy at Arafat and see Masjid Namirah.
-- **Jannat al-Mu'alla Cemetery & Masjid al-Jinn:** Located 1.2 km north of Masjid al-Haram (walkable from Haram courtyard), housing the resting place of Ummul Mu'mineen Khadijah (RA).
-- **Official 2026 Private Makkah Ziyarah Car Rates (3–3.5 Hours):**
-  • **4-Seater Sedan (Camry / Sonata):** **SAR 150 – SAR 200 (~BDT 4,900 – BDT 6,500)** for the entire car.
-  • **7-Seater Family Van (Hyundai Staria / H1 / Toyota HiAce):** **SAR 250 – SAR 320 (~BDT 8,100 – BDT 10,400)**.
+8. FREQUENTLY ASKED QUESTIONS
+When does Ramadan 1448 start in Saudi Arabia?
+Monday 8 February 2027 on the Umm al-Qura calendar, with 1 Shawwal dated 9 March 2027. Both depend on the official moon sighting, so allow a day either way. [1][2]
+Can I get an official I'tikaf place while I am in Saudi Arabia on an Umrah visa?
+Do not plan on it. The Authority's published conditions for the permit service have been aimed at citizens and residents holding a valid residency permit, and the 1447 announcement did not announce a visitor route. Confirm the 1448 conditions on the Authority's portal, and remember you can still pray in the Haram without a permit. [3][4][8]
+When does I'tikaf registration open for 1448?
+It has not been announced as of 19 October 2026. In 1447 the notice was published on 2 Ramadan and registration opened the next day at 11:00 a.m., so expect days of notice rather than months. [3]
+What is the last date to get an Umrah visa for this season?
+Visa issuance ends on 1 Shawwal 1448, 9 March 2027. Entry ends on 15 Shawwal, 23 March 2027, and departure on 30 Shawwal, 7 April 2027. [2]
+Do I need a Nusuk permit as well as the visa?
+Yes. The visa allows entry; the Nusuk Umrah permit is what allows you to enter Makkah and perform Umrah, and it is separate from any I'tikaf application. [2][8]
+Is Ramadan Umrah really equal to Hajj?
+The narration in Sahih al-Bukhari reports the Prophet (PBUH) telling an Ansari woman to perform Umrah when Ramadan comes, "for Umrah in Ramadan is equal to Hajj (in reward)" — or words to that effect. It is a reported virtue, not a booking claim, and questions about your own situation belong with a qualified scholar. [6]`,
+  "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": `This guide is for Bangladeshi pilgrims deciding when to enter Ihram on the way to Makkah — flying direct from Dhaka to Jeddah, connecting through a Gulf hub, or landing in Madinah first. It separates three things that are often blended together: what the published boundary rule requires, what your particular route actually does, and what is a personal religious question you should take to a qualified scholar. It is not a fatwa, a flight-tracking tool or an inspected airport procedure.
 
-2. WHAT ARE THE AUTHENTIC MADINAH ZIYARAH SITES & THE MASJID QUBA UMRAH REWARD?
-In Madinah, historical sites are closer together, well-preserved by the **Madinah Region Development Authority (mda.gov.sa)**, and completely flat for elderly parents in wheelchairs:
-Rule 1: Perform Wudu at Your Hotel & Pray 2 Rakah in Masjid Quba (Reward of 1 Full Umrah!):
-- In an authentic Hadith (Sunan Ibn Majah / Sahih Muslim), the Prophet (PBUH) said: *"Whoever purifies himself (performs Wudu) in his house, then comes to the Mosque of Quba and prays in it, he will have a reward like that of an Umrah."*
-- You can either include Masjid Quba in your morning Ziyarah taxi or walk along the beautiful **3 km pedestrian Quba Walkway** from Masjid an-Nabawi!
-Rule 2: Mount Uhud, Shuhada Uhud & Archers' Hill (Jabal al-Rumat):
-- Visit the enclosure of the **70 Martyrs of Uhud** including Sayyiduna Hamza ibn Abdul-Muttalib (RA), climb the small Archers' Mound, and pray in the grand **Sayyid al-Shuhada Mosque**.
-Rule 3: Masjid al-Qiblatain (Mosque of the Two Qiblahs) & Sab'a Masajid (Battle of Khandaq / Trench):
-- Visit the historic site where the Qiblah command shifted from Masjid al-Aqsa to the Kaaba in Makkah, followed by the Seven Mosques at the site of the Battle of the Trench.
-- **Official 2026 Private Madinah Ziyarah Car Rates (2.5–3 Hours):**
-  • **4-Seater Sedan:** **SAR 120 – SAR 160 (~BDT 3,900 – BDT 5,200)**.
-  • **7-Seater Family Van:** **SAR 200 – SAR 260 (~BDT 6,500 – BDT 8,450)**.
-  • **Madinah Sightseeing Hop-On Hop-Off Bus:** **SAR 80/person** for a 24-hour audio-guided pass stopping at 12 official landmarks.
+Quick Answer — Checked 19 October 2026: the Ministry of Hajj and Umrah states that pilgrims arriving by air must not pass the Miqat, or the point parallel to it, without entering Ihram, and that King Abdulaziz International Airport in Jeddah is "neither a Miqat nor a place for entering Ihram." Entering Ihram means intending Umrah or Hajj and beginning the Talbiyah — not merely wearing the cloth. Which of the five points applies depends on the route your flight actually flies, and the Ministry says airlines heading to Jeddah usually announce when the aircraft is aligned with a Miqat. Treat the announcement as help, not as the requirement itself. [1][2][3]
 
-3. HOW TO PLAN A DAY TRIP TO TAIF OR THE BATTLEFIELD OF BADR?
-Option 1: Makkah to Taif Highland Day Trip (6 to 7 Hours Roundtrip):
-- Located 90 km east of Makkah up the scenic **Al Hada Mountain Ring Road** (1,800m elevation with cool 18°C–24°C weather), a Taif day trip covers **Masjid Abdullah ibn Abbas (RA)**, **Masjid Addas**, **Miqat Qarn al-Manazil (Al-Sayl al-Kabir)**, traditional Taif Rose Water factories, and the **Al Hada Telefric Cable Car**.
-- **Private Car Rate (Makkah -> Taif -> Makkah):** **SAR 350 – SAR 450 (~BDT 11,400 – BDT 14,600)** for a full-day private sedan, or **SAR 550 – SAR 650** for a 7-seater family van.
-- **Crucial Miqat Warning for Taif Day-Trippers:** Because Taif lies outside the Makkah Haram & Miqat boundary, when driving back from Taif into Makkah, pilgrims who wish to perform an additional Umrah can enter Ihram at **Miqat Qarn al-Manazil (Al-Sayl al-Kabir)**!
-Option 2: Madinah to Badr Battlefield Stopover (150 km South-West of Madinah):
-- Visit **Masjid al-Arish** and the Martyrs' Enclosure of the **Battle of Badr (17 Ramadan, 2 AH)** either as a 4-hour roundtrip from Madinah (**SAR 280 – SAR 350**) or as a 1-hour stopover while traveling by private car from Madinah to Makkah.`,
+1. WHAT MUST BE TRUE BEFORE THE AIRCRAFT REACHES THE MIQAT?
+The rule is stated by the Ministry, not inferred from a map: a pilgrim living beyond the boundary points who arrives by air "must not bypass the Miqat (or the point parallel to it) without entering the state of Ihram." It adds, directly, that Jeddah airport "is neither a Miqat nor a place for entering Ihram." That second sentence is the one that matters for a direct flight: there is no authorised point after landing at which to begin. [1]
+
+The five spatial points named in the sources are Dhul Hulayfah (about 420 km from Makkah, for Madinah and those passing that way), Al-Juhfah (187 km; pilgrims now use Rabigh at 204 km), Qarn al-Manazil or Al-Sail Al-Kabeer (94 km), Yalamlam or As-Sa'diyyah (115 km) and Dhat 'Irq (92 km). Ibn Abbas narrated that the Prophet, peace be upon him, appointed these, and that they apply both to the people of those places and to anyone who passes them intending Hajj or Umrah. [1][3]
+
+Ihram begins with intention and Talbiyah, not with cloth. The Ministry's Ihram guide says it "begins when the Muhrim intends to perform the sacred rites and starts reciting the Talbiyah," and gives the wording the pilgrim declares: "Labbayka Allahumma Umrah." Nusuk's own journey page lists Ihram first, as intention with Talbiyah, and only then the garments. This is why putting on the two white sheets in Dhaka and then beginning the Talbiyah in the air are two different steps. [2][4]
+
+Traveller check (ihramPoint): Before you fly, confirm in writing which route your ticket actually takes and ask the operating carrier about its Miqat announcement practice. The requirement is to be in Ihram before the point parallel to the Miqat, not before a certain minute. If you are unsure, enter Ihram earlier rather than later and take the question to a qualified scholar, not to a blog. This page does not issue a ruling for your journey.
+
+2. WHICH MIQAT APPLIES TO A FLIGHT FROM BANGLADESH?
+The Ministry does not assign a point to a nationality or to a departure city; it assigns them by direction and says the traveller enters from the miqat he passes "or at other places adjacent to and parallel to them on the way, whether by air or land." For an aircraft, the relevant event is the point on your flight path that comes level with one of the five. [1][2]
+
+That is also how the scholarly source used here puts it. Jordan's General Iftaa Department, answering a question about a pilgrim flying to Jeddah, says that assuming Ihram from Jeddah is not permissible because it is within the miqat, but that a pilgrim "may wear the clothes of Ihram at home, or on the plane, and make the intention of Ihram when reaching a place parallel to the Miqat which will be indicated by the pilot, or the guide." It is an attributed position, not a substitute for advice on your own case. [6]
+
+So the practical answer is not a country table. A departure from Dhaka may run level with one point on one routing and a different one on another, depending on the airway and the approach into Jeddah. The identity of that point is a question for the flight deck or the carrier, and the obligation to be in Ihram before it remains yours. [1][2]
+
+The Ministry guide says airlines heading to Jeddah "usually announce when the aircraft is aligned with a Miqat so that the pilgrim can enter Ihram in time." No published carrier page opened for this review promises the wording, the language, the timing or that an announcement will be made at all. Plan as though it may not come. [2]
+
+Traveller check (ihramPersonal): If you already live or work in Jeddah, have performed Umrah before, or are mixing a work trip with a later Umrah, your case may fall under one of the Ministry's other categories rather than the fly-in rule. Put your exact dates and route to a qualified scholar; this page deliberately does not decide it. [1][2]
+
+Traveller check (ihramGarments): Wear or carry the garments so you can act without a lavatory queue, and keep the essentials in your cabin bag, within your carrier's cabin allowance. Wearing the cloth early is not the same as entering Ihram; the intention and Talbiyah are. Decide with your scholar how you will handle any uncertainty about the timing, and do not rely on a crew announcement as your only trigger.
+
+3. FLYING DIRECT FROM DHAKA TO JEDDAH
+A direct flight has one useful property: there is no transit terminal in which to change, so the garment step has to happen before boarding or on board. There is no valid step after landing. [1]
+
+Prepare before the airport where you can. The Ministry guide describes ghusl and fragrance as recommended before entering Ihram, and says the pilgrim should begin after an obligatory or voluntary prayer. Many pilgrims bathe at home or at their hotel and travel to the airport already prepared. If you plan to use a prayer room at Dhaka airport, check what is open and accessible on your date; this review did not inspect the terminal. [2]
+
+Have the garments reachable in the cabin. For men that is the Izar and Rida, with a belt or clips if you want them; white is recommended but not required. Women may wear any clothing that is loose, covering and not ornamental, as the Ministry guide puts it, and the women's guide covers the clothing and prohibition questions in more detail. Keep the garments in your cabin bag rather than the hold, within your carrier's allowance — no fixed kilogram figure is set by the rule. [2]
+
+When the announcement comes, or when you judge you are approaching the point, declare the rite and begin the Talbiyah. The Ministry prints the formula "Labbayka Allahumma Umrah", and the Talbiyah that follows. Men raise the voice; women recite quietly. If no announcement comes and you are unsure, act earlier rather than drifting past the boundary, then settle any question with a scholar. [2]
+
+Once in Ihram, the restrictions apply until the rites are completed. The Ministry guide lists the general prohibitions — sexual relations, contracting marriage, hunting, shaving the head or cutting nails, and perfume — with the additional prohibitions on covering the head and wearing sewn garments for men, and on the niqab and gloves for women. This page does not decide exemptions for illness, medical devices or personal circumstances. [2]
+
+Traveller check (ihramTransit): A direct flight removes the transit question but not the timing question. Confirm your flight is genuinely non-stop rather than a through-service with a stop, keep the garments with you, and decide in advance what you will do if the crew does not announce. Nothing about a boarding pass, a visa or a seat class changes the boundary rule.
+
+4. CONNECTING THROUGH A GULF HUB
+On a connection, the first leg is not yet the pilgrimage leg in the same sense: you are still outside the boundary while flying towards the hub. Many pilgrims therefore travel the first leg in ordinary modest clothing and change during the layover, which also avoids arriving at the hub already bound by the restrictions. [1][2]
+
+Change before you board the flight that will come level with the miqat, not after it lands. That means the layover is the natural preparation window, and the intention itself should be made on the leg that crosses the boundary — not automatically at the hub, which is normally still outside it. Nusuk's Hajj guidance describes the same trigger: a pilgrim on a plane approaching the designated Miqat point by air must make the intention for Ihram. [1][2][5]
+
+Major Gulf terminals generally have prayer and ablution facilities, but this review opened no airport page confirming a private changing room, a shower or a dedicated Ihram area at any specific hub. Treat a comfortable change as something you arrange — a prayer room, a quiet corner, or a family washroom if one is available — rather than a published service you can count on. [2]
+
+Ask at check-in whether the connection is protected and how long the layover is. A tight connection is a practical reason to have entered Ihram before the first departure instead of relying on the hub. Neither choice changes the requirement; they only change where you do the preparation. [1]
+
+Traveller check (ihramTransit): Confirm the layover length, the terminal change and whether your bags are through-checked before you decide where to change. Keep the garments and a small bag with you. If the connection is short or the airport is unfamiliar, prepare before the first flight. A missed connection or a delayed second leg does not create a new place to enter Ihram.
+
+5. LANDING IN MADINAH FIRST, THEN TRAVELLING TO MAKKAH
+If your ticket lands at Prince Mohammad Bin Abdulaziz Airport in Madinah, you are not crossing the boundary on that flight, so there is no Ihram to enter on the aircraft. You travel in ordinary clothing and enter Ihram later, when you leave for Makkah. [1][2]
+
+The point for that departure is Dhul Hulayfah, also called Abyar Ali, which the Ministry places about 420 km from Makkah and describes as the miqat for the people of Madinah and those who pass that way. Wear the garments at your hotel in Madinah, and complete the intention and Talbiyah before your transport reaches the point on the route that is level with Dhul Hulayfah. [1][2]
+
+Do not plan around an announcement. For a road transfer, the driver may or may not say anything; for the Haramain High-Speed Rail, this review found no operator or authority page describing an on-board miqat announcement or a ritual stop. Take the responsibility yourself: agree with the driver, or watch the route, and be in Ihram before the parallel point rather than waiting for a station or a call. [1][2]
+
+The Ministry guide also sets out the position for people who are already inside the boundary. Someone in Makkah enters Ihram for a further Umrah from the nearest place outside the Haram, such as Masjid Aisha; someone between Makkah and the mawaqit enters from his current location; a person who came to Jeddah for work or family and only later decided to perform Umrah enters from where he starts. Those are different situations from a pilgrim flying in with the intention already formed, and personal cases belong with a scholar. [1][2]
+
+Traveller check (ihramMadinah): If Madinah is first, book the Makkah leg with enough margin to change and pray before departure, and confirm with the driver or the rail operator where the route passes the parallel point. Do not assume an on-board announcement, a station stop or a hotel shuttle will handle it. If you are already inside the boundary for another purpose, ask a scholar which of the Ministry's categories applies to you.
+
+6. FREQUENTLY ASKED QUESTIONS
+Can I put on Ihram after landing at Jeddah airport?
+No, not if you flew in intending Umrah or Hajj. The Ministry states that the airport is neither a Miqat nor a place for entering Ihram, so the intention and Talbiyah must come before the aircraft reaches the point parallel to the Miqat. [1]
+Which Miqat applies to my flight from Dhaka?
+The one your actual route comes level with. The Ministry lists five points and applies them by direction, not by nationality, and says the traveller enters from the miqat he passes or a point parallel to it. Ask the operating carrier or the crew which point applies to your flight. [1][2][3]
+How will I know when the aircraft is at the Miqat?
+The Ministry guide says airlines heading to Jeddah usually announce it so pilgrims can enter Ihram in time. No opened carrier page guarantees the announcement, its language or its timing. Prepare so that you can act earlier if you are unsure. [2]
+Does wearing the Ihram cloth put me in Ihram?
+No. The Ministry guide says Ihram begins when the pilgrim intends the rites and starts the Talbiyah; Nusuk's journey page likewise lists intention and Talbiyah as the step, with the garments as preparation. Wearing the cloth early is fine, but it is not the state itself. [2][4]
+Do I need Ihram on a flight that lands in Madinah?
+No. Madinah is not crossed on the way to Makkah on that flight, so you enter Ihram later from Dhul Hulayfah, wearing the garments at your hotel and completing the intention before the route reaches the parallel point. [1][2]
+What happens if I pass the Miqat without entering Ihram?
+The Ministry's page gives two outcomes: a pilgrim who passes it must return to it, and one who assumes Ihram after passing it must offer a Fidyah (compensation). Which applies to your case, and what to do if returning is impossible, is a question for a qualified scholar — this page does not decide it. [1]`,
+  "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": `Coming home from Umrah or Hajj, three things cause almost every customs argument at Dhaka: the Zamzam box, the dates, and the gold. This guide covers exactly those three — what each rule actually says, who publishes it, and where the common advice you were given in Makkah stops being true. It is not legal advice, and no officer is obliged to assess your bag the way this page describes.
+
+Quick Answer — Checked 19 October 2026: one sealed 5-litre bottle of Zamzam per pilgrim, bought at the airport and never packed inside a suitcase; the Madinah airport operator lists it at SAR 12.50 [1]. Bangladesh allows 100 g of gold ornaments and 200 g of silver, no more than 12 pieces of one type, once per calendar year, and one gold bar up to 117 g (10 tola) with Tk 5,000 duty per 11.664 g — declared, or it is seized [4][5]. There is no published kilogram allowance for dates: the test is personal use, and a commercial quantity can be taken [4].
+
+1. THE ZAMZAM BOX: ONE BOTTLE, BOUGHT AT THE AIRPORT, CARRIED SEPARATELY
+The rule is not about how much water you own; it is about which container is allowed on the aircraft. The operator of Madinah airport states that a passenger may buy one 5-litre bottle at the dedicated Zamzam sales point, that a valid passport is required, that each passenger is limited to one bottle per purchase, and that bottles "must be carried separately and are prohibited from being placed in checked baggage" [1]. Saudia's conditions of carriage say the same: the bottle is not permitted inside checked baggage [2].
+
+The Ministry of Hajj and Umrah's guidance, reported in March 2025, adds the purchase side: buy from authorised sales points at the airport, hand the bottle over to be placed on the designated belt, and present a valid Umrah visa or a Nusuk permit [3]. The Madinah operator's own page asks for the passport; treat the visa or permit as the Ministry's condition and the passport as the counter's [1][3].
+
+Do not buy loose bottles in Makkah or Madinah and expect them to fly. Do not decant water into your own bottles, and do not wrap a bottle in clothes inside a suitcase. The accepted item is the factory-sealed container from the King Abdullah bin Abdulaziz Zamzam Water Project, sold at the airport, tagged and loaded apart from your bags [1][2][3].
+
+Traveller check (zamzamBox): Buy the box at the airport on the day of travel, keep the seal intact, and hand it in at the counter rather than packing it. If anyone offers you a cheaper sealed box outside the airport, it is not the item the airline will accept, and you will be the one repacking at the check-in queue.
+
+2. WHAT THE BOX COSTS, AND WHETHER IT EATS INTO YOUR BAGGAGE
+The Madinah operator publishes SAR 12.50 for the 5-litre bottle [1]. Jeddah counters have repeatedly been reported at around SAR 12, but the airport's own counter price governs on the day. A previous version of this page said 48 SAR; that figure belongs to a different product — a 24 × 330 ml carton sold through the Nusuk app for delivery inside the Kingdom — and it is not the price of the pilgrim bottle [1].
+
+Whether the box is free or counted is an airline question, and the answer differs by carrier. Saudia's published conditions allow one 5-litre bottle free of charge for guests travelling from Jeddah or Madinah, counted as part of the allowable checked baggage; extra bottles are treated as excess baggage; and Saudia states it will not compensate a guest if the bottle is lost or delayed, though it will provide an alternative when possible [2]. That is the opposite of the "free extra piece, always" advice that circulates in WhatsApp groups.
+
+For Biman, this review could not find a published Zamzam allowance on the airline's baggage pages. Biman does carry the boxes — a delayed Zamzam delivery on a Madinah–Dhaka flight in October 2026 became a public complaint — but carriage practice is not a published allowance [6]. Ask Biman at check-in, in writing if you can, whether the box is additional to your ticket or counts inside it.
+
+Traveller check (zamzamAirline): Before you buy, confirm two things with the operating carrier: whether the 5-litre box is additional to your checked allowance or inside it, and whether it can be lost without compensation. A 5-litre bottle weighs over 5 kg, so if your carrier counts it, you have that much less for everything else.
+
+3. DATES: THERE IS NO KILOGRAM ALLOWANCE — THERE IS A PERSONAL-USE TEST
+Bangladesh's airport customs guidance is blunt about the dividing line: goods carried by a passenger are exempt from duty "unless considered commercial", and "any quantity of goods brought for commercial purposes will be seized" [4]. Dried dates carry a 25% customs duty when they are assessed as a consignment rather than personal baggage [7]. What does not exist, in anything that could be opened for this review, is a published "5 kg" or "10 kg" per-passenger dates allowance — the figure this page used to print had no source behind it.
+
+In practice that means: a family's own consumption, packed in sealed retail or vacuum packs with the grade and packing date visible, sits inside your personal baggage allowance. Several cartons bought to distribute as gifts across a neighbourhood, or quantities that look like stock for resale, invite the commercial judgement, and with it assessment or seizure [4][7].
+
+Date prices move by grade, shop and season, so this page no longer prints a per-kilogram table that cannot be re-checked. Ask the price per kilogram, look at the packing date, compare two shops rather than trusting a "wholesale price", and remember that the cheapest carton is often last season's stock.
+
+Traveller check (datesAllowance): Keep dates for your household, not for sale, in sealed packs you could open and show. If you are carrying a large quantity as gifts, declare it and expect a question about commercial use — the answer to that question, not the weight, decides the outcome.
+
+4. GOLD: WHAT BANGLADESH ACTUALLY ALLOWS DUTY-FREE
+Dhaka airport's customs page sets out the duty-free list: "100 gram gold ornaments and 200 gram silver ornaments (not more than 12 of the same type of ornaments)", under SRO No. 261-Act/2025/71/Customs of 2 June 2025 [4]. The 2025 baggage rules add two conditions that the old version of this page missed: the allowance is **per calendar year**, regardless of how many trips you make, and the jewellery must be ornaments of 22 carats or below — the definition was tightened so that melted 24-carat bars cannot pass as bangles [5][8].
+
+The bar is separate and stricter. A passenger may bring a maximum of 117 g or 10 tola of gold bar or ingot, once per year, by declaring it and paying Tk 5,000 per 11.664 g — roughly Tk 50,000 for the full 117 g [4]. The airport's page is unambiguous about what follows: any amount above 117 g is confiscated, and carrying gold bar, ingot or other non-ornament gold without declaring it is illegal, with detention and a criminal case following an undeclared find [4].
+
+One more restriction worth knowing before you shop: budget reporting in 2024 excluded passengers under 12 from the gold allowance altogether. Treat that as the reported position and confirm it with the current SRO before a child is listed as the carrier of a family's gold [8].
+
+Traveller check (goldDeclare): Weigh your ornaments before you fly and count pieces of the same type. Below 100 g of ornaments, of 22 carats or less, in fewer than 12 identical pieces, you can use the green channel. Anything else — including any bar — is declared before you leave the customs hall, and an attempted undeclared carry is treated as smuggling, not as a paperwork error.
+
+5. THE 15% VAT REFUND: A REAL SCHEME WITH CONDITIONS MOST PILGRIMS MISS
+Saudi Arabia charges 15% VAT, and since April 2025 non-resident visitors can claim it back on eligible goods bought from participating retailers, through the scheme operator Global Blue [9]. The conditions matter more than the headline: the buyer must be 18 or older and a non-resident, the purchase must reach SAR 500 at one retailer on one day (up to three invoices may be combined), the goods must be unused and in their original packaging, and they must leave the Kingdom within 90 days, validated at an airport before departure [9].
+
+Jewellery is where this goes wrong. A ring you wore through Ramadan is used, not unused, and it fails the scheme regardless of the invoice. Keep the piece boxed, keep the original tax-free form and invoice, and present them at the validation counter before check-in. The Madinah airport operator lists a Global Blue tax-refund desk in the main terminal, so the service is not limited to Jeddah — but confirm the desk is staffed on your departure date and terminal [8][9].
+
+This is a refund of tax you paid, not a discount, and it is not available on food, drink, tobacco, hotels or restaurant bills [9]. Treat any shop that promises an instant 15% off at the till as a shop describing something else.
+
+Traveller check (vatRefund): Decide before you shop whether the item will stay boxed until you fly. If it will be worn, skip the refund form and negotiate the price instead; if it stays boxed, check the SAR 500 minimum, keep every invoice, and confirm the validation counter at your departure airport.
+
+6. PACKING ORDER FOR THE FLIGHT HOME
+- Zamzam: buy at the airport, keep it sealed, hand it over at the counter, never inside a suitcase [1][2].
+- Dates: sealed retail or vacuum packs, personal quantity, packing date visible [4].
+- Gold: ornaments only within the allowance; everything else declared, with the duty ready to pay [4][5].
+- Receipts: keep the tax-free forms and invoices with the goods, not in the checked bag [9].
+- Medicines and liquids: the 100 ml cabin rule still applies to everything except the sealed Zamzam box handled at check-in.
+
+7. THE DHAKA ARRIVAL, IN ORDER
+Land, collect your bags, then decide the channel honestly. If you are inside the ornaments allowance and carrying nothing dutiable, the green channel is the normal route [4]. If you are carrying a bar, more than 100 g of ornaments, or anything you are unsure about, use the red channel and declare before leaving the customs hall — the 2025 rules made an early declaration mandatory rather than optional, and it can also be filed online [5].
+
+Declaring is not a penalty; it is the procedure that makes the duty payable instead of the goods seizable. The expensive mistake is being found with undeclared gold, which the airport's own page describes as a criminal matter rather than a tax adjustment [4].
+
+8. FREQUENTLY ASKED QUESTIONS
+How much Zamzam water can I bring to Bangladesh?
+One factory-sealed 5-litre bottle per pilgrim, bought at an authorised airport sales point and carried separately — never inside checked baggage. The Madinah operator lists it at SAR 12.50 and asks for a passport; the Ministry asks for an Umrah visa or Nusuk permit. [1][3]
+Is the Zamzam box free on top of my baggage?
+It depends on the airline. Saudia allows one 5-litre bottle free of charge from Jeddah or Madinah but counts it inside your checked allowance, charges excess for extras, and does not compensate if it is lost or delayed. Biman publishes no Zamzam allowance that this review could find, so ask at check-in. [2][6]
+How many kilograms of dates can I bring duty-free?
+There is no published per-passenger kilogram allowance. Personal-use quantities inside your baggage allowance are exempt; quantities that look commercial can be seized, and dried dates assessed as a consignment carry 25% duty. [4][7]
+How much gold jewellery is duty-free at Dhaka airport?
+100 g of gold ornaments and 200 g of silver ornaments, no more than 12 pieces of the same type, once per calendar year, and the gold must be ornaments of 22 carats or below. [4][5][8]
+Can I bring a gold bar?
+One bar up to 117 g (10 tola) per year, declared, with Tk 5,000 duty per 11.664 g. Anything above 117 g is confiscated, and undeclared gold is treated as a criminal matter. [4]
+Can I get the 15% Saudi VAT back on gold I buy in Makkah or Madinah?
+Only if the conditions are met: SAR 500 at one retailer, goods unused in original packaging, departure within 90 days, and validation at an airport counter before you fly. Jewellery you wear is used and does not qualify. [8][9]`,
+  "bangladeshi-halal-food-guide-makkah-madinah-budget-meals": `Halal is the easy part of eating in Makkah and Madinah. The hard parts are finding a kitchen that cooks rice, dal and fish the way your parents will actually eat, paying a price you agreed to, and keeping an elderly traveller's stomach settled for ten days. This guide covers those three, and it deliberately prints no per-plate price and names no restaurant: the figures in the previous version of this page could not be re-checked against any openable source, so they are gone rather than replaced with better-sounding guesses.
+
+Quick Answer — Checked 19 October 2026: the Saudi Food and Drug Authority has stated that all food sold in the Kingdom is halal, and alcohol and pork are prohibited imports, so the halal question is settled at the national level [1][2][3]. Cleanliness is not settled by that: municipal health certificates cover food workers in Makkah and Madinah [4], but a certificate is a floor, not an inspection result. The documented South Asian food streets in Makkah are Hijra Road and Ibrahim Khaleel Road in the Misfalah area [6]; Al Baik's own branch list, with map pins, is the only reliable way to pick a branch [7]; and BinDawood's locator lists the supermarket branches near both mosques [9].
+
+1. IS THE FOOD HALAL — AND DOES HALAL ALSO MEAN SAFE?
+The halal question has a clearer answer in Saudi Arabia than almost anywhere else a Bangladeshi family travels. The Saudi Food and Drug Authority has publicly reaffirmed that all food sold in the Kingdom is halal [2], and the Kingdom prohibits the import of alcohol, pork and pork products [3]. You do not need to interrogate a kitchen about whether the meat is halal in the way you might in Bangkok or London.
+
+What that statement does not do is certify the tray of biryani that has been sitting under a lamp since before Maghrib. Municipal authorities issue health certificates for workers in food establishments, and Makkah and Madinah are both included in the health-education programme that accompanies them [4]. That is a licensing baseline — a kitchen can hold every certificate and still leave cooked food out too long.
+
+The practical test is the one WHO teaches for any kitchen anywhere: keep food clean, separate raw from cooked, cook it thoroughly, keep it at safe temperatures, and use safe water [5]. In restaurant terms: order what is cooked to order, avoid the dish that has been sitting in the display since the previous rush, drink bottled water, and if a place is empty at peak meal time, ask yourself why.
+
+Traveller check (foodHalal): Halal is the national default, so spend your scepticism on hygiene instead: freshly cooked food, a busy room, clean surfaces, and bottled water. A certificate on the wall is a starting point, not an answer.
+
+2. WHERE DO BANGLADESHI AND SOUTH ASIAN KITCHENS CLUSTER IN MAKKAH?
+The best-documented cluster is the Misfalah side of the city, along Hijra Road and Ibrahim Khaleel Road. A June 2026 report in The Daily Star describes restaurants across those two roads adapting their food for pilgrims from Bangladesh, Pakistan and India, with the same shop sometimes signed in Bengali and in Urdu, staff speaking Chittagonian, and biryani, porota, dal, desi curry and milk tea on offer [6]. If you are looking for the food your parents recognise, that is the area to walk to — not a single named restaurant.
+
+Ajyad Street, on the other side of the central area, is the other traditional food street, with small restaurants and street food. The mall food courts in the central towers are the third option: air-conditioned, family seating, higher prices and food that is reliable rather than memorable.
+
+Restaurant names in all three areas change with tenancy and with the season. That is why this page does not print a list of them. Instead, open a map app, search "Pakistani restaurant" or "Bangladeshi restaurant" around your hotel, filter to places with photographs from the last month, read the recent reviews that mention the actual dishes, and walk to the one that is busy. A name copied from a 2024 blog is the least reliable guide you can carry.
+
+Traveller check (foodMakkah): Treat the street pair as the destination and the restaurant as a same-day decision. Search the map from your hotel, check recent photos, and walk to a full room rather than an empty one with a familiar signboard.
+
+3. WHAT WILL A MEAL COST — AND WHY THIS PAGE PRINTS NO PRICE LIST
+Al Baik, which is the most corporate of the options, publishes its full menu online and still does not print prices on it [8]. The small desi kitchens publish nothing at all. Any per-plate figure in a blog is therefore either a snapshot from one visit or an invention, and it will be wrong the moment the season, the rent or the pilgrim volume changes.
+
+So the number you budget with has to be the number you agree at the counter. Ask three questions before you sit down: is the quoted price per plate or per person; what comes with it — rice, bread, salad, tea; and is there a smaller portion for a child or an older person who eats little. Then order one plate, see the size, and order a second only if you need it. That single habit saves more than any price table.
+
+Paying in riyals and converting in your head is where BDT budgets drift. Use the day's rate for a single calculation, and use our DIY budget calculator for the trip total rather than multiplying each meal by a rate you half-remember.
+
+Traveller check (foodPrice): Agree the price and what it includes before the food is plated. If nobody can tell you what a plate costs, that is your answer about how the bill will end.
+
+4. AL BAIK: WHICH BRANCHES ARE LISTED, AND HOW TO IGNORE QUEUE FOLKLORE
+Al Baik is the one chain a Bangladeshi family usually wants to try, and it is also the one with the most confident misinformation attached to it. The operator's own branch page is the only list worth using, and every branch name on it links to a map pin [7].
+
+In Makkah the listed branches include ALBAIK-MAKKAH JABAL OMAR, ALBAIK-CLOCK TOWER MAKKAH, ALBAIK-MAKKAH TOWER, ALBAIK-MAKKAH AZEEZIA, ALBAIK-MAKKAH DIYAFAH and ALBAIK-MAKKAH JABAL NOOR [7]. In Madinah they include ALBAIK-MADINAH TAIBA, ALBAIK-TAIBA TOWER, ALBAIK-MADINAH CITY, ALBAIK-MADINAH CITY 2 KHALEDIAH and ALBAIK-MADINA TRAIN STATION [7]. Use the pin for the branch you choose, and let the map tell you the walk.
+
+The menu is published, item by item — chicken meals, nuggets, shrimp, fillet sandwiches, falafel, sides and drinks — but without prices [8]. Check the app or the board at the branch for what you will actually pay. What the company does not publish, and what no honest guide can promise, is a queue length at a given hour: a minute figure quoted for the post-Isha rush is a guess wearing a number.
+
+5. WHERE DO I EAT IN MADINAH, AND HOW DO I CHECK A KITCHEN BEFORE SITTING DOWN?
+Madinah's central blocks work on the same national halal baseline, and South Asian kitchens are part of the commercial mix around the Prophet's Mosque — the same 2026 reporting describes the pattern across the holy cities, not only in Makkah [6]. What changes from Makkah is that the central area is more mall-and-hotel, and the cheaper kitchens sit further out along the roads leading away from the mosque.
+
+The anchors that can actually be verified are the chains and the supermarket. Al Baik lists several Madinah branches, including ALBAIK-MADINAH TAIBA, ALBAIK-TAIBA TOWER, ALBAIK-MADINAH CITY and ALBAIK-MADINAH CITY 2 KHALEDIAH [7]. BinDawood lists TAIBA, Al Anwar, Al Hijra, Rotana and Al Jammat among its Madinah branches [9]. Beyond that, the decision is a door check, not a blog: does the price board exist and show prices, is the kitchen visible, is the room busy with families, and does the staff know what "kam mirchi" means.
+
+Traveller check (foodMadinah): Do not walk to a lane because an old article named a gate. Pick two or three candidates on the map, look at the most recent photos, and choose at the door on what you can see and what the board says.
+
+6. HOW DO I FEED AN ELDERLY PARENT OR A YOUNG CHILD FOR TEN DAYS?
+The families who struggle are rarely the ones who could not find food. They are the ones who ate restaurant curry twice a day for a week because it was easier than deciding. Three habits make the difference, and none of them is medical advice.
+
+First, build the day around one cooked meal and two simple ones: supermarket bread, laban, bananas, dates and tea in the room, then one hot meal of rice, dal and a boiled or lightly cooked vegetable. Second, ask the kitchen to go easy — "kam mirchi, kam tel" is understood in the South Asian kitchens, and a plain dal with rice is usually the safest thing on any menu. Third, keep the water bottled and the pace slow: a parent who is dehydrated and overtired will not enjoy any meal.
+
+If your parent has a diagnosed condition and a clinician has given dietary instructions, those instructions govern, not this page. Carry the medicines and the prescription, and do not test a new diet in Makkah.
+
+Traveller check (foodElderly): One hot meal, two simple ones, less chilli and oil, bottled water, and a ground-floor table away from the door. Clinical decisions stay with your own clinician.
+
+7. HOW DO I SELF-CATER AND KEEP THE DAILY BUDGET HONEST?
+Self-catering is what turns an unpredictable food bill into a plan. BinDawood, which calls itself the "Pilgrim's Brand" and lists 26 locations, has branches on both sides of the two mosques, including Abraj Al Bait and Jabal Omar in Makkah and Taiba and Al Anwar in Madinah [9][10]. Buy breakfast and snacks there: laban, bread, bananas, dates, oats, honey, bottled water.
+
+Then do the one thing almost nobody does: record what you spend for the first two days, add it up, and divide. That number — not a figure from an article — is your daily food budget, and you can adjust it while you still have most of the trip left. Keep the receipts; they also tell you which shop is cheaper for the same basket.
+
+Food delivery apps are useful when a parent cannot walk out again, but coverage depends on the hotel address. Order only if the app shows your building, and expect to meet the driver at the entrance. And if you plan to carry dates or food home, read the customs rules before you buy — the allowance is a personal-use test, not a weight you can fill.
+
+Traveller check (foodGrocery): Shop where the locator says there is a branch, write down two days of spending, and set the daily figure from your own receipts rather than from a blog. Check the customs page before buying gifts to carry home.
+
+8. FREQUENTLY ASKED QUESTIONS
+Is all food in Makkah and Madinah halal?
+Yes, at the national level: the Saudi Food and Drug Authority has stated that all food sold in the Kingdom is halal, and alcohol and pork are prohibited imports. That is a statement about the food supply, not about a particular kitchen's hygiene — check the room and the freshness yourself. [1][2][3]
+Where are the Bangladeshi restaurants in Makkah?
+The documented cluster is along Hijra Road and Ibrahim Khaleel Road in the Misfalah area, where the 2026 reporting found Bengali and Urdu signage and Chittagonian-speaking staff. Names change, so choose on the map and at the door. [6]
+How much does a meal cost in Makkah or Madinah?
+No reliable published price exists for the desi kitchens, and Al Baik publishes a menu without prices. Ask whether the quote is per plate or per person, confirm what it includes, and order one plate first. [8]
+Which Al Baik branch is closest to the Haram?
+The operator lists several branches in each city, each with a map pin: Jabal Omar, Clock Tower, Makkah Tower, Azeezia, Diyafah and Jabal Noor in Makkah; Madinah Taiba, Taiba Tower, Madinah City and others in Madinah. Follow the pin rather than a blog's walking time. [7]
+Where can I buy groceries near the mosques?
+BinDawood lists branches at Abraj Al Bait and Jabal Omar in Makkah, and Taiba, Al Anwar, Al Hijra, Rotana and Al Jammat in Madinah. Check the locator for the branch nearest your hotel before walking. [9][10]
+Can I take leftover dates or food home to Bangladesh?
+Dates and food are subject to Bangladesh's personal-use test at Dhaka airport, not a published kilogram allowance. Read the customs guide before you fill a suitcase.`,
+  "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": `Ziyarah — visiting the historical sites around Makkah, Madinah, Taif and Badr — is the part of a Bangladesh Umrah trip that families remember longest and plan least. It is also the part where the published numbers were weakest: the previous version of this page carried car prices, a "best time" window, distances to cemeteries and drive times that no openable source states. Those figures are gone, not replaced with better-sounding guesses. What remains is what the sites themselves, the Saudi Press Agency, Visit Saudi, Saudipedia, the operator of the Madinah sightseeing bus and the Ministry of Tourism actually publish — with the date of the check.
+
+Three things this guide does. It tells you what each site is and what it is not. It tells you when the ticketed places are open, including the one place where two official pages disagree. And it teaches you to fix a car price in writing before the car moves, because no Ziyarah tariff is published anywhere and a number invented on a blog is worse than no number at all.
+
+1. WHAT IS ZIYARAH, AND WHAT IS IT NOT?
+
+Ziyarah here means sightseeing with a purpose: standing at the places where the Seerah happened, and letting your children see the geography instead of only reading it. It is not a ritual with a fixed route, a fixed order or a reward attached to each stop, and this page will not invent one.
+
+Two things follow from that, and both matter at the site. First, the graves you will visit are unmarked. The domes and tombstones at Jannat al-Mu'alla in Makkah and at Jannat al-Baqi in Madinah were removed in the 1920s, so there is no tomb of Khadijah (RA) to walk up to and touch [14]. You are visiting a cemetery, not a shrine. Second, keep the visit quiet: no raised voices, no photographing worshippers, no ritual at a grave that your own scholar has not taught you. The historical value is in being there, and in what you tell your children on the way back.
+
+2. HIRA CULTURAL DISTRICT: WHAT IS OPEN, WHEN, AND WHAT THE CLIMB IS
+
+The district sits at the foot of Jabal al-Noor, at the mouth of the path that leads up to the Cave of Hira, where the first verses of Surah Al-Alaq were revealed. It is a managed site with two ticketed experiences — the Revelation Exhibition and the Qur'an Museum — plus shops, cafés and a visitor centre on the ascent route [1].
+
+The opening hours are genuinely disputed between official pages, so here are all three, dated. The district's own site lists the district and the path to the cave as open 24 hours, and the museums as Saturday to Wednesday 07:30–23:30, Thursday 07:30–01:00 and Friday 15:30–01:00 [1]. Visit Saudi lists the Revelation Exhibition as daily 07:30–23:30 [3]. A Saudi Press Agency report of 31 July 2026 says the two museums are open around the clock except Friday 07:00–15:30 [2]. If you are planning the museum as the centrepiece of a morning, check the district's own page on the day rather than trusting any of the three, including this one.
+
+Tickets are sold online through the operator link that both the district and Visit Saudi point to [1][3]. Visit Saudi gives the price as "from SAR 25 per person" [3]; the district's page does not print a price at all, so treat SAR 25 as a floor, not a total, and confirm the ticket type before you pay.
+
+What the site does not publish is a shuttle, a surface description or a safety guarantee. The path is a mountain path, it is hot for much of the year, and the district's own material simply describes it as an ascent with a visitor centre along the route [1]. Decide before you go: fit adults can walk it, elderly parents and small children can stay with the exhibitions and the cafés at the bottom, and nobody has to do the climb to have made the visit.
+
+Traveller check (ziyarahHira): Book the exhibition for the heat of the day and put the path at the start or the end of the day. Carry water; there is no published promise of shade or of a lift.
+
+3. THE MAKKAH CIRCUIT: THE CEMETERY, THE CAVE OF THAWR, AND THE HAJJ GROUNDS
+
+Jannat al-Mu'alla is the historic cemetery north of Masjid al-Haram, close to the Mosque of the Jinn, and it is where Khadijah (RA), the Prophet's grandfather Abd al-Muttalib and his uncle Abu Talib are recorded as buried [14]. After the demolitions of 1925–26 the graves are marked only by low stones and the ground is bare [14]. Go to walk through it and to explain who is there; go expecting nothing to photograph.
+
+The Cave of Thawr (Jabal Thawr) lies south of Makkah and is the cave of the Hijrah: the place where the Prophet (PBUH) and Abu Bakr (RA) sheltered before continuing to Madinah. It is a viewing stop, not a climb for a family group in the heat, and the published material does not give a safe route or a duration.
+
+Mina, Muzdalifah and the plain of Arafat are Hajj grounds. Outside the Hajj days a car can drive you past the tent city, the Jamarat bridge, Masjid Namirah and Jabal al-Rahmah; during the Hajj days those roads are managed for the pilgrimage, so ask your driver what is reachable on your dates instead of assuming the same route works in Dhul-Hijjah.
+
+Traveller check (ziyarahCemetery): Group the stops by direction. A driver who is asked to "do all of Makkah" in one loop will spend your morning in traffic.
+
+4. THE CAR: HOW TO PRICE AND BOOK IT WHEN NOBODY PUBLISHES A TARIFF
+
+There is no published Ziyarah tariff in Makkah, Madinah, Taif or Badr — not from the Ministry of Tourism, not from Visit Saudi, not from any operator whose rates can be re-checked. That is why this page prints none, and why the per-car bands that used to be here — one for a Makkah sedan, one for Madinah, one for the Taif day trip — have been removed: none of them could be traced to a source that still says so.
+
+What you can do instead, in this order. Agree the price for the whole car and the whole agreed number of hours, not a per-person figure, and write it down or screenshot it. Name the stops before you start, and agree what happens if a stop is closed or the traffic doubles the drive. Ask the hotel desk or a licensed operator rather than a driver who approaches you at the gate. And use the Ministry of Tourism's own rights page as your standard: a tourist guide must hold a ministry licence and belong to a licensed company, and the ministry publishes a complaints channel [15].
+
+The only defensible sentence about price is the one you and the driver both sign up to. If two quotes differ by a third, ask what the second one includes — waiting time, the Taif road toll, a stop at Badr — because that difference is usually the route, not the rate.
+
+Traveller check (ziyarahCar): Per car, not per person. Written, not spoken. And keep the driver's number for the return leg.
+
+5. MADINAH: QUBA, QIBLATAIN AND UHUD — THE THREE THAT ARE VERIFIED
+
+Masjid Quba is the first mosque built in Madinah, and the hadith quoted on this page is Sunan Ibn Majah 1412, graded Hasan by Darussalam: whoever purifies himself at home and then comes to the mosque of Quba and prays in it has a reward like that of an Umrah [4]. The previous version of this page cited Sahih Muslim for the same wording; that attribution was wrong and has been corrected. Make wudu at the hotel, pray two rak'ah, and do not turn the visit into a race. Quba is about 3 km from the Prophet's Mosque along a signed walkway, and Visit Saudi states that no booking is needed [5].
+
+Masjid al-Qiblatain is the mosque of the two qiblahs, 3.8 km north-west of the Prophet's Mosque [6], where the direction of prayer was changed towards the Kaaba. The group of small mosques beside the trench that the old copy counted is not verified in an opened source, so the page now names the trench area without a count.
+
+Uhud is the mountain ridge about 7 km from the Prophet's Mosque, rising to 1,077 m and standing roughly 4 km north of the city, with the archers' position on its flank and the enclosure of the martyrs — about 70 of them, including Hamza (RA) — at its foot [7]. The mosque named in the old copy is not verified and no longer appears; ask the driver for the martyrs' enclosure.
+
+Traveller check (ziyarahMadinah): At Quba, Qiblatain and Uhud the car park is not the door. Tell the driver which gate or which side you need, and agree where he waits, before you get out.
+
+6. MADINAH WITHOUT A CAR: THE HOP-ON HOP-OFF BUS
+
+City Sightseeing Al-Madinah runs two routes with 15 stops between them, starting and ending at the Prophet's Mosque beside King Fahad Gate (Gate 334), with 16 audio languages and a published phone number, 920014044 [9]. The published fares are SR 90 for 24 hours, SR 125 for 48 hours, SR 150 for 72 hours, SR 15 for a single ride, and SR 40 for a four-hour single-route ticket [9]. The operator states a 45-minute frequency and a 125-minute full loop [9].
+
+The routes cover the ground a first-time family actually wants: Quba and the Quba walkway, Qiblatain, the Uhud battlefield, Al-Baqi and the museum district, the Hejaz Railway Museum and the central markets [9]. What the bus cannot do is door-to-door: it stops where the route stops, and an elderly parent still walks from the stop to the site.
+
+One caution from the operator's own page, on the date of this check: several stop cards carried a "temporarily closed" badge [9]. The reason is not published. Before buying, confirm that the bus is running, which stops are open, and where boarding actually happens — the operator's phone number above is the only check that will answer.
+
+Traveller check (ziyarahBus): Routes and stop closures change without notice. One phone call, or a look at the operator's page on the morning, saves a wasted ticket.
+
+7. THE TAIF DAY TRIP, AND THE MIQAT ON THE WAY BACK
+
+Taif is the highland city east of Makkah, reached by the mountain roads, and it holds two sites that Bangladeshi families ask for by name. Masjid Abdullah ibn Abbas stands at the foot of Mount al-Madhoon, associated with the Prophet's cousin, and Masjid Addas is on al-Mathnah Road in Wadi Waj, at the foot of Abu al-Akhailah — the place associated with Addas, the servant who offered grapes after the Prophet (PBUH) was turned away by the people of Taif [13]. The old copy's drive time, elevation and temperature band are gone; heat, traffic and season change all three.
+
+The Al-Hada cable car is the reason many families go. The Saudi Press Agency gives the engineering: 4,200 m in each direction, a 17-minute ride, 52 cabins carrying eight passengers each, and a capacity of about 1,000 passengers an hour; it runs from the Al-Kar Tourist Village [10][11]. The fare and the reported Monday closure come from secondary listings rather than the operator, so treat "about SAR 100 round trip" as an indication and confirm before you drive up.
+
+The miqat is the part to get right. Qarn al-Manazil, also called as-Sayl al-Kabir, is the boundary for pilgrims coming from Najd and Taif; it sits on the Taif–Makkah road, about 80 km north-east of Makkah and 35 km north of Taif [12]. If you intend to perform another Umrah on the way back, you enter ihram there, before crossing the boundary, not in Makkah. If you are only sightseeing, tell the driver your intention clearly and let him stop where the rule applies to you — this page is not the place to decide your ritual for you.
+
+Traveller check (ziyarahTaif): That one sentence decides whether the car stops at Qarn al-Manazil and whether your ihram is in the luggage.
+
+8. BADR: THE LONGEST DRIVE, AND WHAT IS ACTUALLY THERE
+
+Badr is the battlefield of the first major battle of Islam, fought in the second year after the Hijrah. Visit Saudi places the site about 150 km west of Madinah; other sources say 130 km, and the difference is a road, not a story [8]. It is a half-day or a full-day commitment from Madinah, and the previous version's round-trip time, stopover length and per-car fare were not traceable and are gone.
+
+What is there is modest and worth the drive for the right family: the Al-Arish Mosque, the battlefield itself, the martyrs' cemetery, and Jabal Al-Mala'ik about 4 km from Al-Arish [8]. The cemetery enclosure lists 13 names — five from the Muhajirin and eight from the Ansar — while other accounts give 14; the discrepancy is old and this page does not resolve it [8].
+
+It is also the natural stop if you are driving from Madinah to Makkah by private car rather than flying, since the road runs west. Ask the driver whether he will wait at Badr and for how long, and price the whole Madinah–Makkah leg as one agreement rather than as "a stopover" that nobody defined.
+
+Traveller check (ziyarahBadr): The stop is the cheap part to agree; the waiting time and the route are the expensive part to leave vague.
+
+9. FREQUENTLY ASKED QUESTIONS
+Is Ziyarah compulsory during Umrah?
+No. Ziyarah is sightseeing at historical sites. Umrah has its own rites, and nothing in this page adds a rite to them.
+How much does a private Ziyarah car cost in Makkah or Madinah?
+No published tariff exists, so this page prints no figure. Agree a total for the car and the hours before you start, and get it in writing; the Ministry of Tourism publishes tourists' rights and a complaints channel if a guide or operator misrepresents the service [15].
+Can I visit the Cave of Hira without climbing?
+You can visit the Hira Cultural District, its exhibition and the Qur'an Museum without climbing; the cave itself is reached by the mountain path [1]. The district publishes no shuttle or lift.
+Are the Hira museums open on Friday?
+Official pages disagree. The district lists Friday 15:30–01:00, Visit Saudi lists 07:30–23:30 daily, and an SPA report of 31 July 2026 says 24 hours except Friday 07:00–15:30 [1][2][3]. Check the district's own page on the day.
+Is the Quba reward hadith authentic?
+The wording quoted here is Sunan Ibn Majah 1412, graded Hasan by Darussalam [4]. Pray two rak'ah there, and do not let the reward language turn the visit into a rushed stop.
+Do I need ihram for a Taif day trip?
+Only if the return includes an Umrah. Qarn al-Manazil is the boundary for pilgrims coming from the Taif side [12]; decide your intention before you leave Makkah.
+How do I reach Badr from Madinah?
+By private car on the western road, about 150 km per Visit Saudi; some sources say 130 km [8]. It is a half-day commitment, not a quick stop, and the site has no published entry fee.
+
+10. REFERENCES
+Every figure in this page comes from one of these pages, all opened on 19 October 2026. [1] Hira Cultural District, district site; [2] Saudi Press Agency, 31 July 2026; [3] Visit Saudi, Revelation Exhibition; [4] Sunan Ibn Majah 1412 (sunnah.com); [5] Visit Saudi, Masjid Quba; [6] Visit Saudi, Masjid al-Qiblatain; [7] Visit Saudi, Uhud; [8] Visit Saudi, Badr Battle Site; [9] City Sightseeing Al-Madinah; [10] Saudi Press Agency, 18 July 2026; [11] Visit Saudi, Al-Hada; [12] Saudipedia, Qarn al-Manazil; [13] Saudipedia, Taif Governorate; [14] Jannat al-Mu'alla, historical summary; [15] Ministry of Tourism, tourists' rights.`,
   "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide": `For Bangladeshi families with school-going children or young couples planning an unforgettable annual trip, the **7-Day Umrah + 3-Day Dubai Combo Itinerary** is the highest-value outbound route from **Hazrat Shahjalal International Airport (DAC)**. Because Jeddah/Madinah and Dubai sit right along the same Arabian Peninsula flight corridor, combining both destinations into one **Multi-City ticket** eliminates an entire roundtrip airfare.
 
 1. HOW MUCH AIRFARE DO YOU SAVE WITH A MULTI-CITY TICKET (DAC -> JED/MED -> DXB -> DAC)?

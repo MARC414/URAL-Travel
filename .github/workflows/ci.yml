@@ -75,6 +75,24 @@ jobs:
       - name: Verify women-specific Umrah source boundaries and locale parity
         run: npm run test:women-umrah-guide
 
+      - name: Verify older-traveller assistance, Haram mobility and clinical boundaries
+        run: npm run test:elderly-umrah-guide
+
+      - name: Verify Ihram and Miqat source boundaries and locale parity
+        run: npm run test:ihram-miqat-guide
+
+      - name: Verify Ramadan calendar, I'tikaf eligibility and season deadlines
+        run: npm run test:ramadan-itikaf-guide
+
+      - name: Verify Zamzam, dates and gold rules against operator and NBR sources
+        run: npm run test:zamzam-customs-guide
+
+      - name: Verify the food guide against SFDA, Balady and operator sources
+        run: npm run test:food-guide
+
+      - name: Verify the Ziyarah pair against district, SPA, Visit Saudi and operator sources
+        run: npm run test:ziyarah-guide
+
       - name: Type-check
         run: npm run lint
 

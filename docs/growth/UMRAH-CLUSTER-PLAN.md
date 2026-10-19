@@ -10,8 +10,55 @@
 records the sixth source-reviewed core EN/BN revision after main, Nusuk, stopover, hotel/rail and flights. **6/12 core
 pairs** revised/tested by article count only; six remain, plus adjacent Hajj. This is not weighted effort or release
 completion. Hub mechanism is separate from a full fresh hub audit; no reviewed revision deployed in this session.
-Next independent asset: older travellers/elderly parents. Current validation: 275 build checks; personal eligibility,
+Current validation: 275 build checks at that checkpoint; personal eligibility,
 actual access/booking, qualified religious review and visual/approval/release gates remain in the closure register.
+
+**19 October older-traveller follow-up:** [`ELDERLY-UMRAH-SOURCE-REVIEW.md`](ELDERLY-UMRAH-SOURCE-REVIEW.md) records
+the seventh source-reviewed core EN/BN revision. **7/12 core pairs** revised/tested by article count only; five core
+pairs plus adjacent Hajj remain. Carrier charges and approval, cart booking/level, property routes and clinical
+fitness are not resolved by the revision. Current validation: 20 older-traveller tests, **291 build checks**;
+visual, approval and release gates remain separate. Next independent agent-owned asset: Ihram/Miqat.
+
+**19 October Ihram/Miqat follow-up:** [`IHRAM-MIQAT-SOURCE-REVIEW.md`](IHRAM-MIQAT-SOURCE-REVIEW.md) records the
+eighth source-reviewed core EN/BN revision. **8/12 core pairs** revised/tested by article count only; four core pairs
+plus adjacent Hajj remain. The Ministry's air rule and its Jeddah-airport statement now replace the "perimeter"
+metaphor; the "30–45 minutes", trilingual crew script, airline/corridor miqat table, "11 km from Madinah", 7 kg cabin
+figure and on-board Haramain-rail intention instruction are removed. Carrier announcement practice, airport and rail
+facilities, and personal religious rulings remain unresolved and are visibly attributed or referred to a scholar.
+Current validation: 28 Ihram tests, **307 build checks**; visual, qualified-review, approval and release gates remain
+separate. Next independent agent-owned asset: Ramadan/I'tikaf.
+
+**19 October Ramadan/I'tikaf follow-up:** [`RAMADAN-ITIKAF-SOURCE-REVIEW.md`](RAMADAN-ITIKAF-SOURCE-REVIEW.md) records
+the ninth source-reviewed core EN/BN revision. **9/12 core pairs** revised/tested by article count only; three core
+pairs plus adjacent Hajj remain. The published I'tikaf conditions — 18+, citizens or residents with valid residency,
+free, capacity-reviewed — now replace the implication that any pilgrim can obtain a place, and the Ministry's four
+1448 season dates replace a vague window. The Haramain journey time and sales-channel exclusivity are removed. No
+portal, application or identity flow was observed; no 1448 conditions exist yet. Current validation: 28 Ramadan
+tests, **323 build checks**; visual, qualified-review, approval and release gates remain separate. Next independent
+agent-owned asset: Zamzam/customs.
+
+**19 October Zamzam/customs follow-up:** [`ZAMZAM-CUSTOMS-SOURCE-REVIEW.md`](ZAMZAM-CUSTOMS-SOURCE-REVIEW.md) records
+the tenth source-reviewed core EN/BN revision. **10/12 core pairs** revised/tested by article count only; food and
+Ziyarah remain. The pilgrim bottle is priced at SAR 12.50 by the airport operator (48 SAR is the Nusuk delivery
+carton), the invented dates kilogram allowance is replaced by the HSIA personal-use/commercial-quantity test, the gold
+allowance now carries its calendar-year, 22-carat and silver conditions, and the VAT refund is conditional on unused
+goods. Current validation: 28 Zamzam tests, **326 build checks**; visual, qualified-review, approval and release gates
+remain separate. Next independent agent-owned asset: the food guide.
+
+**19 October Food-guide follow-up:** [`FOOD-GUIDE-SOURCE-REVIEW.md`](FOOD-GUIDE-SOURCE-REVIEW.md) records the
+eleventh source-reviewed core EN/BN revision. **11/12 core pairs** revised/tested by article count only; Ziyarah remains.
+The guide now separates halal (national baseline, SFDA statement and import bans) from hygiene (Balady certificate as a
+floor, WHO five keys), names the documented Makkah streets instead of four unverifiable restaurants, uses the operator's
+Al Baik branch names and map pins, and prints no meal price or BDT figure at all. Current validation: 26 food tests,
+**329 build checks**; visual, qualified-review, approval and release gates remain separate.
+
+**19 October Ziyarah follow-up:** [`ZIYARAH-SOURCE-REVIEW.md`](ZIYARAH-SOURCE-REVIEW.md) records the twelfth and final
+source-reviewed core EN/BN revision. **12/12 core pairs** revised/tested by article count only — the cluster is not
+certified, and the adjacent-Hajj, hub, 1448 travel-health and release gates remain open. The pair now prints the three
+contradictory Hira museum timetables instead of one invented "best window", no Ziyarah car fare at all, the Quba hadith
+with its correct book and grade, the bus operator's live SR 90 / 24 h fare, and Badr as roughly 150 km west of Madinah.
+Current validation: 30 Ziyarah tests, **334 build checks**; visual, qualified-review, approval and release gates remain
+separate.
 
 **Use with:** [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md), [`SEO-KEYWORD-MAP.md`](../../SEO-KEYWORD-MAP.md), [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md), [`CONTENT-OS.md`](CONTENT-OS.md), and [`AI-WRITING-PROMPTS.md`](AI-WRITING-PROMPTS.md).
 

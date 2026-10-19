@@ -115,20 +115,20 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     id: "hu-03",
     clusterId: "hajj-umrah",
     funnelStage: "MoFu (Decision & Comparison)",
-    titleEn: "Performing Umrah with Elderly Parents from Bangladesh: Wheelchair Booking, Flat-Street Hotels & Medical Checklist",
-    titleBn: "বয়স্ক মা-বাবাকে নিয়ে বাংলাদেশ থেকে Umrah গাইড: ফ্রি হুইলচেয়ার, ইলেকট্রিক স্কুটার ও সমতল রাস্তার হোটেল",
+    titleEn: "Performing Umrah with Elderly Parents from Bangladesh: Airline Wheelchair, Haram Carts & Medical Preparation",
+    titleBn: "বয়স্ক মা-বাবাকে নিয়ে বাংলাদেশ থেকে ওমরাহ: এয়ারলাইন হুইলচেয়ার, হারাম কার্ট ও মেডিকেল প্রস্তুতি",
     primaryKeyword: "umrah with elderly parents bangladesh",
-    secondaryKeywords: ["makkah electric scooter tawaf price", "wheelchair assistance biman saudia dhaka", "flat street hotels near haram"],
+    secondaryKeywords: ["makkah wheelchair and golf cart booking", "wheelchair assistance biman saudia dhaka", "wheelchair accessible hotel near haram"],
     monthlyIntentSignal: "Not measured · Emotional Caregiver & Family Intent",
     customerPsychologyEn:
-      "Filial Devotion ('Amma-Abba'r Sheba'): Adult children taking 65+ parents with knee pain or diabetes want zero physical hardship—seeking flat streets, direct elevators, and SAR 115 roof electric scooters.",
+      "Caregiver responsibility: adult children travelling with 65+ parents who have knee pain, diabetes or limited walking range want fewer avoidable transfers, a confirmed assistance request and a hotel route they can check—not a generic 'senior-friendly' promise.",
     customerPsychologyBn:
-      "মা-বাবার প্রতি দায়িত্ববোধ ও ভালোবাসা: বয়স্ক মা-বাবার হাঁটুর ব্যথা বা ডায়াবেটিস থাকায় সন্তানরা চায় ঢালবিহীন সমতল রাস্তার হোটেল ও ইলেকট্রিক স্কুটারের সঠিক নিয়ম।",
+      "মা-বাবার প্রতি দায়িত্ববোধ: হাঁটুর ব্যথা, ডায়াবেটিস বা সীমিত হাঁটার সামর্থ্য থাকলে সন্তানরা অপ্রয়োজনীয় ট্রান্সফার কমাতে, নিশ্চিত সহায়তা চাইতে এবং যাচাইযোগ্য হোটেল রুট জানতে চায়—সাধারণ 'সিনিয়র-ফ্রেন্ডলি' প্রতিশ্রুতি নয়।",
     aeoDirectAnswerEn:
-      "Request free SSR WCHR wheelchair assistance 48 hours before flying from Dhaka, bring a foldable wheelchair (free checked medical item), stay in flat-street Jabal Omar/Clock Tower and Madinah Markazia North, and rent Haram electric scooters for SAR 115.",
+      "Request airline wheelchair assistance at booking, not at the airport: Biman makes it mandatory and recommends 48 hours, while Saudia publishes free carriage of wheelchairs and up to two mobility items. Inside the Grand Mosque, free manual wheelchairs and paid Tanaqol carts are separate services.",
     aeoDirectAnswerBn:
-      "ফ্লাইটের ৪৮ ঘণ্টা আগে ফ্রি WCHR হুইলচেয়ার বুক করুন, দেশ থেকে ফোল্ডিং হুইলচেয়ার নিন, Jabal Omar ও Markazia North-এ সমতল হোটেলে থাকুন এবং SAR 115-এ ইলেকট্রিক স্কুটার ব্যবহার করুন।",
-    eavTriples: "Haram Electric Mobility Scooter (Entity) → Full Umrah Fare (Attribute) → SAR 115 / BDT 3,800 (Value)",
+      "এয়ারপোর্টে নয়, বুকিংয়ের সময়ই এয়ারলাইন হুইলচেয়ার সহায়তা চাইুন: বিমান এটি বাধ্যতামূলক বলে ও ৪৮ ঘণ্টা আগে আবেদনের পরামর্শ দেয়; সৌদিয়া হুইলচেয়ার ও সর্বোচ্চ দুইটি মোবিলিটি সামগ্রী বিনামূল্যে বহনের কথা বলে। মসজিদুল হারামে বিনামূল্যে ম্যানুয়াল হুইলচেয়ার ও সাশুল্ক তানাকুল কার্ট আলাদা সেবা।",
+    eavTriples: "Older pilgrim (Entity) → Airline and mosque mobility services (Attribute) → carrier-confirmed assistance and authority-published service points (Value)",
     targetPath: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
     isLiveBlog: false,
   },

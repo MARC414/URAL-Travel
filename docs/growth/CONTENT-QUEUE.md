@@ -859,3 +859,180 @@ passed (107 EN +107 BN routes), including twelve omitted-warning controls and ei
 live application/slot, personal fatwa/medical review, inspected route, care booking, ride, visual QA or deployment.
 Current progress 6/12 core pairs by article-review count only; six core plus adjacent Hajj remain, alongside hub/
 qualified-review/release gates. Next independent agent-owned asset: older travellers/elderly parents.
+
+### 2026-10-19 — independent older-traveller / elderly-parents Umrah EN/BN revision
+
+Owner selected the next existing pair; no new URL. `ELDERLY-UMRAH-SOURCE-REVIEW.md` holds the pre-edit audit, the
+claim ledger, the nine opened pages and the retrieval failures. The prior "checked against official guidelines"
+sentence was not evidence: its three references were homepages and `gacr.gov.sa` did not resolve.
+
+Removed or corrected: the universal "no additional airline fee across major scheduled carriers departing DAC"
+statement; the general "airlines carry personal wheelchairs free" rule; the promised return "at the aircraft door";
+the fixed first-floor/mezzanine Haram circuit and the two-gate entrance map; the Nusuk/Tanaqol booking conflation;
+the Jabal Omar / lower Ibrahim Al-Khalil / Clock Tower zero-incline ranking and the 400 m comparison; the Madinah
+level-plaza and northern women's-cluster promise; the 20-day medicine supply, insulin cold-chain instruction,
+mini-fridge requirement, Haram air-conditioning premise and ORS/lubricant list; and the "never wait in taxi queues"
+transfer promise.
+
+Attributed and added: Saudia's free carriage of wheelchairs and up to two mobility items, hold carriage and return
+"according to airport procedures"; the POC sequence (48-hour statement, three-hour check-in, two spare cabin
+batteries); WCHC alongside WCHR/WCHS, with the weight request and companion expectation; Biman's mandatory
+booking-time request, contacts and 48-hour recommendation; the Ministry's own-wheelchair permission through
+designated entrances and its general health guidance (physician check, vaccinations, adequate supply, medical report,
+glucose monitor); the authority's free manual wheelchairs, paid ground-Sa'i service and Tanaqol platform; the March
+2025 end of manual cart booking, over-65 online recommendation, service-point fallback and free direct access for
+people with disabilities; Nusuk and Tanaqol as different services; and 1448H health requirements recorded as
+unverified.
+
+Nine specific primary references replace three homepages; five curated links per locale (hotel/rail, main DIY, Nusuk,
+Ihram, `/umrah`); five immediate accessible cautions (`elderlyAirline`, `elderlyEquipment`, `elderlyHaram`,
+`elderlyHotel`, `elderlyHealth`); one four-step administrative airline-request HowTo; seven visible/schema FAQs.
+Original publication 27 Sep, author and slug retained; update 19 Oct inherited by BN. The generic TravelIntelligence
+panel is suppressed for this reviewed slug; its independent positive-control fixture is unchanged.
+
+Elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25 passed;
+scheduling/sitemap 23 negative controls, lint, build and **291 build checks** passed (107 EN + 107 BN routes),
+including sixteen older-traveller output/caution controls and seven retired-claim fixtures. No airline, cart,
+property, route or booking was tested; no visual QA, deployment or live check. Current progress **7/12 core pairs**
+by article-review count only; five core plus adjacent Hajj remain, alongside hub, qualified-review and release
+gates. Next independent agent-owned asset: Ihram/Miqat.
+
+### 19 October 2026 — Ihram/Miqat pair revised (8/12 core Umrah pairs)
+
+`wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules` EN/BN rewritten against
+[`IHRAM-MIQAT-SOURCE-REVIEW.md`](IHRAM-MIQAT-SOURCE-REVIEW.md): the Ministry Miqat page, the Ministry Ihram guide PDF,
+Sahih al-Bukhari 1526, two Nusuk pages and Jordan Iftaa 2982. Six specific references replace three homepages
+(haj.gov.sa, gaca.gov.sa, nusuk.sa — the GACA "passenger briefing on Miqat" could not be substantiated).
+
+Retired from both locales: the "30 to 45 minutes before touchdown" figure, the "Bengali, English and Arabic" crew
+script, the airline-by-airline and Gulf-corridor miqat assignment, "11 km outside Madinah", the 7 kg cabin figure,
+Ashkona camp and Terminal 1/2 prayer-room specifics, guaranteed transit changing facilities, and the instruction to
+make the intention on the Haramain train after departure. The Ministry's own wording now carries the rule, the five
+distances, the intention-plus-Talbiyah definition and the return/Fidyah sequence; the airline announcement is
+described only as "usually announce" with an explicit warning that it may not come.
+
+Five curated links per locale (women, DIY, hotel/rail, open-jaw flights, `/umrah`), six point-of-action cautions
+(`ihramPoint`, `ihramPersonal`, `ihramGarments`, `ihramTransit` ×2, `ihramMadinah`), six visible/schema FAQs, no HowTo,
+a qualified optional transfer CTA, and suppression of the generic TravelIntelligence price panel for this slug.
+Original 27 Sep publication, author and slug retained; `updatedAt` 2026-10-19 in both locales.
+
+Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25,
+scheduling and 23 sitemap controls, lint, build and **307 build checks** passed (107 EN + 107 BN routes), including
+fourteen Ihram output/caution controls and five retired-claim fixtures. No carrier announcement practice, airport,
+rail or prayer-room facility, or live page was tested; no scholarly review, visual QA, deployment or live check.
+Progress **8/12 core pairs** by article-review count only; four core plus adjacent Hajj remain. Next independent
+agent-owned asset: Ramadan/I'tikaf.
+
+### 19 October 2026 — Ramadan/I'tikaf pair revised (9/12 core Umrah pairs)
+
+`ramadan-umrah-itikaf-guide-bangladesh-booking-budget` EN/BN rewritten against
+[`RAMADAN-ITIKAF-SOURCE-REVIEW.md`](RAMADAN-ITIKAF-SOURCE-REVIEW.md): the Umm al-Qura 1448 reference, the Ministry's
+1448 season calendar, three SPA announcements, Sahih al-Bukhari 1782, the SAR portal and the Authority's e-service.
+
+Material correction: official I'tikaf permits are a capacity-limited service whose published conditions (2025
+announcement) are for applicants 18+ who are "citizens or residents in the Kingdom holding a valid residency permit",
+free of charge, with Nafath reserved for citizens and residents in 2026. The pair no longer implies a visitor on an
+Umrah visa can obtain a place; it says not to plan on one, while keeping the right to pray in the Haram.
+
+Added the Ministry's four dated cut-offs (visa 9 March 2027, entry 23 March, departure 7 April, season opened 31 May
+2026), the one-day 1447 announcement lead time, the Nusuk-versus-I'tikaf permit distinction, and the corrected
+Madinah-first sequence with Ihram at Dhul Hulayfah. Removed the "two and a half hours" Haramain journey time, the
+"booked only through" sales claim and the unqualified "free/online-only" framing. Six visible/schema FAQs, five
+cautions (`ramadanDeadline`, `ramadanItikaf`, `ramadanAnnouncement`, `ramadanBudget`, `ramadanRoute`), six curated
+links per locale, optional qualified eSIM CTA, price panel suppressed, no HowTo. Original 27 Sep publication, author
+and slug retained; `updatedAt` 2026-10-19.
+
+Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 +
+budget 25, scheduling and 23 sitemap controls, lint, build and **323 build checks** passed (107 EN + 107 BN routes),
+including fourteen Ramadan output/caution controls and five retired-claim fixtures. No portal account, application or
+identity flow; no 1448 conditions published; no quote, booking, visual QA, deployment or live check. Progress
+**9/12 core pairs** by article-review count only; three core plus adjacent Hajj remain. Next independent agent-owned
+asset: Zamzam/customs.
+
+### 19 October 2026 — Zamzam/customs pair revised (10/12 core Umrah pairs)
+
+`official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport` EN/BN rewritten against
+[`ZAMZAM-CUSTOMS-SOURCE-REVIEW.md`](ZAMZAM-CUSTOMS-SOURCE-REVIEW.md): the Madinah airport operator, Saudia's conditions
+of carriage, the Ministry of Hajj and Umrah's Zamzam guidance as reported by Saudi Gazette, the HSIA customs page, the
+NBR's 2025 baggage rules as reported by BSS, the NBR tariff chapter for dates, and two VAT-refund sources.
+
+Price correction, in both directions: the 5-litre pilgrim bottle is **SAR 12.50** per the airport operator, not 48 SAR.
+The 48 SAR figure is the Nusuk-app 24 × 330 ml home-delivery carton and is now named as a different product; the bin
+containing the old price guard was inverted (it banned 12.50 and passed 48) and replaced with a paragraph-scoped check
+plus a negative control. The BDT conversion is gone.
+
+Dates: the "5–10 kg duty-free" allowance had no source and is removed. The page now states the HSIA test — personal
+goods exempt unless considered commercial, commercial quantities seized, dried dates at 25% CD when assessed as a
+consignment — and prints no per-kilogram price. Gold: the 100 g ornaments (22 carat or below, at most 12 of one type)
+and 200 g silver allowances are now once per **calendar year**, alongside the single 117 g/10 tola bar at Tk 5,000 per
+11.664 g, the declaration duty, confiscation above the cap and the criminal consequence of an undeclared find. VAT:
+reframed as a refund on unused goods with the SAR 500, 90-day, original-packaging and validation conditions, and worn
+jewellery is explicitly ineligible. Airline handling is per carrier — Saudia counts one bottle inside the checked
+allowance from JED/MED only and does not compensate loss; Biman publishes no allowance — so "most airlines" and
+"free extra piece" are gone.
+
+Six visible/schema FAQs, five cautions (`zamzamBox`, `zamzamAirline`, `datesAllowance`, `goldDeclare`, `vatRefund`),
+nine references, six curated links per locale including `/umrah`, optional qualified vehicle CTA, price panel
+suppressed, no HowTo. Original 27 Sep publication, author and slug retained; `updatedAt` 2026-10-19.
+
+Zamzam 28 + Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk
+16 + budget 25, scheduling and 23 sitemap controls, lint, build and **326 build checks** passed (107 EN + 107 BN
+routes), including eight new blog-21 output controls and five price negative controls. Two unintended citation
+renumbers in the women's and flight articles were caught by those suites and restored. No airport, counter or customs
+hall was observed; no price was verified on site; no GACA circular could be opened; no legal advice, deployment, PR or
+live check. Progress **10/12 core pairs** by article-review count only; food and Ziyarah remain. Next independent
+agent-owned asset: the Makkah/Madinah food guide.
+
+### 19 October 2026 — Food-guide pair revised (11/12 core Umrah pairs)
+
+`bangladeshi-halal-food-guide-makkah-madinah-budget-meals` EN/BN rewritten against
+[`FOOD-GUIDE-SOURCE-REVIEW.md`](FOOD-GUIDE-SOURCE-REVIEW.md): the SFDA's halal page and its January 2023 statement,
+the U.S. trade guide's list of prohibited Saudi imports, Balady's health-certificate service, WHO's Five Keys to Safer
+Food, the operator's Al Baik branch and menu pages, BinDawood's store locator and holding page, and The Daily Star's
+June 2026 report on the South Asian kitchens of Makkah.
+
+The article no longer prints a single meal price, BDT conversion, walking time, gate number or queue estimate, and it
+names no restaurant. The "every restaurant is 100% Halal by law, so the kitchen is clean" inference is split into its
+two halves: halal as the national baseline (SFDA statement plus the pork and alcohol import bans) and hygiene as a local
+check (municipal health certificates, a certificate is a floor not an inspection result, WHO's five keys). Makkah's
+documented food streets — Hijra Road and Ibrahim Khaleel Road in Misfalah — replace the invented "Bangla Bazar"
+nickname, and Al Baik is described only by the operator's own branch names and map pins. Madinah is anchored on the
+listed Al Baik and BinDawood branches plus a door check, not on gate numbers. The price section teaches three questions
+to ask at the counter, and the elderly section gives practical food and seating guidance while leaving clinical
+decisions with the reader's clinician.
+
+Six visible/schema FAQs, six cautions (`foodHalal`, `foodMakkah`, `foodPrice`, `foodMadinah`, `foodElderly`,
+`foodGrocery`), ten references, six curated links per locale including `/umrah` and the customs guide, optional
+qualified eSIM CTA, no HowTo. The shared price panel stays on this page because it is the fixture for that panel's own
+build test. Original 27 Sep publication, author and slug retained; `updatedAt` 2026-10-19.
+
+Food 26 + Zamzam 28 + Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 +
+Nusuk 16 + budget 25, scheduling and 23 sitemap controls, lint, build and **329 build checks** passed (107 EN + 107 BN
+routes), including four new blog-22 output controls and three retired-claim fixtures. No restaurant, menu, hotel or
+counter was observed; the Balady news pages returned HTTP 500 and are not cited; no deployment, PR or live check.
+Progress **11/12 core pairs** by article-review count only; the Ziyarah pair remains. Next independent agent-owned
+asset: the Ziyarah pair.
+
+### 19 October 2026 — Ziyarah pair revised (12/12 core Umrah pairs, cluster still not certified)
+
+`makkah-madinah-badr-taif-historical-ziyarah-taxi-guide` EN/BN rewritten against
+[`ZIYARAH-SOURCE-REVIEW.md`](ZIYARAH-SOURCE-REVIEW.md): the Hira Cultural District's own site, SPA releases of 18 and
+31 July 2026, Visit Saudi's Makkah and Madinah attraction pages, Sunan Ibn Majah 1412, Saudipedia's Qarn al-Manazil and
+Taif entries, the Madinah sightseeing-bus operator and the Ministry of Tourism's tourists' rights page.
+
+The pair prints no Ziyarah car fare, no BDT conversion, no drive time, no "6:00–9:30" window and no cemetery distance.
+In their place: the three contradictory official Hira museum timetables, all printed with a "check on the day"
+instruction; the ticketed exhibitions "from about SAR 25" as a floor; the Quba hadith as Sunan Ibn Majah 1412, **Hasan**
+(the old Sahih Muslim attribution corrected); the three sourced Madinah distances; the bus at SR 90 for 24 hours with
+its stop-status badge and phone number; the Al-Hada cable-car specifications; the Qarn al-Manazil geometry; and Badr
+about 150 km west with the 13/14-name discrepancy stated. The car section teaches the written total and the licence
+check instead of a tariff, and the cemetery section says the graves are unmarked.
+
+Seven cautions, fifteen references, six links per locale (including `/umrah`, the customs guide and the food guide),
+seven visible/schema FAQs, optional qualified CTA, no HowTo. Original publication date, author and slug retained;
+`updatedAt` 2026-10-19.
+
+Ziyarah 30 + food 26 + Zamzam 28 + Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 +
+stopover 17 + DIY 17 + Nusuk 16 + budget 25, scheduling and 23 sitemap controls, lint, build and **334 build checks**
+passed (107 EN + 107 BN routes). No site visit, no car hire, no ticket purchase. Progress **12/12 core pairs** by
+article-review count only; the cluster is not certified and the adjacent-Hajj, hub and release gates remain open.

@@ -364,9 +364,9 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Compare exact Makkah/Madinah rooms and access routes; check HHR baggage, basic fares, transfers and ticket conditions before booking.",
   },
   "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
-    title: "Umrah with Elderly Parents: Wheelchair & Hotel Guide | URAL",
+    title: "Umrah with Elderly Parents: Wheelchair & Mobility Guide | URAL",
     description:
-      "Plan a smooth Umrah from Bangladesh with elderly parents: airline wheelchair requests, flat-street Makkah and Madinah hotels, electric carts and medical tips.",
+      "Request airline wheelchair help at booking, check device approval, use the Grand Mosque's free wheelchairs or Tanaqol carts, and verify the actual hotel route.",
   },
   "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": {
     title: "96-Hour Saudi Stopover Visa for Bangladeshis | URAL",
@@ -389,29 +389,31 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Compare roundtrip and open-jaw Umrah flights from Dhaka: ticketed baggage, Zamzam conditions, connections and same-basis quotes—not promised savings.",
   },
   "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget": {
-    title: "Ramadan Umrah & I'tikaf Guide from Bangladesh | URAL",
+    title: "Ramadan 1448 Umrah Dates & I'tikaf Eligibility | URAL",
     description:
-      "Ramadan 1448 dates (8 Feb – 8 Mar 2027, moon sighting), the official General Authority I'tikaf registration flow, and a claim-free budget plan for Umrah from Bangladesh.",
+      "Ramadan 1448 starts 8 Feb 2027; Umrah visas close 9 Mar, entry 23 Mar. What the Ministry calendar says and who has actually been eligible for an I'tikaf permit.",
   },
   "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": {
-    title: "Wearing Ihram from Dhaka vs Transit: Miqat Rules | URAL",
+    title: "Ihram & Miqat Rules: Dhaka to Jeddah Flights | URAL",
     description:
-      "Know exactly where to wear Ihram and make Niyyah when flying direct from Dhaka to Jeddah versus connecting via Dubai, Doha, Abu Dhabi, Muscat or Madinah.",
+      "Where to enter Ihram flying from Dhaka: the Ministry's air-travel rule, why Jeddah airport is not a Miqat, Gulf transit, and Madinah-first routes.",
   },
   "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": {
-    title: "Zamzam, Dates & Gold Customs Rules: Jeddah & Dhaka | URAL",
+    title: "Zamzam, Dates & Gold Limits for Dhaka Arrivals | URAL",
     description:
-      "Check official airline and customs rules for bringing 5L Zamzam water, Madinah Ajwa dates and gold jewelry from Jeddah or Madinah back to Dhaka Airport.",
+      "One 5L Zamzam bottle at SAR 12.50, no dates kilogram allowance, and 100 g of gold ornaments or a declared 117 g bar once a year — what the operators and NBR actually publish.",
   },
+
   "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals": {
-    title: "Bangladeshi Food Guide in Makkah & Madinah | URAL",
+    title: "Bangladeshi & Pakistani Food in Makkah & Madinah | URAL",
     description:
-      "Find familiar Bangladeshi, Pakistani and Indian halal meals near Masjid al-Haram and Masjid an-Nabawi, with daily food budgets in SAR and BDT.",
+      "Where the documented South Asian kitchens are, how to check a restaurant at the door, and why this guide prints no per-plate price — verified against SFDA, Balady and the operators.",
   },
+
   "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": {
-    title: "Makkah, Madinah, Badr & Taif Ziyarah Taxi Guide | URAL",
+    title: "Makkah, Madinah, Badr & Taif Ziyarah Guide | URAL",
     description:
-      "Plan historical Ziyarah tours in Makkah, Madinah, Badr and Taif with landmark checklists, visiting hours and private family taxi fares in SAR and BDT.",
+      "Plan Ziyarah in Makkah, Madinah, Taif and Badr: verified hours, Hira's disputed timetable, and how to fix a car price before it moves.",
   },
   "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide": {
     title: "Umrah + Dubai 10-Day Combo Trip from Dhaka | URAL",

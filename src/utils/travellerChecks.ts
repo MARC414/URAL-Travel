@@ -20,10 +20,43 @@ const TITLES = {
   registration: { en: "Check the current registration screen", bn: "বর্তমান নিবন্ধন স্ক্রিন যাচাই করুন" },
   rawdah: { en: "Check your actual Rawdah booking", bn: "নিজের Rawdah বুকিং যাচাই করুন" },
   network: { en: "Check access on your phone and network", bn: "নিজের ফোন ও নেটওয়ার্কে প্রবেশ যাচাই করুন" },
+  elderlyAirline: { en: "Confirm the request, not just the code", bn: "কোড নয়, নিশ্চিত request দেখুন" },
+  elderlyEquipment: { en: "Check the actual device and carrier approval", bn: "আসল device ও carrier approval যাচাই করুন" },
+  elderlyHaram: { en: "Confirm the service point and level today", bn: "আজকের service point ও level নিশ্চিত করুন" },
+  elderlyHotel: { en: "Confirm the door-to-door route", bn: "দরজা থেকে দরজা route নিশ্চিত করুন" },
+  elderlyHealth: { en: "Keep clinical decisions with your clinician", bn: "Clinical সিদ্ধান্ত চিকিৎসকের সঙ্গে রাখুন" },
+  ihramPoint: { en: "Confirm the route and the actual point", bn: "রুট ও আসল বিন্দু নিশ্চিত করুন" },
+  ihramGarments: { en: "Prepare the garments before the boundary", bn: "সীমারেখার আগেই কাপড়ের প্রস্তুতি নিন" },
+  ihramTransit: { en: "Confirm the connection, not the airport name", bn: "বিমানবন্দরের নাম নয়, সংযোগ নিশ্চিত করুন" },
+  ihramMadinah: { en: "Confirm where the route meets the boundary", bn: "রুট কোথায় সীমারেখায় পৌঁছায় তা নিশ্চিত করুন" },
+  ihramPersonal: { en: "Take personal rulings to a qualified scholar", bn: "ব্যক্তিগত রায় যোগ্য আলেমের কাছে নিন" },
+  ramadanDeadline: { en: "Put the season cut-offs in your own calendar", bn: "সিজনের শেষ তারিখ নিজের ক্যালেন্ডারে লিখুন" },
+  ramadanItikaf: { en: "Do not buy an I'tikaf place", bn: "ইতিকাফের জায়গা কিনবেন না" },
+  ramadanAnnouncement: { en: "Wait for the Authority's own notice", bn: "কর্তৃপক্ষের নিজের বিজ্ঞপ্তির অপেক্ষা করুন" },
+  ramadanBudget: { en: "Compare two dated quotes", bn: "তারিখসহ দুটি কোট তুলনা করুন" },
+  ramadanRoute: { en: "Confirm visa, entry and permit before booking", bn: "বুকিংয়ের আগে ভিসা, প্রবেশ ও পারমিট নিশ্চিত করুন" },
+  zamzamBox: { en: "Buy at the airport, carry it separately", bn: "বিমানবন্দরে কিনুন, আলাদাভাবে বহন করুন" },
+  zamzamAirline: { en: "Confirm free or counted with your carrier", bn: "ফ্রি না গণনায়, ক্যারিয়ারের কাছে নিশ্চিত করুন" },
+  datesAllowance: { en: "Personal use, not commercial quantity", bn: "ব্যক্তিগত ব্যবহার, বাণিজ্যিক পরিমাণ নয়" },
+  goldDeclare: { en: "Weigh, count and declare", bn: "ওজন মাপুন, গুনুন, ঘোষণা দিন" },
+  vatRefund: { en: "Keep it boxed or skip the refund", bn: "বাক্সেই রাখুন, নাহলে ফেরত বাদ দিন" },
+  foodHalal: { en: "Halal is the baseline, hygiene is the check", bn: "হালাল নিয়ম, যাচাই করুন পরিচ্ছন্নতা" },
+  foodMakkah: { en: "Pick the street, choose the kitchen today", bn: "রাস্তা বাছুন, রেস্তোরাঁ আজকের সিদ্ধান্ত" },
+  foodPrice: { en: "Agree the plate price before ordering", bn: "অর্ডারের আগে প্লেটের দাম ঠিক করুন" },
+  foodMadinah: { en: "Choose at the door, not from an old blog", bn: "পুরোনো ব্লগ নয়, দরজায় দেখে বাছুন" },
+  foodElderly: { en: "One hot meal, two simple ones", bn: "এক বেলা গরম, দুই বেলা সহজ" },
+  foodGrocery: { en: "Set the budget from your own receipts", bn: "নিজের রসিদ থেকেই বাজেট ঠিক করুন" },
+  ziyarahHira: { en: "The museums are indoors, the cave is a climb", bn: "মিউজিয়াম ভেতরে, গুহা একটি চড়াই" },
+  ziyarahCemetery: { en: "The graves are unmarked, so the visit is about the ground", bn: "কবরগুলো চিহ্নহীন, তাই ভ্রমণটা মাটি ও ইতিহাসের" },
+  ziyarahCar: { en: "Fix the total, the hours and the stops before the car moves", bn: "গাড়ি ছোড়ার আগে মোট দাম, ঘণ্টা ও স্টপ ঠিক করুন" },
+  ziyarahMadinah: { en: "Ask for the drop-off gate, not the name", bn: "নাম নয়, ড্রপ-অফের গেট বলুন" },
+  ziyarahBus: { en: "Confirm the bus is running before you buy the pass", bn: "পাস কেনার আগে বাস চলছে কি না নিশ্চিত করুন" },
+  ziyarahTaif: { en: "Say whether the return includes an Umrah before you leave Makkah", bn: "মক্কা ছাড়ার আগেই বলুন ফেরার পথে ওমরাহ আছে কি না" },
+  ziyarahBadr: { en: "If the day trip is Badr, price the whole leg, not the stop", bn: "ডে-ট্রিপ বদর হলে পুরো লেগের দাম ঠিক করুন, শুধু স্টপের নয়" },
 } as const;
 
 export function getTravellerCheck(paragraph: string) {
-  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir)\):\s+([\s\S]+)$/);
+  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth|ihramPoint|ihramGarments|ihramTransit|ihramMadinah|ihramPersonal|ramadanDeadline|ramadanItikaf|ramadanAnnouncement|ramadanBudget|ramadanRoute|zamzamBox|zamzamAirline|datesAllowance|goldDeclare|vatRefund|foodHalal|foodMakkah|foodPrice|foodMadinah|foodElderly|foodGrocery|ziyarahHira|ziyarahCemetery|ziyarahCar|ziyarahMadinah|ziyarahBus|ziyarahTaif|ziyarahBadr)\):\s+([\s\S]+)$/);
   if (!match) return null;
   const key = match[2] as keyof typeof TITLES;
   const locale = match[1] === "Traveller check" ? "en" : "bn";
