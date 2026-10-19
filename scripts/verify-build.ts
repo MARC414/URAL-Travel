@@ -4910,6 +4910,63 @@ check([
 ].every((fixture) => IHRAM_RETIRED_CLAIMS.test(fixture)),
   "Ihram retired-claim guard rejects all five reintroduction fixtures (negative controls)");
 
+// Ramadan / I'tikaf: the calendar, the Ministry's season cut-offs and the Authority's published
+// permit conditions are external claims; no journey time, sales-channel exclusive or promised
+// I'tikaf place may return. Ledger: docs/growth/RAMADAN-ITIKAF-SOURCE-REVIEW.md (2026-10-19).
+const RAMADAN_SLUG = "ramadan-umrah-itikaf-guide-bangladesh-booking-budget";
+const RAMADAN_NOTE_KEYS = ["ramadanDeadline", "ramadanItikaf", "ramadanAnnouncement", "ramadanBudget", "ramadanRoute"];
+const RAMADAN_RETIRED_CLAIMS = /two and a half hours|two-and-a-half hours|booked only through|online-only, free|আড়াই ঘণ্টা|কেবল অফিশিয়াল পোর্টাল|guaranteed place for every pilgrim|every pilgrim is guaranteed an I'tikaf|প্রত্যেক যাত্রীই ইতিকাফের জায়গা পাবেন|Ramadan packages start at BDT/i;
+const ramadanClaimSurfaces: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  const html = read(path.join(DIST_DIR, ...(locale === "bn" ? ["bn"] : []), "blog", `${RAMADAN_SLUG}.html`)) ?? "";
+  const post = getLocalizedBlogs(locale).find((entry) => entry.slug === RAMADAN_SLUG);
+  const body = locale === "en" ? BLOG_BODY[RAMADAN_SLUG] : post?.content ?? "";
+  const text = normalizeStructuredText(html);
+  ramadanClaimSurfaces.push(body, post?.title ?? "", post?.summary ?? "", JSON.stringify(post?.affiliateCTA), text);
+  const graph = getSeoSchemaGraph(html);
+  const procedures = graph.filter((node) => hasSchemaType(node, "HowTo"));
+  const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
+  const notes = body.split(/\n+/).map(getTravellerCheck).filter((note) => note !== null);
+  const cautionPresent = (candidate: string, key: string) => {
+    const note = notes.find((entry) => entry.key === key);
+    return Boolean(note && candidate.includes(normalizeStructuredText(note.title)) && candidate.includes(normalizeStructuredText(note.text)));
+  };
+  check(
+    post?.updatedAt === "2026-10-19" && post.references?.length === 8 &&
+      post.references.every((reference) => html.includes(reference.url.replace(/&/g, "&amp;")) || html.includes(reference.url)) &&
+      procedures.length === 0 &&
+      Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 6,
+    `${locale} Ramadan guide output preserves eight sources, update, six FAQs and no procedure schema`
+  );
+  check(
+    [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((match) => match[1]).join(",") === RAMADAN_NOTE_KEYS.join(",") &&
+      RAMADAN_NOTE_KEYS.every((key) => cautionPresent(text, key)) &&
+      (locale === "en"
+        ? text.includes("8 February 2027") && text.includes("9 March 2027") && text.includes("23 March 2027") &&
+          text.includes("citizens or residents in the Kingdom holding a valid residency permit") &&
+          text.includes("no announcement yet as of 19 October 2026")
+        : text.includes("৮ ফেব্রুয়ারি ২০২৭") && text.includes("৯ মার্চ ২০২৭") && text.includes("২৩ মার্চ ২০২৭") &&
+          text.includes("বৈধ ইকামাধারী বাসিন্দা") &&
+          text.includes("১৯ অক্টোবর ২০২৬ পর্যন্ত কোনো ঘোষণা নেই")),
+    `${locale} Ramadan guide output retains the calendar, the Ministry cut-offs and the published permit conditions`
+  );
+  for (const key of RAMADAN_NOTE_KEYS) {
+    const note = notes.find((entry) => entry.key === key);
+    check(Boolean(note) && !cautionPresent(text.replace(normalizeStructuredText(note!.text), ""), key),
+      `${locale} Ramadan caution guard rejects removed ${key} body (negative control)`);
+  }
+}
+check(ramadanClaimSurfaces.every((surface) => surface && !RAMADAN_RETIRED_CLAIMS.test(surface)),
+  "Ramadan EN/BN source, metadata and generated pages do not restore journey-time, channel-exclusive or promised-place claims");
+check([
+  "the Haramain high-speed railway takes two and a half hours",
+  "tickets are booked only through the official portal",
+  "registration is online-only, free and instant",
+  "every pilgrim is guaranteed an I'tikaf place",
+  "Ramadan packages start at BDT 95,000 per person",
+].every((fixture) => RAMADAN_RETIRED_CLAIMS.test(fixture)),
+  "Ramadan retired-claim guard rejects all five reintroduction fixtures (negative controls)");
+
 // --- Wave 6: Zamzam & Customs Claims Guards (2026-10-17) ------------------
 // Guard against reintroducing the outdated SAR 9.50-12.50 Zamzam price range
 // (now 48 SAR per Nusuk 2026), unqualified "free" airline claims for Zamzam

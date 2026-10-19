@@ -81,6 +81,9 @@ jobs:
       - name: Verify Ihram and Miqat source boundaries and locale parity
         run: npm run test:ihram-miqat-guide
 
+      - name: Verify Ramadan calendar, I'tikaf eligibility and season deadlines
+        run: npm run test:ramadan-itikaf-guide
+
       - name: Type-check
         run: npm run lint
 

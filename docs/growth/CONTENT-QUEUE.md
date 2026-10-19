@@ -922,3 +922,29 @@ fourteen Ihram output/caution controls and five retired-claim fixtures. No carri
 rail or prayer-room facility, or live page was tested; no scholarly review, visual QA, deployment or live check.
 Progress **8/12 core pairs** by article-review count only; four core plus adjacent Hajj remain. Next independent
 agent-owned asset: Ramadan/I'tikaf.
+
+### 19 October 2026 — Ramadan/I'tikaf pair revised (9/12 core Umrah pairs)
+
+`ramadan-umrah-itikaf-guide-bangladesh-booking-budget` EN/BN rewritten against
+[`RAMADAN-ITIKAF-SOURCE-REVIEW.md`](RAMADAN-ITIKAF-SOURCE-REVIEW.md): the Umm al-Qura 1448 reference, the Ministry's
+1448 season calendar, three SPA announcements, Sahih al-Bukhari 1782, the SAR portal and the Authority's e-service.
+
+Material correction: official I'tikaf permits are a capacity-limited service whose published conditions (2025
+announcement) are for applicants 18+ who are "citizens or residents in the Kingdom holding a valid residency permit",
+free of charge, with Nafath reserved for citizens and residents in 2026. The pair no longer implies a visitor on an
+Umrah visa can obtain a place; it says not to plan on one, while keeping the right to pray in the Haram.
+
+Added the Ministry's four dated cut-offs (visa 9 March 2027, entry 23 March, departure 7 April, season opened 31 May
+2026), the one-day 1447 announcement lead time, the Nusuk-versus-I'tikaf permit distinction, and the corrected
+Madinah-first sequence with Ihram at Dhul Hulayfah. Removed the "two and a half hours" Haramain journey time, the
+"booked only through" sales claim and the unqualified "free/online-only" framing. Six visible/schema FAQs, five
+cautions (`ramadanDeadline`, `ramadanItikaf`, `ramadanAnnouncement`, `ramadanBudget`, `ramadanRoute`), six curated
+links per locale, optional qualified eSIM CTA, price panel suppressed, no HowTo. Original 27 Sep publication, author
+and slug retained; `updatedAt` 2026-10-19.
+
+Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 +
+budget 25, scheduling and 23 sitemap controls, lint, build and **323 build checks** passed (107 EN + 107 BN routes),
+including fourteen Ramadan output/caution controls and five retired-claim fixtures. No portal account, application or
+identity flow; no 1448 conditions published; no quote, booking, visual QA, deployment or live check. Progress
+**9/12 core pairs** by article-review count only; three core plus adjacent Hajj remain. Next independent agent-owned
+asset: Zamzam/customs.

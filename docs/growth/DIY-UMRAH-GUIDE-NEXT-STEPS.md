@@ -138,3 +138,15 @@ internal links per locale include `/umrah` and four siblings, and the CTA is opt
 budget 25, Nusuk 16, DIY 17, stopover 17, hotel/rail 17, flights 17, women 17, older travellers 20, scheduling,
 sitemaps 23, lint, build and **307 build checks** pass. No deployment, no visual/live check, no carrier confirmation
 and no scholarly sign-off. Four core pairs plus adjacent Hajj remain; next asset Ramadan/I'tikaf.
+
+### Ramadan/I'tikaf checkpoint — 19 October 2026
+
+Ninth core EN/BN pair revised and tested; `RAMADAN-ITIKAF-SOURCE-REVIEW.md` holds the ledger. The article now states
+the Authority's published I'tikaf conditions (18+, citizens or residents with valid residency, free, capacity review)
+and tells a visitor on an Umrah visa not to plan around a place, instead of implying access. The Ministry's four 1448
+season dates (visa 9 March, entry 23 March, departure 7 April, season opened 31 May 2026) replace a vague window, the
+1447 precedent is dated with the Nafath restriction, and the Haramain journey-time and sales-channel claims are gone.
+Six FAQs match schema, five cautions sit at the decisions, six links per locale include `/umrah`, and the CTA is
+optional and qualified. 28 targeted tests, all prior suites, lint, build and **323 build checks** pass. No portal,
+application or identity flow was touched, no 1448 conditions exist, and no scholar reviewed the wording. Three core
+pairs plus adjacent Hajj remain; next asset Zamzam/customs.

@@ -1897,7 +1897,8 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                         activePost.slug !== "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" &&
                         activePost.slug !== "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" &&
                         activePost.slug !== "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" &&
-                        activePost.slug !== "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" && (
+                        activePost.slug !== "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" &&
+                        activePost.slug !== "ramadan-umrah-itikaf-guide-bangladesh-booking-budget" && (
 
                         <TravelIntelligence
 

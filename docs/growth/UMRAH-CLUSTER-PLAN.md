@@ -28,6 +28,15 @@ facilities, and personal religious rulings remain unresolved and are visibly att
 Current validation: 28 Ihram tests, **307 build checks**; visual, qualified-review, approval and release gates remain
 separate. Next independent agent-owned asset: Ramadan/I'tikaf.
 
+**19 October Ramadan/I'tikaf follow-up:** [`RAMADAN-ITIKAF-SOURCE-REVIEW.md`](RAMADAN-ITIKAF-SOURCE-REVIEW.md) records
+the ninth source-reviewed core EN/BN revision. **9/12 core pairs** revised/tested by article count only; three core
+pairs plus adjacent Hajj remain. The published I'tikaf conditions — 18+, citizens or residents with valid residency,
+free, capacity-reviewed — now replace the implication that any pilgrim can obtain a place, and the Ministry's four
+1448 season dates replace a vague window. The Haramain journey time and sales-channel exclusivity are removed. No
+portal, application or identity flow was observed; no 1448 conditions exist yet. Current validation: 28 Ramadan
+tests, **323 build checks**; visual, qualified-review, approval and release gates remain separate. Next independent
+agent-owned asset: Zamzam/customs.
+
 **Use with:** [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md), [`SEO-KEYWORD-MAP.md`](../../SEO-KEYWORD-MAP.md), [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md), [`CONTENT-OS.md`](CONTENT-OS.md), and [`AI-WRITING-PROMPTS.md`](AI-WRITING-PROMPTS.md).
 
 This is an operational plan for consolidating URAL's existing Umrah content, not a replacement for or rewrite of the strategy plan of record. It uses the current repository inventory and the Umrah research ledger checked on 14 October 2026. Bangladesh SERP observations and a Search Console query export were not present in those materials; demand and format hypotheses below are **not measured**. Re-check season-sensitive rules and prices against primary sources immediately before each release.

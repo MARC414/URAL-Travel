@@ -389,9 +389,9 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Compare roundtrip and open-jaw Umrah flights from Dhaka: ticketed baggage, Zamzam conditions, connections and same-basis quotes—not promised savings.",
   },
   "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget": {
-    title: "Ramadan Umrah & I'tikaf Guide from Bangladesh | URAL",
+    title: "Ramadan 1448 Umrah Dates & I'tikaf Eligibility | URAL",
     description:
-      "Ramadan 1448 dates (8 Feb – 8 Mar 2027, moon sighting), the official General Authority I'tikaf registration flow, and a claim-free budget plan for Umrah from Bangladesh.",
+      "Ramadan 1448 starts 8 Feb 2027; Umrah visas close 9 Mar, entry 23 Mar. What the Ministry calendar says and who has actually been eligible for an I'tikaf permit.",
   },
   "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": {
     title: "Ihram & Miqat Rules: Dhaka to Jeddah Flights | URAL",

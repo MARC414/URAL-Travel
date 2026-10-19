@@ -935,41 +935,83 @@ No. Confirm through-ticket versus separate-ticket structure, baggage transfer an
 How much time should I leave between landing and a train or another flight?
 There is no universal verified buffer in this guide. Ask the relevant carrier/operator about the actual terminals, immigration, bag collection/recheck, assistance and deadlines, and allow contingency for your party. A scheduled arrival time alone does not guarantee the onward journey. [2][4]`,
 
-  "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": `This guide is for Bangladeshi pilgrims deciding whether to travel for Ramadan 1448 — expected 8 February to 8 March 2027 [1] — whether to register for I'tikaf in the Two Holy Mosques, and how to build a budget they can verify instead of trusting a savings slogan. The Prophet Muhammad (PBUH) said: "Perform Umrah when Ramadan comes, for Umrah in Ramadan is equal to Hajj (in reward)" [5].
+  "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": `This guide is for Bangladeshi pilgrims deciding whether to travel for Ramadan 1448 — expected 8 February to 8 March 2027 [1] — whether to chase an I'tikaf place in the Two Holy Mosques, and how to plan a budget without a price list that does not exist. The Prophet Muhammad (PBUH) said: "Perform Umrah when Ramadan comes, for Umrah in Ramadan is equal to Hajj (in reward)" — or words to that effect [6].
 
-Quick Answer — Ramadan 1448 begins Monday 8 February 2027 on Saudi Arabia's official Umm al-Qura calendar, with the religious start confirmed by moon sighting on the evening of 29 Sha'ban (a day either way) [1]. Official I'tikaf registration is online-only, free and capacity-limited through the General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque [2][3]. No authority publishes Ramadan hotel prices, so treat every BDT figure you see as unverified until it matches a dated quote in your name — this guide publishes dates, rules and process, not savings percentages.
+Quick Answer — Checked 19 October 2026: on the Umm al-Qura calendar, 1 Ramadan 1448 is Monday 8 February 2027 and 1 Shawwal is Tuesday 9 March 2027, both subject to the official moon sighting [1][2]. The Ministry of Hajj and Umrah's 1448 season calendar closes Umrah visa issuance on 1 Shawwal (9 March 2027), the last entry on 15 Shawwal (23 March 2027) and the last departure on 30 Shawwal (7 April 2027) [2]. Official I'tikaf registration is a capacity-limited permit service of the General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque, and its published conditions have been aimed at citizens and residents holding a valid residency permit — not at visitors on an Umrah visa [3][4]. Nothing for 1448 has been announced yet, and nothing about it should be paid for in advance.
 
-1. WHEN IS RAMADAN UMRAH 2026–2027, AND WHEN SHOULD I BOOK?
-- The calendar: 1 Ramadan 1448 falls on Monday 8 February 2027 and the Umm al-Qura calendar gives the month 29 days, putting Eid al-Fitr on 9 March 2027 — both subject to the official moon-sighting announcement [1].
-- The contested window: the last ten nights begin with the night of 21 Ramadan. On that calendar 21 Ramadan falls on 28 February 2027, so that night starts at sunset on 27 February [1]. Inventory for the final Ashra and Eid is the tightest of the whole Umrah year — decide that leg first if you need it.
-- The entry window: Umrah visa issuance, entry and departure dates for each season are set by the Ministry of Hajj and Umrah's season calendar; for 1448H that window runs from the season opening through the published final visa, entry and exit dates (checked 17 October 2026 — season-bound, re-check the current notice before you pay) [4].
-- Book in that order: a dated flight quote first, then hotels against the season window, then the train.
+1. WHEN IS RAMADAN 1448, AND WHAT ARE THE SEASON DEADLINES?
+- Start and end: 1 Ramadan 1448 falls on Monday 8 February 2027 on the Umm al-Qura calendar, and 1 Shawwal 1448 is dated Tuesday 9 March 2027 — the Ministry itself uses that date for the end of the Umrah season. Both remain subject to the sighting announcement, so keep a day either way [1][2].
+- The last ten nights: they begin with the night of 21 Ramadan, which starts at sunset on Saturday 27 February 2027 on this calendar. If your trip is built around the final Ashra, that sunset — not 1 Ramadan — is the date your flights and hotel nights have to fit [1].
+- The visa cut-off is the trap: Umrah visa issuance for the 1448 season ends on 9 March 2027, the day Eid is expected. A decision taken "after Eid" cannot produce a new Umrah visa for this season at all [2].
+- The entry cut-off: pilgrims must enter the Kingdom by 23 March 2027, and every Umrah pilgrim must have departed by 7 April 2027 [2].
+- The season opened on 31 May 2026, with Makkah entry and Nusuk Umrah permits from 1 June 2026, so the window has been running for months already [2].
 
-2. WHAT DOES A RAMADAN UMRAH FROM BANGLADESH ACTUALLY COST?
-There is no official Ramadan price list and no authority that certifies a package price. We removed the BDT tables this article used to carry: none of them could be verified against a dated, same-basis source basket, and repeating them would be guessing. Here is what you can plan around instead:
-- What is fixed: your own costs at home (passport, endorsements, flights you can quote on the day) and every official fee a government or carrier publishes for your booking.
-- What floats: Makkah hotel and package prices are set by sellers per date, per room and per package — the first twenty nights and the final Ashra are sold as different products, and only a dated quote tells you which number applies to you. The DIY Umrah guide publishes this site's only dated planning range (BDT 1,16,000–1,32,000 per person, standard 10-day, four-sharing basis, unre-priced since its 14 October 2026 approval) as a non-Ramadan baseline; Ramadan quotes come on top of that shape and must be re-quoted — check the live guide before relying on that baseline.
-- Three levers that actually move your total: travel dates (first twenty nights versus final Ashra), trip length, and routing (Madinah first versus Makkah direct). Compare live flight quotes before any hotel money changes hands, and use our DIY portal only as an illustrative planner — never as a quote.
+Traveller check (ramadanDeadline): Put the three Ministry dates — 9 March for visa issuance, 23 March for entry, 7 April for departure — into your own calendar before you compare any package. A seller who quotes you a Ramadan trip that starts after 23 March is selling something the season calendar does not allow. Confirm every date against the current calendar on haj.gov.sa before a non-refundable payment, because seasons are re-issued.
 
-3. HOW TO REGISTER FOR OFFICIAL I'TIKAF IN MAKKAH AND MADINAH
-The I'tikaf permit for the last ten days of Ramadan in the Two Holy Mosques is issued by the General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque through its electronic service [2]. What last season actually looked like (dated precedent, not a promise for next season): registration opened Friday 3 Ramadan 1447H — 20 February 2026 — at 11:00 a.m. Saudi time through eservices.alharamain.gov.sa or the Nafath platform; I'tikaf ran from 20 Ramadan to the end of 30 Ramadan under the approved organizational plan; applications were reviewed against capacity and successful applicants were notified by SMS [3].
-For Ramadan 1448 the Authority announces dates annually through its official accounts [2] — as of 17 October 2026 that announcement has not been made, so do not plan around last year's opening day. Read the current conditions on the portal when it opens: eligibility, required status and documents are set by the Authority for that season.
+2. WHAT IS AN OFFICIAL I'TIKAF PERMIT, AND WHO HAS ACTUALLY BEEN ELIGIBLE?
+The Authority's e-service takes applications for a permit to stay in the Two Holy Mosques during the last ten days of Ramadan [3][8]. It is not a hotel booking, not a package add-on and not a ticket you can buy: applicants choose the mosque, accept conditions after an awareness brief, and are then reviewed against available capacity [3][4].
 
-4. SUHOOR, IFTAR AND TAWAF IN THE CROWDS
-- Agree a family meeting point and a fallback before you enter the Haram — the courtyards after Taraweeh are where groups get separated.
-- Schedule your Tawaf for after Fajr or after Isha/Taraweeh rather than the midday sun while you are fasting; less heat, shorter waits, safer pacing.
-- For iftar, eat at your hotel or at mosque iftar services where they are offered, and arrive well before Maghrib if you want a place in the spread.
-- Keep a digital copy of your passport and visa, and save the hotel's address in Arabic for taxi drivers.
+The published conditions matter more than the process. When the Authority described the service in 2025, it said permits were for applicants at least 18 years old who were "either citizens or residents in the Kingdom holding a valid residency permit", that permits were free of charge, and that the service was available in Arabic, English and Urdu [4]. The 2026 announcement routed identity through Nafath "for citizens and residents" and did not announce a visitor route [3][5]. Nothing in the two announcements promises a place to someone arriving on an Umrah visa.
 
-5. A CALENDAR SHAPE THAT KEEPS YOUR UMRAH INSIDE RAMADAN
-If you want your Umrah performed inside Ramadan without anchoring the whole trip on the final Ashra, one routing pattern works on any budget: fly into Madinah in late Sha'ban, perform Umrah once Ramadan begins, then continue to Makkah. The Haramain high-speed railway links Madinah and Makkah in about two and a half hours, booked only through the official Saudi Railways portal (sar.hhr.sa) [6]. This is a routing pattern, not a savings promise — we publish no percentage because we have not verified a same-basis price comparison. Ask every seller for a dated, itemized quote (visa, hotel, transport, meals) and compare like for like.
+For a Bangladeshi household that means planning on the honest assumption: you can pray, perform Tawaf and spend the night in the Haram as a pilgrim, but an official I'tikaf place is a separate, residency-oriented service, and it may simply not be open to you. Check the current conditions on the Authority's portal for 1448 rather than trusting a 2026 precedent, and take any religious question about the validity or scope of your own I'tikaf to a qualified scholar [8].
 
-6. BEFORE YOU PAY: THE CHECKLIST
-- Dated quote in writing with inclusions named; no deal you cannot re-check the next day.
-- Season window verified against the current Ministry calendar before any non-refundable payment [4].
-- I'tikaf dates watched on the Authority's official channels the moment Ramadan approaches [2][3].
-- Passport validity, visa channel and document checklist confirmed in the DIY guide (linked below).
-- References checked 17 October 2026. Prices, permits and timetables change every season — re-check every source beside every number.`,
+Traveller check (ramadanItikaf): Do not buy a "guaranteed I'tikaf place" from any agent. The permit is applied for by the individual through the Authority's own service, is reviewed against capacity, and the published conditions have been tied to citizens and residents. Nothing this page says changes your right to worship in the Haram; it only refuses to promise you a reserved place.
+
+3. HOW REGISTRATION WORKED IN 1447 — AND WHAT TO WATCH FOR 1448
+The dated precedent, not a promise: on 2 Ramadan 1447H (19 February 2026) the Authority announced that registration would open the next day, Friday 3 Ramadan (20 February 2026) at 11:00 a.m. Saudi time. Registration ran through eservices.alharamain.gov.sa by logging in or creating an account, or through Nafath for citizens and residents. Applicants selected the location in either mosque, agreed to the terms, completed the details and submitted; applications were reviewed according to available capacity and successful applicants were told by text message with nomination details. I'tikaf itself ran from 20 Ramadan to the end of the month, with a parallel announcement for the Prophet's Mosque in Madinah [3][5][8].
+
+For 1448 there is no announcement yet as of 19 October 2026, and that is normal rather than a delay: the 1447 notice appeared one day before registration opened, not months ahead. So there is nothing legitimate to "pre-book" in October, and no reason to pay an intermediary to watch the page for you. Watch the Authority's official channels as Ramadan approaches, and read the conditions that season publishes [3][4].
+
+Two permits are easy to confuse. The Nusuk Umrah permit lets you enter Makkah and perform Umrah; the I'tikaf permit is a separate application to stay in the mosque in the last ten days. Neither guarantees the other [2][8].
+
+Traveller check (ramadanAnnouncement): Treat any "I'tikaf registration is open for 1448" message you see before the Authority announces it as unverified — including forwarded screenshots. Confirm the date, time and link on the Authority's own service before entering personal details, and never send your passport, OTP or account credentials to anyone offering to register on your behalf.
+
+4. WHAT A RAMADAN UMRAH ACTUALLY COSTS
+There is no official Ramadan price list, and no authority certifies a package price. We removed the BDT tables this article used to carry because none of them could be checked against a dated, same-basis source, and repeating them would be guessing. What you can plan around instead:
+- Fixed costs: your own documents and endorsements, flights you can quote for your dates, and every fee a government or carrier publishes for your specific booking.
+- Floating costs: Makkah and Madinah hotel prices are set by sellers per date, per room and per package. The first twenty nights and the final Ashra are different products at different prices, and only a dated quote tells you which number applies to you.
+- A labelled baseline, not a Ramadan price: the DIY Umrah guide publishes this site's only dated planning range (BDT 1,16,000–1,32,000 per person, standard 10-day, four-sharing basis, unre-priced since its 14 October 2026 approval) as a non-Ramadan shape. Ramadan quotes sit on top of that shape and have to be re-quoted for your dates.
+- The three levers that actually move the total: which ten days you travel, how long you stay, and whether you land in Madinah or Jeddah first.
+
+Traveller check (ramadanBudget): Ask for a dated, itemised quote — visa, hotel nights, transport, meals, and what is excluded — and compare two quotes on the same dates before paying. A per-person "Ramadan discount" with no date and no room type is not a price you can verify, and this page publishes no savings percentage because none has been established.
+
+5. SUHOOR, IFTAR AND TAWAF IN THE CROWDS
+- Agree a family meeting point and a fallback outside the Haram before you separate; the courtyards after Taraweeh are where groups lose each other.
+- Move Tawaf to after Fajr or after Isha and Taraweeh rather than the middle of a fasting day, and keep the pace you can actually sustain.
+- For iftar, eat at your hotel or at the mosque services where they are offered, and arrive well before Maghrib if you want a place at the spread.
+- Carry a digital copy of your passport and visa, save the hotel address in Arabic, and keep the group's phone numbers written down as well as in a phone.
+- If anyone in the family has a medical condition, the pacing questions belong with their own clinician before the trip, not with a travel article.
+
+6. A ROUTING SHAPE THAT PUTS UMRAH INSIDE RAMADAN
+If the point is to perform Umrah inside Ramadan without anchoring everything to the last ten nights, one pattern works on most budgets: fly to Madinah in Sha'ban, wait for the month to begin, then travel to Makkah in Ihram and perform Umrah when you arrive. The Ihram for that leg is entered at Dhul Hulayfah before the journey, not in Makkah — our Ihram and Miqat guide covers the route rule in detail.
+
+Two timing checks make or break this plan. First, the Umrah visa must be issued before 9 March 2027 and you must enter the Kingdom by 23 March 2027, so a Sha'ban arrival has to sit inside that window [2]. Second, confirm the Nusuk Umrah permit before you head for the Haram; the visa alone is not the permit [2].
+
+For the Madinah–Makkah leg, the Haramain High-Speed Railway publishes its own timetable and sells through its own portal, with separate accessibility terms for wheelchair users [7]. Check the journey time and the date you actually need on that timetable rather than relying on a remembered figure, and book the leg you can afford to miss if the first choice sells out.
+
+Traveller check (ramadanRoute): Before booking a Madinah-first arrival, confirm three things in writing: your visa issue date, your entry date, and your Nusuk Umrah permit. Then confirm where the Ihram is entered for the Makkah leg. A cheap Sha'ban flight is worthless if the visa cannot be issued in time or the permit is not in place.
+
+7. BEFORE YOU PAY: THE CHECKLIST
+- A dated, itemised quote in writing, with inclusions and exclusions named.
+- The three season dates verified against the current Ministry calendar, not a screenshot [2].
+- The Nusuk Umrah permit confirmed for the dates you will actually be in Makkah [2].
+- An I'tikaf expectation you can defend: the Authority's conditions, not an agent's promise [3][4].
+- Passport validity, visa channel and document checks confirmed in the DIY guide before any non-refundable payment.
+- Sources on this page checked 19 October 2026. Dates, permits and prices change every season — re-check each source beside each number.
+
+8. FREQUENTLY ASKED QUESTIONS
+When does Ramadan 1448 start in Saudi Arabia?
+Monday 8 February 2027 on the Umm al-Qura calendar, with 1 Shawwal dated 9 March 2027. Both depend on the official moon sighting, so allow a day either way. [1][2]
+Can I get an official I'tikaf place while I am in Saudi Arabia on an Umrah visa?
+Do not plan on it. The Authority's published conditions for the permit service have been aimed at citizens and residents holding a valid residency permit, and the 1447 announcement did not announce a visitor route. Confirm the 1448 conditions on the Authority's portal, and remember you can still pray in the Haram without a permit. [3][4][8]
+When does I'tikaf registration open for 1448?
+It has not been announced as of 19 October 2026. In 1447 the notice was published on 2 Ramadan and registration opened the next day at 11:00 a.m., so expect days of notice rather than months. [3]
+What is the last date to get an Umrah visa for this season?
+Visa issuance ends on 1 Shawwal 1448, 9 March 2027. Entry ends on 15 Shawwal, 23 March 2027, and departure on 30 Shawwal, 7 April 2027. [2]
+Do I need a Nusuk permit as well as the visa?
+Yes. The visa allows entry; the Nusuk Umrah permit is what allows you to enter Makkah and perform Umrah, and it is separate from any I'tikaf application. [2][8]
+Is Ramadan Umrah really equal to Hajj?
+The narration in Sahih al-Bukhari reports the Prophet (PBUH) telling an Ansari woman to perform Umrah when Ramadan comes, "for Umrah in Ramadan is equal to Hajj (in reward)" — or words to that effect. It is a reported virtue, not a booking claim, and questions about your own situation belong with a qualified scholar. [6]`,
   "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": `This guide is for Bangladeshi pilgrims deciding when to enter Ihram on the way to Makkah — flying direct from Dhaka to Jeddah, connecting through a Gulf hub, or landing in Madinah first. It separates three things that are often blended together: what the published boundary rule requires, what your particular route actually does, and what is a personal religious question you should take to a qualified scholar. It is not a fatwa, a flight-tracking tool or an inspected airport procedure.
 
 Quick Answer — Checked 19 October 2026: the Ministry of Hajj and Umrah states that pilgrims arriving by air must not pass the Miqat, or the point parallel to it, without entering Ihram, and that King Abdulaziz International Airport in Jeddah is "neither a Miqat nor a place for entering Ihram." Entering Ihram means intending Umrah or Hajj and beginning the Talbiyah — not merely wearing the cloth. Which of the five points applies depends on the route your flight actually flies, and the Ministry says airlines heading to Jeddah usually announce when the aircraft is aligned with a Miqat. Treat the announcement as help, not as the requirement itself. [1][2][3]

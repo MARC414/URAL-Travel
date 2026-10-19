@@ -2724,52 +2724,64 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-19",
     slug: "ramadan-umrah-itikaf-guide-bangladesh-booking-budget",
-    title: "Ramadan Umrah & Last 10 Days I'tikaf Guide from Bangladesh (2026–2027): Dates, Registration & Budget Plan",
-    summary: "The Prophet Muhammad (PBUH) said: \"Perform Umrah when Ramadan comes, for Umrah in Ramadan is equal to Hajj in reward\" (Sahih al-Bukhari 1782). Ramadan 1448 is expected 8 February – 8 March 2027 on the official Umm al-Qura calendar, subject to moon sighting. This guide gives Bangladeshi pilgrims the checked dates, the official General Authority I'tikaf registration process as it actually ran last season, and a candid budget framework — this site no longer publishes Ramadan BDT tables or savings percentages it cannot verify against a dated source.",
+    title: "Ramadan 1448 Umrah & I'tikaf Guide from Bangladesh (2027): Dates, Season Deadlines and Who Can Register",
+    summary: "Ramadan 1448 is expected to begin on Monday 8 February 2027, and the Ministry of Hajj and Umrah closes Umrah visa issuance on 9 March 2027, entry on 23 March and departure on 7 April. Checked on 19 October 2026 against the Umm al-Qura calendar, the Ministry's 1448 season calendar and the Authority's own I'tikaf announcements, this guide separates the dates you can plan on from the permit nobody should promise you — the published I'tikaf conditions have been aimed at citizens and residents, not visitors on an Umrah visa.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
-    updatedAt: "2026-10-17",
+    updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "6 min read",
+    readTime: "9 min read",
     references: [
       {
-        name: "Umm al-Qura Calendar — Annual reference 1448 AH (Ramadan 1448 dates)",
-        nameBn: "উম্মুল কুরা ক্যালেন্ডার — ১৪৪৮ হিজরি বার্ষিক রেফারেন্স (রমজান ১৪৪৮-এর তারিখ)",
+        name: "Umm al-Qura Calendar — Annual reference 1448 AH (1 Ramadan 1448 = Monday 8 February 2027)",
+        nameBn: "উম্মুল কুরা ক্যালেন্ডার — ১৪৪৮ হিজরি বার্ষিক রেফারেন্স (১ রমজান ১৪৪৮ = সোমবার ৮ ফেব্রুয়ারি ২০২৭)",
         url: "https://www.ummulqura.org.sa/en/annual-reference",
       },
       {
-        name: "General Authority for the Care of the Affairs of the Grand Mosque and the Prophet's Mosque — I'tikaf service & annual registration notices",
-        nameBn: "মসজিদুল হারাম ও মসজিদে নববীর তত্ত্বাবধায়ন কর্তৃপক্ষ — ইতিকাফ সেবা ও বার্ষিক নিবন্ধন বিজ্ঞপ্তি",
-        url: "https://alharamain.gov.sa/public/?site=en",
-      },
-      {
-        name: "Saudi Press Agency — I'tikaf registration at the Two Holy Mosques opens 3 Ramadan 1447 (20 February 2026)",
-        nameBn: "সৌদি প্রেস এজেন্সি — ৩ রমজান ১৪৪৭ (২০ ফেব্রুয়ারি ২০২৬) থেকে দুই হারাম মসজিদে ইতিকাফ নিবন্ধন",
-        url: "https://spa.gov.sa/en/N2518728",
-      },
-      {
-        name: "Ministry of Hajj and Umrah — Umrah Season Calendar for 1448 AH",
-        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — ১৪৪৮ হিজরি ওমরাহ সিজন ক্যালেন্ডার",
+        name: "Ministry of Hajj and Umrah — Umrah Season Calendar for 1448 AH: visa issuance to 1 Shawwal (9 March 2027), entry to 15 Shawwal (23 March), departure by 30 Shawwal (7 April)",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — ১৪৪৮ হিজরি ওমরাহ সিজন ক্যালেন্ডার: ভিসা ১ শাওয়াল (৯ মার্চ ২০২৭), প্রবেশ ১৫ শাওয়াল (২৩ মার্চ), প্রস্থান ৩০ শাওয়াল (৭ এপ্রিল)",
         url: "https://haj.gov.sa/en/Media-Center/Ministry-News/2026/Ministry-of-Hajj-and-Umrah-Announces-the-Umrah-Season-Calendar-for-1448-AH",
       },
       {
-        name: "Sahih al-Bukhari 1782 — \"'Umra in (the month of) Ramadan\"",
-        nameBn: "সহীহ বুখারী ১৭৮২ — \"রমজান মাসে ওমরাহ\"",
+        name: "Saudi Press Agency — I'tikaf registration at the Two Holy Mosques opens 3 Ramadan 1447 (20 February 2026): 20–30 Ramadan, portal or Nafath, capacity review, SMS nomination",
+        nameBn: "সৌদি প্রেস এজেন্সি — ৩ রমজান ১৪৪৭ (২০ ফেব্রুয়ারি ২০২৬) থেকে দুই হারাম মসজিদে ইতিকাফ নিবন্ধন: ২০–৩০ রমজান, পোর্টাল বা Nafath, আসন যাচাই, এসএমএস মনোনয়ন",
+        url: "https://spa.gov.sa/en/N2518728",
+      },
+      {
+        name: "Saudi Press Agency — I'tikaf permit service described by the Authority (5 March 2025): 18+, citizens or residents with valid residency, free of charge, awareness video, Arabic/English/Urdu",
+        nameBn: "সৌদি প্রেস এজেন্সি — কর্তৃপক্ষের বর্ণিত ইতিকাফ পারমিট সেবা (৫ মার্চ ২০২৫): ১৮+, নাগরিক বা বৈধ ইকামাধারী বাসিন্দা, বিনামূল্যে, সচেতনতা ভিডিও, আরবি/ইংরেজি/উর্দু",
+        url: "https://spa.gov.sa/en/N2275662",
+      },
+      {
+        name: "Saudi Press Agency — parallel I'tikaf registration announcement for the Prophet's Mosque in Madinah, Ramadan 1447",
+        nameBn: "সৌদি প্রেস এজেন্সি — মদিনার মসজিদে নববীর জন্য সমান্তরাল ইতিকাফ নিবন্ধন ঘোষণা, রমজান ১৪৪৭",
+        url: "https://spa.gov.sa/en/N2518742",
+      },
+      {
+        name: "Sahih al-Bukhari 1782 — \"Perform Umrah when Ramadan comes, for Umrah in Ramadan is equal to Hajj (in reward)\", or words to that effect",
+        nameBn: "সহীহ বুখারি ১৭৮২ — “রমজান এলে ওমরাহ কর, রমজানের ওমরাহ হজের সমান (সওয়াবে)”, অথবা এর কাছাকাছি কথায়",
         url: "https://sunnah.com/bukhari:1782",
       },
       {
-        name: "Saudi Railways (SAR) — Official Haramain High-Speed Railway booking portal",
-        nameBn: "সৌদি রেলওয়ে (SAR) — অফিশিয়াল হারামাইন হাই-স্পিড রেলওয়ে বুকিং পোর্টাল",
-        url: "https://sar.hhr.sa/",
+        name: "Saudi Railways (SAR) — Haramain High-Speed Railway timetable, booking portal and accessibility terms",
+        nameBn: "সৌদি রেলওয়ে (SAR) — হারামাইন হাই-স্পিড রেলওয়ের সময়সূচি, বুকিং পোর্টাল ও অ্যাক্সেসিবিলিটি শর্ত",
+        url: "https://sar.hhr.sa/en",
+      },
+      {
+        name: "General Authority for the Care of the Two Holy Mosques — I'tikaf e-service registration portal named in the announcements (login required; not tested)",
+        nameBn: "দুই হারাম মসজিদের তত্ত্বাবধায়ন কর্তৃপক্ষ — ঘোষণায় উল্লিখিত ইতিকাফ ই-সেবা নিবন্ধন পোর্টাল (লগইন প্রয়োজন; পরীক্ষা করা হয়নি)",
+        url: "https://eservices.alharamain.gov.sa/login",
       },
     ],
     internalLinks: [
-      { text: "Complete DIY Umrah & Nusuk Guide from Bangladesh", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "Makkah & Madinah Shuttle vs. Walking Hotel Zones", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Bangladeshi Halal Food & Suhoor/Iftar Guide in Makkah", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
+      { text: "Ihram & Miqat Rules for Flights from Bangladesh", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "Nusuk App, Visa & Rawdah Permit Guide", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Bangladeshi Halal Food, Suhoor & Iftar Guide", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "airalo", headline: "Traveling in Ramadan Crowds? Keep Family Connected 24/7", body: "When the Haram courtyards fill after Taraweeh, an active Saudi 5G eSIM keeps you and your family reachable — set it up from Dhaka before you fly." }
+    affiliateCTA: { provider: "airalo", headline: "Ramadan crowds, separated family, no signal?", body: "An optional Saudi data eSIM lets you reach your group after Taraweeh if you keep the same numbers and test the connection before you rely on it. Coverage, speed and device compatibility must be confirmed by the provider — a data plan does not replace an agreed meeting point." }
   },
   {
     id: "blog-20",

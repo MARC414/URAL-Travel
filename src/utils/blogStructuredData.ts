@@ -48,6 +48,10 @@ const BLOG_FAQ_CONFIGS: Record<
     en: /^\s*6\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৬\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
+  "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": {
+    en: /^\s*8\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৮\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
   "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": {
     en: /^\s*6\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৬\.\s*সচরাচর জিজ্ঞাসা\s*$/,
