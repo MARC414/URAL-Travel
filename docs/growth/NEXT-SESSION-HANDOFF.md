@@ -158,15 +158,19 @@ Inspect the generated article in both locales and validate real React FAQ/warnin
 and schema, not just body regexes. Do visual/mobile QA if a browser is actually available; otherwise report that
 limit. Do not claim authenticated app, live booking, route inspection or deployment from static/SSR tests.
 
-Only after genuine success update the source review, closure register, queue, cluster plan and next steps from
-**6/12 to 7/12** for locally revised/tested core pairs. Do not mark the whole cluster, Hajj, health, expert review
+Only after genuine success update the source review, closure register, queue, cluster plan and next steps for
+locally revised/tested core pairs. As of 19 October 2026 that count is **12/12** — every core EN/BN pair has had a
+dated source-led revision — and the cluster is still **not certified**: the adjacent-Hajj article, the hub gates, the
+1448 travel-health limits and the release/visual gates are open. Do not mark the whole cluster, Hajj, health, expert review
 or production release complete. Report blockers clearly without outsourcing research. Do not automatically open
 or merge another PR or deploy; await authorization for that future release.
 
 ## 6. Remaining sequence and standing limits
 
-After older travellers: **Ihram/Miqat → Ramadan/I'tikaf → Zamzam/customs → food → Ziyarah**. Adjacent Hajj remains
-a separate linked lane; hub source/graph/release gates remain. Continue Hajj/Umrah before unrelated content.
+The core-pair sequence **Ihram/Miqat → Ramadan/I'tikaf → Zamzam/customs → food → Ziyarah** is complete
+(12/12 by article count). No core pair remains; the next lanes are the adjacent-Hajj article and checklist, the hub
+source/graph/release gates, and the unresolved 1448 travel-health and Hajj-deadline items. Continue Hajj/Umrah before
+unrelated content, and do not treat 12/12 as certification of the cluster.
 
 Current 1448 travel-health requirements remain **unverified**, not proven absent: opened MOH/PHA English/Arabic
 material identified 1447/2026. Do not relabel it. The Hajj deadline banner/PDF conflict and inaccessible/partial

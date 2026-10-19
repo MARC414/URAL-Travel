@@ -28,7 +28,8 @@
     "test:ihram-miqat-guide": "tsx scripts/test-ihram-miqat-guide.ts",
     "test:ramadan-itikaf-guide": "tsx scripts/test-ramadan-itikaf-guide.ts",
     "test:zamzam-customs-guide": "tsx scripts/test-zamzam-customs-guide.ts",
-    "test:food-guide": "tsx scripts/test-food-guide.ts"
+    "test:food-guide": "tsx scripts/test-food-guide.ts",
+    "test:ziyarah-guide": "tsx scripts/test-ziyarah-guide.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",

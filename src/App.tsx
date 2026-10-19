@@ -646,7 +646,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
       "Halal is the national baseline in Saudi Arabia — the food authority has stated that all food sold in the Kingdom is halal and pork imports are banned — so the real question is hygiene and price. The documented South Asian food streets in Makkah are Hijra Road and Ibrahim Khaleel Road in Misfalah; Al Baik's own branch list, with map pins, is the only reliable branch guide; and no per-plate price is printed here because no kitchen publishes one that can be re-checked.",
     "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide":
-      "A private 4-seater sedan for a 3-hour morning Ziyarah costs SAR 150–200 in Makkah (Jabal al-Noor Hira Cultural District, Jabal Thawr, Mina, Arafat) and SAR 120–160 in Madinah (Masjid Quba—where 2 Rakah equals an Umrah reward—Mount Uhud, and Qiblatain), while a Taif highland day trip costs SAR 350–450.",
+      "Hira's museums publish three different schedules and all three are printed; the Quba hadith is Ibn Majah 1412, Hasan; the Madinah bus is SR 90 for 24 hours; Badr is about 150 km west. No Ziyarah car tariff is published anywhere, so the guide prints none and teaches you to fix the total and the stops first.",
     "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide":
       "Combine a 7-day Makkah and Madinah Umrah with a 3-day Dubai and Abu Dhabi holiday on one Multi-City air ticket (DAC → JED/MED → DXB → DAC) to save BDT 35,000+ per person on airfare. Pair your Saudi Umrah e-Visa with a 96-hour UAE Transit Visa or 30-day Tourist e-Visa.",
     "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide":
@@ -741,7 +741,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
       "সৌদি আরবে হালাল জাতীয় নিয়ম — খাদ্য কর্তৃপক্ষ জানিয়েছে রাজ্যে বিক্রি হওয়া সব খাবার হালাল এবং শূকরের মাংস আমদানি নিষিদ্ধ — তাই আসল প্রশ্ন পরিচ্ছন্নতা ও দাম। মক্কায় দক্ষিণ এশীয় খাবারের নথিভুক্ত রাস্তা মিসফালাহর হিজরা রোড ও ইব্রাহিম খলিল রোড; আল বাইকের নিজের শাখা-তালিকা ও ম্যাপ পিনই ভরসাযোগ্য; আর এখানে প্রতি প্লেটের দাম নেই, কারণ কোনো রেস্তোরাঁ এমন দাম প্রকাশ করে না যা আবার যাচাই করা যায়।",
     "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide":
-      "প্রাইভেট ৪-সিটার গাড়িতে ৩ ঘণ্টার মক্কা জিয়ারত (জাবালে নূর হেরা ডিস্ট্রিক্ট, গারে সাওর, মিনা, আরাফাত) ১৫০–২০০ রিয়াল এবং মদিনা জিয়ারত (মসজিদে কুবা—যেখানে ২ রাকাত নামাজে ১টি ওমরাহর সওয়াব—উহুদ ও কিবলাতাইন) ১২০–১৬০ রিয়ালে করা যায়। আর তায়েফ ডে-ট্রিপের ভাড়া ৩৫০–৪৫০ রিয়াল।",
+      "হেরার মিউজিয়ামের সময় নিয়ে তিনটি সরকারি পাতা তিন রকম বলে, তিনটিই এখানে আছে; কুবার হাদিস ইবনে মাজাহ ১৪১২ (হাসান); মদিনার বাস ২৪ ঘণ্টায় ৯০ রিয়াল; বদর প্রায় ১৫০ কিমি পশ্চিমে। জিয়ারতের প্রকাশিত গাড়ি-ভাড়া নেই, তাই দাম ছাপা হয়নি — মোট দাম ও স্টপ আগে ঠিক করার নিয়ম দেওয়া হয়েছে।",
     "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide":
       "দুটি আলাদা ট্রিপের বিমান ভাড়া বাঁচাতে একটি Multi-City টিকিটেই (ঢাকা → জেদ্দা/মদিনা → দুবাই → ঢাকা) ৭ দিনের ওমরাহ এবং ৩ দিনের দুবাই ও আবুধাবি ভ্রমণ করুন। এতে ওমরাহ ই-ভিসা ও দুবাই ট্রানজিট/ই-ভিসা ব্যবহার করে জনপ্রতি ৩৫,০০০+ টাকা বিমান ভাড়া সাশ্রয় হয়।",
     "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide":

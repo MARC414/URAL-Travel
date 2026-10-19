@@ -411,9 +411,9 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   },
 
   "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": {
-    title: "Makkah, Madinah, Badr & Taif Ziyarah Taxi Guide | URAL",
+    title: "Makkah, Madinah, Badr & Taif Ziyarah Guide | URAL",
     description:
-      "Plan historical Ziyarah tours in Makkah, Madinah, Badr and Taif with landmark checklists, visiting hours and private family taxi fares in SAR and BDT.",
+      "Plan Ziyarah in Makkah, Madinah, Taif and Badr: verified hours, Hira's disputed timetable, and how to fix a car price before it moves.",
   },
   "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide": {
     title: "Umrah + Dubai 10-Day Combo Trip from Dhaka | URAL",

@@ -1236,40 +1236,106 @@ Where can I buy groceries near the mosques?
 BinDawood lists branches at Abraj Al Bait and Jabal Omar in Makkah, and Taiba, Al Anwar, Al Hijra, Rotana and Al Jammat in Madinah. Check the locator for the branch nearest your hotel before walking. [9][10]
 Can I take leftover dates or food home to Bangladesh?
 Dates and food are subject to Bangladesh's personal-use test at Dhaka airport, not a published kilogram allowance. Read the customs guide before you fill a suitcase.`,
-  "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": `When Bangladeshi families travel for DIY Umrah or Hajj, dedicating one morning in Makkah, one morning in Madinah, and an optional day trip to Taif or the Battlefield of Badr transforms the journey into a lifelong Islamic history lesson for your children and parents.
+  "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": `Ziyarah — visiting the historical sites around Makkah, Madinah, Taif and Badr — is the part of a Bangladesh Umrah trip that families remember longest and plan least. It is also the part where the published numbers were weakest: the previous version of this page carried car prices, a "best time" window, distances to cemeteries and drive times that no openable source states. Those figures are gone, not replaced with better-sounding guesses. What remains is what the sites themselves, the Saudi Press Agency, Visit Saudi, Saudipedia, the operator of the Madinah sightseeing bus and the Ministry of Tourism actually publish — with the date of the check.
 
-1. WHAT ARE THE MUST-VISIT HISTORICAL ZIYARAH SITES IN MAKKAH & HOW MUCH DOES A PRIVATE CAR COST?
-Always start your Makkah Ziyarah immediately after Fajr prayer (**6:00 AM to 9:30 AM**) before the desert sun peaks:
-Route 1: The Eastern Seerah & Hajj Ritual Trail (3 Hours):
-- **Jabal al-Noor & Hira Cultural District (Revelation Exhibition):** Where Prophet Muhammad (PBUH) received the first revelation of Surah Al-Alaq inside Cave Hira. Under the **Royal Commission for Makkah City (rcmc.gov.sa)** upgrade, families can visit the air-conditioned **Revelation Exhibition Museum** at the base of Jabal al-Noor and take the paved mountain path or shuttle up toward the cave without climbing dangerous loose rocks.
-- **Jabal Thawr (Cave of Hijrah):** South of Makkah, where the Prophet (PBUH) and Abu Bakr As-Siddiq (RA) sheltered for 3 nights during the migration to Madinah.
-- **Mina (Tent City & Jamarat Bridge), Muzdalifah & Plains of Arafat (Jabal al-Rahmah):** Walk up the gentle steps of Mount of Mercy at Arafat and see Masjid Namirah.
-- **Jannat al-Mu'alla Cemetery & Masjid al-Jinn:** Located 1.2 km north of Masjid al-Haram (walkable from Haram courtyard), housing the resting place of Ummul Mu'mineen Khadijah (RA).
-- **Official 2026 Private Makkah Ziyarah Car Rates (3–3.5 Hours):**
-  • **4-Seater Sedan (Camry / Sonata):** **SAR 150 – SAR 200 (~BDT 4,900 – BDT 6,500)** for the entire car.
-  • **7-Seater Family Van (Hyundai Staria / H1 / Toyota HiAce):** **SAR 250 – SAR 320 (~BDT 8,100 – BDT 10,400)**.
+Three things this guide does. It tells you what each site is and what it is not. It tells you when the ticketed places are open, including the one place where two official pages disagree. And it teaches you to fix a car price in writing before the car moves, because no Ziyarah tariff is published anywhere and a number invented on a blog is worse than no number at all.
 
-2. WHAT ARE THE AUTHENTIC MADINAH ZIYARAH SITES & THE MASJID QUBA UMRAH REWARD?
-In Madinah, historical sites are closer together, well-preserved by the **Madinah Region Development Authority (mda.gov.sa)**, and completely flat for elderly parents in wheelchairs:
-Rule 1: Perform Wudu at Your Hotel & Pray 2 Rakah in Masjid Quba (Reward of 1 Full Umrah!):
-- In an authentic Hadith (Sunan Ibn Majah / Sahih Muslim), the Prophet (PBUH) said: *"Whoever purifies himself (performs Wudu) in his house, then comes to the Mosque of Quba and prays in it, he will have a reward like that of an Umrah."*
-- You can either include Masjid Quba in your morning Ziyarah taxi or walk along the beautiful **3 km pedestrian Quba Walkway** from Masjid an-Nabawi!
-Rule 2: Mount Uhud, Shuhada Uhud & Archers' Hill (Jabal al-Rumat):
-- Visit the enclosure of the **70 Martyrs of Uhud** including Sayyiduna Hamza ibn Abdul-Muttalib (RA), climb the small Archers' Mound, and pray in the grand **Sayyid al-Shuhada Mosque**.
-Rule 3: Masjid al-Qiblatain (Mosque of the Two Qiblahs) & Sab'a Masajid (Battle of Khandaq / Trench):
-- Visit the historic site where the Qiblah command shifted from Masjid al-Aqsa to the Kaaba in Makkah, followed by the Seven Mosques at the site of the Battle of the Trench.
-- **Official 2026 Private Madinah Ziyarah Car Rates (2.5–3 Hours):**
-  • **4-Seater Sedan:** **SAR 120 – SAR 160 (~BDT 3,900 – BDT 5,200)**.
-  • **7-Seater Family Van:** **SAR 200 – SAR 260 (~BDT 6,500 – BDT 8,450)**.
-  • **Madinah Sightseeing Hop-On Hop-Off Bus:** **SAR 80/person** for a 24-hour audio-guided pass stopping at 12 official landmarks.
+1. WHAT IS ZIYARAH, AND WHAT IS IT NOT?
 
-3. HOW TO PLAN A DAY TRIP TO TAIF OR THE BATTLEFIELD OF BADR?
-Option 1: Makkah to Taif Highland Day Trip (6 to 7 Hours Roundtrip):
-- Located 90 km east of Makkah up the scenic **Al Hada Mountain Ring Road** (1,800m elevation with cool 18°C–24°C weather), a Taif day trip covers **Masjid Abdullah ibn Abbas (RA)**, **Masjid Addas**, **Miqat Qarn al-Manazil (Al-Sayl al-Kabir)**, traditional Taif Rose Water factories, and the **Al Hada Telefric Cable Car**.
-- **Private Car Rate (Makkah -> Taif -> Makkah):** **SAR 350 – SAR 450 (~BDT 11,400 – BDT 14,600)** for a full-day private sedan, or **SAR 550 – SAR 650** for a 7-seater family van.
-- **Crucial Miqat Warning for Taif Day-Trippers:** Because Taif lies outside the Makkah Haram & Miqat boundary, when driving back from Taif into Makkah, pilgrims who wish to perform an additional Umrah can enter Ihram at **Miqat Qarn al-Manazil (Al-Sayl al-Kabir)**!
-Option 2: Madinah to Badr Battlefield Stopover (150 km South-West of Madinah):
-- Visit **Masjid al-Arish** and the Martyrs' Enclosure of the **Battle of Badr (17 Ramadan, 2 AH)** either as a 4-hour roundtrip from Madinah (**SAR 280 – SAR 350**) or as a 1-hour stopover while traveling by private car from Madinah to Makkah.`,
+Ziyarah here means sightseeing with a purpose: standing at the places where the Seerah happened, and letting your children see the geography instead of only reading it. It is not a ritual with a fixed route, a fixed order or a reward attached to each stop, and this page will not invent one.
+
+Two things follow from that, and both matter at the site. First, the graves you will visit are unmarked. The domes and tombstones at Jannat al-Mu'alla in Makkah and at Jannat al-Baqi in Madinah were removed in the 1920s, so there is no tomb of Khadijah (RA) to walk up to and touch [14]. You are visiting a cemetery, not a shrine. Second, keep the visit quiet: no raised voices, no photographing worshippers, no ritual at a grave that your own scholar has not taught you. The historical value is in being there, and in what you tell your children on the way back.
+
+2. HIRA CULTURAL DISTRICT: WHAT IS OPEN, WHEN, AND WHAT THE CLIMB IS
+
+The district sits at the foot of Jabal al-Noor, at the mouth of the path that leads up to the Cave of Hira, where the first verses of Surah Al-Alaq were revealed. It is a managed site with two ticketed experiences — the Revelation Exhibition and the Qur'an Museum — plus shops, cafés and a visitor centre on the ascent route [1].
+
+The opening hours are genuinely disputed between official pages, so here are all three, dated. The district's own site lists the district and the path to the cave as open 24 hours, and the museums as Saturday to Wednesday 07:30–23:30, Thursday 07:30–01:00 and Friday 15:30–01:00 [1]. Visit Saudi lists the Revelation Exhibition as daily 07:30–23:30 [3]. A Saudi Press Agency report of 31 July 2026 says the two museums are open around the clock except Friday 07:00–15:30 [2]. If you are planning the museum as the centrepiece of a morning, check the district's own page on the day rather than trusting any of the three, including this one.
+
+Tickets are sold online through the operator link that both the district and Visit Saudi point to [1][3]. Visit Saudi gives the price as "from SAR 25 per person" [3]; the district's page does not print a price at all, so treat SAR 25 as a floor, not a total, and confirm the ticket type before you pay.
+
+What the site does not publish is a shuttle, a surface description or a safety guarantee. The path is a mountain path, it is hot for much of the year, and the district's own material simply describes it as an ascent with a visitor centre along the route [1]. Decide before you go: fit adults can walk it, elderly parents and small children can stay with the exhibitions and the cafés at the bottom, and nobody has to do the climb to have made the visit.
+
+Traveller check (ziyarahHira): Book the exhibition for the heat of the day and put the path at the start or the end of the day. Carry water; there is no published promise of shade or of a lift.
+
+3. THE MAKKAH CIRCUIT: THE CEMETERY, THE CAVE OF THAWR, AND THE HAJJ GROUNDS
+
+Jannat al-Mu'alla is the historic cemetery north of Masjid al-Haram, close to the Mosque of the Jinn, and it is where Khadijah (RA), the Prophet's grandfather Abd al-Muttalib and his uncle Abu Talib are recorded as buried [14]. After the demolitions of 1925–26 the graves are marked only by low stones and the ground is bare [14]. Go to walk through it and to explain who is there; go expecting nothing to photograph.
+
+The Cave of Thawr (Jabal Thawr) lies south of Makkah and is the cave of the Hijrah: the place where the Prophet (PBUH) and Abu Bakr (RA) sheltered before continuing to Madinah. It is a viewing stop, not a climb for a family group in the heat, and the published material does not give a safe route or a duration.
+
+Mina, Muzdalifah and the plain of Arafat are Hajj grounds. Outside the Hajj days a car can drive you past the tent city, the Jamarat bridge, Masjid Namirah and Jabal al-Rahmah; during the Hajj days those roads are managed for the pilgrimage, so ask your driver what is reachable on your dates instead of assuming the same route works in Dhul-Hijjah.
+
+Traveller check (ziyarahCemetery): Group the stops by direction. A driver who is asked to "do all of Makkah" in one loop will spend your morning in traffic.
+
+4. THE CAR: HOW TO PRICE AND BOOK IT WHEN NOBODY PUBLISHES A TARIFF
+
+There is no published Ziyarah tariff in Makkah, Madinah, Taif or Badr — not from the Ministry of Tourism, not from Visit Saudi, not from any operator whose rates can be re-checked. That is why this page prints none, and why the per-car bands that used to be here — one for a Makkah sedan, one for Madinah, one for the Taif day trip — have been removed: none of them could be traced to a source that still says so.
+
+What you can do instead, in this order. Agree the price for the whole car and the whole agreed number of hours, not a per-person figure, and write it down or screenshot it. Name the stops before you start, and agree what happens if a stop is closed or the traffic doubles the drive. Ask the hotel desk or a licensed operator rather than a driver who approaches you at the gate. And use the Ministry of Tourism's own rights page as your standard: a tourist guide must hold a ministry licence and belong to a licensed company, and the ministry publishes a complaints channel [15].
+
+The only defensible sentence about price is the one you and the driver both sign up to. If two quotes differ by a third, ask what the second one includes — waiting time, the Taif road toll, a stop at Badr — because that difference is usually the route, not the rate.
+
+Traveller check (ziyarahCar): Per car, not per person. Written, not spoken. And keep the driver's number for the return leg.
+
+5. MADINAH: QUBA, QIBLATAIN AND UHUD — THE THREE THAT ARE VERIFIED
+
+Masjid Quba is the first mosque built in Madinah, and the hadith quoted on this page is Sunan Ibn Majah 1412, graded Hasan by Darussalam: whoever purifies himself at home and then comes to the mosque of Quba and prays in it has a reward like that of an Umrah [4]. The previous version of this page cited Sahih Muslim for the same wording; that attribution was wrong and has been corrected. Make wudu at the hotel, pray two rak'ah, and do not turn the visit into a race. Quba is about 3 km from the Prophet's Mosque along a signed walkway, and Visit Saudi states that no booking is needed [5].
+
+Masjid al-Qiblatain is the mosque of the two qiblahs, 3.8 km north-west of the Prophet's Mosque [6], where the direction of prayer was changed towards the Kaaba. The group of small mosques beside the trench that the old copy counted is not verified in an opened source, so the page now names the trench area without a count.
+
+Uhud is the mountain ridge about 7 km from the Prophet's Mosque, rising to 1,077 m and standing roughly 4 km north of the city, with the archers' position on its flank and the enclosure of the martyrs — about 70 of them, including Hamza (RA) — at its foot [7]. The mosque named in the old copy is not verified and no longer appears; ask the driver for the martyrs' enclosure.
+
+Traveller check (ziyarahMadinah): At Quba, Qiblatain and Uhud the car park is not the door. Tell the driver which gate or which side you need, and agree where he waits, before you get out.
+
+6. MADINAH WITHOUT A CAR: THE HOP-ON HOP-OFF BUS
+
+City Sightseeing Al-Madinah runs two routes with 15 stops between them, starting and ending at the Prophet's Mosque beside King Fahad Gate (Gate 334), with 16 audio languages and a published phone number, 920014044 [9]. The published fares are SR 90 for 24 hours, SR 125 for 48 hours, SR 150 for 72 hours, SR 15 for a single ride, and SR 40 for a four-hour single-route ticket [9]. The operator states a 45-minute frequency and a 125-minute full loop [9].
+
+The routes cover the ground a first-time family actually wants: Quba and the Quba walkway, Qiblatain, the Uhud battlefield, Al-Baqi and the museum district, the Hejaz Railway Museum and the central markets [9]. What the bus cannot do is door-to-door: it stops where the route stops, and an elderly parent still walks from the stop to the site.
+
+One caution from the operator's own page, on the date of this check: several stop cards carried a "temporarily closed" badge [9]. The reason is not published. Before buying, confirm that the bus is running, which stops are open, and where boarding actually happens — the operator's phone number above is the only check that will answer.
+
+Traveller check (ziyarahBus): Routes and stop closures change without notice. One phone call, or a look at the operator's page on the morning, saves a wasted ticket.
+
+7. THE TAIF DAY TRIP, AND THE MIQAT ON THE WAY BACK
+
+Taif is the highland city east of Makkah, reached by the mountain roads, and it holds two sites that Bangladeshi families ask for by name. Masjid Abdullah ibn Abbas stands at the foot of Mount al-Madhoon, associated with the Prophet's cousin, and Masjid Addas is on al-Mathnah Road in Wadi Waj, at the foot of Abu al-Akhailah — the place associated with Addas, the servant who offered grapes after the Prophet (PBUH) was turned away by the people of Taif [13]. The old copy's drive time, elevation and temperature band are gone; heat, traffic and season change all three.
+
+The Al-Hada cable car is the reason many families go. The Saudi Press Agency gives the engineering: 4,200 m in each direction, a 17-minute ride, 52 cabins carrying eight passengers each, and a capacity of about 1,000 passengers an hour; it runs from the Al-Kar Tourist Village [10][11]. The fare and the reported Monday closure come from secondary listings rather than the operator, so treat "about SAR 100 round trip" as an indication and confirm before you drive up.
+
+The miqat is the part to get right. Qarn al-Manazil, also called as-Sayl al-Kabir, is the boundary for pilgrims coming from Najd and Taif; it sits on the Taif–Makkah road, about 80 km north-east of Makkah and 35 km north of Taif [12]. If you intend to perform another Umrah on the way back, you enter ihram there, before crossing the boundary, not in Makkah. If you are only sightseeing, tell the driver your intention clearly and let him stop where the rule applies to you — this page is not the place to decide your ritual for you.
+
+Traveller check (ziyarahTaif): That one sentence decides whether the car stops at Qarn al-Manazil and whether your ihram is in the luggage.
+
+8. BADR: THE LONGEST DRIVE, AND WHAT IS ACTUALLY THERE
+
+Badr is the battlefield of the first major battle of Islam, fought in the second year after the Hijrah. Visit Saudi places the site about 150 km west of Madinah; other sources say 130 km, and the difference is a road, not a story [8]. It is a half-day or a full-day commitment from Madinah, and the previous version's round-trip time, stopover length and per-car fare were not traceable and are gone.
+
+What is there is modest and worth the drive for the right family: the Al-Arish Mosque, the battlefield itself, the martyrs' cemetery, and Jabal Al-Mala'ik about 4 km from Al-Arish [8]. The cemetery enclosure lists 13 names — five from the Muhajirin and eight from the Ansar — while other accounts give 14; the discrepancy is old and this page does not resolve it [8].
+
+It is also the natural stop if you are driving from Madinah to Makkah by private car rather than flying, since the road runs west. Ask the driver whether he will wait at Badr and for how long, and price the whole Madinah–Makkah leg as one agreement rather than as "a stopover" that nobody defined.
+
+Traveller check (ziyarahBadr): The stop is the cheap part to agree; the waiting time and the route are the expensive part to leave vague.
+
+9. FREQUENTLY ASKED QUESTIONS
+Is Ziyarah compulsory during Umrah?
+No. Ziyarah is sightseeing at historical sites. Umrah has its own rites, and nothing in this page adds a rite to them.
+How much does a private Ziyarah car cost in Makkah or Madinah?
+No published tariff exists, so this page prints no figure. Agree a total for the car and the hours before you start, and get it in writing; the Ministry of Tourism publishes tourists' rights and a complaints channel if a guide or operator misrepresents the service [15].
+Can I visit the Cave of Hira without climbing?
+You can visit the Hira Cultural District, its exhibition and the Qur'an Museum without climbing; the cave itself is reached by the mountain path [1]. The district publishes no shuttle or lift.
+Are the Hira museums open on Friday?
+Official pages disagree. The district lists Friday 15:30–01:00, Visit Saudi lists 07:30–23:30 daily, and an SPA report of 31 July 2026 says 24 hours except Friday 07:00–15:30 [1][2][3]. Check the district's own page on the day.
+Is the Quba reward hadith authentic?
+The wording quoted here is Sunan Ibn Majah 1412, graded Hasan by Darussalam [4]. Pray two rak'ah there, and do not let the reward language turn the visit into a rushed stop.
+Do I need ihram for a Taif day trip?
+Only if the return includes an Umrah. Qarn al-Manazil is the boundary for pilgrims coming from the Taif side [12]; decide your intention before you leave Makkah.
+How do I reach Badr from Madinah?
+By private car on the western road, about 150 km per Visit Saudi; some sources say 130 km [8]. It is a half-day commitment, not a quick stop, and the site has no published entry fee.
+
+10. REFERENCES
+Every figure in this page comes from one of these pages, all opened on 19 October 2026. [1] Hira Cultural District, district site; [2] Saudi Press Agency, 31 July 2026; [3] Visit Saudi, Revelation Exhibition; [4] Sunan Ibn Majah 1412 (sunnah.com); [5] Visit Saudi, Masjid Quba; [6] Visit Saudi, Masjid al-Qiblatain; [7] Visit Saudi, Uhud; [8] Visit Saudi, Badr Battle Site; [9] City Sightseeing Al-Madinah; [10] Saudi Press Agency, 18 July 2026; [11] Visit Saudi, Al-Hada; [12] Saudipedia, Qarn al-Manazil; [13] Saudipedia, Taif Governorate; [14] Jannat al-Mu'alla, historical summary; [15] Ministry of Tourism, tourists' rights.`,
   "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide": `For Bangladeshi families with school-going children or young couples planning an unforgettable annual trip, the **7-Day Umrah + 3-Day Dubai Combo Itinerary** is the highest-value outbound route from **Hazrat Shahjalal International Airport (DAC)**. Because Jeddah/Madinah and Dubai sit right along the same Arabian Peninsula flight corridor, combining both destinations into one **Multi-City ticket** eliminates an entire roundtrip airfare.
 
 1. HOW MUCH AIRFARE DO YOU SAVE WITH A MULTI-CITY TICKET (DAC -> JED/MED -> DXB -> DAC)?

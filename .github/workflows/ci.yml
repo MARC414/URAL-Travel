@@ -90,6 +90,9 @@ jobs:
       - name: Verify the food guide against SFDA, Balady and operator sources
         run: npm run test:food-guide
 
+      - name: Verify the Ziyarah pair against district, SPA, Visit Saudi and operator sources
+        run: npm run test:ziyarah-guide
+
       - name: Type-check
         run: npm run lint
 

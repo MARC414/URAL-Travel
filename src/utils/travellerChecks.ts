@@ -46,10 +46,17 @@ const TITLES = {
   foodMadinah: { en: "Choose at the door, not from an old blog", bn: "পুরোনো ব্লগ নয়, দরজায় দেখে বাছুন" },
   foodElderly: { en: "One hot meal, two simple ones", bn: "এক বেলা গরম, দুই বেলা সহজ" },
   foodGrocery: { en: "Set the budget from your own receipts", bn: "নিজের রসিদ থেকেই বাজেট ঠিক করুন" },
+  ziyarahHira: { en: "The museums are indoors, the cave is a climb", bn: "মিউজিয়াম ভেতরে, গুহা একটি চড়াই" },
+  ziyarahCemetery: { en: "The graves are unmarked, so the visit is about the ground", bn: "কবরগুলো চিহ্নহীন, তাই ভ্রমণটা মাটি ও ইতিহাসের" },
+  ziyarahCar: { en: "Fix the total, the hours and the stops before the car moves", bn: "গাড়ি ছোড়ার আগে মোট দাম, ঘণ্টা ও স্টপ ঠিক করুন" },
+  ziyarahMadinah: { en: "Ask for the drop-off gate, not the name", bn: "নাম নয়, ড্রপ-অফের গেট বলুন" },
+  ziyarahBus: { en: "Confirm the bus is running before you buy the pass", bn: "পাস কেনার আগে বাস চলছে কি না নিশ্চিত করুন" },
+  ziyarahTaif: { en: "Say whether the return includes an Umrah before you leave Makkah", bn: "মক্কা ছাড়ার আগেই বলুন ফেরার পথে ওমরাহ আছে কি না" },
+  ziyarahBadr: { en: "If the day trip is Badr, price the whole leg, not the stop", bn: "ডে-ট্রিপ বদর হলে পুরো লেগের দাম ঠিক করুন, শুধু স্টপের নয়" },
 } as const;
 
 export function getTravellerCheck(paragraph: string) {
-  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth|ihramPoint|ihramGarments|ihramTransit|ihramMadinah|ihramPersonal|ramadanDeadline|ramadanItikaf|ramadanAnnouncement|ramadanBudget|ramadanRoute|zamzamBox|zamzamAirline|datesAllowance|goldDeclare|vatRefund|foodHalal|foodMakkah|foodPrice|foodMadinah|foodElderly|foodGrocery)\):\s+([\s\S]+)$/);
+  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth|ihramPoint|ihramGarments|ihramTransit|ihramMadinah|ihramPersonal|ramadanDeadline|ramadanItikaf|ramadanAnnouncement|ramadanBudget|ramadanRoute|zamzamBox|zamzamAirline|datesAllowance|goldDeclare|vatRefund|foodHalal|foodMakkah|foodPrice|foodMadinah|foodElderly|foodGrocery|ziyarahHira|ziyarahCemetery|ziyarahCar|ziyarahMadinah|ziyarahBus|ziyarahTaif|ziyarahBadr)\):\s+([\s\S]+)$/);
   if (!match) return null;
   const key = match[2] as keyof typeof TITLES;
   const locale = match[1] === "Traveller check" ? "en" : "bn";

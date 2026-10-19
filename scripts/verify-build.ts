@@ -5115,6 +5115,104 @@ check(
   "blog-22: at least five sibling links plus the /umrah hub"
 );
 
+// --- Ziyarah guide (blog-23) ----------------------------------------------
+// The old copy sold a car tariff, a 6:00-9:30 "best window", a 1.2 km cemetery
+// distance, a Taif drive time and temperature band, a Badr roundtrip price and a
+// Sahih Muslim attribution for the Quba hadith. None of those survived the
+// source review. Ledger: docs/growth/ZIYARAH-SOURCE-REVIEW.md.
+const ZIYARAH_SLUG = "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide";
+const ziyarahBodyPair = [
+  BLOG_BODY[ZIYARAH_SLUG] ?? "",
+  BENGALI_BLOG_OVERRIDES[ZIYARAH_SLUG]?.content ?? "",
+];
+const ziyarahSurfaces = [
+  { label: "article body (EN)", text: ziyarahBodyPair[0] },
+  { label: "article body (BN)", text: ziyarahBodyPair[1] },
+  { label: "article page (EN)", text: read(path.join(DIST_DIR, "blog", `${ZIYARAH_SLUG}.html`)) ?? "" },
+  { label: "article page (BN)", text: read(path.join(DIST_DIR, "bn", "blog", `${ZIYARAH_SLUG}.html`)) ?? "" },
+];
+const ZIYARAH_RETIRED: { label: string; pattern: RegExp }[] = [
+  { label: "Makkah sedan tariff", pattern: /SAR\s*150\s*(?:–|-|to)\s*(?:SAR\s*)?200/i },
+  { label: "Madinah sedan tariff", pattern: /SAR\s*120\s*(?:–|-|to)\s*(?:SAR\s*)?160/i },
+  { label: "Taif day-trip tariff", pattern: /SAR\s*350\s*(?:–|-|to)\s*(?:SAR\s*)?450/i },
+  { label: "Badr roundtrip tariff", pattern: /SAR\s*280\s*(?:–|-|to)\s*(?:SAR\s*)?350/i },
+  { label: "old hop-on bus fare", pattern: /SAR\s*80\b/i },
+  { label: "invented Fajr window", pattern: /6:00\s*AM\s*(?:to|–|-)\s*9:30/i },
+  { label: "unverified cemetery distance", pattern: /\b1\.2\s*(?:km|কিমি)/i },
+  { label: "Taif drive-time claim", pattern: /6\s*(?:to|–|-)\s*7\s*hours/i },
+  { label: "Badr stopover length", pattern: /4[- ]hour roundtrip/i },
+  { label: "unsourced rcmc attribution", pattern: /rcmc\.gov\.sa/i },
+  { label: "wheelchair flat-surface guarantee", pattern: /completely\s+flat/i },
+  { label: "unverified mosque count", pattern: /(?:Sab'a Masajid|Seven Mosques)/i },
+  { label: "unverified mosque name", pattern: /Sayyid al-Shuhada/i },
+  { label: "wrong hadith attribution", pattern: /Sahih Muslim[^.\n]{0,40}(?:Quba|Umrah)|(?:Quba|Umrah)[^.\n]{0,40}Sahih Muslim/i },
+];
+const ZIYARAH_RETIRED_BODY_ONLY: { label: string; pattern: RegExp }[] = [
+  { label: "BDT conversion of a Ziyarah fare", pattern: /BDT\s*\d/i },
+];
+const ziyarahHits = ziyarahSurfaces.flatMap((surface) => {
+  const patterns = /body/.test(surface.label)
+    ? [...ZIYARAH_RETIRED, ...ZIYARAH_RETIRED_BODY_ONLY]
+    : ZIYARAH_RETIRED;
+  const hit = patterns.find((entry) => entry.pattern.test(surface.text));
+  return hit ? [`${surface.label}: ${hit.label}`] : [];
+});
+const ziyarahControls = [
+  "A 3-hour Makkah Ziyarah costs SAR 150 - SAR 200 in a sedan and SAR 120 - SAR 160 in Madinah.",
+  "A Taif day trip is SAR 350 to SAR 450 and takes 6 to 7 hours.",
+  "Badr is SAR 280 - SAR 350 as a 4-hour roundtrip stop.",
+  "The 24-hour hop-on bus ticket costs SAR 80.",
+  "Start after Fajr between 6:00 AM to 9:30 AM.",
+  "Jannat al-Mu'alla is 1.2 km north of Masjid al-Haram.",
+  "Under the rcmc.gov.sa upgrade the sites are completely flat for wheelchairs.",
+  "Visit the Sab'a Masajid and pray at Sayyid al-Shuhada Mosque.",
+  "The reward of Quba is in Sahih Muslim and is often quoted as an Umrah.",
+  "The sedan cost BDT 4,900 for the morning.",
+].every((control) => [...ZIYARAH_RETIRED, ...ZIYARAH_RETIRED_BODY_ONLY].some((entry) => entry.pattern.test(control)));
+const ziyarahFalsePositives = [
+  "The operator sells SR 90 for 24 hours, SR 125 for 48 hours and SR 15 for a single ride.",
+  "Masjid al-Qiblatain is 3.8 km north-west of the Prophet's Mosque.",
+  "Visit Saudi puts Badr about 150 km west of Madinah; other sources say 130 km.",
+  "The wording quoted is Sunan Ibn Majah 1412, graded Hasan by Darussalam.",
+  "Qarn al-Manazil sits about 80 km north-east of Makkah and 35 km north of Taif.",
+  "The Al-Hada cable car runs 4,200 m each way in 17 minutes.",
+].every((control) => [...ZIYARAH_RETIRED, ...ZIYARAH_RETIRED_BODY_ONLY].every((entry) => !entry.pattern.test(control)));
+check(
+  ziyarahHits.length === 0 && ziyarahControls && ziyarahFalsePositives,
+  `blog-23: the Ziyarah guard rejects car tariffs, BDT figures, the Fajr window, 1.2 km, the rcmc attribution, the flat-surface promise and the Sahih Muslim attribution while passing SR 90, 3.8 km, 150 km and Ibn Majah 1412 (negative control) [${ziyarahHits.slice(0, 3).join("; ")}]`
+);
+const ziyarahArticle = BLOG_DATA.find((post) => post.slug === ZIYARAH_SLUG);
+check(
+  (ziyarahArticle?.references?.length ?? 0) === 15 &&
+    ziyarahBodyPair.every(
+      (body) =>
+        (body.match(/Traveller check \(/g) ?? []).length +
+          (body.match(/যাত্রীর যাচাই \(/g) ?? []).length === 7
+    ),
+  "blog-23: fifteen opened references and seven cautions sit in both bodies"
+);
+check(
+  (ziyarahArticle?.internalLinks?.filter((link) => link.path.startsWith("/blog/")).length ?? 0) >= 5 &&
+    (ziyarahArticle?.internalLinks?.some((link) => link.path === "/umrah") ?? false),
+  "blog-23: at least five sibling links plus the /umrah hub"
+);
+check(
+  ziyarahBodyPair[0].includes("9. FREQUENTLY ASKED QUESTIONS") &&
+    ziyarahBodyPair[1].includes("৯. সচরাচর জিজ্ঞাসা"),
+  "blog-23: the FAQ heading that the schema allowlist expects is present in both locales"
+);
+check(
+  ziyarahBodyPair.every(
+    (body) =>
+      /(?:SR\s*90|৯০ রিয়াল)/.test(body) &&
+      /(?:3\.8\s*km|৩\.৮\s*কিমি)/.test(body) &&
+      /(?:150\s*km|১৫০\s*কিমি)/.test(body) &&
+      /1412|১৪১২/.test(body) &&
+      /(?:Hasan|হাসান)/.test(body)
+  ),
+  "blog-23: both bodies keep the verified anchors (bus fare, Qiblatain distance, Badr distance, Ibn Majah 1412 and its grade)"
+);
+
 // Guard: no dates kilogram allowance (the figure the old copy printed was unsourced)
 const zamzamDatesAllowanceClaim =
   /(?:duty[- ]free|tax[- ]free|শুল্কমুক্ত)[^.\n]{0,40}\d+\s*(?:kg|কেজি)|\d+\s*(?:kg|কেজি)[^.\n]{0,25}(?:duty[- ]free|শুল্কমুক্ত)/i;

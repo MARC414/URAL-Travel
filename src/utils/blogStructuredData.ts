@@ -44,6 +44,10 @@ const BLOG_FAQ_CONFIGS: Record<
     en: /^\s*7\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৭\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
+  "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": {
+    en: /^\s*9\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৯\.\s*সচরাচর জিজ্ঞাসা\s*$/,
+  },
   "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": {
     en: /^\s*6\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৬\.\s*সচরাচর জিজ্ঞাসা\s*$/,

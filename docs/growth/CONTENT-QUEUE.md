@@ -1012,3 +1012,27 @@ routes), including four new blog-22 output controls and three retired-claim fixt
 counter was observed; the Balady news pages returned HTTP 500 and are not cited; no deployment, PR or live check.
 Progress **11/12 core pairs** by article-review count only; the Ziyarah pair remains. Next independent agent-owned
 asset: the Ziyarah pair.
+
+### 19 October 2026 — Ziyarah pair revised (12/12 core Umrah pairs, cluster still not certified)
+
+`makkah-madinah-badr-taif-historical-ziyarah-taxi-guide` EN/BN rewritten against
+[`ZIYARAH-SOURCE-REVIEW.md`](ZIYARAH-SOURCE-REVIEW.md): the Hira Cultural District's own site, SPA releases of 18 and
+31 July 2026, Visit Saudi's Makkah and Madinah attraction pages, Sunan Ibn Majah 1412, Saudipedia's Qarn al-Manazil and
+Taif entries, the Madinah sightseeing-bus operator and the Ministry of Tourism's tourists' rights page.
+
+The pair prints no Ziyarah car fare, no BDT conversion, no drive time, no "6:00–9:30" window and no cemetery distance.
+In their place: the three contradictory official Hira museum timetables, all printed with a "check on the day"
+instruction; the ticketed exhibitions "from about SAR 25" as a floor; the Quba hadith as Sunan Ibn Majah 1412, **Hasan**
+(the old Sahih Muslim attribution corrected); the three sourced Madinah distances; the bus at SR 90 for 24 hours with
+its stop-status badge and phone number; the Al-Hada cable-car specifications; the Qarn al-Manazil geometry; and Badr
+about 150 km west with the 13/14-name discrepancy stated. The car section teaches the written total and the licence
+check instead of a tariff, and the cemetery section says the graves are unmarked.
+
+Seven cautions, fifteen references, six links per locale (including `/umrah`, the customs guide and the food guide),
+seven visible/schema FAQs, optional qualified CTA, no HowTo. Original publication date, author and slug retained;
+`updatedAt` 2026-10-19.
+
+Ziyarah 30 + food 26 + Zamzam 28 + Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 +
+stopover 17 + DIY 17 + Nusuk 16 + budget 25, scheduling and 23 sitemap controls, lint, build and **334 build checks**
+passed (107 EN + 107 BN routes). No site visit, no car hire, no ticket purchase. Progress **12/12 core pairs** by
+article-review count only; the cluster is not certified and the adjacent-Hajj, hub and release gates remain open.

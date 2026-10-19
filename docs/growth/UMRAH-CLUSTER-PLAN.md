@@ -50,8 +50,15 @@ eleventh source-reviewed core EN/BN revision. **11/12 core pairs** revised/teste
 The guide now separates halal (national baseline, SFDA statement and import bans) from hygiene (Balady certificate as a
 floor, WHO five keys), names the documented Makkah streets instead of four unverifiable restaurants, uses the operator's
 Al Baik branch names and map pins, and prints no meal price or BDT figure at all. Current validation: 26 food tests,
-**329 build checks**; visual, qualified-review, approval and release gates remain separate. Next independent
-agent-owned asset: the Ziyarah pair.
+**329 build checks**; visual, qualified-review, approval and release gates remain separate.
+
+**19 October Ziyarah follow-up:** [`ZIYARAH-SOURCE-REVIEW.md`](ZIYARAH-SOURCE-REVIEW.md) records the twelfth and final
+source-reviewed core EN/BN revision. **12/12 core pairs** revised/tested by article count only — the cluster is not
+certified, and the adjacent-Hajj, hub, 1448 travel-health and release gates remain open. The pair now prints the three
+contradictory Hira museum timetables instead of one invented "best window", no Ziyarah car fare at all, the Quba hadith
+with its correct book and grade, the bus operator's live SR 90 / 24 h fare, and Badr as roughly 150 km west of Madinah.
+Current validation: 30 Ziyarah tests, **334 build checks**; visual, qualified-review, approval and release gates remain
+separate.
 
 **Use with:** [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md), [`SEO-KEYWORD-MAP.md`](../../SEO-KEYWORD-MAP.md), [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md), [`CONTENT-OS.md`](CONTENT-OS.md), and [`AI-WRITING-PROMPTS.md`](AI-WRITING-PROMPTS.md).
 

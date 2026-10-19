@@ -16,12 +16,14 @@ published inventory. All twelve core Umrah articles already exist; earlier audit
 | 2 optional bridge pairs | Existing inventory; excluded from the 12-core-article count | Independent later review, not a prerequisite to count core article revisions |
 | Release in this session | No reviewed revision deployed or production-verified | Approval, visual checks, actual deployment and live EN/BN checks |
 
-**11/12 = 92% by core article count only.** This is not a weighted completion percentage: effort differs per article,
-the hub fix is a separate partial workstream, Hajj is adjacent, and release work remains. **One core article pair remains**
-(the Ziyarah pair), plus adjacent Hajj, alongside hub/release gates. Public-source research and edits remain agent-owned;
-owner decisions are publication approval and optional genuinely private/field evidence, not delegated web research.
-Current implementation validation: Ramadan 28 + Ihram/Miqat 28 + older travellers 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25, scheduling/sitemap controls, lint/build,
-**323 build checks**, 107 EN + 107 BN routes. Counts do not verify unresolved source claims or authenticated flows.
+**12/12 = 100% by core article count only.** Every core EN/BN pair in the Umrah cluster has now had an independent,
+dated, source-led revision and a per-article regression suite. This is still not a weighted completion percentage and
+**it does not certify the cluster**: the hub fix is a separate partial workstream, Hajj is adjacent, the 1448 travel-health
+requirements remain unverified, the Hajj deadline banner conflict is open, and visual, qualified-review, approval and
+release gates are untouched. Public-source research and edits remain agent-owned; owner decisions are publication
+approval and optional genuinely private/field evidence, not delegated web research.
+Current implementation validation: food 26 + Ziyarah 30 + Zamzam 28 + Ramadan 28 + Ihram/Miqat 28 + older travellers 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25, scheduling/sitemap controls, lint/build,
+**334 build checks**, 107 EN + 107 BN routes. Counts do not verify unresolved source claims or authenticated flows.
 
 ## Quality contract and order
 
@@ -357,5 +359,33 @@ described only by the operator's own branch names and map pins, and the guide te
 instead of printing a figure. Six cautions sit at the decisions, ten references and six links per locale include
 `/umrah` and the customs guide, the FAQ carries six questions matched to schema, and the CTA is optional and qualified.
 26 targeted tests, every prior suite, lint/build and **329 build assertions** pass; 107 EN + 107 BN routes. No
-restaurant or menu was visited and no price was observed. **Eleven core pairs done; Ziyarah remains.** Next independent
-agent-owned asset: the Ziyarah pair.
+restaurant or menu was visited and no price was observed. **Eleven core pairs done at that point.** The twelfth follows below.
+
+## Twelfth pair — Ziyarah (19 October 2026)
+
+`makkah-madinah-badr-taif-historical-ziyarah-taxi-guide` EN/BN rewritten against
+[`ZIYARAH-SOURCE-REVIEW.md`](ZIYARAH-SOURCE-REVIEW.md): the Hira Cultural District's own site, two SPA releases
+(18 and 31 July 2026), Visit Saudi's Makkah and Madinah attraction pages, Sunan Ibn Majah 1412 on sunnah.com,
+Saudipedia's Qarn al-Manazil and Taif Governorate entries, the Madinah sightseeing-bus operator's fare and route page,
+and the Ministry of Tourism's tourists' rights page.
+
+The pair no longer prints a single Ziyarah car fare, BDT conversion, drive time, "best window" or cemetery distance.
+What replaced them is what the sources actually publish: the Hira district's hours **and** the two official pages that
+contradict them (all three printed, with an instruction to re-check on the day), the ticketed experiences at "from
+SAR 25" as a floor, the Quba hadith with its book and grade (Sunan Ibn Majah 1412, Hasan — the old Sahih Muslim
+attribution was wrong), the three sourced Madinah distances, the bus at SR 90 for 24 hours with its live stop-status
+badge, the Al-Hada cable-car specifications, the Qarn al-Manazil geometry on the Taif road, and Badr about 150 km west
+with the 13/14-name discrepancy stated rather than resolved. The booking section teaches the licence check and the
+written total instead of a tariff, and the cemetery section says plainly that the graves are unmarked.
+
+Seven cautions (`ziyarahHira`, `ziyarahCemetery`, `ziyarahCar`, `ziyarahMadinah`, `ziyarahBus`, `ziyarahTaif`,
+`ziyarahBadr`), fifteen references, six curated links per locale including `/umrah`, the customs and food guides, seven
+visible/schema FAQs, optional qualified CTA, no HowTo. Original 27 Sep publication, author and slug retained;
+`updatedAt` 2026-10-19.
+
+Ziyarah 30 + food 26 + Zamzam 28 + Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 +
+stopover 17 + DIY 17 + Nusuk 16 + budget 25, scheduling and 23 sitemap controls, lint, build and **334 build checks**
+passed (107 EN + 107 BN routes), including five new blog-23 output controls. No site was visited, no car hired, no
+ticket bought; rcmc.gov.sa and Nusuk are no longer cited for this pair; no deployment, PR or live check.
+**Twelve core pairs revised/tested by article count; the cluster is not certified** and the adjacent-Hajj and hub gates
+remain open.
