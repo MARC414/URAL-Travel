@@ -394,9 +394,9 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Ramadan 1448 dates (8 Feb – 8 Mar 2027, moon sighting), the official General Authority I'tikaf registration flow, and a claim-free budget plan for Umrah from Bangladesh.",
   },
   "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": {
-    title: "Wearing Ihram from Dhaka vs Transit: Miqat Rules | URAL",
+    title: "Ihram & Miqat Rules: Dhaka to Jeddah Flights | URAL",
     description:
-      "Know exactly where to wear Ihram and make Niyyah when flying direct from Dhaka to Jeddah versus connecting via Dubai, Doha, Abu Dhabi, Muscat or Madinah.",
+      "Where to enter Ihram flying from Dhaka: the Ministry's air-travel rule, why Jeddah airport is not a Miqat, Gulf transit, and Madinah-first routes.",
   },
   "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": {
     title: "Zamzam, Dates & Gold Customs Rules: Jeddah & Dhaka | URAL",

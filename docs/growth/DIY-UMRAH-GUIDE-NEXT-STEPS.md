@@ -126,3 +126,15 @@ insulin storage and Haram air-conditioning premise are replaced by attributed Mi
 as unverified. Seven core pairs done; five plus adjacent Hajj remain; hub and release gates are separate. No main
 health or visa boundary changed and no reviewed revision deployed. Next independent agent-owned asset: Ihram/Miqat.
 The closure register is current progress; earlier checkpoint counts are historical.
+
+### Ihram/Miqat checkpoint — 19 October 2026
+
+Eighth core EN/BN pair revised and tested; `IHRAM-MIQAT-SOURCE-REVIEW.md` holds the ledger. The article now quotes
+the Ministry's air rule and the "neither a Miqat nor a place for entering Ihram" statement, publishes the Ministry's
+five distances, defines Ihram as intention plus Talbiyah, and states the return/Fidyah sequence as the Ministry does.
+The minute-to-landing figure, crew-language script, airline/corridor table, "11 km from Madinah", 7 kg cabin figure and
+on-board rail instruction are gone. Six cautious paragraphs sit at the decision points, six FAQs match schema, five
+internal links per locale include `/umrah` and four siblings, and the CTA is optional and qualified. 28 targeted tests,
+budget 25, Nusuk 16, DIY 17, stopover 17, hotel/rail 17, flights 17, women 17, older travellers 20, scheduling,
+sitemaps 23, lint, build and **307 build checks** pass. No deployment, no visual/live check, no carrier confirmation
+and no scholarly sign-off. Four core pairs plus adjacent Hajj remain; next asset Ramadan/I'tikaf.

@@ -970,39 +970,80 @@ If you want your Umrah performed inside Ramadan without anchoring the whole trip
 - I'tikaf dates watched on the Authority's official channels the moment Ramadan approaches [2][3].
 - Passport validity, visa channel and document checklist confirmed in the DIY guide (linked below).
 - References checked 17 October 2026. Prices, permits and timetables change every season — re-check every source beside every number.`,
-  "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": `For Bangladeshi pilgrims embarking on Umrah or Hajj, entering the sacred state of Ihram before crossing the designated geographic boundary (Miqat) is an obligatory rite under Islamic jurisprudence and Saudi Ministry of Hajj & Umrah directives. Because King Abdulaziz International Airport (JED) in Jeddah lies inside the perimeter of the Miqats, pilgrims landing in Jeddah cannot postpone their Ihram until reaching the airport terminal. Understanding your flight routing—whether flying non-stop from Dhaka, transiting through Gulf hubs, or landing in Madinah first—determines exactly when and where to put on your Ihram garments and formulate your Niyyah. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidance, GACA flight operation notices, and established Sunnah principles.
+  "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": `This guide is for Bangladeshi pilgrims deciding when to enter Ihram on the way to Makkah — flying direct from Dhaka to Jeddah, connecting through a Gulf hub, or landing in Madinah first. It separates three things that are often blended together: what the published boundary rule requires, what your particular route actually does, and what is a personal religious question you should take to a qualified scholar. It is not a fatwa, a flight-tracking tool or an inspected airport procedure.
 
-1. Geographic and Aerial Miqat Boundaries for Flights from Bangladesh
-The Prophet Muhammad (peace be upon him) designated specific geographical boundary points around Makkah for entering Ihram:
-- **Qarn al-Manazil (As-Sayl al-Kabir):** The designated Miqat for travelers arriving from the east and central regions. Flights flying direct from Hazrat Shahjalal International Airport (DAC) across central Arabia or transiting via Riyadh, Dammam, Dubai, Sharjah, Doha, Bahrain, or Kuwait typically cross the aerial projection of Qarn al-Manazil approximately 30 to 45 minutes prior to touchdown at Jeddah [1][2].
-- **Yalamlam (As-Sa'diyyah):** The designated Miqat for travelers approaching from the south (Yemen and southern oceanic corridors). Certain flight paths, such as those routing via Muscat or southern Oman airspace, may cross the aerial alignment of Yalamlam prior to descent into Jeddah [1][2].
-- **Dhul Hulayfah (Abyar Ali):** The designated Miqat for residents of Madinah and those departing Madinah towards Makkah. It is located approximately 11 kilometers outside Madinah city center and is used when travelling overland or via the Haramain High-Speed Train towards Makkah [1][3].
+Quick Answer — Checked 19 October 2026: the Ministry of Hajj and Umrah states that pilgrims arriving by air must not pass the Miqat, or the point parallel to it, without entering Ihram, and that King Abdulaziz International Airport in Jeddah is "neither a Miqat nor a place for entering Ihram." Entering Ihram means intending Umrah or Hajj and beginning the Talbiyah — not merely wearing the cloth. Which of the five points applies depends on the route your flight actually flies, and the Ministry says airlines heading to Jeddah usually announce when the aircraft is aligned with a Miqat. Treat the announcement as help, not as the requirement itself. [1][2][3]
 
-2. Scenario A: Direct Non-Stop Flights from Dhaka to Jeddah (Biman or Saudia)
-When flying non-stop from Dhaka (DAC) directly to Jeddah (JED) with the intention of performing Umrah:
-- **Step 1 — Put on Ihram Garments in Dhaka Before Boarding:** Changing into unstitched sheets inside an aircraft lavatory during flight is cramped and physically challenging. It is recommended to perform Ghusl (ritual bath) at home in Dhaka or use the prayer rooms at Dhaka Airport Terminal 1/2 or Ashkona Hajj Camp after check-in. Put on the two unstitched white towels (Izar and Rida) for men or modest attire for women before boarding the flight [1]. Keep footwear accessible.
-- **Step 2 — Wait for the In-Flight Miqat Announcement to Formulate Niyyah:** Putting on the physical Ihram clothing does not initiate the sacred state of Ihram. You remain in your normal state until you verbally state your intention (Niyyah) and begin the Talbiyah. Approximately 30 to 45 minutes before landing at King Abdulaziz International Airport, the flight crew on Biman or Saudia will announce in Bengali, English, and Arabic that the aircraft is approaching the Miqat [1]. At that time, uncover your head (for male pilgrims), make your intention (**"Labbayk Allahumma Umrah"**), and recite the Talbiyah (**"Labbayk Allahumma Labbayk..."**) [1].
+1. WHAT MUST BE TRUE BEFORE THE AIRCRAFT REACHES THE MIQAT?
+The rule is stated by the Ministry, not inferred from a map: a pilgrim living beyond the boundary points who arrives by air "must not bypass the Miqat (or the point parallel to it) without entering the state of Ihram." It adds, directly, that Jeddah airport "is neither a Miqat nor a place for entering Ihram." That second sentence is the one that matters for a direct flight: there is no authorised point after landing at which to begin. [1]
 
-3. Scenario B: One-Stop Connecting Flights via Gulf Transit Hubs
-When flying on connecting flights via Gulf hubs (such as Air Arabia via Sharjah, flydubai or Emirates via Dubai, Qatar Airways via Doha, Gulf Air via Bahrain, SalamAir via Muscat, or Kuwait Airways):
-- **Step 1 — Fly the First Leg in Comfortable Everyday Clothing:** Wear normal modest clothing for the Dhaka to transit hub leg. Keep your clean Ihram sheets, Ihram money belt, and supportive footwear inside your 7 kg carry-on cabin bag; never pack your Ihram essentials in your checked hold baggage [1].
-- **Step 2 — Change into Ihram During Your Airport Layover:** Major transit terminals across Sharjah, Dubai, Doha, Muscat, and Bahrain feature dedicated airport prayer rooms (Musalla) equipped with ablution and changing facilities. Change into your Ihram garments comfortably during your layover before boarding the connecting flight to Jeddah [1].
-- **Step 3 — Formulate Niyyah on the Connecting Flight:** Once airborne on the second leg heading towards Jeddah, formulate your intention and recite Talbiyah when the captain announces the Miqat or roughly 30 minutes before arrival [1][2].
+The five spatial points named in the sources are Dhul Hulayfah (about 420 km from Makkah, for Madinah and those passing that way), Al-Juhfah (187 km; pilgrims now use Rabigh at 204 km), Qarn al-Manazil or Al-Sail Al-Kabeer (94 km), Yalamlam or As-Sa'diyyah (115 km) and Dhat 'Irq (92 km). Ibn Abbas narrated that the Prophet, peace be upon him, appointed these, and that they apply both to the people of those places and to anyone who passes them intending Hajj or Umrah. [1][3]
 
-4. Scenario C: Flights Landing in Madinah First (Prince Mohammad Bin Abdulaziz Airport - MED)
-If your itinerary flies from Dhaka into Madinah first, the operational and religious sequence is substantially simplified:
-- **No Ihram Required on the Flight:** Because Madinah lies outside the sacred boundary (Haram) of Makkah, you travel from Dhaka to Madinah in your normal everyday clothing [1]. You do not wear Ihram garments on the plane and you do not make Niyyah during flight descent into MED.
-- **Enter Ihram in Madinah Before Departing to Makkah:** After spending your scheduled days praying in Masjid an-Nabawi, perform Ghusl and put on your Ihram garments at your Madinah hotel on the day you depart for Makkah. If traveling by road, stop at Miqat Dhul Hulayfah (Masjid Abyar Ali) to pray and make Niyyah. If traveling on the Haramain High-Speed Train, formulate your intention and recite Talbiyah as the train departs or passes the Miqat zone outside Madinah [1][3].
+Ihram begins with intention and Talbiyah, not with cloth. The Ministry's Ihram guide says it "begins when the Muhrim intends to perform the sacred rites and starts reciting the Talbiyah," and gives the wording the pilgrim declares: "Labbayka Allahumma Umrah." Nusuk's own journey page lists Ihram first, as intention with Talbiyah, and only then the garments. This is why putting on the two white sheets in Dhaka and then beginning the Talbiyah in the air are two different steps. [2][4]
 
-5. Frequently Asked Questions
-Can I put on my Ihram after landing at Jeddah Airport?
-No. Jeddah is located within the geographic Miqat boundary [1]. If your intention is to perform Umrah directly, you must enter the state of Ihram before the aircraft passes the aerial Miqat line [1][2]. Crossing the Miqat without Ihram requires either returning to a Miqat or offering a compensatory sacrifice (Dam) under classical jurisprudence.
-When does the flight crew announce the Miqat?
-On direct flights from Dhaka or connecting flights from Gulf airports to Jeddah, operating carriers announce the approach to Miqat Qarn al-Manazil or Yalamlam approximately 30 to 45 minutes before scheduled landing [1].
-Does wearing the Ihram cloth alone place you in the sacred state?
-No. Putting on the physical towels or modest garments does not initiate Ihram restrictions. The sacred state commences when you make the formal intention (Niyyah) in your heart, utter the intention verbally, and begin reciting the Talbiyah [1].
-Do I need to wear Ihram if my flight lands in Madinah?
-No. If your ticket flies from Dhaka directly or via transit to Madinah (MED), you do not wear Ihram on the aircraft [1]. You enter Ihram later from Madinah at Miqat Dhul Hulayfah before travelling onward to Makkah [1][3].`,
+Traveller check (ihramPoint): Before you fly, confirm in writing which route your ticket actually takes and ask the operating carrier about its Miqat announcement practice. The requirement is to be in Ihram before the point parallel to the Miqat, not before a certain minute. If you are unsure, enter Ihram earlier rather than later and take the question to a qualified scholar, not to a blog. This page does not issue a ruling for your journey.
+
+2. WHICH MIQAT APPLIES TO A FLIGHT FROM BANGLADESH?
+The Ministry does not assign a point to a nationality or to a departure city; it assigns them by direction and says the traveller enters from the miqat he passes "or at other places adjacent to and parallel to them on the way, whether by air or land." For an aircraft, the relevant event is the point on your flight path that comes level with one of the five. [1][2]
+
+That is also how the scholarly source used here puts it. Jordan's General Iftaa Department, answering a question about a pilgrim flying to Jeddah, says that assuming Ihram from Jeddah is not permissible because it is within the miqat, but that a pilgrim "may wear the clothes of Ihram at home, or on the plane, and make the intention of Ihram when reaching a place parallel to the Miqat which will be indicated by the pilot, or the guide." It is an attributed position, not a substitute for advice on your own case. [6]
+
+So the practical answer is not a country table. A departure from Dhaka may run level with one point on one routing and a different one on another, depending on the airway and the approach into Jeddah. The identity of that point is a question for the flight deck or the carrier, and the obligation to be in Ihram before it remains yours. [1][2]
+
+The Ministry guide says airlines heading to Jeddah "usually announce when the aircraft is aligned with a Miqat so that the pilgrim can enter Ihram in time." No published carrier page opened for this review promises the wording, the language, the timing or that an announcement will be made at all. Plan as though it may not come. [2]
+
+Traveller check (ihramPersonal): If you already live or work in Jeddah, have performed Umrah before, or are mixing a work trip with a later Umrah, your case may fall under one of the Ministry's other categories rather than the fly-in rule. Put your exact dates and route to a qualified scholar; this page deliberately does not decide it. [1][2]
+
+Traveller check (ihramGarments): Wear or carry the garments so you can act without a lavatory queue, and keep the essentials in your cabin bag, within your carrier's cabin allowance. Wearing the cloth early is not the same as entering Ihram; the intention and Talbiyah are. Decide with your scholar how you will handle any uncertainty about the timing, and do not rely on a crew announcement as your only trigger.
+
+3. FLYING DIRECT FROM DHAKA TO JEDDAH
+A direct flight has one useful property: there is no transit terminal in which to change, so the garment step has to happen before boarding or on board. There is no valid step after landing. [1]
+
+Prepare before the airport where you can. The Ministry guide describes ghusl and fragrance as recommended before entering Ihram, and says the pilgrim should begin after an obligatory or voluntary prayer. Many pilgrims bathe at home or at their hotel and travel to the airport already prepared. If you plan to use a prayer room at Dhaka airport, check what is open and accessible on your date; this review did not inspect the terminal. [2]
+
+Have the garments reachable in the cabin. For men that is the Izar and Rida, with a belt or clips if you want them; white is recommended but not required. Women may wear any clothing that is loose, covering and not ornamental, as the Ministry guide puts it, and the women's guide covers the clothing and prohibition questions in more detail. Keep the garments in your cabin bag rather than the hold, within your carrier's allowance — no fixed kilogram figure is set by the rule. [2]
+
+When the announcement comes, or when you judge you are approaching the point, declare the rite and begin the Talbiyah. The Ministry prints the formula "Labbayka Allahumma Umrah", and the Talbiyah that follows. Men raise the voice; women recite quietly. If no announcement comes and you are unsure, act earlier rather than drifting past the boundary, then settle any question with a scholar. [2]
+
+Once in Ihram, the restrictions apply until the rites are completed. The Ministry guide lists the general prohibitions — sexual relations, contracting marriage, hunting, shaving the head or cutting nails, and perfume — with the additional prohibitions on covering the head and wearing sewn garments for men, and on the niqab and gloves for women. This page does not decide exemptions for illness, medical devices or personal circumstances. [2]
+
+Traveller check (ihramTransit): A direct flight removes the transit question but not the timing question. Confirm your flight is genuinely non-stop rather than a through-service with a stop, keep the garments with you, and decide in advance what you will do if the crew does not announce. Nothing about a boarding pass, a visa or a seat class changes the boundary rule.
+
+4. CONNECTING THROUGH A GULF HUB
+On a connection, the first leg is not yet the pilgrimage leg in the same sense: you are still outside the boundary while flying towards the hub. Many pilgrims therefore travel the first leg in ordinary modest clothing and change during the layover, which also avoids arriving at the hub already bound by the restrictions. [1][2]
+
+Change before you board the flight that will come level with the miqat, not after it lands. That means the layover is the natural preparation window, and the intention itself should be made on the leg that crosses the boundary — not automatically at the hub, which is normally still outside it. Nusuk's Hajj guidance describes the same trigger: a pilgrim on a plane approaching the designated Miqat point by air must make the intention for Ihram. [1][2][5]
+
+Major Gulf terminals generally have prayer and ablution facilities, but this review opened no airport page confirming a private changing room, a shower or a dedicated Ihram area at any specific hub. Treat a comfortable change as something you arrange — a prayer room, a quiet corner, or a family washroom if one is available — rather than a published service you can count on. [2]
+
+Ask at check-in whether the connection is protected and how long the layover is. A tight connection is a practical reason to have entered Ihram before the first departure instead of relying on the hub. Neither choice changes the requirement; they only change where you do the preparation. [1]
+
+Traveller check (ihramTransit): Confirm the layover length, the terminal change and whether your bags are through-checked before you decide where to change. Keep the garments and a small bag with you. If the connection is short or the airport is unfamiliar, prepare before the first flight. A missed connection or a delayed second leg does not create a new place to enter Ihram.
+
+5. LANDING IN MADINAH FIRST, THEN TRAVELLING TO MAKKAH
+If your ticket lands at Prince Mohammad Bin Abdulaziz Airport in Madinah, you are not crossing the boundary on that flight, so there is no Ihram to enter on the aircraft. You travel in ordinary clothing and enter Ihram later, when you leave for Makkah. [1][2]
+
+The point for that departure is Dhul Hulayfah, also called Abyar Ali, which the Ministry places about 420 km from Makkah and describes as the miqat for the people of Madinah and those who pass that way. Wear the garments at your hotel in Madinah, and complete the intention and Talbiyah before your transport reaches the point on the route that is level with Dhul Hulayfah. [1][2]
+
+Do not plan around an announcement. For a road transfer, the driver may or may not say anything; for the Haramain High-Speed Rail, this review found no operator or authority page describing an on-board miqat announcement or a ritual stop. Take the responsibility yourself: agree with the driver, or watch the route, and be in Ihram before the parallel point rather than waiting for a station or a call. [1][2]
+
+The Ministry guide also sets out the position for people who are already inside the boundary. Someone in Makkah enters Ihram for a further Umrah from the nearest place outside the Haram, such as Masjid Aisha; someone between Makkah and the mawaqit enters from his current location; a person who came to Jeddah for work or family and only later decided to perform Umrah enters from where he starts. Those are different situations from a pilgrim flying in with the intention already formed, and personal cases belong with a scholar. [1][2]
+
+Traveller check (ihramMadinah): If Madinah is first, book the Makkah leg with enough margin to change and pray before departure, and confirm with the driver or the rail operator where the route passes the parallel point. Do not assume an on-board announcement, a station stop or a hotel shuttle will handle it. If you are already inside the boundary for another purpose, ask a scholar which of the Ministry's categories applies to you.
+
+6. FREQUENTLY ASKED QUESTIONS
+Can I put on Ihram after landing at Jeddah airport?
+No, not if you flew in intending Umrah or Hajj. The Ministry states that the airport is neither a Miqat nor a place for entering Ihram, so the intention and Talbiyah must come before the aircraft reaches the point parallel to the Miqat. [1]
+Which Miqat applies to my flight from Dhaka?
+The one your actual route comes level with. The Ministry lists five points and applies them by direction, not by nationality, and says the traveller enters from the miqat he passes or a point parallel to it. Ask the operating carrier or the crew which point applies to your flight. [1][2][3]
+How will I know when the aircraft is at the Miqat?
+The Ministry guide says airlines heading to Jeddah usually announce it so pilgrims can enter Ihram in time. No opened carrier page guarantees the announcement, its language or its timing. Prepare so that you can act earlier if you are unsure. [2]
+Does wearing the Ihram cloth put me in Ihram?
+No. The Ministry guide says Ihram begins when the pilgrim intends the rites and starts the Talbiyah; Nusuk's journey page likewise lists intention and Talbiyah as the step, with the garments as preparation. Wearing the cloth early is fine, but it is not the state itself. [2][4]
+Do I need Ihram on a flight that lands in Madinah?
+No. Madinah is not crossed on the way to Makkah on that flight, so you enter Ihram later from Dhul Hulayfah, wearing the garments at your hotel and completing the intention before the route reaches the parallel point. [1][2]
+What happens if I pass the Miqat without entering Ihram?
+The Ministry's page gives two outcomes: a pilgrim who passes it must return to it, and one who assumes Ihram after passing it must offer a Fidyah (compensation). Which applies to your case, and what to do if returning is impossible, is a question for a qualified scholar — this page does not decide it. [1]`,
   "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": `At the end of your Umrah or Hajj journey, returning smoothly through **Jeddah (JED)** or **Madinah (MED)** departure terminals and clearing **Dhaka Hazrat Shahjalal International Airport (DAC)** customs requires following the official aviation and customs laws of both countries.
 
 1. WHAT ARE THE OFFICIAL GACA RULES FOR CARRYING ZAMZAM WATER FROM JEDDAH OR MADINAH AIRPORT?

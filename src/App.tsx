@@ -640,7 +640,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
       "Ramadan 1448 is expected 8 February – 8 March 2027 on the Umm al-Qura calendar, confirmed by moon sighting. I'tikaf registration at the Two Holy Mosques is free, online and capacity-limited through the General Authority's portal — last season it opened on 3 Ramadan at 11:00 a.m. No authority publishes Ramadan hotel prices, so compare dated quotes instead of trusting savings claims.",
     "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
-      "When flying direct from Dhaka to Jeddah on Biman or Saudia, put on your Ihram garments at Dhaka Airport and make Niyyah when the pilot announces Miqat Qarn al-Manazil before landing. On connecting flights via Gulf hubs, change into Ihram during your layover; flying into Madinah first requires no Ihram on the aircraft.",
+      "Entering Ihram means intending Umrah or Hajj and beginning the Talbiyah, not just wearing the cloth. The Saudi Ministry of Hajj and Umrah says air arrivals must not pass the Miqat or the point parallel to it without entering Ihram, and that Jeddah airport is neither a Miqat nor a place for entering Ihram — so on a direct flight the step happens before landing. Which of the five points applies depends on the route your flight actually flies.",
     "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
       "Never pack loose Zamzam bottles inside checked suitcases. Buy one official 5-liter sealed Zamzam box (SAR 9.50–12.50) at the Jeddah or Madinah airport kiosk, carried free by Biman and Saudia. Returning Bangladeshi passengers can also bring 5–10 kg of Madinah dates and up to 100g of gold jewelry duty-free.",
     "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":
@@ -735,7 +735,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
       "রমজান ১৪৪৮ আনুমানিক ৮ ফেব্রুয়ারি – ৮ মার্চ ২০২৭ (উম্মুল কুরা ক্যালেন্ডার, চাঁদ দেখায় নিশ্চিত হবে)। দুই হারাম মসজিদে ইতিকাফের নিবন্ধন অনলাইনে, বিনামূল্যে ও আসনসীমার ভিত্তিতে কর্তৃপক্ষের ই-সার্ভিসে — গত সিজনে ৩ রমজান সকাল ১১টায় খুলেছিল। রমজানের হোটেল ভাড়ার কোনো অফিশিয়াল তালিকা নেই; সাশ্রয়ের দাবির বদলে তারিখসহ কোট তুলনা করুন।",
     "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
-      "সরাসরি জেদ্দাগামী ফ্লাইটে ঢাকা এয়ারপোর্টেই ইহরাম পরে নিন এবং অবতরণের আগে পাইলট মিকাত ঘোষণা করলে নিয়ত ও তালবিয়া পাঠ করুন। উপসাগরীয় ট্রানজিট ফ্লাইটে লেওভারের সময় ইহরাম পরুন; আর প্রথমে মদিনায় নামলে প্লেনে ইহরাম পরার প্রয়োজন নেই।",
+      "ইহরামে প্রবেশ মানে ওমরাহ বা হজের নিয়ত করে তালবিয়া শুরু করা, শুধু কাপড় পরা নয়। সৌদি হজ ও ওমরাহ মন্ত্রণালয় বলছে, আকাশপথে আগত যাত্রী মিকাত বা তার সমান্তরাল বিন্দু অতিক্রমের আগে ইহরামে প্রবেশ করতে হবে, আর জেদ্দা বিমানবন্দর মিকাতও নয়, ইহরামে প্রবেশের স্থানও নয় — তাই সরাসরি ফ্লাইটে এই ধাপটি অবতরণের আগেই। পাঁচটি মিকাতের কোনটি প্রযোজ্য তা নির্ভর করে আপনার ফ্লাইটের প্রকৃত রুটের ওপর।",
     "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":
       "লাগেজের ভেতর খোলা বোতলে জমজমের পানি ভরলে এক্স-রে স্ক্যানারে তা জব্দ হয়। জেদ্দা বা মদিনা এয়ারপোর্টের অফিশিয়াল কিয়স্ক থেকে পাসপোর্ট দেখিয়ে ৫ লিটারের সিল করা জমজম বক্স (৯.৫০–১২.৫০ রিয়াল) কিনুন, যা বিমান ও সৌদিয়া ফ্রি বহন করে। সাথে ৫–১০ কেজি খেজুর ও ১০০ গ্রাম স্বর্ণালংকার শুল্কমুক্ত আনা যায়।",
     "bangladeshi-halal-food-guide-makkah-madinah-budget-meals":

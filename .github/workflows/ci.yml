@@ -78,6 +78,9 @@ jobs:
       - name: Verify older-traveller assistance, Haram mobility and clinical boundaries
         run: npm run test:elderly-umrah-guide
 
+      - name: Verify Ihram and Miqat source boundaries and locale parity
+        run: npm run test:ihram-miqat-guide
+
       - name: Type-check
         run: npm run lint
 

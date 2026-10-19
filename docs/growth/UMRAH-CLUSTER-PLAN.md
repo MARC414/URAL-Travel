@@ -19,6 +19,15 @@ pairs plus adjacent Hajj remain. Carrier charges and approval, cart booking/leve
 fitness are not resolved by the revision. Current validation: 20 older-traveller tests, **291 build checks**;
 visual, approval and release gates remain separate. Next independent agent-owned asset: Ihram/Miqat.
 
+**19 October Ihram/Miqat follow-up:** [`IHRAM-MIQAT-SOURCE-REVIEW.md`](IHRAM-MIQAT-SOURCE-REVIEW.md) records the
+eighth source-reviewed core EN/BN revision. **8/12 core pairs** revised/tested by article count only; four core pairs
+plus adjacent Hajj remain. The Ministry's air rule and its Jeddah-airport statement now replace the "perimeter"
+metaphor; the "30–45 minutes", trilingual crew script, airline/corridor miqat table, "11 km from Madinah", 7 kg cabin
+figure and on-board Haramain-rail intention instruction are removed. Carrier announcement practice, airport and rail
+facilities, and personal religious rulings remain unresolved and are visibly attributed or referred to a scholar.
+Current validation: 28 Ihram tests, **307 build checks**; visual, qualified-review, approval and release gates remain
+separate. Next independent agent-owned asset: Ramadan/I'tikaf.
+
 **Use with:** [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md), [`SEO-KEYWORD-MAP.md`](../../SEO-KEYWORD-MAP.md), [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md), [`CONTENT-OS.md`](CONTENT-OS.md), and [`AI-WRITING-PROMPTS.md`](AI-WRITING-PROMPTS.md).
 
 This is an operational plan for consolidating URAL's existing Umrah content, not a replacement for or rewrite of the strategy plan of record. It uses the current repository inventory and the Umrah research ledger checked on 14 October 2026. Bangladesh SERP observations and a Search Console query export were not present in those materials; demand and format hypotheses below are **not measured**. Re-check season-sensitive rules and prices against primary sources immediately before each release.

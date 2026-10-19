@@ -2774,39 +2774,53 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-20",
     slug: "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
-    title: "Wearing Ihram from Dhaka Airport vs. Transit Flight (2026): Official Miqat Rules (Qarn al-Manazil & Yalamlam)",
-    summary: "Crossing the aerial Miqat boundary without entering Ihram is a critical concern for pilgrims flying to Jeddah for Umrah. Checked on 16 October 2026 against official Saudi Ministry of Hajj & Umrah guidance, this guide explains when and where to put on Ihram garments and formulate Niyyah: non-stop flights from Dhaka (Biman/Saudia), layovers in Gulf transit airports, and why flying to Madinah first requires no Ihram on the plane.",
+    title: "Ihram & Miqat Rules for Flights from Bangladesh (2026): Direct to Jeddah, Gulf Transit or Madinah First",
+    summary: "Where exactly do you enter Ihram when flying from Dhaka? Checked on 19 October 2026 against the Saudi Ministry of Hajj and Umrah's Miqat page and its official Ihram guide, this explains the published boundary rule, why Jeddah airport is not a place for entering Ihram, how the point parallel to the Miqat works on a connecting route, why a Madinah-first flight needs no Ihram on board, and what the Ministry says happens if the boundary is crossed without Ihram.",
     category: "Hajj & Umrah",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "6 min read",
+    readTime: "9 min read",
     references: [
       {
-        name: "Ministry of Hajj and Umrah — Official Miqat locations and Ihram guidelines",
-        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — অফিশিয়াল মিকাত ও ইহরামের নির্দেশনা",
-        url: "https://www.haj.gov.sa",
+        name: "Ministry of Hajj and Umrah — Miqat locations, the air-travel rule, distances and the return/Fidyah sequence (page stamp 18 October 2026)",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — মিকাতের স্থান, আকাশপথের বিধান, দূরত্ব এবং ফিরে যাওয়া/ফিদইয়ার ক্রম (পেজ স্ট্যাম্প ১৮ অক্টোবর ২০২৬)",
+        url: "https://haj.gov.sa/en/Umrah/Miqaats",
       },
       {
-        name: "General Authority of Civil Aviation (GACA) — Flight passenger briefing on Miqat",
-        nameBn: "সৌদি সিভিল এভিয়েশন অথরিটি (GACA) — মিকাত ফ্লাইটে যাত্রীদের নির্দেশনা",
-        url: "https://gaca.gov.sa",
+        name: "Ministry of Hajj and Umrah — Ihram Awareness Guide (English PDF, G07_EN_V3): intention and Talbiyah, garments, prohibitions, categories of pilgrims, airline announcement practice",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — ইহরাম সচেতনতা গাইড (ইংরেজি পিডিএফ, G07_EN_V3): নিয়ত ও তালবিয়া, পোশাক, নিষেধাজ্ঞা, যাত্রীর শ্রেণি, বিমানের ঘোষণা",
+        url: "https://haj.gov.sa/-/media/Project/HAJJ/PDF-and-FILES/Awareness-Guides/Ihram-Guide/English/en-ihram-guide.pdf",
       },
       {
-        name: "Nusuk — Pilgrim advisory on Ihram preparation & Haramain transit",
-        nameBn: "নুসুক — ওমরাহযাত্রীদের ইহরাম ও হারামাইন ট্রানজিট নির্দেশনা",
-        url: "https://www.nusuk.sa",
+        name: "Sahih al-Bukhari 1526 — Ibn Abbas on the Mawaqit appointed by the Prophet, for residents and for those who pass them",
+        nameBn: "সহিহ বুখারি ১৫২৬ — ইবনে আব্বাস (রা.): রাসূলুল্লাহ (সা.) নির্ধারিত মাওয়াকিত, বাসিন্দা ও পথ অতিক্রমকারীদের জন্য",
+        url: "https://sunnah.com/bukhari:1526",
+      },
+      {
+        name: "Nusuk — Umrah Journey: Ihram as the first step (intention and Talbiyah)",
+        nameBn: "নুসুক — ওমরাহ জার্নি: প্রথম ধাপ ইহরাম (নিয়ত ও তালবিয়া)",
+        url: "https://umrah.nusuk.sa/Journey",
+      },
+      {
+        name: "Nusuk Hajj — Hajj rituals: intention for Ihram when the aircraft approaches the Miqat, and recommended pre-Ihram acts",
+        nameBn: "নুসুক হজ — হজের ইবাদত: বিমান মিকাতের কাছে এলে ইহরামের নিয়ত এবং ইহরামের আগের সুন্নত কাজ",
+        url: "https://hajj.nusuk.sa/nusuk/hajj-rituals",
+      },
+      {
+        name: "Jordan General Iftaa Department, Fatwa 2982 (29 September 2014) — wearing Ihram garments before the flight and making the intention at the point parallel to the Miqat",
+        nameBn: "জর্ডান জেনারেল ইফতা বিভাগ, ফতোয়া ২৯৮২ (২৯ সেপ্টেম্বর ২০১৪) — উড়ানের আগে ইহরামের কাপড় এবং মিকাতের সমান্তরাল বিন্দুতে নিয়ত",
+        url: "https://aliftaa.jo/research-fatwa-english/2982/A-Pilgrim-Traveling-by-Plane-Assumes-Ihram-upon-Reaching-the-Miqat",
       },
     ],
     internalLinks: [
-      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "Umrah Rules for Bangladeshi Women & Modest Ihram Guide", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
+      { text: "Umrah Rules for Bangladeshi Women: Mahram, Visa & Ihram Clothing", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
       { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
-      { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" },
-      { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
+      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
     ],
-    affiliateCTA: { provider: "kiwitaxi", headline: "Landing at Jeddah Terminal 1 in Ihram?", body: "Book a private air-conditioned sedan or family minivan waiting at Jeddah Arrivals to take you directly to your Makkah hotel near Masjid al-Haram." }
+    affiliateCTA: { provider: "kiwitaxi", headline: "Landing at Jeddah in Ihram with family and luggage?", body: "Compare an optional private sedan or family minivan from Jeddah Arrivals to your Makkah hotel. Vehicle size, luggage capacity, meet-and-greet and availability must be confirmed with the provider before you rely on it — a transfer does not change when or where you enter Ihram." }
   },
   {
     id: "blog-21",

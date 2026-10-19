@@ -896,3 +896,29 @@ including sixteen older-traveller output/caution controls and seven retired-clai
 property, route or booking was tested; no visual QA, deployment or live check. Current progress **7/12 core pairs**
 by article-review count only; five core plus adjacent Hajj remain, alongside hub, qualified-review and release
 gates. Next independent agent-owned asset: Ihram/Miqat.
+
+### 19 October 2026 — Ihram/Miqat pair revised (8/12 core Umrah pairs)
+
+`wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules` EN/BN rewritten against
+[`IHRAM-MIQAT-SOURCE-REVIEW.md`](IHRAM-MIQAT-SOURCE-REVIEW.md): the Ministry Miqat page, the Ministry Ihram guide PDF,
+Sahih al-Bukhari 1526, two Nusuk pages and Jordan Iftaa 2982. Six specific references replace three homepages
+(haj.gov.sa, gaca.gov.sa, nusuk.sa — the GACA "passenger briefing on Miqat" could not be substantiated).
+
+Retired from both locales: the "30 to 45 minutes before touchdown" figure, the "Bengali, English and Arabic" crew
+script, the airline-by-airline and Gulf-corridor miqat assignment, "11 km outside Madinah", the 7 kg cabin figure,
+Ashkona camp and Terminal 1/2 prayer-room specifics, guaranteed transit changing facilities, and the instruction to
+make the intention on the Haramain train after departure. The Ministry's own wording now carries the rule, the five
+distances, the intention-plus-Talbiyah definition and the return/Fidyah sequence; the airline announcement is
+described only as "usually announce" with an explicit warning that it may not come.
+
+Five curated links per locale (women, DIY, hotel/rail, open-jaw flights, `/umrah`), six point-of-action cautions
+(`ihramPoint`, `ihramPersonal`, `ihramGarments`, `ihramTransit` ×2, `ihramMadinah`), six visible/schema FAQs, no HowTo,
+a qualified optional transfer CTA, and suppression of the generic TravelIntelligence price panel for this slug.
+Original 27 Sep publication, author and slug retained; `updatedAt` 2026-10-19 in both locales.
+
+Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25,
+scheduling and 23 sitemap controls, lint, build and **307 build checks** passed (107 EN + 107 BN routes), including
+fourteen Ihram output/caution controls and five retired-claim fixtures. No carrier announcement practice, airport,
+rail or prayer-room facility, or live page was tested; no scholarly review, visual QA, deployment or live check.
+Progress **8/12 core pairs** by article-review count only; four core plus adjacent Hajj remain. Next independent
+agent-owned asset: Ramadan/I'tikaf.

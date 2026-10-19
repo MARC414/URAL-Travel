@@ -1,27 +1,27 @@
 # Hajj/Umrah closure — evidence and execution register
 
-Opened **18 October 2026**; last updated **19 October 2026**. Owner priority: finish this cluster before unrelated content.
+Opened **18 October 2026**; last updated **19 October 2026** (Ihram/Miqat revision). Owner priority: finish this cluster before unrelated content.
 This register supplements `UMRAH-CLUSTER-PLAN.md`; it does not certify the cluster or authorize external deployment.
 
-## Progress snapshot — 19 October 2026, after women-specific revision
+## Progress snapshot — 19 October 2026, after the Ihram/Miqat revision
 
 Count **article pairs**, not language versions, and distinguish the current accuracy-upgrade cycle from existing
 published inventory. All twelve core Umrah articles already exist; earlier audits are not fresh certification.
 
 | Scope | Recorded local outcome | Still outstanding |
 |---|---|---|
-| 12 core Umrah article pairs | **7 revised/tested:** main DIY, Nusuk, stopover, hotel/rail, flights, women, older travellers (14 locale pages) | **5 independent reviews:** Ihram, Ramadan/I'tikaf, Zamzam/customs, food, Ziyarah (10 locale pages) |
+| 12 core Umrah article pairs | **8 revised/tested:** main DIY, Nusuk, stopover, hotel/rail, flights, women, older travellers, Ihram/Miqat (16 locale pages) | **4 independent reviews:** Ramadan/I'tikaf, Zamzam/customs, food, Ziyarah (8 locale pages) |
 | Planning hub EN/BN | Quote-input mechanism and no-fake-savings correction tested | Full release-time fact/graph/visual checks; no matched live price basket claimed |
 | Adjacent Hajj article pair / checklist | Deadline conflict and attachment/health limitations recorded | Own source-led article/FAQ/HowTo/download reconciliation and current-source review (2 locale pages plus resource) |
 | 2 optional bridge pairs | Existing inventory; excluded from the 12-core-article count | Independent later review, not a prerequisite to count core article revisions |
 | Release in this session | No reviewed revision deployed or production-verified | Approval, visual checks, actual deployment and live EN/BN checks |
 
-**7/12 = 58% by core article count only.** This is not a weighted completion percentage: effort differs per article,
-the hub fix is a separate partial workstream, Hajj is adjacent, and release work remains. **Six article pairs remain**
-for core Umrah plus adjacent Hajj, alongside hub/release gates. Public-source research and edits remain agent-owned;
+**8/12 = 67% by core article count only.** This is not a weighted completion percentage: effort differs per article,
+the hub fix is a separate partial workstream, Hajj is adjacent, and release work remains. **Four core article pairs remain**
+plus adjacent Hajj, alongside hub/release gates. Public-source research and edits remain agent-owned;
 owner decisions are publication approval and optional genuinely private/field evidence, not delegated web research.
-Current implementation validation: older travellers 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25, scheduling/sitemap controls, lint/build,
-**291 build checks**, 107 EN + 107 BN routes. Counts do not verify unresolved source claims or authenticated flows.
+Current implementation validation: Ihram/Miqat 28 + older travellers 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25, scheduling/sitemap controls, lint/build,
+**307 build checks**, 107 EN + 107 BN routes. Counts do not verify unresolved source claims or authenticated flows.
 
 ## Quality contract and order
 
@@ -167,7 +167,7 @@ of the cluster map.
 | Flights + BN | 19 October source-led EN/BN revision: five primary references, six-step same-basis comparison, six FAQs and three immediate cautions; 17 targeted tests and 257 build checks | No live fare/dated schedule or personal transit assessment; carrier-specific baggage, packaging and connection limits visible. Visual/approval/deploy/live gates open. Record: `FLIGHT-STRATEGY-SOURCE-REVIEW.md` |
 | Women + BN | 19 October EN/BN revision: ten claim-specific primary sources, four-step Rawdah preparation, seven FAQs and six contextual cautions; 17 targeted tests and 275 build checks | Personal eligibility, actual booking/childcare/access and religious/clinical decisions untested. Qualified religious editorial review plus approval/visual/deploy/live gates remain. Record: `WOMEN-UMRAH-SOURCE-REVIEW.md` |
 | Older travellers + BN | 19 October EN/BN revision: nine specific primary pages, six sections, four-step airline-request HowTo, seven FAQs and five immediate cautions; 20 targeted tests and 291 build checks | Carrier charge/approval, cart booking/level, property route and clinical fitness untested; 1448H health unverified. Approval, visual/deploy/live gates open. Record: `ELDERLY-UMRAH-SOURCE-REVIEW.md` |
-| Ihram/Miqat + BN | Not reaudited here | Qualified religious evidence and routing/intention distinctions |
+| Ihram/Miqat + BN | 19 October EN/BN revision: six specific primary pages, five sections, six FAQs and six point-of-action cautions; 28 targeted tests and 307 build checks | No carrier confirmation of any announcement practice, no airport/rail/prayer-room inspection; qualified scholarly review plus approval/visual/deploy/live gates remain. Record: `IHRAM-MIQAT-SOURCE-REVIEW.md` |
 | Ramadan/I'tikaf + BN | Earlier audit exists; not freshly certified here | Current 1448 announcement vs dated precedent; correct itinerary sequence and season claims |
 | Zamzam/customs + BN | Earlier audit exists; not freshly certified here | Current carrier/airport and NBR evidence; inspect snippets/CTAs as well as bodies |
 | Food + BN | Not reaudited here | Dated outlet/menu/location evidence, no invented budget prices |
@@ -203,7 +203,7 @@ owner/release handoff, and the original plan is archived with a historical banne
 not silently certified. Nusuk now has five localized warning boxes at the relevant actions. **13 DIY + 16 Nusuk +
 25 budget tests**, scheduling/sitemap suites, lint/build and **221 build checks passed** for this wave. No production
 or authenticated/visual test occurred. Next independent review remains **stopover → hotel/rail → flights → women →
-older travellers → Ihram → Ramadan → customs → food → Ziyarah**, with separate Hajj conflict/package/1448 work.
+Ihram → Ramadan → customs → food → Ziyarah**, with separate Hajj conflict/package/1448 work.
 
 
 ### Health-source checkpoint — 19 October 2026
@@ -294,3 +294,21 @@ lint/build and **291 build assertions** pass; 107 EN + 107 BN routes. No airline
 tested; no visual, deployment or live check. Qualified clinical and religious/scholarly review, current-season
 airline/cart rechecks and all release gates remain. **Seven core pairs done; five core pairs plus adjacent Hajj
 remain.** Next independent agent-owned asset: Ihram/Miqat.
+
+
+### Ihram/Miqat checkpoint — 19 October 2026
+
+Eighth core EN/BN pair revised/tested. `IHRAM-MIQAT-SOURCE-REVIEW.md` records the pre-edit ledger and the six opened
+pages (Ministry Miqat page, Ministry Ihram guide PDF, Bukhari 1526, two Nusuk pages, Jordan Iftaa 2982). The article
+now quotes the Ministry's air rule and its statement that Jeddah airport is "neither a Miqat nor a place for entering
+Ihram", publishes the Ministry's five distances (420/187/94/115/92 km), defines Ihram as intention plus Talbiyah with
+the Ministry's formula, and states the crossing remedy as the Ministry does: return to the Miqat, Fidyah if Ihram was
+assumed after passing. The "30 to 45 minutes", trilingual crew script, airline/corridor miqat table, "11 km from
+Madinah", 7 kg cabin figure, Ashkona and Terminal 1/2 specifics and the on-board Haramain-rail intention instruction
+are removed; the announcement is described only as the Ministry's "usually announce", with an explicit warning that it
+may not come. Six cautions sit at their decision points; six visible FAQs match schema; five curated links per locale
+include the hub and four siblings; the transfer CTA is optional and qualified; the price panel is excluded for this
+slug. Six specific references replace three homepages. 28 targeted tests plus the preceding suites, budget 25,
+scheduling/sitemaps 23, lint/build and **307 build assertions** pass; 107 EN + 107 BN routes. No carrier, airport,
+rail, prayer-room or booking flow was tested, and no scholar reviewed the wording. **Eight core pairs done; four core
+pairs plus adjacent Hajj remain.** Next independent agent-owned asset: Ramadan/I'tikaf.

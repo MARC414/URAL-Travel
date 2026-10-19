@@ -4857,6 +4857,59 @@ check([
 ].every((fixture) => ELDERLY_RETIRED_CLAIMS.test(fixture)),
   "older-traveller retired-claim guard rejects all seven reintroduction fixtures (negative controls)");
 
+// Ihram / Miqat guide: the boundary rule, the Jeddah-airport statement, intention-plus-Talbiyah
+// and the return/Fidyah sequence are Ministry claims, not site rulings, and no announcement
+// timing, crew language or corridor mapping may return. Ledger: docs/growth/IHRAM-MIQAT-SOURCE-REVIEW.md (2026-10-19).
+const IHRAM_SLUG = "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules";
+const IHRAM_NOTE_KEYS = ["ihramPoint", "ihramPersonal", "ihramGarments", "ihramTransit", "ihramTransit", "ihramMadinah"];
+const IHRAM_RETIRED_CLAIMS = /30 to 45 minutes|30–45 minutes|30-45 minutes|in Bengali, English and Arabic|বাংলা, ইংরেজি ও আরবিতে|১১ কিলোমিটার|11 kilometres|11 kilometers|Ashkona|আশকোনা|Terminal 1\/2|টার্মিনাল ১\/২|Yalamlam for|Qarn al-Manazil is the|কারনুল মানাজিল.*রিয়াদ|ট্রেনে গেলে ট্রেন ছাড়ার পর|offer a Dam|compensatory sacrifice|inside the perimeter|সীমারেখার অভ্যন্তরে অবস্থিত; ফলে|7 kg cabin|৭ কেজি কেবিন/i;
+const ihramClaimSurfaces: string[] = [];
+for (const locale of ["en", "bn"] as const) {
+  const html = read(path.join(DIST_DIR, ...(locale === "bn" ? ["bn"] : []), "blog", `${IHRAM_SLUG}.html`)) ?? "";
+  const post = getLocalizedBlogs(locale).find((entry) => entry.slug === IHRAM_SLUG);
+  const body = locale === "en" ? BLOG_BODY[IHRAM_SLUG] : post?.content ?? "";
+  const text = normalizeStructuredText(html);
+  ihramClaimSurfaces.push(body, post?.title ?? "", post?.summary ?? "", JSON.stringify(post?.affiliateCTA), text);
+  const graph = getSeoSchemaGraph(html);
+  const procedures = graph.filter((node) => hasSchemaType(node, "HowTo"));
+  const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
+  const notes = body.split(/\n+/).map(getTravellerCheck).filter((note) => note !== null);
+  const cautionPresent = (candidate: string, key: string) => {
+    const note = notes.find((entry) => entry.key === key);
+    return Boolean(note && candidate.includes(normalizeStructuredText(note.title)) && candidate.includes(normalizeStructuredText(note.text)));
+  };
+  check(
+    post?.updatedAt === "2026-10-19" && post.references?.length === 6 &&
+      post.references.every((reference) => html.includes(reference.url.replace(/&/g, "&amp;")) || html.includes(reference.url)) &&
+      procedures.length === 0 &&
+      Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 6,
+    `${locale} Ihram guide output preserves six sources, update, six FAQs and no procedure schema`
+  );
+  check(
+    [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((match) => match[1]).join(",") === IHRAM_NOTE_KEYS.join(",") &&
+      IHRAM_NOTE_KEYS.every((key) => cautionPresent(text, key)) &&
+      (locale === "en"
+        ? text.includes("neither a Miqat nor a place for entering Ihram") && text.includes("must return to it") && text.includes("Fidyah") && text.includes("420 km") && text.includes("usually announce")
+        : text.includes("ইহরামে প্রবেশের স্থানও নয়") && text.includes("ফিরে যাবে") && text.includes("ফিদইয়া") && text.includes("৪২০ কিমি") && text.includes("সাধারণত ঘোষণা দেয়")),
+    `${locale} Ihram guide output retains the Ministry rule, distances, Fidyah sequence and six cautions`
+  );
+  for (const key of [...new Set(IHRAM_NOTE_KEYS)]) {
+    const note = notes.find((entry) => entry.key === key);
+    check(Boolean(note) && !cautionPresent(text.replace(normalizeStructuredText(note!.text), ""), key),
+      `${locale} Ihram caution guard rejects removed ${key} body (negative control)`);
+  }
+}
+check(ihramClaimSurfaces.every((surface) => surface && !IHRAM_RETIRED_CLAIMS.test(surface)),
+  "Ihram EN/BN source, metadata and generated pages do not restore minute counts, crew-language scripts, corridor maps or folklore");
+check([
+  "The captain announces the Miqat approximately 30 to 45 minutes before touchdown.",
+  "Announcements are made in Bengali, English and Arabic.",
+  "Dhul Hulayfah is 11 kilometres outside Madinah.",
+  "Wearing the 7 kg cabin bag limit, pack the Ihram in your 7 kg cabin allowance.",
+  "Crossing without Ihram requires offering a Dam as a compensatory sacrifice.",
+].every((fixture) => IHRAM_RETIRED_CLAIMS.test(fixture)),
+  "Ihram retired-claim guard rejects all five reintroduction fixtures (negative controls)");
+
 // --- Wave 6: Zamzam & Customs Claims Guards (2026-10-17) ------------------
 // Guard against reintroducing the outdated SAR 9.50-12.50 Zamzam price range
 // (now 48 SAR per Nusuk 2026), unqualified "free" airline claims for Zamzam

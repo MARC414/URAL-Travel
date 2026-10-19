@@ -25,10 +25,15 @@ const TITLES = {
   elderlyHaram: { en: "Confirm the service point and level today", bn: "আজকের service point ও level নিশ্চিত করুন" },
   elderlyHotel: { en: "Confirm the door-to-door route", bn: "দরজা থেকে দরজা route নিশ্চিত করুন" },
   elderlyHealth: { en: "Keep clinical decisions with your clinician", bn: "Clinical সিদ্ধান্ত চিকিৎসকের সঙ্গে রাখুন" },
+  ihramPoint: { en: "Confirm the route and the actual point", bn: "রুট ও আসল বিন্দু নিশ্চিত করুন" },
+  ihramGarments: { en: "Prepare the garments before the boundary", bn: "সীমারেখার আগেই কাপড়ের প্রস্তুতি নিন" },
+  ihramTransit: { en: "Confirm the connection, not the airport name", bn: "বিমানবন্দরের নাম নয়, সংযোগ নিশ্চিত করুন" },
+  ihramMadinah: { en: "Confirm where the route meets the boundary", bn: "রুট কোথায় সীমারেখায় পৌঁছায় তা নিশ্চিত করুন" },
+  ihramPersonal: { en: "Take personal rulings to a qualified scholar", bn: "ব্যক্তিগত রায় যোগ্য আলেমের কাছে নিন" },
 } as const;
 
 export function getTravellerCheck(paragraph: string) {
-  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth)\):\s+([\s\S]+)$/);
+  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth|ihramPoint|ihramGarments|ihramTransit|ihramMadinah|ihramPersonal)\):\s+([\s\S]+)$/);
   if (!match) return null;
   const key = match[2] as keyof typeof TITLES;
   const locale = match[1] === "Traveller check" ? "en" : "bn";
