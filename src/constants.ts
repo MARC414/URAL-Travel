@@ -78,6 +78,82 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     }
   },
   {
+    id: "ktm-dhaka",
+    from: "Kathmandu (KTM)",
+    to: "Dhaka (DAC)",
+    country: "Nepal",
+    priceRangeBdt: "BDT 28,000 - BDT 40,000 (Roundtrip, Economy)",
+    airlines: ["Biman Bangladesh Airlines", "Himalaya Airlines"],
+    bestTimeToBook: "4-8 weeks before departure, especially for the October-November peak season",
+    duration: "1h 30m (Direct)",
+    visaRequirement: "Bangladeshi citizens do not need a visa to enter Bangladesh. Nepali citizens require a Bangladesh visa (eVisa or Visa on Arrival at DAC, subject to current rules).",
+    quickAnswer: "Direct flights from Kathmandu (KTM) to Dhaka (DAC) take about 1 hour 30 minutes on Biman Bangladesh Airlines and Himalaya Airlines. Round-trip economy fares typically range from BDT 28,000 to BDT 40,000, depending on season and how early you book. Tribhuvan International Airport (KTM) serves as the departure point, with arrivals at Hazrat Shahjalal International Airport (DAC) in Dhaka.",
+    keyFacts: [
+      { label: "Flight Time", value: "1 hour 30 mins (Direct)" },
+      { label: "Direct Airlines", value: "Biman Bangladesh, Himalaya Airlines" },
+      { label: "Average Roundtrip Price", value: "BDT 32,000 - 35,000" },
+      { label: "Departure Airport", value: "Tribhuvan International Airport (KTM)" },
+      { label: "Arrival Airport", value: "Hazrat Shahjalal International Airport (DAC)" }
+    ],
+    faqs: [
+      {
+        question: "Which airlines fly direct from Kathmandu to Dhaka?",
+        answer: "Biman Bangladesh Airlines and Himalaya Airlines both operate regular direct flights between Tribhuvan International Airport (KTM) in Kathmandu and Hazrat Shahjalal International Airport (DAC) in Dhaka, with a flight time of about 1 hour 30 minutes."
+      },
+      {
+        question: "How can I find the cheapest Kathmandu to Dhaka flight ticket?",
+        answer: "Book 4-8 weeks ahead where possible, avoid the October-November peak season if your dates are flexible, and compare both Biman Bangladesh and Himalaya Airlines directly - prices on this short route can vary significantly between the two."
+      },
+      {
+        question: "Do Nepali citizens need a visa to enter Bangladesh from Kathmandu?",
+        answer: "Nepali citizens require a visa to enter Bangladesh. Check current Bangladesh visa rules - options may include eVisa or Visa on Arrival at Hazrat Shahjalal International Airport (DAC), subject to prevailing immigration policy. Bangladeshi citizens do not need a visa to enter their own country."
+      },
+      {
+        question: "How long is the flight from Kathmandu to Dhaka?",
+        answer: "The direct flight time between Kathmandu and Dhaka is approximately 1 hour 30 minutes, making it one of the shortest international routes connecting Nepal and Bangladesh."
+      },
+      {
+        question: "Is Hazrat Shahjalal International Airport close to central Dhaka?",
+        answer: "Yes. Hazrat Shahjalal International Airport (DAC) is roughly 30-45 minutes by taxi from central Dhaka (Gulshan, Banani, Motijheel), depending on traffic conditions."
+      },
+      {
+        question: "What documents must I present at Tribhuvan International Airport in Kathmandu before boarding a flight to Dhaka?",
+        answer: "Before boarding your flight to Dhaka in Kathmandu, you must present a passport valid for at least six months from your travel date, along with a confirmed flight ticket. Bangladeshi citizens should carry their national ID or passport. Nepali citizens should carry their passport with a valid Bangladesh visa if required. Immigration officials at Tribhuvan International Airport (KTM) may also ask to see proof of sufficient funds or accommodation details."
+      },
+      {
+        question: "Should I choose Biman Bangladesh Airlines or Himalaya Airlines for a trip from Kathmandu to Dhaka?",
+        answer: "Both airlines offer regular direct flights on this route, so your choice should depend on price, baggage policies, and schedule preferences. Biman Bangladesh Airlines is a full-service carrier offering complimentary standard meals and generous checked luggage, making it a reliable option for families. Himalaya Airlines is a private carrier based in Nepal that also operates direct flights with basic services, often providing competitive pricing or better timing for quick weekend getaways."
+      },
+      {
+        question: "What is the baggage allowance for Biman Bangladesh and Himalaya Airlines on flights from Kathmandu to Dhaka?",
+        answer: "Biman Bangladesh Airlines generally provides a generous baggage allowance of 20 kg to 30 kg for checked luggage and 7 kg for carry-on baggage in Economy Class, though you should verify the exact limit printed on your ticket. Himalaya Airlines typically allows up to 20 kg of checked baggage and 7 kg of carry-on baggage for their standard economy fares, although they sometimes offer lower-priced promotional tickets with smaller allowances. Always check current baggage specifications at the time of reserving your ticket."
+      }
+    ],
+    schemaMarkup: {
+      type: "Flight",
+      description: "KTM to DAC flight route details for Bangladeshi travelers",
+      code: `{
+  "@context": "https://schema.org",
+  "@type": "Flight",
+  "provider": {
+    "@type": "Airline",
+    "name": "Biman Bangladesh Airlines"
+  },
+  "departureAirport": {
+    "@type": "Airport",
+    "name": "Tribhuvan International Airport",
+    "iataCode": "KTM"
+  },
+  "arrivalAirport": {
+    "@type": "Airport",
+    "name": "Hazrat Shahjalal International Airport",
+    "iataCode": "DAC"
+  },
+  "estimatedFlightDuration": "PT1H30M"
+}`
+    }
+  },
+  {
     id: "dhaka-bangkok",
     from: "Dhaka (DAC)",
     to: "Bangkok (BKK / DMK)",
@@ -333,6 +409,145 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     "iataCode": "MLE"
   },
   "estimatedFlightDuration": "PT4H10M"
+}`
+    }
+  },
+  {
+    id: "dhaka-los-angeles",
+    from: "Dhaka (DAC)",
+    to: "Los Angeles (LAX)",
+    country: "United States",
+    priceRangeBdt: "BDT 150,000 - BDT 240,000 (Roundtrip, Economy)",
+    airlines: ["Emirates", "Qatar Airways", "Etihad Airways", "Turkish Airlines", "Biman Bangladesh Airlines", "US-Bangla Airlines"],
+    bestTimeToBook: "3-5 months before departure, especially for summer (June-August) and winter holiday (December-January) travel",
+    duration: "19h 30m - 24h 0m (1-2 Stops)",
+    visaRequirement: "US B1/B2 Tourist Visa (advance application via US Embassy Dhaka, DS-160 form, visa interview required)",
+    quickAnswer: "There are no nonstop flights from Dhaka (DAC) to Los Angeles (LAX). All itineraries require 1-2 stops, typically through Middle Eastern hubs (Dubai, Doha, Abu Dhabi), Istanbul, or European gateways. Total journey time ranges from 19 hours 30 minutes to 24 hours depending on connection length. Economy roundtrip fares typically range from BDT 150,000 to BDT 240,000. Bangladeshi passport holders must obtain a US B1/B2 visitor visa in advance through the US Embassy in Dhaka — this is not Visa on Arrival or ESTA-eligible.",
+    keyFacts: [
+      { label: "Flight Time", value: "19h 30m - 24h 0m (1-2 Stops)" },
+      { label: "Direct Flights", value: "None — all routes require connections" },
+      { label: "Common Connection Hubs", value: "Dubai (DXB), Doha (DOH), Abu Dhabi (AUH), Istanbul (IST)" },
+      { label: "Average Roundtrip Price", value: "BDT 175,000 - 200,000" },
+      { label: "Visa for Bangladeshis", value: "US B1/B2 Tourist Visa (advance, via US Embassy Dhaka)" }
+    ],
+    faqs: [
+      {
+        question: "Are there direct flights from Dhaka to Los Angeles?",
+        answer: "No. There are currently no nonstop flights from Hazrat Shahjalal International Airport (DAC) to Los Angeles International Airport (LAX). All itineraries require at least one connection, most commonly through Dubai (DXB), Doha (DOH), Abu Dhabi (AUH), or Istanbul (IST)."
+      },
+      {
+        question: "Which airlines fly from Dhaka to Los Angeles with the fewest stops?",
+        answer: "Emirates (via Dubai), Qatar Airways (via Doha), Etihad Airways (via Abu Dhabi), and Turkish Airlines (via Istanbul) offer 1-stop itineraries with the shortest total journey times, typically 19h 30m to 21h. Biman Bangladesh and US-Bangla can connect you to these carriers at the Middle Eastern hubs."
+      },
+      {
+        question: "Do Bangladeshi citizens need a visa to travel to Los Angeles?",
+        answer: "Yes. Bangladeshi passport holders must obtain a US B1/B2 visitor visa before travel. This requires completing the DS-160 form online, paying the visa fee, and attending an in-person interview at the US Embassy in Dhaka. The US is not part of the Visa Waiver Program, so ESTA is not available for Bangladeshi citizens."
+      },
+      {
+        question: "What is the cheapest time to fly from Dhaka to Los Angeles?",
+        answer: "Book 3-5 months in advance. Avoid peak periods: US summer (June-August), winter holidays (December-January), and Eid travel seasons. Shoulder periods (late January-March, September-October) typically offer the lowest fares from BDT 150,000 roundtrip."
+      },
+      {
+        question: "How long does a flight from Dhaka to Los Angeles take?",
+        answer: "Total journey time ranges from 19 hours 30 minutes to 24 hours, depending on the connection hub and layover duration. A typical Emirates itinerary via Dubai is about 20-21 hours including a 2-4 hour layover."
+      },
+      {
+        question: "What documents do I need at Hazrat Shahjalal International Airport before flying to Los Angeles?",
+        answer: "You must present: (1) a passport valid for at least 6 months beyond your US stay, (2) a valid US B1/B2 visa stamped in your passport, (3) a confirmed roundtrip flight ticket, (4) proof of sufficient funds for your US stay, and (5) accommodation details or an invitation letter if applicable. US immigration officers at LAX may ask additional questions on arrival."
+      },
+      {
+        question: "Can I transit through Dubai or Doha without a separate transit visa?",
+        answer: "Bangladeshi citizens typically do not need a separate transit visa for short layovers in Dubai (DXB) or Doha (DOH) if you remain airside and have a confirmed onward ticket. However, if you plan to leave the airport or your layover exceeds the airline's permitted transit window, you may need a transit visa. Check with your airline before booking."
+      }
+    ],
+    schemaMarkup: {
+      type: "Flight",
+      description: "DAC to LAX flight route details for Bangladeshi travelers",
+      code: `{
+  "@context": "https://schema.org",
+  "@type": "Flight",
+  "provider": {
+    "@type": "Airline",
+    "name": "Emirates"
+  },
+  "departureAirport": {
+    "@type": "Airport",
+    "name": "Hazrat Shahjalal International Airport",
+    "iataCode": "DAC"
+  },
+  "arrivalAirport": {
+    "@type": "Airport",
+    "name": "Los Angeles International Airport",
+    "iataCode": "LAX"
+  },
+  "estimatedFlightDuration": "PT20H0M"
+}`
+    }
+  },
+  {
+    id: "dhaka-madinah",
+    from: "Dhaka (DAC)",
+    to: "Madinah (MED)",
+    country: "Saudi Arabia",
+    priceRangeBdt: "BDT 55,000 - BDT 95,000 (Roundtrip, Economy)",
+    airlines: ["Saudia", "Biman Bangladesh Airlines", "Flynas", "Flyadeal"],
+    bestTimeToBook: "2-3 months before departure, especially before Ramadan and Hajj season; off-peak (post-Hajj, Muharram-Safar) offers lowest fares",
+    duration: "6h 30m - 8h 0m (Direct)",
+    visaRequirement: "Saudi Umrah visa or tourist visa (advance application via Saudi visa portal or authorized agents; Bangladeshi passport holders are NOT visa-exempt)",
+    quickAnswer: "Direct flights operate from Hazrat Shahjalal International Airport (DAC) to Prince Mohammad bin Abdulaziz International Airport (MED) in Madinah, Saudi Arabia. Flight time is approximately 6 hours 30 minutes. Economy roundtrip fares typically range from BDT 55,000 to BDT 95,000. Bangladeshi passport holders need a Saudi Umrah visa or tourist visa before travel — this is not Visa on Arrival. Madinah is the second-holiest city in Islam, home to Al-Masjid an-Nabawi (the Prophet's Mosque).",
+    keyFacts: [
+      { label: "Flight Time", value: "6h 30m - 8h 0m (Direct)" },
+      { label: "Direct Flights", value: "Yes — Saudia and Biman Bangladesh operate direct DAC–MED" },
+      { label: "Average Roundtrip Price", value: "BDT 70,000 - 85,000" },
+      { label: "Visa for Bangladeshis", value: "Saudi Umrah visa or tourist visa (advance, via Saudi visa portal)" }
+    ],
+    faqs: [
+      {
+        question: "Are there direct flights from Dhaka to Madinah?",
+        answer: "Yes. Saudia and Biman Bangladesh Airlines operate direct flights from Hazrat Shahjalal International Airport (DAC) to Prince Mohammad bin Abdulaziz International Airport (MED) in Madinah. Flight time is approximately 6 hours 30 minutes."
+      },
+      {
+        question: "Do Bangladeshi citizens need a visa to travel to Madinah for Umrah?",
+        answer: "Yes. Bangladeshi passport holders must obtain a Saudi Umrah visa or tourist visa before travel. Applications can be made through the Saudi visa portal or authorized travel agents in Dhaka. This is not Visa on Arrival."
+      },
+      {
+        question: "What is the cheapest time to fly from Dhaka to Madinah?",
+        answer: "Book 2-3 months in advance. Avoid peak periods: Ramadan, Hajj season (Dhul-Hijjah), and Eid travel seasons. Off-peak months (Muharram-Safar, post-Hajj) typically offer the lowest fares from BDT 55,000 roundtrip."
+      },
+      {
+        question: "How long does a flight from Dhaka to Madinah take?",
+        answer: "Direct flights take approximately 6 hours 30 minutes to 8 hours, depending on the airline and specific routing."
+      },
+      {
+        question: "What documents do I need at Hazrat Shahjalal International Airport before flying to Madinah?",
+        answer: "You must present: (1) a passport valid for at least 6 months beyond your stay, (2) a valid Saudi Umrah visa or tourist visa, (3) a confirmed roundtrip flight ticket, (4) proof of accommodation in Saudi Arabia, and (5) proof of sufficient funds for your stay."
+      },
+      {
+        question: "Can I visit Makkah from Madinah on the same trip?",
+        answer: "Yes. Makkah is about 450 km from Madinah (approximately 4-5 hours by car or bus via the Haramain High-Speed Railway or SAPTCO bus). Many Umrah pilgrims visit both cities — Madinah first (Al-Masjid an-Nabawi) then Makkah (Masjid al-Haram), or vice versa."
+      }
+    ],
+    schemaMarkup: {
+      type: "Flight",
+      description: "DAC to MED flight route details for Bangladeshi Umrah travelers",
+      code: `{
+  "@context": "https://schema.org",
+  "@type": "Flight",
+  "provider": {
+    "@type": "Airline",
+    "name": "Saudia"
+  },
+  "departureAirport": {
+    "@type": "Airport",
+    "name": "Hazrat Shahjalal International Airport",
+    "iataCode": "DAC"
+  },
+  "arrivalAirport": {
+    "@type": "Airport",
+    "name": "Prince Mohammad bin Abdulaziz International Airport",
+    "iataCode": "MED"
+  },
+  "estimatedFlightDuration": "PT6H30M"
 }`
     }
   }
