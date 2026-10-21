@@ -1032,6 +1032,36 @@ function renderFlightsHubBody(title: string, description: string, faqSchema: Ret
     <h1>${escapeHtml(title)}</h1>
     <p>${escapeHtml(description)}</p>
     <p>Use these Dhaka flight guides to compare the destinations covered, indicative BDT fare ranges, journey duration, airlines and booking guidance in one place. The route notes are planning references rather than live fare quotes: prices and schedules can change with travel dates, seat inventory, baggage choices and fare conditions. Before booking, compare the total itinerary—not only the headline fare—including baggage, stopovers, transit requirements, change or cancellation terms, and arrival time. Travelers starting in Chattogram, Sylhet or another city should plan any separate domestic leg and allow a realistic connection buffer. Confirm the operating carrier and current departure details with the airline or booking provider.</p>
+    <section id="direct-flights-from-dhaka" aria-labelledby="direct-flights-h2">
+      <h2 id="direct-flights-h2">Direct flights from Dhaka (DAC): where you can fly nonstop</h2>
+      <p>Hazrat Shahjalal International Airport (DAC) has nonstop service to about 30 international destinations across roughly 20 countries, plus domestic routes. Schedules and operators change by season, so confirm on the airline's website before booking. Last reviewed: October 2026.</p>
+
+      <h3>Nonstop routes covered by URAL guides</h3>
+      <ul>
+        <li><a href="/flights/dhaka-kathmandu">Dhaka to Kathmandu</a> — Biman Bangladesh Airlines, Himalaya Airlines (~1h 30m)</li>
+        <li><a href="/flights/dhaka-bangkok">Dhaka to Bangkok</a> — Biman Bangladesh Airlines, Thai Airways, US-Bangla Airlines, Thai Lion Air (~2h 30m)</li>
+        <li><a href="/flights/dhaka-kuala-lumpur">Dhaka to Kuala Lumpur</a> — Malaysia Airlines, Biman Bangladesh Airlines, AirAsia, US-Bangla Airlines, Batik Air (~3h 50m)</li>
+        <li><a href="/flights/dhaka-singapore">Dhaka to Singapore</a> — Singapore Airlines, Biman Bangladesh Airlines, US-Bangla Airlines (~4h 15m)</li>
+        <li><a href="/flights/dhaka-dubai">Dhaka to Dubai</a> — Emirates, flydubai, Biman Bangladesh Airlines, US-Bangla Airlines (~4h 45m)</li>
+        <li><a href="/flights/dhaka-maldives">Dhaka to Malé, Maldives</a> — US-Bangla Airlines, SriLankan Airlines (~4h 10m)</li>
+      </ul>
+
+      <h3>Saudi Arabia (Umrah and Hajj)</h3>
+      <p>Nonstop flights run to Jeddah and Madinah. See the <a href="/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">open-jaw ticket guide</a> and the <a href="/umrah">DIY Umrah planner</a>.</p>
+
+      <h3>Routes with no nonstop</h3>
+      <p>Some popular searches, such as the US, Canada and most of Europe, usually involve a connection, often through the Gulf. Check the airline's route map for current options. For long-haul planning, see <a href="/flights/dhaka-los-angeles">Dhaka to Los Angeles</a>.</p>
+
+      <h4>FAQ</h4>
+      <details>
+        <summary>Which airlines fly nonstop from Dhaka?</summary>
+        <p>Biman Bangladesh Airlines and US-Bangla operate the most nonstop routes from DAC. Several foreign carriers also serve Dhaka nonstop. Check each airline's site for the current timetable.</p>
+      </details>
+      <details>
+        <summary>Are fares shown on URAL?</summary>
+        <p>URAL publishes route guidance and links to the airline or search partner. Fares change daily.</p>
+      </details>
+    </section>
     <section><h2>Dhaka international flight routes and fare guide</h2><ul>${routeDirectory}</ul></section>
     <section><h2>Route-by-route flight planning from Dhaka</h2>${routeDetails}</section>
     <section><h2>How to compare international flights from Bangladesh</h2>
@@ -3002,6 +3032,30 @@ function buildBengaliBody(
           )
         );
       }
+
+      // Bengali: Direct flights from Dhaka section for the flights hub
+      parts.push(
+        `<section id="direct-flights-from-dhaka" aria-labelledby="direct-flights-h2-bn">` +
+          `<h2 id="direct-flights-h2-bn">ঢাকা (DAC) থেকে সরাসরি ফ্লাইট: আপনি কোথায় ননস্টপ ভ্রমণ করতে পারেন</h2>` +
+          `<p>হাজর শাহজালাল আন্তর্জাতিক বিমানবন্দর (DAC) প্রায় ৩০টি আন্তর্জাতিক গন্তব্যে এবং দেশীয় রুটে সরাসরি সেবা প্রদান করে। এয়ারলাইনের টাইম-টেবিল মৌসুম অনুযায়ী পরিবর্তিত হতে পারে, তাই বুকিং করার আগে এয়ারলাইনের ওয়েবসাইটে নিশ্চিত হয়ে নিন। শেষ পর্যালোচনা: অক্টোবর ২০২৬।</p>` +
+          `<h3>ইউআরএল গাইডে কভার করা ননস্টপ রুটসমূহ</h3>` +
+          `<ul>` +
+            `<li><a href="/bn/flights/dhaka-kathmandu">ঢাকা থেকে কাঠমান্ডু</a> — Biman Bangladesh Airlines, Himalaya Airlines (~১ ঘণ্টা ২৫ মিনিট)</li>` +
+            `<li><a href="/bn/flights/dhaka-bangkok">ঢাকা থেকে ব্যাংকক</a> — Biman Bangladesh Airlines, Thai Airways, US-Bangla Airlines, Thai Lion Air (~২ ঘণ্টা ৩০ মিনিট)</li>` +
+            `<li><a href="/bn/flights/dhaka-kuala-lumpur">ঢাকা থেকে কুয়ালালামপুর</a> — Malaysia Airlines, Biman Bangladesh Airlines, AirAsia, US-Bangla Airlines, Batik Air (~৩ ঘণ্টা ৫০ মিনিট)</li>` +
+            `<li><a href="/bn/flights/dhaka-singapore">ঢাকা থেকে সিঙ্গাপুর</a> — Singapore Airlines, Biman Bangladesh Airlines, US-Bangla Airlines (~৪ ঘণ্টা ১৫ মিনিট)</li>` +
+            `<li><a href="/bn/flights/dhaka-dubai">ঢাকা থেকে দুবাই</a> — Emirates, flydubai, Biman Bangladesh Airlines, US-Bangla Airlines (~৪ ঘণ্টা ৪৫ মিনিট)</li>` +
+            `<li><a href="/bn/flights/dhaka-maldives">ঢাকা থেকে মালদ্বীপ (মালে)</a> — US-Bangla Airlines, SriLankan Airlines (~৪ ঘণ্টা ১০ মিনিট)</li>` +
+          `</ul>` +
+          `<h3>সৌদি আরব (ওমরাহ ও হজ)</h3>` +
+          `<p>জেদ্দা ও মদিনার সরাসরি ফ্লাইট চলতে থাকে। <a href="/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">ওপেন-জেா টিকিট গাইড</a> এবং <a href="/bn/umrah">ডিআইওয়াই ওমরাহ প্ল্যানার দেখুন</a>।</p>` +
+          `<h3>কোনো ননস্টপ নেই এমন রুট</h3>` +
+          `<p>আমেরিকা, কানাডা ও ইউরোপের মতো কিছু জনপ্রিয় গন্তব্যে সাধারণত কানেকশন থাকা লাগে। দীর্ঘ-দূরত্ব পরিকল্পনার জন্য <a href="/bn/flights/dhaka-los-angeles">ঢাকা থেকে লস অ্যাঞ্জেলেস</a> দেখুন।</p>` +
+          `<h4>সচরাচর জিজ্ঞাসা প্রশ্ন</h4>` +
+          `<details><summary>ঢাকা থেকে কোন এয়ারলাইন্স ননস্টপ উড়াড? </summary><p>Biman Bangladesh Airlines ও US-Bangla DAC থেকে সবচেয়ে বেশি ননস্টপ রুট পরিচালনা করে। কিছু বিদেশি এয়ারলাইন্সও ঢাকা থেকে সরাসরি উড়ানে। বর্তমান টাইম-টেবিল-এর জন্য প্রতিটি এয়ারলাইনের ওয়েবসাইট দেখুন।</p></details>` +
+          `<details><summary>ইউআরএলের ভাড়া দেখানো হয়?</summary><p>ইউআরএল রুট গাইড প্রকাশ করে এবং এয়ারলাইন বা সার্চ পার্টনারের লিংক দেয়। ভাড়া প্রতিদিন পরিবর্তিত হয়।</p></details>` +
+          `</section>`
+      );
 
     } else {
       parts.push(

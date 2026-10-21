@@ -43,7 +43,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
   const [bookingMode, setBookingMode] = useState<"diy" | "bdtDesk">("diy");
 
   return (
-    <div className="mt-10 sm:mt-14 space-y-16 animate-fade-in">
+    <div className="space-y-16 animate-fade-in">
       {/* =====================================================================
           1. FULL-WIDTH EDGE-TO-EDGE HERO SECTION WITH PRIMARY SEO H1 HEADING
       ===================================================================== */}

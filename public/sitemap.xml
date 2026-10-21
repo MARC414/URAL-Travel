@@ -46,6 +46,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-kathmandu" />
   </url>
   <url>
+    <loc>https://ural-travel.pages.dev/flights/ktm-dhaka</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/ktm-dhaka" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/ktm-dhaka" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/ktm-dhaka" />
+  </url>
+  <url>
     <loc>https://ural-travel.pages.dev/flights/dhaka-bangkok</loc>
     <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
@@ -89,6 +98,24 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-maldives" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-maldives" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-maldives" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/flights/dhaka-los-angeles</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-los-angeles" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-los-angeles" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-los-angeles" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/flights/dhaka-madinah</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-madinah" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-madinah" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-madinah" />
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/hotels</loc>
@@ -1162,6 +1189,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-kathmandu" />
   </url>
   <url>
+    <loc>https://ural-travel.pages.dev/bn/flights/ktm-dhaka</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/ktm-dhaka" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/ktm-dhaka" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/ktm-dhaka" />
+  </url>
+  <url>
     <loc>https://ural-travel.pages.dev/bn/flights/dhaka-bangkok</loc>
     <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
@@ -1205,6 +1241,24 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-maldives" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-maldives" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-maldives" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/flights/dhaka-los-angeles</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-los-angeles" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-los-angeles" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-los-angeles" />
+  </url>
+  <url>
+    <loc>https://ural-travel.pages.dev/bn/flights/dhaka-madinah</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://ural-travel.pages.dev/flights/dhaka-madinah" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://ural-travel.pages.dev/bn/flights/dhaka-madinah" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ural-travel.pages.dev/flights/dhaka-madinah" />
   </url>
   <url>
     <loc>https://ural-travel.pages.dev/bn/hotels</loc>
