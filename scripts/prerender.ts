@@ -1015,21 +1015,30 @@ function renderVisaApplicationGuidance(): string {
   </section>`;
 }
 
-function renderFlightsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
-  const routeDirectory = FLIGHTS_DATA.map(
-    (route) =>
-      `<li><a href="/flights/${escapeHtml(route.id)}">Flights from ${escapeHtml(route.from)} to ${escapeHtml(route.to)}</a> — ${escapeHtml(route.priceRangeBdt)}; ${escapeHtml(route.duration)}.</li>`
-  ).join("");
-  const routeDetails = FLIGHTS_DATA.map(
-    (route) => `
-      <section>
-        <h3>${escapeHtml(route.from)} to ${escapeHtml(route.to)} (${escapeHtml(route.country)})</h3>
-        <p>This route guide brings together an indicative fare band of ${escapeHtml(route.priceRangeBdt)}, a journey time of ${escapeHtml(route.duration)}, and the airlines listed for the route: ${escapeHtml(route.airlines.join(", "))}. Its booking lead-time note is ${escapeHtml(route.bestTimeToBook)}; check the live timetable, fare rules and current entry conditions before choosing a ticket.</p>
-      </section>`
-  ).join("");
+// One entry per city pair: ktm-dhaka is the return leg of dhaka-kathmandu.
+// The hub body and the hub CollectionPage schema both use this list.
+function uniqueFlightRoutes(): typeof FLIGHTS_DATA {
+  const seen = new Set<string>();
+  return FLIGHTS_DATA.filter((route) => {
+    const key = [route.from, route.to]
+      .map((s) => s.split(" (")[0])
+      .sort()
+      .join("|");
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
 
+const isNonstopRoute = (route: (typeof FLIGHTS_DATA)[number]) => /\(direct/i.test(route.duration);
+
+function renderFlightsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
+  const routeDirectory = uniqueFlightRoutes().map(
+    (route) =>
+      `<li><a href="/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} to ${escapeHtml(route.to.split(" (")[0])}</a> — ${isNonstopRoute(route) ? "Nonstop" : "Connecting"}; ${escapeHtml(route.duration)}; ${escapeHtml(route.priceRangeBdt.split(" (")[0])}.</li>`
+  ).join("");
   return `<article>
-    <h1>${escapeHtml(title)}</h1>
+    <h1>Direct flights from Dhaka</h1>
     <p>${escapeHtml(description)}</p>
     <p>Use these Dhaka flight guides to compare the destinations covered, indicative BDT fare ranges, journey duration, airlines and booking guidance in one place. The route notes are planning references rather than live fare quotes: prices and schedules can change with travel dates, seat inventory, baggage choices and fare conditions. Before booking, compare the total itinerary—not only the headline fare—including baggage, stopovers, transit requirements, change or cancellation terms, and arrival time. Travelers starting in Chattogram, Sylhet or another city should plan any separate domestic leg and allow a realistic connection buffer. Confirm the operating carrier and current departure details with the airline or booking provider.</p>
     <section id="direct-flights-from-dhaka" aria-labelledby="direct-flights-h2">
@@ -1063,7 +1072,6 @@ function renderFlightsHubBody(title: string, description: string, faqSchema: Ret
       </details>
     </section>
     <section><h2>Dhaka international flight routes and fare guide</h2><ul>${routeDirectory}</ul></section>
-    <section><h2>Route-by-route flight planning from Dhaka</h2>${routeDetails}</section>
     <section><h2>How to compare international flights from Bangladesh</h2>
       <p>Start with flexible dates where possible, then compare direct and connecting itineraries using the same passenger count and baggage allowance. A low displayed fare may exclude checked baggage, seat selection or payment fees, while a connection can add transit formalities and a longer journey. Check whether each segment is on one ticket, how missed connections are handled, and whether the fare permits changes. Keep passport validity and destination entry rules in view before committing to a non-refundable fare.</p>
       <p>Flight duration and booking windows in the linked guides are indicative and should be checked against current schedules. For trips during Eid, school holidays or the winter travel season, compare early and revisit fares before purchase rather than assuming a fixed discount window. If your itinerary includes a separate domestic flight to Dhaka, protect that connection with sufficient time and consider the consequences of delays.</p>
@@ -1089,7 +1097,7 @@ function renderHotelsHubBody(title: string, description: string, faqSchema: Retu
   ).join("");
 
   return `<article>
-    <h1>${escapeHtml(title)}</h1>
+    <h1>Direct flights from Dhaka</h1>
     <p>${escapeHtml(description)}</p>
     <p>Choosing the right hotel area can matter as much as choosing the property. These guides compare neighborhoods in destinations reached by Bangladeshi travelers, with attention to transit access, family needs, local food options, quiet or busy surroundings, and the type of trip each area supports. Use the linked city guide to compare the neighborhoods and example stays before checking dates and availability. Displayed BDT amounts are planning references, not a guaranteed quote; the final total can differ because of room dates, occupancy, taxes, service charges, meal plans, currency conversion and the provider's cancellation terms.</p>
     <section><h2>Hotel neighborhood guides by destination</h2><ul>${directory}</ul></section>
@@ -1116,7 +1124,7 @@ function renderVisaHubBody(title: string, description: string, faqSchema: Return
   ).join("");
 
   return `<article>
-    <h1>${escapeHtml(title)}</h1>
+    <h1>Direct flights from Dhaka</h1>
     <p>${escapeHtml(description)}</p>
     <p>If you only need to know which destinations a Bangladeshi passport can enter with nothing arranged in advance, start with <a href="/visa-free-countries">visa-free countries for Bangladeshi passport holders</a> — it separates the destinations you can actually use from the ones that only look easy.</p>
     <p>This visa hub brings together entry-route, fee, processing-time and document guidance for popular destinations for Bangladeshi passport holders. Start with the country-specific guide below to understand whether the route described is visa-free, visa on arrival, electronic or an advance application. Requirements depend on the travel purpose, passport and current policy; the amounts and timeframes shown are guidance from the underlying destination pages, not an approval guarantee. Immigration rules can change without notice, so verify the latest requirements and application channel with the destination's official immigration department, embassy or authorized portal before booking or applying.</p>
@@ -1144,7 +1152,7 @@ function renderDestinationsHubBody(title: string, description: string, faqSchema
   ).join("");
 
   return `<article>
-    <h1>${escapeHtml(title)}</h1>
+    <h1>Direct flights from Dhaka</h1>
     <p>${escapeHtml(description)}</p>
     <p>Use these destination guides to turn a broad idea into a practical trip plan from Bangladesh. Each linked page combines a day-by-day outline with seasonal context, local transport notes and budget context where available, so you can compare the pace and style of different destinations before deciding where to go. The outlines are starting points rather than fixed tours: adjust them for flight arrival times, family mobility, prayer and meal needs, local opening days and weather. Confirm entry requirements separately, then recheck transport schedules, attraction access and prices close to travel.</p>
     <section><h2>Destination itineraries for Bangladeshi travelers</h2><ul>${directory}</ul></section>
@@ -1171,7 +1179,7 @@ function renderCostsHubBody(title: string, description: string, faqSchema: Retur
   ).join("");
 
   return `<article>
-    <h1>${escapeHtml(title)}</h1>
+    <h1>Direct flights from Dhaka</h1>
     <p>${escapeHtml(description)}</p>
     <p>Estimate an international trip from Dhaka in Bangladeshi Taka by looking at the whole journey rather than airfare alone. These destination guides break budgets into categories such as flights, accommodation, meals, transport and activities, with lower, mid-range and higher estimates where the underlying data provides them. Use the figures to set a starting budget and compare destinations; they are not live quotes or a promise that every listed cost is included in the same way. Travel dates, room occupancy, exchange rates, baggage, local taxes and activity choices can all change the final amount.</p>
     <section><h2>Destination cost guides and BDT budget ranges</h2><ul>${directory}</ul></section>
@@ -1453,7 +1461,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         url: `${BASE_URL}/flights`,
         name: flightsHubTitle,
         description: flightsHubDesc,
-        items: FLIGHTS_DATA.map((r) => ({
+        items: uniqueFlightRoutes().map((r) => ({
           name: `${r.from} to ${r.to} Flight Guide`,
           url: `${BASE_URL}/flights/${r.id}`,
           description: r.quickAnswer,
