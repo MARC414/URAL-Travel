@@ -10,6 +10,7 @@ import { ArrowRight, Ticket, Car, Bell, ShieldCheck, Building, ExternalLink } fr
 import { PartnerLinkButton, AFFILIATE_LINKS } from "../components/AffiliatePartners";
 
 import { TravelIntelligence } from "../components/AeoInspector";
+import { FlightsIndex } from "../components/FlightsIndex";
 
 
 
@@ -23,7 +24,10 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
   const activeRoute = localizedFlights.find((route) => route.id === parameterId) || localizedFlights[0];
 
-
+  // /flights (no route id) is the index; /flights/:id keeps the route template.
+  if (!parameterId) {
+    return <FlightsIndex routes={localizedFlights} isBn={isBn} navigateTo={navigateTo} />;
+  }
 
   return (
 
