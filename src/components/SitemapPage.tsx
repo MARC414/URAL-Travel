@@ -17,6 +17,7 @@ import {
   BookOpen,
   ChevronDown,
 } from "lucide-react";
+import { SITE_ORIGIN } from "../utils/localeRoutes";
 import { Language } from "../translations";
 import { BLOG_DATA } from "../constants";
 import type * as BengaliContentModule from "../data/bengaliContent";
@@ -452,7 +453,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
   useEffect(() => {
     if (typeof document === "undefined" || variant !== "pre-departure") return;
     const dynamicSchema = getPreDepartureFaqSchema({
-      url: "https://ural-travel.pages.dev/pre-departure",
+      url: `${SITE_ORIGIN}/pre-departure`,
       uncheckedChecklistItems: uncheckedChecklistItems.map((i) => ({
         title: i.titleEn,
         detail: i.detailEn,
@@ -471,8 +472,8 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
             (n: Record<string, unknown>) => n && n["@type"] === "FAQPage"
           );
           const { "@context": _ctx, ...faqNode } = dynamicSchema as unknown as Record<string, unknown>;
-          faqNode["@id"] = "https://ural-travel.pages.dev/pre-departure#faq";
-          faqNode["mainEntityOfPage"] = { "@id": "https://ural-travel.pages.dev/pre-departure#webpage" };
+          faqNode["@id"] = `${SITE_ORIGIN}/pre-departure#faq`;
+          faqNode["mainEntityOfPage"] = { "@id": `${SITE_ORIGIN}/pre-departure#webpage` };
           if (idx >= 0) {
             parsed["@graph"][idx] = faqNode;
           } else {

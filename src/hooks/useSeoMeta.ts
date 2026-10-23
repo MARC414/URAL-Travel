@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { trackPageView } from "../utils/analytics";
-import { hasBengaliCounterpart } from "../utils/localeRoutes";
+import { hasBengaliCounterpart, SITE_ORIGIN } from "../utils/localeRoutes";
 import { SLUG_TO_TOOL_TAB, toolPathForTab } from "../utils/toolRoutes";
 import {
   generateFaqSchema,
@@ -95,7 +95,7 @@ export const HAJJ_UMRAH_FAQS: FAQItem[] = [
  * Hajj and Umrah preparation pages and guides from Bangladesh.
  */
 export function getHajjUmrahFaqSchema(
-  url = "https://ural-travel.pages.dev/umrah",
+  url = `${SITE_ORIGIN}/umrah`,
   name = "Umrah & Hajj Preparation Guide from Bangladesh (2026) — Official FAQs"
 ): FaqPageSchema {
   return generateFAQSchema(HAJJ_UMRAH_FAQS, {
@@ -123,7 +123,7 @@ export interface PreDepartureFaqSchemaOptions {
 export function getPreDepartureFaqSchema(
   options?: PreDepartureFaqSchemaOptions
 ): FaqPageSchema {
-  const url = options?.url || "https://ural-travel.pages.dev/pre-departure";
+  const url = options?.url || `${SITE_ORIGIN}/pre-departure`;
   const name =
     options?.name ||
     "Dhaka Airport (DAC) Pre-Departure Readiness, Baggage & Embassy Emergency Hub FAQs";
@@ -281,15 +281,15 @@ export function useSeoMeta({
   // files & sitemap.xml. Bengali routes canonicalise to themselves (/bn/...),
   // never to their English twin — a self-referential canonical is what makes the
   // /bn cluster indexable instead of collapsing it into the English page.
-  let canonicalUrl = "https://ural-travel.pages.dev/";
+  let canonicalUrl = `${SITE_ORIGIN}/`;
   let cleanPathTarget: string | null = null;
-  let englishAlternateUrl = "https://ural-travel.pages.dev/";
+  let englishAlternateUrl = `${SITE_ORIGIN}/`;
   let bengaliAlternateUrl: string | null = null;
   let isBengaliRoute = false;
   if (typeof window !== "undefined") {
     const pathname = window.location.pathname;
     const searchParams = new URLSearchParams(window.location.search);
-    const baseUrl = "https://ural-travel.pages.dev";
+    const baseUrl = SITE_ORIGIN;
     const allSegments = pathname.split("/").filter(Boolean);
     const localePrefix = allSegments[0] === "bn" ? "/bn" : "";
     isBengaliRoute = localePrefix === "/bn";
@@ -503,7 +503,7 @@ export function useSeoMeta({
     }
     twitterDesc.setAttribute("content", description);
 
-    const resolvedImage = imageUrl || "https://ural-travel.pages.dev/og-image.jpg";
+    const resolvedImage = imageUrl || `${SITE_ORIGIN}/og-image.jpg`;
     let ogImg = document.querySelector('meta[property="og:image"]');
     if (!ogImg) {
       ogImg = document.createElement("meta");

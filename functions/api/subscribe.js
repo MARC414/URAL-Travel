@@ -72,7 +72,7 @@ export async function onRequestPost(context) {
       String(body.subscriptionId || body["Subscription ID"] || "") ||
       `URAL-SUB-${Math.floor(100000 + Math.random() * 900000)}`;
     const language = String(body.language || body["Preferred Language"] || "English (EN)");
-    const pageUrl = String(body.pageUrl || body["Page URL"] || "https://ural-travel.pages.dev/");
+    const pageUrl = String(body.pageUrl || body["Page URL"] || "https://uraltravel.co.uk/");
     const dhakaTimestamp =
       body.timestamp ||
       new Date().toLocaleString("en-GB", {
@@ -98,9 +98,9 @@ export async function onRequestPost(context) {
     };
 
     const originHeader =
-      context.request.headers.get("Origin") || "https://ural-travel.pages.dev";
+      context.request.headers.get("Origin") || "https://uraltravel.co.uk";
     const refererHeader =
-      context.request.headers.get("Referer") || "https://ural-travel.pages.dev/";
+      context.request.headers.get("Referer") || "https://uraltravel.co.uk/";
 
     let formSubmitDelivered = false;
 

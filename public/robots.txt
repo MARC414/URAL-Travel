@@ -131,5 +131,5 @@ Disallow: /?admin
 Disallow: /?inspector
 Disallow: /?onboarding
 
-Sitemap: https://ural-travel.pages.dev/sitemap.xml
-Sitemap: https://ural-travel.pages.dev/sitemap.txt
+Sitemap: https://uraltravel.co.uk/sitemap.xml
+Sitemap: https://uraltravel.co.uk/sitemap.txt

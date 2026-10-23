@@ -28,6 +28,7 @@ import path from "node:path";
 import { validateSitemapPair } from "./sitemapValidation";
 import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
+import { SITE_ORIGIN } from "../src/utils/localeRoutes";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
 import { AFFILIATE_LINKS, resolvePartnerUrl } from "../src/components/AffiliatePartners";
 import {
@@ -1405,7 +1406,7 @@ const SAMPLE_HTML =
 function fakeContext(
   options: { url?: string; contentType?: string; status?: number; country?: string } = {}
 ) {
-  const url = options.url ?? "https://ural-travel.pages.dev/";
+  const url = options.url ?? `${SITE_ORIGIN}/`;
   const status = options.status ?? 200;
   return {
     request: { url, cf: options.country ? { country: options.country } : undefined },
@@ -1460,7 +1461,7 @@ await middlewareCase("304 responses stay bodyless", async () => {
 
 await middlewareCase("legacy route redirects still work", async () => {
   const response = await (onRequest as any)(
-    fakeContext({ url: "https://ural-travel.pages.dev/flights?route=dhaka-bangkok" })
+    fakeContext({ url: `${SITE_ORIGIN}/flights?route=dhaka-bangkok` })
   );
   if (response.status !== 301) throw new Error(`expected 301, got ${response.status}`);
   const location = response.headers.get("location") ?? "";
@@ -1578,9 +1579,58 @@ for (const [file, type] of [["sitemap.xml", "application/xml"], ["sitemap.txt", 
   const block = deployedHeaders.split(/\r?\n\r?\n/).find((part) => part.split(/\r?\n/).includes(`/${file}`));
   check(!!block?.includes(`  Content-Type: ${type}; charset=utf-8`), `dist/_headers serves /${file} as ${type}`);
 }
+// --- Canonical-host guard -------------------------------------------------
+// The site moved from the Cloudflare Pages default hostname to the custom
+// domain. A stale absolute URL on the retired host is the one migration bug
+// that is invisible at a glance and catastrophic in Search Console: Google
+// simply keeps the old host canonical and every link built afterwards points
+// at a redirect. A URL on the retired host is therefore a fail, in any file
+// shape. A bare `@host` in a mail address is not: the privacy mailbox still
+// names the retired host on purpose until a real one exists on the new domain
+// (Cloudflare Email Routing), and that deferral is tracked, not forgotten.
+{
+  const RETIRED_HOST = "ural-travel.pages.dev";
+  const offenders: string[] = [];
+  // Absolute and protocol-relative references only. A bare `@host` (the
+  // deferred privacy mailbox) is deliberately not matched — it is not a URL.
+  const urlOnRetiredHost = new RegExp(`(?:https?:)?\\/\\/${RETIRED_HOST}`, "i");
+  const walk = (dir: string) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        if (entry.name !== "assets" && entry.name !== "fonts" && entry.name !== "img") walk(full);
+        continue;
+      }
+      if (!/\.(html?|xml|txt|js|json)$/i.test(entry.name)) continue;
+      const text = fs.readFileSync(full, "utf8");
+      if (!text.includes(RETIRED_HOST)) continue;
+      for (const line of text.split(/\r?\n/)) {
+        // An email address on the retired host is a known deferred item, not a
+        // canonical leak; anything that reads as a URL is.
+        if (urlOnRetiredHost.test(line)) {
+          offenders.push(`${path.relative(ROOT_DIR, full)}: ${line.trim().slice(0, 140)}`);
+        }
+      }
+    }
+  };
+  walk(DIST_DIR);
+  check(
+    offenders.length === 0,
+    offenders.length === 0
+      ? `no canonical leak: no URL on the retired ${RETIRED_HOST} host in dist/`
+      : `retired-host URLs still shipped (${offenders.length}):\n    ${offenders.slice(0, 8).join("\n    ")}`
+  );
+  // index.html's static head carries canonical/hreflang/og/twitter/JSON-LD
+  // literals that the prerender only partly rewrites; they must be on the
+  // canonical host too, or the shell and the per-route pages disagree.
+  const distShell = read(path.join(DIST_DIR, "index.html")) ?? "";
+  const shellHits = (distShell.match(new RegExp(`https:\\/\\/uraltravel\\.co\\.uk`, "g")) || []).length;
+  check(shellHits >= 15, `index.html head carries ${shellHits} canonical-host URLs (expected >= 15)`);
+}
+
 const deployedRobots = read(path.join(DIST_DIR, "robots.txt")) ?? "";
 for (const file of ["sitemap.xml", "sitemap.txt"]) {
-  check(deployedRobots.includes(`Sitemap: https://ural-travel.pages.dev/${file}`), `robots.txt advertises ${file}`);
+  check(deployedRobots.includes(`Sitemap: ${SITE_ORIGIN}/${file}`), `robots.txt advertises ${file} on the canonical host`);
 }
 
 
@@ -2630,7 +2680,7 @@ for (const locale of ["en", "bn"] as const) {
   check(
     howTos.length === 3 &&
       ["howto-saudi-visa-bio", "howto-nusuk-visitor-registration", "howto-rawdah-booking"].every(
-        (id, index) => howTos[index]?.["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${nusukReviewSlug}#${id}`
+        (id, index) => howTos[index]?.["@id"] === `${SITE_ORIGIN}${locale === "bn" ? "/bn" : ""}/blog/${nusukReviewSlug}#${id}`
       ) &&
       [4, 4, 5].every((steps, index) => Array.isArray(howTos[index]?.step) && (howTos[index].step as unknown[]).length === steps) &&
       Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 8,
@@ -2672,7 +2722,7 @@ for (const locale of ["en", "bn"] as const) {
   const faq = graph.find((node) => hasSchemaType(node, "FAQPage"));
   check(
     procedures.length === 1 &&
-      procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${diyReviewSlug}#howto-diy-umrah-sequence` &&
+      procedures[0]["@id"] === `${SITE_ORIGIN}${locale === "bn" ? "/bn" : ""}/blog/${diyReviewSlug}#howto-diy-umrah-sequence` &&
       Array.isArray(procedures[0].step) && procedures[0].step.length === 6 &&
       Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 5,
     `${locale} DIY guide renders one six-step application-to-permit procedure and five visible FAQs`
@@ -2764,25 +2814,25 @@ check(
 );
 
 const sampleCollectionItems = [
-  { name: "Sample guide A", url: "https://ural-travel.pages.dev/blog/sample-a" },
-  { name: "Sample guide B", url: "https://ural-travel.pages.dev/blog/sample-b" },
+  { name: "Sample guide A", url: `${SITE_ORIGIN}/blog/sample-a` },
+  { name: "Sample guide B", url: `${SITE_ORIGIN}/blog/sample-b` },
 ];
 const generatedEnBlogCollection = collectionPageSchema({
-  url: "https://ural-travel.pages.dev/blog",
+  url: `${SITE_ORIGIN}/blog`,
   name: "Travel Blog",
   description: "Travel guides",
   items: sampleCollectionItems,
   includeNumberOfItems: true,
 });
 const generatedBnBlogCollection = collectionPageSchema({
-  url: "https://ural-travel.pages.dev/bn/blog",
+  url: `${SITE_ORIGIN}/bn/blog`,
   name: "বাংলা ব্লগ",
   description: "ভ্রমণ নির্দেশিকা",
   items: sampleCollectionItems,
   includeNumberOfItems: true,
 });
 const generatedFlightCollection = collectionPageSchema({
-  url: "https://ural-travel.pages.dev/flights",
+  url: `${SITE_ORIGIN}/flights`,
   name: "Flight Guides",
   description: "Flight route guides",
   items: sampleCollectionItems,
@@ -2892,8 +2942,8 @@ type BreadcrumbSnapshotItem = { name: string; href: string | null };
 function normalizeBreadcrumbHref(href: string | null): string | null {
   if (href === null) return null;
   try {
-    const parsed = new URL(href, "https://ural-travel.pages.dev");
-    if (parsed.origin !== "https://ural-travel.pages.dev") return parsed.href;
+    const parsed = new URL(href, SITE_ORIGIN);
+    if (parsed.origin !== SITE_ORIGIN) return parsed.href;
     const withoutTrailingSlash = parsed.pathname.replace(/\/+$/, "") || "/";
     const pathname = withoutTrailingSlash === "/bn" ? "/bn/" : withoutTrailingSlash;
     return `${pathname}${parsed.search}${parsed.hash}`;
@@ -3085,8 +3135,8 @@ const breadcrumbControlVisible: BreadcrumbSnapshotItem[] = [
   { name: "Sample guide", href: null },
 ];
 const breadcrumbControlSchema: BreadcrumbSnapshotItem[] = [
-  { name: "Home", href: "https://ural-travel.pages.dev/" },
-  { name: "Travel Guides", href: "https://ural-travel.pages.dev/blog" },
+  { name: "Home", href: `${SITE_ORIGIN}/` },
+  { name: "Travel Guides", href: `${SITE_ORIGIN}/blog` },
   { name: "Sample guide", href: null },
 ];
 const breadcrumbMismatchNegativeControlRejectsDrift =
@@ -3353,7 +3403,7 @@ function renderAppAtPath(routePath: string): string {
     location: {
       pathname: routePath,
       search: "",
-      href: `https://ural-travel.pages.dev${routePath}`,
+      href: `${SITE_ORIGIN}${routePath}`,
     },
     localStorage: storage,
     addEventListener: () => {},
@@ -4381,7 +4431,7 @@ for (const [index, locale] of (["en", "bn"] as const).entries()) {
     return Boolean(note && visible.includes(normalizeStructuredText(note.title)) && visible.includes(normalizeStructuredText(note.text)));
   };
   check(
-    procedures.length === 1 && procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${STOPOVER_SLUG}#howto-saudia-stopover-request` &&
+    procedures.length === 1 && procedures[0]["@id"] === `${SITE_ORIGIN}${locale === "bn" ? "/bn" : ""}/blog/${STOPOVER_SLUG}#howto-saudia-stopover-request` &&
       Array.isArray(procedures[0].step) && procedures[0].step.length === 6 &&
       Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 6 &&
       notes.every((note) => !JSON.stringify(procedures).includes(note.text)),
@@ -4714,7 +4764,7 @@ for (const locale of ["en", "bn"] as const) {
   check(
     post?.updatedAt === "2026-10-19" && post.references?.length === 6 &&
       post.references.every((reference) => html.includes(`href="${reference.url}"`)) &&
-      procedures.length === 1 && procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${HOTEL_SLUG}#howto-hotel-rail-plan` &&
+      procedures.length === 1 && procedures[0]["@id"] === `${SITE_ORIGIN}${locale === "bn" ? "/bn" : ""}/blog/${HOTEL_SLUG}#howto-hotel-rail-plan` &&
       Array.isArray(procedures[0].step) && procedures[0].step.length === 6 &&
       Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 6 &&
       notes.every((note) => !JSON.stringify(procedures).includes(note.text)),
@@ -4755,7 +4805,7 @@ for (const locale of ["en", "bn"] as const) {
   check(
     post?.updatedAt === "2026-10-19" && post.references?.length === 5 &&
       post.references.every((reference) => html.includes(`href="${reference.url}"`)) &&
-      procedures.length === 1 && procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${FLIGHT_STRATEGY_SLUG}#howto-compare-umrah-flights` &&
+      procedures.length === 1 && procedures[0]["@id"] === `${SITE_ORIGIN}${locale === "bn" ? "/bn" : ""}/blog/${FLIGHT_STRATEGY_SLUG}#howto-compare-umrah-flights` &&
       Array.isArray(procedures[0].step) && procedures[0].step.length === 6 &&
       Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 6 &&
       notes.every((note) => !JSON.stringify(procedures).includes(note.text)),
@@ -4803,7 +4853,7 @@ for (const locale of ["en", "bn"] as const) {
   check(
     post?.updatedAt === "2026-10-19" && post.references?.length === 10 &&
       post.references.every((reference) => html.includes(`href="${reference.url}"`)) &&
-      procedures.length === 1 && procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${WOMEN_UMRAH_SLUG}#howto-women-rawdah-preparation` &&
+      procedures.length === 1 && procedures[0]["@id"] === `${SITE_ORIGIN}${locale === "bn" ? "/bn" : ""}/blog/${WOMEN_UMRAH_SLUG}#howto-women-rawdah-preparation` &&
       Array.isArray(procedures[0].step) && procedures[0].step.length === 4 &&
       Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 7 &&
       notes.every((note) => !JSON.stringify(procedures).includes(note.text)),
@@ -4851,7 +4901,7 @@ for (const locale of ["en", "bn"] as const) {
   check(
     post?.updatedAt === "2026-10-19" && post.references?.length === 9 &&
       post.references.every((reference) => html.includes(reference.url.replace(/&/g, "&amp;")) || html.includes(reference.url)) &&
-      procedures.length === 1 && procedures[0]["@id"] === `https://ural-travel.pages.dev${locale === "bn" ? "/bn" : ""}/blog/${ELDERLY_UMRAH_SLUG}#howto-elderly-airline-assistance` &&
+      procedures.length === 1 && procedures[0]["@id"] === `${SITE_ORIGIN}${locale === "bn" ? "/bn" : ""}/blog/${ELDERLY_UMRAH_SLUG}#howto-elderly-airline-assistance` &&
       Array.isArray(procedures[0].step) && procedures[0].step.length === 4 &&
       Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 7 &&
       notes.every((note) => !JSON.stringify(procedures).includes(note.text)),

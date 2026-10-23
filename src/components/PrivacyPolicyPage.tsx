@@ -402,11 +402,11 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
           <p>
             {isBn ? (
               <>
-                <strong>URAL Travel Intelligence</strong> (<a href="https://ural-travel.pages.dev" className="text-[#F6B73C] underline">https://ural-travel.pages.dev</a>) হলো একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স ও গবেষণা প্ল্যাটফর্ম, যা পরিচালনা করে URAL Travel Bangladesh (হেডকোয়ার্টার: ঢাকা, বাংলাদেশ)। আমরা কোনো প্রথাগত টিকেট-বিক্রয়কারী এজেন্সি নই—আমাদের মূল লক্ষ্য হলো বাংলাদেশি পাসপোর্টধারী এবং বিশ্বব্যাপী ভ্রমণকারীদের জন্য বিমান ভাড়ার তুলনামূলক তথ্য, ভিসা চেকলিস্ট, BDT ভ্রমণ বাজেট এবং DIY উমরাহ গাইড নির্ভুলভাবে উপস্থাপন করা।
+                <strong>URAL Travel Intelligence</strong> (<a href="https://uraltravel.co.uk" className="text-[#F6B73C] underline">https://uraltravel.co.uk</a>) হলো একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স ও গবেষণা প্ল্যাটফর্ম, যা পরিচালনা করে URAL Travel Bangladesh (হেডকোয়ার্টার: ঢাকা, বাংলাদেশ)। আমরা কোনো প্রথাগত টিকেট-বিক্রয়কারী এজেন্সি নই—আমাদের মূল লক্ষ্য হলো বাংলাদেশি পাসপোর্টধারী এবং বিশ্বব্যাপী ভ্রমণকারীদের জন্য বিমান ভাড়ার তুলনামূলক তথ্য, ভিসা চেকলিস্ট, BDT ভ্রমণ বাজেট এবং DIY উমরাহ গাইড নির্ভুলভাবে উপস্থাপন করা।
               </>
             ) : (
               <>
-                <strong>URAL Travel Intelligence</strong> (<a href="https://ural-travel.pages.dev" className="text-[#F6B73C] underline">https://ural-travel.pages.dev</a>) is an independent travel intelligence publisher operated by URAL Travel Bangladesh, headquartered in Dhaka, Bangladesh. We are not a travel agency or airline booking consolidator; our sole mandate is delivering benchmark flight analytics, verified visa checklists, BDT cost frameworks, and DIY Umrah itineraries for Bangladeshi travelers worldwide.
+                <strong>URAL Travel Intelligence</strong> (<a href="https://uraltravel.co.uk" className="text-[#F6B73C] underline">https://uraltravel.co.uk</a>) is an independent travel intelligence publisher operated by URAL Travel Bangladesh, headquartered in Dhaka, Bangladesh. We are not a travel agency or airline booking consolidator; our sole mandate is delivering benchmark flight analytics, verified visa checklists, BDT cost frameworks, and DIY Umrah itineraries for Bangladeshi travelers worldwide.
               </>
             )}
           </p>
