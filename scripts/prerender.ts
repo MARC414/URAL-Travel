@@ -2446,7 +2446,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         <p>This Privacy and Cookie Policy outlines how URAL Travel Intelligence collects, processes, and protects visitor data, our Google Consent Mode v2 compliance architecture, and our commercial affiliate partner relationships.</p>
         <section>
           <h2>1. Data Controller &amp; Editorial Identity</h2>
-          <p>URAL Travel Intelligence (https://ural-travel.pages.dev) is an independent travel intelligence publisher. We do not sell flight tickets directly or process passenger credit card transactions on our infrastructure.</p>
+          <p>URAL Travel Intelligence (https://uraltravel.co.uk) is an independent travel intelligence publisher. We do not sell flight tickets directly or process passenger credit card transactions on our infrastructure.</p>
         </section>
         <section>
           <h2>2. Google Tag Manager &amp; Consent Mode v2</h2>

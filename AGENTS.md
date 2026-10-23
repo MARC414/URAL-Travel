@@ -1,6 +1,6 @@
 # URAL Travel Intelligence — Agent & Contributor Guide (`AGENTS.md`)
 
-This document serves as the canonical technical handoff and architectural reference for AI coding assistants (Claude Code, Cursor, GitHub Copilot, Codex, Google AI Studio) and developers working on **URAL Travel Intelligence** (`https://ural-travel.pages.dev`).
+This document serves as the canonical technical handoff and architectural reference for AI coding assistants (Claude Code, Cursor, GitHub Copilot, Codex, Google AI Studio) and developers working on **URAL Travel Intelligence** (`https://uraltravel.co.uk`).
 
 ---
 

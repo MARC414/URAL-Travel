@@ -1,7 +1,18 @@
 import { generateBlogCoverAltText } from "./blogAltText";
 import { getAuthorProfile } from "../data/authorProfiles";
+import { SITE_ORIGIN } from "./localeRoutes";
 
-export const BASE_URL = "https://ural-travel.pages.dev";
+/**
+ * The site origin used for every absolute URL the build emits (canonicals,
+ * sitemap `<loc>`, hreflang clusters, JSON-LD `@id`s, og:image).
+ *
+ * This is a deliberate re-export, not a second definition: SITE_ORIGIN in
+ * src/utils/localeRoutes.ts is the one place the production host is written, and
+ * a second literal here is exactly how the client and the prerender drifted into
+ * two different canonical answers. scripts/verify-build.ts fails the build if the
+ * retired host reappears in dist/, so drift is caught rather than shipped.
+ */
+export const BASE_URL = SITE_ORIGIN;
 export const SITE_ORG_ID = `${BASE_URL}/#organization`;
 export const SITE_LOGO_ID = `${BASE_URL}/#logo`;
 export const SITE_WEBSITE_ID = `${BASE_URL}/#website`;

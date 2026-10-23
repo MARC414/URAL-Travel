@@ -11,8 +11,23 @@
 /** Leading locale segment used by the Bengali surface ("/bn/umrah" mirrors "/umrah"). */
 export const BN_PREFIX = "/bn";
 
-/** Canonical origin for absolute URLs (canonicals, JSON-LD, share links). */
-export const SITE_ORIGIN = "https://ural-travel.pages.dev";
+/**
+ * Canonical origin for absolute URLs (canonicals, hreflang, og:url, JSON-LD
+ * `@id`s, share links) — THE one place the production host is written.
+ *
+ * Everything else derives from it: `BASE_URL` in src/utils/schema.ts re-exports
+ * it, the prerender builds every canonical/sitemap URL from it, and
+ * scripts/verify-build.ts fails the build if the retired host appears anywhere
+ * in dist/. If this value and the literals in index.html disagree, Google gets
+ * two different answers to "which URL is canonical" — so the guard, not memory,
+ * is what keeps them in step.
+ *
+ * History: until 2026-10 this pointed at the Cloudflare Pages default hostname
+ * (ural-travel.pages.dev). `https://uraltravel.co.uk` (apex, no `www`) is now
+ * the only canonical host; `www.` 301s to it and the retired pages.dev host must
+ * 301 to it too. Never introduce a second host here.
+ */
+export const SITE_ORIGIN = "https://uraltravel.co.uk";
 
 /**
  * Route groups whose Bengali counterpart does not exist yet.
@@ -59,8 +74,8 @@ export function toBengaliPath(path: string): string {
 
 /**
  * Absolute URL for a page path in a given locale:
- *   siteUrl("/flights", "bn") -> "https://ural-travel.pages.dev/bn/flights"
- *   siteUrl("/", "bn")        -> "https://ural-travel.pages.dev/bn/"  (matches the
+ *   siteUrl("/flights", "bn") -> "https://uraltravel.co.uk/bn/flights"
+ *   siteUrl("/", "bn")        -> "https://uraltravel.co.uk/bn/"  (matches the
  *                                home canonical the prerenderer writes)
  *
  * Only ever pass PAGE paths. Assets (/img, /assets, /og-image.jpg) are shared by
@@ -87,8 +102,8 @@ function isLocaleAgnosticUrl(pathname: string, hash = ""): boolean {
 /**
  * Rewrites an absolute site URL into the target locale, used to keep
  * client-rendered JSON-LD and breadcrumbs consistent with the prerendered HTML:
- *   https://ural-travel.pages.dev/flights  ->  .../bn/flights   (locale "bn")
- *   https://ural-travel.pages.dev/         ->  .../bn/          (locale "bn")
+ *   https://uraltravel.co.uk/flights  ->  .../bn/flights   (locale "bn")
+ *   https://uraltravel.co.uk/         ->  .../bn/          (locale "bn")
  *
  * Leaves assets and external URLs alone, and — importantly — only prefixes
  * groups that actually have a Bengali page (hasBengaliCounterpart), so a

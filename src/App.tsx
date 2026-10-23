@@ -101,6 +101,7 @@ import {
   hasBengaliCounterpart,
   localizePublicSiteUrl,
   siteUrl,
+  SITE_ORIGIN,
 } from "./utils/localeRoutes";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { TiqetsEmbedWidget } from "./components/TiqetsEmbedWidget";
@@ -1216,7 +1217,9 @@ export default function App() {
       timeStyle: "medium",
     });
     const activePageUrl =
-      typeof window !== "undefined" ? window.location.href : `https://ural-travel.pages.dev${currentPath}`;
+      typeof window !== "undefined"
+        ? window.location.href
+        : `${SITE_ORIGIN}${currentPath}`;
     const preferredLanguage = lang === "bn" ? "Bengali (BN)" : "English (EN)";
 
     const notificationPayload = {
@@ -1382,7 +1385,7 @@ export default function App() {
 
   // Parse path to resolve active section and optional query parameters
   const getRouteDetails = () => {
-    const url = new URL(currentPath, "https://ural-travel.pages.dev");
+    const url = new URL(currentPath, SITE_ORIGIN);
     const searchParams = url.searchParams;
     const segments = url.pathname.split("/").filter(Boolean);
     // Bengali is a locale sub-directory: /bn/umrah mirrors /umrah. The locale
@@ -1691,7 +1694,7 @@ export default function App() {
   let seoDescription = "Compare flight prices from Dhaka to Nepal, Thailand, Malaysia and Dubai, check visa requirements step by step, and plan your trip budget in BDT.";
   let seoSchema: any = undefined;
   let seoBreadcrumbs: { name: string; url: string }[] = [];
-  let seoImageUrl = "https://ural-travel.pages.dev/og-image.jpg";
+  let seoImageUrl = `${SITE_ORIGIN}/og-image.jpg`;
   const pageLanguage = lang === "bn" ? "bn-BD" : "en-BD";
 
   if (section === "home") {
@@ -2082,7 +2085,7 @@ export default function App() {
       ];
     } else {
       const postUrl = siteUrl(`/blog/${activePost.slug}`, lang);
-      const postImgUrl = `https://ural-travel.pages.dev/img/blog/${activePost.slug}.jpg`;
+      const postImgUrl = `${SITE_ORIGIN}/img/blog/${activePost.slug}.jpg`;
       const bnPostSeo = isBn ? bnContent?.getBengaliRouteSeo(`/blog/${activePost.slug}`) : null;
       seoTitle = `${activePost.title} | URAL Travel Blog`;
       seoDescription = bnPostSeo?.description || activePost.summary;
@@ -2186,8 +2189,8 @@ export default function App() {
     const orgSchema = {
       "@type": "Organization",
       name: "URAL Travel Intelligence",
-      url: "https://ural-travel.pages.dev",
-      logo: "https://ural-travel.pages.dev/assets/brand/svg/ural-wordmark-v1.svg",
+      url: SITE_ORIGIN,
+      logo: `${SITE_ORIGIN}/assets/brand/svg/ural-wordmark-v1.svg`,
       description: seoDescription,
       contactPoint: {
         "@type": "ContactPoint",
@@ -2430,7 +2433,7 @@ export default function App() {
       return isToolSlug(parameterId) ? `/tools/${parameterId}` : "/tools";
     }
     if (section === "contact") return "/contact";
-    return new URL(currentPath, "https://ural-travel.pages.dev").pathname;
+    return new URL(currentPath, SITE_ORIGIN).pathname;
   })();
 
   // Bengali pages must never fall back to the English copy tables: prefer the
@@ -2505,7 +2508,7 @@ export default function App() {
   // Helper that normalizes legacy query-string paths to clean path-based routes
   const normalizeRoutePath = (rawPath: string): string => {
     try {
-      const u = new URL(rawPath, "https://ural-travel.pages.dev");
+      const u = new URL(rawPath, SITE_ORIGIN);
       const p = u.pathname;
       const sp = u.searchParams;
       if (p === "/flights" && sp.get("route")) return `/flights/${sp.get("route")}`;

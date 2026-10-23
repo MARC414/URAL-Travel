@@ -1,7 +1,13 @@
 import assert from "node:assert/strict";
 import { validateSitemapPair } from "./sitemapValidation";
 
-const origin = "https://ural-travel.pages.dev";
+import { SITE_ORIGIN } from "../src/utils/localeRoutes";
+
+// Verified against the canonical host only: the retired pages.dev hostname is
+// expected to 301, and this script asserts `redirect: "error"`, so pointing it
+// there would fail CI for the right reason. Deriving it from SITE_ORIGIN means
+// the check follows the host instead of pinning it.
+const origin = SITE_ORIGIN;
 const attempts = Number(process.env.SITEMAP_VERIFY_ATTEMPTS ?? "1");
 assert(Number.isInteger(attempts) && attempts >= 1 && attempts <= 30, "Attempts must be between 1 and 30");
 
