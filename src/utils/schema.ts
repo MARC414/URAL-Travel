@@ -31,6 +31,7 @@ export const SITE_WEBSITE_ID = `${BASE_URL}/#website`;
  * adding your site there does not help SEO. Its value here is identity.
  */
 export const URAL_WIKIDATA_ENTITY_URL = "https://www.wikidata.org/wiki/Q141682382";
+export const URAL_SUPPORT_EMAIL = "support@uraltravel.co.uk";
 
 export const URAL_SOCIAL_LINKS = {
   facebook: "https://web.facebook.com/uraltravelbd/",

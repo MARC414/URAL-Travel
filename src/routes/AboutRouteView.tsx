@@ -258,15 +258,15 @@ export default function AboutRouteView({ context }: RouteViewProps) {
 
                 {isBn
 
-                  ? "আমাদের WhatsApp বা হটলাইনে সরাসরি কথা বলুন — +8801784385335"
+                  ? "আমাদের WhatsApp, হটলাইন (+8801784385335) বা ইমেইলে যোগাযোগ করুন — support@uraltravel.co.uk"
 
-                  : "Reach us directly on WhatsApp or hotline — +8801784385335"}
+                  : "Reach us directly on WhatsApp (+8801784385335) or email — support@uraltravel.co.uk"}
 
               </p>
 
             </div>
 
-            <div className="flex gap-2 shrink-0">
+            <div className="flex flex-wrap gap-2 shrink-0">
 
               <a
 
@@ -281,6 +281,18 @@ export default function AboutRouteView({ context }: RouteViewProps) {
               >
 
                 {isBn ? "WhatsApp-এ মেসেজ করুন" : "Message on WhatsApp"}
+
+              </a>
+
+              <a
+
+                href="mailto:support@uraltravel.co.uk"
+
+                className="bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-4 py-2.5 rounded-xl border border-white/20 transition-colors"
+
+              >
+
+                support@uraltravel.co.uk
 
               </a>
 

@@ -103,6 +103,7 @@ export async function onRequestPost(context) {
       context.request.headers.get("Referer") || "https://uraltravel.co.uk/";
 
     let formSubmitDelivered = false;
+    let resendDelivered = false;
 
     // 1. Primary Notification Dispatch via FormSubmit AJAX Service
     try {
@@ -127,14 +128,14 @@ export async function onRequestPost(context) {
     // 2. Optional Resend API dispatch if RESEND_API_KEY is configured in Cloudflare environment
     if (context.env && context.env.RESEND_API_KEY) {
       try {
-        await fetch("https://api.resend.com/emails", {
+        const resendResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${context.env.RESEND_API_KEY}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            from: "URAL Travel Intelligence <alerts@ural-travel.pages.dev>",
+            from: "URAL Travel Support <support@uraltravel.co.uk>",
             to: [RECIPIENT_EMAIL],
             reply_to: cleanEmail,
             subject: `🔔 New URAL Subscription: ${cleanEmail} (${interestSummary})`,
@@ -159,23 +160,26 @@ export async function onRequestPost(context) {
             `,
           }),
         });
+        resendDelivered = resendResponse.ok;
       } catch {
-        // Ignore optional secondary transport errors
+        resendDelivered = false;
       }
     }
 
+    const delivered = formSubmitDelivered || resendDelivered;
     return new Response(
       JSON.stringify({
-        ok: true,
+        ok: delivered,
         subscriptionId,
         subscriberEmail: cleanEmail,
         subscriptionInterests,
         deliveredTo: RECIPIENT_EMAIL,
         formSubmitDelivered,
+        resendDelivered,
         timestamp: dhakaTimestamp,
       }),
       {
-        status: 200,
+        status: delivered ? 200 : 502,
         headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
       }
     );

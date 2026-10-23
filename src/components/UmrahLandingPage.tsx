@@ -49,7 +49,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
       ===================================================================== */}
       <section
         aria-label="Umrah and Hajj Planning Hero Banner"
-        className="w-screen relative left-1/2 -translate-x-1/2 bg-[#071120] text-white border-y border-slate-800 overflow-hidden shadow-2xl"
+        className="w-screen relative left-1/2 -translate-x-1/2 -mt-10 sm:-mt-12 bg-[#071120] text-white border-b border-slate-800 overflow-hidden shadow-2xl"
       >
         {/* Full-Bleed Background Photography + Multi-Layer Editorial Vignette */}
         <ResponsiveImage

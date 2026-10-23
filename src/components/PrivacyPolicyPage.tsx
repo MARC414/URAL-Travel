@@ -411,7 +411,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             )}
           </p>
           <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs space-y-1">
-            <p><strong>{isBn ? "ডেটা নিয়ন্ত্রক ইমেইল:" : "Designated Privacy Contact:"}</strong> privacy@ural-travel.pages.dev</p>
+            <p><strong>{isBn ? "ডেটা নিয়ন্ত্রক ইমেইল:" : "Designated Privacy Contact:"}</strong> support@uraltravel.co.uk</p>
             <p><strong>{isBn ? "অফিসিয়াল হটলাইন / হোয়াটসঅ্যাপ:" : "Official WhatsApp Support Desk:"}</strong> +880 1784-385335</p>
             <p><strong>{isBn ? "ওয়েবসাইট হোস্ট:" : "Global Infrastructure:"}</strong> Cloudflare Pages Edge Network (300+ Cities Worldwide)</p>
           </div>
@@ -857,8 +857,8 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
           </div>
           <p className="text-xs text-slate-400 pt-1">
             {isBn
-              ? "এই অধিকারগুলো প্রয়োগ করতে privacy@ural-travel.pages.dev ঠিকানায় ইমেইল করুন। আমরা ৩০ দিনের মধ্যে জবাব দেওয়ার অঙ্গীকার করি।"
-              : "To exercise any of these entitlements, contact privacy@ural-travel.pages.dev. We guarantee a formal response within 30 days."}
+              ? "এই অধিকারগুলো প্রয়োগ করতে support@uraltravel.co.uk ঠিকানায় ইমেইল করুন। আমরা ৩০ দিনের মধ্যে জবাব দেওয়ার অঙ্গীকার করি।"
+              : "To exercise any of these entitlements, contact support@uraltravel.co.uk. We guarantee a formal response within 30 days."}
           </p>
         </section>
 
@@ -923,13 +923,13 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono pt-2">
             <a
-              href="mailto:privacy@ural-travel.pages.dev"
+              href="mailto:support@uraltravel.co.uk"
               className="p-3 bg-slate-950 border border-slate-800 rounded-2xl hover:border-[#F6B73C] transition-colors flex items-center gap-2.5 text-white"
             >
               <Mail className="w-4 h-4 text-[#F6B73C] shrink-0" />
               <div className="truncate">
                 <span className="text-[10px] text-slate-400 block font-sans">{isBn ? "ইমেইল:" : "Email:"}</span>
-                <span className="font-bold">privacy@ural-travel.pages.dev</span>
+                <span className="font-bold">support@uraltravel.co.uk</span>
               </div>
             </a>
             <a
