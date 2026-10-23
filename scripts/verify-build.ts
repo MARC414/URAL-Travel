@@ -1634,6 +1634,46 @@ for (const file of ["sitemap.xml", "sitemap.txt"]) {
 }
 
 
+// Anchor targets must clear BOTH stacked sticky bars, not just the navbar.
+// `#sticky-site-header` (App.tsx) wraps a notification row and an h-16 navbar: ~96px of
+// chrome. The 6rem Tailwind utility (`scroll-mt-24`) is what the 19 working anchors use;
+// the 7.5rem rule in index.css covers the guide-jump targets. This history is the reason
+// the guard exists: the hero/nav gap was "fixed" several times, and each attempt patched
+// one page while `scroll-mt-12` (3rem) survived on two id-bearing anchors in App.tsx --
+// half an offset reads as a mis-set gap, and it is invisible unless you assert it.
+// Asserted on source, not dist: Tailwind emits the class, so dist carries no numeric
+// truth to read.
+{
+  const srcDir = path.join(ROOT_DIR, "src");
+  const offenders: string[] = [];
+  const walk = (dir: string) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        walk(full);
+        continue;
+      }
+      if (!/\.(tsx?|jsx?)$/.test(entry.name)) continue;
+      const text = fs.readFileSync(full, "utf8");
+      text.split("\n").forEach((line, idx) => {
+        if (!line.includes("scroll-mt-")) return;
+        const hasId = /\bid="[-A-Za-z0-9_]+"/.test(line);
+        const m = line.match(/scroll-mt-(\d+)\b/);
+        if (hasId && m && Number(m[1]) < 24) {
+          offenders.push(`${path.relative(ROOT_DIR, full)}:${idx + 1} (scroll-mt-${m[1]})`);
+        }
+      });
+    }
+  };
+  walk(srcDir);
+  check(
+    offenders.length === 0,
+    offenders.length === 0
+      ? "no id-bearing anchor uses an under-sized scroll-mt offset"
+      : `anchor offset drift: ${offenders.join(", ")} clear only part of the sticky header`
+  );
+}
+
 // The Travelpayouts widget shell is an iframe/popup target, not a landing page.
 // It must stay noindex and out of the sitemap so it cannot compete with /flights.
 {
