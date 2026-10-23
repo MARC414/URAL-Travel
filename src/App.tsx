@@ -4019,7 +4019,7 @@ export default function App() {
               <section
                 id="live-flight-search"
                 aria-labelledby="flight-search-title"
-                className="scroll-mt-12 space-y-5 sm:space-y-6"
+                className="scroll-mt-24 space-y-5 sm:space-y-6"
               >
                 <header className="max-w-3xl space-y-2">
                   <div className="inline-flex items-center gap-2 rounded-full border border-[#F6B73C]/35 bg-[#F6B73C]/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-brand-navy">
@@ -4158,7 +4158,7 @@ export default function App() {
             </div>
 
             {/* 🟦 SECTION 2: QUICK DESTINATION ENTRY */}
-            <div id="destinations-section" className="scroll-mt-12 space-y-6">
+            <div id="destinations-section" className="scroll-mt-24 space-y-6">
               <div className="text-center space-y-2">
                 <span className="text-[10px] font-mono font-bold text-brand-navy uppercase tracking-widest bg-slate-200 px-3 py-1 rounded-full">{t.destinationsBadge}</span>
                 <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{t.destinationsTitle}</h2>

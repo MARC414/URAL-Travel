@@ -211,7 +211,7 @@ export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "
           <div className="partner-marquee__heading">
             <span className="partner-marquee__eyebrow">
               <Plane size={13} aria-hidden="true" />
-              {isBn ? "Travelpayouts পার্টনার নেটওয়ার্ক" : "Travelpayouts partner network"}
+              {isBn ? "পার্টনার নেটওয়ার্ক" : "Travel partners"}
             </span>
             <p className="partner-marquee__description">
               {isBn
@@ -220,11 +220,12 @@ export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "
             </p>
           </div>
 
-          <div className="partner-marquee__controls">
-            <span className="partner-marquee__count">
-              {isBn ? "১৪টি পার্টনার · একসাথে ৫টি" : "14 partners · 5 shown at once"}
-            </span>
-          </div>
+          {/* No item counter here on purpose. The old label reported the carousel's
+              own render maths ("14 partners · 5 shown at once") to the visitor, and
+              the second number went stale whenever PARTNERS changed. The strip is
+              already labelled by aria-roledescription="carousel", which is all a
+              decorative logo row needs. If a count is ever wanted again, derive it
+              from PARTNERS.length — never hard-code a second number. */}
         </div>
 
         <div className="partner-marquee__viewport" aria-live="off">
