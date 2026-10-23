@@ -2329,7 +2329,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     bodyHtml: `
       <article>
         <h1>Contact URAL — Dhaka Outbound Flight, Umrah &amp; Visa Desk (+8801784385335)</h1>
-        <p>Connect directly with our Dhaka support desk via WhatsApp at +8801784385335 for BDT flight &amp; hotel booking, Umrah e-Visa processing, and tourist visa document verification.</p>
+        <p>Connect directly with our Dhaka support desk via WhatsApp at +8801784385335 or email at <a href="mailto:support@uraltravel.co.uk">support@uraltravel.co.uk</a> for BDT flight &amp; hotel booking, Umrah e-Visa processing, and tourist visa document verification.</p>
         <section>
           <h2>Official URAL Social Media &amp; Community Channels</h2>
           <ul>
@@ -2338,6 +2338,7 @@ function buildAllRoutes(): PrerenderRoute[] {
             <li><a href="https://www.linkedin.com/company/ural-travel-bangladesh" target="_blank" rel="me noopener noreferrer">LinkedIn — URAL Travel Bangladesh</a></li>
             <li><a href="https://www.tiktok.com/@uraltravelbd" target="_blank" rel="me noopener noreferrer">TikTok — @uraltravelbd</a></li>
             <li><a href="https://wa.me/8801784385335" target="_blank" rel="noopener noreferrer">WhatsApp Support Desk — +8801784385335</a></li>
+            <li><a href="mailto:support@uraltravel.co.uk">Official Support Email — support@uraltravel.co.uk</a></li>
           </ul>
         </section>
         ${renderLandingFaqs("contact-desk-faqs", "Questions about URAL travel support and BDT booking", contactFaq)}
@@ -2413,7 +2414,7 @@ function buildAllRoutes(): PrerenderRoute[] {
 
         <section>
           <h2>Contact</h2>
-          <p>URAL is a small desk, not a call centre. WhatsApp is the fastest route, on +880 1784-385335, and the <a href="/contact">contact form</a> reaches the same inbox.</p>
+          <p>URAL is a small desk, not a call centre. WhatsApp is the fastest route, on +880 1784-385335, email reaches <a href="mailto:support@uraltravel.co.uk">support@uraltravel.co.uk</a>, and the <a href="/contact">contact form</a> reaches the same inbox.</p>
           <p><small>Published by URAL Travel Intelligence, Dhaka, Bangladesh.</small></p>
         </section>
       </article>
@@ -2446,7 +2447,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         <p>This Privacy and Cookie Policy outlines how URAL Travel Intelligence collects, processes, and protects visitor data, our Google Consent Mode v2 compliance architecture, and our commercial affiliate partner relationships.</p>
         <section>
           <h2>1. Data Controller &amp; Editorial Identity</h2>
-          <p>URAL Travel Intelligence (https://uraltravel.co.uk) is an independent travel intelligence publisher. We do not sell flight tickets directly or process passenger credit card transactions on our infrastructure.</p>
+          <p>URAL Travel Intelligence (https://uraltravel.co.uk) is an independent travel intelligence publisher. Designated privacy and support email: <a href="mailto:support@uraltravel.co.uk">support@uraltravel.co.uk</a>. We do not sell flight tickets directly or process passenger credit card transactions on our infrastructure.</p>
         </section>
         <section>
           <h2>2. Google Tag Manager &amp; Consent Mode v2</h2>

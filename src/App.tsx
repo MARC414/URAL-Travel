@@ -113,6 +113,7 @@ import {
   faqPageNodeSchema,
   howToSchema,
   URAL_SOCIAL_LINKS,
+  URAL_SUPPORT_EMAIL,
   URAL_WIKIDATA_ENTITY_URL,
 } from "./utils/schema";
 import { getAuthorProfile } from "./data/authorProfiles";
@@ -5187,6 +5188,12 @@ export default function App() {
                   <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.665.988 3.3 1.488 5.35 1.489 5.513 0 10.002-4.486 10.005-9.999.001-2.671-1.037-5.182-2.924-7.071C17.192 1.685 14.685.648 12.012.648c-5.516 0-10.01 4.488-10.014 10.002-.001 1.902.48 3.712 1.404 5.385.98 1.775 2.417 3.303 4.166 4.395l-1.13 4.126 4.22-1.114z" />
                 </svg>
                 {isBn ? "হোয়াটসঅ্যাপ" : "WhatsApp"}
+              </a>
+              <a
+                href={`mailto:${URAL_SUPPORT_EMAIL}`}
+                className="min-h-11 inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800/80 px-3.5 text-xs font-mono font-semibold text-slate-200 hover:border-[#F6B73C]/50 hover:text-white"
+              >
+                {URAL_SUPPORT_EMAIL}
               </a>
               <a
                 href={getLocalizedRouteHref("/contact")}

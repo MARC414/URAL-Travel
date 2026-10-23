@@ -143,92 +143,34 @@ Done and verified: GA4 inside GTM is correct (`Ural GA4 - Google Tag` fires Page
 **Known repo bug, parked (not P1):** `src/utils/analytics.ts:83` sends `link_label`, the global
 listener at `:160` sends `link_text` for the same event → one is always empty. Fix in P4.
 
-## P2 — Email: the actual plan for `@uraltravel.co.uk`
+## P2 — Email: `@uraltravel.co.uk` CLOSED (2026-10-23)
 
-**Answer: yes, a real `support@uraltravel.co.uk` costs £0.** Cloudflare Email Routing is free
-with unlimited inbound — 200 routing rules/domain, 200 verified destination addresses/account,
-25 MiB messages, plus-addressing since Jul 2025. It forwards to Gmail; you never buy a mailbox.
-The folklore "100/day" cap is gone.
+**Status 2026-10-23 — live, verified inbound + outbound (£0/mo), and wired across the site onto `support@uraltravel.co.uk`.**
 
-### The only thing that can make this cost money or break something
-
-MX is **one set per hostname**. Whoever owns the MX owns the mail. If the zone already carries
-**LCN** (or any host) mail/forwarding records, enabling Email Routing **replaces** them and
-breaks the old path. So decide the owner before touching anything.
-
-**Step 1 — the one check that settles everything (30 seconds, zero risk):**
-Cloudflare → `uraltravel.co.uk` → **DNS → Records** → filter **MX**.
-
-| What you see | Meaning | Action |
-| --- | --- | --- |
-| No MX rows | Nothing receives mail today | **Option B** below. No conflict, nothing to break |
-| MX → `*.lcn.com` / hostinger / other | A provider already owns mail | **Option A** first — cheaper, zero DNS churn |
-| MX → `route*.mx.cloudflare.net` | Email Routing already enabled | Skip to configuring rules + catch-all |
-
-### Options
-
-**A — Use the registrar's existing forwarding (default choice).**
-If LCN (or whoever) already offers *free incoming-only forwarding* for the domain, create
-`support@`, `privacy@`, `hello@` there → forward to Gmail. **No Cloudflare DNS change at all.**
-Cloudflare Email Routing then never needs to exist. This is the answer to "without paying".
-
-**B — Cloudflare Email Routing (only if A is unavailable).**
-Enable → accept the auto-created MX (priorities 8/19/29 → `route{1,2,3}.mx.cloudflare.net`)
-→ verify `marcwriter2025@gmail.com` as a destination → **catch-all ON → that destination**
-instead of two named rules. A catch-all also delivers every *typo'd* GDPR request, which named
-rules silently drop.
-Two gotchas: since **2025-06-30** inbound mail failing SPF **and** DKIM is silently dropped —
-always test from Gmail. And there may be **only one SPF TXT at `@`**; two = `permerror`. If a
-sending service (Resend) is later added, confirm its SPF/DKIM land on a subdomain/selector,
-not `@`.
-
-**C — Pay for hosted mail.** Not warranted. Only if you later need real multi-seat mailboxes.
-
-### Send path is a separate question — do not conflate it
-
-`alerts@uraltravel.co.uk` in `functions/api/subscribe.js:137` is a **`from:`, not a mailbox**.
-Sending from an address needs no inbox, only a verified sending domain. And it can **never** work
-as written: `@…pages.dev` is un-verifiable in any provider, so that line is dead by construction,
-hidden inside a swallowed `catch`. First check **whether the path runs at all**: Pages →
-`uraltravel` → Settings → Functions → env vars → is `RESEND_API_KEY` set? If not, Resend is
-optional and silently skipped.
-
-### Sequencing (do not skip)
-
-1. Now: **Option A or the DNS check.** No code.
-2. Prove inbound: mail `support@`, `privacy@`, `hello@`, and a deliberate typo (`typo@`) from
-   Gmail. All four must arrive.
-3. **Only then**, in P4's PR, swap `privacy@` ×5 (`PrivacyPolicyPage.tsx:414, 860, 861, 926, 932`)
-   and `subscribe.js:137` `from:`.
-4. **Never ship a new address before step 2 passes.** The policy promises a formal reply within
-   30 days in EN *and* BN; pointing that promise at an unproven mailbox converts an honestly
-   broken contact into a false one.
-5. Leave `index.html:180` (`"email": "farhan.momen@gmail.com"` in the `Organization` JSON-LD)
-   to the P4 schema cleanup — publicly indexed PII with no rich-result benefit since Google dropped
-   those `LocalBusiness` requirements.
-
-### Why `subscribe.js` fails silently (fix in P4, not now)
-
-`:124` computes `formSubmitDelivered` truthfully, then `:180-189` returns `ok: true / 200`
-regardless; the Resend branch swallows its own `catch`; the client (`src/App.tsx:1244-1266`) uses
-`Promise.allSettled`, which cannot throw, so visitors always see success. Zero-deploy diagnostic
-today: submit once with DevTools open and read the JSON — and note **two** notifications may arrive,
-because `App.tsx:1264` also POSTs to FormSubmit directly from the browser.
-FormSubmit activation is **per address, not per domain**, so the domain change did not reset it;
-but held-until-activated submissions expire after **30 days**.
+1. **Inbound (`Cloudflare Email Routing`):**
+   - Replaced registrar placeholder `MX` (`mailforward.lcn.com`, priority 30) with Cloudflare Email Routing `MX` (`route1/2/3.mx.cloudflare.net`) + `SPF` + `cf2024-1._domainkey` DKIM.
+   - Verified destination `marcwriter2025@gmail.com` with custom routing rules (`support@`, `hello@`, `privacy@`, `editorial@`, `contact@`), `Catch-all: Drop`, and a Gmail filter (`To: @uraltravel.co.uk` → *Never send to Spam* + label).
+   - Enabled Cloudflare DMARC Management (`_dmarc` TXT `v=DMARC1; p=none; rua=mailto:...@dmarc-reports.cloudflare.net;`). Tighten `p=none` → `p=quarantine` after 2–3 weeks of clean sending history.
+2. **Outbound (`Resend` + Gmail "Send mail as"):**
+   - Verified `uraltravel.co.uk` sending domain (`resend._domainkey` DKIM + `send` / `rsend` CNAMEs; **Enable Sending = ON**, **Enable Receiving = OFF** so root `MX` stays on Cloudflare).
+   - Connected Gmail *Send mail as* (`URAL Travel Support <support@uraltravel.co.uk>`) via `smtp.resend.com:465` (SSL) with *"Reply from the same address the message was sent to"* enabled.
+3. **Codebase & Serverless Integration (shipped 2026-10-23):**
+   - Unified all support, contact, privacy (`×5`), about, footer, prerender HTML, and `Organization`/`ContactPoint` JSON-LD email references onto **`support@uraltravel.co.uk`** (retiring all `@ural-travel.pages.dev` addresses and personal `farhan.momen@gmail.com` schema PII).
+   - Added `"/api/*"` to `public/_routes.json` so Cloudflare Pages invokes serverless Functions instead of returning static 405s.
+   - Added `/api/contact` (`functions/api/contact.js`) and updated `/api/subscribe` (`functions/api/subscribe.js`) to send via authenticated Resend (`support@uraltravel.co.uk`) + FormSubmit fallback, returning HTTP `502` on dual failure instead of a false `200`.
+   - Fixed the persistent 40–104px `bg-brand-ivory` gap between `#sticky-site-header` and full-bleed `w-screen` heroes on `/umrah` (`UmrahLandingPage.tsx`) and `/banking` (`BankingHubLandingPage.tsx`) via `-mt-10 sm:-mt-12`, guarded by negative controls in `scripts/verify-build.ts`.
 
 ## P3 — Migration watch: Day 1 → 21 (2026-10-23 → 2026-11-13)
 
-**Deploy-side: frozen. Console-side and new-URL content: allowed.**
+**Deploy-side: keep canonicals/sitemaps frozen. Console-side and new-URL content: allowed.**
 
-The earlier "don't edit the site for 21 days" was over-broad. It means: **do not change signals
-on already-indexed URLs.** New pages are unaffected — they have no old canonical to disturb.
+The earlier "don't edit the site for 21 days" was over-broad. It means: **do not change canonicals, URLs, titles, or structured identity on already-indexed URLs.** New pages are unaffected — they have no old canonical to disturb.
 
-| Allowed now | Deferred to P4+ |
+| Allowed now | Deferred to P4+ / P6b |
 | --- | --- |
-| New URLs (UK/diaspora cluster, ≤10) | Any **template** change: H1, title, nav, footer, above-fold |
-| Body-copy edits on existing pages | `privacy@`/`alerts@` swaps, schema cleanup |
-| Console/config (P0, P1, P2 step 1) | Trailing-slash normalisation |
+| New URLs (UK/diaspora cluster, ≤10) | Multi-page hero template rollouts (`P6b` Batches 1–4) |
+| Body-copy fixes on existing pages | `Organization` locality-field restructuring, trailing-slash normalisation |
+| Console/config (P0, P1) | API origin rate-limiting & analytics parameter cleanup |
 
 Weekly 10-minute check (GSC → Pages, Queries, Countries):
 - indexing of `uraltravel.co.uk` climbing toward **254**;
@@ -236,24 +178,20 @@ Weekly 10-minute check (GSC → Pages, Queries, Countries):
 - expect a **20–40 % impression dip for 1–4 weeks**. Normal. Do not "fix" it with content edits;
   that is exactly the mistake this phase exists to prevent.
 
-## P4 — First deploy PR after the watch (one small batch)
+## P4 — Remaining technical polish after the watch (one small batch)
 
-Everything already parked plus the CI guard edits currently **uncommitted in the worktree**
-(`public/_headers` rewrite, `scripts/verify-live-sitemaps.ts` redirect assertion — `git status`
-shows them as `M`; there is no commit for them yet).
+Completed early on 2026-10-23 (at founder request):
+- [x] `support@uraltravel.co.uk` unified across `PrivacyPolicyPage.tsx` (`×5`), `ContactRouteView.tsx`, `AboutRouteView.tsx`, `App.tsx` footer, `index.html` `Organization`/`ContactPoint` JSON-LD, `functions/api/subscribe.js`, and new `functions/api/contact.js` (+ `public/_routes.json` `"/api/*"` fix).
+- [x] `subscribe.js` & `contact.js` return non-200 (`502`) when both Resend and FormSubmit transports fail.
+- [x] `public/_headers` comment updated to document live `301` Bulk Redirects on both `ural-travel.pages.dev` and `www.uraltravel.co.uk`.
+- [x] Full-bleed `w-screen` hero/navbar whitespace bug closed on `/umrah` and `/banking`.
 
-Scope, in this order:
-1. `privacy@uraltravel.co.uk` ×5 + `subscribe.js` `from:` (only if P2 step 2 passed).
-2. Schema PR: drop `address`/`geo`/`priceRange`/`currenciesAccepted`/`paymentAccepted` and the
-   `email` PII from `Organization` (or → `Organization` only, no `TravelAgency` locality claims);
-   fix the `_headers` comment that currently asserts `www.` 301s (untrue until P0 lands).
-3. Make `subscribe.js` fail loudly: return a non-200 (or at least surface the error) when
-   `formSubmitDelivered === false`; reconcile `link_label` vs `link_text`.
-4. Harden the endpoint: it is `Access-Control-Allow-Origin: *` with no rate limit and it proxies
-   attacker-controlled `source`/`pageUrl` into your inbox. Needs an allowlist + throttle.
+Remaining items parked for post-watch P4 PR:
+1. Optional `Organization` JSON-LD locality review (`address`/`geo`/`priceRange`/`currenciesAccepted`/`paymentAccepted`).
+2. Reconcile `link_label` (`src/utils/analytics.ts:83`) vs `link_text` (`:160`).
+3. Harden `/api/subscribe` and `/api/contact` CORS origin allowlist + Cloudflare WAF rate limit rule.
 
-Gate before pushing: `lint` → `build` (129 EN + 129 BN) → `verify:build` (expect **340/340**) →
-`test:sitemaps` (23 controls) → **feeds byte-identical across a rebuild**.
+Gate before pushing: `lint` → `build` (129 EN + 129 BN) → `verify:build` → `test:sitemaps` (23 controls) → **feeds byte-identical across a rebuild**.
 
 ## P5 — Small pre-existing debts (separate PRs)
 
@@ -328,6 +266,30 @@ the UK thesis real rather than rhetorical:
   move (P0b). Adding `sub_id` values is the cheap way to prove attribution per surface.
 - Re-check `areaServed: GB` as a *schema-only* change **after** a UK corpus exists — not before,
   or it is a claim with no pages behind it.
+
+## P6b — Contact-Pattern Photographic Hero Rollout (Sequential Post-Migration Design Plan)
+
+**Approved reference standard:** `/contact` (`src/routes/ContactRouteView.tsx`) — `bg-brand-navy text-white rounded-3xl relative overflow-hidden shadow-xl border border-slate-800` inside `max-w-7xl` (or full-bleed `w-screen relative left-1/2 -translate-x-1/2 -mt-10 sm:-mt-12` on standalone hubs), paired with `<ResponsiveImage fetchPriority="high" decoding="async" />` and a left-weighted directional scrim (`bg-gradient-to-r from-brand-navy via-brand-navy/92 to-brand-navy/55 sm:via-brand-navy/85 sm:to-brand-navy/25`).
+
+### Mandatory 4-Gate CWV & Build Contract for Every Hero Upgrade PR
+1. **Responsive Asset Trio:** `640w / 960w / 1200w` `.avif` + `.webp` files in `public/assets/images/` with exact dimensions registered in `RESPONSIVE_IMAGE_HEIGHTS` (`src/utils/imageAssets.ts`) so SSR/hydration never throws or shifts (`CLS = 0`).
+2. **Preload Parity (`scripts/prerender.ts`):** Set `lcpImageUrl` + `lcpImageSizes` on the route entry so prerendered HTML preloads the exact AVIF `imagesrcset` first (`LCP < 2.5s`).
+3. **Contrast Scrim:** Maintain `from-brand-navy via-brand-navy/92` over text columns so white/gold typography holds `≥ 7:1` contrast across mobile and desktop viewports.
+4. **CI Render Stub (`scripts/verify-build.ts`):** Add every newly upgraded view to `ROUTE_RENDER_STUBS` in EN + BN so missing image metadata fails CI immediately rather than blanking in browsers.
+
+### Already Complete (Do Not Rework)
+- `/` & `/bn/` (`src/App.tsx`), `/contact` & `/bn/contact` (`src/routes/ContactRouteView.tsx`), `/umrah` & `/bn/umrah` (`src/components/UmrahLandingPage.tsx`), `/blog` & `/bn/blog` + `/blog/:slug` (`src/routes/BlogIndexRouteView.tsx`, `BlogPostRouteView.tsx`).
+
+### Logical & Commercial Execution Sequence (Starts After P3 Watch, ~2026-11-13 — 1 Batch = 1 PR)
+
+| Priority Batch | Target Routes & Files | Current State | Ready Asset(s) in `public/assets/images/` | Why This Priority |
+| --- | --- | --- | --- | --- |
+| **Batch 1 — Money & Affiliate Hubs** | 1. `/flights` & `/flights/:route` (`FlightsIndex.tsx`, `FlightsRouteView.tsx`)<br>2. `/hotels`, `/hotels/:city` & `/kkday-hotels` (`HotelsRouteView.tsx`, `KkdayHotelsPage.tsx`)<br>3. `/banking` (`BankingHubLandingPage.tsx`) | Plain white headers (`/flights`, `/hotels`, `/kkday-hotels`); CSS radial gradient without photo (`/banking`) | `dhaka_airport_widebody_airlines_tarmac_1790520836931`, city destination sets (`bangkok`, `kl`, `dubai`, `singapore`, `maldives`, `nepal`), `rfcd_foreign_currency_banking_1790486762760` | Direct Travelpayouts, Klook, KKday & card-endorsement conversion pages; 100% of photos already exist locally |
+| **Batch 2 — SEO Entry & Link-Magnet Pillars** | 1. `/visa-free-countries` (`VisaFreeCountriesRouteView.tsx`)<br>2. `/visa` & `/visa/:country` (`VisaRouteView.tsx`)<br>3. `/destinations` & `/destinations/:country` (`DestinationsRouteView.tsx`, `CityDestinationLanding.tsx`)<br>4. `/costs` & `/costs/:country` (`CostsRouteView.tsx`) | Plain white headers (`Visa*`, `Costs`); solid navy card without photo (`CityDestinationLanding.tsx`) | `passport_stamps_boarding_window_1790486849797`, `bangladesh_epassport_biometric_desk_1790520813052`, per-country destination photos, `pos_card_terminal_currency_1790486792551` | Top organic entry hubs and #1 backlink asset (`/visa-free-countries`); `CityDestinationLanding` is a 1-to-1 drop-in match to `/contact` |
+| **Batch 3 — Mid-Funnel Tools, Passes & Pre-Departure** | 1. `/experiences*` & `/attractions*` (`ExperiencesPage.tsx`, `AttractionDetailPage.tsx`)<br>2. `/tools` & `/tools/:slug` (`ToolsRouteView.tsx`)<br>3. `/pre-departure` (`SitemapPage.tsx` `variant="pre-departure"`) | Plain text/gradient headers | `paris_louvre_london_landmarks_1790485782111`, `singapore_mrt_gardens_bay_1790520762227`, `passport_card_travel_desk_1790430035290`, `airport_departure_board_delay_claim_1790520824658` | Supports UK/Europe Tiqets/Go City passes (high GBP AOV), AirHelp claims, and DAC departure checklist |
+| **Batch 4 — Brand Trust Surface** | `/about` (`AboutRouteView.tsx`) | Solid `bg-brand-navy rounded-3xl` header without image | `clouds_boat_hero_1781438671378` or dedicated editorial desk visual | Completes E-E-A-T visual cohesion once commercial & search hubs are live |
+
+> **Deliberate exclusions:** Keep `/privacy`, `/sitemap` (directory variant), and `404` clean and text-first without hero photography — legal and directory pages benefit from instant text scan and zero extra image bytes.
 
 ---
 

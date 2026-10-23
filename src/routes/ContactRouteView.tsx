@@ -1,10 +1,12 @@
+import React, { useState } from "react";
+
 import { SERVICE_CONTACT_FAQS } from "../hooks/useSeoMeta";
 
 import { ResponsiveImage } from "../components/ResponsiveImage";
 
 import { TravelIntelligence } from "../components/AeoInspector";
 
-import { URAL_SOCIAL_LINKS } from "../utils/schema";
+import { URAL_SOCIAL_LINKS, URAL_SUPPORT_EMAIL } from "../utils/schema";
 
 
 
@@ -15,6 +17,9 @@ type RouteViewProps = { context: Record<string, any> };
 export default function ContactRouteView({ context }: RouteViewProps) {
 
   const { contactDestination, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, isBn, section, setContactDestination, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted } = context;
+
+  const [contactEmail, setContactEmail] = useState("");
+  const [submissionId, setSubmissionId] = useState("");
 
   return (
 
@@ -174,7 +179,7 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                       <span className="font-bold text-slate-400">SUBMISSION ID:</span>
 
-                      <span className="text-brand-navy font-bold">URAL-REQ-{Math.floor(1000 + Math.random() * 9000)}</span>
+                      <span className="text-brand-navy font-bold">{submissionId || `URAL-REQ-${Math.floor(1000 + Math.random() * 9000)}`}</span>
 
                     </div>
 
@@ -191,6 +196,8 @@ export default function ContactRouteView({ context }: RouteViewProps) {
                       setContactName("");
 
                       setContactPhone("");
+
+                      setContactEmail("");
 
                       setContactMessage("");
 
@@ -220,15 +227,17 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                     }
 
+                    const generatedReqId = `URAL-REQ-${Math.floor(1000 + Math.random() * 9000)}`;
+
+                    setSubmissionId(generatedReqId);
+
                     setContactLoading(true);
 
 
 
                     try {
 
-                      // POST to FormSubmit.co AJAX endpoint to route the inquiry safely and for free to your email
-
-                      await fetch("https://formsubmit.co/ajax/marcwriter2025@gmail.com", {
+                      const serverlessRequest = fetch("/api/contact", {
 
                         method: "POST",
 
@@ -236,15 +245,55 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                           "Content-Type": "application/json",
 
-                          "Accept": "application/json"
+                          "Accept": "application/json",
 
                         },
 
                         body: JSON.stringify({
 
+                          submissionId: generatedReqId,
+
+                          name: contactName,
+
+                          phone: contactPhone,
+
+                          email: contactEmail.trim(),
+
+                          subject: contactSubject,
+
+                          destination: contactDestination,
+
+                          message: contactMessage,
+
+                          pageUrl: typeof window !== "undefined" ? window.location.href : "https://uraltravel.co.uk/contact",
+
+                        }),
+
+                      }).catch(() => null);
+
+
+
+                      const formSubmitRequest = fetch("https://formsubmit.co/ajax/marcwriter2025@gmail.com", {
+
+                        method: "POST",
+
+                        headers: {
+
+                          "Content-Type": "application/json",
+
+                          "Accept": "application/json",
+
+                        },
+
+                        body: JSON.stringify({
+
+                          "Submission ID": generatedReqId,
+
                           Name: contactName,
 
                           "Phone / WhatsApp": contactPhone,
+
+                          ...(contactEmail.trim() ? { Email: contactEmail.trim(), _replyto: contactEmail.trim() } : {}),
 
                           "Assistance Category": contactSubject,
 
@@ -252,17 +301,21 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                           Message: contactMessage,
 
-                          "_subject": `New URAL Travel Inquiry from ${contactName}`,
+                          "_subject": `New URAL Travel Inquiry (${generatedReqId}) from ${contactName}`,
 
-                          "_template": "table"
+                          "_template": "table",
 
-                        })
+                        }),
 
-                      });
+                      }).catch(() => null);
+
+
+
+                      await Promise.allSettled([serverlessRequest, formSubmitRequest]);
 
                     } catch (err) {
 
-                      console.warn("Direct email delivery through FormSubmit was blocked or offline, simulating success locally:", err);
+                      console.warn("Direct inquiry delivery fallback:", err);
 
                     } finally {
 
@@ -341,6 +394,36 @@ export default function ContactRouteView({ context }: RouteViewProps) {
                       />
 
                     </div>
+
+                  </div>
+
+
+
+                  {/* Optional Email input for direct reply from support@uraltravel.co.uk */}
+
+                  <div className="space-y-1.5">
+
+                    <label htmlFor="contact-email-address" className="font-bold text-slate-700 block">
+
+                      {isBn ? "ইমেইল ঠিকানা (ঐচ্ছিক — লিখিত উত্তরের জন্য)" : "Email Address (Optional — for written reply)"}
+
+                    </label>
+
+                    <input
+
+                      id="contact-email-address"
+
+                      type="email"
+
+                      placeholder={isBn ? "যেমন: traveler@example.com" : "e.g. traveler@example.com"}
+
+                      value={contactEmail}
+
+                      onChange={(e) => setContactEmail(e.target.value)}
+
+                      className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-brand-navy rounded-xl px-4 py-3 text-slate-800 outline-none transition-all"
+
+                    />
 
                   </div>
 
@@ -622,17 +705,45 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
               <div className="space-y-3">
 
-                <div className="bg-surface-soft p-4 rounded-xl border border-slate-300 text-center space-y-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
-                  <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">DIRECT DIAL DESK</span>
+                  <div className="bg-surface-soft p-4 rounded-xl border border-slate-300 text-center space-y-1">
 
-                  <span className="text-sm font-serif font-black text-brand-navy block">+8801784385335</span>
+                    <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">
+                      {isBn ? "সরাসরি ফোন ও হোয়াটসঅ্যাপ" : "DIRECT DIAL DESK"}
+                    </span>
 
-                  <span className="text-[10px] text-slate-400 block">
+                    <a
+                      href="tel:+8801784385335"
+                      className="text-sm font-serif font-black text-brand-navy hover:underline block"
+                    >
+                      +8801784385335
+                    </a>
 
-                    {isBn ? "২৪/৭ WhatsApp মেসেঞ্জারে সচল" : "Available 24/7 on WhatsApp Messenger"}
+                    <span className="text-[10px] text-slate-500 block">
+                      {isBn ? "২৪/৭ WhatsApp মেসেঞ্জারে সচল" : "Available 24/7 on WhatsApp"}
+                    </span>
 
-                  </span>
+                  </div>
+
+                  <div className="bg-surface-soft p-4 rounded-xl border border-slate-300 text-center space-y-1">
+
+                    <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">
+                      {isBn ? "অফিসিয়াল সাপোর্ট ইমেইল" : "OFFICIAL SUPPORT EMAIL"}
+                    </span>
+
+                    <a
+                      href={`mailto:${URAL_SUPPORT_EMAIL}`}
+                      className="text-sm font-serif font-black text-brand-navy hover:underline block break-all"
+                    >
+                      {URAL_SUPPORT_EMAIL}
+                    </a>
+
+                    <span className="text-[10px] text-slate-500 block">
+                      {isBn ? "সাপোর্ট, ভিসা ও সাধারণ জিজ্ঞাসা" : "Support, visa & general inquiries"}
+                    </span>
+
+                  </div>
 
                 </div>
 

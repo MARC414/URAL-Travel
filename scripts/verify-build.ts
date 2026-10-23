@@ -1579,21 +1579,28 @@ for (const [file, type] of [["sitemap.xml", "application/xml"], ["sitemap.txt", 
   const block = deployedHeaders.split(/\r?\n\r?\n/).find((part) => part.split(/\r?\n/).includes(`/${file}`));
   check(!!block?.includes(`  Content-Type: ${type}; charset=utf-8`), `dist/_headers serves /${file} as ${type}`);
 }
-// --- Canonical-host guard -------------------------------------------------
+// --- Canonical-host & retired-mailbox guard ------------------------------
 // The site moved from the Cloudflare Pages default hostname to the custom
-// domain. A stale absolute URL on the retired host is the one migration bug
-// that is invisible at a glance and catastrophic in Search Console: Google
-// simply keeps the old host canonical and every link built afterwards points
-// at a redirect. A URL on the retired host is therefore a fail, in any file
-// shape. A bare `@host` in a mail address is not: the privacy mailbox still
-// names the retired host on purpose until a real one exists on the new domain
-// (Cloudflare Email Routing), and that deferral is tracked, not forgotten.
+// domain, and Cloudflare Email Routing + Resend SMTP now serve live mail on
+// `support@uraltravel.co.uk`. Neither a URL nor a mailbox on the retired
+// `ural-travel.pages.dev` host (nor the old personal Gmail PII in Organization
+// JSON-LD) may appear anywhere in `dist/` or `functions/`.
+function findRetiredHostOrEmailLeaks(candidates: { label: string; text: string }[]): string[] {
+  const forbidden = /(?:ural-travel\.pages\.dev|farhan\.momen@gmail\.com)/i;
+  const hits: string[] = [];
+  for (const { label, text } of candidates) {
+    if (!forbidden.test(text)) continue;
+    for (const line of text.split(/\r?\n/)) {
+      if (forbidden.test(line)) {
+        hits.push(`${label}: ${line.trim().slice(0, 140)}`);
+      }
+    }
+  }
+  return hits;
+}
 {
   const RETIRED_HOST = "ural-travel.pages.dev";
-  const offenders: string[] = [];
-  // Absolute and protocol-relative references only. A bare `@host` (the
-  // deferred privacy mailbox) is deliberately not matched — it is not a URL.
-  const urlOnRetiredHost = new RegExp(`(?:https?:)?\\/\\/${RETIRED_HOST}`, "i");
+  const surfaces: { label: string; text: string }[] = [];
   const walk = (dir: string) => {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
       const full = path.join(dir, entry.name);
@@ -1602,30 +1609,52 @@ for (const [file, type] of [["sitemap.xml", "application/xml"], ["sitemap.txt", 
         continue;
       }
       if (!/\.(html?|xml|txt|js|json)$/i.test(entry.name)) continue;
-      const text = fs.readFileSync(full, "utf8");
-      if (!text.includes(RETIRED_HOST)) continue;
-      for (const line of text.split(/\r?\n/)) {
-        // An email address on the retired host is a known deferred item, not a
-        // canonical leak; anything that reads as a URL is.
-        if (urlOnRetiredHost.test(line)) {
-          offenders.push(`${path.relative(ROOT_DIR, full)}: ${line.trim().slice(0, 140)}`);
-        }
-      }
+      surfaces.push({
+        label: path.relative(ROOT_DIR, full),
+        text: fs.readFileSync(full, "utf8"),
+      });
     }
   };
   walk(DIST_DIR);
+  walk(path.join(ROOT_DIR, "functions"));
+  const offenders = findRetiredHostOrEmailLeaks(surfaces);
   check(
     offenders.length === 0,
     offenders.length === 0
-      ? `no canonical leak: no URL on the retired ${RETIRED_HOST} host in dist/`
-      : `retired-host URLs still shipped (${offenders.length}):\n    ${offenders.slice(0, 8).join("\n    ")}`
+      ? `no retired-host or legacy-mailbox leak: zero ${RETIRED_HOST} URLs/emails or personal Gmail schema PII in dist/ or functions/`
+      : `retired-host or legacy-mailbox leaks shipped (${offenders.length}):\n    ${offenders.slice(0, 8).join("\n    ")}`
   );
+  // Negative control: both a retired-host mailbox and personal Gmail schema PII must fail.
+  const retiredLeakControl =
+    findRetiredHostOrEmailLeaks([{ label: "fixture-privacy", text: "mailto:privacy@ural-travel.pages.dev" }]).length === 1 &&
+    findRetiredHostOrEmailLeaks([{ label: "fixture-schema", text: '"email": "farhan.momen@gmail.com"' }]).length === 1;
+  check(
+    retiredLeakControl,
+    "retired-host/mailbox guard rejects both @ural-travel.pages.dev and legacy Gmail PII fixtures (negative control)"
+  );
+
   // index.html's static head carries canonical/hreflang/og/twitter/JSON-LD
   // literals that the prerender only partly rewrites; they must be on the
   // canonical host too, or the shell and the per-route pages disagree.
   const distShell = read(path.join(DIST_DIR, "index.html")) ?? "";
   const shellHits = (distShell.match(new RegExp(`https:\\/\\/uraltravel\\.co\\.uk`, "g")) || []).length;
   check(shellHits >= 15, `index.html head carries ${shellHits} canonical-host URLs (expected >= 15)`);
+
+  // Cloudflare Pages `_routes.json` must route `/api/*` to Functions; without it,
+  // `/api/subscribe` and `/api/contact` hit static asset routing (HTTP 405).
+  const hasApiRoute = (rawJson: string) => {
+    try {
+      const parsed = JSON.parse(rawJson) as { include?: unknown };
+      return Array.isArray(parsed.include) && parsed.include.includes("/api/*");
+    } catch {
+      return false;
+    }
+  };
+  const deployedRoutesJson = read(path.join(DIST_DIR, "_routes.json")) ?? "";
+  check(
+    hasApiRoute(deployedRoutesJson) && !hasApiRoute('{"version":1,"include":["/flights"],"exclude":[]}'),
+    'dist/_routes.json includes "/api/*" for serverless email endpoints (with negative control)'
+  );
 }
 
 const deployedRobots = read(path.join(DIST_DIR, "robots.txt")) ?? "";
@@ -1671,6 +1700,65 @@ for (const file of ["sitemap.xml", "sitemap.txt"]) {
     offenders.length === 0
       ? "no id-bearing anchor uses an under-sized scroll-mt offset"
       : `anchor offset drift: ${offenders.join(", ")} clear only part of the sticky header`
+  );
+}
+
+// Full-bleed (`w-screen`) route heroes render inside `<main id="main-content">`,
+// which carries `py-10 sm:py-12` over `bg-brand-ivory`. Without `-mt-10 sm:-mt-12`
+// on the hero `<section>` (and no positive `mt-*` on its wrapper), a 40–104px
+// beige gap appears between `#sticky-site-header` and the dark hero banner.
+function findFullBleedHeroGapIssues(label: string, source: string): string[] {
+  if (!source.includes("w-screen")) return [];
+  const issues: string[] = [];
+  const lines = source.split(/\r?\n/);
+  lines.forEach((line, idx) => {
+    if (!line.includes("w-screen")) return;
+    if (!line.includes("-mt-10") || !line.includes("sm:-mt-12")) {
+      issues.push(`${label}:${idx + 1} missing -mt-10 sm:-mt-12 on full-bleed w-screen hero`);
+    }
+    const precedingWindow = lines.slice(Math.max(0, idx - 8), idx).join("\n");
+    if (/(?<![-\w:])mt-(?:[1-9]\d*)\b/.test(precedingWindow)) {
+      issues.push(`${label}:${idx + 1} wrapper above w-screen hero adds positive top margin`);
+    }
+  });
+  return issues;
+}
+{
+  const srcDir = path.join(ROOT_DIR, "src");
+  const gapIssues: string[] = [];
+  let checkedFullBleedFiles = 0;
+  const walkHeroes = (dir: string) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        walkHeroes(full);
+        continue;
+      }
+      if (!/\.(tsx?|jsx?)$/.test(entry.name)) continue;
+      const source = fs.readFileSync(full, "utf8");
+      if (source.includes("w-screen")) checkedFullBleedFiles += 1;
+      gapIssues.push(...findFullBleedHeroGapIssues(path.relative(ROOT_DIR, full), source));
+    }
+  };
+  walkHeroes(srcDir);
+  check(
+    checkedFullBleedFiles >= 3 && gapIssues.length === 0,
+    gapIssues.length === 0
+      ? `all ${checkedFullBleedFiles} full-bleed w-screen route heroes sit flush under #sticky-site-header (-mt-10 sm:-mt-12, zero wrapper top margin)`
+      : `full-bleed hero/navbar gap detected: ${gapIssues.join("; ")}`
+  );
+  const fullBleedNegativeControl =
+    findFullBleedHeroGapIssues(
+      "UmrahLandingPage.tsx",
+      '<div className="space-y-16">\n  <section className="w-screen relative left-1/2 -translate-x-1/2 bg-[#071120]">'
+    ).length === 1 &&
+    findFullBleedHeroGapIssues(
+      "BankingHubLandingPage.tsx",
+      '<div className="mt-10 sm:mt-14 space-y-14">\n  <section className="w-screen relative left-1/2 -translate-x-1/2 -mt-10 sm:-mt-12 bg-brand-navy">'
+    ).length === 1;
+  check(
+    fullBleedNegativeControl,
+    "full-bleed hero guard rejects missing -mt-10 sm:-mt-12 and positive wrapper top margins (negative control)"
   );
 }
 

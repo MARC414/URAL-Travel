@@ -74,11 +74,11 @@ export const BankingHubLandingPage: React.FC<BankingHubLandingPageProps> = ({
   };
 
   return (
-    <div className="mt-10 sm:mt-14 space-y-14 sm:space-y-16 animate-fade-in">
+    <div className="space-y-14 sm:space-y-16 animate-fade-in">
       {/* 1. HERO ------------------------------------------------------------ */}
       <section
         aria-label={isBn ? "ব্যাংকিং ও ফরেক্স হাব" : "Banking and foreign exchange hub"}
-        className="w-screen relative left-1/2 -translate-x-1/2 bg-brand-navy text-white border-y border-slate-800 overflow-hidden shadow-2xl"
+        className="w-screen relative left-1/2 -translate-x-1/2 -mt-10 sm:-mt-12 bg-brand-navy text-white border-b border-slate-800 overflow-hidden shadow-2xl"
       >
         <div
           className="absolute inset-0 pointer-events-none"
