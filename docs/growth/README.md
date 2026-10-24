@@ -103,6 +103,11 @@ The numbered files above are the technical growth playbook. Use these separate d
 > is now the queue of record** — it sequences everything still open in files 12, 13 and 14 and
 > names the signal that re-opens each item. Read it before proposing any on-site work.
 >
+> **The one task that is still open:** [`16-GA4-MEASUREMENT-RUNBOOK.md`](16-GA4-MEASUREMENT-RUNBOOK.md)
+> — ~15 minutes of GA4 console work (custom dimensions + key events) that must happen **before the
+> first social post**, because GA4 never backfills a custom dimension. Part B of that file is the
+> social cadence and the stop rules.
+>
 > Companion records from the migration:
 > [`12-POST-MIGRATION-ROADMAP.md`](12-POST-MIGRATION-ROADMAP.md) (phases),
 > [`13-POST-MIGRATION-STATUS-AUDIT-2026-10-24.md`](13-POST-MIGRATION-STATUS-AUDIT-2026-10-24.md)
