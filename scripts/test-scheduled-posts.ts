@@ -35,7 +35,17 @@ assert.equal(getPostsDueForPublishing(dueFixtures, nowAtPublish).length, 1);
 assert.equal(getPostsDueForPublishing(dueFixtures, nowAtPublish, true).length, 2);
 
 const repoPosts = loadScheduledBlogPosts();
-assert.equal(repoPosts.length, 2, "both Cox’s Bazar articles should be retained in content/blog");
+assert.equal(repoPosts.length, 3, "the two Cox’s Bazar articles and the new affiliate experiment should be retained in content/blog");
+const affiliateExperimentPost = repoPosts.find(
+  (post) => post.slug === "can-you-make-money-travel-affiliate-marketing-ural-experiment",
+);
+assert.ok(affiliateExperimentPost, "the new travel affiliate experiment should be retained in content/blog");
+assert.equal(affiliateExperimentPost.status, "scheduled");
+assert.equal(affiliateExperimentPost.publishDate, "2026-10-24");
+assert.ok(affiliateExperimentPost.englishBody.includes("my Travelpayouts referral link"));
+assert.ok(affiliateExperimentPost.englishBody.includes("The Fabryk's published Travelpayouts report"));
+assert.ok(affiliateExperimentPost.bengaliBody.includes("এখনো জানি না"));
+
 const coxsBazarPost = repoPosts.find(
   (post) => post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking",
 );

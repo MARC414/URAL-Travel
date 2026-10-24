@@ -687,6 +687,23 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
               const renderFormattedText = (rawText: string) => {
 
+                const renderInlineLinks = (text: string, keyPrefix: string): React.ReactNode => {
+                  const pattern = /\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g;
+                  const nodes: React.ReactNode[] = [];
+                  let cursor = 0;
+                  let match: RegExpExecArray | null;
+                  let index = 0;
+                  while ((match = pattern.exec(text)) !== null) {
+                    if (match.index > cursor) nodes.push(injectContextualInternalLink(text.slice(cursor, match.index), `${keyPrefix}-before-${index}`));
+                    nodes.push(<a key={`${keyPrefix}-link-${index}`} href={match[2]} target="_blank" rel="noopener noreferrer" className="text-brand-navy font-semibold underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-brand-emerald transition-colors">{match[1]}</a>);
+                    cursor = match.index + match[0].length;
+                    index += 1;
+                  }
+                  if (!index) return injectContextualInternalLink(text, keyPrefix);
+                  if (cursor < text.length) nodes.push(injectContextualInternalLink(text.slice(cursor), `${keyPrefix}-after`));
+                  return <React.Fragment key={keyPrefix}>{nodes}</React.Fragment>;
+                };
+
                 const parts = rawText.split(/(\*\*[^*]+\*\*)/g);
 
                 return parts.map((part, pIdx) => {
@@ -699,7 +716,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                       <strong key={pIdx} className="font-semibold text-brand-navy">
 
-                        {injectContextualInternalLink(boldInner, `bold-${pIdx}`)}
+                        {renderInlineLinks(boldInner, `bold-${pIdx}`)}
 
                       </strong>
 
@@ -707,12 +724,11 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                   }
 
-                  return <React.Fragment key={pIdx}>{injectContextualInternalLink(part, `txt-${pIdx}`)}</React.Fragment>;
+                  return <React.Fragment key={pIdx}>{renderInlineLinks(part, `txt-${pIdx}`)}</React.Fragment>;
 
                 });
 
               };
-
 
 
               const hasArticleSpecificSources = Boolean(activePost.references?.length);
