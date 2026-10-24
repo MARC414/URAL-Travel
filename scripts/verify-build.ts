@@ -30,7 +30,14 @@ import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { SITE_ORIGIN } from "../src/utils/localeRoutes";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
-import { AFFILIATE_LINKS, resolvePartnerUrl } from "../src/components/AffiliatePartners";
+import {
+  AFFILIATE_LINKS,
+  TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
+  TRAVELPAYOUTS_REFERRAL_SUB_IDS,
+  TRAVELPAYOUTS_REFERRAL_URL,
+  buildTravelpayoutsReferralUrl,
+  resolvePartnerUrl,
+} from "../src/components/AffiliatePartners";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
   DESTINATION_PARTNER_COPY,
@@ -1572,6 +1579,150 @@ check(
     ? "affiliate loader gates on marketing consent in all cases (6: none yet -> injected on grant, accept-all, custom+marketing, custom-without, declined, unreadable)"
     : `affiliate loader misbehaves: ${loaderFailures.join("; ")}`
 );
+
+// --- 2g. Outbound click analytics: one event, one label key ------------------
+//
+// The delegated listener in src/utils/analytics.ts is the ONLY producer of
+// outbound-click events (PartnerLinkButton's duplicate push was removed on
+// 2026-10-24). Three things have to stay true, and each of them has already been
+// broken once in a way that produced a green build:
+//   (a) one label key. `link_label` / `link_text` / `partner_label` were all in
+//       use for the same event, so at most one of them was ever populated.
+//   (b) a Travelpayouts CREATOR-REFERRAL click is not an affiliate click. The
+//       referral URL is `rel="sponsored"` and contains "travelpayouts", so it
+//       used to be counted as a partner booking.
+//   (c) every referral link carries a `sub_id`, in the React callout AND in the
+//       prerendered HTML (which builds its own copy of the URL).
+{
+  const analyticsSrc = read(path.join(ROOT_DIR, "src", "utils", "analytics.ts")) ?? "";
+  const partnersSrc = read(path.join(ROOT_DIR, "src", "components", "AffiliatePartners.tsx")) ?? "";
+  const legacyKeys = [
+    ["link_text", /\blink_text\s*:/],
+    ["partner_label", /\bpartner_label\s*:/],
+    ["partner_url", /\bpartner_url\s*:/],
+  ].filter(([, pattern]) => (pattern as RegExp).test(analyticsSrc) || (pattern as RegExp).test(partnersSrc));
+  const labelKeyCount = (analyticsSrc.match(/\blink_label\s*:/g) ?? []).length;
+  check(
+    legacyKeys.length === 0 && labelKeyCount >= 2,
+    legacyKeys.length === 0
+      ? `outbound-click events use one label key (link_label on ${labelKeyCount} pushes; no link_text/partner_label/partner_url)`
+      : `competing analytics key names are back: ${legacyKeys.map(([name]) => name).join(", ")}`
+  );
+
+  // Every referral placement must be a real blog slug and must own a SubID.
+  const placementIssues: string[] = [];
+  for (const slug of Object.keys(TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS)) {
+    if (!(BLOG_SLUGS as readonly string[]).includes(slug)) {
+      placementIssues.push(`${slug} is not a published blog slug`);
+    }
+    if (!TRAVELPAYOUTS_REFERRAL_SUB_IDS[slug]) placementIssues.push(`${slug} has no SubID`);
+  }
+  for (const retired of ["havana-cuba-travel-guide-bangladesh", "chefchaouen-morocco-travel-guide-bangladesh"]) {
+    if (TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[retired]) {
+      placementIssues.push(`${retired} is a destination guide - the creator-referral block does not belong there`);
+    }
+  }
+  const builtReferralUrl = buildTravelpayoutsReferralUrl("travel-creator-resources");
+  if (!builtReferralUrl.includes("sub_id=creator_hub")) {
+    placementIssues.push(`the URL builder dropped the SubID (${builtReferralUrl})`);
+  }
+  check(
+    placementIssues.length === 0 &&
+      Object.keys(TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS).length >= 2,
+    placementIssues.length === 0
+      ? `creator-referral placements are intentional (${Object.keys(TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS).join(", ")}) and every one owns a SubID`
+      : `creator-referral placement drift: ${placementIssues.join("; ")}`
+  );
+
+  // The shipped HTML is what a crawler and a visitor actually get, and prerender
+  // builds the referral URL itself - so assert it there too.
+  const referralPages: string[] = [];
+  const walkDist = (dir: string) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walkDist(full);
+      else if (entry.name.endsWith(".html")) {
+        const html = fs.readFileSync(full, "utf8");
+        if (html.includes(TRAVELPAYOUTS_REFERRAL_URL)) referralPages.push(path.relative(DIST_DIR, full));
+      }
+    }
+  };
+  walkDist(DIST_DIR);
+  // No `g` flag on purpose: a global regex carries `lastIndex` between `.test()`
+  // calls, so reusing one instance across files would start the next search
+  // mid-string and miss an earlier match (a silent false negative in a guard is
+  // worse than no guard). One stateless instance, one file at a time.
+  const untaggedRe = new RegExp(
+    `${TRAVELPAYOUTS_REFERRAL_URL.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?!&amp;sub_id=|&sub_id=)`
+  );
+  const untaggedPages = referralPages.filter((page) => {
+    const html = fs.readFileSync(path.join(DIST_DIR, page), "utf8");
+    return untaggedRe.test(html);
+  });
+  check(
+    referralPages.length >= 2 && untaggedPages.length === 0,
+    untaggedPages.length === 0
+      ? `all ${referralPages.length} shipped creator-referral pages tag their link with a SubID`
+      : `untagged creator-referral link in: ${untaggedPages.join(", ")}`
+  );
+
+  // (b), behaviourally: run the real listener against a stub DOM.
+  const analytics = await import("../src/utils/analytics");
+  const fire = (href: string, text: string, rel: string) => {
+    let handler: ((event: unknown) => void) | null = null;
+    const previousWindow = (globalThis as any).window;
+    const previousDocument = (globalThis as any).document;
+    (globalThis as any).window = { dataLayer: [], location: { pathname: "/blog/travel-creator-resources" } };
+    (globalThis as any).document = {
+      addEventListener: (name: string, callback: (event: unknown) => void) => {
+        if (name === "click") handler = callback;
+      },
+      removeEventListener: () => {},
+    };
+    try {
+      analytics.initGlobalClickTracking();
+      (handler as unknown as (event: unknown) => void)({
+        target: { closest: () => ({ getAttribute: (key: string) => (key === "href" ? href : key === "rel" ? rel : null), textContent: text }) },
+      });
+      return ((globalThis as any).window.dataLayer as Record<string, unknown>[]).filter(
+        (entry) => typeof entry.event === "string"
+      );
+    } finally {
+      (globalThis as any).window = previousWindow;
+      (globalThis as any).document = previousDocument;
+    }
+  };
+
+  const clickFailures: string[] = [];
+  const referralClicks = fire(buildTravelpayoutsReferralUrl("travel-creator-resources"), "Explore Travelpayouts", "noopener noreferrer sponsored");
+  if (referralClicks.length !== 1) {
+    clickFailures.push(`referral click produced ${referralClicks.length} events, expected 1`);
+  } else {
+    const [event] = referralClicks;
+    if (event.event !== "travelpayouts_referral_click") clickFailures.push(`referral click named ${String(event.event)}`);
+    if (event.referral_sub_id !== "creator_hub") clickFailures.push(`referral_sub_id was ${String(event.referral_sub_id)}`);
+    if (event.link_label !== "Explore Travelpayouts") clickFailures.push("referral click lost link_label");
+  }
+  const affiliateClicks = fire("https://tiqets.tpo.li/abc123", "Book Tiqets tickets", "noopener noreferrer sponsored");
+  if (affiliateClicks.length !== 1) {
+    clickFailures.push(`affiliate click produced ${affiliateClicks.length} events, expected 1`);
+  } else {
+    const [event] = affiliateClicks;
+    if (event.event !== "affiliate_partner_click") clickFailures.push(`affiliate click named ${String(event.event)}`);
+    if (event.link_label !== "Book Tiqets tickets") clickFailures.push("affiliate click lost link_label");
+    if (typeof event.outbound_url !== "string") clickFailures.push("affiliate click lost outbound_url");
+  }
+  const whatsappClicks = fire("https://wa.me/8801784385335", "WhatsApp desk", "");
+  if (whatsappClicks.length !== 1 || whatsappClicks[0].link_label !== "WhatsApp desk") {
+    clickFailures.push("whatsapp click lost link_label");
+  }
+  check(
+    clickFailures.length === 0,
+    clickFailures.length === 0
+      ? "outbound clicks dispatch one event each with the right name and SubID (3 cases: referral, affiliate, whatsapp)"
+      : `outbound click analytics misbehaves: ${clickFailures.join("; ")}`
+  );
+}
 
 // --- 3. Sitemap: structure + the lastmod invariant --------------------------
 

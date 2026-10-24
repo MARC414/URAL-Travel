@@ -84,7 +84,7 @@ import {
   RADICAL_STORAGE_BLOG_PLACEMENTS,
   MULTI_PARTNER_BLOG_PLACEMENTS,
   TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
-  TRAVELPAYOUTS_REFERRAL_URL,
+  buildTravelpayoutsReferralUrl,
   resolvePartnerUrl,
   sanitizeExpiredPromoText,
   AFFILIATE_LINKS,
@@ -2578,8 +2578,13 @@ function buildAllRoutes(): PrerenderRoute[] {
     }
 
     const refPlacement = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[post.slug];
+    // Per-placement `sub_id` (creator_hub, post_bangkok_food...), so a referral
+    // signup in the Travelpayouts report names the page that produced it. Built
+    // through the same helper the React callout uses - a static HTML copy of the
+    // bare URL would silently be the only untagged link on the page.
+    const travelpayoutsReferralUrl = escapeHtml(buildTravelpayoutsReferralUrl(post.slug));
     const travelpayoutsReferralHtml = refPlacement
-      ? `<section aria-labelledby="travel-creators-referral"><h2 id="travel-creators-referral">${escapeHtml(refPlacement.headlineEn)}</h2><p>${escapeHtml(refPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(TRAVELPAYOUTS_REFERRAL_URL)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacement.anchorTextEn)}</a>${escapeHtml(refPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(TRAVELPAYOUTS_REFERRAL_URL)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacement.buttonLabelEn)}</a>.</p><p><em>${escapeHtml(refPlacement.disclosureEn)}</em></p></section>`
+      ? `<section aria-labelledby="travel-creators-referral"><h2 id="travel-creators-referral">${escapeHtml(refPlacement.headlineEn)}</h2><p>${escapeHtml(refPlacement.bodyBeforeAnchorEn)}<a href="${travelpayoutsReferralUrl}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacement.anchorTextEn)}</a>${escapeHtml(refPlacement.bodyAfterAnchorEn)} <a href="${travelpayoutsReferralUrl}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacement.buttonLabelEn)}</a>.</p><p><em>${escapeHtml(refPlacement.disclosureEn)}</em></p></section>`
       : "";
 
     const planLinksHtml = planLinks.length
@@ -2993,10 +2998,13 @@ function buildBengaliBody(
       );
       const refPlacementBn = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[id];
       if (refPlacementBn) {
+        // Same SubID as the English sibling: the report should tell us which PAGE
+        // produced a signup, not which language the visitor happened to read.
+        const referralUrlBn = escapeHtml(buildTravelpayoutsReferralUrl(id));
         parts.push(
           bnSection(
             refPlacementBn.headlineBn,
-            `<p>${escapeHtml(refPlacementBn.bodyBeforeAnchorBn)}<a href="${escapeHtml(TRAVELPAYOUTS_REFERRAL_URL)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacementBn.anchorTextBn)}</a>${escapeHtml(refPlacementBn.bodyAfterAnchorBn)} <a href="${escapeHtml(TRAVELPAYOUTS_REFERRAL_URL)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacementBn.buttonLabelBn)}</a>.</p><p><em>${escapeHtml(refPlacementBn.disclosureBn)}</em></p>`
+            `<p>${escapeHtml(refPlacementBn.bodyBeforeAnchorBn)}<a href="${referralUrlBn}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacementBn.anchorTextBn)}</a>${escapeHtml(refPlacementBn.bodyAfterAnchorBn)} <a href="${referralUrlBn}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacementBn.buttonLabelBn)}</a>.</p><p><em>${escapeHtml(refPlacementBn.disclosureBn)}</em></p>`
           )
         );
       }

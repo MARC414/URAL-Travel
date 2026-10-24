@@ -140,8 +140,13 @@ Done and verified: GA4 inside GTM is correct (`Ural GA4 - Google Tag` fires Page
       with `wait_for_update: 500`, and it is **not geo-fenced** — GA4 counts consented users,
       not all users. A consent-shaped dip and a migration-shaped dip look identical otherwise.
 
-**Known repo bug, parked (not P1):** `src/utils/analytics.ts:83` sends `link_label`, the global
-listener at `:160` sends `link_text` for the same event → one is always empty. Fix in P4.
+**Label-key bug — FIXED 2026-10-24 (was parked for P4).** `src/utils/analytics.ts` used three
+different key names (`link_label`, `link_text`, `partner_label`) for the same
+`affiliate_partner_click` event, and `PartnerLinkButton` pushed a *second* copy of the event, so one
+click produced two events with at most one populated label. There is now **one producer** (the
+delegated listener) and **one key** (`link_label`) for `affiliate_partner_click`,
+`travelpayouts_referral_click` and `whatsapp_click`. Guarded by four new `verify:build` checks,
+including a behavioural one that runs the real listener against a stub DOM.
 
 ## P2 — Email: `@uraltravel.co.uk` CLOSED (2026-10-23)
 
@@ -188,7 +193,7 @@ Completed early on 2026-10-23 (at founder request):
 
 Remaining items parked for post-watch P4 PR:
 1. Optional `Organization` JSON-LD locality review (`address`/`geo`/`priceRange`/`currenciesAccepted`/`paymentAccepted`).
-2. Reconcile `link_label` (`src/utils/analytics.ts:83`) vs `link_text` (`:160`).
+2. ~~Reconcile `link_label` vs `link_text`~~ — **done 2026-10-24** (see P1 note above).
 3. Harden `/api/subscribe` and `/api/contact` CORS origin allowlist + Cloudflare WAF rate limit rule.
 
 Gate before pushing: `lint` → `build` (129 EN + 129 BN) → `verify:build` → `test:sitemaps` (23 controls) → **feeds byte-identical across a rebuild**.

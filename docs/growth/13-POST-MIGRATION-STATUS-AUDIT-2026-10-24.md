@@ -8,6 +8,10 @@ the built `dist/`, and the guard suite — `npm run lint` ✅ · `npm run build`
 **Not verifiable from here:** anything console-side (Cloudflare, GSC, Bing, GA4/GTM, Resend,
 Travelpayouts dashboard). Those are marked *console* and must be confirmed by you, not by me.
 
+> **Superseded for sequencing (2026-10-24):** the owner froze on-site work and moved to social
+> distribution. This audit remains the record of *what is done vs open*; **`15-SITE-FREEZE-AND-DEFERRED-BACKLOG.md`
+> is now the order those open items come back in.** Nothing below is cancelled.
+>
 > **Headline:** the migration itself is finished and clean. The *monetisation* half is not — and
 > the Travelpayouts project swap you did this week is the one thing in this audit that can
 > silently cost money. See **§3, Finding F1**. Everything else is either cosmetic, deferred by the
@@ -36,7 +40,7 @@ Legend — ✅ done & verified here · 🟡 done, needs your console confirmatio
 | P2 | DMARC `p=none` → `p=quarantine` after 2–3 weeks | ❌ | Clock started ≈ 2026-10-23 → due **≈ 2026-11-06 … 11-13**. Nothing to do until then. |
 | P3 | 21-day watch (canonical freeze, no template churn) | ▶ running | Day 2. New URLs and body-copy fixes are allowed; canonical/title/identity changes are not. |
 | P4 | `Organization` JSON-LD locality review | ❌ | Still parked. |
-| P4 | `link_label` vs `link_text` analytics bug | ❌ **confirmed open** | `src/utils/analytics.ts:83` pushes `link_label`; the global click listener at `:160` pushes `link_text` for the same `affiliate_partner_click` event → one of the two is always empty in GA4. |
+| P4 | `link_label` vs `link_text` analytics bug | ✅ **fixed 2026-10-24** | One producer, one key: `link_label` for `affiliate_partner_click`, `travelpayouts_referral_click` and `whatsapp_click`. `PartnerLinkButton`'s duplicate `partner_label`/`partner_url` push removed. Four new `verify:build` guards, one of them behavioural. |
 | P4 | CORS allowlist + WAF rate limit on `/api/*` | ❌ **confirmed open** | Both functions still send `Access-Control-Allow-Origin: *` (`contact.js:12`, `subscribe.js:15`). |
 | P5 | `/bn` vs `/blog/<slug>` trailing slash | ❌ | Untouched. |
 | P5 | IndexNow re-submit after P4 | 🟠 | Key file is root-served; the build logged `[IndexNow] submission failed: fetch failed` in this sandbox (no egress to IndexNow from here) — harmless locally, but it means "the build submits IndexNow" is not true in every environment. |
@@ -205,7 +209,7 @@ the rules; a metadata rewrite is not. Today's Drive change is therefore legal un
 | This week | Write the consent caveat into `docs/growth/01-indexing-crawling.md` | none |
 | ✅ done today | `/umrah` hero: photo/scrim/overflow/mobile-height + the sticky-header bug (F4, F6) — no H1 rewrite | low |
 | ~2026-11-06 | DMARC `p=none` → `p=quarantine` | none |
-| ~2026-11-13+ | P4 batch (`link_label`/`link_text`, CORS, JSON-LD locality), then P6 cluster | medium |
+| ~2026-11-13+ | P4 batch (CORS, JSON-LD locality — `link_label` already done), then P6 cluster | medium |
 | After P4 data | P6b Batches 1–4, H1/metadata rewrite in its own PR | medium |
 
 ---

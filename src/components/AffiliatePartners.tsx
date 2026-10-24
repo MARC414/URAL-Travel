@@ -35,8 +35,39 @@ export type AffiliatePartnerKey = keyof typeof AFFILIATE_LINKS;
  * transparent "For Travel Creators & Bloggers" block (see
  * TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS) — never disguised as a flight or
  * hotel booking link. Booking CTAs always use the partner URLs above.
+ *
+ * `marker` is the ACCOUNT-level partner id, so it survived the 2026 domain move
+ * (unlike `trs`, the project id — see the TRS_ID comment in
+ * TravelpayoutsCustomWidget.tsx).
  */
 export const TRAVELPAYOUTS_REFERRAL_URL = "https://www.travelpayouts.com/?marker=675992";
+
+/**
+ * Per-placement SubID. Without one, all referral links are byte-identical and
+ * the Travelpayouts "Referrals" report can never say which page produced a
+ * signup. Values are short, lowercase and stable — never reuse one for a
+ * different placement, or its history becomes unreadable.
+ *
+ * `post_havana` and `post_chefchaouen` are RESERVED: their placements were
+ * removed on 2026-10-24 (a "start your own travel blog" pitch inside a city
+ * guide reaches trip-shoppers, not publishers). The ids stay listed so that a
+ * future re-opt-in reuses its own id instead of inheriting another placement's
+ * statistics.
+ */
+export const TRAVELPAYOUTS_REFERRAL_SUB_IDS: Record<string, string> = {
+  "travel-creator-resources": "creator_hub",
+  "halal-food-guide-bangkok-bangladesh": "post_bangkok_food",
+  "chefchaouen-morocco-travel-guide-bangladesh": "post_chefchaouen", // reserved
+  "havana-cuba-travel-guide-bangladesh": "post_havana", // reserved
+};
+
+/** Referral URL for one placement; falls back to the bare link if untagged. */
+export function buildTravelpayoutsReferralUrl(slug?: string): string {
+  const subId = slug ? TRAVELPAYOUTS_REFERRAL_SUB_IDS[slug] : "";
+  return subId
+    ? `${TRAVELPAYOUTS_REFERRAL_URL}&sub_id=${encodeURIComponent(subId)}`
+    : TRAVELPAYOUTS_REFERRAL_URL;
+}
 
 export const AIRHELP_PROMO = {
   code: "AHTPO11",
@@ -584,22 +615,16 @@ export function PartnerLinkButton({
 }) {
   const resolvedHref = resolvePartnerUrl(href);
 
+  // Development-only console trace. The dataLayer push that used to live here was
+  // REMOVED on 2026-10-24: the delegated listener in src/utils/analytics.ts
+  // (capture phase, document-level) already reports this exact click, so every
+  // button press produced TWO `affiliate_partner_click` events - one with
+  // `partner_label`/`partner_url` from here and one with `link_text`/
+  // `outbound_url` from there. Two events, different key names, at most one
+  // populated value per event. There is now one producer and one key name.
   const handleClick = () => {
-    // 1. Log analytics tracking event to console (development only — never ships to production)
     if (import.meta.env.DEV) {
       console.log(`[Affiliate Partner Click] Label: "${label}" | URL: ${resolvedHref} | Timestamp: ${new Date().toISOString()}`);
-    }
-
-    // 2. Push event to standard web dataLayer if present
-    if (typeof window !== "undefined") {
-      const dataLayer = (window as any).dataLayer || [];
-      dataLayer.push({
-        event: "affiliate_partner_click",
-        partner_label: label,
-        partner_url: resolvedHref,
-        timestamp: new Date().toISOString()
-      });
-      (window as any).dataLayer = dataLayer;
     }
   };
 
@@ -1069,51 +1094,7 @@ export const TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS: Record<string, Travelpayout
     disclosureBn:
       "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে আপনি যদি আয় করা শুরু করেন, তাহলে Travelpayouts আমাকে একটি মাইলফলক বোনাস দেয়় - আপনার কোনো অতিরিক্ত খরচ ছাড়াই।",
   },
-  "chefchaouen-morocco-travel-guide-bangladesh": {
-    badgeEn: "✈️ FOR TRAVEL CREATORS & BLOGGERS",
-    badgeBn: "✈️ ট্রাভেল ক্রিয়েটর ও ব্লগারদের জন্য",
-    headlineEn: "Building a Travel Blog, Channel, or Destination Site of Your Own?",
-    headlineBn: "নিজের ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেসটিনেশন সাইট গড়়ছেন?",
-    bodyBeforeAnchorEn:
-      "A note for readers who publish travel content too: managing a dozen separate affiliate dashboards used to eat hours of my week. This site now runs its flight, hotel and activity partnerships through Travelpayouts - one dashboard, one payout. If you are building a travel blog, YouTube channel or destination website, you can ",
-    anchorTextEn: "explore Travelpayouts and its creator tools here",
-    bodyAfterAnchorEn:
-      " - it is the platform I recommend for creators who want to monetize travel content transparently. New partners can earn up to $100 in welcome bonuses, and rewards unlock as your content actually earns: a long-term income stream, not quick cash.",
-    bodyBeforeAnchorBn:
-      "যারা নিজেরারাও ট্রাভেল কন্টেন্ট প্রকাশ করেন তাদের জন্য একটি নোট: আলাদা আলাদা অ্যাফিলিয়েট ড্যাশবোর্ড সামলানো আগে সপ্তাহে ঘণ্টার পর ঘণ্টা নিয়ে যেত। এখন এই সাইটের ফ্লাইট, হোটেল ও অ্যাক্টিভিটি পার্টনরশিপ চলে Travelpayouts-এর একটিমাত্র ড্যাশবোর্ড থেকে। আপনি যদি ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেসটিনেশন ওয়েবসাইট গড়়েন, তাহলে ",
-    anchorTextBn: "এখান থেকে Travelpayouts ও এর ক্রিয়েটর টুলগুলো দেখে নিন",
-    bodyAfterAnchorBn:
-      " - ট্রাভেল কন্টেন্ট দিয়ে স্বচ্ছভাবে আয় করতে চাওয়া ক্রিয়েটরদের জন্য আমি যে প্ল্যাটফর্মটি সুপারিশ করি, সেটিই এটি। নতুন পার্টনাররা স্বাগতম বোনাসে $100 পর্যন্ত পেতে পারেন; তবে পুরস্কার আনলক হয়় আপনার কন্টেন্ট সত্যিই আয় করার পর - এটি দ্রুত টাকার নয়়, দীর্ঘমেয়়াদি আয়ের একটি পথ।",
-    buttonLabelEn: "Explore Travelpayouts for Creators",
-    buttonLabelBn: "ক্রিয়েটরদের জন্য Travelpayouts দেখুন",
-    disclosureEn:
-      "Transparency: this is my referral link. If you join through it and start earning, Travelpayouts pays me a milestone bonus at no extra cost to you.",
-    disclosureBn:
-      "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে আপনি যদি আয় করা শুরু করেন, তাহলে Travelpayouts আমাকে একটি মাইলফলক বোনাস দেয়় - আপনার কোনো অতিরিক্ত খরচ ছাড়াই।",
-  },
   "travel-creator-resources": {
-    badgeEn: "✈️ FOR TRAVEL CREATORS & BLOGGERS",
-    badgeBn: "✈️ ট্রাভেল ক্রিয়েটর ও ব্লগারদের জন্য",
-    headlineEn: "Building a Travel Blog, Channel, or Destination Site of Your Own?",
-    headlineBn: "নিজের ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেস্টিনেশন সাইট গড়ছেন?",
-    bodyBeforeAnchorEn:
-      "A note for readers who publish travel content too: managing a dozen separate affiliate dashboards used to eat hours of my week. This site now runs its flight, hotel and activity partnerships through Travelpayouts - one dashboard, one payout. If you are building a travel blog, YouTube channel or destination website, you can ",
-    anchorTextEn: "explore Travelpayouts and its creator tools here",
-    bodyAfterAnchorEn:
-      " - it is the platform I recommend for creators who want to monetize travel content transparently. New partners can earn up to $100 in welcome bonuses, and rewards unlock as your content actually earns: a long-term income stream, not quick cash.",
-    bodyBeforeAnchorBn:
-      "যারা নিজেরাও ট্রাভেল কন্টেন্ট প্রকাশ করেন তাদের জন্য একটি নোট: আলাদা আলাদা অ্যাফিলিয়েট ড্যাশবোর্ড সামলানো আগে সপ্তাহে ঘণ্টার পর ঘণ্টা নিয়ে যেত। এখন এই সাইটের ফ্লাইট, হোটেল ও অ্যাক্টিভিটি পার্টনারশিপ চলে Travelpayouts-এর একটিমাত্র ড্যাশবোর্ড থেকে। আপনি যদি ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেস্টিনেশন ওয়েবসাইট গড়েন, তাহলে ",
-    anchorTextBn: "এখান থেকে Travelpayouts ও এর ক্রিয়েটর টুলগুলো দেখে নিন",
-    bodyAfterAnchorBn:
-      " - ট্রাভেল কন্টেন্ট দিয়ে স্বচ্ছভাবে আয় করতে চাওয়া ক্রিয়েটরদের জন্য আমি যে প্ল্যাটফর্মটি সুপারিশ করি, সেটিই এটি। নতুন পার্টনাররা স্বাগতম বোনাসে $100 পর্যন্ত পেতে পারেন; তবে পুরস্কার আনলক হয় আপনার কন্টেন্ট সত্যিই আয় করার পর - এটি দ্রুত টাকার নয়, দীর্ঘমেয়াদি আয়ের একটি পথ।",
-    buttonLabelEn: "Explore Travelpayouts for Creators",
-    buttonLabelBn: "ক্রিয়েটরদের জন্য Travelpayouts দেখুন",
-    disclosureEn:
-      "Transparency: this is my referral link. If you join through it and start earning, Travelpayouts pays me a milestone bonus at no extra cost to you.",
-    disclosureBn:
-      "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে আপনি যদি আয় করা শুরু করেন, তাহলে Travelpayouts আমাকে একটি মাইলফলক বোনাস দেয় - আপনার কোনো অতিরিক্ত খরচ ছাড়াই।",
-  },
-  "havana-cuba-travel-guide-bangladesh": {
     badgeEn: "✈️ FOR TRAVEL CREATORS & BLOGGERS",
     badgeBn: "✈️ ট্রাভেল ক্রিয়েটর ও ব্লগারদের জন্য",
     headlineEn: "Building a Travel Blog, Channel, or Destination Site of Your Own?",
@@ -1148,7 +1129,7 @@ export function TravelpayoutsReferralCallout({
   if (!placement) return null;
 
   const isBn = lang === "bn";
-  const href = TRAVELPAYOUTS_REFERRAL_URL;
+  const href = buildTravelpayoutsReferralUrl(slug);
 
   return (
     <aside

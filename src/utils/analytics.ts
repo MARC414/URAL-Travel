@@ -44,9 +44,47 @@ export function trackPageView(pagePath: string, pageTitle: string, canonicalUrl:
   }
 }
 
+/**
+ * Is this a Travelpayouts CREATOR-REFERRAL link rather than a booking tool?
+ *
+ * WHY THIS EXISTS
+ * ---------------
+ * `https://www.travelpayouts.com/?marker=675992` is the referral program link: it
+ * invites another publisher to sign up to the network. It is NOT a flight, hotel
+ * or activity booking link, so counting it as an `affiliate_partner_click` mixes
+ * "a reader booked a trip" with "another blogger joined the platform" in the same
+ * GA4 metric (and in the `partner_name` dimension).
+ *
+ * The discriminator is the HOST, not the marker: booking tools live on
+ * `*.tpo.li`, `tp.media`, `tpemd.com` and the brands' own domains, while every
+ * referral surface is on `travelpayouts.com` itself (docs, brands directory,
+ * program landing pages) plus `?marker=` for attribution.
+ */
+export function isTravelpayoutsReferralUrl(url: string): boolean {
+  if (!url) return false;
+  try {
+    const parsed = new URL(url, "https://uraltravel.co.uk");
+    const host = parsed.hostname.toLowerCase();
+    const isPlatformHost = host === "travelpayouts.com" || host.endsWith(".travelpayouts.com");
+    return isPlatformHost && parsed.searchParams.has("marker");
+  } catch {
+    return false;
+  }
+}
+
+/** `sub_id` on an outbound URL, so referral signups can be traced to a placement. */
+export function readReferralSubId(url: string): string {
+  try {
+    return new URL(url, "https://uraltravel.co.uk").searchParams.get("sub_id") || "";
+  } catch {
+    return "";
+  }
+}
+
 /** Known partner identification from URL */
 export function identifyPartnerFromUrl(url: string): string {
   const lower = url.toLowerCase();
+  if (isTravelpayoutsReferralUrl(url)) return "Travelpayouts (creator referral)";
   if (lower.includes("aviasales") || lower.includes("tpembd.com")) {
     return "Aviasales";
   }
@@ -126,7 +164,7 @@ export function initGlobalClickTracking(): () => void {
     // 1. WhatsApp link detection
     if (href.includes("wa.me/") || href.includes("api.whatsapp.com") || href.includes("whatsapp://")) {
       pushDataLayerEvent("whatsapp_click", {
-        link_text: text || "WhatsApp Button",
+        link_label: text || "WhatsApp Button",
         outbound_url: href,
         page_path: window.location.pathname,
       });
@@ -153,13 +191,34 @@ export function initGlobalClickTracking(): () => void {
       href.includes("welcomepickups") ||
       href.includes("travelpayouts-wl.html");
 
+    // 3. Travelpayouts CREATOR REFERRAL - checked BEFORE the affiliate branch,
+    //    because these links are also `rel="sponsored"` and also contain the
+    //    substring "travelpayouts". Counting them as affiliate clicks would
+    //    report "another publisher signed up" as "a reader booked a flight".
+    //    `referral_sub_id` identifies the placement (creator_hub, post_havana...).
+    if (isTravelpayoutsReferralUrl(href)) {
+      pushDataLayerEvent("travelpayouts_referral_click", {
+        partner_name: "Travelpayouts (creator referral)",
+        link_label: text || "Travelpayouts referral",
+        outbound_url: href,
+        referral_sub_id: readReferralSubId(href) || "untagged",
+        page_path: window.location.pathname,
+      });
+      return;
+    }
+
     const isSponsored = rel.includes("sponsored");
 
     if (isAffiliateDomain || isSponsored) {
       const partner = identifyPartnerFromUrl(href);
+      // ONE label key for every outbound click event: `link_label`.
+      // `link_text` / `partner_label` used to be pushed for this same event from
+      // two other places, so a single click produced two events with different
+      // key names and at most one populated value. See verify-build's
+      // "one label key" guard.
       pushDataLayerEvent("affiliate_partner_click", {
         partner_name: partner,
-        link_text: text || partner,
+        link_label: text || partner,
         outbound_url: href,
         page_path: window.location.pathname,
       });

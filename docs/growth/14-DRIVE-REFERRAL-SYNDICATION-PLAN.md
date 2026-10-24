@@ -4,7 +4,8 @@
 programs, run the Travelpayouts **referral** program, and syndicate articles to **Medium, Substack
 and Reddit** without losing the SEO the migration just protected.
 
-**Read with:** `13-POST-MIGRATION-STATUS-AUDIT-2026-10-24.md` (why the ids matter),
+**Read with:** `15-SITE-FREEZE-AND-DEFERRED-BACKLOG.md` (**the queue of record since 2026-10-24** —
+Parts 2 and 3 below are deferred behind `S0`/`S6`), `13-POST-MIGRATION-STATUS-AUDIT-2026-10-24.md` (why the ids matter),
 `12-POST-MIGRATION-ROADMAP.md` (the watch-window rules), `07-backlinks-free.md` (link acquisition),
 `CONTENT-QUEUE.md` (what to write next).
 
@@ -187,7 +188,25 @@ auditable without holding personal data.
 **When to stop:** if 10 real conversations produce 0 signups, the offer is wrong, not the volume.
 Rewrite the hub page before sending an 11th message.
 
-### 3.5 Cadence and expectations
+### 3.5 What was fixed in code on 2026-10-24
+
+| Problem | Fix |
+| --- | --- |
+| Referral clicks were counted as `affiliate_partner_click` | New `travelpayouts_referral_click` event with `referral_sub_id`; detected by host (`travelpayouts.com` + `?marker=`), checked *before* the affiliate branch because referral links are also `rel="sponsored"` |
+| One click produced two events with three different label keys (`link_label`, `link_text`, `partner_label`) | `PartnerLinkButton`'s duplicate push removed; `link_label` is the single key for every outbound event |
+| All four placements shared one untagged URL | `buildTravelpayoutsReferralUrl(slug)` appends `&sub_id=` (`creator_hub`, `post_bangkok_food`), used by both the React callout and `scripts/prerender.ts` |
+| A creator pitch sat inside two city guides | Removed from `havana-cuba-travel-guide-bangladesh` and `chefchaouen-morocco-travel-guide-bangladesh`; their SubIDs stay reserved so history is never reused |
+
+Where it stands: **2 live placements** (`/blog/travel-creator-resources` and
+`/blog/halal-food-guide-bangkok-bangladesh`, EN + BN each). Coverage is deliberately narrow — a
+"start your own travel blog" block only belongs on pages a publisher would plausibly read. Grow it
+by writing creator-facing content, not by pasting the block into trip guides.
+
+Reading the numbers afterwards: Travelpayouts → *Reports → Referrals* shows the SubID a signup
+arrived with. In GA4, `travelpayouts_referral_click` is the **intent** signal and the Referrals
+report is the **outcome** — a high click count with no signups means the copy oversells the bonus.
+
+### 3.6 Cadence and expectations
 
 10 personal conversations/month beats 1,000 impressions. Realistic first-year outcome with this
 audience: **3–6 active referrals**, of which maybe one or two ever reach $500 → **$100–$400**.
