@@ -46,7 +46,7 @@ import {
 import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
 import { SCHEDULED_BLOG_ALT_TEXT } from "../src/data/scheduledBlogIndex.generated";
 import { BLOG_BODY } from "../src/data/blogContent";
-import { loadScheduledBlogPosts } from "./scheduledPosts";
+import { dhakaCalendarDate, loadScheduledBlogPosts } from "./scheduledPosts";
 import {
   BENGALI_BLOG_OVERRIDES,
   getLocalizedBlogs,
@@ -175,9 +175,17 @@ const cxbFeedOutputs = [
   read(path.join(DIST_DIR, "rss.xml")) ?? "",
   read(path.join(DIST_DIR, "index.html")) ?? "",
 ].join("\n");
+// The publish date is asserted to be a real past date, never a hardcoded
+// literal — pinning "2026-10-16" made this a time bomb (it lies the moment the
+// date moves and fails the moment anyone reschedules the frontmatter).
+const cxbPublishDateIsPast = (() => {
+  const value = cxbScheduled?.publishDate;
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  return value <= dhakaCalendarDate(new Date());
+})();
 const cxbIsScheduledAndPublished =
   cxbScheduled?.status === "scheduled" &&
-  cxbScheduled.publishDate === "2026-10-16" &&
+  cxbPublishDateIsPast &&
   cxbScheduled.englishBody.includes("no confirmed scheduled passenger service") &&
   cxbScheduled.bengaliBody.includes("নির্ধারিত যাত্রীবাহী ফ্লাইটের নিশ্চিত সময়সূচি পাওয়া যায়নি") &&
   BLOG_DATA.some((post) => post.slug === CXB_DRAFT_SLUG) &&
@@ -186,8 +194,27 @@ const cxbIsScheduledAndPublished =
 check(
   cxbIsScheduledAndPublished,
   cxbIsScheduledAndPublished
-    ? "the bilingual Cox’s Bazar guide is scheduled for today (2026-10-16) and included in production routes, sitemap, and RSS"
-    : "the Cox’s Bazar guide must be scheduled for today and present in production output",
+    ? "the bilingual Cox’s Bazar guide is scheduled, past its publish date, and present in production routes, sitemap and RSS"
+    : "the Cox’s Bazar guide must be scheduled, past its publish date, and present in production output",
+);
+
+// Guard the regression that was silently live for five days: a scheduled post
+// whose publish date has passed must reach production output. The nightly
+// checker (getPostsDueForPublishing) uses strict date equality, so without this
+// a missed day means a post is missed forever. Scoped to the overdue set only,
+// so genuinely future-dated drafts never trip it.
+const overdueScheduled = loadScheduledBlogPosts().filter((post) => {
+  if (post.status !== "scheduled" || !post.publishDate) return false;
+  return post.publishDate <= dhakaCalendarDate(new Date());
+});
+const overdueMissingFromOutput = overdueScheduled.filter(
+  (post) => !cxbFeedOutputs.includes(post.slug),
+);
+check(
+  overdueMissingFromOutput.length === 0,
+  overdueMissingFromOutput.length === 0
+    ? `every overdue scheduled post reaches production output (${overdueScheduled.length} checked)`
+    : `overdue scheduled posts missing from sitemap/RSS: ${overdueMissingFromOutput.map((p) => p.slug).join(", ")}`,
 );
 
 const blogImgDir = path.join(DIST_DIR, "img", "blog");

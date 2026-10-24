@@ -10,7 +10,12 @@ on:
       include_overdue:
         description: Include scheduled articles whose publish date has passed
         required: false
-        default: false
+        # Default true: the nightly job uses strict date equality, so a post the
+        # schedule missed on its own day is otherwise missed forever. The build
+        # itself (isPostIncludedInBuild) is time-based and always includes
+        # overdue posts; this input only gates whether the nightly *checker*
+        # notices them and fires the Cloudflare rebuild hook.
+        default: true
         type: boolean
 
 permissions:
