@@ -18,7 +18,7 @@ import {
 } from "../data/tiqetsAttractionsData";
 import { AFFILIATE_LINKS, AFFILIATE_OFFER_REGISTRY } from "./AffiliatePartners";
 import { generateFaqSchema } from "../utils/faqSchema";
-import { productOfferSchema, breadcrumbSchema } from "../utils/schema";
+import { breadcrumbSchema } from "../utils/schema";
 import { siteUrl } from "../utils/localeRoutes";
 import { Language as LangType } from "../translations";
 
@@ -109,16 +109,6 @@ export const AttractionDetailPage: React.FC<AttractionDetailPageProps> = ({
     name: `${attrName} — Frequently Asked Questions`,
   });
 
-  const productSchema = productOfferSchema({
-    url: attractionUrl,
-    idSuffix: `product-tiqets-${attractionId}`,
-    name: attrName,
-    description: `${attrName} — ${cityName}, ${countryName} attraction pass for Bangladeshi travelers.`,
-    sku: `tiqets-${attractionId}`,
-    brandName: "Tiqets",
-    priceBdt: attraction.priceBdt,
-  });
-
   // Pre-computed class names to avoid multi-line template literals in JSX
   const skipTheLineClass = attraction.skipTheLine
     ? "bg-emerald-50 text-emerald-700 border-emerald-100"
@@ -143,10 +133,6 @@ export const AttractionDetailPage: React.FC<AttractionDetailPageProps> = ({
       <>
         {typeof window !== "undefined" && (
           <>
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
-            />
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
