@@ -42,9 +42,14 @@ const affiliateExperimentPost = repoPosts.find(
 assert.ok(affiliateExperimentPost, "the new travel affiliate experiment should be retained in content/blog");
 assert.equal(affiliateExperimentPost.status, "scheduled");
 assert.equal(affiliateExperimentPost.publishDate, "2026-10-24");
-assert.ok(affiliateExperimentPost.englishBody.includes("my Travelpayouts referral link"));
+assert.ok(affiliateExperimentPost.englishBody.includes("join Travelpayouts through my referral link"));
 assert.ok(affiliateExperimentPost.englishBody.includes("The Fabryk's published Travelpayouts report"));
 assert.ok(affiliateExperimentPost.bengaliBody.includes("এখনো জানি না"));
+assert.ok((affiliateExperimentPost.englishBody.match(/^## /gm) ?? []).length >= 14);
+assert.ok((affiliateExperimentPost.bengaliBody.match(/^## /gm) ?? []).length >= 14);
+assert.ok(affiliateExperimentPost.englishBody.includes("## What Is Travel Affiliate Marketing?"));
+assert.ok(affiliateExperimentPost.bengaliBody.includes("## ট্রাভেল অ্যাফিলিয়েট মার্কেটিং কী?"));
+assert.ok(affiliateExperimentPost.englishBody.includes("https://www.travelpayouts.com/?marker=675992&sub_id=post_ural_experiment"));
 
 const coxsBazarPost = repoPosts.find(
   (post) => post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking",
