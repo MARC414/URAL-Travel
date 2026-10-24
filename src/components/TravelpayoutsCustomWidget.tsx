@@ -25,8 +25,19 @@ interface TravelpayoutsCustomWidgetProps {
   lang?: "en" | "bn";
 }
 
+// ---------------------------------------------------------------------------
+// Travelpayouts ids (2026-10-24)
+//
+// `marker` / `shmarker` is the ACCOUNT-level partner id — it survived the domain
+// move and must not be regenerated.
+// `trs` is the PROJECT id. It used to be 540277, which was the project deleted
+// during the uraltravel.co.uk migration; the replacement project is 589561 (the
+// same number that base64-encodes to the Drive filename NTg5NTYx.js). Every
+// hard-coded Travelpayouts URL in this repo now carries 589561 — if a new
+// project is ever created again, grep for this constant first.
+// ---------------------------------------------------------------------------
 const MARKER_ID = "675992";
-const TRS_ID = "540277";
+const TRS_ID = "589561";
 
 const CURRENCY_OPTIONS = {
   BDT: { code: "BDT", symbol: "৳", label: "৳ BDT", rateFromBdt: 1 },

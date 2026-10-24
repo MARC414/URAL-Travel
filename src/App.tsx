@@ -2647,7 +2647,14 @@ export default function App() {
   const routeViewContext: Record<string, any> = { AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedDestinations: DESTINATIONS_DATA, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
 
   return (
-    <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-brand-gold selection:text-brand-navy overflow-x-hidden">
+    // `overflow-x-clip`, not `overflow-x-hidden`: the full-bleed (100vw) heroes
+    // eventually poke a few pixels past the right edge (100vw includes the
+    // classic scrollbar) and this box has to cut that. But `hidden` turns this
+    // element into a SCROLL CONTAINER (visible + hidden computes to auto), and a
+    // scroll container that never scrolls silently kills `position: sticky` on
+    // #sticky-site-header below it. `clip` cuts the overflow without creating a
+    // scrollport, so the header keeps sticking.
+    <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-brand-gold selection:text-brand-navy overflow-x-clip">
 
       {/* Reading progress bar — shown only on blog post pages */}
       {section === "blog" && !isLanding && (

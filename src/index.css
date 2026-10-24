@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* === FULL-BLEED HEROES: NO HORIZONTAL SCROLLBAR === */
+/*
+ * The edge-to-edge heroes (/umrah, /banking, /blog) use the classic escape from a
+ * constrained <main>: `w-screen relative left-1/2 -translate-x-1/2`. That works,
+ * except that `100vw` is the viewport INCLUDING the classic scrollbar, while the
+ * centred `<main>` is laid out in the content box (viewport MINUS scrollbar).
+ * The hero therefore ends ~7-8px past the right edge on every scrollbar desktop,
+ * which produces a horizontal scrollbar and a page that can be dragged sideways.
+ *
+ * `clip` rather than `hidden` on purpose: `overflow-x: hidden` on html/body makes
+ * the element a scroll container and breaks the sticky site header. `clip` cuts
+ * the overflow without creating one, so `position: sticky` keeps working.
+ * Baseline browsers only (Chrome 90+, Firefox 81+, Safari 16+); older engines
+ * simply ignore it and fall back to the current behaviour.
+ */
+html {
+  overflow-x: clip;
+}
+
 /* === ACCESSIBILITY: SKIP LINK === */
 /* Shown only on keyboard focus; visually hidden until then */
 .skip-link {
