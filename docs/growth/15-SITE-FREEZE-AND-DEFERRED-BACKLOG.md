@@ -142,6 +142,11 @@ current decision is explicitly refusing — and it is the correct thing to refus
 Sequencing lives in `14` Part 4 (Medium / Substack / Reddit) and Part 3 (referral). The parts
 that matter here:
 
+> **Executed plan (24 October 2026):** [`16-21-DAY-SOCIAL-MEDIA-PLAN.md`](16-21-DAY-SOCIAL-MEDIA-PLAN.md)
+> is the day-by-day calendar for this phase. Its locked decisions supersede the recommendation in
+> point 1 below: **all surfaces are kept** (EN/BN alternating), Reddit proceeds on the 10:1
+> groundwork, and Substack is tested with its first 3 issues before continuing.
+
 1. **Pick two surfaces, not five.** Recommended: **Reddit answers** (zero cost, real intent,
    the only surface that can produce a first click this week) + **Medium imports** (canonical-safe,
    search-visible within weeks). Add Substack only if you will actually email monthly.
@@ -180,6 +185,7 @@ redesign, a new Tailwind/React version, boredom, or "it has been a month".
 > Its traffic problem is a **distribution** problem, not a technical one, and the owner is
 > working on social instead. Do not propose CWV work, hero batches, new clusters, template
 > refactors or extra GA4 tagging unless §6's trigger has fired. `docs/growth/15` is the queue;
-> `12`, `13` and `14` remain valid but are **not** active. Never touch the 301 rows, the GSC TXT
+> `12`, `13` and `14` remain valid but are **not** active; `docs/growth/16-21-DAY-SOCIAL-MEDIA-PLAN.md`
+> is the active day-by-day distribution plan. Never touch the 301 rows, the GSC TXT
 > record, or the `marker=675992` / `trs=589561` pair. If you think something here is wrong, read
 > §2 first: a GSC dip and a Travelpayouts config gap look similar and are treated oppositely.
