@@ -95,6 +95,7 @@ The numbered files above are the technical growth playbook. Use these separate d
 - [METHOD-NOTES.md](METHOD-NOTES.md) — primary-source research and the URAL adaptation of Koray Gübür and Nathan Gotch methods.
 - [CONTENT-SYSTEM-V2.md](CONTENT-SYSTEM-V2.md) — 16 Oct 2026 upgrade: visual semantics/centerpiece rule, component-spec briefs, QD-Page/Heading/Section decisions, topical coverage-gap method, dual-modality sentence rules, and the tactics explicitly not adopted.
 - [10-CONTENT-UPGRADE-STANDARD.md](10-CONTENT-UPGRADE-STANDARD.md) — the normative per-article acceptance contract: field locations, internal-linking minimums, affiliate relevance, sources and external links, voice, build proof, and the measured debt register.
+- [19-S4-UK-DIASPORA-DRAFTS-PLAN.md](19-S4-UK-DIASPORA-DRAFTS-PLAN.md) — the S4 audience-test cluster fully briefed (6 URLs: Umrah from LHR/MAN, UK↔DAC, UK visa logistics, GBP budgets, halal city guide, one data-named reserve slot); drafting can start anytime, scheduling stays gated behind its trigger.
 
 > ### ⏸ SITE FROZEN — 24 October 2026
 >

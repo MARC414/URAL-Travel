@@ -1177,3 +1177,12 @@ Two bundle notes from this pass, both measured in `dist/`:
   the node is added when the data lands; `dist/banking.html` still ships the static FAQPage node from the prerenderer.
 - The homepage eager-JS budget was raised 200 → **205 KB** the same day: `origin/main` measured 199.9 KB after the
   Umrah wave, so a new route's own eager code could not fit. See `06-core-web-vitals.md` for the measurement history.
+
+---
+
+## Wave S4 — UK/diaspora drafts staged (25 October 2026; scheduling HELD until trigger)
+
+| Added / checked | Verdict | Planned URLs | Primary query / audience / job | Intent evidence | Next gate |
+|---|---|---|---|---|---|
+| 2026-10-25 | **HELD** — six briefs in [`19-S4-UK-DIASPORA-DRAFTS-PLAN.md`](19-S4-UK-DIASPORA-DRAFTS-PLAN.md); drafting only, no scheduling | 6× `/blog/<slug>` (Umrah from LHR/MAN; UK→DAC fares; UK visa logistics; GBP budget templates; halal London guide; one reserve slot named by data) | **UK-based Bangladeshis with cards (GBP)** — the `12` §P6 arbitrage cluster; readers carry card-ready checkout the BD audience lacks | `15` §4 S4 trigger: ≥100 non-Google sessions/month **or** GSC shows UK impressions; S2 disclosure ships before/with the first UK-audience month | S1 GA4 runbook first for attribution; then per-brief six-gate drafting (`10`); NO scheduling until the trigger fires — extending the social window instead is the documented fallback (`16` §13). |
+
