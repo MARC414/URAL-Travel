@@ -74,6 +74,7 @@ import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
 import { TOOL_PAGE_SEO, TOOL_SLUGS } from "../src/utils/toolRoutes";
 import { buildResponsiveSrcSet, getResponsiveImageDimensions } from "../src/utils/imageAssets";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
+import { sortBlogsNewestFirst } from "../src/utils/blogOrdering";
 import { TIQETS_TOP_ATTRACTIONS, TIQETS_CITY_STACKS } from "../src/data/tiqetsAttractionsData";
 import {
   CONTENT_UPDATED,
@@ -2453,7 +2454,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         name: blogHubTitle,
         description: blogHubDesc,
         includeNumberOfItems: false,
-        items: BLOG_DATA.map((p) => ({
+        items: sortBlogsNewestFirst(BLOG_DATA).map((p) => ({
           name: p.title,
           url: `${BASE_URL}/blog/${p.slug}`,
           description: p.summary,
@@ -2465,7 +2466,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         <h1>${escapeHtml(blogHubTitle)}</h1>
         <p>${escapeHtml(blogHubDesc)}</p>
         <ul>
-          ${BLOG_DATA.map(
+          ${sortBlogsNewestFirst(BLOG_DATA).map(
             (p) =>
               `<li><a href="/blog/${p.slug}">${escapeHtml(p.title)}</a> — ${escapeHtml(p.summary)}</li>`
           ).join("\n")}
@@ -2924,7 +2925,7 @@ function buildBengaliBody(
     ids.map((value) => `${prefix}/${value}`);
 
   if (group === "blog" && !id) {
-    const postPaths = BLOG_SLUGS.map((slug) => `/blog/${slug}`);
+    const postPaths = sortBlogsNewestFirst(BLOG_DATA).map((post) => `/blog/${post.slug}`);
     const directory = bnDirectory(
       "সব বাংলা ট্রাভেল গাইড",
       postPaths
@@ -3891,7 +3892,7 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           description: copy.description,
           inLanguage: "bn-BD",
           includeNumberOfItems: false,
-          items: getLocalizedBlogs("bn").map((p) => ({
+          items: sortBlogsNewestFirst(getLocalizedBlogs("bn"), BLOG_DATA).map((p) => ({
             name: p.title,
             url: siteUrl(`/blog/${p.slug}`, "bn"),
             description: p.summary,
