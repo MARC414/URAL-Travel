@@ -64,6 +64,7 @@ import {
 import { COMMONLY_MISREAD } from "../src/data/visaFreeData";
 import { LANDING_DESTINATION_FAQS, LANDING_VISA_FAQS } from "../src/utils/faqSchema";
 import { collectionPageSchema } from "../src/utils/schema";
+import { blogPublicationTimestamp, sortBlogsNewestFirst } from "../src/utils/blogOrdering";
 import { BANKING_CLUSTER_NODES } from "../src/data/bankingHubData";
 import { BANKING_HUB_FAQS } from "../src/data/bankingHubFaqs";
 import { HOME_FAQS } from "../src/data/homeFaqs";
@@ -3250,9 +3251,59 @@ check(
     : "blog CollectionPage should list every guide and omit numberOfItems"
 );
 
+const bnBlogHubHtml = read(path.join(DIST_DIR, "bn", "blog.html")) ?? "";
+const publicationDateParsingWorks =
+  blogPublicationTimestamp("October 25, 2026") === Date.UTC(2026, 9, 25) &&
+  blogPublicationTimestamp("২৬ সেপ্টেম্বর, ২০২৬") === Date.UTC(2026, 8, 26) &&
+  blogPublicationTimestamp("not a publication date") === Number.NEGATIVE_INFINITY;
+check(
+  publicationDateParsingWorks,
+  publicationDateParsingWorks
+    ? "publication-date parser recognizes English and Bengali display dates and rejects unknown formats"
+    : "publication-date parser must recognize English and Bengali display dates and reject unknown formats"
+);
+const newestFirstBlogs = sortBlogsNewestFirst(BLOG_DATA);
+const newestFirstBengaliBlogs = sortBlogsNewestFirst(getLocalizedBlogs("bn"), BLOG_DATA);
+const expectedNewestFirstSlugs = newestFirstBlogs.map((post) => post.slug);
+const expectedBengaliNewestFirstSlugs = newestFirstBengaliBlogs.map((post) => post.slug);
+const publishedDatesAreValidAndDescending = newestFirstBlogs.every((post, index, posts) => {
+  const timestamp = blogPublicationTimestamp(post.date);
+  const nextTimestamp = posts[index + 1]
+    ? blogPublicationTimestamp(posts[index + 1].date)
+    : Number.NEGATIVE_INFINITY;
+  return Number.isFinite(timestamp) && timestamp >= nextTimestamp;
+});
+const localeBlogOrderingMatches =
+  expectedNewestFirstSlugs.length === BLOG_DATA.length &&
+  expectedNewestFirstSlugs.every((slug, index) => expectedBengaliNewestFirstSlugs[index] === slug);
+const schemaNewestFirstSlugs = Array.isArray(blogHubItems)
+  ? (blogHubItems as Record<string, unknown>[]).map((item) =>
+      typeof item.url === "string" ? item.url.split("/").filter(Boolean).at(-1) : ""
+    )
+  : [];
+const englishBlogDirectoryHtml = blogHubHtml.match(/<article>[\s\S]*?<\/article>/)?.[0] ?? "";
+const englishVisibleNewestFirstSlugs = [
+  ...englishBlogDirectoryHtml.matchAll(/<a\b[^>]*href="\/blog\/([^"/?#]+)"/g),
+].map((match) => match[1]);
+const bengaliBlogDirectoryHtml = bnBlogHubHtml.match(/<article>[\s\S]*?<\/article>/)?.[0] ?? "";
+const bengaliVisibleNewestFirstSlugs = [
+  ...bengaliBlogDirectoryHtml.matchAll(/<a\b[^>]*href="\/bn\/blog\/([^"/?#]+)"/g),
+].map((match) => match[1]);
+const newestFirstDirectoryIsCorrect =
+  publishedDatesAreValidAndDescending &&
+  localeBlogOrderingMatches &&
+  schemaNewestFirstSlugs.join("|") === expectedNewestFirstSlugs.join("|") &&
+  englishVisibleNewestFirstSlugs.slice(0, BLOG_DATA.length).join("|") === expectedNewestFirstSlugs.join("|") &&
+  bengaliVisibleNewestFirstSlugs.slice(0, BLOG_DATA.length).join("|") === expectedNewestFirstSlugs.join("|");
+check(
+  newestFirstDirectoryIsCorrect,
+  newestFirstDirectoryIsCorrect
+    ? "English and Bengali blog directories and CollectionPage list every article newest-to-oldest by publication date"
+    : "blog directories/CollectionPage must list valid publication dates in matching newest-to-oldest order across both locales"
+);
+
 // Crawlability is separate from sitemap coverage: a detail page must also be
 // reachable through ordinary anchors from the Bengali blog hub.
-const bnBlogHubHtml = read(path.join(DIST_DIR, "bn", "blog.html")) ?? "";
 function bengaliBlogHubTargets(html: string): Set<string> {
   return new Set(
     [...html.matchAll(/href="(\/bn\/blog\/[^"/?#]+)"/g)].map((match) => match[1])

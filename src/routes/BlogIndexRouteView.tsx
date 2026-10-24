@@ -7,6 +7,7 @@ import { ResponsiveImage } from "../components/ResponsiveImage";
 import { TravelIntelligence } from "../components/AeoInspector";
 
 import { generateBlogCoverAltText } from "../utils/imageAssets";
+import { sortBlogsNewestFirst } from "../utils/blogOrdering";
 
 
 
@@ -26,7 +27,7 @@ function formatPageNumber(num: number, isBn: boolean): string {
 
 export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
-  const { TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, getBlogAeoSnippet50Words, getBlogCoverImage, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, section, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery } = context;
+  const { BLOG_DATA = [], TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, getBlogAeoSnippet50Words, getBlogCoverImage, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, section, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery } = context;
 
   const [currentPage, setCurrentPage] = React.useState(1);
 
@@ -318,15 +319,7 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
             {(() => {
 
-              const orderedBlogs = [
-
-                ...localizedBlogs.filter((b) => b.category === "Hajj & Umrah"),
-
-                ...localizedBlogs.filter((b) => b.category === "Ziyarah & Stopovers"),
-
-                ...localizedBlogs.filter((b) => b.category !== "Hajj & Umrah" && b.category !== "Ziyarah & Stopovers"),
-
-              ];
+              const orderedBlogs = sortBlogsNewestFirst(localizedBlogs, BLOG_DATA);
 
 
 
