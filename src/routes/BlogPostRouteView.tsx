@@ -695,7 +695,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                   let index = 0;
                   while ((match = pattern.exec(text)) !== null) {
                     if (match.index > cursor) nodes.push(injectContextualInternalLink(text.slice(cursor, match.index), `${keyPrefix}-before-${index}`));
-                    nodes.push(<a key={`${keyPrefix}-link-${index}`} href={match[2]} target="_blank" rel="noopener noreferrer" className="text-brand-navy font-semibold underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-brand-emerald transition-colors">{match[1]}</a>);
+                    nodes.push(<a key={`${keyPrefix}-link-${index}`} href={match[2]} target="_blank" rel={match[2].includes("marker=675992") ? "sponsored noopener noreferrer" : "noopener noreferrer"} className="text-brand-navy font-semibold underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-brand-emerald transition-colors">{match[1]}</a>);
                     cursor = match.index + match[0].length;
                     index += 1;
                   }
@@ -1250,6 +1250,30 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                           }
 
 
+
+                          // Explicit Markdown headings preserve the author-defined outline.
+                          // H1 is the page title; article sections are H2 and nested topics are H3.
+                          if (/^##\s+/.test(trimmed) && trimmed.length < 200 && !trimmed.includes("\n")) {
+                            return (
+                              <h2
+                                key={bIdx}
+                                className="ural-section-title font-serif text-[22px] sm:text-[26px] font-bold text-brand-navy leading-[1.3] pt-5 pb-2 border-b border-slate-200"
+                              >
+                                {renderFormattedText(trimmed.replace(/^##\s+/, ""))}
+                              </h2>
+                            );
+                          }
+
+                          if (/^###\s+/.test(trimmed) && trimmed.length < 180 && !trimmed.includes("\n")) {
+                            return (
+                              <h3
+                                key={bIdx}
+                                className="ural-card-title font-serif text-[18px] sm:text-[21px] font-bold text-brand-navy leading-[1.35] pt-3"
+                              >
+                                {renderFormattedText(trimmed.replace(/^###\s+/, ""))}
+                              </h3>
+                            );
+                          }
 
                           // Major numbered section heading -> Semantic H2 (Dark #0B1426, 22px–26px)
 
