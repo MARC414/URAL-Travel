@@ -96,6 +96,20 @@ The numbered files above are the technical growth playbook. Use these separate d
 - [CONTENT-SYSTEM-V2.md](CONTENT-SYSTEM-V2.md) — 16 Oct 2026 upgrade: visual semantics/centerpiece rule, component-spec briefs, QD-Page/Heading/Section decisions, topical coverage-gap method, dual-modality sentence rules, and the tactics explicitly not adopted.
 - [10-CONTENT-UPGRADE-STANDARD.md](10-CONTENT-UPGRADE-STANDARD.md) — the normative per-article acceptance contract: field locations, internal-linking minimums, affiliate relevance, sources and external links, voice, build proof, and the measured debt register.
 
+> ### ⏸ SITE FROZEN — 24 October 2026
+>
+> On-site work stops at "technically correct + basic analytics"; effort moved to social
+> distribution. **[`15-SITE-FREEZE-AND-DEFERRED-BACKLOG.md`](15-SITE-FREEZE-AND-DEFERRED-BACKLOG.md)
+> is now the queue of record** — it sequences everything still open in files 12, 13 and 14 and
+> names the signal that re-opens each item. Read it before proposing any on-site work.
+>
+> Companion records from the migration:
+> [`12-POST-MIGRATION-ROADMAP.md`](12-POST-MIGRATION-ROADMAP.md) (phases),
+> [`13-POST-MIGRATION-STATUS-AUDIT-2026-10-24.md`](13-POST-MIGRATION-STATUS-AUDIT-2026-10-24.md)
+> (what is done vs open),
+> [`14-DRIVE-REFERRAL-SYNDICATION-PLAN.md`](14-DRIVE-REFERRAL-SYNDICATION-PLAN.md)
+> (Drive, program approvals, referral, syndication).
+
 > ### Which document wins on "what do we build next?" — 15 October 2026, amended 19 October 2026
 >
 > The **active cluster plan** does, with its row in [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md). Each topic keeps

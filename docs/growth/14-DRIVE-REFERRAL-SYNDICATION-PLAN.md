@@ -4,7 +4,8 @@
 programs, run the Travelpayouts **referral** program, and syndicate articles to **Medium, Substack
 and Reddit** without losing the SEO the migration just protected.
 
-**Read with:** `13-POST-MIGRATION-STATUS-AUDIT-2026-10-24.md` (why the ids matter),
+**Read with:** `15-SITE-FREEZE-AND-DEFERRED-BACKLOG.md` (**the queue of record since 2026-10-24** —
+Parts 2 and 3 below are deferred behind `S0`/`S6`), `13-POST-MIGRATION-STATUS-AUDIT-2026-10-24.md` (why the ids matter),
 `12-POST-MIGRATION-ROADMAP.md` (the watch-window rules), `07-backlinks-free.md` (link acquisition),
 `CONTENT-QUEUE.md` (what to write next).
 

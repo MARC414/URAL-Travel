@@ -8,6 +8,10 @@ the built `dist/`, and the guard suite — `npm run lint` ✅ · `npm run build`
 **Not verifiable from here:** anything console-side (Cloudflare, GSC, Bing, GA4/GTM, Resend,
 Travelpayouts dashboard). Those are marked *console* and must be confirmed by you, not by me.
 
+> **Superseded for sequencing (2026-10-24):** the owner froze on-site work and moved to social
+> distribution. This audit remains the record of *what is done vs open*; **`15-SITE-FREEZE-AND-DEFERRED-BACKLOG.md`
+> is now the order those open items come back in.** Nothing below is cancelled.
+>
 > **Headline:** the migration itself is finished and clean. The *monetisation* half is not — and
 > the Travelpayouts project swap you did this week is the one thing in this audit that can
 > silently cost money. See **§3, Finding F1**. Everything else is either cosmetic, deferred by the
