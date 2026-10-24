@@ -56,6 +56,7 @@ export const TRAVELPAYOUTS_REFERRAL_URL = "https://www.travelpayouts.com/?marker
  */
 export const TRAVELPAYOUTS_REFERRAL_SUB_IDS: Record<string, string> = {
   "travel-creator-resources": "creator_hub",
+  "can-you-make-money-travel-affiliate-marketing-ural-experiment": "post_ural_experiment",
   "halal-food-guide-bangkok-bangladesh": "post_bangkok_food",
   "chefchaouen-morocco-travel-guide-bangladesh": "post_chefchaouen", // reserved
   "havana-cuba-travel-guide-bangladesh": "post_havana", // reserved
