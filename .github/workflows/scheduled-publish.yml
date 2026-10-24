@@ -60,6 +60,9 @@ jobs:
           status="$(curl --silent --show-error --fail --output /dev/null --write-out '%{http_code}' --request POST "$CLOUDFLARE_PAGES_DEPLOY_HOOK")"
           echo "Cloudflare Pages accepted the scheduled rebuild (HTTP ${status})."
 
-      - name: No post is due today
+      - name: All due posts verified live — no rebuild
         if: steps.due.outputs.publish != 'true'
-        run: echo "No scheduled article is due in Dhaka today; Cloudflare was not triggered."
+        run: |
+          echo "No article requires a rebuild: nothing is due, or every due/overdue post is already live"
+          echo "on the production sitemap (checked=${{ steps.due.outputs.sitemap_checked }}, missing=${{ steps.due.outputs.missing_slugs }})."
+          echo "Cloudflare was not triggered."

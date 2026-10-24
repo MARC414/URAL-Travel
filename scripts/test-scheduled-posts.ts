@@ -117,3 +117,109 @@ for (const post of repoPosts) {
 }
 
 console.log("Scheduled blog parser, Dhaka 9 AM date gates, and current scheduled post all pass.");
+
+// --- Live-sitemap self-heal: rebuild only when a due/overdue post is actually missing ---
+
+import { resolvePublishPlan } from "./publishPlan";
+import { SITE_ORIGIN } from "../src/utils/localeRoutes";
+
+const selfHealNow = new Date("2026-10-24T04:00:00.000Z"); // 10:00 Dhaka on Oct 24
+const selfHealFixture = (slug: string, publishDate: string) =>
+  ({ slug, status: "scheduled", publishDate }) as Parameters<typeof resolvePublishPlan>[0][number];
+
+function sitemapFor(posts: { slug: string; present: boolean }[], outage = false) {
+  const attempts = { count: 0 };
+  const fetcher = async (): Promise<Set<string>> => {
+    attempts.count += 1;
+    if (outage) throw new Error("simulated live-site outage");
+    const entries = posts
+      .map(({ slug, present }) =>
+        present
+          ? [`<url><loc>${SITE_ORIGIN}/blog/${slug}</loc></url>`, `<url><loc>${SITE_ORIGIN}/bn/blog/${slug}</loc></url>`]
+          : [],
+      )
+      .flat()
+      .join("");
+    const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${entries}</urlset>`;
+    return new Set(Array.from(xml.matchAll(/<loc>([^<]+)<\/loc>/g)).map((match) => match[1]));
+  };
+  return { fetcher, attempts };
+}
+
+{
+  // Nothing due: no sitemap request at all, and no rebuild.
+  const { fetcher, attempts } = sitemapFor([]);
+  const plan = await resolvePublishPlan(
+    [selfHealFixture("future-post", "2026-11-01")],
+    selfHealNow,
+    true,
+    fetcher,
+  );
+  assert.equal(plan.publish, false, "nothing due means no rebuild");
+  assert.equal(attempts.count, 0, "no sitemap fetch when nothing is due");
+}
+
+{
+  // Overdue and still missing from the live sitemap → rebuild fires (catch-up).
+  const { fetcher, attempts } = sitemapFor([{ slug: "coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh", present: false }]);
+  const plan = await resolvePublishPlan(
+    [selfHealFixture("coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh", "2026-10-16")],
+    selfHealNow,
+    true,
+    fetcher,
+  );
+  assert.equal(plan.publish, true, "an overdue post missing from the live sitemap must request a rebuild");
+  assert.deepEqual(plan.missingFromLive, ["coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh"]);
+  assert.equal(plan.sitemapChecked, true);
+  assert.equal(attempts.count, 1);
+}
+
+{
+  // Overdue but already live in both locales → no rebuild, no repeat heartbeat.
+  const { fetcher, attempts } = sitemapFor([
+    { slug: "coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh", present: true },
+    { slug: "kathmandu-to-coxs-bazar-flights-route-status-booking", present: true },
+  ]);
+  const plan = await resolvePublishPlan(
+    [
+      selfHealFixture("coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh", "2026-10-16"),
+      selfHealFixture("kathmandu-to-coxs-bazar-flights-route-status-booking", "2026-10-16"),
+    ],
+    selfHealNow,
+    true,
+    fetcher,
+  );
+  assert.equal(plan.publish, false, "live posts must not trigger a nightly rebuild storm");
+  assert.equal(attempts.count, 1, "the sitemap was checked once and decided on its own");
+}
+
+{
+  // One EN/BN twin already live, the other missing → still counts as missing.
+  const fetcher = sitemapFor([{ slug: "coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh", present: false }]);
+  const plan = await resolvePublishPlan(
+    [selfHealFixture("coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh", "2026-10-16")],
+    selfHealNow,
+    true,
+    async () =>
+      new Set([
+        `${SITE_ORIGIN}/blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh`,
+      ]),
+  );
+  assert.equal(plan.publish, true, "half-published (EN live, BN missing) still requires the rebuild");
+}
+
+{
+  // Sitemap unreachable → fail safe to rebuild rather than silently skipping.
+  const plan = await resolvePublishPlan(
+    [selfHealFixture("kathmandu-to-coxs-bazar-flights-route-status-booking", "2026-10-16")],
+    selfHealNow,
+    true,
+    async () => {
+      throw new Error("simulated CDN outage");
+    },
+  );
+  assert.equal(plan.publish, true, "an unreadable sitemap may not veto publication");
+  assert.equal(plan.sitemapChecked, false);
+}
+
+console.log("Scheduled blog live-sitemap self-heal (check once, publish only the missing, no repeat rebuilds) all pass.");
