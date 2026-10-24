@@ -2349,9 +2349,17 @@ if (sitemap) {
     })
   );
 
-  // Google Search Console's verification file is a bare token page it fetches
-  // directly; it is neither a destination nor something we control the head of.
-  const EXEMPT = new Set(["/404", "/googlee50f8d327b90754c"]);
+  // Domain-verification token files are fetched directly by the search engine
+  // that issued them and are neither destinations nor pages whose <head> we get
+  // to design: Google Search Console's is a bare token line, Yandex Webmaster's
+  // is a fixed HTML stub. They stay out of the sitemap on purpose (a token page
+  // must never be advertised as content) and `_headers` sends them `noindex`,
+  // so they are governed — but this walk only reads <meta>, not headers, hence
+  // the exemption. Matched by NAME, not by an exact path, so adding the next
+  // engine's file cannot break the build.
+  const isVerificationFile = (route: string) =>
+    /^\/(?:google[0-9a-z]{8,}|yandex_[0-9a-z]+)$/.test(route);
+  const EXEMPT = new Set(["/404"]);
 
   const htmlPages: string[] = [];
   (function walk(dir: string) {
@@ -2377,7 +2385,7 @@ if (sitemap) {
   const ungoverned: string[] = [];
   for (const file of htmlPages) {
     const route = routeOf(file).replace(/\/$/, "") || "/";
-    if (EXEMPT.has(route)) continue;
+    if (EXEMPT.has(route) || isVerificationFile(route)) continue;
     if (sitemapPaths.has(route)) continue;
     if (isNoindex(fs.readFileSync(file, "utf8"))) continue;
     ungoverned.push(route);
@@ -2391,6 +2399,32 @@ if (sitemap) {
           `(add a robots noindex for shells, or a sitemap entry for destinations): ` +
           ungoverned.slice(0, 5).join(", ")
   );
+
+  // --- 3b.1 Domain-verification files survive the build ----------------------
+  //
+  // Yandex Webmaster (added 2026-10-24) re-checks the verification file
+  // periodically and drops verification if it 404s. That failure is silent, slow
+  // and only noticed when indexing stops, so the file is asserted here: the
+  // exact token, at the exact root path, in the built output.
+  {
+    const yandexToken = "5e14e2fad36afc5f";
+    const yandexHtml = read(path.join(DIST_DIR, `yandex_${yandexToken}.html`));
+    check(
+      yandexHtml !== null && yandexHtml.includes(`Verification: ${yandexToken}`),
+      yandexHtml === null
+        ? `Yandex verification file missing from dist/ (yandex_${yandexToken}.html) - public/ is copied to the site root, so the source file is the one to restore`
+        : "Yandex Webmaster verification file is served from the site root with its exact token"
+    );
+    check(
+      sitemap === null || !sitemap.includes(`yandex_${yandexToken}`),
+      "the Yandex verification file is deliberately absent from sitemap.xml"
+    );
+    const googleHtml = read(path.join(DIST_DIR, "googlee50f8d327b90754c.html"));
+    check(
+      googleHtml !== null && googleHtml.includes("google-site-verification:"),
+      "Google Search Console verification file still served from the site root"
+    );
+  }
 
   // Negative control: the guard must actually fail on an ungoverned page.
   const shellHtml = read(path.join(DIST_DIR, "travelpayouts-wl.html"));

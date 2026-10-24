@@ -116,6 +116,26 @@
 
 
 # ---------------------------------------------------------------------------
+# Domain-verification token pages (Google Search Console, Yandex Webmaster)
+# ---------------------------------------------------------------------------
+# These are fetched directly by the engine that issued them; the files must stay
+# byte-exact and must stay reachable. Two rules that look helpful and are not:
+#   - Do NOT Disallow them in robots.txt. Yandex in particular refuses to verify a
+#     URL its own crawler is told not to fetch, and Google treats a robots block
+#     as a verification failure too.
+#   - Do NOT remove them after verification succeeds. Both engines re-check
+#     periodically and silently drop the property when the file 404s; the site
+#     then stops being reportable with no error anywhere.
+# `noindex` is the right treatment: it keeps a token-only page out of the index
+# without blocking the fetch. Deliberately no long Cache-Control - a cached copy
+# at the edge is fine, but a stale one is a support ticket while debugging.
+/yandex_*.html
+  X-Robots-Tag: noindex
+
+/googlee50f8d327b90754c.html
+  X-Robots-Tag: noindex
+
+# ---------------------------------------------------------------------------
 # ⚠️  DO NOT add `X-Robots-Tag: noindex` for `ural-travel.pages.dev` OR `www.`
 # ---------------------------------------------------------------------------
 # Both `ural-travel.pages.dev` and `www.uraltravel.co.uk` 301-redirect to
