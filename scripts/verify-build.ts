@@ -116,14 +116,20 @@ const stripInlineEmphasisTags = (html: string) =>
 /**
  * Extract the inline affiliate loader from an HTML document.
  *
- * Anchored on `function loadEmerald` and then walked *backwards* to the nearest
+ * Anchored on `function loadDrive` (renamed from `loadEmerald` when the tag was
+ * re-installed from the new Travelpayouts project 589561) and then walked
+ * *backwards* to the nearest
  * `<script` tag: a forward-only regex starting at the first `<script>` in the
  * file would swallow every tag and comment in between (it has produced false
  * positives twice — once from a `crossorigin` mention in markup, once from the
  * word "preconnect" in a comment).
  */
 function extractAffiliateLoader(html: string): string {
-  const marker = html.indexOf("function loadEmerald");
+  // Tolerate both names so a future re-install cannot silently empty this
+  // extraction (an empty string used to fail the behavioural block, but with a
+  // misleading "misbehaves" message).
+  const driveMarker = html.indexOf("function loadDrive");
+  const marker = driveMarker !== -1 ? driveMarker : html.indexOf("function loadEmerald");
   if (marker === -1) return "";
   const open = html.lastIndexOf("<script", marker);
   const bodyStart = html.indexOf(">", open);
@@ -1336,8 +1342,11 @@ check(
 //       used to add is gone). A middleware that buffers HTML is also the thing
 //       that can strip a Content-Encoding or break 304 revalidation.
 //   (b) the shell loader injects the script only when marketing consent is
-//       granted - for every visitor, with no region escape hatch - while keeping
-//       the viewport laziness from Phase 3B.
+//       granted - for every visitor, with no region escape hatch - while staying
+//       off the LCP path (Phase 3B's rule: never in the critical path; the
+//       trigger moved from footer-intersection to an idle callback in 2026-10
+//       because Drive's whole job is rewriting links that a visitor may click
+//       before reaching the footer, so viewport-only meant it often never ran).
 // (b) is exercised for real below, with the loader's own source and a stub DOM.
 const middlewareRaw = read(path.join(ROOT_DIR, "functions", "_middleware.js")) ?? "";
 // Strip comments before scanning: the file explains *why* it no longer tags
@@ -1367,7 +1376,7 @@ const gatingChecks: Array<[string, RegExp]> = [
   ["no region escape hatch", /^(?!.*data-consent-region)(?!.*consent_region)[\s\S]*$/],
   ["checks the marketing category, not just the banner choice", /cookie-consent-settings[\s\S]{0,120}marketing/],
   ["reads the consent choice before loading", /localStorage\.getItem\('cookie-consent'\)/],
-  ["still defers to viewport intersection (Phase 3B)", /IntersectionObserver[\s\S]{0,200}rootMargin/],
+  ["still defers off the LCP path (idle callback with a ceiling)", /requestIdleCallback[\s\S]{0,80}timeout/],
   ["reacts to consent granted later", /ural:consent-updated/],
 ];
 const gateProblems = gatingChecks
@@ -1376,7 +1385,7 @@ const gateProblems = gatingChecks
 check(
   gateProblems.length === 0,
   gateProblems.length === 0
-    ? `affiliate-script gate intact for every visitor (${gatingChecks.length} properties: unconditional, marketing category, lazy-load, consent event)`
+    ? `affiliate-script gate intact for every visitor (${gatingChecks.length} properties: unconditional, marketing category, deferred load, consent event)`
     : `consent gate broken/missing: ${gateProblems.join("; ")}`
 );
 
@@ -1490,11 +1499,17 @@ function runAffiliateLoader(storage: Record<string, string>): LoaderRun {
     addEventListener: (name: string, callback: () => void) => {
       if (name === "ural:consent-updated") listeners.push(callback);
     },
+    // The loader schedules its first decision on an idle callback (2.5s
+    // ceiling). Running it synchronously here keeps these six cases about the
+    // consent decision, not about timer plumbing.
+    requestIdleCallback: (callback: () => void) => callback(),
   };
   const fakeDocument: any = {
     addEventListener: () => {},
     querySelector: () => null,
-    createElement: () => ({ async: false, onerror: null, src: "" }),
+    // setAttribute is part of the Drive snippet Travelpayouts ships
+    // (data-cmp-ab="2"); the stub has to accept it or every case throws.
+    createElement: () => ({ async: false, onerror: null, src: "", setAttribute: () => {} }),
     head: {
       appendChild: (element: { src: string }) => {
         injected.push(element.src);
@@ -1504,9 +1519,10 @@ function runAffiliateLoader(storage: Record<string, string>): LoaderRun {
   const fakeLocalStorage = {
     getItem: (key: string) => (key in storage ? storage[key] : null),
   };
-  // No IntersectionObserver on the stub window, so the loader takes its
-  // non-observer branch and calls attempt() immediately - which is exactly the
-  // decision under test.
+  // The stub's requestIdleCallback is synchronous, so the loader takes its
+  // deferred branch and calls attempt() immediately - which is exactly the
+  // decision under test. No `location` on the stub window either, which proves
+  // the ?tpverify=1 verification hatch is opt-in and never a default.
   // eslint-disable-next-line no-new-func
   new Function("window", "document", "localStorage", "location", loaderSource)(
     fakeWindow,

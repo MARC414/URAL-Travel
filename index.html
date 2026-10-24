@@ -309,27 +309,45 @@
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Travelpayouts Emerald Partner Script - lazy-loaded on viewport
-         intersection AND gated on marketing consent for every visitor.
+    <!-- Travelpayouts DRIVE - project 589561 (uraltravel.co.uk) - gated on
+         marketing consent for every visitor, loaded early-but-not-blocking.
+
+         Why the id changed: Drive's code is generated PER PROJECT (the filename
+         is base64 of the project id: NTg5NTYx -> 589561). The previous tag was
+         issued for the project that was deleted during the domain move, so it was
+         replaced with this one from the new project's "Manual installation" tab.
+         Do not paste 589561 on any other domain, and do not run an old and a new
+         Drive tag together - two instances rewrite the same links.
+
          The affiliate script sets marketing cookies and is listed as a marketing
          processor in our own privacy policy, and the consent banner is shown to
-         everyone, so the gate no longer depends on the visitor's country: the
+         everyone, so the gate does not depend on the visitor's country: the
          script is injected only after marketing consent is granted (Accept all,
          or marketing toggled on in the customize panel), and a later
          `ural:consent-updated` starts it immediately.
+
+         Timing: Drive's job is rewriting travel links and collecting content
+         analytics, so waiting for the footer to scroll into view meant most
+         sessions never loaded it. It now runs on the first idle slot after
+         DOMContentLoaded (2.5 s ceiling) - the same deferral pattern the GTM
+         loader above uses - so it costs nothing on the LCP path.
          Nothing in functions/_middleware.js gates this any more - the decision is
          entirely client-side in marketingAllowed() below.
-         QA: load the site with a fresh profile -> the script must NOT be in the
-         network log; click "Accept all" -> it must appear. -->
-    <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
+
+         QA: load with a fresh profile -> the script must NOT be in the network
+         log; click "Accept all" -> it must appear. Drive's own "Verify
+         installation" crawler does not click cookie banners, so append
+         `?tpverify=1` to the URL once to allow a verification-only load. -->
+    <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
       (function(){
         var loaded=false;
-        function loadEmerald(){
+        function loadDrive(){
           if(loaded)return;
           loaded=true;
           var script=document.createElement("script");
-          script.async=true;
-          script.src="https://emrld.ltd/NTQwMjc3.js?t=540277";
+          script.async=1;
+          script.setAttribute("data-cmp-ab","2");
+          script.src="https://emrld.ltd/NTg5NTYx.js?t=589561";
           script.onerror=function(){};
           document.head.appendChild(script);
         }
@@ -347,16 +365,24 @@
           }catch(e){}
           return false;
         }
-        function attempt(){if(!loaded&&marketingAllowed())loadEmerald();}
-        if('IntersectionObserver'in window){
-          var observer=new IntersectionObserver(function(entries){
-            if(entries[0].isIntersecting){observer.disconnect();attempt();}
-          },{rootMargin:'200px'});
-          document.addEventListener('DOMContentLoaded',function(){
-            var footer=document.querySelector('footer');
-            if(footer)observer.observe(footer);else attempt();
-          });
-        }else{attempt();}
+        function verificationBypass(){
+          // One-shot hook for Travelpayouts' "Verify installation" crawler,
+          // which never clicks a cookie banner. Marketing-only, no other effect.
+          try{return /[?&]tpverify=1(&|$)/.test(window.location.search);}catch(e){return false;}
+        }
+        function attempt(){if(!loaded&&(marketingAllowed()||verificationBypass()))loadDrive();}
+        function schedule(){
+          if('requestIdleCallback'in window){
+            window.requestIdleCallback(attempt,{timeout:2500});
+          }else{
+            setTimeout(attempt,2000);
+          }
+        }
+        if(document.readyState==='loading'){
+          document.addEventListener('DOMContentLoaded',schedule,{once:true});
+        }else{
+          schedule();
+        }
         // Consent granted after this loader ran (Accept all, or marketing toggled
         // on in the customize panel) must still start the script.
         window.addEventListener('ural:consent-updated',attempt);

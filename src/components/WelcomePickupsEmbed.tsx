@@ -13,10 +13,10 @@ import {
 } from "lucide-react";
 
 const WELCOME_PICKUPS_SCRIPT_SRC =
-  "https://tpemd.com/content?promo_id=8951&campaign_id=627&powered_by=true&show_header=true&locale=en&shmarker=675992&trs=540277";
+  "https://tpemd.com/content?promo_id=8951&campaign_id=627&powered_by=true&show_header=true&locale=en&shmarker=675992&trs=589561";
 
 export const WELCOME_PICKUPS_PARTNER_URL =
-  "https://tp.media/r?marker=675992&trs=540277&p=8951&u=https%3A%2F%2Fwww.welcomepickups.com&campaign_id=627";
+  "https://tp.media/r?marker=675992&trs=589561&p=8951&u=https%3A%2F%2Fwww.welcomepickups.com&campaign_id=627";
 
 interface RoutePreset {
   id: string;

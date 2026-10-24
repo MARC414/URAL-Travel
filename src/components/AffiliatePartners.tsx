@@ -44,7 +44,7 @@ export const AIRHELP_PROMO = {
   validUntil: "November 30, 2026",
   expiresAt: "2026-11-30",
   plans: "AirHelp+ Smart & AirHelp+ Pro",
-  scriptSrc: "https://tpemd.com/content?promo_id=8679&campaign_id=120&powered_by=true&lang=en&shmarker=675992&trs=540277"
+  scriptSrc: "https://tpemd.com/content?promo_id=8679&campaign_id=120&powered_by=true&lang=en&shmarker=675992&trs=589561"
 };
 
 export const KKDAY_PROMO = {

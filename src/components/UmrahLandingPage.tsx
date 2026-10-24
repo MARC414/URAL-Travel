@@ -59,19 +59,19 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
           loading="eager"
           fetchPriority="high"
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover object-center opacity-45 scale-[1.01] pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-60 scale-[1.01] pointer-events-none"
         />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(105deg, rgba(7, 17, 32, 0.96) 0%, rgba(11, 22, 40, 0.88) 50%, rgba(15, 23, 42, 0.72) 100%)",
-          }}
-        />
+        {/* Same left-weighted directional scrim as the approved /contact hero
+            (from-brand-navy via-brand-navy/92 to-brand-navy/55), so the H1 keeps
+            ≥7:1 contrast on the text side while the Kaaba stays visible on the
+            side that only carries the conversion card. The previous inline
+            3-stop rgba gradient (0.96 → 0.72) was opaque enough to flatten the
+            photo to a near-solid navy block. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#071120] via-[#071120]/95 to-[#071120]/45 sm:via-[#071120]/88 sm:to-[#071120]/20" />
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#071120] to-transparent pointer-events-none" />
 
         {/* Constrained Content Container Inside Full-Width Hero */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 space-y-10">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-20 space-y-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left Column: Search-Intent H1, Value Prop & Dual CTAs (7 Cols) */}
             <div className="lg:col-span-7 space-y-6">

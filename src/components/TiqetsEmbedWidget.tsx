@@ -23,7 +23,7 @@ export interface TiqetsEmbedWidgetProps {
  * Parameters:
  * - promo_id=3948
  * - campaign_id=89
- * - marker=675992 / trs=540277
+ * - marker=675992 / trs=589561
  *
  * Features:
  * 1. Safe lifecycle script injection with isolated mount container.
@@ -71,7 +71,7 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
     scriptUrl.searchParams.set("language", isBn ? "en" : "en"); // Tiqets widget engine supports en/fr/es/it/de
     scriptUrl.searchParams.set("product", product);
     scriptUrl.searchParams.set("shmarker", "675992");
-    scriptUrl.searchParams.set("trs", "540277");
+    scriptUrl.searchParams.set("trs", "589561");
 
     script.src = scriptUrl.toString();
     script.async = true;
@@ -232,7 +232,7 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
 
             <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-100">
               <span className="text-[11px] font-mono text-slate-500">
-                {isBn ? "সার্টিফাইড পার্টনার আইডি: marker=675992" : "Certified Affiliate Link: marker=675992 • trs=540277"}
+                {isBn ? "সার্টিফাইড পার্টনার আইডি: marker=675992" : "Certified Affiliate Link: marker=675992 • trs=589561"}
               </span>
               <a
                 href={partnerUrl}
