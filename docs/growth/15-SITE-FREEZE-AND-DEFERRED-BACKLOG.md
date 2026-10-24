@@ -102,12 +102,17 @@ content. Everything else in the freeze list still stands.*
 Unlock Drive, attach missing programs, confirm 589561 / 675992.
 *Trigger: §2.2 step 4 shows **zero clicks**.* **Blocking everything else.**
 
-### S1 — Measurement that already exists but is unreadable
-- Register `travelpayouts_referral_click` as a **key event** in GA4.
-- Add event-scoped custom dimensions: `referral_sub_id`, `partner_name`, `link_label`.
-- GA4 default URL + unwanted-referral list (`pages.dev`, sandbox hosts).
-*Trigger: open now — 15 minutes, no repo change, and without it the social traffic you are about
-to buy with your time is unmeasurable.* **Recommended before social starts, not after.**
+### S1 — Measurement that already exists but is unreadable — **the only open item**
+Step-by-step: **[`17-GA4-MEASUREMENT-RUNBOOK.md`](17-GA4-MEASUREMENT-RUNBOOK.md)** (click-level
+instructions, exact parameter names, verification checklist).
+- Confirm GTM forwards the dataLayer events to GA4 (Step 0 — nothing else works if it does not).
+- Event-scoped custom dimensions: `link_label`, `partner_name`, `referral_sub_id`, `outbound_url`,
+  `destination`. **Note: the parameter is `link_label`, not `label`.**
+- Key events: `affiliate_partner_click`, `travelpayouts_referral_click`, `whatsapp_inquiry`.
+- Property hygiene: default URL, data retention 14 months, unwanted referrals, internal traffic.
+*Trigger: open now — ~15 minutes, no repo change. **Must happen before the first social post**,
+because GA4 never backfills a custom dimension, so traffic collected first is permanently
+unreadable.*
 
 ### S2 — `/how-we-make-money/` + a visible affiliate disclosure line
 One page, one sentence in the footer/partner strip. This is a **UK legal** duty (ASA/CMA) and an
