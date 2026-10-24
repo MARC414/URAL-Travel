@@ -92,6 +92,12 @@ record, the Resend/Email Routing DNS records, `SITE_ORIGIN`, the `emrld.ltd` Dri
 Order is deliberate. **Each item names the signal that re-opens it**, so this list is a queue,
 not a wish list. Do not start item *n+1* because item *n* was boring.
 
+### S0a — Yandex Webmaster verification — **done 2026-10-24**
+File deployed at the site root, `noindex` header, kept out of the sitemap, CI-guarded.
+Runbook and expectations: [`01-indexing-crawling.md` §3b](01-indexing-crawling.md#3b-yandex-webmaster--verified-2026-10-24-low-effort-low-expectation).
+*Deliberately inside the freeze: it is a static file + a header rule, changes no page, and needs no
+content. Everything else in the freeze list still stands.*
+
 ### S0 — only if §2.2 found a gap (do now, dashboard-only, ~10 min)
 Unlock Drive, attach missing programs, confirm 589561 / 675992.
 *Trigger: §2.2 step 4 shows **zero clicks**.* **Blocking everything else.**

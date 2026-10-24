@@ -111,6 +111,50 @@ If it still says "Couldn't fetch" after 48h with a valid live `200` XML file, us
 
 ---
 
+## 3b. Yandex Webmaster — verified 2026-10-24 (low effort, low expectation)
+
+**Set realistic expectations first.** Yandex is the dominant engine in Russia and the CIS, not in
+Bangladesh or the UK. For this site it is a *second-order* engine: worth 30 minutes of setup
+because it is free and permanent, not worth any content work, and not a channel to build strategy
+around. Its real value here is the same as Bing's — it is another crawler that may surface the
+`/bn/` corpus and feeds some answer engines.
+
+**What was done (repo side):**
+
+| Item | Detail |
+| --- | --- |
+| Verification file | `public/yandex_5e14e2fad36afc5f.html` → served at `https://uraltravel.co.uk/yandex_5e14e2fad36afc5f.html` |
+| Content | exactly `<body>Verification: 5e14e2fad36afc5f</body>` — must stay byte-exact |
+| Header | `X-Robots-Tag: noindex` from `public/_headers` (keeps a token page out of the index without blocking the fetch) |
+| Sitemap | deliberately **not** included — a token page is not content |
+| CI guard | `verify:build` fails if the file disappears from `dist/`, if the token changes, or if it ever reaches `sitemap.xml` |
+
+**What to do in the dashboard:**
+
+1. https://webmaster.yandex.ru → **Add site** → `https://uraltravel.co.uk` (https, no `www`).
+2. Choose the **HTML file** method. It is already deployed — click **Check**.
+3. **Indexing → Sitemap files** → add `https://uraltravel.co.uk/sitemap.xml`.
+4. **Indexing → Indexing → Pages** — expect it to be near-zero for weeks. Yandex crawls new,
+   low-authority sites slowly and reports lag.
+5. Optional, only if it stays verified for a month: **Settings → Region** (leave unset — the site
+   is not a local Russian business; a wrong region is worse than none).
+
+**Rules that will bite if broken:**
+
+- **Never `Disallow` the verification file in `robots.txt`.** Yandex will not verify a URL its own
+  crawler is told not to fetch. (Same for the Google file.)
+- **Never delete the file after it verifies.** Yandex re-checks periodically and silently drops the
+  property when it 404s — the guard in `verify:build` exists so a refactor cannot do this quietly.
+- **Do not use Yandex Metrica** just because you are here. It is a second analytics stack, and the
+  site already has a consent-gated GA4; adding it now would double the consent surface for a
+  channel with no traffic.
+
+**Known friction, so it does not read as failure:** the Webmaster UI is Russian-first (an English
+toggle exists), signup may ask for a phone number, and verification can take a few minutes to
+propagate after the deploy. None of that indicates a problem with the site.
+
+---
+
 ## 4. Add `<lastmod>` to the sitemap — required
 
 `scripts/prerender.ts` builds `sitemap.xml`. It currently emits `<url><loc>` with no `<lastmod>`. Add one.
