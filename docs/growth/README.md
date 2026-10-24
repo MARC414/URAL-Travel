@@ -102,6 +102,9 @@ The numbered files above are the technical growth playbook. Use these separate d
 > distribution. **[`15-SITE-FREEZE-AND-DEFERRED-BACKLOG.md`](15-SITE-FREEZE-AND-DEFERRED-BACKLOG.md)
 > is now the queue of record** — it sequences everything still open in files 12, 13 and 14 and
 > names the signal that re-opens each item. Read it before proposing any on-site work.
+> The active execution plan for the distribution phase is
+> **[`16-21-DAY-SOCIAL-MEDIA-PLAN.md`](16-21-DAY-SOCIAL-MEDIA-PLAN.md)** (opened 24 October 2026) —
+> read it before proposing any social work.
 >
 > Companion records from the migration:
 > [`12-POST-MIGRATION-ROADMAP.md`](12-POST-MIGRATION-ROADMAP.md) (phases),
