@@ -81,7 +81,6 @@ import {
   articleSchema,
   touristTripSchema,
   serviceSchema,
-  productOfferSchema,
   collectionPageSchema,
 } from "./hooks/useSeoMeta";
 import { Language, translations } from "./translations";
@@ -2218,28 +2217,8 @@ export default function App() {
       seoTitle = "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub) | URAL";
       seoDescription = "Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and KL.";
     }
-    seoSchema = [
-      productOfferSchema({
-        url: experiencesUrl,
-        idSuffix: "product-airalo-saudi-esim",
-        name: "Saudi Arabia Travel eSIM for Umrah (5 GB / 30 days)",
-        description:
-          "Prepaid data eSIM covering Makkah, Madinah and Jeddah, activated before departure from Dhaka.",
-        sku: "airalo-saudi-5gb-30d",
-        brandName: "Airalo",
-        priceBdt: 2100,
-      }),
-      productOfferSchema({
-        url: experiencesUrl,
-        idSuffix: "product-tiqets-paris-pass",
-        name: "Paris Louvre, Eiffel Tower & Seine River Skip-the-Line Bundle",
-        description:
-          "Official mobile-entry attraction bundle for Bangladeshi Schengen visa travelers visiting Paris.",
-        sku: "tiqets-paris-bundle-2026",
-        brandName: "Tiqets",
-        priceBdt: 9800,
-      }),
-    ];
+    // URAL refers travelers to partner booking sites; it does not sell these products.
+    // Do not emit Product/Offer data that presents URAL as the merchant.
     seoBreadcrumbs = [
       { name: "Home", url: siteUrl("/", lang) },
       { name: "Attractions & Passes", url: experiencesUrl }
@@ -2253,18 +2232,6 @@ export default function App() {
       seoDescription = isBn
         ? "প্যারিস, লন্ডন, রোম, মিলান, ভেনিস এবং নিউ ইয়র্কে লাইনে না দাঁড়িয়ে টিকিট পান Tiqets পাসের মাধ্যমে। লুভর, আইফেল টাওয়ার, কলোজিয়াম, ডুয়োমো ও আরও ৫৯টি আকর্ষণ ৯টি ইউরোপিয়ন শহরে।"
         : "Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes. Louvre, Eiffel Tower, Colosseum, Duomo, and 59 curated attractions across 9 European cities for Bangladeshi travelers.";
-      seoSchema = [
-        productOfferSchema({
-          url: attractionsUrl,
-          idSuffix: "product-tiqets-paris-pass",
-          name: "Paris Louvre, Eiffel Tower & Seine River Skip-the-Line Bundle",
-          description:
-            "Official mobile-entry attraction bundle for Bangladeshi Schengen visa travelers visiting Paris.",
-          sku: "tiqets-paris-bundle-2026",
-          brandName: "Tiqets",
-          priceBdt: 9800,
-        }),
-      ];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
         { name: isBn ? "ইউরোপীয় আকর্ষণ" : "European Attractions", url: attractionsUrl }
@@ -2281,17 +2248,7 @@ export default function App() {
       seoDescription = isBn
         ? `${attrLabel} — ${cityLabel}-এ স্কিপ-দ্য-লাইন টিকেট ও Tiqets পাস। বাংলাদেশী ভ্রমণকারীদের জন্য দ্রুত বুকিং করুন।`
         : `${attrLabel} in ${cityLabel} — Skip-the-line tickets & Tiqets passes for Bangladeshi travelers. Book instantly before your trip from Dhaka.`;
-      seoSchema = [
-        productOfferSchema({
-          url: attractionUrl,
-          idSuffix: `product-tiqets-${attractionId}`,
-          name: attrLabel,
-          description: `${attrLabel} — ${cityLabel} attraction pass for Bangladeshi travelers.`,
-          sku: `tiqets-${attractionId}`,
-          brandName: "Tiqets",
-          priceBdt: 0,
-        }),
-      ];
+      // Tickets are sold by Tiqets, not URAL; leave product-rich-result markup to the seller.
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
         { name: isBn ? "ইউরোপীয় আকর্ষণ" : "European Attractions", url: attractionsUrl },
@@ -2644,7 +2601,7 @@ export default function App() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const routeViewContext: Record<string, any> = { AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedDestinations: DESTINATIONS_DATA, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
+  const routeViewContext: Record<string, any> = { BLOG_DATA, AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedDestinations: DESTINATIONS_DATA, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
 
   return (
     // `overflow-x-clip`, not `overflow-x-hidden`: the full-bleed (100vw) heroes
