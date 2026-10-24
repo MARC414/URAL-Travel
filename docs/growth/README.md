@@ -111,6 +111,11 @@ The numbered files above are the technical growth playbook. Use these separate d
 > **[`16-21-DAY-SOCIAL-MEDIA-PLAN.md`](16-21-DAY-SOCIAL-MEDIA-PLAN.md)** (opened 24 October 2026) —
 > read it before proposing any social work.
 >
+> The measured inventory the freeze sits on is
+> [`18-CONTENT-AUDIT-2026-10-24.md`](18-CONTENT-AUDIT-2026-10-24.md) — full repo + build inspection
+> (352/352 checks, 260 routes). Its §6 surface ordering is analysis for the Day-22 review, not the
+> locked decision in `16`.
+>
 > Companion records from the migration:
 > [`12-POST-MIGRATION-ROADMAP.md`](12-POST-MIGRATION-ROADMAP.md) (phases),
 > [`13-POST-MIGRATION-STATUS-AUDIT-2026-10-24.md`](13-POST-MIGRATION-STATUS-AUDIT-2026-10-24.md)
