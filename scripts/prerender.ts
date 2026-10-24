@@ -59,7 +59,6 @@ import {
   articleSchema,
   touristTripSchema,
   serviceSchema,
-  productOfferSchema,
   collectionPageSchema,
   faqPageNodeSchema,
   howToSchema,
@@ -2056,28 +2055,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Attractions & Passes", url: `${BASE_URL}/experiences` },
     ],
-    extraGraphNodes: [
-      productOfferSchema({
-        url: `${BASE_URL}/experiences`,
-        idSuffix: "product-airalo-saudi-esim",
-        name: "Saudi Arabia Travel eSIM for Umrah (5 GB / 30 days)",
-        description:
-          "Prepaid data eSIM covering Makkah, Madinah and Jeddah, activated before departure from Dhaka.",
-        sku: "airalo-saudi-5gb-30d",
-        brandName: "Airalo",
-        priceBdt: 2100,
-      }),
-      productOfferSchema({
-        url: `${BASE_URL}/experiences`,
-        idSuffix: "product-tiqets-paris-pass",
-        name: "Paris Louvre, Eiffel Tower & Seine River Skip-the-Line Bundle",
-        description:
-          "Official mobile-entry attraction bundle for Bangladeshi Schengen visa travelers visiting Paris.",
-        sku: "tiqets-paris-bundle-2026",
-        brandName: "Tiqets",
-        priceBdt: 9800,
-      }),
-    ],
+    extraGraphNodes: [],
     bodyHtml: `
       <article>
         <h1>Europe, UK, USA &amp; Asian Attraction Passes (Tiqets &amp; Klook Hub)</h1>
@@ -2111,15 +2089,6 @@ function buildAllRoutes(): PrerenderRoute[] {
         { name: attraction.title, url: `${BASE_URL}${routePath}` },
       ],
       extraGraphNodes: [
-        productOfferSchema({
-          url: `${BASE_URL}${routePath}`,
-          idSuffix: `product-tiqets-${attraction.productId}`,
-          name: attraction.title,
-          description: `${attraction.title} — ${cityStack.cityName}, ${attraction.country} attraction pass for Bangladeshi travelers.`,
-          sku: `tiqets-${attraction.productId}`,
-          brandName: "Tiqets",
-          priceBdt: attraction.priceBdt,
-        }),
         touristTripSchema({
           url: `${BASE_URL}${routePath}`,
           name: attraction.title,
@@ -3950,29 +3919,6 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           serviceType: "Visa Assistance",
         })
       );
-    } else if (englishPath === "/experiences") {
-      extraGraphNodes.push(
-        productOfferSchema({
-          url: canonicalUrl,
-          idSuffix: "product-airalo-saudi-esim",
-          name: "Saudi Arabia Travel eSIM for Umrah (5 GB / 30 days)",
-          description:
-            "Prepaid data eSIM covering Makkah, Madinah and Jeddah, activated before departure from Dhaka.",
-          sku: "airalo-saudi-5gb-30d",
-          brandName: "Airalo",
-          priceBdt: 2100,
-        }),
-        productOfferSchema({
-          url: canonicalUrl,
-          idSuffix: "product-tiqets-paris-pass",
-          name: "Paris Louvre, Eiffel Tower & Seine River Skip-the-Line Bundle",
-          description:
-            "Official mobile-entry attraction bundle for Bangladeshi Schengen visa travelers visiting Paris.",
-          sku: "tiqets-paris-bundle-2026",
-          brandName: "Tiqets",
-          priceBdt: 9800,
-        })
-      );
     } else if (englishPath === "/privacy") {
       extraGraphNodes.push(
         webPageSchema({
@@ -4033,8 +3979,8 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
       segments[0] === "attractions"
     ) {
       // Attraction hub (/attractions) and detail pages (/attractions/:cityId:attractionId).
-      // Build Bengali productOffer + TouristTrip nodes from the curated Tiqets data
-      // so Bengali pages carry the same structured data as English, localized.
+      // Attraction details are editorial referral pages. Keep trip context, but do not
+      // mark partner-sold tickets as URAL Product/Offer listings.
       if (segments.length === 2) {
         // /attractions landing — collection page over all city stacks.
         extraGraphNodes.push(
@@ -4051,7 +3997,7 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           })
         );
       } else if (segments.length === 3) {
-        // /attractions/:cityId:attractionId — product + tourist trip.
+        // /attractions/:cityId:attractionId — tourist-trip context, not a merchant product.
         const [, cityId, attractionId] = segments;
         const attraction = TIQETS_TOP_ATTRACTIONS.find(
           (a) => a.cityId === cityId && a.productId === attractionId
@@ -4061,17 +4007,6 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           const productUrl = siteUrl(
             `/attractions/${cityId}:${attractionId}`,
             "bn"
-          );
-          extraGraphNodes.push(
-            productOfferSchema({
-              url: productUrl,
-              idSuffix: `product-tiqets-${attractionId}`,
-              name: attraction.titleBn || attraction.title,
-              description: `${attraction.titleBn || attraction.title} — ${cityStack.cityNameBn || cityStack.cityName} আকর্ষণ পাস, বাংলাদেশী ভ্রমণকারীদের জন্য।`,
-              sku: `tiqets-${attractionId}`,
-              brandName: "Tiqets",
-              priceBdt: attraction.priceBdt,
-            })
           );
           extraGraphNodes.push(
             touristTripSchema({

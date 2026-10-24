@@ -112,12 +112,13 @@ export function parseAuthor(authorRaw?: string, inLanguage = "en-BD") {
 }
 
 /**
- * Site-wide Organization/TravelAgency + WebSite entities.
+ * Site-wide Organization + WebSite entities. URAL is a travel-information and
+ * affiliate referral platform, not the merchant or seller of partner products.
  */
 export function getSiteGraphNodes() {
   return [
     {
-      "@type": ["Organization", "TravelAgency"],
+      "@type": "Organization",
       "@id": SITE_ORG_ID,
       name: "URAL",
       legalName: "URAL Travel Intelligence",
@@ -383,7 +384,6 @@ export function touristTripSchema(options: {
   description: string;
   country: string;
   places: string[];
-  estimatedPriceBdt?: number;
   inLanguage?: string;
 }) {
   const {
@@ -392,7 +392,6 @@ export function touristTripSchema(options: {
     description,
     country,
     places,
-    estimatedPriceBdt,
     inLanguage = "en-BD",
   } = options;
 
@@ -422,16 +421,6 @@ export function touristTripSchema(options: {
     },
   };
 
-  if (typeof estimatedPriceBdt === "number" && Number.isFinite(estimatedPriceBdt)) {
-    tripNode.offers = {
-      "@type": "Offer",
-      url,
-      price: estimatedPriceBdt,
-      priceCurrency: "BDT",
-      availability: "https://schema.org/InStock",
-      seller: { "@id": SITE_ORG_ID },
-    };
-  }
   return tripNode;
 }
 
@@ -466,50 +455,6 @@ export function serviceSchema(options: {
       serviceUrl: url,
       servicePhone: "+8801784385335",
       availableLanguage: ["English", "Bengali"],
-    },
-  };
-}
-
-/**
- * Builds a Schema.org Product + Offer node for bookable travel passes / eSIMs / packages.
- */
-export function productOfferSchema(options: {
-  url: string;
-  idSuffix: string;
-  name: string;
-  description: string;
-  sku: string;
-  brandName: string;
-  priceBdt: number;
-  imageUrl?: string;
-}) {
-  const {
-    url,
-    idSuffix,
-    name,
-    description,
-    sku,
-    brandName,
-    priceBdt,
-    imageUrl = `${BASE_URL}/og-image.jpg`,
-  } = options;
-
-  return {
-    "@type": "Product",
-    "@id": `${url}#${idSuffix}`,
-    name,
-    description,
-    image: imageUrl,
-    sku,
-    brand: { "@type": "Brand", name: brandName },
-    offers: {
-      "@type": "Offer",
-      url,
-      price: priceBdt,
-      priceCurrency: "BDT",
-      priceValidUntil: "2026-12-31",
-      availability: "https://schema.org/InStock",
-      seller: { "@id": SITE_ORG_ID },
     },
   };
 }

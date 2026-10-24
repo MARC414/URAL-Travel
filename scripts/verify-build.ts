@@ -2786,6 +2786,35 @@ function hasSchemaType(node: Record<string, unknown>, expected: string): boolean
 const prerenderedRouteFiles = distHtmlFiles.filter((file) =>
   (read(file) ?? "").includes('data-seo-schema="true"')
 );
+
+// URAL is an editorial travel-intelligence/affiliate referral site, not the
+// seller of the tickets and eSIMs listed on partner sites. Product/Offer markup
+// incorrectly identified URAL as the merchant and generated irrelevant Google
+// Merchant listings and Product snippets warnings. Keep this an enforced rule.
+const productSchemaRoutes = prerenderedRouteFiles.filter((file) =>
+  getSeoSchemaGraph(read(file) ?? "").some((node) => hasSchemaType(node, "Product"))
+);
+const homepageEntityGraphMatch = (distIndexHtml ?? "").match(
+  /<script type="application\/ld\+json" id="site-entity-schema">([\s\S]*?)<\/script>/
+);
+let homepageClaimsTravelAgency = false;
+if (homepageEntityGraphMatch) {
+  try {
+    const graph = JSON.parse(homepageEntityGraphMatch[1]) as { "@graph"?: Record<string, unknown>[] };
+    homepageClaimsTravelAgency = (graph["@graph"] ?? []).some((node) =>
+      hasSchemaType(node, "TravelAgency")
+    );
+  } catch {
+    homepageClaimsTravelAgency = true;
+  }
+}
+check(
+  productSchemaRoutes.length === 0 && !homepageClaimsTravelAgency,
+  productSchemaRoutes.length === 0 && !homepageClaimsTravelAgency
+    ? "prerendered pages do not identify URAL as a product seller or travel agency"
+    : `merchant schema must be removed: Product markup on ${productSchemaRoutes.length} route(s); ` +
+        `TravelAgency identity present: ${homepageClaimsTravelAgency}`
+);
 const emptyRouteDescriptions: string[] = [];
 const descriptionsToRoutes = new Map<string, string[]>();
 for (const file of prerenderedRouteFiles) {
