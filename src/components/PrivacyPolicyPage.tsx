@@ -128,10 +128,10 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
           <div className="flex flex-wrap items-center gap-4 pt-2 text-xs font-mono text-slate-400">
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-              {isBn ? "কার্যকর তারিখ: অক্টোবর ২০২৬" : "Effective Date: October 2026"}
+              {isBn ? "কার্যকর তারিখ: ২৫ অক্টোবর ২০২৬" : "Effective Date: 25 October 2026"}
             </span>
             <span>•</span>
-            <span>{isBn ? "ভার্সন: ২.৪ (GDPR ও ePR অনুবর্তী)" : "Version: 2.4 (GDPR & ePR Compliant)"}</span>
+            <span>{isBn ? "ভার্সন: ২.৫ (GDPR ও ePR অনুবর্তী)" : "Version: 2.5 (GDPR & ePR Compliant)"}</span>
             <span>•</span>
             <span>{isBn ? "অধিক্ষেত্র: বাংলাদেশ ও বৈশ্বিক" : "Jurisdiction: Bangladesh & Global"}</span>
           </div>
@@ -368,12 +368,13 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             { id: "sec-7", en: "7. Google Consent Mode v2", bn: "৭. গুগল কনসেন্ট মোড v2" },
             { id: "sec-8", en: "8. Affiliate Disclosure & FTC", bn: "৮. অ্যাফিলিয়েট পার্টনারশিপ ও স্বচ্ছতা" },
             { id: "sec-9", en: "9. Data Retention Schedule", bn: "৯. ডেটা সংরক্ষণের সময়সীমা" },
-            { id: "sec-10", en: "10. Security & Edge Encryption", bn: "১০. সাইট সিকিউরিটি ও এনক্রিপশন" },
-            { id: "sec-11", en: "11. International Data Transfers", bn: "১১. আন্তর্জাতিক ডেটা স্থানান্তর" },
-            { id: "sec-12", en: "12. Your Rights Under GDPR/CCPA", bn: "১২. ব্যবহারকারী হিসেবে আপনার অধিকার" },
-            { id: "sec-13", en: "13. Children's Online Privacy", bn: "১৩. অপ্রাপ্তবয়স্কদের সুরক্ষা" },
-            { id: "sec-14", en: "14. Policy Updates & Versioning", bn: "১৪. নীতিমালার পরিবর্তন" },
-            { id: "sec-15", en: "15. Contact & Privacy Inquiries", bn: "১৫. যোগাযোগ ও সহায়তা ডেস্ক" },
+            { id: "sec-10", en: "10. Third-Party Data Processors", bn: "১০. তৃতীয় পক্ষের ডেটা প্রসেসর" },
+            { id: "sec-11", en: "11. Security & Edge Encryption", bn: "১১. সাইট সিকিউরিটি ও এনক্রিপশন" },
+            { id: "sec-12", en: "12. International Data Transfers", bn: "১২. আন্তর্জাতিক ডেটা স্থানান্তর" },
+            { id: "sec-13", en: "13. Your Rights Under GDPR/CCPA", bn: "১৩. ব্যবহারকারী হিসেবে আপনার অধিকার" },
+            { id: "sec-14", en: "14. Children's Online Privacy", bn: "১৪. অপ্রাপ্তবয়স্কদের সুরক্ষা" },
+            { id: "sec-15", en: "15. Policy Updates & Versioning", bn: "১৫. নীতিমালার পরিবর্তন" },
+            { id: "sec-16", en: "16. Contact & Privacy Inquiries", bn: "১৬. যোগাযোগ ও সহায়তা ডেস্ক" },
           ].map((item) => (
             <a
               key={item.id}
@@ -762,20 +763,113 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
                 : "Retained until you explicitly click 'Unsubscribe' or submit a deletion request."}
             </li>
             <li>
+              <strong>{isBn ? "যোগাযোগের জিজ্ঞাসা:" : "Contact inquiries:"}</strong>{" "}
+              {isBn
+                ? "সাপোর্ট মেইলবক্সে সর্বোচ্চ ২৪ মাস সংরক্ষিত থাকে, এরপর মুছে ফেলা হয়।"
+                : "Held in the support mailbox for up to 24 months, then deleted."}
+            </li>
+            <li>
               <strong>{isBn ? "ক্লাউডফ্লেয়ার এজ লগ:" : "Cloudflare Edge Routing Logs:"}</strong>{" "}
               {isBn ? "সাধারণত ২৪ ঘণ্টা থেকে সর্বোচ্চ ৩০ দিনের মধ্যে রোলিং ডিলিট হয়।" : "Transient IP and request logs purged on a rolling 30-day window."}
             </li>
           </ul>
         </section>
 
-        {/* 10. Security Measures */}
-        <section id="sec-10" className="space-y-3 pt-6 border-t border-slate-800/80">
+        {/* 10. Third-Party Data Processors */}
+        <section id="sec-10" className="space-y-4 pt-6 border-t border-slate-800/80">
+          <div className="flex items-center gap-2 text-white">
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-300">
+              <Server className="w-4 h-4" />
+            </span>
+            <h2 className="ural-section-title text-xl font-bold text-white">
+              {isBn
+                ? "১০. তৃতীয় পক্ষের ডেটা প্রসেসর (Sub-processors)"
+                : "10. Third-Party Data Processors (Sub-processors)"}
+            </h2>
+          </div>
+          <p>
+            {isBn
+              ? "আপনার পাঠানো জিজ্ঞাসা, নিউজলেটার সাবস্ক্রিপশন এবং ফর্মের বট-সুরক্ষা নিচের প্রসেসরদের মাধ্যমে পরিচালিত হয়। প্রত্যেকের সাথে ডেটা প্রসেসিং চুক্তি (DPA) এবং প্রযোজ্য ক্ষেত্রে ইউরোপীয় কমিশনের Standard Contractual Clauses (SCCs) অনুসরণ করা হয়। কোনো তথ্য বিজ্ঞাপন নেটওয়ার্ক বা ডেটা ব্রোকারের কাছে বিক্রি বা শেয়ার করা হয় না।"
+              : "Inquiries you submit, newsletter signups, and the bot protection on this site are handled by the processors below. Each operates under a data-processing agreement (DPA) and, where applicable, European Commission Standard Contractual Clauses (SCCs). Nothing here is sold or shared with advertising networks or data brokers."}
+          </p>
+          <div className="overflow-x-auto rounded-2xl border border-slate-800">
+            <table className="w-full text-left border-collapse text-xs">
+              <thead className="bg-slate-900 text-slate-200 font-mono uppercase tracking-wide text-[10px]">
+                <tr>
+                  <th className="py-3 px-4">{isBn ? "প্রসেসর" : "Processor"}</th>
+                  <th className="py-3 px-4">{isBn ? "ভূমিকা" : "Role"}</th>
+                  <th className="py-3 px-4">{isBn ? "যে ডেটা প্রসেস করে" : "Data it processes"}</th>
+                  <th className="py-3 px-4">{isBn ? "সুরক্ষা" : "Safeguard"}</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-800/80 text-slate-300">
+                <tr>
+                  <td className="py-2.5 px-4 font-bold text-white">Cloudflare, Inc.</td>
+                  <td className="py-2.5 px-4 text-slate-400">
+                    {isBn ? "হোস্টিং, CDN, Pages Functions, Turnstile বট সুরক্ষা" : "Hosting, CDN, Pages Functions, Turnstile bot protection"}
+                  </td>
+                  <td className="py-2.5 px-4">
+                    {isBn ? "আইপি ঠিকানা, রিকোয়েস্ট মেটাডেটা এবং ট্রানজিটে থাকা ফর্ম ডেটা" : "IP address, request metadata, and form data in transit"}
+                  </td>
+                  <td className="py-2.5 px-4 text-emerald-400">SCCs + EU-US DPF</td>
+                </tr>
+                <tr>
+                  <td className="py-2.5 px-4 font-bold text-white">Resend, Inc.</td>
+                  <td className="py-2.5 px-4 text-slate-400">
+                    {isBn ? "ট্রানজ্যাকশনাল ইমেইল ডেলিভারি" : "Transactional email delivery"}
+                  </td>
+                  <td className="py-2.5 px-4">
+                    {isBn ? "নাম, ফোন, ইমেইল, বার্তা, পেজ URL ও টাইমস্ট্যাম্প" : "Name, phone, email, message, page URL, timestamp"}
+                  </td>
+                  <td className="py-2.5 px-4 text-emerald-400">DPA + SCCs</td>
+                </tr>
+                <tr>
+                  <td className="py-2.5 px-4 font-bold text-white">{isBn ? "Google (সাপোর্ট মেইলবক্স)" : "Google (support mailbox)"}</td>
+                  <td className="py-2.5 px-4 text-slate-400">
+                    {isBn ? "নোটিফিকেশন ইমেইল সংরক্ষণ" : "Stores the notification emails"}
+                  </td>
+                  <td className="py-2.5 px-4">
+                    {isBn ? "Resend থেকে প্রাপ্ত একই তথ্য" : "The same fields, as received from Resend"}
+                  </td>
+                  <td className="py-2.5 px-4 text-emerald-400">DPA + SCCs</td>
+                </tr>
+                <tr>
+                  <td className="py-2.5 px-4 font-bold text-white">Travelpayouts</td>
+                  <td className="py-2.5 px-4 text-slate-400">
+                    {isBn ? "অ্যাফিলিয়েট অ্যাট্রিবিউশন (শুধু ক্লিক)" : "Affiliate attribution (clicks only)"}
+                  </td>
+                  <td className="py-2.5 px-4">
+                    {isBn ? "আউটবাউন্ড ক্লিকের মার্কার ও রেফারার — ফর্ম ডেটা নয়" : "Outbound click markers and referrer — never form data"}
+                  </td>
+                  <td className="py-2.5 px-4 text-emerald-400">{isBn ? "§৮ দেখুন" : "See §8"}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs space-y-2">
+            <p>
+              <strong className="text-white">{isBn ? "যা আমরা ব্যবহার করি না:" : "What we do not use:"}</strong>{" "}
+              {isBn
+                ? "কোনো পাবলিক ফর্ম-রিলে (form relay) পরিষেবা নয়। ২৫ অক্টোবর ২০২৬-এ FormSubmit সম্পূর্ণভাবে সরানো হয়েছে; ওই তারিখের পর কোনো জিজ্ঞাসা বা সাবস্ক্রিপশন ডেটা তৃতীয় পক্ষের ফর্ম-রিলেতে পাঠানো হয় না।"
+                : "No public form-relay service. FormSubmit was removed entirely on 25 October 2026; no inquiry or signup data has been sent to a third-party form relay since that date."}
+            </p>
+            <p>
+              <strong className="text-white">{isBn ? "ফর্ম সুরক্ষা:" : "Form protection:"}</strong>{" "}
+              {isBn
+                ? "Cloudflare Turnstile কোনো বিজ্ঞাপন বা অ্যানালিটিক্স কুকি সেট করে না এবং এটি নিরাপত্তা নিয়ন্ত্রণ হিসেবে সর্বদা সক্রিয় থাকে — অ্যানালিটিক্স সম্মতি প্রত্যাখ্যান করলেও এটি বন্ধ হয় না।"
+                : "Cloudflare Turnstile sets no advertising or analytics cookies and runs as a security control regardless of your analytics choice — declining analytics does not disable bot protection on the contact form."}
+            </p>
+          </div>
+        </section>
+
+        {/* 11. Security Measures */}
+        <section id="sec-11" className="space-y-3 pt-6 border-t border-slate-800/80">
           <div className="flex items-center gap-2 text-white">
             <span className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">
               <Lock className="w-4 h-4" />
             </span>
             <h2 className="ural-section-title text-xl font-bold text-white">
-              {isBn ? "১০. সাইট সিকিউরিটি ও ক্লাউড এনক্রিপশন (Security Measures)" : "10. Security Architecture & Encryption"}
+              {isBn ? "১১. সাইট সিকিউরিটি ও ক্লাউড এনক্রিপশন (Security Measures)" : "11. Security Architecture & Encryption"}
             </h2>
           </div>
           <p>
@@ -791,14 +885,14 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
           </p>
         </section>
 
-        {/* 11. International Transfers */}
-        <section id="sec-11" className="space-y-3 pt-6 border-t border-slate-800/80">
+        {/* 12. International Transfers */}
+        <section id="sec-12" className="space-y-3 pt-6 border-t border-slate-800/80">
           <div className="flex items-center gap-2 text-white">
             <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
               <Server className="w-4 h-4" />
             </span>
             <h2 className="ural-section-title text-xl font-bold text-white">
-              {isBn ? "১১. আন্তর্জাতিক ডেটা স্থানান্তর (International Data Transfers)" : "11. International Data Transfers"}
+              {isBn ? "১২. আন্তর্জাতিক ডেটা স্থানান্তর (International Data Transfers)" : "12. International Data Transfers"}
             </h2>
           </div>
           <p>
@@ -814,14 +908,14 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
           </p>
         </section>
 
-        {/* 12. User Rights Under GDPR & CCPA */}
-        <section id="sec-12" className="space-y-3 pt-6 border-t border-slate-800/80">
+        {/* 13. User Rights Under GDPR & CCPA */}
+        <section id="sec-13" className="space-y-3 pt-6 border-t border-slate-800/80">
           <div className="flex items-center gap-2 text-white">
             <span className="p-1.5 rounded-lg bg-[#F6B73C]/10 text-[#F6B73C]">
               <UserCheck className="w-4 h-4" />
             </span>
             <h2 className="ural-section-title text-xl font-bold text-white">
-              {isBn ? "১২. ব্যবহারকারী হিসেবে আপনার অধিকার (Your Rights Under GDPR & CCPA)" : "12. Your Legal Rights as a Data Subject"}
+              {isBn ? "১৩. ব্যবহারকারী হিসেবে আপনার অধিকার (Your Rights Under GDPR & CCPA)" : "13. Your Legal Rights as a Data Subject"}
             </h2>
           </div>
           <p>
@@ -862,14 +956,14 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
           </p>
         </section>
 
-        {/* 13. Children's Privacy */}
-        <section id="sec-13" className="space-y-3 pt-6 border-t border-slate-800/80">
+        {/* 14. Children's Privacy */}
+        <section id="sec-14" className="space-y-3 pt-6 border-t border-slate-800/80">
           <div className="flex items-center gap-2 text-white">
             <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
               <ShieldCheck className="w-4 h-4" />
             </span>
             <h2 className="ural-section-title text-xl font-bold text-white">
-              {isBn ? "১৩. অপ্রাপ্তবয়স্কদের সুরক্ষা (Children's Privacy - COPPA & GDPR-K)" : "13. Children's Online Privacy Protection"}
+              {isBn ? "১৪. অপ্রাপ্তবয়স্কদের সুরক্ষা (Children's Privacy - COPPA & GDPR-K)" : "14. Children's Online Privacy Protection"}
             </h2>
           </div>
           <p>
@@ -885,14 +979,14 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
           </p>
         </section>
 
-        {/* 14. Changes to Policy */}
-        <section id="sec-14" className="space-y-3 pt-6 border-t border-slate-800/80">
+        {/* 15. Changes to Policy */}
+        <section id="sec-15" className="space-y-3 pt-6 border-t border-slate-800/80">
           <div className="flex items-center gap-2 text-white">
             <span className="p-1.5 rounded-lg bg-[#F6B73C]/10 text-[#F6B73C]">
               <RefreshCw className="w-4 h-4" />
             </span>
             <h2 className="ural-section-title text-xl font-bold text-white">
-              {isBn ? "১৪. নীতিমালার হালনাগাদ ও পরিবর্তন (Policy Revisions)" : "14. Policy Updates & Versioning"}
+              {isBn ? "১৫. নীতিমালার হালনাগাদ ও পরিবর্তন (Policy Revisions)" : "15. Policy Updates & Versioning"}
             </h2>
           </div>
           <p>
@@ -908,12 +1002,12 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
           </p>
         </section>
 
-        {/* 15. Contact & Data Protection Officer */}
-        <section id="sec-15" className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4">
+        {/* 16. Contact & Data Protection Officer */}
+        <section id="sec-16" className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4">
           <div className="flex items-center gap-2 text-[#F6B73C]">
             <Mail className="w-5 h-5" />
             <h2 className="ural-section-title text-lg font-bold text-white">
-              {isBn ? "১৫. প্রাইভেসি ও ডেটা সুরক্ষা হেল্পডেস্ক (Contact Us)" : "15. Contact Our Privacy & Data Protection Desk"}
+              {isBn ? "১৬. প্রাইভেসি ও ডেটা সুরক্ষা হেল্পডেস্ক (Contact Us)" : "16. Contact Our Privacy & Data Protection Desk"}
             </h2>
           </div>
           <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">

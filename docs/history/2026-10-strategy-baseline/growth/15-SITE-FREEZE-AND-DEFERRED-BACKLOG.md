@@ -128,6 +128,11 @@ E-E-A-T asset, and it is *also* what unblocks Tier-2 program approvals.
 `/api/*` CORS allowlist + WAF rate limit; `Organization` JSON-LD locality review.
 *Trigger: first sponsor/brand enquiry, or the first spam burst through the forms.*
 
+> **Partly done 2026-10-25 — the trigger fired (a spam submission reached `/contact`).** Shipped:
+> origin allowlist, per-IP rate limits, server-side Turnstile, single Resend transport, and a privacy
+> policy that names its processors (`20-FORM-AND-MAIL-HARDENING-2026-10-25.md`). **Still open:** the
+> Cloudflare **WAF rate-limiting rule** (console) and the `Organization` JSON-LD locality review.
+
 ### S4 — Audience test cluster (5–10 UK/diaspora URLs)
 Per `12` §P6: Umrah from London/Manchester, UK→DAC visa logistics, GBP budget templates.
 *Trigger: ≥ 100 sessions/month arriving from outside Google, **or** GSC shows UK impressions.*

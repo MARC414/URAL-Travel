@@ -1222,26 +1222,11 @@ export default function App() {
         : `${SITE_ORIGIN}${currentPath}`;
     const preferredLanguage = lang === "bn" ? "Bengali (BN)" : "English (EN)";
 
-    const notificationPayload = {
-      email: cleanEmail,
-      "Subscriber Email": cleanEmail,
-      "Subscription ID": generatedSubId,
-      "Signup Placement": sourceLabel,
-      "Subscription Interests": interestSummary,
-      "Preferred Language": preferredLanguage,
-      "Selected Currency": currencyToOption,
-      "Page URL": activePageUrl,
-      "Timestamp (Dhaka BST)": dhakaTimestamp,
-      "Notification Recipient": "marcwriter2025@gmail.com",
-      _replyto: cleanEmail,
-      _subject: `🔔 New URAL Subscription: ${cleanEmail} (${interestSummary})`,
-      _template: "table",
-      _captcha: "false",
-    };
-
     try {
-      // 1. Primary dispatch via dedicated Cloudflare Pages serverless endpoint (/api/subscribe)
-      const serverlessRequest = fetch("/api/subscribe", {
+      // Single authenticated transport: the Pages Function, which delivers via
+      // Resend. The browser no longer posts to a third-party form relay — see
+      // docs/growth/20-FORM-AND-MAIL-HARDENING-2026-10-25.md.
+      const response = await fetch("/api/subscribe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1258,40 +1243,45 @@ export default function App() {
         }),
       }).catch(() => null);
 
-      // 2. Direct client-side FormSubmit AJAX dispatch to marcwriter2025@gmail.com
-      // (ensures browser Origin/Referer headers are included for immediate FormSubmit delivery)
-      const formSubmitRequest = fetch("https://formsubmit.co/ajax/marcwriter2025@gmail.com", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(notificationPayload),
-      }).catch(() => null);
-
-      await Promise.allSettled([serverlessRequest, formSubmitRequest]);
-    } catch (err) {
-      console.warn("Subscription notification dispatch fallback:", err);
-    } finally {
-      if (typeof window !== "undefined") {
-        try {
-          localStorage.setItem("ural_subscribed_email", cleanEmail);
-          localStorage.setItem("ural_subscription_id", generatedSubId);
-          localStorage.setItem("ural_subscription_interests", JSON.stringify(selectedInterests));
-        } catch {
-          // ignore storage quota errors
-        }
+      const result = response && response.ok ? await response.json().catch(() => null) : null;
+      if (!response || !response.ok || !result || result.ok !== true) {
+        setEmailSubscribeError(
+          (result && typeof result.error === "string" && result.error) ||
+            (lang === "bn"
+              ? "সাবস্ক্রিপশন সংরক্ষণ করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন, অথবা সরাসরি support@uraltravel.co.uk-এ ইমেইল করুন।"
+              : "We could not save your subscription. Please try again, or email support@uraltravel.co.uk directly.")
+        );
+        return;
       }
-      setSubscriptionId(generatedSubId);
-      setSelectedSubscriptionInterests(selectedInterests);
-      setEmailSubmitting(false);
-      setEmailSubscribed(true);
-      setAffiliateToast(
+    } catch (err) {
+      console.warn("Subscription dispatch failed:", err);
+      setEmailSubscribeError(
         lang === "bn"
-          ? `সাবস্ক্রিপশন নিশ্চিত হয়েছে (${generatedSubId})! ${localizedInterestSummary} আপডেটের জন্য ${cleanEmail} যুক্ত হয়েছে।`
-          : `Subscription confirmed (${generatedSubId})! ${localizedInterestSummary} updates are selected for ${cleanEmail}.`
+          ? "নেটওয়ার্ক সমস্যার কারণে সাবস্ক্রিপশন সম্পন্ন হয়নি। অনুগ্রহ করে আবার চেষ্টা করুন।"
+          : "A network error stopped your subscription. Please try again."
       );
+      return;
+    } finally {
+      setEmailSubmitting(false);
     }
+
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("ural_subscribed_email", cleanEmail);
+        localStorage.setItem("ural_subscription_id", generatedSubId);
+        localStorage.setItem("ural_subscription_interests", JSON.stringify(selectedInterests));
+      } catch {
+        // ignore storage quota errors
+      }
+    }
+    setSubscriptionId(generatedSubId);
+    setSelectedSubscriptionInterests(selectedInterests);
+    setEmailSubscribed(true);
+    setAffiliateToast(
+      lang === "bn"
+        ? `সাবস্ক্রিপশন নিশ্চিত হয়েছে (${generatedSubId})! ${localizedInterestSummary} আপডেটের জন্য ${cleanEmail} যুক্ত হয়েছে।`
+        : `Subscription confirmed (${generatedSubId})! ${localizedInterestSummary} updates are selected for ${cleanEmail}.`
+    );
   };
   const [packingItems, setPackingItems] = useState([
     { id: 1, text: "6 Months Valid Original Passport", checked: true },
@@ -1309,6 +1299,7 @@ export default function App() {
   const [contactMessage, setContactMessage] = useState("");
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [contactLoading, setContactLoading] = useState(false);
+  const [contactError, setContactError] = useState<string | null>(null);
 
   // Blog Directory Filtering & Search States
   const [blogCategoryFilter, setBlogCategoryFilter] = useState<string>("all");
@@ -2601,7 +2592,7 @@ export default function App() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const routeViewContext: Record<string, any> = { BLOG_DATA, AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedDestinations: DESTINATIONS_DATA, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
+  const routeViewContext: Record<string, any> = { BLOG_DATA, AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactError, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedDestinations: DESTINATIONS_DATA, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactError, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
 
   return (
     // `overflow-x-clip`, not `overflow-x-hidden`: the full-bleed (100vw) heroes

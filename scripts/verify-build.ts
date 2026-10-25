@@ -6188,6 +6188,109 @@ check(
     : `Banking & Forex cluster guard failed a negative control (${bankingControlResults.join(", ")})`
 );
 
+// --- Form & mail hardening (2026-10-25) ------------------------------------
+// Until 2026-10-25 the contact form and newsletter signup were dispatched to a
+// public form-relay provider TWICE (browser + Pages Function) with Resend as an
+// optional third copy. That produced duplicate deliveries, an unauthenticated
+// inbox endpoint and a second PII processor. These guards make the regression —
+// or a reintroduced wildcard CORS / silent-transport failure — impossible to
+// ship without a failing check.
+{
+  const readTree = (dir: string): { label: string; text: string }[] => {
+    const out: { label: string; text: string }[] = [];
+    const walk = (current: string) => {
+      for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+        const full = path.join(current, entry.name);
+        if (entry.isDirectory()) {
+          walk(full);
+          continue;
+        }
+        if (!/\.(tsx?|jsx?|html)$/i.test(entry.name)) continue;
+        out.push({ label: path.relative(ROOT_DIR, full), text: fs.readFileSync(full, "utf8") });
+      }
+    };
+    walk(dir);
+    return out;
+  };
+
+  const RELAY_PATTERN = /formsubmit\.co/i;
+  const shippedCode = [...readTree(path.join(ROOT_DIR, "src")), ...readTree(path.join(ROOT_DIR, "functions"))];
+  const relayLeaks = shippedCode.filter((file) => RELAY_PATTERN.test(file.text)).map((file) => file.label);
+  check(
+    relayLeaks.length === 0,
+    relayLeaks.length === 0
+      ? "no third-party form-relay endpoint in src/ or functions/ (single Resend transport)"
+      : `third-party form-relay endpoint reintroduced (${relayLeaks.join(", ")})`
+  );
+  check(
+    [RELAY_PATTERN.test('fetch("https://formsubmit.co/ajax/owner@example.com")'), RELAY_PATTERN.test('fetch("/api/contact")')].join(",") === "true,false",
+    "form-relay guard rejects a relay URL and passes a local endpoint (negative control)"
+  );
+
+  const contactFunction = read(path.join(ROOT_DIR, "functions", "api", "contact.js")) ?? "";
+  const subscribeFunction = read(path.join(ROOT_DIR, "functions", "api", "subscribe.js")) ?? "";
+  check(
+    /https:\/\/api\.resend\.com\/emails/.test(contactFunction) && /https:\/\/api\.resend\.com\/emails/.test(subscribeFunction),
+    "both mail endpoints deliver through the Resend API"
+  );
+  check(
+    /TURNSTILE_SECRET_KEY/.test(contactFunction) && /turnstile\/v0\/siteverify/.test(contactFunction),
+    "/api/contact verifies a Turnstile token server-side when TURNSTILE_SECRET_KEY is configured"
+  );
+  check(
+    /function checkRateLimit/.test(contactFunction) && /function checkRateLimit/.test(subscribeFunction) && /\b429\b/.test(contactFunction),
+    "both mail endpoints carry a per-IP rate limit that answers 429"
+  );
+  check(
+    /mail_transport_not_configured/.test(contactFunction) && /503/.test(contactFunction),
+    "/api/contact fails loudly (503) instead of reporting success when no transport is configured"
+  );
+
+  const WILDCARD_CORS = /Access-Control-Allow-Origin["']?\s*:\s*["']\*["']/;
+  check(
+    !WILDCARD_CORS.test(contactFunction) && !WILDCARD_CORS.test(subscribeFunction),
+    "mail endpoints answer CORS from an origin allowlist, not a wildcard"
+  );
+  check(
+    WILDCARD_CORS.test('"Access-Control-Allow-Origin": "*"') && !WILDCARD_CORS.test('"Access-Control-Allow-Origin": origin'),
+    "wildcard-CORS guard rejects the wildcard and passes the allowlisted form (negative control)"
+  );
+
+  const contactView = read(path.join(ROOT_DIR, "src", "routes", "ContactRouteView.tsx")) ?? "";
+  const appSource = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
+  check(
+    /fetch\("\/api\/contact"/.test(contactView) && /fetch\("\/api\/subscribe"/.test(appSource),
+    "the browser posts only to the site's own /api endpoints"
+  );
+  const turnstileWidget = read(path.join(ROOT_DIR, "src", "components", "TurnstileWidget.tsx")) ?? "";
+  const shellHtml = read(path.join(ROOT_DIR, "index.html")) ?? "";
+  check(
+    /challenges\.cloudflare\.com\/turnstile/.test(turnstileWidget) && !/challenges\.cloudflare\.com/.test(shellHtml),
+    "Turnstile loads on the contact form only, never in the document shell of all 260 pages"
+  );
+
+  // The privacy page is a lazily-hydrated component, so its prose is NOT in the
+  // prerendered HTML. Assert the source of truth, and separately assert that the
+  // shipped pages never contain the retired relay host.
+  const privacySource = read(path.join(ROOT_DIR, "src", "components", "PrivacyPolicyPage.tsx")) ?? "";
+  check(
+    privacySource.includes("Third-Party Data Processors") &&
+      privacySource.includes("Resend, Inc.") &&
+      privacySource.includes("Cloudflare, Inc."),
+    "privacy policy (EN) names its data processors: Resend and Cloudflare"
+  );
+  check(
+    privacySource.includes("তৃতীয় পক্ষের ডেটা প্রসেসর") && privacySource.includes("Resend, Inc."),
+    "privacy policy (BN) carries the same processor disclosure"
+  );
+  const privacyEn = read(path.join(DIST_DIR, "privacy.html")) ?? "";
+  const privacyBn = read(path.join(DIST_DIR, "bn", "privacy.html")) ?? "";
+  check(
+    privacyEn.length > 0 && !/formsubmit\.co/i.test(privacyEn) && !/formsubmit\.co/i.test(privacyBn),
+    "privacy policy links no retired form-relay endpoint in either locale"
+  );
+}
+
 // --- Report ----------------------------------------------------------------
 // Keep this block LAST. The checks above only count if it runs after them; when
 // it sat in the middle of the file, guards appended below it could fail without

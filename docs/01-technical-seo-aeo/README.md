@@ -12,7 +12,7 @@ The current audit is the latest diagnostic baseline. This folder collects refere
 
 ## Implementation references
 
-[AGENTS.md](../../AGENTS.md) covers build verification and repository constraints. Source of implementation truth: `src/hooks/useSeoMeta.ts`, `src/utils/localeRoutes.ts`, `src/utils/schema.ts`, `scripts/prerender.ts`, `scripts/verify-build.ts`, `public/robots.txt`, `public/_headers`, `public/_redirects`, `functions/_middleware.js` and `.github/workflows/`.
+[AGENTS.md](../../AGENTS.md) covers build verification and repository constraints. The contact/newsletter endpoints are documented in the [form & mail hardening runbook](../growth/20-FORM-AND-MAIL-HARDENING-2026-10-25.md) (transport, rate limits, Turnstile, processor disclosure). Source of implementation truth: `src/hooks/useSeoMeta.ts`, `src/utils/localeRoutes.ts`, `src/utils/schema.ts`, `scripts/prerender.ts`, `scripts/verify-build.ts`, `public/robots.txt`, `public/_headers`, `public/_redirects`, `functions/_middleware.js` and `.github/workflows/`.
 
 ## Historical diagnostics — not instructions
 
