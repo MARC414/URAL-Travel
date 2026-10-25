@@ -1,0 +1,208 @@
+> **HISTORICAL RECORD — DO NOT TREAT AS CURRENT STATE.**
+>
+> Archived 25 October 2026: former indexing diagnosis and runbook. Counts, backlink assertions and task order below are not a current baseline. The sitemap-date rationale remains available for historical CI references.
+> Current authority: [strategy index](../../../../00-URAL-STRATEGY-INDEX.md) and [current audit](../../../../00-URAL-CURRENT-AUDIT.md).
+
+# 01 — Google Indexing & Crawling
+
+> ## ⚠️ PARTLY SUPERSEDED — re-measured against `dist/` on 2026-10-13
+>
+> **Root causes A and B below no longer hold. C and D (especially D) do.**
+>
+> | § | Claim (29 Sept) | Measured (13 Oct) |
+> |---|---|---|
+> | A | Blog posts prerender exactly 1 internal link; `/flights` hub has 6; deep pages are near-orphans | **0 orphans.** Blog posts carry **29–33 unique internal links** each; homepage **105**; `/flights` 6 → routine. **241 distinct internal URLs** linked. |
+> | B | Hub/money pages are thin | Route pages carry **800–1,200 words** of prerendered body copy with H1/H2/FAQ structure. *`dist/experiences.html` is the one exception: ~230 words.* |
+> | C | No `<lastmod>` freshness signal | **Resolved** — `<lastmod>` on every URL. (Counts in §1C have drifted: the sitemap now lists **173** URLs — 90 EN + 83 BN.) |
+> | D | Zero backlinks | **Still true, and now the single biggest lever.** See [07-backlinks-free.md](../../../01-technical-seo-aeo/07-backlinks-free.md). |
+>
+> **Consequence:** the section §1 diagnosis was an outside-in reading of the site, and the site's own
+> build output has since contradicted it. **Do not start at §1.** Start by opening Google Search
+> Console and reading the **actual indexed-page count** — that number, not this file's assumption, is
+> the input you need. If indexing is still poor despite 0 orphans and adequate depth, the cause is D
+> (authority), and files 03–04 are the wrong place to spend effort.
+>
+> *The GSC setup, `lastmod`, IndexNow and verification procedures in §4 onward remain useful and are
+> unaffected by this correction.*
+
+
+**Perspective:** getting all pages indexed, not just the homepage. (173 routes: 90 EN + 83 BN as of 2026-10-13.)
+**Prereqs:** none — this is the first thing to fix.
+**Feeds into:** [02-internal-linking.md](02-internal-linking.md), [09-synchronization-maintenance.md](09-synchronization-maintenance.md).
+
+---
+
+## 1. The problem, stated precisely
+
+Only the homepage (`/`) is indexed. Google has *discovered* the other URLs (they're in the sitemap and linked from the homepage) but files them under **"Discovered – currently not indexed"** or **"Crawled – currently not indexed"** and defers indexing.
+
+This is **not** a technical blocker (there is no `noindex`, no robots block, canonicals are correct). It is a **priority/quality** decision by Google. A new site with no external authority gets a small crawl budget, and Google spends it on pages it judges most valuable. Right now that's only the homepage, because:
+
+### Root cause A — internal-linking dead-ends (resolved 2026-10-17)
+
+> **This diagnosis is historical.** Its measurements were taken in September against a pre-link build. Measured from
+> `dist/` on the merged `main` on 17 October 2026: every English blog page renders at least four distinct `/blog/`
+> anchors (curated `internalLinks` plus `getRelatedBlogPosts`), the Hajj & Umrah pages also render their hub links,
+> and the Bengali pages carry their own curated links. The remaining gaps — 8 legacy destination posts with no
+> blog→blog link, 9 Bengali pages with no blog anchor, and 9 editorial orphans — are tracked in
+> [`10-CONTENT-UPGRADE-STANDARD.md`](../../../growth/10-CONTENT-UPGRADE-STANDARD.md) §10. The `/flights` hub link count was not
+> re-measured here.
+>
+> Do not act on the September premise. The structural contract that keeps this resolved is file 10, and
+> `npm run verify:build` now fails if a flagship article's curated anchors are missing from either locale.
+
+### Root cause B — thin content on hub/money pages
+- `/flights` hub prerenders ~803 characters of body content vs the homepage's ~4,511.
+- Thin pages are the exact profile Google leaves in "Crawled – currently not indexed."
+- **Fix in [03-content-topical-authority.md](03-content-topical-authority.md).**
+
+### Root cause C — no freshness signal in the sitemap
+- `sitemap.xml` now carries a `<lastmod>` on every URL (done, §4). Google uses `<lastmod>` to prioritize crawl. The sitemap lists 171 URLs: 89 English and 82 Bengali (`https://ural-travel.pages.dev/bn/` is the Bengali home).
+- **Fix below in §4.**
+
+### Root cause D — the site is new with zero backlinks
+- No external site vouches for these pages. **Fix in [07-backlinks-free.md](../../../01-technical-seo-aeo/07-backlinks-free.md).**
+
+> **Do not** blame the sitemap "not being fetched." Google's docs are explicit: a sitemap is a *discovery hint*, and "submitting a sitemap doesn't guarantee that all the items in your sitemap will be crawled and indexed." If GSC shows the sitemap as read (even "Couldn't fetch" that later clears), the sitemap is doing its job. Indexing is decided by A–D above, not by the sitemap.
+
+---
+
+## 2. Google Search Console — do this manually, once
+
+These steps require a human with the Google account. A tool cannot verify domain ownership.
+
+1. Go to https://search.google.com/search-console → **Add property**.
+2. Choose **URL prefix**, enter `https://ural-travel.pages.dev/`.
+3. Verify via the **HTML tag** method: GSC gives a `<meta name="google-site-verification" content="...">` tag.
+   - **Where it goes:** add it to `index.html` `<head>` (it will prerender into every page, which is fine), **or** as a `_headers` / DNS TXT record. The meta tag in `index.html` is simplest — put it right after the `charset`/`viewport` block. Commit and deploy first, then click Verify.
+4. Once verified: **Sitemaps** → submit `sitemap.xml` (enter just `sitemap.xml`).
+5. **Request indexing for the homepage and top 5 money pages** via URL Inspection → Request Indexing. This nudges the queue; don't spam it.
+
+### Why GSC may say "Couldn't fetch" the sitemap
+Common, usually harmless causes — check in this order:
+- **It was just submitted.** Fetch status can lag hours to a day. Re-check later before doing anything.
+- **The URL you typed.** Submit `sitemap.xml`, not the full URL, not `/public/sitemap.xml`.
+- **Cloudflare challenge / bot check** intercepting Googlebot. Verify `https://ural-travel.pages.dev/sitemap.xml` returns `200` with `Content-Type: application/xml` (or `text/xml`) using `curl -I`. It does today — confirmed live.
+- **A stale/empty sitemap from a bad build.** Confirm the built `dist/sitemap.xml` has all 171 `<url>` entries after `npm run build`. Also confirm `https://ural-travel.pages.dev/bn/` returns `200` (not a redirect). The Bengali home is built to `dist/bn/index.html` so it matches the sitemap and canonical.
+- **Line-ending noise** turning the file invalid — it is valid today; keep it that way (see [08-site-cleanup.md](08-site-cleanup.md) on CRLF/LF).
+
+If it still says "Couldn't fetch" after 48h with a valid live `200` XML file, use **Validate/Retry** in GSC — it almost always clears. Do not rebuild the sitemap format chasing this; the format is correct.
+
+---
+
+## 3. Bing & IndexNow — free, fast, underused
+
+- Add the property in **Bing Webmaster Tools** (https://www.bing.com/webmasters). You can *import* directly from GSC. Bing also feeds DuckDuckGo and (via crawl data) some AI answer engines.
+- **IndexNow is half-wired and must be finished.** The key file already exists at `public/uralindexnow2026bangladesh83pages.txt`, but **nothing submits URLs**. This is a remaining task:
+
+### Task: wire up IndexNow submission on deploy
+- After every build/deploy, POST changed URLs to `https://api.indexnow.org/indexnow` with the key.
+- Simplest implementation: a small step in `scripts/prerender.ts` (or a separate `scripts/indexnow.ts` run in the deploy pipeline) that, after generating the URL list, sends:
+  ```
+  POST https://api.indexnow.org/indexnow
+  Content-Type: application/json
+  { "host": "ural-travel.pages.dev",
+    "key": "uralindexnow2026bangladesh83pages",
+    "keyLocation": "https://ural-travel.pages.dev/uralindexnow2026bangladesh83pages.txt",
+    "urlList": [ ...all 173 absolute URLs (90 EN + 83 BN)... ] }
+  ```
+- **Note:** the key file's *contents* must equal the key value in the URL/body. Verify the file contains exactly `uralindexnow2026bangladesh83pages` (matching the filename stem) — if it contains something else, use that.
+- ⚠️ **Do NOT rename the key file, and do not treat the `83pages` in it as a page count.**
+  It is an **opaque credential** chosen in September, not a description of the site. The site now has
+  173 routes. Renaming the file invalidates the key registered with IndexNow and silently breaks
+  submission — so the stale-looking number stays. Add the URLs, never "fix" the key.
+- Bing, Yandex, Seznam, Naver honor IndexNow. Google does not consume it directly but it costs nothing.
+- **Permission tier:** medium (adds a network call to the build). Say so in the commit, don't ask.
+
+---
+
+## 3b. Yandex Webmaster — verified 2026-10-24 (low effort, low expectation)
+
+**Set realistic expectations first.** Yandex is the dominant engine in Russia and the CIS, not in
+Bangladesh or the UK. For this site it is a *second-order* engine: worth 30 minutes of setup
+because it is free and permanent, not worth any content work, and not a channel to build strategy
+around. Its real value here is the same as Bing's — it is another crawler that may surface the
+`/bn/` corpus and feeds some answer engines.
+
+**What was done (repo side):**
+
+| Item | Detail |
+| --- | --- |
+| Verification file | `public/yandex_5e14e2fad36afc5f.html` → served at `https://uraltravel.co.uk/yandex_5e14e2fad36afc5f.html` |
+| Content | exactly `<body>Verification: 5e14e2fad36afc5f</body>` — must stay byte-exact |
+| Header | `X-Robots-Tag: noindex` from `public/_headers` (keeps a token page out of the index without blocking the fetch) |
+| Sitemap | deliberately **not** included — a token page is not content |
+| CI guard | `verify:build` fails if the file disappears from `dist/`, if the token changes, or if it ever reaches `sitemap.xml` |
+
+**What to do in the dashboard:**
+
+1. https://webmaster.yandex.ru → **Add site** → `https://uraltravel.co.uk` (https, no `www`).
+2. Choose the **HTML file** method. It is already deployed — click **Check**.
+3. **Indexing → Sitemap files** → add `https://uraltravel.co.uk/sitemap.xml`.
+4. **Indexing → Indexing → Pages** — expect it to be near-zero for weeks. Yandex crawls new,
+   low-authority sites slowly and reports lag.
+5. Optional, only if it stays verified for a month: **Settings → Region** (leave unset — the site
+   is not a local Russian business; a wrong region is worse than none).
+
+**Rules that will bite if broken:**
+
+- **Never `Disallow` the verification file in `robots.txt`.** Yandex will not verify a URL its own
+  crawler is told not to fetch. (Same for the Google file.)
+- **Never delete the file after it verifies.** Yandex re-checks periodically and silently drops the
+  property when it 404s — the guard in `verify:build` exists so a refactor cannot do this quietly.
+- **Do not use Yandex Metrica** just because you are here. It is a second analytics stack, and the
+  site already has a consent-gated GA4; adding it now would double the consent surface for a
+  channel with no traffic.
+
+**Known friction, so it does not read as failure:** the Webmaster UI is Russian-first (an English
+toggle exists), signup may ask for a phone number, and verification can take a few minutes to
+propagate after the deploy. None of that indicates a problem with the site.
+
+---
+
+## 4. Add `<lastmod>` to the sitemap — required
+
+`scripts/prerender.ts` builds `sitemap.xml`. It currently emits `<url><loc>` with no `<lastmod>`. Add one.
+
+- **Best signal:** per-URL last-content-change date. If the route's content is data-driven from `src/constants.ts`, you likely don't have per-route timestamps — so use the next best thing.
+- **Acceptable pragmatic approach:** use the build date (ISO 8601, `YYYY-MM-DD`) for all URLs, OR better, the git last-commit date of the source file that drives each route. Build date is fine to start.
+- Also set realistic `<changefreq>` and `<priority>` (homepage/hubs `weekly`/`0.9`; blog posts `monthly`/`0.6`). These are weak hints but harmless.
+- **Do not** fake future dates or bump `lastmod` on every build for unchanged pages — Google learns to distrust it. Only change `lastmod` when the page's content actually changed. (A build-date-for-all approach is acceptable initially but graduate to per-file git dates.)
+- **Shipped (2 Oct 2026) — the graduated implementation, and why it is not a git lookup.** Data-driven pages now read `CONTENT_UPDATED` from [`src/data/contentMeta.ts`](../../../../src/data/contentMeta.ts), a committed date; blog posts keep their own exact `post.date`. The git-derived version this section recommended **failed in production**: Cloudflare Pages builds from a shallow checkout, so `git log` for `src/constants.ts` returned nothing and the code fell back to *today's* date — stamping the deploy date onto 77 of 159 URLs on rebuilds where nothing changed, while a locally-built sitemap (full history) disagreed with CI. A committed constant is identical in every environment and moves only on a real content change.
+  - **Maintenance:** bump `CONTENT_UPDATED` whenever `src/constants.ts` or `src/data/bengaliContent.ts` changes materially. `prerender.ts` warns in the build log once the value is older than `CONTENT_UPDATED_MAX_AGE_DAYS` (180), so it cannot rot silently. Never make the value fresher than reality — the safe failure mode is staleness, not freshness.
+
+**Verify:** after build, `dist/sitemap.xml` must show `<lastmod>` on every `<url>`, and two consecutive builds of an unchanged tree must produce a **byte-identical** `public/sitemap.xml` (`git diff --exit-code public/sitemap.xml`).
+
+---
+
+## 5. Prerendered-HTML checklist (run after every build)
+
+Google's first wave reads static HTML. For each route in `dist/`, confirm:
+- [ ] `<title>` and `<meta name="description">` are unique and route-specific (managed in `src/utils/seoCopy.ts`).
+- [ ] `<link rel="canonical">` = the page's own absolute URL.
+- [ ] `hreflang` self-reference is the page's own URL (fixed per-route in prerender as of `40cf42c`) — **not** the homepage.
+- [ ] No `noindex` anywhere except intentionally on `/?admin`, `/?inspector`, `/?onboarding` (these are query-param states, already disallowed in robots.txt).
+- [ ] Schema `@graph` `@id`s use the page's own URL as the base.
+- [ ] Body content is present in the HTML source (not injected only by JS).
+
+Automate this as a post-build script when time allows (see [09-synchronization-maintenance.md](09-synchronization-maintenance.md)).
+
+---
+
+## 6. What NOT to do
+
+- Don't add `noindex` to "fix" duplicate-content fears — canonicals already handle that.
+- Don't submit the sitemap repeatedly; once is enough, resubmit only after structural URL changes.
+- Don't create doorway pages or programmatic thin pages to inflate the count — Google penalizes this and it's the opposite of what this niche needs.
+- Don't emit `bn-BD` hreflang until real Bengali URLs exist (see [03](03-content-topical-authority.md)).
+
+---
+
+## 7. Order of operations (this file's mini-checklist)
+
+1. [x] Add `<lastmod>` to sitemap (§4) — deploy.
+2. [ ] Verify GSC + submit sitemap + request-index top pages (§2).
+3. [ ] Add Bing, import from GSC (§3).
+4. [ ] Wire IndexNow submission into deploy (§3).
+5. [ ] Then go do [02-internal-linking.md](02-internal-linking.md) — that's what actually moves pages from Discovered → Indexed.
+6. [ ] Re-check GSC Pages report weekly; log progress in [09](09-synchronization-maintenance.md).

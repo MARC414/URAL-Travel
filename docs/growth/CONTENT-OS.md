@@ -4,6 +4,10 @@
 
 **Purpose:** a repeatable, evidence-led production and refresh workflow for URAL's English and Bengali content.
 
+**Role reconciled 26 October 2026:** supporting execution detail for the
+[master content optimization guide](../../URAL-CONTENT-OPTIMIZATION-GUIDE.md). The master guide governs
+editorial-method conflicts; the article acceptance contract and actual publishing code retain implementation requirements.
+
 > **Reconstruction note:** the previous session's `CONTENT-OS.md` was not present in this checkout, and its referenced commit was not available in local Git history. This file is reconstructed from the current repository's `AGENTS.md`, the existing growth playbook and content strategy, the code-level publishing contract, and the stage requirements supplied for this work. It does not claim to reproduce the missing version.
 
 ---
@@ -12,23 +16,20 @@
 
 Read these documents in this order before a content task:
 
-1. [`../../AGENTS.md`](../../AGENTS.md) — repository, safety, and documentation rules.
-2. [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md) — plan of record. Treat it as strategy, not a scratchpad; do not rewrite it as part of a content task.
-3. This file — pipeline rules and release contract.
-4. [`AI-WRITING-PROMPTS.md`](AI-WRITING-PROMPTS.md) — stage-by-stage work instructions.
-5. [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md) — work record, decisions, evidence ledger, and gate status.
-6. [`METHOD-NOTES.md`](METHOD-NOTES.md) — sourced Koray/Gotch methods and the limits on how they are applied.
-7. The target article and its live code/build representation — do not assume the metadata, body, localized content, or references are already in sync.
+1. The current owner task, [`strategy index`](../../00-URAL-STRATEGY-INDEX.md) and
+   [`current audit`](../../00-URAL-CURRENT-AUDIT.md) — permitted scope and diagnostic baseline.
+2. [`Master optimization guide`](../../URAL-CONTENT-OPTIMIZATION-GUIDE.md), [`AGENTS.md`](../../AGENTS.md)
+   and [`10-CONTENT-UPGRADE-STANDARD.md`](10-CONTENT-UPGRADE-STANDARD.md)
+   — repository rules and the standing article acceptance contract.
+3. This file and [`AI-WRITING-PROMPTS.md`](AI-WRITING-PROMPTS.md) — evidence and publication workflow for authorized work.
+4. [`Content references`](../02-content/README.md), the URL/intent map and relevant dated source ledgers — supporting evidence.
+5. The target article and its live code/build representation — do not assume metadata, body, localized content or references are already in sync.
 
-**Before item 2 sets your agenda, read the active cluster plan when one exists** — currently
-[`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md) (opened 19 October 2026), with
-[`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md) still valid for the Umrah cluster. Item 2 supplies the site-wide
-inventory, the gap register and the scoring model; a cluster plan supplies the release order, page ownership and
-per-wave gates for the cluster being built. Where the two disagree about *what to build next*, the cluster plan and the
-queue row win. Today that means the **Banking & Forex cluster is the open work** (hub `/banking`, five live node owners,
-evidence base [`A1-CLAIMS-LEDGER.md`](A1-CLAIMS-LEDGER.md) M1–M5), the **Umrah cluster's remaining waves are paused, not
-closed**, **Fard Hajj stays a separate linked topic** (its own registration/package page, not an Umrah child), and the
-India pillar in `CONTENT-STRATEGY-2026.md` §5/§6/§12 is an unscheduled gap.
+**Authority clarified 25 October 2026:** the former content strategy, Banking/Umrah rollout plans and
+content queue are historical. They do not select work or grant publication permission. Current direction
+is Bangladesh-first travel intelligence with Umrah as the initial learning cycle; Fard Hajj remains
+separate and linked. The owner-requested master guide and social programme now provide the current
+method and proposed repurposing system. This supporting workflow does not authorize new articles or publication.
 
 If a source, legal rule, code contract, or owner instruction appears to conflict with a content requirement, stop before drafting or changing the live claim. Record the exact conflict, source, date checked, and the narrow decision needed. Do not silently “resolve” a high-impact legal or cost discrepancy.
 
@@ -107,7 +108,15 @@ A later stage does not override a failed earlier gate. If Stage 2 exposes an own
 
 For multi-page work, map the hub and supporting pages before drafting. Audit the existing site first: update a suitable hub in place instead of creating a duplicate, and give each child page one distinct reader job. Use available SERP and GSC evidence to prioritize; otherwise say “not measured.” Do not invent search metrics or produce all cluster pages in one drafting or publishing batch.
 
-Default release order is **hub first, then one supporting article per release wave**, publishing each article's English and Bengali locale routes together. The rollout currently in progress is the Umrah cluster ([`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md)); Fard Hajj remains a separate linked pillar, not one of its children, and no other cluster from [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md) §6/§12 opens until the owner closes or re-prioritises those waves. The owner approves the page set, boundaries, links, and cadence. At each wave, take that one article asset through Stages 1–9 and owner review. Link to live pages only; after a child is deployed, add useful links from the hub and related live pages. Do not add `href`s to planned pages. (Every published blog slug is live and prerendered, so this rule never justifies skipping links to an existing post; the per-article floor and its CI checks are in [`10-CONTENT-UPGRADE-STANDARD.md`](10-CONTENT-UPGRADE-STANDARD.md) §3.) A completed Stage 9 means the repository build is verified, not that the page has been deployed. Follow the owner-controlled post-deploy checks and measurement process in `AI-WRITING-PROMPTS.md`; do not require a ranking gain before starting the next scheduled wave.
+For an explicitly authorized multi-page assignment, the owner approves the page set, boundaries,
+links and cadence. The existing default workflow is **hub first, then one supporting article per
+release wave**, with English and Bengali together; it does not reopen the archived cluster plans.
+Fard Hajj remains a separate linked topic. At each approved wave, take that article asset through
+Stages 1–9 and owner review. Link to live pages only; after a child is deployed, add useful links from
+the hub and related live pages. Do not add `href`s to planned pages. The per-article floor and CI
+checks remain in [`10-CONTENT-UPGRADE-STANDARD.md`](10-CONTENT-UPGRADE-STANDARD.md) §3. A completed
+Stage 9 means the repository build is verified, not deployed. Follow the owner-controlled
+post-deploy checks in `AI-WRITING-PROMPTS.md`.
 
 ## 5. Existing-page refresh contract
 
@@ -158,4 +167,8 @@ Report the exact command results and any remaining limitations. “Build passed�
 
 ## 7. Ownership and stale-document rule
 
-`CONTENT-STRATEGY-2026.md` is the strategy plan of record. A task may record a dated execution decision in the queue and implement it, but must not rewrite strategy to make the task look pre-approved. This queue and ledger are operational records; after work lands, keep only information that remains useful for future reviews, and move genuinely historical evidence to `docs/history/` in line with `AGENTS.md`.
+The [strategy index](../../00-URAL-STRATEGY-INDEX.md) and current owner task define authority;
+the [current audit](../../00-URAL-CURRENT-AUDIT.md) is the diagnostic baseline. Record decisions in
+the authorized task/PR context without making work look pre-approved. Do not append new tasks to
+the archived queue. Preserve useful source provenance, and keep historical instructions in
+`docs/history/` under the documentation rules in `AGENTS.md`.

@@ -1,5 +1,7 @@
 # Saudi stopover — source and implementation record
 
+> **SUPPORTING EVIDENCE — DATED SOURCE RECORD.** Retain the recorded checks, qualifications and claim IDs. Former approvals and next steps below are historical, not current task authorization. No source date is refreshed by this cleanup. Current direction: [strategy index](../../00-URAL-STRATEGY-INDEX.md).
+
 Checked **19 October 2026 (Dhaka)**. Scope: existing stopover article EN/BN, its metadata/snippets/CTA, rendered
 FAQ/procedure and point-of-action cautions. Not the wider cluster, an authenticated booking, or a deployment.
 

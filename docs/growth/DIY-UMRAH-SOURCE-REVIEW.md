@@ -1,5 +1,7 @@
 # DIY process guide — 19 October 2026 source and implementation record
 
+> **SUPPORTING EVIDENCE — DATED SOURCE RECORD.** Retain the recorded checks, qualifications and claim IDs. Former approvals and next steps below are historical, not current task authorization. No source date is refreshed by this cleanup. Current direction: [strategy index](../../00-URAL-STRATEGY-INDEX.md).
+
 Scope: existing main DIY article and BN twin. Owner now authorizes source-led execution of the previous plan,
 sequentially, without waiting for personal app tests. No production publication or wider-cluster certification is implied.
 

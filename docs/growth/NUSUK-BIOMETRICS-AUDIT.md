@@ -1,5 +1,7 @@
 # Nusuk / Saudi Visa Bio — claim audit and release evidence
 
+> **SUPPORTING EVIDENCE — DATED SOURCE RECORD.** Retain the recorded checks, qualifications and claim IDs. Former approvals and next steps below are historical, not current task authorization. No source date is refreshed by this cleanup. Current direction: [strategy index](../../00-URAL-STRATEGY-INDEX.md).
+
 Checked **19 October 2026 (Asia/Dhaka)**. Some fetched source pages display 18 October in Saudi time;
 that is not their publication date. Audience: Bangladeshi ordinary-passport visitors planning Umrah.
 Scope: existing Nusuk EN/BN article, metadata/snippets, links, CTA, procedural schema and target-only renderer behaviour.

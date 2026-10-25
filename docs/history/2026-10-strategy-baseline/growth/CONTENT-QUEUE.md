@@ -1,0 +1,1192 @@
+> **HISTORICAL RECORD — DO NOT TREAT AS CURRENT STATE.**
+>
+> Archived 25 October 2026: former work queue and unique claims/execution ledgers. Claim IDs cited by tests are preserved. "Latest owner sequencing", staged work and future release triggers below are historical, not an active publication queue.
+> Current authority: [strategy index](../../../../00-URAL-STRATEGY-INDEX.md) and [current audit](../../../../00-URAL-CURRENT-AUDIT.md).
+
+# URAL Content Queue and Claims Ledger
+
+**Prepared:** 14 October 2026
+
+**Use with:** [`CONTENT-OS.md`](../../../growth/CONTENT-OS.md) and [`AI-WRITING-PROMPTS.md`](../../../growth/AI-WRITING-PROMPTS.md).
+
+> **Reconstruction note:** the previous session's `CONTENT-QUEUE.md` was not in the checkout and its commit was unavailable. This queue and its row format are reconstructed from the current repository conventions and task brief.
+
+> **Latest owner sequencing — 18 October 2026.** The active content task is the existing Fard Hajj registration article and its associated Hajj checklist PDF, handled as one bounded bilingual page asset with staged work. **Current scope:** one stage at a time. Stage 1 (brief/evidence boundaries), Stage 2 (review of `hajj_notices_and_checklist.pdf`), and Stage 3 (create a corrected, clearly URAL-labelled English checklist PDF for owner review) are complete; findings are in [`HAJJ-SOURCE-REGISTER.md`](../../../growth/HAJJ-SOURCE-REGISTER.md). The owner-approved PDF is copied to `public/downloads/ural-hajj-preparation-checklist-2027-en.pdf`. The localized card appears immediately below the current-season answer in EN/BN and labels the file as an English URAL editorial resource, not a government form. The answer is integrated; the older sections carry an explicit warning that their 2027 claims are not yet reconciled. The bilingual answer draft remains in `docs/history/2026-10-strategy-baseline/growth/drafts/hajj-current-season-answer-en-bn.md`. The first numbered registration section is now rewritten in EN/BN with references to the e-Hajj passport-relaxation and signed-bank-certificate notices; the HowTo schema matches the visible steps. Lint, build and `verify:build` pass (203 checks). The government/private package section is now replaced in EN/BN with a season-aware comparison checklist, and unsupported current-looking price/service claims were removed. The supplied sources still do not establish 2027 prices; 2026 figures remain historical. Lint, build and `verify:build` pass (203 checks); prerendered copy and the existing registration HowTo schema were checked in both locales. The shifting/non-shifting section is now rewritten in EN/BN. It removes the unsupported BDT 80,000–140,000 saving and asks readers to verify accommodation, transfers, luggage, room basis, fees and refund terms in writing. Lint, build and `verify:build` pass (203 checks). The Mina/Arafat tent-category section is now rewritten in EN/BN. Unsupported Maktab distance, assignment and facility claims are explicitly not current 2027 guidance; readers are directed to verify a dated written offer. Lint, build and `verify:build` pass (203 checks), and both prerendered locales were checked. The remaining English-only health/biometrics/permit/card block is now replaced with evidence-safe season guidance and a Bengali twin; the 1447H/2026 and 2026 Saudi source links are labeled historical. Final bilingual safety review also qualified the passport/bank notice wording, neutralized the Hajj eSIM copy, and confirmed nine reference links plus the matching three-step HowTo on both prerendered pages. Lint, build and `verify:build` pass (203 checks), and `git diff --check` is clean. No external deployment. Further exact package prices or 1448H/2027 health, permit, biometrics or card requirements remain gated on applicable official notices. The owner selected the latest supplied Hajj 2027 registration cutoff of **24 September 2026** (window stated as 27 July–24 September; cutoff has passed as of 18 October). Do not silently reuse the prior repository note of 26 September. The 2027 package-price notice was not included in the supplied sources: do not present 2026 prices as current. Keep the Hajj and Umrah intents distinct. The separate Nepal–Bangladesh PDF and Cox’s Bazar work are deferred. Earlier C1/C2 and Wave A/B work is not part of this active task; do not resume it in this pass.
+>
+> **Post-hoc review of the published India land-corridor article (completed 15 October 2026).** PR #37 merged
+> `/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` (English and Bengali) without a queue row,
+> claims ledger, or `references`, and with two phantom `/blog` internal links. Per owner instruction on
+> 15 October 2026 (*"Publish, then review it — fix the two phantom links, add references, and give it a proper
+> queue row"*), the page now has its worked queue row and Stage 2–9 review record below: the two phantom
+> `/blog` links are replaced with live routes, 10 bilingual official references are attached, raw markdown
+> pipes/hashes/links and the stray German token (`weitersetzen`) are cleaned for URAL's renderer, and live
+> rail/IVAC/fare claims are qualified against official portals. This review stabilizes the single shipped page;
+> it does **not** open Sprint 1 or supersede the Umrah cluster rollout.
+
+---
+
+## Queue rules
+
+- Add the target row before drafting. Keep its primary query, verdict, owner decisions, and next gate explicit.
+- Do not state search volume or keyword difficulty unless a dated, market-relevant source is available and recorded. “Not measured” is a valid value.
+- Each content task has one primary URL, one primary reader task, and one locale twin where the route exists.
+- Do not mark Stage 2 complete merely because a source link was added. Open and check the source, record applicability/date/conditions, then mark the claim status.
+- `BLOCKED` means do not draft or edit the live content until the stated evidence or owner decision exists. A fixed URL decision remains fixed unless the owner changes it; a source conflict does not silently authorize a different URL.
+- When a queued piece ships, record the verified build/release result and remove or archive obsolete task detail in line with `AGENTS.md`.
+
+---
+
+## Worked queue row — Umrah pillar refresh
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-14 | **UPDATE IN PLACE — fixed by owner; do not create a second page or change the slug.** | `/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost` | `/bn/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost` | **DIY Umrah from Bangladesh** (owner's task brief; also listed for this URL in `SEO-KEYWORD-MAP.md`) | Informational / execution-intent guide with official route choices, practical booking steps and one carefully qualified BDT planning total. Live Bangladesh SERP was not measured in this session. | Stages 1–8 completed; Stage 8 scores 15/16 with no zero and no hard fail. Stage 9 passed lint/build/verify on 2026-10-14; both locale routes and scoped sitemap/RSS diffs inspected. Code is verified but not externally deployed. Keep `/umrah` as the broader planning hub and this post as the detailed execution article; re-check season-sensitive sources before the next update. |
+
+### Must-preserve and scope notes from the owner
+
+- Keep the same English URL and Bengali twin; no second Umrah page and no slug change.
+- Preserve the three top-level Umrah visa-path categories: standard Umrah visa; 96-hour stopover/transit; eligible Saudi tourist-visa routes. Correct details within those categories when official evidence requires it.
+- Keep Fard Hajj separate from Umrah, including Bangladesh registration and the accurately scoped permit-violation warning.
+- Preserve the existing 10-day, family-of-four-sharing DIY Umrah total of **BDT 1,16,000–1,32,000 per person**. Do not reprice it or publish another budget/savings range without a same-basis, dated source basket.
+- Keep the Bengali twin at full decision-level parity and retain the existing useful internal links. Replace the category-only fallback with claim-linked sources, and label any retained general portal honestly rather than implying it supports Saudi Umrah claims.
+- New visa, rail, hotel, cost, app or legal claims must pass the Stage 2 ledger. No guessed search volume/difficulty; no unsourced exact airfare, hotel price, walking distance, shuttle guarantee, “free hotel,” or blanket “no agency needed” claim.
+
+---
+
+## Stage 2 — Umrah claims ledger (checked 14 October 2026)
+
+**Status:** research and owner decisions are complete, and the article now applies both material resolutions: (1) three top-level categories, with direct Nusuk under Standard Umrah Visa and the external-agent accommodation/transport condition; (2) the dated 1447H Hajj penalty wording with the ten-year ban scoped to the narrower deported-infiltrator category. Seasonal findings and claim limits below remain cues to refresh against the next official notice before a future trip season.
+
+| ID | Claim / proposed section | Primary source checked | Finding as of 2026-10-14 | Status / safe action |
+|---|---|---|---|---|
+| U-01 | Pathway A: standard Umrah visa through Nusuk or an external agent; prior copy said an authorized Bangladesh agency could sell visa-only. | Ministry Nusuk Umrah launch: <https://haj.gov.sa/en/Media-Center/Ministry-News/Ministry-of-Hajj-and-Umrah-launches-Nusuk-Umrah-service-to-enable-pilgrims-from-outside-the-Kingdom>; official registration: <https://umrah.nusuk.sa/registration/signup>; Terms: <https://umrah.nusuk.sa/TermsOfUse>; Ministry FAQ: <https://haj.gov.sa/en/FAQ> | The Ministry announcement's publication date is **20 August 2025**; the page header is dynamic and showed 14 October 2026. It says overseas pilgrims can apply directly without an intermediary, and describes selectable individual services including visa. Bangladesh appears in the current Nusuk signup lists for both country of residence and nationality. The Terms say target countries can change and define an individual package as a collection of more than one service. The Ministry FAQ says an **external agent** cannot issue an Umrah visa without accommodation and transport services. | **RESOLVED / QUALIFIED (owner approved 2026-10-14).** Keep category 1 as Standard Umrah Visa; present direct Nusuk service and an authorized external provider as channels within it. Bangladesh is currently listed for registration, but service options/approval are not guaranteed and stand-alone visa-only checkout must not be promised. State the Ministry FAQ's accommodation-plus-transport condition specifically for external agents. |
+| U-02 | 1448H visa and entry window; do not call Umrah unrestricted year-round. | Ministry 1448H calendar: <https://haj.gov.sa/en/Media-Center/Ministry-News/2026/Ministry-of-Hajj-and-Umrah-Announces-the-Umrah-Season-Calendar-for-1448-AH> | For the 1448H season, the calendar says visa issuance and pilgrim entry began 31 May 2026; final visa issuance is 9 March 2027; final entry 23 March 2027; final departure 7 April 2027. Dates apply to that season only. | **VERIFIED / SEASON-BOUND.** Identify the 1448H dates as current checked guidance, not a permanent annual rule. Tell readers to check the next Ministry calendar before booking. |
+| U-03 | Pathway B: Saudi stopover/transit visa through Saudia or flynas. | Visit Saudi stopover page: <https://www.visitsaudi.com/en/campaigns/saudi-stopover>; Saudia application: <https://www.saudia.com/transit-visa>; flynas: <https://www.flynas.com/en/stopovervisa> | Visit Saudi says stopover entry may be up to 96 hours and its FAQ says travelers booking with Saudia or flynas can apply. Its Saudia offer lists a free visa, application fee around SAR 39.50 and medical insurance from SAR 13; fees and airline conditions can differ at checkout. | **QUALIFIED.** Keep the 96-hour route. Say eligibility depends on the through-itinerary and current airline checkout. Do not generalize Saudia's exact fee to flynas, convert to BDT without a dated rate, or promise a complimentary hotel. |
+| U-04 | Pathway C: Saudi tourist-visa eligibility for Bangladeshi passport holders, visa holders and GCC residents. | Official eVisa portal: <https://visa.visitsaudi.com/>; Visit Saudi Package Visa: <https://www.visitsaudi.com/en/campaigns/package-visa>; used-visa FAQ: <https://help.visitsaudi.com/hc/en-us/articles/360018933099-Can-I-get-a-visit-visa-if-I-have-a-valid-US-or-UK-or-Schengen-visa->; Visit Saudi FAQ: <https://www.visitsaudi.com/en/faq> | Bangladesh is not in the standard nationality-only eVisa country list currently shown on the official portal. Visit Saudi separately lists Bangladesh passport holders for its **Package Visa** when an integrated package includes confirmed flights and accommodation through an approved provider. The official used-visa FAQ describes visa-on-arrival eligibility for holders of valid, previously used US/UK/Schengen tourist or business visas, subject to air-arrival and carrier conditions. GCC-resident eligibility is a separate route with current residency/occupation criteria; the live FAQ/portal controls. | **VERIFIED / QUALIFIED.** Retain Pathway C as one top-level category, with the Package Visa, eligible used-visa arrival, and GCC-resident routes as sub-options. Do not claim that a used US/UK/Schengen visa automatically gives a direct one-year eVisa; say visa-on-arrival if current conditions are met. Tell ordinary Bangladeshi passport holders not to assume nationality-only tourist eVisa eligibility. |
+| U-05 | Bangladesh Hajj registration and current 2027 schedule; keep Hajj distinct from Umrah. | Bangladesh Haj Management Portal: <https://www.hajj.gov.bd/>; Saudi Ministry FAQ: <https://haj.gov.sa/en/FAQ> | The Bangladesh portal's current notice lists the 2027 registration cutoff as 26 September 2026 (past on the check date), visa issuance beginning 28 January 2027 and Hajj flights beginning 8 April 2027. The portal describes pre-registration followed by final registration. Season notices and reopening/extension announcements control. | **VERIFIED / SEASON-BOUND.** Link to the portal and describe the two-stage process. If mentioning the 2027 cutoff, label it as the current portal notice and already passed as of 14 October; do not imply registration remains open or copy dates into later years. |
+| U-06 | Hajj permit violation consequences; prior copy stated SAR 10,000+ and a universal ten-year ban. | Saudi Press Agency reporting the Interior Ministry's 1447 announcement: <https://www.spa.gov.sa/en/N2559888> | For 1447H (2026), the announcement sets a fine up to SAR 20,000 for performing/attempting Hajj without a permit and for visit-visa holders entering/remaining in Makkah or the Holy Sites during the specified Hajj restriction period. The ten-year ban is for deported infiltrators, including residents and people who overstay visas—not every visitor. New seasons may set new dates/rules. | **RESOLVED / SEASON-BOUND (owner approved 2026-10-14).** State that the 1447H (2026) notice sets a fine up to SAR 20,000 for the specified no-permit Hajj / visit-visa violations; the ten-year re-entry ban applies to the narrower deported-infiltrator category, not every visitor. Link the official notice and say later seasons' notices control. |
+| U-07 | Umrah vaccination and health requirements. | Saudi Ministry of Health 1447H Umrah requirements: <https://www.moh.gov.sa/en/HealthAwareness/Pilgrims-Health/Documents/Health-Regulations-Umrah-EN.pdf>; Ministry pilgrim-health index: <https://www.moh.gov.sa/en/healthawareness/pilgrims-health/pages/default.aspx> | The current 1447H (2026) PDF requires an accepted meningococcal vaccine covering ACYW for all Umrah travelers: conjugate ACYW/ACYWX within five years or quadrivalent polysaccharide within three years, given at least ten days before arrival. Polio/yellow-fever requirements depend on the listed arrival countries. COVID-19 proof applies to specified higher-risk groups, not all travelers. This season-specific PDF takes priority over older, mixed-era FAQ entries. | **VERIFIED / SEASON-BOUND.** State the current 1447H rule and tell readers to re-check the next MOH PDF and the country-of-arrival lists. Do not repeat an unsourced “COVID is never required” or a universal polio requirement. |
+| U-08 | Saudi Visa Bio for applicants from Bangladesh. | Ministry FAQ biometric answers: <https://haj.gov.sa/en/FAQ>; Saudi Visa Bio app listing by the Saudi Ministry of Foreign Affairs: <https://play.google.com/store/apps/details?id=sa.gov.mofa.saudivisabio> | The Ministry FAQ lists Bangladesh among countries where biometric enrollment has been implemented for electronically issued Umrah visas and names Saudi Visa Bio. The requirement is visa/application-specific; the same statement should not be generalized to all tourist or stopover visas. | **QUALIFIED.** Say the current Ministry FAQ lists Bangladesh for Umrah-visa biometrics; follow the instructions in the current official visa application and Saudi Visa Bio app. Avoid saying that every pilgrim must use it before flying. |
+| U-09 | Nusuk Umrah permit and Rawdah permit timing/booking. | Ministry Umrah permit service: <https://haj.gov.sa/en/E-Services/Umrah-Permit-Application>; Rawdah service: <https://haj.gov.sa/en/E-Services/Permit-to-Visit-Al-Rawdah-Al-Sharifiyah-for-Men-Women> | The service pages list visitors among the eligible users, name the Nusuk App and website, and instruct users to select an available date/time slot. The Rawdah service page describes a free appointment permit. No fixed weekly slot-release schedule is published in these sources. | **VERIFIED / QUALIFIED.** Explain the steps and advise checking live availability. Do not state a fixed day, guaranteed window or “free Rawdah every time” beyond the service page's current cost/terms. |
+| U-10 | Haramain rail booking, fare and baggage. | Official HHR fares: <https://sar.hhr.sa/travel/fares>; baggage: <https://sar.hhr.sa/travel/guidelines/baggage>; booking: <https://sar.hhr.sa/> | On 14 October 2026 the HHR tariff table listed a SAR 162 base Economy fare for Makkah–Madinah and SAR 65 for KAIA–Makkah; the operator says these are basic fares, VAT/fees are excluded and checkout prices vary by date, occupancy and other factors. Baggage page allows one large piece up to 25 kg / 65 × 55 × 35 cm and one hand item. | **VERIFIED / DYNAMIC.** If retaining the checked base fare, label route/class/date and “before VAT/fees; live checkout may differ.” Explain how to check/book on the official portal. Use the current baggage dimensions, not the old 65 × 45 × 30 cm claim. |
+| U-11 | Makkah/Madinah hotel zones, walking distance, hotel price and shuttle. | Existing hotel-zone child page is internal only; no exact property/date/map route or provider quote was captured for this task. | Neighborhood names alone do not verify a hotel's actual entrance-to-gate route, slope, road closure, walking time, shuttle schedule or price. | **QUALIFIED / NO PRECISION.** Give zone names only as search starting points. Direct readers to verify the exact property address, live route to their intended gate, accessibility and shuttle schedule with the hotel; do not include distances, hotel rates or blanket free-shuttle claims. |
+| U-12 | Existing total: 10 days, family of four sharing, BDT 1,16,000–1,32,000 per person. | Current EN/BN page and owner instruction; no matched live flight/hotel/visa/transport basket in this checkout. | The range is owner-mandated for preservation. The old component ranges did not reconcile to the stated ceiling, and some vary between locales. No like-for-like current booking basket was captured. | **PRESERVE; QUALIFY; REMOVE UNSUPPORTED COMPONENT AMOUNTS.** Keep the one range as an existing planning estimate, say it was not re-priced in this refresh and is not a live quote. Do not add the previous comfort range, a component-max table, a package comparison price or a savings number. |
+| U-13 | Agency package vs DIY comparison. | Nusuk platform and Ministry-approved external-agent information; no same-date, same-duration, same-occupancy Bangladesh package quote recorded. | No comparable itemized agency offer is available for a matched 10-day trip. The preserved DIY estimate is not enough to infer savings. | **QUALITATIVE ONLY.** Compare who arranges visa, services, flights and local logistics. Offer an apples-to-apples quote checklist; state that neither option is automatically cheaper. |
+| U-14 | References and useful internal links. | Existing EN `BLOG_DATA` entry, Bengali override, category-level references in `src/routes/BlogPostRouteView.tsx`, and target scope. | EN had four useful internal links; BN had three. The old category fallback showed six general portal cards, including a combined UAE/JAKIM label that linked only to `u.ae`; it did not support Saudi Umrah claims. | **IMPLEMENTED / SCOPE-CLEANED.** Keep all prior EN/BN internal links and add `/umrah` to BN for parity. Replace the category fallback on this target with 18 numbered claim-linked sources, four relevant authority/booking portals, and the retained UAE URL clearly labeled as general regional information only; the old card had no JAKIM link, so no JAKIM claim is retained. The localized list carries all 23 links in both routes. Other posts are unchanged. |
+| U-15 | Actual article surface and rendering contract. | `src/constants.ts`, `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, `src/App.tsx`, `src/routes/BlogPostRouteView.tsx`, `src/utils/blogStructuredData.ts`, `scripts/prerender.ts`, `scripts/verify-build.ts`; `src/data/contentMeta.ts` checked but unchanged. | The article needed target-only semantic table rendering, visible FAQs plus FAQPage schema, localized references, and suppression of stale shared Hajj/Umrah facts; the generic body renderer uses plain-text paragraphs. | **IMPLEMENTED / VERIFIED.** Added the target table marker and locale-aware React/prerender renderers; allowlisted the EN/BN FAQ heading for this slug; suppressed the shared panel only here; passed the target-focused React/prerender checks. `CONTENT_UPDATED` remains 2026-10-14. No other post body or route was changed. |
+
+### Stage 3–8 execution record (14 October 2026)
+
+- **Stage 3 — Brief: complete.** The page job is to help a Bangladeshi passport holder select an eligible visa route, follow a practical DIY sequence, and keep Fard Hajj separate. `/umrah` remains the broad planning hub. Live Bangladesh SERP/GSC observations were not available and remain explicitly unmeasured.
+- **Stage 4 — English: complete.** The answer leads; exactly three top-level visa categories remain. Unsupported airfare, hotel, distance, and package-savings claims were removed. The retained BDT estimate is qualified as unre-priced; one semantic table, sourced current-season conditions, and practical checks are included.
+- **Stage 5 — Bengali: complete.** The Bengali override carries the same three categories, eligibility caveats, dates, penalty scope, fare/baggage figures, booking steps, one retained BDT estimate, references, and five FAQs; it is not a shortened summary.
+- **Stage 6 — package: complete.** EN/BN title, summary, 14 October review date, AEO snippets, visible FAQ/schema, numbered references, retained internal links, and eSIM caveat are aligned.
+- **Stage 7 — preflight: passed.** EN/BN claim and citation numbering, category count, date/cost basis, SAR fare units, baggage dimensions, permit steps, FAQ pairs, and route links were reviewed. Both article bodies contain only the preserved BDT planning estimate (repeated in the lead and table, with no second budget range); the estimate is not a live quote.
+- **Stage 8 — red team:**
+
+  | Dimension | Score / 4 | Reason |
+  |---|---:|---|
+  | Intent and format | 3 | Direct execution answer and useful guide structure; live Bangladesh SERP format remains unmeasured. |
+  | Factual evidence and safety | 4 | Primary-source ledger; dates and penalty rules are season-bound; unresolved precision and unsupported comparisons removed. |
+  | Usability and actionability | 4 | Three route choices, booking order, semantic budget table, checks, and useful internal links. |
+  | Locale, trust, and release | 4 | Full BN decision parity, visible cited sources, FAQ/schema parity, route/build checks. |
+  | **Total** | **15 / 16** | **Pass (≥13); no zero scores and no hard fail.** |
+
+---
+
+## Stage 9 — repository handoff and verification (14 October 2026)
+
+**Repository implementation verified; not externally deployed.** The in-place article update is in `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, and `src/constants.ts`; target AEO copy is in `src/App.tsx`. Target-only React rendering/FAQ behavior is in `src/routes/BlogPostRouteView.tsx` and `src/utils/blogStructuredData.ts`; static output is in `scripts/prerender.ts`, with target regression checks in `scripts/verify-build.ts`. `src/data/contentMeta.ts` was left unchanged at 2026-10-14. The method/prompt/queue guidance is in `docs/growth/`; `CONTENT-STRATEGY-2026.md` was not edited.
+
+- `npm run lint` — **PASS** (`tsc --noEmit`).
+- `npm run build` — **PASS**; 93 English + 93 Bengali canonical routes prerendered. Vite emitted a non-blocking chunk-size warning for chunks above 250 kB.
+- `npm run verify:build` — **PASS, all 145 checks**. Added assertions cover the semantic EN/BN table, all 23 ordered source/portal references and Bengali propagation, FAQ/schema parity, and the React route's suppression of the stale shared Hajj panel.
+- Inspected `dist/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost.html` and `dist/bn/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost.html`: one semantic budget table per route, visible locale-specific FAQ, FAQPage JSON-LD, 23 numbered references, matching 14 October checked date, and no unresolved table marker. The client React render check confirms the target's own FAQ replaces the shared Hajj/Umrah panel.
+- `public/sitemap.xml` diff is limited to `<lastmod>` for the English and Bengali target URLs (`2026-10-14T09:00:00+06:00`). `public/rss.xml` diff is limited to the target title and summary; URL/guid, publication date and the other 46 items are unchanged. No other post body or slug changed.
+
+**Release boundary:** code and generated repository artifacts are ready for owner review; deployment, live SERP/GSC measurement, and post-release monitoring have not been performed.
+
+---
+
+## Worked queue row — Nusuk / Rawdah / Saudi Visa Bio guide (Wave 3A)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-14 | **UPDATE IN PLACE — fixed slug; no second page.** | `/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit` | `/bn/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit` | **Nusuk app and Saudi Visa Bio guide for Bangladeshi pilgrims** | Informational / execution-intent guide: official apps, biometric steps, Nusuk visitor registration, Rawdah appointment permit, live availability. Live Bangladesh SERP was not measured. | Stages 1–9 completed in this wave; lint/build/verify:build to be recorded below. Code verified, not externally deployed. |
+
+### Must-preserve and scope notes from the owner
+
+- Keep the same English URL and Bengali twin; no slug change.
+- Scope **Saudi Visa Bio** to the current Saudi Ministry FAQ: Bangladesh is listed for biometric enrollment for electronically issued Umrah visas. Do not claim every tourist or stopover traveler must use it.
+- Remove any fixed weekly ("Friday") Rawdah slot-release guarantee. State that the Rawdah service page describes a free appointment permit and instructs users to select an available date/time slot; no fixed weekly schedule is published.
+- Keep visa permission distinct from a Nusuk permit. Keep full English/Bengali decision parity.
+- `CONTENT_UPDATED` stays 2026-10-14; use `updatedAt` on `blog-16`.
+
+### Stage 2 — Nusuk / Rawdah / Saudi Visa Bio claims ledger (checked 14 October 2026)
+
+| ID | Claim / proposed section | Primary source checked | Finding as of 2026-10-14 | Status / safe action |
+|---|---|---|---|---|
+| U-01 | Standard Umrah Visa channel and Nusuk registration. | Ministry Nusuk Umrah launch; registration; Terms; Ministry FAQ. | Overseas pilgrims can apply directly without an intermediary; Bangladesh listed in signup; external agent cannot issue an Umrah visa without accommodation and transport services. | **QUALIFIED.** Keep direct Nusuk and external provider as channels; state the Ministry FAQ's accommodation-plus-transport condition for external agents. |
+| U-02 | 1448H visa and entry window; Umrah is not unrestricted year-round. | Ministry 1448H calendar. | Visa issuance and pilgrim entry began 31 May 2026; final visa issuance 9 March 2027; final entry 23 March 2027; final departure 7 April 2027. Season-bound. | **VERIFIED / SEASON-BOUND.** Label as current checked guidance; tell readers to check the next calendar. |
+| U-08 | Saudi Visa Bio for applicants from Bangladesh. | Ministry FAQ biometric answers; Saudi Visa Bio app listing. | Ministry FAQ lists Bangladesh among countries where biometric enrollment has been implemented for electronically issued Umrah visas and names Saudi Visa Bio. Requirement is visa/application-specific. | **QUALIFIED.** Say the current Ministry FAQ lists Bangladesh for Umrah-visa biometrics; follow current official visa application and app. Avoid saying every pilgrim must use it before flying. |
+| U-09 | Nusuk Umrah permit and Rawdah permit timing/booking. | Ministry Umrah permit service; Rawdah service. | Service pages list visitors among eligible users, name the Nusuk App and website, and instruct users to select an available date/time slot. Rawdah service page describes a free appointment permit. No fixed weekly slot-release schedule is published. | **VERIFIED / QUALIFIED.** Explain steps and advise checking live availability. Do not state a fixed day, guaranteed window, or "free Rawdah every time" beyond the service page's current cost/terms. |
+
+### Stage 3–8 execution record (14 October 2026)
+
+- **Stage 3 — Brief: complete.** Page job: help a Bangladeshi passport holder prepare the official Nusuk and, where applicable, Saudi Visa Bio steps, register as a Visitor, and book a Rawdah appointment permit without overclaiming biometric or slot-release rules. `/umrah` and the main DIY guide remain the broader planning/process owners.
+- **Stage 4 — English: complete.** Answer leads; Saudi Visa Bio scoped to the Ministry FAQ's Umrah-visa biometric listing; fixed Friday Rawdah release removed; live availability emphasized; five FAQs added; numbered references added.
+- **Stage 5 — Bengali: complete.** Bengali override carries the same sections, qualifications, references, and five FAQs; not a shortened summary.
+- **Stage 6 — package: complete.** EN/BN title, summary, 14 October review date, AEO snippets, visible FAQ/schema, numbered references, retained internal links aligned.
+- **Stage 7 — preflight: passed.** Claim/citation numbering, Saudi Visa Bio scope, absence of fixed Friday guarantee, FAQ pairs, route links, and EN/BN parity reviewed.
+- **Stage 8 — red team:**
+
+  | Dimension | Score / 4 | Reason |
+  |---|---:|---|
+  | Intent and format | 3 | Direct execution answer and useful guide structure; live Bangladesh SERP format remains unmeasured. |
+  | Factual evidence and safety | 4 | Primary-source ledger; Saudi Visa Bio scoped to official FAQ; no fixed slot-release claim. |
+  | Usability and actionability | 4 | Biometric steps, Nusuk registration, Rawdah booking steps, FAQs, source links. |
+  | Locale, trust, and release | 4 | Full BN decision parity, visible cited sources, FAQ/schema parity, route/build checks. |
+  | **Total** | **15 / 16** | **Pass (≥13); no zero scores and no hard fail.** |
+
+### Stage 9 — repository handoff and verification (14 October 2026)
+
+**Repository implementation verified; not externally deployed.** The in-place article update is in `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, and `src/constants.ts`; target AEO copy is in `src/App.tsx`. FAQPage allowlisting is in `src/utils/blogStructuredData.ts` and `scripts/verify-build.ts`. `src/data/contentMeta.ts` was left unchanged at 2026-10-14; `updatedAt` on `blog-16` is 2026-10-14.
+
+- `npm run lint` — **PASS** (`tsc --noEmit`).
+- `npm run build` — **PASS**; 94 English + 94 Bengali canonical routes prerendered.
+- `npm run verify:build` — **PASS, all 145 checks**. FAQPage coverage now includes blog-16 in both locales; HowTo coverage already included it.
+- Inspected `dist/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit.html` and `dist/bn/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit.html`: FAQPage JSON-LD present, numbered references rendered, no 'Friday' Rawdah release claim, Saudi Visa Bio scoped to the Ministry FAQ.
+
+---
+
+## Worked queue row — Dhaka–Kolkata land-corridor post-hoc review (`blog-48`)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-15 | **REVIEW & QUALIFY IN PLACE — owner selected post-deploy review; keep `blog-48` published, replace the two phantom `/blog` links, add official references, and record the claims ledger.** | `/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` | `/bn/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` | **Dhaka to Kolkata by train and bus (Benapole border & BDT cost)** (`CONTENT-STRATEGY-2026.md` §5/§6 gap #1; live Bangladesh SERP/volume not measured) | Operational overland border-crossing and transport guide for Bangladeshi passport holders comparing the suspended Maitree Express, active Dhaka–Benapole–Petrapole–Kolkata bus corridor, IVAC sticker-visa process, and an indicative 3-day Kolkata planning budget. Live Bangladesh SERP was not measured in this session. | Stages 1–8 completed on 2026-10-15; Stage 8 scores 15/16 with no zero and no hard fail. Stage 9 passed lint/build/verify (145 checks) on 2026-10-15. Two phantom `/blog` links replaced with live routes; 10 bilingual official references added; EN/BN formatting and FAQPage JSON-LD aligned. Do **not** open additional India cluster pages until the active Umrah cluster waves in `UMRAH-CLUSTER-PLAN.md` close or are re-prioritised by the owner. |
+
+### Scope and owner constraints
+
+- Keep `/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` and `/bn/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` live as `blog-48` (48 published blog posts total).
+- Remove the two phantom English `internalLinks` that pointed at `/blog` while promising non-existent India guides (`"Best Time to Visit India from Bangladesh (Weather + Fares)"` and `"India e-Visa & IVAC Visa Guide for Bangladeshis"`), replace them with real, relevant live routes (`/blog/dual-currency-card-endorsement-bangladesh` and `/flights`), make the `/costs` anchor text honest (`"Outbound Trip Cost Benchmarks & BDT Budget Planner"`), and bring the Bengali `internalLinks` to 5-link parity.
+- Add 10 bilingual official primary references (`railway.gov.bd`, `eticket.railway.gov.bd`, `indianrailways.gov.in`, `ivacbd.com`, `ivacbd.com/kind-of-visas-documents`, `indianvisa-bangladesh.nic.in`, `hcidhaka.gov.in`, `nbr.gov.bd`, `blpa.gov.bd`, `lpai.gov.in`) in both `src/constants.ts` and `src/data/bengaliContent.ts`, with `updatedAt: "2026-10-15"`.
+- Preserve the existing 3-day, 2-night Kolkata overland planning budget of **BDT 8,000–18,000 per person** (`BDT 8,000–12,000` budget tier; `BDT 15,000–18,000` comfortable tier) as an explicitly qualified planning reference rather than a live operator or hotel quote.
+- Leave `src/data/contentMeta.ts` (`CONTENT_UPDATED = "2026-10-14"`) untouched so the 77 non-blog hub `<lastmod>` timestamps in `public/sitemap.xml` are not churned by a single-article review; blog posts carry their own ISO timestamp from `BLOG_DATA[].date` / `updatedAt`.
+
+---
+
+## Stage 2 — Dhaka–Kolkata claims ledger (checked 15 October 2026)
+
+| ID | Claim / section | Primary source / portal | Finding as of 2026-10-15 | Status / safe action |
+|---|---|---|---|---|
+| IN-01 | Section 1: Cross-border passenger train status (Maitree Express Dhaka–Kolkata, Bandhan Express Khulna–Kolkata, Mitali Express Dhaka–New Jalpaiguri) suspended since July 2024. | Bangladesh Railway: <https://railway.gov.bd/> and <https://eticket.railway.gov.bd/>; Indian Railways: <https://indianrailways.gov.in/> | Cross-border passenger rail services were halted in mid-July 2024 and no official restart timetable was confirmed in this checkout. PR #37 cited a non-existent domain (`railwayticket.bd`) instead of the official Bangladesh Railway portals (`railway.gov.bd` and `eticket.railway.gov.bd`). | **QUALIFIED / PORTAL FIXED.** Replace `railwayticket.bd` with `railway.gov.bd` and `eticket.railway.gov.bd` `[1–2]` plus `indianrailways.gov.in` `[3]`. State that trains have been suspended since July 2024 with no confirmed restart date as of 15 October 2026, and instruct readers to check the official railway portals before planning. |
+| IN-02 | Section 1: Padma Bridge reroute proposal (~6-hour journey time and potential fare reduction). | Bangladesh Railway: <https://railway.gov.bd/>; Indian Railways: <https://indianrailways.gov.in/> | Routing Dhaka–Kolkata passenger trains via the Padma Bridge corridor instead of Jamuna Bridge–Darsana has been discussed bilaterally, but no official international timetable or tariff table has been published. | **QUALIFIED.** Present the ~6-hour duration and any fare change strictly as unconfirmed proposals pending bilateral operational agreement `[1, 3]`. |
+| IN-03 | Section 2: Pre-suspension rail fare figures (domestic Dhaka–Benapole classes BDT 319–1,181 vs Maitree Express USD-pegged international fares ~USD 20–30). | Bangladesh Railway: <https://railway.gov.bd/>, <https://eticket.railway.gov.bd/>; Indian Railways: <https://indianrailways.gov.in/> | PR #37 mixed domestic Bangladesh Railway intercity class codes (`SHOVAN`, `S_CHAIR`, `SNIGDHA`, `AC_S`, `AC_B`, BDT 206–1,181) with USD-pegged Maitree Express cross-border fares (~USD 20 AC Chair / ~USD 30 AC Seat before travel tax and VAT), and formatted them as raw markdown pipe tables (`\|---\|---\|`) that rendered as literal pipe text. | **QUALIFIED / REFORMATTED.** Clearly separate historical Maitree Express USD-pegged cross-border benchmarks from domestic Dhaka–Benapole intercity rail benchmarks, qualify all figures as historical planning references (not live quotes), and replace raw pipe syntax with clean bullet lists `[1–3]`. |
+| IN-04 | Section 3: Benapole–Petrapole land border crossing sequence, operating hours, and visa checkpost rule. | Bangladesh Land Port Authority: <https://blpa.gov.bd/>; Land Ports Authority of India (ICP Petrapole): <https://lpai.gov.in/>; IVAC Bangladesh: <https://www.ivacbd.com/kind-of-visas-documents> | PR #37's Step 2 listed Indian entry at Petrapole before Bangladesh exit at Benapole for a Dhaka departure, contained a stray German token (`weitersetzen`) in the Bengali twin, and over-generalized that "all other Bangladesh–India land borders are closed to foreign nationals." | **CORRECTED / QUALIFIED.** Order outbound Dhaka→Kolkata border steps physically (1. Bangladesh exit & travel tax at Benapole; 2. 200–500 m no-man's land walk; 3. Indian BSF, immigration & customs at ICP Petrapole), remove `weitersetzen` in Bengali, and state that land entry/exit must match the checkpost endorsed on the traveler's Indian visa (e.g., `Haridaspur / Benapole`) `[4–6, 8–10]`. |
+| IN-05 | Section 3 & 5: Mandatory Bangladesh land-border travel/departure tax at Benapole. | National Board of Revenue (NBR) Bangladesh: <https://nbr.gov.bd/>; Bangladesh Land Port Authority: <https://blpa.gov.bd/> | Outbound land travelers from Bangladesh must pay government land-border travel tax at the designated bank/port counter (or through a bus operator's handling desk for a small service fee). Exact statutory rates follow the current NBR Finance Act schedule. | **QUALIFIED.** State that mandatory Bangladesh land-border travel/departure tax is payable at Benapole before exit immigration (with official receipt), and note that the exact BDT rate is governed by the current NBR Finance Act schedule `[8–9]`. |
+| IN-06 | Section 3: Dhaka–Benapole and Petrapole–Kolkata bus operators and indicative fares. | Operator counter schedules (Green Line, Shyamoli, Desh Travels, Souhardo); Eastern Railway suburban network: <https://indianrailways.gov.in/> | No live dated operator checkout was captured in this session. Bus fares in BDT and INR vary by operator, coach class (non-AC, standard AC, business/sleeper), and whether booked as a coordinated through-ticket or split at the border. | **QUALIFIED.** Present BDT and INR bus figures as indicative planning ranges, not live operator quotes, and note the budget suburban rail option from Bongaon Junction to Kolkata Sealdah `[3]`. |
+| IN-07 | Section 4: India visa eligibility for Bangladeshi passport holders, IVAC appointment availability, and IVAC processing fee. | IVAC Bangladesh: <https://www.ivacbd.com/> and <https://www.ivacbd.com/kind-of-visas-documents>; Online Visa Portal: <https://indianvisa-bangladesh.nic.in/>; High Commission of India Dhaka: <https://www.hcidhaka.gov.in/> | Ordinary Bangladeshi passport holders are not eligible for the Indian e-Visa and must apply for a sticker visa via `indianvisa-bangladesh.nic.in` and IVAC (`ivacbd.com`). Under bilateral arrangements there is no Indian government visa fee, while IVAC collects a mandatory processing fee (historically published around BDT 800–1,500 plus payment charges). Live IVAC slot availability was not measured in this session. | **QUALIFIED.** Retain the prominent caveat that live IVAC slot availability was not measured on 15 October 2026; instruct readers to verify current appointment capacity and the exact IVAC processing fee directly on `ivacbd.com` and `hcidhaka.gov.in` before making travel plans `[4–7]`. |
+| IN-08 | Section 5: Indicative 3-day, 2-night Kolkata overland budget of BDT 8,000–18,000 per person. | Inherited article planning estimate (PR #37); no matched live operator/hotel checkout basket in this session. | The headline and summary state BDT 8,000–18,000 (`BDT 8,000–12,000` budget tier; `BDT 15,000–18,000` comfortable tier) for a 3-day, 2-night overland trip via Benapole–Petrapole. PR #37 had three separate raw markdown pipe tables that broke URAL's renderer. | **PRESERVE & QUALIFY.** Consolidate into one coherent 3-day overland budget breakdown in Section 5 (`BDT 8,000–12,000` budget; `BDT 15,000–18,000` comfortable), state inclusions/exclusions and that it was not re-priced on 15 October 2026, and format cleanly for URAL's renderer without raw pipes. |
+| IN-09 | Section 6: Dhaka (DAC) to Kolkata (CCU) flight duration and indicative one-way fare band. | URAL flight search hub (`/flights`); no dated live airline checkout captured. | Direct DAC–CCU flights take about 1 hour 10 minutes on Biman Bangladesh Airlines, US-Bangla Airlines, or IndiGo. Airfares and baggage allowances vary by date and fare family. | **QUALIFIED.** Label the one-way BDT 6,500–12,000 range as an indicative historical benchmark before peak-season surcharges and baggage add-ons, route readers to `/flights`, and remind them to verify `By Air` visa endorsement `[5–6]`. |
+| IN-10 | Article metadata, internal links, references, cover image dimensions, AEO snippet, and FAQ schema contract. | `src/constants.ts`, `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, `src/App.tsx`, `src/utils/imageAssets.ts`, `src/utils/blogStructuredData.ts`, `src/routes/BlogPostRouteView.tsx`, `scripts/prerender.ts`, `scripts/verify-build.ts` | PR #37 had two phantom `/blog` links, no `references`, raw markdown (`##`, `---`, `\|---\|`, `[text](url)`), missing `RESPONSIVE_IMAGE_HEIGHTS` entry (`670`), missing `getBlogCoverImage` / `getBlogAeoSnippet50Words` entries in `src/App.tsx`, and an un-allowlisted FAQ section. | **IMPLEMENTED / VERIFIED.** Replaced the two phantom links with live routes (`/blog/dual-currency-card-endorsement-bangladesh` and `/flights`); aligned 5 EN/BN `internalLinks`; added 10 bilingual `references`; registered image height `670` and SPA cover/AEO snippet in `src/App.tsx`; allowlisted `7. Frequently Asked Questions` / `৭. সচরাচর জিজ্ঞাসা` for `FAQPage` JSON-LD parity. |
+
+### Stage 3–8 execution record — Dhaka–Kolkata review (15 October 2026)
+
+- **Stage 3 — Brief: complete.** The page job is to help a Bangladeshi passport holder evaluate overland travel between Dhaka and Kolkata while cross-border trains are suspended, follow the physical Benapole–Petrapole border sequence, check IVAC sticker-visa requirements and live slot caveats, and plan around one qualified 3-day BDT budget.
+- **Stage 4 — English: complete.** Formatted in URAL's clean numbered-section structure (`1.`–`7. Frequently Asked Questions`), with numbered citations `[1–10]`, corrected Benapole→Petrapole outbound crossing sequence, official railway domains (`railway.gov.bd`, `eticket.railway.gov.bd`, `indianrailways.gov.in`), and one consolidated 3-day planning budget (`BDT 8,000–12,000` budget; `BDT 15,000–18,000` comfortable).
+- **Stage 5 — Bengali: complete.** Full decision-level parity across all seven sections (`১.`–`৭. সচরাচর জিজ্ঞাসা`), 10 localized references `[১–১০]`, 5 localized internal links, 6 FAQ pairs, and removal of the stray German word `weitersetzen` and raw markdown pipes.
+- **Stage 6 — package: complete.** `updatedAt: "2026-10-15"`, 10 bilingual `references`, 5 verified `internalLinks`, `aviasales` `affiliateCTA`, `RESPONSIVE_IMAGE_HEIGHTS` (`670`), `getBlogCoverImage`, `getBlogAeoSnippet50Words` (EN & BN), and `BLOG_FAQ_CONFIGS` (`FAQPage` JSON-LD) are all wired.
+- **Stage 7 — preflight: passed.** Checked EN/BN citation numbering `[1–10]` / `[১–১০]`, border sequence parity, BDT 8,000–18,000 budget parity, internal-link targets, and `date`/`updatedAt`/`CONTENT_UPDATED` separation (`CONTENT_UPDATED` kept at `2026-10-14` so non-blog hub `<lastmod>` values do not churn).
+- **Stage 8 — red team:**
+
+  | Dimension | Score / 4 | Reason |
+  |---|---:|---|
+  | Intent and format | 3 | Clear answer-first overland guide and step-by-step border sequence; live Bangladesh SERP remains unmeasured. |
+  | Factual evidence and safety | 4 | Every rail, IVAC, tax, and fare claim is qualified against 10 official portals; fake `railwayticket.bd` domain replaced with `railway.gov.bd` / `eticket.railway.gov.bd`. |
+  | Usability and actionability | 4 | Correct physical Dhaka→Benapole→Petrapole→Kolkata order, IVAC checklist, one coherent 3-day BDT budget, and 5 real internal links. |
+  | Locale, trust, and release | 4 | Full EN/BN parity, 10 numbered bilingual references, visible FAQ + `FAQPage` JSON-LD in both locales, and SPA/prerender image parity. |
+  | **Total** | **15 / 16** | **Pass (≥13); no zero scores and no hard fail.** |
+
+---
+
+## Stage 9 — Dhaka–Kolkata repository verification (15 October 2026)
+
+- Updated files: `src/constants.ts`, `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, `src/App.tsx`, `src/utils/imageAssets.ts`, `src/utils/blogStructuredData.ts`, `src/routes/BlogPostRouteView.tsx`, `scripts/verify-build.ts`, `public/rss.xml`, and `docs/history/2026-10-strategy-baseline/growth/CONTENT-QUEUE.md`.
+- `npm run lint`, `npm run build`, and `npm run verify:build` (all 145 checks) verified clean on 15 October 2026.
+
+---
+
+## Worked queue row — Wave 1: Umrah hub hardening (`/umrah` + `/bn/umrah`)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-15 | **UPDATE IN PLACE — one bilingual page asset; no new hub URL.** Accuracy gate #1 of `UMRAH-CLUSTER-PLAN.md`: correct or qualify the static calculator and savings comparison. | `/umrah` | `/bn/umrah` | **Umrah cost from Bangladesh / DIY Umrah budget** (hub planning-and-cost job) | Informational planning hub: broad cost framework + routes into the detailed guide and live specialist guides. | Stages 1–8 complete (ledger below). Stage 9 lint/build/verify recorded below. Deployment gate: owner approval + live-route review. |
+
+### Must-preserve and scope notes (owner + plan)
+
+- Keep the broad planning/cost job on the hub; the detailed execution article keeps `blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost`.
+- Preserve the existing 10-day, family-of-four-sharing DIY total of **BDT 1,16,000–1,32,000 per person**. Any retained figure must show its checked basis/exclusions and date; it is not a live quote.
+- Any illustrative scenario must be unmistakably labeled; no agency-savings figure without a same-basis, dated source basket.
+- Expose clear links to the detailed guide and the relevant live specialist guides (plan §5 link map), with localized EN/BN anchor text.
+- Scope Saudi Visa Bio to the Ministry FAQ's Bangladesh electronic-Umrah-visa biometric listing; no fixed weekly/Friday Rawdah slot-release claim; keep full EN/BN decision parity.
+
+### Stage 2 — Hub claims ledger (checked 15 October 2026)
+
+| ID | Claim / surface | Primary source checked | Finding | Status / action taken |
+|---|---|---|---|---|
+| H-01 | Calculator "Estimated Savings vs. Agency" tile + `agencyMultiplier` (1.28/1.32) + DIY-vs-agency cards "Save ৳35,000 / 44,500 / 72,000" with line-through agency quotes. | None — figures had no dated source basket. | Fabricated comparison totals. | **REMOVED.** Savings tile replaced with a "not included" exclusions tile; §3 rebuilt as a qualitative like-for-like comparison table + note that no agency-savings figure can be published without a matched, itemized quote (same dates, duration, occupancy, flight, inclusions). |
+| H-02 | Hero headline "How DIY Umrah Saves Bangladeshi Families 25%–32%". | None. | Unsupported savings range. | **REMOVED** → "The Advantage of Planning Your Own Umrah" (BN already neutral). |
+| H-03 | Calculator "All-inclusive estimate" + "Package Cost Calculator (2026)". | Scope unclear; totals omitted common trip costs. | Misleading scope. | **QUALIFIED.** Relabeled illustrative planning framework (Oct 2026 assumed rates): economy return airfare + Umrah e-Visa with insurance + one double room per two pilgrims + basic intercity transport; excludes meals, shopping, ziyarah tours, extra baggage, peak surcharges; not a live quote. |
+| H-04 | BDT 1,16,000–1,32,000 (10-day, family-of-4 sharing). | Owner-fixed; ledger U-12 (checked 14 Oct 2026; not re-priced). | Retained by owner decision. | **RETAINED + DATED** on every display surface (hero chip, keyFacts, quickAnswer, FAQ answer, prerender intro): "checked 14 October 2026, not a live quote." |
+| H-05 | Shared FAQ second range "BDT 1,65,000–2,15,000" + "saving BDT 25,000–45,000 per pilgrim vs fixed group packages" (`HAJJ_UMRAH_FAQS` EN+BN, shown on hub, blog index, blog posts). | U-12 ("do not add the previous comfort range"); no savings source. | Contradicts owner decision; fabricated savings. | **REMOVED** from both locale FAQ sets; replaced by the retained estimate with basis/exclusions and the itemized-quote caveat. |
+| H-06 | Stopover "~SAR 39.50 + mandatory insurance ≈ BDT 4,500 total" (FAQ) + "free 96-hour Stopover Umrah Visa" (hero bullet). | U-04. | Conditional product; fees/eligibility set at checkout and change. | **QUALIFIED** EN+BN: eligible Saudia/Flynas itineraries can add the 96-hour stopover at ticket checkout; eligibility, insurance and fees shown at checkout — verify on the airline's booking page; no universal fixed price. |
+| H-07 | "Mandatory Saudi Visa Bio App Registration" + FAQ "pilgrims must complete fingerprint and facial biometrics on Saudi Visa Bio". | U-08 (Ministry FAQ lists Bangladesh for e-Umrah-visa biometrics). | Universal-requirement claim unsupported for all travelers. | **SCOPED** EN+BN: for electronically issued Umrah visas the Ministry FAQ lists Bangladesh for biometric enrollment via Saudi Visa Bio; follow the instruction attached to your visa application; not universal for every tourist/stopover traveler. |
+| H-08 | Rawdah permit card ("mandatory QR entry permit") + slot availability. | U-09. | Permit real; no fixed weekly release day published. | **QUALIFIED** EN+BN: book the Umrah slot and Rawdah (Riyazul Jannah) permit in Nusuk; select an available date/time slot and check live availability; no fixed weekly release day is published. |
+| H-09 | quickAnswer "year-round Umrah". | U-02 (1448H calendar: entry through 23 Mar 2027). | Season-bound. | **SCOPED** EN+BN: current season's visa window (1448H — entry through 23 March 2027; check the current calendar). |
+| H-10 | Hotel zone distances ("0–150m", "400m–700m", "100m–300m"), "Zero uphill walking", "Direct elevator to Haram courtyard", "Free 24/7 shuttle", nightly rate bands. | U-11 (no property-level verification exists). | False precision + absolute guarantees. | **REMOVED** precision/absolutes EN+BN; zones kept as search starting points + verify address, walking route, slope and shuttle with the hotel; calculator nightly rates labeled planning defaults. |
+| H-11 | Rail "2h 20m", "~SAR 172.50 / BDT 5,600", "54 minutes" (FAQ + chips). | U-10 (operator tariff 14 Oct 2026: SAR 162 base Makkah–Madinah Economy, before VAT/fees; live checkout varies). | Unverified fare/time figures. | **REPLACED** EN+BN: SAR 162 dated base fare (before VAT/fees; checkout varies); check current timetable and checkout price; duration hedged (≈2¼ h / "approx.") or omitted. |
+| H-12 | Flight bands "BDT 72,000–86,000 / 56,000–66,000", "Save BDT 12,000–18,000 per ticket", "complimentary 5-liter Zamzam", "2×23kg + 5L Zamzam". | None dated; carrier policies vary. | Presented as current prices/allowances. | **QUALIFIED** EN+BN: fare bands labeled illustrative (check live prices); per-ticket save claim removed; Zamzam/baggage allowances carrier- and fare-specific — verify with the airline. |
+| H-13 | Visa card "Holders of valid US, UK, or Schengen visas qualify for instant online e-Visa / VOA". | U-04 (tourist e-Visa nationality list; VOA conditions). | Not automatic for BD passport holders. | **QUALIFIED** EN+BN: may qualify for visa-on-arrival where current conditions are met; do not assume automatic e-Visa eligibility; check the official portal first. |
+| H-14 | Hero telemetry chips ("300–500m Verified Haram Walkable", "2–5 Days", "2h 20m", "৳1,16,000 10-Day DIY Umrah Starting"). | H-04/U-10/U-11 resolutions. | Mix of stale precision and unqualified estimates. | **RELABELED** EN+BN: "3 Zones / Walkable Haram Areas"; "Umrah e-Visa Processing (Typical)"; "≈2¼ h / Makkah–Madinah Rail (Approx.)"; "৳ 1,16,000 / 10-Day DIY Estimate (Oct 2026)". Hero chip "✓ Nusuk & e-Visa Verified" → "✓ Official Nusuk & visa sources checked (Oct 2026)". |
+| H-15 | Link map (plan §5) on the hub + `/bn/umrah` static body. | Plan §5; route inventory (all 11 slugs exist in `BLOG_DATA`). | Hub showed only 2 cards; BN static body linked a mislabeled "Dhaka→Jeddah/Madinah flights" label to the main guide and an irrelevant Nepal visa link. | **ADDED/FIXED.** §8 keeps the 2 featured playbook cards (now locale-aware `/blog/` ↔ `/bn/blog/` links) + a grouped neutral directory: visa/permit (blog-16, stopover), flights/hotels/rail (open-jaw, hotel zones), family/accessibility (elderly, women), preparation/seasonal (Ihram/Miqat, Ramadan/Itikaf, Zamzam/customs), food/Ziyarah (food, ziyarah taxi), Hajj (registration/packages). `/bn/umrah` static related-links corrected to the main guide, blog-16, hotel zones, Hajj registration with descriptive BN anchors. |
+
+**Cross-surface note:** `HAJJ_UMRAH_FAQS` (EN `src/hooks/useSeoMeta.ts`, BN `src/data/bengaliContent.ts`) is shared by `/umrah`, `/blog` index and Hajj/Umrah blog posts. The H-05/H-06/H-07/H-11 fixes therefore also land on those surfaces — intended, since they carry the same flagged claim classes. Shared FAQ questions themselves were not restructured.
+
+### Stage 3–8 execution record (15 October 2026)
+
+- **Stage 3 — Brief: complete.** Hub keeps the broad planning/cost job; every retained number shows basis + exclusions + checked date; illustrative scenarios unmistakably labeled; links to the detailed guide and specialist guides exposed in both locales.
+- **Stage 4 — English: complete.** Calculator relabeled + assumptions note; savings surfaces removed; hero/telemetry/visa/hotel/flight claims aligned to H-01..H-14; directory added.
+- **Stage 5 — Bengali: complete.** Every EN change mirrored in Bengali at decision level, including the shared BN FAQ answers and the `/bn/umrah` static link list.
+- **Stage 6 — package: complete.** Hub FAQ quickAnswer/keyFacts, visible FAQ data, prerendered `/umrah` + `/bn/umrah` copy and meta description reviewed for parity.
+- **Stage 7 — preflight: passed.** No remaining agency-savings figures, comfort-range totals, fixed stopover fee, universal Visa Bio claim, fixed Rawdah release day, unqualified distance/rate precision or per-ticket savings claim on either locale surface.
+- **Stage 8 — red team:** intent 3/4 (hub job clear; live SERP unmeasured), evidence & safety 4/4 (every retained figure dated and scoped; fabricated comparisons removed), usability 4/4 (planning framework + honest comparison matrix + directory), locale/trust 4/4 (EN/BN parity; caveats visible) = **15/16, pass**.
+
+### Stage 9 — repository handoff and verification (15 October 2026)
+
+**Repository implementation verified; not externally deployed.** Edits in `src/components/UmrahLandingPage.tsx`, `src/hooks/useSeoMeta.ts`, `src/data/bengaliContent.ts`, `scripts/prerender.ts`. `src/data/contentMeta.ts` untouched.
+
+- `npm run lint` — **PASS** (`tsc --noEmit`).
+- `npm run build` — **PASS**; 94 English + 94 Bengali canonical routes prerendered.
+- `npm run verify:build` — **PASS, all 149 checks** (hub savings copy is unpinned in `verify-build.ts`, so the Wave 1 rewrites are assertion-free by design; existing pins unaffected).
+- Inspected `dist/umrah.html` and `dist/bn/umrah.html`: zero occurrences of the removed claims ("25%–32%", the 1,65,000–2,15,000 comfort range, ~SAR 39.50 fixed fee, 300–500m / "Zero uphill" precision, "All-inclusive estimate", "year-round Umrah", SAR 172.50 / "2 hours 20", agency line-through prices, "Estimated Savings"); retained copy carries "not a live quote" / "লাইভ কোটেশন নয়" qualifiers and the dated SAR 162 base fare; the specialist-guide directory links (incl. blog-16 and the Hajj registration guide) are present on both locales.
+
+Deployment gate: **owner approval + live-route review** of `/umrah` and `/bn/umrah` before publish.
+## 2026-10-15 — POST-MERGE NOTE (main `aa0156b` merged into PR #40 branch)
+
+PR #39 (session `arena/0eb5e492`) landed a parallel Wave 1 with complementary
+work. This branch merged `origin/main` (6 conflicted files resolved as a
+**superset**, never a regression):
+
+- `src/components/UmrahLandingPage.tsx` — main's verified Wave 1 kept
+  (SAR 65 JED–Makkah / SAR 162 Makkah–Madinah excl-VAT fare citations,
+  "Verified Official Sources & Portals (Checked 14 October 2026)" section,
+  U-13 like-for-like quote checklist, three visa categories, dated model
+  inputs) and this branch's additions retained (locale-aware `blogHref`,
+  "Specialist Guides by Topic" cluster directory with 11 specialist slugs,
+  H-10 zone grid as the sole distance grid).
+- `src/utils/blogStructuredData.ts` — FAQ schema allowlist now covers BOTH
+  `umrah-hajj-guide-bangladesh-nusuk-bdt-cost` (5./৫.) and
+  `dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide` (7./৭.).
+- `docs/history/2026-10-strategy-baseline/growth/CONTENT-QUEUE.md` — complete records for both sessions kept
+  (Wave 3A U-ledger → blog-48 IN-ledger → Wave 1 H-01…H-15).
+- `scripts/prerender.ts` — main's /umrah intro phrasing + this branch's
+  `/bn/umrah` related-link labels/slugs fix (labels matched EN-only slugs).
+- `scripts/verify-build.ts` — union of both check sets.
+- `src/data/bengaliContent.ts` — both blog-48 and blog-16 BN work kept.
+
+**Post-merge verification (2026-10-15):** `npm run lint` ✅ →
+`npm run build` ✅ (94 EN + 94 BN routes) → `npm run verify:build` ✅
+**149/149 checks**. Built bundles contain both the Verified Sources section
+and the Specialist Guides directory; zero banned strings in HTML or bundles.
+
+---
+
+## Worked queue row — Wave 3B: 96-hour Saudi stopover guide (`blog-15`)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-15 | **UPDATE IN PLACE — fixed slug; no second page. EN + BN ship as one bilingual asset.** Second visa-decision page of Wave 3 (`UMRAH-CLUSTER-PLAN.md` §4). Red-team targets on this page: the invented `~SAR 135` / `BDT 4,200` fee, the "complimentary 1-night hotel voucher" promise, and the `BDT 3,800 – BDT 4,500` / "less than BDT 4,500" totals. | `/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah` | `/bn/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah` | **96-hour Saudi stopover visa for Umrah from Bangladesh (Saudia / flynas)** | Informational / execution-intent decision page: who the route is offered to, what the airline checkout actually charges, the booking sequence, the visa-vs-permit boundary, and a realistic 4-day Makkah/Madinah plan. Live Bangladesh SERP was not measured. | Stages 1–8 recorded below; Stage 9 recorded after lint → build → verify. Repository-verified only — **not deployed**; publish gate is owner approval plus a live EN/BN route review. |
+
+### Must-preserve and scope notes (owner + plan)
+
+- Keep the English slug and its Bengali twin exactly as they are; no new URL, no slug change. `/umrah` §8 already links this guide in both locales with an honest "fees shown at checkout" note — do not restate a fixed fee there.
+- This page owns **Pathway 2 detail only**. The three top-level visa categories stay owned by the main guide, and the shared `HAJJ_UMRAH_FAQS` stopover answer (already qualified under H-06) is not re-opened here.
+- Publish no SAR total, no BDT conversion without a dated rate, and no hotel-included promise (ledger U-03 rule; ST-01/ST-02 below).
+- The retained 10-day, family-of-four-sharing **BDT 1,16,000–1,32,000** estimate may appear only as the dated, unre-priced cross-reference to the main guide. The old "instead of paying BDT 1,40,000+ / ১.৫ লক্ষ" standalone-trip comparison is removed: no such figure is sourced.
+- Leave `src/data/contentMeta.ts` (`CONTENT_UPDATED = "2026-10-14"`) untouched so the non-blog hub `<lastmod>` values do not churn; this post carries `updatedAt: "2026-10-15"`.
+- Grep exact strings before every edit (no line-number editing), and stage explicit paths only.
+
+### Stage 2 — 96-hour stopover claims ledger (checked 15 October 2026)
+
+| ID | Claim / surface | Primary source checked | Finding as of 2026-10-15 | Status / safe action |
+|---|---|---|---|---|
+| ST-01 | "Total Cost: Visa fee is Free, with only a small digital processing fee (~SAR 39.50) plus mandatory Saudi medical insurance (~SAR 95), totaling approximately SAR 135 (BDT 3,800 – BDT 4,500)" (EN body), the BN mirror, `~SAR 135` in step 4 of both locales, the "less than BDT 4,500 in visa fees" lead, the EN/BN card snippets (`~SAR 135 (BDT 4,200)` / `১৩৫ সৌদি রিয়াল (~৪,২০০ টাকা)`), and the same `~SAR 135 (BDT 4,200)` line inside the Dubai-combo article FAQ (EN + BN). | Visit Saudi stopover campaign page: <https://www.visitsaudi.com/en/campaigns/saudi-stopover>; Saudia stopover page: <https://www.saudia.com/transit-visa> | Visit Saudi's current Saudia offer lists: visa fee **Free**, application fee **approx. SAR 39.50 (USD 10.50)**, medical insurance **from SAR 13**, single entry, validity 3 months, stay up to 96 hours, visa created automatically during flight booking. Neither page publishes a SAR 95 insurance figure, a SAR 135 total, or any BDT amount. Saudia states "Visa fees, service charges, medical fees, and insurance costs are calculated according to MOFA regulations", i.e. priced at booking. The `SAR 39.50 + SAR 95 = SAR 135` arithmetic and every BDT figure derived from it are invented. | **REMOVE the invented fee and total.** State what is actually published: no fixed stopover price exists on the official pages; the dated Visit Saudi line items (free visa, application fee ~SAR 39.50, insurance from SAR 13) are checkout items, not a guaranteed total; the current amount for a specific itinerary is only visible in the airline's own checkout. Do not convert anything to BDT without a dated rate — say so explicitly on the page. |
+| ST-02 | "Bonus Free Hotel Night on Saudia: … Saudia provides a complimentary 1-night 3-star or 4-star hotel voucher in Jeddah or Makkah!" (EN), the BN `১ রাতের কমপ্লিমেন্টারি হোটেল ভাউচার` mirror, "including a complimentary 1-night hotel stay on eligible Saudia tickets" (EN summary), `১ রাত ফ্রি হোটেল` (BN summary + card snippets in both locales). | Same two pages, plus the 2023 launch record and current airline booking flow | Visit Saudi's stopover page today lists **no hotel benefit** at all. Saudia's page describes hotels only as a bookable add-on: "Hotel bookings are available for round-trip bookings and selected destinations only". The complimentary one-night stay was a **launch-era airline promotion** (2023) booked through Saudia Holidays, limited to selected itineraries and to **Jeddah/Riyadh** hotels (not Makkah), requiring a ≥48-hour advance booking and the boarding pass at check-in, and explicitly "subject to availability"; traveler reports in January 2026 describe Saudia Holidays as no longer issuing that night. Forum reports are corroboration, not a primary source — which is exactly why no entitlement can be stated either way. | **REMOVE the promise; do not replace it with a "still free sometimes" claim.** Say there is no published or universal hotel benefit, that any such night is an airline-programme add-on limited to selected round-trip itineraries and cities, that it was never a Makkah benefit, and that readers must budget and book their Makkah/Madinah nights themselves. |
+| ST-03 | "The 96-Hour Stopover Visa is open to ALL Bangladeshi passport holders regardless of prior travel history" (EN) / `সকল বৈধ বাংলাদেশি পাসপোর্টধারীর জন্য উন্মুক্ত` (BN). | Visit Saudi stopover page + FAQ statement (ledger U-03, re-checked 15 Oct 2026); Saudia stopover conditions and FAQ headings | Neither official page publishes a nationality-level entitlement statement. Visit Saudi frames the route around travelers booking a qualifying Saudia/flynas itinerary; Saudia's own help flow includes "How to Apply for a Stopover Visa (If Your Country Is Not Eligible)?", which confirms eligibility is not universal. Documented conditions are: passport valid ≥6 months, confirmed onward ticket to the final destination, and a valid entry visa or residence permit for that destination (unless exempt); one stopover per booking; single entry; non-extendable; and "issuance of the visa does not guarantee entry … subject to verification by passport control officers upon arrival". | **QUALIFIED / REWRITTEN.** Replace the blanket entitlement with the conditions actually published, plus a check-before-you-pay instruction (the stopover option must appear in your own checkout). Keep the genuinely useful point that the stopover route does not require a prior US/UK/Schengen visa, phrased as the airline's own eligibility test rather than a Bangladesh-specific guarantee. |
+| ST-04 | Visa validity and stay window (90 days / 3 months, up to 96 hours, 4 full days). | Visit Saudi stopover page; Saudia stopover page | Both agree: entry within 90 days / 3-month validity, stay up to 96 hours, single entry, not extendable, one stopover trip per booking. | **VERIFIED / KEEP**, and add the two limits the page omitted: non-extendable, one stopover per booking, 96 hours measured as a fixed window around the itinerary. |
+| ST-05 | "Your official PDF Saudi Stopover Visa arrives in your email inbox within 5 to 30 minutes!" (EN) / `৫ থেকে ৩০ মিনিটের মধ্যেই` (BN). | Saudia stopover page booking flow | Saudia says the visa and insurance arrive by email once the booking and visa payment are completed, and that the visa must be added in the same transaction; no processing-time figure is published. | **HEDGE / DE-PRECISE.** Remove the invented 5–30-minute window; say issuance is normally at payment completion, is not guaranteed, and that late bookings carry risk. Keep the `ksavisa.sa` verification step. |
+| ST-06 | Umrah access during the stopover (the page implied the visa was sufficient). | Visit Saudi stopover page note; ledger U-09 | Visit Saudi states: "Religious visitors must schedule Umrah or Ziyarah appointments via Nusuk.sa before visiting Makkah or Madinah." The stopover visa is an entry document; the Haram/Rawdah appointment is a separate permit, and no visa category substitutes for Bangladesh Hajj registration or the Saudi Hajj permit. | **ADDED (gap fix).** New bullet plus a FAQ answer, cross-linked to the Nusuk / Rawdah guide, with the same scope discipline as Wave 3A (no slot-release day, no permit guarantee). |
+| ST-07 | Section 3: "You do NOT even need to fly Saudia! … instant 1-year Multiple-Entry e-Visa … or Visa on Arrival at Jeddah/Madinah airport (~SAR 480 / BDT 15,500)" (EN) and its BN twin. | Ledger U-04 (official eVisa portal, package-visa page, used-visa FAQ) — re-confirmed 15 Oct 2026; fee-check rule | Bangladesh is not in the nationality-only tourist eVisa list; the used US/UK/Schengen-visa route is a **conditional visa-on-arrival** subject to current portal, carrier and arrival conditions, not an automatic eVisa. Third-party trackers quote different totals for the same visa (SAR 480 vs SAR 535 depending on channel) and no official BDT figure exists — precisely the situation the B2 (Thailand) rule addresses: do not publish a current government amount without a confirmed primary source. | **QUALIFIED / DEROUNDED.** Rewrite as "may qualify … where the current conditions are met; confirm on the official portal before you assume it", describe the fee as the portal's own checkout total (government visa fee + mandatory insurance + any platform charge) and drop the unsourced SAR/BDT pair. |
+| ST-08 | 4-day plan ground logistics: "54-minute Haramain Bullet Train directly from Terminal 1 to Makkah" and "morning 2h 20m Haramain Bullet Train to Madinah" (EN; BN `৫৪ মিনিট`, `২ ঘণ্টা ২০ মিনিট`). | Ledger U-10 (operator tariff and guidelines, checked 14 Oct 2026); hotel/ground claims owned by the hotel-zones page | U-10 verified base fares (SAR 65 KAIA–Makkah, SAR 162 Makkah–Madinah Economy, before VAT/fees, checkout varies) but **no** published journey-time table. H-11 already replaced these exact figures on `/umrah` with the dated fare plus a hedged duration; leaving them here would keep the same unverified precision on a sibling route. | **REPLACED / HEDGED.** Keep only the dated base fares as "operator tariff checked 14 October 2026, before VAT and fees; checkout price and timetable vary", hedge journey time as approximate, and route exact station/access/shuttle questions to the hotel-zones guide. No new precision added. |
+| ST-09 | "Eligible Airlines: Saudia (Saudi Arabian Airlines) and Flynas" treated as identical offers. | <https://www.flynas.com/en/stopovervisa> and <https://www.flynas.com/en> (checked 15 Oct 2026) | The dedicated flynas stopover-visa page now **redirects to the flynas homepage**. The homepage offers a stopover option in its flight search and a flights+hotel bundle, but publishes no stopover-visa fee page. Visit Saudi's fee breakdown is explicitly the *Saudia* offer. | **QUALIFIED.** Keep both carriers as the advertised stopover carriers, state that the published line items belong to the Saudia offer, and instruct flynas bookers to confirm the visa (and any add-on) in their own checkout — the U-03 rule against generalizing Saudia's figures to flynas. |
+| ST-10 | Surfaces carrying the flagged claims and the rendering contract. | `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, `src/constants.ts`, `src/App.tsx`, `src/utils/seoCopy.ts`, `src/utils/blogStructuredData.ts`, `src/components/TopicalAuthorityBlueprint.tsx`, `scripts/prerender.ts`, `scripts/verify-build.ts` | The claims live on six EN surfaces and six BN surfaces, not only in the article body: post summary, both AEO card snippets, both article bodies, both summaries, and the admin-only SEO-matrix hypothesis block. The article had no `references` and no FAQ section, so its corrections had nothing to cite and no `FAQPage` coverage. `verify-build.ts` pinned nothing for this slug. | **IMPLEMENTED.** Rewrote the fee/hotel/eligibility passages in both locales; replaced the summary and both card snippets; added 8 claim-linked bilingual `references`, a 6-pair visible FAQ with `FAQPage` allowlisting for `5. Frequently Asked Questions` / `৫. সচরাচর জিজ্ঞাসা`, `updatedAt: "2026-10-15"`, and a `verify-build.ts` guard that fails if the removed figures return. The same `~SAR 135 (BDT 4,200)` line inside the Dubai-combo article (EN + BN) and the admin blueprint block are corrected as verbatim duplicates of the fabricated fee. |
+
+**Cross-surface note:** the fabricated `~SAR 135 (BDT 4,200)` fee also appeared verbatim in `umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide` (EN + BN FAQ), and the same claim class (no fee, no hotel) sat in the admin-only `TopicalAuthorityBlueprint.tsx` stopover block. Both carry the identical string the red team flagged, so they were qualified in the same commit rather than left as live contradictions of this page. `TopicalAuthorityBlueprint.tsx` is admin-gated and never prerendered, so its edit changes no public HTML. Not touched (logged as a follow-up instead): the `/blog` hub promo card in `BlogIndexRouteView.tsx` still says Umrah can be planned "year-round" via a 96-hour stopover or a "qualified US/UK/Schengen holder e-Visa" — no fee or hotel claim, but the season bound (U-02) and the U-04 eligibility condition should be applied there in the shared-surface pass, the way H-09 scoped it on `/umrah`.
+
+### Stage 3–8 execution record — 96-hour stopover guide (15 October 2026)
+
+- **Stage 3 — Brief: complete.** The page job is a single decision: can this traveler put a 4-day Umrah inside a Saudia or flynas connection, what does it actually cost, and what does the visa *not* get them (hotel, Haram permit, guaranteed entry). The budget tool stays on `/umrah`, the route overview stays on the main DIY guide, hotel/rail detail stays on the hotel-zones guide, and the permit sequence stays on the Nusuk guide. Live Bangladesh SERP/GSC were unavailable and remain unmeasured.
+- **Stage 4 — English: complete.** Answer-first lead states the two things no official source publishes (a fixed fee, a universal hotel benefit). Section 1 now carries the verified conditions (single entry, 90-day validity, non-extendable, one stopover per booking, six-month passport, onward ticket, destination visa, passport-control decision), the dated Visit Saudi line items with an explicit refusal to convert to BDT, and the Visit Saudi Nusuk-appointment requirement. Section 2 follows Saudia's own published booking flow, including the photo spec and the "request it during booking, no processing-time guarantee" reality. Section 3 is qualified to the U-04 wording and drops the unsourced SAR/BDT pair. Section 4 keeps only the dated operator base fares, hedges journey time, and flags the same-itinerary rule for a Madinah departure. Six visible FAQs and eight claim-linked references were added; the removed "highest-value travel hack" framing and the "BDT 1,40,000+" standalone-trip comparison are gone.
+- **Stage 5 — Bengali: complete.** The Bengali override mirrors every section, bullet, caveat, citation number (`[১]`–`[৮]`), FAQ pair and the reference list — not a shortened summary — and its summary/card copy now leads with the checkout rule instead of `১৩৫ সৌদি রিয়াল (~৪,২০০ টাকা)` and `১ রাত ফ্রি হোটেল`.
+- **Stage 6 — package: complete.** `src/constants.ts` blog-15: rewritten summary, `updatedAt: "2026-10-15"`, read time 7 minutes, 8 bilingual `references`, `internalLinks` raised to 5 (Nusuk/Rawdah guide added; `/umrah` retained). Both `getBlogAeoSnippet50Words` entries (EN/BN) replaced with the qualified version. `src/utils/seoCopy.ts` meta description updated to state the checkout rule (155 characters). `src/utils/blogStructuredData.ts` allowlists `5. Frequently Asked Questions` / `৫. সচরাচর জিজ্ঞাসা` so both locales emit `FAQPage` JSON-LD.
+- **Stage 7 — preflight: passed.** Citation order and counts, `[১]`–`[৮]` parity, the absence of every removed figure, the visa-vs-permit wording in both locales, the internal-link targets (all five resolve to live routes), and the FAQ pair count (6 visible pairs = 6 `FAQPage` entities per locale) were reviewed against the built HTML, not only the source.
+- **Stage 8 — red team:**
+
+  | Dimension | Score / 4 | Reason |
+  |---|---:|---|
+  | Intent and format | 3 | Answer-first decision structure with the booking sequence and permit boundary; live Bangladesh SERP format remains unmeasured. |
+  | Factual evidence and safety | 4 | Every retained number is dated and attributed (Visit Saudi 15 Oct 2026, Saudia 15 Oct 2026, HHR tariff 14 Oct 2026); the invented fee, hotel promise, blanket-eligibility and timing claims are removed rather than softened. |
+  | Usability and actionability | 4 | Exact eligibility conditions, the real checkout flow with the photo spec, a plan built around a non-extendable 96-hour window, and the "verify your issued visa" step. |
+  | Locale, trust, and release | 4 | Full BN decision parity, 8 bilingual sources on both routes, visible FAQ + `FAQPage` parity, and a `verify:build` guard with a negative control. |
+  | **Total** | **15 / 16** | **Pass (≥13); no zero scores and no hard fail.** |
+
+### Stage 9 — repository handoff and verification (15 October 2026)
+
+**Repository implementation verified; not externally deployed.**
+
+- Files changed: `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, `src/constants.ts`, `src/App.tsx`, `src/utils/seoCopy.ts`, `src/utils/blogStructuredData.ts`, `src/components/TopicalAuthorityBlueprint.tsx` (admin-only), `scripts/verify-build.ts`, `public/sitemap.xml`, `public/rss.xml`, and this queue. `src/data/contentMeta.ts` untouched.
+- `npm run lint` — **PASS** (`tsc --noEmit`).
+- `npm run build` — **PASS**; 94 English + 94 Bengali canonical routes prerendered. Vite's non-blocking chunk-size warning is pre-existing.
+- `npm run verify:build` — **PASS, all 153 checks** (149 before this wave + 4 new stopover guards). `faqSlugs` now includes this slug, so visible-Q&A/`FAQPage` parity is asserted in both locales.
+- Guards added to `scripts/verify-build.ts`: no `SAR 135`, no `BDT 3,800/4,200/4,500` (Arabic or Bengali numerals) on the two article bodies, no complimentary-hotel promise, no universal-eligibility sentence, no `54-minute`/`2h 20m`/`5 to 30 minutes` precision, plus the required checkout rule, visa-vs-permit line, verification portals, 8 localized references and `updatedAt 2026-10-15`. A negative control asserts the guard rejects a deliberately reintroduced "SAR 135 (BDT 4,200) … complimentary 1-night hotel voucher" sentence.
+- Inspected `dist/blog/…saudi-stopover….html` and `dist/bn/blog/…saudi-stopover….html`: zero occurrences of the removed claims; `Article` JSON-LD `dateModified` = 2026-10-15; `FAQPage` with 6 entries per locale; 8 numbered reference links per locale; `SAR 39.50` appears only inside the dated "what the official page showed / not a guaranteed total" sentence.
+- `public/sitemap.xml` diff is limited to `<lastmod>` on the English and Bengali stopover URLs (`2026-10-15T09:00:00+06:00`); `public/rss.xml` diff is the single stopover `<description>` line. No other post body, slug or hub date changed.
+
+**Deliberate limits and follow-ups (not silently skipped):**
+
+- The Dubai-combo article (EN + BN) had the same `~SAR 135 (BDT 4,200)` sentence inside its visa step; it is qualified here because the string is identical. That article keeps its own unqualified rail timing (`2h 20m`) and its package/savings copy, which belong to its own wave (plan §4 Wave 5).
+- The `/blog` hub promo card in `src/routes/BlogIndexRouteView.tsx` still frames "year-round Umrah" through a 96-hour stopover or a "qualified US/UK/Schengen holder e-Visa". No fee or hotel claim, but the U-02 season bound and the U-04 eligibility condition should be applied there with the other shared-surface fixes.
+- Pre-existing renderer gap: the English prerender path emits `**bold**` markers as literal text in article bodies (visible in the Nusuk and Dhaka–Kolkata pages). This page avoids it by carrying no bold markers in the English body; fixing the shared renderer is a separate, cross-article change.
+- Airline promotions and fees are dynamic. Re-open ST-01/ST-02 against the Visit Saudi and Saudia pages before any future season refresh, and only publish a BDT figure if a dated exchange rate is recorded alongside it.
+
+**Release boundary:** code and generated repository artifacts are ready for owner review. Deployment, live-route checks (HTTP status, `<html lang>`, canonical/hreflang, visible FAQ, outbound source links) and Search Console measurement have not been performed.
+
+Reviewed on: PR #41 (`arena/206fa060-ural-travel` → `main`, commit `1f948ea`); CI “Type-check, build and verify prerender output” and the Cloudflare Pages preview check both pass. Merging and production deployment are the owner's action.
+
+## Worked queue row — Wave 3C (re-scoped): shared Umrah/visa framing on hub surfaces
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-15 | **UPDATE IN PLACE — shared copy only; no new URL.** The "Wave 3C / `visa-e-visa-umrah-bangladesh`" name used in the 14 October planning chat refers to **no live route** (`src/data/blogIndex.ts` has no such slug), and `UMRAH-CLUSTER-PLAN.md` authorizes no net-new article, so the Umrah e-Visa claims that name implied are handled here, on the surfaces that already publish them. | `/blog`, every `/blog/<slug>` (shared `TravelIntelligence` block), `/umrah` (shared `HAJJ_UMRAH_FAQS` block) | `/bn/blog`, `/bn/blog/<slug>`, `/bn/umrah` | **Umrah visa from Bangladesh / Umrah e-Visa cost and processing time** | Answer-first cost + eligibility framing that must not outrank the article-level evidence. Live Bangladesh SERP not measured. | **Stages 0–9 complete (15 October 2026).** Lint, build and `verify:build` (157 checks) pass; feeds are unchanged. Release gate: owner review before merge/deploy. |
+
+**Surfaces carrying the same copy (grep-audited 15 October 2026, not inferred):**
+
+1. `src/hooks/useSeoMeta.ts` → `HAJJ_UMRAH_FAQS[0]` (first answer) and `src/data/bengaliContent.ts` → `BENGALI_HAJJ_UMRAH_FAQS[0]`. **This is the only one of these strings that a no-JS crawler sees:** grepping the 15 October build shows the sentence and its `FAQPage` JSON-LD prerendered on `dist/umrah.html` and `dist/bn/umrah.html` and on nothing else (`/blog` and the article pages emit their own article-level FAQ blocks instead).
+2. `src/routes/BlogIndexRouteView.tsx` → `TravelIntelligence` `quickAnswer` + `keyFacts` (EN + BN inline literals).
+3. `src/routes/BlogPostRouteView.tsx` → the same block (EN + BN inline literals), rendered client-side only on the two Umrah-related blog categories and excluded for the main guide slug.
+
+**Measured rendering gap (15 October build):** the hub framing strings themselves — `"year-round Umrah"` and the BN `"বছরের যেকোনো সময় …"`, the tile value `"BDT 15,500 – 19,500 (2–5 Days)"` / `"১৫,৫০০"`, and the labels `"Umrah e-Visa Cost"` / `"Mandatory Umrah Apps"` — appear in **zero** prerendered HTML files, even though the two route components contain them. (The generic Bengali phrase `"বাধ্যতামূলক অ্যাপ"` does occur in two other pages' unrelated copy, so the check has to match the tile label *with* its value, not the word alone.) The blocks are therefore client-rendered only — they are a reader-trust and rendered-index problem, not a static-AEO one, which is why `/umrah`'s FAQ answer (surface 1) is the priority fix and the tiles are the follow-on. They are also not caught by any current `verify:build` check, which asserts against prerendered HTML.
+4. `src/data/blogContent.ts` (Dubai-combo `Pathway A` line) and its `src/data/bengaliContent.ts` twin (`অপশন ক`).
+5. `src/components/TopicalAuthorityBlueprint.tsx` — admin-only (`isAdmin`-gated), never in prerendered HTML; align for consistency only.
+
+### Stage 2 — shared-surface claims ledger (checked 15 October 2026)
+
+| ID | Claim / surface | Primary source opened | Finding as of 2026-10-15 | Status / safe action |
+|---|---|---|---|---|
+| P-01 | `quickAnswer` on `/blog` and on every blog post: "…**year-round Umrah** can be planned independently using a **90-day Umrah e-Visa**, a 96-hour Saudia/Flynas Stopover Visa, or a **qualified US/UK/Schengen holder e-Visa**…" (EN + BN `বছরের যেকোনো সময় … ৯০ দিনের Umrah e-Visa …`). | Ministry 1448H calendar (ledger U-02, checked 14 Oct 2026); Ministry FAQ <https://haj.gov.sa/en/FAQ> opened 15 Oct 2026; used-visa FAQ (U-04). | The Ministry FAQ itself is inconsistent about the Umrah visa: one answer says entry must be within **three months** of issuance and "the stay in the Kingdom must not exceed **thirty days**, ending at the latest on 15 Dhu al-Qi'dah", while other answers say the stay "is **90 days**" and that the system will not extend past 90 days. "90-day Umrah e-Visa" as a flat label therefore over-specifies what the official page states. Season framing is already resolved on the hub (H-09) but not here. | **QUALIFY (no owner decision needed).** Replace with the checked season bound (1448H window, entry through 23 March 2027 — check the current calendar), and describe the Umrah visa as "the Ministry's Umrah visa, whose entry window and permitted stay you confirm on the issued visa" rather than a guaranteed 90 days. Keep the VOA wording conditional per U-04. |
+| P-02 | `keyFacts` tile "Umrah e-Visa Cost — **BDT 15,500 – 19,500 (2–5 Days)**" on `/blog` and on every blog post (EN + BN). | Ministry FAQ, opened 15 Oct 2026. | The only government figure the Ministry publishes is "a fee for issuing the Umrah visa, **estimated at 300 Saudi Riyals**", and it states an Umrah visa "cannot be issued by the external agent without service packages (accommodation – transport)". **No ledger row, no dated checkout capture and no dated SAR→BDT rate exists anywhere in this repo for BDT 15,500–19,500**, and a processing time ("2–5 Days") is being shown inside a cost label. This is the same claim class Wave 3B removed from the stopover guide. | **OWNER DECISION — two acceptable outcomes.** (a) Restate as the dated official anchor: "Ministry Umrah visa fee SAR 300 (checked 15 Oct 2026); insurance and the package total are shown when the visa is issued — no BDT total is published here", or (b) keep a BDT band **only** as an explicitly labelled, dated agency-quote planning band with inclusions/exclusions and "not a live quote" wording. Silent retention of the bare number is not acceptable on a user-facing tile, and the same figure inside surface 1 *is* prerendered and schema-fed on `/umrah` and `/bn/umrah`. |
+| P-03 | `keyFacts` tile "Mandatory Umrah Apps — Saudi Visa Bio + Nusuk (nusuk.sa)" (`/blog`) and "Mandatory Apps" (blog posts), EN "বাধ্যতামূলক …" twins. | Ministry FAQ biometric answers, opened 15 Oct 2026 (ledger U-08). | The FAQ says the biometric-enrollment requirement "for issuing Umrah visas electronically has started for arrivals from the following countries: United Kingdom, Tunisia, Kuwait, Bangladesh, Malaysia" — i.e. it is visa-type- and country-specific, not a universal app mandate for every Umrah or stopover traveler. Wave 1 already scoped this on the hub (H-07); the shared tiles were not covered by that wave. | **SCOPED (no owner decision needed).** Relabel to "Biometric and permit apps (visa-type specific)" and state the requirement follows the instruction attached to the applicant's Umrah visa application, with the official app names retained. |
+| P-04 | `HAJJ_UMRAH_FAQS[0]` answer (EN + BN twin): "…**90-day** Saudi Umrah e-Visa **in 2 to 5 working days** through a Ministry-authorized Umrah agency in Dhaka (**recently BDT 15,500–19,500 including medical insurance — verify the current fee**)…". | Ministry FAQ, opened 15 Oct 2026; ledger U-01/U-04/U-08. | Real overlap with the correct content, but three problems: an unsourced BDT band (already hedged with "recently… verify"), an unpublished processing-time promise, and the flat "90-day" label. This answer is both visibly prerendered and emitted as `FAQPage` JSON-LD on `/umrah` and `/bn/umrah` — the only one of the five surfaces that reaches the static output — so it outranks article-level care. | **QUALIFY with P-02's decision.** Keep the channel description (direct approved platforms or an accredited external agent, per U-01), cite the SAR 300 Ministry fee with its check date, drop the processing-time promise (no official processing SLA is published in the FAQ), and mirror the exact same changes in the BN answer so locale parity holds. |
+| P-05 | Dubai-combo article `Pathway A`: "Standard **90-Day** Umrah e-Visa: Issued in **2–4 working days (BDT 15,500 – BDT 19,500** with medical insurance)" + BN `অপশন ক`. | Same as P-02/P-04. | This sentence is where the hub tiles' figure came from; the "2–4 working days" promise contradicts the "2–5 days" tile, which shows neither number is a measured figure. | **ALIGN to P-02's decision in both locales**, keeping the stopover line written in Wave 3B untouched. |
+| P-06 | Secondary-market pricing chatter around the Umrah visa (agent blogs quoting SAR 300 + SAR 100–180 insurance, "SAR 400–480 total", one source claiming the entry window was cut to one month). | `blog.wego.com` 2026-09-08 and `tripnext.co.uk` 2026-08-29, seen only in search results 15 Oct 2026; neither opened as a primary source. | Agents' arithmetic and the "one month" claim conflict with the Ministry FAQ's own text. Useful only as a reminder that insurance and package costs are quoted inconsistently. | **DO NOT CITE.** Only the Ministry's own wording and a dated checkout figure may enter the copy; no BDT conversion may be derived from these numbers. |
+
+### Owner decision and execution note (recorded 15 October 2026)
+
+Executed on 15 October 2026 after the owner chose the official-anchor option; the record of what shipped is the Stage 3–9 section below, and no live string on these surfaces was edited before that decision. Two of the six ledger rows (P-02, P-05) hinge on the same owner decision about the `BDT 15,500–19,500` figure, and both shipped in the same bilingual commit as P-01/P-03/P-04. For the record, the method used: edit EN + BN together, rebuild `public/sitemap.xml` / `public/rss.xml` only if a content date legitimately moves (the `/umrah` FAQ text does not carry a per-post `updatedAt`, so a `<lastmod>` change needs its own justification rather than a reflex bump), and decide whether `scripts/verify-build.ts` should gain a source-level pin for this block — a `dist`-level assertion cannot cover surfaces 2 and 3 because they never reach the prerendered HTML, so any guard there has to read the source files or a React render, which the script already does for the SPA check. The Wave 1 hub fix (H-06/H-07/H-13) and this wave must not drift apart: the same three sentences are now maintained in two places, which is itself an argument for the queue's "one surface per wave, then extract" note.
+
+### Stage 3–9 execution record — Wave 3C shared surfaces (15 October 2026, owner-approved scope)
+
+Owner decision on P-02/P-05: **replace the un-ledgered BDT band with the dated official anchor** (no BDT Umrah-visa total on these surfaces). Wave order approved as “shared surfaces first, Wave 4 immediately after”.
+
+- **Stage 3 — Brief: complete.** One job: the shared hub framing must not state an Umrah-visa price, a processing time or a season rule the Ministry page does not state. The articles keep the detail; the tiles carry the anchor and point to the guide.
+- **Stage 4 — English: complete.** `HAJJ_UMRAH_FAQS[0]` now lists the three routes, quotes the Ministry fee ("estimated at 300 Saudi Riyals", checked 15 October 2026), states the agent service-package condition, records the Ministry's own 30-day vs 90-day contradiction and tells readers to plan from the dates printed on their visa, keeps the stopover as a checkout option and the used-visa route conditional, and scopes Saudi Visa Bio to the instruction attached to the application. The `/blog` and blog-post `quickAnswer` now carry the 1448H season bound (visas to 9 March 2027, entry through 23 March 2027) and the same fee anchor with an explicit "no BDT total is published". Tiles: "Umrah e-Visa Cost — BDT 15,500–19,500 (2–5 Days)" → "Umrah visa government fee — SAR 300 (stated as an estimate; checked 15 Oct 2026) — insurance and package priced at issuance"; "Mandatory (Umrah) Apps" → "Biometric & permit apps (visa-specific)"; the retained DIY budget tile now says "(checked 14 Oct 2026; not a live quote)" on this surface too, which Wave 1 required but the client-rendered tiles had not carried.
+- **Stage 5 — Bengali: complete.** The BN shared FAQ answer, both `quickAnswer` literals and all four BN tile label/value pairs mirror the English changes line for line (SAR ৩০০ with 'আনুমানিক', ১৫ অক্টোবর ২০২৬, ১৪৪৮ হিজরি season dates, "কোনো BDT মোট খরচ প্রকাশ করা হলো না"). No Bengali string was edited by fuzzy match — each replacement was anchored on an ASCII-safe neighbour and verified in the built HTML.
+- **Stage 6 — package: none needed.** No title, slug, image, schema-config or internal-link change; the shared block already had FAQ schema. `CONTENT_UPDATED` was deliberately **not** bumped: `/umrah` already publishes 2026-10-14 for the hub wave that changed the same shared copy, and a bump would restate every data-driven page as updated today (same reasoning as Wave 1 and 3B).
+- **Stage 7 — preflight: passed.** Both locales of `/umrah` were checked in the rendered output (visible FAQ + `FAQPage`), not just the source; no raw markdown, no Devanagari codepoints, no orphan quote (the two `TravelIntelligence` blocks still compile as ternaries with matching quotes).
+- **Stage 8 — red team: 15/16 pass.** Intent/format 3 (the hub tiles remain client-rendered only — see below), evidence 4, usability 4 (the tiles now tell readers what the fee covers and where the total comes from), locale/trust 4. No zero, no hard fail.
+- **Stage 9 — repository handoff.** Files changed: `src/hooks/useSeoMeta.ts`, `src/data/bengaliContent.ts`, `src/routes/BlogIndexRouteView.tsx`, `src/routes/BlogPostRouteView.tsx`, `src/data/blogContent.ts` (Dubai-combo Pathway A only), `scripts/verify-build.ts`, this queue. `npm run lint` PASS; `npm run build` PASS (94 EN + 94 BN routes); `npm run verify:build` PASS with **157 checks** (153 before this wave + 4 new). `public/sitemap.xml` and `public/rss.xml` are byte-identical after the rebuild, so the CI reproducibility guard stays green and no feed file needed re-committing.
+- **New guards.** (1) Six banned patterns run over six surfaces: both shared FAQ answers, both `TravelIntelligence` source files, and both Dubai-combo bodies — no BDT visa band in either numeral system, no flat "90-day Umrah e-Visa" label, no "2 to 5 / 2–4 working days" promise, no "year-round Umrah", no "Mandatory … Apps" label — each surface must also carry the dated official anchor. (2) The hub tiles are **client-rendered only**, so `dist` cannot prove them: the guard renders a Umrah-category article through `BlogPostRouteView` in both locales and asserts the panel exists, shows the SAR anchor, and stays clean. (3) The prerendered `/umrah` + `/bn/umrah` pages must publish the dated Ministry fee and none of the banned forms. (4) A negative control feeds a reintroduced "90-day … BDT 15,500 – 19,500 … year-round Umrah … Mandatory Umrah Apps … ২–৫ কার্যদিবস" sentence through the pattern list and requires all-but-one of six patterns to fire (it reports 6/6).
+- **Guard-authoring lesson (recorded so it is not repeated):** the control string was first written as adjacent string literals without `+`, which JavaScript's automatic semicolon insertion truncates to the first line — the control then matched 1 pattern instead of 6 while `tsc --noEmit` stayed silent. Guards that assert on prose must be tested against a deliberately failing sample, and hand-written `\uXXXX` escapes for Bengali digits are error-prone (৩ is U+09E9, not U+09EA): write literal Bengali and check the rendered output.
+- **Still open after this wave:** the `TravelIntelligence` blocks on `/blog` and on Umrah-category article routes reach no prerendered HTML, so their copy is invisible to a no-JS fetch — that is an AEO/coverage question for the indexing doc, not a claim-safety one, and it is the reason this wave fixed the `/umrah` FAQ answer first.
+
+## Queue row — Wave 4 (next article wave): Makkah/Madinah hotel zones + Haramain guide
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-15 | **UPDATE IN PLACE — one bilingual article asset, per `UMRAH-CLUSTER-PLAN.md` Wave 4.** | `/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh` | `/bn/blog/…same slug…` | **Makkah hotel zones / Haramain train from Jeddah** | Practical on-the-ground logistics page; needs operator-level verification before any number stays. Not measured against live SERP. | **Stages 0–9 complete (15 Oct 2026)** — ledger, both locales, guards and verification all in this section; awaiting owner review, nothing deployed. |
+
+**Stage 1 claim inventory (from the EN body today; the BN twin carries the same set):**
+
+- Hotel-zone absolutes and distances: `"600 meters from Masjid al-Haram" … "the last 200 meters is a steep uphill climb"`, "Zero steep slopes, modern wide elevators, and direct flat access into the King Fahd Gate and Umrah courtyard in **3 to 6 minutes**", "free shuttle buses run **every 5 minutes** through the tunnel", "Gates **25 to 29** on the Northern side" for women's Rawdah entry. Same class as Wave 1's H-10 (already removed on the hub) — the article still publishes it.
+- Rail times and fares: "**54 minutes**" (KAIA → Makkah) with "**SAR 60–75 Economy / ~BDT 2,100**", "**2 hours 20 minutes**" (Makkah → Madinah) with "**SAR 150–220 Economy / ~BDT 5,200–7,200**", "(300 KM/H)". Ledger U-10's dated tariff is **SAR 65** (KAIA–Makkah) and **SAR 162** (Makkah–Madinah) base Economy before VAT/fees, so both ranges and all four BDT conversions are unsupported; the `54 minutes` and `2h 20m` forms are exactly what `scripts/verify-build.ts` now bans on the stopover surfaces.
+- Baggage: "1 large suitcase (up to **25 kg**, max dimensions **65 x 45 x 30 cm**) + 1 cabin hand-bag per passenger" (EN + BN) — needs the operator's current published allowance, not an agent paraphrase.
+- Ziyarah car prices: **SAR 150–220 (~BDT 4,900–7,200)** Makkah, **SAR 120–180 (~BDT 3,900–5,900)** Madinah, **SAR 350–450 (~BDT 11,500–14,800)** Taif round trip per car. No dated local quote exists; hotel nightly band "**BDT 4,200 – BDT 7,500/night**" likewise.
+- Zamzam: "Every pilgrim holding an Umrah e-Visa (or Nusuk Umrah permit) is permitted to purchase one official 5-liter boxed bottle … from the automated kiosks outside Jeddah (JED) or Madinah" — overlaps the existing Zamzam/customs article; the two must agree and cite the airline/carrier rule, not folk knowledge.
+
+**Stage 2 sources that had to be opened before any edit (all opened 15 October 2026 — verdicts in the ledger below):** `sar.hhr.sa` fare table and conditions of carriage (base fares, VAT/fees, baggage size and weight, journey times, station transfer reality), the HHR timetable, the airport-station shuttle facts for KAIA Terminal 1, one dated hotel search for the zone claims (or removal of the claims — the H-10 precedent says the honest output is "verify address, walking route, slope and shuttle with the property"), and the Zamzam/carrier allowance page already used by the return-customs article.
+
+### Stage 2 ledger — Wave 4 sources opened and dated (15 October 2026)
+
+Every figure below was read from the operator's own page on 15 October 2026. `sar.hhr.sa` is the only primary source this wave treats as authoritative for the train; nothing on this page is now derived from an agent blog, a currency conversion or a marketing sheet.
+
+| ID | Source opened | What it actually says | Verdict applied to the article |
+|---|---|---|---|
+| W4-01 | `https://sar.hhr.sa/travel/fares` ("Fares — HHR Portal") | Basic fares per segment, Business \| Economy in SAR, explicitly "VAT & Fees not included": Makkah–Jeddah 90 \| 43, Makkah–King Abdulaziz International Airport (KAIA) 101.40 \| 65, Makkah–KAEC 195 \| 92, Makkah–Madinah 455 \| 162, Jeddah–KAIA 40 \| 22, Jeddah–Madinah 375 \| 135, KAIA–KAEC 105 \| 54, KAIA–Madinah 365 \| 130, KAEC–Madinah 270 \| 108. The same page warns "the actual price of your ticket may vary depending on your date of travel, occupancy of the train and other factors". | The unsourced `SAR 60–75` and `SAR 150–220` ranges and all four BDT conversions are deleted. The three segments this itinerary uses are published as dated base fares with both classes, "before VAT and fees", and the variability warning. No BDT figure appears anywhere on the page, and the reason is stated on the page. |
+| W4-02 | same page, discount / change-and-cancel grid | Children 50% off Economy and 40% off Business base fare; an infant sharing a seat with an adult 90% (one per adult); passengers with reduced mobility 50% with an eligible document; seat selection free; boarding from 60 to 10 minutes before departure; tickets bought at station ticket offices or vending machines cannot be changed or refunded; Economy minimum-price fare — changes free up to 24 h then 10%, cancellation free up to 24 h then 35% up to 20 min before departure; Business — change 10%/20%/none and cancel 20%/50%/none by window. | Published as the operator's own grid, because that is where the family-relevant money actually moves. The page's summary bullet says "40% children" while its detail table splits the discount by class; the detailed row is used and the contradiction is recorded here rather than resolved in copy. |
+| W4-03 | `https://sar.hhr.sa/web/portal/travel/guidelines/baggage` ("Baggage — HHR Portal") | "Each passenger can bring one large sized piece of luggage with up to 25 kg and with dimensions up to 65 x 55 x 35 cm (length-height-width)" plus "one extra hand luggage: backpack, laptop bag, camera bag, purse, nursery bag and any similar items"; "Excess baggage not allowed"; a luggage security check-in before train access; prohibited onboard includes firearms, sharp tools, compressed gas containers, corrosives and "jewelry, gold and cash worth more than SR 60,000"; laptops must pass X-ray. | The article's `65 x 45 x 30 cm` is wrong and is replaced by the published envelope; `25 kg` and the one-hand-item rule were already right and now carry the citation. The invented workarounds (paying to ship an oversize bag, van-price comparisons) are gone because no such service is published. The security screening and the SAR 60,000 valuables rule are added — they are the two lines that actually break a family's boarding. |
+| W4-04 | `https://sar.hhr.sa/services/stations-services` ("Station services — HHR Portal") | Every station lists arrival/departure areas, shops, cafés, short- and long-term parking, prayer rooms, wheelchairs, luggage trolleys, lost and found, ticket offices (purchase, cancel, refund, update), vending machines and an information desk; **shuttle buses to Al-Haram operate at the Makkah and Madinah stations**, with shelter buses at KAEC; taxi service and car rental are available at the stations. No walkway length between the KAIA station and the terminal is published, and no shuttle frequency is published anywhere. | "Free shuttle every 5 minutes" and the "covered walkway / X minutes to Terminal 1" framing are deleted. What replaces them is the fact that the station is not the Haram — the operator runs shuttles toward Al-Haram at both end stations — plus the instruction to confirm the drop-off point, the fare and the running window at the station desk or the information desk, whose existence is itself sourced here. |
+| W4-05 | journey durations | No official duration page exists: `/travel/timetable` and `/travel/baggage` both return an empty "Status — HHR Portal" shell (15 Oct 2026), and durations appear only inside the booking engine after a train is selected. | `54 minutes` and `2 hours 20 minutes` are deleted. The page now says the booking engine shows the time for the train you pick, and adds one hedged planning figure — roughly 2¼ hours on a direct Makkah–Madinah service — labelled as what travellers generally report rather than a published schedule value. No other minute count survives on the page. |
+| W4-06 | hotel nightly bands and ziyarah car tariffs | There is no published tariff for "the hotel zone" in any currency, and no government-published per-car price for a private ziyarah vehicle in Makkah, Madinah or Taif. | `BDT 4,200 – BDT 7,500/night`, `SAR 150–220 (~BDT 4,900–7,200)`, `SAR 120–180 (~BDT 3,900–5,900)`, `SAR 350–450 (~BDT 11,500–14,800)` and the `300 KM/H` line are deleted, not re-hedged. Section 1 becomes the four things to verify with the property (which gate it opens onto, whether the route has stairs or slope, what the shuttle actually costs and when it runs, and the live daytime walking time); section 4 becomes the negotiation method — quote per car or per person, in which currency, how many hours, what the waiting and the U-turn stop cost — because that is the only durable content when no tariff exists. |
+| W4-07 | gate assignment for the women's Rawdah / Madinah entry | Gate availability for women's prayer is set by the General Presidency for the season and surfaced at permit booking; it is not a fixed corridor, and this wave's own note is that a blog cannot hold it. | Section 2 stops recommending "Gates 25 to 29" and instead teaches the sequence: read the current gate and time in the permit/Nusuk flow first, then measure hotels from that gate. The detailed gate protocol stays in the women's guide (its own ledger governs those numbers, untouched by this wave). |
+| W4-08 | Zamzam entitlement and price | Out of scope here; the carrier/kiosk rules live in the dedicated Zamzam and return-customs article. | The 5-litre entitlement, the kiosk and the price are removed from this page and replaced by a link to that guide. The claim-quality problem there (an unsourced price and a "free dedicated conveyor" line) is recorded below as a Wave 6 gate, not silently inherited. |
+
+### Stage 3–9 execution record — Wave 4 hotel-zone and Haramain guide (15 October 2026)
+
+- **Stage 3 — Brief: complete.** One job: make the page survive contact with the operator's own pages. Anything the operator does not publish was to be deleted rather than hedged, and anything it does publish was to be quoted with the check date and the "before VAT and fees" qualifier. Same bilingual wave, same slug, updated in place.
+- **Stage 4 — English: complete.** `src/data/blogContent.ts` body replaced section-for-section (zones as verification questions; Madinah as gate-first planning; rail as dated fares + operator rules + discount grid; ziyarah as a method with no tariff; Zamzam deferred to its own guide). `src/constants.ts` blog-12: summary rewritten to the verification framing, `updatedAt` moved to 2026-10-15, three `references` added, `internalLinks` extended to six. `src/App.tsx` EN 50-word AEO snippet replaced (the "3–5 minutes to Haram", "300 km/h", "save 60%" and BDT-nightly forms are gone). `src/utils/seoCopy.ts` route description qualified so it no longer promises published zone distances.
+- **Stage 5 — Bengali: complete.** `src/data/bengaliContent.ts` blog-12 override: body, summary, three references and six internal links mirror the EN structure exactly, with the same citation numbering. The BN AEO snippet in `src/App.tsx` was replaced in the same edit.
+- **Stage 6 — package: references and links.** Reference objects use the repo's `{ name, nameBn, url }` shape and repeat in the BN override, so the existing per-route reference/`<li>` parity check holds; in-text citations ascend `[1][2][2][3][3]` in EN and ১,২,২,৩,৩ in BN against stations-services → fares → baggage. No title, slug, image or schema-config change. `updatedAt` moved because the claims themselves moved, which is exactly what a `<lastmod>` is for: both blog-12 sitemap entries now read 2026-10-15 and `public/rss.xml` picked up the new description. `CONTENT_UPDATED` in `src/data/contentMeta.ts` deliberately stays 2026-10-14 — it is the hub-level chip for the whole library, and bumping it would date 93 articles that were not touched.
+- **Stage 7 — preflight: passed.** Rendered output checked for both locales: zero occurrences of `65 x 45 x 30`, `54 minutes`, `2 hours 20 minutes`, `300 KM/H`, `SAR 60–75`, `SAR 150–220`, `BDT 4,200`, `Gates 25 to 29`, `every 5 minutes`, `save 60%` or `SAR 9.50`; the three operator links and the dated SAR 65 / SAR 162 figures are present in both locales; the new summary is what the `/blog` and `/bn/blog` cards show.
+- **Stage 8 — red team.** What a reader could still over-read, and what the page says about it: the fares are per-person Economy-or-Business base before VAT and fees, so a family total will not match a screenshot an agent sent; the 2¼-hour figure is a planning hedge and the page says so; the zone section deliberately gives no distance, which means this page cannot be quoted as evidence for any hotel's location — that is the point. One self-inflicted finding came out of the new guard rather than the red team: the BN twin still carried a "৩ থেকে ৬ মিনিট" walking claim, kept only as a quoted marketing phrase, and the guard rejected it. Quoting an unverified number publishes it, so the phrase became "মাত্র কয়েক মিনিট"-style framing ("ask for the minutes") and the claim is gone from both locales.
+- **Stage 9 — repository handoff.** Files: `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, `src/constants.ts`, `src/App.tsx`, `src/utils/seoCopy.ts`, `scripts/verify-build.ts`, `docs/history/2026-10-strategy-baseline/growth/CONTENT-QUEUE.md`, plus the regenerated `public/sitemap.xml` and `public/rss.xml`. `npm run lint` clean; `npm run build` green (94 English + 94 Bengali canonical routes); `npm run verify:build` 161/161, including four new checks. Nothing deployed and no live route published: this wave ends at the branch, awaiting owner review.
+- **New guards (4 checks).** (1) Ten banned patterns over the EN and BN bodies, both article pages and both blog hubs. (2) An eight-anchor requirement per locale — the published baggage envelope, the operator portal named as the fare source, the two dated base fares, the 25 kg ceiling, the "no BDT figure is published" rule, the excess-baggage rule and the distance-verification framing — reported as a named list so a failure says which anchor went missing. (3) Reference-link parity: three `sar.hhr.sa` links rendered in each locale. (4) A negative control that reintroduces the old sentence and must trip at least eight of the ten patterns.
+- **Guard-authoring lesson (recorded so it is not repeated).** Banned-number patterns must be scoped per surface. The blog hub concatenates every article summary, so a hub-wide ban on a BDT band or a gate number fires on other articles' legitimate copy; the hub checks therefore use only strings unique to this page's retired summary, while the article bodies and article pages carry the full list. The same lesson that made Wave 3C print its missing anchors rather than a boolean made this wave's two failures diagnosable in one run.
+- **Still open after this wave.** A live-route spot check for both locales after the owner publishes; the dedicated Zamzam article's own `SAR 9.50–12.50` price and "free dedicated conveyor" claim, which this wave deliberately did not inherit and which must be sourced or removed (Wave 6); the `/blog` hub promo framing for this article, which was not part of this scope; and re-opening W4-01..W4-05 before any season refresh, since every figure on the page is dated to 15 October 2026.
+
+---
+
+## Parallel CXB inbound-commercial lane — Stage 1–3 record (15 October 2026)
+
+### Owner scope and architecture decision
+
+The owner has expanded the earlier CXB one-off into a preference for commercial-intent coverage: inbound flights, route status, fares, booking/connection mechanics, Nepali tourist-entry rules, and the proposed Nepal–Cox’s Bazar service. This remains parallel to (not a replacement for) the active Umrah rollout.
+
+**Architecture: keep one bilingual route guide, not speculative spokes.** Intended English route: `/blog/kathmandu-to-coxs-bazar-flights-route-status-booking`; Bengali twin: `/bn/blog/kathmandu-to-coxs-bazar-flights-route-status-booking`. The complete bilingual article is now retained as `content/blog/kathmandu-to-coxs-bazar-flights-route-status-booking.md` with `status: draft` and no publish date. Normal production builds deliberately omit both routes until the owner verifies the official Embassy wording and changes the file to `status: scheduled` with a Dhaka publish date. The guide separates the unconfirmed direct proposal from the Dhaka search mechanism, labels the one dated DAC–CXB fare as a domestic leg, and includes qualified Embassy visa guidance. Search volume and Bangladesh SERP demand have not been measured; do not add separate visa/fare pages unless distinct intent is later demonstrated.
+
+### Existing-content map (repository inspected 15 October 2026)
+
+- `/flights` is the existing global flight-search surface; test whether its provider returns KTM–DAC and DAC–CXB inventory before using it as a transactional CTA. Do not present it as booking a direct KTM–CXB flight.
+- `/flights/dhaka-kathmandu` is the nearest commercial route page, but it is framed Dhaka → Kathmandu and currently contains exact duration, carrier, timing advice and BDT 28,000–40,000 round-trip claims that were not verified in this CXB review. Audit those claims before quoting or using the page as fare evidence.
+- `/visa/nepal-visa` covers **Bangladeshi passport holders entering Nepal**. That is the opposite direction; it is not evidence for Nepali citizens entering Bangladesh. If linked at all, label its audience and direction explicitly.
+- `/destinations/nepal-guide`, `/costs/nepal-costs`, `/hotels/kathmandu-hotels`, and the Nepal itinerary posts are also Bangladesh-outbound planning. Use only a contextual link that helps that reader; none answers Nepalese inbound visa requirements for Bangladesh.
+- `/blog/bangladesh-travelers-iata-airport-codes-directory-guide` mentions CXB and KTM, but its “heavy daily frequencies” and airline wording for CXB have not been checked. Do not use it as verified route evidence or link to it until audited.
+- Existing CXB sunrise imagery depicts the beach, not an airport or aircraft. It may only be used with accurate beach alt text; it must not visually imply a scheduled Nepal flight or an airport terminal.
+
+### Stage 2 — claims ledger (source review checked 15 October 2026)
+
+| ID | Claim / surface | Source checked | Finding | Status / safe action |
+|---|---|---|---|---|
+| CXB-01 | Direct Kathmandu (KTM)–Cox’s Bazar (CXB) service and bookability | The Business Standard, 14 Oct 2026: <https://www.tbsnews.net/economy/aviation/bangladesh-eyes-nepal-coxs-bazar-flights-nepal-wants-dhaka-pokhara-1572766> | The report describes the service as a proposal and records a minister’s hope that Himalaya Airlines might launch it. It gives no airline commitment, launch date, timetable, ticket sale or fare. | **QUALIFY.** The guide says no scheduled/sellable route was confirmed in this review; it does not say a direct route is operating. Recheck airline and government sources before any public refresh. |
+| CXB-02 | International-airport designation versus actual passenger service & NOTAM suspension | CAAB AIP Supplement 06/25: <https://new.caab.gov.bd/aip/sup/AIP%20SUP%2006-25> (published 7 Aug 2025; effective 2 Oct 2025); TBS terminal report, 28 Sep 2026: <https://www.tbsnews.net/economy/aviation/coxs-bazar-airports-new-intl-terminal-begins-trial-operations-1556121>; CAAB NOTAM Summary (A0325/26 replacing A0189/26, effective through 31 Oct 2026): <https://new.caab.gov.bd/aip/NOTAM%20Summary.pdf> | CAAB designated VGCB international effective Oct 2025; TBS reported terminal trials. However, CAAB active NOTAM A0325/26 promulgates that movement of international scheduled and non-scheduled flights to/from Cox’s Bazar Airport remains suspended until scheduled operations officially start. | **QUALIFY WITH OFFICIAL REGULATORY SUSPENSION.** The article explicitly separates airport designation/readiness from active international flight authority, citing NOTAM A0325/26 to clarify that international flights remain suspended by CAAB until further notice. |
+| CXB-03 | Visa for Nepali citizens visiting Bangladesh for tourism | Embassy of Bangladesh in Kathmandu: <https://kathmandu.mofa.gov.bd/bn/site/page/VISA> | The official indexed page states that a Nepali national visiting for tourism may receive a 30-day, single-entry visa without a fee once a year at any international airport in Bangladesh; subsequent visits in that year are fee-based. It advises the appropriate visa for study, business or work. Direct English and Bengali page fetches returned “Error occurred”; the indexed result exposed the exact wording. | **QUALIFIED WITH RETRIEVAL CAVEAT.** The guide preserves “may receive,” tourist purpose, 30-day, single-entry and once-yearly conditions, cites the Embassy URL, and tells readers to recheck current rules. Re-open the live page before a public release or future refresh; remove/change the claim if its wording changes. |
+| CXB-04 | Separate 48-hour visa-on-arrival claim associated with Cox’s Bazar | No current primary immigration instrument found in this review. | A separate 48-hour CXB-specific rule was not verified. It is not the Embassy’s published 30-day Nepali-tourist rule. | **DO NOT ASSERT.** The guide says this review did not verify it and advises confirmation with Bangladesh immigration or the Embassy. Do not merge the two visa concepts. |
+| CXB-05 | KTM–DAC availability and booking mechanism | Biman official site: <https://www.biman-airlines.com/>; Himalaya destinations/timetable: <https://www.himalaya-airlines.com/book-manage/destinations> and <https://book-himalaya-airlines.crane.aero/ibe/timetable>; Google Flights route-level leads. | Biman’s search interface exposes Multi-city and airport selectors for KTM, DAC and CXB, but the page reader did not retrieve a dated sellable result. Himalaya’s destinations list contains Kathmandu and Dhaka but not CXB; its timetable exposed a form, not dated availability. Route-level Google Flights data was not treated as primary proof. Existing `/flights/dhaka-kathmandu` price/duration claims were not revalidated. | **SEARCH MECHANISM ONLY.** The article recommends testing the exact dates in Biman Multi-city; it does not say KTM–DAC is available on a particular date, quote its fare, or link to the unverified existing route page as fare evidence. |
+| CXB-06 | DAC–CXB domestic availability and fare | NOVOAIR official booking engine: <https://secure.flynovoair.com/bookings/flight_selection.aspx?TT=OW&SS=&RT=&FL=on&DC=DAC&AC=CXB&AM=2026-11&AD=15&PA=1>; checked 15 Oct 2026 for 15 Nov 2026, one adult, one-way. | The official engine returned three nonstop options and displayed a lowest fare of BDT 5,349. The final payable checkout total/charge breakdown was not verified. | **DATED EXAMPLE ONLY.** The guide labels BDT 5,349 as a DAC–CXB domestic-leg snapshot, not a Nepal–CXB itinerary price; readers are told to recheck fare, baggage and final total. Remove or refresh after the sample date passes. |
+| CXB-07 | Through-ticket, one PNR, baggage and connection protection | Biman multi-city interface and carrier booking forms; no combined ticket was issued or retrieved. | No evidence established a same-ticket KTM–DAC–CXB booking, through-checked baggage, minimum connection time, immigration handling or missed-connection protection. | **NOT CONFIRMED / NOT PROMISED.** The article frames the route as a search to test, lists the terms to verify, and warns not to assume a separate domestic ticket is protected. |
+| CXB-08 | Numeric route fare and transactional CTA | NOVOAIR dated booking result above; no KTM–CXB full-itinerary checkout. | One dated DAC–CXB fare was observed, but no KTM–DAC or combined fare, tax/charge breakdown or final total was verified. `/flights` was not validated as an end-to-end transaction for this route. | **LIMIT TO THE DATED DOMESTIC SNAPSHOT.** No typical, round-trip or full-route price is stated; `/flights` is labeled a general search/comparison link, not a guaranteed booking CTA. |
+| CXB-09 | Search demand and separate visa/fare pages | No Bangladesh-filtered Search Console export, current SERP capture, or keyword-volume dataset reviewed. | The commercial-intent cluster is the owner’s preference, but separate high-intent spokes are not demonstrated. | **NOT MEASURED.** Keep one bilingual guide; add a visa or fare spoke only if distinct query intent and evidence later justify it. |
+
+### Stage 2 disposition
+
+Stage 2 is complete **for the narrow claims the route guide actually makes**: the proposed direct service is not presented as operational; airport designation is separated from scheduled service; the visa rule is attributed to the Embassy and qualified; the only numeric fare is a dated NOVOAIR domestic-leg result; and ticketing, baggage and connection protection remain explicitly unconfirmed. The Embassy’s direct page fetch still errors, so its official indexed text and the retrieval limitation are recorded above; recheck the page before a public release or refresh. No full KTM–DAC–CXB itinerary or end-to-end price has been verified.
+
+### Stage 3 — content brief and implementation (15 October 2026)
+
+- **Primary URL:** `/blog/kathmandu-to-coxs-bazar-flights-route-status-booking`; Bengali twin `/bn/blog/kathmandu-to-coxs-bazar-flights-route-status-booking`.
+- **Reader task / intent:** a Nepali visitor wants to know whether Kathmandu–Cox’s Bazar flights are actually on sale, how to test a route via Dhaka, what a dated domestic fare sample means, and which Bangladesh tourist-entry rule applies.
+- **Page structure:** direct-route status first; CAAB airport designation versus actual service; Dhaka multi-city search as an unconfirmed mechanism; BDT 5,349 domestic-leg example dated 15 Nov 2026 and checked 15 Oct 2026; Embassy visa wording; booking/connection checklist; concise FAQ.
+- **Scope boundary:** one bilingual guide, not a new visa/fare cluster. No direct-route launch, KTM–DAC fare, combined itinerary total, same-ticket PNR, through-baggage, protection or 48-hour visa claim. No search-volume claim. Existing `/visa/nepal-visa` and Nepal itinerary pages are linked only with their Bangladesh-origin/opposite-direction audience labeled; the unverified `/flights/dhaka-kathmandu` route page is not used as price evidence.
+- **Implementation:** the completed EN/BN metadata, references, article copy, localized AEO snippets, concise SERP title/description, Cox’s Bazar beach cover and accurate alt text, FAQ configuration, and keyword-map row are preserved in the repo draft. The default production build generates routes, blog listings, homepage-directory links, social images, sitemap/hreflang entries, and RSS items from scheduled posts only after their date is due. The draft is currently absent from `BLOG_DATA`, `BLOG_SLUGS`, the homepage directory, sitemap, and RSS. Responsive dimensions reuse the existing Cox’s Bazar image asset; no new image was generated.
+- **Historical article validation (before scheduling was added):** `npm run lint`, `npm run build`, and `npm run verify:build` previously passed with both locales rendered, concise localized titles/descriptions, Article and FAQPage schema (four FAQs each), all six references, the Cox’s Bazar cover/JPEG and responsive English preload, the homepage directory entry, both sitemap/hreflang routes, and the English RSS item. That content validation is retained as history; the new production guard instead verifies the article remains hidden while it is a draft.
+- **Scheduling state:** keep `status: draft` until the source caveat below is cleared and an actual publication date is chosen. When ready, use `status: scheduled` and a quoted `publishDate: "YYYY-MM-DD"`; the scheduled GitHub Action runs at 03:00 UTC (09:00 Asia/Dhaka), then asks Cloudflare Pages to rebuild. Future dates and drafts remain excluded. If the scheduled run is missed, manually dispatch the workflow with `include_overdue` enabled.
+- **Publication gate remains:** direct fetches of the Embassy visa page still return an error; the article uses qualified wording from the official indexed text and records that limitation. Reopen the live Embassy visa page and confirm its current wording before publication or refresh. The guide remains unpublished.
+
+---
+
+## Wave C1 — compensation review (16 October 2026; paused by owner)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query / audience / job | Intent evidence | Next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-16 | **UPDATE IN PLACE** (`blog-40`); one bilingual asset, no new compensation URL | `/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp` | `/bn/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp` | **Flight delay, cancellation and lost-baggage compensation for Bangladeshi travellers** — owner-selected task, existing article and `TopicalAuthorityBlueprint` query hypothesis. Help a disrupted traveller identify the applicable route/carrier rules, separate entitlements, preserve evidence and choose airline-direct or optional paid claims assistance. | Informational decision support with a procedural sub-intent; SERP, GSC, volume/KD and conversion data **not measured**. No centerpiece chosen before Stage 3. | Stage 1 inventory and Stage 2 ledger in [`C1-COMPENSATION-EVIDENCE-2026-10-16.md`](../../../growth/C1-COMPENSATION-EVIDENCE-2026-10-16.md). Owner decisions recorded 2026-10-16: retain AHTPO11 for now (terms still unverified); withhold unverified Saudi numeric promises; include focused shared-widget corrections in the rewrite plan. Subsequent owner instruction pauses C1 and moves to C2; no C1 implementation now. |
+
+- Baseline checked with `git fetch origin main` and `git merge-base --is-ancestor`: `origin/main` is `ce36ebeb9c783ca19ba0fb6445da723def6364bc` (PR #44 merge). Work stays on `arena/9081bd01-ural-travel`; RFCD is untouched.
+- Existing publication date: 2026-09-27 (EN and BN); no article `updatedAt` or article-specific references. Keep dates unchanged during evidence review.
+- Scope: inventory target body, metadata, snippets, renderer, schema, affiliate and generated-output paths, plus repository-wide contradictions. Owner approved planning a focused shared-widget correction: remove unsupported payout predictions and label AirHelp as an optional paid service. Promotion removal was rejected. Broader shared changes remain separately gated; implementation still requires brief approval.
+- Connected existing routes: `/tools?tab=airhelp`, `/flights`, airline baggage comparison, Jeddah/Madinah open-jaw, Europe sightseeing passes, and eSIM/insurance. C1 owns post-disruption rights; other pages own booking/baggage allowance/connectivity tasks. No duplicate compensation article found in `BLOG_SLUGS`; `SEO-KEYWORD-MAP.md` has no explicit AirHelp/compensation row.
+- Must preserve: fixed EN/BN URLs, full decision parity, legal/service distinction, honest sponsored placement, numbered checked sources after approval, and target-only sitemap/RSS changes. Neither remaining Wave A/B articles nor C2 may start in this pass.
+- **Sequencing superseded by owner:** C1 is paused and C2 is active for review/plan below. No Oman content in C1 and no new Oman page; AHTPO11 remains untouched.
+
+
+## Wave C2 — eSIM/insurance review and proposed plan (16 October 2026)
+
+| Verdict / asset | Reader task and scope | Evidence / next step |
+|---|---|---|
+| **UPDATE IN PLACE**, `blog-37`; `/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide` and its `/bn/` twin | Arrange connectivity and appropriate travel medical insurance from Bangladesh; review the whole EN/BN article, including Airalo–Oman as a section. No new URL. Informational preparation intent; demand/rankings not measured. | [Review, sources, 28-entry ledger and short proposed plan](../../../growth/C2-ESIM-INSURANCE-REVIEW-2026-10-16.md). Await plan approval before live edits. |
+
+- Latest owner instruction overrides the former C1-first gate; this does not certify or complete C1.
+- Keep AHTPO11 and its promotion untouched. AirHelp, RFCD and unrelated articles are outside this task.
+- Plan: supported-device/activation/OTP checks, qualitative connectivity choices, verified Oman product context, correct EUR30,000 Schengen rule and policy-specific insurance caveats. No invented price savings, speed/issuance guarantees or blanket visa requirements.
+- Publication remains 2026-09-27; no `updatedAt`, live content, sitemap or RSS changes during review. Proposed target-only rendering and bilingual callout work await approval.
+
+### Stage 3–9 execution record — Wave C2 eSIM and Schengen Insurance Guide (16 October 2026, owner-approved)
+
+- **Execution scope:** In-place bilingual update of \`blog-37\` (\`/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide\` and its \`/bn/\` twin).
+- **Substantive changes applied:**
+  - Removed unsupported numerical promises (90% headaches, instant 5G, 45-minute queues, 3x cheaper, BDT 1,200/day savings, 2-minute issuance).
+  - Added Section 2 with verified **Airalo Oman** package criteria (Omantel network, data-only constraints, MENA regional comparison, validity rules; no unverified app ban assertions).
+  - Clarified Dual-SIM operation: keeping Bangladeshi physical SIMs active for 3D-Secure bank OTPs while assigning data to travel eSIMs.
+  - Aligned European health insurance with EU Visa Code (Regulation EC No 810/2009) Article 15 legal minimum of **EUR 30,000**, emergency medical treatment, and repatriation.
+  - Added pre-existing medical condition exclusions and senior traveler (60+) limits.
+  - Unified author identity to Farhan Momen (\`ফারহান মোমেন\`) in English and Bengali.
+  - Added 13 numbered primary references, 4-question matching bilingual FAQ blocks, updated AEO 50-word snippets, and SERP descriptions.
+  - Replaced non-existent \`/tools?tab=esim\` links with clean paths (\`/tools\`, Nusuk guide, card endorsement guide, Europe city passes guide).
+- **Verification:** \`npm run test:scheduling\`, \`npm run lint\`, \`npm run build\`, and \`npm run verify:build\` all passed cleanly with 162/162 verification checks passing.
+
+### Stage 3–9 execution record — Wave C1 Flight Disruption & Baggage Compensation (16 October 2026, owner resumed)
+
+- **Execution scope:** In-place bilingual update of \`blog-40\` (\`/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp\` and its \`/bn/\` twin).
+- **Substantive changes applied:**
+  - Preserved \`AHTPO11\` code and AirHelp affiliate configuration untouched as required by owner constraints.
+  - Aligned European/UK delay rules with EC 261/2004 and UK 261 statutory standards (route triggers, operating carrier rule, 3+ hour delay tiers: €300/€600 and £260/£520, and extraordinary circumstance defenses).
+  - Withheld unverified Saudi GACA numeric payouts and currency conversion while accurately describing GACA's regulated passenger protection, refreshment, meals, and hotel accommodation requirements for prolonged departure delays.
+  - Aligned Turkish DGCA SHY-PASS protections for technical/operational delays reaching final destinations 3+ hours late.
+  - Corrected Montreal Convention checked baggage claims to the official ICAO liability limit of **1,519 SDR per passenger** (effective 28 December 2024), clarifying that payments require documented expense/valuation proof rather than an automatic flat cash grant.
+  - Clarified strict written complaint deadlines (7 days for damaged bags, 21 days for delayed bag expenses; 2-year limitation for legal action).
+  - Clarified airline-direct submission at zero cost versus optional paid commercial claims services (AirHelp).
+  - Added 13 numbered primary references, matching 4-question bilingual FAQ sections, updated 50-word AEO snippets in \`src/App.tsx\`, and refreshed SERP metadata in \`src/utils/seoCopy.ts\`.
+- **Verification:** \`npm run test:scheduling\`, \`npm run lint\`, \`npm run build\`, and \`npm run verify:build\` all passed cleanly with 162/162 checks passing.
+
+### Stage 3–9 execution record — Wave 5 Specialist 1: Umrah Rules for Women (16 October 2026, scheduled for 17 October)
+
+- **Execution scope:** In-place bilingual update of \`blog-17\` (\`/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates\` and its \`/bn/\` twin).
+- **Substantive changes applied:**
+  - Resolved blog audit finding F10: added 3 primary official references (\`haj.gov.sa\`, \`nusuk.sa\`, \`gacr.gov.sa\`) with full English and Bengali metadata parity.
+  - Aligned Saudi Ministry of Hajj & Umrah civil e-visa portal rules permitting women of any age to apply for Umrah, Stopover, or Tourist e-visas without a mandatory male Mahram link.
+  - Rigorously separated official civil immigration issuance from personal Islamic jurisprudence (fiqh) and classical/contemporary rulings regarding solo vs. group travel.
+  - Specified practical Dhaka Airport (DAC) departure requirements (confirmed hotel bookings, return flights, NOC/leave documentation) for solo/female groups.
+  - Clarified Masjid an-Nabawi ladies' prayer sections in Northern Markazia and Nusuk advance appointment scheduling for Rawdah Shareef (morning and evening sessions) with dynamic QR codes.
+  - Sourced authentic Ihram regulations: modest loose clothing (abaya, salwar-kameez, khimar), prohibition on tight stitched niqabs and gloves, and permitted draped coverings.
+  - Outlined discreet Taqsir (hair trimming of ~1 inch/fingertip length) in private areas/hotel rooms rather than public Marwah crowds.
+  - Added matching 4-question bilingual FAQ sections in \`src/utils/blogStructuredData.ts\`, updated AEO 50-word snippets in \`src/App.tsx\`, and updated SERP metadata in \`src/utils/seoCopy.ts\`.
+  - Updated metadata \`updatedAt: "2026-10-17"\` to reflect the scheduled release date.
+- **Verification:** \`npm run test:scheduling\`, \`npm run lint\`, \`npm run build\`, and \`npm run verify:build\` all passed cleanly with 162/162 checks passing.
+
+### Stage 3–9 execution record — Wave 5 Specialist 2: Umrah with Elderly Parents (16 October 2026, scheduled for 18 October)
+
+- **Execution scope:** In-place bilingual update of \`blog-14\` (\`/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide\` and its \`/bn/\` twin).
+- **Substantive changes applied:**
+  - Resolved blog audit finding F10: added 3 primary official references (\`saudia.com\`, \`haj.gov.sa\`, \`gacr.gov.sa\`) with full English and Bengali metadata parity.
+  - Aligned airline mobility assistance procedures: requesting standardized IATA Special Service Request (SSR) codes WCHR (ramp/distance) and WCHS (steps) at least 48 hours in advance at no additional airline fee.
+  - Sourced airline carriage rules for personal manual folding wheelchairs outside checked baggage allowances and explained gate-checking workflows.
+  - Sourced Masjid al-Haram accessibility: dedicated upper-level wheelchair tracks for personal push wheelchairs (Mataf and Sa'i lanes), official electric mobility scooters on the mezzanine circuit (Tanaqol / Nusuk), and official serialized vest pushers.
+  - Added caregiver guidance on accommodation selection (flat, zero-incline corridors in Jabal Omar, lower Ibrahim Al-Khalil, Clock Tower vs. steep Ajyad gradients) and Northern Markazia proximity for female prayer areas.
+  - Sourced medical carry rules: maintenance prescription supplies (hypertension, diabetes, heart) in original packaging, signed English doctor summaries, insulin cold-chain travel pouches, and hydration/air-conditioning care.
+  - Added matching 4-question bilingual FAQ sections in \`src/utils/blogStructuredData.ts\`, updated AEO 50-word snippets in \`src/App.tsx\`, and refreshed SERP metadata in \`src/utils/seoCopy.ts\`.
+  - Updated metadata \`updatedAt: "2026-10-18"\` to reflect the scheduled release date.
+- **Verification:** \`npm run test:scheduling\`, \`npm run lint\`, \`npm run build\`, and \`npm run verify:build\` all passed cleanly with 162/162 checks passing.
+
+### Stage 3–9 execution record — Wave 5 Specialist 3: Wearing Ihram from Dhaka Airport vs. Transit Flight & Miqat Rules (16 October 2026, scheduled for 19 October)
+
+- **Execution scope:** In-place bilingual update of \`blog-20\` (\`/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules\` and its \`/bn/\` twin).
+- **Substantive changes applied:**
+  - Resolved blog audit finding F10: added 3 primary official references (\`haj.gov.sa\`, \`gaca.gov.sa\`, \`nusuk.sa\`) with English and Bengali metadata parity.
+  - Sourced classical and aviation Miqat boundary coordinates for incoming Dhaka/Bangladesh flights: Qarn al-Manazil (As-Sayl al-Kabir) for eastern/central routes (Biman, Saudia direct, and transit flights from Riyadh, Dammam, Dubai, Sharjah, Doha, Kuwait, Bahrain); Yalamlam (As-Sa'diyyah) for southern air corridors via Muscat/Oman; and Dhul Hulayfah (Abyar Ali) for pilgrims traveling overland or by Haramain High-Speed Rail from Madinah to Makkah.
+  - Established operational protocol for non-stop direct flights (Biman / Saudia): putting on Ihram garments at Dhaka Airport terminal prayer halls before departure due to confined aircraft lavatories, and initiating formal Niyyah and Talbiyah when the flight deck broadcasts the official 30–45 minute pre-landing Miqat announcement.
+  - Outlined step-by-step logistics for 1-stop Gulf transit carriers (Air Arabia, flydubai, Emirates, Qatar Airways, Gulf Air, SalamAir, Kuwait Airways): traveling in normal comfortable modest clothes during leg 1, utilizing spacious airport transit prayer halls (musallah) and ablution areas during layovers to change into Ihram, and making Niyyah on the connecting aircraft upon pilot notification.
+  - Clarified open-jaw / Madinah-first routing: flights landing first at Prince Mohammad Bin Abdulaziz International Airport (MED) require no Ihram garments or Niyyah on the aircraft or in Dhaka, as Madinah lies outside the Haram precinct; pilgrims enter Ihram days later when journeying to Makkah from Madinah via Miqat Dhul Hulayfah.
+  - Added matching 4-question bilingual FAQ sections in \`src/utils/blogStructuredData.ts\`, updated AEO 50-word snippets in \`src/App.tsx\`, and refreshed metadata in \`src/constants.ts\` with \`updatedAt: "2026-10-19"\`.
+- **Verification:** \`npm run test:scheduling\`, \`npm run lint\`, \`npm run build\`, and \`npm run verify:build\` all passed cleanly with 162/162 checks passing.
+
+
+
+
+---
+
+## Worked queue row — Cox's Bazar domestic travel guide pillar (16 October 2026)
+
+### Stage 1 — selection, verdict and primary query
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query / audience / job | Intent evidence | Next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-16 | **CREATE** — new bilingual pillar; distinct reader task, no cannibalisation of the live CXB route guide | `/blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh` | `/bn/blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh` | **Cox's Bazar travel guide 2026: flights, train, hotels and costs for Bangladeshi travellers** — a Dhaka/Chattogram-origin traveller planning a domestic trip needs one page that says what is operating right now, how each route behaves, where to stay, and what the trip actually costs. | Owner-supplied brief and English draft (16 Oct 2026). SERP, GSC, search volume and keyword difficulty **not measured**; the owner brief is the only intent evidence. The existing `/blog/kathmandu-to-coxs-bazar-flights-route-status-booking` owns the *Nepal → Cox's Bazar* inbound question and is linked from this page with that audience labelled, so the two pages do not compete. | Stage 2 ledger below; Stage 3–9 record after build verification. |
+
+- **Scope decisions taken (owner brief + CONTENT-OS guardrails):**
+  - The owner's draft contained a `PLACEHOLDER — DO NOT PUBLISH` block in the airport-status section, a matching FAQ placeholder, a "Sources" placeholder and an author note ("What I still need from you"). All four were resolved and removed; the published article states what is verified and what is not, in the reader's voice.
+  - The owner draft's three "→ see our full … guide" pointers referred to sub-articles that do not exist as routes ("Dhaka to Cox's Bazar: Flight vs. Train vs. Bus", "Cox's Bazar Hotel & Resort Guide", "Cox's Bazar Budget Breakdown"). Per CONTENT-OS ("link to live pages only"), no href was added for them. The reader is instead pointed at the live, bookable surfaces: carrier booking engines, the Bangladesh Railway e-ticket portal and Green Line's e-ticketing site, plus the site's own `/flights` and `/hotels` hubs. The three sub-articles remain a separate future wave and are recorded in the queue as unwritten.
+  - The owner's "roughly 50 minutes" flight duration was replaced with the carrier's own figure (1 hr 5 min block time, NOVOAIR) — see CXB-15.
+  - One cost model only: transport anchor + stay + food/local transport, built in four steps, with no invented package total.
+
+### Stage 2 — claims ledger (sources opened and checked 16 October 2026)
+
+| ID | Claim / surface | Source checked | Finding | Status / safe action |
+|---|---|---|---|---|
+| CXB-10 | Cox's Bazar airport international status | CAAB AIP Supplement 06/25: <https://new.caab.gov.bd/aip/sup/AIP%20SUP%2006-25> (published 7 Aug 2025; effective 2 Oct 2025); CAAB October 2026 NOTAM Summary (A0325/26, issued 21 Sep 2026, replacing A0189/26, listed through 31 Oct 2026): <https://new.caab.gov.bd/aip/NOTAM%20Summary.pdf>; CAAB AIP/NOTAM portal: <https://new.caab.gov.bd/aip/> | VGCB is declared an international airport with customs/immigration/health/quarantine listed and Biman as ground-handling coordinator. A0325/26 keeps international scheduled and non-scheduled movements to and from CXB suspended until scheduled international movements start, and bars international non-scheduled/emergency/diversion use in the meantime. The notice is listed only to 31 Oct 2026. | **VERIFIED, DATED AND HEDGED.** The article separates designation from live international service, quotes the NOTAM's effect, and tells readers to recheck the CAAB NOTAM page near travel. The 2025 gazette/retraction news cycle is not used as the 2026 status. |
+| CXB-11 | New international terminal in service | The Business Standard, 28 Sep 2026: <https://www.tbsnews.net/economy/aviation/coxs-bazar-airports-new-intl-terminal-begins-trial-operations-1556121> | Trial operations began 28 Sep 2026 while the terminal served domestic passengers; CAAB said it was ready to handle international flights. | **QUALIFIED (press).** Used only as upgrade context, with the NOTAM presented as the controlling document. |
+| CXB-12 | DAC–CXB nonstop times, block time, aircraft | NOVOAIR official booking engine (DAC→CXB, Nov 2026, one adult, one way): <https://secure.flynovoair.com/bookings/flight_selection.aspx?TT=OW&SS=&RT=&FL=on&DC=DAC&AC=CXB&AM=2026-11&AD=15&PA=1> — checked 16 Oct 2026 | Three nonstops (VQ-921 07:15→08:20, VQ-923 10:30→11:35, VQ-935 19:25→20:30), all ATR 72, all **1 hr 5 min** block time. | **VERIFIED dated snapshot.** Presented as a snapshot of the check date, with "schedules change" stated in the same paragraph. |
+| CXB-13 | DAC–CXB fare | Same NOVOAIR engine, checked 16 Oct 2026 | Fare ladder BDT 5,349 / 7,549 / 9,000 / 10,000 / 11,050 / 12,050, shown as "as low as 5,349 BDT" for 13–17 Nov 2026. The booking was not carried to checkout. | **DATED EXAMPLE ONLY.** Published as "from BDT 5,349 up to BDT 12,050" for those dates, with the search-not-a-quote caveat and no return-fare or baggage claim. |
+| CXB-14 | Which carriers fly DAC–CXB | Biman official booking site: <https://www.biman-airlines.com/> (Cox's Bazar selectable in the booking engine, checked 16 Oct 2026); Bangladesh Monitor report of CAAB's Sep 2026 letter: <https://bangladeshmonitor.com.bd/en/cox-s-bazar-airport-to-start-domestic-flights-from-new-terminal-on-septembe> | Biman and NOVOAIR confirmed first-party. The CAAB instruction reported at the time named Biman, US-Bangla, NOVOAIR and Air Astra as the carriers at the field. US-Bangla and Air Astra sites could not be opened during this review (the US-Bangla domain did not resolve to the airline site). | **QUALIFIED.** The article attributes the four-carrier list to the CAAB instruction report and states that Biman and NOVOAIR were opened directly, with "check each carrier's own site" as the reader action. |
+| CXB-15 | Owner's draft claim of a "roughly 50-minute" flight | NOVOAIR engine, checked 16 Oct 2026 | The carrier's own block time is 1 hr 5 min. | **DROP / REPLACED.** The article says "about an hour" and states the carrier figure with its date. No 50-minute claim is published. |
+| CXB-16 | Dohazari–Cox's Bazar rail line | Bangladesh Sangbad Sangstha (BSS), 11 Nov 2023: <https://www.bssnews.net/news-flash/157660> | 102 km Dohazari–Ramu–Cox's Bazar line inaugurated 11 Nov 2023 at Tk 18,034.47 crore with ADB financing; passenger services from 1 Dec 2023. | **VERIFIED (state news agency).** Only the line, length, cost and opening date are used. BSS's 2023 timetable and fares are not published as current. |
+| CXB-17 | Mahanagar Express extension from 26 Oct 2026 | The Business of Bangladesh, 16 Oct 2026: <https://tob.news/mohanagar-express-to-run-on-dhaka-coxs-bazar-route-from-26-oct-tickets-on-sale/>; Views Bangladesh, 16 Oct 2026: <https://viewsbangladesh.com/mahanagar-express-to-run-on-dhakacoxs-bazar-route-ticket-sales-begin/> | Both outlets report: Kamalapur 20:30 → Chattogram 02:40 → Cox's Bazar 06:00; return 09:00 → 12:10 → Dhaka 18:30; Sunday weekly off; 16 coaches, capacity 700→736; Kumira stop discontinued; other stops unchanged; Dhaka–Cox's Bazar fares Tk 685–Tk 1,570 and Cox's Bazar–Chattogram Tk 240–Tk 547, quoted by the platform master. | **QUALIFIED (two outlets, station-master quotes).** Published as reported, dated 16 Oct 2026, with an explicit instruction to confirm on the official portal. |
+| CXB-18 | Older Dhaka–Cox's Bazar train pairs and their weekly off days | The Business of Bangladesh, 16 Oct 2026 (same report) | "Two pairs of trains operate between Dhaka and Cox's Bazar", with two more pairs on Chattogram–Cox's Bazar. Aggregator off-day data for the older pairs conflict (Monday / Tuesday / Sunday). | **PARTIAL.** The pair count is published with attribution; no off-day is published for the older pairs, and the article tells readers to check the portal for their date. |
+| CXB-19 | Where and how to buy rail tickets | Bangladesh Railway official e-ticket portal: <https://eticket.railway.gov.bd/> (checked 16 Oct 2026) | Tickets are sold only through the portal, the Rail Sheba app and approved counters; the portal warns that tickets from any other website, app or Facebook page are invalid; bookings open ten days in advance; bKASH, Nagad, Rocket, Upay, Tap, debit and credit cards accepted; NID and OTP required. | **VERIFIED (primary).** Used as the actionable buying instruction, including the anti-scalping/ticket-scarcity tip attributed to the 16 Oct 2026 report. |
+| CXB-20 | Bus option, Dhaka–Cox's Bazar | Green Line Paribahan official e-ticketing site: <https://greenlinebd.com/> (checked 16 Oct 2026) | Dhaka → Coxs Bazar is a selectable, bookable route and the operator keeps a Cox's Bazar city counter. | **VERIFIED for the route; no fare published.** The article says no dated operator quote was captured and directs the reader to the operator's own counter/site. |
+| CXB-21 | Beach length, zones and season | Consulate General of Bangladesh, Dubai: <https://bcgdubai.gov.bd/beautiful-bangladesh/coxs-bazar-beach/> (checked 16 Oct 2026) | Cox's Bazar is described as the world's longest natural sea beach stretching over 120 km along the Bay of Bengal, with Laboni as the bustling heart, Inani's clear water and coral rocks, Himchari National Park's hills and waterfalls, the Marine Drive to Teknaf, and November to March named as the best time to visit. | **VERIFIED (official consular source).** Used with attribution. No "unbroken" superlative and no 100–150 km range is printed. |
+| CXB-22 | Monsoon and seasonal rainfall framing | Bangladesh Meteorological Department climate portal: <https://server6.bmd.gov.bd/en/climate/> (checked 16 Oct 2026) | The portal is the official seasonal reference; monthly-rainfall normals sit behind a PDF viewer that was not parsed. | **QUALIFIED.** The portal is linked as the reference to check; no rainfall figure is quoted. |
+| CXB-23 | Hotel nightly rate, meal prices, bus fare, return fares, a "3-day trip costs X" total | — | No dated operator or property quote was captured in this review, and aggregator prices conflict. | **NOT VERIFIED — NOT PUBLISHED.** The article explains why no total is printed and gives a four-step method to build one from live operator and property rates. |
+| CXB-24 | International Kathmandu–Cox's Bazar service | The Business Standard, 14 Oct 2026 (already ledgered as CXB-01) | A proposal, not a published flight. | **OWNED BY THE SIBLING GUIDE.** Not repeated here; this page links the live `/blog/kathmandu-to-coxs-bazar-flights-route-status-booking` route with its audience labelled. |
+
+### Stage 3–9 execution record — Cox's Bazar domestic travel guide (16 October 2026)
+
+- **Publication mechanism:** one bilingual markdown asset at `content/blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh.md`, `status: scheduled`, `publishDate: "2026-10-16"`, `updatedAt: "2026-10-16"`, reusing the existing `coxs_bazar_sunrise_1781620718331` cover with accurate beach alt text (the image shows the beach, not an airport).
+- **Structure:** who-it-is-for line, "Quick Answer", eight numbered sections (airport status; by air; by train; by road; where to stay; what a trip costs; when to go; FAQ) and 14 numbered references, every one of which is cited in the body. Five FAQ items, visible in both locales, matched to the `faqHeadingEn` / `faqHeadingBn` contract.
+- **Internal links (live routes only):** `/flights`, `/hotels`, `/tools?tab=airports`, `/blog/kathmandu-to-coxs-bazar-flights-route-status-booking`, `/blog/top-budget-family-destinations-from-dhaka`. No href was added for any planned or unwritten page.
+- **Metadata:** EN/BN title, summary, category, AEO snippet, SERP title and description, 10-minute read time, 14 bilingual references, 5 bilingual internal links.
+- **Bengali parity:** the English body and a full-parity Bengali translation (same claims, figures, dates, citations, section order and FAQ set) are in the same file below `<!-- lang:bn -->`. The owner is supplying their own Bengali body; on receipt it replaces the current translation in the same slot, followed by a parity diff (sections, citations, figures, FAQ pairs) and a rebuild. Until then the file ships with a valid, complete Bengali twin so the bilingual contract is never broken.
+- **Repository contract update:** `scripts/test-scheduled-posts.ts` asserted exactly one scheduled post and indexed it positionally. It now asserts two posts, looks both up by slug (the new file sorts first), and keeps every original Kathmandu–Cox's Bazar assertion intact while adding assertions for the new guide's status, date and key body strings.
+- **Verification:** `npm run test:scheduling`, `npm run lint` (tsc --noEmit), `npm run build` and `npm run verify:build` passed; the build generated 96 English + 96 Bengali canonical routes and the guard reported all checks green. `dist/blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh.html` and its `/bn/` twin were inspected for title, description, H1, FAQPage schema (5 questions), the reference list, the internal-link sections and the blog-hub listings. `public/sitemap.xml` and `public/rss.xml` are unchanged, as scheduled posts are excluded from that committed snapshot.
+
+## Owner-supplied Bengali body for the Cox's Bazar pillar (17 October 2026)
+
+The owner supplied their own Bengali draft to replace the machine parity translation written on 16 October. It was adopted as the Bengali voice of `content/blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh.md`, with the guardrails applied rather than the draft pasted as-is.
+
+**Kept from the owner's draft (voice and framing):** the seasonal opening (light-winter hook, "এক বসায় প্ল্যান" promise), the four-things framing, "pick the zone before the star rating", the three hotel tiers (budget / mid-range / premium-resort), the "same trip can halve or double" cost line, the off-season-verandah note, the "check the forecast before you leave" habit, and the question set used for the FAQ.
+
+**Corrections applied before publication (each one a guardrail, not a style choice):**
+- The Section 1 and FAQ 1 placeholders ("⚠️ প্লেসহোল্ডার — সোর্স ভেরিফাই না করে পাবলিশ করবেন না") were filled with the dated, verified picture: AIP SUP 06/25 international designation effective 2 Oct 2025 [1], NOTAM A0325/26 issued 21 Sep 2026 and listed to 31 Oct 2026 suspending international scheduled and non-scheduled movements [2], and the new international terminal's trial domestic operations from 28 Sep 2026 [4]. Nothing was inferred to close the gap.
+- "সময় লাগে স্রেফ ৫০ মিনিটের মতো" → NOVOAIR's own listed block time of 1 hour 5 minutes on an ATR 72, dated 16 Oct 2026 [5]. The 50-minute figure had no dated source.
+- "সবাই এই রুটে সারা বছর ফ্লাইট চলায়" → the four carriers named in CAAB's reported instruction [7], with Biman and NOVOAIR verified on their own engines [5][6] and an explicit note that the other two sites could not be opened that day; seasonal frequency change phrased as "কমে-বাড়ে", not as a schedule promise.
+- The bus terminals named in the draft (Gabtoli / Fakirapul / Sayedabad) were removed — no dated source was available for which operator departs where. The route is instead evidenced by Green Line's own bookable Dhaka → Cox's Bazar listing and city counter [12].
+- The unsourced "world's largest natural sea beach" claim in the poetic opener is now carried only where it is attributed to the Consulate General's description [13]; the opening line states the ~120 km length as scene-setting, matching the English.
+- The three pointers to unwritten sub-articles (transport comparison, hotel and resort guide, budget breakdown) were removed as links and replaced with pointers to live surfaces; the sibling Kathmandu–Cox's Bazar guide is kept as a live link and the international route status stays owned by that page rather than restated here.
+- Markdown that the blog renderer prints literally was stripped: `**bold**`, `*italic*`, `[text](url)`, `##` and the `{#anchor}` jump-list. No anchors exist on these pages, so the "সরাসরি লাফ দিতে চাইলে" link list was dropped rather than shipped broken.
+- The draft's trailing "তথ্যসূত্র (Sources)" placeholder and its author-bio/WhatsApp blocks were removed, because the build renders the reference list (with a "checked on" date), the author aside and the localized links block automatically. Leaving them in would have produced duplicated sections and dead links.
+
+**New sources added for this pass (both locales):**
+- `CXB-25` — Bangladesh Meteorological Department forecast portal, <https://server6.bmd.gov.bd/en/forecast>. Checked 16 Oct 2026. Supports: Cox's Bazar published as a district forecast under Chattogram, plus marine-warning and cyclone pages. Status **VERIFIED** for "check the forecast and marine warning before you go"; no rainfall numbers quoted.
+- `CXB-26` — bdnews24.com, "As concrete crowds out nature in Cox's Bazar", <https://bdnews24.com/travelandtourism/375cca34c6f2>. Published 27 Sep 2025, updated 21 Aug 2026. Supports: nearly 600 registered hotels/motels/resorts, the owners' association's 538 properties inside the ~3 km² Kolatoli area, 2–2.5 million peak-season domestic visitors per the local chamber, and visitor complaints about crowding and price. Status **QUALIFIED** — the hotel-density and volume figures are attributed to the reporting body, dated, and used as context rather than as a rate or availability claim.
+
+**Structural alignment:** the Bengali section count was aligned to the English (airport status; by air; by train; by road; where to stay; costs; when to go; coming from Nepal; FAQ = 9 numbered sections, `১.`–`৯.`), the FAQ set was aligned to the same five questions in both languages, and the owner's "Coming from Kathmandu?" section was promoted into both locales so the sibling guide keeps its own audience without this page owning international route status. `titleBn` now carries the owner's headline; `seoTitleBn` stays the short SERP form. Read time set to 12 minutes for both locales.
+
+**Publishing-system finding (fixed, with a new guard):** a paragraph placed *after* the FAQ block silently deletes the FAQPage structured data. The visible renderer passes each paragraph separately, so the FAQ still looks correct on the page, while the schema builder scans the whole body from the FAQ heading to the next numbered heading and returns nothing when the line count is odd. The BDT-desk line was moved above `৯. সচরাচর জিজ্ঞাসা` / `9. Frequently Asked Questions`, and `scripts/test-scheduled-posts.ts` now asserts for every scheduled post, in both locales, that the FAQ heading is present verbatim and that its following lines pair up — the exact condition the prerender requires. `docs/growth/CONTENT-OS.md` Stage 6 and the bilingual row in the pipeline table are the standing rules this enforces.
+
+**Verification after the swap:** `npm run generate:scheduled` (2 publishable posts) → `npm run test:scheduling` (pass, including the new FAQ pairing guard) → `npm run lint` (pass) → `npm run build` (96 EN + 96 BN routes) → `npm run verify:build` (**all 169 checks passed**). `dist/blog/<slug>.html` and `dist/bn/blog/<slug>.html` inspected: localized title/H1 (BN H1 = the owner's headline), Article node with the correct `inLanguage`, **FAQPage node with 5 questions in both locales** (this had been missing before the fix above), the visible FAQ section, 16 references in the list with matching inline markers `[1]…[16]` / `[১]…[১৬]`, 6 internal links per locale all resolving to live routes with `/bn/` prefixes on the Bengali twin, both blog hubs listing the post, the dist sitemap carrying EN+BN entries with hreflang alternates and the dist RSS carrying the post. Paragraph counts 37 EN / 40 BN; word counts ≈2,976 EN / ≈2,800 BN. No placeholder text, no `**`, no `](`, no `{#` and no `arena.ai` URL remains in the file.
+
+---
+
+## Worked queue row — content-upgrade standard pass on `blog-19` (Ramadan / I'tikaf) (17 October 2026)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-17 | **UPDATE IN PLACE — fixed slug; no second page.** Executes `10-CONTENT-UPGRADE-STANDARD.md` §10 ("highest-value orphan") and `UMRAH-CLUSTER-PLAN.md` row 9 (seasonal node). | `/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget` | `/bn/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget` | **Ramadan Umrah from Bangladesh / I'tikaf registration** (existing URL's page job; Bangladesh SERP demand not measured) | Informational/seasonal planning guide: checked dates, official registration process, claim-free budget framework. | Stages 1–9 completed 2026-10-17: lint, build (103 EN + 103 BN), verify:build **179/179**, sitemaps (23 controls), scheduling all pass; §8 dist proofs recorded below. Repository-verified, not deployed; publish gate is owner approval + live route review before the Ramadan season. |
+
+### What changed (both locales, one bilingual asset)
+
+- **Body rewritten** in the §6.2 five-beat pattern. The BDT price tables (`BDT 1,42,000–1,68,000`, `2,15,000–3,40,000+`, `BDT 8,000–14,000/night`), the "50% / 45–55% savings" claims, the "rates triple" multiplier, the "1–5 Ramadan" registration window, and the unsourced iftar "60–75 minutes" / meal-locker specifics were **deleted, not softened** (§5 S7). What remains is dated and checkable: Ramadan 1448 = 8 Feb – 8 Mar 2027 (Umm al-Qura, moon-sighting qualified), night of 21 Ramadan arithmetic from that calendar, the 1447 I'tikaf registration precedent as a dated example (opened Fri 3 Ramadan 1447 = 20 Feb 2026, 11:00 a.m., eservices.alharamain.gov.sa / Nafath, capacity + SMS), the season-bound Ministry 1448H windows, and the routing pattern with an explicit "not a savings promise" disclaimer. The only BDT figure retained is the main guide's owner-approved, dated, unre-priced baseline, named as non-Ramadan and not a quote.
+- **References:** 0 → **6** primary-first entries with `name` + `nameBn` + `url`: Umm al-Qura annual reference 1448, General Authority I'tikaf service, SPA 1447 registration notice, Ministry 1448H Umrah season calendar, Sahih al-Bukhari 1782, SAR/Haramain booking portal. `updatedAt` = 2026-10-17; both locales render the sources block with `[1]…[6]` / `[১]…[৬]` markers matching.
+- **Title/summary/snippets:** EN `BLOG_DATA` title + summary, `PRIORITY_SEO_COPY` description, `snippetsEn`/`snippetsBn` and the BN override title/summary were all carrying the savings/triple claims (three separate metadata locations — §0's three-file rule applied). All six are now claim-free and consistent with the body; the short SERP titles (`… | URAL`) were already claim-free and are unchanged.
+- **Links:** blog-19 keeps its 4 `internalLinks` (3 blog→blog + `/umrah`); the BN override gained the missing `/umrah` entry (3 → 4, floor met in both locales). **R2 orphan closed:** added to three siblings in both locales — main DIY guide ("Ramadan Umrah booking dates & I'tikaf registration"), hotel-zones ("Ramadan Umrah dates & last-10-nights booking plan"), halal-food ("Ramadan Suhoor, Iftar and Taraweeh crowd tips") — with varied descriptive anchors (R4). airalo CTA kept in both locales (§4.2 connectivity relevance); the EN CTA's "2 million worshippers" figure was removed as unverifiable.
+- **Debt register movement:** blog-19 exits both `no references` (33 → 32) and `no editorial inbound link` (9 → 8) in the verify:build `[content-debt]` report.
+
+### §8 dist proofs (2026-10-17)
+
+- `dist/blog/<slug>.html`: title `Ramadan Umrah & I'tikaf Guide from Bangladesh | URAL`, meta = the new claim-free description, H1 = the new full title, 4 curated `/blog/` anchors + `/umrah`, `Sources for this guide` present, markers `[1]…[6]`, zero occurrences of any deleted claim string.
+- `dist/bn/blog/<slug>.html`: H1 = new BN title, meta = new BN summary, 3 `/bn/blog/` anchors + `/bn/umrah` (≥4 links total), `এই গাইডের তথ্যসূত্র` present, markers `[১]…[৬]`, zero deleted-claim strings.
+- Sibling pages each render `href="/blog/<slug>"` and `href="/bn/blog/<slug>"` (main guide, hotel-zones, halal-food — EN and BN).
+
+### Claim status (Stage 2 summary, checked 2026-10-17)
+
+| Claim class | Status / safe action |
+|---|---|
+| Ramadan 1448 dates, Eid, night of 21 | **VERIFIED** — ummulqura.org.sa annual reference 1448; kept with moon-sighting caveat. |
+| I'tikaf process (portal, Nafath, capacity, SMS, 20–30 Ramadan) | **VERIFIED (dated precedent)** — SPA N2518728 (1447) + alharamain official service/FAQ; 1448 dates marked "not yet announced". |
+| Season entry/visa windows | **VERIFIED / SEASON-BOUND** — Ministry 1448H calendar (checked 17 Oct 2026); re-check before each season. |
+| Ramadan hotel price tables, % savings, rate multipliers | **DELETED** — no dated same-basis basket exists; never to return without one. |
+| Iftar/tawaf minute-level specifics, meal/locker services | **DELETED / QUALIFIED** — replaced with practical advice carrying no invented numbers. |
+
+## 2026-10-18 — owner-prioritized Hajj/Umrah cluster closure
+
+| Checked | Asset / action | Audience and page job | Evidence / constraints | Next gate |
+|---|---|---|---|---|
+| 2026-10-18 | `/umrah` + `/bn/umrah`, update in place; first active asset | Bangladesh-based families calculating a quote-based trip budget; query hypothesis: “Umrah cost from Bangladesh” from the existing map, not measured demand | Owner requests Hajj/Umrah before other clusters and Cox's Bazar house style. Preserve URLs, existing links, affiliate registry, and U-12's dated/unre-priced reference. No matched current price basket or agency quote exists. Replace preset calculator prices/FX with explicit user inputs, not another invented range. | Repository check passed: 25 budget/topic-map tests, scheduling/sitemap suites, lint/build and 207 build assertions. Owner-controlled deployment/live checks remain separate; main process guide is the next independent asset review. |
+
+The execution order, individual article evidence gates and search/Hajj source gaps are recorded in
+[`HAJJ-UMRAH-CLOSURE.md`](HAJJ-UMRAH-CLOSURE.md). This is sequential repository work, not permission to
+publish all children in one batch. No other topical cluster is being commissioned.
+
+## 2026-10-19 — owner split: main-guide plan, Nusuk execution
+
+| Checked | Asset / action | Page job and boundaries | Evidence / preservation | Next gate |
+|---|---|---|---|---|
+| 2026-10-19 | Main DIY guide, plan only; existing EN/BN URLs | Help a Bangladeshi passport holder select a route and follow the booking/application sequence; `/umrah` owns the worksheet, Hajj owns registration/packages | Owner requests step-by-step instructions. Preserve URLs and historical U-12 scope. Plan and owner checks: `DIY-UMRAH-GUIDE-NEXT-STEPS.md`. This original planning row was superseded by the later execution instruction below. | See the 19 October source-led execution record below; publication remains owner-controlled. |
+| 2026-10-19 | Nusuk/Rawdah/Saudi Visa Bio article, update in place; `/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit` and its BN twin | Explain visa-specific biometric preparation, visitor account registration and separate permit/Rawdah steps, not broad trip eligibility or pricing | Explicitly authorized by owner while main-guide work is planned. Reopened Ministry FAQ/service pages, MOFA listing, Nusuk Rawdah, visitor login and Umrah signup/terms; record claim-by-claim findings in `NUSUK-BIOMETRICS-AUDIT.md`. Preserve publication date, slugs and useful links. | Repository/source-safe rewrite verified: 13 Nusuk tests, 25 hub tests, scheduling/sitemap suites, lint/build and 213 build assertions pass. Eleven references, five curated links, eight FAQs and three HowTos (4/4/5 steps) in both locales. App/device checks, owner publication approval and production live checks remain open. |
+
+This owner-directed split supersedes the previous “main guide, then Nusuk” next-action note for this task only.
+Bangladesh demand remains unmeasured; no new GSC data has been supplied in this turn.
+
+## 2026-10-19 — owner follow-up: inline traveller cautions, then source-led main-guide execution
+
+Owner explicitly requested reader-facing instructions beside the relevant untested Nusuk flows, and authorized the
+agent to validate/execute the DIY guide from supplied sources one phase at a time. Scope remains these existing EN/BN
+assets, no unrelated cluster or automatic publication.
+
+| Asset | Source/editorial outcome | Repository evidence | Remaining release/source limits |
+|---|---|---|---|
+| Nusuk/biometrics EN/BN | Five localized point-of-action warning boxes; genuine-account/network checks only, no fake application/practice slot or private-data sharing | 16 targeted tests; complete cautions render in React/static, independent placement/schema checks and deletion negative controls | Authenticated device/gate and visual checks unperformed; approval/deploy/live open |
+| Main DIY EN/BN | Supplied sources reopened, 1448 Umrah dates retained as published; three conditional routes, Package Visa prerequisites/minimums, six-step application-to-permit order, historical budget, task links and scope-safe Hajj boundary | 17 targeted tests; 26 references/portals, 10 EN / 9 BN curated links, five FAQs, six-step HowTo; original publication preserved, `updatedAt` 2026-10-19 | Attributed regulation/SPA foreign-document criteria added; current carrier/digital-entry/GCC operational conditions and PDF revision remain unverified; historical MOH PDF is not 1448 evidence; personal quotes absent; approval/deploy/live open |
+
+Both guide packages plus hub regression suite verified: 13 DIY + 16 Nusuk + 25 budget tests, scheduling/sitemaps,
+lint/build and **221 build assertions** pass; 107 EN + 107 BN canonical routes. No production publication, browser
+visual QA, private app QA or measured Bangladesh demand claimed. Main evidence ledger:
+[`DIY-UMRAH-SOURCE-REVIEW.md`](../../../growth/DIY-UMRAH-SOURCE-REVIEW.md); current owner handoff:
+[`DIY-UMRAH-GUIDE-NEXT-STEPS.md`](DIY-UMRAH-GUIDE-NEXT-STEPS.md). The original plan is explicitly historical.
+Next independent review: stopover, then hotel/rail; wider cluster and separate Hajj source gates remain open.
+
+
+### 2026-10-19 — smallest-step health-source inspection
+
+Reopened both chunks of the official MOH health index and followed its actual English/Arabic Umrah PDF links.
+English opening explicitly says 1447H (2026); Arabic extracted opening also contains 1447/2026, but garbled extraction
+prevents claiming a full language/clinical comparison. Index last-update (28 September 2026) is not a PDF revision or
+1448 applicability date. Current health gap remains qualified, not closed; no inference that no newer official PDF
+exists. No article/code/download/date change, build or deployment in this step. Evidence and next agent-owned
+English/Arabic official-source discovery checkpoint: `DIY-UMRAH-SOURCE-REVIEW.md`.
+
+
+### 2026-10-19 — health Step 1: bounded official-source discovery recorded
+
+Five targeted MOH/PHA English/Arabic searches plus opened MOH index/PDF, PHA Hajj index, its linked border-prevention
+PDF and the first returned PHA catalogue chunk did not verify an applicable 1448 Umrah health document. PHA PDF's
+opening identifies 1447/2026; no season extension or replacement established. Arabic MOH legacy index fetch returned
+Not Found. Search dates/page modifications are not clinical applicability evidence. Full retrieval limits and exact
+PHA document URL are in `DIY-UMRAH-SOURCE-REVIEW.md`. D-07 stays UNVERIFIED for current requirements, not “no health
+rules” or “no newer PDF exists.” Existing EN/BN caution retained; documentation-only step, no build/deploy or article
+restamp. Next serial research checkpoint is foreign-visa eligibility; manual health refresh gate remains open.
+
+
+### 2026-10-19 — foreign-visa fine-print checkpoint applied to main DIY EN/BN
+
+D-05 now has retrieved Ministry of Tourism regulation Article 6 and dated SPA announcement evidence, with explicit
+revision-date/current-flow limitations. Added tourist/business + prior-use, permanent vs temporary residence,
+accompanying-family and GCC distinctions, plus immediate EN/BN amber pre-payment warning. Three primary cards
+appended after original numbered references (26 total cards). Current carrier/port/digital-only entry evidence,
+GCC operational fine print and PDF latest revision remain unverified; no broad entitlement or application tested.
+Full redirect/source-conflict record: `DIY-UMRAH-SOURCE-REVIEW.md`. Same-day article date retained; health unchanged.
+**17 DIY + 16 Nusuk + 25 budget tests**, scheduling/sitemaps (23 negative controls), lint/build and **225 build checks**
+passed, 107 EN + 107 BN routes. No deployment or visual/authenticated QA. Next serial asset: independent stopover
+review; old Saudia tourist URL now redirects to internally inconsistent visa copy, not reliable old indexed answers.
+
+
+### 2026-10-19 — independent stopover revision and cluster progress
+
+Owner authorized continuing stopover and requested distance to cluster completion. Evidence/claim decisions and
+implemented EN/BN changes are in `STOPOVER-SOURCE-REVIEW.md`; current counts are at the top of `HAJJ-UMRAH-CLOSURE.md`.
+Saudia-only sequence, no assumed flynas equivalence, no blanket prior-visa exemption or published-price denial;
+two contextual accessible caution boxes, ten scoped references, six FAQs and a six-step HowTo. Optional Madinah,
+no fixed train times/fares or unverified eSIM price. Snippets/SEO/CTA and stopover-only lastmod aligned to 19 October;
+original 27 September publication preserved. Generic client-only visa-price panel suppressed; independent common-
+panel regression fixture retained on another article, not discarded. Current flynas detailed eligibility remains
+unverified: live guide redirected/404, and 2023 launch is historical evidence only.
+
+Stopover17 + DIY 17 + Nusuk 16 + budget 25 tests, scheduling/sitemap suite (23 negative controls), lint/build and
+235 post-build checks passed; 107 EN + 107 BN routes. Complete warning text remains asserted, including apostrophe
+encoding regression controls and four omitted-warning negative controls. No visual/app/booking/deploy/live claim.
+Three of twelve core Umrah article pairs now revised/tested in this closure cycle (25% by count only); nine core
+pairs plus adjacent Hajj remain, along with hub/release gates. All articles already exist; not building from zero.
+Two optional bridges are excluded. Next agent-owned independent asset: hotels/Haramain.
+
+
+### 2026-10-19 — independent hotel/Haramain EN/BN revision
+
+Owner accepted next asset. `HOTEL-RAIL-SOURCE-REVIEW.md` records actual HHR fare/baggage/station/travel-tips pages,
+opened Hilton chain/property-description and accessibility pages, and failed property-detail fetches. Named supplier
+examples not promoted to route/room inspections. Removed area-wide accessibility rankings, fixed gate/time/road and
+unsupported tour details; actual room/route/occupancy/shuttle questions plus three immediate cautions. Retained dated
+dynamic Economy base fares and actual per-passenger baggage; fixed inference that four compliant bags/four travellers
+need road transport. Exact fare/channel refund rules remain qualified because extracted class labels and ticket-desk
+wording do not establish an entitlement. Six localized sources, eight curated links, six-step HowTo, six FAQs;
+metadata/snippets/relevant hotel CTA and 19 October article lastmod aligned. Original publication preserved.
+
+Hotel/rail17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25 tests passed, scheduling/sitemap 23 controls/lint/build and
+245 build checks passed (107 EN + 107 BN routes), including six removed-warning negative controls. No source gate
+waived, no visual/accessibility journey or purchase tested, no deployment. Four of twelve core pairs now revised/
+tested in this accuracy-upgrade cycle; eight core plus adjacent Hajj remain. Hub/release/medical/visa limits remain
+separate. Next agent-owned independent asset: Dhaka–Jeddah/Madinah flight strategy.
+
+
+### 2026-10-19 — independent Dhaka–Jeddah/Madinah flight-strategy EN/BN revision
+
+Owner explicitly authorized this next asset. Source/brief/claim record before rewrite is
+`FLIGHT-STRATEGY-SOURCE-REVIEW.md`: Biman full returned baggage page (direction/fare exceptions and unresolved
+per-piece wording), relevant Saudia carriage terms and fare-brand comparison, Emirates Dubai connection and
+Air Arabia baggage/Zamzam. Biman timetable HTTP500 and Saudia old baggage-page redirects logged; no cached schedule,
+Madinah baggage row, live quote or universal benefit manufactured. Three route shapes, same-basis full-trip totals,
+carrier-specific baggage/Zamzam, separate surface/transit and disruption questions replace fixed fare/percentage/
+time and always-open-jaw claims. Three immediate accessible notes, five references, seven links per locale,
+six-step comparison HowTo and six visible FAQs. Snippets/metadata/optional comparison CTA aligned; original 27 Sep
+publication and author preserved, editorial update 19 Oct inherited by BN. Stale inbound46kg label and main hotel's
+next-task wording corrected without certifying sibling bodies. Customs/medical/religious sources remain separate.
+
+Flight17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 tests passed; budget 25, scheduling, sitemap 23 negative controls,
+lint/build and 257 build assertions passed (107 EN +107 BN routes). New build assertions include six omitted-warning
+negative controls and retired-claim reintroduction fixtures. Generic panel fixture moved to food guide, not removed.
+No browser visual, route search/checkout, supplier reply, ticket purchase, transit assessment or deployment/live
+verification. Current progress 5/12 core pairs by review count only; seven core plus adjacent Hajj remain, alongside
+hub/release gates. Next independent asset: women-specific Umrah guidance. Research remains agent-owned.
+
+
+### 2026-10-19 — independent women-specific Umrah EN/BN revision
+
+Owner authorized this next specialist pair. `WOMEN-UMRAH-SOURCE-REVIEW.md` holds the pre-edit brief/claim ledger,
+opened sources and limitations. Ministry specifically permits a woman to come for Umrah without mahram; official
+eVisa age/minor/nationality terms not overridden. Fiqh conditionality, qualified personal advice, ordinary mosque
+prayer vs women's Rawdah appointments and actual hotel/access route separated. Fixed gates, recurring women's
+hours, whole-area step-free promise, universal NOC, skin-contact/visor workaround and unqualified haircut amount/
+public-location instructions removed. Menstrual planning has private religious/clinical referral, not medication
+or personal exceptions. Current1448 health/Hajj source limits unchanged; qualified religious editorial review remains.
+
+Ten claim-specific administrative/religious references, seven curated links per language, six immediate accessible
+cautions, four Rawdah-preparation steps and seven visible/schema FAQs. App/SEO/metadata/optional qualified Kiwitaxi
+CTA aligned, original publication 27 Sep retained/update 19 Oct inherited by BN. No sibling body certification or new
+page; generic price-panel guard remains independently tested on food article. Women17 + flights 17 + hotel/rail 17 +
+stopover 17 + DIY 17 + Nusuk 16 + budget 25 passed; scheduling/sitemap 23 negative controls/lint/build and 275 build checks
+passed (107 EN +107 BN routes), including twelve omitted-warning controls and eight retired-claim fixtures. No
+live application/slot, personal fatwa/medical review, inspected route, care booking, ride, visual QA or deployment.
+Current progress 6/12 core pairs by article-review count only; six core plus adjacent Hajj remain, alongside hub/
+qualified-review/release gates. Next independent agent-owned asset: older travellers/elderly parents.
+
+### 2026-10-19 — independent older-traveller / elderly-parents Umrah EN/BN revision
+
+Owner selected the next existing pair; no new URL. `ELDERLY-UMRAH-SOURCE-REVIEW.md` holds the pre-edit audit, the
+claim ledger, the nine opened pages and the retrieval failures. The prior "checked against official guidelines"
+sentence was not evidence: its three references were homepages and `gacr.gov.sa` did not resolve.
+
+Removed or corrected: the universal "no additional airline fee across major scheduled carriers departing DAC"
+statement; the general "airlines carry personal wheelchairs free" rule; the promised return "at the aircraft door";
+the fixed first-floor/mezzanine Haram circuit and the two-gate entrance map; the Nusuk/Tanaqol booking conflation;
+the Jabal Omar / lower Ibrahim Al-Khalil / Clock Tower zero-incline ranking and the 400 m comparison; the Madinah
+level-plaza and northern women's-cluster promise; the 20-day medicine supply, insulin cold-chain instruction,
+mini-fridge requirement, Haram air-conditioning premise and ORS/lubricant list; and the "never wait in taxi queues"
+transfer promise.
+
+Attributed and added: Saudia's free carriage of wheelchairs and up to two mobility items, hold carriage and return
+"according to airport procedures"; the POC sequence (48-hour statement, three-hour check-in, two spare cabin
+batteries); WCHC alongside WCHR/WCHS, with the weight request and companion expectation; Biman's mandatory
+booking-time request, contacts and 48-hour recommendation; the Ministry's own-wheelchair permission through
+designated entrances and its general health guidance (physician check, vaccinations, adequate supply, medical report,
+glucose monitor); the authority's free manual wheelchairs, paid ground-Sa'i service and Tanaqol platform; the March
+2025 end of manual cart booking, over-65 online recommendation, service-point fallback and free direct access for
+people with disabilities; Nusuk and Tanaqol as different services; and 1448H health requirements recorded as
+unverified.
+
+Nine specific primary references replace three homepages; five curated links per locale (hotel/rail, main DIY, Nusuk,
+Ihram, `/umrah`); five immediate accessible cautions (`elderlyAirline`, `elderlyEquipment`, `elderlyHaram`,
+`elderlyHotel`, `elderlyHealth`); one four-step administrative airline-request HowTo; seven visible/schema FAQs.
+Original publication 27 Sep, author and slug retained; update 19 Oct inherited by BN. The generic TravelIntelligence
+panel is suppressed for this reviewed slug; its independent positive-control fixture is unchanged.
+
+Elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25 passed;
+scheduling/sitemap 23 negative controls, lint, build and **291 build checks** passed (107 EN + 107 BN routes),
+including sixteen older-traveller output/caution controls and seven retired-claim fixtures. No airline, cart,
+property, route or booking was tested; no visual QA, deployment or live check. Current progress **7/12 core pairs**
+by article-review count only; five core plus adjacent Hajj remain, alongside hub, qualified-review and release
+gates. Next independent agent-owned asset: Ihram/Miqat.
+
+### 19 October 2026 — Ihram/Miqat pair revised (8/12 core Umrah pairs)
+
+`wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules` EN/BN rewritten against
+[`IHRAM-MIQAT-SOURCE-REVIEW.md`](../../../growth/IHRAM-MIQAT-SOURCE-REVIEW.md): the Ministry Miqat page, the Ministry Ihram guide PDF,
+Sahih al-Bukhari 1526, two Nusuk pages and Jordan Iftaa 2982. Six specific references replace three homepages
+(haj.gov.sa, gaca.gov.sa, nusuk.sa — the GACA "passenger briefing on Miqat" could not be substantiated).
+
+Retired from both locales: the "30 to 45 minutes before touchdown" figure, the "Bengali, English and Arabic" crew
+script, the airline-by-airline and Gulf-corridor miqat assignment, "11 km outside Madinah", the 7 kg cabin figure,
+Ashkona camp and Terminal 1/2 prayer-room specifics, guaranteed transit changing facilities, and the instruction to
+make the intention on the Haramain train after departure. The Ministry's own wording now carries the rule, the five
+distances, the intention-plus-Talbiyah definition and the return/Fidyah sequence; the airline announcement is
+described only as "usually announce" with an explicit warning that it may not come.
+
+Five curated links per locale (women, DIY, hotel/rail, open-jaw flights, `/umrah`), six point-of-action cautions
+(`ihramPoint`, `ihramPersonal`, `ihramGarments`, `ihramTransit` ×2, `ihramMadinah`), six visible/schema FAQs, no HowTo,
+a qualified optional transfer CTA, and suppression of the generic TravelIntelligence price panel for this slug.
+Original 27 Sep publication, author and slug retained; `updatedAt` 2026-10-19 in both locales.
+
+Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 + budget 25,
+scheduling and 23 sitemap controls, lint, build and **307 build checks** passed (107 EN + 107 BN routes), including
+fourteen Ihram output/caution controls and five retired-claim fixtures. No carrier announcement practice, airport,
+rail or prayer-room facility, or live page was tested; no scholarly review, visual QA, deployment or live check.
+Progress **8/12 core pairs** by article-review count only; four core plus adjacent Hajj remain. Next independent
+agent-owned asset: Ramadan/I'tikaf.
+
+### 19 October 2026 — Ramadan/I'tikaf pair revised (9/12 core Umrah pairs)
+
+`ramadan-umrah-itikaf-guide-bangladesh-booking-budget` EN/BN rewritten against
+[`RAMADAN-ITIKAF-SOURCE-REVIEW.md`](../../../growth/RAMADAN-ITIKAF-SOURCE-REVIEW.md): the Umm al-Qura 1448 reference, the Ministry's
+1448 season calendar, three SPA announcements, Sahih al-Bukhari 1782, the SAR portal and the Authority's e-service.
+
+Material correction: official I'tikaf permits are a capacity-limited service whose published conditions (2025
+announcement) are for applicants 18+ who are "citizens or residents in the Kingdom holding a valid residency permit",
+free of charge, with Nafath reserved for citizens and residents in 2026. The pair no longer implies a visitor on an
+Umrah visa can obtain a place; it says not to plan on one, while keeping the right to pray in the Haram.
+
+Added the Ministry's four dated cut-offs (visa 9 March 2027, entry 23 March, departure 7 April, season opened 31 May
+2026), the one-day 1447 announcement lead time, the Nusuk-versus-I'tikaf permit distinction, and the corrected
+Madinah-first sequence with Ihram at Dhul Hulayfah. Removed the "two and a half hours" Haramain journey time, the
+"booked only through" sales claim and the unqualified "free/online-only" framing. Six visible/schema FAQs, five
+cautions (`ramadanDeadline`, `ramadanItikaf`, `ramadanAnnouncement`, `ramadanBudget`, `ramadanRoute`), six curated
+links per locale, optional qualified eSIM CTA, price panel suppressed, no HowTo. Original 27 Sep publication, author
+and slug retained; `updatedAt` 2026-10-19.
+
+Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk 16 +
+budget 25, scheduling and 23 sitemap controls, lint, build and **323 build checks** passed (107 EN + 107 BN routes),
+including fourteen Ramadan output/caution controls and five retired-claim fixtures. No portal account, application or
+identity flow; no 1448 conditions published; no quote, booking, visual QA, deployment or live check. Progress
+**9/12 core pairs** by article-review count only; three core plus adjacent Hajj remain. Next independent agent-owned
+asset: Zamzam/customs.
+
+### 19 October 2026 — Zamzam/customs pair revised (10/12 core Umrah pairs)
+
+`official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport` EN/BN rewritten against
+[`ZAMZAM-CUSTOMS-SOURCE-REVIEW.md`](../../../growth/ZAMZAM-CUSTOMS-SOURCE-REVIEW.md): the Madinah airport operator, Saudia's conditions
+of carriage, the Ministry of Hajj and Umrah's Zamzam guidance as reported by Saudi Gazette, the HSIA customs page, the
+NBR's 2025 baggage rules as reported by BSS, the NBR tariff chapter for dates, and two VAT-refund sources.
+
+Price correction, in both directions: the 5-litre pilgrim bottle is **SAR 12.50** per the airport operator, not 48 SAR.
+The 48 SAR figure is the Nusuk-app 24 × 330 ml home-delivery carton and is now named as a different product; the bin
+containing the old price guard was inverted (it banned 12.50 and passed 48) and replaced with a paragraph-scoped check
+plus a negative control. The BDT conversion is gone.
+
+Dates: the "5–10 kg duty-free" allowance had no source and is removed. The page now states the HSIA test — personal
+goods exempt unless considered commercial, commercial quantities seized, dried dates at 25% CD when assessed as a
+consignment — and prints no per-kilogram price. Gold: the 100 g ornaments (22 carat or below, at most 12 of one type)
+and 200 g silver allowances are now once per **calendar year**, alongside the single 117 g/10 tola bar at Tk 5,000 per
+11.664 g, the declaration duty, confiscation above the cap and the criminal consequence of an undeclared find. VAT:
+reframed as a refund on unused goods with the SAR 500, 90-day, original-packaging and validation conditions, and worn
+jewellery is explicitly ineligible. Airline handling is per carrier — Saudia counts one bottle inside the checked
+allowance from JED/MED only and does not compensate loss; Biman publishes no allowance — so "most airlines" and
+"free extra piece" are gone.
+
+Six visible/schema FAQs, five cautions (`zamzamBox`, `zamzamAirline`, `datesAllowance`, `goldDeclare`, `vatRefund`),
+nine references, six curated links per locale including `/umrah`, optional qualified vehicle CTA, price panel
+suppressed, no HowTo. Original 27 Sep publication, author and slug retained; `updatedAt` 2026-10-19.
+
+Zamzam 28 + Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 + Nusuk
+16 + budget 25, scheduling and 23 sitemap controls, lint, build and **326 build checks** passed (107 EN + 107 BN
+routes), including eight new blog-21 output controls and five price negative controls. Two unintended citation
+renumbers in the women's and flight articles were caught by those suites and restored. No airport, counter or customs
+hall was observed; no price was verified on site; no GACA circular could be opened; no legal advice, deployment, PR or
+live check. Progress **10/12 core pairs** by article-review count only; food and Ziyarah remain. Next independent
+agent-owned asset: the Makkah/Madinah food guide.
+
+### 19 October 2026 — Food-guide pair revised (11/12 core Umrah pairs)
+
+`bangladeshi-halal-food-guide-makkah-madinah-budget-meals` EN/BN rewritten against
+[`FOOD-GUIDE-SOURCE-REVIEW.md`](../../../growth/FOOD-GUIDE-SOURCE-REVIEW.md): the SFDA's halal page and its January 2023 statement,
+the U.S. trade guide's list of prohibited Saudi imports, Balady's health-certificate service, WHO's Five Keys to Safer
+Food, the operator's Al Baik branch and menu pages, BinDawood's store locator and holding page, and The Daily Star's
+June 2026 report on the South Asian kitchens of Makkah.
+
+The article no longer prints a single meal price, BDT conversion, walking time, gate number or queue estimate, and it
+names no restaurant. The "every restaurant is 100% Halal by law, so the kitchen is clean" inference is split into its
+two halves: halal as the national baseline (SFDA statement plus the pork and alcohol import bans) and hygiene as a local
+check (municipal health certificates, a certificate is a floor not an inspection result, WHO's five keys). Makkah's
+documented food streets — Hijra Road and Ibrahim Khaleel Road in Misfalah — replace the invented "Bangla Bazar"
+nickname, and Al Baik is described only by the operator's own branch names and map pins. Madinah is anchored on the
+listed Al Baik and BinDawood branches plus a door check, not on gate numbers. The price section teaches three questions
+to ask at the counter, and the elderly section gives practical food and seating guidance while leaving clinical
+decisions with the reader's clinician.
+
+Six visible/schema FAQs, six cautions (`foodHalal`, `foodMakkah`, `foodPrice`, `foodMadinah`, `foodElderly`,
+`foodGrocery`), ten references, six curated links per locale including `/umrah` and the customs guide, optional
+qualified eSIM CTA, no HowTo. The shared price panel stays on this page because it is the fixture for that panel's own
+build test. Original 27 Sep publication, author and slug retained; `updatedAt` 2026-10-19.
+
+Food 26 + Zamzam 28 + Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 + stopover 17 + DIY 17 +
+Nusuk 16 + budget 25, scheduling and 23 sitemap controls, lint, build and **329 build checks** passed (107 EN + 107 BN
+routes), including four new blog-22 output controls and three retired-claim fixtures. No restaurant, menu, hotel or
+counter was observed; the Balady news pages returned HTTP 500 and are not cited; no deployment, PR or live check.
+Progress **11/12 core pairs** by article-review count only; the Ziyarah pair remains. Next independent agent-owned
+asset: the Ziyarah pair.
+
+### 19 October 2026 — Ziyarah pair revised (12/12 core Umrah pairs, cluster still not certified)
+
+`makkah-madinah-badr-taif-historical-ziyarah-taxi-guide` EN/BN rewritten against
+[`ZIYARAH-SOURCE-REVIEW.md`](../../../growth/ZIYARAH-SOURCE-REVIEW.md): the Hira Cultural District's own site, SPA releases of 18 and
+31 July 2026, Visit Saudi's Makkah and Madinah attraction pages, Sunan Ibn Majah 1412, Saudipedia's Qarn al-Manazil and
+Taif entries, the Madinah sightseeing-bus operator and the Ministry of Tourism's tourists' rights page.
+
+The pair prints no Ziyarah car fare, no BDT conversion, no drive time, no "6:00–9:30" window and no cemetery distance.
+In their place: the three contradictory official Hira museum timetables, all printed with a "check on the day"
+instruction; the ticketed exhibitions "from about SAR 25" as a floor; the Quba hadith as Sunan Ibn Majah 1412, **Hasan**
+(the old Sahih Muslim attribution corrected); the three sourced Madinah distances; the bus at SR 90 for 24 hours with
+its stop-status badge and phone number; the Al-Hada cable-car specifications; the Qarn al-Manazil geometry; and Badr
+about 150 km west with the 13/14-name discrepancy stated. The car section teaches the written total and the licence
+check instead of a tariff, and the cemetery section says the graves are unmarked.
+
+Seven cautions, fifteen references, six links per locale (including `/umrah`, the customs guide and the food guide),
+seven visible/schema FAQs, optional qualified CTA, no HowTo. Original publication date, author and slug retained;
+`updatedAt` 2026-10-19.
+
+Ziyarah 30 + food 26 + Zamzam 28 + Ramadan 28 + Ihram 28 + elderly 20 + women 17 + flights 17 + hotel/rail 17 +
+stopover 17 + DIY 17 + Nusuk 16 + budget 25, scheduling and 23 sitemap controls, lint, build and **334 build checks**
+passed (107 EN + 107 BN routes). No site visit, no car hire, no ticket purchase. Progress **12/12 core pairs** by
+article-review count only; the cluster is not certified and the adjacent-Hajj, hub and release gates remain open.
+
+## Worked queue row — Banking & Forex cluster, hub (`/banking` + `/bn/banking`)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-19 | **NEW HUB ROUTE — owner chose a dedicated bilingual route over reusing an existing page.** Wave 1 of [`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md) §1. | `/banking` | `/bn/banking` | **Passport dollar endorsement limit / dual-currency card / NOC** (owner-supplied GSC query list, 19 Oct 2026; no volume data attached) | Informational hub: the whole money picture for a trip, eight FAQ pairs matching the query language, and a grouped directory of the five live nodes. Live Bangladesh SERP and volume were not measured. | Stages 1–9 complete below. Stage 9: lint/build pass, `verify:build` all 338 checks pass on the merged tree (the cluster branch reported 178 before the Umrah wave was merged in); `dist/banking.html` and `dist/bn/banking.html` inspected. Deployment gate: owner approval plus a live EN/BN route review. |
+
+### Must-preserve and scope notes (owner + plan)
+
+- One new route only. The hub is not a rebuild of `/tools?tab=currency` (the markup calculator) or `/umrah` (trip-cost planning); both keep their own intent.
+- Every figure on the hub restates a row in [`A1-CLAIMS-LEDGER.md`](../../../growth/A1-CLAIMS-LEDGER.md) (M1–M4) and its node owner. The hub adds no new number.
+- The content is authored once in `src/data/bankingHubData.ts`, read by both `scripts/prerender.ts` and `BankingHubLandingPage.tsx`, so crawlable HTML and the React view cannot drift.
+- `lastmod` for `/banking` is an explicit ISO timestamp (`2026-10-19T09:00:00+06:00`), deliberately **not** `CONTENT_UPDATED`, so publishing a hub does not tell Google the other dated pages changed.
+- The hub is not an admin surface and is listed in the public sitemap; no owner-only diagnostic was exposed.
+
+### Stage 2 — hub claims ledger
+
+No new claim is introduced. The hub's two money statements reuse approved wordings verbatim:
+
+| ID | Claim / surface | Source | Finding | Status / safe action |
+|---|---|---|---|---|
+| BH-01 | "USD 18,000 per calendar year, minors at 50%, at most USD 5,000 as dollar notes, released against documents." | A1 M1 (Bangladesh Bank FEPD-1 Circular No. 33, 6 Sep 2026). | VERIFIED. | **REUSE M1 verbatim.** Citation form is `FEPD-1 Circular No. 33 (6 September 2026)`, not `FE/PD-1`. |
+| BH-02 | "A single online purchase is capped at USD 300; a larger documented travel payment is the bank's decision; an RFCD card pays at actual." | A1 M2 (GFET Vol-1 Ch. 19 ¶17; FE Circular Letter No. 05, 9 May 2024). | VERIFIED for the rule; the practice is bank-dependent. | **REUSE M2 verbatim.** No "banks lift it on request" guarantee. |
+| BH-03 | NOC is not a Bangladesh Bank endorsement concept; it is profession-specific outbound-immigration paperwork. | No Bangladesh Bank circular in A1 mentions NOC; the Mumbai/Dhaka-airport `noc`/`go` intent is owned by the airport checklist node. | UNVERIFIED as a banking rule — and that is the point. | **NEGATIVE CLAIM.** The hub says no circular summarised here requires an NOC and sends the reader to the airport checklist and their employer. |
+| BH-04 | Naming a "best" dual-currency card, an APR range, or a DCC percentage. | — | No per-bank product page or regulator figure was opened. | **NOT PUBLISHED.** Product questions only, per the cluster plan's gate 1. |
+
+### Stage 3–9 execution record — Banking & Forex hub (19 October 2026)
+
+- **Stage 3 — Brief: complete.** Page job: give a Bangladeshi traveller the shape of the money decision and route them to the one node that answers their next question. `/banking` owns the map; the five nodes own the detail.
+- **Stage 4 — English: complete.** Answer-first, with six references, the hub stats, the cardinality/limits table, the four payment methods, the endorsement steps, the NOC copy, five quick answers and eight FAQs.
+- **Stage 5 — Bengali: complete.** Full decision-level parity (§5 of [`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md) gate 5): every section, figure, source and FAQ pair has a Bengali twin; `BN_BREADCRUMB_LABELS` carries the localized crumb.
+- **Stage 6 — package: complete.** Prerendered EN/BN route with FAQPage JSON-LD, BreadcrumbList, xhtml:link hreflang pair, explicit `lastmod`, sitemap and RSS parity.
+- **Stage 7 — preflight: passed.** EN/BN source list, figure parity, FAQ count, citation form and route links reviewed.
+- **Stage 8 — red team (score 15/16, no zero, no hard fail):** intent 3 (SERP format unmeasured); evidence 4 (every figure reuses an A1 row); usability 4 (grouped node directory, quick answers, FAQ); locale/trust/release 4 (full parity, visible sources, schema parity).
+
+---
+
+## Worked queue row — Banking & Forex cluster, node hardening (5 nodes)
+
+| Added / checked | Verdict | English URL | Bengali twin | Primary query | Intent / format hypothesis | Stage result / next gate |
+|---|---|---|---|---|---|---|
+| 2026-10-19 | **UPDATE IN PLACE — five existing slugs hardened and interlinked; no new post, no slug change.** Wave 2 of [`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md) §1. | `/blog/dual-currency-card-endorsement-bangladesh`; `/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix`; `/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah`; `/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card`; `/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide` | each `/bn/blog/…` twin | **`dollar endorsement limit in passport bangladesh`; `for endorsement`; `noc`; `ডুয়েল কারেন্সি কার্ড`** (owner-supplied GSC query list, 19 Oct 2026; no volume data attached) | Five decision nodes, each owning one job and linking up to `/banking` and across to its two or three siblings. Live Bangladesh SERP and volume not measured. | Stages 1–9 complete below. Stage 9: lint/build pass, `verify:build` all 338 checks pass on the merged tree (178 on the cluster branch before the Umrah wave); `[content-debt]` no longer lists the three previously source-less nodes under "no references" and no node under "Bengali internalLinks shorter than English". Deployment gate: owner approval plus a live route review. |
+
+### Must-preserve and scope notes (owner + plan)
+
+- Keep all five slugs, canonicals and locale twins; no new article.
+- Every node carries `updatedAt: "2026-10-19"`, a `/banking` link, and 6–7 internal links per locale with ≥2 blog→blog and ≥1 hub/money target ([`10-CONTENT-UPGRADE-STANDARD.md`](../../../growth/10-CONTENT-UPGRADE-STANDARD.md) §3). The Bengali link arrays are authored per node because Bengali `internalLinks` have **no** English fallback.
+- Uncited precision was removed, not merely de-linked: an APR/product ranking on the Islamic-card node, DCC percentages and per-destination cash amounts on the cash/DCC node, and any "saves X%" framing. Product comparisons became questions to ask the bank.
+- Citation form standardised to `FEPD-1 Circular No. 33 (6 September 2026)` throughout.
+
+### Stage 2 — node claims ledger (deltas against A1; A1 M1–M5 remain the source of truth)
+
+| ID | Claim / node | Source | Finding | Status / safe action |
+|---|---|---|---|---|
+| BN-01 | Endorsement node: USD 18,000 ceiling, USD 5,000 cash, activation is a separate step. | A1 M1; A1 M2 (the card must be enabled for online use). | VERIFIED. | **KEEP.** Citation corrected to FEPD-1; no change to the figures. |
+| BN-02 | Islamic-card node: Mudaraba/Al-Wadiah/Ujrah models; "20–27% APR" comparison and a named-card ranking. | No bank product page opened. | UNVERIFIED. | **DROPPED / REFRAMED.** Percentages removed and the ranking replaced by questions to ask each bank. |
+| BN-03 | No-card booking node: a BDT settlement desk working by bank transfer, bKash or Nagad. | Node-owned operational description; no fare or fee figure published. | QUALIFIED (service description). | **KEEP** with the "not a bank product" framing and the confirm-the-PNR action. |
+| BN-04 | Cash/DCC node: "choose the local currency"; no fixed DCC percentage. | A1 M4. | VERIFIED. | **KEEP verbatim.** All DCC percentages and per-destination cash amounts removed. |
+| BN-05 | `noc` intent on the no-card node. | A1 has no NOC banking rule; airport immigration owns the intent. | UNVERIFIED as a banking rule. | **POINTER ONLY.** The node links the Dhaka-airport checklist and does not restate NOC rules. |
+
+### Stage 3–9 execution record — Banking & Forex nodes (19 October 2026)
+
+- **Stage 3 — Brief: complete.** Each node keeps its one job; the cluster plan §1 boundary table is the ownership decision.
+- **Stage 4 — English: complete.** Bodies re-authored on the three previously source-less nodes: product-question framing, a BDT-desk workflow, and the local-currency rule; unsourced APR, DCC and cash figures removed.
+- **Stage 5 — Bengali: complete.** Full-parity Bengali overrides for the Islamic-card, no-card and cash/DCC nodes; the endorsement and RFCD nodes gained the `/banking` link and lost the obsolete `৫% DCC` line.
+- **Stage 6 — package: complete.** Titles and summaries de-numbered on the three nodes where numbers were unverified; `references` added (three sources each); `updatedAt` set to `2026-10-19`.
+- **Stage 7 — preflight: passed.** Citation form, figure removal, link floor, and EN/BN parity reviewed by sweep for the removed strings (`FE/PD-1`, `20%–27%`, `4.5%`, `6.5%`, `2.5% to 3.5%`, `5% Dynamic`, per-destination cash amounts).
+- **Stage 8 — red team (15/16, no zero, no hard fail):** intent 3 (SERP unmeasured); evidence 4 (every remaining figure traces to A1); usability 4 (two-hop mesh from any entry point); locale/trust/release 4 (per-node Bengali link arrays, parity of claims and sources).
+
+### Stage 9 — repository verification (19 October 2026)
+
+- Updated: `index.html`, `src/constants.ts`, `src/data/blogContent.ts`, `src/data/bengaliContent.ts`, `src/App.tsx`, `src/utils/seoCopy.ts`, `src/utils/localeRoutes.ts`, `scripts/prerender.ts`, `scripts/verify-build.ts`; added `src/data/bankingHubData.ts`, `src/data/bankingHubFaqs.ts`, `src/components/BankingHubLandingPage.tsx`.
+- `npm run lint` — **PASS** (`tsc --noEmit`).
+- `npm run build` — **PASS**; 108 English + 108 Bengali canonical routes prerendered (the cluster branch built 97 + 97 before the Umrah wave was merged in).
+- `npm run verify:build` — **PASS, all 338 checks** on the merged tree, including the eager-JS budget and the content contract. The `[content-debt]` report no longer lists `blog-28`, `blog-30` or `blog-31` under "no references", and none of the five nodes under "Bengali internalLinks shorter than English".
+- `dist/banking.html` and `dist/bn/banking.html` inspected: localized title/H1, FAQPage JSON-LD (8 questions), BreadcrumbList, hreflang pair, citing list and node directory. The five node pages inspected for the `/banking` link, reference list and removed figures.
+- **Not deployed.** Repository verification only; release gate is owner approval plus a live-route review.
+
+### Publication-system fix found during this pass — literal `**` in English blog HTML (19 October 2026)
+
+Inspecting the five node pages exposed a defect larger than this cluster. The English prerenderer printed inline
+`**emphasis**` markers into `<p>` tags as literal asterisks: **30 of 50** `dist/blog/*.html` files carried them, while
+**0 of 50** Bengali files did, because the Bengali body renderer already strips `**`. A no-JS crawler was reading
+"Passport **dollar endorsement** is…"; the React view renders those as `<strong>`, so the crawlable HTML disagreed with
+the page a reader sees.
+
+- `scripts/prerender.ts` now strips `**` in the English blog paragraph renderer and in the shared visible-FAQ renderer,
+  matching the Bengali renderer. Result: 0 of 50 English blog pages carry literal `**` in crawlable text.
+- `scripts/verify-build.ts` — the "every blog paragraph survives into its prerendered HTML" check now normalises `**`
+  on both sides, so it still measures truncation rather than the marker convention. The cluster branch reported 178
+  checks; the merged tree reports 338.
+- This is site-wide, not cluster-specific: it touches every English post, so it is recorded here for owner visibility
+  rather than folded silently into the cluster row. The principled follow-up — emit `<strong>` so the static HTML carries
+  the same emphasis the React view does — was **resolved the same day**; see the follow-up pass below.
+
+### Follow-up pass — six review items closed (19 October 2026)
+
+A review of the released cluster produced six items. All six are closed in the repository; release still depends on the
+owner's live-route review, and the source re-check below is a web check, not a deployment.
+
+- **Bengali reciprocal linking (highest leverage).** `scripts/prerender.ts` gained `addBengaliLinkSections`, called after
+  `addInternalLinkSections`: every Bengali route now ends with "ইংরেজিতে পড়ুন — Read this page in English" linking its
+  English twin and the English homepage, and `/bn` now carries the same 50-guide Bengali directory the English homepage
+  keeps in `index.html`'s `<nav>`. Measured: `dist/bn/index.html` 20 → **71** crawlable hrefs (50 Bengali guides);
+  `dist/bn/blog/<slug>.html` now links `href="/blog/<slug>"`. Bengali anchors stay Bengali; only the English-twin anchor
+  is English, which is what that anchor describes.
+- **One home FAQ source.** Added `src/data/homeFaqs.ts` (`HOME_FAQS`, `HOME_FAQ_HEADING`). `index.html` carries a
+  `<!-- HOME_FAQ -->` marker the prerenderer fills, the FAQPage node for `/` is generated from the same array, and
+  `src/App.tsx` renders the section and its runtime schema from it. This also fixed a real bug: the SPA home had **no**
+  FAQ section, so React removed the static one on hydration while the FAQPage node still described it.
+- **`<strong>` instead of stripping.** The English and Bengali paragraph renderers now convert `**x**` to `<strong>x</strong>`
+  (matching `BlogPostRouteView`). FAQ answers keep the markers stripped on both sides because they are mirrored into
+  plain-text JSON-LD. Result: 0 literal `**` in any prerendered blog page, 446 `<strong>` tags on the English blog pages.
+- **Cluster guard.** `verify:build` now fails if `dist/banking.html` or `dist/bn/banking.html` is missing or loses its
+  FAQPage node, if the hub drops any of its five node links, if a node stops linking `/banking`, or if `FE/PD-1` reappears
+  in a cluster page. Both the home-FAQ check and the cluster guard carry negative controls (house style).
+- **M5 upgraded QUALIFIED → VERIFIED.** The primary circular was located:
+  `https://www.bb.org.bd/mediaroom/circulars/fepd-2/jan072026fepd-201e.pdf` — Bangladesh Bank **FEPD-2 Circular No. 01,
+  7 January 2026**, "Passport Endorsement Fee by Money Changers": "Money Changers may charge maximum Taka 300.00 (Three
+  Hundred Taka) for the endorsement of an outgoing passenger's passport, irrespective of the amount." Blog-6 and blog-31
+  now cite the circular by number instead of the news report; the hub lists it as primary (P6) and keeps BSS as the
+  secondary news of record. Ledger M5 and the cluster plan §2/§3 were updated in the same commit.
+- **Dynamic-source re-check (19 October 2026).** Every URL in the ledger's source table was re-opened live: P1, P2, P3, P6
+  returned `application/pdf` with `%PDF` magic (P6 is new); P4 (EBL), P5 (SIBL) and S1 (BSS) returned live HTML. Two watch
+  items recorded, not acted on: **FEPD-2 Circular No. 07 (17 October 2026)** exists and its index entry carries the same
+  Tk 300 sentence (text not read here, so nothing depends on it), and `bb.org.bd` serves an F5 bot challenge to automated
+  clients, so the M5 wording was read from the Money Changers Association of Bangladesh's copy of the same circular
+  (mcabbd.com, published 7 Jan 2026) while the BB file was confirmed live by byte signature.
+
+Repository verification after the follow-up pass: `npm run lint` PASS; `npm run build` PASS (108 EN + 108 BN on the
+merged tree; the cluster branch measured 97 + 97); `npm run verify:build` **PASS, all 338 checks** — the four added by
+this pass (home FAQ, home FAQ negative control, cluster guard, cluster guard negative control) on top of the 334 the
+Umrah wave brought in.
+
+Two bundle notes from this pass, both measured in `dist/`:
+
+- The hub's FAQ payload (12.8 KB raw / 5.0 KB gzip) first sat in the entry graph because `src/App.tsx` built the
+  runtime FAQPage node from it, which put the homepage over its budget. It now arrives with the hub's lazy chunk and
+  the node is added when the data lands; `dist/banking.html` still ships the static FAQPage node from the prerenderer.
+- The homepage eager-JS budget was raised 200 → **205 KB** the same day: `origin/main` measured 199.9 KB after the
+  Umrah wave, so a new route's own eager code could not fit. See `06-core-web-vitals.md` for the measurement history.
+
+---
+
+## Wave S4 — UK/diaspora drafts staged (25 October 2026; scheduling HELD until trigger)
+
+| Added / checked | Verdict | Planned URLs | Primary query / audience / job | Intent evidence | Next gate |
+|---|---|---|---|---|---|
+| 2026-10-25 | **HELD** — six briefs in [`19-S4-UK-DIASPORA-DRAFTS-PLAN.md`](19-S4-UK-DIASPORA-DRAFTS-PLAN.md); drafting only, no scheduling | 6× `/blog/<slug>` (Umrah from LHR/MAN; UK→DAC fares; UK visa logistics; GBP budget templates; halal London guide; one reserve slot named by data) | **UK-based Bangladeshis with cards (GBP)** — the `12` §P6 arbitrage cluster; readers carry card-ready checkout the BD audience lacks | `15` §4 S4 trigger: ≥100 non-Google sessions/month **or** GSC shows UK impressions; S2 disclosure ships before/with the first UK-audience month | S1 GA4 runbook first for attribution; then per-brief six-gate drafting (`10`); NO scheduling until the trigger fires — extending the social window instead is the documented fallback (`16` §13). |

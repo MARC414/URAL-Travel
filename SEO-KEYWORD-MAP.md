@@ -1,6 +1,12 @@
 # First-pass keyword-to-URL map
 
-**Status:** implementation hypotheses; first prepared 2026-09-28. The Umrah page roles were reconciled on 2026-10-15 with [`docs/growth/UMRAH-CLUSTER-PLAN.md`](docs/growth/UMRAH-CLUSTER-PLAN.md); the remaining rows retain their prior first-pass scope. No Search Console query export or Bangladesh-filtered keyword-tool dataset was available, so this map makes **no search-volume, difficulty, or ranking claims**. Validate hypotheses against Search Console page/query data before expanding titles or content around any term.
+> **SUPPORTING REFERENCE — NOT A RELEASE SCHEDULE.** Existing URL/intent boundaries remain useful.
+> The priority column and query labels are hypotheses, not measured demand or instructions to publish.
+> Current authority is the [strategy index](00-URAL-STRATEGY-INDEX.md) and [current audit](00-URAL-CURRENT-AUDIT.md).
+
+**Status:** implementation hypotheses; first prepared 2026-09-28. The Umrah page roles were reconciled on 2026-10-15 with [`docs/history/2026-10-strategy-baseline/growth/UMRAH-CLUSTER-PLAN.md`](docs/history/2026-10-strategy-baseline/growth/UMRAH-CLUSTER-PLAN.md); the remaining rows retain their prior first-pass scope. No Search Console query export or Bangladesh-filtered keyword-tool dataset was available, so this map makes **no search-volume, difficulty, or ranking claims**. Validate hypotheses against Search Console page/query data before expanding titles or content around any term.
+
+**Evidence update, 26 October 2026:** the owner supplied corrected historical pages.dev GSC excerpts and early `.co.uk` signals. They are recorded separately in [search evidence](docs/03-social/SEARCH-EVIDENCE.md); date ranges/filters remain missing. The [master optimization guide](URAL-CONTENT-OPTIMIZATION-GUIDE.md) governs their interpretation and preserves the page boundaries below. The original map's priority column is not a current production schedule.
 
 ## Priority pages and intent boundaries
 

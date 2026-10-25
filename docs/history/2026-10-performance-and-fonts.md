@@ -134,7 +134,7 @@ Recorded so nobody re-does them:
 | Verify Bengali rendering | **Done** — `/bn/` routes prerender with their own preload and hreflang cluster |
 
 **Not done, and still open:** a custom domain. `*.pages.dev` indexes slowly; a real domain
-remains the single largest off-page lever. Tracked in `docs/MASTER-REMEDIATION-PLAN.md`.
+remains the single largest off-page lever. Tracked in `docs/history/2026-10-strategy-baseline/MASTER-REMEDIATION-PLAN.md`.
 
 ---
 
@@ -147,3 +147,4 @@ remains the single largest off-page lever. Tracked in `docs/MASTER-REMEDIATION-P
 - **Line numbers.** They rot within one commit.
 - **Status banners.** Status belongs to git commits and pull requests, which are dated and
   immutable. A document's status rots silently — and then misleads.
+> Current authority: [strategy index](../../00-URAL-STRATEGY-INDEX.md) and [25 October audit](../../00-URAL-CURRENT-AUDIT.md). Measurements and work instructions below retain their historical date and scope.

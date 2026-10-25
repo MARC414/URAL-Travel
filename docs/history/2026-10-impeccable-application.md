@@ -1,3 +1,5 @@
+> Current authority: [strategy index](../../00-URAL-STRATEGY-INDEX.md) and [25 October audit](../../00-URAL-CURRENT-AUDIT.md). Former "outstanding work" pointers below are historical, not an active design queue.
+
 > ## ⚠️ HISTORICAL RECORD — THIS WAS A WORK ORDER, AND THE WORK IS DONE
 >
 > Archived 2026-10-13. **Do not execute Parts 0–5 of this document** — they are a plan for work that
@@ -5,7 +7,7 @@
 > where the plan was corrected mid-flight, would undo the corrections.
 >
 > - **Want the results?** They live in `DESIGN.md` (the visual contract) and `PRODUCT.md` (product truth).
-> - **Want the outstanding work?** `docs/MASTER-REMEDIATION-PLAN.md` **Workstream F**.
+> - **Want the outstanding work?** `docs/history/2026-10-strategy-baseline/MASTER-REMEDIATION-PLAN.md` **Workstream F**.
 > - **Want to know what was decided and why?** Parts 6–8 below, especially the *"corrections to this
 >   document"* sections, which record where this plan was wrong and what was done instead.
 >
@@ -18,7 +20,7 @@
 
 **Status:** **EXECUTED — archived 2026-10-13.** Phase 0 through Phase 3 were applied and shipped
 in PR #27; Phases 4–5 were superseded by a decision to stop polishing and ship. See Parts 7 and 8
-for what was applied, and `docs/MASTER-REMEDIATION-PLAN.md` Workstream F for the deliberately-open
+for what was applied, and `docs/history/2026-10-strategy-baseline/MASTER-REMEDIATION-PLAN.md` Workstream F for the deliberately-open
 remainder. (This line originally read *"Phase 2+ not started"* — it rotted within the same day.)
 **Audited commit:** `0ded5c1` (`arena/ed7a9384-ural-travel`, branched from `main`)
 **Audited:** 2026-10-13

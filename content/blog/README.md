@@ -2,12 +2,16 @@
 
 Each article lives in one Markdown file in this directory. The checked-in file is the publishing source of truth; generated TypeScript is ignored and rebuilt by the npm scripts.
 
+Before authoring or repurposing, read the [master content optimization guide](../../URAL-CONTENT-OPTIMIZATION-GUIDE.md)
+and [article acceptance contract](../../docs/growth/10-CONTENT-UPGRADE-STANDARD.md). This file supplies the
+Markdown publishing mechanics; the current owner task selects the work.
+
 ## Google Drive source-to-draft handoff
 
 Use Drive as the research/source library and the repository as the publishing queue. The GitHub schedule does **not** poll Drive or publish a newly uploaded document automatically.
 
 - **Keep in Drive:** strategy/social plans (for example, `URAL-FIRST-5-POSTS.md`, which is a social-media plan, not a website article), source documents, data, URLs, and claim-check notes with the date checked. Organize these by topic or article slug. The existing `URAL Articles` folder is suitable.
-- **Use the repo's strategy files:** `docs/growth/CONTENT-QUEUE.md` tracks article tasks, reader intent and evidence; `SEO-KEYWORD-MAP.md` maps target intent to URLs. These guide what to write, but they are not the publication calendar.
+- **Use the current baseline:** [the strategy index](../../00-URAL-STRATEGY-INDEX.md) and [current audit](../../00-URAL-CURRENT-AUDIT.md) establish context; the owner authorizes the next task. [SEO-KEYWORD-MAP.md](../../SEO-KEYWORD-MAP.md) preserves intent boundaries. The former content queue is historical and must not be resumed as a calendar.
 - **Keep the publishable website article in the repo:** one bilingual Markdown file at `content/blog/<slug>.md`. This committed file is the only publishing source of truth. You may keep a Drive copy for convenience, but updates there do not update the website.
 
 1. Tell me which Drive file or folder contains the source material. I can read connected Drive sources, check time-sensitive claims against primary sources where possible, and flag anything uncertain.
@@ -20,10 +24,10 @@ This review gate keeps source documents, unverified claims, and drafts out of th
 ## Status and publish time
 
 - `status: draft` — never included in a normal site build, regardless of its date.
-- `status: scheduled` plus `publishDate: "YYYY-MM-DD"` — automatically included in the first production build at or after **9:00 AM on that Dhaka date**. The daily GitHub Action runs at **03:00 UTC (about 9:00 AM Asia/Dhaka)** and asks Cloudflare Pages to rebuild when a post is scheduled for that date.
+- `status: scheduled` plus `publishDate: "YYYY-MM-DD"` — automatically included in the first production build at or after **9:00 AM on that Dhaka date**. The daily GitHub Action runs at **03:00 UTC (about 9:00 AM Asia/Dhaka)**. The checker includes due and overdue posts by default and uses the live sitemap to avoid rebuilding posts already published.
 - A date without a time means **9:00 AM Dhaka time**. Do not add a timezone offset or a time to the date.
 - Keep the post in the repository before its scheduled date. The Cloudflare deploy-hook URL is stored as the private GitHub Actions secret `CLOUDFLARE_PAGES_DEPLOY_HOOK`; never add it to an article or commit it.
-- If GitHub Actions misses a date, use the workflow's **Run workflow** button with `include_overdue` enabled. The normal daily run is date-specific, so it will not repeatedly trigger old posts.
+- If GitHub Actions misses a date, the default overdue-inclusive checker can recover it on a later run. **Run workflow** also defaults `include_overdue` to true; explicitly setting it false restricts the check. See `scripts/check-scheduled-posts.ts` and `scripts/publishPlan.ts`; the current behavior supersedes old date-equality comments and plans.
 
 ## Create or schedule a post
 

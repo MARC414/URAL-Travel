@@ -1,5 +1,7 @@
 # Ziyarah pair — source review and claim ledger
 
+> **SUPPORTING EVIDENCE — DATED SOURCE RECORD.** Retain the recorded checks, qualifications and claim IDs. Former approvals and next steps below are historical, not current task authorization. No source date is refreshed by this cleanup. Current direction: [strategy index](../../00-URAL-STRATEGY-INDEX.md).
+
 **Asset:** `makkah-madinah-badr-taif-historical-ziyarah-taxi-guide` (blog-23), EN + BN.
 **Review date:** 19 October 2026. **Reviewer:** agent-owned public-source review; no owner-supplied material.
 **Method:** every quantitative or locational claim in the published pair was listed, then checked against a page that

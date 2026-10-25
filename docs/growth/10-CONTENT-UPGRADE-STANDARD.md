@@ -1,14 +1,14 @@
 # 10 — Content Upgrade Standard (normative)
 
-**Applies to:** every article written, upgraded, localized, or reviewed on `https://ural-travel.pages.dev` — by a
+**Applies to:** every article written, upgraded, localized, or reviewed on `https://uraltravel.co.uk` — by a
 person or by an AI tool. **Baseline:** 17 October 2026, measured against `dist/` built from `main`.
 
-> This file is the acceptance contract for **one article**. It does not decide *what* to write next; that is the active
-> cluster plan — [`BANKING-FOREX-CLUSTER-PLAN.md`](BANKING-FOREX-CLUSTER-PLAN.md) (opened 19 October 2026), or
-> [`UMRAH-CLUSTER-PLAN.md`](UMRAH-CLUSTER-PLAN.md) for the Umrah cluster — and the active row in
-> [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md), sequenced by [`CONTENT-OS.md`](CONTENT-OS.md) §1. Where a planning document and
-> this file disagree about **how a post must be wired and verified**, this file wins. Where they disagree about **what to
-> build next**, the cluster plan wins.
+> **Standing acceptance contract; authority reconciled 26 October 2026.** This file retains the
+> field-level wiring and verification requirements for one authorized article. The
+> [master optimization guide](../../URAL-CONTENT-OPTIMIZATION-GUIDE.md) synthesizes the editorial method
+> and resolves conflicts among older instructions. Start with that guide, the
+> [strategy index](../../00-URAL-STRATEGY-INDEX.md), [current audit](../../00-URAL-CURRENT-AUDIT.md)
+> and current owner request. Former cluster plans and the content queue remain historical.
 
 ---
 
@@ -76,7 +76,7 @@ A green `verify:build` does **not** satisfy gates 1, 2 or 5. CI cannot read pros
 ### 3.1 The map
 
 ```
-/umrah (pillar)  ──  cluster children (blog-11 … blog-22)
+/umrah (pillar)  ──  Umrah specialist guides (Fard Hajj stays separate and linked)
       │                    │
       │                    ├── lateral: 2–5 sibling posts
       │                    ├── up: pillar / category hub
@@ -94,7 +94,8 @@ task. Do not link every sibling from every post; that produces a link farm with 
 - **R2 — No orphans.** A new article must be added to **at least two existing articles** in the same release wave.
   Publishing a page that only the index links to is not a release.
 - **R3 — No dead, duplicate or self targets.** `/blog/<slug>` must exist; a path may appear once; never link the
-  article to itself. Aliases (`/pre-departure`, `/indexing`) resolve to `/sitemap` — write the canonical path.
+  article to itself. Use the current canonical route inventory. `/pre-departure` has its own route;
+  older instructions treating it as a `/sitemap` alias are historical.
 - **R4 — Anchors are descriptive and varied.** Name the target's subject ("Nusuk app and Rawdah permit
   step-by-step"), not "read more", "click here" or "this guide". Vary the wording for the same target across posts.
   A phrase, not a sentence.
@@ -234,7 +235,7 @@ NO   Planning a trip to Cox's Bazar? Read on to discover everything you need to 
 
 Factual sections (rules, fees, eligibility) run definition → rule → attribute → source. Practical sections
 (choices, trade-offs, planning) may use first/second person and editorial judgement, but may not invent experience,
-reviews or community answers. Component and visual rules: [`CONTENT-SYSTEM-V2.md`](CONTENT-SYSTEM-V2.md).
+reviews or community answers. Component and visual rules: [`CONTENT-SYSTEM-V2.md`](../02-content/CONTENT-SYSTEM-V2.md).
 
 ### 6.4 Bengali parity
 
@@ -252,7 +253,7 @@ does not support.
 
 ## 7. Procedure
 
-1. **Read the queue row and cluster plan.** Confirm the URL, the action (new / update in place) and the page's one job.
+1. **Read the current authorized task and baseline.** Confirm the URL, the action (new / update in place) and the page's one job. Old queue rows and cluster plans supply history, not authorization.
 2. **Inspect the live representation.** Open the rendered EN and BN pages and the three source locations in §0.
    Record the current link count, CTA provider and reference count.
 3. **Build the claims ledger** ([`CONTENT-OS.md`](CONTENT-OS.md) §3, prompt in `AI-WRITING-PROMPTS.md` Stage 2).
@@ -321,7 +322,9 @@ posts with no editorial inbound link. Green CI is not a pass on those items; it 
 
 ## 10. Debt register — measured 17 October 2026
 
-Re-measure with `npm run verify:build 2>&1 | grep '\[content-debt\]'`. These numbers are a snapshot, not a target.
+Re-measure with `npm run verify:build 2>&1 | grep '\[content-debt\]'`. These numbers are a historical
+17 October snapshot, not a target or current work list. The [current audit](../../00-URAL-CURRENT-AUDIT.md)
+records the later 25 October measurement.
 
 | Item | Count | Pages |
 |---|---|---|
@@ -332,8 +335,8 @@ Re-measure with `npm run verify:build 2>&1 | grep '\[content-debt\]'`. These num
 | Posts with no editorial inbound link | 9 | `blog-2, 19, 23, 39, 42, 43, 47, 48`, scheduled Cox's Bazar guide |
 | Bengali `internalLinks` shorter than English | 34 posts | list printed by the debt report; the renderer does not fall back |
 
-`blog-19` (Ramadan / I'tikaf) is the highest-value orphan: it is in the active cluster, it is scheduled for upgrade,
-and no sibling currently links to it. Adding it to two or three siblings is part of that upgrade (R2).
+The former instruction to upgrade `blog-19` from this snapshot is superseded. Its later source review
+and the current audit provide the subsequent evidence; remeasure before selecting any new work.
 
 ---
 

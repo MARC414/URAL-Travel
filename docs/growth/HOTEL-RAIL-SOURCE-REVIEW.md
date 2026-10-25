@@ -1,5 +1,7 @@
 # Makkah/Madinah hotels and Haramain — source review
 
+> **SUPPORTING EVIDENCE — DATED SOURCE RECORD.** Retain the recorded checks, qualifications and claim IDs. Former approvals and next steps below are historical, not current task authorization. No source date is refreshed by this cleanup. Current direction: [strategy index](../../00-URAL-STRATEGY-INDEX.md).
+
 Checked 19 October 2026, Dhaka. Scope: the existing hotel/rail article EN/BN and its own metadata, CTA, snippets,
 FAQ/procedure and rendered tests. Not a field visit, hotel quote, live ticket purchase or cluster certification.
 

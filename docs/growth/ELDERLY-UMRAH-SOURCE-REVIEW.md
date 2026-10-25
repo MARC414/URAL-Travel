@@ -1,5 +1,7 @@
 # Older travellers / elderly parents — source/claim review
 
+> **SUPPORTING EVIDENCE — DATED SOURCE RECORD.** Retain the recorded checks, qualifications and claim IDs. Former approvals and next steps below are historical, not current task authorization. No source date is refreshed by this cleanup. Current direction: [strategy index](../../00-URAL-STRATEGY-INDEX.md).
+
 Pre-edit audit and claim ledger written **2026-10-19, Asia/Dhaka** (some Saudi site clocks showed 18 October
 2026 UTC). Existing EN/BN slug:
 `umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide`. One article pair, not a medical clearance,

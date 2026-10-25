@@ -1,5 +1,7 @@
 # A1-S1 — Shared Claims Ledger: Money Cluster (Bangladesh Bank facts)
 
+> **SUPPORTING EVIDENCE — DATED SOURCE RECORD.** Retain the recorded checks, qualifications and claim IDs. Former approvals and next steps below are historical, not current task authorization. No source date is refreshed by this cleanup. Current direction: [strategy index](../../00-URAL-STRATEGY-INDEX.md).
+
 **Segment:** A1-S1 (shared ledger for 4 articles) · **Checked:** 16 October 2026
 **Re-checked:** 19 October 2026 — all source URLs re-opened on the live web. M5 upgraded QUALIFIED → **VERIFIED**: its
 primary circular was located (P6). No money figure changed in the re-check.
@@ -120,4 +122,4 @@ circular (P6, 19 October 2026). M4 precision stays DROP.
 ✋ **Owner sign-off requested on the safe wordings M1–M5** before S2 briefs are written.
 Status of this ledger as a document: the S1 field note above ("no article prose changed in this segment") describes the
 16 October audit only — the Banking & Forex pass executed those wordings on 19 October 2026 and recorded the changes in
-[`CONTENT-QUEUE.md`](CONTENT-QUEUE.md).
+[`CONTENT-QUEUE.md`](../history/2026-10-strategy-baseline/growth/CONTENT-QUEUE.md).

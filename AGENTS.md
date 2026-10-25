@@ -2,28 +2,46 @@
 
 This document serves as the canonical technical handoff and architectural reference for AI coding assistants (Claude Code, Cursor, GitHub Copilot, Codex, Google AI Studio) and developers working on **URAL Travel Intelligence** (`https://uraltravel.co.uk`).
 
+## 0. Current baseline and task authority
+
+Start with [`00-URAL-STRATEGY-INDEX.md`](00-URAL-STRATEGY-INDEX.md) and
+[`00-URAL-CURRENT-AUDIT.md`](00-URAL-CURRENT-AUDIT.md), the owner's designated diagnostic baseline
+from 25 October 2026. The current owner task controls scope; the audit's recommendations are not
+automatic implementation approval.
+
+The direction is **Bangladesh-first travel intelligence, with Umrah as the initial commercial/content
+learning cycle**. Fard Hajj is a separate, linked topic. UK/diaspora, broader Muslim travel and Europe
+are future research. Old cluster plans, calendars, freeze triggers and UK-pivot instructions in
+`docs/history/` are historical, not current work orders. The owner-requested
+[`URAL-CONTENT-OPTIMIZATION-GUIDE.md`](URAL-CONTENT-OPTIMIZATION-GUIDE.md) is the current editorial-method
+standard. [`URAL-SOCIAL-CONTENT-ECOSYSTEM.md`](URAL-SOCIAL-CONTENT-ECOSYSTEM.md) contains the proposed
+existing-content production programme. Guides and draft calendars do not authorize article rewrites,
+site repairs or live publication outside the current owner task.
+
 ---
 
 ## 1. Mission & Product Identity
 
 **URAL (উড়াল)** is an editorial **Travel Intelligence Platform** designed primarily for Bangladeshi travelers while serving global visitors worldwide.
 - **Core Capabilities:**
-  - Global Flight & Hotel Search powered by Travelpayouts White Label (`wl_id=22462`), Aviasales, and Kiwi.com (`marker=675992`, `trs=540277`).
+  - Global flight search and hotel-partner handoffs using Travelpayouts White Label (`wl_id=22462`), Aviasales, and Kiwi.com (`marker=675992`, project `trs=589561`). The current audit records limitations in the hotel handoff.
   - Step-by-step Tourist, Medical, and Umrah Visa Checklists (`Nepal`, `Thailand`, `Malaysia`, `UAE/Dubai`, `Singapore`, `Maldives`, `Schengen`, `Saudi Arabia`).
   - Bilingual Support (`en` English & `bn` Bengali) with dynamic `<html lang>` synchronization.
-  - Real-time Multi-Currency Display (`BDT`, `USD`, `EUR`, `GBP`, `SAR`, `AED`).
+  - Multi-Currency Display (`BDT`, `USD`, `EUR`, `GBP`, `SAR`, `AED`). The inspected widget conversions use fixed rates; do not describe them as live FX.
   - Static Prerendering (`scripts/prerender.ts`) generating crawlable HTML, OpenGraph metadata, and Schema.org JSON-LD (`FAQPage`, `Article`, `Organization`, `BreadcrumbList`) for English and Bengali routes. URAL is a travel-information and affiliate referral platform; partner products are not sold by URAL and must not be marked up as URAL `Product`/`Offer` listings.
 
 ---
 
 ## 2. Affiliate Partner Registry & Lifecycle Rules (`src/components/AffiliatePartners.tsx`)
 
-All Travelpayouts partner links and promotional campaigns are managed centrally in `src/components/AffiliatePartners.tsx`.
+The canonical registry for Travelpayouts partner links and promotional campaigns is
+`src/components/AffiliatePartners.tsx`. The current audit records legacy embeds that bypass it;
+the rules below are the required convention, not a claim that every existing call site complies.
 
 ### Single Source of Truth
 - **`AFFILIATE_LINKS`**: Canonical dictionary of partner `.tpo.li` and short URLs (`aviasales`, `klook`, `tiqets`, `airhelp`, `kkday`, `kiwitaxi`, `welcomePickups`, `airalo`, `qeeq`, `radicalStorage`, `yesim`, `kiwi`, `getTransfer`, `goCity`). **Never hardcode raw `.tpo.li` URLs in UI components**—always import `AFFILIATE_LINKS` and resolve through `resolvePartnerUrl(...)` or `<PartnerLinkButton />`.
 - **`AFFILIATE_OFFER_REGISTRY`**: Maps every partner key to its `status` (`"active" | "paused"`), `offerType` (`"evergreen" | "commission-boost" | "customer-promo"`), `fallbackPartner`, and optional `expiresAt` (`YYYY-MM-DD` evaluated in Bangladesh Standard Time `UTC+06:00`).
-- **Automatic Fallback Behavior (`resolvePartnerUrl`)**: If a partner program is ever paused (`status: "paused"`), `resolvePartnerUrl()` automatically returns the active `fallbackPartner` URL across every CTA button, contextual callout, and prerendered link.
+- **Automatic Fallback Behavior (`resolvePartnerUrl`)**: If a partner program is paused (`status: "paused"`), registry-based callers of `resolvePartnerUrl()` receive the active `fallbackPartner` URL. Hardcoded links bypass that behavior.
 - **Automatic Promo Expiry (`isPromoActive` & `sanitizeExpiredPromoText`)**:
   - Time-limited customer promos (such as `KKDAY_PROMO` or `AIRHELP_PROMO`) must always be gated by `isPromoActive(PROMO.expiresAt)`.
   - Blog post body text and CTA headlines must pass through `sanitizeExpiredPromoText(text)` in both `src/App.tsx` and `scripts/prerender.ts` so expired coupon codes or sale dates never appear in live or prerendered HTML.
@@ -33,9 +51,11 @@ All Travelpayouts partner links and promotional campaigns are managed centrally 
 
 ## 2b. Content Authoring Contract (normative)
 
-**Before writing, upgrading, or auditing an article, read
-[`docs/growth/10-CONTENT-UPGRADE-STANDARD.md`](docs/growth/10-CONTENT-UPGRADE-STANDARD.md).** It is the acceptance
-contract for one article and applies to every AI tool and contributor.
+**Before writing, upgrading, auditing or repurposing an article, read
+[`URAL-CONTENT-OPTIMIZATION-GUIDE.md`](URAL-CONTENT-OPTIMIZATION-GUIDE.md) and
+[`docs/growth/10-CONTENT-UPGRADE-STANDARD.md`](docs/growth/10-CONTENT-UPGRADE-STANDARD.md).** The master guide
+reconciles editorial methods; the latter retains the field-level acceptance contract for one article.
+Both apply to every AI tool and contributor. Social tasks also use the current asset register and source gates.
 
 - **Fields live in three files, not one.** Bodies are in `src/data/blogContent.ts`; English metadata
   (`references`, `internalLinks`, `affiliateCTA`, dates) is in `src/constants.ts`; Bengali overrides are in
@@ -61,7 +81,7 @@ contract for one article and applies to every AI tool and contributor.
 2. **Global Hotel & Flight Custom Widget (`src/components/TravelpayoutsCustomWidget.tsx`)**:
    - Features the **Explore Popular Cities** 12-hub selector (`Makkah`, `Paris`, `Dubai`, `Madinah`, `Bangkok`, `Kuala Lumpur`, `London`, `Singapore`, `Maldives`, `Istanbul`, `Kathmandu`, `New York`) above the global search bar.
    - Supports any worldwide city or hotel query with live Travelpayouts autocomplete, check-in/check-out date pickers, guest counter, and 6-currency selector.
-   - Dispatches live hotel searches to Klook (`AFFILIATE_LINKS.klook`); KKday stay search lives on its own `/kkday-hotels` page (`AFFILIATE_LINKS.kkday`).
+   - Opens the Klook partner link (`AFFILIATE_LINKS.klook`); the audited handoff does not carry city/date/guest selections. KKday stay search lives on its own `/kkday-hotels` page (`AFFILIATE_LINKS.kkday`).
 3. **Standalone & Embedded URAL White Label (`public/travelpayouts-wl.html`)**:
    - Uses Travelpayouts White Label `wl_id=22462` (`tpembd.com/wl_web/main.js?wl_id=22462`).
    - When opened in a new tab with `?standalone=1`, displays the full URAL Travel Intelligence Navy (`#0B192C`) & Gold (`#F6B73C`) header, navigation bar, and footer. When embedded inside an iframe, hides the standalone chrome and posts height updates to the parent window.
@@ -107,24 +127,21 @@ misled the next reader. The rule that prevents it:
    Archived material goes in `docs/history/` behind a `HISTORICAL RECORD — DO NOT TREAT AS CURRENT
    STATE` banner, with stale details marked as stale. Read `docs/history/2026-10-performance-and-fonts.md`
    for the pattern.
-2. **No status banners in documents.** "COMPLETED ✅" and "Production Ready" belong to git commits and
-   pull requests, which are dated and immutable. A document's status rots silently — and then misleads.
+2. **Use lifecycle labels, not completion badges.** Current, supporting, future and historical labels
+   distinguish authority. "COMPLETED ✅" and "Production Ready" belong to dated commits and pull requests;
+   they are not durable claims about present implementation.
 3. **No line numbers.** They are wrong within one commit. Name the symbol or the surrounding text instead.
 4. **Status updates go inline where they are read.** When a section becomes obsolete, replace it with a
-   dated resolution note rather than leaving the stale claim standing (see `docs/growth/README.md` §0
-   rule 6 for the pattern).
+   dated resolution note rather than leaving the stale claim standing. Current navigation lives in
+   `00-URAL-STRATEGY-INDEX.md`; preserved old work orders must be explicitly historical.
 5. **Delete work orders when the work lands.** A plan, checklist or audit that has been executed is not
    documentation — it is a to-do list someone already finished. Its results belong in the code, in
    `DESIGN.md`/`PRODUCT.md`, or in `docs/history/`.
 6. **Never record a projected performance number as if measured.** A "Lighthouse: 65 → 80" that was never
    run will be quoted as fact forever. Measure, or say you did not.
-7. **Content and growth work starts from the execution layer, not from a sprint list.** Read
-   `docs/growth/CONTENT-OS.md` §1 for the order, then the **active cluster plan** and its row in
-   `docs/growth/CONTENT-QUEUE.md`. Release order comes from the cluster plan and queue; each cluster has its
-   own plan, and the most recently opened one is `docs/growth/BANKING-FOREX-CLUSTER-PLAN.md` (19 October
-   2026), while `docs/growth/UMRAH-CLUSTER-PLAN.md` remains valid for the Umrah cluster.
-   `docs/growth/CONTENT-STRATEGY-2026.md` is the site-wide gap inventory and scoring model — its §6 gap
-   register and §12 sprints are **analysis, not schedule**: its India pillar ("Dhaka↔Kolkata land route") is
-   the largest *content* gap and is explicitly **not** the next work item. The clusters in progress are
-   **Banking & Forex** and **Umrah**; **Fard Hajj is a separate, linked topic**. `docs/growth/README.md` §2A
-   carries the same precedence note.
+7. **Content and growth work starts from the current owner task, index, audit and master optimization guide.**
+   `URAL-CONTENT-OPTIMIZATION-GUIDE.md` is the reconciled method; `docs/growth/CONTENT-OS.md` supplies
+   supporting workflow and `docs/growth/10-CONTENT-UPGRADE-STANDARD.md` retains acceptance requirements.
+   The current social programme uses its own register, source gates and corrected GSC provenance.
+   The former content queue, Banking/Umrah rollout plans, social calendars and post-migration roadmaps
+   remain archived. Retained research and old approvals cannot reopen them.

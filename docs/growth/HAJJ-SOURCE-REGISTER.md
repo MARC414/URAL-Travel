@@ -1,5 +1,7 @@
 # Hajj Source Register — Bangladesh-focused page
 
+> **SUPPORTING EVIDENCE — DATED SOURCE RECORD.** Retain official-source provenance and the checklist review history. Former approval/release steps below are historical, not current task authorization. The checklist files remain intact; no source date is refreshed by this cleanup. Current direction: [strategy index](../../00-URAL-STRATEGY-INDEX.md).
+
 **Added:** 18 October 2026
 **Purpose:** starting list of official portals and state information sources for the existing Hajj registration article. This is a source-finding aid, **not** a claims ledger and does not verify any specific fee, date, package inclusion, health rule, or app procedure.
 
@@ -76,7 +78,7 @@ Created `docs/growth/resources/ural-hajj-preparation-checklist-2027-en.pdf`; the
 
 ## Stage 4 — current-season answer and download card (18 October 2026)
 
-Prepared and integrated the short English/Bengali current-season answer into the existing Hajj article. It states the owner-selected 2027 registration window and closed status, points readers to the official portal for later notices, and does not present 2026 prices as current. The direct circular URL remains unavailable, so the article references the official portal homepage rather than inventing a URL. A visible note warns that the remaining older sections have not yet been reconciled for 2027. The approved checklist card is integrated immediately after the answer in both locales. The original working copy is retained at `docs/growth/drafts/hajj-current-season-answer-en-bn.md`.
+Prepared and integrated the short English/Bengali current-season answer into the existing Hajj article. It states the owner-selected 2027 registration window and closed status, points readers to the official portal for later notices, and does not present 2026 prices as current. The direct circular URL remains unavailable, so the article references the official portal homepage rather than inventing a URL. A visible note warns that the remaining older sections have not yet been reconciled for 2027. The approved checklist card is integrated immediately after the answer in both locales. The original working copy is retained at `docs/history/2026-10-strategy-baseline/growth/drafts/hajj-current-season-answer-en-bn.md`.
 
 ## Stage 5 — registration-status section rewrite (18 October 2026)
 

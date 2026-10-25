@@ -1,5 +1,7 @@
 # C2 — eSIM and travel insurance: review and proposed update plan
 
+> **SUPPORTING EVIDENCE — DATED SOURCE RECORD.** The source checks and limitations remain useful. The proposed rewrite, old approval request and next steps below are historical, not an active task. No source date is refreshed by this cleanup. Current direction: [strategy index](../../00-URAL-STRATEGY-INDEX.md).
+
 Checked **2026-10-16**. Documentation only; live edits await plan approval.
 
 ## Short plan for the owner

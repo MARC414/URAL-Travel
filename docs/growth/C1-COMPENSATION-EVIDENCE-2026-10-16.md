@@ -1,5 +1,7 @@
 # Wave C1 — current-surface inventory and claim-level evidence ledger
 
+> **SUPPORTING EVIDENCE — DATED SOURCE RECORD.** Retain the recorded checks, qualifications and claim IDs. Former approvals, campaign instructions and next steps below are historical, not current task authorization. No source date is refreshed by this cleanup. Current direction: [strategy index](../../00-URAL-STRATEGY-INDEX.md).
+
 **Review date:** 2026-10-16. **Asset:** `blog-40`, English and Bengali together.
 **Scope of this record:** CONTENT-OS Stages 1–2 only. This is evidence for owner review, not a component brief, approved copy, implementation, or release certification.
 

@@ -1,8 +1,10 @@
 # HISTORICAL RECORD — DO NOT TREAT AS CURRENT STATE
 
+Current authority is the [strategy index](../../00-URAL-STRATEGY-INDEX.md) and [25 October audit](../../00-URAL-CURRENT-AUDIT.md). All planning/next-task references below are historical.
+
 The original 19 October planning snapshot below predates the owner’s execution authorization and the main-guide rewrite.
 Its “planned/not rewritten” statements are historical. Current results and remaining gates: `../growth/DIY-UMRAH-SOURCE-REVIEW.md`
-and `../growth/DIY-UMRAH-GUIDE-NEXT-STEPS.md`.
+and `2026-10-strategy-baseline/growth/DIY-UMRAH-GUIDE-NEXT-STEPS.md`.
 
 # Main DIY Umrah guide — step-by-step owner and editor plan
 

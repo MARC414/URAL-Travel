@@ -1,5 +1,7 @@
 # Zamzam / dates / gold customs — source and claim review
 
+> **SUPPORTING EVIDENCE — DATED SOURCE RECORD.** Retain the recorded checks, qualifications and claim IDs. Former approvals and next steps below are historical, not current task authorization. No source date is refreshed by this cleanup. Current direction: [strategy index](../../00-URAL-STRATEGY-INDEX.md).
+
 Pre-edit audit written **2026-10-19, Asia/Dhaka**. One EN/BN pair:
 `official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport` (`blog-21`). Not legal advice, not a customs
 ruling, and not a claim that any officer will assess your bag the way this page describes.

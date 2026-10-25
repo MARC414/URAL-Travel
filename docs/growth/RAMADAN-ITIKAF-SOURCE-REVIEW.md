@@ -1,5 +1,7 @@
 # Ramadan / I'tikaf — source and claim review
 
+> **SUPPORTING EVIDENCE — DATED SOURCE RECORD.** Retain the recorded checks, qualifications and claim IDs. Former approvals and next steps below are historical, not current task authorization. No source date is refreshed by this cleanup. Current direction: [strategy index](../../00-URAL-STRATEGY-INDEX.md).
+
 Pre-edit audit written **2026-10-19, Asia/Dhaka**. One EN/BN article pair:
 `ramadan-umrah-itikaf-guide-bangladesh-booking-budget` (`blog-19`). Not a fatwa, not a booking agent, not a
 prediction of the moon, and not a claim that any particular pilgrim will be given an I'tikaf place.

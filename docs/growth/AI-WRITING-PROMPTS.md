@@ -2,7 +2,11 @@
 
 **Prepared:** 14 October 2026
 
-**Use with:** [`CONTENT-OS.md`](CONTENT-OS.md), [`CONTENT-QUEUE.md`](CONTENT-QUEUE.md), [`METHOD-NOTES.md`](METHOD-NOTES.md), `AGENTS.md`, and the plan of record in [`CONTENT-STRATEGY-2026.md`](CONTENT-STRATEGY-2026.md).
+**Use with:** [the master optimization guide](../../URAL-CONTENT-OPTIMIZATION-GUIDE.md), [strategy index](../../00-URAL-STRATEGY-INDEX.md), [current audit](../../00-URAL-CURRENT-AUDIT.md), [`CONTENT-OS.md`](CONTENT-OS.md), [article acceptance standard](10-CONTENT-UPGRADE-STANDARD.md), [method research](../02-content/METHOD-NOTES.md) and `AGENTS.md`.
+
+**Authority reconciled 26 October 2026:** these are supporting prompts for explicitly authorized work.
+The master optimization guide governs methodology conflicts. Former cluster plans and the queue remain
+historical; the current social programme is a separate production register, not article-rewrite approval.
 
 > **Reconstruction note:** this prompt pack is reconstructed because the prior session's file and commit were unavailable in this checkout. It follows the stage sequence and constraints provided in the task prompt and the current repository contract. It is not represented as a recovered or verbatim-upgraded prior draft.
 
@@ -13,7 +17,7 @@
 Paste this at the start of each content task, then add the task-specific brief:
 
 ```text
-You are helping produce or refresh one URAL Travel Intelligence content asset for Bangladeshi travelers. Before drafting, read AGENTS.md, docs/growth/CONTENT-OS.md, docs/growth/CONTENT-STRATEGY-2026.md (plan of record; do not rewrite it), docs/growth/CONTENT-QUEUE.md, and docs/growth/METHOD-NOTES.md. Inspect the current English and Bengali page, metadata, AEO snippets, internal links, references, schema/rendering contract, and generated output where relevant.
+You are helping produce or refresh one explicitly authorized URAL Travel Intelligence content asset for Bangladeshi travelers. Before drafting, read the current owner task, URAL-CONTENT-OPTIMIZATION-GUIDE.md, 00-URAL-STRATEGY-INDEX.md, 00-URAL-CURRENT-AUDIT.md, AGENTS.md, docs/growth/CONTENT-OS.md, docs/growth/10-CONTENT-UPGRADE-STANDARD.md and relevant research under docs/02-content/. Old queue entries and cluster plans are historical, not authorization. Inspect the current English and Bengali page, metadata, AEO snippets, internal links, references, schema/rendering contract, and generated output where relevant.
 
 Work stage by stage. Do not skip the claims ledger. Do not invent Bangladesh search volume, keyword difficulty, prices, availability, visa terms, official deadlines, distances, or legal consequences. Research primary sources; record each source URL and checked date. Escalate material conflicts before drafting. Do not create a competing URL when the decision is to update an existing URL. Keep English and Bengali at full decision-level parity. Cite material claims inline and in the source list. Treat SEO/AEO methods as editorial heuristics, not ranking guarantees.
 
@@ -34,7 +38,7 @@ In Bengali, localize naturally for Bangladeshi readers. Preserve the same eligib
 
 ## Method Rules — apply, do not recite
 
-Use the sourced methods in [`METHOD-NOTES.md`](METHOD-NOTES.md) as editorial tools, not algorithm promises:
+Use the sourced methods in [`METHOD-NOTES.md`](../02-content/METHOD-NOTES.md) as editorial tools, not algorithm promises:
 
 - **Koray / query network:** map the connected questions, prerequisites, attributes, constraints, and follow-ups around one reader task. Keep a page's macro-context stable; use micro-contexts as supporting sub-questions under that task. Move a distinct task to a child page and connect it with a contextual internal link. Never stuff every related entity into one URL.
 - **Contextual vectors and EAV:** make the subject, attribute, value, unit, date, condition, and source explicit where they matter. Order headings from the broad page job to narrower sub-intents. Use query/attribute maps to find omissions, not to assert that Google uses a secret checklist.
@@ -43,7 +47,7 @@ Use the sourced methods in [`METHOD-NOTES.md`](METHOD-NOTES.md) as editorial too
 - **Gotch / upgrade first:** look at the existing asset, its query/page performance if available, links and age, and the cost of preserving its accumulated value. Improve, consolidate, redirect, or retire only with evidence and permission appropriate to the change. For the same intent on a chosen URL, upgrade that URL; do not publish a near-duplicate.
 - **Information gain:** add a source-backed local constraint, first-party data, useful decision rule, or verified step a generic competitor cannot supply. If no original evidence exists, be transparent and do not invent a first-hand angle.
 - **No proxy for success:** word count, content scores, “semantic terms,” schema, and an answer box do not prove quality or ranking. Use them only when they serve reader comprehension and the repository contract.
-- **v2 visual semantics (see [`CONTENT-SYSTEM-V2.md`](CONTENT-SYSTEM-V2.md)):** specify the centerpiece for the page's intent and a render component for every section in the brief; keep text as short as the verified ledger allows. Factual sections open definition→rule→attribute; practical/judgement sections are visually segmented, may use editorial first/second person, and must never fabricate experience, reviews, or community answers. Never write, structure, or schedule content to evade AI detection, spam filters, or platform rules — §9 of the v2 file lists rejected tactics that must be escalated to the owner, not implemented.
+- **v2 visual semantics (see [`CONTENT-SYSTEM-V2.md`](../02-content/CONTENT-SYSTEM-V2.md)):** specify the centerpiece for the page's intent and a render component for every section in the brief; keep text as short as the verified ledger allows. Factual sections open definition→rule→attribute; practical/judgement sections are visually segmented, may use editorial first/second person, and must never fabricate experience, reviews, or community answers. Never write, structure, or schedule content to evade AI detection, spam filters, or platform rules — §9 of the v2 file lists rejected tactics that must be escalated to the owner, not implemented.
 
 ---
 
@@ -54,7 +58,7 @@ Use this prompt before Stage 1 when the assignment spans a topic cluster. It pro
 ```text
 CLUSTER PLAN — ROADMAP ONLY
 
-Plan a phased URAL content cluster for: [topic / reader task / country or market]. The audience is [audience]. The owner wants [goal or constraint]. Read AGENTS.md, docs/growth/CONTENT-OS.md, docs/growth/CONTENT-STRATEGY-2026.md (do not rewrite it), docs/growth/METHOD-NOTES.md, docs/growth/CONTENT-QUEUE.md, and inspect the existing site inventory, hub pages, child guides, English/Bengali twins, internal links, and available Search Console data.
+Only when the owner explicitly requests cluster planning, plan a phased URAL content cluster for: [topic / reader task / country or market]. The audience is [audience]. The owner wants [goal or constraint]. Read the current owner task, URAL-CONTENT-OPTIMIZATION-GUIDE.md, 00-URAL-STRATEGY-INDEX.md, 00-URAL-CURRENT-AUDIT.md, AGENTS.md, docs/growth/CONTENT-OS.md and the relevant supporting research in docs/02-content/. Inspect the existing site inventory, hub pages, child guides, English/Bengali twins, internal links, and correctly scoped Search Console data. Do not resume an archived plan or expand the authorized page set unasked.
 
 Do not start by assuming a new hub is needed. First identify the best existing hub for the broad reader task. Recommend updating that URL in place when it already serves the intent. Propose a new URL only when the existing inventory shows a distinct, non-cannibalizing reader task and the owner approves it.
 
@@ -95,9 +99,9 @@ The owner approves the hub, page boundaries, URLs/actions, internal-link plan, p
 ```text
 STAGE 1 — SELECTION AND QUEUE
 
-Inspect the site inventory, SEO-KEYWORD-MAP.md, strategy plan of record, the target URL, locale twin, existing cluster, and internal links. If the request spans multiple pages, first run the “Cluster rollout” prompt above, get owner approval for the map/order, then create a queue row per approved URL. Only the current release wave proceeds to drafting. Identify this page's primary job and likely query. Decide whether this is a new URL, update in place, consolidation, or no-op. Use the owner-provided decision if one exists; do not reopen a fixed decision without a material safety/source conflict.
+Inspect the site inventory, SEO-KEYWORD-MAP.md, current audit and owner-approved scope, the target URL, locale twin, existing cluster, and internal links. If the authorized request spans multiple pages, use the “Cluster rollout” prompt above and obtain the owner's map/order decision. Only the approved release wave proceeds to drafting. Identify this page's primary job and likely query. Decide whether this is a new URL, update in place, consolidation, or no-op. Use the owner-provided decision if one exists; do not reopen a fixed decision without a material safety/source conflict.
 
-Record one real row in docs/growth/CONTENT-QUEUE.md before research or drafting. Include: checked date, exact canonical URL(s), action/verdict, primary query and where it came from, audience, intent hypothesis, the one-sentence page job, must-preserve constraints, connected pages, current publish/update dates, and next gate.
+Record the task row in the current owner-approved task/PR context before research or drafting; do not append to the historical CONTENT-QUEUE.md. Include: checked date, exact canonical URL(s), action/verdict, primary query and where it came from, audience, intent hypothesis, the one-sentence page job, must-preserve constraints, connected pages, current publish/update dates, and next gate.
 
 Do not invent or estimate Bangladesh search volume or difficulty. If SERP/GSC/keyword-tool data is not accessible, say “not measured.” Treat SERP format as a hypothesis until a dated live SERP review is recorded.
 ```
@@ -150,7 +154,7 @@ Using the Stage 1 decision and Stage 2 ledger, create a one-page brief. State: t
 
 Inspect competing pages by relevance, not just domain name. Make a gap table with (a) expected/table-stakes coverage, (b) what a useful competing page answers, (c) the unanswered Bangladesh-specific question, and (d) URAL's evidence-backed contribution. Do not copy a competitor's headings. Separate this intent from `/umrah`, visa, hotel, train, Hajj, or child-guide intents; link to them rather than duplicating their full answer.
 
-Apply CONTENT-SYSTEM-V2.md: record a QD-Page / QD-Heading / QD-Section / QD-Link verdict for each candidate query; choose the centerpiece from the layout-matches-intent table; and output the outline as the v2 brief table (heading, intent, component from the approved inventory, ledger IDs, modality, internal link out). A component outside the inventory becomes a dev ticket with a prose fallback, not an invented design.
+Apply the master guide's reconciled use of CONTENT-SYSTEM-V2.md: record a QD-Page / QD-Heading / QD-Section / QD-Link verdict for each candidate query, select the first useful block, and specify each section's supported format, ledger IDs, qualifications and internal link. A component's existence elsewhere does not prove the article renderer supports it; use a supported fallback or record a scoped development dependency.
 
 Do not add sections simply to make the page longer. Each section must complete a step, answer a related sub-question, support a decision, or establish a necessary boundary.
 ```
