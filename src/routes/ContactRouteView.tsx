@@ -8,6 +8,8 @@ import { TravelIntelligence } from "../components/AeoInspector";
 
 import { URAL_SOCIAL_LINKS, URAL_SUPPORT_EMAIL } from "../utils/schema";
 
+import { TurnstileWidget } from "../components/TurnstileWidget";
+
 
 
 type RouteViewProps = { context: Record<string, any> };
@@ -16,10 +18,14 @@ type RouteViewProps = { context: Record<string, any> };
 
 export default function ContactRouteView({ context }: RouteViewProps) {
 
-  const { contactDestination, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, isBn, section, setContactDestination, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted } = context;
+  const { contactDestination, contactError, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, isBn, section, setContactDestination, setContactError, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted } = context;
 
   const [contactEmail, setContactEmail] = useState("");
   const [submissionId, setSubmissionId] = useState("");
+
+  // Cloudflare Turnstile token. Empty when the widget is not configured or the
+  // token has expired; the API treats it as optional unless a secret is set.
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   return (
 
@@ -193,6 +199,8 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                       setContactSubmitted(false);
 
+                      setContactError(null);
+
                       setContactName("");
 
                       setContactPhone("");
@@ -237,7 +245,7 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                     try {
 
-                      const serverlessRequest = fetch("/api/contact", {
+                      const response = await fetch("/api/contact", {
 
                         method: "POST",
 
@@ -245,7 +253,7 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                           "Content-Type": "application/json",
 
-                          "Accept": "application/json",
+                          Accept: "application/json",
 
                         },
 
@@ -265,63 +273,57 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                           message: contactMessage,
 
+                          turnstileToken,
+
                           pageUrl: typeof window !== "undefined" ? window.location.href : "https://uraltravel.co.uk/contact",
 
                         }),
 
                       }).catch(() => null);
 
+                      const result = response && response.ok ? await response.json().catch(() => null) : null;
 
+                      if (!response || !response.ok || !result || result.ok !== true) {
 
-                      const formSubmitRequest = fetch("https://formsubmit.co/ajax/marcwriter2025@gmail.com", {
+                        const fallbackMessage = isBn
 
-                        method: "POST",
+                          ? "আপনার জিজ্ঞাসা পাঠানো যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন, অথবা সরাসরি support@uraltravel.co.uk-এ ইমেইল করুন।"
 
-                        headers: {
+                          : "Your inquiry could not be sent. Please try again, or email support@uraltravel.co.uk directly.";
 
-                          "Content-Type": "application/json",
+                        setContactError(
 
-                          "Accept": "application/json",
+                          (result && typeof result.error === "string" && result.error) || fallbackMessage
 
-                        },
+                        );
 
-                        body: JSON.stringify({
+                        return;
 
-                          "Submission ID": generatedReqId,
+                      }
 
-                          Name: contactName,
+                      setSubmissionId(typeof result.submissionId === "string" ? result.submissionId : generatedReqId);
 
-                          "Phone / WhatsApp": contactPhone,
-
-                          ...(contactEmail.trim() ? { Email: contactEmail.trim(), _replyto: contactEmail.trim() } : {}),
-
-                          "Assistance Category": contactSubject,
-
-                          "Travel Destination": contactDestination,
-
-                          Message: contactMessage,
-
-                          "_subject": `New URAL Travel Inquiry (${generatedReqId}) from ${contactName}`,
-
-                          "_template": "table",
-
-                        }),
-
-                      }).catch(() => null);
-
-
-
-                      await Promise.allSettled([serverlessRequest, formSubmitRequest]);
+                      setContactSubmitted(true);
 
                     } catch (err) {
 
-                      console.warn("Direct inquiry delivery fallback:", err);
+                      console.warn("Contact inquiry dispatch failed:", err);
+
+                      setContactError(
+
+                        isBn
+
+                          ? "নেটওয়ার্ক সমস্যার কারণে জিজ্ঞাসা পাঠানো যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন বা support@uraltravel.co.uk-এ ইমেইল করুন।"
+
+                          : "A network error stopped your inquiry. Please try again, or email support@uraltravel.co.uk directly."
+
+                      );
 
                     } finally {
 
                       setContactLoading(false);
 
-                      setContactSubmitted(true);
+                      setTurnstileToken("");
 
                     }
 
@@ -552,6 +554,24 @@ export default function ContactRouteView({ context }: RouteViewProps) {
                   </div>
 
 
+
+                  {contactError && (
+
+                    <p
+
+                      role="alert"
+
+                      className="text-xs font-bold text-red-700 bg-red-50 border border-red-200 rounded-xl px-4 py-3"
+
+                    >
+
+                      {contactError}
+
+                    </p>
+
+                  )}
+
+                  <TurnstileWidget onToken={setTurnstileToken} lang={isBn ? "bn" : "en"} />
 
                   <button
 

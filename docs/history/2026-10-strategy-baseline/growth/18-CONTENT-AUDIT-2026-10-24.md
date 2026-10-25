@@ -180,7 +180,7 @@ deployed sitemap** — i.e. default the check to overdue-inclusive rather than d
 | 8 | **Retire or merge Havana + Chefchaouen** (off-strategy, unsourced) | Redirect to `/destinations` rather than delete |
 | 9 | **Give the 4 new city guides a reason to exist** — visa + flight + cost surfaces, or a diaspora-specific angle | Otherwise they are 8 orphan pages |
 | 10 | **`/how-we-make-money` + `/terms`** | The footer disclosure exists; the dedicated page does not, and Tier-2 programs and UK ASA/CMA both want it |
-| 11 | **Forms still deliver to a personal Gmail** (`functions/api/contact.js:7`, `subscribe.js:7`) with `Access-Control-Allow-Origin: *` | Real inbox SPOF + wildcard CORS on a public endpoint |
+| 11 | **Forms still deliver to a personal Gmail** (`functions/api/contact.js:7`, `subscribe.js:7`) with `Access-Control-Allow-Origin: *` | Real inbox SPOF + wildcard CORS on a public endpoint. *2026-10-25: the wildcard CORS, the duplicate form relay and the missing rate limit are fixed — see `20-FORM-AND-MAIL-HARDENING-2026-10-25.md`; the personal-Gmail recipient remains.* |
 
 ### P2 — only when a §6 trigger in `15` fires
 
