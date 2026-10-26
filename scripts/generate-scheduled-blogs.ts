@@ -37,6 +37,7 @@ function toBlogMetadata(post: ScheduledBlogPost) {
     ...(post.updatedAt ? { updatedAt: post.updatedAt } : {}),
     author: post.author,
     readTime: post.readTime,
+    ...(post.inlineFigure ? { inlineFigure: post.inlineFigure } : {}),
     ...(post.references.length ? { references: post.references } : {}),
     internalLinks: post.internalLinksEn,
   };

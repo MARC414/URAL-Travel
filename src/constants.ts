@@ -3937,6 +3937,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "5 Insider Secrets to Booking Cheaper Flights from Dhaka", path: "/blog/cheap-flight-booking-hacks-dhaka" },
       { text: "Flight Delay, Cancellation & Lost Baggage Compensation Guide", path: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" },
       { text: "Best Travel eSIM and Schengen Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
+      { text: "Turn Your Travel Experience Into Income — Without Building a Website", path: "/blog/turn-travel-experience-into-income-without-a-website" },
     ],
   },
   {

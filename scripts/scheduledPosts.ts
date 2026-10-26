@@ -37,6 +37,17 @@ export interface ScheduledBlogPost {
   coverImage?: string;
   coverAltEn?: string;
   coverAltBn?: string;
+  /**
+   * Optional in-article figure, rendered wherever the body carries a standalone
+   * `[[figure]]` paragraph. Covers are wired separately through `coverImage`.
+   */
+  inlineFigure?: {
+    imageSrc: string;
+    altEn: string;
+    altBn: string;
+    captionEn: string;
+    captionBn: string;
+  };
   seoTitle?: string;
   seoDescription?: string;
   seoTitleBn?: string;
@@ -146,6 +157,45 @@ function getStaticBlogSlugs(): Set<string> {
   return new Set([...match[1].matchAll(/"([a-z0-9-]+)"/g)].map((entry) => entry[1]));
 }
 
+function parseInlineFigure(
+  value: unknown,
+  file: string,
+  englishBody: string,
+  bengaliBody: string,
+): ScheduledBlogPost["inlineFigure"] {
+  if (value === undefined || value === null) return undefined;
+  if (typeof value !== "object" || Array.isArray(value)) {
+    return fail(file, '"inlineFigure" must be a mapping with imageSrc, altEn, altBn, captionEn and captionBn');
+  }
+  const figure = value as Record<string, unknown>;
+  const imageSrc = requiredString(figure, "imageSrc", file);
+  if (!/^\/assets\/images\/[a-z0-9][a-z0-9_-]*-1200\.webp$/.test(imageSrc)) {
+    return fail(file, '"inlineFigure.imageSrc" must be a canonical /assets/images/<name>-1200.webp path');
+  }
+  const basename = imageSrc.split("/").pop()?.replace(/-1200\.webp$/, "") ?? "";
+  const imageDimensionsSource = fs.readFileSync(IMAGE_DIMENSIONS_FILE, "utf8");
+  if (!imageDimensionsSource.includes(`"${basename}":`)) {
+    return fail(file, `inlineFigure image "${basename}" needs an entry in src/utils/imageAssets.ts`);
+  }
+  for (const width of [640, 960, 1200]) {
+    const variant = path.join(ROOT_DIR, "public", "assets", "images", `${basename}-${width}.webp`);
+    if (!fs.existsSync(variant)) return fail(file, `inlineFigure is missing ${path.relative(ROOT_DIR, variant)}`);
+  }
+  for (const [body, label] of [[englishBody, "English"], [bengaliBody, "Bengali"]] as const) {
+    const markers = body.split("\n\n").filter((para) => para.trim() === "[[figure]]").length;
+    if (markers !== 1) {
+      return fail(file, `the ${label} body must carry exactly one standalone [[figure]] paragraph (found ${markers})`);
+    }
+  }
+  return {
+    imageSrc,
+    altEn: requiredString(figure, "altEn", file),
+    altBn: requiredString(figure, "altBn", file),
+    captionEn: requiredString(figure, "captionEn", file),
+    captionBn: requiredString(figure, "captionBn", file),
+  };
+}
+
 function parsePost(file: string): ScheduledBlogPost {
   const source = fs.readFileSync(file, "utf8");
   const frontmatterMatch = source.match(/^(?:\uFEFF)?---[ \t]*\r?\n([\s\S]*?)\r?\n---[ \t]*(?:\r?\n|$)/);
@@ -234,6 +284,7 @@ function parsePost(file: string): ScheduledBlogPost {
     coverImage,
     coverAltEn,
     coverAltBn,
+    inlineFigure: parseInlineFigure(data.inlineFigure, file, englishBody, bengaliBody),
     seoTitle: optionalString(data, "seoTitle", file),
     seoDescription: optionalString(data, "seoDescription", file),
     seoTitleBn: optionalString(data, "seoTitleBn", file),
