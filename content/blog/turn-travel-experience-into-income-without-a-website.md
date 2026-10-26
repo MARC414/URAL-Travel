@@ -20,8 +20,8 @@ inlineFigure:
   imageSrc: /assets/images/traveller_phone_street_ugc_1792483200000-1200.webp
   altEn: A traveller stands in an old-quarter street at dusk, holding a phone up to photograph the shophouses, parked scooters and a passing tuk-tuk.
   altBn: সন্ধ্যার পুরোনো পাড়ার রাস্তায় দাঁড়িয়ে এক ভ্রমণকারী ফোন তুলে দোকান, দাঁড়ানো স্কুটার আর পাশ দিয়ে যাওয়া টুকটুকের ছবি তুলছেন।
-  captionEn: "The hard part is already finished: you were there, you looked, you recorded it. Everything after this is about whether that record helps someone else decide."
-  captionBn: "কঠিন অংশটা ইতিমধ্যেই শেষ: আপনি সেখানে ছিলেন, দেখেছেন, ছবি তুলেছেন। এরপরের সবকিছু নির্ভর করে — সেই ছবি-তথ্য আরেকজনকে সিদ্ধান্ত নিতে সাহায্য করে কি না, তার ওপর।"
+  captionEn: "Every stage of that journey starts with someone standing in a street like this, looking properly. The recording is the raw material; the partner network is only the plumbing."
+  captionBn: "সেই যাত্রার প্রতিটি ধাপ শুরু হয় এমন একটি রাস্তায় দাঁড়ানো একজনের থেকে, যিনি ঠিকভাবে দেখছেন। রেকর্ডটাই কাঁচামাল; পার্টনার নেটওয়ার্ক শুধু প্লাম্বিং।"
 seoTitle: "Turn Travel Stories Into Helpful Guides — and Maybe Income"
 seoDescription: "Your photos, videos and honest recommendations can help another traveller plan a trip — and a travel booking platform can let you earn from the bookings they make. Here is how the whole chain fits together, and where it still does not."
 seoTitleBn: "ভ্রমণ-গল্প থেকে সহায়ক গাইড — আর সম্ভাব্য কিছু আয়"
@@ -148,8 +148,6 @@ That last step — the booking — is the only place where money exists. Everyth
 
 Which means the order matters: useful first, link second. A traveller who writes a genuinely helpful answer and never earns a taka has still made something worth keeping. A traveller who chases the link and skips the answer has made an advertisement nobody reads.
 
-[[figure]]
-
 ## Where the earning sits — and why it is not the point
 
 You do not need to own a hotel, sell airline tickets, or become a travel agent. You need a reader who has decided to book something, and a way for that decision to be tracked back to the recommendation that caused it.
@@ -187,6 +185,8 @@ Paying for it from Bangladesh. This stage is invisible to travellers from most c
 Coming home. What you may bring back, and how much of it is duty-free. The last stage of the trip and the first thing people ask about on the return flight.
 
 That is the ecosystem. Every stage has a partner type attached to it, and no single company owns the whole journey. Which is why a creator with one good post about one stage can still earn inside a system they do not control — and why nobody should expect a single link to cover a holiday.
+
+[[figure]]
 
 ## Where that ecosystem is still incomplete
 
@@ -315,8 +315,6 @@ You already did the travelling. Start by writing down one thing you know that no
 
 অর্থাৎ ক্রমটা গুরুত্বপূর্ণ: আগে উপকার, পরে লিংক। যে ভ্রমণকারী সত্যিই সহায়ক উত্তর লেখেন কিন্তু এক টাকাও আয় করেন না, তিনি তবুও রাখার মতো কিছু বানিয়েছেন। যে ভ্রমণকারী লিংকের পেছনে ছোটেন আর উত্তর বাদ দেন, তিনি এমন একটি বিজ্ঞাপন বানিয়েছেন যা কেউ পড়ে না।
 
-[[figure]]
-
 ## আয়ের জায়গাটা কোথায় — আর কেন সেটাই মূল কথা নয়
 
 আপনার হোটেল থাকতে হবে না, এয়ারলাইন টিকিট বেচতে হবে না, বা ট্রাভেল এজেন্ট হতে হবে না। দরকার একজন পাঠক, যিনি কিছু একটা বুক করার সিদ্ধান্ত নিয়েছেন — এবং সেই সিদ্ধান্তটি যে সুপারিশ থেকে এসেছে তা ফিরিয়ে হিসাব করার একটি উপায়।
@@ -354,6 +352,8 @@ You already did the travelling. Start by writing down one thing you know that no
 ফিরে আসা। কী ফেরানো যাবে, কতটা শুল্কমুক্ত। যাত্রার শেষ ধাপ, আর ফেরার ফ্লাইটে মানুষ সবার আগে এটাই জিজ্ঞেস করে।
 
 এটাই ইকোসিস্টেম। প্রতিটি ধাপের সঙ্গে একটি পার্টনার-ধরন জড়িত, আর পুরো যাত্রার মালিক কোনো একক কোম্পানি নেই। এ কারণেই একটি ধাপ নিয়ে একটি ভালো পোস্ট থাকা ক্রিয়েটর নিজের নিয়ন্ত্রণের বাইরের একটি ব্যবস্থার ভেতরেও আয় করতে পারেন — আর এ কারণেই একটি লিংক দিয়ে পুরো একটি ছুটি ঢেকে যাবে এমন আশা করা উচিত নয়।
+
+[[figure]]
 
 ## এই ইকোসিস্টেমে এখনো যা নেই
 
