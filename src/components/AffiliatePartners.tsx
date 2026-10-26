@@ -57,6 +57,7 @@ export const TRAVELPAYOUTS_REFERRAL_URL = "https://www.travelpayouts.com/?marker
 export const TRAVELPAYOUTS_REFERRAL_SUB_IDS: Record<string, string> = {
   "travel-creator-resources": "creator_hub",
   "can-you-make-money-travel-affiliate-marketing-ural-experiment": "post_ural_experiment",
+  "turn-travel-experience-into-income-without-a-website": "post_social_income",
   "halal-food-guide-bangkok-bangladesh": "post_bangkok_food",
   "chefchaouen-morocco-travel-guide-bangladesh": "post_chefchaouen", // reserved
   "havana-cuba-travel-guide-bangladesh": "post_havana", // reserved
@@ -1094,6 +1095,28 @@ export const TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS: Record<string, Travelpayout
       "Transparency: this is my referral link. If you join through it and start earning, Travelpayouts pays me a milestone bonus at no extra cost to you.",
     disclosureBn:
       "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে আপনি যদি আয় করা শুরু করেন, তাহলে Travelpayouts আমাকে একটি মাইলফলক বোনাস দেয়় - আপনার কোনো অতিরিক্ত খরচ ছাড়াই।",
+  },
+  "turn-travel-experience-into-income-without-a-website": {
+    badgeEn: "✈️ FOR TRAVELLERS WHO ALREADY SHARE",
+    badgeBn: "✈️ যাঁরা ইতিমধ্যেই ভ্রমণের কথা শেয়ার করেন",
+    headlineEn: "Want to turn your travel experiences into a small travel income stream?",
+    headlineBn: "আপনার ভ্রমণের অভিজ্ঞতাকে কি ছোট একটি আয়ের পথে বদলাতে চান?",
+    bodyBeforeAnchorEn:
+      "If you are already sharing travel photos, videos, stories or recommendations, you can judge for yourself whether Travelpayouts' affiliate tools fit what you publish. You can ",
+    anchorTextEn: "join Travelpayouts through my referral link here",
+    bodyAfterAnchorEn:
+      ", after reading the programme terms. Remember that rewards depend on the programme and on the booking actually confirming - nothing here is guaranteed.",
+    bodyBeforeAnchorBn:
+      "আপনি যদি ইতিমধ্যেই ভ্রমণের ছবি, ভিডিও, গল্প বা সুপারিশ শেয়ার করেন, তাহলে নিজেই বিচার করতে পারেন Travelpayouts-এর অ্যাফিলিয়েট টুলগুলো আপনার প্রকাশের সঙ্গে মানায় কি না। আপনি ",
+    anchorTextBn: "এখান থেকে আমার রেফারেল লিংকে Travelpayouts-এ যোগ দিতে পারেন",
+    bodyAfterAnchorBn:
+      ", তবে আগে প্রোগ্রামের শর্তাবলি পড়ে নিন। মনে রাখুন - পুরস্কার নির্ভর করে প্রোগ্রাম এবং বুকিং সত্যিই নিশ্চিত হওয়ার ওপর; এখানে কিছুই নিশ্চিত নয়।",
+    buttonLabelEn: "Explore Travelpayouts",
+    buttonLabelBn: "Travelpayouts দেখুন",
+    disclosureEn:
+      "Transparency: this is my referral link. If you join through it and later meet the programme's conditions, Travelpayouts may pay me a referral reward at no extra cost to you. It does not reduce your own earnings.",
+    disclosureBn:
+      "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে পরে প্রোগ্রামের শর্ত পূরণ করলে Travelpayouts আমাকে একটি রেফারেল পুরস্কার দিতে পারে - আপনার কোনো অতিরিক্ত খরচ ছাড়াই। এতে আপনার নিজের আয় কমে না।",
   },
   "travel-creator-resources": {
     badgeEn: "✈️ FOR TRAVEL CREATORS & BLOGGERS",

@@ -210,6 +210,23 @@ function renderInlineEmphasis(escapedText: string): string {
 }
 
 /**
+ * Markdown section headings inside a blog body. The React view turns a lone
+ * `## …` / `### …` block into a real <h2>/<h3> (BlogPostRouteView.tsx); the
+ * prerendered HTML has to emit the same tags, otherwise a no-JS crawler reads
+ * the literal "## " prefix and the article has no outline at all.
+ */
+function renderMarkdownHeadingHtml(paragraph: string): string {
+  if (paragraph.includes("\n")) return "";
+  if (/^##\s+/.test(paragraph) && paragraph.length < 200) {
+    return `<h2>${renderInlineEmphasis(escapeHtml(paragraph.replace(/^##\s+/, "")))}</h2>`;
+  }
+  if (/^###\s+/.test(paragraph) && paragraph.length < 180) {
+    return `<h3>${renderInlineEmphasis(escapeHtml(paragraph.replace(/^###\s+/, "")))}</h3>`;
+  }
+  return "";
+}
+
+/**
  * Plain-text rendering for surfaces that are mirrored into JSON-LD (FAQ answers,
  * HowTo steps). The schema is plain text, so the marked-up copy must match it
  * exactly — emphasis is dropped on both sides rather than added to one.
@@ -2615,6 +2632,8 @@ function buildAllRoutes(): PrerenderRoute[] {
               }
               const faqSection = getVisibleBlogFaqSection(post.slug, trimmedPara, "en");
               if (faqSection) return renderVisibleFaqHtml(faqSection);
+              const headingHtml = renderMarkdownHeadingHtml(trimmedPara);
+              if (headingHtml) return headingHtml;
               if (trimmedPara === "[[figure]]") {
                 const fig = post.inlineFigure;
                 if (!fig) return "";
@@ -2804,6 +2823,8 @@ function bnParagraphs(
       }
       const faqSection = getVisibleBlogFaqSection(slug || "", rawParagraph, "bn");
       if (faqSection) return renderVisibleFaqHtml(faqSection);
+      const headingHtml = renderMarkdownHeadingHtml(rawParagraph.trim());
+      if (headingHtml) return headingHtml;
       const paragraph = rawParagraph.replace(/\n/g, " ").trim();
       if (!paragraph) return "";
       return paragraph === "[[figure]]"

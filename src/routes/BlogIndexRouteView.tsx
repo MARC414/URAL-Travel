@@ -203,6 +203,14 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                     {
 
+                      id: "Travel Creator Economy",
+
+                      label: isBn ? "ট্রাভেল ক্রিয়েটর ইকোনমি" : "Travel Creator Economy",
+
+                    },
+
+                    {
+
                       id: "Flights, Hotels & Food",
 
                       label: isBn
@@ -334,6 +342,10 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
                     : blogCategoryFilter === "Flights, Hotels & Food"
 
                     ? ["Cheap Flight Tips", "Hotel Savings", "Food & Culture"].includes(post.category)
+
+                    : blogCategoryFilter === "Travel Creator Economy"
+
+                    ? ["Travel Creator Economy", "ট্রাভেল ক্রিয়েটর ইকোনমি"].includes(post.category)
 
                     : blogCategoryFilter === "Travel Tips"
 

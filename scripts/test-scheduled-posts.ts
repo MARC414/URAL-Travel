@@ -35,7 +35,7 @@ assert.equal(getPostsDueForPublishing(dueFixtures, nowAtPublish).length, 1);
 assert.equal(getPostsDueForPublishing(dueFixtures, nowAtPublish, true).length, 2);
 
 const repoPosts = loadScheduledBlogPosts();
-assert.equal(repoPosts.length, 3, "the two Cox’s Bazar articles and the new affiliate experiment should be retained in content/blog");
+assert.equal(repoPosts.length, 4, "the two Cox’s Bazar articles, the affiliate experiment and the social-income article should be retained in content/blog");
 const affiliateExperimentPost = repoPosts.find(
   (post) => post.slug === "can-you-make-money-travel-affiliate-marketing-ural-experiment",
 );
@@ -50,6 +50,53 @@ assert.ok((affiliateExperimentPost.bengaliBody.match(/^## /gm) ?? []).length >= 
 assert.ok(affiliateExperimentPost.englishBody.includes("## What Is Travel Affiliate Marketing?"));
 assert.ok(affiliateExperimentPost.bengaliBody.includes("## ট্রাভেল অ্যাফিলিয়েট মার্কেটিং কী?"));
 assert.ok(affiliateExperimentPost.englishBody.includes("https://www.travelpayouts.com/?marker=675992&sub_id=post_ural_experiment"));
+
+const socialIncomePost = repoPosts.find(
+  (post) => post.slug === "turn-travel-experience-into-income-without-a-website",
+);
+assert.ok(socialIncomePost, "the social-first travel income article should be retained in content/blog");
+assert.equal(socialIncomePost.status, "scheduled");
+assert.equal(socialIncomePost.category, "Travel Creator Economy");
+assert.equal(socialIncomePost.categoryBn, "ট্রাভেল ক্রিয়েটর ইকোনমি");
+assert.ok((socialIncomePost.englishBody.match(/^## /gm) ?? []).length >= 12);
+assert.ok((socialIncomePost.bengaliBody.match(/^## /gm) ?? []).length >= 12);
+assert.ok(socialIncomePost.englishBody.includes("## Where that ecosystem is still incomplete"));
+assert.ok(socialIncomePost.bengaliBody.includes("## এই ইকোসিস্টেমে এখনো যা নেই"));
+assert.ok(socialIncomePost.references.length >= 4);
+assert.ok(
+  socialIncomePost.references.some((ref) =>
+    ref.url.includes("205233008-For-social-media-creators"),
+  ),
+  "the no-website claim must cite Travelpayouts' own social-creator documentation",
+);
+assert.ok(socialIncomePost.internalLinksEn.length >= 8);
+assert.ok(socialIncomePost.internalLinksBn.length >= 8);
+assert.ok(
+  socialIncomePost.inlineFigure,
+  "the social-income post should keep its in-article UGC figure",
+);
+assert.ok(
+  socialIncomePost.inlineFigure?.imageSrc ===
+    "/assets/images/traveller_phone_street_ugc_1792483200000-1200.webp",
+  "the figure must point at the canonical -1200.webp asset, not a one-off URL",
+);
+assert.equal(
+  (socialIncomePost.englishBody.match(/\[\[figure\]\]/g) ?? []).length,
+  1,
+  "the English body must carry exactly one [[figure]] placeholder",
+);
+assert.equal(
+  (socialIncomePost.bengaliBody.match(/\[\[figure\]\]/g) ?? []).length,
+  1,
+  "the Bengali body must carry exactly one [[figure]] placeholder",
+);
+assert.ok(
+  socialIncomePost.inlineFigure?.altBn &&
+    socialIncomePost.inlineFigure?.captionBn &&
+    socialIncomePost.inlineFigure?.altEn &&
+    socialIncomePost.inlineFigure?.captionEn,
+  "the figure needs alt text and a caption in both locales",
+);
 
 const coxsBazarPost = repoPosts.find(
   (post) => post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking",

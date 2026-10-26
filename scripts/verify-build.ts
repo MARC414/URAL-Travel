@@ -2556,7 +2556,11 @@ if (rss) {
     // drop the markers. Remove that tag exactly like the marker it replaced, so
     // this stays a truncation check rather than an emphasis-formatting check.
     const page = normalise(stripInlineEmphasisTags(html));
-    const stripEmphasis = (value: string) => value.replace(/\*\*/g, "");
+    // Section headings are emitted as real <h2>/<h3> tags, so the `## ` / `### `
+    // marker in the source is dropped exactly like `**` is. Anything else would
+    // turn this truncation guard into a markdown-formatting check.
+    const stripEmphasis = (value: string) =>
+      value.replace(/\*\*/g, "").replace(/^#{2,3}\s+/, "");
     const paragraphs = body
       .split("\n\n")
       .map((para) => para.trim())
