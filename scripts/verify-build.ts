@@ -46,6 +46,7 @@ import {
 import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
 import { SCHEDULED_BLOG_ALT_TEXT } from "../src/data/scheduledBlogIndex.generated";
 import { BLOG_BODY } from "../src/data/blogContent";
+import { blogCategoryFilterIds } from "../src/utils/blogCategories";
 import { dhakaCalendarDate, loadScheduledBlogPosts } from "./scheduledPosts";
 import {
   BENGALI_BLOG_OVERRIDES,
@@ -6294,6 +6295,81 @@ check(
     "privacy policy links no retired form-relay endpoint in either locale"
   );
 }
+
+// --- Blog listing: category filters and card links --------------------------
+// Two regressions this guards, both found on the live /blog listing:
+//   1. a post was published under a category no filter tab rendered, so it was
+//      reachable only through "All Guides";
+//   2. the whole card was a click handler, so nothing in it could be opened in a
+//      new tab (and it was invisible to keyboard/modified-click expectations).
+// The taxonomy lives in src/utils/blogCategories.ts, shared with the listing.
+const creatorClusterSlugs = [
+  "can-you-make-money-travel-affiliate-marketing-ural-experiment",
+  "travel-creator-resources",
+  "turn-travel-experience-into-income-without-a-website",
+];
+const categoryCoverage = (posts: { slug: string; category: string }[]) =>
+  posts
+    .filter((post) => blogCategoryFilterIds(post.category).length === 0)
+    .map((post) => `${post.slug}=${post.category}`);
+const enCategoryGaps = categoryCoverage(BLOG_DATA);
+const bnCategoryGaps = categoryCoverage(getLocalizedBlogs("bn"));
+check(
+  enCategoryGaps.length === 0,
+  `blog listing: every English post category is reachable from a named filter tab [${enCategoryGaps.slice(0, 3).join("; ")}]`
+);
+check(
+  bnCategoryGaps.length === 0,
+  `blog listing: every Bengali post category is reachable from a named filter tab [${bnCategoryGaps.slice(0, 3).join("; ")}]`
+);
+check(
+  blogCategoryFilterIds("Not A Real Category").length === 0,
+  "blog listing: the coverage check flags an unknown category (negative control)"
+);
+
+const creatorClusterIssues = creatorClusterSlugs.flatMap((slug) => {
+  const en = BLOG_DATA.find((post) => post.slug === slug);
+  const bn = getLocalizedBlogs("bn").find((post) => post.slug === slug);
+  const issues: string[] = [];
+  if (!en) return [`${slug}: missing in English`];
+  if (!en.category) issues.push(`${slug}: no English category`);
+  if (!blogCategoryFilterIds(en.category).includes("Travel Creator Economy"))
+    issues.push(`${slug}: EN "${en.category}" not under Travel Creator Economy`);
+  if (!bn) return [...issues, `${slug}: missing in Bengali`];
+  // Bengali overrides must not silently fall back to an English category label.
+  if (!/^[\u0980-\u09FF]/.test(bn.category))
+    issues.push(`${slug}: BN category "${bn.category}" is not localised`);
+  if (!blogCategoryFilterIds(bn.category).includes("Travel Creator Economy"))
+    issues.push(`${slug}: BN "${bn.category}" not under Travel Creator Economy`);
+  return issues;
+});
+check(
+  creatorClusterIssues.length === 0,
+  `blog listing: the creator posts sit together under Travel Creator Economy in both locales [${creatorClusterIssues.slice(0, 3).join("; ")}]`
+);
+
+const blogCardHrefIsNative =
+  /href=\{getLocalizedRouteHref\(`\/blog\/\$\{post\.slug\}`\)\}/.test(blogIndexSource) &&
+  /href=\{getLocalizedRouteHref\(`\/blog\/\$\{post\.slug\}`\)\}[\s\S]{0,300}?target="_blank"/.test(
+    blogIndexSource
+  ) &&
+  /target="_blank"[\s\S]{0,200}?rel="noopener noreferrer"/.test(blogIndexSource);
+check(
+  blogCardHrefIsNative,
+  "blog listing: each card is one native anchor to its article with target=_blank and rel=noopener noreferrer"
+);
+check(
+  !/onClick=\{\(e\) => \{\s*e\.stopPropagation\(\);\s*navigateTo\(`\/blog\/\$\{post\.slug\}`\)/.test(
+    blogIndexSource
+  ) &&
+    /pb-6 pt-2[\s\S]{0,200}?<span className="w-full bg-brand-navy/.test(blogIndexSource),
+  "blog listing: no nested navigation handlers or buttons inside the card link"
+);
+check(
+  blogIndexSource.includes("Opens in a new tab") &&
+    blogIndexSource.includes("নতুন ট্যাবে খুলবে"),
+  "blog listing: the new-tab behaviour is announced in English and Bengali"
+);
 
 // --- Report ----------------------------------------------------------------
 // Keep this block LAST. The checks above only count if it runs after them; when
