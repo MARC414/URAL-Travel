@@ -3926,7 +3926,7 @@ export const BLOG_DATA: BlogPost[] = [
     title: "Travel Creator Resources: The Tools We Actually Use (2026)",
     summary:
       "A no-hype 2026 resource list for travel creators: the free SEO tools, phone-photography workflow, trusted research sources, and one monetization hub we actually use at URAL Travel, chosen for creators building from Bangladesh. Includes honest answers on how travel blogs really earn, where affiliate tools belong in an article, and what a creator in Dhaka should verify before joining any platform.",
-    category: "Travel Tips",
+    category: "Travel Creator Economy",
     date: "October 8, 2026",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "10 min read",
