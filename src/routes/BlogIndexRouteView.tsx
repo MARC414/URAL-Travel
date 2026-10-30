@@ -8,6 +8,7 @@ import { TravelIntelligence } from "../components/AeoInspector";
 
 import { generateBlogCoverAltText } from "../utils/imageAssets";
 import { sortBlogsNewestFirst } from "../utils/blogOrdering";
+import { BLOG_CATEGORY_TABS, matchesBlogCategoryFilter } from "../utils/blogCategories";
 
 
 
@@ -151,120 +152,25 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                 >
 
-                  {[
-
-                    {
-
-                      id: "all",
-
-                      label: isBn ? "সব গাইড" : "All Guides",
-
-                    },
-
-                    {
-
-                      id: "Hajj & Umrah",
-
-                      label: isBn ? "হজ্জ ও ওমরাহ" : "Hajj & Umrah",
-
-                    },
-
-                    {
-
-                      id: "Ziyarah & Stopovers",
-
-                      label: isBn ? "জিয়ারত ও স্টপওভার" : "Ziyarah & Stopovers",
-
-                    },
-
-                    {
-
-                      id: "Visa & Immigration",
-
-                      label: isBn ? "ভিসা ও ইমিগ্রেশন" : "Visa & Immigration",
-
-                    },
-
-                    {
-
-                      id: "Banking & Payments",
-
-                      label: isBn ? "ডুয়াল-কারেন্সি কার্ড ও BDT" : "Card Endorsement & BDT",
-
-                    },
-
-                    {
-
-                      id: "Family & Budget",
-
-                      label: isBn ? "ফ্যামিলি ও বাজেট ট্রিপ" : "Family & Budget Trips",
-
-                    },
-
-                    {
-
-                      id: "Flights, Hotels & Food",
-
-                      label: isBn
-
-                        ? "ফ্লাইট, হোটেল ও হালাল খাবার"
-
-                        : "Flights, Hotels & Halal Food",
-
-                    },
-
-                    {
-
-                      id: "Travel Tips",
-
-                      label: isBn ? "ট্রাভেল টিপস" : "Travel Tips",
-
-                    },
-
-                    {
-
-                      id: "Affiliate marketing",
-
-                      label: isBn ? "অ্যাফিলিয়েট মার্কেটিং" : "Affiliate Marketing",
-
-                    },
-
-                  ].map((tab) => {
-
+                  {BLOG_CATEGORY_TABS.map((tab) => {
                     const isActive = blogCategoryFilter === tab.id;
-
+                    const label = isBn ? tab.labelBn : tab.labelEn;
                     return (
-
                       <button
-
                         key={tab.id}
-
                         type="button"
-
                         role="tab"
-
                         aria-selected={isActive}
-
                         onClick={() => setBlogCategoryFilter(tab.id)}
-
                         className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
-
                           isActive
-
                             ? "bg-brand-navy text-white shadow-xs"
-
                             : "text-slate-700 hover:text-slate-900 hover:bg-white/60"
-
                         }`}
-
                       >
-
-                        {tab.label}
-
+                        {label}
                       </button>
-
                     );
-
                   })}
 
                 </div>
@@ -329,32 +235,11 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
               const orderedBlogs = sortBlogsNewestFirst(localizedBlogs, BLOG_DATA);
 
-              // Filter by the canonical category, not its translated display label.
-              const canonicalCategories = new Map<string, string>(
-                BLOG_DATA.map((post: { slug: string; category: string }) => [post.slug, post.category]),
-              );
-
 
 
               const filteredBlogs = orderedBlogs.filter((post) => {
 
-                const category = canonicalCategories.get(post.slug) ?? post.category;
-
-                const matchesCategory =
-
-                  blogCategoryFilter === "all"
-
-                    ? true
-
-                    : blogCategoryFilter === "Flights, Hotels & Food"
-
-                    ? ["Cheap Flight Tips", "Hotel Savings", "Food & Culture"].includes(category)
-
-                    : blogCategoryFilter === "Travel Tips"
-
-                    ? ["Travel Tips", "Travel Deals & Intelligence", "ট্রাভেল ডিল ও ইন্টেলিজেন্স"].includes(category)
-
-                    : category === blogCategoryFilter;
+                const matchesCategory = matchesBlogCategoryFilter(post.category, blogCategoryFilter);
 
 
 
@@ -481,148 +366,82 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
 
                     return (
-
                       <article
-
                         key={post.id}
-
-                        className="group bg-white border border-slate-200/90 hover:border-[#F6B73C] focus-within:border-brand-emerald rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
-
+                        className="group bg-white border border-slate-200/90 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
                       >
-
+                        {/* Native link: the whole card (thumbnail, title and footer) opens the
+                            article in a new tab, so the listing's filter and page state stay put. */}
                         <a
                           href={getLocalizedRouteHref(`/blog/${post.slug}`)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          aria-labelledby={`blog-card-title-${post.id}`}
-                          title={isBn ? "নতুন ট্যাবে খুলবে" : "Opens in a new tab"}
-                          className="flex flex-1 flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-emerald active:opacity-90"
+                          className="flex flex-1 flex-col justify-between rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-emerald focus-visible:ring-offset-2"
                         >
-
-                        <div className="flex flex-col">
-
-                          {/* Unique Card Thumbnail Image */}
-
-                          <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
-
-                            <ResponsiveImage
-
-                              src={coverImg}
-
-                              sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-
-                              alt={generateBlogCoverAltText({
-
-                                title: post.title,
-
-                                category: post.category,
-
-                                slug: post.slug,
-
-                                lang: isBn ? "bn" : "en",
-
-                              })}
-
-                              loading="lazy"
-
-                              fetchPriority="low"
-
-                              decoding="async"
-
-                              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
-
-                            />
-
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent" />
-
-                            <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[11px] text-white/95 font-medium">
-
-                              <span className="bg-brand-navy/85 backdrop-blur-xs px-2.5 py-0.5 rounded-md border border-white/15">
-
-                                {post.category}
-
-                              </span>
-
-                              <span className="font-mono">{post.readTime}</span>
-
+                          <div className="flex flex-col">
+                            {/* Unique Card Thumbnail Image */}
+                            <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
+                              <ResponsiveImage
+                                src={coverImg}
+                                sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                                alt={generateBlogCoverAltText({
+                                  title: post.title,
+                                  category: post.category,
+                                  slug: post.slug,
+                                  lang: isBn ? "bn" : "en",
+                                })}
+                                loading="lazy"
+                                fetchPriority="low"
+                                decoding="async"
+                                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent" />
+                              <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[11px] text-white/95 font-medium">
+                                <span className="bg-brand-navy/85 backdrop-blur-xs px-2.5 py-0.5 rounded-md border border-white/15">
+                                  {post.category}
+                                </span>
+                                <span className="font-mono">{post.readTime}</span>
+                              </div>
                             </div>
 
+                            {/* Card Body: Metadata + Dark H2 Title (20px-22px) + ~50-Word AEO Main Snippet (14px) */}
+                            <div className="p-6 space-y-3">
+                              <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500">
+                                <span>{post.date}</span>
+                                <span aria-hidden="true">·</span>
+                                <span>
+                                  {isBn
+                                    ? `লেখক: ${post.author.split(" (")[0]}`
+                                    : `By ${post.author.split(" (")[0]}`}
+                                </span>
+                              </div>
+
+                              <h2 className="ural-card-title font-serif text-[20px] sm:text-[22px] font-bold text-brand-navy group-hover:text-brand-emerald leading-[1.3] text-balance">
+                                {post.title}
+                              </h2>
+
+                              <p className="text-[14px] text-slate-700 leading-[1.65]">
+                                {aeoSnippet50Words}
+                              </p>
+                            </div>
                           </div>
 
-
-
-                          {/* Card Body: Metadata + Dark H2 Title (20px-22px) + ~50-Word AEO Main Snippet (14px) */}
-
-                          <div className="p-6 space-y-3">
-
-                            <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500">
-
-                              <span>{post.date}</span>
-
-                              <span aria-hidden="true">·</span>
-
+                          {/* Card Footer: 'Read Full Blog' affordance + new-tab notice */}
+                          <div className="px-6 pb-6 pt-2">
+                            <span className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-between">
                               <span>
-
-                                {isBn
-
-                                  ? `লেখক: ${post.author.split(" (")[0]}`
-
-                                  : `By ${post.author.split(" (")[0]}`}
-
+                                {isBn ? "সম্পূর্ণ ব্লগ পড়ুন · Read Full Blog" : "Read Full Blog"}
                               </span>
-
-                            </div>
-
-
-
-                            <h2 id={`blog-card-title-${post.id}`} className="ural-card-title font-serif text-[20px] sm:text-[22px] font-bold text-brand-navy group-hover:text-brand-emerald leading-[1.3] text-balance">
-
-                              {post.title}
-
-                              <span className="sr-only">
-                                {isBn ? " (নতুন ট্যাবে খুলবে)" : " (opens in a new tab)"}
-                              </span>
-
-                            </h2>
-
-
-
-                            <p className="text-[14px] text-slate-700 leading-[1.65]">
-
-                              {aeoSnippet50Words}
-
-                            </p>
-
+                              <ArrowRight size={14} className="text-[#F6B73C] group-hover:text-brand-navy transition-transform group-hover:translate-x-0.5" />
+                            </span>
+                            <span className="mt-2 flex items-center gap-1 text-[11px] font-medium text-slate-500">
+                              <ExternalLink size={11} aria-hidden="true" />
+                              {isBn ? "নতুন ট্যাবে খুলবে" : "Opens in a new tab"}
+                            </span>
                           </div>
-
-                        </div>
-
-
-
-                        {/* Card Footer: visual CTA within the single, full-card link */}
-
-                        <div className="px-6 pb-6 pt-2">
-
-                          <span
-
-                            className="w-full bg-brand-navy group-hover:bg-[#F6B73C] group-focus-within:bg-brand-gold text-white group-hover:text-brand-navy group-focus-within:text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-between"
-
-                          >
-
-                            <span>{isBn ? "সম্পূর্ণ ব্লগ পড়ুন · Read Full Blog" : "Read Full Blog"}</span>
-
-                            <ExternalLink size={14} aria-hidden="true" className="text-brand-gold group-hover:text-brand-navy group-focus-within:text-brand-navy shrink-0" />
-
-                          </span>
-
-                        </div>
-
                         </a>
-
                       </article>
-
                     );
-
                   })}
 
                   </div>

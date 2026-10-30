@@ -83,9 +83,6 @@ import {
 import {
   RADICAL_STORAGE_BLOG_PLACEMENTS,
   MULTI_PARTNER_BLOG_PLACEMENTS,
-  KLOOK_HOTEL_BLOG_PLACEMENTS,
-  KLOOK_HOTEL_COMMISSION_NOTE,
-  KLOOK_HOTEL_CHECK_STEPS,
   TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
   AFFILIATE_OFFER_REGISTRY,
   buildTravelpayoutsReferralUrl,
@@ -93,6 +90,11 @@ import {
   sanitizeExpiredPromoText,
   AFFILIATE_LINKS,
 } from "../src/components/AffiliatePartners";
+import {
+  KLOOK_HOTEL_BLOG_PLACEMENTS,
+  KLOOK_HOTEL_COMMISSION_NOTE,
+  KLOOK_HOTEL_CHECK_STEPS,
+} from "../src/components/KlookHotelOffers";
 import {
   HAJJ_UMRAH_FAQS,
   generateFAQSchema,
@@ -211,6 +213,23 @@ function injectScheduledBlogDirectory(html: string): string {
  */
 function renderInlineEmphasis(escapedText: string): string {
   return escapedText.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+}
+
+/**
+ * Markdown section headings inside a blog body. The React view turns a lone
+ * `## …` / `### …` block into a real <h2>/<h3> (BlogPostRouteView.tsx); the
+ * prerendered HTML has to emit the same tags, otherwise a no-JS crawler reads
+ * the literal "## " prefix and the article has no outline at all.
+ */
+function renderMarkdownHeadingHtml(paragraph: string): string {
+  if (paragraph.includes("\n")) return "";
+  if (/^##\s+/.test(paragraph) && paragraph.length < 200) {
+    return `<h2>${renderInlineEmphasis(escapeHtml(paragraph.replace(/^##\s+/, "")))}</h2>`;
+  }
+  if (/^###\s+/.test(paragraph) && paragraph.length < 180) {
+    return `<h3>${renderInlineEmphasis(escapeHtml(paragraph.replace(/^###\s+/, "")))}</h3>`;
+  }
+  return "";
 }
 
 /**
@@ -2479,7 +2498,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         <ul>
           ${sortBlogsNewestFirst(BLOG_DATA).map(
             (p) =>
-              `<li><a href="/blog/${p.slug}" target="_blank" rel="noopener noreferrer" title="Opens in a new tab">${escapeHtml(p.title)}</a> — ${escapeHtml(p.summary)}</li>`
+              `<li><a href="/blog/${p.slug}">${escapeHtml(p.title)}</a> — ${escapeHtml(p.summary)}</li>`
           ).join("\n")}
         </ul>
       </article>
@@ -2631,6 +2650,8 @@ function buildAllRoutes(): PrerenderRoute[] {
               }
               const faqSection = getVisibleBlogFaqSection(post.slug, trimmedPara, "en");
               if (faqSection) return renderVisibleFaqHtml(faqSection);
+              const headingHtml = renderMarkdownHeadingHtml(trimmedPara);
+              if (headingHtml) return headingHtml;
               if (trimmedPara === "[[figure]]") {
                 const fig = post.inlineFigure;
                 if (!fig) return "";
@@ -2759,12 +2780,8 @@ function bnFactList(rows: { label: string; value?: string }[]): string {
 /** Bengali link list. Paths without a Bengali counterpart are dropped (no 404s). */
 function bnLinkList(
   heading: string,
-  links: { label: string; path: string }[],
-  openInNewTab = false,
+  links: { label: string; path: string }[]
 ): string {
-  const linkAttributes = openInNewTab
-    ? ' target="_blank" rel="noopener noreferrer" title="নতুন ট্যাবে খুলবে"'
-    : "";
   const items = links
     // Resolve aliases BEFORE the availability check and the /bn conversion.
     // The English renderer already does this (normalizeInternalHref in the blog
@@ -2777,7 +2794,7 @@ function bnLinkList(
     .filter((link) => link.label && hasBengaliCounterpart(link.path))
     .map(
       (link) =>
-        `<li><a href="${escapeHtml(toBengaliPath(link.path))}"${linkAttributes}>${escapeHtml(link.label)}</a></li>`
+        `<li><a href="${escapeHtml(toBengaliPath(link.path))}">${escapeHtml(link.label)}</a></li>`
     )
     .join("");
   return items ? bnSection(heading, `<ul>${items}</ul>`) : "";
@@ -2825,6 +2842,8 @@ function bnParagraphs(
       }
       const faqSection = getVisibleBlogFaqSection(slug || "", rawParagraph, "bn");
       if (faqSection) return renderVisibleFaqHtml(faqSection);
+      const headingHtml = renderMarkdownHeadingHtml(rawParagraph.trim());
+      if (headingHtml) return headingHtml;
       const paragraph = rawParagraph.replace(/\n/g, " ").trim();
       if (!paragraph) return "";
       return paragraph === "[[figure]]"
@@ -2836,12 +2855,12 @@ function bnParagraphs(
 }
 
 /** Directory section: links to the Bengali twins of the given English paths. */
-function bnDirectory(heading: string, englishPaths: string[], openInNewTab = false): string {
+function bnDirectory(heading: string, englishPaths: string[]): string {
   const links = englishPaths
     .map((path) => ({ path, copy: getBengaliRouteSeo(path) }))
     .filter((entry) => entry.copy)
     .map((entry) => ({ label: entry.copy!.h1, path: entry.path }));
-  return bnLinkList(heading, links, openInNewTab);
+  return bnLinkList(heading, links);
 }
 
 /** Cross-links to the same country's flight/hotel/visa/cost Bengali pages. */
@@ -2949,8 +2968,7 @@ function buildBengaliBody(
     const postPaths = sortBlogsNewestFirst(BLOG_DATA).map((post) => `/blog/${post.slug}`);
     const directory = bnDirectory(
       "সব বাংলা ট্রাভেল গাইড",
-      postPaths,
-      true,
+      postPaths
     );
     parts.push(
       `<p>এই সূচিতে বাংলাদেশি ভ্রমণকারীদের জন্য ভিসা ও ইমিগ্রেশন, ফ্লাইট, হোটেল, পরিবারের বাজেট, হজ-ওমরাহ, জিয়ারত এবং খাবার নিয়ে বাংলা গাইড আছে। যে বিষয়ে পরিকল্পনা করছেন, সেই গাইডটি খুলে ধাপ, খরচ ও প্রয়োজনীয় নথির বিস্তারিত দেখুন।</p>`

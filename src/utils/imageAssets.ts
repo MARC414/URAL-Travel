@@ -60,6 +60,7 @@ export const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "singapore_mrt_gardens_bay_1790520762227": 670,
   "sri_lanka_nine_arch_train_1790520800518": 670,
   "travel_esim_smartphone_insurance_1790520786938": 670,
+  "traveller_phone_street_ugc_1792483200000": 675,
   "umrah_makkah_haram_guide_1790430007679": 896,
   "ural_hero_bg_1781543111624": 670,
   "zamzam_ajwa_dates_1790484440926": 896,

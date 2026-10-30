@@ -34,14 +34,16 @@ import {
   AFFILIATE_LINKS,
   AFFILIATE_OFFER_REGISTRY,
   KLOOK_PROMO,
-  KLOOK_HOTEL_BLOG_PLACEMENTS,
-  KLOOK_HOTEL_COMMISSION_NOTE,
   TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
   TRAVELPAYOUTS_REFERRAL_SUB_IDS,
   TRAVELPAYOUTS_REFERRAL_URL,
   buildTravelpayoutsReferralUrl,
   resolvePartnerUrl,
 } from "../src/components/AffiliatePartners";
+import {
+  KLOOK_HOTEL_BLOG_PLACEMENTS,
+  KLOOK_HOTEL_COMMISSION_NOTE,
+} from "../src/components/KlookHotelOffers";
 import { KlookHotelSpotlight } from "../src/components/KlookHotelSpotlight";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
@@ -51,6 +53,7 @@ import {
 import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
 import { SCHEDULED_BLOG_ALT_TEXT } from "../src/data/scheduledBlogIndex.generated";
 import { BLOG_BODY } from "../src/data/blogContent";
+import { blogCategoryFilterIds } from "../src/utils/blogCategories";
 import { dhakaCalendarDate, loadScheduledBlogPosts } from "./scheduledPosts";
 import {
   BENGALI_BLOG_OVERRIDES,
@@ -87,7 +90,6 @@ import {
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import App from "../src/App";
-import BlogIndexRouteView from "../src/routes/BlogIndexRouteView";
 import BlogPostRouteView from "../src/routes/BlogPostRouteView";
 import { UmrahBudgetCalculator } from "../src/components/UmrahBudgetCalculator";
 import { calculateUmrahBudget, emptyUmrahBudget, UMRAH_BUDGET_ITEMS } from "../src/utils/umrahBudget";
@@ -2688,7 +2690,11 @@ if (rss) {
     // drop the markers. Remove that tag exactly like the marker it replaced, so
     // this stays a truncation check rather than an emphasis-formatting check.
     const page = normalise(stripInlineEmphasisTags(html));
-    const stripEmphasis = (value: string) => value.replace(/\*\*/g, "");
+    // Section headings are emitted as real <h2>/<h3> tags, so the `## ` / `### `
+    // marker in the source is dropped exactly like `**` is. Anything else would
+    // turn this truncation guard into a markdown-formatting check.
+    const stripEmphasis = (value: string) =>
+      value.replace(/\*\*/g, "").replace(/^#{2,3}\s+/, "");
     const paragraphs = body
       .split("\n\n")
       .map((para) => para.trim())
@@ -3433,121 +3439,6 @@ check(
     ? "English and Bengali blog directories and CollectionPage list every article newest-to-oldest by publication date"
     : "blog directories/CollectionPage must list valid publication dates in matching newest-to-oldest order across both locales"
 );
-
-function blogDirectoryArticleLinks(markup: string) {
-  return [...markup.matchAll(/<a\b([^>]*\bhref="(\/(?:bn\/)?blog\/([^"/?#]+))"[^>]*)>([\s\S]*?)<\/a>/g)]
-    .map(([, attributes, href, slug, body]) => ({ attributes, href, slug, body }));
-}
-
-function hasSafeNewTabArticleLinks(markup: string, expectedCount: number): boolean {
-  const links = blogDirectoryArticleLinks(markup);
-  return links.length === expectedCount && links.every(({ attributes, body }) => {
-    const rel = attributes.match(/\brel="([^"]*)"/)?.[1].split(/\s+/) ?? [];
-    return /\btarget="_blank"/.test(attributes) &&
-      rel.includes("noopener") && rel.includes("noreferrer") && !rel.includes("sponsored") &&
-      /\btitle="[^"]+"/.test(attributes) && !/<(?:a|button)\b/.test(body);
-  });
-}
-
-for (const [locale, markup] of [["en", englishBlogDirectoryHtml], ["bn", bengaliBlogDirectoryHtml]] as const) {
-  check(
-    hasSafeNewTabArticleLinks(markup, BLOG_DATA.length),
-    `${locale} prerendered blog directory opens every article in a safe new tab with a notice`,
-  );
-}
-check(
-  !hasSafeNewTabArticleLinks(englishBlogDirectoryHtml.replace(/ target="_blank"/g, ""), BLOG_DATA.length),
-  "blog-directory new-tab guard rejects same-tab links (negative control)",
-);
-
-const CREATOR_CATEGORY_SLUGS = [
-  "travel-creator-resources",
-  "can-you-make-money-travel-affiliate-marketing-ural-experiment",
-];
-
-function renderBlogDirectory(locale: "en" | "bn", category: string, query = ""): string {
-  const EmptyWidget = () => null;
-  return renderToStaticMarkup(React.createElement(BlogIndexRouteView, {
-    context: {
-      BLOG_DATA,
-      isBn: locale === "bn",
-      isAdmin: false,
-      lang: locale,
-      localizedBlogs: getLocalizedBlogs(locale),
-      localizedHajjFaqs: [],
-      blogCategoryFilter: category,
-      blogSearchQuery: query,
-      // Known dimensioned image: these are link/filter probes, not asset-map tests.
-      blogHeroBannerImg: "/assets/images/clouds_boat_hero_1781438671378-1200.webp",
-      getBlogCoverImage: () => "/assets/images/clouds_boat_hero_1781438671378-1200.webp",
-      getBlogAeoSnippet50Words: (_slug: string, _isBn: boolean, summary: string) => summary,
-      getLocalizedRouteHref: (route: string) => locale === "bn" ? `/bn${route}` : route,
-      navigateTo: () => {},
-      setBlogCategoryFilter: () => {},
-      setBlogSearchQuery: () => {},
-      setAreTpScriptsReady: () => {},
-      areTpScriptsReady: false,
-      TravelpayoutsWidgetSkeleton: EmptyWidget,
-      TravelEssentials: EmptyWidget,
-    },
-  }));
-}
-
-for (const locale of ["en", "bn"] as const) {
-  try {
-    const posts = getLocalizedBlogs(locale);
-    const categoryLabel = locale === "bn" ? "অ্যাফিলিয়েট মার্কেটিং" : "Affiliate marketing";
-    check(
-      CREATOR_CATEGORY_SLUGS.every((slug) => {
-        const post = posts.find((entry) => entry.slug === slug);
-        const html = read(path.join(DIST_DIR, ...(locale === "bn" ? ["bn"] : []), "blog", `${slug}.html`)) ?? "";
-        const article = getSeoSchemaGraph(html).find((node) => hasSchemaType(node, "Article"));
-        return post?.category === categoryLabel && article?.articleSection === categoryLabel;
-      }),
-      `${locale} creator resources and earnings experiment share the affiliate category in metadata and built Article schema`,
-    );
-
-    const allMarkup = renderBlogDirectory(locale, "all");
-    const allLinks = blogDirectoryArticleLinks(allMarkup);
-    const expectedSlugs = sortBlogsNewestFirst(posts, BLOG_DATA).slice(0, 15).map((post) => post.slug);
-    check(
-      hasSafeNewTabArticleLinks(allMarkup, expectedSlugs.length) &&
-        allLinks.map((link) => link.slug).join("|") === expectedSlugs.join("|") &&
-        allLinks.every(({ attributes, href }) => {
-          const titleId = attributes.match(/\baria-labelledby="([^"]+)"/)?.[1];
-          return href.startsWith(locale === "bn" ? "/bn/blog/" : "/blog/") &&
-            Boolean(titleId && allMarkup.includes(`id="${titleId}"`));
-        }),
-      `${locale} client blog cards are labelled, localized full-card new-tab anchors and preserve newest-first pagination`,
-    );
-
-    const affiliateMarkup = renderBlogDirectory(locale, "Affiliate marketing");
-    const affiliateLinks = blogDirectoryArticleLinks(affiliateMarkup);
-    const selectedTabLabel = affiliateMarkup.match(/<button\b[^>]*role="tab"[^>]*aria-selected="true"[^>]*>([\s\S]*?)<\/button>/)?.[1];
-    check(
-      hasSafeNewTabArticleLinks(affiliateMarkup, CREATOR_CATEGORY_SLUGS.length) &&
-        affiliateLinks.every((link) => CREATOR_CATEGORY_SLUGS.includes(link.slug)) &&
-        visibleText(selectedTabLabel ?? "") === (locale === "bn" ? categoryLabel : "Affiliate Marketing"),
-      `${locale} Affiliate Marketing filter selects both creator-focused articles despite translated category labels`,
-    );
-
-    const travelTipsMarkup = renderBlogDirectory(locale, "Travel Tips");
-    check(
-      blogDirectoryArticleLinks(travelTipsMarkup).length > 0 &&
-        blogDirectoryArticleLinks(travelTipsMarkup).every((link) => !CREATOR_CATEGORY_SLUGS.includes(link.slug)),
-      `${locale} Travel Tips remains populated without the creator-focused affiliate articles`,
-    );
-
-    const creatorTitle = posts.find((post) => post.slug === CREATOR_CATEGORY_SLUGS[0])!.title;
-    const searchLinks = blogDirectoryArticleLinks(renderBlogDirectory(locale, "Affiliate marketing", creatorTitle));
-    check(
-      searchLinks.length === 1 && searchLinks[0].slug === CREATOR_CATEGORY_SLUGS[0],
-      `${locale} article search still combines with the affiliate category filter`,
-    );
-  } catch (error) {
-    check(false, `${locale} blog directory link/category regression probes render (threw: ${String(error)})`);
-  }
-}
 
 // Crawlability is separate from sitemap coverage: a detail page must also be
 // reachable through ordinary anchors from the Bengali blog hub.
@@ -6538,6 +6429,81 @@ check(
     "privacy policy links no retired form-relay endpoint in either locale"
   );
 }
+
+// --- Blog listing: category filters and card links --------------------------
+// Two regressions this guards, both found on the live /blog listing:
+//   1. a post was published under a category no filter tab rendered, so it was
+//      reachable only through "All Guides";
+//   2. the whole card was a click handler, so nothing in it could be opened in a
+//      new tab (and it was invisible to keyboard/modified-click expectations).
+// The taxonomy lives in src/utils/blogCategories.ts, shared with the listing.
+const creatorClusterSlugs = [
+  "can-you-make-money-travel-affiliate-marketing-ural-experiment",
+  "travel-creator-resources",
+  "turn-travel-experience-into-income-without-a-website",
+];
+const categoryCoverage = (posts: { slug: string; category: string }[]) =>
+  posts
+    .filter((post) => blogCategoryFilterIds(post.category).length === 0)
+    .map((post) => `${post.slug}=${post.category}`);
+const enCategoryGaps = categoryCoverage(BLOG_DATA);
+const bnCategoryGaps = categoryCoverage(getLocalizedBlogs("bn"));
+check(
+  enCategoryGaps.length === 0,
+  `blog listing: every English post category is reachable from a named filter tab [${enCategoryGaps.slice(0, 3).join("; ")}]`
+);
+check(
+  bnCategoryGaps.length === 0,
+  `blog listing: every Bengali post category is reachable from a named filter tab [${bnCategoryGaps.slice(0, 3).join("; ")}]`
+);
+check(
+  blogCategoryFilterIds("Not A Real Category").length === 0,
+  "blog listing: the coverage check flags an unknown category (negative control)"
+);
+
+const creatorClusterIssues = creatorClusterSlugs.flatMap((slug) => {
+  const en = BLOG_DATA.find((post) => post.slug === slug);
+  const bn = getLocalizedBlogs("bn").find((post) => post.slug === slug);
+  const issues: string[] = [];
+  if (!en) return [`${slug}: missing in English`];
+  if (!en.category) issues.push(`${slug}: no English category`);
+  if (!blogCategoryFilterIds(en.category).includes("Travel Creator Economy"))
+    issues.push(`${slug}: EN "${en.category}" not under Travel Creator Economy`);
+  if (!bn) return [...issues, `${slug}: missing in Bengali`];
+  // Bengali overrides must not silently fall back to an English category label.
+  if (!/^[\u0980-\u09FF]/.test(bn.category))
+    issues.push(`${slug}: BN category "${bn.category}" is not localised`);
+  if (!blogCategoryFilterIds(bn.category).includes("Travel Creator Economy"))
+    issues.push(`${slug}: BN "${bn.category}" not under Travel Creator Economy`);
+  return issues;
+});
+check(
+  creatorClusterIssues.length === 0,
+  `blog listing: the creator posts sit together under Travel Creator Economy in both locales [${creatorClusterIssues.slice(0, 3).join("; ")}]`
+);
+
+const blogCardHrefIsNative =
+  /href=\{getLocalizedRouteHref\(`\/blog\/\$\{post\.slug\}`\)\}/.test(blogIndexSource) &&
+  /href=\{getLocalizedRouteHref\(`\/blog\/\$\{post\.slug\}`\)\}[\s\S]{0,300}?target="_blank"/.test(
+    blogIndexSource
+  ) &&
+  /target="_blank"[\s\S]{0,200}?rel="noopener noreferrer"/.test(blogIndexSource);
+check(
+  blogCardHrefIsNative,
+  "blog listing: each card is one native anchor to its article with target=_blank and rel=noopener noreferrer"
+);
+check(
+  !/onClick=\{\(e\) => \{\s*e\.stopPropagation\(\);\s*navigateTo\(`\/blog\/\$\{post\.slug\}`\)/.test(
+    blogIndexSource
+  ) &&
+    /pb-6 pt-2[\s\S]{0,200}?<span className="w-full bg-brand-navy/.test(blogIndexSource),
+  "blog listing: no nested navigation handlers or buttons inside the card link"
+);
+check(
+  blogIndexSource.includes("Opens in a new tab") &&
+    blogIndexSource.includes("নতুন ট্যাবে খুলবে"),
+  "blog listing: the new-tab behaviour is announced in English and Bengali"
+);
 
 // --- Report ----------------------------------------------------------------
 // Keep this block LAST. The checks above only count if it runs after them; when

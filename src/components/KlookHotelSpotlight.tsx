@@ -4,10 +4,12 @@ import { Building2, CreditCard, ExternalLink, ShieldCheck } from "lucide-react";
 import {
   AFFILIATE_LINKS,
   AFFILIATE_OFFER_REGISTRY,
-  KLOOK_HOTEL_CHECK_STEPS,
-  getKlookHotelCommissionNote,
   resolvePartnerUrl,
 } from "./AffiliatePartners";
+import {
+  KLOOK_HOTEL_CHECK_STEPS,
+  getKlookHotelCommissionNote,
+} from "./KlookHotelOffers";
 
 const CITY_BN: Record<string, string> = {
   Kathmandu: "কাঠমান্ডু",

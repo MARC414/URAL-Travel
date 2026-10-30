@@ -6,8 +6,8 @@ title: "Can You Really Make Money With Travel Affiliate Marketing? I'm Building 
 titleBn: "ট্রাভেল অ্যাফিলিয়েট মার্কেটিংয়ে কি সত্যিই আয় করা যায়? জানতে Ural Travel তৈরি করছি"
 summary: "An honest, in-progress account of building Ural Travel: what affiliate commissions really mean, what public income reports show, and why meaningful income is not guaranteed."
 summaryBn: "Ural Travel তৈরির বাস্তব অভিজ্ঞতা: অ্যাফিলিয়েট কমিশনের প্রকৃত অর্থ, প্রকাশিত আয়ের রিপোর্ট কী বলে এবং উল্লেখযোগ্য আয় কেন নিশ্চিত নয়।"
-category: Affiliate marketing
-categoryBn: অ্যাফিলিয়েট মার্কেটিং
+category: Travel Creator Economy
+categoryBn: ট্রাভেল ক্রিয়েটর ইকোনমি
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (প্রতিষ্ঠাতা ও ট্রাভেল সম্পাদক)
 readTime: 10 min read

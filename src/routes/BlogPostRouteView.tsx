@@ -24,7 +24,8 @@ import { getRelatedBlogPosts } from "../utils/blogLinks";
 
 import { getVisibleBlogFaqSection } from "../utils/blogStructuredData";
 
-import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, KlookHotelBlogCallout, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, QeeqCarRentalWidget } from "../components/AffiliatePartners";
+import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, QeeqCarRentalWidget } from "../components/AffiliatePartners";
+import { KlookHotelBlogCallout } from "../components/KlookHotelOffers";
 
 
 

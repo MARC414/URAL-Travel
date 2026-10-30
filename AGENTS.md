@@ -66,6 +66,11 @@ Both apply to every AI tool and contributor. Social tasks also use the current a
   affiliate CTA, Bengali parity, and build proof. `verify:build` can only assert the structural half.
 - **Bengali links have no fallback.** `getLocalizedBlogs("bn")` assigns `internalLinks` from the Bengali override
   only. Omitting the array ships a Bengali article with zero editorial links.
+- **Every post category needs a listing filter.** The `/blog` tabs and the category labels they group are defined once
+  in `src/utils/blogCategories.ts` (`BLOG_CATEGORY_TABS`, `BLOG_CATEGORY_GROUPINGS`). A new `category`/`categoryBn`
+  string that no tab groups is invisible except under "All Guides" — which is how the affiliate-marketing experiment
+  shipped unreachable. `verify:build` now fails when any published English *or* Bengali category has no filter, so add
+  the label to the right grouping (or a new tab, in both locales) in the same change that publishes the post.
 - **CI enforces the structure.** `npm run verify:build` fails on dead, duplicate, or self links, unknown affiliate
   providers, a Hajj & Umrah article with fewer than two blog links, and curated anchors missing from the rendered EN
   or BN page. It also prints a non-blocking `[content-debt]` report; green CI is not a pass on the debt.

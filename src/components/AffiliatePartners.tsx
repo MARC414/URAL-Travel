@@ -57,6 +57,7 @@ export const TRAVELPAYOUTS_REFERRAL_URL = "https://www.travelpayouts.com/?marker
 export const TRAVELPAYOUTS_REFERRAL_SUB_IDS: Record<string, string> = {
   "travel-creator-resources": "creator_hub",
   "can-you-make-money-travel-affiliate-marketing-ural-experiment": "post_ural_experiment",
+  "turn-travel-experience-into-income-without-a-website": "post_social_income",
   "halal-food-guide-bangkok-bangladesh": "post_bangkok_food",
   "chefchaouen-morocco-travel-guide-bangladesh": "post_chefchaouen", // reserved
   "havana-cuba-travel-guide-bangladesh": "post_havana", // reserved
@@ -310,67 +311,6 @@ export function isPromoActive(expiresAt?: string): boolean {
   if (Number.isNaN(endOfDayBst)) return true;
   return Date.now() <= endOfDayBst;
 }
-
-/**
- * Evergreen Klook hotel disclosure. This exact wording is what the prerendered
- * HTML carries, because a static file built during the promotion would otherwise
- * keep an expired rate claim in cached HTML after December 31, 2026.
- */
-export const KLOOK_HOTEL_COMMISSION_NOTE = {
-  en: "Commission note: URAL may earn a commission on qualifying Klook hotel bookings. That is our revenue, not a traveller discount — you pay the price Klook shows.",
-  bn: "কমিশন নোট: যোগ্য Klook হোটেল বুকিংয়ে URAL কমিশন পেতে পারে। এটি আমাদের আয়, ভ্রমণকারীর জন্য ছাড় নয়—আপনি Klook-এ যে দাম দেখবেন সেটাই দেবেন।",
-} as const;
-
-/**
- * Commission disclosure for the Klook hotel module. The time-limited 8% claim is
- * shown only while `KLOOK_PROMO.expiresAt` is still in the future (BST); after
- * that the evergreen sentence above takes over with no rebuild required.
- */
-export function getKlookHotelCommissionNote(lang: "en" | "bn" = "en"): string {
-  if (!isPromoActive(KLOOK_PROMO.expiresAt)) return KLOOK_HOTEL_COMMISSION_NOTE[lang];
-  return lang === "bn"
-    ? `কমিশন নোট: ${KLOOK_PROMO.validUntilBn} পর্যন্ত যোগ্য Klook হোটেল বুকিংয়ে URAL ${KLOOK_PROMO.hotelsRateBn} পাবলিশার কমিশন পায়। এটি আমাদের আয়, ভ্রমণকারীর জন্য ছাড় নয়—আপনি Klook-এ যে দাম দেখবেন সেটাই দেবেন।`
-    : `Commission note: URAL earns ${KLOOK_PROMO.hotelsRate} publisher commission on qualifying Klook hotel bookings through ${KLOOK_PROMO.validUntil}. That is our revenue, not a traveller discount — you pay the price Klook shows.`;
-}
-
-/**
- * The three comparison rules shown inside the Klook hotel module.
- *
- * They live here, once, because the hydrated component and the prerendered
- * static HTML both render them in both languages. Four hand-maintained copies
- * of the same bilingual list is how English and Bengali drift apart, and how a
- * static page keeps advice the component has already changed.
- */
-export const KLOOK_HOTEL_CHECK_STEPS = {
-  en: [
-    {
-      title: "Keep the area shortlist",
-      body: "Pick two or three areas from the neighborhood comparison above before comparing prices.",
-    },
-    {
-      title: "Match dates and guests",
-      body: "A two-person room rate is not a family-room rate. Use the same nights and occupancy on both sites.",
-    },
-    {
-      title: "Compare the checkout total",
-      body: "Taxes, service charge, breakfast and the cancellation deadline change the real price.",
-    },
-  ],
-  bn: [
-    {
-      title: "এলাকার শর্টলিস্ট ঠিক রাখুন",
-      body: "দাম তুলনার আগে ওপরের এলাকা তুলনা থেকে দুই-তিনটি এলাকা বেছে নিন।",
-    },
-    {
-      title: "তারিখ ও অতিথিসংখ্যা মিলান",
-      body: "দুই জনের রুমের দাম পরিবারের রুমের দাম নয়। দুই সাইটেই একই রাত ও একই অতিথিসংখ্যা দিন।",
-    },
-    {
-      title: "চূড়ান্ত মোট দাম মিলান",
-      body: "ট্যাক্স, সার্ভিস চার্জ, ব্রেকফাস্ট ও বাতিলের শেষ সময় আসল দাম বদলে দেয়।",
-    },
-  ],
-} as const;
 
 /**
  * Returns remaining calendar days until `expiresAt` (negative if already expired).
@@ -1109,100 +1049,6 @@ export function MultiPartnerBlogCallout({
 }
 
 /* -------------------------------------------------------------------------
-   Klook hotel-collection placement
-   -------------------------------------------------------------------------
-   The partner email promotes a curated Klook landing page of best-selling
-   hotels across Asia. That URL carries no affiliate parameters, so linking it
-   directly would lose attribution; this placement uses the registered tracked
-   Klook link instead and does NOT claim to open the curated page. The copy
-   treats Klook as a second quote, never as a discount for the traveller.
-   --------------------------------------------------------------------------- */
-
-export interface KlookHotelBlogPlacement {
-  badgeEn: string;
-  badgeBn: string;
-  headlineEn: string;
-  headlineBn: string;
-  bodyEn: string;
-  bodyBn: string;
-  buttonEn: string;
-  buttonBn: string;
-}
-
-export const KLOOK_HOTEL_BLOG_PLACEMENTS: Record<string, KlookHotelBlogPlacement> = {
-  "hotel-savings-guide-bangkok-kl-dubai": {
-    badgeEn: "🏨 HOTEL PRICE CHECK · KLOOK",
-    badgeBn: "🏨 হোটেলের দাম যাচাই · Klook",
-    headlineEn: "Comparing Bangkok, Kuala Lumpur or Dubai hotels? Get a second quote on Klook",
-    headlineBn: "ব্যাংকক, কুয়ালালামপুর বা দুবাইয়ের হোটেল তুলনা করছেন? Klook-এ দ্বিতীয় দাম দেখুন",
-    bodyEn:
-      "Klook's Asia hotel search covers all three cities, and the platform also groups a shortlist of its most-booked hotels in one collection. Match the same nights and guest count, then compare the checkout total — taxes, service charge, breakfast and the cancellation deadline — against the BDT guide figures in this article. Klook's ranking is its own booking data, not an independent quality rating.",
-    bodyBn:
-      "Klook-এর এশিয়া হোটেল সার্চে এই তিন শহরই আছে, আর প্ল্যাটফর্মটি নিজেদের সবচেয়ে বেশি বুকিং হওয়া হোটেলের একটি বাছাই করা তালিকাও এক জায়গায় রাখে। একই রাত ও একই সংখ্যক অতিথি দিয়ে চূড়ান্ত মোট দাম—ট্যাক্স, সার্ভিস চার্জ, ব্রেকফাস্ট ও বাতিলের শেষ সময়—এই লেখার BDT হিসাবের সঙ্গে তুলনা করুন। Klook-এর ক্রম তাদের নিজেদের বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়।",
-    buttonEn: "Search Klook hotels",
-    buttonBn: "Klook-এ হোটেল খুঁজুন",
-  },
-};
-
-export function KlookHotelBlogCallout({
-  slug,
-  lang = "en"
-}: {
-  slug: string;
-  lang?: "en" | "bn";
-}) {
-  const placement = KLOOK_HOTEL_BLOG_PLACEMENTS[slug];
-  if (!placement) return null;
-  // If Klook is ever paused, resolvePartnerUrl would send readers to KKday while
-  // this copy kept naming Klook. Hiding the placement is the honest failure mode.
-  if (AFFILIATE_OFFER_REGISTRY.klook.status === "paused") return null;
-
-  const isBn = lang === "bn";
-  const href = resolvePartnerUrl(AFFILIATE_LINKS.klook);
-
-  return (
-    <aside
-      aria-label={isBn ? "Klook হোটেলের দাম যাচাই" : "Klook hotel price check"}
-      className="relative overflow-hidden rounded-2xl bg-brand-navy p-5 text-white shadow-lg sm:p-6 space-y-3 text-left"
-    >
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-gold via-[#FFD27A] to-brand-gold" />
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className="text-[10px] font-mono font-bold uppercase tracking-wider bg-brand-gold text-brand-navy px-2.5 py-1 rounded-md">
-          {isBn ? placement.badgeBn : placement.badgeEn}
-        </span>
-        <span className="text-[11px] font-mono text-slate-300">
-          {isBn ? "নতুন ট্যাবে খুলবে" : "Opens in a new tab"}
-        </span>
-      </div>
-
-      <h3 className="font-serif text-base sm:text-lg font-bold text-white leading-snug text-balance">
-        {isBn ? placement.headlineBn : placement.headlineEn}
-      </h3>
-
-      <p className="text-xs sm:text-[13.5px] text-slate-200 leading-relaxed">
-        {isBn ? placement.bodyBn : placement.bodyEn}
-      </p>
-
-      <div className="flex flex-wrap items-center gap-2.5 pt-1">
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer sponsored"
-          className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand-gold px-4 py-2.5 text-xs font-bold text-brand-navy transition-colors hover:bg-[#FFC654] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
-        >
-          {isBn ? placement.buttonBn : placement.buttonEn}
-          <ExternalLink size={13} aria-hidden="true" />
-        </a>
-      </div>
-
-      <p className="border-t border-white/10 pt-3 text-[11px] leading-5 text-slate-300">
-        {getKlookHotelCommissionNote(lang)}
-      </p>
-    </aside>
-  );
-}
-
-/* -------------------------------------------------------------------------
    Travelpayouts creator-referral placement ("For Travel Creators & Bloggers")
    -------------------------------------------------------------------------
    One transparent referral placement per opted-in blog post. The link is a
@@ -1253,6 +1099,28 @@ export const TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS: Record<string, Travelpayout
       "Transparency: this is my referral link. If you join through it and start earning, Travelpayouts pays me a milestone bonus at no extra cost to you.",
     disclosureBn:
       "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে আপনি যদি আয় করা শুরু করেন, তাহলে Travelpayouts আমাকে একটি মাইলফলক বোনাস দেয়় - আপনার কোনো অতিরিক্ত খরচ ছাড়াই।",
+  },
+  "turn-travel-experience-into-income-without-a-website": {
+    badgeEn: "✈️ FOR TRAVELLERS WHO ALREADY SHARE",
+    badgeBn: "✈️ যাঁরা ইতিমধ্যেই ভ্রমণের কথা শেয়ার করেন",
+    headlineEn: "Want to turn your travel experiences into a small travel income stream?",
+    headlineBn: "আপনার ভ্রমণের অভিজ্ঞতাকে কি ছোট একটি আয়ের পথে বদলাতে চান?",
+    bodyBeforeAnchorEn:
+      "If you are already sharing travel photos, videos, stories or recommendations, you can judge for yourself whether Travelpayouts' affiliate tools fit what you publish. You can ",
+    anchorTextEn: "join Travelpayouts through my referral link here",
+    bodyAfterAnchorEn:
+      ", after reading the programme terms. Remember that rewards depend on the programme and on the booking actually confirming - nothing here is guaranteed.",
+    bodyBeforeAnchorBn:
+      "আপনি যদি ইতিমধ্যেই ভ্রমণের ছবি, ভিডিও, গল্প বা সুপারিশ শেয়ার করেন, তাহলে নিজেই বিচার করতে পারেন Travelpayouts-এর অ্যাফিলিয়েট টুলগুলো আপনার প্রকাশের সঙ্গে মানায় কি না। আপনি ",
+    anchorTextBn: "এখান থেকে আমার রেফারেল লিংকে Travelpayouts-এ যোগ দিতে পারেন",
+    bodyAfterAnchorBn:
+      ", তবে আগে প্রোগ্রামের শর্তাবলি পড়ে নিন। মনে রাখুন - পুরস্কার নির্ভর করে প্রোগ্রাম এবং বুকিং সত্যিই নিশ্চিত হওয়ার ওপর; এখানে কিছুই নিশ্চিত নয়।",
+    buttonLabelEn: "Explore Travelpayouts",
+    buttonLabelBn: "Travelpayouts দেখুন",
+    disclosureEn:
+      "Transparency: this is my referral link. If you join through it and later meet the programme's conditions, Travelpayouts may pay me a referral reward at no extra cost to you. It does not reduce your own earnings.",
+    disclosureBn:
+      "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে পরে প্রোগ্রামের শর্ত পূরণ করলে Travelpayouts আমাকে একটি রেফারেল পুরস্কার দিতে পারে - আপনার কোনো অতিরিক্ত খরচ ছাড়াই। এতে আপনার নিজের আয় কমে না।",
   },
   "travel-creator-resources": {
     badgeEn: "✈️ FOR TRAVEL CREATORS & BLOGGERS",
