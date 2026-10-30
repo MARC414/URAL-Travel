@@ -9,6 +9,8 @@ import { TravelIntelligence } from "../components/AeoInspector";
 
 import { resolvePartnerUrl, AFFILIATE_LINKS } from "../components/AffiliatePartners";
 
+import { KlookHotelSpotlight } from "../components/KlookHotelSpotlight";
+
 
 
 type RouteViewProps = { context: Record<string, any> };
@@ -57,6 +59,8 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
             { id: "hotel-neighborhoods", en: "Choose a neighborhood", bn: "এলাকা বেছে নিন" },
 
             { id: "hotel-curated-stays", en: "Compare curated stays", bn: "বাছাইকৃত হোটেল তুলনা করুন" },
+
+            { id: "hotel-klook-check", en: "Second quote on Klook", bn: "Klook-এ দ্বিতীয় দাম" },
 
             { id: "hotel-ground-transport", en: "Transfers and local essentials", bn: "ট্রান্সফার ও স্থানীয় প্রয়োজনীয়তা" },
 
@@ -305,6 +309,12 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
                       </div>
 
                     </div>
+
+
+
+                    {/* Second-quote module: Klook hotel comparison, gated by the offer registry */}
+
+                    <KlookHotelSpotlight city={activeHotel.city} lang={lang} />
 
 
 

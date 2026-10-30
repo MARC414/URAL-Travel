@@ -83,7 +83,11 @@ import {
 import {
   RADICAL_STORAGE_BLOG_PLACEMENTS,
   MULTI_PARTNER_BLOG_PLACEMENTS,
+  KLOOK_HOTEL_BLOG_PLACEMENTS,
+  KLOOK_HOTEL_COMMISSION_NOTE,
+  KLOOK_HOTEL_CHECK_STEPS,
   TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
+  AFFILIATE_OFFER_REGISTRY,
   buildTravelpayoutsReferralUrl,
   resolvePartnerUrl,
   sanitizeExpiredPromoText,
@@ -1625,6 +1629,13 @@ function buildAllRoutes(): PrerenderRoute[] {
           <ul>${h.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
           <h2>Example properties in the ${escapeHtml(h.city)} guide</h2>
           <ul>${h.hotels.map((hotel) => `<li><strong>${escapeHtml(hotel.name)}</strong> — ${escapeHtml(hotel.category)} option in ${escapeHtml(hotel.neighborhood)}; indicative guide figure BDT ${hotel.priceBdt.toLocaleString("en-US")}. Listed features include ${escapeHtml(hotel.features.join(", "))}.</li>`).join("")}</ul>
+          ${AFFILIATE_OFFER_REGISTRY.klook.status === "active" ? `
+          <section aria-labelledby="klook-hotel-check">
+            <h2 id="klook-hotel-check">Get a second hotel quote on Klook</h2>
+            <p>Klook's Asia hotel search covers ${escapeHtml(h.city)}, and the platform also groups a shortlist of its most-booked hotels in one collection. Treat either as a second quote for the neighborhoods above; the ranking is Klook's own booking data, not an independent quality rating. <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klook))}" target="_blank" rel="noopener noreferrer sponsored">Search Klook hotels</a>.</p>
+            <ol>${KLOOK_HOTEL_CHECK_STEPS.en.map((step) => `<li><strong>${escapeHtml(step.title)}:</strong> ${escapeHtml(step.body)}</li>`).join("")}</ol>
+            <p><small>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.en)} Klook charges in the hotel's own currency; check your card's foreign-transaction fee before comparing a converted BDT amount.</small></p>
+          </section>` : ""}
           <section>
             <h2>Match the hotel area to your itinerary</h2>
             <p>The area options in this guide have different profiles: ${h.neighborhoods.map((area) => `${escapeHtml(area.name)} (${escapeHtml(area.vibe)})`).join("; ")}. Choose by looking at where you expect to spend your time, how you will reach those places and the pace that suits your travel party. A central location may reduce some local journeys but can cost more or be busier; a quieter base may require more planning for meals and transport. Use the neighborhood descriptions above to compare trade-offs rather than treating one area as the universal best choice.</p>
@@ -2468,7 +2479,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         <ul>
           ${sortBlogsNewestFirst(BLOG_DATA).map(
             (p) =>
-              `<li><a href="/blog/${p.slug}">${escapeHtml(p.title)}</a> — ${escapeHtml(p.summary)}</li>`
+              `<li><a href="/blog/${p.slug}" target="_blank" rel="noopener noreferrer" title="Opens in a new tab">${escapeHtml(p.title)}</a> — ${escapeHtml(p.summary)}</li>`
           ).join("\n")}
         </ul>
       </article>
@@ -2579,6 +2590,11 @@ function buildAllRoutes(): PrerenderRoute[] {
             : ""
         }.</p></section>`
       : "";
+    const klookHotelPlacement = KLOOK_HOTEL_BLOG_PLACEMENTS[post.slug];
+    const klookHotelHtml =
+      klookHotelPlacement && AFFILIATE_OFFER_REGISTRY.klook.status === "active"
+        ? `<section aria-labelledby="klook-hotel-quote"><h2 id="klook-hotel-quote">${escapeHtml(klookHotelPlacement.headlineEn)}</h2><p>${escapeHtml(klookHotelPlacement.bodyEn)}</p><p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klook))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(klookHotelPlacement.buttonEn)}</a></p><p><em>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.en)}</em></p></section>`
+        : "";
 
     routes.push({
       routePath: `/blog/${post.slug}`,
@@ -2636,6 +2652,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           ${post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking" ? renderCoxsBazarAuthorBioHtml("en") : renderAuthorBioHtml(getAuthorProfile(post.author), "en")}
           ${radicalStorageHtml}
           ${multiPartnerHtml}
+          ${klookHotelHtml}
           ${travelpayoutsReferralHtml}
           ${planLinksHtml}
           ${relatedGuidesHtml}
@@ -2742,8 +2759,12 @@ function bnFactList(rows: { label: string; value?: string }[]): string {
 /** Bengali link list. Paths without a Bengali counterpart are dropped (no 404s). */
 function bnLinkList(
   heading: string,
-  links: { label: string; path: string }[]
+  links: { label: string; path: string }[],
+  openInNewTab = false,
 ): string {
+  const linkAttributes = openInNewTab
+    ? ' target="_blank" rel="noopener noreferrer" title="নতুন ট্যাবে খুলবে"'
+    : "";
   const items = links
     // Resolve aliases BEFORE the availability check and the /bn conversion.
     // The English renderer already does this (normalizeInternalHref in the blog
@@ -2756,7 +2777,7 @@ function bnLinkList(
     .filter((link) => link.label && hasBengaliCounterpart(link.path))
     .map(
       (link) =>
-        `<li><a href="${escapeHtml(toBengaliPath(link.path))}">${escapeHtml(link.label)}</a></li>`
+        `<li><a href="${escapeHtml(toBengaliPath(link.path))}"${linkAttributes}>${escapeHtml(link.label)}</a></li>`
     )
     .join("");
   return items ? bnSection(heading, `<ul>${items}</ul>`) : "";
@@ -2815,12 +2836,12 @@ function bnParagraphs(
 }
 
 /** Directory section: links to the Bengali twins of the given English paths. */
-function bnDirectory(heading: string, englishPaths: string[]): string {
+function bnDirectory(heading: string, englishPaths: string[], openInNewTab = false): string {
   const links = englishPaths
     .map((path) => ({ path, copy: getBengaliRouteSeo(path) }))
     .filter((entry) => entry.copy)
     .map((entry) => ({ label: entry.copy!.h1, path: entry.path }));
-  return bnLinkList(heading, links);
+  return bnLinkList(heading, links, openInNewTab);
 }
 
 /** Cross-links to the same country's flight/hotel/visa/cost Bengali pages. */
@@ -2928,7 +2949,8 @@ function buildBengaliBody(
     const postPaths = sortBlogsNewestFirst(BLOG_DATA).map((post) => `/blog/${post.slug}`);
     const directory = bnDirectory(
       "সব বাংলা ট্রাভেল গাইড",
-      postPaths
+      postPaths,
+      true,
     );
     parts.push(
       `<p>এই সূচিতে বাংলাদেশি ভ্রমণকারীদের জন্য ভিসা ও ইমিগ্রেশন, ফ্লাইট, হোটেল, পরিবারের বাজেট, হজ-ওমরাহ, জিয়ারত এবং খাবার নিয়ে বাংলা গাইড আছে। যে বিষয়ে পরিকল্পনা করছেন, সেই গাইডটি খুলে ধাপ, খরচ ও প্রয়োজনীয় নথির বিস্তারিত দেখুন।</p>`
@@ -2975,6 +2997,17 @@ function buildBengaliBody(
           bnSection(
             refPlacementBn.headlineBn,
             `<p>${escapeHtml(refPlacementBn.bodyBeforeAnchorBn)}<a href="${referralUrlBn}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacementBn.anchorTextBn)}</a>${escapeHtml(refPlacementBn.bodyAfterAnchorBn)} <a href="${referralUrlBn}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacementBn.buttonLabelBn)}</a>.</p><p><em>${escapeHtml(refPlacementBn.disclosureBn)}</em></p>`
+          )
+        );
+      }
+      const klookHotelPlacementBn = KLOOK_HOTEL_BLOG_PLACEMENTS[id];
+      if (klookHotelPlacementBn && AFFILIATE_OFFER_REGISTRY.klook.status === "active") {
+        parts.push(
+          bnSection(
+            klookHotelPlacementBn.headlineBn,
+            `<p>${escapeHtml(klookHotelPlacementBn.bodyBn)}</p>` +
+              `<p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klook))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(klookHotelPlacementBn.buttonBn)}</a></p>` +
+              `<p><em>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.bn)}</em></p>`
           )
         );
       }
@@ -3070,6 +3103,16 @@ function buildBengaliBody(
           )
           .join("");
         if (stays) parts.push(bnSection("কোথায় থাকবেন", `<ul>${stays}</ul>`));
+        if (AFFILIATE_OFFER_REGISTRY.klook.status === "active") {
+          parts.push(
+            bnSection(
+              "Klook-এ হোটেলের দ্বিতীয় দাম দেখুন",
+              `<p>Klook-এর এশিয়া হোটেল সার্চে ${escapeHtml(hotel.city)} আছে, আর প্ল্যাটফর্মটি নিজেদের সবচেয়ে বেশি বুকিং হওয়া হোটেলের একটি বাছাই করা তালিকাও এক জায়গায় রাখে। ওপরের এলাকাগুলোর জন্য এটিকে দ্বিতীয় দাম হিসেবে ব্যবহার করুন—ক্রমটি Klook-এর নিজের বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়। <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klook))}" target="_blank" rel="noopener noreferrer sponsored">Klook-এ হোটেল খুঁজুন</a>।</p>` +
+                `<ol>${KLOOK_HOTEL_CHECK_STEPS.bn.map((step) => `<li><strong>${escapeHtml(step.title)}:</strong> ${escapeHtml(step.body)}</li>`).join("")}</ol>` +
+                `<p><small>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.bn)} Klook হোটেলের নিজস্ব মুদ্রায় চার্জ করে; BDT-তে বদলে তুলনার আগে কার্ডের বিদেশি লেনদেন ফি জেনে নিন।</small></p>`
+            )
+          );
+        }
         parts.push(
           bnLinkList(
             "এই ট্রিপের বাকি পরিকল্পনা",

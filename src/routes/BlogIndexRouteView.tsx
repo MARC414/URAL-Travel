@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 
 import { ResponsiveImage } from "../components/ResponsiveImage";
 
@@ -27,7 +27,7 @@ function formatPageNumber(num: number, isBn: boolean): string {
 
 export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
-  const { BLOG_DATA = [], TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, getBlogAeoSnippet50Words, getBlogCoverImage, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, section, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery } = context;
+  const { BLOG_DATA = [], TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, section, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery } = context;
 
   const [currentPage, setCurrentPage] = React.useState(1);
 
@@ -221,6 +221,14 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                     },
 
+                    {
+
+                      id: "Affiliate marketing",
+
+                      label: isBn ? "অ্যাফিলিয়েট মার্কেটিং" : "Affiliate Marketing",
+
+                    },
+
                   ].map((tab) => {
 
                     const isActive = blogCategoryFilter === tab.id;
@@ -321,9 +329,16 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
               const orderedBlogs = sortBlogsNewestFirst(localizedBlogs, BLOG_DATA);
 
+              // Filter by the canonical category, not its translated display label.
+              const canonicalCategories = new Map<string, string>(
+                BLOG_DATA.map((post: { slug: string; category: string }) => [post.slug, post.category]),
+              );
+
 
 
               const filteredBlogs = orderedBlogs.filter((post) => {
+
+                const category = canonicalCategories.get(post.slug) ?? post.category;
 
                 const matchesCategory =
 
@@ -333,13 +348,13 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                     : blogCategoryFilter === "Flights, Hotels & Food"
 
-                    ? ["Cheap Flight Tips", "Hotel Savings", "Food & Culture"].includes(post.category)
+                    ? ["Cheap Flight Tips", "Hotel Savings", "Food & Culture"].includes(category)
 
                     : blogCategoryFilter === "Travel Tips"
 
-                    ? ["Travel Tips", "Travel Deals & Intelligence", "ট্রাভেল ডিল ও ইন্টেলিজেন্স"].includes(post.category)
+                    ? ["Travel Tips", "Travel Deals & Intelligence", "ট্রাভেল ডিল ও ইন্টেলিজেন্স"].includes(category)
 
-                    : post.category === blogCategoryFilter;
+                    : category === blogCategoryFilter;
 
 
 
@@ -471,11 +486,18 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                         key={post.id}
 
-                        onClick={() => navigateTo(`/blog/${post.slug}`)}
-
-                        className="group bg-white border border-slate-200/90 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between cursor-pointer"
+                        className="group bg-white border border-slate-200/90 hover:border-[#F6B73C] focus-within:border-brand-emerald rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
 
                       >
+
+                        <a
+                          href={getLocalizedRouteHref(`/blog/${post.slug}`)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-labelledby={`blog-card-title-${post.id}`}
+                          title={isBn ? "নতুন ট্যাবে খুলবে" : "Opens in a new tab"}
+                          className="flex flex-1 flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-emerald active:opacity-90"
+                        >
 
                         <div className="flex flex-col">
 
@@ -553,9 +575,13 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
 
 
-                            <h2 className="ural-card-title font-serif text-[20px] sm:text-[22px] font-bold text-brand-navy group-hover:text-brand-emerald leading-[1.3] text-balance">
+                            <h2 id={`blog-card-title-${post.id}`} className="ural-card-title font-serif text-[20px] sm:text-[22px] font-bold text-brand-navy group-hover:text-brand-emerald leading-[1.3] text-balance">
 
                               {post.title}
+
+                              <span className="sr-only">
+                                {isBn ? " (নতুন ট্যাবে খুলবে)" : " (opens in a new tab)"}
+                              </span>
 
                             </h2>
 
@@ -573,33 +599,25 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
 
 
-                        {/* Card Footer: 'Read Full Blog' Button */}
+                        {/* Card Footer: visual CTA within the single, full-card link */}
 
                         <div className="px-6 pb-6 pt-2">
 
-                          <button
+                          <span
 
-                            type="button"
-
-                            onClick={(e) => {
-
-                              e.stopPropagation();
-
-                              navigateTo(`/blog/${post.slug}`);
-
-                            }}
-
-                            className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-between cursor-pointer"
+                            className="w-full bg-brand-navy group-hover:bg-[#F6B73C] group-focus-within:bg-brand-gold text-white group-hover:text-brand-navy group-focus-within:text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-between"
 
                           >
 
                             <span>{isBn ? "সম্পূর্ণ ব্লগ পড়ুন · Read Full Blog" : "Read Full Blog"}</span>
 
-                            <ArrowRight size={14} className="text-[#F6B73C] group-hover:text-brand-navy transition-transform group-hover:translate-x-0.5" />
+                            <ExternalLink size={14} aria-hidden="true" className="text-brand-gold group-hover:text-brand-navy group-focus-within:text-brand-navy shrink-0" />
 
-                          </button>
+                          </span>
 
                         </div>
+
+                        </a>
 
                       </article>
 
