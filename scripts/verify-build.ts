@@ -717,7 +717,7 @@ function imgsMissingAlt(html: string): string[] {
   const editorialHeroContracts = [
     ["flights.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "International Flights from Dhaka"],
     ["bn/flights.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "ঢাকা থেকে ফ্লাইট"],
-    ["hotels.html", "hotels_london_marylebone_exterior_20261101-1200.avif", "Hotel &amp; Stay Guides"],
+    ["hotels.html", "hotels_london_marylebone_exterior_20261101-1200.avif", "Hotel Area Guides"],
     ["bn/hotels.html", "hotels_london_marylebone_exterior_20261101-1200.avif", "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড"],
     ["visa.html", "visa_changi_immigration_20261101-1200.avif", "Visa Guides &amp; Travel Document Checklists"],
     ["bn/visa.html", "visa_changi_immigration_20261101-1200.avif", "বাংলাদেশি নাগরিকদের জন্য ভিসা গাইড"],
@@ -1736,7 +1736,7 @@ check(
 
   // (b), behaviourally: run the real listener against a stub DOM.
   const analytics = await import("../src/utils/analytics");
-  const fire = (href: string, text: string, rel: string) => {
+  const fire = (href: string, text: string, rel: string, affiliatePlacement?: string) => {
     let handler: ((event: unknown) => void) | null = null;
     const previousWindow = (globalThis as any).window;
     const previousDocument = (globalThis as any).document;
@@ -1750,7 +1750,7 @@ check(
     try {
       analytics.initGlobalClickTracking();
       (handler as unknown as (event: unknown) => void)({
-        target: { closest: () => ({ getAttribute: (key: string) => (key === "href" ? href : key === "rel" ? rel : null), textContent: text }) },
+        target: { closest: () => ({ dataset: affiliatePlacement ? { affiliatePlacement } : undefined, getAttribute: (key: string) => (key === "href" ? href : key === "rel" ? rel : null), textContent: text }) },
       });
       return ((globalThis as any).window.dataLayer as Record<string, unknown>[]).filter(
         (entry) => typeof entry.event === "string"
@@ -1780,6 +1780,15 @@ check(
     if (event.link_label !== "Book Tiqets tickets") clickFailures.push("affiliate click lost link_label");
     if (typeof event.outbound_url !== "string") clickFailures.push("affiliate click lost outbound_url");
   }
+  const placementClicks = fire(
+    AFFILIATE_LINKS.klookHotels,
+    "Search Klook hotel collection",
+    "noopener noreferrer sponsored",
+    "hotel_guide_bangkok_klook_collection"
+  );
+  if (placementClicks.length !== 1 || placementClicks[0].affiliate_placement !== "hotel_guide_bangkok_klook_collection") {
+    clickFailures.push("affiliate click lost first-party placement scope");
+  }
   const whatsappClicks = fire("https://wa.me/8801784385335", "WhatsApp desk", "");
   if (whatsappClicks.length !== 1 || whatsappClicks[0].link_label !== "WhatsApp desk") {
     clickFailures.push("whatsapp click lost link_label");
@@ -1787,7 +1796,7 @@ check(
   check(
     clickFailures.length === 0,
     clickFailures.length === 0
-      ? "outbound clicks dispatch one event each with the right name and SubID (3 cases: referral, affiliate, whatsapp)"
+      ? "outbound clicks dispatch one event each with the right name, referral SubID and optional first-party placement (4 cases)"
       : `outbound click analytics misbehaves: ${clickFailures.join("; ")}`
   );
 }
@@ -2363,7 +2372,6 @@ if (sitemap) {
   // the commission disclosure, expiry behavior and bilingual hotel placements.
   const KLOOK_HOTEL_HREF = resolvePartnerUrl(AFFILIATE_LINKS.klookHotels);
   const KLOOK_HOTEL_LINK_CONSUMERS = [
-    "src/routes/HotelsRouteView.tsx",
     "src/routes/DestinationsRouteView.tsx",
     "src/components/TravelpayoutsCustomWidget.tsx",
     "src/components/KlookEmbed.tsx",
@@ -2383,6 +2391,12 @@ if (sitemap) {
     missingKlookHotelLinkConsumers.length === 0,
     `all hotel-specific site placements use the dedicated tracked Klook hotel link [${missingKlookHotelLinkConsumers.join(", ")}]`
   );
+  const hotelRouteSource = read(path.join(ROOT_DIR, "src/routes/HotelsRouteView.tsx")) ?? "";
+  check(
+    hotelRouteSource.includes("<KlookHotelSpotlight city={activeHotel.city} guideId={activeHotel.id} lang={lang} />") &&
+      hotelRouteSource.includes("affiliatePlacement={getHotelGuideAffiliatePlacement(activeHotel.id)}"),
+    "hotel guide CTAs receive a stable guide-specific first-party scope"
+  );
 
   const KLOOK_HOTEL_IDS = [
     "kathmandu-hotels",
@@ -2398,21 +2412,27 @@ if (sitemap) {
     const end = html.indexOf("</section>", start);
     return end < 0 ? html.slice(start) : html.slice(start, end + "</section>".length);
   };
-
   const klookHotelHtmlIssues: string[] = [];
   for (const hotelId of KLOOK_HOTEL_IDS) {
     const enHtml = read(path.join(DIST_DIR, "hotels", `${hotelId}.html`)) ?? "";
     const bnHtml = read(path.join(DIST_DIR, "bn", "hotels", `${hotelId}.html`)) ?? "";
     const enSection = sectionStartingAt(enHtml, 'id="klook-hotel-check"');
-    const bnSection = sectionStartingAt(bnHtml, "Klook-এর বাছাইকৃত হোটেল তালিকায় দ্বিতীয় দাম দেখুন");
+    const bnSection = sectionStartingAt(bnHtml, "Klook-এর হোটেল তালিকা সার্চ করুন");
     const enOk =
-      enSection.includes("Get a second hotel quote on Klook") &&
+      enSection.includes("Search Klook’s hotel collection") &&
+      enSection.includes("general hotel collection") &&
+      enSection.includes("not a live quote") &&
+      enSection.includes("Re-enter") &&
+      enSection.includes(`data-affiliate-placement="hotel_guide_${hotelId.replace(/-hotels$/, "").replace(/-/g, "_")}_klook_collection"`) &&
       enSection.includes(KLOOK_HOTEL_HREF) &&
       !enSection.includes(AFFILIATE_LINKS.klook) &&
       enSection.includes('rel="noopener noreferrer sponsored"') &&
       enSection.includes("not a traveller discount");
     const bnOk =
       bnSection.includes(KLOOK_HOTEL_HREF) &&
+      bnSection.includes("সাধারণ হোটেল তালিকা") &&
+      bnSection.includes("লাইভ কোট নয়") &&
+      bnSection.includes(`data-affiliate-placement="hotel_guide_${hotelId.replace(/-hotels$/, "").replace(/-/g, "_")}_klook_collection"`) &&
       !bnSection.includes(AFFILIATE_LINKS.klook) &&
       bnSection.includes('rel="noopener noreferrer sponsored"') &&
       bnSection.includes("ভ্রমণকারীর জন্য ছাড় নয়");
@@ -2427,7 +2447,7 @@ if (sitemap) {
   }
   check(
     klookHotelHtmlIssues.length === 0,
-    `all six hotel guides carry the Klook second-quote module in English and Bengali, link only the tracked partner URL and keep prerendered copy evergreen [${klookHotelHtmlIssues.join(", ")}]`
+    `all six hotel guides carry the transparent generic Klook collection handoff in English and Bengali, with tracked links, first-party placement scopes and evergreen copy [${klookHotelHtmlIssues.join(", ")}]`
   );
 
   const withMockedNow = <T,>(timestamp: number, render: () => T): T => {
@@ -2440,7 +2460,9 @@ if (sitemap) {
     }
   };
   const renderSpotlight = (lang: "en" | "bn") =>
-    renderToStaticMarkup(React.createElement(KlookHotelSpotlight, { city: "Bangkok", lang }));
+    renderToStaticMarkup(
+      React.createElement(KlookHotelSpotlight, { city: "Bangkok", guideId: "bangkok-hotels", lang })
+    );
   const spotlightActiveEn = withMockedNow(Date.UTC(2026, 10, 1), () => renderSpotlight("en"));
   const spotlightActiveBn = withMockedNow(Date.UTC(2026, 10, 1), () => renderSpotlight("bn"));
   const spotlightExpiredEn = withMockedNow(Date.UTC(2027, 0, 1, 6), () => renderSpotlight("en"));
@@ -2497,7 +2519,7 @@ if (sitemap) {
     !(klookBlogEn + klookBlogBn).includes("klook.com/tetris");
   check(
     klookBlogOk,
-    "the Bangkok/KL/Dubai hotel-savings guide carries the same Klook second-quote placement in both languages, tracked and evergreen"
+    "the Bangkok/KL/Dubai hotel-area guide labels Klook as a generic tracked collection handoff in both languages, with local placement scope and no quote promise"
   );
 
   check(

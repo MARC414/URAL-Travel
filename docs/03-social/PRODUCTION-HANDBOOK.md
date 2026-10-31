@@ -118,7 +118,7 @@ Copy the complete link from the calendar/production block. Use the direct curren
 
 Source URLs are evidence locations. A source URL in a row does not authorize using it as a CTA when `landing_url` is blank. In particular SOC-007 and its derivatives have no tool/desk CTA.
 
-UTMs describe the inbound visit. They do **not** create a supported Travelpayouts SubID on the later outbound link. Do not append `sub_id` to an inbound URL and report affiliate attribution as solved. Partner-supported placement IDs, event forwarding and actual report receipt need their own verification.
+UTMs describe the inbound visit. They do **not** create a supported Travelpayouts SubID on the later outbound link. Do not append `sub_id` to an inbound URL and report affiliate attribution as solved. Hotel-guide Klook links now carry a first-party `data-affiliate-placement` scope, which the site click event can record as `affiliate_placement`; this is local event context only, not a Travelpayouts SubID, partner-side attribution, or proof of bookings. Existing event-forwarding gaps still need verification before commercial reporting.
 
 ### CTA readiness
 
@@ -152,7 +152,7 @@ The following is a **reporting specification**, not a claim that all events are 
 | Partner outcome | Partner-reported booking, then separately approved commission and payout | Actual partner report, currency and period; account for pending/cancelled transactions and reporting lag |
 | Creator interest | Creator referral/professional discussion | Separate field; never combine with pilgrim enquiries or traveller bookings |
 
-The site's current event names include `affiliate_partner_click`, `whatsapp_click`, `whatsapp_inquiry` and `travelpayouts_referral_click`. Their names are not proof of what happened. The audit found misclassification and forwarding gaps; reconcile them with behavior before using them as commercial metrics.
+The site's current event names include `affiliate_partner_click`, `whatsapp_click`, `whatsapp_inquiry` and `travelpayouts_referral_click`. Some hotel-guide click events also include the `affiliate_placement` property; it is not a separate event or partner attribution identifier. Event names and properties are not proof of what happened. The audit found misclassification and forwarding gaps; reconcile them with behavior before using them as commercial metrics.
 
 ### Weekly review
 

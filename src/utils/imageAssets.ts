@@ -17,6 +17,16 @@ export {
  */
 export const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "airport_departure_board_delay_claim_1790520824658": 670,
+  "destination_dubai_hero_20261101": 670,
+  "destination_italy_hero_20261101": 670,
+  "destination_london_hero_20261101": 670,
+  "destination_malaysia_hero_20261101": 670,
+  "destination_maldives_hero_20261101": 670,
+  "destination_nepal_hero_20261101": 670,
+  "destination_new_york_hero_20261101": 670,
+  "destination_paris_hero_20261101": 670,
+  "destination_singapore_hero_20261101": 670,
+  "destination_thailand_hero_20261101": 670,
   "ayutthaya_wat_phra_si_sanphet_chedis_1791427300000": 1054,
   "bangkok_destination_1781544149435": 655,
   "bangkok_medical_hospital_lobby_1790520775439": 670,

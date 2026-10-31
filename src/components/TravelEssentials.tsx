@@ -180,24 +180,27 @@ export function TravelEssentials({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center animate-fade-in">
           <div className="lg:col-span-5 space-y-3">
             <div className="flex items-center gap-2 text-xs text-slate-500">
-              <span className="font-semibold text-brand-navy">Hotels, Tours &amp; All-Inclusive City Passes</span>
+              <span className="font-semibold text-brand-navy">{isBn ? "হোটেল, ট্যুর ও সিটি পাস" : "Hotels, Tours & City Passes"}</span>
               <span aria-hidden="true">·</span>
-              <span>Instant Mobile QR Vouchers</span>
+              <span>{isBn ? "পার্টনারের শর্ত যাচাই করুন" : "Check partner terms before booking"}</span>
             </div>
             <h4 className="font-serif text-lg font-bold text-slate-900">
               Hotels, Guided Day Tours &amp; All-Inclusive / Explorer Passes in {country}
             </h4>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Book verified hotels, theme parks, and sightseeing tours on Klook, or bundle 3 to 10+ top landmarks on a single <strong>Go City All-Inclusive Pass</strong> or <strong>Explorer Pass</strong> to save up to 50% at the gate.
+              {isBn
+                ? "Klook-এর হোটেল লিংক সাধারণ তালিকা খোলে—নির্দিষ্ট হোটেল বা তারিখের কোট নয়; গন্তব্য, তারিখ ও অতিথি আবার দিন। ট্যুর বা পাস বাছার আগে অন্তর্ভুক্ত আকর্ষণ, আলাদা টিকিটের মোট দাম ও বাতিলের শর্ত মিলিয়ে দেখুন। যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে।"
+                : "Klook hotel links open a general collection—not a quote for a selected property or dates—so re-enter destination, dates and guests. Before choosing a tour or pass, compare included attractions, separate ticket totals and cancellation terms. URAL may earn commission on qualifying bookings."}
             </p>
             <div className="flex flex-wrap items-center gap-2.5 pt-2">
               <a
                 href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
+                data-affiliate-placement="travel_essentials_hotel_collection"
                 target="_blank"
                 rel="noopener noreferrer sponsored"
                 className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
               >
-                <span>{isBn ? "Klook-এর বাছাইকৃত হোটেল" : "Klook Curated Hotels"}</span>
+                <span>{isBn ? "Klook-এর হোটেল তালিকা" : "Klook hotel collection"}</span>
                 <ExternalLink size={12} />
               </a>
               <a

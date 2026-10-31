@@ -86,37 +86,37 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/hotels": {
     title: "Hotel Area Guides for Bangladesh Travelers | URAL",
     description:
-      "Explore hotel neighborhoods and stay-planning guides for popular destinations, with practical notes on location, transport and BDT budgets.",
+      "Compare hotel neighborhoods and practical booking checks for popular destinations. No fixed nightly rates are published; partner collections may require you to re-enter dates and guests before checking current availability and terms.",
   },
   "/hotels/kathmandu-hotels": {
-    title: "Where to Stay in Kathmandu: Thamel & Area Guide | URAL",
+    title: "Where to Stay in Kathmandu: Neighborhoods & Booking Checks | URAL",
     description:
-      "Compare Kathmandu hotel areas for Bangladeshi travelers, including Thamel for budget stays, Lazimpat for quieter comfort and Boudha, with BDT rate guidance.",
+      "Compare Thamel, Boudha and Lazimpat by itinerary, pace and transport. Check current room availability, checkout totals and booking terms.",
   },
   "/hotels/bangkok-hotels": {
-    title: "Where to Stay in Bangkok: Best Areas & BDT Guide | URAL",
+    title: "Where to Stay in Bangkok: Neighborhoods & Booking Checks | URAL",
     description:
-      "Compare Bangkok hotel neighborhoods for Bangladeshi travelers, including Pratunam for shopping, Sukhumvit near Bumrungrad and Riverside, with BDT rates.",
+      "Compare Pratunam, Sukhumvit and Khao San Road by shopping, transit, nightlife and noise. Check current room totals and terms for your dates.",
   },
   "/hotels/kuala-lumpur-hotels": {
-    title: "Where to Stay in Kuala Lumpur: KLCC & Bukit Bintang | URAL",
+    title: "Where to Stay in Kuala Lumpur: Area Comparison & Booking Checks | URAL",
     description:
-      "Compare Kuala Lumpur hotel areas for Bangladeshi families, including Bukit Bintang, KLCC serviced suites and KL Sentral transit hubs, with BDT rate ranges.",
+      "Compare KLCC, Bukit Bintang and Chinatown by itinerary, transport and room needs. Check live availability and full booking conditions.",
   },
   "/hotels/dubai-hotels": {
     title: "Where to Stay in Dubai: Deira, Downtown & Marina | URAL",
     description:
-      "Compare Dubai hotel neighborhoods for Bangladeshi travelers: Deira and Bur Dubai for budget metro access and halal dining, or Downtown and Marina for luxury.",
+      "Compare Deira, Downtown / Business Bay and Dubai Marina / JBR by itinerary and transport. Review current charges, totals and cancellation terms.",
   },
   "/hotels/singapore-hotels": {
-    title: "Where to Stay in Singapore: Little India & Bugis | URAL",
+    title: "Where to Stay in Singapore: Area Comparison & Booking Checks | URAL",
     description:
-      "Compare Singapore hotel areas for Bangladeshi travelers, including Little India near Mustafa Centre, Bugis and Marina Bay, with MRT and BDT budget notes.",
+      "Compare Little India, Bugis and Marina Bay by transit, dining and planned activities. Check current room details, totals and cancellation terms.",
   },
   "/hotels/maldives-hotels": {
-    title: "Where to Stay in Maldives: Maafushi & Hulhumalé | URAL",
+    title: "Where to Stay in the Maldives: Local Islands & Resorts | URAL",
     description:
-      "Compare affordable Maldives stays on Maafushi and Hulhumalé local islands versus private resorts, with speedboat transfer and BDT nightly rate guidance.",
+      "Compare inhabited-island stays and private resorts by transfers, meals and room terms. Confirm current availability and the full trip cost before booking.",
   },
   "/visa": {
     title: "Visa Guides for Bangladeshi Citizens | URAL",
@@ -349,9 +349,9 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Compare Nepal and Thailand for a first international trip from Bangladesh across visa rules, BDT flight and hotel costs, halal food and family comfort.",
   },
   "/blog/hotel-savings-guide-bangkok-kl-dubai": {
-    title: "How to Save on Hotels in Bangkok, KL & Dubai | URAL",
+    title: "Compare Hotel Areas and Booking Terms in Bangkok, Kuala Lumpur & Dubai | URAL",
     description:
-      "Cut hotel costs by 30–40% in Bangkok, Kuala Lumpur and Dubai with transit-friendly neighborhood picks, serviced apartments and BDT booking tips.",
+      "Compare hotel areas, then review the same room/date basis and checkout total on partner sites. No fixed rates or savings claims are presented.",
   },
   "/blog/halal-food-guide-bangkok-bangladesh": {
     title: "Halal Food Guide in Bangkok for Bangladeshis | URAL",
@@ -641,37 +641,37 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
   "/hotels": {
     title: "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড | URAL",
     description:
-      "জনপ্রিয় গন্তব্যের হোটেল এলাকা ও থাকার পরিকল্পনা গাইড দেখুন — অবস্থান, যাতায়াত ও টাকায় বাজেট নিয়ে ব্যবহারিক নোটসহ।",
+      "জনপ্রিয় গন্তব্যের হোটেল এলাকা ও বুকিং-চেক তুলনা করুন। স্থির রাতপ্রতি ভাড়া নেই—আপনার তারিখের বর্তমান প্রাপ্যতা ও সম্পূর্ণ শর্ত যাচাই করুন।",
   },
   "/hotels/bangkok-hotels": {
-    title: "ব্যাংককে কোথায় থাকবেন: সেরা এলাকা ও টাকায় গাইড | URAL",
+    title: "ব্যাংককে কোথায় থাকবেন: এলাকা ও বুকিং চেক | URAL",
     description:
-      "বাংলাদেশি ভ্রমণকারীদের জন্য ব্যাংককের হোটেল এলাকা তুলনা করুন — শপিংয়ের জন্য প্রতুনাম, বামরুনগ্রাদের কাছে সুকুমভিট ও রিভারসাইড, টাকায় রেটসহ।",
+      "শপিং, যাতায়াত, রাতের পরিবেশ ও শব্দ ধরে Pratunam, Sukhumvit ও Khao San Road তুলনা করুন। আপনার তারিখে বর্তমান রুমের মোট দাম ও শর্ত দেখুন।",
   },
   "/hotels/dubai-hotels": {
     title: "দুবাইয়ে কোথায় থাকবেন: দেইরা, ডাউনটাউন ও মেরিনা | URAL",
     description:
-      "বাংলাদেশি ভ্রমণকারীদের জন্য দুবাইয়ের হোটেল এলাকা তুলনা করুন — বাজেট মেট্রো ও হালাল খাবারের জন্য দেইরা ও বার দুবাই, কিংবা বিলাসের জন্য ডাউনটাউন ও মেরিনা।",
+      "ভ্রমণসূচি ও যাতায়াত ধরে Deira, Downtown / Business Bay এবং Dubai Marina / JBR তুলনা করুন। বর্তমান চার্জ, মোট দাম ও বাতিলের শর্ত যাচাই করুন।",
   },
   "/hotels/kathmandu-hotels": {
-    title: "কাঠমান্ডুতে কোথায় থাকবেন: থামেল ও এলাকা গাইড | URAL",
+    title: "কাঠমান্ডুতে কোথায় থাকবেন: এলাকা ও বুকিং চেক | URAL",
     description:
-      "বাংলাদেশি ভ্রমণকারীদের জন্য কাঠমান্ডুর হোটেল এলাকা তুলনা করুন — বাজেট থাকার জন্য থামেল, শান্ত আরামের জন্য লাজিমপাট ও বৌদ্ধ, টাকায় রেটের দিকনির্দেশনাসহ।",
+      "ভ্রমণসূচি, পছন্দের পরিবেশ ও যাতায়াত ধরে Thamel, Boudha ও Lazimpat তুলনা করুন। বর্তমান রুম-প্রাপ্যতা, মোট দাম ও বুকিংয়ের শর্ত দেখুন।",
   },
   "/hotels/kuala-lumpur-hotels": {
-    title: "কুয়ালালামপুরে কোথায় থাকবেন: KLCC ও বুকিত বিনতাং | URAL",
+    title: "কুয়ালালামপুরে কোথায় থাকবেন: এলাকা তুলনা ও বুকিং চেক | URAL",
     description:
-      "বাংলাদেশি পরিবারের জন্য কুয়ালালামপুরের হোটেল এলাকা তুলনা করুন — বুকিত বিনতাং, KLCC সার্ভিসড স্যুট ও KL সেন্ট্রাল ট্রানজিট হাব, টাকায় রেটের পরিসরসহ।",
+      "ভ্রমণসূচি, যাতায়াত ও রুমের প্রয়োজন ধরে KLCC, Bukit Bintang ও Chinatown তুলনা করুন। লাইভ প্রাপ্যতা ও সম্পূর্ণ বুকিং-শর্ত যাচাই করুন।",
   },
   "/hotels/maldives-hotels": {
-    title: "মালদ্বীপে কোথায় থাকবেন: মাফুশি ও হুলহুমালে | URAL",
+    title: "মালদ্বীপে কোথায় থাকবেন: লোকাল আইল্যান্ড ও রিসোর্ট | URAL",
     description:
-      "মাফুশি ও হুলহুমালে লোকাল আইল্যান্ডের সাশ্রয়ী থাকা বনাম প্রাইভেট রিসোর্ট তুলনা করুন — স্পিডবোট ট্রান্সফার ও টাকায় রাত্রিপ্রতি রেটের দিকনির্দেশনাসহ।",
+      "ট্রান্সফার, খাবার ও রুমের শর্ত ধরে বসতিপূর্ণ দ্বীপের থাকা ও প্রাইভেট রিসোর্ট তুলনা করুন। বুকিংয়ের আগে বর্তমান প্রাপ্যতা ও পুরো ভ্রমণ-খরচ নিশ্চিত করুন।",
   },
   "/hotels/singapore-hotels": {
-    title: "সিঙ্গাপুরে কোথায় থাকবেন: লিটল ইন্ডিয়া ও বুগিস | URAL",
+    title: "সিঙ্গাপুরে কোথায় থাকবেন: এলাকা ও বুকিং চেক | URAL",
     description:
-      "বাংলাদেশি ভ্রমণকারীদের জন্য সিঙ্গাপুরের হোটেল এলাকা তুলনা করুন — মুস্তাফা সেন্টারের কাছে লিটল ইন্ডিয়া, বুগিস ও মেরিনা বে, MRT ও টাকায় বাজেট নোটসহ।",
+      "যাতায়াত, খাবার ও কার্যক্রম ধরে Little India, Bugis ও Marina Bay তুলনা করুন। বর্তমান রুমের বিবরণ, মোট দাম ও বাতিলের শর্ত দেখুন।",
   },
   "/pre-departure": {
     title: "ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার চেকলিস্ট, লাগেজ নিয়ম ও দূতাবাস হেল্পলাইন | URAL",

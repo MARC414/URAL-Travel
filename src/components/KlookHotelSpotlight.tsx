@@ -10,6 +10,7 @@ import {
   KLOOK_HOTEL_CHECK_STEPS,
   getKlookHotelCommissionNote,
 } from "./KlookHotelOffers";
+import { getHotelGuideAffiliatePlacement } from "../utils/affiliatePlacement";
 
 const CITY_BN: Record<string, string> = {
   Kathmandu: "কাঠমান্ডু",
@@ -30,6 +31,7 @@ const BENGALI_DIGITS = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", 
 interface KlookHotelSpotlightProps {
   /** English city label from the hotel guide, used to key the Bengali label. */
   city: string;
+  guideId: string;
   lang?: "en" | "bn";
 }
 
@@ -46,7 +48,7 @@ interface KlookHotelSpotlightProps {
  * curated hotel collection. Selected city/date/guest details are not forwarded,
  * so the copy tells travellers to enter those on Klook.
  */
-export function KlookHotelSpotlight({ city, lang = "en" }: KlookHotelSpotlightProps) {
+export function KlookHotelSpotlight({ city, guideId, lang = "en" }: KlookHotelSpotlightProps) {
   // A paused partner would make this Klook-specific copy false while
   // resolvePartnerUrl silently redirected readers to KKday. Hide it instead.
   if (
@@ -74,7 +76,7 @@ export function KlookHotelSpotlight({ city, lang = "en" }: KlookHotelSpotlightPr
       <div className="flex flex-wrap items-center justify-between gap-3">
         <span className="inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-brand-gold">
           <Building2 size={14} aria-hidden="true" />
-          {isBn ? "পার্টনার হোটেল যাচাই · Klook" : "PARTNER HOTEL CHECK · KLOOK"}
+          {isBn ? "পার্টনার হোটেল সার্চ · Klook" : "PARTNER HOTEL SEARCH · KLOOK"}
         </span>
         <span className="rounded-md border border-white/15 px-2 py-0.5 font-mono text-[10px] text-slate-300">
           {isBn ? "নতুন ট্যাবে খুলবে" : "OPENS IN A NEW TAB"}
@@ -86,14 +88,14 @@ export function KlookHotelSpotlight({ city, lang = "en" }: KlookHotelSpotlightPr
         className="mt-3 max-w-2xl font-serif text-xl font-black leading-tight text-white text-balance sm:text-2xl"
       >
         {isBn
-          ? `${cityLabel}-এ রুম বুক করার আগে Klook-এ দ্বিতীয় দাম দেখুন`
-          : `Before you book a ${city} room, get a second quote on Klook`}
+          ? `${cityLabel}-এর থাকার বিকল্প খুঁজতে Klook-এর হোটেল তালিকা সার্চ করুন`
+          : `Search Klook’s hotel collection for ${city}`}
       </h2>
 
       <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-200">
         {isBn
-          ? `Klook-এর বাছাইকৃত হোটেল তালিকা নতুন ট্যাবে খুলবে। ${cityLabel}-এ থাকার বিকল্প দেখতে Klook-এ গন্তব্য, তারিখ ও অতিথিসংখ্যা দিন। তালিকার ক্রম Klook-এর নিজস্ব বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়।`
-          : `Klook's curated hotel collection opens in a new tab. Enter ${city}, your dates and guest count on Klook to find available stays. Its selection reflects Klook's own booking data, not an independent quality rating.`}
+          ? `এই লিংকটি Klook-এর সাধারণ হোটেল তালিকা খুলবে—নির্বাচিত হোটেল বা আপনার তারিখের লাইভ কোট নয়। ${cityLabel}-এর বিকল্প খুঁজতে Klook-এ গন্তব্য, তারিখ ও অতিথিসংখ্যা আবার দিন। তালিকার ক্রম Klook-এর নিজস্ব বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়।`
+          : `This link opens Klook’s general hotel collection, not a live quote for a selected property or your dates. Re-enter ${city}, your dates and guest count on Klook to search current options. Its selection reflects Klook’s own booking data, not an independent quality rating.`}
       </p>
 
       <ol className="mt-4 grid gap-2 sm:grid-cols-3">
@@ -111,18 +113,19 @@ export function KlookHotelSpotlight({ city, lang = "en" }: KlookHotelSpotlightPr
       <div className="mt-5 flex flex-wrap items-center gap-3">
         <a
           href={href}
+          data-affiliate-placement={getHotelGuideAffiliatePlacement(guideId)}
           target="_blank"
           rel="noopener noreferrer sponsored"
           className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand-gold px-4 py-3 text-sm font-bold text-brand-navy transition-colors hover:bg-[#FFC654] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
         >
-          {isBn ? "Klook-এর বাছাইকৃত হোটেল দেখুন" : "Browse Klook’s Curated Hotels"}
+          {isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}
           <ExternalLink size={15} aria-hidden="true" />
         </a>
         <a
           href="#hotel-curated-stays"
           className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-white/25 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
         >
-          {isBn ? "বাছাইকৃত তালিকায় ফিরুন" : "Back to the curated list"}
+          {isBn ? "তুলনার চেকলিস্টে ফিরুন" : "Back to the comparison checklist"}
         </a>
       </div>
 

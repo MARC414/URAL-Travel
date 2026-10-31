@@ -3,6 +3,8 @@ import { ArrowRight, Compass, Info, MapPin, Ticket } from "lucide-react";
 import type { BlogPost, DestinationGuide } from "../types";
 import type { Language } from "../translations";
 import { AFFILIATE_LINKS, PartnerLinkButton } from "./AffiliatePartners";
+import { ResponsiveImage } from "./ResponsiveImage";
+import { DESTINATION_HERO_IMAGES } from "../data/destinationHeroImages";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
   DESTINATION_PARTNER_COPY,
@@ -55,6 +57,7 @@ export default function CityDestinationLanding({ guide, blogs, lang, onNavigate 
   const partnerKeys = DESTINATION_AFFILIATE_PARTNERS[guide.id] ?? [];
   const otherDestinationLinks = DESTINATION_LINKS.filter((item) => item.path !== `/destinations/${guide.id}`);
   const activityDestination = ACTIVITY_DESTINATION_NAMES[guide.id] ?? { en: guide.country, bn: guide.country };
+  const heroImage = DESTINATION_HERO_IMAGES[guide.id];
   const localizedHref = (path: string) => isBn
     ? `/bn${path === "/" ? "/" : path}`
     : path;
@@ -65,39 +68,54 @@ export default function CityDestinationLanding({ guide, blogs, lang, onNavigate 
     onNavigate(path);
   };
 
-  return (
-    <main className="mx-auto w-full max-w-6xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
-      <nav aria-label={isBn ? "ব্রেডক্রাম্ব" : "Breadcrumb"} className="text-sm text-slate-500">
-        <a href={localizedHref("/destinations")} onClick={(e) => navigate(e, "/destinations")} className="hover:text-brand-navy hover:underline">
-          {isBn ? "গন্তব্যসমূহ" : "Destinations"}
-        </a>
-        <span className="mx-2" aria-hidden="true">/</span>
-        <span aria-current="page" className="text-slate-700">{guide.country}</span>
-      </nav>
+  if (!heroImage) {
+    throw new Error(`Missing generated destination hero image: ${guide.id}`);
+  }
 
-      <header className="rounded-3xl bg-brand-navy p-6 text-white shadow-lg sm:p-9">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#F6B73C]/40 bg-[#F6B73C]/10 px-3 py-1 text-xs font-semibold text-[#F6B73C]">
-          <Compass size={14} aria-hidden="true" />
-          {isBn ? "গন্তব্য গাইড" : "Destination guide"}
-        </div>
-        <h1 className="ural-page-title max-w-4xl font-serif text-3xl font-black leading-tight sm:text-5xl">{guide.title}</h1>
-        <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-200 sm:text-base">{guide.quickAnswer}</p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          {experiencePath && (
-            <a href={localizedHref(experiencePath)} onClick={(e) => navigate(e, experiencePath)} className="inline-flex items-center gap-2 rounded-xl bg-[#F6B73C] px-4 py-3 text-sm font-bold text-brand-navy hover:bg-amber-300">
-              <Ticket size={16} aria-hidden="true" />
-              {isBn ? `${activityDestination.bn} আকর্ষণ ও কার্যক্রম দেখুন` : `Explore ${activityDestination.en} activities`}
+  return (
+    <main className="space-y-8 pb-8">
+      {/* Escape the centered route wrapper and offset its top padding for a true full-bleed hero. */}
+      <header className="relative left-1/2 -mt-10 isolate flex min-h-[420px] w-screen -translate-x-1/2 items-center overflow-hidden bg-brand-navy text-white sm:-mt-12 sm:min-h-[470px]">
+        <ResponsiveImage
+          src={heroImage.src}
+          sizes="100vw"
+          alt={isBn ? heroImage.altBn : heroImage.altEn}
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover object-[62%_center]"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-brand-navy/95 via-brand-navy/75 to-brand-navy/25" />
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+          <nav aria-label={isBn ? "ব্রেডক্রাম্ব" : "Breadcrumb"} className="mb-7 text-sm text-white/80">
+            <a href={localizedHref("/destinations")} onClick={(e) => navigate(e, "/destinations")} className="hover:text-[#F6B73C] hover:underline">
+              {isBn ? "গন্তব্যসমূহ" : "Destinations"}
+            </a>
+            <span className="mx-2" aria-hidden="true">/</span>
+            <span aria-current="page" className="text-white">{guide.country}</span>
+          </nav>
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#F6B73C]/40 bg-[#F6B73C]/10 px-3 py-1 text-xs font-semibold text-[#F6B73C]">
+            <Compass size={14} aria-hidden="true" />
+            {isBn ? "গন্তব্য গাইড" : "Destination guide"}
+          </div>
+          <h1 className="ural-page-title max-w-4xl font-serif text-3xl font-black leading-tight sm:text-4xl lg:text-5xl">{guide.title}</h1>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-100 sm:text-base">{guide.quickAnswer}</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {experiencePath && (
+              <a href={localizedHref(experiencePath)} onClick={(e) => navigate(e, experiencePath)} className="inline-flex items-center gap-2 rounded-xl bg-[#F6B73C] px-4 py-3 text-sm font-bold text-brand-navy hover:bg-amber-300">
+                <Ticket size={16} aria-hidden="true" />
+                {isBn ? `${activityDestination.bn} আকর্ষণ ও কার্যক্রম দেখুন` : `Explore ${activityDestination.en} activities`}
+                <ArrowRight size={15} aria-hidden="true" />
+              </a>
+            )}
+            <a href={localizedHref("/flights")} onClick={(e) => navigate(e, "/flights")} className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/15">
+              {isBn ? "ফ্লাইট পরিকল্পনা" : "Plan flights"}
               <ArrowRight size={15} aria-hidden="true" />
             </a>
-          )}
-          <a href={localizedHref("/flights")} onClick={(e) => navigate(e, "/flights")} className="inline-flex items-center gap-2 rounded-xl border border-white/25 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10">
-            {isBn ? "ফ্লাইট পরিকল্পনা" : "Plan flights"}
-            <ArrowRight size={15} aria-hidden="true" />
-          </a>
+          </div>
         </div>
       </header>
 
-      <section className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(250px,1fr)]">
+      <section className="mx-auto grid w-full max-w-6xl gap-6 px-4 sm:px-6 lg:grid-cols-[minmax(0,2fr)_minmax(250px,1fr)] lg:px-8">
         <article className="space-y-6 rounded-2xl border border-slate-200 bg-white p-5 sm:p-7">
           <div>
             <h2 className="ural-section-title font-serif text-xl font-bold text-slate-900">

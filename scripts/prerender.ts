@@ -15,6 +15,8 @@ import {
   BLOG_DATA,
 } from "../src/constants";
 import { BLOG_SLUGS } from "../src/data/blogIndex";
+import { getHotelGuideAffiliatePlacement, getBlogHotelAffiliatePlacement } from "../src/utils/affiliatePlacement";
+import { DESTINATION_HERO_IMAGES } from "../src/data/destinationHeroImages";
 import { SCHEDULED_BLOG_DIRECTORY } from "../src/data/scheduledBlogIndex.generated";
 import { SCHEDULED_BLOG_IMAGE_MAP } from "../src/data/scheduledBlogSeo.generated";
 // The English blog bodies were split out of constants.ts so the client can load
@@ -1112,22 +1114,22 @@ function renderHotelsHubBody(title: string, description: string, faqSchema: Retu
     (guide) => `
       <section>
         <h3>${escapeHtml(guide.city)}, ${escapeHtml(guide.country)}</h3>
-        <p>Choose between ${guide.neighborhoods
+        <p>Compare ${guide.neighborhoods
           .map((area) => `<strong>${escapeHtml(area.name)}</strong> (${escapeHtml(area.vibe)})`)
-          .join(", ")}. The linked guide compares these areas with example properties such as ${guide.hotels.map((hotel) => escapeHtml(hotel.name)).join(", ")}.</p>
-        <p>Use the area notes to match a stay to your transit plans, preferred pace and trip budget. Check the exact address and current room terms before booking; a property's listed category or neighborhood alone does not confirm availability, accessibility or the final payable price.</p>
+          .join(", ")} against your itinerary, preferred pace and transport needs.</p>
+        <p>These guides do not publish fixed nightly prices or property-specific offers. Check a current listing for your dates and occupancy, then review the final total, room details, payment timing and cancellation conditions.</p>
       </section>`
   ).join("");
 
   return `<article>
-    <h1>Hotel &amp; Stay Guides for Trips from Bangladesh</h1>
+    <h1>Hotel Area Guides for Trips from Bangladesh</h1>
     <p>${escapeHtml(description)}</p>
-    <p>Choosing the right hotel area can matter as much as choosing the property. These guides compare neighborhoods in destinations reached by Bangladeshi travelers, with attention to transit access, family needs, local food options, quiet or busy surroundings, and the type of trip each area supports. Use the linked city guide to compare the neighborhoods and example stays before checking dates and availability. Displayed BDT amounts are planning references, not a guaranteed quote; the final total can differ because of room dates, occupancy, taxes, service charges, meal plans, currency conversion and the provider's cancellation terms.</p>
+    <p>Choosing an area depends on where you plan to go, how you expect to travel and what kind of stay suits your party. Use the linked city guides to compare neighborhood trade-offs and practical booking checks. We do not publish static nightly hotel rates: availability and checkout totals depend on exact dates, occupancy, room type, taxes, service charges, meals, currency and cancellation terms.</p>
     <section><h2>Hotel neighborhood guides by destination</h2><ul>${directory}</ul></section>
     <section><h2>Compare where to stay in each destination</h2>${guideDetails}</section>
     <section><h2>Hotel booking checklist for Bangladesh-based travelers</h2>
-      <p>Before paying, confirm the full property address, check-in and check-out time, room occupancy, whether breakfast is included, and whether the booking is refundable. Compare the final payable amount after local taxes and fees rather than relying on the first nightly rate shown. For family trips, confirm bed configuration and any child charges directly in the booking conditions.</p>
-      <p>Review the neighborhood against your actual itinerary: proximity to a metro or airport link can reduce transfer time, while a quieter area may suit a longer stay. Check recent property reviews and the route between the hotel and the places you expect to visit. If you plan to pay with a Bangladeshi card, verify foreign-currency endorsement and online transaction settings with your bank; payment options vary by hotel and booking platform.</p>
+      <p>Before paying, confirm the property's full address, check-in and check-out arrangements, room occupancy, bed configuration, included meals and refund conditions. Compare the full checkout amount for the same dates, guest count and room type; do not rely on a headline nightly rate alone.</p>
+      <p>Review the neighborhood against your itinerary and check the route to the places you expect to visit using current maps. Ask the property about any specific accessibility, child, luggage or arrival needs. Payment methods vary by property and booking platform, so check card acceptance and foreign-currency settings with your bank before relying on a particular payment method.</p>
     </section>
     ${renderLandingFaqs("hotels-hub-faqs", "Hotel booking questions for Bangladeshi travelers", faqSchema)}
   </article>`;
@@ -1578,9 +1580,9 @@ function buildAllRoutes(): PrerenderRoute[] {
   }
 
   // 4. Hotels Hub (/hotels) + 6 Hotel Guides (/hotels/:id)
-  const hotelsHubTitle = "International Hotel Guides for Bangladeshi Travelers (2026) | URAL";
+  const hotelsHubTitle = "Hotel Area Guides for Bangladeshi Travelers | URAL";
   const hotelsHubDesc =
-    "Compare hotel neighborhoods, example stays and booking guidance in Kathmandu, Bangkok, Kuala Lumpur, Dubai, Singapore and the Maldives.";
+    "Compare hotel neighborhoods and practical booking checks in Kathmandu, Bangkok, Kuala Lumpur, Dubai, Singapore and the Maldives. Partner collections require you to re-enter your dates and guests before checking current availability and full terms.";
   const hotelsFaq = getFaqSchemaForPage("hotels", undefined, true, `${BASE_URL}/hotels`);
   routes.push({
     routePath: "/hotels",
@@ -1600,7 +1602,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         name: hotelsHubTitle,
         description: hotelsHubDesc,
         items: HOTELS_DATA.map((h) => ({
-          name: `Best Hotels in ${h.city} (${h.country})`,
+          name: `Where to Stay in ${h.city} (${h.country})`,
           url: `${BASE_URL}/hotels/${h.id}`,
           description: h.quickAnswer,
         })),
@@ -1612,22 +1614,12 @@ function buildAllRoutes(): PrerenderRoute[] {
 
   for (const h of HOTELS_DATA) {
     const hotelUrl = `${BASE_URL}/hotels/${h.id}`;
-    const title =
-      h.id === "kathmandu-hotels"
-        ? "Best Hotels in Kathmandu for Bangladeshi Travelers (2026) | URAL"
-        : `Top Rated Hotels in ${h.city} | URAL`;
+    const title = `Where to Stay in ${h.city}: Neighborhoods & Booking Checklist | URAL`;
     const description =
-      `Compare neighborhoods, hotel styles and planning budgets in ${h.city}. Check your dates, room terms and current availability before booking.`;
-    const extraNodes: Record<string, unknown>[] = [];
-    if (h.schemaMarkup?.code) {
-      try {
-        extraNodes.push(stripContext(JSON.parse(h.schemaMarkup.code)));
-      } catch {
-        // ignore
-      }
-    }
+      `Compare neighborhoods and booking terms in ${h.city}. No fixed nightly rates are published; check current totals, room terms and availability for your dates.`;
     const hotelFaq = getFaqSchemaForPage("hotels", h.id, false, hotelUrl, HOTELS_DATA);
-    if (hotelFaq) extraNodes.push(stripContext(hotelFaq));
+    const extraNodes: Record<string, unknown>[] = hotelFaq ? [stripContext(hotelFaq)] : [];
+    const placement = getHotelGuideAffiliatePlacement(h.id);
 
     routes.push({
       routePath: `/hotels/${h.id}`,
@@ -1645,38 +1637,35 @@ function buildAllRoutes(): PrerenderRoute[] {
       extraGraphNodes: extraNodes,
       bodyHtml: `
         <article>
-          <h1>Where to Stay in ${escapeHtml(h.city)}: Best Areas &amp; Hotels</h1>
+          <h1>Where to Stay in ${escapeHtml(h.city)}: Neighborhoods &amp; Booking Checklist</h1>
           <p>${escapeHtml(description)}</p>
           <p>${escapeHtml(h.quickAnswer || h.description || description)}</p>
           <h2>Neighborhoods to compare in ${escapeHtml(h.city)}</h2>
           <ul>
             ${h.neighborhoods.map((area) => `<li><strong>${escapeHtml(area.name)}:</strong> ${escapeHtml(area.description)} (${escapeHtml(area.vibe)})</li>`).join("")}
           </ul>
-          <h2>Planning facts</h2>
+          <h2>Practical planning checks</h2>
           <ul>${h.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
-          <h2>Example properties in the ${escapeHtml(h.city)} guide</h2>
-          <ul>${h.hotels.map((hotel) => `<li><strong>${escapeHtml(hotel.name)}</strong> — ${escapeHtml(hotel.category)} option in ${escapeHtml(hotel.neighborhood)}; indicative guide figure BDT ${hotel.priceBdt.toLocaleString("en-US")}. Listed features include ${escapeHtml(hotel.features.join(", "))}.</li>`).join("")}</ul>
           ${AFFILIATE_OFFER_REGISTRY.klook.status === "active" && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active" ? `
           <section aria-labelledby="klook-hotel-check">
-            <h2 id="klook-hotel-check">Get a second hotel quote on Klook</h2>
-            <p>Klook's curated Asia hotel collection opens in a new tab. Enter ${escapeHtml(h.city)}, your dates and guest count on Klook to find available stays. Its selection reflects Klook's own booking data, not an independent quality rating. <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" target="_blank" rel="noopener noreferrer sponsored">Browse Klook's curated hotels</a>.</p>
+            <h2 id="klook-hotel-check">Search Klook’s hotel collection</h2>
+            <p>This tracked link opens Klook’s general hotel collection, not a live quote for a selected property or your dates. Re-enter ${escapeHtml(h.city)}, your dates and guest count on Klook to search current options. The collection reflects Klook’s own booking data, not an independent quality rating. <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" data-affiliate-placement="${escapeHtml(placement)}" target="_blank" rel="noopener noreferrer sponsored">Search Klook hotel collection</a>.</p>
             <ol>${KLOOK_HOTEL_CHECK_STEPS.en.map((step) => `<li><strong>${escapeHtml(step.title)}:</strong> ${escapeHtml(step.body)}</li>`).join("")}</ol>
-            <p><small>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.en)} Klook charges in the hotel's own currency; check your card's foreign-transaction fee before comparing a converted BDT amount.</small></p>
+            <p><small>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.en)} Klook charges in the hotel’s own currency; check your card’s foreign-transaction fee before comparing a converted amount.</small></p>
           </section>` : ""}
           <section>
             <h2>Match the hotel area to your itinerary</h2>
-            <p>The area options in this guide have different profiles: ${h.neighborhoods.map((area) => `${escapeHtml(area.name)} (${escapeHtml(area.vibe)})`).join("; ")}. Choose by looking at where you expect to spend your time, how you will reach those places and the pace that suits your travel party. A central location may reduce some local journeys but can cost more or be busier; a quieter base may require more planning for meals and transport. Use the neighborhood descriptions above to compare trade-offs rather than treating one area as the universal best choice.</p>
-            <p>Before selecting a property, plot its exact address against your planned activities and the transport you expect to use. Check walking distances, station access and airport-transfer arrangements using current maps. If you have mobility needs, children or an early departure, contact the property to confirm the room setup, lift access, luggage storage and check-in arrangements instead of relying only on a neighborhood label.</p>
+            <p>Compare the areas above by planned activities, transport and preferred pace; no neighborhood is the universal best choice. Check each property's exact address against current maps. If you have mobility needs, children or an early departure, confirm room setup, access, luggage arrangements and check-in details directly with the property.</p>
           </section>
           <section>
-            <h2>Check the full rate and reservation conditions</h2>
-            <p>Compare the final amount for the same dates, room occupancy and number of nights. Confirm whether the displayed rate includes local taxes, service charges, breakfast and any required deposit; these items can change the checkout total. Review the cancellation deadline, refund method, payment schedule and conditions for changing guest names. If a booking is marked non-refundable, make sure your travel dates and entry arrangements are sufficiently settled before paying.</p>
-            <p>The BDT figures and property examples in this guide are planning references, not live availability or a guaranteed offer. Prices can change with season, room type, occupancy and booking channel. Check the provider's current listing and recent property reviews, and verify that the selected room meets your needs before confirming. A star category or an attractive headline rate does not replace checking the room description and terms.</p>
+            <h2>Check the current total and reservation conditions</h2>
+            <p>This guide does not publish fixed nightly prices or property-specific offers. Compare the current total for the same dates, guest count, room type and number of nights. Check which taxes, service charges, meals and deposits are included; review the cancellation deadline, refund method, payment schedule and change conditions before paying.</p>
+            <p>Availability and prices can change with dates, occupancy, room type and booking channel. Confirm the current provider listing and recent property details, and make sure the selected room meets your needs before confirming.</p>
           </section>
           <section>
             <h2>Payment and arrival planning for travelers from Bangladesh</h2>
-            <p>Payment methods vary by booking platform and property. Before relying on a Bangladeshi debit or credit card, ask your bank about foreign-currency endorsement, online transactions and any international usage controls. A “pay at property” option may still require a card guarantee or a deposit, so read the policy rather than assuming payment can be made in BDT at arrival. Keep the reservation confirmation and the property's contact details available offline.</p>
-            <p>For arrival day, note the local address and check-in hours, then confirm what to do if your flight is delayed or lands after reception hours. Arrange a transfer using current airport and local transport information; do not assume the hotel is next to the airport or a station simply because it appears close on a city map. Share the address and check-in plan with the other travelers in your party.</p>
+            <p>Payment methods vary by booking platform and property. Before relying on a Bangladeshi debit or credit card, ask your bank about foreign-currency endorsement, online transactions and international usage controls. A “pay at property” option may still require a card guarantee or deposit, so read the policy instead of assuming payment can be made in BDT at arrival.</p>
+            <p>Keep the reservation confirmation and property contact details available offline. Note the local address and check-in hours, and confirm what to do if your flight is delayed or arrives outside reception hours.</p>
           </section>
           ${renderLandingFaqs("hotel-guide-faqs", `Hotel questions about ${h.city}`, hotelFaq)}
         </article>
@@ -1976,6 +1965,8 @@ function buildAllRoutes(): PrerenderRoute[] {
       title,
       description,
       imageUrl: defaultOgImage,
+      lcpImageUrl: DESTINATION_HERO_IMAGES[d.id].src,
+      lcpImageSizes: "100vw",
       breadcrumbs: [
         { name: "Home", url: `${BASE_URL}/` },
         { name: "Destinations", url: `${BASE_URL}/destinations` },
@@ -2621,7 +2612,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     const klookHotelPlacement = KLOOK_HOTEL_BLOG_PLACEMENTS[post.slug];
     const klookHotelHtml =
       klookHotelPlacement && AFFILIATE_OFFER_REGISTRY.klook.status === "active" && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active"
-        ? `<section aria-labelledby="klook-hotel-quote"><h2 id="klook-hotel-quote">${escapeHtml(klookHotelPlacement.headlineEn)}</h2><p>${escapeHtml(klookHotelPlacement.bodyEn)}</p><p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(klookHotelPlacement.buttonEn)}</a></p><p><em>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.en)}</em></p></section>`
+        ? `<section aria-labelledby="klook-hotel-quote"><h2 id="klook-hotel-quote">${escapeHtml(klookHotelPlacement.headlineEn)}</h2><p>${escapeHtml(klookHotelPlacement.bodyEn)}</p><p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" data-affiliate-placement="${escapeHtml(getBlogHotelAffiliatePlacement(post.slug))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(klookHotelPlacement.buttonEn)}</a></p><p><em>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.en)}</em></p></section>`
         : "";
 
     routes.push({
@@ -3037,7 +3028,7 @@ function buildBengaliBody(
           bnSection(
             klookHotelPlacementBn.headlineBn,
             `<p>${escapeHtml(klookHotelPlacementBn.bodyBn)}</p>` +
-              `<p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(klookHotelPlacementBn.buttonBn)}</a></p>` +
+              `<p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" data-affiliate-placement="${escapeHtml(getBlogHotelAffiliatePlacement(id))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(klookHotelPlacementBn.buttonBn)}</a></p>` +
               `<p><em>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.bn)}</em></p>`
           )
         );
@@ -3126,22 +3117,23 @@ function buildBengaliBody(
         parts.push(
           bnFactList([{ label: "শহর", value: hotel.city }, { label: "দেশ", value: hotel.country }])
         );
-        const stays = hotel.hotels
-          .slice(0, 6)
-          .map(
-            (item) =>
-              `<li><strong>${escapeHtml(item.name)}</strong> — BDT ${item.priceBdt}/রাত (${item.stars}★, ${escapeHtml(item.neighborhood)})</li>`
-          )
+        const areas = hotel.neighborhoods
+          .map((area) => `<li><strong>${escapeHtml(area.name)}:</strong> ${escapeHtml(area.description)} (${escapeHtml(area.vibe)})</li>`)
           .join("");
-        if (stays) parts.push(bnSection("কোথায় থাকবেন", `<ul>${stays}</ul>`));
+        if (areas) parts.push(bnSection("কোন এলাকাগুলো তুলনা করবেন", `<ul>${areas}</ul>`));
+        const checks = hotel.keyFacts
+          .map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`)
+          .join("");
+        if (checks) parts.push(bnSection("বুকিংয়ের আগে যাচাই করুন", `<ul>${checks}</ul>`));
         if (
           AFFILIATE_OFFER_REGISTRY.klook.status === "active" &&
           AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active"
         ) {
+          const placement = getHotelGuideAffiliatePlacement(hotel.id);
           parts.push(
             bnSection(
-              "Klook-এর বাছাইকৃত হোটেল তালিকায় দ্বিতীয় দাম দেখুন",
-              `<p>Klook-এর বাছাইকৃত এশিয়া হোটেল তালিকা নতুন ট্যাবে খুলবে। সেখানে ${escapeHtml(hotel.city)}, তারিখ ও অতিথিসংখ্যা দিয়ে থাকার বিকল্প খুঁজুন। তালিকাটি Klook-এর নিজস্ব বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়। <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" target="_blank" rel="noopener noreferrer sponsored">Klook-এর বাছাইকৃত হোটেল দেখুন</a>।</p>` +
+              "Klook-এর হোটেল তালিকা সার্চ করুন",
+              `<p>এই ট্র্যাক করা লিংকটি Klook-এর সাধারণ হোটেল তালিকা খোলে—নির্বাচিত হোটেল বা আপনার তারিখের লাইভ কোট নয়। ${escapeHtml(hotel.city)}, তারিখ ও অতিথিসংখ্যা Klook-এ আবার দিন। তালিকাটি Klook-এর নিজস্ব বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়। <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" data-affiliate-placement="${escapeHtml(placement)}" target="_blank" rel="noopener noreferrer sponsored">Klook-এর সাধারণ হোটেল তালিকা সার্চ করুন</a>।</p>` +
                 `<ol>${KLOOK_HOTEL_CHECK_STEPS.bn.map((step) => `<li><strong>${escapeHtml(step.title)}:</strong> ${escapeHtml(step.body)}</li>`).join("")}</ol>` +
                 `<p><small>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.bn)} Klook হোটেলের নিজস্ব মুদ্রায় চার্জ করে; BDT-তে বদলে তুলনার আগে কার্ডের বিদেশি লেনদেন ফি জেনে নিন।</small></p>`
             )

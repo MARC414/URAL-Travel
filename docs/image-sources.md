@@ -1,6 +1,6 @@
 # Hero image sources and attribution
 
-These locally optimized hero assets are derived from real photographs. Each image is cropped/resized for the site; AVIF/WebP variants are generated from the local JPEG masters.
+This register records the source and attribution obligations for the site's locally optimized hero assets. Photo assets are cropped/resized for the site; AVIF/WebP variants are generated from local JPEG masters. Destination hero artwork is AI-generated for URAL Travel and has no third-party photo attribution requirement.
 
 | Asset | Placement | Source and credit | License |
 | --- | --- | --- | --- |
@@ -8,5 +8,15 @@ These locally optimized hero assets are derived from real photographs. Each imag
 | `hotels_london_marylebone_exterior_20261101` | Hotel-guide index | Pexels, image-search result/photo ID `3494638`; [Pexels London hotel search](https://www.pexels.com/search/hotel%20in%20london/) | [Pexels License](https://www.pexels.com/license/). |
 | `hotel_guide_guest_room_20261101` | Destination hotel guides | [Hotel room interior](https://www.pexels.com/photo/interior-design-of-hotel-room-19045884) — Pexels | [Pexels License](https://www.pexels.com/license/). |
 | `visa_changi_immigration_20261101` | Visa index and country guides | [Singapore Changi Airport Terminal 1 Arrival Immigration](https://commons.wikimedia.org/wiki/File:Singapore_Changi_Airport_Terminal_1_Arrival_Immigration.jpg) — Exec8 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The cropped and resized derivative is distributed under the same license. |
+| `destination_nepal_hero_20261101` | Nepal destination guide | AI-generated for URAL Travel; Annapurna range and Phewa Lake scene | No third-party photo attribution required. |
+| `destination_thailand_hero_20261101` | Thailand destination guide | AI-generated for URAL Travel; Wat Arun and Chao Phraya River scene | No third-party photo attribution required. |
+| `destination_malaysia_hero_20261101` | Malaysia destination guide | AI-generated for URAL Travel; Petronas Twin Towers and Kuala Lumpur scene | No third-party photo attribution required. |
+| `destination_dubai_hero_20261101` | Dubai destination guide | AI-generated for URAL Travel; Burj Khalifa and Downtown Dubai scene | No third-party photo attribution required. |
+| `destination_singapore_hero_20261101` | Singapore destination guide | AI-generated for URAL Travel; Marina Bay waterfront scene | No third-party photo attribution required. |
+| `destination_maldives_hero_20261101` | Maldives destination guide | AI-generated for URAL Travel; overwater villas and lagoon scene | No third-party photo attribution required. |
+| `destination_london_hero_20261101` | London destination guide | AI-generated for URAL Travel; Big Ben and the Palace of Westminster scene | No third-party photo attribution required. |
+| `destination_italy_hero_20261101` | Italy destination guide | AI-generated for URAL Travel; Colosseum in Rome scene | No third-party photo attribution required. |
+| `destination_paris_hero_20261101` | Paris destination guide | AI-generated for URAL Travel; Eiffel Tower and Seine scene | No third-party photo attribution required. |
+| `destination_new_york_hero_20261101` | New York City destination guide | AI-generated for URAL Travel; Statue of Liberty and Lower Manhattan scene | No third-party photo attribution required. |
 
 The Commons credits and license are also linked in each hero's visible photo credit. The hotel photos are credited to Pexels in the UI; Pexels attribution is optional, and the source links are retained here for provenance. Re-check the source page before replacing or re-licensing any source image.

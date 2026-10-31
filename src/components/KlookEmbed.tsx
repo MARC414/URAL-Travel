@@ -23,8 +23,8 @@ export function KlookEmbed({ lang = "en" }: KlookEmbedProps) {
           </h4>
           <p className="font-mono text-[10px] uppercase tracking-wider text-slate-500">
             {isBn
-              ? "এশিয়ার বাছাইকৃত হোটেল · ভ্রমণ-অভিজ্ঞতা · আকর্ষণ"
-              : "Curated Asia hotels · Tours · Attractions"}
+              ? "সাধারণ হোটেল তালিকা · ভ্রমণ-অভিজ্ঞতা · আকর্ষণ"
+              : "General hotel collection · Tours · Attractions"}
           </p>
         </div>
         <span className="ml-auto hidden items-center gap-1 rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 font-mono text-[10px] font-bold text-emerald-800 sm:inline-flex">
@@ -34,18 +34,19 @@ export function KlookEmbed({ lang = "en" }: KlookEmbedProps) {
 
       <p className="mb-3 text-[11px] leading-relaxed text-slate-600">
         {isBn
-          ? "হোটেলের বাছাইকৃত তালিকা Klook-এ নতুন ট্যাবে খুলবে। গন্তব্য, ভ্রমণের তারিখ ও অতিথিসংখ্যা Klook-এর পেজে আবার দিন।"
-          : "The curated hotel collection opens on Klook in a new tab. Enter your destination, travel dates and guest count on Klook."}
+          ? "এই লিংকটি Klook-এর সাধারণ হোটেল তালিকা খোলে—নির্বাচিত হোটেল বা তারিখের লাইভ কোট নয়। গন্তব্য, তারিখ ও অতিথিসংখ্যা Klook-এ আবার দিন। যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; এটি ভ্রমণকারীর জন্য ছাড় নয়।"
+          : "This link opens Klook’s general hotel collection—not a live quote for a selected property or dates. Re-enter your destination, dates and guest count on Klook. URAL may earn commission on qualifying bookings; this is not a traveller discount."}
       </p>
 
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         <a
           href={klookHotelUrl}
+          data-affiliate-placement="klook_embed_hotel_collection"
           target="_blank"
           rel="noopener noreferrer sponsored"
           className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-lg bg-brand-navy px-4 py-2.5 text-xs font-bold text-[#F6B73C] transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
         >
-          <span>{isBn ? "Klook-এর বাছাইকৃত হোটেল দেখুন" : "Browse Klook’s Curated Hotels"}</span>
+          <span>{isBn ? "Klook-এর হোটেল তালিকা সার্চ করুন" : "Search Klook hotel collection"}</span>
           <ExternalLink size={11} aria-hidden="true" />
         </a>
         <a

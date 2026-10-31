@@ -58,7 +58,7 @@ export const BLOG_CATEGORY_TABS: readonly BlogCategoryTab[] = [
 export const BLOG_CATEGORY_GROUPINGS: Readonly<Record<string, readonly string[]>> = {
   "Flights, Hotels & Food": [
     "Cheap Flight Tips",
-    "Hotel Savings",
+    "Hotel Planning",
     "Food & Culture",
     "এয়ারলাইন্স ও লাগেজ",
   ],
