@@ -272,7 +272,7 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
                                 id={`hotel-booking-btn-${room.name.toLowerCase().replace(/\s+/g, '-')}`}
 
-                                href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                                href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
 
                                 target="_blank"
 
@@ -284,9 +284,9 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
                                     isBn
 
-                                      ? `${room.name}, ${room.neighborhood}-এর সেরা হোটেল ডিল খোলা হচ্ছে...`
+                                      ? "Klook-এর বাছাইকৃত হোটেল তালিকা খুলছে। গন্তব্য ও তারিখ Klook-এ আবার দিন।"
 
-                                      : `Opening verified hotel rates for ${room.name}, ${room.neighborhood} on Klook...`
+                                      : "Opening Klook’s curated hotel collection. Re-enter your destination and dates there."
 
                                   );
 
@@ -296,7 +296,7 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
                               >
 
-                                {isBn ? "বুক করুন" : "Book Stay"} <ExternalLink size={10} />
+                                {isBn ? "Klook-এ হোটেল দেখুন" : "Browse on Klook"} <ExternalLink size={10} />
 
                               </a>
 

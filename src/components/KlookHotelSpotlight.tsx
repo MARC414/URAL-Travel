@@ -42,18 +42,21 @@ interface KlookHotelSpotlightProps {
  * dropped automatically after KLOOK_PROMO.expiresAt (BST); the evergreen
  * sentence keeps the link useful afterwards.
  *
- * The partner email's curated landing page has no affiliate parameters, so the
- * button uses URAL's registered tracked Klook link and the copy does not claim
- * to open that curated page.
+ * The hotel button uses the partner-provided tracked deep link to open the
+ * curated hotel collection. Selected city/date/guest details are not forwarded,
+ * so the copy tells travellers to enter those on Klook.
  */
 export function KlookHotelSpotlight({ city, lang = "en" }: KlookHotelSpotlightProps) {
   // A paused partner would make this Klook-specific copy false while
   // resolvePartnerUrl silently redirected readers to KKday. Hide it instead.
-  if (AFFILIATE_OFFER_REGISTRY.klook.status === "paused") return null;
+  if (
+    AFFILIATE_OFFER_REGISTRY.klook.status === "paused" ||
+    AFFILIATE_OFFER_REGISTRY.klookHotels.status === "paused"
+  ) return null;
 
   const isBn = lang === "bn";
   const cityLabel = isBn ? CITY_BN[city] ?? city : city;
-  const href = resolvePartnerUrl(AFFILIATE_LINKS.klook);
+  const href = resolvePartnerUrl(AFFILIATE_LINKS.klookHotels);
 
   const steps = KLOOK_HOTEL_CHECK_STEPS[lang];
 
@@ -89,8 +92,8 @@ export function KlookHotelSpotlight({ city, lang = "en" }: KlookHotelSpotlightPr
 
       <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-200">
         {isBn
-          ? `Klook-এর এশিয়া হোটেল সার্চে ${cityLabel} আছে, আর প্ল্যাটফর্মটি নিজেদের সবচেয়ে বেশি বুকিং হওয়া হোটেলের একটি বাছাই করা তালিকাও এক জায়গায় রাখে। ওপরের এলাকাগুলোর জন্য এটিকে দ্বিতীয় দাম হিসেবে ব্যবহার করুন—ক্রমটি Klook-এর নিজের বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়।`
-          : `Klook's Asia hotel search covers ${city}, and the platform also groups a shortlist of its most-booked hotels in one collection. Treat either as a second quote for the areas above — the ranking is Klook's own booking data, not an independent quality rating.`}
+          ? `Klook-এর বাছাইকৃত হোটেল তালিকা নতুন ট্যাবে খুলবে। ${cityLabel}-এ থাকার বিকল্প দেখতে Klook-এ গন্তব্য, তারিখ ও অতিথিসংখ্যা দিন। তালিকার ক্রম Klook-এর নিজস্ব বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়।`
+          : `Klook's curated hotel collection opens in a new tab. Enter ${city}, your dates and guest count on Klook to find available stays. Its selection reflects Klook's own booking data, not an independent quality rating.`}
       </p>
 
       <ol className="mt-4 grid gap-2 sm:grid-cols-3">
@@ -112,7 +115,7 @@ export function KlookHotelSpotlight({ city, lang = "en" }: KlookHotelSpotlightPr
           rel="noopener noreferrer sponsored"
           className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand-gold px-4 py-3 text-sm font-bold text-brand-navy transition-colors hover:bg-[#FFC654] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
         >
-          {isBn ? "Klook-এ হোটেল খুঁজুন" : "Search Klook hotels"}
+          {isBn ? "Klook-এর বাছাইকৃত হোটেল দেখুন" : "Browse Klook’s Curated Hotels"}
           <ExternalLink size={15} aria-hidden="true" />
         </a>
         <a

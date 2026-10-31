@@ -2325,12 +2325,33 @@ if (sitemap) {
 
   // --- Klook hotel second-quote module -------------------------------------
   //
-  // The partner email promotes a curated Klook hotel landing page, but that URL
-  // carries no affiliate parameters. These checks pin the chosen behaviour:
-  // hotel guides and the hotel-comparison article link the REGISTERED tracked
-  // Klook URL, disclose the 8% as publisher commission while the offer is live,
-  // and fall back to evergreen copy after 2026-12-31 without losing the link.
-  const KLOOK_HOTEL_HREF = resolvePartnerUrl(AFFILIATE_LINKS.klook);
+  // The supplied Travelpayouts deep link targets Klook's curated hotel
+  // collection. Hotel placements use this dedicated tracked URL, while generic
+  // Klook links remain on the standard partner URL. These checks also protect
+  // the commission disclosure, expiry behavior and bilingual hotel placements.
+  const KLOOK_HOTEL_HREF = resolvePartnerUrl(AFFILIATE_LINKS.klookHotels);
+  const KLOOK_HOTEL_LINK_CONSUMERS = [
+    "src/routes/HotelsRouteView.tsx",
+    "src/routes/DestinationsRouteView.tsx",
+    "src/components/TravelpayoutsCustomWidget.tsx",
+    "src/components/KlookEmbed.tsx",
+    "src/components/KlookHotelSpotlight.tsx",
+    "src/components/KlookHotelOffers.tsx",
+    "src/components/TravelEssentials.tsx",
+    "src/components/TravelpayoutsWidget.jsx",
+    "src/components/ExperiencesPage.tsx",
+    "src/App.tsx",
+    "scripts/prerender.ts",
+  ];
+  const missingKlookHotelLinkConsumers = KLOOK_HOTEL_LINK_CONSUMERS.filter((file) => {
+    const source = read(path.join(ROOT_DIR, file)) ?? "";
+    return !source.includes("AFFILIATE_LINKS.klookHotels") && !source.includes("klookHotelsPartnerUrl");
+  });
+  check(
+    missingKlookHotelLinkConsumers.length === 0,
+    `all hotel-specific site placements use the dedicated tracked Klook hotel link [${missingKlookHotelLinkConsumers.join(", ")}]`
+  );
+
   const KLOOK_HOTEL_IDS = [
     "kathmandu-hotels",
     "bangkok-hotels",
@@ -2351,14 +2372,16 @@ if (sitemap) {
     const enHtml = read(path.join(DIST_DIR, "hotels", `${hotelId}.html`)) ?? "";
     const bnHtml = read(path.join(DIST_DIR, "bn", "hotels", `${hotelId}.html`)) ?? "";
     const enSection = sectionStartingAt(enHtml, 'id="klook-hotel-check"');
-    const bnSection = sectionStartingAt(bnHtml, "Klook-এ হোটেলের দ্বিতীয় দাম দেখুন");
+    const bnSection = sectionStartingAt(bnHtml, "Klook-এর বাছাইকৃত হোটেল তালিকায় দ্বিতীয় দাম দেখুন");
     const enOk =
       enSection.includes("Get a second hotel quote on Klook") &&
       enSection.includes(KLOOK_HOTEL_HREF) &&
+      !enSection.includes(AFFILIATE_LINKS.klook) &&
       enSection.includes('rel="noopener noreferrer sponsored"') &&
       enSection.includes("not a traveller discount");
     const bnOk =
       bnSection.includes(KLOOK_HOTEL_HREF) &&
+      !bnSection.includes(AFFILIATE_LINKS.klook) &&
       bnSection.includes('rel="noopener noreferrer sponsored"') &&
       bnSection.includes("ভ্রমণকারীর জন্য ছাড় নয়");
     // The prerendered file must stay evergreen: a build made during the
@@ -2432,9 +2455,11 @@ if (sitemap) {
   const klookBlogOk =
     !!klookBlogPlacement &&
     klookBlogEnSection.includes(KLOOK_HOTEL_HREF) &&
+    !klookBlogEnSection.includes(AFFILIATE_LINKS.klook) &&
     klookBlogEnSection.includes('rel="noopener noreferrer sponsored"') &&
     klookBlogEnSection.includes(klookBlogPlacement.buttonEn) &&
     klookBlogBnSection.includes(KLOOK_HOTEL_HREF) &&
+    !klookBlogBnSection.includes(AFFILIATE_LINKS.klook) &&
     klookBlogBnSection.includes(klookBlogPlacement.buttonBn) &&
     !/8%|৮%|December 31, 2026|৩১ ডিসেম্বর ২০২৬/.test(klookBlogEnSection + klookBlogBnSection) &&
     !(klookBlogEn + klookBlogBn).includes("klook.com/tetris");
@@ -2444,9 +2469,14 @@ if (sitemap) {
   );
 
   check(
-    AFFILIATE_OFFER_REGISTRY.klook.offerType === "commission-boost" &&
+    AFFILIATE_LINKS.klookHotels === "https://klook.tpo.li/tnjuBwoy" &&
+      AFFILIATE_LINKS.klookHotels !== AFFILIATE_LINKS.klook &&
+      AFFILIATE_OFFER_REGISTRY.klookHotels.url === AFFILIATE_LINKS.klookHotels &&
+      AFFILIATE_OFFER_REGISTRY.klookHotels.offerType === "commission-boost" &&
+      AFFILIATE_OFFER_REGISTRY.klookHotels.expiresAt === KLOOK_PROMO.expiresAt &&
+      AFFILIATE_OFFER_REGISTRY.klook.offerType === "commission-boost" &&
       AFFILIATE_OFFER_REGISTRY.klook.expiresAt === KLOOK_PROMO.expiresAt,
-    "the Klook hotel rate stays tied to the registry offer and its expiry date"
+    "the dedicated Klook hotel collection has its own tracked link and shares the registered hotel commission expiry"
   );
 
   check(

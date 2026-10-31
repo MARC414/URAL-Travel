@@ -5356,10 +5356,9 @@ export default function App() {
             </div>
 
             {/* COLUMN 5 (3 Cols): Travel Services — one row per partner and per job.
-                Klook used to appear twice with two different labels pointing at the
-                identical URL (hotels + tours), so a reader saw seven offers where
-                there were six. The two are merged; Go City, Tiqets, Airalo, Welcome
-                Pickups and AirHelp stay. Labels say what you actually buy. */}
+                Klook hotels now use the tracked hotel-collection deep link; tours
+                and activities keep the general Klook affiliate destination. Labels
+                distinguish the separate booking tasks. */}
             <div className="lg:col-span-3 space-y-2.5">
               <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
                 {isBn ? "গ্লোবাল ট্রাভেল সার্ভিস" : "Travel Services"}
@@ -5367,12 +5366,23 @@ export default function App() {
               <ul className="space-y-1.5 text-xs">
                 <li>
                   <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex items-center gap-1 py-1 hover:text-white hover:underline"
+                  >
+                    {isBn ? "Klook-এর বাছাইকৃত হোটেল" : "Klook Curated Hotels"}
+                    <span aria-hidden="true" className="text-slate-500">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
                     href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
                     className="inline-flex items-center gap-1 py-1 hover:text-white hover:underline"
                   >
-                    {isBn ? "হোটেল, ট্যুর ও অ্যাক্টিভিটি" : "Hotels, Tours & Activities"}
+                    {isBn ? "Klook ট্যুর ও অ্যাক্টিভিটি" : "Klook Tours & Activities"}
                     <span aria-hidden="true" className="text-slate-500">↗</span>
                   </a>
                 </li>

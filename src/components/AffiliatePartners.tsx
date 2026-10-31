@@ -11,6 +11,8 @@ import { WelcomePickupsEmbed, WELCOME_PICKUPS_PARTNER_URL } from "./WelcomePicku
 export const AFFILIATE_LINKS = {
   aviasales: "https://aviasales.tpo.li/8saJolX0",
   klook: "https://klook.tpo.li/IYOU76Bn",
+  // Klook's campaign-specific tracked deep link to its curated Asia hotel collection.
+  klookHotels: "https://klook.tpo.li/tnjuBwoy",
   tiqets: "https://tiqets.tpo.li/KSc4uyIB",
   airhelp: "https://airhelp.tpo.li/XS95LnEC",
   kkday: "https://kkday.tpo.li/3Ecyxris",
@@ -172,6 +174,17 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     expiresAt: KLOOK_PROMO.expiresAt,
     activeNote: `Boosted Q4 Commission through ${KLOOK_PROMO.validUntil}: 10% Tours/Activities + 8% Hotels (Web & App)`,
     expiredFallbackBehavior: "Keeps permanent Klook Hotels & Activities link live after Dec 31, 2026; falls back to KKday if ever paused"
+  },
+  klookHotels: {
+    id: "klookHotels",
+    partnerName: "Klook Curated Asia Hotels",
+    status: "active",
+    offerType: "commission-boost",
+    url: AFFILIATE_LINKS.klookHotels,
+    fallbackPartner: "klook",
+    expiresAt: KLOOK_PROMO.expiresAt,
+    activeNote: `Tracked deep link to Klook's curated Asia hotel collection; hotel commission offer through ${KLOOK_PROMO.validUntil}`,
+    expiredFallbackBehavior: "Keeps the curated Klook hotel destination available after the boosted rate ends; falls back to the standard tracked Klook link if this deep link is paused"
   },
   tiqets: {
     id: "tiqets",

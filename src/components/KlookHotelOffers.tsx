@@ -84,10 +84,9 @@ export const KLOOK_HOTEL_CHECK_STEPS = {
 /* -------------------------------------------------------------------------
    Klook hotel-collection placement
    -------------------------------------------------------------------------
-   The partner email promotes a curated Klook landing page of best-selling
-   hotels across Asia. That URL carries no affiliate parameters, so linking it
-   directly would lose attribution; this placement uses the registered tracked
-   Klook link instead and does NOT claim to open the curated page. The copy
+   The partner provided a Travelpayouts-tracked deep link to Klook's curated
+   Asia hotel collection. Hotel placements use that dedicated link; general
+   Klook links remain separate for tours, activities and attractions. The copy
    treats Klook as a second quote, never as a discount for the traveller.
    --------------------------------------------------------------------------- */
 
@@ -109,11 +108,11 @@ export const KLOOK_HOTEL_BLOG_PLACEMENTS: Record<string, KlookHotelBlogPlacement
     headlineEn: "Comparing Bangkok, Kuala Lumpur or Dubai hotels? Get a second quote on Klook",
     headlineBn: "ব্যাংকক, কুয়ালালামপুর বা দুবাইয়ের হোটেল তুলনা করছেন? Klook-এ দ্বিতীয় দাম দেখুন",
     bodyEn:
-      "Klook's Asia hotel search covers all three cities, and the platform also groups a shortlist of its most-booked hotels in one collection. Match the same nights and guest count, then compare the checkout total — taxes, service charge, breakfast and the cancellation deadline — against the BDT guide figures in this article. Klook's ranking is its own booking data, not an independent quality rating.",
+      "Open Klook's curated Asia hotel collection and search there for your destination. Match the same nights and guest count, then compare the checkout total — including taxes, service charge, breakfast and the cancellation deadline — against the BDT guide figures in this article. The collection reflects Klook's own booking data, not an independent quality rating.",
     bodyBn:
-      "Klook-এর এশিয়া হোটেল সার্চে এই তিন শহরই আছে, আর প্ল্যাটফর্মটি নিজেদের সবচেয়ে বেশি বুকিং হওয়া হোটেলের একটি বাছাই করা তালিকাও এক জায়গায় রাখে। একই রাত ও একই সংখ্যক অতিথি দিয়ে চূড়ান্ত মোট দাম—ট্যাক্স, সার্ভিস চার্জ, ব্রেকফাস্ট ও বাতিলের শেষ সময়—এই লেখার BDT হিসাবের সঙ্গে তুলনা করুন। Klook-এর ক্রম তাদের নিজেদের বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়।",
-    buttonEn: "Search Klook hotels",
-    buttonBn: "Klook-এ হোটেল খুঁজুন",
+      "Klook-এর বাছাইকৃত এশিয়া হোটেল তালিকা খুলে সেখানে আপনার গন্তব্য খুঁজুন। একই রাত ও অতিথিসংখ্যা দিয়ে ট্যাক্স, সার্ভিস চার্জ, ব্রেকফাস্ট এবং বাতিলের শেষ সময়সহ চূড়ান্ত মোট দাম এই লেখার BDT হিসাবের সঙ্গে তুলনা করুন। তালিকাটি Klook-এর নিজস্ব বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়।",
+    buttonEn: "Browse Klook’s curated hotel collection",
+    buttonBn: "Klook-এর বাছাইকৃত হোটেল তালিকা দেখুন",
   },
 };
 
@@ -128,10 +127,13 @@ export function KlookHotelBlogCallout({
   if (!placement) return null;
   // If Klook is ever paused, resolvePartnerUrl would send readers to KKday while
   // this copy kept naming Klook. Hiding the placement is the honest failure mode.
-  if (AFFILIATE_OFFER_REGISTRY.klook.status === "paused") return null;
+  if (
+    AFFILIATE_OFFER_REGISTRY.klook.status === "paused" ||
+    AFFILIATE_OFFER_REGISTRY.klookHotels.status === "paused"
+  ) return null;
 
   const isBn = lang === "bn";
-  const href = resolvePartnerUrl(AFFILIATE_LINKS.klook);
+  const href = resolvePartnerUrl(AFFILIATE_LINKS.klookHotels);
 
   return (
     <aside

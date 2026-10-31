@@ -583,15 +583,26 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
               </a>
 
               <a
-                href={AFFILIATE_LINKS.klook}
+                href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
                 className="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-semibold text-xs px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2 cursor-pointer"
               >
                 <span>
                   {isBn
-                    ? "Klook-এ হোটেল ও ট্যুর ডিল দেখুন"
-                    : "Explore Klook Hotels, Tours & Activities"}
+                    ? "Klook-এর বাছাইকৃত হোটেল দেখুন"
+                    : "Browse Klook’s Curated Hotels"}
+                </span>
+                <ExternalLink size={13} />
+              </a>
+              <a
+                href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="bg-slate-700 hover:bg-slate-600 border border-slate-600 text-white font-semibold text-xs px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2 cursor-pointer"
+              >
+                <span>
+                  {isBn ? "Klook ট্যুর ও অ্যাক্টিভিটি" : "Klook Tours & Activities"}
                 </span>
                 <ExternalLink size={13} />
               </a>

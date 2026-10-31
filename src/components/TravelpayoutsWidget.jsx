@@ -3116,6 +3116,19 @@ export default function TravelpayoutsWidget({
                 )}
                 <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px]">
                   <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex min-h-8 items-center gap-1 text-slate-200 transition-colors hover:text-white"
+                  >
+                    <span>
+                      {isBn
+                        ? `${effectiveDest.city} হোটেল (Klook)`
+                        : `${effectiveDest.city} Hotels (Klook)`}
+                    </span>
+                    <ExternalLink size={11} aria-hidden="true" />
+                  </a>
+                  <a
                     href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
@@ -3123,8 +3136,8 @@ export default function TravelpayoutsWidget({
                   >
                     <span>
                       {isBn
-                        ? `${effectiveDest.city} হোটেল ও ট্যুর (Klook)`
-                        : `${effectiveDest.city} Hotels & Tours (Klook)`}
+                        ? `${effectiveDest.city} ট্যুর (Klook)`
+                        : `${effectiveDest.city} Tours (Klook)`}
                     </span>
                     <ExternalLink size={11} aria-hidden="true" />
                   </a>

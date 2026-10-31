@@ -699,7 +699,7 @@ export function TravelpayoutsCustomWidget({
   const uralWlDeepUrl = `/travelpayouts-wl.html?origin=${origCode}&destination=${
     searchTab === "hotels" ? hotelIataCode : destCode
   }&flightSearch=${searchCode}&currency=${currency}&standalone=1`;
-  const klookHotelsPartnerUrl = resolvePartnerUrl(AFFILIATE_LINKS.klook);
+  const klookHotelsPartnerUrl = resolvePartnerUrl(AFFILIATE_LINKS.klookHotels);
   const goCityPassUrl = resolvePartnerUrl(AFFILIATE_LINKS.goCity);
   const [swapRotated, setSwapRotated] = useState(false);
 
@@ -1240,14 +1240,16 @@ export function TravelpayoutsCustomWidget({
                 >
                   <div className="flex items-center gap-1.5 font-black text-sm sm:text-[15px] tracking-tight">
                     <Search size={16} className="shrink-0 stroke-[2.5]" />
-                    <span>Search Hotels</span>
+                    <span>{isBn ? "Klook-এর বাছাইকৃত হোটেল দেখুন" : "Browse Klook’s Curated Hotels"}</span>
                     <ExternalLink
                       size={13}
                       className="shrink-0 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
                     />
                   </div>
-                  <span className="text-[10px] font-mono font-bold text-brand-navy/80 truncate max-w-full">
-                    {hotelCity || "Global"} · {currency}
+                  <span className="max-w-full truncate text-[9px] font-mono font-bold text-brand-navy/80">
+                    {isBn
+                      ? "গন্তব্য, তারিখ ও অতিথির সংখ্যা Klook-এ আবার দিন"
+                      : "Re-enter destination, dates & guests on Klook"}
                   </span>
                 </a>
               </div>
@@ -1367,7 +1369,7 @@ export function TravelpayoutsCustomWidget({
                     className="inline-flex items-center gap-1.5 bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer"
                   >
                     <span>
-                      Search {hotelCity} Hotels on Klook ({currency})
+                      Browse Klook’s curated hotel collection
                     </span>
                     <ExternalLink size={12} />
                   </a>

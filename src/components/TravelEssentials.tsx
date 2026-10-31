@@ -26,20 +26,6 @@ export function TravelEssentials({
   const [transferProvider, setTransferProvider] = useState<"welcome" | "kiwitaxi">("welcome");
   const isBn = lang === "bn";
 
-  // Helper to map country to appropriate Klook City ID
-  const parseKlookCityId = (cName: string): number => {
-    const formatted = cName.toLowerCase();
-    if (formatted.includes("nepal") || formatted.includes("kathmandu")) return 98;
-    if (formatted.includes("thailand") || formatted.includes("bangkok")) return 6;
-    if (formatted.includes("malaysia") || formatted.includes("kuala")) return 14;
-    if (formatted.includes("singapore")) return 15;
-    if (formatted.includes("maldives")) return 110;
-    if (formatted.includes("uae") || formatted.includes("dubai")) return 9;
-    return 9;
-  };
-
-  const cityId = parseKlookCityId(country);
-
   const tabs: Array<{
     id: EssentialsTab;
     label: string;
@@ -206,12 +192,21 @@ export function TravelEssentials({
             </p>
             <div className="flex flex-wrap items-center gap-2.5 pt-2">
               <a
-                href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
                 className="bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
               >
-                <span>Klook Hotels &amp; Tours</span>
+                <span>{isBn ? "Klook-এর বাছাইকৃত হোটেল" : "Klook Curated Hotels"}</span>
+                <ExternalLink size={12} />
+              </a>
+              <a
+                href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 font-semibold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
+              >
+                <span>{isBn ? "Klook ট্যুর ও পাস" : "Klook Tours & Passes"}</span>
                 <ExternalLink size={12} />
               </a>
               <a
@@ -236,7 +231,7 @@ export function TravelEssentials({
           </div>
 
           <div className="lg:col-span-7">
-            <KlookEmbed cityId={cityId} />
+            <KlookEmbed lang={lang} />
           </div>
         </div>
       )}
