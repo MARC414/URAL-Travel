@@ -15,6 +15,7 @@ import {
   BLOG_DATA,
 } from "../src/constants";
 import { BLOG_SLUGS } from "../src/data/blogIndex";
+import { DESTINATION_HERO_IMAGES } from "../src/data/destinationHeroImages";
 import { SCHEDULED_BLOG_DIRECTORY } from "../src/data/scheduledBlogIndex.generated";
 import { SCHEDULED_BLOG_IMAGE_MAP } from "../src/data/scheduledBlogSeo.generated";
 // The English blog bodies were split out of constants.ts so the client can load
@@ -1976,6 +1977,8 @@ function buildAllRoutes(): PrerenderRoute[] {
       title,
       description,
       imageUrl: defaultOgImage,
+      lcpImageUrl: DESTINATION_HERO_IMAGES[d.id].src,
+      lcpImageSizes: "100vw",
       breadcrumbs: [
         { name: "Home", url: `${BASE_URL}/` },
         { name: "Destinations", url: `${BASE_URL}/destinations` },
