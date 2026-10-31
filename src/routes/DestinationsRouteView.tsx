@@ -3,6 +3,7 @@ import React from "react";
 import { GuideJumpNav } from "../components/GuideJumpNav";
 
 import { AFFILIATE_LINKS, resolvePartnerUrl } from "../components/AffiliatePartners";
+import { getHotelGuideAffiliatePlacement } from "../utils/affiliatePlacement";
 
 import { Compass, ArrowRight, MapPin, ExternalLink, Lightbulb, Plane, Building, ShieldCheck, FileText, Calendar, DollarSign, AlertTriangle, CreditCard } from "lucide-react";
 
@@ -21,7 +22,7 @@ type RouteViewProps = { context: Record<string, any> };
 
 export default function DestinationsRouteView({ context }: RouteViewProps) {
 
-  const { TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryCityName, getCountryCityWithIata, getCountryIata, getCountryVisaId, isBn, lang, localizedBlogs, navigateTo, openPriceAlert, parameterId, section, setAreTpScriptsReady, triggerAffiliateToast } = context;
+  const { TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryCityName, getCountryCityWithIata, getCountryIata, getCountryVisaId, isBn, lang, localizedBlogs, localizedHotels = [], navigateTo, openPriceAlert, parameterId, section, setAreTpScriptsReady, triggerAffiliateToast } = context;
   const DESTINATIONS_DATA = context.localizedDestinations ?? EN_DESTINATIONS_DATA;
 
   if (["nepal-guide", "thailand-guide", "malaysia-guide", "singapore-guide", "maldives-guide", "dubai-guide", "london-guide", "italy-guide", "paris-guide", "new-york-guide"].includes(parameterId)) {
@@ -94,6 +95,17 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
               {(() => {
 
                 const activeDes = DESTINATIONS_DATA.find(d => d.id === parameterId) || DESTINATIONS_DATA[0];
+                const hotelGuideIdByDestination: Record<string, string> = {
+                  "nepal-guide": "kathmandu-hotels",
+                  "thailand-guide": "bangkok-hotels",
+                  "malaysia-guide": "kuala-lumpur-hotels",
+                  "singapore-guide": "singapore-hotels",
+                  "maldives-guide": "maldives-hotels",
+                  "dubai-guide": "dubai-hotels",
+                };
+                const hotelGuide = localizedHotels.find(
+                  (hotel: any) => hotel.id === hotelGuideIdByDestination[activeDes.id],
+                );
 
                 return activeDes.id === "dubai-guide" ? (
 
@@ -291,11 +303,13 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                             </span>
 
-                            <h2 className="ural-section-title font-serif text-lg font-bold text-slate-900">Find Hotels in Dubai</h2>
+                            <h2 className="ural-section-title font-serif text-lg font-bold text-slate-900">{isBn ? "দুবাইয়ে থাকার এলাকা দেখুন" : "Explore Dubai Stay Areas"}</h2>
 
                             <p className="text-xs text-slate-500">
 
-                              Compare properties, locate perfect layovers, and secure custom partner rates instantly.
+                              {isBn
+                                ? "অবস্থান, যাতায়াত ও বুকিংয়ের শর্ত তুলনা করুন। পার্টনার সাইটে তারিখ ও অতিথির সংখ্যা আবার দিন।"
+                                : "Compare location, transport access and booking terms. Re-enter your dates and guests on the partner site."}
 
                             </p>
 
@@ -303,7 +317,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                           <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200 text-slate-900">
 
-                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">LIVE HOTEL COMPARISON ENGINE</span>
+                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">{isBn ? "হোটেল পার্টনার সার্চ" : "HOTEL PARTNER SEARCH"}</span>
 
                             {areTpScriptsReady ? (
 
@@ -332,6 +346,10 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
                                   initialTo="Dubai (DXB)"
 
                                   initialHotelCity="Dubai"
+
+                                  affiliatePlacement={hotelGuide ? getHotelGuideAffiliatePlacement(hotelGuide.id) : undefined}
+
+                                  lang={lang}
 
                                 />
 
@@ -923,7 +941,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                           <div className="bg-white p-2 sm:p-4 rounded-xl border border-slate-200 text-slate-900">
 
-                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">LIVE ACCOMMODATION COMPARISON ENGINE</span>
+                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase block mb-3 px-1">{isBn ? "হোটেল পার্টনার সার্চ" : "HOTEL PARTNER SEARCH"}</span>
 
                             {areTpScriptsReady ? (
 
@@ -953,6 +971,10 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                                   initialHotelCity={getCountryCityName(activeDes.country)}
 
+                                  affiliatePlacement={hotelGuide ? getHotelGuideAffiliatePlacement(hotelGuide.id) : undefined}
+
+                                  lang={lang}
+
                                 />
 
                               </React.Suspense>
@@ -977,137 +999,76 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
 
 
-                        {/* 5. “TOP PLACES TO STAY” SECTION (SEO + AFFILIATE SUPPORT) */}
-
-                        <div id="dest-curated-stays" className="ural-guide-jump-target space-y-4">
-
+                        {/* 5. HOTEL AREA GUIDANCE — no static properties, ratings or nightly prices */}
+                        <section id="dest-curated-stays" className="ural-guide-jump-target space-y-4">
                           <div className="border-b border-slate-200 pb-2">
-
-                            <h2 className="ural-section-title font-serif font-black text-lg text-slate-900">Curated Stays & Recommended Neighborhoods</h2>
-
-                            <p className="text-xs text-slate-500">Hotels near the main attractions, picked for travelers from Bangladesh.</p>
-
+                            <h2 className="ural-section-title font-serif font-black text-lg text-slate-900">
+                              {isBn ? "থাকার এলাকা তুলনা করুন" : "Compare Areas Before Choosing a Stay"}
+                            </h2>
+                            <p className="text-xs text-slate-500">
+                              {isBn
+                                ? "এলাকার নাম কেবল পরিকল্পনার শুরু—নির্দিষ্ট হোটেলের মান, প্রাপ্যতা বা দামের নিশ্চয়তা নয়। ঠিকানা, যাতায়াত, রুমের শর্ত ও বাতিলের নিয়ম যাচাই করুন।"
+                                : "Neighborhood names are a starting point, not a rating or a promise about a specific property's availability or price. Check the exact address, access, room terms and cancellation rules."}
+                            </p>
                           </div>
 
-
-
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                            {(activeDes.id === "nepal-guide" ? [
-
-                              { area: "Downtown Backpacker Zone (Thamel)", name: "Thamel Eco Resort & Spa", rate: "৳3,500 / night", star: "⭐ ⭐ ⭐", linkTip: "Free airport luggage pick-up and organic buffet included." },
-
-                              { area: "Airport Transit Hub (Sinamangal)", name: "The Suite Airport Guest House KTM", rate: "৳4,200 / night", star: "⭐ ⭐ ⭐", linkTip: "Walking distance to Tribhuvan airport gates; perfect for night arrivals." },
-
-                              { area: "Heritage Tourist Sector (Patan / Durbar)", name: "Durbar Square Boutique Heritage Lodge", rate: "৳5,800 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Stunning brick-lined traditional Newari apartments with city terrace view." }
-
-                            ] : activeDes.id === "thailand-guide" ? [
-
-                              { area: "Downtown Shopping Sector (Pratunam Market)", name: "Centara Watergate Pavillion Hotel Bangkok", rate: "৳9,800 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Direct access to market lanes and legendary Sukhumvit halal hub food lines." },
-
-                              { area: "Airport Connection (Suvarnabhumi Link)", name: "Mariya Boutique Residence BKK Node", rate: "৳5,200 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Complimentary sky train shuttle and early check-in options for Bangladeshis." },
-
-                              { area: "Vibrant Night Market District (Sukhumvit Road)", name: "Siam Star Premium Hotel Area", rate: "৳4,800 / night", star: "⭐ ⭐ ⭐", linkTip: "Very close to BTS Skytrain lines, making central transport entirely gridlock-free." }
-
-                            ] : activeDes.id === "malaysia-guide" ? [
-
-                              { area: "Downtown Action Core (Bukit Bintang Mallway)", name: "Gold 3 Boutique Family Hotel KL", rate: "৳4,500 / night", star: "⭐ ⭐ ⭐", linkTip: "Surrounded by local food courts, digital item hubs, and direct Monorail stations." },
-
-                              { area: "Airport Transit Zone (KLIA Sepang Node)", name: "Tune Airport Hotel KLIA2 Terminal", rate: "৳6,200 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Covered walkway directly to boarding check-in counters. Outstanding choice for child layovers." },
-
-                              { area: "Prestige Park Sector (KLCC Petronas Vista)", name: "Impiana KLCC Premium Resort Complex", rate: "৳9,500 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Skybridge walking path connects straight to Twin Towers and central park fountains." }
-
-                            ] : activeDes.id === "singapore-guide" ? [
-
-                              { area: "24/7 Bangladeshi Hub (Little India / Farrer Park)", name: "One Farrer Hotel / ibis budget Imperial", rate: "৳7,200 – ৳19,500 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Steps from 24-hour Mustafa Centre, MRT station, and halal Bangladeshi/Indian dining." },
-
-                              { area: "Halal Heritage Quarter (Bugis / Arab Street)", name: "Village Hotel Bugis & Hotel Boss", rate: "৳10,500 – ৳13,500 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Walkable to Sultan Mosque, Haji Lane, and Bugis MRT interchange." },
-
-                              { area: "Iconic Waterfront (Marina Bay Sands Zone)", name: "Marina Bay Waterfront Luxury Suites", rate: "৳34,000 / night", star: "⭐ ⭐ ⭐ ⭐ ⭐", linkTip: "Unbeatable views of Gardens by the Bay and nightly Spectra water show." }
-
-                            ] : activeDes.id === "maldives-guide" ? [
-
-                              { area: "Best Budget Island (Maafushi Bikini Beach)", name: "Kaani Palm Beach & Arena Beach Hotel", rate: "৳8,200 – ৳9,800 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "35-min shared speedboat ($25) from airport; $30 snorkeling & sandbank tours daily." },
-
-                              { area: "Airport Road Island (Hulhumalé Beachfront)", name: "h78 at Hulhumale Maldives", rate: "৳6,400 / night", star: "⭐ ⭐ ⭐", linkTip: "Connected to Malé Airport by bridge taxi ($8) — zero speedboat fees required." },
-
-                              { area: "Private Overwater Island (North Malé Atoll)", name: "Cinnamon Dhonveli Water Suites", rate: "৳38,000 / night", star: "⭐ ⭐ ⭐ ⭐ ⭐", linkTip: "Iconic overwater bungalows with all-inclusive halal dining and house reef." }
-
-                            ] : [
-
-                              { area: "Downtown Luxury Skyscrapers (Burj Vista Center)", name: "Rove Downtown Dubai Premium Suites", rate: "৳12,000 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "Stellar views of Burj Khalifa and direct shuttle rides to the Dubai Mall gates." },
-
-                              { area: "Airport Sector & Budget Markets (Deira Creek)", name: "Ibis Styles Dubai Airport Transit Inn", rate: "৳8,500 / night", star: "⭐ ⭐ ⭐", linkTip: "Right beside metro lines; close to traditional gold souks and BDT-friendly diners." },
-
-                              { area: "Beach Side Promenade (Dubai Marina / JBR)", name: "Marina View Deluxe Hotel Apartment", rate: "৳18,000 / night", star: "⭐ ⭐ ⭐ ⭐", linkTip: "High-altitude skyline balconies, private kitchen amenities, and direct yacht harbor lookouts." }
-
-                            ]).map((hotel, index) => (
-
-                              <div key={index} className="ural-card bg-white border border-slate-200 hover:border-[#F6B73C] p-5 shadow-sm flex flex-col justify-between transition-all transform hover:-translate-y-1">
-
-                                <div className="space-y-2">
-
-                                  <div className="flex items-center justify-between">
-
-                                    <span className="text-[10px] font-mono font-bold uppercase bg-slate-100 text-brand-navy px-2 py-0.5 rounded-full">
-
-                                      {hotel.area}
-
-                                    </span>
-
-                                    <span className="text-amber-500 text-xs font-bold leading-none">{hotel.star}</span>
-
+                          {hotelGuide?.neighborhoods?.length ? (
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                              {hotelGuide.neighborhoods.map((area: any) => (
+                                <article key={area.name} className="ural-card bg-white border border-slate-200 p-4 shadow-sm">
+                                  <div className="flex items-start gap-2">
+                                    <MapPin size={15} className="mt-0.5 shrink-0 text-brand-gold-ink" aria-hidden="true" />
+                                    <div>
+                                      <h3 className="ural-card-title font-serif font-bold text-sm text-slate-900">{area.name}</h3>
+                                      <p className="mt-1 text-[11px] text-brand-navy font-semibold">{area.vibe}</p>
+                                    </div>
                                   </div>
+                                  <p className="mt-3 text-xs text-slate-600 leading-relaxed">{area.description}</p>
+                                </article>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
+                              {isBn ? "হোটেল এলাকা ও বুকিং শর্তের ব্যবহারিক চেকলিস্ট দেখুন।" : "Use the hotel guide for practical area and booking-term checks."}
+                            </p>
+                          )}
 
-                                  <h3 className="ural-card-title font-serif font-bold text-sm text-slate-900">{hotel.name}</h3>
-
-                                  <p className="text-[11px] text-slate-500 leading-relaxed font-light">{hotel.linkTip}</p>
-
-                                </div>
-
-
-
-                                <div className="pt-4 flex items-center justify-between border-t border-slate-100 mt-4">
-
-                                  <div>
-
-                                    <span className="text-[10px] font-mono text-slate-400 block uppercase">Estimate rates</span>
-
-                                    <span className="text-xs font-mono font-bold text-[#F6B73C]">{hotel.rate}</span>
-
-                                  </div>
-
-                                  <a
-
-                                    href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
-
-                                    target="_blank"
-
-                                    rel="noopener noreferrer sponsored"
-
-                                    onClick={() => triggerAffiliateToast(isBn ? "Klook-এর বাছাইকৃত হোটেল তালিকা খুলছে। গন্তব্য ও তারিখ Klook-এ আবার দিন।" : "Opening Klook’s curated hotel collection. Re-enter your destination and dates there.")}
-
-                                    className="bg-brand-navy hover:bg-[#F6B73C] hover:text-brand-navy text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
-
-                                  >
-
-                                    {isBn ? "Klook-এ হোটেল দেখুন" : "Browse Klook Hotels"} <ExternalLink size={10} />
-
-                                  </a>
-
-                                </div>
-
-                              </div>
-
-                            ))}
-
+                          <div className="rounded-xl border border-amber-200 bg-amber-50/70 p-4">
+                            <div className="flex flex-wrap items-center gap-3">
+                              {hotelGuide && (
+                                <button
+                                  type="button"
+                                  onClick={() => navigateTo(`/hotels/${hotelGuide.id}`)}
+                                  className="inline-flex items-center gap-2 rounded-lg bg-brand-navy px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-slate-800"
+                                >
+                                  {isBn ? "শহরের হোটেল গাইড দেখুন" : "Open the city hotel guide"}
+                                  <ArrowRight size={13} aria-hidden="true" />
+                                </button>
+                              )}
+                              <a
+                                href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
+                                data-affiliate-placement={hotelGuide ? getHotelGuideAffiliatePlacement(hotelGuide.id) : undefined}
+                                target="_blank"
+                                rel="noopener noreferrer sponsored"
+                                onClick={() => triggerAffiliateToast(isBn
+                                  ? "Klook-এর সাধারণ হোটেল তালিকা খুলছে। গন্তব্য, তারিখ ও অতিথি আবার দিন।"
+                                  : "Opening Klook’s general hotel collection. Re-enter your destination, dates and guests.")}
+                                className="inline-flex items-center gap-2 rounded-lg border border-amber-300 bg-white px-3 py-2 text-xs font-bold text-brand-navy transition-colors hover:bg-amber-100"
+                              >
+                                {isBn ? "Klook-এর হোটেল তালিকা দেখুন" : "Browse Klook hotel collection"}
+                                <ExternalLink size={12} aria-hidden="true" />
+                              </a>
+                            </div>
+                            <p className="mt-3 text-[11px] leading-5 text-slate-600">
+                              {isBn
+                                ? "Klook-এর লিংকটি সাধারণ তালিকা খোলে—নির্বাচিত হোটেল বা তারিখের লাইভ কোট নয়। গন্তব্য, তারিখ ও অতিথি Klook-এ আবার দিন। যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; আপনার জন্য ছাড় নয়।"
+                                : "Klook opens a general collection—not a live quote for a selected hotel or dates. Re-enter destination, dates and guests on Klook. URAL may earn commission on qualifying bookings; this is not a traveller discount."}
+                            </p>
                           </div>
-
-                        </div>
-
+                        </section>
 
 
-                        {/* 🚗 TRAVEL ESSENTIALS & SERVICES (Taxis, eSIMs, Rentals, Activities) */}
+                                                {/* 🚗 TRAVEL ESSENTIALS & SERVICES (Taxis, eSIMs, Rentals, Activities) */}
 
                         <React.Suspense fallback={null}>
 

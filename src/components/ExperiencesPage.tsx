@@ -584,14 +584,15 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
 
               <a
                 href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
+                data-affiliate-placement="experiences_hotel_collection"
                 target="_blank"
                 rel="noopener noreferrer sponsored"
                 className="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-semibold text-xs px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2 cursor-pointer"
               >
                 <span>
                   {isBn
-                    ? "Klook-এর বাছাইকৃত হোটেল দেখুন"
-                    : "Browse Klook’s Curated Hotels"}
+                    ? "Klook-এর হোটেল তালিকা সার্চ করুন"
+                    : "Search Klook hotel collection"}
                 </span>
                 <ExternalLink size={13} />
               </a>
@@ -620,6 +621,11 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 <ExternalLink size={13} />
               </a>
             </div>
+            <p className="max-w-2xl text-[11px] leading-relaxed text-slate-300">
+              {isBn
+                ? "Klook-এর হোটেল লিংক সাধারণ তালিকা খোলে—নির্বাচিত হোটেল বা তারিখের লাইভ কোট নয়। গন্তব্য, তারিখ ও অতিথি আবার দিন। যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; এটি ভ্রমণকারীর জন্য ছাড় নয়।"
+                : "The Klook hotel link opens a general collection—not a live quote for a selected property or dates. Re-enter destination, dates and guests. URAL may earn commission on qualifying bookings; this is not a traveller discount."}
+            </p>
           </div>
 
           {/* Right Column: Interactive Bundle & Availability Calculator (Widget 3 Equivalent) */}

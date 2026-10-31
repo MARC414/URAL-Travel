@@ -558,291 +558,164 @@ export const HOTELS_DATA: HotelGuide[] = [
     id: "kathmandu-hotels",
     city: "Kathmandu",
     country: "Nepal",
-    description: "Kathmandu blends centuries-old Newari architecture with a compact, walkable tourist core. Where you stay shapes your whole trip - Thamel for convenience and nightlife, Boudha for a quieter pace near the great stupa, or Lazimpat for upscale comfort.",
+    description: "Compare Kathmandu neighborhoods by the places you plan to visit, preferred pace, transport and dining needs. Room availability and total cost vary by dates and booking terms, so check a live listing before deciding.",
     neighborhoods: [
-      { name: "Thamel", description: "The main tourist hub - dense with budget guesthouses, restaurants, trekking shops, and currency exchange counters. Almost everything a first-time visitor needs is within walking distance.", vibe: "Energetic, Backpacker-friendly, Convenient" },
-      { name: "Boudha", description: "Centered on the massive Boudhanath Stupa. Quieter guesthouses and cafes, popular with travelers who want a calmer base with easy taxi access to the rest of the city.", vibe: "Peaceful, Spiritual, Tibetan culture" },
-      { name: "Lazimpat / Darbar Marg", description: "Wide, leafy streets with upscale hotels, embassies, and fine dining. A short ride from Thamel, with a calmer, more residential feel.", vibe: "Upscale, Quiet, Well-connected" }
+      { name: "Thamel", description: "A central visitor district with restaurants, shops and trekking services nearby. It can suit an itinerary focused on visitor facilities; check the exact address and likely evening noise.", vibe: "Lively, visitor services, central" },
+      { name: "Boudha", description: "An area around Boudhanath Stupa with a different pace from the central visitor district. Compare the route to your planned sights and the transport you will use.", vibe: "Quieter pace, cultural sites" },
+      { name: "Lazimpat / Darbar Marg", description: "A more residential-feeling option north of the central visitor areas. Check travel time to your planned activities and whether nearby services fit your stay.", vibe: "Calmer base, dining options" },
     ],
-    hotels: [
-      { name: "Hotel Shanker", stars: 4, priceBdt: 7500, category: "Mid-Range", neighborhood: "Lazimpat", features: ["Restored heritage palace", "Outdoor swimming pool", "Garden courtyard", "Free Wi-Fi"] },
-      { name: "Dwarika's Hotel", stars: 5, priceBdt: 29000, category: "Luxury", neighborhood: "Battisputali (near Ring Road)", features: ["Hand-carved Newari architecture", "On-site heritage museum", "Spa & wellness centre", "Award-winning restaurant"] },
-      { name: "Thamel Grand Hotel", stars: 3, priceBdt: 2200, category: "Budget", neighborhood: "Thamel", features: ["Rooftop cafe", "Free breakfast included", "5-minute walk to main shopping streets", "Clean, simple rooms"] },
-      { name: "Bodhi Guest House", stars: 2, priceBdt: 1500, category: "Budget", neighborhood: "Boudha", features: ["Views of Boudhanath Stupa", "Shared kitchen access", "Hot water available", "Quiet courtyard"] }
-    ],
-    quickAnswer: "Thamel is the best base for most Bangladeshi travelers in Kathmandu, with budget hotels from BDT 1,500-2,500 per night and everything - restaurants, shops, tour operators - within walking distance. Mid-range comfort hotels like Hotel Shanker run around BDT 7,500 per night, while heritage luxury stays such as Dwarika's Hotel start near BDT 29,000. For a quieter trip, Boudha offers peaceful guesthouses from BDT 1,500 near Boudhanath Stupa.",
+    quickAnswer: "For Kathmandu, compare Thamel, Boudha and Lazimpat against your itinerary, preferred pace and transport needs. Hotel prices and availability change with dates, room type and occupancy; compare live totals and booking terms before choosing.",
     keyFacts: [
-      { label: "Best Area for First-Timers", value: "Thamel" },
-      { label: "Budget Room Price (BDT)", value: "1,500 - 2,500 / night" },
-      { label: "Mid-Range Price (BDT)", value: "5,000 - 8,000 / night" },
-      { label: "Luxury / Heritage (BDT)", value: "15,000 - 30,000+ / night" }
+      { label: "Visitor-services area to compare", value: "Thamel" },
+      { label: "Cultural-area option", value: "Boudha" },
+      { label: "Before booking", value: "Check exact address, room terms and total" },
     ],
     faqs: [
       {
-        question: "What is the best area to stay in Kathmandu for a first visit?",
-        answer: "Thamel is the most convenient choice for first-time visitors, including those from Bangladesh - it has the highest concentration of budget and mid-range hotels, restaurants, ATMs, and tour/trekking agencies, almost all within walking distance."
+        question: "Which Kathmandu areas should I compare for a first visit?",
+        answer: "Compare Thamel, Boudha and Lazimpat against your itinerary, pace and transport preferences. Check the property's exact address and recent listing details rather than treating one neighborhood as the best choice for every traveler.",
       },
       {
-        question: "How much does a hotel in Thamel cost per night?",
-        answer: "Basic budget rooms in Thamel start around BDT 1,500-2,500 per night, comfortable 3-star hotels run roughly BDT 2,500-4,000, and mid-range options with pools or rooftop restaurants are typically BDT 5,000-8,000 per night."
+        question: "How should I compare Kathmandu hotel prices?",
+        answer: "Use the same dates, nights, guest count and room type. Compare the final checkout total, included meals and taxes, payment schedule and cancellation terms; rates and availability can change between searches.",
       },
-      {
-        question: "Is tap water safe to drink in Kathmandu hotels?",
-        answer: "No - tap water should not be drunk anywhere in Kathmandu, including in hotels. Most reputable hotels provide complimentary bottled or filtered drinking water daily; if a guesthouse doesn't, bottled water is cheap and widely available."
-      },
-      {
-        question: "Do Kathmandu hotels accept Bangladeshi Taka (BDT)?",
-        answer: "No, hotels in Kathmandu price and charge in Nepali Rupees (NPR) or sometimes US Dollars for higher-end properties. Bring USD cash to exchange on arrival, or use an international card - most mid-range and luxury hotels accept Visa/Mastercard."
-      },
-      {
-        question: "How far is Thamel from Tribhuvan International Airport?",
-        answer: "Thamel is roughly 4-6 km from Tribhuvan International Airport, usually a 15-20 minute taxi ride depending on traffic. Most hotels in Thamel can arrange airport pickup for a small fee."
-      }
     ],
-    schemaMarkup: {
-      type: "ItemList + FAQPage",
-      description: "Kathmandu hotel guide for Bangladeshi travelers",
-      code: `{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "ItemList",
-      "name": "Recommended Kathmandu Hotels for Bangladeshi Travelers",
-      "numberOfItems": 4,
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Dwarika's Hotel" },
-        { "@type": "ListItem", "position": 2, "name": "Hotel Shanker" },
-        { "@type": "ListItem", "position": 3, "name": "Thamel Grand Hotel" },
-        { "@type": "ListItem", "position": 4, "name": "Bodhi Guest House" }
-      ]
-    }
-  ]
-}`
-    }
   },
   {
     id: "bangkok-hotels",
     city: "Bangkok",
     country: "Thailand",
-    description: "Whether you seek glittering sky scrapers or historical neighborhoods along the Chao Phraya River, Bangkok hosts some of the best-value hotels globally.",
+    description: "Compare Bangkok areas by your trip focus, transport plan, preferred pace and the property's exact location. No neighborhood is the right fit for every itinerary, and live hotel totals vary by dates and room terms.",
     neighborhoods: [
-      { name: "Pratunam", description: "Sensational budget shopping hub. Popular with Bangladeshi wholesale traders and families searching for Indian/halal food options.", vibe: "Bustling, Retail-first, Crowded" },
-      { name: "Sukhumvit (Asok / Nana)", description: "The ultimate modern arterial road. Complete with luxury hotels, BTS Skytrain stations, and high-end malls.", vibe: "Metropolitan, Nightlife, Transit-dense" },
-      { name: "Khao San Road", description: "The legendary global backpacker street, filled with energetic bars, cheap street food stalls, and hostel rooms.", vibe: "Bohemian, Noisy, Youthful" }
+      { name: "Pratunam", description: "A busy shopping-focused area. Check the distance from the property to the shops and transit you plan to use, and consider the surrounding activity level.", vibe: "Shopping, busy, central" },
+      { name: "Sukhumvit (Asok / Nana)", description: "A large, active district with a mix of dining, nightlife and transit options. Check the exact station access and street noise for the property you are considering.", vibe: "Urban, dining, transit options" },
+      { name: "Khao San Road", description: "A visitor area associated with nightlife and budget travel. Review recent noise and room-condition feedback before booking, especially for a family or early start.", vibe: "Social, nightlife, visitor-focused" },
     ],
-    hotels: [
-      { name: "Amari Bangkok", stars: 5, priceBdt: 12500, category: "Luxury", neighborhood: "Pratunam", features: ["Outdoor infinity pool", "Luxury spa", "Opposite Platinum Mall", "Excellent buffet"] },
-      { name: "Kloof Hostel", stars: 2, priceBdt: 1800, category: "Budget", neighborhood: "Khao San", features: ["Modern pod beds", "Lively social lounge", "Co-working space", "High speed WiFi"] },
-      { name: "S31 Sukhumvit Hotel", stars: 4, priceBdt: 6800, category: "Mid-Range", neighborhood: "Sukhumvit", features: ["Glass-edge pool", "Duplex suites", "Skytrain distance", "Panoramic gym"] },
-      { name: "First House Hotel", stars: 3, priceBdt: 3800, category: "Mid-Range", neighborhood: "Pratunam", features: ["Halal breakfast options", "Quiet alley location", "Great value", "Baggage scale"] }
-    ],
-    quickAnswer: "Bangkok hotel prices generally range from BDT 1,800 to BDT 12,500 per night depending on the neighborhood and hotel star rating. For Bangladeshi travelers focused on shopping, the Pratunam neighborhood is highly recommended with budget-friendly options like First House Hotel starting at BDT 3,800 per night. If you prefer high-end business convenience with quick BTS Skytrain connection, modern Sukhumvit hotels like Amari Bangkok cost between BDT 6,800 and BDT 12,500 per night.",
+    quickAnswer: "In Bangkok, compare Pratunam, Sukhumvit and Khao San Road based on shopping, transit, nightlife and noise preferences. Hotel availability and total cost depend on your dates, guests and room terms, so compare live listings on the same basis.",
     keyFacts: [
-      { label: "Best Shopping Neighborhood", value: "Pratunam" },
-      { label: "Avg Mid-Range Price (BDT)", value: "3,500 - 7,000 / night" },
-      { label: "Best Transit Access", value: "BTS Sukhumvit Line" },
-      { label: "Halal Food Focus Area", value: "Sukhumvit Soi 3 to 11 / Pratunam" }
+      { label: "Shopping-focused area to compare", value: "Pratunam" },
+      { label: "Transit and dining options to compare", value: "Sukhumvit" },
+      { label: "Before booking", value: "Check exact station access and noise" },
     ],
     faqs: [
       {
-        question: "Is Halal food easily accessible around Bangkok Hotels?",
-        answer: "Yes, particularly in Pratunam (near Indra Square/Pratunam Market) and Sukhumvit Soi 3/Soi 4 (Nana area), which are packed with Arab, Pakistani, and Indian-Halal restaurants."
-      }
+        question: "Which Bangkok neighborhood should I choose for my stay?",
+        answer: "Compare the exact property location in Pratunam, Sukhumvit or Khao San Road against your activities, transit needs and preferred noise level. Check recent listing details and routes rather than relying on a neighborhood label alone.",
+      },
+      {
+        question: "How do I compare Bangkok hotel listings?",
+        answer: "Search the same dates, guest count, room type and cancellation conditions. Compare the checkout total after taxes and service charges, and confirm which meals and payment terms are included.",
+      },
     ],
-    schemaMarkup: {
-      type: "HotelGuide",
-      description: "Bangkok hotel listing",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "Accommodation",
-  "name": "Pratunam Accommodations Guide"
-}`
-    }
   },
   {
     id: "kuala-lumpur-hotels",
     city: "Kuala Lumpur",
     country: "Malaysia",
-    description: "Malaysia's capital offers modern luxury architectural wonders alongside green parks and historical monuments. You can find high-rise apartments with infinity pools looking at the Petronas Twin Towers for very cheap.",
+    description: "Compare Kuala Lumpur neighborhoods by sightseeing, shopping, transit and room needs. Check the individual property's address, current availability and complete booking terms before making a decision.",
     neighborhoods: [
-      { name: "KLCC", description: "Direct heart of the city surrounding the Petronas Towers. Perfect for high-end boutique experiences, malls, and premium restaurants.", vibe: "Prestigious, Modern, Scenic" },
-      { name: "Bukit Bintang", description: "The premier shopping, lifestyle, and transit core. Hosts major mega-malls, Pavilion, and the famous Alor Street Food Night Market.", vibe: "Trendy, Buzzing, Entertaining" },
-      { name: "Chinatown / Petaling Street", description: "Historic quarters with cultural heritage temples, gorgeous architecture, hipster cafes, and historic cheap hostels.", vibe: "Heritage, Hipster, Retro" }
+      { name: "KLCC", description: "A central district around the Petronas Towers, with major city landmarks and shopping nearby. Compare the property's actual walking route and room configuration with your plans.", vibe: "Landmarks, shopping, central" },
+      { name: "Bukit Bintang", description: "A busy shopping and dining district. Check the exact street, transit access and expected evening activity at the property.", vibe: "Shopping, dining, lively" },
+      { name: "Chinatown / Petaling Street", description: "A historic visitor area with markets and cultural sites. Review room conditions, noise and transport routes for the exact stay you are considering.", vibe: "Historic, markets, visitor-focused" },
     ],
-    hotels: [
-      { name: "The Face Suites KLCC", stars: 5, priceBdt: 9500, category: "Luxury", neighborhood: "KLCC", features: ["World-famous rooftop infinity pool", "Petronas tower view", "Large family apartments", "Kitchenette"] },
-      { name: "Wolo Bukit Bintang", stars: 4, priceBdt: 6200, category: "Mid-Range", neighborhood: "Bukit Bintang", features: ["Art deco interiors", "Direct BB Crossing location", "Vibrant vibe", "Boutique coffee bar"] },
-      { name: "The Explorer Guesthouse", stars: 2, priceBdt: 1700, category: "Budget", neighborhood: "Chinatown", features: ["Eco-friendly layout", "Shared kitchen", "Rooftop terrace", "English breakfast"] }
-    ],
-    quickAnswer: "Kuala Lumpur is famous for highly affordable luxury. Stays like The Face Suites in KLCC (BDT 9,500/night) offer giant executive suites with rooftop infinity pools framing the Twin Towers. For non-stop shopping and dining, the boutique Wolo Bukit Bintang (BDT 6,200) sits central on the main crossroad, while backpackers will find great social setups in Chinatown under BDT 2,000.",
+    quickAnswer: "For Kuala Lumpur, compare KLCC, Bukit Bintang and Chinatown by your itinerary, transit, dining and room needs. Rates vary with dates, occupancy and inclusions; compare current full totals and cancellation terms rather than relying on a static nightly figure.",
     keyFacts: [
-      { label: "Best Tower-View Stays", value: "KLCC (Face Suites / Eq KL)" },
-      { label: "Avg Apartment Rate (BDT)", value: "5,000 - 10,000 / night" },
-      { label: "Top Food Street", value: "Jalan Alor (Bukit Bintang)" },
-      { label: "Tourist Tax (TTx)", value: "RM 10 per room/night (standard)" }
+      { label: "Landmarks and central access", value: "KLCC" },
+      { label: "Shopping and dining", value: "Bukit Bintang" },
+      { label: "Before booking", value: "Check room configuration and total" },
     ],
     faqs: [
       {
-        question: "What is the Malaysia Tourism Tax?",
-        answer: "In Malaysia, hotels charge a flat Tourism Tax of RM 10 (approx BDT 270) per room per night for foreign passports, usually collected in cash at check-in."
-      }
+        question: "Which Kuala Lumpur area should I compare for a family stay?",
+        answer: "Compare KLCC, Bukit Bintang and Chinatown against your planned activities, transport and room requirements. Confirm the exact bed setup, occupancy limits, included facilities and route to transit for each property.",
+      },
+      {
+        question: "What should I compare when checking Kuala Lumpur hotel prices?",
+        answer: "Use identical dates, guest counts and room types, then compare the full checkout amount, taxes, service charges, meals, payment timing and cancellation deadline. Verify any local tax or fee in the current booking breakdown.",
+      },
     ],
-    schemaMarkup: {
-      type: "HotelGuide",
-      description: "Accommodation guidelines in KL",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "LodgingBusiness",
-  "name": "The Face Suites"
-}`
-    }
   },
   {
     id: "dubai-hotels",
     city: "Dubai",
     country: "UAE",
-    description: "From budget gold-souk guest houses in Old Deira to iconic cloud-piercing luxury skyscrapers overlooking Dubai Marina, the city offers some of the world's most versatile, clean, and futuristic hotel stays.",
+    description: "Compare Dubai areas by the places you plan to visit, preferred setting and transport needs. Hotel totals and local charges depend on the property and dates; inspect the current price breakdown and booking conditions.",
     neighborhoods: [
-      { name: "Deira / Al Rigga", description: "Old Dubai charm. Home to traditional souks, cheap local dining street vendors, and extremely affordable BDT 3,000-5,000/night tourist hotels.", vibe: "Traditional, Nostalgic, Budget-centric" },
-      { name: "Downtown / Business Bay", description: "Ultra-luxury high rise corridor centering the Burj Khalifa and Dubai Mall. Offers breathtaking views and near-instant access to luxury retail.", vibe: "Cosmopolitan, Futuristic, Premium" },
-      { name: "Dubai Marina / JBR", description: "Beaches, luxury yachts, marina skylines, and beautiful outdoor walking paths. Perfect for family resort stays.", vibe: "Coastal, Majestic, Leisure" }
+      { name: "Deira / Al Rigga", description: "An older commercial district with traditional markets and city services. Check the property's route to the places on your itinerary and the transport available at your travel times.", vibe: "Markets, urban, practical base" },
+      { name: "Downtown / Business Bay", description: "A central area near major landmarks and retail destinations. Compare location, expected travel routes and the total room terms with other areas.", vibe: "Landmarks, retail, central" },
+      { name: "Dubai Marina / JBR", description: "A waterfront district with leisure and dining options. Confirm the exact distance to planned activities and whether the setting fits your trip.", vibe: "Waterfront, leisure, dining" },
     ],
-    hotels: [
-      { name: "Rove City Centre Deira", stars: 3, priceBdt: 6500, category: "Mid-Range", neighborhood: "Deira", features: ["Modern stylish room design", "Outdoor heated pool", "Free shuttle to central mall", "Halal buffet cuisine"] },
-      { name: "Address Downtown Dubai", stars: 5, priceBdt: 45000, category: "Luxury", neighborhood: "Downtown", features: ["Direct Burj Khalifa view", "Walkable skybridge to Dubai Mall", "State of the art spa", "Premium infinity pool"] },
-      { name: "Ibis Styles Dragon Mart", stars: 3, priceBdt: 4800, category: "Budget", neighborhood: "International City", features: ["Colorful family layouts", "Free shuttle to metro", "Very quiet", "English and Arabic breakfast"] }
-    ],
-    quickAnswer: "For budget-friendly Bangladeshi families, Rove City Centre Deira (BDT 6,500/night) offers premium, ultra-clean mid-range rooms with excellent highway access. Luxury hunters seeking magical fountain views can select the iconic Address Downtown Dubai (BDT 45,000+), while budget-conscious wholesale buyers can stay in Deira or near Dragon Mart for under BDT 5,000.",
+    quickAnswer: "For Dubai, compare Deira, Downtown / Business Bay and Dubai Marina / JBR against your itinerary, setting and transport preferences. Check live availability and the complete price breakdown, including any local charges and cancellation terms, before booking.",
     keyFacts: [
-      { label: "Top Retail Stay District", value: "Downtown Dubai & Deira" },
-      { label: "Avg Family Suite Cost", value: "BDT 8,000 - 15,000 / night" },
-      { label: "Primary Metro Access Pass", value: "Nol Card (Silver/Gold Class)" },
-      { label: "Tourism Dirham Fee", value: "AED 10 to AED 20 per room/night" }
+      { label: "Traditional markets and city services", value: "Deira / Al Rigga" },
+      { label: "Landmarks and retail", value: "Downtown / Business Bay" },
+      { label: "Before booking", value: "Review local charges and payment terms" },
     ],
     faqs: [
       {
-        question: "Is there any tourism tax on Dubai hotel stays?",
-        answer: "Yes, Dubai hotels collect a mandatory cash fee called 'Tourism Dirham' ranging from AED 10 (approx BDT 320) per room-night for 3-star hotels, up to AED 20 (approx BDT 640) for luxury 5-star resorts."
-      }
+        question: "How do I choose between Deira, Downtown and Dubai Marina?",
+        answer: "Compare each property's exact location with your itinerary, transit plan and preferred setting. Review recent listing information and route options; no single area is the best fit for every trip.",
+      },
+      {
+        question: "Are local charges included in Dubai hotel prices?",
+        answer: "The displayed breakdown depends on the property and booking channel. Check the current checkout total and itemized charges, and confirm whether anything is payable at the property before booking.",
+      },
     ],
-    schemaMarkup: {
-      type: "HotelGuide",
-      description: "Dubai hotel locations listing",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  "name": "Featured Dubai Hotels",
-  "numberOfItems": 3,
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Address Downtown"
-    }
-  ]
-}`
-    }
   },
   {
     id: "singapore-hotels",
     city: "Singapore",
     country: "Singapore",
-    description: "Singapore hotel rates are higher than Bangkok or Kuala Lumpur, so choosing the right MRT-connected neighborhood is the secret to keeping your trip affordable. Little India/Farrer Park and Bugis offer unbeatable value and halal food access for Bangladeshi travelers.",
+    description: "Compare Singapore neighborhoods by transit access, planned activities, dining preferences and room needs. Rates and availability change by travel dates and property terms, so check a current listing before booking.",
     neighborhoods: [
-      { name: "Little India / Serangoon Road", description: "Centered around the 24-hour Mustafa Centre and Farrer Park MRT. Packed with Bangladeshi, Indian, and Muslim-owned halal restaurants and the best-value 3-star and 4-star hotels in Singapore.", vibe: "Bangladeshi-Favorite, 24/7 Shopping, Budget-Friendly" },
-      { name: "Bugis / Kampong Glam (Arab Street)", description: "Historic Malay-Arab heritage quarter anchored by the golden Sultan Mosque. Walkable to trendy cafes, Haji Lane, Bugis Street Market, and two major MRT lines.", vibe: "Halal Hub, Cultural, Central Transit" },
-      { name: "Marina Bay / Civic District", description: "Singapore's postcard waterfront skyline featuring Marina Bay Sands, Gardens by the Bay, and Merlion Park. Ideal for milestone family trips and luxury stays.", vibe: "Iconic Skyline, Ultra-Luxury, Waterfront" }
+      { name: "Little India / Serangoon Road", description: "A lively district with shops, dining and transit options. Check the exact station route, room size and surrounding activity for the property.", vibe: "Dining, shopping, transit options" },
+      { name: "Bugis / Kampong Glam", description: "A central area with cultural sites, shops and dining. Compare the property's location and evening atmosphere with your itinerary.", vibe: "Cultural sites, dining, central" },
+      { name: "Marina Bay / Civic District", description: "A waterfront and civic area near major city attractions. Check whether the location and room terms suit your trip priorities.", vibe: "Landmarks, waterfront, city access" },
     ],
-    hotels: [
-      { name: "One Farrer Hotel", stars: 5, priceBdt: 19500, category: "Luxury", neighborhood: "Little India (Farrer Park MRT)", features: ["Directly above Farrer Park MRT", "3-min walk to Mustafa Centre", "Olympic-size outdoor pool", "Popular with Bangladeshi families & medical visitors"] },
-      { name: "Village Hotel Bugis", stars: 4, priceBdt: 13500, category: "Mid-Range", neighborhood: "Bugis / Arab Street", features: ["Halal-certified Landmark restaurant", "Steps from Sultan Mosque", "Spacious family rooms", "5-min walk to Bugis MRT"] },
-      { name: "Hotel Boss", stars: 4, priceBdt: 10500, category: "Mid-Range", neighborhood: "Lavender / Kampong Glam", features: ["Sky terrace swimming pool", "Halal food court downstairs", "Near Lavender MRT", "Great value modern rooms"] },
-      { name: "ibis budget Singapore Imperial", stars: 3, priceBdt: 7200, category: "Budget", neighborhood: "Lavender / Little India border", features: ["Clean compact rooms", "Rooftop pool", "2-min walk to Lavender MRT", "Walkable to Mustafa Centre"] }
-    ],
-    quickAnswer: "For Bangladeshi travelers, Little India (near Mustafa Centre and Farrer Park MRT) and Bugis / Arab Street are the best neighborhoods to stay in Singapore. Clean budget hotels like ibis budget Imperial start around BDT 7,200 per night, popular family-friendly 4-star stays like Hotel Boss and Village Hotel Bugis cost BDT 10,500–13,500 per night, and 5-star properties like One Farrer Hotel start around BDT 19,500.",
+    quickAnswer: "In Singapore, compare Little India / Serangoon Road, Bugis / Kampong Glam and Marina Bay / Civic District by transit, activities and room needs. Check current room availability, total price and cancellation conditions for your exact dates.",
     keyFacts: [
-      { label: "Best Bangladeshi Area", value: "Little India (Near Mustafa Centre)" },
-      { label: "Budget Room Price (BDT)", value: "6,800 - 8,500 / night" },
-      { label: "Mid-Range Family (BDT)", value: "10,500 - 14,500 / night" },
-      { label: "Top Halal Dining Zone", value: "Arab Street (Bugis) & Serangoon Rd" }
+      { label: "Dining and shopping options", value: "Little India / Serangoon Road" },
+      { label: "Cultural sites and central access", value: "Bugis / Kampong Glam" },
+      { label: "Before booking", value: "Confirm room dimensions and transit route" },
     ],
     faqs: [
       {
-        question: "Why do most Bangladeshi travelers stay near Mustafa Centre in Singapore?",
-        answer: "Mustafa Centre on Serangoon Road (Little India) is open 24 hours for electronics, chocolates, watches, and luggage shopping, and is surrounded by familiar Bangladeshi and Indian halal restaurants, money changers with competitive rates, and Farrer Park MRT station."
+        question: "Which Singapore neighborhoods should I compare?",
+        answer: "Compare Little India / Serangoon Road, Bugis / Kampong Glam and Marina Bay / Civic District against your activities, transit and dining preferences. Confirm the exact hotel location and room details on the current listing.",
       },
       {
-        question: "Are hotel rooms in Singapore smaller than in Bangkok or Kuala Lumpur?",
-        answer: "Yes, land is scarce in Singapore so standard budget rooms are typically 14–18 sq meters. If traveling with children, look at Village Hotel Bugis or One Farrer Hotel which offer larger family room layouts."
-      }
+        question: "What should I check before booking a Singapore hotel?",
+        answer: "Compare the same dates, guest count and room type, including the final checkout total, taxes and fees, payment timing, room dimensions and cancellation terms.",
+      },
     ],
-    schemaMarkup: {
-      type: "HotelGuide",
-      description: "Singapore hotel guide for Bangladeshi travelers",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  "name": "Recommended Singapore Hotels for Bangladeshi Travelers",
-  "numberOfItems": 4,
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "One Farrer Hotel" },
-    { "@type": "ListItem", "position": 2, "name": "Village Hotel Bugis" },
-    { "@type": "ListItem", "position": 3, "name": "Hotel Boss" },
-    { "@type": "ListItem", "position": 4, "name": "ibis budget Singapore Imperial" }
-  ]
-}`
-    }
   },
   {
     id: "maldives-hotels",
     city: "Malé & Maafushi",
     country: "Maldives",
-    description: "The Maldives offers two completely different accommodation styles: inhabited local islands (like Maafushi and Hulhumalé) where Bangladeshi travelers can stay in modern beachfront guesthouses for BDT 5,500–9,500/night, and private resort islands featuring iconic overwater villas.",
+    description: "Compare accommodation on inhabited islands with private-island resorts by the type of stay, transfer arrangements, meal plan and activities you want. Confirm current availability and the full trip cost directly in the booking terms.",
     neighborhoods: [
-      { name: "Maafushi Island (South Malé Atoll)", description: "The #1 budget-friendly local island in the Maldives, just 35–40 minutes by speedboat ($25) or 90 minutes by public ferry ($2) from Malé Airport. Packed with bikini beaches, water sports centers, and affordable excursion operators.", vibe: "Budget Beach Paradise, Snorkeling Tours, Lively" },
-      { name: "Hulhumalé (Airport Connected Island)", description: "A modern reclaimed island connected to Velana International Airport by a 15-minute highway taxi ride. Ideal for first/last night transit stays or short budget beach breaks without paying speedboat fees.", vibe: "Zero Boat Transfer Cost, Convenient, Clean Beach" },
-      { name: "Private Resort Islands (North/South Malé Atoll)", description: "One-island-one-resort private sanctuaries reached by resort speedboat. Home to overwater bungalows, infinity pools, and all-inclusive dining.", vibe: "Honeymoon Luxury, Overwater Villas, Exclusive" }
+      { name: "Maafushi Island", description: "An inhabited-island option with guesthouses and local services. Confirm transfer schedules, pickup details and any island-specific rules with the property before travel.", vibe: "Local-island stay, activities" },
+      { name: "Hulhumalé", description: "An inhabited island near the international airport. Check the property's exact location, arrival transfer and suitability for your flight times.", vibe: "Airport-area base, local services" },
+      { name: "Private resort islands", description: "Resort stays on separate islands may require a transfer arranged by the resort. Confirm transfer type, schedule, price and meal inclusions before paying.", vibe: "Resort stay, transfer planning" },
     ],
-    hotels: [
-      { name: "Kaani Palm Beach", stars: 4, priceBdt: 9800, category: "Mid-Range", neighborhood: "Maafushi Island", features: ["Rooftop infinity pool overlooking ocean", "Directly on Bikini Beach", "In-house shark & sandbank tour desk", "100% Halal buffet"] },
-      { name: "Arena Beach Hotel", stars: 4, priceBdt: 8200, category: "Mid-Range", neighborhood: "Maafushi Island", features: ["Sea-view balcony rooms", "Coco Grill beachfront dining", "Discounted snorkeling packages", "Speedboat pickup coordination"] },
-      { name: "h78 at Hulhumale Maldives", stars: 3, priceBdt: 6400, category: "Budget", neighborhood: "Hulhumalé Beachfront", features: ["15-min taxi from Malé Airport", "No expensive boat transfer needed", "Direct beach across the street", "Great for late-night Dhaka flights"] },
-      { name: "Cinnamon Dhonveli Maldives", stars: 5, priceBdt: 38000, category: "Luxury", neighborhood: "North Malé Atoll (Private Resort)", features: ["Iconic overwater suites", "25-min speedboat from airport", "Full-board & all-inclusive packages", "World-class house reef"] }
-    ],
-    quickAnswer: "You do not need to spend লাখ টাকা on a private resort to visit the Maldives from Bangladesh. By staying on Maafushi local island (such as Arena Beach Hotel or Kaani Palm Beach for BDT 8,200–9,800/night) or Hulhumalé beachfront (from BDT 6,400/night), you get crystal-clear lagoons and cheap $25–$40 snorkeling excursions. For honeymooners seeking overwater villas, private resorts near Malé start around BDT 35,000–45,000 per night.",
+    quickAnswer: "For the Maldives, compare inhabited-island stays with private-island resorts by room terms, meals, activities and required transfers. Confirm transfer arrangements and all mandatory charges with the property; the room rate alone may not represent the full trip cost.",
     keyFacts: [
-      { label: "Best Budget Island", value: "Maafushi (35m speedboat from MLE)" },
-      { label: "Local Island Hotel (BDT)", value: "5,500 - 10,500 / night" },
-      { label: "Private Resort Villa (BDT)", value: "32,000 - 85,000+ / night" },
-      { label: "Green Tax & GST Rule", value: "Check if 16% T-GST + $6/night Green Tax is included" }
+      { label: "Inhabited-island options", value: "Maafushi and Hulhumalé" },
+      { label: "Resort-island planning", value: "Confirm required transfer with the property" },
+      { label: "Before booking", value: "Compare room, meal and transfer inclusions" },
     ],
     faqs: [
       {
-        question: "How do I get from Malé Airport to Maafushi or Hulhumalé?",
-        answer: "Hulhumalé is connected by bridge to the airport and takes 15 minutes by road taxi (approx $7–$10). Maafushi is reached in 35 minutes via scheduled shared speedboat ($25 USD per person each way, bookable through your hotel) directly from the airport jetty."
+        question: "How should I compare local-island stays and private resorts in the Maldives?",
+        answer: "Compare the room, meals, activities, transfer arrangements and cancellation terms together. Confirm how you will reach the property and whether transfers or other mandatory charges are included in the current checkout total.",
       },
       {
-        question: "Is all food in the Maldives halal for Bangladeshi travelers?",
-        answer: "Yes! The Maldives is a 100% Muslim nation, so all meat and food served on local islands (Malé, Hulhumalé, Maafushi) and resorts is strictly Halal."
-      }
+        question: "What should I confirm about a Maldives hotel transfer?",
+        answer: "Ask the property for the current transfer type, schedule, pickup point, price and passenger requirements, and check how it aligns with your flight. Do not assume a transfer is included in the room rate.",
+      },
     ],
-    schemaMarkup: {
-      type: "HotelGuide",
-      description: "Maldives local island and resort hotel guide for Bangladeshis",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  "name": "Best Maldives Hotels & Guesthouses for Bangladeshi Travelers",
-  "numberOfItems": 4,
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Kaani Palm Beach Maafushi" },
-    { "@type": "ListItem", "position": 2, "name": "Arena Beach Hotel Maafushi" },
-    { "@type": "ListItem", "position": 3, "name": "h78 at Hulhumale" },
-    { "@type": "ListItem", "position": 4, "name": "Cinnamon Dhonveli Maldives" }
-  ]
-}`
-    }
-  }
+  },
 ];
 
 export const VISA_DATA: VisaGuide[] = [
@@ -2115,12 +1988,13 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-3",
     slug: "hotel-savings-guide-bangkok-kl-dubai",
-    title: "How to Keep Hotel Costs Low in Bangkok, KL, and Dubai",
-    summary: "Accommodation typically consumes 30% to 40% of an outbound trip budget from Bangladesh, yet most travelers overpay simply by booking inside the most crowded tourist blocks. In this neighborhood-by-neighborhood hotel savings guide, you will learn how shifting just two or three metro stops down the line—such as staying near On Nut or Phra Khanong BTS instead of Siam in Bangkok, choosing Al Rigga or Union Metro in Deira over Downtown Dubai, or booking serviced family apartments near Bukit Bintang and KLCC in Kuala Lumpur—can save BDT 8,000 to BDT 15,000 per trip while keeping you surrounded by affordable Halal restaurants and fast transit.",
-    category: "Hotel Savings",
+    title: "How to Compare Hotel Areas and Booking Terms in Bangkok, Kuala Lumpur & Dubai",
+    summary: "Compare hotel neighborhoods in Bangkok, Kuala Lumpur and Dubai by itinerary, transit, room needs and booking terms. This guide avoids fixed nightly rates and savings promises: compare the same dates, guests and room type, then review the full checkout total and cancellation conditions before booking.",
+    category: "Hotel Planning",
     date: "June 05, 2026",
+    updatedAt: "2026-11-01",
     author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "4 min read",
+    readTime: "3 min read",
     internalLinks: [
       { text: "Dubai trip cost from Dhaka", path: "/costs/dubai-costs" },
       { text: "Kuala Lumpur Hotels Guide", path: "/hotels/kuala-lumpur-hotels" },
@@ -3263,7 +3137,7 @@ export const BLOG_DATA: BlogPost[] = [
     internalLinks: [
       { text: "Umrah + Dubai 10-Day Multi-City Combo Guide from Dhaka", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
       { text: "Dubai Safari, Burj Khalifa & Abu Dhabi Passes Hub", path: "/experiences?region=asia&city=dubai-klook" },
-      { text: "Hotel Savings Guide in Bangkok, Kuala Lumpur & Dubai", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" },
+      { text: "Compare Hotel Areas and Booking Terms in Bangkok, Kuala Lumpur & Dubai", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" },
       { text: "Dubai & UAE Tourist Visa Checklist", path: "/visa/dubai-visa" },
       { text: "Dhaka to Dubai Flight Schedule & Fares", path: "/flights/dhaka-dubai" },
       { text: "Where to Stay in Dubai: Metro & Marina Hotels", path: "/hotels/dubai-hotels" },
@@ -3283,7 +3157,7 @@ export const BLOG_DATA: BlogPost[] = [
     internalLinks: [
       { text: "Malaysia 5-Day Family Destination & e-Visa Guide", path: "/destinations/malaysia-guide" },
       { text: "Top 6 Budget-Friendly Family Destinations from Dhaka", path: "/blog/top-budget-family-destinations-from-dhaka" },
-      { text: "Hotel Savings Guide in Kuala Lumpur, Bangkok & Dubai", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" },
+      { text: "Compare Hotel Areas and Booking Terms in Kuala Lumpur, Bangkok & Dubai", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" },
       { text: "Malaysia eVisa & MDAC Arrival Card Checklist", path: "/visa/malaysia-visa" },
       { text: "Dhaka to Kuala Lumpur Flight Schedule & Fares", path: "/flights/dhaka-kuala-lumpur" },
       { text: "Where to Stay in KL: Hotel Neighborhoods", path: "/hotels/kuala-lumpur-hotels" },

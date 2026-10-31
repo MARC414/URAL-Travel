@@ -23,6 +23,8 @@ interface TravelpayoutsCustomWidgetProps {
   hotelsOnly?: boolean;
   showInlineResults?: boolean;
   lang?: "en" | "bn";
+  /** First-party click scope supplied by the enclosing hotel guide; not a TP SubID. */
+  affiliatePlacement?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -196,190 +198,24 @@ function getFlightOptions(fromCity: string, toCity: string) {
   return [];
 }
 
-function getHotelOptions(hotelCity: string) {
-  const lower = hotelCity.toLowerCase();
-  if (lower.includes("kathmandu") || lower.includes("nepal") || lower.includes("pokhara")) {
-    return [
-      { id: "h1", name: "Thamel Grand Heritage Hotel", category: "Budget Friendly", rating: "3★", review: "8.7/10 Very Good", priceBdt: 2400, neighborhood: "Thamel Core, Kathmandu", features: ["Free Breakfast", "5-min walk to Durbar Marg", "24h Airport Pickup"] },
-      { id: "h2", name: "Hotel Shanker Kathmandu", category: "Mid-Range", rating: "4★", review: "9.1/10 Wonderful", priceBdt: 7400, neighborhood: "Lazimpat, Kathmandu", features: ["Outdoor Swimming Pool", "Heritage Palace Architecture", "Halal-Friendly Dining Nearby"] },
-      { id: "h3", name: "Dwarika's Heritage Resort", category: "Luxury", rating: "5★", review: "9.7/10 Exceptional", priceBdt: 28500, neighborhood: "Battisputali, Kathmandu", features: ["Award-Winning Courtyard", "Full Spa & Courtyard Pool", "Hand-Carved Suites"] },
-    ];
-  }
-  if (lower.includes("bangkok") || lower.includes("thailand") || lower.includes("phuket")) {
-    return [
-      { id: "h4", name: "First House Hotel Pratunam", category: "Value Pick", rating: "3★", review: "8.4/10 Very Good", priceBdt: 3900, neighborhood: "Pratunam Shopping Zone, Bangkok", features: ["Halal Street Food Outside", "2-min walk to Platinum Mall", "Family Triple Rooms"] },
-      { id: "h5", name: "S31 Sukhumvit Hotel", category: "Mid-Range", rating: "4★", review: "8.9/10 Excellent", priceBdt: 6800, neighborhood: "Sukhumvit (Near Phrom Phong BTS)", features: ["Saltwater Infinity Pool", "Spacious Family Suites", "Easy BTS Skytrain Access"] },
-      { id: "h6", name: "Amari Bangkok Pratunam", category: "Luxury", rating: "5★", review: "9.4/10 Outstanding", priceBdt: 12500, neighborhood: "Pratunam Opposite Platinum Mall", features: ["Resort Pool Deck", "Breeze Spa & Executive Lounge", "Direct Skybridge Walk"] },
-    ];
-  }
-  if (lower.includes("kuala") || lower.includes("malaysia") || lower.includes("kl") || lower.includes("penang")) {
-    return [
-      { id: "h7", name: "Travelodge Chinatown KL", category: "Budget Friendly", rating: "3★", review: "8.5/10 Very Good", priceBdt: 2900, neighborhood: "Chinatown & Pasar Seni MRT, KL", features: ["2-min walk to MRT/LRT", "Fast Wi-Fi", "Central Sightseeing Base"] },
-      { id: "h8", name: "WOLO Kuala Lumpur", category: "Mid-Range", rating: "4★", review: "9.1/10 Superb", priceBdt: 6400, neighborhood: "Bukit Bintang Crossing, KL", features: ["Next to Pavilion Mall", "Walk to Jalan Alor & Arab Street", "Modern Boutique Rooms"] },
-      { id: "h9", name: "THE FACE Suites Kuala Lumpur", category: "Luxury", rating: "5★", review: "9.5/10 Exceptional", priceBdt: 9800, neighborhood: "KLCC District, Kuala Lumpur", features: ["51st Floor Rooftop Infinity Pool", "Petronas Twin Towers View", "Full Apartment Suites"] },
-    ];
-  }
-  if (lower.includes("dubai") || lower.includes("uae") || lower.includes("abu dhabi")) {
-    return [
-      { id: "h10", name: "Rove City Centre Deira", category: "Best Value", rating: "3★", review: "9.1/10 Superb", priceBdt: 7200, neighborhood: "Deira (2 mins to Metro), Dubai", features: ["Outdoor Saltwater Pool", "10 mins from DXB Airport", "South Asian & Halal Dining"] },
-      { id: "h11", name: "Swissôtel Al Ghurair Dubai", category: "Mid-Range", rating: "5★", review: "9.0/10 Excellent", priceBdt: 12800, neighborhood: "Deira Creekside, Dubai", features: ["Connected to Al Ghurair Mall", "Free Beach Shuttle", "Large Family Rooms"] },
-      { id: "h12", name: "Address Downtown View Hotel", category: "Luxury", rating: "5★", review: "9.6/10 World Class", priceBdt: 29500, neighborhood: "Downtown Dubai (Burj Khalifa View)", features: ["Infinity Pool Facing Burj Khalifa", "Direct Dubai Mall Access", "VIP Concierge"] },
-    ];
-  }
-  if (lower.includes("singapore")) {
-    return [
-      { id: "h13", name: "Hotel Boss Singapore", category: "Popular Family Value", rating: "4★", review: "8.4/10 Very Good", priceBdt: 11800, neighborhood: "Victoria Street (Near Lavender MRT & Masjid Sultan)", features: ["Halal Food Court Downstairs", "Outdoor Sky Pool", "5 mins to Mustafa Centre"] },
-      { id: "h14", name: "V Hotel Lavender", category: "Mid-Range MRT Hub", rating: "4★", review: "8.6/10 Excellent", priceBdt: 13500, neighborhood: "Directly Above Lavender MRT Station", features: ["Direct Changi MRT Line", "Rooftop Pool Terrace", "24h Kopitiam & Convenience"] },
-      { id: "h15", name: "PARKROYAL COLLECTION Marina Bay", category: "Luxury", rating: "5★", review: "9.3/10 Superb", priceBdt: 34500, neighborhood: "Marina Bay Sands District, Singapore", features: ["Indoor Garden Atrium", "Halal-Certified Buffet", "Skyline Pool"] },
-    ];
-  }
-  if (lower.includes("maldives") || lower.includes("maafushi") || lower.includes("male") || lower.includes("hulhumale")) {
-    return [
-      { id: "h16", name: "Kaani Palm Beach Maafushi", category: "Best Island Value", rating: "4★", review: "8.9/10 Excellent", priceBdt: 8900, neighborhood: "Bikini Beachfront, Maafushi Local Island", features: ["Rooftop Infinity Pool", "100% Halal Dining", "$30 Snorkeling & Sandbank Tours"] },
-      { id: "h17", name: "Arena Beach Hotel Maafushi", category: "Family Pick", rating: "4★", review: "8.8/10 Very Good", priceBdt: 8200, neighborhood: "Maafushi Coastline, Maldives", features: ["Direct Speedboat from MLE", "Ocean View Balconies", "Free Snorkeling Gear"] },
-      { id: "h18", name: "Kurumba Maldives Private Island", category: "5★ Resort", rating: "5★", review: "9.5/10 Exceptional", priceBdt: 42000, neighborhood: "North Malé Atoll (10-min Speedboat from MLE)", features: ["Private Lagoon & House Reef", "7 Halal-Friendly Restaurants", "No Seaplane Needed"] },
-    ];
-  }
-  if (lower.includes("makkah") || lower.includes("mecca") || lower.includes("jeddah")) {
-    return [
-      { id: "h19", name: "Emaar Grand Hotel Makkah", category: "Walkable Value", rating: "4★", review: "8.3/10 Very Good", priceBdt: 7800, neighborhood: "Ibrahim Al Khalil Street (650m flat walk to Haram)", features: ["No Steep Hills for Seniors", "Bangladeshi & Asian Restaurants Outside", "Quad Family Rooms"] },
-      { id: "h20", name: "Swissôtel Makkah (Clock Tower)", category: "Direct Haram Access", rating: "5★", review: "9.1/10 Superb", priceBdt: 24500, neighborhood: "Abraj Al Bait Complex, King Abdulaziz Gate", features: ["Direct Elevator to Haram Courtyard", "Wheelchair Accessible", "Haram Speaker Audio in Rooms"] },
-      { id: "h21", name: "Jabal Omar Hyatt Regency Makkah", category: "Luxury Haram View", rating: "5★", review: "9.4/10 Exceptional", priceBdt: 31000, neighborhood: "Jabal Omar (1-min walk to King Fahd Gate)", features: ["Steps from Ladies Prayer Area", "Spacious Family Suites", "24h In-Room Dining"] },
-    ];
-  }
-  if (lower.includes("madinah") || lower.includes("medina")) {
-    return [
-      { id: "h22", name: "Saja Al Madinah Hotel", category: "Best Value", rating: "4★", review: "8.6/10 Excellent", priceBdt: 9200, neighborhood: "Northern Central Area (4-min walk to Masjid an-Nabawi)", features: ["Near Ladies Gate 25–29", "Family Quad Rooms", "International Buffet"] },
-      { id: "h23", name: "Pullman Zamzam Madina", category: "5★ Haram Courtyard", rating: "5★", review: "9.0/10 Superb", priceBdt: 19500, neighborhood: "Southern Markazia (Near Bab Al Salam & Rawdah)", features: ["Free Haram Shuttle & Direct Walk", "Prophet's Mosque Views", "Full Family Suites"] },
-      { id: "h24", name: "Dar Al Taqwa Hotel Madinah", category: "Luxury Front Row", rating: "5★", review: "9.5/10 World Class", priceBdt: 34000, neighborhood: "Directly Opposite King Fahd Gate, Madinah", features: ["20 Seconds to Haram Gate", "Zero Walking Strain for Seniors", "VIP Concierge"] },
-    ];
-  }
-  if (lower.includes("london") || lower.includes("uk")) {
-    return [
-      { id: "h25", name: "Point A Hotel London Paddington", category: "Central Value", rating: "3★", review: "8.4/10 Very Good", priceBdt: 16500, neighborhood: "Paddington & Edgware Road (Halal Dining Hub)", features: ["5-min walk to Paddington Heathrow Express", "Halal Restaurants on Edgware Rd", "Fast Wi-Fi"] },
-      { id: "h26", name: "Park Plaza Westminster Bridge", category: "Mid-Range Family", rating: "4★", review: "8.9/10 Excellent", priceBdt: 29500, neighborhood: "South Bank (Opposite Big Ben & London Eye)", features: ["Indoor Pool & Spa", "Walk to London Eye & Waterloo", "Family Studio Rooms"] },
-    ];
-  }
-  if (lower.includes("istanbul") || lower.includes("turkey")) {
-    return [
-      { id: "h27", name: "Hotel Sultania Boutique Class", category: "Top Heritage Pick", rating: "4★", review: "9.4/10 Exceptional", priceBdt: 14200, neighborhood: "Sultanahmet & Sirkeci, Istanbul", features: ["5-min walk to Hagia Sophia & Blue Mosque", "Indoor Pool & Turkish Hammam", "100% Halal Breakfast"] },
-      { id: "h28", name: "CVK Park Bosphorus Hotel", category: "Luxury View", rating: "5★", review: "9.2/10 Superb", priceBdt: 26800, neighborhood: "Taksim Square & Bosphorus Terrace", features: ["Panoramic Bosphorus Strait Views", "2-min walk to Taksim Metro", "Spacious Family Suites"] },
-    ];
-  }
-  if (lower.includes("paris") || lower.includes("france")) {
-    return [
-      { id: "h29", name: "Hôtel Excelsior Opéra Paris", category: "Central Value", rating: "3★", review: "8.5/10 Very Good", priceBdt: 17800, neighborhood: "Opéra & Grands Boulevards (9th Arr.), Paris", features: ["Walk to Galeries Lafayette & Metro", "Halal Brasseries Nearby", "Direct RoissyBus from CDG"] },
-      { id: "h30", name: "Pullman Paris Tour Eiffel", category: "Iconic View", rating: "4★", review: "8.9/10 Excellent", priceBdt: 34500, neighborhood: "15th Arr. (Steps from Eiffel Tower & Seine)", features: ["Direct Eiffel Tower Views", "Family Connecting Rooms", "5-min walk to Bir-Hakeim Metro"] },
-      { id: "h31", name: "Hôtel Napoléon Champs-Élysées", category: "5★ Luxury", rating: "5★", review: "9.3/10 Superb", priceBdt: 46000, neighborhood: "Arc de Triomphe & Champs-Élysées, Paris", features: ["Classic Haussmann Suites", "2-min walk to Charles de Gaulle–Étoile", "VIP Concierge"] },
-    ];
-  }
-  if (lower.includes("new york") || lower.includes("nyc") || lower.includes("manhattan")) {
-    return [
-      { id: "h32", name: "Pod Times Square Manhattan", category: "Midtown Value", rating: "3★", review: "8.5/10 Very Good", priceBdt: 19500, neighborhood: "Times Square & Hell's Kitchen, New York", features: ["Walk to Broadway & Subway Lines", "Halal Carts & Dining Nearby", "Modern Smart Pods"] },
-      { id: "h33", name: "New York Hilton Midtown", category: "Family Hub", rating: "4★", review: "8.7/10 Excellent", priceBdt: 32800, neighborhood: "Sixth Avenue (Near Central Park & Rockefeller)", features: ["Halal-Famous 53rd St Platter Outside", "Spacious Family Two-Double Rooms", "Central Manhattan Base"] },
-    ];
-  }
+/** No static hotel listings or nightly prices are published here. */
+function getHotelOptions(_hotelCity: string) {
   return [];
 }
 
 const EXPLORE_POPULAR_CITIES = [
-  {
-    city: "Makkah",
-    country: "Saudi Arabia",
-    flag: "🇸🇦",
-    tag: "Haram Walkable",
-    flightDest: "Jeddah (JED)",
-    fromBdt: 7800,
-  },
-  {
-    city: "Paris",
-    country: "France",
-    flag: "🇫🇷",
-    tag: "Eiffel & Opéra",
-    flightDest: "Paris (CDG)",
-    fromBdt: 17800,
-  },
-  {
-    city: "Dubai",
-    country: "UAE",
-    flag: "🇦🇪",
-    tag: "Deira & Downtown",
-    flightDest: "Dubai (DXB)",
-    fromBdt: 7200,
-  },
-  {
-    city: "Madinah",
-    country: "Saudi Arabia",
-    flag: "🇸🇦",
-    tag: "Markazia Haram",
-    flightDest: "Madinah (MED)",
-    fromBdt: 9200,
-  },
-  {
-    city: "Bangkok",
-    country: "Thailand",
-    flag: "🇹🇭",
-    tag: "Pratunam & BTS",
-    flightDest: "Bangkok (BKK)",
-    fromBdt: 3900,
-  },
-  {
-    city: "Kuala Lumpur",
-    country: "Malaysia",
-    flag: "🇲🇾",
-    tag: "Bukit Bintang & KLCC",
-    flightDest: "Kuala Lumpur (KUL)",
-    fromBdt: 2900,
-  },
-  {
-    city: "London",
-    country: "United Kingdom",
-    flag: "🇬🇧",
-    tag: "Paddington & Central",
-    flightDest: "London Heathrow (LHR)",
-    fromBdt: 16500,
-  },
-  {
-    city: "Singapore",
-    country: "Singapore",
-    flag: "🇸🇬",
-    tag: "MRT & Marina Bay",
-    flightDest: "Singapore (SIN)",
-    fromBdt: 11800,
-  },
-  {
-    city: "Maldives (Maafushi & Malé)",
-    shortLabel: "Maldives",
-    country: "Maldives",
-    flag: "🇲🇻",
-    tag: "Maafushi & Atolls",
-    flightDest: "Malé, Maldives (MLE)",
-    fromBdt: 8200,
-  },
-  {
-    city: "Istanbul",
-    country: "Turkey",
-    flag: "🇹🇷",
-    tag: "Sultanahmet & Taksim",
-    flightDest: "Istanbul (IST)",
-    fromBdt: 14200,
-  },
-  {
-    city: "Kathmandu",
-    country: "Nepal",
-    flag: "🇳🇵",
-    tag: "Thamel & Lazimpat",
-    flightDest: "Kathmandu (KTM)",
-    fromBdt: 2400,
-  },
-  {
-    city: "New York",
-    country: "United States",
-    flag: "🇺🇸",
-    tag: "Midtown Manhattan",
-    flightDest: "New York (JFK)",
-    fromBdt: 19500,
-  },
+  { city: "Makkah", country: "Saudi Arabia", flag: "🇸🇦", tag: "Haram area guide", flightDest: "Jeddah (JED)" },
+  { city: "Paris", country: "France", flag: "🇫🇷", tag: "City area guide", flightDest: "Paris (CDG)" },
+  { city: "Dubai", country: "UAE", flag: "🇦🇪", tag: "Deira & Downtown", flightDest: "Dubai (DXB)" },
+  { city: "Madinah", country: "Saudi Arabia", flag: "🇸🇦", tag: "Haram area guide", flightDest: "Madinah (MED)" },
+  { city: "Bangkok", country: "Thailand", flag: "🇹🇭", tag: "Pratunam & Sukhumvit", flightDest: "Bangkok (BKK)" },
+  { city: "Kuala Lumpur", country: "Malaysia", flag: "🇲🇾", tag: "KLCC & Bukit Bintang", flightDest: "Kuala Lumpur (KUL)" },
+  { city: "London", country: "United Kingdom", flag: "🇬🇧", tag: "City area guide", flightDest: "London Heathrow (LHR)" },
+  { city: "Singapore", country: "Singapore", flag: "🇸🇬", tag: "Little India & Bugis", flightDest: "Singapore (SIN)" },
+  { city: "Maldives", country: "Maldives", flag: "🇲🇻", tag: "Local islands & resorts", flightDest: "Malé (MLE)" },
+  { city: "Istanbul", country: "Turkey", flag: "🇹🇷", tag: "City area guide", flightDest: "Istanbul (IST)" },
+  { city: "Kathmandu", country: "Nepal", flag: "🇳🇵", tag: "Thamel & Boudha", flightDest: "Kathmandu (KTM)" },
+  { city: "New York", country: "United States", flag: "🇺🇸", tag: "City area guide", flightDest: "New York (JFK)" },
 ];
 
 export function TravelpayoutsCustomWidget({
@@ -390,6 +226,7 @@ export function TravelpayoutsCustomWidget({
   hotelsOnly = false,
   showInlineResults = false,
   lang = "en",
+  affiliatePlacement,
 }: TravelpayoutsCustomWidgetProps = {}) {
   const isBn = lang === "bn" || (typeof window !== "undefined" && window.location.pathname.startsWith("/bn"));
   const instanceId = useId();
@@ -664,7 +501,7 @@ export function TravelpayoutsCustomWidget({
           city: r.city,
           country: r.country,
           flag: r.flag,
-          zone: `City Center & Top Rated Stays (${r.code})`,
+          zone: `Hotel areas to compare (${r.code})`,
           iata: r.code,
         });
       }
@@ -845,13 +682,13 @@ export function TravelpayoutsCustomWidget({
           const isActive =
             searchTab === "hotels" &&
             hotelCity.toLowerCase().includes(firstWord);
-          const displayLabel = hub.shortLabel || hub.city;
+          const displayLabel = hub.city;
 
           return (
             <button
               key={hub.city}
               type="button"
-              title={`${hub.city} (${hub.tag}) — from ${formatPrice(hub.fromBdt)}`}
+              title={`${hub.city} (${hub.tag})`}
               onClick={() => {
                 setSearchTab("hotels");
                 setHotelCity(hub.city);
@@ -867,13 +704,6 @@ export function TravelpayoutsCustomWidget({
             >
               <span className="font-bold">
                 {hub.flag} {displayLabel}
-              </span>
-              <span
-                className={`text-[10px] font-mono font-bold ${
-                  isActive ? "text-[#F6B73C]" : "text-emerald-700"
-                }`}
-              >
-                {formatPrice(hub.fromBdt)}+
               </span>
             </button>
           );
@@ -1221,16 +1051,17 @@ export function TravelpayoutsCustomWidget({
                     <option value="4">4 Guests · 2 Rooms</option>
                   </select>
                   <span className="text-[11px] text-slate-500 truncate">
-                    Dual-Currency Card OK
+                    {isBn ? "কার্ডের বৈদেশিক লেনদেনের শর্ত যাচাই করুন" : "Check your card’s foreign-transaction terms"}
                   </span>
                 </div>
               </div>
 
-              {/* Primary Submit CTA — Routes directly to Approved Klook Hotel Partner (8% Commission) */}
+              {/* Generic partner handoff; the city, dates and guests are not forwarded to Klook. */}
               <div className="lg:col-span-2 flex">
                 <a
                   id="btn-search-hotels-submit"
                   href={klookHotelsPartnerUrl}
+                  data-affiliate-placement={affiliatePlacement}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
                   onClick={() => {
@@ -1240,7 +1071,7 @@ export function TravelpayoutsCustomWidget({
                 >
                   <div className="flex items-center gap-1.5 font-black text-sm sm:text-[15px] tracking-tight">
                     <Search size={16} className="shrink-0 stroke-[2.5]" />
-                    <span>{isBn ? "Klook-এর বাছাইকৃত হোটেল দেখুন" : "Browse Klook’s Curated Hotels"}</span>
+                    <span>{isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}</span>
                     <ExternalLink
                       size={13}
                       className="shrink-0 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
@@ -1285,19 +1116,26 @@ export function TravelpayoutsCustomWidget({
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <span className="inline-flex items-center gap-1 font-semibold text-slate-700">
                 <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
-                Free · No account needed · Instant Hotel &amp; Pass Vouchers (
-                {hotelCity || "Worldwide"})
+                {isBn
+                  ? "পার্টনার লিংক সাধারণ তালিকা খোলে—লাইভ কোট নয়। গন্তব্য, তারিখ ও অতিথি আবার দিন।"
+                  : "Partner links open general collections—not live quotes. Re-enter destination, dates and guests."}
+              </span>
+              <span className="block text-[10px] leading-4 text-slate-500">
+                {isBn
+                  ? "যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; এটি ভ্রমণকারীর জন্য ছাড় নয়।"
+                  : "URAL may earn a commission on qualifying bookings; this is not a traveller discount."}
               </span>
             </div>
 
             <div className="flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
               <a
                 href={klookHotelsPartnerUrl}
+                data-affiliate-placement={affiliatePlacement}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
                 className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-amber-700 bg-amber-50/90 hover:bg-amber-100/80 border border-amber-200/80 px-2.5 py-1 rounded-lg transition-colors"
               >
-                <span>Klook Hotels &amp; Resorts</span>
+                <span>{isBn ? "Klook-এ হোটেল সার্চ" : "Search Klook hotel collection"}</span>
                 <ExternalLink size={11} />
               </a>
               <a
@@ -1313,7 +1151,7 @@ export function TravelpayoutsCustomWidget({
                 href="/kkday-hotels"
                 className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
               >
-                <span>KKday Hotel &amp; Stay Deals</span>
+                <span>{isBn ? "KKday হোটেল তালিকা" : "Search KKday hotel collection"}</span>
                 <ExternalLink size={11} />
               </a>
               <a
@@ -1348,9 +1186,7 @@ export function TravelpayoutsCustomWidget({
               <span className="text-xs font-bold text-slate-800">
                 {searchTab === "flights"
                   ? `Flights: ${fromCity} → ${toCity} (${date})`
-                  : `Stays in ${
-                      hotelCity || "Global Destination"
-                    } · Check-in ${date} – Check-out ${checkOutDate}`}
+                  : `Hotel search handoff · ${hotelCity || "Global Destination"} · ${date} – ${checkOutDate}`}
               </span>
             </div>
 
@@ -1364,12 +1200,13 @@ export function TravelpayoutsCustomWidget({
                 <>
                   <a
                     href={klookHotelsPartnerUrl}
+                    data-affiliate-placement={affiliatePlacement}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
                     className="inline-flex items-center gap-1.5 bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer"
                   >
                     <span>
-                      Browse Klook’s curated hotel collection
+                      {isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}
                     </span>
                     <ExternalLink size={12} />
                   </a>
@@ -1408,7 +1245,7 @@ export function TravelpayoutsCustomWidget({
             </div>
           </div>
 
-          {/* Curated Results OR Global Live Dispatch Card */}
+          {/* Static hotel examples are disabled; hotel searches hand off to partner collections. */}
           {results.length > 0 ? (
             <div className="space-y-3">
               {searchTab === "flights"
@@ -1508,22 +1345,18 @@ export function TravelpayoutsCustomWidget({
                       </div>
 
                       <div className="flex items-center justify-between md:flex-col md:items-end gap-2 border-t md:border-t-0 border-slate-100 pt-3 md:pt-0">
-                        <div className="text-left md:text-right">
-                          <div className="text-lg font-black text-slate-900 tabular-nums">
-                            {formatPrice(hotel.priceBdt)}
-                          </div>
-                          <span className="text-[11px] text-slate-500 block">
-                            Per Room / Night
-                          </span>
+                        <div className="text-left md:text-right text-[11px] text-slate-500">
+                          Check the current total and room terms on the provider site.
                         </div>
                         <a
                           id={`btn-book-hotel-${hotel.id}`}
                           href={klookHotelsPartnerUrl}
+                          data-affiliate-placement={affiliatePlacement}
                           target="_blank"
                           rel="noopener noreferrer sponsored"
                           className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
                         >
-                          Check Rates on Klook
+                          Search Klook hotel collection
                           <ExternalLink size={12} />
                         </a>
                       </div>
@@ -1537,20 +1370,20 @@ export function TravelpayoutsCustomWidget({
                 <Sparkles size={12} />
                 <span>
                   {searchTab === "hotels"
-                    ? `Global Hotel Search Ready · ${hotelCity}`
+                    ? `Partner hotel search · ${hotelCity}`
                     : `Global Flight Search Ready · ${origCode} → ${destCode}`}
                 </span>
               </div>
               <h4 className="font-bold text-slate-900 text-sm sm:text-base">
                 {searchTab === "hotels"
-                  ? `Compare Live Hotel Rates & Family Stays in ${hotelCity} (${currency})`
+                  ? `Check hotel listings in ${hotelCity} on a partner site`
                   : `Compare Live Airlines for ${fromCity} → ${toCity} (${currency})`}
               </h4>
               <p className="text-xs text-slate-600 leading-relaxed">
                 {searchTab === "hotels"
-                  ? `Open verified hotel deals and family resort packages for ${hotelCity} (${date} to ${checkOutDate}, ${travelers} ${
-                      travelers === 1 ? "Guest" : "Guests"
-                    }) on Klook or KKday.`
+                  ? `These links open general partner hotel collections, not a quote for your selected dates or guests. Re-enter ${hotelCity}, ${date} to ${checkOutDate} and ${travelers} ${
+                      travelers === 1 ? "guest" : "guests"
+                    } on the partner site, then compare the current checkout total, inclusions and cancellation terms. URAL may earn a commission on qualifying bookings; this is not a traveller discount.`
                   : `Open live global flight search results for ${fromCity} to ${toCity} on ${date} in ${currency} via URAL Branded White-Label (#22462) or Aviasales Global (#${MARKER_ID}).`}
               </p>
               <div className="flex flex-wrap items-center gap-2.5 pt-1">
@@ -1558,18 +1391,19 @@ export function TravelpayoutsCustomWidget({
                   <>
                     <a
                       href={klookHotelsPartnerUrl}
+                      data-affiliate-placement={affiliatePlacement}
                       target="_blank"
                       rel="noopener noreferrer sponsored"
                       className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
-                      <span>Search Hotels on Klook ({currency})</span>
+                      <span>{isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}</span>
                       <ExternalLink size={13} />
                     </a>
                     <a
                       href="/kkday-hotels"
                                             className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
-                      <span>KKday Hotel &amp; Stay Deals</span>
+                      <span>{isBn ? "KKday হোটেল তালিকা" : "Search KKday hotel collection"}</span>
                       <ExternalLink size={13} />
                     </a>
                   </>
@@ -1599,69 +1433,35 @@ export function TravelpayoutsCustomWidget({
             </div>
           )}
 
-          {/* Selected Booking Confirmation Banner */}
-          {selectedItem && (
+          {/* Selected flight handoff only; hotel searches never show static sample cards. */}
+          {selectedItem?.type === "flight" && (
             <div className="mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="space-y-1">
                 <div className="text-xs font-bold text-emerald-950 flex items-center gap-1.5">
                   <CheckCircle2 size={15} className="text-[#07C369]" />
-                  <span>
-                    {selectedItem.type === "flight"
-                      ? `${selectedItem.airline} (${
-                          selectedItem.flightNo
-                        }) — ${formatPrice(selectedItem.priceBdt)}`
-                      : `${selectedItem.name} (${
-                          selectedItem.neighborhood
-                        }) — ${formatPrice(selectedItem.priceBdt)}/night`}
-                  </span>
+                  <span>{selectedItem.airline} ({selectedItem.flightNo}) — {formatPrice(selectedItem.priceBdt)}</span>
                 </div>
-                <p className="text-xs text-slate-600">
-                  Continue to official partner booking portal to lock in this
-                  rate for {date} ({currency}).
-                </p>
+                <p className="text-xs text-slate-600">Check current fare, baggage and ticket conditions with the provider before purchase; displayed details may not reflect live availability.</p>
               </div>
               <div className="flex flex-wrap items-center gap-2 shrink-0">
-                {selectedItem.type === "flight" ? (
-                  <>
-                    <a
-                      href={uralWlDeepUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-                    >
-                      <span>{isBn ? 'বুকিং সম্পন্ন করুন' : 'Book Flight Online'}</span>
-                      <ExternalLink size={13} />
-                    </a>
-                    <a
-                      href={aviasalesDeepUrl}
-                      target="_blank"
-                      rel="noopener noreferrer sponsored"
-                      className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-                    >
-                      <span>Aviasales Global Checkout</span>
-                      <ExternalLink size={13} />
-                    </a>
-                  </>
-                ) : (
-                  <>
-                    <a
-                      href={klookHotelsPartnerUrl}
-                      target="_blank"
-                      rel="noopener noreferrer sponsored"
-                      className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-                    >
-                      <span>Book Hotel on Klook</span>
-                      <ExternalLink size={13} />
-                    </a>
-                    <a
-                      href="/kkday-hotels"
-                                            className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-                    >
-                      <span>KKday Hotel &amp; Stay Deals</span>
-                      <ExternalLink size={13} />
-                    </a>
-                  </>
-                )}
+                <a
+                  href={uralWlDeepUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <span>{isBn ? "লাইভ ফ্লাইট সার্চ" : "Search current flights"}</span>
+                  <ExternalLink size={13} />
+                </a>
+                <a
+                  href={aviasalesDeepUrl}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <span>Compare on Aviasales</span>
+                  <ExternalLink size={13} />
+                </a>
               </div>
             </div>
           )}

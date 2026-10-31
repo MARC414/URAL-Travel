@@ -111,11 +111,14 @@ export function trackAffiliateClick({
   label,
   url,
   destination,
+  placement,
 }: {
   partner?: string;
   label: string;
   url: string;
   destination?: string;
+  /** First-party placement scope; not a Travelpayouts SubID. */
+  placement?: string;
 }) {
   const partnerName = partner || identifyPartnerFromUrl(url);
   pushDataLayerEvent("affiliate_partner_click", {
@@ -123,6 +126,8 @@ export function trackAffiliateClick({
     link_label: label,
     outbound_url: url,
     destination: destination || "unknown",
+    page_path: typeof window !== "undefined" ? window.location.pathname : undefined,
+    ...(placement ? { affiliate_placement: placement } : {}),
   });
 }
 
@@ -160,6 +165,9 @@ export function initGlobalClickTracking(): () => void {
     const href = target.getAttribute("href") || "";
     const rel = target.getAttribute("rel") || "";
     const text = (target.textContent || "").trim().slice(0, 100);
+    // Stable first-party link placement. This scopes our click event only; it is
+    // not appended to the partner URL and does not establish partner-side attribution.
+    const affiliatePlacement = target.dataset?.affiliatePlacement || "";
 
     // 1. WhatsApp link detection
     if (href.includes("wa.me/") || href.includes("api.whatsapp.com") || href.includes("whatsapp://")) {
@@ -221,6 +229,7 @@ export function initGlobalClickTracking(): () => void {
         link_label: text || partner,
         outbound_url: href,
         page_path: window.location.pathname,
+        ...(affiliatePlacement ? { affiliate_placement: affiliatePlacement } : {}),
       });
     }
   };

@@ -3117,14 +3117,13 @@ export default function TravelpayoutsWidget({
                 <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px]">
                   <a
                     href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
+                    data-affiliate-placement="flight_widget_hotel_collection"
                     target="_blank"
                     rel="noopener noreferrer sponsored"
                     className="inline-flex min-h-8 items-center gap-1 text-slate-200 transition-colors hover:text-white"
                   >
                     <span>
-                      {isBn
-                        ? `${effectiveDest.city} হোটেল (Klook)`
-                        : `${effectiveDest.city} Hotels (Klook)`}
+                      {isBn ? "Klook হোটেল তালিকা" : "Klook hotel collection"}
                     </span>
                     <ExternalLink size={11} aria-hidden="true" />
                   </a>
@@ -3168,6 +3167,11 @@ export default function TravelpayoutsWidget({
                     <ExternalLink size={11} aria-hidden="true" />
                   </a>
                 </div>
+                <p className="text-[10px] leading-relaxed text-slate-400">
+                  {isBn
+                    ? "Klook-এর হোটেল লিংক সাধারণ তালিকা খোলে—লাইভ কোট নয়; গন্তব্য, তারিখ ও অতিথি আবার দিন। যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে।"
+                    : "Klook opens a general hotel collection—not a live quote. Re-enter destination, dates and guests. URAL may earn commission on qualifying bookings."}
+                </p>
               </div>
             </div>
           </section>

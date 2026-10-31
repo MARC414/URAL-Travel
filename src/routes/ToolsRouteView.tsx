@@ -14,7 +14,7 @@ type RouteViewProps = { context: Record<string, any> };
 
 export default function ToolsRouteView({ context }: RouteViewProps) {
 
-  const { InteractiveTools, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, isAdmin, isBn, parameterId, section, setAreTpScriptsReady } = context;
+  const { InteractiveTools, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, isAdmin, isBn, lang, parameterId, section, setAreTpScriptsReady } = context;
 
   // Per-tool hero copy for /tools/<slug> — see TOOL_PAGE_SEO (single source
   // shared with seoCopy.ts, App.tsx breadcrumbs and scripts/prerender.ts).
@@ -205,7 +205,11 @@ export default function ToolsRouteView({ context }: RouteViewProps) {
 
                       >
 
-                        <TravelpayoutsCustomWidget initialTab="hotels" />
+                        <TravelpayoutsCustomWidget
+                          initialTab="hotels"
+                          affiliatePlacement="tools_hotel_search"
+                          lang={lang}
+                        />
 
                       </React.Suspense>
 

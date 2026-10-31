@@ -3,13 +3,13 @@ import React from "react";
 import { GuideJumpNav } from "../components/GuideJumpNav";
 import { QuickAnswer } from "../components/QuickAnswer";
 
-import { Building, ArrowRight, MapPin, ExternalLink, Zap, ShieldCheck, Plane, Car } from "lucide-react";
+import { Building, ArrowRight, Zap, ShieldCheck, Plane, Car } from "lucide-react";
 
 import { TravelIntelligence } from "../components/AeoInspector";
 
-import { resolvePartnerUrl, AFFILIATE_LINKS } from "../components/AffiliatePartners";
-
 import { KlookHotelSpotlight } from "../components/KlookHotelSpotlight";
+import { AFFILIATE_LINKS } from "../components/AffiliatePartners";
+import { getHotelGuideAffiliatePlacement } from "../utils/affiliatePlacement";
 
 import { EditorialPageHero } from "../components/EditorialPageHero";
 
@@ -21,7 +21,7 @@ type RouteViewProps = { context: Record<string, any> };
 
 export default function HotelsRouteView({ context }: RouteViewProps) {
 
-  const { TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryCityWithIata, getCountryFlightId, getCountryVisaId, isBn, lang, localizedHotels, navigateTo, parameterId, section, setAreTpScriptsReady, triggerAffiliateToast } = context;
+  const { TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryCityWithIata, getCountryFlightId, getCountryVisaId, isBn, lang, localizedHotels, navigateTo, parameterId, section, setAreTpScriptsReady } = context;
 
   const activeHotel = localizedHotels.find((hotel) => hotel.id === parameterId) || localizedHotels[0];
 
@@ -96,11 +96,11 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
         <EditorialPageHero
           eyebrow={isBn ? "শহরভিত্তিক থাকার গাইড" : "CITY STAY GUIDE"}
           title={isBn
-            ? `${activeHotel.city}-এ কোথায় থাকবেন: এলাকা, হোটেল দাম ও হালাল খাবারের গাইড (২০২৬)`
-            : `Where to Stay in ${activeHotel.city}: Best Areas & Hotels`}
+            ? `${activeHotel.city}-এ কোথায় থাকবেন: এলাকা তুলনা ও বুকিং চেকলিস্ট`
+            : `Where to Stay in ${activeHotel.city}: Neighborhoods & Booking Checklist`}
           description={isBn
-            ? `${activeHotel.city} ভ্রমণে থাকার এলাকা, হোটেলের ধরন এবং আনুমানিক বাজেটের তুলনা করুন। তারিখ, রুমের শর্ত ও বর্তমান প্রাপ্যতা বুকিংয়ের আগে যাচাই করুন।`
-            : `Compare neighborhoods, hotel styles and planning budgets in ${activeHotel.city}. Check your dates, room terms and current availability before booking.`}
+            ? `${activeHotel.city}-এ থাকার এলাকা ও বুকিংয়ের শর্ত তুলনা করুন। আমরা স্থির রাতপ্রতি দাম দিই না—আপনার তারিখে বর্তমান মোট দাম, রুমের শর্ত ও প্রাপ্যতা যাচাই করুন।`
+            : `Compare neighborhoods and booking terms in ${activeHotel.city}. We do not publish fixed nightly rates; check current totals, room terms and availability for your dates.`}
           imageSrc="/assets/images/hotel_guide_guest_room_20261101-1200.webp"
           imageAlt={isBn
             ? "দুইজনের বিছানা ও উষ্ণ আলোসহ একটি পরিচ্ছন্ন হোটেল কক্ষ"
@@ -127,15 +127,15 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
             { id: "hotel-neighborhoods", en: "Choose a neighborhood", bn: "এলাকা বেছে নিন" },
 
-            { id: "hotel-curated-stays", en: "Compare curated stays", bn: "বাছাইকৃত হোটেল তুলনা করুন" },
+            { id: "hotel-curated-stays", en: "Compare hotel areas and booking checks", bn: "হোটেল এলাকা ও বুকিং যাচাই করুন" },
 
-            { id: "hotel-klook-check", en: "Second quote on Klook", bn: "Klook-এ দ্বিতীয় দাম" },
+            { id: "hotel-klook-check", en: "Search Klook hotel collection", bn: "Klook হোটেল তালিকা সার্চ" },
 
             { id: "hotel-ground-transport", en: "Transfers and local essentials", bn: "ট্রান্সফার ও স্থানীয় প্রয়োজনীয়তা" },
 
             { id: "hotel-internal-loop", en: "Related visa and flight guides", bn: "সম্পর্কিত ভিসা ও ফ্লাইট গাইড" },
 
-            { id: "hotel-search", en: "Search hotel rates", bn: "হোটেলের ভাড়া খুঁজুন" },
+            { id: "hotel-search", en: "Search hotel partner listings", bn: "পার্টনার সাইটে হোটেল খুঁজুন" },
 
             { id: "travel-intelligence-panel", en: "FAQs and key answers", bn: "প্রশ্নোত্তর ও প্রয়োজনীয় তথ্য" },
 
@@ -235,7 +235,7 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
                       <h2 className="ural-section-title font-serif font-black text-lg text-slate-900 border-b border-slate-100 pb-2">
 
-                        {isBn ? "থাকার জন্য সেরা এলাকা ও লোকেশন বিশ্লেষণ" : "Best Neighborhoods Area breakdown"}
+                        {isBn ? "তুলনা করার মতো থাকার এলাকা" : "Neighborhoods to compare"}
 
                       </h2>
 
@@ -261,130 +261,42 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
 
 
-                    {/* Curated Housing Grid list */}
+                    {/* Live hotel search guidance: no static rates or unverified property cards. */}
 
-                    <div id="hotel-curated-stays" className="ural-guide-jump-target space-y-4">
+                    <section id="hotel-curated-stays" className="ural-guide-jump-target space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
                       <h2 className="ural-section-title font-serif font-black text-lg text-slate-900">
 
-                        {isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য বাছাইকৃত হোটেল" : "Curated Local Stays Selection"}
+                        {isBn ? "বর্তমান হোটেল বিকল্প কীভাবে যাচাই করবেন" : "How to check current hotel options"}
 
                       </h2>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <p className="text-sm leading-relaxed text-slate-700">
 
-                        {activeHotel.hotels.map((room) => (
+                        {isBn
+                          ? "এই গাইডে স্থির রাতপ্রতি হোটেল-দাম বা নির্দিষ্ট হোটেলের অফার দেখানো হয় না। তারিখ, অতিথিসংখ্যা, রুমের ধরন, খাবার, ট্যাক্স, সার্ভিস চার্জ, মুদ্রা ও বাতিলের শর্তে চূড়ান্ত মোট দাম বদলাতে পারে। নিচের পার্টনার লিংক সাধারণ হোটেল তালিকা খোলে—এটি নির্বাচিত হোটেল বা তারিখের লাইভ কোট নয়।"
+                          : "This guide does not publish fixed nightly hotel rates or property-specific offers. The final total can vary by dates, guest count, room type, meals, taxes, service charges, currency and cancellation terms. The partner link below opens a general hotel collection—not a live quote for a selected property or dates."}
 
-                          <div key={room.name} className="ural-card border border-border-subtle p-5 bg-white rounded-xl shadow-sm flex flex-col justify-between">
+                      </p>
 
-                            <div>
+                      <ul className="grid gap-2 text-sm text-slate-700 sm:grid-cols-2">
 
-                              <div className="flex justify-between items-center mb-2">
+                        <li className="rounded-lg bg-slate-50 p-3">{isBn ? "একই তারিখ, রাতের সংখ্যা, অতিথিসংখ্যা ও রুমের ধরন দিয়ে তুলনা করুন।" : "Match dates, nights, guest count and room type."}</li>
 
-                                <span className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded-full uppercase border ${
+                        <li className="rounded-lg bg-slate-50 p-3">{isBn ? "চূড়ান্ত মোট দাম, অন্তর্ভুক্ত খাবার, চার্জ ও পেমেন্টের সময় দেখুন।" : "Check the checkout total, included meals, charges and payment timing."}</li>
 
-                                  room.category === "Luxury" ? "bg-amber-100 border-amber-300 text-amber-800" :
+                        <li className="rounded-lg bg-slate-50 p-3">{isBn ? "বাতিল ও পরিবর্তনের সময়সীমা এবং ফেরতের শর্ত পড়ুন।" : "Read cancellation, change and refund conditions."}</li>
 
-                                  room.category === "Budget" ? "bg-emerald-100 border-emerald-300 text-emerald-800" :
+                        <li className="rounded-lg bg-slate-50 p-3">{isBn ? "সঠিক ঠিকানা, রুমের বিন্যাস ও যাতায়াতের রুট যাচাই করুন।" : "Verify the exact address, room setup and transport route."}</li>
 
-                                  "bg-indigo-100 border-indigo-300 text-indigo-800"
+                      </ul>
 
-                                }`}>
-
-                                  {room.category}
-
-                                </span>
-
-                                <span className="text-xs font-mono font-bold text-amber-500">{room.stars} ★</span>
-
-                              </div>
-
-                              <h3 className="ural-card-title font-serif font-bold text-slate-800 text-sm">{room.name}</h3>
-
-                              <p className="text-[11px] text-text-muted mt-1 font-semibold italic flex items-center gap-1">
-
-                                <MapPin size={11} className="text-[#F6B73C] shrink-0" />
-
-                                <span>{room.neighborhood}</span>
-
-                              </p>
+                    </section>
 
 
+                    {/* Generic partner handoff; the city and dates must be entered on Klook. */}
 
-                              <div className="flex flex-wrap gap-1 mt-3">
-
-                                {room.features.slice(0, 3).map((f) => (
-
-                                  <span key={f} className="text-[10px] font-mono bg-slate-100 text-brand-navy px-2 py-0.5 rounded border border-slate-200">{f}</span>
-
-                                ))}
-
-                              </div>
-
-                            </div>
-
-
-
-                            <div className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between">
-
-                              <div>
-
-                                <span className="text-xs font-mono text-slate-400 block">{isBn ? "প্রতি রাতের ভাড়া" : "Night Rate"}</span>
-
-                                <span className="text-sm font-bold text-slate-800">৳ {room.priceBdt.toLocaleString()} BDT</span>
-
-                              </div>
-
-
-
-                              <a
-
-                                id={`hotel-booking-btn-${room.name.toLowerCase().replace(/\s+/g, '-')}`}
-
-                                href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
-
-                                target="_blank"
-
-                                rel="noopener noreferrer sponsored"
-
-                                onClick={() => {
-
-                                  triggerAffiliateToast(
-
-                                    isBn
-
-                                      ? "Klook-এর বাছাইকৃত হোটেল তালিকা খুলছে। গন্তব্য ও তারিখ Klook-এ আবার দিন।"
-
-                                      : "Opening Klook’s curated hotel collection. Re-enter your destination and dates there."
-
-                                  );
-
-                                }}
-
-                                className="bg-brand-navy text-white hover:bg-[#1a4166] text-[10px] font-bold px-3 py-1.5 rounded-md cursor-pointer flex items-center gap-1.5 transition-colors"
-
-                              >
-
-                                {isBn ? "Klook-এ হোটেল দেখুন" : "Browse on Klook"} <ExternalLink size={10} />
-
-                              </a>
-
-                            </div>
-
-                          </div>
-
-                        ))}
-
-                      </div>
-
-                    </div>
-
-
-
-                    {/* Second-quote module: Klook hotel comparison, gated by the offer registry */}
-
-                    <KlookHotelSpotlight city={activeHotel.city} lang={lang} />
-
+                    <KlookHotelSpotlight city={activeHotel.city} guideId={activeHotel.id} lang={lang} />
 
 
                     {/* 🚕 Unified Airport Transfer & Travel Essentials Hub */}
@@ -520,6 +432,10 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
                           initialHotelCity={activeHotel.city}
 
                           initialTo={getCountryCityWithIata(activeHotel.country)}
+
+                          affiliatePlacement={getHotelGuideAffiliatePlacement(activeHotel.id)}
+
+                          lang={lang}
 
                         />
 

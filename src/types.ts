@@ -41,26 +41,15 @@ export interface Neighborhood {
   vibe: string;
 }
 
-export interface HotelRecommend {
-  name: string;
-  stars: number;
-  priceBdt: number;
-  category: "Budget" | "Mid-Range" | "Luxury";
-  neighborhood: string;
-  features: string[];
-}
-
 export interface HotelGuide {
   id: string;
   city: string;
   country: string;
   description: string;
   neighborhoods: Neighborhood[];
-  hotels: HotelRecommend[];
   quickAnswer: string;
   keyFacts: KeyFact[];
   faqs: FAQ[];
-  schemaMarkup: SchemaMarkup;
 }
 
 export interface DocumentChecklist {

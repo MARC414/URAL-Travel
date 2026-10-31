@@ -58,21 +58,21 @@ export const LANDING_FLIGHT_FAQS: FAQItem[] = [
 
 export const LANDING_HOTEL_FAQS: FAQItem[] = [
   {
-    question: "How can Bangladeshi travelers book international hotels without a credit card?",
-    answer: "Many platforms supported on URAL allow 'Pay at Hotel' reservations in local currency upon arrival. Alternatively, Bangladeshi authorized travel agencies can issue confirmed hotel booking vouchers paid locally in Bangladeshi Taka (BDT) via bank transfer, debit card, or mobile banking."
+    question: "Can I book an international hotel without a credit card?",
+    answer: "Payment options vary by property and booking platform. Check the current listing for accepted payment methods, any card guarantee or deposit, and when payment is due. Do not assume that a property will accept BDT or allow payment on arrival unless the booking terms confirm it.",
   },
   {
-    question: "Which hotel areas are best suited for Bangladeshi tourists in Bangkok and Kathmandu?",
-    answer: "In Bangkok, Sukhumvit (around Nana and Asok) and Pratunam are top choices due to proximity to halal food, shopping malls, and BTS Skytrain stations. In Kathmandu, Thamel is the premier tourist neighborhood, offering walkable access to dining, trekking agencies, and money exchange counters."
+    question: "How should I choose a hotel area in a city?",
+    answer: "Compare the exact property location with your itinerary, transport needs, preferred pace and room requirements. Check current maps and recent property details; a neighborhood name alone does not establish travel time, availability or suitability.",
   },
   {
-    question: "Are hotel taxes and service charges included in the displayed rates?",
-    answer: "Most international booking sites display rates excluding local city taxes (e.g. 7% VAT in Thailand, tourism dirham fee in Dubai, or service charges in Nepal). URAL's hotel neighborhood guides clearly highlight these hidden fees so you can budget accurately in BDT."
+    question: "Are hotel taxes and service charges included in the displayed rate?",
+    answer: "It depends on the property and booking channel. Review the current checkout breakdown for taxes, service charges, meals, deposits and any amount payable at the property before confirming.",
   },
   {
-    question: "Do hotels abroad accept dual-currency cards endorsed against a Bangladeshi passport?",
-    answer: "Yes, major international hotels worldwide accept Visa, Mastercard, and American Express cards endorsed under the Bangladesh Bank annual travel quota ($18,000 per calendar year under FEPD-1 Circular No. 33). Always notify your bank before flying abroad to activate international POS transactions."
-  }
+    question: "Can I pay for an overseas hotel with a Bangladeshi bank card?",
+    answer: "Card acceptance and foreign-currency payment depend on the issuer, card settings, merchant and booking platform. Check endorsement, online and international transaction settings with your bank, and confirm the provider's accepted payment methods before relying on the card.",
+  },
 ];
 
 export const LANDING_VISA_FAQS: FAQItem[] = [

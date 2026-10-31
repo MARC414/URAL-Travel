@@ -1,22 +1,11 @@
 import React, { useState } from "react";
 import { 
   CheckCircle2, 
-  HelpCircle, 
-  Percent, 
   ShieldCheck, 
-  Coins, 
   ExternalLink, 
-  Flame, 
   Info, 
-  ChevronRight, 
-  ArrowRight, 
-  FileText, 
-  Sliders, 
   Users, 
   Layers, 
-  TrendingUp, 
-  Play, 
-  Eye, 
   Sparkles 
 } from "lucide-react";
 import {
@@ -31,14 +20,14 @@ export function TravelpayoutsOnboarding() {
 
   // 1. Interactive Onboarding Checklist State
   const [checklistItems, setChecklistItems] = useState([
-    { id: "dashboard", category: "Account Setup", title: "Review Dashboard Snapshot", desc: "Monitor live clicks, conversions, potential earnings, and top performing programs in one central place.", timestamp: "0:58", completed: true },
-    { id: "programs", category: "Account Setup", title: "Connect Major Partner Programs", desc: "Connect instantly to top brands like Booking.com, GetyourGuide, Kiwi, and Rental Cars. Verify terms (e.g. Booking.com offers 10% reward & 90-day cookie).", timestamp: "1:18", completed: true },
-    { id: "widgets", category: "Monetization", title: "Configure Custom Search Widgets", desc: "Embed responsive widgets like the Flight and Hotel search tools on your main routes to capture search intent.", timestamp: "1:53", completed: true },
-    { id: "deeplinks", category: "Monetization", title: "Generate Deep Links with Sub-IDs", desc: "Create targeted deep links (e.g. for Thamel Hotels) using descriptive sub-IDs to track specific route performance.", timestamp: "3:15", completed: true },
-    { id: "links-props", category: "Best Practices", title: "Configure Link Attributes (SEO Safety)", desc: "Ensure all manual affiliate outbound links are styled as sponsored, nofollow, and open in a new tab.", timestamp: "3:53", completed: true },
-    { id: "drive-script", category: "Automation", title: "Activate Travelpayouts Drive", desc: "Insert the automated AI monetization engine script or install the official plugin for hands-off optimizations.", timestamp: "2:47", completed: true },
-    { id: "reports", category: "Analytics", title: "Review Performance & Booking Reports", desc: "Utilize Performance, Bookings (filtered by Sub-ID), and Content Analytics with page-level click-through rates.", timestamp: "6:30", completed: true },
-    { id: "referrals", category: "Referrals", title: "Join the Referral Program", desc: "Earn up to $600 per referral by authentic recommendation. Play with the referral potential slider.", timestamp: "7:08", completed: true },
+    { id: "dashboard", category: "Account Setup", title: "Review Dashboard Snapshot", desc: "Monitor live clicks, conversions, potential earnings, and top performing programs in one central place.", timestamp: "0:58", completed: false },
+    { id: "programs", category: "Account Setup", title: "Connect Major Partner Programs", desc: "Review each partner program’s current eligibility, commission, cookie and payment terms in your account before publishing a claim.", timestamp: "1:18", completed: false },
+    { id: "widgets", category: "Monetization", title: "Configure Custom Search Widgets", desc: "Embed responsive widgets like the Flight and Hotel search tools on your main routes to capture search intent.", timestamp: "1:53", completed: false },
+    { id: "deeplinks", category: "Monetization", title: "Verify partner placement-ID support", desc: "URAL records stable first-party link-placement labels. Do not append a Travelpayouts SubID unless the partner program and reporting support it and the account setup is verified.", timestamp: "3:15", completed: false },
+    { id: "links-props", category: "Best Practices", title: "Configure Link Attributes (SEO Safety)", desc: "Ensure all manual affiliate outbound links are styled as sponsored, nofollow, and open in a new tab.", timestamp: "3:53", completed: false },
+    { id: "drive-script", category: "Automation", title: "Review third-party scripts before enabling", desc: "Verify current product documentation, consent behavior, performance and affiliate-link changes before installing any monetization script.", timestamp: "2:47", completed: false },
+    { id: "reports", category: "Analytics", title: "Reconcile clicks and bookings separately", desc: "A site-side click event is not a booking. Verify event forwarding, partner-side placement reporting and completed/approved bookings in the relevant accounts.", timestamp: "6:30", completed: false },
+    { id: "referrals", category: "Referrals", title: "Check current referral terms", desc: "Referral rewards and eligibility can change. Review current official terms before describing potential earnings.", timestamp: "7:08", completed: false },
   ]);
 
   const toggleCheckItem = (id: string) => {
@@ -49,27 +38,18 @@ export function TravelpayoutsOnboarding() {
   const progressPercent = Math.round((completedCount / checklistItems.length) * 100);
 
   // 2. Drive Sandbox State
-  const [selectedDriveTool, setSelectedDriveTool] = useState<number>(2); // Default to Link relevant keywords
-  const [smartPreviewHovered, setSmartPreviewHovered] = useState(false);
+  const [selectedDriveTool, setSelectedDriveTool] = useState<number>(2); // Default to the area-comparison example
   const [clickOfferTriggered, setClickOfferTriggered] = useState(false);
   const [clickOfferLog, setClickOfferLog] = useState<string[]>([]);
 
   // 3. Referral Calculator State
-  const [referralCount, setReferralCount] = useState<number>(5);
-  const [averageMonthlyEarnings, setAverageMonthlyEarnings] = useState<number>(200);
-
-  // Calculated referral values
-  // Referrals yield 7% of their earnings for the first 2 years, with custom rewards up to $600 per successful referral
-  const baseRewardPerReferral = 50; // $50 sign up activation reward
-  const estimatedAnnualEarnings = Math.round(referralCount * baseRewardPerReferral + (referralCount * averageMonthlyEarnings * 0.07 * 12));
-
-  // 4. Verification Audit Results
+  // Code-level status only; no live partner dashboard, GTM or booking report was inspected here.
   const auditChecks = [
-    { name: "Responsive Flight Widget Integration", status: "PASSED", detail: "Aviasales JetRadar interactive flight search engine successfully integrated on Flights and Home pages.", icon: "✈️" },
-    { name: "In-Country Multi-Provider Widgets", status: "PASSED", detail: "Klook (Activities), Kiwitaxi (Transfers), Airalo (eSIM), and QEEQ (Car Rentals) custom widget modules active.", icon: "🏨" },
-    { name: "SEO Link Attributes Conformity Check", status: "PASSED", detail: "All outbound partner links explicitly hardcoded with rel='noopener noreferrer sponsored' for maximum safety.", icon: "🔗" },
-    { name: "Custom Sub-ID Tracking Parameters", status: "PASSED", detail: "Static routes successfully append customized Sub-IDs ('nepal-visa', 'dhaka-bangkok') for precise sales attribution.", icon: "📊" },
-    { name: "Static Fallback Outbound Anchors", status: "PASSED", detail: "In case scripts are blocked in sandboxed frames, beautiful high-contrast direct links are supplied.", icon: "🛡️" }
+    { name: "First-party partner-click event", status: "IMPLEMENTED", detail: "The site can record partner, link label and page path; hotel calls also include a stable affiliate_placement label. A click does not confirm a booking.", icon: "📍" },
+    { name: "GTM / GA4 event forwarding", status: "NOT VERIFIED", detail: "Confirm the container receives affiliate_partner_click and registers affiliate_placement before using it for reporting.", icon: "🔎" },
+    { name: "Travelpayouts SubID support", status: "NOT VERIFIED", detail: "No SubID is appended to hotel partner URLs. Check the specific program, generated link and dashboard reporting before enabling partner-side scopes.", icon: "🔗" },
+    { name: "Completed booking attribution", status: "NOT VERIFIED", detail: "Use the partner's booking and approval reports to confirm commercial outcomes; site click events alone are not booking evidence.", icon: "📊" },
+    { name: "Hotel handoff and disclosure", status: "CODE REVIEWED", detail: "The Klook hotel collection is a generic destination handoff. Visitors must re-enter destination, dates and guests; the CTA states the commission relationship.", icon: "🏨" },
   ];
 
   return (
@@ -82,22 +62,21 @@ export function TravelpayoutsOnboarding() {
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-[#F6B73C] text-xs font-mono font-bold tracking-widest uppercase">
               <span className="w-2 h-2 rounded-full bg-[#F6B73C] animate-pulse"></span>
-              Onboarding & Setup Inspector
+              Partner Integration Review
             </div>
             <h2 className="font-serif text-2xl sm:text-3xl font-black text-white tracking-tight">
-              Travelpayouts Partner Hub
+              Partner Links &amp; Measurement Review
             </h2>
             <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
-              Ensure your URAL travel platform has implemented 100% of the official Travelpayouts setup instructions. 
-              Review the onboarding checklist, preview Travelpayouts Drive features, and estimate your referral earnings.
+              This page is a local checklist and illustrative mockup—not a live Travelpayouts account or booking audit. Verify current program terms, analytics forwarding, placement support and booking reports in the relevant accounts.
             </p>
           </div>
           
           <div className="flex bg-[#0c2033]/80 p-1.5 rounded-xl border border-white/10 text-xs shrink-0 items-center gap-3">
             <span className="text-[10px] text-slate-400 font-mono">STATUS:</span>
-            <span className="bg-emerald-500/20 text-emerald-300 font-bold px-2.5 py-1 rounded-lg flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-              INTEGRATION HEALTHY
+            <span className="bg-amber-500/20 text-amber-200 font-bold px-2.5 py-1 rounded-lg flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+              ACCOUNT REVIEW NEEDED
             </span>
           </div>
         </div>
@@ -120,7 +99,7 @@ export function TravelpayoutsOnboarding() {
             }`}
           >
             <Layers size={15} />
-            Travelpayouts Drive Preview
+            Link UI Mockup
           </button>
           <button
             onClick={() => setActiveTab("referral-calculator")}
@@ -129,7 +108,7 @@ export function TravelpayoutsOnboarding() {
             }`}
           >
             <Users size={15} />
-            Referral Earnings ($600/Ref)
+            Referral Terms
           </button>
           <button
             onClick={() => setActiveTab("audit")}
@@ -149,13 +128,13 @@ export function TravelpayoutsOnboarding() {
           <div>
             <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-brand-navy bg-[#F6B73C]/20 px-3 py-1 rounded-full mb-2">
               <Sparkles size={13} className="text-amber-600" />
-              Automated Offer Lifecycle &amp; Fallback Engine
+              Configured Offer Registry — Manual Review Needed
             </div>
             <h3 className="font-serif text-lg sm:text-xl font-black text-slate-900">
-              Time-Bound Promotions &amp; Commission Boosts (Zero Dead Links)
+              Offer dates and destination checks
             </h3>
             <p className="text-xs text-slate-600 mt-1 max-w-3xl">
-              Every temporary Travelpayouts promo code or commission boost is registered in <code className="bg-slate-200 px-1.5 py-0.5 rounded font-mono text-[11px]">AFFILIATE_OFFER_REGISTRY</code>. When an offer passes its <code className="bg-slate-200 px-1.5 py-0.5 rounded font-mono text-[11px]">expiresAt</code> date, URAL automatically hides expired coupon badges for visitors while keeping the permanent partner link (or fallback partner URL) live.
+              URAL stores configured offer dates in <code className="bg-slate-200 px-1.5 py-0.5 rounded font-mono text-[11px]">AFFILIATE_OFFER_REGISTRY</code>. This site configuration is not independent proof of current program terms or destination availability; re-check partner terms and links before promotion.
             </p>
           </div>
         </div>
@@ -223,8 +202,8 @@ export function TravelpayoutsOnboarding() {
           <div className="space-y-6">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <div>
-                <h3 className="font-serif text-lg font-bold text-slate-900">Step-by-Step Monetization Checklist</h3>
-                <p className="text-xs text-slate-500">Check off each item to ensure you haven't missed any essential Travelpayouts features.</p>
+                <h3 className="font-serif text-lg font-bold text-slate-900">Partner and measurement checklist</h3>
+                <p className="text-xs text-slate-500">Marks are local checklist state only; they do not inspect a partner account, tag container or booking report.</p>
               </div>
               <div className="bg-slate-100 px-3 py-1.5 rounded-full text-xs font-mono font-bold text-slate-700">
                 {completedCount} of {checklistItems.length} Steps Active
@@ -234,7 +213,7 @@ export function TravelpayoutsOnboarding() {
             {/* Progress Meter bar */}
             <div className="space-y-2">
               <div className="flex justify-between text-xs font-bold text-slate-700">
-                <span>Setup & Monetization Readiness Index</span>
+                <span>Local checklist progress</span>
                 <span className="text-brand-navy">{progressPercent}% Completed</span>
               </div>
               <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
@@ -265,7 +244,7 @@ export function TravelpayoutsOnboarding() {
                   <div className="space-y-1">
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">{item.category}</span>
-                      <span className="text-[10px] bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded font-mono font-medium">🎥 Video @ {item.timestamp}</span>
+                      <span className="text-[10px] bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded font-mono font-medium">MANUAL REVIEW</span>
                     </div>
                     <h4 className={`text-sm font-bold tracking-tight ${item.completed ? "text-slate-800 line-through decoration-slate-400" : "text-slate-900"}`}>
                       {item.title}
@@ -282,8 +261,8 @@ export function TravelpayoutsOnboarding() {
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex gap-3 text-xs leading-relaxed text-slate-600">
               <Info size={18} className="text-brand-navy shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold text-text-primary block mb-1">💡 Professional Tip from the Onboarding Video</span>
-                "Join programs that you can recommend authentically to your audience. Add the tools, activate Drive, and just let it do its thing while you focus on writing incredible content!"
+                <span className="font-bold text-text-primary block mb-1">💡 Measurement reminder</span>
+                Treat clicks, bookings, eligible commissions and payouts as separate stages. Verify each with the relevant account report before making a performance claim.
               </div>
             </div>
           </div>
@@ -293,11 +272,8 @@ export function TravelpayoutsOnboarding() {
         {activeTab === "drive-sandbox" && (
           <div className="space-y-6">
             <div className="border-b border-slate-100 pb-4">
-              <h3 className="font-serif text-lg font-bold text-slate-900">Travelpayouts Drive Simulation & Sandbox</h3>
-              <p className="text-xs text-slate-500">
-                The video describes "Drive" as an AI-powered monetization engine that automatically optimizes five elements. 
-                Interact with the sandbox below to see exactly how these elements display on a page!
-              </p>
+              <h3 className="font-serif text-lg font-bold text-slate-900">Illustrative partner-link UI mockup</h3>
+              <p className="text-xs text-slate-500">This local mockup is not connected to Travelpayouts Drive or a live account and does not verify product features, program terms, URL rewriting or bookings.</p>
             </div>
 
             {/* Split layout: Selector left, simulator display right */}
@@ -306,17 +282,16 @@ export function TravelpayoutsOnboarding() {
               {/* Left Selector Panel (Col 5) */}
               <div className="lg:col-span-5 space-y-2">
                 {[
-                  { id: 1, title: "1. Scan & Monetize Links", summary: "Transforms regular flight or hotel outbound URLs into partner commission tracking links automatically." },
-                  { id: 2, title: "2. Link Relevant Keywords", summary: "Scans posts to find terms like 'stay in Thamel' or 'flight to Bangkok' and turns them into high-converting anchor text links." },
-                  { id: 3, title: "3. Insert Recommendations", summary: "Dynamically inserts visual cards highlighting the top 3 best-rated hotels or activities based on reviews." },
-                  { id: 4, title: "4. Display Smart Previews", summary: "Adds a details bubble upon hovering/tapping links, showing scores, photo previews, and booking triggers." },
-                  { id: 5, title: "5. Show Targeted Offers", summary: "Active background trigger. Clicking empty workspace areas temporarily activates a cookie tracking tab to preserve commission margins." }
+                  { id: 1, title: "1. Review Outbound Links", summary: "Check that each visible partner link reaches the intended destination and has the correct disclosure and link attributes." },
+                  { id: 2, title: "2. Label a Link Placement", summary: "A site-side scope can identify a CTA location in analytics; it does not modify the partner URL or prove a booking." },
+                  { id: 3, title: "3. Keep Recommendations Evidence-Based", summary: "Do not publish property rankings, ratings or rates without current, comparable evidence and a matching booking destination." },
+                  { id: 4, title: "4. Preview Current Listing Details", summary: "Show property identity, availability, price and terms only when the provider supplies current matching information." },
+                  { id: 5, title: "5. Use Clear User-Initiated Links", summary: "Partner links should be visible and optional. Do not trigger hidden redirects or promise cookie-based attribution without verified terms." }
                 ].map((tool) => (
                   <button
                     key={tool.id}
                     onClick={() => {
                       setSelectedDriveTool(tool.id);
-                      setSmartPreviewHovered(false);
                     }}
                     className={`w-full text-left p-3.5 rounded-xl border transition-all space-y-1 block cursor-pointer ${
                       selectedDriveTool === tool.id 
@@ -335,118 +310,62 @@ export function TravelpayoutsOnboarding() {
               {/* Right Simulator Panel (Col 7) */}
               <div className="lg:col-span-7 bg-slate-950 text-white rounded-2xl border border-slate-800 p-6 flex flex-col justify-between min-h-[360px] relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-3 bg-slate-900 border-b border-l border-slate-800 text-[10px] font-mono font-bold uppercase tracking-widest text-amber-400">
-                  Drive AI Live Render Simulation
+                  Illustrative Mockup — Not Connected to Travelpayouts Drive
                 </div>
 
                 {/* Display Area */}
                 <div className="space-y-4 my-auto pt-6 pb-4">
                   {selectedDriveTool === 1 && (
                     <div className="space-y-3">
-                      <span className="text-[10px] font-mono font-bold text-slate-400 block uppercase">Link Converter Rule:</span>
+                      <span className="text-[10px] font-mono font-bold text-slate-400 block uppercase">Illustrative click scope (site analytics only):</span>
                       <div className="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-1 font-mono text-[11px]">
-                        <span className="text-red-400 block">❌ Non-Monetized Raw URL:</span>
-                        <code className="text-slate-300 block truncate">https://www.booking.com/hotel/np/thamel-grand-hotel.html</code>
-                        <span className="text-emerald-400 block mt-2">✔ Converted Affiliate Tracking URL:</span>
-                        <code className="text-[#F6B73C] block truncate font-bold">https://booking.tpo.li/click?shmarker=675992&sub_id=dhaka-kathmandu</code>
+                        <span className="text-slate-300 block">Partner URL:</span>
+                        <code className="text-slate-300 block truncate">Configured destination link (unchanged)</code>
+                        <span className="text-[#F6B73C] block mt-2">First-party event scope:</span>
+                        <code className="text-[#F6B73C] block truncate font-bold">hotel_guide_kathmandu_klook_collection</code>
                       </div>
                       <p className="text-xs text-slate-400 leading-relaxed font-sans">
-                        URAL automatically scans outbound links and rewrites them in the background, adding your partner affiliate token.
+                        This label scopes the site's click event only. It is not a Travelpayouts SubID, is not added to the partner URL, and does not confirm a booking.
                       </p>
                     </div>
                   )}
 
                   {selectedDriveTool === 2 && (
                     <div className="space-y-3">
-                      <span className="text-[10px] font-mono font-bold text-slate-400 block uppercase">Keyword Auto-Linking:</span>
+                      <span className="text-[10px] font-mono font-bold text-slate-400 block uppercase">Area comparison (illustrative):</span>
                       <div className="p-4 bg-brand-navy rounded-xl border border-[#F6B73C]/20 text-slate-200 font-serif leading-relaxed text-sm">
-                        "For tourists seeking a safe, central, and buzzing zone, the absolute best choice is to{" "}
-                        <span className="text-[#F6B73C] underline font-bold cursor-pointer hover:text-amber-300 relative inline-block group">
-                          stay in Thamel
-                          <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-mono py-0.5 px-2 rounded tracking-wider whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                            affiliate_link_active
-                          </span>
-                        </span>
-                        . It holds thousands of budget guestrooms, delicious eateries, and tourist bus guides."
+                        "Compare Thamel, Boudha and Lazimpat against your itinerary, transport needs and preferred pace. Check the exact property address and current booking terms before choosing."
+
                       </div>
                       <p className="text-xs text-slate-400 leading-relaxed font-sans">
-                        Keywords are scanned on-the-fly and linked safely without modifying the hardcoded template files.
+                        No automatic linking is shown here. Use an explicit, user-initiated partner link and verify its destination and tracking terms.
                       </p>
                     </div>
                   )}
 
                   {selectedDriveTool === 3 && (
                     <div className="space-y-3">
-                      <span className="text-[10px] font-mono font-bold text-slate-400 block uppercase">Visual Recommendation Cards:</span>
-                      
-                      {/* Video-matched top 3 hotels block */}
+                      <span className="text-[10px] font-mono font-bold text-slate-400 block uppercase">Hotel planning checklist — illustrative, no property offers:</span>
                       <div className="bg-white border border-slate-200 text-slate-900 p-4 rounded-xl shadow-md space-y-3 font-sans">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[10px] bg-amber-500 text-white px-2 py-0.5 rounded font-mono font-bold uppercase tracking-wide">🏆 Recommended Stays (Kathmandu)</span>
-                          <span className="text-[10px] text-slate-400 font-medium">Score: 9.2/10</span>
-                        </div>
-                        
-                        <div className="space-y-2 divide-y divide-border-faint">
-                          {[
-                            { name: "1. Thamel Grand Hotel", rating: "9.1/10 (Superb)", price: "BDT 2,200/night", link: "https://aviasales.tpo.li/8saJolX0" },
-                            { name: "2. Hotel Shanker Palace", rating: "9.0/10 (Excellent)", price: "BDT 7,500/night", link: "https://aviasales.tpo.li/8saJolX0" },
-                            { name: "3. Dwarika's Heritage Resort", rating: "9.7/10 (Exceptional)", price: "BDT 29,000/night", link: "https://aviasales.tpo.li/8saJolX0" }
-                          ].map((h, i) => (
-                            <div key={i} className={`flex items-center justify-between text-xs pt-2 ${i === 0 ? "pt-0" : ""}`}>
-                              <div>
-                                <span className="font-bold text-brand-navy">{h.name}</span>
-                                <span className="text-[10px] text-amber-600 block">⭐ {h.rating}</span>
-                              </div>
-                              <div className="text-right">
-                                <span className="font-bold text-slate-700 block">{h.price}</span>
-                                <a href={h.link} target="_blank" rel="noopener noreferrer sponsored" className="text-[10px] text-brand-navy font-bold hover:underline flex items-center justify-end gap-0.5">
-                                  Book stay <ExternalLink size={8} />
-                                </a>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
+                        <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-1 rounded font-mono font-bold uppercase tracking-wide">Compare current listings yourself</span>
+                        <ul className="space-y-2 text-xs">
+                          <li><b>Area:</b> compare location and route against the itinerary.</li>
+                          <li><b>Room:</b> confirm occupancy, bed setup and included meals.</li>
+                          <li><b>Total:</b> inspect current checkout charges and cancellation terms.</li>
+                        </ul>
+                        <a href="/hotels/kathmandu-hotels" className="text-[10px] text-brand-navy font-bold hover:underline">Open the Kathmandu area guide <ExternalLink size={9} className="inline" /></a>
                       </div>
                     </div>
                   )}
 
                   {selectedDriveTool === 4 && (
                     <div className="space-y-4 text-center">
-                      <span className="text-[10px] font-mono font-bold text-slate-400 block uppercase">Smart hover previews:</span>
-                      
-                      <div className="inline-block relative">
-                        <span 
-                          onMouseEnter={() => setSmartPreviewHovered(true)}
-                          onMouseLeave={() => setSmartPreviewHovered(false)}
-                          onClick={() => setSmartPreviewHovered(!smartPreviewHovered)}
-                          className="bg-amber-500/10 hover:bg-amber-500/20 text-[#F6B73C] border border-[#F6B73C] rounded px-3 py-1.5 text-xs font-semibold cursor-pointer font-mono inline-flex items-center gap-1"
-                        >
-                          🔍 Hover/Tap to Trigger Link Preview
-                        </span>
-
-                        {/* Pop-up bubble matching video details */}
-                        <div className={`absolute bottom-10 left-1/2 -translate-x-1/2 bg-white text-slate-900 border border-slate-300 p-4 rounded-xl shadow-2xl w-60 text-left space-y-2 z-20 transition-all duration-300 ${
-                          smartPreviewHovered ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"
-                        }`}>
-                          <div className="flex items-center justify-between">
-                            <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400 font-mono">STATION PREVIEW</span>
-                            <span className="text-[10px] font-bold bg-indigo-50 text-indigo-700 px-1.5 py-0.5 rounded">9.1 out of 10</span>
-                          </div>
-                          <div>
-                            <h5 className="font-bold text-xs text-slate-900">Thamel Grand Guestroom</h5>
-                            <span className="text-[10px] text-slate-400 block font-mono">📍 1,240 Verified Reviews</span>
-                          </div>
-                          <p className="text-[10px] text-slate-600 leading-normal">
-                            Comfortable single, double, and triple options with free daily breakfast.
-                          </p>
-                          <a 
-                            href="https://aviasales.tpo.li/8saJolX0" 
-                            target="_blank" 
-                            rel="noopener noreferrer sponsored" 
-                            className="bg-brand-navy hover:bg-[#1a4166] text-white text-center py-1 rounded text-[10px] font-bold block"
-                          >
-                            Check Availability
-                          </a>
-                        </div>
+                      <span className="text-[10px] font-mono font-bold text-slate-400 block uppercase">Partner-link preview — illustrative:</span>
+                      <div className="mx-auto max-w-sm rounded-xl border border-slate-700 bg-slate-900 p-4 text-left space-y-2">
+                        <span className="text-[10px] uppercase font-bold tracking-widest text-[#F6B73C] font-mono">CHECK LIVE LISTING</span>
+                        <h5 className="font-bold text-sm text-white">Hotel details are not pre-filled</h5>
+                        <p className="text-xs text-slate-300 leading-normal">Confirm property identity, current room availability, review date, total payable and booking terms on the provider’s page.</p>
+                        <p className="text-[10px] text-slate-400">No static review score, nightly price or availability is shown in this demo.</p>
                       </div>
                     </div>
                   )}
@@ -455,27 +374,26 @@ export function TravelpayoutsOnboarding() {
                     <div className="space-y-4">
                       <span className="text-[10px] font-mono font-bold text-slate-400 block uppercase">Show Targeted Offers:</span>
                       <p className="text-xs text-slate-300 leading-relaxed font-sans">
-                        Whenever users click blank spaces, a background tab triggers a redirect cookie (e.g. to Booking.com). 
-                        If they buy anything on the target site over the next 90 days, you earn. Let's test it:
+                        A partner click is a user action. This local demo does not open a partner page, set a cookie, append a SubID or record a booking. Click below only to display an example site-side event:
                       </p>
 
                       <div 
                         onClick={() => {
                           setClickOfferTriggered(true);
-                          const log = [...clickOfferLog, `[Drive AI Event] ${new Date().toLocaleTimeString()} - Cookie initialized for Booking.com. Session ID tracking active (90-day cookie)`];
+                          const log = [...clickOfferLog, `[Local demo] ${new Date().toLocaleTimeString()} - Example affiliate_partner_click event; no partner request or booking recorded.`];
                           setClickOfferLog(log.slice(-3));
                           setTimeout(() => setClickOfferTriggered(false), 2000);
                         }}
                         className="bg-slate-900/80 border border-dashed border-slate-700 hover:bg-slate-800 hover:border-[#F6B73C]/50 py-8 text-center rounded-xl cursor-pointer select-none transition-all group"
                       >
                         <span className="text-xs text-slate-400 font-mono group-hover:text-white">
-                          🎯 CLICK ANYWHERE INSIDE THIS BOX TO TEST
+                          ▶ SHOW LOCAL DEMO EVENT
                         </span>
                       </div>
 
                       {clickOfferTriggered && (
                         <div className="text-[10px] bg-amber-500/10 border border-amber-500/20 text-[#F6B73C] p-2.5 rounded font-mono text-center animate-pulse">
-                          ✔ COMMISSION EVENT REGISTERED: Cookie Tracking Tagged to Client Browser
+                          ℹ DEMO EVENT SHOWN: no cookie, partner click or booking
                         </div>
                       )}
 
@@ -495,136 +413,29 @@ export function TravelpayoutsOnboarding() {
 
                 {/* Footer status indicators */}
                 <div className="border-t border-slate-800 pt-3 flex items-center justify-between text-[10px] font-mono text-slate-500">
-                  <span>Tracking Tag: <b className="text-slate-300">675992</b></span>
-                  <span>Interactive Simulator Engine</span>
+                  <span>Partner URL: <b className="text-slate-300">not modified in this demo</b></span>
+                  <span>Local UI simulation only</span>
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        {/* TAB 3: REFERRAL CALCULATOR */}
+        {/* TAB 3: REFERRAL TERMS */}
         {activeTab === "referral-calculator" && (
-          <div className="space-y-6">
-            <div className="border-b border-slate-100 pb-4">
-              <h3 className="font-serif text-lg font-bold text-slate-900">Referral Program Earnings Potential</h3>
-              <p className="text-xs text-slate-500">
-                At the end of the video, it describes the referral program: earn rewards and 7% of what your invitees make. 
-                Move the sliders to see what your earning potential is!
-              </p>
-            </div>
-
-            {/* Main grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-              
-              {/* Sliders left */}
-              <div className="space-y-6 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest block">Adjust Parameters</span>
-                
-                {/* Slider 1: Referral invitees */}
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center text-xs">
-                    <label htmlFor="tp-referral-count-range" className="font-bold text-slate-700">Friends invited & active:</label>
-                    <span className="font-mono bg-indigo-50 text-brand-navy px-2.5 py-0.5 rounded font-black">{referralCount} Bloggers</span>
-                  </div>
-                  <input
-                    id="tp-referral-count-range"
-                    type="range"
-                    min="1"
-                    max="20"
-                    value={referralCount}
-                    onChange={(e) => setReferralCount(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-navy"
-                  />
-                  <div className="flex justify-between text-[10px] font-mono text-slate-400">
-                    <span>1 Friend</span>
-                    <span>10 Friends</span>
-                    <span>20 Friends</span>
-                  </div>
-                </div>
-
-                {/* Slider 2: Average monthly earnings of invitee */}
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center text-xs">
-                    <label htmlFor="tp-monthly-earnings-range" className="font-bold text-slate-700">Their average monthly affiliate earnings:</label>
-                    <span className="font-mono bg-indigo-50 text-brand-navy px-2.5 py-0.5 rounded font-black">${averageMonthlyEarnings}/mo</span>
-                  </div>
-                  <input
-                    id="tp-monthly-earnings-range"
-                    type="range"
-                    min="50"
-                    max="1500"
-                    step="50"
-                    value={averageMonthlyEarnings}
-                    onChange={(e) => setAverageMonthlyEarnings(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-navy"
-                  />
-                  <div className="flex justify-between text-[10px] font-mono text-slate-400">
-                    <span>$50</span>
-                    <span>$750</span>
-                    <span>$1,500</span>
-                  </div>
-                </div>
-
-                {/* Tips matching video directly */}
-                <div className="border-t border-slate-200 pt-4 space-y-2 text-xs text-slate-600 font-sans leading-relaxed">
-                  <span className="font-bold text-brand-navy uppercase tracking-wider block font-mono text-[10px]">Onboarding Video Invite Guidelines:</span>
-                  <ul className="list-disc pl-4 space-y-1">
-                    <li><b>Who to invite:</b> target active travel bloggers, photographers, or travel content creators.</li>
-                    <li><b>How to invite:</b> send authentic personal recommendations explaining how simple the dashboard and tools are.</li>
-                    <li><b>Set clear expectations:</b> tell them about instant connections and the hands-off Travelpayouts Drive engine.</li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Outputs right */}
-              <div className="bg-brand-navy text-white p-6 sm:p-8 rounded-2xl flex flex-col justify-between relative overflow-hidden">
-                <div className="absolute top-0 right-0 opacity-10 text-white text-9xl font-serif">$</div>
-                
-                <div className="space-y-4">
-                  <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-widest block">Expected Annual Referral Income</span>
-                  <div className="text-4xl sm:text-5xl font-serif font-black tracking-tight text-white">
-                    ${estimatedAnnualEarnings.toLocaleString()} <span className="text-sm font-sans font-normal text-slate-300">USD</span>
-                  </div>
-                  <p className="text-xs text-slate-300 leading-normal">
-                    This estimation comprises a one-off <b>${referralCount * baseRewardPerReferral} USD</b> activation bonus (up to $600 per tier), 
-                    plus an ongoing 7% lifetime affiliate revenue share commission of <b>${Math.round(referralCount * averageMonthlyEarnings * 0.07 * 12).toLocaleString()} USD</b>.
-                  </p>
-                </div>
-
-                <div className="bg-slate-900/60 p-4 rounded-xl border border-white/10 mt-6 space-y-2">
-                  <span className="text-[10px] uppercase font-mono text-slate-400 font-bold block">Commission Breakdowns</span>
-                  <div className="flex justify-between text-xs py-1 border-b border-white/5 text-slate-300">
-                    <span>Direct Signup Bonus (${baseRewardPerReferral} x {referralCount}):</span>
-                    <span className="font-mono text-white font-bold">${referralCount * baseRewardPerReferral} USD</span>
-                  </div>
-                  <div className="flex justify-between text-xs py-1 text-slate-300">
-                    <span>7% Recurrent Rev Share (monthly):</span>
-                    <span className="font-mono text-white font-bold">${Math.round(referralCount * averageMonthlyEarnings * 0.07)} USD/mo</span>
-                  </div>
-                </div>
-
-                <a
-                  href="https://aviasales.tpo.li/8saJolX0"
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="w-full bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] font-black text-xs py-3 rounded-xl shadow-md text-center tracking-wide mt-6 block cursor-pointer transition-colors"
-                >
-                  Retrieve My Partner Invite URL <ExternalLink size={12} className="inline ml-1" />
-                </a>
-              </div>
-            </div>
-          </div>
+          <section className="space-y-4 rounded-2xl border border-amber-200 bg-amber-50 p-6" aria-labelledby="tp-referral-terms-title">
+            <h3 id="tp-referral-terms-title" className="font-serif text-lg font-bold text-slate-900">Check the current referral terms before estimating earnings</h3>
+            <p className="text-sm leading-relaxed text-slate-700">This page does not calculate or promise referral income. Reward amounts, eligibility, timing and revenue-share terms can change and may depend on the account or market. Review the current official terms in your Travelpayouts account before publishing any figures.</p>
+            <p className="text-sm leading-relaxed text-slate-700">A referral click, signup or booking is not automatically an approved commission. Reconcile each stage against the relevant partner report.</p>
+          </section>
         )}
 
         {/* TAB 4: AUDIT */}
         {activeTab === "audit" && (
           <div className="space-y-6">
             <div className="border-b border-slate-100 pb-4">
-              <h3 className="font-serif text-lg font-bold text-slate-900">URAL Travel Platform Integration Audit</h3>
-              <p className="text-xs text-slate-500">
-                This analyzer performs an inspection on the active layout and components of the URAL app to ensure seamless compatibility with affiliate rules.
-              </p>
+              <h3 className="font-serif text-lg font-bold text-slate-900">Code-level integration notes</h3>
+              <p className="text-xs text-slate-500">These notes are limited to repository code; they are not a live account or partner-dashboard audit.</p>
             </div>
 
             {/* Audit grid */}
@@ -638,27 +449,17 @@ export function TravelpayoutsOnboarding() {
                       <p className="text-xs text-slate-500 leading-normal mt-0.5">{check.detail}</p>
                     </div>
                   </div>
-                  <div className="shrink-0 flex items-center gap-1.5 bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-[10px] font-mono font-black border border-emerald-200 uppercase">
-                    <CheckCircle2 size={12} className="stroke-[2.5px]" />
+                  <div className={`shrink-0 flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-black border uppercase ${check.status === "IMPLEMENTED" || check.status === "CODE REVIEWED" ? "bg-slate-100 text-slate-700 border-slate-200" : "bg-amber-100 text-amber-900 border-amber-200"}`}>
+                    <Info size={12} />
                     {check.status}
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Audit Summary Card */}
-            <div className="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="space-y-1">
-                <span className="text-xs font-mono font-bold text-emerald-800 block uppercase tracking-wider">PLATFORM CONFORMANCE SUMMARY:</span>
-                <p className="text-sm font-serif font-bold text-brand-navy">Passed 5 / 5 Technical Alignment Benchmarks</p>
-                <p className="text-xs text-slate-600 leading-relaxed font-sans">
-                  The URAL application perfectly integrates Travelpayouts widgets, adheres to nofollow and sponsored outbound link standards, uses clean sub-IDs, and supports static fallback anchors.
-                </p>
-              </div>
-              <div className="bg-emerald-500 text-white p-4 rounded-xl text-center shrink-0 min-w-[120px] shadow-sm shadow-emerald-500/10">
-                <span className="text-xs font-mono font-black uppercase tracking-widest block">SCORE</span>
-                <span className="text-3xl font-black font-serif">100%</span>
-              </div>
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+              <span className="text-xs font-mono font-bold text-amber-900 block uppercase tracking-wider">SCOPE NOTE</span>
+              <p className="mt-1 text-sm leading-relaxed text-slate-700">These statuses summarize repository code only. They do not verify Travelpayouts dashboard settings, GTM/GA4 delivery, partner SubID acceptance, completed bookings or approved commissions.</p>
             </div>
           </div>
         )}

@@ -249,8 +249,8 @@ export function TravelpayoutsWidgetSkeleton({
         aria-busy="true"
         aria-label={
           isBn
-            ? "হোটেল ভাড়া তুলনা উইজেট লোড হচ্ছে..."
-            : "Loading Travelpayouts hotel comparison widget..."
+            ? "হোটেল পার্টনার সার্চ উইজেট লোড হচ্ছে..."
+            : "Loading hotel partner-search widget..."
         }
         onMouseDown={onInteract}
         onTouchStart={onInteract}
@@ -267,8 +267,8 @@ export function TravelpayoutsWidgetSkeleton({
             <span className="w-2 h-2 rounded-full bg-[#F6B73C]" />
             <span>
               {isBn
-                ? "লাইভ হোটেল রেট ইঞ্জিন প্রস্তুত হচ্ছে..."
-                : "Initializing live hotel partner rates..."}
+                ? "হোটেল পার্টনার সার্চ প্রস্তুত হচ্ছে..."
+                : "Preparing hotel partner search..."}
             </span>
           </div>
         </div>
@@ -288,7 +288,7 @@ export function TravelpayoutsWidgetSkeleton({
           </div>
         </div>
 
-        {/* Hotel Comparison Result Cards Skeleton */}
+        {/* Generic hotel partner-search skeleton; no live rates are shown here. */}
         <div className="p-4 sm:p-6 bg-white space-y-4">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
             <div className="h-4 w-56 rounded bg-slate-200 animate-pulse" />
@@ -690,7 +690,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "nepal-vs-thailand-first-trip":
       "Nepal Immigration lists a free tourist visa of up to 30 days for eligible SAARC visitors, except Afghanistan, on a first visit in a visa year; check current rules before departure. Thailand uses an advance e-Visa process. As planning estimates, a five-day trip is about BDT 45,000–65,000 in Nepal and BDT 80,000+ in Thailand; live fares and lodging rates change.",
     "hotel-savings-guide-bangkok-kl-dubai":
-      "Save 30%–40% on family hotels in Bangkok, Kuala Lumpur, and Dubai without sacrificing safety by booking 2–3 metro stops outside the pricey tourist core—such as On Nut BTS in Bangkok, Al Rigga Metro in Deira Dubai, or serviced family apartments near Bukit Bintang and KLCC in Malaysia.",
+      "Compare hotel areas in Bangkok, Kuala Lumpur, and Dubai by itinerary, transport access, room needs, and booking terms. Use the same dates, guests, and room type to compare checkout totals; no fixed saving or hotel quote is promised.",
     "halal-food-guide-bangkok-bangladesh":
       "Bangladeshi travelers in Bangkok can find 100% certified Halal meals displaying the green Central Islamic Council of Thailand emblem across Pratunam (Petchaburi Road alleys) and Sukhumvit Soi 3 (Nana Arab Street). Halal food court dishes start at BDT 180–300, with famous spots including Maidaun and Yana Restaurant.",
     "nepal-pokhara-itinerary-bangladesh":
@@ -785,7 +785,7 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
     "nepal-vs-thailand-first-trip":
       "Nepal Immigration-এর প্রকাশিত নিয়মে Afghanistan ছাড়া যোগ্য SAARC নাগরিকদের visa year-এ প্রথম সফরে সর্বোচ্চ ৩০ দিনের gratis visa আছে; যাত্রার আগে বর্তমান নিয়ম যাচাই করুন। Thailand-এর জন্য আগাম e-Visa দরকার। আনুমানিক ৫ দিনের বাজেট Nepal-এ BDT 45,000–65,000 এবং Thailand-এ BDT 80,000+—লাইভ ফ্লাইট ও হোটেলদর বদলায়।",
     "hotel-savings-guide-bangkok-kl-dubai":
-      "ব্যাংকক, কুয়ালালামপুর ও দুবাইয়ে নিরাপদ ও পরিচ্ছন্ন হোটেলে ৩০%–৪০% খরচ বাঁচাতে মূল ট্যুরিস্ট স্পট থেকে মাত্র ২–৩টি মেট্রো স্টেশন দূরে হোটেল নিন—যেমন ব্যাংককের On Nut BTS, দুবাই দেইরার Al Rigga Metro অথবা কুয়ালালামপুরের Bukit Bintang সংলগ্ন ফ্যামিলি অ্যাপার্টমেন্ট।",
+      "ব্যাংকক, কুয়ালালামপুর ও দুবাইয়ে ভ্রমণসূচি, যাতায়াত, রুমের প্রয়োজন ও বুকিংয়ের শর্ত ধরে হোটেল এলাকা তুলনা করুন। একই তারিখ, অতিথি ও রুমের ধরন ধরে চূড়ান্ত মোট দাম মিলিয়ে নিন—নির্দিষ্ট সাশ্রয় বা হোটেল কোটের প্রতিশ্রুতি নেই।",
     "halal-food-guide-bangkok-bangladesh":
       "ব্যাংককে হালাল খাবারের জন্য Central Islamic Council of Thailand-এর সবুজ লোগো দেখে Pratunam (Petchaburi Soi 7) এবং Sukhumvit Soi 3 (Nana Arab Street) এলাকায় যান। মাত্র ১৮০–৩০০ টাকায় শপিং মলের ফুড কোর্টে এবং Maidaun ও Yana Restaurant-এ সুস্বাদু হালাল খাবার পাওয়া যায়।",
     "nepal-pokhara-itinerary-bangladesh":
@@ -1754,8 +1754,12 @@ export default function App() {
     const hubUrl = siteUrl("/hotels", lang);
 
     if (isLanding) {
-      seoTitle = `International Hotel Guides for Bangladeshi Travelers (2026) | URAL`;
-      seoDescription = "Compare hotel areas, example stays and booking guidance in Kathmandu, Bangkok, Kuala Lumpur, Dubai, Singapore and the Maldives.";
+      seoTitle = isBn
+        ? "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড | URAL"
+        : "Hotel Area Guides for Bangladeshi Travelers | URAL";
+      seoDescription = isBn
+        ? "জনপ্রিয় গন্তব্যের হোটেল এলাকা ও বুকিং-চেক তুলনা করুন। স্থির রাতপ্রতি ভাড়া নেই—আপনার তারিখের বর্তমান প্রাপ্যতা ও সম্পূর্ণ শর্ত যাচাই করুন।"
+        : "Compare hotel neighborhoods and practical booking checks in Kathmandu, Bangkok, Kuala Lumpur, Dubai, Singapore and the Maldives. No fixed nightly rates; check current totals and terms for your dates.";
       const collectionNode = collectionPageSchema({
         url: hubUrl,
         name: seoTitle,
@@ -1764,7 +1768,7 @@ export default function App() {
         items: localizedHotels.map((h) => ({
           name: isBn
             ? getBengaliSeoCopy(`/hotels/${h.id}`)?.title || `${h.city} হোটেল গাইড (${h.country})`
-            : `Best Hotels in ${h.city} (${h.country})`,
+            : `Where to Stay in ${h.city} (${h.country})`,
           url: siteUrl(`/hotels/${h.id}`, lang),
           description: h.quickAnswer,
         })),
@@ -1777,21 +1781,15 @@ export default function App() {
       ];
     } else {
       const hotelUrl = siteUrl(`/hotels/${activeHotel.id}`, lang);
-      seoTitle = activeHotel.id === "kathmandu-hotels"
-        ? `Best Hotels in Kathmandu for Bangladeshi Travelers (2026) | URAL`
-        : `Top Rated Hotels in ${activeHotel.city} | URAL`;
-      seoDescription = `Compare neighborhoods, hotel styles and planning budgets in ${activeHotel.city}. Check room terms and current availability before booking.`;
+      seoTitle = isBn
+        ? getBengaliSeoCopy(`/hotels/${activeHotel.id}`)?.title || `${activeHotel.city} হোটেল এলাকা ও বুকিং গাইড | URAL`
+        : `Where to Stay in ${activeHotel.city}: Neighborhoods & Booking Checklist | URAL`;
+      seoDescription = isBn
+        ? getBengaliSeoCopy(`/hotels/${activeHotel.id}`)?.description || activeHotel.quickAnswer
+        : `Compare neighborhoods and booking terms in ${activeHotel.city}. No fixed nightly rates are published; check current totals, room terms and availability for your dates.`;
 
-      let schemaObj: any = undefined;
-      try {
-        if (activeHotel.schemaMarkup?.code) {
-          schemaObj = JSON.parse(activeHotel.schemaMarkup.code);
-        }
-      } catch (e) {
-        console.error("Schema parse error:", e);
-      }
       const faqSchema = getFaqSchemaForPage("hotels", activeHotel.id, false, hotelUrl, localizedHotels);
-      seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
+      seoSchema = faqSchema || undefined;
 
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -4119,8 +4117,8 @@ export default function App() {
                     city: "Kathmandu",
                     country: "Nepal",
                     tag: isBn
-                      ? "বাংলাদেশিদের জন্য ফ্রি Visa on Arrival। Thamel-এ BDT 1,500/রাত থেকে হোটেল। প্রথম বিদেশ ভ্রমণের জন্য সেরা।"
-                      : "Free visa on arrival for Bangladeshis. Budget hotels in Thamel from BDT 1,500/night. A great first international trip.",
+                    ? "Visa on Arrival-এর যোগ্যতা যাচাই করুন। Thamel, Boudha ও Lazimpat-এর এলাকা ও বুকিং শর্ত তুলনা করুন।"
+                    : "Check Visa on Arrival eligibility. Compare Thamel, Boudha and Lazimpat, then review hotel terms for your dates.",
                     code: "nepal-guide",
                     img: "🇳🇵",
                     path: "/destinations/nepal-guide",
@@ -4258,7 +4256,7 @@ export default function App() {
                   onClick={() => navigateTo("/hotels")}
                   className="bg-brand-navy text-white hover:bg-slate-800 font-bold text-xs py-3.5 px-6 rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
                 >
-                  {isBn ? "বাজেট Hotel খুঁজুন →" : "Search Budget Hotels →"}
+                  {isBn ? "হোটেল তালিকা দেখুন →" : "Browse Hotel Listings →"}
                 </button>
                 <button 
                   onClick={() => navigateTo("/blog")}
@@ -4275,17 +4273,17 @@ export default function App() {
               <div className="max-w-3xl mx-auto text-center space-y-2.5 mb-6">
                 <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-brand-gold-ink uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/25 px-3 py-1 rounded-full">
                   <Building size={12} className="text-[#F6B73C]" />
-                  <span>{isBn ? "গ্লোবাল হোটেল ও ফ্যামিলি স্টে সার্চ" : "Global Hotel & Stay Finder"}</span>
+                  <span>{isBn ? "হোটেল সার্চ ও বুকিং যাচাই" : "Hotel Search & Booking Checks"}</span>
                 </span>
                 <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-black text-slate-900">
                   {isBn
-                    ? "মক্কা, দুবাই, ব্যাংকক, কুয়ালালামপুর, প্যারিস ও বিশ্বের যেকোনো শহরের হোটেল তুলনা করুন"
-                    : "Compare Hotels & Family Stays Worldwide (Asia, Middle East, Europe & USA)"}
+                    ? "হোটেলের এলাকা ও বুকিং শর্ত তুলনা করুন; পার্টনার সাইটে প্রাপ্যতা দেখুন"
+                    : "Compare hotel areas and booking terms, then check availability with a partner"}
                 </h2>
                 <p className="text-xs text-slate-600 leading-relaxed max-w-2xl mx-auto">
                   {isBn
-                    ? "যেকোনো শহর ও তারিখ দিয়ে আসল হোটেল ভাড়া দেখুন। মক্কা হারাম ভিউ, Thamel-এর বাজেট রুম কিংবা Pratunam ও প্যারিসের ফ্যামিলি স্যুট—সব অপশন তুলনা করে সরাসরি বুক করুন।"
-                    : "Type any city worldwide or pick a popular hub below to compare live hotel rates. From Makkah Haram-view suites and Bangkok Pratunam stays to Paris, London, and New York hotels."}
+                    ? "শহর বেছে পার্টনার তালিকায় সার্চ করুন। লিংকে তারিখ বা অতিথি যায় না—আবার দিয়ে চূড়ান্ত দাম ও বুকিংয়ের শর্ত যাচাই করুন।"
+                    : "Choose a city, then search a partner collection. Dates and guests are not carried over; re-enter them and review the final total and booking terms."}
                 </p>
               </div>
 
@@ -4301,7 +4299,12 @@ export default function App() {
                       />
                     }
                   >
-                    <TravelpayoutsCustomWidget initialTab="hotels" hotelsOnly={true} />
+                    <TravelpayoutsCustomWidget
+                      initialTab="hotels"
+                      hotelsOnly={true}
+                      affiliatePlacement="home_hotel_search"
+                      lang={lang}
+                    />
                   </React.Suspense>
                 ) : (
                   <TravelpayoutsWidgetSkeleton

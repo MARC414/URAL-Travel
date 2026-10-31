@@ -1,6 +1,8 @@
 import React from "react";
 import { ExternalLink } from "lucide-react";
 
+import { getBlogHotelAffiliatePlacement } from "../utils/affiliatePlacement";
+
 import {
   AFFILIATE_LINKS,
   AFFILIATE_OFFER_REGISTRY,
@@ -103,16 +105,16 @@ export interface KlookHotelBlogPlacement {
 
 export const KLOOK_HOTEL_BLOG_PLACEMENTS: Record<string, KlookHotelBlogPlacement> = {
   "hotel-savings-guide-bangkok-kl-dubai": {
-    badgeEn: "🏨 HOTEL PRICE CHECK · KLOOK",
-    badgeBn: "🏨 হোটেলের দাম যাচাই · Klook",
-    headlineEn: "Comparing Bangkok, Kuala Lumpur or Dubai hotels? Get a second quote on Klook",
-    headlineBn: "ব্যাংকক, কুয়ালালামপুর বা দুবাইয়ের হোটেল তুলনা করছেন? Klook-এ দ্বিতীয় দাম দেখুন",
+    badgeEn: "🏨 PARTNER HOTEL SEARCH · KLOOK",
+    badgeBn: "🏨 পার্টনার হোটেল সার্চ · Klook",
+    headlineEn: "Need current hotel options? Search Klook’s collection",
+    headlineBn: "বর্তমান হোটেল বিকল্প খুঁজছেন? Klook-এর তালিকা সার্চ করুন",
     bodyEn:
-      "Open Klook's curated Asia hotel collection and search there for your destination. Match the same nights and guest count, then compare the checkout total — including taxes, service charge, breakfast and the cancellation deadline — against the BDT guide figures in this article. The collection reflects Klook's own booking data, not an independent quality rating.",
+      "This tracked link opens Klook’s general Asia hotel collection, not a live quote for a selected property or your dates. Re-enter your destination, dates and guest count on Klook, then compare the same room basis and checkout total — including taxes, service charges, meals and cancellation terms. The collection reflects Klook’s own booking data, not an independent quality rating.",
     bodyBn:
-      "Klook-এর বাছাইকৃত এশিয়া হোটেল তালিকা খুলে সেখানে আপনার গন্তব্য খুঁজুন। একই রাত ও অতিথিসংখ্যা দিয়ে ট্যাক্স, সার্ভিস চার্জ, ব্রেকফাস্ট এবং বাতিলের শেষ সময়সহ চূড়ান্ত মোট দাম এই লেখার BDT হিসাবের সঙ্গে তুলনা করুন। তালিকাটি Klook-এর নিজস্ব বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়।",
-    buttonEn: "Browse Klook’s curated hotel collection",
-    buttonBn: "Klook-এর বাছাইকৃত হোটেল তালিকা দেখুন",
+      "এই ট্র্যাক করা লিংকটি Klook-এর সাধারণ এশিয়া হোটেল তালিকা খুলবে—নির্বাচিত হোটেল বা আপনার তারিখের লাইভ কোট নয়। Klook-এ গন্তব্য, তারিখ ও অতিথিসংখ্যা আবার দিয়ে একই রুমের শর্তে ট্যাক্স, সার্ভিস চার্জ, খাবার ও বাতিলের নিয়মসহ চূড়ান্ত মোট দাম তুলনা করুন। তালিকাটি Klook-এর নিজস্ব বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়।",
+    buttonEn: "Search Klook hotel collection",
+    buttonBn: "Klook-এ হোটেল সার্চ করুন",
   },
 };
 
@@ -137,7 +139,7 @@ export function KlookHotelBlogCallout({
 
   return (
     <aside
-      aria-label={isBn ? "Klook হোটেলের দাম যাচাই" : "Klook hotel price check"}
+      aria-label={isBn ? "Klook হোটেল পার্টনার সার্চ" : "Klook hotel partner search"}
       className="relative overflow-hidden rounded-2xl bg-brand-navy p-5 text-white shadow-lg sm:p-6 space-y-3 text-left"
     >
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-gold via-[#FFD27A] to-brand-gold" />
@@ -161,6 +163,7 @@ export function KlookHotelBlogCallout({
       <div className="flex flex-wrap items-center gap-2.5 pt-1">
         <a
           href={href}
+          data-affiliate-placement={getBlogHotelAffiliatePlacement(slug)}
           target="_blank"
           rel="noopener noreferrer sponsored"
           className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand-gold px-4 py-2.5 text-xs font-bold text-brand-navy transition-colors hover:bg-[#FFC654] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
