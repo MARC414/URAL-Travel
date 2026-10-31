@@ -9,6 +9,8 @@ import { ShieldCheck, ArrowRight, FileText, Wifi, Building, Plane, Globe } from 
 
 import { TravelIntelligence } from "../components/AeoInspector";
 
+import { EditorialPageHero } from "../components/EditorialPageHero";
+
 
 
 type RouteViewProps = { context: Record<string, any> };
@@ -21,7 +23,67 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
   const activeVisa = localizedVisas.find((visa) => visa.id === parameterId) || localizedVisas[0];
 
+  if (!parameterId) {
+    return (
+      <div className="space-y-7">
+        <EditorialPageHero
+          eyebrow={isBn ? "বাংলাদেশি পাসপোর্টধারীদের জন্য" : "FOR BANGLADESHI PASSPORT HOLDERS"}
+          title={isBn ? "বাংলাদেশি নাগরিকদের জন্য ভিসা গাইড" : "Visa Guides & Travel Document Checklists"}
+          description={isBn
+            ? "জনপ্রিয় গন্তব্যের প্রবেশের নিয়ম, প্রয়োজনীয় নথি, আবেদন ধাপ ও ফি-সংক্রান্ত নির্দেশনা দেখুন। নিয়ম বদলাতে পারে—আবেদনের আগে সরকারি সূত্র যাচাই করুন।"
+            : "Review entry routes, document checklists, application steps and fee guidance for popular destinations. Rules change, so confirm details with official sources before applying."}
+          imageSrc="/assets/images/visa_changi_immigration_20261101-1200.webp"
+          imageAlt={isBn
+            ? "সিঙ্গাপুরের চাঙ্গি বিমানবন্দর টার্মিনাল ১-এর আগমন ইমিগ্রেশন হলে যাত্রীরা"
+            : "Travelers at the arrival immigration hall in Singapore Changi Airport Terminal 1"}
+          imageSizes="(min-width: 1024px) 45vw, 100vw"
+          credit={
+            <>
+              <a href="https://commons.wikimedia.org/wiki/File:Singapore_Changi_Airport_Terminal_1_Arrival_Immigration.jpg" target="_blank" rel="noopener noreferrer">
+                Exec8 / Wikimedia Commons
+              </a>
+              <span aria-hidden="true"> · </span>
+              <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
+            </>
+          }
+        />
 
+        <section aria-labelledby="visa-guide-index-title" className="space-y-3">
+          <div>
+            <h2 id="visa-guide-index-title" className="ural-section-title font-serif text-xl font-bold text-slate-900">
+              {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa guides by destination"}
+            </h2>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600">
+              {isBn ? "প্রতিটি দেশের গাইডে প্রবেশের ধরন, নথি ও আবেদন প্রক্রিয়ার সারাংশ রয়েছে। চূড়ান্ত সিদ্ধান্তের জন্য সরকারি কর্তৃপক্ষের নির্দেশনা অনুসরণ করুন।" : "Each country guide summarizes the entry route, documents and application process. Use official authority guidance for the final decision."}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {localizedVisas.map((visa) => (
+              <a
+                key={visa.id}
+                href={`/visa/${visa.id}`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  navigateTo(`/visa/${visa.id}`);
+                }}
+                className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+              >
+                <div className="mb-3 flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="font-serif text-lg font-bold text-brand-navy">{visa.country}</h3>
+                    <p className="text-xs font-semibold text-slate-500">{visa.requirementType}</p>
+                  </div>
+                  <ArrowRight size={16} className="mt-1 shrink-0 text-slate-400 transition group-hover:translate-x-1 group-hover:text-brand-navy" aria-hidden="true" />
+                </div>
+                <p className="line-clamp-3 text-sm leading-relaxed text-slate-600">{visa.quickAnswer}</p>
+                <p className="mt-4 text-xs font-bold text-brand-navy">{isBn ? "চেকলিস্ট ও আবেদনের ধাপ দেখুন" : "View checklist and application steps"}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
 
@@ -31,29 +93,33 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
       <header className="space-y-4 lg:col-start-2 lg:col-span-3 lg:row-start-1">
 
-        <div className="border-b border-slate-200 pb-5">
-
-          <div className="flex flex-wrap items-center justify-between gap-4">
-
-            <h1 className="ural-page-title font-serif text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-
-              {isBn
-
-                ? `বাংলাদেশি পাসপোর্টধারীদের জন্য ${activeVisa.country} ভিসা গাইড ও চেকলিস্ট`
-
-                : `${activeVisa.country} Visa Requirements for Bangladeshi Citizens`}
-
-            </h1>
-
-            <span className="rounded-full bg-brand-navy px-3 py-1 text-xs font-mono font-bold text-white">
-
-              {activeVisa.requirementType}
-
-            </span>
-
-          </div>
-
-        </div>
+        <EditorialPageHero
+          eyebrow={isBn ? "বাংলাদেশি নাগরিকদের প্রবেশ-নিয়ম" : "ENTRY GUIDANCE FOR BANGLADESHI CITIZENS"}
+          title={isBn
+            ? `${activeVisa.country} ভিসা (বাংলাদেশি পাসপোর্ট): নিয়ম, ডকুমেন্ট ও খরচ (২০২৬)`
+            : `${activeVisa.country} Visa Requirements for Bangladeshi Citizens`}
+          description={isBn
+            ? `${activeVisa.country}-এ প্রবেশের ধরন, প্রয়োজনীয় নথি ও আবেদন ধাপ পর্যালোচনা করুন। নিয়ম ও ফি বদলাতে পারে—আবেদনের আগে সরকারি নির্দেশনা যাচাই করুন।`
+            : `Review the entry route, required documents and application steps for ${activeVisa.country}. Rules and fees can change, so verify current instructions with official sources before applying.`}
+          imageSrc="/assets/images/visa_changi_immigration_20261101-1200.webp"
+          imageAlt={isBn
+            ? "সিঙ্গাপুরের চাঙ্গি বিমানবন্দর টার্মিনাল ১-এর আগমন ইমিগ্রেশন হলে যাত্রীরা"
+            : "Travelers at the arrival immigration hall in Singapore Changi Airport Terminal 1"}
+          imageSizes="(min-width: 1024px) 45vw, 100vw"
+          credit={
+            <>
+              <a href="https://commons.wikimedia.org/wiki/File:Singapore_Changi_Airport_Terminal_1_Arrival_Immigration.jpg" target="_blank" rel="noopener noreferrer">
+                Exec8 / Wikimedia Commons
+              </a>
+              <span aria-hidden="true"> · </span>
+              <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
+            </>
+          }
+        >
+          <span className="inline-flex w-fit rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-bold text-white">
+            {activeVisa.requirementType}
+          </span>
+        </EditorialPageHero>
 
         <QuickAnswer
           id="visa-aeo-box"

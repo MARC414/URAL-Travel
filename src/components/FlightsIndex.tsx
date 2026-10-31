@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { EditorialPageHero } from "./EditorialPageHero";
 import type { FlightRoute } from "../types";
 
 type FlightsIndexProps = {
@@ -25,17 +26,28 @@ export function FlightsIndex({ routes, isBn, navigateTo }: FlightsIndexProps) {
   });
 
   return (
-    <section aria-labelledby="flights-index-title" className="space-y-5">
-      <header className="space-y-2">
-        <h1 id="flights-index-title" className="font-serif text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-          {isBn ? "ঢাকা থেকে সরাসরি ফ্লাইট" : "Direct flights from Dhaka"}
-        </h1>
-        <p className="max-w-[72ch] text-sm leading-relaxed text-slate-700">
-          {isBn
-            ? "প্রতিটি রুটে সরাসরি না সংযোগী ফ্লাইট, আনুমানিক সময় ও ভাড়ার পরিসর দেখুন। ভাড়া ও সময়সূচি বদলায়, বুকিংয়ের আগে এয়ারলাইনের সাইটে যাচাই করুন।"
-            : "See which routes have nonstop flights and which need a connection, with typical flight time and BDT fare ranges. Fares and schedules change, so confirm with the airline before booking."}
-        </p>
-      </header>
+    <section aria-label={isBn ? "ঢাকা থেকে ফ্লাইট গাইড" : "Flight guides from Dhaka"} className="space-y-6">
+      <EditorialPageHero
+        eyebrow={isBn ? "ঢাকা থেকে ফ্লাইট গাইড" : "FLIGHT GUIDES FROM DHAKA"}
+        title={isBn ? "ঢাকা থেকে ফ্লাইট: রুট, ভাড়া ও এয়ারলাইন্স" : "International Flights from Dhaka: Routes, Fares & Airlines"}
+        description={isBn
+          ? "ঢাকা থেকে জনপ্রিয় গন্তব্যে সরাসরি ও সংযোগী ফ্লাইটের সময়, আনুমানিক ভাড়া এবং এয়ারলাইন্স তুলনা করুন। বুকিংয়ের আগে বর্তমান সময়সূচি যাচাই করুন।"
+          : "Compare nonstop and connecting routes from Dhaka, with typical flight times, BDT fare ranges and airline options. Check current schedules before booking."}
+        imageSrc="/assets/images/flights_heathrow_b747_takeoff_20261101-1200.webp"
+        imageAlt={isBn
+          ? "লন্ডনের হিথ্রো বিমানবন্দরের কাছে আকাশে উড়ে যাওয়া থাই এয়ারওয়েজের বোয়িং ৭৪৭ বিমান"
+          : "A Thai Airways Boeing 747 climbing above London Heathrow Airport"}
+        imageSizes="(min-width: 1024px) 45vw, 100vw"
+        imageFit="contain"
+        credit={
+          <>
+            <a href="https://en.wikipedia.org/wiki/File:Thai_b747-400_hs-tgp_takeoff_london_heathrow_arp.jpg" target="_blank" rel="noopener noreferrer">
+              Adrian Pingstone / Wikimedia Commons
+            </a>
+            <span aria-hidden="true"> · Public domain</span>
+          </>
+        }
+      />
 
       <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {unique.map((route) => {

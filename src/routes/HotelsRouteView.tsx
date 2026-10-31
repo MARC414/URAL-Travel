@@ -11,6 +11,8 @@ import { resolvePartnerUrl, AFFILIATE_LINKS } from "../components/AffiliatePartn
 
 import { KlookHotelSpotlight } from "../components/KlookHotelSpotlight";
 
+import { EditorialPageHero } from "../components/EditorialPageHero";
+
 
 
 type RouteViewProps = { context: Record<string, any> };
@@ -23,7 +25,65 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
   const activeHotel = localizedHotels.find((hotel) => hotel.id === parameterId) || localizedHotels[0];
 
+  if (!parameterId) {
+    return (
+      <div className="space-y-7">
+        <EditorialPageHero
+          eyebrow={isBn ? "আন্তর্জাতিক হোটেল গাইড" : "INTERNATIONAL HOTEL GUIDES"}
+          title={isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড" : "Hotel & Stay Guides for Trips from Bangladesh"}
+          description={isBn
+            ? "কাঠমান্ডু, ব্যাংকক, কুয়ালালামপুর, দুবাই, সিঙ্গাপুর ও মালদ্বীপে থাকার এলাকা, হোটেল এবং বুকিংয়ের পরামর্শ তুলনা করুন।"
+            : "Compare neighborhoods, hotel options and practical booking advice for Kathmandu, Bangkok, Kuala Lumpur, Dubai, Singapore and the Maldives."}
+          imageSrc="/assets/images/hotels_london_marylebone_exterior_20261101-1200.webp"
+          imageAlt={isBn
+            ? "লন্ডনের হ্যাম ইয়ার্ড হোটেলের প্রবেশপথে ইউনিয়ন জ্যাক পতাকা"
+            : "Hotel entrance and Union Jack flag outside a London hotel"}
+          imageSizes="(min-width: 1024px) 45vw, 100vw"
+          credit={
+            <a href="https://www.pexels.com/search/hotel%20in%20london/" target="_blank" rel="noopener noreferrer">
+              Pexels · Ham Yard Hotel, London (photo 3494638)
+            </a>
+          }
+        />
 
+        <section aria-labelledby="hotel-guide-index-title" className="space-y-3">
+          <div>
+            <h2 id="hotel-guide-index-title" className="ural-section-title font-serif text-xl font-bold text-slate-900">
+              {isBn ? "গন্তব্য অনুযায়ী থাকার গাইড বেছে নিন" : "Choose a hotel guide by destination"}
+            </h2>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600">
+              {isBn ? "প্রতিটি গাইডে এলাকার বৈশিষ্ট্য, বাছাইকৃত থাকার জায়গা এবং বুকিংয়ের আগে যাচাই করার বিষয় রয়েছে।" : "Each guide covers neighborhood trade-offs, example stays and practical checks to make before booking."}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {localizedHotels.map((hotel) => (
+              <a
+                key={hotel.id}
+                href={`/hotels/${hotel.id}`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  navigateTo(`/hotels/${hotel.id}`);
+                }}
+                className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+              >
+                <div className="mb-3 flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="font-serif text-lg font-bold text-brand-navy">{hotel.city}</h3>
+                    <p className="text-xs font-semibold text-slate-500">{hotel.country}</p>
+                  </div>
+                  <ArrowRight size={16} className="mt-1 shrink-0 text-slate-400 transition group-hover:translate-x-1 group-hover:text-brand-navy" aria-hidden="true" />
+                </div>
+                <p className="line-clamp-3 text-sm leading-relaxed text-slate-600">{hotel.quickAnswer}</p>
+                <p className="mt-4 text-xs font-bold text-brand-navy">
+                  {isBn ? `${hotel.neighborhoods.length}টি এলাকার গাইড` : `${hotel.neighborhoods.length} neighborhoods covered`}
+                </p>
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
 
@@ -33,15 +93,24 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
       <header className="space-y-4 lg:col-start-2 lg:col-span-3 lg:row-start-1">
 
-        <div className="border-b border-slate-200 pb-5">
-
-          <h1 className="ural-page-title font-serif text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-
-            {isBn ? `${activeHotel.city}-এ কোথায় থাকবেন: সেরা এলাকা ও হোটেল গাইড` : `Where to Stay in ${activeHotel.city}: Best Areas & Hotels`}
-
-          </h1>
-
-        </div>
+        <EditorialPageHero
+          eyebrow={isBn ? "শহরভিত্তিক থাকার গাইড" : "CITY STAY GUIDE"}
+          title={isBn
+            ? `${activeHotel.city}-এ কোথায় থাকবেন: এলাকা, হোটেল দাম ও হালাল খাবারের গাইড (২০২৬)`
+            : `Where to Stay in ${activeHotel.city}: Best Areas & Hotels`}
+          description={isBn
+            ? `${activeHotel.city} ভ্রমণে থাকার এলাকা, হোটেলের ধরন এবং আনুমানিক বাজেটের তুলনা করুন। তারিখ, রুমের শর্ত ও বর্তমান প্রাপ্যতা বুকিংয়ের আগে যাচাই করুন।`
+            : `Compare neighborhoods, hotel styles and planning budgets in ${activeHotel.city}. Check your dates, room terms and current availability before booking.`}
+          imageSrc="/assets/images/hotel_guide_guest_room_20261101-1200.webp"
+          imageAlt={isBn
+            ? "দুইজনের বিছানা ও উষ্ণ আলোসহ একটি পরিচ্ছন্ন হোটেল কক্ষ"
+            : "A clean hotel guest room with a double bed and warm bedside lighting"}
+          credit={
+            <a href="https://www.pexels.com/photo/interior-design-of-hotel-room-19045884" target="_blank" rel="noopener noreferrer">
+              Pexels · hotel room photo
+            </a>
+          }
+        />
 
         <QuickAnswer
           id="hotel-aeo-quick-answer"

@@ -32,7 +32,10 @@ export const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "dhaka_kolkata_benapole_border_train_1791500000000": 670,
   "dubai_destination_1781544180311": 655,
   "dubai_skyline_burj_twilight_1790485747967": 670,
+  "flights_heathrow_b747_takeoff_20261101": 670,
   "haramain_bullet_train_1790484312808": 896,
+  "hotel_guide_guest_room_20261101": 670,
+  "hotels_london_marylebone_exterior_20261101": 1200,
   "havana_gran_teatro_classic_cars_1791427200000": 1072,
   "ihram_preparation_set_1790484426740": 896,
   "islamic_banking_card_makkah_1790486749439": 670,
@@ -63,6 +66,7 @@ export const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "traveller_phone_street_ugc_1792483200000": 675,
   "umrah_makkah_haram_guide_1790430007679": 896,
   "ural_hero_bg_1781543111624": 670,
+  "visa_changi_immigration_20261101": 670,
   "zamzam_ajwa_dates_1790484440926": 896,
 };
 
