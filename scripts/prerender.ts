@@ -84,11 +84,17 @@ import {
   RADICAL_STORAGE_BLOG_PLACEMENTS,
   MULTI_PARTNER_BLOG_PLACEMENTS,
   TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
+  AFFILIATE_OFFER_REGISTRY,
   buildTravelpayoutsReferralUrl,
   resolvePartnerUrl,
   sanitizeExpiredPromoText,
   AFFILIATE_LINKS,
 } from "../src/components/AffiliatePartners";
+import {
+  KLOOK_HOTEL_BLOG_PLACEMENTS,
+  KLOOK_HOTEL_COMMISSION_NOTE,
+  KLOOK_HOTEL_CHECK_STEPS,
+} from "../src/components/KlookHotelOffers";
 import {
   HAJJ_UMRAH_FAQS,
   generateFAQSchema,
@@ -1642,6 +1648,13 @@ function buildAllRoutes(): PrerenderRoute[] {
           <ul>${h.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
           <h2>Example properties in the ${escapeHtml(h.city)} guide</h2>
           <ul>${h.hotels.map((hotel) => `<li><strong>${escapeHtml(hotel.name)}</strong> — ${escapeHtml(hotel.category)} option in ${escapeHtml(hotel.neighborhood)}; indicative guide figure BDT ${hotel.priceBdt.toLocaleString("en-US")}. Listed features include ${escapeHtml(hotel.features.join(", "))}.</li>`).join("")}</ul>
+          ${AFFILIATE_OFFER_REGISTRY.klook.status === "active" && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active" ? `
+          <section aria-labelledby="klook-hotel-check">
+            <h2 id="klook-hotel-check">Get a second hotel quote on Klook</h2>
+            <p>Klook's curated Asia hotel collection opens in a new tab. Enter ${escapeHtml(h.city)}, your dates and guest count on Klook to find available stays. Its selection reflects Klook's own booking data, not an independent quality rating. <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" target="_blank" rel="noopener noreferrer sponsored">Browse Klook's curated hotels</a>.</p>
+            <ol>${KLOOK_HOTEL_CHECK_STEPS.en.map((step) => `<li><strong>${escapeHtml(step.title)}:</strong> ${escapeHtml(step.body)}</li>`).join("")}</ol>
+            <p><small>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.en)} Klook charges in the hotel's own currency; check your card's foreign-transaction fee before comparing a converted BDT amount.</small></p>
+          </section>` : ""}
           <section>
             <h2>Match the hotel area to your itinerary</h2>
             <p>The area options in this guide have different profiles: ${h.neighborhoods.map((area) => `${escapeHtml(area.name)} (${escapeHtml(area.vibe)})`).join("; ")}. Choose by looking at where you expect to spend your time, how you will reach those places and the pace that suits your travel party. A central location may reduce some local journeys but can cost more or be busier; a quieter base may require more planning for meals and transport. Use the neighborhood descriptions above to compare trade-offs rather than treating one area as the universal best choice.</p>
@@ -2080,7 +2093,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         <p>Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and Kuala Lumpur.</p>
         <section aria-labelledby="luggage-storage-tip">
           <h2 id="luggage-storage-tip">Museum Bag-Ban Rule, Go City All-Inclusive &amp; Explorer Passes &amp; Luggage Storage</h2>
-          <p>Major European, UK, and US attractions (Louvre, Eiffel Tower, Colosseum, Vatican, British Museum, and Statue of Liberty) strictly prohibit suitcases and large backpacks inside security. Store your bags for ~€5/day per bag (with €3,000 security guarantee) at verified hotels and shops near major stations via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">Radical Storage luggage storage network</a>, bundle 3 to 10+ city landmarks with <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.goCity))}" target="_blank" rel="noopener noreferrer sponsored">Go City All-Inclusive &amp; Explorer Passes</a>, book verified global hotels and sightseeing tours on <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klook))}" target="_blank" rel="noopener noreferrer sponsored">Klook Global Hotels &amp; Activities</a>.</p>
+          <p>Major European, UK, and US attractions (Louvre, Eiffel Tower, Colosseum, Vatican, British Museum, and Statue of Liberty) strictly prohibit suitcases and large backpacks inside security. Store your bags for ~€5/day per bag (with €3,000 security guarantee) at verified hotels and shops near major stations via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">Radical Storage luggage storage network</a>, bundle 3 to 10+ city landmarks with <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.goCity))}" target="_blank" rel="noopener noreferrer sponsored">Go City All-Inclusive &amp; Explorer Passes</a>, browse Klook's curated hotel collection via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" target="_blank" rel="noopener noreferrer sponsored">Klook Global Hotels</a>, or book sightseeing tours on <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klook))}" target="_blank" rel="noopener noreferrer sponsored">Klook Activities</a>.</p>
         </section>
       </article>
     `,
@@ -2596,6 +2609,11 @@ function buildAllRoutes(): PrerenderRoute[] {
             : ""
         }.</p></section>`
       : "";
+    const klookHotelPlacement = KLOOK_HOTEL_BLOG_PLACEMENTS[post.slug];
+    const klookHotelHtml =
+      klookHotelPlacement && AFFILIATE_OFFER_REGISTRY.klook.status === "active" && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active"
+        ? `<section aria-labelledby="klook-hotel-quote"><h2 id="klook-hotel-quote">${escapeHtml(klookHotelPlacement.headlineEn)}</h2><p>${escapeHtml(klookHotelPlacement.bodyEn)}</p><p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(klookHotelPlacement.buttonEn)}</a></p><p><em>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.en)}</em></p></section>`
+        : "";
 
     routes.push({
       routePath: `/blog/${post.slug}`,
@@ -2655,6 +2673,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           ${post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking" ? renderCoxsBazarAuthorBioHtml("en") : renderAuthorBioHtml(getAuthorProfile(post.author), "en")}
           ${radicalStorageHtml}
           ${multiPartnerHtml}
+          ${klookHotelHtml}
           ${travelpayoutsReferralHtml}
           ${planLinksHtml}
           ${relatedGuidesHtml}
@@ -2999,6 +3018,21 @@ function buildBengaliBody(
           )
         );
       }
+      const klookHotelPlacementBn = KLOOK_HOTEL_BLOG_PLACEMENTS[id];
+      if (
+        klookHotelPlacementBn &&
+        AFFILIATE_OFFER_REGISTRY.klook.status === "active" &&
+        AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active"
+      ) {
+        parts.push(
+          bnSection(
+            klookHotelPlacementBn.headlineBn,
+            `<p>${escapeHtml(klookHotelPlacementBn.bodyBn)}</p>` +
+              `<p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(klookHotelPlacementBn.buttonBn)}</a></p>` +
+              `<p><em>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.bn)}</em></p>`
+          )
+        );
+      }
       const internal = (override.internalLinks || [])
         .filter((link) => hasBengaliCounterpart(link.path))
         .map((link) => ({ label: link.text, path: link.path }));
@@ -3091,6 +3125,19 @@ function buildBengaliBody(
           )
           .join("");
         if (stays) parts.push(bnSection("কোথায় থাকবেন", `<ul>${stays}</ul>`));
+        if (
+          AFFILIATE_OFFER_REGISTRY.klook.status === "active" &&
+          AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active"
+        ) {
+          parts.push(
+            bnSection(
+              "Klook-এর বাছাইকৃত হোটেল তালিকায় দ্বিতীয় দাম দেখুন",
+              `<p>Klook-এর বাছাইকৃত এশিয়া হোটেল তালিকা নতুন ট্যাবে খুলবে। সেখানে ${escapeHtml(hotel.city)}, তারিখ ও অতিথিসংখ্যা দিয়ে থাকার বিকল্প খুঁজুন। তালিকাটি Klook-এর নিজস্ব বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়। <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" target="_blank" rel="noopener noreferrer sponsored">Klook-এর বাছাইকৃত হোটেল দেখুন</a>।</p>` +
+                `<ol>${KLOOK_HOTEL_CHECK_STEPS.bn.map((step) => `<li><strong>${escapeHtml(step.title)}:</strong> ${escapeHtml(step.body)}</li>`).join("")}</ol>` +
+                `<p><small>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.bn)} Klook হোটেলের নিজস্ব মুদ্রায় চার্জ করে; BDT-তে বদলে তুলনার আগে কার্ডের বিদেশি লেনদেন ফি জেনে নিন।</small></p>`
+            )
+          );
+        }
         parts.push(
           bnLinkList(
             "এই ট্রিপের বাকি পরিকল্পনা",

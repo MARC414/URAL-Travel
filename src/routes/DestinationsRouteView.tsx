@@ -1079,19 +1079,19 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
 
                                   <a
 
-                                    href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                                    href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
 
                                     target="_blank"
 
                                     rel="noopener noreferrer sponsored"
 
-                                    onClick={() => triggerAffiliateToast(`Opening verified hotel rates for ${hotel.name}, ${hotel.area} on Klook...`)}
+                                    onClick={() => triggerAffiliateToast(isBn ? "Klook-এর বাছাইকৃত হোটেল তালিকা খুলছে। গন্তব্য ও তারিখ Klook-এ আবার দিন।" : "Opening Klook’s curated hotel collection. Re-enter your destination and dates there.")}
 
                                     className="bg-brand-navy hover:bg-[#F6B73C] hover:text-brand-navy text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
 
                                   >
 
-                                    Check Rates <ExternalLink size={10} />
+                                    {isBn ? "Klook-এ হোটেল দেখুন" : "Browse Klook Hotels"} <ExternalLink size={10} />
 
                                   </a>
 

@@ -32,12 +32,19 @@ import { SITE_ORIGIN } from "../src/utils/localeRoutes";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
 import {
   AFFILIATE_LINKS,
+  AFFILIATE_OFFER_REGISTRY,
+  KLOOK_PROMO,
   TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
   TRAVELPAYOUTS_REFERRAL_SUB_IDS,
   TRAVELPAYOUTS_REFERRAL_URL,
   buildTravelpayoutsReferralUrl,
   resolvePartnerUrl,
 } from "../src/components/AffiliatePartners";
+import {
+  KLOOK_HOTEL_BLOG_PLACEMENTS,
+  KLOOK_HOTEL_COMMISSION_NOTE,
+} from "../src/components/KlookHotelOffers";
+import { KlookHotelSpotlight } from "../src/components/KlookHotelSpotlight";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
   DESTINATION_PARTNER_COPY,
@@ -2316,6 +2323,162 @@ if (sitemap) {
     "all ten English and Bengali destination landings expose curated existing blog links and content-matched affiliate partners"
   );
 
+  // --- Klook hotel second-quote module -------------------------------------
+  //
+  // The supplied Travelpayouts deep link targets Klook's curated hotel
+  // collection. Hotel placements use this dedicated tracked URL, while generic
+  // Klook links remain on the standard partner URL. These checks also protect
+  // the commission disclosure, expiry behavior and bilingual hotel placements.
+  const KLOOK_HOTEL_HREF = resolvePartnerUrl(AFFILIATE_LINKS.klookHotels);
+  const KLOOK_HOTEL_LINK_CONSUMERS = [
+    "src/routes/HotelsRouteView.tsx",
+    "src/routes/DestinationsRouteView.tsx",
+    "src/components/TravelpayoutsCustomWidget.tsx",
+    "src/components/KlookEmbed.tsx",
+    "src/components/KlookHotelSpotlight.tsx",
+    "src/components/KlookHotelOffers.tsx",
+    "src/components/TravelEssentials.tsx",
+    "src/components/TravelpayoutsWidget.jsx",
+    "src/components/ExperiencesPage.tsx",
+    "src/App.tsx",
+    "scripts/prerender.ts",
+  ];
+  const missingKlookHotelLinkConsumers = KLOOK_HOTEL_LINK_CONSUMERS.filter((file) => {
+    const source = read(path.join(ROOT_DIR, file)) ?? "";
+    return !source.includes("AFFILIATE_LINKS.klookHotels") && !source.includes("klookHotelsPartnerUrl");
+  });
+  check(
+    missingKlookHotelLinkConsumers.length === 0,
+    `all hotel-specific site placements use the dedicated tracked Klook hotel link [${missingKlookHotelLinkConsumers.join(", ")}]`
+  );
+
+  const KLOOK_HOTEL_IDS = [
+    "kathmandu-hotels",
+    "bangkok-hotels",
+    "kuala-lumpur-hotels",
+    "singapore-hotels",
+    "maldives-hotels",
+    "dubai-hotels",
+  ];
+  const sectionStartingAt = (html: string, marker: string) => {
+    const start = html.indexOf(marker);
+    if (start < 0) return "";
+    const end = html.indexOf("</section>", start);
+    return end < 0 ? html.slice(start) : html.slice(start, end + "</section>".length);
+  };
+
+  const klookHotelHtmlIssues: string[] = [];
+  for (const hotelId of KLOOK_HOTEL_IDS) {
+    const enHtml = read(path.join(DIST_DIR, "hotels", `${hotelId}.html`)) ?? "";
+    const bnHtml = read(path.join(DIST_DIR, "bn", "hotels", `${hotelId}.html`)) ?? "";
+    const enSection = sectionStartingAt(enHtml, 'id="klook-hotel-check"');
+    const bnSection = sectionStartingAt(bnHtml, "Klook-এর বাছাইকৃত হোটেল তালিকায় দ্বিতীয় দাম দেখুন");
+    const enOk =
+      enSection.includes("Get a second hotel quote on Klook") &&
+      enSection.includes(KLOOK_HOTEL_HREF) &&
+      !enSection.includes(AFFILIATE_LINKS.klook) &&
+      enSection.includes('rel="noopener noreferrer sponsored"') &&
+      enSection.includes("not a traveller discount");
+    const bnOk =
+      bnSection.includes(KLOOK_HOTEL_HREF) &&
+      !bnSection.includes(AFFILIATE_LINKS.klook) &&
+      bnSection.includes('rel="noopener noreferrer sponsored"') &&
+      bnSection.includes("ভ্রমণকারীর জন্য ছাড় নয়");
+    // The prerendered file must stay evergreen: a build made during the
+    // promotion cannot leave an expired rate or date in cached HTML.
+    const noStaleRate = !/8%|December 31, 2026|৮%|৩১ ডিসেম্বর ২০২৬/.test(enSection + bnSection);
+    const noUntrackedLandingPage = !(enHtml + bnHtml).includes("klook.com/tetris");
+    if (!enOk || !bnOk || !noStaleRate || !noUntrackedLandingPage) {
+      klookHotelHtmlIssues.push(hotelId);
+      console.error(`[VERIFY] Klook hotel module incomplete or stale: ${hotelId}`);
+    }
+  }
+  check(
+    klookHotelHtmlIssues.length === 0,
+    `all six hotel guides carry the Klook second-quote module in English and Bengali, link only the tracked partner URL and keep prerendered copy evergreen [${klookHotelHtmlIssues.join(", ")}]`
+  );
+
+  const withMockedNow = <T,>(timestamp: number, render: () => T): T => {
+    const realNow = Date.now;
+    Date.now = () => timestamp;
+    try {
+      return render();
+    } finally {
+      Date.now = realNow;
+    }
+  };
+  const renderSpotlight = (lang: "en" | "bn") =>
+    renderToStaticMarkup(React.createElement(KlookHotelSpotlight, { city: "Bangkok", lang }));
+  const spotlightActiveEn = withMockedNow(Date.UTC(2026, 10, 1), () => renderSpotlight("en"));
+  const spotlightActiveBn = withMockedNow(Date.UTC(2026, 10, 1), () => renderSpotlight("bn"));
+  const spotlightExpiredEn = withMockedNow(Date.UTC(2027, 0, 1, 6), () => renderSpotlight("en"));
+  const spotlightExpiredBn = withMockedNow(Date.UTC(2027, 0, 1, 6), () => renderSpotlight("bn"));
+  const spotlightActiveOk =
+    spotlightActiveEn.includes(KLOOK_PROMO.hotelsRate) &&
+    spotlightActiveEn.includes(KLOOK_PROMO.validUntil) &&
+    spotlightActiveEn.includes(KLOOK_HOTEL_HREF) &&
+    spotlightActiveEn.includes('rel="noopener noreferrer sponsored"') &&
+    spotlightActiveEn.includes("not a traveller discount") &&
+    spotlightActiveEn.includes("Bangkok") &&
+    spotlightActiveBn.includes(KLOOK_PROMO.hotelsRateBn) &&
+    spotlightActiveBn.includes(KLOOK_PROMO.validUntilBn) &&
+    spotlightActiveBn.includes(KLOOK_HOTEL_HREF) &&
+    spotlightActiveBn.includes("ভ্রমণকারীর জন্য ছাড় নয়") &&
+    spotlightActiveBn.includes("ব্যাংকক");
+  check(
+    spotlightActiveOk,
+    "the Klook hotel module states the 8% rate as publisher commission, not a traveller discount, in both languages while the offer is live"
+  );
+  const spotlightExpiryOk =
+    !spotlightExpiredEn.includes(KLOOK_PROMO.hotelsRate) &&
+    !spotlightExpiredEn.includes(KLOOK_PROMO.validUntil) &&
+    !spotlightExpiredBn.includes(KLOOK_PROMO.hotelsRateBn) &&
+    !spotlightExpiredBn.includes(KLOOK_PROMO.validUntilBn) &&
+    spotlightExpiredEn.includes(KLOOK_HOTEL_COMMISSION_NOTE.en) &&
+    spotlightExpiredBn.includes(KLOOK_HOTEL_COMMISSION_NOTE.bn) &&
+    spotlightExpiredEn.includes(KLOOK_HOTEL_HREF) &&
+    spotlightExpiredBn.includes(KLOOK_HOTEL_HREF);
+  check(
+    spotlightExpiryOk,
+    "after 2026-12-31 the Klook hotel module drops the rate and date, keeps the evergreen disclosure and still links the tracked partner URL"
+  );
+
+  const klookBlogSlug = "hotel-savings-guide-bangkok-kl-dubai";
+  const klookBlogPlacement = KLOOK_HOTEL_BLOG_PLACEMENTS[klookBlogSlug];
+  const klookBlogEn = read(path.join(DIST_DIR, "blog", `${klookBlogSlug}.html`)) ?? "";
+  const klookBlogBn = read(path.join(DIST_DIR, "bn", "blog", `${klookBlogSlug}.html`)) ?? "";
+  const klookBlogEnSection = sectionStartingAt(klookBlogEn, 'id="klook-hotel-quote"');
+  const klookBlogBnSection = sectionStartingAt(
+    klookBlogBn,
+    klookBlogPlacement?.headlineBn ?? ""
+  );
+  const klookBlogOk =
+    !!klookBlogPlacement &&
+    klookBlogEnSection.includes(KLOOK_HOTEL_HREF) &&
+    !klookBlogEnSection.includes(AFFILIATE_LINKS.klook) &&
+    klookBlogEnSection.includes('rel="noopener noreferrer sponsored"') &&
+    klookBlogEnSection.includes(klookBlogPlacement.buttonEn) &&
+    klookBlogBnSection.includes(KLOOK_HOTEL_HREF) &&
+    !klookBlogBnSection.includes(AFFILIATE_LINKS.klook) &&
+    klookBlogBnSection.includes(klookBlogPlacement.buttonBn) &&
+    !/8%|৮%|December 31, 2026|৩১ ডিসেম্বর ২০২৬/.test(klookBlogEnSection + klookBlogBnSection) &&
+    !(klookBlogEn + klookBlogBn).includes("klook.com/tetris");
+  check(
+    klookBlogOk,
+    "the Bangkok/KL/Dubai hotel-savings guide carries the same Klook second-quote placement in both languages, tracked and evergreen"
+  );
+
+  check(
+    AFFILIATE_LINKS.klookHotels === "https://klook.tpo.li/tnjuBwoy" &&
+      AFFILIATE_LINKS.klookHotels !== AFFILIATE_LINKS.klook &&
+      AFFILIATE_OFFER_REGISTRY.klookHotels.url === AFFILIATE_LINKS.klookHotels &&
+      AFFILIATE_OFFER_REGISTRY.klookHotels.offerType === "commission-boost" &&
+      AFFILIATE_OFFER_REGISTRY.klookHotels.expiresAt === KLOOK_PROMO.expiresAt &&
+      AFFILIATE_OFFER_REGISTRY.klook.offerType === "commission-boost" &&
+      AFFILIATE_OFFER_REGISTRY.klook.expiresAt === KLOOK_PROMO.expiresAt,
+    "the dedicated Klook hotel collection has its own tracked link and shares the registered hotel commission expiry"
+  );
+
   check(
     enBlocks.length >= MIN_EN_ROUTES,
     `sitemap has >= ${MIN_EN_ROUTES} English URLs (found ${enBlocks.length})`
@@ -3646,6 +3809,7 @@ const guideRouteFiles = [
 const guideSharedSources = [
   read(path.join(ROOT_DIR, "src/components/AeoInspector.tsx")) ?? "",
   read(path.join(ROOT_DIR, "src/components/InteractiveTools.tsx")) ?? "",
+  read(path.join(ROOT_DIR, "src/components/KlookHotelSpotlight.tsx")) ?? "",
 ];
 const guideSharedIds = new Set(
   guideSharedSources.flatMap((source) =>

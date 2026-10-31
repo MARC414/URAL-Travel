@@ -25,6 +25,7 @@ import { getRelatedBlogPosts } from "../utils/blogLinks";
 import { getVisibleBlogFaqSection } from "../utils/blogStructuredData";
 
 import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, QeeqCarRentalWidget } from "../components/AffiliatePartners";
+import { KlookHotelBlogCallout } from "../components/KlookHotelOffers";
 
 
 
@@ -1759,6 +1760,12 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                       {/* Contextual Multi-Partner Callout (Yesim eSIM, Kiwi.com Multi-City, GetTransfer Vans & Go City Passes) */}
 
                       <MultiPartnerBlogCallout slug={activePost.slug} lang={lang} />
+
+
+
+                      {/* Klook hotel second-quote callout (hotel-comparison guides only) */}
+
+                      <KlookHotelBlogCallout slug={activePost.slug} lang={lang} />
 
 
 

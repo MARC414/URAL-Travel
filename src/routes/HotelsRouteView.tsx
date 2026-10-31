@@ -9,6 +9,8 @@ import { TravelIntelligence } from "../components/AeoInspector";
 
 import { resolvePartnerUrl, AFFILIATE_LINKS } from "../components/AffiliatePartners";
 
+import { KlookHotelSpotlight } from "../components/KlookHotelSpotlight";
+
 
 
 type RouteViewProps = { context: Record<string, any> };
@@ -57,6 +59,8 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
             { id: "hotel-neighborhoods", en: "Choose a neighborhood", bn: "এলাকা বেছে নিন" },
 
             { id: "hotel-curated-stays", en: "Compare curated stays", bn: "বাছাইকৃত হোটেল তুলনা করুন" },
+
+            { id: "hotel-klook-check", en: "Second quote on Klook", bn: "Klook-এ দ্বিতীয় দাম" },
 
             { id: "hotel-ground-transport", en: "Transfers and local essentials", bn: "ট্রান্সফার ও স্থানীয় প্রয়োজনীয়তা" },
 
@@ -268,7 +272,7 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
                                 id={`hotel-booking-btn-${room.name.toLowerCase().replace(/\s+/g, '-')}`}
 
-                                href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                                href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
 
                                 target="_blank"
 
@@ -280,9 +284,9 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
                                     isBn
 
-                                      ? `${room.name}, ${room.neighborhood}-এর সেরা হোটেল ডিল খোলা হচ্ছে...`
+                                      ? "Klook-এর বাছাইকৃত হোটেল তালিকা খুলছে। গন্তব্য ও তারিখ Klook-এ আবার দিন।"
 
-                                      : `Opening verified hotel rates for ${room.name}, ${room.neighborhood} on Klook...`
+                                      : "Opening Klook’s curated hotel collection. Re-enter your destination and dates there."
 
                                   );
 
@@ -292,7 +296,7 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
                               >
 
-                                {isBn ? "বুক করুন" : "Book Stay"} <ExternalLink size={10} />
+                                {isBn ? "Klook-এ হোটেল দেখুন" : "Browse on Klook"} <ExternalLink size={10} />
 
                               </a>
 
@@ -305,6 +309,12 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
                       </div>
 
                     </div>
+
+
+
+                    {/* Second-quote module: Klook hotel comparison, gated by the offer registry */}
+
+                    <KlookHotelSpotlight city={activeHotel.city} lang={lang} />
 
 
 
