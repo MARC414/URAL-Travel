@@ -11,6 +11,7 @@ import { PartnerLinkButton, AFFILIATE_LINKS } from "../components/AffiliatePartn
 
 import { TravelIntelligence } from "../components/AeoInspector";
 import { FlightsIndex } from "../components/FlightsIndex";
+import { EditorialPageHero } from "../components/EditorialPageHero";
 
 
 
@@ -37,45 +38,42 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
       <header className="space-y-4 lg:col-start-2 lg:col-span-3 lg:row-start-1">
 
-        <div className="border-b border-slate-200 pb-5">
-
-          <div className="flex flex-wrap items-center justify-between gap-4">
-
-            <h1 className="ural-page-title font-serif text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-
-              {isBn ? `${activeRoute.from} থেকে ${activeRoute.to} ফ্লাইট গাইড` : `Flights from ${activeRoute.from} to ${activeRoute.to}`}
-
-            </h1>
-
-            <div className="flex items-center gap-2.5">
-
-              <span className="rounded-full bg-[#F6B73C]/20 px-3 py-1.5 font-mono text-xs font-bold text-brand-navy">
-
-                {activeRoute.priceRangeBdt.split(" (")[0]}
-
-              </span>
-
-              <button
-
-                type="button"
-
-                onClick={() => openPriceAlert(activeRoute.to)}
-
-                className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-colors hover:bg-emerald-700"
-
-              >
-
-                <Bell size={12} className="text-white" aria-hidden="true" />
-
-                <span>{isBn ? "ফেয়ার অ্যালার্ট" : "Price Alert"}</span>
-
-              </button>
-
-            </div>
-
+        <EditorialPageHero
+          eyebrow={isBn ? "ঢাকা থেকে ফ্লাইট রুট" : "FLIGHT ROUTE FROM DHAKA"}
+          title={isBn
+            ? `ঢাকা → ${activeRoute.to.split(" (")[0]} বিমান ভাড়া, সময় ও ভিসা গাইড (২০২৬)`
+            : `Flights from ${activeRoute.from} to ${activeRoute.to}`}
+          description={isBn
+            ? `${activeRoute.to} রুটের সাধারণ ভাড়া, ভ্রমণের সময় এবং এয়ারলাইন্স তুলনা করুন। বুকিংয়ের আগে বর্তমান সময়সূচি, ব্যাগেজ ও প্রবেশের নিয়ম যাচাই করুন।`
+            : `Compare typical fares, journey times and airline options from Dhaka to ${activeRoute.to.split(" (")[0]}. Check current schedules, baggage and entry rules before booking.`}
+          imageSrc="/assets/images/flights_heathrow_b747_takeoff_20261101-1200.webp"
+          imageAlt={isBn
+            ? "লন্ডনের হিথ্রো বিমানবন্দরের কাছে আকাশে উড়ে যাওয়া থাই এয়ারওয়েজের বোয়িং ৭৪৭ বিমান"
+            : "A Thai Airways Boeing 747 climbing above London Heathrow Airport"}
+          imageFit="contain"
+          credit={
+            <>
+              <a href="https://en.wikipedia.org/wiki/File:Thai_b747-400_hs-tgp_takeoff_london_heathrow_arp.jpg" target="_blank" rel="noopener noreferrer">
+                Adrian Pingstone / Wikimedia Commons
+              </a>
+              <span aria-hidden="true"> · Public domain</span>
+            </>
+          }
+        >
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span className="rounded-full bg-[#F6B73C]/20 px-3 py-1.5 font-mono text-xs font-bold text-[#FFE0A0]">
+              {activeRoute.priceRangeBdt.split(" (")[0]}
+            </span>
+            <button
+              type="button"
+              onClick={() => openPriceAlert(activeRoute.to)}
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-emerald-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-colors hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
+            >
+              <Bell size={12} className="text-white" aria-hidden="true" />
+              <span>{isBn ? "ফেয়ার অ্যালার্ট" : "Price Alert"}</span>
+            </button>
           </div>
-
-        </div>
+        </EditorialPageHero>
 
 
 

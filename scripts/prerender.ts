@@ -1061,7 +1061,7 @@ function renderFlightsHubBody(title: string, description: string, faqSchema: Ret
       `<li><a href="/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} to ${escapeHtml(route.to.split(" (")[0])}</a> — ${isNonstopRoute(route) ? "Nonstop" : "Connecting"}; ${escapeHtml(route.duration)}; ${escapeHtml(route.priceRangeBdt.split(" (")[0])}.</li>`
   ).join("");
   return `<article>
-    <h1>Direct flights from Dhaka</h1>
+    <h1>International Flights from Dhaka: Routes, Fares &amp; Airlines</h1>
     <p>${escapeHtml(description)}</p>
     <p>Use these Dhaka flight guides to compare the destinations covered, indicative BDT fare ranges, journey duration, airlines and booking guidance in one place. The route notes are planning references rather than live fare quotes: prices and schedules can change with travel dates, seat inventory, baggage choices and fare conditions. Before booking, compare the total itinerary—not only the headline fare—including baggage, stopovers, transit requirements, change or cancellation terms, and arrival time. Travelers starting in Chattogram, Sylhet or another city should plan any separate domestic leg and allow a realistic connection buffer. Confirm the operating carrier and current departure details with the airline or booking provider.</p>
     <section id="direct-flights-from-dhaka" aria-labelledby="direct-flights-h2">
@@ -1120,7 +1120,7 @@ function renderHotelsHubBody(title: string, description: string, faqSchema: Retu
   ).join("");
 
   return `<article>
-    <h1>Direct flights from Dhaka</h1>
+    <h1>Hotel &amp; Stay Guides for Trips from Bangladesh</h1>
     <p>${escapeHtml(description)}</p>
     <p>Choosing the right hotel area can matter as much as choosing the property. These guides compare neighborhoods in destinations reached by Bangladeshi travelers, with attention to transit access, family needs, local food options, quiet or busy surroundings, and the type of trip each area supports. Use the linked city guide to compare the neighborhoods and example stays before checking dates and availability. Displayed BDT amounts are planning references, not a guaranteed quote; the final total can differ because of room dates, occupancy, taxes, service charges, meal plans, currency conversion and the provider's cancellation terms.</p>
     <section><h2>Hotel neighborhood guides by destination</h2><ul>${directory}</ul></section>
@@ -1147,7 +1147,7 @@ function renderVisaHubBody(title: string, description: string, faqSchema: Return
   ).join("");
 
   return `<article>
-    <h1>Direct flights from Dhaka</h1>
+    <h1>Visa Guides &amp; Travel Document Checklists</h1>
     <p>${escapeHtml(description)}</p>
     <p>If you only need to know which destinations a Bangladeshi passport can enter with nothing arranged in advance, start with <a href="/visa-free-countries">visa-free countries for Bangladeshi passport holders</a> — it separates the destinations you can actually use from the ones that only look easy.</p>
     <p>This visa hub brings together entry-route, fee, processing-time and document guidance for popular destinations for Bangladeshi passport holders. Start with the country-specific guide below to understand whether the route described is visa-free, visa on arrival, electronic or an advance application. Requirements depend on the travel purpose, passport and current policy; the amounts and timeframes shown are guidance from the underlying destination pages, not an approval guarantee. Immigration rules can change without notice, so verify the latest requirements and application channel with the destination's official immigration department, embassy or authorized portal before booking or applying.</p>
@@ -1467,7 +1467,7 @@ function buildAllRoutes(): PrerenderRoute[] {
   // 3. Flights Hub (/flights) + 6 Flight Routes (/flights/:id)
   const flightsHubTitle = "Flights from Dhaka: Compare Fares, Routes & Airlines (2026) | URAL";
   const flightsHubDesc =
-    "Compare cheap international flights from Hazrat Shahjalal International Airport (DAC) to Nepal, Thailand, Malaysia, and Dubai. View flight duration, direct airlines, and BDT fares.";
+    "Compare nonstop and connecting flights from Dhaka, with typical fares, journey times and airline options for popular international routes.";
   const flightsFaq = getFaqSchemaForPage("flights", undefined, true, `${BASE_URL}/flights`);
   routes.push({
     routePath: "/flights",
@@ -1475,6 +1475,8 @@ function buildAllRoutes(): PrerenderRoute[] {
     title: flightsHubTitle,
     description: flightsHubDesc,
     imageUrl: defaultOgImage,
+    lcpImageUrl: "/assets/images/flights_heathrow_b747_takeoff_20261101-1200.webp",
+    lcpImageSizes: "(min-width: 1024px) 45vw, 100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Flight Guides", url: `${BASE_URL}/flights` },
@@ -1522,6 +1524,8 @@ function buildAllRoutes(): PrerenderRoute[] {
       title,
       description,
       imageUrl: defaultOgImage,
+      lcpImageUrl: "/assets/images/flights_heathrow_b747_takeoff_20261101-1200.webp",
+      lcpImageSizes: "(min-width: 1024px) 34vw, 100vw",
       breadcrumbs: [
         { name: "Home", url: `${BASE_URL}/` },
         { name: "Flight Guides", url: `${BASE_URL}/flights` },
@@ -1530,7 +1534,8 @@ function buildAllRoutes(): PrerenderRoute[] {
       extraGraphNodes: extraNodes,
       bodyHtml: `
         <article>
-          <h1>${escapeHtml(title)}</h1>
+          <h1>Flights from ${escapeHtml(r.from)} to ${escapeHtml(r.to)}</h1>
+          <p>${escapeHtml(description)}</p>
           <p>${escapeHtml(r.quickAnswer || description)}</p>
           <p><strong>Price range:</strong> ${escapeHtml(r.priceRangeBdt)} | <strong>Journey duration:</strong> ${escapeHtml(r.duration)} | <strong>Airlines listed:</strong> ${escapeHtml(r.airlines.join(", "))}</p>
           <section>
@@ -1575,7 +1580,7 @@ function buildAllRoutes(): PrerenderRoute[] {
   // 4. Hotels Hub (/hotels) + 6 Hotel Guides (/hotels/:id)
   const hotelsHubTitle = "International Hotel Guides for Bangladeshi Travelers (2026) | URAL";
   const hotelsHubDesc =
-    "Find top-rated budget & family hotels in Kathmandu, Bangkok, Kuala Lumpur, and Dubai. Neighborhood safety, halal dining, and BDT payment guides.";
+    "Compare hotel neighborhoods, example stays and booking guidance in Kathmandu, Bangkok, Kuala Lumpur, Dubai, Singapore and the Maldives.";
   const hotelsFaq = getFaqSchemaForPage("hotels", undefined, true, `${BASE_URL}/hotels`);
   routes.push({
     routePath: "/hotels",
@@ -1583,6 +1588,8 @@ function buildAllRoutes(): PrerenderRoute[] {
     title: hotelsHubTitle,
     description: hotelsHubDesc,
     imageUrl: defaultOgImage,
+    lcpImageUrl: "/assets/images/hotels_london_marylebone_exterior_20261101-1200.webp",
+    lcpImageSizes: "(min-width: 1024px) 45vw, 100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Hotel Neighborhoods", url: `${BASE_URL}/hotels` },
@@ -1610,9 +1617,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         ? "Best Hotels in Kathmandu for Bangladeshi Travelers (2026) | URAL"
         : `Top Rated Hotels in ${h.city} | URAL`;
     const description =
-      h.id === "kathmandu-hotels"
-        ? "Where to stay in Kathmandu: Thamel for budget travelers from BDT 1,500/night, Lazimpat for comfort, and Boudha for a quieter trip. Full neighborhood guide."
-        : `Compare clean rooms, recommended zones, and hotels in ${h.city} starting from cheap BDT tourist rates.`;
+      `Compare neighborhoods, hotel styles and planning budgets in ${h.city}. Check your dates, room terms and current availability before booking.`;
     const extraNodes: Record<string, unknown>[] = [];
     if (h.schemaMarkup?.code) {
       try {
@@ -1630,6 +1635,8 @@ function buildAllRoutes(): PrerenderRoute[] {
       title,
       description,
       imageUrl: defaultOgImage,
+      lcpImageUrl: "/assets/images/hotel_guide_guest_room_20261101-1200.webp",
+      lcpImageSizes: "(min-width: 1024px) 34vw, 100vw",
       breadcrumbs: [
         { name: "Home", url: `${BASE_URL}/` },
         { name: "Hotel Neighborhoods", url: `${BASE_URL}/hotels` },
@@ -1638,7 +1645,8 @@ function buildAllRoutes(): PrerenderRoute[] {
       extraGraphNodes: extraNodes,
       bodyHtml: `
         <article>
-          <h1>${escapeHtml(title)}</h1>
+          <h1>Where to Stay in ${escapeHtml(h.city)}: Best Areas &amp; Hotels</h1>
+          <p>${escapeHtml(description)}</p>
           <p>${escapeHtml(h.quickAnswer || h.description || description)}</p>
           <h2>Neighborhoods to compare in ${escapeHtml(h.city)}</h2>
           <ul>
@@ -1789,7 +1797,7 @@ function buildAllRoutes(): PrerenderRoute[] {
   // 5. Visa Hub (/visa) + 6 Visa Guides (/visa/:id)
   const visaHubTitle = "Visa Requirements for Bangladeshi Citizens 2026: Guides & Checklists | URAL";
   const visaHubDesc =
-    "Check current tourist visa guidance for Bangladeshi citizens, including Nepal entry rules, Thailand's official e-Visa process, Malaysia eVisa, and Dubai visas. Verify live government fees; bank/payment and optional agency charges are separate.";
+    "Review visa routes, document checklists, application steps and fee guidance for Bangladeshi travelers. Verify current rules with official authorities.";
   const visaFaq = getFaqSchemaForPage("visa", undefined, true, `${BASE_URL}/visa`);
   routes.push({
     routePath: "/visa",
@@ -1797,6 +1805,8 @@ function buildAllRoutes(): PrerenderRoute[] {
     title: visaHubTitle,
     description: visaHubDesc,
     imageUrl: defaultOgImage,
+    lcpImageUrl: "/assets/images/visa_changi_immigration_20261101-1200.webp",
+    lcpImageSizes: "(min-width: 1024px) 45vw, 100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Visa Guides", url: `${BASE_URL}/visa` },
@@ -1824,11 +1834,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         ? "Nepal Visa for Bangladeshi Citizens 2026: Free Visa on Arrival Guide | URAL"
         : `${v.country} Visa for Bangladeshi Travelers 2026 | URAL`;
     const description =
-      v.id === "nepal-visa"
-        ? "Bangladeshi citizens get a free 30-day Nepal visa on arrival for their first trip each year. Full document checklist, fees for repeat visits, and step-by-step process."
-        : v.id === "thailand-visa"
-          ? "Bangladeshi applicants use Thailand's official e-Visa portal. The Dhaka TR checklist updated November 30, 2022 lists BDT 60,000/person or BDT 120,000/family; verify current rules. Government, bank/payment and optional agency charges are separate."
-          : `Check complete visa requirements, costs in BDT, step-by-step instructions, and checklist for ${v.country} from Dhaka.`;
+      `Review the ${v.country} entry route, required documents and application steps for Bangladeshi travelers. Verify current rules and fees with official sources before applying.`;
     const extraNodes: Record<string, unknown>[] = [];
     if (v.schemaMarkup?.code) {
       try {
@@ -1846,6 +1852,8 @@ function buildAllRoutes(): PrerenderRoute[] {
       title,
       description,
       imageUrl: defaultOgImage,
+      lcpImageUrl: "/assets/images/visa_changi_immigration_20261101-1200.webp",
+      lcpImageSizes: "(min-width: 1024px) 34vw, 100vw",
       breadcrumbs: [
         { name: "Home", url: `${BASE_URL}/` },
         { name: "Visa Guides", url: `${BASE_URL}/visa` },
@@ -1854,7 +1862,8 @@ function buildAllRoutes(): PrerenderRoute[] {
       extraGraphNodes: extraNodes,
       bodyHtml: `
         <article>
-          <h1>${escapeHtml(title)}</h1>
+          <h1>${escapeHtml(v.country)} Visa Requirements for Bangladeshi Citizens</h1>
+          <p>${escapeHtml(description)}</p>
           <p>${escapeHtml(v.quickAnswer || description)}</p>
           <p><strong>Entry route:</strong> ${escapeHtml(v.requirementType)} | <strong>Published fee/entry guidance:</strong> ${escapeHtml(v.costBdt)} | <strong>Indicative processing guidance:</strong> ${escapeHtml(v.processingTime)}</p>
           <p>Comparing this route with the rest of the region? See <a href="/visa-free-countries">which countries a Bangladeshi passport can enter without a prior visa</a>.</p>
@@ -4098,6 +4107,8 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
       title: copy.title,
       description: copy.description,
       imageUrl: en.imageUrl,
+      lcpImageUrl: en.lcpImageUrl,
+      lcpImageSizes: en.lcpImageSizes,
       breadcrumbs,
       extraGraphNodes,
       bodyHtml: buildBengaliBody(englishPath, copy.h1, copy.description),

@@ -1704,7 +1704,7 @@ export default function App() {
 
     if (isLanding) {
       seoTitle = `Flights from Dhaka: Compare Fares, Routes & Airlines (${year}) | URAL`;
-      seoDescription = "Compare cheap international flights from Hazrat Shahjalal International Airport (DAC) to Nepal, Thailand, Malaysia, and Dubai. View flight duration, direct airlines, and BDT fares.";
+      seoDescription = "Compare nonstop and connecting flights from Dhaka, with typical fares, journey times and airline options for popular international routes.";
       const collectionNode = collectionPageSchema({
         url: hubUrl,
         name: seoTitle,
@@ -1729,9 +1729,7 @@ export default function App() {
       seoTitle = activeRoute.id === "dhaka-kathmandu"
         ? `Dhaka to Kathmandu Flight Guide 2026: Price, Time & Visa | URAL`
         : `Flights from Dhaka to ${activeRoute.to.split(" (")[0]} (${activeRoute.country}) ${year} | URAL`;
-      seoDescription = activeRoute.id === "dhaka-kathmandu"
-        ? `Direct Dhaka to Kathmandu flights take 1h30m on Biman Bangladesh or Himalaya Airlines, from BDT 28,000 roundtrip. Bangladeshis get a free visa on arrival.`
-        : `Compare flights from Dhaka to ${activeRoute.to.split(" (")[0]}. Check flight duration, direct airlines, and BDT fares.`;
+      seoDescription = `Compare flights from Dhaka to ${activeRoute.to.split(" (")[0]}. Check typical flight times, airlines and BDT fare guidance before booking.`;
 
       let schemaObj: any = undefined;
       try {
@@ -1757,7 +1755,7 @@ export default function App() {
 
     if (isLanding) {
       seoTitle = `International Hotel Guides for Bangladeshi Travelers (2026) | URAL`;
-      seoDescription = "Find top-rated budget & family hotels in Kathmandu, Bangkok, Kuala Lumpur, and Dubai. Neighborhood safety, halal dining, and BDT payment guides.";
+      seoDescription = "Compare hotel areas, example stays and booking guidance in Kathmandu, Bangkok, Kuala Lumpur, Dubai, Singapore and the Maldives.";
       const collectionNode = collectionPageSchema({
         url: hubUrl,
         name: seoTitle,
@@ -1782,9 +1780,7 @@ export default function App() {
       seoTitle = activeHotel.id === "kathmandu-hotels"
         ? `Best Hotels in Kathmandu for Bangladeshi Travelers (2026) | URAL`
         : `Top Rated Hotels in ${activeHotel.city} | URAL`;
-      seoDescription = activeHotel.id === "kathmandu-hotels"
-        ? `Where to stay in Kathmandu: Thamel for budget travelers from BDT 1,500/night, Lazimpat for comfort, and Boudha for a quieter trip. Full neighborhood guide.`
-        : `Compare clean rooms, recommended zones, and hotels in ${activeHotel.city} starting from cheap BDT tourist rates.`;
+      seoDescription = `Compare neighborhoods, hotel styles and planning budgets in ${activeHotel.city}. Check room terms and current availability before booking.`;
 
       let schemaObj: any = undefined;
       try {
@@ -1812,7 +1808,7 @@ export default function App() {
       seoTitle = `Visa Requirements for Bangladeshi Citizens 2026: Guides & Checklists | URAL`;
       seoDescription = isBn
         ? "বাংলাদেশি নাগরিকদের বর্তমান visa guidance দেখুন। Thailand e-Visa-এর সরকারি fee, bank/payment charge ও optional agency fee আলাদা; official source-এ যাচাই করুন।"
-        : "Check current tourist visa guidance for Bangladeshi citizens, including Nepal entry rules, Thailand's official e-Visa process, Malaysia eVisa, and Dubai visas. Verify live government fees; bank/payment and optional agency charges are separate.";
+        : "Review visa routes, document checklists, application steps and fee guidance for Bangladeshi travelers. Verify current rules with official authorities.";
       const collectionNode = collectionPageSchema({
         url: hubUrl,
         name: seoTitle,
@@ -1837,13 +1833,9 @@ export default function App() {
       seoTitle = activeVisa.id === "nepal-visa"
         ? `Nepal Visa for Bangladeshi Citizens 2026: Free Visa on Arrival Guide | URAL`
         : `${activeVisa.country} Visa for Bangladeshi Travelers 2026 | URAL`;
-      seoDescription = activeVisa.id === "nepal-visa"
-        ? `Bangladeshi citizens get a free 30-day Nepal visa on arrival for their first trip each year. Full document checklist, fees for repeat visits, and step-by-step process.`
-        : activeVisa.id === "thailand-visa"
-          ? isBn
-            ? "Thailand e-Visa-এর জন্য official portal ব্যবহার করুন। Dhaka TR checklist (হালনাগাদ ৩০ নভেম্বর ২০২২) জনপ্রতি BDT 60,000/পরিবারে BDT 120,000 উল্লেখ করে—বর্তমান requirement যাচাই করুন। সরকারি fee, bank/payment ও optional agency fee আলাদা।"
-            : "Bangladeshi applicants use Thailand's official e-Visa portal. The Dhaka TR checklist updated November 30, 2022 lists BDT 60,000/person or BDT 120,000/family; verify current rules. Government, bank/payment and optional agency charges are separate."
-          : `Check complete visa requirements, costs in BDT, step-by-step instructions, and checklist for ${activeVisa.country} from Dhaka.`;
+      seoDescription = isBn
+        ? `${activeVisa.country}-এর প্রবেশ-নিয়ম, প্রয়োজনীয় নথি ও আবেদন ধাপ দেখুন। আবেদন করার আগে সরকারি সূত্রে বর্তমান নিয়ম ও ফি যাচাই করুন।`
+        : `Review the ${activeVisa.country} entry route, required documents and application steps for Bangladeshi travelers. Verify current rules and fees with official sources before applying.`;
 
       let schemaObj: any = undefined;
       try {

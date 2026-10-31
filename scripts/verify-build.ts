@@ -714,6 +714,38 @@ function imgsMissingAlt(html: string): string[] {
       : `${preloadProblems.length} image-preload problem(s): ` + preloadProblems.slice(0, 3).join("; ")
   );
 
+  const editorialHeroContracts = [
+    ["flights.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "International Flights from Dhaka"],
+    ["bn/flights.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "ঢাকা থেকে ফ্লাইট"],
+    ["hotels.html", "hotels_london_marylebone_exterior_20261101-1200.avif", "Hotel &amp; Stay Guides"],
+    ["bn/hotels.html", "hotels_london_marylebone_exterior_20261101-1200.avif", "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড"],
+    ["visa.html", "visa_changi_immigration_20261101-1200.avif", "Visa Guides &amp; Travel Document Checklists"],
+    ["bn/visa.html", "visa_changi_immigration_20261101-1200.avif", "বাংলাদেশি নাগরিকদের জন্য ভিসা গাইড"],
+    ["flights/dhaka-kathmandu.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "Flights from Dhaka"],
+    ["bn/flights/dhaka-kathmandu.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "ঢাকা → কাঠমান্ডু"],
+    ["hotels/kathmandu-hotels.html", "hotel_guide_guest_room_20261101-1200.avif", "Where to Stay in Kathmandu"],
+    ["bn/hotels/kathmandu-hotels.html", "hotel_guide_guest_room_20261101-1200.avif", "কাঠমান্ডু-এ কোথায় থাকবেন"],
+    ["visa/nepal-visa.html", "visa_changi_immigration_20261101-1200.avif", "Nepal Visa Requirements"],
+    ["bn/visa/nepal-visa.html", "visa_changi_immigration_20261101-1200.avif", "নেপাল ভিসা (বাংলাদেশি পাসপোর্ট)"],
+  ] as const;
+  const brokenEditorialHeroes = editorialHeroContracts.flatMap(([relativePath, imageStem, h1Text]) => {
+    const file = path.join(DIST_DIR, relativePath);
+    if (!fs.existsSync(file)) return [`${relativePath}: missing rendered route`];
+    const html = fs.readFileSync(file, "utf8");
+    const h1s = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)];
+    const preload = html.match(/<link rel="preload" as="image"[^>]*href="([^"]+)"[^>]*>/i)?.[1] ?? "";
+    const problems: string[] = [];
+    if (h1s.length !== 1 || !h1s[0]?.[1].includes(h1Text)) problems.push(`${relativePath}: expected one H1 containing ${h1Text}`);
+    if (!preload.includes(imageStem)) problems.push(`${relativePath}: expected hero preload ${imageStem}`);
+    return problems;
+  });
+  check(
+    brokenEditorialHeroes.length === 0,
+    brokenEditorialHeroes.length === 0
+      ? `all 12 English/Bengali category and detail hero pages have the correct single H1 and LCP image`
+      : `${brokenEditorialHeroes.length} editorial hero regression(s): ` + brokenEditorialHeroes.slice(0, 4).join("; ")
+  );
+
   // no raw getResponsiveImageProps spread left in src/ — every photo must go
   // through <ResponsiveImage>, or the next feature silently ships WebP-only
   const srcFiles = collectSourceFiles(path.join(ROOT_DIR, "src"));
