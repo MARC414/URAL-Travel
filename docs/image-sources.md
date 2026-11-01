@@ -20,3 +20,16 @@ This register records the source and attribution obligations for the site's loca
 | `destination_new_york_hero_20261101` | New York City destination guide | AI-generated for URAL Travel; Statue of Liberty and Lower Manhattan scene | No third-party photo attribution required. |
 
 The Commons credits and license are also linked in each hero's visible photo credit. The hotel photos are credited to Pexels in the UI; Pexels attribution is optional, and the source links are retained here for provenance. Re-check the source page before replacing or re-licensing any source image.
+
+## Video assets
+
+The Hajj/Umrah reel in `docs/03-social/video/` is built entirely from AI-generated stills generated for URAL Travel. There are no third-party photo or music licences to clear — the ambient bed is synthesised. Stills used, in shot order, are listed in that folder's README.
+
+| Asset | Placement | Source and credit | License |
+| --- | --- | --- | --- |
+| `img1_kaaba` | Reel 0.0–5.7s | AI-generated for URAL Travel; Kaaba at blue hour | No third-party attribution required. |
+| `img2_dua` | Reel 4.9–12.0s | AI-generated for URAL Travel; hands raised in dua | No third-party attribution required. |
+| `img5_plan` | Reel 11.2–16.2s | AI-generated for URAL Travel; passport and taka planning desk | No third-party attribution required. |
+| `img4_tawaf` | Reel 15.4–18.9s | AI-generated for URAL Travel; overhead tawaf | No third-party attribution required. |
+| `img3_masjid` | Reel 18.1–22.5s | AI-generated for URAL Travel; Masjid an-Nabawi at golden hour | No third-party attribution required. |
+| `img6_dawn` | Reel 21.7–28.9s | AI-generated for URAL Travel; Makkah skyline at dawn | No third-party attribution required. |

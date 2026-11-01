@@ -26,3 +26,11 @@ src/data/scheduledBlogSeo.generated.ts
 *.log
 .env*
 !.env.example
+
+# Video render scratch: intermediate stills, frames, font conversions and the
+# full-bitrate master. The share-ready encode lives in docs/03-social/video/.
+/.video/work/
+/.video/check/
+/.video/master/
+/.video/out/
+__pycache__/
