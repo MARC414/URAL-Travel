@@ -4832,6 +4832,14 @@ const bnAppShellHtml = renderAppAtPath("/bn/");
 const appSource = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
 const topBarSearchSource = read(path.join(ROOT_DIR, "src", "components", "TopBarSiteSearch.tsx")) ?? "";
 const globalSearchSource = read(path.join(ROOT_DIR, "src", "components", "GlobalSiteSearch.tsx")) ?? "";
+check(
+  appSource.includes('const BRAND_TAGLINE = "A Travel Intelligence Ecosystem";') &&
+    !appSource.includes("Travel Intelligence System · Beyond a Typical Agency") &&
+    !appSource.includes("ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়") &&
+    enAppShellHtml.includes("A Travel Intelligence Ecosystem") &&
+    bnAppShellHtml.includes("A Travel Intelligence Ecosystem"),
+  "the requested brand slogan replaces the previous tagline in both locales"
+);
 const topBarSearchEnHtml = renderToStaticMarkup(React.createElement(TopBarSiteSearch, {
   isBn: false, initialQuery: "", navigateTo: () => {}, onOpenSearch: () => {}, onSubmitQuery: async () => false, inputRef: { current: null },
 }));

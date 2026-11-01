@@ -122,6 +122,8 @@ import {
   getVisibleBlogHowTos,
 } from "./utils/blogStructuredData";
 
+const BRAND_TAGLINE = "A Travel Intelligence Ecosystem";
+
 const ENGLISH_FEATURED_GROWTH_TOPICS = [
   {
     id: "trend-umrah-hajj",
@@ -2814,9 +2816,7 @@ export default function App() {
                 className="h-7 sm:h-8 w-auto transition-opacity duration-200 group-hover:opacity-95"
               />
               <span className="text-[10px] sm:text-[10px] font-medium tracking-wide text-slate-300/90 group-hover:text-[#F6B73C] transition-colors leading-none mt-1 whitespace-nowrap">
-                {isBn
-                  ? "ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়"
-                  : "Travel Intelligence System · Beyond a Typical Agency"}
+                {BRAND_TAGLINE}
               </span>
             </a>
 
@@ -3454,9 +3454,7 @@ export default function App() {
                       className="h-6 w-auto"
                     />
                     <span className="text-[10px] text-slate-300 block">
-                      {isBn
-                        ? "ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়"
-                        : "Travel Intelligence System · Beyond a Typical Agency"}
+                      {BRAND_TAGLINE}
                     </span>
                   </div>
                   <button
@@ -5338,9 +5336,7 @@ export default function App() {
                   />
                 </a>
                 <p className="text-[11px] font-semibold text-[#F6B73C] tracking-wide">
-                  {isBn
-                    ? "ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়"
-                    : "Travel Intelligence System · Beyond a Typical Agency"}
+                  {BRAND_TAGLINE}
                 </p>
               </div>
 
