@@ -77,6 +77,9 @@ import { TOOL_PAGE_SEO, TOOL_SLUGS } from "../src/utils/toolRoutes";
 import { buildResponsiveSrcSet, getResponsiveImageDimensions } from "../src/utils/imageAssets";
 import { getRelatedBlogPosts } from "../src/utils/blogLinks";
 import { sortBlogsNewestFirst } from "../src/utils/blogOrdering";
+import { SITE_SEARCH_ALIASES } from "../src/data/siteSearchAliases";
+import type { SiteSearchEntry, SiteSearchKind } from "../src/utils/siteSearch";
+import { HOTEL_GUIDE_DESTINATIONS } from "../src/data/hotelGuideDestinations";
 import { TIQETS_TOP_ATTRACTIONS, TIQETS_CITY_STACKS } from "../src/data/tiqetsAttractionsData";
 import {
   CONTENT_UPDATED,
@@ -1105,11 +1108,42 @@ function renderFlightsHubBody(title: string, description: string, faqSchema: Ret
   </article>`;
 }
 
+function renderResponsiveSearchImage(src: string, alt: string, sizes: string, prioritize = false): string {
+  const dimensions = getResponsiveImageDimensions(src);
+  const loading = prioritize ? "eager" : "lazy";
+  const fetchPriority = prioritize ? ' fetchpriority="high"' : "";
+  return `<picture><source type="image/avif" srcset="${escapeHtml(buildResponsiveSrcSet(dimensions.src, "avif"))}" sizes="${escapeHtml(sizes)}"><source type="image/webp" srcset="${escapeHtml(buildResponsiveSrcSet(dimensions.src, "webp"))}" sizes="${escapeHtml(sizes)}"><img src="${escapeHtml(dimensions.src)}" width="${dimensions.width}" height="${dimensions.height}" alt="${escapeHtml(alt)}" loading="${loading}" decoding="async"${fetchPriority} class="h-full w-full object-cover"></picture>`;
+}
+
+function renderDestinationDirectoryCards(locale: "en" | "bn"): string {
+  const guides = locale === "bn" ? getLocalizedDestinations("bn") : DESTINATIONS_DATA;
+  const localePrefix = locale === "bn" ? "/bn" : "";
+  return `<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">${guides.map((guide, index) => {
+    const image = DESTINATION_HERO_IMAGES[guide.id];
+    if (!image) return "";
+    const path = `${localePrefix}/destinations/${guide.id}`;
+    const title = guide.title || guide.country;
+    const alt = locale === "bn" ? image.altBn : image.altEn;
+    return `<a href="${escapeHtml(path)}" class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"><div class="relative aspect-[16/9] overflow-hidden bg-slate-100">${renderResponsiveSearchImage(image.src, alt, "(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw", index === 0)}<span class="absolute left-3 top-3 rounded-full border border-white/70 bg-white/95 px-2.5 py-1 text-xs font-semibold text-brand-navy">${escapeHtml(guide.country)}</span></div><div class="space-y-2 p-4 sm:p-5"><h2 class="font-serif text-xl font-bold text-brand-navy">${escapeHtml(title)}</h2><p class="line-clamp-3 text-sm leading-relaxed text-slate-600">${escapeHtml(guide.quickAnswer)}</p><span class="inline-flex items-center gap-2 pt-1 text-sm font-bold text-brand-navy">${locale === "bn" ? "গাইড খুলুন" : "Open destination guide"}</span></div></a>`;
+  }).join("")}</div>`;
+}
+
+function renderHotelGuideDirectoryCards(locale: "en" | "bn"): string {
+  const guides = locale === "bn" ? getLocalizedHotels("bn") : HOTELS_DATA;
+  const localePrefix = locale === "bn" ? "/bn" : "";
+  return `<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">${guides.map((guide) => {
+    const destinationId = HOTEL_GUIDE_DESTINATIONS[guide.id];
+    const image = destinationId ? DESTINATION_HERO_IMAGES[destinationId] : undefined;
+    if (!image) return "";
+    const path = `${localePrefix}/hotels/${guide.id}`;
+    const alt = locale === "bn" ? image.altBn : image.altEn;
+    const title = locale === "bn" ? `${guide.city}-এ কোথায় থাকবেন` : `Where to stay in ${guide.city}`;
+    const areaCount = locale === "bn" ? `${bnDigits(guide.neighborhoods.length)}টি এলাকা তুলনা` : `Compare ${guide.neighborhoods.length} areas`;
+    return `<a href="${escapeHtml(path)}" class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"><div class="relative aspect-[16/9] overflow-hidden bg-slate-100">${renderResponsiveSearchImage(image.src, alt, "(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw")}<span class="absolute left-3 top-3 rounded-full border border-white/70 bg-white/95 px-2.5 py-1 text-xs font-semibold text-brand-navy">${escapeHtml(guide.country)}</span></div><div class="space-y-2 p-4 sm:p-5"><h2 class="font-serif text-lg font-bold text-brand-navy">${escapeHtml(title)}</h2><p class="text-xs font-semibold text-slate-500">${locale === "bn" ? "এলাকা গাইড" : "Neighborhood guide"}</p><p class="line-clamp-3 text-sm leading-relaxed text-slate-600">${escapeHtml(guide.quickAnswer)}</p><span class="text-xs font-bold text-brand-navy">${areaCount}</span></div></a>`;
+  }).join("")}</div>`;
+}
+
 function renderHotelsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
-  const directory = HOTELS_DATA.map(
-    (guide) =>
-      `<li><a href="/hotels/${escapeHtml(guide.id)}">Where to stay in ${escapeHtml(guide.city)}, ${escapeHtml(guide.country)}</a> — compare ${guide.neighborhoods.map((area) => escapeHtml(area.name)).join(", ")}.</li>`
-  ).join("");
   const guideDetails = HOTELS_DATA.map(
     (guide) => `
       <section>
@@ -1125,7 +1159,7 @@ function renderHotelsHubBody(title: string, description: string, faqSchema: Retu
     <h1>Hotel Area Guides for Trips from Bangladesh</h1>
     <p>${escapeHtml(description)}</p>
     <p>Choosing an area depends on where you plan to go, how you expect to travel and what kind of stay suits your party. Use the linked city guides to compare neighborhood trade-offs and practical booking checks. We do not publish static nightly hotel rates: availability and checkout totals depend on exact dates, occupancy, room type, taxes, service charges, meals, currency and cancellation terms.</p>
-    <section><h2>Hotel neighborhood guides by destination</h2><ul>${directory}</ul></section>
+    <section><h2>Hotel neighborhood guides by destination</h2>${renderHotelGuideDirectoryCards("en")}</section>
     <section><h2>Compare where to stay in each destination</h2>${guideDetails}</section>
     <section><h2>Hotel booking checklist for Bangladesh-based travelers</h2>
       <p>Before paying, confirm the property's full address, check-in and check-out arrangements, room occupancy, bed configuration, included meals and refund conditions. Compare the full checkout amount for the same dates, guest count and room type; do not rely on a headline nightly rate alone.</p>
@@ -1164,10 +1198,6 @@ function renderVisaHubBody(title: string, description: string, faqSchema: Return
 }
 
 function renderDestinationsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
-  const directory = DESTINATIONS_DATA.map(
-    (guide) =>
-      `<li><a href="/destinations/${escapeHtml(guide.id)}">${escapeHtml(guide.country)} itinerary from Bangladesh</a> — best-time note: ${escapeHtml(guide.bestTimeToVisit)}; local budget reference: ${escapeHtml(guide.budgetBdt)}.</li>`
-  ).join("");
   const guideDetails = DESTINATIONS_DATA.map(
     (guide) => `
       <section>
@@ -1177,10 +1207,10 @@ function renderDestinationsHubBody(title: string, description: string, faqSchema
   ).join("");
 
   return `<article>
-    <h1>Direct flights from Dhaka</h1>
+    <h1>Destination Guides from Bangladesh</h1>
     <p>${escapeHtml(description)}</p>
     <p>Use these destination guides to turn a broad idea into a practical trip plan from Bangladesh. Each linked page combines a day-by-day outline with seasonal context, local transport notes and budget context where available, so you can compare the pace and style of different destinations before deciding where to go. The outlines are starting points rather than fixed tours: adjust them for flight arrival times, family mobility, prayer and meal needs, local opening days and weather. Confirm entry requirements separately, then recheck transport schedules, attraction access and prices close to travel.</p>
-    <section><h2>Destination itineraries for Bangladeshi travelers</h2><ul>${directory}</ul></section>
+    <section><h2>Destination itineraries for Bangladeshi travelers</h2>${renderDestinationDirectoryCards("en")}</section>
     <section><h2>Compare sample itineraries and local planning notes</h2>${guideDetails}</section>
     <section><h2>How to adapt an itinerary to your trip</h2>
       <p>Begin by setting the number of nights and identifying any fixed arrival or departure times. Avoid placing a long intercity transfer and several time-sensitive attractions on the same day. Check the actual location of each hotel against the itinerary, and leave room for traffic, rest and unexpected weather. For a multi-city trip, compare the time and total cost of road, rail and air connections rather than assuming the fastest option is the most convenient.</p>
@@ -1887,6 +1917,8 @@ function buildAllRoutes(): PrerenderRoute[] {
     title: destHubTitle,
     description: destHubDesc,
     imageUrl: defaultOgImage,
+    lcpImageUrl: DESTINATION_HERO_IMAGES[DESTINATIONS_DATA[0].id].src,
+    lcpImageSizes: "(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Destinations", url: `${BASE_URL}/destinations` },
@@ -2901,12 +2933,6 @@ function bnDestinationsHubBody(): string {
   const guides = getLocalizedDestinations("bn").filter(
     (guide) => getBengaliRouteSeo(`/destinations/${guide.id}`) !== null
   );
-  const directory = guides
-    .map(
-      (guide) =>
-        `<li><a href="/bn/destinations/${escapeHtml(guide.id)}">${escapeHtml(guide.country)} ভ্রমণ গাইড</a> — যাওয়ার সেরা সময়: ${escapeHtml(guide.bestTimeToVisit)}; আনুমানিক স্থানীয় বাজেট: ${escapeHtml(guide.budgetBdt)}।</li>`
-    )
-    .join("");
   const guideDetails = guides
     .map(
       (guide) => `
@@ -2921,7 +2947,7 @@ function bnDestinationsHubBody(): string {
   return `
     <p>নিচের গাইডগুলো একটা সাধারণ ইচ্ছাকে কাজের ভ্রমণ পরিকল্পনায় বদলে দিতে সাহায্য করবে। প্রতিটি পাতায় দিনভিত্তিক রুট, যাওয়ার উপযুক্ত সময়, স্থানীয় যাতায়াতের বিকল্প আর যেখানে তথ্য আছে সেখানে বাজেট-সংক্রান্ত প্রসঙ্গ দেওয়া হয়েছে — তাই কোথায় যাবেন ঠিক করার আগেই কোন যাত্রার গতি ও ধরন আপনার সঙ্গে মানাবে, সেটা মিলিয়ে নিতে পারবেন।</p>
     <p>এগুলো ধরা-বাঁধা ট্যুর নয়, শুরুর খসড়া। ফ্লাইট কখন পৌঁছাবে, পরিবারের কারও হাঁটার সমস্যা আছে কি না, নামাজ ও খাবারের সময়, স্থানীয় বন্ধের দিন আর আবহাওয়া — এসব মিলিয়ে নিজের মতো বদলে নিন। ভিসা ও প্রবেশের নিয়ম আলাদাভাবে যাচাই করুন, আর রওনা হওয়ার আগে যাতায়াতের সময়সূচি, টিকিটের দাম ও খোলা-বন্ধের সময় আবার মিলিয়ে নিন।</p>
-    <section><h2>বাংলাদেশি ভ্রমণকারীদের জন্য গন্তব্য গাইড</h2><ul>${directory}</ul></section>
+    <section><h2>বাংলাদেশি ভ্রমণকারীদের জন্য গন্তব্য গাইড</h2>${renderDestinationDirectoryCards("bn")}</section>
     <section><h2>কোন রুট কেমন — এক নজরে তুলনা</h2>${guideDetails}</section>
     <section><h2>রুটটা নিজের মতো সাজিয়ে নেওয়ার উপায়</h2>
       <p>শুরু করুন রাতের সংখ্যা আর ফ্লাইটের নির্দিষ্ট সময় দিয়ে। একই দিনে দীর্ঘ আন্তঃনগর যাত্রা আর সময়-বাঁধা একাধিক দর্শনীয় স্থান একসাথে রাখবেন না। প্রতিটি হোটেলের আসল অবস্থান রুটের সঙ্গে মিলিয়ে দেখুন, আর যানজট, বিশ্রাম ও খারাপ আবহাওয়ার জন্য বাড়তি সময় রেখে দিন। একাধিক শহরে গেলে সড়ক, রেল ও বিমান — তিনটিরই সময় ও মোট খরচ তুলনা করুন; সবচেয়ে দ্রুত বিকল্পটাই যে সবচেয়ে সুবিধাজনক, তা ধরে নেবেন না।</p>
@@ -3158,10 +3184,7 @@ function buildBengaliBody(
 
     } else {
       parts.push(
-        bnDirectory(
-          "সব হোটেল গাইড",
-          englishPathsIn("/hotels", HOTELS_DATA.map((hotel) => hotel.id))
-        )
+        `<section><h2>গন্তব্য অনুযায়ী হোটেল এলাকা গাইড</h2>${renderHotelGuideDirectoryCards("bn")}</section>`
       );
     }
     return `<article>${parts.join("")}</article>`;
@@ -4637,6 +4660,94 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
   }
 }
 
+function decodeSearchEntities(value: string): string {
+  const named: Record<string, string> = {
+    amp: "&", apos: "'", quot: '"', nbsp: " ", ldquo: '"', rdquo: '"',
+    lsquo: "'", rsquo: "'", ndash: "–", mdash: "—", hellip: "…", lt: "<", gt: ">",
+  };
+  return value
+    .replace(/&([a-z]+);/gi, (entity, name: string) => named[name.toLowerCase()] ?? entity)
+    .replace(/&#(x[\da-f]+|\d+);/gi, (entity, code: string) => {
+      const value = code[0].toLowerCase() === "x" ? Number.parseInt(code.slice(1), 16) : Number.parseInt(code, 10);
+      return Number.isFinite(value) && value > 0 && value <= 0x10ffff
+        ? String.fromCodePoint(value)
+        : entity;
+    });
+}
+
+function stripHtmlForSearch(value: string): string {
+  const semanticSections = [
+    ...[...value.matchAll(/<h[1-3]\b[^>]*>([\s\S]*?)<\/h[1-3]>/gi)].slice(0, 12).map((match) => match[1]),
+    ...[...value.matchAll(/<summary\b[^>]*>([\s\S]*?)<\/summary>/gi)].slice(0, 10).map((match) => match[1]),
+    ...[...value.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)].slice(0, 4).map((match) => match[1]),
+  ].join(" ");
+  return decodeSearchEntities(
+    semanticSections
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+  ).trim().slice(0, 1200);
+}
+
+function searchKindForPath(routePath: string): SiteSearchKind {
+  const pathOnly = toEnglishBasePath(routePath);
+  if (pathOnly.startsWith("/destinations/")) return "destination";
+  if (pathOnly === "/destinations") return "hub";
+  if (pathOnly.startsWith("/hotels/")) return "hotel";
+  if (pathOnly === "/hotels") return "hub";
+  if (pathOnly.startsWith("/flights/")) return "flight";
+  if (pathOnly === "/flights") return "hub";
+  if (pathOnly.startsWith("/visa/") || pathOnly === "/visa-free-countries") return "visa";
+  if (pathOnly === "/visa") return "hub";
+  if (pathOnly.startsWith("/costs/")) return "cost";
+  if (pathOnly === "/costs") return "hub";
+  if (pathOnly.startsWith("/blog/")) return "article";
+  if (pathOnly.startsWith("/tools/")) return "tool";
+  if (pathOnly === "/tools") return "hub";
+  if (["/", "/umrah", "/banking", "/experiences", "/attractions"].includes(pathOnly)) return "hub";
+  return "other";
+}
+
+function generateSiteSearchIndex(enRoutes: PrerenderRoute[], bnRoutes: PrerenderRoute[]) {
+  const bnByEnglishPath = new Map(
+    bnRoutes.map((route) => [toEnglishBasePath(route.routePath), route])
+  );
+  const entries: SiteSearchEntry[] = enRoutes.map((en) => {
+    const englishPath = toEnglishBasePath(en.routePath);
+    const bn = bnByEnglishPath.get(englishPath);
+    const aliases = SITE_SEARCH_ALIASES[englishPath];
+    const bnPath = bn?.routePath;
+    const searchText = [
+      en.title,
+      en.description,
+      stripHtmlForSearch(en.bodyHtml),
+      ...(aliases?.en ?? []),
+      ...(aliases?.bn ?? []),
+      ...(bn ? [bn.title, bn.description, stripHtmlForSearch(bn.bodyHtml)] : []),
+    ].filter(Boolean).join(" ");
+    return {
+      id: englishPath,
+      kind: searchKindForPath(englishPath),
+      pathEn: en.routePath,
+      ...(bnPath ? { pathBn: bnPath } : {}),
+      titleEn: stripBrandSuffix(en.title),
+      ...(bn ? { titleBn: stripBrandSuffix(bn.title) } : {}),
+      summaryEn: en.description,
+      ...(bn ? { summaryBn: bn.description } : {}),
+      searchText,
+    };
+  });
+
+  fs.mkdirSync(DIST_DIR, { recursive: true });
+  fs.writeFileSync(
+    path.join(DIST_DIR, "site-search-index.json"),
+    JSON.stringify({ version: 1, entries }),
+    "utf8"
+  );
+  console.log(`[Site search] Generated a bilingual index for ${entries.length} existing pages.`);
+}
+
 async function main() {
   copyStaticSeoImages();
   const enRoutes = buildAllRoutes();
@@ -4669,6 +4780,7 @@ async function main() {
   addBengaliLinkSections(bnRoutes, enByPath);
   applySharedSeoCopy(enRoutes, "en");
   applySharedSeoCopy(bnRoutes, "bn");
+  generateSiteSearchIndex(enRoutes, bnRoutes);
   warnIfContentDateStale();
   generateSitemaps(routes);
   // Notify IndexNow (Bing, Yandex, Seznam, Naver) about all canonical URLs so

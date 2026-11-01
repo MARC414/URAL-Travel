@@ -12,6 +12,8 @@ import { AFFILIATE_LINKS } from "../components/AffiliatePartners";
 import { getHotelGuideAffiliatePlacement } from "../utils/affiliatePlacement";
 
 import { EditorialPageHero } from "../components/EditorialPageHero";
+import { ResponsiveImage } from "../components/ResponsiveImage";
+import { getHotelGuideDestinationImage } from "../data/hotelGuideDestinations";
 
 
 
@@ -21,7 +23,7 @@ type RouteViewProps = { context: Record<string, any> };
 
 export default function HotelsRouteView({ context }: RouteViewProps) {
 
-  const { TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryCityWithIata, getCountryFlightId, getCountryVisaId, isBn, lang, localizedHotels, navigateTo, parameterId, section, setAreTpScriptsReady } = context;
+  const { TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryCityWithIata, getCountryFlightId, getCountryVisaId, getLocalizedRouteHref, isBn, lang, localizedHotels, navigateTo, parameterId, section, setAreTpScriptsReady } = context;
 
   const activeHotel = localizedHotels.find((hotel) => hotel.id === parameterId) || localizedHotels[0];
 
@@ -52,35 +54,82 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
               {isBn ? "গন্তব্য অনুযায়ী থাকার গাইড বেছে নিন" : "Choose a hotel guide by destination"}
             </h2>
             <p className="mt-1 text-sm leading-relaxed text-slate-600">
-              {isBn ? "প্রতিটি গাইডে এলাকার বৈশিষ্ট্য, বাছাইকৃত থাকার জায়গা এবং বুকিংয়ের আগে যাচাই করার বিষয় রয়েছে।" : "Each guide covers neighborhood trade-offs, example stays and practical checks to make before booking."}
+              {isBn ? "প্রতিটি গাইডে এলাকার বৈশিষ্ট্য, ভ্রমণ-পরিকল্পনার সঙ্গে মানানসই দিক এবং বুকিংয়ের আগে যাচাই করার বিষয় রয়েছে।" : "Each guide compares neighborhood trade-offs and practical booking checks; it is not a directory of verified individual properties."}
             </p>
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {localizedHotels.map((hotel) => (
-              <a
-                key={hotel.id}
-                href={`/hotels/${hotel.id}`}
-                onClick={(event) => {
-                  event.preventDefault();
-                  navigateTo(`/hotels/${hotel.id}`);
-                }}
-                className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
-              >
-                <div className="mb-3 flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="font-serif text-lg font-bold text-brand-navy">{hotel.city}</h3>
-                    <p className="text-xs font-semibold text-slate-500">{hotel.country}</p>
+            {localizedHotels.map((hotel) => {
+              const image = getHotelGuideDestinationImage(hotel.id);
+              if (!image) return null;
+              return (
+                <a
+                  key={hotel.id}
+                  href={`/hotels/${hotel.id}`}
+                  onClick={(event) => {
+                    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                    event.preventDefault();
+                    navigateTo(`/hotels/${hotel.id}`);
+                  }}
+                  className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+                >
+                  <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
+                    <ResponsiveImage
+                      src={image.src}
+                      alt={isBn ? image.altBn : image.altEn}
+                      sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                    />
+                    <span className="absolute left-3 top-3 rounded-full border border-white/70 bg-white/95 px-2.5 py-1 text-xs font-semibold text-brand-navy shadow-sm">
+                      {hotel.country}
+                    </span>
                   </div>
-                  <ArrowRight size={16} className="mt-1 shrink-0 text-slate-400 transition group-hover:translate-x-1 group-hover:text-brand-navy" aria-hidden="true" />
-                </div>
-                <p className="line-clamp-3 text-sm leading-relaxed text-slate-600">{hotel.quickAnswer}</p>
-                <p className="mt-4 text-xs font-bold text-brand-navy">
-                  {isBn ? `${hotel.neighborhoods.length}টি এলাকার গাইড` : `${hotel.neighborhoods.length} neighborhoods covered`}
-                </p>
+                  <div className="space-y-2 p-4 sm:p-5">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <h3 className="font-serif text-lg font-bold text-brand-navy">
+                          {isBn ? `${hotel.city}-এ কোথায় থাকবেন` : `Where to stay in ${hotel.city}`}
+                        </h3>
+                        <p className="text-xs font-semibold text-slate-500">{isBn ? "এলাকা গাইড" : "Neighborhood guide"}</p>
+                      </div>
+                      <ArrowRight size={16} className="mt-1 shrink-0 text-slate-400 transition group-hover:translate-x-1 group-hover:text-brand-navy" aria-hidden="true" />
+                    </div>
+                    <p className="line-clamp-3 text-sm leading-relaxed text-slate-600">{hotel.quickAnswer}</p>
+                    <p className="pt-1 text-xs font-bold text-brand-navy">
+                      {isBn ? `${hotel.neighborhoods.length}টি এলাকা তুলনা` : `Compare ${hotel.neighborhoods.length} areas`}
+                    </p>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+
+        <nav aria-label={isBn ? "সম্পর্কিত ভ্রমণ পরিকল্পনা" : "Related trip planning"} className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+          <h2 className="font-serif text-lg font-bold text-brand-navy">{isBn ? "ভ্রমণের বাকি ধাপগুলো পরিকল্পনা করুন" : "Plan the rest of your trip"}</h2>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {[
+              { path: "/destinations", en: "Destination guides", bn: "গন্তব্য গাইড" },
+              { path: "/flights", en: "Flight routes", bn: "ফ্লাইট রুট" },
+              { path: "/visa", en: "Visa guides", bn: "ভিসা গাইড" },
+              { path: "/costs", en: "Trip costs", bn: "ভ্রমণ খরচ" },
+            ].map((link) => (
+              <a
+                key={link.path}
+                href={getLocalizedRouteHref ? getLocalizedRouteHref(link.path) : link.path}
+                onClick={(event) => {
+                  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                  event.preventDefault();
+                  navigateTo(link.path);
+                }}
+                className="rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-brand-navy hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+              >
+                {isBn ? link.bn : link.en}
               </a>
             ))}
           </div>
-        </section>
+        </nav>
       </div>
     );
   }

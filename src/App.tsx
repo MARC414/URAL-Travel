@@ -173,6 +173,9 @@ const ContactRouteView = React.lazy(() => import("./routes/ContactRouteView"));
 const AboutRouteView = React.lazy(() => import("./routes/AboutRouteView"));
 const NotFoundRouteView = React.lazy(() => import("./routes/NotFoundRouteView"));
 const VisaFreeCountriesRouteView = React.lazy(() => import("./routes/VisaFreeCountriesRouteView"));
+const GlobalSiteSearch = React.lazy(() =>
+  import("./components/GlobalSiteSearch").then((module) => ({ default: module.GlobalSiteSearch }))
+);
 
 const UmrahLandingPage = React.lazy(() =>
   import("./components/UmrahLandingPage").then((m) => ({ default: m.UmrahLandingPage }))
@@ -1048,6 +1051,8 @@ export default function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [siteSearchOpen, setSiteSearchOpen] = useState(false);
+  const siteSearchTriggerRef = useRef<HTMLButtonElement>(null);
   const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
   const mobileMenuCloseRef = useRef<HTMLButtonElement>(null);
   const mobileDrawerPanelRef = useRef<HTMLDivElement>(null);
@@ -1056,6 +1061,19 @@ export default function App() {
   const toolsMenuRef = useRef<HTMLDivElement>(null);
   const destinationsDisclosureRef = useRef<HTMLButtonElement>(null);
   const toolsDisclosureRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleSearchShortcut = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (event.altKey || target?.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target?.tagName ?? "")) return;
+      if ((event.key === "/" && !event.metaKey && !event.ctrlKey) || ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k")) {
+        event.preventDefault();
+        setSiteSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", handleSearchShortcut);
+    return () => window.removeEventListener("keydown", handleSearchShortcut);
+  }, []);
 
   // Reading progress + back-to-top state
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -2593,6 +2611,16 @@ export default function App() {
     // #sticky-site-header below it. `clip` cuts the overflow without creating a
     // scrollport, so the header keeps sticking.
     <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-brand-gold selection:text-brand-navy overflow-x-clip">
+      {siteSearchOpen && (
+        <React.Suspense fallback={null}>
+          <GlobalSiteSearch
+            isBn={isBn}
+            onClose={() => setSiteSearchOpen(false)}
+            navigateTo={navigateTo}
+            triggerRef={siteSearchTriggerRef}
+          />
+        </React.Suspense>
+      )}
 
       {/* Reading progress bar — shown only on blog post pages */}
       {section === "blog" && !isLanding && (
@@ -2619,6 +2647,18 @@ export default function App() {
           <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between text-white/55 text-xs">
             <span className="truncate font-sans font-medium">{t.topStripTagline}</span>
             <div className="flex items-center gap-2 sm:gap-3 shrink-0 font-sans text-[11px] font-medium">
+              <button
+                ref={siteSearchTriggerRef}
+                type="button"
+                onClick={() => setSiteSearchOpen(true)}
+                aria-haspopup="dialog"
+                aria-expanded={siteSearchOpen}
+                aria-label={isBn ? "URAL সাইটে খুঁজুন" : "Search this site"}
+                className="inline-flex min-h-8 items-center gap-1.5 rounded-md px-1.5 text-white/75 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+              >
+                <span aria-hidden="true" className="relative h-3 w-3 rounded-full border-2 border-current after:absolute after:-bottom-1 after:-right-1 after:h-1.5 after:w-1 after:rotate-45 after:rounded-full after:bg-current" />
+                <span className="hidden sm:inline">{isBn ? "খুঁজুন" : "Search"}</span>
+              </button>
               <TopBarWhatsApp lang={lang} />
               <span className="w-px h-3 bg-white/20"></span>
               <LanguageSwitcher
