@@ -1,6 +1,9 @@
 import React from "react";
 
 import { GuideJumpNav } from "../components/GuideJumpNav";
+import { ResponsiveImage } from "../components/ResponsiveImage";
+import { DESTINATION_HERO_IMAGES } from "../data/destinationHeroImages";
+import { DESTINATION_HOTEL_GUIDES } from "../data/hotelGuideDestinations";
 
 import { AFFILIATE_LINKS, resolvePartnerUrl } from "../components/AffiliatePartners";
 import { getHotelGuideAffiliatePlacement } from "../utils/affiliatePlacement";
@@ -22,14 +25,106 @@ type RouteViewProps = { context: Record<string, any> };
 
 export default function DestinationsRouteView({ context }: RouteViewProps) {
 
-  const { TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryCityName, getCountryCityWithIata, getCountryIata, getCountryVisaId, isBn, lang, localizedBlogs, localizedHotels = [], navigateTo, openPriceAlert, parameterId, section, setAreTpScriptsReady, triggerAffiliateToast } = context;
+  const { TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryCityName, getCountryCityWithIata, getCountryIata, getCountryVisaId, getLocalizedRouteHref, isBn, isLanding, lang, localizedBlogs, localizedHotels = [], navigateTo, openPriceAlert, parameterId, section, setAreTpScriptsReady, triggerAffiliateToast } = context;
   const DESTINATIONS_DATA = context.localizedDestinations ?? EN_DESTINATIONS_DATA;
 
-  if (["nepal-guide", "thailand-guide", "malaysia-guide", "singapore-guide", "maldives-guide", "dubai-guide", "london-guide", "italy-guide", "paris-guide", "new-york-guide"].includes(parameterId)) {
+  if (!isLanding && ["nepal-guide", "thailand-guide", "malaysia-guide", "singapore-guide", "maldives-guide", "dubai-guide", "london-guide", "italy-guide", "paris-guide", "new-york-guide"].includes(parameterId)) {
     const destinationGuide = DESTINATIONS_DATA.find((destination: any) => destination.id === parameterId);
     if (destinationGuide) {
       return <CityDestinationLanding guide={destinationGuide} blogs={localizedBlogs ?? []} lang={lang} onNavigate={navigateTo} />;
     }
+  }
+
+  if (isLanding) {
+    const openGuide = (event: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      navigateTo(path);
+    };
+    const localizedHref = (path: string) =>
+      typeof getLocalizedRouteHref === "function"
+        ? getLocalizedRouteHref(path)
+        : isBn ? `/bn${path}` : path;
+
+    return (
+      <main className="space-y-7">
+        <header className="max-w-3xl space-y-3">
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-emerald">
+            {isBn ? "বাংলাদেশ থেকে ভ্রমণ পরিকল্পনা" : "PLAN A TRIP FROM BANGLADESH"}
+          </p>
+          <h1 className="ural-page-title font-serif text-3xl font-black text-slate-900 sm:text-4xl">
+            {isBn ? "গন্তব্য গাইড" : "Destination Guides from Bangladesh"}
+          </h1>
+          <p className="max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+            {isBn
+              ? "বিদ্যমান গন্তব্য গাইডগুলো তুলনা করুন—দিনভিত্তিক রুট, স্থানীয় যাতায়াত এবং আপনার ভ্রমণ পরিকল্পনার জন্য প্রাসঙ্গিক পরামর্শসহ।"
+              : "Browse our existing destination guides for itinerary outlines, local transport context and practical next steps. Each guide is a starting point to adapt to your dates and needs."}
+          </p>
+        </header>
+
+        <section aria-label={isBn ? "গন্তব্য গাইডের তালিকা" : "Destination guide directory"}>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {DESTINATIONS_DATA.map((guide: any, index: number) => {
+              const image = DESTINATION_HERO_IMAGES[guide.id];
+              if (!image) return null;
+              const path = `/destinations/${guide.id}`;
+              return (
+                <a
+                  key={guide.id}
+                  href={localizedHref(path)}
+                  onClick={(event) => openGuide(event, path)}
+                  className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+                >
+                  <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
+                    <ResponsiveImage
+                      src={image.src}
+                      alt={isBn ? image.altBn : image.altEn}
+                      sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      fetchPriority={index === 0 ? "high" : undefined}
+                      decoding="async"
+                      className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                    />
+                    <span className="absolute left-3 top-3 rounded-full border border-white/70 bg-white/95 px-2.5 py-1 text-xs font-semibold text-brand-navy shadow-sm">
+                      {guide.country}
+                    </span>
+                  </div>
+                  <div className="space-y-2 p-4 sm:p-5">
+                    <h2 className="font-serif text-xl font-bold text-brand-navy">{guide.title || guide.country}</h2>
+                    <p className="line-clamp-3 text-sm leading-relaxed text-slate-600">{guide.quickAnswer}</p>
+                    <span className="inline-flex items-center gap-2 pt-1 text-sm font-bold text-brand-navy">
+                      {isBn ? "গাইড খুলুন" : "Open destination guide"}
+                      <ArrowRight size={15} aria-hidden="true" className="transition group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+
+        <nav aria-label={isBn ? "ভ্রমণ পরিকল্পনার বিভাগ" : "Other travel-planning guides"} className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+          <h2 className="font-serif text-lg font-bold text-brand-navy">{isBn ? "পরবর্তী ধাপ" : "Plan the next step"}</h2>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {[
+              { path: "/flights", en: "Flight routes", bn: "ফ্লাইট রুট" },
+              { path: "/hotels", en: "Hotel area guides", bn: "হোটেল এলাকা গাইড" },
+              { path: "/visa", en: "Visa guides", bn: "ভিসা গাইড" },
+              { path: "/costs", en: "Trip costs", bn: "ভ্রমণ খরচ" },
+            ].map((link) => (
+              <a
+                key={link.path}
+                href={localizedHref(link.path)}
+                onClick={(event) => openGuide(event, link.path)}
+                className="rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-brand-navy hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+              >
+                {isBn ? link.bn : link.en}
+              </a>
+            ))}
+          </div>
+        </nav>
+      </main>
+    );
   }
 
   return (
@@ -95,16 +190,8 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
               {(() => {
 
                 const activeDes = DESTINATIONS_DATA.find(d => d.id === parameterId) || DESTINATIONS_DATA[0];
-                const hotelGuideIdByDestination: Record<string, string> = {
-                  "nepal-guide": "kathmandu-hotels",
-                  "thailand-guide": "bangkok-hotels",
-                  "malaysia-guide": "kuala-lumpur-hotels",
-                  "singapore-guide": "singapore-hotels",
-                  "maldives-guide": "maldives-hotels",
-                  "dubai-guide": "dubai-hotels",
-                };
                 const hotelGuide = localizedHotels.find(
-                  (hotel: any) => hotel.id === hotelGuideIdByDestination[activeDes.id],
+                  (hotel: any) => hotel.id === DESTINATION_HOTEL_GUIDES[activeDes.id],
                 );
 
                 return activeDes.id === "dubai-guide" ? (

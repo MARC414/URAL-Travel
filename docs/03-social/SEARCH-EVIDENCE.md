@@ -76,3 +76,22 @@ Individual one-impression rows are never STRONG merely because the family is imp
 Add each property's actual date range, search type, country/device filters, export date and complete page/query exports. For attribution, obtain the specific query-by-page view rather than reconstructing it. Add current GA4 and partner results only when actually inspected. This improves the numerical baseline without restarting broad keyword research.
 
 The new evidence changes the earlier “GSC unavailable” assumption. It does not resolve the current audit's measurement, delivery, affiliate or desk-fulfillment findings.
+
+## 8. Owner-supplied three-month snapshot and CTR diagnosis — 1 November 2026
+
+The owner subsequently supplied a broader three-month GSC snapshot. Treat the figures below as the supplied rows, not a complete export: the exact date range, search type, filters, average position and query-to-page joins were not included.
+
+### Reported signals
+
+- Property-level summary: **more than 1,000 impressions and 2 clicks** (aggregate CTR below roughly **0.2%**).
+- Strongest named query: Bengali wording for “which countries can I visit visa-free with a Bangladeshi passport in 2026,” **37 impressions / 0 clicks**. Other supplied query rows: Dhaka–Kathmandu flight **8 / 0**, UAE visit visa for Bangladeshi **8 / 0**, Nepal travel costs **5 / 0**, and “Dubai hotel” **4 / 0**.
+- Pages: Bangladesh e-Passport application/renewal guide **76 / 1**; family-destination article **23 / 1**; English and Bengali visa-free-country pages **55 / 0** and **54 / 0**; Bengali Nepal-cost guide **50 impressions**. Airport-code tools had **22 English / 19 Bengali impressions**.
+- Existing flight-route pages: Dhaka–Dubai **26**, Dhaka–Kathmandu **20**, Dhaka–Maldives **19**, Dhaka–Singapore **19**, Dhaka–Bangkok **14**, and Dhaka–Kuala Lumpur **13 impressions**.
+- Existing hotel-area pages: Dubai English **14**, Singapore Bengali **15**, Bangkok Bengali **9** and Bangkok English **5 impressions**.
+- Country dimension: Bangladesh **602 / 1**, UK **100 / 0**, US **57 / 0**, UAE **51 / 0**, Saudi Arabia **48 / 0**, Singapore **47 / 0**, India **30 / 0**, Portugal **1 / 1**.
+
+### What the figures establish—and do not
+
+The supplied property summary establishes that reported CTR is low. The page and query examples identify visible existing intents and reasonable internal-search aliases. They do **not** establish that titles/descriptions are the cause: without average-position distributions or query-to-page joins, low CTR cannot be separated from low ranking, broad query exposure, or other SERP context. The query and page tables also need not add to the same totals because Search Console can omit anonymized queries and the supplied tables may use different dimensions or scopes. Country totals alone do not justify a Bangladesh-first strategy change.
+
+No title or description was changed from this snapshot. The immediate low-risk response is better discovery of existing guides (implemented as bilingual global site search and directory cards), not new thin URLs. Existing Dubai/Bangkok/Singapore hotel-area guides remain the relevant coverage; “Kashmir hotel” does not establish a Kashmir guide or an individual-property opportunity. Revisit snippet edits only after checking the actual query/page pair and the displayed result for a high-impression page; make a specific, evidence-backed change rather than a blanket title rewrite.

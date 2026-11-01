@@ -1,4 +1,7 @@
 import { getTravellerCheck } from "../src/utils/travellerChecks";
+import { prepareSiteSearchIndex, searchSite, type SiteSearchEntry } from "../src/utils/siteSearch";
+import { HOTEL_GUIDE_DESTINATIONS } from "../src/data/hotelGuideDestinations";
+import { DESTINATION_HERO_IMAGES } from "../src/data/destinationHeroImages";
 /**
  * Post-build verification for the prerendered output.
  *
@@ -162,6 +165,87 @@ check(fs.existsSync(DIST_DIR), "dist/ was produced by the build");
 // --- 2. Generated social/OG images (built by copyStaticSeoImages) -----------
 
 check(fs.existsSync(path.join(DIST_DIR, "og-image.jpg")), "dist/og-image.jpg generated");
+
+const searchIndexRaw = read(path.join(DIST_DIR, "site-search-index.json"));
+let siteSearchEntries: SiteSearchEntry[] = [];
+try {
+  const parsed = searchIndexRaw ? JSON.parse(searchIndexRaw) as { version?: number; entries?: SiteSearchEntry[] } : null;
+  if (parsed?.version === 1 && Array.isArray(parsed.entries)) siteSearchEntries = parsed.entries;
+} catch {
+  siteSearchEntries = [];
+}
+check(
+  siteSearchEntries.length >= 120 &&
+    new Set(siteSearchEntries.map((entry) => entry.pathEn)).size === siteSearchEntries.length &&
+    new Set(siteSearchEntries.map((entry) => entry.pathBn)).size === siteSearchEntries.length &&
+    siteSearchEntries.every((entry) => Boolean(entry.pathBn) && !entry.pathEn.startsWith("/admin") && !entry.pathBn?.startsWith("/admin")) &&
+    siteSearchEntries.some((entry) => entry.pathBn === "/bn/hotels/dubai-hotels") &&
+    siteSearchEntries.some((entry) => entry.pathEn === "/hotels/dubai-hotels"),
+  "the lazy site-search index contains bilingual public pages without private/admin routes"
+);
+const searchIndexGzipBytes = searchIndexRaw
+  ? zlib.gzipSync(Buffer.from(searchIndexRaw), { level: 9 }).length
+  : Number.POSITIVE_INFINITY;
+check(
+  searchIndexGzipBytes <= 125 * 1024,
+  `the bilingual site-search index stays under 125 KB gzip (${Math.ceil(searchIndexGzipBytes / 1024)} KB)`
+);
+const preparedSiteSearch = prepareSiteSearchIndex(siteSearchEntries);
+check(
+  Object.keys(HOTEL_GUIDE_DESTINATIONS).length === 6 &&
+    Object.values(HOTEL_GUIDE_DESTINATIONS).every((destinationId) => Boolean(DESTINATION_HERO_IMAGES[destinationId])),
+  "each existing hotel-area guide is paired with a matching generated destination image"
+);
+const indexedKinds = new Set(siteSearchEntries.map((entry) => entry.kind));
+check(
+  ["destination", "hotel", "flight", "visa", "cost", "tool", "article"].every((kind) => indexedKinds.has(kind as SiteSearchEntry["kind"])),
+  "site search indexes every requested existing content family: guides, routes, hotels, costs, tools and articles"
+);
+const expectedSearchRoutes = [
+  { query: "dhaka to kathmundu flight", locale: "en" as const, path: "/flights/dhaka-kathmandu" },
+  { query: "IATA airport codes directory for Dhaka travelers", locale: "en" as const, path: "/tools/airport-codes" },
+  { query: "Sheikh Zayed Mosque day trip from Dubai", locale: "en" as const, path: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" },
+  { query: "dubai hotel", locale: "en" as const, path: "/hotels/dubai-hotels" },
+  { query: "where to stay in bangkok thailand", locale: "en" as const, path: "/hotels/bangkok-hotels" },
+  { query: "uae visit visa for bangladeshi", locale: "en" as const, path: "/visa/dubai-visa" },
+  { query: "nepal travel costs", locale: "en" as const, path: "/costs/nepal-costs" },
+  { query: "নেপাল ভ্রমণ খরচ", locale: "bn" as const, path: "/bn/costs/nepal-costs" },
+  { query: "বাংলাদেশের পাসপোর্ট দিয়ে ভিসা ছাড়া কোন কোন দেশে যাওয়া যায় ২০২৬", locale: "bn" as const, path: "/bn/visa-free-countries" },
+];
+for (const example of expectedSearchRoutes) {
+  const first = searchSite(preparedSiteSearch, example.query, example.locale)[0];
+  check(
+    first?.path === example.path,
+    `site search maps “${example.query}” to ${example.path} (got ${first?.path ?? "no result"})`
+  );
+}
+check(
+  searchSite(preparedSiteSearch, "Kashmir hotel", "en").length === 0 &&
+    searchSite(preparedSiteSearch, "oddschecker", "en").length === 0,
+  "site search does not invent a Kashmir guide or surface irrelevant oddschecker noise"
+);
+const destinationsHubHtml = read(path.join(DIST_DIR, "destinations.html")) ?? "";
+const bnDestinationsHubHtml = read(path.join(DIST_DIR, "bn", "destinations.html")) ?? "";
+const hotelsHubHtml = read(path.join(DIST_DIR, "hotels.html")) ?? "";
+const bnHotelsHubHtml = read(path.join(DIST_DIR, "bn", "hotels.html")) ?? "";
+check(
+  destinationsHubHtml.includes("<h1>Destination Guides from Bangladesh</h1>") &&
+    (destinationsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 10 &&
+    (bnDestinationsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 10 &&
+    destinationsHubHtml.includes('alt="The Annapurna Himalayan range above Phewa Lake at dawn in Nepal" loading="eager" decoding="async" fetchpriority="high"') &&
+    destinationsHubHtml.includes('href="/assets/images/destination_nepal_hero_20261101-1200.avif"') &&
+    bnDestinationsHubHtml.includes('alt="নেপালের ফেওয়া লেকের ওপরে ভোরের আলোয় অন্নপূর্ণা হিমালয় পর্বতমালা" loading="eager" decoding="async" fetchpriority="high"'),
+  "English and Bengali destination directories prerender all 10 localized photo cards and prioritize/preload the first card as the likely LCP image"
+);
+check(
+  (hotelsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 6 &&
+    (bnHotelsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 6 &&
+    hotelsHubHtml.includes('href="/hotels/dubai-hotels"') &&
+    bnHotelsHubHtml.includes('href="/bn/hotels/dubai-hotels"') &&
+    hotelsHubHtml.includes("Neighborhood guide") &&
+    !hotelsHubHtml.includes("verified property directory"),
+  "English and Bengali hotel directories prerender six destination-image area-guide cards, not property listings"
+);
 const blogIndexInSync =
   BLOG_POST_COUNT === BLOG_DATA.length &&
   BLOG_SLUGS.length === BLOG_DATA.length &&
@@ -2938,7 +3022,10 @@ if (rss) {
   // not fit — the /banking route's branch, SEO copy and homepage FAQ data add
   // ~1.6 KB. The hub's FAQ payload was moved into its lazy chunk first, so what
   // remains is genuinely eager. See docs/growth/06-core-web-vitals.md.
-  const EAGER_JS_BUDGET_KB = 205;
+  // Raised by 1 KB on 1 November 2026 for the site-wide search trigger and
+  // keyboard shortcut (~0.4 KB gzip measured); the dialog and search index must
+  // stay lazy, guarded below.
+  const EAGER_JS_BUDGET_KB = 206;
   const contentDataIsEager = [...new Set([...eagerScripts, ...eagerPreloads])].some((url) =>
     /content-data/i.test(url)
   );
@@ -2947,6 +3034,13 @@ if (rss) {
     contentDataIsEager
       ? "content-data is in the homepage's eager script/preload graph"
       : "content-data is absent from the homepage's eager script/preload graph"
+  );
+  const eagerAssetUrls = [...new Set([...eagerScripts, ...eagerPreloads])];
+  const globalSearchDialogIsEager = eagerAssetUrls.some((url) => /GlobalSiteSearch/i.test(url));
+  const searchIndexIsEager = (read(path.join(DIST_DIR, "index.html")) ?? "").includes("site-search-index.json");
+  check(
+    !globalSearchDialogIsEager && !searchIndexIsEager,
+    "the search dialog chunk and bilingual index stay out of the homepage's eager download graph"
   );
   const contentDataFile = jsChunks.find((file) => /^content-data-.*\.js$/.test(file));
   const contentDataHref = contentDataFile ? `/assets/${contentDataFile}` : null;
