@@ -803,7 +803,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                 rel="noopener noreferrer sponsored"
                 className="bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5"
               >
-                <span>{isBn ? "Klook-এ সব অফার দেখুন" : "Explore All Deals on Klook"}</span>
+                <span>{isBn ? "Klook-এর কার্যক্রম দেখুন" : "Browse Activities on Klook"}</span>
                 <ExternalLink size={12} />
               </a>
             </div>
@@ -861,12 +861,12 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
           <h3 className="font-serif font-bold text-slate-900 text-sm sm:text-base">
             {isBn
               ? "সিটি পাস ও বান্ডেল ডিল দেখুন এক্সপেরিয়েন্সেস হাবে"
-              : "See City Passes & Bundle Deals on Our Experiences Hub"}
+              : "Compare City Passes & Activity Bundles on Our Experiences Hub"}
           </h3>
           <p className="text-xs text-slate-600 leading-relaxed">
             {isBn
               ? "ইউরোপ ও এশিয়ার সিটি পাস, বান্ডেল এবং স্কিপ-দ্য-লাইন ডিলের জন্য আমাদের /experiences পেজ ভিজিট করুন।"
-              : "Visit our /experiences page for city passes, bundles, and skip-the-line deals across Europe and Asia."}
+              : "Visit our /experiences page to compare city passes, activity bundles, and ticket options across Europe and Asia."}
           </p>
         </div>
         <div className="flex flex-wrap gap-2 sm:gap-3">

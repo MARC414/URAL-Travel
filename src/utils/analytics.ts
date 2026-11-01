@@ -203,7 +203,7 @@ export function initGlobalClickTracking(): () => void {
     //    because these links are also `rel="sponsored"` and also contain the
     //    substring "travelpayouts". Counting them as affiliate clicks would
     //    report "another publisher signed up" as "a reader booked a flight".
-    //    `referral_sub_id` identifies the placement (creator_hub, post_havana...).
+    //    `referral_sub_id` identifies the placement (creator_hub, post_social_income...).
     if (isTravelpayoutsReferralUrl(href)) {
       pushDataLayerEvent("travelpayouts_referral_click", {
         partner_name: "Travelpayouts (creator referral)",

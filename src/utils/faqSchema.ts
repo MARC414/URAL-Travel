@@ -176,8 +176,8 @@ export const SERVICE_TRAVEL_SERVICES_FAQS: FAQItem[] = [
     answer: "Through KiwiTaxi and verified partners, your driver tracks your flight arrival time and waits in the airport arrival hall with a personalized name sign. This eliminates taxi negotiation stress, late-night transit scams, and local language barriers."
   },
   {
-    question: "Why should Bangladeshi tourists buy attraction tickets and tours on Klook before traveling?",
-    answer: "Pre-booking activities like Sarangkot sunrise tours, Chao Phraya dinner cruises, Genting Awana cable car passes, or Burj Khalifa tickets on Klook saves up to 30-50% compared to gate prices, skips long ticket lines, and allows payment with international or dual-currency cards."
+    question: "How should Bangladeshi travelers compare Klook attraction tickets and tours before booking?",
+    answer: "Klook lists activities such as Sarangkot sunrise tours, Chao Phraya dinner cruises, Genting Awana cable cars, and Burj Khalifa visits. Compare the selected date's checkout total, inclusions, entry instructions, cancellation terms, and payment options with the operator or other sellers. Prices and conditions vary by listing; no universal discount or queue-skip promise applies."
   },
   {
     question: "Is an International Driving Permit (IDP) required to rent a car abroad through Qeeq?",

@@ -336,7 +336,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp": {
     title: "Flight Delay, Cancellation & Baggage Compensation Guide | URAL",
     description:
-      "Understand international air passenger rights for delays and baggage under EC 261, UK 261, Turkish SHY-PASS, Saudi GACA and Montreal Convention rules.",
+      "Understand international passenger rights for flight disruptions and baggage under EC 261, UK 261, Turkey's SHY-YOLCU regulation, Saudi GACA rules and the Montreal Convention.",
   },
   "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla": {
     title: "Airlines from Dhaka: Routes & Baggage Guide | URAL",

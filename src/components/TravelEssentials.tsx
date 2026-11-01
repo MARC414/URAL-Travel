@@ -120,10 +120,12 @@ export function TravelEssentials({
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50 px-4 py-3 rounded-xl border border-slate-200/80">
             <div className="space-y-0.5">
               <div className="text-xs font-semibold text-slate-900">
-                Choose Your Airport Transfer Partner for {country}
+                {isBn ? `${country}-এর জন্য ট্রান্সফার পার্টনার বেছে নিন` : `Compare transfer partners for ${country}`}
               </div>
               <p className="text-[11px] text-slate-500">
-                Welcome Pickups includes arrival-gate meet & greet with flight tracking; Kiwitaxi offers budget point-to-point shuttles.
+                {isBn
+                  ? "পার্টনার সাইটে রুট ও যাত্রার তথ্য আবার দিতে হবে। বুকিংয়ের আগে প্রাপ্যতা, চূড়ান্ত ভাড়া ও শর্ত যাচাই করুন।"
+                  : "Enter your trip details again on the partner site. Check availability, the final fare and terms before booking."}
               </p>
             </div>
 
@@ -137,7 +139,7 @@ export function TravelEssentials({
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                Welcome Pickups (Meet & Greet)
+                Welcome Pickups
               </button>
               <button
                 type="button"
@@ -148,29 +150,15 @@ export function TravelEssentials({
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                Kiwitaxi (Standard Shuttle)
+                Kiwitaxi
               </button>
             </div>
           </div>
 
           {transferProvider === "welcome" ? (
-            <WelcomePickupsEmbed defaultCountry={country} />
+            <WelcomePickupsEmbed defaultCountry={country} lang={lang} />
           ) : (
-            <div className="space-y-3">
-              <KiwitaxiEmbed />
-              <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs text-slate-500">
-                <span>Fixed price per car · Free cancellation up to 24h before arrival</span>
-                <a
-                  href={resolvePartnerUrl(AFFILIATE_LINKS.kiwitaxi)}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="font-semibold text-brand-navy hover:underline inline-flex items-center gap-1"
-                >
-                  <span>Open Kiwitaxi Direct</span>
-                  <ExternalLink size={12} />
-                </a>
-              </div>
-            </div>
+            <KiwitaxiEmbed defaultCountry={country} lang={lang} />
           )}
         </div>
       )}

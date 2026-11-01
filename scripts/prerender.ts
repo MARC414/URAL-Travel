@@ -17,6 +17,7 @@ import {
 import { BLOG_SLUGS } from "../src/data/blogIndex";
 import { getHotelGuideAffiliatePlacement, getBlogHotelAffiliatePlacement } from "../src/utils/affiliatePlacement";
 import { DESTINATION_HERO_IMAGES } from "../src/data/destinationHeroImages";
+import { DESTINATION_OFFICIAL_SOURCES } from "../src/data/destinationOfficialSources";
 import { SCHEDULED_BLOG_DIRECTORY } from "../src/data/scheduledBlogIndex.generated";
 import { SCHEDULED_BLOG_IMAGE_MAP } from "../src/data/scheduledBlogSeo.generated";
 // The English blog bodies were split out of constants.ts so the client can load
@@ -140,7 +141,6 @@ const DIST_DIR = path.join(ROOT_DIR, "dist");
 const OPTIMIZED_SOCIAL_IMAGES_DIR = path.join(ROOT_DIR, "src", "assets", "optimized-social");
 
 const BLOG_IMAGE_MAP: Record<string, string> = {
-  "kkday-10-10-winter-sale-japan-tours-passes-guide": "paris_louvre_london_landmarks_1790485782111.jpg",
   "havana-cuba-travel-guide-bangladesh": "havana_gran_teatro_classic_cars_1791427200000.jpg",
   "chefchaouen-morocco-travel-guide-bangladesh": "chefchaouen_blue_fountain_alley_1791427400000.jpg",
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": "umrah_makkah_haram_guide_1790430007679.jpg",
@@ -1115,6 +1115,23 @@ function renderResponsiveSearchImage(src: string, alt: string, sizes: string, pr
   return `<picture><source type="image/avif" srcset="${escapeHtml(buildResponsiveSrcSet(dimensions.src, "avif"))}" sizes="${escapeHtml(sizes)}"><source type="image/webp" srcset="${escapeHtml(buildResponsiveSrcSet(dimensions.src, "webp"))}" sizes="${escapeHtml(sizes)}"><img src="${escapeHtml(dimensions.src)}" width="${dimensions.width}" height="${dimensions.height}" alt="${escapeHtml(alt)}" loading="${loading}" decoding="async"${fetchPriority} class="h-full w-full object-cover"></picture>`;
 }
 
+function renderDestinationOfficialSources(destinationId: string, locale: "en" | "bn"): string {
+  const sources = DESTINATION_OFFICIAL_SOURCES[destinationId] ?? [];
+  const flightPlanner = locale === "bn"
+    ? '<section aria-labelledby="destination-flight-planner"><h2 id="destination-flight-planner">ঢাকা থেকে ফ্লাইট খুঁজুন</h2><p>এই গাইডে লাইভ ভাড়া দেখানো হয় না। বর্তমান রুট ও বিকল্প দেখতে <a href="/bn/flights">সম্পূর্ণ ফ্লাইট প্ল্যানার খুলুন</a>।</p></section>'
+    : '<section aria-labelledby="destination-flight-planner"><h2 id="destination-flight-planner">Flights from Dhaka</h2><p>This guide does not display a live fare. <a href="/flights">Open the full flight planner</a> to review current routes and options.</p></section>';
+  if (!sources.length) return flightPlanner;
+  const heading = locale === "bn" ? "ভ্রমণের আগে সরকারি ও পরিবহন-তথ্য যাচাই করুন" : "Check official and transport information before travel";
+  const note = locale === "bn"
+    ? "প্রবেশের নিয়ম, সময়সূচি ও পরিষেবা বদলাতে পারে। বুকিংয়ের আগে সংশ্লিষ্ট কর্তৃপক্ষের সর্বশেষ তথ্য দেখুন।"
+    : "Entry rules, schedules and services can change. Check the relevant authority's current information before booking.";
+  const links = sources.map((source) => {
+    const label = locale === "bn" ? source.labelBn : source.labelEn;
+    return `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a></li>`;
+  }).join("");
+  return `${flightPlanner}<section aria-labelledby="destination-official-sources"><h2 id="destination-official-sources">${heading}</h2><p>${note}</p><ul>${links}</ul></section>`;
+}
+
 function renderDestinationDirectoryCards(locale: "en" | "bn"): string {
   const guides = locale === "bn" ? getLocalizedDestinations("bn") : DESTINATIONS_DATA;
   const localePrefix = locale === "bn" ? "/bn" : "";
@@ -1620,8 +1637,8 @@ function buildAllRoutes(): PrerenderRoute[] {
     title: hotelsHubTitle,
     description: hotelsHubDesc,
     imageUrl: defaultOgImage,
-    lcpImageUrl: "/assets/images/hotels_london_marylebone_exterior_20261101-1200.webp",
-    lcpImageSizes: "(min-width: 1024px) 45vw, 100vw",
+    lcpImageUrl: DESTINATION_HERO_IMAGES[DESTINATIONS_DATA[0].id].src,
+    lcpImageSizes: "(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Hotel Neighborhoods", url: `${BASE_URL}/hotels` },
@@ -2015,6 +2032,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h2>Local transport options</h2>
           <ul>${d.localTransport.map((option) => `<li>${escapeHtml(option)}</li>`).join("")}</ul>
           <p><strong>Budget planning note:</strong> ${escapeHtml(d.budgetBdt)}. Review international flights and current entry rules separately.</p>
+          ${renderDestinationOfficialSources(d.id, "en")}
           ${d.id === "london-guide" ? '<p><a href="/experiences?region=west&amp;city=london">Explore London activities and experiences</a></p>' : d.id === "italy-guide" ? '<p><a href="/experiences?region=west&amp;city=rome-italy">Explore Italy activities and experiences</a></p>' : d.id === "paris-guide" ? '<p><a href="/experiences?region=west&amp;city=paris">Explore Paris activities and experiences</a></p>' : d.id === "new-york-guide" ? '<p><a href="/experiences?region=west&amp;city=new-york">Explore New York City activities and experiences</a></p>' : ""}
           <section>
             <h2>${escapeHtml(d.country)} key facts for travelers from Bangladesh</h2>
@@ -2112,7 +2130,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     canonicalUrl: `${BASE_URL}/experiences`,
     title: "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub) | URAL",
     description:
-      "Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and KL.",
+      "Browse attraction and activity listings for Europe, the UK, the USA and Asia. Compare current dates, inclusions, checkout totals, entry instructions and cancellation terms before booking.",
     imageUrl: defaultOgImage,
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
@@ -2122,7 +2140,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     bodyHtml: `
       <article>
         <h1>Europe, UK, USA &amp; Asian Attraction Passes (Tiqets &amp; Klook Hub)</h1>
-        <p>Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and Kuala Lumpur.</p>
+        <p>Browse attraction and activity listings for Europe, the UK, the USA and Asia. Before booking, compare the specific dates, inclusions, checkout totals, entry instructions and cancellation terms shown by the relevant operator.</p>
         <section aria-labelledby="luggage-storage-tip">
           <h2 id="luggage-storage-tip">Museum Bag-Ban Rule, Go City All-Inclusive &amp; Explorer Passes &amp; Luggage Storage</h2>
           <p>Major European, UK, and US attractions (Louvre, Eiffel Tower, Colosseum, Vatican, British Museum, and Statue of Liberty) strictly prohibit suitcases and large backpacks inside security. Store your bags for ~€5/day per bag (with €3,000 security guarantee) at verified hotels and shops near major stations via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">Radical Storage luggage storage network</a>, bundle 3 to 10+ city landmarks with <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.goCity))}" target="_blank" rel="noopener noreferrer sponsored">Go City All-Inclusive &amp; Explorer Passes</a>, browse Klook's curated hotel collection via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" target="_blank" rel="noopener noreferrer sponsored">Klook Global Hotels</a>, or book sightseeing tours on <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klook))}" target="_blank" rel="noopener noreferrer sponsored">Klook Activities</a>.</p>
@@ -2226,17 +2244,17 @@ function buildAllRoutes(): PrerenderRoute[] {
       serviceSchema({
         url: `${BASE_URL}/tools`,
         idSuffix: "service-travel-tools",
-        name: "Bangladesh Outbound Currency, Visa Odds & Flight Delay Claim Tools",
+        name: "Bangladesh Outbound Travel Tools & Flight Disruption Check",
         description:
-          "Access handy travel utility tools for Bangladeshi outbound tourists: live BDT exchange rates, power plug specifications, packing checklist, and translation aids.",
-        serviceType: "Travel Planning & Flight Compensation Utility",
+          "Access travel planning tools for Bangladeshi outbound tourists and review the details that may affect a flight-disruption claim.",
+        serviceType: "Travel Planning & Flight Disruption Information",
       }),
       ...(toolsFaq ? [stripContext(toolsFaq)] : []),
     ],
     bodyHtml: `
       <article>
-        <h1>Bangladeshi Traveler Utility Tools &amp; Flight Delay Compensation (€600)</h1>
-        <p>Convert BDT to USD, SAR, NPR, THB, MYR, SGD, and AED, evaluate tourist visa approval readiness, and claim up to €600 ($650) for delayed or cancelled flights via AirHelp.</p>
+        <h1>Bangladeshi Traveler Utility Tools &amp; Flight Disruption Checks</h1>
+        <p>Convert BDT to USD, SAR, NPR, THB, MYR, SGD, and AED, review tourist visa information, and check which details may affect a flight-disruption claim. AirHelp is an optional service; verify eligibility, terms and fees directly with the provider.</p>
         ${renderLandingFaqs("tools-hub-faqs", "Travel planning tool questions for Bangladeshi travelers", toolsFaq)}
       </article>
     `,
@@ -3313,6 +3331,7 @@ function buildBengaliBody(
             `<p>${escapeHtml(destination.budgetBdt)}। আন্তর্জাতিক বিমানভাড়া ও সাম্প্রতিক ভিসা নিয়ম আলাদাভাবে মিলিয়ে নিন।</p>`
           )
         );
+        parts.push(renderDestinationOfficialSources(id, "bn"));
 
         parts.push(
           bnSection(
@@ -3536,7 +3555,7 @@ function buildBengaliBody(
         { label: "কারেন্সি কনভার্টার (BDT)", path: "/tools/currency-converter" },
         { label: "ট্রিপ বাজেট ক্যালকুলেটর", path: "/tools/budget-calculator" },
         { label: "ভিসা অডস চেকার", path: "/tools/visa-checker" },
-        { label: "ফ্লাইট ডিলে ক্ষতিপূরণ (AirHelp)", path: "/tools/flight-delay-claim" },
+        { label: "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)", path: "/tools/flight-delay-claim" },
         { label: "সম্পূর্ণ সাইট ডিরেক্টরি", path: "/sitemap" },
       ])
     );
@@ -3550,7 +3569,7 @@ function buildBengaliBody(
       { label: "ট্রিপ বাজেট ক্যালকুলেটর", path: "/tools/budget-calculator" },
       { label: "স্মার্ট প্যাকিং চেকলিস্ট", path: "/tools/packing-checklist" },
       { label: "ভিসা অডস চেকার", path: "/tools/visa-checker" },
-      { label: "ফ্লাইট ডিলে ক্ষতিপূরণ (AirHelp)", path: "/tools/flight-delay-claim" },
+      { label: "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)", path: "/tools/flight-delay-claim" },
       { label: "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)", path: "/tools/airport-codes" },
     ];
     parts.push(
@@ -3599,7 +3618,7 @@ function buildBengaliBody(
         { label: "ট্রিপ বাজেট ক্যালকুলেটর", path: "/tools/budget-calculator" },
         { label: "স্মার্ট প্যাকিং চেকলিস্ট", path: "/tools/packing-checklist" },
         { label: "ভিসা অডস চেকার", path: "/tools/visa-checker" },
-        { label: "ফ্লাইট ডিলে ক্ষতিপূরণ (AirHelp)", path: "/tools/flight-delay-claim" },
+        { label: "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)", path: "/tools/flight-delay-claim" },
         { label: "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)", path: "/tools/airport-codes" },
         { label: "প্রি-ডিপার্চার হাব", path: "/pre-departure" },
       ])
@@ -3725,9 +3744,9 @@ function bnGuidanceFor(group: string): string[] {
   }
   if (group === "tools") {
     return [
-      "সব টুলই ফ্রি—কোনো লগইন বা সাবস্ক্রিপশন লাগে না। ফলাফল আপনার ব্রাউজারেই তৈরি হয়, তাই তথ্য দেখতে গিয়ে কোনো অর্ডার বা পেমেন্ট পর্যন্ত যেতে হয় না।",
+      "URAL-এর নিজস্ব ক্যালকুলেটর ও চেকলিস্ট বিনামূল্যে; AirHelp-এর মতো তৃতীয় পক্ষের পরিষেবার আলাদা শর্ত ও ফি থাকতে পারে। কোনো দাবি-সেবা বেছে নিলে তার বর্তমান শর্ত আগে পড়ুন।",
       "কারেন্সি রেট ও ভিসার সম্ভাবনা আনুমানিক সূচক। চূড়ান্ত রেট আপনার ব্যাংক, কার্ড কোম্পানি বা এক্সচেঞ্জ হাউসের হিসাবই ভিত্তি, আর ভিসার সিদ্ধান্ত সংশ্লিষ্ট দেশের কর্তৃপক্ষের।",
-      "ফ্লাইট ডিলে ক্ষতিপূরণের যোগ্যতা রুট, দেরির সময় ও প্রযোজ্য নিয়মের ওপর নির্ভর করে—ফ্লাইট নম্বর ও তারিখ দিয়ে টুলে মিলিয়ে দেখেই আবেদন শুরু করুন।",
+      "ফ্লাইটের রুট, operating carrier ও ঘটনার বিবরণ প্রযোজ্য নিয়মকে প্রভাবিত করে। এই পাতা যোগ্যতা বা পেআউট নির্ধারণ করে না; AirHelp ব্যবহার করলে তাদের বর্তমান শর্ত ও ফি যাচাই করুন।",
     ];
   }
   return [];
@@ -3996,9 +4015,9 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
         serviceSchema({
           url: canonicalUrl,
           idSuffix: "service-travel-tools",
-          name: "Bangladesh Outbound Currency, Visa Odds & Flight Delay Claim Tools",
+          name: "Bangladesh Outbound Travel Tools & Flight Disruption Check",
           description: copy.description,
-          serviceType: "Travel Planning & Flight Compensation Utility",
+          serviceType: "Travel Planning & Flight Disruption Information",
         })
       );
     } else if (englishPath === "/contact") {

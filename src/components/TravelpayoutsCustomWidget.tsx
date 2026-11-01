@@ -21,7 +21,10 @@ interface TravelpayoutsCustomWidgetProps {
   initialTo?: string;
   initialHotelCity?: string;
   hotelsOnly?: boolean;
+  flightSearchOnly?: boolean;
   showInlineResults?: boolean;
+  /** Exposes the Aviasales handoff in the footer without rendering sample result cards. */
+  showFlightProviderHandoffs?: boolean;
   lang?: "en" | "bn";
   /** First-party click scope supplied by the enclosing hotel guide; not a TP SubID. */
   affiliatePlacement?: string;
@@ -224,7 +227,9 @@ export function TravelpayoutsCustomWidget({
   initialTo = "Kathmandu (KTM)",
   initialHotelCity = "Kathmandu",
   hotelsOnly = false,
+  flightSearchOnly = false,
   showInlineResults = false,
+  showFlightProviderHandoffs = false,
   lang = "en",
   affiliatePlacement,
 }: TravelpayoutsCustomWidgetProps = {}) {
@@ -523,19 +528,10 @@ export function TravelpayoutsCustomWidget({
     [origCode, destCode, date, checkOutDate, travelers]
   );
 
-  const hotelMatchedHub = useMemo(() => {
-    const q = hotelCity.trim().toLowerCase();
-    return (
-      GLOBAL_HOTEL_CITIES.find((h) => q.includes(h.city.toLowerCase())) ||
-      GLOBAL_HOTEL_CITIES[0]
-    );
-  }, [hotelCity]);
-
-  const hotelIataCode = hotelMatchedHub?.iata || destCode || "KTM";
   const aviasalesDeepUrl = `https://www.aviasales.com/search/${searchCode}?marker=${MARKER_ID}&currency=${currency}`;
-  const uralWlDeepUrl = `/travelpayouts-wl.html?origin=${origCode}&destination=${
-    searchTab === "hotels" ? hotelIataCode : destCode
-  }&flightSearch=${searchCode}&currency=${currency}&standalone=1`;
+  // This portal is flight-only (the shell explicitly hides hotels), so never
+  // derive its airport destination from the hotel city field.
+  const uralFlightWlDeepUrl = `/travelpayouts-wl.html?origin=${origCode}&destination=${destCode}&flightSearch=${searchCode}&currency=${currency}&standalone=1`;
   const klookHotelsPartnerUrl = resolvePartnerUrl(AFFILIATE_LINKS.klookHotels);
   const goCityPassUrl = resolvePartnerUrl(AFFILIATE_LINKS.goCity);
   const [swapRotated, setSwapRotated] = useState(false);
@@ -581,13 +577,13 @@ export function TravelpayoutsCustomWidget({
               <Building size={15} />
               <span>URAL Global Hotel &amp; Resort Finder</span>
               <span className="hidden md:inline-block text-[10px] font-mono uppercase tracking-wider bg-[#F6B73C] text-brand-navy px-2 py-0.5 rounded-md font-extrabold ml-1">
-                Verified Klook Stays
+                {isBn ? "Klook পার্টনার সার্চ" : "Klook partner search"}
               </span>
             </div>
           ) : (
             <div
               role="group"
-              aria-label="Search mode"
+              aria-label={isBn ? "সার্চের ধরন" : "Search mode"}
               className="inline-flex items-center bg-slate-800/90 p-1 rounded-xl border border-slate-700"
             >
               <button
@@ -604,24 +600,26 @@ export function TravelpayoutsCustomWidget({
                 }`}
               >
                 <Plane size={14} />
-                Search Flights
+                {isBn ? "ফ্লাইট সার্চ" : "Search Flights"}
               </button>
-              <button
-                id="tab-search-hotels"
-                type="button"
-                onClick={() => {
-                  setSearchTab("hotels");
-                  setSelectedItem(null);
-                }}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-colors cursor-pointer ${
-                  searchTab === "hotels"
-                    ? "bg-[#F6B73C] text-brand-navy shadow-2xs"
-                    : "hover:text-white text-slate-300"
-                }`}
-              >
-                <Building size={14} />
-                Search Hotels
-              </button>
+              {!flightSearchOnly && (
+                <button
+                  id="tab-search-hotels"
+                  type="button"
+                  onClick={() => {
+                    setSearchTab("hotels");
+                    setSelectedItem(null);
+                  }}
+                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-colors cursor-pointer ${
+                    searchTab === "hotels"
+                      ? "bg-[#F6B73C] text-brand-navy shadow-2xs"
+                      : "hover:text-white text-slate-300"
+                  }`}
+                >
+                  <Building size={14} />
+                  {isBn ? "হোটেল সার্চ" : "Search Hotels"}
+                </button>
+              )}
             </div>
           )}
 
@@ -633,8 +631,8 @@ export function TravelpayoutsCustomWidget({
             }
             aria-label={
               listeningField
-                ? "Stop voice dictation"
-                : "Dictate destination city by voice"
+                ? isBn ? "ভয়েস ইনপুট বন্ধ করুন" : "Stop voice dictation"
+                : isBn ? "গন্তব্যের নাম কণ্ঠে বলুন" : "Dictate destination city by voice"
             }
             aria-pressed={Boolean(listeningField)}
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
@@ -644,13 +642,13 @@ export function TravelpayoutsCustomWidget({
             }`}
           >
             {listeningField ? <MicOff size={13} /> : <Mic size={13} />}
-            <span>{listeningField ? "Listening..." : "Voice Search"}</span>
+            <span>{listeningField ? (isBn ? "শুনছি..." : "Listening...") : (isBn ? "কণ্ঠে সার্চ" : "Voice Search")}</span>
           </button>
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5">
           <span className="text-[11px] text-slate-300 font-medium mr-1 hidden sm:inline">
-            Currency:
+            {isBn ? "মুদ্রা:" : "Currency:"}
           </span>
           <div className="inline-flex items-center bg-slate-800/90 p-1 rounded-xl border border-slate-700/80 text-[11px] font-semibold">
             {(Object.keys(CURRENCY_OPTIONS) as CurrencyCode[]).map((code) => (
@@ -671,44 +669,48 @@ export function TravelpayoutsCustomWidget({
         </div>
       </div>
 
-      {/* Explore Popular Cities — Horizontal Scrollable One-Click Hub Bar */}
-      <div className="bg-slate-50/90 px-4 sm:px-6 py-3 border-b border-slate-200/80 flex items-center gap-2 overflow-x-auto no-scrollbar">
-        <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-brand-navy shrink-0 mr-1">
-          <MapPin size={12} className="text-[#F6B73C]" />
-          Popular Hubs:
-        </span>
-        {EXPLORE_POPULAR_CITIES.map((hub) => {
-          const firstWord = hub.city.toLowerCase().split(" ")[0];
-          const isActive =
-            searchTab === "hotels" &&
-            hotelCity.toLowerCase().includes(firstWord);
-          const displayLabel = hub.city;
+      {!flightSearchOnly && (
+        <>
+          {/* Explore Popular Cities — Horizontal Scrollable One-Click Hub Bar */}
+          <div className="bg-slate-50/90 px-4 sm:px-6 py-3 border-b border-slate-200/80 flex items-center gap-2 overflow-x-auto no-scrollbar">
+            <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-brand-navy shrink-0 mr-1">
+              <MapPin size={12} className="text-[#F6B73C]" />
+              {isBn ? "জনপ্রিয় গন্তব্য:" : "Popular Hubs:"}
+            </span>
+            {EXPLORE_POPULAR_CITIES.map((hub) => {
+              const firstWord = hub.city.toLowerCase().split(" ")[0];
+              const isActive =
+                searchTab === "hotels" &&
+                hotelCity.toLowerCase().includes(firstWord);
+              const displayLabel = hub.city;
 
-          return (
-            <button
-              key={hub.city}
-              type="button"
-              title={`${hub.city} (${hub.tag})`}
-              onClick={() => {
-                setSearchTab("hotels");
-                setHotelCity(hub.city);
-                setToCity(hub.flightDest);
-                setActiveDropdown(null);
-                setSelectedItem(null);
-              }}
-              className={`min-h-[34px] shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-xl border text-xs font-medium transition-colors cursor-pointer ${
-                isActive
-                  ? "bg-brand-navy text-white border-brand-navy shadow-2xs"
-                  : "bg-white hover:bg-amber-50/60 text-slate-800 border-slate-200/90 hover:border-[#F6B73C]"
-              }`}
-            >
-              <span className="font-bold">
-                {hub.flag} {displayLabel}
-              </span>
-            </button>
-          );
-        })}
-      </div>
+              return (
+                <button
+                  key={hub.city}
+                  type="button"
+                  title={`${hub.city} (${hub.tag})`}
+                  onClick={() => {
+                    setSearchTab("hotels");
+                    setHotelCity(hub.city);
+                    setToCity(hub.flightDest);
+                    setActiveDropdown(null);
+                    setSelectedItem(null);
+                  }}
+                  className={`min-h-[34px] shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-xl border text-xs font-medium transition-colors cursor-pointer ${
+                    isActive
+                      ? "bg-brand-navy text-white border-brand-navy shadow-2xs"
+                      : "bg-white hover:bg-amber-50/60 text-slate-800 border-slate-200/90 hover:border-[#F6B73C]"
+                  }`}
+                >
+                  <span className="font-bold">
+                    {hub.flag} {displayLabel}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
 
       {/* Unified Search Strip Form */}
       <div
@@ -726,13 +728,13 @@ export function TravelpayoutsCustomWidget({
                     htmlFor={fromAirportId}
                     className="text-[11px] font-semibold text-slate-500"
                   >
-                    From
+                    {isBn ? "যাত্রা শুরু" : "From"}
                   </label>
                   <input
                     id={fromAirportId}
                     type="text"
                     value={fromCity}
-                    placeholder="City or airport (e.g. Dhaka, London)"
+                    placeholder={isBn ? "শহর বা বিমানবন্দর (যেমন Dhaka, London)" : "City or airport (e.g. Dhaka, London)"}
                     onFocus={() => setActiveDropdown("from")}
                     onChange={(e) => {
                       setFromCity(e.target.value);
@@ -741,7 +743,7 @@ export function TravelpayoutsCustomWidget({
                     className="w-full bg-transparent text-sm font-extrabold text-slate-900 focus:outline-none truncate"
                   />
                   <span className="text-[11px] text-slate-500 truncate font-mono">
-                    Origin ({origCode})
+                    {isBn ? `যাত্রার স্থান (${origCode})` : `Origin (${origCode})`}
                   </span>
                 </div>
                 {activeDropdown === "from" && (
@@ -779,13 +781,13 @@ export function TravelpayoutsCustomWidget({
                       htmlFor={toAirportId}
                       className="text-[11px] font-semibold text-slate-500"
                     >
-                      To
+                      {isBn ? "গন্তব্য" : "To"}
                     </label>
                     <button
                       type="button"
                       onClick={swapCities}
-                      title="Swap Departure and Destination"
-                      aria-label="Swap departure and destination cities"
+                      title={isBn ? "যাত্রার স্থান ও গন্তব্য অদলবদল করুন" : "Swap Departure and Destination"}
+                      aria-label={isBn ? "যাত্রার স্থান ও গন্তব্য অদলবদল করুন" : "Swap departure and destination cities"}
                       className="text-[11px] font-bold text-brand-navy hover:text-amber-600 flex items-center gap-1 cursor-pointer"
                     >
                       <ArrowRightLeft
@@ -795,14 +797,14 @@ export function TravelpayoutsCustomWidget({
                           transition: "transform 300ms cubic-bezier(0.22, 1, 0.36, 1)",
                         }}
                       />
-                      Swap
+                      {isBn ? "অদলবদল" : "Swap"}
                     </button>
                   </div>
                   <input
                     id={toAirportId}
                     type="text"
                     value={toCity}
-                    placeholder="Destination (e.g. Bangkok, Rome, JFK)"
+                    placeholder={isBn ? "গন্তব্য (যেমন Bangkok, Rome, JFK)" : "Destination (e.g. Bangkok, Rome, JFK)"}
                     onFocus={() => setActiveDropdown("to")}
                     onChange={(e) => {
                       setToCity(e.target.value);
@@ -811,7 +813,7 @@ export function TravelpayoutsCustomWidget({
                     className="w-full bg-transparent text-sm font-extrabold text-slate-900 focus:outline-none truncate"
                   />
                   <span className="text-[11px] text-slate-500 truncate font-mono">
-                    Destination ({destCode})
+                    {isBn ? `গন্তব্য বিমানবন্দর (${destCode})` : `Destination (${destCode})`}
                   </span>
                 </div>
                 {activeDropdown === "to" && (
@@ -846,7 +848,7 @@ export function TravelpayoutsCustomWidget({
                   htmlFor={flightDateId}
                   className="text-[11px] font-semibold text-slate-500"
                 >
-                  Departure
+                  {isBn ? "যাত্রার তারিখ" : "Departure"}
                 </label>
                 <input
                   id={flightDateId}
@@ -856,14 +858,14 @@ export function TravelpayoutsCustomWidget({
                   className="w-full bg-transparent text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
                 />
                 <span className="text-[11px] text-slate-500 truncate">
-                  Live Fares
+                  {isBn ? "পার্টনার ফ্লাইট সার্চ" : "Partner flight search"}
                 </span>
               </div>
 
               <div className="md:col-span-2 flex">
                 <a
                   id="btn-search-flights-submit"
-                  href={uralWlDeepUrl}
+                  href={uralFlightWlDeepUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setActiveDropdown(null)}
@@ -871,7 +873,7 @@ export function TravelpayoutsCustomWidget({
                 >
                   <div className="flex items-center gap-1.5">
                     <Search size={16} />
-                    <span>Search Flights</span>
+                    <span>{isBn ? "ফ্লাইট খুঁজুন" : "Search Flights"}</span>
                     <ExternalLink size={13} />
                   </div>
                   <span className="text-[10px] font-mono font-bold text-brand-navy/80">
@@ -1116,62 +1118,87 @@ export function TravelpayoutsCustomWidget({
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <span className="inline-flex items-center gap-1 font-semibold text-slate-700">
                 <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
-                {isBn
-                  ? "পার্টনার লিংক সাধারণ তালিকা খোলে—লাইভ কোট নয়। গন্তব্য, তারিখ ও অতিথি আবার দিন।"
-                  : "Partner links open general collections—not live quotes. Re-enter destination, dates and guests."}
+                {searchTab === "hotels"
+                  ? isBn
+                    ? "পার্টনার লিংক সাধারণ হোটেল তালিকা খোলে—নির্বাচিত তারিখের লাইভ কোট নয়। গন্তব্য, তারিখ ও অতিথি আবার দিন।"
+                    : "Hotel links open general partner collections—not live quotes for your selected dates. Re-enter destination, dates and guests."
+                  : isBn
+                    ? "ফ্লাইট লিংক পার্টনার সার্চে নিয়ে যায়; ভাড়া, প্রাপ্যতা ও শর্ত সেবাদাতার সাইটে যাচাই করুন।"
+                    : "Flight links hand off to partner search; check fares, availability and terms on the provider’s site."}
               </span>
               <span className="block text-[10px] leading-4 text-slate-500">
-                {isBn
-                  ? "যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; এটি ভ্রমণকারীর জন্য ছাড় নয়।"
-                  : "URAL may earn a commission on qualifying bookings; this is not a traveller discount."}
+                {flightSearchOnly
+                  ? isBn
+                    ? "যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে—আপনার অতিরিক্ত খরচ ছাড়াই।"
+                    : "URAL may earn a commission on qualifying bookings, at no extra cost to you."
+                  : isBn
+                    ? "যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; এটি ভ্রমণকারীর জন্য ছাড় নয়।"
+                    : "URAL may earn a commission on qualifying bookings; this is not a traveller discount."}
               </span>
             </div>
 
             <div className="flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
-              <a
-                href={klookHotelsPartnerUrl}
-                data-affiliate-placement={affiliatePlacement}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-amber-700 bg-amber-50/90 hover:bg-amber-100/80 border border-amber-200/80 px-2.5 py-1 rounded-lg transition-colors"
-              >
-                <span>{isBn ? "Klook-এ হোটেল সার্চ" : "Search Klook hotel collection"}</span>
-                <ExternalLink size={11} />
-              </a>
-              <a
-                href={goCityPassUrl}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
-              >
-                <span>Go City All-Inclusive &amp; Explorer Pass</span>
-                <ExternalLink size={11} />
-              </a>
-              <a
-                href="/kkday-hotels"
-                className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
-              >
-                <span>{isBn ? "KKday হোটেল তালিকা" : "Search KKday hotel collection"}</span>
-                <ExternalLink size={11} />
-              </a>
-              <a
-                href={resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage)}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
-              >
-                <span>Luggage Storage (Radical)</span>
-                <ExternalLink size={11} />
-              </a>
-              <a
-                href={uralWlDeepUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 font-semibold text-slate-600 hover:text-brand-navy px-2 py-1 rounded-lg transition-colors"
-              >
-                <span>URAL White-Label Portal</span>
-                <ExternalLink size={11} />
-              </a>
+              {!flightSearchOnly && (
+                <>
+                  <a
+                    href={klookHotelsPartnerUrl}
+                    data-affiliate-placement={affiliatePlacement}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-amber-700 bg-amber-50/90 hover:bg-amber-100/80 border border-amber-200/80 px-2.5 py-1 rounded-lg transition-colors"
+                  >
+                    <span>{isBn ? "Klook-এ হোটেল সার্চ" : "Search Klook hotel collection"}</span>
+                    <ExternalLink size={11} />
+                  </a>
+                  <a
+                    href={goCityPassUrl}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
+                  >
+                    <span>Go City All-Inclusive &amp; Explorer Pass</span>
+                    <ExternalLink size={11} />
+                  </a>
+                  <a
+                    href="/kkday-hotels"
+                    className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
+                  >
+                    <span>{isBn ? "KKday হোটেল তালিকা" : "Search KKday hotel collection"}</span>
+                    <ExternalLink size={11} />
+                  </a>
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
+                  >
+                    <span>Luggage Storage (Radical)</span>
+                    <ExternalLink size={11} />
+                  </a>
+                  {searchTab === "flights" && (
+                    <a
+                      href={uralFlightWlDeepUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-semibold text-slate-600 hover:text-brand-navy px-2 py-1 rounded-lg transition-colors"
+                    >
+                      <span>{isBn ? "URAL-এর পূর্ণাঙ্গ ফ্লাইট সার্চ খুলুন" : "Open URAL full flight search"}</span>
+                      <ExternalLink size={11} />
+                    </a>
+                  )}
+                </>
+              )}
+              {showFlightProviderHandoffs && searchTab === "flights" && (
+                <a
+                  href={aviasalesDeepUrl}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-amber-700 bg-amber-50/90 hover:bg-amber-100/80 border border-amber-200/80 px-2.5 py-1 rounded-lg transition-colors"
+                >
+                  <span>{isBn ? "Aviasales-এ ফ্লাইট তুলনা করুন" : "Compare flights on Aviasales"}</span>
+                  <ExternalLink size={11} />
+                </a>
+              )}
             </div>
           </div>
         </form>
@@ -1223,7 +1250,7 @@ export function TravelpayoutsCustomWidget({
               ) : (
                 <>
                   <a
-                    href={uralWlDeepUrl}
+                    href={uralFlightWlDeepUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 bg-[#07C369] hover:bg-[#06ad5d] text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer"
@@ -1410,7 +1437,7 @@ export function TravelpayoutsCustomWidget({
                 ) : (
                   <>
                     <a
-                      href={uralWlDeepUrl}
+                      href={uralFlightWlDeepUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
@@ -1445,7 +1472,7 @@ export function TravelpayoutsCustomWidget({
               </div>
               <div className="flex flex-wrap items-center gap-2 shrink-0">
                 <a
-                  href={uralWlDeepUrl}
+                  href={uralFlightWlDeepUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"

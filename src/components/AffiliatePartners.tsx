@@ -50,17 +50,17 @@ export const TRAVELPAYOUTS_REFERRAL_URL = "https://www.travelpayouts.com/?marker
  * signup. Values are short, lowercase and stable — never reuse one for a
  * different placement, or its history becomes unreadable.
  *
- * `post_havana` and `post_chefchaouen` are RESERVED: their placements were
- * removed on 2026-10-24 (a "start your own travel blog" pitch inside a city
- * guide reaches trip-shoppers, not publishers). The ids stay listed so that a
- * future re-opt-in reuses its own id instead of inheriting another placement's
- * statistics.
+ * `post_bangkok_food`, `post_havana` and `post_chefchaouen` are RESERVED: those
+ * placements were removed from destination/traveller guides because a creator
+ * referral belongs in creator-focused content, not trip-planning advice. The ids
+ * stay listed so a future re-opt-in reuses its own id instead of inheriting
+ * another placement's statistics.
  */
 export const TRAVELPAYOUTS_REFERRAL_SUB_IDS: Record<string, string> = {
   "travel-creator-resources": "creator_hub",
   "can-you-make-money-travel-affiliate-marketing-ural-experiment": "post_ural_experiment",
   "turn-travel-experience-into-income-without-a-website": "post_social_income",
-  "halal-food-guide-bangkok-bangladesh": "post_bangkok_food",
+  "halal-food-guide-bangkok-bangladesh": "post_bangkok_food", // reserved: no longer placed on a traveller guide
   "chefchaouen-morocco-travel-guide-bangladesh": "post_chefchaouen", // reserved
   "havana-cuba-travel-guide-bangladesh": "post_havana", // reserved
 };
@@ -217,7 +217,7 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     fallbackPartner: "klook",
     expiresAt: KKDAY_PROMO.expiresAt,
     promoCode: "1010TOURS, 1010MOVE, 1010TIX",
-    activeNote: `${KKDAY_PROMO.campaignName} (${KKDAY_PROMO.discount}: 1010TOURS, 1010MOVE, 1010TIX) through Oct 31, 2026`,
+    activeNote: "Evergreen partner placement remains active; the 10.10 customer voucher ended Oct 31, 2026",
     expiredFallbackBehavior: "Auto-switches banner to evergreen KKday Asian Tours & Rail Passes after Oct 31, 2026"
   },
   kiwitaxi: {
@@ -1091,28 +1091,6 @@ export interface TravelpayoutsReferralBlogPlacement {
 }
 
 export const TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS: Record<string, TravelpayoutsReferralBlogPlacement> = {
-  "halal-food-guide-bangkok-bangladesh": {
-    badgeEn: "✈️ FOR TRAVEL CREATORS & BLOGGERS",
-    badgeBn: "✈️ ট্রাভেল ক্রিয়েটর ও ব্লগারদের জন্য",
-    headlineEn: "Building a Travel Blog, Channel, or Destination Site of Your Own?",
-    headlineBn: "নিজের ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেসটিনেশন সাইট গড়়ছেন?",
-    bodyBeforeAnchorEn:
-      "A note for readers who publish travel content too: managing a dozen separate affiliate dashboards used to eat hours of my week. This site now runs its flight, hotel and activity partnerships through Travelpayouts - one dashboard, one payout. If you are building a travel blog, YouTube channel or destination website, you can ",
-    anchorTextEn: "explore Travelpayouts and its creator tools here",
-    bodyAfterAnchorEn:
-      " - it is the platform I recommend for creators who want to monetize travel content transparently. New partners can earn up to $100 in welcome bonuses, and rewards unlock as your content actually earns: a long-term income stream, not quick cash.",
-    bodyBeforeAnchorBn:
-      "যারা নিজেরারাও ট্রাভেল কন্টেন্ট প্রকাশ করেন তাদের জন্য একটি নোট: আলাদা আলাদা অ্যাফিলিয়েট ড্যাশবোর্ড সামলানো আগে সপ্তাহে ঘণ্টার পর ঘণ্টা নিয়ে যেত। এখন এই সাইটের ফ্লাইট, হোটেল ও অ্যাক্টিভিটি পার্টনরশিপ চলে Travelpayouts-এর একটিমাত্র ড্যাশবোর্ড থেকে। আপনি যদি ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেসটিনেশন ওয়েবসাইট গড়়েন, তাহলে ",
-    anchorTextBn: "এখান থেকে Travelpayouts ও এর ক্রিয়েটর টুলগুলো দেখে নিন",
-    bodyAfterAnchorBn:
-      " - ট্রাভেল কন্টেন্ট দিয়ে স্বচ্ছভাবে আয় করতে চাওয়া ক্রিয়েটরদের জন্য আমি যে প্ল্যাটফর্মটি সুপারিশ করি, সেটিই এটি। নতুন পার্টনাররা স্বাগতম বোনাসে $100 পর্যন্ত পেতে পারেন; তবে পুরস্কার আনলক হয়় আপনার কন্টেন্ট সত্যিই আয় করার পর - এটি দ্রুত টাকার নয়়, দীর্ঘমেয়়াদি আয়ের একটি পথ।",
-    buttonLabelEn: "Explore Travelpayouts for Creators",
-    buttonLabelBn: "ক্রিয়েটরদের জন্য Travelpayouts দেখুন",
-    disclosureEn:
-      "Transparency: this is my referral link. If you join through it and start earning, Travelpayouts pays me a milestone bonus at no extra cost to you.",
-    disclosureBn:
-      "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে আপনি যদি আয় করা শুরু করেন, তাহলে Travelpayouts আমাকে একটি মাইলফলক বোনাস দেয়় - আপনার কোনো অতিরিক্ত খরচ ছাড়াই।",
-  },
   "turn-travel-experience-into-income-without-a-website": {
     badgeEn: "✈️ FOR TRAVELLERS WHO ALREADY SHARE",
     badgeBn: "✈️ যাঁরা ইতিমধ্যেই ভ্রমণের কথা শেয়ার করেন",
@@ -1141,21 +1119,21 @@ export const TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS: Record<string, Travelpayout
     headlineEn: "Building a Travel Blog, Channel, or Destination Site of Your Own?",
     headlineBn: "নিজের ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেস্টিনেশন সাইট গড়ছেন?",
     bodyBeforeAnchorEn:
-      "A note for readers who publish travel content too: managing a dozen separate affiliate dashboards used to eat hours of my week. This site now runs its flight, hotel and activity partnerships through Travelpayouts - one dashboard, one payout. If you are building a travel blog, YouTube channel or destination website, you can ",
+      "A note for travel publishers: our site uses Travelpayouts for tracked links to several travel partners. If you are building a travel blog, YouTube channel or destination website, review the current terms and check partner availability, approval and payout options for your market. You can ",
     anchorTextEn: "explore Travelpayouts and its creator tools here",
     bodyAfterAnchorEn:
-      " - it is the platform I recommend for creators who want to monetize travel content transparently. New partners can earn up to $100 in welcome bonuses, and rewards unlock as your content actually earns: a long-term income stream, not quick cash.",
+      " - it is one of the affiliate tools we use. Participating partners, eligibility and rewards can change; joining does not guarantee commissions.",
     bodyBeforeAnchorBn:
-      "যারা নিজেরাও ট্রাভেল কন্টেন্ট প্রকাশ করেন তাদের জন্য একটি নোট: আলাদা আলাদা অ্যাফিলিয়েট ড্যাশবোর্ড সামলানো আগে সপ্তাহে ঘণ্টার পর ঘণ্টা নিয়ে যেত। এখন এই সাইটের ফ্লাইট, হোটেল ও অ্যাক্টিভিটি পার্টনারশিপ চলে Travelpayouts-এর একটিমাত্র ড্যাশবোর্ড থেকে। আপনি যদি ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেস্টিনেশন ওয়েবসাইট গড়েন, তাহলে ",
+      "ট্রাভেল কনটেন্ট প্রকাশকদের জন্য একটি কথা: আমাদের সাইটে কয়েকটি ট্রাভেল পার্টনারের ট্র্যাক করা লিংকের জন্য Travelpayouts ব্যবহার করি। আপনি যদি ট্রাভেল ব্লগ, ইউটিউব চ্যানেল বা ডেস্টিনেশন ওয়েবসাইট তৈরি করেন, বর্তমান শর্ত পড়ুন এবং আপনার বাজারে পার্টনারের প্রাপ্যতা, অনুমোদন ও পেআউটের সুযোগ যাচাই করুন। আপনি ",
     anchorTextBn: "এখান থেকে Travelpayouts ও এর ক্রিয়েটর টুলগুলো দেখে নিন",
     bodyAfterAnchorBn:
-      " - ট্রাভেল কন্টেন্ট দিয়ে স্বচ্ছভাবে আয় করতে চাওয়া ক্রিয়েটরদের জন্য আমি যে প্ল্যাটফর্মটি সুপারিশ করি, সেটিই এটি। নতুন পার্টনাররা স্বাগতম বোনাসে $100 পর্যন্ত পেতে পারেন; তবে পুরস্কার আনলক হয় আপনার কন্টেন্ট সত্যিই আয় করার পর - এটি দ্রুত টাকার নয়, দীর্ঘমেয়াদি আয়ের একটি পথ।",
+      " - এটি আমাদের ব্যবহৃত অ্যাফিলিয়েট টুলগুলোর একটি। পার্টনার, যোগ্যতা ও পুরস্কারের শর্ত বদলাতে পারে; যোগ দিলেই কমিশন নিশ্চিত হয় না।",
     buttonLabelEn: "Explore Travelpayouts for Creators",
     buttonLabelBn: "ক্রিয়েটরদের জন্য Travelpayouts দেখুন",
     disclosureEn:
-      "Transparency: this is my referral link. If you join through it and start earning, Travelpayouts pays me a milestone bonus at no extra cost to you.",
+      "Transparency: this is my referral link. Travelpayouts may reward me if you join through it and meet its current qualifying conditions. It does not add a fee or reduce your commission.",
     disclosureBn:
-      "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে আপনি যদি আয় করা শুরু করেন, তাহলে Travelpayouts আমাকে একটি মাইলফলক বোনাস দেয় - আপনার কোনো অতিরিক্ত খরচ ছাড়াই।",
+      "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে বর্তমান যোগ্যতার শর্ত পূরণ করলে Travelpayouts আমাকে পুরস্কার দিতে পারে। এতে আপনার কোনো অতিরিক্ত ফি যোগ হয় না বা আপনার কমিশন কমে না।",
   },
 };
 

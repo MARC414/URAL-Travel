@@ -2,6 +2,11 @@ import { getTravellerCheck } from "../src/utils/travellerChecks";
 import { prepareSiteSearchIndex, searchSite, type SiteSearchEntry } from "../src/utils/siteSearch";
 import { HOTEL_GUIDE_DESTINATIONS } from "../src/data/hotelGuideDestinations";
 import { DESTINATION_HERO_IMAGES } from "../src/data/destinationHeroImages";
+import { SITE_SEARCH_ALIASES } from "../src/data/siteSearchAliases";
+import {
+  DESTINATION_FLIGHT_SEARCHES,
+  DESTINATION_OFFICIAL_SOURCES,
+} from "../src/data/destinationOfficialSources";
 /**
  * Post-build verification for the prerendered output.
  *
@@ -32,22 +37,25 @@ import { validateSitemapPair } from "./sitemapValidation";
 import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { SITE_ORIGIN } from "../src/utils/localeRoutes";
-import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
+import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, HOTELS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
 import {
   AFFILIATE_LINKS,
   AFFILIATE_OFFER_REGISTRY,
+  KKDAY_PROMO,
   KLOOK_PROMO,
   TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
   TRAVELPAYOUTS_REFERRAL_SUB_IDS,
   TRAVELPAYOUTS_REFERRAL_URL,
   buildTravelpayoutsReferralUrl,
   resolvePartnerUrl,
+  sanitizeExpiredPromoText,
 } from "../src/components/AffiliatePartners";
 import {
   KLOOK_HOTEL_BLOG_PLACEMENTS,
   KLOOK_HOTEL_COMMISSION_NOTE,
 } from "../src/components/KlookHotelOffers";
 import { KlookHotelSpotlight } from "../src/components/KlookHotelSpotlight";
+import { KKdayPromoBanner } from "../src/components/KKdayPromoBanner";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
   DESTINATION_PARTNER_COPY,
@@ -65,6 +73,7 @@ import {
   getLocalizedDestinations,
   getLocalizedFlights,
   getLocalizedHajjFaqs,
+  getLocalizedHotels,
   getLocalizedVisas,
 } from "../src/data/bengaliContent";
 import { EDITOR_PROFILE } from "../src/data/authorProfiles";
@@ -93,7 +102,12 @@ import {
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import App from "../src/App";
+import { TravelpayoutsCustomWidget } from "../src/components/TravelpayoutsCustomWidget";
+import { AirHelpWidget } from "../src/components/AirHelpWidget";
+import { KiwitaxiEmbed } from "../src/components/KiwitaxiEmbed";
+import { WelcomePickupsEmbed, WELCOME_PICKUPS_PARTNER_URL } from "../src/components/WelcomePickupsEmbed";
 import BlogPostRouteView from "../src/routes/BlogPostRouteView";
+import HotelsRouteView from "../src/routes/HotelsRouteView";
 import { UmrahBudgetCalculator } from "../src/components/UmrahBudgetCalculator";
 import { calculateUmrahBudget, emptyUmrahBudget, UMRAH_BUDGET_ITEMS } from "../src/utils/umrahBudget";
 import ContactRouteView from "../src/routes/ContactRouteView";
@@ -119,6 +133,112 @@ function check(condition: boolean, label: string) {
 function read(filePath: string): string | null {
   return fs.existsSync(filePath) ? fs.readFileSync(filePath, "utf8") : null;
 }
+
+// --- Transfer handoff regression guards ------------------------------------
+const welcomePickupSource = read(path.join(ROOT_DIR, "src/components/WelcomePickupsEmbed.tsx")) ?? "";
+const kiwitaxiSource = read(path.join(ROOT_DIR, "src/components/KiwitaxiEmbed.tsx")) ?? "";
+const essentialsSource = read(path.join(ROOT_DIR, "src/components/TravelEssentials.tsx")) ?? "";
+const renderTransfer = (component: React.ReactElement) => renderToStaticMarkup(component);
+const welcomeTransferEn = renderTransfer(React.createElement(WelcomePickupsEmbed, { defaultCountry: "Thailand", lang: "en" }));
+const welcomeTransferBn = renderTransfer(React.createElement(WelcomePickupsEmbed, { defaultCountry: "Thailand", lang: "bn" }));
+const kiwitaxiTransferEn = renderTransfer(React.createElement(KiwitaxiEmbed, { defaultCountry: "Thailand", lang: "en" }));
+const kiwitaxiTransferBn = renderTransfer(React.createElement(KiwitaxiEmbed, { defaultCountry: "Thailand", lang: "bn" }));
+const kiwitaxiPartnerUrl = resolvePartnerUrl(AFFILIATE_LINKS.kiwitaxi);
+check(
+  !/2026-10-15|TRANSFER_ROUTES|sedanBdt|minivanBdt|estimatedBdt|estimatedUsd|window\.open\(/.test(welcomePickupSource) &&
+    !/2026-10-15|2026-07-15/.test(welcomeTransferEn + welcomeTransferBn + kiwitaxiSource + kiwitaxiTransferEn + kiwitaxiTransferBn),
+  "transfer planners have no stale preset dates, unsupported fare tables or form-submit redirect"
+);
+check(
+  welcomeTransferEn.includes("Welcome Pickups") && welcomeTransferBn.includes("Welcome Pickups") &&
+    welcomeTransferEn.includes("not sent to Welcome Pickups") && welcomeTransferBn.includes("পাঠানো হয় না") &&
+    welcomeTransferEn.includes("not a confirmed booking") && welcomeTransferBn.includes("নিশ্চিত বুকিং") &&
+    welcomeTransferEn.includes("drafts a message to URAL") && welcomeTransferBn.includes("খসড়া বার্তা তৈরি করে") &&
+    welcomePickupSource.includes(WELCOME_PICKUPS_PARTNER_URL) &&
+    welcomePickupSource.includes('data-affiliate-placement="travel_essentials_welcome_pickups_transfer"') &&
+    welcomePickupSource.includes('rel="noopener noreferrer sponsored"') &&
+    welcomePickupSource.includes("may earn a commission on qualifying bookings"),
+  "Welcome Pickups EN/BN handoff explains non-forwarded details, inquiry-only contact, tracked partner link and commission disclosure"
+);
+check(
+  kiwitaxiTransferEn.includes(kiwitaxiPartnerUrl.replace(/&/g, "&amp;")) &&
+    kiwitaxiTransferBn.includes(kiwitaxiPartnerUrl.replace(/&/g, "&amp;")) &&
+    kiwitaxiTransferEn.includes("does not carry an airport") && kiwitaxiTransferBn.includes("তথ্য পাঠায় না") &&
+    kiwitaxiTransferEn.includes('data-affiliate-placement="travel_essentials_kiwitaxi_transfer"') &&
+    kiwitaxiTransferBn.includes('data-affiliate-placement="travel_essentials_kiwitaxi_transfer"') &&
+    !/Fixed price per car|Free cancellation up to 24h|Open Kiwitaxi Direct/.test(essentialsSource),
+  "Kiwitaxi EN/BN handoff uses one tracked generic CTA and removes unsupported price/cancellation claims and duplicate CTA"
+);
+check(
+  essentialsSource.includes('<WelcomePickupsEmbed defaultCountry={country} lang={lang} />') &&
+    essentialsSource.includes('<KiwitaxiEmbed defaultCountry={country} lang={lang} />') &&
+    !welcomePickupSource.includes("data-affiliate-placement=\"ural_transfer_availability_inquiry\""),
+  "travel essentials pass locale and destination context to both transfer handoffs; URAL inquiry is not mislabeled as an affiliate"
+);
+const renderPartnerWidget = (props: Record<string, unknown>) =>
+  renderTransfer(React.createElement(TravelpayoutsCustomWidget as React.ComponentType<any>, props));
+const hotelModeWidgetHtml = renderPartnerWidget({ hotelsOnly: true, initialTab: "hotels", initialHotelCity: "Bangkok", lang: "en" });
+const hotelModeWidgetBnHtml = renderPartnerWidget({ hotelsOnly: true, initialTab: "hotels", initialHotelCity: "Bangkok", lang: "bn" });
+const flightModeWidgetHtml = renderPartnerWidget({ initialTab: "flights", initialTo: "Bangkok (BKK)", lang: "en" });
+const escapedPartnerUrl = (partner: keyof typeof AFFILIATE_LINKS) =>
+  resolvePartnerUrl(AFFILIATE_LINKS[partner]).replace(/&/g, "&amp;");
+check(
+  !hotelModeWidgetHtml.includes("travelpayouts-wl.html") && !hotelModeWidgetBnHtml.includes("travelpayouts-wl.html") &&
+    hotelModeWidgetHtml.includes(escapedPartnerUrl("klookHotels")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("klookHotels")) &&
+    hotelModeWidgetHtml.includes("/kkday-hotels") && hotelModeWidgetBnHtml.includes("/kkday-hotels") &&
+    hotelModeWidgetHtml.includes(escapedPartnerUrl("goCity")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("goCity")) &&
+    hotelModeWidgetHtml.includes(escapedPartnerUrl("radicalStorage")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("radicalStorage")) &&
+    hotelModeWidgetHtml.includes("Klook partner search") && hotelModeWidgetBnHtml.includes("Klook পার্টনার সার্চ") &&
+    !hotelModeWidgetHtml.includes("Verified Klook Stays") && !hotelModeWidgetBnHtml.includes("Verified Klook Stays"),
+  "EN/BN hotel mode hides the flight-only portal, keeps Klook and KKday hotel, Go City activity and Radical Storage links, and avoids an unsupported verified-stays claim"
+);
+check(
+  flightModeWidgetHtml.includes('href="/travelpayouts-wl.html?origin=DAC&amp;destination=BKK&amp;flightSearch=') &&
+    flightModeWidgetHtml.includes("Open URAL full flight search") &&
+    !flightModeWidgetHtml.includes("destination=KTM&amp;flightSearch="),
+  "flight mode retains the URAL white-label partner handoff with the selected flight destination, not the hotel-city mapping"
+);
+const airHelpScreenEn = renderTransfer(React.createElement(AirHelpWidget, { lang: "en" }));
+const airHelpScreenBn = renderTransfer(React.createElement(AirHelpWidget, { lang: "bn" }));
+const airHelpEstimatorCopyClear =
+  airHelpScreenEn.includes("Not an eligibility or payout decision") &&
+  airHelpScreenBn.includes("এটি যোগ্যতা বা পেআউটের সিদ্ধান্ত নয়") &&
+  airHelpScreenEn.includes("Check eligibility with AirHelp") &&
+  airHelpScreenBn.includes("AirHelp-এ যোগ্যতা যাচাই করুন") &&
+  airHelpScreenEn.includes(escapedPartnerUrl("airhelp")) &&
+  airHelpScreenBn.includes(escapedPartnerUrl("airhelp")) &&
+  airHelpScreenEn.includes('rel="noopener noreferrer sponsored"') &&
+  airHelpScreenBn.includes('rel="noopener noreferrer sponsored"') &&
+  !/Estimated Compensation|Up to €600|BDT 78,000|100% No Win, No Fee|Covers flights from past 3 years|Free 2-minute eligibility check/.test(airHelpScreenEn) &&
+  !/সম্ভাব্য ক্ষতিপূরণ|সর্বোচ্চ €600|৭৮,০০০ টাকা|কোনো অগ্রিম ফি নেই|গত ৩ বছরের ফ্লাইট গ্রহণযোগ্য/.test(airHelpScreenBn);
+check(
+  airHelpEstimatorCopyClear,
+  "AirHelp's EN/BN preliminary screen avoids implied payout/eligibility decisions from limited inputs while retaining the clearly sponsored partner handoff"
+);
+const airHelpPlusSource = read(path.join(ROOT_DIR, "src", "components", "AirHelpWidget.tsx")) ?? "";
+const airHelpPlusCopyClear =
+  airHelpPlusSource.includes("AirHelp+ is a paid membership, not travel insurance.") &&
+  airHelpPlusSource.includes("Plans, prices, included services and trip limits can vary by market and may change.") &&
+  airHelpPlusSource.includes("Membership does not guarantee compensation") &&
+  airHelpPlusSource.includes("AirHelp+ একটি পেইড মেম্বারশিপ, ভ্রমণ বীমা নয়।") &&
+  airHelpPlusSource.includes("আপনার বাজার ও প্ল্যানে কোডটি গ্রহণযোগ্য হলে অফার প্রযোজ্য") &&
+  airHelpPlusSource.includes('href="https://www.airhelp.com/en/airhelp-plus-terms/"') &&
+  !/Covers up to 3 trips|Up to 3 Trips \/ Year|Up to 9 Trips|Covers up to 9 trips|zero fee on €600|Keep 100% of your €600|instant airport lounge|valid across all markets/i.test(airHelpPlusSource) &&
+  AFFILIATE_LINKS.airhelp === "https://airhelp.tpo.li/XS95LnEC" &&
+  AFFILIATE_OFFER_REGISTRY.airhelp.status === "active";
+check(
+  airHelpPlusCopyClear,
+  "AirHelp+ plan copy avoids fixed market-dependent benefits, directs users to current official terms, qualifies the code at checkout, and preserves the active partner link"
+);
+const airHelpFallbackCopyClear =
+  airHelpPlusSource.includes("The embedded form did not load.") &&
+  airHelpPlusSource.includes("AirHelp's current terms") &&
+  airHelpPlusSource.includes("confirm offer eligibility at checkout") &&
+  !/check €600 compensation eligibility|up to €600 compensation eligibility for free/i.test(airHelpPlusSource);
+check(
+  airHelpFallbackCopyClear,
+  "the AirHelp embedded-form fallback makes no free or fixed-amount eligibility promise and keeps offer eligibility conditional"
+);
 
 /**
  * `**bold**` in a blog body is authored markdown that the React view renders as
@@ -224,6 +344,24 @@ check(
     searchSite(preparedSiteSearch, "oddschecker", "en").length === 0,
   "site search does not invent a Kashmir guide or surface irrelevant oddschecker noise"
 );
+const searchAliasCases = Object.entries(SITE_SEARCH_ALIASES).flatMap(([englishPath, locales]) =>
+  (["en", "bn"] as const).flatMap((locale) =>
+    locales[locale].map((query) => ({
+      query,
+      locale,
+      expectedPath: locale === "bn" ? `/bn${englishPath}` : englishPath,
+    }))
+  )
+);
+const searchAliasFailures = searchAliasCases.filter(({ query, locale, expectedPath }) =>
+  searchSite(preparedSiteSearch, query, locale)[0]?.path !== expectedPath
+);
+check(
+  searchAliasCases.length === 66 && searchAliasFailures.length === 0,
+  searchAliasFailures.length === 0
+    ? `all ${searchAliasCases.length} real EN/BN search-query variations lead with their existing guide`
+    : `search-query alias mismatches: ${searchAliasFailures.map(({ locale, query, expectedPath }) => `${locale} “${query}” → ${expectedPath}`).join("; ")}`
+);
 const destinationsHubHtml = read(path.join(DIST_DIR, "destinations.html")) ?? "";
 const bnDestinationsHubHtml = read(path.join(DIST_DIR, "bn", "destinations.html")) ?? "";
 const hotelsHubHtml = read(path.join(DIST_DIR, "hotels.html")) ?? "";
@@ -237,6 +375,88 @@ check(
     bnDestinationsHubHtml.includes('alt="নেপালের ফেওয়া লেকের ওপরে ভোরের আলোয় অন্নপূর্ণা হিমালয় পর্বতমালা" loading="eager" decoding="async" fetchpriority="high"'),
   "English and Bengali destination directories prerender all 10 localized photo cards and prioritize/preload the first card as the likely LCP image"
 );
+const destinationFlightWidgetSource = read(path.join(ROOT_DIR, "src", "components", "TravelpayoutsCustomWidget.tsx")) ?? "";
+const destinationMappingsValid = DESTINATIONS_DATA.every((destination) => {
+  const flight = DESTINATION_FLIGHT_SEARCHES[destination.id];
+  const sources = DESTINATION_OFFICIAL_SOURCES[destination.id] ?? [];
+  const airportCode = flight?.initialTo.match(/\(([A-Z]{3})\)/)?.[1];
+  return Boolean(
+    flight && airportCode && destinationFlightWidgetSource.includes(`code: "${airportCode}"`) &&
+    sources.length >= 2 && sources.some((source) => source.category === "entry") &&
+    sources.every((source) => {
+      try {
+        const url = new URL(source.url);
+        return url.protocol === "https:" && source.labelEn.length >= 20 && source.labelBn.length >= 12 &&
+          !/tpo\.li|affiliate|sponsored/i.test(source.url);
+      } catch {
+        return false;
+      }
+    })
+  );
+});
+check(
+  destinationMappingsValid && Object.keys(DESTINATION_FLIGHT_SEARCHES).length === DESTINATIONS_DATA.length &&
+    Object.keys(DESTINATION_OFFICIAL_SOURCES).length === DESTINATIONS_DATA.length,
+  "all ten destination guides have widget-recognized DAC airport defaults and at least two descriptive HTTPS editorial sources"
+);
+const widgetProvidesBothFlightHandoffs =
+  destinationFlightWidgetSource.includes("/travelpayouts-wl.html?") &&
+  destinationFlightWidgetSource.includes("https://www.aviasales.com/search/");
+check(
+  widgetProvidesBothFlightHandoffs,
+  "destination flight search uses the shared widget’s existing white-label and Aviasales handoffs"
+);
+const destinationLandingSource = read(path.join(ROOT_DIR, "src", "components", "CityDestinationLanding.tsx")) ?? "";
+check(
+  destinationLandingSource.includes("flightSearchOnly") &&
+    destinationLandingSource.includes("showInlineResults={false}") &&
+    destinationLandingSource.includes("showFlightProviderHandoffs") &&
+    destinationFlightWidgetSource.includes("showFlightProviderHandoffs") &&
+    destinationFlightWidgetSource.includes("Compare flights on Aviasales"),
+  "destination widget exposes both partner handoffs without rendering simulated inline fare cards"
+);
+const destinationReferencePagesValid = DESTINATIONS_DATA.every((destination) => {
+  const enHtml = read(path.join(DIST_DIR, "destinations", `${destination.id}.html`)) ?? "";
+  const bnHtml = read(path.join(DIST_DIR, "bn", "destinations", `${destination.id}.html`)) ?? "";
+  const sources = DESTINATION_OFFICIAL_SOURCES[destination.id] ?? [];
+  const staticFallback = Boolean(
+    enHtml.includes('href="/flights"') && enHtml.includes("Open the full flight planner") &&
+    bnHtml.includes('href="/bn/flights"') && bnHtml.includes("সম্পূর্ণ ফ্লাইট প্ল্যানার খুলুন") &&
+    enHtml.includes("does not display a live fare") && bnHtml.includes("লাইভ ভাড়া")
+  );
+  const sourceAnchors = sources.every((source) => {
+    const escapedUrl = source.url.replace(/&/g, "&amp;");
+    return enHtml.includes(`href="${escapedUrl}"`) && enHtml.includes(source.labelEn) &&
+      bnHtml.includes(`href="${escapedUrl}"`) && bnHtml.includes(source.labelBn);
+  });
+  return staticFallback && sourceAnchors;
+});
+check(
+  destinationReferencePagesValid,
+  "all English and Bengali destination pages prerender descriptive official-source links and a no-live-quote flight-planner fallback"
+);
+const destinationWidgetHtml = renderToStaticMarkup(
+  React.createElement(TravelpayoutsCustomWidget as React.ComponentType<any>, {
+    initialTab: "flights",
+    initialFrom: "Dhaka (DAC)",
+    initialTo: "Kathmandu (KTM)",
+    flightSearchOnly: true,
+    showInlineResults: false,
+    showFlightProviderHandoffs: true,
+    lang: "bn",
+  })
+);
+check(
+  destinationWidgetHtml.includes('href="/travelpayouts-wl.html?origin=DAC&amp;destination=KTM') &&
+    destinationWidgetHtml.includes('href="https://www.aviasales.com/search/') &&
+    destinationWidgetHtml.includes("যাত্রা শুরু") && destinationWidgetHtml.includes("ফ্লাইট খুঁজুন") &&
+    destinationWidgetHtml.includes("Aviasales-এ ফ্লাইট তুলনা করুন") &&
+    !destinationWidgetHtml.includes("Search Klook hotel collection") &&
+    !destinationWidgetHtml.includes("Go City All-Inclusive") &&
+    !destinationWidgetHtml.includes("Biman Bangladesh Airlines") &&
+    !destinationWidgetHtml.includes("Direct Flight"),
+  "route-prefilled Bengali widget exposes white-label and Aviasales handoffs without fabricated inline fares"
+);
 check(
   (hotelsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 6 &&
     (bnHotelsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 6 &&
@@ -245,6 +465,33 @@ check(
     hotelsHubHtml.includes("Neighborhood guide") &&
     !hotelsHubHtml.includes("verified property directory"),
   "English and Bengali hotel directories prerender six destination-image area-guide cards, not property listings"
+);
+const renderHotelDirectory = (locale: "en" | "bn") =>
+  renderToStaticMarkup(
+    React.createElement(HotelsRouteView as React.ComponentType<any>, {
+      context: {
+        isBn: locale === "bn",
+        lang: locale,
+        localizedHotels: getLocalizedHotels(locale),
+        parameterId: undefined,
+        navigateTo: (routePath: string) => routePath,
+        getLocalizedRouteHref: (routePath: string) => locale === "bn" ? `/bn${routePath}` : routePath,
+      },
+    })
+  );
+const clientHotelsHubHtml = renderHotelDirectory("en");
+const clientBnHotelsHubHtml = renderHotelDirectory("bn");
+const clientHotelGuideLinksLocalized = HOTELS_DATA.every((hotel) =>
+  clientHotelsHubHtml.includes(`href="/hotels/${hotel.id}"`) &&
+    clientBnHotelsHubHtml.includes(`href="/bn/hotels/${hotel.id}"`) &&
+    !clientBnHotelsHubHtml.includes(`href="/hotels/${hotel.id}"`)
+);
+check(
+  clientHotelGuideLinksLocalized &&
+    clientHotelsHubHtml.includes('alt="The Annapurna Himalayan range above Phewa Lake at dawn in Nepal"') &&
+    clientBnHotelsHubHtml.includes('alt="নেপালের ফেওয়া লেকের ওপরে ভোরের আলোয় অন্নপূর্ণা হিমালয় পর্বতমালা"') &&
+    !clientHotelsHubHtml.includes("Pexels") && !clientHotelsHubHtml.includes("London hotel"),
+  "hydrated hotel directories keep all guide links localized and use the shared, non-property destination hero without stock-source credit"
 );
 const blogIndexInSync =
   BLOG_POST_COUNT === BLOG_DATA.length &&
@@ -255,6 +502,81 @@ check(
   blogIndexInSync
     ? `the eager blog URL index stays in sync with full metadata (${BLOG_POST_COUNT} slugs)`
     : "src/data/blogIndex.ts must match BLOG_DATA slugs and count in order"
+);
+
+const klookVisitorSavingsClaim = /\b(?:save|saves|saved|saving|savings|discount|discounted|discounts|cheaper|lowest|deal|deals|off)\b|best price guarantee|\b\d{1,2}\s*%/i;
+const klookBlogCtas = [
+  ...BLOG_DATA,
+  ...getLocalizedBlogs("bn"),
+].filter((post) => post.affiliateCTA?.provider === "klook");
+const experiencesSourceForKlook = read(path.join(ROOT_DIR, "src", "components", "ExperiencesPage.tsx")) ?? "";
+const klookRetiredCustomerClaims = [
+  "Save 15–25% on Safari World",
+  "Save 15%–25% compared to Dubai ticket counters",
+  "Save up to 25% on Bangkok family attractions",
+  "Save 20% on Gardens by the Bay",
+  "pre-book on Klook to save 15%",
+  "saves up to 30-50% compared to gate prices",
+  "lowest prices and deepest bundle discounts",
+  "discounted Klook tours",
+  "extra 15% off",
+  "১৫% পর্যন্ত ছাড় পান",
+  "২৫% পর্যন্ত ছাড় পান",
+  "২০% ছাড় পান",
+];
+const klookSavingsSource = [
+  read(path.join(ROOT_DIR, "src", "constants.ts")) ?? "",
+  read(path.join(ROOT_DIR, "src", "data", "bengaliContent.ts")) ?? "",
+  read(path.join(ROOT_DIR, "src", "data", "blogContent.ts")) ?? "",
+  read(path.join(ROOT_DIR, "src", "utils", "faqSchema.ts")) ?? "",
+  read(path.join(ROOT_DIR, "src", "utils", "bn-faq-schema.ts")) ?? "",
+  read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "",
+  read(path.join(ROOT_DIR, "src", "components", "ConsentBanner.tsx")) ?? "",
+  read(path.join(ROOT_DIR, "scripts", "prerender.ts")) ?? "",
+].join(" ");
+const experiencesHtmlForKlook = read(path.join(DIST_DIR, "experiences.html")) ?? "";
+const klookSavingsCopyClear =
+  klookBlogCtas.every((post) => !klookVisitorSavingsClaim.test(`${post.affiliateCTA?.headline ?? ""} ${post.affiliateCTA?.body ?? ""}`)) &&
+  klookRetiredCustomerClaims.every((claim) => !klookSavingsSource.toLowerCase().includes(claim.toLowerCase())) &&
+  !/lowest prices|deepest bundle discounts|Best Price Guarantee|discounted theme parks|extra 15% off/i.test(experiencesSourceForKlook) &&
+  !/discounted Klook tours|Klook.*(?:save|saving|savings|discount|cheaper|lowest|\d{1,2}\s*%)/i.test(experiencesHtmlForKlook) &&
+  AFFILIATE_LINKS.klook === "https://klook.tpo.li/IYOU76Bn" &&
+  AFFILIATE_OFFER_REGISTRY.klook.status === "active";
+check(
+  klookSavingsCopyClear,
+  "Klook activity CTAs in English and Bengali make no unsupported visitor-savings or price-guarantee claims, while the tracked partner URL remains unchanged"
+);
+
+const umrahHotelPlacementSource = read(path.join(ROOT_DIR, "src", "components", "UmrahLandingPage.tsx")) ?? "";
+const umrahHotelPlacementCopyClear =
+  !umrahHotelPlacementSource.includes("Compare Live Makkah & Madinah Hotel Rates:") &&
+  !umrahHotelPlacementSource.includes("মক্কা ও মদিনার হোটেল রেট লাইভ সার্চ করুন:") &&
+  !umrahHotelPlacementSource.includes("Premium Tier · Live Rates Vary by Date & View") &&
+  !umrahHotelPlacementSource.includes("Mid-Range & Shuttle Tiers · Confirm Shuttle Terms") &&
+  !umrahHotelPlacementSource.includes("Dynamic Rates by Direction (North / West / South)") &&
+  umrahHotelPlacementSource.includes("Search hotel listings for Makkah or Madinah:") &&
+  umrahHotelPlacementSource.includes("মক্কা বা মদিনার হোটেল তালিকা খুঁজুন:") &&
+  umrahHotelPlacementSource.includes("<TravelpayoutsCustomWidget");
+check(
+  umrahHotelPlacementCopyClear,
+  "the Umrah hotel handoff describes partner listings rather than live quotes, removes unsubstantiated price tiers, and keeps its booking search placement"
+);
+
+const retiredKkdayCampaignSlug = "kkday-10-10-winter-sale-japan-tours-passes-guide";
+const retiredKkdayRedirects = read(path.join(DIST_DIR, "_redirects")) ?? "";
+const retiredKkdaySitemap = read(path.join(DIST_DIR, "sitemap.xml")) ?? "";
+const retiredKkdayFeed = read(path.join(DIST_DIR, "rss.xml")) ?? "";
+const retiredKkdayCampaignClean =
+  !BLOG_SLUGS.includes(retiredKkdayCampaignSlug as (typeof BLOG_SLUGS)[number]) &&
+  !BLOG_DATA.some((post) => post.slug === retiredKkdayCampaignSlug) &&
+  !(retiredKkdayCampaignSlug in BLOG_BODY) &&
+  retiredKkdayRedirects.includes(`/blog/${retiredKkdayCampaignSlug}  /experiences?region=asia  301`) &&
+  retiredKkdayRedirects.includes(`/bn/blog/${retiredKkdayCampaignSlug}  /bn/experiences?region=asia  301`) &&
+  !retiredKkdaySitemap.includes(retiredKkdayCampaignSlug) &&
+  !retiredKkdayFeed.includes(retiredKkdayCampaignSlug);
+check(
+  retiredKkdayCampaignClean,
+  "the expired KKday campaign article is removed from both locale indexes and feeds, with old URLs redirected to the evergreen Experiences hub"
 );
 
 const CXB_DRAFT_SLUG = "kathmandu-to-coxs-bazar-flights-route-status-booking";
@@ -551,6 +873,274 @@ check(
     ? `all ${expectedSplitRoutes.length} split tool/pre-departure routes ship prerendered HTML (en + bn)`
     : `missing prerendered files: ${missingSplitRoutes.join(", ")}`
 );
+const airHelpToolPageEn = read(path.join(DIST_DIR, "tools", "flight-delay-claim.html")) ?? "";
+const airHelpToolPageBn = read(path.join(DIST_DIR, "bn", "tools", "flight-delay-claim.html")) ?? "";
+const airHelpToolsHubHtml = read(path.join(DIST_DIR, "tools.html")) ?? "";
+const airHelpRouteCopyClear =
+  airHelpToolPageEn.includes("Flight Disruption Claim Check") &&
+  airHelpToolPageBn.includes("ফ্লাইটে সমস্যা হলে দাবি যাচাই ও যাত্রী-অধিকার গাইড") &&
+  airHelpToolPageEn.includes("optional service") &&
+  airHelpToolPageBn.includes("ঐচ্ছিক সেবা") &&
+  airHelpToolsHubHtml.includes("Flight Disruption Checks") &&
+  airHelpToolsHubHtml.includes("check which details may affect a flight-disruption claim") &&
+  !/Claim Up to €600|claim up to €600|No Win, No Fee|€250–€600 EU compensation|€600 \(\$650\)/i.test(
+    airHelpToolPageEn + airHelpToolPageBn + airHelpToolsHubHtml
+  );
+check(
+  airHelpRouteCopyClear,
+  "the EN/BN AirHelp tool route and prerendered tools hub describe an optional case review, not a general €600 or no-fee claim promise"
+);
+const airHelpArticleSlug = "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp";
+const airHelpArticleEn = BLOG_DATA.find((post) => post.slug === airHelpArticleSlug);
+const airHelpArticleBn = getLocalizedBlogs("bn").find((post) => post.slug === airHelpArticleSlug);
+const airHelpArticleBodyEn = BLOG_BODY[airHelpArticleSlug] ?? "";
+const airHelpArticleBodyBn = airHelpArticleBn?.content ?? "";
+const originalDateNow = Date.now;
+let airHelpActiveCtaEn = "";
+let airHelpActiveCtaBn = "";
+let airHelpExpiredCtaEn = "";
+let airHelpExpiredCtaBn = "";
+try {
+  Date.now = () => Date.parse("2026-11-29T12:00:00+06:00");
+  airHelpActiveCtaEn = sanitizeExpiredPromoText(airHelpArticleEn?.affiliateCTA?.body ?? "");
+  airHelpActiveCtaBn = sanitizeExpiredPromoText(airHelpArticleBn?.affiliateCTA?.body ?? "");
+  Date.now = () => Date.parse("2026-12-01T12:00:00+06:00");
+  airHelpExpiredCtaEn = sanitizeExpiredPromoText(airHelpArticleEn?.affiliateCTA?.body ?? "");
+  airHelpExpiredCtaBn = sanitizeExpiredPromoText(airHelpArticleBn?.affiliateCTA?.body ?? "");
+} finally {
+  Date.now = originalDateNow;
+}
+const airHelpArticlePromoLifecycleClear =
+  airHelpArticleEn?.affiliateCTA?.provider === "airhelp" &&
+  airHelpArticleBn?.affiliateCTA?.provider === "airhelp" &&
+  airHelpActiveCtaEn.includes("AHTPO11") && airHelpActiveCtaEn.includes("11% OFF") &&
+  airHelpActiveCtaBn.includes("AHTPO11") && airHelpActiveCtaBn.includes("১১% ছাড়") &&
+  !/AHTPO11|11% OFF/i.test(airHelpExpiredCtaEn) &&
+  !/AHTPO11|১১% ছাড়/.test(airHelpExpiredCtaBn) &&
+  !/AHTPO11|11% off/i.test(airHelpArticleBodyEn) &&
+  !/AHTPO11|১১% ছাড়/.test(airHelpArticleBodyBn) &&
+  airHelpArticleBodyEn.includes("service fees from recovered compensation") &&
+  airHelpArticleBodyBn.includes("সার্ভিস ফি কাটা হতে পারে") &&
+  (airHelpArticleEn?.references?.some((reference) => reference.url === "https://www.airhelp.com/en/our-fees/") ?? false) &&
+  airHelpArticleEn?.affiliateCTA?.provider === "airhelp" &&
+  AFFILIATE_LINKS.airhelp === "https://airhelp.tpo.li/XS95LnEC" &&
+  AFFILIATE_OFFER_REGISTRY.airhelp.status === "active";
+check(
+  airHelpArticlePromoLifecycleClear,
+  "the EN/BN AirHelp article separates claims fees from AirHelp+ discounts, keeps the configured offer only while active, removes it after expiry, and preserves the active affiliate handoff"
+);
+const airHelpGacaScopeClear =
+  airHelpArticleBodyEn.includes("all flights departing Saudi airports") &&
+  airHelpArticleBodyEn.includes("whether operated by Saudi or foreign carriers") &&
+  airHelpArticleBodyEn.includes("flights arriving in Saudi Arabia on a Saudi carrier") &&
+  airHelpArticleBodyEn.includes("baggage complaints for arrivals on foreign carriers") &&
+  airHelpArticleBodyEn.includes("refreshments and drinks from the first hour") &&
+  airHelpArticleBodyEn.includes("hotel accommodation plus airport transport after 6 hours") &&
+  airHelpArticleBodyBn.includes("সৌদি বিমানবন্দর থেকে ছেড়ে যাওয়া সব ফ্লাইটে") &&
+  airHelpArticleBodyBn.includes("সৌদি বা বিদেশি carrier যাই হোক") &&
+  airHelpArticleBodyBn.includes("বিদেশি carrier-এর সৌদিতে আগত ফ্লাইটে লাগেজ-সংক্রান্ত অভিযোগও অন্তর্ভুক্ত") &&
+  airHelpArticleBodyBn.includes("৬ ঘণ্টার বেশি হলে হোটেল ও বিমানবন্দরে যাতায়াত") &&
+  !airHelpArticleBodyEn.includes("Saudi airports and Saudi national carriers") &&
+  (airHelpArticleEn?.references?.some((reference) => reference.url.startsWith("https://gaca.gov.sa/-/media/Files/PDF/LawsAndRegulation/Consumer-Protection/Passenger-Rights-Protection-Regulations-EN.pdf")) ?? false);
+check(
+  airHelpGacaScopeClear,
+  "the EN/BN article states the GACA regulation's carrier/route scope and delay-care thresholds and links the official regulation"
+);
+const getArticleSection = (text: string, start: string, end: string) => {
+  const startAt = text.indexOf(start);
+  const endAt = startAt < 0 ? -1 : text.indexOf(end, startAt + start.length);
+  return startAt >= 0 && endAt >= 0 ? text.slice(startAt, endAt) : "";
+};
+const europeanRightsSectionEn = getArticleSection(
+  airHelpArticleBodyEn,
+  "- **European Regulation EC 261/2004",
+  "\n- **UK 261 Regulations"
+);
+const europeanRightsSectionBn = getArticleSection(
+  airHelpArticleBodyBn,
+  "- **ইউরোপীয় ইউনিয়ন রেগুলেশন EC 261/2004",
+  "\n- **যুক্তরাজ্য UK 261"
+);
+const airHelpEuropeanExceptionCopyClear =
+  europeanRightsSectionEn.includes("carrier is exempt only if it proves") &&
+  europeanRightsSectionEn.includes("could not have been avoided even if all reasonable measures had been taken") &&
+  europeanRightsSectionEn.includes("do not automatically qualify") &&
+  europeanRightsSectionEn.includes("assessment depends on the specific event and flight") &&
+  europeanRightsSectionEn.includes("duty of care may still apply") &&
+  europeanRightsSectionBn.includes("এয়ারলাইন্স কেবল তখনই ক্ষতিপূরণ থেকে ছাড় পেতে পারে") &&
+  europeanRightsSectionBn.includes("সব যুক্তিসঙ্গত ব্যবস্থা নিলেও এড়ানো যেত না") &&
+  europeanRightsSectionBn.includes("স্বয়ংক্রিয়ভাবে এই ছাড় পাওয়া যায় না") &&
+  europeanRightsSectionBn.includes("নির্দিষ্ট ঘটনা ও ফ্লাইটের পরিস্থিতি বিবেচনা করতে হয়") &&
+  europeanRightsSectionBn.includes("যাত্রী-যত্নের দায়িত্ব বহাল থাকতে পারে") &&
+  !/within the airline's control|Extreme weather and air traffic control restrictions are extraordinary circumstances/i.test(europeanRightsSectionEn) &&
+  [
+    "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62015CJ0315",
+    "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62025TJ0134",
+    "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62011CJ0012",
+  ].every((url) => airHelpArticleEn?.references?.some((reference) => reference.url === url) ?? false);
+check(
+  airHelpEuropeanExceptionCopyClear,
+  "the EN/BN EU261 article states the extraordinary-circumstances proof test, avoids automatic weather/ATC exemptions, preserves care duties, and cites official EU judgments"
+);
+const airHelpEu261AmountsClear =
+  europeanRightsSectionEn.includes("statutory base amount is €600") &&
+  europeanRightsSectionEn.includes("reduced by 50% to €300") &&
+  europeanRightsSectionEn.includes("arrival delay is less than 4 hours") &&
+  europeanRightsSectionEn.includes("As of 2 November 2026, those are the current rates") &&
+  europeanRightsSectionEn.includes("its amendments apply from 23 October 2027") &&
+  europeanRightsSectionBn.includes("মূল ক্ষতিপূরণ €৬০০") &&
+  europeanRightsSectionBn.includes("৫০% কমে €৩০০") &&
+  europeanRightsSectionBn.includes("বিলম্ব ৪ ঘণ্টার কম") &&
+  europeanRightsSectionBn.includes("২ নভেম্বর ২০২৬ অনুযায়ী এগুলো বর্তমান হার") &&
+  europeanRightsSectionBn.includes("২৩ অক্টোবর ২০২৭ থেকে প্রযোজ্য হবে") &&
+  (airHelpArticleEn?.references?.some((reference) => reference.url === "https://eur-lex.europa.eu/eli/reg/2026/2202/oj/eng") ?? false);
+check(
+  airHelpEu261AmountsClear,
+  "the EN/BN EU261 article distinguishes the current €600 base and possible €300 reduction from the 2027 amendment date"
+);
+const ukRightsSectionEn = getArticleSection(
+  airHelpArticleBodyEn,
+  "- **UK 261 Regulations",
+  "\n- **Saudi Arabia GACA"
+);
+const ukRightsSectionBn = getArticleSection(
+  airHelpArticleBodyBn,
+  "- **যুক্তরাজ্য UK 261",
+  "\n- **সৌদি আরব GACA"
+);
+const airHelpUk261ScopeClear =
+  ukRightsSectionEn.includes("any airline departing a UK airport") &&
+  ukRightsSectionEn.includes("flights arriving in the UK on a UK or EU carrier") &&
+  ukRightsSectionEn.includes("flights from outside the UK to an EU airport if operated by a UK carrier") &&
+  ukRightsSectionEn.includes("already received benefits or compensation and assistance in the departure country") &&
+  ukRightsSectionBn.includes("যুক্তরাজ্যের বিমানবন্দর থেকে যেকোনো ক্যারিয়ারের ফ্লাইটে") &&
+  ukRightsSectionBn.includes("UK বা EU carrier পরিচালিত যুক্তরাজ্যে আগত ফ্লাইটে") &&
+  ukRightsSectionBn.includes("UK-এর বাইরে থেকে EU বিমানবন্দরে UK carrier পরিচালিত ফ্লাইটে") &&
+  ukRightsSectionBn.includes("প্রস্থানের দেশেই আগে সুবিধা/ক্ষতিপূরণ এবং সহায়তা") &&
+  (airHelpArticleEn?.references?.some((reference) => reference.url === "https://www.legislation.gov.uk/uksi/2019/278/regulation/8") ?? false) &&
+  (airHelpArticleEn?.references?.some((reference) => reference.url === "https://www.caa.co.uk/media/jn3npj1h/uk-261-annex-1.pdf") ?? false);
+check(
+  airHelpUk261ScopeClear,
+  "the EN/BN UK261 article includes inbound UK and UK-carrier-to-EU scope, preserves the prior-assistance exception, and links CAA and statutory sources"
+);
+const airHelpUk261RateUnitClear =
+  ukRightsSectionEn.includes("£260 per passenger") &&
+  ukRightsSectionEn.includes("£520 per passenger") &&
+  !ukRightsSectionEn.includes("per ticket") &&
+  ukRightsSectionBn.includes("জনপ্রতি £২৬০") &&
+  ukRightsSectionBn.includes("জনপ্রতি £৫২০") &&
+  (airHelpArticleEn?.references?.some((reference) => reference.url === "https://www.caa.co.uk/air-passengers/travel-problems-and-rights/flight-delays-and-cancellations/delays/") ?? false) &&
+  (airHelpArticleEn?.references?.some((reference) => reference.url === "https://www.legislation.gov.uk/eur/2004/261/article/7") ?? false);
+check(
+  airHelpUk261RateUnitClear,
+  "the EN/BN UK261 long-haul compensation rates are stated per passenger and linked to current CAA guidance and Article 7"
+);
+const turkishRightsSectionEn = getArticleSection(
+  airHelpArticleBodyEn,
+  "- **Turkey's SHY-YOLCU",
+  "\n- **The Montreal"
+);
+const turkishRightsSectionBn = getArticleSection(
+  airHelpArticleBodyBn,
+  "- **তুরস্কের SHY-YOLCU",
+  "\n- **মন্ট্রিল"
+);
+const airHelpTurkishRuleCopyClear =
+  turkishRightsSectionEn.includes("Turkish air carriers to or from Turkish airports") &&
+  turkishRightsSectionEn.includes("foreign carriers departing Turkish airports") &&
+  turkishRightsSectionEn.includes("technical or operational delay") &&
+  turkishRightsSectionEn.includes("3 hours or more late") &&
+  turkishRightsSectionEn.includes("€100 for domestic flights") &&
+  turkishRightsSectionEn.includes("€250 (up to 1,500 km)") &&
+  turkishRightsSectionEn.includes("€400 (1,500–3,500 km)") &&
+  turkishRightsSectionEn.includes("€600 (over 3,500 km)") &&
+  turkishRightsSectionEn.includes("selling rate on the payment date") &&
+  turkishRightsSectionBn.includes("SHY-YOLCU তুর্কি carrier-এর তুরস্কে আসা-যাওয়ার ফ্লাইট") &&
+  turkishRightsSectionBn.includes("বিদেশি carrier-এর তুর্কি বিমানবন্দর থেকে ছেড়ে যাওয়া ফ্লাইট") &&
+  turkishRightsSectionBn.includes("কারিগরি বা অপারেশনাল কারণে") &&
+  turkishRightsSectionBn.includes("৩ ঘণ্টা বা বেশি দেরিতে") &&
+  turkishRightsSectionBn.includes("€১০০") &&
+  turkishRightsSectionBn.includes("€২৫০") &&
+  turkishRightsSectionBn.includes("€৪০০") &&
+  turkishRightsSectionBn.includes("€৬০০") &&
+  turkishRightsSectionBn.includes("অর্থপ্রদানের দিনের তুরস্কের কেন্দ্রীয় ব্যাংকের বৈদেশিক মুদ্রা বিক্রয় হার") &&
+  !/SHY-PASS|within the carrier's control/i.test(turkishRightsSectionEn + turkishRightsSectionBn) &&
+  (airHelpArticleEn?.references?.some((reference) => reference.url === "https://web.shgm.gov.tr/doc4/shy-yolcu.pdf") ?? false) &&
+  (airHelpArticleEn?.references?.some((reference) => reference.url === "https://resmigazete.gov.tr/eskiler/2024/12/20241210-10.htm") ?? false);
+check(
+  airHelpTurkishRuleCopyClear,
+  "the EN/BN article uses the official SHY-YOLCU name, describes its route scope and amendment without an EU-style control test, and keeps the official Turkish source"
+);
+const montrealRightsSectionEn = getArticleSection(
+  airHelpArticleBodyEn,
+  "- **The Montreal Convention",
+  "\n\n2. Essential Steps"
+);
+const montrealRightsSectionBn = getArticleSection(
+  airHelpArticleBodyBn,
+  "- **মন্ট্রিল কনভেনশন",
+  "\n\n২. এয়ারপোর্টে"
+);
+const airHelpMontrealLiabilityClear =
+  montrealRightsSectionEn.includes("1,519 Special Drawing Rights (SDR) per passenger") &&
+  montrealRightsSectionEn.includes("maximum, not a fixed payout") &&
+  montrealRightsSectionEn.includes("substantiate their actual loss") &&
+  montrealRightsSectionEn.includes("special declaration of interest") &&
+  montrealRightsSectionBn.includes("সাধারণ দায়সীমা যাত্রীপ্রতি ১,৫১৯") &&
+  montrealRightsSectionBn.includes("সর্বোচ্চ সীমা, নির্ধারিত এককালীন পেমেন্ট নয়") &&
+  montrealRightsSectionBn.includes("প্রকৃত ক্ষতি প্রমাণ") &&
+  montrealRightsSectionBn.includes("বিশেষ স্বার্থ ঘোষণা") &&
+  airHelpArticleBodyEn.includes("passengers must substantiate actual loss or damage with supporting evidence") &&
+  airHelpArticleBodyBn.includes("যাত্রীকে প্রমাণসহ প্রকৃত ক্ষতি বা লোকসান দেখাতে হয়") &&
+  (airHelpArticleEn?.references?.some((reference) => reference.url === "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:62019CJ0086") ?? false) &&
+  (airHelpArticleEn?.references?.some((reference) => reference.url === "https://www.icao.int/news/international-air-travel-liability-limits-set-increase-enhancing-customer-compensation-0") ?? false);
+check(
+  airHelpMontrealLiabilityClear,
+  "the EN/BN Montreal baggage copy states the current standard cap as a maximum, requires substantiation of actual loss, explains the checked-baggage declaration option, and cites ICAO and CJEU sources"
+);
+const montrealDeadlinesStepEn = getArticleSection(
+  airHelpArticleBodyEn,
+  "Step 2: Obtain a Property Irregularity Report (PIR)",
+  "Step 3: Decide between direct airline submission"
+);
+const montrealDeadlinesFaqEn = getArticleSection(
+  airHelpArticleBodyEn,
+  "What are the Montreal Convention's baggage-notice and court-action deadlines?",
+  "Can I submit a flight compensation claim directly"
+);
+const montrealDeadlinesStepBn = getArticleSection(
+  airHelpArticleBodyBn,
+  "ধাপ ২: কাস্টমস হল ছাড়ার আগেই PIR",
+  "ধাপ ৩: সরাসরি এয়ারলাইন্সে আবেদন"
+);
+const montrealDeadlinesFaqBn = getArticleSection(
+  airHelpArticleBodyBn,
+  "মন্ট্রিল কনভেনশনে লাগেজ অভিযোগ ও আইনি পদক্ষেপের সময়সীমা কী?",
+  "কোনো থার্ড-পার্টি সার্ভিস ছাড়াই"
+);
+const airHelpMontrealDeadlinesClear =
+  montrealDeadlinesStepEn.includes("promptly after discovery") &&
+  montrealDeadlinesStepEn.includes("7 calendar days after receipt") &&
+  montrealDeadlinesStepEn.includes("21 calendar days after the baggage is placed at your disposal") &&
+  montrealDeadlinesFaqEn.includes("give or dispatch a written complaint") &&
+  montrealDeadlinesFaqEn.includes("except in case of fraud") &&
+  montrealDeadlinesFaqEn.includes("within 2 years") &&
+  montrealDeadlinesFaqEn.includes("the date carriage stopped") &&
+  montrealDeadlinesFaqEn.includes("the law of the court hearing the case determines how that period is calculated") &&
+  montrealDeadlinesStepBn.includes("ক্ষতি জানার পরপরই লিখিতভাবে") &&
+  montrealDeadlinesStepBn.includes("৭ ক্যালেন্ডার দিনের পরে নয়") &&
+  montrealDeadlinesStepBn.includes("২১ ক্যালেন্ডার দিনের মধ্যে") &&
+  montrealDeadlinesFaqBn.includes("লিখিত অভিযোগ ও আদালতে ক্ষতিপূরণের মামলা—এই দুই সময়সীমা আলাদা") &&
+  montrealDeadlinesFaqBn.includes("প্রতারণার ক্ষেত্রে ব্যতিক্রম") &&
+  montrealDeadlinesFaqBn.includes("পরিবহন বন্ধ হওয়ার দিন থেকে") &&
+  montrealDeadlinesFaqBn.includes("মামলার আদালতের আইন নির্ধারণ করে") &&
+  !airHelpArticleBodyEn.includes("within 21 days from when delayed luggage was delivered") &&
+  !airHelpArticleBodyBn.includes("বিলম্বিত লাগেজের ক্ষেত্রে ২১ দিনের মধ্যে লিখিত অভিযোগ দায়ের") &&
+  (airHelpArticleEn?.references?.some((reference) => reference.url.includes("CELEX:22001A0718(01)")) ?? false);
+check(
+  airHelpMontrealDeadlinesClear,
+  "the EN/BN Montreal copy separates written-notice periods from the two-year court-action period, uses the Convention's triggers and calendar days, states the fraud exception, and cites the treaty"
+);
 
 // (1a) every responsive image stem ships every breakpoint
 const responsiveImgDir = path.join(DIST_DIR, "assets", "images");
@@ -801,8 +1391,8 @@ function imgsMissingAlt(html: string): string[] {
   const editorialHeroContracts = [
     ["flights.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "International Flights from Dhaka"],
     ["bn/flights.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "ঢাকা থেকে ফ্লাইট"],
-    ["hotels.html", "hotels_london_marylebone_exterior_20261101-1200.avif", "Hotel Area Guides"],
-    ["bn/hotels.html", "hotels_london_marylebone_exterior_20261101-1200.avif", "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড"],
+    ["hotels.html", "destination_nepal_hero_20261101-1200.avif", "Hotel Area Guides"],
+    ["bn/hotels.html", "destination_nepal_hero_20261101-1200.avif", "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড"],
     ["visa.html", "visa_changi_immigration_20261101-1200.avif", "Visa Guides &amp; Travel Document Checklists"],
     ["bn/visa.html", "visa_changi_immigration_20261101-1200.avif", "বাংলাদেশি নাগরিকদের জন্য ভিসা গাইড"],
     ["flights/dhaka-kathmandu.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "Flights from Dhaka"],
@@ -1769,7 +2359,7 @@ check(
     }
     if (!TRAVELPAYOUTS_REFERRAL_SUB_IDS[slug]) placementIssues.push(`${slug} has no SubID`);
   }
-  for (const retired of ["havana-cuba-travel-guide-bangladesh", "chefchaouen-morocco-travel-guide-bangladesh"]) {
+  for (const retired of ["havana-cuba-travel-guide-bangladesh", "chefchaouen-morocco-travel-guide-bangladesh", "halal-food-guide-bangkok-bangladesh"]) {
     if (TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[retired]) {
       placementIssues.push(`${retired} is a destination guide - the creator-referral block does not belong there`);
     }
@@ -1816,6 +2406,28 @@ check(
     untaggedPages.length === 0
       ? `all ${referralPages.length} shipped creator-referral pages tag their link with a SubID`
       : `untagged creator-referral link in: ${untaggedPages.join(", ")}`
+  );
+  const creatorGuideEn = BLOG_BODY["travel-creator-resources"] ?? "";
+  const creatorGuideBn = getLocalizedBlogs("bn").find((post) => post.slug === "travel-creator-resources")?.content ?? "";
+  const creatorReferralBlock = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS["travel-creator-resources"];
+  const creatorGuideHtmlEn = read(path.join(DIST_DIR, "blog", "travel-creator-resources.html")) ?? "";
+  const creatorGuideHtmlBn = read(path.join(DIST_DIR, "bn", "blog", "travel-creator-resources.html")) ?? "";
+  check(
+    !TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS["halal-food-guide-bangkok-bangladesh"] &&
+      !referralPages.some((page) => page.includes("halal-food-guide-bangkok-bangladesh")) &&
+      referralPages.some((page) => page.includes("travel-creator-resources")) &&
+      referralPages.some((page) => page.includes("turn-travel-experience-into-income-without-a-website")) &&
+      referralPages.some((page) => page.includes("can-you-make-money-travel-affiliate-marketing-ural-experiment")),
+    "creator referrals remain on creator/monetization content and are absent from the Bangkok halal-food traveller guide"
+  );
+  check(
+    Boolean(creatorReferralBlock) &&
+      !/\$100|80\+ travel brands|WayAway/i.test(creatorGuideEn + creatorGuideBn + JSON.stringify(creatorReferralBlock) + creatorGuideHtmlEn + creatorGuideHtmlBn) &&
+      creatorGuideEn.includes("official referral terms") && creatorGuideBn.includes("অফিশিয়াল রেফারেল শর্তে") &&
+      creatorGuideHtmlEn.includes("official referral terms") && creatorGuideHtmlBn.includes("অফিশিয়াল রেফারেল শর্তে") &&
+      creatorGuideEn.includes(TRAVELPAYOUTS_REFERRAL_URL) === false &&
+      creatorGuideBn.includes(TRAVELPAYOUTS_REFERRAL_URL) === false,
+    "creator-resource copy removes unsupported $100/80+ and unlisted WayAway claims, points to current official terms and leaves referral URLs in the disclosed callout"
   );
 
   // (b), behaviourally: run the real listener against a stub DOM.
@@ -2543,6 +3155,37 @@ if (sitemap) {
       Date.now = realNow;
     }
   };
+  const renderKKdayBanner = (lang: "en" | "bn", variant: "full" | "compact") =>
+    renderToStaticMarkup(
+      React.createElement(KKdayPromoBanner, { lang, variant, onNavigate: () => undefined })
+    );
+  const kkdayExpiredStates = withMockedNow(Date.UTC(2026, 10, 1), () => ({
+    fullEn: renderKKdayBanner("en", "full"),
+    fullBn: renderKKdayBanner("bn", "full"),
+    compactEn: renderKKdayBanner("en", "compact"),
+    compactBn: renderKKdayBanner("bn", "compact"),
+  }));
+  const kkdayLiveStates = withMockedNow(Date.UTC(2026, 9, 30), () => ({
+    fullEn: renderKKdayBanner("en", "full"),
+    fullBn: renderKKdayBanner("bn", "full"),
+  }));
+  const expiredKKdayMarkup = Object.values(kkdayExpiredStates).join(" ");
+  const kkdayExpiryCopyOk =
+    [kkdayExpiredStates.fullEn, kkdayExpiredStates.compactEn].every((html) =>
+      html.includes(AFFILIATE_LINKS.kkday) && html.includes("URAL may earn commission") &&
+      html.includes("Compare")
+    ) &&
+    [kkdayExpiredStates.fullBn, kkdayExpiredStates.compactBn].every((html) =>
+      html.includes(AFFILIATE_LINKS.kkday) && html.includes("কমিশন") && html.includes("তুলনা")
+    ) &&
+    !/1010TOURS|1010MOVE|1010TIX|30%|15[–-]25%|15[–-]30%|10\.10|Oct 31, 2026/i.test(expiredKKdayMarkup) &&
+    kkdayLiveStates.fullEn.includes(KKDAY_PROMO.codes.tours) &&
+    kkdayLiveStates.fullBn.includes(KKDAY_PROMO.codes.transportation);
+  check(
+    kkdayExpiryCopyOk,
+    "expired KKday banners hide voucher codes and savings claims in English and Bengali, keep the partner link, and retain date-scoped sale codes only while live"
+  );
+
   const renderSpotlight = (lang: "en" | "bn") =>
     renderToStaticMarkup(
       React.createElement(KlookHotelSpotlight, { city: "Bangkok", guideId: "bangkok-hotels", lang })
@@ -4182,6 +4825,21 @@ function renderAppAtPath(routePath: string): string {
     }
   }
 }
+
+const enAppShellHtml = renderAppAtPath("/");
+const bnAppShellHtml = renderAppAtPath("/bn/");
+const appSource = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
+const globalSearchSource = read(path.join(ROOT_DIR, "src", "components", "GlobalSiteSearch.tsx")) ?? "";
+check(
+  enAppShellHtml.includes('role="search"') && enAppShellHtml.includes('id="top-bar-site-search"') &&
+    enAppShellHtml.includes('placeholder="Search this site"') &&
+    bnAppShellHtml.includes('role="search"') && bnAppShellHtml.includes('id="top-bar-site-search"') &&
+    bnAppShellHtml.includes('placeholder="এই সাইটে খুঁজুন"') &&
+    appSource.includes("openSiteSearch(topBarSearchQuery)") &&
+    appSource.includes("initialQuery={siteSearchInitialQuery}") &&
+    globalSearchSource.includes("useState(initialQuery)"),
+  "the EN/BN top bar renders an editable search field and carries its query into the existing global-search dialog"
+);
 
 const FOOTER_RENDER_PATHS = [
   { label: "footer (en)", path: "/" },

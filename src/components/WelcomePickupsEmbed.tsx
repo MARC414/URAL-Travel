@@ -1,16 +1,5 @@
-import React, { useState, useEffect, useRef, useId } from "react";
-import {
-  Car,
-  Calendar,
-  MapPin,
-  Users,
-  Plane,
-  ShieldCheck,
-  ExternalLink,
-  Loader2,
-  MessageCircle,
-  Code2,
-} from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Calendar, ExternalLink, MapPin, MessageCircle, Plane, ShieldCheck, Users } from "lucide-react";
 
 const WELCOME_PICKUPS_SCRIPT_SRC =
   "https://tpemd.com/content?promo_id=8951&campaign_id=627&powered_by=true&show_header=true&locale=en&shmarker=675992&trs=589561";
@@ -18,400 +7,197 @@ const WELCOME_PICKUPS_SCRIPT_SRC =
 export const WELCOME_PICKUPS_PARTNER_URL =
   "https://tp.media/r?marker=675992&trs=589561&p=8951&u=https%3A%2F%2Fwww.welcomepickups.com&campaign_id=627";
 
-interface RoutePreset {
-  id: string;
-  country: string;
-  airport: string;
-  defaultHotelZone: string;
-  defaultFlightNo: string;
-  sedanUsd: number;
-  sedanBdt: number;
-  minivanUsd: number;
-  minivanBdt: number;
-  duration: string;
-  highlight: string;
-}
-
-const TRANSFER_ROUTES: RoutePreset[] = [
-  {
-    id: "bangkok",
-    country: "Thailand",
-    airport: "Bangkok Suvarnabhumi (BKK)",
-    defaultHotelZone: "Sukhumvit / Pratunam Hotel",
-    defaultFlightNo: "BG 388",
-    sedanUsd: 32,
-    sedanBdt: 3850,
-    minivanUsd: 46,
-    minivanBdt: 5500,
-    duration: "40 mins",
-    highlight: "Driver waits at Arrival Gate 3 with name sign · Highway tolls included",
-  },
-  {
-    id: "kuala-lumpur",
-    country: "Malaysia",
-    airport: "Kuala Lumpur Intl (KUL / KLIA1 & KLIA2)",
-    defaultHotelZone: "Bukit Bintang / KLCC City Center",
-    defaultFlightNo: "BG 386",
-    sedanUsd: 36,
-    sedanBdt: 4300,
-    minivanUsd: 54,
-    minivanBdt: 6500,
-    duration: "50 mins",
-    highlight: "Ideal for late-night Dhaka arrivals (01:10 AM) · English-speaking driver",
-  },
-  {
-    id: "dubai",
-    country: "UAE",
-    airport: "Dubai International (DXB Terminal 1/2/3)",
-    defaultHotelZone: "Deira / Downtown Dubai / Marina",
-    defaultFlightNo: "EK 585",
-    sedanUsd: 39,
-    sedanBdt: 4700,
-    minivanUsd: 58,
-    minivanBdt: 6950,
-    duration: "25 mins",
-    highlight: "60 mins free waiting time after landing for immigration clearance",
-  },
-  {
-    id: "singapore",
-    country: "Singapore",
-    airport: "Singapore Changi Airport (SIN T1–T4)",
-    defaultHotelZone: "Little India (Mustafa) / Bugis / Marina Bay",
-    defaultFlightNo: "SQ 447",
-    sedanUsd: 45,
-    sedanBdt: 5400,
-    minivanUsd: 65,
-    minivanBdt: 7800,
-    duration: "22 mins",
-    highlight: "Door-to-door Changi pickup with luggage help & child booster seats",
-  },
-  {
-    id: "nepal",
-    country: "Nepal",
-    airport: "Kathmandu Tribhuvan Airport (KTM)",
-    defaultHotelZone: "Thamel / Lazimpat / Boudha",
-    defaultFlightNo: "BG 371",
-    sedanUsd: 18,
-    sedanBdt: 2150,
-    minivanUsd: 28,
-    minivanBdt: 3350,
-    duration: "20 mins",
-    highlight: "Skip outside taxi haggling after Visa-on-Arrival counter",
-  },
-  {
-    id: "maldives",
-    country: "Maldives",
-    airport: "Malé Velana International (MLE)",
-    defaultHotelZone: "Hulhumalé Beachfront Hotel / Jetty Transfer",
-    defaultFlightNo: "BS 337",
-    sedanUsd: 24,
-    sedanBdt: 2900,
-    minivanUsd: 35,
-    minivanBdt: 4200,
-    duration: "15 mins",
-    highlight: "Direct bridge transfer to Hulhumalé hotels or speedboat jetty",
-  },
-];
-
 interface WelcomePickupsEmbedProps {
+  /** Context label only; it is not sent through the generic partner link. */
   defaultCountry?: string;
+  lang?: "en" | "bn";
 }
 
-export function WelcomePickupsEmbed({ defaultCountry = "Thailand" }: WelcomePickupsEmbedProps) {
-  const instanceId = useId();
-  const arrivalAirportId = `${instanceId}-arrival-airport`;
-  const destinationHotelId = `${instanceId}-destination-hotel`;
-  const flightNumberId = `${instanceId}-flight-number`;
-  const pickupDateId = `${instanceId}-pickup-date`;
-  const travelersVehicleId = `${instanceId}-travelers-vehicle`;
-
-  const resolveInitialPreset = (cName: string): RoutePreset => {
-    const lower = cName.toLowerCase();
-    if (lower.includes("malaysia") || lower.includes("kuala")) return TRANSFER_ROUTES[1];
-    if (lower.includes("dubai") || lower.includes("uae")) return TRANSFER_ROUTES[2];
-    if (lower.includes("singapore")) return TRANSFER_ROUTES[3];
-    if (lower.includes("nepal") || lower.includes("kathmandu")) return TRANSFER_ROUTES[4];
-    if (lower.includes("maldives") || lower.includes("male")) return TRANSFER_ROUTES[5];
-    return TRANSFER_ROUTES[0];
-  };
-
-  const initialPreset = resolveInitialPreset(defaultCountry);
-
-  const [selectedRouteId, setSelectedRouteId] = useState<string>(initialPreset.id);
-  const [hotelAddress, setHotelAddress] = useState<string>(initialPreset.defaultHotelZone);
-  const [flightNumber, setFlightNumber] = useState<string>(initialPreset.defaultFlightNo);
-  const [pickupDate, setPickupDate] = useState<string>("2026-10-15");
-  const [passengers, setPassengers] = useState<number>(3);
-  const [vehicleType, setVehicleType] = useState<"sedan" | "minivan">("sedan");
-  const [isRedirecting, setIsRedirecting] = useState<boolean>(false);
-  const [showLiveScriptEmbed, setShowLiveScriptEmbed] = useState<boolean>(false);
+export function WelcomePickupsEmbed({
+  defaultCountry = "",
+  lang = "en",
+}: WelcomePickupsEmbedProps) {
+  const isBn = lang === "bn";
+  const [arrivalAirport, setArrivalAirport] = useState("");
+  const [destinationAddress, setDestinationAddress] = useState("");
+  const [flightNumber, setFlightNumber] = useState("");
+  const [pickupDate, setPickupDate] = useState("");
+  const [passengers, setPassengers] = useState(2);
+  const [showOfficialWidget, setShowOfficialWidget] = useState(false);
   const scriptContainerRef = useRef<HTMLDivElement>(null);
 
-  // Sync when parent country changes
   useEffect(() => {
-    const next = resolveInitialPreset(defaultCountry);
-    setSelectedRouteId(next.id);
-    setHotelAddress(next.defaultHotelZone);
-    setFlightNumber(next.defaultFlightNo);
-  }, [defaultCountry]);
-
-  // Inject official Travelpayouts Welcome Pickups script (shmarker=675992, promo_id=8951) when toggled
-  useEffect(() => {
-    if (!showLiveScriptEmbed || !scriptContainerRef.current) return;
+    if (!showOfficialWidget || !scriptContainerRef.current) return;
     scriptContainerRef.current.innerHTML = "";
     const script = document.createElement("script");
     script.src = WELCOME_PICKUPS_SCRIPT_SRC;
     script.async = true;
     script.charset = "utf-8";
     scriptContainerRef.current.appendChild(script);
-  }, [showLiveScriptEmbed]);
+  }, [showOfficialWidget]);
 
-  const activePreset =
-    TRANSFER_ROUTES.find((r) => r.id === selectedRouteId) || TRANSFER_ROUTES[0];
-
-  const handleRouteChange = (newId: string) => {
-    setSelectedRouteId(newId);
-    const found = TRANSFER_ROUTES.find((r) => r.id === newId);
-    if (found) {
-      setHotelAddress(found.defaultHotelZone);
-      setFlightNumber(found.defaultFlightNo);
-    }
-  };
-
-  const handlePassengerChange = (count: number) => {
-    setPassengers(count);
-    if (count >= 4) {
-      setVehicleType("minivan");
-    } else {
-      setVehicleType("sedan");
-    }
-  };
-
-  const estimatedUsd =
-    vehicleType === "minivan" ? activePreset.minivanUsd : activePreset.sedanUsd;
-  const estimatedBdt =
-    vehicleType === "minivan" ? activePreset.minivanBdt : activePreset.sedanBdt;
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsRedirecting(true);
-    setTimeout(() => {
-      setIsRedirecting(false);
-      window.open(WELCOME_PICKUPS_PARTNER_URL, "_blank", "noopener,noreferrer,sponsored");
-    }, 600);
-  };
-
-  const whatsappPersonalBookingUrl = `https://wa.me/8801784385335?text=${encodeURIComponent(
-    `Hi URAL Desk! Please help me book a Welcome Pickups airport transfer (BDT payment):\n• Route: ${activePreset.airport} → ${hotelAddress}\n• Flight: ${flightNumber} on ${pickupDate}\n• Passengers: ${passengers} (${vehicleType === "minivan" ? "Family Minivan" : "Private Sedan"})\n• Est. Fare: ~$${estimatedUsd} (৳${estimatedBdt.toLocaleString()} BDT)`
-  )}`;
+  const whatsappMessage = [
+    "Hi URAL desk — I have a question about arranging an airport transfer.",
+    `Destination context: ${defaultCountry || "not specified"}`,
+    `Arrival airport: ${arrivalAirport.trim() || "not provided"}`,
+    `Destination area/address: ${destinationAddress.trim() || "not provided"}`,
+    `Flight number: ${flightNumber.trim() || "not provided"}`,
+    `Pickup date: ${pickupDate || "not selected"}`,
+    `Passengers: ${passengers}`,
+    "Please confirm whether this service is available, whether BDT payment is possible, and the current total and terms before I pay. This is an inquiry, not a confirmed booking.",
+  ].join("\n");
+  const whatsappUrl = `https://wa.me/8801784385335?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <div className="w-full bg-white rounded-xl p-4 sm:p-5 border border-slate-200 font-sans space-y-4">
-      {/* Header Row */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
+    <section
+      aria-label={isBn ? "Welcome Pickups ট্রান্সফার অপশন" : "Welcome Pickups transfer options"}
+      className="w-full space-y-4 rounded-xl border border-slate-200 bg-white p-4 font-sans sm:p-5"
+    >
+      <div className="flex flex-col gap-3 border-b border-slate-100 pb-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-start gap-3">
-          <div className="p-2 bg-brand-navy text-[#F6B73C] rounded-lg shrink-0 mt-0.5">
-            <Car size={18} />
-          </div>
+          <span className="mt-0.5 rounded-lg bg-brand-navy p-2 text-[#F6B73C]">
+            <MapPin size={18} aria-hidden="true" />
+          </span>
           <div>
-            <div className="flex flex-wrap items-center gap-2">
-              <h4 className="font-serif font-bold text-base text-slate-900">
-                Welcome Pickups — Arrival Gate Meet & Greet
-              </h4>
-              <span className="text-xs text-emerald-700 font-medium">
-                · Flight Delay Monitoring Included
-              </span>
-            </div>
-            <p className="text-xs text-slate-500 mt-0.5">
-              English-speaking driver waits inside the airport terminal holding your name sign · Flat pre-paid fare
+            <h4 className="font-serif text-base font-bold text-slate-900">
+              {isBn ? "Welcome Pickups ট্রান্সফার সার্চ" : "Search transfers on Welcome Pickups"}
+            </h4>
+            <p className="mt-1 text-xs leading-relaxed text-slate-600">
+              {isBn
+                ? `গন্তব্যের প্রসঙ্গ: ${defaultCountry || "নির্বাচিত নয়"}. পার্টনার লিংকে এখানকার বিমানবন্দর, ঠিকানা, তারিখ বা যাত্রীর তথ্য যায় না—সাইটে আবার দিন এবং চূড়ান্ত দাম ও শর্ত যাচাই করুন।`
+                : `Destination context: ${defaultCountry || "not selected"}. The partner link does not carry an airport, address, date or passenger details from here; enter them on the partner site and verify the current total and terms.`}
             </p>
           </div>
         </div>
-
         <button
           type="button"
-          onClick={() => setShowLiveScriptEmbed((prev) => !prev)}
-          className="self-start sm:self-center inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-2.5 py-1.5 rounded-md transition-colors whitespace-nowrap cursor-pointer"
+          aria-expanded={showOfficialWidget}
+          onClick={() => setShowOfficialWidget((visible) => !visible)}
+          className="inline-flex min-h-10 shrink-0 items-center justify-center gap-1.5 self-start rounded-md bg-slate-100 px-3 py-2 text-[11px] font-semibold text-slate-700 transition-colors hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
         >
-          <Code2 size={12} />
-          <span>{showLiveScriptEmbed ? "Hide Official Embed" : "Official Widget"}</span>
+          {showOfficialWidget
+            ? isBn ? "অফিশিয়াল উইজেট বন্ধ করুন" : "Hide official widget"
+            : isBn ? "অফিশিয়াল উইজেট দেখুন" : "Show official partner widget"}
         </button>
       </div>
 
-      {/* Optional Official Travelpayouts Script Embed Container */}
-      {showLiveScriptEmbed && (
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-2">
-          <div className="flex items-center justify-between text-[11px] text-slate-500 font-mono">
-            <span>Travelpayouts Official Script (shmarker=675992 · promo_id=8951)</span>
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <label className="block text-[11px] font-semibold text-slate-700">
+          <span className="mb-1 flex items-center gap-1"><MapPin size={11} aria-hidden="true" />{isBn ? "আগমনের বিমানবন্দর" : "Arrival airport"}</span>
+          <input
+            type="text"
+            value={arrivalAirport}
+            onChange={(event) => setArrivalAirport(event.target.value)}
+            placeholder={isBn ? "বিমানবন্দরের নাম বা কোড" : "Airport name or code"}
+            className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
+          />
+        </label>
+        <label className="block text-[11px] font-semibold text-slate-700">
+          <span className="mb-1 flex items-center gap-1"><MapPin size={11} aria-hidden="true" />{isBn ? "গন্তব্য এলাকা বা হোটেলের ঠিকানা" : "Destination area or hotel address"}</span>
+          <input
+            type="text"
+            value={destinationAddress}
+            onChange={(event) => setDestinationAddress(event.target.value)}
+            placeholder={isBn ? "সঠিক এলাকা বা ঠিকানা লিখুন" : "Enter the specific area or address"}
+            className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
+          />
+        </label>
+        <label className="block text-[11px] font-semibold text-slate-700">
+          <span className="mb-1 flex items-center gap-1"><Plane size={11} aria-hidden="true" />{isBn ? "ফ্লাইট নম্বর (ঐচ্ছিক)" : "Flight number (optional)"}</span>
+          <input
+            type="text"
+            value={flightNumber}
+            onChange={(event) => setFlightNumber(event.target.value)}
+            placeholder={isBn ? "যেমন: BG 388" : "e.g. BG 388"}
+            className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
+          />
+        </label>
+        <div className="grid grid-cols-2 gap-3">
+          <label className="block text-[11px] font-semibold text-slate-700">
+            <span className="mb-1 flex items-center gap-1"><Calendar size={11} aria-hidden="true" />{isBn ? "পিকআপের তারিখ" : "Pickup date"}</span>
+            <input
+              type="date"
+              value={pickupDate}
+              onChange={(event) => setPickupDate(event.target.value)}
+              className="w-full rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 text-sm text-slate-900 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
+            />
+          </label>
+          <label className="block text-[11px] font-semibold text-slate-700">
+            <span className="mb-1 flex items-center gap-1"><Users size={11} aria-hidden="true" />{isBn ? "যাত্রী" : "Passengers"}</span>
+            <select
+              value={passengers}
+              onChange={(event) => setPassengers(Number(event.target.value))}
+              className="w-full rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 text-sm text-slate-900 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
+            >
+              {[1, 2, 3, 4, 5, 6, 7].map((count) => (
+                <option key={count} value={count}>{count}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <p className="text-xs leading-relaxed text-slate-600">
+        {isBn
+          ? "উপরের তথ্যগুলো সরাসরি Welcome Pickups-এ পাঠানো হয় না। WhatsApp বোতামটি এই তথ্য দিয়ে URAL-কে একটি খসড়া বার্তা তৈরি করে—পাঠানোর আগে দেখে বা সম্পাদনা করুন। পার্টনার সাইটে সার্চ করলে বর্তমান প্রাপ্যতা, পিকআপের শর্ত ও চূড়ান্ত দাম মিলিয়ে নিন। URAL যোগ্য বুকিংয়ে কমিশন পেতে পারে।"
+          : "The details above are not sent to Welcome Pickups by the direct link. The WhatsApp button drafts a message to URAL using these fields—review or edit it before sending. Search the partner site to check current availability, pickup terms and the final price. URAL may earn a commission on qualifying bookings."}
+      </p>
+
+      <div className="flex flex-wrap gap-2.5">
+        <a
+          href={WELCOME_PICKUPS_PARTNER_URL}
+          data-affiliate-placement="travel_essentials_welcome_pickups_transfer"
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#F6B73C] px-4 py-2.5 text-xs font-bold text-brand-navy transition-colors hover:bg-[#ffc654] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
+        >
+          {isBn ? "Welcome Pickups-এ সার্চ করুন" : "Search Welcome Pickups"}
+          <ExternalLink size={12} aria-hidden="true" />
+        </a>
+        <a
+          href={whatsappUrl}
+          data-contact-placement="ural_transfer_availability_inquiry"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs font-semibold text-slate-800 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+        >
+          <MessageCircle size={13} className="text-emerald-700" aria-hidden="true" />
+          {isBn ? "URAL ডেস্কে ট্রান্সফার সম্পর্কে জিজ্ঞাসা করুন" : "Ask URAL about transfer options"}
+        </a>
+      </div>
+
+      <p className="flex gap-1.5 text-[11px] leading-relaxed text-slate-500">
+        <ShieldCheck size={13} className="mt-0.5 shrink-0 text-emerald-700" aria-hidden="true" />
+        <span>
+          {isBn
+            ? "WhatsApp বার্তাটি কেবল অনুসন্ধান; এটি নিশ্চিত বুকিং বা ভাড়ার কোট নয়। পেমেন্টের আগে সেবার প্রাপ্যতা, BDT-তে পরিশোধের সুযোগ, মোট দাম ও শর্ত URAL ডেস্কের সঙ্গে নিশ্চিত করুন।"
+            : "The WhatsApp message is an inquiry, not a confirmed booking or fare quote. Before paying, confirm availability, whether BDT payment is possible, the full amount and terms with URAL."}
+        </span>
+      </p>
+
+      {showOfficialWidget && (
+        <div className="space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500">
+            <span>{isBn ? "পার্টনার-পরিচালিত অফিসিয়াল উইজেট" : "Partner-provided official widget"}</span>
             <a
               href={WELCOME_PICKUPS_PARTNER_URL}
+              data-affiliate-placement="travel_essentials_welcome_pickups_official_widget_link"
               target="_blank"
               rel="noopener noreferrer sponsored"
-              className="text-brand-navy font-semibold hover:underline inline-flex items-center gap-1"
+              className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:underline"
             >
-              <span>Open Direct</span>
-              <ExternalLink size={10} />
+              {isBn ? "পার্টনার সাইট খুলুন" : "Open partner site"}
+              <ExternalLink size={10} aria-hidden="true" />
             </a>
           </div>
+          <p className="text-[11px] leading-relaxed text-slate-600">
+            {isBn
+              ? "উইজেটের তথ্য পার্টনারের নিয়ন্ত্রণে। সার্চের আগে রুট ও তারিখ যাচাই করুন এবং পেমেন্টের আগে চূড়ান্ত দাম ও শর্ত পড়ুন।"
+              : "The widget is controlled by the partner. Confirm the route and date in its search, then review the final price and terms before paying."}
+          </p>
           <div ref={scriptContainerRef} className="min-h-[120px] w-full overflow-x-auto" />
         </div>
       )}
-
-      {/* Interactive Transfer Planner Form */}
-      <form onSubmit={handleSearch} className="space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {/* Airport Pickup */}
-          <div>
-            <label
-              htmlFor={arrivalAirportId}
-              className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1"
-            >
-              <MapPin size={11} className="text-brand-navy" /> Arrival Airport
-            </label>
-            <select
-              id={arrivalAirportId}
-              value={selectedRouteId}
-              onChange={(e) => handleRouteChange(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 font-medium focus:outline-none focus:border-brand-navy transition-colors cursor-pointer"
-            >
-              {TRANSFER_ROUTES.map((r) => (
-                <option key={r.id} value={r.id}>
-                  {r.airport}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Drop-off Hotel / District */}
-          <div>
-            <label
-              htmlFor={destinationHotelId}
-              className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1"
-            >
-              <MapPin size={11} className="text-brand-emerald" /> Destination Hotel / Area
-            </label>
-            <input
-              id={destinationHotelId}
-              type="text"
-              value={hotelAddress}
-              onChange={(e) => setHotelAddress(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-navy transition-colors"
-              placeholder="e.g. Sukhumvit Hotel, Bangkok"
-              required
-            />
-          </div>
-
-          {/* Flight Number + Arrival Date */}
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <label
-                htmlFor={flightNumberId}
-                className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1"
-              >
-                <Plane size={11} className="text-brand-navy" /> Flight #
-              </label>
-              <input
-                id={flightNumberId}
-                type="text"
-                value={flightNumber}
-                onChange={(e) => setFlightNumber(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 font-mono focus:outline-none focus:border-brand-navy transition-colors"
-                placeholder="BG 388"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor={pickupDateId}
-                className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1"
-              >
-                <Calendar size={11} className="text-brand-navy" /> Date
-              </label>
-              <input
-                id={pickupDateId}
-                type="date"
-                value={pickupDate}
-                onChange={(e) => setPickupDate(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-2 text-xs text-slate-900 focus:outline-none focus:border-brand-navy transition-colors"
-                required
-              />
-            </div>
-          </div>
-
-          {/* Passengers & Vehicle Type */}
-          <div>
-            <label
-              htmlFor={travelersVehicleId}
-              className="block text-[11px] font-semibold text-slate-700 mb-1 flex items-center gap-1"
-            >
-              <Users size={11} className="text-brand-navy" /> Travelers & Vehicle
-            </label>
-            <select
-              id={travelersVehicleId}
-              value={passengers}
-              onChange={(e) => handlePassengerChange(Number(e.target.value))}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-900 font-medium focus:outline-none focus:border-brand-navy transition-colors cursor-pointer"
-            >
-              <option value={1}>1–2 Pax · Private Sedan</option>
-              <option value={3}>3 Pax · Private Sedan</option>
-              <option value={4}>4–5 Pax · Family Minivan</option>
-              <option value={6}>6–7 Pax · Large Family Van</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Live Route Summary & Action Bar */}
-        <div className="bg-slate-50 border border-slate-200/90 rounded-xl p-3.5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600">
-              <span className="font-semibold text-slate-900">
-                Est. Flat Rate ({vehicleType === "minivan" ? "Family Minivan" : "Private Sedan"}):
-              </span>
-              <span className="font-mono font-bold text-brand-navy tabular-nums">
-                ৳{estimatedBdt.toLocaleString()} BDT
-              </span>
-              <span aria-hidden="true">·</span>
-              <span className="font-mono text-slate-500 tabular-nums">${estimatedUsd} USD</span>
-              <span aria-hidden="true">·</span>
-              <span>~{activePreset.duration} to hotel</span>
-            </div>
-            <p className="text-[11px] text-slate-500 flex items-center gap-1.5">
-              <ShieldCheck size={13} className="text-emerald-600 shrink-0" />
-              <span>{activePreset.highlight}</span>
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-            <button
-              type="submit"
-              disabled={isRedirecting}
-              className="bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-2.5 px-4 rounded-lg transition-colors inline-flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer disabled:opacity-70"
-            >
-              {isRedirecting ? (
-                <>
-                  <Loader2 size={13} className="animate-spin" />
-                  <span>Opening Welcome Pickups...</span>
-                </>
-              ) : (
-                <>
-                  <span>Book Driver on Welcome Pickups</span>
-                  <ExternalLink size={12} />
-                </>
-              )}
-            </button>
-
-            <a
-              href={whatsappPersonalBookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 font-semibold text-xs py-2.5 px-3.5 rounded-lg transition-colors inline-flex items-center justify-center gap-1.5 whitespace-nowrap"
-              title="No dual-currency card? URAL can book your pickup for you and you pay in BDT/bKash"
-            >
-              <MessageCircle size={13} className="text-emerald-600" />
-              <span>No USD Card? Book via WhatsApp (BDT)</span>
-            </a>
-          </div>
-        </div>
-      </form>
-    </div>
+    </section>
   );
 }

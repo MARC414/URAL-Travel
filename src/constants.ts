@@ -2153,7 +2153,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Malaysia eVisa & MDAC Arrival Card Checklist", path: "/visa/malaysia-visa" },
       { text: "Maldives On-Arrival Visa & IMUGA Checklist", path: "/visa/maldives-visa" }
     ],
-    affiliateCTA: { provider: "klook", headline: "Book Family Theme Parks & Safari World Passes", body: "Save 15–25% on Safari World Bangkok, Genting SkyWorlds, Gardens by the Bay, and Dubai Desert Safaris with mobile QR tickets." }
+    affiliateCTA: { provider: "klook", headline: "Compare family attractions and activity options", body: "Browse listings for Safari World Bangkok, Genting SkyWorlds, Gardens by the Bay, and Dubai desert safaris; check the selected dates, inclusions, total, ticket instructions, and cancellation terms." }
   },
   {
     id: "blog-10",
@@ -3123,7 +3123,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dubai 5-Day Trip Cost Calculator in BDT", path: "/costs/dubai-costs" },
       { text: "Dubai Desert Safari & Burj Khalifa Passes", path: "/experiences?region=asia&city=dubai-klook" }
     ],
-    affiliateCTA: { provider: "klook", headline: "Book Discounted Dubai Desert Safari, Burj Khalifa & Museum of the Future Passes", body: "Save 15%–25% compared to Dubai ticket counters by pre-booking your verified Klook mobile vouchers before flying from Madinah or Jeddah to Dubai." }
+    affiliateCTA: { provider: "klook", headline: "Compare Dubai Desert Safari, Burj Khalifa & Museum of the Future listings", body: "Check the selected date, total price, inclusions, ticket delivery and cancellation terms on Klook; compare with the attraction or operator before booking." }
   },
   {
     id: "blog-25",
@@ -3163,7 +3163,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Where to Stay in KL: Hotel Neighborhoods", path: "/hotels/kuala-lumpur-hotels" },
       { text: "Malaysia 5-Day Trip Cost Calculator in BDT", path: "/costs/malaysia-costs" }
     ],
-    affiliateCTA: { provider: "kkday", headline: "Save 30% on Malaysia & Genting Passes (KKday 10.10 Sale)", body: "Book Petronas Twin Towers Skybridge, Genting Awana SkyWay Cable Car, Aquaria KLCC, and KLIA Ekspres tickets with promo code 1010MOVE." }
+    affiliateCTA: { provider: "kkday", headline: "Compare KLIA Ekspres and Malaysia attractions on KKday", body: "Check current availability, validity, inclusions, total price, and cancellation terms for your dates before booking." }
   },
   {
     id: "blog-27",
@@ -3385,7 +3385,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka to Bangkok Flight Schedule & Fares", path: "/flights/dhaka-bangkok" },
       { text: "Where to Stay in Bangkok: Hotel Neighborhoods", path: "/hotels/bangkok-hotels" }
     ],
-    affiliateCTA: { provider: "klook", headline: "Book Safari World Bangkok, Chao Phraya Cruise & Bangkok Hospital Transfers", body: "Save up to 25% on Bangkok family attractions and Suvarnabhumi Airport transfers with instant Klook QR tickets." }
+    affiliateCTA: { provider: "klook", headline: "Compare Bangkok family activities and ticket options", body: "Browse relevant Bangkok activity listings and check the total, selected date, inclusions, pickup details where offered, and cancellation terms before booking." }
   },
   {
     id: "blog-33",
@@ -3456,7 +3456,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka to Singapore Flight Schedule & Fares", path: "/flights/dhaka-singapore" },
       { text: "Where to Stay in Singapore: MRT Hotel Guide", path: "/hotels/singapore-hotels" }
     ],
-    affiliateCTA: { provider: "klook", headline: "Save 20% on Gardens by the Bay, Universal Studios & Sentosa Passes", body: "Pre-book instant QR tickets for Singapore's top family attractions on Klook and skip the ticket booth queues." }
+    affiliateCTA: { provider: "klook", headline: "Compare Gardens by the Bay, Universal Studios & Sentosa tickets", body: "Check the selected date, admission instructions, inclusions, total price, and cancellation terms on Klook and with the attraction before booking." }
   },
   {
     id: "blog-36",
@@ -3610,10 +3610,10 @@ export const BLOG_DATA: BlogPost[] = [
     id: "blog-40",
     slug: "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
     title: "Flight Delay, Cancellation & Baggage Compensation Guide for Bangladeshi Flyers (2026)",
-    summary: "Understand your legal rights when international flights are delayed, cancelled or arrive without luggage. Review EC 261/UK 261 rules, Turkish SHY-PASS, Saudi GACA passenger regulations, Montreal Convention limits (1,519 SDR) and how to file directly or via AirHelp.",
+    summary: "Understand your legal rights when international flights are delayed, cancelled or arrive without luggage. Review EC 261/UK 261 rules, Turkey's SHY-YOLCU passenger regulation, Saudi GACA protections, Montreal Convention limits (1,519 SDR) and how to file directly or via AirHelp.",
     category: "Cheap Flight Tips",
     date: "September 27, 2026",
-    updatedAt: "2026-10-16",
+    updatedAt: "2026-11-02",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
     references: [
@@ -3678,9 +3678,49 @@ export const BLOG_DATA: BlogPost[] = [
         url: "https://www.airhelp.com/en/terms/",
       },
       {
-        name: "General Authority of Civil Aviation, Saudi Arabia (GACA) — Passenger Rights Protection portal",
-        nameBn: "সৌদি জেনারেল অথরিটি অব সিভিল এভিয়েশন (GACA) — যাত্রী অধিকার সুরক্ষা পোর্টাল",
-        url: "https://gaca.gov.sa/en/",
+        name: "General Authority of Civil Aviation, Saudi Arabia (GACA) — Passenger Rights Protection Regulations",
+        nameBn: "সৌদি জেনারেল অথরিটি অব সিভিল এভিয়েশন (GACA) — যাত্রী অধিকার সুরক্ষা প্রবিধান",
+        url: "https://gaca.gov.sa/-/media/Files/PDF/LawsAndRegulation/Consumer-Protection/Passenger-Rights-Protection-Regulations-EN.pdf?as=0&hash=CAA102A31F884894A517602A4264F99C",
+      },
+      {
+        name: "AirHelp — Current service and membership fees",
+        nameBn: "AirHelp — বর্তমান দাবি-সেবা ও মেম্বারশিপ ফি",
+        url: "https://www.airhelp.com/en/our-fees/",
+      },
+      {
+        name: "Court of Justice of the European Union — Pešková and Peška v Travel Service (Case C-315/15), extraordinary circumstances and reasonable measures",
+        nameBn: "ইউরোপীয় ইউনিয়নের বিচার আদালত — Pešková ও Peška বনাম Travel Service (মামলা C-315/15), অসাধারণ পরিস্থিতি ও যুক্তিসঙ্গত ব্যবস্থা",
+        url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62015CJ0315",
+      },
+      {
+        name: "General Court of the European Union — D S.A. v P S.A. (Case T-134/25), air-traffic-management decisions and adverse weather",
+        nameBn: "ইউরোপীয় ইউনিয়নের জেনারেল কোর্ট — D S.A. বনাম P S.A. (মামলা T-134/25), এয়ার ট্রাফিক ম্যানেজমেন্ট সিদ্ধান্ত ও প্রতিকূল আবহাওয়া",
+        url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62025TJ0134",
+      },
+      {
+        name: "Court of Justice of the European Union — McDonagh v Ryanair (Case C-12/11), duty of care during extraordinary circumstances",
+        nameBn: "ইউরোপীয় ইউনিয়নের বিচার আদালত — McDonagh বনাম Ryanair (মামলা C-12/11), অসাধারণ পরিস্থিতিতেও যাত্রী-যত্নের দায়িত্ব",
+        url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62011CJ0012",
+      },
+      {
+        name: "UK Legislation — Air Passenger Rights and Air Travel Organisers' Licensing (Amendment) (EU Exit) Regulations 2019, regulation 8 (UK261 scope)",
+        nameBn: "যুক্তরাজ্যের আইন — Air Passenger Rights and Air Travel Organisers' Licensing (Amendment) (EU Exit) Regulations 2019, regulation 8 (UK261-এর পরিধি)",
+        url: "https://www.legislation.gov.uk/uksi/2019/278/regulation/8",
+      },
+      {
+        name: "European Union — Regulation (EU) 2026/2202 amending Regulation (EC) No 261/2004; compensation amounts and application date",
+        nameBn: "ইউরোপীয় ইউনিয়ন — Regulation (EU) 2026/2202, Regulation (EC) No 261/2004 সংশোধনী; ক্ষতিপূরণের হার ও প্রযোজ্যতার তারিখ",
+        url: "https://eur-lex.europa.eu/eli/reg/2026/2202/oj/eng",
+      },
+      {
+        name: "Official Gazette of the Republic of Türkiye — 10 December 2024 SHY-YOLCU amendment (Official Gazette No. 32748)",
+        nameBn: "তুরস্কের সরকারি গেজেট — ১০ ডিসেম্বর ২০২৪-এর SHY-YOLCU সংশোধনী (গেজেট নং ৩২৭৪৮)",
+        url: "https://resmigazete.gov.tr/eskiler/2024/12/20241210-10.htm",
+      },
+      {
+        name: "Court of Justice of the European Union — SL v Vueling Airlines (Case C-86/19), the Montreal baggage limit is a maximum and compensation requires proof of actual loss",
+        nameBn: "ইউরোপীয় ইউনিয়নের বিচার আদালত — SL বনাম Vueling Airlines (মামলা C-86/19), মন্ট্রিল লাগেজ দায়সীমা সর্বোচ্চ সীমা এবং ক্ষতিপূরণের জন্য প্রকৃত ক্ষতির প্রমাণ প্রয়োজন",
+        url: "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:62019CJ0086",
       },
     ],
     internalLinks: [
@@ -3692,8 +3732,8 @@ export const BLOG_DATA: BlogPost[] = [
     ],
     affiliateCTA: {
       provider: "airhelp",
-      headline: "Check Your Flight Disruption or Baggage Compensation Eligibility",
-      body: "Test your flight details free on AirHelp to check statutory compensation rights (Use code AHTPO11 for 11% off AirHelp+ protection).",
+      headline: "Check Whether AirHelp Can Review Your Disruption or Baggage Case",
+      body: "AirHelp offers a free eligibility check; its optional claims service has separate terms and fees. AirHelp+ is a separate membership (Use Promo Code AHTPO11 for 11% OFF AirHelp+ Smart & Pro).",
     },
   },
   {
@@ -3813,30 +3853,6 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Best Travel eSIM and Schengen Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
       { text: "Turn Your Travel Experience Into Income — Without Building a Website", path: "/blog/turn-travel-experience-into-income-without-a-website" },
     ],
-  },
-  {
-    id: "blog-47",
-    slug: "kkday-10-10-winter-sale-japan-tours-passes-guide",
-    title: "KKday 10.10 Winter Travel Sale: 30% Promo Codes for Japan Ski Tours, Theme Parks, JR Passes & Skyliner (2026)",
-    summary:
-      "Unlock 30% discount promo codes (1010TOURS, 1010MOVE, 1010TIX) for KKday's 10.10 Winter Sale launching October 10 at 08:00 AM UTC+8. Here is our curated guide to Hokkaido & Mt. Fuji ski tours, Universal Studios Japan, Tokyo Disney, Keisei Skyliner express tickets, and Kansai Rapi:t airport passes for international and Bangladeshi travelers using dual-currency cards.",
-    category: "Travel Deals & Intelligence",
-    date: "October 9, 2026",
-    author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "8 min read",
-    internalLinks: [
-      { text: "Travel Creator Resources: The Tools We Actually Use (2026)", path: "/blog/travel-creator-resources" },
-      { text: "5 Insider Secrets to Booking Cheaper Flights from Dhaka", path: "/blog/cheap-flight-booking-hacks-dhaka" },
-      { text: "Dual-Currency Card Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "Best Travel eSIM & Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
-      { text: "Global Flight Search & Fare Benchmark", path: "/flights" },
-      { text: "Global Hotel & Family Stay Finder", path: "/hotels" },
-    ],
-    affiliateCTA: {
-      provider: "kkday",
-      headline: "Lock in 30% Off Winter Japan Passes & Ski Tours",
-      body: "Use promo codes 1010TOURS, 1010MOVE, and 1010TIX on KKday before quotas run out.",
-    },
   },
   {
     id: "blog-48",

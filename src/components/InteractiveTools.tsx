@@ -335,7 +335,7 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
               activeTool === "airhelp" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
             }`}
           >
-            Flight Delay Claim (€600)
+            Flight Disruption Check (AirHelp)
           </button>
         </div>
       </div>

@@ -1,10 +1,14 @@
 import React from "react";
-import { ArrowRight, Compass, Info, MapPin, Ticket } from "lucide-react";
+import { ArrowRight, Compass, ExternalLink, Info, MapPin, Ticket } from "lucide-react";
 import type { BlogPost, DestinationGuide } from "../types";
 import type { Language } from "../translations";
 import { AFFILIATE_LINKS, PartnerLinkButton } from "./AffiliatePartners";
 import { ResponsiveImage } from "./ResponsiveImage";
 import { DESTINATION_HERO_IMAGES } from "../data/destinationHeroImages";
+import {
+  DESTINATION_FLIGHT_SEARCHES,
+  DESTINATION_OFFICIAL_SOURCES,
+} from "../data/destinationOfficialSources";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
   DESTINATION_PARTNER_COPY,
@@ -16,7 +20,18 @@ interface CityDestinationLandingProps {
   blogs: BlogPost[];
   lang: Language;
   onNavigate: (path: string) => void;
+  areTpScriptsReady: boolean;
+  setAreTpScriptsReady: (ready: boolean) => void;
+  TravelpayoutsWidgetSkeleton: React.ComponentType<{
+    variant?: "flights" | "hotels";
+    isBn?: boolean;
+    onInteract?: () => void;
+  }>;
 }
+
+const DestinationFlightSearch = React.lazy(() =>
+  import("./TravelpayoutsCustomWidget").then((module) => ({ default: module.TravelpayoutsCustomWidget }))
+);
 
 const EXPERIENCE_PATHS: Record<string, string> = {
   "london-guide": "/experiences?region=west&city=london",
@@ -48,7 +63,15 @@ const DESTINATION_LINKS = [
 const BENGALI_DIGITS = "০১২৩৪৫৬৭৮৯";
 const localizeNumber = (value: number) => String(value).replace(/[0-9]/g, (digit) => BENGALI_DIGITS[Number(digit)]);
 
-export default function CityDestinationLanding({ guide, blogs, lang, onNavigate }: CityDestinationLandingProps) {
+export default function CityDestinationLanding({
+  guide,
+  blogs,
+  lang,
+  onNavigate,
+  areTpScriptsReady,
+  setAreTpScriptsReady,
+  TravelpayoutsWidgetSkeleton,
+}: CityDestinationLandingProps) {
   const isBn = lang === "bn";
   const experiencePath = EXPERIENCE_PATHS[guide.id];
   const relatedArticles = (DESTINATION_RELATED_BLOG_SLUGS[guide.id] ?? [])
@@ -58,6 +81,8 @@ export default function CityDestinationLanding({ guide, blogs, lang, onNavigate 
   const otherDestinationLinks = DESTINATION_LINKS.filter((item) => item.path !== `/destinations/${guide.id}`);
   const activityDestination = ACTIVITY_DESTINATION_NAMES[guide.id] ?? { en: guide.country, bn: guide.country };
   const heroImage = DESTINATION_HERO_IMAGES[guide.id];
+  const flightSearch = DESTINATION_FLIGHT_SEARCHES[guide.id];
+  const officialSources = DESTINATION_OFFICIAL_SOURCES[guide.id] ?? [];
   const localizedHref = (path: string) => isBn
     ? `/bn${path === "/" ? "/" : path}`
     : path;
@@ -70,6 +95,9 @@ export default function CityDestinationLanding({ guide, blogs, lang, onNavigate 
 
   if (!heroImage) {
     throw new Error(`Missing generated destination hero image: ${guide.id}`);
+  }
+  if (!flightSearch || officialSources.length < 2) {
+    throw new Error(`Missing flight-search or official-source mapping: ${guide.id}`);
   }
 
   return (
@@ -229,6 +257,91 @@ export default function CityDestinationLanding({ guide, blogs, lang, onNavigate 
             </section>
           )}
         </aside>
+      </section>
+
+      <section
+        aria-labelledby="destination-official-sources-title"
+        className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"
+      >
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+          <h2 id="destination-official-sources-title" className="ural-section-title font-serif text-xl font-bold text-slate-900">
+            {isBn ? "যাত্রার আগে সরকারি তথ্য যাচাই করুন" : "Check official information before you travel"}
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
+            {isBn
+              ? "প্রবেশের শর্ত, ভিসা, আকর্ষণের সময়সূচি ও পরিবহন-তথ্য বদলাতে পারে। যাত্রার আগে সংশ্লিষ্ট সরকারি সংস্থা বা অপারেটরের বর্তমান তথ্য দেখুন; কোনো লিংকই ভিসা অনুমোদন বা প্রবেশ নিশ্চিত করে না।"
+              : "Entry rules, visa guidance, attraction schedules and transport information can change. Check the relevant authority or operator before travel; these links do not guarantee visa approval or admission."}
+          </p>
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+            {officialSources.map((source) => (
+              <li key={source.url}>
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-h-11 items-center justify-between gap-3 rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-semibold text-brand-navy hover:border-brand-navy/30 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+                >
+                  <span>{isBn ? source.labelBn : source.labelEn}</span>
+                  <ExternalLink size={14} className="shrink-0 text-slate-500" aria-hidden="true" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section
+        id="destination-flight-search"
+        aria-labelledby="destination-flight-search-title"
+        className="mx-auto w-full max-w-6xl space-y-3 px-4 sm:px-6 lg:px-8"
+      >
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-emerald">
+            {isBn ? "ঢাকা থেকে ফ্লাইট পরিকল্পনা" : "FLIGHT PLANNING FROM DHAKA"}
+          </p>
+          <h2 id="destination-flight-search-title" className="ural-section-title mt-1 font-serif text-xl font-bold text-slate-900 sm:text-2xl">
+            {isBn ? `${guide.country}-এর ফ্লাইট অপশন খুঁজুন` : `Search flight options for ${guide.country}`}
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
+            {isBn
+              ? `সার্চটি ঢাকা (DAC) থেকে ${flightSearch.initialTo} দিয়ে শুরু হবে। আপনার প্রকৃত শহর, তারিখ, যাত্রী ও মুদ্রা মিলিয়ে নিন। ${flightSearch.noteBn ?? ""}`
+              : `The search starts from Dhaka (DAC) to ${flightSearch.initialTo}. Confirm your actual arrival airport, dates, passengers and currency before continuing. ${flightSearch.noteEn ?? ""}`}
+          </p>
+        </div>
+        <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm sm:p-5">
+          {areTpScriptsReady ? (
+            <React.Suspense
+              fallback={
+                <TravelpayoutsWidgetSkeleton
+                  variant="flights"
+                  isBn={isBn}
+                  onInteract={() => setAreTpScriptsReady(true)}
+                />
+              }
+            >
+              <DestinationFlightSearch
+                initialTab="flights"
+                initialFrom="Dhaka (DAC)"
+                initialTo={flightSearch.initialTo}
+                flightSearchOnly
+                showInlineResults={false}
+                showFlightProviderHandoffs
+                lang={lang}
+              />
+            </React.Suspense>
+          ) : (
+            <TravelpayoutsWidgetSkeleton
+              variant="flights"
+              isBn={isBn}
+              onInteract={() => setAreTpScriptsReady(true)}
+            />
+          )}
+          <p className="mt-3 text-xs leading-5 text-slate-600">
+            {isBn
+              ? "এটি Travelpayouts-এর URAL White-Label ও Aviasales-এ সার্চ হ্যান্ডঅফ—এখানে লাইভ ভাড়া বা প্রাপ্যতার কোট দেখানো হয় না। নির্বাচিত পার্টনারের ফলাফল, মূল্য ও শর্ত যাচাই করুন। যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; আপনার অতিরিক্ত খরচ হয় না।"
+              : "Search handoff through URAL’s Travelpayouts White-Label and Aviasales—not a live fare or availability quote on this page. Check the selected partner’s results, prices and terms. URAL may earn a commission on qualifying bookings, at no extra cost to you."}
+          </p>
+        </div>
       </section>
     </main>
   );

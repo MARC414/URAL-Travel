@@ -90,8 +90,8 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
                     ? "৩০% ফ্ল্যাশ ভাউচার (1010TOURS, 1010MOVE, 1010TIX)"
                     : "30% OFF (1010TOURS · 1010MOVE · 1010TIX)"
                   : isBn
-                  ? "ইনস্ট্যান্ট মোবাইল QR টিকিট"
-                  : "Instant Mobile QR E-Tickets"}
+                  ? "তারিখ, দাম ও শর্ত যাচাই করুন"
+                  : "Check dates, price & terms"}
               </span>
               <span className="text-slate-300">
                 {saleActive
@@ -110,8 +110,8 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
                   ? `${cityContext ? `${cityContext}-এ ` : "জাপান ও এশিয়ায় "}স্কি ট্যুর, এয়ারপোর্ট ট্রেন ও থিম পার্ক টিকিটে ৩০% ফ্ল্যাশ ছাড়`
                   : `Save 30% on ${cityContext || "Japan & Asia"} Ski Tours, Airport Rail & Theme Park Tickets`
                 : isBn
-                ? `${cityContext ? `${cityContext}-এ ` : "জাপান, থাইল্যান্ড ও সিঙ্গাপুরে "}ট্যুর, এয়ারপোর্ট ট্রেন ও থিম পার্কের মোবাইল পাস`
-                : `Pre-Book Discounted ${cityContext || "Asia & Global"} Tours, Rail & Attraction Passes`}
+                ? `${cityContext ? `${cityContext}-এ ` : "জাপান ও এশিয়ায় "}ট্যুর, এয়ারপোর্ট ট্রেন ও আকর্ষণের টিকিট তুলনা করুন`
+                : `Compare ${cityContext || "Asia"} Tours, Rail & Attraction Tickets`}
             </h3>
 
             <p className="text-xs text-slate-300 leading-relaxed">
@@ -120,8 +120,8 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
                   ? "১০ অক্টোবর সকাল ৮:০০ (UTC+8 / বাংলাদেশ সময় সকাল ৬:০০) থেকে সীমিত কোটায় শুরু হচ্ছে কেকেডে ১০.১০ সেল। ট্যুর (1010TOURS), ট্রান্সপোর্ট (1010MOVE) ও টিকিটে (1010TIX) ৩০% সাশ্রয় করুন।"
                   : "Launching October 10 at 08:00 AM UTC+8 (06:00 AM BST). First-come, first-served 30% discount codes for tours, airport rail (Skyliner, Rapi:t) and attraction passes."
                 : isBn
-                ? "আপনার এনডোর্স করা বাংলাদেশি ডুয়াল-কারেন্সি কার্ড ব্যবহার করে প্রি-বুক করুন এবং টিকিট কাউন্টারের দীর্ঘ লাইন এড়িয়ে সরাসরি প্রবেশ করুন।"
-                : "Use your endorsed Bangladeshi dual-currency card to secure instant mobile vouchers while saving 15–30% over walk-up ticket counters."}
+                ? "বুক করার আগে আপনার তারিখের প্রাপ্যতা, মোট দাম, কী অন্তর্ভুক্ত এবং বাতিলের শর্ত KKday-তে যাচাই করুন। URAL যোগ্য বুকিং থেকে কমিশন পেতে পারে।"
+                : "Check availability, total price, inclusions and cancellation terms for your dates on KKday before booking. URAL may earn commission on qualifying bookings."}
             </p>
           </div>
 
@@ -138,12 +138,12 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
                     ? "KKday ১০.১০ সেল পেজ খুলুন"
                     : "Open KKday 10.10 Sale Page"
                   : isBn
-                  ? "KKday অ্যাটাকশন ও ট্রেন পাস দেখুন"
-                  : "Compare KKday Passes & Deals"}
+                  ? "KKday-তে ট্যুর ও টিকিট তুলনা করুন"
+                  : "Compare KKday Tours & Tickets"}
               </span>
               <ExternalLink size={14} />
             </a>
-            {onNavigate && (
+            {onNavigate && saleActive && (
               <button
                 type="button"
                 onClick={() => onNavigate("/blog/kkday-10-10-winter-sale-japan-tours-passes-guide")}
@@ -160,7 +160,7 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
 
   return (
     <section
-      aria-labelledby="kkday-sale-heading"
+      aria-labelledby="kkday-offer-heading"
       className="bg-gradient-to-br from-[#0B192C] via-brand-navy to-[#0F2942] text-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-cyan-500/30 shadow-md relative overflow-hidden"
     >
       <div
@@ -182,7 +182,7 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
                   : KKDAY_PROMO.campaignName
                 : isBn
                 ? "KKday এশিয়া ট্রাভেল হাব"
-                : "KKday Asia Official Passes"}
+                : "KKday Asia Tours & Tickets"}
             </span>
             <span className="bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2.5 py-1 rounded-md font-semibold inline-flex items-center gap-1">
               <Tag size={12} />
@@ -191,8 +191,8 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
                   ? "৩০% ফ্ল্যাশ ভাউচার কোড"
                   : "30% OFF Flash Codes"
                 : isBn
-                ? "অনলাইন ডিসকাউন্ট ও ইনস্ট্যান্ট QR"
-                : "Online Discounts + Instant QR"}
+                ? "বর্তমান দাম ও শর্ত যাচাই করুন"
+                : "Check current price & terms"}
             </span>
             <span className="text-slate-300 flex items-center gap-1">
               <Clock size={12} className="text-cyan-400" />
@@ -201,13 +201,13 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
                   ? "লঞ্চ: ১০ অক্টোবর সকাল ৮:০০ (UTC+8) · FCFS কোটা"
                   : "Launches Oct 10, 08:00 UTC+8 · First-Come FCFS"
                 : isBn
-                ? "সারা বছর ইনস্ট্যান্ট মোবাইল QR টিকিট"
-                : "Year-round instant e-tickets for travelers"}
+                ? "প্রাপ্যতা পণ্য ও তারিখভেদে বদলায়"
+                : "Availability varies by product and date"}
             </span>
           </div>
 
           <h3
-            id="kkday-sale-heading"
+            id="kkday-offer-heading"
             className="font-serif text-xl sm:text-2xl lg:text-3xl font-bold text-white leading-tight"
           >
             {saleActive
@@ -215,7 +215,7 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
                 ? "KKday ১০.১০ উইন্টার সেল: জাপান স্কি ট্যুর, এয়ারপোর্ট ট্রেন ও থিম পার্কের টিকিটে ৩০% ফ্ল্যাশ ছাড়"
                 : "KKday 10.10 Winter Sale: 30% OFF Japan Ski Tours, Airport Rail & Theme Park Tickets"
               : isBn
-              ? "জাপান, থাইল্যান্ড ও সিঙ্গাপুর ভ্রমণে ডিসকাউন্টেড থিম পার্ক, ডে-ট্যুর ও এয়ারপোর্ট ট্রেন পাস"
+              ? "জাপান ও এশিয়ায় থিম পার্ক, ডে-ট্যুর ও এয়ারপোর্ট ট্রেনের বিকল্প"
               : "Asia Attraction Passes, Airport Rail & Ski Tours for International Travelers"}
           </h3>
 
@@ -225,10 +225,12 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
                 ? "আপনি কি ২০২৬-২০২৭ শীতকালীন ছুটিতে জাপান (টোকিও, ওসাকা, হোক্কাইডো) কিংবা সাউথইস্ট এশিয়া যাওয়ার পরিকল্পনা করছেন? KKday-র ১০.১০ উইন্টার সেল থেকে ট্যুর, এয়ারপোর্ট এক্সপ্রেস (Keisei Skyliner, Nankai Rapi:t) ও থিম পার্ক (USJ, Tokyo Disney) বুক করে ৩০% পর্যন্ত সাশ্রয় করুন।"
                 : "Planning a winter getaway to Japan (Tokyo, Osaka, Hokkaido ski resorts) or Southeast Asia? Lock in KKday's 10.10 Winter Travel Sale launching October 10 at 08:00 AM UTC+8. Grab 30% off tours, transportation passes, and attraction tickets before codes run out."
               : isBn
-              ? "টোকিও, ওসাকা, হোক্কাইডো বা ব্যাংকক ভ্রমণের আগে KKday থেকে থিম পার্ক টিকিট, ডে-ট্যুর ও এয়ারপোর্ট এক্সপ্রেস অনলাইনে প্রি-বুক করলে কাউন্টারের তুলনায় ১৫–২৫% পর্যন্ত সাশ্রয় হয়।"
-              : "Pre-booking your theme park passes, airport rail tickets, and winter ski tours on KKday saves 15–25% compared to walk-up ticket counters while eliminating airport lines."}
+              ? "KKday-তে নির্বাচিত ট্যুর, রেল টিকিট বা আকর্ষণের বর্তমান দাম, তারিখ, অন্তর্ভুক্তি ও বাতিলের শর্ত তুলনা করুন। পণ্য ও তারিখভেদে দাম ও প্রাপ্যতা বদলায়।"
+              : "Compare current prices, dates, inclusions and cancellation terms for the selected tour, rail ticket or attraction on KKday. Prices and availability vary by product and date."}
           </p>
 
+          {saleActive && (
+            <>
           {/* Interactive 3-Voucher Code Stack */}
           <div className="space-y-2 pt-2">
             <div className="text-[11px] font-mono text-cyan-300 uppercase tracking-wider flex items-center gap-1.5">
@@ -277,6 +279,8 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
               })}
             </div>
           </div>
+            </>
+          )}
         </div>
 
         {/* Right 4 Cols: Action & Terms Box */}
@@ -284,17 +288,30 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
           <div className="flex items-center justify-between border-b border-white/10 pb-3">
             <div>
               <div className="text-[11px] font-mono text-cyan-300 uppercase">
-                {isBn ? "অফিশিয়াল ক্যাম্পেইন নেটওয়ার্ক" : "Official Travel Network"}
+                {saleActive
+                  ? isBn
+                    ? "অফিশিয়াল ক্যাম্পেইন নেটওয়ার্ক"
+                    : "Official Travel Network"
+                  : isBn
+                    ? "পার্টনার বুকিং লিংক"
+                    : "Partner booking link"}
               </div>
               <div className="font-serif text-lg font-bold text-white">
-                KKday Global Winter Sale
+                {saleActive ? "KKday Global Winter Sale" : isBn ? "ভ্রমণ বুকিংয়ের আগে যাচাই করুন" : "Before You Book"}
               </div>
             </div>
-            <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[11px] font-mono font-bold px-2.5 py-1 rounded-md animate-pulse">
-              {saleActive ? (isBn ? "১০.১০ লাইভ" : "10.10 FLASH") : isBn ? "ভেরিফায়েড পার্টনার" : "OFFICIAL PARTNER"}
+            <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[11px] font-mono font-bold px-2.5 py-1 rounded-md">
+              {saleActive
+                ? isBn
+                  ? "১০.১০ লাইভ"
+                  : "10.10 FLASH"
+                : isBn
+                  ? "অফিশিয়াল ট্রাভেল পার্টনার"
+                  : "OFFICIAL TRAVEL PARTNER"}
             </span>
           </div>
 
+          {saleActive ? (
           <ul className="space-y-2 text-xs text-slate-200">
             <li className="flex items-start gap-2">
               <Check size={14} className="text-cyan-400 shrink-0 mt-0.5" />
@@ -329,6 +346,13 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
               </span>
             </li>
           </ul>
+          ) : (
+            <ul className="space-y-2 text-xs text-slate-200">
+              <li className="flex items-start gap-2"><Check size={14} className="text-cyan-400 shrink-0 mt-0.5" /><span>{isBn ? "আপনার ভ্রমণের তারিখে পণ্যটি পাওয়া যাবে কি না দেখুন।" : "Check whether the product is available for your travel dates."}</span></li>
+              <li className="flex items-start gap-2"><Check size={14} className="text-cyan-400 shrink-0 mt-0.5" /><span>{isBn ? "মোট দাম, কী অন্তর্ভুক্ত এবং বাতিলের শর্ত তুলনা করুন।" : "Compare the total price, inclusions and cancellation terms."}</span></li>
+              <li className="flex items-start gap-2"><Check size={14} className="text-cyan-400 shrink-0 mt-0.5" /><span>{isBn ? "চেকআউটে মুদ্রা ও পেমেন্টের শর্ত নিশ্চিত করুন।" : "Confirm the checkout currency and payment terms."}</span></li>
+            </ul>
+          )}
 
           <div className="space-y-2">
             <a
@@ -343,13 +367,13 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
                     ? "KKday ১০.১০ সেল পেজে যান"
                     : "Go to KKday 10.10 Sale Page"
                   : isBn
-                  ? "KKday এশিয়া ডিলগুলো দেখুন"
-                  : "Browse KKday Travel Passes"}
+                  ? "KKday-তে ট্যুর ও টিকিট তুলনা করুন"
+                  : "Compare Tours & Tickets on KKday"}
               </span>
               <ExternalLink size={15} />
             </a>
 
-            {onNavigate && (
+            {onNavigate && saleActive && (
               <button
                 type="button"
                 onClick={() => onNavigate("/blog/kkday-10-10-winter-sale-japan-tours-passes-guide")}
@@ -362,9 +386,13 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
           </div>
 
           <div className="text-[11px] text-slate-300 text-center">
-            {isBn
-              ? "টিপস: কোড সক্রিয় হওয়ার সাথে সাথে দ্রুত রিডিম করতে আপনার কার্ড এনডোর্স রাখুন!"
-              : "Tip: Codes apply at checkout on eligible items. Ensure card endorsement is active."}
+            {saleActive
+              ? isBn
+                ? "প্রোমো কোডের যোগ্যতা, প্রাপ্যতা ও শর্ত চেকআউটে যাচাই করুন।"
+                : "Check code eligibility, availability and terms at checkout."
+              : isBn
+                ? "URAL যোগ্য বুকিং থেকে কমিশন পেতে পারে। চেকআউটে চূড়ান্ত দাম ও শর্ত যাচাই করুন।"
+                : "URAL may earn commission on qualifying bookings. Confirm the final price and terms at checkout."}
           </div>
         </div>
       </div>

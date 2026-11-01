@@ -14,6 +14,7 @@ import { getHotelGuideAffiliatePlacement } from "../utils/affiliatePlacement";
 import { EditorialPageHero } from "../components/EditorialPageHero";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { getHotelGuideDestinationImage } from "../data/hotelGuideDestinations";
+import { DESTINATION_HERO_IMAGES } from "../data/destinationHeroImages";
 
 
 
@@ -26,6 +27,7 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
   const { TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryCityWithIata, getCountryFlightId, getCountryVisaId, getLocalizedRouteHref, isBn, lang, localizedHotels, navigateTo, parameterId, section, setAreTpScriptsReady } = context;
 
   const activeHotel = localizedHotels.find((hotel) => hotel.id === parameterId) || localizedHotels[0];
+  const hotelsDirectoryHeroImage = DESTINATION_HERO_IMAGES["nepal-guide"];
 
   if (!parameterId) {
     return (
@@ -36,16 +38,9 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
           description={isBn
             ? "কাঠমান্ডু, ব্যাংকক, কুয়ালালামপুর, দুবাই, সিঙ্গাপুর ও মালদ্বীপে থাকার এলাকা, হোটেল এবং বুকিংয়ের পরামর্শ তুলনা করুন।"
             : "Compare neighborhoods, hotel options and practical booking advice for Kathmandu, Bangkok, Kuala Lumpur, Dubai, Singapore and the Maldives."}
-          imageSrc="/assets/images/hotels_london_marylebone_exterior_20261101-1200.webp"
-          imageAlt={isBn
-            ? "লন্ডনের হ্যাম ইয়ার্ড হোটেলের প্রবেশপথে ইউনিয়ন জ্যাক পতাকা"
-            : "Hotel entrance and Union Jack flag outside a London hotel"}
+          imageSrc={hotelsDirectoryHeroImage.src}
+          imageAlt={isBn ? hotelsDirectoryHeroImage.altBn : hotelsDirectoryHeroImage.altEn}
           imageSizes="(min-width: 1024px) 45vw, 100vw"
-          credit={
-            <a href="https://www.pexels.com/search/hotel%20in%20london/" target="_blank" rel="noopener noreferrer">
-              Pexels · Ham Yard Hotel, London (photo 3494638)
-            </a>
-          }
         />
 
         <section aria-labelledby="hotel-guide-index-title" className="space-y-3">
@@ -61,14 +56,15 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
             {localizedHotels.map((hotel) => {
               const image = getHotelGuideDestinationImage(hotel.id);
               if (!image) return null;
+              const hotelPath = `/hotels/${hotel.id}`;
               return (
                 <a
                   key={hotel.id}
-                  href={`/hotels/${hotel.id}`}
+                  href={getLocalizedRouteHref ? getLocalizedRouteHref(hotelPath) : hotelPath}
                   onClick={(event) => {
                     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
                     event.preventDefault();
-                    navigateTo(`/hotels/${hotel.id}`);
+                    navigateTo(hotelPath);
                   }}
                   className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
                 >

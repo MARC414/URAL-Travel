@@ -10,9 +10,10 @@ import {
 
 type GlobalSiteSearchProps = {
   isBn: boolean;
+  initialQuery: string;
   onClose: () => void;
   navigateTo: (path: string) => void;
-  triggerRef: React.RefObject<HTMLButtonElement | null>;
+  triggerRef: React.RefObject<HTMLElement | null>;
 };
 
 type SearchIndexResponse = { version: number; entries: SiteSearchEntry[] };
@@ -47,10 +48,10 @@ function localePath(path: string, isBn: boolean): string {
   return path === "/" ? "/bn/" : `/bn${path}`;
 }
 
-export function GlobalSiteSearch({ isBn, onClose, navigateTo, triggerRef }: GlobalSiteSearchProps) {
+export function GlobalSiteSearch({ isBn, initialQuery, onClose, navigateTo, triggerRef }: GlobalSiteSearchProps) {
   const [entries, setEntries] = useState<SiteSearchEntry[] | null>(null);
   const [loadError, setLoadError] = useState(false);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery);
   const [settledQuery, setSettledQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);

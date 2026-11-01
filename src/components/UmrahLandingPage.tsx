@@ -591,8 +591,8 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 max-w-3xl">
             {isBn
-              ? "শুধুমাত্র এলাকার নাম দেখে হোটেলের প্রকৃত দূরত্ব, রাস্তার ঢাল (incline), রাস্তা বন্ধ থাকা বা শাটল বাসের নিশ্চয়তা পাওয়া যায় না। নিচের ৩টি জোন থেকে খোঁজা শুরু করুন এবং বুকিংয়ের আগে নির্দিষ্ট হোটেলের গুগল ম্যাপ পিন, গেটের পথ ও লাইভ ভাড়া যাচাই করুন:"
-              : "Neighborhood names alone do not guarantee an individual hotel's exact walking distance, street incline, road-closure diversions, or shuttle frequency. Use these three areas as search starting points and verify the specific property address, route to your intended gate, and live nightly rate before booking:"}
+              ? "শুধু এলাকার নাম দেখে কোনো হোটেলের সঠিক হাঁটার দূরত্ব, রাস্তার ঢাল, বন্ধ রাস্তার বিকল্প পথ বা শাটলের নিশ্চয়তা পাওয়া যায় না। নিচের ৩টি জোনকে খোঁজার সূচনা হিসেবে নিন; বুকিং সাইটে নির্দিষ্ট হোটেলের ঠিকানা, আপনার তারিখের মোট মূল্য এবং কাঙ্ক্ষিত গেটের পথ যাচাই করুন:"
+              : "Neighborhood names alone do not establish a hotel's exact walking distance, street incline, road-closure diversions, or shuttle frequency. Use these three areas as starting points, then check the specific property's address, total for your dates, and route to your intended gate on the booking site:"}
           </p>
         </div>
 
@@ -603,7 +603,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 ? "১. আবরাজ আল বাইত (Clock Tower) ও Jabal Omar"
                 : "1. Abraj Al Bait (Clock Tower) & Jabal Omar",
               dist: isBn ? "হারাম চত্বর সংলগ্ন জোন · পিন যাচাই করুন" : "Courtyard Perimeter Zone · Verify Exact Tower Pin",
-              price: isBn ? "প্রিমিয়াম টিয়ার · তারিখভেদে ভাড়া পরিবর্তিত হয়" : "Premium Tier · Live Rates Vary by Date & View",
+              bookingCheck: isBn ? "নির্দিষ্ট টাওয়ার, রুম/ভিউ ও তারিখ মিলিয়ে মোট মূল্য তুলনা করুন" : "Compare the exact tower, room/view and total for your dates",
               desc: isBn
                 ? "কাবা চত্বরের ঠিক পাশের বহুতল কমপ্লেক্স ও শপিং মল এলাকা। তবে বড় কমপ্লেক্সের ভেতর কোন টাওয়ার এবং লিফট লবি থেকে চত্বরে নামতে কতটুকু হাঁটতে হয় তা নির্দিষ্ট হোটেলের রিভিউ দেখে নিশ্চিত করুন।"
                 : "High-rise complexes bordering the southern and western Haram plazas with indoor mall and food-court access. Because tower blocks vary in distance and elevator changes, check the exact tower pin and lobby-to-courtyard access route.",
@@ -613,7 +613,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 ? "২. আজইয়াদ (Ajyad), ইব্রাহিম আল খলিল রোড ও শাটল জোন"
                 : "2. Ajyad, Ibrahim Al Khalil Road & Outer Shuttle Zones",
               dist: isBn ? "সেন্ট্রাল করিডোর ও শাটল এরিয়া · ঢাল যাচাই করুন" : "Central Corridors & Shuttle Zones · Check Street Slope",
-              price: isBn ? "মিড-রেঞ্জ ও বাজেট টিয়ার · শাটল শিডিউল দেখুন" : "Mid-Range & Shuttle Tiers · Confirm Shuttle Terms",
+              bookingCheck: isBn ? "শাটলের সময়সূচি, ওঠার স্থান ও পরিবহন খরচ হোটেলের কাছে যাচাই করুন" : "Ask the hotel about shuttle times, pickup point and transport cost",
               desc: isBn
                 ? "ইব্রাহিম আল খলিল রোড ও আজইয়াদে প্রচুর দক্ষিণ এশীয় খাবার ও ফার্মেসি রয়েছে, তবে আজইয়াদের কিছু শাখা রাস্তায় ঢাল (incline) আছে। আর Kudai বা Aziziyah জোনে বুক করলে হোটেলের নিজস্ব শাটল বাসের সময়সূচি ও ড্রপ-অফ পয়েন্ট আগেই লিখিতভাবে জেনে নিন।"
                 : "Ibrahim Al Khalil Road and Ajyad offer South Asian dining and pharmacies, though side streets off Ajyad can have uphill gradients. For outer zones (Kudai / Aziziyah), verify the hotel's current shuttle timetable and drop-off terminal directly with the property.",
@@ -623,7 +623,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 ? "৩. মদিনা সেন্ট্রাল এরিয়া (Markazia — ১ম রিং রোডের ভেতর)"
                 : "3. Madinah Central Area (Markazia Inside 1st Ring Road)",
               dist: isBn ? "মসজিদে নববী চত্বর এলাকা · বর্তমান গেট দেখুন" : "Masjid an-Nabawi Perimeter · Check Current Gate Access",
-              price: isBn ? "মৌসুম ও দিকভেদে ভাড়া ভিন্ন হয়" : "Dynamic Rates by Direction (North / West / South)",
+              bookingCheck: isBn ? "নির্দিষ্ট হোটেলের দিক, রুম ও তারিখ মিলিয়ে মোট মূল্য ও প্রবেশপথ যাচাই করুন" : "Check the exact hotel's side, room, date-specific total and access route",
               desc: isBn
                 ? "মদিনায় ১ম রিং রোডের ভেতর (Markazia North/West/South) হোটেল নিলে মসজিদে নববীর চত্বরে সহজে যাওয়া যায়। নারী যাত্রীদের প্রবেশের গেট ও রিয়াজুল জান্নাত (Al-Rawdah) ভিজিটের সময়সূচি পরিবর্তনশীল—বুকিংয়ের সময় হোটেলের অবস্থান ও অফিসিয়াল Nusuk অ্যাপের নির্দেশনা মিলিয়ে নিন।"
                 : "Staying inside Madinah's 1st Ring Road (Markazia) places you around the Prophet's Mosque courtyard perimeter. Because women's prayer section gates and Al-Rawdah entry arrangements can change, check the property's exact side (North/West/South) and follow the live instructions in your Nusuk permit.",
@@ -639,7 +639,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 <p className="text-xs text-slate-600 leading-relaxed">{z.desc}</p>
               </div>
               <div className="pt-3 border-t border-slate-200/80 text-xs font-mono font-bold text-slate-900">
-                {z.price}
+                {z.bookingCheck}
               </div>
             </div>
           ))}
@@ -648,8 +648,8 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 space-y-3">
           <h3 className="ural-card-title font-serif text-base font-bold text-brand-navy">
             {isBn
-              ? "মক্কা ও মদিনার হোটেল রেট লাইভ সার্চ করুন:"
-              : "Compare Live Makkah & Madinah Hotel Rates:"}
+              ? "মক্কা বা মদিনার হোটেল তালিকা খুঁজুন:"
+              : "Search hotel listings for Makkah or Madinah:"}
           </h3>
           <TravelpayoutsCustomWidget
             initialTab="hotels"

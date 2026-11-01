@@ -1144,7 +1144,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
               }}
               className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-semibold transition-colors cursor-pointer"
             >
-              🛡️ {isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "Flight Delay Claim (€600)"}
+              🛡️ {isBn ? "ফ্লাইট-সমস্যার দাবি যাচাই" : "Flight Disruption Check"}
             </a>
           </div>
         </div>
