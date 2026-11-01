@@ -15,6 +15,8 @@ export const AFFILIATE_LINKS = {
   klookHotels: "https://klook.tpo.li/tnjuBwoy",
   tiqets: "https://tiqets.tpo.li/KSc4uyIB",
   airhelp: "https://airhelp.tpo.li/XS95LnEC",
+  // Dedicated KKday hotel and accommodation page; keep `kkday` generic for tours/passes.
+  kkdayHotels: "https://kkday.tpo.li/fyAFi2IO",
   kkday: "https://kkday.tpo.li/3Ecyxris",
   kiwitaxi: "https://kiwitaxi.tpo.li/GIhvhrtF",
   welcomePickups: WELCOME_PICKUPS_PARTNER_URL,
@@ -219,6 +221,16 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     promoCode: "1010TOURS, 1010MOVE, 1010TIX",
     activeNote: "Evergreen partner placement remains active; the 10.10 customer voucher ended Oct 31, 2026",
     expiredFallbackBehavior: "Auto-switches banner to evergreen KKday Asian Tours & Rail Passes after Oct 31, 2026"
+  },
+  kkdayHotels: {
+    id: "kkdayHotels",
+    partnerName: "KKday Hotels & Stays",
+    status: "active",
+    offerType: "evergreen",
+    url: AFFILIATE_LINKS.kkdayHotels,
+    fallbackPartner: "kkday",
+    activeNote: "Direct tracked link to KKday's hotel and accommodation page",
+    expiredFallbackBehavior: "Falls back to the general KKday partner catalog if the hotel deep link is paused"
   },
   kiwitaxi: {
     id: "kiwitaxi",

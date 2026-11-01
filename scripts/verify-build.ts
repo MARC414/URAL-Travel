@@ -56,6 +56,7 @@ import {
 } from "../src/components/KlookHotelOffers";
 import { KlookHotelSpotlight } from "../src/components/KlookHotelSpotlight";
 import { KKdayPromoBanner } from "../src/components/KKdayPromoBanner";
+import { KkdayHotelsPage } from "../src/components/KkdayHotelsPage";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
   DESTINATION_PARTNER_COPY,
@@ -186,12 +187,40 @@ const escapedPartnerUrl = (partner: keyof typeof AFFILIATE_LINKS) =>
 check(
   !hotelModeWidgetHtml.includes("travelpayouts-wl.html") && !hotelModeWidgetBnHtml.includes("travelpayouts-wl.html") &&
     hotelModeWidgetHtml.includes(escapedPartnerUrl("klookHotels")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("klookHotels")) &&
-    hotelModeWidgetHtml.includes("/kkday-hotels") && hotelModeWidgetBnHtml.includes("/kkday-hotels") &&
+    hotelModeWidgetHtml.includes(escapedPartnerUrl("kkdayHotels")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("kkdayHotels")) &&
     hotelModeWidgetHtml.includes(escapedPartnerUrl("goCity")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("goCity")) &&
     hotelModeWidgetHtml.includes(escapedPartnerUrl("radicalStorage")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("radicalStorage")) &&
     hotelModeWidgetHtml.includes("Klook partner search") && hotelModeWidgetBnHtml.includes("Klook পার্টনার সার্চ") &&
     !hotelModeWidgetHtml.includes("Verified Klook Stays") && !hotelModeWidgetBnHtml.includes("Verified Klook Stays"),
   "EN/BN hotel mode hides the flight-only portal, keeps Klook and KKday hotel, Go City activity and Radical Storage links, and avoids an unsupported verified-stays claim"
+);
+const kkdayHotelsPageEnHtml = renderToStaticMarkup(
+  React.createElement(KkdayHotelsPage, { isBn: false, onNavigate: () => undefined })
+);
+const kkdayHotelsPageBnHtml = renderToStaticMarkup(
+  React.createElement(KkdayHotelsPage, { isBn: true, onNavigate: () => undefined })
+);
+check(
+  AFFILIATE_LINKS.kkdayHotels === "https://kkday.tpo.li/fyAFi2IO" &&
+    AFFILIATE_LINKS.kkday === "https://kkday.tpo.li/3Ecyxris" &&
+    kkdayHotelsPageEnHtml.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    kkdayHotelsPageBnHtml.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    hotelModeWidgetHtml.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    hotelModeWidgetBnHtml.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    hotelModeWidgetHtml.includes(`href="${AFFILIATE_LINKS.klookHotels}"`) &&
+    hotelModeWidgetBnHtml.includes(`href="${AFFILIATE_LINKS.klookHotels}"`) &&
+    (read(path.join(ROOT_DIR, "scripts", "prerender.ts")) ?? "").includes("resolvePartnerUrl(AFFILIATE_LINKS.kkdayHotels)") &&
+    !(read(path.join(ROOT_DIR, "scripts", "prerender.ts")) ?? "").includes("href=\"https://kkday.tpo.li/3Ecyxris\""),
+  "KKday hotel placements use the supplied direct affiliate URL while keeping the generic KKday and Klook hotel links distinct"
+);
+const kkdayHotelPrerenderEn = read(path.join(DIST_DIR, "kkday-hotels.html")) ?? "";
+const kkdayHotelPrerenderBn = read(path.join(DIST_DIR, "bn", "kkday-hotels.html")) ?? "";
+check(
+  kkdayHotelPrerenderEn.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    kkdayHotelPrerenderBn.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    kkdayHotelPrerenderEn.includes('target="_blank" rel="noopener noreferrer sponsored"') &&
+    kkdayHotelPrerenderBn.includes('target="_blank" rel="noopener noreferrer sponsored"'),
+  "English and Bengali prerendered KKday hotel pages use the direct affiliate URL with safe new-tab attributes"
 );
 check(
   flightModeWidgetHtml.includes('href="/travelpayouts-wl.html?origin=DAC&amp;destination=BKK&amp;flightSearch=') &&
@@ -505,7 +534,9 @@ check(
 check(
   !hotelInlineDispatchHtml.includes("These links open general partner hotel collections") &&
     !hotelInlineDispatchHtml.includes("not a quote for your selected dates or guests") &&
-    !hotelInlineDispatchHtml.includes("this is not a traveller discount"),
+    !hotelInlineDispatchHtml.includes("this is not a traveller discount") &&
+    hotelInlineDispatchHtml.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    hotelInlineDispatchHtml.includes(`href="${AFFILIATE_LINKS.klookHotels}"`),
   "hotel inline dispatch also omits the removed date-handoff and commission message"
 );
 check(

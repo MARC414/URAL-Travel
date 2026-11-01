@@ -20,7 +20,7 @@ const CITY_GUIDES: { id: string; en: string; bn: string }[] = [
 ];
 
 export function KkdayHotelsPage({ isBn, onNavigate }: Props) {
-  const kkdayUrl = resolvePartnerUrl(AFFILIATE_LINKS.kkday);
+  const kkdayUrl = resolvePartnerUrl(AFFILIATE_LINKS.kkdayHotels);
 
   return (
     <section
@@ -49,6 +49,7 @@ export function KkdayHotelsPage({ isBn, onNavigate }: Props) {
       <a
         id="btn-kkday-hotels-search"
         href={kkdayUrl}
+        data-affiliate-placement="kkday_hotels_page"
         target="_blank"
         rel="noopener noreferrer sponsored"
         className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#07C369] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#06ad5d]"
