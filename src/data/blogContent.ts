@@ -1653,7 +1653,7 @@ Under **Singapore Land Transport Authority (LTA - lta.gov.sg)** rules, foreign v
   • Spend the day at **Universal Studios Singapore** or **S.E.A. Aquarium + Palawan & Siloso Beach**, finishing with the **Wings of Time** night laser show on the beach.
 - **Day 3 — Sultan Mosque (Kampong Glam), Cloud Forest & Mandai Night Safari / Bird Paradise:**
   • Pray Dhuhr at the historic golden-domed **Masjid Sultan in Kampong Glam (Arab Street)** and lunch at **Zam Zam Restaurant (famous since 1908 for Halal Murtabak, SGD 8–12 / BDT 730–1,100)**.
-  • Afternoon inside the air-conditioned **Cloud Forest & Flower Dome** at Gardens by the Bay (pre-book on Klook to save 15%).
+  • Check current ticket availability for the **Cloud Forest & Flower Dome** at Gardens by the Bay. If considering Klook, compare the selected date, admission type, inclusions, checkout total and cancellation terms with the official attraction listing.
 - **Day 4 — 24-Hour Mustafa Centre Souvenir Shopping & Departure from Changi:**
   • Spend your morning buying chocolates, perfumes, watches, and electronics at **Mustafa Centre (Serangoon Road)**—don't forget to present your Bangladeshi passport at the GST Refund counter for purchases over **SGD 100** to claim up to **9% cash/card tax refund at Changi Airport**! If your hotel or budget apartment in Little India or Bugis does not hold bags after 11:00 AM check-out, drop your heavy suitcases at a verified Radical Storage counter near Farrer Park or Bugis MRT so you can shop and ride the MRT hands-free before your evening flight.
 
@@ -1821,32 +1821,32 @@ Rule 2: Official 2026 Bangladesh e-Passport Fee Chart (Including 15% VAT):
 1. International Passenger Rights Frameworks for Bangladeshi Travelers
 Statutory compensation is governed by route endpoints, the operating carrier and specific disruption causes—not your passport.
 - **European Regulation EC 261/2004 (EU Flights):**
-  Applies to all flights departing from an EU airport (regardless of carrier nationality, including Biman from Rome or Gulf/Turkish carriers departing Europe) and flights arriving into an EU airport if operated by an EU carrier [1][2]. For long-haul itineraries over 3,500 km arriving 3+ hours late at the final destination due to operational reasons within the airline's control, passengers may be entitled to statutory compensation of €300 (between 3 and 4 hours) or €600 (4+ hours) [1][2]. Extreme weather and air traffic control restrictions are extraordinary circumstances that exempt carriers from cash compensation, though duty of care remains.
+  Applies to all flights departing from an EU airport (regardless of carrier nationality, including Biman from Rome or Gulf/Turkish carriers departing Europe) and flights arriving into an EU airport if operated by an EU carrier [1][2]. For long-haul itineraries over 3,500 km, the statutory base amount is €600 when qualifying passengers arrive at the final destination 3 hours or more late; it may be reduced by 50% to €300 if the applicable conditions are met and the arrival delay is less than 4 hours [1][2]. As of 2 November 2026, those are the current rates. Regulation (EU) 2026/2202 retains the €250/€400/€600 base amounts, but its amendments apply from 23 October 2027; recheck the rules for flights on or after that date [19]. A carrier is exempt only if it proves the delay was caused by extraordinary circumstances that could not have been avoided even if all reasonable measures had been taken. Weather conditions and air-traffic-management decisions do not automatically qualify; assessment depends on the specific event and flight [1][15][16]. The duty of care may still apply even when compensation is exempted [17].
 - **UK 261 Regulations (Flights Involving the United Kingdom):**
-  Applies to flights departing UK airports (such as London Heathrow or Manchester on Biman, Emirates or Qatar Airways) on any airline, and flights into the UK operated by UK or EU carriers [3][4]. Under UK statutory compensation rates, long-haul flight delays exceeding 4 hours entitle qualifying passengers to up to £520 per ticket, or £260 for delays between 3 and 4 hours [4][5].
+  Applies to any airline departing a UK airport (for example, London Heathrow on Biman or Emirates), to flights arriving in the UK on a UK or EU carrier, and to flights from outside the UK to an EU airport if operated by a UK carrier [3][18]. For flights departing outside the UK, Article 3 excludes cases where passengers have already received benefits or compensation and assistance in the departure country [18]. Under UK statutory compensation rates, qualifying passengers on long-haul flights over 3,500 km may receive £260 per passenger when arriving between 3 and 4 hours late, or £520 per passenger when arriving more than 4 hours late [4][5].
 - **Saudi Arabia GACA Passenger Rights Regulations (Umrah & Transit Routes):**
-  Enforced by the Saudi General Authority of Civil Aviation (GACA) for departures from Saudi airports (such as Jeddah, Madinah, Riyadh, and Dammam) and Saudi national carriers [13]. For prolonged departure delays, airlines must provide refreshments, meals, and hotel accommodation when delays exceed statutory thresholds. Regulated claim channels require submitting claims directly to the carrier before escalating to GACA.
-- **Turkish DGCA SHY-PASS Regulations (Transit via Istanbul):**
-  Covers flights operated by Turkish air carriers to/from Turkey and foreign carriers departing Turkish airports [11]. When long delays reaching the final destination (3+ hours late) occur due to technical or operational factors within the carrier's control, passengers may be entitled to tiered statutory compensation payable in local currency equivalent [11].
+  The regulation applies to all flights departing Saudi airports, whether operated by Saudi or foreign carriers; flights arriving in Saudi Arabia on a Saudi carrier unless the passenger has already been compensated under the departure country's rules; and baggage complaints for arrivals on foreign carriers [13]. For covered departures, the regulation sets support stages: refreshments and drinks from the first hour, a suitable meal after 3 hours, and hotel accommodation plus airport transport after 6 hours of delay [13]. Check the current regulation and complaint process for the specific flight.
+- **Turkey's SHY-YOLCU Passenger Rights Regulation (including Istanbul connections):**
+  SHY-YOLCU applies to flights operated by Turkish air carriers to or from Turkish airports and to flights operated by foreign carriers departing Turkish airports [11]. Its 10 December 2024 amendment requires the operating carrier to fulfill Articles 8 and 9 when a technical or operational delay gets the passenger to the planned final destination 3 hours or more late [11][20]. Article 8 sets compensation at €100 for domestic flights, and €250 (up to 1,500 km), €400 (1,500–3,500 km) or €600 (over 3,500 km) for international flights. The Turkish-lira equivalent is calculated using Türkiye's Central Bank foreign-exchange selling rate on the payment date [11][20]. Check the official text for any other applicable conditions or reduction.
 - **The Montreal Convention (Checked Baggage Delays, Damage & Loss):**
-  Governs international carriage between participating states (including Bangladesh, Saudi Arabia, the UAE, Thailand, the UK and the US) [8][10]. Under official ICAO liability revisions effective 28 December 2024, an airline's liability limit for proven baggage damage, loss, or delay is up to 1,519 Special Drawing Rights (SDR) per passenger [9][10]. This is not an automatic flat payment: passengers must provide documented evidence of necessary expenses, damaged contents or item valuations.
+  Governs international carriage between participating states (including Bangladesh, Saudi Arabia, the UAE, Thailand, the UK and the US) [8][10]. Under the ICAO revision effective 28 December 2024, the standard Montreal Convention liability limit for destruction, loss, damage or delay of baggage is 1,519 Special Drawing Rights (SDR) per passenger [9][10]. It is a maximum, not a fixed payout: passengers must substantiate their actual loss, for example with receipts for replacement purchases or evidence of the value of damaged or missing contents [21]. For checked baggage, a passenger may make a special declaration of interest in delivery when handing the bag to the carrier and pay any required additional charge, subject to Article 22(2) [8].
 
 2. Essential Steps at the Airport During a Delay or Baggage Disruption
 Preserving contemporaneous evidence at the airport is critical to substantiating any subsequent airline claim:
 Step 1: Retain all travel documentation and boarding passes
 Keep your paper or digital boarding passes, electronic ticket receipt showing the 6-digit PNR, checked baggage claim tag receipts, and screenshots of airport departure displays or airline delay notifications [1][8].
 Step 2: Obtain a Property Irregularity Report (PIR) before leaving customs
-If your checked suitcase is missing or visibly damaged upon arrival at Dhaka (DAC), Jeddah (JED) or any international destination, report it immediately to the operating airline's baggage service desk before exiting the baggage hall. Secure an official Property Irregularity Report (PIR) and file a written notice within statutory deadlines: within 7 days of receipt for damaged baggage, and within 21 days of baggage arrival for delayed baggage expenses [8].
+If your checked suitcase is missing or visibly damaged upon arrival at Dhaka (DAC), Jeddah (JED) or any international destination, report it immediately to the operating airline's baggage service desk before exiting the baggage hall and ask for a Property Irregularity Report (PIR). Separately, the Montreal Convention requires a written complaint for checked-baggage damage promptly after discovery and no later than 7 calendar days after receipt; for delay, the complaint must be made within 21 calendar days after the baggage is placed at your disposal [8].
 Step 3: Decide between direct airline submission or claims assistance
-You always have the legal right to submit your compensation or reimbursement claim directly to the operating airline at zero cost [2][7]. If an airline rejects a valid claim or fails to respond, optional third-party commercial claims services such as AirHelp evaluate flight disruption claims under a no-win, no-fee model (charging a service fee only upon successful recovery, with promotional code AHTPO11 offering 11% off AirHelp+ membership protection).
+You can submit a claim directly to the operating airline without a claims-service fee [2][7]. AirHelp is an optional commercial claims service; its no-win, no-fee model can deduct service fees from recovered compensation, and additional fees may apply in limited cases [12][14]. AirHelp+ is a separate paid membership; any current offer applies only to eligible membership purchases, not to the claim service. Check the current offer at checkout.
 
 3. Frequently Asked Questions
 Does EU/UK compensation apply to Dhaka to Jeddah flights on Gulf carriers?
 Generally no. Itineraries originating in Dhaka and terminating in Saudi Arabia operated by Biman, Saudia, Emirates or Qatar Airways do not touch EU or UK airspace or involve EU/UK operating carriers, so EC 261 and UK 261 do not apply [1][3].
 Is airline baggage compensation an automatic cash payout?
-No. Under the Montreal Convention, the 1,519 SDR ceiling is a maximum liability limit [9]. Airlines reimburse proven, documented expenses for necessary emergency purchases (for delayed bags) or substantiated valuations for damaged and lost belongings [8].
-How long do I have to file a baggage claim with the airline?
-Under the Montreal Convention, you must file a written complaint within 7 days of receiving damaged luggage, and within 21 days from when delayed luggage was delivered [8]. Legal action must be initiated within 2 years [8].
+No. The 1,519 SDR limit is a maximum, not an automatic flat payment; passengers must substantiate actual loss or damage with supporting evidence [21]. A special declaration of interest for checked baggage may provide for a higher declared value, subject to Article 22(2)'s conditions [8].
+What are the Montreal Convention's baggage-notice and court-action deadlines?
+Keep the written-complaint and court-action periods separate. For checked-baggage damage, complain in writing promptly after discovery and no later than 7 calendar days after receipt. For delay, give or dispatch a written complaint within 21 calendar days of the date the baggage is placed at your disposal. A late or missing complaint generally bars an action against the carrier, except in case of fraud. A damages action must be brought within 2 years, counted as applicable from arrival at destination, the date the aircraft ought to have arrived, or the date carriage stopped; the law of the court hearing the case determines how that period is calculated [8].
 Can I submit a flight compensation claim directly without paying a third party?
 Yes. Official consumer protection guidelines in the EU and UK advise submitting your initial complaint directly to the operating carrier at no charge [2][7]. Commercial claim companies are optional paid services that take a percentage fee if they secure a settlement.`,
   "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla": `Not all airline tickets priced at **BDT 45,000 or BDT 75,000** from **Dhaka (DAC)** deliver the same value. A low-cost carrier ticket that appears BDT 6,000 cheaper online can end up costing **BDT 15,000 more** once you pay for 30kg checked luggage, hot Halal meals, and Zamzam water carriage. Here is our verified **2026 comparison of the top airlines operating from Hazrat Shahjalal International Airport (DAC)** so you always book the smartest fare.
@@ -2069,9 +2069,9 @@ Some famous names are deliberately missing. A short list you can trust beats a l
 
 2. Start With One Monetization Hub, Not Ten Affiliate Logins
 How do travel bloggers actually make money, and how do you monetize a travel blog without turning it into a billboard? Almost always the same first step: affiliate commissions on the tools your readers were going to book anyway. The mistake most new creators make is signing up for ten separate programs, chasing ten dashboards, and earning nothing from any of them. Start with one hub.
-Travelpayouts is the hub we recommend and the one this site runs on. Joining is free, and a single dashboard connects you to 80+ travel brands: flights, hotels, tours, transfers, attraction tickets, eSIMs. Several programs featured in our own guides run through it: Aviasales for flight search, WayAway for trip-planning cashback, Klook for activities and rail passes, GetTransfer for private transfers, and Tiqets for museum and attraction tickets.
+Travelpayouts is one of the networks URAL uses for tracked links to several travel partners. Examples on our site include Aviasales flight search, Klook hotel and activity searches, KKday stays and activities, Tiqets attraction tickets, and Welcome Pickups or Kiwitaxi transfer searches. Partner availability, approval and payout terms vary by market and program; check the current terms before applying.
 What actually earns: the platform's widgets, deep links, and ready-made buttons do the boring technical work, so your energy goes into content instead of link management. See where those tools sit inside real articles in our flight-booking hacks guide and our flight compensation guide: a search box where readers would search, a booking button where readers would book, and nothing in between pretending to be editorial.
-The Travelpayouts referral program deserves one honest paragraph here, because this page is exactly where it belongs. If you later recommend the platform to other creators using your own referral link, new partners can earn up to $100 in welcome bonuses, and you earn milestone rewards as those creators actually earn: on real, withdrawn earnings, not empty sign-ups. It is a slow, compounding channel, not quick cash, and self-referrals are banned. The marked callout below carries our own referral link, clearly disclosed.
+The Travelpayouts referral program belongs in a creator resource like this. If you later recommend the platform to other publishers, review the [official referral terms](https://support.travelpayouts.com/hc/en-us/articles/4916404883986-Terms-of-the-Travelpayouts-referral-program) for current eligibility, milestones and payment. Rewards are conditional; a click or signup alone does not guarantee one. The marked callout below carries our referral link and disclosure.
 
 3. Free Content and SEO Tools That Earn Their Place
 You do not need a 99-dollar-a-month toolchain to start travel blogging. Everything below has a genuinely useful free tier, and none of these companies pay us anything.
@@ -2126,122 +2126,7 @@ Inside the marked creator callout further down this page: exactly one place, cle
 8. Build Your First Article, Not Your Perfect Setup
 The difference between creators who earn and creators who keep tweaking their logo is finished articles. Pick one destination or one problem you genuinely know, maybe the visa paperwork you already survived or the halal food map of the city you walk, and publish one useful, honest page this week. Then another.
 When you are ready to monetize, start with one hub, place tools where they help, and disclose everything. The creator callout is the only place on this page where we earn if you click. We would rather you trust this page for years than click it once.`,
-  "kkday-10-10-winter-sale-japan-tours-passes-guide": `Winter is peak holiday season across Japan and East Asia, drawing international travelers for Hokkaido powder snow, Mt. Fuji day trips, Tokyo illuminations, and theme park spectacles. Today, Travelpayouts and KKday announced the official launch of the **KKday 10.10 Winter Travel Sale**, releasing three high-value 30% discount promo codes starting **October 10 at 08:00 AM UTC+8** (06:00 AM Bangladesh Standard Time / BST).
 
-Because these codes are strictly first-come, first-served (FCFS) with one redemption per customer account, planning your cart before the launch trigger is critical. In this editorial guide, we break down the three voucher codes, map them against the verified winter catalog, and share essential booking tips for travelers paying with international or Bangladeshi dual-currency cards.
-
----
-
-### 1. The 10.10 Winter Promo Code Stack (30% Discount Tier)
-
-The sale features three distinct category-specific voucher codes launching simultaneously:
-
-* **Code: \`1010TOURS\` — 30% OFF Tours & Experiences**
-  Applies to ski lessons, snow resort day trips, guided UNESCO heritage excursions (like Shirakawa-go), and cultural workshops.
-* **Code: \`1010MOVE\` — 30% OFF Transportation & Rail**
-  Applies to airport express trains (Keisei Skyliner, Nankai Rapi:t), multi-day city subway passes, JR regional rail passes, and private airport transfers.
-* **Code: \`1010TIX\` — 30% OFF Attraction Tickets**
-  Applies to major theme parks, observation decks, digital art exhibits, and multi-attraction sightseeing passes.
-
-**Campaign Rules & Guardrails:**
-1. **Launch Window:** October 10 at 08:00 AM UTC+8 through October 31, 2026 (or until code quotas are exhausted).
-2. **Travel Validity:** Bookings made with these codes are valid for travel dates throughout the entire 2026–2027 winter season (up to March 31, 2027).
-3. **Usage Limit:** Exactly one redemption per code per registered KKday user account.
-4. **Checkout Tip:** Codes must be applied at checkout in the promo code field before finalizing payment with your Visa, Mastercard, or Amex.
-
----
-
-### 2. Best Tours & Ski Experiences to Pair with \`1010TOURS\` (30% OFF)
-
-Winter day trips in Japan can cost between $80 and $250 USD per person due to private coach transit, equipment hire, and lift tickets. Applying \`1010TOURS\` provides significant cash savings on these verified winter items:
-
-1. **Hokkaido Ski Day Tour — Teine Ski Resort (Sapporo Departure):**
-   Sapporo Teine hosted the 1972 Winter Olympic alpine events and sits just 45 minutes from central Sapporo. This tour includes roundtrip bus transfer, ski equipment rental, and bilingual instruction—perfect for first-time skiers.
-2. **Mt. Fuji Snow Park Yeti Skiing & Lesson Tour (Tokyo Departure):**
-   Located on the southern slope of Mt. Fuji 2nd Station, Snow Park Yeti is famous for being Japan's earliest-opening outdoor snow resort. Full packages include Tokyo pickup, ski gear, sledding basin access, and optional hot spring (Onsen) add-ons.
-3. **Shirakawa-go Gassho Village & Hida Takayama Tour (Nagoya / Takayama Departure):**
-   The UNESCO World Heritage village of Shirakawa-go transforms into a fairy-tale snow kingdom in winter. KKday provides guaranteed-departure day buses including the Shiroyama Tenshukaku observation deck.
-4. **GALA Yuzawa Snow Resort Ski Gear & Gondola Pass (Niigata):**
-   GALA Yuzawa is the only ski resort in the world directly connected to a Shinkansen bullet train station (75 minutes from Tokyo Station). Pre-booking your gear rental and lift pass online eliminates 45-minute lines at the rental desk.
-5. **Niseko & Rusutsu Private Ski Instruction (Hokkaido):**
-   For families or small groups visiting Hokkaido's powder capital, private multi-lingual lessons provide dedicated instructors for adults and kids.
-6. **Kyoto Arashiyama Hozugawa River Boat Ride:**
-   Experience Arashiyama's dramatic winter river gorges on a traditional pole-steered 16-kilometer boat cruise from Kameoka into scenic Arashiyama.
-
----
-
-### 3. Essential Airport Trains & Rail Passes to Pair with \`1010MOVE\` (30% OFF)
-
-Getting from international gateway airports into Tokyo and Osaka is one of the highest unavoidable trip expenses. Code \`1010MOVE\` delivers instant 30% savings on top transit arteries:
-
-1. **Keisei Skyliner Express (Narita Airport ↔ Tokyo Ueno/Nippori):**
-   The fastest transit connection from Narita Airport (NRT) to central Tokyo, operating at 160 km/h and reaching Nippori in just 36 minutes. KKday issues instant digital QR vouchers that exchange at automated ticket machines in 30 seconds.
-2. **Osaka Kansai Airport (KIX) Nankai Rapi:t Airport Express:**
-   The retro-futuristic blue bullet train connecting Kansai Airport directly to Namba Station in central Osaka in 34 minutes with reserved seating.
-3. **Tokyo Metro 24/48/72-Hour Unlimited Ticket:**
-   Provides unlimited rides across all 13 Tokyo Metro and Toei Subway lines for as little as ~800 JPY/day. A massive cost saver compared to tapping individual IC cards (Suica/Pasmo) for every tourist stop.
-4. **JR Hokkaido Rail Pass & JR Kansai WIDE Area Pass:**
-   Unlimited Shinkansen and express train transit across Sapporo, Otaru, Hakodate, and Asahikawa (Hokkaido) or Osaka, Kyoto, Nara, and Okayama (Kansai).
-5. **SNOW LINER Direct Ski Buses (Narita/Haneda ↔ Hakuba & Shiga Kogen):**
-   Direct long-distance airport express coaches running straight from Tokyo airports into Nagano ski resorts, bypassing awkward multi-leg train transfers with heavy luggage.
-6. **Haneda (HND) / Narita (NRT) Private Chauffeur Transfers:**
-   Door-to-door private van transfers directly to Tokyo 23 Wards, Tokyo Disneyland, or suburban hotels—ideal for multi-generational families with strollers and suitcases.
-
----
-
-### 4. Top Attraction Passes & Theme Parks to Pair with \`1010TIX\` (30% OFF)
-
-Major attractions in Japan enforce timed entry and frequently sell out gate capacity weeks in advance. Code \`1010TIX\` works on premier entertainment tickets:
-
-1. **Universal Studios Japan (USJ) 1-Day Studio Pass (Osaka):**
-   Super Nintendo World, The Wizarding World of Harry Potter, and Minion Park. Official electronic tickets bypass the main park ticket booth queues.
-2. **Warner Bros. Studio Tour Tokyo — The Making of Harry Potter:**
-   The world's largest indoor Harry Potter attraction built on the former Toshimaen site. Walk through the Great Hall, Diagon Alley, and the Ministry of Magic.
-3. **Tokyo Disney Resort (Disneyland & DisneySea):**
-   Secure confirmed 1-day park passes for Tokyo Disneyland or the world-exclusive Fantasy Springs expansion at Tokyo DisneySea.
-4. **SHIBUYA SKY 360° Observation Deck (Tokyo):**
-   Perched 229 meters above Shibuya Crossing, SHIBUYA SKY is Tokyo's most viral sunset photo spot. Sunset slots sell out 4 weeks in advance.
-5. **TeamLab Planets TOKYO (Toyosu):**
-   The immersive digital art museum featuring walk-through water exhibitions and infinite crystal universes.
-6. **Osaka Amazing Pass (1-Day / 2-Day):**
-   Includes free rides on the Osaka Metro network plus complimentary admission to 40+ premier attractions including Osaka Castle Museum, Umeda Sky Building Floating Garden, and the Tombori River Cruise.
-
----
-
-### 5. Winter Gourmet Dining & 5G eSIM Connectivity
-
-Beyond tours and passes, KKday's winter catalog features exclusive culinary reservations and instant mobile connectivity:
-
-* **Hokkaido All-You-Can-Eat Three Major Crabs & Shabu-Shabu:**
-  Reserve guaranteed tables at top Sapporo seafood dining halls (such as Japanese Buffet Dining Den) for unlimited snow crab, king crab, and horsehair crab.
-* **Century-Old Sukiyaki & A5 Wagyu Hotpots:**
-  Book reservations at Sukiyaki-Chinya in Asakusa (Tokyo) or Black Wagyu Shabu-Shabu houses in Namba and Umeda (Osaka).
-* **Japan 5G Unlimited Data eSIMs (SoftBank / KDDI / Docomo):**
-  Avoid expensive $10/day international roaming fees. KKday offers daily high-speed 5G eSIM QR codes at 50% discount that activate instantly upon landing at Haneda, Narita, or Kansai Airport.
-
----
-
-### 6. Payment & Dual-Currency Card Guide for Bangladeshi & South Asian Travelers
-
-If you are booking from Bangladesh using an endorsed Dual-Currency card:
-
-1. **Passport Travel Quota (FE Circular No. 33):**
-   Ensure your passport is endorsed under Bangladesh Bank's $18,000 USD annual quota. EBL, City Bank Amex, BRAC Bank, and Standard Chartered cards easily process online international payments on KKday.
-2. **Enable E-Commerce & 3D Secure:**
-   Before the 08:00 AM UTC+8 launch trigger, open your banking app and ensure International E-Commerce transactions are toggled ON with sufficient credit/balance.
-3. **Select USD or JPY at Checkout:**
-   Always pay in the native merchant currency (USD or JPY) on KKday rather than enabling dynamic currency conversion (DCC), which adds unnecessary 3%–5% banking spread.
-4. **Combine with Klook Price Checks:**
-   As part of URAL's Travel Intelligence ethos, we recommend cross-checking rates on Klook before confirming your order to guarantee the lowest net price.
-
----
-
-### Summary: Your 10.10 Action Plan
-
-1. Browse the eligible products on KKday and add your winter dates to your cart today.
-2. At **08:00 AM UTC+8 on October 10**, apply code \`1010TOURS\` for tours, \`1010MOVE\` for transport, or \`1010TIX\` for attractions.
-3. Complete checkout immediately with your endorsed card before the promo quotas expire.
-4. Save your digital QR vouchers to Apple Wallet or Google Wallet for seamless offline presentation at Japan train gates and attraction turnstiles.`,
   "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide": `India is one of the most frequently visited international destinations for Bangladeshi passport holders, and the Dhaka–Kolkata overland corridor via Benapole–Petrapole is the primary road route. Cross-border passenger trains (Maitree Express, Bandhan Express, and Mitali Express) have been suspended since July 2024, with no confirmed restart timetable as of our 15 October 2026 review [1, 3]. While rail service remains on hold, travelers with a valid Indian sticker visa endorsed for the Haridaspur/Benapole checkpost use direct or split-leg buses across the Benapole–Petrapole land border. An indicative 3-day, 2-night overland Kolkata trip budget remains BDT 8,000–18,000 per person as a planning reference, not a live quote.
 
 This guide was reviewed against official rail, visa, tax, and land-port portals on 15 October 2026. Because cross-border rail resumption, IVAC appointment availability, border taxes, and operator fares can change without notice, verify live status on the cited official portals before booking non-refundable travel [1–10].

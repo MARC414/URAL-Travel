@@ -342,7 +342,7 @@ export function ConsentBanner({ onNavigate, lang = "en" }: ConsentBannerProps) {
               </div>
               <p className="text-[11px] text-slate-400 leading-snug">
                 {isBn
-                  ? "Travelpayouts, Aviasales, Klook ও Airalo-তে ডিসকাউন্ট ও ট্র্যাকিং সক্ষম করে। কোনো ব্যক্তিগত তথ্য থাকে না।"
+                  ? "Travelpayouts, Aviasales, Klook ও Airalo-র বুকিং রেফারেল ট্র্যাকিং সক্ষম করে। কোনো ব্যক্তিগত তথ্য থাকে না।"
                   : "Enables secure partner attribution with Travelpayouts, Aviasales & Klook for booking referrals."}
               </p>
             </div>

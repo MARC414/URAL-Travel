@@ -51,7 +51,6 @@ export const BLOG_SLUGS = [
   "havana-cuba-travel-guide-bangladesh",
   "chefchaouen-morocco-travel-guide-bangladesh",
   "travel-creator-resources",
-  "kkday-10-10-winter-sale-japan-tours-passes-guide",
   "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
   ...SCHEDULED_BLOG_SLUGS,
 ] as const;

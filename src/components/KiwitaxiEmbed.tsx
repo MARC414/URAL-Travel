@@ -1,138 +1,55 @@
-import React, { useState, useId } from "react";
-import { ExternalLink, Car, Calendar, MapPin, Users, Loader2 } from "lucide-react";
+import React from "react";
+import { Car, ExternalLink, ShieldCheck } from "lucide-react";
+import { AFFILIATE_LINKS, resolvePartnerUrl } from "./AffiliatePartners";
 
-export function KiwitaxiEmbed() {
-  const uid = useId();
-  const [pickup, setPickup] = useState("Kathmandu Airport (KTM)");
-  const [destination, setDestination] = useState("Thamel City Center Hotel");
-  const [date, setDate] = useState("2026-07-15");
-  const [passengers, setPassengers] = useState("2");
-  const [isRedirecting, setIsRedirecting] = useState(false);
+interface KiwitaxiEmbedProps {
+  defaultCountry?: string;
+  lang?: "en" | "bn";
+}
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsRedirecting(true);
-    
-    setTimeout(() => {
-      setIsRedirecting(false);
-      window.open("https://kiwitaxi.tpo.li/GIhvhrtF", "_blank", "noopener,noreferrer,sponsored");
-    }, 1000);
-  };
+/** A generic tracked handoff: this site does not send trip details to Kiwitaxi. */
+export function KiwitaxiEmbed({ defaultCountry = "", lang = "en" }: KiwitaxiEmbedProps) {
+  const isBn = lang === "bn";
 
   return (
-    <div className="w-full bg-slate-50/80 rounded-xl p-4 sm:p-5 border border-slate-100 relative overflow-hidden font-sans">
-      <div className="flex items-center gap-2.5 mb-3.5">
-        <div className="p-1.5 bg-emerald-500/10 text-emerald-600 rounded-lg">
-          <Car size={18} />
-        </div>
-        <div>
-          <h4 className="font-serif font-black text-sm text-slate-900">Book Transfers on Kiwitaxi</h4>
-          <p className="text-[10px] text-slate-500 uppercase font-mono tracking-wider">English-Speaking Drivers • Fixed Rates</p>
-        </div>
+    <section
+      aria-label={isBn ? "Kiwitaxi ট্রান্সফার সার্চ" : "Kiwitaxi transfer search"}
+      className="w-full space-y-3 rounded-xl border border-slate-200 bg-slate-50/80 p-4 font-sans sm:p-5"
+    >
+      <div className="flex items-center gap-2.5">
+        <span className="rounded-lg bg-emerald-500/10 p-1.5 text-emerald-700">
+          <Car size={18} aria-hidden="true" />
+        </span>
+        <h4 className="font-serif text-sm font-black text-slate-900">
+          {isBn ? "Kiwitaxi-তে ট্রান্সফার অপশন খুঁজুন" : "Search transfer options on Kiwitaxi"}
+        </h4>
       </div>
 
-      <form onSubmit={handleSearch} className="space-y-3">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {/* Pickup */}
-          <div>
-            <label htmlFor={`${uid}-pickup`} className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
-              <MapPin size={9} className="text-emerald-500" /> From (Airport or City)
-            </label>
-            <input
-              id={`${uid}-pickup`}
-              type="text"
-              value={pickup}
-              onChange={(e) => setPickup(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
-              placeholder="e.g. Dhaka Airport"
-              required
-            />
-          </div>
+      <p className="text-xs leading-relaxed text-slate-600">
+        {isBn
+          ? `${defaultCountry ? `${defaultCountry} প্রসঙ্গে: ` : ""}এই ট্র্যাক করা লিংকটি Kiwitaxi-তে যায়, কিন্তু এখান থেকে বিমানবন্দর, গন্তব্য, তারিখ বা যাত্রীর তথ্য পাঠায় না। Kiwitaxi-তে তথ্যগুলো আবার দিন এবং বুকিংয়ের আগে চূড়ান্ত ভাড়া, গাড়ি ও বাতিলের শর্ত যাচাই করুন।`
+          : `${defaultCountry ? `For ${defaultCountry}: ` : ""}This tracked link opens Kiwitaxi, but does not carry an airport, destination, date or passenger details from this page. Re-enter them on Kiwitaxi, then check the final quote, vehicle and cancellation terms before booking.`}
+      </p>
 
-          {/* Destination */}
-          <div>
-            <label htmlFor={`${uid}-destination`} className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
-              <MapPin size={9} className="text-emerald-500" /> To (Hotel or Address)
-            </label>
-            <input
-              id={`${uid}-destination`}
-              type="text"
-              value={destination}
-              onChange={(e) => setDestination(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
-              placeholder="e.g. Hotel Radisson"
-              required
-            />
-          </div>
-        </div>
+      <a
+        href={resolvePartnerUrl(AFFILIATE_LINKS.kiwitaxi)}
+        data-affiliate-placement="travel_essentials_kiwitaxi_transfer"
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+      >
+        {isBn ? "Kiwitaxi-তে সার্চ করুন" : "Search Kiwitaxi"}
+        <ExternalLink size={12} aria-hidden="true" />
+      </a>
 
-        <div className="grid grid-cols-2 gap-3">
-          {/* Date */}
-          <div>
-            <label htmlFor={`${uid}-date`} className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
-              <Calendar size={9} className="text-emerald-500" /> Transfer Date
-            </label>
-            <input
-              id={`${uid}-date`}
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
-              required
-            />
-          </div>
-
-          {/* Passengers */}
-          <div>
-            <label htmlFor={`${uid}-passengers`} className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1">
-              <Users size={9} className="text-emerald-500" /> Passengers
-            </label>
-            <select
-              id={`${uid}-passengers`}
-              value={passengers}
-              onChange={(e) => setPassengers(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
-            >
-              <option value="1">1 Passenger</option>
-              <option value="2">2 Passengers</option>
-              <option value="3">3 Passengers</option>
-              <option value="4">4 Passengers</option>
-              <option value="5">5+ Passengers</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Dual Transfer Partner Buttons: Kiwitaxi + GetTransfer.com (Intercity Vans & Driver Bidding) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <button
-            type="submit"
-            disabled={isRedirecting}
-            className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-3 rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-70"
-          >
-            {isRedirecting ? (
-              <>
-                <Loader2 size={12} className="animate-spin text-white" />
-                <span>Opening Kiwitaxi...</span>
-              </>
-            ) : (
-              <>
-                <span>Fixed Rate on Kiwitaxi</span>
-                <ExternalLink size={11} />
-              </>
-            )}
-          </button>
-
-          <a
-            href="https://gettransfer.tpo.li/sekWRAM1"
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-2.5 px-3 rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer text-center"
-          >
-            <span>Compare Driver Bids (GetTransfer)</span>
-            <ExternalLink size={11} />
-          </a>
-        </div>
-      </form>
-    </div>
+      <p className="flex gap-1.5 text-[11px] leading-relaxed text-slate-500">
+        <ShieldCheck size={13} className="mt-0.5 shrink-0 text-emerald-700" aria-hidden="true" />
+        <span>
+          {isBn
+            ? "যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; এটি ভ্রমণকারীর জন্য ছাড় নয়।"
+            : "URAL may earn a commission on qualifying bookings; this is not a traveller discount."}
+        </span>
+      </p>
+    </section>
   );
 }

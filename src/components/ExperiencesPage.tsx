@@ -330,7 +330,7 @@ const CITY_HUBS: CityHub[] = [
         provider: "klook",
         priceForeign: "AED 179",
         priceBdt: 5900,
-        highlight: "Instant Klook mobile voucher; combine with Dubai Aquarium for extra 15% off",
+        highlight: "Compare current ticket listings; check date availability, inclusions and combo terms",
         highlightBn: "মোবাইল ভাউচারে সরাসরি প্রবেশ; ফাউন্টেন শোর সেরা ভিউ",
         duration: "2 hours",
       },
@@ -462,7 +462,7 @@ const EXPERIENCES_FAQS = [
   {
     question: "What is the difference between Tiqets and Klook on URAL?",
     answer:
-      "We pair each region with its strongest global inventory partner: Klook offers the lowest prices and deepest bundle discounts across Asia and the Middle East (Bangkok, Kuala Lumpur, Singapore, Dubai, Maldives, and Saudi Arabia Ziyarah tours), while Tiqets specializes in official skip-the-line museum, palace, and observation deck passes across Europe, the UK, and North America.",
+      "Our activity links are grouped by destination: Klook lists activities and tours across Asia and the Middle East, while Tiqets lists museum, palace, and observation-deck experiences in Europe, the UK, and North America. Product selection, dates, checkout totals, entry instructions and cancellation terms vary by listing, so compare the details before booking.",
   },
   {
     question: "Do I need to print out Tiqets or Klook vouchers?",
@@ -745,8 +745,8 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                       ? `${activeCalcCity.city}-এর Tiqets স্লট চেক করুন`
                       : `Check ${activeCalcCity.city} Slots on Tiqets`
                     : isBn
-                    ? `${activeCalcCity.city}-এর Klook ডিসকাউন্ট দেখুন`
-                    : `Check ${activeCalcCity.city} Deals on Klook`}
+                    ? `${activeCalcCity.city}-এর Klook তালিকা তুলনা করুন`
+                    : `Compare ${activeCalcCity.city} listings on Klook`}
                 </span>
                 <ExternalLink size={13} />
               </a>
@@ -859,7 +859,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
         </a>
       </div>
 
-      {/* 2B. KKDAY 10.10 WINTER TRAVEL SALE SPOTLIGHT (30% OFF CODES: 1010TOURS, 1010MOVE, 1010TIX) */}
+      {/* 2B. KKday activity and rail partner spotlight; campaign copy expires automatically. */}
       {regionFilter !== "west" && (
         <KKdayPromoBanner
           lang={lang}
@@ -941,7 +941,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                             ? "KKday ১০.১০ সেল (৩০% কোড)"
                             : "KKday 10.10 Sale (30% OFF)"
                           : isBn
-                          ? "KKday এশিয়া ডিল দেখুন"
+                            ? "KKday-তে পাস তুলনা করুন"
                           : "Compare Passes on KKday"}
                       </span>
                       <ExternalLink size={13} className="text-cyan-700" />
@@ -1148,8 +1148,8 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
         }
         quickAnswer={
           isBn
-            ? "বাংলাদেশি পর্যটকরা ইউরোপ, যুক্তরাজ্য ও আমেরিকার (প্যারিস, লন্ডন, রোম, মিলান, ভেনিস, নিউ ইয়র্ক) মিউজিয়াম ও ভিউপয়েন্টের স্কিপ-দ্য-লাইন টিকিটের জন্য Tiqets এবং এশিয়া ও মধ্যপ্রাচ্যের (দুবাই, ব্যাংকক, সিঙ্গাপুর, কুয়ালালামপুর) থিম পার্ক ও ডে-ট্যুরের জন্য Klook ব্যবহার করে সর্বোচ্চ সময় ও অর্থ সাশ্রয় করতে পারেন।"
-            : "Bangladeshi travelers can pre-book official skip-the-line timed-entry passes for Europe, the UK, and the USA (Paris, London, Rome, Milan, Venice, New York) via Tiqets, and discounted theme parks, desert safaris, and halal dinner cruises across Asia and Dubai via Klook."
+            ? "বাংলাদেশি ভ্রমণকারীরা ইউরোপ, যুক্তরাজ্য ও আমেরিকার আকর্ষণের ticket listing-এ Tiqets এবং এশিয়া ও মধ্যপ্রাচ্যের কার্যক্রম ও ট্যুরের listing-এ Klook ব্যবহার করতে পারেন। বুকিংয়ের আগে তারিখ, অন্তর্ভুক্তি, মোট দাম, প্রবেশের নির্দেশনা ও cancellation terms যাচাই করুন।"
+            : "Bangladeshi travelers can browse Tiqets attraction listings in Europe, the UK and the USA, and Klook activity listings across Asia and the Middle East. Check dates, inclusions, checkout totals, entry instructions and cancellation terms before booking."
         }
         keyFacts={[
           {
@@ -1158,7 +1158,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
           },
           {
             label: isBn ? "Asia ও Dubai পার্টনার" : "Asia & Middle East Partner",
-            value: "Klook (Best Price Guarantee)",
+            value: "Klook activity listings",
           },
           {
             label: isBn ? "কার্ড পেমেন্ট" : "Card Compatibility",

@@ -60,50 +60,38 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
     return () => clearTimeout(fallbackTimer);
   }, [activeMode]);
 
-  const getEstimatedPayout = () => {
+  const getEligibilityChecklist = () => {
     if (flightRegion === "eu-uk") {
-      if (delayHours === "under3") {
-        return {
-          eligible: false,
-          amount: "€0 (Under 3h threshold)",
-          bdt: "BDT 0",
-          note: isBn
-            ? "EU EC 261 ও UK 261 আইন অনুযায়ী গন্তব্যে পৌঁছাতে অন্তত ৩ ঘণ্টা বিলম্ব বা ফ্লাইট বাতিল হতে হবে। তবে AirHelp+ মেম্বাররা প্রোঅ্যাক্টিভ লাউঞ্জ অ্যাক্সেস পান।"
-            : "Under EU EC 261 & UK 261 regulations, arrival delay must be 3+ hours (or flight cancelled) to trigger cash compensation. AirHelp+ members still receive airport lounge access during shorter delays.",
-        };
-      }
-      return {
-        eligible: true,
-        amount: "Up to €600 / £520",
-        bdt: "~BDT 78,000 per passenger",
-        note: isBn
-          ? "লন্ডন, প্যারিস, রোম, ইউরোপ বা যুক্তরাজ্যের যেকোনো ফ্লাইটে ৩+ ঘণ্টা বিলম্ব, ক্যান্সেলেশন বা মিসড কানেকশনে প্রতি যাত্রীর জন্য সর্বোচ্চ €600 (~৭৮,০০০ টাকা) ক্ষতিপূরণ দাবি করা যায়।"
-          : "Long-haul flights (>3,500 km) departing EU/UK airports—or flying into EU/UK on a European/British carrier—qualify for up to €600 (~BDT 78,000) per passenger for 3+ hour arrival delays, cancellations, or missed connections.",
-      };
+      return isBn
+        ? "এই সংক্ষিপ্ত বাছাই থেকে যোগ্যতা বা ক্ষতিপূরণের পরিমাণ নির্ধারণ করা যায় না। প্রযোজ্য UK/EU নিয়ম যাচাই করতে operating carrier, সম্পূর্ণ itinerary, গন্তব্যে পৌঁছানোর বিলম্ব, রুটের দূরত্ব এবং বাতিলের নোটিশ ও কারণ মিলিয়ে দেখুন।"
+        : "This short selection cannot determine eligibility or compensation. To check UK/EU rules, verify the operating carrier, full itinerary, arrival delay at the final destination, route distance, and any cancellation notice and reason.";
     }
 
     if (flightRegion === "gulf-transit") {
-      return {
-        eligible: true,
-        amount: "Up to €600 (Transit / Montreal Convention)",
-        bdt: "~BDT 52,000 – 78,000",
-        note: isBn
-          ? "দুবাই, দোহা, জেদ্দা বা রিয়াদ হয়ে ট্রানজিট ফ্লাইটে মিসড কানেকশন, লাগেজ হারানো বা ক্যান্সেলেশনের ক্ষেত্রে Montreal Convention ও সৌদি GACA নিয়মে ক্ষতিপূরণ চেক করুন।"
-          : "Connecting flights via Dubai, Doha, Jeddah, or Istanbul qualify for baggage loss/delay payouts under the Montreal Convention, Saudi GACA passenger rights, Turkish SHY-PASS rules, or EC 261 on onward European legs.",
-      };
+      return isBn
+        ? "শুধু ট্রানজিট শহর দেখে ক্ষতিপূরণের অধিকার বা পরিমাণ বোঝা যায় না। operating carrier, সম্পূর্ণ টিকিট/সংযোগ, প্রযোজ্য দেশের নিয়ম এবং ঘটনার কারণ যাচাই করুন। লাগেজের সমস্যা হলে carrier-এর রিপোর্টিং নিয়ম মেনে নথি ও রসিদ রাখুন।"
+        : "A transit city alone cannot establish a right to compensation or its amount. Check the operating carrier, full ticket and connection, applicable country rules, and cause of the disruption. For baggage issues, follow the carrier's reporting process and keep records and receipts.";
     }
 
-    return {
-      eligible: true,
-      amount: "Baggage & Cancellation Claim Check",
-      bdt: "Up to ~BDT 1,95,000 (Lost Luggage / AirHelp+)",
-      note: isBn
-        ? "এশিয়ান রুটে সরাসরি ফ্লাইটে ক্যান্সেলেশন, ওভারবুকিং বা লাগেজ ক্ষতিগ্রস্ত হলে আন্তর্জাতিক Montreal Convention অনুযায়ী দাবি করা যায়—এবং ফ্লাইটের আগে AirHelp+ নিলে সব রুটেই সুরক্ষা মেলে।"
-        : "Direct Asian routes are covered for delayed/damaged/lost checked baggage and denied boarding under the Montreal Convention, plus instant delay payouts & lounge access when protected in advance with AirHelp+.",
-    };
+    return isBn
+      ? "সরাসরি এশীয় রুট হলেও ক্ষতিপূরণ নিশ্চিত নয়। operating carrier, রুটে প্রযোজ্য নিয়ম, itinerary ও ঘটনার কারণ যাচাই করুন। লাগেজের দাবি ফ্লাইট-বিলম্বের ক্ষতিপূরণ থেকে আলাদা হতে পারে; carrier-এর কাছে দ্রুত রিপোর্ট করে নথি রাখুন।"
+      : "A direct Asian route does not guarantee compensation. Check the operating carrier, rules for the route, itinerary, and cause of the disruption. Baggage claims may follow different rules from delay compensation; report promptly to the carrier and keep records.";
   };
 
-  const result = getEstimatedPayout();
+  const selectedEventLabel = isBn
+    ? {
+        over4: "৩+ ঘণ্টা বিলম্ব",
+        cancelled: "ফ্লাইট বাতিল",
+        "3to4": "মিসড ট্রানজিট বা লাগেজ সমস্যা",
+        "under3": "৩ ঘণ্টার কম বিলম্ব",
+      }[delayHours]
+    : {
+        over4: "3+ hour delay",
+        cancelled: "cancellation",
+        "3to4": "missed transit or baggage issue",
+        "under3": "delay under 3 hours",
+      }[delayHours];
+  const result = { note: getEligibilityChecklist(), selectedEventLabel };
 
   if (compact) {
     return (
@@ -116,22 +104,22 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
               </span>
               <span aria-hidden="true">·</span>
               <span>
-                {isBn ? "সর্বোচ্চ €600 (~BDT 78,000) ক্ষতিপূরণ" : "Up to €600 (~BDT 78,000) Compensation"}
+                {isBn ? "যোগ্যতা যাচাই করুন" : "Check eligibility"}
               </span>
             </div>
             <h3 className="font-serif text-base sm:text-lg font-bold text-slate-900">
               {isBn
-                ? "আপনার ফ্লাইট কি ৩+ ঘণ্টা লেট বা বাতিল হয়েছে? অথবা আসন্ন ট্রিপ সুরক্ষিত রাখতে চান?"
-                : "Flight Delayed 3+ Hours, Cancelled, or Flying Soon? Protect Your Ticket with AirHelp"}
+                ? "ফ্লাইটে সমস্যা হয়েছে? আপনার itinerary ও প্রযোজ্য নিয়ম মিলিয়ে দেখুন।"
+                : "Had a flight disruption? Check your itinerary and the rules that apply."}
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed max-w-2xl">
               {promoActive
                 ? isBn
-                  ? `AirHelp-এর মাধ্যমে গত ৩ বছরের যেকোনো বিলম্বিত বা বাতিল ফ্লাইটের ক্ষতিপূরণ চেক করুন (No Win, No Fee)। আর ফ্লাইটের আগে AirHelp+ Smart বা Pro নিলে প্রোমো কোড ${AIRHELP_PROMO.code} ব্যবহার করে পান ১১% ছাড় (${AIRHELP_PROMO.validUntil} পর্যন্ত)।`
-                  : `Check free compensation eligibility for delayed or cancelled flights from the past 3 years (No Win, No Fee), or get 11% OFF AirHelp+ Smart & Pro subscriptions through ${AIRHELP_PROMO.validUntil} using code ${AIRHELP_PROMO.code}.`
+                  ? `AirHelp কোনো পুরোনো ফ্লাইটের দাবি যাচাই করতে পারে; যোগ্যতা itinerary ও ঘটনার ওপর নির্ভর করে। ব্যবহার করলে বর্তমান শর্ত ও ফি দেখুন। আলাদা AirHelp+ Smart বা Pro মেম্বারশিপে ${AIRHELP_PROMO.code} কোডে ${AIRHELP_PROMO.validUntil} পর্যন্ত ১১% ছাড়—কেনার আগে checkout-এ শর্ত নিশ্চিত করুন।`
+                  : `AirHelp can review a past flight disruption; eligibility depends on the itinerary and case details. Review current terms and fees before using the service. The separate AirHelp+ Smart or Pro membership has 11% off through ${AIRHELP_PROMO.validUntil} with code ${AIRHELP_PROMO.code}; confirm terms at checkout.`
                 : isBn
-                ? "AirHelp-এর মাধ্যমে গত ৩ বছরের যেকোনো বিলম্বিত বা বাতিল ফ্লাইটের ক্ষতিপূরণ ফ্রিতে চেক করুন (No Win, No Fee)—অথবা ফ্লাইটের আগে AirHelp+ নিয়ে লাউঞ্জ অ্যাক্সেস ও লাগেজ সুরক্ষা নিশ্চিত করুন।"
-                : "Check free compensation eligibility for delayed or cancelled flights from the past 3 years (No Win, No Fee), or protect upcoming trips with AirHelp+ Smart & Pro for lounge access and baggage protection."}
+                ? "AirHelp কোনো ফ্লাইট-সমস্যার দাবি যাচাই করতে পারে; যোগ্যতা itinerary ও ঘটনার ওপর নির্ভর করে। ব্যবহার করলে বর্তমান শর্ত ও ফি দেখুন। AirHelp+ আলাদা মেম্বারশিপ—কেনার আগে বর্তমান plan ও শর্ত যাচাই করুন।"
+                : "AirHelp can review a flight-disruption claim; eligibility depends on itinerary and case details. Review current terms and fees before using the service. AirHelp+ is a separate membership; check current plans and terms before buying."}
             </p>
           </div>
 
@@ -154,7 +142,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
               rel="noopener noreferrer sponsored"
               className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] font-bold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
             >
-              <span>{isBn ? "ক্ষতিপূরণ যাচাই করুন" : "Check Flight Compensation"}</span>
+              <span>{isBn ? "AirHelp-এ যোগ্যতা যাচাই করুন" : "Check eligibility with AirHelp"}</span>
               <ExternalLink size={12} />
             </a>
           </div>
@@ -184,19 +172,19 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                   ? `প্রোমো কোড: ${AIRHELP_PROMO.code} (১১% ছাড়)`
                   : `Promo: ${AIRHELP_PROMO.code} (11% OFF AirHelp+)`
                 : isBn
-                ? "No Win, No Fee · সর্বোচ্চ €600"
-                : "No Win, No Fee · Up to €600 Claim"}
+                ? "যোগ্যতা নির্ভর করে ঘটনার বিবরণে"
+                : "Eligibility depends on case details"}
             </span>
           </div>
           <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
             {isBn
-              ? "ফ্লাইট বিলম্ব, বাতিল বা মিসড কানেকশন? সর্বোচ্চ €600 (~BDT 78,000) ক্ষতিপূরণ দাবি করুন"
-              : "Flight Delayed or Cancelled? Claim Up to €600 (~BDT 78,000) per Passenger"}
+              ? "ফ্লাইটে সমস্যা হয়েছে? যোগ্যতা যাচাই করুন"
+              : "Flight Disrupted? Check Whether It May Qualify"}
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             {isBn
-              ? "অনেক বাংলাদেশি যাত্রীই জানেন না যে ইউরোপ, যুক্তরাজ্য, তুরস্ক, সৌদি আরব বা ট্রানজিট ফ্লাইটে ৩ ঘণ্টার বেশি বিলম্ব, ক্যান্সেলেশন বা লাগেজ হারালে আন্তর্জাতিক আইন অনুযায়ী এয়ারলাইন্স থেকে নগদ ক্ষতিপূরণ পাওয়া যায়।"
-              : "Most Bangladeshi flyers don't realize that a 3+ hour flight delay, last-minute cancellation, overbooking, or missed connection on eligible routes entitles you to up to €600 (~BDT 78,000) in compensation—even on tickets booked months ago."}
+              ? "কোন নিয়ম প্রযোজ্য এবং কোনো দাবি সফল হবে কি না তা রুট, airline, সম্পূর্ণ itinerary ও ঘটনার বিবরণের ওপর নির্ভর করে। এই টুল কেবল প্রাথমিক নির্দেশনা দেয়, যোগ্যতা বা ক্ষতিপূরণের পরিমাণ নিশ্চিত করে না।"
+              : "Which rules apply and whether a claim succeeds depend on the route, airline, full itinerary, and disruption details. This tool offers only a starting point; it cannot confirm eligibility or compensation amounts."}
           </p>
         </div>
 
@@ -216,7 +204,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
-            {isBn ? "১. ক্ষতিপূরণ ক্যালকুলেটর" : "1. Payout Estimator"}
+            {isBn ? "১. প্রাথমিক যাচাই" : "1. Disruption Check"}
           </button>
           <button
             type="button"
@@ -251,7 +239,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
         </div>
       </div>
 
-      {/* MODE 1: INTERACTIVE PAYOUT ESTIMATOR */}
+      {/* MODE 1: PRELIMINARY ELIGIBILITY CHECKLIST */}
       {activeMode === "claim" && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           <div className="lg:col-span-7 space-y-5">
@@ -323,26 +311,27 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 pt-1">
-              <span>{isBn ? "✓ কোনো অগ্রিম ফি নেই (No Win, No Fee)" : "✓ 100% No Win, No Fee"}</span>
-              <span aria-hidden="true">·</span>
-              <span>{isBn ? "✓ গত ৩ বছরের ফ্লাইট গ্রহণযোগ্য" : "✓ Covers flights from past 3 years"}</span>
-              <span aria-hidden="true">·</span>
-              <span>{isBn ? "✓ ২ মিনিটে ফ্রি যাচাই" : "✓ Free 2-minute eligibility check"}</span>
-            </div>
+            <p className="text-xs text-slate-500 leading-relaxed pt-1">
+              {isBn
+                ? "আরও এগোনোর আগে airline-এর প্রক্রিয়া এবং AirHelp বেছে নিলে তার বর্তমান শর্ত ও ফি যাচাই করুন।"
+                : "Before proceeding, check the airline's process and review AirHelp's current terms and fees if you choose to use it."}
+            </p>
           </div>
 
-          {/* Payout Card */}
+          {/* Eligibility guidance, not a payout calculator */}
           <div className="lg:col-span-5 bg-brand-navy text-white rounded-2xl p-6 space-y-4 border border-slate-800">
-            <div className="flex items-center justify-between text-xs text-slate-400">
-              <span>{isBn ? "সম্ভাব্য ক্ষতিপূরণ (প্রতি যাত্রী)" : "Estimated Compensation"}</span>
-              <span className="font-mono text-[#F6B73C]">{result.amount}</span>
+            <div className="space-y-1">
+              <div className="text-xs font-semibold text-slate-300">
+                {isBn ? "এটি যোগ্যতা বা পেআউটের সিদ্ধান্ত নয়" : "Not an eligibility or payout decision"}
+              </div>
+              <h3 className="text-lg font-bold text-white">
+                {isBn ? "যে তথ্যগুলো যাচাই করবেন" : "Details to verify"}
+              </h3>
             </div>
 
-            <div className="text-2xl sm:text-3xl font-serif font-bold text-white tabular-nums">
-              {result.bdt}
-            </div>
-
+            <p className="text-xs font-semibold text-amber-200">
+              {isBn ? "নির্বাচিত সমস্যা:" : "Selected disruption:"} {result.selectedEventLabel}
+            </p>
             <p className="text-xs text-slate-300 leading-relaxed">{result.note}</p>
 
             <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
@@ -352,7 +341,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                 rel="noopener noreferrer sponsored"
                 className="flex-1 bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
               >
-                <span>{isBn ? "ফ্রি ক্ষতিপূরণ চেক করুন" : "Check My Flight for Free"}</span>
+                <span>{isBn ? "AirHelp-এ যোগ্যতা যাচাই করুন" : "Check eligibility with AirHelp"}</span>
                 <ExternalLink size={13} />
               </a>
               <button
@@ -378,7 +367,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           <div className="lg:col-span-7 space-y-4">
             <div className="flex flex-wrap items-center gap-2 text-xs text-emerald-700 font-semibold">
-              <span>{isBn ? "অফিশিয়াল পার্টনার প্রোটেকশন" : "Official Partner Flight Protection"}</span>
+              <span>{isBn ? "ঐচ্ছিক পেইড মেম্বারশিপ" : "Optional paid membership"}</span>
               <span aria-hidden="true">·</span>
               <span>
                 {promoActive
@@ -394,17 +383,17 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
             <h3 className="font-serif text-lg sm:text-xl font-bold text-slate-900">
               {promoActive
                 ? isBn
-                  ? "AirHelp+ Smart ও Pro সাবস্ক্রিপশনে ১১% ডিসকাউন্ট (যুক্তরাষ্ট্র ছাড়া সকল মার্কেটে)"
-                  : "Save 11% on AirHelp+ Smart & AirHelp+ Pro Annual Flight Protection"
+                  ? `AirHelp+ Smart ও Pro-তে তালিকাভুক্ত ১১% অফার · ${AIRHELP_PROMO.validUntil} পর্যন্ত`
+                  : `Listed 11% offer on AirHelp+ Smart & Pro through ${AIRHELP_PROMO.validUntil}`
                 : isBn
-                ? "AirHelp+ Smart ও Pro বার্ষিক ফ্লাইট, লাগেজ ও লাউঞ্জ সুরক্ষা"
-                : "AirHelp+ Smart & AirHelp+ Pro Annual Flight & Airport Lounge Protection"}
+                ? "AirHelp+ প্ল্যান: কেনার আগে বর্তমান শর্ত যাচাই করুন"
+                : "AirHelp+ plans: check current terms before buying"}
             </h3>
 
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
               {isBn
-                ? "আপনি যদি বছরে ১-২ বারের বেশি বিদেশ ভ্রমণ করেন (Umrah, Dubai, Bangkok, Europe বা UK), তবে AirHelp+ মেম্বারশিপ নিলে ফ্লাইট বিলম্বের সাথে সাথে এয়ারপোর্ট লাউঞ্জ অ্যাক্সেস, লাগেজ সুরক্ষা এবং ১০০% সার্ভিস-ফি ছাড়া ক্ষতিপূরণ সহায়তা পাবেন।"
-                : "Ideal for Bangladeshi frequent flyers, Umrah pilgrims, and business travelers. AirHelp+ members keep 100% of their compensation payout (zero commission deducted on claims), plus unlock instant airport lounge access when flights are delayed and luggage protection."}
+                ? "AirHelp+ একটি পেইড মেম্বারশিপ, ভ্রমণ বীমা নয়। প্ল্যান, মূল্য, অন্তর্ভুক্ত সেবা ও ট্রিপ-সীমা বাজারভেদে বদলাতে পারে। মেম্বারশিপ ক্ষতিপূরণ পাওয়ার নিশ্চয়তা দেয় না; কেনার আগে আপনার বাজারের বর্তমান প্ল্যান-শর্ত, সীমা, বাদ পড়া বিষয় ও নিবন্ধনের সময়সীমা যাচাই করুন।"
+                : "AirHelp+ is a paid membership, not travel insurance. Plans, prices, included services and trip limits can vary by market and may change. Membership does not guarantee compensation; check the current plan terms, limits, exclusions and registration deadlines for your market before buying."}
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
@@ -412,13 +401,13 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-900">AirHelp+ Smart</span>
                   <span className="text-xs font-mono text-emerald-700 font-semibold">
-                    {promoActive ? `11% OFF with ${AIRHELP_PROMO.code}` : "Up to 3 Trips / Year"}
+                    {promoActive ? `Offer code ${AIRHELP_PROMO.code}` : "Check current plan limits"}
                   </span>
                 </div>
                 <p className="text-xs text-slate-600">
                   {isBn
-                    ? "বছরে ৩টি ট্রিপ পর্যন্ত ফ্লাইট ও লাগেজ সুরক্ষা, ক্লেইমে ০% ফি এবং লাইভ ফ্লাইট স্ট্যাটাস ট্র্যাকিং।"
-                    : "Covers up to 3 trips per year: zero fee on €600 compensation claims, delayed luggage protection, and 24/7 specialist chat."}
+                    ? "আপনার বাজারে বর্তমান মূল্য, ট্রিপ-সীমা, অন্তর্ভুক্ত সেবা, যোগ্যতা ও নিবন্ধনের সময়সীমা যাচাই করুন।"
+                    : "Check the current price, trip limits, included services, eligibility and registration deadlines for your market."}
                 </p>
               </div>
 
@@ -426,13 +415,13 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-900">AirHelp+ Pro</span>
                   <span className="text-xs font-mono text-emerald-700 font-semibold">
-                    {promoActive ? `11% OFF with ${AIRHELP_PROMO.code}` : "Up to 9 Trips + Lounge"}
+                    {promoActive ? `Offer code ${AIRHELP_PROMO.code}` : "Compare current plan limits"}
                   </span>
                 </div>
                 <p className="text-xs text-slate-600">
                   {isBn
-                    ? "বছরে ৯টি ট্রিপ পর্যন্ত সুরক্ষা + ফ্লাইট বিলম্ব হলে বিনামূল্যে আন্তর্জাতিক Airport Lounge পাস।"
-                    : "Covers up to 9 trips per year + complimentary Luxury Airport Lounge pass whenever your flight is delayed."}
+                    ? "Smart প্ল্যানের সঙ্গে বর্তমান ট্রিপ-সীমা, সুবিধা ও মূল্য তুলনা করুন; কোনো সুবিধা সব বাজারে প্রযোজ্য ধরে নেবেন না।"
+                    : "Compare current trip limits, benefits and price with Smart; do not assume every feature applies in every market."}
                 </p>
               </div>
             </div>
@@ -451,7 +440,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
                       {AIRHELP_PROMO.code}
                     </span>
                     <span className="block text-[11px] text-slate-500">
-                      11% OFF Smart &amp; Pro · Valid through {AIRHELP_PROMO.validUntil}
+                      Listed 11% offer · Smart &amp; Pro · through {AIRHELP_PROMO.validUntil}
                     </span>
                   </div>
                   <button
@@ -467,12 +456,12 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
             ) : (
               <div className="space-y-1">
                 <span className="text-xs font-semibold text-slate-500">
-                  {isBn ? "কেন AirHelp+ মেম্বারশিপ নেবেন?" : "Why Frequent Flyers Choose AirHelp+"}
+                  {isBn ? "কেনার আগে কী যাচাই করবেন" : "What to check before buying"}
                 </span>
                 <p className="text-xs text-slate-600 leading-relaxed">
                   {isBn
-                    ? "ফ্লাইট বিলম্ব বা বাতিল হলে ১০০% ক্ষতিপূরণ অর্থ আপনার (০% সার্ভিস ফি) এবং আন্তর্জাতিক বিমানবন্দরে ফ্রি লাউঞ্জ অ্যাক্সেস।"
-                    : "Keep 100% of your €600 compensation payout with zero service fees deducted, plus instant airport lounge access during flight delays."}
+                    ? "আপনার বাজারে বর্তমান প্ল্যানের মূল্য, ট্রিপ-সীমা, অন্তর্ভুক্ত সেবা ও নিবন্ধনের নিয়ম যাচাই করুন।"
+                    : "Check current plan price, trip limits, included services and registration rules for your market."}
                 </p>
               </div>
             )}
@@ -486,8 +475,8 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
               <span>
                 {promoActive
                   ? isBn
-                    ? "AirHelp+ এ ১১% ডিসকাউন্ট অ্যাক্টিভেট করুন"
-                    : "Activate 11% OFF on AirHelp+ Official Site"
+                    ? "AirHelp+ প্ল্যান ও কোড যাচাই করুন"
+                    : "Check AirHelp+ plans and offer"
                   : isBn
                   ? "AirHelp+ মেম্বারশিপ প্ল্যান দেখুন"
                   : "Explore AirHelp+ Plans on Official Site"}
@@ -495,15 +484,25 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
               <ArrowRight size={14} />
             </a>
 
-            <p className="text-[11px] text-slate-500 leading-relaxed">
-              {promoActive
-                ? isBn
-                  ? "নোট: প্রোমো কোডটি যুক্তরাষ্ট্র (US) বাদে বাংলাদেশ, যুক্তরাজ্য, ইউরোপ, মধ্যপ্রাচ্য ও এশিয়ার সকল মার্কেটে কার্যকর।"
-                  : `Note: Promo code ${AIRHELP_PROMO.code} is valid across all markets (including Bangladesh, UK, Europe, UAE & Asia) except the US.`
-                : isBn
-                ? "বাংলাদেশি ডুয়াল-কারেন্সি কার্ডে অনলাইনে তাৎক্ষণিক অ্যাক্টিভেশন সুবিধা।"
-                : "Instant online activation with Bangladeshi dual-currency cards."}
-            </p>
+            <div className="space-y-2 text-[11px] text-slate-500 leading-relaxed">
+              <p>
+                {promoActive
+                  ? isBn
+                    ? "আপনার বাজার ও প্ল্যানে কোডটি গ্রহণযোগ্য হলে অফার প্রযোজ্য; চেকআউটে ছাড় ও মোট মূল্য নিশ্চিত করুন।"
+                    : "The offer applies only if the code is accepted for your market and plan; confirm the discount and final total at checkout."
+                  : isBn
+                  ? "বর্তমান প্ল্যান, মূল্য ও যোগ্যতা AirHelp-এর সাইটে যাচাই করুন।"
+                  : "Check current plans, prices and eligibility on AirHelp's site."}
+              </p>
+              <a
+                href="https://www.airhelp.com/en/airhelp-plus-terms/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-slate-700"
+              >
+                {isBn ? "AirHelp+ সেবার শর্ত (ইংরেজি)" : "Read AirHelp+ service terms"}
+              </a>
+            </div>
           </div>
         </div>
       )}
@@ -531,10 +530,8 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
               <div className="py-6 px-4 text-center space-y-3">
                 <p className="text-xs text-slate-600 max-w-lg mx-auto">
                   {isBn
-                    ? "আপনার ব্রাউজারের অ্যাড-ব্লকার বা প্রাইভেসি সেটিংসের কারণে এমবেড ফর্মটি ব্লক হয়েছে। নিচের বাটনে ক্লিক করে সরাসরি অফিসিয়াল AirHelp পোর্টালে আপনার ফ্লাইট নম্বর চেক করুন।"
-                    : promoActive
-                    ? `Open the official AirHelp portal directly to enter your flight number, check €600 compensation eligibility, or redeem promo code ${AIRHELP_PROMO.code} for 11% OFF AirHelp+.`
-                    : "Open the official AirHelp portal directly to enter your flight number and check up to €600 compensation eligibility for free."}
+                    ? `এম্বেড ফর্মটি লোড হয়নি। AirHelp সাইটে ফ্লাইটের তথ্য দিয়ে দাবি যাচাই করুন; যোগ্যতা ও ফি ঘটনার বিবরণ এবং AirHelp-এর বর্তমান শর্তের ওপর নির্ভর করে। ${promoActive ? `AirHelp+ কোড ${AIRHELP_PROMO.code} ব্যবহার করলে চেকআউটে অফারের যোগ্যতা নিশ্চিত করুন।` : ""}`
+                    : `The embedded form did not load. Enter your flight details on AirHelp to check whether a claim may be worth pursuing; eligibility and fees depend on the case and AirHelp's current terms. ${promoActive ? `If using AirHelp+ code ${AIRHELP_PROMO.code}, confirm offer eligibility at checkout.` : ""}`}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3">
                   <a

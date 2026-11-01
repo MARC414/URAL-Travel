@@ -31,7 +31,17 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
   if (!isLanding && ["nepal-guide", "thailand-guide", "malaysia-guide", "singapore-guide", "maldives-guide", "dubai-guide", "london-guide", "italy-guide", "paris-guide", "new-york-guide"].includes(parameterId)) {
     const destinationGuide = DESTINATIONS_DATA.find((destination: any) => destination.id === parameterId);
     if (destinationGuide) {
-      return <CityDestinationLanding guide={destinationGuide} blogs={localizedBlogs ?? []} lang={lang} onNavigate={navigateTo} />;
+      return (
+        <CityDestinationLanding
+          guide={destinationGuide}
+          blogs={localizedBlogs ?? []}
+          lang={lang}
+          onNavigate={navigateTo}
+          areTpScriptsReady={areTpScriptsReady}
+          setAreTpScriptsReady={setAreTpScriptsReady}
+          TravelpayoutsWidgetSkeleton={TravelpayoutsWidgetSkeleton}
+        />
+      );
     }
   }
 

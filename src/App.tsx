@@ -11,6 +11,7 @@ import {
   BookOpen,
   ArrowRight,
   Menu,
+  Search,
   X,
   MapPin,
   ExternalLink,
@@ -624,8 +625,6 @@ function getBlogCoverImage(slug: string): string {
       return havanaGranTeatroImg;
     case "chefchaouen-morocco-travel-guide-bangladesh":
       return chefchaouenFountainImg;
-    case "kkday-10-10-winter-sale-japan-tours-passes-guide":
-      return parisLouvreLandmarksImg;
     case "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide":
       return dhakaKolkataBorderTrainImg;
     default:
@@ -724,8 +723,6 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
       "Chefchaouen, Morocco's Blue City in the Rif Mountains, is best visited April-June and September-October. CTM buses reach it in about 4 hours from Tangier or Fes. Bangladeshi travelers need a Moroccan visa in advance (no visa on arrival), halal food is the default everywhere, and a 5-day Morocco loop costs about BDT 150,000-220,000 including flights.",
     "travel-creator-resources":
       "Travel creator resources that work in 2026: start with one free monetization hub (Travelpayouts), free SEO tools like Google Search Console and Trends, honest phone photography with real alt text, trusted research sources like Seat61 and embassy pages, and a realistic workflow - publish honest articles one at a time and disclose every affiliate link.",
-    "kkday-10-10-winter-sale-japan-tours-passes-guide":
-      "Claim 30% off with promo codes 1010TOURS (Hokkaido ski & day tours), 1010MOVE (Keisei Skyliner, Nankai Rapi:t, Tokyo Metro), and 1010TIX (Universal Studios Japan, Tokyo Disney, SHIBUYA SKY) during KKday's 10.10 Winter Sale launching October 10 at 08:00 AM UTC+8 with dual-currency card checkout.",
     "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide":
       "Cross-border passenger trains (Maitree, Bandhan, and Mitali Express) have been suspended since July 2024; check railway.gov.bd and indianrailways.gov.in for any restart notice. For overland travel via Benapole–Petrapole, Bangladeshi travelers need an IVAC sticker visa (ivacbd.com; no e-Visa) and can plan around an indicative 3-day Kolkata budget of BDT 8,000–18,000.",
   };
@@ -821,8 +818,6 @@ function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSummary: 
       "রিফ পাহাড়ের মরক্কোর নীল শহর শেফশাওয়েন এপ্রিল-জুন ও সেপ্টেম্বর-অক্টোবরে যাওয়া ভালো। টাঞ্জিয়ার বা ফেজ থেকে CTM বাসে প্রায় ৪ ঘণ্টা। বাংলাদেশিদের আগেই মরক্কো ভিসা লাগে (ভিসা অন অ্যারাইভাল নেই), হালাল সর্বত্র স্বাভাবিক, আর ৫ দিনের মরক্কো লুপের ব্যয় প্রায় ১,৫০,০০০-২,২০,০০০ টাকা (ফ্লাইটসহ)।",
     "travel-creator-resources":
       "২০২৬ সালের কার্যকর ট্রাভেল ক্রিয়েটর রিসোর্সেস: একটিমাত্র ফ্রি মনিটাইজেশন হাব (Travelpayouts), Google Search Console ও Trends-এর মতো ফ্রি SEO টুল, আসল অল্ট টেক্সটসহ সৎ ফোন ফটোগ্রাফি, Seat61 ও দূতাবাসের পেজের মতো বিশ্বস্ত রিসার্স সোর্স এবং বাস্তব ওয়ার্কফ্লো - একটি করে সৎ আর্টিকেল প্রকাশ করুন এবং প্রতিটি অ্যাফিলিয়েট লিংক প্রকাশ করুন।",
-    "kkday-10-10-winter-sale-japan-tours-passes-guide":
-      "KKday-র ১০.১০ উইন্টার সেল শুরু হচ্ছে ১০ অক্টোবর সকাল ৮:০০ (UTC+8)-এ। প্রোমো কোড 1010TOURS (হোক্কাইডো স্কি ও ডে-ট্যুর), 1010MOVE (Keisei Skyliner, Nankai Rapi:t, মেট্রো) ও 1010TIX (USJ, টোকিও ডিজনি, শিবুয়া স্কাই) ব্যবহার করে ৩০% ফ্ল্যাশ ছাড় নিন।",
     "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide":
       "জুলাই ২০২৪ থেকে মৈত্রী, বন্ধন ও মিতালি এক্সপ্রেস স্থগিত; পুনরায় চালুর বিজ্ঞপ্তির জন্য railway.gov.bd ও indianrailways.gov.in দেখুন। বেনাপোল–পেট্রাপোল স্থলপথে ভ্রমণের জন্য বাংলাদেশি পাসপোর্টধারীদের IVAC স্টিকার ভিসা (ivacbd.com; e-Visa নেই) লাগে এবং ৩ দিনের কলকাতা ভ্রমণের আনুমানিক পরিকল্পনা বাজেট BDT 8,000–18,000।",
   };
@@ -1052,7 +1047,17 @@ export default function App() {
   }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [siteSearchOpen, setSiteSearchOpen] = useState(false);
-  const siteSearchTriggerRef = useRef<HTMLButtonElement>(null);
+  const [topBarSearchQuery, setTopBarSearchQuery] = useState("");
+  const [siteSearchInitialQuery, setSiteSearchInitialQuery] = useState("");
+  const siteSearchTriggerRef = useRef<HTMLInputElement>(null);
+  const openSiteSearch = (query = "") => {
+    setSiteSearchInitialQuery(query);
+    setSiteSearchOpen(true);
+  };
+  const closeSiteSearch = () => {
+    setSiteSearchOpen(false);
+    setSiteSearchInitialQuery("");
+  };
   const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
   const mobileMenuCloseRef = useRef<HTMLButtonElement>(null);
   const mobileDrawerPanelRef = useRef<HTMLDivElement>(null);
@@ -1068,6 +1073,7 @@ export default function App() {
       if (event.altKey || target?.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target?.tagName ?? "")) return;
       if ((event.key === "/" && !event.metaKey && !event.ctrlKey) || ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k")) {
         event.preventDefault();
+        setSiteSearchInitialQuery("");
         setSiteSearchOpen(true);
       }
     };
@@ -2211,10 +2217,10 @@ export default function App() {
       seoDescription = "Skip the line in Paris, London, Rome, Milan, and Venice with official Tiqets passes. Louvre, Eiffel Tower, Colosseum, Duomo, and more for Bangladeshi Schengen visa travelers.";
     } else if (region === "asia") {
       seoTitle = "Asian Attraction Passes & Tours (Klook) | URAL";
-      seoDescription = "Book discounted Klook tours in Dubai, Bangkok, Singapore, and Kuala Lumpur. Skip-the-line entry, city passes, and attraction bundles for Bangladeshi travelers.";
+      seoDescription = "Browse Klook activity listings in Dubai, Bangkok, Singapore, and Kuala Lumpur. Compare dates, inclusions, checkout totals, and booking terms before choosing.";
     } else {
       seoTitle = "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub) | URAL";
-      seoDescription = "Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes, or book discounted Klook tours in Dubai, Bangkok, Singapore, and KL.";
+      seoDescription = "Compare official Tiqets attraction listings in Europe and New York with Klook activity listings in Dubai, Bangkok, Singapore, and Kuala Lumpur; check current dates and terms.";
     }
     // URAL refers travelers to partner booking sites; it does not sell these products.
     // Do not emit Product/Offer data that presents URAL as the merchant.
@@ -2468,6 +2474,8 @@ export default function App() {
       const u = new URL(rawPath, SITE_ORIGIN);
       const p = u.pathname;
       const sp = u.searchParams;
+      if (p === "/blog/kkday-10-10-winter-sale-japan-tours-passes-guide") return "/experiences?region=asia";
+      if (p === "/bn/blog/kkday-10-10-winter-sale-japan-tours-passes-guide") return "/bn/experiences?region=asia";
       if (p === "/flights" && sp.get("route")) return `/flights/${sp.get("route")}`;
       if (p === "/hotels" && sp.get("city")) return `/hotels/${sp.get("city")}`;
       if (p === "/visa" && sp.get("country")) return `/visa/${sp.get("country")}`;
@@ -2615,7 +2623,8 @@ export default function App() {
         <React.Suspense fallback={null}>
           <GlobalSiteSearch
             isBn={isBn}
-            onClose={() => setSiteSearchOpen(false)}
+            initialQuery={siteSearchInitialQuery}
+            onClose={closeSiteSearch}
             navigateTo={navigateTo}
             triggerRef={siteSearchTriggerRef}
           />
@@ -2647,18 +2656,36 @@ export default function App() {
           <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between text-white/55 text-xs">
             <span className="truncate font-sans font-medium">{t.topStripTagline}</span>
             <div className="flex items-center gap-2 sm:gap-3 shrink-0 font-sans text-[11px] font-medium">
-              <button
-                ref={siteSearchTriggerRef}
-                type="button"
-                onClick={() => setSiteSearchOpen(true)}
-                aria-haspopup="dialog"
-                aria-expanded={siteSearchOpen}
+              <form
+                role="search"
                 aria-label={isBn ? "URAL সাইটে খুঁজুন" : "Search this site"}
-                className="inline-flex min-h-8 items-center gap-1.5 rounded-md px-1.5 text-white/75 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  openSiteSearch(topBarSearchQuery);
+                }}
+                className="flex h-7 w-[130px] items-center gap-1 rounded-md border border-white/20 bg-white/[0.07] px-2 text-white/80 transition focus-within:border-[#F6B73C] focus-within:ring-2 focus-within:ring-[#F6B73C]/50 sm:h-8 sm:w-[180px] md:w-[210px]"
               >
-                <span aria-hidden="true" className="relative h-3 w-3 rounded-full border-2 border-current after:absolute after:-bottom-1 after:-right-1 after:h-1.5 after:w-1 after:rotate-45 after:rounded-full after:bg-current" />
-                <span className="hidden sm:inline">{isBn ? "খুঁজুন" : "Search"}</span>
-              </button>
+                <input
+                  ref={siteSearchTriggerRef}
+                  id="top-bar-site-search"
+                  type="search"
+                  value={topBarSearchQuery}
+                  onChange={(event) => setTopBarSearchQuery(event.currentTarget.value)}
+                  aria-label={isBn ? "সার্চের শব্দ লিখুন" : "Enter a site-search query"}
+                  placeholder={isBn ? "এই সাইটে খুঁজুন" : "Search this site"}
+                  autoComplete="off"
+                  className="min-w-0 flex-1 select-text bg-transparent text-[11px] text-white outline-none placeholder:text-white/60"
+                />
+                <button
+                  type="submit"
+                  aria-haspopup="dialog"
+                  aria-expanded={siteSearchOpen}
+                  aria-label={isBn ? "সার্চ করুন" : "Search"}
+                  className="inline-flex size-5 shrink-0 items-center justify-center rounded text-white/80 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+                >
+                  <Search size={13} aria-hidden="true" />
+                </button>
+              </form>
               <TopBarWhatsApp lang={lang} />
               <span className="w-px h-3 bg-white/20"></span>
               <LanguageSwitcher
@@ -3037,7 +3064,7 @@ export default function App() {
                             )}
                           </span>
                           <span className="text-amber-300 font-semibold">
-                            {isPromoActive(KKDAY_PROMO.expiresAt) ? "30% Codes" : "Instant QR"}
+                            {isPromoActive(KKDAY_PROMO.expiresAt) ? "30% Codes" : "Check terms"}
                           </span>
                         </div>
                         <p className="text-[11px] text-slate-300 leading-relaxed">
@@ -3046,8 +3073,8 @@ export default function App() {
                               ? "জাপান স্কি ট্যুর, থিম পার্ক ও এয়ারপোর্ট রেল পাসে ৩০% প্রোমো কোড (1010TOURS, 1010MOVE, 1010TIX)।"
                               : "30% OFF promo codes for Japan ski tours, theme parks & airport express rail (1010TOURS, 1010MOVE, 1010TIX)."
                             : isBn
-                            ? "জাপান, থাইল্যান্ড ও সিঙ্গাপুরের থিম পার্ক, ডে-ট্যুর ও এয়ারপোর্ট ট্রেন টিকিটে অনলাইন ছাড়।"
-                            : "Save 15–30% on Japan, Thailand & Singapore theme parks, airport rail & ski tours."}
+                            ? "জাপান, থাইল্যান্ড ও সিঙ্গাপুরে বর্তমান দাম, তারিখ, অন্তর্ভুক্তি ও বাতিলের শর্ত তুলনা করুন।"
+                            : "Compare current prices, dates, inclusions, and cancellation terms for Japan, Thailand, and Singapore activities."}
                         </p>
                         <div className="grid grid-cols-2 gap-2 pt-0.5">
                           <a
@@ -3229,14 +3256,14 @@ export default function App() {
                       {
                         id: "airhelp",
                         icon: ShieldCheck,
-                        label: isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "Flight Delay Claim (€600 / AirHelp)",
+                        label: isBn ? "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)" : "Flight Disruption Check (AirHelp)",
                         sub: isPromoActive(AIRHELP_PROMO.expiresAt)
                           ? isBn
-                            ? `প্রোমো কোড ${AIRHELP_PROMO.code} (১১% ছাড়)`
-                            : `Up to BDT 78k payout + Code ${AIRHELP_PROMO.code}`
+                            ? `প্রোমো কোড ${AIRHELP_PROMO.code} · যোগ্যতা যাচাই করুন`
+                            : `Code ${AIRHELP_PROMO.code} · Check eligibility`
                           : isBn
-                          ? "No Win, No Fee · ৭৮,০০০ টাকা পর্যন্ত"
-                          : "No Win, No Fee · Up to BDT 78k payout",
+                          ? "যোগ্যতা ঘটনার বিবরণের ওপর নির্ভর করে"
+                          : "Eligibility depends on case details",
                         path: "/tools/flight-delay-claim",
                       },
                       {
@@ -3519,8 +3546,8 @@ export default function App() {
                       id: "tools" as const,
                       title: isBn ? "এয়ারপোর্ট প্রস্তুতি, টুলস ও সাপোর্ট" : "Airport Readiness, Tools & Help",
                       subtitle: isBn
-                        ? "কারেন্সি কনভার্টার · দূতাবাস · €600 ক্লেইম"
-                        : "FX tool · DAC checklist · €600 claim",
+                        ? "কারেন্সি কনভার্টার · দূতাবাস · ফ্লাইট-সমস্যার গাইড"
+                        : "FX tool · DAC checklist · flight-disruption guide",
                       isActiveGroup: ["tools", "sitemap", "preDeparture", "contact"].includes(section),
                       primaryLinks: [
                         {
@@ -3537,14 +3564,14 @@ export default function App() {
                         },
                         {
                           id: "airhelp",
-                          label: isBn ? "ফ্লাইট বিলম্ব ক্ষতিপূরণ (€600)" : "Flight Delay Claim (€600 / AirHelp)",
+                          label: isBn ? "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)" : "Flight Disruption Check (AirHelp)",
                           meta: isPromoActive(AIRHELP_PROMO.expiresAt)
                             ? isBn
-                              ? `প্রোমো কোড ${AIRHELP_PROMO.code} · ৭৮,০০০ টাকা পর্যন্ত`
-                              : `Code ${AIRHELP_PROMO.code} · Up to BDT 78k payout`
+                              ? `প্রোমো কোড ${AIRHELP_PROMO.code} · যোগ্যতা যাচাই করুন`
+                              : `Code ${AIRHELP_PROMO.code} · Check eligibility`
                             : isBn
-                            ? "No Win, No Fee · ৭৮,০০০ টাকা পর্যন্ত"
-                            : "No Win, No Fee · Up to BDT 78k payout",
+                            ? "যোগ্যতা ঘটনার বিবরণের ওপর নির্ভর করে"
+                            : "Eligibility depends on case details",
                           path: "/tools/flight-delay-claim",
                         },
                         {

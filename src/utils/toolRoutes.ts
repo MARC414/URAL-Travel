@@ -159,21 +159,21 @@ export const TOOL_PAGE_SEO: Record<string, ToolPageMeta> = {
     serviceNameEn: "Visa Eligibility Checker for Bangladeshi Passport Holders",
   },
   "flight-delay-claim": {
-    nameEn: "Flight Delay Claim",
-    nameBn: "ফ্লাইট ডিলে ক্ষতিপূরণ",
-    titleEn: "Flight Delay Compensation: Claim Up to €600 with AirHelp | URAL",
+    nameEn: "Flight Disruption Check",
+    nameBn: "ফ্লাইট-সমস্যার দাবি যাচাই",
+    titleEn: "Flight Disruption Claim Check & Passenger-Rights Guide | URAL",
     descriptionEn:
-      "Check whether a delayed or cancelled flight qualifies for €250–€600 EU compensation and start an AirHelp claim — No Win, No Fee.",
-    titleBn: "ফ্লাইট ডিলে ক্ষতিপূরণ: €600 পর্যন্ত দাবি (AirHelp) | URAL",
+      "Review the route and disruption details that may affect a flight claim. AirHelp is an optional service; check its current eligibility rules, terms and fees.",
+    titleBn: "ফ্লাইটে সমস্যা হলে দাবি যাচাই ও যাত্রী-অধিকার গাইড | URAL",
     descriptionBn:
-      "বিলম্বিত বা বাতিল ফ্লাইট €২৫০–€৬০০ ইউরোপীয় ক্ষতিপূরণের যোগ্য কি না দেখুন এবং AirHelp-তে দাবি শুরু করুন — No Win, No Fee।",
-    h1En: "Flight Delay Compensation: Claim Up to €600 (AirHelp)",
-    h1Bn: "ফ্লাইট ডিলে ক্ষতিপূরণ: €600 পর্যন্ত দাবি (AirHelp)",
+      "ফ্লাইটের রুট ও ঘটনার বিবরণ যাচাই করে সম্ভাব্য দাবি সম্পর্কে জানুন। AirHelp ঐচ্ছিক সেবা; তাদের বর্তমান যোগ্যতার নিয়ম, শর্ত ও ফি দেখুন।",
+    h1En: "Flight Disruption Claim Check",
+    h1Bn: "ফ্লাইট-সমস্যার দাবি যাচাই",
     subEn:
-      "Check eligibility for €250–€600 compensation on delayed or cancelled flights — No Win, No Fee.",
+      "Use this as a starting point, not a payout estimate. Eligibility depends on your itinerary, operating carrier and disruption details; review any claims service's terms and fees.",
     subBn:
-      "বিলম্বিত বা বাতিল ফ্লাইটে €২৫০–€৬০০ ক্ষতিপূরণের যোগ্যতা দেখুন — No Win, No Fee।",
-    serviceNameEn: "Flight Delay & Cancellation Compensation Claims (EU 261/2004)",
+      "এটিকে প্রাথমিক নির্দেশনা হিসেবে নিন, পেআউটের হিসাব হিসেবে নয়। যোগ্যতা itinerary, operating carrier ও ঘটনার বিবরণের ওপর নির্ভর করে; দাবি-সেবার শর্ত ও ফি যাচাই করুন।",
+    serviceNameEn: "Flight Disruption Claim Information and Optional AirHelp Service",
   },
   "airport-codes": {
     nameEn: "Airport Codes Directory",

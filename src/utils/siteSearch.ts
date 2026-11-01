@@ -61,7 +61,7 @@ function normalizeSearchText(value: string): string {
     .normalize("NFKC")
     .toLocaleLowerCase()
     .replace(/[\u200c\u200d\ufeff]/g, "")
-    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .replace(/[^\p{L}\p{M}\p{N}]+/gu, " ")
     .trim();
 }
 
