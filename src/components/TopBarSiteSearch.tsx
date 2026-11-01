@@ -9,10 +9,11 @@ type TopBarSiteSearchProps = {
   initialQuery: string;
   navigateTo: (path: string) => void;
   onOpenSearch: (query: string) => void;
+  onSubmitQuery: (query: string) => Promise<boolean>;
   inputRef: React.RefObject<HTMLInputElement | null>;
 };
 
-export function TopBarSiteSearch({ isBn, initialQuery, navigateTo, onOpenSearch, inputRef }: TopBarSiteSearchProps) {
+export function TopBarSiteSearch({ isBn, initialQuery, navigateTo, onOpenSearch, onSubmitQuery, inputRef }: TopBarSiteSearchProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [query, setQuery] = useState(initialQuery);
   const [settledQuery, setSettledQuery] = useState("");
@@ -20,6 +21,7 @@ export function TopBarSiteSearch({ isBn, initialQuery, navigateTo, onOpenSearch,
   const [searchApi, setSearchApi] = useState<SiteSearchApi | null>(null);
   const [loadError, setLoadError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -77,10 +79,24 @@ export function TopBarSiteSearch({ isBn, initialQuery, navigateTo, onOpenSearch,
     navigateTo(path);
   };
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (results.length > 0) selectResult(results[Math.min(activeIndex, results.length - 1)].path);
-    else onOpenSearch(query.trim());
+    if (isSubmitting) return;
+    if (results.length > 0) {
+      selectResult(results[Math.min(activeIndex, results.length - 1)].path);
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      const didNavigate = await onSubmitQuery(query.trim());
+      if (didNavigate) {
+        setIsFocused(false);
+        setQuery("");
+        setSettledQuery("");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const onInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -100,6 +116,7 @@ export function TopBarSiteSearch({ isBn, initialQuery, navigateTo, onOpenSearch,
       ref={formRef}
       role="search"
       aria-label={isBn ? "URAL সাইটে খুঁজুন" : "Search this site"}
+      aria-busy={isLoading || isSubmitting}
       onSubmit={onSubmit}
       className="relative z-[70] mx-auto flex h-9 w-full max-w-[360px] items-center gap-2 rounded-lg border border-white/20 bg-white/[0.08] px-3 text-white shadow-sm transition focus-within:border-[#F6B73C] focus-within:bg-white/[0.11] focus-within:ring-2 focus-within:ring-[#F6B73C]/40"
     >
@@ -135,7 +152,8 @@ export function TopBarSiteSearch({ isBn, initialQuery, navigateTo, onOpenSearch,
       <button
         type="submit"
         aria-label={isBn ? "সার্চ ফলাফল দেখুন" : "Open the best matching page"}
-        className="inline-flex size-6 shrink-0 items-center justify-center rounded-md text-white/85 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+        disabled={isSubmitting}
+        className="inline-flex size-6 shrink-0 items-center justify-center rounded-md text-white/85 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] disabled:opacity-70"
       >
         <ArrowRight size={15} aria-hidden="true" />
       </button>

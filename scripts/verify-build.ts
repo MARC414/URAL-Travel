@@ -4833,10 +4833,10 @@ const appSource = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
 const topBarSearchSource = read(path.join(ROOT_DIR, "src", "components", "TopBarSiteSearch.tsx")) ?? "";
 const globalSearchSource = read(path.join(ROOT_DIR, "src", "components", "GlobalSiteSearch.tsx")) ?? "";
 const topBarSearchEnHtml = renderToStaticMarkup(React.createElement(TopBarSiteSearch, {
-  isBn: false, initialQuery: "", navigateTo: () => {}, onOpenSearch: () => {}, inputRef: { current: null },
+  isBn: false, initialQuery: "", navigateTo: () => {}, onOpenSearch: () => {}, onSubmitQuery: async () => false, inputRef: { current: null },
 }));
 const topBarSearchBnHtml = renderToStaticMarkup(React.createElement(TopBarSiteSearch, {
-  isBn: true, initialQuery: "", navigateTo: () => {}, onOpenSearch: () => {}, inputRef: { current: null },
+  isBn: true, initialQuery: "", navigateTo: () => {}, onOpenSearch: () => {}, onSubmitQuery: async () => false, inputRef: { current: null },
 }));
 check(
   enAppShellHtml.includes('id="top-bar-site-search"') &&
@@ -4844,11 +4844,14 @@ check(
     topBarSearchEnHtml.includes('placeholder="Search destinations, flights, visas, guides..."') &&
     topBarSearchBnHtml.includes('placeholder="গন্তব্য, ফ্লাইট, ভিসা বা গাইড খুঁজুন"') &&
     appSource.includes("onOpenSearch={openSiteSearch}") &&
-    appSource.includes("md:grid-cols-[minmax(0,1fr)_minmax(260px,360px)_minmax(0,1fr)]") &&
+    appSource.includes("md:left-1/2") && appSource.includes("md:top-1/2") &&
+    appSource.includes("md:-translate-x-1/2") && appSource.includes("md:-translate-y-1/2") &&
     appSource.includes("min-h-[68px]") && appSource.includes("md:min-h-12") &&
+    appSource.includes("findSiteSearchPath") && appSource.includes("await onSubmitQuery(value.trim())") &&
     topBarSearchEnHtml.includes("max-w-[360px]") &&
     topBarSearchSource.includes("api.loadSiteSearchIndex()") &&
     topBarSearchSource.includes("searchApi.searchSite(preparedEntries, settledQuery") &&
+    topBarSearchSource.includes("await onSubmitQuery(query.trim())") &&
     topBarSearchSource.includes("selectResult(results[Math.min(activeIndex, results.length - 1)].path)") &&
     topBarSearchSource.includes('role="listbox"') && topBarSearchSource.includes('role="option"') &&
     globalSearchSource.includes("useState(initialQuery)"),
