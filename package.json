@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "generate:scheduled": "tsx scripts/generate-scheduled-blogs.ts",
-    "dev": "npm run generate:scheduled && vite --port=3000 --host=0.0.0.0",
-    "dev:drafts": "tsx scripts/generate-scheduled-blogs.ts --include-unpublished && vite --port=3000 --host=0.0.0.0",
+    "generate:site-search-index": "tsx scripts/prerender.ts --search-index-only",
+    "dev": "npm run generate:scheduled && npm run generate:site-search-index && vite --port=3000 --host=0.0.0.0",
+    "dev:drafts": "tsx scripts/generate-scheduled-blogs.ts --include-unpublished && npm run generate:site-search-index && vite --port=3000 --host=0.0.0.0",
     "build": "npm run generate:scheduled && vite build --mode production && tsx scripts/prerender.ts",
     "build:spa": "npm run generate:scheduled && vite build",
     "verify:build": "tsx scripts/verify-build.ts",

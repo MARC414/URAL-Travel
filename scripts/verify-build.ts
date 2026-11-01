@@ -106,6 +106,7 @@ import { TravelpayoutsCustomWidget } from "../src/components/TravelpayoutsCustom
 import { AirHelpWidget } from "../src/components/AirHelpWidget";
 import { KiwitaxiEmbed } from "../src/components/KiwitaxiEmbed";
 import { WelcomePickupsEmbed, WELCOME_PICKUPS_PARTNER_URL } from "../src/components/WelcomePickupsEmbed";
+import { TopBarSiteSearch } from "../src/components/TopBarSiteSearch";
 import BlogPostRouteView from "../src/routes/BlogPostRouteView";
 import HotelsRouteView from "../src/routes/HotelsRouteView";
 import { UmrahBudgetCalculator } from "../src/components/UmrahBudgetCalculator";
@@ -4829,16 +4830,37 @@ function renderAppAtPath(routePath: string): string {
 const enAppShellHtml = renderAppAtPath("/");
 const bnAppShellHtml = renderAppAtPath("/bn/");
 const appSource = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
+const topBarSearchSource = read(path.join(ROOT_DIR, "src", "components", "TopBarSiteSearch.tsx")) ?? "";
 const globalSearchSource = read(path.join(ROOT_DIR, "src", "components", "GlobalSiteSearch.tsx")) ?? "";
+const topBarSearchEnHtml = renderToStaticMarkup(React.createElement(TopBarSiteSearch, {
+  isBn: false, initialQuery: "", navigateTo: () => {}, onOpenSearch: () => {}, inputRef: { current: null },
+}));
+const topBarSearchBnHtml = renderToStaticMarkup(React.createElement(TopBarSiteSearch, {
+  isBn: true, initialQuery: "", navigateTo: () => {}, onOpenSearch: () => {}, inputRef: { current: null },
+}));
 check(
-  enAppShellHtml.includes('role="search"') && enAppShellHtml.includes('id="top-bar-site-search"') &&
-    enAppShellHtml.includes('placeholder="Search this site"') &&
-    bnAppShellHtml.includes('role="search"') && bnAppShellHtml.includes('id="top-bar-site-search"') &&
-    bnAppShellHtml.includes('placeholder="এই সাইটে খুঁজুন"') &&
-    appSource.includes("openSiteSearch(topBarSearchQuery)") &&
-    appSource.includes("initialQuery={siteSearchInitialQuery}") &&
+  enAppShellHtml.includes('id="top-bar-site-search"') &&
+    bnAppShellHtml.includes('id="top-bar-site-search"') &&
+    topBarSearchEnHtml.includes('placeholder="Search destinations, flights, visas, guides..."') &&
+    topBarSearchBnHtml.includes('placeholder="গন্তব্য, ফ্লাইট, ভিসা বা গাইড খুঁজুন"') &&
+    appSource.includes("onOpenSearch={openSiteSearch}") &&
+    appSource.includes("md:grid-cols-[minmax(0,1fr)_minmax(260px,360px)_minmax(0,1fr)]") &&
+    appSource.includes("min-h-[68px]") && appSource.includes("md:min-h-12") &&
+    topBarSearchEnHtml.includes("max-w-[360px]") &&
+    topBarSearchSource.includes("api.loadSiteSearchIndex()") &&
+    topBarSearchSource.includes("searchApi.searchSite(preparedEntries, settledQuery") &&
+    topBarSearchSource.includes("selectResult(results[Math.min(activeIndex, results.length - 1)].path)") &&
+    topBarSearchSource.includes('role="listbox"') && topBarSearchSource.includes('role="option"') &&
     globalSearchSource.includes("useState(initialQuery)"),
-  "the EN/BN top bar renders an editable search field and carries its query into the existing global-search dialog"
+  "the centered EN/BN top-bar search shows live accessible matches, opens a selected page, and preserves full search"
+);
+const packageScripts = JSON.parse(read(path.join(ROOT_DIR, "package.json")) ?? "{}").scripts as Record<string, string>;
+const prerenderSource = read(path.join(ROOT_DIR, "scripts", "prerender.ts")) ?? "";
+check(
+  packageScripts.dev.includes("generate:site-search-index") &&
+    packageScripts["generate:site-search-index"].includes("--search-index-only") &&
+    prerenderSource.includes("SEARCH_INDEX_ONLY ? PUBLIC_DIR : DIST_DIR"),
+  "the development server generates the public search index instead of receiving the SPA HTML fallback"
 );
 
 const FOOTER_RENDER_PATHS = [

@@ -177,6 +177,9 @@ const VisaFreeCountriesRouteView = React.lazy(() => import("./routes/VisaFreeCou
 const GlobalSiteSearch = React.lazy(() =>
   import("./components/GlobalSiteSearch").then((module) => ({ default: module.GlobalSiteSearch }))
 );
+const TopBarSiteSearch = React.lazy(() =>
+  import("./components/TopBarSiteSearch").then((module) => ({ default: module.TopBarSiteSearch }))
+);
 
 const UmrahLandingPage = React.lazy(() =>
   import("./components/UmrahLandingPage").then((m) => ({ default: m.UmrahLandingPage }))
@@ -1012,6 +1015,64 @@ const readSavedSubscriptionInterests = (): SubscriptionInterest[] => {
   }
 };
 
+type TopBarSearchTriggerProps = {
+  isBn: boolean;
+  value: string;
+  dialogOpen: boolean;
+  inputRef: React.RefObject<HTMLInputElement | null>;
+  onChangeValue: (value: string) => void;
+  onActivate: () => void;
+  onOpenSearch: (query: string) => void;
+};
+
+function TopBarSearchTrigger({
+  isBn,
+  value,
+  dialogOpen,
+  inputRef,
+  onChangeValue,
+  onActivate,
+  onOpenSearch,
+}: TopBarSearchTriggerProps) {
+  return (
+    <form
+      role="search"
+      aria-label={isBn ? "URAL সাইটে খুঁজুন" : "Search this site"}
+      onSubmit={(event) => {
+        event.preventDefault();
+        onOpenSearch(value.trim());
+      }}
+      className="mx-auto flex h-9 w-full max-w-[360px] items-center gap-2 rounded-lg border border-white/20 bg-white/[0.08] px-3 text-white shadow-sm transition focus-within:border-[#F6B73C] focus-within:bg-white/[0.11] focus-within:ring-2 focus-within:ring-[#F6B73C]/40"
+    >
+      <Search size={15} aria-hidden="true" className="shrink-0 text-white/70" />
+      <input
+        ref={inputRef}
+        id="top-bar-site-search"
+        type="search"
+        value={value}
+        onFocus={onActivate}
+        onChange={(event) => {
+          onChangeValue(event.currentTarget.value);
+          onActivate();
+        }}
+        aria-label={isBn ? "সার্চের শব্দ লিখুন" : "Search destinations, flights, visas, guides"}
+        placeholder={isBn ? "গন্তব্য, ফ্লাইট, ভিসা বা গাইড খুঁজুন" : "Search destinations, flights, visas, guides..."}
+        autoComplete="off"
+        className="min-w-0 flex-1 select-text bg-transparent py-1 text-[13px] font-medium text-white outline-none placeholder:text-white/60"
+      />
+      <button
+        type="submit"
+        aria-haspopup="dialog"
+        aria-expanded={dialogOpen}
+        aria-label={isBn ? "সার্চ করুন" : "Search"}
+        className="inline-flex size-6 shrink-0 items-center justify-center rounded-md text-white/85 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+      >
+        <Search size={14} aria-hidden="true" />
+      </button>
+    </form>
+  );
+}
+
 export default function App() {
   // Simulated Browser Routing State
   const [currentPath, setCurrentPath] = useState<string>(() => {
@@ -1047,6 +1108,7 @@ export default function App() {
   }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [siteSearchOpen, setSiteSearchOpen] = useState(false);
+  const [topBarSearchEnhanced, setTopBarSearchEnhanced] = useState(false);
   const [topBarSearchQuery, setTopBarSearchQuery] = useState("");
   const [siteSearchInitialQuery, setSiteSearchInitialQuery] = useState("");
   const siteSearchTriggerRef = useRef<HTMLInputElement>(null);
@@ -2651,43 +2713,48 @@ export default function App() {
       {/* 🟦 STICKY HEADER WRAPPER (Top Strip + Main Navbar) */}
       <div id="sticky-site-header" className="sticky top-0 z-50 w-full shadow-lg">
         
-        {/* 🟦 TOP STRIP (Height: 36px, Background: #0B1426) */}
-        <div className="w-full bg-brand-navy h-9 flex items-center select-none">
-          <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between text-white/55 text-xs">
-            <span className="truncate font-sans font-medium">{t.topStripTagline}</span>
-            <div className="flex items-center gap-2 sm:gap-3 shrink-0 font-sans text-[11px] font-medium">
-              <form
-                role="search"
-                aria-label={isBn ? "URAL সাইটে খুঁজুন" : "Search this site"}
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  openSiteSearch(topBarSearchQuery);
-                }}
-                className="flex h-7 w-[130px] items-center gap-1 rounded-md border border-white/20 bg-white/[0.07] px-2 text-white/80 transition focus-within:border-[#F6B73C] focus-within:ring-2 focus-within:ring-[#F6B73C]/50 sm:h-8 sm:w-[180px] md:w-[210px]"
-              >
-                <input
-                  ref={siteSearchTriggerRef}
-                  id="top-bar-site-search"
-                  type="search"
+        {/* Top utility strip: centered site search, with brand and account utilities balanced around it. */}
+        <div className="flex min-h-[68px] w-full items-center bg-brand-navy py-1 select-none md:min-h-12 md:py-0">
+          <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-y-1 px-4 text-white/55 sm:px-6 md:grid-cols-[minmax(0,1fr)_minmax(260px,360px)_minmax(0,1fr)] md:gap-y-0">
+            <span className="hidden truncate font-sans text-xs font-medium md:col-start-1 md:row-start-1 md:block">
+              {t.topStripTagline}
+            </span>
+            <div className="md:col-start-2 md:row-start-1">
+              {topBarSearchEnhanced ? (
+                <React.Suspense fallback={
+                  <TopBarSearchTrigger
+                    isBn={isBn}
+                    value={topBarSearchQuery}
+                    dialogOpen={siteSearchOpen}
+                    inputRef={siteSearchTriggerRef}
+                    onChangeValue={setTopBarSearchQuery}
+                    onActivate={() => setTopBarSearchEnhanced(true)}
+                    onOpenSearch={openSiteSearch}
+                  />
+                }>
+                  <TopBarSiteSearch
+                    isBn={isBn}
+                    initialQuery={topBarSearchQuery}
+                    navigateTo={navigateTo}
+                    onOpenSearch={openSiteSearch}
+                    inputRef={siteSearchTriggerRef}
+                  />
+                </React.Suspense>
+              ) : (
+                <TopBarSearchTrigger
+                  isBn={isBn}
                   value={topBarSearchQuery}
-                  onChange={(event) => setTopBarSearchQuery(event.currentTarget.value)}
-                  aria-label={isBn ? "সার্চের শব্দ লিখুন" : "Enter a site-search query"}
-                  placeholder={isBn ? "এই সাইটে খুঁজুন" : "Search this site"}
-                  autoComplete="off"
-                  className="min-w-0 flex-1 select-text bg-transparent text-[11px] text-white outline-none placeholder:text-white/60"
+                  dialogOpen={siteSearchOpen}
+                  inputRef={siteSearchTriggerRef}
+                  onChangeValue={setTopBarSearchQuery}
+                  onActivate={() => setTopBarSearchEnhanced(true)}
+                  onOpenSearch={openSiteSearch}
                 />
-                <button
-                  type="submit"
-                  aria-haspopup="dialog"
-                  aria-expanded={siteSearchOpen}
-                  aria-label={isBn ? "সার্চ করুন" : "Search"}
-                  className="inline-flex size-5 shrink-0 items-center justify-center rounded text-white/80 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
-                >
-                  <Search size={13} aria-hidden="true" />
-                </button>
-              </form>
+              )}
+            </div>
+            <div className="flex items-center justify-end gap-2 font-sans text-[11px] font-medium sm:gap-3 md:col-start-3 md:row-start-1 md:justify-self-end">
               <TopBarWhatsApp lang={lang} />
-              <span className="w-px h-3 bg-white/20"></span>
+              <span aria-hidden="true" className="h-3 w-px bg-white/20"></span>
               <LanguageSwitcher
                 lang={lang}
                 onToggle={handleLangToggle}

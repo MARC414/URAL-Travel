@@ -138,6 +138,7 @@ import {
 const ROOT_DIR = process.cwd();
 const PUBLIC_DIR = path.join(ROOT_DIR, "public");
 const DIST_DIR = path.join(ROOT_DIR, "dist");
+const SEARCH_INDEX_ONLY = process.argv.includes("--search-index-only");
 const OPTIMIZED_SOCIAL_IMAGES_DIR = path.join(ROOT_DIR, "src", "assets", "optimized-social");
 
 const BLOG_IMAGE_MAP: Record<string, string> = {
@@ -4758,17 +4759,18 @@ function generateSiteSearchIndex(enRoutes: PrerenderRoute[], bnRoutes: Prerender
     };
   });
 
-  fs.mkdirSync(DIST_DIR, { recursive: true });
+  const outputDir = SEARCH_INDEX_ONLY ? PUBLIC_DIR : DIST_DIR;
+  fs.mkdirSync(outputDir, { recursive: true });
   fs.writeFileSync(
-    path.join(DIST_DIR, "site-search-index.json"),
+    path.join(outputDir, "site-search-index.json"),
     JSON.stringify({ version: 1, entries }),
     "utf8"
   );
-  console.log(`[Site search] Generated a bilingual index for ${entries.length} existing pages.`);
+  console.log(`[Site search] Generated a bilingual index for ${entries.length} existing pages in ${SEARCH_INDEX_ONLY ? "public/" : "dist/"}.`);
 }
 
 async function main() {
-  copyStaticSeoImages();
+  if (!SEARCH_INDEX_ONLY) copyStaticSeoImages();
   const enRoutes = buildAllRoutes();
   for (const route of enRoutes) {
     route.locale = "en";
@@ -4800,6 +4802,7 @@ async function main() {
   applySharedSeoCopy(enRoutes, "en");
   applySharedSeoCopy(bnRoutes, "bn");
   generateSiteSearchIndex(enRoutes, bnRoutes);
+  if (SEARCH_INDEX_ONLY) return;
   warnIfContentDateStale();
   generateSitemaps(routes);
   // Notify IndexNow (Bing, Yandex, Seznam, Naver) about all canonical URLs so
