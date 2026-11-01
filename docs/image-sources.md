@@ -23,13 +23,18 @@ The Commons credits and license are also linked in each hero's visible photo cre
 
 ## Video assets
 
-The Hajj/Umrah reel in `docs/03-social/video/` is built entirely from AI-generated stills generated for URAL Travel. There are no third-party photo or music licences to clear — the ambient bed is synthesised. Stills used, in shot order, are listed in that folder's README.
+The Hajj/Umrah reel in `docs/03-social/video/` is built entirely from AI-generated illustrations made for URAL Travel. There are no third-party photo or music licences to clear — the ambient bed is synthesised.
+
+The artwork is deliberately non-photographic: flat gouache and screen-print shapes with no identifiable individuals, so no frame can be mistaken for documentary photography of real pilgrims. Shot list and timings are in that folder's README.
 
 | Asset | Placement | Source and credit | License |
 | --- | --- | --- | --- |
-| `img1_kaaba` | Reel 0.0–5.7s | AI-generated for URAL Travel; Kaaba at blue hour | No third-party attribution required. |
-| `img2_dua` | Reel 4.9–12.0s | AI-generated for URAL Travel; hands raised in dua | No third-party attribution required. |
-| `img5_plan` | Reel 11.2–16.2s | AI-generated for URAL Travel; passport and taka planning desk | No third-party attribution required. |
-| `img4_tawaf` | Reel 15.4–18.9s | AI-generated for URAL Travel; overhead tawaf | No third-party attribution required. |
-| `img3_masjid` | Reel 18.1–22.5s | AI-generated for URAL Travel; Masjid an-Nabawi at golden hour | No third-party attribution required. |
-| `img6_dawn` | Reel 21.7–28.9s | AI-generated for URAL Travel; Makkah skyline at dawn | No third-party attribution required. |
+| `art_kaaba` | Reel 0.0–7.1s | AI illustration for URAL Travel; Haram courtyard at night | No third-party attribution required. |
+| `art_lantern` | Reel 6.3–14.6s | AI illustration for URAL Travel; lantern, prayer beads and dates | No third-party attribution required. |
+| `art_mina` | Reel 13.8–21.8s | AI illustration for URAL Travel; Mina tent rows at sunset | No third-party attribution required. |
+| `art_ihram` | Reel 21.0–28.4s | AI illustration for URAL Travel; folded ihram cloth | No third-party attribution required. |
+| `art_documents` | Reel 27.6–32.9s | AI illustration for URAL Travel; passport, forms and visa stamp | No third-party attribution required. |
+| `art_budget` | Reel 32.1–37.5s | AI illustration for URAL Travel; calculator, notes and budget bars | No third-party attribution required. |
+| `art_care` | Reel 36.7–43.6s | AI illustration for URAL Travel; prayer mat and shawl | No third-party attribution required. |
+| `art_crescent` | Reel 42.8–50.8s | AI illustration for URAL Travel; crescent over hills and minaret | No third-party attribution required. |
+| `art_dawn` | Reel 50.0–60.0s | AI illustration for URAL Travel; Makkah skyline at dawn | No third-party attribution required. |
