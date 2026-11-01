@@ -474,6 +474,15 @@ const bnHotelSearchWidgetHtml = renderToStaticMarkup(
     lang: "bn",
   })
 );
+const hotelInlineDispatchHtml = renderToStaticMarkup(
+  React.createElement(TravelpayoutsCustomWidget as React.ComponentType<any>, {
+    initialTab: "hotels",
+    hotelsOnly: true,
+    showInlineResults: true,
+    affiliatePlacement: "home_hotel_search",
+    lang: "en",
+  })
+);
 const hotelPartnerLinkOrder = [
   hotelSearchWidgetHtml.lastIndexOf("Search Klook hotel collection"),
   hotelSearchWidgetHtml.indexOf("Search KKday hotel collection"),
@@ -492,6 +501,12 @@ check(
     hotelSearchWidgetHtml.includes("More hotel and trip options:") &&
     hotelPartnerLinkOrder.every((position, index) => position >= 0 && (index === 0 || position > hotelPartnerLinkOrder[index - 1])),
   "hotel widget omits repeated handoff copy and presents partner links in a clear booking-to-trip order"
+);
+check(
+  !hotelInlineDispatchHtml.includes("These links open general partner hotel collections") &&
+    !hotelInlineDispatchHtml.includes("not a quote for your selected dates or guests") &&
+    !hotelInlineDispatchHtml.includes("this is not a traveller discount"),
+  "hotel inline dispatch also omits the removed date-handoff and commission message"
 );
 check(
   (hotelsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 6 &&

@@ -1402,13 +1402,11 @@ export function TravelpayoutsCustomWidget({
                   ? `Check hotel listings in ${hotelCity} on a partner site`
                   : `Compare Live Airlines for ${fromCity} → ${toCity} (${currency})`}
               </h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                {searchTab === "hotels"
-                  ? `These links open general partner hotel collections, not a quote for your selected dates or guests. Re-enter ${hotelCity}, ${date} to ${checkOutDate} and ${travelers} ${
-                      travelers === 1 ? "guest" : "guests"
-                    } on the partner site, then compare the current checkout total, inclusions and cancellation terms. URAL may earn a commission on qualifying bookings; this is not a traveller discount.`
-                  : `Open live global flight search results for ${fromCity} to ${toCity} on ${date} in ${currency} via URAL Branded White-Label (#22462) or Aviasales Global (#${MARKER_ID}).`}
-              </p>
+              {searchTab === "flights" && (
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {`Open live global flight search results for ${fromCity} to ${toCity} on ${date} in ${currency} via URAL Branded White-Label (#22462) or Aviasales Global (#${MARKER_ID}).`}
+                </p>
+              )}
               <div className="flex flex-wrap items-center gap-2.5 pt-1">
                 {searchTab === "hotels" ? (
                   <>
