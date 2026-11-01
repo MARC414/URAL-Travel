@@ -122,6 +122,8 @@ import {
   getVisibleBlogHowTos,
 } from "./utils/blogStructuredData";
 
+const BRAND_TAGLINE = "A Travel Intelligence Ecosystem";
+
 const ENGLISH_FEATURED_GROWTH_TOPICS = [
   {
     id: "trend-umrah-hajj",
@@ -1022,7 +1024,7 @@ type TopBarSearchTriggerProps = {
   inputRef: React.RefObject<HTMLInputElement | null>;
   onChangeValue: (value: string) => void;
   onActivate: () => void;
-  onOpenSearch: (query: string) => void;
+  onSubmitQuery: (query: string) => Promise<boolean>;
 };
 
 function TopBarSearchTrigger({
@@ -1032,15 +1034,24 @@ function TopBarSearchTrigger({
   inputRef,
   onChangeValue,
   onActivate,
-  onOpenSearch,
+  onSubmitQuery,
 }: TopBarSearchTriggerProps) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   return (
     <form
       role="search"
       aria-label={isBn ? "URAL সাইটে খুঁজুন" : "Search this site"}
-      onSubmit={(event) => {
+      aria-busy={isSubmitting}
+      onSubmit={async (event) => {
         event.preventDefault();
-        onOpenSearch(value.trim());
+        if (isSubmitting) return;
+        setIsSubmitting(true);
+        try {
+          await onSubmitQuery(value.trim());
+        } finally {
+          setIsSubmitting(false);
+        }
       }}
       className="mx-auto flex h-9 w-full max-w-[360px] items-center gap-2 rounded-lg border border-white/20 bg-white/[0.08] px-3 text-white shadow-sm transition focus-within:border-[#F6B73C] focus-within:bg-white/[0.11] focus-within:ring-2 focus-within:ring-[#F6B73C]/40"
     >
@@ -1064,10 +1075,11 @@ function TopBarSearchTrigger({
         type="submit"
         aria-haspopup="dialog"
         aria-expanded={dialogOpen}
-        aria-label={isBn ? "সার্চ করুন" : "Search"}
-        className="inline-flex size-6 shrink-0 items-center justify-center rounded-md text-white/85 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+        aria-label={isSubmitting ? (isBn ? "খোঁজা হচ্ছে" : "Searching") : (isBn ? "সার্চ করুন" : "Search")}
+        disabled={isSubmitting}
+        className="inline-flex size-6 shrink-0 items-center justify-center rounded-md text-white/85 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] disabled:opacity-70"
       >
-        <Search size={14} aria-hidden="true" />
+        {isSubmitting ? <span aria-hidden="true" className="size-3 animate-spin rounded-full border-2 border-current border-t-transparent" /> : <Search size={14} aria-hidden="true" />}
       </button>
     </form>
   );
@@ -2612,6 +2624,25 @@ export default function App() {
     pushPath(hasBengaliTarget(normalized) ? toLocalePath(normalized, "bn") : normalized);
   };
 
+  const submitTopBarSearch = async (query: string): Promise<boolean> => {
+    const trimmedQuery = query.trim();
+    if (trimmedQuery.length >= 2) {
+      try {
+        const { findSiteSearchPath } = await import("./utils/siteSearch");
+        const resultPath = await findSiteSearchPath(trimmedQuery, isBn ? "bn" : "en");
+        if (resultPath) {
+          setTopBarSearchQuery("");
+          navigateTo(resultPath);
+          return true;
+        }
+      } catch {
+        // Keep the full search's own visible fallback if index loading fails.
+      }
+    }
+    openSiteSearch(trimmedQuery);
+    return false;
+  };
+
   const getLocalizedRouteHref = (path: string) => {
     const normalized = normalizeRoutePath(path);
     return hasBengaliTarget(normalized) ? toLocalePath(normalized, "bn") : normalized;
@@ -2713,13 +2744,13 @@ export default function App() {
       {/* 🟦 STICKY HEADER WRAPPER (Top Strip + Main Navbar) */}
       <div id="sticky-site-header" className="sticky top-0 z-50 w-full shadow-lg">
         
-        {/* Top utility strip: centered site search, with brand and account utilities balanced around it. */}
+        {/* Utility strip: true viewport-centered search with balanced outer utilities. */}
         <div className="flex min-h-[68px] w-full items-center bg-brand-navy py-1 select-none md:min-h-12 md:py-0">
-          <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-y-1 px-4 text-white/55 sm:px-6 md:grid-cols-[minmax(0,1fr)_minmax(260px,360px)_minmax(0,1fr)] md:gap-y-0">
-            <span className="hidden truncate font-sans text-xs font-medium md:col-start-1 md:row-start-1 md:block">
+          <div className="relative mx-auto flex w-full max-w-[1200px] flex-col gap-y-1 px-4 py-1 text-white/55 sm:px-6 md:h-12 md:flex-row md:items-center md:justify-between md:gap-y-0 md:py-0">
+            <span className="hidden truncate font-sans text-xs font-medium md:block">
               {t.topStripTagline}
             </span>
-            <div className="md:col-start-2 md:row-start-1">
+            <div className="order-first flex w-full justify-center md:absolute md:left-1/2 md:top-1/2 md:order-none md:w-auto md:-translate-x-1/2 md:-translate-y-1/2">
               {topBarSearchEnhanced ? (
                 <React.Suspense fallback={
                   <TopBarSearchTrigger
@@ -2729,7 +2760,7 @@ export default function App() {
                     inputRef={siteSearchTriggerRef}
                     onChangeValue={setTopBarSearchQuery}
                     onActivate={() => setTopBarSearchEnhanced(true)}
-                    onOpenSearch={openSiteSearch}
+                    onSubmitQuery={submitTopBarSearch}
                   />
                 }>
                   <TopBarSiteSearch
@@ -2737,6 +2768,7 @@ export default function App() {
                     initialQuery={topBarSearchQuery}
                     navigateTo={navigateTo}
                     onOpenSearch={openSiteSearch}
+                    onSubmitQuery={submitTopBarSearch}
                     inputRef={siteSearchTriggerRef}
                   />
                 </React.Suspense>
@@ -2748,11 +2780,11 @@ export default function App() {
                   inputRef={siteSearchTriggerRef}
                   onChangeValue={setTopBarSearchQuery}
                   onActivate={() => setTopBarSearchEnhanced(true)}
-                  onOpenSearch={openSiteSearch}
+                  onSubmitQuery={submitTopBarSearch}
                 />
               )}
             </div>
-            <div className="flex items-center justify-end gap-2 font-sans text-[11px] font-medium sm:gap-3 md:col-start-3 md:row-start-1 md:justify-self-end">
+            <div className="flex items-center justify-end gap-2 font-sans text-[11px] font-medium sm:gap-3 md:ml-auto">
               <TopBarWhatsApp lang={lang} />
               <span aria-hidden="true" className="h-3 w-px bg-white/20"></span>
               <LanguageSwitcher
@@ -2784,9 +2816,7 @@ export default function App() {
                 className="h-7 sm:h-8 w-auto transition-opacity duration-200 group-hover:opacity-95"
               />
               <span className="text-[10px] sm:text-[10px] font-medium tracking-wide text-slate-300/90 group-hover:text-[#F6B73C] transition-colors leading-none mt-1 whitespace-nowrap">
-                {isBn
-                  ? "ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়"
-                  : "Travel Intelligence System · Beyond a Typical Agency"}
+                {BRAND_TAGLINE}
               </span>
             </a>
 
@@ -3424,9 +3454,7 @@ export default function App() {
                       className="h-6 w-auto"
                     />
                     <span className="text-[10px] text-slate-300 block">
-                      {isBn
-                        ? "ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়"
-                        : "Travel Intelligence System · Beyond a Typical Agency"}
+                      {BRAND_TAGLINE}
                     </span>
                   </div>
                   <button
@@ -4404,7 +4432,7 @@ export default function App() {
             {/* 🟦 SECTION 4: HOTEL SEARCH ENTRY */}
             <div id="global-hotel-search" className="ural-panel relative overflow-hidden bg-white text-brand-navy p-6 sm:p-8 shadow-sm border border-border-subtle">
               
-              <div className="max-w-3xl mx-auto text-center space-y-2.5 mb-6">
+              <div className="max-w-3xl mx-auto text-center space-y-2.5 mb-5">
                 <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-brand-gold-ink uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/25 px-3 py-1 rounded-full">
                   <Building size={12} className="text-[#F6B73C]" />
                   <span>{isBn ? "হোটেল সার্চ ও বুকিং যাচাই" : "Hotel Search & Booking Checks"}</span>
@@ -4414,11 +4442,6 @@ export default function App() {
                     ? "হোটেলের এলাকা ও বুকিং শর্ত তুলনা করুন; পার্টনার সাইটে প্রাপ্যতা দেখুন"
                     : "Compare hotel areas and booking terms, then check availability with a partner"}
                 </h2>
-                <p className="text-xs text-slate-600 leading-relaxed max-w-2xl mx-auto">
-                  {isBn
-                    ? "শহর বেছে পার্টনার তালিকায় সার্চ করুন। লিংকে তারিখ বা অতিথি যায় না—আবার দিয়ে চূড়ান্ত দাম ও বুকিংয়ের শর্ত যাচাই করুন।"
-                    : "Choose a city, then search a partner collection. Dates and guests are not carried over; re-enter them and review the final total and booking terms."}
-                </p>
               </div>
 
               {/* DEDICATED GLOBAL HOTEL WIDGET (Single clean bar, no flight tab duplication) */}
@@ -4450,8 +4473,8 @@ export default function App() {
               </div>
 
               {/* Quick links to pre-filled hotel lookups */}
-              <div className="text-center text-xs font-mono text-slate-600 mt-6 flex flex-wrap justify-center items-center gap-2">
-                <span>{isBn ? "জনপ্রিয় ফ্যামিলি হোটেল জোন:" : "Top family-rated lodging selectors:"}</span>
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-center text-xs font-mono text-slate-600">
+                <span>{isBn ? "জনপ্রিয় হোটেল এলাকা:" : "Popular hotel areas:"}</span>
                 <button onClick={() => navigateTo("/hotels/kathmandu-hotels")} className="text-brand-gold-ink hover:text-brand-navy hover:underline">Thamel, Kathmandu 🇳🇵</button>
                 <span>•</span>
                 <button onClick={() => navigateTo("/hotels/bangkok-hotels")} className="text-brand-gold-ink hover:text-brand-navy hover:underline">Pratunam, Bangkok 🇹🇭</button>
@@ -5308,9 +5331,7 @@ export default function App() {
                   />
                 </a>
                 <p className="text-[11px] font-semibold text-[#F6B73C] tracking-wide">
-                  {isBn
-                    ? "ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়"
-                    : "Travel Intelligence System · Beyond a Typical Agency"}
+                  {BRAND_TAGLINE}
                 </p>
               </div>
 

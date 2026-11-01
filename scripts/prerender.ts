@@ -2187,7 +2187,7 @@ function buildAllRoutes(): PrerenderRoute[] {
 
   // 8b. KKday Hotel & Stay Deals (/kkday-hotels). Klook is the primary hotel
   // search on /hotels/:city; KKday stays live on this dedicated page.
-  // Affiliate URL mirrors AFFILIATE_LINKS.kkday in src/components/AffiliatePartners.tsx.
+  // Affiliate URL mirrors AFFILIATE_LINKS.kkdayHotels in src/components/AffiliatePartners.tsx.
   routes.push({
     routePath: "/kkday-hotels",
     canonicalUrl: `${BASE_URL}/kkday-hotels`,
@@ -2203,7 +2203,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       <article>
         <h1>KKday Hotel &amp; Stay Deals</h1>
         <p>Compare hotels and stays on KKday before you book. Check the final price, cancellation terms, and voucher details on KKday before you pay. This is an affiliate link: URAL may earn a commission at no extra cost to you.</p>
-        <p><a href="https://kkday.tpo.li/3Ecyxris" rel="noopener noreferrer sponsored">Search hotels on KKday</a></p>
+        <p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.kkdayHotels))}" target="_blank" rel="noopener noreferrer sponsored">Search hotels on KKday</a></p>
         <h2>Before you book</h2>
         <ul>
           <li>Make sure the guest name matches your passport exactly.</li>
@@ -2988,9 +2988,9 @@ function buildBengaliBody(
     `<p>${escapeHtml(description)}</p>`,
   ];
   if (englishPath === "/kkday-hotels") {
-    // Same affiliate CTA as the English page (AFFILIATE_LINKS.kkday, see AffiliatePartners.tsx).
+    // Same direct hotel affiliate CTA as the English page (AFFILIATE_LINKS.kkdayHotels).
     parts.push(
-      `<p><a href="https://kkday.tpo.li/3Ecyxris" rel="noopener noreferrer sponsored">KKday-তে হোটেল খুঁজুন</a></p>`,
+      `<p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.kkdayHotels))}" target="_blank" rel="noopener noreferrer sponsored">KKday-তে হোটেল খুঁজুন</a></p>`,
       `<p>এটি একটি অ্যাফিলিয়েট লিংক; বুকিংয়ে আমরা কমিশন পেতে পারি, আপনার খরচ বাড়ে না।</p>`,
       `<h2>বুকিংয়ের আগে যা দেখে নিন</h2>`,
       `<ul>

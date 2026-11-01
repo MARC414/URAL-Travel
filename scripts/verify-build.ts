@@ -56,6 +56,7 @@ import {
 } from "../src/components/KlookHotelOffers";
 import { KlookHotelSpotlight } from "../src/components/KlookHotelSpotlight";
 import { KKdayPromoBanner } from "../src/components/KKdayPromoBanner";
+import { KkdayHotelsPage } from "../src/components/KkdayHotelsPage";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
   DESTINATION_PARTNER_COPY,
@@ -186,12 +187,40 @@ const escapedPartnerUrl = (partner: keyof typeof AFFILIATE_LINKS) =>
 check(
   !hotelModeWidgetHtml.includes("travelpayouts-wl.html") && !hotelModeWidgetBnHtml.includes("travelpayouts-wl.html") &&
     hotelModeWidgetHtml.includes(escapedPartnerUrl("klookHotels")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("klookHotels")) &&
-    hotelModeWidgetHtml.includes("/kkday-hotels") && hotelModeWidgetBnHtml.includes("/kkday-hotels") &&
+    hotelModeWidgetHtml.includes(escapedPartnerUrl("kkdayHotels")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("kkdayHotels")) &&
     hotelModeWidgetHtml.includes(escapedPartnerUrl("goCity")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("goCity")) &&
     hotelModeWidgetHtml.includes(escapedPartnerUrl("radicalStorage")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("radicalStorage")) &&
     hotelModeWidgetHtml.includes("Klook partner search") && hotelModeWidgetBnHtml.includes("Klook পার্টনার সার্চ") &&
     !hotelModeWidgetHtml.includes("Verified Klook Stays") && !hotelModeWidgetBnHtml.includes("Verified Klook Stays"),
   "EN/BN hotel mode hides the flight-only portal, keeps Klook and KKday hotel, Go City activity and Radical Storage links, and avoids an unsupported verified-stays claim"
+);
+const kkdayHotelsPageEnHtml = renderToStaticMarkup(
+  React.createElement(KkdayHotelsPage, { isBn: false, onNavigate: () => undefined })
+);
+const kkdayHotelsPageBnHtml = renderToStaticMarkup(
+  React.createElement(KkdayHotelsPage, { isBn: true, onNavigate: () => undefined })
+);
+check(
+  AFFILIATE_LINKS.kkdayHotels === "https://kkday.tpo.li/fyAFi2IO" &&
+    AFFILIATE_LINKS.kkday === "https://kkday.tpo.li/3Ecyxris" &&
+    kkdayHotelsPageEnHtml.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    kkdayHotelsPageBnHtml.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    hotelModeWidgetHtml.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    hotelModeWidgetBnHtml.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    hotelModeWidgetHtml.includes(`href="${AFFILIATE_LINKS.klookHotels}"`) &&
+    hotelModeWidgetBnHtml.includes(`href="${AFFILIATE_LINKS.klookHotels}"`) &&
+    (read(path.join(ROOT_DIR, "scripts", "prerender.ts")) ?? "").includes("resolvePartnerUrl(AFFILIATE_LINKS.kkdayHotels)") &&
+    !(read(path.join(ROOT_DIR, "scripts", "prerender.ts")) ?? "").includes("href=\"https://kkday.tpo.li/3Ecyxris\""),
+  "KKday hotel placements use the supplied direct affiliate URL while keeping the generic KKday and Klook hotel links distinct"
+);
+const kkdayHotelPrerenderEn = read(path.join(DIST_DIR, "kkday-hotels.html")) ?? "";
+const kkdayHotelPrerenderBn = read(path.join(DIST_DIR, "bn", "kkday-hotels.html")) ?? "";
+check(
+  kkdayHotelPrerenderEn.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    kkdayHotelPrerenderBn.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    kkdayHotelPrerenderEn.includes('target="_blank" rel="noopener noreferrer sponsored"') &&
+    kkdayHotelPrerenderBn.includes('target="_blank" rel="noopener noreferrer sponsored"'),
+  "English and Bengali prerendered KKday hotel pages use the direct affiliate URL with safe new-tab attributes"
 );
 check(
   flightModeWidgetHtml.includes('href="/travelpayouts-wl.html?origin=DAC&amp;destination=BKK&amp;flightSearch=') &&
@@ -457,6 +486,58 @@ check(
     !destinationWidgetHtml.includes("Biman Bangladesh Airlines") &&
     !destinationWidgetHtml.includes("Direct Flight"),
   "route-prefilled Bengali widget exposes white-label and Aviasales handoffs without fabricated inline fares"
+);
+const hotelSearchWidgetHtml = renderToStaticMarkup(
+  React.createElement(TravelpayoutsCustomWidget as React.ComponentType<any>, {
+    initialTab: "hotels",
+    hotelsOnly: true,
+    affiliatePlacement: "home_hotel_search",
+    lang: "en",
+  })
+);
+const bnHotelSearchWidgetHtml = renderToStaticMarkup(
+  React.createElement(TravelpayoutsCustomWidget as React.ComponentType<any>, {
+    initialTab: "hotels",
+    hotelsOnly: true,
+    affiliatePlacement: "home_hotel_search",
+    lang: "bn",
+  })
+);
+const hotelInlineDispatchHtml = renderToStaticMarkup(
+  React.createElement(TravelpayoutsCustomWidget as React.ComponentType<any>, {
+    initialTab: "hotels",
+    hotelsOnly: true,
+    showInlineResults: true,
+    affiliatePlacement: "home_hotel_search",
+    lang: "en",
+  })
+);
+const hotelPartnerLinkOrder = [
+  hotelSearchWidgetHtml.lastIndexOf("Search Klook hotel collection"),
+  hotelSearchWidgetHtml.indexOf("Search KKday hotel collection"),
+  hotelSearchWidgetHtml.indexOf("Go City All-Inclusive"),
+  hotelSearchWidgetHtml.indexOf("Luggage Storage (Radical)"),
+];
+check(
+  !hotelSearchWidgetHtml.includes("Hotel links open general partner collections") &&
+    !hotelSearchWidgetHtml.includes("not live quotes for your selected dates") &&
+    !hotelSearchWidgetHtml.includes("Re-enter destination, dates") &&
+    !hotelSearchWidgetHtml.includes("this is not a traveller discount") &&
+    !hotelSearchWidgetHtml.includes("Re-enter destination, dates &amp; guests on Klook") &&
+    !bnHotelSearchWidgetHtml.includes("পার্টনার লিংক সাধারণ হোটেল তালিকা খোলে") &&
+    !bnHotelSearchWidgetHtml.includes("যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; এটি ভ্রমণকারীর জন্য ছাড় নয়") &&
+    !bnHotelSearchWidgetHtml.includes("গন্তব্য, তারিখ ও অতিথির সংখ্যা Klook-এ আবার দিন") &&
+    hotelSearchWidgetHtml.includes("More hotel and trip options:") &&
+    hotelPartnerLinkOrder.every((position, index) => position >= 0 && (index === 0 || position > hotelPartnerLinkOrder[index - 1])),
+  "hotel widget omits repeated handoff copy and presents partner links in a clear booking-to-trip order"
+);
+check(
+  !hotelInlineDispatchHtml.includes("These links open general partner hotel collections") &&
+    !hotelInlineDispatchHtml.includes("not a quote for your selected dates or guests") &&
+    !hotelInlineDispatchHtml.includes("this is not a traveller discount") &&
+    hotelInlineDispatchHtml.includes(`href="${AFFILIATE_LINKS.kkdayHotels}"`) &&
+    hotelInlineDispatchHtml.includes(`href="${AFFILIATE_LINKS.klookHotels}"`),
+  "hotel inline dispatch also omits the removed date-handoff and commission message"
 );
 check(
   (hotelsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 6 &&
@@ -4832,11 +4913,30 @@ const bnAppShellHtml = renderAppAtPath("/bn/");
 const appSource = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
 const topBarSearchSource = read(path.join(ROOT_DIR, "src", "components", "TopBarSiteSearch.tsx")) ?? "";
 const globalSearchSource = read(path.join(ROOT_DIR, "src", "components", "GlobalSiteSearch.tsx")) ?? "";
+const homeHotelSectionStart = appSource.indexOf("{/* 🟦 SECTION 4: HOTEL SEARCH ENTRY */}");
+const homeHotelSectionEnd = appSource.indexOf("{/* 🟦 SECTION 4.25: UNIFIED TABBED TRAVEL ESSENTIALS HUB */}");
+const homeHotelSectionSource = appSource.slice(homeHotelSectionStart, homeHotelSectionEnd);
+check(
+  homeHotelSectionStart >= 0 && homeHotelSectionEnd > homeHotelSectionStart &&
+    homeHotelSectionSource.indexOf("Hotel Search & Booking Checks") < homeHotelSectionSource.indexOf("<TravelpayoutsCustomWidget") &&
+    homeHotelSectionSource.indexOf("<TravelpayoutsCustomWidget") < homeHotelSectionSource.indexOf("Popular hotel areas:") &&
+    !homeHotelSectionSource.includes("Dates and guests are not carried over") &&
+    !homeHotelSectionSource.includes("তারিখ বা অতিথি যায় না"),
+  "home hotel section flows from heading to search widget to area links without repeated handoff instructions"
+);
+check(
+  appSource.includes('const BRAND_TAGLINE = "A Travel Intelligence Ecosystem";') &&
+    !appSource.includes("Travel Intelligence System · Beyond a Typical Agency") &&
+    !appSource.includes("ট্রাভেল ইন্টেলিজেন্স সিস্টেম · সাধারণ এজেন্সি নয়") &&
+    enAppShellHtml.includes("A Travel Intelligence Ecosystem") &&
+    bnAppShellHtml.includes("A Travel Intelligence Ecosystem"),
+  "the requested brand slogan replaces the previous tagline in both locales"
+);
 const topBarSearchEnHtml = renderToStaticMarkup(React.createElement(TopBarSiteSearch, {
-  isBn: false, initialQuery: "", navigateTo: () => {}, onOpenSearch: () => {}, inputRef: { current: null },
+  isBn: false, initialQuery: "", navigateTo: () => {}, onOpenSearch: () => {}, onSubmitQuery: async () => false, inputRef: { current: null },
 }));
 const topBarSearchBnHtml = renderToStaticMarkup(React.createElement(TopBarSiteSearch, {
-  isBn: true, initialQuery: "", navigateTo: () => {}, onOpenSearch: () => {}, inputRef: { current: null },
+  isBn: true, initialQuery: "", navigateTo: () => {}, onOpenSearch: () => {}, onSubmitQuery: async () => false, inputRef: { current: null },
 }));
 check(
   enAppShellHtml.includes('id="top-bar-site-search"') &&
@@ -4844,11 +4944,14 @@ check(
     topBarSearchEnHtml.includes('placeholder="Search destinations, flights, visas, guides..."') &&
     topBarSearchBnHtml.includes('placeholder="গন্তব্য, ফ্লাইট, ভিসা বা গাইড খুঁজুন"') &&
     appSource.includes("onOpenSearch={openSiteSearch}") &&
-    appSource.includes("md:grid-cols-[minmax(0,1fr)_minmax(260px,360px)_minmax(0,1fr)]") &&
+    appSource.includes("md:left-1/2") && appSource.includes("md:top-1/2") &&
+    appSource.includes("md:-translate-x-1/2") && appSource.includes("md:-translate-y-1/2") &&
     appSource.includes("min-h-[68px]") && appSource.includes("md:min-h-12") &&
+    appSource.includes("findSiteSearchPath") && appSource.includes("await onSubmitQuery(value.trim())") &&
     topBarSearchEnHtml.includes("max-w-[360px]") &&
     topBarSearchSource.includes("api.loadSiteSearchIndex()") &&
     topBarSearchSource.includes("searchApi.searchSite(preparedEntries, settledQuery") &&
+    topBarSearchSource.includes("await onSubmitQuery(query.trim())") &&
     topBarSearchSource.includes("selectResult(results[Math.min(activeIndex, results.length - 1)].path)") &&
     topBarSearchSource.includes('role="listbox"') && topBarSearchSource.includes('role="option"') &&
     globalSearchSource.includes("useState(initialQuery)"),

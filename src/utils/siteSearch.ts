@@ -223,6 +223,12 @@ export function searchSite(
     .slice(0, limit);
 }
 
+/** Resolve the top-ranked destination for a submitted query using the same shipped index. */
+export async function findSiteSearchPath(query: string, locale: "en" | "bn"): Promise<string | null> {
+  const entries = await loadSiteSearchIndex();
+  return searchSite(prepareSiteSearchIndex(entries), query, locale, 1)[0]?.path ?? null;
+}
+
 export function siteSearchKindLabel(kind: SiteSearchKind, locale: "en" | "bn"): string {
   const labels: Record<SiteSearchKind, { en: string; bn: string }> = {
     destination: { en: "Destination guide", bn: "গন্তব্য গাইড" },

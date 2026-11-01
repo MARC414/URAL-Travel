@@ -533,6 +533,7 @@ export function TravelpayoutsCustomWidget({
   // derive its airport destination from the hotel city field.
   const uralFlightWlDeepUrl = `/travelpayouts-wl.html?origin=${origCode}&destination=${destCode}&flightSearch=${searchCode}&currency=${currency}&standalone=1`;
   const klookHotelsPartnerUrl = resolvePartnerUrl(AFFILIATE_LINKS.klookHotels);
+  const kkdayHotelsPartnerUrl = resolvePartnerUrl(AFFILIATE_LINKS.kkdayHotels);
   const goCityPassUrl = resolvePartnerUrl(AFFILIATE_LINKS.goCity);
   const [swapRotated, setSwapRotated] = useState(false);
 
@@ -1069,20 +1070,15 @@ export function TravelpayoutsCustomWidget({
                   onClick={() => {
                     setActiveDropdown(null);
                   }}
-                  className="w-full h-[68px] bg-[#F6B73C] text-brand-navy hover:bg-[#f5ad24] active:scale-[0.98] rounded-xl border border-amber-400/90 shadow-[0_10px_22px_-5px_rgba(246,183,60,0.5)] transition-transform flex flex-col items-center justify-center gap-0.5 cursor-pointer px-3 text-center group"
+                  className="w-full h-[68px] bg-[#F6B73C] text-brand-navy hover:bg-[#f5ad24] active:scale-[0.98] rounded-xl border border-amber-400/90 shadow-[0_10px_22px_-5px_rgba(246,183,60,0.5)] transition-transform flex items-center justify-center cursor-pointer px-3 text-center group"
                 >
-                  <div className="flex items-center gap-1.5 font-black text-sm sm:text-[15px] tracking-tight">
+                  <span className="flex items-center gap-1.5 font-black text-sm sm:text-[15px] tracking-tight">
                     <Search size={16} className="shrink-0 stroke-[2.5]" />
                     <span>{isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}</span>
                     <ExternalLink
                       size={13}
                       className="shrink-0 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
                     />
-                  </div>
-                  <span className="max-w-full truncate text-[9px] font-mono font-bold text-brand-navy/80">
-                    {isBn
-                      ? "গন্তব্য, তারিখ ও অতিথির সংখ্যা Klook-এ আবার দিন"
-                      : "Re-enter destination, dates & guests on Klook"}
                   </span>
                 </a>
               </div>
@@ -1113,33 +1109,34 @@ export function TravelpayoutsCustomWidget({
             </div>
           )}
 
-          {/* Quiet Footer Row: Trust Microcopy + Demoted Revenue Partner Links */}
-          <div className="mt-4 pt-3.5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-[11px] text-slate-500">
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <span className="inline-flex items-center gap-1 font-semibold text-slate-700">
-                <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
-                {searchTab === "hotels"
-                  ? isBn
-                    ? "পার্টনার লিংক সাধারণ হোটেল তালিকা খোলে—নির্বাচিত তারিখের লাইভ কোট নয়। গন্তব্য, তারিখ ও অতিথি আবার দিন।"
-                    : "Hotel links open general partner collections—not live quotes for your selected dates. Re-enter destination, dates and guests."
-                  : isBn
+          {/* Keep flight handoff guidance here; the hotel tab is reserved for its search and partner links. */}
+          <div className="mt-4 border-t border-slate-100 pt-3.5 text-[11px] text-slate-500">
+            {searchTab === "flights" && (
+              <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="inline-flex items-center gap-1 font-semibold text-slate-700">
+                  <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
+                  {isBn
                     ? "ফ্লাইট লিংক পার্টনার সার্চে নিয়ে যায়; ভাড়া, প্রাপ্যতা ও শর্ত সেবাদাতার সাইটে যাচাই করুন।"
                     : "Flight links hand off to partner search; check fares, availability and terms on the provider’s site."}
-              </span>
-              <span className="block text-[10px] leading-4 text-slate-500">
-                {flightSearchOnly
-                  ? isBn
-                    ? "যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে—আপনার অতিরিক্ত খরচ ছাড়াই।"
-                    : "URAL may earn a commission on qualifying bookings, at no extra cost to you."
-                  : isBn
-                    ? "যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; এটি ভ্রমণকারীর জন্য ছাড় নয়।"
-                    : "URAL may earn a commission on qualifying bookings; this is not a traveller discount."}
-              </span>
-            </div>
+                </span>
+                <span className="text-[10px] leading-4 text-slate-500">
+                  {flightSearchOnly
+                    ? isBn
+                      ? "যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে—আপনার অতিরিক্ত খরচ ছাড়াই।"
+                      : "URAL may earn a commission on qualifying bookings, at no extra cost to you."
+                    : isBn
+                      ? "যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; এটি ভ্রমণকারীর জন্য ছাড় নয়।"
+                      : "URAL may earn a commission on qualifying bookings; this is not a traveller discount."}
+                </span>
+              </div>
+            )}
 
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               {!flightSearchOnly && (
-                <>
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <span className="mr-1 text-[10px] font-bold uppercase tracking-wide text-slate-500">
+                    {isBn ? "আরও হোটেল ও ভ্রমণ বিকল্প:" : "More hotel and trip options:"}
+                  </span>
                   <a
                     href={klookHotelsPartnerUrl}
                     data-affiliate-placement={affiliatePlacement}
@@ -1151,19 +1148,22 @@ export function TravelpayoutsCustomWidget({
                     <ExternalLink size={11} />
                   </a>
                   <a
+                    href={kkdayHotelsPartnerUrl}
+                    data-affiliate-placement={affiliatePlacement}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
+                  >
+                    <span>{isBn ? "KKday হোটেল তালিকা" : "Search KKday hotel collection"}</span>
+                    <ExternalLink size={11} />
+                  </a>
+                  <a
                     href={goCityPassUrl}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
                     className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
                   >
                     <span>Go City All-Inclusive &amp; Explorer Pass</span>
-                    <ExternalLink size={11} />
-                  </a>
-                  <a
-                    href="/kkday-hotels"
-                    className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
-                  >
-                    <span>{isBn ? "KKday হোটেল তালিকা" : "Search KKday hotel collection"}</span>
                     <ExternalLink size={11} />
                   </a>
                   <a
@@ -1186,7 +1186,7 @@ export function TravelpayoutsCustomWidget({
                       <ExternalLink size={11} />
                     </a>
                   )}
-                </>
+                </div>
               )}
               {showFlightProviderHandoffs && searchTab === "flights" && (
                 <a
@@ -1406,13 +1406,11 @@ export function TravelpayoutsCustomWidget({
                   ? `Check hotel listings in ${hotelCity} on a partner site`
                   : `Compare Live Airlines for ${fromCity} → ${toCity} (${currency})`}
               </h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                {searchTab === "hotels"
-                  ? `These links open general partner hotel collections, not a quote for your selected dates or guests. Re-enter ${hotelCity}, ${date} to ${checkOutDate} and ${travelers} ${
-                      travelers === 1 ? "guest" : "guests"
-                    } on the partner site, then compare the current checkout total, inclusions and cancellation terms. URAL may earn a commission on qualifying bookings; this is not a traveller discount.`
-                  : `Open live global flight search results for ${fromCity} to ${toCity} on ${date} in ${currency} via URAL Branded White-Label (#22462) or Aviasales Global (#${MARKER_ID}).`}
-              </p>
+              {searchTab === "flights" && (
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {`Open live global flight search results for ${fromCity} to ${toCity} on ${date} in ${currency} via URAL Branded White-Label (#22462) or Aviasales Global (#${MARKER_ID}).`}
+                </p>
+              )}
               <div className="flex flex-wrap items-center gap-2.5 pt-1">
                 {searchTab === "hotels" ? (
                   <>
@@ -1427,8 +1425,11 @@ export function TravelpayoutsCustomWidget({
                       <ExternalLink size={13} />
                     </a>
                     <a
-                      href="/kkday-hotels"
-                                            className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                      href={kkdayHotelsPartnerUrl}
+                      data-affiliate-placement={affiliatePlacement}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <span>{isBn ? "KKday হোটেল তালিকা" : "Search KKday hotel collection"}</span>
                       <ExternalLink size={13} />
