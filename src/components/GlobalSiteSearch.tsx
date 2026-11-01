@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ArrowRight, X } from "lucide-react";
 import {
+  loadSiteSearchIndex,
   prepareSiteSearchIndex,
   searchSite,
   siteSearchKindLabel,
@@ -15,33 +16,6 @@ type GlobalSiteSearchProps = {
   navigateTo: (path: string) => void;
   triggerRef: React.RefObject<HTMLElement | null>;
 };
-
-type SearchIndexResponse = { version: number; entries: SiteSearchEntry[] };
-
-let cachedIndexPromise: Promise<SiteSearchEntry[]> | null = null;
-
-function loadSearchIndex(): Promise<SiteSearchEntry[]> {
-  if (!cachedIndexPromise) {
-    cachedIndexPromise = fetch("/site-search-index.json", {
-      headers: { Accept: "application/json" },
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error(`Search index request failed (${response.status})`);
-        return response.json() as Promise<SearchIndexResponse>;
-      })
-      .then((payload) => {
-        if (payload.version !== 1 || !Array.isArray(payload.entries)) {
-          throw new Error("Unsupported site search index");
-        }
-        return payload.entries;
-      })
-      .catch((error) => {
-        cachedIndexPromise = null;
-        throw error;
-      });
-  }
-  return cachedIndexPromise;
-}
 
 function localePath(path: string, isBn: boolean): string {
   if (!isBn || path.startsWith("/bn/")) return path;
@@ -59,7 +33,7 @@ export function GlobalSiteSearch({ isBn, initialQuery, onClose, navigateTo, trig
 
   useEffect(() => {
     let cancelled = false;
-    loadSearchIndex()
+    loadSiteSearchIndex()
       .then((nextEntries) => {
         if (!cancelled) setEntries(nextEntries);
       })

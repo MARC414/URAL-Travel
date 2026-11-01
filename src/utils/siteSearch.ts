@@ -42,6 +42,37 @@ export interface PreparedSiteSearchEntry {
   corpusNorm: string;
 }
 
+type SiteSearchIndexResponse = { version: number; entries: SiteSearchEntry[] };
+let siteSearchIndexPromise: Promise<SiteSearchEntry[]> | null = null;
+
+/** Load the generated public index once and share it between search surfaces. */
+export function loadSiteSearchIndex(): Promise<SiteSearchEntry[]> {
+  if (!siteSearchIndexPromise) {
+    siteSearchIndexPromise = fetch("/site-search-index.json", {
+      headers: { Accept: "application/json" },
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Search index request failed (${response.status})`);
+        const contentType = response.headers.get("content-type") ?? "";
+        if (!contentType.includes("application/json")) {
+          throw new Error("The search index endpoint did not return JSON");
+        }
+        return response.json() as Promise<SiteSearchIndexResponse>;
+      })
+      .then((payload) => {
+        if (payload.version !== 1 || !Array.isArray(payload.entries)) {
+          throw new Error("Unsupported site search index");
+        }
+        return payload.entries;
+      })
+      .catch((error) => {
+        siteSearchIndexPromise = null;
+        throw error;
+      });
+  }
+  return siteSearchIndexPromise;
+}
+
 const STOP_WORDS = new Set([
   "a", "an", "and", "are", "can", "do", "for", "from", "how", "in", "is",
   "of", "on", "the", "to", "what", "which", "where", "with", "your",
