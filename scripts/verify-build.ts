@@ -458,6 +458,41 @@ check(
     !destinationWidgetHtml.includes("Direct Flight"),
   "route-prefilled Bengali widget exposes white-label and Aviasales handoffs without fabricated inline fares"
 );
+const hotelSearchWidgetHtml = renderToStaticMarkup(
+  React.createElement(TravelpayoutsCustomWidget as React.ComponentType<any>, {
+    initialTab: "hotels",
+    hotelsOnly: true,
+    affiliatePlacement: "home_hotel_search",
+    lang: "en",
+  })
+);
+const bnHotelSearchWidgetHtml = renderToStaticMarkup(
+  React.createElement(TravelpayoutsCustomWidget as React.ComponentType<any>, {
+    initialTab: "hotels",
+    hotelsOnly: true,
+    affiliatePlacement: "home_hotel_search",
+    lang: "bn",
+  })
+);
+const hotelPartnerLinkOrder = [
+  hotelSearchWidgetHtml.lastIndexOf("Search Klook hotel collection"),
+  hotelSearchWidgetHtml.indexOf("Search KKday hotel collection"),
+  hotelSearchWidgetHtml.indexOf("Go City All-Inclusive"),
+  hotelSearchWidgetHtml.indexOf("Luggage Storage (Radical)"),
+];
+check(
+  !hotelSearchWidgetHtml.includes("Hotel links open general partner collections") &&
+    !hotelSearchWidgetHtml.includes("not live quotes for your selected dates") &&
+    !hotelSearchWidgetHtml.includes("Re-enter destination, dates") &&
+    !hotelSearchWidgetHtml.includes("this is not a traveller discount") &&
+    !hotelSearchWidgetHtml.includes("Re-enter destination, dates &amp; guests on Klook") &&
+    !bnHotelSearchWidgetHtml.includes("পার্টনার লিংক সাধারণ হোটেল তালিকা খোলে") &&
+    !bnHotelSearchWidgetHtml.includes("যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; এটি ভ্রমণকারীর জন্য ছাড় নয়") &&
+    !bnHotelSearchWidgetHtml.includes("গন্তব্য, তারিখ ও অতিথির সংখ্যা Klook-এ আবার দিন") &&
+    hotelSearchWidgetHtml.includes("More hotel and trip options:") &&
+    hotelPartnerLinkOrder.every((position, index) => position >= 0 && (index === 0 || position > hotelPartnerLinkOrder[index - 1])),
+  "hotel widget omits repeated handoff copy and presents partner links in a clear booking-to-trip order"
+);
 check(
   (hotelsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 6 &&
     (bnHotelsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 6 &&
@@ -4832,6 +4867,17 @@ const bnAppShellHtml = renderAppAtPath("/bn/");
 const appSource = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
 const topBarSearchSource = read(path.join(ROOT_DIR, "src", "components", "TopBarSiteSearch.tsx")) ?? "";
 const globalSearchSource = read(path.join(ROOT_DIR, "src", "components", "GlobalSiteSearch.tsx")) ?? "";
+const homeHotelSectionStart = appSource.indexOf("{/* 🟦 SECTION 4: HOTEL SEARCH ENTRY */}");
+const homeHotelSectionEnd = appSource.indexOf("{/* 🟦 SECTION 4.25: UNIFIED TABBED TRAVEL ESSENTIALS HUB */}");
+const homeHotelSectionSource = appSource.slice(homeHotelSectionStart, homeHotelSectionEnd);
+check(
+  homeHotelSectionStart >= 0 && homeHotelSectionEnd > homeHotelSectionStart &&
+    homeHotelSectionSource.indexOf("Hotel Search & Booking Checks") < homeHotelSectionSource.indexOf("<TravelpayoutsCustomWidget") &&
+    homeHotelSectionSource.indexOf("<TravelpayoutsCustomWidget") < homeHotelSectionSource.indexOf("Popular hotel areas:") &&
+    !homeHotelSectionSource.includes("Dates and guests are not carried over") &&
+    !homeHotelSectionSource.includes("তারিখ বা অতিথি যায় না"),
+  "home hotel section flows from heading to search widget to area links without repeated handoff instructions"
+);
 check(
   appSource.includes('const BRAND_TAGLINE = "A Travel Intelligence Ecosystem";') &&
     !appSource.includes("Travel Intelligence System · Beyond a Typical Agency") &&

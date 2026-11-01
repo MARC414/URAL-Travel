@@ -4432,7 +4432,7 @@ export default function App() {
             {/* 🟦 SECTION 4: HOTEL SEARCH ENTRY */}
             <div id="global-hotel-search" className="ural-panel relative overflow-hidden bg-white text-brand-navy p-6 sm:p-8 shadow-sm border border-border-subtle">
               
-              <div className="max-w-3xl mx-auto text-center space-y-2.5 mb-6">
+              <div className="max-w-3xl mx-auto text-center space-y-2.5 mb-5">
                 <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold text-brand-gold-ink uppercase tracking-widest bg-[#F6B73C]/10 border border-[#F6B73C]/25 px-3 py-1 rounded-full">
                   <Building size={12} className="text-[#F6B73C]" />
                   <span>{isBn ? "হোটেল সার্চ ও বুকিং যাচাই" : "Hotel Search & Booking Checks"}</span>
@@ -4442,11 +4442,6 @@ export default function App() {
                     ? "হোটেলের এলাকা ও বুকিং শর্ত তুলনা করুন; পার্টনার সাইটে প্রাপ্যতা দেখুন"
                     : "Compare hotel areas and booking terms, then check availability with a partner"}
                 </h2>
-                <p className="text-xs text-slate-600 leading-relaxed max-w-2xl mx-auto">
-                  {isBn
-                    ? "শহর বেছে পার্টনার তালিকায় সার্চ করুন। লিংকে তারিখ বা অতিথি যায় না—আবার দিয়ে চূড়ান্ত দাম ও বুকিংয়ের শর্ত যাচাই করুন।"
-                    : "Choose a city, then search a partner collection. Dates and guests are not carried over; re-enter them and review the final total and booking terms."}
-                </p>
               </div>
 
               {/* DEDICATED GLOBAL HOTEL WIDGET (Single clean bar, no flight tab duplication) */}
@@ -4478,8 +4473,8 @@ export default function App() {
               </div>
 
               {/* Quick links to pre-filled hotel lookups */}
-              <div className="text-center text-xs font-mono text-slate-600 mt-6 flex flex-wrap justify-center items-center gap-2">
-                <span>{isBn ? "জনপ্রিয় ফ্যামিলি হোটেল জোন:" : "Top family-rated lodging selectors:"}</span>
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-center text-xs font-mono text-slate-600">
+                <span>{isBn ? "জনপ্রিয় হোটেল এলাকা:" : "Popular hotel areas:"}</span>
                 <button onClick={() => navigateTo("/hotels/kathmandu-hotels")} className="text-brand-gold-ink hover:text-brand-navy hover:underline">Thamel, Kathmandu 🇳🇵</button>
                 <span>•</span>
                 <button onClick={() => navigateTo("/hotels/bangkok-hotels")} className="text-brand-gold-ink hover:text-brand-navy hover:underline">Pratunam, Bangkok 🇹🇭</button>
