@@ -80,6 +80,15 @@ fails the build; a deliberate one is recorded with its reason.
 
 ## 5. Measurement is a precondition, not a phase
 
+> **Update, 2 November 2026:** the search half of this section is now satisfied.
+> The owner supplied a real GSC export — 1,246 impressions, 2 clicks, 10 days —
+> read in `docs/03-social/GSC-READ-2026-11-02.md`. Conversion events are still
+> missing. The practical consequence: **G3 can now be tested against real
+> queries for search-driven articles**, and the cap returns to two per week for
+> work aimed at the queries already ranking. It does not return to two per week
+> for *new* intents, because the export shows the site is at 0.47 impressions
+> per URL per day — the constraint is visibility, not inventory.
+
 The 25 October audit classified measurement as **P0** and the public GTM
 container still lacks forwarding for URAL's custom events. The current GSC
 exports in the repository carry **no click or impression values** ("NOT
@@ -107,8 +116,8 @@ record intentions.
 
 | Candidate | Status under v2 |
 | --- | --- |
-| `tawaf-sai-seven-circuits-step-by-step-guide` | **Passes G1–G7.** G3 = owner request + reel gap; G6 = static. Plan: `docs/02-content/PLAN-tawaf-and-hajj-rites.md`. |
-| `hajj-rites-mina-arafah-muzdalifah-day-by-day` | **Passes G1–G7.** G6 = seasonal. Same plan. |
+| `tawaf-sai-seven-circuits-step-by-step-guide` | **Built 2 Nov.** G3 was an owner request plus a reel gap, not a GSC query — recorded as an unvalidated hypothesis with a 90-day review under §3. G6 = static. |
+| `hajj-rites-mina-arafah-muzdalifah-day-by-day` | **Fails G3 on current evidence (2 Nov).** The entire 25-URL cluster earns 97 impressions and 0 clicks over 10 days. Hold until the cluster's CTR is repaired and a query appears. Spec kept in the plan for when it does. |
 | `/visa/saudi-arabia-visa` | **A page, not an article** — does not require G1–G7, but requires the same evidence standard and a named maintenance owner (fast-moving). Spec: `docs/02-content/SPEC-visa-saudi-arabia-visa.md`. |
 | Bengali override for `umrah-dubai-10-day-combo-trip…` | **Defect fix**, not content. Do it first; it is cheap and it is currently wrong. |
 
