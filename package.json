@@ -28,6 +28,7 @@
     "test:elderly-umrah-guide": "tsx scripts/test-elderly-umrah-guide.ts",
     "test:ihram-miqat-guide": "tsx scripts/test-ihram-miqat-guide.ts",
     "test:tawaf-sai-guide": "tsx scripts/test-tawaf-sai-guide.ts",
+    "test:journey-help": "tsx scripts/test-journey-help.ts",
     "test:ramadan-itikaf-guide": "tsx scripts/test-ramadan-itikaf-guide.ts",
     "test:zamzam-customs-guide": "tsx scripts/test-zamzam-customs-guide.ts",
     "test:food-guide": "tsx scripts/test-food-guide.ts",

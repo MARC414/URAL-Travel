@@ -234,6 +234,14 @@ panel should become the primary and `affiliateCTA` should be reconsidered — an
 
 **A panel nobody clicks is a banner. Delete it rather than insist on it.**
 
+**Status: built 2 November 2026.** `src/utils/journeyHelp.ts` (stage → partners),
+`src/components/JourneyHelpPanel.tsx` (render, disclosure, `data-affiliate-placement`),
+`journeyStage` on `BlogPost`, rendered in `BlogPostRouteView` directly above the
+related-links block. Guarded by `scripts/test-journey-help.ts` (13 checks), which
+asserts the stage→partner rules including the one that matters most: `perform`
+cannot carry a fare or a compensation link. All 13 Hajj & Umrah posts carry a
+stage (7 prepare, 3 travel, 2 perform, 1 return).
+
 ---
 
 ## 5. Sources and external links

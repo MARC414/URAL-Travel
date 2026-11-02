@@ -21,6 +21,7 @@ import { generateBlogCoverAltText } from "../utils/imageAssets";
 import { getAuthorProfile } from "../data/authorProfiles";
 
 import { getRelatedBlogPosts } from "../utils/blogLinks";
+import JourneyHelpPanel from "../components/JourneyHelpPanel";
 
 import { getVisibleBlogFaqSection } from "../utils/blogStructuredData";
 
@@ -2274,6 +2275,13 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                       )}
 
 
+
+                      {/* Journey Help — stage-gated partner guidance.
+                          docs/growth/10-CONTENT-UPGRADE-STANDARD.md §4.4.
+                          Placed after the body and before related links: the
+                          reader has just finished the job, so this is where the
+                          next problem is actually on their mind. */}
+                      <JourneyHelpPanel stage={activePost.journeyStage} isBn={isBn} />
 
                       {/* 5. Related Calculators & Next Steps */}
 
