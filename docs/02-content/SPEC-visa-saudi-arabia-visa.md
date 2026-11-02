@@ -59,11 +59,17 @@ pillar already documents three conditional categories:
 headline ("Visa On Arrival", "e-Visa"). Do **not** pick one route and drop the
 other two — that would make the page wrong for most readers.
 
-**Recommended value:** `"e-Visa — multiple eligible routes (see steps)"`, with
-the three categories enumerated in `stepByStep` and `keyFacts`. If that reads
-badly in the directory listing, the alternative is to extend the type union
-with something like `"Multiple routes"`, which is a small code change and a
-better long-term shape. Decide before writing.
+**Resolved 2 November 2026 — there is no decision to make.** `VisaGuide.requirementType`
+is declared as `"Visa On Arrival" | "e-Visa" | "Sticker Visa / Sticker Required" | "Visa Free" | string`.
+The trailing `| string` means any string already type-checks: the union is
+documentation, not a constraint. `requirementType` is also used in exactly two
+places, both display-only (`src/routes/VisaRouteView.tsx:74` and `:120`) — no
+switch, no colour map, no filter. So a new value costs nothing and risks nothing.
+
+**Use `"Multiple routes — check eligibility"`.** It is accurate, it reads
+naturally in the directory listing beside "Visa On Arrival" and "Visa Free",
+and it sets the reader's expectation that they must find out which route is
+theirs. The three routes are then enumerated in `stepByStep` and `keyFacts`.
 
 ## 4. Content spec
 

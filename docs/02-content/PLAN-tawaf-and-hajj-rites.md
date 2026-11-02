@@ -312,8 +312,23 @@ otherwise have shipped broken:
 
 ### Still open
 
-- **Article B** (`hajj-rites-mina-arafah-muzdalifah-day-by-day`): needs the
-  8–13 Dhul-Hijjah sequence from a ministry source. Neither Nusuk page read so
-  far gives the day-by-day; the secondary blogs that do cannot be used under S1.
+- **Article B** (`hajj-rites-mina-arafah-muzdalifah-day-by-day`) — **on hold
+  for two independent reasons**, both recorded 2 November 2026:
+
+  1. **Demand (G3).** The whole 25-URL cluster earns 97 impressions and zero
+     clicks over ten days (`docs/03-social/GSC-READ-2026-11-02.md`). A nineteenth
+     post would earn a fraction of nothing. Held until cluster CTR is repaired.
+  2. **Source availability (S1).** The one page that states the day-by-day
+     sequence — `https://hajj.nusuk.sa/Journey` — was returning a maintenance
+     page when checked on 2 November, so it cannot be cited as verified today.
+     `haj.gov.sa/en/Hajj/Arafah` resolves and is authentic (page last updated
+     19 Oct 2026) but covers Arafah only; `haj.gov.sa/en/Hajj` lists the pillars
+     without the 8–13 sequence. The Mina Awareness Guide PDF path cited in
+     search results returns 404.
+
+  **Nothing is needed from the owner to unblock this.** The source is known and
+  the sequence is not in dispute; it simply has to be re-checked at the source
+  on the day it is written. Meanwhile the article waits on G3, which is the
+  binding constraint.
 - **Publish date** is set to 2 November 2026 on the assumption this ships in the
   current week. If it slips, change `date`/`dateBn` and `updatedAt` together.
