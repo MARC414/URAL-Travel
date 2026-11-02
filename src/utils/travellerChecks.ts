@@ -30,6 +30,9 @@ const TITLES = {
   ihramTransit: { en: "Confirm the connection, not the airport name", bn: "বিমানবন্দরের নাম নয়, সংযোগ নিশ্চিত করুন" },
   ihramMadinah: { en: "Confirm where the route meets the boundary", bn: "রুট কোথায় সীমারেখায় পৌঁছায় তা নিশ্চিত করুন" },
   ihramPersonal: { en: "Take personal rulings to a qualified scholar", bn: "ব্যক্তিগত রায় যোগ্য আলেমের কাছে নিন" },
+  tawafStart: { en: "Fix your own start line before you join the ring", bn: "ভিড়ে ঢোকার আগে শুরুর রেখা নিজে ঠিক করুন" },
+  tawafCount: { en: "Count one direction only", bn: "শুধু এক দিকেই গণনা করুন" },
+  tawafCrowd: { en: "Agree the level and the meeting point first", bn: "আগেই তলা ও মিলনস্থল ঠিক করুন" },
   ramadanDeadline: { en: "Put the season cut-offs in your own calendar", bn: "সিজনের শেষ তারিখ নিজের ক্যালেন্ডারে লিখুন" },
   ramadanItikaf: { en: "Do not buy an I'tikaf place", bn: "ইতিকাফের জায়গা কিনবেন না" },
   ramadanAnnouncement: { en: "Wait for the Authority's own notice", bn: "কর্তৃপক্ষের নিজের বিজ্ঞপ্তির অপেক্ষা করুন" },
@@ -56,7 +59,7 @@ const TITLES = {
 } as const;
 
 export function getTravellerCheck(paragraph: string) {
-  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth|ihramPoint|ihramGarments|ihramTransit|ihramMadinah|ihramPersonal|ramadanDeadline|ramadanItikaf|ramadanAnnouncement|ramadanBudget|ramadanRoute|zamzamBox|zamzamAirline|datesAllowance|goldDeclare|vatRefund|foodHalal|foodMakkah|foodPrice|foodMadinah|foodElderly|foodGrocery|ziyarahHira|ziyarahCemetery|ziyarahCar|ziyarahMadinah|ziyarahBus|ziyarahTaif|ziyarahBadr)\):\s+([\s\S]+)$/);
+  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth|ihramPoint|ihramGarments|ihramTransit|ihramMadinah|ihramPersonal|tawafStart|tawafCount|tawafCrowd|ramadanDeadline|ramadanItikaf|ramadanAnnouncement|ramadanBudget|ramadanRoute|zamzamBox|zamzamAirline|datesAllowance|goldDeclare|vatRefund|foodHalal|foodMakkah|foodPrice|foodMadinah|foodElderly|foodGrocery|ziyarahHira|ziyarahCemetery|ziyarahCar|ziyarahMadinah|ziyarahBus|ziyarahTaif|ziyarahBadr)\):\s+([\s\S]+)$/);
   if (!match) return null;
   const key = match[2] as keyof typeof TITLES;
   const locale = match[1] === "Traveller check" ? "en" : "bn";

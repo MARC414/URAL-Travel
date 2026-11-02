@@ -26,6 +26,10 @@ export interface BlogCoverAltTextInput {
 export const CURATED_BLOG_SCENES: Readonly<
   Record<string, { en: string; bn: string }>
 > = {
+  "tawaf-sai-seven-circuits-step-by-step-guide": {
+    en: "Pilgrims in white Ihram circle the Kaaba counter-clockwise inside the mataf of Masjid al-Haram at dusk",
+    bn: "গোধূলিতে মসজিদুল হারামের মাতাফে সাদা ইহরামে কাবা ঘিরে ঘড়ির কাঁটার বিপরীতে তাওয়াফ করছেন হাজিরা",
+  },
   "travel-creator-resources": {
     en: "An open laptop, notebook, camera and world map arranged on a wooden desk",
     bn: "কাঠের টেবিলে খোলা ল্যাপটপ, নোটবুক, ক্যামেরা ও বিশ্ব মানচিত্র",

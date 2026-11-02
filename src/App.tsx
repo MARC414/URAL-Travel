@@ -538,6 +538,8 @@ const dhakaAirlinesTarmacImg = "/assets/images/dhaka_airport_widebody_airlines_t
 const havanaGranTeatroImg = "/assets/images/havana_gran_teatro_classic_cars_1791427200000-1200.webp";
 const chefchaouenFountainImg = "/assets/images/chefchaouen_blue_fountain_alley_1791427400000-1200.webp";
 const dhakaKolkataBorderTrainImg = "/assets/images/dhaka_kolkata_benapole_border_train_1791500000000-1200.webp";
+const tawafMatafKaabaImg = "/assets/images/tawaf_mataf_kaaba_circuits_1791000000000-1200.webp";
+const minaTentCityDawnImg = "/assets/images/mina_tent_city_arafah_dawn_1791000100000-1200.webp";
 
 function getBlogCoverImage(slug: string): string {
   const scheduledCover = SCHEDULED_BLOG_COVER_IMAGES[slug];
@@ -562,6 +564,8 @@ function getBlogCoverImage(slug: string): string {
       return jeddahAirportTerminalImg;
     case "ramadan-umrah-itikaf-guide-bangladesh-booking-budget":
       return ramadanMakkahNightImg;
+    case "tawaf-sai-seven-circuits-step-by-step-guide":
+      return tawafMatafKaabaImg;
     case "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
       return ihramPreparationImg;
     case "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":

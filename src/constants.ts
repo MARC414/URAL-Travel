@@ -2194,6 +2194,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dubai Stopover & UAE Visa Guide from Dhaka", path: "/destinations/dubai-guide" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
       { text: "Ramadan Umrah booking dates & I'tikaf registration", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
+      { text: "Tawaf and Sa'i: Seven Circuits, Counted Correctly", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
     ],
     references: [
       {
@@ -2920,7 +2921,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Tawaf and Sa'i: Seven Circuits, Counted Correctly", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Landing at Jeddah in Ihram with family and luggage?", body: "Compare an optional private sedan or family minivan from Jeddah Arrivals to your Makkah hotel. Vehicle size, luggage capacity, meet-and-greet and availability must be confirmed with the provider before you rely on it — a transfer does not change when or where you enter Ihram." }
   },
@@ -3928,6 +3930,42 @@ export const BLOG_DATA: BlogPost[] = [
       headline: "Compare Dhaka to Kolkata Direct Flight Fares",
       body: "While cross-border passenger trains remain suspended, direct Dhaka (DAC) to Kolkata (CCU) flights take about 1 hour 10 minutes — compare live fares and baggage terms across airlines before booking.",
     },
+  },
+  {
+    id: "blog-49",
+    slug: "tawaf-sai-seven-circuits-step-by-step-guide",
+    title: "Tawaf and Sa'i: Seven Circuits, Counted Correctly (2026 Guide)",
+    summary:
+      "Checked 2 November 2026 against the Ministry of Hajj and Umrah and Nusuk: where a tawaf circuit starts and ends, why gates are the wrong place to count, how sa'i is seven one-way lengths rather than three and a half rounds, and what finishing (halq or taqsir) does to your Ihram. Not a fatwa; school differences are named, not decided.",
+    category: "Hajj & Umrah",
+    date: "November 2, 2026",
+    updatedAt: "2026-11-02",
+    author: "Farhan Momen (Founder & Travel Editor)",
+    readTime: "7 min read",
+    references: [
+      {
+        name: "Saudi Ministry of Hajj and Umrah — Umrah: the pillars of Umrah (Tawaf and Saa'i defined)",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — উমরাহ: উমরাহর রুকন (তাওয়াফ ও সাঈর সংজ্ঞা)",
+        url: "https://haj.gov.sa/en/Umrah",
+      },
+      {
+        name: "Nusuk Umrah — Umrah Journey: rite-by-rite steps, sunnah list and halq/taqsir",
+        nameBn: "নুসুক উমরাহ — উমরাহ জার্নি: ধাপে ধাপে আমল, সুন্নাহর তালিকা ও হালক/তাকসির",
+        url: "https://umrah.nusuk.sa/Journey",
+      },
+      {
+        name: "Nusuk Hajj — Hajj rituals: tawaf, sa'i and Tawaf al-Wadaa in the Hajj context",
+        nameBn: "নুসুক হজ — হজের আমল: হজের প্রেক্ষাপটে তাওয়াফ, সাঈ ও তাওয়াফুল বিদা",
+        url: "https://hajj.nusuk.sa/nusuk/hajj-rituals",
+      },
+    ],
+    internalLinks: [
+      { text: "DIY Umrah Planning Portal & BDT Calculator", path: "/umrah" },
+      { text: "Complete Umrah & Hajj Visa, Nusuk & BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Wearing Ihram at Dhaka Airport or at the Miqat", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "Umrah Rules for Women: Mahram, Visa and Ladies' Gates", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
+      { text: "Umrah with Elderly Parents: Wheelchair and Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+    ],
   },
   ...SCHEDULED_BLOG_DATA,
 ];

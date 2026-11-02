@@ -37,6 +37,16 @@ cadence, not a publishing programme.
 | G6 | **Maintenance owner** | A named owner and a review interval: `seasonal` (recheck each season), `static` (recheck annually), or `fast-moving` (90 days). | Do not publish. Orphaned pages decay silently. |
 | G7 | **Cadence** | ≤2 new URLs per week. No same-day batches of unrelated posts. | Queue it. The queue is not a backlog of promises; it is an ordering. |
 
+### 2.1 One documented exemption: the commercial block
+
+Gate G4 counts links, not CTAs. A page whose reader job is a religious procedure
+carries **no** affiliate block (A2 of
+[10-CONTENT-UPGRADE-STANDARD](10-CONTENT-UPGRADE-STANDARD.md)). Because
+`verify-build.ts` otherwise requires a CTA on every Hajj & Umrah post, the
+exemption is held in an explicit one-line-per-slug map (`CTA_EXEMPT_SLUGS`) with
+a stale-entry check, not inferred from a missing field. A forgotten CTA still
+fails the build; a deliberate one is recorded with its reason.
+
 ## 3. Short is allowed. Thin is not.
 
 - **Target length for a single-question article: 700–1,000 words** per locale.

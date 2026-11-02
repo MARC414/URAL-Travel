@@ -2201,6 +2201,59 @@ What is the indicative budget for a 3-day Dhaka to Kolkata overland trip?
 An indicative 3-day, 2-night overland trip by bus via Benapole–Petrapole ranges from roughly BDT 8,000–12,000 per person (budget tier) to BDT 15,000–18,000 per person (comfortable AC tier), including roundtrip bus transport, IVAC processing fee, border tax, two hotel nights, and meals. Treat this as a planning reference, not a live quote.
 Which land border should be endorsed on my Indian visa for Dhaka–Kolkata travel?
 The Benapole–Petrapole corridor corresponds to the Haridaspur / Benapole checkpost endorsement on an Indian visa. Always verify that the entry and exit points printed on your visa sticker match your planned land or air route before departure [4–6, 9–10].`,
+  "tawaf-sai-seven-circuits-step-by-step-guide": `This guide is for a first-time pilgrim who will be inside Masjid al-Haram within days: where a circuit begins, what counts as one, and how the counting works once you turn to Safa. It is not a fatwa and does not settle differences between the schools. Where the official sources call a practice sunnah rather than required, this page says so.
+
+Quick Answer — Checked 2 November 2026: tawaf is seven circuits of the Kaaba anticlockwise, Kaaba on your left, beginning and ending in line with the Black Stone. A circuit is complete when you return to that alignment, not when you pass a gate. Sa'i is seven one-way lengths: Safa to Marwa is one, Marwa back to Safa is two, and the seventh ends at Marwa. The Ministry of Hajj and Umrah states both rules in the same sentence that defines each rite. [1]
+
+1. WHAT MUST BE TRUE BEFORE YOU ENTER THE MATAF
+
+You must already be in Ihram. Tawaf is part of the rite, not a preliminary to it, so consecration is not something you enter inside the courtyard. If your group plans to arrive and then change, that plan is wrong. [1][2]
+
+Purity during tawaf is answered differently by the schools. The Ministry's definition does not make it a condition and Nusuk's steps do not mention it. Follow your own school; if you can reasonably be in wudu, be in wudu. Decide two practical things before the doors: a meeting point that does not depend on phone signal, because the crowd separates families within minutes, and what you are carrying, because a shoulder bag in a dense circuit is a hazard to the person behind you.
+
+2. WHERE TAWAF STARTS AND WHERE A CIRCUIT ENDS
+
+You stand level with the Black Stone, Kaaba on your left, raise your hand toward it, say "Allahu Akbar", and move anticlockwise. [2] The rule that decides everything is the next one: a circuit ends when you come back to the same alignment — Nusuk's words are "the same point from which we started, aligning with the Black Stone" — and you repeat the alignment and takbir before starting the next. [2]
+
+This is why gates matter less than pilgrims expect. The start line runs outward from the Black Stone across the floor; it is not the door you came in by. Count at the gate and your number drifts by one within ten minutes.
+
+3. HOW TO COUNT SEVEN WITHOUT LOSING YOUR PLACE
+
+Count in the order the rite happens. Align, say the takbir, walk, return to the alignment. That return is the number: the first is one, the seventh is seven, and after the seventh you stop. [1][2] Three errors cause most wrong counts — treating the walk from the entrance as circuit one, counting at a gate or floor marker instead of the alignment, and starting the next circuit before actually reaching it, which happens easily when the crowd moves you sideways.
+
+Traveller check (tawafStart): Before you join the ring, fix your own reference for the start line — look outward from the Black Stone at eye level and pick something you will recognise from the far side of the crowd. It will not stay in place relative to you, but it will tell you when you are level with it again. The rule does not change if your reference shifts; only your ability to read it does.
+
+4. WHAT DOES NOT BREAK A CIRCUIT
+
+The definition is about going around the Kaaba seven times, not the lane you walk in. Nusuk describes pilgrims passing a point and continuing; it does not say that being pushed outward, stepping around a stationary group or moving to an outer ring restarts the count — and it does not say the opposite either. [1][2] Going the wrong way round clearly breaks it, and so does beginning a fresh circuit before returning to the alignment. If you leave the mataf entirely, do not assume you can resume mid-circuit.
+
+Being carried, using a wheelchair or being pushed by an attendant is a genuine question in the schools, and neither official page addresses it. It is also the commonest question from Bangladeshi families travelling with parents; the elderly guide covers the access side. This page says only this: the physical method is a ruling question; the count is still seven.
+
+Traveller check (tawafCrowd): Nothing in the sources gives you a right of way, a reserved lane or a protected hour. If the density is beyond what you can manage, complete the circuits on an upper level rather than forcing the ground floor — the Kaaba is still on your left and you are still going around it. Agree with your group leader before you split up.
+
+5. THE SUNNAH THAT GETS MISTAKEN FOR A REQUIREMENT
+
+Nusuk lists these separately, under "Sunnah to perform": men uncovering the right shoulder while circumambulating, men quickening their pace in the first three circuits, two rak'ahs after tawaf, and men jogging on the sa'i. The Ministry places the two rak'ahs "in a suitable place" rather than at a fixed spot. [1][2] None appears as a condition in the definition of tawaf. A pilgrim who quickens their pace for three circuits and then cannot remember whether they are on three or four has traded a sunnah for a mistake.
+
+6. SA'I: SEVEN ONE-WAY LENGTHS, NOT THREE AND A HALF ROUNDS
+
+When tawaf ends you go to Safa and the sa'i begins there. The Ministry states the rule in one sentence worth reading twice: from Safa you walk to Marwa, and "when he reaches Al-Marwah, he completes one lap, then returns to Al-Safa to complete the second lap, and so on until he completes seven laps, ending at Al-Marwah." [1] So Safa to Marwa is one, Marwa back to Safa is two, the seventh finishes at Marwa, and you do not walk back afterwards. [1][2]
+
+Nusuk describes the same thing from the other direction as "three and a half laps that end at Mount Marwah" — three and a half return trips, which is seven one-way lengths. Both agree. Know both: pilgrims who think in round trips stop at Safa after seven lengths and are one short, while pilgrims who think in three and a half sometimes stop at Marwa after three. Men jog between the two green markers; Nusuk is explicit that the jogging stops after the marked area. [2]
+
+Traveller check (tawafCount): Count sa'i in one direction only, and say the number at Marwa rather than at Safa. The direction you count in decides whether your seventh length ends at Marwa or at Safa, and only one of those is right. If you have been counting return trips, convert before you start rather than halfway through.
+
+7. IF YOU LOSE COUNT
+
+Do not restart — restarting guarantees a wrong answer, because you will lose count again in the same conditions. Ask the person beside you, ask your companion, and use a physical counter: a ring, a knot in cloth, a tasbih, anything but a phone. If you genuinely cannot reconstruct the number, that is a ruling question: take it to a qualified scholar with the facts. A pilgrim who stops and asks is better placed than one who keeps walking and guesses.
+
+8. FINISHING: HALQ OR TAQSIR
+
+After tawaf and sa'i you shave or shorten your hair and the Umrah is complete: men shave the whole head or shorten it, women cut one to two centimetres from the ends. [2] You may postpone the cutting until you are back at your accommodation, and it may be done by yourself or someone staying with you — but the prohibitions of Ihram stay in force until it is actually done. [2]
+
+For a Bangladeshi group on a tight schedule this is the detail that matters. If the coach to Madinah leaves before anyone has cut their hair, you are still in Ihram on that coach. Settle the sequence with your group leader before the day, not at the door of the hotel.
+
+None of this replaces your own scholar on your own case. It is a map of what the official sources say, dated so you can see when it was checked.`,
   ...SCHEDULED_BLOG_BODY,
 };
 

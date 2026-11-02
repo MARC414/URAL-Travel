@@ -6949,11 +6949,30 @@ const flagshipBlogLinks = (post: { slug: string; internalLinks?: { path: string 
       link.path !== `/blog/${post.slug}` &&
       CONTENT_SLUGS.has(link.path.slice("/blog/".length))
   );
+// A2 of docs/growth/10-CONTENT-UPGRADE-STANDARD: a page whose reader job is a
+// religious procedure must not carry a commercial partner block. The exemption
+// is explicit and one line per slug, never inferred from a missing field, so a
+// genuinely forgotten CTA still fails.
+const CTA_EXEMPT_SLUGS = new Map<string, string>([
+  [
+    "tawaf-sai-seven-circuits-step-by-step-guide",
+    "A2: ritual walkthrough — the reader is counting circuits, not choosing a supplier",
+  ],
+]);
+const staleCtaExemptions = [...CTA_EXEMPT_SLUGS.keys()].filter(
+  (slug) => !BLOG_DATA.some((post) => post.slug === slug),
+);
+check(
+  staleCtaExemptions.length === 0,
+  staleCtaExemptions.length === 0
+    ? `affiliate-CTA exemptions all point at live posts (${CTA_EXEMPT_SLUGS.size})`
+    : `stale affiliate-CTA exemption(s): ${staleCtaExemptions.join(", ")}`,
+);
 const flagshipIssues = flagshipPosts
   .map((post) => ({
     id: post.id,
     blogLinks: flagshipBlogLinks(post).length,
-    hasCta: Boolean(post.affiliateCTA),
+    hasCta: Boolean(post.affiliateCTA) || CTA_EXEMPT_SLUGS.has(post.slug),
   }))
   .filter((row) => row.blogLinks < 2 || !row.hasCta)
   .map((row) => `${row.id}: ${row.blogLinks} blog links, cta=${row.hasCta}`);
