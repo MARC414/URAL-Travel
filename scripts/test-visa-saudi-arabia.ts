@@ -99,6 +99,13 @@ test("no document list is invented", () => {
 
 test("every FAQ answers something the sources support", () => {
   assert.ok(en!.faqs.length >= 6, `only ${en!.faqs.length} FAQs`);
+  // Anything a reader could act on must carry a way to check it. On a visa page
+  // that is not a footer disclaimer: it is a FAQ that says which portal decides,
+  // what date this page was read, and that the portal wins any disagreement.
+  assert.ok(
+    en!.faqs.some((faq) => /portal is right/i.test(faq.answer) && /2 November 2026/.test(faq.answer)),
+    "missing the 'check this page yourself' FAQ — the source-wins rule",
+  );
   for (const faq of en!.faqs) {
     assert.ok(faq.question.length > 15, "trivial FAQ question");
     assert.ok(faq.answer.length > 80, `thin answer: ${faq.question}`);

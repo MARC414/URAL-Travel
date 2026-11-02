@@ -92,6 +92,11 @@ for (const locale of ["en", "bn"] as const) {
     }
   });
 
+  test(`${locale}: the reader is told which side wins a disagreement`, () => {
+    const phrase = bn ? "সূত্রই সঠিক" : "the source is right";
+    assert.ok(body.includes(phrase), `${locale}: missing the source-wins rule`);
+  });
+
   test(`${locale}: all three traveller checks render`, () => {
     const notes = body
       .split(/\n+/)

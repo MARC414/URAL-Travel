@@ -2253,7 +2253,7 @@ After tawaf and sa'i you shave or shorten your hair and the Umrah is complete: m
 
 For a Bangladeshi group on a tight schedule this is the detail that matters. If the coach to Madinah leaves before anyone has cut their hair, you are still in Ihram on that coach. Settle the sequence with your group leader before the day, not at the door of the hotel.
 
-None of this replaces your own scholar on your own case. It is a map of what the official sources say, dated so you can see when it was checked.`,
+None of this replaces your own scholar on your own case. It is a map of what the official sources say, dated so you can see when it was checked. Every numbered claim above points to the source listed at the foot of this page; where the two disagree, the source is right and this page is out of date.`,
   "hajj-rites-mina-arafah-muzdalifah-day-by-day": `This page is for a pilgrim who already has a Hajj seat and will be in Mina within days. It gives the order of the rites from 8 to 13 Dhul-Hijjah and the ruling inside each day that decides whether what you did counts. It is not a fatwa and it does not settle differences between the schools; where the schools differ, the difference is named.
 
 Quick Answer — Checked 2 November 2026: the Ministry of Hajj and Umrah orders the journey as Mina on the Day of Tarwiyah, then Arafah, then Muzdalifah, then Jamrat al-Aqaba al-Kubra, the sacrifice, Tawaf Al-Ifadhah and Sa'y of Hajj, then the night of the 10th in Mina, the 11th, the 12th, the 13th, and Tawaf Al-Wadaa. The Ministry publishes the order and no timings. Every hour below comes from a dated ruling, and is attributed.
@@ -2321,6 +2321,14 @@ Once the days are over and you intend to travel, do not leave until you have per
 Where your tent is, how far it stands from the jamarat, when your coach moves, how long you will be standing, and who holds your medication are all set by your package. None of it is on the ministry pages above, and none of it is a ruling. Get three answers in writing before the 8th: the departure time for Arafah on the 9th, the meeting point if your group separates in the crowd, and whether the package is nafar awwal or nafar thani. A pilgrim holding those three answers can follow the sequence above without guessing at any point.
 
 If your trip includes Umrah as well, the tawaf and sa'i mechanics sit on the companion page, which covers where a circuit begins and how seven are counted.
+
+9. CHECKING THIS PAGE YOURSELF
+
+Every claim above carries a number, and the numbered source sits at the foot of the page. If this page and a source disagree, the source is right and this page is stale — that is the rule, and it is why the numbers are there rather than in a bibliography nobody reads.
+
+Two things move under a reader's feet. The first is the ministry's journey order, read on 2 November 2026: it is administrative and it can be reordered between seasons. The second is the rulings, which are answers to questions rather than a settled code — which is exactly why the schools are named where they differ, and why neither position is chosen for you.
+
+If you are reading this during Hajj and something on the ground contradicts it, follow the person responsible for your group and check the source afterwards. A page cannot see the crowd you are standing in.
 
 None of this replaces your own scholar on your own case. It is a map of what the dated sources say, checked on 2 November 2026.`,
   ...SCHEDULED_BLOG_BODY,

@@ -1398,6 +1398,10 @@ export const VISA_DATA: VisaGuide[] = [
         {
           "question": "What should I do before paying anyone?",
           "answer": "Open the official eligible-countries list and confirm your own position on it. Then confirm the provider is accredited and integrated with Nusuk before transferring money. Two checks, both free, and between them they remove almost every way a Bangladeshi pilgrim loses money on a Saudi visa."
+        },
+        {
+          "question": "How can I check this page is still correct?",
+          "answer": "Read the eligible-country list on the official Saudi eVisa portal yourself, and check it on the day you pay rather than the day you plan. That portal decides, and this page is built from it: the list was read on 2 November 2026. Eligibility lists, fees and health requirements all change between seasons, so treat every sentence here as a dated snapshot rather than a live feed. If this page and the official portal ever disagree, the portal is right and this page is out of date."
         }
       ],
     schemaMarkup: {
@@ -1485,6 +1489,14 @@ export const VISA_DATA: VisaGuide[] = [
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Open the official eligible-countries list and confirm your own position on it. Then confirm the provider is accredited and integrated with Nusuk before transferring money. Two checks, both free, and between them they remove almost every way a Bangladeshi pilgrim loses money on a Saudi visa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I check this page is still correct?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Read the eligible-country list on the official Saudi eVisa portal yourself, and check it on the day you pay rather than the day you plan. That portal decides, and this page is built from it: the list was read on 2 November 2026. Eligibility lists, fees and health requirements all change between seasons, so treat every sentence here as a dated snapshot rather than a live feed. If this page and the official portal ever disagree, the portal is right and this page is out of date."
           }
         }
       ]

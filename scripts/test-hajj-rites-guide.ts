@@ -139,6 +139,18 @@ for (const locale of ["en", "bn"] as const) {
     }
   });
 
+  test(`${locale}: the page tells the reader how to overrule it`, () => {
+    // The house rule for anything a reader might act on: name the checking method,
+    // say the source wins, and say the page is dated. A disclaimer that only says
+    // "not a fatwa" is decoration; this one gives the reader a way to check.
+    const phrases = bn
+      ? ["সূত্রই সঠিক, আর এই পেজটিই পুরোনো", "২ নভেম্বর ২০২৬", "গ্রুপের দায়িত্বপ্রাপ্ত"]
+      : ["the source is right and this page is stale", "2 November 2026", "follow the person responsible for your group"];
+    for (const phrase of phrases) {
+      assert.ok(body.includes(phrase), `${locale}: missing "${phrase}"`);
+    }
+  });
+
   test(`${locale}: the boundary warning survives — time is forgiving, place is not`, () => {
     // 34293, mistake 2: standing OUTSIDE 'Arafah invalidates the Hajj, which is the
     // counterpart to the late-arrival relief. Dropping it would leave the page
