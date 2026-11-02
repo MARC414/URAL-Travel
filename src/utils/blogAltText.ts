@@ -30,6 +30,10 @@ export const CURATED_BLOG_SCENES: Readonly<
     en: "Pilgrims in white Ihram circle the Kaaba counter-clockwise inside the mataf of Masjid al-Haram at dusk",
     bn: "গোধূলিতে মসজিদুল হারামের মাতাফে সাদা ইহরামে কাবা ঘিরে ঘড়ির কাঁটার বিপরীতে তাওয়াফ করছেন হাজিরা",
   },
+  "hajj-rites-mina-arafah-muzdalifah-day-by-day": {
+    en: "Rows of white Mina tent city stretching to the hills behind Arafah at dawn",
+    bn: "ভোরের আলোয় আরাফার পেছনের পাহাড় পর্যন্ত বিস্তৃত মিনার সাদা তাঁবুর শহর",
+  },
   "travel-creator-resources": {
     en: "An open laptop, notebook, camera and world map arranged on a wooden desk",
     bn: "কাঠের টেবিলে খোলা ল্যাপটপ, নোটবুক, ক্যামেরা ও বিশ্ব মানচিত্র",

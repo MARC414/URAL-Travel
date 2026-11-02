@@ -28,6 +28,7 @@
     "test:elderly-umrah-guide": "tsx scripts/test-elderly-umrah-guide.ts",
     "test:ihram-miqat-guide": "tsx scripts/test-ihram-miqat-guide.ts",
     "test:tawaf-sai-guide": "tsx scripts/test-tawaf-sai-guide.ts",
+    "test:hajj-rites": "tsx scripts/test-hajj-rites-guide.ts",
     "test:journey-help": "tsx scripts/test-journey-help.ts",
     "test:visa-saudi-arabia": "tsx scripts/test-visa-saudi-arabia.ts",
     "test:ramadan-itikaf-guide": "tsx scripts/test-ramadan-itikaf-guide.ts",

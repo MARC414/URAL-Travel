@@ -566,6 +566,8 @@ function getBlogCoverImage(slug: string): string {
       return ramadanMakkahNightImg;
     case "tawaf-sai-seven-circuits-step-by-step-guide":
       return tawafMatafKaabaImg;
+    case "hajj-rites-mina-arafah-muzdalifah-day-by-day":
+      return minaTentCityDawnImg;
     case "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules":
       return ihramPreparationImg;
     case "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport":

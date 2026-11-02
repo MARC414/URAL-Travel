@@ -290,3 +290,54 @@ of headings, which the ministry already publishes and we would only be duplicati
 - **Prompt B answered** → write Article B to the original 1,100–1,300 word spec.
 - **Prompt B still NOT IN SOURCES** → do not write it. Record why, once, and stop
   revisiting it until a source changes.
+
+---
+
+# RESULT — 2 November 2026, same day
+
+**Prompt B: answered. Prompt A: still open, and now known to be the harder one.**
+
+## Prompt B — unblocked, Article B written
+
+The six Islam Q&A answers were fetched and read in full. They cover all eight
+questions, and they turned out to be the *right* institution all along: the
+ministry was never going to answer them, because ritual validity is fiqh, not
+administration.
+
+| # | Question | Result |
+| --- | --- | --- |
+| 1 | Arafah start/end | ✅ zenith on the 9th → dawn on the 10th; late arrival still valid |
+| 2 | Muzdalifah | ✅ Maghrib + Isha, overnight, Fajr, du'a to just before sunrise; weak may leave at the end of the night |
+| 3 | Day 10 stoning time | ✅ after sunrise → sunset; not past dawn on the 11th |
+| 4 | Tashreeq order/window | ✅ zenith → end of night; small → middle → Aqabah |
+| 5 | Pebble counts | ✅ 7, then 21 a day — 49 / 70 |
+| 6 | 12th-or-13th condition | ✅ out before sunset; involuntary detention excepted |
+| 7 | Shaving on the 10th | ✅ sacrifice → shave → Tawaf al-Ifadhah |
+| 8 | Tawaf al-Ifadah timing | ✅ placed on the 10th; no deadline stated |
+
+Shipped as `hajj-rites-mina-arafah-muzdalifah-day-by-day`.
+
+**One correction to the summary I was given:** the nafar awwal condition is
+**before sunset**, not before Maghrib. Maghrib *is* sunset, so the practical result
+is the same — but the sources say sunset, and a reader in a hurry must not think
+there is a margin after it.
+
+## Prompt A — not answered, and the reason matters
+
+`vc.tasheer.com` renders its country requirements client-side; only the shell and a
+cookie banner are retrievable. That is the same wall as the ministry FAQ pages.
+
+**What would actually settle it:** open `vc.tasheer.com`, choose Bangladesh, print
+the requirement page to PDF, and upload that PDF. A government-adjacent portal
+printed at a stated date is citable in a way a live JS page is not.
+
+Until then the visa page stays as it is — honest, dated, and pointing at the
+embassy. **That is a finished state, not a failure state.**
+
+## Standing rule this round established
+
+When a question comes back `NOT IN SOURCES` twice from the same class of source,
+stop re-asking it and ask **which class of institution owns the answer**. The Hajj
+block was not a source shortage; it was a category error. The visa block may be the
+same: fee and biometrics are issued by a *visa application centre*, not a ministry,
+so the ministry will keep returning nothing.

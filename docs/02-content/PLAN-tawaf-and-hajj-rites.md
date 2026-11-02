@@ -1,7 +1,8 @@
 # Plan — two new Hajj/Umrah articles (tawaf & the Hajj rites)
 
-**Status: PROPOSAL · 2 November 2026.** Not started. This is the plan the owner
-asked for before any prose is written.
+**Status: COMPLETE · 2 November 2026.** Both articles are built and gated.
+Article A shipped first; Article B was unblocked the same day once the source
+class was corrected — see §3 "Resolved" below.
 
 Fills Gap A and Gap B from
 [the reel coverage audit](../03-social/video/CONTENT-COVERAGE-AND-URL-MAP.md).
@@ -310,25 +311,42 @@ otherwise have shipped broken:
    derived files; the `optimize-images-production.sh` script needs `cwebp`,
    which is absent here, so variants were built with ImageMagick instead.
 
+### Resolved — Article B, 2 November 2026
+
+The hold had two stated reasons. **Both were wrong, in instructive ways.**
+
+**1. Demand (G3) — withdrawn, not satisfied.** G3 was cited as the binding
+constraint on a 25-URL cluster earning 97 impressions. But `PUBLICATION-STANDARD-V2`
+§2.2 says a site under six months old and under 10,000 impressions **cannot fail G3
+by absence** — there is not enough data for the gate to mean anything. Citing G3 to
+hold a page on a one-month-old site applied the rule outside the range where it
+exists. The GSC figures are real; they are simply the wrong instrument here, and are
+better spent on social content, as the owner said.
+
+**2. Source availability (S1) — the framing was wrong.** The plan asked the Ministry
+of Hajj and Umrah for times, pebble counts and exit conditions. It will never publish
+them: those are *fiqh* questions, not administrative ones. `haj.gov.sa` publishes the
+order (confirmed today, still just headings), the pillars, and health advice. The
+rulings come from scholarship.
+
+Once the question was asked of the right institution — six dated Islam Q&A answers,
+fetch-verified rather than summarised — **all eight procedural questions resolved.**
+Arafah runs to dawn; Aqabah is stoned sunrise to sunset; Tashreeq opens at the zenith;
+49 or 70 pebbles; the nafar awwal condition is sunset plus an involuntary-detention
+exception; shaving sits between the sacrifice and Tawaf al-Ifadhah on the 10th.
+
+Article B was therefore written the same day. See
+[the visa spec §11](SPEC-visa-saudi-arabia-visa.md) for the full ledger.
+
 ### Still open
 
-- **Article B** (`hajj-rites-mina-arafah-muzdalifah-day-by-day`) — **on hold
-  for two independent reasons**, both recorded 2 November 2026:
-
-  1. **Demand (G3).** The whole 25-URL cluster earns 97 impressions and zero
-     clicks over ten days (`docs/03-social/GSC-READ-2026-11-02.md`). A nineteenth
-     post would earn a fraction of nothing. Held until cluster CTR is repaired.
-  2. **Source availability (S1).** The one page that states the day-by-day
-     sequence — `https://hajj.nusuk.sa/Journey` — was returning a maintenance
-     page when checked on 2 November, so it cannot be cited as verified today.
-     `haj.gov.sa/en/Hajj/Arafah` resolves and is authentic (page last updated
-     19 Oct 2026) but covers Arafah only; `haj.gov.sa/en/Hajj` lists the pillars
-     without the 8–13 sequence. The Mina Awareness Guide PDF path cited in
-     search results returns 404.
-
-  **Nothing is needed from the owner to unblock this.** The source is known and
-  the sequence is not in dispute; it simply has to be re-checked at the source
-  on the day it is written. Meanwhile the article waits on G3, which is the
-  binding constraint.
+- **28 blog titles still ship clamped.** `compactTitle` in `src/utils/seoCopy.ts`
+  trims the topic to 53 characters and appends "… | URAL". Twenty-eight titles
+  in `dist/` carry that ellipsis — including, until today, both tawaf titles.
+  This belongs with the withdrawn CTR repair, not with this plan: a truncated
+  `<title>` is a visible search-result defect on every one of them.
+  `test:hajj-rites` now guards the two pages in this cluster.
+  **Do not fix in bulk without the owner's go-ahead** — it changes 28 SERP
+  snippets at once.
 - **Publish date** is set to 2 November 2026 on the assumption this ships in the
   current week. If it slips, change `date`/`dateBn` and `updatedAt` together.

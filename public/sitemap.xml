@@ -1153,6 +1153,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/blog/tawaf-sai-seven-circuits-step-by-step-guide" />
   </url>
   <url>
+    <loc>https://uraltravel.co.uk/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day</loc>
+    <lastmod>2026-11-02T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day" />
+  </url>
+  <url>
     <loc>https://uraltravel.co.uk/bn/</loc>
     <lastmod>2026-11-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -2303,5 +2312,14 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/blog/tawaf-sai-seven-circuits-step-by-step-guide" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/blog/tawaf-sai-seven-circuits-step-by-step-guide" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/blog/tawaf-sai-seven-circuits-step-by-step-guide" />
+  </url>
+  <url>
+    <loc>https://uraltravel.co.uk/bn/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day</loc>
+    <lastmod>2026-11-02T09:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day" />
   </url>
 </urlset>

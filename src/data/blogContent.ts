@@ -2254,6 +2254,71 @@ After tawaf and sa'i you shave or shorten your hair and the Umrah is complete: m
 For a Bangladeshi group on a tight schedule this is the detail that matters. If the coach to Madinah leaves before anyone has cut their hair, you are still in Ihram on that coach. Settle the sequence with your group leader before the day, not at the door of the hotel.
 
 None of this replaces your own scholar on your own case. It is a map of what the official sources say, dated so you can see when it was checked.`,
+  "hajj-rites-mina-arafah-muzdalifah-day-by-day": `This page is for a pilgrim who already has a Hajj seat and will be in Mina within days. It gives the order of the rites from 8 to 13 Dhul-Hijjah and the ruling inside each day that decides whether what you did counts. It is not a fatwa and it does not settle differences between the schools; where the schools differ, the difference is named.
+
+Quick Answer — Checked 2 November 2026: the Ministry of Hajj and Umrah orders the journey as Mina on the Day of Tarwiyah, then Arafah, then Muzdalifah, then Jamrat al-Aqaba al-Kubra, the sacrifice, Tawaf Al-Ifadhah and Sa'y of Hajj, then the night of the 10th in Mina, the 11th, the 12th, the 13th, and Tawaf Al-Wadaa. The Ministry publishes the order and no timings. Every hour below comes from a dated ruling, and is attributed.
+
+1. WHY THE TIMES HERE ARE NOT FROM THE MINISTRY
+
+The Ministry's Hajj page lists the journey as a clean sequence and names the pillars: Ihram, Standing at Arafah, Tawaf Al-Ifadhah and Sa'i. [1] It does not state a single hour, a pebble count or an exit condition.
+
+That is not an oversight. When a rite is valid, how many stones are thrown, and under what condition a pilgrim may leave Mina are ruling questions, and they belong to scholarship rather than to an administrative ministry. A travel site that prints a timetable as though the ministry issued it is inventing one. So each time on this page is attributed, and where the schools differ you are told rather than handed a single verdict.
+
+2. THE SHAPE OF THE FIVE OR SIX DAYS
+
+The rites run from the 8th to either the 12th or the 13th. Leaving on the 12th is nafar awwal and gives five days; staying for the 13th is nafar thani and gives six. The gap between them is one night in Mina and 21 pebbles. Nobody should discover which one their group booked while standing beside a coach.
+
+3. 8 DHUL-HIJJAH — MINA, THE DAY OF TARWIYAH
+
+Enter Ihram for Hajj from Makkah or its environs, then go to Mina and stay the night there, praying Zuhr, 'Asr, Maghrib, 'Isha and Fajr. [2]
+
+This is the quietest of the five days and the only one you can use to prepare. The Ministry lists Mina as the first stage of the journey and says nothing further about it. [1]
+
+4. 9 DHUL-HIJJAH — ARAFAH, AND THE WINDOW THAT DECIDES EVERYTHING
+
+When the sun rises, move to Arafah, pray Zuhr and 'Asr together and shortened at the time of Zuhr, then make du'a, dhikr and seek forgiveness until the sun sets. [2]
+
+The standing is valid from the moment the sun passes its zenith on the 9th until dawn on the 10th. That is the position of Malik, Abu Hanifah and the majority of the scholars, as al-Nawawi reports it; Ahmad held that it begins at dawn on the 9th rather than at noon. [3]
+
+The practical consequence is the most useful thing on this page. If the coach is late and you reach Arafah after sunset, your Hajj is not lost: whoever reaches Arafah at any point before dawn on the Day of Sacrifice has performed the standing and must complete the remaining rites. [3] What you must not do is leave Arafah deliberately before sunset. [2]
+
+Traveller check (hajjArafahLate): Ask your group leader before the 8th what the plan is if the coach runs late on the 9th. Most groups have never discussed it. The answer changes nothing about the validity of your Hajj, but knowing it stops a family panicking on a stalled bus at nine in the evening.
+
+Then Muzdalifah. Leave Arafah after sunset and travel there, praying Maghrib and 'Isha on arrival, staying the night, praying Fajr and making du'a until just before sunrise. [2] The weak — women, children, the elderly and those caring for them — may leave at the end of the night: Asma bint Abi Bakr waited for the moon to set, then left Muzdalifah for Mina. [4]
+
+5. 10 DHUL-HIJJAH — THE ORDER THAT TRIPS PEOPLE UP
+
+The Ministry's Day 10 sequence reads Jamrat al-Aqaba al-Kubra, then the sacrifice, then Tawaf Al-Ifadhah and Sa'y of Hajj. [1] Read it twice, because shaving is not in it, and shaving is the step that ends most of the prohibitions of Ihram.
+
+The fuller order is to stone Jamrat al-Aqabah with seven pebbles, then slaughter the hadiy, then shave the head or cut the hair, then go to Makkah for the tawaf of Hajj. [2] Men shave or shorten; women cut about the length of a fingertip from the ends of the hair and do not shave. [2][6]
+
+On timing, the stoning of Jamrat al-Aqabah begins after the sun has risen and lasts until sunset on the Day of Sacrifice. The weak may do it at the end of the night of 'Eid. It may be delayed to the end of the night because of severe crowding or distance, but not to dawn on the 11th. [4]
+
+Traveller check (hajjJamaratTiming): The window on the 10th closes at sunset, not at midnight, and the window on the 11th to the 13th opens only after the sun passes its zenith. That gap is where coach timetables and crowds collide. Confirm with your group whether you stone on the 10th after sunrise or at the end of the night, and do not let a schedule decide a ruling for you.
+
+6. 11, 12 AND 13 DHUL-HIJJAH — THE TASHREEQ DAYS
+
+Stay the nights of the 11th and 12th in Mina. On each of those days, after the sun has passed its zenith, stone the three jamarat in order, beginning with the smallest, which is the one furthest from Makkah, then the middle, then Jamrat al-Aqabah, seven pebbles at each and the takbir with every throw. Make du'a after the small and the middle; there is no du'a after the Aqabah. [2]
+
+Stoning before the sun passes its zenith on the 11th, 12th or 13th is not permissible, because the Prophet (peace be upon him) did not do it before that time and told the people to learn their rites from him. [4] The window ends at the end of the night: stoning at night is permitted where heat or crowding makes the day hard, but delaying it past dawn is not. [4]
+
+The counts are seven on the 10th and then 21 on each day. Leave on the 12th and that is 49 pebbles. Stay for the 13th and it is 70.
+
+The exit rule is where most confusion lives. Finish the stoning on the 12th and leave Mina before sunset, and the 13th is waived for you. If the sun sets while you are still in Mina, you must stay the night and stone the three jamarat on the 13th after the sun passes its zenith. [5] But if you had packed and boarded the bus and the road held you there, you were not in Mina by choice, and you do not have to stay. [2]
+
+Traveller check (hajjExitRule): Settle with your group on the 11th, not on the 12th, whether everyone leaves that evening. The rule turns on being physically out of Mina before sunset, and a coach that has not started moving at five in the afternoon is not out of Mina. If your package says nafar awwal, ask what happens when the traffic does not cooperate.
+
+7. BEFORE YOU LEAVE MAKKAH
+
+Once the days are over and you intend to travel, do not leave until you have performed the farewell tawaf, seven circuits of the Kaaba. Women who are menstruating or bleeding after childbirth are exempt from it. [2]
+
+8. WHAT THESE SOURCES DO NOT TELL YOU
+
+Where your tent is, how far it stands from the jamarat, when your coach moves, how long you will be standing, and who holds your medication are all set by your package. None of it is on the ministry pages above, and none of it is a ruling. Get three answers in writing before the 8th: the departure time for Arafah on the 9th, the meeting point if your group separates in the crowd, and whether the package is nafar awwal or nafar thani. A pilgrim holding those three answers can follow the sequence above without guessing at any point.
+
+If your trip includes Umrah as well, the tawaf and sa'i mechanics sit on the companion page, which covers where a circuit begins and how seven are counted.
+
+None of this replaces your own scholar on your own case. It is a map of what the dated sources say, checked on 2 November 2026.`,
   ...SCHEDULED_BLOG_BODY,
 };
 

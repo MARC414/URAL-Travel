@@ -4149,7 +4149,7 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-49",
     slug: "tawaf-sai-seven-circuits-step-by-step-guide",
-    title: "Tawaf and Sa'i: Seven Circuits, Counted Correctly (2026 Guide)",
+    title: "Tawaf and Sa'i: Seven Circuits, Counted Right (2026)",
     summary:
       "Checked 2 November 2026 against the Ministry of Hajj and Umrah and Nusuk: where a tawaf circuit starts and ends, why gates are the wrong place to count, how sa'i is seven one-way lengths rather than three and a half rounds, and what finishing (halq or taqsir) does to your Ihram. Not a fatwa; school differences are named, not decided.",
     category: "Hajj & Umrah",
@@ -4183,6 +4183,59 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Umrah with Elderly Parents: Wheelchair and Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
           { text: "Nusuk App & Saudi Visa Bio Guide: Rawdah Permit", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Makkah & Madinah Hotel Zones and Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Hajj Rites Day by Day: Mina, Arafah, Muzdalifah, Jamarat", path: "/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day" },
+    ],
+  },
+  {
+    id: "blog-50",
+    slug: "hajj-rites-mina-arafah-muzdalifah-day-by-day",
+    title: "Hajj Rites Day by Day: Arafah, Mina, Jamarat (2026)",
+    summary:
+      "Checked 2 November 2026: the day order the Ministry of Hajj and Umrah publishes, joined to the dated rulings it does not publish — the Arafah window that runs to dawn, why shaving is missing from the ministry's Day 10 list, the pebble counts, and the sunset rule that decides whether you leave Mina on the 12th or the 13th. Not a fatwa; school differences are named, not decided.",
+    category: "Hajj & Umrah",
+    journeyStage: "perform",
+    date: "November 2, 2026",
+    updatedAt: "2026-11-02",
+    author: "Farhan Momen (Founder & Travel Editor)",
+    readTime: "8 min read",
+    references: [
+      {
+        name: "Saudi Ministry of Hajj and Umrah — Hajj: the pillars and the day-by-day journey order (Mina, Arafah, Muzdalifah, Jamarat, sacrifice, Tawaf Al-Ifadhah, Tashreeq nights)",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — হজ: রুকনসমূহ ও দিনভিত্তিক ক্রম (মিনা, আরাফাহ, মুজদালিফাহ, জামারাত, কুরবানি, তাওয়াফুল ইফাদাহ, তাশরিকের রাত)",
+        url: "https://haj.gov.sa/en/Hajj",
+      },
+      {
+        name: "Islam Q&A no. 27090 — How to perform Hajj: the full rite-by-rite sequence, Day 10 order, Tashreeq stoning and the involuntary-detention exception",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ২৭০৯০ — হজ কীভাবে আদায় করবেন: ধাপে ধাপে পূর্ণ ক্রম, ১০ তারিখের ধারাবাহিকতা, তাশরিকের কঙ্কর ও অনিচ্ছাকৃত আটকে পড়ার ব্যতিক্রম",
+        url: "https://islamqa.info/en/answers/27090/how-to-perform-hajj",
+      },
+      {
+        name: "Islam Q&A no. 144830 — Extending the standing in Arafah until dawn on the Day of Sacrifice (the window, and the schools' positions)",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ১৪৪৮৩০ — কুরবানির দিনের ফজর পর্যন্ত আরাফাহতে অবস্থানের সময়সীমা (সীমা ও মাযহাবভেদ)",
+        url: "https://islamqa.info/en/answers/144830",
+      },
+      {
+        name: "Islam Q&A no. 36436 — The time for stoning the Jamarat: Aqabah after sunrise to sunset, Tashreeq after the zenith to the end of the night",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ৩৬৪৩৬ — জামারাতে কঙ্কর নিক্ষেপের সময়: আকাবাহ সূর্যোদয় থেকে সূর্যাস্ত, তাশরিক জাওয়াল থেকে রাতের শেষ পর্যন্ত",
+        url: "https://islamqa.info/en/answers/36436",
+      },
+      {
+        name: "Islam Q&A no. 205161 — Hastening to depart from Mina: the sunset condition on the 12th, and the Standing Committee ruling",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ২০৫১৬১ — মিনা থেকে তাড়াতাড়ি ফেরা: ১২ তারিখে সূর্যাস্তের শর্ত ও স্থায়ী কমিটির ফতোয়া",
+        url: "https://islamqa.info/en/answers/205161",
+      },
+      {
+        name: "Islam Q&A no. 31822 — Description of Hajj: types of Hajj, and halq or taqsir by men and women",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ৩১৮২২ — হজের বর্ণনা: হজের প্রকারভেদ এবং পুরুষ ও নারীর হালক বা তাকসির",
+        url: "https://islamqa.info/en/answers/31822",
+      },
+    ],
+    internalLinks: [
+      { text: "Tawaf and Sa'i: Seven Circuits, Counted Correctly", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
+      { text: "Hajj Registration in Bangladesh: Government vs Private Package Cost", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
+      { text: "Complete Umrah & Hajj Visa, Nusuk & BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Umrah with Elderly Parents: Wheelchair and Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "DIY Umrah Planning Portal & BDT Calculator", path: "/umrah" },
     ],
   },
   ...SCHEDULED_BLOG_DATA,

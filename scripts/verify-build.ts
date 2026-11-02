@@ -6958,6 +6958,10 @@ const CTA_EXEMPT_SLUGS = new Map<string, string>([
     "tawaf-sai-seven-circuits-step-by-step-guide",
     "A2: ritual walkthrough — the reader is counting circuits, not choosing a supplier",
   ],
+  [
+    "hajj-rites-mina-arafah-muzdalifah-day-by-day",
+    "A2: Hajj day-by-day — the pilgrim already holds a package and is mid-rite; the route to help is the package-cost article, not a partner link",
+  ],
 ]);
 const staleCtaExemptions = [...CTA_EXEMPT_SLUGS.keys()].filter(
   (slug) => !BLOG_DATA.some((post) => post.slug === slug),

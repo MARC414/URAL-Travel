@@ -247,6 +247,37 @@ house standard**. What *is* writable is a shorter piece built on the official or
 with an explicit "the ministry does not specify this here" marker on every step, and
 the operational detail delegated to the group leader and the package operator.
 
-**Recommendation: do not write it yet.** The honest article is thin, and the cluster
-earns 97 impressions. Revisit when either the ministry publishes procedural guidance
-or `hajj.nusuk.sa` returns with more than headings.
+**Status: BUILT — 2 November 2026, after the source position changed.**
+
+The owner supplied a second source set: six dated Islam Q&A answers. They were fetched
+and read in full, not taken on trust. They answer all eight questions, and the reason
+is worth recording, because it reframes the whole problem:
+
+> **The ministry was never going to answer these.** Visa eligibility, ritual validity
+> windows, pebble counts and exit conditions are *fiqh* questions, not administrative
+> ones. `haj.gov.sa` publishes logistics, virtues and health advice. The ruling on when
+> a standing is valid belongs to scholarship. Asking the ministry for it was asking the
+> wrong institution, and the `NOT IN SOURCES` result was the correct answer to a
+> misframed question.
+
+**The verified procedural ledger**
+
+| Question | Answer | Source |
+| --- | --- | --- |
+| Arafah window | From the zenith on the 9th until dawn on the 10th — Malik, Abu Hanifah and the majority; Ahmad said from dawn on the 9th | [144830](https://islamqa.info/en/answers/144830) |
+| Late arrival | Reaching Arafah any time before dawn on the 10th is valid — the Hajj is not lost | 144830 |
+| Aqabah stoning | After sunrise until sunset on the Day of Sacrifice; the weak at the end of the night; not delayed past dawn on the 11th | [36436](https://islamqa.info/en/answers/36436) |
+| Tashreeq order | Small (furthest from Makkah) → middle → Aqabah, seven each, du'a after the first two only | [27090](https://islamqa.info/en/answers/27090) |
+| Tashreeq timing | Opens when the sun passes the zenith; closes at the end of the night; night stoning permitted when it is hard by day | 36436 |
+| Pebbles | 7 on the 10th, then 21 a day — 49 leaving on the 12th, 70 staying to the 13th | 27090 (counts derived, arithmetic stated on the page) |
+| Nafar awwal | Out of Mina after stoning and before sunset; caught by sunset ⇒ must stay and stone on the 13th; involuntary detention (traffic) is excepted | [205161](https://islamqa.info/en/answers/205161), 27090 |
+| Shaving on the 10th | Between the sacrifice and Tawaf al-Ifadhah — the step the ministry's own Day 10 list omits | 27090, [31822](https://islamqa.info/en/answers/31822) |
+
+**Editorial consequence.** The article's spine is now the *gap* between the two source
+classes: the ministry's order, joined to the dated rulings it leaves out. That is a
+genuinely differentiated page rather than a restatement of headings, and it lets the
+reader see which sentence comes from which institution.
+
+**Shipped as** `hajj-rites-mina-arafah-muzdalifah-day-by-day`, 1,453 EN / 1,193 BN
+words, six references, three traveller checks, no commercial CTA (A2), guarded by
+`test:hajj-rites` (22 checks).
