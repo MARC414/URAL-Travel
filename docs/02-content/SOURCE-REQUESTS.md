@@ -179,3 +179,114 @@ ministry does not specify this" instead of inventing it.
 - Fees or prices for the visa page. I will deliberately publish no fee figure,
   because fees change by route and a wrong number is the most expensive mistake
   this site can make.
+
+---
+
+# ROUND 2 — 2 November 2026
+
+## Verification of the 68-country finding (asked: "are you sure?")
+
+Re-fetched `https://visa.visitsaudi.com/` and counted the list by region:
+
+| Region | Countries |
+| --- | --- |
+| North America | 7 |
+| South America | 1 |
+| Europe | 41 |
+| Asia | 14 |
+| Africa | 3 |
+| Oceania | 2 |
+| **Total** | **68** |
+
+The count matches the portal's own sentence ("international visitors from 68
+eligible countries"), which is the check that matters: a partial page load would
+not land exactly on 68. **Bangladesh is not in it.**
+
+**Sanity check that removes the "why is Bangladesh singled out" worry:** Indonesia,
+India, Pakistan, Egypt, Nigeria, Morocco, Sri Lanka and Nepal are **also** absent.
+Indonesia is the largest Umrah market in the world and it is not on this list. So the
+list is not a judgement about Bangladesh — it is the *tourism* eVisa programme, and
+large pilgrimage markets travel through a different channel.
+
+**What this does and does not mean:**
+
+- It **does** mean an ordinary Bangladeshi passport cannot use the tourist eVisa, and
+  that the portal's own instruction is to contact the nearest Saudi embassy.
+- It **does not** mean Bangladeshis cannot perform Umrah. There is a separate Umrah
+  route. That route's fee, documents and biometrics are what this round asks for.
+- **Recheck before publishing any update.** These lists change; the finding is dated
+  2 November 2026 and should carry that date on the page.
+
+## Why the fee, processing time, document list and biometrics are still absent
+
+Not for lack of claims — because the claims are unusable. Example from a site that
+appeared in the research: the Saudi visa fee for Bangladeshis "starts from **BDT
+10,050 to BDT 3,72065**". That second number is not a number. Other agency pages
+quote different totals, because each bundles a service charge it sets itself.
+
+The four missing items are issued consularly and by the visa application centre, and
+they change. A page that publishes a wrong fee sends a reader to an embassy with the
+wrong amount of money. So the page sends them to the source instead.
+
+## SHORT PROMPT A — the four missing items (2026, official)
+
+Add these sources: `https://vc.tasheer.com/`, `https://www.mofa.gov.sa/`,
+`https://bdemb.mofa.gov.sa/`, `https://visa.mofa.gov.sa/`.
+Do **not** add: visathing, obokash, ivisa, saudivisaoffice, evisaudi, saudilife guide.
+
+```
+Answer only from these sources. Quote verbatim. If not stated, write "NOT IN SOURCES".
+
+For an ORDINARY Bangladeshi passport holder applying for a Saudi visa in 2026:
+
+1. Which office or centre handles the application, and is an appointment required?
+2. What is the CURRENT fee, broken into visa fee / service fee / insurance, in the
+   currency the source states? Give the exact figures and the date they were published.
+3. What is the stated processing time?
+4. Is biometric enrolment required, at what age range, and at which centre?
+5. What is the exact document checklist the source publishes?
+
+For each answer give the URL and the date you accessed it.
+Then list any of the five that is NOT IN SOURCES.
+```
+
+If Tasheer's Bangladesh pages only render after you pick a country, open
+`vc.tasheer.com`, select Bangladesh, and screenshot or print the requirement page to
+PDF — that PDF is then a citable source.
+
+## SHORT PROMPT B — Article B (the Hajj rites)
+
+Add: `https://hajj.nusuk.sa/nusuk/hajj-rituals`, `https://hajj.nusuk.sa/Journey`,
+`https://haj.gov.sa/en/Hajj`, `https://haj.gov.sa/en/Hajj/Arafah`,
+`https://haj.gov.sa/en/Hajj/Miqaats-Types-of-Rituals`, and the Mina Awareness Guide
+PDF if you can download it.
+
+```
+Answer only from these sources. Quote verbatim, with URL. If not stated, write
+"NOT IN SOURCES". I need PROCEDURE, not virtues.
+
+1. Arafah: what start and end time does the source give for the standing?
+2. Muzdalifah: what is done there, and which acts are called obligatory vs sunnah?
+3. Day 10: is a time of day given for stoning Jamrat al-Aqabah? Quote it.
+4. Tashreeq (11-13): which pillars, in what order, and is a time window stated?
+5. Are pebble counts stated anywhere? Quote the numbers.
+6. What condition does the source give for leaving on the 12th instead of the 13th?
+7. For Hajj, where does shaving/hair-cutting sit in the order of Day 10 acts?
+8. Is Tawaf al-Ifadah's timing stated?
+
+Then list which of the eight are NOT IN SOURCES.
+```
+
+**What would make Article B writable:** any official source that answers 1, 3, 4, 5
+and 6. Those five are the spine of a day-by-day. Without them the article is a list
+of headings, which the ministry already publishes and we would only be duplicating.
+
+## What I will do with the results
+
+- **Prompt A answered** → upgrade `/visa/saudi-arabia-visa` from "ask the embassy" to
+  a real checklist with a dated fee, and cite Tasheer as the application channel.
+- **Prompt A mostly NOT IN SOURCES** → the page stays as it is. That is a legitimate
+  outcome and the page is already honest.
+- **Prompt B answered** → write Article B to the original 1,100–1,300 word spec.
+- **Prompt B still NOT IN SOURCES** → do not write it. Record why, once, and stop
+  revisiting it until a source changes.
