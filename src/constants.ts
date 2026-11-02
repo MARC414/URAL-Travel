@@ -4229,6 +4229,16 @@ export const BLOG_DATA: BlogPost[] = [
         nameBn: "ইসলাম প্রশ্নোত্তর নং ৩১৮২২ — হজের বর্ণনা: হজের প্রকারভেদ এবং পুরুষ ও নারীর হালক বা তাকসির",
         url: "https://islamqa.info/en/answers/31822",
       },
+      {
+        name: "Islam Q&A no. 34293 — Mistakes made when going to 'Arafah and in 'Arafah itself: standing outside the boundary, the Talbiyah, and facing the qiblah",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ৩৪২৯৩ — আরাফাহগমনে ও আরাফাহতে সচরাচর ভুল: সীমানার বাইরে অবস্থান, তালবিয়া এবং কিবলার দিকে মুখ",
+        url: "https://islamqa.info/en/answers/34293",
+      },
+      {
+        name: "Islam Q&A no. 43274 — What hastening to depart from Mina actually means: stoning the jamarat first, then leaving before sunset",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ৪৩২৭৪ — মিনা থেকে তাড়াতাড়ি ফেরার প্রকৃত অর্থ: আগে কঙ্কর নিক্ষেপ, তারপর সূর্যাস্তের আগে প্রস্থান",
+        url: "https://islamqa.info/en/answers/43274",
+      },
     ],
     internalLinks: [
       { text: "Tawaf and Sa'i: Seven Circuits, Counted Correctly", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },

@@ -341,3 +341,43 @@ stop re-asking it and ask **which class of institution owns the answer**. The Ha
 block was not a source shortage; it was a category error. The visa block may be the
 same: fee and biometrics are issued by a *visa application centre*, not a ministry,
 so the ministry will keep returning nothing.
+
+## All six URLs tested — 2 of them changed the article
+
+Fetched and read in full on 2 November 2026. All six resolve, all six are dated
+answers with named scholars.
+
+| URL | Status | Effect on the article |
+| --- | --- | --- |
+| `/144830` | ✅ read | Already the source for the Arafah window |
+| `/31822` | ✅ read | Already the source for halq/taqsir |
+| `/27090` | ✅ read | Already the spine of the day-by-day |
+| `/205161` | ✅ read | Already the source for the exit rule |
+| `/34293` | ✅ **new** | **Added a whole section.** See below |
+| `/43274` | ✅ **new** | Sharpened the exit rule |
+
+**34293 was the most valuable source in the set, and it had not been in the
+article.** Its second listed mistake is pilgrims standing *outside the boundary of
+Arafah* — which invalidates the Hajj, because "Hajj is 'Arafah". That is the
+counterpart to the late-arrival relief the page already gives, and the pairing is
+what makes it useful:
+
+> **Time is forgiving; location is not.** Arrive after sunset and you are covered
+> until dawn. Stand a few hundred metres on the wrong side of the line and no amount
+> of time helps.
+
+No travel site states this pair together, because the ministry does not publish
+boundaries and the agencies have no reason to frighten a customer. It is now §4 of
+the article, in both locales.
+
+The same answer supplied two smaller mistakes that repeat every year: pilgrims stop
+reciting the **Talbiyah** on the road from Mina to Arafah, and they face the
+**mountain** for du'a instead of the qiblah.
+
+**43274** corrected a precision I had wrong by omission. "Hastening" is not simply
+leaving before sunset — it is leaving *after* stoning the jamarat on the 12th.
+Leave first and return later to stone, and you have not hastened at all.
+
+**One source in the article is not on the supplied list:** `/36436` (the time for
+stoning the jamarat). It is the answer that actually fixes the Day 10 and Tashreeq
+windows, so it was verified and kept.

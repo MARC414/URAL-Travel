@@ -2284,6 +2284,10 @@ The practical consequence is the most useful thing on this page. If the coach is
 
 Traveller check (hajjArafahLate): Ask your group leader before the 8th what the plan is if the coach runs late on the 9th. Most groups have never discussed it. The answer changes nothing about the validity of your Hajj, but knowing it stops a family panicking on a stalled bus at nine in the evening.
 
+The mistake that actually costs a Hajj is standing in the wrong place, and it is the mirror image of the one above. Some pilgrims stop outside the boundary of Arafah, stay until the sun goes down and then leave for Muzdalifah. Those who stand there have not performed Hajj, because the Prophet (peace be upon him) said: "Hajj is 'Arafah." Whoever does not stand in a place that is part of Arafah, at the time appointed for the standing, his Hajj is not valid. [7] The boundary is marked and the markers are not hidden; look for them before you sit down, and do not take a driver's word for it. Time here is forgiving; location is not. Arrive after sunset and you are covered until dawn. Stand a few hundred metres on the wrong side of the line and no amount of time helps.
+
+Two smaller mistakes repeat every year in the same crowd. The first is going silent: pilgrims stop reciting the Talbiyah on the road from Mina to Arafah, though the Prophet (peace be upon him) kept reciting it until he had stoned Jamrat al-Aqabah on the day of Eid. [7] The second is direction. People turn to the mountain for du'a because the Prophet stood near it, but he faced the qiblah with the mountain between him and it, and facing the hill instead is recorded as a mistake. [7] All of Arafah is the place of standing: you do not have to reach any particular spot, and the pilgrims who exhaust themselves getting to one have made the day harder than it was made for them. [7]
+
 Then Muzdalifah. Leave Arafah after sunset and travel there, praying Maghrib and 'Isha on arrival, staying the night, praying Fajr and making du'a until just before sunrise. [2] The weak — women, children, the elderly and those caring for them — may leave at the end of the night: Asma bint Abi Bakr waited for the moon to set, then left Muzdalifah for Mina. [4]
 
 5. 10 DHUL-HIJJAH — THE ORDER THAT TRIPS PEOPLE UP
@@ -2304,7 +2308,7 @@ Stoning before the sun passes its zenith on the 11th, 12th or 13th is not permis
 
 The counts are seven on the 10th and then 21 on each day. Leave on the 12th and that is 49 pebbles. Stay for the 13th and it is 70.
 
-The exit rule is where most confusion lives. Finish the stoning on the 12th and leave Mina before sunset, and the 13th is waived for you. If the sun sets while you are still in Mina, you must stay the night and stone the three jamarat on the 13th after the sun passes its zenith. [5] But if you had packed and boarded the bus and the road held you there, you were not in Mina by choice, and you do not have to stay. [2]
+The exit rule is where most confusion lives. Hastening has a precise meaning, and it is not simply leaving early: it means leaving Mina before sunset on the 12th after having stoned the jamarat. Leave before sunset without stoning and come back afterwards to stone, and you have not hastened. [8] Finish the stoning on the 12th and leave Mina before sunset, and the 13th is waived for you. If the sun sets while you are still in Mina, you must stay the night and stone the three jamarat on the 13th after the sun passes its zenith. [5] But if you had packed and boarded the bus and the road held you there, you were not in Mina by choice, and you do not have to stay. [2]
 
 Traveller check (hajjExitRule): Settle with your group on the 11th, not on the 12th, whether everyone leaves that evening. The rule turns on being physically out of Mina before sunset, and a coach that has not started moving at five in the afternoon is not out of Mina. If your package says nafar awwal, ask what happens when the traffic does not cooperate.
 

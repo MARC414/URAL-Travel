@@ -272,12 +272,15 @@ is worth recording, because it reframes the whole problem:
 | Pebbles | 7 on the 10th, then 21 a day — 49 leaving on the 12th, 70 staying to the 13th | 27090 (counts derived, arithmetic stated on the page) |
 | Nafar awwal | Out of Mina after stoning and before sunset; caught by sunset ⇒ must stay and stone on the 13th; involuntary detention (traffic) is excepted | [205161](https://islamqa.info/en/answers/205161), 27090 |
 | Shaving on the 10th | Between the sacrifice and Tawaf al-Ifadhah — the step the ministry's own Day 10 list omits | 27090, [31822](https://islamqa.info/en/answers/31822) |
+| Arafah boundary | Standing **outside** the boundary invalidates the Hajj — the counterpart to the late-arrival relief: time is forgiving, place is not | [34293](https://islamqa.info/en/answers/34293) |
+| Talbiyah, qiblah | Talbiyah continues until Aqabah is stoned on the 10th; du'a faces the qiblah, not the mountain | 34293 |
+| "Hastening" defined | Leaving on the 12th **after stoning**; leaving first and stoning later is not hastening | [43274](https://islamqa.info/en/answers/43274) |
 
 **Editorial consequence.** The article's spine is now the *gap* between the two source
 classes: the ministry's order, joined to the dated rulings it leaves out. That is a
 genuinely differentiated page rather than a restatement of headings, and it lets the
 reader see which sentence comes from which institution.
 
-**Shipped as** `hajj-rites-mina-arafah-muzdalifah-day-by-day`, 1,453 EN / 1,193 BN
-words, six references, three traveller checks, no commercial CTA (A2), guarded by
+**Shipped as** `hajj-rites-mina-arafah-muzdalifah-day-by-day`, 1,770 EN words (BN at parity)
+plus the boundary and hastening sections, eight references, three traveller checks, no commercial CTA (A2), guarded by
 `test:hajj-rites` (22 checks).

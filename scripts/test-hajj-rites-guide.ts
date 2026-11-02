@@ -32,11 +32,11 @@ function test(name: string, run: () => void) {
   count++;
 }
 
-test("en: metadata, date and the six sources", () => {
+test("en: metadata, date and the eight sources", () => {
   const entry = BLOG_DATA.find((item) => item.slug === slug);
   assert.ok(entry, "post missing from BLOG_DATA");
   assert.equal(entry!.updatedAt, "2026-11-02");
-  assert.equal(entry!.references?.length, 6);
+  assert.equal(entry!.references?.length, 8);
 
   const urls = entry!.references!.map((ref) => ref.url);
   assert.ok(
@@ -45,7 +45,7 @@ test("en: metadata, date and the six sources", () => {
   );
   assert.equal(
     urls.filter((url) => url.includes("islamqa.info")).length,
-    5,
+    7,
     "the five answering sources must all be cited",
   );
 
@@ -134,6 +134,29 @@ for (const locale of ["en", "bn"] as const) {
           "your Hajj is not lost",
           "before dawn on the Day of Sacrifice",
         ];
+    for (const phrase of phrases) {
+      assert.ok(body.includes(phrase), `${locale}: missing "${phrase}"`);
+    }
+  });
+
+  test(`${locale}: the boundary warning survives — time is forgiving, place is not`, () => {
+    // 34293, mistake 2: standing OUTSIDE 'Arafah invalidates the Hajj, which is the
+    // counterpart to the late-arrival relief. Dropping it would leave the page
+    // reassuring in the one case that is recoverable and silent in the one that
+    // is not.
+    const phrases = bn
+      ? ["সীমানার বাইরে", "হজ শুদ্ধ নয়", "সময় ক্ষমাশীল, জায়গা নয়"]
+      : ["outside the boundary of Arafah", "his Hajj is not valid", "Time here is forgiving; location is not"];
+    for (const phrase of phrases) {
+      assert.ok(body.includes(phrase), `${locale}: missing "${phrase}"`);
+    }
+  });
+
+  test(`${locale}: hastening is defined as stoning first, then leaving`, () => {
+    // 43274: leaving before sunset without stoning is not "hastening".
+    const phrases = bn
+      ? ["কঙ্কর নিক্ষেপ করার পর সূর্যাস্তের আগে মিনা ছাড়া"]
+      : ["after having stoned the jamarat", "you have not hastened"];
     for (const phrase of phrases) {
       assert.ok(body.includes(phrase), `${locale}: missing "${phrase}"`);
     }
