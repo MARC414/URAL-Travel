@@ -1874,12 +1874,18 @@ function buildAllRoutes(): PrerenderRoute[] {
 
   for (const v of VISA_DATA) {
     const visaUrl = `${BASE_URL}/visa/${v.id}`;
+    // The Saudi page deliberately publishes no fee and no document list, so the
+    // generic sentence below would advertise exactly what it refuses to give.
+    const saudiVisa = v.id === "saudi-arabia-visa";
     const title =
       v.id === "nepal-visa"
         ? "Nepal Visa for Bangladeshi Citizens 2026: Free Visa on Arrival Guide | URAL"
-        : `${v.country} Visa for Bangladeshi Travelers 2026 | URAL`;
-    const description =
-      `Review the ${v.country} entry route, required documents and application steps for Bangladeshi travelers. Verify current rules and fees with official sources before applying.`;
+        : saudiVisa
+          ? "Saudi Visa: Which Route Fits Your Passport (2026)"
+          : `${v.country} Visa for Bangladeshi Travelers 2026 | URAL`;
+    const description = saudiVisa
+      ? "Bangladesh is not on Saudi Arabia's 68-country tourist eVisa list. The three routes that are actually open, the transit eVisa condition, and why this page publishes no fee figure — checked against official sources."
+      : `Review the ${v.country} entry route, required documents and application steps for Bangladeshi travelers. Verify current rules and fees with official sources before applying.`;
     const extraNodes: Record<string, unknown>[] = [];
     if (v.schemaMarkup?.code) {
       try {

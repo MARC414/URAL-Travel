@@ -1289,7 +1289,210 @@ export const VISA_DATA: VisaGuide[] = [
   ]
 }`
     }
-  }
+  },
+  {
+    id: "saudi-arabia-visa",
+    country: "Saudi Arabia",
+    requirementType: "Multiple routes — check eligibility",
+    costBdt:
+      "No single published figure. The Saudi authorities do not publish one central fee for a consulate visa, and the amount differs by the channel you apply through. Confirm the fee with the embassy or the accredited provider before paying anything; treat any website quoting an exact fee for a visa it has not yet assessed as a sales page.",
+    processingTime:
+      "Not published as a fixed number, and it differs by channel and season. Get the current estimate from the embassy or the accredited provider for your own dates, and do not book a non-refundable fare until the visa is in hand.",
+    documentChecklist: [
+        {
+          "category": "Prove which route applies to you first",
+          "items": [
+            "Open https://visa.visitsaudi.com and read the eligible-countries list yourself. Bangladesh is not on it, and that single fact decides your route.",
+            "If you already hold a valid GCC, UK, US or Schengen tourist visa, check the stopover transit eVisa terms on your airline's own visa page before assuming you qualify.",
+            "If you do not hold one of those, the consulate route is your route — there is no legitimate way around it.",
+            "Never pay a website that promises an instant Saudi eVisa to a Bangladeshi passport without first checking that list."
+          ]
+        },
+        {
+          "category": "Then, at the embassy or through an accredited provider",
+          "items": [
+            "The Royal Embassy of Saudi Arabia in Dhaka is the official channel for a consulate visa. Contact them directly for the current document list, because that list is issued consularly and is not published centrally in English.",
+            "For Umrah, the Ministry of Hajj and Umrah states that packages are booked through accredited service providers and approved platforms integrated with the Nusuk platform.",
+            "Do not treat a quote as an approval. A package price does not mean the visa has been decided."
+          ]
+        },
+        {
+          "category": "Health requirements before you travel",
+          "items": [
+            "The Saudi Ministry of Health publishes the current Hajj and Umrah health requirement documents. Download the Umrah one and read it before you apply, not after you book.",
+            "Requirements can be season-dated. Check the document that is current at the time you apply, not the one you remember from a previous trip."
+          ]
+        }
+      ],
+    stepByStep: [
+        "Check the official eligible-countries list at visa.visitsaudi.com. If Bangladesh is absent, as it is today, the tourist eVisa is closed to your passport.",
+        "If you hold a valid GCC, UK, US or Schengen tourist visa, read your airline's stopover visa page. Saudia states the transit eVisa is available to travellers holding a valid tourist visa for the GCC, the UK, the USA or the Schengen area.",
+        "If you do not, contact the Royal Embassy of Saudi Arabia in Dhaka for the consulate visa requirements. Both the official portal and the national carrier direct travellers from non-eligible countries to Saudi embassies and consulates.",
+        "For Umrah specifically, the Ministry of Hajj and Umrah states that packages are booked through accredited providers and approved platforms integrated with the Nusuk platform. Confirm the provider is accredited before you transfer money.",
+        "Read the current Ministry of Health requirements for Umrah and complete whatever they require before your application, not after.",
+        "Get the visa before you book a non-refundable ticket. A fare is not a reason to assume an approval.",
+        "On arrival, carry printed copies of the visa, the accommodation booking and the health documentation. Do not rely on a phone that may not have a working SIM yet.",
+        "Confirm the exit and entry conditions on the visa itself. A visa issued for one purpose is not automatically valid for another."
+      ],
+    quickAnswer:
+      "Bangladesh is not one of the 68 countries on Saudi Arabia's official tourist eVisa list, so the direct online tourist visa is not open to an ordinary Bangladeshi passport. The routes that remain are a consulate visa through the Saudi embassy, a free stopover transit eVisa if you already hold a valid GCC, UK, US or Schengen tourist visa, or an Umrah package booked through an accredited provider integrated with Nusuk. A tourist visa, where you can get one, does permit Umrah but never Hajj.",
+    keyFacts: [
+        {
+          "label": "Tourist eVisa eligible?",
+          "value": "No — Bangladesh is not on the 68-country list"
+        },
+        {
+          "label": "Route if not eligible",
+          "value": "Consulate visa via the Saudi embassy"
+        },
+        {
+          "label": "Transit eVisa condition",
+          "value": "Valid GCC / UK / US / Schengen tourist visa"
+        },
+        {
+          "label": "Transit eVisa terms",
+          "value": "90-day validity, stay up to 96 hours"
+        },
+        {
+          "label": "Umrah on a tourist visa",
+          "value": "Permitted, excluding Hajj"
+        },
+        {
+          "label": "Umrah packages",
+          "value": "Through accredited Nusuk-integrated providers"
+        },
+        {
+          "label": "Published fee",
+          "value": "Not published centrally — confirm consularly"
+        }
+      ],
+    faqs: [
+        {
+          "question": "Can a Bangladeshi passport holder apply for the Saudi tourist eVisa online?",
+          "answer": "Not directly. The official Saudi eVisa portal lists 68 eligible countries and Bangladesh is not among them. The portal's own instruction for a country that is not listed is to contact the nearest Saudi embassy, and the national carrier states the same thing in different words: travellers from non-eligible countries should apply for a consulate visa through Saudi embassies and consulates."
+        },
+        {
+          "question": "I have a US or UK or Schengen visa. Does that change anything?",
+          "answer": "It can open the stopover transit eVisa, which is a different product from the tourist eVisa. Saudia states the transit eVisa is available to citizens and residents of 60+ countries or to travellers holding a valid tourist visa for the GCC countries, the UK, the USA or the Schengen area. It is valid for 90 days and allows a stay of up to 96 hours. Read the conditions on the airline page for your own trip, because eligibility is checked at booking, not by us."
+        },
+        {
+          "question": "Can I perform Umrah on a tourist visa?",
+          "answer": "Yes, where you hold one. The official eVisa portal describes the tourist visa as covering tourism-related activities including Umrah, excluding Hajj. That is a permission, not a booking: you still need an Umrah package through an accredited provider and you still need to meet the health requirements."
+        },
+        {
+          "question": "Do I need a travel agent?",
+          "answer": "The Ministry of Hajj and Umrah describes Umrah packages as booked through accredited service providers and approved platforms integrated with the Nusuk platform. That is the ministry's own description of how packages are sold. We do not state that an agent is legally mandatory, because the official English pages do not say that in those words — ask the embassy for your own case."
+        },
+        {
+          "question": "What does the visa cost, and how long does it take?",
+          "answer": "We deliberately publish no figure, because the Saudi authorities do not publish a single central fee or processing time for a consulate visa, and a number copied from an agency page would be wrong for most readers. Fee and timing are set by the channel you apply through. Ask the embassy, and treat any website that quotes you a precise fee for a visa it has not yet assessed as a sales page rather than an authority."
+        },
+        {
+          "question": "Are vaccinations required?",
+          "answer": "The Saudi Ministry of Health publishes current health requirement documents for both Hajj and Umrah, and states that pilgrims should receive necessary vaccinations in advance of travel. The specific requirement changes by season, so read the current document rather than a summary. We do not reproduce a vaccine list here because it is season-dated and getting it wrong is a health risk, not a formatting error."
+        },
+        {
+          "question": "Is there a visa on arrival for Bangladeshi passports?",
+          "answer": "The official portal lists visa on arrival for eligible nationalities, and Bangladesh is not on the eligible-countries list. If you hold a qualifying GCC, UK, US or Schengen tourist visa, the stopover transit route is the one to check — it is a different product with different conditions, and it is confirmed at booking."
+        },
+        {
+          "question": "What should I do before paying anyone?",
+          "answer": "Open the official eligible-countries list and confirm your own position on it. Then confirm the provider is accredited and integrated with Nusuk before transferring money. Two checks, both free, and between them they remove almost every way a Bangladeshi pilgrim loses money on a Saudi visa."
+        }
+      ],
+    schemaMarkup: {
+      type: "GovernmentService + FAQPage",
+      description: "Saudi visa routes for Bangladeshi passport holders, checked against the official eVisa portal, the national carrier and the Ministry of Health",
+      code: `{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "GovernmentService",
+      "name": "Saudi Arabia visa routes for Bangladeshi passport holders",
+      "serviceType": "Visa guidance",
+      "provider": {
+        "@type": "GovernmentOrganization",
+        "name": "Saudi Ministry of Foreign Affairs / Ministry of Hajj and Umrah"
+      },
+      "areaServed": "Bangladesh",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Bangladeshi passport holders"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can a Bangladeshi passport holder apply for the Saudi tourist eVisa online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not directly. The official Saudi eVisa portal lists 68 eligible countries and Bangladesh is not among them. The portal's own instruction for a country that is not listed is to contact the nearest Saudi embassy, and the national carrier states the same thing in different words: travellers from non-eligible countries should apply for a consulate visa through Saudi embassies and consulates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I have a US or UK or Schengen visa. Does that change anything?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It can open the stopover transit eVisa, which is a different product from the tourist eVisa. Saudia states the transit eVisa is available to citizens and residents of 60+ countries or to travellers holding a valid tourist visa for the GCC countries, the UK, the USA or the Schengen area. It is valid for 90 days and allows a stay of up to 96 hours. Read the conditions on the airline page for your own trip, because eligibility is checked at booking, not by us."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I perform Umrah on a tourist visa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, where you hold one. The official eVisa portal describes the tourist visa as covering tourism-related activities including Umrah, excluding Hajj. That is a permission, not a booking: you still need an Umrah package through an accredited provider and you still need to meet the health requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a travel agent?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Ministry of Hajj and Umrah describes Umrah packages as booked through accredited service providers and approved platforms integrated with the Nusuk platform. That is the ministry's own description of how packages are sold. We do not state that an agent is legally mandatory, because the official English pages do not say that in those words — ask the embassy for your own case."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the visa cost, and how long does it take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We deliberately publish no figure, because the Saudi authorities do not publish a single central fee or processing time for a consulate visa, and a number copied from an agency page would be wrong for most readers. Fee and timing are set by the channel you apply through. Ask the embassy, and treat any website that quotes you a precise fee for a visa it has not yet assessed as a sales page rather than an authority."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are vaccinations required?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Saudi Ministry of Health publishes current health requirement documents for both Hajj and Umrah, and states that pilgrims should receive necessary vaccinations in advance of travel. The specific requirement changes by season, so read the current document rather than a summary. We do not reproduce a vaccine list here because it is season-dated and getting it wrong is a health risk, not a formatting error."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a visa on arrival for Bangladeshi passports?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The official portal lists visa on arrival for eligible nationalities, and Bangladesh is not on the eligible-countries list. If you hold a qualifying GCC, UK, US or Schengen tourist visa, the stopover transit route is the one to check — it is a different product with different conditions, and it is confirmed at booking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I do before paying anyone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the official eligible-countries list and confirm your own position on it. Then confirm the provider is accredited and integrated with Nusuk before transferring money. Two checks, both free, and between them they remove almost every way a Bangladeshi pilgrim loses money on a Saudi visa."
+          }
+        }
+      ]
+    }
+  ]
+}`,
+    },
+  },
 ];
 
 export const DESTINATIONS_DATA: DestinationGuide[] = [

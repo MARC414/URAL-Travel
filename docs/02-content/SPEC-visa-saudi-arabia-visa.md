@@ -92,12 +92,33 @@ the application route*; the posts own the operational detail.
 
 ## 5. Sources — the gate before writing
 
-> ### STATUS 2 NOVEMBER 2026: BLOCKED. Do not write this page yet.
+> ### STATUS 2 NOVEMBER 2026: **BUILT — the block was resolved by a different source.**
 >
-> I attempted the source verification and could not complete it. What I found:
+> The owner's NotebookLM run returned `NOT IN SOURCES` to every eligibility question,
+> which was the useful answer: the ministry does not publish nationality eligibility in
+> English. But it also surfaced the right portal, and that portal settles the question.
 >
-> | Source tried | Result |
-> | --- | --- |
+> | Source | Verified? | What it actually says |
+> | --- | --- | --- |
+> | `https://visa.visitsaudi.com/` | ✅ **primary, fetched** | Lists all 68 eVisa-eligible countries by region. **Bangladesh is not among them.** Also: eVisa is one year, multiple entry, up to 90 days; the tourist visa covers "Umrah (excluding Hajj)"; and "If your country is not in the list contact the nearest Saudi Arabia Embassy." |
+> | `https://www.saudia.com/explore/visit-saudi-arabia/visas` | ✅ official carrier, fetched | "Tourists that are not from eligible countries list should apply for a consulate visa through Saudi embassies and consulates." Stopover transit eVisa: available to holders of a valid GCC / UK / USA / Schengen tourist visa, 90-day validity, stay up to 96 hours. |
+> | `https://haj.gov.sa/en/Umrah` | ✅ primary, fetched | Umrah = Ihram + Tawaf + Sa'i; packages are booked through accredited providers integrated with Nusuk. |
+> | `https://www.moh.gov.sa/en/healthawareness/pilgrims-health/pages/default.aspx` | ✅ primary, fetched | Publishes the current Hajj 1447-2026 and Umrah health-requirement documents. The PDFs themselves could not be downloaded here, so the page is cited for the existence and location of the requirement, not for specific vaccines. |
+>
+> **What this page can therefore say, all of it sourced:** Bangladesh is not on the
+> 68-country list; the official fallback is a consulate visa; a transit eVisa exists
+> but is conditional on holding another country's tourist visa; Umrah is permitted on
+> a tourist visa but Hajj is not.
+>
+> **What it still cannot say, and does not pretend to:** the fee, the processing time,
+> the biometrics step, or a document list. Those are issued consularly and are not
+> published centrally in English. The page states that plainly and sends the reader to
+> the embassy, which is more useful than a number copied from an agency.
+>
+> **Agency sources were not used.** ivisa, saudivisaoffice, evisaudi, hudhudtrip,
+> visathing, obokash and umrah.com.bd all appeared in the research and none was cited.
+
+--- | --- |
 > | `haj.gov.sa/en/Umrah` | **Live and authentic** (updated 19 Oct 2026). Confirms Umrah = Ihram + Tawaf + Sa'i, and that packages are booked through accredited providers integrated with Nusuk. **Says nothing about visa eligibility by nationality.** |
 > | `hajj.nusuk.sa/Journey` | Maintenance page, twice, hours apart. |
 > | `umrah.nusuk.sa/Journey` | Live. Rites only; no visa eligibility. |
@@ -190,3 +211,42 @@ Record the checked date in the page copy (the sibling pages do this) and in
 | Duplicates the pillar's visa section. | Pillar keeps the process narrative; this page owns eligibility-by-route and the fee-owner breakdown. Cross-link, don't copy. |
 | Bengali falls back to English silently. | Override shipped in the same commit; test asserts it. |
 | Stale within a season. | 90-day review class and a named owner. |
+
+---
+
+## 10. Owner's NotebookLM run — what it proved, and why it was worth doing
+
+The research returned **`NOT IN SOURCES` to every eligibility question**. That is a
+result, not a failure, and it changed the build:
+
+| Question asked | Answer | Consequence |
+| --- | --- | --- |
+| Is Bangladesh on the eVisa list? | `NOT IN SOURCES` | The ministry pages genuinely do not answer it — so the answer had to come from the portal itself, which does. |
+| Conditions for eVisa / visa on arrival | `NOT IN SOURCES` | Confirmed the gap is real, not a search failure. |
+| Is an agent mandatory? | `NOT IN SOURCES` | The page now says the ministry *describes* packages as sold through accredited providers, and explicitly declines to call an agent "legally mandatory", because no official English page says that. |
+| Fees, processing, biometrics | `NOT IN SOURCES` | The page publishes none of them, and says why. |
+| Hajj 8–13 Dhul-Hijjah sequence | Outline headings only, procedure `NOT IN SOURCES` | Article B cannot be written to standard yet — see §11. |
+| Vaccinations | ✅ quoted, `haj.gov.sa/en/Hajj` | Supported by the MOH requirement documents, which the built page points at. |
+
+**The pattern worth remembering:** English-language Saudi government pages publish
+*ritual guidance, virtues, health advice and contact details*. They do **not** publish
+visa eligibility, fees, processing times or biometrics. Any site that states those
+confidently got them from somewhere other than the ministry — usually a competitor's
+marketing copy.
+
+## 11. Article B — the source position, now precise
+
+`hajj.nusuk.sa/Journey` gives the **order** of the rites as outline headings
+(airport → Makkah → Mina/Tarwiyah → Arafah → Muzdalifah → Jamrat al-Aqaba → sacrifice
+→ Tawaf al-Ifadhah and Sa'i → night of the 10th in Mina → 11th → 12th → 13th →
+Tawaf al-Wadaa). Everything procedural — times, pebble counts, nafar awwal conditions,
+where shaving sits for Hajj — is `NOT IN SOURCES`.
+
+So Article B as planned (a 1,100–1,300 word day-by-day) **cannot be written to the
+house standard**. What *is* writable is a shorter piece built on the official order,
+with an explicit "the ministry does not specify this here" marker on every step, and
+the operational detail delegated to the group leader and the package operator.
+
+**Recommendation: do not write it yet.** The honest article is thin, and the cluster
+earns 97 impressions. Revisit when either the ministry publishes procedural guidance
+or `hajj.nusuk.sa` returns with more than headings.

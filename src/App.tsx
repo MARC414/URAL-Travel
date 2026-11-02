@@ -1930,12 +1930,26 @@ export default function App() {
       ];
     } else {
       const visaUrl = siteUrl(`/visa/${activeVisa.id}`, lang);
-      seoTitle = activeVisa.id === "nepal-visa"
-        ? `Nepal Visa for Bangladeshi Citizens 2026: Free Visa on Arrival Guide | URAL`
-        : `${activeVisa.country} Visa for Bangladeshi Travelers 2026 | URAL`;
-      seoDescription = isBn
-        ? `${activeVisa.country}-এর প্রবেশ-নিয়ম, প্রয়োজনীয় নথি ও আবেদন ধাপ দেখুন। আবেদন করার আগে সরকারি সূত্রে বর্তমান নিয়ম ও ফি যাচাই করুন।`
-        : `Review the ${activeVisa.country} entry route, required documents and application steps for Bangladeshi travelers. Verify current rules and fees with official sources before applying.`;
+
+      // The Saudi page must not promise what it deliberately does not publish.
+      // The generic fallback below advertises "required documents and fees",
+      // which this page refuses to state — carrying that copy would be the page
+      // breaking its own promise in the snippet, before the reader arrives.
+      if (activeVisa.id === "saudi-arabia-visa") {
+        seoTitle = isBn
+          ? "সৌদি ভিসা: বাংলাদেশি পাসপোর্টে কোন পথ প্রযোজ্য (২০২৬) | URAL"
+          : "Saudi Visa: Which Route Fits Your Passport (2026)";
+        seoDescription = isBn
+          ? "বাংলাদেশ সৌদি আরবের ৬৮ দেশের পর্যটন ই-ভিসা তালিকায় নেই। কোন পথগুলো বাস্তবে খোলা, ট্রানজিট ই-ভিসার শর্ত কী, আর কেন আমরা কোনো ফি-র অঙ্ক প্রকাশ করি না — সরকারি সূত্রে যাচাই করা গাইড।"
+          : "Bangladesh is not on Saudi Arabia's 68-country tourist eVisa list. The three routes that are actually open, the transit eVisa condition, and why this page publishes no fee figure — checked against official sources.";
+      } else {
+        seoTitle = activeVisa.id === "nepal-visa"
+          ? `Nepal Visa for Bangladeshi Citizens 2026: Free Visa on Arrival Guide | URAL`
+          : `${activeVisa.country} Visa for Bangladeshi Travelers 2026 | URAL`;
+        seoDescription = isBn
+          ? `${activeVisa.country}-এর প্রবেশ-নিয়ম, প্রয়োজনীয় নথি ও আবেদন ধাপ দেখুন। আবেদন করার আগে সরকারি সূত্রে বর্তমান নিয়ম ও ফি যাচাই করুন।`
+          : `Review the ${activeVisa.country} entry route, required documents and application steps for Bangladeshi travelers. Verify current rules and fees with official sources before applying.`;
+      }
 
       let schemaObj: any = undefined;
       try {
