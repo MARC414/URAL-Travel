@@ -159,9 +159,18 @@ through `resolvePartnerUrl()` or `<PartnerLinkButton />` so paused programmes fa
 ### 4.3 Rules
 
 - **A1 — One primary CTA per article.** A second, unrelated CTA splits intent and reads as a advertorial.
-- **A2 — The CTA must answer the article's own friction.** If the page is about mahram rules, a family transfer
-  solves the arrival problem; a city attraction pass does not. If nothing is relevant, ship **no** CTA and say so in
-  the queue row.
+- **A2 — Every article must leave the reader with a next step, and that step is chosen by the reader's stage, not
+  by the article's topic.** There are two commercial layers and they are governed differently:
+  - **A2.1 — the primary CTA** (`affiliateCTA`): at most one partner, and it must solve the friction *this* page
+    creates. If the page is about mahram rules, a family transfer does not solve it; a women's-access question needs
+    an answer, not a taxi. If no partner answers the page's own friction, the primary CTA is omitted.
+  - **A2.2 — the Journey Help panel** (`journeyHelp`, §4.4): a separate, always-present block that shows the reader
+    what their *next* practical problem will be, with 2–3 partner links and a written reason for each.
+
+  The old rule said "ship no CTA and say so". That is withdrawn: **no article ships with no commercial layer at all.**
+  What replaces it is stricter, not looser — a partner may only appear in a stage where it genuinely helps (§4.4),
+  the panel is capped at three links, each link carries a specific reason, and every link is measured. A reader who
+  has just been told how to count seven circuits gets a SIM card and a transfer, never a city attraction pass.
 - **A3 — Provider keys only.** `affiliateCTA.provider` must be a key of `AFFILIATE_LINKS`; CI rejects anything else.
 - **A4 — Specific copy, not a slogan.** Name the airport, city or route the reader is actually using. "Landing at
   Jeddah Terminal 1 in Ihram?" is specific; "Book your transfer today!" is not.
@@ -175,6 +184,55 @@ through `resolvePartnerUrl()` or `<PartnerLinkButton />` so paused programmes fa
   `TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS` in `scripts/prerender.ts`. That is a code change, not a copy change.
 - **A8 — No fake relevance.** Never attach a partner to a page whose intent it does not serve merely to raise
   revenue. The owner reviews this as an editorial decision.
+
+### 4.4 The Journey Help panel (`journeyHelp`)
+
+**Why it exists.** The reader of a Hajj or Umrah article is on a journey with a fixed sequence of practical
+problems — visa, flight, arrival transfer, connectivity, accommodation, the rites themselves, then customs on the
+way home. An article answers one of those and then abandons the reader at the next one. The panel closes that gap:
+it shows what the *next* problem is and who can help with it, on the page the reader is already on.
+
+**Why it is not a licence to advertise.** Because the panel is chosen by **stage**, not by article, and a stage only
+carries partners that genuinely serve it. A stage with no suitable partner carries no links — the panel still
+renders, with internal links and no commercial link.
+
+#### 4.4.1 The four stages
+
+Every Hajj & Umrah article declares one stage (new optional field `journeyStage` on `BlogPost`):
+
+| Stage | Reader is doing | Panel partners, in order | Never |
+| --- | --- | --- | --- |
+| `prepare` | visa, registration, documents, budget | `airalo` / `yesim` (connectivity for Nusuk and Rawdah QR), `kiwitaxi` / `getTransfer` (arrival), `klook` (hotel search) | attraction passes, `airhelp` |
+| `travel` | flights, airport, Ihram, transfer | `aviasales` / `kiwi` (fares), `kiwitaxi` / `welcomePickups` (arrival), `airalo` / `yesim` (SIM), `radicalStorage` (bags) | `qeeq` (no self-drive), `goCity` |
+| `perform` | the rites themselves, inside Makkah/Madinah | `airalo` / `yesim` (Nusuk and Rawdah QR, family tracking), `radicalStorage` (bags during rites), `kiwitaxi` (Makkah ⇄ Madinah ⇄ Mina transfer) | **airfare**, **attraction passes**, `airhelp` |
+| `return` | departure, customs, Zamzam, delays | `airhelp` (delay, cancellation, baggage), `radicalStorage` (last-day bags), `airalo` / `yesim` (roaming before landing) | `klook`, `goCity` |
+
+The `perform` row is the one that matters most and the one most likely to be argued for. It stays as written:
+a pilgrim counting circuits is not shopping for a fare, and putting one there would be the clearest possible
+breach of A8.
+
+#### 4.4.2 Panel contract
+
+- **Maximum three commercial links.** More reads as an advertorial block and dilutes the click.
+- **Every link carries a written reason** of one line that names the reader's actual next problem. "Get connected
+  before your Rawdah slot" passes; "Book now and save" fails A4.
+- **The panel is labelled.** It sits under a heading that says what it is (e.g. "Before your next step") and carries
+  the site disclosure (A5). It must not look like an editorial recommendation.
+- **It is additive to internal links, never a substitute.** An article's internal links still carry the reading job;
+  the panel carries the logistics job. A page that has a panel and thin internal links fails G4.
+- **It is client-rendered**, so it does not add to the static HTML (A7). If it must be crawlable, that is a code
+  change in `scripts/prerender.ts`, not a copy change.
+- **It is optional per article**, but its absence must be a decision: the article's queue row records
+  `journeyHelp: none — <reason>`, in the same way the old rule required.
+
+#### 4.4.3 Measurement
+
+Every panel link fires `affiliate_partner_click` with `affiliate_placement: "journey_help"`, which the existing
+tracker already carries (`src/utils/analytics.ts`). That means the moment GTM forwarding is live, the panel is
+measured against the primary CTA on the same page: if `journey_help` out-clicks the primary CTA over 30 days, the
+panel should become the primary and `affiliateCTA` should be reconsidered — and if it earns nothing, it comes off.
+
+**A panel nobody clicks is a banner. Delete it rather than insist on it.**
 
 ---
 

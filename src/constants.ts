@@ -3965,6 +3965,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Wearing Ihram at Dhaka Airport or at the Miqat", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
       { text: "Umrah Rules for Women: Mahram, Visa and Ladies' Gates", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
       { text: "Umrah with Elderly Parents: Wheelchair and Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+          { text: "Nusuk App & Saudi Visa Bio Guide: Rawdah Permit", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "Makkah & Madinah Hotel Zones and Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
     ],
   },
   ...SCHEDULED_BLOG_DATA,

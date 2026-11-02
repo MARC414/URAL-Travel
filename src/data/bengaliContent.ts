@@ -54,6 +54,8 @@ export const BENGALI_BLOG_OVERRIDES: Record<
       { text: "ঢাকা বিমানবন্দরে না মিকাতে ইহরাম", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
       { text: "নারীদের ওমরাহ নিয়ম: মাহরাম, ভিসা ও লেডিজ গেট", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
       { text: "বয়স্ক বাবা-মাকে নিয়ে ওমরাহ: হুইলচেয়ার ও চিকিৎসা গাইড", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+          { text: "নুসুক অ্যাপ ও সৌদি ভিসা বায়ো গাইড: রাওদা পারমিট", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "মক্কা-মদিনা হোটেল জোন ও হারামাইন ট্রেন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
     ],
     content: `এই গাইডটি সেই প্রথমবারের যাত্রীর জন্য, যিনি কয়েক দিনের মধ্যেই মসজিদুল হারামের ভেতরে দাঁড়াবেন: এক চক্কর কোথায় শুরু হয়, কতগুলোতে এক গণনা হয়, আর সাফার দিকে ফেরার পর গণনাটা কীভাবে চলে। এটি কোনো ফতোয়া নয় এবং মাযহাবগুলোর পার্থক্য এখানে মিটিয়ে দেওয়া হয়নি। যেখানে সরকারি সূত্র কোনো আমলকে সুন্নাহ বলেছে, সেখানে এই পেজে সেটাই লেখা হয়েছে।
 

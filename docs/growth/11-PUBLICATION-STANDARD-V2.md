@@ -31,11 +31,39 @@ cadence, not a publishing programme.
 | --- | --- | --- | --- |
 | G1 | **Distinct job** | A question no live URL owns, checked against `public/sitemap.xml` + `SEO-KEYWORD-MAP.md` + a grep of the cluster. Memory is not evidence. | Add it to the existing owner as a section. |
 | G2 | **Evidence** | ≥3 references, primary first (ministry, regulator, operator, airport, airline), each with `name`, `nameBn`, HTTPS `url`, and a checked date. | Do not write. Find the source or drop the claim. |
-| G3 | **Demand signal** | At least one of: a GSC query, an owner-supplied reader question, or an explicitly labelled hypothesis with a review date. "A keyword tool suggested it" is not a signal. | Label the article an unvalidated hypothesis, and cap it at one per month. |
+| G3 | **Demand signal** | At least one of: a GSC query, an owner-supplied reader question, or an explicitly labelled hypothesis with a review date. "A keyword tool suggested it" is not a signal. **Under 6 months old or under 10,000 impressions, see §2.2 — absence of a query is not evidence of absent demand.** | Label the article an unvalidated hypothesis, and cap it at one per month. |
 | G4 | **Links both ways** | ≥4 `internalLinks` in the article (≥2 blog→blog, ≥1 hub/money), **and** ≥2 existing posts link *into* it in the same release (EN and BN arrays both). | Not a release. Hold it. |
 | G5 | **Locale parity** | English and Bengali body at publish time, same facts, same caveats, explicitly written BN `internalLinks`. | Publish nothing, or publish English only *without* a `/bn/` URL in the sitemap. |
 | G6 | **Maintenance owner** | A named owner and a review interval: `seasonal` (recheck each season), `static` (recheck annually), or `fast-moving` (90 days). | Do not publish. Orphaned pages decay silently. |
 | G7 | **Cadence** | ≤2 new URLs per week. No same-day batches of unrelated posts. | Queue it. The queue is not a backlog of promises; it is an ordering. |
+
+### 2.2 Domain age overrides absence-of-evidence (added 2 November 2026)
+
+**The mistake this section prevents, made and corrected the same day.** On 2
+November I read a ten-day GSC export — 1,246 impressions, 2 clicks, on a domain
+roughly one month old — and wrote that the Hajj rites article "fails G3". That was
+wrong. A month-old domain has not yet been given the query surface it will
+eventually be shown for, so **a query that does not appear yet tells you almost
+nothing about whether demand exists.**
+
+The rule:
+
+- **A domain under six months old, or under 10,000 impressions in the export,
+  cannot fail G3 by absence.** G3 is satisfied by an owner request, a reader
+  question, or a labelled hypothesis — as before — and a missing query is simply
+  silence, not a negative signal.
+- **Volume findings are not direction findings.** "262 URLs earned 1,246
+  impressions" is a baseline. It does not license killing a topic, and it does not
+  license a CTR rewrite at n=59, where zero clicks is inside normal variance.
+- **What small data *can* do:** reveal a defect (a page serving the wrong locale, a
+  broken canon, a 404), and supply topic ideas for social. Both are cheap and
+  reversible. Neither is a content-direction decision.
+- **What it cannot do:** rank topics, decide an article is unwanted, or justify
+  rewriting titles in bulk.
+
+**Action on this data is deferred to a 60–90 day comparison.** The export is kept
+as the baseline in `docs/03-social/gsc-2026-10-22_2026-10-31/`, and the read is in
+`docs/03-social/GSC-READ-2026-11-02.md`.
 
 ### 2.1 One documented exemption: the commercial block
 
@@ -116,8 +144,8 @@ record intentions.
 
 | Candidate | Status under v2 |
 | --- | --- |
-| `tawaf-sai-seven-circuits-step-by-step-guide` | **Built 2 Nov.** G3 was an owner request plus a reel gap, not a GSC query — recorded as an unvalidated hypothesis with a 90-day review under §3. G6 = static. |
-| `hajj-rites-mina-arafah-muzdalifah-day-by-day` | **Fails G3 on current evidence (2 Nov).** The entire 25-URL cluster earns 97 impressions and 0 clicks over 10 days. Hold until the cluster's CTR is repaired and a query appears. Spec kept in the plan for when it does. |
+| `tawaf-sai-seven-circuits-step-by-step-guide` | **Built 2 Nov.** G3 = owner request + reel gap. Gains the Journey Help panel (§4.4 of 10-CONTENT-UPGRADE-STANDARD, stage `perform`) at the next content release. G6 = static. |
+| `hajj-rites-mina-arafah-muzdalifah-day-by-day` | **G3 satisfied** (owner request + reel gap), per §2.2. Held only on the source re-check, not on demand. Withdrawn claim: it does **not** fail G3 — see the correction in `GSC-READ-2026-11-02.md`. |
 | `/visa/saudi-arabia-visa` | **A page, not an article** — does not require G1–G7, but requires the same evidence standard and a named maintenance owner (fast-moving). Spec: `docs/02-content/SPEC-visa-saudi-arabia-visa.md`. |
 | Bengali override for `umrah-dubai-10-day-combo-trip…` | **Defect fix**, not content. Do it first; it is cheap and it is currently wrong. |
 
