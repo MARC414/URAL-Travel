@@ -1,5 +1,11 @@
 import { TravellerCheckNote } from "../components/TravellerCheckNote";
 import { getTravellerCheck } from "../utils/travellerChecks";
+import {
+  INLINE_CITATION_PATTERN,
+  resolveCitation,
+  citationAnchorId,
+  CITATION_LINK_CLASS,
+} from "../utils/citations";
 import React from "react";
 
 import { BLOG_DATA } from "../constants";
@@ -690,6 +696,51 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
               const renderFormattedText = (rawText: string) => {
 
                 const renderInlineLinks = (text: string, keyPrefix: string): React.ReactNode => {
+                  // Inline `[1]` citation markers jump to the sources block. Split on
+                  // them first, then run the markdown-link pass on each remaining
+                  // segment, because `[1]` and `[text](url)` share the same opening
+                  // bracket and would otherwise compete for the same characters.
+                  // The shared pattern carries the `(?!\()` guard that keeps a
+                  // numbered markdown link out of this pass.
+                  const citationParts: React.ReactNode[] = [];
+                  let citationCursor = 0;
+                  let citationMatch: RegExpExecArray | null;
+                  let citationIndex = 0;
+                  INLINE_CITATION_PATTERN.lastIndex = 0;
+                  while ((citationMatch = INLINE_CITATION_PATTERN.exec(text)) !== null) {
+                    const resolved = resolveCitation(citationMatch[1], activePost.references?.length ?? 0);
+                    if (resolved === null) continue;
+                    if (citationMatch.index > citationCursor) {
+                      citationParts.push(
+                        <React.Fragment key={`${keyPrefix}-cite-before-${citationIndex}`}>
+                          {renderInlineMarkdownLinks(text.slice(citationCursor, citationMatch.index), `${keyPrefix}-cite-pre-${citationIndex}`)}
+                        </React.Fragment>
+                      );
+                    }
+                    citationParts.push(
+                      <a
+                        key={`${keyPrefix}-cite-${citationIndex}`}
+                        href={`#${citationAnchorId(resolved)}`}
+                        className={`${CITATION_LINK_CLASS} cursor-pointer`}
+                      >
+                        [{citationMatch[1]}]
+                      </a>
+                    );
+                    citationCursor = citationMatch.index + citationMatch[0].length;
+                    citationIndex += 1;
+                  }
+                  if (!citationIndex) return renderInlineMarkdownLinks(text, keyPrefix);
+                  if (citationCursor < text.length) {
+                    citationParts.push(
+                      <React.Fragment key={`${keyPrefix}-cite-after`}>
+                        {renderInlineMarkdownLinks(text.slice(citationCursor), `${keyPrefix}-cite-post`)}
+                      </React.Fragment>
+                    );
+                  }
+                  return <React.Fragment key={`${keyPrefix}-cites`}>{citationParts}</React.Fragment>;
+                };
+
+                const renderInlineMarkdownLinks = (text: string, keyPrefix: string): React.ReactNode => {
                   const pattern = /\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g;
                   const nodes: React.ReactNode[] = [];
                   let cursor = 0;
@@ -1721,6 +1772,8 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                               key={sIdx}
 
+                              id={citationAnchorId(sIdx + 1)}
+
                               href={src.url}
 
                               target="_blank"
@@ -2147,6 +2200,24 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                           >
 
                             <span>{isBn ? "Facebook" : "Facebook"}</span>
+
+                          </a>
+
+                          {/* LinkedIn builds its card from the og:image family on the
+                              page, so the button itself only needs the canonical URL. */}
+                          <a
+
+                            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`${SITE_ORIGIN}${isBn ? "/bn" : ""}/blog/${activePost.slug}`)}`}
+
+                            target="_blank"
+
+                            rel="noopener noreferrer"
+
+                            className="flex-1 bg-white hover:bg-slate-100 text-brand-navy border border-slate-300 font-semibold text-[12px] py-2.5 px-3 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5"
+
+                          >
+
+                            <span>LinkedIn</span>
 
                           </a>
 

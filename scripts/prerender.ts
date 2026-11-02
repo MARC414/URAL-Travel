@@ -1,5 +1,7 @@
 import { TravellerCheckNote } from "../src/components/TravellerCheckNote";
 import { getTravellerCheck } from "../src/utils/travellerChecks";
+import { generateBlogCoverAltText } from "../src/utils/blogAltText";
+import { linkifyCitations, citationAnchorId, CITATION_LINK_CLASS } from "../src/utils/citations";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { UmrahBudgetCalculator } from "../src/components/UmrahBudgetCalculator";
@@ -350,6 +352,99 @@ function renderHajjResourceDownloadHtml(locale: "en" | "bn"): string {
   )}</a></section>`;
 }
 
+/**
+ * Reads the pixel size straight out of a JPEG's SOF header.
+ *
+ * Why this exists: `og:image:width` and `og:image:height` are optional in the
+ * Open Graph spec and mandatory in practice. LinkedIn in particular will accept a
+ * page with no dimensions and then render no preview card at all — which is
+ * exactly the "my link has no image" complaint. Twitter and Facebook are more
+ * forgiving but crop badly when they have to guess.
+ *
+ * We read the real file instead of hard-coding 1200x630 because these covers are
+ * NOT all one size: the generator emits 1200x670, 1200x896, 1200x655 and 1376x768
+ * depending on the source photograph. A guessed ratio would letterbox or crop the
+ * hero image on the platforms that trust the declared size.
+ *
+ * Returns null when the file is missing or unparseable, and the caller then emits
+ * no dimension tags rather than a wrong claim.
+ */
+function readJpegSize(filePath: string): { width: number; height: number } | null {
+  let buf: Buffer;
+  try {
+    buf = fs.readFileSync(filePath);
+  } catch {
+    return null;
+  }
+  if (buf.length < 4 || buf[0] !== 0xff || buf[1] !== 0xd8) return null;
+  let offset = 2;
+  while (offset + 9 < buf.length) {
+    if (buf[offset] !== 0xff) {
+      offset += 1;
+      continue;
+    }
+    const marker = buf[offset + 1];
+    // SOF0..SOF3, SOF5..SOF7, SOF9..SOF11, SOF13..SOF15 carry the frame size.
+    // C4 (DHT), C8 (JPG) and CC (DAC) share the range but are not frame headers.
+    const isFrameHeader =
+      marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc;
+    if (isFrameHeader) {
+      return { height: buf.readUInt16BE(offset + 5), width: buf.readUInt16BE(offset + 7) };
+    }
+    if (marker === 0xd8 || marker === 0xd9 || (marker >= 0xd0 && marker <= 0xd7)) {
+      offset += 2;
+      continue;
+    }
+    const segmentLength = buf.readUInt16BE(offset + 2);
+    if (segmentLength < 2) return null;
+    offset += 2 + segmentLength;
+  }
+  return null;
+}
+
+/**
+ * Per-post social metadata. `og:image:alt` used to be one global sentence on every
+ * page, which meant a screen reader on a shared LinkedIn card heard the site
+ * strapline instead of a description of the photograph. The curated scene text in
+ * `src/utils/blogAltText.ts` already describes each cover for humans, so the card
+ * reuses it rather than inventing a second description that could drift.
+ */
+/**
+ * Alt text for the shared branded OG image used by every non-article route.
+ *
+ * Articles override this with a description of their own photograph; hubs and
+ * tool pages keep the strapline, which is what the template shipped before and is
+ * accurate for a card that shows a brand graphic rather than a scene.
+ */
+const SOCIAL_DEFAULT_IMAGE_ALT =
+  "URAL — Flights, Hotels, Umrah & Visa Guides for Bangladeshi Travelers";
+
+function socialImageMeta(
+  imageUrl: string,
+  alt: string | undefined,
+): string {
+  const parts = [`<meta property="og:image" content="${escapeHtml(imageUrl)}" />`];
+  // Resolve against `public/`, not `dist/`: the social JPEGs are copied into dist
+  // by a later pass, so on a clean build dist/img/blog can still be empty when the
+  // route records are assembled. `public/` is the committed source of truth and
+  // holds exactly the bytes that will be served.
+  const relative = imageUrl.startsWith(BASE_URL) ? imageUrl.slice(BASE_URL.length) : "";
+  const onDisk = relative
+    ? path.join(ROOT_DIR, "public", relative.replace(/^\//, ""))
+    : "";
+  const size = onDisk ? readJpegSize(onDisk) : null;
+  if (size) {
+    parts.push(`<meta property="og:image:width" content="${size.width}" />`);
+    parts.push(`<meta property="og:image:height" content="${size.height}" />`);
+  }
+  parts.push(`<meta property="og:image:type" content="image/jpeg" />`);
+  if (imageUrl.startsWith("https://")) {
+    parts.push(`<meta property="og:image:secure_url" content="${escapeHtml(imageUrl)}" />`);
+  }
+  if (alt) parts.push(`<meta property="og:image:alt" content="${escapeHtml(alt)}" />`);
+  return parts.join("\n    ");
+}
+
 function renderArticleReferencesHtml(
   references: { name: string; nameBn: string; url: string }[] | undefined,
   locale: "en" | "bn",
@@ -368,7 +463,7 @@ function renderArticleReferencesHtml(
   const links = references
     .map((reference, index) => {
       const referenceNumber = isBengali ? bnDigits(index + 1) : String(index + 1);
-      return `<li><a href="${escapeHtml(reference.url)}" target="_blank" rel="noopener noreferrer"><span>[${referenceNumber}]</span> ${escapeHtml(
+      return `<li id="${citationAnchorId(index + 1)}"><a href="${escapeHtml(reference.url)}" target="_blank" rel="noopener noreferrer"><span>[${referenceNumber}]</span> ${escapeHtml(
         isBengali ? reference.nameBn : reference.name
       )}</a></li>`;
     })
@@ -894,6 +989,15 @@ interface PrerenderRoute {
   title: string;
   description: string;
   imageUrl: string;
+  /** Per-route social alt text. Defaults to the site strapline when absent. */
+  imageAlt?: string;
+  /** Open Graph object type. Blog posts are "article"; everything else "website". */
+  ogType?: "website" | "article";
+  /** Article-only Open Graph dates, ISO. Omitted on non-article routes. */
+  articlePublished?: string;
+  articleModified?: string;
+  articleSection?: string;
+  articleAuthor?: string;
   lcpImageUrl?: string;
   lcpImageSizes?: string;
   breadcrumbs: { name: string; url: string }[];
@@ -2687,6 +2791,17 @@ function buildAllRoutes(): PrerenderRoute[] {
       title,
       description,
       imageUrl: postImgUrl,
+      imageAlt: generateBlogCoverAltText({
+        title: post.title,
+        category: post.category,
+        slug: post.slug,
+        lang: "en",
+      }),
+      ogType: "article",
+      articlePublished: toIsoDate(post.date),
+      articleModified: toIsoDate(post.updatedAt || post.date),
+      articleSection: post.category,
+      articleAuthor: post.author,
       lcpImageUrl: postLcpImageUrl,
       lcpImageSizes: "(max-width: 767px) 100vw, 840px",
       breadcrumbs: [
@@ -2730,8 +2845,10 @@ function buildAllRoutes(): PrerenderRoute[] {
               // <strong>. Emit the same tag here so a no-JS crawler reads the
               // sentence the reader sees, emphasis included. FAQ answers keep the
               // markers stripped because they are mirrored into plain-text JSON-LD.
-              return `<p>${renderInlineEmphasis(
-                escapeHtml(sanitizeExpiredPromoText(String(para)))
+              return `<p>${linkifyCitations(
+                renderInlineEmphasis(escapeHtml(sanitizeExpiredPromoText(String(para)))),
+                post.references?.length ?? 0,
+                CITATION_LINK_CLASS
               )}</p>`;
             })
             .join("\n")}
@@ -2886,7 +3003,8 @@ function bnFaqList(
 function bnParagraphs(
   text: string,
   figureHtml?: string,
-  slug?: string
+  slug?: string,
+  referenceCount = 0
 ): string {
   return String(text || "")
     .split(/\n{2,}/)
@@ -2914,7 +3032,11 @@ function bnParagraphs(
       if (!paragraph) return "";
       return paragraph === "[[figure]]"
         ? figureHtml ?? ""
-        : `<p>${renderInlineEmphasis(escapeHtml(paragraph))}</p>`;
+        : `<p>${linkifyCitations(
+            renderInlineEmphasis(escapeHtml(paragraph)),
+            referenceCount,
+            CITATION_LINK_CLASS
+          )}</p>`;
     })
     .filter(Boolean)
     .join("");
@@ -3053,7 +3175,14 @@ function buildBengaliBody(
             )}" sizes="(max-width: 767px) 100vw, 840px" width="${dims.width}" height="${dims.height}" loading="lazy" alt="${escapeHtml(bnFig.altBn)}"><figcaption>${escapeHtml(bnFig.captionBn)}</figcaption></figure>`;
           })()
         : undefined;
-      parts.push(bnParagraphs(override.content, bnFigureHtml, id));
+      parts.push(
+        bnParagraphs(
+          override.content,
+          bnFigureHtml,
+          id,
+          (override.references || bnPost?.references)?.length ?? 0
+        )
+      );
       parts.push(
         renderArticleReferencesHtml(
           override.references || bnPost?.references,
@@ -4152,6 +4281,23 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
       }
     }
 
+    // The cover photograph is shared between locales, but the alt text is not:
+    // Bengali readers get the Bengali scene description, and the Open Graph card
+    // carries it too. Falling back to `en.imageAlt` would put English alt text on
+    // a Bengali card.
+    const bnBlogSlug = englishPath.startsWith("/blog/") ? englishPath.split("/")[2] : "";
+    const bnPost = bnBlogSlug
+      ? getLocalizedBlogs("bn").find((item) => item.slug === bnBlogSlug)
+      : undefined;
+    const bnImageAlt = bnBlogSlug
+      ? generateBlogCoverAltText({
+          title: bnPost?.title ?? copy.h1,
+          category: bnPost?.category ?? "Hajj & Umrah",
+          slug: bnBlogSlug,
+          lang: "bn",
+        })
+      : en.imageAlt;
+
     bnRoutes.push({
       routePath: bnPath,
       canonicalUrl,
@@ -4159,6 +4305,12 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
       title: copy.title,
       description: copy.description,
       imageUrl: en.imageUrl,
+      imageAlt: bnImageAlt,
+      ogType: en.ogType,
+      articlePublished: en.articlePublished,
+      articleModified: en.articleModified,
+      articleSection: en.articleSection,
+      articleAuthor: en.articleAuthor,
       lcpImageUrl: en.lcpImageUrl,
       lcpImageSizes: en.lcpImageSizes,
       breadcrumbs,
@@ -4579,9 +4731,20 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
         /<meta property="og:description" content="[^"]*" \/>/,
         `<meta property="og:description" content="${escapeHtml(r.description)}" />`
       )
+      // The whole og:image family is swapped in one go. `og:image` alone is not
+      // enough: without width/height LinkedIn renders no card at all, and without
+      // a per-post alt the card's accessible name is the site strapline.
+      // Consumes the template's og:image *and* the generic og:image:alt that used
+      // to follow it. Leaving that alt behind produced two og:image:alt tags, and
+      // scrapers pick the first one — which was the site strapline, defeating the
+      // per-post alt entirely.
       .replace(
-        /<meta property="og:image" content="[^"]*" \/>/,
-        `<meta property="og:image" content="${escapeHtml(r.imageUrl)}" />`
+        /<meta property="og:image" content="[^"]*" \/>\n?\s*(?:<meta property="og:image:alt" content="[^"]*" \/>\n?\s*)?/,
+        `${socialImageMeta(r.imageUrl, r.imageAlt ?? SOCIAL_DEFAULT_IMAGE_ALT)}\n    `
+      )
+      .replace(
+        /<meta property="og:type" content="[^"]*" \/>/,
+        `<meta property="og:type" content="${r.ogType ?? "website"}" />`
       )
       .replace(
         /<meta name="twitter:url" content="[^"]*" \/>/,
@@ -4596,12 +4759,22 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
         `<meta name="twitter:description" content="${escapeHtml(r.description)}" />`
       )
       .replace(
-        /<meta name="twitter:image" content="[^"]*" \/>/,
-        `<meta name="twitter:image" content="${escapeHtml(r.imageUrl)}" />`
+        /<meta name="twitter:image" content="[^"]*" \/>\n?/,
+        `<meta name="twitter:image" content="${escapeHtml(r.imageUrl)}" />\n    ` +
+          (r.imageAlt ? `<meta name="twitter:image:alt" content="${escapeHtml(r.imageAlt)}" />` : "")
       )
       .replace(
         "</head>",
-        `  <script type="application/ld+json" data-seo-schema="true">${fullGraphJson}</script>\n  </head>`
+        // Article metadata rides on the same head insertion as the JSON-LD graph.
+        // Only blog posts get it: `article:*` on a hub page is a lie that LinkedIn
+        // and Facebook both read when composing the card.
+        (r.ogType === "article"
+          ? `  <meta property="article:published_time" content="${escapeHtml(r.articlePublished ?? "")}" />\n` +
+            `  <meta property="article:modified_time" content="${escapeHtml(r.articleModified ?? "")}" />\n` +
+            `  <meta property="article:section" content="${escapeHtml(r.articleSection ?? "")}" />\n` +
+            `  <meta property="article:author" content="${escapeHtml(r.articleAuthor ?? "")}" />\n`
+          : "") +
+          `  <script type="application/ld+json" data-seo-schema="true">${fullGraphJson}</script>\n  </head>`
       );
 
     // Content-backed routes replace the prerendered body on React mount, so
