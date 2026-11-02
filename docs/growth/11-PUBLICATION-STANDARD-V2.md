@@ -99,9 +99,8 @@ record intentions.
 | --- | --- |
 | `tawaf-sai-seven-circuits-step-by-step-guide` | **Passes G1–G7.** G3 = owner request + reel gap; G6 = static. Plan: `docs/02-content/PLAN-tawaf-and-hajj-rites.md`. |
 | `hajj-rites-mina-arafah-muzdalifah-day-by-day` | **Passes G1–G7.** G6 = seasonal. Same plan. |
-| `/visa/saudi-arabia` | **A page, not an article** — does not require G1–G7, but requires the same evidence standard and a named maintenance owner (fast-moving). |
+| `/visa/saudi-arabia-visa` | **A page, not an article** — does not require G1–G7, but requires the same evidence standard and a named maintenance owner (fast-moving). Spec: `docs/02-content/SPEC-visa-saudi-arabia-visa.md`. |
 | Bengali override for `umrah-dubai-10-day-combo-trip…` | **Defect fix**, not content. Do it first; it is cheap and it is currently wrong. |
-| Bengali checklist PDF | **Defect fix.** The download card ignores `isBengali`. |
 
 ## 8. Backlog rule
 

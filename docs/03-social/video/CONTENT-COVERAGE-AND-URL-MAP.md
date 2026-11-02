@@ -8,15 +8,20 @@ does the site have what the reel promised — and which URLs are involved?**
 
 ## 0. The decision in one line
 
-**Upgrade two existing articles; create no new blog URLs.** The cluster is
-already broad (17 posts, 16 with Bengali). What is missing is not another post
-— it is two specific sections inside articles that already own the topic, plus
-two parity defects and one structural gap outside the blog.
+**Two new articles, one defect fix, one structural page.**
 
-That matches `docs/03-social/FUTURE-CONTENT-GAPS.md`, whose standing
-recommendation is zero new standalone articles until a specific audience
-question and a source are identified. Both gaps below have a named question but
-belong inside an existing owner, so no new URL is earned.
+Originally this audit recommended section upgrades only, under the
+zero-new-article rule. On 2 November 2026 the owner overruled that and
+[Publication Standard v2](../../growth/11-PUBLICATION-STANDARD-V2.md) replaced
+the freeze with a gated standard. The two gaps below are now being written as
+articles:
+
+- `tawaf-sai-seven-circuits-step-by-step-guide`
+- `hajj-rites-mina-arafah-muzdalifah-day-by-day`
+
+Full spec: [PLAN-tawaf-and-hajj-rites](../../02-content/PLAN-tawaf-and-hajj-rites.md).
+The reasoning for each — and the case where a section still beats a new URL —
+is retained below as evidence.
 
 ## 1. What the reels promise
 
@@ -99,7 +104,7 @@ The page families exist for other destinations but have **no Saudi member**:
 
 | Missing URL | Family it should join |
 | --- | --- |
-| `/visa/saudi-arabia` | 6 country visa pages exist (`/visa/dubai-visa` …) |
+| `/visa/saudi-arabia-visa` | 6 country visa pages exist (`/visa/dubai-visa` …); the pattern is `/visa/{id}` |
 | `/destinations/saudi-arabia` | 10 destination guides exist |
 | `/hotels/makkah`, `/hotels/madinah` | 6 hotel pages exist |
 
@@ -123,7 +128,11 @@ structural hole in the funnel, not a missing blog post — see §4.3.
 
 ## 4. Decision
 
-### 4.1 Upgrade these — in this order
+### 4.1 Historical recommendation (superseded)
+
+The owner chose new articles for Gap A and Gap B; see §0 and the plan document.
+The section-upgrade route below remains valid as a cheaper fallback if the
+articles are ever pulled.
 
 **UP-1 · Tawaf and sa'i as a rite**
 Host: `/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost` (pillar + `/bn/`).
@@ -150,26 +159,18 @@ English, because there is no entry in `BENGALI_BLOG_OVERRIDES`. Either add the
 override or drop the BN URL from the sitemap. Shipping an English page on a
 `/bn/` route is worse than not having the URL.
 
-**UP-4 · Bengali checklist PDF**
-`HajjResourceDownloadCard` hard-codes
-`/downloads/ural-hajj-preparation-checklist-2027-en.pdf` and ignores its
-`isBengali` prop, so the Bengali Hajj article offers an English download. Either
-produce `…-2027-bn.pdf` and switch on `isBengali`, or label the card "English
-only" so the reader is not surprised.
-
 **UP-5 (optional) · First-time traveller section**
 One short section in the pillar, or a `travellerType` block on `/umrah`, rather
 than a new post.
 
 ### 4.2 What not to create
 
-- **A standalone "Tawaf guide" article** — it would compete with the pillar for
-  the same intent, and the pillar already ranks for the cluster head terms.
-  Section first; a separate URL only if the section earns its own query volume.
-- **A standalone "Hajj rites" article** — `hajj-registration…` is the seasonal
-  Hajj owner; two Hajj URLs would split authority exactly when the season
-  spikes.
-- **Any new post**, per the standing zero-new-article recommendation.
+Both "do not create" bullets that used to sit here — no standalone tawaf guide,
+no standalone Hajj rites article — are **withdrawn by the 2 November decision.**
+They were written under the freeze. The risks they named are real and are now
+handled by the plan instead: each new article is wired into the pillar so
+authority still concentrates, and either is merged back into its parent if it
+earns no impressions within 90 days (v2 §3).
 
 If a new URL *is* later justified, the test is in FUTURE-CONTENT-GAPS §"Future
 sequence": name the question, the source, the distinct job, the internal links,
@@ -177,10 +178,10 @@ the EN/BN scope and the maintenance burden.
 
 ### 4.3 The one structural decision for the owner
 
-`/visa/saudi-arabia` is the highest-value missing URL in the whole funnel: it is
+`/visa/saudi-arabia-visa` is the highest-value missing URL in the whole funnel: it is
 an existing template, the searcher intent is huge, and six sibling pages already
-prove the pattern. This is a **page, not an article** — it does not breach the
-zero-article rule. It is also the one item here that needs real source work
+prove the pattern. This is a **page, not an article** — it does not consume the new-URL
+allowance. It is also the one item here that needs real source work
 (eligible visa categories change), so it should be scheduled, not improvised.
 
 ## 5. If you would rather change the reel than the site
@@ -214,7 +215,7 @@ headline strings change; timings are unaffected.
 - [ ] Internal links added: tawaf section ↔ women, elderly, Ramadan; Hajj rites
       ↔ ziyarah, hotel zones, Zamzam customs.
 - [ ] UP-3: `/bn/blog/umrah-dubai…` either renders Bangla or is out of the sitemap.
-- [ ] UP-4: BN article's download card offers a BN file or says English-only.
+- [ ] 
 - [ ] `npm run verify:build` passes; both locales prerender the new text.
 
 ## 8. How this was verified

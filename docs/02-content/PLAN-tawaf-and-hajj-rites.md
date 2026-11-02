@@ -18,8 +18,9 @@ Fills Gap A and Gap B from
 ## 1. Why two articles rather than two sections
 
 The earlier recommendation was sections inside existing owners, on the grounds
-that a new URL splits authority. The owner has decided otherwise, and the case
-for new URLs is real:
+that a new URL splits authority. The owner has decided otherwise on 2 November
+2026, and [Publication Standard v2](../growth/11-PUBLICATION-STANDARD-V2.md) now
+permits gated new URLs. The case is real:
 
 - **Tawaf + sa'i** is a complete, self-contained task ("what do I actually do
   inside the Haram"), searched independently of visa and budget. It is not a
