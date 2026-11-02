@@ -92,6 +92,42 @@ the application route*; the posts own the operational detail.
 
 ## 5. Sources — the gate before writing
 
+> ### STATUS 2 NOVEMBER 2026: BLOCKED. Do not write this page yet.
+>
+> I attempted the source verification and could not complete it. What I found:
+>
+> | Source tried | Result |
+> | --- | --- |
+> | `haj.gov.sa/en/Umrah` | **Live and authentic** (updated 19 Oct 2026). Confirms Umrah = Ihram + Tawaf + Sa'i, and that packages are booked through accredited providers integrated with Nusuk. **Says nothing about visa eligibility by nationality.** |
+> | `hajj.nusuk.sa/Journey` | Maintenance page, twice, hours apart. |
+> | `umrah.nusuk.sa/Journey` | Live. Rites only; no visa eligibility. |
+> | `visa.mofa.gov.sa` | Live, but an Arabic-language transactional portal (login + service selection). No citable eligibility statement. |
+> | `mofa.gov.sa/en/visa` | 404. |
+> | `ksavisa.sa` | Live, but it is an AI virtual-assistant interface, not a document. Cannot be cited. |
+>
+> Every search result describing Bangladeshi eligibility (ivisa.com, saudivisaoffice.com,
+> evisaudi.com, hudhudtrip.com, hotelsinmakkah.com) is a **commercial visa agency**.
+> They broadly agree — Bangladesh is not on the tourist eVisa list; a used US/UK/Schengen
+> visa or GCC residency opens the eVisa route; otherwise the Umrah visa goes through a
+> licensed agent on the Masar system — but **not one of them is a government source**, and
+> S1 forbids publishing a visa page from them.
+>
+> **This is the correct outcome, not a delay.** A visa page whose central claim — who is
+> eligible for which route — rests on competitor agencies' marketing copy is the single
+> most damaging page this site could publish. It is also the page a reader is most likely
+> to act on with money.
+>
+> **What unblocks it (owner task, ~10 minutes):** open `https://ksavisa.sa` in a browser and
+> ask the assistant "Umrah visa eligibility for Bangladeshi passport holders" — the tool is
+> designed to answer exactly this and it is an official MOFA channel. Capture the answer
+> **and the date**. Alternatively, the Saudi Embassy in Dhaka publishes consular guidance;
+> a screenshot or PDF of the current notice is a citable primary source. Either one is
+> enough for me to write the page.
+>
+> **Do not substitute:** a blog, an agency, or my own recollection of the rules.
+
+
+
 Minimum three, primary first, all dated. Candidate set (verify each before use;
 none may be cited from memory):
 

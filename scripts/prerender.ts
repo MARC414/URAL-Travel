@@ -496,6 +496,14 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
       href: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
       text: "Saudi stopover visa and Umrah routing guide",
     },
+    {
+      href: "/blog/tawaf-sai-seven-circuits-step-by-step-guide",
+      text: "Tawaf and Sa'i: where a circuit starts, ends and how to count it",
+    },
+    {
+      href: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
+      text: "Entering Ihram at Dhaka airport or at the Miqat",
+    },
   ],
   "/banking": [
     {
@@ -3403,6 +3411,8 @@ function buildBengaliBody(
         { label: "Nusuk অ্যাপ, Saudi Visa Bio ও Rawdah পারমিট গাইড", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
         { label: "মক্কা-মদিনা হোটেল জোন ও Haramain ট্রেন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
         { label: "বাংলাদেশ থেকে হজ নিবন্ধন ও প্যাকেজ গাইড", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
+        { label: "তাওয়াফ ও সাঈ: এক চক্কর কোথায় শুরু, কোথায় শেষ", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
+        { label: "ঢাকা বিমানবন্দরে না মিকাতে ইহরাম", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
       ])
     );
     return `<article>${parts.join("")}</article>`;
