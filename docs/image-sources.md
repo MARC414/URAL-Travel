@@ -23,19 +23,27 @@ The Commons credits and license are also linked in each hero's visible photo cre
 
 ## Video assets
 
-`docs/03-social/video/` holds two 60-second cuts built from stills made with image generation for URAL Travel. There are no third-party photo or music licences to clear — the ambient bed is synthesised.
+The Hajj/Umrah reels in `docs/03-social/video/` are built entirely from AI-generated imagery made for URAL Travel. There are no third-party photo or music licences to clear — the ambient bed is synthesised.
 
-**Provenance.** Neither cut contains documentary photography. The photographic cut is AI-generated photoreal imagery, not photographs of real pilgrims; it is captioned as AI illustration wherever it runs. The illustrated cut is flat artwork with no identifiable individuals and makes no photographic claim at all. The same stills are reused across both cuts, so they are listed once.
+**Important:** the photographic cut is photoreal but it is *not* documentary photography. It is generated imagery of Makkah and Madinah, and it must be captioned as AI-generated whenever it is published; it must not be placed where it would be read as reportage of a real Hajj season. The illustrated cut exists for exactly that situation — flat gouache artwork with no identifiable individuals.
 
-| Asset | Used in | Source and credit | License |
+Shot list and timings are in that folder's README.
+
+### Photographic cut
+
+| Asset | Placement | Source and credit | License |
 | --- | --- | --- | --- |
-| `img1_kaaba` | photo, art (as `art_kaaba`) | AI-generated for URAL Travel; Haram courtyard at blue hour | No third-party attribution required. |
-| `img2_dua` | photo | AI-generated for URAL Travel; hands raised in dua | No third-party attribution required. |
-| `img7_mina` | photo (as `art_mina`) | AI-generated for URAL Travel; Mina tent city in the hills | No third-party attribution required. |
-| `img8_ihram` | photo (as `art_ihram`) | AI-generated for URAL Travel; folded ihram cloth | No third-party attribution required. |
-| `img10_documents` | photo (as `art_documents`) | AI-generated for URAL Travel; passport and visa paperwork | No third-party attribution required. |
-| `img5_plan` | photo (as `art_budget`) | AI-generated for URAL Travel; passport and taka planning desk | No third-party attribution required. |
-| `img9_elderly` | photo (as `art_care`) | AI-generated for URAL Travel; an elder's hands on a prayer mat | No third-party attribution required. |
-| `img4_tawaf` | photo (as `art_crescent`) | AI-generated for URAL Travel; overhead tawaf | No third-party attribution required. |
-| `img3_masjid` | photo | AI-generated for URAL Travel; Masjid an-Nabawi at golden hour | No third-party attribution required. |
-| `img6_dawn` | photo, art (as `art_dawn`) | AI-generated for URAL Travel; Makkah skyline at dawn | No third-party attribution required. |
+| `ph_kaaba` | Reel 0.0–6.6s | AI image for URAL Travel; Kaaba at blue hour | No third-party attribution required. |
+| `ph_dua` | Reel 5.8–14.1s | AI image for URAL Travel; hands raised in dua | No third-party attribution required. |
+| `ph_mina` | Reel 13.3–21.6s | AI image for URAL Travel; Mina tent city at golden hour | No third-party attribution required. |
+| `ph_ihram` | Reel 20.8–28.8s | AI image for URAL Travel; folded ihram cloth | No third-party attribution required. |
+| `ph_docs` | Reel 28.0–33.4s | AI image for URAL Travel; passport, visa form and stamp | No third-party attribution required. |
+| `ph_budget` | Reel 32.6–38.6s | AI image for URAL Travel; passport, coins and notebook | No third-party attribution required. |
+| `ph_care` | Reel 37.8–44.5s | AI image for URAL Travel; prayer mat and shawl in an arch | No third-party attribution required. |
+| `ph_masjid` | Reel 43.7–49.8s | AI image for URAL Travel; Masjid an-Nabawi at golden hour | No third-party attribution required. |
+| `ph_tawaf` | Reel 49.0–54.2s | AI image for URAL Travel; overhead long-exposure tawaf | No third-party attribution required. |
+| `ph_dawn` | Reel 53.4–60.0s | AI image for URAL Travel; Makkah skyline at dawn | No third-party attribution required. |
+
+### Illustrated cut
+
+Flat gouache and screen-print artwork with no identifiable individuals: `art_kaaba`, `art_lantern`, `art_mina`, `art_ihram`, `art_documents`, `art_budget`, `art_care`, `art_crescent`, `art_dawn`. All AI-generated for URAL Travel; no third-party attribution required.

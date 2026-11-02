@@ -48,7 +48,7 @@ photographic claim at all.
 
 | File | Use |
 | --- | --- |
-| `ural-hajj-umrah-reel-9x16-photo.mp4` | Primary cut. ~11 MB. |
+| `ural-hajj-umrah-reel-9x16-photo.mp4` | Primary cut. ~13 MB. |
 | `ural-hajj-umrah-reel-9x16-share.mp4` | Illustrated cut. ~10 MB. |
 | `ural-hajj-umrah-reel-9x16-photo-poster.jpg` | Cover frame for the photographic cut. |
 | `ural-hajj-umrah-reel-poster.jpg` | Cover frame for the illustrated cut. |
@@ -71,16 +71,16 @@ Full-bitrate masters (CRF 18) are build artifacts and are not committed;
 
 | Time | Visual | On screen | Voiceover |
 | --- | --- | --- | --- |
-| 0.0–7.1 | Kaaba at blue hour, push in | হজ ও উমরাহ / পবিত্র ভূমির স্বপ্ন | প্রতি বছর হাজারো মানুষ পবিত্র ভূমির স্বপ্ন দেখেন। |
-| 6.3–14.6 | Hands raised in dua, pull back | কিন্তু প্রশ্নটা একটাই · যাব কীভাবে? / খরচ কত? / প্রথমে কী করব? | কিন্তু প্রশ্নটা একটাই — যাব কীভাবে, খরচ কত, আর প্রথমে কী করব? |
-| 13.8–22.2 | Mina tent city from the hills | ধাপে ধাপে / মিনা · আরাফাহ মুজদালিফা | মিনা, আরাফাহ, মুজদালিফা — প্রতিটি ধাপের প্রস্তুতি আগেই জেনে নিন। |
-| 21.4–29.1 | Folded ihram cloth, raking light | ইহরাম / মিকাত থেকে তালবিয়া | ইহরাম, মিকাত, তালবিয়া — কোথায় কী করবেন, তা পরিষ্কার করে। |
-| 28.3–33.7 | Passport, visa form, glasses | ভিসা / চেকলিস্ট, ধাপে ধাপে | ধাপে ধাপে ভিসা চেকলিস্ট। |
-| 32.9–38.3 | Passport, taka notes, planning desk | বাজেট / সব হিসাব টাকায় · ফ্লাইট · হোটেল · ভিসা · খাবার | আর বাজেট ক্যালকুলেটর, সব হিসাব টাকায়। |
-| 37.5–44.4 | An elder's hands on a prayer mat | সবার জন্য / নারী, বয়স্ক প্রথম যাত্রী | নারী, বয়স্ক ও প্রথমবার যাত্রীদের জন্য আলাদা গাইড। |
-| 43.6–50.1 | Overhead tawaf, counter-zoom | গাইড / হজ ও উমরাহর বিস্তারিত গাইড | উড়াল-এ পাবেন হজ ও উমরাহর বিস্তারিত গাইড। |
-| 49.3–54.5 | Masjid an-Nabawi at golden hour | মদিনা / মসজিদে নববীতে শান্তি | (no speech — lets the image breathe) |
-| 53.7–60.0 | Makkah skyline at dawn, end card | URAL wordmark · যাত্রার আগেই জেনে নিন · uraltravel.co.uk | যাত্রার আগেই জেনে নিন। উড়াল — আপনার ভ্রমণবুদ্ধি, বাংলায়। |
+| 0.0–6.6 | Kaaba at blue hour, push in | হজ ও উমরাহ / পবিত্র ভূমির স্বপ্ন | প্রতি বছর হাজারো মানুষ পবিত্র ভূমির স্বপ্ন দেখেন। |
+| 5.8–14.1 | Hands raised in dua, pull back | কিন্তু প্রশ্নটা একটাই · যাব কীভাবে? / খরচ কত? / প্রথমে কী করব? | কিন্তু প্রশ্নটা একটাই — যাব কীভাবে, খরচ কত, আর প্রথমে কী করব? |
+| 13.3–21.6 | Mina tent city from the hills | ধাপে ধাপে / মিনা · আরাফাহ মুজদালিফা | মিনা, আরাফাহ, মুজদালিফা — প্রতিটি ধাপের প্রস্তুতি আগেই জেনে নিন। |
+| 20.8–28.8 | Folded ihram cloth, raking light | ইহরাম / মিকাত থেকে তালবিয়া | ইহরাম, মিকাত, তালবিয়া — কোথায় কী করবেন, তা পরিষ্কার করে। |
+| 28.0–33.4 | Passport, visa form and stamp | ভিসা / চেকলিস্ট, ধাপে ধাপে | ধাপে ধাপে ভিসা চেকলিস্ট। |
+| 32.6–38.6 | Passport, coins, notebook | বাজেট / সব হিসাব টাকায় · ফ্লাইট · হোটেল · ভিসা · খাবার | আর বাজেট ক্যালকুলেটর, সব হিসাব টাকায়। |
+| 37.8–44.5 | Prayer mat and shawl in an arch | সবার জন্য / নারী, বয়স্ক প্রথম যাত্রী | নারী, বয়স্ক ও প্রথমবার যাত্রীদের জন্য আলাদা গাইড। |
+| 43.7–49.8 | Masjid an-Nabawi at golden hour | গাইড / হজ ও উমরাহর বিস্তারিত গাইড | উড়াল-এ পাবেন হজ ও উমরাহর বিস্তারিত গাইড। |
+| 49.0–54.2 | Overhead tawaf, counter-zoom | তাওয়াফ / সাত প্রদক্ষিণ, এক ইবাদত | (no speech — lets the image breathe) |
+| 53.4–60.0 | Makkah skyline at dawn, end card | URAL wordmark · যাত্রার আগেই জেনে নিন · uraltravel.co.uk | যাত্রার আগেই জেনে নিন। উড়াল — আপনার ভ্রমণবুদ্ধি, বাংলায়। |
 
 The illustrated cut is the same narration in nine shots (its EDL is in git
 history at the first version of this file, and the scene table is the `ART`
