@@ -283,6 +283,20 @@ const stripInlineEmphasisTags = (html: string) =>
   html.replace(/<\/?(?:strong|b|em|i)\b[^>]*>/gi, "");
 
 /**
+ * Unwraps inline `[n]` citation links back to the literal marker they came from.
+ *
+ * `scripts/prerender.ts` turns a body's `[1]` into `<a href="#source-1">[1]</a>`
+ * so a reader can jump to the source. Both text-comparison guards below read the
+ * served HTML as a string, and an anchor sitting mid-sentence would otherwise
+ * either break a substring match (raw-include checks) or inject spaces around the
+ * marker (tag-stripping checks that replace tags with " "). Unwrapping is the honest
+ * fix: the guards are asking "is this sentence on the page", and the sentence is
+ * unchanged — only its markup is.
+ */
+const unwrapCitationAnchors = (html: string) =>
+  html.replace(/<a\b[^>]*href="#source-[0-9]+"[^>]*>([\s\S]*?)<\/a>/gi, "$1");
+
+/**
  * Extract the inline affiliate loader from an HTML document.
  *
  * Anchored on `function loadDrive` (renamed from `loadEmerald` when the tag was
@@ -3582,7 +3596,7 @@ if (rss) {
     // view renders the same emphasis), while FAQ answers and the Bengali renderer
     // drop the markers. Remove that tag exactly like the marker it replaced, so
     // this stays a truncation check rather than an emphasis-formatting check.
-    const page = normalise(stripInlineEmphasisTags(html));
+    const page = normalise(unwrapCitationAnchors(stripInlineEmphasisTags(html)));
     // Section headings are emitted as real <h2>/<h3> tags, so the `## ` / `### `
     // marker in the source is dropped exactly like `**` is. Anything else would
     // turn this truncation guard into a markdown-formatting check.
@@ -3965,7 +3979,7 @@ check(
 );
 
 const normalizeStructuredText = (value: string) =>
-  stripInlineEmphasisTags(value)
+  unwrapCitationAnchors(stripInlineEmphasisTags(value))
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
     .replace(/<[^>]*>/g, " ")
