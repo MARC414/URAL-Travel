@@ -1,5 +1,6 @@
 import { TravellerCheckNote } from "../components/TravellerCheckNote";
 import { getTravellerCheck } from "../utils/travellerChecks";
+import { buildShareCaption } from "../utils/shareCaption";
 import {
   INLINE_CITATION_PATTERN,
   resolveCitation,
@@ -19,7 +20,7 @@ import { TiqetsEmbedWidget } from "../components/TiqetsEmbedWidget";
 
 import { TravelIntelligence } from "../components/AeoInspector";
 
-import { toIsoDate, URAL_SOCIAL_LINKS } from "../utils/schema";
+import { toIsoDate } from "../utils/schema";
 import { SITE_ORIGIN } from "../utils/localeRoutes";
 
 import { generateBlogCoverAltText } from "../utils/imageAssets";
@@ -2229,9 +2230,9 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                               const caption = isBn
 
-                                ? `✈️ ${activePost.title}\n\n📌 সংক্ষিপ্ত উত্তর:\n${getBlogAeoSnippet50Words(activePost.slug, true, activePost.summary)}\n\n👉 সম্পূর্ণ গাইড: ${SITE_ORIGIN}/bn/blog/${activePost.slug}\n🌐 Facebook: ${URAL_SOCIAL_LINKS.facebook}\n💬 BDT বুকিং WhatsApp: +8801784385335`
+                                ? buildShareCaption({ title: activePost.title, snippet: getBlogAeoSnippet50Words(activePost.slug, true, activePost.summary), slug: activePost.slug, isBn: true })
 
-                                : `✈️ ${activePost.title}\n\n📌 Quick Summary:\n${getBlogAeoSnippet50Words(activePost.slug, false, activePost.summary)}\n\n👉 Read Full Guide: ${SITE_ORIGIN}/blog/${activePost.slug}\n🌐 Follow URAL: ${URAL_SOCIAL_LINKS.facebook}\n💬 BDT Booking via WhatsApp: +8801784385335`;
+                                : buildShareCaption({ title: activePost.title, snippet: getBlogAeoSnippet50Words(activePost.slug, false, activePost.summary), slug: activePost.slug, isBn: false });
 
                               navigator.clipboard?.writeText(caption);
 

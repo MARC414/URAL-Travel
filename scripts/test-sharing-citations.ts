@@ -9,6 +9,14 @@ import {
   linkifyCitations,
   CITATION_LINK_CLASS,
 } from "../src/utils/citations";
+import {
+  buildShareCaption,
+  extractUrls,
+  shareArticleUrl,
+  SHARE_ORIGIN,
+  BRAND_HANDLE,
+} from "../src/utils/shareCaption";
+import { SITE_ORIGIN } from "../src/utils/localeRoutes";
 
 /**
  * Guards the two things a reader could not do before this file existed:
@@ -230,6 +238,62 @@ test("undersized exemptions still point at real posts", () => {
   for (const slug of Object.keys(UNDERSIZED_COVER_EXEMPTIONS)) {
     assert.ok(files.has(`${slug}.jpg`), `stale cover exemption: ${slug}`);
   }
+});
+
+// ---------------------------------------------------------------------------
+// Copy Post captions. A second URL in the pasted text is what made Facebook
+// scrapers pick the URAL page and show the profile logo instead of the hero.
+// ---------------------------------------------------------------------------
+
+const baseCaption = {
+  title: "Hajj Rites Day by Day",
+  snippet: "A short summary of the guide.",
+  slug: "hajj-rites-mina-arafah-muzdalifah-day-by-day",
+};
+
+test("a share caption carries exactly one URL", () => {
+  for (const isBn of [false, true]) {
+    const urls = extractUrls(buildShareCaption({ ...baseCaption, isBn }));
+    assert.equal(
+      urls.length,
+      1,
+      `${isBn ? "bn" : "en"} caption has ${urls.length} URLs — a second one can win the scrape: ${urls.join(", ")}`,
+    );
+  }
+});
+
+test("the one URL is the article, and it is the canonical one", () => {
+  for (const isBn of [false, true]) {
+    const [url] = extractUrls(buildShareCaption({ ...baseCaption, isBn }));
+    assert.equal(url, shareArticleUrl(baseCaption.slug, isBn));
+    assert.ok(url.startsWith("https://uraltravel.co.uk/"), `unexpected origin: ${url}`);
+    if (isBn) assert.ok(url.includes("/bn/blog/"), "bn caption must point at the bn route");
+  }
+});
+
+test("no social profile URL is ever pasted into a caption", () => {
+  // The exact regression: the Facebook page URL was in the caption, the platform
+  // scraped it, and the card showed the URAL logo instead of the article hero.
+  for (const isBn of [false, true]) {
+    const caption = buildShareCaption({ ...baseCaption, isBn });
+    for (const host of ["facebook.com", "instagram.com", "linkedin.com", "tiktok.com", "wa.me"]) {
+      assert.ok(!caption.includes(host), `caption still contains ${host}`);
+    }
+  }
+});
+
+test("the follow prompt survives as a handle, not a link", () => {
+  for (const isBn of [false, true]) {
+    const caption = buildShareCaption({ ...baseCaption, isBn });
+    assert.ok(caption.includes(BRAND_HANDLE), "brand handle dropped from the caption");
+    assert.ok(!caption.includes(`https://${BRAND_HANDLE}`), "handle became a URL");
+  }
+});
+
+test("share origin matches the site's canonical origin", () => {
+  // The caption builds its own origin to stay dependency-free; if the site origin
+  // ever moves, the caption must move with it or every copied link 404s.
+  assert.equal(SHARE_ORIGIN, SITE_ORIGIN);
 });
 
 console.log(`\n[test:sharing-citations] ${count} checks passed.`);

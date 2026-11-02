@@ -71,6 +71,42 @@ the old card until it is re-scraped:
 - LinkedIn: <https://www.linkedin.com/post-inspector/> → enter the URL → **Inspect**
 - X / Twitter: the card validator, or posting the link fresh
 
+## 1b. The caption was fighting the card — found by the owner, 2 November 2026
+
+The first fix made the article's own `og:image` correct. It was not enough, and the
+owner found the reason by watching it happen:
+
+> Pasting a post and getting the URAL profile logo instead of the hero photograph.
+
+**Cause: the copied caption contained two URLs.**
+
+```
+👉 Read Full Guide: https://uraltravel.co.uk/blog/<slug>
+🌐 Follow URAL:     https://web.facebook.com/uraltravelbd/     ← the second one
+```
+
+A social platform unfurls **one** link from pasted text, and with two candidates it
+does not reliably pick the article. Facebook, LinkedIn and WhatsApp all built a card
+from the *page* URL — and a page's card is its profile picture, which is the URAL
+logo. This was a real defect and the reason "the image doesn't appear" survived the
+first fix.
+
+**The fix keeps the follow prompt and removes the link.** `@uraltravelbd` is a bare
+handle: no platform turns it into a preview, so the article URL is the only address
+in the text and the only thing that can be scraped. Nothing is lost — a reader can
+still find the page, and the card now shows the photograph.
+
+Captions are built by `src/utils/shareCaption.ts`, a pure function with one rule
+documented at the top of the file: **exactly one URL**. It is a module rather than a
+template literal in the component so the rule can be tested, and
+`test:sharing-citations` now asserts that no caption contains
+`facebook.com`, `instagram.com`, `linkedin.com`, `tiktok.com` or `wa.me`.
+
+**The rule this establishes for any future share text:** if the text will be pasted
+where a card is expected, it gets one URL. Any second address — a profile, a
+subpage, a marketplace listing — will sometimes win the scrape, and when it does the
+hero image silently disappears again.
+
 ## 2. "LinkedIn is missing from the sharing options"
 
 The share box carried WhatsApp, Facebook and Copy Post. A LinkedIn button using
