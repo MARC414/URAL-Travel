@@ -30,6 +30,9 @@ const TITLES = {
   ihramTransit: { en: "Confirm the connection, not the airport name", bn: "বিমানবন্দরের নাম নয়, সংযোগ নিশ্চিত করুন" },
   ihramMadinah: { en: "Confirm where the route meets the boundary", bn: "রুট কোথায় সীমারেখায় পৌঁছায় তা নিশ্চিত করুন" },
   ihramPersonal: { en: "Take personal rulings to a qualified scholar", bn: "ব্যক্তিগত রায় যোগ্য আলেমের কাছে নিন" },
+  tawafStart: { en: "Fix your own start line before you join the ring", bn: "ভিড়ে ঢোকার আগে শুরুর রেখা নিজে ঠিক করুন" },
+  tawafCount: { en: "Count one direction only", bn: "শুধু এক দিকেই গণনা করুন" },
+  tawafCrowd: { en: "Agree the level and the meeting point first", bn: "আগেই তলা ও মিলনস্থল ঠিক করুন" },
   ramadanDeadline: { en: "Put the season cut-offs in your own calendar", bn: "সিজনের শেষ তারিখ নিজের ক্যালেন্ডারে লিখুন" },
   ramadanItikaf: { en: "Do not buy an I'tikaf place", bn: "ইতিকাফের জায়গা কিনবেন না" },
   ramadanAnnouncement: { en: "Wait for the Authority's own notice", bn: "কর্তৃপক্ষের নিজের বিজ্ঞপ্তির অপেক্ষা করুন" },
@@ -53,10 +56,13 @@ const TITLES = {
   ziyarahBus: { en: "Confirm the bus is running before you buy the pass", bn: "পাস কেনার আগে বাস চলছে কি না নিশ্চিত করুন" },
   ziyarahTaif: { en: "Say whether the return includes an Umrah before you leave Makkah", bn: "মক্কা ছাড়ার আগেই বলুন ফেরার পথে ওমরাহ আছে কি না" },
   ziyarahBadr: { en: "If the day trip is Badr, price the whole leg, not the stop", bn: "ডে-ট্রিপ বদর হলে পুরো লেগের দাম ঠিক করুন, শুধু স্টপের নয়" },
+  hajjArafahLate: { en: "Know the Arafah window before the coach moves", bn: "কোচ ছাড়ার আগেই আরাফাহর সময়সীমা জেনে নিন" },
+  hajjJamaratTiming: { en: "Confirm the stoning window, not the coach time", bn: "কোচের সময় নয়, কঙ্কর নিক্ষেপের সময়সীমা নিশ্চিত করুন" },
+  hajjExitRule: { en: "Decide the 12th-or-13th exit on the 11th", bn: "১১ তারিখেই ঠিক করুন ১২ না ১৩ তারিখে ফিরবেন" },
 } as const;
 
 export function getTravellerCheck(paragraph: string) {
-  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth|ihramPoint|ihramGarments|ihramTransit|ihramMadinah|ihramPersonal|ramadanDeadline|ramadanItikaf|ramadanAnnouncement|ramadanBudget|ramadanRoute|zamzamBox|zamzamAirline|datesAllowance|goldDeclare|vatRefund|foodHalal|foodMakkah|foodPrice|foodMadinah|foodElderly|foodGrocery|ziyarahHira|ziyarahCemetery|ziyarahCar|ziyarahMadinah|ziyarahBus|ziyarahTaif|ziyarahBadr)\):\s+([\s\S]+)$/);
+  const match = paragraph.trim().match(/^(Traveller check|যাত্রীর যাচাই) \((services|biometrics|registration|rawdah|network|visaEligibility|stopoverEligibility|stopoverPermits|hotelAccess|railBaggage|railTicket|flightConnection|flightBaggage|flightZamzam|womenVisa|womenAccess|womenRawdah|womenIhram|womenHealth|womenTaqsir|elderlyAirline|elderlyEquipment|elderlyHaram|elderlyHotel|elderlyHealth|ihramPoint|ihramGarments|ihramTransit|ihramMadinah|ihramPersonal|tawafStart|tawafCount|tawafCrowd|ramadanDeadline|ramadanItikaf|ramadanAnnouncement|ramadanBudget|ramadanRoute|zamzamBox|zamzamAirline|datesAllowance|goldDeclare|vatRefund|foodHalal|foodMakkah|foodPrice|foodMadinah|foodElderly|foodGrocery|ziyarahHira|ziyarahCemetery|ziyarahCar|ziyarahMadinah|ziyarahBus|ziyarahTaif|ziyarahBadr|hajjArafahLate|hajjJamaratTiming|hajjExitRule)\):\s+([\s\S]+)$/);
   if (!match) return null;
   const key = match[2] as keyof typeof TITLES;
   const locale = match[1] === "Traveller check" ? "en" : "bn";

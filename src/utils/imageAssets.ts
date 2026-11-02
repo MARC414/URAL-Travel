@@ -58,6 +58,8 @@ export const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "maldives_destination_1790387286896": 896,
   "masjid_nabawi_arches_1790484388265": 896,
   "mina_hajj_tents_1790484325661": 896,
+  "mina_tent_city_arafah_dawn_1791000100000": 670,
+  "tawaf_mataf_kaaba_circuits_1791000000000": 670,
   "nepal_destination_1781544132297": 655,
   "paris_louvre_london_landmarks_1790485782111": 670,
   "passport_card_travel_desk_1790430035290": 896,

@@ -2201,6 +2201,136 @@ What is the indicative budget for a 3-day Dhaka to Kolkata overland trip?
 An indicative 3-day, 2-night overland trip by bus via Benapole–Petrapole ranges from roughly BDT 8,000–12,000 per person (budget tier) to BDT 15,000–18,000 per person (comfortable AC tier), including roundtrip bus transport, IVAC processing fee, border tax, two hotel nights, and meals. Treat this as a planning reference, not a live quote.
 Which land border should be endorsed on my Indian visa for Dhaka–Kolkata travel?
 The Benapole–Petrapole corridor corresponds to the Haridaspur / Benapole checkpost endorsement on an Indian visa. Always verify that the entry and exit points printed on your visa sticker match your planned land or air route before departure [4–6, 9–10].`,
+  "tawaf-sai-seven-circuits-step-by-step-guide": `This guide is for a first-time pilgrim who will be inside Masjid al-Haram within days: where a circuit begins, what counts as one, and how the counting works once you turn to Safa. It is not a fatwa and does not settle differences between the schools. Where the official sources call a practice sunnah rather than required, this page says so.
+
+Quick Answer — Checked 2 November 2026: tawaf is seven circuits of the Kaaba anticlockwise, Kaaba on your left, beginning and ending in line with the Black Stone. A circuit is complete when you return to that alignment, not when you pass a gate. Sa'i is seven one-way lengths: Safa to Marwa is one, Marwa back to Safa is two, and the seventh ends at Marwa. The Ministry of Hajj and Umrah states both rules in the same sentence that defines each rite. [1]
+
+1. WHAT MUST BE TRUE BEFORE YOU ENTER THE MATAF
+
+You must already be in Ihram. Tawaf is part of the rite, not a preliminary to it, so consecration is not something you enter inside the courtyard. If your group plans to arrive and then change, that plan is wrong. [1][2]
+
+Purity during tawaf is answered differently by the schools. The Ministry's definition does not make it a condition and Nusuk's steps do not mention it. Follow your own school; if you can reasonably be in wudu, be in wudu. Decide two practical things before the doors: a meeting point that does not depend on phone signal, because the crowd separates families within minutes, and what you are carrying, because a shoulder bag in a dense circuit is a hazard to the person behind you.
+
+2. WHERE TAWAF STARTS AND WHERE A CIRCUIT ENDS
+
+You stand level with the Black Stone, Kaaba on your left, raise your hand toward it, say "Allahu Akbar", and move anticlockwise. [2] The rule that decides everything is the next one: a circuit ends when you come back to the same alignment — Nusuk's words are "the same point from which we started, aligning with the Black Stone" — and you repeat the alignment and takbir before starting the next. [2]
+
+This is why gates matter less than pilgrims expect. The start line runs outward from the Black Stone across the floor; it is not the door you came in by. Count at the gate and your number drifts by one within ten minutes.
+
+3. HOW TO COUNT SEVEN WITHOUT LOSING YOUR PLACE
+
+Count in the order the rite happens. Align, say the takbir, walk, return to the alignment. That return is the number: the first is one, the seventh is seven, and after the seventh you stop. [1][2] Three errors cause most wrong counts — treating the walk from the entrance as circuit one, counting at a gate or floor marker instead of the alignment, and starting the next circuit before actually reaching it, which happens easily when the crowd moves you sideways.
+
+Traveller check (tawafStart): Before you join the ring, fix your own reference for the start line — look outward from the Black Stone at eye level and pick something you will recognise from the far side of the crowd. It will not stay in place relative to you, but it will tell you when you are level with it again. The rule does not change if your reference shifts; only your ability to read it does.
+
+4. WHAT DOES NOT BREAK A CIRCUIT
+
+The definition is about going around the Kaaba seven times, not the lane you walk in. Nusuk describes pilgrims passing a point and continuing; it does not say that being pushed outward, stepping around a stationary group or moving to an outer ring restarts the count — and it does not say the opposite either. [1][2] Going the wrong way round clearly breaks it, and so does beginning a fresh circuit before returning to the alignment. If you leave the mataf entirely, do not assume you can resume mid-circuit.
+
+Being carried, using a wheelchair or being pushed by an attendant is a genuine question in the schools, and neither official page addresses it. It is also the commonest question from Bangladeshi families travelling with parents; the elderly guide covers the access side. This page says only this: the physical method is a ruling question; the count is still seven.
+
+Traveller check (tawafCrowd): Nothing in the sources gives you a right of way, a reserved lane or a protected hour. If the density is beyond what you can manage, complete the circuits on an upper level rather than forcing the ground floor — the Kaaba is still on your left and you are still going around it. Agree with your group leader before you split up.
+
+5. THE SUNNAH THAT GETS MISTAKEN FOR A REQUIREMENT
+
+Nusuk lists these separately, under "Sunnah to perform": men uncovering the right shoulder while circumambulating, men quickening their pace in the first three circuits, two rak'ahs after tawaf, and men jogging on the sa'i. The Ministry places the two rak'ahs "in a suitable place" rather than at a fixed spot. [1][2] None appears as a condition in the definition of tawaf. A pilgrim who quickens their pace for three circuits and then cannot remember whether they are on three or four has traded a sunnah for a mistake.
+
+6. SA'I: SEVEN ONE-WAY LENGTHS, NOT THREE AND A HALF ROUNDS
+
+When tawaf ends you go to Safa and the sa'i begins there. The Ministry states the rule in one sentence worth reading twice: from Safa you walk to Marwa, and "when he reaches Al-Marwah, he completes one lap, then returns to Al-Safa to complete the second lap, and so on until he completes seven laps, ending at Al-Marwah." [1] So Safa to Marwa is one, Marwa back to Safa is two, the seventh finishes at Marwa, and you do not walk back afterwards. [1][2]
+
+Nusuk describes the same thing from the other direction as "three and a half laps that end at Mount Marwah" — three and a half return trips, which is seven one-way lengths. Both agree. Know both: pilgrims who think in round trips stop at Safa after seven lengths and are one short, while pilgrims who think in three and a half sometimes stop at Marwa after three. Men jog between the two green markers; Nusuk is explicit that the jogging stops after the marked area. [2]
+
+Traveller check (tawafCount): Count sa'i in one direction only, and say the number at Marwa rather than at Safa. The direction you count in decides whether your seventh length ends at Marwa or at Safa, and only one of those is right. If you have been counting return trips, convert before you start rather than halfway through.
+
+7. IF YOU LOSE COUNT
+
+Do not restart — restarting guarantees a wrong answer, because you will lose count again in the same conditions. Ask the person beside you, ask your companion, and use a physical counter: a ring, a knot in cloth, a tasbih, anything but a phone. If you genuinely cannot reconstruct the number, that is a ruling question: take it to a qualified scholar with the facts. A pilgrim who stops and asks is better placed than one who keeps walking and guesses.
+
+8. FINISHING: HALQ OR TAQSIR
+
+After tawaf and sa'i you shave or shorten your hair and the Umrah is complete: men shave the whole head or shorten it, women cut one to two centimetres from the ends. [2] You may postpone the cutting until you are back at your accommodation, and it may be done by yourself or someone staying with you — but the prohibitions of Ihram stay in force until it is actually done. [2]
+
+For a Bangladeshi group on a tight schedule this is the detail that matters. If the coach to Madinah leaves before anyone has cut their hair, you are still in Ihram on that coach. Settle the sequence with your group leader before the day, not at the door of the hotel.
+
+None of this replaces your own scholar on your own case. It is a map of what the official sources say, dated so you can see when it was checked. Every numbered claim above points to the source listed at the foot of this page; where the two disagree, the source is right and this page is out of date.`,
+  "hajj-rites-mina-arafah-muzdalifah-day-by-day": `This page is for a pilgrim who already has a Hajj seat and will be in Mina within days. It gives the order of the rites from 8 to 13 Dhul-Hijjah and the ruling inside each day that decides whether what you did counts. It is not a fatwa and it does not settle differences between the schools; where the schools differ, the difference is named.
+
+Quick Answer — Checked 2 November 2026: the Ministry of Hajj and Umrah orders the journey as Mina on the Day of Tarwiyah, then Arafah, then Muzdalifah, then Jamrat al-Aqaba al-Kubra, the sacrifice, Tawaf Al-Ifadhah and Sa'y of Hajj, then the night of the 10th in Mina, the 11th, the 12th, the 13th, and Tawaf Al-Wadaa. The Ministry publishes the order and no timings. Every hour below comes from a dated ruling, and is attributed.
+
+1. WHY THE TIMES HERE ARE NOT FROM THE MINISTRY
+
+The Ministry's Hajj page lists the journey as a clean sequence and names the pillars: Ihram, Standing at Arafah, Tawaf Al-Ifadhah and Sa'i. [1] It does not state a single hour, a pebble count or an exit condition.
+
+That is not an oversight. When a rite is valid, how many stones are thrown, and under what condition a pilgrim may leave Mina are ruling questions, and they belong to scholarship rather than to an administrative ministry. A travel site that prints a timetable as though the ministry issued it is inventing one. So each time on this page is attributed, and where the schools differ you are told rather than handed a single verdict.
+
+2. THE SHAPE OF THE FIVE OR SIX DAYS
+
+The rites run from the 8th to either the 12th or the 13th. Leaving on the 12th is nafar awwal and gives five days; staying for the 13th is nafar thani and gives six. The gap between them is one night in Mina and 21 pebbles. Nobody should discover which one their group booked while standing beside a coach.
+
+3. 8 DHUL-HIJJAH — MINA, THE DAY OF TARWIYAH
+
+Enter Ihram for Hajj from Makkah or its environs, then go to Mina and stay the night there, praying Zuhr, 'Asr, Maghrib, 'Isha and Fajr. [2]
+
+This is the quietest of the five days and the only one you can use to prepare. The Ministry lists Mina as the first stage of the journey and says nothing further about it. [1]
+
+4. 9 DHUL-HIJJAH — ARAFAH, AND THE WINDOW THAT DECIDES EVERYTHING
+
+When the sun rises, move to Arafah, pray Zuhr and 'Asr together and shortened at the time of Zuhr, then make du'a, dhikr and seek forgiveness until the sun sets. [2]
+
+The standing is valid from the moment the sun passes its zenith on the 9th until dawn on the 10th. That is the position of Malik, Abu Hanifah and the majority of the scholars, as al-Nawawi reports it; Ahmad held that it begins at dawn on the 9th rather than at noon. [3]
+
+The practical consequence is the most useful thing on this page. If the coach is late and you reach Arafah after sunset, your Hajj is not lost: whoever reaches Arafah at any point before dawn on the Day of Sacrifice has performed the standing and must complete the remaining rites. [3] What you must not do is leave Arafah deliberately before sunset. [2]
+
+Traveller check (hajjArafahLate): Ask your group leader before the 8th what the plan is if the coach runs late on the 9th. Most groups have never discussed it. The answer changes nothing about the validity of your Hajj, but knowing it stops a family panicking on a stalled bus at nine in the evening.
+
+The mistake that actually costs a Hajj is standing in the wrong place, and it is the mirror image of the one above. Some pilgrims stop outside the boundary of Arafah, stay until the sun goes down and then leave for Muzdalifah. Those who stand there have not performed Hajj, because the Prophet (peace be upon him) said: "Hajj is 'Arafah." Whoever does not stand in a place that is part of Arafah, at the time appointed for the standing, his Hajj is not valid. [7] The boundary is marked and the markers are not hidden; look for them before you sit down, and do not take a driver's word for it. Time here is forgiving; location is not. Arrive after sunset and you are covered until dawn. Stand a few hundred metres on the wrong side of the line and no amount of time helps.
+
+Two smaller mistakes repeat every year in the same crowd. The first is going silent: pilgrims stop reciting the Talbiyah on the road from Mina to Arafah, though the Prophet (peace be upon him) kept reciting it until he had stoned Jamrat al-Aqabah on the day of Eid. [7] The second is direction. People turn to the mountain for du'a because the Prophet stood near it, but he faced the qiblah with the mountain between him and it, and facing the hill instead is recorded as a mistake. [7] All of Arafah is the place of standing: you do not have to reach any particular spot, and the pilgrims who exhaust themselves getting to one have made the day harder than it was made for them. [7]
+
+Then Muzdalifah. Leave Arafah after sunset and travel there, praying Maghrib and 'Isha on arrival, staying the night, praying Fajr and making du'a until just before sunrise. [2] The weak — women, children, the elderly and those caring for them — may leave at the end of the night: Asma bint Abi Bakr waited for the moon to set, then left Muzdalifah for Mina. [4]
+
+5. 10 DHUL-HIJJAH — THE ORDER THAT TRIPS PEOPLE UP
+
+The Ministry's Day 10 sequence reads Jamrat al-Aqaba al-Kubra, then the sacrifice, then Tawaf Al-Ifadhah and Sa'y of Hajj. [1] Read it twice, because shaving is not in it, and shaving is the step that ends most of the prohibitions of Ihram.
+
+The fuller order is to stone Jamrat al-Aqabah with seven pebbles, then slaughter the hadiy, then shave the head or cut the hair, then go to Makkah for the tawaf of Hajj. [2] Men shave or shorten; women cut about the length of a fingertip from the ends of the hair and do not shave. [2][6]
+
+On timing, the stoning of Jamrat al-Aqabah begins after the sun has risen and lasts until sunset on the Day of Sacrifice. The weak may do it at the end of the night of 'Eid. It may be delayed to the end of the night because of severe crowding or distance, but not to dawn on the 11th. [4]
+
+Traveller check (hajjJamaratTiming): The window on the 10th closes at sunset, not at midnight, and the window on the 11th to the 13th opens only after the sun passes its zenith. That gap is where coach timetables and crowds collide. Confirm with your group whether you stone on the 10th after sunrise or at the end of the night, and do not let a schedule decide a ruling for you.
+
+6. 11, 12 AND 13 DHUL-HIJJAH — THE TASHREEQ DAYS
+
+Stay the nights of the 11th and 12th in Mina. On each of those days, after the sun has passed its zenith, stone the three jamarat in order, beginning with the smallest, which is the one furthest from Makkah, then the middle, then Jamrat al-Aqabah, seven pebbles at each and the takbir with every throw. Make du'a after the small and the middle; there is no du'a after the Aqabah. [2]
+
+Stoning before the sun passes its zenith on the 11th, 12th or 13th is not permissible, because the Prophet (peace be upon him) did not do it before that time and told the people to learn their rites from him. [4] The window ends at the end of the night: stoning at night is permitted where heat or crowding makes the day hard, but delaying it past dawn is not. [4]
+
+The counts are seven on the 10th and then 21 on each day. Leave on the 12th and that is 49 pebbles. Stay for the 13th and it is 70.
+
+The exit rule is where most confusion lives. Hastening has a precise meaning, and it is not simply leaving early: it means leaving Mina before sunset on the 12th after having stoned the jamarat. Leave before sunset without stoning and come back afterwards to stone, and you have not hastened. [8] Finish the stoning on the 12th and leave Mina before sunset, and the 13th is waived for you. If the sun sets while you are still in Mina, you must stay the night and stone the three jamarat on the 13th after the sun passes its zenith. [5] But if you had packed and boarded the bus and the road held you there, you were not in Mina by choice, and you do not have to stay. [2]
+
+Traveller check (hajjExitRule): Settle with your group on the 11th, not on the 12th, whether everyone leaves that evening. The rule turns on being physically out of Mina before sunset, and a coach that has not started moving at five in the afternoon is not out of Mina. If your package says nafar awwal, ask what happens when the traffic does not cooperate.
+
+7. BEFORE YOU LEAVE MAKKAH
+
+Once the days are over and you intend to travel, do not leave until you have performed the farewell tawaf, seven circuits of the Kaaba. Women who are menstruating or bleeding after childbirth are exempt from it. [2]
+
+8. WHAT THESE SOURCES DO NOT TELL YOU
+
+Where your tent is, how far it stands from the jamarat, when your coach moves, how long you will be standing, and who holds your medication are all set by your package. None of it is on the ministry pages above, and none of it is a ruling. Get three answers in writing before the 8th: the departure time for Arafah on the 9th, the meeting point if your group separates in the crowd, and whether the package is nafar awwal or nafar thani. A pilgrim holding those three answers can follow the sequence above without guessing at any point.
+
+If your trip includes Umrah as well, the tawaf and sa'i mechanics sit on the companion page, which covers where a circuit begins and how seven are counted.
+
+9. CHECKING THIS PAGE YOURSELF
+
+Every claim above carries a number, and the numbered source sits at the foot of the page. If this page and a source disagree, the source is right and this page is stale — that is the rule, and it is why the numbers are there rather than in a bibliography nobody reads.
+
+Two things move under a reader's feet. The first is the ministry's journey order, read on 2 November 2026: it is administrative and it can be reordered between seasons. The second is the rulings, which are answers to questions rather than a settled code — which is exactly why the schools are named where they differ, and why neither position is chosen for you.
+
+If you are reading this during Hajj and something on the ground contradicts it, follow the person responsible for your group and check the source afterwards. A page cannot see the crowd you are standing in.
+
+None of this replaces your own scholar on your own case. It is a map of what the dated sources say, checked on 2 November 2026.`,
   ...SCHEDULED_BLOG_BODY,
 };
 

@@ -1289,7 +1289,222 @@ export const VISA_DATA: VisaGuide[] = [
   ]
 }`
     }
-  }
+  },
+  {
+    id: "saudi-arabia-visa",
+    country: "Saudi Arabia",
+    requirementType: "Multiple routes — check eligibility",
+    costBdt:
+      "No single published figure. The Saudi authorities do not publish one central fee for a consulate visa, and the amount differs by the channel you apply through. Confirm the fee with the embassy or the accredited provider before paying anything; treat any website quoting an exact fee for a visa it has not yet assessed as a sales page.",
+    processingTime:
+      "Not published as a fixed number, and it differs by channel and season. Get the current estimate from the embassy or the accredited provider for your own dates, and do not book a non-refundable fare until the visa is in hand.",
+    documentChecklist: [
+        {
+          "category": "Prove which route applies to you first",
+          "items": [
+            "Open https://visa.visitsaudi.com and read the eligible-countries list yourself. Bangladesh is not on it, and that single fact decides your route.",
+            "If you already hold a valid GCC, UK, US or Schengen tourist visa, check the stopover transit eVisa terms on your airline's own visa page before assuming you qualify.",
+            "If you do not hold one of those, the consulate route is your route — there is no legitimate way around it.",
+            "Never pay a website that promises an instant Saudi eVisa to a Bangladeshi passport without first checking that list."
+          ]
+        },
+        {
+          "category": "Then, at the embassy or through an accredited provider",
+          "items": [
+            "The Royal Embassy of Saudi Arabia in Dhaka is the official channel for a consulate visa. Contact them directly for the current document list, because that list is issued consularly and is not published centrally in English.",
+            "For Umrah, the Ministry of Hajj and Umrah states that packages are booked through accredited service providers and approved platforms integrated with the Nusuk platform.",
+            "Do not treat a quote as an approval. A package price does not mean the visa has been decided."
+          ]
+        },
+        {
+          "category": "Health requirements before you travel",
+          "items": [
+            "The Saudi Ministry of Health publishes the current Hajj and Umrah health requirement documents. Download the Umrah one and read it before you apply, not after you book.",
+            "Requirements can be season-dated. Check the document that is current at the time you apply, not the one you remember from a previous trip."
+          ]
+        }
+      ],
+    stepByStep: [
+        "Check the official eligible-countries list at visa.visitsaudi.com. If Bangladesh is absent, as it is today, the tourist eVisa is closed to your passport.",
+        "If you hold a valid GCC, UK, US or Schengen tourist visa, read your airline's stopover visa page. Saudia states the transit eVisa is available to travellers holding a valid tourist visa for the GCC, the UK, the USA or the Schengen area.",
+        "If you do not, contact the Royal Embassy of Saudi Arabia in Dhaka for the consulate visa requirements. Both the official portal and the national carrier direct travellers from non-eligible countries to Saudi embassies and consulates.",
+        "For Umrah specifically, the Ministry of Hajj and Umrah states that packages are booked through accredited providers and approved platforms integrated with the Nusuk platform. Confirm the provider is accredited before you transfer money.",
+        "Read the current Ministry of Health requirements for Umrah and complete whatever they require before your application, not after.",
+        "Get the visa before you book a non-refundable ticket. A fare is not a reason to assume an approval.",
+        "On arrival, carry printed copies of the visa, the accommodation booking and the health documentation. Do not rely on a phone that may not have a working SIM yet.",
+        "Confirm the exit and entry conditions on the visa itself. A visa issued for one purpose is not automatically valid for another."
+      ],
+    quickAnswer:
+      "Bangladesh is not one of the 68 countries on Saudi Arabia's official tourist eVisa list, so the direct online tourist visa is not open to an ordinary Bangladeshi passport. The routes that remain are a consulate visa through the Saudi embassy, a free stopover transit eVisa if you already hold a valid GCC, UK, US or Schengen tourist visa, or an Umrah package booked through an accredited provider integrated with Nusuk. A tourist visa, where you can get one, does permit Umrah but never Hajj.",
+    keyFacts: [
+        {
+          "label": "Tourist eVisa eligible?",
+          "value": "No — Bangladesh is not on the 68-country list"
+        },
+        {
+          "label": "Route if not eligible",
+          "value": "Consulate visa via the Saudi embassy"
+        },
+        {
+          "label": "Transit eVisa condition",
+          "value": "Valid GCC / UK / US / Schengen tourist visa"
+        },
+        {
+          "label": "Transit eVisa terms",
+          "value": "90-day validity, stay up to 96 hours"
+        },
+        {
+          "label": "Umrah on a tourist visa",
+          "value": "Permitted, excluding Hajj"
+        },
+        {
+          "label": "Umrah packages",
+          "value": "Through accredited Nusuk-integrated providers"
+        },
+        {
+          "label": "Published fee",
+          "value": "Not published centrally — confirm consularly"
+        }
+      ],
+    faqs: [
+        {
+          "question": "Can a Bangladeshi passport holder apply for the Saudi tourist eVisa online?",
+          "answer": "Not directly. The official Saudi eVisa portal lists 68 eligible countries and Bangladesh is not among them. The portal's own instruction for a country that is not listed is to contact the nearest Saudi embassy, and the national carrier states the same thing in different words: travellers from non-eligible countries should apply for a consulate visa through Saudi embassies and consulates."
+        },
+        {
+          "question": "I have a US or UK or Schengen visa. Does that change anything?",
+          "answer": "It can open the stopover transit eVisa, which is a different product from the tourist eVisa. Saudia states the transit eVisa is available to citizens and residents of 60+ countries or to travellers holding a valid tourist visa for the GCC countries, the UK, the USA or the Schengen area. It is valid for 90 days and allows a stay of up to 96 hours. Read the conditions on the airline page for your own trip, because eligibility is checked at booking, not by us."
+        },
+        {
+          "question": "Can I perform Umrah on a tourist visa?",
+          "answer": "Yes, where you hold one. The official eVisa portal describes the tourist visa as covering tourism-related activities including Umrah, excluding Hajj. That is a permission, not a booking: you still need an Umrah package through an accredited provider and you still need to meet the health requirements."
+        },
+        {
+          "question": "Do I need a travel agent?",
+          "answer": "The Ministry of Hajj and Umrah describes Umrah packages as booked through accredited service providers and approved platforms integrated with the Nusuk platform. That is the ministry's own description of how packages are sold. We do not state that an agent is legally mandatory, because the official English pages do not say that in those words — ask the embassy for your own case."
+        },
+        {
+          "question": "What does the visa cost, and how long does it take?",
+          "answer": "We deliberately publish no figure, because the Saudi authorities do not publish a single central fee or processing time for a consulate visa, and a number copied from an agency page would be wrong for most readers. Fee and timing are set by the channel you apply through. Ask the embassy, and treat any website that quotes you a precise fee for a visa it has not yet assessed as a sales page rather than an authority."
+        },
+        {
+          "question": "Are vaccinations required?",
+          "answer": "The Saudi Ministry of Health publishes current health requirement documents for both Hajj and Umrah, and states that pilgrims should receive necessary vaccinations in advance of travel. The specific requirement changes by season, so read the current document rather than a summary. We do not reproduce a vaccine list here because it is season-dated and getting it wrong is a health risk, not a formatting error."
+        },
+        {
+          "question": "Is there a visa on arrival for Bangladeshi passports?",
+          "answer": "The official portal lists visa on arrival for eligible nationalities, and Bangladesh is not on the eligible-countries list. If you hold a qualifying GCC, UK, US or Schengen tourist visa, the stopover transit route is the one to check — it is a different product with different conditions, and it is confirmed at booking."
+        },
+        {
+          "question": "What should I do before paying anyone?",
+          "answer": "Open the official eligible-countries list and confirm your own position on it. Then confirm the provider is accredited and integrated with Nusuk before transferring money. Two checks, both free, and between them they remove almost every way a Bangladeshi pilgrim loses money on a Saudi visa."
+        },
+        {
+          "question": "How can I check this page is still correct?",
+          "answer": "Read the eligible-country list on the official Saudi eVisa portal yourself, and check it on the day you pay rather than the day you plan. That portal decides, and this page is built from it: the list was read on 2 November 2026. Eligibility lists, fees and health requirements all change between seasons, so treat every sentence here as a dated snapshot rather than a live feed. If this page and the official portal ever disagree, the portal is right and this page is out of date."
+        }
+      ],
+    schemaMarkup: {
+      type: "GovernmentService + FAQPage",
+      description: "Saudi visa routes for Bangladeshi passport holders, checked against the official eVisa portal, the national carrier and the Ministry of Health",
+      code: `{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "GovernmentService",
+      "name": "Saudi Arabia visa routes for Bangladeshi passport holders",
+      "serviceType": "Visa guidance",
+      "provider": {
+        "@type": "GovernmentOrganization",
+        "name": "Saudi Ministry of Foreign Affairs / Ministry of Hajj and Umrah"
+      },
+      "areaServed": "Bangladesh",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Bangladeshi passport holders"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can a Bangladeshi passport holder apply for the Saudi tourist eVisa online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not directly. The official Saudi eVisa portal lists 68 eligible countries and Bangladesh is not among them. The portal's own instruction for a country that is not listed is to contact the nearest Saudi embassy, and the national carrier states the same thing in different words: travellers from non-eligible countries should apply for a consulate visa through Saudi embassies and consulates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I have a US or UK or Schengen visa. Does that change anything?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It can open the stopover transit eVisa, which is a different product from the tourist eVisa. Saudia states the transit eVisa is available to citizens and residents of 60+ countries or to travellers holding a valid tourist visa for the GCC countries, the UK, the USA or the Schengen area. It is valid for 90 days and allows a stay of up to 96 hours. Read the conditions on the airline page for your own trip, because eligibility is checked at booking, not by us."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I perform Umrah on a tourist visa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, where you hold one. The official eVisa portal describes the tourist visa as covering tourism-related activities including Umrah, excluding Hajj. That is a permission, not a booking: you still need an Umrah package through an accredited provider and you still need to meet the health requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a travel agent?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Ministry of Hajj and Umrah describes Umrah packages as booked through accredited service providers and approved platforms integrated with the Nusuk platform. That is the ministry's own description of how packages are sold. We do not state that an agent is legally mandatory, because the official English pages do not say that in those words — ask the embassy for your own case."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the visa cost, and how long does it take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We deliberately publish no figure, because the Saudi authorities do not publish a single central fee or processing time for a consulate visa, and a number copied from an agency page would be wrong for most readers. Fee and timing are set by the channel you apply through. Ask the embassy, and treat any website that quotes you a precise fee for a visa it has not yet assessed as a sales page rather than an authority."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are vaccinations required?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Saudi Ministry of Health publishes current health requirement documents for both Hajj and Umrah, and states that pilgrims should receive necessary vaccinations in advance of travel. The specific requirement changes by season, so read the current document rather than a summary. We do not reproduce a vaccine list here because it is season-dated and getting it wrong is a health risk, not a formatting error."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a visa on arrival for Bangladeshi passports?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The official portal lists visa on arrival for eligible nationalities, and Bangladesh is not on the eligible-countries list. If you hold a qualifying GCC, UK, US or Schengen tourist visa, the stopover transit route is the one to check — it is a different product with different conditions, and it is confirmed at booking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I do before paying anyone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the official eligible-countries list and confirm your own position on it. Then confirm the provider is accredited and integrated with Nusuk before transferring money. Two checks, both free, and between them they remove almost every way a Bangladeshi pilgrim loses money on a Saudi visa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I check this page is still correct?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Read the eligible-country list on the official Saudi eVisa portal yourself, and check it on the day you pay rather than the day you plan. That portal decides, and this page is built from it: the list was read on 2 November 2026. Eligibility lists, fees and health requirements all change between seasons, so treat every sentence here as a dated snapshot rather than a live feed. If this page and the official portal ever disagree, the portal is right and this page is out of date."
+          }
+        }
+      ]
+    }
+  ]
+}`,
+    },
+  },
 ];
 
 export const DESTINATIONS_DATA: DestinationGuide[] = [
@@ -2179,6 +2394,7 @@ export const BLOG_DATA: BlogPost[] = [
     title: "DIY Umrah from Bangladesh: Visa Routes, Nusuk Steps & Budget Checks",
     summary: "Choose a conditional Umrah visa route from Bangladesh, check the published 1448H dates and follow the application-to-permit sequence. Includes Package Visa conditions, source limits and a historical ten-day budget—not a live quote. Official instructions reviewed 19 October 2026; personal app flows not tested.",
     category: "Hajj & Umrah",
+    journeyStage: "prepare",
     date: "September 26, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -2194,6 +2410,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dubai Stopover & UAE Visa Guide from Dhaka", path: "/destinations/dubai-guide" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
       { text: "Ramadan Umrah booking dates & I'tikaf registration", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
+      { text: "Tawaf and Sa'i: Seven Circuits, Counted Correctly", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
     ],
     references: [
       {
@@ -2340,6 +2557,7 @@ export const BLOG_DATA: BlogPost[] = [
     summary:
       "Checked 19 October 2026: HHR basic fares, baggage and station services, plus hotel-owned examples. Confirm the exact room, mosque route, shuttle and ticket conditions before booking; no area-wide accessibility ranking, live room quote or guaranteed transfer.",
     category: "Hajj & Umrah",
+    journeyStage: "prepare",
     date: "September 26, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -2447,6 +2665,7 @@ export const BLOG_DATA: BlogPost[] = [
       },
     ],
     category: "Hajj & Umrah",
+    journeyStage: "prepare",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -2465,6 +2684,7 @@ export const BLOG_DATA: BlogPost[] = [
     title: "Umrah with Elderly Parents from Bangladesh: Airline Wheelchair, Haram Mobility & Medical Preparation",
     summary: "Checked 19 October 2026: what a carrier can confirm for an older parent, how a personal wheelchair and powered device are handled, where the Grand Mosque's free wheelchairs and paid electric carts are booked, and which hotel and clinical questions only the property and your doctor can answer. No universal free service, guaranteed gate delivery, step-free hotel route or medical clearance.",
     category: "Hajj & Umrah",
+    journeyStage: "prepare",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -2532,6 +2752,7 @@ export const BLOG_DATA: BlogPost[] = [
     summary:
       "Checked 19 October 2026: Saudia’s published stopover booking sequence, up to 96 hours, onward-document checks and actual checkout costs. Current detailed flynas eligibility remains unverified. Separate Umrah/Rawdah permits and realistic transfer buffers matter; no universal approval, free hotel or instant-issuance promise.",
     category: "Hajj & Umrah",
+    journeyStage: "prepare",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -2608,6 +2829,7 @@ export const BLOG_DATA: BlogPost[] = [
     title: "Nusuk & Saudi Visa Bio for Bangladeshis: Registration, Biometrics and Rawdah Permits",
     summary: "For Bangladeshi visitors: application-specific Saudi Visa Bio steps, Nusuk visitor registration and separate Umrah/Rawdah permits. Learn the dated annual-booking rule, confirmation window and entry-code checks, without a fixed OTP length, screenshot ban or paid-data requirement. Official published sources reviewed 19 October 2026; authenticated app screens not tested.",
     category: "Hajj & Umrah",
+    journeyStage: "prepare",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -2685,6 +2907,7 @@ export const BLOG_DATA: BlogPost[] = [
     summary:
       "Source review, 19 October 2026: distinguish the Ministry’s no-mahram Umrah answer from visa/age eligibility and personal religious advice. Check actual Rawdah bookings, hotel routes, Ihram, menstrual contingencies and private Taqsir—not universal gates or personal rulings.",
     category: "Hajj & Umrah",
+    journeyStage: "prepare",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -2764,6 +2987,7 @@ export const BLOG_DATA: BlogPost[] = [
     summary:
       "Source review, 19 October 2026: compare roundtrip and open-jaw on the same dates, passengers, baggage and terms. Check Biman directional baggage, Saudia Zamzam wording and connections; no live fare, guaranteed savings or daily schedule is established.",
     category: "Hajj & Umrah",
+    journeyStage: "travel",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -2817,6 +3041,7 @@ export const BLOG_DATA: BlogPost[] = [
     title: "Ramadan 1448 Umrah & I'tikaf Guide from Bangladesh (2027): Dates, Season Deadlines and Who Can Register",
     summary: "Ramadan 1448 is expected to begin on Monday 8 February 2027, and the Ministry of Hajj and Umrah closes Umrah visa issuance on 9 March 2027, entry on 23 March and departure on 7 April. Checked on 19 October 2026 against the Umm al-Qura calendar, the Ministry's 1448 season calendar and the Authority's own I'tikaf announcements, this guide separates the dates you can plan on from the permit nobody should promise you — the published I'tikaf conditions have been aimed at citizens and residents, not visitors on an Umrah visa.",
     category: "Hajj & Umrah",
+    journeyStage: "prepare",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -2879,6 +3104,7 @@ export const BLOG_DATA: BlogPost[] = [
     title: "Ihram & Miqat Rules for Flights from Bangladesh (2026): Direct to Jeddah, Gulf Transit or Madinah First",
     summary: "Where exactly do you enter Ihram when flying from Dhaka? Checked on 19 October 2026 against the Saudi Ministry of Hajj and Umrah's Miqat page and its official Ihram guide, this explains the published boundary rule, why Jeddah airport is not a place for entering Ihram, how the point parallel to the Miqat works on a connecting route, why a Madinah-first flight needs no Ihram on board, and what the Ministry says happens if the boundary is crossed without Ihram.",
     category: "Hajj & Umrah",
+    journeyStage: "travel",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -2920,7 +3146,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Complete DIY Umrah & 10-Day BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Comparison", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Tawaf and Sa'i: Seven Circuits, Counted Correctly", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Landing at Jeddah in Ihram with family and luggage?", body: "Compare an optional private sedan or family minivan from Jeddah Arrivals to your Makkah hotel. Vehicle size, luggage capacity, meet-and-greet and availability must be confirmed with the provider before you rely on it — a transfer does not change when or where you enter Ihram." }
   },
@@ -2930,6 +3157,7 @@ export const BLOG_DATA: BlogPost[] = [
     title: "Zamzam, Dates & Gold: What You Can Actually Bring Back to Bangladesh (2026)",
     summary: "Checked on 19 October 2026 against the Madinah airport operator, Saudia's conditions of carriage, the Ministry of Hajj and Umrah's Zamzam guidance, Dhaka airport customs and the NBR's 2025 baggage rules: one sealed 5-litre Zamzam bottle at SAR 12.50, no published kilogram allowance for dates (a personal-use test instead), and 100 g of gold ornaments or 200 g of silver once a calendar year, with a 117 g declared bar cap.",
     category: "Hajj & Umrah",
+    journeyStage: "return",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -2997,6 +3225,7 @@ export const BLOG_DATA: BlogPost[] = [
     title: "Bangladeshi & Pakistani Food in Makkah & Madinah (2026): Where to Eat and How to Budget Honestly",
     summary: "Checked on 19 October 2026 against the SFDA's halal statements, the Balady municipal health-certificate service, WHO food-safety guidance, the official Al Baik branch and menu pages, BinDawood's store locator and a June 2026 Daily Star report: halal is the national baseline, hygiene is a local question, the documented South Asian food streets in Makkah are Hijra Road and Ibrahim Khaleel Road, and no per-plate price is printed because no kitchen publishes one that can be re-checked.",
     category: "Hajj & Umrah",
+    journeyStage: "perform",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -3928,6 +4157,108 @@ export const BLOG_DATA: BlogPost[] = [
       headline: "Compare Dhaka to Kolkata Direct Flight Fares",
       body: "While cross-border passenger trains remain suspended, direct Dhaka (DAC) to Kolkata (CCU) flights take about 1 hour 10 minutes — compare live fares and baggage terms across airlines before booking.",
     },
+  },
+  {
+    id: "blog-49",
+    slug: "tawaf-sai-seven-circuits-step-by-step-guide",
+    title: "Tawaf and Sa'i: Seven Circuits, Counted Right (2026)",
+    summary:
+      "Checked 2 November 2026 against the Ministry of Hajj and Umrah and Nusuk: where a tawaf circuit starts and ends, why gates are the wrong place to count, how sa'i is seven one-way lengths rather than three and a half rounds, and what finishing (halq or taqsir) does to your Ihram. Not a fatwa; school differences are named, not decided.",
+    category: "Hajj & Umrah",
+    journeyStage: "perform",
+    date: "November 2, 2026",
+    updatedAt: "2026-11-02",
+    author: "Farhan Momen (Founder & Travel Editor)",
+    readTime: "7 min read",
+    references: [
+      {
+        name: "Saudi Ministry of Hajj and Umrah — Umrah: the pillars of Umrah (Tawaf and Saa'i defined)",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — উমরাহ: উমরাহর রুকন (তাওয়াফ ও সাঈর সংজ্ঞা)",
+        url: "https://haj.gov.sa/en/Umrah",
+      },
+      {
+        name: "Nusuk Umrah — Umrah Journey: rite-by-rite steps, sunnah list and halq/taqsir",
+        nameBn: "নুসুক উমরাহ — উমরাহ জার্নি: ধাপে ধাপে আমল, সুন্নাহর তালিকা ও হালক/তাকসির",
+        url: "https://umrah.nusuk.sa/Journey",
+      },
+      {
+        name: "Nusuk Hajj — Hajj rituals: tawaf, sa'i and Tawaf al-Wadaa in the Hajj context",
+        nameBn: "নুসুক হজ — হজের আমল: হজের প্রেক্ষাপটে তাওয়াফ, সাঈ ও তাওয়াফুল বিদা",
+        url: "https://hajj.nusuk.sa/nusuk/hajj-rituals",
+      },
+    ],
+    internalLinks: [
+      { text: "DIY Umrah Planning Portal & BDT Calculator", path: "/umrah" },
+      { text: "Complete Umrah & Hajj Visa, Nusuk & BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Wearing Ihram at Dhaka Airport or at the Miqat", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+      { text: "Umrah Rules for Women: Mahram, Visa and Ladies' Gates", path: "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" },
+      { text: "Umrah with Elderly Parents: Wheelchair and Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+          { text: "Nusuk App & Saudi Visa Bio Guide: Rawdah Permit", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
+      { text: "Makkah & Madinah Hotel Zones and Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
+      { text: "Hajj Rites Day by Day: Mina, Arafah, Muzdalifah, Jamarat", path: "/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day" },
+    ],
+  },
+  {
+    id: "blog-50",
+    slug: "hajj-rites-mina-arafah-muzdalifah-day-by-day",
+    title: "Hajj Rites Day by Day: Arafah, Mina, Jamarat (2026)",
+    summary:
+      "Checked 2 November 2026: the day order the Ministry of Hajj and Umrah publishes, joined to the dated rulings it does not publish — the Arafah window that runs to dawn, why shaving is missing from the ministry's Day 10 list, the pebble counts, and the sunset rule that decides whether you leave Mina on the 12th or the 13th. Not a fatwa; school differences are named, not decided.",
+    category: "Hajj & Umrah",
+    journeyStage: "perform",
+    date: "November 2, 2026",
+    updatedAt: "2026-11-02",
+    author: "Farhan Momen (Founder & Travel Editor)",
+    readTime: "8 min read",
+    references: [
+      {
+        name: "Saudi Ministry of Hajj and Umrah — Hajj: the pillars and the day-by-day journey order (Mina, Arafah, Muzdalifah, Jamarat, sacrifice, Tawaf Al-Ifadhah, Tashreeq nights)",
+        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — হজ: রুকনসমূহ ও দিনভিত্তিক ক্রম (মিনা, আরাফাহ, মুজদালিফাহ, জামারাত, কুরবানি, তাওয়াফুল ইফাদাহ, তাশরিকের রাত)",
+        url: "https://haj.gov.sa/en/Hajj",
+      },
+      {
+        name: "Islam Q&A no. 27090 — How to perform Hajj: the full rite-by-rite sequence, Day 10 order, Tashreeq stoning and the involuntary-detention exception",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ২৭০৯০ — হজ কীভাবে আদায় করবেন: ধাপে ধাপে পূর্ণ ক্রম, ১০ তারিখের ধারাবাহিকতা, তাশরিকের কঙ্কর ও অনিচ্ছাকৃত আটকে পড়ার ব্যতিক্রম",
+        url: "https://islamqa.info/en/answers/27090/how-to-perform-hajj",
+      },
+      {
+        name: "Islam Q&A no. 144830 — Extending the standing in Arafah until dawn on the Day of Sacrifice (the window, and the schools' positions)",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ১৪৪৮৩০ — কুরবানির দিনের ফজর পর্যন্ত আরাফাহতে অবস্থানের সময়সীমা (সীমা ও মাযহাবভেদ)",
+        url: "https://islamqa.info/en/answers/144830",
+      },
+      {
+        name: "Islam Q&A no. 36436 — The time for stoning the Jamarat: Aqabah after sunrise to sunset, Tashreeq after the zenith to the end of the night",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ৩৬৪৩৬ — জামারাতে কঙ্কর নিক্ষেপের সময়: আকাবাহ সূর্যোদয় থেকে সূর্যাস্ত, তাশরিক জাওয়াল থেকে রাতের শেষ পর্যন্ত",
+        url: "https://islamqa.info/en/answers/36436",
+      },
+      {
+        name: "Islam Q&A no. 205161 — Hastening to depart from Mina: the sunset condition on the 12th, and the Standing Committee ruling",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ২০৫১৬১ — মিনা থেকে তাড়াতাড়ি ফেরা: ১২ তারিখে সূর্যাস্তের শর্ত ও স্থায়ী কমিটির ফতোয়া",
+        url: "https://islamqa.info/en/answers/205161",
+      },
+      {
+        name: "Islam Q&A no. 31822 — Description of Hajj: types of Hajj, and halq or taqsir by men and women",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ৩১৮২২ — হজের বর্ণনা: হজের প্রকারভেদ এবং পুরুষ ও নারীর হালক বা তাকসির",
+        url: "https://islamqa.info/en/answers/31822",
+      },
+      {
+        name: "Islam Q&A no. 34293 — Mistakes made when going to 'Arafah and in 'Arafah itself: standing outside the boundary, the Talbiyah, and facing the qiblah",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ৩৪২৯৩ — আরাফাহগমনে ও আরাফাহতে সচরাচর ভুল: সীমানার বাইরে অবস্থান, তালবিয়া এবং কিবলার দিকে মুখ",
+        url: "https://islamqa.info/en/answers/34293",
+      },
+      {
+        name: "Islam Q&A no. 43274 — What hastening to depart from Mina actually means: stoning the jamarat first, then leaving before sunset",
+        nameBn: "ইসলাম প্রশ্নোত্তর নং ৪৩২৭৪ — মিনা থেকে তাড়াতাড়ি ফেরার প্রকৃত অর্থ: আগে কঙ্কর নিক্ষেপ, তারপর সূর্যাস্তের আগে প্রস্থান",
+        url: "https://islamqa.info/en/answers/43274",
+      },
+    ],
+    internalLinks: [
+      { text: "Tawaf and Sa'i: Seven Circuits, Counted Correctly", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
+      { text: "Hajj Registration in Bangladesh: Government vs Private Package Cost", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
+      { text: "Complete Umrah & Hajj Visa, Nusuk & BDT Budget Guide", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
+      { text: "Umrah with Elderly Parents: Wheelchair and Medical Guide", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
+      { text: "DIY Umrah Planning Portal & BDT Calculator", path: "/umrah" },
+    ],
   },
   ...SCHEDULED_BLOG_DATA,
 ];

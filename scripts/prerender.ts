@@ -144,6 +144,7 @@ const OPTIMIZED_SOCIAL_IMAGES_DIR = path.join(ROOT_DIR, "src", "assets", "optimi
 const BLOG_IMAGE_MAP: Record<string, string> = {
   "havana-cuba-travel-guide-bangladesh": "havana_gran_teatro_classic_cars_1791427200000.jpg",
   "chefchaouen-morocco-travel-guide-bangladesh": "chefchaouen_blue_fountain_alley_1791427400000.jpg",
+  "hajj-rites-mina-arafah-muzdalifah-day-by-day": "mina_tent_city_arafah_dawn_1791000100000.jpg",
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": "umrah_makkah_haram_guide_1790430007679.jpg",
   "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": "haramain_bullet_train_1790484312808.jpg",
   "hajj-registration-bangladesh-government-vs-private-package-cost": "mina_hajj_tents_1790484325661.jpg",
@@ -495,6 +496,14 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
     {
       href: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
       text: "Saudi stopover visa and Umrah routing guide",
+    },
+    {
+      href: "/blog/tawaf-sai-seven-circuits-step-by-step-guide",
+      text: "Tawaf and Sa'i: where a circuit starts, ends and how to count it",
+    },
+    {
+      href: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
+      text: "Entering Ihram at Dhaka airport or at the Miqat",
     },
   ],
   "/banking": [
@@ -1866,12 +1875,18 @@ function buildAllRoutes(): PrerenderRoute[] {
 
   for (const v of VISA_DATA) {
     const visaUrl = `${BASE_URL}/visa/${v.id}`;
+    // The Saudi page deliberately publishes no fee and no document list, so the
+    // generic sentence below would advertise exactly what it refuses to give.
+    const saudiVisa = v.id === "saudi-arabia-visa";
     const title =
       v.id === "nepal-visa"
         ? "Nepal Visa for Bangladeshi Citizens 2026: Free Visa on Arrival Guide | URAL"
-        : `${v.country} Visa for Bangladeshi Travelers 2026 | URAL`;
-    const description =
-      `Review the ${v.country} entry route, required documents and application steps for Bangladeshi travelers. Verify current rules and fees with official sources before applying.`;
+        : saudiVisa
+          ? "Saudi Visa: Which Route Fits Your Passport (2026)"
+          : `${v.country} Visa for Bangladeshi Travelers 2026 | URAL`;
+    const description = saudiVisa
+      ? "Bangladesh is not on Saudi Arabia's 68-country tourist eVisa list. The three routes that are actually open, the transit eVisa condition, and why this page publishes no fee figure — checked against official sources."
+      : `Review the ${v.country} entry route, required documents and application steps for Bangladeshi travelers. Verify current rules and fees with official sources before applying.`;
     const extraNodes: Record<string, unknown>[] = [];
     if (v.schemaMarkup?.code) {
       try {
@@ -3403,6 +3418,8 @@ function buildBengaliBody(
         { label: "Nusuk অ্যাপ, Saudi Visa Bio ও Rawdah পারমিট গাইড", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
         { label: "মক্কা-মদিনা হোটেল জোন ও Haramain ট্রেন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
         { label: "বাংলাদেশ থেকে হজ নিবন্ধন ও প্যাকেজ গাইড", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
+        { label: "তাওয়াফ ও সাঈ: এক চক্কর কোথায় শুরু, কোথায় শেষ", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
+        { label: "ঢাকা বিমানবন্দরে না মিকাতে ইহরাম", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
       ])
     );
     return `<article>${parts.join("")}</article>`;

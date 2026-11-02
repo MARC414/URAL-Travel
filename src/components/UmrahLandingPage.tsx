@@ -1020,6 +1020,20 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 ],
               },
               {
+                group: isBn ? "ইবাদতের ধাপগুলো" : "The rites themselves",
+                links: [
+                  {
+                    slug: "tawaf-sai-seven-circuits-step-by-step-guide",
+                    label: isBn
+                      ? "তাওয়াফ ও সাঈ: সাত প্রদক্ষিণের নিয়ম"
+                      : "Tawaf and Sa'i: counting the seven circuits",
+                    note: isBn
+                      ? "কোথায় শুরু, কোথায় শেষ, কীভাবে গণনা"
+                      : "Where a circuit starts, ends and how to count",
+                  },
+                ],
+              },
+              {
                 group: isBn ? "খাবার ও জিয়ারত" : "Food & Ziyarah",
                 links: [
                   {

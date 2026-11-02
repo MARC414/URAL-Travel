@@ -26,6 +26,7 @@ https://uraltravel.co.uk/visa/malaysia-visa
 https://uraltravel.co.uk/visa/dubai-visa
 https://uraltravel.co.uk/visa/singapore-visa
 https://uraltravel.co.uk/visa/maldives-visa
+https://uraltravel.co.uk/visa/saudi-arabia-visa
 https://uraltravel.co.uk/destinations
 https://uraltravel.co.uk/destinations/nepal-guide
 https://uraltravel.co.uk/destinations/thailand-guide
@@ -124,6 +125,8 @@ https://uraltravel.co.uk/blog/havana-cuba-travel-guide-bangladesh
 https://uraltravel.co.uk/blog/chefchaouen-morocco-travel-guide-bangladesh
 https://uraltravel.co.uk/blog/travel-creator-resources
 https://uraltravel.co.uk/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide
+https://uraltravel.co.uk/blog/tawaf-sai-seven-circuits-step-by-step-guide
+https://uraltravel.co.uk/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day
 https://uraltravel.co.uk/bn/
 https://uraltravel.co.uk/bn/umrah
 https://uraltravel.co.uk/bn/banking
@@ -152,6 +155,7 @@ https://uraltravel.co.uk/bn/visa/malaysia-visa
 https://uraltravel.co.uk/bn/visa/dubai-visa
 https://uraltravel.co.uk/bn/visa/singapore-visa
 https://uraltravel.co.uk/bn/visa/maldives-visa
+https://uraltravel.co.uk/bn/visa/saudi-arabia-visa
 https://uraltravel.co.uk/bn/destinations
 https://uraltravel.co.uk/bn/destinations/nepal-guide
 https://uraltravel.co.uk/bn/destinations/thailand-guide
@@ -250,3 +254,5 @@ https://uraltravel.co.uk/bn/blog/havana-cuba-travel-guide-bangladesh
 https://uraltravel.co.uk/bn/blog/chefchaouen-morocco-travel-guide-bangladesh
 https://uraltravel.co.uk/bn/blog/travel-creator-resources
 https://uraltravel.co.uk/bn/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide
+https://uraltravel.co.uk/bn/blog/tawaf-sai-seven-circuits-step-by-step-guide
+https://uraltravel.co.uk/bn/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day

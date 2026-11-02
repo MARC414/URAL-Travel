@@ -33,4 +33,4 @@ Phase A reserves **SOC-057–SOC-064** already describe useful social assets fro
 4. For a genuinely new article, record the distinct job, source availability, internal links, EN/BN scope, maintenance burden and why a current page cannot own it.
 5. The owner selects the task. A resulting social asset continues the global `SOC-` sequence; a research gap retains its `GAP-` identity.
 
-**Current standalone-article recommendation: zero.** The single plausible route-query candidate above remains unvalidated. No fixed total of future articles is commissioned by this document.
+**Superseded 2 November 2026.** This document's zero-new-article recommendation no longer governs. New URLs are permitted under the gates in [Publication Standard v2](../growth/11-PUBLICATION-STANDARD-V2.md); the gap analysis below remains valid as evidence.

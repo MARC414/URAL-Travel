@@ -149,6 +149,12 @@ export interface BlogPost {
     captionEn: string;
     captionBn: string;
   };
+  /**
+   * Journey Help stage (docs/growth/10-CONTENT-UPGRADE-STANDARD.md §4.4).
+   * Optional: absent means the panel does not render. Chosen by where the
+   * reader is in the journey, never by what the article is about.
+   */
+  journeyStage?: "prepare" | "travel" | "perform" | "return";
   internalLinks: { text: string; path: string }[];
   affiliateCTA?: { provider: "aviasales" | "klook" | "kkday" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage" | "yesim" | "kiwi" | "getTransfer" | "goCity"; headline: string; body: string };
   /**

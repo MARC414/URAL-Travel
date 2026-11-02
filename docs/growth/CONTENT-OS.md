@@ -29,7 +29,7 @@ Read these documents in this order before a content task:
 content queue are historical. They do not select work or grant publication permission. Current direction
 is Bangladesh-first travel intelligence with Umrah as the initial learning cycle; Fard Hajj remains
 separate and linked. The owner-requested master guide and social programme now provide the current
-method and proposed repurposing system. This supporting workflow does not authorize new articles or publication.
+method and proposed repurposing system. New articles are governed by [Publication Standard v2](11-PUBLICATION-STANDARD-V2.md) (2 November 2026); this workflow supplies the execution detail, not the authorisation.
 
 If a source, legal rule, code contract, or owner instruction appears to conflict with a content requirement, stop before drafting or changing the live claim. Record the exact conflict, source, date checked, and the narrow decision needed. Do not silently “resolve” a high-impact legal or cost discrepancy.
 

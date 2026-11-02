@@ -2,6 +2,8 @@
 
 **Current direction, confirmed 25 October 2026:** Bangladesh-first travel intelligence, with Umrah as the initial commercial/content learning cycle. Help travellers make practical decisions before spending money. Fard Hajj remains a distinct, linked topic. Broader Muslim travel, UK/diaspora travel and Europe are future research.
 
+**Publication rule updated 2 November 2026:** the freeze on new articles is replaced by [Publication Standard v2](docs/growth/11-PUBLICATION-STANDARD-V2.md) — new URLs permitted, gated by seven tests, capped at two per week (one while measurement is broken).
+
 **Current phase, updated 26 October 2026:** the owner requested a consolidated content-optimization standard and an existing-content social production strategy using corrected historical GSC evidence and early new-domain signals. The resulting guide and proposed programme are linked below. Article rewrites, site repairs and live publication still require the relevant owner task; a draft calendar is not a published campaign.
 
 ## Read order and authority
