@@ -59,6 +59,7 @@ import {
   KLOOK_PICK_SIGNALS,
   buildKlookDeepLink,
   buildKlookHotelDetailLink,
+  buildKlookSearchLink,
 } from "../src/components/KlookHotelOffers";
 import { KlookHotelSpotlight } from "../src/components/KlookHotelSpotlight";
 import { KKdayPromoBanner } from "../src/components/KKdayPromoBanner";
@@ -3435,6 +3436,31 @@ if (sitemap) {
   check(
     klookRedirectGuards.every(Boolean),
     `the Klook deep-link builder forwards only https Klook hosts and refuses lookalike, plain-http, javascript: and malformed targets (${klookRedirectGuards.filter((ok) => !ok).length} of ${klookRedirectGuards.length} guards failed)`
+  );
+
+  // Tours and activities carry the 12% rate, but only when the reader actually
+  // lands on a Klook page for the thing they clicked. Pointing them at the bare
+  // partner link threw that away; the search deep link keeps the intent and the
+  // attribution.
+  const klookSearchLinkGuards = [
+    buildKlookSearchLink("Eiffel Tower", "attraction_test") ===
+      `${AFFILIATE_LINKS.klook}?u=${encodeURIComponent("https://www.klook.com/en-US/search/result/?query=Eiffel%20Tower")}&sub_id=attraction_test`,
+    buildKlookSearchLink("   ", "x") === AFFILIATE_LINKS.klook,
+    buildKlookSearchLink("https://evil.example/hotels", "x").startsWith(`${AFFILIATE_LINKS.klook}?u=`),
+  ];
+  const klookSearchConsumers = [
+    "src/components/AttractionDetailPage.tsx",
+    "src/components/ExperiencesPage.tsx",
+  ];
+  const missingKlookSearchConsumers = klookSearchConsumers.filter(
+    (file) => !(read(path.join(ROOT_DIR, file)) ?? "").includes("buildKlookSearchLink")
+  );
+  const strayAttractionParam = klookSearchConsumers.some((file) =>
+    (read(path.join(ROOT_DIR, file)) ?? "").includes("?attraction=")
+  );
+  check(
+    klookSearchLinkGuards.every(Boolean) && missingKlookSearchConsumers.length === 0 && !strayAttractionParam,
+    `attraction and experience CTAs deep link to a Klook search for the specific attraction or city with a placement scope, and no CTA relies on an invented ?attraction= parameter [${missingKlookSearchConsumers.join(", ")}]`
   );
 
   check(

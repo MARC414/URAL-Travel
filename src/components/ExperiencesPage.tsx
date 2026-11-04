@@ -17,6 +17,7 @@ import {
   RadicalStorageContextualCallout,
   MultiPartnerBlogCallout,
 } from "./AffiliatePartners";
+import { buildKlookDeepLink, buildKlookSearchLink } from "./KlookHotelOffers";
 import { AirHelpWidget } from "./AirHelpWidget";
 import { KKdayPromoBanner } from "./KKdayPromoBanner";
 import { TiqetsEmbedWidget } from "./TiqetsEmbedWidget";
@@ -597,7 +598,12 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 <ExternalLink size={13} />
               </a>
               <a
-                href={resolvePartnerUrl(AFFILIATE_LINKS.klook)}
+                href={buildKlookDeepLink(
+                  "https://www.klook.com/en-US/",
+                  "experiences_klook_tours_activities",
+                  "klook"
+                )}
+                data-affiliate-placement="experiences_klook_tours_activities"
                 target="_blank"
                 rel="noopener noreferrer sponsored"
                 className="bg-slate-700 hover:bg-slate-600 border border-slate-600 text-white font-semibold text-xs px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2 cursor-pointer"
@@ -730,11 +736,19 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
               </div>
 
               <a
-                href={resolvePartnerUrl(
+                href={
                   activeCalcCity.provider === "tiqets"
-                    ? AFFILIATE_LINKS.tiqets
-                    : AFFILIATE_LINKS.klook
-                )}
+                    ? resolvePartnerUrl(AFFILIATE_LINKS.tiqets)
+                    : buildKlookSearchLink(
+                        `${activeCalcCity.city} attractions`,
+                        `experiences_budget_${activeCalcCity.id}_klook_search`
+                      )
+                }
+                data-affiliate-placement={
+                  activeCalcCity.provider === "tiqets"
+                    ? `experiences_budget_${activeCalcCity.id}_tiqets`
+                    : `experiences_budget_${activeCalcCity.id}_klook_search`
+                }
                 target="_blank"
                 rel="noopener noreferrer sponsored"
                 className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
@@ -745,8 +759,8 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                       ? `${activeCalcCity.city}-এর Tiqets স্লট চেক করুন`
                       : `Check ${activeCalcCity.city} Slots on Tiqets`
                     : isBn
-                    ? `${activeCalcCity.city}-এর Klook তালিকা তুলনা করুন`
-                    : `Compare ${activeCalcCity.city} listings on Klook`}
+                    ? `${activeCalcCity.city}-এর আকর্ষণ Klook-এ খুঁজুন`
+                    : `Search ${activeCalcCity.city} attractions on Klook`}
                 </span>
                 <ExternalLink size={13} />
               </a>

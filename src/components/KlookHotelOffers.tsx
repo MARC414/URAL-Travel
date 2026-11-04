@@ -95,6 +95,28 @@ export function buildKlookHotelDetailLink(
   );
 }
 
+/**
+ * Builds a tracked Klook search deep link for tours, tickets and activities.
+ *
+ * URAL does not maintain a Klook product-id catalogue, so the honest target is
+ * Klook's own search results for the named attraction or city rather than a
+ * guessed product page. The `klook` partner link carries the 12% tours and
+ * activities commission; hotel links keep using `klookHotels`.
+ */
+export function buildKlookSearchLink(
+  query: string,
+  subId?: string,
+  locale: "en-US" | "en-GB" = "en-US"
+): string {
+  const trimmed = query.trim();
+  if (!trimmed) return resolvePartnerUrl(AFFILIATE_LINKS.klook);
+  return buildKlookDeepLink(
+    `https://www.klook.com/${locale}/search/result/?query=${encodeURIComponent(trimmed)}`,
+    subId,
+    "klook"
+  );
+}
+
 export type KlookPickSignal = "popular" | "value" | "rising";
 
 /**
