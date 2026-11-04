@@ -37,7 +37,7 @@ import { validateSitemapPair } from "./sitemapValidation";
 import { checkKlookHotelRedirect } from "./klookRedirectValidation";
 import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
-import { SITE_ORIGIN } from "../src/utils/localeRoutes";
+import { SITE_ORIGIN, localizePublicSiteUrl } from "../src/utils/localeRoutes";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, HOTELS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
 import {
   AFFILIATE_LINKS,
@@ -147,6 +147,33 @@ function check(condition: boolean, label: string) {
 function read(filePath: string): string | null {
   return fs.existsSync(filePath) ? fs.readFileSync(filePath, "utf8") : null;
 }
+
+// The client visits strings inside JSON-LD while localizing URLs. Schema types,
+// dates, language codes and prose must remain literal values after that pass.
+const schemaLiteralFixtures = [
+  "Article", "FAQPage", "HowTo", "Question", "Answer", "Person", "bn-BD",
+  "2026-10-19T09:00:00+06:00", "Farhan Momen", "Hajj & Umrah",
+  "কোন Flight ও PNR আপনার যাত্রার জন্য প্রযোজ্য?", "Check the ticket before paying.",
+  "#source-1", "mailto:support@uraltravel.co.uk", "https://schema.org/Article",
+  "https://example.org/guide", `${SITE_ORIGIN}/img/blog/guide.jpg`,
+  `${SITE_ORIGIN}/#organization`, `${SITE_ORIGIN}/#/author/Farhan%20Momen`,
+];
+check(
+  schemaLiteralFixtures.every((value) => localizePublicSiteUrl(value, "bn") === value),
+  "Bengali schema URL localization preserves types, dates, language codes, prose, external URLs and shared entities"
+);
+const schemaPageUrlFixtures = [
+  [`${SITE_ORIGIN}/blog/cheap-flight-booking-hacks-dhaka#article`, `${SITE_ORIGIN}/bn/blog/cheap-flight-booking-hacks-dhaka#article`],
+  ["/tools/currency-converter?amount=100#result", `${SITE_ORIGIN}/bn/tools/currency-converter?amount=100#result`],
+  [`${SITE_ORIGIN}/bn/blog/cheap-flight-booking-hacks-dhaka`, `${SITE_ORIGIN}/bn/blog/cheap-flight-booking-hacks-dhaka`],
+  [`${SITE_ORIGIN}/`, `${SITE_ORIGIN}/bn/`],
+];
+check(
+  schemaPageUrlFixtures.every(([input, expected]) =>
+    localizePublicSiteUrl(input, "bn") === expected && localizePublicSiteUrl(input, "en") === input
+  ),
+  "schema localization retains real page URLs, queries and fragments and never double-prefixes Bengali paths"
+);
 
 // --- Transfer handoff regression guards ------------------------------------
 const welcomePickupSource = read(path.join(ROOT_DIR, "src/components/WelcomePickupsEmbed.tsx")) ?? "";

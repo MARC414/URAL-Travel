@@ -111,6 +111,10 @@ function isLocaleAgnosticUrl(pathname: string, hash = ""): boolean {
  */
 export function localizePublicSiteUrl(url: string, locale: "en" | "bn"): string {
   if (locale !== "bn") return url;
+  // The schema-copy pass visits every string, including Article/FAQPage types,
+  // dates, language codes and Bengali prose. URL(value, origin) accepts those
+  // as relative paths, so require an explicit URL or root-relative path first.
+  if (!/^(?:https?:\/\/|\/)/i.test(url)) return url;
   try {
     const parsed = new URL(url, SITE_ORIGIN);
     if (parsed.origin !== SITE_ORIGIN) return url;
