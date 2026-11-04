@@ -348,12 +348,12 @@ not used anywhere in this system.**
   normal tracking and headings use relaxed line height.
 - **Layout:** the navy panel has a quiet edge and 16px/24px padding. Area groups
   have named list headings. Pick grids respond to available width; single picks
-  fill their row. Links are at least 56px high; the two main actions are at least
-  44px high and wrap onto full-width rows on narrow panels.
+  fill their row. Links are at least 56px high; the primary action is at least
+  44px high and wraps onto a full-width row on narrow panels.
 
-| State | Property row / secondary action | Primary action |
+| State | Property row | Primary action |
 |---|---|---|
-| Rest | Raised navy surface / transparent action, light text | Gold fill, navy text |
+| Rest | Raised navy surface | Gold fill, navy text |
 | Hover | Lighter surface, gold border; property name underlined | Gold-dark fill |
 | Keyboard focus | 2px white outline, 3px offset | Same visible outline |
 | Pressed | Stronger raised surface, gold border | Gold-dark fill, light border |
@@ -362,11 +362,13 @@ not used anywhere in this system.**
 Feedback changes colour rather than moving content. Touch devices avoid sticky
 hover styling; the shared reduced-motion rule suppresses transitions.
 
-`scripts/prerender.ts` renders this same component with `disclosure="evergreen"`.
-The interactive view may show the current, expiry-gated commission disclosure;
-cached HTML always uses the evergreen wording. Both share the visual roles,
-property URLs, accessible link names, source note and navigation targets. A
-design edit does not update the feed's checked date or establish new hotel facts.
+`scripts/prerender.ts` renders this same component, so cached HTML matches the
+hydrated view. The commission disclosure is evergreen in both paths: it says
+URAL may earn a commission and never publishes URAL's rate or the boost end
+date — those are deal terms, not booking information for the reader. Both paths
+share the visual roles, property URLs, accessible link names, source note and
+navigation targets. A design edit does not update the feed's checked date or
+establish new hotel facts.
 
 ### Inputs / Fields
 - **Style:** white fill, `border-default` `#CBD5E1`, `rounded-md`/`rounded-lg`.
