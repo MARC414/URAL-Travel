@@ -9,7 +9,6 @@ import {
 import {
   KLOOK_CURATED_HOTEL_PICKS,
   KLOOK_HOTEL_CHECK_STEPS,
-  KLOOK_HOTEL_COMMISSION_NOTE,
   KLOOK_PICKS_CHECKED_AT,
   KLOOK_PICKS_PROVENANCE,
   KLOOK_PICK_SIGNALS,
@@ -40,8 +39,6 @@ interface KlookHotelSpotlightProps {
   city: string;
   guideId: string;
   lang?: "en" | "bn";
-  /** Static HTML must not cache a time-limited commission rate. */
-  disclosure?: "current" | "evergreen";
 }
 
 /**
@@ -49,9 +46,9 @@ interface KlookHotelSpotlightProps {
  *
  * It sits beside accommodation content instead of running site-wide, and it
  * treats Klook as another quote for the areas already shortlisted above — not
- * as a traveller discount. The 8% figure is URAL's publisher commission and is
- * dropped automatically after KLOOK_PROMO.expiresAt (BST); the evergreen
- * sentence keeps the link useful afterwards.
+ * as a traveller discount. The disclosure never states URAL's publisher rate
+ * or the boost end date: those are deal terms, not booking information, so the
+ * hydrated page and the prerendered HTML always carry the same evergreen note.
  *
  * The hotel button uses the partner-provided tracked deep link to open the
  * curated hotel collection. Selected city/date/guest details are not forwarded,
@@ -62,7 +59,7 @@ interface KlookHotelSpotlightProps {
  * never a URAL verdict: the feed has no rates, room types or inspection notes,
  * so the checked date and the provenance line state exactly what was read.
  */
-export function KlookHotelSpotlight({ city, guideId, lang = "en", disclosure = "current" }: KlookHotelSpotlightProps) {
+export function KlookHotelSpotlight({ city, guideId, lang = "en" }: KlookHotelSpotlightProps) {
   // A paused partner would make this Klook-specific copy false while
   // resolvePartnerUrl silently redirected readers to KKday. Hide it instead.
   if (
@@ -132,12 +129,6 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en", disclosure = "
         >
           {isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}
           <ExternalLink size={15} aria-hidden="true" />
-        </a>
-        <a
-          href="#hotel-curated-stays"
-          className="hotel-partner-action"
-        >
-          {isBn ? "তুলনার চেকলিস্টে ফিরুন" : "Back to the comparison checklist"}
         </a>
       </div>
 
@@ -220,7 +211,7 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en", disclosure = "
       <div className="hotel-partner-notes">
         <p className="hotel-partner-note">
           <ShieldCheck size={14} aria-hidden="true" />
-          <span>{disclosure === "evergreen" ? KLOOK_HOTEL_COMMISSION_NOTE[lang] : getKlookHotelCommissionNote(lang)}</span>
+          <span>{getKlookHotelCommissionNote(lang)}</span>
         </p>
         <p className="hotel-partner-note">
           <CreditCard size={14} aria-hidden="true" />
