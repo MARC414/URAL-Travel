@@ -2545,9 +2545,9 @@ export const BLOG_DATA: BlogPost[] = [
       },
     ],
     affiliateCTA: {
-      provider: "airalo",
-      headline: "Check Saudi data coverage before your Umrah trip",
-      body: "An eSIM is optional for maps and messages, not a Nusuk permit requirement. Check compatibility, provider coverage, activation, validity and final price; neither network access nor appointments are guaranteed.",
+      provider: "aviasales",
+      headline: "Budget worked out? Test the flight line against live fares",
+      body: "Flights are usually the largest single line in this budget. Compare Dhaka–Jeddah and Dhaka–Madinah — including open-jaw returns — for your exact dates, then put the checkout total, baggage included, back into your worksheet. Live fares change and are not the dated reference figures in this guide.",
     },
   },
   {

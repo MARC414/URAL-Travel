@@ -43,6 +43,7 @@ import {
   AFFILIATE_LINKS,
   AFFILIATE_OFFER_REGISTRY,
   KKDAY_PROMO,
+  MULTI_PARTNER_BLOG_PLACEMENTS,
   KLOOK_PROMO,
   TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
   TRAVELPAYOUTS_REFERRAL_SUB_IDS,
@@ -3447,6 +3448,70 @@ if (sitemap) {
   check(
     klookBlogOk,
     "the Bangkok/KL/Dubai hotel-area guide labels Klook as a generic tracked collection handoff in both languages, with local placement scope and no quote promise"
+  );
+
+  // Focus-set commercial parity: the static Bengali blog page must carry the
+  // same partner next step as the English page (the BN prerenderer previously
+  // skipped MULTI_PARTNER_BLOG_PLACEMENTS entirely, so BN Makkah–Madinah and
+  // BN Dual-Currency rendered zero sponsored next steps), and the Umrah Cost
+  // guide — the highest-intent cost page — must carry its matched live-fare
+  // next step in both languages instead of only an optional eSIM widget.
+  const focusMultiCases: { slug: string; partner: keyof typeof AFFILIATE_LINKS }[] = [
+    { slug: "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh", partner: "getTransfer" },
+    { slug: "dual-currency-card-endorsement-bangladesh", partner: "aviasales" },
+  ];
+  const focusMultiIssues: string[] = [];
+  for (const { slug, partner } of focusMultiCases) {
+    const placement = MULTI_PARTNER_BLOG_PLACEMENTS[slug];
+    if (!placement || placement.primaryPartner !== partner) {
+      focusMultiIssues.push(`${slug}: missing ${partner} multi-partner placement`);
+      continue;
+    }
+    const enHtml = read(path.join(DIST_DIR, "blog", `${slug}.html`)) ?? "";
+    const bnHtml = read(path.join(DIST_DIR, "bn", "blog", `${slug}.html`)) ?? "";
+    if (
+      !enHtml.includes(placement.headlineEn) ||
+      !enHtml.includes(AFFILIATE_LINKS[partner]) ||
+      !enHtml.includes('rel="noopener noreferrer sponsored"')
+    ) {
+      focusMultiIssues.push(`${slug}: EN static page lacks the partner next step`);
+    }
+    if (
+      !bnHtml.includes(placement.headlineBn) ||
+      !bnHtml.includes(AFFILIATE_LINKS[partner]) ||
+      !bnHtml.includes('rel="noopener noreferrer sponsored"')
+    ) {
+      focusMultiIssues.push(`${slug}: BN static page lacks the partner next step`);
+    }
+  }
+  check(
+    focusMultiIssues.length === 0,
+    focusMultiIssues.length === 0
+      ? "the focus set (Makkah–Madinah hotels, Dual-Currency) carries the same sponsored partner next step in static EN and BN blog HTML"
+      : `focus-set partner next-step parity failed: ${focusMultiIssues.join("; ")}`
+  );
+
+  // The Umrah Cost guide's matched next step is its affiliateCTA: live
+  // Dhaka–Saudi fares tested against the worksheet (provider aviasales in
+  // both languages), rendered by the React route and by the static
+  // prerenderers. An eSIM-only CTA left the highest-intent cost page with no
+  // commercial step that matched the reader's task.
+  const umrahCostSlug = "umrah-hajj-guide-bangladesh-nusuk-bdt-cost";
+  const umrahCostEn = BLOG_DATA.find((post) => post.slug === umrahCostSlug);
+  const umrahCostBn = BENGALI_BLOG_OVERRIDES[umrahCostSlug];
+  const umrahCostEnHtml = read(path.join(DIST_DIR, "blog", `${umrahCostSlug}.html`)) ?? "";
+  const umrahCostBnHtml = read(path.join(DIST_DIR, "bn", "blog", `${umrahCostSlug}.html`)) ?? "";
+  const umrahCostOk =
+    umrahCostEn?.affiliateCTA?.provider === "aviasales" &&
+    umrahCostBn?.affiliateCTA?.provider === "aviasales" &&
+    umrahCostEnHtml.includes(umrahCostEn.affiliateCTA?.headline ?? "—missing—") &&
+    umrahCostEnHtml.includes(AFFILIATE_LINKS.aviasales) &&
+    umrahCostBnHtml.includes(umrahCostBn.affiliateCTA?.headline ?? "—missing—") &&
+    umrahCostBnHtml.includes(AFFILIATE_LINKS.aviasales) &&
+    umrahCostBnHtml.includes('rel="noopener noreferrer sponsored"');
+  check(
+    umrahCostOk,
+    "the Umrah Cost guide carries its matched live-fare next step (aviasales affiliateCTA) in EN and BN source data and in both static pages"
   );
 
   check(
