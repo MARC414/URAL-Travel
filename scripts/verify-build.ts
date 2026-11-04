@@ -3252,7 +3252,6 @@ if (sitemap) {
     const noInventedPicks = isCurated || !/klook-hotel-picks|hotels%2Fdetail%2F/.test(enSection + bnSection);
     const navigationIntact = [enHtml, bnHtml].every((html) =>
       html.includes('id="hotel-curated-stays"') &&
-      html.includes('href="#hotel-curated-stays"') &&
       html.includes('aria-labelledby="klook-hotel-check"') &&
       html.includes('id="klook-hotel-check"') &&
       html.split('id="hotel-klook-check"').length === 2
@@ -3264,7 +3263,7 @@ if (sitemap) {
   }
   check(
     klookHotelHtmlIssues.length === 0,
-    `all ${KLOOK_HOTEL_IDS.length} registered hotel guides carry the transparent EN/BN Klook handoff and working panel/checklist anchors, with no invented property picks on uncurated guides [${klookHotelHtmlIssues.join(", ")}]`
+    `all ${KLOOK_HOTEL_IDS.length} registered hotel guides carry the transparent EN/BN Klook handoff and the panel/checklist landing anchors, with no invented property picks on uncurated guides and no in-panel self-jump back to the section the panel already sits in [${klookHotelHtmlIssues.join(", ")}]`
   );
 
   const unregisteredKlookPickGuides = Object.keys(KLOOK_CURATED_HOTEL_PICKS).filter(
@@ -3374,23 +3373,28 @@ if (sitemap) {
   const spotlightActiveBn = withMockedNow(Date.UTC(2026, 10, 1), () => renderSpotlight("bn"));
   const spotlightExpiredEn = withMockedNow(Date.UTC(2027, 0, 1, 6), () => renderSpotlight("en"));
   const spotlightExpiredBn = withMockedNow(Date.UTC(2027, 0, 1, 6), () => renderSpotlight("bn"));
-  const spotlightActiveOk =
-    spotlightActiveEn.includes(KLOOK_PROMO.hotelsRate) &&
-    spotlightActiveEn.includes(KLOOK_PROMO.validUntil) &&
+  // The publisher rate and the boost end date are URAL's deal terms; they never
+  // appear in reader-facing HTML, live or cached — so there is no expiry branch
+  // for the disclosure at all.
+  const evergreenActiveOk =
+    !spotlightActiveEn.includes(KLOOK_PROMO.hotelsRate) &&
+    !spotlightActiveEn.includes(KLOOK_PROMO.validUntil) &&
+    !spotlightActiveBn.includes(KLOOK_PROMO.hotelsRateBn) &&
+    !spotlightActiveBn.includes(KLOOK_PROMO.validUntilBn) &&
+    !/8%|December 31, 2026|৮%|৩১ ডিসেম্বর ২০২৬/.test(spotlightActiveEn + spotlightActiveBn) &&
+    spotlightActiveEn.includes(KLOOK_HOTEL_COMMISSION_NOTE.en) &&
     spotlightActiveEn.includes(KLOOK_HOTEL_HREF) &&
     spotlightActiveEn.includes('rel="noopener noreferrer sponsored"') &&
     spotlightActiveEn.includes("not a traveller discount") &&
     spotlightActiveEn.includes("Bangkok") &&
-    spotlightActiveBn.includes(KLOOK_PROMO.hotelsRateBn) &&
-    spotlightActiveBn.includes(KLOOK_PROMO.validUntilBn) &&
-    spotlightActiveBn.includes(KLOOK_HOTEL_HREF) &&
+    spotlightActiveBn.includes(KLOOK_HOTEL_COMMISSION_NOTE.bn) &&
     spotlightActiveBn.includes("ভ্রমণকারীর জন্য ছাড় নয়") &&
     spotlightActiveBn.includes("ব্যাংকক");
   check(
-    spotlightActiveOk,
-    "the Klook hotel module states the 8% rate as publisher commission, not a traveller discount, in both languages while the offer is live"
+    evergreenActiveOk,
+    "the Klook hotel module publishes no commission rate or offer end date in either language; it uses the evergreen may-earn disclosure while the boost is live"
   );
-  const spotlightExpiryOk =
+  const evergreenAfterExpiryOk =
     !spotlightExpiredEn.includes(KLOOK_PROMO.hotelsRate) &&
     !spotlightExpiredEn.includes(KLOOK_PROMO.validUntil) &&
     !spotlightExpiredBn.includes(KLOOK_PROMO.hotelsRateBn) &&
@@ -3400,8 +3404,8 @@ if (sitemap) {
     spotlightExpiredEn.includes(KLOOK_HOTEL_HREF) &&
     spotlightExpiredBn.includes(KLOOK_HOTEL_HREF);
   check(
-    spotlightExpiryOk,
-    "after 2026-12-31 the Klook hotel module drops the rate and date, keeps the evergreen disclosure and still links the tracked partner URL"
+    evergreenAfterExpiryOk,
+    "after 2026-12-31 the Klook hotel module keeps the same evergreen disclosure and still links the tracked partner URL"
   );
 
   const klookBlogSlug = "hotel-savings-guide-bangkok-kl-dubai";

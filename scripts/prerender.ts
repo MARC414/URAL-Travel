@@ -204,10 +204,11 @@ function escapeHtml(str: string): string {
 }
 
 /** Same panel, links, accessible names and CSS roles as the interactive guide.
- * Cached HTML uses the evergreen disclosure so it cannot retain an expired rate. */
+ * The disclosure is evergreen in both paths, so the cached HTML cannot retain
+ * a time-limited rate claim. */
 function renderKlookHotelSpotlight(city: string, guideId: string, lang: "en" | "bn"): string {
   return renderToStaticMarkup(
-    React.createElement(KlookHotelSpotlight, { city, guideId, lang, disclosure: "evergreen" })
+    React.createElement(KlookHotelSpotlight, { city, guideId, lang })
   );
 }
 

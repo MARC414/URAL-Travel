@@ -124,7 +124,9 @@ export const KLOOK_PROMO = {
   toursAndActivitiesRate: "12%",
   hotelsRate: "8%",
   // Bengali twins of the two values above. Kept beside them so a rate or date
-  // change cannot update the English disclosure and leave the Bengali stale.
+  // change cannot update the English registry metadata and leave the Bengali
+  // value stale. Neither string ships to travellers: the reader-facing hotel
+  // disclosure is evergreen and carries no rate or date.
   hotelsRateBn: "৮%",
   validUntil: "December 31, 2026",
   validUntilBn: "৩১ ডিসেম্বর ২০২৬",

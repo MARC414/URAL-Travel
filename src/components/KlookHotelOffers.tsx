@@ -6,8 +6,6 @@ import { getBlogHotelAffiliatePlacement } from "../utils/affiliatePlacement";
 import {
   AFFILIATE_LINKS,
   AFFILIATE_OFFER_REGISTRY,
-  KLOOK_PROMO,
-  isPromoActive,
   resolvePartnerUrl,
 } from "./AffiliatePartners";
 
@@ -310,15 +308,14 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
 };
 
 /**
- * Commission disclosure for the Klook hotel module. The time-limited 8% claim is
- * shown only while `KLOOK_PROMO.expiresAt` is still in the future (BST); after
- * that the evergreen sentence above takes over with no rebuild required.
+ * Commission disclosure for the Klook hotel module. Travellers never see URAL's
+ * publisher rate or the offer end date — those are internal deal terms
+ * (`KLOOK_PROMO`, the `activeNote`s in `AFFILIATE_OFFER_REGISTRY`), not booking
+ * information the reader can act on. This always returns the evergreen
+ * sentence, so the live HTML and the prerendered cache match during the boost.
  */
 export function getKlookHotelCommissionNote(lang: "en" | "bn" = "en"): string {
-  if (!isPromoActive(KLOOK_PROMO.expiresAt)) return KLOOK_HOTEL_COMMISSION_NOTE[lang];
-  return lang === "bn"
-    ? `কমিশন নোট: ${KLOOK_PROMO.validUntilBn} পর্যন্ত যোগ্য Klook হোটেল বুকিংয়ে URAL ${KLOOK_PROMO.hotelsRateBn} পাবলিশার কমিশন পায়। এটি আমাদের আয়, ভ্রমণকারীর জন্য ছাড় নয়—আপনি Klook-এ যে দাম দেখবেন সেটাই দেবেন।`
-    : `Commission note: URAL earns ${KLOOK_PROMO.hotelsRate} publisher commission on qualifying Klook hotel bookings through ${KLOOK_PROMO.validUntil}. That is our revenue, not a traveller discount — you pay the price Klook shows.`;
+  return KLOOK_HOTEL_COMMISSION_NOTE[lang];
 }
 
 /**
