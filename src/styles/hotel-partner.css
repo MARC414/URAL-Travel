@@ -268,8 +268,7 @@
 }
 
 @media (hover: hover) {
-  .hotel-pick-link:hover,
-  .hotel-partner-action:not(.hotel-partner-action--primary):hover {
+  .hotel-pick-link:hover {
     background: var(--hotel-pick-hover);
     border-color: var(--accent-on-inverse);
   }
@@ -294,8 +293,7 @@
   outline-offset: 3px;
 }
 
-.hotel-pick-link:active,
-.hotel-partner-action:not(.hotel-partner-action--primary):active {
+.hotel-pick-link:active {
   background: var(--hotel-pick-pressed);
   border-color: var(--accent-on-inverse);
 }

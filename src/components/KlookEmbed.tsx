@@ -46,7 +46,7 @@ export function KlookEmbed({ lang = "en" }: KlookEmbedProps) {
           rel="noopener noreferrer sponsored"
           className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-lg bg-brand-navy px-4 py-2.5 text-xs font-bold text-[#F6B73C] transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
         >
-          <span>{isBn ? "Klook-এর হোটেল তালিকা সার্চ করুন" : "Search Klook hotel collection"}</span>
+          <span>{isBn ? "Klook-এর হোটেল তালিকা দেখুন" : "Browse Klook hotel collection"}</span>
           <ExternalLink size={11} aria-hidden="true" />
         </a>
         <a

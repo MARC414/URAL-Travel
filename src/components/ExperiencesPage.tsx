@@ -596,8 +596,8 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 >
                   <span>
                     {isBn
-                      ? "Klook-এর হোটেল তালিকা সার্চ করুন"
-                      : "Search Klook hotel collection"}
+                      ? "Klook-এর হোটেল তালিকা দেখুন"
+                      : "Browse Klook hotel collection"}
                   </span>
                   <ExternalLink size={13} />
                 </a>

@@ -379,16 +379,16 @@ export interface KlookHotelBlogPlacement {
 
 export const KLOOK_HOTEL_BLOG_PLACEMENTS: Record<string, KlookHotelBlogPlacement> = {
   "hotel-savings-guide-bangkok-kl-dubai": {
-    badgeEn: "🏨 PARTNER HOTEL SEARCH · KLOOK",
-    badgeBn: "🏨 পার্টনার হোটেল সার্চ · Klook",
-    headlineEn: "Need current hotel options? Search Klook’s collection",
+    badgeEn: "🏨 PARTNER HOTEL COLLECTION · KLOOK",
+    badgeBn: "🏨 পার্টনার হোটেল তালিকা · Klook",
+    headlineEn: "Need current hotel options? Browse Klook’s collection",
     headlineBn: "বর্তমান হোটেল বিকল্প খুঁজছেন? Klook-এর তালিকা সার্চ করুন",
     bodyEn:
       "This tracked link opens Klook’s general Asia hotel collection, not a live quote for a selected property or your dates. Re-enter your destination, dates and guest count on Klook, then compare the same room basis and checkout total — including taxes, service charges, meals and cancellation terms. The collection reflects Klook’s own booking data, not an independent quality rating.",
     bodyBn:
       "এই ট্র্যাক করা লিংকটি Klook-এর সাধারণ এশিয়া হোটেল তালিকা খুলবে—নির্বাচিত হোটেল বা আপনার তারিখের লাইভ কোট নয়। Klook-এ গন্তব্য, তারিখ ও অতিথিসংখ্যা আবার দিয়ে একই রুমের শর্তে ট্যাক্স, সার্ভিস চার্জ, খাবার ও বাতিলের নিয়মসহ চূড়ান্ত মোট দাম তুলনা করুন। তালিকাটি Klook-এর নিজস্ব বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়।",
-    buttonEn: "Search Klook hotel collection",
-    buttonBn: "Klook-এ হোটেল সার্চ করুন",
+    buttonEn: "Browse Klook hotel collection",
+    buttonBn: "Klook-এ হোটেল তালিকা দেখুন",
   },
 };
 
