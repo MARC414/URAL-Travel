@@ -11,23 +11,22 @@ import React from "react";
 
 import { BLOG_DATA } from "../constants";
 
-import { ChevronLeft, CalendarDays, ExternalLink, Link2, ArrowRight, Lightbulb, KeyRound, TriangleAlert, Telescope } from "lucide-react";
+import { ChevronLeft, ExternalLink, Link2, ArrowRight, Lightbulb, KeyRound, TriangleAlert, Telescope } from "lucide-react";
 
 import { ResponsiveImage } from "../components/ResponsiveImage";
-import { QuickAnswer } from "../components/QuickAnswer";
+import { BlogArticleHeader } from "../components/BlogArticleHeader";
+import { BlogPlanningLinks, BlogPlanningHubs, BlogRelatedArticles } from "../components/BlogArticleNavigation";
 
 import { TiqetsEmbedWidget } from "../components/TiqetsEmbedWidget";
 
 import { TravelIntelligence } from "../components/AeoInspector";
 
-import { toIsoDate } from "../utils/schema";
 import { SITE_ORIGIN } from "../utils/localeRoutes";
-
-import { generateBlogCoverAltText } from "../utils/imageAssets";
+import { toIsoDate } from "../utils/schema";
 
 import { getAuthorProfile } from "../data/authorProfiles";
 
-import { getRelatedBlogPosts } from "../utils/blogLinks";
+import { getArticleRelatedPosts } from "../utils/blogPresentation";
 import JourneyHelpPanel from "../components/JourneyHelpPanel";
 
 import { getVisibleBlogFaqSection } from "../utils/blogStructuredData";
@@ -182,16 +181,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
               const canonicalPost = BLOG_DATA.find((post) => post.slug === activePost.slug);
 
               const updatedAt = canonicalPost?.updatedAt || activePost.updatedAt;
-
-              const publishedDateIso = toIsoDate(canonicalPost?.date || activePost.date);
-
               const updatedDateLabel = updatedAt ? formatArticleDate(updatedAt, isBn) : null;
-
-              const dateStatusLabel = updatedAt
-
-                ? `${isBn ? "হালনাগাদ" : "UPDATED"} · ${updatedDateLabel}`
-
-                : `${isBn ? "প্রকাশিত" : "PUBLISHED"} · ${activePost.date}`;
 
               // Body text: Bengali posts carry it inline in BLOG_DATA, English posts
 
@@ -283,13 +273,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
               const activeCoverImg = getBlogCoverImage(activePost.slug);
 
-              const sameCategoryPosts = localizedBlogs.filter(
-
-                (p) => p.slug !== activePost.slug && p.category === activePost.category
-
-              );
-
-              const relatedPosts = getRelatedBlogPosts(activePost, localizedBlogs, 3);
+              const relatedPosts = getArticleRelatedPosts(activePost.slug, BLOG_DATA, localizedBlogs);
 
 
 
@@ -968,106 +952,12 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                     <article className="lg:col-span-8 space-y-7 bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-xs">
 
-                      {/* Primary Semantic H1 in Dark Color (#0B1426) & Large Pixel Scale (30px–38px) */}
-
-                      <header className="space-y-5 border-b border-slate-200 pb-6">
-
-                        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
-
-                          <div className="flex flex-wrap items-center gap-2">
-
-                            <span className="font-bold text-brand-navy">{activePost.category}</span>
-
-                            <span aria-hidden="true">·</span>
-
-                            <time dateTime={publishedDateIso}>{activePost.date}</time>
-
-                            <span aria-hidden="true">·</span>
-
-                            <span>{activePost.readTime}</span>
-
-                            <span aria-hidden="true">·</span>
-
-                            <span>{isBn ? `লেখক: ${activePost.author}` : `By ${activePost.author}`}</span>
-
-                          </div>
-
-                          <span className="font-mono text-emerald-800 font-semibold inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md text-[11px]">
-
-                            <CalendarDays size={12} className="text-emerald-600 shrink-0" />
-
-                            <time dateTime={updatedAt ? toIsoDate(updatedAt) : publishedDateIso}>
-
-                              {dateStatusLabel}
-
-                            </time>
-
-                          </span>
-
-                        </div>
-
-
-
-                        <h1 className="ural-page-title font-serif text-[28px] sm:text-[34px] lg:text-[38px] font-black text-brand-navy leading-[1.18] tracking-tight text-balance">
-
-                          {activePost.title}
-
-                        </h1>
-
-
-
-                        {/* Dedicated Unique Article Feature Photograph */}
-
-                        <figure className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-900">
-
-                          <ResponsiveImage
-
-                            src={activeCoverImg}
-
-                            sizes="(max-width: 767px) 100vw, 840px"
-
-                            alt={generateBlogCoverAltText({
-
-                              title: activePost.title,
-
-                              category: activePost.category,
-
-                              slug: activePost.slug,
-
-                              lang: isBn ? "bn" : "en",
-
-                            })}
-
-                            loading="eager"
-
-                            fetchPriority="high"
-
-                            decoding="async"
-
-                            className="w-full aspect-[16/9] object-cover object-center"
-
-                          />
-
-                        </figure>
-
-
-
-                        {/* Quick Answer & Key Takeaway Box (AEO-Structured Direct Answer) */}
-
-                        <QuickAnswer
-                          label={
-                            isBn
-                              ? "একনজরে মূল উত্তর ও সারসংক্ষেপ"
-                              : "Quick Answer & Key Takeaway"
-                          }
-                          bodyClassName="text-base leading-[1.75] text-slate-800"
-                        >
-                          {activePost.summary}
-                        </QuickAnswer>
-
-
-
-                      </header>
+                      <BlogArticleHeader
+                        post={activePost}
+                        canonicalPost={canonicalPost || activePost}
+                        locale={isBn ? "bn" : "en"}
+                        coverImage={activeCoverImg}
+                      />
 
 
 
@@ -2354,59 +2244,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                           next problem is actually on their mind. */}
                       <JourneyHelpPanel stage={activePost.journeyStage} isBn={isBn} />
 
-                      {/* 5. Related Calculators & Next Steps */}
-
-                      {activePost.internalLinks.length > 0 && (
-
-                        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs space-y-2.5">
-
-                          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
-
-                            {isCoxsBazarFlightGuide
-                              ? isBn
-                                ? "সম্পর্কিত ভ্রমণ গাইড ও পরবর্তী ধাপ"
-                                : "Related Travel Guides & Next Steps"
-                              : isBn
-                                ? "সংশ্লিষ্ট ক্যালকুলেটর ও পরবর্তী ধাপ"
-                                : "Related Calculators & Next Steps"}
-
-                          </div>
-
-                          <div className="space-y-2">
-
-                            {activePost.internalLinks.map((lnk, idx) => (
-
-                              <a
-
-                                key={idx}
-
-                                href={getLocalizedRouteHref(lnk.path)}
-
-                                onClick={(e) => { e.preventDefault(); navigateTo(lnk.path); }}
-
-                                className="flex items-center justify-between bg-slate-50 hover:bg-brand-navy text-brand-navy hover:text-white border border-slate-200 hover:border-brand-navy px-3.5 py-2.5 rounded-xl transition-all text-[12px] font-medium group"
-
-                              >
-
-                                <span className="flex items-center gap-2">
-
-                                  <Link2 size={13} className="text-brand-emerald group-hover:text-[#F6B73C] shrink-0" />
-
-                                  <span className="line-clamp-1">{lnk.text}</span>
-
-                                </span>
-
-                                <ArrowRight size={12} className="shrink-0 opacity-60 group-hover:opacity-100" />
-
-                              </a>
-
-                            ))}
-
-                          </div>
-
-                        </div>
-
-                      )}
+                      <BlogPlanningLinks post={activePost} locale={isBn ? "bn" : "en"} navigate={navigateTo} />
 
 
 
@@ -2458,171 +2296,14 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
 
-                  {/* Bottom Section: 3 More Blog Cards in One Row (Unique Thumbnail + Dark H3 + 50-Word AEO Snippet + 'Read Full Blog' Button) */}
-
-                  <div className="pt-10 border-t border-slate-200 space-y-6">
-
-                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-
-                      <div className="space-y-1">
-
-                        <div className="text-xs font-semibold text-brand-navy">
-
-                          {isBn ? "আরও পড়ুন" : "Continue Reading"}
-
-                        </div>
-
-                        <h2 className="ural-section-title font-serif text-2xl font-bold text-brand-navy">
-
-                          {isBn
-
-                            ? "বাংলাদেশি ভ্রমণকারীদের জন্য আরও প্রয়োজনীয় গাইড"
-
-                            : "More Travel Guides for Bangladeshi Flyers"}
-
-                        </h2>
-
-                      </div>
-
-                      <a
-
-                        href={getLocalizedRouteHref("/blog")}
-
-                        onClick={(e) => { e.preventDefault(); navigateTo("/blog"); }}
-
-                        className="self-start sm:self-end bg-brand-navy text-white text-xs font-semibold px-4 py-2.5 rounded-xl inline-flex items-center gap-1.5"
-
-                      >
-
-                        <span>
-
-                          {isBn
-
-                            ? "সবগুলো ব্লগ দেখুন"
-
-                            : "View All Blogs"}
-
-                        </span>
-
-                        <ArrowRight size={13} className="text-[#F6B73C]" />
-
-                      </a>
-
-                    </div>
-
-
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                      {relatedPosts.map((post) => {
-
-                        const relatedSnippet = getBlogAeoSnippet50Words(post.slug, isBn, post.summary);
-
-
-
-                        return (
-
-                          <article
-
-                            key={post.id}
-
-                            className="bg-white border border-slate-200 hover:border-[#F6B73C] rounded-2xl overflow-hidden shadow-xs transition-all"
-
-                          >
-
-                            <a
-
-                              href={getLocalizedRouteHref(`/blog/${post.slug}`)}
-
-                              onClick={(e) => { e.preventDefault(); navigateTo(`/blog/${post.slug}`); }}
-
-                              className="group flex h-full flex-col justify-between"
-
-                            >
-
-                            <div>
-
-                              <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
-
-                                {/* 1 column below md (768), 3 columns above it — no 50vw band exists here */}
-
-                                <ResponsiveImage
-
-                                  src={getBlogCoverImage(post.slug)}
-
-                                  sizes="(max-width: 767px) 100vw, 33vw"
-
-                                  alt={generateBlogCoverAltText({
-
-                                    title: post.title,
-
-                                    category: post.category,
-
-                                    slug: post.slug,
-
-                                    lang: isBn ? "bn" : "en",
-
-                                  })}
-
-                                  loading="lazy"
-
-                                  fetchPriority="low"
-
-                                  decoding="async"
-
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-
-                                />
-
-                              </div>
-
-                              <div className="p-5 space-y-2.5">
-
-                                <div className="text-xs text-slate-500">
-
-                                  {post.category} · {post.readTime}
-
-                                </div>
-
-                                <h3 className="ural-card-title font-serif font-bold text-[18px] text-brand-navy group-hover:text-brand-emerald leading-snug">
-
-                                  {post.title}
-
-                                </h3>
-
-                                <p className="text-[13.5px] text-slate-700 leading-[1.65]">
-
-                                  {relatedSnippet}
-
-                                </p>
-
-                              </div>
-
-                            </div>
-
-                            <div className="px-5 pb-5 pt-2">
-
-                              <span className="w-full bg-brand-navy group-hover:bg-[#F6B73C] text-white group-hover:text-brand-navy font-bold text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-between">
-
-                                <span>{isBn ? "সম্পূর্ণ ব্লগ পড়ুন · Read Full Blog" : "Read Full Blog"}</span>
-
-                                <ArrowRight size={13} />
-
-                              </span>
-
-                            </div>
-
-                            </a>
-
-                          </article>
-
-                        );
-
-                      })}
-
-                    </div>
-
-                  </div>
+                  <BlogRelatedArticles
+                    posts={relatedPosts}
+                    locale={isBn ? "bn" : "en"}
+                    getCoverImage={getBlogCoverImage}
+                    getSnippet={getBlogAeoSnippet50Words}
+                    navigate={navigateTo}
+                  />
+                  <BlogPlanningHubs locale={isBn ? "bn" : "en"} navigate={navigateTo} />
 
                 </>
 

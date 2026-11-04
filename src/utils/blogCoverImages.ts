@@ -1,0 +1,56 @@
+import { SCHEDULED_BLOG_COVER_IMAGES } from "../data/scheduledBlogIndex.generated";
+
+/** Article and card photographs. Social JPEG derivatives have a separate build map. */
+const BLOG_COVER_IMAGES: Record<string, string> = {
+  "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": "umrah_makkah_haram_guide_1790430007679",
+  "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh": "haramain_bullet_train_1790484312808",
+  "hajj-registration-bangladesh-government-vs-private-package-cost": "mina_hajj_tents_1790484325661",
+  "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide": "madinah_courtyard_umbrellas_1790484340720",
+  "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": "saudi_stopover_aircraft_1790484351784",
+  "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": "madinah_green_dome_1790484369923",
+  "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates": "masjid_nabawi_arches_1790484388265",
+  "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia": "jeddah_airport_terminal_1790484400414",
+  "ramadan-umrah-itikaf-guide-bangladesh-booking-budget": "ramadan_makkah_night_1790484415220",
+  "tawaf-sai-seven-circuits-step-by-step-guide": "tawaf_mataf_kaaba_circuits_1791000000000",
+  "hajj-rites-mina-arafah-muzdalifah-day-by-day": "mina_tent_city_arafah_dawn_1791000100000",
+  "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules": "ihram_preparation_set_1790484426740",
+  "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport": "zamzam_ajwa_dates_1790484440926",
+  "bangladeshi-halal-food-guide-makkah-madinah-budget-meals": "makkah_halal_cuisine_1790484456326",
+  "makkah-madinah-badr-taif-historical-ziyarah-taxi-guide": "quba_mosque_taif_ziyarah_1790485732985",
+  "umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide": "dubai_skyline_burj_twilight_1790485747967",
+  "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide": "sheikh_zayed_grand_mosque_1790485758750",
+  "malaysia-islamic-heritage-putrajaya-halal-family-tour-guide": "putrajaya_pink_mosque_malaysia_1790485770212",
+  "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide": "paris_louvre_london_landmarks_1790485782111",
+  "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah": "islamic_banking_card_makkah_1790486749439",
+  "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": "rfcd_foreign_currency_banking_1790486762760",
+  "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": "bdt_travel_concierge_voucher_1790486777146",
+  "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": "pos_card_terminal_currency_1790486792551",
+  "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": "bangkok_wat_arun_chao_phraya_1790486821534",
+  "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration": "kuala_lumpur_petronas_twilight_1790486835902",
+  "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia": "passport_stamps_boarding_window_1790486849797",
+  "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide": "singapore_mrt_gardens_bay_1790520762227",
+  "bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh": "bangkok_medical_hospital_lobby_1790520775439",
+  "best-travel-esim-and-schengen-travel-insurance-bangladesh-guide": "travel_esim_smartphone_insurance_1790520786938",
+  "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost": "sri_lanka_nine_arch_train_1790520800518",
+  "bangladesh-epassport-application-renewal-64-districts-fee-guide": "bangladesh_epassport_biometric_desk_1790520813052",
+  "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp": "airport_departure_board_delay_claim_1790520824658",
+  "top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla": "dhaka_airport_widebody_airlines_tarmac_1790520836931",
+  "dual-currency-card-endorsement-bangladesh": "passport_card_travel_desk_1790430035290",
+  "dhaka-airport-outbound-immigration-checklist-noc-go": "ural_hero_bg_1781543111624",
+  "nepal-pokhara-itinerary-bangladesh": "nepal_destination_1781544132297",
+  "nepal-vs-thailand-first-trip": "coxs_bazar_sunrise_1781620718331",
+  "halal-food-guide-bangkok-bangladesh": "bangkok_destination_1781544149435",
+  "top-budget-family-destinations-from-dhaka": "kl_destination_1781544164707",
+  "hotel-savings-guide-bangkok-kl-dubai": "dubai_destination_1781544180311",
+  "singapore-visa-guide-bangladesh-agents": "singapore_destination_1790387270177",
+  "maldives-budget-trip-bangladesh-maafushi": "maldives_destination_1790387286896",
+  "cheap-flight-booking-hacks-dhaka": "blog_editorial_hero_banner_1790429994056",
+  "havana-cuba-travel-guide-bangladesh": "havana_gran_teatro_classic_cars_1791427200000",
+  "chefchaouen-morocco-travel-guide-bangladesh": "chefchaouen_blue_fountain_alley_1791427400000",
+  "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide": "dhaka_kolkata_benapole_border_train_1791500000000",
+};
+
+export function getBlogCoverImage(slug: string): string {
+  return SCHEDULED_BLOG_COVER_IMAGES[slug] ||
+    `/assets/images/${BLOG_COVER_IMAGES[slug] || "clouds_boat_hero_1781438671378"}-1200.webp`;
+}

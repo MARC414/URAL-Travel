@@ -100,9 +100,9 @@ for (const locale of ["en", "bn"] as const) {
     for (const link of post.internalLinks!) assert.ok(html.includes(`href="${bn ? "/bn" : ""}${link.path}"`));
   });
 }
-test("EN/BN App snippets and SEO remove unsupported fares/time; retired-claim fixture still rejected", () => {
-  const app = fs.readFileSync(new URL("../src/App.tsx", import.meta.url), "utf8");
-  const snippets = [...app.matchAll(new RegExp(`"${slug}":\\s*\\n\\s*"([^"\\n]+)"`, "g"))].map((match) => match[1]);
+test("EN/BN shared snippets and SEO remove unsupported fares/time; retired-claim fixture still rejected", () => {
+  const source = fs.readFileSync(new URL("../src/utils/blogSnippets.ts", import.meta.url), "utf8");
+  const snippets = [...source.matchAll(new RegExp(`"${slug}":\\s*\\n\\s*"([^"\\n]+)"`, "g"))].map((match) => match[1]);
   assert.equal(snippets.length, 2);
   assert.ok(snippets.every((snippet) => !retired.test(snippet) && /No live fare|Live fare/.test(snippet)));
   const seo = fs.readFileSync(new URL("../src/utils/seoCopy.ts", import.meta.url), "utf8").split(`"/blog/${slug}": {`)[1].split("},")[0];

@@ -168,6 +168,18 @@ html {
   letter-spacing: var(--ls-tight);
 }
 
+/* The critical shell's unlayered h1 rule outranks Tailwind text-size utilities.
+   Scope the article scale here so the saved header and React use it alike. */
+[data-blog-article-header] .ural-page-title {
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.375rem);
+  line-height: 1.18;
+}
+
+[data-blog-article-header][data-article-locale="bn"] .ural-page-title {
+  line-height: 1.45;
+  letter-spacing: normal;
+}
+
 .ural-section-title {
   font-family: var(--font-serif);
   font-weight: var(--fw-extrabold);

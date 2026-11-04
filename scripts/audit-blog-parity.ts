@@ -15,7 +15,9 @@ import { BLOG_BODY } from "../src/data/blogContent";
 import { BENGALI_BLOG_OVERRIDES, getLocalizedBlogs, getLocalizedHajjFaqs, getBengaliRouteSeo } from "../src/data/bengaliContent";
 import { SCHEDULED_BLOG_SNIPPETS, SCHEDULED_BLOG_SEO_COPY } from "../src/data/scheduledBlogSeo.generated";
 import { getSeoCopy, getBengaliSeoCopy, PRIORITY_SEO_COPY } from "../src/utils/seoCopy";
-import { getRelatedBlogPosts } from "../src/utils/blogLinks";
+import { getArticleRelatedPosts } from "../src/utils/blogPresentation";
+import { getBlogAeoSnippet50Words as getSnippet } from "../src/utils/blogSnippets";
+import { getBlogCoverImage } from "../src/utils/blogCoverImages";
 import { getVisibleBlogFaqSection, getVisibleBlogHowTos } from "../src/utils/blogStructuredData";
 import { SITE_ORIGIN, toBengaliPath } from "../src/utils/localeRoutes";
 import { toolPathForTab } from "../src/utils/toolRoutes";
@@ -32,19 +34,12 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUTPUT = path.join(ROOT, "dist", "__parity-audit");
 fs.mkdirSync(OUTPUT, { recursive: true });
 
-const appText = fs.readFileSync(path.join(ROOT, "src", "App.tsx"), "utf8");
-const appAst = ts.createSourceFile("App.tsx", appText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
-const snippetFunction = appAst.statements.find(
+const snippetText = fs.readFileSync(path.join(ROOT, "src", "utils", "blogSnippets.ts"), "utf8");
+const snippetAst = ts.createSourceFile("blogSnippets.ts", snippetText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+const snippetFunction = snippetAst.statements.find(
   (node): node is ts.FunctionDeclaration => ts.isFunctionDeclaration(node) && node.name?.text === "getBlogAeoSnippet50Words",
 );
-if (!snippetFunction) throw new Error("App's snippet function was not found; inspect its current source.");
-const snippetCode = ts.transpileModule(snippetFunction.getText(appAst), {
-  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
-}).outputText;
-// Execute the exact repository function with its generated-data dependency.
-const getSnippet = new Function("SCHEDULED_BLOG_SNIPPETS", `${snippetCode}\nreturn getBlogAeoSnippet50Words;`)(SCHEDULED_BLOG_SNIPPETS) as (
-  slug: string, isBn: boolean, fallback: string,
-) => string;
+if (!snippetFunction) throw new Error("The shared snippet function was not found; inspect its current source.");
 const snippetKeys: Record<"en" | "bn", Set<string>> = { en: new Set(), bn: new Set() };
 function readSnippetKeys(node: ts.Node): void {
   if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.initializer && ts.isObjectLiteralExpression(node.initializer)) {
@@ -89,17 +84,17 @@ const rows = BLOG_DATA.map((post) => {
       ? "scheduled-frontmatter"
       : isBn ? (getBengaliSeoCopy(route) ? "authored-copy" : "title-summary-fallback")
         : PRIORITY_SEO_COPY[route] ? "authored-copy" : "title-summary-fallback";
-    const snippetSource = snippetKeys[locale].has(post.slug) ? "App-authored"
+    const snippetSource = snippetKeys[locale].has(post.slug) ? "shared-authored"
       : SCHEDULED_BLOG_SNIPPETS[post.slug]?.[locale] ? "scheduled-frontmatter" : "summary-fallback";
     const faq = getVisibleBlogFaqSection(post.slug, body, locale);
     const howTos = getVisibleBlogHowTos(post.slug, body, locale);
-    // Real route component, with controlled author/cover/URL callbacks. The full
-    // App's routing, head updates and final cover need separate browser checks.
+    // Real route component and shared cover/snippet functions. The App's routing
+    // and head updates still need separate running-browser checks.
     const html = renderToStaticMarkup(React.createElement(BlogPostRouteView, { context: {
       AuthorBioCard: () => null,
       blogBodies: BLOG_BODY,
       getBlogAeoSnippet50Words: getSnippet,
-      getBlogCoverImage: () => "/assets/images/madinah_green_dome_1790484369923-1200.webp",
+      getBlogCoverImage,
       getLocalizedRouteHref: (href: string) => isBn ? toBengaliPath(href) : href,
       isBn, isLanding: false, lang: locale,
       localizedBlogs: postsByLocale[locale], localizedHajjFaqs: getLocalizedHajjFaqs(locale),
@@ -130,7 +125,7 @@ const rows = BLOG_DATA.map((post) => {
         alt: isBn ? localizedPost.inlineFigure.altBn : localizedPost.inlineFigure.altEn,
         caption: isBn ? localizedPost.inlineFigure.captionBn : localizedPost.inlineFigure.captionEn,
       } : null,
-      suggestedSlugs: getRelatedBlogPosts(localizedPost, postsByLocale[locale], 3).map((entry) => entry.slug),
+      suggestedSlugs: getArticleRelatedPosts(post.slug, BLOG_DATA, postsByLocale[locale]).map((entry) => entry.slug),
       staticFile: `${isBn ? "/bn" : ""}${route}.html`,
       reactFixture: `/__parity-audit/${fixture}`,
     }];

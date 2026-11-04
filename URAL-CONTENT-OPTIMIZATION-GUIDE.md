@@ -420,7 +420,7 @@ For social, extract **one** supported decision, mistake, comparison or checklist
 | Established English article | `src/data/blogContent.ts` body; `src/constants.ts` metadata/references/links/CTA |
 | Established Bengali twin | `src/data/bengaliContent.ts` overrides, including explicit links |
 | Markdown-authored article | `content/blog/<slug>.md`; regenerate with the normal scripts; never hand-edit generated TypeScript |
-| AEO snippets / SEO copy | Locate actual slug handling in `src/App.tsx`, `src/utils/seoCopy.ts` and relevant generated data |
+| AEO snippets / SEO copy | `src/utils/blogSnippets.ts`, `src/utils/seoCopy.ts` and relevant generated data; article QuickAnswer uses the full summary |
 | Static and client output | `scripts/prerender.ts` and `src/routes/BlogPostRouteView.tsx` |
 | Hub/tool | Actual component/data owner; article-only conventions do not create unsupported component behavior |
 

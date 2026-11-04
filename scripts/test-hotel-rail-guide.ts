@@ -107,8 +107,8 @@ for (const locale of ["en", "bn"] as const) {
     for (const link of post.internalLinks!) assert.ok(html.includes(`href="${bn ? "/bn" : ""}${link.path}"`));
   });
 }
-test("App snippets do not universalize distance endpoints or omit the hand item", () => {
-  const source = fs.readFileSync(new URL("../src/App.tsx", import.meta.url), "utf8");
+test("shared snippets do not universalize distance endpoints or omit the hand item", () => {
+  const source = fs.readFileSync(new URL("../src/utils/blogSnippets.ts", import.meta.url), "utf8");
   const matches = [...source.matchAll(new RegExp(`"${slug}":\\s*\\n\\s*"([^"\\n]+)"`, "g"))];
   assert.equal(matches.length, 2);
   assert.ok(matches.every((match) => match[1].includes("hand item")));

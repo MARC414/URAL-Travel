@@ -82,8 +82,9 @@ Both apply to every AI tool and contributor. Social tasks also use the current a
 - **CI guards specific regressions.** `npm run verify:build` checks English declared-link integrity, the Hajj &
   Umrah linking minimums and rendered anchors, declared affiliate next steps in static HTML, and at least one
   in-locale article link on every Bengali static page. It also checks that URL localization preserves schema types,
-  dates, language codes and prose. These checks do not yet enforce complete pairwise parity; the focused audit
-  found a Bengali duplicate link and missing destinations despite a passing build. The non-blocking
+  dates, language codes and prose. Shared presentation checks cover full headers, canonical dates, each locale's
+  planning links and the same automatic recommendations across saved HTML and React. These checks do not yet
+  enforce complete editorial pairwise parity; authored Bengali duplicate/missing destinations remain review items. The non-blocking
   `[content-debt]` report still needs editorial review.
 
 ---

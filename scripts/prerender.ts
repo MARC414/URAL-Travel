@@ -5,6 +5,12 @@ import { linkifyCitations, citationAnchorId, CITATION_LINK_CLASS } from "../src/
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { UmrahBudgetCalculator } from "../src/components/UmrahBudgetCalculator";
+import { BlogArticleHeader } from "../src/components/BlogArticleHeader";
+import { BlogPlanningLinks, BlogPlanningHubs, BlogRelatedArticles } from "../src/components/BlogArticleNavigation";
+import { getArticleRelatedPosts, type ArticleLocale } from "../src/utils/blogPresentation";
+import { getBlogCoverImage } from "../src/utils/blogCoverImages";
+import { getBlogAeoSnippet50Words } from "../src/utils/blogSnippets";
+import type { BlogPost } from "../src/types";
 import fs from "node:fs";
 import path from "node:path";
 import { validateSitemapPair } from "./sitemapValidation";
@@ -78,7 +84,6 @@ import {
 import { getSeoCopy, stripBrandSuffix } from "../src/utils/seoCopy";
 import { TOOL_PAGE_SEO, TOOL_SLUGS } from "../src/utils/toolRoutes";
 import { buildResponsiveSrcSet, getResponsiveImageDimensions } from "../src/utils/imageAssets";
-import { getRelatedBlogPosts } from "../src/utils/blogLinks";
 import { sortBlogsNewestFirst } from "../src/utils/blogOrdering";
 import { SITE_SEARCH_ALIASES } from "../src/data/siteSearchAliases";
 import type { SiteSearchEntry, SiteSearchKind } from "../src/utils/siteSearch";
@@ -805,6 +810,28 @@ function renderLinkSection(id: string, heading: string, links: InternalLinkItem[
     .join("\n")}</ul></section>`;
 }
 
+/** Identical reading sections and canonical recommendations in both locales. */
+function renderBlogReadingSectionsHtml(post: BlogPost, locale: ArticleLocale): string {
+  return renderToStaticMarkup(React.createElement(React.Fragment, null,
+    React.createElement(BlogPlanningLinks, { post, locale }),
+    React.createElement(BlogRelatedArticles, {
+      posts: getArticleRelatedPosts(post.slug, BLOG_DATA, getLocalizedBlogs(locale)),
+      locale,
+      getCoverImage: getBlogCoverImage,
+      getSnippet: getBlogAeoSnippet50Words,
+    }),
+    React.createElement(BlogPlanningHubs, { locale }),
+  ));
+}
+
+function renderBlogLuggagePlacementHtml(slug: string, locale: ArticleLocale): string {
+  const placement = RADICAL_STORAGE_BLOG_PLACEMENTS[slug];
+  if (!placement) return "";
+  const isBn = locale === "bn";
+  const href = escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage));
+  return `<section aria-labelledby="luggage-storage-tip"><h2 id="luggage-storage-tip">${escapeHtml(isBn ? placement.headlineBn : placement.headlineEn)}</h2><p>${escapeHtml(isBn ? placement.bodyBeforeAnchorBn : placement.bodyBeforeAnchorEn)}<a href="${href}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(isBn ? placement.anchorTextBn : placement.anchorTextEn)}</a>${escapeHtml(isBn ? placement.bodyAfterAnchorBn : placement.bodyAfterAnchorEn)} <a href="${href}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(isBn ? placement.buttonLabelBn : placement.buttonLabelEn)}</a>.</p></section>`;
+}
+
 function renderDestinationRelatedBlogSection(
   destinationId: string,
   locale: "en" | "bn"
@@ -915,6 +942,7 @@ function addInternalLinkSections(
     if (
       route.routePath !== "/" &&
       route.routePath !== "/sitemap" &&
+      !route.routePath.startsWith("/blog/") &&
       !categoryHubPaths.has(route.routePath)
     ) {
       const parentHubPath = CATEGORY_HUB_LINKS.map((link) => link.href).find((hubPath) =>
@@ -2733,9 +2761,7 @@ function buildAllRoutes(): PrerenderRoute[] {
 
   for (const post of BLOG_DATA) {
     const postUrl = `${BASE_URL}/blog/${post.slug}`;
-    const postImageFileName =
-      BLOG_IMAGE_MAP[post.slug] || "ural_hero_bg_1781543111624.jpg";
-    const postLcpImageUrl = `/assets/images/${postImageFileName.replace(/\.jpg$/, "-1200.webp")}`;
+    const postLcpImageUrl = getBlogCoverImage(post.slug);
     const postImgUrl = `${BASE_URL}/img/blog/${post.slug}.jpg`;
     const title = `${post.title} | URAL Travel Blog`;
     const description = post.summary;
@@ -2778,31 +2804,6 @@ function buildAllRoutes(): PrerenderRoute[] {
       );
     }
 
-    const planLinks: { text: string; href: string }[] = [];
-    const relatedGuideLinks: { text: string; href: string }[] = [];
-    const usedBlogLinkHrefs = new Set<string>();
-
-    for (const link of post.internalLinks || []) {
-      const href = normalizeInternalHref(link.path);
-      if (!href.startsWith("/")) continue;
-      if (href.startsWith("/blog/")) {
-        if (href !== `/blog/${post.slug}` && !usedBlogLinkHrefs.has(href)) {
-          relatedGuideLinks.push({ text: link.text, href });
-          usedBlogLinkHrefs.add(href);
-        }
-      } else if (!planLinks.some((existing) => existing.href === href)) {
-        planLinks.push({ text: link.text, href });
-      }
-    }
-
-    for (const relatedPost of getRelatedBlogPosts(post, BLOG_DATA, 4)) {
-      const href = `/blog/${relatedPost.slug}`;
-      if (!usedBlogLinkHrefs.has(href)) {
-        relatedGuideLinks.push({ text: relatedPost.title, href });
-        usedBlogLinkHrefs.add(href);
-      }
-    }
-
     const refPlacement = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[post.slug];
     // Per-placement `sub_id` (creator_hub, post_bangkok_food...), so a referral
     // signup in the Travelpayouts report names the page that produced it. Built
@@ -2813,20 +2814,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       ? `<section aria-labelledby="travel-creators-referral"><h2 id="travel-creators-referral">${escapeHtml(refPlacement.headlineEn)}</h2><p>${escapeHtml(refPlacement.bodyBeforeAnchorEn)}<a href="${travelpayoutsReferralUrl}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacement.anchorTextEn)}</a>${escapeHtml(refPlacement.bodyAfterAnchorEn)} <a href="${travelpayoutsReferralUrl}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacement.buttonLabelEn)}</a>.</p><p><em>${escapeHtml(refPlacement.disclosureEn)}</em></p></section>`
       : "";
 
-    const planLinksHtml = planLinks.length
-      ? `<section aria-labelledby="plan-your-trip-links"><h2 id="plan-your-trip-links">Plan your trip</h2><ul>${planLinks
-          .map((link) => `<li><a href="${escapeHtml(link.href)}">${escapeHtml(link.text)}</a></li>`)
-          .join("\n")}</ul></section>`
-      : "";
-    const relatedGuidesHtml = relatedGuideLinks.length
-      ? `<section aria-labelledby="related-travel-guides"><h2 id="related-travel-guides">Related Bangladesh travel guides</h2><ul>${relatedGuideLinks
-          .map((link) => `<li><a href="${escapeHtml(link.href)}">${escapeHtml(link.text)}</a></li>`)
-          .join("\n")}</ul></section>`
-      : "";
-    const radicalPlacement = RADICAL_STORAGE_BLOG_PLACEMENTS[post.slug];
-    const radicalStorageHtml = radicalPlacement
-      ? `<section aria-labelledby="luggage-storage-tip"><h2 id="luggage-storage-tip">${escapeHtml(radicalPlacement.headlineEn)}</h2><p>${escapeHtml(radicalPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(radicalPlacement.anchorTextEn)}</a>${escapeHtml(radicalPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(radicalPlacement.buttonLabelEn)}</a>.</p></section>`
-      : "";
+    const radicalStorageHtml = renderBlogLuggagePlacementHtml(post.slug, "en");
     const multiPlacement = MULTI_PARTNER_BLOG_PLACEMENTS[post.slug];
     const multiPartnerHtml = multiPlacement
       ? `<section aria-labelledby="partner-travel-tools"><h2 id="partner-travel-tools">${escapeHtml(multiPlacement.headlineEn)}</h2><p>${escapeHtml(multiPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacement.primaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.anchorTextEn)}</a>${escapeHtml(multiPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacement.primaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.primaryButtonEn)}</a>${
@@ -2876,9 +2864,9 @@ function buildAllRoutes(): PrerenderRoute[] {
       lastmod: toIsoDate(post.updatedAt || post.date),
       bodyHtml: `
         <article>
-          <h1>${escapeHtml(post.title)}</h1>
-          <p><em>By ${escapeHtml(post.author)} · Published ${escapeHtml(post.date)}${post.updatedAt ? ` · Updated ${escapeHtml(post.updatedAt)}` : ""} · ${escapeHtml(post.readTime)}</em></p>
-          <p>${escapeHtml(post.summary)}</p>
+          ${renderToStaticMarkup(React.createElement(BlogArticleHeader, {
+            post, canonicalPost: post, locale: "en", coverImage: postLcpImageUrl,
+          }))}
           ${blogBody
             .split("\n\n")
             .map((para) => {
@@ -2922,9 +2910,8 @@ function buildAllRoutes(): PrerenderRoute[] {
           ${klookHotelHtml}
           ${travelpayoutsReferralHtml}
           ${affiliateCtaHtml}
-          ${planLinksHtml}
-          ${relatedGuidesHtml}
           ${post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking" ? renderCoxsBazarBookingCtaHtml("en") : ""}
+          ${renderBlogReadingSectionsHtml(post, "en")}
         </article>
       `,
     });
@@ -3230,6 +3217,13 @@ function buildBengaliBody(
     const override = BENGALI_BLOG_OVERRIDES[id];
     if (override) {
       const bnPost = BLOG_DATA.find((post) => post.slug === id);
+      const localizedPost = getLocalizedBlogs("bn").find((post) => post.slug === id);
+      if (!bnPost || !localizedPost) throw new Error(`Missing Bengali article data for ${id}`);
+      // Replace the generic SEO-description opening with the full shared header.
+      parts.length = 0;
+      parts.push(renderToStaticMarkup(React.createElement(BlogArticleHeader, {
+        post: localizedPost, canonicalPost: bnPost, locale: "bn", coverImage: getBlogCoverImage(id),
+      })));
       const bnFig = bnPost?.inlineFigure;
       const bnFigureHtml = bnFig
         ? (() => {
@@ -3259,6 +3253,7 @@ function buildBengaliBody(
           ? renderCoxsBazarAuthorBioHtml("bn")
           : renderAuthorBioHtml(getAuthorProfile(bnPost?.author), "bn")
       );
+      parts.push(renderBlogLuggagePlacementHtml(id, "bn"));
       const refPlacementBn = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[id];
       if (refPlacementBn) {
         // Same SubID as the English sibling: the report should tell us which PAGE
@@ -3313,14 +3308,10 @@ function buildBengaliBody(
           )
         );
       }
-      const internal = (override.internalLinks || [])
-        .filter((link) => hasBengaliCounterpart(link.path))
-        .map((link) => ({ label: link.text, path: link.path }));
-      const related = bnLinkList("সম্পর্কিত গাইড", internal);
-      if (related) parts.push(related);
       if (id === "kathmandu-to-coxs-bazar-flights-route-status-booking") {
         parts.push(renderCoxsBazarBookingCtaHtml("bn"));
       }
+      parts.push(renderBlogReadingSectionsHtml(localizedPost, "bn"));
     }
     return `<article>${parts.join("")}</article>`;
   }

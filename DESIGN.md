@@ -394,6 +394,36 @@ establish new hotel facts.
   exemption is one named line in `scripts/verify-build.ts` with its reason, never
   inferred from a missing field.
 
+### Article header and reading navigation
+
+- **Shared rendering:** `BlogArticleHeader.tsx` supplies the byline, canonical
+  publication/update dates, localized H1, responsive cover and complete-summary
+  `QuickAnswer`. `BlogArticleNavigation.tsx` supplies the curated planning list,
+  related-reading cards and five planning hubs. Both the React article route and
+  the English/Bengali prerender branches use these components.
+- **Header typography:** the article H1 scales from 28px to 38px. Bengali uses
+  1.45 line height and normal tracking. Scoped rules in `src/index.css` override
+  the critical shell's generic H1 styling; utility classes alone cannot do that.
+  Flex gap keeps the heading, cover and summary separated even when the shell
+  resets heading margins.
+- **Reading links:** descriptive labels wrap in full, with a minimum 44px link
+  target, an emerald focus outline and color-based hover/pressed feedback.
+  Each related card is one native anchor. Modified clicks retain browser behavior;
+  fragment links retain native scrolling.
+- **Selection and localization:** `getArticleRelatedPosts` in
+  `src/utils/blogPresentation.ts` ranks up to three guides from the canonical
+  English article graph, then supplies localized titles and URLs. Planning links
+  resolve legacy currency-tool aliases and preserve filters/fragments; duplicate
+  destinations and self-links are omitted from the rendered planning list.
+- **Content sources:** `src/utils/blogCoverImages.ts` owns article/card cover
+  selection; `src/utils/blogSnippets.ts` owns the existing card/share answers.
+  The visible QuickAnswer uses the complete article summary. Social JPEG
+  derivatives retain their separate prerender asset map.
+- **Regression coverage:** `scripts/articlePresentationChecks.ts`, called by
+  `verify:build`, checks every published EN/BN pair in saved HTML and the actual
+  React route. These checks establish rendering fidelity; the authored link
+  destinations and Bengali prose still require editorial review.
+
 ### Inputs / Fields
 - **Style:** white fill, `border-default` `#CBD5E1`, `rounded-md`/`rounded-lg`.
 - **Focus:** visible ring in brand gold or navy at 2–3px with offset. Never remove outline

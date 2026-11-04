@@ -115,8 +115,8 @@ for (const locale of ["en", "bn"] as const) {
   });
 }
 
-test("EN/BN App snippets retain carrier uncertainty instead of broad prior-visa exemption", () => {
-  const source = fs.readFileSync(new URL("../src/App.tsx", import.meta.url), "utf8");
+test("EN/BN shared snippets retain carrier uncertainty instead of broad prior-visa exemption", () => {
+  const source = fs.readFileSync(new URL("../src/utils/blogSnippets.ts", import.meta.url), "utf8");
   const matches = [...source.matchAll(new RegExp(`"${slug}":\\s*\\n\\s*"([^"\\n]+)"`, "g"))];
   assert.equal(matches.length, 2);
   assert.ok(matches[0][1].includes("detailed current flynas conditions remain unverified"));

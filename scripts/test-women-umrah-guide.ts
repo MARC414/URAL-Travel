@@ -105,8 +105,8 @@ for (const locale of ["en", "bn"] as const) {
   });
 }
 test("EN/BN snippets/SEO remove area guarantees; retired-claim controls still reject the old assertions", () => {
-  const app = fs.readFileSync(new URL("../src/App.tsx", import.meta.url), "utf8");
-  const snippets = [...app.matchAll(new RegExp(`"${slug}":\\s*\\n\\s*"([^"\\n]+)"`, "g"))].map((match) => match[1]);
+  const source = fs.readFileSync(new URL("../src/utils/blogSnippets.ts", import.meta.url), "utf8");
+  const snippets = [...source.matchAll(new RegExp(`"${slug}":\\s*\\n\\s*"([^"\\n]+)"`, "g"))].map((match) => match[1]);
   assert.equal(snippets.length, 2);
   assert.ok(snippets.every((snippet) => !retired.test(snippet) && snippet.includes("age") && snippet.includes("nationality")));
   assert.ok(!snippets.some((snippet) => /Markazia North|flat access|সবচেয়ে সুবিধাজনক/.test(snippet)));

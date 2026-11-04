@@ -3,8 +3,8 @@
 **Lifecycle: supporting, dated diagnostic.**
 
 **Baseline:** `e0c7936`, rebuilt locally on 5 November 2026. Scope: all **53 English/Bengali article pairs**,
-their source data, saved HTML and the shared React article component. The first schema repair below was verified
-after this baseline. The remaining findings are open; this document is not a declaration of full parity.
+their source data, saved HTML and the shared React article component. Schema and shared-presentation repairs were
+verified after this baseline. Dated resolutions below distinguish those repairs from the open editorial findings.
 
 ## Owner's requirement
 
@@ -24,7 +24,8 @@ either: two lists of five links can take the reader to different destinations.
 - Inspected metadata and links in `src/constants.ts`, bodies in `src/data/blogContent.ts`, Bengali overrides in
   `src/data/bengaliContent.ts`, and the four Markdown-authored posts through their generated data.
 - Followed the actual SEO and answer sources: `src/utils/seoCopy.ts`, `getBengaliRouteSeo`, the two snippet maps
-  in `src/App.tsx`, scheduled SEO/snippet data, and `src/utils/blogStructuredData.ts`.
+  then in `src/App.tsx`, scheduled SEO/snippet data, and `src/utils/blogStructuredData.ts`. The shared-presentation
+  repair subsequently moved the existing snippet maps to `src/utils/blogSnippets.ts`.
 - Parsed **106 saved article documents** with the browser's DOM parser. Inspected another 106 HTML fixtures
   rendered by the real `BlogPostRouteView` component. These fixtures supply an inert author-card callback, a
   fixed cover-image path and a simple locale URL formatter; they establish component structure. App-head behavior,
@@ -72,7 +73,27 @@ original helper before the fix. After the fix, the built browser pages for Benga
 Cox's Bazar contained `Article`, correct language/date values and headlines matching their visible H1s. The DIY
 page retained five FAQ questions and six HowTo steps. The English DIY page retained the same schema capabilities.
 
-### 2. Saved Bengali article structure is reduced — open
+### 2. Saved Bengali header and reading sections — resolved; body formatting remains open
+
+**Resolution, 5 November 2026:** all **53 pairs** now render the same shared header and reading components in
+saved HTML and React: complete localized summary, byline, canonical dates, responsive cover, curated planning
+panel, up to three related cards and five planning hubs. All four shared section IDs occur once per article.
+Bengali's three missing static luggage-storage placements now use their existing localized placement data.
+
+| Measured after repair | EN saved HTML | BN saved HTML | React, each locale |
+|---|---:|---:|---:|
+| Full summary in the shared QuickAnswer | 53 | 53 | 53 |
+| Shared publication/update byline and cover | 53 | 53 | 53 |
+| Curated planning section | 53 | 53 | 53 |
+| Related-reading card section | 53 | 53 | 53 |
+| Planning-hub section | 53 | 53 | 53 |
+| Localized luggage-storage placement | 3 | 3 | 3 |
+
+The two snippet maps and 46 explicit article-cover mappings were extracted without changing their values.
+The shared header uses a 28–38px fluid title scale and relaxed Bengali line height; scoped CSS fixes the critical
+shell's former 40px override. Planning labels wrap fully rather than being truncated to one line.
+
+**Baseline evidence retained:**
 
 | Feature at the baseline | English saved HTML | Bengali saved HTML | React article view |
 |---|---:|---:|---|
@@ -86,34 +107,34 @@ page retained five FAQ questions and six HowTo steps. The English DIY page retai
 | Klook hotel collection placement | 1 | 1 | 1 in each locale |
 | Declared article affiliate next step | 48 | 48 | 48 in each locale |
 
-The Bengali static branch starts with its short SEO description rather than the full article summary and has no
-equivalent of the English publication/read-time byline. It combines its authored planning/article links under one
-heading. The complete body still exists; these are presentation and supporting-content gaps, not 51 empty articles.
+At the baseline, the Bengali static branch started with its short SEO description and lacked the equivalent
+publication/read-time byline. The shared header replaces that opening with the full summary and byline.
 
-The missing static luggage-storage placement affects:
+The restored static luggage-storage placement covers:
 
 - `europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide`
 - `hotel-savings-guide-bangkok-kl-dubai`
 - `sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost`
 
-Both static renderers also omit the React cover/QuickAnswer-card treatment and leave many numbered headings and
-lists as paragraph text. The two authored inline figures and the DIY budget table render in both languages.
-Some parity work therefore belongs in shared rendering, rather than adding more Bengali-only conditions.
+The cover/QuickAnswer treatment is now shared. Many numbered body headings and lists still have different static
+formatting, and other article/sidebar features retain separate rendering paths. Those need their own bounded
+review. The two authored inline figures and the DIY budget table continue to render in both languages.
 
-### 3. Link destinations and recommendations differ — open
+### 3. Authored link destinations — open; automatic selection and link routing resolved
 
 - **25 pairs have different authored link counts:** Bengali is shorter on 18 and longer on 7.
 - **31 pairs have different raw URL lists.** Four are legacy currency-tool aliases; after resolving those,
   **27 pairs have genuinely different editorial destination sets**.
-- **38 pairs have different ordered automatic recommendation lists** from the current locale-dependent scorer.
-  It reads translated titles and differing link arrays, so using the same helper does not produce the same selection.
+- **Automatic recommendation differences: 38 → 0 pairs.** `getArticleRelatedPosts` now scores the canonical
+  English graph and then supplies each locale's titles and URLs. Saved HTML and React expose the same ordered list.
 - The Bengali DIY Umrah array repeats the hotel/Haramain article and omits the English Dubai destination link.
   Both arrays contain eleven entries, so a count-only parity check misses the problem.
 
-Static URL handling also drops action details. `normalizeInternalHref` removes every query and fragment. For
-`blog-6`, `blog-28`, `blog-30` and `blog-31`, the Bengali currency-tool alias becomes `/bn/tools`, losing the
-converter selection. Experience filters are stripped on four English and two Bengali article lists. These are
-destination/selection differences, not evidence that the hub URLs themselves return 404.
+**Routing resolution, 5 November:** article planning links now use `articleLinkPath`, which resolves the four
+Bengali currency-tool aliases to `/bn/tools/currency-converter` and preserves experience filters and fragments.
+The rendered planning list deduplicates destinations; the DIY Umrah duplicate still needs removal from its
+authored Bengali array alongside the missing Dubai link. The source inventory still measures **27 genuinely
+different destination sets**. Fixing rendering does not reconcile those editorial choices.
 
 ### 4. Four articles change their primary affiliate partner by language — open
 
@@ -140,10 +161,11 @@ Every saved Bengali article has Bengali title/description text. The issue is **4
 without an equally authored Bengali counterpart**, plus the quality of fallback wording. Purpose-written Bengali
 copy should serve the same query intent while using natural Bengali and accurate technical terms.
 
-The AEO snippet inventory is better than the interrupted audit suggested: **45 App-authored snippets and four
-scheduled snippets exist in each language**, with four summary fallbacks in each. The visible React QuickAnswer
-uses the article summary, while cards and sharing use `getBlogAeoSnippet50Words`. These are distinct surfaces and
-must stay aligned during editorial work.
+The AEO snippet inventory is better than the interrupted audit suggested: **45 authored snippets and four
+scheduled snippets exist in each language**, with four summary fallbacks in each. The authored maps now live in
+`src/utils/blogSnippets.ts`; the extraction was not an editorial rewrite. The shared QuickAnswer uses the complete
+article summary, while cards and sharing use `getBlogAeoSnippet50Words`. These surfaces need coordinated editorial
+review for natural Bengali, supported claims and equivalent qualifications.
 
 ### 6. Body outline and natural Bengali need section-level review — open
 
@@ -169,11 +191,11 @@ passage. Existing unsupported claims need evidence review in both languages befo
 - Both locales have the same supported inline figures and budget table. No active per-paragraph `callouts` arrays
   were found in this inventory, so their unused localization behavior was not counted as a live defect.
 
-## Per-article inventory
+## Per-article inventory — baseline `e0c7936`
 
 `Links` and `H2/H3` are **EN / BN**. Heading counts are inside the real React article component, with the supplied
 author-card callback omitted identically in both fixtures. `Targets` compares canonical editorial destination sets;
-`alias` means equivalent currency-tool source URLs whose saved rendering still needs correction. `CTA` compares
+`alias` means equivalent currency-tool source URLs whose saved rendering was corrected in the shared repair. `CTA` compares
 provider keys only. All rows have matching reference destination lists and FAQ/HowTo counts where those are present.
 
 | ID / article | Links | Targets | CTA | H2/H3 |
@@ -235,20 +257,18 @@ provider keys only. All rows have matching reference destination lists and FAQ/H
 Scheduled source files are the four articles in `content/blog/`; their IDs use `blog-scheduled-<slug>`.
 There is no `blog-47` in the current published set.
 
-## Implementation order
+## Remaining implementation order
 
-1. **Schema string corruption:** resolved in this change, with a failing-before/passing-after regression check and
-   real-browser verification.
-2. **Shared article rendering:** give both locales the same full-summary/byline treatment, planning/related/hub
-   blocks, contextual placements and source-supported body formatting in saved HTML and the browser.
-3. **Shared reading journey:** reconcile the 27 destination differences, the duplicate and legacy query handling;
-   select automatic recommendations consistently and supply native Bengali anchors.
-4. **Editorial parity:** align the four primary CTA choices, purpose-write Bengali SEO copy where English already
+1. **Curated reading journey:** reconcile the 27 authored destination differences and the duplicate, with natural
+   Bengali anchors and a useful prerequisite/next-step order.
+2. **Editorial parity:** align the four primary CTA choices, purpose-write Bengali SEO copy where English already
    has it, and review native Bengali section coverage and qualifications by topic. A matched provider or count is
    not a language-quality review.
+3. **Remaining rendering features:** reconcile body formatting and other independently rendered article/sidebar
+   features against the owner's complete-experience requirement.
 
 Keep each implementation bounded to one feature/topic, verify the affected EN/BN outputs, then commit and push.
-The immediate next repair is the shared article-rendering layer.
+The immediate next step is curated-link reconciliation.
 
 ## First-repair verification
 
@@ -261,3 +281,23 @@ The immediate next repair is the shared article-rendering layer.
   correct Article type, language, dates, visible-H1 alignment, expected FAQs/steps, and locale-correct canonicals.
 
 These are local build/browser results. Search-engine processing and deployment status are separate observations.
+
+## Shared-presentation repair verification — 5 November 2026
+
+- `npm run lint`, `npm run build`, `npm run verify:build` — passed; **468 checks**, with 133 routes per locale.
+- Twelve relevant suites passed: DIY Umrah, Nusuk, stopover, hotel/rail, flight strategy, elderly travellers,
+  women's Umrah, sharing/citations, sitemaps, Journey Help, Tawaf/Sa'i and Hajj rites.
+- All **106 saved documents and 106 React fixtures** were parsed with the browser DOM parser. Headers, canonical
+  dates, planning lists and ordered localized related cards matched their corresponding React/static surfaces.
+- **24 running-app layout cases:** DIY Umrah, hotel-area comparison, dual-currency endorsement and the scheduled
+  Cox's Bazar guide; English/Bengali at 390, 768 and 1280 CSS pixels. **Eight no-JavaScript cases:** DIY Umrah and
+  hotel-area comparison in both locales at 390 and 1280 pixels. Checked in headless Microsoft Edge via Playwright.
+- The scoped shared components had no horizontal overflow or clipped labels. Checked link targets were at least
+  **44px** high; the lowest measured text contrast was **7.22:1**. Keyboard focus and reduced-motion behavior passed.
+- Native Ctrl-click opened the localized related article in a new tab and retained the source page. Normal
+  related-card navigation, the Bengali currency-converter link and an experience link's region/city filters passed.
+- Local-only diagnostic fixtures were moved outside `dist/` after inspection. The build's optional IndexNow
+  request failed at the network step; these checks do not establish indexing or deployment.
+
+This verifies the bounded shared-presentation repair. The open editorial and remaining rendering findings above
+still define the work needed for full article parity.

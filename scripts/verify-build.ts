@@ -1,4 +1,5 @@
 import { getTravellerCheck } from "../src/utils/travellerChecks";
+import { checkArticlePresentation } from "./articlePresentationChecks";
 import { prepareSiteSearchIndex, searchSite, type SiteSearchEntry } from "../src/utils/siteSearch";
 import { HOTEL_GUIDE_DESTINATIONS } from "../src/data/hotelGuideDestinations";
 import { DESTINATION_HERO_IMAGES } from "../src/data/destinationHeroImages";
@@ -7522,6 +7523,8 @@ check(
   `content contract: the static builder emits affiliate next steps at scale, not for a token page (${affiliateRenderedSlugs.size} posts)`
 );
 
+checkArticlePresentation(DIST_DIR, check);
+
 // Non-blocking debt report. Printed on every run so the numbers in §10 of the
 // standard are reproducible, but never counted as a pass.
 const contentDebt: string[] = [];
@@ -7544,14 +7547,10 @@ for (const post of BLOG_DATA) {
   const anchors = new Set([...bnHtml.matchAll(/href="(\/bn\/blog\/[^"]+)"/g)].map((match) => match[1]));
   if (anchors.size === 0) bnBare.push(post.id);
 }
-// Blocking, unlike the rest of this section. A Bengali page with no article
-// anchor is a dead end: the reader finishes the article and has nothing to read
-// next. It stayed invisible for months because the English page gets an
-// automatic related-guides list and the Bengali page does not - Bengali links
-// are authored, never inferred (AGENTS.md §2b) - so "the post has internal
-// links" was read off the English object and the Bengali page shipped bare.
-// On 2026-11-05 ten pages were in that state; each now carries hand-picked,
-// in-locale links, and this check keeps the eleventh from shipping.
+// Minimum next-reading guard retained from the 5 November link repair. The
+// shared presentation checks now also compare canonical recommendations and
+// each locale's complete declared planning links. Editorial destination parity
+// is still a separate review of the authored arrays.
 check(
   bnBare.length === 0,
   `content contract: every Bengali article page carries at least one in-locale article link [${bnBare
