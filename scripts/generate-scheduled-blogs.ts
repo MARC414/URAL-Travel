@@ -39,6 +39,7 @@ function toBlogMetadata(post: ScheduledBlogPost) {
     readTime: post.readTime,
     ...(post.inlineFigure ? { inlineFigure: post.inlineFigure } : {}),
     ...(post.references.length ? { references: post.references } : {}),
+    ...(post.affiliateCta ? { affiliateCTA: post.affiliateCta } : {}),
     internalLinks: post.internalLinksEn,
   };
 }
@@ -53,6 +54,7 @@ function toBengaliOverride(post: ScheduledBlogPost) {
     author: post.authorBn,
     readTime: post.readTimeBn,
     content: post.bengaliBody,
+    ...(post.affiliateCtaBn ? { affiliateCTA: post.affiliateCtaBn } : {}),
     internalLinks: post.internalLinksBn,
   };
 }
@@ -131,7 +133,7 @@ function generate(posts: ScheduledBlogPost[]): void {
   );
   writeIfChanged(
     path.join(OUTPUT_DIR, "scheduledBengaliBlogs.generated.ts"),
-    serializeModule("SCHEDULED_BENGALI_BLOG_OVERRIDES", bengaliOverrides, "Record<string, { title: string; summary: string; category: string; date: string; author: string; readTime: string; content: string; internalLinks: { text: string; path: string }[] }>"),
+    serializeModule("SCHEDULED_BENGALI_BLOG_OVERRIDES", bengaliOverrides, "Record<string, { title: string; summary: string; category: string; date: string; author: string; readTime: string; content: string; internalLinks: { text: string; path: string }[]; affiliateCTA?: { provider: string; headline: string; body: string } }>"),
   );
   writeIfChanged(
     path.join(OUTPUT_DIR, "scheduledBlogSeo.generated.ts"),

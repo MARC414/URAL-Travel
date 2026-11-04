@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
+import { AFFILIATE_LINKS } from "../src/components/AffiliatePartners";
 
 export const PUBLISH_TIME_ZONE = "Asia/Dhaka";
 export const DEFAULT_PUBLISH_HOUR = 9;
@@ -17,6 +18,22 @@ export interface ScheduledBlogReference {
 export interface ScheduledBlogLink {
   text: string;
   path: string;
+}
+
+/**
+ * The article-level affiliate next step, authored in the same file as the
+ * article it belongs to.
+ *
+ * Scheduled posts live in `content/blog/<slug>.md` and are compiled into
+ * `BLOG_DATA`, so a CTA declared only in `src/constants.ts` could never reach
+ * them. `provider` must be a real key in `AFFILIATE_LINKS`; the renderer
+ * resolves the URL through `resolvePartnerUrl`, so a paused programme falls back
+ * instead of shipping a dead link.
+ */
+export interface ScheduledBlogAffiliateCta {
+  provider: string;
+  headline: string;
+  body: string;
 }
 
 export interface ScheduledBlogPost {
@@ -59,6 +76,8 @@ export interface ScheduledBlogPost {
   references: ScheduledBlogReference[];
   internalLinksEn: ScheduledBlogLink[];
   internalLinksBn: ScheduledBlogLink[];
+  affiliateCta?: ScheduledBlogAffiliateCta;
+  affiliateCtaBn?: ScheduledBlogAffiliateCta;
   englishBody: string;
   bengaliBody: string;
   sourceFile: string;
@@ -68,6 +87,8 @@ const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."
 export const BLOG_DRAFTS_DIR = path.join(ROOT_DIR, "content", "blog");
 const BLOG_INDEX_FILE = path.join(ROOT_DIR, "src", "data", "blogIndex.ts");
 const IMAGE_DIMENSIONS_FILE = path.join(ROOT_DIR, "src", "utils", "imageAssets.ts");
+/** Real partner keys, so frontmatter cannot point a CTA at a partner we do not hold. */
+const partnerKeys = Object.keys(AFFILIATE_LINKS);
 
 function fail(file: string, message: string): never {
   throw new Error(`[Scheduled blogs] ${path.relative(ROOT_DIR, file)}: ${message}`);
@@ -124,6 +145,46 @@ function parseLinks(value: unknown, field: string, file: string): ScheduledBlogL
     }
     return { text: link.text.trim(), path: link.path.trim() };
   });
+}
+
+/**
+ * Parses the optional `<prefix>Provider` / `<prefix>Headline` / `<prefix>Body`
+ * triple. English is the required half; Bengali is all-or-nothing so a Bengali
+ * page can never inherit an English sentence into its own locale.
+ */
+function parseAffiliateCta(
+  data: Record<string, unknown>,
+  file: string,
+  options: { prefix: string; partnerKeys: string[]; required: boolean }
+): ScheduledBlogAffiliateCta | undefined {
+  const { prefix, partnerKeys, required } = options;
+  const provider = optionalString(data, `${prefix}Provider`, file);
+  const headline = optionalString(data, `${prefix}Headline`, file);
+  const body = optionalString(data, `${prefix}Body`, file);
+  const supplied = [provider, headline, body].filter(Boolean).length;
+
+  if (supplied === 0) {
+    if (required) {
+      return fail(
+        file,
+        `frontmatter must set ${prefix}Provider, ${prefix}Headline and ${prefix}Body together`
+      );
+    }
+    return undefined;
+  }
+  if (supplied < 3) {
+    return fail(
+      file,
+      `frontmatter must set ${prefix}Provider, ${prefix}Headline and ${prefix}Body together`
+    );
+  }
+  if (!partnerKeys.includes(provider as string)) {
+    return fail(
+      file,
+      `frontmatter field "${prefix}Provider" must be a known partner (${partnerKeys.join(", ")})`
+    );
+  }
+  return { provider: provider as string, headline: headline as string, body: body as string };
 }
 
 function parseReferences(value: unknown, file: string): ScheduledBlogReference[] {
@@ -296,6 +357,16 @@ function parsePost(file: string): ScheduledBlogPost {
     references: parseReferences(data.references, file),
     internalLinksEn: parseLinks(data.internalLinksEn, "internalLinksEn", file),
     internalLinksBn: parseLinks(data.internalLinksBn, "internalLinksBn", file),
+    affiliateCta: parseAffiliateCta(data, file, {
+      prefix: "affiliateCta",
+      partnerKeys,
+      required: false,
+    }),
+    affiliateCtaBn: parseAffiliateCta(data, file, {
+      prefix: "affiliateCtaBn",
+      partnerKeys,
+      required: false,
+    }),
     englishBody,
     bengaliBody,
     sourceFile: file,

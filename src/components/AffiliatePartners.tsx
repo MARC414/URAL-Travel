@@ -1124,6 +1124,33 @@ export const TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS: Record<string, Travelpayout
     disclosureBn:
       "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে বর্তমান যোগ্যতার শর্ত পূরণ করলে Travelpayouts আমাকে পুরস্কার দিতে পারে। এতে আপনার কোনো অতিরিক্ত ফি যোগ হয় না বা আপনার কমিশন কমে না।",
   },
+  // The article that documents this site's own experiment with the model. The
+  // placement belongs here because the reader has just read what the work
+  // involves; it is deliberately worded as "the platform this experiment runs
+  // on", never as an income promise, and it points back at the article's own
+  // caution rather than at the third-party reports quoted inside it.
+  "can-you-make-money-travel-affiliate-marketing-ural-experiment": {
+    badgeEn: "✈️ THE PLATFORM THIS EXPERIMENT RUNS ON",
+    badgeBn: "✈️ এই পরীক্ষাটি যে প্ল্যাটফর্মে চলছে",
+    headlineEn: "If you want to test the same model on your own site",
+    headlineBn: "আপনি যদি নিজের সাইটেই একই মডেল পরীক্ষা করতে চান",
+    bodyBeforeAnchorEn:
+      "Ural Travel's tracked partner links run through Travelpayouts. If you want to run a similar test yourself, you can ",
+    anchorTextEn: "join Travelpayouts through my referral link here",
+    bodyAfterAnchorEn:
+      " and read the programme terms before deciding. Judge it against what your own publishing can support — the income reports quoted above belong to other publishers, and joining guarantees nothing.",
+    bodyBeforeAnchorBn:
+      "Ural Travel-এর ট্র্যাক করা পার্টনার লিংকগুলো Travelpayouts দিয়ে চলে। আপনি যদি নিজেও এমন একটি পরীক্ষা চালাতে চান, তাহলে ",
+    anchorTextBn: "এখান থেকে আমার রেফারেল লিংকে Travelpayouts-এ যোগ দিতে পারেন",
+    bodyAfterAnchorBn:
+      " — তবে সিদ্ধান্তের আগে প্রোগ্রামের শর্ত পড়ে নিন। আপনার নিজের প্রকাশ কতটা সামলাতে পারবে, সেটা দিয়ে বিচার করুন — উপরে উল্লেখ করা আয়ের রিপোর্টগুলো অন্য প্রকাশকদের, আর যোগ দিলে কিছুই নিশ্চিত হয় না।",
+    buttonLabelEn: "Explore Travelpayouts",
+    buttonLabelBn: "Travelpayouts দেখুন",
+    disclosureEn:
+      "Transparency: this is my referral link. If you join through it and meet the programme's conditions, Travelpayouts may pay me a referral reward at no extra cost to you. It does not reduce your own earnings and it does not promise you any income.",
+    disclosureBn:
+      "স্বচ্ছতার জন্য: এটি আমার রেফারেল লিংক। এই লিংক দিয়ে যোগ দিয়ে প্রোগ্রামের শর্ত পূরণ করলে Travelpayouts আমাকে একটি রেফারেল পুরস্কার দিতে পারে — আপনার কোনো অতিরিক্ত খরচ ছাড়াই। এতে আপনার নিজের আয় কমে না, আর আপনার কোনো আয়ের নিশ্চয়তাও এটি দেয় না।",
+  },
 };
 
 export function TravelpayoutsReferralCallout({

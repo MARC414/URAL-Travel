@@ -61,6 +61,12 @@ internalLinksEn:
     path: /visa/nepal-visa
   - text: "Search live flight options and compare fares"
     path: /flights
+affiliateCtaProvider: aviasales
+affiliateCtaHeadline: "Test the KTM–DAC–CXB connection against live fares"
+affiliateCtaBody: "No direct Kathmandu–Cox's Bazar service was found on our review date, so the honest check is the two-leg search: search KTM to CXB for your own dates and see whether a single priced itinerary is actually offered. Confirm one ticket or PNR, the baggage allowance and the connection terms before paying — a route on a map is not a seat for sale."
+affiliateCtaBnProvider: aviasales
+affiliateCtaBnHeadline: "লাইভ ভাড়ায় KTM–DAC–CXB সংযোগটি যাচাই করুন"
+affiliateCtaBnBody: "পর্যালোচনার তারিখে কাঠমান্ডু–কক্সবাজার সরাসরি কোনো ফ্লাইট পাওয়া যায়নি, তাই বাস্তব যাচাইটি দুই লেগের সার্চ: আপনার তারিখে KTM থেকে CXB সার্চ করে দেখুন আসলে একটানা ভাড়াসহ itinerary দেখানো হয় কি না। টাকা দেওয়ার আগে এক টিকিট/PNR, ব্যাগেজ ভাতা ও সংযোগের শর্ত নিশ্চিত করুন — মানচিত্রে রুট থাকা মানে বিক্রির জন্য সিট থাকা নয়।"
 internalLinksBn:
   - text: "ঢাকা–কাঠমান্ডু ফ্লাইট গাইড (বাংলাদেশ থেকে নেপাল)"
     path: /flights/dhaka-kathmandu

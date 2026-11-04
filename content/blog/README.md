@@ -38,6 +38,8 @@ This review gate keeps source documents, unverified claims, and drafts out of th
 
 The frontmatter fields `slug`, `status`, `title`, `titleBn`, `summary`, `summaryBn`, `category`, `categoryBn`, `author`, `authorBn`, `readTime`, and `readTimeBn` are required. `publishDate` is required only when status is `scheduled`. Optional fields include `updatedAt`, the localized SEO title/description, a cover image, localized alt text, AEO snippets, FAQ headings, references, and internal links. A post must have a validated cover image plus English and Bengali alt text before it can be marked `scheduled`. Reference URLs must use HTTPS.
 
+An article can also declare its own affiliate next step, so a scheduled post earns the same way a hand-written one does: `affiliateCtaProvider`, `affiliateCtaHeadline`, `affiliateCtaBody` for English, and the `affiliateCtaBn*` equivalents. The three keys must be supplied together, and `affiliateCtaProvider` must be a real key in `AFFILIATE_LINKS` (`src/components/AffiliatePartners.tsx`) — the build fails otherwise. The section renders in the static HTML as well as after hydration; the button label comes from `getAffiliateCtaButtonLabel()` and the disclosure is evergreen, so do not write a price, discount or end date into `affiliateCtaBody`. Leave the fields out if the article should carry no commercial next step.
+
 Split the article body with this exact marker on a line by itself:
 
 ```html

@@ -86,6 +86,12 @@ internalLinksEn:
     path: /blog/top-budget-family-destinations-from-dhaka
   - text: "Contact the URAL Dhaka desk to book in BDT (WhatsApp, bKash, Nagad)"
     path: /contact
+affiliateCtaProvider: aviasales
+affiliateCtaHeadline: "Check the live fare before you fix the budget"
+affiliateCtaBody: "Every flight figure in this guide is a planning number from a dated check, not a quote. Search the dates you actually want and use the live total — baggage and taxes included — in place of the estimate before you commit."
+affiliateCtaBnProvider: aviasales
+affiliateCtaBnHeadline: "বাজেট চূড়ান্ত করার আগে লাইভ ভাড়া দেখে নিন"
+affiliateCtaBnBody: "এই গাইডের প্রতিটি ফ্লাইট-অঙ্ক একটি নির্দিষ্ট তারিখে দেখা পরিকল্পনার সংখ্যা, কোনো কোট নয়। আপনি যে তারিখে যেতে চান সেটি সার্চ করে ব্যাগেজ ও ট্যাক্সসহ লাইভ মোট দাম দেখে নিন, তারপর আনুমানিক অঙ্কের জায়গায় বসিয়ে বাজেট চূড়ান্ত করুন।"
 internalLinksBn:
   - text: "লাইভ ফ্লাইট অপশন সার্চ ও ভাড়া তুলনা"
     path: /flights
