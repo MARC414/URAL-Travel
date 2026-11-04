@@ -3213,8 +3213,8 @@ if (sitemap) {
   for (const hotelId of KLOOK_HOTEL_IDS) {
     const enHtml = read(path.join(DIST_DIR, "hotels", `${hotelId}.html`)) ?? "";
     const bnHtml = read(path.join(DIST_DIR, "bn", "hotels", `${hotelId}.html`)) ?? "";
-    const enSection = sectionStartingAt(enHtml, 'id="klook-hotel-check"');
-    const bnSection = sectionStartingAt(bnHtml, "Klook-এর হোটেল তালিকা সার্চ করুন");
+    const enSection = sectionStartingAt(enHtml, 'id="hotel-klook-check"');
+    const bnSection = sectionStartingAt(bnHtml, 'id="hotel-klook-check"');
     const enOk =
       enSection.includes("Search Klook’s hotel collection") &&
       enSection.includes("general hotel collection") &&
@@ -3239,14 +3239,21 @@ if (sitemap) {
     const noUntrackedLandingPage = !(enHtml + bnHtml).includes("klook.com/tetris");
     const isCurated = (KLOOK_CURATED_HOTEL_PICKS[hotelId]?.length ?? 0) > 0;
     const noInventedPicks = isCurated || !/klook-hotel-picks|hotels%2Fdetail%2F/.test(enSection + bnSection);
-    if (!enOk || !bnOk || !noStaleRate || !noUntrackedLandingPage || !noInventedPicks) {
+    const navigationIntact = [enHtml, bnHtml].every((html) =>
+      html.includes('id="hotel-curated-stays"') &&
+      html.includes('href="#hotel-curated-stays"') &&
+      html.includes('aria-labelledby="klook-hotel-check"') &&
+      html.includes('id="klook-hotel-check"') &&
+      html.split('id="hotel-klook-check"').length === 2
+    );
+    if (!enOk || !bnOk || !noStaleRate || !noUntrackedLandingPage || !noInventedPicks || !navigationIntact) {
       klookHotelHtmlIssues.push(hotelId);
       console.error(`[VERIFY] Klook hotel module incomplete or stale: ${hotelId}`);
     }
   }
   check(
     klookHotelHtmlIssues.length === 0,
-    `all ${KLOOK_HOTEL_IDS.length} registered hotel guides carry the transparent EN/BN Klook collection handoff, with no invented property picks on uncurated guides [${klookHotelHtmlIssues.join(", ")}]`
+    `all ${KLOOK_HOTEL_IDS.length} registered hotel guides carry the transparent EN/BN Klook handoff and working panel/checklist anchors, with no invented property picks on uncurated guides [${klookHotelHtmlIssues.join(", ")}]`
   );
 
   const unregisteredKlookPickGuides = Object.keys(KLOOK_CURATED_HOTEL_PICKS).filter(
@@ -3266,8 +3273,8 @@ if (sitemap) {
     const picks = KLOOK_CURATED_HOTEL_PICKS[hotelId] ?? [];
     const enHtml = read(path.join(DIST_DIR, "hotels", `${hotelId}.html`)) ?? "";
     const bnHtml = read(path.join(DIST_DIR, "bn", "hotels", `${hotelId}.html`)) ?? "";
-    const enSection = sectionStartingAt(enHtml, 'id="klook-hotel-check"');
-    const bnSection = sectionStartingAt(bnHtml, "Klook-এর হোটেল তালিকা সার্চ করুন");
+    const enSection = sectionStartingAt(enHtml, 'id="hotel-klook-check"');
+    const bnSection = sectionStartingAt(bnHtml, 'id="hotel-klook-check"');
     const missingEn = picks.filter((pick) => {
       const href = buildKlookHotelDetailLink(pick.hotelId, pick.subId).replace(/&/g, "&amp;");
       return (

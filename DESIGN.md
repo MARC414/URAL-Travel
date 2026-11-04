@@ -331,6 +331,43 @@ not used anywhere in this system.**
   1px border in the same colour, and the emoji that stood in for icons (💡 🔑 ⚠️ 🔎) became
   drawn Lucide icons at 14px. Emoji as an icon system is refused by this design system.
 
+### Hotel partner panel (Klook)
+
+- **Implementation:** `src/components/KlookHotelSpotlight.tsx` and
+  `src/styles/hotel-partner.css`. The stylesheet is imported by `src/index.css`
+  so the panel is styled before JavaScript runs. The component stays route-lazy.
+- **Three token layers:** existing `@theme` brand/type/spacing primitives feed
+  the semantic `--surface-inverse`, `--content-on-inverse-*`,
+  `--border-on-inverse-*` and `--accent-on-inverse` roles. Scoped
+  `--hotel-panel-*`, `--hotel-pick-*`, `--hotel-action-*` and
+  `--hotel-focus-ring` aliases control this component. Tune the role instead of
+  scattering palette values across the English, Bengali and static renderers.
+- **Reading hierarchy:** heading 20–24px; shortlist heading 18px; hotel names,
+  area-fit text and actions 14px; metadata, source notes and disclosures 12px.
+  Names wrap in full. Labels use Inter/Noto Sans Bengali; Bengali labels have
+  normal tracking and headings use relaxed line height.
+- **Layout:** the navy panel has a quiet edge and 16px/24px padding. Area groups
+  have named list headings. Pick grids respond to available width; single picks
+  fill their row. Links are at least 56px high; the two main actions are at least
+  44px high and wrap onto full-width rows on narrow panels.
+
+| State | Property row / secondary action | Primary action |
+|---|---|---|
+| Rest | Raised navy surface / transparent action, light text | Gold fill, navy text |
+| Hover | Lighter surface, gold border; property name underlined | Gold-dark fill |
+| Keyboard focus | 2px white outline, 3px offset | Same visible outline |
+| Pressed | Stronger raised surface, gold border | Gold-dark fill, light border |
+| Programme/link paused | Panel omitted | Panel omitted |
+
+Feedback changes colour rather than moving content. Touch devices avoid sticky
+hover styling; the shared reduced-motion rule suppresses transitions.
+
+`scripts/prerender.ts` renders this same component with `disclosure="evergreen"`.
+The interactive view may show the current, expiry-gated commission disclosure;
+cached HTML always uses the evergreen wording. Both share the visual roles,
+property URLs, accessible link names, source note and navigation targets. A
+design edit does not update the feed's checked date or establish new hotel facts.
+
 ### Inputs / Fields
 - **Style:** white fill, `border-default` `#CBD5E1`, `rounded-md`/`rounded-lg`.
 - **Focus:** visible ring in brand gold or navy at 2–3px with offset. Never remove outline
