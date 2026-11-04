@@ -24,7 +24,7 @@ site repairs or live publication outside the current owner task.
 
 **URAL (উড়াল)** is an editorial **Travel Intelligence Platform** designed primarily for Bangladeshi travelers while serving global visitors worldwide.
 - **Core Capabilities:**
-  - Global flight search and hotel-partner handoffs using Travelpayouts White Label (`wl_id=22462`), Aviasales, and Kiwi.com (`marker=675992`, project `trs=589561`). The current audit records limitations in the hotel handoff.
+  - Global flight search and hotel-partner handoffs using Travelpayouts White Label **Page 24232** at `https://flights.uraltravel.co.uk/`, Aviasales, and Kiwi.com (`marker=675992`, project `trs=589561`). Provider activation evidence is recorded in [the hosted-search reference](docs/04-monetization/FLIGHT-WHITE-LABEL.md).
   - Step-by-step Tourist, Medical, and Umrah Visa Checklists (`Nepal`, `Thailand`, `Malaysia`, `UAE/Dubai`, `Singapore`, `Maldives`, `Schengen`, `Saudi Arabia`).
   - Bilingual Support (`en` English & `bn` Bengali) with dynamic `<html lang>` synchronization.
   - Multi-Currency Display (`BDT`, `USD`, `EUR`, `GBP`, `SAR`, `AED`). The inspected widget conversions use fixed rates; do not describe them as live FX.
@@ -93,15 +93,18 @@ Both apply to every AI tool and contributor. Social tasks also use the current a
 
 1. **Global Flight Scanner (`src/components/TravelpayoutsWidget.jsx`)**:
    - Defaults to `Dhaka (DAC)` for convenience, while supporting **any global origin or destination city/airport** via a 65+ international airport directory plus live autocomplete from `https://autocomplete.travelpayouts.com/places2`.
-   - Verified Bangladesh departure routes render the curated benchmark schedule table + URAL White-Label toggle.
-   - Unlisted global routes (e.g., `London → New York`, `Dhaka → Rome`, `Toronto → Istanbul`) **never display fake flight schedules**; instead, they automatically open the live **URAL White-Label Search Engine** (`public/travelpayouts-wl.html`) and provide one-click partner buttons for Aviasales Global (`marker=675992`) and Kiwi.com Multi-City.
+   - The form hands off route, departure/return dates, trip type, cabin, adult count, currency and language to the hosted Page through `src/utils/flightSearch.ts`. Children and infants can be added on the provider page.
+   - Unlisted global routes (e.g., `London → New York`, `Dhaka → Rome`, `Toronto → Istanbul`) **must never display fake flight schedules**. Hosted search opens in a top-level tab. The optional legacy `showInlineResults` benchmark view supplies hosted/Aviasales/Kiwi handoffs; it no longer embeds a white-label engine.
 2. **Global Hotel & Flight Custom Widget (`src/components/TravelpayoutsCustomWidget.tsx`)**:
    - Features the **Explore Popular Cities** 12-hub selector (`Makkah`, `Paris`, `Dubai`, `Madinah`, `Bangkok`, `Kuala Lumpur`, `London`, `Singapore`, `Maldives`, `Istanbul`, `Kathmandu`, `New York`) above the global search bar.
-   - Supports any worldwide city or hotel query with live Travelpayouts autocomplete, check-in/check-out date pickers, guest counter, and 6-currency selector.
-   - Opens the Klook partner link (`AFFILIATE_LINKS.klook`); the audited handoff does not carry city/date/guest selections. KKday stay search lives on its own `/kkday-hotels` page (`AFFILIATE_LINKS.kkday`).
-3. **Standalone & Embedded URAL White Label (`public/travelpayouts-wl.html`)**:
-   - Uses Travelpayouts White Label `wl_id=22462` (`tpembd.com/wl_web/main.js?wl_id=22462`).
-   - When opened in a new tab with `?standalone=1`, displays the full URAL Travel Intelligence Navy (`#0B192C`) & Gold (`#F6B73C`) header, navigation bar, and footer. When embedded inside an iframe, hides the standalone chrome and posts height updates to the parent window.
+   - Flight mode supports global airport autocomplete, departure date and the 6-currency selector.
+   - Hotel mode opens registry-based Klook/KKday hotel collections (`klookHotels` / `kkdayHotels`). Its generic handoff does not carry city/date/guest selections; visitors enter those on the partner site. `/kkday-hotels` retains the separate KKday hotel page.
+   - Its compact flight form sends a one-way Economy search for one adult; that intent is visible beside the handoff. It does not invent a return date from former hotel state.
+3. **Hosted URAL White Label and legacy compatibility**:
+   - **Page 24232** is configured in Travelpayouts for `flights.uraltravel.co.uk`, CNAME `whitelabel.travelpayouts.com`, **DNS only**, TTL **Auto**. Travelpayouts provides the engine and TLS. The main website does not load a `wl_web` script for this Page.
+   - `src/utils/flightSearch.ts` owns the hosted URL and native `flightSearch` encoding. The supported handoff preferences are `currency` and `locale`; Bengali uses `locale=bn`, not a `/bn` path on the provider host.
+   - `functions/_middleware.js` redirects old `/travelpayouts-wl.html` and `/travelpayouts-wl` bookmarks while preserving their search code and preferences. Both paths must stay in `public/_routes.json`.
+   - `public/travelpayouts-wl.html` is a small **noindex compatibility bridge** for static previews and cached iframes. It supplies a top-level link when framed. Do not restore widget 22462, iframe messaging, cookie interception or patched provider responses.
 
 ---
 

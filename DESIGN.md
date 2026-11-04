@@ -424,6 +424,22 @@ establish new hotel facts.
   React route. These checks establish rendering fidelity; the authored link
   destinations and Bengali prose still require editorial review.
 
+### Hosted flight-search handoff
+
+- The existing flight controls retain their layout and brand styling. Their primary
+  native anchor opens `flights.uraltravel.co.uk` in a new tab, with a visible handoff
+  note and sponsored link attributes. Keyboard form submission opens the same URL.
+- The main scanner names its count **Adults** because that is what its search code
+  sends. It carries the selected cabin and includes a return only for round-trips.
+  The compact form explicitly states **one-way, one adult, Economy**.
+- The compact form uses its own container width: stacked on narrow panels, two
+  columns from 36rem and a single search row from 56rem. Its action must not squeeze
+  into a two-column span based only on the viewport width.
+- Incomplete route/date inputs explain what needs correction. Validity checks run
+  before the primary handoff. Children and infants are added on the provider page.
+- The hosted Page is not an iframe. The noindex legacy bridge gives cached frames
+  an explicit new-tab link and keeps the flight-planner return link localized.
+
 ### Inputs / Fields
 - **Style:** white fill, `border-default` `#CBD5E1`, `rounded-md`/`rounded-lg`.
 - **Focus:** visible ring in brand gold or navy at 2–3px with offset. Never remove outline

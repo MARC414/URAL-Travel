@@ -54,6 +54,9 @@ jobs:
       - name: Verify sitemap validation guards
         run: npm run test:sitemaps
 
+      - name: Verify hosted flight-search handoffs and legacy redirects
+        run: npm run test:flight-search
+
       - name: Verify quote-based Umrah budget
         run: npm run test:umrah-budget
 

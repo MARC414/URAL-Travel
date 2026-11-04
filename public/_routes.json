@@ -2,6 +2,8 @@
   "version": 1,
   "include": [
     "/api/*",
+    "/travelpayouts-wl.html",
+    "/travelpayouts-wl",
     "/flights",
     "/hotels",
     "/visa",

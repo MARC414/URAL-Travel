@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FLIGHT_WHITE_LABEL } from "../utils/flightSearch";
 import { 
   CheckCircle2, 
   ShieldCheck, 
@@ -22,7 +23,7 @@ export function TravelpayoutsOnboarding() {
   const [checklistItems, setChecklistItems] = useState([
     { id: "dashboard", category: "Account Setup", title: "Review Dashboard Snapshot", desc: "Monitor live clicks, conversions, potential earnings, and top performing programs in one central place.", timestamp: "0:58", completed: false },
     { id: "programs", category: "Account Setup", title: "Connect Major Partner Programs", desc: "Review each partner program’s current eligibility, commission, cookie and payment terms in your account before publishing a claim.", timestamp: "1:18", completed: false },
-    { id: "widgets", category: "Monetization", title: "Configure Custom Search Widgets", desc: "Embed responsive widgets like the Flight and Hotel search tools on your main routes to capture search intent.", timestamp: "1:53", completed: false },
+    { id: "widgets", category: "Monetization", title: "Verify the hosted flight-search handoff", desc: `Flight forms open ${FLIGHT_WHITE_LABEL.origin} (Page ${FLIGHT_WHITE_LABEL.id}). Check HTTPS, route, dates, cabin, adults, language and currency on the provider page.`, timestamp: "1:53", completed: false },
     { id: "deeplinks", category: "Monetization", title: "Verify partner placement-ID support", desc: "URAL records stable first-party link-placement labels. Do not append a Travelpayouts SubID unless the partner program and reporting support it and the account setup is verified.", timestamp: "3:15", completed: false },
     { id: "links-props", category: "Best Practices", title: "Configure Link Attributes (SEO Safety)", desc: "Ensure all manual affiliate outbound links are styled as sponsored, nofollow, and open in a new tab.", timestamp: "3:53", completed: false },
     { id: "drive-script", category: "Automation", title: "Review third-party scripts before enabling", desc: "Verify current product documentation, consent behavior, performance and affiliate-link changes before installing any monetization script.", timestamp: "2:47", completed: false },

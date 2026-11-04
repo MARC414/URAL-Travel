@@ -60,8 +60,8 @@ Three product commitments:
 
 ## Operating Context
 
-- Affiliate monetisation through Travelpayouts (white label `wl_id=22462`, `marker=675992`,
-  project `trs=589561`) plus Aviasales, Kiwi.com, Klook, Tiqets, AirHelp, KKday,
+- Affiliate monetisation through Travelpayouts (hosted white-label **Page 24232** at
+  `flights.uraltravel.co.uk`, `marker=675992`, project `trs=589561`) plus Aviasales, Kiwi.com, Klook, Tiqets, AirHelp, KKday,
   KiwiTaxi, Welcome Pickups, Airalo, QEEQ and related partners. Partner links must use
   the registry in `src/components/AffiliatePartners.tsx`; the audit identifies bypassing embeds.
 - Time-limited partner promos are gated on an expiry date and sanitised in blog body text
@@ -74,8 +74,10 @@ Three product commitments:
 ## Capabilities and Constraints
 
 **Confirmed capabilities**
-- Global flight search (curated Dhaka benchmarks + live white-label search) and hotel-partner
+- Global flight search (curated Dhaka benchmarks + hosted white-label handoffs) and hotel-partner
   handoffs. The audited generic hotel link does not transmit the selected city, dates or guests.
+  The [hosted-search reference](docs/04-monetization/FLIGHT-WHITE-LABEL.md) records configuration
+  and provider-side activation evidence separately from website build checks.
 - Step-by-step visa checklists for Nepal, Thailand, Malaysia, UAE/Dubai, Singapore,
   Maldives, Schengen and Saudi Arabia (tourist, medical, and Umrah).
 - Destination guides, trip-budget guides, interactive tools, Hajj/Umrah preparation.

@@ -308,7 +308,7 @@ That builds on current content. It should be distinguished from UK-passport Umra
 | Correct campaign URLs and claims | Every campaign destination works and matches the post's promise. |
 | Repair the main hotel handoff | Its behavior matches the fields and CTA shown to the visitor. |
 
-Current identifiers are marker **675992**, project **589561**, and white label **22462**. Working redirects alone do not establish programme approval or earnings.
+The identifiers at this audit were marker **675992**, project **589561**, and white label **22462**. **5 November 2026 update:** after the owner deleted the old widget, the replacement is hosted **Page 24232** at `flights.uraltravel.co.uk`; the marker and project were confirmed in the authenticated dashboard. [Configuration and activation evidence](docs/04-monetization/FLIGHT-WHITE-LABEL.md) records the provider certificate check. Working redirects alone do not establish programme approval or earnings.
 
 ### P1 — Run the 30-day Bangladesh Umrah cycle
 

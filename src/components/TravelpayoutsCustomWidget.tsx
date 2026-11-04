@@ -14,6 +14,7 @@ import {
   MicOff,
 } from "lucide-react";
 import { AFFILIATE_LINKS, AFFILIATE_OFFER_REGISTRY, resolvePartnerUrl } from "./AffiliatePartners";
+import { buildFlightSearchCode, buildWhiteLabelUrl } from "../utils/flightSearch";
 
 interface TravelpayoutsCustomWidgetProps {
   initialTab?: "flights" | "hotels";
@@ -104,15 +105,6 @@ function extractIataCode(placeStr: string, fallback = "KTM"): string {
   );
   if (found) return found.code;
   return fallback;
-}
-
-function buildSearchCode(origCode: string, destCode: string, depIso: string, retIso: string, pax: number) {
-  const parseDdMm = (iso: string) => {
-    const parts = (iso || "").split("-");
-    if (parts.length === 3) return `${parts[2]}${parts[1]}`;
-    return "1510";
-  };
-  return `${origCode}${parseDdMm(depIso)}${destCode}${parseDdMm(retIso)}${Math.max(1, Math.min(9, pax))}`;
 }
 
 function getFlightOptions(fromCity: string, toCity: string) {
@@ -223,8 +215,6 @@ export function TravelpayoutsCustomWidget({
   const [toCity, setToCity] = useState(initialTo);
   const [hotelCity, setHotelCity] = useState(initialHotelCity);
   const [date, setDate] = useState(() => getDefaultDateIso(14));
-  const [checkOutDate, setCheckOutDate] = useState(() => getDefaultDateIso(18));
-  const [travelers, setTravelers] = useState(2);
   const [currency, setCurrency] = useState<CurrencyCode>("BDT");
   const [isSearching, setIsSearching] = useState(false);
   const [searchUpdatedCount, setSearchUpdatedCount] = useState(0);
@@ -461,14 +451,14 @@ export function TravelpayoutsCustomWidget({
   const origCode = useMemo(() => extractIataCode(fromCity, "DAC"), [fromCity]);
   const destCode = useMemo(() => extractIataCode(toCity, "KTM"), [toCity]);
   const searchCode = useMemo(
-    () => buildSearchCode(origCode, destCode, date, checkOutDate, travelers),
-    [origCode, destCode, date, checkOutDate, travelers]
+    // This compact form only collects departure; do not invent a return trip.
+    () => buildFlightSearchCode({ origin: origCode, destination: destCode, departureDate: date, adults: 1 }),
+    [origCode, destCode, date]
   );
 
   const aviasalesDeepUrl = `https://www.aviasales.com/search/${searchCode}?marker=${MARKER_ID}&currency=${currency}`;
-  // This portal is flight-only (the shell explicitly hides hotels), so never
-  // derive its airport destination from the hotel city field.
-  const uralFlightWlDeepUrl = `/travelpayouts-wl.html?origin=${origCode}&destination=${destCode}&flightSearch=${searchCode}&currency=${currency}&standalone=1`;
+  // A flight handoff always uses the flight fields, not the hotel-city selection.
+  const uralFlightWlDeepUrl = buildWhiteLabelUrl({ flightSearch: searchCode, currency, locale: isBn ? "bn" : "en" });
   const isKlookHotelsActive =
     AFFILIATE_OFFER_REGISTRY.klook.status === "active" &&
     AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active";
@@ -502,6 +492,8 @@ export function TravelpayoutsCustomWidget({
         setIsSearching(false);
         setSearchUpdatedCount((c) => c + 1);
       }, 280);
+    } else if (searchTab === "flights" && searchCode) {
+      window.open(uralFlightWlDeepUrl, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -509,7 +501,7 @@ export function TravelpayoutsCustomWidget({
     <div
       ref={wrapperRef}
       id="travelpayouts-affiliate-block"
-      className="bg-white rounded-2xl shadow-[0_14px_34px_-10px_rgba(11,25,44,0.18)] border border-slate-200/90 overflow-visible my-2 text-slate-900"
+      className="@container bg-white rounded-2xl shadow-[0_14px_34px_-10px_rgba(11,25,44,0.18)] border border-slate-200/90 overflow-visible my-2 text-slate-900"
     >
       {/* Widget Header / Segmented Control & Global Currency Switcher */}
       <div className="bg-brand-navy px-4 py-3 sm:px-6 text-white flex flex-wrap items-center justify-between gap-3 rounded-t-2xl border-b border-slate-800">
@@ -663,10 +655,11 @@ export function TravelpayoutsCustomWidget({
         }`}
       >
         <form onSubmit={handleSearch}>
+          <button type="submit" hidden>{isBn ? "ফ্লাইট খুঁজুন" : "Search Flights"}</button>
           {searchTab === "flights" ? (
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-stretch bg-slate-50/80 p-2 rounded-2xl border border-slate-200/90 shadow-inner">
+            <div className="grid grid-cols-1 @xl:grid-cols-2 @4xl:grid-cols-12 gap-2.5 items-stretch bg-slate-50/80 p-2 rounded-2xl border border-slate-200/90 shadow-inner">
               {/* Departure Airport Global Autocomplete */}
-              <div className="md:col-span-4 relative">
+              <div className="@4xl:col-span-4 relative">
                 <div className="h-[68px] bg-white border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-all duration-200 focus-within:border-[#F6B73C] focus-within:ring-3 focus-within:ring-[#F6B73C]/20 focus-within:scale-[1.01] focus-within:shadow-md">
                   <label
                     htmlFor={fromAirportId}
@@ -677,6 +670,7 @@ export function TravelpayoutsCustomWidget({
                   <input
                     id={fromAirportId}
                     type="text"
+                    required
                     value={fromCity}
                     placeholder={isBn ? "শহর বা বিমানবন্দর (যেমন Dhaka, London)" : "City or airport (e.g. Dhaka, London)"}
                     onFocus={() => setActiveDropdown("from")}
@@ -718,7 +712,7 @@ export function TravelpayoutsCustomWidget({
               </div>
 
               {/* Destination Airport Global Autocomplete */}
-              <div className="md:col-span-4 relative">
+              <div className="@4xl:col-span-4 relative">
                 <div className="h-[68px] bg-white border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-all duration-200 focus-within:border-[#F6B73C] focus-within:ring-3 focus-within:ring-[#F6B73C]/20 focus-within:scale-[1.01] focus-within:shadow-md">
                   <div className="flex items-center justify-between">
                     <label
@@ -747,6 +741,7 @@ export function TravelpayoutsCustomWidget({
                   <input
                     id={toAirportId}
                     type="text"
+                    required
                     value={toCity}
                     placeholder={isBn ? "গন্তব্য (যেমন Bangkok, Rome, JFK)" : "Destination (e.g. Bangkok, Rome, JFK)"}
                     onFocus={() => setActiveDropdown("to")}
@@ -787,7 +782,7 @@ export function TravelpayoutsCustomWidget({
                 )}
               </div>
 
-              <div className="md:col-span-2 h-[68px] bg-white border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-all duration-200 focus-within:border-[#F6B73C] focus-within:ring-3 focus-within:ring-[#F6B73C]/20 focus-within:scale-[1.01] focus-within:shadow-md">
+              <div className="@4xl:col-span-2 h-[68px] bg-white border border-slate-200/90 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-all duration-200 focus-within:border-[#F6B73C] focus-within:ring-3 focus-within:ring-[#F6B73C]/20 focus-within:scale-[1.01] focus-within:shadow-md">
                 <label
                   htmlFor={flightDateId}
                   className="text-[11px] font-semibold text-slate-500"
@@ -797,6 +792,8 @@ export function TravelpayoutsCustomWidget({
                 <input
                   id={flightDateId}
                   type="date"
+                  required
+                  min={getDefaultDateIso(0)}
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
                   className="w-full bg-transparent text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
@@ -806,14 +803,21 @@ export function TravelpayoutsCustomWidget({
                 </span>
               </div>
 
-              <div className="md:col-span-2 flex">
+              <div className="@4xl:col-span-2 flex">
                 <a
                   id="btn-search-flights-submit"
-                  href={uralFlightWlDeepUrl}
+                  href={searchCode ? uralFlightWlDeepUrl : undefined}
                   target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setActiveDropdown(null)}
-                  className="w-full h-[68px] bg-[#F6B73C] hover:bg-[#f5ad24] active:scale-[0.98] text-brand-navy rounded-xl text-sm font-black transition-transform flex flex-col items-center justify-center gap-0.5 cursor-pointer shadow-md border border-amber-400/80"
+                  rel="noopener noreferrer sponsored"
+                  aria-disabled={!searchCode}
+                  onClick={(event) => {
+                    if (!searchCode || !event.currentTarget.closest("form")?.reportValidity()) {
+                      event.preventDefault();
+                      return;
+                    }
+                    setActiveDropdown(null);
+                  }}
+                  className="w-full h-[68px] bg-[#F6B73C] hover:bg-[#f5ad24] active:scale-[0.98] text-brand-navy rounded-xl text-sm font-black transition-transform flex flex-col items-center justify-center gap-0.5 cursor-pointer shadow-md border border-amber-400/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy focus-visible:ring-offset-2"
                 >
                   <div className="flex items-center gap-1.5">
                     <Search size={16} />
@@ -919,6 +923,13 @@ export function TravelpayoutsCustomWidget({
           <div className="mt-4 border-t border-slate-100 pt-3.5 text-[11px] text-slate-500">
             {searchTab === "flights" && (
               <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1">
+                <p className="w-full text-xs leading-relaxed text-slate-600" role={!searchCode ? "status" : undefined}>
+                  {!searchCode
+                    ? isBn ? "আলাদা দুটি বিমানবন্দর ও সঠিক যাত্রার তারিখ বেছে নিন।" : "Choose two different airports and a valid departure date."
+                    : isBn
+                      ? "ওয়ান-ওয়ে · ১ জন প্রাপ্তবয়স্ক · Economy। flights.uraltravel.co.uk নতুন ট্যাবে খুলবে; সেখানে ফেরার তারিখ ও যাত্রী পরিবর্তন করতে পারবেন।"
+                      : "One-way · 1 adult · Economy. Opens flights.uraltravel.co.uk in a new tab; adjust passengers and add a return there."}
+                </p>
                 <span className="inline-flex items-center gap-1 font-semibold text-slate-700">
                   <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
                   {isBn
@@ -989,7 +1000,7 @@ export function TravelpayoutsCustomWidget({
                     <a
                       href={uralFlightWlDeepUrl}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener noreferrer sponsored"
                       className="inline-flex items-center gap-1 font-semibold text-slate-600 hover:text-brand-navy px-2 py-1 rounded-lg transition-colors"
                     >
                       <span>{isBn ? "URAL-এর পূর্ণাঙ্গ ফ্লাইট সার্চ খুলুন" : "Open URAL full flight search"}</span>
@@ -1064,7 +1075,7 @@ export function TravelpayoutsCustomWidget({
                   <a
                     href={uralFlightWlDeepUrl}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener noreferrer sponsored"
                     className="inline-flex items-center gap-1.5 bg-[#07C369] hover:bg-[#06ad5d] text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer"
                   >
                     <span>{isBn ? 'লাইভ টিকিট সার্চ' : 'Search Live Fares'}</span>
@@ -1220,7 +1231,9 @@ export function TravelpayoutsCustomWidget({
               </h4>
               {searchTab === "flights" && (
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  {`Open live global flight search results for ${fromCity} to ${toCity} on ${date} in ${currency} via URAL Branded White-Label (#22462) or Aviasales Global (#${MARKER_ID}).`}
+                  {isBn
+                    ? `${fromCity} থেকে ${toCity}, ${date}: URAL-এর ফ্লাইট সার্চ সাইট বা Aviasales-এ বর্তমান ভাড়া ও শর্ত তুলনা করুন।`
+                    : `Compare current fares and terms for ${fromCity} to ${toCity} on ${date} through URAL’s flight site or Aviasales.`}
                 </p>
               )}
               <div className="flex flex-wrap items-center gap-2.5 pt-1">
@@ -1252,7 +1265,7 @@ export function TravelpayoutsCustomWidget({
                     <a
                       href={uralFlightWlDeepUrl}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener noreferrer sponsored"
                       className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <span>{isBn ? 'লাইভ ফ্লাইট সার্চ' : 'Search Live Flights'}</span>
@@ -1287,7 +1300,7 @@ export function TravelpayoutsCustomWidget({
                 <a
                   href={uralFlightWlDeepUrl}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer sponsored"
                   className="bg-[#07C369] hover:bg-[#06ad5d] text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <span>{isBn ? "লাইভ ফ্লাইট সার্চ" : "Search current flights"}</span>

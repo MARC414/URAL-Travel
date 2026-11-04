@@ -15,7 +15,7 @@ URAL's model is editorial travel intelligence with affiliate referrals and a hum
 - `src/components/AffiliatePartners.tsx` owns the canonical partner registry, fallback rules and promotion-expiry helpers.
 - `src/components/KlookHotelOffers.tsx` owns the route-lazy Klook deep-link helpers and curated picks; keep them out of the eager registry module. `HOTELS_DATA` in `src/constants.ts` defines published hotel guides, not the search widget's city suggestions.
 - `src/utils/analytics.ts`, `index.html` and the published GTM container participate in measurement. The audit identifies gaps; a data-layer push alone is not proof of GA4 receipt.
-- `public/travelpayouts-wl.html` is the white-label implementation; `/api` delivery code is under `functions/api/`.
+- [Hosted flight search](FLIGHT-WHITE-LABEL.md) records Page 24232, DNS, native deep links and provider activation evidence. `src/utils/flightSearch.ts` owns the website handoff; `public/travelpayouts-wl.html` is only a legacy compatibility bridge. `/api` delivery code is under `functions/api/`.
 - [AGENTS.md](../../AGENTS.md) retains implementation conventions. Affiliate clicks, creator referrals, enquiries and approved commissions are distinct outcomes.
 
 ### Klook verification boundaries

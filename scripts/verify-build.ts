@@ -1,4 +1,5 @@
 import { getTravellerCheck } from "../src/utils/travellerChecks";
+import { FLIGHT_WHITE_LABEL } from "../src/utils/flightSearch";
 import { checkArticlePresentation } from "./articlePresentationChecks";
 import { prepareSiteSearchIndex, searchSite, type SiteSearchEntry } from "../src/utils/siteSearch";
 import { HOTEL_GUIDE_DESTINATIONS } from "../src/data/hotelGuideDestinations";
@@ -226,6 +227,7 @@ const escapedPartnerUrl = (partner: keyof typeof AFFILIATE_LINKS) =>
   resolvePartnerUrl(AFFILIATE_LINKS[partner]).replace(/&/g, "&amp;");
 check(
   !hotelModeWidgetHtml.includes("travelpayouts-wl.html") && !hotelModeWidgetBnHtml.includes("travelpayouts-wl.html") &&
+    !hotelModeWidgetHtml.includes(FLIGHT_WHITE_LABEL.origin) && !hotelModeWidgetBnHtml.includes(FLIGHT_WHITE_LABEL.origin) &&
     hotelModeWidgetHtml.includes(escapedPartnerUrl("klookHotels")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("klookHotels")) &&
     hotelModeWidgetHtml.includes(escapedPartnerUrl("kkdayHotels")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("kkdayHotels")) &&
     hotelModeWidgetHtml.includes(escapedPartnerUrl("goCity")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("goCity")) &&
@@ -263,10 +265,11 @@ check(
   "English and Bengali prerendered KKday hotel pages use the direct affiliate URL with safe new-tab attributes"
 );
 check(
-  flightModeWidgetHtml.includes('href="/travelpayouts-wl.html?origin=DAC&amp;destination=BKK&amp;flightSearch=') &&
+  flightModeWidgetHtml.includes(`href="${FLIGHT_WHITE_LABEL.origin}/?flightSearch=DAC`) &&
+    /flightSearch=DAC\d{4}BKK1&amp;currency=BDT&amp;locale=en/.test(flightModeWidgetHtml) &&
     flightModeWidgetHtml.includes("Open URAL full flight search") &&
-    !flightModeWidgetHtml.includes("destination=KTM&amp;flightSearch="),
-  "flight mode retains the URAL white-label partner handoff with the selected flight destination, not the hotel-city mapping"
+    !flightModeWidgetHtml.includes("travelpayouts-wl.html"),
+  "flight mode opens the hosted Page with the selected flight destination, one-way intent, adult count, currency and language"
 );
 const airHelpScreenEn = renderTransfer(React.createElement(AirHelpWidget, { lang: "en" }));
 const airHelpScreenBn = renderTransfer(React.createElement(AirHelpWidget, { lang: "bn" }));
@@ -484,7 +487,7 @@ check(
   "all ten destination guides have widget-recognized DAC airport defaults and at least two descriptive HTTPS editorial sources"
 );
 const widgetProvidesBothFlightHandoffs =
-  destinationFlightWidgetSource.includes("/travelpayouts-wl.html?") &&
+  flightModeWidgetHtml.includes(FLIGHT_WHITE_LABEL.origin) &&
   destinationFlightWidgetSource.includes("https://www.aviasales.com/search/");
 check(
   widgetProvidesBothFlightHandoffs,
@@ -531,7 +534,8 @@ const destinationWidgetHtml = renderToStaticMarkup(
   })
 );
 check(
-  destinationWidgetHtml.includes('href="/travelpayouts-wl.html?origin=DAC&amp;destination=KTM') &&
+  destinationWidgetHtml.includes(`href="${FLIGHT_WHITE_LABEL.origin}/?flightSearch=DAC`) &&
+    /flightSearch=DAC\d{4}KTM1&amp;currency=BDT&amp;locale=bn/.test(destinationWidgetHtml) &&
     destinationWidgetHtml.includes('href="https://www.aviasales.com/search/') &&
     destinationWidgetHtml.includes("যাত্রা শুরু") && destinationWidgetHtml.includes("ফ্লাইট খুঁজুন") &&
     destinationWidgetHtml.includes("Aviasales-এ ফ্লাইট তুলনা করুন") &&
@@ -2252,14 +2256,18 @@ check(
 const middlewareRaw = read(path.join(ROOT_DIR, "functions", "_middleware.js")) ?? "";
 // Strip comments before scanning: the file explains *why* it no longer tags
 // regions, and prose about the old behaviour must not read as the behaviour.
-const middlewareSrc = middlewareRaw
+// A literal-null redirect can set Location/Vary without buffering an asset.
+// Constructors supplied with HTML, a stream or another response remain forbidden.
+const withoutBodylessResponses = (source: string) =>
+  source.replace(/\bnew\s+Response\s*\(\s*null\s*,/g, "bodylessResponse(");
+const middlewareSrc = withoutBodylessResponses(middlewareRaw
   .replace(/\/\*[\s\S]*?\*\//g, "")
-  .replace(/(^|[^:])\/\/[^\n]*/g, "$1");
+  .replace(/(^|[^:])\/\/[^\n]*/g, "$1"));
 const middlewareForbidden: Array<[string, RegExp]> = [
   ["no region tagging", /data-consent-region/],
   ["no country lookup", /request\.cf/],
   ["does not read response bodies", /response\.text\(\)/],
-  ["does not rebuild responses", /new Response\(/],
+  ["does not rebuild response bodies", /new\s+Response\s*\(/],
   ["does not strip headers", /headers\.delete\(/],
 ];
 const middlewareViolations = middlewareForbidden
@@ -2270,6 +2278,12 @@ check(
   middlewareViolations.length === 0
     ? `functions/_middleware.js is redirect-only (${middlewareForbidden.length} body-rewrite patterns absent)`
     : `middleware touches response bodies again: ${middlewareViolations.join("; ")}`
+);
+check(
+  !middlewareForbidden[3][1].test(withoutBodylessResponses('new Response(null, { status: 301 })')) &&
+    middlewareForbidden[3][1].test(withoutBodylessResponses('new Response(response.body, { status: 200 })')) &&
+    middlewareForbidden[3][1].test(withoutBodylessResponses('new Response(html, { status: 200 })')),
+  "middleware body-rewrite guard permits empty redirects and rejects rebuilt streams or HTML (negative controls)"
 );
 
 const shellHtml = read(path.join(ROOT_DIR, "index.html")) ?? "";

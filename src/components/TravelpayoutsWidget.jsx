@@ -28,6 +28,7 @@ import {
   TrendingDown,
 } from 'lucide-react';
 import { AFFILIATE_LINKS, resolvePartnerUrl } from './AffiliatePartners';
+import { buildFlightSearchCode, buildWhiteLabelUrl } from '../utils/flightSearch';
 
 const MARKER_ID = '675992';
 
@@ -914,29 +915,6 @@ function formatReadableDate(isoDate) {
   }
 }
 
-function buildAviasalesSearchCode(origin, destination, departIso, returnIso, tripType, passengers) {
-  const orig = (origin || 'DAC').toUpperCase();
-  const dest = (destination || 'KTM').toUpperCase();
-  const pax = Math.max(1, Math.min(9, Number(passengers) || 1));
-
-  const parseDdMm = (iso) => {
-    if (!iso || !iso.includes('-')) {
-      const fallback = new Date();
-      fallback.setDate(fallback.getDate() + 14);
-      return `${String(fallback.getDate()).padStart(2, '0')}${String(fallback.getMonth() + 1).padStart(2, '0')}`;
-    }
-    const parts = iso.split('-');
-    return `${parts[2]}${parts[1]}`;
-  };
-
-  const depDdMm = parseDdMm(departIso);
-  if (tripType === 'roundtrip' && returnIso) {
-    const retDdMm = parseDdMm(returnIso);
-    return `${orig}${depDdMm}${dest}${retDdMm}${pax}`;
-  }
-  return `${orig}${depDdMm}${dest}${pax}`;
-}
-
 function generateDynamicRouteData(originInfo, destInfo) {
   const origCode = (originInfo?.code || 'DAC').toUpperCase();
   const destCode = (destInfo?.code || 'KTM').toUpperCase();
@@ -1119,7 +1097,6 @@ export default function TravelpayoutsWidget({
   const [cabinClass, setCabinClass] = useState('economy'); // 'economy' | 'business'
   const [passengers, setPassengers] = useState(1);
   const [currency, setCurrency] = useState('BDT'); // 'BDT' | 'USD' | 'EUR' | 'GBP' | 'SAR' | 'AED'
-  const [wlFrameHeight, setWlFrameHeight] = useState(540);
 
   const [departDate, setDepartDate] = useState(() => getFutureDateIso(14));
   const [returnDate, setReturnDate] = useState(() => getFutureDateIso(21));
@@ -1131,7 +1108,6 @@ export default function TravelpayoutsWidget({
   const [sortBy, setSortBy] = useState('cheapest'); // 'cheapest' | 'fastest' | 'earliest'
   const [expandedFlightId, setExpandedFlightId] = useState(null);
   const [selectedBookingFlight, setSelectedBookingFlight] = useState(null);
-  const [showClassicWhiteLabel, setShowClassicWhiteLabel] = useState(false);
 
   // Committed query state that updates when user clicks "Search Flights" or picks a Quick Route
   const [committedQuery, setCommittedQuery] = useState(() => ({
@@ -1146,19 +1122,6 @@ export default function TravelpayoutsWidget({
 
   const resultsContainerRef = useRef(null);
   const formWrapperRef = useRef(null);
-  const wlIframeRef = useRef(null);
-
-  // Listen for dynamic height resize messages from /travelpayouts-wl.html
-  useEffect(() => {
-    const handleMessage = (event) => {
-      const data = event?.data;
-      if (data && data.type === 'tpwl-resize' && typeof data.height === 'number') {
-        setWlFrameHeight(Math.max(480, Math.min(2400, data.height)));
-      }
-    };
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, []);
 
   // Sync if parent prop changes (e.g. navigating between Nepal, Thailand, Malaysia, Dubai flight pages or Home Global Search)
   useEffect(() => {
@@ -1171,12 +1134,6 @@ export default function TravelpayoutsWidget({
       origin: nextOrigin,
       destination: nextDest,
     }));
-    const isGlobalUnlisted =
-      !BANGLADESH_AIRPORT_CODES.has((nextOrigin?.code || 'DAC').toUpperCase()) ||
-      !ROUTE_DATABASE[(nextDest?.code || 'KTM').toUpperCase()];
-    if (isGlobalUnlisted) {
-      setShowClassicWhiteLabel(true);
-    }
     setExpandedFlightId(null);
     setSelectedBookingFlight(null);
   }, [defaultOrigin, defaultDestination]);
@@ -1494,23 +1451,6 @@ export default function TravelpayoutsWidget({
     setIsSearching(true);
     setSelectedBookingFlight(null);
 
-    const isGlobalUnlisted =
-      !BANGLADESH_AIRPORT_CODES.has((finalOrigin?.code || 'DAC').toUpperCase()) ||
-      !ROUTE_DATABASE[(finalDest?.code || 'KTM').toUpperCase()];
-
-    if (isGlobalUnlisted) {
-      setShowClassicWhiteLabel(true);
-    }
-
-    const nextCode = buildAviasalesSearchCode(
-      finalOrigin.code,
-      finalDest.code,
-      nextDepart,
-      nextReturn,
-      nextTripType,
-      nextPax
-    );
-
     setTimeout(() => {
       setCommittedQuery({
         origin: finalOrigin,
@@ -1526,17 +1466,6 @@ export default function TravelpayoutsWidget({
       setLastSearchedAt(
         new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
       );
-
-      if (wlIframeRef.current && wlIframeRef.current.contentWindow) {
-        try {
-          wlIframeRef.current.contentWindow.postMessage(
-            { type: 'tpwl-run-search', flightSearch: nextCode },
-            '*'
-          );
-        } catch {
-          // ignore cross-frame errors
-        }
-      }
 
       if (scrollToResults && resultsContainerRef.current) {
         resultsContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1563,6 +1492,8 @@ export default function TravelpayoutsWidget({
     setActiveDropdown(null);
     if (showInlineResults) {
       executeSearch({ scrollToResults: true });
+    } else if (liveFormSearchCode) {
+      window.open(liveFormUralWlUrl, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -1686,14 +1617,15 @@ export default function TravelpayoutsWidget({
   }, [computedFlights]);
 
   const searchCode = useMemo(() => {
-    return buildAviasalesSearchCode(
-      committedQuery.origin.code,
-      committedQuery.destination.code,
-      committedQuery.departDate,
-      committedQuery.returnDate,
-      committedQuery.tripType,
-      committedQuery.passengers
-    );
+    return buildFlightSearchCode({
+      origin: committedQuery.origin.code,
+      destination: committedQuery.destination.code,
+      departureDate: committedQuery.departDate,
+      returnDate: committedQuery.returnDate,
+      tripType: committedQuery.tripType,
+      cabinClass: committedQuery.cabinClass,
+      adults: committedQuery.passengers,
+    });
   }, [committedQuery]);
 
   const aviasalesPartnerUrl = useMemo(() => {
@@ -1701,8 +1633,8 @@ export default function TravelpayoutsWidget({
   }, [searchCode, currency]);
 
   const uralBrandedWlUrl = useMemo(() => {
-    return `/travelpayouts-wl.html?origin=${committedQuery.origin.code}&destination=${committedQuery.destination.code}&flightSearch=${searchCode}&currency=${currency}&standalone=1`;
-  }, [committedQuery.origin.code, committedQuery.destination.code, searchCode, currency]);
+    return buildWhiteLabelUrl({ flightSearch: searchCode, currency, locale: lang });
+  }, [searchCode, currency, lang]);
 
   const effectiveOrigin = useMemo(() => {
     if (activeDropdown === 'origin' && originQuery.trim()) {
@@ -1721,19 +1653,20 @@ export default function TravelpayoutsWidget({
   }, [activeDropdown, destQuery, destInfo, destRemoteSuggestions]);
 
   const liveFormSearchCode = useMemo(() => {
-    return buildAviasalesSearchCode(
-      effectiveOrigin.code,
-      effectiveDest.code,
-      departDate,
+    return buildFlightSearchCode({
+      origin: effectiveOrigin.code,
+      destination: effectiveDest.code,
+      departureDate: departDate,
       returnDate,
       tripType,
-      passengers
-    );
-  }, [effectiveOrigin.code, effectiveDest.code, departDate, returnDate, tripType, passengers]);
+      cabinClass,
+      adults: passengers,
+    });
+  }, [effectiveOrigin.code, effectiveDest.code, departDate, returnDate, tripType, cabinClass, passengers]);
 
   const liveFormUralWlUrl = useMemo(() => {
-    return `/travelpayouts-wl.html?origin=${effectiveOrigin.code}&destination=${effectiveDest.code}&flightSearch=${liveFormSearchCode}&currency=${currency}&standalone=1`;
-  }, [effectiveOrigin.code, effectiveDest.code, liveFormSearchCode, currency]);
+    return buildWhiteLabelUrl({ flightSearch: liveFormSearchCode, currency, locale: lang });
+  }, [liveFormSearchCode, currency, lang]);
 
   const routeBaseFareBdt = useMemo(() => {
     const routeEntry = ROUTE_DATABASE[(effectiveDest.code || 'KTM').toUpperCase()];
@@ -1767,6 +1700,8 @@ export default function TravelpayoutsWidget({
         className={`p-4 sm:p-6 bg-white ${showInlineResults ? 'border-b border-slate-200 rounded-t-2xl' : 'rounded-2xl'}`}
       >
         {/* ROW 1: Segmented Control Track (Trip Type, Cabin, Passengers) + Multi-Currency Switcher */}
+        {/* A native submit control enables Enter while the visible anchor keeps new-tab link behavior. */}
+        <button type="submit" hidden>{isBn ? 'ফ্লাইট খুঁজুন' : 'Search Flights'}</button>
         <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100">
           <div className="flex flex-wrap items-center gap-2.5">
             {/* Segmented Trip-Type Control with CSS-only sliding pill + gold dot */}
@@ -1866,23 +1801,23 @@ export default function TravelpayoutsWidget({
                 type="button"
                 onClick={() => setPassengers((p) => Math.max(1, p - 1))}
                 className="w-6 h-6 rounded-md bg-white border border-slate-200 text-slate-700 hover:bg-brand-navy hover:text-white font-bold text-xs flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
-                aria-label="Decrease passengers"
+                aria-label={isBn ? 'প্রাপ্তবয়স্কের সংখ্যা কমান' : 'Decrease adults'}
               >
                 -
               </button>
               <span className="text-xs font-bold font-mono text-slate-900 min-w-[62px] text-center tabular-nums">
                 {passengers}{' '}
                 {isBn
-                  ? 'জন যাত্রী'
+                  ? 'জন প্রাপ্তবয়স্ক'
                   : passengers === 1
-                  ? 'Traveler'
-                  : 'Travelers'}
+                  ? 'Adult'
+                  : 'Adults'}
               </span>
               <button
                 type="button"
                 onClick={() => setPassengers((p) => Math.min(9, p + 1))}
                 className="w-6 h-6 rounded-md bg-white border border-slate-200 text-slate-700 hover:bg-brand-navy hover:text-white font-bold text-xs flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
-                aria-label="Increase passengers"
+                aria-label={isBn ? 'প্রাপ্তবয়স্কের সংখ্যা বাড়ান' : 'Increase adults'}
               >
                 +
               </button>
@@ -2240,6 +2175,8 @@ export default function TravelpayoutsWidget({
                 <input
                   id={departDateId}
                   type="date"
+                  required
+                  min={getFutureDateIso(0)}
                   value={departDate}
                   onChange={(e) => {
                     const nextDep = e.target.value;
@@ -2266,6 +2203,7 @@ export default function TravelpayoutsWidget({
                   <input
                     id={returnDateId}
                     type="date"
+                    required
                     value={returnDate}
                     min={departDate}
                     onChange={(e) => setReturnDate(e.target.value)}
@@ -2297,11 +2235,16 @@ export default function TravelpayoutsWidget({
 
           {/* Primary action spans the complete width of the search card. */}
             <a
-              href={liveFormUralWlUrl}
+              href={liveFormSearchCode ? liveFormUralWlUrl : undefined}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer sponsored"
+              aria-disabled={!liveFormSearchCode}
               data-testid="search-flights-submit-btn"
-              onClick={() => {
+              onClick={(event) => {
+                if (!liveFormSearchCode || !event.currentTarget.closest('form')?.reportValidity()) {
+                  event.preventDefault();
+                  return;
+                }
                 if (originQuery.trim()) {
                   setOriginInfo(effectiveOrigin);
                   setOriginQuery('');
@@ -2326,6 +2269,15 @@ export default function TravelpayoutsWidget({
                 {effectiveOrigin.code} → {effectiveDest.code} · {currency}
               </span>
             </a>
+            <p className="text-xs leading-relaxed text-slate-600" role={!liveFormSearchCode ? 'status' : undefined}>
+              {!liveFormSearchCode
+                ? isBn
+                  ? 'আলাদা দুটি বিমানবন্দর ও সঠিক যাত্রার তারিখ বেছে নিন। রাউন্ড-ট্রিপের জন্য ফেরার তারিখও দিন।'
+                  : 'Choose two different airports and valid travel dates. A round-trip needs a return date.'
+                : isBn
+                  ? 'flights.uraltravel.co.uk নতুন ট্যাবে খুলবে। শিশু ও ইনফ্যান্ট থাকলে সার্চ সাইটে যোগ করুন।'
+                  : 'Opens flights.uraltravel.co.uk in a new tab. Add children and infants on the flight site.'}
+            </p>
         </div>
 
         {/* LIVE VOICE DICTATION STATUS FEEDBACK PILL + QUICK VOICE ROUTE PRESETS */}
@@ -2480,7 +2432,7 @@ export default function TravelpayoutsWidget({
               <a
                 href={uralBrandedWlUrl}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer sponsored"
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-brand-navy hover:bg-slate-800 px-3.5 py-2 rounded-lg transition-colors cursor-pointer shadow-2xs"
               >
                 <span>{isBn ? 'লাইভ ফ্লাইট সার্চ খুলুন' : 'Open Live Flight Search'}</span>
@@ -2580,14 +2532,16 @@ export default function TravelpayoutsWidget({
                   Compare Live {committedQuery.origin.city} ({committedQuery.origin.code}) to {committedQuery.destination.city} ({committedQuery.destination.code}) Fares in {currency}
                 </h4>
                 <p className="text-xs text-slate-600 max-w-2xl">
-                  Browse real-time flight schedules below, or open full-screen search results in a new tab with your exact dates ({formatReadableDate(committedQuery.departDate)}{committedQuery.tripType === 'roundtrip' ? ` – ${formatReadableDate(committedQuery.returnDate)}` : ''}) and passenger count.
+                  {isBn
+                    ? 'আপনার বেছে নেওয়া রুট, তারিখ, কেবিন ও প্রাপ্তবয়স্কের সংখ্যা নিয়ে URAL-এর ফ্লাইট সার্চ সাইট খুলুন। ফলাফলে ভাড়া ও প্রাপ্যতা যাচাই করুন।'
+                    : 'Open URAL’s flight site with your selected route, dates, cabin and adult count. Check fares and availability in the results.'}
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-2.5 shrink-0">
                 <a
                   href={uralBrandedWlUrl}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer sponsored"
                   className="bg-[#07C369] hover:bg-[#06ad5d] text-white font-bold text-xs px-4 py-3 rounded-xl flex items-center gap-2 shadow-sm transition-colors cursor-pointer"
                 >
                   <span>{isBn ? 'ফুল-স্ক্রিন ফ্লাইট সার্চ' : 'Full-Screen Flight Search'}</span>
@@ -2913,7 +2867,7 @@ export default function TravelpayoutsWidget({
                       <a
                         href={uralBrandedWlUrl}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener noreferrer sponsored"
                         className="w-full sm:w-auto bg-[#07C369] hover:bg-[#06ad5d] text-white font-bold text-xs px-4 py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer"
                       >
                         <span>{isBn ? 'টিকিট সার্চ ও বুকিং' : 'Search & Book Live Fares'}</span>
@@ -2936,44 +2890,24 @@ export default function TravelpayoutsWidget({
           })}
         </div>
 
-        {/* Footer Tip & Optional Classic White-Label Toggle */}
+        {/* Hosted Page-type search opens in a top-level tab. */}
         <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-slate-500 border-t border-slate-200/80">
           <div>
             <strong>Booking Tip:</strong> {routeMeta.bestWindow}
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <button
-              type="button"
-              onClick={() => setShowClassicWhiteLabel((v) => !v)}
-              className="text-brand-navy hover:underline font-semibold cursor-pointer"
-            >
-              {showClassicWhiteLabel || routeMeta.isGlobalLiveOnly
-                ? isBn ? 'লাইভ ফ্লাইট শিডিউল লুকান' : 'Hide Live Flight Schedule'
-                : isBn ? 'লাইভ ফ্লাইট শিডিউল দেখুন' : 'View Live Flight Schedule'}
-            </button>
             <a
               href={uralBrandedWlUrl}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer sponsored"
               className="text-emerald-700 hover:underline font-semibold inline-flex items-center gap-1"
             >
-              <span>Open in New Tab</span>
+              <span>{isBn ? 'URAL ফ্লাইট সার্চ খুলুন' : 'Open URAL flight search'}</span>
               <ExternalLink size={11} />
             </a>
           </div>
         </div>
 
-        {(showClassicWhiteLabel || routeMeta.isGlobalLiveOnly) && (
-          <div className="pt-2">
-            <iframe
-              ref={wlIframeRef}
-              src={`/travelpayouts-wl.html?origin=${committedQuery.origin.code}&destination=${committedQuery.destination.code}&flightSearch=${searchCode}&currency=${currency}`}
-              title="Live Flight Search & Booking Engine"
-              className="w-full rounded-xl border border-slate-200 bg-white"
-              style={{ height: `${wlFrameHeight}px`, width: '100%', display: 'block' }}
-            />
-          </div>
-        )}
       </div>
       )}
         </div>

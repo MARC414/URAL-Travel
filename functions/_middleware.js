@@ -1,3 +1,5 @@
+import { getLegacyWhiteLabelUrl } from "../src/utils/flightSearch.ts";
+
 const LEGACY_QUERY_ROUTES = {
   "/flights": { parameter: "route", prefix: "/flights" },
   "/hotels": { parameter: "city", prefix: "/hotels" },
@@ -64,6 +66,19 @@ const LEGACY_BLOG_SLUGS = {
 // serves the page.
 export async function onRequest(context) {
   const url = new URL(context.request.url);
+  if (url.pathname === "/travelpayouts-wl.html" || url.pathname === "/travelpayouts-wl") {
+    // Cached clients can still request the old iframe. The static bridge gives
+    // them a new-tab link; only top-level visits redirect to the hosted Page.
+    if (context.request.headers.get("Sec-Fetch-Dest") === "iframe") return context.next();
+    return new Response(null, {
+      status: 301,
+      headers: {
+        Location: getLegacyWhiteLabelUrl(url),
+        Vary: "Sec-Fetch-Dest",
+        "Cache-Control": "no-store",
+      },
+    });
+  }
 
   // --- Legacy /experiences?region= → clean static paths (301) ---
   if (url.pathname === "/experiences") {
