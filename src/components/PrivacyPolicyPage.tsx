@@ -115,7 +115,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <ShieldCheck className="w-4 h-4" />
             <span>{isBn ? "আইনগত স্বচ্ছতা ও ডেটা সুরক্ষা" : "Legal Transparency & Data Protection"}</span>
           </div>
-          <h1 className="ural-page-title text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          <h1 className="ural-page-title font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
             {isBn
               ? "গোপনীয়তা ও কুকি নীতিমালা"
               : "Privacy & Cookie Policy"}

@@ -33,6 +33,175 @@ export const KLOOK_HOTEL_COMMISSION_NOTE = {
 } as const;
 
 /**
+ * Builds a tracked Klook affiliate deep link using the `.tpo.li` short-link
+ * forwarding parameter (`?u=<encoded-klook-url>&sub_id=<placementId>`),
+ * while preserving `resolvePartnerUrl()` pause/fallback protection.
+ */
+export function buildKlookDeepLink(
+  targetUrl: string,
+  subId?: string,
+  partnerKey: "klookHotels" | "klook" = "klookHotels"
+): string {
+  const base = resolvePartnerUrl(AFFILIATE_LINKS[partnerKey]);
+  if (
+    AFFILIATE_OFFER_REGISTRY.klook.status === "paused" ||
+    AFFILIATE_OFFER_REGISTRY[partnerKey].status === "paused"
+  ) {
+    return base;
+  }
+  const encodedTarget = encodeURIComponent(targetUrl.trim());
+  return subId
+    ? `${base}?u=${encodedTarget}&sub_id=${encodeURIComponent(subId.trim())}`
+    : `${base}?u=${encodedTarget}`;
+}
+
+/**
+ * Builds a tracked Klook hotel detail URL (`https://www.klook.com/hotels/detail/<id>`)
+ * routed through `AFFILIATE_LINKS.klookHotels` with an optional Travelpayouts `sub_id`.
+ */
+export function buildKlookHotelDetailLink(
+  hotelId: string | number,
+  subId?: string
+): string {
+  return buildKlookDeepLink(
+    `https://www.klook.com/hotels/detail/${String(hotelId).trim()}`,
+    subId,
+    "klookHotels"
+  );
+}
+
+export interface KlookCuratedHotelPick {
+  hotelId: string;
+  name: string;
+  areaEn: string;
+  areaBn: string;
+  tagEn: string;
+  tagBn: string;
+  subId: string;
+}
+
+/**
+ * Curated Klook hotel picks from the Travelpayouts/Klook partner feed for
+ * URAL's Bangkok and Kuala Lumpur hotel guides. Each card links to the property
+ * page on Klook (`?u=https://www.klook.com/hotels/detail/<id>&sub_id=...`) so
+ * readers can inspect live dates, room terms and final checkout totals directly.
+ */
+export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHotelPick[]> = {
+  "bangkok-hotels": [
+    {
+      hotelId: "279724",
+      name: "Vince Hotel Pratunam",
+      areaEn: "Pratunam",
+      areaBn: "প্রাতুনাম",
+      tagEn: "Great prices",
+      tagBn: "সাশ্রয়ী রেট",
+      subId: "hotel_bkk_pratunam_vince",
+    },
+    {
+      hotelId: "427421",
+      name: "Grand Diamond Suites Hotel",
+      areaEn: "Pratunam",
+      areaBn: "প্রাতুনাম",
+      tagEn: "Hot selling",
+      tagBn: "জনপ্রিয় বুকিং",
+      subId: "hotel_bkk_pratunam_diamond",
+    },
+    {
+      hotelId: "278632",
+      name: "Grande Centre Point Terminal 21",
+      areaEn: "Sukhumvit (Asok)",
+      areaBn: "সুখুম্ভিত (আসোক)",
+      tagEn: "Hot selling",
+      tagBn: "জনপ্রিয় বুকিং",
+      subId: "hotel_bkk_sukhumvit_terminal21",
+    },
+    {
+      hotelId: "285240",
+      name: "Carlton Hotel Bangkok Sukhumvit",
+      areaEn: "Sukhumvit",
+      areaBn: "সুখুম্ভিত",
+      tagEn: "Great prices",
+      tagBn: "সাশ্রয়ী রেট",
+      subId: "hotel_bkk_sukhumvit_carlton",
+    },
+    {
+      hotelId: "1085275",
+      name: "Chatrium Grand Bangkok",
+      areaEn: "Siam",
+      areaBn: "সিয়াম",
+      tagEn: "Hot selling",
+      tagBn: "জনপ্রিয় বুকিং",
+      subId: "hotel_bkk_siam_chatrium",
+    },
+    {
+      hotelId: "442026",
+      name: "Chatrium Hotel Riverside Bangkok",
+      areaEn: "Riverside",
+      areaBn: "রিভারসাইড",
+      tagEn: "Hot selling",
+      tagBn: "জনপ্রিয় বুকিং",
+      subId: "hotel_bkk_riverside_chatrium",
+    },
+  ],
+  "kuala-lumpur-hotels": [
+    {
+      hotelId: "1233964",
+      name: "Sleeping Lion Suites",
+      areaEn: "Bukit Bintang",
+      areaBn: "বুকিত বিনতাং",
+      tagEn: "Great prices",
+      tagBn: "সাশ্রয়ী রেট",
+      subId: "hotel_kl_bb_sleeping_lion",
+    },
+    {
+      hotelId: "1284910",
+      name: "Hotel Royal Signature",
+      areaEn: "Bukit Bintang",
+      areaBn: "বুকিত বিনতাং",
+      tagEn: "Hot selling",
+      tagBn: "জনপ্রিয় বুকিং",
+      subId: "hotel_kl_bb_royal_signature",
+    },
+    {
+      hotelId: "1422152",
+      name: "Imperial Lexis Kuala Lumpur",
+      areaEn: "KLCC",
+      areaBn: "কেএলসিসি (KLCC)",
+      tagEn: "High growth",
+      tagBn: "ক্রমবর্ধমান চাহিদা",
+      subId: "hotel_kl_klcc_imperial_lexis",
+    },
+    {
+      hotelId: "7961",
+      name: "THE FACE Style Hotel",
+      areaEn: "KLCC / City Centre",
+      areaBn: "কেএলসিসি / সিটি সেন্টার",
+      tagEn: "High growth",
+      tagBn: "ক্রমবর্ধমান চাহিদা",
+      subId: "hotel_kl_klcc_face_style",
+    },
+    {
+      hotelId: "449088",
+      name: "Cititel Mid Valley",
+      areaEn: "Mid Valley / KL Sentral link",
+      areaBn: "মিড ভ্যালি / কেএল সেন্ট্রাল সংযোগ",
+      tagEn: "Great prices",
+      tagBn: "সাশ্রয়ী রেট",
+      subId: "hotel_kl_midvalley_cititel",
+    },
+    {
+      hotelId: "427403",
+      name: "Sunway Pyramid Hotel",
+      areaEn: "Sunway City (Family Resort)",
+      areaBn: "সানওয়ে সিটি (ফ্যামিলি রিসোর্ট)",
+      tagEn: "Hot selling",
+      tagBn: "জনপ্রিয় বুকিং",
+      subId: "hotel_kl_sunway_pyramid",
+    },
+  ],
+};
+
+/**
  * Commission disclosure for the Klook hotel module. The time-limited 8% claim is
  * shown only while `KLOOK_PROMO.expiresAt` is still in the future (BST); after
  * that the evergreen sentence above takes over with no rebuild required.

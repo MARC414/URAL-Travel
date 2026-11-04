@@ -35,7 +35,7 @@ export function KkdayHotelsPage({ isBn, onNavigate }: Props) {
         </span>
         <h1
           id="kkday-hotels-title"
-          className="font-serif text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
+          className="ural-page-title font-serif text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
         >
           {isBn ? "KKday হোটেল ও স্টে ডিল" : "KKday Hotel & Stay Deals"}
         </h1>
@@ -59,7 +59,7 @@ export function KkdayHotelsPage({ isBn, onNavigate }: Props) {
       </a>
 
       <div className="space-y-3">
-        <h2 className="font-serif text-xl font-bold text-slate-900">
+        <h2 className="ural-section-title font-serif text-xl font-bold text-slate-900">
           {isBn ? "বুকিংয়ের আগে যা দেখে নিন" : "Before you book"}
         </h2>
         <ul className="list-disc space-y-1.5 pl-5 text-sm text-slate-700">
@@ -85,7 +85,7 @@ export function KkdayHotelsPage({ isBn, onNavigate }: Props) {
       </div>
 
       <div className="space-y-2">
-        <h2 className="font-serif text-xl font-bold text-slate-900">
+        <h2 className="ural-section-title font-serif text-xl font-bold text-slate-900">
           {isBn ? "টাকা ও কার্ড" : "Cards and currency"}
         </h2>
         <p className="text-sm text-slate-700">
@@ -99,7 +99,7 @@ export function KkdayHotelsPage({ isBn, onNavigate }: Props) {
       </div>
 
       <div className="space-y-3">
-        <h2 className="font-serif text-xl font-bold text-slate-900">
+        <h2 className="ural-section-title font-serif text-xl font-bold text-slate-900">
           {isBn ? "শহর অনুযায়ী হোটেল গাইড" : "Hotel guides by city"}
         </h2>
         <p className="text-sm text-slate-600">

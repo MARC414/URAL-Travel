@@ -114,7 +114,7 @@ html {
    * without also shipping the file: a named-but-unloaded font is invisible in
    * code review and only shows up as inconsistent typography on real devices.
    */
-  --font-serif: "Source Serif 4", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-serif: "Source Serif 4", "Noto Sans Bengali", Georgia, Cambria, "Times New Roman", Times, serif;
   /*
    * No web font is shipped for mono, and none is needed: this role is used for
    * measurement and data (airport codes, prices, dates, tabular figures) and

@@ -79,7 +79,7 @@ function HajjResourceDownloadCard({ isBengali }: { isBengali: boolean }) {
       <p className="mb-1 text-xs font-bold uppercase tracking-wide text-emerald-900">
         {isBengali ? "ডাউনলোড রিসোর্স · ইংরেজি PDF" : "Download resource · English PDF"}
       </p>
-      <h2 className="font-serif text-lg font-bold leading-snug text-brand-navy">
+      <h2 className="ural-section-title font-serif text-lg font-bold leading-snug text-brand-navy">
         {isBengali
           ? "URAL-এর Hajj প্রস্তুতি চেকলিস্ট"
           : "URAL’s Hajj preparation checklist"}
@@ -103,7 +103,7 @@ function HajjResourceDownloadCard({ isBengali }: { isBengali: boolean }) {
 function UmrahBudgetTable({ isBengali }: { isBengali: boolean }) {
   return (
     <section className="my-2 space-y-3" aria-labelledby="umrah-budget-table-heading">
-      <h2 id="umrah-budget-table-heading" className="font-serif text-lg font-bold text-brand-navy">
+      <h2 id="umrah-budget-table-heading" className="ural-section-title font-serif text-lg font-bold text-brand-navy">
         {isBengali ? "১০ দিনের DIY Umrah পরিকল্পনা-হিসাব" : "10-day DIY Umrah planning estimate"}
       </h2>
       <p className="text-sm leading-relaxed text-slate-700">
@@ -1707,7 +1707,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                             id="article-reference-links-heading"
 
-                            className="text-sm font-bold text-brand-navy"
+                            className="ural-section-title font-serif text-sm font-bold text-brand-navy"
 
                           >
 
@@ -1935,7 +1935,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                         >
                           <h2
                             id="blog-author-bio-heading"
-                            className="font-serif text-lg font-bold text-brand-navy"
+                            className="ural-section-title font-serif text-lg font-bold text-brand-navy"
                           >
                             {isBn ? "লেখক সম্পর্কে" : "About the author"}
                           </h2>
@@ -1963,7 +1963,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                         >
                           <h2
                             id="cxb-bdt-booking-heading"
-                            className="font-serif text-lg font-bold text-[#F6B73C]"
+                            className="ural-section-title font-serif text-lg font-bold text-[#F6B73C]"
                           >
                             {isBn
                               ? "BDT-তে বা আন্তর্জাতিক কার্ড ছাড়াই বুক করতে চান?"

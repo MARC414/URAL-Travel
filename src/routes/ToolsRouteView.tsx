@@ -29,7 +29,7 @@ export default function ToolsRouteView({ context }: RouteViewProps) {
 
             <div className="border-b border-slate-200 pb-4">
 
-              <h1 className="ural-page-title font-serif text-3xl font-bold tracking-tight text-slate-900">
+              <h1 className="ural-page-title font-serif text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
 
                 {toolCopy
                   ? (isBn ? toolCopy.h1Bn : toolCopy.h1En)

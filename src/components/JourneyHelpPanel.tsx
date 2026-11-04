@@ -41,7 +41,7 @@ export default function JourneyHelpPanel({
         </p>
         <h2
           id="journey-help-heading"
-          className="text-lg font-bold leading-snug text-slate-900 sm:text-xl"
+          className="ural-section-title font-serif text-lg font-bold leading-snug text-slate-900 sm:text-xl"
         >
           {isBn ? config.headingBn : config.headingEn}
         </h2>
