@@ -507,7 +507,7 @@ check(
     destinationWidgetHtml.includes('href="https://www.aviasales.com/search/') &&
     destinationWidgetHtml.includes("যাত্রা শুরু") && destinationWidgetHtml.includes("ফ্লাইট খুঁজুন") &&
     destinationWidgetHtml.includes("Aviasales-এ ফ্লাইট তুলনা করুন") &&
-    !destinationWidgetHtml.includes("Search Klook hotel collection") &&
+    !destinationWidgetHtml.includes("Browse Klook hotel collection") &&
     !destinationWidgetHtml.includes("Go City All-Inclusive") &&
     !destinationWidgetHtml.includes("Biman Bangladesh Airlines") &&
     !destinationWidgetHtml.includes("Direct Flight"),
@@ -539,7 +539,7 @@ const hotelInlineDispatchHtml = renderToStaticMarkup(
   })
 );
 const hotelPartnerLinkOrder = [
-  hotelSearchWidgetHtml.lastIndexOf("Search Klook hotel collection"),
+  hotelSearchWidgetHtml.lastIndexOf("Browse Klook hotel collection"),
   hotelSearchWidgetHtml.indexOf("Search KKday hotel collection"),
   hotelSearchWidgetHtml.indexOf("Go City All-Inclusive"),
   hotelSearchWidgetHtml.indexOf("Luggage Storage (Radical)"),
@@ -2602,7 +2602,7 @@ check(
   }
   const placementClicks = fire(
     AFFILIATE_LINKS.klookHotels,
-    "Search Klook hotel collection",
+    "Browse Klook hotel collection",
     "noopener noreferrer sponsored",
     "hotel_guide_bangkok_klook_collection"
   );
@@ -3245,7 +3245,7 @@ if (sitemap) {
     const enSection = sectionStartingAt(enHtml, 'id="hotel-klook-check"');
     const bnSection = sectionStartingAt(bnHtml, 'id="hotel-klook-check"');
     const enOk =
-      enSection.includes("Search Klook’s hotel collection") &&
+      enSection.includes("Browse Klook’s hotel collection") &&
       enSection.includes("general hotel collection") &&
       enSection.includes("not a live quote") &&
       enSection.includes("Re-enter") &&
@@ -3282,6 +3282,50 @@ if (sitemap) {
   check(
     klookHotelHtmlIssues.length === 0,
     `all ${KLOOK_HOTEL_IDS.length} registered hotel guides carry the transparent EN/BN Klook handoff and the panel/checklist landing anchors, with no invented property picks on uncurated guides and no in-panel self-jump back to the section the panel already sits in [${klookHotelHtmlIssues.join(", ")}]`
+  );
+
+  // Static jump nav: the React GuideJumpNav only exists after hydration, so
+  // the prerendered hotel guides must carry their own in-page links — and
+  // every such link must point at an id that exists on the same page.
+  const jumpNavIssues: string[] = [];
+  for (const hotelId of KLOOK_HOTEL_IDS) {
+    for (const [locale, file] of [
+      ["EN", path.join(DIST_DIR, "hotels", `${hotelId}.html`)],
+      ["BN", path.join(DIST_DIR, "bn", "hotels", `${hotelId}.html`)],
+    ] as const) {
+      const html = read(file) ?? "";
+      const inPageHrefs = [...html.matchAll(/href="#(hotel-[a-z-]+)"/g)].map((m) => m[1]);
+      if (inPageHrefs.length < 2) {
+        jumpNavIssues.push(`${hotelId} ${locale}: only ${inPageHrefs.length} in-page jump link(s)`);
+        continue;
+      }
+      for (const target of new Set(inPageHrefs)) {
+        if (!html.includes(`id="${target}"`)) {
+          jumpNavIssues.push(`${hotelId} ${locale}: jump link #${target} has no target`);
+        }
+      }
+      if (html.includes("Search Klook hotel collection") || html.includes("Search Klook’s hotel collection")) {
+        jumpNavIssues.push(`${hotelId} ${locale}: still labels the generic collection a "search"`);
+      }
+    }
+  }
+  check(
+    jumpNavIssues.length === 0,
+    jumpNavIssues.length === 0
+      ? "every EN/BN static hotel guide carries a working in-page jump nav (links present, targets present) and labels the Klook collection a browse, not a search"
+      : `static hotel jump-nav / browse-label check failed: ${jumpNavIssues.slice(0, 4).join("; ")}`
+  );
+
+  // Picks intro must be the guide's own city text: Bangkok copy on the KL
+  // page (the old silent fallback) or vice versa fails here.
+  const bangkokHotelsHtml = read(path.join(DIST_DIR, "hotels", "bangkok-hotels.html")) ?? "";
+  const klHotelsHtml = read(path.join(DIST_DIR, "hotels", "kuala-lumpur-hotels.html")) ?? "";
+  check(
+    bangkokHotelsHtml.includes("Chao Phraya Riverside") &&
+      !bangkokHotelsHtml.includes("Mid Valley (rail-linked mall hub)") &&
+      klHotelsHtml.includes("Mid Valley (rail-linked mall hub)") &&
+      !klHotelsHtml.includes("Chao Phraya Riverside"),
+    "the curated-picks intro on each hotel guide is that city's own text, with no cross-city fallback"
   );
 
   const unregisteredKlookPickGuides = Object.keys(KLOOK_CURATED_HOTEL_PICKS).filter(

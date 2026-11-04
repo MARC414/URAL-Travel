@@ -175,7 +175,7 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
             { id: "hotel-curated-stays", en: "Compare hotel areas and booking checks", bn: "হোটেল এলাকা ও বুকিং যাচাই করুন" },
 
             ...(AFFILIATE_OFFER_REGISTRY.klook.status === "active" && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active"
-              ? [{ id: "hotel-klook-check", en: "Search Klook hotel collection", bn: "Klook হোটেল তালিকা সার্চ" }]
+              ? [{ id: "hotel-klook-check", en: "Browse Klook hotel collection", bn: "Klook হোটেল তালিকা দেখুন" }]
               : []),
 
             { id: "hotel-ground-transport", en: "Transfers and local essentials", bn: "ট্রান্সফার ও স্থানীয় প্রয়োজনীয়তা" },

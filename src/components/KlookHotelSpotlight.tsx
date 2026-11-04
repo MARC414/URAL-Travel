@@ -27,6 +27,22 @@ const CITY_BN: Record<string, string> = {
   "Malé & Maafushi": "মালে ও মাফুশি",
 };
 
+/**
+ * Per-guide intro for the curated picks shortlist, keyed by guideId. A guide
+ * with picks but no entry here renders no intro — never another city's text.
+ * Add the entry in the same change that adds a guide's picks.
+ */
+const KLOOK_PICKS_INTRO: Record<string, { en: string; bn: string }> = {
+  "bangkok-hotels": {
+    en: "Alongside Pratunam and Sukhumvit from the neighborhood guide above, this shortlist includes adjacent Siam (walking distance to Pratunam on the BTS line) and the Chao Phraya Riverside. For Khao San Road stays, use the general Klook collection button above.",
+    bn: "ওপরের এলাকা তুলনার প্রাতুনাম ও সুখুম্ভিতের পাশাপাশি এখানে সংলগ্ন সিয়াম (প্রাতুনামের পাশের বিটিএস হাব) এবং চাও ফ্রায়া রিভারসাইড অন্তর্ভুক্ত রয়েছে। খাও সান রোড এলাকার হোটেল খুঁজতে ওপরের সাধারণ Klook তালিকার বোতামটি ব্যবহার করুন।",
+  },
+  "kuala-lumpur-hotels": {
+    en: "Alongside Bukit Bintang and KLCC from the neighborhood comparison above, this shortlist includes Mid Valley (rail-linked mall hub) and Bandar Sunway (lagoon resort district).",
+    bn: "ওপরের বুকিত বিনতাং ও কেএলসিসি এলাকার পাশাপাশি এখানে মিড ভ্যালি (কমিউটার ট্রেন সংযুক্ত মল হাব) এবং বান্দার সানওয়ে (থিম পার্ক রিসোর্ট এলাকা) অন্তর্ভুক্ত রয়েছে।",
+  },
+};
+
 const DUAL_CURRENCY_GUIDE = {
   en: "/blog/dual-currency-card-endorsement-bangladesh",
   bn: "/bn/blog/dual-currency-card-endorsement-bangladesh",
@@ -85,7 +101,7 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en" }: KlookHotelSp
       <div className="hotel-partner-header">
         <span className="hotel-partner-eyebrow">
           <Building2 size={14} aria-hidden="true" />
-          {isBn ? "পার্টনার হোটেল সার্চ · Klook" : "PARTNER HOTEL SEARCH · KLOOK"}
+          {isBn ? "পার্টনার হোটেল তালিকা · Klook" : "PARTNER HOTEL COLLECTION · KLOOK"}
         </span>
         <span className="hotel-partner-meta">
           {isBn ? "নতুন ট্যাবে খুলবে" : "OPENS IN A NEW TAB"}
@@ -97,8 +113,8 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en" }: KlookHotelSp
         className="hotel-partner-title"
       >
         {isBn
-          ? `${cityLabel}-এর থাকার বিকল্প খুঁজতে Klook-এর হোটেল তালিকা সার্চ করুন`
-          : `Search Klook’s hotel collection for ${city}`}
+          ? `${cityLabel}-এর থাকার বিকল্প খুঁজতে Klook-এর হোটেল তালিকা দেখুন`
+          : `Browse Klook’s hotel collection for ${city}`}
       </h2>
 
       <p className="hotel-partner-intro">
@@ -127,7 +143,7 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en" }: KlookHotelSp
           rel="noopener noreferrer sponsored"
           className="hotel-partner-action hotel-partner-action--primary"
         >
-          {isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}
+          {isBn ? "Klook-এ হোটেল তালিকা দেখুন" : "Browse Klook hotel collection"}
           <ExternalLink size={15} aria-hidden="true" />
         </a>
       </div>
@@ -147,15 +163,11 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en" }: KlookHotelSp
             </span>
           </div>
 
-          <p className="hotel-partner-intro">
-            {guideId === "bangkok-hotels"
-              ? isBn
-                ? "ওপরের এলাকা তুলনার প্রাতুনাম ও সুখুম্ভিতের পাশাপাশি এখানে সংলগ্ন সিয়াম (প্রাতুনামের পাশের বিটিএস হাব) এবং চাও ফ্রায়া রিভারসাইড অন্তর্ভুক্ত রয়েছে। খাও সান রোড এলাকার হোটেল খুঁজতে ওপরের সাধারণ Klook সার্চ বোতামটি ব্যবহার করুন।"
-                : "Alongside Pratunam and Sukhumvit from the neighborhood guide above, this shortlist includes adjacent Siam (walking distance to Pratunam on the BTS line) and the Chao Phraya Riverside. For Khao San Road stays, use the general Klook search button above."
-              : isBn
-                ? "ওপরের বুকিত বিনতাং ও কেএলসিসি এলাকার পাশাপাশি এখানে মিড ভ্যালি (কমিউটার ট্রেন সংযুক্ত মল হাব) এবং বান্দার সানওয়ে (থিম পার্ক রিসোর্ট এলাকা) অন্তর্ভুক্ত রয়েছে।"
-                : "Alongside Bukit Bintang and KLCC from the neighborhood comparison above, this shortlist includes Mid Valley (rail-linked mall hub) and Bandar Sunway (lagoon resort district)."}
-          </p>
+          {KLOOK_PICKS_INTRO[guideId] && (
+            <p className="hotel-partner-intro">
+              {isBn ? KLOOK_PICKS_INTRO[guideId].bn : KLOOK_PICKS_INTRO[guideId].en}
+            </p>
+          )}
 
           <div className="hotel-pick-groups">
             {pickGroups.map((group, index) => (

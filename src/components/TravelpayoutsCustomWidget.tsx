@@ -874,8 +874,8 @@ export function TravelpayoutsCustomWidget({
                       <span>
                         {isKlookHotelsActive
                           ? isBn
-                            ? "Klook-এ হোটেল সার্চ করুন"
-                            : "Search Klook hotel collection"
+                            ? "Klook-এ হোটেল তালিকা দেখুন"
+                            : "Browse Klook hotel collection"
                           : isBn
                             ? "KKday হোটেল তালিকা"
                             : "Search KKday hotel collection"}
@@ -951,7 +951,7 @@ export function TravelpayoutsCustomWidget({
                       rel="noopener noreferrer sponsored"
                       className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-amber-700 bg-amber-50/90 hover:bg-amber-100/80 border border-amber-200/80 px-2.5 py-1 rounded-lg transition-colors"
                     >
-                      <span>{isBn ? "Klook-এ হোটেল সার্চ" : "Search Klook hotel collection"}</span>
+                      <span>{isBn ? "Klook-এ হোটেল তালিকা" : "Browse Klook hotel collection"}</span>
                       <ExternalLink size={11} />
                     </a>
                   )}
@@ -1044,7 +1044,7 @@ export function TravelpayoutsCustomWidget({
                       className="inline-flex items-center gap-1.5 bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer"
                     >
                       <span>
-                        {isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}
+                        {isBn ? "Klook-এ হোটেল তালিকা দেখুন" : "Browse Klook hotel collection"}
                       </span>
                       <ExternalLink size={12} />
                     </a>
@@ -1195,7 +1195,7 @@ export function TravelpayoutsCustomWidget({
                           rel="noopener noreferrer sponsored"
                           className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
                         >
-                          Search Klook hotel collection
+                          Browse Klook hotel collection
                           <ExternalLink size={12} />
                         </a>
                       </div>
@@ -1233,7 +1233,7 @@ export function TravelpayoutsCustomWidget({
                       rel="noopener noreferrer sponsored"
                       className="bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
-                      <span>{isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}</span>
+                      <span>{isBn ? "Klook-এ হোটেল তালিকা দেখুন" : "Browse Klook hotel collection"}</span>
                       <ExternalLink size={13} />
                     </a>
                     <a

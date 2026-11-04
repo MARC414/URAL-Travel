@@ -1809,7 +1809,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h1>Where to Stay in ${escapeHtml(h.city)}: Neighborhoods &amp; Booking Checklist</h1>
           <p>${escapeHtml(description)}</p>
           <p>${escapeHtml(h.quickAnswer || h.description || description)}</p>
-          <h2>Neighborhoods to compare in ${escapeHtml(h.city)}</h2>
+          <h2 id="hotel-neighborhoods">Neighborhoods to compare in ${escapeHtml(h.city)}</h2>
           <ul>
             ${h.neighborhoods.map((area) => `<li><strong>${escapeHtml(area.name)}:</strong> ${escapeHtml(area.description)} (${escapeHtml(area.vibe)})</li>`).join("")}
           </ul>
@@ -1834,6 +1834,26 @@ function buildAllRoutes(): PrerenderRoute[] {
         </article>
       `,
     });
+
+    // Static jump nav: the React GuideJumpNav only exists after hydration, so
+    // the crawlable hotel page carried no in-page links at all. Mirror its
+    // labels here, keeping only anchors whose target id is present below
+    // (the Klook section and FAQ block are conditional).
+    const enHotelRoute = routes[routes.length - 1];
+    const enJumpLinks = [
+      { id: "hotel-neighborhoods", label: "Choose a neighborhood" },
+      { id: "hotel-curated-stays", label: "Compare hotel areas and booking checks" },
+      { id: "hotel-klook-check", label: "Browse Klook hotel collection" },
+      { id: "hotel-guide-faqs", label: "FAQs and key answers" },
+    ].filter((link) => enHotelRoute.bodyHtml.includes(`id="${link.id}"`));
+    if (enJumpLinks.length) {
+      enHotelRoute.bodyHtml = enHotelRoute.bodyHtml.replace(
+        '<h2 id="hotel-neighborhoods">',
+        `<nav aria-label="Sections in this guide"><ul>${enJumpLinks
+          .map((link) => `<li><a href="#${link.id}">${escapeHtml(link.label)}</a></li>`)
+          .join("")}</ul></nav>\n          <h2 id="hotel-neighborhoods">`
+      );
+    }
   }
 
   // 4b. Visa-Free Countries pillar (/visa-free-countries)
@@ -3354,7 +3374,7 @@ function buildBengaliBody(
         const areas = hotel.neighborhoods
           .map((area) => `<li><strong>${escapeHtml(area.name)}:</strong> ${escapeHtml(area.description)} (${escapeHtml(area.vibe)})</li>`)
           .join("");
-        if (areas) parts.push(bnSection("কোন এলাকাগুলো তুলনা করবেন", `<ul>${areas}</ul>`));
+        if (areas) parts.push(`<section id="hotel-neighborhoods"><h2>কোন এলাকাগুলো তুলনা করবেন</h2><ul>${areas}</ul></section>`);
         const checks = hotel.keyFacts
           .map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`)
           .join("");
@@ -3381,6 +3401,26 @@ function buildBengaliBody(
       parts.push(
         `<section><h2>গন্তব্য অনুযায়ী হোটেল এলাকা গাইড</h2>${renderHotelGuideDirectoryCards("bn")}</section>`
       );
+    }
+    if (id) {
+      // Static jump nav, mirroring the English hotel guides: the React
+      // GuideJumpNav only exists after hydration. Keep only anchors whose
+      // target id is present in the assembled body.
+      const bnJoined = parts.join("");
+      const bnJumpLinks = [
+        { id: "hotel-neighborhoods", label: "এলাকা বেছে নিন" },
+        { id: "hotel-curated-stays", label: "হোটেল এলাকা ও বুকিং যাচাই করুন" },
+        { id: "hotel-klook-check", label: "Klook হোটেল তালিকা দেখুন" },
+      ].filter((link) => bnJoined.includes(`id="${link.id}"`));
+      if (bnJumpLinks.length) {
+        parts.splice(
+          2,
+          0,
+          `<nav aria-label="এই গাইডের অংশসমূহ"><ul>${bnJumpLinks
+            .map((link) => `<li><a href="#${link.id}">${escapeHtml(link.label)}</a></li>`)
+            .join("")}</ul></nav>`
+        );
+      }
     }
     return `<article>${parts.join("")}</article>`;
   }
