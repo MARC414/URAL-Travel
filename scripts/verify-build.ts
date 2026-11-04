@@ -44,6 +44,7 @@ import {
   AFFILIATE_OFFER_REGISTRY,
   KKDAY_PROMO,
   MULTI_PARTNER_BLOG_PLACEMENTS,
+  RADICAL_STORAGE_BLOG_PLACEMENTS,
   KLOOK_PROMO,
   TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
   TRAVELPAYOUTS_REFERRAL_SUB_IDS,
@@ -3512,6 +3513,48 @@ if (sitemap) {
   check(
     umrahCostOk,
     "the Umrah Cost guide carries its matched live-fare next step (aviasales affiliateCTA) in EN and BN source data and in both static pages"
+  );
+
+  // Mismatched-placement cut: the Sheikh Zayed day-trip and Singapore budget
+  // itinerary posts carried Radical Storage + Go City placements that did not
+  // match the reader's task on those pages (and included unverified savings
+  // claims). Both posts keep their matched Klook tours/tickets affiliateCTA;
+  // the cut placements must not return in data or in either static language.
+  const cutPlacementSlugs = [
+    "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide",
+    "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide",
+  ];
+  const cutPlacementIssues: string[] = [];
+  for (const slug of cutPlacementSlugs) {
+    if (RADICAL_STORAGE_BLOG_PLACEMENTS[slug]) {
+      cutPlacementIssues.push(`${slug}: Radical Storage placement still in data`);
+    }
+    if (MULTI_PARTNER_BLOG_PLACEMENTS[slug]) {
+      cutPlacementIssues.push(`${slug}: multi-partner (Go City) placement still in data`);
+    }
+    if (BLOG_DATA.find((post) => post.slug === slug)?.affiliateCTA?.provider !== "klook") {
+      cutPlacementIssues.push(`${slug}: matched Klook affiliateCTA missing (EN)`);
+    }
+    if (BENGALI_BLOG_OVERRIDES[slug]?.affiliateCTA?.provider !== "klook") {
+      cutPlacementIssues.push(`${slug}: matched Klook affiliateCTA missing (BN)`);
+    }
+    for (const [locale, file] of [
+      ["EN", path.join(DIST_DIR, "blog", `${slug}.html`)],
+      ["BN", path.join(DIST_DIR, "bn", "blog", `${slug}.html`)],
+    ] as const) {
+      const html = read(file) ?? "";
+      if (!html) {
+        cutPlacementIssues.push(`${slug}: ${locale} static page missing`);
+      } else if (html.includes("radicalstorage.tpo.li") || html.includes("gocity.tpo.li")) {
+        cutPlacementIssues.push(`${slug}: ${locale} static page still links Radical Storage/Go City`);
+      }
+    }
+  }
+  check(
+    cutPlacementIssues.length === 0,
+    cutPlacementIssues.length === 0
+      ? "the Sheikh Zayed day-trip and Singapore itinerary posts no longer carry Radical Storage/Go City placements (EN/BN data or static pages) and keep their matched Klook CTA"
+      : `mismatched-placement cut failed: ${cutPlacementIssues.join("; ")}`
   );
 
   check(
