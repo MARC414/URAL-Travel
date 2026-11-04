@@ -32,7 +32,7 @@ import JourneyHelpPanel from "../components/JourneyHelpPanel";
 
 import { getVisibleBlogFaqSection } from "../utils/blogStructuredData";
 
-import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, QeeqCarRentalWidget } from "../components/AffiliatePartners";
+import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, QeeqCarRentalWidget, getAffiliateCtaButtonLabel, BLOG_AFFILIATE_CTA_DISCLOSURE } from "../components/AffiliatePartners";
 import { KlookHotelBlogCallout } from "../components/KlookHotelOffers";
 
 
@@ -1904,21 +1904,20 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                               href={AFFILIATE_LINKS[activePost.affiliateCTA.provider]}
 
-                              label={
-
-                                isBn
-
-                                  ? "লাইভ ভাড়া ও অ্যাভেইলেবিলিটি দেখুন"
-
-                                  : "Compare Live Prices & Availability"
-
-                              }
+                              label={getAffiliateCtaButtonLabel(
+                                activePost.affiliateCTA.provider,
+                                isBn ? "bn" : "en"
+                              )}
 
                               variant="dark"
 
                             />
 
                           )}
+
+                          <p className="text-[11px] leading-relaxed text-slate-500">
+                            {BLOG_AFFILIATE_CTA_DISCLOSURE[isBn ? "bn" : "en"]}
+                          </p>
 
                         </div>
 

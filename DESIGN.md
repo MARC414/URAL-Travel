@@ -370,6 +370,30 @@ share the visual roles, property URLs, accessible link names, source note and
 navigation targets. A design edit does not update the feed's checked date or
 establish new hotel facts.
 
+### Article affiliate next step
+
+- **Implementation:** declared per post as `affiliateCTA` (`provider`, `headline`,
+  `body`) in `src/constants.ts`, with the Bengali override in
+  `src/data/bengaliContent.ts`. The React route renders the panel; `scripts/prerender.ts`
+  renders the same fields into the static page through `renderBlogAffiliateCtaHtml`.
+- **One action per block.** The headline and body come from the post's own fields —
+  never re-worded in the renderer — and the button label comes from
+  `getAffiliateCtaButtonLabel()` so the two renderers cannot drift apart. The label
+  names what the partner actually shows (fares, transfer quotes, eSIM plans).
+- **The static page must carry it.** Until 2026-11-05 only one hardcoded slug emitted
+  this block, so 34 posts rendered their next step after hydration and nowhere else.
+  `verify:build` now asserts the declared partner URL, with a sponsored `rel`, in both
+  the EN and BN file on disk.
+- **Disclosure is evergreen.** `BLOG_AFFILIATE_CTA_DISCLOSURE` says URAL may earn a
+  commission and that the reader pays the partner's price. It never states URAL's rate
+  or an offer end date. Same rule as the hotel panel above.
+- **A paused partner is not a dead end.** The URL resolves through
+  `resolvePartnerUrl`; if that yields nothing the block is omitted rather than shipped
+  as a link to nowhere.
+- **Exemptions are explicit.** A ritual walkthrough may carry no commercial block; each
+  exemption is one named line in `scripts/verify-build.ts` with its reason, never
+  inferred from a missing field.
+
 ### Inputs / Fields
 - **Style:** white fill, `border-default` `#CBD5E1`, `rounded-md`/`rounded-lg`.
 - **Focus:** visible ring in brand gold or navy at 2–3px with offset. Never remove outline

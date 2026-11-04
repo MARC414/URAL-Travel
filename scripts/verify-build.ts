@@ -7439,6 +7439,62 @@ check(
   }]`
 );
 
+// --- Every declared affiliate next step must exist in the static HTML --------
+// Until 2026-11-05 the prerenderer emitted an article-level affiliate CTA for a
+// single hardcoded slug. Every other post's `affiliateCTA` rendered only after
+// hydration, so a first-pass crawl, an RSS reader or a browser whose widget
+// chunk failed reached a page with no monetised next step at all — and the
+// failure was invisible because the data (and the post-build checks) only ever
+// looked at `affiliateCTA`, never at the bytes. This asserts the bytes: the
+// partner URL the post declares, with a sponsored rel, in both locales.
+const affiliateRenderIssues: string[] = [];
+const affiliateRenderedSlugs = new Set<string>();
+const bnEffectiveCta = new Map(
+  getLocalizedBlogs("bn").map((post) => [post.id, post.affiliateCTA])
+);
+for (const post of BLOG_DATA) {
+  if (!post.affiliateCTA) continue;
+  const enExpected = resolvePartnerUrl(AFFILIATE_LINKS[post.affiliateCTA.provider]);
+  if (!enExpected) continue; // paused with no live fallback: nothing to render
+  const bnCta = bnEffectiveCta.get(post.id);
+  const bnExpected = bnCta ? resolvePartnerUrl(AFFILIATE_LINKS[bnCta.provider]) : "";
+  for (const [locale, expected, page] of [
+    ["EN", enExpected, path.join(DIST_DIR, "blog", `${post.slug}.html`)],
+    [
+      "BN",
+      bnExpected,
+      path.join(DIST_DIR, "bn", "blog", `${post.slug}.html`),
+    ],
+  ] as const) {
+    if (!expected) continue;
+    const html = read(page) ?? "";
+    if (!html) {
+      affiliateRenderIssues.push(`${post.id}: ${locale} page missing`);
+      continue;
+    }
+    const sponsored = new RegExp(
+      `<a[^>]*href="${expected.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"[^>]*rel="[^"]*sponsored`
+    );
+    if (!sponsored.test(html)) {
+      affiliateRenderIssues.push(
+        `${post.id}: ${locale} static page has no sponsored link to ${bnCta ? "its" : "the"} declared partner`
+      );
+      continue;
+    }
+    if (locale === "EN") affiliateRenderedSlugs.add(post.slug);
+  }
+}
+check(
+  affiliateRenderIssues.length === 0,
+  `content contract: every declared affiliate next step is rendered in the static EN and BN page [${
+    affiliateRenderIssues.slice(0, 3).join("; ")
+  }]`
+);
+check(
+  affiliateRenderedSlugs.size >= 40,
+  `content contract: the static builder emits affiliate next steps at scale, not for a token page (${affiliateRenderedSlugs.size} posts)`
+);
+
 // Non-blocking debt report. Printed on every run so the numbers in §10 of the
 // standard are reproducible, but never counted as a pass.
 const contentDebt: string[] = [];

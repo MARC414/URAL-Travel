@@ -404,6 +404,55 @@ export function sanitizeExpiredPromoText(text: string): string {
   return out;
 }
 
+/**
+ * Button wording for the article-level affiliate next step.
+ *
+ * That next step is rendered twice: by the React route after hydration, and by
+ * `scripts/prerender.ts` into the crawlable HTML. Two hand-written copies of the
+ * same sentence drift, and a drifted label is a broken promise — a "check hotel
+ * rates" button that opens a flight search is exactly the kind of mismatch this
+ * site exists not to ship. So the wording lives here once and both renderers
+ * read it.
+ *
+ * The label names what the reader will actually see at the partner: live fares,
+ * transfer quotes, eSIM plans. It deliberately never names a price, a discount
+ * or an end date — those are the partner's numbers, not ours.
+ */
+const AFFILIATE_CTA_LABELS: Record<string, { en: string; bn: string }> = {
+  aviasales: { en: "Compare Live Flight Fares", bn: "লাইভ বিমান ভাড়া তুলনা করুন" },
+  tiqets: { en: "Check Skip-the-Line Passes", bn: "Skip-the-Line টিকিট দেখুন" },
+  klook: { en: "Compare Tour & Attraction Passes", bn: "ট্যুর ও ডে-পাস ভাড়া দেখুন" },
+  kkday: { en: "Compare Tour & Attraction Passes", bn: "ট্যুর ও ডে-পাস ভাড়া দেখুন" },
+  kiwitaxi: { en: "Check Private Car & Pickup Rates", bn: "প্রাইভেট কার ও পিকআপ ভাড়া দেখুন" },
+  welcomePickups: { en: "Check Private Car & Pickup Rates", bn: "প্রাইভেট কার ও পিকআপ ভাড়া দেখুন" },
+  airalo: { en: "Check Travel eSIM Plans", bn: "Saudi / ট্রাভেল eSIM দেখুন" },
+  airhelp: { en: "Check Flight Compensation Eligibility", bn: "ফ্লাইট ক্ষতিপূরণের যোগ্যতা দেখুন" },
+  qeeq: { en: "Compare Car Rental Rates", bn: "গাড়ি ভাড়ার দাম তুলনা করুন" },
+};
+
+const AFFILIATE_CTA_FALLBACK_LABEL = {
+  en: "Compare Live Prices & Availability",
+  bn: "লাইভ ভাড়া ও অ্যাভেইলেবিলিটি দেখুন",
+};
+
+export function getAffiliateCtaButtonLabel(provider: string, lang: "en" | "bn" = "en"): string {
+  const entry = AFFILIATE_CTA_LABELS[provider];
+  return entry ? entry[lang] : AFFILIATE_CTA_FALLBACK_LABEL[lang];
+}
+
+/**
+ * Evergreen commission disclosure for an article-level affiliate next step.
+ *
+ * States that URAL may earn a commission and that the reader's price does not
+ * change. It never states URAL's commission rate or an offer end date: both are
+ * commercial terms that go stale, and a reader-facing page is the wrong place to
+ * carry them. Same rule the Klook hotel panel follows.
+ */
+export const BLOG_AFFILIATE_CTA_DISCLOSURE = {
+  en: "Affiliate link: URAL may earn a commission if you book through this link. You pay the partner's price, not a marked-up one.",
+  bn: "অ্যাফিলিয়েট লিংক: এই লিংক দিয়ে বুক করলে URAL কমিশন পেতে পারে। আপনি পার্টনারের দামই দেন, বাড়তি কিছু নয়।",
+};
+
 export interface RadicalStorageBlogPlacement {
   badgeEn: string;
   badgeBn: string;

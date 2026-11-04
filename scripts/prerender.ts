@@ -97,6 +97,8 @@ import {
   resolvePartnerUrl,
   sanitizeExpiredPromoText,
   AFFILIATE_LINKS,
+  getAffiliateCtaButtonLabel,
+  BLOG_AFFILIATE_CTA_DISCLOSURE,
 } from "../src/components/AffiliatePartners";
 import {
   KLOOK_HOTEL_BLOG_PLACEMENTS,
@@ -507,6 +509,38 @@ function renderCoxsBazarBookingCtaHtml(locale: "en" | "bn"): string {
   }</p><p><a href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener noreferrer">${
     isBengali ? "WhatsApp-এ URAL ঢাকা ডেস্কে কথা বলুন →" : "Chat with the URAL Dhaka desk on WhatsApp →"
   }</a></p></section>`;
+}
+
+/**
+ * Static twin of the React article-level affiliate next step.
+ *
+ * Every published post may declare an `affiliateCTA`; the React route renders it
+ * after hydration. Without this function the crawlable HTML carried no
+ * monetised next step for any post except one hardcoded slug, so a first-pass
+ * crawl, an RSS reader or a failed widget chunk produced a dead end.
+ *
+ * One section, one action: the headline and body come from the post's own
+ * fields (never re-written here), the button label from the shared helper, and
+ * the disclosure is evergreen — it names the commission but never a rate or an
+ * end date. A paused partner resolves through `resolvePartnerUrl`, and if that
+ * resolution yields nothing the section is dropped rather than shipped as a
+ * link to nowhere.
+ */
+function renderBlogAffiliateCtaHtml(
+  cta: { provider: string; headline: string; body: string } | undefined,
+  locale: "en" | "bn"
+): string {
+  if (!cta) return "";
+  const href = resolvePartnerUrl(AFFILIATE_LINKS[cta.provider as keyof typeof AFFILIATE_LINKS]);
+  if (!href) return "";
+  const label = getAffiliateCtaButtonLabel(cta.provider, locale);
+  return `<section aria-labelledby="article-affiliate-cta"><h2 id="article-affiliate-cta">${escapeHtml(
+    sanitizeExpiredPromoText(cta.headline)
+  )}</h2><p>${escapeHtml(sanitizeExpiredPromoText(cta.body))}</p><p><a href="${escapeHtml(
+    href
+  )}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(
+    label
+  )}</a></p><p><em>${escapeHtml(BLOG_AFFILIATE_CTA_DISCLOSURE[locale])}</em></p></section>`;
 }
 
 function renderCoxsBazarAuthorBioHtml(locale: "en" | "bn"): string {
@@ -2801,15 +2835,13 @@ function buildAllRoutes(): PrerenderRoute[] {
             : ""
         }.</p></section>`
       : "";
-    // The Umrah Cost guide's matched next step lives in its affiliateCTA
-    // (live Dhaka–Saudi fares vs the worksheet). The React route renders that
-    // CTA, but the static renderer otherwise emitted no next step at all for
-    // this post, so render the same headline/body here — slug-scoped, reading
-    // the same source fields, never a second copy of the wording.
-    const umrahNextStepHtml =
-      post.slug === "umrah-hajj-guide-bangladesh-nusuk-bdt-cost" && post.affiliateCTA
-        ? `<section aria-labelledby="umrah-cost-next-step"><h2 id="umrah-cost-next-step">${escapeHtml(post.affiliateCTA.headline)}</h2><p>${escapeHtml(post.affiliateCTA.body)}</p><p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[post.affiliateCTA.provider]))}" target="_blank" rel="noopener noreferrer sponsored">Compare Live Flight Fares</a></p></section>`
-        : "";
+    // The article-level affiliate next step used to be emitted for one slug only
+    // (the Umrah Cost guide), so every other post's `affiliateCTA` existed after
+    // hydration and nowhere else: a no-JS reader, a crawler reading first-pass
+    // HTML or a browser that failed to load the widget chunk saw no monetised
+    // next step at all. Render it for every post that defines one, from the same
+    // fields and the same label helper the React route uses.
+    const affiliateCtaHtml = renderBlogAffiliateCtaHtml(post.affiliateCTA, "en");
     const klookHotelPlacement = KLOOK_HOTEL_BLOG_PLACEMENTS[post.slug];
     const klookHotelHtml =
       klookHotelPlacement && AFFILIATE_OFFER_REGISTRY.klook.status === "active" && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active"
@@ -2889,7 +2921,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           ${multiPartnerHtml}
           ${klookHotelHtml}
           ${travelpayoutsReferralHtml}
-          ${umrahNextStepHtml}
+          ${affiliateCtaHtml}
           ${planLinksHtml}
           ${relatedGuidesHtml}
           ${post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking" ? renderCoxsBazarBookingCtaHtml("en") : ""}
@@ -3257,20 +3289,14 @@ function buildBengaliBody(
           )
         );
       }
-      if (id === "umrah-hajj-guide-bangladesh-nusuk-bdt-cost") {
+      {
         // Same matched next step as the English static page, from the Bengali
         // override's affiliateCTA (falling back to the English CTA exactly as
-        // getLocalizedBlogs does).
-        const umrahCtaBn =
+        // getLocalizedBlogs does) and rendered by the same shared helper.
+        const blogCtaBn =
           override.affiliateCTA !== undefined ? override.affiliateCTA : bnPost?.affiliateCTA;
-        if (umrahCtaBn) {
-          parts.push(
-            bnSection(
-              umrahCtaBn.headline,
-              `<p>${escapeHtml(umrahCtaBn.body)}</p><p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[umrahCtaBn.provider]))}" target="_blank" rel="noopener noreferrer sponsored">লাইভ বিমান ভাড়া তুলনা করুন</a></p>`
-            )
-          );
-        }
+        const blogCtaHtmlBn = renderBlogAffiliateCtaHtml(blogCtaBn || undefined, "bn");
+        if (blogCtaHtmlBn) parts.push(blogCtaHtmlBn);
       }
       const klookHotelPlacementBn = KLOOK_HOTEL_BLOG_PLACEMENTS[id];
       if (
