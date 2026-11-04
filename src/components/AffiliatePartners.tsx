@@ -44,7 +44,14 @@ export type AffiliatePartnerKey = keyof typeof AFFILIATE_LINKS;
  * (unlike `trs`, the project id — see the TRS_ID comment in
  * TravelpayoutsCustomWidget.tsx).
  */
-export const TRAVELPAYOUTS_REFERRAL_URL = "https://www.travelpayouts.com/?marker=675992";
+/**
+ * The Travelpayouts account-level marker, shared by every tracked link URAL
+ * publishes. Kept as a named constant because the live Klook smoke test reads
+ * it back out of the redirect to prove our tracking survived the hop.
+ */
+export const TRAVELPAYOUTS_MARKER = "675992";
+
+export const TRAVELPAYOUTS_REFERRAL_URL = `https://www.travelpayouts.com/?marker=${TRAVELPAYOUTS_MARKER}`;
 
 /**
  * Per-placement SubID. Without one, all referral links are byte-identical and

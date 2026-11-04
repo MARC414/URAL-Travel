@@ -3419,6 +3419,24 @@ if (sitemap) {
     "the dedicated Klook hotel collection has its own tracked link, deep-link builder (?u= & sub_id=), curated Bangkok/KL picks, and shares the registered hotel commission expiry"
   );
 
+  // The `?u=` parameter is an outbound forwarding instruction, so an unchecked
+  // value would make our tracked link an open redirect. Only Klook's own HTTPS
+  // hosts may be forwarded; every rejection falls back to the plain partner link.
+  const klookRedirectGuards = [
+    buildKlookDeepLink("https://www.klook.com.evil.example/hotels/detail/1", "x") === AFFILIATE_LINKS.klookHotels,
+    buildKlookDeepLink("https://evil.example/?u=https://www.klook.com", "x") === AFFILIATE_LINKS.klookHotels,
+    buildKlookDeepLink("http://www.klook.com/hotels/detail/1", "x") === AFFILIATE_LINKS.klookHotels,
+    buildKlookDeepLink("javascript:alert(1)", "x") === AFFILIATE_LINKS.klookHotels,
+    buildKlookDeepLink("not a url", "x") === AFFILIATE_LINKS.klookHotels,
+    !buildKlookDeepLink("https://evil.example/hotels/detail/1", "x").includes("u="),
+    buildKlookDeepLink("https://klook.com/hotels/detail/1", "x").includes("u="),
+    buildKlookDeepLink("https://www.klook.com/hotels/detail/1", "x").includes("u="),
+  ];
+  check(
+    klookRedirectGuards.every(Boolean),
+    `the Klook deep-link builder forwards only https Klook hosts and refuses lookalike, plain-http, javascript: and malformed targets (${klookRedirectGuards.filter((ok) => !ok).length} of ${klookRedirectGuards.length} guards failed)`
+  );
+
   check(
     enBlocks.length >= MIN_EN_ROUTES,
     `sitemap has >= ${MIN_EN_ROUTES} English URLs (found ${enBlocks.length})`

@@ -33,6 +33,30 @@ export const KLOOK_HOTEL_COMMISSION_NOTE = {
 } as const;
 
 /**
+ * Hosts a Klook deep link may point at.
+ *
+ * The `?u=` forwarding parameter tells the Travelpayouts short link where to
+ * send the reader, so an unchecked value would turn our tracked affiliate link
+ * into an open redirect. Only Klook's own HTTPS hosts are accepted; anything
+ * else falls back to the plain partner link instead of forwarding.
+ */
+export const KLOOK_DEEP_LINK_HOSTS = ["klook.com"] as const;
+
+export function isAllowedKlookTarget(targetUrl: string): boolean {
+  let parsed: URL;
+  try {
+    parsed = new URL(targetUrl.trim());
+  } catch {
+    return false;
+  }
+  if (parsed.protocol !== "https:") return false;
+  const host = parsed.hostname.toLowerCase();
+  return KLOOK_DEEP_LINK_HOSTS.some(
+    (allowed) => host === allowed || host.endsWith(`.${allowed}`)
+  );
+}
+
+/**
  * Builds a tracked Klook affiliate deep link using the `.tpo.li` short-link
  * forwarding parameter (`?u=<encoded-klook-url>&sub_id=<placementId>`),
  * while preserving `resolvePartnerUrl()` pause/fallback protection.
@@ -49,6 +73,7 @@ export function buildKlookDeepLink(
   ) {
     return base;
   }
+  if (!isAllowedKlookTarget(targetUrl)) return base;
   const encodedTarget = encodeURIComponent(targetUrl.trim());
   return subId
     ? `${base}?u=${encodedTarget}&sub_id=${encodeURIComponent(subId.trim())}`
