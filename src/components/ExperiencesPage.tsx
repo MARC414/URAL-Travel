@@ -730,11 +730,11 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
               </div>
 
               <a
-                href={
+                href={resolvePartnerUrl(
                   activeCalcCity.provider === "tiqets"
                     ? AFFILIATE_LINKS.tiqets
                     : AFFILIATE_LINKS.klook
-                }
+                )}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
                 className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
@@ -891,8 +891,9 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
       {/* 3. CITY-BY-CITY "MORNING LANDMARK + AFTERNOON CRUISE + SUNSET VIEWPOINT" BUNDLES */}
       <div className="space-y-12">
         {visibleCities.map((hub, idx) => {
-          const partnerUrl =
-            hub.provider === "tiqets" ? AFFILIATE_LINKS.tiqets : AFFILIATE_LINKS.klook;
+          const partnerUrl = resolvePartnerUrl(
+            hub.provider === "tiqets" ? AFFILIATE_LINKS.tiqets : AFFILIATE_LINKS.klook
+          );
           const partnerName = hub.provider === "tiqets" ? "Tiqets" : "Klook";
 
           return (

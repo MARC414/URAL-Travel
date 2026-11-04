@@ -114,7 +114,7 @@ export const RADICAL_STORAGE_PROMO = {
 export const KLOOK_PROMO = {
   affiliateUrl: "https://klook.tpo.li/IYOU76Bn",
   partnerName: "Klook Hotels, Tours & Activities",
-  toursAndActivitiesRate: "10%",
+  toursAndActivitiesRate: "12%",
   hotelsRate: "8%",
   // Bengali twins of the two values above. Kept beside them so a rate or date
   // change cannot update the English disclosure and leave the Bengali stale.
@@ -122,7 +122,7 @@ export const KLOOK_PROMO = {
   validUntil: "December 31, 2026",
   validUntilBn: "৩১ ডিসেম্বর ২০২৬",
   expiresAt: "2026-12-31",
-  categories: "Global Hotels & Resorts (8%), Tours & Sightseeing (10%), Activities & Experiences (10%)"
+  categories: "Global Hotels & Resorts (8%), Tours & Sightseeing (12%), Activities & Experiences (12%)"
 };
 
 export const GO_CITY_PROMO = {
@@ -174,7 +174,7 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     url: AFFILIATE_LINKS.klook,
     fallbackPartner: "kkday",
     expiresAt: KLOOK_PROMO.expiresAt,
-    activeNote: `Boosted Q4 Commission through ${KLOOK_PROMO.validUntil}: 10% Tours/Activities + 8% Hotels (Web & App)`,
+    activeNote: `Boosted Q4 Commission through ${KLOOK_PROMO.validUntil}: ${KLOOK_PROMO.toursAndActivitiesRate} Tours/Activities + ${KLOOK_PROMO.hotelsRate} Hotels (Web & App)`,
     expiredFallbackBehavior: "Keeps permanent Klook Hotels & Activities link live after Dec 31, 2026; falls back to KKday if ever paused"
   },
   klookHotels: {

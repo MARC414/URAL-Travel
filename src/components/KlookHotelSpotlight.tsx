@@ -7,7 +7,9 @@ import {
   resolvePartnerUrl,
 } from "./AffiliatePartners";
 import {
+  KLOOK_CURATED_HOTEL_PICKS,
   KLOOK_HOTEL_CHECK_STEPS,
+  buildKlookHotelDetailLink,
   getKlookHotelCommissionNote,
 } from "./KlookHotelOffers";
 import { getHotelGuideAffiliatePlacement } from "../utils/affiliatePlacement";
@@ -59,6 +61,7 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en" }: KlookHotelSp
   const isBn = lang === "bn";
   const cityLabel = isBn ? CITY_BN[city] ?? city : city;
   const href = resolvePartnerUrl(AFFILIATE_LINKS.klookHotels);
+  const curatedPicks = KLOOK_CURATED_HOTEL_PICKS[guideId] ?? [];
 
   const steps = KLOOK_HOTEL_CHECK_STEPS[lang];
 
@@ -109,6 +112,49 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en" }: KlookHotelSp
           </li>
         ))}
       </ol>
+
+      {curatedPicks.length > 0 && (
+        <div className="mt-5 space-y-2.5 rounded-xl border border-white/15 bg-white/[0.03] p-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h3 className="font-serif text-sm font-bold text-white">
+              {isBn
+                ? `${cityLabel}-এর এলাকা অনুযায়ী Klook হোটেল শর্টলিস্ট`
+                : `Klook hotel picks in ${city} by area`}
+            </h3>
+            <span className="font-mono text-[10px] text-slate-300">
+              {isBn
+                ? "হোটেল পেজে তারিখ ও চূড়ান্ত মোট দাম দেখুন"
+                : "Check dates & final total on the property page"}
+            </span>
+          </div>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {curatedPicks.map((pick) => (
+              <a
+                key={pick.hotelId}
+                href={buildKlookHotelDetailLink(pick.hotelId, pick.subId)}
+                data-affiliate-placement={pick.subId}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="group flex items-start justify-between gap-2 rounded-lg border border-white/10 bg-white/[0.04] p-3 text-left transition-colors hover:border-brand-gold/50 hover:bg-white/[0.08]"
+              >
+                <div className="min-w-0 space-y-0.5">
+                  <span className="block truncate text-xs font-bold text-white group-hover:text-brand-gold">
+                    {pick.name}
+                  </span>
+                  <span className="block font-mono text-[10px] text-slate-300">
+                    {isBn ? pick.areaBn : pick.areaEn} · {isBn ? pick.tagBn : pick.tagEn}
+                  </span>
+                </div>
+                <ExternalLink
+                  size={12}
+                  className="mt-0.5 shrink-0 text-slate-300 group-hover:text-brand-gold"
+                  aria-hidden="true"
+                />
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="mt-5 flex flex-wrap items-center gap-3">
         <a

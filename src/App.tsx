@@ -4012,16 +4012,16 @@ export default function App() {
             <div className="hero-enter relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col items-center sm:items-start justify-center space-y-6">
               
 
-              <h1 className="font-sans text-[clamp(2.3rem,6vw,4.5rem)] font-[900] leading-[1.1] tracking-tight text-white max-w-4xl drop-shadow text-center sm:text-left">
+              <h1 className="ural-page-title font-serif text-[clamp(2.3rem,6vw,4.5rem)] font-[900] leading-[1.1] tracking-tight text-white max-w-4xl drop-shadow text-center sm:text-left">
                 {isBn ? (
                   <>
-                    বাংলাদেশ থেকে ভ্রমণ <br />
+                    যেকোনো স্থান থেকে ভ্রমণ <br />
                     <span className="text-[#F6B73C]">পরিকল্পনা করুন স্মার্টভাবে</span>
                   </>
                 ) : (
                   <>
                     Plan Your Trip <br />
-                    <span className="text-[#F6B73C]">From Bangladesh</span>
+                    <span className="text-[#F6B73C]">From Anywhere</span>
                   </>
                 )}
               </h1>

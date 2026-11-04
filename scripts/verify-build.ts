@@ -51,8 +51,11 @@ import {
   sanitizeExpiredPromoText,
 } from "../src/components/AffiliatePartners";
 import {
+  KLOOK_CURATED_HOTEL_PICKS,
   KLOOK_HOTEL_BLOG_PLACEMENTS,
   KLOOK_HOTEL_COMMISSION_NOTE,
+  buildKlookDeepLink,
+  buildKlookHotelDetailLink,
 } from "../src/components/KlookHotelOffers";
 import { KlookHotelSpotlight } from "../src/components/KlookHotelSpotlight";
 import { KKdayPromoBanner } from "../src/components/KKdayPromoBanner";
@@ -1326,7 +1329,7 @@ const staticHeroMarkup =
     ? distIndexHtml!.slice(staticHeroStart, staticHeroMainStart)
     : "";
 const staticHeroHasCopyAndCtas =
-  /<h1[^>]*class="pre-hydration-hero__title"[^>]*>[\s\S]*?Plan Your Trip/.test(staticHeroMarkup) &&
+  /<h1[^>]*class="pre-hydration-hero__title"[^>]*>[\s\S]*?Plan Your Trip[\s\S]*?From Anywhere/.test(staticHeroMarkup) &&
   staticHeroMarkup.includes("Flights, hotels, visas, and destination guides") &&
   staticHeroMarkup.includes('href="/flights"') &&
   staticHeroMarkup.includes('href="/hotels"');
@@ -3348,12 +3351,22 @@ if (sitemap) {
   check(
     AFFILIATE_LINKS.klookHotels === "https://klook.tpo.li/tnjuBwoy" &&
       AFFILIATE_LINKS.klookHotels !== AFFILIATE_LINKS.klook &&
+      KLOOK_PROMO.toursAndActivitiesRate === "12%" &&
+      KLOOK_PROMO.hotelsRate === "8%" &&
       AFFILIATE_OFFER_REGISTRY.klookHotels.url === AFFILIATE_LINKS.klookHotels &&
       AFFILIATE_OFFER_REGISTRY.klookHotels.offerType === "commission-boost" &&
       AFFILIATE_OFFER_REGISTRY.klookHotels.expiresAt === KLOOK_PROMO.expiresAt &&
       AFFILIATE_OFFER_REGISTRY.klook.offerType === "commission-boost" &&
-      AFFILIATE_OFFER_REGISTRY.klook.expiresAt === KLOOK_PROMO.expiresAt,
-    "the dedicated Klook hotel collection has its own tracked link and shares the registered hotel commission expiry"
+      AFFILIATE_OFFER_REGISTRY.klook.expiresAt === KLOOK_PROMO.expiresAt &&
+      buildKlookHotelDetailLink("279724", "hotel_bkk_pratunam_vince") ===
+        `${AFFILIATE_LINKS.klookHotels}?u=${encodeURIComponent("https://www.klook.com/hotels/detail/279724")}&sub_id=hotel_bkk_pratunam_vince` &&
+      buildKlookDeepLink("https://www.klook.com/hotels/detail/437543", "hotel_hk_wanchai", "klook") ===
+        `${AFFILIATE_LINKS.klook}?u=${encodeURIComponent("https://www.klook.com/hotels/detail/437543")}&sub_id=hotel_hk_wanchai` &&
+      KLOOK_CURATED_HOTEL_PICKS["bangkok-hotels"]?.length === 6 &&
+      KLOOK_CURATED_HOTEL_PICKS["kuala-lumpur-hotels"]?.length === 6 &&
+      spotlightActiveEn.includes(buildKlookHotelDetailLink("279724", "hotel_bkk_pratunam_vince").replace(/&/g, "&amp;")) &&
+      spotlightActiveBn.includes(buildKlookHotelDetailLink("279724", "hotel_bkk_pratunam_vince").replace(/&/g, "&amp;")),
+    "the dedicated Klook hotel collection has its own tracked link, deep-link builder (?u= & sub_id=), curated Bangkok/KL picks, and shares the registered hotel commission expiry"
   );
 
   check(
