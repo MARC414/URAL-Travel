@@ -2222,7 +2222,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Where to Stay in Dubai: Metro & Marina Hotels", path: "/hotels/dubai-hotels" },
       { text: "Dubai Desert Safari & Burj Khalifa Passes", path: "/experiences?region=asia&city=dubai-klook" }
     ],
-    affiliateCTA: { provider: "kiwitaxi", headline: "Save on transport too", body: "A pre-booked airport transfer is usually cheaper than a metered taxi at arrival." }
+    affiliateCTA: { provider: "kiwitaxi", headline: "Agree the transfer price before you land", body: "A pre-booked private transfer is quoted and confirmed before you travel, so the fare is known in advance; a street taxi is metered at arrival instead. Compare the quoted total for your own arrival time, terminal and luggage, and check what the provider does if your flight is delayed." }
   },
   {
     id: "blog-4",
