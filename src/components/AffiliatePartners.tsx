@@ -124,9 +124,7 @@ export const KLOOK_PROMO = {
   toursAndActivitiesRate: "12%",
   hotelsRate: "8%",
   // Bengali twins of the two values above. Kept beside them so a rate or date
-  // change cannot update the English registry metadata and leave the Bengali
-  // value stale. Neither string ships to travellers: the reader-facing hotel
-  // disclosure is evergreen and carries no rate or date.
+  // change cannot update the English disclosure and leave the Bengali stale.
   hotelsRateBn: "৮%",
   validUntil: "December 31, 2026",
   validUntilBn: "৩১ ডিসেম্বর ২০২৬",
@@ -461,46 +459,6 @@ export const RADICAL_STORAGE_BLOG_PLACEMENTS: Record<string, RadicalStorageBlogP
       " এবং শেষ বিকেলে হাত খালি রেখে শপিং ও ডিনার শেষ করে এয়ারপোর্টে যান।",
     buttonLabelEn: "Check Luggage Storage in Bangkok, KL & Dubai",
     buttonLabelBn: "Bangkok, KL ও Dubai লাগেজ স্টোরেজ দেখুন"
-  },
-  "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide": {
-    badgeEn: "🧳 DAY 4 MUSTAFA CENTRE SHOPPING & LATE FLIGHT TIP",
-    badgeBn: "🧳 ৪র্থ দিন Mustafa Centre শপিং ও লাগেজ টিপস",
-    headlineEn: "Shopping at Mustafa Centre or Bugis After 11:00 AM Hotel Check-Out?",
-    headlineBn: "হোটেল চেক-আউটের পর Mustafa Centre বা Bugis-এ শেষ মুহূর্তের শপিং করছেন?",
-    bodyBeforeAnchorEn:
-      "Navigating Mustafa Centre's crowded aisles or riding the MRT to Marina Bay with heavy family suitcases after morning hotel check-out is exhausting. Before your evening flight from Changi Airport, ",
-    anchorTextEn:
-      "book an insured Radical Storage luggage drop near Little India, Bugis, or Lavender MRT station",
-    bodyAfterAnchorEn:
-      " so your family can shop, pray at Masjid Sultan, and dine hands-free before heading to the airport.",
-    bodyBeforeAnchorBn:
-      "সকালে হোটেল চেক-আউট করার পর ভারী স্যুটকেস টেনে Mustafa Centre-এ শপিং করা বা MRT-তে চড়া বেশ কষ্টকর। চাঙ্গি এয়ারপোর্টে যাওয়ার আগে ",
-    anchorTextBn:
-      "Little India, Bugis বা MRT স্টেশনের কাছে ভেরিফায়েড Radical Storage পয়েন্টে ব্যাগ জমা রাখুন",
-    bodyAfterAnchorBn:
-      " এবং হাত খালি রেখে আরামে শেষ দিনের কেনাকাটা ও খাওয়া-দাওয়া শেষ করুন।",
-    buttonLabelEn: "Book Singapore MRT & Little India Bag Storage",
-    buttonLabelBn: "সিঙ্গাপুরে লাগেজ স্টোরেজ লোকেশন দেখুন"
-  },
-  "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide": {
-    badgeEn: "🧳 FINAL-DAY ABU DHABI STOP & CHECK-OUT LOGISTICS",
-    badgeBn: "🧳 শেষ দিনে আবুধাবি ডে-ট্রিপ ও লাগেজ স্টোরেজ টিপস",
-    headlineEn: "Doing Your Abu Dhabi Day Trip After Checking Out of Your Dubai Hotel?",
-    headlineBn: "দুবাই হোটেল চেক-আউট করে কি সরাসরি আবুধাবি ডে-ট্রিপে যাচ্ছেন?",
-    bodyBeforeAnchorEn:
-      "Sheikh Zayed Grand Mosque and Qasr Al Watan security scanners do not allow visitors to bring rolling suitcases into the prayer halls or palace galleries. If you are visiting Abu Dhabi on your last day in the UAE, ",
-    anchorTextEn:
-      "leave your suitcases at a Radical Storage point near Ibn Battuta, Al Ghubaiba, or central Abu Dhabi",
-    bodyAfterAnchorEn:
-      " before boarding the E100/E101 intercity bus so you can tour the mosque and palace stress-free.",
-    bodyBeforeAnchorBn:
-      "শেখ জায়েদ গ্র্যান্ড মসজিদ এবং কাসর আল ওয়াতান প্রাসাদের সিকিউরিটি গেটে ট্রলি ব্যাগ বা বড় স্যুটকেস নিয়ে প্রবেশ করা যায় না। আপনি যদি সফরের শেষ দিনে হোটেল ছেড়ে আবুধাবি যান, তবে বাসে ওঠার আগে ",
-    anchorTextBn:
-      "Ibn Battuta, Al Ghubaiba বা আবুধাবি বাস স্টেশনের কাছে Radical Storage-এ লাগেজ জমা রাখুন",
-    bodyAfterAnchorBn:
-      " এবং নিশ্চিন্তে মসজিদ ও প্রাসাদ পরিদর্শন করুন।",
-    buttonLabelEn: "Find Dubai & Abu Dhabi Luggage Storage",
-    buttonLabelBn: "দুবাই ও আবুধাবি লাগেজ স্টোরেজ দেখুন"
   },
   "sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost": {
     badgeEn: "🧳 COLOMBO TRANSIT LAYOVER & TRAIN BAGGAGE TIP",
@@ -975,54 +933,7 @@ export const MULTI_PARTNER_BLOG_PLACEMENTS: Record<string, MultiPartnerBlogPlace
     primaryButtonEn: "Explore Go City All-Inclusive Passes",
     primaryButtonBn: "Go City অল-ইনক্লুসিভ পাস দেখুন",
   },
-  "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide": {
-    primaryPartner: "goCity",
-    secondaryPartner: "yesim",
-    badgeEn: "🎟️ GO CITY SINGAPORE PASS + YESIM ESIM",
-    badgeBn: "🎟️ Go City সিঙ্গাপুর পাস + Yesim eSIM",
-    headlineEn: "Bundling Gardens by the Bay, Sentosa Cable Car & Night Safari? Check Go City Singapore",
-    headlineBn: "Gardens by the Bay, Sentosa ও Night Safari একসাথে ঘুরবেন? Go City পাস দেখুন",
-    bodyBeforeAnchorEn:
-      "If your family plans to visit 3 to 7 attractions across Marina Bay, Sentosa, and Mandai, ",
-    anchorTextEn:
-      "compare the Go City Singapore Explorer & All-Inclusive Pass",
-    bodyAfterAnchorEn:
-      " to cut gate admission costs by up to 45%—and stay connected on the MRT with a Yesim Singapore eSIM.",
-    bodyBeforeAnchorBn:
-      "সিঙ্গাপুরে ৩ থেকে ৭টি আকর্ষণ একসাথে ঘুরতে চাইলে ",
-    anchorTextBn:
-      "Go City Singapore Pass-এর মাধ্যমে টিকিট খরচে ৪৫% পর্যন্ত সাশ্রয় করুন",
-    bodyAfterAnchorBn:
-      " এবং MRT ও ম্যাপ ব্যবহারের জন্য Yesim Singapore eSIM সাথে রাখুন।",
-    primaryButtonEn: "Check Go City Singapore Pass Deals",
-    primaryButtonBn: "Go City সিঙ্গাপুর পাস দেখুন",
-    secondaryButtonEn: "Get Yesim Singapore eSIM",
-    secondaryButtonBn: "Yesim সিঙ্গাপুর eSIM নিন"
-  },
-  "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide": {
-    primaryPartner: "goCity",
-    secondaryPartner: "getTransfer",
-    badgeEn: "🎟️ DUBAI & ABU DHABI EXPLORER PASS + PRIVATE INTERCITY CAR",
-    badgeBn: "🎟️ দুবাই ও আবুধাবি পাস (Go City) + প্রাইভেট গাড়ি",
-    headlineEn: "Combining Louvre Abu Dhabi, Qasr Al Watan & Burj Khalifa? Save with Go City Dubai",
-    headlineBn: "লুভর আবুধাবি, কাসর আল ওয়াতান ও বুর্জ খলিফা একসাথে দেখবেন? Go City Pass নিন",
-    bodyBeforeAnchorEn:
-      "Visitors combining Dubai and Abu Dhabi highlights can ",
-    anchorTextEn:
-      "bundle Louvre Abu Dhabi, Qasr Al Watan, Desert Safari, and Burj Khalifa on a single Go City Pass",
-    bodyAfterAnchorEn:
-      " or book a private door-to-door Dubai ↔ Abu Dhabi family car via GetTransfer.",
-    bodyBeforeAnchorBn:
-      "দুবাই ও আবুধাবির প্রধান আকর্ষণগুলো একসাথে ঘুরতে ",
-    anchorTextBn:
-      "Go City Pass নিয়ে এক পাসে সর্বোচ্চ ৫০% পর্যন্ত টিকিট খরচ বাঁচান",
-    bodyAfterAnchorBn:
-      " অথবা পরিবারের জন্য দুবাই থেকে আবুধাবি যাওয়ার প্রাইভেট গাড়ি GetTransfer-এ বুক করুন।",
-    primaryButtonEn: "Browse Go City Dubai & Abu Dhabi Pass",
-    primaryButtonBn: "Go City দুবাই ও আবুধাবি পাস দেখুন",
-    secondaryButtonEn: "Book Private Dubai–Abu Dhabi Car (GetTransfer)",
-    secondaryButtonBn: "GetTransfer প্রাইভেট গাড়ি বুক করুন"
-  }
+
 };
 
 export function MultiPartnerBlogCallout({

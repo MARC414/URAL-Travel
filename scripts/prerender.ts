@@ -2781,6 +2781,15 @@ function buildAllRoutes(): PrerenderRoute[] {
             : ""
         }.</p></section>`
       : "";
+    // The Umrah Cost guide's matched next step lives in its affiliateCTA
+    // (live Dhaka–Saudi fares vs the worksheet). The React route renders that
+    // CTA, but the static renderer otherwise emitted no next step at all for
+    // this post, so render the same headline/body here — slug-scoped, reading
+    // the same source fields, never a second copy of the wording.
+    const umrahNextStepHtml =
+      post.slug === "umrah-hajj-guide-bangladesh-nusuk-bdt-cost" && post.affiliateCTA
+        ? `<section aria-labelledby="umrah-cost-next-step"><h2 id="umrah-cost-next-step">${escapeHtml(post.affiliateCTA.headline)}</h2><p>${escapeHtml(post.affiliateCTA.body)}</p><p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[post.affiliateCTA.provider]))}" target="_blank" rel="noopener noreferrer sponsored">Compare Live Flight Fares</a></p></section>`
+        : "";
     const klookHotelPlacement = KLOOK_HOTEL_BLOG_PLACEMENTS[post.slug];
     const klookHotelHtml =
       klookHotelPlacement && AFFILIATE_OFFER_REGISTRY.klook.status === "active" && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active"
@@ -2860,6 +2869,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           ${multiPartnerHtml}
           ${klookHotelHtml}
           ${travelpayoutsReferralHtml}
+          ${umrahNextStepHtml}
           ${planLinksHtml}
           ${relatedGuidesHtml}
           ${post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking" ? renderCoxsBazarBookingCtaHtml("en") : ""}
@@ -3208,6 +3218,39 @@ function buildBengaliBody(
             `<p>${escapeHtml(refPlacementBn.bodyBeforeAnchorBn)}<a href="${referralUrlBn}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacementBn.anchorTextBn)}</a>${escapeHtml(refPlacementBn.bodyAfterAnchorBn)} <a href="${referralUrlBn}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(refPlacementBn.buttonLabelBn)}</a>.</p><p><em>${escapeHtml(refPlacementBn.disclosureBn)}</em></p>`
           )
         );
+      }
+      const multiPlacementBn = MULTI_PARTNER_BLOG_PLACEMENTS[id];
+      if (multiPlacementBn) {
+        // Mirror the English renderer: the Bengali static page must carry the
+        // same partner next step as /blog/<slug>, using the placement's own
+        // Bengali copy (the React callout already renders it after hydration;
+        // without this block the crawlable BN page silently had none).
+        const multiUrlBn = escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacementBn.primaryPartner]));
+        const multiSecondaryBn =
+          multiPlacementBn.secondaryPartner && multiPlacementBn.secondaryButtonBn
+            ? ` · <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacementBn.secondaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacementBn.secondaryButtonBn)}</a>`
+            : "";
+        parts.push(
+          bnSection(
+            multiPlacementBn.headlineBn,
+            `<p>${escapeHtml(multiPlacementBn.bodyBeforeAnchorBn)}<a href="${multiUrlBn}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacementBn.anchorTextBn)}</a>${escapeHtml(multiPlacementBn.bodyAfterAnchorBn)} <a href="${multiUrlBn}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacementBn.primaryButtonBn)}</a>${multiSecondaryBn}.</p>`
+          )
+        );
+      }
+      if (id === "umrah-hajj-guide-bangladesh-nusuk-bdt-cost") {
+        // Same matched next step as the English static page, from the Bengali
+        // override's affiliateCTA (falling back to the English CTA exactly as
+        // getLocalizedBlogs does).
+        const umrahCtaBn =
+          override.affiliateCTA !== undefined ? override.affiliateCTA : bnPost?.affiliateCTA;
+        if (umrahCtaBn) {
+          parts.push(
+            bnSection(
+              umrahCtaBn.headline,
+              `<p>${escapeHtml(umrahCtaBn.body)}</p><p><a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[umrahCtaBn.provider]))}" target="_blank" rel="noopener noreferrer sponsored">লাইভ বিমান ভাড়া তুলনা করুন</a></p>`
+            )
+          );
+        }
       }
       const klookHotelPlacementBn = KLOOK_HOTEL_BLOG_PLACEMENTS[id];
       if (

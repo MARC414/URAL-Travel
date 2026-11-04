@@ -465,9 +465,9 @@ Umrah ও Rawdah permit কোথায় বুক করব?
       { text: "তাওয়াফ ও সাঈ: সাত প্রদক্ষিণ, সঠিক গণনা", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
     ],
     affiliateCTA: {
-      provider: "airalo",
-      headline: "মানচিত্র ও মেসেজের জন্য ঐচ্ছিক ডেটা প্ল্যান যাচাই করুন",
-      body: "eSIM মানচিত্র ও মেসেজের জন্য ঐচ্ছিক, Nusuk পারমিটের শর্ত নয়। ফোনের সামঞ্জস্য, provider coverage, activation, validity ও মোট দাম দেখুন; network access বা appointment নিশ্চিত নয়।",
+      provider: "aviasales",
+      headline: "বাজেট তৈরি? এবার লাইভ ভাড়া দিয়ে ফ্লাইটের খরচ মিলিয়ে দেখুন",
+      body: "এই বাজেটে সাধারণত ফ্লাইটই সবচেয়ে বড় একক খরচ। নিজের নির্দিষ্ট তারিখে ঢাকা–জেদ্দা ও ঢাকা–মদিনা (open-jaw ফেরতসহ) তুলনা করুন, তারপর ব্যাগেজসহ চূড়ান্ত মোট দাম worksheet-এ বসান। লাইভ ভাড়া বদলায় — এগুলো এই গাইডের তারিখযুক্ত reference figure নয়।",
     },
   },
 

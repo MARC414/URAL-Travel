@@ -55,29 +55,6 @@ const CURRENCY_OPTIONS = {
 
 type CurrencyCode = keyof typeof CURRENCY_OPTIONS;
 
-const GLOBAL_HOTEL_CITIES = [
-  { city: "Kathmandu", country: "Nepal", flag: "🇳🇵", zone: "Thamel, Lazimpat & Durbar Marg", iata: "KTM" },
-  { city: "Bangkok", country: "Thailand", flag: "🇹🇭", zone: "Pratunam, Sukhumvit & Siam", iata: "BKK" },
-  { city: "Kuala Lumpur", country: "Malaysia", flag: "🇲🇾", zone: "Bukit Bintang, KLCC & Chinatown", iata: "KUL" },
-  { city: "Singapore", country: "Singapore", flag: "🇸🇬", zone: "Little India, Bugis & Marina Bay", iata: "SIN" },
-  { city: "Maldives (Maafushi & Malé)", country: "Maldives", flag: "🇲🇻", zone: "Maafushi, Hulhumalé & Private Atolls", iata: "MLE" },
-  { city: "Dubai", country: "United Arab Emirates", flag: "🇦🇪", zone: "Deira, Bur Dubai & Downtown", iata: "DXB" },
-  { city: "Makkah", country: "Saudi Arabia", flag: "🇸🇦", zone: "Abraj Al Bait, Ibrahim Al Khalil & Ajyad", iata: "JED" },
-  { city: "Madinah", country: "Saudi Arabia", flag: "🇸🇦", zone: "Central Haram (Markazia North & South)", iata: "MED" },
-  { city: "London", country: "United Kingdom", flag: "🇬🇧", zone: "Paddington, Westminster & Kensington", iata: "LHR" },
-  { city: "Paris", country: "France", flag: "🇫🇷", zone: "Opera, Marais & Eiffel Tower District", iata: "CDG" },
-  { city: "Istanbul", country: "Turkey", flag: "🇹🇷", zone: "Sultanahmet, Sirkeci & Taksim", iata: "IST" },
-  { city: "Rome", country: "Italy", flag: "🇮🇹", zone: "Centro Storico, Termini & Prati", iata: "FCO" },
-  { city: "Barcelona", country: "Spain", flag: "🇪🇸", zone: "Eixample, Gothic Quarter & Plaça Catalunya", iata: "BCN" },
-  { city: "Amsterdam", country: "Netherlands", flag: "🇳🇱", zone: "Centrum, Museum Quarter & Canal Ring", iata: "AMS" },
-  { city: "Zurich", country: "Switzerland", flag: "🇨🇭", zone: "Old Town (Altstadt) & Zurich HB", iata: "ZRH" },
-  { city: "New York", country: "United States", flag: "🇺🇸", zone: "Midtown Manhattan, Times Square & Queens", iata: "JFK" },
-  { city: "Toronto", country: "Canada", flag: "🇨🇦", zone: "Downtown Core, Yorkville & Harbourfront", iata: "YYZ" },
-  { city: "Tokyo", country: "Japan", flag: "🇯🇵", zone: "Shinjuku, Asakusa & Tokyo Station", iata: "NRT" },
-  { city: "Colombo", country: "Sri Lanka", flag: "🇱🇰", zone: "Galle Face, Fort & Kollupitiya", iata: "CMB" },
-  { city: "Doha", country: "Qatar", flag: "🇶🇦", zone: "Souq Waqif, West Bay & Corniche", iata: "DOH" },
-];
-
 const GLOBAL_AIRPORTS = [
   { label: "Dhaka (DAC)", code: "DAC", city: "Dhaka", country: "Bangladesh", flag: "🇧🇩" },
   { label: "Chattogram (CGP)", code: "CGP", city: "Chattogram", country: "Bangladesh", flag: "🇧🇩" },
@@ -238,10 +215,6 @@ export function TravelpayoutsCustomWidget({
   const fromAirportId = `${instanceId}-select-from-airport`;
   const toAirportId = `${instanceId}-select-to-airport`;
   const flightDateId = `${instanceId}-input-flight-date`;
-  const hotelCityId = "ural-global-hotel-input";
-  const checkinDateId = `${instanceId}-input-checkin-date`;
-  const checkoutDateId = `${instanceId}-input-checkout-date`;
-  const hotelRoomsId = `${instanceId}-select-hotel-rooms`;
 
   const [searchTab, setSearchTab] = useState<"flights" | "hotels">(
     hotelsOnly ? "hotels" : initialTab
@@ -258,8 +231,8 @@ export function TravelpayoutsCustomWidget({
   const [selectedItem, setSelectedItem] = useState<any | null>(null);
 
   // Autocomplete dropdown states
-  const [activeDropdown, setActiveDropdown] = useState<"from" | "to" | "hotel" | null>(null);
-  const [listeningField, setListeningField] = useState<"from" | "to" | "hotel" | null>(null);
+  const [activeDropdown, setActiveDropdown] = useState<"from" | "to" | null>(null);
+  const [listeningField, setListeningField] = useState<"from" | "to" | null>(null);
   const [voiceStatus, setVoiceStatus] = useState<string | null>(null);
   const recognitionRef = useRef<any>(null);
   const [remotePlaces, setRemotePlaces] = useState<Array<{ label: string; code: string; city: string; country: string; flag: string }>>([]);
@@ -300,7 +273,7 @@ export function TravelpayoutsCustomWidget({
     };
   }, []);
 
-  const handleVoiceInput = (field: "from" | "to" | "hotel", e: React.MouseEvent) => {
+  const handleVoiceInput = (field: "from" | "to", e: React.MouseEvent) => {
     e.stopPropagation();
     if (listeningField === field && recognitionRef.current) {
       try {
@@ -339,11 +312,7 @@ export function TravelpayoutsCustomWidget({
 
     setListeningField(field);
     setActiveDropdown(null);
-    setVoiceStatus(
-      field === "hotel"
-        ? "Listening... Say a city for your hotel stay (e.g. Makkah, Bangkok, Dubai)"
-        : "Listening... Say a city or route (e.g. Dhaka to Bangkok)"
-    );
+    setVoiceStatus("Listening... Say a city or route (e.g. Dhaka to Bangkok)");
 
     recognition.onresult = (event: any) => {
       const transcript = (event?.results?.[0]?.[0]?.transcript || "").replace(/[.,!?]/g, "").trim();
@@ -353,10 +322,7 @@ export function TravelpayoutsCustomWidget({
         return;
       }
 
-      if (field === "hotel") {
-        setHotelCity(transcript);
-        setVoiceStatus(`Hotel destination set to "${transcript}"`);
-      } else {
+      {
         const parts = transcript
           .replace(/^from\s+/i, "")
           .split(/\s+(?:to|towards)\s+/i)
@@ -401,8 +367,6 @@ export function TravelpayoutsCustomWidget({
         ? fromCity.trim()
         : activeDropdown === "to"
         ? toCity.trim()
-        : activeDropdown === "hotel"
-        ? hotelCity.trim()
         : "";
 
     if (!term || term.length < 2) {
@@ -441,7 +405,7 @@ export function TravelpayoutsCustomWidget({
       cancelled = true;
       clearTimeout(timer);
     };
-  }, [fromCity, toCity, hotelCity, activeDropdown]);
+  }, [fromCity, toCity, activeDropdown]);
 
   const filteredFromAirports = useMemo(() => {
     const q = fromCity.trim().toLowerCase();
@@ -486,33 +450,6 @@ export function TravelpayoutsCustomWidget({
     }
     return merged.slice(0, 8);
   }, [toCity, remotePlaces]);
-
-  const filteredHotelCities = useMemo(() => {
-    const q = hotelCity.trim().toLowerCase();
-    const base = q
-      ? GLOBAL_HOTEL_CITIES.filter(
-          (h) =>
-            h.city.toLowerCase().includes(q) ||
-            h.country.toLowerCase().includes(q) ||
-            h.zone.toLowerCase().includes(q)
-        )
-      : GLOBAL_HOTEL_CITIES;
-    const seen = new Set(base.map((b) => b.city.toLowerCase()));
-    const merged = [...base];
-    for (const r of remotePlaces) {
-      if (!seen.has(r.city.toLowerCase())) {
-        seen.add(r.city.toLowerCase());
-        merged.push({
-          city: r.city,
-          country: r.country,
-          flag: r.flag,
-          zone: `Hotel areas to compare (${r.code})`,
-          iata: r.code,
-        });
-      }
-    }
-    return merged.slice(0, 8);
-  }, [hotelCity, remotePlaces]);
 
   const results = useMemo(() => {
     if (searchTab === "flights") {
@@ -580,9 +517,9 @@ export function TravelpayoutsCustomWidget({
           {hotelsOnly ? (
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#F6B73C]/15 border border-[#F6B73C]/35 text-[#F6B73C] text-xs sm:text-sm font-bold">
               <Building size={15} />
-              <span>URAL Global Hotel &amp; Resort Finder</span>
+              <span>URAL Hotel Partner Collections</span>
               <span className="hidden md:inline-block text-[10px] font-mono uppercase tracking-wider bg-[#F6B73C] text-brand-navy px-2 py-0.5 rounded-md font-extrabold ml-1">
-                {isBn ? "Klook পার্টনার সার্চ" : "Klook partner search"}
+                {isBn ? "পার্টনার তালিকা" : "Partner collections"}
               </span>
             </div>
           ) : (
@@ -622,17 +559,18 @@ export function TravelpayoutsCustomWidget({
                   }`}
                 >
                   <Building size={14} />
-                  {isBn ? "হোটেল সার্চ" : "Search Hotels"}
+                  {isBn ? "হোটেল দেখুন" : "Browse Hotels"}
                 </button>
               )}
             </div>
           )}
 
-          {/* Voice Dictation Quick Pill */}
+          {/* Voice Dictation Quick Pill (flights only; hotel mode has no input to dictate into) */}
+          {searchTab !== "hotels" && (
           <button
             type="button"
             onClick={(e) =>
-              handleVoiceInput(searchTab === "hotels" ? "hotel" : "to", e)
+              handleVoiceInput("to", e)
             }
             aria-label={
               listeningField
@@ -649,6 +587,7 @@ export function TravelpayoutsCustomWidget({
             {listeningField ? <MicOff size={13} /> : <Mic size={13} />}
             <span>{listeningField ? (isBn ? "শুনছি..." : "Listening...") : (isBn ? "কণ্ঠে সার্চ" : "Voice Search")}</span>
           </button>
+          )}
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5">
@@ -888,197 +827,50 @@ export function TravelpayoutsCustomWidget({
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-2.5 items-stretch bg-slate-50/80 p-2 rounded-2xl border border-slate-200/90 shadow-inner">
-              {/* Global Hotel City / Property Autocomplete */}
-              <div className="lg:col-span-4 relative">
-                <div
-                  onClick={() => setActiveDropdown("hotel")}
-                  className={`h-[68px] bg-white border rounded-xl px-3.5 py-2 flex flex-col justify-between cursor-text transition-all duration-200 focus-within:border-[#F6B73C] focus-within:ring-3 focus-within:ring-[#F6B73C]/20 focus-within:scale-[1.008] focus-within:shadow-md ${
-                    activeDropdown === "hotel"
-                      ? "border-[#F6B73C] ring-3 ring-[#F6B73C]/20 shadow-md"
-                      : "border-slate-200/90 hover:border-slate-300"
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <label
-                      htmlFor={hotelCityId}
-                      className="text-[11px] font-semibold text-slate-600 cursor-pointer"
-                    >
-                      {isBn ? "গন্তব্য শহর বা হোটেল" : "Destination City or Hotel"}
-                    </label>
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        type="button"
-                        onClick={(e) => handleVoiceInput("hotel", e)}
-                        aria-label={
-                          listeningField === "hotel"
-                            ? "Stop voice input for hotel destination"
-                            : "Dictate hotel destination city by voice"
-                        }
-                        aria-pressed={listeningField === "hotel"}
-                        title="Dictate hotel destination city by voice"
-                        className={`w-6 h-6 rounded-full flex items-center justify-center transition-colors cursor-pointer ${
-                          listeningField === "hotel"
-                            ? "bg-rose-500 text-white ring-4 ring-rose-500/25 animate-pulse"
-                            : "bg-slate-100 hover:bg-brand-navy text-slate-600 hover:text-[#F6B73C]"
-                        }`}
-                      >
-                        {listeningField === "hotel" ? (
-                          <MicOff size={12} />
-                        ) : (
-                          <Mic size={12} />
-                        )}
-                      </button>
-                      <span className="text-[10px] font-mono font-bold bg-[#F6B73C]/25 text-brand-navy px-1.5 py-0.5 rounded">
-                        {isBn ? "পার্টনার তালিকা" : "PARTNER LISTINGS"}
-                      </span>
-                    </div>
-                  </div>
-                  <input
-                    id={hotelCityId}
-                    type="text"
-                    value={hotelCity}
-                    placeholder={isBn ? "যেমন: ব্যাংকক, কুয়ালালামপুর, দুবাই..." : "e.g. Makkah, Bangkok, Dubai, Paris, London..."}
-                    onFocus={() => setActiveDropdown("hotel")}
-                    onChange={(e) => {
-                      setHotelCity(e.target.value);
-                      setActiveDropdown("hotel");
-                    }}
-                    className="w-full bg-transparent text-sm sm:text-[15px] font-extrabold text-slate-900 placeholder:text-slate-400 placeholder:font-medium focus:outline-none truncate"
-                  />
-                  <span className="text-[11px] text-slate-500 truncate">
-                    {filteredHotelCities[0]?.zone ||
-                      (isBn ? "পার্টনার সাইটে শহর আবার দিন" : "Re-enter city on partner site")}
+            <div className="bg-slate-50/80 p-5 sm:p-6 rounded-2xl border border-slate-200/90 shadow-inner">
+              <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                <div className="max-w-2xl space-y-3">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-[#F6B73C]/40 bg-[#F6B73C]/15 px-2.5 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-brand-navy">
+                    <Building size={12} aria-hidden="true" />
+                    {isBn ? "পার্টনার হোটেল তালিকা" : "Partner hotel collections"}
                   </span>
-                </div>
-                {activeDropdown === "hotel" && (
-                  <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 max-h-64 overflow-y-auto py-1">
-                    <div className="px-3.5 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 bg-slate-50/60">
-                      {isBn ? "শহর বেছে নিন (পার্টনার সাইটে আবার দিন)" : "Select Popular City (Re-enter on Partner Site)"}
-                    </div>
-                    {filteredHotelCities.map((h) => (
-                      <button
-                        key={`hotel-city-${h.city}-${h.country}`}
-                        type="button"
-                        onClick={() => {
-                          setHotelCity(h.city);
-                          setActiveDropdown(null);
-                        }}
-                        className="w-full px-3.5 py-2.5 text-left hover:bg-slate-50 flex items-center justify-between gap-2 text-xs cursor-pointer border-b border-slate-50 last:border-0"
-                      >
-                        <div className="min-w-0">
-                          <div className="font-bold text-slate-900">
-                            {h.flag} {h.city}{" "}
-                            <span className="font-normal text-slate-500">
-                              · {h.country}
-                            </span>
-                          </div>
-                          <div className="text-[11px] text-slate-500 truncate">
-                            {h.zone}
-                          </div>
-                        </div>
-                        <span className="font-mono text-[11px] font-bold text-brand-navy bg-slate-100 px-1.5 py-0.5 rounded shrink-0">
-                          {h.iata}
-                        </span>
-                      </button>
+                  <p className="font-serif text-xl font-black text-slate-900">
+                    {isBn ? "পার্টনার সাইটে হোটেল খুঁজুন" : "Find hotels on the partner site"}
+                  </p>
+                  <p className="text-sm leading-relaxed text-slate-600">
+                    {isBn
+                      ? "এই উইজেটে শহর, তারিখ বা অতিথিসংখ্যা নেওয়া হয় না, কারণ এই তথ্য পার্টনারের চেকআউটে পাঠানো যায় না। তালিকাটি খুলে সেখানে তথ্যগুলো দিন, তারপর পেমেন্টের আগে লাইভ মোট দাম, রুমের বিবরণ ও বাতিলের শর্ত তুলনা করুন।"
+                      : "This widget does not collect a city, dates or guests, because those details cannot be carried into the partner checkout. Open the collection, add them there, then compare the live total, room details and cancellation terms before you pay."}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-2 text-[11px] font-semibold text-slate-600">
+                    <span>{isBn ? "পার্টনার সাইটে দেওয়ার জন্য তৈরি রাখুন:" : "Have ready to enter on the partner site:"}</span>
+                    {(isBn ? ["শহর বা এলাকা", "তারিখ", "অতিথি ও রুম"] : ["City or area", "Dates", "Guests & rooms"]).map((item) => (
+                      <span key={item} className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1">
+                        <CheckCircle2 size={11} className="text-emerald-600" aria-hidden="true" />
+                        {item}
+                      </span>
                     ))}
                   </div>
-                )}
-              </div>
-
-              {/* Check-in Date */}
-              <div className="lg:col-span-2">
-                <div className="h-[68px] bg-white border border-slate-200/90 hover:border-slate-300 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-all duration-200 focus-within:border-[#F6B73C] focus-within:ring-3 focus-within:ring-[#F6B73C]/20 focus-within:scale-[1.008] focus-within:shadow-md">
-                  <label
-                    htmlFor={checkinDateId}
-                    className="text-[11px] font-semibold text-slate-600 cursor-pointer"
-                  >
-                    {isBn ? "চেক-ইন তারিখ" : "Check-In"}
-                  </label>
-                  <input
-                    id={checkinDateId}
-                    type="date"
-                    value={date}
-                    onChange={(e) => {
-                      const nextIn = e.target.value;
-                      setDate(nextIn);
-                      if (checkOutDate && nextIn >= checkOutDate) {
-                        setCheckOutDate(nextIn);
-                      }
-                    }}
-                    className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
-                  />
-                  <span className="text-[11px] text-slate-500 truncate">
-                    {isBn ? "পার্টনার সাইটে তারিখ দিন" : "Enter dates on partner site"}
-                  </span>
+                  <p className="text-[11px] leading-relaxed text-slate-500">
+                    {isBn
+                      ? "যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে—আপনার অতিরিক্ত খরচ ছাড়াই।"
+                      : "URAL may earn a commission on qualifying bookings, at no extra cost to you."}
+                  </p>
                 </div>
-              </div>
-
-              {/* Check-out Date */}
-              <div className="lg:col-span-2">
-                <div className="h-[68px] bg-white border border-slate-200/90 hover:border-slate-300 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-all duration-200 focus-within:border-[#F6B73C] focus-within:ring-3 focus-within:ring-[#F6B73C]/20 focus-within:scale-[1.008] focus-within:shadow-md">
-                  <label
-                    htmlFor={checkoutDateId}
-                    className="text-[11px] font-semibold text-slate-600 cursor-pointer"
-                  >
-                    {isBn ? "চেক-আউট তারিখ" : "Check-Out"}
-                  </label>
-                  <input
-                    id={checkoutDateId}
-                    type="date"
-                    value={checkOutDate}
-                    min={date}
-                    onChange={(e) => setCheckOutDate(e.target.value)}
-                    className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
-                  />
-                  <span className="text-[11px] text-slate-500 truncate">
-                    {isBn ? "রুম ও বাতিলের শর্ত দেখুন" : "Check room & cancellation terms"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Guests / Rooms */}
-              <div className="lg:col-span-2">
-                <div className="h-[68px] bg-white border border-slate-200/90 hover:border-slate-300 rounded-xl px-3.5 py-2 flex flex-col justify-between transition-all duration-200 focus-within:border-[#F6B73C] focus-within:ring-3 focus-within:ring-[#F6B73C]/20 focus-within:scale-[1.008] focus-within:shadow-md">
-                  <label
-                    htmlFor={hotelRoomsId}
-                    className="text-[11px] font-semibold text-slate-600 cursor-pointer"
-                  >
-                    {isBn ? "অতিথি ও রুম" : "Guests & Rooms"}
-                  </label>
-                  <select
-                    id={hotelRoomsId}
-                    value={travelers}
-                    onChange={(e) => setTravelers(Number(e.target.value))}
-                    className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
-                  >
-                    <option value="1">{isBn ? "১ অতিথি · ১ রুম" : "1 Guest · 1 Room"}</option>
-                    <option value="2">{isBn ? "২ অতিথি · ১ রুম" : "2 Guests · 1 Room"}</option>
-                    <option value="3">{isBn ? "৩ অতিথি · ১ রুম" : "3 Guests · 1 Room"}</option>
-                    <option value="4">{isBn ? "৪ অতিথি · ২ রুম" : "4 Guests · 2 Rooms"}</option>
-                  </select>
-                  <span className="text-[11px] text-slate-500 truncate">
-                    {isBn ? "কার্ডের বৈদেশিক লেনদেনের শর্ত যাচাই করুন" : "Check your card’s foreign-transaction terms"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Generic partner handoff; the city, dates and guests are not forwarded to Klook. */}
-              <div className="lg:col-span-2 flex">
-                {primaryHotelPartnerUrl && (
-                  <a
-                    id="btn-search-hotels-submit"
-                    href={primaryHotelPartnerUrl}
-                    data-affiliate-placement={affiliatePlacement}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    onClick={() => {
-                      setActiveDropdown(null);
-                    }}
-                    className="w-full h-[68px] bg-[#F6B73C] text-brand-navy hover:bg-[#f5ad24] active:scale-[0.98] rounded-xl border border-amber-400/90 shadow-[0_10px_22px_-5px_rgba(246,183,60,0.5)] transition-transform flex items-center justify-center cursor-pointer px-3 text-center group"
-                  >
-                    <span className="flex items-center gap-1.5 font-black text-sm sm:text-[15px] tracking-tight">
-                      <Search size={16} className="shrink-0 stroke-[2.5]" />
+                <div className="shrink-0">
+                  {primaryHotelPartnerUrl && (
+                    <a
+                      id="btn-browse-hotel-partner"
+                      href={primaryHotelPartnerUrl}
+                      data-affiliate-placement={affiliatePlacement}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      onClick={() => {
+                        setActiveDropdown(null);
+                      }}
+                      className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-xl border border-amber-400/90 bg-[#F6B73C] px-5 py-3 text-center text-sm font-black text-brand-navy shadow-[0_10px_22px_-5px_rgba(246,183,60,0.5)] transition-transform hover:bg-[#f5ad24] active:scale-[0.98] lg:w-auto"
+                    >
+                      <Search size={16} className="shrink-0 stroke-[2.5]" aria-hidden="true" />
                       <span>
                         {isKlookHotelsActive
                           ? isBn
@@ -1088,13 +880,13 @@ export function TravelpayoutsCustomWidget({
                             ? "KKday হোটেল তালিকা"
                             : "Search KKday hotel collection"}
                       </span>
-                      <ExternalLink
-                        size={13}
-                        className="shrink-0 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                      />
-                    </span>
-                  </a>
-                )}
+                      <ExternalLink size={13} className="shrink-0 opacity-80" aria-hidden="true" />
+                    </a>
+                  )}
+                  <p className="mt-2 text-center text-[11px] font-medium text-slate-500">
+                    {isBn ? "নতুন ট্যাবে খুলবে" : "Opens in a new tab"}
+                  </p>
+                </div>
               </div>
             </div>
           )}
@@ -1231,7 +1023,7 @@ export function TravelpayoutsCustomWidget({
               <span className="text-xs font-bold text-slate-800">
                 {searchTab === "flights"
                   ? `Flights: ${fromCity} → ${toCity} (${date})`
-                  : `Hotel search handoff · ${hotelCity || "Global Destination"} · ${date} – ${checkOutDate}`}
+                  : "Partner hotel collections"}
               </span>
             </div>
 
@@ -1417,13 +1209,13 @@ export function TravelpayoutsCustomWidget({
                 <Sparkles size={12} />
                 <span>
                   {searchTab === "hotels"
-                    ? `Partner hotel search · ${hotelCity}`
+                    ? "Partner hotel collections"
                     : `Global Flight Search Ready · ${origCode} → ${destCode}`}
                 </span>
               </div>
               <h4 className="font-bold text-slate-900 text-sm sm:text-base">
                 {searchTab === "hotels"
-                  ? `Check hotel listings in ${hotelCity} on a partner site`
+                  ? "Browse hotel collections on a partner site"
                   : `Compare Live Airlines for ${fromCity} → ${toCity} (${currency})`}
               </h4>
               {searchTab === "flights" && (
