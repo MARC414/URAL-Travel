@@ -377,6 +377,18 @@ These describe relationships, not instructions to edit all four pages now.
 
 Website EN/BN twins retain the same decision, facts, figures, dates, limitations, reference destinations, CTA meaning and useful editorial links. Localize phrasing rather than translating each English sentence mechanically. A shorter Bengali sentence is fine; a missing condition is not.
 
+**Owner clarification, 5 November 2026:** article parity includes the same section hierarchy, visible components,
+features, keyword-intent coverage, SEO/AEO fields, structured-data capabilities and internal-link destinations.
+Keep the same reading journey and commercial actions in both languages, including shared related-article
+recommendations with localized titles and URLs. Verify the initial HTML and the fully loaded browser; a feature
+appearing in only one representation is a rendering gap. Minimum link counts alone do not establish parity.
+
+Write complete, fluent Bengali rather than English sentences with Bengali endings. Use accurate, natural Bengali
+for ordinary prose, and preserve recognizable technical, industry and aviation terms where an English term is
+more precise: for example, PNR, open-jaw, eSIM, IATA codes and official product names. Preserve the English article's
+coverage and qualifications while allowing natural Bengali sentence rhythm and length. Review unsupported claims
+in both languages before propagating them as part of a parity repair.
+
 Check the title, summary, answer, each section, tables/labels, FAQs, sources, link labels, CTA and image alternatives. Keep official portal/product names recognizable. Avoid inventing a separate Banglish URL for a spelling variant of the same intent.
 
 ## 11. Commercial actions and social reuse

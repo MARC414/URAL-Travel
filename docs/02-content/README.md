@@ -17,6 +17,7 @@ repurposing; former calendars, cluster waves and priority scores remain historic
 
 ## Supporting research
 
+- [EN/BN article parity audit — 5 November 2026](2026-11-05-en-bn-parity-audit.md) — 53 article pairs, saved HTML and React/browser evidence; records the owner's full-parity requirement and the first schema repair.
 - [Existing URL/intent map](../../SEO-KEYWORD-MAP.md) — hypotheses and established page boundaries, not measured demand or release priority.
 - [Keyword-language notes](04-keywords.md)
 - [Practitioner method/source notes](METHOD-NOTES.md)

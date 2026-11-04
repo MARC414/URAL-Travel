@@ -64,20 +64,27 @@ Both apply to every AI tool and contributor. Social tasks also use the current a
   a single-file grep.
 - **"Done" is six gates:** body, ≥3 primary references, ≥4 internal links (≥2 blog→blog, ≥1 hub/money), one relevant
   affiliate CTA, Bengali parity, and build proof. `verify:build` can only assert the structural half.
+- **Full EN/BN article parity — owner clarification, 5 November 2026.** Both languages require the same section
+  structure, features, design components, SEO/AEO coverage, source destinations, editorial link destinations and
+  commercial actions. Check the saved HTML and the running browser. Write Bengali naturally, preserving the full
+  meaning and qualifications; keep technical, industry and aviation terms in English where that is the accurate
+  wording. Length and phrasing can differ. Shared automatic recommendations should use the same selection with
+  localized titles and URLs. Passing a minimum link count does not establish parity. The
+  [focused parity audit](docs/02-content/2026-11-05-en-bn-parity-audit.md) records the measured gaps.
 - **Bengali links have no fallback.** `getLocalizedBlogs("bn")` assigns `internalLinks` from the Bengali override
-  only. Omitting the array ships a Bengali article with zero editorial links.
+  only. Author the same canonical destinations explicitly with natural Bengali anchor text. This requirement
+  concerns curated links; the React article view already supplies automatic related cards in both languages.
 - **Every post category needs a listing filter.** The `/blog` tabs and the category labels they group are defined once
   in `src/utils/blogCategories.ts` (`BLOG_CATEGORY_TABS`, `BLOG_CATEGORY_GROUPINGS`). A new `category`/`categoryBn`
   string that no tab groups is invisible except under "All Guides" — which is how the affiliate-marketing experiment
   shipped unreachable. `verify:build` now fails when any published English *or* Bengali category has no filter, so add
   the label to the right grouping (or a new tab, in both locales) in the same change that publishes the post.
-- **CI enforces the structure.** `npm run verify:build` fails on dead, duplicate, or self links, unknown affiliate
-  providers, a Hajj & Umrah article with fewer than two blog links, curated anchors missing from the rendered EN
-  or BN page, a post whose declared affiliate next step is absent from the static HTML, and a Bengali article page
-  that renders no in-locale article link. That last one is blocking because the English page gets an automatic
-  related-guides list and the Bengali page does not, so a "has links" reading taken from the English object says
-  nothing about what a Bengali reader actually sees. It also prints a non-blocking `[content-debt]` report; green CI
-  is not a pass on the debt.
+- **CI guards specific regressions.** `npm run verify:build` checks English declared-link integrity, the Hajj &
+  Umrah linking minimums and rendered anchors, declared affiliate next steps in static HTML, and at least one
+  in-locale article link on every Bengali static page. It also checks that URL localization preserves schema types,
+  dates, language codes and prose. These checks do not yet enforce complete pairwise parity; the focused audit
+  found a Bengali duplicate link and missing destinations despite a passing build. The non-blocking
+  `[content-debt]` report still needs editorial review.
 
 ---
 

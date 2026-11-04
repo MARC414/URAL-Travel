@@ -47,10 +47,11 @@ hand-edit a `*.generated.ts` file**; edit the Markdown draft and regenerate.
 | Article metadata | `src/constants.ts` / `bengaliContent.ts` | Changing it changes listings, schema, sitemap and the article. |
 | Sitemap `lastmod` | `src/data/contentMeta.ts` (`CONTENT_UPDATED`) + per-post `updatedAt` | A material edit needs a truthful date, or the sitemap lies. |
 
-**Critical asymmetry:** the English prerenderer appends up to four related posts from `getRelatedBlogPosts()` on top
-of `internalLinks`, so an English article always shows at least four blog anchors. **The Bengali renderer does not.**
-It renders only `BENGALI_BLOG_OVERRIDES[slug].internalLinks`, filtered to paths that have a Bengali page. That is why
-a post can look healthy in English and be bare in Bengali — and why §3 requires links to be written twice.
+**Dated implementation gap, checked 5 November 2026 at `e0c7936`:** the English static renderer appends
+`getRelatedBlogPosts()` results to its curated links; the Bengali static renderer emits one combined curated list.
+The React article view already renders automatic related cards in both languages. This difference between saved
+HTML and the browser is a defect against the owner's full-parity requirement, not an intentional Bengali feature
+reduction. See the [focused audit](../02-content/2026-11-05-en-bn-parity-audit.md).
 
 ---
 
@@ -108,16 +109,22 @@ task. Do not link every sibling from every post; that produces a link farm with 
 - **R7 — Rendered, not declared.** A link that exists in `BLOG_DATA` but not in `dist/` is not a link. Verify with §8.
 - **R8 — Relevance over volume.** Link the page a reader needs next, not every page in the cluster. A visa page does
   not need a hotel link unless hotel choice changes the visa decision.
-- **R9 — Auto-related is a floor, not a strategy.** `getRelatedBlogPosts()` fills the English related box from
-  category, tags and title similarity. It cannot tell whether the match answers the reader's next question. Curate
-  the links you care about; do not rely on the fallback.
+- **R9 — Shared recommendations supplement curated links.** Both locales require the same automatic
+  recommendation selection, with localized titles and destinations. Curated links still supply the deliberate
+  reader journey. The current helper scores category, title/slug tokens, explicit links and reciprocal links;
+  those signals do not establish editorial relevance on their own.
 
-### 3.3 What the renderer actually does
+### 3.3 Dated renderer observation — 5 November 2026, `e0c7936`
 
 | Locale | Related blog anchors | Hub / money anchors | Extra |
 |---|---|---|---|
-| EN | every valid `internalLinks` blog path + up to 4 `getRelatedBlogPosts()` results | separate "Plan your trip" list | `internalLinks[0]` also appears inline in the body |
-| BN | only `BENGALI_BLOG_OVERRIDES[slug].internalLinks` whose path has a Bengali page | same list, localized | no auto-related supplement |
+| EN saved HTML | valid curated blog paths + up to 4 `getRelatedBlogPosts()` results | separate "Plan your trip" and planning-hub lists | no React related cards |
+| BN saved HTML | curated Bengali links | combined with blog links | automatic supplement and planning-hub block absent |
+| React, both locales | automatic related cards + curated links | curated next-step panel | first curated link also appears in the body where applicable |
+
+The target is full structural and functional parity. These observations document repair work; they do not permit
+omitting a feature from Bengali. Compare destinations as well as counts, and distinguish legacy URL aliases from
+genuinely different destinations.
 
 ### 3.4 Worked example — `blog-17`
 
@@ -128,9 +135,9 @@ Umrah with elderly parents       → /blog/umrah-with-elderly-parents-…  (sibl
 DIY Umrah portal & calculator    → /umrah                              (up-link, pillar)
 ```
 
-Three siblings, one pillar, no dead targets, mirrored in Bengali. The English page additionally shows the ihram
-guide because the auto-related fallback supplies it; Bengali does not — which is acceptable because the curated four
-are present in both.
+This illustrates three sibling relationships and a pillar link. Read the current source arrays for the actual
+list. Additional English recommendations also need a Bengali counterpart; the earlier allowance for a shorter
+Bengali recommendation list is superseded by the owner's 5 November full-parity instruction.
 
 ---
 
@@ -178,10 +185,10 @@ through `resolvePartnerUrl()` or `<PartnerLinkButton />` so paused programmes fa
   `rel="noopener noreferrer sponsored"`. Never add `nofollow` to editorial references.
 - **A6 — Promotions expire.** Any coupon, sale or price claim in CTA copy must pass through `isPromoActive()` and
   `sanitizeExpiredPromoText()`. Do not hardcode a promo date into prose.
-- **A7 — The CTA is client-rendered.** `BlogPostRouteView` renders `affiliateCTA` after hydration, so the **static
-  HTML contains no partner URL** (verified: zero `kiwitaxi` occurrences on the blog-17 page). If a commercial link
-  must be crawlable, add a placement to `MULTI_PARTNER_BLOG_PLACEMENTS` / `RADICAL_STORAGE_BLOG_PLACEMENTS` /
-  `TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS` in `scripts/prerender.ts`. That is a code change, not a copy change.
+- **A7 — Article CTAs render in both representations.** Since the 5 November static-CTA repair,
+  `renderBlogAffiliateCtaHtml` emits every declared article CTA in saved EN/BN HTML. `BlogPostRouteView` renders
+  the interactive equivalent. Both use the partner registry and evergreen disclosure. Verify the actual link and
+  localized wording; other contextual placements have their own rendering paths.
 - **A8 — No fake relevance.** Never attach a partner to a page whose intent it does not serve merely to raise
   revenue. The owner reviews this as an editorial decision.
 
@@ -306,8 +313,13 @@ reviews or community answers. Component and visual rules: [`CONTENT-SYSTEM-V2.md
 ### 6.4 Bengali parity
 
 The Bengali article must answer the same questions with the same eligibility, prices, date basis, exclusions,
-warnings, route steps and source links. It is not a summary and not a translation of the English page's layout. It
-must also carry its own `internalLinks` (R6).
+warnings, route steps and source links. It must carry the same section hierarchy, features, components, SEO/AEO
+coverage, editorial destinations, related recommendations and commercial actions as English, in both saved HTML
+and the running browser. It also needs its own explicit `internalLinks` with Bengali anchors (R6).
+
+Write native, correct Bengali with its own sentence rhythm. Preserve technical, industry and aviation terms in
+English when that is the accurate wording, including PNR, open-jaw, eSIM and IATA codes. Ordinary prose should read
+naturally in Bengali. Equal word or heading counts cannot certify equal coverage or writing quality.
 
 ### 6.5 Banned phrases
 
@@ -354,7 +366,7 @@ grep -o 'href="/bn/blog/[^"]*"' dist/bn/blog/<slug>.html | sort -u
 # the sources block rendered
 grep -o 'Sources for this guide' dist/blog/<slug>.html
 
-# expected: 0 for a CTA-only article — the widget is client-rendered
+# expected: the declared partner URL is present when this article uses Kiwitaxi
 grep -c 'kiwitaxi.tpo.li' dist/blog/<slug>.html
 ```
 
@@ -369,10 +381,13 @@ the metadata as proof.
 
 | Check | Scope | Fails when |
 |---|---|---|
-| Link integrity | all posts | an empty link list, a non-absolute path, a self-link, a duplicate path, or a `/blog/` target that does not exist |
+| Link integrity | English declared arrays | an empty link list, a non-absolute path, a self-link, a duplicate path, or a `/blog/` target that does not exist |
 | Provider integrity | all posts | `affiliateCTA.provider` is not a key of `AFFILIATE_LINKS` |
 | Flagship minimums | Hajj & Umrah | fewer than two blog→blog links, or no affiliate CTA |
 | Rendered anchors | Hajj & Umrah | a curated `/blog/` link is absent from the EN page, or the BN page has fewer than two `/bn/blog/` anchors |
+| Bengali next reading link | every Bengali static article | no in-locale article anchor is rendered; this minimum is not a full parity comparison |
+| Declared affiliate next step | static EN/BN articles | the declared partner's sponsored link is absent |
+| Schema URL localization | client-used URL helper | a schema type, date, language code or prose is converted into a site URL, or a genuine page URL is localized incorrectly |
 | Negative control | fixtures | the validator stops catching a deliberately broken fixture |
 
 The validator is tested against broken fixtures on every run, so a refactor cannot silently neuter it.
