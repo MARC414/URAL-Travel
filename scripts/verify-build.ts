@@ -7517,6 +7517,20 @@ for (const post of BLOG_DATA) {
   const anchors = new Set([...bnHtml.matchAll(/href="(\/bn\/blog\/[^"]+)"/g)].map((match) => match[1]));
   if (anchors.size === 0) bnBare.push(post.id);
 }
+// Blocking, unlike the rest of this section. A Bengali page with no article
+// anchor is a dead end: the reader finishes the article and has nothing to read
+// next. It stayed invisible for months because the English page gets an
+// automatic related-guides list and the Bengali page does not - Bengali links
+// are authored, never inferred (AGENTS.md §2b) - so "the post has internal
+// links" was read off the English object and the Bengali page shipped bare.
+// On 2026-11-05 ten pages were in that state; each now carries hand-picked,
+// in-locale links, and this check keeps the eleventh from shipping.
+check(
+  bnBare.length === 0,
+  `content contract: every Bengali article page carries at least one in-locale article link [${bnBare
+    .slice(0, 3)
+    .join(", ")}]`
+);
 const bnLocalizedById = new Map(getLocalizedBlogs("bn").map((post) => [post.id, post]));
 const bnParityShort = BLOG_DATA.filter((post) => {
   const bn = bnLocalizedById.get(post.id);
@@ -7529,7 +7543,6 @@ if (noBlogLink.length) contentDebt.push(`no blog->blog link (${noBlogLink.length
 if (noCta.length) contentDebt.push(`no affiliateCTA (${noCta.length}): ${noCta.join(", ")}`);
 if (noRefs.length) contentDebt.push(`no references (${noRefs.length}): ${noRefs.join(", ")}`);
 if (orphaned.length) contentDebt.push(`no editorial inbound link (${orphaned.length}): ${orphaned.join(", ")}`);
-if (bnBare.length) contentDebt.push(`BN page renders no blog anchors (${bnBare.length}): ${bnBare.join(", ")}`);
 if (bnParityShort.length)
   contentDebt.push(
     `Bengali internalLinks shorter than English (${bnParityShort.length}): ${bnParityShort.join(", ")}`

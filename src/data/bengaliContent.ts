@@ -794,6 +794,9 @@ Nepal এবং Maldives-এ বাংলাদেশিদের জন্য �
     internalLinks: [
       { text: "ঢাকা থেকে কাঠমান্ডু ফ্লাইট গাইড", path: "/flights/dhaka-kathmandu" },
       { text: "ঢাকা থেকে ব্যাংকক ফ্লাইট গাইড", path: "/flights/dhaka-bangkok" },
+      { text: "ঢাকা থেকে জেদ্দা–মদিনা open-jaw ভাড়া কৌশল", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
+      { text: "ঢাকার প্রধান এয়ারলাইন্সগুলোর ব্যাগেজ নিয়ম", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
+      { text: "কার্ড দিয়ে টিকিট কেনার আগে ডুয়াল কারেন্সি গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -825,6 +828,9 @@ Nepal এবং Maldives-এ বাংলাদেশিদের জন্য �
     internalLinks: [
       { text: "Nepal ভিসা চেকলিস্ট দেখুন", path: "/visa/nepal-visa" },
       { text: "Thailand e-Visa গাইড দেখুন", path: "/visa/thailand-visa" },
+      { text: "কাঠমান্ডু ও পোখরার ৫ দিনের itinerary", path: "/blog/nepal-pokhara-itinerary-bangladesh" },
+      { text: "থাইল্যান্ড e-Visa: নথি ও ব্যাংক ব্যালেন্স", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
+      { text: "নতুন পাসপোর্টে প্রথম বিদেশ ভ্রমণের ধাপ", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -859,6 +865,8 @@ Bangkok-এ Pratunam, Sukhumvit ও Khao San Road-কে শপিং, যাত
       { text: "কুয়ালালামপুরের হোটেল এলাকা গাইড", path: "/hotels/kuala-lumpur-hotels" },
       { text: "ব্যাংককের হোটেল এলাকা গাইড", path: "/hotels/bangkok-hotels" },
       { text: "দুবাইয়ের হোটেল এলাকা গাইড", path: "/hotels/dubai-hotels" },
+      { text: "ব্যাংককে হালাল খাবার কোথায় খাবেন", path: "/blog/halal-food-guide-bangkok-bangladesh" },
+      { text: "কুয়ালালামপুরে নামার আগে Malaysia eVisa ও MDAC", path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
     ],
     affiliateCTA: {
       provider: "kiwitaxi",
@@ -905,6 +913,8 @@ Bangkok-এ Pratunam, Sukhumvit ও Khao San Road-কে শপিং, যাত
       { text: "Thailand ভিসা গাইড ও চেকলিস্ট", path: "/visa/thailand-visa" },
       { text: "Bangkok হোটেল ও সেরা এলাকা", path: "/hotels/bangkok-hotels" },
       { text: "Bangkok ৫ দিনের সম্পূর্ণ BDT বাজেট", path: "/costs/thailand-costs" },
+      { text: "ব্যাংকক, কুয়ালালামপুর ও দুবাইয়ে হোটেল এলাকা বাছাই", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" },
+      { text: "মক্কা–মদিনায় হালাল খাবারের বাজেট গাইড", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -939,6 +949,8 @@ Bangkok-এ Pratunam, Sukhumvit ও Khao San Road-কে শপিং, যাত
       { text: "ঢাকা থেকে কাঠমান্ডু ফ্লাইটের দাম", path: "/flights/dhaka-kathmandu" },
       { text: "কাঠমান্ডু ও পোখারার হোটেল গাইড", path: "/hotels/kathmandu-hotels" },
       { text: "Nepal ৫ দিনের বিস্তারিত খরচ", path: "/costs/nepal-costs" },
+      { text: "নেপাল বনাম থাইল্যান্ড: প্রথম বিদেশ ভ্রমণে কোনটি", path: "/blog/nepal-vs-thailand-first-trip" },
+      { text: "নতুন পাসপোর্টে প্রথম বিদেশ ভ্রমণের ধাপ", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -974,6 +986,8 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
       { text: "Maldives ৪ দিনের বিস্তারিত BDT বাজেট", path: "/costs/maldives-costs" },
       { text: "Maldives ফ্রি VOA ও IMUGA চেকলিস্ট", path: "/visa/maldives-visa" },
       { text: "Maafushi ও Hulhumalé হোটেল গাইড", path: "/hotels/maldives-hotels" },
+      { text: "শ্রীলঙ্কা–মালদ্বীপ একসঙ্গে: ETA ও BDT খরচ", path: "/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" },
+      { text: "নতুন পাসপোর্টে প্রথম বিদেশ ভ্রমণের ধাপ", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -1012,6 +1026,8 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
       { text: "Singapore ভিসা চেকলিস্ট পেজ দেখুন", path: "/visa/singapore-visa" },
       { text: "ঢাকা থেকে সিঙ্গাপুর ডিরেক্ট ফ্লাইট ভাড়া", path: "/flights/dhaka-singapore" },
       { text: "Little India ও Bugis হোটেল গাইড", path: "/hotels/singapore-hotels" },
+      { text: "সিঙ্গাপুর ৪ দিনের বাজেট itinerary", path: "/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide" },
+      { text: "নতুন পাসপোর্টে প্রথম বিদেশ ভ্রমণের ধাপ", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -3511,6 +3527,8 @@ URAL বা যেকোনো এয়ারলাইন্স এজেন্স
       { text: "ফ্লাইট ডিলে ক্ষতিপূরণ চেকার (€600)", path: "/tools/flight-delay-claim" },
       { text: "ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার ইমিগ্রেশন চেকলিস্ট", path: "/pre-departure" },
       { text: "গ্লোবাল ফ্লাইট সার্চ ও ফেয়ার বেঞ্চমার্ক", path: "/flights" },
+      { text: "ঢাকা থেকে কম ভাড়ায় টিকিট বুকিংয়ের কৌশল", path: "/blog/cheap-flight-booking-hacks-dhaka" },
+      { text: "ঢাকার প্রধান এয়ারলাইন্সগুলোর ব্যাগেজ নিয়ম", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -3553,6 +3571,8 @@ URAL বা যেকোনো এয়ারলাইন্স এজেন্স
       { text: "দুবাই ৫ দিনের সম্পূর্ণ BDT ভ্রমণ খরচ হিসাব", path: "/costs/dubai-costs" },
       { text: "এয়ারপোর্ট কোড ও হোয়াটসঅ্যাপ টিকিট অনুসন্ধান টুল", path: "/tools/airport-codes" },
       { text: "ফ্লাইট ডিলে ক্ষতিপূরণ চেকার (€600)", path: "/tools/flight-delay-claim" },
+      { text: "দুবাই থেকে আবু ধাবি শেখ জায়েদ মসজিদ ডে ট্রিপ", path: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" },
+      { text: "ঢাকার প্রধান এয়ারলাইন্সগুলোর ব্যাগেজ নিয়ম", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
     ],
     affiliateCTA: {
       provider: "aviasales",

@@ -72,8 +72,12 @@ Both apply to every AI tool and contributor. Social tasks also use the current a
   shipped unreachable. `verify:build` now fails when any published English *or* Bengali category has no filter, so add
   the label to the right grouping (or a new tab, in both locales) in the same change that publishes the post.
 - **CI enforces the structure.** `npm run verify:build` fails on dead, duplicate, or self links, unknown affiliate
-  providers, a Hajj & Umrah article with fewer than two blog links, and curated anchors missing from the rendered EN
-  or BN page. It also prints a non-blocking `[content-debt]` report; green CI is not a pass on the debt.
+  providers, a Hajj & Umrah article with fewer than two blog links, curated anchors missing from the rendered EN
+  or BN page, a post whose declared affiliate next step is absent from the static HTML, and a Bengali article page
+  that renders no in-locale article link. That last one is blocking because the English page gets an automatic
+  related-guides list and the Bengali page does not, so a "has links" reading taken from the English object says
+  nothing about what a Bengali reader actually sees. It also prints a non-blocking `[content-debt]` report; green CI
+  is not a pass on the debt.
 
 ---
 

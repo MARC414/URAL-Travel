@@ -53,6 +53,10 @@ internalLinksEn:
 internalLinksBn:
   - text: "URAL-এর ভ্রমণ গাইড দেখুন"
     path: /blog
+  - text: "ট্রাভেল ক্রিয়েটরদের জন্য URAL-এর রিসোর্স"
+    path: /blog/travel-creator-resources
+  - text: "ওয়েবসাইট ছাড়াই ভ্রমণের অভিজ্ঞতাকে আয়ের পথে বদলানো"
+    path: /blog/turn-travel-experience-into-income-without-a-website
 ---
 
 I don't know yet.
