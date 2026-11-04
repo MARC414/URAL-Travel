@@ -200,7 +200,7 @@ check(
     hotelModeWidgetHtml.includes(escapedPartnerUrl("kkdayHotels")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("kkdayHotels")) &&
     hotelModeWidgetHtml.includes(escapedPartnerUrl("goCity")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("goCity")) &&
     hotelModeWidgetHtml.includes(escapedPartnerUrl("radicalStorage")) && hotelModeWidgetBnHtml.includes(escapedPartnerUrl("radicalStorage")) &&
-    hotelModeWidgetHtml.includes("Klook partner search") && hotelModeWidgetBnHtml.includes("Klook পার্টনার সার্চ") &&
+    hotelModeWidgetHtml.includes("Partner collections") && hotelModeWidgetBnHtml.includes("পার্টনার তালিকা") &&
     !hotelModeWidgetHtml.includes("Verified Klook Stays") && !hotelModeWidgetBnHtml.includes("Verified Klook Stays"),
   "EN/BN hotel mode hides the flight-only portal, keeps Klook and KKday hotel, Go City activity and Radical Storage links, and avoids an unsupported verified-stays claim"
 );
@@ -553,7 +553,23 @@ check(
     !bnHotelSearchWidgetHtml.includes("গন্তব্য, তারিখ ও অতিথির সংখ্যা Klook-এ আবার দিন") &&
     hotelSearchWidgetHtml.includes("More hotel and trip options:") &&
     hotelPartnerLinkOrder.every((position, index) => position >= 0 && (index === 0 || position > hotelPartnerLinkOrder[index - 1])),
-  "hotel widget omits repeated handoff copy and presents partner links in a clear booking-to-trip order"
+  "hotel widget avoids the retired search-handoff wording and presents partner links in a clear booking-to-trip order"
+);
+check(
+  !hotelSearchWidgetHtml.includes("Destination City or Hotel") &&
+    !hotelSearchWidgetHtml.includes("<input") &&
+    !hotelSearchWidgetHtml.includes("<select") &&
+    !hotelSearchWidgetHtml.includes('type="date"') &&
+    hotelSearchWidgetHtml.includes("Find hotels on the partner site") &&
+    hotelSearchWidgetHtml.includes("This widget does not collect a city, dates or guests") &&
+    hotelSearchWidgetHtml.includes('id="btn-browse-hotel-partner"') &&
+    !bnHotelSearchWidgetHtml.includes("গন্তব্য শহর বা হোটেল") &&
+    !bnHotelSearchWidgetHtml.includes("<input") &&
+    !bnHotelSearchWidgetHtml.includes("<select") &&
+    !bnHotelSearchWidgetHtml.includes('type="date"') &&
+    bnHotelSearchWidgetHtml.includes("পার্টনার সাইটে হোটেল খুঁজুন") &&
+    bnHotelSearchWidgetHtml.includes("এই উইজেটে শহর, তারিখ বা অতিথিসংখ্যা নেওয়া হয় না"),
+  "hotel mode collects no city, dates or guests in EN/BN; it offers one honest partner-collection handoff instead of a discarded search form"
 );
 check(
   !hotelInlineDispatchHtml.includes("These links open general partner hotel collections") &&

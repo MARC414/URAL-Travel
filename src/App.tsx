@@ -4056,7 +4056,7 @@ export default function App() {
                     setAreTpScriptsReady(true);
                     document.getElementById("global-hotel-search")?.scrollIntoView({ behavior: "smooth", block: "start" });
                     setTimeout(() => {
-                      document.getElementById("ural-global-hotel-input")?.focus();
+                      document.getElementById("btn-browse-hotel-partner")?.focus();
                     }, 450);
                   }}
                   className="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/15 border border-white/25 hover:border-[#F6B73C]/60 text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-all cursor-pointer group"
