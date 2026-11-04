@@ -2595,10 +2595,21 @@ check(
   if (whatsappClicks.length !== 1 || whatsappClicks[0].link_label !== "WhatsApp desk") {
     clickFailures.push("whatsapp click lost link_label");
   }
+  const internalNavTargets = [
+    "#hotel-klook-check",
+    "/kkday-hotels",
+    "/bn/kkday-hotels",
+    "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
+  ];
+  for (const internalHref of internalNavTargets) {
+    if (fire(internalHref, "Internal jump or page", "").length !== 0) {
+      clickFailures.push(`internal link ${internalHref} fired an affiliate event`);
+    }
+  }
   check(
     clickFailures.length === 0,
     clickFailures.length === 0
-      ? "outbound clicks dispatch one event each with the right name, referral SubID and optional first-party placement (4 cases)"
+      ? "outbound clicks dispatch one event each with the right name, referral SubID and optional first-party placement, while internal links emit zero affiliate events (8 cases)"
       : `outbound click analytics misbehaves: ${clickFailures.join("; ")}`
   );
 }

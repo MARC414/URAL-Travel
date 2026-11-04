@@ -18,6 +18,7 @@ interface TravelIntelligenceProps {
   faqs: FAQItem[];
   schemaMarkup?: { type: string; description: string; code: string };
   metaDescription?: string;
+  lang?: "en" | "bn";
 }
 
 export function TravelIntelligence({
@@ -25,9 +26,11 @@ export function TravelIntelligence({
   quickAnswer,
   keyFacts,
   faqs,
+  lang,
 }: TravelIntelligenceProps) {
   // State to track which FAQ index is open (accordion style)
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const isBn = lang === "bn" || /[\u0980-\u09FF]/.test(pageTitle);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -41,10 +44,14 @@ export function TravelIntelligence({
           <div className="p-1.5 bg-[#F6B73C]/10 rounded-lg text-[#F6B73C]">
             <Info size={18} />
           </div>
-          <h2 className="ural-section-title font-serif text-xl font-bold text-slate-900">Essential Travel Insights</h2>
+          <h2 className="ural-section-title font-serif text-xl font-bold text-slate-900">
+            {isBn ? "প্রয়োজনীয় ভ্রমণ তথ্য ও প্রশ্নোত্তর" : "Essential Travel Insights"}
+          </h2>
         </div>
         <p className="text-sm text-slate-500">
-          Quick guides, key metrics, and frequently asked questions for travelers from Bangladesh.
+          {isBn
+            ? "বাংলাদেশি ভ্রমণকারীদের জন্য মূল তথ্য এবং সাধারণ প্রশ্নোত্তর।"
+            : "Quick guides, key metrics, and frequently asked questions for travelers from Bangladesh."}
         </p>
       </div>
 
@@ -54,11 +61,11 @@ export function TravelIntelligence({
           <div className="absolute top-0 right-0 w-32 h-32 bg-[#F6B73C]/5 rounded-full blur-2xl pointer-events-none" />
           <div className="flex items-start gap-3">
             <span className="flex-shrink-0 text-sm font-mono font-bold text-[#F6B73C] bg-[#F6B73C]/10 px-2.5 py-1 rounded">
-              SUMMARY
+              {isBn ? "সারসংক্ষেপ" : "SUMMARY"}
             </span>
             <div className="space-y-1">
               <h3 className="ural-card-title text-xs font-bold tracking-wider text-brand-navy uppercase">
-                Travel Summary & Key Takeaways
+                {isBn ? "ভ্রমণ সারসংক্ষেপ ও মূল তথ্য" : "Travel Summary & Key Takeaways"}
               </h3>
               <p className="text-slate-700 text-sm leading-relaxed font-sans">
                 {quickAnswer}
@@ -73,7 +80,7 @@ export function TravelIntelligence({
         <div className="space-y-4">
           <h3 className="ural-card-title font-serif text-base font-bold text-brand-navy flex items-center gap-2">
             <CheckCircle2 size={16} className="text-[#F6B73C]" />
-            Key Facts & Travel Metrics
+            {isBn ? "গুরুত্বপূর্ণ তথ্য ও মূল দিক" : "Key Facts & Travel Metrics"}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {keyFacts.map((fact, index) => (
@@ -81,7 +88,7 @@ export function TravelIntelligence({
                 key={index} 
                 className="ural-card bg-slate-50/60 border border-border-faint hover:border-border-subtle p-4 shadow-sm transition-all duration-200"
               >
-                <span className="text-[10px] font-mono font-semibold tracking-wider text-slate-400 uppercase block mb-1">
+                <span className="text-xs font-semibold tracking-wider text-slate-500 uppercase block mb-1">
                   {fact.label}
                 </span>
                 <span className="font-sans font-bold text-slate-800 text-sm">
@@ -98,7 +105,7 @@ export function TravelIntelligence({
         <div className="space-y-4 pt-4 border-t border-slate-100">
           <h3 className="ural-card-title font-serif text-base font-bold text-brand-navy flex items-center gap-2">
             <HelpCircle size={16} className="text-[#F6B73C]" />
-            Frequently Asked Questions
+            {isBn ? "সচরাচর জিজ্ঞাসিত প্রশ্ন (FAQ)" : "Frequently Asked Questions"}
           </h3>
           <div className="space-y-2.5">
             {faqs.map((faq, index) => {

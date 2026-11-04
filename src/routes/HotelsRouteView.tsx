@@ -8,7 +8,7 @@ import { Building, ArrowRight, Zap, ShieldCheck, Plane, Car } from "lucide-react
 import { TravelIntelligence } from "../components/AeoInspector";
 
 import { KlookHotelSpotlight } from "../components/KlookHotelSpotlight";
-import { AFFILIATE_LINKS } from "../components/AffiliatePartners";
+import { AFFILIATE_LINKS, AFFILIATE_OFFER_REGISTRY } from "../components/AffiliatePartners";
 import { getHotelGuideAffiliatePlacement } from "../utils/affiliatePlacement";
 
 import { EditorialPageHero } from "../components/EditorialPageHero";
@@ -174,7 +174,9 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
             { id: "hotel-curated-stays", en: "Compare hotel areas and booking checks", bn: "হোটেল এলাকা ও বুকিং যাচাই করুন" },
 
-            { id: "hotel-klook-check", en: "Search Klook hotel collection", bn: "Klook হোটেল তালিকা সার্চ" },
+            ...(AFFILIATE_OFFER_REGISTRY.klook.status === "active" && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active"
+              ? [{ id: "hotel-klook-check", en: "Search Klook hotel collection", bn: "Klook হোটেল তালিকা সার্চ" }]
+              : []),
 
             { id: "hotel-ground-transport", en: "Transfers and local essentials", bn: "ট্রান্সফার ও স্থানীয় প্রয়োজনীয়তা" },
 
@@ -508,11 +510,13 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
 
                       pageTitle={isBn ? `${activeHotel.city}-এ কোথায় থাকবেন` : `Where to stay in ${activeHotel.city}`}
 
-                      quickAnswer={activeHotel.quickAnswer}
+                      quickAnswer=""
 
                       keyFacts={activeHotel.keyFacts}
 
                       faqs={activeHotel.faqs}
+
+                      lang={lang}
 
                     />
 
