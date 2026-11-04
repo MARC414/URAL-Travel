@@ -34,6 +34,7 @@ import fs from "node:fs";
 import zlib from "node:zlib";
 import path from "node:path";
 import { validateSitemapPair } from "./sitemapValidation";
+import { checkKlookHotelRedirect } from "./klookRedirectValidation";
 import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { SITE_ORIGIN } from "../src/utils/localeRoutes";
@@ -62,6 +63,8 @@ import {
   buildKlookSearchLink,
 } from "../src/components/KlookHotelOffers";
 import { KlookHotelSpotlight } from "../src/components/KlookHotelSpotlight";
+import { AttractionDetailPage } from "../src/components/AttractionDetailPage";
+import { ExperiencesPage } from "../src/components/ExperiencesPage";
 import { KKdayPromoBanner } from "../src/components/KKdayPromoBanner";
 import { KkdayHotelsPage } from "../src/components/KkdayHotelsPage";
 import {
@@ -3197,14 +3200,9 @@ if (sitemap) {
     "hotel guide CTAs receive a stable guide-specific first-party scope"
   );
 
-  const KLOOK_HOTEL_IDS = [
-    "kathmandu-hotels",
-    "bangkok-hotels",
-    "kuala-lumpur-hotels",
-    "singapore-hotels",
-    "maldives-hotels",
-    "dubai-hotels",
-  ];
+  // Published route records, not widget city suggestions or a copied plan,
+  // define the hotel-guide inventory.
+  const KLOOK_HOTEL_IDS = HOTELS_DATA.map((hotel) => hotel.id);
   const sectionStartingAt = (html: string, marker: string) => {
     const start = html.indexOf(marker);
     if (start < 0) return "";
@@ -3239,14 +3237,24 @@ if (sitemap) {
     // promotion cannot leave an expired rate or date in cached HTML.
     const noStaleRate = !/8%|December 31, 2026|৮%|৩১ ডিসেম্বর ২০২৬/.test(enSection + bnSection);
     const noUntrackedLandingPage = !(enHtml + bnHtml).includes("klook.com/tetris");
-    if (!enOk || !bnOk || !noStaleRate || !noUntrackedLandingPage) {
+    const isCurated = (KLOOK_CURATED_HOTEL_PICKS[hotelId]?.length ?? 0) > 0;
+    const noInventedPicks = isCurated || !/klook-hotel-picks|hotels%2Fdetail%2F/.test(enSection + bnSection);
+    if (!enOk || !bnOk || !noStaleRate || !noUntrackedLandingPage || !noInventedPicks) {
       klookHotelHtmlIssues.push(hotelId);
       console.error(`[VERIFY] Klook hotel module incomplete or stale: ${hotelId}`);
     }
   }
   check(
     klookHotelHtmlIssues.length === 0,
-    `all six hotel guides carry the transparent generic Klook collection handoff in English and Bengali, with tracked links, first-party placement scopes and evergreen copy [${klookHotelHtmlIssues.join(", ")}]`
+    `all ${KLOOK_HOTEL_IDS.length} registered hotel guides carry the transparent EN/BN Klook collection handoff, with no invented property picks on uncurated guides [${klookHotelHtmlIssues.join(", ")}]`
+  );
+
+  const unregisteredKlookPickGuides = Object.keys(KLOOK_CURATED_HOTEL_PICKS).filter(
+    (guideId) => !KLOOK_HOTEL_IDS.includes(guideId)
+  );
+  check(
+    unregisteredKlookPickGuides.length === 0,
+    `every curated Klook pick group belongs to a published hotel-guide route [${unregisteredKlookPickGuides.join(", ")}]`
   );
 
   // The curated shortlist started life as a hydrated-only component, so the
@@ -3254,7 +3262,7 @@ if (sitemap) {
   // picks, their checked date and their provenance inside the static HTML, and
   // stop the partner feed's commercial labels being republished as URAL verdicts.
   const klookPickHtmlIssues: string[] = [];
-  for (const hotelId of ["bangkok-hotels", "kuala-lumpur-hotels"]) {
+  for (const hotelId of Object.keys(KLOOK_CURATED_HOTEL_PICKS)) {
     const picks = KLOOK_CURATED_HOTEL_PICKS[hotelId] ?? [];
     const enHtml = read(path.join(DIST_DIR, "hotels", `${hotelId}.html`)) ?? "";
     const bnHtml = read(path.join(DIST_DIR, "bn", "hotels", `${hotelId}.html`)) ?? "";
@@ -3270,12 +3278,16 @@ if (sitemap) {
         !enSection.includes(KLOOK_PICK_SIGNALS[pick.signal].en)
       );
     });
-    const missingBn = picks.filter(
-      (pick) =>
+    const missingBn = picks.filter((pick) => {
+      const href = buildKlookHotelDetailLink(pick.hotelId, pick.subId).replace(/&/g, "&amp;");
+      return (
         !bnSection.includes(pick.name) ||
+        !bnSection.includes(href) ||
+        bnSection.split(href).length - 1 !== 1 ||
         !bnSection.includes(pick.bestForBn) ||
         !bnSection.includes(KLOOK_PICK_SIGNALS[pick.signal].bn)
-    );
+      );
+    });
     const hasProvenance =
       enSection.includes(`Checked ${KLOOK_PICKS_CHECKED_AT.en}`) &&
       enSection.includes(KLOOK_PICKS_PROVENANCE.en) &&
@@ -3405,6 +3417,8 @@ if (sitemap) {
       KLOOK_PROMO.toursAndActivitiesRate === "12%" &&
       KLOOK_PROMO.hotelsRate === "8%" &&
       AFFILIATE_OFFER_REGISTRY.klookHotels.url === AFFILIATE_LINKS.klookHotels &&
+      AFFILIATE_OFFER_REGISTRY.klookHotels.fallbackPartner === "klook" &&
+      AFFILIATE_OFFER_REGISTRY.klook.fallbackPartner === "kkday" &&
       AFFILIATE_OFFER_REGISTRY.klookHotels.offerType === "commission-boost" &&
       AFFILIATE_OFFER_REGISTRY.klookHotels.expiresAt === KLOOK_PROMO.expiresAt &&
       AFFILIATE_OFFER_REGISTRY.klook.offerType === "commission-boost" &&
@@ -3438,10 +3452,98 @@ if (sitemap) {
     `the Klook deep-link builder forwards only https Klook hosts and refuses lookalike, plain-http, javascript: and malformed targets (${klookRedirectGuards.filter((ok) => !ok).length} of ${klookRedirectGuards.length} guards failed)`
   );
 
-  // Tours and activities carry the 12% rate, but only when the reader actually
-  // lands on a Klook page for the thing they clicked. Pointing them at the bare
-  // partner link threw that away; the search deep link keeps the intent and the
-  // attribution.
+  // A programme pause overrides the dedicated hotel's still-active link entry.
+  // Test both flags independently and restore the real registry before any
+  // later render. A fallback must never carry a Klook forwarding instruction.
+  const pauseCases = [
+    { name: "both Klook entries active", klook: "active", hotels: "active", hotelBase: AFFILIATE_LINKS.klookHotels, tourBase: AFFILIATE_LINKS.klook, hotelDeep: true, tourDeep: true },
+    { name: "hotel link paused", klook: "active", hotels: "paused", hotelBase: AFFILIATE_LINKS.klook, tourBase: AFFILIATE_LINKS.klook, hotelDeep: false, tourDeep: true },
+    { name: "programme paused, hotel link active", klook: "paused", hotels: "active", hotelBase: AFFILIATE_LINKS.kkday, tourBase: AFFILIATE_LINKS.kkday, hotelDeep: false, tourDeep: false },
+    { name: "both Klook entries paused", klook: "paused", hotels: "paused", hotelBase: AFFILIATE_LINKS.kkday, tourBase: AFFILIATE_LINKS.kkday, hotelDeep: false, tourDeep: false },
+  ] as const;
+  const savedKlookStatus = AFFILIATE_OFFER_REGISTRY.klook.status;
+  const savedHotelStatus = AFFILIATE_OFFER_REGISTRY.klookHotels.status;
+  const savedKkdayStatus = AFFILIATE_OFFER_REGISTRY.kkday.status;
+  const klookPauseIssues: string[] = [];
+  try {
+    AFFILIATE_OFFER_REGISTRY.kkday.status = "active";
+    for (const scenario of pauseCases) {
+      AFFILIATE_OFFER_REGISTRY.klook.status = scenario.klook;
+      AFFILIATE_OFFER_REGISTRY.klookHotels.status = scenario.hotels;
+      const hotelLink = buildKlookHotelDetailLink("279724", "pause_test");
+      const tourLink = buildKlookSearchLink("Bangkok attractions", "pause_test");
+      const expectedHotel = scenario.hotelDeep
+        ? `${scenario.hotelBase}?u=${encodeURIComponent("https://www.klook.com/hotels/detail/279724")}&sub_id=pause_test`
+        : scenario.hotelBase;
+      const expectedTour = scenario.tourDeep
+        ? `${scenario.tourBase}?u=${encodeURIComponent("https://www.klook.com/en-US/search/result/?query=Bangkok%20attractions")}&sub_id=pause_test`
+        : scenario.tourBase;
+      if (hotelLink !== expectedHotel || tourLink !== expectedTour || buildKlookSearchLink(" ", "pause_test") !== scenario.tourBase) {
+        klookPauseIssues.push(scenario.name);
+      }
+      if (scenario.klook === "paused" && (renderSpotlight("en") || renderSpotlight("bn"))) {
+        klookPauseIssues.push(`${scenario.name}: Klook-specific spotlight is still visible`);
+      }
+      if (scenario.klook === "paused") {
+        for (const lang of ["en", "bn"] as const) {
+          const attractionMarkup = renderToStaticMarkup(
+            React.createElement(AttractionDetailPage, { lang, parameterId: "london:992434", onNavigate: () => undefined })
+          );
+          const experiencesMarkup = renderToStaticMarkup(
+            React.createElement(ExperiencesPage, { lang, onNavigate: () => undefined })
+          );
+          if (attractionMarkup.includes('data-affiliate-placement="attraction_london_992434_klook_search"') ||
+            experiencesMarkup.includes('data-affiliate-placement="experiences_klook_tours_activities"') ||
+            experiencesMarkup.includes('data-affiliate-placement="experiences_hotel_collection"')) {
+            klookPauseIssues.push(`${scenario.name}: ${lang} Klook-labelled handoff is still visible`);
+          }
+        }
+      }
+    }
+    // Klook and KKday point back to each other. If both programmes are paused,
+    // fail closed instead of returning another paused partner's link.
+    AFFILIATE_OFFER_REGISTRY.klook.status = "paused";
+    AFFILIATE_OFFER_REGISTRY.klookHotels.status = "active";
+    AFFILIATE_OFFER_REGISTRY.kkday.status = "paused";
+    if (buildKlookHotelDetailLink("279724", "pause_test") || buildKlookSearchLink("Bangkok", "pause_test") || buildKlookSearchLink(" ", "pause_test")) {
+      klookPauseIssues.push("no active Klook/KKday fallback");
+    }
+  } finally {
+    AFFILIATE_OFFER_REGISTRY.klook.status = savedKlookStatus;
+    AFFILIATE_OFFER_REGISTRY.klookHotels.status = savedHotelStatus;
+    AFFILIATE_OFFER_REGISTRY.kkday.status = savedKkdayStatus;
+  }
+  check(
+    klookPauseIssues.length === 0,
+    `Klook hotel/tour deep links honour programme and link pauses, return clean active fallbacks, and fail closed if no fallback is active [${klookPauseIssues.join(", ")}]`
+  );
+
+  const klookResponseUrl = "https://www.klook.com/hotels/detail/279724/?aff_pid=675992";
+  const klookResponseFixtures = [
+    { name: "HTTP 200", url: klookResponseUrl, status: 200, outcome: "http-ok" },
+    { name: "HTTP 403", url: klookResponseUrl, status: 403, outcome: "redirect-only" },
+    { name: "HTTP 401", url: klookResponseUrl, status: 401, outcome: "redirect-only" },
+    { name: "HTTP 429", url: klookResponseUrl, status: 429, outcome: "redirect-only" },
+    { name: "HTTP 404", url: klookResponseUrl, status: 404, outcome: "failed" },
+    { name: "HTTP 410", url: klookResponseUrl, status: 410, outcome: "failed" },
+    { name: "HTTP 500", url: klookResponseUrl, status: 500, outcome: "failed" },
+    { name: "wrong property", url: klookResponseUrl.replace("279724", "427421"), status: 200, outcome: "failed" },
+    { name: "missing marker", url: klookResponseUrl.replace("?aff_pid=675992", ""), status: 200, outcome: "failed" },
+    { name: "wrong marker", url: klookResponseUrl.replace("675992", "1"), status: 200, outcome: "failed" },
+    { name: "HTTP URL", url: klookResponseUrl.replace("https:", "http:"), status: 200, outcome: "failed" },
+    { name: "lookalike host", url: klookResponseUrl.replace("www.klook.com", "www.klook.com.evil.example"), status: 200, outcome: "failed" },
+    { name: "malformed URL", url: "not a URL", status: 200, outcome: "failed" },
+  ];
+  const klookResponseIssues = klookResponseFixtures.filter(
+    (fixture) => checkKlookHotelRedirect(fixture.url, fixture.status, "279724", "675992").outcome !== fixture.outcome
+  );
+  check(
+    klookResponseIssues.length === 0,
+    `live Klook validation distinguishes URL forwarding from page access and rejects broken HTTP responses, wrong destinations and missing markers (${klookResponseFixtures.length} fixtures) [${klookResponseIssues.map((fixture) => fixture.name).join(", ")}]`
+  );
+
+  // Specific search targets preserve the reader's intent. Neither a correct
+  // redirect nor the rate in the registry proves a booking or commission.
   const klookSearchLinkGuards = [
     buildKlookSearchLink("Eiffel Tower", "attraction_test") ===
       `${AFFILIATE_LINKS.klook}?u=${encodeURIComponent("https://www.klook.com/en-US/search/result/?query=Eiffel%20Tower")}&sub_id=attraction_test`,
@@ -3882,6 +3984,16 @@ if (rss) {
       : "content-data is absent from the homepage's eager script/preload graph"
   );
   const eagerAssetUrls = [...new Set([...eagerScripts, ...eagerPreloads])];
+  const klookModuleIsEager = eagerAssetUrls.some((url) => {
+    const sourceMap = read(path.join(DIST_DIR, `${url.replace(/^\//, "")}.map`));
+    if (!sourceMap) return true; // Missing maps cannot prove lazy isolation.
+    const sources: string[] = JSON.parse(sourceMap).sources ?? [];
+    return sources.some((source) => source.replace(/\\/g, "/").endsWith("/src/components/KlookHotelOffers.tsx"));
+  });
+  check(
+    !klookModuleIsEager,
+    "Klook deep-link helpers and hotel-pick data stay out of the homepage's eager script/preload graph"
+  );
   const globalSearchDialogIsEager = eagerAssetUrls.some((url) => /GlobalSiteSearch/i.test(url));
   const searchIndexIsEager = (read(path.join(DIST_DIR, "index.html")) ?? "").includes("site-search-index.json");
   check(

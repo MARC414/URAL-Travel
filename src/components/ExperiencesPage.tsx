@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import {
   AFFILIATE_LINKS,
+  AFFILIATE_OFFER_REGISTRY,
   KKDAY_PROMO,
   isPromoActive,
   resolvePartnerUrl,
@@ -474,6 +475,8 @@ const EXPERIENCES_FAQS = [
 
 export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNavigate, region }) => {
   const isBn = lang === "bn";
+  const klookAvailable = AFFILIATE_OFFER_REGISTRY.klook.status === "active";
+  const klookHotelsAvailable = klookAvailable && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active";
   // Map clean static route region to internal filter: "europe" → "west", "asia" → "asia"
   const initialRegion = region === "europe" ? "west" : region === "asia" ? "asia" : "all";
   const [regionFilter, setRegionFilter] = useState<"all" | "west" | "asia">(() => {
@@ -583,36 +586,40 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 <ExternalLink size={13} />
               </a>
 
-              <a
-                href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
-                data-affiliate-placement="experiences_hotel_collection"
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-semibold text-xs px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2 cursor-pointer"
-              >
-                <span>
-                  {isBn
-                    ? "Klook-এর হোটেল তালিকা সার্চ করুন"
-                    : "Search Klook hotel collection"}
-                </span>
-                <ExternalLink size={13} />
-              </a>
-              <a
-                href={buildKlookDeepLink(
-                  "https://www.klook.com/en-US/",
-                  "experiences_klook_tours_activities",
-                  "klook"
-                )}
-                data-affiliate-placement="experiences_klook_tours_activities"
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="bg-slate-700 hover:bg-slate-600 border border-slate-600 text-white font-semibold text-xs px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2 cursor-pointer"
-              >
-                <span>
-                  {isBn ? "Klook ট্যুর ও অ্যাক্টিভিটি" : "Klook Tours & Activities"}
-                </span>
-                <ExternalLink size={13} />
-              </a>
+              {klookHotelsAvailable && (
+                <a
+                  href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}
+                  data-affiliate-placement="experiences_hotel_collection"
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-semibold text-xs px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2 cursor-pointer"
+                >
+                  <span>
+                    {isBn
+                      ? "Klook-এর হোটেল তালিকা সার্চ করুন"
+                      : "Search Klook hotel collection"}
+                  </span>
+                  <ExternalLink size={13} />
+                </a>
+              )}
+              {klookAvailable && (
+                <a
+                  href={buildKlookDeepLink(
+                    "https://www.klook.com/en-US/",
+                    "experiences_klook_tours_activities",
+                    "klook"
+                  )}
+                  data-affiliate-placement="experiences_klook_tours_activities"
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="bg-slate-700 hover:bg-slate-600 border border-slate-600 text-white font-semibold text-xs px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2 cursor-pointer"
+                >
+                  <span>
+                    {isBn ? "Klook ট্যুর ও অ্যাক্টিভিটি" : "Klook Tours & Activities"}
+                  </span>
+                  <ExternalLink size={13} />
+                </a>
+              )}
               <a
                 href={resolvePartnerUrl(AFFILIATE_LINKS.goCity)}
                 target="_blank"
@@ -735,35 +742,37 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
                 </div>
               </div>
 
-              <a
-                href={
-                  activeCalcCity.provider === "tiqets"
-                    ? resolvePartnerUrl(AFFILIATE_LINKS.tiqets)
-                    : buildKlookSearchLink(
-                        `${activeCalcCity.city} attractions`,
-                        `experiences_budget_${activeCalcCity.id}_klook_search`
-                      )
-                }
-                data-affiliate-placement={
-                  activeCalcCity.provider === "tiqets"
-                    ? `experiences_budget_${activeCalcCity.id}_tiqets`
-                    : `experiences_budget_${activeCalcCity.id}_klook_search`
-                }
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
-              >
-                <span>
-                  {activeCalcCity.provider === "tiqets"
-                    ? isBn
-                      ? `${activeCalcCity.city}-এর Tiqets স্লট চেক করুন`
-                      : `Check ${activeCalcCity.city} Slots on Tiqets`
-                    : isBn
-                    ? `${activeCalcCity.city}-এর আকর্ষণ Klook-এ খুঁজুন`
-                    : `Search ${activeCalcCity.city} attractions on Klook`}
-                </span>
-                <ExternalLink size={13} />
-              </a>
+              {(activeCalcCity.provider === "tiqets" || klookAvailable) && (
+                <a
+                  href={
+                    activeCalcCity.provider === "tiqets"
+                      ? resolvePartnerUrl(AFFILIATE_LINKS.tiqets)
+                      : buildKlookSearchLink(
+                          `${activeCalcCity.city} attractions`,
+                          `experiences_budget_${activeCalcCity.id}_klook_search`
+                        )
+                  }
+                  data-affiliate-placement={
+                    activeCalcCity.provider === "tiqets"
+                      ? `experiences_budget_${activeCalcCity.id}_tiqets`
+                      : `experiences_budget_${activeCalcCity.id}_klook_search`
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="w-full bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <span>
+                    {activeCalcCity.provider === "tiqets"
+                      ? isBn
+                        ? `${activeCalcCity.city}-এর Tiqets স্লট চেক করুন`
+                        : `Check ${activeCalcCity.city} Slots on Tiqets`
+                      : isBn
+                      ? `${activeCalcCity.city}-এর আকর্ষণ Klook-এ খুঁজুন`
+                      : `Search ${activeCalcCity.city} attractions on Klook`}
+                  </span>
+                  <ExternalLink size={13} />
+                </a>
+              )}
             </div>
           </div>
         </div>

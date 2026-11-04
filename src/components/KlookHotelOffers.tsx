@@ -14,11 +14,11 @@ import {
 /**
  * Klook hotel-offer content.
  *
- * These constants and the blog callout live OUTSIDE `AffiliatePartners.tsx`
- * because that module is part of the eager entry chunk. The copy below is only
- * needed on hotel and blog routes, which are lazy chunks, and putting ~150
- * lines of bilingual marketing prose in the entry graph pushed the homepage
- * over its 205 KB gzip budget. The registry itself (`AFFILIATE_LINKS`,
+ * Deep-link helpers, hotel picks and the blog callout stay OUTSIDE
+ * `AffiliatePartners.tsx`, which is part of the eager homepage entry graph.
+ * Hotel, blog, attraction and experience routes load these helpers lazily.
+ * `verify:build` checks both the homepage gzip budget and this module's absence
+ * from its eager chunks. The registry itself (`AFFILIATE_LINKS`,
  * `AFFILIATE_OFFER_REGISTRY`, `KLOOK_PROMO`) stays in AffiliatePartners.
  */
 
@@ -59,18 +59,24 @@ export function isAllowedKlookTarget(targetUrl: string): boolean {
 /**
  * Builds a tracked Klook affiliate deep link using the `.tpo.li` short-link
  * forwarding parameter (`?u=<encoded-klook-url>&sub_id=<placementId>`),
- * while preserving `resolvePartnerUrl()` pause/fallback protection.
+ * while preserving the registry's pause/fallback direction.
+ * A programme pause overrides an active hotel-link entry. A paused link gets
+ * a clean fallback without Klook parameters; no active fallback returns "".
  */
 export function buildKlookDeepLink(
   targetUrl: string,
   subId?: string,
   partnerKey: "klookHotels" | "klook" = "klookHotels"
 ): string {
+  const programme = AFFILIATE_OFFER_REGISTRY.klook;
+  if (programme.status === "paused") {
+    const fallback = AFFILIATE_OFFER_REGISTRY[programme.fallbackPartner];
+    return fallback?.status === "active"
+      ? resolvePartnerUrl(AFFILIATE_LINKS.klook)
+      : "";
+  }
   const base = resolvePartnerUrl(AFFILIATE_LINKS[partnerKey]);
-  if (
-    AFFILIATE_OFFER_REGISTRY.klook.status === "paused" ||
-    AFFILIATE_OFFER_REGISTRY[partnerKey].status === "paused"
-  ) {
+  if (AFFILIATE_OFFER_REGISTRY[partnerKey].status === "paused") {
     return base;
   }
   if (!isAllowedKlookTarget(targetUrl)) return base;
@@ -100,8 +106,9 @@ export function buildKlookHotelDetailLink(
  *
  * URAL does not maintain a Klook product-id catalogue, so the honest target is
  * Klook's own search results for the named attraction or city rather than a
- * guessed product page. The `klook` partner link carries the 12% tours and
- * activities commission; hotel links keep using `klookHotels`.
+ * guessed product page. Tours use `klook`; hotels use `klookHotels`.
+ * A deep link preserves intent, not a promise of commission: qualifying
+ * bookings and the account's current programme terms determine earnings.
  */
 export function buildKlookSearchLink(
   query: string,
@@ -109,7 +116,7 @@ export function buildKlookSearchLink(
   locale: "en-US" | "en-GB" = "en-US"
 ): string {
   const trimmed = query.trim();
-  if (!trimmed) return resolvePartnerUrl(AFFILIATE_LINKS.klook);
+  if (!trimmed) return buildKlookDeepLink("", undefined, "klook");
   return buildKlookDeepLink(
     `https://www.klook.com/${locale}/search/result/?query=${encodeURIComponent(trimmed)}`,
     subId,

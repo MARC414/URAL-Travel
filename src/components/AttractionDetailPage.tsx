@@ -308,19 +308,21 @@ export const AttractionDetailPage: React.FC<AttractionDetailPageProps> = ({
 
             {/* Secondary partner CTAs row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <a
-                href={buildKlookSearchLink(
-                  `${isBn ? attraction.titleBn : attraction.title} ${attraction.cityName}`,
-                  `attraction_${cityId}_${attractionId}_klook_search`
-                )}
-                data-affiliate-placement={`attraction_${cityId}_${attractionId}_klook_search`}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-slate-700 font-bold rounded-xl border border-slate-200 hover:bg-slate-50 transition-all shadow-sm hover:shadow-md text-sm"
-              >
-                <Ticket size={14} className="text-slate-500" />
-                <span>{isBn ? "Klook-এ ট্যুর খুঁজুন" : "Find Tours on Klook"}</span>
-              </a>
+              {AFFILIATE_OFFER_REGISTRY.klook.status === "active" && (
+                <a
+                  href={buildKlookSearchLink(
+                    `${isBn ? attraction.titleBn : attraction.title} ${attraction.cityName}`,
+                    `attraction_${cityId}_${attractionId}_klook_search`
+                  )}
+                  data-affiliate-placement={`attraction_${cityId}_${attractionId}_klook_search`}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-slate-700 font-bold rounded-xl border border-slate-200 hover:bg-slate-50 transition-all shadow-sm hover:shadow-md text-sm"
+                >
+                  <Ticket size={14} className="text-slate-500" />
+                  <span>{isBn ? "Klook-এ ট্যুর খুঁজুন" : "Find Tours on Klook"}</span>
+                </a>
+              )}
               <a
                 href={`${AFFILIATE_LINKS.airalo}?city=${cityId}`}
                 target="_blank"

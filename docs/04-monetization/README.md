@@ -13,6 +13,15 @@ URAL's model is editorial travel intelligence with affiliate referrals and a hum
 ## Implementation references
 
 - `src/components/AffiliatePartners.tsx` owns the canonical partner registry, fallback rules and promotion-expiry helpers.
+- `src/components/KlookHotelOffers.tsx` owns the route-lazy Klook deep-link helpers and curated picks; keep them out of the eager registry module. `HOTELS_DATA` in `src/constants.ts` defines published hotel guides, not the search widget's city suggestions.
 - `src/utils/analytics.ts`, `index.html` and the published GTM container participate in measurement. The audit identifies gaps; a data-layer push alone is not proof of GA4 receipt.
 - `public/travelpayouts-wl.html` is the white-label implementation; `/api` delivery code is under `functions/api/`.
 - [AGENTS.md](../../AGENTS.md) retains implementation conventions. Affiliate clicks, creator referrals, enquiries and approved commissions are distinct outcomes.
+
+### Klook verification boundaries
+
+- The registered fallback direction is `klookHotels → klook → kkday`. A general Klook programme pause overrides a still-active hotel-link entry in the deep-link helpers. Never append Klook's `u` or `sub_id` to a fallback URL; the Klook spotlight and updated attraction/experience deep-link CTAs hide when that programme is paused. This is not a claim that every legacy registry consumer has the same programme-level gate.
+- `npm run verify:build` checks pause scenarios, published guide/pick mappings, EN/BN property links and lazy-module isolation. Guides without curated picks retain a generic collection handoff; do not invent property IDs or claim a city-prefilled hotel search without testing it.
+- Run `npm run verify:klook:live` deliberately, not in CI. Probes use `verify_*` SubIDs so they can be excluded from visitor reports. `redirect-only` means the property path and affiliate marker survived, but HTTP 401/403/429 left page access unverified. Other error responses fail; a paused programme/link is reported as not tested, not a successful zero-link run.
+- **4 November 2026 evidence:** a real Bangkok-card browser click reached `/hotels/detail/279724/` with `aff_pid=675992`, then displayed Klook's device check. All 12 automated property redirects matched their IDs and marker but returned HTTP 403. This does not establish bookable inventory, Travelpayouts report receipt, programme eligibility or commission earnings.
+- The owner must separately confirm the browser test's `hotel_bkk_pratunam_vince` SubID in Travelpayouts Performance. Klook's final `aff_sid` field being empty does not itself establish whether Travelpayouts recorded the click.
