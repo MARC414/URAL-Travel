@@ -81,27 +81,34 @@ export function readReferralSubId(url: string): string {
   }
 }
 
+const PARTNER_DOMAINS: Array<[string, string]> = [
+  ["aviasales", "Aviasales"],
+  ["tpembd.com", "Aviasales"],
+  ["klook", "Klook"],
+  ["airhelp", "AirHelp"],
+  ["kiwitaxi", "Kiwitaxi"],
+  ["airalo", "Airalo"],
+  ["kkday", "KKday"],
+  ["tiqets", "Tiqets"],
+  ["radical", "Radical Storage"],
+  ["qeeq", "QEEQ Car Rental"],
+  ["yesim", "Yesim eSIM"],
+  ["kiwi.com", "Kiwi.com"],
+  ["gettransfer", "GetTransfer"],
+  ["gocity", "Go City"],
+  ["welcomepickups", "Welcome Pickups"],
+  ["tpo.li", "Travelpayouts Partner"],
+  ["tp.media", "Travelpayouts Partner"],
+  ["travelpayouts", "Travelpayouts Partner"],
+];
+
 /** Known partner identification from URL */
 export function identifyPartnerFromUrl(url: string): string {
   const lower = url.toLowerCase();
   if (isTravelpayoutsReferralUrl(url)) return "Travelpayouts (creator referral)";
-  if (lower.includes("aviasales") || lower.includes("tpembd.com")) {
-    return "Aviasales";
+  for (const [token, name] of PARTNER_DOMAINS) {
+    if (lower.includes(token)) return name;
   }
-  if (lower.includes("klook")) return "Klook";
-  if (lower.includes("airhelp")) return "AirHelp";
-  if (lower.includes("kiwitaxi")) return "Kiwitaxi";
-  if (lower.includes("airalo")) return "Airalo";
-  if (lower.includes("kkday")) return "KKday";
-  if (lower.includes("tiqets")) return "Tiqets";
-  if (lower.includes("radicalstorage") || lower.includes("radical")) return "Radical Storage";
-  if (lower.includes("qeeq")) return "QEEQ Car Rental";
-  if (lower.includes("yesim")) return "Yesim eSIM";
-  if (lower.includes("kiwi.com")) return "Kiwi.com";
-  if (lower.includes("gettransfer")) return "GetTransfer";
-  if (lower.includes("gocity")) return "Go City";
-  if (lower.includes("welcomepickups")) return "Welcome Pickups";
-  if (lower.includes("tpo.li") || lower.includes("travelpayouts")) return "Travelpayouts Partner";
   return "Affiliate Partner";
 }
 
@@ -179,25 +186,23 @@ export function initGlobalClickTracking(): () => void {
       return;
     }
 
+    // Ignore in-page anchor jumps and same-origin routes (except the flight white-label portal).
+    if (!href || href.startsWith("#")) return;
+    let host = "";
+    let pathname = "";
+    try {
+      const parsed = new URL(href, "https://uraltravel.co.uk");
+      host = parsed.hostname.toLowerCase();
+      pathname = parsed.pathname;
+    } catch {
+      return;
+    }
+    if (host === "uraltravel.co.uk" && pathname !== "/travelpayouts-wl.html") return;
+
     // 2. Affiliate / Sponsored link detection
     const isAffiliateDomain =
-      href.includes(".tpo.li") ||
-      href.includes("travelpayouts") ||
-      href.includes("aviasales") ||
-      href.includes("klook") ||
-      href.includes("airhelp") ||
-      href.includes("kiwitaxi") ||
-      href.includes("airalo") ||
-      href.includes("kkday") ||
-      href.includes("tiqets") ||
-      href.includes("radicalstorage") ||
-      href.includes("qeeq") ||
-      href.includes("yesim") ||
-      href.includes("kiwi.com") ||
-      href.includes("gettransfer") ||
-      href.includes("gocity") ||
-      href.includes("welcomepickups") ||
-      href.includes("travelpayouts-wl.html");
+      pathname === "/travelpayouts-wl.html" ||
+      PARTNER_DOMAINS.some(([token]) => host.includes(token));
 
     // 3. Travelpayouts CREATOR REFERRAL - checked BEFORE the affiliate branch,
     //    because these links are also `rel="sponsored"` and also contain the

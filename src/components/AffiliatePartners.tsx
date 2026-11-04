@@ -171,7 +171,7 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     url: AFFILIATE_LINKS.aviasales,
     fallbackPartner: "kiwi",
     activeNote: "Core flight metasearch engine (40% rev share, Web & App)",
-    expiredFallbackBehavior: "Falls back to Kiwi.com if ever paused"
+    expiredFallbackBehavior: "Falls back to Kiwi.com if paused"
   },
   klook: {
     id: "klook",
@@ -181,8 +181,8 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     url: AFFILIATE_LINKS.klook,
     fallbackPartner: "kkday",
     expiresAt: KLOOK_PROMO.expiresAt,
-    activeNote: `Boosted Q4 Commission through ${KLOOK_PROMO.validUntil}: ${KLOOK_PROMO.toursAndActivitiesRate} Tours/Activities + ${KLOOK_PROMO.hotelsRate} Hotels (Web & App)`,
-    expiredFallbackBehavior: "Keeps permanent Klook Hotels & Activities link live after Dec 31, 2026; falls back to KKday if ever paused"
+    activeNote: `Boosted Q4 Commission through ${KLOOK_PROMO.validUntil}: ${KLOOK_PROMO.toursAndActivitiesRate} Tours/Activities + ${KLOOK_PROMO.hotelsRate} Hotels`,
+    expiredFallbackBehavior: "Keeps Klook link live after Dec 31, 2026; falls back to KKday if paused"
   },
   klookHotels: {
     id: "klookHotels",
@@ -192,8 +192,8 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     url: AFFILIATE_LINKS.klookHotels,
     fallbackPartner: "klook",
     expiresAt: KLOOK_PROMO.expiresAt,
-    activeNote: `Tracked deep link to Klook's curated Asia hotel collection; hotel commission offer through ${KLOOK_PROMO.validUntil}`,
-    expiredFallbackBehavior: "Keeps the curated Klook hotel destination available after the boosted rate ends; falls back to the standard tracked Klook link if this deep link is paused"
+    activeNote: `Tracked deep link to Klook curated Asia hotels through ${KLOOK_PROMO.validUntil}`,
+    expiredFallbackBehavior: "Keeps hotel link after boost ends; falls back to Klook/KKday if paused"
   },
   tiqets: {
     id: "tiqets",
@@ -203,7 +203,7 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     url: AFFILIATE_LINKS.tiqets,
     fallbackPartner: "goCity",
     activeNote: "Core Europe, UK & USA museum pass partner (Web & App)",
-    expiredFallbackBehavior: "Falls back to Go City if ever paused"
+    expiredFallbackBehavior: "Falls back to Go City if paused"
   },
   airhelp: {
     id: "airhelp",
@@ -357,17 +357,25 @@ export function getPromoDaysRemaining(expiresAt?: string): number | null {
 /**
  * Resolves a partner key or raw URL so that if a partner is ever marked `status: "paused"`
  * in `AFFILIATE_OFFER_REGISTRY`, it automatically substitutes the active `fallbackPartner` URL.
+ * A general Klook programme pause also overrides `klookHotels`, and cyclic paused fallbacks
+ * resolve to `""` rather than returning a paused partner link.
  */
 export function resolvePartnerUrl(hrefOrKey: string): string {
-  const matchedEntry = Object.values(AFFILIATE_OFFER_REGISTRY).find(
+  let current = Object.values(AFFILIATE_OFFER_REGISTRY).find(
     (entry) => entry.id === hrefOrKey || entry.url === hrefOrKey
   );
-  if (!matchedEntry) return hrefOrKey;
-  if (matchedEntry.status === "paused") {
-    const fallback = AFFILIATE_OFFER_REGISTRY[matchedEntry.fallbackPartner];
-    return fallback ? fallback.url : AFFILIATE_LINKS.aviasales;
+  if (!current) return hrefOrKey;
+  const visited = new Set<string>();
+  while (
+    current &&
+    (current.status === "paused" ||
+      (current.id === "klookHotels" && AFFILIATE_OFFER_REGISTRY.klook.status === "paused"))
+  ) {
+    if (visited.has(current.id)) return "";
+    visited.add(current.id);
+    current = AFFILIATE_OFFER_REGISTRY[current.fallbackPartner];
   }
-  return matchedEntry.url;
+  return current ? current.url : "";
 }
 
 /**

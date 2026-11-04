@@ -122,6 +122,25 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en", disclosure = "
         ))}
       </ol>
 
+      <div className="hotel-partner-actions">
+        <a
+          href={href}
+          data-affiliate-placement={getHotelGuideAffiliatePlacement(guideId)}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="hotel-partner-action hotel-partner-action--primary"
+        >
+          {isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}
+          <ExternalLink size={15} aria-hidden="true" />
+        </a>
+        <a
+          href="#hotel-curated-stays"
+          className="hotel-partner-action"
+        >
+          {isBn ? "তুলনার চেকলিস্টে ফিরুন" : "Back to the comparison checklist"}
+        </a>
+      </div>
+
       {curatedPicks.length > 0 && (
         <div className="hotel-partner-picks">
           <div className="hotel-picks-header">
@@ -136,6 +155,16 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en", disclosure = "
                 : `Checked ${KLOOK_PICKS_CHECKED_AT.en}`}
             </span>
           </div>
+
+          <p className="hotel-partner-intro">
+            {guideId === "bangkok-hotels"
+              ? isBn
+                ? "ওপরের এলাকা তুলনার প্রাতুনাম ও সুখুম্ভিতের পাশাপাশি এখানে সংলগ্ন সিয়াম (প্রাতুনামের পাশের বিটিএস হাব) এবং চাও ফ্রায়া রিভারসাইড অন্তর্ভুক্ত রয়েছে। খাও সান রোড এলাকার হোটেল খুঁজতে ওপরের সাধারণ Klook সার্চ বোতামটি ব্যবহার করুন।"
+                : "Alongside Pratunam and Sukhumvit from the neighborhood guide above, this shortlist includes adjacent Siam (walking distance to Pratunam on the BTS line) and the Chao Phraya Riverside. For Khao San Road stays, use the general Klook search button above."
+              : isBn
+                ? "ওপরের বুকিত বিনতাং ও কেএলসিসি এলাকার পাশাপাশি এখানে মিড ভ্যালি (কমিউটার ট্রেন সংযুক্ত মল হাব) এবং বান্দার সানওয়ে (থিম পার্ক রিসোর্ট এলাকা) অন্তর্ভুক্ত রয়েছে।"
+                : "Alongside Bukit Bintang and KLCC from the neighborhood comparison above, this shortlist includes Mid Valley (rail-linked mall hub) and Bandar Sunway (lagoon resort district)."}
+          </p>
 
           <div className="hotel-pick-groups">
             {pickGroups.map((group, index) => (
@@ -187,25 +216,6 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en", disclosure = "
           </p>
         </div>
       )}
-
-      <div className="hotel-partner-actions">
-        <a
-          href={href}
-          data-affiliate-placement={getHotelGuideAffiliatePlacement(guideId)}
-          target="_blank"
-          rel="noopener noreferrer sponsored"
-          className="hotel-partner-action hotel-partner-action--primary"
-        >
-          {isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}
-          <ExternalLink size={15} aria-hidden="true" />
-        </a>
-        <a
-          href="#hotel-curated-stays"
-          className="hotel-partner-action"
-        >
-          {isBn ? "তুলনার চেকলিস্টে ফিরুন" : "Back to the comparison checklist"}
-        </a>
-      </div>
 
       <div className="hotel-partner-notes">
         <p className="hotel-partner-note">

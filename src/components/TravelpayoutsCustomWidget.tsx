@@ -13,7 +13,7 @@ import {
   Mic,
   MicOff,
 } from "lucide-react";
-import { AFFILIATE_LINKS, resolvePartnerUrl } from "./AffiliatePartners";
+import { AFFILIATE_LINKS, AFFILIATE_OFFER_REGISTRY, resolvePartnerUrl } from "./AffiliatePartners";
 
 interface TravelpayoutsCustomWidgetProps {
   initialTab?: "flights" | "hotels";
@@ -532,8 +532,12 @@ export function TravelpayoutsCustomWidget({
   // This portal is flight-only (the shell explicitly hides hotels), so never
   // derive its airport destination from the hotel city field.
   const uralFlightWlDeepUrl = `/travelpayouts-wl.html?origin=${origCode}&destination=${destCode}&flightSearch=${searchCode}&currency=${currency}&standalone=1`;
+  const isKlookHotelsActive =
+    AFFILIATE_OFFER_REGISTRY.klook.status === "active" &&
+    AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active";
   const klookHotelsPartnerUrl = resolvePartnerUrl(AFFILIATE_LINKS.klookHotels);
   const kkdayHotelsPartnerUrl = resolvePartnerUrl(AFFILIATE_LINKS.kkdayHotels);
+  const primaryHotelPartnerUrl = isKlookHotelsActive ? klookHotelsPartnerUrl : kkdayHotelsPartnerUrl;
   const goCityPassUrl = resolvePartnerUrl(AFFILIATE_LINKS.goCity);
   const [swapRotated, setSwapRotated] = useState(false);
 
@@ -900,7 +904,7 @@ export function TravelpayoutsCustomWidget({
                       htmlFor={hotelCityId}
                       className="text-[11px] font-semibold text-slate-600 cursor-pointer"
                     >
-                      Destination City or Hotel
+                      {isBn ? "গন্তব্য শহর বা হোটেল" : "Destination City or Hotel"}
                     </label>
                     <div className="flex items-center gap-1.5">
                       <button
@@ -926,7 +930,7 @@ export function TravelpayoutsCustomWidget({
                         )}
                       </button>
                       <span className="text-[10px] font-mono font-bold bg-[#F6B73C]/25 text-brand-navy px-1.5 py-0.5 rounded">
-                        VERIFIED STAYS
+                        {isBn ? "পার্টনার তালিকা" : "PARTNER LISTINGS"}
                       </span>
                     </div>
                   </div>
@@ -934,7 +938,7 @@ export function TravelpayoutsCustomWidget({
                     id={hotelCityId}
                     type="text"
                     value={hotelCity}
-                    placeholder="e.g. Makkah, Bangkok, Dubai, Paris, London..."
+                    placeholder={isBn ? "যেমন: ব্যাংকক, কুয়ালালামপুর, দুবাই..." : "e.g. Makkah, Bangkok, Dubai, Paris, London..."}
                     onFocus={() => setActiveDropdown("hotel")}
                     onChange={(e) => {
                       setHotelCity(e.target.value);
@@ -944,13 +948,13 @@ export function TravelpayoutsCustomWidget({
                   />
                   <span className="text-[11px] text-slate-500 truncate">
                     {filteredHotelCities[0]?.zone ||
-                      "Hotels, Resorts & Family Suites"}
+                      (isBn ? "পার্টনার সাইটে শহর আবার দিন" : "Re-enter city on partner site")}
                   </span>
                 </div>
                 {activeDropdown === "hotel" && (
                   <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 max-h-64 overflow-y-auto py-1">
                     <div className="px-3.5 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 bg-slate-50/60">
-                      Select Popular City or Type Any Destination Worldwide
+                      {isBn ? "শহর বেছে নিন (পার্টনার সাইটে আবার দিন)" : "Select Popular City (Re-enter on Partner Site)"}
                     </div>
                     {filteredHotelCities.map((h) => (
                       <button
@@ -989,7 +993,7 @@ export function TravelpayoutsCustomWidget({
                     htmlFor={checkinDateId}
                     className="text-[11px] font-semibold text-slate-600 cursor-pointer"
                   >
-                    Check-In
+                    {isBn ? "চেক-ইন তারিখ" : "Check-In"}
                   </label>
                   <input
                     id={checkinDateId}
@@ -1005,7 +1009,7 @@ export function TravelpayoutsCustomWidget({
                     className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
                   />
                   <span className="text-[11px] text-slate-500 truncate">
-                    Flexible check-in
+                    {isBn ? "পার্টনার সাইটে তারিখ দিন" : "Enter dates on partner site"}
                   </span>
                 </div>
               </div>
@@ -1017,7 +1021,7 @@ export function TravelpayoutsCustomWidget({
                     htmlFor={checkoutDateId}
                     className="text-[11px] font-semibold text-slate-600 cursor-pointer"
                   >
-                    Check-Out
+                    {isBn ? "চেক-আউট তারিখ" : "Check-Out"}
                   </label>
                   <input
                     id={checkoutDateId}
@@ -1028,7 +1032,7 @@ export function TravelpayoutsCustomWidget({
                     className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
                   />
                   <span className="text-[11px] text-slate-500 truncate">
-                    Instant voucher
+                    {isBn ? "রুম ও বাতিলের শর্ত দেখুন" : "Check room & cancellation terms"}
                   </span>
                 </div>
               </div>
@@ -1040,7 +1044,7 @@ export function TravelpayoutsCustomWidget({
                     htmlFor={hotelRoomsId}
                     className="text-[11px] font-semibold text-slate-600 cursor-pointer"
                   >
-                    Guests &amp; Rooms
+                    {isBn ? "অতিথি ও রুম" : "Guests & Rooms"}
                   </label>
                   <select
                     id={hotelRoomsId}
@@ -1048,10 +1052,10 @@ export function TravelpayoutsCustomWidget({
                     onChange={(e) => setTravelers(Number(e.target.value))}
                     className="w-full bg-transparent text-xs sm:text-sm font-extrabold text-slate-900 focus:outline-none cursor-pointer"
                   >
-                    <option value="1">1 Guest · 1 Room</option>
-                    <option value="2">2 Guests · 1 Room</option>
-                    <option value="3">3 Guests · 1 Room</option>
-                    <option value="4">4 Guests · 2 Rooms</option>
+                    <option value="1">{isBn ? "১ অতিথি · ১ রুম" : "1 Guest · 1 Room"}</option>
+                    <option value="2">{isBn ? "২ অতিথি · ১ রুম" : "2 Guests · 1 Room"}</option>
+                    <option value="3">{isBn ? "৩ অতিথি · ১ রুম" : "3 Guests · 1 Room"}</option>
+                    <option value="4">{isBn ? "৪ অতিথি · ২ রুম" : "4 Guests · 2 Rooms"}</option>
                   </select>
                   <span className="text-[11px] text-slate-500 truncate">
                     {isBn ? "কার্ডের বৈদেশিক লেনদেনের শর্ত যাচাই করুন" : "Check your card’s foreign-transaction terms"}
@@ -1061,26 +1065,36 @@ export function TravelpayoutsCustomWidget({
 
               {/* Generic partner handoff; the city, dates and guests are not forwarded to Klook. */}
               <div className="lg:col-span-2 flex">
-                <a
-                  id="btn-search-hotels-submit"
-                  href={klookHotelsPartnerUrl}
-                  data-affiliate-placement={affiliatePlacement}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  onClick={() => {
-                    setActiveDropdown(null);
-                  }}
-                  className="w-full h-[68px] bg-[#F6B73C] text-brand-navy hover:bg-[#f5ad24] active:scale-[0.98] rounded-xl border border-amber-400/90 shadow-[0_10px_22px_-5px_rgba(246,183,60,0.5)] transition-transform flex items-center justify-center cursor-pointer px-3 text-center group"
-                >
-                  <span className="flex items-center gap-1.5 font-black text-sm sm:text-[15px] tracking-tight">
-                    <Search size={16} className="shrink-0 stroke-[2.5]" />
-                    <span>{isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}</span>
-                    <ExternalLink
-                      size={13}
-                      className="shrink-0 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                    />
-                  </span>
-                </a>
+                {primaryHotelPartnerUrl && (
+                  <a
+                    id="btn-search-hotels-submit"
+                    href={primaryHotelPartnerUrl}
+                    data-affiliate-placement={affiliatePlacement}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    onClick={() => {
+                      setActiveDropdown(null);
+                    }}
+                    className="w-full h-[68px] bg-[#F6B73C] text-brand-navy hover:bg-[#f5ad24] active:scale-[0.98] rounded-xl border border-amber-400/90 shadow-[0_10px_22px_-5px_rgba(246,183,60,0.5)] transition-transform flex items-center justify-center cursor-pointer px-3 text-center group"
+                  >
+                    <span className="flex items-center gap-1.5 font-black text-sm sm:text-[15px] tracking-tight">
+                      <Search size={16} className="shrink-0 stroke-[2.5]" />
+                      <span>
+                        {isKlookHotelsActive
+                          ? isBn
+                            ? "Klook-এ হোটেল সার্চ করুন"
+                            : "Search Klook hotel collection"
+                          : isBn
+                            ? "KKday হোটেল তালিকা"
+                            : "Search KKday hotel collection"}
+                      </span>
+                      <ExternalLink
+                        size={13}
+                        className="shrink-0 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                      />
+                    </span>
+                  </a>
+                )}
               </div>
             </div>
           )}
@@ -1137,26 +1151,30 @@ export function TravelpayoutsCustomWidget({
                   <span className="mr-1 text-[10px] font-bold uppercase tracking-wide text-slate-500">
                     {isBn ? "আরও হোটেল ও ভ্রমণ বিকল্প:" : "More hotel and trip options:"}
                   </span>
-                  <a
-                    href={klookHotelsPartnerUrl}
-                    data-affiliate-placement={affiliatePlacement}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-amber-700 bg-amber-50/90 hover:bg-amber-100/80 border border-amber-200/80 px-2.5 py-1 rounded-lg transition-colors"
-                  >
-                    <span>{isBn ? "Klook-এ হোটেল সার্চ" : "Search Klook hotel collection"}</span>
-                    <ExternalLink size={11} />
-                  </a>
-                  <a
-                    href={kkdayHotelsPartnerUrl}
-                    data-affiliate-placement={affiliatePlacement}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
-                  >
-                    <span>{isBn ? "KKday হোটেল তালিকা" : "Search KKday hotel collection"}</span>
-                    <ExternalLink size={11} />
-                  </a>
+                  {isKlookHotelsActive && (
+                    <a
+                      href={klookHotelsPartnerUrl}
+                      data-affiliate-placement={affiliatePlacement}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-amber-700 bg-amber-50/90 hover:bg-amber-100/80 border border-amber-200/80 px-2.5 py-1 rounded-lg transition-colors"
+                    >
+                      <span>{isBn ? "Klook-এ হোটেল সার্চ" : "Search Klook hotel collection"}</span>
+                      <ExternalLink size={11} />
+                    </a>
+                  )}
+                  {kkdayHotelsPartnerUrl && (
+                    <a
+                      href={kkdayHotelsPartnerUrl}
+                      data-affiliate-placement={affiliatePlacement}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="inline-flex items-center gap-1 font-semibold text-brand-navy hover:text-emerald-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg transition-colors"
+                    >
+                      <span>{isBn ? "KKday হোটেল তালিকা" : "Search KKday hotel collection"}</span>
+                      <ExternalLink size={11} />
+                    </a>
+                  )}
                   <a
                     href={goCityPassUrl}
                     target="_blank"
@@ -1225,18 +1243,20 @@ export function TravelpayoutsCustomWidget({
               )}
               {searchTab === "hotels" ? (
                 <>
-                  <a
-                    href={klookHotelsPartnerUrl}
-                    data-affiliate-placement={affiliatePlacement}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="inline-flex items-center gap-1.5 bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer"
-                  >
-                    <span>
-                      {isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}
-                    </span>
-                    <ExternalLink size={12} />
-                  </a>
+                  {isKlookHotelsActive && (
+                    <a
+                      href={klookHotelsPartnerUrl}
+                      data-affiliate-placement={affiliatePlacement}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="inline-flex items-center gap-1.5 bg-brand-navy hover:bg-slate-800 text-[#F6B73C] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer"
+                    >
+                      <span>
+                        {isBn ? "Klook-এ হোটেল সার্চ করুন" : "Search Klook hotel collection"}
+                      </span>
+                      <ExternalLink size={12} />
+                    </a>
+                  )}
                   <a
                     href={goCityPassUrl}
                     target="_blank"
