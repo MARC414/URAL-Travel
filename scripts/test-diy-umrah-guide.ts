@@ -92,12 +92,16 @@ for (const locale of ["en", "bn"] as const) {
     assert.ok(body.includes("BDT 1,16,000–1,32,000"));
     assert.equal(getVisibleBlogFaqSection(slug, body, locale)?.questions.length, 5);
   });
-  test(`${locale}: task links, sibling inbounds and optional commerce are present`, () => {
+  test(`${locale}: task links, sibling inbounds and matched commerce are present`, () => {
     for (const target of taskSlugs) assert.ok(post.internalLinks?.some((link) => link.path === `/blog/${target}`));
     assert.ok(post.internalLinks?.some((link) => link.path === "/umrah"));
     assert.ok(posts.filter((entry) => entry.slug !== slug && entry.internalLinks?.some((link) => link.path === `/blog/${slug}`)).length >= 2);
-    assert.equal(post.affiliateCTA?.provider, "airalo");
-    assert.ok(post.affiliateCTA?.body.includes(isBn ? "পারমিটের শর্ত নয়" : "not a Nusuk permit requirement"));
+    // The matched next step for a cost guide is testing the flight line at
+    // live fares (changed from the old eSIM-only CTA in 3c716a6); the copy
+    // must keep disowning the guide's dated reference figures.
+    assert.equal(post.affiliateCTA?.provider, "aviasales");
+    assert.ok(post.affiliateCTA?.body.includes(isBn ? "লাইভ ভাড়া বদলায়" : "Live fares change"));
+    assert.ok(post.affiliateCTA?.body.includes(isBn ? "reference figure নয়" : "not the dated reference figures"));
   });
   test(`${locale}: real React article renders the table, FAQs, 26 sources and task links without shared price FAQ`, () => {
     const html = renderToStaticMarkup(React.createElement(BlogPostRouteView as any, { context: {
