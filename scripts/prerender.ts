@@ -99,9 +99,15 @@ import {
   AFFILIATE_LINKS,
 } from "../src/components/AffiliatePartners";
 import {
+  KLOOK_CURATED_HOTEL_PICKS,
   KLOOK_HOTEL_BLOG_PLACEMENTS,
   KLOOK_HOTEL_COMMISSION_NOTE,
   KLOOK_HOTEL_CHECK_STEPS,
+  KLOOK_PICKS_CHECKED_AT,
+  KLOOK_PICKS_PROVENANCE,
+  KLOOK_PICK_SIGNALS,
+  buildKlookHotelDetailLink,
+  groupKlookPicksByArea,
 } from "../src/components/KlookHotelOffers";
 import {
   HAJJ_UMRAH_FAQS,
@@ -201,6 +207,40 @@ function escapeHtml(str: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+/**
+ * Static twin of the curated Klook shortlist rendered by KlookHotelSpotlight.
+ *
+ * The picks live in the hydrated component, so without this the crawlable hotel
+ * page carried only the generic collection handoff while a reader who waited for
+ * JavaScript saw a shortlist the HTML never mentioned. Same data, same honesty:
+ * area, an area-fit note, Klook's own booking signal, the checked date and the
+ * provenance line. Uses a div, not a nested section, so the surrounding section
+ * stays one extractable block for the build assertions.
+ */
+function renderKlookHotelPicks(guideId: string, lang: "en" | "bn"): string {
+  const picks = KLOOK_CURATED_HOTEL_PICKS[guideId] ?? [];
+  if (picks.length === 0) return "";
+  const isBn = lang === "bn";
+  const heading = isBn
+    ? "এলাকা অনুযায়ী Klook হোটেল শর্টলিস্ট"
+    : "Klook hotel picks by area";
+  const checked = isBn
+    ? `যাচাই: ${KLOOK_PICKS_CHECKED_AT.bn}`
+    : `Checked ${KLOOK_PICKS_CHECKED_AT.en}`;
+  const groupsHtml = groupKlookPicksByArea(picks)
+    .map(
+      (group) =>
+        `<h3>${escapeHtml(isBn ? group.areaBn : group.areaEn)}</h3><ul>${group.picks
+          .map(
+            (pick) =>
+              `<li><a href="${escapeHtml(buildKlookHotelDetailLink(pick.hotelId, pick.subId))}" data-affiliate-placement="${escapeHtml(pick.subId)}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(pick.name)}</a> — ${escapeHtml(isBn ? pick.bestForBn : pick.bestForEn)} <em>(${escapeHtml(isBn ? KLOOK_PICK_SIGNALS[pick.signal].bn : KLOOK_PICK_SIGNALS[pick.signal].en)})</em></li>`,
+          )
+          .join("")}</ul>`,
+    )
+    .join("");
+  return `<div><h3 id="klook-hotel-picks">${escapeHtml(heading)}</h3><p><small>${escapeHtml(checked)}</small></p>${groupsHtml}<p><small>${escapeHtml(isBn ? KLOOK_PICKS_PROVENANCE.bn : KLOOK_PICKS_PROVENANCE.en)}</small></p></div>`;
 }
 
 function injectScheduledBlogDirectory(html: string): string {
@@ -1812,6 +1852,7 @@ function buildAllRoutes(): PrerenderRoute[] {
             <h2 id="klook-hotel-check">Search Klook’s hotel collection</h2>
             <p>This tracked link opens Klook’s general hotel collection, not a live quote for a selected property or your dates. Re-enter ${escapeHtml(h.city)}, your dates and guest count on Klook to search current options. The collection reflects Klook’s own booking data, not an independent quality rating. <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" data-affiliate-placement="${escapeHtml(placement)}" target="_blank" rel="noopener noreferrer sponsored">Search Klook hotel collection</a>.</p>
             <ol>${KLOOK_HOTEL_CHECK_STEPS.en.map((step) => `<li><strong>${escapeHtml(step.title)}:</strong> ${escapeHtml(step.body)}</li>`).join("")}</ol>
+            ${renderKlookHotelPicks(h.id, "en")}
             <p><small>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.en)} Klook charges in the hotel’s own currency; check your card’s foreign-transaction fee before comparing a converted amount.</small></p>
           </section>` : ""}
           <section>
@@ -3324,6 +3365,7 @@ function buildBengaliBody(
               "Klook-এর হোটেল তালিকা সার্চ করুন",
               `<p>এই ট্র্যাক করা লিংকটি Klook-এর সাধারণ হোটেল তালিকা খোলে—নির্বাচিত হোটেল বা আপনার তারিখের লাইভ কোট নয়। ${escapeHtml(hotel.city)}, তারিখ ও অতিথিসংখ্যা Klook-এ আবার দিন। তালিকাটি Klook-এর নিজস্ব বুকিং ডেটার ভিত্তিতে, স্বতন্ত্র মানের রেটিং নয়। <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" data-affiliate-placement="${escapeHtml(placement)}" target="_blank" rel="noopener noreferrer sponsored">Klook-এর সাধারণ হোটেল তালিকা সার্চ করুন</a>।</p>` +
                 `<ol>${KLOOK_HOTEL_CHECK_STEPS.bn.map((step) => `<li><strong>${escapeHtml(step.title)}:</strong> ${escapeHtml(step.body)}</li>`).join("")}</ol>` +
+                renderKlookHotelPicks(hotel.id, "bn") +
                 `<p><small>${escapeHtml(KLOOK_HOTEL_COMMISSION_NOTE.bn)} Klook হোটেলের নিজস্ব মুদ্রায় চার্জ করে; BDT-তে বদলে তুলনার আগে কার্ডের বিদেশি লেনদেন ফি জেনে নিন।</small></p>`
             )
           );

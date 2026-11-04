@@ -70,14 +70,56 @@ export function buildKlookHotelDetailLink(
   );
 }
 
+export type KlookPickSignal = "popular" | "value" | "rising";
+
+/**
+ * The partner feed labels a hotel "Hot selling", "Great prices" or "High growth".
+ * Those are Klook's booking signals, not an independent quality or price audit,
+ * so the reader-facing labels say who said it instead of repeating the claim.
+ */
+export const KLOOK_PICK_SIGNALS: Record<KlookPickSignal, { en: string; bn: string }> = {
+  popular: { en: "Frequently booked on Klook", bn: "Klook-এ বেশি বুকিং" },
+  value: { en: "Klook flags it for value", bn: "Klook-এ ভ্যালু হিসেবে চিহ্নিত" },
+  rising: { en: "Rising demand on Klook", bn: "Klook-এ চাহিদা বাড়ছে" },
+};
+
+/** The date the partner feed was read. Update it when the picks are re-checked. */
+export const KLOOK_PICKS_CHECKED_AT = {
+  en: "4 November 2026",
+  bn: "৪ নভেম্বর ২০২৬",
+} as const;
+
+/**
+ * Why the picks exist at all, in one sentence a reader can check us against.
+ * The feed does not include rates, room types or inspection notes, so the page
+ * cannot claim any of them.
+ */
+export const KLOOK_PICKS_PROVENANCE = {
+  en: "Source: the Klook partner hotel feed, checked 4 November 2026. URAL has not inspected these properties or verified their rates. The signals are Klook booking labels, not URAL ratings.",
+  bn: "সূত্র: Klook পার্টনার হোটেল ফিড, ৪ নভেম্বর ২০২৬-এ যাচাই করা। URAL এই হোটেলগুলো নিজে পরিদর্শন করেনি বা রেট যাচাই করেনি। সংকেতগুলো Klook-এর বুকিং লেবেল, URAL-এর রেটিং নয়।",
+} as const;
+
 export interface KlookCuratedHotelPick {
   hotelId: string;
   name: string;
   areaEn: string;
   areaBn: string;
-  tagEn: string;
-  tagBn: string;
+  /** Area-fit framing, not a property claim. */
+  bestForEn: string;
+  bestForBn: string;
+  signal: KlookPickSignal;
   subId: string;
+}
+
+/** Preserves the editorial order of the picks while grouping them by area. */
+export function groupKlookPicksByArea(picks: readonly KlookCuratedHotelPick[]) {
+  const groups: { areaEn: string; areaBn: string; picks: KlookCuratedHotelPick[] }[] = [];
+  for (const pick of picks) {
+    const group = groups.find((entry) => entry.areaEn === pick.areaEn);
+    if (group) group.picks.push(pick);
+    else groups.push({ areaEn: pick.areaEn, areaBn: pick.areaBn, picks: [pick] });
+  }
+  return groups;
 }
 
 /**
@@ -93,8 +135,9 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
       name: "Vince Hotel Pratunam",
       areaEn: "Pratunam",
       areaBn: "প্রাতুনাম",
-      tagEn: "Great prices",
-      tagBn: "সাশ্রয়ী রেট",
+      bestForEn: "Market and mall days on foot in Pratunam",
+      bestForBn: "প্রাতুনামে হেঁটেই মার্কেট ও মল",
+      signal: "value",
       subId: "hotel_bkk_pratunam_vince",
     },
     {
@@ -102,8 +145,9 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
       name: "Grand Diamond Suites Hotel",
       areaEn: "Pratunam",
       areaBn: "প্রাতুনাম",
-      tagEn: "Hot selling",
-      tagBn: "জনপ্রিয় বুকিং",
+      bestForEn: "A Pratunam base that keeps the shopping cluster close",
+      bestForBn: "শপিং এলাকার কাছে থেকে প্রাতুনামে ওঠা",
+      signal: "popular",
       subId: "hotel_bkk_pratunam_diamond",
     },
     {
@@ -111,8 +155,9 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
       name: "Grande Centre Point Terminal 21",
       areaEn: "Sukhumvit (Asok)",
       areaBn: "সুখুম্ভিত (আসোক)",
-      tagEn: "Hot selling",
-      tagBn: "জনপ্রিয় বুকিং",
+      bestForEn: "Asok transport and the Terminal 21 mall next door",
+      bestForBn: "আসোকের যাতায়াত ও পাশের টার্মিনাল ২১ মল",
+      signal: "popular",
       subId: "hotel_bkk_sukhumvit_terminal21",
     },
     {
@@ -120,8 +165,9 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
       name: "Carlton Hotel Bangkok Sukhumvit",
       areaEn: "Sukhumvit",
       areaBn: "সুখুম্ভিত",
-      tagEn: "Great prices",
-      tagBn: "সাশ্রয়ী রেট",
+      bestForEn: "Sukhumvit nights without the Pratunam crowds",
+      bestForBn: "প্রাতুনামের ভিড় এড়িয়ে সুখুম্ভিতে থাকা",
+      signal: "value",
       subId: "hotel_bkk_sukhumvit_carlton",
     },
     {
@@ -129,8 +175,9 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
       name: "Chatrium Grand Bangkok",
       areaEn: "Siam",
       areaBn: "সিয়াম",
-      tagEn: "Hot selling",
-      tagBn: "জনপ্রিয় বুকিং",
+      bestForEn: "Siam shopping and BTS connections",
+      bestForBn: "সিয়ামের শপিং ও বিটিএস সংযোগ",
+      signal: "popular",
       subId: "hotel_bkk_siam_chatrium",
     },
     {
@@ -138,8 +185,9 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
       name: "Chatrium Hotel Riverside Bangkok",
       areaEn: "Riverside",
       areaBn: "রিভারসাইড",
-      tagEn: "Hot selling",
-      tagBn: "জনপ্রিয় বুকিং",
+      bestForEn: "A riverside base instead of a mall-side one",
+      bestForBn: "মলের পাশে নয়, নদীর ধারে ওঠা",
+      signal: "popular",
       subId: "hotel_bkk_riverside_chatrium",
     },
   ],
@@ -149,8 +197,9 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
       name: "Sleeping Lion Suites",
       areaEn: "Bukit Bintang",
       areaBn: "বুকিত বিনতাং",
-      tagEn: "Great prices",
-      tagBn: "সাশ্রয়ী রেট",
+      bestForEn: "Bukit Bintang food and shopping on foot",
+      bestForBn: "বুকিত বিনতাংয়ে হেঁটেই খাবার ও শপিং",
+      signal: "value",
       subId: "hotel_kl_bb_sleeping_lion",
     },
     {
@@ -158,8 +207,9 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
       name: "Hotel Royal Signature",
       areaEn: "Bukit Bintang",
       areaBn: "বুকিত বিনতাং",
-      tagEn: "Hot selling",
-      tagBn: "জনপ্রিয় বুকিং",
+      bestForEn: "A central Bukit Bintang base for a short trip",
+      bestForBn: "ছোট ভ্রমণে বুকিত বিনতাংয়ের কেন্দ্রে ওঠা",
+      signal: "popular",
       subId: "hotel_kl_bb_royal_signature",
     },
     {
@@ -167,8 +217,9 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
       name: "Imperial Lexis Kuala Lumpur",
       areaEn: "KLCC",
       areaBn: "কেএলসিসি (KLCC)",
-      tagEn: "High growth",
-      tagBn: "ক্রমবর্ধমান চাহিদা",
+      bestForEn: "KLCC skyline stays close to the park",
+      bestForBn: "পার্কের কাছে কেএলসিসি এলাকায় ওঠা",
+      signal: "rising",
       subId: "hotel_kl_klcc_imperial_lexis",
     },
     {
@@ -176,8 +227,9 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
       name: "THE FACE Style Hotel",
       areaEn: "KLCC / City Centre",
       areaBn: "কেএলসিসি / সিটি সেন্টার",
-      tagEn: "High growth",
-      tagBn: "ক্রমবর্ধমান চাহিদা",
+      bestForEn: "Between KLCC and the city centre, walkable to both",
+      bestForBn: "কেএলসিসি ও সিটি সেন্টারের মাঝখানে, দুটোই হাঁটার দূরত্বে",
+      signal: "rising",
       subId: "hotel_kl_klcc_face_style",
     },
     {
@@ -185,8 +237,9 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
       name: "Cititel Mid Valley",
       areaEn: "Mid Valley / KL Sentral link",
       areaBn: "মিড ভ্যালি / কেএল সেন্ট্রাল সংযোগ",
-      tagEn: "Great prices",
-      tagBn: "সাশ্রয়ী রেট",
+      bestForEn: "Mid Valley shopping with the KL Sentral rail link",
+      bestForBn: "মিড ভ্যালি শপিং ও কেএল সেন্ট্রাল রেল সংযোগ",
+      signal: "value",
       subId: "hotel_kl_midvalley_cititel",
     },
     {
@@ -194,8 +247,9 @@ export const KLOOK_CURATED_HOTEL_PICKS: Record<string, readonly KlookCuratedHote
       name: "Sunway Pyramid Hotel",
       areaEn: "Sunway City (Family Resort)",
       areaBn: "সানওয়ে সিটি (ফ্যামিলি রিসোর্ট)",
-      tagEn: "Hot selling",
-      tagBn: "জনপ্রিয় বুকিং",
+      bestForEn: "Families basing the trip at Sunway City",
+      bestForBn: "পরিবার নিয়ে সানওয়ে সিটিকে ঘিরে ভ্রমণ",
+      signal: "popular",
       subId: "hotel_kl_sunway_pyramid",
     },
   ],

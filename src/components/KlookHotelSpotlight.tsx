@@ -9,8 +9,12 @@ import {
 import {
   KLOOK_CURATED_HOTEL_PICKS,
   KLOOK_HOTEL_CHECK_STEPS,
+  KLOOK_PICKS_CHECKED_AT,
+  KLOOK_PICKS_PROVENANCE,
+  KLOOK_PICK_SIGNALS,
   buildKlookHotelDetailLink,
   getKlookHotelCommissionNote,
+  groupKlookPicksByArea,
 } from "./KlookHotelOffers";
 import { getHotelGuideAffiliatePlacement } from "../utils/affiliatePlacement";
 
@@ -49,6 +53,11 @@ interface KlookHotelSpotlightProps {
  * The hotel button uses the partner-provided tracked deep link to open the
  * curated hotel collection. Selected city/date/guest details are not forwarded,
  * so the copy tells travellers to enter those on Klook.
+ *
+ * Bangkok and Kuala Lumpur also get a shortlist pulled from the partner feed.
+ * Each row carries the area, an area-fit note and Klook's own booking signal,
+ * never a URAL verdict: the feed has no rates, room types or inspection notes,
+ * so the checked date and the provenance line state exactly what was read.
  */
 export function KlookHotelSpotlight({ city, guideId, lang = "en" }: KlookHotelSpotlightProps) {
   // A paused partner would make this Klook-specific copy false while
@@ -62,6 +71,7 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en" }: KlookHotelSp
   const cityLabel = isBn ? CITY_BN[city] ?? city : city;
   const href = resolvePartnerUrl(AFFILIATE_LINKS.klookHotels);
   const curatedPicks = KLOOK_CURATED_HOTEL_PICKS[guideId] ?? [];
+  const pickGroups = groupKlookPicksByArea(curatedPicks);
 
   const steps = KLOOK_HOTEL_CHECK_STEPS[lang];
 
@@ -114,45 +124,68 @@ export function KlookHotelSpotlight({ city, guideId, lang = "en" }: KlookHotelSp
       </ol>
 
       {curatedPicks.length > 0 && (
-        <div className="mt-5 space-y-2.5 rounded-xl border border-white/15 bg-white/[0.03] p-4">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <h3 className="font-serif text-sm font-bold text-white">
+        <div className="mt-5 rounded-xl border border-white/15 bg-white/[0.03] p-4 sm:p-5">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1.5">
+            <h3 className="min-w-0 font-serif text-sm font-bold text-white sm:text-base">
               {isBn
                 ? `${cityLabel}-এর এলাকা অনুযায়ী Klook হোটেল শর্টলিস্ট`
                 : `Klook hotel picks in ${city} by area`}
             </h3>
-            <span className="font-mono text-[10px] text-slate-300">
+            <span className="shrink-0 rounded-md border border-white/15 px-2 py-0.5 font-mono text-[10px] text-slate-300">
               {isBn
-                ? "হোটেল পেজে তারিখ ও চূড়ান্ত মোট দাম দেখুন"
-                : "Check dates & final total on the property page"}
+                ? `যাচাই: ${KLOOK_PICKS_CHECKED_AT.bn}`
+                : `Checked ${KLOOK_PICKS_CHECKED_AT.en}`}
             </span>
           </div>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-            {curatedPicks.map((pick) => (
-              <a
-                key={pick.hotelId}
-                href={buildKlookHotelDetailLink(pick.hotelId, pick.subId)}
-                data-affiliate-placement={pick.subId}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="group flex items-start justify-between gap-2 rounded-lg border border-white/10 bg-white/[0.04] p-3 text-left transition-colors hover:border-brand-gold/50 hover:bg-white/[0.08]"
-              >
-                <div className="min-w-0 space-y-0.5">
-                  <span className="block truncate text-xs font-bold text-white group-hover:text-brand-gold">
-                    {pick.name}
-                  </span>
-                  <span className="block font-mono text-[10px] text-slate-300">
-                    {isBn ? pick.areaBn : pick.areaEn} · {isBn ? pick.tagBn : pick.tagEn}
-                  </span>
-                </div>
-                <ExternalLink
-                  size={12}
-                  className="mt-0.5 shrink-0 text-slate-300 group-hover:text-brand-gold"
-                  aria-hidden="true"
-                />
-              </a>
+
+          <div className="mt-3.5 space-y-3.5">
+            {pickGroups.map((group) => (
+              <div key={group.areaEn}>
+                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-brand-gold">
+                  {isBn ? group.areaBn : group.areaEn}
+                </p>
+                <ul className="mt-1.5 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  {group.picks.map((pick) => (
+                    <li key={pick.hotelId}>
+                      <a
+                        href={buildKlookHotelDetailLink(pick.hotelId, pick.subId)}
+                        data-affiliate-placement={pick.subId}
+                        target="_blank"
+                        rel="noopener noreferrer sponsored"
+                        aria-label={
+                          isBn
+                            ? `${pick.name} — Klook-এ নতুন ট্যাবে দেখুন`
+                            : `${pick.name} — open on Klook in a new tab`
+                        }
+                        className="group flex min-h-14 items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] p-3 transition-colors hover:border-brand-gold/50 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
+                      >
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-xs font-bold text-white group-hover:text-brand-gold">
+                            {pick.name}
+                          </span>
+                          <span className="mt-0.5 block text-[11px] leading-4 text-slate-300">
+                            {isBn ? pick.bestForBn : pick.bestForEn}
+                          </span>
+                          <span className="mt-1 block text-[10px] leading-4 text-slate-400">
+                            {isBn ? KLOOK_PICK_SIGNALS[pick.signal].bn : KLOOK_PICK_SIGNALS[pick.signal].en}
+                          </span>
+                        </span>
+                        <ExternalLink
+                          size={13}
+                          className="shrink-0 text-slate-400 group-hover:text-brand-gold"
+                          aria-hidden="true"
+                        />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
+
+          <p className="mt-3.5 border-t border-white/10 pt-2.5 text-[10px] leading-4 text-slate-400">
+            {isBn ? KLOOK_PICKS_PROVENANCE.bn : KLOOK_PICKS_PROVENANCE.en}
+          </p>
         </div>
       )}
 

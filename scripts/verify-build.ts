@@ -54,6 +54,9 @@ import {
   KLOOK_CURATED_HOTEL_PICKS,
   KLOOK_HOTEL_BLOG_PLACEMENTS,
   KLOOK_HOTEL_COMMISSION_NOTE,
+  KLOOK_PICKS_CHECKED_AT,
+  KLOOK_PICKS_PROVENANCE,
+  KLOOK_PICK_SIGNALS,
   buildKlookDeepLink,
   buildKlookHotelDetailLink,
 } from "../src/components/KlookHotelOffers";
@@ -3243,6 +3246,53 @@ if (sitemap) {
   check(
     klookHotelHtmlIssues.length === 0,
     `all six hotel guides carry the transparent generic Klook collection handoff in English and Bengali, with tracked links, first-party placement scopes and evergreen copy [${klookHotelHtmlIssues.join(", ")}]`
+  );
+
+  // The curated shortlist started life as a hydrated-only component, so the
+  // crawlable page and the rendered page disagreed. These assertions keep the
+  // picks, their checked date and their provenance inside the static HTML, and
+  // stop the partner feed's commercial labels being republished as URAL verdicts.
+  const klookPickHtmlIssues: string[] = [];
+  for (const hotelId of ["bangkok-hotels", "kuala-lumpur-hotels"]) {
+    const picks = KLOOK_CURATED_HOTEL_PICKS[hotelId] ?? [];
+    const enHtml = read(path.join(DIST_DIR, "hotels", `${hotelId}.html`)) ?? "";
+    const bnHtml = read(path.join(DIST_DIR, "bn", "hotels", `${hotelId}.html`)) ?? "";
+    const enSection = sectionStartingAt(enHtml, 'id="klook-hotel-check"');
+    const bnSection = sectionStartingAt(bnHtml, "Klook-এর হোটেল তালিকা সার্চ করুন");
+    const missingEn = picks.filter((pick) => {
+      const href = buildKlookHotelDetailLink(pick.hotelId, pick.subId).replace(/&/g, "&amp;");
+      return (
+        !enSection.includes(pick.name) ||
+        !enSection.includes(href) ||
+        enSection.split(href).length - 1 !== 1 ||
+        !enSection.includes(pick.bestForEn) ||
+        !enSection.includes(KLOOK_PICK_SIGNALS[pick.signal].en)
+      );
+    });
+    const missingBn = picks.filter(
+      (pick) =>
+        !bnSection.includes(pick.name) ||
+        !bnSection.includes(pick.bestForBn) ||
+        !bnSection.includes(KLOOK_PICK_SIGNALS[pick.signal].bn)
+    );
+    const hasProvenance =
+      enSection.includes(`Checked ${KLOOK_PICKS_CHECKED_AT.en}`) &&
+      enSection.includes(KLOOK_PICKS_PROVENANCE.en) &&
+      bnSection.includes(`যাচাই: ${KLOOK_PICKS_CHECKED_AT.bn}`) &&
+      bnSection.includes(KLOOK_PICKS_PROVENANCE.bn);
+    const noCommercialLabelAsVerdict = !/Hot selling|Great prices|High growth|জনপ্রিয় বুকিং|সাশ্রয়ী রেট|ক্রমবর্ধমান চাহিদা/.test(
+      enSection + bnSection
+    );
+    if (missingEn.length || missingBn.length || !hasProvenance || !noCommercialLabelAsVerdict) {
+      klookPickHtmlIssues.push(hotelId);
+      console.error(
+        `[VERIFY] Klook hotel picks missing from static HTML: ${hotelId} (en: ${missingEn.map((p) => p.hotelId).join(",") || "ok"}; bn: ${missingBn.map((p) => p.hotelId).join(",") || "ok"}; provenance: ${hasProvenance}; no commercial labels: ${noCommercialLabelAsVerdict})`
+      );
+    }
+  }
+  check(
+    klookPickHtmlIssues.length === 0,
+    `the Bangkok and Kuala Lumpur curated Klook picks appear in the prerendered English and Bengali HTML with a checked date and provenance, and the partner feed's booking labels are never republished as URAL verdicts [${klookPickHtmlIssues.join(", ")}]`
   );
 
   const withMockedNow = <T,>(timestamp: number, render: () => T): T => {
