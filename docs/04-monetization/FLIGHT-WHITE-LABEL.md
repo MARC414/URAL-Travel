@@ -44,6 +44,11 @@ https://flights.uraltravel.co.uk/?flightSearch=DAC1511BKK2211c3&currency=GBP&loc
   language. These query preferences were observed in `TPWL_EXTRA` and the browser
   language on Travelpayouts' official Page demo. That demo is supporting evidence,
   not an end-to-end test of URAL's domain.
+- The Page's own default currency is **USD** (dashboard main currency). The website
+  sends **BDT only when the departure airport is in Bangladesh**
+  (`preferredCurrencyForOrigin` in `flightSearch.ts`); every other origin opens in USD,
+  including London–New York. A currency the visitor chose explicitly is never
+  overridden, and legacy bookmarks without a currency follow the same rule.
 - The hosted domain identifies the configured account/project. Website links do not
   append a new marker, project override or unverified SubID.
 
@@ -66,6 +71,80 @@ bridge itself redirects top-level visits. It remains noindex and outside the sit
 The retired engine's cookie/fetch patches and frame messaging are removed. Page 24232
 must not be substituted into the deleted widget 22462's embed script.
 
+## Branding change-set (approved 5 November 2026)
+
+The template itself is themed in the Travelpayouts dashboard. **Nothing in this section is
+published by a repository deploy**; it records the agreed values so a later change does not
+re-derive them. Owner decision: keep the template's layout and images, replace the default
+blue with URAL navy, and use the URAL mark and name.
+
+### Header, logo and copy
+
+The logo slot is a 40 px square. Replace the default `.tpwl-logo__logo` block in **Custom HTML
+code** for **both** language blocks:
+
+```css
+.tpwl-logo__logo {
+  width: 40px;
+  height: 40px;
+  background: no-repeat center url('https://uraltravel.co.uk/assets/brand/svg/ural-ascent-mark-navy-v1.svg');
+  background-size: 40px 40px;
+}
+```
+
+Use the **navy** mark, not the ivory one: the slot sits on the light header band, and the
+shipped default is a white glyph that is almost invisible there. The header text changes from
+“Flight tickets” to **URAL Travel Intelligence**.
+
+| Element | English | Bengali |
+|---|---|---|
+| Headline | Worldwide flights, one search. | বিশ্বজুড়ে ফ্লাইট, এক অনুসন্ধানে। |
+| Page title | Flight Search \| URAL Travel Intelligence | ফ্লাইট সার্চ \| URAL Travel Intelligence |
+| Meta description | Search flights worldwide with URAL. Compare routes, cabins and fares across airlines and booking sites, then plan the trip with URAL travel guides. | URAL-এ বিশ্বজুড়ে ফ্লাইট খুঁজুন। এয়ারলাইন ও বুকিং সাইটের মধ্যে রুট, কেবিন ও ভাড়া তুলনা করুন, তারপর URAL-এর ভ্রমণ গাইডে পরিকল্পনা সাজান। |
+
+The default “cheapest flights” meta wording is not carried over: URAL does not publish a
+price-superlative claim it cannot verify. Set the favicon from the Meta block
+(`/assets/brand/favicon/favicon-32.png`).
+
+### Palette
+
+Set these in the **Design** tab rather than in Custom HTML: the same values drive the results
+page through `--main-accent`, so the results page follows automatically. Do not define the
+colours in both places with different values.
+
+| Field | Default | URAL |
+|---|---|---|
+| Search form background | `#D3DCE8` | `#EFEAE1` |
+| Headline text | `#1F1F26` | `#0B1426` |
+| Main text | `#1F1F26` | `#1E293B` |
+| Button background | `#1F4FD1` | `#0B1426` |
+| Button text | `#FFFFFF` | `#F5F1E8` |
+| Links (prices, footer) | `#1F4FD1` | `#0B1426` |
+| Icons in the search form | `#1F4FD1` | `#0B1426` |
+| Page background | `#F6F7F9` | `#F7F5EF` |
+| Ticker cards background | unchanged | unchanged |
+
+Contrast: ivory on navy ≈ 15.6:1 and navy on the warm band ≈ 15.4:1; navy prices on white
+cards exceed 12:1. A navy hero band was rejected because the full-width “Search flights”
+button sits on that band and would disappear into it.
+
+### Images and the results page
+
+- The popular-destination card photos are provider-supplied per city. The editable part is the
+  city list (`data-destination="IATA"`), and the heading text. The “Origin: Dhaka / …” price
+  rows inside those cards are generated from the account, not from the page code.
+- The results page inherits colour, border radius and font from the Design tab. It has no
+  custom image slot; airline logos and any photography there are provider-owned.
+- The only place URAL photography can be added is the documented
+  `header.tpwl-logo-header` background rule, which needs an overlay to keep the headline
+  readable. Not applied.
+
+### Footer
+
+The default credit reads “Travelpayouts © 2008−2026”. A text-only change to “URAL Travel
+Intelligence © 2026” is possible without touching layout; the Terms, Privacy and Cookie links
+are left as delivered.
+
 ## Activation evidence — 5 November 2026
 
 - Authoritative DNS resolved the configured CNAME; its A records matched the provider:
@@ -74,32 +153,26 @@ must not be substituted into the deleted widget 22462's embed script.
 - The authenticated dashboard/API confirmed the domain, enabled Page type, marker,
   project and languages. BDT, EUR and GBP were added to the existing currency options
   and the saved values were read back.
-- HTTPS was rejected with **`ERR_CERT_COMMON_NAME_INVALID`**. This establishes a
-  certificate-hostname mismatch; it does not establish the earlier suggested
-  “unverified domain” explanation for an HTTP 500.
-- The owner said the Page was created **about 30 minutes earlier**. Travelpayouts'
-  dashboard and HTTPS guide allow **up to 48 hours** after creation/customization
-  for certificate provisioning. No manual Check/Verify control was present.
+- HTTPS initially failed with **`ERR_CERT_COMMON_NAME_INVALID`** shortly after the Page was
+  created. **Resolved later the same day:** `https://flights.uraltravel.co.uk/` returned
+  **HTTP 200** and rendered the hosted search page (form, EN/BN switch, USD, the pre-filled
+  London–Dubai route and the popular-destinations module). Provisioning landed inside
+  Travelpayouts' documented **48-hour** window, so no support escalation was needed.
 
-**Provider activation is pending at this observation.** A successful repository build
-does not certify the subdomain's TLS, rendered results, availability or booking attribution.
-When HTTPS becomes valid, verify one-way and round-trip handoffs, Business, adult count,
-all six website currencies and both languages on the actual URAL Page. Check dates/year
-in the resulting form without completing a purchase.
+**TLS is valid; the booking path is not certified.** The page loads and renders, but a live
+result set, availability and booking attribution have not been verified end to end. Any
+remaining check must avoid completing a purchase.
 
-If the mismatch persists beyond the documented window, send Travelpayouts support:
-
-> Please check TLS provisioning for flights.uraltravel.co.uk, White Label Web Page
-> 24232, account marker 675992, project 589561. The saved domain is correct and enabled.
-> The DNS-only CNAME points to whitelabel.travelpayouts.com; authoritative A records
-> match the provider. HTTPS returns ERR_CERT_COMMON_NAME_INVALID. Please verify the
-> domain binding and certificate deployment after the provisioning window.
+The page confirmed these dashboard values on load: `wl_id=24232`, marker `675992`, project
+`589561`, main currency USD, English with Bengali available, and the default palette
+`#D3DCE8` / `#1F4FD1` / `#1F1F26` recorded in the branding section above.
 
 ## Verification and measurement boundary
 
 `npm run test:flight-search` checks native encoding, incomplete/invalid dates, currencies,
-locales, real middleware redirects, iframe recovery, the static bridge and both React
-widgets. `npm run verify:build` checks the rendered partner handoffs and bridge governance.
+locales, the USD-first / Bangladesh-BDT currency rule, real middleware redirects, iframe
+recovery, the static bridge and both React widgets. `npm run verify:build` checks the
+rendered partner handoffs and bridge governance.
 Run the normal lint/build/verification sequence and check the interactive EN/BN forms.
 
 **5 November repository verification:** `test:flight-search`, `lint`, `build` and all

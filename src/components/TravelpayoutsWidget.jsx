@@ -28,7 +28,7 @@ import {
   TrendingDown,
 } from 'lucide-react';
 import { AFFILIATE_LINKS, resolvePartnerUrl } from './AffiliatePartners';
-import { buildFlightSearchCode, buildWhiteLabelUrl } from '../utils/flightSearch';
+import { buildFlightSearchCode, buildWhiteLabelUrl, preferredCurrencyForOrigin } from '../utils/flightSearch';
 
 const MARKER_ID = '675992';
 
@@ -1096,7 +1096,9 @@ export default function TravelpayoutsWidget({
   const [tripType, setTripType] = useState('roundtrip'); // 'roundtrip' | 'oneway'
   const [cabinClass, setCabinClass] = useState('economy'); // 'economy' | 'business'
   const [passengers, setPassengers] = useState(1);
-  const [currency, setCurrency] = useState('BDT'); // 'BDT' | 'USD' | 'EUR' | 'GBP' | 'SAR' | 'AED'
+  const [currency, setCurrency] = useState(() => preferredCurrencyForOrigin(defaultOrigin));
+  // Once the visitor picks a currency, the route must stop overriding it.
+  const currencyChosenRef = useRef(false);
 
   const [departDate, setDepartDate] = useState(() => getFutureDateIso(14));
   const [returnDate, setReturnDate] = useState(() => getFutureDateIso(21));
@@ -1137,6 +1139,13 @@ export default function TravelpayoutsWidget({
     setExpandedFlightId(null);
     setSelectedBookingFlight(null);
   }, [defaultOrigin, defaultDestination]);
+
+  // Currency follows the departure country until the visitor picks one explicitly:
+  // Dhaka keeps BDT, any other origin starts from the Page's USD default.
+  useEffect(() => {
+    if (currencyChosenRef.current) return;
+    setCurrency(preferredCurrencyForOrigin(originInfo.code));
+  }, [originInfo.code]);
 
   // Close autocomplete dropdown on outside click & clean up speech recognition on unmount
   useEffect(() => {
@@ -1854,7 +1863,10 @@ export default function TravelpayoutsWidget({
                 <button
                   key={curr.code}
                   type="button"
-                  onClick={() => setCurrency(curr.code)}
+                  onClick={() => {
+                    currencyChosenRef.current = true;
+                    setCurrency(curr.code);
+                  }}
                   className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
                     currency === curr.code
                       ? 'bg-brand-navy text-[#F6B73C] font-bold shadow-2xs'

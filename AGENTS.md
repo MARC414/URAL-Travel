@@ -93,7 +93,7 @@ Both apply to every AI tool and contributor. Social tasks also use the current a
 
 1. **Global Flight Scanner (`src/components/TravelpayoutsWidget.jsx`)**:
    - Defaults to `Dhaka (DAC)` for convenience, while supporting **any global origin or destination city/airport** via a 65+ international airport directory plus live autocomplete from `https://autocomplete.travelpayouts.com/places2`.
-   - The form hands off route, departure/return dates, trip type, cabin, adult count, currency and language to the hosted Page through `src/utils/flightSearch.ts`. Children and infants can be added on the provider page.
+   - The form hands off route, departure/return dates, trip type, cabin, adult count, currency and language to the hosted Page through `src/utils/flightSearch.ts`. The handoff currency follows the departure country by default: BDT for a Bangladesh departure, USD for every other origin, and never overriding a currency the visitor chose. Children and infants can be added on the provider page.
    - Unlisted global routes (e.g., `London → New York`, `Dhaka → Rome`, `Toronto → Istanbul`) **must never display fake flight schedules**. Hosted search opens in a top-level tab. The optional legacy `showInlineResults` benchmark view supplies hosted/Aviasales/Kiwi handoffs; it no longer embeds a white-label engine.
 2. **Global Hotel & Flight Custom Widget (`src/components/TravelpayoutsCustomWidget.tsx`)**:
    - Features the **Explore Popular Cities** 12-hub selector (`Makkah`, `Paris`, `Dubai`, `Madinah`, `Bangkok`, `Kuala Lumpur`, `London`, `Singapore`, `Maldives`, `Istanbul`, `Kathmandu`, `New York`) above the global search bar.

@@ -12,6 +12,26 @@ export const FLIGHT_WHITE_LABEL = {
 } as const;
 
 const CURRENCIES = new Set(["BDT", "USD", "EUR", "GBP", "SAR", "AED", "CNY"]);
+
+/**
+ * The hosted Page is an international page whose dashboard default is USD.
+ * BDT is a convenience for searches departing Bangladesh, not the global default;
+ * otherwise every London→New York handoff would open priced in taka.
+ */
+export const DEFAULT_FLIGHT_CURRENCY = "USD";
+
+/** Active Bangladeshi gateways in the airport directory. Do not include codes owned elsewhere. */
+const BANGLADESH_AIRPORT_CODES = new Set(["DAC", "CGP", "CXB", "SYL", "JSR", "RJH", "SPD", "BAR"]);
+
+export function isBangladeshAirport(code: string): boolean {
+  return BANGLADESH_AIRPORT_CODES.has(String(code ?? "").trim().toUpperCase());
+}
+
+/** BDT only when the journey starts in Bangladesh; every other origin starts from USD. */
+export function preferredCurrencyForOrigin(origin: string): "BDT" | "USD" {
+  return isBangladeshAirport(origin) ? "BDT" : "USD";
+}
+
 const CABIN_CODES: Record<string, string> = { economy: "", business: "c", comfort: "w", first: "f" };
 
 interface FlightSearch {
@@ -51,21 +71,23 @@ export function isFlightSearchCode(code: string): boolean {
 }
 
 export function buildWhiteLabelUrl({
-  flightSearch = "", currency = "BDT", locale = "en",
+  flightSearch = "", currency = DEFAULT_FLIGHT_CURRENCY, locale = "en",
 }: { flightSearch?: string; currency?: string; locale?: string } = {}): string {
   const url = new URL("/", FLIGHT_WHITE_LABEL.origin);
   if (isFlightSearchCode(flightSearch)) url.searchParams.set("flightSearch", flightSearch);
   const selectedCurrency = currency.toUpperCase();
-  url.searchParams.set("currency", CURRENCIES.has(selectedCurrency) ? selectedCurrency : "BDT");
+  url.searchParams.set("currency", CURRENCIES.has(selectedCurrency) ? selectedCurrency : DEFAULT_FLIGHT_CURRENCY);
   url.searchParams.set("locale", locale.toLowerCase() === "bn" ? "bn" : "en");
   return url.toString();
 }
 
 /** Old bookmarks carry shell-only origin/destination/standalone parameters. */
 export function getLegacyWhiteLabelUrl(url: URL): string {
+  const flightSearch = url.searchParams.get("flightSearch") ?? "";
   return buildWhiteLabelUrl({
-    flightSearch: url.searchParams.get("flightSearch") ?? "",
-    currency: url.searchParams.get("currency") ?? "BDT",
+    flightSearch,
+    // A bookmark without a currency follows its departure country, exactly like the widgets.
+    currency: url.searchParams.get("currency") || preferredCurrencyForOrigin(flightSearch.slice(0, 3)),
     locale: url.searchParams.get("locale") || url.searchParams.get("lang") || "en",
   });
 }

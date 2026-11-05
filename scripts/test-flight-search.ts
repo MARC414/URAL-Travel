@@ -3,7 +3,7 @@ import fs from "node:fs";
 import vm from "node:vm";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { buildFlightSearchCode, buildWhiteLabelUrl, getLegacyWhiteLabelUrl, FLIGHT_WHITE_LABEL } from "../src/utils/flightSearch";
+import { buildFlightSearchCode, buildWhiteLabelUrl, getLegacyWhiteLabelUrl, FLIGHT_WHITE_LABEL, DEFAULT_FLIGHT_CURRENCY, isBangladeshAirport, preferredCurrencyForOrigin } from "../src/utils/flightSearch";
 import { onRequest } from "../functions/_middleware.js";
 import TravelpayoutsWidget from "../src/components/TravelpayoutsWidget.jsx";
 import { TravelpayoutsCustomWidget } from "../src/components/TravelpayoutsCustomWidget";
@@ -34,6 +34,19 @@ for (const locale of ["en", "bn"]) {
     assert.equal(url.searchParams.size, 3, "no invented marker, SubID or shell parameters");
   }
 }
+
+assert.equal(DEFAULT_FLIGHT_CURRENCY, "USD", "the hosted Page default is USD, not taka");
+assert.equal(new URL(buildWhiteLabelUrl()).searchParams.get("currency"), "USD", "a bare handoff opens in USD");
+assert.equal(new URL(buildWhiteLabelUrl({ currency: "bogus" })).searchParams.get("currency"), "USD", "an unknown currency falls back to USD");
+assert.equal(new URL(buildWhiteLabelUrl({ currency: "bdt" })).searchParams.get("currency"), "BDT", "an explicit selection is still honoured");
+for (const code of ["DAC", "cgp", " CXB ", "syl", "JSR", "RJH", "SPD", "BAR"]) {
+  assert.equal(preferredCurrencyForOrigin(code), "BDT", `${code} is a Bangladesh departure`);
+}
+for (const code of ["LHR", "JFK", "", "RAJ", "DXB"]) {
+  assert.equal(preferredCurrencyForOrigin(code), "USD", `${code} is not a Bangladesh departure`);
+}
+assert.equal(isBangladeshAirport("syl"), true);
+assert.equal(isBangladeshAirport("RAJ"), false, "RAJ is Rajkot, not Rajshahi");
 
 const bridge = fs.readFileSync(new URL("../public/travelpayouts-wl.html", import.meta.url), "utf8");
 const bridgeScript = bridge.match(/<script>([\s\S]*?)<\/script>/)?.[1];
@@ -97,4 +110,19 @@ for (const lang of ["en", "bn"] as const) {
     }
   }
 }
-console.log("Flight search: native date/cabin/adult encoding, EN/BN currencies, legacy redirects, cached iframe recovery and both widgets passed.");
+for (const lang of ["en", "bn"] as const) {
+  for (const element of [
+    React.createElement(TravelpayoutsWidget as React.ComponentType<any>, { lang, defaultOrigin: "LHR", showQuickRoutes: false }),
+    React.createElement(TravelpayoutsCustomWidget as React.ComponentType<any>, { lang, initialFrom: "London (LHR)", initialTo: "New York (JFK)", showFlightProviderHandoffs: true }),
+  ]) {
+    const html = renderToStaticMarkup(element);
+    const links = [...html.matchAll(/<a\b[^>]*href="(https:\/\/flights\.uraltravel\.co\.uk[^\"]*)"[^>]*>/g)];
+    assert.ok(links.length > 0);
+    for (const [, href] of links) {
+      const url = new URL(href.replace(/&amp;/g, "&"));
+      assert.equal(url.searchParams.get("currency"), "USD", `a non-Bangladesh search must not open in BDT: ${href}`);
+      assert.equal(url.searchParams.get("locale"), lang);
+    }
+  }
+}
+console.log("Flight search: native date/cabin/adult encoding, USD-first international handoffs, Bangladesh-route BDT, legacy redirects, cached iframe recovery and both widgets passed.");

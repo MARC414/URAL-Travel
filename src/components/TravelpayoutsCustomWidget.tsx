@@ -14,7 +14,7 @@ import {
   MicOff,
 } from "lucide-react";
 import { AFFILIATE_LINKS, AFFILIATE_OFFER_REGISTRY, resolvePartnerUrl } from "./AffiliatePartners";
-import { buildFlightSearchCode, buildWhiteLabelUrl } from "../utils/flightSearch";
+import { buildFlightSearchCode, buildWhiteLabelUrl, preferredCurrencyForOrigin } from "../utils/flightSearch";
 
 interface TravelpayoutsCustomWidgetProps {
   initialTab?: "flights" | "hotels";
@@ -215,7 +215,11 @@ export function TravelpayoutsCustomWidget({
   const [toCity, setToCity] = useState(initialTo);
   const [hotelCity, setHotelCity] = useState(initialHotelCity);
   const [date, setDate] = useState(() => getDefaultDateIso(14));
-  const [currency, setCurrency] = useState<CurrencyCode>("BDT");
+  const [currency, setCurrency] = useState<CurrencyCode>(
+    () => preferredCurrencyForOrigin(extractIataCode(initialFrom, "DAC"))
+  );
+  // Once the visitor picks a currency, the route must stop overriding it.
+  const currencyChosenRef = useRef(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchUpdatedCount, setSearchUpdatedCount] = useState(0);
   const [selectedItem, setSelectedItem] = useState<any | null>(null);
@@ -450,6 +454,13 @@ export function TravelpayoutsCustomWidget({
 
   const origCode = useMemo(() => extractIataCode(fromCity, "DAC"), [fromCity]);
   const destCode = useMemo(() => extractIataCode(toCity, "KTM"), [toCity]);
+
+  // Currency follows the departure country until the visitor picks one explicitly.
+  useEffect(() => {
+    if (currencyChosenRef.current) return;
+    setCurrency(preferredCurrencyForOrigin(origCode));
+  }, [origCode]);
+
   const searchCode = useMemo(
     // This compact form only collects departure; do not invent a return trip.
     () => buildFlightSearchCode({ origin: origCode, destination: destCode, departureDate: date, adults: 1 }),
@@ -591,7 +602,10 @@ export function TravelpayoutsCustomWidget({
               <button
                 key={code}
                 type="button"
-                onClick={() => setCurrency(code)}
+                onClick={() => {
+                  currencyChosenRef.current = true;
+                  setCurrency(code);
+                }}
                 className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
                   currency === code
                     ? "bg-[#F6B73C] text-brand-navy font-bold shadow-2xs"
