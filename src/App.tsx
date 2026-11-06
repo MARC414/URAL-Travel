@@ -2819,34 +2819,36 @@ export default function App() {
                         </div>
                       </div>
 
-                      {/* Featured Callout Card inside Mega Menu */}
+                      {/* Featured Callout Card inside Mega Menu.
+
+                          GATED ON THE PROMO'S OWN EXPIRY. The container was
+                          previously rendered unconditionally while only its
+                          *copy* was gated, so after 31 October 2026 the menu
+                          still carried a KKday card advertising a finished
+                          10.10 sale and duplicating Klook, which is the featured
+                          partner in the column beside it.
+
+                          KKday's functionality is untouched: the partner
+                          registry entry, the affiliate deep link, the
+                          /kkday-hotels page and the klook/kkdayHotels fallbacks
+                          all remain. Only this promotional placement is hidden.
+
+                          To run a future KKday campaign, set a new `expiresAt`
+                          (and matching copy) on KKDAY_PROMO and the card returns
+                          automatically. Do not re-add the markup ungated. */}
+                      {isPromoActive(KKDAY_PROMO.expiresAt) && (
                       <div className="bg-white/6 border border-white/12 rounded-2xl p-3.5 space-y-2">
                         <div className="flex items-center justify-between text-[11px] font-mono">
                           <span className="text-cyan-300 font-bold inline-flex items-center gap-1.5">
-                            {isPromoActive(KKDAY_PROMO.expiresAt) ? (
-                              <>
-                                <Sparkles size={12} className="text-cyan-300 shrink-0" />
-                                <span>{isBn ? "KKday ১০.১০ উইন্টার সেল (৩০% ছাড়)" : "KKday 10.10 Winter Sale (30% OFF)"}</span>
-                              </>
-                            ) : (
-                              <>
-                                <Globe size={12} className="text-cyan-300 shrink-0" />
-                                <span>{isBn ? "KKday এশিয়া ট্রাভেল পাস" : "KKday Asia Travel Passes"}</span>
-                              </>
-                            )}
+                            <Sparkles size={12} className="text-cyan-300 shrink-0" />
+                            <span>{isBn ? "KKday ১০.১০ উইন্টার সেল (৩০% ছাড়)" : "KKday 10.10 Winter Sale (30% OFF)"}</span>
                           </span>
-                          <span className="text-amber-300 font-semibold">
-                            {isPromoActive(KKDAY_PROMO.expiresAt) ? "30% Codes" : "Check terms"}
-                          </span>
+                          <span className="text-amber-300 font-semibold">30% Codes</span>
                         </div>
                         <p className="text-[11px] text-slate-300 leading-relaxed">
-                          {isPromoActive(KKDAY_PROMO.expiresAt)
-                            ? isBn
-                              ? "জাপান স্কি ট্যুর, থিম পার্ক ও এয়ারপোর্ট রেল পাসে ৩০% প্রোমো কোড (1010TOURS, 1010MOVE, 1010TIX)।"
-                              : "30% OFF promo codes for Japan ski tours, theme parks & airport express rail (1010TOURS, 1010MOVE, 1010TIX)."
-                            : isBn
-                            ? "জাপান, থাইল্যান্ড ও সিঙ্গাপুরে বর্তমান দাম, তারিখ, অন্তর্ভুক্তি ও বাতিলের শর্ত তুলনা করুন।"
-                            : "Compare current prices, dates, inclusions, and cancellation terms for Japan, Thailand, and Singapore activities."}
+                          {isBn
+                            ? "জাপান স্কি ট্যুর, থিম পার্ক ও এয়ারপোর্ট রেল পাসে ৩০% প্রোমো কোড (1010TOURS, 1010MOVE, 1010TIX)।"
+                            : "30% OFF promo codes for Japan ski tours, theme parks & airport express rail (1010TOURS, 1010MOVE, 1010TIX)."}
                         </p>
                         <div className="grid grid-cols-2 gap-2 pt-0.5">
                           <a
@@ -2863,16 +2865,11 @@ export default function App() {
                             rel="noopener noreferrer sponsored"
                             className="bg-cyan-400 hover:bg-cyan-300 text-[#0B192C] font-bold text-[11px] py-2 px-2.5 rounded-xl transition-colors text-center"
                           >
-                            {isPromoActive(KKDAY_PROMO.expiresAt)
-                              ? isBn
-                                ? "KKday ৩০% ডিল ↗"
-                                : "KKday 30% Sale ↗"
-                              : isBn
-                              ? "KKday ডিল দেখুন ↗"
-                              : "KKday Passes ↗"}
+                            {isBn ? "KKday ৩০% ডিল ↗" : "KKday 30% Sale ↗"}
                           </a>
                         </div>
                       </div>
+                      )}
                     </div>
                   </div>
                 </div>

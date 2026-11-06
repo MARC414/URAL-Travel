@@ -66,6 +66,9 @@ jobs:
       - name: Verify tool-usage events exist and cannot carry reader data
         run: npm run test:tool-analytics
 
+      - name: Verify the expired KKday menu card cannot render
+        run: npm run test:kkday-card
+
       - name: Verify Nusuk article safety and locale/schema parity
         run: npm run test:nusuk-guide
 

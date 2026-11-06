@@ -124,7 +124,7 @@ render.**
 | **D7** | **Three hand-typed exchange-rate tables, all materially wrong.** Worst error **−12.2%**. | `TravelpayoutsCustomWidget.tsx:49-54`; `InteractiveTools.tsx:98-104`; inline converter `App.tsx:~4197-4245` | §2.4 measurement table |
 | **D25** | **🆕 A fourth rate table, this time inside published prose.** `TRIP_COSTS_DATA.exchangeRateText` prints six rate strings as reader-facing content: `"1 THB ≈ 3.28 BDT"`, `"1 MYR ≈ 27.20 BDT"`, `"1 AED ≈ 32.20 BDT"`, `"1 NPR ≈ 0.88 BDT"`, `"1 SGD ≈ 91.50 BDT"`, `"1 USD ≈ 122 BDT"`. THB is off by **−11.9%** and MYR by **−11.6%**. Because the same wrong rate appears in *both* the widget and the prose, the reader sees one **consistent** wrong number — which is more convincing, not less. | `src/constants.ts:1862, 1934, 1978, 2022, 2066, 2110` | §2.4 |
 | **D4** | **KKday menu card promotes a promotion that expired 2026-10-31** (six days before this audit), duplicating Klook in the same column. The promo-code path is correctly gated by `isPromoActive`, but the **Feature Callout Card container is not**. | `AffiliatePartners.tsx:94-108`; card in `App.tsx` Experiences mega-menu ~2776-2850 | Its own `expiredFallbackBehavior` says it should have switched on 1 Nov |
-| **D5** | **Removing KKday would create dead links** — it is the registered fallback for `klook` (`:182`) and `kkdayHotels` (`:238`). | `AffiliatePartners.tsx` | `resolvePartnerUrl()` routes paused partners to fallback |
+| **D5** | ~~Removing KKday would create dead links~~ — **closed as not applicable** (6 Nov): the owner kept the whole partner, only the expired card was removed, so no fallback needed re-pointing. Retained for the record in case a future task removes the partner. | `AffiliatePartners.tsx` | `resolvePartnerUrl()` routes paused partners to fallback |
 | **D3** | **"Contact & BDT Booking Desk — Pay in BDT via bank / bKash"** promises a payment capability that does not exist. | `App.tsx:3044-3045` | `functions/api/contact.js` is a Resend email transport; no checkout anywhere |
 | **D16** | **Preset trip prices with no date, no source, no seasonality.** Airfare is **41%** of the default total (BDT 90,500 of which 37,000). | `InteractiveTools.tsx:113-138` | Measured default state |
 | **D26** | **🆕 Dateless BDT totals published as facts in article/FAQ prose.** `quickAnswer` fields state e.g. *"A 5-day Nepal trip… costs roughly BDT 45,000… about BDT 65,000… BDT 1,20,000+"* with no "checked on" date, and these strings are syndicated into FAQ/JSON-LD. | `src/constants.ts:1877` and `keyFacts`/`faqs` for all six countries | 6 country records; 4 dateless "roughly BDT" framings |
@@ -228,7 +228,7 @@ The first draft was a flat list, which hid the dependencies. Five phases, each s
 
 | Phase | Name | Goal | Packages | Effort |
 |---|---|---|---|---|
-| **0** | **Truth** | Remove everything false or stale *today*; make the site measurable | WP7 ✅ · WP0 ✅ · WP4 ✅ · WP1, WP2 | 1 day left |
+| **0** | **Truth** | Remove everything false or stale *today*; make the site measurable | WP7 ✅ · WP0 ✅ · WP4 ✅ · WP2 ✅ · **WP1 remains** | 1 day left |
 | **1** | **Foundation** | One dated rate source; one number discipline | WP3 | 1–2 days |
 | **2** | **Tools** | Make the converters and estimators honest and useful | WP5, WP9 | 4–6 days |
 | **3** | **Voice** | International framing across the interface | WP6 | 0.5 day |
@@ -307,89 +307,45 @@ surface. **Rollback:** restore the menu entry and map block from git.
 
 ---
 
-### WP2 — 🟠 De-clutter the Experiences menu, and de-risk KKday *(0.5 day · must ship with WP1)*
+### WP2 — 🟠 De-clutter the Experiences menu — ✅ **DONE 6 November 2026 (scope: card only)**
 
-**Objective.** Remove an expired promotion from prime menu space without creating dead affiliate links (D4, D5,
-D6, D27).
+**Owner decision.** *"Remove the KKday card only — the offer has expired, so no benefit to keep it. But keep the
+KKday functionality set up earlier; don't keep the expired 31 October offer."*
 
-**Change — order matters.**
-1. **First, re-point fallbacks** in `AffiliatePartners.tsx`: `klook` (`:182`) `"kkday"` → `"kiwi"`;
-   `kkdayHotels` (`:238`) `"kkday"` → `"klook"`.
-2. **Then decide KKday's status** (owner Q2). Option A (recommended): keep the registry entries for deep-link
-   continuity, delete **only** the Feature Callout Card (`App.tsx` ~2776-2850). Option B: remove the partner
-   entirely, including `KKDAY_PROMO`.
-3. **Fix the actual bug:** if a promo card is ever rendered again, its **container** must be wrapped in
-   `isPromoActive(...)`, not just its text.
-4. **Decide `/kkday-hotels`** (owner Q3): keep unlisted, or delete with a 301 → `/hotels`.
-5. **Fix the vendor-name typo** (D27) as part of this copy pass.
+**Delivered — the expired offer is gone; HD functionality untouched.**
+- The **Feature Callout Card container** is now gated on `isPromoActive(KKDAY_PROMO.expiresAt)`
+  (`src/App.tsx`, Experiences mega-menu). It renders nothing today and **returns automatically** when a future
+  `expiresAt` is set — so a new campaign needs no code change.
+- The unreachable "evergreen fallback" copy (*"KKday Asia Travel Passes" / "Check terms" / "KKday Passes ↗"*) was
+  **deleted**. It could never render once the container is gated, and leaving it in implied a fallback that did
+  not exist.
+- **`scripts/test-kkday-card-expiry.ts`** (new) — **7 tests**, wired into `package.json` and CI.
 
-**Acceptance.** No menu card renders for an expired promo; `resolvePartnerUrl("klook")` returns a live URL;
-`/kkday-hotels` either 301s or is intentionally unlisted; `verify:build` green. **Rollback:** registry and menu
-block together.
+**The actual bug, stated precisely.** `isPromoActive(...)` guarded the card's *copy* while the card's own `<div>`
+rendered unconditionally. So from 1 November 2026 the menu carried a KKday card advertising a finished 10.10 sale,
+sitting beside **Klook**, which is the featured partner in the same column with a live boost through 31 December.
+Its own `expiredFallbackBehavior` said it should have switched on 1 November — nothing enforced that.
 
----
+**What was deliberately NOT changed (the owner's "keep the functionality" instruction):**
+- `AFFILIATE_LINKS.kkday` and `AFFILIATE_LINKS.kkdayHotels` — unchanged.
+- Both registry entries (`kkday`, `kkdayHotels`) — unchanged, so `resolvePartnerUrl()` still resolves.
+- `/kkday-hotels` page, route and section handler — unchanged.
+- `KKdayPromoBanner` — already correctly date-gated **and already covered by an existing `verify:build` guard**
+  that mocks the clock (`verify-build.ts:3440-3470`). It was never the problem.
+- `sanitizeExpiredPromoText()` — unchanged; it already strips expired campaign text from blog bodies.
 
-### WP4 — 🟠 Turn on tool measurement — ✅ **DONE 6 November 2026**
+**Consequence for the earlier plan text:** WP2's "re-point the fallbacks first" step is **no longer required**,
+because no partner was removed. D5 (dead-link risk from deleting KKday) is closed as *not applicable* under this
+scope. D6 (`/kkday-hotels` orphan) remains **open** pending Q3 — the owner kept the page, so its discoverability
+is still a live question, not something this change should decide.
 
-**Objective.** Answer "does this tool earn its menu place?" with evidence (D28).
+**Verification:** lint clean · build pass · `verify:build` **469/469** · `test:kkday-card` **7/7** ·
+regression re-proved by un-gating the container (suite failed with *"the card container is not wrapped in an
+isPromoActive gate"*) then restoring. Built HTML confirms **no prerendered page** carries `1010TOURS`,
+`KKday 30% Sale` or `30% OFF Flash`; the strings survive only inside the JS bundle as the gated (currently dead)
+branch, which is correct.
 
-**Delivered.**
-- **`src/utils/toolAnalytics.ts`** (new) — `trackToolOpen`, `trackToolResult`, `trackToolLimitShown`, plus
-  `partySizeBand` and `durationBand`. Reuses the existing `pushDataLayerEvent`, so no new dependency.
-- **`src/components/InteractiveTools.tsx`** — `tool_open` fires on tab/tool change; `tool_result` fires from the
-  estimator (debounced 1.2s), the converter (1.5s) and the packing checklist (per tick).
-- **`scripts/test-tool-analytics.ts`** (new) — **10 tests**, wired into `package.json` and CI.
-
-**Privacy contract, enforced by tests rather than stated.**
-- Exact traveller counts and day counts are **banded** before they leave the browser (`"1" | "2-3" | "4+"`,
-  `"1-3" | "4-7" | "8-14" | "15+"`).
-- The payload key set is an **allowlist** in the test: a new field fails the build unless deliberately added.
-- An injected `amount: 160000` is proven not to reach `dataLayer` — verified by injecting a payload spread and
-  watching the test fail, then restoring.
-- The wiring itself is asserted from source, because React effects do not run under `renderToStaticMarkup`:
-  without that check the helpers could be perfect and never called — precisely the defect WP4 exists to fix.
-
-**Consent.** Events go to `dataLayer` exactly like the existing affiliate events and are gated at GA4 by
-**Consent Mode v2** (default-denied block in `index.html:245-262`). No second gate was added: a code-level check
-would *drop* events for readers who later accept, whereas Consent Mode holds and discards them at the
-destination. This is documented in the module header so it is not "fixed" later by mistake.
-
-**Scope note.** `visa-checker` is deliberately **not** instrumented — it is scheduled for removal under WP1, and
-instrumenting a doomed surface would create misleading trend data. `trackToolLimitShown` is shipped but not yet
-called anywhere; it is tree-shaken from the bundle until WP8 wires the AI allowance message. That was verified
-rather than assumed (`tool_open`/`tool_result` present in the bundle, `tool_limit_shown` absent).
-
-**Verification:** lint clean · build pass · `verify:build` **469/469** · `test:umrah-budget` **25/25** ·
-`test:checklist-progress` **9/9** · `test:tool-analytics` **10/10**; leak-injection and call-site-removal both
-re-proved to fail the suite before restoring.
-
-**Rollback:** delete the two new files, revert the `InteractiveTools.tsx` effects and the two config entries.
-
-### WP7 — 🔴 Fix the progress-bar overshoot — ✅ **DONE 6 November 2026**
-
-**Delivered.**
-- **`src/utils/checklistProgress.ts`** (new) — the arithmetic extracted as a pure function with a written
-  contract: 0→0, all→100, monotonic, clamped, empty-list and non-finite inputs safe.
-- **`src/components/InteractiveTools.tsx:175`** — now calls `checklistProgress(checkedCount, checklist.length)`;
-  the `* 105` is gone. The `Math.min(…,100)` guards at the two render sites stay as harmless defence.
-- **`scripts/test-checklist-progress.ts`** (new) — **9 tests**, including a **negative control** that asserts the
-  old formula really was wrong (`buggy(3,12) === 26`), so the suite cannot silently stop testing anything.
-- **Wired into CI** (`package.json` `test:checklist-progress`, `.github/workflows/ci.yml`) — it runs on every push
-  rather than sitting unused.
-
-**Measured before → after.** Default state was **26% Ready** for 3 of 12 ticked; it is now **25%**. Every value
-was inflated: 11/12 read 96% (true 92%), 12/12 computed 105% and depended on a clamp, and a 20-item list would
-have shown a full 100% with an item still unticked.
-
-**Verification run in this change:** `npm run lint` clean · `npm run build` pass · `npm run verify:build`
-**469/469** · `npm run test:umrah-budget` **25/25** · `npm run test:checklist-progress` **9/9** · regression
-re-proved by reintroducing `* 105` (suite failed) and restoring it (suite passed) · shipped bundle contains
-`Math.round(c/s*100)` and **zero** occurrences of `105`.
-
-**Rollback:** revert two files (`checklistProgress.ts` delete, `InteractiveTools.tsx` one line) plus the test. No
-other surface depends on the helper.
-
----
+**Rollback:** one gate and one copy change in `App.tsx`, plus the test file.
 
 ## PHASE 1 — FOUNDATION
 
@@ -621,7 +577,7 @@ per-IP rate limit answering 429, fail loudly (503) rather than reporting false s
 | New: attribution on every rate surface | — | enforced |
 | New: no `visa-checker` in menu/sitemap | — | enforced |
 | New: banned claim patterns absent (`100% approval`, `Sofa Template`) | — | enforced |
-| New: no menu card for an expired promo | — | enforced |
+| New: no menu card for an expired promo | ✅ **enforced** (`test:kkday-card`, 7 tests incl. container-gate proof) | done |
 | New: one name per tool across menu/metadata/heading | — | enforced |
 | New: estimator shows a dated stamp or no total | — | enforced |
 | New: progress bar monotonic 0→100 | ✅ **enforced** (`test:checklist-progress`, 9 tests incl. negative control) | done |
@@ -639,7 +595,7 @@ a source; no surface states a claim the product cannot support; zero ongoing cos
 | # | Question | Recommendation | Blocks |
 |---|---|---|---|
 | Q1 | Visa Odds Checker: delete permanently, or rebuild as a dated lookup? | Delete now (WP1). Rebuild later **only** by projecting `VISA_DATA`, never a second hand-written table | WP1 |
-| Q2 | KKday: card only, or partner entirely? | Card only (Option A); fallbacks re-pointed first | WP2 |
+| Q2 | ~~KKday: card only, or partner entirely?~~ | ✅ **Answered 6 Nov: card only.** Functionality retained; expired offer hidden behind a date gate | resolved |
 | Q3 | Does `/kkday-hotels` earn anything? | If no → delete + 301 to `/hotels` | WP2 |
 | Q4 | Do you actually take BDT payment off-site? | If no → rename to "Contact & Trip Help" | WP6 |
 | Q5 | Which free model, given the July 2026 change? | Start with `glm-4.7-flash`; verify plan in dashboard | WP8 |
