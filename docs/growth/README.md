@@ -11,4 +11,7 @@ This directory retains stable paths cited by source code, tests and article evid
 - **Historical pointers:** `CONTENT-QUEUE.md`, `01-indexing-crawling.md`, `06-core-web-vitals.md` and `08-site-cleanup.md` preserve references from code/configuration, not active tasks.
 - **Archives:** the [former master index](../history/2026-10-strategy-baseline/growth/README.md), cluster plans, posting calendars and older audits are listed in the [archive manifest](../history/2026-10-strategy-baseline/README.md).
 
-Current direction is Bangladesh-first travel intelligence with Umrah as the initial learning cycle. The owner task controls implementation/publication; old Banking/India/UK schedules do not select the next task.
+Current direction is international travel intelligence with Bangladesh as the home market and priority
+(updated 6 November 2026; see [`PRODUCT.md`](../../PRODUCT.md) and
+[`docs/MASTER-PLAN-2026-11-06.md`](../MASTER-PLAN-2026-11-06.md)). Umrah remains the initial learning
+cycle. The owner task controls implementation/publication; old Banking/India/UK schedules do not select the next task.

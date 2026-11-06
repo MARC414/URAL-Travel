@@ -42,9 +42,56 @@ what do I do first?"* — before they spend money on a booking.
 Success means a reader leaves with a decision made and a next action taken (search a
 flight, open a visa checklist, contact the desk) rather than a list of links.
 
-The current direction is Bangladesh-first travel intelligence, with Umrah as the initial
-commercial/content learning cycle. Fard Hajj remains distinct and linked. UK/diaspora,
-broader Muslim travel and Europe are future research, not current implementation instructions.
+The current direction is **international travel intelligence, with Bangladesh as the home market
+and priority**. URAL serves readers worldwide; Bangladeshi readers keep every advantage they have
+today. Umrah remains the initial commercial/content learning cycle, and Fard Hajj remains distinct
+and linked. Direction confirmed by the owner on 6 November 2026 — see
+[the master plan](docs/MASTER-PLAN-2026-11-06.md).
+
+## Direction — international first, Bangladesh by priority (6 November 2026)
+
+URAL is an international travel-intelligence site. Bangladesh is the home market and keeps every
+advantage: BDT remains the default for a Dhaka departure, and Bangladesh-specific guidance (passport
+dollar endorsement, NOC, DAC procedures, bKash/bank routes) is unchanged. International readers
+receive a first-class experience: display currency follows the reader's origin, tools are named by
+what they do, and no surface addresses a single passport as though it were the only reader.
+
+Three consequences that are testable, not aspirational:
+
+- **Currency follows origin.** BDT for a Bangladesh departure, USD for every other origin, always
+  overridable, never forced. This extends the rule the flight search already implements
+  (`AGENTS.md` §3) rather than reversing Bangladesh-first pricing.
+- **Tools are named by function**; the audience is named in the subtitle. A tool labelled "BDT
+  Currency Converter" tells a reader in Jakarta the site is not for them; "Currency Converter — live
+  daily rates, with BDT-first guidance for Bangladesh" serves both.
+- **No third language in this phase.** `Language` remains `"en" | "bn"`. International reach and
+  framing come first; additional locales are a separate, funded project with their own parity budget.
+
+## Number rule
+
+**Every published money figure carries a date and a source, or it does not render.**
+
+- Fixed exchange-rate constants are not permitted in **new** `src/` code. Rates come from the dated
+  rates endpoint and are shown with the date they were fetched and the provider attribution their
+  licence requires.
+  **Migration debt, recorded 6 November 2026:** **18** rate literals still ship in five places and must
+  not be extended — `TravelpayoutsCustomWidget.tsx` (5), `TravelpayoutsWidget.jsx` (5),
+  `InteractiveTools.tsx` (4), `src/App.tsx` inline converter (4), and `src/constants.ts` (7 prose
+  strings, of which 6 are `exchangeRateText`). Removing them is work package WP3 in
+  [the master plan](docs/MASTER-PLAN-2026-11-06.md); until then the rule is a rule for new code, and
+  the debt above is the recognised exception. **Do not read this rule as a claim that the site is
+  already compliant.**
+- Differentiate an official fee, a supplier quote, a live fare, a historical estimate, a reader's own
+  input and an FX conversion. Never present one as another.
+- If a rate or price is unknown or unavailable, omit the figure or show the last dated value **with
+  its date**. Never show `0`, never show a stale rate without a date, and never show an undated point
+  price as though it were checked.
+- A reader-supplied figure is the reader's, not ours: a worksheet may sum it but must not silently
+  convert it, and must never present an incomplete worksheet as a complete budget.
+
+Implementation order, defects found and open decisions live in
+[the master plan](docs/MASTER-PLAN-2026-11-06.md); the editorial method is
+[the content optimization guide](URAL-CONTENT-OPTIMIZATION-GUIDE.md), which this rule does not replace.
 
 ## Positioning
 
@@ -52,8 +99,11 @@ Three product commitments:
 
 1. **Bangladeshi-passport-specific visa guidance.** Step-by-step checklists written for
    the passport the reader actually holds, not a generic "visa requirements" table.
-2. **BDT-first pricing with real multi-currency context.** Costs are budgeted in Taka
-   first (৳), then shown in USD/EUR/GBP/SAR/AED — not converted as an afterthought.
+2. **BDT-first pricing with real multi-currency context.** For a Bangladesh departure, costs are
+   budgeted in Taka first (৳) and then shown in USD/EUR/GBP/SAR/AED — not converted as an
+   afterthought. For every other origin the display currency follows the reader's origin (see
+   *Currency follows origin* above). Any converted figure is dated and attributed; see the Number
+   rule.
 3. **Decision-level bilingual parity.** Both locales have crawlable articles and their own
    language relationships. The current audit records remaining editorial-link and interface gaps;
    parity is a requirement, not a claim that every surface has passed review.

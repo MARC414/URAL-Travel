@@ -353,7 +353,7 @@ const ROUTE_DATABASE = {
     ],
   },
   KUL: {
-    visaNote: 'Malaysia Digital e-Visa required online prior to flight (approved in 2–5 working days)',
+    visaNote: 'Malaysia Digital e-Visa required online before the flight. malaysiavisa.imi.gov.my publishes 2–7 working days, excluding weekends and holidays; apply at least 14 days ahead (checked 6 Nov 2026)',
     visaBadge: 'Online Malaysia e-Visa',
     bestWindow: 'Book 4–8 weeks ahead; KLIA1 & KLIA2 have 5 daily direct flights from Dhaka',
     terminalTip: 'AirAsia lands at KLIA2 · Malaysia Airlines, Biman & Batik land at KLIA Terminal 1',

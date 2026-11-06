@@ -69,7 +69,6 @@ https://uraltravel.co.uk/tools
 https://uraltravel.co.uk/tools/currency-converter
 https://uraltravel.co.uk/tools/budget-calculator
 https://uraltravel.co.uk/tools/packing-checklist
-https://uraltravel.co.uk/tools/visa-checker
 https://uraltravel.co.uk/tools/flight-delay-claim
 https://uraltravel.co.uk/tools/airport-codes
 https://uraltravel.co.uk/pre-departure
@@ -198,7 +197,6 @@ https://uraltravel.co.uk/bn/tools
 https://uraltravel.co.uk/bn/tools/currency-converter
 https://uraltravel.co.uk/bn/tools/budget-calculator
 https://uraltravel.co.uk/bn/tools/packing-checklist
-https://uraltravel.co.uk/bn/tools/visa-checker
 https://uraltravel.co.uk/bn/tools/flight-delay-claim
 https://uraltravel.co.uk/bn/tools/airport-codes
 https://uraltravel.co.uk/bn/pre-departure

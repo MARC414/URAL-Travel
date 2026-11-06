@@ -224,7 +224,7 @@ Once your Singapore e-Visa PDF arrives (usually within 5–7 working days), prin
 
 2. MALAYSIA (KUALA LUMPUR & GENTING HIGHLANDS) — BEST ALL-AROUND MUSLIM FAMILY HUB
 - Flight Time from Dhaka: 4 hrs direct (Biman, Malaysia Airlines, AirAsia, Batik Air)
-- Visa for Bangladeshis: 100% Online e-Visa (BDT 3,800 – 4,200; 2–4 working days)
+- Visa for Bangladeshis: 100% online e-Visa (BDT 3,800 – 4,200; official processing 2–7 working days, apply at least 14 days ahead)
 - 5-Day Per-Person Budget (Family Sharing): BDT 68,000 – BDT 85,000
 - Why Families Love It: Malaysia is arguably the most stress-free country in Asia for Bangladeshi families. Virtually 100% of restaurants in Bukit Bintang and KLCC are JAKIM Halal-certified, English is spoken everywhere, sidewalks are stroller- and wheelchair-friendly, and a 2-bedroom serviced apartment with a kitchen and swimming pool near KLCC costs less than a cramped hotel room elsewhere. Kids adore the Awana Skyway cable car up to Genting Highlands and Aquaria KLCC.
 
@@ -1596,7 +1596,7 @@ Step 5: Review before submission:
 1. STEP-BY-STEP: HOW TO APPLY FOR A MALAYSIA TOURIST E-VISA FROM BANGLADESH
 Under official **Immigration Department of Malaysia (malaysiavisa.imi.gov.my)** regulations:
 - **Visa Validity & Stay:** 30-day Single-Entry (or eligible Multiple-Entry) Tourist e-Visa; total fee is approximately **BDT 3,800 – BDT 4,200** paid online via an endorsed Bangladeshi Dual-Currency Visa/Mastercard.
-- **Approval Timeline:** Typically **2 to 4 working days** (100% digital A4 PDF e-Visa—no physical passport submission required).
+- **Approval Timeline:** The department publishes **2 to 7 working days**, excluding weekends, public holidays and any query stage, and advises applying **at least 14 days** before departure (checked 6 November 2026). The e-Visa is a digital A4 PDF — no physical passport submission required.
 - **Required Document Scans:**
   • **1. Studio Passport Photo (35mm x 50mm):** White background, forehead and ears clearly visible, no spectacles.
   • **2. Passport Bio-Page Scan:** Minimum 6 months validity from arrival date.
@@ -1630,7 +1630,7 @@ Option B: The Maldives (Malé & Maafushi Local Island — 5-Day Budget: BDT 72,0
 
 2. STEP 2 (MONTHS 4–9): GRADUATE TO SOUTHEAST ASIAN ONLINE E-VISAS (MALAYSIA + THAILAND COMBO)
 Once your passport shows at least 1 completed international trip (and your 6-month bank statement shows steady salary or business transactions with **BDT 1,20,000 – BDT 1,80,000+ closing balance**), move to Step 2:
-- **🇲🇾 Malaysia 30-Day Online e-Visa (malaysiavisa.imi.gov.my):** Approved in 2–4 working days without surrendering your physical passport. Spend 4–5 days exploring **Kuala Lumpur, Putrajaya's Pink Mosque, and Genting Highlands**.
+- **🇲🇾 Malaysia 30-Day Online e-Visa (malaysiavisa.imi.gov.my):** The department publishes 2–7 working days and advises applying at least 14 days ahead; you keep your physical passport. Spend 4–5 days exploring **Kuala Lumpur, Putrajaya's Pink Mosque, and Genting Highlands**.
 - **🇹🇭 Thailand 60-Day Official e-Visa (thaievisa.go.th):** Apply online from Dhaka. Even better, book a **7-Day Malaysia + Thailand Multi-City Trip (DAC → KUL → BKK → DAC)** so a single vacation adds **two major ASEAN tourist visas and four immigration stamps** to your passport while saving BDT 25,000 on airfare!
 
 3. STEP 3 (MONTHS 10–18): UNLOCK SINGAPORE, DUBAI + UMRAH, AND SCHENGEN / UK / US VISAS

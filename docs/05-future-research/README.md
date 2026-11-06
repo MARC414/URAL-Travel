@@ -4,7 +4,17 @@
 
 [Strategy index](../../00-URAL-STRATEGY-INDEX.md) · [Current audit](../../00-URAL-CURRENT-AUDIT.md)
 
-Broader Muslim travel, UK/diaspora travel, Europe/rail, comparison engines and additional tools are possible future directions. Their presence here does not authorize research expansion, new routes, publication, new languages or a domain change.
+**Direction change, 6 November 2026.** International positioning is **no longer future research**. The
+owner has adopted "international first, Bangladesh by priority": display currency follows the reader's
+origin, tools are named by function, and no surface addresses a single passport as its only reader.
+That is recorded as a standing commitment in [`PRODUCT.md`](../../PRODUCT.md) and sequenced in
+[`docs/MASTER-PLAN-2026-11-06.md`](../MASTER-PLAN-2026-11-06.md).
+
+What this folder still withholds: the historical briefs below remain **past material, not instructions**.
+This change does not authorize a domain change, a third or additional language, a UK/diaspora content
+pivot, new routes beyond the master plan, publication outside
+[Publication Standard v2](../growth/11-PUBLICATION-STANDARD-V2.md), or expansion into Europe/rail or
+comparison engines. Those remain unapproved and out of scope.
 
 ## Existing reference material
 

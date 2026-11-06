@@ -980,7 +980,7 @@ const toolRoutesSource = read(path.join(ROOT_DIR, "src", "utils", "toolRoutes.ts
 const middlewareSource = read(path.join(ROOT_DIR, "functions", "_middleware.js")) ?? "";
 const redirectsSource = read(path.join(ROOT_DIR, "public", "_redirects")) ?? "";
 const routesConfigSource = read(path.join(ROOT_DIR, "public", "_routes.json")) ?? "";
-const supportedToolTabs = ["airports", "calculator", "converter", "packing", "visa-checker", "airhelp"];
+const supportedToolTabs = ["airports", "calculator", "converter", "packing", "airhelp"];
 const toolDeepLinksArePreserved =
   interactiveToolsSource.includes('new URLSearchParams(window.location.search)') &&
   supportedToolTabs.every((tab) => {
@@ -1003,8 +1003,8 @@ const toolDeepLinksArePreserved =
 check(
   toolDeepLinksArePreserved,
   toolDeepLinksArePreserved
-    ? "all six tool tabs, canonical /tools/<slug> links, legacy ?tab= edge 301s, and the standalone /pre-departure URL remain wired"
-    : "tool deep links regressed: keep the six tabs, canonical /tools/<slug> menu links, the middleware ?tab= rule, and no /pre-departure→/sitemap redirect"
+    ? "all five tool tabs, canonical /tools/<slug> links, legacy ?tab= edge 301s, and the standalone /pre-departure URL remain wired"
+    : "tool deep links regressed: keep the five tabs, canonical /tools/<slug> menu links, the middleware ?tab= rule, and no /pre-departure→/sitemap redirect"
 );
 
 // The split routes must actually ship as prerendered static files (no SPA
@@ -1014,7 +1014,6 @@ const expectedSplitRoutes = [
   "tools/currency-converter.html",
   "tools/budget-calculator.html",
   "tools/packing-checklist.html",
-  "tools/visa-checker.html",
   "tools/flight-delay-claim.html",
   "tools/airport-codes.html",
   "bn/pre-departure.html",
@@ -5942,8 +5941,23 @@ function b2HasNoLegacyStickerWorkflow(text: string): boolean {
   return !b2HasLegacyStickerWorkflow(text);
 }
 const B2_BD_ELIGIBILITY_SOURCE = read(path.join(ROOT_DIR, "src", "components", "InteractiveTools.tsx")) ?? "";
-const B2_BD_ELIGIBILITY_BLOCK = B2_BD_ELIGIBILITY_SOURCE.match(/bd:\s*\{([\s\S]*?)\n\s*},\s*in:/)?.[1] ?? "";
-const B2_INTERACTIVE_THAILAND_RESULT = B2_BD_ELIGIBILITY_BLOCK.match(/th:\s*\{([^}]*)\}/)?.[1] ?? "";
+// WP1 deleted the Visa Odds Checker and the visaEligibilityMap it rendered, so
+// there is no longer a Thailand cell to scrape out of the source. The copy is
+// kept here as a FIXTURE rather than deleted outright, because the sticker-visa
+// guard below must keep its teeth: it is the negative control that proves the
+// wording check works. Scraping a removed block would have silently hollowed the
+// guard out — it would have kept passing while checking nothing.
+const B2_INTERACTIVE_THAILAND_RESULT =
+  'status: "Advance Tourist e-Visa Required", text: "Apply through Thailand\'s official e-Visa portal and follow the current Dhaka mission checklist before departure. Approval and processing time are not guaranteed."';
+const b2VisaOddsCheckerStaysRemoved =
+  !/visaEligibilityMap/.test(B2_BD_ELIGIBILITY_SOURCE) &&
+  !/tool-nav-visa-checker/.test(B2_BD_ELIGIBILITY_SOURCE);
+check(
+  b2VisaOddsCheckerStaysRemoved,
+  b2VisaOddsCheckerStaysRemoved
+    ? "the removed Visa Odds Checker has not been reintroduced into InteractiveTools"
+    : "the Visa Odds Checker (visaEligibilityMap / tool-nav-visa-checker) is back in InteractiveTools"
+);
 const B2_TOPICAL_SOURCE = read(path.join(ROOT_DIR, "src", "components", "TopicalAuthorityBlueprint.tsx")) ?? "";
 const b2TopicalStart = B2_TOPICAL_SOURCE.indexOf('id: "iv-03"');
 const b2TopicalEnd = B2_TOPICAL_SOURCE.indexOf('id: "iv-04"', b2TopicalStart + 1);

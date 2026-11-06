@@ -18,6 +18,7 @@ repurposing; former calendars, cluster waves and priority scores remain historic
 ## Supporting research
 
 - [EN/BN article parity audit — 5 November 2026](2026-11-05-en-bn-parity-audit.md) — 53 article pairs, saved HTML and React/browser evidence; records the full-parity requirement, schema/shared-presentation repairs and open editorial gaps.
+- [Review — international trip-budget-planner proposal for `/umrah`, 6 November 2026](2026-11-06-international-planner-proposal-review.md) — dated rejection of the proposed HTML worksheet replacement (undated FX rates, a global `duration` multiplier over mixed per-trip/per-night categories, no Bengali parity), with measured arithmetic; records the BRN/CRN-is-not-a-fee correction, the PPIU/Indonesia channel note and two pre-existing `/tools` defects.
 - [Existing URL/intent map](../../SEO-KEYWORD-MAP.md) — hypotheses and established page boundaries, not measured demand or release priority.
 - [Keyword-language notes](04-keywords.md)
 - [Practitioner method/source notes](METHOD-NOTES.md)

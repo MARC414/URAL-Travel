@@ -18,7 +18,9 @@ const LEGACY_TOOL_TAB_SLUGS = {
   currency: "currency-converter",
   calculator: "budget-calculator",
   packing: "packing-checklist",
-  "visa-checker": "visa-checker",
+  // "visa-checker" was removed 6 Nov 2026 (WP1). Deliberately NOT mapped
+  // below, so ?tab=visa-checker falls through to the /tools hub instead of
+  // 301-ing to a page that no longer exists.
   airhelp: "flight-delay-claim",
   airports: "airport-codes",
 };

@@ -27,8 +27,10 @@ Read these documents in this order before a content task:
 
 **Authority clarified 25 October 2026:** the former content strategy, Banking/Umrah rollout plans and
 content queue are historical. They do not select work or grant publication permission. Current direction
-is Bangladesh-first travel intelligence with Umrah as the initial learning cycle; Fard Hajj remains
-separate and linked. The owner-requested master guide and social programme now provide the current
+is international travel intelligence with Bangladesh as the home market and priority (updated
+6 November 2026 — see [`PRODUCT.md`](../../PRODUCT.md)); Umrah remains the initial learning cycle and
+Fard Hajj remains separate and linked. The **Number rule** applies to every figure published through
+this workflow: a date and a source, or no figure. The owner-requested master guide and social programme now provide the current
 method and proposed repurposing system. New articles are governed by [Publication Standard v2](11-PUBLICATION-STANDARD-V2.md) (2 November 2026); this workflow supplies the execution detail, not the authorisation.
 
 If a source, legal rule, code contract, or owner instruction appears to conflict with a content requirement, stop before drafting or changing the live claim. Record the exact conflict, source, date checked, and the narrow decision needed. Do not silently “resolve” a high-impact legal or cost discrepancy.

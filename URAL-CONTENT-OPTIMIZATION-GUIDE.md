@@ -42,7 +42,7 @@ For one authorized asset:
 
 ## 1. Authority and current direction
 
-**Bangladesh-first travel intelligence; Umrah is the initial commercial/content learning cycle.** Payments, airport preparation and flights support that journey and also have independent Bangladesh-outbound value. Fard Hajj has its own seasonal process. Existing regional, domestic, inbound and international assets retain their legitimate roles; future UK/Europe expansion requires its own evidence and task.
+**International travel intelligence, with Bangladesh as the home market and priority; Umrah is the initial commercial/content learning cycle.** Display currency follows the reader's origin and tools are named by function (owner decision, 6 November 2026 — see [PRODUCT.md](PRODUCT.md)). Payments, airport preparation and flights support that journey and also have independent Bangladesh-outbound value. Fard Hajj has its own seasonal process. Existing regional, domestic, inbound and international assets retain their legitimate roles. This guide's **Prices, totals and dates** section is now backed by a product-level *Number rule*: every published money figure carries a date and a source, or it does not render. Europe/rail, comparison engines and additional languages require their own evidence and task.
 
 Authority works as follows:
 

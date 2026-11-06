@@ -224,7 +224,7 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     faqs: [
       {
         question: "How long does the Malaysia eVisa take to process for Bangladeshis?",
-        answer: "The official processing window is 48-72 hours, but it is highly recommended to apply at least 7-10 days before flying to account for verification delays."
+        answer: "The Immigration Department of Malaysia publishes 2-7 working days, excluding weekends, Malaysian public holidays and any query or interview stage. Its FAQ advises applying at least 14 days before departure. Verify the current figure at malaysiavisa.imi.gov.my (checked 6 November 2026)."
       },
       {
         question: "Which low-cost carrier connects Dhaka to KL directly?",
@@ -973,7 +973,7 @@ export const VISA_DATA: VisaGuide[] = [
         items: [
           "High resolution scan of passport bio-data and signature pages",
           "Studio passport photograph (3.5cm x 5.0cm, white background, matte finish)",
-          "6-month Bank Statement with a minimum current balance of BDT 80,000 per person",
+          "Bank statements for the last 3 months (the official requirement); agents may ask for more, so confirm before applying",
           "Bank Solvency Certificate from bank manager",
           "Confirmed return airline ticket and hotel reservation vouchers in Malaysia"
         ]
@@ -986,11 +986,11 @@ export const VISA_DATA: VisaGuide[] = [
       "Check your email inbox or portal status daily. If any 'Additional Documents Resubmission' is requested, resolve it immediately.",
       "Upon approval, download and print the A4 physical paper eVisa. Keep this paper securely folded inside your passport when departing Dhaka."
     ],
-    quickAnswer: "Malaysia offers a reliable, fully online eVisa system for Bangladeshi citizens. You do not need to drop off physical passports at an embassy. Submit professional passport photos, high-resolution bio-data scans, and a 6-month bank statement (showing BDT 80,000+ balance) directly to the Immigration Department of Malaysia's online portal. Total costs are around BDT 3,800 to 4,200, and approval typically arrives in 2-4 working days.",
+    quickAnswer: "Malaysia offers a fully online eVisa system for Bangladeshi citizens. You do not need to drop off physical passports at an embassy. Submit professional passport photos, high-resolution bio-data scans, and bank statements covering the last 3 months directly to the Immigration Department of Malaysia's online portal. Total costs are around BDT 3,800 to 4,200. The department publishes 2-7 working days for processing, excluding weekends, public holidays and any query stage, and advises applying at least 14 days before departure; check malaysiavisa.imi.gov.my (checked 6 November 2026). No application is guaranteed to be approved.",
     keyFacts: [
       { label: "Application Portal", value: "Online eVisa Portal" },
-      { label: "Required Bank Balance", value: "Min BDT 80,000 (Per person)" },
-      { label: "Processing Duration", value: "48-96 Standard business hours" },
+      { label: "Bank Statements", value: "Last 3 months (official requirement)" },
+      { label: "Processing Duration", value: "2-7 working days (official, checked 6 Nov 2026)" },
       { label: "Maximum Visa Stay", value: "30 days per entry" }
     ],
     faqs: [
@@ -1012,7 +1012,7 @@ export const VISA_DATA: VisaGuide[] = [
     {
       "@type": "HowTo",
       "name": "How to get a Malaysia visa as a Bangladeshi citizen",
-      "description": "Malaysia offers a reliable, fully online eVisa system for Bangladeshi citizens. You do not need to drop off physical passports at an embassy. Submit professional passport photos, high-resolution bio-data scans, and a 6-month bank statement (showing BDT 80,000+ balance) directly to the Immigration Department of Malaysia's online portal. Total costs are around BDT 3,800 to 4,200, and approval typically arrives in 2-4 working days.",
+      "description": "Malaysia offers a fully online eVisa system for Bangladeshi citizens. Submit professional passport photos, high-resolution bio-data scans, and bank statements covering the last 3 months to the Immigration Department of Malaysia's online portal. The department publishes 2-7 working days for processing, excluding weekends, public holidays and any query stage. Check malaysiavisa.imi.gov.my before applying (checked 6 November 2026).",
       "totalTime": "P4D",
       "estimatedCost": {
         "@type": "MonetaryAmount",
@@ -1621,7 +1621,7 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       },
       {
         question: "Do Bangladeshi citizens need a visa for Malaysia, and how is it applied for?",
-        answer: "Yes, an eVisa is required. The application goes entirely online to the Immigration Department of Malaysia - there is no embassy appointment and no physical passport drop-off. You upload high-resolution bio-data page scans, professional passport photos, and a six-month bank statement showing a balance of BDT 80,000 or more. Total cost comes to roughly BDT 3,800 to 4,200, and approval typically arrives in 2 to 4 working days."
+        answer: "Yes, an eVisa is required. The application goes entirely online at malaysiavisa.imi.gov.my - there is no embassy appointment and no physical passport drop-off. You upload high-resolution bio-data page scans, professional passport photos, and bank statements for the last 3 months. Total cost comes to roughly BDT 3,800 to 4,200. The department publishes 2 to 7 working days for processing, excluding weekends, public holidays and any query stage, and advises applying at least 14 days before departure (checked 6 November 2026)."
       }
     ],
     schemaMarkup: {
