@@ -1,10 +1,20 @@
 # URAL — Current Baseline & Strategy Index
 
-**Current direction, confirmed 25 October 2026:** Bangladesh-first travel intelligence, with Umrah as the initial commercial/content learning cycle. Help travellers make practical decisions before spending money. Fard Hajj remains a distinct, linked topic. Broader Muslim travel, UK/diaspora travel and Europe are future research.
+**Current direction, updated 6 November 2026:** **international travel intelligence, with Bangladesh as the home market and priority.** Display currency follows the reader's origin (BDT for a Dhaka departure, USD otherwise); tools are named by function; no surface addresses a single passport as its only reader. Bangladeshi readers keep every advantage — BDT default, endorsement/NOC/DAC/bKash guidance unchanged. Umrah remains the initial commercial/content learning cycle; Fard Hajj remains a distinct, linked topic. The standing commitments and the **Number rule** ("every published money figure carries a date and a source, or it does not render") are in [PRODUCT.md](PRODUCT.md). Europe/rail, comparison engines, additional languages and a domain change remain **unapproved**.
 
 **Publication rule updated 2 November 2026:** the freeze on new articles is replaced by [Publication Standard v2](docs/growth/11-PUBLICATION-STANDARD-V2.md) — new URLs permitted, gated by seven tests, capped at two per week (one while measurement is broken).
 
 **Current phase, updated 26 October 2026:** the owner requested a consolidated content-optimization standard and an existing-content social production strategy using corrected historical GSC evidence and early new-domain signals. The resulting guide and proposed programme are linked below. Article rewrites, site repairs and live publication still require the relevant owner task; a draft calendar is not a published campaign.
+
+## Current plan (6 November 2026)
+
+[**MASTER PLAN — international positioning, honest tools, live rates, free AI**](docs/MASTER-PLAN-2026-11-06.md)
+is the single authoritative plan as of 6 November 2026. It records twelve verified findings (including three live
+defects), nine work packages in execution order, the rejected alternatives with reasons, licence constraints and a
+verification matrix. **Nothing in it is applied** — each package needs owner go-ahead, and the open decisions are
+listed in its Part 8. It consolidates the earlier dated material in
+[docs/01-technical-seo-aeo/](docs/01-technical-seo-aeo/PLAN-international-and-tool-audit.md) and
+[docs/02-content/2026-11-06-international-planner-proposal-review.md](docs/02-content/2026-11-06-international-planner-proposal-review.md).
 
 ## Read order and authority
 

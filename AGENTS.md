@@ -9,9 +9,16 @@ Start with [`00-URAL-STRATEGY-INDEX.md`](00-URAL-STRATEGY-INDEX.md) and
 from 25 October 2026. The current owner task controls scope; the audit's recommendations are not
 automatic implementation approval.
 
-The direction is **Bangladesh-first travel intelligence, with Umrah as the initial commercial/content
-learning cycle**. Fard Hajj is a separate, linked topic. UK/diaspora, broader Muslim travel and Europe
-are future research. Old cluster plans, calendars, freeze triggers and UK-pivot instructions in
+The direction is **international travel intelligence, with Bangladesh as the home market and priority**
+(owner decision, 6 November 2026 — see [`PRODUCT.md`](PRODUCT.md) and
+[`docs/MASTER-PLAN-2026-11-06.md`](docs/MASTER-PLAN-2026-11-06.md)). Display currency follows the
+reader's origin; tools are named by function; no surface addresses a single passport as its only
+reader. Bangladeshi readers keep every advantage (BDT default, endorsement/NOC/DAC guidance unchanged).
+Umrah remains the initial commercial/content learning cycle and Fard Hajj a separate, linked topic.
+Additional languages, a domain change and Europe/rail expansion remain **unapproved**. A new
+**Number rule** applies to all code and content: every published money figure carries a date and a
+source, or it does not render; fixed exchange-rate constants are not permitted in `src/`. Old cluster
+plans, calendars, freeze triggers and UK-pivot instructions in
 `docs/history/` are historical, not current work orders. The owner-requested
 [`URAL-CONTENT-OPTIMIZATION-GUIDE.md`](URAL-CONTENT-OPTIMIZATION-GUIDE.md) is the current editorial-method
 standard. [`URAL-SOCIAL-CONTENT-ECOSYSTEM.md`](URAL-SOCIAL-CONTENT-ECOSYSTEM.md) contains the proposed
