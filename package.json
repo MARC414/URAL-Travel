@@ -21,6 +21,7 @@
     "verify:sitemaps:live": "tsx scripts/verify-live-sitemaps.ts",
     "verify:klook:live": "tsx scripts/verify-klook-deeplinks.ts",
     "test:umrah-budget": "tsx scripts/test-umrah-budget.ts",
+    "test:checklist-progress": "tsx scripts/test-checklist-progress.ts",
     "test:nusuk-guide": "tsx scripts/test-nusuk-guide.ts",
     "test:diy-umrah-guide": "tsx scripts/test-diy-umrah-guide.ts",
     "test:stopover-guide": "tsx scripts/test-stopover-guide.ts",

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Coins, Calculator, CheckSquare, ShieldCheck, Heart, User, Sparkles, Check, RefreshCw, Plane, Search, Copy, Send, ArrowRight } from "lucide-react";
 import { AirHelpWidget } from "./AirHelpWidget";
 import { trackWhatsAppInquiry } from "../utils/analytics";
+import { checklistProgress } from "../utils/checklistProgress";
 
 interface AirportItem {
   code: string;
@@ -171,7 +172,7 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
   };
 
   const checkedCount = checklist.filter(i => i.checked).length;
-  const progressPercent = Math.round((checkedCount / checklist.length) * 105);
+  const progressPercent = checklistProgress(checkedCount, checklist.length);
 
   // 4. Visa Eligibility Tester State
   const [testNational, setTestNational] = useState<"bd" | "in" | "pk">("bd");

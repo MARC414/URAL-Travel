@@ -60,6 +60,9 @@ jobs:
       - name: Verify quote-based Umrah budget
         run: npm run test:umrah-budget
 
+      - name: Verify packing-checklist progress cannot over-report
+        run: npm run test:checklist-progress
+
       - name: Verify Nusuk article safety and locale/schema parity
         run: npm run test:nusuk-guide
 
