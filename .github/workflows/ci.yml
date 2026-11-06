@@ -63,6 +63,9 @@ jobs:
       - name: Verify packing-checklist progress cannot over-report
         run: npm run test:checklist-progress
 
+      - name: Verify tool-usage events exist and cannot carry reader data
+        run: npm run test:tool-analytics
+
       - name: Verify Nusuk article safety and locale/schema parity
         run: npm run test:nusuk-guide
 

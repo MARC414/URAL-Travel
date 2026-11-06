@@ -228,7 +228,7 @@ The first draft was a flat list, which hid the dependencies. Five phases, each s
 
 | Phase | Name | Goal | Packages | Effort |
 |---|---|---|---|---|
-| **0** | **Truth** | Remove everything false or stale *today*; make the site measurable | WP7 ✅ · WP0 ✅ · WP1, WP2, WP4 | 1.5 days left |
+| **0** | **Truth** | Remove everything false or stale *today*; make the site measurable | WP7 ✅ · WP0 ✅ · WP4 ✅ · WP1, WP2 | 1 day left |
 | **1** | **Foundation** | One dated rate source; one number discipline | WP3 | 1–2 days |
 | **2** | **Tools** | Make the converters and estimators honest and useful | WP5, WP9 | 4–6 days |
 | **3** | **Voice** | International framing across the interface | WP6 | 0.5 day |
@@ -329,25 +329,41 @@ block together.
 
 ---
 
-### WP4 — 🟠 Turn on tool measurement *(0.5 day · new · enables every later judgement)*
+### WP4 — 🟠 Turn on tool measurement — ✅ **DONE 6 November 2026**
 
-**Objective.** Answer "does this tool earn its menu place?" with evidence instead of opinion (D28).
+**Objective.** Answer "does this tool earn its menu place?" with evidence (D28).
 
-**Change.** Add `pushDataLayerEvent` calls — using the existing helper in `src/utils/analytics.ts`, no new
-dependency:
-- `tool_open` — `{ tool: "budget-estimator" | "currency-converter" | "packing" | "airports", locale }`
-- `tool_result` — fired once per calculation, with **no personal data** (no amounts, no dates, no destination
-  query text — only the tool name, the tier or currency code, and a coarse band such as party size 1/2–3/4+).
-- `tool_limit_shown` — for the AI helper later; fired when the allowance message appears.
+**Delivered.**
+- **`src/utils/toolAnalytics.ts`** (new) — `trackToolOpen`, `trackToolResult`, `trackToolLimitShown`, plus
+  `partySizeBand` and `durationBand`. Reuses the existing `pushDataLayerEvent`, so no new dependency.
+- **`src/components/InteractiveTools.tsx`** — `tool_open` fires on tab/tool change; `tool_result` fires from the
+  estimator (debounced 1.2s), the converter (1.5s) and the packing checklist (per tick).
+- **`scripts/test-tool-analytics.ts`** (new) — **10 tests**, wired into `package.json` and CI.
 
-**Constraint.** This is analytics, not profiling: no entered money values, no free text, and it must sit inside the
-existing consent model (`ConsentBanner`) — check that the events are gated by the same consent state as the
-existing affiliate events before shipping.
+**Privacy contract, enforced by tests rather than stated.**
+- Exact traveller counts and day counts are **banded** before they leave the browser (`"1" | "2-3" | "4+"`,
+  `"1-3" | "4-7" | "8-14" | "15+"`).
+- The payload key set is an **allowlist** in the test: a new field fails the build unless deliberately added.
+- An injected `amount: 160000` is proven not to reach `dataLayer` — verified by injecting a payload spread and
+  watching the test fail, then restoring.
+- The wiring itself is asserted from source, because React effects do not run under `renderToStaticMarkup`:
+  without that check the helpers could be perfect and never called — precisely the defect WP4 exists to fix.
 
-**Acceptance.** Events appear in GTM Preview for each tool; no amount or free-text value is transmitted; consent
-gating verified in both accept and reject states. **Rollback:** remove the three call sites.
+**Consent.** Events go to `dataLayer` exactly like the existing affiliate events and are gated at GA4 by
+**Consent Mode v2** (default-denied block in `index.html:245-262`). No second gate was added: a code-level check
+would *drop* events for readers who later accept, whereas Consent Mode holds and discards them at the
+destination. This is documented in the module header so it is not "fixed" later by mistake.
 
----
+**Scope note.** `visa-checker` is deliberately **not** instrumented — it is scheduled for removal under WP1, and
+instrumenting a doomed surface would create misleading trend data. `trackToolLimitShown` is shipped but not yet
+called anywhere; it is tree-shaken from the bundle until WP8 wires the AI allowance message. That was verified
+rather than assumed (`tool_open`/`tool_result` present in the bundle, `tool_limit_shown` absent).
+
+**Verification:** lint clean · build pass · `verify:build` **469/469** · `test:umrah-budget` **25/25** ·
+`test:checklist-progress` **9/9** · `test:tool-analytics` **10/10**; leak-injection and call-site-removal both
+re-proved to fail the suite before restoring.
+
+**Rollback:** delete the two new files, revert the `InteractiveTools.tsx` effects and the two config entries.
 
 ### WP7 — 🔴 Fix the progress-bar overshoot — ✅ **DONE 6 November 2026**
 
@@ -609,7 +625,7 @@ per-IP rate limit answering 429, fail loudly (503) rather than reporting false s
 | New: one name per tool across menu/metadata/heading | — | enforced |
 | New: estimator shows a dated stamp or no total | — | enforced |
 | New: progress bar monotonic 0→100 | ✅ **enforced** (`test:checklist-progress`, 9 tests incl. negative control) | done |
-| New: tool events fire and carry no amounts | — | enforced |
+| New: tool events fire and carry no amounts | ✅ **enforced** (`test:tool-analytics`, 10 tests incl. allowlist + injection proof) | done |
 | New: AI gate refuses `BDT 15,500` / `2–5 working days` / `100% approval` | — | enforced |
 | New: AI limit message names UTC + 4 cities | — | enforced |
 

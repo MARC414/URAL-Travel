@@ -3,6 +3,7 @@ import { Coins, Calculator, CheckSquare, ShieldCheck, Heart, User, Sparkles, Che
 import { AirHelpWidget } from "./AirHelpWidget";
 import { trackWhatsAppInquiry } from "../utils/analytics";
 import { checklistProgress } from "../utils/checklistProgress";
+import { trackToolOpen, trackToolResult, partySizeBand, durationBand, type ToolId } from "../utils/toolAnalytics";
 
 interface AirportItem {
   code: string;
@@ -94,6 +95,23 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
     if (initialTool) setActiveTool(initialTool);
   }, [initialTool]);
 
+  // Tool-usage measurement (WP4). `visa-checker` is deliberately absent: its
+  // fabricated claims are removed under WP1, and instrumenting a surface that
+  // is scheduled for deletion would create misleading trend data.
+  const TOOL_ID_BY_TAB: Partial<Record<ActiveTool, ToolId>> = {
+    converter: "currency-converter",
+    calculator: "budget-estimator",
+    packing: "packing-checklist",
+    airports: "airport-codes",
+    airhelp: "flight-delay-claim",
+  };
+  React.useEffect(() => {
+    const tool = TOOL_ID_BY_TAB[activeTool];
+    if (tool) trackToolOpen(tool);
+    // Fire only on an actual tool change, not on every render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTool]);
+
   // 1. Currency Converter State
   const [bdtAmount, setBdtAmount] = useState<number>(10000);
   const conversionRates: { [key: string]: { rate: number; name: string; icon: string } } = {
@@ -169,7 +187,33 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
 
   const toggleCheckItem = (id: number) => {
     setChecklist(checklist.map(item => item.id === id ? { ...item, checked: !item.checked } : item));
+    // One event per tick, debounced by the reader's own pace. The checklist
+    // holds no personal data, so only the tool name is sent.
+    trackToolResult("packing-checklist");
   };
+
+  // Converter: the reader typed a base amount. Debounced; the AMOUNT ITSELF IS
+  // NEVER SENT — only that a conversion happened and which currencies are shown.
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      trackToolResult("currency-converter", { currency: "BDT" });
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [bdtAmount]);
+
+  // Result measurement per tool (WP4). Debounced so dragging the sliders emits
+  // one event on settle rather than dozens, and carrying only coarse bands.
+  const calculatorInputs = `${calcCountry}|${calcDays}|${calcPeeps}|${budgetTier}`;
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      trackToolResult("budget-estimator", {
+        tier: budgetTier,
+        partySize: partySizeBand(calcPeeps),
+        duration: durationBand(calcDays),
+      });
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, [calculatorInputs]);
 
   const checkedCount = checklist.filter(i => i.checked).length;
   const progressPercent = checklistProgress(checkedCount, checklist.length);
