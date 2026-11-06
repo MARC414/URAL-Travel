@@ -228,7 +228,7 @@ The first draft was a flat list, which hid the dependencies. Five phases, each s
 
 | Phase | Name | Goal | Packages | Effort |
 |---|---|---|---|---|
-| **0** | **Truth** | Remove everything false or stale *today*; make the site measurable | WP7 ✅ · WP0 ✅ · WP4 ✅ · WP2 ✅ · **WP1 remains** | 1 day left |
+| **0** | **Truth** | ✅ **Complete** — remove everything false or stale *today*; make the site measurable | WP7 ✅ · WP0 ✅ · WP4 ✅ · WP2 ✅ · WP1 ✅ | **Phase 0 complete** |
 | **1** | **Foundation** | One dated rate source; one number discipline | WP3 | 1–2 days |
 | **2** | **Tools** | Make the converters and estimators honest and useful | WP5, WP9 | 4–6 days |
 | **3** | **Voice** | International framing across the interface | WP6 | 0.5 day |
@@ -283,10 +283,70 @@ claim of current compliance.**
 
 **Rollback:** six doc edits; revert individually.
 
-### WP1 — 🔴 Remove the fabricated visa claims and unify the two systems *(1 day)*
+### WP1 — ✅ **DONE 6 November 2026** — Remove the fabricated visa claims and unify the two systems
 
 **Objective.** One visa truth, not two contradicting ones (D2, D21, D22).
 
+**Delivered.** The plan's assumption that one of the two Malaysia figures must be right was **wrong — both were**.
+The evidence came from the primary source, so Q1 and Q11 were answered by research rather than by the owner.
+
+**What the live check found** — Immigration Department of Malaysia eVISA FAQ, last updated **6 October 2026**
+(`malaysiavisa.imi.gov.my/faq`), corroborated by Malaysian mission pages (`kln.gov.my`):
+
+| Claim that was live | Where | Official position |
+| --- | --- | --- |
+| Malaysia processing **"48-72 hours"** | `InteractiveTools.tsx:229` | **"2 - 7 working days"**, excluding weekends, public holidays, incomplete/query/interview cases |
+| Malaysia processing **"2-4 working days"** | `constants.ts:989/1015/1624`, `blogContent.ts`, `blogSnippets.ts` | same — understated by roughly half |
+| **"100% approval rates"** when bank statement ≥ BDT 80,000 | `InteractiveTools.tsx:229` | *"does not guarantee that the eVISA will be issued"*; the mission *"reserves the right to refuse … without providing any reason"* |
+| India → Malaysia **"Visa On Arrival"** | `InteractiveTools.tsx:236` | Indian nationals are **exempt from the visa** for social visits until 31 Dec 2026, and India is **not** on the 31-nationality eVISA list |
+| **"6-month"** bank statement | `constants.ts:976/992` | statements for the **last 3 months**, plus return ticket and accommodation proof |
+| Bengali "৪ থেকে ৭ কার্যদিবসে" | `bengaliContent.ts:691` | ✅ already correct — the only surface that was |
+
+**Delivered, in order.**
+1. **Deleted the parallel system.** `visaEligibilityMap`, its two `useState` hooks, the "Visa Checker" tab button and
+   the whole evaluator panel are gone from `InteractiveTools.tsx` (65,272 → 58,151 bytes). No replacement matrix was
+   built: 12 assertions across 12 passport/destination pairs, with no date and no source, cannot be maintained.
+2. **Removed it from navigation.** The `App.tsx` mega-menu card, the footer tool list, `ToolTabId`,
+   `TOOL_TAB_TO_SLUG` and the `TOOL_PAGE_SEO` entry in `toolRoutes.ts`, plus four prerender link lists and the
+   related-links table.
+3. **Redirected, permanently, in both languages:** `/tools/visa-checker → /tools` and `/bn/tools/visa-checker →
+   /bn/tools` in `public/_redirects`; `?tab=visa-checker` deliberately left unmapped in `functions/_middleware.js` so
+   it falls through to the hub rather than 301-ing at a deleted page. `/tools` is the honest target — `/visa` still
+   holds the guide, and the plan's original `/visa` target would have implied the tool still existed.
+4. **Corrected the figures** to the official **2-7 working days** with *"apply at least 14 days before departure"*
+   and a **checked 6 November 2026** date, at every location; "6-month statement" → "last 3 months" on `/costs`;
+   "100% approval" removed from `constants.ts:1624`; "100% Online e-Visa" labels de-hyped.
+5. **Truth guard** — `scripts/test-visa-claim-integrity.ts` (8 tests, `npm run test:visa-claims`, wired into CI).
+   Chosen over extending `verify:build` because it needs to parse quoted durations, not match a flat blocklist.
+
+**Two defects in the guard itself, both found by negative control, not by review.**
+- The first version was a **blocklist** of the five strings live on 6 Nov. A negative control introduced an
+  undeclared *"1-2 working days"* and it **passed**. Replaced with a parser that compares any quoted duration's upper
+  bound against the official 7.
+- The parser then matched only hyphenated ranges, so restoring *"2 **to** 4 working days"* **passed**. Widened to
+  accept `-`, `–`, `—` and `to`.
+This is why the suite ships with three assertions whose only job is to prove the checks can still fail.
+
+**Debt ratchet.** While step 1 was in flight, the five not-yet-corrected claims were declared in a `KNOWN_DEBT` list
+so the suite could be green without claiming the site was clean. Each entry had to be deleted as its figure was
+fixed — a "the debt is still real" test failed until it was. **The list is now empty and permanently must be.**
+
+**Verification.** lint clean · `tsc --noEmit` clean · build pass (**132 EN + 132 BN**, was 133: the tool's page is gone)
+· `verify:build` **470/470** · visa-claims **8/8** · umrah-budget **25/25** · checklist-progress **9/9** ·
+tool-analytics **10/10** · kkday-card **7/7**. No `dist/**/*.html` contains "Visa Odds Checker", "100% approval" or
+the evaluator heading; `dist/tools/visa-checker.html` and its Bengali twin no longer exist; sitemaps carry **0**
+references; both 301s ship in `dist/_redirects`.
+`verify:build` independently caught a guard that had been scraping the deleted block and gone hollow — it now holds
+that copy as a fixture and additionally asserts the checker stays removed.
+
+**Known gap — recorded, not papered over.** No Bangladesh-specific official statement of a Dhaka High Commission
+processing delay was found; the mission pages are generic. The copy therefore quotes the portal's own range and its
+own 14-day advice, and invents no local figure. If a future check finds a Dhaka-specific service standard, add it with
+its date and source.
+
+**Rollback.** `git revert` this commit; the matrix, navigational entries and figures return together.
+
+**Original plan text, kept for the record:**
 **Change, in order.**
 1. **Delete the parallel system:** remove `visaEligibilityMap` (`InteractiveTools.tsx:180-199`) and its state
    (`:177-178`). Do **not** try to "fix" its wording — the defect is that it exists as an unsourced second source.
@@ -594,7 +654,7 @@ a source; no surface states a claim the product cannot support; zero ongoing cos
 
 | # | Question | Recommendation | Blocks |
 |---|---|---|---|
-| Q1 | Visa Odds Checker: delete permanently, or rebuild as a dated lookup? | Delete now (WP1). Rebuild later **only** by projecting `VISA_DATA`, never a second hand-written table | WP1 |
+| Q1 | ~~Visa Odds Checker: delete permanently, or rebuild as a dated lookup?~~ | ✅ **Resolved 6 Nov by evidence, not preference.** Deleted permanently, no rebuild. It had no source and no date, and four of its twelve cells contradicted the official FAQ. Any future visa help is a dated lookup pointing at the official portal | resolved |
 | Q2 | ~~KKday: card only, or partner entirely?~~ | ✅ **Answered 6 Nov: card only.** Functionality retained; expired offer hidden behind a date gate | resolved |
 | Q3 | Does `/kkday-hotels` earn anything? | If no → delete + 301 to `/hotels` | WP2 |
 | Q4 | Do you actually take BDT payment off-site? | If no → rename to "Contact & Trip Help" | WP6 |
@@ -604,7 +664,7 @@ a source; no surface states a claim the product cannot support; zero ongoing cos
 | Q8 | Any dated source for the preset prices, or must airfare go live? | Live/range; an undated point fare is indefensible | WP3, WP9 |
 | Q9 | `/costs` says 6 countries, the estimator has 4 — which is canonical? | `/costs` set; extend the estimator to match | WP9 |
 | Q10 | Retire `/costs` prose rate strings or generate them? | Generate from WP3 and show the date; never a literal | WP3 |
-| Q11 | Is Malaysia's true processing time 2–4 working days (VISA_DATA) or 48–72 hours? | Investigate against the live portal before publishing either | WP1 |
+| Q11 | ~~Is Malaysia's true processing time 2–4 working days or 48–72 hours?~~ | ✅ **Resolved 6 Nov: neither.** Official FAQ (updated 6 Oct 2026) states **2 - 7 working days**. Both site figures understated it | resolved |
 
 ---
 

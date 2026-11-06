@@ -68,6 +68,8 @@ jobs:
 
       - name: Verify the expired KKday menu card cannot render
         run: npm run test:kkday-card
+      - name: Visa-claim integrity
+        run: npm run test:visa-claims
 
       - name: Verify Nusuk article safety and locale/schema parity
         run: npm run test:nusuk-guide

@@ -4379,7 +4379,7 @@ const BENGALI_VISA_OVERRIDES: Record<string, Partial<VisaGuide>> = {
       "বাংলাদেশি নাগরিকদের Thailand যেতে আগে official portal-এ Tourist e-Visa আবেদন করতে হয়। Dhaka Embassy-র public TR checklist (শেষ হালনাগাদ ৩০ নভেম্বর ২০২২) ৬ মাসের statement ও solvency certificateসহ জনপ্রতি BDT 60,000 / পরিবারে BDT 120,000 উল্লেখ করে; live portal-এর বর্তমান prompt ভিন্ন হতে পারে—আবেদনের আগে যাচাই করুন। সরকারি visa fee, bank/payment charge ও optional agency service fee আলাদা; current amount এবং agency-র itemized quote যাচাই না করে নির্দিষ্ট অঙ্ক ধরে নেবেন না। Approval ও processing time নিশ্চিত নয়।",
   },
   "malaysia-visa": {
-    requirementType: "100% Online e-Visa + MDAC",
+    requirementType: "Online e-Visa + MDAC",
     quickAnswer:
       "বাংলাদেশি পর্যটকরা ঘরে বসেই মালয়েশিয়ার অফিশিয়াল পোর্টালে Malaysia Tourist e-Visa আবেদন করতে পারেন। ৪ থেকে ৭ কার্যদিবসে ভিসা অনুমোদিত হয় এবং ফ্লাইটের ৩ দিন আগে অনলাইনে ফ্রি Malaysia Digital Arrival Card (MDAC) পূরণ করতে হয়।",
   },

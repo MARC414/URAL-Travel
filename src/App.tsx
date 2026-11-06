@@ -1802,7 +1802,7 @@ export default function App() {
       const toolsServiceNode = serviceSchema({
         url: toolsUrl,
         idSuffix: "service-travel-tools",
-        name: "Bangladesh Outbound Currency, Visa Odds & Flight Delay Claim Tools",
+        name: "Bangladesh Outbound Currency, Flight Delay Claim & Airport Tools",
         description: seoDescription,
         serviceType: "Travel Planning & Flight Compensation Utility",
       });
@@ -2995,13 +2995,6 @@ export default function App() {
                         path: "/tools/packing-checklist",
                       },
                       {
-                        id: "visa-checker",
-                        icon: FileText,
-                        label: isBn ? "ভিসা অডস চেকার" : "Visa Odds Checker",
-                        sub: isBn ? "VOA ও eVisa স্ট্যাটাস যাচাই" : "VOA & eVisa status for Bangladeshi passports",
-                        path: "/tools/visa-checker",
-                      },
-                      {
                         id: "airport-codes",
                         icon: MapPin,
                         label: isBn ? "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)" : "IATA Airport Codes Directory",
@@ -3360,10 +3353,6 @@ export default function App() {
                         {
                           label: isBn ? "প্যাকিং চেকলিস্ট" : "Packing Checklist",
                           path: "/tools/packing-checklist",
-                        },
-                        {
-                          label: isBn ? "ভিসা অডস চেকার" : "Visa Odds Checker",
-                          path: "/tools/visa-checker",
                         },
                         {
                           label: isBn ? "এয়ারপোর্ট কোড" : "Airport Codes",

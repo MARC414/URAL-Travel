@@ -706,11 +706,6 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
     { href: "/pre-departure", text: "Pre-departure checklist, baggage rules and embassy helplines" },
     { href: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide", text: "Travel eSIM and insurance guide for Bangladeshi travelers" },
   ],
-  "/tools/visa-checker": [
-    { href: "/visa", text: "Visa requirements for Bangladeshi passport holders" },
-    { href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go", text: "Dhaka Airport outbound immigration checklist" },
-    { href: "/visa-free-countries", text: "Visa-free countries for a Bangladeshi passport" },
-  ],
   "/tools/flight-delay-claim": [
     { href: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp", text: "Flight delay, cancellation and baggage claim guide" },
     { href: "/flights", text: "Compare international flights from Dhaka" },
@@ -3790,7 +3785,6 @@ function buildBengaliBody(
         { label: "স্মার্ট প্যাকিং চেকলিস্ট", path: "/tools/packing-checklist" },
         { label: "কারেন্সি কনভার্টার (BDT)", path: "/tools/currency-converter" },
         { label: "ট্রিপ বাজেট ক্যালকুলেটর", path: "/tools/budget-calculator" },
-        { label: "ভিসা অডস চেকার", path: "/tools/visa-checker" },
         { label: "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)", path: "/tools/flight-delay-claim" },
         { label: "সম্পূর্ণ সাইট ডিরেক্টরি", path: "/sitemap" },
       ])
@@ -3804,7 +3798,6 @@ function buildBengaliBody(
       { label: "কারেন্সি কনভার্টার (BDT ⇄ বিদেশি মুদ্রা)", path: "/tools/currency-converter" },
       { label: "ট্রিপ বাজেট ক্যালকুলেটর", path: "/tools/budget-calculator" },
       { label: "স্মার্ট প্যাকিং চেকলিস্ট", path: "/tools/packing-checklist" },
-      { label: "ভিসা অডস চেকার", path: "/tools/visa-checker" },
       { label: "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)", path: "/tools/flight-delay-claim" },
       { label: "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)", path: "/tools/airport-codes" },
     ];
@@ -3825,8 +3818,6 @@ function buildBengaliBody(
         ? [{ label: "ঢাকা থেকে আন্তর্জাতিক ফ্লাইট গাইড", path: "/flights" }]
         : id === "currency-converter" || id === "budget-calculator"
           ? [{ label: "দেশভিত্তিক ভ্রমণ খরচ (BDT)", path: "/costs" }]
-          : id === "visa-checker"
-            ? [{ label: "বাংলাদেশি পাসপোর্টের ভিসা গাইড", path: "/visa" }]
             : id === "packing-checklist"
               ? [{ label: "প্রি-ডিপার্চার চেকলিস্ট ও ব্যাগেজ নিয়ম", path: "/pre-departure" }]
               : [];
@@ -3853,7 +3844,6 @@ function buildBengaliBody(
         { label: "কারেন্সি কনভার্টার (BDT)", path: "/tools/currency-converter" },
         { label: "ট্রিপ বাজেট ক্যালকুলেটর", path: "/tools/budget-calculator" },
         { label: "স্মার্ট প্যাকিং চেকলিস্ট", path: "/tools/packing-checklist" },
-        { label: "ভিসা অডস চেকার", path: "/tools/visa-checker" },
         { label: "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)", path: "/tools/flight-delay-claim" },
         { label: "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)", path: "/tools/airport-codes" },
         { label: "প্রি-ডিপার্চার হাব", path: "/pre-departure" },

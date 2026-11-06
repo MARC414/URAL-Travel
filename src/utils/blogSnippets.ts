@@ -48,7 +48,7 @@ export function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSu
     "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide":
       "Thailand's official e-Visa portal handles applications, but approval and timing are not guaranteed. The Dhaka TR checklist (updated Nov 30, 2022) lists BDT 60,000 per person or BDT 120,000 per family; confirm current requirements. Check the live government fee; bank/payment charges and optional agency fees are separate.",
     "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration":
-      "Apply online at malaysiavisa.imi.gov.my for a 30-day Malaysia Tourist e-Visa (BDT 3,800–4,200; approved in 2–4 working days) with a 6-month bank statement showing BDT 80,000+ balance. Within 3 days before landing at KLIA, submit the mandatory free Malaysia Digital Arrival Card (MDAC).",
+      "Apply online at malaysiavisa.imi.gov.my for a 30-day Malaysia Tourist e-Visa (BDT 3,800–4,200; the department publishes 2–7 working days, so apply at least 14 days ahead) with bank statements covering the last 3 months. Within 3 days before landing at KLIA, submit the mandatory free Malaysia Digital Arrival Card (MDAC).",
     "fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia":
       "Build a strong travel history on a blank Bangladeshi e-Passport in 3 steps: Step 1 — Get a zero-risk free Visa on Arrival in Nepal or the Maldives; Step 2 — Obtain online e-Visas for Malaysia and Thailand; Step 3 — Unlock Singapore, Dubai + Umrah, and Schengen/UK/US visas.",
     "dual-currency-card-endorsement-bangladesh":

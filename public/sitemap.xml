@@ -640,15 +640,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/tools/packing-checklist" />
   </url>
   <url>
-    <loc>https://uraltravel.co.uk/tools/visa-checker</loc>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/tools/visa-checker" />
-    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/tools/visa-checker" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/tools/visa-checker" />
-  </url>
-  <url>
     <loc>https://uraltravel.co.uk/tools/flight-delay-claim</loc>
     <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
@@ -1799,15 +1790,6 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/tools/packing-checklist" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/tools/packing-checklist" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/tools/packing-checklist" />
-  </url>
-  <url>
-    <loc>https://uraltravel.co.uk/bn/tools/visa-checker</loc>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/tools/visa-checker" />
-    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/tools/visa-checker" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/tools/visa-checker" />
   </url>
   <url>
     <loc>https://uraltravel.co.uk/bn/tools/flight-delay-claim</loc>

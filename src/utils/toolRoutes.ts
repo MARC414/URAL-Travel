@@ -15,7 +15,6 @@ export type ToolTabId =
   | "calculator"
   | "converter"
   | "packing"
-  | "visa-checker"
   | "airhelp";
 
 /** Interactive tab → canonical URL slug. */
@@ -23,7 +22,6 @@ export const TOOL_TAB_TO_SLUG: Record<ToolTabId, string> = {
   converter: "currency-converter",
   calculator: "budget-calculator",
   packing: "packing-checklist",
-  "visa-checker": "visa-checker",
   airhelp: "flight-delay-claim",
   airports: "airport-codes",
 };
@@ -37,6 +35,27 @@ export const LEGACY_TAB_TO_SLUG: Record<string, string> = {
   ...TOOL_TAB_TO_SLUG,
   currency: "currency-converter",
 };
+
+/**
+ * Removed tools. "/tools/visa-checker" and "?tab=visa-checker" are NOT listed
+ * in the tables above, so both already 301 to the /tools hub via the fallback
+ * in functions/_middleware.js. Kept here as a record of what was deleted and
+ * why, so the matrix is not rebuilt from an old copy of this file.
+ *
+ * Visa Odds Checker — removed 6 Nov 2026. It asserted visa rules for 12
+ * passport/destination pairs with no date and no source, and four of them
+ * contradicted the Immigration Department of Malaysia's own eVISA FAQ:
+ *   - Malaysia processing "48-72 hours" (and "2-4 working days" elsewhere)
+ *     against an official "2 - 7 working days";
+ *   - "100% approval rates" against an official "does not guarantee that the
+ *     eVISA will be issued … reserves the right to refuse … without reason";
+ *   - India -> Malaysia "Visa On Arrival", where Indian nationals are in fact
+ *     exempt from the visa for social visits until 31 Dec 2026 and are not on
+ *     the 31-nationality eVISA list at all.
+ * Visa rules change; a static matrix cannot keep up. Point readers at the
+ * official portal instead. See docs/MASTER-PLAN-2026-11-06.md (WP1).
+ */
+export const REMOVED_TOOL_SLUGS = ["visa-checker"] as const;
 
 /** Canonical URL slug → interactive tab (reverse of TOOL_TAB_TO_SLUG). */
 export const SLUG_TO_TOOL_TAB: Record<string, ToolTabId> = Object.fromEntries(
@@ -140,23 +159,6 @@ export const TOOL_PAGE_SEO: Record<string, ToolPageMeta> = {
     subBn:
       "কেবিন ওজন, ১০০ মি.লি. তরল, পাওয়ার ব্যাংক mAh সীমা ও ইমিগ্রেশনের ডকুমেন্ট প্যাকিং তালিকা।",
     serviceNameEn: "Smart Packing Checklist for Flights from Dhaka (DAC)",
-  },
-  "visa-checker": {
-    nameEn: "Visa Odds Checker",
-    nameBn: "ভিসা অডস চেকার",
-    titleEn: "Visa Odds Checker for Bangladeshi Passports | URAL",
-    descriptionEn:
-      "See visa-on-arrival and eVisa status for popular destinations from Dhaka before you apply with a Bangladeshi passport.",
-    titleBn: "বাংলাদেশি পাসপোর্টের ভিসা অডস চেকার | URAL",
-    descriptionBn:
-      "বাংলাদেশি পাসপোর্টে আবেদনের আগে ঢাকা থেকে জনপ্রিয় গন্তব্যের ভিসা-অন-অ্যারাইভাল ও eVisa স্ট্যাটাস দেখে নিন।",
-    h1En: "Visa Odds Checker for Bangladeshi Passports",
-    h1Bn: "বাংলাদেশি পাসপোর্টের ভিসা অডস চেকার",
-    subEn:
-      "See visa-on-arrival and eVisa status for top destinations from Dhaka before you apply.",
-    subBn:
-      "আবেদনের আগে ঢাকা থেকে জনপ্রিয় গন্তব্যের ভিসা-অন-অ্যারাইভাল ও eVisa স্ট্যাটাস দেখে নিন।",
-    serviceNameEn: "Visa Eligibility Checker for Bangladeshi Passport Holders",
   },
   "flight-delay-claim": {
     nameEn: "Flight Disruption Check",

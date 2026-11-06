@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Coins, Calculator, CheckSquare, ShieldCheck, Heart, User, Sparkles, Check, RefreshCw, Plane, Search, Copy, Send, ArrowRight } from "lucide-react";
+import { Coins, Calculator, CheckSquare, Heart, User, Sparkles, Check, RefreshCw, Plane, Search, Copy, Send, ArrowRight } from "lucide-react";
 import { AirHelpWidget } from "./AirHelpWidget";
 import { trackWhatsAppInquiry } from "../utils/analytics";
 import { checklistProgress } from "../utils/checklistProgress";
@@ -56,7 +56,7 @@ const AIRPORTS_DIRECTORY: AirportItem[] = [
   { code: "IST", city: "Istanbul", name: "Istanbul Airport", country: "Turkey", category: "global", airlines: "Turkish Airlines, Biman" },
 ];
 
-type ActiveTool = "converter" | "calculator" | "packing" | "visa-checker" | "airhelp" | "airports";
+type ActiveTool = "converter" | "calculator" | "packing" | "airhelp" | "airports";
 
 interface InteractiveToolsProps {
   /**
@@ -73,7 +73,7 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const tab = params.get("tab");
-      if (tab === "airhelp" || tab === "converter" || tab === "calculator" || tab === "packing" || tab === "visa-checker" || tab === "airports") {
+      if (tab === "airhelp" || tab === "converter" || tab === "calculator" || tab === "packing" || tab === "airports") {
         return tab;
       }
     }
@@ -84,7 +84,7 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
     if (typeof window === "undefined" || initialTool) return;
     const params = new URLSearchParams(window.location.search);
     const tab = params.get("tab");
-    if (tab === "airhelp" || tab === "converter" || tab === "calculator" || tab === "packing" || tab === "visa-checker" || tab === "airports") {
+    if (tab === "airhelp" || tab === "converter" || tab === "calculator" || tab === "packing" || tab === "airports") {
       setActiveTool(tab);
     }
   }, [typeof window !== "undefined" ? window.location.search : "", initialTool]);
@@ -95,10 +95,12 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
     if (initialTool) setActiveTool(initialTool);
   }, [initialTool]);
 
-  // Tool-usage measurement (WP4). `visa-checker` is deliberately absent: its
-  // fabricated claims are removed under WP1, and instrumenting a surface that
-  // is scheduled for deletion would create misleading trend data.
-  const TOOL_ID_BY_TAB: Partial<Record<ActiveTool, ToolId>> = {
+  // Tool-usage measurement (WP4). Deliberately a full Record, not a Partial:
+  // adding a tool tab now fails the build until it is given a ToolId, so no
+  // future tool can ship unmeasured. The Visa Odds Checker was removed under
+  // WP1 rather than instrumented — measuring a surface scheduled for deletion
+  // would have produced misleading trend data.
+  const TOOL_ID_BY_TAB: Record<ActiveTool, ToolId> = {
     converter: "currency-converter",
     calculator: "budget-estimator",
     packing: "packing-checklist",
@@ -218,33 +220,6 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
   const checkedCount = checklist.filter(i => i.checked).length;
   const progressPercent = checklistProgress(checkedCount, checklist.length);
 
-  // 4. Visa Eligibility Tester State
-  const [testNational, setTestNational] = useState<"bd" | "in" | "pk">("bd");
-  const [testDest, setTestDest] = useState<"np" | "th" | "my" | "ae">("np");
-
-  const visaEligibilityMap = {
-    bd: {
-      np: { status: "Visa On Arrival", color: "text-emerald-600 bg-emerald-50 border-emerald-200", text: "Bangladeshi passport holders receive an instant 15/30/90 days Visa on Arrival. First entry of the calendar year is completely GRATIS (Free) for SAARC nationals!" },
-      th: { status: "Advance Tourist e-Visa Required", color: "text-amber-700 bg-amber-50 border-amber-200", text: "Apply through Thailand's official e-Visa portal and follow the current Dhaka mission checklist before departure. Approval and processing time are not guaranteed." },
-      my: { status: "eVisa (Fast Online Approval)", color: "text-blue-700 bg-blue-50 border-blue-200", text: "An eVisa is easily applied for online with 100% approval rates when bank statements show BDT 80,000+ per person. Processing duration: 48-72 hours." },
-      ae: { status: "eVisa via Register Agencies", color: "text-pink-700 bg-pink-50 border-pink-200", text: "Tourist visas are applied online via registered travel agencies or flies carriers (Emirates, flydubai) at least 5 days prior to boarding." }
-    },
-    in: {
-      np: { status: "Visa Free / Freedom of Movement", color: "text-emerald-700 bg-emerald-50 border-emerald-200", text: "Indian citizens have full freedom of travel, stay, and work in Nepal. No visa, fee, or pre-approvals required. Simply fly with a valid national ID or passport!" },
-      th: { status: "Visa On Arrival / eVisa", color: "text-teal-700 bg-teal-50 border-teal-200", text: "Eligible for easy 15-day Visa on Arrival or high-speed eVisa approvals. Fares: 2,000 THB." },
-      my: { status: "Visa On Arrival / eVisa", color: "text-blue-700 bg-blue-50 border-blue-200", text: "Indian passport holders can smoothly travel with digital eVisa or receive Visa on Arrival under specific transit rules at designated borders." },
-      ae: { status: "eVisa / Visa on Arrival", color: "text-pink-700 bg-[#FFF5F7] border-pink-200", text: "Eligible for Visa on Arrival if holding specific green cards/visas from US/UK/Schengen. Otherwise, digital eVisa is required." }
-    },
-    pk: {
-      np: { status: "Visa on Arrival", color: "text-emerald-700 bg-emerald-50 border-emerald-200", text: "Eligible for standard Visa on Arrival. First trip registration is gratis as a SAARC citizen." },
-      th: { status: " Embassy Sticker Required", color: "text-red-700 bg-red-50 border-red-200", text: "Must apply for a physical sticker visa at Thai consulate before flying. High documentation checks apply." },
-      my: { status: "Pre-arranged Visa Required", color: "text-red-700 bg-red-50 border-red-200", text: "Must obtain an approved Single Entry Visa online or through registered consultancies before departing." },
-      ae: { status: "Pre-arranged Visa", color: "text-red-700 bg-red-50 border-red-200", text: "Tourist visas are restricted and require pre-clearances and secure agent approvals." }
-    }
-  };
-
-  const currentEligibility = visaEligibilityMap[testNational][testDest];
-
   // 5. Airport Code Directory & WhatsApp Ticket Inquiry State
   const [airportQuery, setAirportQuery] = useState("");
   const [airportCategory, setAirportCategory] = useState<"all" | "bangladesh" | "middle-east" | "asia" | "global">("all");
@@ -359,17 +334,6 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
             }`}
           >
             Smart Checklist
-          </button>
-          <button
-            id="tool-nav-visa-checker"
-            type="button"
-            aria-pressed={activeTool === "visa-checker"}
-            onClick={() => setActiveTool("visa-checker")}
-            className={`min-h-11 px-2 py-2 rounded-md font-semibold leading-tight text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] sm:px-3 ${
-              activeTool === "visa-checker" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
-            }`}
-          >
-            Visa Checker
           </button>
           <button
             id="tool-nav-airhelp"
@@ -649,65 +613,6 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
                   </div>
                 );
               })}
-            </div>
-          </div>
-        )}
-
-        {/* TOOL 4: VISA ELIGIBILITY */}
-        {activeTool === "visa-checker" && (
-          <div className="space-y-6 max-w-xl mx-auto">
-            <div className="flex items-center gap-2 text-slate-800 font-serif border-b border-slate-200 pb-3">
-              <ShieldCheck className="text-brand-navy" size={20} />
-              <h3 className="ural-card-title font-bold text-lg">Passport Visa Eligibility Evaluator</h3>
-            </div>
-
-            <div className="ural-card bg-slate-50 border border-border-subtle p-6 space-y-4">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div>
-                  <label htmlFor="select-checker-national" className="block text-xs font-bold text-text-secondary uppercase tracking-widest mb-1.5 font-mono">My Nationality Passport:</label>
-                  <select
-                    id="select-checker-national"
-                    value={testNational}
-                    onChange={(e) => setTestNational(e.target.value as any)}
-                    className="w-full min-h-11 bg-white border border-border-default rounded-lg px-2.5 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                  >
-                    <option value="bd">Bangladesh 🇧🇩</option>
-                    <option value="in">India 🇮🇳</option>
-                    <option value="pk">Pakistan 🇵🇰</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="select-checker-dest" className="block text-xs font-bold text-text-secondary uppercase tracking-widest mb-1.5 font-mono">Travel Destination:</label>
-                  <select
-                    id="select-checker-dest"
-                    value={testDest}
-                    onChange={(e) => setTestDest(e.target.value as any)}
-                    className="w-full min-h-11 bg-white border border-border-default rounded-lg px-2.5 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                  >
-                    <option value="np">Nepal 🇳🇵</option>
-                    <option value="th">Thailand 🇹🇭</option>
-                    <option value="my">Malaysia 🇲🇾</option>
-                    <option value="ae">UAE 🇦🇪</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Dynamic Answer Box */}
-              <div className={`p-5 rounded-lg border-2 ${currentEligibility.color} space-y-2 animate-fade-in`}>
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="shrink-0" size={18} />
-                  <span className="font-serif font-black text-sm uppercase">{currentEligibility.status}</span>
-                </div>
-                <p className="text-xs leading-relaxed text-slate-700">
-                  {currentEligibility.text}
-                </p>
-              </div>
-
-              {/* General rule warning */}
-              <div className="bg-amber-50 border border-amber-100 rounded-lg p-3 text-[10px] text-amber-900 leading-relaxed font-mono">
-                ⚠️ Bangladeshis require a tourist check-in clearance. Always verify that your passport biodata pages do not contain 'restricted clearance' remarks and that your passport has at least 6 months validity.
-              </div>
             </div>
           </div>
         )}
