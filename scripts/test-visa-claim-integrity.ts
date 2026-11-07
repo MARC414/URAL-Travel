@@ -430,6 +430,55 @@ test("the affiliate guard would catch a component that dropped its disclosure", 
 });
 
 // ---------------------------------------------------------------------------
+// The disclosure must survive without JavaScript.
+// ---------------------------------------------------------------------------
+
+/**
+ * The source-reading check above cannot see this, and that is the whole point:
+ * a disclosure that only exists in a React component is absent for crawlers and
+ * for anyone whose bundle failed to load. Affiliate links ARE prerendered into
+ * static HTML, so the statement must be too. Asserted against dist/, and skipped
+ * cleanly when no build exists so the suite works before `npm run build`.
+ */
+test("every prerendered page that links a partner carries the disclosure in static HTML", () => {
+  const distDir = path.join(ROOT, "dist");
+  if (!fsExists(distDir)) {
+    console.log("    (dist/ not built — run npm run build to exercise this check)");
+    return;
+  }
+  const PARTNER = /klook\.tpo\.li|airhelp\.com|tiqets|aviasales|emrld|travelpayouts\.(com|io)/i;
+  const pages: string[] = [];
+  const walkHtml = (dir: string) => {
+    for (const entry of readdirSync(dir)) {
+      const full = path.join(dir, entry);
+      if (statSync(full).isDirectory()) walkHtml(full);
+      else if (entry.endsWith(".html")) pages.push(full);
+    }
+  };
+  walkHtml(distDir);
+
+  const offenders: string[] = [];
+  for (const page of pages) {
+    const html = readFileSync(page, "utf8");
+    if (!PARTNER.test(html)) continue;
+    if (!html.includes('data-affiliate-disclosure="static"')) offenders.push(path.relative(distDir, page));
+  }
+  assert(
+    offenders.length === 0,
+    `pages with partner links but no static disclosure:\n    ${offenders.slice(0, 10).join("\n    ")}`
+  );
+});
+
+test("the static disclosure exists in both locales", () => {
+  const distDir = path.join(ROOT, "dist");
+  if (!fsExists(distDir)) return;
+  const en = readFileSync(path.join(distDir, "tools.html"), "utf8");
+  const bn = readFileSync(path.join(distDir, "bn", "tools.html"), "utf8");
+  assert(/Affiliate disclosure:/i.test(en), "the English static disclosure is missing from /tools");
+  assert(/অ্যাফিলিয়েট ডিসক্লোজার/.test(bn), "the Bengali static disclosure is missing from /bn/tools");
+});
+
+// ---------------------------------------------------------------------------
 
 if (failures.length > 0) {
   console.error(`\n${failures.length} visa-claim integrity test(s) failed:`);

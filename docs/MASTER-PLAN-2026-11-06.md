@@ -473,7 +473,15 @@ question was never whether to have it, but whether the labels told the truth.
   site-wide disclosure, but an 11px footer line does not carry a whole tab sitting beside tools URAL actually built.
   Added the same wording `JourneyHelpPanel` already uses, in both locales.
 
-**Guards added (14 tests in `test:visa-claims`):** the site-wide footer disclosure must exist in both locales, and a
+**Disclosure reachability — fixed 7 November 2026.** Affiliate links are prerendered into static HTML, but the
+footer disclosure was **client-rendered only**, so a crawler or a JS-blocked reader saw paid links with no
+statement. `staticAffiliateDisclosure()` in `prerender.ts` now injects the disclosure into every prerendered shell
+(EN and BN), plus the home page, which skips the shell replacement. **262 of 266 built pages** carry it; the four that
+do not are `404.html` and three verification stubs, none of which contain a partner link. Guarded by two checks that
+read `dist/`, not source — proving the statement survives without JavaScript. Negative control: stripping the tag
+from all 262 pages fails both checks.
+
+**Guards added (16 tests in `test:visa-claims`):** the site-wide footer disclosure must exist in both locales, and a
 tab that is wholly an affiliate placement must disclose locally. Negative control: deleting AirHelpWidget's
 disclosure fails the suite with the named check.
 

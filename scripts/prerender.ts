@@ -4857,16 +4857,45 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       attractionDataPreloadCount++;
     }
 
+/**
+ * Affiliate disclosure must exist BEFORE JavaScript runs.
+ *
+ * Affiliate links are prerendered into static HTML (60 pages at last count), but
+ * the footer disclosure was client-rendered only — so a crawler, a reader with JS
+ * blocked, or anyone whose bundle failed saw paid links with no statement. The
+ * source-reading guard in test-visa-claim-integrity.ts structurally cannot catch
+ * that, which is why this is enforced in the emitted HTML rather than the TSX.
+ *
+ * Wording deliberately mirrors the client footer (src/App.tsx) so the two never
+ * diverge: "Some outbound links are affiliate links; we may earn a commission at
+ * no extra cost to you."
+ */
+function staticAffiliateDisclosure(isBn: boolean): string {
+  return isBn
+    ? '<p data-affiliate-disclosure="static" style="max-width:1100px;margin:20px auto 0;padding:16px 24px;border-top:1px solid #cbd5e1;font-size:12px;line-height:1.6;color:#475569;font-family:system-ui,sans-serif"><strong>অ্যাফিলিয়েট ডিসক্লোজার:</strong> সাইটের কিছু আউটবাউন্ড লিংক অ্যাফিলিয়েট লিংক; আপনার অতিরিক্ত খরচ ছাড়াই URAL একটি কমিশন পেতে পারে।</p>'
+    : '<p data-affiliate-disclosure="static" style="max-width:1100px;margin:20px auto 0;padding:16px 24px;border-top:1px solid #cbd5e1;font-size:12px;line-height:1.6;color:#475569;font-family:system-ui,sans-serif"><strong>Affiliate disclosure:</strong> Some outbound links are affiliate links; we may earn a commission at no extra cost to you.</p>';
+}
+
     if (r.routePath !== "/") {
       pageHtml = pageHtml.replace(
         /<div id="root">[\s\S]*?<\/main>\s*<\/div>/,
-        `<div id="root"><main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif">${r.bodyHtml}</main></div>`
+        `<div id="root"><main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif">${r.bodyHtml}</main>${staticAffiliateDisclosure(r.routePath.startsWith("/bn"))}</div>`
       );
     }
 
     if (r.routePath === "/") {
       pageHtml = injectScheduledBlogDirectory(pageHtml);
       pageHtml = injectHomeFaq(pageHtml);
+      // The home is the one route skipped by the shell replacement above, so it
+      // needs the disclosure injected explicitly - it hosts the hotel search
+      // partner slot, and its React footer is not in the static HTML.
+      if (pageHtml.includes("</div>") && !pageHtml.includes('data-affiliate-disclosure="static"')) {
+        const lastClose = pageHtml.lastIndexOf("</div>");
+        pageHtml =
+          pageHtml.slice(0, lastClose) +
+          staticAffiliateDisclosure(false) +
+          pageHtml.slice(lastClose);
+      }
       fs.writeFileSync(path.join(DIST_DIR, "index.html"), pageHtml, "utf8");
     } else if (r.routePath === "/bn") {
       // The Bengali home is served as a directory index so that /bn/ (the
