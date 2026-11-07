@@ -235,7 +235,7 @@ The first draft was a flat list, which hid the dependencies. Five phases, each s
 |---|---|---|---|---|
 | **0** | **Truth** | ✅ **Complete** — remove everything false or stale *today*; make the site measurable | WP7 ✅ · WP0 ✅ · WP4 ✅ · WP2 ✅ · WP1 ✅ | **Phase 0 complete** |
 | **1** | **Foundation** | ✅ **Complete** — one dated rate source; one number discipline | WP3 ✅ | done |
-| **2** | **Tools** | Make the converters and estimators honest and useful | WP5, WP9 | 4–6 days |
+| **2** | **Tools** | ✅ **Complete** — honest converters and estimators | WP5 ✅ · WP9 ✅ | done |
 | **3** | **Voice** | ✅ **Complete** — international framing across the interface | WP6 — D3a ✅ · D3b ✅ · D3c ✅ | done |
 | **4** | **Assistant** | The free AI helper, last, on a verified corpus | WP8 | 4–6 days |
 
@@ -455,7 +455,31 @@ covers its arithmetic, unknown/zero inputs and origin defaults; rate failure and
 
 ---
 
-### WP9 — The Trip Cost Estimator, rebuilt as two layers *(2–3 days · incorporates Addendum A)*
+### WP2b — Tool tab honesty pass *(owner-requested 7 November 2026)*
+
+The owner kept the WhatsApp contact channel deliberately: *"I need people to contact me through WhatsApp."* So the
+question was never whether to have it, but whether the labels told the truth.
+
+**Kept, relabelled where the label overstated the thing.**
+- **Airport Codes tab.** `AIRPORTS_DIRECTORY` holds exactly **32** entries and the badge says "32 Verified Air Hubs" —
+  that figure is true and was left alone. The WhatsApp generator is honest by construction: its prefilled message
+  asks URAL *"to point me to the airline or the site that sells this route … so I can compare the all-in price
+  myself."* It never claims URAL books. **Changed:** the heading from "1-Click WhatsApp Fare Question" to
+  "1-Click WhatsApp Contact — Flights, Routes & Documents", and added a scope line stating that URAL does not sell
+  tickets and points readers to the airline and official portal. That makes an existing contact channel clearer, not
+  smaller.
+- **AirHelp tab.** Left visible and unmistakably attributed to AirHelp in its label. **Defect found and fixed:** the
+  widget opened four affiliate links with **no affiliate disclosure at all** in the widget. The footer carries a
+  site-wide disclosure, but an 11px footer line does not carry a whole tab sitting beside tools URAL actually built.
+  Added the same wording `JourneyHelpPanel` already uses, in both locales.
+
+**Guards added (14 tests in `test:visa-claims`):** the site-wide footer disclosure must exist in both locales, and a
+tab that is wholly an affiliate placement must disclose locally. Negative control: deleting AirHelpWidget's
+disclosure fails the suite with the named check.
+
+---
+
+### WP9 — ✅ **DONE 7 November 2026** — The Trip Cost Estimator, rebuilt as two layers *(incorporates Addendum A)*
 
 **7 November evidence-led implementation resolution.** The saved `/costs` matrices had no recorded supplier
 sources or price-collection dates. The owner's delegated implementation decision and Number rule therefore require
@@ -552,7 +576,36 @@ sat on the same page and would otherwise contradict the new heading. `lint` 0, `
 
 ## PHASE 4 — ASSISTANT
 
-### WP8 — Free AI helper with four hard gates *(4–6 days · last)*
+### WP8 — ⛔ **NOT STARTED — blocked on infrastructure, not on effort** — Free AI helper with four hard gates
+
+**Owner decision 7 November 2026: yes in principle, but only if it gives real help.** *"I think we should apply AI helper
+in the site if it is not able to render any real help"* — i.e. ship it when it works, not before. That matches the
+plan's own gate better than a scaffold would.
+
+**Why it cannot be built here.** Verified in this repository: there is **no** `wrangler.toml`, no Workers AI binding,
+no KV/D1 namespace, no AI function under `functions/api/` (only `contact.js`, `rates.js`, `subscribe.js`), and no
+authenticated free-plan token. A helper with no corpus would render a chat box that cannot answer — a public promise
+with nothing behind it, which is the exact defect class this plan exists to remove (D5, D6, the KKday card, the Visa
+Odds Checker).
+
+**Rejected: offline-mock scaffolding.** A UI with stubbed answers and gates tested against fixtures would look
+finished and behave like a lie. Gates proven against *mock* ingestion prove nothing about real ingestion — the exact
+lesson from WP1, where the visa guard passed on fictional data twice.
+
+**To unblock, in order:**
+1. Create the Cloudflare Workers project and bind Workers AI + one KV namespace; record the binding names in `wrangler.toml`. (Owner action — needs the account.)
+2. Choose the model from the **free-verified** set and confirm its plan requirement in the dashboard *before* shipping. `@cf/moonshotai/kimi-k2.6`, `kimi-k2.7-code` and `@cf/zai-org/glm-5.2` now require Workers **Paid** (changelog 2026-07-28) and fail with 403 / error 5035 on Free.
+3. Author the corpus from sources that already exist and are dated: the Umrah hub, the dated Saudi source reviews, and `SHARED_UMRAH_BANNED_PATTERNS`. No new research.
+4. Then build UI + gates + limit messaging + negative controls, in that order.
+
+**Budget reality.** 10,000 neurons/day on Free ≈ **74 conversations/day** (70B, ~2,000 in / 400 out) or **~120/day**
+(8B). Overage fails closed — no bill — which is the right failure mode. Instrument refusals and cap-hits from day one.
+
+**Still-unanswered question for the owner:** the corpus is Umrah-only per the plan. Is that the intent, or should the
+first version answer broader travel questions? A narrow box that refuses most questions is honest but may disappoint;
+a broad box without a broad corpus is the failure mode above.
+
+**Original scope, unchanged:**
 
 **Objective.** One scoped helper that answers only from verified content, with the limit handled as a feature.
 

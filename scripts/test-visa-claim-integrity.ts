@@ -382,6 +382,54 @@ test("every redirected blog URL really is gone from the build", () => {
 });
 
 // ---------------------------------------------------------------------------
+// Affiliate honesty: a commission link must say so.
+// ---------------------------------------------------------------------------
+
+/**
+ * RULE: any component that sends the reader to an affiliate partner must
+ * disclose that URAL may earn a commission. This is not about taste — an
+ * undisclosed paid link is a regulatory problem in the UK (CAP/CMA) and the EU,
+ * and it is indefensible on a site whose whole pitch is that it does not
+ * pretend. JourneyHelpPanel already did this correctly; AirHelpWidget opened
+ * partner links with no statement at all until 7 Nov 2026.
+ */
+test("the site carries a conspicuous site-wide affiliate disclosure", () => {
+  // Most partner surfaces rely on this footer disclosure, which is why a
+  // per-component rule would be wrong: it asserts a fact that is already true
+  // once, globally. What must not happen is losing it.
+  const app = read("src/App.tsx");
+  const hasDisclosure =
+    /Affiliate disclosure:/i.test(app) && /may earn a commission at no extra cost to you/i.test(app);
+  assert(
+    hasDisclosure,
+    "the footer affiliate disclosure (\"Some outbound links are affiliate links; we may earn a commission at no extra cost to you\") is missing from src/App.tsx"
+  );
+  const bnDisclosure = /অ্যাফিলিয়েট ডিসক্লোজার/.test(app) && /কমিশন/.test(app);
+  assert(bnDisclosure, "the Bengali affiliate disclosure is missing");
+});
+
+test("a tab that is wholly an affiliate placement discloses locally, not just in the footer", () => {
+  // An 11px footer line does not carry a whole tab whose only content is a
+  // commissioned CTA. AirHelp is presented in the Tools tab bar next to tools
+  // URAL actually built, so the local statement is what stops the implication.
+  const airhelp = read("src/components/AirHelpWidget.tsx");
+  const discloses =
+    /affiliate partner, AirHelp/i.test(airhelp) && /may earn a commission if you claim/i.test(airhelp);
+  assert(discloses, "AirHelpWidget no longer discloses the AirHelp affiliate relationship locally");
+});
+
+test("the affiliate guard would catch a component that dropped its disclosure", () => {
+  // Negative control on the checker itself: the disclosure regex must match the
+  // shipped wording, or the rule above is vacuous.
+  const shipped =
+    "URAL may earn a commission if you claim through them, at no extra cost to you.";
+  assert(
+    /may earn a commission|commission if you (buy|claim)/i.test(shipped),
+    "the disclosure regex no longer matches the wording actually used on the site"
+  );
+});
+
+// ---------------------------------------------------------------------------
 
 if (failures.length > 0) {
   console.error(`\n${failures.length} visa-claim integrity test(s) failed:`);

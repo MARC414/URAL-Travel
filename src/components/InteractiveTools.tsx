@@ -382,11 +382,13 @@ export function InteractiveTools({ initialTool, initialCountry }: InteractiveToo
                     Fare Research & Airline Handoff
                   </span>
                   <h4 className="font-serif font-bold text-base text-white">
-                    1-Click WhatsApp Fare Question
+                    1-Click WhatsApp Contact — Flights, Routes &amp; Documents
                   </h4>
                 </div>
                 <span className="text-[11px] text-slate-300">
-                  Route and document questions on WhatsApp (+8801784385335)
+                  {isBn
+                    ? "রুট, ফ্লাইট ও ডকুমেন্ট সংক্রান্ত প্রশ্ন WhatsApp-এ (+8801784385335)। URAL টিকিট বিক্রি করে না — আমরা এয়ারলাইন্স ও অফিশিয়াল পোর্টালের দিকে দেখাই।"
+                    : "Route, flight and document questions on WhatsApp (+8801784385335). URAL does not sell tickets — we point you to the airline and the official portal."}
                 </span>
               </div>
 
