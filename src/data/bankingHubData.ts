@@ -173,18 +173,6 @@ export const BANKING_CLUSTER_NODES: BankingNode[] = [
       "ইসলামি ব্যাংক কীভাবে সুদ ছাড়া ট্রাভেল কার্ড দেয়, আর আবেদনের আগে কোন কোন পণ্য-প্রশ্ন করতে হবে।",
   },
   {
-    id: "blog-30",
-    slug: "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
-    kicker: "No card, no endorsement",
-    kickerBn: "কার্ড নেই, এনডোর্সমেন্ট নেই",
-        title: "Pay for flights and hotels in BDT",
-        titleBn: "BDT-তে ফ্লাইট ও হোটেলের দাম মেটানো",
-    description:
-      "Paying a travel desk by bank transfer, bKash or Nagad when the passport is at an embassy or the card is not ready — and what to verify before you pay.",
-    descriptionBn:
-      "পাসপোর্ট দূতাবাসে থাকলে বা কার্ড প্রস্তুত না থাকলে ব্যাংক ট্রান্সফার, bKash বা Nagad-এ ট্রাভেল ডেস্ককে পেমেন্ট — আর দেওয়ার আগে কী যাচাই করবেন।",
-  },
-  {
     id: "blog-31",
     slug: "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
     kicker: "Cash, card and the terminal",
@@ -210,9 +198,11 @@ export interface BankingPaymentMethod {
   ruleBn: string;
   watch: string;
   watchBn: string;
-  nodeSlug: string;
-  nodeLabel: string;
-  nodeLabelBn: string;
+  /** Internal article that explains this method. Optional: a method card must
+   *  not link to a page that no longer exists. */
+  nodeSlug?: string;
+  nodeLabel?: string;
+  nodeLabelBn?: string;
 }
 
 /**
@@ -265,9 +255,6 @@ export const BANKING_PAYMENT_METHODS: BankingPaymentMethod[] = [
     ruleBn: "আপনি টাকায় পেমেন্ট করেন, বিনিময়ে airline PNR ও হোটেল ভাউচার পান। এটি আপনার ও ডেস্কের মধ্যে service ব্যবস্থা, বাংলাদেশ ব্যাংকের কোনো পণ্য নয়।",
     watch: "Compare the all-in BDT quote with the airline's own card price, confirm the PNR with the airline, and read the cancellation terms before paying.",
     watchBn: "সর্বমোট BDT quote-এর সঙ্গে এয়ারলাইন্সের নিজের কার্ড-দাম মিলিয়ে দেখুন, PNR এয়ারলাইন্সের কাছে যাচাই করুন, আর পেমেন্টের আগে বাতিলের শর্ত পড়ুন।",
-    nodeSlug: "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
-    nodeLabel: "How the BDT route works",
-    nodeLabelBn: "BDT পদ্ধতি কীভাবে কাজ করে",
   },
   {
     id: "cash",

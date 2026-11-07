@@ -34,7 +34,6 @@ export const BLOG_SLUGS = [
   "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
   "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
   "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
-  "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
   "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
   "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
   "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration",

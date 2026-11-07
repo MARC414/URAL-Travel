@@ -460,15 +460,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                 },
 
-                {
-
-                  pattern: /\b(bKash|Nagad|BDT payment|local bank transfer|বিকাশ|নগদে পেমেন্ট)\b/i,
-
-                  path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
-
-                  title: "How to Pay for Flights and Makkah Hotels in BDT (bKash / Bank Transfer)",
-
-                },
+                
 
                 {
 

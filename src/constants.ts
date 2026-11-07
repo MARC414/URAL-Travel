@@ -2004,7 +2004,6 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account vs. Travel Quota (the $300 online-payment rule)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "Cash SAR / USD vs. Card Abroad (choose local currency, avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
-            { text: "How to Settle Flights & Makkah Hotels in BDT (bKash / Bank Transfer)", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Card Endorsed & Ready?", body: "Compare live international flight fares from Dhaka and book with your endorsed card." }
@@ -3146,7 +3145,6 @@ export const BLOG_DATA: BlogPost[] = [
     internalLinks: [
       { text: "Complete $18,000 Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-            { text: "No Card? How to Pay for Flights & Umrah Hotels in BDT", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Money & Banking Hub: endorsement, cards, USD 300 rule and NOC", path: "/banking" },
       { text: "10-Day DIY Umrah Cost Calculator in BDT", path: "/umrah" },
       { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" }
@@ -3195,48 +3193,9 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Passport Dollar Endorsement and Card Activation Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Cash vs. Card Abroad (choose local currency and avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-            { text: "No Card? BDT Payment Checks via bKash or Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Dual-Currency Card Fee and Markup Calculator", path: "/tools/currency-converter" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare the Fare Before You Ask Your Bank", body: "Check the live flight price and exact checkout amount, then ask your card issuer about documented travel-payment approval before paying." }
-  },
-  {
-    id: "blog-30",
-    slug: "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
-        title: "How to Settle Flights, Makkah Hotels & Airport Transfers in BDT (bKash / Bank Transfer, No Card Needed)",
-            summary: "Not every Bangladeshi traveller has an endorsed dual-currency card ready when a cheap fare or a Haram-view hotel rate appears online. This guide explains the pay-in-Taka route honestly: who can settle a booking in BDT, what the airline PNR and hotel voucher must show, which charges belong inside the all-in quote, and what to keep for the Dhaka Airport immigration folder. It also explains where URAL's own role ends: researched information, official portals and affiliate partners, with questions answered on WhatsApp or through the contact form.",
-    category: "Banking & Payments",
-    date: "September 27, 2026",
-    updatedAt: "2026-10-19",
-    author: "Farhan Momen (Founder & Travel Editor)",
-    readTime: "6 min read",
-    references: [
-      {
-        name: "Bangladesh Bank — FEPD-1 Circular No. 33 (6 September 2026): travel entitlement raised to USD 18,000",
-        nameBn: "বাংলাদেশ ব্যাংক — FEPD-1 Circular No. 33 (৬ সেপ্টেম্বর ২০২৬): ভ্রমণ entitlement USD 18,000-এ বৃদ্ধি",
-        url: "https://www.bb.org.bd/mediaroom/circulars/fepd/sep062026fepd-133e.pdf",
-      },
-      {
-        name: "Bangladesh Bank — GFET Volume 1, Chapter 19: payment through international cards (USD 300 single online purchase)",
-        nameBn: "বাংলাদেশ ব্যাংক — GFET Volume 1, Chapter 19: আন্তর্জাতিক কার্ডে পেমেন্ট (একবারে USD 300 online purchase)",
-        url: "https://www.bb.org.bd/aboutus/regulationguideline/foreignexchange/feguidevol1/19.pdf",
-      },
-      {
-        name: "Saudi Ministry of Hajj and Umrah — official FAQ (Umrah visa, permit and biometric answers)",
-        nameBn: "সৌদি হজ ও ওমরাহ মন্ত্রণালয় — অফিশিয়াল FAQ (উমরাহ ভিসা, পারমিট ও বায়োমেট্রিক)",
-        url: "https://haj.gov.sa/en/FAQ",
-      },
-    ],
-    internalLinks: [
-      { text: "Money & Banking Hub: endorsement, cards, USD 300 rule and NOC", path: "/banking" },
-      { text: "10-Day DIY Umrah Cost Calculator & Hotel Zones", path: "/umrah" },
-      { text: "Dual-Currency Card Endorsement ($18,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" },
-      { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
-    ],
-        affiliateCTA: { provider: "aviasales", headline: "Check Live Flight Prices Before You Ask a Desk", body: "Compare real-time airline fares from Dhaka so you know the exact market price before you evaluate any pay-in-Taka offer." }
   },
   {
     id: "blog-31",
@@ -3407,7 +3366,6 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Thailand Official e-Visa Guide (thaievisa.go.th Upload Rules)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
       { text: "Where to Eat Halal Food in Bangkok (Pratunam & Sukhumvit Soi 3)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
       { text: "Dual-Currency Card Endorsement & Medical Quota Rules", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-            { text: "No Card? How to Pay for Bangkok Flights & Hotels in BDT", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Thailand e-Visa & Dhaka Embassy Requirements", path: "/visa/thailand-visa" },
       { text: "Dhaka to Bangkok Flight Schedule & Fares", path: "/flights/dhaka-bangkok" },
       { text: "Where to Stay in Bangkok: Hotel Neighborhoods", path: "/hotels/bangkok-hotels" },
@@ -3516,7 +3474,6 @@ export const BLOG_DATA: BlogPost[] = [
     internalLinks: [
       { text: "Maldives Local Island Guide", path: "/blog/maldives-budget-trip-bangladesh-maafushi" },
       { text: "First International Trip on a Fresh Passport (3-Step Ladder)", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
-            { text: "How to Pay for Multi-City Flights in BDT Without a Card", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Maldives 5-Day Cost Calculator in BDT", path: "/costs/maldives-costs" },
       { text: "Maldives On-Arrival Visa & IMUGA Checklist", path: "/visa/maldives-visa" },
       { text: "Dhaka to Maldives Flight Schedule & Fares", path: "/flights/dhaka-maldives" },

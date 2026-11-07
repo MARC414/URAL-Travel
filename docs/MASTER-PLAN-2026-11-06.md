@@ -234,10 +234,10 @@ The first draft was a flat list, which hid the dependencies. Five phases, each s
 | Phase | Name | Goal | Packages | Effort |
 |---|---|---|---|---|
 | **0** | **Truth** | ✅ **Complete** — remove everything false or stale *today*; make the site measurable | WP7 ✅ · WP0 ✅ · WP4 ✅ · WP2 ✅ · WP1 ✅ | **Phase 0 complete** |
-| **1** | **Foundation** | One dated rate source; one number discipline | WP3 | 1–2 days |
-| **2** | **Tools** | Make the converters and estimators honest and useful | WP5, WP9 | 4–6 days |
-| **3** | **Voice** | International framing across the interface | WP6 | 0.5 day |
-| **4** | **Assistant** | The free AI helper, last, on a verified corpus | WP8 | 4–6 days |
+| **1** | **Foundation** | ✅ **Complete** — one dated rate source; one number discipline | WP3 ✅ | done |
+| **2** | **Tools** | ✅ **Complete** — honest converters and estimators | WP5 ✅ · WP9 ✅ | done |
+| **3** | **Voice** | ✅ **Complete** — international framing across the interface | WP6 — D3a ✅ · D3b ✅ · D3c ✅ | done |
+| **4** | **Assistant** | ⛔ **Cancelled** — replaced by the WhatsApp Answer Desk (manual, £0, no infrastructure) | WP8 ❌ → `docs/growth/WHATSAPP-ANSWER-DESK.md` | done |
 
 **Why this order and not another.** Phase 0 first because two of its items (WP1, WP2) remove claims that are false
 *right now*, and a feature shipped on top of a false claim compounds it. Phase 1 before Phase 2 because both
@@ -414,7 +414,11 @@ branch, which is correct.
 
 ## PHASE 1 — FOUNDATION
 
-### WP3 — 🟠 One dated rate source, and the end of hand-typed rates *(1–2 days · blocks WP5, WP9)*
+### WP3 — ✅ **DONE 7 November 2026** — One dated rate source, and the end of hand-typed rates *(unblocks WP5, WP9)*
+
+**Delivered in `0f2b8484`** (66 files, +2752/−3015) — the commit message names the travel-tool and fare work, so the
+WP3 half is recorded here: **all fixed rate constants were deleted from `src/`**; `functions/api/rates.js` and
+`src/utils/rateData.ts` are now the only rate source, and `src/utils/rates.ts` the only browser client.
 
 **7 November implementation resolution.** The endpoint and client now share `rateData.ts`. They read the
 provider's real top-level Unix timestamps, validate the base and finite rates, preserve the date through cache
@@ -431,7 +435,14 @@ by `test:rates`; static output and fixed-rate regressions are covered by `verify
 
 ## PHASE 2 — TOOLS
 
-### WP5 — Currency choice on the Umrah worksheet *(2 days · one control)*
+### WP5 — ✅ **DONE 7 November 2026** — Currency choice on the Umrah worksheet
+
+**Delivered — verified, not assumed.** `UmrahBudgetCalculator.tsx` holds `currencyChoice: "BDT" | "USD" | null`,
+defaulting to `preferredCurrencyForOrigin(origin)`, so the control follows origin until the visitor chooses and then
+keeps an explicit choice across origin changes. One selector, not per-row. An "Equal share per traveller" result is
+labelled, with a note that equal sharing is arithmetic and not the child/infant fare. All eight whole-party inputs
+remain BDT. `test:umrah-budget` **26/26**, including *"Umrah currency defaults follow origin while all eight inputs
+remain BDT"* (DAC/ZYL → BDT, LHR → USD). `verify:build` checks the EN/BN controls in `dist`. Nothing was left to do.
 
 **7 November implementation resolution.** The shared worksheet now has BDT/USD display choice, dated provider
 attribution, a labelled BDT fallback and explicit equal sharing. An explicit choice survives origin changes. The
@@ -444,7 +455,39 @@ covers its arithmetic, unknown/zero inputs and origin defaults; rate failure and
 
 ---
 
-### WP9 — The Trip Cost Estimator, rebuilt as two layers *(2–3 days · incorporates Addendum A)*
+### WP2b — Tool tab honesty pass *(owner-requested 7 November 2026)*
+
+The owner kept the WhatsApp contact channel deliberately: *"I need people to contact me through WhatsApp."* So the
+question was never whether to have it, but whether the labels told the truth.
+
+**Kept, relabelled where the label overstated the thing.**
+- **Airport Codes tab.** `AIRPORTS_DIRECTORY` holds exactly **32** entries and the badge says "32 Verified Air Hubs" —
+  that figure is true and was left alone. The WhatsApp generator is honest by construction: its prefilled message
+  asks URAL *"to point me to the airline or the site that sells this route … so I can compare the all-in price
+  myself."* It never claims URAL books. **Changed:** the heading from "1-Click WhatsApp Fare Question" to
+  "1-Click WhatsApp Contact — Flights, Routes & Documents", and added a scope line stating that URAL does not sell
+  tickets and points readers to the airline and official portal. That makes an existing contact channel clearer, not
+  smaller.
+- **AirHelp tab.** Left visible and unmistakably attributed to AirHelp in its label. **Defect found and fixed:** the
+  widget opened four affiliate links with **no affiliate disclosure at all** in the widget. The footer carries a
+  site-wide disclosure, but an 11px footer line does not carry a whole tab sitting beside tools URAL actually built.
+  Added the same wording `JourneyHelpPanel` already uses, in both locales.
+
+**Disclosure reachability — fixed 7 November 2026.** Affiliate links are prerendered into static HTML, but the
+footer disclosure was **client-rendered only**, so a crawler or a JS-blocked reader saw paid links with no
+statement. `staticAffiliateDisclosure()` in `prerender.ts` now injects the disclosure into every prerendered shell
+(EN and BN), plus the home page, which skips the shell replacement. **262 of 266 built pages** carry it; the four that
+do not are `404.html` and three verification stubs, none of which contain a partner link. Guarded by two checks that
+read `dist/`, not source — proving the statement survives without JavaScript. Negative control: stripping the tag
+from all 262 pages fails both checks.
+
+**Guards added (16 tests in `test:visa-claims`):** the site-wide footer disclosure must exist in both locales, and a
+tab that is wholly an affiliate placement must disclose locally. Negative control: deleting AirHelpWidget's
+disclosure fails the suite with the named check.
+
+---
+
+### WP9 — ✅ **DONE 7 November 2026** — The Trip Cost Estimator, rebuilt as two layers *(incorporates Addendum A)*
 
 **7 November evidence-led implementation resolution.** The saved `/costs` matrices had no recorded supplier
 sources or price-collection dates. The owner's delegated implementation decision and Number rule therefore require
@@ -483,6 +526,36 @@ D3 splits into three independently shippable slices:
 D3a goes first because it is the only slice that is *legally identifying*: it is the machine-readable answer to
 "what is this business". D3b is the visible half of the same sentence. D3c waits for the owner's article decision.
 
+**D3b — shipped 7 November 2026** (`0f2b8484`). Every "pay in BDT / message our Dhaka desk / pay in Taka via bKash"
+claim was replaced with platform-checkout guidance: `ExperiencesPage.tsx` (banner body), `GlobalAttractionsHub.tsx`
+(advisory bullet 2), `App.tsx` and `InteractiveTools.tsx`. Verified: `grep` for "message our dhaka desk" and "pay in
+Bangladeshi Taka via" returns **0**. The surviving "Payment Guide" headings are guidance, not a payment offer, and stay.
+
+**D3c — DECIDED AND DELIVERED 7 November 2026: deleted, not rewritten.** Owner chose deletion with a 301.
+
+Deleted: the article body in both locales (`blogContent.ts`, `bengaliContent.ts`), its `BLOG_DATA` and BN records,
+its `bankingHubData` method card, its `blogIndex` entry, alt text, cover image, snippet, SEO copy, the four
+`prerender.ts` link lists, `BlogPostRouteView`'s keyword matcher, its `TopicalAuthorityBlueprint` keyword node, and a
+hardcoded `<li>` in `index.html` itself (the last one only surfaced because `verify:build` compares homepage blog
+links against `BLOG_DATA`).
+
+Redirected: `/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card → /banking` and its `/bn/`
+twin → `/bn/banking`. The banking hub keeps the underlying guidance — endorsement, RFCD, card vs cash — without a
+booking promise. `BANKING_PAYMENT_METHODS.nodeSlug` became optional and both renderers now guard it, so the
+still-useful "BDT settlement" method card no longer links to a deleted page.
+
+Build: **131 English + 131 Bengali** routes (132 → 131), 52 blog covers.
+
+**Superseded note — the earlier partial fix.** The following was true between the two commits and is kept for the
+record: Rewording the three titles from "Pay" to "Settle" did
+not resolve the ambiguity my review flagged: the article's STEP-BY-STEP section said *"Message **the desk** your travel
+dates … and a passport bio-page scan"* and *"pay by bKash or Nagad"* without ever naming who "the desk" was, on a
+domain the reader is already on. A reader would reasonably supply URAL. Fixed by naming the actor explicitly — the
+section now opens *"This section describes the route used by licensed travel agencies and airline offices in Dhaka.
+**URAL is not that desk** — it does not take your payment, your documents or your booking"* — and Step 2 warns the
+reader to send identity documents only to the business they are actually paying. **The rewrite-or-301 decision still
+belongs to the owner** and is unchanged.
+
 **Q4 is resolved** (owner, 7 November 2026): URAL takes no payment for travel services. A paid consultation may
 exist later, and must be disclosed on the page that offers it — not implied in a menu label.
 
@@ -511,7 +584,65 @@ sat on the same page and would otherwise contradict the new heading. `lint` 0, `
 
 ## PHASE 4 — ASSISTANT
 
-### WP8 — Free AI helper with four hard gates *(4–6 days · last)*
+### WP8 — ❌ **CANCELLED 7 November 2026 (owner decision)** — replaced by the WhatsApp Answer Desk
+
+**Decision.** *"No then I dont want the on-site helper now."* The free AI helper is not being built. No scaffold, no
+placeholder, no chat box. The reasoning that carried: an on-site helper cannot attach a date and a source to its own
+output, and an undated, unsourced visa answer is precisely the defect class this entire plan exists to remove. Its
+budget was also a hard ceiling of ~74 conversations/day, so it could never be the primary channel anyway.
+
+**Replacement — `docs/growth/WHATSAPP-ANSWER-DESK.md`.** A six-step manual for answering reader questions on
+WhatsApp with AI as a drafting assistant the owner controls: receive → classify fact vs service → draft with a
+constrained prompt → **verify against the deciding authority** → send in a fixed four-part shape (answer, official
+source, checked date, caveat) → log. The safety property is ordering: draft, then verify, then send.
+
+The drafting prompt contains one instruction that matters more than the rest: *"Give NO price, processing time,
+approval rate, or visa-validity figure unless I supply it … write `[NEEDS OFFICIAL FIGURE]` in its place."* That
+turns the model's most dangerous habit — confidently inventing a number — into a visible gap the human fills from the
+official page. Cost £0. No infrastructure. No daily cap.
+
+**`docs/growth/WHATSAPP-QUESTION-LOG.md`** is the other half, and the more valuable one: a table of every question
+asked, what decided it, and whether a page already covers it. Weekly, it drives the content queue by how anxious the
+questioner was, not by search volume. Its four conditions are the *evidence-based* trigger for ever revisiting an
+on-site helper: 30+ real questions, 10+ repeats, 5+ pages written from the log, and stable answers. Until those are
+true, a helper would be guessing at what readers want.
+
+**Guarded** by `scripts/test-answer-desk.ts` (7 checks, CI-wired as `test:answer-desk`): the manual must keep the
+`[NEEDS OFFICIAL FIGURE]` hatch, the standing "no payment, no booking" line, the full refusal list matching the claims
+the site already removed, and the draft → verify → send ordering. Both negative controls run and pass.
+
+---
+
+
+
+**Owner decision 7 November 2026: yes in principle, but only if it gives real help.** *"I think we should apply AI helper
+in the site if it is not able to render any real help"* — i.e. ship it when it works, not before. That matches the
+plan's own gate better than a scaffold would.
+
+**Why it cannot be built here.** Verified in this repository: there is **no** `wrangler.toml`, no Workers AI binding,
+no KV/D1 namespace, no AI function under `functions/api/` (only `contact.js`, `rates.js`, `subscribe.js`), and no
+authenticated free-plan token. A helper with no corpus would render a chat box that cannot answer — a public promise
+with nothing behind it, which is the exact defect class this plan exists to remove (D5, D6, the KKday card, the Visa
+Odds Checker).
+
+**Rejected: offline-mock scaffolding.** A UI with stubbed answers and gates tested against fixtures would look
+finished and behave like a lie. Gates proven against *mock* ingestion prove nothing about real ingestion — the exact
+lesson from WP1, where the visa guard passed on fictional data twice.
+
+**To unblock, in order:**
+1. Create the Cloudflare Workers project and bind Workers AI + one KV namespace; record the binding names in `wrangler.toml`. (Owner action — needs the account.)
+2. Choose the model from the **free-verified** set and confirm its plan requirement in the dashboard *before* shipping. `@cf/moonshotai/kimi-k2.6`, `kimi-k2.7-code` and `@cf/zai-org/glm-5.2` now require Workers **Paid** (changelog 2026-07-28) and fail with 403 / error 5035 on Free.
+3. Author the corpus from sources that already exist and are dated: the Umrah hub, the dated Saudi source reviews, and `SHARED_UMRAH_BANNED_PATTERNS`. No new research.
+4. Then build UI + gates + limit messaging + negative controls, in that order.
+
+**Budget reality.** 10,000 neurons/day on Free ≈ **74 conversations/day** (70B, ~2,000 in / 400 out) or **~120/day**
+(8B). Overage fails closed — no bill — which is the right failure mode. Instrument refusals and cap-hits from day one.
+
+**Still-unanswered question for the owner:** the corpus is Umrah-only per the plan. Is that the intent, or should the
+first version answer broader travel questions? A narrow box that refuses most questions is honest but may disappoint;
+a broad box without a broad corpus is the failure mode above.
+
+**Original scope, unchanged:**
 
 **Objective.** One scoped helper that answers only from verified content, with the limit handled as a feature.
 

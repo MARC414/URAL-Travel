@@ -114,10 +114,6 @@ export const CURATED_BLOG_SCENES: Readonly<
     en: "Foreign banknotes and a wallet beside a laptop showing a spreadsheet",
     bn: "স্প্রেডশিট খোলা ল্যাপটপের পাশে বৈদেশিক মুদ্রার নোট ও মানিব্যাগ",
   },
-  "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": {
-    en: "Passport and boarding passes on a desk beside tea, a camera, and a city view",
-    bn: "জানালার বাইরের শহরের দৃশ্যের পাশে টেবিলে পাসপোর্ট, বোর্ডিং পাস, চা ও ক্যামেরা",
-  },
   "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": {
     en: "A contactless payment terminal beside a wallet, banknotes, and payment cards",
     bn: "মানিব্যাগ, বৈদেশিক মুদ্রার নোট ও কার্ডের পাশে কন্ট্যাক্টলেস পেমেন্ট টার্মিনাল",

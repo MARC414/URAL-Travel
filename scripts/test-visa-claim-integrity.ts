@@ -20,7 +20,7 @@
  * prose assertions, and rendering them would need a browser.
  */
 
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync as fsExists, readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -297,6 +297,185 @@ test("no tool tab can ship unmeasured", () => {
     tools.includes("const TOOL_ID_BY_TAB: Record<ActiveTool, ToolId>"),
     "TOOL_ID_BY_TAB is Partial again — a new tool could ship without measurement"
   );
+});
+
+// ---------------------------------------------------------------------------
+// Payments: the site must never imply URAL takes the money.
+// ---------------------------------------------------------------------------
+
+/**
+ * Q4 (owner, 7 Nov 2026): URAL takes no payment for travel services. The risk
+ * is not a direct claim — those are gone — but a *silent subject*: an article
+ * that says "message the desk ... pay by bKash" on URAL's own domain, leaving
+ * the reader to assume URAL is the desk. A disclaimer at the end of the page is
+ * not enough when the instruction itself implies it.
+ */
+test("no article instructs the reader to pay or send documents without naming the recipient", () => {
+  const offenders: string[] = [];
+  const paymentInstruction =
+    /(pay|send|message)\s+(the\s+)?desk\b|message our desk|pay in BDT|pay by bank transfer, \*\*bKash\*\*/i;
+  for (const file of contentFiles) {
+    const source = stripComments(readFileSync(file, "utf8"));
+    source.split("\n").forEach((line, i) => {
+      if (!paymentInstruction.test(line)) return;
+      // A nearby explicit disclaimer satisfies the rule.
+      const context = source.slice(Math.max(0, i - 2000), i + 2000);
+      const namesAudience = /(agency|agent|airline|platform|hotel|desk|office)/i.test(line);
+      const disclaims = /URAL is not that desk|not to URAL|does not take your payment|agency you (have )?chosen/i.test(context);
+      if (namesAudience && disclaims) return;
+      if (!/desk/i.test(line)) return; // unambiguous subjects are fine
+      offenders.push(`${path.relative(ROOT, file)}:${i + 1} "${line.trim().slice(0, 90)}"`);
+    });
+  }
+  assert(
+    offenders.length === 0,
+    `payment instructions with an unnamed 'desk':\n    ${offenders.join("\n    ")}`
+  );
+});
+
+// ---------------------------------------------------------------------------
+// Deleted articles: redirect the URL, don't keep linking to it.
+// ---------------------------------------------------------------------------
+
+/**
+ * A 301 is for outside traffic. If the site itself still links to a deleted
+ * page, that visitor takes an avoidable extra hop, and the link is a promise the
+ * page still exists. Every slug redirected in `public/_redirects` must therefore
+ * be absent from src/, scripts/ and index.html — except the redirect file itself.
+ */
+test("no internal link points at a URL that only exists to be redirected", () => {
+  const redirects = read("public/_redirects");
+  const redirectedBlogSlugs = [...redirects.matchAll(/^\/blog\/([a-z0-9-]+)\s+\S+\s+301$/gm)].map(
+    (match) => match[1]
+  );
+  assert(redirectedBlogSlugs.length > 0, "expected at least one redirected blog slug");
+
+  const offenders: string[] = [];
+  const files = [
+    ...contentFiles,
+    ...walk(path.join(ROOT, "scripts")).filter((file) => file !== import.meta.filename),
+    path.join(ROOT, "index.html"),
+  ];
+  for (const file of files) {
+    const source = stripComments(readFileSync(file, "utf8"));
+    for (const slug of redirectedBlogSlugs) {
+      // An in-app upgrade (a legacy-URL normaliser) is the same decision as the
+      // edge 301, written twice on purpose so client and edge agree. It maps the
+      // URL away rather than linking to it, so it is not a dangling link.
+      const upgrades = new RegExp(
+        `(if\\(?\\s*|===?\\s*)[\"\`](/(bn/)?blog/${slug})[\"\`][\\s\\S]{0,120}?return\\s+[\"\`]`
+      ).test(source);
+      if (upgrades) continue;
+      if (source.includes(`/blog/${slug}`)) offenders.push(`${path.relative(ROOT, file)} -> /blog/${slug}`);
+    }
+  }
+  assert(offenders.length === 0, `internal links to redirected URLs:\n    ${offenders.join("\n    ")}`);
+});
+
+test("every redirected blog URL really is gone from the build", () => {
+  const redirects = read("public/_redirects");
+  const slugs = [...redirects.matchAll(/^\/blog\/([a-z0-9-]+)\s+\S+\s+301$/gm)].map((m) => m[1]);
+  const distDir = path.join(ROOT, "dist");
+  if (!fsExists(distDir)) return; // build not run: nothing to assert
+  const stillBuilt = slugs.filter((slug) => fsExists(path.join(distDir, "blog", `${slug}.html`)));
+  assert(stillBuilt.length === 0, `redirected but still prerendered: ${stillBuilt.join(", ")}`);
+});
+
+// ---------------------------------------------------------------------------
+// Affiliate honesty: a commission link must say so.
+// ---------------------------------------------------------------------------
+
+/**
+ * RULE: any component that sends the reader to an affiliate partner must
+ * disclose that URAL may earn a commission. This is not about taste — an
+ * undisclosed paid link is a regulatory problem in the UK (CAP/CMA) and the EU,
+ * and it is indefensible on a site whose whole pitch is that it does not
+ * pretend. JourneyHelpPanel already did this correctly; AirHelpWidget opened
+ * partner links with no statement at all until 7 Nov 2026.
+ */
+test("the site carries a conspicuous site-wide affiliate disclosure", () => {
+  // Most partner surfaces rely on this footer disclosure, which is why a
+  // per-component rule would be wrong: it asserts a fact that is already true
+  // once, globally. What must not happen is losing it.
+  const app = read("src/App.tsx");
+  const hasDisclosure =
+    /Affiliate disclosure:/i.test(app) && /may earn a commission at no extra cost to you/i.test(app);
+  assert(
+    hasDisclosure,
+    "the footer affiliate disclosure (\"Some outbound links are affiliate links; we may earn a commission at no extra cost to you\") is missing from src/App.tsx"
+  );
+  const bnDisclosure = /অ্যাফিলিয়েট ডিসক্লোজার/.test(app) && /কমিশন/.test(app);
+  assert(bnDisclosure, "the Bengali affiliate disclosure is missing");
+});
+
+test("a tab that is wholly an affiliate placement discloses locally, not just in the footer", () => {
+  // An 11px footer line does not carry a whole tab whose only content is a
+  // commissioned CTA. AirHelp is presented in the Tools tab bar next to tools
+  // URAL actually built, so the local statement is what stops the implication.
+  const airhelp = read("src/components/AirHelpWidget.tsx");
+  const discloses =
+    /affiliate partner, AirHelp/i.test(airhelp) && /may earn a commission if you claim/i.test(airhelp);
+  assert(discloses, "AirHelpWidget no longer discloses the AirHelp affiliate relationship locally");
+});
+
+test("the affiliate guard would catch a component that dropped its disclosure", () => {
+  // Negative control on the checker itself: the disclosure regex must match the
+  // shipped wording, or the rule above is vacuous.
+  const shipped =
+    "URAL may earn a commission if you claim through them, at no extra cost to you.";
+  assert(
+    /may earn a commission|commission if you (buy|claim)/i.test(shipped),
+    "the disclosure regex no longer matches the wording actually used on the site"
+  );
+});
+
+// ---------------------------------------------------------------------------
+// The disclosure must survive without JavaScript.
+// ---------------------------------------------------------------------------
+
+/**
+ * The source-reading check above cannot see this, and that is the whole point:
+ * a disclosure that only exists in a React component is absent for crawlers and
+ * for anyone whose bundle failed to load. Affiliate links ARE prerendered into
+ * static HTML, so the statement must be too. Asserted against dist/, and skipped
+ * cleanly when no build exists so the suite works before `npm run build`.
+ */
+test("every prerendered page that links a partner carries the disclosure in static HTML", () => {
+  const distDir = path.join(ROOT, "dist");
+  if (!fsExists(distDir)) {
+    console.log("    (dist/ not built — run npm run build to exercise this check)");
+    return;
+  }
+  const PARTNER = /klook\.tpo\.li|airhelp\.com|tiqets|aviasales|emrld|travelpayouts\.(com|io)/i;
+  const pages: string[] = [];
+  const walkHtml = (dir: string) => {
+    for (const entry of readdirSync(dir)) {
+      const full = path.join(dir, entry);
+      if (statSync(full).isDirectory()) walkHtml(full);
+      else if (entry.endsWith(".html")) pages.push(full);
+    }
+  };
+  walkHtml(distDir);
+
+  const offenders: string[] = [];
+  for (const page of pages) {
+    const html = readFileSync(page, "utf8");
+    if (!PARTNER.test(html)) continue;
+    if (!html.includes('data-affiliate-disclosure="static"')) offenders.push(path.relative(distDir, page));
+  }
+  assert(
+    offenders.length === 0,
+    `pages with partner links but no static disclosure:\n    ${offenders.slice(0, 10).join("\n    ")}`
+  );
+});
+
+test("the static disclosure exists in both locales", () => {
+  const distDir = path.join(ROOT, "dist");
+  if (!fsExists(distDir)) return;
+  const en = readFileSync(path.join(distDir, "tools.html"), "utf8");
+  const bn = readFileSync(path.join(distDir, "bn", "tools.html"), "utf8");
+  assert(/Affiliate disclosure:/i.test(en), "the English static disclosure is missing from /tools");
+  assert(/অ্যাফিলিয়েট ডিসক্লোজার/.test(bn), "the Bengali static disclosure is missing from /bn/tools");
 });
 
 // ---------------------------------------------------------------------------

@@ -663,7 +663,6 @@ Endorsement ও activation আলাদা বিষয়। ব্যাংক
       { text: "ওমরাহর জন্য শরীয়াহ-সম্মত ইসলামিক ডুয়েল-কারেন্সি কার্ড", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account বনাম সাধারণ Travel Quota ($300 লিমিট সমাধান)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "নগদ রিয়াল/ডলার বনাম কার্ড (local currency বেছে DCC এড়ান)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
-      { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুকিং", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "তারিখসহ কারেন্সি রেফারেন্স কনভার্টার", path: "/tools/currency-converter" },
     ],
     affiliateCTA: {
@@ -2791,7 +2790,6 @@ KL Sentral থেকে মাত্র ৫ মিনিট দূরত্ব�
     internalLinks: [
       { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "মক্কা ও মদিনা হোটেল জোন এবং Haramain বুলেট ট্রেন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "কার্ড নেই? bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুক করুন", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "টাকা ও ব্যাংকিং হাব: এনডোর্সমেন্ট, কার্ড, USD 300 নিয়ম ও NOC", path: "/banking" },
       { text: "১০ দিনের DIY Umrah BDT বাজেট ক্যালকুলেটর", path: "/umrah" },
       { text: "তারিখসহ কারেন্সি রেফারেন্স কনভার্টার", path: "/tools/currency-converter" },
@@ -2884,72 +2882,12 @@ RFCD card কি POS বা ATM limit-ও সরিয়ে দেয়?
       { text: "Passport Dollar Endorsement ও Card Activation Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "বিদেশে Cash বনাম Card (local currency বেছে DCC এড়ান)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
       { text: "Umrah-এর জন্য Shariah-Compliant Islamic Dual-Currency Card", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-      { text: "Card নেই? bKash বা Bank Transfer-এ BDT Payment", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Dual-Currency Card Fee ও Markup Calculator", path: "/tools/currency-converter" },
     ],
     affiliateCTA: {
       provider: "aviasales",
       headline: "Bank-কে বলার আগে Flight Fare তুলনা করুন",
       body: "Live flight price ও checkout-এর exact amount দেখুন, তারপর payment-এর আগে documented travel-payment approval সম্পর্কে card issuer-কে জিজ্ঞেস করুন।",
-    },
-  },
-
-  "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": {
-        title: "Dual-Currency Card ছাড়াই BDT-তে ফ্লাইট, মক্কা-মদিনার হোটেল ও এয়ারপোর্ট ট্রান্সফারের দাম মেটানোর নিয়ম",
-    summary:
-                        "অনলাইনে কম ভাড়া বা হারামের কাছে হোটেলের দাম দেখার সময় প্রতিটি বাংলাদেশি ভ্রমণকারীর হাতে এনডোর্স করা ডুয়েল-কারেন্সি কার্ড থাকে না। এই গাইডে টাকায় দাম মেটানোর পথটি সৎভাবে ব্যাখ্যা করা হয়েছে: কে BDT-তে বুকিং settlement করতে পারে, airline PNR ও হোটেল ভাউচারে কী থাকতে হবে, সর্বমোট quote-এ কোন চার্জ ধরা পড়ে, আর ঢাকা এয়ারপোর্টের ইমিগ্রেশন ফাইলের জন্য কী রাখতে হবে। সঙ্গে ব্যাখ্যা করা হয়েছে URAL-এর নিজের ভূমিকা কোথায় শেষ: যাচাই করা তথ্য, অফিশিয়াল পোর্টাল ও অ্যাফিলিয়েট পার্টনার, আর প্রশ্নের উত্তর WhatsApp বা contact form-এ।",
-    category: "Banking & Payments",
-    date: "২৭ সেপ্টেম্বর, ২০২৬",
-    author: "ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)",
-    readTime: "৬ মিনিট পড়া",
-    content: `ধরুন অনলাইনে ভালো একটি **ঢাকা–জেদ্দা ওমরাহ ভাড়া** বা মসজিদুল হারামের হাঁটার দূরত্বে একটি হোটেল দেখলেন—কিন্তু হাতে **ডুয়েল-কারেন্সি কার্ড** নেই, পাসপোর্টে ডলার এনডোর্সমেন্ট করা নেই, অথবা কার্ডের একবারের পেমেন্ট-সীমা checkout আটকে দিচ্ছে। ঢাকা, চট্টগ্রাম, সিলেটসহ সারা দেশের পরিবারের জন্য স্থানীয় ট্রাভেল ডেস্কের মাধ্যমে **বাংলাদেশি টাকায় (BDT)**—ব্যাংক ট্রান্সফার, **bKash** বা **Nagad**-এ—বুকিং সম্পন্ন করা এমন একটি পথ যা কার্ড ছাড়াই চলে।
-
-১. কেন কিছু বাংলাদেশি ভ্রমণকারী BDT বুকিং ডেস্ক বেছে নেন
-টাকায় settlement একটি ব্যবহারিক ব্যবস্থা, বাংলাদেশ ব্যাংকের কোনো পণ্য নয়। তিনটি কারণে ভ্রমণকারীরা এটি ব্যবহার করেন:
-- **বিদেশের খরচের জন্য পাসপোর্টের ট্রাভেল কোটা অক্ষত রাখা:** দেশ ছাড়ার আগে ফ্লাইট ও হোটেল ভাউচার BDT-তে পরিশোধ করলে পাসপোর্টে এনডোর্স করা বৈদেশিক মুদ্রা বিদেশে খরচ, খাবার ও জরুরি প্রয়োজনে খোলা থাকে। entitlement একটি ceiling, যা ব্যাংক ভ্রমণের কাগজ দেখে ছাড়ে; এটি আপনাকে খরচ করতেই হবে এমন নির্দিষ্ট অঙ্ক নয় [1]।
-- **পাসপোর্ট না থাকলে বা কার্ড তৈরি না হলে:** প্রোমোশনাল সিট দ্রুত শেষ হয়। পাসপোর্ট দূতাবাস বা ভিসা প্রসেসিংয়ে থাকলে শাখায় গিয়ে এনডোর্স করা যায় না, আর কার্ড সময়মতো চালু নাও হতে পারে।
-- **ভিসা ও এয়ারপোর্ট যাচাইয়ের কাগজ:** দূতাবাস ও ঢাকা এয়ারপোর্টের ইমিগ্রেশন কাউন্টার যাত্রীর নাম ও রেফারেন্স নম্বরসহ পরিশোধিত, নিশ্চিত বুকিং চাইতে পারে। ডেস্ক ঠিক সেটাই দেয়।
-
-২. ডেস্ককে টাকা দেওয়ার আগে কী যাচাই করবেন
-ডেস্ক টাকায় settlement করে এবং আপনাকে airline PNR ও হোটেল ভাউচার দেয়। এটিকে আপনার ও ডেস্কের মধ্যে service ব্যবস্থা হিসেবে দেখুন, ব্যাংকের পণ্য নয়, আর টাকা দেওয়ার আগে এগুলো যাচাই করুন:
-- **সর্বমোট BDT quote:** একই তারিখ ও রুমের জন্য ডেস্কের মোট দাম এয়ারলাইন্সের বা হোটেলের নিজের কার্ড-দামের সঙ্গে মিলিয়ে দেখুন, এবং কোনো conversion, service বা amendment ফি ভেতরে আছে কি না জিজ্ঞেস করুন।
-- **PNR:** এয়ারলাইন্সের ছয়-অক্ষরের PNR চেয়ে নিন এবং টিকিট ইস্যু হয়েছে ধরে নেওয়ার আগে সরাসরি এয়ারলাইন্সের কাছে যাচাই করুন।
-- **ভাউচার:** হোটেল ভাউচারে প্রতিটি অতিথির নাম, হোটেল, তারিখ ও হোটেল যাচাই করতে পারে এমন booking reference থাকা উচিত।
-- **বাতিল ও ফেরতের শর্ত:** এয়ারলাইন্সের fare rule ও হোটেলের cancellation policy লিখিতভাবে পড়ুন, আর সফর বদলালে ফেরত কে বহন করবে তা যাচাই করুন।
-- **প্রাপক:** ডেস্ক লিখিতভাবে যে business account বা wallet দেয়, শুধু সেখানেই টাকা দিন এবং রসিদ রাখুন।
-
-৩. ধাপে ধাপে: BDT বুকিং কীভাবে কাজ করে
-ধাপ ১: ফ্লাইট, হোটেল জোন বা ট্রান্সফার বাছুন:
-- ডেস্ক যে তারিখ, যাত্রীসংখ্যা ও রুট বা হোটেল এলাকার quote দেবে তা ঠিক করুন—এই সাইটের flight search ও Umrah planning টুল ব্যবহার করে।
-ধাপ ২: আপনার তথ্য পাঠান:
-- ডেস্ককে ভ্রমণের তারিখ, রুট বা হোটেল পছন্দ এবং পাসপোর্টের bio-page স্ক্যান পাঠান, যাতে PNR-এ যাত্রীর নাম নির্ভুল বানানে থাকে।
-- ডেস্ক দেয়া rate-এ convert করা সর্বমোট BDT quote পাঠায়।
-ধাপ ৩: BDT-তে পরিশোধ করে কাগজ নিন:
-- ব্যাংক ট্রান্সফার, **bKash** বা **Nagad**-এ পরিশোধ করুন, তারপর airline e-ticket ও তার PNR, হোটেল ভাউচার এবং কোনো transfer confirmation ইমেইল বা WhatsApp-এ নিন—এয়ারপোর্টের ফাইলের জন্য প্রস্তুত।
-- কোনো Umrah অংশ থাকলে বুক করার আগে বর্তমান ভিসা, পারমিট ও স্বাস্থ্য শর্ত অফিশিয়াল সৌদি পাতায় যাচাই করুন, ব্লগে নয় [3]।
-
-৪. BDT-তে কী কী settlement করা যায়
-- **ওমরাহর অংশ:** ফ্লাইট, মক্কা ও মদিনার হোটেল, হারামাইন হাই-স্পিড ট্রেন ও প্রাইভেট ট্রান্সফার—প্রতিটি যথাযথ ভিসা বা পারমিট থাকা এবং এয়ারলাইন্স ও হোটেলের নিজস্ব শর্ত সাপেক্ষে।
-- **এশিয়া ও মধ্যপ্রাচ্যের ছুটির অংশ:** নেপাল, থাইল্যান্ড, মালয়েশিয়া, মালদ্বীপ, সিঙ্গাপুর ও UAE-এর ফ্লাইট, হোটেল ও এয়ারপোর্ট ট্রান্সফার—ভ্রমণকারীর নিজস্ব ভিসা অবস্থা সাপেক্ষে।
-
-৫. অনেক সফরে কার্ডই এখনো ডিফল্ট
-BDT ডেস্ক একটি কাজের বিকল্প, আপনার নিয়ন্ত্রণে থাকা কার্ডের বিকল্প নয়। সময়মতো পাসপোর্ট এনডোর্স ও ডুয়েল-কারেন্সি কার্ড চালু করতে পারলে বুকিং, PNR ও রসিদ আপনার নিজের নাম ও account-এ থাকে। USD 300 একবারের অনলাইন-পেমেন্ট নিয়ম এবং এর বেশি documented payment-এ ব্যাংকের সিদ্ধান্তের ব্যাখ্যা নিচে দেওয়া ক্লাস্টার গাইডে [2]।
-
-৬. URAL-এর অবস্থান
-URAL একটি স্বাধীন ট্রাভেল-ইনফরমেশন ও অ্যাফিলিয়েট প্ল্যাটফর্ম: এটি যাচাই করা গাইড প্রকাশ করে, অফিশিয়াল পোর্টাল এবং প্রতিটি সেবা যে প্রতিষ্ঠান ইস্যু করে তার লিংক দেয়, আর WhatsApp বা contact form-এ প্রশ্নের উত্তর দেয়। বুকিং সম্পন্ন হয় এয়ারলাইন্স, হোটেল, টিকিট বিক্রি করা প্ল্যাটফর্ম বা আপনার বেছে নেওয়া লাইসেন্সপ্রাপ্ত এজেন্সির সঙ্গে।`,
-    internalLinks: [
-      { text: "টাকা ও ব্যাংকিং হাব: এনডোর্সমেন্ট, কার্ড, USD 300 নিয়ম ও NOC", path: "/banking" },
-      { text: "১০ দিনের DIY Umrah BDT বাজেট ক্যালকুলেটর ও হোটেল জোন", path: "/umrah" },
-      { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
-      { text: "মক্কা ও মদিনা হোটেল জোন এবং Haramain বুলেট ট্রেন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "তারিখসহ কারেন্সি রেফারেন্স কনভার্টার", path: "/tools/currency-converter" },
-      { text: "লাইভ গ্লোবাল ফ্লাইট সার্চ ও ভাড়া বেঞ্চমার্ক", path: "/flights" },
-    ],
-    affiliateCTA: {
-      provider: "aviasales",
-            headline: "প্রথমে লাইভ ফ্লাইট ভাড়া যাচাই করুন, তারপর পেমেন্টের পথ ঠিক করুন",
-      body: "ঢাকা থেকে যেকোনো রুটের বর্তমান সর্বনিম্ন বিমান ভাড়া একনজরে দেখে নিন।",
     },
   },
 
@@ -3274,7 +3212,6 @@ URAL একটি স্বাধীন ট্রাভেল-ইনফরমে
       { text: "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
       { text: "ব্যাংককে হালাল খাবারের সেরা জায়গা (Pratunam ও Sukhumvit Soi 3)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
       { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে ব্যাংকক ফ্লাইট ও হোটেল বুকিং", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
     ],
     affiliateCTA: {
       provider: "kiwitaxi",
@@ -3411,7 +3348,6 @@ eSIM-এর মেয়াদ কখন থেকে শুরু হয়?
       { text: "মালদ্বীপে দ্বীপ ও থাকার জায়গা তুলনা", path: "/hotels/maldives-hotels" },
       { text: "মাত্র ৭৫,০০০ টাকায় মালদ্বীপ ভ্রমণ (Maafushi গাইড)", path: "/blog/maldives-budget-trip-bangladesh-maafushi" },
       { text: "নতুন পাসপোর্টে (Fresh Passport) ৩ ধাপে Travel History তৈরির গাইড", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
-      { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে মাল্টি-সিটি ফ্লাইট বুকিং", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Maldives ৫ দিনের বিস্তারিত BDT খরচ ক্যালকুলেটর", path: "/costs/maldives-costs" },
     ],
     affiliateCTA: {

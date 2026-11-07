@@ -263,17 +263,19 @@ export const BankingHubLandingPage: React.FC<BankingHubLandingPageProps> = ({
                   </div>
                 </div>
 
-                <a
-                  href={blogHref(method.nodeSlug)}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    onNavigate(blogHref(method.nodeSlug));
-                  }}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy hover:text-brand-navy/70 transition-colors"
-                >
-                  <span>{isBn ? method.nodeLabelBn : method.nodeLabel}</span>
-                  <ArrowRight size={13} aria-hidden="true" />
-                </a>
+                {method.nodeSlug && (
+                  <a
+                    href={blogHref(method.nodeSlug)}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      onNavigate(blogHref(method.nodeSlug!));
+                    }}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy hover:text-brand-navy/70 transition-colors"
+                  >
+                    <span>{isBn ? method.nodeLabelBn : method.nodeLabel}</span>
+                    <ArrowRight size={13} aria-hidden="true" />
+                  </a>
+                )}
               </article>
             );
           })}

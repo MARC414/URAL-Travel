@@ -146,7 +146,7 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
             {onNavigate && saleActive && (
               <button
                 type="button"
-                onClick={() => onNavigate("/blog/kkday-10-10-winter-sale-japan-tours-passes-guide")}
+                onClick={() => onNavigate("/experiences?region=asia")}
                 className="text-[11px] text-cyan-300 hover:text-white underline underline-offset-2 font-mono text-center cursor-pointer"
               >
                 {isBn ? "১০.১০ সেল গাইড ও প্রডাক্ট লিস্ট পড়ুন →" : "Read Full 10.10 Sale Guide & Products →"}
@@ -376,7 +376,7 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
             {onNavigate && saleActive && (
               <button
                 type="button"
-                onClick={() => onNavigate("/blog/kkday-10-10-winter-sale-japan-tours-passes-guide")}
+                onClick={() => onNavigate("/experiences?region=asia")}
                 className="w-full bg-white/10 hover:bg-white/20 text-white font-semibold text-xs py-2.5 px-4 rounded-xl inline-flex items-center justify-center gap-1.5 transition-colors border border-white/15 cursor-pointer"
               >
                 <span>{isBn ? "১০.১০ প্রডাক্ট গাইড ও টিপস পড়ুন" : "Read 10.10 Curated Products Guide"}</span>

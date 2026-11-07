@@ -176,7 +176,6 @@ const BLOG_IMAGE_MAP: Record<string, string> = {
   "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide": "paris_louvre_london_landmarks_1790485782111.jpg",
   "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah": "islamic_banking_card_makkah_1790486749439.jpg",
   "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": "rfcd_foreign_currency_banking_1790486762760.jpg",
-  "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": "bdt_travel_concierge_voucher_1790486777146.jpg",
   "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": "pos_card_terminal_currency_1790486792551.jpg",
   "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": "bangkok_wat_arun_chao_phraya_1790486821534.jpg",
   "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration": "kuala_lumpur_petronas_twilight_1790486835902.jpg",
@@ -666,10 +665,6 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
       text: "Shariah-compliant Islamic dual-currency cards for Umrah",
     },
     {
-      href: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
-      text: "How to pay for flights and hotels in BDT without a dual-currency card",
-    },
-    {
       href: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
       text: "Cash, card and choosing the local currency abroad",
     },
@@ -702,7 +697,6 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
   "/tools/budget-calculator": [
     { href: "/costs", text: "Trip cost matrices in BDT by country" },
     { href: "/blog/dual-currency-card-endorsement-bangladesh", text: "Dual-currency card endorsement and travel quota guide" },
-    { href: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card", text: "How to pay for travel in BDT when you have no card" },
   ],
   "/tools/packing-checklist": [
     { href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go", text: "Dhaka Airport outbound immigration checklist" },
@@ -726,7 +720,6 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
     { href: "/sitemap", text: "Complete site directory of every URAL guide" },
   ],
   "/contact": [
-    { href: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card", text: "How to pay for travel in BDT when you have no card" },
     { href: "/blog/dual-currency-card-endorsement-bangladesh", text: "Passport dollar endorsement and dual-currency card guide" },
     { href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go", text: "Dhaka Airport documents and outbound checklist" },
     { href: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost", text: "Umrah planning and BDT cost guide" },
@@ -1449,7 +1442,8 @@ function renderBankingHubSections(locale: "en" | "bn"): string {
     const bestFor = escapeHtml(isBn ? method.bestForBn : method.bestFor);
     const rule = escapeHtml(isBn ? method.ruleBn : method.rule);
     const watch = escapeHtml(isBn ? method.watchBn : method.watch);
-    const label = escapeHtml(isBn ? method.nodeLabelBn : method.nodeLabel);
+    // A payment method no longer links to a deleted article, so these are optional.
+    const label = escapeHtml((isBn ? method.nodeLabelBn : method.nodeLabel) ?? "");
     return `<h3>${title}</h3><p><strong>${copy(
       "Best for:",
       "কাদের জন্য:"
@@ -4863,16 +4857,45 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       attractionDataPreloadCount++;
     }
 
+/**
+ * Affiliate disclosure must exist BEFORE JavaScript runs.
+ *
+ * Affiliate links are prerendered into static HTML (60 pages at last count), but
+ * the footer disclosure was client-rendered only — so a crawler, a reader with JS
+ * blocked, or anyone whose bundle failed saw paid links with no statement. The
+ * source-reading guard in test-visa-claim-integrity.ts structurally cannot catch
+ * that, which is why this is enforced in the emitted HTML rather than the TSX.
+ *
+ * Wording deliberately mirrors the client footer (src/App.tsx) so the two never
+ * diverge: "Some outbound links are affiliate links; we may earn a commission at
+ * no extra cost to you."
+ */
+function staticAffiliateDisclosure(isBn: boolean): string {
+  return isBn
+    ? '<p data-affiliate-disclosure="static" style="max-width:1100px;margin:20px auto 0;padding:16px 24px;border-top:1px solid #cbd5e1;font-size:12px;line-height:1.6;color:#475569;font-family:system-ui,sans-serif"><strong>অ্যাফিলিয়েট ডিসক্লোজার:</strong> সাইটের কিছু আউটবাউন্ড লিংক অ্যাফিলিয়েট লিংক; আপনার অতিরিক্ত খরচ ছাড়াই URAL একটি কমিশন পেতে পারে।</p>'
+    : '<p data-affiliate-disclosure="static" style="max-width:1100px;margin:20px auto 0;padding:16px 24px;border-top:1px solid #cbd5e1;font-size:12px;line-height:1.6;color:#475569;font-family:system-ui,sans-serif"><strong>Affiliate disclosure:</strong> Some outbound links are affiliate links; we may earn a commission at no extra cost to you.</p>';
+}
+
     if (r.routePath !== "/") {
       pageHtml = pageHtml.replace(
         /<div id="root">[\s\S]*?<\/main>\s*<\/div>/,
-        `<div id="root"><main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif">${r.bodyHtml}</main></div>`
+        `<div id="root"><main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif">${r.bodyHtml}</main>${staticAffiliateDisclosure(r.routePath.startsWith("/bn"))}</div>`
       );
     }
 
     if (r.routePath === "/") {
       pageHtml = injectScheduledBlogDirectory(pageHtml);
       pageHtml = injectHomeFaq(pageHtml);
+      // The home is the one route skipped by the shell replacement above, so it
+      // needs the disclosure injected explicitly - it hosts the hotel search
+      // partner slot, and its React footer is not in the static HTML.
+      if (pageHtml.includes("</div>") && !pageHtml.includes('data-affiliate-disclosure="static"')) {
+        const lastClose = pageHtml.lastIndexOf("</div>");
+        pageHtml =
+          pageHtml.slice(0, lastClose) +
+          staticAffiliateDisclosure(false) +
+          pageHtml.slice(lastClose);
+      }
       fs.writeFileSync(path.join(DIST_DIR, "index.html"), pageHtml, "utf8");
     } else if (r.routePath === "/bn") {
       // The Bengali home is served as a directory index so that /bn/ (the

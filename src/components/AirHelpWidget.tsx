@@ -96,6 +96,15 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
   if (compact) {
     return (
       <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 space-y-4">
+        {/* Affiliate disclosure: every CTA below opens AirHelp's own site, and
+            URAL may earn a commission. JourneyHelpPanel states the same thing for
+            its partner links; this widget opened partner links with no statement
+            at all. Required, not decorative. */}
+        <p className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[11px] leading-relaxed text-slate-600">
+          {isBn
+            ? "নিচের লিংকগুলো affiliate অংশীদার (AirHelp)-এর — আপনি সেখানে দাবি করালে URAL একটি কমিশন পেতে পারে, আপনার জন্য কোনো অতিরিক্ত খরচ ছাড়াই। এটি কোনো সরকারি সেবা নয় এবং ক্ষতিপূরণের নিশ্চয়তা দেয় না।"
+            : "The links below are to our affiliate partner, AirHelp. URAL may earn a commission if you claim through them, at no extra cost to you. This is not an official service and it does not guarantee compensation."}
+        </p>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">

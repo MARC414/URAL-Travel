@@ -6,6 +6,13 @@
 /og-image.jpg  /og-image.jpg  200
 
 # Canonical 301 redirects for duplicate alias routes
+# The BDT travel-desk article was deleted on 7 Nov 2026 (WP6 D3c, owner decision).
+# It described a licensed agency's pay-in-Taka route in URAL's own voice on a page
+# URAL owns, which read as URAL taking payment - it does not. Deleted rather than
+# rewritten. Both languages 301 to the banking hub, which keeps the underlying
+# guidance (endorsement, RFCD, card vs cash) without a booking promise.
+/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card   /banking   301
+/bn/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card   /bn/banking   301
 # The Visa Odds Checker was removed on 6 Nov 2026: it asserted visa rules with
 # no date or source and four of its twelve cells contradicted the Immigration
 # Department of Malaysia's own eVISA FAQ. Permanent, in both languages.

@@ -498,27 +498,6 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     isLiveBlog: false,
   },
   {
-    id: "bf-04",
-    clusterId: "banking-fx",
-    funnelStage: "BoFu (High Commercial)",
-        titleEn: "How to Pay for International Flights, Makkah Hotels & Airport Transfers in BDT via bKash/Bank Transfer (No Card Needed)",
-        titleBn: "Dual-Currency Card ছাড়াই bKash বা দেশীয় ব্যাংক ট্রান্সফারে (BDT) ফ্লাইট, ওমরাহ হোটেল ও ট্রান্সফারের দাম মেটানোর নিয়ম",
-    primaryKeyword: "book international flight with bkash bangladesh",
-        secondaryKeywords: ["book makkah hotel in bdt without credit card", "agoda booking in bdt from dhaka", "pay for flight in bdt without card"],
-        monthlyIntentSignal: "Very High · Assisted-Payment Research Intent",
-    customerPsychologyEn:
-            "Non-cardholders want a known route to pay in Taka without waiting for a card endorsement to clear, and a clear list of what to check before money moves.",
-    customerPsychologyBn:
-            "কার্ড না থাকা যাত্রীরা কার্ড এনডোর্সমেন্টের জন্য অপেক্ষা না করে টাকায় দাম মেটানোর একটি জানা পথ চান।",
-    aeoDirectAnswerEn:
-                  "Travelers without an endorsed dual-currency card can compare the airline's or hotel's own checkout, then ask a licensed travel desk or the airline's own office about paying in Taka by local bank transfer, bKash or Nagad. URAL publishes this verification checklist and links the official portals and partners.",
-    aeoDirectAnswerBn:
-                  "হাতে ডুয়েল-কারেন্সি কার্ড না থাকলে এয়ারলাইন্স বা হোটেলের নিজের checkout মিলিয়ে দেখুন, তারপর লাইসেন্সপ্রাপ্ত ট্রাভেল ডেস্ক বা এয়ারলাইন্সের নিজের অফিসে দেশীয় ব্যাংক ট্রান্সফার, বিকাশ বা নগদে BDT-তে পেমেন্টের বিকল্প জানতে চান। URAL এই যাচাই-চেকলিস্ট প্রকাশ করে এবং অফিশিয়াল পোর্টাল ও পার্টনারের লিংক দেয়।",
-        eavTriples: "BDT Settlement Without a Card (Topic) → Verification Step (Attribute) → All-in BDT Quote, Airline-Confirmed PNR, Voucher Reference (Value)",
-    targetPath: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
-    isLiveBlog: false,
-  },
-  {
     id: "bf-05",
     clusterId: "banking-fx",
     funnelStage: "ToFu (Trust & Preparation)",
