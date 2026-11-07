@@ -53,6 +53,8 @@ references:
     nameBn: "CAAB — অক্টোবর ২০২৬ NOTAM Summary (A0325/26; তালিকাভুক্ত তথ্য অনুযায়ী ৩১ অক্টোবর পর্যন্ত VGCB-তে আন্তর্জাতিক কার্যক্রম স্থগিত)"
     url: "https://new.caab.gov.bd/aip/NOTAM%20Summary.pdf"
 internalLinksEn:
+  - text: "Cox's Bazar flights, rail, hotels and trip planning"
+    path: /blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh
   - text: "Dhaka to Kathmandu flight guide (Bangladesh-origin route)"
     path: /flights/dhaka-kathmandu
   - text: "Nepal itinerary for Bangladeshi travelers (the reverse direction)"
@@ -68,6 +70,8 @@ affiliateCtaBnProvider: aviasales
 affiliateCtaBnHeadline: "লাইভ ভাড়ায় KTM–DAC–CXB সংযোগটি যাচাই করুন"
 affiliateCtaBnBody: "পর্যালোচনার তারিখে কাঠমান্ডু–কক্সবাজার সরাসরি কোনো ফ্লাইট পাওয়া যায়নি, তাই বাস্তব যাচাইটি দুই লেগের সার্চ: আপনার তারিখে KTM থেকে CXB সার্চ করে দেখুন আসলে একটানা ভাড়াসহ itinerary দেখানো হয় কি না। টাকা দেওয়ার আগে এক টিকিট/PNR, ব্যাগেজ ভাতা ও সংযোগের শর্ত নিশ্চিত করুন — মানচিত্রে রুট থাকা মানে বিক্রির জন্য সিট থাকা নয়।"
 internalLinksBn:
+  - text: "কক্সবাজারের ফ্লাইট, রেল, হোটেল ও ট্রিপ পরিকল্পনা"
+    path: /blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh
   - text: "ঢাকা–কাঠমান্ডু ফ্লাইট গাইড (বাংলাদেশ থেকে নেপাল)"
     path: /flights/dhaka-kathmandu
   - text: "বাংলাদেশি ভ্রমণকারীদের জন্য নেপাল itinerary (উল্টো দিকের যাত্রা)"

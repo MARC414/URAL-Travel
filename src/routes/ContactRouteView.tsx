@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { SERVICE_CONTACT_FAQS } from "../hooks/useSeoMeta";
+import { BN_SERVICE_CONTACT_FAQS } from "../utils/bn-faq-schema";
 
 import { ResponsiveImage } from "../components/ResponsiveImage";
 
@@ -1005,7 +1006,7 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
             ]}
 
-            faqs={SERVICE_CONTACT_FAQS}
+            faqs={isBn ? BN_SERVICE_CONTACT_FAQS : SERVICE_CONTACT_FAQS}
 
           />
 

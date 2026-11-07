@@ -140,7 +140,7 @@ import {
   toEnglishBasePath,
 } from "../src/utils/localeRoutes";
 import { BENGALI_SEO_COPY, getBengaliSeoCopy } from "../src/utils/seoCopy";
-import { getBnFaqSchemaForPage, BN_LANDING_FLIGHT_FAQS } from "../src/utils/bn-faq-schema";
+import { getBnFaqSchemaForPage, BN_LANDING_FLIGHT_FAQS, BN_SERVICE_CONTACT_FAQS } from "../src/utils/bn-faq-schema";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
   DESTINATION_PARTNER_COPY,
@@ -3825,6 +3825,26 @@ function buildBengaliBody(
     return `<article>${parts.join("")}</article>`;
   }
 
+  if (englishPath === "/contact") {
+    parts.push(
+      bnFactList([
+        { label: "চ্যানেল", value: "WhatsApp বা contact form" },
+        { label: "ফোন", value: "+8801784385335" },
+        { label: "পরিচয়", value: "স্বাধীন প্ল্যাটফর্ম · এজেন্সি নয়" },
+        { label: "সাড়া দেওয়ার সময়", value: "ঢাকার সময়ে 15 থেকে 30 মিনিট" },
+      ]),
+      bnLinkList("এই পাতা থেকে যা করা যায়", [
+        { label: "ফ্লাইট গাইড", path: "/flights" },
+        { label: "ভিসা গাইড", path: "/visa" },
+        { label: "ভ্রমণ খরচ", path: "/costs" },
+        { label: "উমরাহ প্ল্যানার", path: "/umrah" },
+        { label: "ট্রাভেল ব্লগ", path: "/blog" },
+      ]),
+      bnFaqList("যোগাযোগ নিয়ে প্রশ্নোত্তর", BN_SERVICE_CONTACT_FAQS)
+    );
+    return `<article>${parts.join("")}</article>`;
+  }
+
   // Home + static/hub pages: Bengali intro plus a directory of the main hubs.
   const hubLinks = [
     { label: "ফ্লাইট গাইড", path: "/flights" },
@@ -4189,6 +4209,15 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           serviceType: "ভ্রমণ তথ্য",
         })
       );
+      const bnContactFaq = stripContext(
+        getBnFaqSchemaForPage("contact", undefined, true, canonicalUrl)
+      );
+      if (bnContactFaq) {
+        bnContactFaq["@id"] = `${canonicalUrl}#faq`;
+        bnContactFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+        bnContactFaq["inLanguage"] = "bn-BD";
+        extraGraphNodes.push(bnContactFaq);
+      }
     } else if (englishPath === "/privacy") {
       extraGraphNodes.push(
         webPageSchema({

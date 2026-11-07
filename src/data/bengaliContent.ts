@@ -453,6 +453,8 @@ Tourist বা stopover visa দিয়ে ফরজ হজ করা যা�
 Umrah ও Rawdah permit কোথায় বুক করব?
 প্রতিটি কাজের অফিশিয়াল Ministry/Nusuk service ব্যবহার করুন। এগুলো আলাদা অ্যাপয়েন্টমেন্ট; live availability ও বর্তমান booking নির্দেশনা প্রযোজ্য। Account বা initial reservation-কে নিশ্চিত প্রবেশ না ধরে confirmation ও entry-code access যাচাই করুন [১৫–১৬]।`,
     internalLinks: [
+      { text: "জিয়ারতের স্থান ও পরিবহনের শর্ত যাচাই", path: "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide" },
+      { text: "দুবাইয়ে যাত্রাবিরতি ও ভ্রমণের পরিকল্পনা", path: "/destinations/dubai-guide" },
       { text: "Nusuk নিবন্ধন, Visa Bio ও Rawdah যাচাই", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Saudi stopover: আলাদা ৯৬ ঘণ্টার সফর", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
       { text: "হোটেলে প্রবেশ ও Haramain রেল পরিকল্পনা", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
@@ -662,7 +664,7 @@ Endorsement ও activation আলাদা বিষয়। ব্যাংক
       { text: "RFCD Account বনাম সাধারণ Travel Quota ($300 লিমিট সমাধান)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "নগদ রিয়াল/ডলার বনাম কার্ড (local currency বেছে DCC এড়ান)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
       { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুকিং", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
-      { text: "ডুয়েল-কারেন্সি কার্ড fee ও markup ক্যালকুলেটর", path: "/tools?tab=currency" },
+      { text: "তারিখসহ কারেন্সি রেফারেন্স কনভার্টার", path: "/tools/currency-converter" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -674,7 +676,7 @@ Endorsement ও activation আলাদা বিষয়। ব্যাংক
   "top-budget-family-destinations-from-dhaka": {
     title: "ঢাকা থেকে পরিবারের সাথে ঘোরার সেরা ৬টি বাজেট ফ্রেন্ডলি দেশ (2026 — BDT খরচ ও Visa তুলনা)",
     summary:
-      "ছোট বাচ্চা, স্ত্রী বা বয়স্ক বাবা-মাকে নিয়ে বাংলাদেশ থেকে বিদেশে ফ্যামিলি ট্যুরের পরিকল্পনা করতে গেলে ফ্লাইটের সময়, গন্তব্যভেদে visa requirement, Halal খাবারের সুবিধা এবং বাংলাদেশি টাকায় (BDT) মোট বাজেটের দিকে খেয়াল রাখতে হয়। এই র‍্যাঙ্কিং গাইডে ঢাকা থেকে ৫ দিনের জনপ্রতি সর্বনিম্ন খরচের ক্রমানুসারে সেরা ৬টি দেশ তুলনা করা হয়েছে: Nepal (মাত্র ৪২,০০০ টাকা থেকে, ফ্রি Visa on Arrival), Malaysia (৬৮,০০০ টাকা থেকে, অনলাইন e-Visa ও Halal খাবার), Thailand (৭২,০০০ টাকা থেকে, Safari World ও মেডিকেল চেকআপ), Maldives Local Islands (Maafushi ৭৫,০০০ টাকা থেকে), Singapore এবং Dubai। Visa approval ও live price বদলাতে পারে—বুকিংয়ের আগে বর্তমান নিয়ম যাচাই করুন। Thailand-এর visa-related charge এই trip range-এ আলাদা itemized নয়; current government e-Visa fee, bank/payment charge ও optional agency service fee আলাদা করে যাচাই করুন।",
+      "ছোট বাচ্চা, স্ত্রী বা বয়স্ক বাবা-মাকে নিয়ে বাংলাদেশ থেকে বিদেশে ফ্যামিলি ট্যুরের পরিকল্পনা করতে গেলে ফ্লাইটের সময়, গন্তব্যভেদে visa requirement, Halal খাবারের সুবিধা এবং বাংলাদেশি টাকায় মোট বাজেটের দিকে খেয়াল রাখতে হয়। এই র‍্যাঙ্কিং গাইডে ঢাকা থেকে ৫ দিনের জনপ্রতি সর্বনিম্ন খরচের ক্রমানুসারে সেরা ৬টি দেশ তুলনা করা হয়েছে: Nepal (ফ্রি Visa on Arrival), Malaysia (অনলাইন e-Visa ও Halal খাবার), Thailand (Safari World ও মেডিকেল চেকআপ), Maldives Local Islands (Maafushi), Singapore এবং Dubai। Visa approval ও live price বদলাতে পারে—বুকিংয়ের আগে বর্তমান নিয়ম যাচাই করুন। Thailand-এর visa-related charge এই trip range-এ আলাদা itemized নয়; current government e-Visa fee, bank/payment charge ও optional agency service fee আলাদা করে যাচাই করুন।",
     category: "Family & Budget",
     date: "২৬ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -712,6 +714,13 @@ Endorsement ও activation আলাদা বিষয়। ব্যাংক
 - **৫ দিনের জনপ্রতি খরচ:** **BDT 1,10,000 – BDT 1,35,000**
 - **কেন পরিবারের জন্য সেরা:** অক্টোবর থেকে মার্চ মাসের চমৎকার আবহাওয়া, শতভাগ হালাল খাবার, Burj Khalifa, Miracle Garden এবং ফ্যামিলি Desert Safari।`,
     internalLinks: [
+      { text: "প্রথম ভ্রমণে নেপাল ও থাইল্যান্ড তুলনা", path: "/blog/nepal-vs-thailand-first-trip" },
+      { text: "কলকাতা স্থলভ্রমণ ও সীমান্তের প্রস্তুতি", path: "/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide" },
+      { text: "নিজের উৎসসহ ট্রিপ বাজেট হিসাব করুন", path: "/tools/budget-calculator" },
+      { text: "নেপাল Visa on Arrival-এর যোগ্যতা ও চেকলিস্ট", path: "/visa/nepal-visa" },
+      { text: "থাইল্যান্ড e-Visa ও ঢাকার মিশনের নির্দেশনা", path: "/visa/thailand-visa" },
+      { text: "মালয়েশিয়া eVisa ও MDAC-এর চেকলিস্ট", path: "/visa/malaysia-visa" },
+      { text: "মালদ্বীপের প্রবেশের শর্ত ও IMUGA", path: "/visa/maldives-visa" },
       { text: "Singapore ৪ দিনের বাজেট ট্যুর প্ল্যান (MRT SimplyGo ও হালাল খাবার)", path: "/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide" },
       { text: "Bumrungrad ও Bangkok Hospital মেডিকেল চেকআপ গাইড", path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" },
       { text: "মাত্র ৭৫,০০০ টাকায় মালদ্বীপ ভ্রমণ (Maafushi গাইড)", path: "/blog/maldives-budget-trip-bangladesh-maafushi" },
@@ -759,6 +768,8 @@ Nepal এবং Maldives-এ বাংলাদেশিদের জন্য �
 - আপনি কোন হোটেলে থাকছেন এবং কোন কোন জায়গা ঘুরবেন তা জেনে রাখুন (যেমন: *"আমরা কাঠমান্ডুর Thamel-এ ৩ রাত এবং Pokhara Lakeside-এ ২ রাত থাকব"*).
 - সাথে অন্তত **$300–$500 USD** সমপরিমাণ নগদ ডলার অথবা এনডোর্স করা **Dual-Currency Card ও Bank Statement** রাখুন।`,
     internalLinks: [
+      { text: "পাসপোর্ট আবেদন, পুনরায় ইস্যু ও পরিচয়ের তথ্য যাচাই", path: "/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide" },
+      { text: "ঢাকা বিমানবন্দরের প্রি-ডিপার্চার চেকলিস্ট", path: "/pre-departure" },
       { text: "নতুন পাসপোর্টে (Fresh Passport) ৩ ধাপে Travel History তৈরির গাইড", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
       { text: "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
       { text: "Malaysia e-Visa ও ফ্রি MDAC কার্ড গাইড (KLIA ইমিগ্রেশন)", path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
@@ -793,6 +804,9 @@ Nepal এবং Maldives-এ বাংলাদেশিদের জন্য �
 ৪. দেশীয় ব্যাংকের কার্ড ডিসকাউন্ট ও প্রোমো কোড
 ভ্রমণের আগে আপনার EBL, City Bank Amex, BRAC Bank বা Standard Chartered কার্ডে চলমান ট্রাভেল ডিসকাউন্ট চেক করুন এবং আমাদের ফ্লাইট সার্চ ইঞ্জিনে সব এয়ারলাইন্সের লাইভ রেট তুলনা করে নিন।`,
     internalLinks: [
+      { text: "ফ্লাইট ডিলে বা বাতিলে দাবি যাচাই", path: "/tools/flight-delay-claim" },
+      { text: "লাইভ ফ্লাইট সার্চ ও ভাড়া তুলনা", path: "/flights" },
+      { text: "ফ্লাইট বাছাইয়ের আগে বিমানবন্দর কোড যাচাই", path: "/blog/bangladesh-travelers-iata-airport-codes-directory-guide" },
       { text: "ঢাকা থেকে কাঠমান্ডু ফ্লাইট গাইড", path: "/flights/dhaka-kathmandu" },
       { text: "ঢাকা থেকে ব্যাংকক ফ্লাইট গাইড", path: "/flights/dhaka-bangkok" },
       { text: "ঢাকা থেকে জেদ্দা–মদিনা open-jaw ভাড়া কৌশল", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
@@ -827,6 +841,12 @@ Nepal এবং Maldives-এ বাংলাদেশিদের জন্য �
 ৩. চূড়ান্ত সিদ্ধান্ত
 আপনি যদি পাহাড়ি দৃশ্য, তুলনামূলক সহজ entry process (বর্তমান নিয়ম যাচাই করে) এবং সীমিত বাজেট চান, **Nepal** বিবেচনা করুন। আর আধুনিক মেট্রো শহর, শপিং মল, street food ও দ্বীপ দেখতে এবং আগে থেকে visa আয়োজন করতে প্রস্তুত থাকলে **Thailand** বেছে নিতে পারেন।`,
     internalLinks: [
+      { text: "থাইল্যান্ড ভ্রমণের কোটেশন ও বাজেট পরিকল্পনা", path: "/costs/thailand-costs" },
+      { text: "ঢাকা–ব্যাংকক রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-bangkok" },
+      { text: "ব্যাংককে হোটেল এলাকা ও বুকিং যাচাই", path: "/hotels/bangkok-hotels" },
+      { text: "ঢাকা–কাঠমান্ডু রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-kathmandu" },
+      { text: "কাঠমান্ডু ও পোখারায় থাকার পরিকল্পনা", path: "/hotels/kathmandu-hotels" },
+      { text: "নেপাল ভ্রমণের কোটেশন ও বাজেট পরিকল্পনা", path: "/costs/nepal-costs" },
       { text: "Nepal ভিসা চেকলিস্ট দেখুন", path: "/visa/nepal-visa" },
       { text: "Thailand e-Visa গাইড দেখুন", path: "/visa/thailand-visa" },
       { text: "কাঠমান্ডু ও পোখরার ৫ দিনের itinerary", path: "/blog/nepal-pokhara-itinerary-bangladesh" },
@@ -862,6 +882,12 @@ Bangkok-এ Pratunam, Sukhumvit ও Khao San Road-কে শপিং, যাত
 
 এই গাইডে লাইভ হোটেল ভাড়া প্রকাশ করা হয় না বা নির্দিষ্ট সাশ্রয়ের প্রতিশ্রুতি দেওয়া হয় না। পাতার Klook লিংকটি সাধারণ হোটেল তালিকা খোলে—নির্বাচিত হোটেল বা আপনার তারিখের কোট নয়। ব্যবহার করলে Klook-এ গন্তব্য, তারিখ ও অতিথিসংখ্যা আবার দিন, তারপর বর্তমান তালিকা ও সম্পূর্ণ শর্ত তুলনা করুন। যোগ্য বুকিংয়ে URAL কমিশন পেতে পারে; এটি ভ্রমণকারীর জন্য ছাড় নয়।`,
     internalLinks: [
+      { text: "থাইল্যান্ড e-Visa ও ঢাকার মিশনের নির্দেশনা", path: "/visa/thailand-visa" },
+      { text: "ঢাকা–ব্যাংকক রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-bangkok" },
+      { text: "থাইল্যান্ড ভ্রমণের কোটেশন ও বাজেট পরিকল্পনা", path: "/costs/thailand-costs" },
+      { text: "দুবাই ও UAE ভিসার চেকলিস্ট", path: "/visa/dubai-visa" },
+      { text: "ঢাকা–দুবাই রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-dubai" },
+      { text: "দুবাইয়ের অ্যাক্টিভিটি ও টিকিটের বিকল্প", path: "/experiences?region=asia&city=dubai-klook" },
       { text: "দুবাই ভ্রমণের খরচের গাইড", path: "/costs/dubai-costs" },
       { text: "কুয়ালালামপুরের হোটেল এলাকা গাইড", path: "/hotels/kuala-lumpur-hotels" },
       { text: "ব্যাংককের হোটেল এলাকা গাইড", path: "/hotels/bangkok-hotels" },
@@ -911,6 +937,8 @@ Bangkok-এ Pratunam, Sukhumvit ও Khao San Road-কে শপিং, যাত
 
 আয়ুথায়ার পাঁচ সত্যিকারের ঘণ্টা একটি ব্যাংকক ফুড ট্রিপকে ঠিকঠাক থাইল্যান্ড হলিডেতে বদলে দেয় - আর ওয়াট ফ্রা সি সানফেটের সেই ছবিই হবে যেটা দেখে বন্ধুরা ভাববে আপনি পৃথিবীর অন্য প্রান্তে উড়ে গিয়েছিলেন।`,
     internalLinks: [
+      { text: "ট্রাভেল ক্রিয়েটরদের গবেষণা ও প্রকাশনার রিসোর্স", path: "/blog/travel-creator-resources" },
+      { text: "ঢাকা–ব্যাংকক রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-bangkok" },
       { text: "Thailand ভিসা গাইড ও চেকলিস্ট", path: "/visa/thailand-visa" },
       { text: "Bangkok হোটেল ও সেরা এলাকা", path: "/hotels/bangkok-hotels" },
       { text: "Bangkok ৫ দিনের সম্পূর্ণ BDT বাজেট", path: "/costs/thailand-costs" },
@@ -947,6 +975,7 @@ Bangkok-এ Pratunam, Sukhumvit ও Khao San Road-কে শপিং, যাত
 
 **মোট ৫ দিনের খরচ:** ট্যুরিস্ট বাসে যাতায়াত করলে জনপ্রতি **BDT 40,000 – BDT 45,000**, আর অভ্যন্তরীণ ফ্লাইট নিলে **BDT 50,000 – BDT 56,000**।`,
     internalLinks: [
+      { text: "নেপাল Visa on Arrival-এর যোগ্যতা ও চেকলিস্ট", path: "/visa/nepal-visa" },
       { text: "ঢাকা থেকে কাঠমান্ডু ফ্লাইটের দাম", path: "/flights/dhaka-kathmandu" },
       { text: "কাঠমান্ডু ও পোখারার হোটেল গাইড", path: "/hotels/kathmandu-hotels" },
       { text: "Nepal ৫ দিনের বিস্তারিত খরচ", path: "/costs/nepal-costs" },
@@ -961,7 +990,7 @@ Bangkok-এ Pratunam, Sukhumvit ও Khao San Road-কে শপিং, যাত
   },
 
   "maldives-budget-trip-bangladesh-maafushi": {
-    title: "ঢাকা থেকে ৭৫,০০০ টাকায় Maldives ভ্রমণ: Maafushi Local Island বনাম প্রাইভেট রিসোর্ট গাইড",
+    title: "ঢাকা থেকে Maldives ভ্রমণ: Maafushi Local Island বনাম প্রাইভেট রিসোর্ট গাইড",
     summary:
       "অনেকেই মনে করেন Maldives ভ্রমণ করতে হলে জনপ্রতি ২ থেকে আড়াই লাখ টাকা খরচ করতে হয়, কারণ প্রাইভেট ওভারওয়াটার রিসোর্টগুলোতে এক রাতের ভাড়াই ৫০০ ডলারের বেশি। কিন্তু বর্তমানে Maafushi এবং Hulhumalé-এর মতো স্থানীয় দ্বীপগুলোতে (Local Islands) থেকে আপনি ঠিক একই স্বচ্ছ নীল ভারত মহাসাগরের সৌন্দর্য উপভোগ করতে পারবেন ফ্লাইটসহ মোট BDT 75,000-এর নিচে! এই গাইডে জানুন কীভাবে বাংলাদেশি পর্যটকরা ফ্রি ৩০ দিনের Visa on Arrival ও IMUGA ফর্ম নিয়ে মাত্র ২৫ ডলারের স্পিডবোটে Maafushi যান এবং ৩০ ডলারে স্নরকেলিং ও স্যান্ডব্যাংক ট্যুর করেন।",
     category: "Family & Budget",
@@ -984,6 +1013,7 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 - **হাফ-ডে স্নরকেলিং ট্যুর ও খাবার:** BDT 11,000
 - **মোট খরচ:** **BDT 72,500 – BDT 82,500**!`,
     internalLinks: [
+      { text: "ঢাকা–মালে রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-maldives" },
       { text: "Maldives ৪ দিনের বিস্তারিত BDT বাজেট", path: "/costs/maldives-costs" },
       { text: "Maldives ফ্রি VOA ও IMUGA চেকলিস্ট", path: "/visa/maldives-visa" },
       { text: "Maafushi ও Hulhumalé হোটেল গাইড", path: "/hotels/maldives-hotels" },
@@ -1024,6 +1054,7 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 ৪. ফ্লাইটের ৭২ ঘণ্টা আগে ফ্রি SG ARRIVAL CARD (SGAC)
 ভিসা অনুমোদনের পর ঢাকা থেকে ফ্লাইটের ঠিক ৩ দিন (৭২ ঘণ্টা) আগে অফিশিয়াল ICA ওয়েবসাইট বা **MyICA Mobile App**-এ সম্পূর্ণ বিনামূল্যে **SG Arrival Card** সাবমিট করবেন।`,
     internalLinks: [
+      { text: "সিঙ্গাপুর ভ্রমণের কোটেশন ও বাজেট পরিকল্পনা", path: "/costs/singapore-costs" },
       { text: "Singapore ভিসা চেকলিস্ট পেজ দেখুন", path: "/visa/singapore-visa" },
       { text: "ঢাকা থেকে সিঙ্গাপুর ডিরেক্ট ফ্লাইট ভাড়া", path: "/flights/dhaka-singapore" },
       { text: "Little India ও Bugis হোটেল গাইড", path: "/hotels/singapore-hotels" },
@@ -1089,6 +1120,7 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
 - Hajj visa-র biometric, permit এবং card বা transport-access-এর শর্তের জন্য সৌদি মন্ত্রণালয়/Nusuk ও বাংলাদেশ MoRA/e-Hajj-এর বর্তমান নির্দেশনা অনুসরণ করুন [১, ৭–৮]। আপনার visa আবেদনের বর্তমান সরকারি নির্দেশনায় চাইলে তবেই Saudi Visa Bio ব্যবহার করুন।
 - বর্তমান সরকারি বিজ্ঞপ্তি ও নিজের আবেদনের নির্দেশনা সংরক্ষণ করুন। প্রযোজ্য নিয়মের বদলে আগের মৌসুমের PDF, এজেন্সির brochure বা সাধারণ app listing ব্যবহার করবেন না।`,
     internalLinks: [
+      { text: "পৃথক ওমরাহ পরিকল্পনা ও বাজেট worksheet", path: "/umrah" },
       { text: "সম্পূর্ণ DIY Umrah ও Nusuk App গাইড (2026)", path: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" },
       { text: "বয়স্ক বাবা-মাকে নিয়ে Umrah: হুইলচেয়ার ও মেডিকেল গাইড", path: "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" },
       { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
@@ -2569,6 +2601,13 @@ Landing থেকে train বা আরেক flight-এর মাঝে কত
 - **দিন ৮ থেকে ১০ (দুবাই ও আবুধাবি — ৩ রাত):** মদিনা বা জেদ্দা থেকে দুবাই ফ্লাইট। দুবাইয়ের **Deira (Al Rigga Metro)** হোটেলে অবস্থান, বিকেলে **Desert Safari with BBQ Dinner**, পরদিন **Burj Khalifa, Dubai Mall ও Museum of the Future** এবং শেষ দিন **আবুধাবি শেখ জায়েদ গ্র্যান্ড মসজিদ** ঘুরে ঢাকায় প্রত্যাবর্তন!
 - **১০ দিনের মোট জনপ্রতি বাজেট (৪ জনের পরিবার শেয়ারে):** সব ফ্লাইট, ২টি ভিসা, ১০ রাত হোটেল, ট্রেন ও ডেজার্ট সাফারিসহ জনপ্রতি **BDT 1,58,000 – BDT 1,85,000**।`,
     internalLinks: [
+      { text: "সৌদি আরবে জিয়ারতের স্থান ও পরিবহন যাচাই", path: "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide" },
+      { text: "ওমরাহ পরিকল্পনা ও বাজেট worksheet", path: "/umrah" },
+      { text: "দুবাই ও UAE ভিসার চেকলিস্ট", path: "/visa/dubai-visa" },
+      { text: "ঢাকা–দুবাই রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-dubai" },
+      { text: "দুবাইয়ের হোটেল এলাকা ও বুকিং যাচাই", path: "/hotels/dubai-hotels" },
+      { text: "দুবাই ভ্রমণের কোটেশন ও বাজেট পরিকল্পনা", path: "/costs/dubai-costs" },
+      { text: "দুবাইয়ের অ্যাক্টিভিটি ও টিকিটের বিকল্প", path: "/experiences?region=asia&city=dubai-klook" },
       { text: "দুবাই থেকে আবুধাবি শেখ জায়েদ গ্র্যান্ড মসজিদ ডে-ট্রিপ গাইড", path: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" },
       { text: "৯৬ ঘণ্টার Saudi Stopover Visa ওমরাহ গাইড", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
       { text: "দুবাই ভ্রমণ প্ল্যান ও UAE ভিসা গাইড", path: "/destinations/dubai-guide" },
@@ -2611,6 +2650,10 @@ Landing থেকে train বা আরেক flight-এর মাঝে কত
 - **দুপুর ১:৩০ – বিকেল ৩:৩০:** সাদিয়াত আইল্যান্ডের **Louvre Abu Dhabi** পরিদর্শন ও আল ওয়াহদা মলে হালাল লাঞ্চ।
 - **বিকেল ৪:৩০ – সন্ধ্যা ৭:০০ (গোল্ডেন আওয়ার):** বিকেল ৪:৩০-এ শেখ জায়েদ গ্র্যান্ড মসজিদে প্রবেশ করুন—যাতে দিনের আলো, সূর্যাস্তের সোনালী আভা এবং মাগরিবের পর নীল আলোর জাদুকরী সৌন্দর্য একসাথে দেখতে পান! (টিপস: মসজিদ ও প্রাসাদের সিকিউরিটি গেটে বড় স্যুটকেস নিয়ে প্রবেশ নিষিদ্ধ, তাই শেষ দিনে হোটেল চেক-আউট করে আবুধাবি গেলে বাসে ওঠার আগে Ibn Battuta বা আবুধাবি বাস স্টেশনের কাছে **Radical Storage**-এ ব্যাগ জমা রাখুন।)`,
     internalLinks: [
+      { text: "দুবাই ও UAE ভিসার চেকলিস্ট", path: "/visa/dubai-visa" },
+      { text: "ঢাকা–দুবাই রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-dubai" },
+      { text: "দুবাইয়ের হোটেল এলাকা ও বুকিং যাচাই", path: "/hotels/dubai-hotels" },
+      { text: "দুবাই ভ্রমণের কোটেশন ও বাজেট পরিকল্পনা", path: "/costs/dubai-costs" },
       { text: "একই ট্রিপে Umrah + Dubai ১০ দিনের মাল্টি-সিটি গাইড", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
       { text: "দুবাই ও আবুধাবি Attraction Passes হাব (Klook)", path: "/experiences?region=asia&city=dubai-klook" },
       { text: "দুবাই, কুয়ালালামপুর ও ব্যাংককে হোটেল এলাকা ও বুকিং শর্ত তুলনা", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" },
@@ -2650,6 +2693,10 @@ KL Sentral থেকে মাত্র ৫ মিনিট দূরত্ব�
 - **সেরা হালাল খাবার:** Suria KLCC Level 2 Food Court (**MYR 15–25**), Bukit Bintang-এর **Damascus ও Halab Gate** এরাবিয়ান রেস্টুরেন্ট এবং **Masjid India** এলাকার দেশি ভাত-মাছ ও বিরিয়ানি।
 - **৫ দিনের মোট মালয়েশিয়া ফ্যামিলি বাজেট:** ঢাকা–KL রাউন্ডট্রিপ ফ্লাইট, অনলাইন e-Visa (ফ্রি MDAC সহ), ৪ রাত হোটেল, পুত্রজায়া ও Genting Highlands কেবল কারসহ জনপ্রতি **BDT 66,000 – BDT 82,000**।`,
     internalLinks: [
+      { text: "মালয়েশিয়া eVisa ও MDAC-এর চেকলিস্ট", path: "/visa/malaysia-visa" },
+      { text: "ঢাকা–কুয়ালালামপুর রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-kuala-lumpur" },
+      { text: "কুয়ালালামপুরের হোটেল এলাকা ও বুকিং যাচাই", path: "/hotels/kuala-lumpur-hotels" },
+      { text: "মালয়েশিয়া ভ্রমণের কোটেশন ও বাজেট পরিকল্পনা", path: "/costs/malaysia-costs" },
       { text: "মালয়েশিয়া ৫ দিনের ট্যুর প্ল্যান ও e-Visa গাইড", path: "/destinations/malaysia-guide" },
       { text: "ঢাকা থেকে সেরা ৬টি বাজেট-বান্ধব ফ্যামিলি গন্তব্য", path: "/blog/top-budget-family-destinations-from-dhaka" },
       { text: "কুয়ালালামপুর, ব্যাংকক ও দুবাইয়ে হোটেল এলাকা ও বুকিং শর্ত তুলনা", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" },
@@ -2747,7 +2794,7 @@ KL Sentral থেকে মাত্র ৫ মিনিট দূরত্ব�
       { text: "কার্ড নেই? bKash বা ব্যাংক ট্রান্সফারে ফ্লাইট ও হোটেল বুক করুন", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "টাকা ও ব্যাংকিং হাব: এনডোর্সমেন্ট, কার্ড, USD 300 নিয়ম ও NOC", path: "/banking" },
       { text: "১০ দিনের DIY Umrah BDT বাজেট ক্যালকুলেটর", path: "/umrah" },
-      { text: "ডুয়েল-কারেন্সি কার্ড fee ও markup ক্যালকুলেটর", path: "/tools?tab=currency" },
+      { text: "তারিখসহ কারেন্সি রেফারেন্স কনভার্টার", path: "/tools/currency-converter" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -2896,7 +2943,7 @@ URAL একটি স্বাধীন ট্রাভেল-ইনফরমে
       { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "মক্কা ও মদিনা হোটেল জোন এবং Haramain বুলেট ট্রেন গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "ডুয়েল-কারেন্সি কার্ড fee ও markup ক্যালকুলেটর", path: "/tools?tab=currency" },
+      { text: "তারিখসহ কারেন্সি রেফারেন্স কনভার্টার", path: "/tools/currency-converter" },
       { text: "লাইভ গ্লোবাল ফ্লাইট সার্চ ও ভাড়া বেঞ্চমার্ক", path: "/flights" },
     ],
     affiliateCTA: {
@@ -2944,7 +2991,7 @@ URAL একটি স্বাধীন ট্রাভেল-ইনফরমে
       { text: "ওমরাহর জন্য শরীয়াহ-সম্মত ইসলামিক ডুয়েল-কারেন্সি কার্ড", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account বনাম সাধারণ Travel Quota ($300 লিমিট সমাধান)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "মক্কা ও মদিনায় বাংলাদেশি হালাল খাবারের হোটেল ও দাম", path: "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals" },
-      { text: "ডুয়েল-কারেন্সি কার্ড fee ও markup ক্যালকুলেটর", path: "/tools?tab=currency" },
+      { text: "তারিখসহ কারেন্সি রেফারেন্স কনভার্টার", path: "/tools/currency-converter" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -3017,6 +3064,8 @@ URAL একটি স্বাধীন ট্রাভেল-ইনফরমে
       },
     ],
     internalLinks: [
+      { text: "ঢাকা–ব্যাংকক রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-bangkok" },
+      { text: "ব্যাংককে হোটেল এলাকা ও বুকিং যাচাই", path: "/hotels/bangkok-hotels" },
       { text: "Thailand ভিসা চেকলিস্ট ও ফি ক্যালকুলেটর", path: "/visa/thailand-visa" },
       { text: "Bangkok-এ Halal খাবারের সেরা জায়গা (Pratunam ও Sukhumvit)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
       { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
@@ -3064,6 +3113,10 @@ URAL একটি স্বাধীন ট্রাভেল-ইনফরমে
 - **৩. প্রিন্ট করা পেইড হোটেল বুকিং ভাউচার।**
 - **৪. পকেট মানি বা ডলারের প্রমাণ ($500–$1,000 USD নগদ বা এনডোর্স করা কার্ড)** এবং আপনার ঢাকার **অফিস আইডি কার্ড / NOC**।`,
     internalLinks: [
+      { text: "ঢাকা বিমানবন্দরের প্রি-ডিপার্চার চেকলিস্ট", path: "/pre-departure" },
+      { text: "তারিখসহ কারেন্সি রেফারেন্স কনভার্টার", path: "/tools/currency-converter" },
+      { text: "ঢাকা–কুয়ালালামপুর রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-kuala-lumpur" },
+      { text: "কুয়ালালামপুরের হোটেল এলাকা ও বুকিং যাচাই", path: "/hotels/kuala-lumpur-hotels" },
       { text: "মালয়েশিয়া ইসলামিক হেরিটেজ, পুত্রজায়া পিঙ্ক মসজিদ ও হালাল ট্যুর গাইড", path: "/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" },
       { text: "Malaysia ভিসা চেকলিস্ট ও আবেদনের নিয়ম", path: "/visa/malaysia-visa" },
       { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
@@ -3103,6 +3156,20 @@ URAL একটি স্বাধীন ট্রাভেল-ইনফরমে
 - **🇸🇬 সিঙ্গাপুর, 🇦🇪 দুবাই ও 🇸🇦 সৌদি ওমরাহ:** সিঙ্গাপুরের অনুমোদিত ভিসা এজেন্ট এবং দুবাই/সৌদি স্পনসরদের কাছে আপনার প্রোফাইল তখন একজন পরীক্ষিত পর্যটক হিসেবে গণ্য হবে। আপনি সহজেই **১০ দিনের ওমরাহ + দুবাই কম্বো ট্রিপ** করতে পারবেন।
 - **🇪🇺 ইউরোপ (Schengen), 🇬🇧 যুক্তরাজ্য ও 🇺🇸 আমেরিকা:** উন্নত দেশগুলোর দূতাবাসে আবেদন করলে অফিসাররা দেখবেন আপনি ৩–৪টি দেশ ভ্রমণ করে সময়মতো দেশে ফিরেছেন। আর একবার আপনার পাসপোর্টে বৈধ ও ব্যবহৃত **US, UK বা Schengen ভিসা** যুক্ত হলে আপনি ভবিষ্যতে যেকোনো সময় **১ বছরের মাল্টিপল-এন্ট্রি সৌদি ই-ভিসা বা অন-অ্যারাইভাল ভিসা** নিয়ে ওমরাহ করতে পারবেন!`,
     internalLinks: [
+      { text: "সঠিক তথ্য দিয়ে পাসপোর্ট আবেদন বা পুনরায় ইস্যু", path: "/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide" },
+      { text: "মালয়েশিয়া eVisa ও MDAC-এর চেকলিস্ট", path: "/visa/malaysia-visa" },
+      { text: "ঢাকা–কুয়ালালামপুর রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-kuala-lumpur" },
+      { text: "কুয়ালালামপুরের হোটেল এলাকা ও বুকিং যাচাই", path: "/hotels/kuala-lumpur-hotels" },
+      { text: "মালয়েশিয়া ভ্রমণের কোটেশন ও বাজেট পরিকল্পনা", path: "/costs/malaysia-costs" },
+      { text: "নেপাল Visa on Arrival-এর যোগ্যতা ও চেকলিস্ট", path: "/visa/nepal-visa" },
+      { text: "ঢাকা–কাঠমান্ডু রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-kathmandu" },
+      { text: "কাঠমান্ডু ও পোখারায় থাকার পরিকল্পনা", path: "/hotels/kathmandu-hotels" },
+      { text: "নেপাল ভ্রমণের কোটেশন ও বাজেট পরিকল্পনা", path: "/costs/nepal-costs" },
+      { text: "মালদ্বীপের প্রবেশের শর্ত ও IMUGA", path: "/visa/maldives-visa" },
+      { text: "ঢাকা–মালে রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-maldives" },
+      { text: "মালদ্বীপে দ্বীপ ও থাকার জায়গা তুলনা", path: "/hotels/maldives-hotels" },
+      { text: "মালদ্বীপ ভ্রমণের কোটেশন ও বাজেট পরিকল্পনা", path: "/costs/maldives-costs" },
+      { text: "ঢাকা বিমানবন্দরের প্রি-ডিপার্চার চেকলিস্ট", path: "/pre-departure" },
       { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Malaysia e-Visa ও ফ্রি MDAC কার্ড গাইড", path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
       { text: "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
@@ -3149,6 +3216,9 @@ URAL একটি স্বাধীন ট্রাভেল-ইনফরমে
 - **Gardens by the Bay ও Sentosa অ্যাটাকশন টিকিট:** BDT 8,000 – 12,500
 - **মোট ৪ দিনের জনপ্রতি খরচ:** **BDT 82,000 – BDT 1,05,000**`,
     internalLinks: [
+      { text: "সিঙ্গাপুর ভিসা ও SG Arrival Card-এর নিয়ম", path: "/visa/singapore-visa" },
+      { text: "ঢাকা–সিঙ্গাপুর রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-singapore" },
+      { text: "সিঙ্গাপুরে হোটেল এলাকা ও MRT যাচাই", path: "/hotels/singapore-hotels" },
       { text: "Singapore Tourist Visa গাইড (অনুমোদিত এজেন্ট ও LOI V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" },
       { text: "Singapore ৪ দিনের বিস্তারিত BDT খরচ ক্যালকুলেটর", path: "/costs/singapore-costs" },
       { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
@@ -3197,6 +3267,10 @@ URAL একটি স্বাধীন ট্রাভেল-ইনফরমে
 ৪. বাংলাদেশ ব্যাংকের $10,000+ মেডিকেল কোটা ব্যবহারের নিয়ম
 **বাংলাদেশ ব্যাংকের (bb.org.bd)** নিয়ম অনুযায়ী আপনার সাধারণ **$18,000 USD বার্ষিক ট্রাভেল কোটার** বাইরেও, হাসপাতালের অফিশিয়াল প্রাক্কলিত বিল (Cost Estimate Invoice) দেখিয়ে ব্যাংকের AD শাখা থেকে চিকিৎসার জন্য অতিরিক্ত **USD $10,000+ Medical Quota** কার্ডে বা হাসপাতালের একাউন্টে ছাড় করানো যায়!`,
     internalLinks: [
+      { text: "থাইল্যান্ড e-Visa ও ঢাকার মিশনের নির্দেশনা", path: "/visa/thailand-visa" },
+      { text: "ঢাকা–ব্যাংকক রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-bangkok" },
+      { text: "ব্যাংককে হোটেল এলাকা ও বুকিং যাচাই", path: "/hotels/bangkok-hotels" },
+      { text: "থাইল্যান্ড ভ্রমণের কোটেশন ও বাজেট পরিকল্পনা", path: "/costs/thailand-costs" },
       { text: "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
       { text: "ব্যাংককে হালাল খাবারের সেরা জায়গা (Pratunam ও Sukhumvit Soi 3)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
       { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
@@ -3332,6 +3406,9 @@ eSIM-এর মেয়াদ কখন থেকে শুরু হয়?
 - **৭ দিনের হালাল খাবার ও এন্ট্রি টিকিট:** BDT 7,000 – 9,500
 - **মোট ৭ দিনের ২-দেশ কম্বো বাজেট:** **জনপ্রতি BDT 95,000 – BDT 1,20,500!**`,
     internalLinks: [
+      { text: "মালদ্বীপের প্রবেশের শর্ত ও IMUGA", path: "/visa/maldives-visa" },
+      { text: "ঢাকা–মালে রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-maldives" },
+      { text: "মালদ্বীপে দ্বীপ ও থাকার জায়গা তুলনা", path: "/hotels/maldives-hotels" },
       { text: "মাত্র ৭৫,০০০ টাকায় মালদ্বীপ ভ্রমণ (Maafushi গাইড)", path: "/blog/maldives-budget-trip-bangladesh-maafushi" },
       { text: "নতুন পাসপোর্টে (Fresh Passport) ৩ ধাপে Travel History তৈরির গাইড", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
       { text: "কার্ড ছাড়াই bKash বা ব্যাংক ট্রান্সফারে মাল্টি-সিটি ফ্লাইট বুকিং", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
@@ -3381,6 +3458,7 @@ eSIM-এর মেয়াদ কখন থেকে শুরু হয়?
 - **তথ্য অপরিবর্তিত থাকলে পুলিশ ভেরিফিকেশন লাগে না!** আপনার যদি আগের কোনো **MRP বা e-Passport** থাকে এবং আপনি নাম, পিতা-মাতার নাম, জন্ম তারিখ ও স্থায়ী ঠিকানা অপরিবর্তিত রেখে রিনিউ (Re-issue) আবেদন করেন, তবে নতুন করে পুলিশ ভেরিফিকেশন ছাড়াই দ্রুত পাসপোর্ট প্রিন্ট হয়ে আসে।
 - **গুরুত্বপূর্ণ টিপস:** নতুন ই-পাসপোর্ট হাতে পাওয়ার সময় পুরনো পাসপোর্টটি *"Cancelled without Prejudice"* সিলসহ ফেরত নিন এবং বিদেশ ভ্রমণের সময় পুরনো ও নতুন পাসপোর্ট একসাথে পিন করে সাথে রাখুন!`,
     internalLinks: [
+      { text: "ঢাকা বিমানবন্দরের প্রি-ডিপার্চার চেকলিস্ট", path: "/pre-departure" },
       { text: "নতুন পাসপোর্টে (Fresh Passport) ৩ ধাপে Travel History তৈরির গাইড", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
       { text: "নতুন পাসপোর্টে $18,000 ডলার এনডোর্সমেন্ট করার নিয়ম", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
@@ -3483,6 +3561,10 @@ eSIM-এর মেয়াদ কখন থেকে শুরু হয়?
 - **৬. বাজেট এয়ারলাইন্স (AirAsia, Thai Lion Air, SalamAir, Air Arabia, Jazeera, Flynas):**
   • **সবচেয়ে জরুরি নিয়ম:** এদের সর্বনিম্ন ভাড়ায় শুধুমাত্র **৭ কেজি কেবিন ব্যাগ** থাকে (কোনো চেক-ইন লাগেজ থাকে না!)। তাই টিকিট কাটার সময় অনলাইনেই **২০ বা ৩০ কেজি লাগেজ বান্ডেল** কিনে নিন—এয়ারপোর্টে কিনতে গেলে ৩ গুণ বেশি টাকা লাগবে!`,
     internalLinks: [
+      { text: "বিমানবন্দর কোড ও একাধিক বিমানবন্দরের শহর বোঝা", path: "/blog/bangladesh-travelers-iata-airport-codes-directory-guide" },
+      { text: "চট্টগ্রামের যাত্রা ও রুট আলাদা করে তুলনা", path: "/blog/chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai" },
+      { text: "ফ্লাইট ডিলে বা বাতিলে দাবি যাচাই", path: "/tools/flight-delay-claim" },
+      { text: "লাইভ ফ্লাইট সার্চ ও ভাড়া তুলনা", path: "/flights" },
       { text: "ঢাকা থেকে কম খরচে ফ্লাইট টিকিট কাটার ৫টি গোপন কৌশল", path: "/blog/cheap-flight-booking-hacks-dhaka" },
       { text: "ঢাকা থেকে জেদ্দা ও মদিনা Open-Jaw Flight কৌশল", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
       { text: "ফ্লাইট ডিলে বা লাগেজ হারালে সর্বোচ্চ €600 ক্ষতিপূরণ পাওয়ার নিয়ম", path: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" },
@@ -3526,6 +3608,9 @@ eSIM-এর মেয়াদ কখন থেকে শুরু হয়?
 ৪. ট্রাভেল ডেস্কে দ্রুত কোটেশন পাওয়ার নিয়ম
 URAL বা যেকোনো এয়ারলাইন্স এজেন্সিকে মেসেজ দেওয়ার সময় *"DAC to DXB on 15 Oct, 1 Passenger"* লিখে পাঠালে এজেন্ট মাত্র ১০ সেকেন্ডে গ্লোবাল সিস্টেমে সার্চ করে সেরা BDT ভাড়া জানাতে পারে। আমাদের **Travel Tools**-এর এয়ারপোর্ট কোড সেকশন থেকে সরাসরি হোয়াটসঅ্যাপে মেসেজ ফরম্যাট ড্রাফট করে পাঠাতে পারেন।`,
     internalLinks: [
+      { text: "চট্টগ্রামের যাত্রা ও রুট যাচাই", path: "/blog/chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai" },
+      { text: "কক্সবাজারের ফ্লাইট, রেল ও ট্রিপ পরিকল্পনা", path: "/blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh" },
+      { text: "কলকাতা স্থলভ্রমণ ও সীমান্তের প্রস্তুতি", path: "/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide" },
       { text: "টুলস ডেস্কে সার্চেবল এয়ারপোর্ট ডিরেক্টরি ও হোয়াটসঅ্যাপ কোটেশন", path: "/tools/airport-codes" },
       { text: "ঢাকা থেকে দুবাই ফ্লাইট শিডিউল ও বিমান ভাড়া", path: "/flights/dhaka-dubai" },
       { text: "ফ্লাইট ডিলে ক্ষতিপূরণ চেকার (€600)", path: "/tools/flight-delay-claim" },
@@ -3650,6 +3735,7 @@ URAL বা যেকোনো এয়ারলাইন্স এজেন্স
 শেষ কথা:
 হাভানা হালকা পরিকল্পনা ও ধীর হাঁটাকে পুরস্কৃত করে। ফ্লাইট ও ভিসা আগেই ঠিক করুন, প্রথম দুই রাত বুক করুন, বাকি সপ্তাহ আলগা রাখুন — এই শহরের সেরা ঘণ্টাগুলো অনুসূচিতহীন, যখন গ্রান তেয়াত্রোর বক্স অফিসে হঠাৎ ব্যালের টিকিট মেলে, শেয়ার্ড ট্যাক্সি শহর ঘোরায় পরিণত হয়, কিংবা মালেকোন আপনার সন্ধ্যা ঠিক করে দেয়। এখানে পাঁচ সত্যিকারের দিন ক্যারিবিয়ানের প্রায় যেকোনো জায়গার পাঁচটি পালিশ করা দিনকে ছাড়িয়ে যাবে।`,
     internalLinks: [
+      { text: "ট্রাভেল ক্রিয়েটরদের গবেষণা ও প্রকাশনার রিসোর্স", path: "/blog/travel-creator-resources" },
       { text: "ঢাকা থেকে সস্তায় ফ্লাইট টিকিটের ৫টি গোপন কৌশল", path: "/blog/cheap-flight-booking-hacks-dhaka" },
       { text: "ঢাকা থেকে প্রধান এয়ারলাইন্সের ব্যাগেজ নিয়ম তুলনা", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },
       { text: "সেরা ট্রাভেল eSIM ও ট্রাভেল ইনস্যুরেন্স গাইড", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
@@ -3719,6 +3805,7 @@ URAL বা যেকোনো এয়ারলাইন্স এজেন্স
 শেষ কথা:
 শেফশাওয়েন এমন জায়গা যেখানে ভ্রমণকারীরা মাসের পর মাস লেখেন — কোনো একটি দর্শনীয় স্থানের জন্য নয়, বরং ধীর সেই ঘণ্টাগুলোর জন্য: দেয়াল বেগুনি হয়ে ওঠার সময় ছাদে চা, এখনো গ্রামের কূপের মতো কাজ করা ফোয়ারা চত্বর, হাঁটা সহজ বলে যে পাহাড়ি সূর্যাস্তটিতে আপনি পৌঁছে যান। বৃহত্তর মরক্কো লুপের মধ্যে দুটি অবসরপূর্ণ দিন দিন, নগদ টাকা সাথে রাখুন, স্বপ্ন দেখার আগে ভিসা নিশ্চিত করুন — বাকিটা নীল রঙকে করতে দিন।`,
     internalLinks: [
+      { text: "ট্রাভেল ক্রিয়েটরদের গবেষণা ও প্রকাশনার রিসোর্স", path: "/blog/travel-creator-resources" },
       { text: "হাভানা, কিউবা ট্রাভেল গাইড: ক্লাসিক গাড়ি ও গ্রান তেয়াত্রো", path: "/blog/havana-cuba-travel-guide-bangladesh" },
       { text: "ঢাকা থেকে সস্তায় ফ্লাইট টিকিটের ৫টি গোপন কৌশল", path: "/blog/cheap-flight-booking-hacks-dhaka" },
       { text: "ঢাকা থেকে প্রধান এয়ারলাইন্সের ব্যাগেজ নিয়ম তুলনা", path: "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla" },

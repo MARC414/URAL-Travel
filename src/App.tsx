@@ -862,6 +862,9 @@ export default function App() {
   // The Banking & Forex hub's FAQ pairs live in the hub's lazy chunk: importing
   // them into the entry graph pushed the homepage over its gzip budget.
   const [bankingFaqs, setBankingFaqs] = useState<BankingFaq[] | null>(null);
+  // Bengali FAQ getters live outside the entry chunk; load only on /bn/contact
+  // so the client FAQPage never describes English text the BN page does not show.
+  const [bnFaqSchema, setBnFaqSchema] = useState<typeof import("./utils/bn-faq-schema") | null>(null);
 
   // The document language is baked into index.html as lang="en", but the UI can
   // switch to Bengali entirely client-side. Without this, <html lang> keeps
@@ -1438,6 +1441,17 @@ export default function App() {
     };
   }, [section, bankingFaqs]);
 
+  useEffect(() => {
+    if (section !== "contact" || !isBn || bnFaqSchema) return;
+    let cancelled = false;
+    void import("./utils/bn-faq-schema").then((mod) => {
+      if (!cancelled) setBnFaqSchema(mod);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [section, isBn, bnFaqSchema]);
+
   // Dynamically compute metadata and schema
   let seoTitle = "URAL — Compare Flights, Hotels & Visa Guides for Bangladeshi Travelers";
   let seoDescription = "Compare flight prices from Dhaka to Nepal, Thailand, Malaysia and Dubai, check visa requirements step by step, and plan your trip budget in BDT.";
@@ -1917,7 +1931,11 @@ export default function App() {
         : "Independent travel information and planning support for outbound travellers: route research, visa requirement checklists with official sources and dates, and budget estimation. URAL publishes researched guides, links official portals and affiliate partners, and answers questions on WhatsApp or by email.",
       serviceType: isBn ? "ভ্রমণ তথ্য" : "Travel Information",
     });
-    const faqSchema = getFaqSchemaForPage("contact", undefined, true, contactUrl);
+    const faqSchema = isBn && bnFaqSchema
+      ? bnFaqSchema.getBnFaqSchemaForPage("contact", undefined, true, contactUrl)
+      : isBn
+        ? null
+        : getFaqSchemaForPage("contact", undefined, true, contactUrl);
     seoSchema = faqSchema ? [contactServiceNode, faqSchema] : [contactServiceNode];
     seoBreadcrumbs = [
       { name: "Home", url: siteUrl("/", lang) },
