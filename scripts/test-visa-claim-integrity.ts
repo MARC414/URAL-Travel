@@ -20,7 +20,7 @@
  * prose assertions, and rendering them would need a browser.
  */
 
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync as fsExists, readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -331,6 +331,54 @@ test("no article instructs the reader to pay or send documents without naming th
     offenders.length === 0,
     `payment instructions with an unnamed 'desk':\n    ${offenders.join("\n    ")}`
   );
+});
+
+// ---------------------------------------------------------------------------
+// Deleted articles: redirect the URL, don't keep linking to it.
+// ---------------------------------------------------------------------------
+
+/**
+ * A 301 is for outside traffic. If the site itself still links to a deleted
+ * page, that visitor takes an avoidable extra hop, and the link is a promise the
+ * page still exists. Every slug redirected in `public/_redirects` must therefore
+ * be absent from src/, scripts/ and index.html — except the redirect file itself.
+ */
+test("no internal link points at a URL that only exists to be redirected", () => {
+  const redirects = read("public/_redirects");
+  const redirectedBlogSlugs = [...redirects.matchAll(/^\/blog\/([a-z0-9-]+)\s+\S+\s+301$/gm)].map(
+    (match) => match[1]
+  );
+  assert(redirectedBlogSlugs.length > 0, "expected at least one redirected blog slug");
+
+  const offenders: string[] = [];
+  const files = [
+    ...contentFiles,
+    ...walk(path.join(ROOT, "scripts")).filter((file) => file !== import.meta.filename),
+    path.join(ROOT, "index.html"),
+  ];
+  for (const file of files) {
+    const source = stripComments(readFileSync(file, "utf8"));
+    for (const slug of redirectedBlogSlugs) {
+      // An in-app upgrade (a legacy-URL normaliser) is the same decision as the
+      // edge 301, written twice on purpose so client and edge agree. It maps the
+      // URL away rather than linking to it, so it is not a dangling link.
+      const upgrades = new RegExp(
+        `(if\\(?\\s*|===?\\s*)[\"\`](/(bn/)?blog/${slug})[\"\`][\\s\\S]{0,120}?return\\s+[\"\`]`
+      ).test(source);
+      if (upgrades) continue;
+      if (source.includes(`/blog/${slug}`)) offenders.push(`${path.relative(ROOT, file)} -> /blog/${slug}`);
+    }
+  }
+  assert(offenders.length === 0, `internal links to redirected URLs:\n    ${offenders.join("\n    ")}`);
+});
+
+test("every redirected blog URL really is gone from the build", () => {
+  const redirects = read("public/_redirects");
+  const slugs = [...redirects.matchAll(/^\/blog\/([a-z0-9-]+)\s+\S+\s+301$/gm)].map((m) => m[1]);
+  const distDir = path.join(ROOT, "dist");
+  if (!fsExists(distDir)) return; // build not run: nothing to assert
+  const stillBuilt = slugs.filter((slug) => fsExists(path.join(distDir, "blog", `${slug}.html`)));
+  assert(stillBuilt.length === 0, `redirected but still prerendered: ${stillBuilt.join(", ")}`);
 });
 
 // ---------------------------------------------------------------------------

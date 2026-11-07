@@ -236,7 +236,7 @@ The first draft was a flat list, which hid the dependencies. Five phases, each s
 | **0** | **Truth** | ✅ **Complete** — remove everything false or stale *today*; make the site measurable | WP7 ✅ · WP0 ✅ · WP4 ✅ · WP2 ✅ · WP1 ✅ | **Phase 0 complete** |
 | **1** | **Foundation** | ✅ **Complete** — one dated rate source; one number discipline | WP3 ✅ | done |
 | **2** | **Tools** | Make the converters and estimators honest and useful | WP5, WP9 | 4–6 days |
-| **3** | **Voice** | International framing across the interface | WP6 — D3a ✅ · D3b ✅ · **D3c needs owner decision** | ~0.5 day left |
+| **3** | **Voice** | ✅ **Complete** — international framing across the interface | WP6 — D3a ✅ · D3b ✅ · D3c ✅ | done |
 | **4** | **Assistant** | The free AI helper, last, on a verified corpus | WP8 | 4–6 days |
 
 **Why this order and not another.** Phase 0 first because two of its items (WP1, WP2) remove claims that are false
@@ -435,7 +435,14 @@ by `test:rates`; static output and fixed-rate regressions are covered by `verify
 
 ## PHASE 2 — TOOLS
 
-### WP5 — Currency choice on the Umrah worksheet *(2 days · one control)*
+### WP5 — ✅ **DONE 7 November 2026** — Currency choice on the Umrah worksheet
+
+**Delivered — verified, not assumed.** `UmrahBudgetCalculator.tsx` holds `currencyChoice: "BDT" | "USD" | null`,
+defaulting to `preferredCurrencyForOrigin(origin)`, so the control follows origin until the visitor chooses and then
+keeps an explicit choice across origin changes. One selector, not per-row. An "Equal share per traveller" result is
+labelled, with a note that equal sharing is arithmetic and not the child/infant fare. All eight whole-party inputs
+remain BDT. `test:umrah-budget` **26/26**, including *"Umrah currency defaults follow origin while all eight inputs
+remain BDT"* (DAC/ZYL → BDT, LHR → USD). `verify:build` checks the EN/BN controls in `dist`. Nothing was left to do.
 
 **7 November implementation resolution.** The shared worksheet now has BDT/USD display choice, dated provider
 attribution, a labelled BDT fallback and explicit equal sharing. An explicit choice survives origin changes. The
@@ -492,7 +499,23 @@ claim was replaced with platform-checkout guidance: `ExperiencesPage.tsx` (banne
 (advisory bullet 2), `App.tsx` and `InteractiveTools.tsx`. Verified: `grep` for "message our dhaka desk" and "pay in
 Bangladeshi Taka via" returns **0**. The surviving "Payment Guide" headings are guidance, not a payment offer, and stay.
 
-**D3c — partially decided; one defect fixed 7 November 2026.** Rewording the three titles from "Pay" to "Settle" did
+**D3c — DECIDED AND DELIVERED 7 November 2026: deleted, not rewritten.** Owner chose deletion with a 301.
+
+Deleted: the article body in both locales (`blogContent.ts`, `bengaliContent.ts`), its `BLOG_DATA` and BN records,
+its `bankingHubData` method card, its `blogIndex` entry, alt text, cover image, snippet, SEO copy, the four
+`prerender.ts` link lists, `BlogPostRouteView`'s keyword matcher, its `TopicalAuthorityBlueprint` keyword node, and a
+hardcoded `<li>` in `index.html` itself (the last one only surfaced because `verify:build` compares homepage blog
+links against `BLOG_DATA`).
+
+Redirected: `/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card → /banking` and its `/bn/`
+twin → `/bn/banking`. The banking hub keeps the underlying guidance — endorsement, RFCD, card vs cash — without a
+booking promise. `BANKING_PAYMENT_METHODS.nodeSlug` became optional and both renderers now guard it, so the
+still-useful "BDT settlement" method card no longer links to a deleted page.
+
+Build: **131 English + 131 Bengali** routes (132 → 131), 52 blog covers.
+
+**Superseded note — the earlier partial fix.** The following was true between the two commits and is kept for the
+record: Rewording the three titles from "Pay" to "Settle" did
 not resolve the ambiguity my review flagged: the article's STEP-BY-STEP section said *"Message **the desk** your travel
 dates … and a passport bio-page scan"* and *"pay by bKash or Nagad"* without ever naming who "the desk" was, on a
 domain the reader is already on. A reader would reasonably supply URAL. Fixed by naming the actor explicitly — the

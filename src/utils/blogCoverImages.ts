@@ -23,7 +23,6 @@ const BLOG_COVER_IMAGES: Record<string, string> = {
   "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide": "paris_louvre_london_landmarks_1790485782111",
   "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah": "islamic_banking_card_makkah_1790486749439",
   "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix": "rfcd_foreign_currency_banking_1790486762760",
-  "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": "bdt_travel_concierge_voucher_1790486777146",
   "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": "pos_card_terminal_currency_1790486792551",
   "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": "bangkok_wat_arun_chao_phraya_1790486821534",
   "malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration": "kuala_lumpur_petronas_twilight_1790486835902",

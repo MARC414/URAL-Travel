@@ -450,11 +450,6 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "See why Bangladesh's USD 300 online-purchase rule affects travel-quota cards, how documented travel approval works, and when an RFCD account fits.",
   },
-  "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": {
-        title: "How to Pay for Flights & Makkah Hotels in BDT Without a Card | URAL",
-    description:
-            "How Bangladeshi travellers without a dual-currency card can pay for international flights, Makkah hotels and transfers in BDT — what to verify before paying anyone, and where URAL stops.",
-  },
   "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": {
     title: "Cash SAR/USD vs Dual-Currency Card Abroad | URAL",
     description:

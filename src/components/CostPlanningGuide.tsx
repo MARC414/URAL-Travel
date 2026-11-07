@@ -89,7 +89,7 @@ export function CostPlanningGuide({ cost, isBn }: { cost: TripCostData; isBn: bo
         <a className={linkClass} href={`${prefix}/destinations/${stem}-guide`}>{isBn ? "ভ্রমণের itinerary" : "Travel itinerary"}</a>
         <a className={linkClass} href={`${prefix}/hotels/${HOTEL_IDS[stem]}-hotels`}>{isBn ? "হোটেল এলাকা ও booking check" : "Hotel areas & booking checks"}</a>
       </div>
-      <p className="text-sm leading-relaxed text-slate-700">{isBn ? "বাংলাদেশ থেকে পরিকল্পনায়: " : "When planning from Bangladesh: "}<a className={linkClass} href={`${prefix}/blog/dual-currency-card-endorsement-bangladesh`}>{isBn ? "কার্ড endorsement-এর ধাপ" : "card endorsement steps"}</a> · <a className={linkClass} href={`${prefix}/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card`}>{isBn ? "bKash ও bank transfer-এ travel payment যাচাই" : "travel-payment checks for bKash and bank transfers"}</a></p>
+      <p className="text-sm leading-relaxed text-slate-700">{isBn ? "বাংলাদেশ থেকে পরিকল্পনায়: " : "When planning from Bangladesh: "}<a className={linkClass} href={`${prefix}/blog/dual-currency-card-endorsement-bangladesh`}>{isBn ? "কার্ড endorsement-এর ধাপ" : "card endorsement steps"}</a></p>
     </section>
     <TripCostEstimator key={cost.id} isBn={isBn} initialCountry={estimatorCountry} />
     <section aria-labelledby="cost-facts-heading" className="space-y-4 border-t border-slate-200 pt-6">

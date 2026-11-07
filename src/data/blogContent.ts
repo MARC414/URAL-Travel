@@ -1507,42 +1507,6 @@ Can an RFCD account have supplementary cards?
 SIBL states that its RFCD card facility allows up to two supplementary cards. Treat that as a bank-specific term and check the product you choose [4].
 Does an RFCD card remove POS or ATM limits too?
 The 9 May 2024 Bangladesh Bank circular specifically permits online payment at the actual amount. It does not establish that every POS or ATM limit disappears, so confirm those limits with the issuing bank [2].`,
-  "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": `What happens when you spot a good **Dhaka–Jeddah Umrah fare** or a hotel within walking distance of Masjid al-Haram, but you do not have a **dual-currency card**, your passport dollar endorsement is not stamped yet, or your card's single-purchase limit blocks the checkout? For Bangladeshi families in Dhaka, Chattogram, Sylhet and beyond, settling the booking in **Bangladeshi Taka (BDT)** through a local travel desk — by bank transfer, **bKash** or **Nagad** — is one option that does not require a card.
-
-1. WHY SOME BANGLADESHI TRAVELLERS CHOOSE A BDT BOOKING DESK
-Settling in Taka is a practical arrangement, not a Bangladesh Bank product. Three reasons travellers use it:
-- **Keeping the passport travel quota for spending abroad:** When flights and hotel vouchers are paid in BDT before departure, the passport's endorsed foreign exchange stays available for spending, dining and emergencies abroad. The entitlement is a ceiling released by the bank against travel documents, not a fixed sum you must spend [1].
-- **When the passport is not available or the card is not ready:** Airline promotional seats can sell out quickly. If your passport is with an embassy or a visa-processing agency, you cannot take it to a branch for endorsement, and a card may not be activated in time.
-- **Paperwork for visa and airport checks:** Embassies and Dhaka airport emigration officers may ask for a paid, confirmed booking showing the guest names and a reference number. A desk issues exactly that.
-
-2. WHAT TO VERIFY BEFORE YOU PAY A BOOKING DESK
-A desk settles in Taka and gives you an airline PNR and a hotel voucher. Treat it as a service arrangement between you and the desk, not as a bank product, and check these before paying:
-- **The all-in BDT quote:** Compare the desk's total with the airline's or hotel's own card price for the same date and room, and ask whether any conversion, service or amendment fee is inside the number.
-- **The PNR:** Ask for the airline's six-character PNR and confirm the booking directly with the airline before you treat the ticket as issued.
-- **The voucher:** The hotel voucher should carry every guest's name, the property, the dates and a booking reference the hotel can verify.
-- **Cancellation and refund terms:** Read the airline fare rules and the hotel's cancellation policy in writing, and check who bears the refund if the trip changes.
-- **The recipient:** Pay only to the business account or wallet the desk names in writing, and keep the receipt.
-
-3. STEP BY STEP: HOW A BDT BOOKING WORKS **WITH A THIRD-PARTY DESK**
-This section describes the route used by licensed travel agencies and airline offices in Dhaka. **URAL is not that desk** — it does not take your payment, your documents or your booking (see section 6).
-Step 1: Choose the flight, hotel zone or transfer:
-- Pick the exact dates, passenger count and route or hotel area the desk will quote on, using the flight search and Umrah planning tools on this site.
-Step 2: Send your details to that agency, not to URAL:
-- Message the agency you have chosen your travel dates, route or hotel preference and a passport bio-page scan so the passenger names on the PNR are spelled correctly. Be deliberate about who receives identity documents; send them only to the business you are actually paying, and check how it handles them before you do.
-- The desk replies with an all-inclusive BDT quote converted at its stated rate.
-Step 3: Pay that agency in BDT and receive the documents:
-- Pay by bank transfer, **bKash** or **Nagad** to the account or wallet the agency names in writing, then receive the airline e-ticket with its PNR, a hotel voucher and any transfer confirmation by email or WhatsApp, ready for the airport folder.
-- Where an Umrah component is involved, confirm the current visa, permit and health requirements on the official Saudi pages before booking rather than relying on a blog [3].
-
-4. WHAT CAN BE SETTLED IN BDT
-- **Umrah components:** flights, Makkah and Madinah hotels, the Haramain High-Speed Train and private transfers, each subject to the traveller holding the right visa or permit and to the airline's and hotel's own terms.
-- **Asian and Middle East holiday components:** flights, hotels and airport transfers for Nepal, Thailand, Malaysia, the Maldives, Singapore and the UAE, again subject to the traveller's own visa status.
-
-5. THE CARD ROUTE IS STILL THE DEFAULT FOR MANY TRIPS
-A BDT desk is a useful fallback, not a replacement for a card you control. If you can endorse your passport and activate a dual-currency card in time, your own name and account stay on the booking, the PNR and the receipt. The USD 300 single-online-purchase rule and the bank's decision on a larger documented payment are explained in the cluster guides linked below [2].
-
-6. WHERE URAL STANDS
-URAL is an independent travel-information and affiliate platform: it publishes researched guides, links official portals and the partners that issue each service, and answers questions on WhatsApp or through the contact form. The booking itself is completed with the airline, the hotel, the platform that sells the ticket, or a licensed agency you choose.`,
   "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": `Poor currency exchange choices quietly drain a family's travel budget. Whether you are flying from **Dhaka (DAC)** to **Jeddah or Madinah** for Umrah, or heading to **Bangkok, Kuala Lumpur, Singapore, Dubai or the Maldives**, three decisions matter most: when to carry **local cash**, when to carry **US dollars**, and how to use a **dual-currency card** at an overseas terminal without converting twice.
 
 1. UMRAH CURRENCY: BUY SAUDI RIYALS IN DHAKA, OR CARRY US DOLLARS?
