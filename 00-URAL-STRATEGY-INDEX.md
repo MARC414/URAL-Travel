@@ -6,6 +6,13 @@
 
 **Current phase, updated 26 October 2026:** the owner requested a consolidated content-optimization standard and an existing-content social production strategy using corrected historical GSC evidence and early new-domain signals. The resulting guide and proposed programme are linked below. Article rewrites, site repairs and live publication still require the relevant owner task; a draft calendar is not a published campaign.
 
+## Reader questions (7 November 2026)
+
+[**WhatsApp Answer Desk**](docs/growth/WHATSAPP-ANSWER-DESK.md) — the procedure for answering reader questions with
+AI as a drafting assistant, verifying every answer against the official authority, and sending nothing until it is
+checked. Paired with [**WHATSAPP-QUESTION-LOG.md**](docs/growth/WHATSAPP-QUESTION-LOG.md), which collects the real
+questions and becomes the content queue. This replaces the planned on-site AI helper (WP8, cancelled 7 November 2026).
+
 ## Current plan (6 November 2026)
 
 [**MASTER PLAN — international positioning, honest tools, live rates, free AI**](docs/MASTER-PLAN-2026-11-06.md)

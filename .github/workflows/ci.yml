@@ -70,6 +70,8 @@ jobs:
         run: npm run test:kkday-card
       - name: Visa-claim integrity
         run: npm run test:visa-claims
+      - name: WhatsApp answer-desk manual
+        run: npm run test:answer-desk
 
       - name: Verify Nusuk article safety and locale/schema parity
         run: npm run test:nusuk-guide

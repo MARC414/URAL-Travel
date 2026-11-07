@@ -237,7 +237,7 @@ The first draft was a flat list, which hid the dependencies. Five phases, each s
 | **1** | **Foundation** | ✅ **Complete** — one dated rate source; one number discipline | WP3 ✅ | done |
 | **2** | **Tools** | ✅ **Complete** — honest converters and estimators | WP5 ✅ · WP9 ✅ | done |
 | **3** | **Voice** | ✅ **Complete** — international framing across the interface | WP6 — D3a ✅ · D3b ✅ · D3c ✅ | done |
-| **4** | **Assistant** | The free AI helper, last, on a verified corpus | WP8 | 4–6 days |
+| **4** | **Assistant** | ⛔ **Cancelled** — replaced by the WhatsApp Answer Desk (manual, £0, no infrastructure) | WP8 ❌ → `docs/growth/WHATSAPP-ANSWER-DESK.md` | done |
 
 **Why this order and not another.** Phase 0 first because two of its items (WP1, WP2) remove claims that are false
 *right now*, and a feature shipped on top of a false claim compounds it. Phase 1 before Phase 2 because both
@@ -584,7 +584,36 @@ sat on the same page and would otherwise contradict the new heading. `lint` 0, `
 
 ## PHASE 4 — ASSISTANT
 
-### WP8 — ⛔ **NOT STARTED — blocked on infrastructure, not on effort** — Free AI helper with four hard gates
+### WP8 — ❌ **CANCELLED 7 November 2026 (owner decision)** — replaced by the WhatsApp Answer Desk
+
+**Decision.** *"No then I dont want the on-site helper now."* The free AI helper is not being built. No scaffold, no
+placeholder, no chat box. The reasoning that carried: an on-site helper cannot attach a date and a source to its own
+output, and an undated, unsourced visa answer is precisely the defect class this entire plan exists to remove. Its
+budget was also a hard ceiling of ~74 conversations/day, so it could never be the primary channel anyway.
+
+**Replacement — `docs/growth/WHATSAPP-ANSWER-DESK.md`.** A six-step manual for answering reader questions on
+WhatsApp with AI as a drafting assistant the owner controls: receive → classify fact vs service → draft with a
+constrained prompt → **verify against the deciding authority** → send in a fixed four-part shape (answer, official
+source, checked date, caveat) → log. The safety property is ordering: draft, then verify, then send.
+
+The drafting prompt contains one instruction that matters more than the rest: *"Give NO price, processing time,
+approval rate, or visa-validity figure unless I supply it … write `[NEEDS OFFICIAL FIGURE]` in its place."* That
+turns the model's most dangerous habit — confidently inventing a number — into a visible gap the human fills from the
+official page. Cost £0. No infrastructure. No daily cap.
+
+**`docs/growth/WHATSAPP-QUESTION-LOG.md`** is the other half, and the more valuable one: a table of every question
+asked, what decided it, and whether a page already covers it. Weekly, it drives the content queue by how anxious the
+questioner was, not by search volume. Its four conditions are the *evidence-based* trigger for ever revisiting an
+on-site helper: 30+ real questions, 10+ repeats, 5+ pages written from the log, and stable answers. Until those are
+true, a helper would be guessing at what readers want.
+
+**Guarded** by `scripts/test-answer-desk.ts` (7 checks, CI-wired as `test:answer-desk`): the manual must keep the
+`[NEEDS OFFICIAL FIGURE]` hatch, the standing "no payment, no booking" line, the full refusal list matching the claims
+the site already removed, and the draft → verify → send ordering. Both negative controls run and pass.
+
+---
+
+
 
 **Owner decision 7 November 2026: yes in principle, but only if it gives real help.** *"I think we should apply AI helper
 in the site if it is not able to render any real help"* — i.e. ship it when it works, not before. That matches the
