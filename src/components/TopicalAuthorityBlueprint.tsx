@@ -514,7 +514,7 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
                   "Travelers without an endorsed dual-currency card can compare the airline's or hotel's own checkout, then ask a licensed travel desk or the airline's own office about paying in Taka by local bank transfer, bKash or Nagad. URAL publishes this verification checklist and links the official portals and partners.",
     aeoDirectAnswerBn:
                   "হাতে ডুয়েল-কারেন্সি কার্ড না থাকলে এয়ারলাইন্স বা হোটেলের নিজের checkout মিলিয়ে দেখুন, তারপর লাইসেন্সপ্রাপ্ত ট্রাভেল ডেস্ক বা এয়ারলাইন্সের নিজের অফিসে দেশীয় ব্যাংক ট্রান্সফার, বিকাশ বা নগদে BDT-তে পেমেন্টের বিকল্প জানতে চান। URAL এই যাচাই-চেকলিস্ট প্রকাশ করে এবং অফিশিয়াল পোর্টাল ও পার্টনারের লিংক দেয়।",
-        eavTriples: "Pay in BDT Without a Card (Topic) → Verification Step (Attribute) → All-in BDT Quote, Airline-Confirmed PNR, Voucher Reference (Value)",
+        eavTriples: "BDT Settlement Without a Card (Topic) → Verification Step (Attribute) → All-in BDT Quote, Airline-Confirmed PNR, Voucher Reference (Value)",
     targetPath: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
     isLiveBlog: false,
   },

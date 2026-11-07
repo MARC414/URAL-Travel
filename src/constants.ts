@@ -2004,7 +2004,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account vs. Travel Quota (the $300 online-payment rule)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "Cash SAR / USD vs. Card Abroad (choose local currency, avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
-            { text: "How to Pay for Flights & Makkah Hotels in BDT (bKash / Bank Transfer)", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+            { text: "How to Settle Flights & Makkah Hotels in BDT (bKash / Bank Transfer)", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Card Endorsed & Ready?", body: "Compare live international flight fares from Dhaka and book with your endorsed card." }
@@ -3195,7 +3195,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Passport Dollar Endorsement and Card Activation Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Cash vs. Card Abroad (choose local currency and avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-            { text: "No Card? How to Pay in BDT via bKash or Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+            { text: "No Card? BDT Payment Checks via bKash or Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Dual-Currency Card Fee and Markup Calculator", path: "/tools/currency-converter" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare the Fare Before You Ask Your Bank", body: "Check the live flight price and exact checkout amount, then ask your card issuer about documented travel-payment approval before paying." }
@@ -3203,7 +3203,7 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-30",
     slug: "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
-        title: "How to Pay for Flights, Makkah Hotels & Airport Transfers in BDT (bKash / Bank Transfer, No Card Needed)",
+        title: "How to Settle Flights, Makkah Hotels & Airport Transfers in BDT (bKash / Bank Transfer, No Card Needed)",
             summary: "Not every Bangladeshi traveller has an endorsed dual-currency card ready when a cheap fare or a Haram-view hotel rate appears online. This guide explains the pay-in-Taka route honestly: who can settle a booking in BDT, what the airline PNR and hotel voucher must show, which charges belong inside the all-in quote, and what to keep for the Dhaka Airport immigration folder. It also explains where URAL's own role ends: researched information, official portals and affiliate partners, with questions answered on WhatsApp or through the contact form.",
     category: "Banking & Payments",
     date: "September 27, 2026",
