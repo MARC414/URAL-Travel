@@ -23,7 +23,6 @@
 import React, { useState } from "react";
 import {
   ExternalLink,
-  Sparkles,
   Calendar,
   Clock,
   ShieldAlert,
@@ -107,7 +106,6 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
         <div className="relative z-10 space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="inline-flex items-center gap-2 bg-[#F6B73C]/20 border border-[#F6B73C]/40 text-[#F6B73C] text-xs font-mono font-bold px-3.5 py-1.5 rounded-full">
-              <Sparkles size={13} />
               <span>
                 {isBn
                   ? "অফিসিয়াল স্কিপ-দ্য-লাইন ও সিটি পাস হাব (Tiqets + Klook)"
@@ -302,7 +300,6 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                     : "text-slate-700 hover:bg-white"
                 }`}
               >
-                <Sparkles size={14} className="text-[#F6B73C]" />
                 <span>
                   {isBn
                     ? "⚡ Tiqets অফিশিয়াল লাইভ স্ক্যানার (Promo 3948)"

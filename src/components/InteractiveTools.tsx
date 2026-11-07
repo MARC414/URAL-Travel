@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { CheckSquare, Sparkles, Check, Plane, Search, Copy, Send, ArrowRight } from "lucide-react";
+import { CheckSquare, Check, Plane, Search, Copy, Send, ArrowRight } from "lucide-react";
+import { AscentMark } from "./AscentMark";
 import { AirHelpWidget } from "./AirHelpWidget";
 import { trackWhatsAppInquiry } from "../utils/analytics";
 import { checklistProgress } from "../utils/checklistProgress";
@@ -210,7 +211,7 @@ export function InteractiveTools({ initialTool, initialCountry }: InteractiveToo
       {/* Tools Top Header Navigation */}
       <div className="bg-brand-navy px-4 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-slate-700 sm:px-6">
         <h2 className="ural-section-title font-serif text-lg font-bold text-white flex min-w-0 items-center gap-2">
-          <Sparkles className="shrink-0 text-[#F6B73C]" size={20} />
+          <AscentMark size={20} variant="ivory" />
           {isBn ? "URAL ট্রাভেল টুলস" : "URAL Travel Tools"}
         </h2>
         <div
@@ -685,7 +686,6 @@ export function InteractiveTools({ initialTool, initialCountry }: InteractiveToo
             {/* Travel Agent Tip */}
             <div className="ural-panel bg-slate-50 border border-border-subtle p-5 space-y-2">
               <div className="flex items-center gap-2 text-xs font-bold text-brand-navy uppercase tracking-wider">
-                <Sparkles size={14} className="text-[#D4941A]" />
                 <span>Senior Ticketing Consultant Advice for Inbound Callers</span>
               </div>
               <p className="text-xs text-slate-700 leading-relaxed">

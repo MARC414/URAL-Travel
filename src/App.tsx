@@ -18,7 +18,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
-  Sparkles,
   Link2,
   Calendar,
   Layers,
@@ -53,6 +52,7 @@ import { HOME_FAQS, HOME_FAQ_HEADING } from "./data/homeFaqs";
 
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
+import { AscentMark } from "./components/AscentMark";
 import {
   KiwitaxiTransferWidget,
   WelcomePickupsWidget,
@@ -2860,7 +2860,6 @@ export default function App() {
                       <div className="bg-white/6 border border-white/12 rounded-2xl p-3.5 space-y-2">
                         <div className="flex items-center justify-between text-[11px] font-mono">
                           <span className="text-cyan-300 font-bold inline-flex items-center gap-1.5">
-                            <Sparkles size={12} className="text-cyan-300 shrink-0" />
                             <span>{isBn ? "KKday ১০.১০ উইন্টার সেল (৩০% ছাড়)" : "KKday 10.10 Winter Sale (30% OFF)"}</span>
                           </span>
                           <span className="text-amber-300 font-semibold">30% Codes</span>
@@ -4293,7 +4292,6 @@ export default function App() {
                 </div>
                 <div className="space-y-1 p-4 bg-slate-900/40 rounded-xl border border-slate-800">
                   <span className="text-[#F6B73C] font-semibold text-xs inline-flex items-center gap-1.5 uppercase tracking-wider font-mono">
-                    <Sparkles size={13} className="text-[#F6B73C]" />
                     <span>{isBn ? "দ্রুত ও সম্পূর্ণ ফ্রি" : "Fast and Free"}</span>
                   </span>
                   <p className="text-[11px] text-[#F6B73C] font-bold mt-1">
@@ -5309,7 +5307,7 @@ export default function App() {
       {/* Dynamic Action Affiliate Conversion Toast Overlay */}
       {affiliateToast && (
         <div id="converter-toast" className="fixed bottom-6 right-6 z-50 max-w-sm bg-brand-navy text-white p-4 rounded-xl shadow-2xl border border-[#F6B73C] animate-fade-in flex items-start gap-4">
-          <div className="p-2 bg-[#F6B73C] text-brand-navy rounded-lg shrink-0 text-xs"><Sparkles size={14} /></div>
+          <div className="p-1.5 bg-[#F6B73C] text-brand-navy rounded-lg shrink-0"><AscentMark size={18} variant="monoNavy" /></div>
           <div className="space-y-1 text-xs">
             <span className="font-mono font-bold text-[#F6B73C] block uppercase tracking-wide font-sans">Secure Partner Dispatch</span>
             <p className="leading-relaxed font-sans text-slate-300">{affiliateToast}</p>

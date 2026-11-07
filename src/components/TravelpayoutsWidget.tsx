@@ -11,7 +11,6 @@ import {
   Clock,
   Luggage,
   ShieldCheck,
-  Sparkles,
   ExternalLink,
   ChevronDown,
   ChevronUp,
@@ -2528,7 +2527,6 @@ export default function TravelpayoutsWidget({
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1">
                 <div className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider bg-brand-navy text-[#F6B73C] px-2.5 py-1 rounded-md">
-                  <Sparkles size={12} />
                   <span>Global Live Flight Search Ready · {committedQuery.origin.code} → {committedQuery.destination.code}</span>
                 </div>
                 <h4 className="text-base font-bold text-slate-900">

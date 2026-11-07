@@ -9,7 +9,6 @@ import {
   MapPin,
   ShieldCheck,
   FileText,
-  Sparkles,
 } from "lucide-react";
 import { TravelpayoutsEmbed } from "./TravelpayoutsEmbed";
 import { TravelpayoutsCustomWidget } from "./TravelpayoutsCustomWidget";

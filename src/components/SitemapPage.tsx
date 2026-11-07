@@ -11,7 +11,6 @@ import {
   CreditCard,
   Search,
   RotateCcw,
-  Sparkles,
   MapPin,
   AlertTriangle,
   BookOpen,
@@ -861,7 +860,6 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
 
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
             <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
-              <Sparkles size={17} className="text-emerald-600" />
               <span>
                 {isBn
                   ? "ওমরাহ ও হজযাত্রীদের জন্য জমজম পানির নিয়ম"

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ExternalLink, Sparkles, ShieldCheck, RefreshCw, Ticket, CheckCircle2, AlertCircle } from "lucide-react";
+import { ExternalLink, ShieldCheck, RefreshCw, Ticket, CheckCircle2, AlertCircle } from "lucide-react";
 import { AFFILIATE_LINKS, resolvePartnerUrl } from "./AffiliatePartners";
 import { Language } from "../translations";
 
@@ -240,7 +240,6 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
                 rel="noopener noreferrer sponsored"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-navy hover:bg-[#10243E] text-white text-xs font-bold transition-all shadow hover:shadow-md cursor-pointer"
               >
-                <Sparkles size={13} className="text-[#F6B73C]" />
                 <span>
                   {isBn ? "Tiqets এ সব টিকেট খুঁজুন" : `Browse All Tickets for ${cityName} on Tiqets`}
                 </span>

@@ -6,8 +6,7 @@ import {
   ExternalLink, 
   Info, 
   Users, 
-  Layers, 
-  Sparkles 
+  Layers 
 } from "lucide-react";
 import {
   AFFILIATE_OFFER_REGISTRY,
@@ -128,7 +127,6 @@ export function TravelpayoutsOnboarding() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
           <div>
             <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-brand-navy bg-[#F6B73C]/20 px-3 py-1 rounded-full mb-2">
-              <Sparkles size={13} className="text-amber-600" />
               Configured Offer Registry — Manual Review Needed
             </div>
             <h3 className="font-serif text-lg sm:text-xl font-black text-slate-900">
