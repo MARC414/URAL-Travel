@@ -56,6 +56,7 @@ export const BLOG_CATEGORY_TABS: readonly BlogCategoryTab[] = [
 
 /** Filter id → every post category label (both locales) that the tab groups in. */
 export const BLOG_CATEGORY_GROUPINGS: Readonly<Record<string, readonly string[]>> = {
+  "Hajj & Umrah": ["Hajj & Umrah", "হজ্জ ও ওমরাহ"],
   "Flights, Hotels & Food": [
     "Cheap Flight Tips",
     "Hotel Planning",

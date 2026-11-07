@@ -428,6 +428,8 @@ const AFFILIATE_CTA_LABELS: Record<string, { en: string; bn: string }> = {
   airalo: { en: "Check Travel eSIM Plans", bn: "Saudi / ট্রাভেল eSIM দেখুন" },
   airhelp: { en: "Check Flight Compensation Eligibility", bn: "ফ্লাইট ক্ষতিপূরণের যোগ্যতা দেখুন" },
   qeeq: { en: "Compare Car Rental Rates", bn: "গাড়ি ভাড়ার দাম তুলনা করুন" },
+  klookHotels: { en: "Compare Hotel Rates & Availability", bn: "হোটেলের ভাড়া ও রুমের Availability দেখুন" },
+  kkdayHotels: { en: "Compare Hotel Rates & Availability", bn: "হোটেলের ভাড়া ও রুমের Availability দেখুন" },
 };
 
 const AFFILIATE_CTA_FALLBACK_LABEL = {

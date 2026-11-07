@@ -35,7 +35,18 @@ assert.equal(getPostsDueForPublishing(dueFixtures, nowAtPublish).length, 1);
 assert.equal(getPostsDueForPublishing(dueFixtures, nowAtPublish, true).length, 2);
 
 const repoPosts = loadScheduledBlogPosts();
-assert.equal(repoPosts.length, 4, "the two Cox’s Bazar articles, the affiliate experiment and the social-income article should be retained in content/blog");
+assert.ok(repoPosts.length >= 4, "the retained articles must stay in content/blog");
+for (const retainedSlug of [
+  "coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh",
+  "kathmandu-to-coxs-bazar-flights-route-status-booking",
+  "can-you-make-money-travel-affiliate-marketing-ural-experiment",
+  "turn-travel-experience-into-income-without-a-website",
+]) {
+  assert.ok(
+    repoPosts.some((post) => post.slug === retainedSlug),
+    `content/blog must retain ${retainedSlug}`,
+  );
+}
 const affiliateExperimentPost = repoPosts.find(
   (post) => post.slug === "can-you-make-money-travel-affiliate-marketing-ural-experiment",
 );

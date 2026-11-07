@@ -157,7 +157,7 @@ export interface BlogPost {
    */
   journeyStage?: "prepare" | "travel" | "perform" | "return";
   internalLinks: { text: string; path: string }[];
-  affiliateCTA?: { provider: "aviasales" | "klook" | "kkday" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage" | "yesim" | "kiwi" | "getTransfer" | "goCity"; headline: string; body: string };
+  affiliateCTA?: { provider: "aviasales" | "klook" | "klookHotels" | "kkday" | "kkdayHotels" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage" | "yesim" | "kiwi" | "getTransfer" | "goCity"; headline: string; body: string };
   /**
    * In-article callout boxes injected at specific paragraph positions.
    * blockIdx = the index in the \n\n-split body array where the callout renders.

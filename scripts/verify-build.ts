@@ -80,7 +80,7 @@ import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
 import { SCHEDULED_BLOG_ALT_TEXT } from "../src/data/scheduledBlogIndex.generated";
 import { BLOG_BODY } from "../src/data/blogContent";
 import { blogCategoryFilterIds } from "../src/utils/blogCategories";
-import { dhakaCalendarDate, loadScheduledBlogPosts } from "./scheduledPosts";
+import { dhakaCalendarDate, isPublicationTimeReached, loadScheduledBlogPosts } from "./scheduledPosts";
 import {
   BENGALI_BLOG_OVERRIDES,
   getLocalizedBlogs,
@@ -774,9 +774,12 @@ check(
 // checker (getPostsDueForPublishing) uses strict date equality, so without this
 // a missed day means a post is missed forever. Scoped to the overdue set only,
 // so genuinely future-dated drafts never trip it.
+// "Overdue" means the 9 AM Dhaka publishing gate has passed, not merely that the
+// calendar date matches — otherwise a post dated today looks overdue at 3 AM
+// while the generator is still (correctly) holding it back.
 const overdueScheduled = loadScheduledBlogPosts().filter((post) => {
   if (post.status !== "scheduled" || !post.publishDate) return false;
-  return post.publishDate <= dhakaCalendarDate(new Date());
+  return isPublicationTimeReached(post, new Date());
 });
 const overdueMissingFromOutput = overdueScheduled.filter(
   (post) => !cxbFeedOutputs.includes(post.slug),
@@ -4199,7 +4202,12 @@ if (rss) {
   // Raised by 1 KB on 1 November 2026 for the site-wide search trigger and
   // keyboard shortcut (~0.4 KB gzip measured); the dialog and search index must
   // stay lazy, guarded below.
-  const EAGER_JS_BUDGET_KB = 206;
+  // Raised to 212 KB on 8 November 2026 for the Makkah/Madinah accommodation
+  // cluster: eight scheduled posts add their frontmatter, reference labels and
+  // curated planning links to the generated post data, which the homepage blog
+  // index imports eagerly (measured 210.6 KB gzip). Follow-up worth doing:
+  // move scheduled-post metadata behind the lazy route-data chunk.
+  const EAGER_JS_BUDGET_KB = 212;
   const contentDataIsEager = [...new Set([...eagerScripts, ...eagerPreloads])].some((url) =>
     /content-data/i.test(url)
   );
