@@ -1523,14 +1523,15 @@ A desk settles in Taka and gives you an airline PNR and a hotel voucher. Treat i
 - **Cancellation and refund terms:** Read the airline fare rules and the hotel's cancellation policy in writing, and check who bears the refund if the trip changes.
 - **The recipient:** Pay only to the business account or wallet the desk names in writing, and keep the receipt.
 
-3. STEP BY STEP: HOW A BDT BOOKING WORKS
+3. STEP BY STEP: HOW A BDT BOOKING WORKS **WITH A THIRD-PARTY DESK**
+This section describes the route used by licensed travel agencies and airline offices in Dhaka. **URAL is not that desk** — it does not take your payment, your documents or your booking (see section 6).
 Step 1: Choose the flight, hotel zone or transfer:
 - Pick the exact dates, passenger count and route or hotel area the desk will quote on, using the flight search and Umrah planning tools on this site.
-Step 2: Send your details:
-- Message the desk your travel dates, route or hotel preference and a passport bio-page scan so the passenger names on the PNR are spelled correctly.
+Step 2: Send your details to that agency, not to URAL:
+- Message the agency you have chosen your travel dates, route or hotel preference and a passport bio-page scan so the passenger names on the PNR are spelled correctly. Be deliberate about who receives identity documents; send them only to the business you are actually paying, and check how it handles them before you do.
 - The desk replies with an all-inclusive BDT quote converted at its stated rate.
-Step 3: Pay in BDT and receive the documents:
-- Pay by bank transfer, **bKash** or **Nagad**, then receive the airline e-ticket with its PNR, a hotel voucher and any transfer confirmation by email or WhatsApp, ready for the airport folder.
+Step 3: Pay that agency in BDT and receive the documents:
+- Pay by bank transfer, **bKash** or **Nagad** to the account or wallet the agency names in writing, then receive the airline e-ticket with its PNR, a hotel voucher and any transfer confirmation by email or WhatsApp, ready for the airport folder.
 - Where an Umrah component is involved, confirm the current visa, permit and health requirements on the official Saudi pages before booking rather than relying on a blog [3].
 
 4. WHAT CAN BE SETTLED IN BDT

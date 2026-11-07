@@ -234,9 +234,9 @@ The first draft was a flat list, which hid the dependencies. Five phases, each s
 | Phase | Name | Goal | Packages | Effort |
 |---|---|---|---|---|
 | **0** | **Truth** | ✅ **Complete** — remove everything false or stale *today*; make the site measurable | WP7 ✅ · WP0 ✅ · WP4 ✅ · WP2 ✅ · WP1 ✅ | **Phase 0 complete** |
-| **1** | **Foundation** | One dated rate source; one number discipline | WP3 | 1–2 days |
+| **1** | **Foundation** | ✅ **Complete** — one dated rate source; one number discipline | WP3 ✅ | done |
 | **2** | **Tools** | Make the converters and estimators honest and useful | WP5, WP9 | 4–6 days |
-| **3** | **Voice** | International framing across the interface | WP6 | 0.5 day |
+| **3** | **Voice** | International framing across the interface | WP6 — D3a ✅ · D3b ✅ · **D3c needs owner decision** | ~0.5 day left |
 | **4** | **Assistant** | The free AI helper, last, on a verified corpus | WP8 | 4–6 days |
 
 **Why this order and not another.** Phase 0 first because two of its items (WP1, WP2) remove claims that are false
@@ -414,7 +414,11 @@ branch, which is correct.
 
 ## PHASE 1 — FOUNDATION
 
-### WP3 — 🟠 One dated rate source, and the end of hand-typed rates *(1–2 days · blocks WP5, WP9)*
+### WP3 — ✅ **DONE 7 November 2026** — One dated rate source, and the end of hand-typed rates *(unblocks WP5, WP9)*
+
+**Delivered in `0f2b8484`** (66 files, +2752/−3015) — the commit message names the travel-tool and fare work, so the
+WP3 half is recorded here: **all fixed rate constants were deleted from `src/`**; `functions/api/rates.js` and
+`src/utils/rateData.ts` are now the only rate source, and `src/utils/rates.ts` the only browser client.
 
 **7 November implementation resolution.** The endpoint and client now share `rateData.ts`. They read the
 provider's real top-level Unix timestamps, validate the base and finite rates, preserve the date through cache
@@ -482,6 +486,20 @@ D3 splits into three independently shippable slices:
 
 D3a goes first because it is the only slice that is *legally identifying*: it is the machine-readable answer to
 "what is this business". D3b is the visible half of the same sentence. D3c waits for the owner's article decision.
+
+**D3b — shipped 7 November 2026** (`0f2b8484`). Every "pay in BDT / message our Dhaka desk / pay in Taka via bKash"
+claim was replaced with platform-checkout guidance: `ExperiencesPage.tsx` (banner body), `GlobalAttractionsHub.tsx`
+(advisory bullet 2), `App.tsx` and `InteractiveTools.tsx`. Verified: `grep` for "message our dhaka desk" and "pay in
+Bangladeshi Taka via" returns **0**. The surviving "Payment Guide" headings are guidance, not a payment offer, and stay.
+
+**D3c — partially decided; one defect fixed 7 November 2026.** Rewording the three titles from "Pay" to "Settle" did
+not resolve the ambiguity my review flagged: the article's STEP-BY-STEP section said *"Message **the desk** your travel
+dates … and a passport bio-page scan"* and *"pay by bKash or Nagad"* without ever naming who "the desk" was, on a
+domain the reader is already on. A reader would reasonably supply URAL. Fixed by naming the actor explicitly — the
+section now opens *"This section describes the route used by licensed travel agencies and airline offices in Dhaka.
+**URAL is not that desk** — it does not take your payment, your documents or your booking"* — and Step 2 warns the
+reader to send identity documents only to the business they are actually paying. **The rewrite-or-301 decision still
+belongs to the owner** and is unchanged.
 
 **Q4 is resolved** (owner, 7 November 2026): URAL takes no payment for travel services. A paid consultation may
 exist later, and must be disclosed on the page that offers it — not implied in a menu label.

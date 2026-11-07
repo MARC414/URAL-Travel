@@ -300,6 +300,40 @@ test("no tool tab can ship unmeasured", () => {
 });
 
 // ---------------------------------------------------------------------------
+// Payments: the site must never imply URAL takes the money.
+// ---------------------------------------------------------------------------
+
+/**
+ * Q4 (owner, 7 Nov 2026): URAL takes no payment for travel services. The risk
+ * is not a direct claim — those are gone — but a *silent subject*: an article
+ * that says "message the desk ... pay by bKash" on URAL's own domain, leaving
+ * the reader to assume URAL is the desk. A disclaimer at the end of the page is
+ * not enough when the instruction itself implies it.
+ */
+test("no article instructs the reader to pay or send documents without naming the recipient", () => {
+  const offenders: string[] = [];
+  const paymentInstruction =
+    /(pay|send|message)\s+(the\s+)?desk\b|message our desk|pay in BDT|pay by bank transfer, \*\*bKash\*\*/i;
+  for (const file of contentFiles) {
+    const source = stripComments(readFileSync(file, "utf8"));
+    source.split("\n").forEach((line, i) => {
+      if (!paymentInstruction.test(line)) return;
+      // A nearby explicit disclaimer satisfies the rule.
+      const context = source.slice(Math.max(0, i - 2000), i + 2000);
+      const namesAudience = /(agency|agent|airline|platform|hotel|desk|office)/i.test(line);
+      const disclaims = /URAL is not that desk|not to URAL|does not take your payment|agency you (have )?chosen/i.test(context);
+      if (namesAudience && disclaims) return;
+      if (!/desk/i.test(line)) return; // unambiguous subjects are fine
+      offenders.push(`${path.relative(ROOT, file)}:${i + 1} "${line.trim().slice(0, 90)}"`);
+    });
+  }
+  assert(
+    offenders.length === 0,
+    `payment instructions with an unnamed 'desk':\n    ${offenders.join("\n    ")}`
+  );
+});
+
+// ---------------------------------------------------------------------------
 
 if (failures.length > 0) {
   console.error(`\n${failures.length} visa-claim integrity test(s) failed:`);
