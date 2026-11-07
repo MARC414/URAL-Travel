@@ -18,7 +18,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
-  Sparkles,
   Link2,
   Calendar,
   Layers,
@@ -53,6 +52,7 @@ import { HOME_FAQS, HOME_FAQ_HEADING } from "./data/homeFaqs";
 
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
+import { AscentMark } from "./components/AscentMark";
 import {
   KiwitaxiTransferWidget,
   WelcomePickupsWidget,
@@ -5307,7 +5307,7 @@ export default function App() {
       {/* Dynamic Action Affiliate Conversion Toast Overlay */}
       {affiliateToast && (
         <div id="converter-toast" className="fixed bottom-6 right-6 z-50 max-w-sm bg-brand-navy text-white p-4 rounded-xl shadow-2xl border border-[#F6B73C] animate-fade-in flex items-start gap-4">
-          <div className="p-2 bg-[#F6B73C] text-brand-navy rounded-lg shrink-0 text-xs"><Sparkles size={14} /></div>
+          <div className="p-1.5 bg-[#F6B73C] text-brand-navy rounded-lg shrink-0"><AscentMark size={18} variant="monoNavy" /></div>
           <div className="space-y-1 text-xs">
             <span className="font-mono font-bold text-[#F6B73C] block uppercase tracking-wide font-sans">Secure Partner Dispatch</span>
             <p className="leading-relaxed font-sans text-slate-300">{affiliateToast}</p>
