@@ -19,6 +19,7 @@
  */
 
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -93,20 +94,43 @@ const jobs: Job[] = [
   { out: "../../../apple-touch-icon.png", src: "navyField", size: 180 },
 ];
 
+interface SharpChain {
+  resize(width: number, height: number, options?: { kernel?: string }): SharpChain;
+  flatten(options: { background: string }): SharpChain;
+  composite(items: { input: Buffer; top: number; left: number }[]): SharpChain;
+  png(options?: { compressionLevel?: number }): SharpChain;
+  toBuffer(): Promise<Buffer>;
+  toFile(target: string): Promise<unknown>;
+}
+
 type SharpInput =
   | string
   | Buffer
   | { create: { width: number; height: number; channels: number; background: string } };
-type SharpFn = (input: SharpInput) => import("sharp").Sharp;
+type SharpFn = (input: SharpInput) => SharpChain;
+
+async function loadSharp(): Promise<SharpFn | null> {
+  // Loaded through createRequire, NOT a static `import("sharp")`.
+  //
+  // sharp is intentionally absent from package.json: it is a native module needed
+  // only to regenerate icons, and CI does not install it. A static import made
+  // `tsc --noEmit` fail in CI with "Cannot find module 'sharp'" while passing
+  // locally where I had installed it — a local-pass/CI-fail gap. createRequire
+  // resolves at runtime only, so the type-check is independent of whether sharp
+  // is present, and the local interfaces above describe just the slice we use.
+  const require_ = createRequire(import.meta.url);
+  try {
+    const mod = require_("sharp");
+    const fn = (mod?.default ?? mod) as SharpFn;
+    return typeof fn === "function" ? fn : null;
+  } catch {
+    return null;
+  }
+}
 
 async function main() {
-  let sharp: SharpFn;
-  try {
-    // sharp ships CJS; the callable factory is on `default` at runtime but is
-    // typed inconsistently, so pin the shape we actually use.
-    const mod = (await import("sharp")) as unknown as { default?: SharpFn } & SharpFn;
-    sharp = (mod.default ?? mod) as SharpFn;
-  } catch {
+  const sharp = await loadSharp();
+  if (!sharp) {
     console.log(
       "sharp is not installed. Run `npm install --no-save sharp` then re-run.\n" +
         "Skipping icon generation (this script is not part of the build)."
@@ -129,7 +153,7 @@ async function main() {
       const inner = Math.round(job.size * 0.6);
       const mark = await sharp(source)
         .resize(inner, inner)
-        .flatten({ background: job.backdrop })
+        .flatten({ background: job.backdrop ?? NAVY })
         .png()
         .toBuffer();
       const off = Math.round((job.size - inner) / 2);
