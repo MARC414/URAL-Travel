@@ -34,7 +34,7 @@ site repairs or live publication outside the current owner task.
   - Global flight search and hotel-partner handoffs using Travelpayouts White Label **Page 24232** at `https://flights.uraltravel.co.uk/`, Aviasales, and Kiwi.com (`marker=675992`, project `trs=589561`). Provider activation evidence is recorded in [the hosted-search reference](docs/04-monetization/FLIGHT-WHITE-LABEL.md).
   - Step-by-step Tourist, Medical, and Umrah Visa Checklists (`Nepal`, `Thailand`, `Malaysia`, `UAE/Dubai`, `Singapore`, `Maldives`, `Schengen`, `Saudi Arabia`).
   - Bilingual Support (`en` English & `bn` Bengali) with dynamic `<html lang>` synchronization.
-  - Multi-Currency Display (`BDT`, `USD`, `EUR`, `GBP`, `SAR`, `AED`). The inspected widget conversions use fixed rates; do not describe them as live FX.
+  - Multi-Currency Display (`BDT`, `USD`, `EUR`, `GBP`, `SAR`, `AED`). Local conversions use ExchangeRate API's dated daily reference rates, with source attribution and a bounded, labelled cache fallback. These are planning references, not transaction quotes. See the [travel-tool contracts](docs/01-technical-seo-aeo/TRAVEL-TOOLS.md).
   - Static Prerendering (`scripts/prerender.ts`) generating crawlable HTML, OpenGraph metadata, and Schema.org JSON-LD (`FAQPage`, `Article`, `Organization`, `BreadcrumbList`) for English and Bengali routes. URAL is a travel-information and affiliate referral platform; partner products are not sold by URAL and must not be marked up as URAL `Product`/`Offer` listings.
 
 ---
@@ -98,10 +98,10 @@ Both apply to every AI tool and contributor. Social tasks also use the current a
 
 ## 3. Global Flight & Hotel Search Architecture
 
-1. **Global Flight Scanner (`src/components/TravelpayoutsWidget.jsx`)**:
+1. **Global Flight Scanner (`src/components/TravelpayoutsWidget.tsx`)**:
    - Defaults to `Dhaka (DAC)` for convenience, while supporting **any global origin or destination city/airport** via a 65+ international airport directory plus live autocomplete from `https://autocomplete.travelpayouts.com/places2`.
    - The form hands off route, departure/return dates, trip type, cabin, adult count, currency and language to the hosted Page through `src/utils/flightSearch.ts`. The handoff currency follows the departure country by default: BDT for a Bangladesh departure, USD for every other origin, and never overriding a currency the visitor chose. Children and infants can be added on the provider page.
-   - Unlisted global routes (e.g., `London → New York`, `Dhaka → Rome`, `Toronto → Istanbul`) **must never display fake flight schedules**. Hosted search opens in a top-level tab. The optional legacy `showInlineResults` benchmark view supplies hosted/Aviasales/Kiwi handoffs; it no longer embeds a white-label engine.
+   - All routes **must never display fake flight schedules or price forecasts**. Hosted search opens in a top-level tab. The optional legacy `showInlineResults` view supplies hosted/Aviasales/Kiwi handoffs; it renders neither the old sample-fare table nor an embedded white-label engine. Date comparison opens the hosted provider's search.
 2. **Global Hotel & Flight Custom Widget (`src/components/TravelpayoutsCustomWidget.tsx`)**:
    - Features the **Explore Popular Cities** 12-hub selector (`Makkah`, `Paris`, `Dubai`, `Madinah`, `Bangkok`, `Kuala Lumpur`, `London`, `Singapore`, `Maldives`, `Istanbul`, `Kathmandu`, `New York`) above the global search bar.
    - Flight mode supports global airport autocomplete, departure date and the 6-currency selector.
@@ -119,6 +119,15 @@ Both apply to every AI tool and contributor. Social tasks also use the current a
 
 - `src/components/TravelpayoutsOnboarding.tsx` and `src/components/AeoInspector.tsx` are internal owner/operator diagnostics.
 - They are strictly lazy-loaded and gated behind `isAdmin` (`?admin`, `?inspector`, or `?onboarding=true` URL query parameters) in `src/App.tsx` and are **never** included in `scripts/prerender.ts` or public sitemaps.
+
+### Travel-tool data contract
+
+`src/utils/rateData.ts` validates provider timestamps and rates for both the edge function and the browser.
+`TripCostEstimator.tsx` and `UmrahBudgetCalculator.tsx` are shared with prerendering. Unknown required
+costs produce no total; explicit zero is valid. Inputs remain BDT and currency selection changes display only.
+The estimator's six destinations match the bilingual planning records in `src/data/tripCosts.ts`.
+Those records replace the former unsourced price matrices; never restore them by assigning a code-review
+date as a supplier price-check date. Details and test commands: [travel-tool contracts](docs/01-technical-seo-aeo/TRAVEL-TOOLS.md).
 
 ---
 

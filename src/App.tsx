@@ -219,7 +219,7 @@ const TravelpayoutsOnboarding = React.lazy(() =>
 const PriceAlertModal = React.lazy(() =>
   import("./components/PriceAlertModal").then((m) => ({ default: m.PriceAlertModal }))
 );
-const TravelpayoutsWidget = React.lazy(() => import("./components/TravelpayoutsWidget.jsx"));
+const TravelpayoutsWidget = React.lazy(() => import("./components/TravelpayoutsWidget.tsx"));
 const TravelpayoutsEmbed = React.lazy(() =>
   import("./components/TravelpayoutsEmbed").then((m) => ({ default: m.TravelpayoutsEmbed }))
 );
@@ -654,8 +654,8 @@ const SUBSCRIPTION_INTERESTS: readonly SubscriptionInterest[] = [
 
 const SUBSCRIPTION_INTEREST_LABELS: Record<SubscriptionInterest, { en: string; bn: string }> = {
   "dhaka-fare-alerts": {
-    en: "Dhaka flight fare-drop alerts",
-    bn: "ঢাকা থেকে ফ্লাইট ভাড়া কমার অ্যালার্ট",
+    en: "Dhaka flight fare guidance on WhatsApp",
+    bn: "ঢাকা থেকে ফ্লাইটের ভাড়া নিয়ে WhatsApp-এ নির্দেশনা",
   },
   "travel-newsletter": {
     en: "General URAL travel newsletter",
@@ -893,8 +893,6 @@ export default function App() {
   const [heroVisaCountry, setHeroVisaCountry] = useState("nepal-visa");
 
   // Custom Interactive Home states
-  const [currencyAmount, setCurrencyAmount] = useState<number>(10000);
-  const [currencyToOption, setCurrencyToOption] = useState<"USD" | "NPR" | "THB" | "MYR" | "AED" | "SGD">("NPR");
   const [emailSubscribed, setEmailSubscribed] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
       return Boolean(localStorage.getItem("ural_subscribed_email"));
@@ -1157,7 +1155,8 @@ export default function App() {
     } else if (root === "flights" && segs.length <= 2) {
       const routeParam = searchParams.get("route") || subSegment;
       section = "flights";
-      parameterId = routeParam || "dhaka-kathmandu";
+      // No default route here: /flights is the hub, /flights/:id is the route guide.
+      parameterId = routeParam;
       isLanding = !routeParam;
     } else if (root === "hotels" && segs.length <= 2) {
       const cityParam = searchParams.get("city") || subSegment;
@@ -1463,7 +1462,7 @@ export default function App() {
 
     if (isLanding) {
       seoTitle = `Flights from Dhaka: Compare Fares, Routes & Airlines (${year}) | URAL`;
-      seoDescription = "Compare nonstop and connecting flights from Dhaka, with typical fares, journey times and airline options for popular international routes.";
+      seoDescription = "Compare nonstop and connecting flights from Dhaka, with journey times, airline options and live fare checks for your own travel dates.";
       const collectionNode = collectionPageSchema({
         url: hubUrl,
         name: seoTitle,
@@ -1488,7 +1487,7 @@ export default function App() {
       seoTitle = activeRoute.id === "dhaka-kathmandu"
         ? `Dhaka to Kathmandu Flight Guide 2026: Price, Time & Visa | URAL`
         : `Flights from Dhaka to ${activeRoute.to.split(" (")[0]} (${activeRoute.country}) ${year} | URAL`;
-      seoDescription = `Compare flights from Dhaka to ${activeRoute.to.split(" (")[0]}. Check typical flight times, airlines and BDT fare guidance before booking.`;
+      seoDescription = `Compare flights from Dhaka to ${activeRoute.to.split(" (")[0]}. Check flight times, airlines and live fares for your own travel dates before booking.`;
 
       let schemaObj: any = undefined;
       try {
@@ -1720,8 +1719,8 @@ export default function App() {
     const hubUrl = siteUrl("/costs", lang);
 
     if (isLanding) {
-      seoTitle = `International Trip Budgets from Bangladesh: Realistic BDT Cost Guides | URAL`;
-      seoDescription = "How much does an international trip really cost from Dhaka? Detailed BDT budgets for Nepal, Thailand, Malaysia, and Dubai covering flights, hotels, food & transport.";
+      seoTitle = "Trip Budget Guides: Six Destinations & Quote Planning | URAL";
+      seoDescription = "Plan trip costs for Nepal, Thailand, Malaysia, Dubai, Singapore and the Maldives using current quotes, clear units and a dated cost estimator.";
       const collectionNode = collectionPageSchema({
         url: hubUrl,
         name: seoTitle,
@@ -1730,7 +1729,7 @@ export default function App() {
         items: localizedCosts.map((c) => ({
           name: isBn
             ? getBengaliSeoCopy(`/costs/${c.id}`)?.title || `${c.country} ভ্রমণ খরচ (BDT)`
-            : `${c.country} 5-Day Trip Cost Breakdown in BDT`,
+            : `${c.country} Trip Budget Planning`,
           url: siteUrl(`/costs/${c.id}`, lang),
           description: c.quickAnswer,
         })),
@@ -1743,12 +1742,8 @@ export default function App() {
       ];
     } else {
       const costUrl = siteUrl(`/costs/${activeCost.id}`, lang);
-      seoTitle = activeCost.id === "nepal-costs"
-        ? `Nepal Trip Cost from Bangladesh 2026: Full Budget Breakdown (BDT) | URAL`
-        : `${activeCost.country} Trip Cost from Bangladesh: Full Budget Sheet | URAL`;
-      seoDescription = activeCost.id === "nepal-costs"
-        ? `What a 5-day Nepal trip really costs from Bangladesh - flights, hotels, food, and transport in BDT, from budget (BDT 45,000) to luxury.`
-        : `Detailed BDT breakdown of flights, hotels, dining, and sightseeing costs for planning your trip from Dhaka to ${activeCost.country}.`;
+      seoTitle = `${activeCost.country} Trip Budget Planning | URAL`;
+      seoDescription = activeCost.quickAnswer;
 
       let schemaObj: any = undefined;
       try {
@@ -1905,15 +1900,22 @@ export default function App() {
     }
   } else if (section === "contact") {
     const contactUrl = siteUrl("/contact", lang);
-    seoTitle = "Contact URAL — Direct Phone & WhatsApp Support";
-    seoDescription = "Connect directly with our flight & visa support desk at +8801784385335. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.";
+    seoTitle = isBn
+      ? "যোগাযোগ — URAL ট্রাভেল ইনফরমেশন ডেস্ক"
+      : "Contact URAL — Travel Information Desk";
+    seoDescription = isBn
+      ? "রুট, ভিসার শর্ত বা ভ্রমণ পরিকল্পনা নিয়ে +8801784385335 নম্বরে URAL-কে প্রশ্ন করুন। আমরা আপনার বিকল্পগুলো বুঝিয়ে দিই এবং সরকারি পোর্টাল বা সেবাটি ইস্যু ও বিক্রি করে এমন সেবাদাতার দিকে পাঠাই।"
+      : "Ask URAL a question about routes, visa requirements or trip planning at +8801784385335. We explain your options and point you to the official portal or the provider that issues and sells the service.";
     const contactServiceNode = serviceSchema({
       url: contactUrl,
-      idSuffix: "service-visa-assistance",
-      name: "Bangladesh Outbound Visa Assistance & BDT Booking Desk",
-      description:
-        "Visa checklist review, document preparation, and flight/hotel booking in Bangladeshi Taka via bKash or bank transfer for Bangladeshi passport holders.",
-      serviceType: "Visa Assistance",
+      idSuffix: "service-travel-information",
+      name: isBn
+        ? "ট্রাভেল ইনফরমেশন ও পরিকল্পনা সহায়তা ডেস্ক"
+        : "Travel Information & Planning Help Desk",
+      description: isBn
+        ? "বিদেশগামী ভ্রমণকারীদের জন্য স্বাধীন ভ্রমণ তথ্য ও পরিকল্পনা সহায়তা: রুট যাচাই, সরকারি সূত্র ও তারিখসহ ভিসার শর্তের চেকলিস্ট, এবং বাজেটের আনুমানিক হিসাব। URAL যাচাই করা তথ্য প্রকাশ করে, অফিশিয়াল পোর্টাল ও অ্যাফিলিয়েট পার্টনারের লিংক দেয়, আর প্রশ্ন ও পরামর্শের জন্য WhatsApp ও ইমেইল চ্যানেল রাখে।"
+        : "Independent travel information and planning support for outbound travellers: route research, visa requirement checklists with official sources and dates, and budget estimation. URAL publishes researched guides, links official portals and affiliate partners, and answers questions on WhatsApp or by email.",
+      serviceType: isBn ? "ভ্রমণ তথ্য" : "Travel Information",
     });
     const faqSchema = getFaqSchemaForPage("contact", undefined, true, contactUrl);
     seoSchema = faqSchema ? [contactServiceNode, faqSchema] : [contactServiceNode];
@@ -2651,7 +2653,7 @@ export default function App() {
                         {[
                           {
                             label: isBn ? "🇳🇵 নেপাল (কাঠমান্ডু ও পোখরা)" : "🇳🇵 Nepal (Kathmandu & Pokhara)",
-                            sub: isBn ? "ফ্রি SAARC অন-অ্যারাইভাল ভিসা" : "Free SAARC VOA · From BDT 40k",
+                            sub: isBn ? "ফ্রি SAARC অন-অ্যারাইভাল ভিসা" : "Free SAARC VOA · Check live fares",
                             path: "/destinations/nepal-guide",
                           },
                           {
@@ -2969,22 +2971,22 @@ export default function App() {
                       {
                         id: "costs",
                         icon: BarChart3,
-                        label: isBn ? "দেশভিত্তিক বাজেট শিট (BDT)" : "Trip Cost & Budget Matrices",
-                        sub: isBn ? "৬টি দেশের ৩-স্তরের খরচের হিসাব" : "3-tier BDT budgets for 6 countries",
+                        label: isBn ? "ট্রিপ বাজেট গাইড" : "Trip Budget Guides",
+                        sub: isBn ? "৬টি গন্তব্যের কোটেশন ও খরচের খাত" : "Quote planning for six destinations",
                         path: "/costs",
                       },
                       {
                         id: "currency-converter",
                         icon: DollarSign,
-                        label: isBn ? "BDT কারেন্সি কনভার্টার" : "BDT Currency Converter",
-                        sub: isBn ? "লাইভ রেট ও কার্ড মার্কআপ নোট" : "USD, AED, SAR, NPR, THB rates & markup notes",
+                        label: isBn ? "কারেন্সি কনভার্টার" : "Currency Converter",
+                        sub: isBn ? "Provider ও তারিখসহ দৈনিক রেফারেন্স রেট" : "Daily reference rates with provider and date",
                         path: "/tools/currency-converter",
                       },
                       {
                         id: "budget-calculator",
                         icon: Calculator,
-                        label: isBn ? "ট্রিপ বাজেট ক্যালকুলেটর" : "Trip Budget Calculator",
-                        sub: isBn ? "মানুষ ও দিনভিত্তিক BDT খরচের হিসাব" : "BDT trip totals by travellers & days",
+                        label: isBn ? "ট্রিপ কস্ট এস্টিমেটর" : "Trip Cost Estimator",
+                        sub: isBn ? "৬ গন্তব্য · কোটেশন, যাত্রী ও রুম-রাত" : "Six destinations · quotes, travellers & room-nights",
                         path: "/tools/budget-calculator",
                       },
                       {
@@ -3031,8 +3033,8 @@ export default function App() {
                       {
                         id: "contact",
                         icon: MessageSquare,
-                        label: isBn ? "BDT বুকিং ও সাপোর্ট ডেস্ক" : "Contact & BDT Booking Desk",
-                        sub: isBn ? "WhatsApp: +8801784385335" : "Pay in BDT via bank / bKash",
+                        label: isBn ? "যোগাযোগ ও ভ্রমণ-সহায়তা" : "Contact & Trip Help",
+                        sub: isBn ? "WhatsApp-এ প্রশ্ন করুন" : "Ask a question on WhatsApp",
                         path: "/contact",
                       },
                     ].map((toolItem) => {
@@ -3337,7 +3339,7 @@ export default function App() {
                         {
                           id: "contact",
                           label: t.navContact,
-                          meta: isBn ? "কার্ড ছাড়াই বিকাশ/ব্যাংকে BDT পেমেন্ট" : "Book via bKash, Nagad or Bank BDT",
+                          meta: isBn ? "WhatsApp বা ইমেইলে প্রশ্ন করুন" : "Ask a question on WhatsApp",
                           path: "/contact",
                         },
                       ],
@@ -3347,7 +3349,7 @@ export default function App() {
                           path: "/tools/currency-converter",
                         },
                         {
-                          label: isBn ? "বাজেট ক্যালকুলেটর" : "Budget Calculator",
+                          label: isBn ? "ট্রিপ কস্ট এস্টিমেটর" : "Trip Cost Estimator",
                           path: "/tools/budget-calculator",
                         },
                         {
@@ -4170,69 +4172,16 @@ export default function App() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 
-                {/* 1. Currency Converter (Interactive) */}
+                {/* Currency tools load on their own route, keeping the home entry light. */}
                 <div className="ural-card bg-white p-5 border border-border-subtle flex flex-col justify-between">
                   <div>
                     <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest inline-flex items-center gap-1.5 mb-2">
                       <DollarSign size={13} className="text-[#F6B73C]" />
-                      <span>{isBn ? "কারেন্সি কনভার্টার (BDT রেট)" : "Currency Converter"}</span>
+                      <span>{isBn ? "কারেন্সি কনভার্টার" : "Currency Converter"}</span>
                     </span>
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <label
-                          htmlFor="home-currency-bdt-amount"
-                          className="text-slate-600 font-mono text-[10px] uppercase w-12"
-                        >
-                          BDT (৳)
-                          <span className="sr-only">
-                            {isBn ? " বাংলাদেশি টাকার পরিমাণ" : " Amount in Bangladeshi Taka"}
-                          </span>
-                        </label>
-                        <input 
-                          id="home-currency-bdt-amount"
-                          type="number" 
-                          value={currencyAmount}
-                          onChange={(e) => setCurrencyAmount(Number(e.target.value))}
-                          className="flex-grow bg-slate-50 border border-slate-200 rounded p-1 text-xs font-mono focus:outline-none"
-                        />
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <label
-                          htmlFor="home-currency-target-select"
-                          className="text-slate-600 font-mono text-[10px] uppercase w-12"
-                        >
-                          To
-                          <span className="sr-only">
-                            {isBn ? " গন্তব্য দেশের মুদ্রা" : " Target Currency"}
-                          </span>
-                        </label>
-                        <select 
-                          id="home-currency-target-select"
-                          value={currencyToOption}
-                          onChange={(e) => setCurrencyToOption(e.target.value as any)}
-                          className="flex-grow bg-slate-50 border border-border-subtle rounded p-1 text-xs font-mono focus:outline-none font-bold"
-                        >
-                          <option value="NPR">NPR (Nepal Rupee)</option>
-                          <option value="THB">THB (Thai Baht)</option>
-                          <option value="MYR">MYR (Malaysian Ringgit)</option>
-                          <option value="SGD">SGD (Singapore Dollar)</option>
-                          <option value="USD">USD (Maldives / Global)</option>
-                          <option value="AED">AED (UAE Dirham)</option>
-                        </select>
-                      </div>
-                    </div>
+                    <p className="text-sm leading-relaxed text-slate-600">{isBn ? "সর্বশেষ উপলব্ধ দৈনিক রেফারেন্স রেটে BDT রূপান্তর করুন। উৎস ও রেটের তারিখ হিসাবের পাশে দেখুন।" : "Convert BDT at the latest available daily reference rates, with the provider and rate date beside the result."}</p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-slate-100 text-xs font-mono font-bold text-center bg-slate-50 py-1.5 rounded text-indigo-900">
-                    ৳ {currencyAmount.toLocaleString()} BDT = &nbsp;
-                    <span className="text-brand-gold-ink">
-                      {currencyToOption === "NPR" ? (currencyAmount * 1.13).toFixed(2) :
-                       currencyToOption === "THB" ? (currencyAmount * 0.30).toFixed(2) : 
-                       currencyToOption === "MYR" ? (currencyAmount * 0.037).toFixed(2) :
-                       currencyToOption === "SGD" ? (currencyAmount * 0.011).toFixed(2) :
-                       currencyToOption === "USD" ? (currencyAmount * 0.0082).toFixed(2) :
-                       (currencyAmount * 0.031).toFixed(2)} {currencyToOption}
-                    </span>
-                  </div>
+                  <a href={isBn ? "/bn/tools/currency-converter" : "/tools/currency-converter"} className="mt-4 inline-flex min-h-11 items-center self-start rounded-lg bg-brand-navy px-4 py-2 text-sm font-semibold text-white hover:bg-brand-emerald">{isBn ? "কারেন্সি কনভার্টার খুলুন" : "Open Currency Converter"}</a>
                 </div>
 
                 {/* 2. Packing Checklist (Interactive checkboxes) */}
@@ -4271,20 +4220,20 @@ export default function App() {
                   <div>
                     <span className="text-xs font-bold text-brand-navy font-mono uppercase tracking-widest inline-flex items-center gap-1.5 mb-2">
                       <Calculator size={13} className="text-[#F6B73C]" />
-                      <span>{isBn ? "৫ দিনের BDT বাজেট প্ল্যানার" : "Fast Budget Planner"}</span>
+                      <span>{isBn ? "ট্রিপ কস্ট এস্টিমেটর" : "Trip Cost Estimator"}</span>
                     </span>
-                    <p className="text-[11px] text-slate-500 leading-normal">
+                    <p className="text-sm text-slate-600 leading-relaxed">
                       {isBn
-                        ? "৫ দিনের বিদেশ সফরে Flight, Hotel, খাবার ও লোকাল যাতায়াতে মোট কত টাকা (BDT) খরচ হবে তার বিস্তারিত হিসাব দেখুন।"
-                        : "Get a rough estimate of what a 5-day trip costs — flights, hotel, food, and transport, all broken down in BDT."}
+                        ? "৬টি গন্তব্যে ১–৩০ দিনের ট্রিপ হিসাব করুন নিজের কোটেশন দিয়ে। প্রাপ্তবয়স্ক, শিশু, ইনফ্যান্ট ও হোটেলের রাত আলাদা রাখুন।"
+                        : "Use your quotes to estimate a 1–30-day trip across six destinations. Count adults, children, infants and hotel nights separately."}
                     </p>
                   </div>
-                  <button 
-                    onClick={() => navigateTo("/costs")}
-                    className="bg-brand-navy text-white hover:bg-slate-800 font-bold text-[10px] py-1.5 px-3 rounded-lg self-start mt-3"
+                  <a
+                    href={isBn ? "/bn/tools/budget-calculator" : "/tools/budget-calculator"}
+                    className="mt-4 inline-flex min-h-11 items-center self-start rounded-lg bg-brand-navy px-4 py-2 text-sm font-semibold text-white hover:bg-brand-emerald"
                   >
-                    {isBn ? "বাজেট ক্যালকুলেটর খুলুন" : "Open Budget Calculator"}
-                  </button>
+                    {isBn ? "ট্রিপ কস্ট এস্টিমেটর খুলুন" : "Open Trip Cost Estimator"}
+                  </a>
                 </div>
 
               </div>
@@ -4816,13 +4765,13 @@ export default function App() {
                       <span className="space-y-1">
                         <span className="block text-sm font-bold text-white">
                           {isBn
-                            ? "ঢাকা থেকে ফ্লাইটের ভাড়া কমলে সাথে সাথে এলার্ট পান"
-                            : "Get Flight Deal Alerts from Dhaka"}
+                            ? "ঢাকা থেকে ফ্লাইটের ভাড়া নিয়ে প্রশ্ন করুন"
+                            : "Ask About Flight Fares from Dhaka"}
                         </span>
                         <span className="block text-xs leading-relaxed text-slate-300">
                           {isBn
-                            ? "ঢাকা থেকে Maldives, Nepal, Bangkok, Kuala Lumpur, Jeddah বা Dubai-এর ভাড়া কমলে BDT অ্যালার্ট পান।"
-                            : "Get BDT alerts when fares from Dhaka to Maldives, Nepal, Bangkok, Kuala Lumpur, or Dubai fall below BDT 20,000."}
+                            ? "ঢাকা থেকে Maldives, Nepal, Bangkok, Kuala Lumpur, Jeddah বা Dubai-এর ভাড়া নিয়ে প্রশ্ন করুন—আমরা বর্তমান ভাড়ার নির্দেশনা ও সরকারি সার্চ লিংক জানাব। স্বয়ংক্রিয় ভাড়া-মনিটরিং নেই; চূড়ান্ত দাম আপনি নিজে যাচাই করবেন।"
+                            : "Ask about fares from Dhaka to the Maldives, Nepal, Bangkok, Kuala Lumpur, Jeddah or Dubai. We reply with current fare guidance and the official search link; there is no automatic fare monitoring, so you confirm the live price yourself."}
                         </span>
                       </span>
                     </label>
@@ -4930,18 +4879,18 @@ export default function App() {
           <div className="md:col-span-2 lg:col-span-12 rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-4 sm:px-6 sm:py-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div className="space-y-1">
               <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
-                {isBn ? "সরাসরি সাপোর্ট ডেস্ক" : "Direct Support Desk"}
+                {isBn ? "সরাসরি যোগাযোগ" : "Talk to URAL"}
               </span>
               <p className="text-[11px] text-slate-400 leading-relaxed">
                 {isBn
-                  ? "ঢাকা ডেস্ক · ফ্লাইট ও হোটেল বুকিং, ভিসা ডকুমেন্ট ও ওমরাহ সহায়তা"
-                  : "Dhaka desk · flight & hotel booking, visa documents, Umrah support"}
+                  ? "প্রশ্নের জন্য WhatsApp · ভিসা ডকুমেন্ট, রুট ও ওমরাহ তথ্য"
+                  : "WhatsApp questions · visa documents, routes and Umrah information"}
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <a
                 href="tel:+8801784385335"
-                aria-label={isBn ? "সরাসরি কল করুন: +880 1784-385335" : "Call the URAL desk: +880 1784-385335"}
+                aria-label={isBn ? "সরাসরি কল করুন: +880 1784-385335" : "Call URAL: +880 1784-385335"}
                 className="min-h-11 inline-flex items-center px-1 font-mono text-sm font-bold tracking-tight text-[#F6B73C] hover:text-white hover:underline"
               >
                 +880 1784-385335

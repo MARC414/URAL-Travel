@@ -5,6 +5,9 @@ import { linkifyCitations, citationAnchorId, CITATION_LINK_CLASS } from "../src/
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { UmrahBudgetCalculator } from "../src/components/UmrahBudgetCalculator";
+import { TripCostEstimator } from "../src/components/TripCostEstimator";
+import { CurrencyConverter } from "../src/components/CurrencyConverter";
+import { CostPlanningGuide, CostPlanningHub } from "../src/components/CostPlanningGuide";
 import { BlogArticleHeader } from "../src/components/BlogArticleHeader";
 import { BlogPlanningLinks, BlogPlanningHubs, BlogRelatedArticles } from "../src/components/BlogArticleNavigation";
 import { getArticleRelatedPosts, type ArticleLocale } from "../src/utils/blogPresentation";
@@ -137,7 +140,7 @@ import {
   toEnglishBasePath,
 } from "../src/utils/localeRoutes";
 import { BENGALI_SEO_COPY, getBengaliSeoCopy } from "../src/utils/seoCopy";
-import { getBnFaqSchemaForPage } from "../src/utils/bn-faq-schema";
+import { getBnFaqSchemaForPage, BN_LANDING_FLIGHT_FAQS } from "../src/utils/bn-faq-schema";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
   DESTINATION_PARTNER_COPY,
@@ -502,17 +505,17 @@ function renderArticleReferencesHtml(
 function renderCoxsBazarBookingCtaHtml(locale: "en" | "bn"): string {
   const isBengali = locale === "bn";
   const message = isBengali
-    ? "আসসালামু আলাইকুম URAL ডেস্ক, কাঠমান্ডু থেকে কক্সবাজার ভ্রমণের ফ্লাইট বা হোটেল BDT-তে বুক করতে সাহায্য চাই।"
-    : "Hello URAL desk, I need help booking flights or a hotel for Kathmandu to Cox's Bazar and would like to pay in BDT.";
+    ? "আসসালামু আলাইকুম URAL, আন্তর্জাতিক কার্ড ছাড়া কাঠমান্ডু থেকে কক্সবাজার ভ্রমণ নিয়ে একটি প্রশ্ন আছে।"
+    : "Hello URAL, I have a question about travelling from Kathmandu to Cox's Bazar without an international card.";
   const whatsappUrl = `https://wa.me/8801784385335?text=${encodeURIComponent(message)}`;
   return `<section aria-labelledby="cxb-bdt-booking-heading"><h2 id="cxb-bdt-booking-heading">${
-    isBengali ? "BDT-তে বা আন্তর্জাতিক কার্ড ছাড়াই বুক করতে চান?" : "Need to book in BDT or without an international card?"
+    isBengali ? "আন্তর্জাতিক কার্ড ছাড়াই ভ্রমণ করছেন?" : "Travelling without an international card?"
   }</h2><p>${
     isBengali
-      ? "আমাদের ঢাকা ডেস্ক bKash, Nagad বা ব্যাংক ট্রান্সফারে ফ্লাইট টিকিট ও হোটেল ভাউচার নিতে সাহায্য করতে পারে। পেমেন্টের আগে লাইভ প্রাপ্যতা ও চূড়ান্ত অঙ্ক নিশ্চিত করুন।"
-      : "Our Dhaka desk can help arrange flight tickets and hotel vouchers via bKash, Nagad or bank transfer. Confirm live availability and the final amount before paying."
+      ? "BDT দামের জন্য এয়ারলাইন্স বা হোটেলের নিজের checkout মিলিয়ে দেখুন, আর কাউকে টাকা দেওয়ার আগে fare rule পড়ে নিন। কোনো ধাপ অস্পষ্ট হলে WhatsApp-এ আমাদের প্রশ্ন করুন।"
+      : "For the BDT price, compare the airline's or hotel's own checkout, and confirm the fare rules before you pay anyone. Ask us on WhatsApp if a step is unclear."
   }</p><p><a href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener noreferrer">${
-    isBengali ? "WhatsApp-এ URAL ঢাকা ডেস্কে কথা বলুন →" : "Chat with the URAL Dhaka desk on WhatsApp →"
+    isBengali ? "WhatsApp-এ প্রশ্ন করুন →" : "Ask a question on WhatsApp →"
   }</a></p></section>`;
 }
 
@@ -664,7 +667,7 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
     },
     {
       href: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
-      text: "Book flights and hotels in BDT without a dual-currency card",
+      text: "How to pay for flights and hotels in BDT without a dual-currency card",
     },
     {
       href: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
@@ -699,7 +702,7 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
   "/tools/budget-calculator": [
     { href: "/costs", text: "Trip cost matrices in BDT by country" },
     { href: "/blog/dual-currency-card-endorsement-bangladesh", text: "Dual-currency card endorsement and travel quota guide" },
-    { href: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card", text: "How to book travel in BDT by bKash or bank transfer" },
+    { href: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card", text: "How to pay for travel in BDT when you have no card" },
   ],
   "/tools/packing-checklist": [
     { href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go", text: "Dhaka Airport outbound immigration checklist" },
@@ -709,7 +712,7 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
   "/tools/flight-delay-claim": [
     { href: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp", text: "Flight delay, cancellation and baggage claim guide" },
     { href: "/flights", text: "Compare international flights from Dhaka" },
-    { href: "/contact", text: "Contact the URAL Dhaka support desk" },
+    { href: "/contact", text: "Contact URAL with a question" },
   ],
   "/tools/airport-codes": [
     { href: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp", text: "Flight delay, cancellation and baggage claim guide" },
@@ -723,7 +726,7 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
     { href: "/sitemap", text: "Complete site directory of every URAL guide" },
   ],
   "/contact": [
-    { href: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card", text: "How to book travel in BDT by bKash or bank transfer" },
+    { href: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card", text: "How to pay for travel in BDT when you have no card" },
     { href: "/blog/dual-currency-card-endorsement-bangladesh", text: "Passport dollar endorsement and dual-currency card guide" },
     { href: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go", text: "Dhaka Airport documents and outbound checklist" },
     { href: "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost", text: "Umrah planning and BDT cost guide" },
@@ -1243,12 +1246,12 @@ const isNonstopRoute = (route: (typeof FLIGHTS_DATA)[number]) => /\(direct/i.tes
 function renderFlightsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
   const routeDirectory = uniqueFlightRoutes().map(
     (route) =>
-      `<li><a href="/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} to ${escapeHtml(route.to.split(" (")[0])}</a> — ${isNonstopRoute(route) ? "Nonstop" : "Connecting"}; ${escapeHtml(route.duration)}; ${escapeHtml(route.priceRangeBdt.split(" (")[0])}.</li>`
+      `<li><a href="/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} to ${escapeHtml(route.to.split(" (")[0])}</a> — ${isNonstopRoute(route) ? "Nonstop" : "Connecting"}; ${escapeHtml(route.duration)}. Compare live fares for your dates.</li>`
   ).join("");
   return `<article>
     <h1>International Flights from Dhaka: Routes, Fares &amp; Airlines</h1>
     <p>${escapeHtml(description)}</p>
-    <p>Use these Dhaka flight guides to compare the destinations covered, indicative BDT fare ranges, journey duration, airlines and booking guidance in one place. The route notes are planning references rather than live fare quotes: prices and schedules can change with travel dates, seat inventory, baggage choices and fare conditions. Before booking, compare the total itinerary—not only the headline fare—including baggage, stopovers, transit requirements, change or cancellation terms, and arrival time. Travelers starting in Chattogram, Sylhet or another city should plan any separate domestic leg and allow a realistic connection buffer. Confirm the operating carrier and current departure details with the airline or booking provider.</p>
+    <p>Use these Dhaka flight guides to compare the destinations covered, journey duration, airlines and booking guidance in one place. No fixed fare is published: prices and schedules change with travel dates, seat inventory, baggage choices and fare conditions, so compare live totals for your own dates. Before booking, check the full itinerary—not only the headline fare—including baggage, stopovers, transit requirements, change or cancellation terms, and arrival time. Travelers starting in Chattogram, Sylhet or another city should plan any separate domestic leg and allow a realistic connection buffer. Confirm the operating carrier and current departure details with the airline or booking provider.</p>
     <section id="direct-flights-from-dhaka" aria-labelledby="direct-flights-h2">
       <h2 id="direct-flights-h2">Direct flights from Dhaka (DAC): where you can fly nonstop</h2>
       <p>Hazrat Shahjalal International Airport (DAC) has nonstop service to about 30 international destinations across roughly 20 countries, plus domestic routes. Schedules and operators change by season, so confirm on the airline's website before booking. Last reviewed: October 2026.</p>
@@ -1418,36 +1421,7 @@ function renderDestinationsHubBody(title: string, description: string, faqSchema
 }
 
 function renderCostsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
-  const directory = TRIP_COSTS_DATA.map(
-    (guide) =>
-      `<li><a href="/costs/${escapeHtml(guide.id)}">${escapeHtml(guide.country)} trip cost in BDT</a> — ${guide.durationDays}-day guide in ${escapeHtml(guide.currencyCode)}.</li>`
-  ).join("");
-  const guideDetails = TRIP_COSTS_DATA.map(
-    (guide) => `
-      <section>
-        <h3>${escapeHtml(guide.country)} trip budget from Bangladesh</h3>
-        <p>This ${guide.durationDays}-day guide separates ${guide.categories.map((category) => escapeHtml(category.name)).join(", ")}. It also flags seasonal influences and includes ${guide.moneyHacks.length} practical budget suggestions. Open the destination breakdown to review its BDT ranges and assumptions together rather than treating any one category as the total trip price.</p>
-      </section>`
-  ).join("");
-
-  return `<article>
-    <h1>Direct flights from Dhaka</h1>
-    <p>${escapeHtml(description)}</p>
-    <p>Estimate an international trip from Dhaka in Bangladeshi Taka by looking at the whole journey rather than airfare alone. These destination guides break budgets into categories such as flights, accommodation, meals, transport and activities, with lower, mid-range and higher estimates where the underlying data provides them. Use the figures to set a starting budget and compare destinations; they are not live quotes or a promise that every listed cost is included in the same way. Travel dates, room occupancy, exchange rates, baggage, local taxes and activity choices can all change the final amount.</p>
-    <section><h2>Destination cost guides and BDT budget ranges</h2><ul>${directory}</ul></section>
-    <section><h2>Compare trip costs by destination</h2>${guideDetails}</section>
-    <section><h2>How to build a realistic travel budget</h2>
-      <p>Separate one-time costs from daily costs. Flights, visas and some activities are usually paid before departure; hotels, meals, ground transport and shopping are paid during the trip. Keep a contingency for exchange-rate movement, airport transfers, baggage fees and unexpected changes. If a category shows a range, choose the level that matches your likely travel style rather than simply adding every lowest estimate together.</p>
-      <p>Exchange-rate references are approximate and can move; check a current bank or authorized money-changer rate before converting funds. Review what each guide includes and excludes, especially airfare, accommodation nights, visa fees and optional activities, so you do not compare different trip lengths on an equal footing. Revisit the estimate when your dates and bookings are known.</p>
-      <ol>
-        <li>Choose the destination and duration that match your real travel window, then open that country's detailed BDT breakdown.</li>
-        <li>Mark which costs are already fixed, such as purchased flights, and which still depend on daily choices, such as meals and local transport.</li>
-        <li>Use the middle estimate as a comparison point only when it fits your accommodation and activity preferences; do not assume the lowest figure covers every traveler.</li>
-        <li>Recheck exchange rates, baggage conditions, hotel taxes and payment fees close to booking, and leave a separate contingency rather than hiding it inside the listed categories.</li>
-      </ol>
-    </section>
-    ${renderLandingFaqs("costs-hub-faqs", "Trip budget questions for travelers from Bangladesh", faqSchema)}
-  </article>`;
+  return renderToStaticMarkup(React.createElement(CostPlanningHub, { costs: TRIP_COSTS_DATA, isBn: false }));
 }
 
 /**
@@ -1577,8 +1551,8 @@ function renderBankingHubSections(locale: "en" | "bn"): string {
     <section>
       <p>${escapeHtml(isBn ? BANKING_HUB_CLOSING.bn : BANKING_HUB_CLOSING.en)}</p>
       <p>${copy(
-        "URAL does not sell tickets or process visas. This page explains the rules; it does not promise an approval.",
-        "URAL টিকিট বিক্রি করে না এবং ভিসা প্রসেস করে না। এই পাতাটি তথ্য দেয়, অনুমোদনের নিশ্চয়তা দেয় না।"
+                  "URAL is an independent information platform, not an agency. This page explains the rules; it does not promise an approval.",
+                  "URAL একটি স্বাধীন তথ্য প্ল্যাটফর্ম, এজেন্সি নয়। এই পাতাটি নিয়ম ব্যাখ্যা করে, অনুমোদনের নিশ্চয়তা দেয় না।",
       )}</p>
     </section>`;
 }
@@ -1696,7 +1670,7 @@ function buildAllRoutes(): PrerenderRoute[] {
   // 3. Flights Hub (/flights) + 6 Flight Routes (/flights/:id)
   const flightsHubTitle = "Flights from Dhaka: Compare Fares, Routes & Airlines (2026) | URAL";
   const flightsHubDesc =
-    "Compare nonstop and connecting flights from Dhaka, with typical fares, journey times and airline options for popular international routes.";
+    "Compare nonstop and connecting flights from Dhaka, with journey times, airline options and live fare checks for your own travel dates.";
   const flightsFaq = getFaqSchemaForPage("flights", undefined, true, `${BASE_URL}/flights`);
   routes.push({
     routePath: "/flights",
@@ -1734,8 +1708,8 @@ function buildAllRoutes(): PrerenderRoute[] {
         : `Flights from Dhaka to ${r.to.split(" (")[0]} (${r.country}) 2026 | URAL`;
     const description =
       r.id === "dhaka-kathmandu"
-        ? "Direct Dhaka to Kathmandu flights take 1h30m on Biman Bangladesh or Himalaya Airlines, from BDT 28,000 roundtrip. Bangladeshis get a free visa on arrival."
-        : `Compare flights from Dhaka to ${r.to.split(" (")[0]}. Check flight duration, direct airlines, and BDT fares.`;
+        ? "Direct Dhaka to Kathmandu flights take 1h30m on Biman Bangladesh or Himalaya Airlines. Compare live fares for your dates; Bangladeshis get a free visa on arrival."
+        : `Compare flights from Dhaka to ${r.to.split(" (")[0]}. Check flight duration, direct airlines and live fares for your own travel dates.`;
     const extraNodes: Record<string, unknown>[] = [];
     if (r.schemaMarkup?.code) {
       try {
@@ -1766,15 +1740,15 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h1>Flights from ${escapeHtml(r.from)} to ${escapeHtml(r.to)}</h1>
           <p>${escapeHtml(description)}</p>
           <p>${escapeHtml(r.quickAnswer || description)}</p>
-          <p><strong>Price range:</strong> ${escapeHtml(r.priceRangeBdt)} | <strong>Journey duration:</strong> ${escapeHtml(r.duration)} | <strong>Airlines listed:</strong> ${escapeHtml(r.airlines.join(", "))}</p>
+          <p><strong>Fares:</strong> compare live totals for your dates | <strong>Journey duration:</strong> ${escapeHtml(r.duration)} | <strong>Airlines listed:</strong> ${escapeHtml(r.airlines.join(", "))}</p>
           <section>
             <h2>Dhaka to ${escapeHtml(r.to.split(" (")[0])} route facts</h2>
             <ul>${r.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
           </section>
           <section>
             <h2>How to compare fares on this route</h2>
-            <p>Treat the published fare band as a starting point for comparison, not as a live quote or a promise that seats are available at that price. Check the same travel dates, passenger count, cabin and baggage allowance across providers. Compare the final payable amount after any booking, payment or seat-selection fees, and read the change and cancellation conditions before you pay. A connecting option may have a lower headline price but a longer total journey; make sure the transfer time is practical and that you understand who is responsible if a segment is delayed.</p>
-            <p>If your dates are flexible, compare nearby departure days as well as different times. Fare inventory changes, and holidays or school breaks may affect availability. The guide's BDT range is useful for planning a budget; use the airline or booking provider's current checkout total for the final decision.</p>
+            <p>No fare band is published here because an undated range cannot be checked against today's market. Enter your own travel dates, passenger count, cabin and baggage allowance, then compare the same itinerary across providers. Compare the final payable amount after any booking, payment or seat-selection fees, and read the change and cancellation conditions before you pay. A connecting option may have a lower headline price but a longer total journey; make sure the transfer time is practical and that you understand who is responsible if a segment is delayed.</p>
+            <p>If your dates are flexible, compare nearby departure days as well as different times. Fare inventory changes, and holidays or school breaks may affect availability. Use the airline or booking provider's current checkout total for the final decision, and record the date you checked it so the figure can be reviewed later.</p>
           </section>
           <section>
             <h2>Booking window and airline choice</h2>
@@ -2244,9 +2218,9 @@ function buildAllRoutes(): PrerenderRoute[] {
   }
 
   // 7. Costs Hub (/costs) + 6 Cost Guides (/costs/:id)
-  const costsHubTitle = "International Trip Budgets from Bangladesh: Realistic BDT Cost Guides | URAL";
+  const costsHubTitle = "Trip Budget Guides: Six Destinations & Quote Planning | URAL";
   const costsHubDesc =
-    "How much does an international trip really cost from Dhaka? Detailed BDT budgets for Nepal, Thailand, Malaysia, and Dubai covering flights, hotels, food & transport.";
+    "Plan trip costs for Nepal, Thailand, Malaysia, Dubai, Singapore and the Maldives using current quotes, clear units and a dated cost estimator.";
   const costsFaq = getFaqSchemaForPage("costs", undefined, true, `${BASE_URL}/costs`);
   routes.push({
     routePath: "/costs",
@@ -2276,14 +2250,8 @@ function buildAllRoutes(): PrerenderRoute[] {
 
   for (const c of TRIP_COSTS_DATA) {
     const costUrl = `${BASE_URL}/costs/${c.id}`;
-    const title =
-      c.id === "nepal-costs"
-        ? "Nepal Trip Cost from Bangladesh 2026: Full Budget Breakdown (BDT) | URAL"
-        : `${c.country} Trip Cost from Bangladesh: Full Budget Sheet | URAL`;
-    const description =
-      c.id === "nepal-costs"
-        ? "What a 5-day Nepal trip really costs from Bangladesh - flights, hotels, food, and transport in BDT, from budget (BDT 45,000) to luxury."
-        : `Detailed BDT breakdown of flights, hotels, dining, and sightseeing costs for planning your trip from Dhaka to ${c.country}.`;
+    const title = `${c.country} Trip Budget Planning | URAL`;
+    const description = c.quickAnswer;
     const extraNodes: Record<string, unknown>[] = [];
     const cFaq = getFaqSchemaForPage("costs", c.id, false, costUrl, TRIP_COSTS_DATA);
     if (cFaq) extraNodes.push(stripContext(cFaq));
@@ -2300,26 +2268,8 @@ function buildAllRoutes(): PrerenderRoute[] {
         { name: `${c.country} Costs`, url: costUrl },
       ],
       extraGraphNodes: extraNodes,
-      bodyHtml: `
-        <article>
-          <h1>${escapeHtml(title)}</h1>
-          <p>${escapeHtml(c.quickAnswer || description)}</p>
-          <h2>${escapeHtml(String(c.durationDays))}-day cost categories</h2>
-          <table>
-            <thead><tr><th>Category</th><th>Lower estimate</th><th>Mid-range estimate</th><th>Higher estimate</th></tr></thead>
-            <tbody>${c.categories.map((category) => `<tr><th scope="row">${escapeHtml(category.name)}</th><td>BDT ${category.lowBdt.toLocaleString("en-US")}</td><td>BDT ${category.midBdt.toLocaleString("en-US")}</td><td>BDT ${category.highBdt.toLocaleString("en-US")}</td></tr>`).join("")}</tbody>
-          </table>
-          <p><strong>Seasonal considerations:</strong> ${escapeHtml(c.seasonalVariation)}</p>
-          <h2>Budget planning tips</h2>
-          <ul>${c.moneyHacks.map((tip) => `<li>${escapeHtml(tip)}</li>`).join("")}</ul>
-          <p>These figures are planning estimates, not live quotes. Check current fares, hotel rates and exchange rates before booking.</p>
-          <section>
-            <h2>${escapeHtml(c.country)} cost facts at a glance</h2>
-            <ul>${c.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
-          </section>
-          ${renderLandingFaqs(`${c.id}-faqs`, `${c.country} trip cost questions for Bangladeshi travelers`, cFaq)}
-        </article>
-      `,
+      bodyHtml: renderToStaticMarkup(React.createElement(CostPlanningGuide, { cost: c, isBn: false })),
+      lastmod: c.updatedAt,
     });
   }
 
@@ -2431,9 +2381,9 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/tools",
     canonicalUrl: `${BASE_URL}/tools`,
-    title: "Bangladeshi Traveler Utility Tools & Services (2026) | URAL",
+    title: "Travel Tools: Trip Cost Estimator, Currency & Checklists | URAL",
     description:
-      "Access handy travel utility tools for Bangladeshi outbound tourists: live BDT exchange rates, power plug specifications, packing checklist, and translation aids.",
+      "Plan with a quote-based Trip Cost Estimator, dated currency conversion, packing checklist, airport-code lookup and flight-disruption guidance.",
     imageUrl: defaultOgImage,
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
@@ -2443,17 +2393,19 @@ function buildAllRoutes(): PrerenderRoute[] {
       serviceSchema({
         url: `${BASE_URL}/tools`,
         idSuffix: "service-travel-tools",
-        name: "Bangladesh Outbound Travel Tools & Flight Disruption Check",
+        name: "Travel Tools & Flight Disruption Check",
         description:
-          "Access travel planning tools for Bangladeshi outbound tourists and review the details that may affect a flight-disruption claim.",
+          "Use quote-based travel planning tools and review the details that may affect a flight-disruption claim.",
         serviceType: "Travel Planning & Flight Disruption Information",
       }),
       ...(toolsFaq ? [stripContext(toolsFaq)] : []),
     ],
     bodyHtml: `
       <article>
-        <h1>Bangladeshi Traveler Utility Tools &amp; Flight Disruption Checks</h1>
-        <p>Convert BDT to USD, SAR, NPR, THB, MYR, SGD, and AED, review tourist visa information, and check which details may affect a flight-disruption claim. AirHelp is an optional service; verify eligibility, terms and fees directly with the provider.</p>
+        <h1>Travel Tools</h1>
+        <p>Build a quote-based trip estimate, convert BDT using dated reference rates, look up airport codes and prepare a packing checklist.</p>
+        ${renderToStaticMarkup(React.createElement(TripCostEstimator, { isBn: false }))}
+        <section><h2>Flight Disruption Checks</h2><p>You can check which details may affect a flight-disruption claim. AirHelp is an optional service; review the provider’s eligibility rules, terms and fees.</p></section>
         ${renderLandingFaqs("tools-hub-faqs", "Travel planning tool questions for Bangladeshi travelers", toolsFaq)}
       </article>
     `,
@@ -2484,8 +2436,9 @@ function buildAllRoutes(): PrerenderRoute[] {
       <article>
         <h1>${escapeHtml(meta.h1En)}</h1>
         <p>${escapeHtml(meta.subEn)}</p>
+        ${toolSlug === "budget-calculator" ? renderToStaticMarkup(React.createElement(TripCostEstimator, { isBn: false })) : toolSlug === "currency-converter" ? renderToStaticMarkup(React.createElement(CurrencyConverter, { isBn: false })) : ""}
         <section>
-          <h2>How this tool helps travellers from Dhaka</h2>
+          <h2>How to use this tool</h2>
           <p>${escapeHtml(meta.descriptionEn)}</p>
         </section>
       </article>
@@ -2550,9 +2503,9 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/contact",
     canonicalUrl: `${BASE_URL}/contact`,
-    title: "Contact URAL — Direct Phone & WhatsApp Support",
+    title: "Contact URAL — Travel Information Desk in Dhaka",
     description:
-      "Connect directly with our flight & visa support desk at +8801784385335. Send us an inquiry for flight packages, visa assistance, and personalized outbound plans.",
+      "Ask URAL about routes, visa requirements or trip planning on +8801784385335. We explain your options and point you to the official portal or provider.",
     imageUrl: defaultOgImage,
     // The hero photo is the page's LCP element and is rendered client-side, so
     // this preload is what decides the fetch. Emitted as AVIF (see the comment
@@ -2567,18 +2520,18 @@ function buildAllRoutes(): PrerenderRoute[] {
     extraGraphNodes: [
       serviceSchema({
         url: `${BASE_URL}/contact`,
-        idSuffix: "service-visa-assistance",
-        name: "Bangladesh Outbound Visa Assistance & BDT Booking Desk",
+        idSuffix: "service-travel-information",
+        name: "Travel Information & Planning Help Desk",
         description:
-          "Visa checklist review, document preparation, and flight/hotel booking in Bangladeshi Taka via bKash or bank transfer for Bangladeshi passport holders.",
-        serviceType: "Visa Assistance",
+                    "Independent travel information and planning support for outbound travellers: route research, visa requirement checklists with official sources and dates, and budget estimation. URAL publishes researched guides, links official portals and affiliate partners, and answers questions on WhatsApp or by email.",
+        serviceType: "Travel Information",
       }),
       ...(contactFaq ? [stripContext(contactFaq)] : []),
     ],
     bodyHtml: `
       <article>
-        <h1>Contact URAL — Dhaka Outbound Flight, Umrah &amp; Visa Desk (+8801784385335)</h1>
-        <p>Connect directly with our Dhaka support desk via WhatsApp at +8801784385335 or email at <a href="mailto:support@uraltravel.co.uk">support@uraltravel.co.uk</a> for BDT flight &amp; hotel booking, Umrah e-Visa processing, and tourist visa document verification.</p>
+        <h1>Contact URAL — Travel Information Desk (+8801784385335)</h1>
+        <p>Message our desk at <a href="https://wa.me/8801784385335">+8801784385335</a> or <a href="mailto:support@uraltravel.co.uk">support@uraltravel.co.uk</a> with a question about routes, visa requirements or planning. We explain your options and link the official source or the partner that provides the service, where the application is completed.</p>
         <section>
           <h2>Official URAL Social Media &amp; Community Channels</h2>
           <ul>
@@ -2590,7 +2543,7 @@ function buildAllRoutes(): PrerenderRoute[] {
             <li><a href="mailto:support@uraltravel.co.uk">Official Support Email — support@uraltravel.co.uk</a></li>
           </ul>
         </section>
-        ${renderLandingFaqs("contact-desk-faqs", "Questions about URAL travel support and BDT booking", contactFaq)}
+        ${renderLandingFaqs("contact-desk-faqs", "Questions about asking URAL a travel question", contactFaq)}
       </article>
     `,
   });
@@ -2609,7 +2562,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     canonicalUrl: `${BASE_URL}/about`,
     title: "About URAL Travel Intelligence | Farhan Momen, Founder & Travel Editor",
     description:
-      "URAL is an independent travel intelligence desk in Dhaka — not a travel agency. Who writes it, how each guide is sourced and dated, and how the site is funded.",
+            "URAL is an independent travel-intelligence publisher in Dhaka — not a travel agency. Who writes it, how each guide is sourced and dated, and how the site stays independent.",
     imageUrl: defaultOgImage,
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
@@ -2619,7 +2572,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     bodyHtml: `
       <article>
         <h1>About URAL: Travel Intelligence, Not a Travel Agency</h1>
-        <p>URAL is an independent outbound-travel desk in Dhaka. It publishes flight-fare guidance in Bangladeshi Taka, visa checklists built from official sources, Umrah and Hajj planning material, and trip budgets a family in Bangladesh can compare against its own income. It does not sell tickets, and it does not process visa applications.</p>
+        <p>URAL is an independent outbound-travel publisher in Dhaka: flight-fare guidance in Bangladeshi Taka, visa checklists built from official sources, Umrah and Hajj planning material, and trip budgets a family in Bangladesh can compare against its own income. It links the official portal or the affiliate partner for each service, and answers questions on WhatsApp or through the contact form.</p>
 
         <section>
           <h2>Who writes it</h2>
@@ -2634,9 +2587,9 @@ function buildAllRoutes(): PrerenderRoute[] {
         </section>
 
         <section>
-          <h2>How URAL is funded</h2>
-          <p>Some outbound links are affiliate links. If you book a hotel, an eSIM or an airport transfer through one of them, the partner pays URAL a commission and you pay exactly the same price. That is the entire revenue model — there is no sponsored content, no paid placement inside a guide, and no airline or hotel that can pay to change what a page says. The arrangement is disclosed in full in the footer of every page and in the <a href="/privacy">privacy and cookie policy</a>.</p>
-          <p>Because the commission comes from the booking rather than from advertising, the incentive is to write pages that are accurate enough to be worth returning to.</p>
+          <h2>How the site stays independent</h2>
+          <p>Some outbound links are affiliate partner links, and they are marked where they appear. The partner sets the price, the terms and the cancellation policy on its own site. A guide's recommendation is never sold or sponsored: no airline, hotel or booking platform can pay to change what a page says, and the arrangement is disclosed in the footer of every page and in the <a href="/privacy">privacy and cookie policy</a>.</p>
+          <p>Each guide also names the official source it relies on and the date it was last checked, so a reader can verify a rule at the source instead of trusting the summary here. Questions and consultation go to the WhatsApp line or the contact form, and the reply explains the options with the official or partner link that completes the step.</p>
         </section>
 
         <section>
@@ -2934,32 +2887,6 @@ function buildAllRoutes(): PrerenderRoute[] {
 // no /bn route is generated for it and its hreflang cluster is withheld — see
 // DEFERRED_BN_GROUPS in src/utils/localeRoutes.ts.
 // ===========================================================================
-
-/** Bengali labels for the trip-cost line items (names are English in the data). */
-const BN_COST_CATEGORY_LABELS: Record<string, string> = {
-  "Flights from Dhaka": "ঢাকা থেকে ফ্লাইট",
-  "Flights from Dhaka (Roundtrip)": "ঢাকা থেকে ফ্লাইট (রাউন্ডট্রিপ)",
-  "Accommodations (per night)": "থাকার খরচ (প্রতি রাত)",
-  "Accommodations (3 Nights Total)": "থাকার খরচ (৩ রাত)",
-  "Hotels / Guesthouses (4 Nights)": "হোটেল / গেস্টহাউস (৪ রাত)",
-  "Daily Meals & Street Food": "দৈনিক খাবার ও স্ট্রিট ফুড",
-  "Daily Meals & Satay Feasts": "দৈনিক খাবার ও সাটে",
-  "Daily Meals & Creek Shawarma": "দৈনিক খাবার ও শাওয়ারমা",
-  "Halal Hawker Centres & Meals": "হালাল হকার সেন্টার ও খাবার",
-  "Meals & Beachfront Dining": "খাবার ও বিচফ্রন্ট ডাইনিং",
-  "Intercity Transit / Taxis": "আন্তঃনগর যাতায়াত / ট্যাক্সি",
-  "BTS/MRT Trains & Grab Rides": "BTS/MRT ট্রেন ও গ্র্যাব",
-  "MRT SimplyGo & Airport Transit": "MRT SimplyGo ও এয়ারপোর্ট ট্রান্সফার",
-  "Metro Nol card & RTA Taxis": "মেট্রো নল কার্ড ও RTA ট্যাক্সি",
-  "LRT/MRT Trains & Grab Taxis": "LRT/MRT ট্রেন ও গ্র্যাব ট্যাক্সি",
-  "Attraction Tickets & Guides": "দর্শনীয় স্থানের টিকিট ও গাইড",
-  "Sentosa, Gardens & Visa Fee": "সেন্তোসা, গার্ডেনস ও ভিসা ফি",
-  "Genting / Attractions Tickets": "গেন্টিং / দর্শনীয় স্থানের টিকিট",
-  "Desert Safaris & Khalifa tickets": "ডেজার্ট সাফারি ও খলিফা টাওয়ার টিকিট",
-  "Shopping & Market Purchases": "শপিং ও মার্কেট কেনাকাটা",
-  "Snorkeling, Sandbank & Resort Tours": "স্নরকেলিং, স্যান্ডব্যাংক ও রিসোর্ট ট্যুর",
-  "Speedboat / Ferry Transfers": "স্পিডবোট / ফেরি ট্রান্সফার",
-};
 
 /**
  * Bengali digits for counts and durations in rendered Bengali bodies.
@@ -3317,9 +3244,9 @@ function buildBengaliBody(
       if (route) {
         parts.push(
           bnFactList([
-            { label: "ভাড়ার পরিসীমা (রাউন্ডট্রিপ)", value: route.priceRangeBdt },
             { label: "যাত্রার সময়", value: route.flightDuration || route.duration },
             { label: "এয়ারলাইন্স", value: route.airlines.join(", ") },
+            { label: "ভাড়া যাচাই", value: "আপনার তারিখের লাইভ ভাড়া তুলনা করুন" },
             { label: "বুকিংয়ের উপযুক্ত সময়", value: route.bestTimeToBook },
             { label: "ভিসা প্রয়োজন", value: route.visaRequirement },
           ])
@@ -3355,22 +3282,61 @@ function buildBengaliBody(
             `<li><a href="/bn/flights/dhaka-dubai">ঢাকা থেকে দুবাই</a> — Emirates, flydubai, Biman Bangladesh Airlines, US-Bangla Airlines (~৪ ঘণ্টা ৪৫ মিনিট)</li>` +
             `<li><a href="/bn/flights/dhaka-maldives">ঢাকা থেকে মালদ্বীপ (মালে)</a> — US-Bangla Airlines, SriLankan Airlines (~৪ ঘণ্টা ১০ মিনিট)</li>` +
           `</ul>` +
+          `<p>প্রতিটি রুটের ভাড়া আপনার তারিখ, আসন ও ব্যাগেজ অনুযায়ী বদলায়—নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, তাই বুকিংয়ের আগে লাইভ ভাড়া তুলনা করুন।</p>` +
           `<h3>সৌদি আরব (ওমরাহ ও হজ)</h3>` +
-          `<p>জেদ্দা ও মদিনার সরাসরি ফ্লাইট চলতে থাকে। <a href="/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">ওপেন-জেா টিকিট গাইড</a> এবং <a href="/bn/umrah">ডিআইওয়াই ওমরাহ প্ল্যানার দেখুন</a>।</p>` +
+          `<p>জেদ্দা ও মদিনার সরাসরি ফ্লাইট চলতে থাকে। <a href="/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">ওপেন-জেদ্দা টিকিট গাইড</a> এবং <a href="/bn/umrah">ডিআইওয়াই ওমরাহ প্ল্যানার দেখুন</a>।</p>` +
           `<h3>কোনো ননস্টপ নেই এমন রুট</h3>` +
           `<p>আমেরিকা, কানাডা ও ইউরোপের মতো কিছু জনপ্রিয় গন্তব্যে সাধারণত কানেকশন থাকা লাগে। দীর্ঘ-দূরত্ব পরিকল্পনার জন্য <a href="/bn/flights/dhaka-los-angeles">ঢাকা থেকে লস অ্যাঞ্জেলেস</a> দেখুন।</p>` +
           `<h4>সচরাচর জিজ্ঞাসা প্রশ্ন</h4>` +
-          `<details><summary>ঢাকা থেকে কোন এয়ারলাইন্স ননস্টপ উড়াড? </summary><p>Biman Bangladesh Airlines ও US-Bangla DAC থেকে সবচেয়ে বেশি ননস্টপ রুট পরিচালনা করে। কিছু বিদেশি এয়ারলাইন্সও ঢাকা থেকে সরাসরি উড়ানে। বর্তমান টাইম-টেবিল-এর জন্য প্রতিটি এয়ারলাইনের ওয়েবসাইট দেখুন।</p></details>` +
-          `<details><summary>ইউআরএলের ভাড়া দেখানো হয়?</summary><p>ইউআরএল রুট গাইড প্রকাশ করে এবং এয়ারলাইন বা সার্চ পার্টনারের লিংক দেয়। ভাড়া প্রতিদিন পরিবর্তিত হয়।</p></details>` +
+          `<details><summary>ঢাকা থেকে কোন এয়ারলাইন্স ননস্টপ উড়ে? </summary><p>Biman Bangladesh Airlines ও US-Bangla DAC থেকে সবচেয়ে বেশি ননস্টপ রুট পরিচালনা করে। কিছু বিদেশি এয়ারলাইন্সও ঢাকা থেকে সরাসরি উড়ে। বর্তমান টাইম-টেবিল-এর জন্য প্রতিটি এয়ারলাইনের ওয়েবসাইট দেখুন।</p></details>` +
+          `<details><summary>ভাড়া কি এখানে দেখানো হয়?</summary><p>পেজটি রুট গাইড প্রকাশ করে এবং এয়ারলাইন বা সার্চ পার্টনারের লিংক দেয়। নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, কারণ ভাড়া প্রতিদিন ও প্রতিটি তারিখে পরিবর্তিত হয়—আপনার তারিখের লাইভ ভাড়া ও শর্ত যাচাই করুন।</p></details>` +
           `</section>`
       );
 
     } else {
+      const seenPairs = new Set<string>();
+      const hubRoutes = getLocalizedFlights("bn").filter((route) => {
+        const key = [route.from, route.to]
+          .map((part) => part.split(" (")[0])
+          .sort()
+          .join("|");
+        if (seenPairs.has(key)) return false;
+        seenPairs.add(key);
+        return true;
+      });
+      const nonstopRoutes = hubRoutes.filter((route) => /direct/i.test(route.flightDuration || route.duration));
+      const nonstopItems = nonstopRoutes
+        .map(
+          (route) =>
+            `<li><a href="/bn/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} → ${escapeHtml(route.to.split(" (")[0])}</a> — ${escapeHtml(route.airlines.join(", "))} (${escapeHtml(route.flightDuration || route.duration)})</li>`
+        )
+        .join("");
       parts.push(
         bnDirectory(
           "সব ফ্লাইট রুট গাইড",
           englishPathsIn("/flights", FLIGHTS_DATA.map((route) => route.id))
-        )
+        ),
+        `<p>নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না: তারিখ, আসন, ব্যাগেজ ও টিকিটের শর্ত অনুযায়ী দাম বদলায়। রুট গাইডে যাত্রার সময় ও এয়ারলাইন্স দেখে নিন, তারপর নিজের তারিখের লাইভ মোট ভাড়া তুলনা করুন।</p>`,
+        bnSection(
+          "ঢাকা (DAC) থেকে সরাসরি ফ্লাইট",
+          `<p>হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর থেকে প্রায় ৩০টি আন্তর্জাতিক গন্তব্যে সরাসরি ফ্লাইট চলে, পাশাপাশি দেশীয় রুটও। মৌসুম অনুযায়ী সময়সূচি ও পরিচালনাকারী এয়ারলাইন্স বদলায়, তাই বুকিংয়ের আগে এয়ারলাইনের ওয়েবসাইটে নিশ্চিত হয়ে নিন।</p>` +
+            (nonstopItems ? `<ul>${nonstopItems}</ul>` : "") +
+            `<h3>সৌদি আরব (ওমরাহ ও হজ)</h3><p>জেদ্দা ও মদিনায় সরাসরি ফ্লাইট চলে। <a href="/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">ওপেন-জ টিকিট গাইড</a> এবং <a href="/bn/umrah">DIY ওমরাহ প্ল্যানার</a> দেখুন।</p>` +
+            `<h3>কোনো ননস্টপ ফ্লাইট নেই এমন রুট</h3><p>আমেরিকা, কানাডা ও ইউরোপের অনেক গন্তব্যে সাধারণত সংযোগ লাগে, প্রায়ই উপসাগরীয় হাব হয়ে। দীর্ঘ-দূরত্বের পরিকল্পনার জন্য <a href="/bn/flights/dhaka-los-angeles">ঢাকা থেকে লস অ্যাঞ্জেলেস</a> গাইড দেখুন।</p>`
+        ),
+        bnSection(
+          "বাংলাদেশ থেকে আন্তর্জাতিক ফ্লাইট কীভাবে তুলনা করবেন",
+          `<p>সম্ভব হলে নমনীয় তারিখ নিয়ে শুরু করুন, তারপর একই যাত্রীসংখ্যা ও ব্যাগেজ ভাতা রেখে সরাসরি ও সংযোগী বিকল্প মিলিয়ে দেখুন। কম দেখানো ভাড়ায় চেকড ব্যাগেজ, সিট সিলেকশন বা পেমেন্ট ফি বাদ থাকতে পারে, আর সংযোগে ট্রানজিট আনুষ্ঠানিকতা ও বেশি সময় যোগ হয়। প্রতিটি সেগমেন্ট এক টিকিটে আছে কি না, সংযোগ হাতছাড়া হলে কী হবে এবং ভাড়ায় পরিবর্তন অনুমোদিত কি না—এগুলো যাচাই করুন।</p>` +
+            `<p>গাইডে দেওয়া যাত্রার সময় ও বুকিং উইন্ডো নির্দেশক; বর্তমান সময়সূচির সঙ্গে মিলিয়ে নিন। ঈদ, স্কুল ছুটি বা শীতের মৌসুমে নির্দিষ্ট ছাড়ের সময় ধরে না নিয়ে আগে ও পরে দুবার দাম দেখুন। ঢাকার বাইরে থেকে এলে আলাদা দেশীয় ফ্লাইটের সংযোগের জন্য যথেষ্ট সময় রাখুন এবং দেরি হলে কী হবে জেনে নিন।</p>`
+        ),
+        bnLinkList("ভ্রমণের বাকি পরিকল্পনা", [
+          { label: "ভিসার চেকলিস্ট ও সরকারি পোর্টাল", path: "/visa" },
+          { label: "ট্রিপ কস্ট এস্টিমেটর ও গন্তব্যের বাজেট", path: "/costs" },
+          { label: "হোটেল এলাকা ও বুকিং যাচাই", path: "/hotels" },
+          { label: "ওমরাহ পরিকল্পনা ও নুসুক ধাপ", path: "/umrah" },
+          { label: "ব্যবহারিক ভ্রমণ গাইড", path: "/blog" },
+        ]),
+        bnFaqList("ফ্লাইট বুকিং নিয়ে প্রশ্ন", BN_LANDING_FLIGHT_FAQS)
       );
     }
     return `<article>${parts.join("")}</article>`;
@@ -3477,47 +3443,11 @@ function buildBengaliBody(
   }
 
   if (group === "costs") {
-    if (id) {
-      const cost = getLocalizedCosts("bn").find((item) => item.id === id);
-      if (cost) {
-        const rows = cost.categories
-          .map((category) => {
-            const label =
-              BN_COST_CATEGORY_LABELS[category.name] || category.name;
-            return `<li><strong>${escapeHtml(label)}:</strong> BDT ${category.lowBdt.toLocaleString(
-              "en-US"
-            )} – ${category.midBdt.toLocaleString("en-US")} (মিড-রেঞ্জ) – ${category.highBdt.toLocaleString(
-              "en-US"
-            )}</li>`;
-          })
-          .join("");
-        if (rows) parts.push(bnSection("খরচের খাতভিত্তিক হিসাব", `<ul>${rows}</ul>`));
-        parts.push(
-          bnLinkList(
-            "এই ট্রিপের বাকি পরিকল্পনা",
-            bnCountryCrossLinks(cost.country, englishPath)
-          )
-        );
-      }
-      const guidance = bnGuidanceFor(group);
-      if (guidance.length) {
-        parts.push(
-          bnSection(
-            "ব্যবহারিক পরামর্শ",
-            guidance.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")
-          )
-        );
-      }
-
-    } else {
-      parts.push(
-        bnDirectory(
-          "সব খরচের গাইড",
-          englishPathsIn("/costs", TRIP_COSTS_DATA.map((cost) => cost.id))
-        )
-      );
-    }
-    return `<article>${parts.join("")}</article>`;
+    const costs = getLocalizedCosts("bn");
+    const cost = costs.find((item) => item.id === id);
+    return cost
+      ? renderToStaticMarkup(React.createElement(CostPlanningGuide, { cost, isBn: true }))
+      : renderToStaticMarkup(React.createElement(CostPlanningHub, { costs, isBn: true }));
   }
 
   if (group === "destinations") {
@@ -3784,7 +3714,7 @@ function buildBengaliBody(
         { label: "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)", path: "/tools/airport-codes" },
         { label: "স্মার্ট প্যাকিং চেকলিস্ট", path: "/tools/packing-checklist" },
         { label: "কারেন্সি কনভার্টার (BDT)", path: "/tools/currency-converter" },
-        { label: "ট্রিপ বাজেট ক্যালকুলেটর", path: "/tools/budget-calculator" },
+        { label: "ট্রিপ কস্ট এস্টিমেটর", path: "/tools/budget-calculator" },
         { label: "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)", path: "/tools/flight-delay-claim" },
         { label: "সম্পূর্ণ সাইট ডিরেক্টরি", path: "/sitemap" },
       ])
@@ -3793,10 +3723,12 @@ function buildBengaliBody(
   }
 
   if (group === "tools") {
+    if (!id || id === "budget-calculator") parts.push(renderToStaticMarkup(React.createElement(TripCostEstimator, { isBn: true })));
+    if (id === "currency-converter") parts.push(renderToStaticMarkup(React.createElement(CurrencyConverter, { isBn: true })));
     // Hub and the six /tools/<slug> twins both land here (id is the slug).
     const toolLinks = [
-      { label: "কারেন্সি কনভার্টার (BDT ⇄ বিদেশি মুদ্রা)", path: "/tools/currency-converter" },
-      { label: "ট্রিপ বাজেট ক্যালকুলেটর", path: "/tools/budget-calculator" },
+      { label: "কারেন্সি কনভার্টার (BDT থেকে বিদেশি মুদ্রা)", path: "/tools/currency-converter" },
+      { label: "ট্রিপ কস্ট এস্টিমেটর", path: "/tools/budget-calculator" },
       { label: "স্মার্ট প্যাকিং চেকলিস্ট", path: "/tools/packing-checklist" },
       { label: "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)", path: "/tools/flight-delay-claim" },
       { label: "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)", path: "/tools/airport-codes" },
@@ -3842,7 +3774,7 @@ function buildBengaliBody(
       bnLinkList("ফ্রি টুলস ও প্রি-ডিপার্চার", [
         { label: "ট্রাভেল টুলস হাব", path: "/tools" },
         { label: "কারেন্সি কনভার্টার (BDT)", path: "/tools/currency-converter" },
-        { label: "ট্রিপ বাজেট ক্যালকুলেটর", path: "/tools/budget-calculator" },
+        { label: "ট্রিপ কস্ট এস্টিমেটর", path: "/tools/budget-calculator" },
         { label: "স্মার্ট প্যাকিং চেকলিস্ট", path: "/tools/packing-checklist" },
         { label: "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)", path: "/tools/flight-delay-claim" },
         { label: "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)", path: "/tools/airport-codes" },
@@ -4250,11 +4182,11 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
       extraGraphNodes.push(
         serviceSchema({
           url: canonicalUrl,
-          idSuffix: "service-visa-assistance",
-          name: "Bangladesh Outbound Visa Assistance & BDT Booking Desk",
+          idSuffix: "service-travel-information",
+          name: "ট্রাভেল ইনফরমেশন ও পরিকল্পনা সহায়তা ডেস্ক",
           description:
-            "Visa checklist review, document preparation, and flight/hotel booking in Bangladeshi Taka via bKash or bank transfer for Bangladeshi passport holders.",
-          serviceType: "Visa Assistance",
+            "বিদেশগামী ভ্রমণকারীদের জন্য স্বাধীন ভ্রমণ তথ্য ও পরিকল্পনা সহায়তা: রুট যাচাই, সরকারি সূত্র ও তারিখসহ ভিসার শর্তের চেকলিস্ট, এবং বাজেটের আনুমানিক হিসাব। URAL যাচাই করা তথ্য প্রকাশ করে, অফিশিয়াল পোর্টাল ও অ্যাফিলিয়েট পার্টনারের লিংক দেয়, আর প্রশ্ন ও পরামর্শের জন্য WhatsApp ও ইমেইল চ্যানেল রাখে।",
+          serviceType: "ভ্রমণ তথ্য",
         })
       );
     } else if (englishPath === "/privacy") {
@@ -4601,7 +4533,7 @@ function getContentDataChunkPath(): string | null {
       { file?: string }
     >;
     for (const [key, entry] of Object.entries(manifest)) {
-      if (key.includes("src/constants") && entry.file) return `/${entry.file}`;
+      if (entry.file && (key.includes("src/constants") || /^assets\/content-data-[^/]+\.js$/.test(entry.file))) return `/${entry.file}`;
     }
   } catch (err) {
     console.warn("  ! could not read the build manifest for the route-data preload:", err);

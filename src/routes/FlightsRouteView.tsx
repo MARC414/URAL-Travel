@@ -25,9 +25,53 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
   const activeRoute = localizedFlights.find((route) => route.id === parameterId) || localizedFlights[0];
 
+  // The same search card serves the /flights hub and each route guide.
+  const searchCard = (
+    <div id="flight-search" className="ural-guide-jump-target ural-card bg-slate-100 p-4 border border-border-subtle space-y-3">
+      <span className="text-[10px] font-mono font-bold text-brand-navy block">
+        {isBn ? (parameterId ? "এই রুটের ফ্লাইট সার্চ করুন" : "ফ্লাইট সার্চ করুন") : parameterId ? "Search Flights on This Route" : "Search Flights"}
+      </span>
+      {areTpScriptsReady ? (
+        <React.Suspense
+          fallback={
+            <TravelpayoutsWidgetSkeleton
+              variant="flights"
+              isBn={isBn}
+              onInteract={() => setAreTpScriptsReady(true)}
+            />
+          }
+        >
+          <TravelpayoutsEmbed
+            defaultDestination={parameterId ? getCountryIata(activeRoute.country) : undefined}
+            lang={lang}
+            onOpenPriceAlert={openPriceAlert}
+          />
+        </React.Suspense>
+      ) : (
+        <TravelpayoutsWidgetSkeleton
+          variant="flights"
+          isBn={isBn}
+          onInteract={() => setAreTpScriptsReady(true)}
+        />
+      )}
+      <div className="pt-2 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
+        <span className="text-xs text-slate-600">
+          {isBn
+            ? "মাল্টি-সিটি, ওপেন-জ বা ভিন্ন এয়ারলাইন্সের কম্বো টিকিট খুঁজছেন?"
+            : "Looking for Multi-City, Open-Jaw, or Self-Transfer Airline Combos?"}
+        </span>
+        <PartnerLinkButton
+          href={AFFILIATE_LINKS.kiwi}
+          label={isBn ? "Kiwi.com-এ মাল্টি-সিটি ভাড়া দেখুন" : "Compare Multi-City Fares on Kiwi.com"}
+          variant="dark"
+        />
+      </div>
+    </div>
+  );
+
   // /flights (no route id) is the index; /flights/:id keeps the route template.
   if (!parameterId) {
-    return <FlightsIndex routes={localizedFlights} isBn={isBn} navigateTo={navigateTo} />;
+    return <FlightsIndex routes={localizedFlights} isBn={isBn} navigateTo={navigateTo} searchSlot={searchCard} />;
   }
 
   return (
@@ -44,8 +88,8 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
             ? `ঢাকা → ${activeRoute.to.split(" (")[0]} বিমান ভাড়া, সময় ও ভিসা গাইড (২০২৬)`
             : `Flights from ${activeRoute.from} to ${activeRoute.to}`}
           description={isBn
-            ? `${activeRoute.to} রুটের সাধারণ ভাড়া, ভ্রমণের সময় এবং এয়ারলাইন্স তুলনা করুন। বুকিংয়ের আগে বর্তমান সময়সূচি, ব্যাগেজ ও প্রবেশের নিয়ম যাচাই করুন।`
-            : `Compare typical fares, journey times and airline options from Dhaka to ${activeRoute.to.split(" (")[0]}. Check current schedules, baggage and entry rules before booking.`}
+            ? `${activeRoute.to} রুটের লাইভ ভাড়া, ভ্রমণের সময় এবং এয়ারলাইন্স তুলনা করুন। বুকিংয়ের আগে তারিখ অনুযায়ী বর্তমান সময়সূচি, ব্যাগেজ ও প্রবেশের নিয়ম যাচাই করুন।`
+            : `Compare live fares, journey times and airline options from Dhaka to ${activeRoute.to.split(" (")[0]}. Check current schedules, baggage and entry rules for your dates before booking.`}
           imageSrc="/assets/images/flights_heathrow_b747_takeoff_20261101-1200.webp"
           imageAlt={isBn
             ? "লন্ডনের হিথ্রো বিমানবন্দরের কাছে আকাশে উড়ে যাওয়া থাই এয়ারওয়েজের বোয়িং ৭৪৭ বিমান"
@@ -62,7 +106,7 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
         >
           <div className="flex flex-wrap items-center gap-2.5">
             <span className="rounded-full bg-[#F6B73C]/20 px-3 py-1.5 font-mono text-xs font-bold text-[#FFE0A0]">
-              {activeRoute.priceRangeBdt.split(" (")[0]}
+              {isBn ? "লাইভ ভাড়া তুলনা করুন" : "Compare live fares"}
             </span>
             <button
               type="button"
@@ -278,87 +322,9 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
 
 
-                     {/* Embedded Conversion search form widget */}
+                     {/* Embedded Conversion search form widget: shared by the hub and route views */}
 
-                    <div id="flight-search" className="ural-guide-jump-target ural-card bg-slate-100 p-4 border border-border-subtle space-y-3">
-
-                      <span className="text-[10px] font-mono font-bold text-brand-navy block">
-
-                        {isBn ? "এই রুটের ফ্লাইট সার্চ করুন" : "Search Flights on This Route"}
-
-                      </span>
-
-                      {areTpScriptsReady ? (
-
-                        <React.Suspense
-
-                          fallback={
-
-                            <TravelpayoutsWidgetSkeleton
-
-                              variant="flights"
-
-                              isBn={isBn}
-
-                              onInteract={() => setAreTpScriptsReady(true)}
-
-                            />
-
-                          }
-
-                        >
-
-                          <TravelpayoutsEmbed
-
-                            defaultDestination={getCountryIata(activeRoute.country)}
-
-                            lang={lang}
-
-                            onOpenPriceAlert={openPriceAlert}
-
-                          />
-
-                        </React.Suspense>
-
-                      ) : (
-
-                        <TravelpayoutsWidgetSkeleton
-
-                          variant="flights"
-
-                          isBn={isBn}
-
-                          onInteract={() => setAreTpScriptsReady(true)}
-
-                        />
-
-                      )}
-
-                      <div className="pt-2 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
-
-                        <span className="text-xs text-slate-600">
-
-                          {isBn
-
-                            ? "মাল্টি-সিটি, ওপেন-জ বা ভিন্ন এয়ারলাইন্সের কম্বো টিকিট খুঁজছেন?"
-
-                            : "Looking for Multi-City, Open-Jaw, or Self-Transfer Airline Combos?"}
-
-                        </span>
-
-                        <PartnerLinkButton
-
-                          href={AFFILIATE_LINKS.kiwi}
-
-                          label={isBn ? "Kiwi.com-এ মাল্টি-সিটি ভাড়া দেখুন" : "Compare Multi-City Fares on Kiwi.com"}
-
-                          variant="dark"
-
-                        />
-
-                      </div>
-
-                    </div>
+                    {searchCard}
 
 
 
@@ -476,7 +442,7 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
           <h2 className="ural-card-title font-serif text-sm font-bold">
 
-            {isBn ? "আপনার পরবর্তী ফ্লাইট বুকিংয়ে সর্বোচ্চ BDT 3,500 সাশ্রয় করুন" : "Save up to BDT 3,500 on Your Next Booking"}
+            {isBn ? "টিকিট কেনার আগে মোট ভাড়া তুলনা করুন" : "Compare the total fare before you book"}
 
           </h2>
 
@@ -484,9 +450,9 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
             {isBn
 
-              ? `আপনার ${activeRoute.country || "Nepal"} ফ্লাইটের ভাড়া তুলনা করুন — ভেরিফায়েড পার্টনারের মাধ্যমে সর্বনিম্ন ভাড়া খুঁজুন।`
+              ? "একই রুট ও তারিখে একাধিক এয়ারলাইন ও সেবাদাতার মোট ভাড়া মিলিয়ে দেখুন, তারপর ব্যাগেজ, পেমেন্ট চার্জ ও পরিবর্তনের শর্ত যাচাই করুন।"
 
-              : `Compare prices for your ${activeRoute.country || "Nepal"} flight — lowest fares through our verified booking partners.`}
+              : "Compare the same route and dates across airlines and providers, then check baggage, payment fees and change conditions before paying."}
 
           </p>
 

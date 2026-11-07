@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Coins, Calculator, CheckSquare, Heart, User, Sparkles, Check, RefreshCw, Plane, Search, Copy, Send, ArrowRight } from "lucide-react";
+import { CheckSquare, Sparkles, Check, Plane, Search, Copy, Send, ArrowRight } from "lucide-react";
 import { AirHelpWidget } from "./AirHelpWidget";
 import { trackWhatsAppInquiry } from "../utils/analytics";
 import { checklistProgress } from "../utils/checklistProgress";
-import { trackToolOpen, trackToolResult, partySizeBand, durationBand, type ToolId } from "../utils/toolAnalytics";
+import { trackToolOpen, trackToolResult, type ToolId } from "../utils/toolAnalytics";
+import { TripCostEstimator } from "./TripCostEstimator";
+import { CurrencyConverter } from "./CurrencyConverter";
+import type { EstimatorCountry } from "../utils/tripCostEstimator";
 
 interface AirportItem {
   code: string;
@@ -65,9 +68,11 @@ interface InteractiveToolsProps {
    * URL always opens the tool it names, even next to an old query string.
    */
   initialTool?: ActiveTool;
+  initialCountry?: EstimatorCountry;
 }
 
-export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
+export function InteractiveTools({ initialTool, initialCountry }: InteractiveToolsProps = {}) {
+  const isBn = typeof window !== "undefined" ? window.location.pathname.startsWith("/bn") : false;
   const [activeTool, setActiveTool] = useState<ActiveTool>(() => {
     if (initialTool) return initialTool;
     if (typeof window !== "undefined") {
@@ -114,60 +119,6 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTool]);
 
-  // 1. Currency Converter State
-  const [bdtAmount, setBdtAmount] = useState<number>(10000);
-  const conversionRates: { [key: string]: { rate: number; name: string; icon: string } } = {
-    NPR: { rate: 1.13, name: "Nepali Rupee", icon: "🇳🇵" },
-    THB: { rate: 0.30, name: "Thai Baht", icon: "🇹🇭" },
-    MYR: { rate: 0.037, name: "Malaysian Ringgit", icon: "🇲🇾" },
-    AED: { rate: 0.033, name: "UAE Dirham", icon: "🇦🇪" },
-    USD: { rate: 0.0084, name: "US Dollar", icon: "🇺🇸" }
-  };
-
-  // 2. Travel Budget Calculator State
-  const [calcCountry, setCalcCountry] = useState<"nepal" | "thailand" | "malaysia" | "uae">("thailand");
-  const [calcDays, setCalcDays] = useState<number>(5);
-  const [calcPeeps, setCalcPeeps] = useState<number>(1);
-  const [budgetTier, setBudgetTier] = useState<"low" | "mid" | "high">("mid");
-
-  const calcRates = {
-    nepal: {
-      flightBdt: 33000,
-      low: { lodging: 1200, meals: 800, transport: 500, tickets: 600 },
-      mid: { lodging: 3500, meals: 1800, transport: 1500, tickets: 1800 },
-      high: { lodging: 12000, meals: 3500, transport: 4500, tickets: 4000 }
-    },
-    thailand: {
-      flightBdt: 37000,
-      low: { lodging: 1800, meals: 1200, transport: 400, tickets: 800 },
-      mid: { lodging: 4500, meals: 2500, transport: 1200, tickets: 2500 },
-      high: { lodging: 14000, meals: 6000, transport: 3500, tickets: 6000 }
-    },
-    malaysia: {
-      flightBdt: 42000,
-      low: { lodging: 1800, meals: 1000, transport: 300, tickets: 1500 },
-      mid: { lodging: 5000, meals: 2200, transport: 1000, tickets: 4000 },
-      high: { lodging: 11000, meals: 5000, transport: 3000, tickets: 9000 }
-    },
-    uae: {
-      flightBdt: 62000,
-      low: { lodging: 3500, meals: 1800, transport: 800, tickets: 4500 },
-      mid: { lodging: 8000, meals: 4500, transport: 2000, tickets: 12000 },
-      high: { lodging: 25000, meals: 12000, transport: 6000, tickets: 35000 }
-    }
-  };
-
-  // Calculate totals
-  const activeRateSet = calcRates[calcCountry];
-  const activeCosts = activeRateSet[budgetTier];
-  const flightCostTotal = activeRateSet.flightBdt * calcPeeps;
-  const lodgingCostTotal = activeCosts.lodging * calcDays * Math.ceil(calcPeeps / 2); // Assume double sharing
-  const mealsCostTotal = activeCosts.meals * calcDays * calcPeeps;
-  const transitCostTotal = activeCosts.transport * calcDays * calcPeeps;
-  const entriesCostTotal = activeCosts.tickets * calcDays * calcPeeps;
-
-  const grandBdtTotal = flightCostTotal + lodgingCostTotal + mealsCostTotal + transitCostTotal + entriesCostTotal;
-
   // 3. Packing Checklist State
   const [checklist, setChecklist] = useState([
     // Category: Documents
@@ -193,29 +144,6 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
     // holds no personal data, so only the tool name is sent.
     trackToolResult("packing-checklist");
   };
-
-  // Converter: the reader typed a base amount. Debounced; the AMOUNT ITSELF IS
-  // NEVER SENT — only that a conversion happened and which currencies are shown.
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      trackToolResult("currency-converter", { currency: "BDT" });
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, [bdtAmount]);
-
-  // Result measurement per tool (WP4). Debounced so dragging the sliders emits
-  // one event on settle rather than dozens, and carrying only coarse bands.
-  const calculatorInputs = `${calcCountry}|${calcDays}|${calcPeeps}|${budgetTier}`;
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      trackToolResult("budget-estimator", {
-        tier: budgetTier,
-        partySize: partySizeBand(calcPeeps),
-        duration: durationBand(calcDays),
-      });
-    }, 1200);
-    return () => clearTimeout(timer);
-  }, [calculatorInputs]);
 
   const checkedCount = checklist.filter(i => i.checked).length;
   const progressPercent = checklistProgress(checkedCount, checklist.length);
@@ -262,7 +190,7 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
     const destLabel = destItem ? `${destItem.city} (${destItem.code})` : inquiryDestination;
 
     const message = [
-      `Assalamu Alaikum URAL Travel Desk, I would like to request a flight fare quote:`,
+      `Assalamu Alaikum URAL, I have a question about a flight route:`,
       ``,
       `✈️ Route: ${originLabel} ➔ ${destLabel}`,
       `📅 Departure Date: ${inquiryDate || "Flexible (Please advise earliest/cheapest)"}`,
@@ -271,7 +199,7 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
       `💺 Cabin Class: ${inquiryClass}`,
       inquiryNotes ? `📝 Note: ${inquiryNotes}` : ``,
       ``,
-      `Please share available airline options, baggage allowances, and best BDT fare via bKash/Bank Transfer.`
+      `Please point me to the airline or the site that sells this route, with its baggage allowance, so I can compare the all-in price myself.`
     ].filter(Boolean).join("\n");
 
     return `https://wa.me/8801784385335?text=${encodeURIComponent(message)}`;
@@ -283,11 +211,11 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
       <div className="bg-brand-navy px-4 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-slate-700 sm:px-6">
         <h2 className="ural-section-title font-serif text-lg font-bold text-white flex min-w-0 items-center gap-2">
           <Sparkles className="shrink-0 text-[#F6B73C]" size={20} />
-          URAL Bangladesh Travel Utility Desk
+          {isBn ? "URAL ট্রাভেল টুলস" : "URAL Travel Tools"}
         </h2>
         <div
           role="group"
-          aria-label="Choose a travel tool"
+            aria-label={isBn ? "ট্রাভেল টুল বেছে নিন" : "Choose a travel tool"}
           className="grid w-full min-w-0 grid-cols-2 gap-1 rounded-lg border border-slate-800 bg-[#0c2033]/80 p-1 text-xs text-white sm:flex sm:w-auto sm:max-w-full sm:flex-wrap sm:justify-end"
         >
           <button
@@ -300,7 +228,7 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
             }`}
           >
             <Plane className="shrink-0" size={13} />
-            Airport Codes (IATA)
+            {isBn ? "বিমানবন্দরের কোড (IATA)" : "Airport Codes (IATA)"}
           </button>
           <button
             id="tool-nav-calculator"
@@ -311,7 +239,7 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
               activeTool === "calculator" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
             }`}
           >
-            Trip Cost Estimator
+            {isBn ? "ট্রিপ কস্ট এস্টিমেটর" : "Trip Cost Estimator"}
           </button>
           <button
             id="tool-nav-converter"
@@ -322,7 +250,7 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
               activeTool === "converter" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
             }`}
           >
-            Currency Converter
+            {isBn ? "কারেন্সি কনভার্টার" : "Currency Converter"}
           </button>
           <button
             id="tool-nav-packing"
@@ -333,7 +261,7 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
               activeTool === "packing" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
             }`}
           >
-            Smart Checklist
+            {isBn ? "প্যাকিং চেকলিস্ট" : "Packing Checklist"}
           </button>
           <button
             id="tool-nav-airhelp"
@@ -344,7 +272,7 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
               activeTool === "airhelp" ? "bg-[#F6B73C] text-brand-navy shadow-sm" : "text-slate-300 hover:text-white"
             }`}
           >
-            Flight Disruption Check (AirHelp)
+            {isBn ? "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)" : "Flight Disruption Check (AirHelp)"}
           </button>
         </div>
       </div>
@@ -352,207 +280,10 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
       {/* Internal Content Container */}
       <div className="p-4 sm:p-6 md:p-8">
         {/* TOOL 1: CALCULATOR */}
-        {activeTool === "calculator" && (
-          <div className="space-y-6">
-            <div className="flex items-center gap-2 text-slate-800 font-serif border-b border-slate-200 pb-3">
-              <Calculator className="text-brand-navy" size={20} />
-              <h3 className="ural-card-title font-bold text-lg">Interactive Outbound Budget Estimator (BDT)</h3>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Controls Column */}
-              <div className="ural-card space-y-4 bg-slate-100/70 p-5 border border-border-subtle">
-                <h4 className="text-xs font-black text-slate-500 uppercase tracking-wider">1. Trip Parameters</h4>
-
-                <div>
-                  <label htmlFor="calc-dest-select" className="block text-xs font-semibold text-slate-700 mb-1">Target Destination</label>
-                  <select
-                    id="calc-dest-select"
-                    value={calcCountry}
-                    onChange={(e) => setCalcCountry(e.target.value as any)}
-                    className="w-full min-h-11 bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                  >
-                    <option value="nepal">Nepal 🇳🇵</option>
-                    <option value="thailand">Thailand 🇹🇭</option>
-                    <option value="malaysia">Malaysia 🇲🇾</option>
-                    <option value="uae">United Arab Emirates (Dubai) 🇦🇪</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="calc-days-range" className="block text-xs font-semibold text-slate-700 mb-1">Duration of Trip ({calcDays} Days)</label>
-                  <input
-                    id="calc-days-range"
-                    type="range"
-                    min="1"
-                    max="14"
-                    value={calcDays}
-                    onChange={(e) => setCalcDays(Number(e.target.value))}
-                    className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-navy"
-                  />
-                  <div className="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
-                    <span>1 Day</span>
-                    <span>7 Days</span>
-                    <span>14 Days</span>
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="calc-peeps-range" className="block text-xs font-semibold text-slate-700 mb-1">Companions ({calcPeeps} {calcPeeps === 1 ? "Person" : "Persons"})</label>
-                  <input
-                    id="calc-peeps-range"
-                    type="range"
-                    min="1"
-                    max="5"
-                    value={calcPeeps}
-                    onChange={(e) => setCalcPeeps(Number(e.target.value))}
-                    className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-navy"
-                  />
-                  <div className="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
-                    <span>1 Traveler (Solo)</span>
-                    <span>3 (Couple + 1)</span>
-                    <span>5 (Family)</span>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Style of Travel</label>
-                  <div className="grid grid-cols-3 gap-1.5 p-1 bg-white rounded-lg border border-border-subtle text-[10px] font-bold">
-                    <button
-                      id="tier-low"
-                      type="button"
-                      aria-pressed={budgetTier === "low"}
-                      onClick={() => setBudgetTier("low")}
-                      className={`min-h-11 px-1 py-2 rounded leading-tight ${budgetTier === "low" ? "bg-slate-800 text-white" : "text-slate-600 hover:bg-slate-100"}`}
-                    >
-                      Backpacker
-                    </button>
-                    <button
-                      id="tier-mid"
-                      type="button"
-                      aria-pressed={budgetTier === "mid"}
-                      onClick={() => setBudgetTier("mid")}
-                      className={`min-h-11 px-1 py-2 rounded leading-tight ${budgetTier === "mid" ? "bg-slate-800 text-white" : "text-slate-600 hover:bg-slate-100"}`}
-                    >
-                      Mid-Comfort
-                    </button>
-                    <button
-                      id="tier-high"
-                      type="button"
-                      aria-pressed={budgetTier === "high"}
-                      onClick={() => setBudgetTier("high")}
-                      className={`min-h-11 px-1 py-2 rounded leading-tight ${budgetTier === "high" ? "bg-slate-800 text-white" : "text-slate-600 hover:bg-slate-100"}`}
-                    >
-                      Luxury Heritage
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Dynamic Recalculated Output Column */}
-              <div className="md:col-span-2 space-y-4">
-                <div className="bg-brand-navy text-slate-100 p-6 rounded-xl relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  {/* Decorative mesh */}
-                  <div className="absolute right-0 top-0 opacity-10 text-white font-serif text-9xl">৳</div>
-                  <div>
-                    <h4 className="text-[10px] font-bold text-[#F6B73C] uppercase tracking-widest block mb-1">Estimated Trip Budget</h4>
-                    <div className="text-4xl font-serif font-black tracking-tight text-white">
-                      ৳ {grandBdtTotal.toLocaleString()} <span className="text-xs font-sans font-normal text-slate-300">BDT</span>
-                    </div>
-                    <p className="text-xs text-slate-300 mt-1">
-                      Planning estimate only. Confirm current airfare, accommodation, and local costs before booking.
-                    </p>
-                  </div>
-                  <div className="bg-slate-800/60 p-3 rounded-lg border border-slate-700 shrink-0 text-center md:min-w-[120px]">
-                    <span className="text-[10px] text-slate-400 uppercase font-mono block">Budget Per Person</span>
-                    <span className="text-sm font-bold text-white">৳ {Math.round(grandBdtTotal / calcPeeps).toLocaleString()}</span>
-                    <span className="text-[10px] text-slate-300 block mt-0.5">({calcPeeps} {calcPeeps === 1 ? "traveler" : "travelers"})</span>
-                  </div>
-                </div>
-
-                <div className="ural-card bg-white border border-border-subtle p-4 space-y-2.5">
-                  <h5 className="text-xs font-bold text-slate-500 font-mono uppercase tracking-wider mb-2">Cost Breakdown Overview:</h5>
-
-                  <div className="flex items-start justify-between gap-3 text-xs py-1.5 border-b border-slate-100">
-                    <span className="min-w-0 flex-1 leading-relaxed text-slate-600">🛫 Roundtrip Outbound Airfare (Dhaka - {calcCountry.toUpperCase()})</span>
-                    <span className="shrink-0 whitespace-nowrap text-right font-mono font-semibold text-slate-800">৳ {flightCostTotal.toLocaleString()}</span>
-                  </div>
-                  <div className="flex items-start justify-between gap-3 text-xs py-1.5 border-b border-slate-100">
-                    <span className="min-w-0 flex-1 leading-relaxed text-slate-600">🏨 Local Accommodation ({calcDays} Nights, {Math.ceil(calcPeeps/2)} Rooms)</span>
-                    <span className="shrink-0 whitespace-nowrap text-right font-mono font-semibold text-slate-800">৳ {lodgingCostTotal.toLocaleString()}</span>
-                  </div>
-                  <div className="flex items-start justify-between gap-3 text-xs py-1.5 border-b border-slate-100">
-                    <span className="min-w-0 flex-1 leading-relaxed text-slate-600">🍲 Daily Halal Meals & Refreshments</span>
-                    <span className="shrink-0 whitespace-nowrap text-right font-mono font-semibold text-slate-800">৳ {mealsCostTotal.toLocaleString()}</span>
-                  </div>
-                  <div className="flex items-start justify-between gap-3 text-xs py-1.5 border-b border-slate-100">
-                    <span className="min-w-0 flex-1 leading-relaxed text-slate-600">🚗 Innercity Transit & Taxis ({calcDays} Days)</span>
-                    <span className="shrink-0 whitespace-nowrap text-right font-mono font-semibold text-slate-800">৳ {transitCostTotal.toLocaleString()}</span>
-                  </div>
-                  <div className="flex items-start justify-between gap-3 text-xs py-1.5">
-                    <span className="min-w-0 flex-1 leading-relaxed text-slate-600">🎟️ Attraction Sightseeing & Historical Monuments Gates Entry</span>
-                    <span className="shrink-0 whitespace-nowrap text-right font-mono font-semibold text-slate-800">৳ {entriesCostTotal.toLocaleString()}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        {activeTool === "calculator" && <TripCostEstimator key={initialCountry} isBn={isBn} initialCountry={initialCountry} />}
 
         {/* TOOL 2: CONVERTER */}
-        {activeTool === "converter" && (
-          <div className="space-y-6 max-w-xl mx-auto">
-            <div className="flex items-center gap-2 text-slate-800 font-serif border-b border-slate-200 pb-3">
-              <Coins className="text-brand-navy" size={20} />
-              <h3 className="ural-card-title font-bold text-lg">Indicative BDT Currency Converter</h3>
-            </div>
-
-            <div className="ural-card bg-slate-100/70 p-6 border border-border-subtle space-y-4">
-              <div>
-                <label htmlFor="input-converter-bdt" className="block text-xs font-bold text-slate-600 uppercase tracking-widest mb-1.5">Base Investment (Bangladeshi Taka BDT)</label>
-                <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 font-serif font-semibold text-slate-500 text-sm">৳</span>
-                  <input
-                    id="input-converter-bdt"
-                    type="number"
-                    value={bdtAmount}
-                    onChange={(e) => setBdtAmount(Number(e.target.value))}
-                    className="w-full bg-white border border-border-default rounded-lg pl-8 pr-12 py-3 text-sm font-semibold font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                  />
-                  <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-mono font-bold text-slate-400">BDT</span>
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <p role="note" className="text-xs text-slate-600 leading-relaxed mb-3">
-                  Reference rates are illustrative, not live exchange quotes. Confirm your provider’s rate before exchanging.
-                </p>
-                <span className="text-xs font-bold text-text-secondary block mb-2 font-mono uppercase">INDICATIVE CONVERSIONS:</span>
-                <div className="space-y-2">
-                  {Object.keys(conversionRates).map((currency) => {
-                    const coin = conversionRates[currency];
-                    const convertedVal = (bdtAmount * coin.rate).toFixed(2);
-                    return (
-                      <div key={currency} className="bg-white border border-slate-200 p-3 rounded-lg flex items-center justify-between text-xs hover:bg-slate-50 transition-colors">
-                        <div className="flex items-center gap-2.5">
-                          <span className="text-lg">{coin.icon}</span>
-                          <div>
-                            <span className="font-bold text-slate-800">{currency}</span>
-                            <span className="text-slate-400 block text-[10px]">{coin.name}</span>
-                          </div>
-                        </div>
-                        <div className="text-right font-mono">
-                          <div className="font-bold text-text-primary text-sm">{convertedVal} {currency}</div>
-                          <div className="text-[10px] text-slate-400">1 BDT ≈ {coin.rate} {currency}</div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        {activeTool === "converter" && <CurrencyConverter isBn={isBn} />}
 
         {/* TOOL 3: PACKING */}
         {activeTool === "packing" && (
@@ -648,14 +379,14 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
                 <div className="space-y-0.5">
                   <span className="text-[10px] font-mono font-bold text-[#F6B73C] uppercase tracking-wider block">
-                    Instant Ticketing Assistance
+                    Fare Research & Airline Handoff
                   </span>
                   <h4 className="font-serif font-bold text-base text-white">
-                    1-Click WhatsApp Flight Fare Request
+                    1-Click WhatsApp Fare Question
                   </h4>
                 </div>
                 <span className="text-[11px] text-slate-300">
-                  Direct connection with Dhaka Outbound Desk (+8801784385335)
+                  Route and document questions on WhatsApp (+8801784385335)
                 </span>
               </div>
 
@@ -797,7 +528,7 @@ export function InteractiveTools({ initialTool }: InteractiveToolsProps = {}) {
                   className="min-h-11 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl transition-all shadow-md shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
                 >
                   <Send size={14} />
-                  <span>Send Fare Quote Request on WhatsApp →</span>
+                  <span>Ask About This Route on WhatsApp →</span>
                 </a>
               </div>
             </div>

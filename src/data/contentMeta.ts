@@ -40,10 +40,10 @@
  * once this value is more than `CONTENT_UPDATED_MAX_AGE_DAYS` old, so it cannot
  * rot silently.
  *
- * Last intentional refresh: 2026-10-18 — new bilingual city destination guides
- * (London, Italy, Paris and New York) added to the existing collection.
+ * Last intentional refresh: 2026-11-07 — bilingual quote-based cost guides,
+ * sourced-rate tools and travel-information positioning updates.
  */
-export const CONTENT_UPDATED = "2026-11-01";
+export const CONTENT_UPDATED = "2026-11-07";
 
 /**
  * Warn (do not fail) once CONTENT_UPDATED is older than this. Chosen so a content

@@ -177,8 +177,8 @@ export const BANKING_CLUSTER_NODES: BankingNode[] = [
     slug: "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
     kicker: "No card, no endorsement",
     kickerBn: "কার্ড নেই, এনডোর্সমেন্ট নেই",
-    title: "Book flights and hotels in BDT",
-    titleBn: "BDT-তে ফ্লাইট ও হোটেল বুকিং",
+        title: "Pay for flights and hotels in BDT",
+        titleBn: "BDT-তে ফ্লাইট ও হোটেলের দাম মেটানো",
     description:
       "Paying a travel desk by bank transfer, bKash or Nagad when the passport is at an embassy or the card is not ready — and what to verify before you pay.",
     descriptionBn:

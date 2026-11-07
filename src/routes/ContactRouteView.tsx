@@ -71,7 +71,7 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
               <h1 className="ural-page-title font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none">
 
-                {isBn ? "সরাসরি আমাদের সাথে যোগাযোগ করুন" : "Let's Connect Directly"}
+                {isBn ? "URAL-এর সাথে যোগাযোগ — ট্রাভেল ইনফরমেশন ডেস্ক (+8801784385335)" : "Contact URAL — Travel Information Desk (+8801784385335)"}
 
               </h1>
 
@@ -80,8 +80,8 @@ export default function ContactRouteView({ context }: RouteViewProps) {
               <p className="text-sm sm:text-base text-slate-200 max-w-2xl leading-relaxed">
 
                 {isBn
-                  ? "ফ্লাইট বুকিং, ভিসা প্রসেসিং, কিংবা Umrah ও ট্যুর প্যাকেজ সম্পর্কে জানতে চান? সরাসরি কল করুন, WhatsApp-এ মেসেজ দিন অথবা নিচের ফর্মটি পূরণ করুন। আমরা দ্রুততম সময়ে উত্তর দিই!"
-                  : "Have inquiries about flight bookings, visa procedures, or destination travel packages? Contact our director directly through Call, WhatsApp, or the interactive travel inquiry form below. We respond instantly!"}
+                  ? "রুট, ভিসার শর্ত বা ভ্রমণ পরিকল্পনা নিয়ে প্রশ্ন আছে? সরাসরি কল করুন, WhatsApp-এ মেসেজ দিন অথবা নিচের ফর্মটি পূরণ করুন। আমরা আপনার বিকল্পগুলো বুঝিয়ে দিই এবং সরকারি সূত্র বা সেবাদাতার লিংক দিই।"
+                  : "Questions about routes, visa requirements or trip planning? Call, message on WhatsApp, or use the form below. We explain your options and link the official source or the provider that issues and sells the service."}
 
               </p>
 
@@ -671,7 +671,7 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                         <>
 
-                          <b>ভেরিফায়েড পার্টনার নেটওয়ার্ক:</b> অনুমোদিত ভিসা ডেস্ক এবং বিশ্বস্ত ট্রাভেল অপারেটরের মাধ্যমে নিরাপদ বুকিং।
+                          <b>স্বাধীন, এজেন্সি নয়:</b> URAL গবেষণা ও চেকলিস্ট প্রকাশ করে এবং সরকারি পোর্টাল বা সেবাদাতার লিংক দেয় — আবেদন সেখানেই সম্পন্ন হয়।
 
                         </>
 
@@ -679,7 +679,7 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                         <>
 
-                          <b>Authorized Referrals:</b> Connect to approved visa processing desks and Travelpayouts verified operators.
+                          <b>Independent, not an agency:</b> URAL publishes the research and links the official portal or the provider, where the application is completed.
 
                         </>
 
@@ -981,15 +981,15 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
           <TravelIntelligence
 
-            pageTitle={isBn ? "ট্রাভেল বুকিং সহায়তা ও সাপোর্ট ডেস্ক" : "Travel Booking Assistance & Desk Support"}
+            pageTitle={isBn ? "ট্রাভেল ইনফরমেশন ও পরিকল্পনা সহায়তা ডেস্ক" : "Travel Information & Planning Support"}
 
             quickAnswer={
 
               isBn
 
-                ? "URAL বাংলাদেশি ভ্রমণকারীদের জন্য ট্যুর প্ল্যানিং, ভিসা ডকুমেন্ট রিভিউ এবং সরাসরি এজেন্সি বুকিং সহায়তা প্রদান করে (+8801784385335 WhatsApp ও হটলাইন)। ফ্লাইট টিকেট ও হোটেল বুকিংয়ের পেমেন্ট bKash, Nagad বা লোকাল ব্যাংক ট্রান্সফারের মাধ্যমে বাংলাদেশি টাকায় (BDT) সম্পন্ন করা যায়।"
+                ? "URAL বাংলাদেশি ভ্রমণকারীদের প্রশ্নের উত্তর দেয় — কোন রুট কেমন, ভিসার শর্ত কী, কোন সরকারি পোর্টালে আবেদন করতে হয় এবং কী কী নথি লাগে (+8801784385335 WhatsApp ও হটলাইন)। প্রশ্ন ও পরামর্শের জন্য WhatsApp লাইন ও contact form ব্যবহার করুন।"
 
-                : "URAL connects Bangladeshi travelers with dedicated itinerary planning, visa checklist reviews, and direct agency booking services via WhatsApp (+8801784385335) and hotline. All ticket and hotel payments can be completed safely in BDT via domestic banking, bKash, or in person."
+                : "URAL answers travel questions for Bangladeshi readers — how a route works, what a visa requires, which official portal issues it, and what documents it asks for (+8801784385335 WhatsApp and hotline). The WhatsApp line and the contact form are the channels for questions and consultation with URAL."
 
             }
 
@@ -999,9 +999,9 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
               { label: isBn ? "রেসপন্স সময়" : "Response Window", value: "15 to 30 Mins (Dhaka Time)" },
 
-              { label: isBn ? "পেমেন্ট মাধ্যম" : "Payment Flexibility", value: "BDT (bKash / Nagad / Bank Transfer)" },
+              { label: isBn ? "প্রশ্ন" : "Questions", value: isBn ? "WhatsApp বা contact form" : "WhatsApp or contact form" },
 
-              { label: isBn ? "ভেরিফিকেশন" : "Desk Verification", value: "Verified IATA Agency Network" }
+              { label: isBn ? "পরিচয়" : "Identity", value: isBn ? "স্বাধীন প্ল্যাটফর্ম · এজেন্সি নয়" : "Independent · Not an agency" },
 
             ]}
 

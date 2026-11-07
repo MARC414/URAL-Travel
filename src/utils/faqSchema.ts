@@ -36,7 +36,7 @@ interface RouteFaqEntry {
 export const LANDING_FLIGHT_FAQS: FAQItem[] = [
   {
     question: "What are the cheapest international flight destinations from Dhaka?",
-    answer: "The most affordable international routes from Hazrat Shahjalal International Airport (DAC) are Kolkata, Kathmandu (Nepal), Bangkok (Thailand), and Kuala Lumpur (Malaysia). Roundtrip fares to Kathmandu and Bangkok typically start between BDT 28,000 and BDT 38,000 when booked 4 to 8 weeks in advance."
+    answer: "The routes usually compared first from Hazrat Shahjalal International Airport (DAC) are Kolkata, Kathmandu (Nepal), Bangkok (Thailand), and Kuala Lumpur (Malaysia). No fixed fare is published here: compare live totals for your own dates and check baggage, transit and change conditions, because a low headline price can exclude costs that apply to your itinerary."
   },
   {
     question: "Which airlines fly direct international routes from Dhaka?",
@@ -96,20 +96,20 @@ export const LANDING_VISA_FAQS: FAQItem[] = [
 
 export const LANDING_COST_FAQS: FAQItem[] = [
   {
-    question: "What is the average cost of a 5-day international trip from Bangladesh?",
-    answer: "For a 5-day trip from Dhaka, budget travelers spend approximately BDT 45,000 to BDT 60,000 in Nepal, BDT 65,000 to BDT 85,000 in Thailand or Malaysia, and BDT 95,000 to BDT 130,000 in Dubai, inclusive of economy flights, 3-star hotels, local meals, transport, and sightseeing."
+    question: "How do I calculate the cost of an international trip?",
+    answer: "Collect quotes for your exact dates, party and room occupancy. Add return flights, all hotel nights, meals, local transport, activities, visa and insurance charges, other fees and a reserve. The Trip Cost Estimator totals your dated entries and identifies missing costs."
   },
   {
-    question: "How much foreign currency can a Bangladeshi citizen endorse per calendar year?",
-    answer: "Under Bangladesh Bank regulations (FEPD-1 Circular No. 33), an adult citizen with a valid passport can endorse up to $18,000 USD per calendar year for private travel across personal dual-currency cards and cash notes."
+    question: "Which destinations do these budget guides cover?",
+    answer: "Nepal, Thailand, Malaysia, Dubai in the UAE, Singapore and the Maldives. Each guide explains which costs to quote and how to count them; use your own departure airport and travel dates."
   },
   {
-    question: "What is the most effective way to carry money when traveling abroad from Dhaka?",
-    answer: "The safest and most cost-effective method is carrying 60-70% on an endorsed dual-currency debit/credit card for flights, hotels, and shopping, with 30-40% in cash USD banknotes to exchange at authorized money changers upon landing for street food and local transport."
+    question: "How should I plan travel payments from Bangladesh?",
+    answer: "Use the banking and endorsement guide, then confirm current limits, international card activation, payment options and fees with your Authorized Dealer bank. Choose cash and card arrangements for the providers and places on your actual itinerary."
   },
   {
-    question: "How can Bangladeshi budget travelers minimize travel expenses abroad?",
-    answer: "Travel during shoulder season (avoiding peak holidays), choose budget boutique hotels or guesthouses in tourist hubs like Thamel or Pratunam, use public mass transit (BTS/MRT/Metro) instead of metered taxis, and purchase a local eSIM online for affordable data roaming."
+    question: "How can I compare two trip budgets fairly?",
+    answer: "Use the same dates, party, baggage, room occupancy, taxes and inclusions. Price transfers and child/infant fares explicitly. A lower headline price is not evidence of a cheaper complete trip."
   }
 ];
 
@@ -135,34 +135,34 @@ export const LANDING_DESTINATION_FAQS: FAQItem[] = [
 export const SERVICE_TOOLS_FAQS: FAQItem[] = [
   {
     question: "How accurate are the travel currency exchange rates on URAL?",
-    answer: "Our currency utility monitors mid-market exchange rates for NPR, THB, MYR, AED, and USD against Bangladeshi Taka (BDT). Actual cash rates at airport kiosks and money changers in Dhaka may vary by 1% to 2% due to cash handling and conversion fees."
+    answer: "The converter uses ExchangeRate API’s daily reference rates and shows the provider’s update date. These are for planning, not transactions; your bank or payment provider may apply a different rate and fees. A cached rate is labelled, and conversions stop when its allowed age expires."
   },
   {
-    question: "What power plug adapter do I need when traveling from Bangladesh to Nepal, Thailand, Malaysia, or Dubai?",
-    answer: "Nepal uses Type C and D plugs (similar to Bangladesh). Thailand uses Type A, B, and C (two-pin flat or round). Malaysia and Dubai strictly require Type G three-pin British plugs (230V). Carrying a universal multi-pin travel adapter is strongly recommended for all outbound trips."
+    question: "Does the Trip Cost Estimator use current supplier prices?",
+    answer: "You enter your own supplier quotes and spending allowances, together with their sources and checked date. The estimator handles adults, children, infants, room-nights and daily costs separately. Flight-search links help you collect current quotes."
   },
   {
-    question: "What essential documents should Bangladeshi citizens pack in their hand luggage?",
-    answer: "Always carry your physical original passport with 6+ months validity, printed roundtrip e-tickets, hotel booking vouchers, visa copy (or passport photo for VOA), bank solvency certificate, and dual-currency bank cards in your carry-on bag for Dhaka immigration inspection."
+    question: "What happens if exchange rates are unavailable?",
+    answer: "BDT inputs remain usable. The budget tools show BDT with an explanation when USD conversion is unavailable; they never substitute an invented exchange rate."
   },
   {
-    question: "How can I translate menus and signs in non-English countries like Thailand or Nepal?",
-    answer: "Use Google Translate or photo-translation apps on your smartphone. URAL's built-in travel translator also provides essential phonetic phrases for greetings, directions, halal food requests, and bargaining numbers in Thai, Nepali, Malay, and Arabic."
+    question: "Does URAL save my budget quotes?",
+    answer: "The worksheets keep amounts and quote notes only in the current page session. They are not saved or submitted, and refreshing the page clears them. Keep your original supplier quotes separately."
   }
 ];
 
 export const SERVICE_CONTACT_FAQS: FAQItem[] = [
   {
-    question: "How does URAL assist Bangladeshi travelers with flight bookings and visa queries?",
-    answer: "URAL provides direct phone and WhatsApp consultation at +8801784385335. Our desk answers itinerary questions, confirms airline baggage allowances, connects users with verified IATA agency ticket desks in Dhaka, and provides up-to-date embassy document checklists."
+    question: "How does URAL help Bangladeshi travellers with flight and visa questions?",
+    answer: "URAL answers travel questions directly on phone and WhatsApp at +8801784385335: how a route works, what an airline's baggage allowance is, which official portal issues a visa, and what documents that portal asks for. URAL does not book tickets and does not submit visa applications."
   },
   {
-    question: "Can I pay for flight tickets and travel services in Bangladeshi Taka (BDT)?",
-    answer: "Yes. Inquiries routed through our Dhaka partner desk can be settled via bKash, Nagad, domestic bank transfer, or in person at our affiliated travel desk in Dhaka, without requiring international credit cards."
+        question: "Can I ask URAL about my own trip?",
+        answer: "Yes. Send your route, dates and question on WhatsApp at +8801784385335 or through the contact form, and you get a reply with the relevant guide, the official source and the current conditions. URAL is an information and consultation channel; the booking or application itself is completed with the official portal or the provider."
   },
   {
     question: "How does the WhatsApp Flight Price Alert service work?",
-    answer: "When you subscribe to a price alert for a route (e.g. Dhaka to Kathmandu, Bangkok, or Dubai), our team monitors airline flash sales and special promo seat inventories, sending an immediate alert to your WhatsApp number so you can lock in lowest fares."
+    answer: "The price-alert form prepares a WhatsApp message with your route, travel window and budget target and sends it to URAL. It does not track fares automatically: you get a reply with current fare guidance and the official search link, and you confirm the live price yourself."
   },
   {
     question: "What is the response time for WhatsApp and telephone support?",
@@ -373,7 +373,7 @@ export function getFaqSchemaForPage(
 
     case "contact": {
       faqs = SERVICE_CONTACT_FAQS;
-      pageName = "Travel Desk Inquiries & WhatsApp Booking Assistance FAQs";
+      pageName = "Travel Information Desk & Planning Enquiries FAQs";
       break;
     }
 

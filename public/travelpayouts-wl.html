@@ -38,7 +38,7 @@
       var code = source.searchParams.get('flightSearch') || '';
       // Mirrors preferredCurrencyForOrigin: BDT only for a Bangladesh departure,
       // otherwise the international USD default.
-      var bangladesh = ['DAC', 'CGP', 'CXB', 'SYL', 'JSR', 'RJH', 'SPD', 'BAR'];
+      var bangladesh = ['DAC', 'CGP', 'CXB', 'ZYL', 'JSR', 'RJH', 'SPD', 'BZL'];
       var fallbackCurrency = bangladesh.indexOf(code.slice(0, 3).toUpperCase()) >= 0 ? 'BDT' : 'USD';
       var currency = (source.searchParams.get('currency') || fallbackCurrency).toUpperCase();
       var locale = (source.searchParams.get('locale') || source.searchParams.get('lang') || 'en').toLowerCase() === 'bn' ? 'bn' : 'en';

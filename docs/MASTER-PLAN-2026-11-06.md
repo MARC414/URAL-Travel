@@ -2,7 +2,12 @@
 
 **Version 2.0 · 6 November 2026 · Branch `arena/56e63301-ural-travel` · Baseline `c63cd5a`**
 
-**STATUS: PLAN ONLY. Nothing in this document has been applied to the codebase.**
+**Lifecycle: CURRENT PHASE PLAN AND EXECUTION RECORD · updated 7 November 2026.**
+
+The original diagnostic and design baseline is retained below. Local implementation has progressed through
+the truth/foundation work and the tool rebuild. The [travel-tool contracts](01-technical-seo-aeo/TRAVEL-TOOLS.md)
+describe the saved implementation; dated resolution notes supersede the original design where evidence changed
+the approach. Local verification is not a deployment record. Remaining voice/assistant work retains its own gates.
 
 Version 2.0 is a full rewrite, restructured into **phases** and audited for internal consistency. It supersedes
 v1.1 completely. The rewrite found **eight new defects** the first draft missed, including a **pricing
@@ -125,7 +130,7 @@ render.**
 | **D25** | **🆕 A fourth rate table, this time inside published prose.** `TRIP_COSTS_DATA.exchangeRateText` prints six rate strings as reader-facing content: `"1 THB ≈ 3.28 BDT"`, `"1 MYR ≈ 27.20 BDT"`, `"1 AED ≈ 32.20 BDT"`, `"1 NPR ≈ 0.88 BDT"`, `"1 SGD ≈ 91.50 BDT"`, `"1 USD ≈ 122 BDT"`. THB is off by **−11.9%** and MYR by **−11.6%**. Because the same wrong rate appears in *both* the widget and the prose, the reader sees one **consistent** wrong number — which is more convincing, not less. | `src/constants.ts:1862, 1934, 1978, 2022, 2066, 2110` | §2.4 |
 | **D4** | **KKday menu card promotes a promotion that expired 2026-10-31** (six days before this audit), duplicating Klook in the same column. The promo-code path is correctly gated by `isPromoActive`, but the **Feature Callout Card container is not**. | `AffiliatePartners.tsx:94-108`; card in `App.tsx` Experiences mega-menu ~2776-2850 | Its own `expiredFallbackBehavior` says it should have switched on 1 Nov |
 | **D5** | ~~Removing KKday would create dead links~~ — **closed as not applicable** (6 Nov): the owner kept the whole partner, only the expired card was removed, so no fallback needed re-pointing. Retained for the record in case a future task removes the partner. | `AffiliatePartners.tsx` | `resolvePartnerUrl()` routes paused partners to fallback |
-| **D3** | **"Contact & BDT Booking Desk — Pay in BDT via bank / bKash"** promises a payment capability that does not exist. | `App.tsx:3044-3045` | `functions/api/contact.js` is a Resend email transport; no checkout anywhere |
+| **D3** | **A payment and booking capability that does not exist — and it is a theme, not a string.** *"Contact & BDT Booking Desk — Pay in BDT via bank / bKash"* appears across **16 surfaces in two locales**: a `Service` schema node on `/contact`, two duplicated copies of that node in prerender, an indexed `<h1>`/`<p>` claiming *"Umrah e-Visa processing"* and *"BDT flight & hotel booking"*, FAQ answers published as JSON-LD (*"settled via bKash… in person at our affiliated office"*), two menus, three CTA blocks, and a whole article. **Re-scoped 7 Nov 2026 — the original register recorded one surface.** | `App.tsx:1909,1913-1915,3034-3035,3340`; `scripts/prerender.ts:512-513,2571-2574,2580-2581,4254-4257`; `src/utils/faqSchema.ts:161,376`; `src/utils/bn-faq-schema.ts:33,143`; `InteractiveTools.tsx:265,274,800`; `ExperiencesPage.tsx:1104-1111,1124-1125`; `GlobalAttractionsHub.tsx:911-912`; `TopicalAuthorityBlueprint.tsx:504-518` | `functions/api/contact.js` is a Resend email transport; there is no checkout, no PNR issuer and no visa submission path anywhere in the repo |
 | **D16** | **Preset trip prices with no date, no source, no seasonality.** Airfare is **41%** of the default total (BDT 90,500 of which 37,000). | `InteractiveTools.tsx:113-138` | Measured default state |
 | **D26** | **🆕 Dateless BDT totals published as facts in article/FAQ prose.** `quickAnswer` fields state e.g. *"A 5-day Nepal trip… costs roughly BDT 45,000… about BDT 65,000… BDT 1,20,000+"* with no "checked on" date, and these strings are syndicated into FAQ/JSON-LD. | `src/constants.ts:1877` and `keyFacts`/`faqs` for all six countries | 6 country records; 4 dateless "roughly BDT" framings |
 | **D27** | **🆕 Garbled vendor name shipped as advice:** *"Book tourist buses like **Sofa Template**…"* (almost certainly "Sofa Travels"/"Sajha"). | `src/constants.ts:1873` | Verbatin grep |
@@ -411,35 +416,16 @@ branch, which is correct.
 
 ### WP3 — 🟠 One dated rate source, and the end of hand-typed rates *(1–2 days · blocks WP5, WP9)*
 
-**Objective.** Replace **four** rate locations (D7 widget tables + D25 prose strings) with one dated, credited,
-server-cached source.
+**7 November implementation resolution.** The endpoint and client now share `rateData.ts`. They read the
+provider's real top-level Unix timestamps, validate the base and finite rates, preserve the date through cache
+failure, bound stale use and render linked attribution from the displayed payload. Cache storage is per Cloudflare
+location, not a global once-per-day job. The home card links to the converter route; flight handoffs keep currency
+preferences independent of local FX. The
+[current contract](01-technical-seo-aeo/TRAVEL-TOOLS.md#exchange-rates) controls maintenance.
 
-**New `functions/api/rates.js`**, following `functions/api/contact.js` conventions:
-- Upstream `https://open.er-api.com/v6/latest/BDT`, **at most once per 24h**, keyed off the response's own
-  `time_next_update_unix`.
-- `caches.default` with `s-maxage` until the next update; **serve stale up to 24h** on upstream failure so no tool
-  breaks.
-- Return **normalised** data only: `{ base, rates, sourceDate, fetchedAt, provider, eol }`. Never the raw payload;
-  never a public pair endpoint.
-- Read `time_eol_unix`; alert if non-zero.
-- No key, no secret, no cost. CORS: same-origin only, never wildcard.
-
-**Retire all four locations**
-
-| Location | Change |
-|---|---|
-| `TravelpayoutsCustomWidget.tsx:49-54` | `rateFromBdt` constants → fetched; **keep the option labels**, they drive the flight handoff and must not regress |
-| `InteractiveTools.tsx:98-104` | `conversionRates` → fetched |
-| `App.tsx` inline converter (~4197-4245) | → fetched |
-| **`TravelpayoutsWidget.jsx:38-45`** ✅ *found 6 November during WP0* | `CURRENCY_CONFIG.rateFromBdt` (5 literals) → fetched; keep the option labels for the hosted handoff |
-| **`src/constants.ts:1862, 1934, 1978, 2022, 2066, 2110`** | **`exchangeRateText` prose strings → generated from the dated rate at render time, showing the date.** If a currency is unavailable, omit the line rather than print a stale one |
-
-**Fallback rule.** On failure, degrade to **BDT-only display with the caveat** — never `0`, never a stale rate
-without its date.
-
-**Acceptance.** Every rate-bearing surface shows a real date and the attribution string
-`Rates By Exchange Rate API`. Grep for `rateFromBdt: 1 /`, `rate: 0.0084` and any `≈ [0-9.]+ BDT` literal returns
-nothing. Simulated upstream failure still renders. `verify:build` green + new checks.
+The executed work order is replaced by the implementation contract linked above. Rate normalization,
+direction, corrupt payloads, blocked storage, retry delays, stale bounds and unavailable-FX behavior are covered
+by `test:rates`; static output and fixed-rate regressions are covered by `verify:build`.
 
 ---
 
@@ -447,96 +433,79 @@ nothing. Simulated upstream failure still renders. `verify:build` green + new ch
 
 ### WP5 — Currency choice on the Umrah worksheet *(2 days · one control)*
 
-**Objective.** Answer "not BDT-only" without reintroducing the rejected engine (D1).
+**7 November implementation resolution.** The shared worksheet now has BDT/USD display choice, dated provider
+attribution, a labelled BDT fallback and explicit equal sharing. An explicit choice survives origin changes. The
+eight whole-party input categories retain their calculation contract. See the
+[current contract](01-technical-seo-aeo/TRAVEL-TOOLS.md#umrah-and-currency-conversion).
 
-**Design — one control in the section header, not per row:**
-
-```
-What will your family's Umrah budget be?
-Your quote-based worksheet · Not market prices
-                          [ Display currency: ৳ BDT ▾ ]
-Rates updated 6 November 2026 · reference only · Rates by Exchange Rate API
-```
-
-**Rules.**
-1. **Inputs never change currency.** Selector changes **display only**; the 8-category whole-party contract that
-   25 tests protect is untouched.
-2. **Default:** BDT for a Bangladesh origin, USD otherwise; explicit choice always wins; no IP-only geolocation.
-3. **Conversion always labelled:** "converted at the 6 Nov 2026 reference rate (1 BDT = 0.008026 USD) — your bank
-   differs."
-4. **No `days` field.** 5 of 8 categories are not daily quantities (see §6).
-5. **Formatter becomes currency-aware:** `UmrahBudgetCalculator.tsx:9-11` maps `en-BD`/`bn-BD` for BDT and
-   sensible locales per currency, keeping Bengali numerals on `/bn`.
-6. **Missing rate → BDT display + caveat.** Never blank, never zero.
-
-**Preserved invariants:** incomplete → **no total**; explicit `0` valid; equal-share labelled as equal-share; static
-HTML/no-JS; EN+BN via the shared component (`prerender.ts:1652` EN, `:3629` BN; `verify-build.ts:6601, 6615`).
-
-**New tests:** incomplete still null; unconverted display keeps entered currency; missing rate degrades to BDT not
-zero; BN keeps Bengali currency formatting; attribution present.
+The executed control work order is replaced by the shared worksheet implementation. `test:umrah-budget`
+covers its arithmetic, unknown/zero inputs and origin defaults; rate failure and conversion contracts use
+`test:rates` plus bilingual browser checks.
 
 ---
 
 ### WP9 — The Trip Cost Estimator, rebuilt as two layers *(2–3 days · incorporates Addendum A)*
 
-**Objective.** Fix D14–D19, D16, D17, D26: the calculator currently presents our typed-in prices as if they were
-checked facts, and charges children as adults.
+**7 November evidence-led implementation resolution.** The saved `/costs` matrices had no recorded supplier
+sources or price-collection dates. The owner's delegated implementation decision and Number rule therefore require
+quote-based output: named reader sources, their checked date, exact minor-unit arithmetic and no total/breakdown
+until required costs are present. Current airfare comes through the hosted search handoff. Six destination guides
+now supply bilingual cost-category and quote-comparison guidance. Hotel rooms/nights are explicit; adult, child and
+infant airfare is covered separately or by an explicit whole-party quote; child admission is never an adult-price
+fallback. Menus, metadata and the shared EN/BN initial HTML use **Trip Cost Estimator**.
 
-**Option chosen: Option 3 — rebuild.** (Options 1 "retire" and 2 "leave as-is" are recorded in §6.)
+The original preset design is superseded. A future
+indicative-price layer requires actual supplier evidence before any figures can render. The
+[current estimator contract](01-technical-seo-aeo/TRAVEL-TOOLS.md#trip-cost-estimator) supersedes it.
 
-**Layer 1 — Indicative, clearly labelled.**
-- **One name everywhere** (D14): *"Trip Cost Estimator"* in menu, metadata and heading.
-- **A visible "indicative prices last checked <date>"** stamp on the result. **No stamp → no number.**
-- **Fix airfare first (D16):** it is 41% of every total. Replace the `flightBdt` constant with the live
-  flight-search handoff (`src/utils/flightSearch.ts`) or, at minimum, a dated **range** rather than a false point
-  value.
-- **Server-render the initial state** (D15) so the tool exists in HTML.
-- **Currency follows origin** (WP3 source), with the dated caveat.
-
-**Layer 2 — "Use your own quote".** Every preset line is overridable. The moment the reader replaces one, the
-label changes from *"our estimate"* to *"your quote"*. This gives the two calculators a **shared philosophy**
-instead of opposing ones:
-
-| Line | Preset | Overridable |
-|---|---|---|
-| Airfare | live handoff / dated range | yes |
-| Lodging | per room-night by tier | yes (rooms × nights shown) |
-| Meals | per person-day | yes |
-| Transport | per person-day | yes |
-| Tickets | per person-day | yes |
-
-**Fix the party model (D17) — the part readers feel.** Replace the single "Companions" slider with **Adults /
-Children / Infants**:
-- Adults: full fare, full meals.
-- Children: rooms unchanged (`ceil(people/2)`), but airfare and tickets flagged *"child fare — replace with your
-  airline's quote"* rather than silently charging adult fare.
-- Infants: no seat, no meals line.
-- **Never label 3 people "Couple + 1" while charging three adult fares.**
-
-**Raise and document the caps (D18):** days 1–30, travellers 1–12, limit stated in the label.
-
-**Reconcile with `/costs` (D19, D26):** pick one canonical destination set (owner Q9) and make `/costs`, the menu
-subtitle and the estimator agree. Put a **checked-on date** on the `TRIP_COSTS_DATA` quick answers, or remove their
-specific BDT totals in favour of a dated range.
-
-**Acceptance.** One name in three places; result carries a dated stamp or shows no total; airfare is live/range;
-adults/children/infants separated with the child line flagged; initial state renders without JS; currency choice
-works; caps documented; `/costs` and estimator agree on coverage; no dateless "roughly BDT" total remains in
-syndicated FAQ text. `verify:build` + new checks for the date stamp and the three-name regression.
+The executed rebuild work order is replaced by `TripCostEstimator`, `tripCostEstimator.ts`, the bilingual
+`tripCosts.ts` records and their shared prerender components. `test:trip-estimator` covers calculation
+invariants and EN/BN rendering; `verify:build` checks the saved pages. The former source-free prices and
+mixed category units are not retained as a market-price layer.
 
 ---
 
 ## PHASE 3 — VOICE
 
-### WP6 — Relabel the menu, and fix the payment promise *(0.5 day)*
+### WP6 — Relabel the menu, and fix the payment promise *(1.5–2 days, not 0.5 — re-scoped 7 November 2026)*
 
-Apply the Part 3.2 table in **both locales** in `App.tsx:2960-3050`, plus the mobile menu if it duplicates labels.
-Move the DAC/bKash detail into subtitles rather than deleting it. Separately, fix **D3**: rename *"Contact & BDT
-Booking Desk"* / *"Pay in BDT via bank / bKash"* to *"Contact & Trip Help"* / *"Talk to a person"* unless the owner
-confirms URAL genuinely takes BDT payment off-site (Q4).
+**Scope correction (7 Nov 2026).** WP6 assumed D3 was two strings at `App.tsx:3044-3045`. It is a theme across
+**16 surfaces and one whole article** (corrected D3 row in §2.2). Shipping the two-string version would remove the
+visible label and leave the same claim in JSON-LD, in prerendered HTML, and in a post Google already indexes.
+D3 splits into three independently shippable slices:
 
-**Acceptance.** No menu label begins with "BDT" or names one passport as the audience; the detail survives in
-subtitles; no payment claim without a payment path; both locales; `verify:build` green.
+| Slice | What | Surfaces | Effort |
+|---|---|---|---|
+| **D3a — machine-readable identity** | The `Service` node and the `/contact` meta must describe *information and planning*, not booking, visa processing or payment. Fix all three copies (app + both prerender branches) **and** the indexed `<h1>`/`<p>` in the same commit, or the static HTML keeps contradicting the app. | `App.tsx:1909,1913-1915`; `prerender.ts:2571-2574,2580-2581,4254-4257` | 2–3 h |
+| **D3b — visible CTAs** | Menu labels, WhatsApp generators, and the two partner blocks: no payment claim without a payment path. Keep DAC/bKash *guidance* in subtitles where it genuinely helps the reader; remove it where it is a sales promise. | `App.tsx:3034-3035,3340`; `InteractiveTools.tsx:265,274,800`; `ExperiencesPage.tsx:1104-1111,1124-1125`; `GlobalAttractionsHub.tsx:911-912`; `prerender.ts:512-513` | 3–4 h |
+| **D3c — the article** | `/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card` plus its snippet, SEO copy, cover, alt text, sitemap entry and internal links. **Owner decision, not a copy edit:** rewrite as a *payment-methods* guide with no URAL booking claim, or delete with a 301. Until decided, `blogSnippets.ts:44-45,137-138` must not claim URAL books or issues tickets. | 8 files + sitemap | 0.5 day if rewritten |
+
+D3a goes first because it is the only slice that is *legally identifying*: it is the machine-readable answer to
+"what is this business". D3b is the visible half of the same sentence. D3c waits for the owner's article decision.
+
+**Q4 is resolved** (owner, 7 November 2026): URAL takes no payment for travel services. A paid consultation may
+exist later, and must be disclosed on the page that offers it — not implied in a menu label.
+
+The menu relabel (D9/D14, Part 3.2 table) is unaffected by the split: apply it in both locales to
+`App.tsx:2960-3050` plus the mobile menu.
+
+**Acceptance.** No page publishes a `Service` whose `serviceType` or `description` names booking, ticket issuance,
+visa processing or local payment; `grep` for `PNR tickets`, `e-Visa processing` and `settled via bKash` returns
+nothing in `src/` **or** `scripts/prerender.ts`; both locales; `verify:build` green.
+
+**D3a — shipped 7 November 2026.** `Service` node replaced in all three copies (`App.tsx` + both `prerender.ts`
+branches) with `serviceType: "Travel Information"`, an `@id` of `…#service-travel-information`, and a description that
+states URAL does not sell, book or issue flights, visas, hotels or tickets and takes no payment. The indexed `/contact`
+`<h1>`/`<p>` were rewritten in the same change, and the visible React hero (`ContactRouteView.tsx`) now carries the
+same heading. The page's own summary answer, key facts, trust bullet and the `SERVICE_CONTACT_FAQS` /
+`BN_SERVICE_CONTACT_FAQS` entries (payment, IATA agency desks, price-alert automation) were corrected because they
+sat on the same page and would otherwise contradict the new heading. `lint` 0, `build` 132 EN + 132 BN,
+`verify:build` 470/470. Two items deliberately left for their own slices (both pre-existing):
+
+- `/contact` still links *"How to book travel in BDT by bKash or bank transfer"* in its related-guides list; that anchor
+  disappears when D3c is decided.
+- The Bengali `/contact` page renders the English FAQ list and gains no Bengali `FAQPage` node in prerender — an
+  EN/BN parity gap, not a payment claim. Next candidate for a one-file step.
 
 ---
 
@@ -607,7 +576,7 @@ WhatsApp link. An empty corpus match renders a refusal. No answer renders withou
 | **Leaving the cost estimator as-is (Option 2)** | Keeps D16/D17 live; it is the pattern already removed from `/umrah` |
 | Keeping the Visa Odds Checker under a new name | The claims are the defect, not the label — and D22 shows the deeper issue is a *second unsourced system* |
 | A third language now | Closed union; parity gaps already open |
-| Reusing the Umrah worksheet's quote-only model for the cost estimator | A pilgrimage package has no defensible preset; a city break does, **provided it is dated** |
+| Earlier rejection of quote-only output for the cost estimator | **Superseded 7 November:** no supplier provenance was recorded for the saved city-break prices. The current implementation uses sourced, dated reader entries and provider search handoffs. Presets need actual evidence before publication |
 
 ---
 
@@ -657,7 +626,7 @@ a source; no surface states a claim the product cannot support; zero ongoing cos
 | Q1 | ~~Visa Odds Checker: delete permanently, or rebuild as a dated lookup?~~ | ✅ **Resolved 6 Nov by evidence, not preference.** Deleted permanently, no rebuild. It had no source and no date, and four of its twelve cells contradicted the official FAQ. Any future visa help is a dated lookup pointing at the official portal | resolved |
 | Q2 | ~~KKday: card only, or partner entirely?~~ | ✅ **Answered 6 Nov: card only.** Functionality retained; expired offer hidden behind a date gate | resolved |
 | Q3 | Does `/kkday-hotels` earn anything? | If no → delete + 301 to `/hotels` | WP2 |
-| Q4 | Do you actually take BDT payment off-site? | If no → rename to "Contact & Trip Help" | WP6 |
+| Q4 | ~~Do you actually take BDT payment off-site?~~ | ✅ **Resolved 7 Nov 2026 by the owner: no.** URAL takes no payment for travel services. A paid consultation may exist later and must be disclosed on the page that offers it, never implied in a menu label | resolved → D3b |
 | Q5 | Which free model, given the July 2026 change? | Start with `glm-4.7-flash`; verify plan in dashboard | WP8 |
 | Q6 | Approve the WP0 paragraphs? | Yes — unblocks Phases 2–3 | WP0 |
 | Q7 | Cost estimator: retire or rebuild? | Rebuild (Option 3) | WP9 |
@@ -723,7 +692,7 @@ a source; no surface states a claim the product cannot support; zero ongoing cos
 
 Retained for reference; WP9 is the actionable summary.
 
-- **What it does today:** four destinations; a 1–14 day slider; a 1–5 "Companions" slider; a low/mid/high toggle;
+- **Historical 6 November baseline — superseded by the 7 November rebuild:** four destinations; a 1–14 day slider; a 1–5 "Companions" slider; a low/mid/high toggle;
   five fixed categories. `flightBdt × peeps`, `lodging × days × ceil(peeps/2)`, and meals/transport/tickets
   `× days × peeps`.
 - **Why that model is defensible here and not on `/umrah`:** all five lines here are genuinely per-day or

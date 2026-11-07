@@ -69,7 +69,7 @@ internalLinksEn:
     path: /tools/budget-calculator
   - text: "Planning Umrah from Bangladesh: the guide most of our readers start with"
     path: /umrah
-  - text: "Ask the URAL desk a question about your own plan"
+  - text: "Ask URAL a question about your own plan"
     path: /contact
 internalLinksBn:
   - text: "সৎ পরীক্ষা: ট্রাভেল অ্যাফিলিয়েট মার্কেটিং থেকে আসলেই আয় হয় কি না"
@@ -90,7 +90,7 @@ internalLinksBn:
     path: /tools/budget-calculator
   - text: "বাংলাদেশ থেকে ওমরাহ পরিকল্পনা: বেশিরভাগ পাঠক যেখানে শুরু করেন"
     path: /umrah
-  - text: "নিজের পরিকল্পনা নিয়ে URAL ডেস্ককে প্রশ্ন করুন"
+  - text: "নিজের পরিকল্পনা নিয়ে URAL-কে প্রশ্ন করুন"
     path: /contact
 ---
 

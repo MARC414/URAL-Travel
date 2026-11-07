@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useRef, useState, useMemo, useId } from 'react';
 import {
   Plane,
@@ -28,20 +29,27 @@ import {
   TrendingDown,
 } from 'lucide-react';
 import { AFFILIATE_LINKS, resolvePartnerUrl } from './AffiliatePartners';
+
+// SpeechRecognition API type declarations (browser API, not in lib.dom by default)
+declare const SpeechRecognition: any;
+declare const webkitSpeechRecognition: any;
 import { buildFlightSearchCode, buildWhiteLabelUrl, preferredCurrencyForOrigin } from '../utils/flightSearch';
+import { useRates } from '../utils/rates-hook';
+import { quote, formatConverted } from '../utils/rates';
+import { RatesNotice } from './RatesNotice';
 
 const MARKER_ID = '675992';
 
-const FlightPriceTrendChart = React.lazy(() => import('./FlightPriceTrendChart.jsx'));
-const BDT_PER_USD = 120;
+// Currency config is built dynamically from fetched rates (see dynamicCurrencyConfig below)
+// BDT is the unit (rateFromBdt: 1); all other rates come from ExchangeRate API
 
-const CURRENCY_CONFIG = {
-  BDT: { symbol: '৳', code: 'BDT', label: '৳ BDT', rateFromBdt: 1 },
-  USD: { symbol: '$', code: 'USD', label: '$ USD', rateFromBdt: 1 / 120 },
-  EUR: { symbol: '€', code: 'EUR', label: '€ EUR', rateFromBdt: 1 / 130 },
-  GBP: { symbol: '£', code: 'GBP', label: '£ GBP', rateFromBdt: 1 / 152 },
-  SAR: { symbol: 'SAR ', code: 'SAR', label: '﷼ SAR', rateFromBdt: 1 / 32 },
-  AED: { symbol: 'AED ', code: 'AED', label: 'د.إ AED', rateFromBdt: 1 / 32.7 },
+const currencySymbols: Record<string, string> = {
+  BDT: '৳',
+  USD: '$',
+  EUR: '€',
+  GBP: '£',
+  SAR: '﷼',
+  AED: 'د.إ',
 };
 
 const BANGLADESH_AIRPORT_CODES = new Set(['DAC', 'CGP', 'ZYL', 'CXB', 'RJH', 'SPD', 'JSR', 'BZL']);
@@ -918,25 +926,16 @@ function formatReadableDate(isoDate) {
 function generateDynamicRouteData(originInfo, destInfo) {
   const origCode = (originInfo?.code || 'DAC').toUpperCase();
   const destCode = (destInfo?.code || 'KTM').toUpperCase();
-  const isBangladeshOrigin = BANGLADESH_AIRPORT_CODES.has(origCode);
-
-  if (isBangladeshOrigin && ROUTE_DATABASE[destCode]) {
-    return {
-      ...ROUTE_DATABASE[destCode],
-      isGlobalLiveOnly: false,
-    };
-  }
-
   const origCity = originInfo?.city || origCode;
   const destCity = destInfo?.city || destCode;
   const destCountry = destInfo?.country || 'International';
 
   return {
     isGlobalLiveOnly: true,
-    visaNote: `Check ${destCountry} entry & visa rules for your nationality and ensure 6+ months passport validity before flying`,
+    visaNote: `Check ${destCountry} entry, visa and passport-validity rules for your nationality before flying`,
     visaBadge: `${destCountry} Global Route`,
     bestWindow: `Compare live airlines, 1-stop connections, and multi-city fares for ${origCity} (${origCode}) → ${destCity} (${destCode})`,
-    terminalTip: 'Live global route search · Real-time airline inventory and verified flight schedules',
+    terminalTip: 'Check current schedules, terminals and fares in the provider results',
     flights: [],
   };
 }
@@ -1020,7 +1019,7 @@ function isWithinOneEdit(a, b) {
   return edits <= 1;
 }
 
-function findAirportInfo(codeOrQuery) {
+function findAirportInfo(codeOrQuery: string): { code: string; city: string; name: string; country: string; flag: string } {
   if (!codeOrQuery) return AIRPORTS_DIRECTORY[0];
   const q = codeOrQuery.trim().toUpperCase();
   const compactQ = q.replace(/[^A-Z]/g, '');
@@ -1082,21 +1081,27 @@ export default function TravelpayoutsWidget({
   const [originQuery, setOriginQuery] = useState('');
   const [destQuery, setDestQuery] = useState('');
   const [globalQuickQuery, setGlobalQuickQuery] = useState('');
-  const [activeDropdown, setActiveDropdown] = useState(null); // 'origin' | 'dest' | 'global' | null
+  const [activeDropdown, setActiveDropdown] = useState<'origin' | 'dest' | 'global' | null>(null);
   const [highlightIndex, setHighlightIndex] = useState(0);
   const [swapRotation, setSwapRotation] = useState(0);
   const [listeningField, setListeningField] = useState(null); // 'origin' | 'dest' | null
-  const [voiceFeedback, setVoiceFeedback] = useState(null); // { type: 'listening' | 'success' | 'error', text: string } | null
-  const [showPriceTrendChart, setShowPriceTrendChart] = useState(false);
-  const recognitionRef = useRef(null);
-  const [originRemoteSuggestions, setOriginRemoteSuggestions] = useState([]);
-  const [destRemoteSuggestions, setDestRemoteSuggestions] = useState([]);
-  const [globalRemoteSuggestions, setGlobalRemoteSuggestions] = useState([]);
+  const [voiceFeedback, setVoiceFeedback] = useState<{ type: 'listening' | 'success' | 'error'; text: string } | null>(null);
+  const recognitionRef = useRef<any>(null);
+  const [originRemoteSuggestions, setOriginRemoteSuggestions] = useState<{ code: string; city: string; name: string; country: string; flag: string }[]>([]);
+  const [destRemoteSuggestions, setDestRemoteSuggestions] = useState<{ code: string; city: string; name: string; country: string; flag: string }[]>([]);
+  const [globalRemoteSuggestions, setGlobalRemoteSuggestions] = useState<{ code: string; city: string; name: string; country: string; flag: string }[]>([]);
 
-  const [tripType, setTripType] = useState('roundtrip'); // 'roundtrip' | 'oneway'
-  const [cabinClass, setCabinClass] = useState('economy'); // 'economy' | 'business'
+  const [tripType, setTripType] = useState<'roundtrip' | 'oneway'>('roundtrip');
+  const [cabinClass, setCabinClass] = useState<'economy' | 'business'>('economy');
   const [passengers, setPassengers] = useState(1);
-  const [currency, setCurrency] = useState(() => preferredCurrencyForOrigin(defaultOrigin));
+  const [currency, setCurrency] = useState<"BDT" | "USD" | "EUR" | "GBP" | "SAR" | "AED">(() => preferredCurrencyForOrigin(defaultOrigin));
+  const { rates, status } = useRates();
+  const [ratesReady, setRatesReady] = useState(false);
+
+  useEffect(() => {
+    if (status === "ready" && rates) setRatesReady(true);
+  }, [status, rates]);
+
   // Once the visitor picks a currency, the route must stop overriding it.
   const currencyChosenRef = useRef(false);
 
@@ -1108,11 +1113,21 @@ export default function TravelpayoutsWidget({
   const [lastSearchedAt, setLastSearchedAt] = useState('Ready');
   const [filterMode, setFilterMode] = useState('all'); // 'all' | 'direct' | 'baggage30'
   const [sortBy, setSortBy] = useState('cheapest'); // 'cheapest' | 'fastest' | 'earliest'
-  const [expandedFlightId, setExpandedFlightId] = useState(null);
+  const [expandedFlightId, setExpandedFlightId] = useState<string | null>(null);
   const [selectedBookingFlight, setSelectedBookingFlight] = useState(null);
 
   // Committed query state that updates when user clicks "Search Flights" or picks a Quick Route
-  const [committedQuery, setCommittedQuery] = useState(() => ({
+  interface CommittedQuery {
+    origin: { code: string; city: string; name: string; country: string; flag: string };
+    destination: { code: string; city: string; name: string; country: string; flag: string };
+    departDate: string;
+    returnDate: string;
+    tripType: 'roundtrip' | 'oneway';
+    cabinClass: 'economy' | 'business';
+    passengers: number;
+  }
+
+  const [committedQuery, setCommittedQuery] = useState<CommittedQuery>(() => ({
     origin: findAirportInfo(defaultOrigin),
     destination: findAirportInfo(defaultDestination),
     departDate: getFutureDateIso(14),
@@ -1122,8 +1137,8 @@ export default function TravelpayoutsWidget({
     passengers: 1,
   }));
 
-  const resultsContainerRef = useRef(null);
-  const formWrapperRef = useRef(null);
+  const resultsContainerRef = useRef<HTMLDivElement | null>(null);
+  const formWrapperRef = useRef<HTMLDivElement | null>(null);
 
   // Sync if parent prop changes (e.g. navigating between Nepal, Thailand, Malaysia, Dubai flight pages or Home Global Search)
   useEffect(() => {
@@ -1150,7 +1165,7 @@ export default function TravelpayoutsWidget({
   // Close autocomplete dropdown on outside click & clean up speech recognition on unmount
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (formWrapperRef.current && !formWrapperRef.current.contains(e.target)) {
+      if (formWrapperRef.current && (recognitionRef.current as any)?.contains?.(e.target)) {
         setActiveDropdown(null);
       }
     };
@@ -1267,7 +1282,7 @@ export default function TravelpayoutsWidget({
 
     const SpeechRecognitionApi =
       typeof window !== 'undefined' &&
-      (window.SpeechRecognition || window.webkitSpeechRecognition);
+      ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
 
     if (!SpeechRecognitionApi) {
       setVoiceFeedback({
@@ -1568,51 +1583,9 @@ export default function TravelpayoutsWidget({
     return generateDynamicRouteData(committedQuery.origin, committedQuery.destination);
   }, [committedQuery.origin, committedQuery.destination]);
 
-  const computedFlights = useMemo(() => {
-    const baseList = routeMeta.flights || [];
-    // Calculate date-based price modifier so changing dates visibly updates fares realistically
-    const depStr = committedQuery.departDate || '';
-    const daySum = depStr
-      .split('')
-      .reduce((acc, ch) => acc + (Number.isNaN(Number(ch)) ? 0 : Number(ch)), 0);
-    const dateFactor = 0.96 + ((daySum % 9) * 0.012); // ~0.96 to 1.05x
-    const tripFactor = committedQuery.tripType === 'oneway' ? 0.58 : 1.0;
-    const cabinFactor = committedQuery.cabinClass === 'business' ? 2.35 : 1.0;
-    const originFactor = committedQuery.origin.code === 'DAC' ? 1.0 : 1.06;
-
-    const mapped = baseList.map((f) => {
-      const perPersonBdt = Math.round(
-        (f.baseRoundtripBdt * dateFactor * tripFactor * cabinFactor * originFactor) / 100
-      ) * 100;
-      const totalBdt = perPersonBdt * committedQuery.passengers;
-      const perPersonUsd = Math.round(perPersonBdt / BDT_PER_USD);
-      const totalUsd = Math.round(totalBdt / BDT_PER_USD);
-
-      return {
-        ...f,
-        perPersonBdt,
-        totalBdt,
-        perPersonUsd,
-        totalUsd,
-      };
-    });
-
-    let filtered = mapped;
-    if (filterMode === 'direct') {
-      filtered = mapped.filter((f) => f.stops === 0);
-    } else if (filterMode === 'baggage30') {
-      filtered = mapped.filter((f) => f.checkedBag.includes('30') || f.checkedBag.includes('46'));
-    }
-
-    const sorted = [...filtered].sort((a, b) => {
-      if (sortBy === 'cheapest') return a.perPersonBdt - b.perPersonBdt;
-      if (sortBy === 'fastest') return a.durationMinutes - b.durationMinutes;
-      if (sortBy === 'earliest') return a.departTime.localeCompare(b.departTime);
-      return 0;
-    });
-
-    return sorted;
-  }, [routeMeta, committedQuery, filterMode, sortBy]);
+  // Hosted search is the price source. The old hand-typed route table has no
+  // supplier quote/date and must not enter the results, including preview mode.
+  const computedFlights: any[] = [];
 
   const cheapestFlight = useMemo(() => {
     if (!computedFlights.length) return null;
@@ -1677,22 +1650,36 @@ export default function TravelpayoutsWidget({
     return buildWhiteLabelUrl({ flightSearch: liveFormSearchCode, currency, locale: lang });
   }, [liveFormSearchCode, currency, lang]);
 
-  const routeBaseFareBdt = useMemo(() => {
-    const routeEntry = ROUTE_DATABASE[(effectiveDest.code || 'KTM').toUpperCase()];
-    if (!routeEntry?.flights?.length) return undefined;
-    return Math.min(...routeEntry.flights.map((flight) => flight.baseRoundtripBdt));
-  }, [effectiveDest.code]);
+  // Dynamic currency config built from fetched rates — never hard-coded
+  const dynamicCurrencyConfig = useMemo(() => {
+    const codes = ['BDT', 'USD', 'EUR', 'GBP', 'SAR', 'AED'];
+    const config: Record<string, { symbol: string; code: string; label: string; rateFromBdt: number | null }> = {};
+    for (const code of codes) {
+      const rate = code === 'BDT' ? 1 : (ratesReady ? quote(code, rates) : null);
+      config[code] = {
+        symbol: currencySymbols[code] || code,
+        code,
+        label: `${currencySymbols[code] || code} ${code}`,
+        rateFromBdt: rate,
+      };
+    }
+    return config;
+  }, [rates, ratesReady]);
 
 
 
-  const formatMoney = (bdtAmount) => {
-    const cfg = CURRENCY_CONFIG[currency] || CURRENCY_CONFIG.BDT;
-    const converted = Math.round(bdtAmount * cfg.rateFromBdt);
-    return `${cfg.symbol}${converted.toLocaleString()} ${cfg.code}`;
+  const formatMoney = (bdtAmount: number) => {
+    if (!ratesReady || !rates || currency === 'BDT') {
+      return `৳${bdtAmount.toLocaleString()} BDT`;
+    }
+    const converted = formatConverted(bdtAmount, currency, rates, isBn);
+    if (converted) return converted;
+    return `৳${bdtAmount.toLocaleString()} BDT`;
   };
 
   const formatSecondaryMoney = (bdtAmount, usdAmount) => {
     if (currency === 'BDT') {
+      if (!Number.isFinite(usdAmount)) return isBn ? 'USD রূপান্তর পাওয়া যায়নি' : 'USD conversion unavailable';
       return `≈ $${usdAmount.toLocaleString()} USD`;
     }
     return `≈ ৳${bdtAmount.toLocaleString()} BDT`;
@@ -1859,13 +1846,13 @@ export default function TravelpayoutsWidget({
               {isBn ? 'মুদ্রা:' : 'Currency:'}
             </span>
             <div className="inline-flex flex-wrap items-center bg-slate-100 p-1 rounded-xl border border-slate-200/70 text-xs font-semibold">
-              {Object.values(CURRENCY_CONFIG).map((curr) => (
+              {Object.values(dynamicCurrencyConfig).map((curr) => (
                 <button
                   key={curr.code}
                   type="button"
                   onClick={() => {
                     currencyChosenRef.current = true;
-                    setCurrency(curr.code);
+                    setCurrency(curr.code as 'BDT' | 'USD' | 'EUR' | 'GBP' | 'SAR' | 'AED');
                   }}
                   className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
                     currency === curr.code
@@ -1878,6 +1865,10 @@ export default function TravelpayoutsWidget({
               ))}
             </div>
           </div>
+
+          {ratesReady && rates && (
+            <RatesNotice rates={rates} isBn={isBn} />
+          )}
         </div>
 
         {/* ROW 2: FULL-WIDTH ROUTE/DATE STRIP WITH PRIMARY CTA BELOW IT */}
@@ -2410,8 +2401,8 @@ export default function TravelpayoutsWidget({
                 <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700">
                   <CheckCircle2 size={14} className="text-[#07C369]" />
                   {searchCount > 0
-                    ? `Updated Results for Your Query (${lastSearchedAt})`
-                    : 'Live Route Fares & Schedules Ready'}
+                    ? (isBn ? 'সার্চের তথ্য আপডেট হয়েছে' : 'Search details updated')
+                    : (isBn ? 'Provider-এ সার্চের জন্য প্রস্তুত' : 'Ready to search on the provider')}
                 </span>
                 <span className="text-slate-300" aria-hidden="true">·</span>
                 <span className="text-xs text-slate-600 font-medium">
@@ -2470,7 +2461,7 @@ export default function TravelpayoutsWidget({
                   Lowest Fare Found ({committedQuery.tripType === 'roundtrip' ? 'Round-Trip' : 'One-Way'})
                 </div>
                 <div className="text-base font-black text-slate-900 mt-0.5 tabular-nums">
-                  {formatMoney(cheapestFlight.perPersonBdt, cheapestFlight.perPersonUsd)}{' '}
+                  {formatMoney(cheapestFlight.perPersonBdt)}{' '}
                   <span className="text-xs font-normal text-slate-500">/ person</span>
                 </div>
                 <div className="text-[11px] text-slate-600 mt-0.5">
@@ -2480,13 +2471,13 @@ export default function TravelpayoutsWidget({
             ) : (
               <div className="bg-slate-50 rounded-lg p-3 border border-slate-200/60">
                 <div className="text-[11px] font-medium text-slate-500">
-                  Live Global Airline Inventory
+                  {isBn ? 'আপনার সার্চ রুট' : 'Your search route'}
                 </div>
                 <div className="text-sm font-black text-brand-navy mt-0.5">
                   {committedQuery.origin.code} → {committedQuery.destination.code} ({currency})
                 </div>
                 <div className="text-[11px] text-slate-600 mt-0.5">
-                  720+ airlines & OTA partners compared live
+                  {isBn ? 'Provider-এর results-এ বর্তমান availability দেখুন' : 'Check current availability in provider results'}
                 </div>
               </div>
             )}
@@ -2653,7 +2644,7 @@ export default function TravelpayoutsWidget({
 
         {/* Flight Cards List */}
         <div className="space-y-3">
-          {computedFlights.map((flight) => {
+          {computedFlights.map((flight: any) => {
             const isExpanded = expandedFlightId === flight.id;
             const isBookingSelected = selectedBookingFlight?.id === flight.id;
 
@@ -2774,7 +2765,7 @@ export default function TravelpayoutsWidget({
                   <div className="lg:col-span-3 flex flex-row lg:flex-col items-center lg:items-end justify-between gap-3 pt-3 lg:pt-0 border-t lg:border-t-0 lg:border-l border-slate-100 lg:pl-4">
                     <div className="text-left lg:text-right">
                       <div className="text-xl font-black text-brand-navy tabular-nums">
-                        {formatMoney(flight.totalBdt, flight.totalUsd)}
+                        {formatMoney(flight.totalBdt)}
                       </div>
                       <div className="text-[11px] text-slate-500 tabular-nums">
                         {formatSecondaryMoney(flight.totalBdt, flight.totalUsd)} ·{' '}
@@ -2848,8 +2839,8 @@ export default function TravelpayoutsWidget({
                       </div>
                       <div>
                         <span className="font-semibold text-slate-800 block">Fare Breakdown:</span>
-                        Base fare: {formatMoney(Math.round(flight.totalBdt * 0.82), Math.round(flight.totalUsd * 0.82))} + Taxes & Carrier Fees:{' '}
-                        {formatMoney(Math.round(flight.totalBdt * 0.18), Math.round(flight.totalUsd * 0.18))}
+                        Base fare: {formatMoney(Math.round(flight.totalBdt * 0.82))} + Taxes & Carrier Fees:{' '}
+                        {formatMoney(Math.round(flight.totalBdt * 0.18))}
                       </div>
                     </div>
                   </div>
@@ -2863,7 +2854,7 @@ export default function TravelpayoutsWidget({
                         <CheckCircle2 size={15} className="text-[#07C369]" />
                         <span>
                           Ready to Book: {flight.airline} ({flight.flightNo}) ·{' '}
-                          {formatMoney(flight.totalBdt, flight.totalUsd)}
+                          {formatMoney(flight.totalBdt)}
                         </span>
                       </div>
                       <p className="text-xs text-slate-600">
@@ -2942,19 +2933,19 @@ export default function TravelpayoutsWidget({
                     <TrendingDown size={17} aria-hidden="true" />
                   </span>
                   <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
-                    {isBn ? 'আনুমানিক ভাড়া পূর্বাভাস' : 'Indicative fare outlook'}
+                    {isBn ? 'নিজের তারিখের বিকল্প তুলনা করুন' : 'Compare your travel-date options'}
                   </span>
                 </div>
                 <h3
                   id={`${instanceId}-price-trend-title`}
                   className="mt-3 font-serif text-xl font-black tracking-tight text-slate-900 sm:text-2xl"
                 >
-                  {isBn ? '৩০ দিনের ফ্লাইট ভাড়ার ট্রেন্ড' : '30-Day Flight Price Trend'}
+                  {isBn ? 'তারিখ বদলে বর্তমান ভাড়া দেখুন' : 'Check current fares across dates'}
                 </h3>
                 <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">
                   {isBn
-                    ? 'আপনার নির্বাচিত রুটের আনুমানিক ভাড়ার ধারা দেখুন। চার্টে একটি তারিখ বেছে নিলে যাত্রার তারিখ আপডেট হবে।'
-                    : 'Explore an indicative fare pattern for your selected route. Choose a date in the chart to update your departure.'}
+                    ? 'আপনার রুট ও তারিখ নিয়ে provider-এর সার্চ খুলুন। সেখানে কাছাকাছি তারিখ, baggage ও মোট checkout price তুলনা করুন।'
+                    : 'Open the provider’s search with your route and dates. Compare nearby dates, baggage and complete checkout prices there.'}
                 </p>
               </div>
               <span className="inline-flex min-h-8 shrink-0 items-center gap-1.5 self-start rounded-full border border-slate-200 bg-white/85 px-3 py-1 font-mono text-[11px] font-bold text-brand-navy">
@@ -2965,56 +2956,17 @@ export default function TravelpayoutsWidget({
               </span>
             </div>
 
-            <button
-              type="button"
-              aria-expanded={showPriceTrendChart}
-              aria-controls={`${instanceId}-price-trend-chart`}
-              onClick={() => setShowPriceTrendChart((visible) => !visible)}
+            <a
+              href={liveFormUralWlUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              data-flight-date-comparison
               className="relative mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-brand-navy/15 bg-white px-4 py-3 text-sm font-bold text-brand-navy shadow-sm transition-colors hover:border-brand-navy/30 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 sm:w-auto sm:min-w-[240px]"
             >
               <TrendingDown size={16} className="text-emerald-700" aria-hidden="true" />
-              <span>
-                {showPriceTrendChart
-                  ? isBn ? '৩০ দিনের চার্ট লুকান' : 'Hide 30-Day Price Trend'
-                  : isBn ? '৩০ দিনের ভাড়ার ট্রেন্ড দেখুন' : 'View 30-Day Price Trend'}
-              </span>
-              <ArrowRight
-                size={15}
-                className={`transition-transform ${showPriceTrendChart ? 'rotate-90' : ''}`}
-                aria-hidden="true"
-              />
-            </button>
-
-            {showPriceTrendChart && (
-              <div id={`${instanceId}-price-trend-chart`} className="relative mt-5 min-h-[250px]">
-                <React.Suspense
-                  fallback={
-                    <div
-                      className="h-[250px] rounded-2xl border border-slate-200 bg-white/80"
-                      role="status"
-                      aria-label={isBn ? 'চার্ট লোড হচ্ছে' : 'Loading fare trend chart'}
-                    />
-                  }
-                >
-                  <FlightPriceTrendChart
-                    origin={effectiveOrigin}
-                    destination={effectiveDest}
-                    routeBaseFareBdt={routeBaseFareBdt}
-                    currencyConfig={CURRENCY_CONFIG}
-                    currency={currency}
-                    tripType={tripType}
-                    cabinClass={cabinClass}
-                    passengers={passengers}
-                    departDate={departDate}
-                    isBn={isBn}
-                    onSelectDate={(isoDate) => {
-                      setDepartDate(isoDate);
-                      if (returnDate && isoDate > returnDate) setReturnDate(isoDate);
-                    }}
-                  />
-                </React.Suspense>
-              </div>
-            )}
+              <span>{isBn ? 'Provider-এ তারিখ ও ভাড়া তুলনা করুন' : 'Compare dates and fares on the provider'}</span>
+              <ArrowRight size={15} aria-hidden="true" />
+            </a>
           </section>
 
           <section

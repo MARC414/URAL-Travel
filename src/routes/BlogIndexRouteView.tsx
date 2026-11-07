@@ -590,9 +590,9 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       {isBn
 
-                        ? "Jeddah, Madinah, Kathmandu, Bangkok, Kuala Lumpur, Singapore, Malé ও Dubai-এর লাইভ ভাড়া দেখুন—অথবা Dual-Currency Card না থাকলে আমাদের WhatsApp BDT ডেস্কে মেসেজ দিন।"
+                        ? "Jeddah, Madinah, Kathmandu, Bangkok, Kuala Lumpur, Singapore, Malé ও Dubai-এর লাইভ ভাড়া দেখুন—কার্ড বা পেমেন্ট নিয়ে প্রশ্ন থাকলে WhatsApp-এ আমাদের জিজ্ঞেস করুন।"
 
-                        : "Search live fares to Jeddah, Madinah, Kathmandu, Bangkok, Kuala Lumpur, Singapore, Malé, and Dubai—or message our WhatsApp BDT Desk if you don't have a dual-currency card yet."}
+                        : "Search live fares to Jeddah, Madinah, Kathmandu, Bangkok, Kuala Lumpur, Singapore, Malé, and Dubai—or ask us a question on WhatsApp if you don't have a dual-currency card yet."}
 
                     </p>
 
@@ -612,9 +612,9 @@ export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
                       {isBn
 
-                        ? "BDT-তে টিকিট ও হোটেল বুকিং সহায়তা"
+                        ? "প্রশ্ন আছে? URAL-কে জিজ্ঞেস করুন"
 
-                        : "Need BDT Booking Help? Contact Desk"}
+                        : "Ask Before You Book? Contact URAL"}
 
                     </span>
 

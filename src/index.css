@@ -605,3 +605,23 @@ footer ul li a[href] {
 #interactive-tools-panel {
   scroll-margin-top: 7.5rem;
 }
+
+/* Quote tools: visible field boundaries override the shell's unlayered reset. */
+:is(#trip-cost-estimator, #currency-converter, #umrah-calculator) :is(input, select) {
+  border: 1px solid var(--color-text-muted, #64748b);
+  border-radius: 0.625rem;
+  caret-color: var(--color-brand-emerald);
+}
+
+:is(#trip-cost-estimator, #currency-converter, #umrah-calculator) :is(input, select, button, a):focus-visible {
+  outline: 2px solid var(--color-brand-emerald);
+  outline-offset: 3px;
+}
+
+:is(#trip-cost-estimator, #currency-converter, #umrah-calculator) :is(input, select)[aria-invalid="true"] {
+  border-color: #b91c1c;
+}
+
+#trip-cost-estimator aside select:focus-visible {
+  outline-color: var(--color-brand-gold);
+}

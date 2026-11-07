@@ -51,37 +51,37 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/flights": {
     title: "Flights from Dhaka: Routes, Fares & Airlines | URAL",
     description:
-      "Compare popular flights from Dhaka by route, airline, duration and BDT fare guidance. Find practical planning tips for Bangladeshi travelers.",
+      "Compare popular flights from Dhaka by route, airline and duration, then check live fares for your dates. Practical planning tips for Bangladeshi travelers.",
   },
   "/flights/dhaka-kathmandu": {
     title: "Dhaka to Kathmandu Flights: Price & Route Guide | URAL",
     description:
-      "Compare Dhaka–Kathmandu flight options, journey times and BDT fare guidance. See practical booking tips for Bangladeshi travelers planning a Nepal trip.",
+      "Compare Dhaka–Kathmandu flight options and journey times, then check live fares for your dates. Practical booking tips for Bangladeshi travelers planning a Nepal trip.",
   },
   "/flights/dhaka-bangkok": {
     title: "Dhaka to Bangkok Flights: Fares, Airlines & Tips | URAL",
     description:
-      "Compare Dhaka to Bangkok flights across BKK and DMK airports, direct airlines, 2h 30m flight time and BDT roundtrip fare guidance for Bangladesh।",
+      "Compare Dhaka to Bangkok flights across BKK and DMK airports, direct airlines, 2h 30m flight time, then check live fares for your dates.",
   },
   "/flights/dhaka-kuala-lumpur": {
     title: "Dhaka to Kuala Lumpur Flights: Price & Airlines | URAL",
     description:
-      "Compare direct Dhaka to Kuala Lumpur (KUL) flights, 3h 50m duration, budget vs full-service airlines and BDT roundtrip fare ranges from Bangladesh.",
+      "Compare direct Dhaka to Kuala Lumpur (KUL) flights, 3h 50m duration and budget vs full-service airlines, then check live fares for your dates.",
   },
   "/flights/dhaka-dubai": {
     title: "Dhaka to Dubai Flights: BDT Fares & Airlines | URAL",
     description:
-      "Compare direct and connecting Dhaka to Dubai (DXB) flights, 4h 45m flight time, operating airlines and BDT roundtrip fare guidance for Bangladeshi।",
+      "Compare direct and connecting Dhaka to Dubai (DXB) flights, 4h 45m flight time and operating airlines, then check live fares for your dates.",
   },
   "/flights/dhaka-singapore": {
     title: "Dhaka to Singapore Flights: Airlines & BDT Fares | URAL",
     description:
-      "Compare direct Dhaka to Singapore (SIN) flights, 4h 15m journey time, Biman, US-Bangla and Singapore Airlines options, and BDT roundtrip fare guidance.",
+      "Compare direct Dhaka to Singapore (SIN) flights, 4h 15m journey time and carrier options, then check live fares for your dates.",
   },
   "/flights/dhaka-maldives": {
     title: "Dhaka to Maldives Flights: Direct & Transit Fares | URAL",
     description:
-      "Compare Dhaka to Malé (MLE) direct and Colombo-transit flights, journey times, operating airlines and BDT fare guidance for Bangladeshi travelers.",
+      "Compare Dhaka to Malé (MLE) direct and Colombo-transit flights, journey times and operating airlines, then check live fares for your dates.",
   },
   "/hotels": {
     title: "Hotel Area Guides for Bangladesh Travelers | URAL",
@@ -209,39 +209,39 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Plan New York City around harbor sights, parks, museums and selected neighborhoods. Check current attraction, transport and entry information for your dates.",
   },
   "/costs": {
-    title: "Trip Costs from Bangladesh: BDT Travel Budgets | URAL",
+    title: "Trip Budget Guides: Six Destinations & Quote Planning | URAL",
     description:
-      "Explore BDT-based trip-budget guides for popular destinations, with flight, accommodation and local-transport categories to help plan from Bangladesh.",
+      "Plan Nepal, Thailand, Malaysia, Dubai, Singapore and Maldives budgets using current quotes, clear cost categories and the Trip Cost Estimator.",
   },
   "/costs/nepal-costs": {
-    title: "Nepal Trip Cost from Bangladesh: BDT Budget | URAL",
+    title: "Nepal Trip Budget: Quotes, Hotels & Transport | URAL",
     description:
       "Estimate a Nepal trip budget from Bangladesh in BDT. Review flight, lodging, transport and daily-spend categories before building your itinerary.",
   },
   "/costs/thailand-costs": {
-    title: "Thailand Trip Cost from Bangladesh: BDT Budget | URAL",
+    title: "Thailand Trip Budget: Quotes & Cost Planning | URAL",
     description:
       "Plan a Thailand trip in BDT. Visa charges are not itemized; verify the current government e-Visa fee, bank/payment charges and optional agency service fees separately.",
   },
   "/costs/malaysia-costs": {
-    title: "Malaysia Trip Cost from Bangladesh: BDT Budget | URAL",
+    title: "Malaysia Trip Budget: Quotes, Hotels & Transport | URAL",
     description:
-      "Estimate a 5-day Malaysia trip budget from Bangladesh in BDT, with low, mid-range and luxury estimates for flights, Kuala Lumpur hotels, food and transit.",
+      "Plan Malaysia trip costs from your flight, Kuala Lumpur hotel, transport and activity quotes. Check units, inclusions and child fares before calculating.",
   },
   "/costs/dubai-costs": {
-    title: "Dubai Trip Cost from Bangladesh: 5-Day BDT Budget | URAL",
+    title: "Dubai Trip Budget: Quotes, Hotels & Transfers | URAL",
     description:
-      "Estimate a 5-day Dubai trip cost from Bangladesh in BDT, including Dhaka–DXB flights, UAE tourist visa fees, Deira or Downtown hotels, metro and activities.",
+      "Plan Dubai trip costs using current flight, hotel, transfer and attraction quotes. Keep visa, insurance, shopping and fees separate.",
   },
   "/costs/singapore-costs": {
-    title: "Singapore Trip Cost from Bangladesh: BDT Budget | URAL",
+    title: "Singapore Trip Budget: Quotes, Hotels & Activities | URAL",
     description:
-      "Estimate a 4-day Singapore trip budget from Bangladesh in BDT, covering flights from Dhaka, visa fees, Little India or Bugis hotels, MRT and Sentosa tickets.",
+      "Plan Singapore costs using actual hotel nights, flight quotes, MRT journeys and attraction tickets. Check child prices and record visa charges separately.",
   },
   "/costs/maldives-costs": {
-    title: "Maldives Trip Cost from Bangladesh: BDT Budget | URAL",
+    title: "Maldives Trip Budget: Stays, Transfers & Quotes | URAL",
     description:
-      "Estimate a 5-day Maldives trip cost from Bangladesh in BDT, comparing budget Maafushi guesthouses and speedboat transfers with private island resort stays.",
+      "Compare Maldives guesthouses and resorts using full stay, tax, meal-plan and return-transfer quotes. Build a budget for your dates and party.",
   },
   "/experiences": {
     title: "Attraction & Activity Guides for Bangladesh Travelers | URAL",
@@ -249,9 +249,9 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Plan activities and attraction visits abroad with practical links and guides for travelers departing from Bangladesh.",
   },
   "/tools": {
-    title: "Travel Planning Tools for Bangladesh Travelers | URAL",
+    title: "Travel Tools: Trip Cost Estimator, Currency & Checklists | URAL",
     description:
-      "Use practical travel-planning tools for Bangladeshi travelers, including currency conversion, packing and pre-departure checks.",
+      "Use the Trip Cost Estimator, dated BDT currency conversion, airport-code lookup, packing checklist and flight-disruption guidance.",
   },
   "/pre-departure": {
     title: "Dhaka Airport (DAC) Pre-Departure Checklist & Helplines | URAL",
@@ -264,9 +264,9 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Every URAL page in one place: flights, visas, hotels, BDT budgets, destination itineraries, Umrah preparation, travel tools and the full blog index for Bangladeshi travelers.",
   },
   "/contact": {
-    title: "Contact URAL Travel Support in Dhaka | URAL",
+    title: "Contact URAL — Travel Information Desk in Dhaka | URAL",
     description:
-      "Contact URAL's Dhaka support desk about flight planning, visa checklists, Umrah preparation or travel questions for Bangladeshi travelers.",
+      "Ask URAL about routes, visa requirements or trip planning on +8801784385335. We explain your options and point you to the official portal or provider.",
   },
   "/privacy": {
     title: "Privacy & Cookie Policy | URAL Travel Intelligence",
@@ -451,9 +451,9 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "See why Bangladesh's USD 300 online-purchase rule affects travel-quota cards, how documented travel approval works, and when an RFCD account fits.",
   },
   "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card": {
-    title: "Book Flights & Makkah Hotels in BDT Without a Card | URAL",
+        title: "How to Pay for Flights & Makkah Hotels in BDT Without a Card | URAL",
     description:
-      "Learn how Bangladeshi travelers without a dual-currency card can book international flights, Makkah hotels and transfers in BDT via bKash or bank transfer.",
+            "How Bangladeshi travellers without a dual-currency card can pay for international flights, Makkah hotels and transfers in BDT — what to verify before paying anyone, and where URAL stops.",
   },
   "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": {
     title: "Cash SAR/USD vs Dual-Currency Card Abroad | URAL",
@@ -549,9 +549,9 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
       "বাংলাদেশি ভ্রমণকারীদের জন্য ব্যবহারিক ভ্রমণ গাইড পড়ুন — ভিসা, ঢাকা থেকে ফ্লাইট, ওমরাহ পরিকল্পনা, টাকায় বাজেট ও গন্তব্যভিত্তিক দিকনির্দেশনা।",
   },
   "/contact": {
-    title: "ঢাকায় URAL ট্রাভেল সাপোর্টে যোগাযোগ করুন | URAL",
+    title: "ঢাকায় URAL ট্রাভেল ইনফরমেশন ডেস্কে যোগাযোগ | URAL",
     description:
-      "ফ্লাইট পরিকল্পনা, ভিসা চেকলিস্ট, ওমরাহ প্রস্তুতি বা ভ্রমণ প্রশ্নে বাংলাদেশি ভ্রমণকারীদের জন্য URAL-এর ঢাকা সাপোর্ট ডেস্কে যোগাযোগ করুন।",
+      "রুট, ভিসার শর্ত বা ভ্রমণ পরিকল্পনা নিয়ে +8801784385335 নম্বরে URAL-কে প্রশ্ন করুন। আমরা বিকল্প বুঝিয়ে দিই এবং সরকারি পোর্টাল বা সেবাদাতার লিংক দিই।",
   },
   "/privacy": {
     title: "গোপনীয়তা ও কুকি নীতিমালা | URAL Travel Intelligence",
@@ -559,9 +559,9 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
       "URAL Travel Intelligence-এর গোপনীয়তা ও কুকি নীতিমালা। আমরা কীভাবে ভিজিটর ডেটা, গুগল কনসেন্ট মোড v2 ও ট্রাভেলপেআউটস পার্টনার কুকিজ নিরাপদে হ্যান্ডেল করি জানুন।",
   },
   "/costs": {
-    title: "বাংলাদেশ থেকে ভ্রমণ খরচ: টাকায় বাজেট | URAL",
+    title: "ট্রিপ বাজেট গাইড: ৬ গন্তব্যের কোটেশন ও পরিকল্পনা | URAL",
     description:
-      "জনপ্রিয় গন্তব্যের জন্য টাকাভিত্তিক ভ্রমণ-বাজেট গাইড দেখুন — ফ্লাইট, থাকা ও স্থানীয় যাতায়াতের ক্যাটাগরিসহ বাংলাদেশ থেকে পরিকল্পনা করুন।",
+      "নেপাল, থাইল্যান্ড, মালয়েশিয়া, দুবাই, সিঙ্গাপুর ও মালদ্বীপের বাজেট সাজান বর্তমান কোটেশন, স্পষ্ট খরচের খাত ও ট্রিপ কস্ট এস্টিমেটর দিয়ে।",
   },
   "/costs/dubai-costs": {
     title: "বাংলাদেশ থেকে দুবাই ভ্রমণ খরচ: ৫ দিনের টাকায় বাজেট | URAL",
@@ -571,7 +571,7 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
   "/costs/malaysia-costs": {
     title: "বাংলাদেশ থেকে মালয়েশিয়া ভ্রমণ খরচ: টাকায় বাজেট | URAL",
     description:
-      "বাংলাদেশ থেকে ৫ দিনের মালয়েশিয়া ভ্রমণ বাজেট টাকায় হিসাব করুন — ফ্লাইট, কুয়ালালামপুর হোটেল, খাবার ও যাতায়াতের জন্য কম, মধ্যম ও বিলাসবহুল হিসাব।",
+      "Flight, কুয়ালালামপুর hotel, transport ও activity quote দিয়ে মালয়েশিয়ার বাজেট সাজান। হিসাবের আগে একক, inclusions ও শিশুর ভাড়া দেখুন।",
   },
   "/costs/maldives-costs": {
     title: "বাংলাদেশ থেকে মালদ্বীপ ভ্রমণ খরচ: টাকায় বাজেট | URAL",
@@ -606,37 +606,37 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
   "/flights": {
     title: "ঢাকা থেকে ফ্লাইট: রুট, ভাড়া ও এয়ারলাইন্স | URAL",
     description:
-      "ঢাকা থেকে জনপ্রিয় ফ্লাইটগুলো রুট, এয়ারলাইন, সময় ও টাকায় ভাড়া অনুযায়ী তুলনা করুন। বাংলাদেশি ভ্রমণকারীদের জন্য ব্যবহারিক পরিকল্পনা টিপস।",
+      "ঢাকা থেকে জনপ্রিয় ফ্লাইটগুলো রুট, এয়ারলাইন ও যাত্রার সময় অনুযায়ী তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন। বাংলাদেশি ভ্রমণকারীদের জন্য ব্যবহারিক পরিকল্পনা টিপস।",
   },
   "/flights/dhaka-bangkok": {
     title: "ঢাকা টু ব্যাংকক ফ্লাইট: ভাড়া, এয়ারলাইন ও টিপস | URAL",
     description:
-      "BKK ও DMK বিমানবন্দরে ঢাকা টু ব্যাংকক ফ্লাইট, সরাসরি এয়ারলাইন, ২ঘ. ৩০মি. ফ্লাইট সময় ও বাংলাদেশি যাত্রীদের জন্য টাকায় রাউন্ডট্রিপ ভাড়ার দিকনির্দেশনা।",
+      "BKK ও DMK বিমানবন্দরে ঢাকা টু ব্যাংকক ফ্লাইট, সরাসরি এয়ারলাইন ও ২ঘ. ৩০মি. ফ্লাইট সময় তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।",
   },
   "/flights/dhaka-dubai": {
     title: "ঢাকা টু দুবাই ফ্লাইট: টাকায় ভাড়া ও এয়ারলাইন | URAL",
     description:
-      "সরাসরি ও কানেকটিং ঢাকা টু দুবাই (DXB) ফ্লাইট, ৪ঘ. ৪৫মি. সময়, পরিচালনাকারী এয়ারলাইন ও বাংলাদেশি যাত্রীদের জন্য টাকায় রাউন্ডট্রিপ ভাড়ার দিকনির্দেশনা।",
+      "সরাসরি ও কানেকটিং ঢাকা টু দুবাই (DXB) ফ্লাইট, ৪ঘ. ৪৫মি. সময় ও পরিচালনাকারী এয়ারলাইন তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।",
   },
   "/flights/dhaka-kathmandu": {
     title: "ঢাকা টু কাঠমান্ডু ফ্লাইট: ভাড়া ও রুট গাইড | URAL",
     description:
-      "ঢাকা–কাঠমান্ডু ফ্লাইটের বিকল্প, যাত্রার সময় ও টাকায় ভাড়ার দিকনির্দেশনা তুলনা করুন। নেপাল ভ্রমণের পরিকল্পনায় বাংলাদেশি যাত্রীদের জন্য ব্যবহারিক বুকিং টিপস।",
+      "ঢাকা–কাঠমান্ডু ফ্লাইটের বিকল্প ও যাত্রার সময় তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন। নেপাল ভ্রমণের পরিকল্পনায় বাংলাদেশি যাত্রীদের জন্য ব্যবহারিক বুকিং টিপস।",
   },
   "/flights/dhaka-kuala-lumpur": {
     title: "ঢাকা টু কুয়ালালামপুর ফ্লাইট: ভাড়া ও এয়ারলাইন | URAL",
     description:
-      "সরাসরি ঢাকা টু কুয়ালালামপুর (KUL) ফ্লাইট, ৩ঘ. ৫০মি. সময়, বাজেট বনাম ফুল-সার্ভিস এয়ারলাইন এবং বাংলাদেশ থেকে টাকায় রাউন্ডট্রিপ ভাড়ার পরিসর তুলনা করুন।",
+      "সরাসরি ঢাকা টু কুয়ালালামপুর (KUL) ফ্লাইট, ৩ঘ. ৫০মি. সময় ও বাজেট বনাম ফুল-সার্ভিস এয়ারলাইন তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।",
   },
   "/flights/dhaka-maldives": {
     title: "ঢাকা টু মালদ্বীপ ফ্লাইট: সরাসরি ও ট্রানজিট ভাড়া | URAL",
     description:
-      "ঢাকা টু মালে (MLE) সরাসরি ও কলম্বো-ট্রানজিট ফ্লাইট, যাত্রার সময়, পরিচালনাকারী এয়ারলাইন ও বাংলাদেশি যাত্রীদের জন্য টাকায় ভাড়ার দিকনির্দেশনা তুলনা করুন।",
+      "ঢাকা টু মালে (MLE) সরাসরি ও কলম্বো-ট্রানজিট ফ্লাইট, যাত্রার সময় ও পরিচালনাকারী এয়ারলাইন তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।",
   },
   "/flights/dhaka-singapore": {
     title: "ঢাকা টু সিঙ্গাপুর ফ্লাইট: এয়ারলাইন ও টাকায় ভাড়া | URAL",
     description:
-      "সরাসরি ঢাকা টু সিঙ্গাপুর (SIN) ফ্লাইট, ৪ঘ. ১৫মি. সময়, বিমান, ইউএস-বাংলা ও সিঙ্গাপুর এয়ারলাইন্সের বিকল্প এবং টাকায় রাউন্ডট্রিপ ভাড়ার দিকনির্দেশনা তুলনা করুন।",
+      "সরাসরি ঢাকা টু সিঙ্গাপুর (SIN) ফ্লাইট, ৪ঘ. ১৫মি. সময় ও এয়ারলাইন্সের বিকল্প তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।",
   },
   "/hotels": {
     title: "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড | URAL",
@@ -684,9 +684,9 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
       "ফ্লাইট, ভিসা, হোটেল, টাকার বাজেট, গন্তব্য গাইড, ওমরাহ প্রস্তুতি ও ভ্রমণ টুলসহ URAL-এর প্রতিটি পেজের সরাসরি লিংক এক জায়গায়।",
   },
   "/tools": {
-    title: "বাংলাদেশি ভ্রমণকারীদের জন্য ভ্রমণ পরিকল্পনা টুল | URAL",
+    title: "ট্রাভেল টুলস: ট্রিপ কস্ট এস্টিমেটর, কারেন্সি ও চেকলিস্ট | URAL",
     description:
-      "বাংলাদেশি ভ্রমণকারীদের জন্য ব্যবহারিক ভ্রমণ-পরিকল্পনা টুল ব্যবহার করুন — মুদ্রা রূপান্তর, প্যাকিং ও প্রি-ডিপার্চার চেকসহ।",
+      "ট্রিপ কস্ট এস্টিমেটর, তারিখসহ BDT currency conversion, airport code, packing checklist ও flight-disruption guidance ব্যবহার করুন।",
   },
   "/umrah": {
     title: "বাংলাদেশ থেকে ওমরাহ খরচ: নিজে করুন গাইড ও নুসুক | URAL",

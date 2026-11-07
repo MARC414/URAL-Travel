@@ -138,8 +138,8 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
               </h4>
               <p className="text-xs text-slate-600 max-w-sm mx-auto leading-relaxed">
                 {lang === "bn"
-                  ? `ঢাকা ➔ ${targetDest} রুটের জন্য আপনার তথ্য Ural Travel ঢাকা ডেস্কে পাঠানো হয়েছে। এয়ারলাইন্স রেট কমালে আপনাকে হোয়াটসঅ্যাপে জানানো হবে।`
-                  : `Your request for Dhaka ➔ ${targetDest} has been received by our Ural Travel flight desk. We will message you on WhatsApp the moment promo fares drop.`}
+                  ? `ঢাকা ➔ ${targetDest} রুটের জন্য আপনার তথ্য URAL-এ পৌঁছেছে। নতুন ভাড়া-আপডেট প্রকাশ হলে হোয়াটসঅ্যাপে জানাব।`
+                  : `Your request for Dhaka ➔ ${targetDest} has been received by URAL. We will message you when we publish a fare update.`}
               </p>
             </div>
 
@@ -300,8 +300,8 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
               </button>
 
               <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1 px-1">
-                <span>🔒 No spam • Agency verified</span>
-                <span>DAC Desk: 01784385335</span>
+                <span>🔒 No spam • Information only</span>
+                <span>WhatsApp: 01784385335</span>
               </div>
             </div>
           </form>

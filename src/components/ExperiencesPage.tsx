@@ -1092,7 +1092,7 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
         })}
       </div>
 
-      {/* 4. DUAL-CURRENCY CARD VS. WHATSAPP BDT DESK ASSIST BANNER */}
+      {/* 4. DUAL-CURRENCY CARD VS. PLATFORM CHECKOUT PAYMENT GUIDANCE BANNER */}
       <div className="bg-brand-navy text-white rounded-3xl p-6 sm:p-10 border border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div className="lg:col-span-8 space-y-2">
           <div className="text-xs font-mono text-[#F6B73C]">
@@ -1102,27 +1102,27 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
           </div>
           <h2 className="ural-section-title font-serif text-xl sm:text-2xl font-bold text-white">
             {isBn
-              ? "Dual-Currency Card নেই? আমাদের ঢাকা ডেস্কের মাধ্যমে BDT-তে Tiqets ও Klook ভাউচার ইস্যু করুন"
-              : "Don't Have a Dual-Currency Card Yet? Book Any Tiqets or Klook Pass in BDT"}
+              ? "Dual-Currency Card নেই? Tiqets বা Klook পাস কেনার আগে পেমেন্টের ধাপগুলো পড়ুন"
+              : "No Dual-Currency Card Yet? Check the Payment Steps Before You Book a Tiqets or Klook Pass"}
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
             {isBn
-              ? "আপনার পাসপোর্টে যদি ডলার এন্ডোর্সমেন্ট করা থাকে, তবে সরাসরি উপরের Tiqets বা Klook লিংকে কার্ড দিয়ে পেমেন্ট করে সাথে সাথে QR টিকিট ডাউনলোড করতে পারবেন। আর কার্ড না থাকলে আমাদের WhatsApp ডেস্কে (+8801784385335) মেসেজ দিয়ে bKash/Nagad বা ব্যাংক ট্রান্সফারে বুক করুন।"
-              : "If your Bangladeshi passport has USD endorsement enabled, book directly on Tiqets or Klook above for instant QR delivery. Need to pay in Bangladeshi Taka via bank transfer or bKash? Message our Dhaka desk on WhatsApp."}
+              ? "আপনার পাসপোর্টে যদি ডলার এন্ডোর্সমেন্ট করা থাকে, তবে সরাসরি উপরের Tiqets বা Klook লিংকে কার্ড দিয়ে পেমেন্ট করে সাথে সাথে QR টিকিট ডাউনলোড করতে পারবেন। কার্ড তৈরি না হলে কোন পেমেন্ট পদ্ধতি গ্রহণ করা হয় তা ওই প্ল্যাটফর্মের নিজের checkout পাতায় দেখে নিন, আর কোনো ধাপ অস্পষ্ট হলে WhatsApp-এ আমাদের প্রশ্ন করুন।"
+              : "If your Bangladeshi passport has USD endorsement enabled, book directly on Tiqets or Klook above for instant QR delivery. If the card is not ready, check which payment methods each platform accepts on its own checkout page, and ask us a question on WhatsApp if a step is unclear."}
           </p>
         </div>
 
         <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
           <a
-            href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20want%20to%20book%20Tiqets%20or%20Klook%20attraction%20passes%20in%20BDT!"
+            href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20have%20a%20question%20about%20paying%20for%20a%20Tiqets%20or%20Klook%20attraction%20pass%20with%20a%20Bangladeshi%20card."
             target="_blank"
             rel="noopener noreferrer"
             className="w-full bg-brand-emerald hover:bg-brand-emerald/90 text-white font-bold text-xs py-3.5 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
           >
             <span>
               {isBn
-                ? "WhatsApp BDT বুকিং ডেস্ক (+8801784385335)"
-                : "WhatsApp BDT Desk (+8801784385335)"}
+                ? "WhatsApp-এ প্রশ্ন করুন (+8801784385335)"
+                : "Ask a Question on WhatsApp (+8801784385335)"}
             </span>
           </a>
           <a
@@ -1189,8 +1189,8 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
             value: "BD Dual-Currency Visa/Mastercard/Amex",
           },
           {
-            label: isBn ? "BDT সাপোর্ট" : "BDT Assistance",
-            value: "WhatsApp Desk (+8801784385335)",
+            label: isBn ? "BDT নিয়ে প্রশ্ন" : "BDT Questions",
+            value: "WhatsApp questions (+8801784385335)",
           },
         ]}
         faqs={EXPERIENCES_FAQS}

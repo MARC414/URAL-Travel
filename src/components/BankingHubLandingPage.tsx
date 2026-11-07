@@ -540,8 +540,8 @@ export const BankingHubLandingPage: React.FC<BankingHubLandingPageProps> = ({
           <Check size={13} className="shrink-0 mt-0.5 text-emerald-600" aria-hidden="true" />
           <span>
             {isBn
-              ? "URAL টিকিট বিক্রি করে না এবং ভিসা প্রসেস করে না। এই পাতাটি তথ্য দেয়, অনুমোদনের নিশ্চয়তা দেয় না।"
-              : "URAL does not sell tickets or process visas. This page explains the rules; it does not promise an approval."}
+              ? "URAL একটি স্বাধীন তথ্য প্ল্যাটফর্ম, এজেন্সি নয়। এই পাতাটি নিয়ম ব্যাখ্যা করে, অনুমোদনের নিশ্চয়তা দেয় না।"
+              : "URAL is an independent information platform, not an agency. This page explains the rules; it does not promise an approval."}
           </span>
         </div>
       </section>

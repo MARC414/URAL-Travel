@@ -21,7 +21,7 @@ const CURRENCIES = new Set(["BDT", "USD", "EUR", "GBP", "SAR", "AED", "CNY"]);
 export const DEFAULT_FLIGHT_CURRENCY = "USD";
 
 /** Active Bangladeshi gateways in the airport directory. Do not include codes owned elsewhere. */
-const BANGLADESH_AIRPORT_CODES = new Set(["DAC", "CGP", "CXB", "SYL", "JSR", "RJH", "SPD", "BAR"]);
+const BANGLADESH_AIRPORT_CODES = new Set(["DAC", "CGP", "CXB", "ZYL", "JSR", "RJH", "SPD", "BZL"]);
 
 export function isBangladeshAirport(code: string): boolean {
   return BANGLADESH_AIRPORT_CODES.has(String(code ?? "").trim().toUpperCase());

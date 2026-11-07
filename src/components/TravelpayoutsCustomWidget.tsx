@@ -45,14 +45,21 @@ interface TravelpayoutsCustomWidgetProps {
 const MARKER_ID = "675992";
 const TRS_ID = "589561";
 
-const CURRENCY_OPTIONS = {
+interface CurrencyOption {
+  code: string;
+  symbol: string;
+  label: string;
+  rateFromBdt?: number; // optional: fetched rates replace this; BDT is the unit (1)
+}
+
+const CURRENCY_OPTIONS: Record<string, CurrencyOption> = {
   BDT: { code: "BDT", symbol: "৳", label: "৳ BDT", rateFromBdt: 1 },
-  USD: { code: "USD", symbol: "$", label: "$ USD", rateFromBdt: 1 / 120 },
-  EUR: { code: "EUR", symbol: "€", label: "€ EUR", rateFromBdt: 1 / 130 },
-  GBP: { code: "GBP", symbol: "£", label: "£ GBP", rateFromBdt: 1 / 152 },
-  SAR: { code: "SAR", symbol: "SAR ", label: "﷼ SAR", rateFromBdt: 1 / 32 },
-  AED: { code: "AED", symbol: "AED ", label: "د.إ AED", rateFromBdt: 1 / 32.7 },
-} as const;
+  USD: { code: "USD", symbol: "$", label: "$ USD" },
+  EUR: { code: "EUR", symbol: "€", label: "€ EUR" },
+  GBP: { code: "GBP", symbol: "£", label: "£ GBP" },
+  SAR: { code: "SAR", symbol: "SAR ", label: "﷼ SAR" },
+  AED: { code: "AED", symbol: "AED ", label: "د.إ AED" },
+};
 
 type CurrencyCode = keyof typeof CURRENCY_OPTIONS;
 
@@ -481,7 +488,8 @@ export function TravelpayoutsCustomWidget({
 
   const formatPrice = (bdtAmount: number) => {
     const cfg = CURRENCY_OPTIONS[currency] || CURRENCY_OPTIONS.BDT;
-    const val = Math.round(bdtAmount * cfg.rateFromBdt);
+    const rate = cfg.rateFromBdt ?? 1;
+    const val = Math.round(bdtAmount * rate);
     return `${cfg.symbol}${val.toLocaleString()} ${cfg.code}`;
   };
 

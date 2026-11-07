@@ -23,7 +23,6 @@ export interface FlightRoute {
   from: string;
   to: string;
   country: string;
-  priceRangeBdt: string;
   airlines: string[];
   bestTimeToBook: string;
   duration: string;
@@ -94,17 +93,17 @@ export interface DestinationGuide {
 
 export interface CostCategory {
   name: string;
-  lowBdt: number;
-  midBdt: number;
-  highBdt: number;
+  basis: string;
+  check: string;
 }
 
 export interface TripCostData {
   id: string;
   country: string;
+  countryBn: string;
   durationDays: number;
   currencyCode: string;
-  exchangeRateText: string;
+  currencyIso: string;
   categories: CostCategory[];
   seasonalVariation: string;
   moneyHacks: string[];
@@ -112,6 +111,8 @@ export interface TripCostData {
   keyFacts: KeyFact[];
   faqs: FAQ[];
   schemaMarkup: SchemaMarkup;
+  updatedAt: string;
+  references: { name: string; nameBn: string; url: string }[];
 }
 
 export interface BlogPost {

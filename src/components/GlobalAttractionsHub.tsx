@@ -735,7 +735,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
 
                   <a
                     href={`https://wa.me/8801784385335?text=${encodeURIComponent(
-                      `Hi URAL! I want to book Tiqets attraction: ${activeCalendarProduct.title} (#${activeCalendarProduct.productId}) for ${partySize} travelers on ${selectedDate} in BDT.`
+                      `Hi URAL! I have a question about paying for this Tiqets attraction: ${activeCalendarProduct.title} (#${activeCalendarProduct.productId}) for ${partySize} travelers on ${selectedDate} with a Bangladeshi card.`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -743,8 +743,8 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                   >
                     <span>
                       {isBn
-                        ? "💬 কার্ড নেই? WhatsApp-এ BDT-তে টিকেট কাটুন"
-                        : "💬 No Dual-Currency Card? Request BDT Booking via WhatsApp"}
+                        ? "💬 কার্ড নেই? WhatsApp-এ প্রশ্ন করুন"
+                        : "💬 No Dual-Currency Card? Ask a Question on WhatsApp"}
                     </span>
                   </a>
                 </div>
@@ -908,8 +908,8 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
           </h2>
           <p className="text-xs text-slate-600 leading-relaxed">
             {isBn
-              ? "১) আপনার পাসপোর্টে বার্ষিক $18,000 ট্রাভেল কোটা এন্ডোর্স করা থাকলে ব্যাংকের অ্যাপে E-Commerce ও 3D-Secure চালু করে সরাসরি Tiqets থেকে ই-টিকেট কাটুন। ২) কার্ড না থাকলে আমাদের WhatsApp ডেস্কে (+8801784385335) মেসেজ দিয়ে বিকাশ/ব্যাংক ট্রান্সফারের মাধ্যমে BDT-তে ভেরিফায়েড টিকেট সংগ্রহ করুন।"
-              : "1) Use your passport-endorsed Dual-Currency Visa/Mastercard on Tiqets (supports 3D-Secure OTP) so you don't face foreign ticket machine declines abroad. 2) Don't have an endorsed card yet? Message our Dhaka desk on WhatsApp (+8801784385335) to issue your skip-the-line QR vouchers in BDT."}
+              ? "১) আপনার পাসপোর্টে বার্ষিক $18,000 ট্রাভেল কোটা এন্ডোর্স করা থাকলে ব্যাংকের অ্যাপে E-Commerce ও 3D-Secure চালু করে সরাসরি Tiqets থেকে ই-টিকেট কাটুন। ২) কার্ড না থাকলে কোন পেমেন্ট পদ্ধতি গ্রহণ করা হয় তা ওই প্ল্যাটফর্মের নিজের checkout পাতায় দেখে নিন, আর কোনো ধাপ অস্পষ্ট হলে WhatsApp-এ (+8801784385335) আমাদের প্রশ্ন করুন।"
+              : "1) Use your passport-endorsed Dual-Currency Visa/Mastercard on Tiqets (supports 3D-Secure OTP) so you don't face foreign ticket machine declines abroad. 2) Don't have an endorsed card yet? Check which payment methods the platform accepts on its own checkout page, and ask us a question on WhatsApp (+8801784385335) if a step is unclear."}
           </p>
         </div>
 

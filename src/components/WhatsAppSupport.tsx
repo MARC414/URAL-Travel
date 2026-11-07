@@ -67,8 +67,8 @@ export function WhatsAppSupport({ lang }: WhatsAppSupportProps) {
                 </p>
                 <p>
                   {lang === "bn" 
-                    ? "ঢাকা থেকে যেকোনো আন্তর্জাতিক ফ্লাইটের টিকিট, ভিসা ডকুমেন্টস বা হোটেল নিয়ে কোনো প্রশ্ন থাকলে সরাসরি মেসেজ দিন।"
-                    : "Have questions about flights departing Dhaka, visa eligibility, or hotel bookings? Chat directly with our travel desk."}
+                    ? "ঢাকা থেকে আন্তর্জাতিক ফ্লাইট, ভিসার যোগ্যতা বা হোটেল বুকিং নিয়ে প্রশ্ন থাকলে সরাসরি মেসেজ দিন। আমরা উত্তর দিই এবং যে প্রতিষ্ঠান সেবাটি বিক্রি করে তার পাতায় পাঠাই।"
+                    : "Have questions about flights departing Dhaka, visa eligibility, or how to book a hotel? Ask our editorial team on WhatsApp — we answer questions and point you to the page that sells the service."}
                 </p>
                 <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-mono">
                   <span>Direct: {displayPhone}</span>

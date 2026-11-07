@@ -3,6 +3,7 @@ import React from "react";
 import { KlookActivitiesWidget, AiraloEsimWidget } from "../components/AffiliatePartners";
 
 import { SERVICE_TOOLS_FAQS } from "../hooks/useSeoMeta";
+import { BN_SERVICE_TOOLS_FAQS } from "../utils/bn-faq-schema";
 
 import { TravelIntelligence } from "../components/AeoInspector";
 
@@ -33,15 +34,15 @@ export default function ToolsRouteView({ context }: RouteViewProps) {
 
                 {toolCopy
                   ? (isBn ? toolCopy.h1Bn : toolCopy.h1En)
-                  : (isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য স্মার্ট ট্রাভেল টুলস" : "Outbound Travel Tools Workspace")}
+                  : (isBn ? "ট্রাভেল টুলস" : "Travel Tools")}
 
               </h1>
 
-              <p className="text-xs text-slate-500 font-mono">
+              <p className="mt-3 max-w-prose text-sm leading-relaxed text-slate-600">
 
                 {toolCopy
                   ? (isBn ? toolCopy.subBn : toolCopy.subEn)
-                  : (isBn ? "BDT কারেন্সি কনভার্টার, ইমিগ্রেশন চেকলিস্ট এবং জরুরি ট্রাভেল ইউটিলিটি।" : "Dynamic calculators constructed specifically for South Asian travelers.")}
+                  : (isBn ? "কোটেশনভিত্তিক ট্রিপের হিসাব, তারিখসহ কারেন্সি রূপান্তর, বিমানবন্দরের কোড ও প্যাকিং চেকলিস্ট।" : "Quote-based trip estimates, dated currency conversion, airport codes and a packing checklist.")}
 
               </p>
 
@@ -301,31 +302,31 @@ export default function ToolsRouteView({ context }: RouteViewProps) {
 
             <TravelIntelligence
 
-              pageTitle={isBn ? "বাংলাদেশি ভ্রমণকারীদের ট্রাভেল টুলস" : "Bangladeshi Traveler Utility Tools"}
+              pageTitle={isBn ? "ট্রাভেল টুলস" : "Travel Tools"}
 
               quickAnswer={
 
                 isBn
 
-                  ? "আমাদের ট্রাভেল টুলস ড্যাশবোর্ডে বাংলাদেশি ভ্রমণকারীদের জন্য রয়েছে লাইভ BDT কারেন্সি কনভার্টার, বিভিন্ন দেশের পাওয়ার প্লাগ ও অ্যাডাপ্টার গাইড (Type C, D, G), ঢাকা এয়ারপোর্ট ইমিগ্রেশন চেকলিস্ট এবং জরুরি বিদেশি ভাষার ফ্রেজবুক।"
+                  ? "নিজের কোটেশন দিয়ে ট্রিপের হিসাব করুন, তারিখসহ reference rate-এ BDT রূপান্তর করুন, বিমানবন্দরের কোড খুঁজুন এবং packing checklist ব্যবহার করুন।"
 
-                  : "Our travel tool suite equips outbound tourists from Bangladesh with live mid-market exchange rate calculators, comprehensive plug type adapters (Type C, D, G) by destination, an interactive packing checklist for Dhaka airport immigration, and essential phrases in Thai, Malay, Nepali, and Arabic."
+                  : "Calculate a trip from your own quotes, convert BDT with dated reference rates, look up airport codes and use the packing checklist."
 
               }
 
               keyFacts={[
 
-                { label: isBn ? "কারেন্সি রেট" : "Currency Rates", value: "Mid-Market BDT Live Tracker" },
+                { label: isBn ? "কারেন্সি রেট" : "Currency rates", value: isBn ? "Provider ও তারিখসহ দৈনিক reference" : "Daily reference, with provider and date" },
 
-                { label: isBn ? "বার্ষিক এন্ডোর্সমেন্ট কোটা" : "Annual FX Quota", value: "$18,000 USD / Adult Passport (FE Circular 33)" },
+                { label: isBn ? "সর্বোচ্চ দল" : "Party limit", value: isBn ? "১২ জন, শিশু ও ইনফ্যান্টসহ" : "12 travellers, including children and infants" },
 
-                { label: isBn ? "প্লাগ সাপোর্ট" : "Plug Compatibility", value: "Type C/D (Nepal), A/B (Thailand), G (MY/UAE)" },
+                { label: isBn ? "সময়সীমা" : "Trip duration", value: isBn ? "১–৩০ দিন; হোটেলের রাত আলাদা" : "1–30 days; hotel nights separate" },
 
-                { label: isBn ? "ইমিগ্রেশন প্যাক" : "Immigration Pack", value: "Passport + Ticket + Hotel + Solvency" }
+                { label: isBn ? "ইনপুটের ভিত্তি" : "Input basis", value: isBn ? "নিজের quote ও spending allowance" : "Your quotes and spending allowances" }
 
               ]}
 
-              faqs={SERVICE_TOOLS_FAQS}
+              faqs={isBn ? BN_SERVICE_TOOLS_FAQS : SERVICE_TOOLS_FAQS}
 
             />
 

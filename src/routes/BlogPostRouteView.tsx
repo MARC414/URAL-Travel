@@ -462,11 +462,11 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                 {
 
-                  pattern: /\b(bKash|Nagad|BDT Support Desk|local bank transfer|বিকাশ|নগদে পেমেন্ট)\b/i,
+                  pattern: /\b(bKash|Nagad|BDT payment|local bank transfer|বিকাশ|নগদে পেমেন্ট)\b/i,
 
                   path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
 
-                  title: "How to Book Flights & Makkah Hotels in BDT via bKash/Bank Transfer",
+                  title: "How to Pay for Flights and Makkah Hotels in BDT (bKash / Bank Transfer)",
 
                 },
 
@@ -1473,9 +1473,9 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                       {isBn
 
-                                        ? "নিজে ডুয়াল-কারেন্সি কার্ডে অনলাইনে ফ্লাইট, পিকআপ ও ট্যুর পাস বুক করুন—অথবা কার্ড না থাকলে সরাসরি আমাদের ঢাকা ডেস্ক থেকে BDT-তে হোটেল ভাউচার ও টিকিট নিন:"
+                                        ? "নিজে ডুয়াল-কারেন্সি কার্ডে অনলাইনে ফ্লাইট, পিকআপ ও ট্যুর পাস বুক করুন—অথবা কার্ড না থাকলে BDT-তে পেমেন্টের পথ ও কী যাচাই করবেন তা পড়ুন:"
 
-                                        : "Book flights, airport transfers, or attraction passes online with your card—or book Makkah, Madinah, Dubai & KL hotels directly in BDT via our Dhaka Desk:"}
+                                        : "Book flights, airport transfers, or attraction passes online with your card—or read how to pay in BDT without one, and what to verify before you do:"}
 
                                     </div>
 
@@ -1547,7 +1547,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                         href={`https://wa.me/8801784385335?text=${encodeURIComponent(
 
-                                          `Assalamu Alaikum URAL Desk, I was reading "${activePost.title}" and want to check BDT hotel & flight package rates.`
+                                          `Assalamu Alaikum URAL, I was reading "${activePost.title}" and have a question about paying in BDT.`
 
                                         )}`}
 
@@ -1855,27 +1855,27 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                             className="ural-section-title font-serif text-lg font-bold text-[#F6B73C]"
                           >
                             {isBn
-                              ? "BDT-তে বা আন্তর্জাতিক কার্ড ছাড়াই বুক করতে চান?"
-                              : "Need to book in BDT or without an international card?"}
+                              ? "আন্তর্জাতিক কার্ড ছাড়াই ভ্রমণ করছেন?"
+                              : "Travelling without an international card?"}
                           </h2>
                           <p className="mt-2 text-sm leading-6 text-slate-200">
                             {isBn
-                              ? "আমাদের ঢাকা ডেস্ক bKash, Nagad বা ব্যাংক ট্রান্সফারে ফ্লাইট টিকিট ও হোটেল ভাউচার নিতে সাহায্য করতে পারে। পেমেন্টের আগে লাইভ প্রাপ্যতা ও চূড়ান্ত অঙ্ক নিশ্চিত করুন।"
-                              : "Our Dhaka desk can help arrange flight tickets and hotel vouchers via bKash, Nagad or bank transfer. Confirm live availability and the final amount before paying."}
+                              ? "BDT দামের জন্য এয়ারলাইন্স বা হোটেলের নিজের checkout মিলিয়ে দেখুন, আর কাউকে টাকা দেওয়ার আগে fare rule পড়ে নিন। কোনো ধাপ অস্পষ্ট হলে WhatsApp-এ আমাদের প্রশ্ন করুন।"
+                              : "For the BDT price, compare the airline's or hotel's own checkout, and confirm the fare rules before you pay anyone. Ask us on WhatsApp if a step is unclear."}
                           </p>
                           <a
                             href={`https://wa.me/8801784385335?text=${encodeURIComponent(
                               isBn
-                                ? "আসসালামু আলাইকুম URAL ডেস্ক, কাঠমান্ডু থেকে কক্সবাজার ভ্রমণের ফ্লাইট বা হোটেল BDT-তে বুক করতে সাহায্য চাই।"
-                                : "Hello URAL desk, I need help booking flights or a hotel for Kathmandu to Cox's Bazar and would like to pay in BDT."
+                                ? "আসসালামু আলাইকুম URAL, আন্তর্জাতিক কার্ড ছাড়া কক্সবাজার ভ্রমণ নিয়ে একটি প্রশ্ন আছে।"
+                                : "Hello URAL, I have a question about travelling to Cox's Bazar without an international card."
                             )}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="mt-4 inline-flex items-center rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-brand-navy underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:bg-[#F6B73C]"
                           >
                             {isBn
-                              ? "WhatsApp-এ URAL ঢাকা ডেস্কে কথা বলুন →"
-                              : "Chat with the URAL Dhaka desk on WhatsApp →"}
+                              ? "WhatsApp-এ প্রশ্ন করুন →"
+                              : "Ask a question on WhatsApp →"}
                           </a>
                         </section>
                       )}
@@ -2248,14 +2248,14 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
 
-                      {/* The route-specific BDT booking CTA is placed after the article, not in the sidebar. */}
+                      {/* The route-specific "ask before you pay" panel is placed after the article, not in the sidebar. */}
 
                       {!isCoxsBazarFlightGuide && (
                         <div className="bg-brand-navy text-white rounded-2xl p-5 space-y-3 shadow-sm">
 
                         <div className="text-[11px] font-bold uppercase tracking-wider text-[#F6B73C]">
 
-                          {isBn ? "কার্ড ছাড়া BDT-তে বুক করুন" : "No Card? Pay in BDT via WhatsApp"}
+                          {isBn ? "কার্ড ছাড়া ভ্রমণে প্রশ্ন আছে?" : "Travelling Without a Card? Ask Before You Pay"}
 
                         </div>
 
@@ -2263,9 +2263,9 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                           {isBn
 
-                            ? "ঢাকা সাপোর্ট ডেস্কে bKash, Nagad অথবা ব্যাংক ট্রান্সফার করে Flight, মক্কা/মদিনা হোটেল এবং এয়ারপোর্ট পিকআপ বুক করুন।"
+                            ? "URAL চেকলিস্ট প্রকাশ করে। বুক করার আগে এয়ারলাইন্স, হোটেল বা অফিশিয়াল পোর্টালের নিজের checkout-এ সর্বমোট BDT অঙ্ক মিলিয়ে দেখুন।"
 
-                            : "Our Dhaka desk issues flights, Makkah/Madinah hotel vouchers, and airport transfers using bKash, Nagad, or bank transfer."}
+                            : "URAL publishes the checklist. Compare the all-in BDT amount on the airline's, hotel's or official portal's own checkout before you book."}
 
                         </p>
 
@@ -2281,7 +2281,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                         >
 
-                          <span>{isBn ? "WhatsApp-এ মেসেজ দিন" : "Chat on WhatsApp (+8801784385335)"}</span>
+                          <span>{isBn ? "WhatsApp-এ প্রশ্ন করুন" : "Ask a question on WhatsApp (+8801784385335)"}</span>
 
                         </a>
 

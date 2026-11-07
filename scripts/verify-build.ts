@@ -2166,26 +2166,21 @@ check(
     : `route-level code splitting regressed for: ${splitRouteProblems.join(", ")}`
 );
 
-const widgetSrc = read(path.join(ROOT_DIR, "src", "components", "TravelpayoutsWidget.jsx")) ?? "";
+const widgetSrc = read(path.join(ROOT_DIR, "src", "components", "TravelpayoutsWidget.tsx")) ?? "";
 const chartChunkExists = jsChunks.some(
   (file) => file.startsWith("FlightPriceTrendChart-") && file.endsWith(".js")
 );
-const chartOnlyLoadsOnDemand =
-  /const FlightPriceTrendChart = React\.lazy\(\(\) => import\('\.\/FlightPriceTrendChart\.jsx'\)\)/.test(widgetSrc) &&
-  /showPriceTrendChart, setShowPriceTrendChart\] = useState\(false\)/.test(widgetSrc) &&
-  !/from ['"]recharts['"]/.test(widgetSrc) &&
-  (() => {
-    const trigger = widgetSrc.indexOf("{showPriceTrendChart && (");
-    const chartCard = widgetSrc.indexOf("<div id={`${instanceId}-price-trend-chart`}", trigger);
-    const suspense = widgetSrc.indexOf("<React.Suspense", chartCard);
-    return trigger >= 0 && chartCard > trigger && suspense > chartCard && suspense - trigger < 500;
-  })() &&
-  chartChunkExists;
+// Number rule, 7 November: the unsupported simulated chart is replaced by
+// the provider's date comparison. Neither its fake data nor Recharts ships.
+const chartOnlyLoadsOnDemand = !chartChunkExists &&
+  !/FlightPriceTrendChart|dateFactor|from ['"]recharts['"]/.test(widgetSrc) &&
+  widgetSrc.includes('data-flight-date-comparison') &&
+  widgetSrc.includes('href={liveFormUralWlUrl}');
 check(
   chartOnlyLoadsOnDemand,
   chartOnlyLoadsOnDemand
-    ? "Travelpayouts' Recharts fare trend is a user-triggered lazy chunk (not mounted or downloaded at widget load)"
-    : "fare chart must be hidden by default, dynamically imported, and emitted as its own chunk"
+    ? "flight date comparison hands off to the provider; no simulated fare chart or Recharts chunk is shipped"
+    : "flight date comparison must use the hosted provider, without simulated fares or the retired chart chunk"
 );
 
 // Below-the-fold trust and booking-hub components stay out of the eager App
@@ -3250,7 +3245,7 @@ if (sitemap) {
     "src/components/KlookHotelSpotlight.tsx",
     "src/components/KlookHotelOffers.tsx",
     "src/components/TravelEssentials.tsx",
-    "src/components/TravelpayoutsWidget.jsx",
+    "src/components/TravelpayoutsWidget.tsx",
     "src/components/ExperiencesPage.tsx",
     "src/App.tsx",
     "scripts/prerender.ts",
@@ -8033,6 +8028,89 @@ check(
   blogIndexSource.includes("Opens in a new tab") &&
     blogIndexSource.includes("নতুন ট্যাবে খুলবে"),
   "blog listing: the new-tab behaviour is announced in English and Bengali"
+);
+
+// --- Quote-based tools: crawlable controls, parity and the Number rule --------
+for (const locale of ["en", "bn"] as const) {
+  const prefix = locale === "bn" ? "bn/" : "";
+  const estimatorHtml = read(path.join(DIST_DIR, prefix, "tools/budget-calculator.html")) ?? "";
+  const converterHtml = read(path.join(DIST_DIR, prefix, "tools/currency-converter.html")) ?? "";
+  const requiredIds = ["trip-cost-estimator", "trip-destination", "trip-origin", "trip-adults", "trip-children", "trip-infants", "trip-days", "trip-nights", "trip-rooms", "trip-quote-source", "trip-quote-date", "trip-display-currency"];
+  const hasHonestInitialEstimator = (html: string) => requiredIds.every((id) => html.includes(`id="${id}"`)) &&
+    !html.includes("data-trip-estimate-total") && html.includes("https://flights.uraltravel.co.uk/");
+  check(hasHonestInitialEstimator(estimatorHtml), `${locale} estimator ships all controls, source/date fields, a flight handoff and no invented initial total`);
+  check(!hasHonestInitialEstimator(estimatorHtml.replace('id="trip-quote-date"', 'id="missing-date"')), `${locale} estimator guard catches a removed date field (negative control)`);
+  check(converterHtml.includes('id="input-converter-bdt"') && !converterHtml.includes("data-converted-currency"), `${locale} converter renders its input without a fabricated initial rate`);
+  for (const cost of TRIP_COSTS_DATA) {
+    const localized = locale === "bn" ? getLocalizedCosts("bn").find((item) => item.id === cost.id)! : cost;
+    const html = read(path.join(DIST_DIR, prefix, "costs", `${cost.id}.html`)) ?? "";
+    check(hasHonestInitialEstimator(html) && localized.references.every((reference) => html.includes(reference.url)), `${locale} ${cost.id} has its quote estimator and official planning links in saved HTML`);
+    const priceClaims = /(?:BDT|USD|AED|SGD|NPR|THB|MYR|MVR)\s*[0-9০-৯]|PriceSpecification/;
+    check(!priceClaims.test(JSON.stringify(localized)) && !html.includes('"@type":"PriceSpecification"'), `${locale} ${cost.id} does not syndicate unsourced price totals or price schema`);
+  }
+}
+const fixedRateFiles: string[] = [];
+(function scanRateConstants(directory: string) {
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const filename = path.join(directory, entry.name);
+    if (entry.isDirectory()) scanRateConstants(filename);
+    else if (/\.[jt]sx?$/.test(entry.name) && /rateFromBdt\s*:\s*1\s*\/|rate\s*:\s*0\.0084|≈\s*\d[\d.]*\s*BDT|exchangeRateText/.test(read(filename) ?? "")) fixedRateFiles.push(filename);
+  }
+})(path.join(ROOT_DIR, "src"));
+check(fixedRateFiles.length === 0, `no fixed FX constants or legacy prose-rate fields remain in src [${fixedRateFiles.join(", ")}]`);
+check(!/Trip Budget Calculator|Fast Budget Planner|Open Budget Calculator/.test(toolsAppSource) &&
+  toolsAppSource.includes('"ট্রিপ কস্ট এস্টিমেটর" : "Trip Cost Estimator"'), "desktop, mobile and home use the Trip Cost Estimator name");
+
+// --- Number rule on route, destination and visa records ----------------------
+const moneyFigure = /(?:BDT|USD|SAR|AED|MYR|SGD|THB|৳)\s*[0-9০-৯]/;
+const flightMoneyOffenders = FLIGHTS_DATA.filter((route) => moneyFigure.test(JSON.stringify(route)));
+check(
+  flightMoneyOffenders.length === 0,
+  `flight route records publish no undated fare figures [${flightMoneyOffenders.map((route) => route.id).join(", ")}]`
+);
+check(
+  moneyFigure.test(JSON.stringify({ ...FLIGHTS_DATA[0], priceRangeBdt: "BDT 28,000" })),
+  "flight fare guard catches a reintroduced price range (negative control)"
+);
+const flightHtmlOffenders = ["flights.html", ...FLIGHTS_DATA.map((route) => `flights/${route.id}.html`)]
+  .flatMap((page) => [page, `bn/${page}`])
+  .filter((page) =>
+    // Related-blog card titles are separate editorial debt; this guard covers route fare claims.
+    moneyFigure.test(
+      (read(path.join(DIST_DIR, page)) ?? "").replace(
+        /<a\b[^>]*href="[^"]*\/blog\/[^"]*"[^>]*>[\s\S]*?<\/a>/g,
+        ""
+      )
+    )
+  );
+check(
+  flightHtmlOffenders.length === 0,
+  `saved flight pages publish no undated fare figures [${flightHtmlOffenders.join(", ")}]`
+);
+check(
+  moneyFigure.test(`<p>Fares from BDT 28,000.</p>`),
+  "saved flight page guard still catches an undated fare in prose (negative control)"
+);
+const budgetOffenders = DESTINATIONS_DATA.filter((guide) => moneyFigure.test(guide.budgetBdt));
+check(
+  budgetOffenders.length === 0,
+  `destination budget fields carry no undated figures [${budgetOffenders.map((guide) => guide.id).join(", ")}]`
+);
+const visaFeeOffenders = VISA_DATA.filter((visa) => moneyFigure.test(visa.costBdt));
+check(
+  visaFeeOffenders.length === 0,
+  `visa fee fields carry no undated BDT figures [${visaFeeOffenders.map((visa) => visa.id).join(", ")}]`
+);
+check(
+  moneyFigure.test("BDT 3,800"),
+  "visa fee guard catches a reintroduced BDT amount (negative control)"
+);
+const pricedVisaSchema = VISA_DATA.filter((visa) =>
+  /"estimatedCost"\s*:\s*\{[\s\S]{0,160}?"value"\s*:\s*"(?!0")[^"]+"/.test(visa.schemaMarkup?.code ?? "")
+);
+check(
+  pricedVisaSchema.length === 0,
+  `visa schema publishes no unsourced MonetaryAmount prices [${pricedVisaSchema.map((visa) => visa.id).join(", ")}]`
 );
 
 // --- Report ----------------------------------------------------------------

@@ -133,15 +133,15 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 </a>
 
                 <a
-                  href="https://wa.me/8801784385335?text=Assalamu%20Alaikum%20URAL%2C%20I%20want%20help%20planning%20my%20Umrah%20trip%20in%20BDT!"
+                  href="https://wa.me/8801784385335?text=Assalamu%20Alaikum%20URAL%2C%20I%20have%20a%20question%20about%20planning%20a%20Umrah%20trip%20from%20Bangladesh."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-brand-emerald hover:bg-brand-emerald/90 text-white font-bold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition-colors inline-flex items-center gap-2"
                 >
                   <span>
                     {isBn
-                      ? "WhatsApp BDT ওমরাহ ডেস্ক"
-                      : "WhatsApp BDT Desk (+8801784385335)"}
+                      ? "WhatsApp-এ ওমরাহ প্রশ্ন করুন"
+                      : "Ask an Umrah Question on WhatsApp (+8801784385335)"}
                   </span>
                 </a>
               </div>
@@ -191,11 +191,11 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               </div>
             </div>
 
-            {/* Right Column: Dual-Mode Conversion Card (DIY vs. BDT Desk) (5 Cols) */}
+            {/* Right Column: Dual-Mode Planning Card (DIY vs. Agency & Payment Questions) (5 Cols) */}
             <div className="lg:col-span-5 bg-brand-navy/95 backdrop-blur-md border border-white/15 rounded-3xl p-6 sm:p-7 space-y-5 shadow-2xl">
               <div className="space-y-1">
                 <span className="text-[11px] font-mono text-[#F6B73C] font-semibold uppercase tracking-wider block">
-                  {isBn ? "আপনার বুকিং পদ্ধতি বেছে নিন" : "Select Your Umrah Booking Path"}
+                  {isBn ? "আপনার ওমরাহ পরিকল্পনার পথ বেছে নিন" : "Choose Your Umrah Planning Path"}
                 </span>
                 <div className="flex items-center gap-1 p-1 bg-[#071120] rounded-xl border border-slate-800 mt-2">
                   <button
@@ -218,7 +218,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                         : "text-slate-300 hover:text-white"
                     }`}
                   >
-                    {isBn ? "২. BDT ডেস্ক সাপোর্ট" : "2. Pay in BDT Desk"}
+                    {isBn ? "২. এজেন্সি ও পেমেন্ট" : "2. Agency & Payment Questions"}
                   </button>
                 </div>
               </div>
@@ -271,32 +271,32 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 <div className="space-y-4 text-xs">
                   <h2 className="ural-section-title font-serif text-base sm:text-lg font-bold text-white">
                     {isBn
-                      ? "পাসপোর্টে ডলার এন্ডোর্সমেন্ট নেই? সম্পূর্ণ BDT-তে বুক করুন"
-                      : "No Dual-Currency Card? Book Your Custom Umrah in BDT"}
+                      ? "পাসপোর্টে ডলার এন্ডোর্সমেন্ট নেই? এজেন্সির পথটি আসলে কীভাবে কাজ করে"
+                      : "No Dual-Currency Card? How the Agency Route Actually Works"}
                   </h2>
                   <p className="text-slate-300 leading-relaxed">
                     {isBn
-                      ? "আপনি নিজের পছন্দমতো ফ্লাইট ও মক্কা-মদিনার হোটেল বাছাই করুন—আমাদের ঢাকা টিম অনুমোদিত প্রক্রিয়ায় সৌদি ওমরাহ ভিসা (হোটেল ও ট্রান্সপোর্টসহ), রিটার্ন এয়ার টিকিট ও এয়ারপোর্ট পিকআপ বাংলাদেশি টাকায় (ব্যাংক ট্রান্সফার / bKash / Nagad) সম্পন্ন করতে সহায়তা করবে।"
-                      : "Choose your preferred flight dates and Makkah/Madinah hotels—our Dhaka desk assists with authorized Saudi Umrah visa packages (bundled with accommodation and transport per Ministry rules), air tickets, and transfers in BDT."}
+                      ? "আপনি নিজের পছন্দমতো ফ্লাইট ও মক্কা-মদিনার হোটেল বাছাই করতে পারেন, তবে প্যাকেজ বিক্রি করে লাইসেন্সপ্রাপ্ত ওমরাহ এজেন্সি; সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের নিয়মে ভিসার সঙ্গে থাকা-খাওয়া ও যাতায়াত বান্ডল করা বাধ্যতামূলক। লাইসেন্সপ্রাপ্ত এজেন্সির লিখিত কোটেশন মিলিয়ে দেখুন, অফিশিয়াল Nusuk বা সৌদি মন্ত্রণালয়ের পাতায় ভিসা যাচাই করুন, আর কোনো ধাপ বা কাগজ অস্পষ্ট হলে WhatsApp-এ আমাদের প্রশ্ন করুন।"
+                      : "A licensed Umrah agency sells the package, and Saudi Ministry of Hajj and Umrah rules require the visa to be bundled with accommodation and transport. Compare a licensed agency's written quote, confirm the visa on the official Nusuk or Saudi ministry pages, and ask us on WhatsApp if a step or document is unclear."}
                   </p>
                   <div className="bg-[#071120] border border-slate-800 rounded-xl p-3.5 space-y-1">
                     <div className="text-[11px] text-slate-400 font-mono">
-                      {isBn ? "সরাসরি ওমরাহ ডেস্ক (ঢাকা):" : "Direct Dhaka Umrah Desk:"}
+                      {isBn ? "প্রশ্নের জন্য WhatsApp:" : "Questions on WhatsApp:"}
                     </div>
                     <div className="text-sm font-mono font-bold text-[#F6B73C]">
-                      +8801784385335 (WhatsApp & Hotline)
+                      +8801784385335 (WhatsApp)
                     </div>
                   </div>
                   <a
-                    href="https://wa.me/8801784385335?text=Assalamu%20Alaikum%20URAL%2C%20I%20want%20a%20custom%20Umrah%20quote%20in%20BDT%20(Visa%20%2B%20Flight%20%2B%20Hotels)."
+                    href="https://wa.me/8801784385335?text=Assalamu%20Alaikum%20URAL%2C%20I%20have%20a%20question%20about%20planning%20a%2014-day%20Umrah%20trip%20from%20Bangladesh."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full bg-brand-emerald hover:bg-brand-emerald/90 text-white font-bold text-xs py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5"
                   >
                     <span>
                       {isBn
-                        ? "WhatsApp-এ কাস্টম BDT কোটেশন নিন"
-                        : "Request Custom BDT Quote on WhatsApp"}
+                        ? "WhatsApp-এ ওমরাহ প্রশ্ন করুন"
+                        : "Ask an Umrah Question on WhatsApp"}
                     </span>
                   </a>
                 </div>

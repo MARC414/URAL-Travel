@@ -110,38 +110,38 @@ export interface ToolPageMeta {
 
 export const TOOL_PAGE_SEO: Record<string, ToolPageMeta> = {
   "currency-converter": {
-    nameEn: "BDT Currency Converter",
-    nameBn: "BDT কারেন্সি কনভার্টার",
-    titleEn: "BDT Currency Converter for Bangladeshi Travelers | URAL",
+    nameEn: "Currency Converter",
+    nameBn: "কারেন্সি কনভার্টার",
+    titleEn: "Currency Converter: Dated BDT Reference Rates | URAL",
     descriptionEn:
-      "Convert Taka into USD, AED, SAR, NPR, THB and MYR with indicative rates, card-markup notes and the $18,000 endorsement quota reminder.",
-    titleBn: "বাংলাদেশি ভ্রমণকারীদের জন্য BDT কারেন্সি কনভার্টার | URAL",
+      "Convert BDT into USD, EUR, GBP, SAR, AED, NPR, THB, MYR, SGD and MVR using the provider’s dated daily reference rates.",
+    titleBn: "কারেন্সি কনভার্টার: তারিখসহ BDT রেফারেন্স রেট | URAL",
     descriptionBn:
-      "ডলার, দিরহম, রিয়াল, নেপালি রুপি, বাট ও রিংগিটে টাকার রূপান্তর — কার্ড মার্কআপ নোট ও বার্ষিক $১৮,০০০ কোটা রিমাইন্ডারসহ।",
-    h1En: "BDT Currency Converter for Bangladeshi Travelers",
-    h1Bn: "বাংলাদেশি ভ্রমণকারীদের জন্য BDT কারেন্সি কনভার্টার",
+      "Provider-এর তারিখসহ দৈনিক রেফারেন্স রেটে BDT থেকে USD, EUR, GBP, SAR, AED, NPR, THB, MYR, SGD ও MVR হিসাব করুন।",
+    h1En: "Currency Converter",
+    h1Bn: "কারেন্সি কনভার্টার",
     subEn:
-      "Convert Taka to USD, AED, SAR, NPR, THB and MYR with card-markup notes for Dhaka travellers.",
+      "Convert BDT with the latest available daily reference rates. Each conversion shows its provider and rate date.",
     subBn:
-      "ডলার, দিরহম, রিয়াল, নেপালি রুপি, বাট ও রিংগিটে টাকার হিসাব — কার্ড মার্কআপ নোটসহ।",
-    serviceNameEn: "BDT Currency Converter for Bangladesh Outbound Travel",
+      "সর্বশেষ উপলব্ধ দৈনিক রেফারেন্স রেটে BDT রূপান্তর করুন। প্রতিটি হিসাবের সঙ্গে provider ও রেটের তারিখ থাকে।",
+    serviceNameEn: "Currency Converter",
   },
   "budget-calculator": {
     nameEn: "Trip Cost Estimator",
     nameBn: "ট্রিপ কস্ট এস্টিমেটর",
-    titleEn: "Trip Cost Estimator in BDT from Bangladesh | URAL",
+    titleEn: "Trip Cost Estimator: Quotes, Travellers & Hotel Nights | URAL",
     descriptionEn:
-      "Estimate flights, hotels, meals, transport and attraction tickets for Nepal, Thailand, Malaysia or Dubai — all in Bangladeshi Taka.",
-    titleBn: "টাকায় ট্রিপ খরচের হিসাব: বাংলাদেশ থেকে ভ্রমণ বাজেট | URAL",
+      "Calculate a sourced, dated trip estimate for Nepal, Thailand, Malaysia, Dubai, Singapore or the Maldives. Separate adult, child, infant and room-night costs.",
+    titleBn: "ট্রিপ কস্ট এস্টিমেটর: কোটেশন, যাত্রী ও হোটেলের রাত | URAL",
     descriptionBn:
-      "নেপাল, থাইল্যান্ড, মালেশিয়া বা দুবাইয়ের ফ্লাইট, হোটেল, খাবার ও টিকিটের খরচ বাংলাদেশি টাকায় হিসাব করুন।",
-    h1En: "Trip Cost Estimator in BDT from Bangladesh",
-    h1Bn: "টাকায় ট্রিপ খরচের হিসাব: বাংলাদেশ থেকে ভ্রমণ বাজেট",
+      "নেপাল, থাইল্যান্ড, মালয়েশিয়া, দুবাই, সিঙ্গাপুর বা মালদ্বীপের ট্রিপ হিসাব করুন উৎস ও তারিখসহ। প্রাপ্তবয়স্ক, শিশু, ইনফ্যান্ট ও রুম-রাত আলাদা রাখুন।",
+    h1En: "Trip Cost Estimator",
+    h1Bn: "ট্রিপ কস্ট এস্টিমেটর",
     subEn:
-      "Estimate flights, hotels, meals, transport and tickets for Nepal, Thailand, Malaysia or Dubai — all in BDT.",
+      "Plan 1–30 days for up to 12 travellers. Add dated quotes, check every cost, and display your estimate in BDT or USD.",
     subBn:
-      "নেপাল, থাইল্যান্ড, মালেশিয়া বা দুবাইয়ের ফ্লাইট, হোটেল, খাবার ও টিকিটের খরচ টাকায় হিসাব করুন।",
-    serviceNameEn: "BDT Trip Budget Estimator for Outbound Bangladesh Travel",
+      "সর্বোচ্চ ১২ জনের জন্য ১–৩০ দিনের পরিকল্পনা করুন। তারিখসহ কোটেশন দিয়ে প্রতিটি খরচ মিলিয়ে BDT বা USD-তে ফল দেখুন।",
+    serviceNameEn: "Trip Cost Estimator",
   },
   "packing-checklist": {
     nameEn: "Packing Checklist",

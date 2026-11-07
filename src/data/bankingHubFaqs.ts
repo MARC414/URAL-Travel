@@ -71,10 +71,10 @@ export const BANKING_HUB_FAQS: BankingFaq[] = [
   {
     question: "Can I book flights and hotels in BDT without a dual-currency card?",
     answer:
-      "Yes, through a travel desk that settles in Taka and issues the airline PNR and hotel voucher; URAL's Dhaka desk works this way by bank transfer, bKash or Nagad. Treat it as a service arrangement, not a bank product: compare the all-in BDT quote with the airline's own card price, confirm the PNR directly with the airline, and read the cancellation terms before paying.",
+                  "Yes, through a travel desk that settles in Taka and issues the airline PNR and hotel voucher — but choose it yourself, and check it. Compare the all-in BDT quote with the airline's own card price, confirm the PNR directly with the airline, and read the cancellation terms before paying. URAL publishes this checklist and links the official portals and partners.",
     questionBn: "ডুয়েল কারেন্সি কার্ড ছাড়া BDT-তে ফ্লাইট ও হোটেল বুক করা যায়?",
     answerBn:
-      "হ্যাঁ, এমন ট্রাভেল ডেস্কের মাধ্যমে যারা টাকায় settlement করে airline PNR ও হোটেল ভাউচার দেয়; URAL-এর ঢাকা ডেস্ক ব্যাংক ট্রান্সফার, bKash বা Nagad-এ এভাবে কাজ করে। এটিকে ব্যাংকের পণ্য নয়, service ব্যবস্থা হিসেবে দেখুন: সর্বমোট BDT quote এয়ারলাইন্সের কার্ড-দামের সঙ্গে মিলিয়ে দেখুন, PNR সরাসরি এয়ারলাইন্সের কাছে যাচাই করুন, আর পেমেন্টের আগে বাতিলের শর্ত পড়ুন।",
+                  "হ্যাঁ, এমন ট্রাভেল ডেস্কের মাধ্যমে যারা টাকায় settlement করে airline PNR ও হোটেল ভাউচার দেয়—তবে ডেস্ক নিজে বাছুন এবং যাচাই করুন। সর্বমোট BDT quote এয়ারলাইন্সের কার্ড-দামের সঙ্গে মিলিয়ে দেখুন, PNR সরাসরি এয়ারলাইন্সের কাছে যাচাই করুন, আর পেমেন্টের আগে বাতিলের শর্ত পড়ুন। URAL এই চেকলিস্ট প্রকাশ করে এবং অফিশিয়াল পোর্টাল ও পার্টনারের লিংক দেয়।",
   },
   {
     question: "Should I buy Saudi Riyals in Dhaka or carry US dollars?",

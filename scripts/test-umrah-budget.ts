@@ -86,4 +86,12 @@ for (const lang of ["en", "bn"] as const) {
     }
   });
 }
+test("Umrah currency defaults follow origin while all eight inputs remain BDT", () => {
+  for (const [originCode, currency] of [["DAC", "BDT"], ["ZYL", "BDT"], ["LHR", "USD"]] as const) {
+    const html = renderToStaticMarkup(React.createElement(UmrahBudgetCalculator, { isBn: false, originCode }));
+    assert.ok(html.includes(`<option value="${currency}" selected=""`));
+    assert.ok(html.includes("Whole-party totals by category (BDT)"));
+    assert.ok(!html.includes('data-umrah-budget-total="true"'));
+  }
+});
 console.log(`\n${assertions} Umrah budget and topic-map tests passed.`);

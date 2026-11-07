@@ -188,27 +188,25 @@ test("the component is actually wired to these helpers", () => {
   // React effects do not run under renderToStaticMarkup, so the wiring itself
   // is asserted from source. Without this, the helpers could be perfectly
   // tested and never called — which is exactly the defect WP4 exists to fix.
-  const source = readFileSync(
-    new URL("../src/components/InteractiveTools.tsx", import.meta.url),
-    "utf8"
-  );
+  const workspace = readFileSync(new URL("../src/components/InteractiveTools.tsx", import.meta.url), "utf8");
+  const estimator = readFileSync(new URL("../src/components/TripCostEstimator.tsx", import.meta.url), "utf8");
+  const converter = readFileSync(new URL("../src/components/CurrencyConverter.tsx", import.meta.url), "utf8");
+  assert.ok(workspace.includes("<TripCostEstimator") && workspace.includes("<CurrencyConverter"), "measured tools must actually be mounted");
+  const source = [workspace, estimator, converter].join("\n");
   for (const call of [
     "trackToolOpen(",
     'trackToolResult("budget-estimator"',
     'trackToolResult("currency-converter"',
     'trackToolResult("packing-checklist"',
   ]) {
-    assert.ok(source.includes(call), `InteractiveTools never calls ${call}`);
+    assert.ok(source.includes(call), `the tools workspace never calls ${call}`);
   }
   assert.ok(source.includes("partySizeBand("), "party size is not being banded");
   assert.ok(source.includes("durationBand("), "duration is not being banded");
-  // The raw values must never be handed to the tracker: every occurrence of
-  // `calcPeeps`/`calcDays` inside a tracker call must be wrapped in its banding
-  // function. (A naive "contains calcPeeps" check false-positives on
-  // `partySizeBand(calcPeeps)`, so this looks at the preceding token instead.)
-  const estimatorCall = source.slice(source.indexOf('trackToolResult("budget-estimator"'));
-  const callText = estimatorCall.slice(0, 400);
-  for (const [raw, wrapper] of [["calcPeeps", "partySizeBand("], ["calcDays", "durationBand("]] as const) {
+  // Counts are banded at the call site; quote amounts and source notes stay local.
+  const callText = estimator.match(/trackToolResult\("budget-estimator",\s*(\{[^}]+\})\)/)?.[1] ?? "";
+  assert.ok(callText);
+  for (const [raw, wrapper] of [["result.travellers", "partySizeBand("], ["days", "durationBand("]] as const) {
     let index = callText.indexOf(raw);
     while (index !== -1) {
       const before = callText.slice(Math.max(0, index - wrapper.length), index);

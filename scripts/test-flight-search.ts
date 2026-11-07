@@ -5,7 +5,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { buildFlightSearchCode, buildWhiteLabelUrl, getLegacyWhiteLabelUrl, FLIGHT_WHITE_LABEL, DEFAULT_FLIGHT_CURRENCY, isBangladeshAirport, preferredCurrencyForOrigin } from "../src/utils/flightSearch";
 import { onRequest } from "../functions/_middleware.js";
-import TravelpayoutsWidget from "../src/components/TravelpayoutsWidget.jsx";
+import TravelpayoutsWidget from "../src/components/TravelpayoutsWidget.tsx";
 import { TravelpayoutsCustomWidget } from "../src/components/TravelpayoutsCustomWidget";
 
 const trip = { origin: "DAC", destination: "BKK", departureDate: "2027-11-15", returnDate: "2027-11-22", adults: 3 };
@@ -39,14 +39,22 @@ assert.equal(DEFAULT_FLIGHT_CURRENCY, "USD", "the hosted Page default is USD, no
 assert.equal(new URL(buildWhiteLabelUrl()).searchParams.get("currency"), "USD", "a bare handoff opens in USD");
 assert.equal(new URL(buildWhiteLabelUrl({ currency: "bogus" })).searchParams.get("currency"), "USD", "an unknown currency falls back to USD");
 assert.equal(new URL(buildWhiteLabelUrl({ currency: "bdt" })).searchParams.get("currency"), "BDT", "an explicit selection is still honoured");
-for (const code of ["DAC", "cgp", " CXB ", "syl", "JSR", "RJH", "SPD", "BAR"]) {
+for (const code of ["DAC", "cgp", " CXB ", "zyl", "JSR", "RJH", "SPD", "BZL"]) {
   assert.equal(preferredCurrencyForOrigin(code), "BDT", `${code} is a Bangladesh departure`);
 }
-for (const code of ["LHR", "JFK", "", "RAJ", "DXB"]) {
+for (const code of ["LHR", "JFK", "", "RAJ", "DXB", "SYL", "BAR"]) {
   assert.equal(preferredCurrencyForOrigin(code), "USD", `${code} is not a Bangladesh departure`);
 }
-assert.equal(isBangladeshAirport("syl"), true);
+assert.equal(isBangladeshAirport("zyl"), true);
 assert.equal(isBangladeshAirport("RAJ"), false, "RAJ is Rajkot, not Rajshahi");
+
+for (const lang of ["en", "bn"] as const) {
+  const html = renderToStaticMarkup(React.createElement(TravelpayoutsWidget as React.ComponentType<any>, { lang, showQuickRoutes: true, showInlineResults: true }));
+  assert.ok(html.includes("data-flight-date-comparison"));
+  assert.ok(html.includes("https://flights.uraltravel.co.uk/"));
+  assert.ok(!/Lowest Fare Found|30-Day Flight Price Trend|Base fare:|Round-trip incl\. taxes/.test(html), "unsupported sample fares and date-based forecasts must not render");
+  assert.ok(!/(?:BDT|USD)\s*\d|৳\s*\d/.test(html), "no price without a dated supplier quote");
+}
 
 const bridge = fs.readFileSync(new URL("../public/travelpayouts-wl.html", import.meta.url), "utf8");
 const bridgeScript = bridge.match(/<script>([\s\S]*?)<\/script>/)?.[1];

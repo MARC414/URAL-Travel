@@ -56,7 +56,7 @@ export function buildShareCaption({ title, snippet, slug, isBn }: ShareCaptionIn
         "",
         `👉 সম্পূর্ণ গাইড: ${url}`,
         `🌐 Facebook: ${BRAND_HANDLE}`,
-        `💬 BDT বুকিং WhatsApp: ${BRAND_WHATSAPP_DISPLAY}`,
+        `💬 প্রশ্ন করুন WhatsApp-এ: ${BRAND_WHATSAPP_DISPLAY}`,
       ]
     : [
         `✈️ ${title}`,
@@ -66,7 +66,7 @@ export function buildShareCaption({ title, snippet, slug, isBn }: ShareCaptionIn
         "",
         `👉 Read Full Guide: ${url}`,
         `🌐 Follow URAL: ${BRAND_HANDLE}`,
-        `💬 BDT Booking via WhatsApp: ${BRAND_WHATSAPP_DISPLAY}`,
+        `💬 Questions on WhatsApp: ${BRAND_WHATSAPP_DISPLAY}`,
       ];
   return lines.join("\n");
 }

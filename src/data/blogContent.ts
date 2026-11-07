@@ -1538,7 +1538,10 @@ Step 3: Pay in BDT and receive the documents:
 - **Asian and Middle East holiday components:** flights, hotels and airport transfers for Nepal, Thailand, Malaysia, the Maldives, Singapore and the UAE, again subject to the traveller's own visa status.
 
 5. THE CARD ROUTE IS STILL THE DEFAULT FOR MANY TRIPS
-A BDT desk is a useful fallback, not a replacement for a card you control. If you can endorse your passport and activate a dual-currency card in time, your own name and account stay on the booking, the PNR and the receipt. The USD 300 single-online-purchase rule and the bank's decision on a larger documented payment are explained in the cluster guides linked below [2].`,
+A BDT desk is a useful fallback, not a replacement for a card you control. If you can endorse your passport and activate a dual-currency card in time, your own name and account stay on the booking, the PNR and the receipt. The USD 300 single-online-purchase rule and the bank's decision on a larger documented payment are explained in the cluster guides linked below [2].
+
+6. WHERE URAL STANDS
+URAL is an independent travel-information and affiliate platform: it publishes researched guides, links official portals and the partners that issue each service, and answers questions on WhatsApp or through the contact form. The booking itself is completed with the airline, the hotel, the platform that sells the ticket, or a licensed agency you choose.`,
   "cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide": `Poor currency exchange choices quietly drain a family's travel budget. Whether you are flying from **Dhaka (DAC)** to **Jeddah or Madinah** for Umrah, or heading to **Bangkok, Kuala Lumpur, Singapore, Dubai or the Maldives**, three decisions matter most: when to carry **local cash**, when to carry **US dollars**, and how to use a **dual-currency card** at an overseas terminal without converting twice.
 
 1. UMRAH CURRENCY: BUY SAUDI RIYALS IN DHAKA, OR CARRY US DOLLARS?

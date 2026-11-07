@@ -1,5 +1,5 @@
 import React from "react";
-import TravelpayoutsWidget from "./TravelpayoutsWidget.jsx";
+import TravelpayoutsWidget from "./TravelpayoutsWidget.tsx";
 
 interface TravelpayoutsEmbedProps {
   defaultOrigin?: string;

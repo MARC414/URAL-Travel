@@ -40,9 +40,9 @@ export default function AboutRouteView({ context }: RouteViewProps) {
 
               {isBn
 
-                ? "URAL হলো বাংলাদেশি ভ্রমণকারীদের জন্য একটি স্বাধীন, নিরপেক্ষ ট্রাভেল গাইড প্ল্যাটফর্ম — যেখানে কোনো বিক্রিত রিভিউ, গোপন পার্টনার চুক্তি বা লুকানো কমিশন নেই।"
+                ? "URAL হলো বাংলাদেশি ও বৈশ্বিক ভ্রমণকারীদের জন্য একটি স্বাধীন ট্রাভেল-ইনফরমেশন প্ল্যাটফর্ম — যেখানে কোনো স্পনসরড রিভিউ বা গাইডের ভেতরে পেইড প্লেসমেন্ট নেই, আর প্রশ্নের উত্তর মেলে WhatsApp বা contact form-এ।"
 
-                : "URAL is an independent, unbiased travel intelligence platform built for Bangladeshi and global travelers — with no sponsored reviews, hidden partner deals, or undisclosed commissions."}
+                : "URAL is an independent travel-information platform for Bangladeshi and global readers — with no sponsored reviews, no paid placement inside a guide, and questions answered on WhatsApp or through the contact form."}
 
             </p>
 
@@ -90,9 +90,9 @@ export default function AboutRouteView({ context }: RouteViewProps) {
 
                 {isBn
 
-                  ? "URAL কোনো লাইসেন্সপ্রাপ্ত ট্রাভেল এজেন্সি নয়, টিকিট বিক্রেতা নয় এবং কোনো এয়ারলাইন বা হোটেলের অফিসিয়াল প্রতিনিধি নয়। আমরা একটি সম্পাদকীয় ইন্টেলিজেন্স সিস্টেম যা আপনাকে সিদ্ধান্ত নিতে সাহায্য করে।"
+                  ? "URAL একটি স্বাধীন তথ্য প্ল্যাটফর্ম: এটি যাচাই করা গাইড প্রকাশ করে, প্রতিটি সেবার অফিশিয়াল পোর্টাল বা অ্যাফিলিয়েট পার্টনারের লিংক দেয়, আর প্রশ্ন ও পরামর্শের উত্তর দেয় WhatsApp ও contact form-এ।"
 
-                  : "URAL is not a licensed travel agency, ticket seller, or official representative of any airline or hotel brand. We are an editorial intelligence system that helps you make informed decisions."}
+                  : "URAL is an independent information platform: it publishes researched guides, links the official portal or the affiliate partner for each service, and answers questions and consultation requests on WhatsApp or through the contact form."}
 
               </p>
 
@@ -194,13 +194,13 @@ export default function AboutRouteView({ context }: RouteViewProps) {
 
                   icon: "💰",
 
-                  titleBn: "কোনো লুকানো ফি নেই",
+                  titleBn: "অ্যাফিলিয়েট লিংক চিহ্নিত",
 
-                  titleEn: "No Hidden Fees",
+                  titleEn: "Affiliate Links, Marked",
 
-                  descBn: "অ্যাফিলিয়েট লিংক সম্পূর্ণ প্রকাশিত এবং আপনার জন্য বিনামূল্যে।",
+                  descBn: "অ্যাফিলিয়েট পার্টনার লিংক যেখানে আছে সেখানেই স্পষ্টভাবে চিহ্নিত।",
 
-                  descEn: "Affiliate links are fully disclosed and cost you nothing extra.",
+                  descEn: "Affiliate partner links are labelled wherever they appear.",
 
                 },
 

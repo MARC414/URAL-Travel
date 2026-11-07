@@ -84,7 +84,7 @@ internalLinksEn:
     path: /blog/kathmandu-to-coxs-bazar-flights-route-status-booking
   - text: "Family trip planning on a BDT budget from Dhaka"
     path: /blog/top-budget-family-destinations-from-dhaka
-  - text: "Contact the URAL Dhaka desk to book in BDT (WhatsApp, bKash, Nagad)"
+  - text: "Ask URAL a question before you pay anyone in BDT"
     path: /contact
 affiliateCtaProvider: aviasales
 affiliateCtaHeadline: "Check the live fare before you fix the budget"
@@ -103,7 +103,7 @@ internalLinksBn:
     path: /blog/kathmandu-to-coxs-bazar-flights-route-status-booking
   - text: "ঢাকা থেকে পরিবারসহ BDT বাজেটে ভ্রমণের পরিকল্পনা"
     path: /blog/top-budget-family-destinations-from-dhaka
-  - text: "BDT-তে বুক করতে URAL-এর ঢাকা ডেস্কে যোগাযোগ (হোয়াটসঅ্যাপ, বিকাশ, নগদ)"
+  - text: "কাউকে BDT-তে টাকা দেওয়ার আগে URAL-কে প্রশ্ন করুন"
     path: /contact
 ---
 
@@ -205,7 +205,7 @@ This guide is written for departures inside Bangladesh. If your trip starts in N
 
 Read the Kathmandu to Cox's Bazar route guide →
 
-Booking without an international card: our Dhaka desk can arrange domestic flight tickets and Cox's Bazar hotel vouchers in BDT over WhatsApp, paid by bKash, Nagad or bank transfer. Confirm live availability and the final amount with the desk before you pay →
+Travelling without an international card? Check the airline's own checkout for the fare you want, and ask us a question on WhatsApp if a step or a document is unclear →
 
 9. Frequently Asked Questions
 Can I fly into Cox's Bazar on an international route right now?

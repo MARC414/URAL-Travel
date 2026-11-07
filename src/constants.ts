@@ -7,16 +7,15 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     from: "Dhaka (DAC)",
     to: "Kathmandu (KTM)",
     country: "Nepal",
-    priceRangeBdt: "BDT 28,000 - BDT 40,000 (Roundtrip, Economy)",
     airlines: ["Biman Bangladesh Airlines", "Himalaya Airlines"],
     bestTimeToBook: "4-8 weeks before departure, especially for the October-November peak season",
     duration: "1h 30m (Direct)",
     visaRequirement: "Free 30-day Visa on Arrival for the first entry of each calendar year (SAARC gratis visa)",
-    quickAnswer: "Direct flights from Dhaka (DAC) to Kathmandu (KTM) take about 1 hour 30 minutes on Biman Bangladesh Airlines and Himalaya Airlines. Round-trip economy fares typically range from BDT 28,000 to BDT 40,000, depending on season and how early you book. Bangladeshi passport holders get a free 30-day Visa on Arrival for their first trip of each calendar year, making this one of the simplest international routes from Dhaka.",
+    quickAnswer: "Direct flights from Dhaka (DAC) to Kathmandu (KTM) take about 1 hour 30 minutes on Biman Bangladesh Airlines and Himalaya Airlines. Compare current fares for your own dates through the flight search; no fixed fare is published here because the total changes with season, availability, baggage and fare conditions. Bangladeshi passport holders get a free 30-day Visa on Arrival for their first trip of each calendar year, making this one of the simplest international routes from Dhaka.",
     keyFacts: [
       { label: "Flight Time", value: "1 hour 30 mins (Direct)" },
       { label: "Direct Airlines", value: "Biman Bangladesh, Himalaya Airlines" },
-      { label: "Average Roundtrip Price", value: "BDT 32,000 - 35,000" },
+      { label: "Fare check", value: "Compare live fares for your dates" },
       { label: "Visa on Arrival for Bangladeshis", value: "Free (1st trip per year)" }
     ],
     faqs: [
@@ -82,16 +81,15 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     from: "Kathmandu (KTM)",
     to: "Dhaka (DAC)",
     country: "Nepal",
-    priceRangeBdt: "BDT 28,000 - BDT 40,000 (Roundtrip, Economy)",
     airlines: ["Biman Bangladesh Airlines", "Himalaya Airlines"],
     bestTimeToBook: "4-8 weeks before departure, especially for the October-November peak season",
     duration: "1h 30m (Direct)",
     visaRequirement: "Bangladeshi citizens do not need a visa to enter Bangladesh. Nepali citizens require a Bangladesh visa (eVisa or Visa on Arrival at DAC, subject to current rules).",
-    quickAnswer: "Direct flights from Kathmandu (KTM) to Dhaka (DAC) take about 1 hour 30 minutes on Biman Bangladesh Airlines and Himalaya Airlines. Round-trip economy fares typically range from BDT 28,000 to BDT 40,000, depending on season and how early you book. Tribhuvan International Airport (KTM) serves as the departure point, with arrivals at Hazrat Shahjalal International Airport (DAC) in Dhaka.",
+    quickAnswer: "Direct flights from Kathmandu (KTM) to Dhaka (DAC) take about 1 hour 30 minutes on Biman Bangladesh Airlines and Himalaya Airlines. Compare current fares for your own dates through the flight search; no fixed fare is published here because the total changes with season, availability, baggage and fare conditions. Tribhuvan International Airport (KTM) serves as the departure point, with arrivals at Hazrat Shahjalal International Airport (DAC) in Dhaka.",
     keyFacts: [
       { label: "Flight Time", value: "1 hour 30 mins (Direct)" },
       { label: "Direct Airlines", value: "Biman Bangladesh, Himalaya Airlines" },
-      { label: "Average Roundtrip Price", value: "BDT 32,000 - 35,000" },
+      { label: "Fare check", value: "Compare live fares for your dates" },
       { label: "Departure Airport", value: "Tribhuvan International Airport (KTM)" },
       { label: "Arrival Airport", value: "Hazrat Shahjalal International Airport (DAC)" }
     ],
@@ -158,22 +156,21 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     from: "Dhaka (DAC)",
     to: "Bangkok (BKK / DMK)",
     country: "Thailand",
-    priceRangeBdt: "BDT 31,500 - BDT 45,000 (Roundtrip)",
     airlines: ["Biman Bangladesh Airlines", "Thai Airways", "US-Bangla Airlines", "Thai Lion Air"],
     bestTimeToBook: "30-50 days before departure",
     duration: "2h 30m (Direct)",
     visaRequirement: "Advance Tourist e-Visa via Thailand's official portal (thaievisa.go.th)",
-    quickAnswer: "Direct flights from Dhaka to Bangkok take about 2 hours and 30 minutes, with economy roundtrip fares typically ranging from BDT 31,500 to BDT 45,000. Major carriers like Biman Bangladesh Airlines, Thai Airways, and US-Bangla Airlines fly to Suvarnabhumi Airport (BKK), while Thai Lion Air operates to Don Mueang Airport (DMK). Bangladeshi passport holders should obtain an approved Tourist e-Visa through Thailand's official portal before departure; check current Dhaka mission instructions.",
+    quickAnswer: "Direct flights from Dhaka to Bangkok take about 2 hours and 30 minutes. Major carriers like Biman Bangladesh Airlines, Thai Airways, and US-Bangla Airlines fly to Suvarnabhumi Airport (BKK), while Thai Lion Air operates to Don Mueang Airport (DMK). Compare current fares, baggage rules and airport choice for your own dates through the flight search; no fixed fare is published here. Bangladeshi passport holders should obtain an approved Tourist e-Visa through Thailand's official portal before departure; check current Dhaka mission instructions.",
     keyFacts: [
       { label: "Flight Time", value: "2 hours 30 mins" },
       { label: "Direct Airlines", value: "Thai Airways, Biman, US-Bangla, Thai Lion" },
-      { label: "Average Roundtrip Price", value: "BDT 36,000" },
+      { label: "Fare check", value: "Compare live fares for your dates" },
       { label: "Main Airports", value: "Suvarnabhumi (BKK) & Don Mueang (DMK)" }
     ],
     faqs: [
       {
-        question: "What is the cheapest airline flying from Dhaka to Bangkok?",
-        answer: "Thai Lion Air (flying to Don Mueang DMK) is usually the most budget-friendly carrier, with tickets starting around BDT 31,000-33,000 for a roundtrip."
+        question: "Which airline is usually cheapest flying from Dhaka to Bangkok?",
+        answer: "Thai Lion Air (flying to Don Mueang DMK) is usually the most budget-friendly carrier. Compare its current total with the same dates and baggage allowance against full-service fares, because a low headline price may exclude checked baggage or airport transfer costs."
       },
       {
         question: "Can citizens of Bangladesh get a Visa on Arrival in Thailand?",
@@ -209,16 +206,15 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     from: "Dhaka (DAC)",
     to: "Kuala Lumpur (KUL)",
     country: "Malaysia",
-    priceRangeBdt: "BDT 36,000 - BDT 48,000 (Roundtrip)",
     airlines: ["Malaysia Airlines", "Biman Bangladesh Airlines", "AirAsia", "US-Bangla Airlines", "Batik Air"],
     bestTimeToBook: "60 days prior to departure",
     duration: "3h 50m (Direct)",
     visaRequirement: "Malaysia eVisa (Single Entry eVisa is highly reliable for Bangladeshis)",
-    quickAnswer: "Bangladeshi outbound tourists can reach Kuala Lumpur (KUL) directly from Dhaka within 3 hours and 50 minutes. Excellent premium services are provided by Malaysia Airlines and Biman, with budget routes run by AirAsia and Batik Air. Fares are usually BDT 36,000 to 48,000 roundtrip. Tourists can smoothly apply for a Malaysian eVisa online, which typically takes 2-5 business days to process.",
+    quickAnswer: "Bangladeshi outbound tourists can reach Kuala Lumpur (KUL) directly from Dhaka within 3 hours and 50 minutes. Excellent premium services are provided by Malaysia Airlines and Biman, with budget routes run by AirAsia and Batik Air. Compare current fares, baggage allowances and seat availability for your own dates through the flight search; no fixed fare is published here. Tourists can smoothly apply for a Malaysian eVisa online, which typically takes 2-5 business days to process.",
     keyFacts: [
       { label: "Flight Time", value: "3 hours 50 mins" },
       { label: "Direct Airlines", value: "Malaysia Airlines, AirAsia, Biman, Batik, US-Bangla" },
-      { label: "Average Roundtrip Price", value: "BDT 40,500" },
+      { label: "Fare check", value: "Compare live fares for your dates" },
       { label: "Visa Requirement", value: "eVisa (Applied online prior)" }
     ],
     faqs: [
@@ -260,16 +256,15 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     from: "Dhaka (DAC)",
     to: "Dubai (DXB)",
     country: "UAE",
-    priceRangeBdt: "BDT 58,000 - BDT 75,000 (Roundtrip)",
     airlines: ["Emirates", "flydubai", "Biman Bangladesh Airlines", "US-Bangla Airlines"],
     bestTimeToBook: "60-90 days before departure",
     duration: "4h 45m (Direct)",
     visaRequirement: "UAE eVisa (Pre-arranged Tourist visa, usually secured via registered travel agencies or airlines)",
-    quickAnswer: "Direct flights from Dhaka to Dubai (DXB) take about 4 hours 45 mins. Direct options range from ultra-premium on Emirates to budget-friendly flydubai, Biman, and US-Bangla Airlines. Fares start around BDT 58,000. Tourist eVisas (30 or 60 days) are processed in 3-5 days via agencies or designated portals, making pre-travel planning vital.",
+    quickAnswer: "Direct flights from Dhaka to Dubai (DXB) take about 4 hours 45 mins. Direct options range from ultra-premium on Emirates to budget-friendly flydubai, Biman, and US-Bangla Airlines. Compare current fares, baggage rules and fare conditions for your own dates through the flight search; no fixed fare is published here. Tourist eVisas (30 or 60 days) are processed in 3-5 days via agencies or designated portals, making pre-travel planning vital.",
     keyFacts: [
       { label: "Flight Time", value: "4 hours 45 mins" },
       { label: "Direct Airlines", value: "Emirates, flydubai, Biman, US-Bangla" },
-      { label: "Average Roundtrip Price", value: "BDT 66,000" },
+      { label: "Fare check", value: "Compare live fares for your dates" },
       { label: "Best Booking Window", value: "2-3 months prior" }
     ],
     faqs: [
@@ -307,16 +302,15 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     from: "Dhaka (DAC)",
     to: "Singapore (SIN)",
     country: "Singapore",
-    priceRangeBdt: "BDT 42,000 - BDT 62,000 (Roundtrip)",
     airlines: ["Biman Bangladesh Airlines", "Singapore Airlines", "US-Bangla Airlines"],
     bestTimeToBook: "45-60 days before departure",
     duration: "4h 15m (Direct)",
     visaRequirement: "Pre-arranged Singapore e-Visa (Applied via Authorized Visa Agents in Dhaka/Chattogram)",
-    quickAnswer: "Direct flights from Dhaka (DAC) to Singapore Changi Airport (SIN) take approximately 4 hours and 15 minutes. Biman Bangladesh Airlines, US-Bangla Airlines, and Singapore Airlines operate daily non-stop flights on this route. Roundtrip economy fares typically range from BDT 42,000 to BDT 62,000, while one-stop transit flights via Kuala Lumpur on AirAsia or Batik Air can drop to BDT 36,000. Bangladeshi passport holders must obtain a pre-arranged Singapore e-Visa through an embassy-authorized agent and submit the free SG Arrival Card online within 3 days before flying.",
+    quickAnswer: "Direct flights from Dhaka (DAC) to Singapore Changi Airport (SIN) take approximately 4 hours and 15 minutes. Biman Bangladesh Airlines, US-Bangla Airlines, and Singapore Airlines operate daily non-stop flights on this route. Compare current direct and one-stop fares for your own dates through the flight search; no fixed fare is published here. Bangladeshi passport holders must obtain a pre-arranged Singapore e-Visa through an embassy-authorized agent and submit the free SG Arrival Card online within 3 days before flying.",
     keyFacts: [
       { label: "Flight Time", value: "4 hours 15 mins (Direct)" },
       { label: "Direct Airlines", value: "Singapore Airlines, Biman, US-Bangla" },
-      { label: "Average Roundtrip Price", value: "BDT 46,500" },
+      { label: "Fare check", value: "Compare live fares for your dates" },
       { label: "Visa Requirement", value: "Authorized Agent e-Visa + SGAC" }
     ],
     faqs: [
@@ -325,8 +319,8 @@ export const FLIGHTS_DATA: FlightRoute[] = [
         answer: "Singapore Airlines, Biman Bangladesh Airlines, and US-Bangla Airlines operate daily non-stop flights from Hazrat Shahjalal International Airport (DAC) to Singapore Changi Airport (SIN), taking roughly 4 hours and 15 minutes."
       },
       {
-        question: "What is the cheapest way to fly from Dhaka to Singapore?",
-        answer: "US-Bangla Airlines and Biman Bangladesh Airlines offer the lowest direct roundtrip fares starting around BDT 42,000-46,000. If you only carry 7kg cabin baggage, a one-stop flight via Kuala Lumpur on AirAsia or Batik Air can cost between BDT 35,000 and BDT 39,000 roundtrip."
+        question: "How can I compare the cheapest way to fly from Dhaka to Singapore?",
+        answer: "Compare direct and one-stop itineraries for the same dates, then add baggage, seat and transfer costs before deciding. A one-stop flight via Kuala Lumpur can have a lower headline fare, but check the total journey time, baggage rules and whether both sectors are on one ticket."
       },
       {
         question: "Do Bangladeshi travelers need to fill out the SG Arrival Card before boarding?",
@@ -362,16 +356,15 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     from: "Dhaka (DAC)",
     to: "Malé (MLE)",
     country: "Maldives",
-    priceRangeBdt: "BDT 46,000 - BDT 68,000 (Roundtrip)",
     airlines: ["US-Bangla Airlines", "SriLankan Airlines", "Maldivian", "Malaysia Airlines"],
     bestTimeToBook: "45-75 days before departure (especially ahead of November-March dry season)",
     duration: "4h 10m (Direct) / 6h 30m (via Colombo)",
     visaRequirement: "Free 30-day Tourist Visa on Arrival + Mandatory IMUGA form within 96 hours",
-    quickAnswer: "Direct flights from Dhaka (DAC) to Velana International Airport in Malé (MLE) take 4 hours and 10 minutes on US-Bangla Airlines, while SriLankan Airlines offers convenient 1-stop connections via Colombo. Roundtrip economy fares generally range between BDT 46,000 and BDT 68,000. Bangladeshi passport holders receive a free 30-day Tourist Visa on Arrival in the Maldives, provided they carry a confirmed hotel voucher, return ticket, USD endorsement, and complete the free IMUGA Traveller Declaration online within 96 hours of flying.",
+    quickAnswer: "Direct flights from Dhaka (DAC) to Velana International Airport in Malé (MLE) take 4 hours and 10 minutes on US-Bangla Airlines, while SriLankan Airlines offers convenient 1-stop connections via Colombo. Compare current direct and connecting fares for your own dates through the flight search; no fixed fare is published here. Bangladeshi passport holders receive a free 30-day Tourist Visa on Arrival in the Maldives, provided they carry a confirmed hotel voucher, return ticket, USD endorsement, and complete the free IMUGA Traveller Declaration online within 96 hours of flying.",
     keyFacts: [
       { label: "Flight Time", value: "4 hours 10 mins (Direct)" },
       { label: "Popular Airlines", value: "US-Bangla (Direct), SriLankan (1-Stop)" },
-      { label: "Average Roundtrip Price", value: "BDT 52,000" },
+      { label: "Fare check", value: "Compare live fares for your dates" },
       { label: "Visa on Arrival", value: "Free 30 Days (+ IMUGA Form)" }
     ],
     faqs: [
@@ -417,17 +410,16 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     from: "Dhaka (DAC)",
     to: "Los Angeles (LAX)",
     country: "United States",
-    priceRangeBdt: "BDT 150,000 - BDT 240,000 (Roundtrip, Economy)",
     airlines: ["Emirates", "Qatar Airways", "Etihad Airways", "Turkish Airlines", "Biman Bangladesh Airlines", "US-Bangla Airlines"],
     bestTimeToBook: "3-5 months before departure, especially for summer (June-August) and winter holiday (December-January) travel",
     duration: "19h 30m - 24h 0m (1-2 Stops)",
     visaRequirement: "US B1/B2 Tourist Visa (advance application via US Embassy Dhaka, DS-160 form, visa interview required)",
-    quickAnswer: "There are no nonstop flights from Dhaka (DAC) to Los Angeles (LAX). All itineraries require 1-2 stops, typically through Middle Eastern hubs (Dubai, Doha, Abu Dhabi), Istanbul, or European gateways. Total journey time ranges from 19 hours 30 minutes to 24 hours depending on connection length. Economy roundtrip fares typically range from BDT 150,000 to BDT 240,000. Bangladeshi passport holders must obtain a US B1/B2 visitor visa in advance through the US Embassy in Dhaka — this is not Visa on Arrival or ESTA-eligible.",
+    quickAnswer: "There are no nonstop flights from Dhaka (DAC) to Los Angeles (LAX). All itineraries require 1-2 stops, typically through Middle Eastern hubs (Dubai, Doha, Abu Dhabi), Istanbul, or European gateways. Total journey time ranges from 19 hours 30 minutes to 24 hours depending on connection length. Compare current fares for your own dates and connection hubs through the flight search; no fixed fare is published here. Bangladeshi passport holders must obtain a US B1/B2 visitor visa in advance through the US Embassy in Dhaka — this is not Visa on Arrival or ESTA-eligible.",
     keyFacts: [
       { label: "Flight Time", value: "19h 30m - 24h 0m (1-2 Stops)" },
       { label: "Direct Flights", value: "None — all routes require connections" },
       { label: "Common Connection Hubs", value: "Dubai (DXB), Doha (DOH), Abu Dhabi (AUH), Istanbul (IST)" },
-      { label: "Average Roundtrip Price", value: "BDT 175,000 - 200,000" },
+      { label: "Fare check", value: "Compare live fares for your dates" },
       { label: "Visa for Bangladeshis", value: "US B1/B2 Tourist Visa (advance, via US Embassy Dhaka)" }
     ],
     faqs: [
@@ -444,8 +436,8 @@ export const FLIGHTS_DATA: FlightRoute[] = [
         answer: "Yes. Bangladeshi passport holders must obtain a US B1/B2 visitor visa before travel. This requires completing the DS-160 form online, paying the visa fee, and attending an in-person interview at the US Embassy in Dhaka. The US is not part of the Visa Waiver Program, so ESTA is not available for Bangladeshi citizens."
       },
       {
-        question: "What is the cheapest time to fly from Dhaka to Los Angeles?",
-        answer: "Book 3-5 months in advance. Avoid peak periods: US summer (June-August), winter holidays (December-January), and Eid travel seasons. Shoulder periods (late January-March, September-October) typically offer the lowest fares from BDT 150,000 roundtrip."
+        question: "When is the cheapest time to fly from Dhaka to Los Angeles?",
+        answer: "Book 3-5 months in advance. Avoid peak periods: US summer (June-August), winter holidays (December-January), and Eid travel seasons. Shoulder periods (late January-March, September-October) often have more fare choice, but compare live prices for your exact dates rather than relying on a seasonal rule."
       },
       {
         question: "How long does a flight from Dhaka to Los Angeles take?",
@@ -489,16 +481,15 @@ export const FLIGHTS_DATA: FlightRoute[] = [
     from: "Dhaka (DAC)",
     to: "Madinah (MED)",
     country: "Saudi Arabia",
-    priceRangeBdt: "BDT 55,000 - BDT 95,000 (Roundtrip, Economy)",
     airlines: ["Saudia", "Biman Bangladesh Airlines", "Flynas", "Flyadeal"],
     bestTimeToBook: "2-3 months before departure, especially before Ramadan and Hajj season; off-peak (post-Hajj, Muharram-Safar) offers lowest fares",
     duration: "6h 30m - 8h 0m (Direct)",
     visaRequirement: "Saudi Umrah visa or tourist visa (advance application via Saudi visa portal or authorized agents; Bangladeshi passport holders are NOT visa-exempt)",
-    quickAnswer: "Direct flights operate from Hazrat Shahjalal International Airport (DAC) to Prince Mohammad bin Abdulaziz International Airport (MED) in Madinah, Saudi Arabia. Flight time is approximately 6 hours 30 minutes. Economy roundtrip fares typically range from BDT 55,000 to BDT 95,000. Bangladeshi passport holders need a Saudi Umrah visa or tourist visa before travel — this is not Visa on Arrival. Madinah is the second-holiest city in Islam, home to Al-Masjid an-Nabawi (the Prophet's Mosque).",
+    quickAnswer: "Direct flights operate from Hazrat Shahjalal International Airport (DAC) to Prince Mohammad bin Abdulaziz International Airport (MED) in Madinah, Saudi Arabia. Flight time is approximately 6 hours 30 minutes. Compare current fares, baggage rules and airline conditions for your own dates through the flight search; no fixed fare is published here. Bangladeshi passport holders need a Saudi Umrah visa or tourist visa before travel — this is not Visa on Arrival. Madinah is the second-holiest city in Islam, home to Al-Masjid an-Nabawi (the Prophet's Mosque).",
     keyFacts: [
       { label: "Flight Time", value: "6h 30m - 8h 0m (Direct)" },
       { label: "Direct Flights", value: "Yes — Saudia and Biman Bangladesh operate direct DAC–MED" },
-      { label: "Average Roundtrip Price", value: "BDT 70,000 - 85,000" },
+      { label: "Fare check", value: "Compare live fares for your dates" },
       { label: "Visa for Bangladeshis", value: "Saudi Umrah visa or tourist visa (advance, via Saudi visa portal)" }
     ],
     faqs: [
@@ -511,8 +502,8 @@ export const FLIGHTS_DATA: FlightRoute[] = [
         answer: "Yes. Bangladeshi passport holders must obtain a Saudi Umrah visa or tourist visa before travel. Applications can be made through the Saudi visa portal or authorized travel agents in Dhaka. This is not Visa on Arrival."
       },
       {
-        question: "What is the cheapest time to fly from Dhaka to Madinah?",
-        answer: "Book 2-3 months in advance. Avoid peak periods: Ramadan, Hajj season (Dhul-Hijjah), and Eid travel seasons. Off-peak months (Muharram-Safar, post-Hajj) typically offer the lowest fares from BDT 55,000 roundtrip."
+        question: "When is the cheapest time to fly from Dhaka to Madinah?",
+        answer: "Book 2-3 months in advance. Avoid peak periods: Ramadan, Hajj season (Dhul-Hijjah), and Eid travel seasons. Off-peak months (Muharram-Safar, post-Hajj) often have more fare choice, but compare live prices for your exact dates and fare conditions."
       },
       {
         question: "How long does a flight from Dhaka to Madinah take?",
@@ -965,7 +956,7 @@ export const VISA_DATA: VisaGuide[] = [
     id: "malaysia-visa",
     country: "Malaysia",
     requirementType: "e-Visa",
-    costBdt: "BDT 3,800 - BDT 4,200",
+    costBdt: "Confirm the current government fee on malaysiavisa.imi.gov.my before paying. Bank/payment charges and any agency service fee are separate and provider-set.",
     processingTime: "2 - 4 Business Days",
     documentChecklist: [
       {
@@ -986,7 +977,7 @@ export const VISA_DATA: VisaGuide[] = [
       "Check your email inbox or portal status daily. If any 'Additional Documents Resubmission' is requested, resolve it immediately.",
       "Upon approval, download and print the A4 physical paper eVisa. Keep this paper securely folded inside your passport when departing Dhaka."
     ],
-    quickAnswer: "Malaysia offers a fully online eVisa system for Bangladeshi citizens. You do not need to drop off physical passports at an embassy. Submit professional passport photos, high-resolution bio-data scans, and bank statements covering the last 3 months directly to the Immigration Department of Malaysia's online portal. Total costs are around BDT 3,800 to 4,200. The department publishes 2-7 working days for processing, excluding weekends, public holidays and any query stage, and advises applying at least 14 days before departure; check malaysiavisa.imi.gov.my (checked 6 November 2026). No application is guaranteed to be approved.",
+    quickAnswer: "Malaysia offers a fully online eVisa system for Bangladeshi citizens. You do not need to drop off physical passports at an embassy. Submit professional passport photos, high-resolution bio-data scans, and bank statements covering the last 3 months directly to the Immigration Department of Malaysia's online portal. The government fee, payment charges and any agency service fee are separate; confirm the current amount in the portal before paying. The department publishes 2-7 working days for processing, excluding weekends, public holidays and any query stage, and advises applying at least 14 days before departure; check malaysiavisa.imi.gov.my (checked 6 November 2026). No application is guaranteed to be approved.",
     keyFacts: [
       { label: "Application Portal", value: "Online eVisa Portal" },
       { label: "Bank Statements", value: "Last 3 months (official requirement)" },
@@ -1014,11 +1005,6 @@ export const VISA_DATA: VisaGuide[] = [
       "name": "How to get a Malaysia visa as a Bangladeshi citizen",
       "description": "Malaysia offers a fully online eVisa system for Bangladeshi citizens. Submit professional passport photos, high-resolution bio-data scans, and bank statements covering the last 3 months to the Immigration Department of Malaysia's online portal. The department publishes 2-7 working days for processing, excluding weekends, public holidays and any query stage. Check malaysiavisa.imi.gov.my before applying (checked 6 November 2026).",
       "totalTime": "P4D",
-      "estimatedCost": {
-        "@type": "MonetaryAmount",
-        "currency": "BDT",
-        "value": "3800"
-      },
       "step": [
         {
           "@type": "HowToStep",
@@ -1050,7 +1036,7 @@ export const VISA_DATA: VisaGuide[] = [
     id: "dubai-visa",
     country: "UAE",
     requirementType: "e-Visa",
-    costBdt: "BDT 11,500 - BDT 14,500 (30 Days Single Entry)",
+    costBdt: "Confirm the current government and sponsor/agency charges with the airline, approved agent or GDRFA/ICP channel before paying. The total depends on visa type, validity and provider.",
     processingTime: "3 - 5 Business Days",
     documentChecklist: [
       {
@@ -1075,7 +1061,7 @@ export const VISA_DATA: VisaGuide[] = [
     keyFacts: [
       { label: "Visa Mechanism", value: "Electronic Sponsor-based eVisa" },
       { label: "Standard Processing", value: "3 to 5 business days" },
-      { label: "Visa Cost (BDT)", value: "approx BDT 12,000" },
+      { label: "Fee check", value: "Confirm current government and agency charges" },
       { label: "Approval Security Check", value: "Standard profile reviews apply" }
     ],
     faqs: [
@@ -1099,11 +1085,6 @@ export const VISA_DATA: VisaGuide[] = [
       "name": "How to get a UAE visa as a Bangladeshi citizen",
       "description": "Bangladeshi citizens can easily secure tourist visas to the United Arab Emirates using the fully electronic sponsor-based eVisa system. Visas are processed in 3-5 days without needing passport submission. Applications are handled through airlines (Emirates, flydubai, Air Arabia) or approved local agents in Dhaka. A 6-month bank statement with BDT 150,000+ is recommended for flawless security approval. Note: UAE visa applications are not submitted directly to an embassy — you apply through Emirates, flydubai, Air Arabia, or an approved Dhaka-based travel agent.",
       "totalTime": "P5D",
-      "estimatedCost": {
-        "@type": "MonetaryAmount",
-        "currency": "BDT",
-        "value": "11500"
-      },
       "step": [
         {
           "@type": "HowToStep",
@@ -1135,7 +1116,7 @@ export const VISA_DATA: VisaGuide[] = [
     id: "singapore-visa",
     country: "Singapore",
     requirementType: "e-Visa",
-    costBdt: "BDT 4,200 - BDT 6,500 (SGD 30 Embassy Fee + Authorized Agent Service Charge; higher if agency arranges LOI)",
+    costBdt: "Confirm the current government fee and the Authorized Visa Agent's service charge before paying. The agent's total varies by provider and can be higher if it arranges the Letter of Introduction.",
     processingTime: "5 - 7 Business Days (excluding submission day and weekends)",
     documentChecklist: [
       {
@@ -1166,10 +1147,10 @@ export const VISA_DATA: VisaGuide[] = [
       "Wait 5 to 7 working days for the Consulate of the Republic of Singapore in Dhaka to process the application.",
       "Once approved, follow the current ICA and authorized-channel instructions for your visa document. Submit the free SG Arrival Card (SGAC) within three days, including the day of arrival, before entering Singapore."
     ],
-    quickAnswer: "Bangladeshi passport holders require a pre-arranged e-Visa to enter Singapore. You cannot apply directly at the Singapore Consulate in Dhaka; all applications must be submitted through an embassy-approved Authorized Visa Agent. The visa costs approximately BDT 4,200 to BDT 6,500 (SGD 30 government fee plus agency charge) and takes 5 to 7 working days. A Letter of Introduction (LOI Form V39A) from a Singapore local contact or sponsor is standardly required, along with a 6-month bank statement showing at least BDT 1,50,000 balance.",
+    quickAnswer: "Bangladeshi passport holders require a pre-arranged e-Visa to enter Singapore. You cannot apply directly at the Singapore Consulate in Dhaka; all applications must be submitted through an embassy-approved Authorized Visa Agent. The government fee and the Authorized Visa Agent's service charge are separate, and the agent's total varies; confirm the itemized amount before paying. Processing is published as 5 to 7 working days. A Letter of Introduction (LOI Form V39A) from a Singapore local contact or sponsor is standardly required, along with a 6-month bank statement showing at least BDT 1,50,000 balance.",
     keyFacts: [
       { label: "Submission Channel", value: "Authorized Visa Agents in Dhaka" },
-      { label: "Total Visa Cost", value: "BDT 4,200 - 6,500" },
+      { label: "Fee check", value: "Government fee and agent charge confirmed separately" },
       { label: "Processing Window", value: "5 to 7 Working Days" },
       { label: "Arrival Declaration", value: "Free SG Arrival Card within 3 days before arrival" }
     ],
@@ -1203,11 +1184,6 @@ export const VISA_DATA: VisaGuide[] = [
       "@type": "HowTo",
       "name": "How to apply for a Singapore visa from Bangladesh",
       "totalTime": "P7D",
-      "estimatedCost": {
-        "@type": "MonetaryAmount",
-        "currency": "BDT",
-        "value": "4500"
-      },
       "step": [
         { "@type": "HowToStep", "text": "Gather 6-month bank statement (BDT 150,000+), NOC/Trade License, and 35x45mm matte photos." },
         { "@type": "HowToStep", "text": "Submit Form 14A and LOI (Form V39A) through an Authorized Visa Agent in Dhaka." },
@@ -1590,11 +1566,11 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       { day: 4, title: "Genting Highlands Day Trip", activities: ["Take an express bus from KL Sentral to Genting Highlands cable car station", "Ride the Awana Skyway cable car up into the clouds and cooler mountain breezes", "Spend the afternoon touring the theme parks or shopping at premium outlets"] }
     ],
     localTransport: ["GOKL Free City Bus (completely free inner-city shuttle running on major tourism routes!)", "LRT & MRT Train network (extremely safe, fully automated, direct access to all sights)", "Grab ride-share (massively popular, affordable for 2-4 travelers sharing)"],
-    budgetBdt: "BDT 30,000 - BDT 50,000 per person (Excluding airfare, based on city discovery & Genting trips)",
-    quickAnswer: "Kuala Lumpur stands out for modern, stress-free South Asian family travel. Local transport costs are minimal thanks to free GOKL buses and affordable MRT trains. A 4-day budget of BDT 30,000 per person covers high-rise penthouse apartments, outstanding culinary experiences at Jalan Alor, and high-altitude Genting Highland day tours",
+    budgetBdt: "No whole-trip total is quoted. Airfare, accommodation, local transport, meals and attraction costs vary by date and travel style; compare current prices and terms before booking.",
+    quickAnswer: "Kuala Lumpur stands out for modern, stress-free South Asian family travel. Local transport costs are minimal thanks to free GOKL buses and affordable MRT trains. Compare current accommodation, food and attraction prices for your dates rather than relying on a fixed budget figure; the total changes with room type, meals and how much you travel outside the city.",
     keyFacts: [
       { label: "Optimal Duration", value: "4 to 5 Days" },
-      { label: "Daily Local Budget", value: "BDT 5,500 - 8,000 / day" },
+      { label: "Budget check", value: "Compare current prices for your dates" },
       { label: "Free Transport Hack", value: "GOKL City Bus (Pink lines are completely free!)" },
       { label: "Top Family Daytrip", value: "Genting Highlands (45 mins away)" },
       {
@@ -1853,300 +1829,7 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
   }
 ];
 
-export const TRIP_COSTS_DATA: TripCostData[] = [
-  {
-    id: "nepal-costs",
-    country: "Nepal",
-    durationDays: 5,
-    currencyCode: "NPR (Nepali Rupee)",
-    exchangeRateText: "1 NPR ≈ 0.88 BDT | 1 BDT ≈ 1.13 NPR",
-    categories: [
-      { name: "Flights from Dhaka", lowBdt: 28500, midBdt: 33000, highBdt: 38000 },
-      { name: "Accommodations (per night)", lowBdt: 1200, midBdt: 3500, highBdt: 12000 },
-      { name: "Daily Meals & Street Food", lowBdt: 800, midBdt: 1800, highBdt: 3500 },
-      { name: "Intercity Transit / Taxis", lowBdt: 500, midBdt: 1500, highBdt: 4500 },
-      { name: "Attraction Tickets & Guides", lowBdt: 600, midBdt: 2500, highBdt: 8000 }
-    ],
-    seasonalVariation: "September-November is peak season carrying dry clear skies and highest ticket/hotel costs. December-February has chilly nights but great hotel discounts. Monsoon (June-August) has landslide risks but maximum hotel bargains.",
-    moneyHacks: [
-      "No visa fee! The first visa of any calendar year is fully free for Bangladeshi SAARC nationals, saving you over BDT 3,500 right at immigration.",
-      "Book tourist buses like Sofa Template instead of private taxis for Kathmandu to Pokhara travels - it saves up to 80% of transit expenses.",
-      "Ask for student discounts if holding a valid university ID at heritage ticket gates."
-    ],
-    quickAnswer: "A 5-day Nepal trip from Bangladesh costs roughly BDT 45,000 per person for a budget backpacker (including flights), about BDT 65,000 for a comfortable mid-range trip with better hotels and tourist buses, and BDT 1,20,000+ for a luxury heritage-hotel stay. The free Visa on Arrival for Bangladeshi citizens saves an extra USD 30-50 compared to most other nationalities.",
-    keyFacts: [
-      { label: "Budget Trip (5 days, incl. flight)", value: "approx BDT 45,000" },
-      { label: "Mid-Range Trip (5 days, incl. flight)", value: "approx BDT 65,000" },
-      { label: "Visa Savings vs Other Nationalities", value: "USD 30 - 50" },
-      { label: "Average Daily Meal Cost", value: "BDT 1,000 - 2,000" }
-    ],
-    faqs: [
-      {
-        question: "How much does a 5-day Nepal trip cost from Bangladesh in total?",
-        answer: "Including round-trip flights from Dhaka, a 5-day Nepal trip costs around BDT 45,000 per person on a budget itinerary, roughly BDT 65,000 for a comfortable mid-range trip, and BDT 1,20,000 or more for luxury heritage hotels and private transport."
-      },
-      {
-        question: "Should I carry US Dollars or Nepali Rupees to Nepal?",
-        answer: "Carry US Dollars in cash - this is required for the Visa on Arrival fee (if applicable) and is widely accepted for exchange. You can exchange USD for Nepali Rupees (NPR) at the airport or in Thamel; Bangladeshi Taka is not commonly accepted."
-      },
-      {
-        question: "What is the cheapest way to travel from Kathmandu to Pokhara?",
-        answer: "Tourist buses cost roughly BDT 1,200-1,800 one way and take 6-8 hours on a scenic mountain highway - this is significantly cheaper than a private taxi or domestic flight and is the most popular option for budget travelers."
-      },
-      {
-        question: "Are there hidden costs for Bangladeshi tourists in Nepal?",
-        answer: "Aside from the visa fee on repeat visits within the same year, most hotels add a 10% service charge plus 13% VAT to room rates - check whether quoted prices already include these before booking. Heritage site entry tickets are an additional cost worth budgeting for separately."
-      },
-      {
-        question: "How can I travel between Kathmandu and Pokhara on the absolute tightest budget when arriving from Dhaka?",
-        answer: "The absolute cheapest transport option is to take a local public bus or microbus from Kathmandu's Gongabu Bus Park, which costs around BDT 600 to 800 (about NPR 700 to 900) but can be crowded and less comfortable. For a balance of safety and cost, tourist buses departing from Shorakhutte (near Thamel) are recommended at BDT 1,200 to 1,500, offering comfortable seating, air conditioning, and designated rest stops. While domestic flights only take 25 minutes, they cost over BDT 10,000 one-way for foreign nationals, which will quickly exhaust a typical budget."
-      },
-      {
-        question: "Is Bangladeshi Taka (BDT) accepted for currency exchange or daily purchases in Nepal?",
-        answer: "Bangladeshi Taka is not accepted for standard day-to-day purchases in Nepal, and very few exchange booths near Thamel will convert them into Nepali Rupees, usually at very poor rates. It is highly recommended to carry US Dollars (USD) in cash from Dhaka, which can be exchanged quickly at standard rates anywhere in Kathmandu or Pokhara. Alternatively, you can use an internationally enabled dual-currency card endorsed with USD to withdraw Nepali Rupees directly from local ATMs. Restricting your itinerary to only carrying BDT cash will leave you unable to pay for transport or food in most tourist areas."
-      },
-      {
-        question: "What is the average daily cost of food and meals for a Bangladeshi traveler in Kathmandu?",
-        answer: "A Bangladeshi traveler can expect to spend between BDT 800 and 1,500 per day on food, depending strictly on where and what they eat. Tasting local Dal Bhat (lentil soup with rice and vegetable curries) or plates of steam/fried Momos at local eateries is incredibly cheap, costing around BDT 150 to 300 per meal. Dining in regular tourist-oriented cafes and restaurants in Thamel will increase your costs to BDT 500 to 900 per meal. Because Nepali cuisine shares many similarities with Bangladeshi food, such as rice and spicy curries, finding delicious and familiar meals is extremely simple and highly budget-friendly."
-      },
-      {
-        question: "How much money should a tourist from Dhaka budget for heritage site ticket costs in Nepal?",
-        answer: "As a SAARC national, you are eligible for heavily discounted ticket prices at major heritage attractions like Kathmandu Durbar Square, Patan, Bhaktapur, and the Boudhanath Stupa, usually paying BDT 100 to 500 per site compared to the BDT 1,000+ paid by non-SAARC tourists. However, popular trekking regions, national parks, and Mount Everest viewpoint fees do not have significant SAARC discounts and can cost between BDT 2,000 and 5,500 per permit. It is wise to set aside around BDT 3,500 to 5,000 in your total budget specifically for these admission tickets. Always carry your Bangladeshi passport to these ticket booths to prove SAARC citizenship and claim your discount."
-      }
-    ],
-    schemaMarkup: {
-      type: "TripCostData",
-      description: "Cost estimations for Nepal based on BDT",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "PriceSpecification",
-  "priceCurrency": "BDT",
-  "minPrice": "45000",
-  "maxPrice": "120000"
-}`
-    }
-  },
-  {
-    id: "thailand-costs",
-    country: "Thailand",
-    durationDays: 5,
-    currencyCode: "THB (Thai Baht)",
-    exchangeRateText: "1 THB ≈ 3.28 BDT | 1 BDT ≈ 0.30 THB",
-    categories: [
-      { name: "Flights from Dhaka", lowBdt: 31500, midBdt: 37000, highBdt: 48000 },
-      { name: "Accommodations (per night)", lowBdt: 1800, midBdt: 4500, highBdt: 14000 },
-      { name: "Daily Meals & Street Food", lowBdt: 1200, midBdt: 2500, highBdt: 6000 },
-      { name: "BTS/MRT Trains & Grab Rides", lowBdt: 400, midBdt: 1200, highBdt: 3500 },
-      { name: "Shopping & Market Purchases", lowBdt: 5000, midBdt: 15000, highBdt: 50000 }
-    ],
-    seasonalVariation: "High season occurs from November to January. Hot season (March-May) sees shopping festival sales. May to October is the green monsoon season, with great hotel rates and some flight discount vouchers.",
-    moneyHacks: [
-      "Shop at wholesale plazas like Platinum Mall or Chatuchak, and buy bundles of 3+ pieces to trigger discount pricing.",
-      "Get a tourist VAT refund form (P.P.10) for purchases over 2,000 THB at major stores to claim 7% VAT cash back at Bangkok airport before exiting.",
-      "Buy a 1-Day Pass for the BTS Skytrain for BDT 450, granting endless air-conditioned train travel and cutting transit cost."
-    ],
-    quickAnswer: "Thailand travel budgets from Dhaka rely heavily on your shopping style. A 5-day shopping and leisure itinerary usually costs around BDT 70,000-80,000 (including flights!). Backpackers limiting shopping can experience Bangkok comfortably for BDT 55,000, while premium travelers staying in five-star hotels with fine dining should budget BDT 1,35,000+. Visa-related charges are not itemized in these broad estimates: verify the current government e-Visa fee, separate bank/payment charges, and any optional agency service fee before treating a total as all-in.",
-    keyFacts: [
-      { label: "Bargain Backpacker (5d)", value: "approx BDT 55,000" },
-      { label: "Comfort Shopping (5d)", value: "approx BDT 80,000" },
-      { label: "Average Meal Cost", value: "approx BDT 400 - 800" },
-      { label: "VAT Refund Offer", value: "7% Cash refund at airport" }
-    ],
-    faqs: [
-      {
-        question: "How much cash should I carry to pass Thai Immigration?",
-        answer: "By Thai law, tourists should carry equivalent to 10,000 THB (approx BDT 33,000) per person or 20,000 THB per family to show self-sufficiency if checked by immigration officers."
-      }
-    ],
-    schemaMarkup: {
-      type: "TripCostData",
-      description: "Thailand trip budget estimates for Bangladesh; visa-related charges are not itemized and should be verified separately.",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "PriceSpecification",
-  "priceCurrency": "BDT",
-  "minPrice": "55000",
-  "maxPrice": "135000"
-}`
-    }
-  },
-  {
-    id: "malaysia-costs",
-    country: "Malaysia",
-    durationDays: 5,
-    currencyCode: "MYR (Malaysian Ringgit)",
-    exchangeRateText: "1 MYR ≈ 27.20 BDT | 1 BDT ≈ 0.037 MYR",
-    categories: [
-      { name: "Flights from Dhaka", lowBdt: 36000, midBdt: 42000, highBdt: 50000 },
-      { name: "Accommodations (per night)", lowBdt: 1800, midBdt: 5000, highBdt: 11000 },
-      { name: "Daily Meals & Satay Feasts", lowBdt: 1000, midBdt: 2200, highBdt: 5000 },
-      { name: "LRT/MRT Trains & Grab Taxis", lowBdt: 300, midBdt: 1000, highBdt: 3000 },
-      { name: "Genting / Attractions Tickets", lowBdt: 1500, midBdt: 4000, highBdt: 9000 }
-    ],
-    seasonalVariation: "Kuala Lumpur is a year-round destination. Low rainfall in May to July attracts tourists, but prices are stable. Major shopping campaigns (like Mega Sale) yield fantastic item deals.",
-    moneyHacks: [
-      "Take the free GOKL pink city buses! They loop critical tourist sites like Bukit Bintang, KLCC, and Chinatown for BDT 0.",
-      "Get a travel multicarrier card or carry cash for street food joints like Jalan Alor which might not accept non-Malaysian QR wallets.",
-      "Book family suites if traveling in a group - spacious executive apartments in KL offer incredible cost-efficiency per person."
-    ],
-    quickAnswer: "Malaysia represents a highly cost-efficient metropolis. A comfortable 5-day itinerary (flights, modern high-rise hotels in Bukit Bintang, great meals, and day outings to Genting Highlands) averages BDT 75,000 per person. Backpackers utilizing free buses and budget suites can cut local costs to BDT 58,000 total.",
-    keyFacts: [
-      { label: "Backpacker Total (5d)", value: "approx BDT 58,000" },
-      { label: "Comfort Executive (5d)", value: "approx BDT 75,000" },
-      { label: "Free Transport Savings", value: "approx BDT 2,500" },
-      { label: "Tower View Condo (BDT)", value: "5,000 - 8,000 / night" }
-    ],
-    faqs: [
-      {
-        question: "Is raw street food expensive in Kuala Lumpur?",
-        answer: "No. Excellent local food courts (Kopitiams) and Mamak stalls serve Nasi Lemak, Roti Canai, or Fried Kuay Teow for just RM 6 - RM 12 (approx BDT 160 - BDT 320) per plate."
-      }
-    ],
-    schemaMarkup: {
-      type: "TripCostData",
-      description: "Malaysia price points",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "PriceSpecification",
-  "priceCurrency": "BDT",
-  "minPrice": "58000",
-  "maxPrice": "110000"
-}`
-    }
-  },
-  {
-    id: "dubai-costs",
-    country: "UAE",
-    durationDays: 5,
-    currencyCode: "AED (UAE Dirham)",
-    exchangeRateText: "1 AED ≈ 32.20 BDT | 1 BDT ≈ 0.031 AED",
-    categories: [
-      { name: "Flights from Dhaka", lowBdt: 58000, midBdt: 68000, highBdt: 85000 },
-      { name: "Accommodations (per night)", lowBdt: 3500, midBdt: 8000, highBdt: 25000 },
-      { name: "Daily Meals & Creek Shawarma", lowBdt: 1800, midBdt: 4500, highBdt: 12000 },
-      { name: "Metro Nol card & RTA Taxis", lowBdt: 800, midBdt: 2000, highBdt: 6000 },
-      { name: "Desert Safaris & Khalifa tickets", lowBdt: 4500, midBdt: 12000, highBdt: 35000 }
-    ],
-    seasonalVariation: "Extreme price spikes from November to February due to perfect warm winter outdoor weather. Hotel rents plummet up to 50% from June to September due to high summer desert heats (above 40°C), making mall shopping highly economic.",
-    moneyHacks: [
-      "Buy a Silver Nol Card in the metro terminal. It costs BDT 800, provides AED 19 pre-loaded values, and offers much cheaper fares than paper day tickets.",
-      "Eat like a local in Deira or Bur Dubai! Excellent South Asian curries, Arabic mandi rice, or fresh wraps cost just AED 10 to AED 20 per meal.",
-      "Book desert safari packages on local UAE multi-agent platforms or pre-purchase tourist passes to save up to 40% on Burj Khalifa entry fees."
-    ],
-    quickAnswer: "A 5-day Dubai trip from Bangladesh costs approximately BDT 1,20,000 to BDT 1,40,000 per person for a comfortable mid-range itinerary including direct roundtrip flights. Extreme budget backpackers departing from Dhaka can reduce local expenses to around BDT 95,000 by staying in Deira hostels and using the Dubai Metro with a Nol card. High-end luxury stays covering 5-star hotels like Burj Al Arab and top-tier dining will elevate the budget to BDT 2,50,000 or more.",
-    keyFacts: [
-      { label: "Old Dubai Budget (5d)", value: "approx BDT 95,000" },
-      { label: "Comfort Shopping (5d)", value: "approx BDT 1,30,000" },
-      { label: "Ferry Abra Crossing rate", value: "AED 1 (Direct cash)" },
-      { label: "VAT Cash Refund", value: "85% on purchases over AED 250" }
-    ],
-    faqs: [
-      {
-        question: "Can I use standard Bangladeshi credit cards in Dubai?",
-        answer: "Yes. Most banks in Bangladesh offer easy global dual-currency validation. You should call your bank support before departure to activate your card profile, ensuring transparent AED transactions."
-      }
-    ],
-    schemaMarkup: {
-      type: "TripCostData",
-      description: "UAE Dubai price matrices for Bangladesh",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "PriceSpecification",
-  "priceCurrency": "BDT",
-  "minPrice": "95090",
-  "maxPrice": "250000"
-}`
-    }
-  },
-  {
-    id: "singapore-costs",
-    country: "Singapore",
-    durationDays: 4,
-    currencyCode: "SGD (Singapore Dollar)",
-    exchangeRateText: "1 SGD ≈ 91.50 BDT | 1 BDT ≈ 0.011 SGD",
-    categories: [
-      { name: "Flights from Dhaka (Roundtrip)", lowBdt: 41500, midBdt: 47500, highBdt: 64000 },
-      { name: "Accommodations (3 Nights Total)", lowBdt: 21000, midBdt: 34000, highBdt: 68000 },
-      { name: "Halal Hawker Centres & Meals", lowBdt: 6500, midBdt: 12000, highBdt: 28000 },
-      { name: "MRT SimplyGo & Airport Transit", lowBdt: 2200, midBdt: 4500, highBdt: 12000 },
-      { name: "Sentosa, Gardens & Visa Fee", lowBdt: 9500, midBdt: 18500, highBdt: 35000 }
-    ],
-    seasonalVariation: "Prices spike during Formula 1 Singapore Grand Prix weekend (September), Chinese New Year, and December school holidays. Travelling in February–May or July–August offers the best hotel rates.",
-    moneyHacks: [
-      "Eat at Halal-certified stalls in famous Hawker Centres (Lau Pa Sat, Tekka Centre in Little India, or Albert Centre in Bugis) where delicious chicken biryani, murtabak, or nasi padang costs just SGD 5–8 (BDT 450–730).",
-      "Tap your Bangladeshi dual-currency Visa/Mastercard directly on MRT gates (SimplyGo) instead of using Grab taxis—Changi Airport to Little India by MRT costs under SGD 2.20 (BDT 200) vs SGD 30 by taxi!",
-      "Singapore tap water is 100% safe and WHO-certified to drink. Carry a refillable water bottle to save SGD 3 (BDT 275) per bottle at attractions."
-    ],
-    quickAnswer: "A 4-day Singapore trip from Bangladesh costs roughly BDT 80,000 to BDT 85,000 per person for a smart budget traveler (including direct flights and visa), around BDT 1,15,000 for a comfortable family stay in Bugis or Little India with Sentosa theme park tickets, and BDT 2,00,000+ for luxury Marina Bay hotels.",
-    keyFacts: [
-      { label: "Smart Budget Total (4d)", value: "approx BDT 82,000" },
-      { label: "Family Mid-Range (4d)", value: "approx BDT 1,16,500" },
-      { label: "Hawker Meal Cost", value: "SGD 6 - 9 (BDT 550 - 820)" },
-      { label: "Tourist GST Refund", value: "Up to 9% back at Changi" }
-    ],
-    faqs: [
-      {
-        question: "How much bank balance do I need to show for a Singapore trip from Bangladesh?",
-        answer: "Authorized visa agents in Dhaka recommend showing a minimum closing balance of BDT 1,50,000 to BDT 2,00,000 per applicant on a 6-month bank statement."
-      }
-    ],
-    schemaMarkup: {
-      type: "TripCostData",
-      description: "Singapore 4-day trip cost breakdown in BDT",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "PriceSpecification",
-  "priceCurrency": "BDT",
-  "minPrice": "80700",
-  "maxPrice": "207000"
-}`
-    }
-  },
-  {
-    id: "maldives-costs",
-    country: "Maldives",
-    durationDays: 5,
-    currencyCode: "MVR (Maldivian Rufiyaa) & USD",
-    exchangeRateText: "1 USD ≈ 122 BDT | 1 MVR ≈ 7.90 BDT",
-    categories: [
-      { name: "Flights from Dhaka (Roundtrip)", lowBdt: 46000, midBdt: 52500, highBdt: 68000 },
-      { name: "Hotels / Guesthouses (4 Nights)", lowBdt: 16000, midBdt: 34000, highBdt: 155000 },
-      { name: "Speedboat / Ferry Transfers", lowBdt: 1500, midBdt: 6200, highBdt: 24000 },
-      { name: "Meals & Beachfront Dining", lowBdt: 6500, midBdt: 13500, highBdt: 42000 },
-      { name: "Snorkeling, Sandbank & Resort Tours", lowBdt: 4500, midBdt: 14000, highBdt: 48000 }
-    ],
-    seasonalVariation: "December to March is peak dry season with the highest hotel rates. Travelling in the shoulder months of April, May, October, or November cuts Maafushi guesthouse and private resort rates by 30% to 45% while still offering plenty of sunshine.",
-    moneyHacks: [
-      "Stay on Maafushi or Hulhumalé instead of a private resort island—you save 70% on rooms and speedboats while enjoying the exact same turquoise Indian Ocean water.",
-      "Book a Half-Day Snorkeling + Dolphin + Sandbank Lunch package in Maafushi for just $30 USD (approx BDT 3,650), which includes underwater GoPro and drone photos!",
-      "Travel with a friend or spouse so you split the $60–$80/night ocean-view guesthouse room and save 50% on accommodation."
-    ],
-    quickAnswer: "A 5-day Maldives trip from Bangladesh costs only BDT 74,500 per person (flights included!) when you stay at a clean guesthouse on Hulhumalé or Maafushi local island. A comfortable mid-range beach holiday with sea-view rooms at Arena/Kaani Beach and multiple snorkeling/resort day trips costs around BDT 1,20,000 per person, while private overwater villa resorts start at BDT 2,50,000+.",
-    keyFacts: [
-      { label: "Local Island Budget (5d)", value: "approx BDT 74,500" },
-      { label: "Mid-Range Maafushi (5d)", value: "approx BDT 1,20,000" },
-      { label: "Visa Cost for Bangladeshis", value: "BDT 0 (Free VOA)" },
-      { label: "Snorkeling + Sandbank Tour", value: "$30 USD (approx BDT 3,650)" }
-    ],
-    faqs: [
-      {
-        question: "Why are private resort transfers so expensive in the Maldives?",
-        answer: "Private resorts require dedicated resort speedboats ($100–$250 return) or seaplanes ($400+ return). By contrast, Maafushi local island uses shared scheduled speedboats for $25 USD each way, and Hulhumalé is connected by a $8 road taxi from Malé Airport."
-      }
-    ],
-    schemaMarkup: {
-      type: "TripCostData",
-      description: "Maldives 5-day trip cost breakdown in BDT for Bangladeshi travelers",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "PriceSpecification",
-  "priceCurrency": "BDT",
-  "minPrice": "74500",
-  "maxPrice": "337000"
-}`
-    }
-  }
-];
+export { TRIP_COSTS_DATA } from "./data/tripCosts";
 
 export const BLOG_DATA: BlogPost[] = [
   {
@@ -2308,7 +1991,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account vs. Travel Quota (the $300 online-payment rule)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "Cash SAR / USD vs. Card Abroad (choose local currency, avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
-      { text: "Book Flights & Makkah Hotels in BDT via bKash/Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+            { text: "How to Pay for Flights & Makkah Hotels in BDT (bKash / Bank Transfer)", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Card Endorsed & Ready?", body: "Compare live international flight fares from Dhaka and book with your endorsed card." }
@@ -3440,7 +3123,7 @@ export const BLOG_DATA: BlogPost[] = [
     internalLinks: [
       { text: "Complete $18,000 Passport Dollar Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Bullet Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
-      { text: "No Card? Book Flights & Umrah Hotels in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+            { text: "No Card? How to Pay for Flights & Umrah Hotels in BDT", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Money & Banking Hub: endorsement, cards, USD 300 rule and NOC", path: "/banking" },
       { text: "10-Day DIY Umrah Cost Calculator in BDT", path: "/umrah" },
       { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" }
@@ -3489,7 +3172,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Passport Dollar Endorsement and Card Activation Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Cash vs. Card Abroad (choose local currency and avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
-      { text: "No Card? Pay in BDT via bKash or Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+            { text: "No Card? How to Pay in BDT via bKash or Bank Transfer", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Dual-Currency Card Fee and Markup Calculator", path: "/tools/currency-converter" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Compare the Fare Before You Ask Your Bank", body: "Check the live flight price and exact checkout amount, then ask your card issuer about documented travel-payment approval before paying." }
@@ -3497,8 +3180,8 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-30",
     slug: "book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card",
-    title: "How to Book Flights, Makkah Hotels & Airport Transfers in BDT (bKash / Bank Transfer, No Card Needed)",
-    summary: "Not every Bangladeshi traveller has an endorsed dual-currency card ready when a cheap fare or a Haram-view hotel rate appears online. Waiting for a new card — or paying an unverified middleman — is not the only option: you can reserve international air tickets, Makkah/Madinah or Asian hotel vouchers and airport transfers in Bangladeshi Taka (BDT) through a local bank transfer, bKash or Nagad booking desk. This checked guide explains how a transparent BDT-assisted booking workflow works, what to verify before you pay, and what to keep for the Dhaka Airport immigration folder.",
+        title: "How to Pay for Flights, Makkah Hotels & Airport Transfers in BDT (bKash / Bank Transfer, No Card Needed)",
+            summary: "Not every Bangladeshi traveller has an endorsed dual-currency card ready when a cheap fare or a Haram-view hotel rate appears online. This guide explains the pay-in-Taka route honestly: who can settle a booking in BDT, what the airline PNR and hotel voucher must show, which charges belong inside the all-in quote, and what to keep for the Dhaka Airport immigration folder. It also explains where URAL's own role ends: researched information, official portals and affiliate partners, with questions answered on WhatsApp or through the contact form.",
     category: "Banking & Payments",
     date: "September 27, 2026",
     updatedAt: "2026-10-19",
@@ -3530,7 +3213,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" },
       { text: "Global Flight Search & Fare Benchmark", path: "/flights" }
     ],
-    affiliateCTA: { provider: "aviasales", headline: "Check Live Flight Prices First, Then Book by Card or BDT WhatsApp", body: "Compare real-time airline fares from Dhaka so you know the exact market price before booking." }
+        affiliateCTA: { provider: "aviasales", headline: "Check Live Flight Prices Before You Ask a Desk", body: "Compare real-time airline fares from Dhaka so you know the exact market price before you evaluate any pay-in-Taka offer." }
   },
   {
     id: "blog-31",
@@ -3700,7 +3383,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Thailand Official e-Visa Guide (thaievisa.go.th Upload Rules)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
       { text: "Where to Eat Halal Food in Bangkok (Pratunam & Sukhumvit Soi 3)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
       { text: "Dual-Currency Card Endorsement & Medical Quota Rules", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "No Card? Book Bangkok Flights & Hotels in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+            { text: "No Card? How to Pay for Bangkok Flights & Hotels in BDT", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Thailand e-Visa & Dhaka Embassy Requirements", path: "/visa/thailand-visa" },
       { text: "Dhaka to Bangkok Flight Schedule & Fares", path: "/flights/dhaka-bangkok" },
       { text: "Where to Stay in Bangkok: Hotel Neighborhoods", path: "/hotels/bangkok-hotels" },
@@ -3809,7 +3492,7 @@ export const BLOG_DATA: BlogPost[] = [
     internalLinks: [
       { text: "Maldives Under BDT 75,000: Maafushi Local Island Guide", path: "/blog/maldives-budget-trip-bangladesh-maafushi" },
       { text: "First International Trip on a Fresh Passport (3-Step Ladder)", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
-      { text: "How to Book Multi-City Flights in BDT via WhatsApp", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
+            { text: "How to Pay for Multi-City Flights in BDT Without a Card", path: "/blog/book-flights-makkah-hotels-in-bdt-bkash-bank-transfer-no-card" },
       { text: "Maldives 5-Day Cost Calculator in BDT", path: "/costs/maldives-costs" },
       { text: "Maldives On-Arrival Visa & IMUGA Checklist", path: "/visa/maldives-visa" },
       { text: "Dhaka to Maldives Flight Schedule & Fares", path: "/flights/dhaka-maldives" },
@@ -4262,5 +3945,4 @@ export const BLOG_DATA: BlogPost[] = [
   },
   ...SCHEDULED_BLOG_DATA,
 ];
-
 
