@@ -685,7 +685,6 @@ export function InteractiveTools({ initialTool, initialCountry }: InteractiveToo
             {/* Travel Agent Tip */}
             <div className="ural-panel bg-slate-50 border border-border-subtle p-5 space-y-2">
               <div className="flex items-center gap-2 text-xs font-bold text-brand-navy uppercase tracking-wider">
-                <Sparkles size={14} className="text-[#D4941A]" />
                 <span>Senior Ticketing Consultant Advice for Inbound Callers</span>
               </div>
               <p className="text-xs text-slate-700 leading-relaxed">

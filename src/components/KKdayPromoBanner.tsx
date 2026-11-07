@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ExternalLink, Sparkles, Tag, Check, Copy, ArrowRight, ShieldCheck, Clock, Compass, Train, Ticket } from "lucide-react";
+import { ExternalLink, Tag, Check, Copy, ArrowRight, ShieldCheck, Clock, Compass, Train, Ticket } from "lucide-react";
 import {
   AFFILIATE_LINKS,
   KKDAY_PROMO,
@@ -175,7 +175,6 @@ export const KKdayPromoBanner: React.FC<KKdayPromoBannerProps> = ({
         <div className="lg:col-span-8 space-y-4">
           <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
             <span className="bg-cyan-400 text-[#0B192C] px-3 py-1 rounded-md font-bold inline-flex items-center gap-1.5">
-              <Sparkles size={13} />
               {saleActive
                 ? isBn
                   ? "KKday ১০.১০ উইন্টার ট্রাভেল সেল"

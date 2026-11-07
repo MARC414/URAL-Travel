@@ -9,7 +9,6 @@ import {
   RefreshCw,
   Luggage,
   MapPin,
-  Sparkles,
   Mic,
   MicOff,
 } from "lucide-react";
@@ -1239,7 +1238,6 @@ export function TravelpayoutsCustomWidget({
             /* Global City / Route Live Partner Dispatch Card when user searches any other city on Earth */
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3">
               <div className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider bg-brand-navy text-[#F6B73C] px-2.5 py-1 rounded-md">
-                <Sparkles size={12} />
                 <span>
                   {searchTab === "hotels"
                     ? "Partner hotel collections"

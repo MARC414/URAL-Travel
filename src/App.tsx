@@ -2860,7 +2860,6 @@ export default function App() {
                       <div className="bg-white/6 border border-white/12 rounded-2xl p-3.5 space-y-2">
                         <div className="flex items-center justify-between text-[11px] font-mono">
                           <span className="text-cyan-300 font-bold inline-flex items-center gap-1.5">
-                            <Sparkles size={12} className="text-cyan-300 shrink-0" />
                             <span>{isBn ? "KKday ১০.১০ উইন্টার সেল (৩০% ছাড়)" : "KKday 10.10 Winter Sale (30% OFF)"}</span>
                           </span>
                           <span className="text-amber-300 font-semibold">30% Codes</span>
@@ -4293,7 +4292,6 @@ export default function App() {
                 </div>
                 <div className="space-y-1 p-4 bg-slate-900/40 rounded-xl border border-slate-800">
                   <span className="text-[#F6B73C] font-semibold text-xs inline-flex items-center gap-1.5 uppercase tracking-wider font-mono">
-                    <Sparkles size={13} className="text-[#F6B73C]" />
                     <span>{isBn ? "দ্রুত ও সম্পূর্ণ ফ্রি" : "Fast and Free"}</span>
                   </span>
                   <p className="text-[11px] text-[#F6B73C] font-bold mt-1">

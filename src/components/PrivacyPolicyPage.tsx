@@ -19,7 +19,6 @@ import {
   UserCheck,
   Server,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 import { Language } from "../translations";
 import { updateGoogleConsentMode, GranularConsentSettings } from "./ConsentBanner";
@@ -141,7 +140,6 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
       {/* QUICK SUMMARY CARD: 60-SECOND PLAIN LANGUAGE SUMMARY */}
       <section className="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-5">
         <div className="flex items-center gap-2.5 text-[#F6B73C]">
-          <Sparkles className="w-5 h-5" />
           <h2 className="ural-section-title text-lg font-bold text-white">
             {isBn ? "৬০ সেকেন্ডের সংক্ষেপ: আপনার জন্য জরুরি বিষয়গুলো" : "The 60-Second Summary: What You Need to Know"}
           </h2>
